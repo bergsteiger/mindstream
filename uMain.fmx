@@ -8,6 +8,8 @@ object fmMain: TfmMain
   FormFactor.Height = 480
   FormFactor.Devices = [dkDesktop, dkiPhone, dkiPad]
   OnCreate = FormCreate
+  OnMouseMove = FormMouseMove
+  OnMouseUp = FormMouseUp
   DesignerMobile = False
   DesignerWidth = 0
   DesignerHeight = 0
@@ -43,7 +45,6 @@ object fmMain: TfmMain
       Height = 431.000000000000000000
       Width = 640.000000000000000000
       OnMouseDown = imgMainMouseDown
-      OnPaint = imgMainPaint
     end
   end
   object pnlTop: TPanel
@@ -76,6 +77,13 @@ object fmMain: TfmMain
       StyleLookup = 'buttonstyle'
       Text = 'btnDrawLine'
       Width = 80.000000000000000000
+    end
+    object lblMouseCoorinats: TLabel
+      Height = 17.000000000000000000
+      Position.X = 240.000000000000000000
+      Position.Y = 16.000000000000000000
+      Text = 'lblMouseCoorinats'
+      Width = 120.000000000000000000
     end
   end
 end

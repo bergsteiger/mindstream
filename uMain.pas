@@ -3,7 +3,7 @@
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   FMX.Objects, FMX.Menus;
 
@@ -19,6 +19,7 @@ type
     btnArc: TButton;
     imgMain: TImage;
     btnDrawLine: TSpeedButton;
+    lblMouseCoorinats: TLabel;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -26,11 +27,13 @@ type
     procedure btnArcClick(Sender: TObject);
     procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
-    procedure imgMainPaint(Sender: TObject; Canvas: TCanvas;
-      const ARect: TRectF);
+    procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Single);
+    procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Single);
   private
-   FObjects : array of TRectangle;
    FPoints : array of TPointF;
+   FStartPos: TPointF;
+   FPressed: Boolean;
 //   imgMain : TImage;
   public
     { Public declarations }
@@ -58,61 +61,69 @@ begin
 end;
 
 procedure TfmMain.btnRectClick(Sender: TObject);
-var
-  l_Rect: TRectF;
 begin
   // sets the rectangle to be drawed
- l_Rect := TRectF.Create(10, 10, 200, 270);
  imgMain.Bitmap.Canvas.BeginScene;
- imgMain.Bitmap.Canvas.DrawRect(l_Rect, 30, 60, AllCorners, 100, TCornerType.ctInnerLine);
+ imgMain.Bitmap.Canvas.DrawRect(TRectF.Create(10, 10, 200, 270),
+                                30, 60,
+                                AllCorners, 100,
+                                TCornerType.ctRound);
  imgMain.Bitmap.Canvas.EndScene;
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
 // imgMain := TImage.Create(self);
- imgMain.Bitmap := TBitmap.Create(400, 400);
+ imgMain.Bitmap := TBitmap.Create(Round(pnlMain.Width), Round(pnlMain.Height));
  imgMain.Bitmap.Clear(TAlphaColorRec.White);
+ imgMain.AutoCapture := True;
+end;
+
+procedure TfmMain.FormMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Single);
+begin
+ lblMouseCoorinats.Text := 'x = ' + FloatToStr(X) + ';' + ' y = ' + FloatToStr(Y);
+end;
+
+procedure TfmMain.FormMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Single);
+begin
+ FPressed := False;
 end;
 
 procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 var
  i : integer;
- l_Rect: TRectF;
+ l_PointsCount : Integer;
 begin
+ FPressed := True;
+ FStartPos := TPointF.Create(X, Y);
+
  i := High(FPoints)+1;
  SetLength(FPoints,i+1);
  FPoints[i].X := x;
  FPoints[i].y := y;
-  // sets the rectangle to be drawed
- l_Rect := TRectF.Create(10, 10, 200, 270);
- imgMainPaint(self, imgMain.Canvas, l_Rect);
-end;
 
-procedure TfmMain.imgMainPaint(Sender: TObject; Canvas: TCanvas;
-  const ARect: TRectF);
-var
- K : Integer;
- l_point1, l_point2 : TPointf;
-begin
- K := High(FPoints);
- if K < 0 then Exit;
+ lblMouseCoorinats.Text := 'x = ' + FloatToStr(X) + ';' + ' y = ' + FloatToStr(Y);
 
+// FPoints[i].X := x + pnlTop.Width;
+// FPoints[i].y := y + pnlTop.Height;
+ // sets the rectangle to be drawed
+ //l_Rect := TRectF.Create(0, 0, 200, 270);
+ // imgMainPaint(self, imgMain.Canvas, l_Rect);
+ l_PointsCount := High(FPoints);
+ if l_PointsCount < 0 then Exit;
+// if (l_PointsCount mod 2) = 0 then Exit;
  with ImgMain.Bitmap.Canvas do
  begin
   BeginScene;
-  DrawEllipse(TRectF.Create(FPoints[0]), 20);
+  //DrawEllipse(TRectF.Create(FPoints[0]), 20);
 
-  if K > 0 then
+  if l_PointsCount > 0 then
   begin
-   DrawEllipse(TRectF.Create(FPoints[k]), 20);
-
-{   with FPoints[0] do
-    MoveTo(X, Y);  }
-
-   for K := 1 to K do
-    DrawLine(FPoints[0], FPoints[k], 20);
+   for l_PointsCount := 1 to l_PointsCount do
+    DrawLine(FPoints[l_PointsCount-1], FPoints[l_PointsCount], 20);
   end;
   EndScene;
  end;
