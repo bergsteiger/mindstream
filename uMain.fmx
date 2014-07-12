@@ -7,21 +7,13 @@ object fmMain: TfmMain
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [dkDesktop, dkiPhone, dkiPad]
+  OnCreate = FormCreate
   DesignerMobile = False
   DesignerWidth = 0
   DesignerHeight = 0
   DesignerDeviceName = ''
   DesignerOrientation = 0
   DesignerOSVersion = ''
-  object btnRect: TButton
-    Height = 22.000000000000000000
-    Position.X = 480.000000000000000000
-    Position.Y = 56.000000000000000000
-    TabOrder = 0
-    Text = 'btnRect'
-    Width = 80.000000000000000000
-    OnClick = btnRectClick
-  end
   object mmMain: TMainMenu
     Left = 24
     Top = 8
@@ -36,6 +28,54 @@ object fmMain: TfmMain
     object miAbout: TMenuItem
       Text = 'miAbout'
       OnClick = miAboutClick
+    end
+  end
+  object pnlMain: TPanel
+    Align = alClient
+    Height = 431.000000000000000000
+    Width = 640.000000000000000000
+    TabOrder = 0
+    object imgMain: TImage
+      MultiResBitmap = <
+        item
+        end>
+      Align = alClient
+      Height = 431.000000000000000000
+      Width = 640.000000000000000000
+      OnMouseDown = imgMainMouseDown
+      OnPaint = imgMainPaint
+    end
+  end
+  object pnlTop: TPanel
+    Align = alTop
+    Height = 49.000000000000000000
+    Width = 640.000000000000000000
+    TabOrder = 1
+    object btnRect: TButton
+      Height = 22.000000000000000000
+      Position.X = 504.000000000000000000
+      Position.Y = 16.000000000000000000
+      TabOrder = 0
+      Text = 'btnRect'
+      Width = 80.000000000000000000
+      OnClick = btnRectClick
+    end
+    object btnArc: TButton
+      Height = 22.000000000000000000
+      Position.X = 400.000000000000000000
+      Position.Y = 16.000000000000000000
+      TabOrder = 1
+      Text = 'btnArc'
+      Width = 80.000000000000000000
+      OnClick = btnArcClick
+    end
+    object btnDrawLine: TSpeedButton
+      Height = 22.000000000000000000
+      Position.X = 72.000000000000000000
+      Position.Y = 16.000000000000000000
+      StyleLookup = 'buttonstyle'
+      Text = 'btnDrawLine'
+      Width = 80.000000000000000000
     end
   end
 end
