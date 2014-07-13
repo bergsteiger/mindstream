@@ -8,6 +8,7 @@ uses
   FMX.Objects, FMX.Menus;
 
 type
+ TShapes = (sPen, sLine);
   TfmMain = class(TForm)
     mmMain: TMainMenu;
     miFile: TMenuItem;
@@ -20,6 +21,7 @@ type
     imgMain: TImage;
     btnDrawLine: TSpeedButton;
     lblMouseCoorinats: TLabel;
+    btnPen: TButton;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -27,13 +29,17 @@ type
     procedure btnArcClick(Sender: TObject);
     procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
-    procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Single);
-    procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
+    procedure imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Single);
+    procedure btnPenClick(Sender: TObject);
+    procedure imgMainMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
+    procedure btnDrawLineClick(Sender: TObject);
   private
    FPoints : array of TPointF;
    FStartPos: TPointF;
    FPressed: Boolean;
+   FShapeToDraw: TShapes;
 //   imgMain : TImage;
   public
     { Public declarations }
@@ -60,6 +66,16 @@ begin
  imgMain.Bitmap.Canvas.EndScene;
 end;
 
+procedure TfmMain.btnDrawLineClick(Sender: TObject);
+begin
+ FShapeToDraw := sLine;
+end;
+
+procedure TfmMain.btnPenClick(Sender: TObject);
+begin
+ FShapeToDraw := sPen;
+end;
+
 procedure TfmMain.btnRectClick(Sender: TObject);
 begin
   // sets the rectangle to be drawed
@@ -73,22 +89,11 @@ end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
-// imgMain := TImage.Create(self);
+ // imgMain := TImage.Create(self);
  imgMain.Bitmap := TBitmap.Create(Round(pnlMain.Width), Round(pnlMain.Height));
  imgMain.Bitmap.Clear(TAlphaColorRec.White);
- imgMain.AutoCapture := True;
-end;
-
-procedure TfmMain.FormMouseMove(Sender: TObject; Shift: TShiftState; X,
-  Y: Single);
-begin
- lblMouseCoorinats.Text := 'x = ' + FloatToStr(X) + ';' + ' y = ' + FloatToStr(Y);
-end;
-
-procedure TfmMain.FormMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Single);
-begin
- FPressed := False;
+ //imgMain.AutoCapture := True;
+ FShapeToDraw := sPen;
 end;
 
 procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;
@@ -97,8 +102,7 @@ var
  i : integer;
  l_PointsCount : Integer;
 begin
- FPressed := True;
- FStartPos := TPointF.Create(X, Y);
+{Рисует ломаную линию
 
  i := High(FPoints)+1;
  SetLength(FPoints,i+1);
@@ -107,18 +111,11 @@ begin
 
  lblMouseCoorinats.Text := 'x = ' + FloatToStr(X) + ';' + ' y = ' + FloatToStr(Y);
 
-// FPoints[i].X := x + pnlTop.Width;
-// FPoints[i].y := y + pnlTop.Height;
- // sets the rectangle to be drawed
- //l_Rect := TRectF.Create(0, 0, 200, 270);
- // imgMainPaint(self, imgMain.Canvas, l_Rect);
  l_PointsCount := High(FPoints);
  if l_PointsCount < 0 then Exit;
-// if (l_PointsCount mod 2) = 0 then Exit;
  with ImgMain.Bitmap.Canvas do
  begin
   BeginScene;
-  //DrawEllipse(TRectF.Create(FPoints[0]), 20);
 
   if l_PointsCount > 0 then
   begin
@@ -126,6 +123,39 @@ begin
     DrawLine(FPoints[l_PointsCount-1], FPoints[l_PointsCount], 20);
   end;
   EndScene;
+ end;            }
+ FPressed := True;
+ FStartPos := TPointF.Create(X, Y);
+end;
+
+procedure TfmMain.imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Single);
+begin
+ Caption := 'x = ' + FloatToStr(X) + '; y = ' + FloatToStr(Y);
+ if FPressed then
+ begin
+  ImgMain.Bitmap.Canvas.BeginScene;
+  case FShapeToDraw of
+   sPen:
+   begin
+    ImgMain.Bitmap.Canvas.DrawLine(FStartPos, TPointF.Create(X, Y), 20);
+    FStartPos := TPointF.Create(X, Y);
+   end;
+   sLine : begin
+    ImgMain.Bitmap.Canvas.DrawLine(FStartPos, TPointF.Create(X, Y), 20);
+   end;
+  end;
+  ImgMain.Bitmap.Canvas.EndScene;
+ end;
+end;
+
+procedure TfmMain.imgMainMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Single);
+begin
+ FPressed := False;
+
+ case FShapeToDraw of
+  sLine : ImgMain.Bitmap.Canvas.DrawLine(FStartPos, TPointF.Create(X, Y), 20);
  end;
 end;
 

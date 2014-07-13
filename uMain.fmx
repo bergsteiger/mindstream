@@ -4,12 +4,11 @@ object fmMain: TfmMain
   Caption = 'MindStream'
   ClientHeight = 480
   ClientWidth = 640
+  WindowState = wsMinimized
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [dkDesktop, dkiPhone, dkiPad]
   OnCreate = FormCreate
-  OnMouseMove = FormMouseMove
-  OnMouseUp = FormMouseUp
   DesignerMobile = False
   DesignerWidth = 0
   DesignerHeight = 0
@@ -17,8 +16,8 @@ object fmMain: TfmMain
   DesignerOrientation = 0
   DesignerOSVersion = ''
   object mmMain: TMainMenu
-    Left = 24
-    Top = 8
+    Left = 32
+    Top = 416
     object miFile: TMenuItem
       Text = 'miFile'
       object miExit: TMenuItem
@@ -45,6 +44,8 @@ object fmMain: TfmMain
       Height = 431.000000000000000000
       Width = 640.000000000000000000
       OnMouseDown = imgMainMouseDown
+      OnMouseMove = imgMainMouseMove
+      OnMouseUp = imgMainMouseUp
     end
   end
   object pnlTop: TPanel
@@ -72,11 +73,11 @@ object fmMain: TfmMain
     end
     object btnDrawLine: TSpeedButton
       Height = 22.000000000000000000
-      Position.X = 72.000000000000000000
+      Position.X = 8.000000000000000000
       Position.Y = 16.000000000000000000
-      StyleLookup = 'buttonstyle'
       Text = 'btnDrawLine'
       Width = 80.000000000000000000
+      OnClick = btnDrawLineClick
     end
     object lblMouseCoorinats: TLabel
       Height = 17.000000000000000000
@@ -84,6 +85,15 @@ object fmMain: TfmMain
       Position.Y = 16.000000000000000000
       Text = 'lblMouseCoorinats'
       Width = 120.000000000000000000
+    end
+    object btnPen: TButton
+      Height = 22.000000000000000000
+      Position.X = 104.000000000000000000
+      Position.Y = 16.000000000000000000
+      TabOrder = 4
+      Text = 'btnPen'
+      Width = 80.000000000000000000
+      OnClick = btnPenClick
     end
   end
 end
