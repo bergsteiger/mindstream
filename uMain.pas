@@ -11,7 +11,6 @@ uses
 
 type
  TShapes = (sPen, sLine);
- TPointsList = TList<TPointF>;
   TfmMain = class(TForm)
     mmMain: TMainMenu;
     miFile: TMenuItem;
@@ -50,11 +49,11 @@ type
     procedure btnDrawAllClick(Sender: TObject);
   private
    FPoints : array of TPointF;
-   FStartPos: TPointF;
+   FStartPos,
+   FLastPoint : TPointF;
    FPressed: Boolean;
    FShapeToDraw: TShapes;
    FDrawness: TDrawness;
-   FLastPointList: TPointsList;
    FIsFirstClick: Boolean;
   public
     { Public declarations }
@@ -122,7 +121,6 @@ begin
 
  FDrawness := TDrawness.Create;
 
- FLastPointList := TPointsList.Create();
 
  //Первое нажатие всегда первое :)
  FIsFirstClick := True;
@@ -143,7 +141,8 @@ begin
   case FShapeToDraw of
    sPen:
    begin
-    ImgMain.Bitmap.Canvas.DrawLine(FStartPos, TPointF.Create(X, Y), 1);
+    FDrawness.ShapeList.Add(TLine.Create(FStartPos, TPointF.Create(X, Y)));
+    FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
     FStartPos := TPointF.Create(X, Y);
    end;
   end;
@@ -159,28 +158,19 @@ begin
  FStartPos := TPointF.Create(X, Y);
 
  if FIsFirstClick then
- begin
-  FIsFirstClick := False;
-
-  case FShapeToDraw of
-  sLine :
-  begin
-   FLastPointList.Add(TPointF.Create(X, Y));
-  end;
- end;
- end
+  FIsFirstClick := False
  else
  begin
-  FIsFirstClick := True;
-
-  FDrawness.ShapeList.Add(TLine.Create(FLastPointList.Last, FStartPos));
+  FDrawness.ShapeList.Add(TLine.Create(FStartPos, FLastPoint));
   FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
-  FLastPointList.Add(TPointF.Create(X, Y));
+
+  FIsFirstClick := True;
  end;
 
- FDrawness.ShapeList.Add(TPointRound.Create(FLastPointList.Last, FStartPos));
- FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
+ FLastPoint := TPointF.Create(X, Y);
 
+ FDrawness.ShapeList.Add(TPointRound.Create(FStartPos, FLastPoint));
+ FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
 end;
 
 procedure TfmMain.imgMainMouseUp(Sender: TObject; Button: TMouseButton;
