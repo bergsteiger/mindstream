@@ -2,7 +2,8 @@ program MindStream;
 
 uses
   FMX.Forms,
-  uMain in 'uMain.pas' {fmMain};
+  uMain in 'uMain.pas' {fmMain},
+  Drawness in 'Drawness.pas';
 
 {$R *.res}
 

@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Objects, FMX.Menus;
+  FMX.Objects, FMX.Menus, FMX.Edit, Drawness;
 
 type
  TShapes = (sPen, sLine);
@@ -17,16 +17,22 @@ type
     pnlMain: TPanel;
     pnlTop: TPanel;
     btnRect: TButton;
-    btnArc: TButton;
     imgMain: TImage;
     btnDrawLine: TSpeedButton;
-    lblMouseCoorinats: TLabel;
     btnPen: TButton;
+    lblStartPoint: TLabel;
+    edtStartPointX: TEdit;
+    edtFinalPointX: TEdit;
+    lblFinalPoint: TLabel;
+    edtStartPointY: TEdit;
+    edtFinalPointY: TEdit;
+    btnAddLine: TButton;
+    btnClearImage: TButton;
+    btnDrawAll: TButton;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRectClick(Sender: TObject);
-    procedure btnArcClick(Sender: TObject);
     procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
     procedure imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -35,12 +41,16 @@ type
     procedure imgMainMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
     procedure btnDrawLineClick(Sender: TObject);
+    procedure btnAddLineClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure btnClearImageClick(Sender: TObject);
+    procedure btnDrawAllClick(Sender: TObject);
   private
    FPoints : array of TPointF;
    FStartPos: TPointF;
    FPressed: Boolean;
    FShapeToDraw: TShapes;
-//   imgMain : TImage;
+   FDrawness: TDrawness;
   public
     { Public declarations }
   end;
@@ -51,19 +61,26 @@ implementation
 
 {$R *.fmx}
 
-procedure TfmMain.btnArcClick(Sender: TObject);
+procedure TfmMain.btnAddLineClick(Sender: TObject);
 var
-  p1, p2: TPointF;
+ l_StartPoint, l_FinalPoint: TPointF;
 begin
- // Sets the center of the arc
- p1 := TPointF.Create(200, 200);
- // sets the radius of the arc
- p2 := TPointF.Create(150, 150);
- imgMain.Bitmap.Canvas.BeginScene;
- // draws the arc on the canvas
- imgMain.Bitmap.Canvas.DrawArc(p1, p2, 90, 230, 20);
- // updates the bitmap to show the arc
- imgMain.Bitmap.Canvas.EndScene;
+ l_StartPoint := TPointF.Create(StrToFloat(edtStartPointX.Text),
+                                StrToFloat(edtStartPointY.Text));
+ l_FinalPoint := TPointF.Create(StrToFloat(edtFinalPointX.Text),
+                                StrToFloat(edtFinalPointY.Text));
+ FDrawness.ShapeList.Add(TLine.Create(l_StartPoint, l_FinalPoint));
+ FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
+end;
+
+procedure TfmMain.btnClearImageClick(Sender: TObject);
+begin
+ imgMain.Bitmap.Clear(TAlphaColorRec.White);
+end;
+
+procedure TfmMain.btnDrawAllClick(Sender: TObject);
+begin
+ FDrawness.DrawTo(imgMain.Bitmap.Canvas);
 end;
 
 procedure TfmMain.btnDrawLineClick(Sender: TObject);
@@ -77,53 +94,33 @@ begin
 end;
 
 procedure TfmMain.btnRectClick(Sender: TObject);
+var
+ l_StartPoint, l_FinalPoint: TPointF;
 begin
-  // sets the rectangle to be drawed
- imgMain.Bitmap.Canvas.BeginScene;
- imgMain.Bitmap.Canvas.DrawRect(TRectF.Create(10, 10, 200, 270),
-                                30, 60,
-                                AllCorners, 100,
-                                TCornerType.ctRound);
- imgMain.Bitmap.Canvas.EndScene;
+ l_StartPoint := TPointF.Create(StrToFloat(edtStartPointX.Text),
+                                StrToFloat(edtStartPointY.Text));
+ l_FinalPoint := TPointF.Create(StrToFloat(edtFinalPointX.Text),
+                                StrToFloat(edtFinalPointY.Text));
+ FDrawness.ShapeList.Add(TRectangle.Create(l_StartPoint, l_FinalPoint));
+ FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
- // imgMain := TImage.Create(self);
  imgMain.Bitmap := TBitmap.Create(Round(pnlMain.Width), Round(pnlMain.Height));
  imgMain.Bitmap.Clear(TAlphaColorRec.White);
- //imgMain.AutoCapture := True;
  FShapeToDraw := sPen;
+ FDrawness := TDrawness.Create;
+end;
+
+procedure TfmMain.FormDestroy(Sender: TObject);
+begin
+ FreeAndNil(FDrawness);
 end;
 
 procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
-var
- i : integer;
- l_PointsCount : Integer;
 begin
-{Рисует ломаную линию
-
- i := High(FPoints)+1;
- SetLength(FPoints,i+1);
- FPoints[i].X := x;
- FPoints[i].y := y;
-
- lblMouseCoorinats.Text := 'x = ' + FloatToStr(X) + ';' + ' y = ' + FloatToStr(Y);
-
- l_PointsCount := High(FPoints);
- if l_PointsCount < 0 then Exit;
- with ImgMain.Bitmap.Canvas do
- begin
-  BeginScene;
-
-  if l_PointsCount > 0 then
-  begin
-   for l_PointsCount := 1 to l_PointsCount do
-    DrawLine(FPoints[l_PointsCount-1], FPoints[l_PointsCount], 20);
-  end;
-  EndScene;
- end;            }
  FPressed := True;
  FStartPos := TPointF.Create(X, Y);
 end;
@@ -138,7 +135,7 @@ begin
   case FShapeToDraw of
    sPen:
    begin
-    ImgMain.Bitmap.Canvas.DrawLine(FStartPos, TPointF.Create(X, Y), 20);
+    ImgMain.Bitmap.Canvas.DrawLine(FStartPos, TPointF.Create(X, Y), 1);
     FStartPos := TPointF.Create(X, Y);
    end;
    sLine : begin
