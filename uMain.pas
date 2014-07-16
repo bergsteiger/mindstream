@@ -4,11 +4,14 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  Generics.Collections,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Objects, FMX.Menus, FMX.Edit, Drawness;
+  FMX.Objects, FMX.Menus, FMX.Edit,
+  Drawness;
 
 type
  TShapes = (sPen, sLine);
+ TPointsList = TList<TPointF>;
   TfmMain = class(TForm)
     mmMain: TMainMenu;
     miFile: TMenuItem;
@@ -51,6 +54,8 @@ type
    FPressed: Boolean;
    FShapeToDraw: TShapes;
    FDrawness: TDrawness;
+   FLastPointList: TPointsList;
+   FIsFirstClick: Boolean;
   public
     { Public declarations }
   end;
@@ -60,19 +65,6 @@ var
 implementation
 
 {$R *.fmx}
-
-procedure TfmMain.btnAddLineClick(Sender: TObject);
-var
- l_StartPoint, l_FinalPoint: TPointF;
-begin
- l_StartPoint := TPointF.Create(StrToFloat(edtStartPointX.Text),
-                                StrToFloat(edtStartPointY.Text));
- l_FinalPoint := TPointF.Create(StrToFloat(edtFinalPointX.Text),
-                                StrToFloat(edtFinalPointY.Text));
- FDrawness.ShapeList.Add(TLine.Create(l_StartPoint, l_FinalPoint));
- FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
-end;
-
 procedure TfmMain.btnClearImageClick(Sender: TObject);
 begin
  imgMain.Bitmap.Clear(TAlphaColorRec.White);
@@ -93,6 +85,22 @@ begin
  FShapeToDraw := sPen;
 end;
 
+procedure TfmMain.btnAddLineClick(Sender: TObject);
+var
+ l_StartPoint, l_FinalPoint: TPointF;
+begin
+ l_StartPoint := TPointF.Create(StrToFloat(edtStartPointX.Text),
+                                StrToFloat(edtStartPointY.Text));
+ l_FinalPoint := TPointF.Create(StrToFloat(edtFinalPointX.Text),
+                                StrToFloat(edtFinalPointY.Text));
+
+ FDrawness.ShapeList.Add(TLine.Create(l_StartPoint, l_FinalPoint));
+ FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
+
+ FDrawness.ShapeList.Add(TPointRound.Create(l_StartPoint, l_FinalPoint));
+ FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
+end;
+
 procedure TfmMain.btnRectClick(Sender: TObject);
 var
  l_StartPoint, l_FinalPoint: TPointF;
@@ -109,20 +117,20 @@ procedure TfmMain.FormCreate(Sender: TObject);
 begin
  imgMain.Bitmap := TBitmap.Create(Round(pnlMain.Width), Round(pnlMain.Height));
  imgMain.Bitmap.Clear(TAlphaColorRec.White);
+
  FShapeToDraw := sPen;
+
  FDrawness := TDrawness.Create;
+
+ FLastPointList := TPointsList.Create();
+
+ //Первое нажатие всегда первое :)
+ FIsFirstClick := True;
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
 begin
  FreeAndNil(FDrawness);
-end;
-
-procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Single);
-begin
- FPressed := True;
- FStartPos := TPointF.Create(X, Y);
 end;
 
 procedure TfmMain.imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -138,24 +146,48 @@ begin
     ImgMain.Bitmap.Canvas.DrawLine(FStartPos, TPointF.Create(X, Y), 1);
     FStartPos := TPointF.Create(X, Y);
    end;
-   sLine : begin
-    ImgMain.Bitmap.Canvas.DrawLine(FStartPos, TPointF.Create(X, Y), 20);
-   end;
   end;
   ImgMain.Bitmap.Canvas.EndScene;
  end;
+end;
+
+
+procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Single);
+begin
+ FPressed := True;
+ FStartPos := TPointF.Create(X, Y);
+
+ if FIsFirstClick then
+ begin
+  FIsFirstClick := False;
+
+  case FShapeToDraw of
+  sLine :
+  begin
+   FLastPointList.Add(TPointF.Create(X, Y));
+  end;
+ end;
+ end
+ else
+ begin
+  FIsFirstClick := True;
+
+  FDrawness.ShapeList.Add(TLine.Create(FLastPointList.Last, FStartPos));
+  FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
+  FLastPointList.Add(TPointF.Create(X, Y));
+ end;
+
+ FDrawness.ShapeList.Add(TPointRound.Create(FLastPointList.Last, FStartPos));
+ FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
+
 end;
 
 procedure TfmMain.imgMainMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 begin
  FPressed := False;
-
- case FShapeToDraw of
-  sLine : ImgMain.Bitmap.Canvas.DrawLine(FStartPos, TPointF.Create(X, Y), 20);
- end;
 end;
-
 procedure TfmMain.miAboutClick(Sender: TObject);
 begin
  ShowMessage(self.Caption);

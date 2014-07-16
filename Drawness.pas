@@ -24,6 +24,11 @@ type
    procedure DrawShape(const aCanvas : TCanvas); override;
  end;
 
+ TPointRound = class(TMyShape)
+ private
+   procedure DrawShape(const aCanvas : TCanvas); override;
+ end;
+
 type
  TShapeList = TObjectList<TMyShape>;
 
@@ -53,6 +58,7 @@ begin
   aCanvas.BeginScene;
   DrawShape(aCanvas);
   aCanvas.EndScene;
+//  aCanvas.
 end;
 
 { TDrawness }
@@ -96,6 +102,21 @@ begin
                                 0, 0,
                                 AllCorners, 1,
                                 TCornerType.ctRound);
+end;
+
+{ TPointRound }
+
+procedure TPointRound.DrawShape(const aCanvas: TCanvas);
+var
+ l_StartPoint, l_FinalPoint: TPointF;
+begin
+ l_StartPoint.X := FStartPoint.X - 15;
+ l_StartPoint.Y := FStartPoint.Y - 15;
+
+ l_FinalPoint.X := FStartPoint.X + 15;
+ l_FinalPoint.Y := FStartPoint.Y + 15;
+
+ aCanvas.DrawEllipse(TRectF.Create(l_StartPoint, l_FinalPoint), 1);
 end;
 
 end.
