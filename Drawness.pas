@@ -9,43 +9,46 @@ type
  private
   FStartPoint, FFinalPoint: TPointF;
  public
-  Constructor Create(aStartPoint, aFinalPoint: TPointF); overload;
-  procedure DrawTo(aCanvas : TCanvas);
-  procedure DrawShape(aCanvas : TCanvas); virtual; abstract;
+  Constructor Create(const aStartPoint, aFinalPoint: TPointF); overload;
+  procedure DrawTo(const aCanvas : TCanvas);
+  procedure DrawShape(const aCanvas : TCanvas); virtual; abstract;
  end;
 
  TLine = class(TMyShape)
  private
-   procedure DrawShape(aCanvas : TCanvas); override;
+   procedure DrawShape(const aCanvas : TCanvas); override;
  end;
 
  TRectangle = class(TMyShape)
  private
-   procedure DrawShape(aCanvas : TCanvas); override;
+   procedure DrawShape(const aCanvas : TCanvas); override;
  end;
+
+type
+ TShapeList = TObjectList<TMyShape>;
 
  TDrawness = class
  private
-  FShapeList : TObjectList<TMyShape>;
-    function GetShapeList: TObjectList<TMyShape>;
+  FShapeList : TShapeList;
+    function GetShapeList: TShapeList;
  public
   constructor Create;
   destructor Destroy; override;
-  procedure DrawTo(aCanvas : TCanvas);
- property ShapeList : TObjectList<TMyShape> read GetShapeList;
+  procedure DrawTo(const aCanvas : TCanvas);
+ property ShapeList : TShapeList read GetShapeList;
  end;
 
 implementation
 
 { TDrawness }
 
-constructor TMyShape.Create(aStartPoint, aFinalPoint: TPointF);
+constructor TMyShape.Create(const aStartPoint, aFinalPoint: TPointF);
 begin
  FStartPoint := aStartPoint;
  FFinalPoint := aFinalPoint;
 end;
 
-procedure TMyShape.DrawTo(aCanvas: TCanvas);
+procedure TMyShape.DrawTo(const aCanvas: TCanvas);
 begin
   aCanvas.BeginScene;
   DrawShape(aCanvas);
@@ -56,7 +59,7 @@ end;
 
 constructor TDrawness.Create;
 begin
- FShapeList := TObjectList<TMyShape>.Create();
+ FShapeList := TShapeList.Create();
 end;
 
 destructor TDrawness.Destroy;
@@ -65,7 +68,7 @@ begin
  inherited;
 end;
 
-procedure TDrawness.DrawTo(aCanvas: TCanvas);
+procedure TDrawness.DrawTo(const aCanvas: TCanvas);
 var
  i : Integer;
 begin
@@ -73,21 +76,21 @@ begin
   do FShapeList[i].DrawTo(aCanvas);
 end;
 
-function TDrawness.GetShapeList: TObjectList<TMyShape>;
+function TDrawness.GetShapeList: TShapeList;
 begin
  Result := FShapeList;
 end;
 
 { TLine }
 
-procedure TLine.DrawShape(aCanvas : TCanvas);
+procedure TLine.DrawShape(const aCanvas : TCanvas);
 begin
  aCanvas.DrawLine(FStartPoint, FFinalPoint, 1);
 end;
 
 { TRectangle }
 
-procedure TRectangle.DrawShape(aCanvas: TCanvas);
+procedure TRectangle.DrawShape(const aCanvas: TCanvas);
 begin
  aCanvas.DrawRect(TRectF.Create(FStartPoint, FFinalPoint),
                                 0, 0,
