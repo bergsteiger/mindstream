@@ -3,120 +3,55 @@ unit Drawness;
 interface
 
 uses
- FMX.Graphics, System.Types, FMX.Types, Generics.Collections, System.SysUtils;
-type 
- TMyShape = class
- private
-  FStartPoint, FFinalPoint: TPointF;
- public
-  Constructor Create(const aStartPoint, aFinalPoint: TPointF); overload;
-  procedure DrawTo(const aCanvas : TCanvas);
-  procedure DrawShape(const aCanvas : TCanvas); virtual; abstract;
- end;
-
- TLine = class(TMyShape)
- private
-   procedure DrawShape(const aCanvas : TCanvas); override;
- end;
-
- TRectangle = class(TMyShape)
- private
-   procedure DrawShape(const aCanvas : TCanvas); override;
- end;
-
- TPointRound = class(TMyShape)
- private
-   procedure DrawShape(const aCanvas : TCanvas); override;
- end;
+ FMX.Graphics, System.Types, FMX.Types, Generics.Collections, System.SysUtils, MyShape;
 
 type
- TShapeList = TObjectList<TMyShape>;
+ TShapeList = TObjectList<TmsShape>;
 
- TDrawness = class
+ TShapes = (sPen, sLine, sRectangle);
+
+ TmsDrawness = class
  private
   FShapeList : TShapeList;
-    function GetShapeList: TShapeList;
  public
   constructor Create;
   destructor Destroy; override;
   procedure DrawTo(const aCanvas : TCanvas);
- property ShapeList : TShapeList read GetShapeList;
+  procedure AddPrimitive(const aShape : TmsShape);
+  procedure DrawLastPrimitive(const aCanvas : TCanvas);
  end;
 
 implementation
 
 { TDrawness }
 
-constructor TMyShape.Create(const aStartPoint, aFinalPoint: TPointF);
+procedure TmsDrawness.AddPrimitive(const aShape: TmsShape);
 begin
- FStartPoint := aStartPoint;
- FFinalPoint := aFinalPoint;
+ FShapeList.Add(aShape);
 end;
 
-procedure TMyShape.DrawTo(const aCanvas: TCanvas);
-begin
-  aCanvas.BeginScene;
-  DrawShape(aCanvas);
-  aCanvas.EndScene;
-//  aCanvas.
-end;
-
-{ TDrawness }
-
-constructor TDrawness.Create;
+constructor TmsDrawness.Create;
 begin
  FShapeList := TShapeList.Create();
 end;
 
-destructor TDrawness.Destroy;
+destructor TmsDrawness.Destroy;
 begin
  freeandnil(FShapeList);
  inherited;
 end;
 
-procedure TDrawness.DrawTo(const aCanvas: TCanvas);
+procedure TmsDrawness.DrawLastPrimitive(const aCanvas: TCanvas);
+begin
+ FShapeList.Last.DrawTo(aCanvas);
+end;
+
+procedure TmsDrawness.DrawTo(const aCanvas: TCanvas);
 var
  i : Integer;
 begin
  for i:= 0 to FShapeList.Count-1
   do FShapeList[i].DrawTo(aCanvas);
-end;
-
-function TDrawness.GetShapeList: TShapeList;
-begin
- Result := FShapeList;
-end;
-
-{ TLine }
-
-procedure TLine.DrawShape(const aCanvas : TCanvas);
-begin
- aCanvas.DrawLine(FStartPoint, FFinalPoint, 1);
-end;
-
-{ TRectangle }
-
-procedure TRectangle.DrawShape(const aCanvas: TCanvas);
-begin
- aCanvas.DrawRect(TRectF.Create(FStartPoint, FFinalPoint),
-                                0, 0,
-                                AllCorners, 1,
-                                TCornerType.ctRound);
-end;
-
-{ TPointRound }
-
-procedure TPointRound.DrawShape(const aCanvas: TCanvas);
-var
- l_StartPoint, l_FinalPoint: TPointF;
-begin
- l_StartPoint.X := FStartPoint.X - 15;
- l_StartPoint.Y := FStartPoint.Y - 15;
-
- l_FinalPoint.X := FStartPoint.X + 15;
- l_FinalPoint.Y := FStartPoint.Y + 15;
-
- aCanvas.DrawEllipse(TRectF.Create(l_StartPoint, l_FinalPoint), 1);
 end;
 
 end.

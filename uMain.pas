@@ -6,11 +6,9 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   Generics.Collections,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Objects, FMX.Menus, FMX.Edit,
-  Drawness;
+  FMX.Objects, FMX.Menus, FMX.Edit, Drawness, MyShape, FMX.ListBox;
 
 type
- TShapes = (sPen, sLine);
   TfmMain = class(TForm)
     mmMain: TMainMenu;
     miFile: TMenuItem;
@@ -20,8 +18,6 @@ type
     pnlTop: TPanel;
     btnRect: TButton;
     imgMain: TImage;
-    btnDrawLine: TSpeedButton;
-    btnPen: TButton;
     lblStartPoint: TLabel;
     edtStartPointX: TEdit;
     edtFinalPointX: TEdit;
@@ -31,6 +27,7 @@ type
     btnAddLine: TButton;
     btnClearImage: TButton;
     btnDrawAll: TButton;
+    cbbPrimitives: TComboBox;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -39,21 +36,18 @@ type
       Shift: TShiftState; X, Y: Single);
     procedure imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Single);
-    procedure btnPenClick(Sender: TObject);
     procedure imgMainMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
-    procedure btnDrawLineClick(Sender: TObject);
     procedure btnAddLineClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnClearImageClick(Sender: TObject);
     procedure btnDrawAllClick(Sender: TObject);
   private
-   FPoints : array of TPointF;
    FStartPos,
    FLastPoint : TPointF;
    FPressed: Boolean;
    FShapeToDraw: TShapes;
-   FDrawness: TDrawness;
+   FDrawness: TmsDrawness;
    FIsFirstClick: Boolean;
   public
     { Public declarations }
@@ -74,16 +68,6 @@ begin
  FDrawness.DrawTo(imgMain.Bitmap.Canvas);
 end;
 
-procedure TfmMain.btnDrawLineClick(Sender: TObject);
-begin
- FShapeToDraw := sLine;
-end;
-
-procedure TfmMain.btnPenClick(Sender: TObject);
-begin
- FShapeToDraw := sPen;
-end;
-
 procedure TfmMain.btnAddLineClick(Sender: TObject);
 var
  l_StartPoint, l_FinalPoint: TPointF;
@@ -93,11 +77,8 @@ begin
  l_FinalPoint := TPointF.Create(StrToFloat(edtFinalPointX.Text),
                                 StrToFloat(edtFinalPointY.Text));
 
- FDrawness.ShapeList.Add(TLine.Create(l_StartPoint, l_FinalPoint));
- FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
-
- FDrawness.ShapeList.Add(TPointRound.Create(l_StartPoint, l_FinalPoint));
- FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
+ FDrawness.AddPrimitive(TmsLine.Create(l_StartPoint, l_FinalPoint));
+ FDrawness.DrawTo(imgMain.Bitmap.Canvas);
 end;
 
 procedure TfmMain.btnRectClick(Sender: TObject);
@@ -108,8 +89,8 @@ begin
                                 StrToFloat(edtStartPointY.Text));
  l_FinalPoint := TPointF.Create(StrToFloat(edtFinalPointX.Text),
                                 StrToFloat(edtFinalPointY.Text));
- FDrawness.ShapeList.Add(TRectangle.Create(l_StartPoint, l_FinalPoint));
- FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
+ FDrawness.AddPrimitive(TmsRectangle.Create(l_StartPoint, l_FinalPoint));
+ FDrawness.DrawLastPrimitive(imgMain.Bitmap.Canvas);
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
@@ -119,8 +100,7 @@ begin
 
  FShapeToDraw := sPen;
 
- FDrawness := TDrawness.Create;
-
+ FDrawness := TmsDrawness.Create;
 
  //Первое нажатие всегда первое :)
  FIsFirstClick := True;
@@ -141,8 +121,8 @@ begin
   case FShapeToDraw of
    sPen:
    begin
-    FDrawness.ShapeList.Add(TLine.Create(FStartPos, TPointF.Create(X, Y)));
-    FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
+    FDrawness.AddPrimitive(TmsLine.Create(FStartPos, TPointF.Create(X, Y)));
+    FDrawness.DrawLastPrimitive(imgMain.Bitmap.Canvas);
     FStartPos := TPointF.Create(X, Y);
    end;
   end;
@@ -157,20 +137,25 @@ begin
  FPressed := True;
  FStartPos := TPointF.Create(X, Y);
 
- if FIsFirstClick then
-  FIsFirstClick := False
- else
- begin
-  FDrawness.ShapeList.Add(TLine.Create(FStartPos, FLastPoint));
-  FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
+ case cbbPrimitives.ItemIndex of
+  0 : begin // Line
+   if FIsFirstClick then FIsFirstClick := False
+   else begin
+    FIsFirstClick := True;
+    FDrawness.AddPrimitive(TmsLine.Create(FStartPos, FLastPoint));
+    FDrawness.DrawLastPrimitive(imgMain.Bitmap.Canvas);
+   end;
 
-  FIsFirstClick := True;
+   FDrawness.AddPrimitive(TmsPointCircle.Create(FStartPos, FLastPoint));
+   FDrawness.DrawLastPrimitive(imgMain.Bitmap.Canvas);
+
+   FLastPoint := TPointF.Create(X, Y);
+  end;
+  1 : begin
+   FDrawness.AddPrimitive(TmsRectangle.Create(FStartPos, TPointF.Create(X+100, Y+100)));
+   FDrawness.DrawLastPrimitive(imgMain.Bitmap.Canvas);
+  end;
  end;
-
- FLastPoint := TPointF.Create(X, Y);
-
- FDrawness.ShapeList.Add(TPointRound.Create(FStartPos, FLastPoint));
- FDrawness.ShapeList.Last.DrawTo(imgMain.Bitmap.Canvas);
 end;
 
 procedure TfmMain.imgMainMouseUp(Sender: TObject; Button: TMouseButton;
@@ -178,6 +163,7 @@ procedure TfmMain.imgMainMouseUp(Sender: TObject; Button: TMouseButton;
 begin
  FPressed := False;
 end;
+
 procedure TfmMain.miAboutClick(Sender: TObject);
 begin
  ShowMessage(self.Caption);
