@@ -1,4 +1,4 @@
-unit MyShape;
+unit msShape;
 
 interface
 uses

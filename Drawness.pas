@@ -3,7 +3,7 @@ unit Drawness;
 interface
 
 uses
- FMX.Graphics, System.Types, FMX.Types, Generics.Collections, System.SysUtils, MyShape;
+ FMX.Graphics, System.Types, FMX.Types, Generics.Collections, System.SysUtils, msShape;
 
 type
  TShapeList = TObjectList<TmsShape>;
