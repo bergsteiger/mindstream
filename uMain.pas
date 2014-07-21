@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   Generics.Collections,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Objects, FMX.Menus, FMX.Edit, Drawness, MyShape, FMX.ListBox;
+  FMX.Objects, FMX.Menus, FMX.Edit, FMX.ListBox, msDrawness;
 
 type
   TfmMain = class(TForm)
@@ -46,7 +46,7 @@ type
    FStartPos,
    FLastPoint : TPointF;
    FPressed: Boolean;
-   FShapeToDraw: TShapes;
+//   FShapeToDraw: TShapes;
    FDrawness: TmsDrawness;
    FIsFirstClick: Boolean;
   public
@@ -56,6 +56,8 @@ type
 var
  fmMain: TfmMain;
 implementation
+uses
+ msShape, msLine, msRectangle, msPointCircle, msRegisteredPrimitives;
 
 {$R *.fmx}
 procedure TfmMain.btnClearImageClick(Sender: TObject);
@@ -77,6 +79,7 @@ begin
  l_FinalPoint := TPointF.Create(StrToFloat(edtFinalPointX.Text),
                                 StrToFloat(edtFinalPointY.Text));
 
+// TmsRegisteredPrimitives.GetInstance.AddPrimitive();
  FDrawness.AddPrimitive(TmsLine.Create(l_StartPoint, l_FinalPoint));
  FDrawness.DrawTo(imgMain.Bitmap.Canvas);
 end;
@@ -98,7 +101,7 @@ begin
  imgMain.Bitmap := TBitmap.Create(Round(pnlMain.Width), Round(pnlMain.Height));
  imgMain.Bitmap.Clear(TAlphaColorRec.White);
 
- FShapeToDraw := sPen;
+ //FShapeToDraw := sPen;
 
  FDrawness := TmsDrawness.Create;
 
@@ -115,7 +118,7 @@ procedure TfmMain.imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Single);
 begin
  Caption := 'x = ' + FloatToStr(X) + '; y = ' + FloatToStr(Y);
- if FPressed then
+{ if FPressed then
  begin
   ImgMain.Bitmap.Canvas.BeginScene;
   case FShapeToDraw of
@@ -127,7 +130,7 @@ begin
    end;
   end;
   ImgMain.Bitmap.Canvas.EndScene;
- end;
+ end;                 }
 end;
 
 

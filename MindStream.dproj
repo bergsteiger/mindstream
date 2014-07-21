@@ -87,9 +87,12 @@
             <Form>fmMain</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="Drawness.pas"/>
+        <DCCReference Include="msDrawness.pas"/>
         <DCCReference Include="msShape.pas"/>
         <DCCReference Include="msRegisteredPrimitives.pas"/>
+        <DCCReference Include="msLine.pas"/>
+        <DCCReference Include="msRectangle.pas"/>
+        <DCCReference Include="msPointCircle.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

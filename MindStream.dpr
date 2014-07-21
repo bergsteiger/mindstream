@@ -3,9 +3,12 @@ program MindStream;
 uses
   FMX.Forms,
   uMain in 'uMain.pas' {fmMain},
-  Drawness in 'Drawness.pas',
+  msDrawness in 'msDrawness.pas',
   msShape in 'msShape.pas',
-  msRegisteredPrimitives in 'msRegisteredPrimitives.pas';
+  msRegisteredPrimitives in 'msRegisteredPrimitives.pas',
+  msLine in 'msLine.pas',
+  msRectangle in 'msRectangle.pas',
+  msPointCircle in 'msPointCircle.pas';
 
 {$R *.res}
 
