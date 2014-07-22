@@ -32,13 +32,13 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure btnClearImageClick(Sender: TObject);
     procedure btnDrawAllClick(Sender: TObject);
+    procedure cbbPrimitivesChange(Sender: TObject);
   private
    FStartPos,
    FLastPoint : TPointF;
    FPressed: Boolean;
    FDrawness: TmsDrawness;
    FIsFirstClick: Boolean;
-   function GetCurrentClass : RmsShape;
   public
     { Public declarations }
   end;
@@ -53,19 +53,20 @@ uses
 
 {$R *.fmx}
 
-function TfmMain.GetCurrentClass: RmsShape;
-begin
- Result := RmsShape(cbbPrimitives.items.Objects[cbbPrimitives.ItemIndex])
-end;
-
 procedure TfmMain.btnClearImageClick(Sender: TObject);
 begin
  imgMain.Bitmap.Clear(TAlphaColorRec.White);
+// imgMain.InvalidateRect(TRectF.Create(0,0,500,500));
 end;
 
 procedure TfmMain.btnDrawAllClick(Sender: TObject);
 begin
- FDrawness.DrawTo(imgMain.Bitmap.Canvas);
+ FDrawness.DrawTo(imgMain.Bitmap.Canvas, TPointF.Create(25, 25));
+end;
+
+procedure TfmMain.cbbPrimitivesChange(Sender: TObject);
+begin
+ FDrawness.CurrentClass := RmsShape(cbbPrimitives.items.Objects[cbbPrimitives.ItemIndex]);
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
@@ -84,6 +85,7 @@ begin
   cbbPrimitives.Items.AddObject(TmsRegisteredPrimitives.GetInstance.Primitives[i].ClassName,
                                 TObject(TmsRegisteredPrimitives.GetInstance.Primitives[i]));
 
+ cbbPrimitivesChange(nil);
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
@@ -106,22 +108,22 @@ begin
  FPressed := True;
  FStartPos := TPointF.Create(X, Y);
 
- if GetCurrentClass.IsNeedsSecondClick then
+ if FDrawness.CurrentClass.IsNeedsSecondClick then
  begin
   if FIsFirstClick then FIsFirstClick := False
   else
   begin
    FIsFirstClick := True;
-   ShapeObject := GetCurrentClass.Create(FStartPos, FLastPoint);
+   ShapeObject := FDrawness.CurrentClass.Create(FStartPos, FLastPoint);
    FDrawness.AddPrimitive(ShapeObject);
-   FDrawness.DrawLastPrimitive(imgMain.Bitmap.Canvas);
+   FDrawness.DrawLastPrimitive(imgMain.Bitmap.Canvas, TPointF.Create(0,0));
   end;
   FLastPoint := TPointF.Create(X, Y);
  end else
  begin
-  ShapeObject := GetCurrentClass.Create(FStartPos, FLastPoint);
+  ShapeObject := FDrawness.CurrentClass.Create(FStartPos, FLastPoint);
   FDrawness.AddPrimitive(ShapeObject);
-  FDrawness.DrawLastPrimitive(imgMain.Bitmap.Canvas);
+  FDrawness.DrawLastPrimitive(imgMain.Bitmap.Canvas, TPointF.Create(0,0));
  end;
 end;
 

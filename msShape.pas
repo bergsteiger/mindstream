@@ -11,11 +11,11 @@ type
  protected
   FStartPoint, FFinalPoint: TPointF;
   FNeedsSecondClick : Boolean;
-  procedure DrawShape(const aCanvas : TCanvas); virtual; abstract;
+  procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
   procedure DoLogic; virtual; abstract;
  public
   constructor Create(const aStartPoint, aFinalPoint: TPointF); virtual;
-  procedure DrawTo(const aCanvas : TCanvas);
+  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
   property StartPoint : TPointF read FStartPoint write FStartPoint;
   property FinalPoint : TPointF read FFinalPoint write FFinalPoint;
   class function IsNeedsSecondClick : Boolean; virtual; abstract;
@@ -29,10 +29,10 @@ begin
  FFinalPoint := aFinalPoint;
 end;
 
-procedure TmsShape.DrawTo(const aCanvas: TCanvas);
+procedure TmsShape.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 begin
  aCanvas.BeginScene;
- DrawShape(aCanvas);
+ DrawShape(aCanvas, aOrigin);
  aCanvas.EndScene;
 end;
 

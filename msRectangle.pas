@@ -11,7 +11,7 @@ uses
 type
  TmsRectangle = class(TmsShape)
  protected
-  procedure DrawShape(const aCanvas : TCanvas); override;
+  procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
   procedure DoLogic; override;
  public
   constructor Create(const aStartPoint, aFinalPoint: TPointF); override;
@@ -30,7 +30,7 @@ constructor TmsRectangle.Create(const aStartPoint, aFinalPoint: TPointF);
 begin
  inherited;
  FNeedsSecondClick := False;
- FFinalPoint:= TPointF.Create(FStartPoint.X+c_RectangleWidth,
+ FFinalPoint:= TPointF.Create(FStartPoint.X + c_RectangleWidth,
                               FStartPoint.Y + c_RectangleHeight);
 end;
 
@@ -40,9 +40,10 @@ begin
 
 end;
 
-procedure TmsRectangle.DrawShape(const aCanvas: TCanvas);
+procedure TmsRectangle.DrawShape(const aCanvas: TCanvas; const aOrigin : TPointF);
 begin
- aCanvas.DrawRect(TRectF.Create(FStartPoint, FFinalPoint),
+ aCanvas.DrawRect(TRectF.Create(FStartPoint.add(aOrigin),
+                                FFinalPoint.add(aOrigin)),
                                 0, 0,
                                 AllCorners, 1,
                                 TCornerType.ctRound);

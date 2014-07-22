@@ -10,7 +10,7 @@ uses
 type
  TmsPointCircle = class(TmsShape)
  protected
-  procedure DrawShape(const aCanvas : TCanvas); override;
+  procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
   procedure DoLogic; override;
  end;
 
@@ -27,7 +27,8 @@ begin
 
 end;
 
-procedure TmsPointCircle.DrawShape(const aCanvas: TCanvas);
+procedure TmsPointCircle.DrawShape(const aCanvas: TCanvas;
+                                   const aOrigin : TPointF);
 var
  l_StartPoint, l_FinalPoint: TPointF;
 begin
@@ -37,7 +38,8 @@ begin
  l_FinalPoint.X := FStartPoint.X + c_CircleRadius;
  l_FinalPoint.Y := FStartPoint.Y + c_CircleRadius;
 
- aCanvas.DrawEllipse(TRectF.Create(l_StartPoint, l_FinalPoint), 1);
+ aCanvas.DrawEllipse(TRectF.Create(l_StartPoint.Add(aOrigin),
+                                   l_FinalPoint.Add(aOrigin)), 1);
 end;
 
 end.
