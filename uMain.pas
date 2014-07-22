@@ -97,6 +97,8 @@ begin
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
+var
+ i : Integer;
 begin
  imgMain.Bitmap := TBitmap.Create(Round(pnlMain.Width), Round(pnlMain.Height));
  imgMain.Bitmap.Clear(TAlphaColorRec.White);
@@ -107,6 +109,11 @@ begin
 
  //Первое нажатие всегда первое :)
  FIsFirstClick := True;
+
+ for i := 0 to TmsRegisteredPrimitives.GetInstance.PrimitivesCount-1 do
+  cbbPrimitives.Items.AddObject(TmsRegisteredPrimitives.GetInstance.Primitives[i].ClassName,
+                                TObject(TmsRegisteredPrimitives.GetInstance.Primitives[i]));
+
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
@@ -118,19 +125,6 @@ procedure TfmMain.imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Single);
 begin
  Caption := 'x = ' + FloatToStr(X) + '; y = ' + FloatToStr(Y);
-{ if FPressed then
- begin
-  ImgMain.Bitmap.Canvas.BeginScene;
-  case FShapeToDraw of
-   sPen:
-   begin
-    FDrawness.AddPrimitive(TmsLine.Create(FStartPos, TPointF.Create(X, Y)));
-    FDrawness.DrawLastPrimitive(imgMain.Bitmap.Canvas);
-    FStartPos := TPointF.Create(X, Y);
-   end;
-  end;
-  ImgMain.Bitmap.Canvas.EndScene;
- end;                 }
 end;
 
 
