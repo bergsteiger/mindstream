@@ -6,18 +6,26 @@ uses
  FMX.Graphics,
  System.Types,
  msShape;
-const
- c_CircleRadius = 10;
 
 type
  TmsPointCircle = class(TmsShape)
- private
-   procedure DrawShape(const aCanvas : TCanvas); override;
+ protected
+  procedure DrawShape(const aCanvas : TCanvas); override;
+  procedure DoLogic; override;
  end;
 
 implementation
 
 { TmsPointCircle }
+
+const
+ c_CircleRadius = 10;
+
+procedure TmsPointCircle.DoLogic;
+begin
+ inherited;
+
+end;
 
 procedure TmsPointCircle.DrawShape(const aCanvas: TCanvas);
 var

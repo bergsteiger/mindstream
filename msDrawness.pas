@@ -11,8 +11,6 @@ uses
 type
  TShapeList = TObjectList<TmsShape>;
 
- TShapes = (sPen, sLine, sRectangle);
-
  TmsDrawness = class
  private
   FShapeList : TShapeList;

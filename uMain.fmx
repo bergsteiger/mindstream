@@ -33,7 +33,7 @@ object fmMain: TfmMain
   end
   object pnlMain: TPanel
     Align = alClient
-    Height = 519.000000000000000000
+    Height = 559.000000000000000000
     Width = 600.000000000000000000
     TabOrder = 0
     object imgMain: TImage
@@ -41,7 +41,7 @@ object fmMain: TfmMain
         item
         end>
       Align = alClient
-      Height = 519.000000000000000000
+      Height = 559.000000000000000000
       Width = 600.000000000000000000
       OnMouseDown = imgMainMouseDown
       OnMouseMove = imgMainMouseMove
@@ -50,95 +50,23 @@ object fmMain: TfmMain
   end
   object pnlTop: TPanel
     Align = alTop
-    Height = 81.000000000000000000
+    Height = 41.000000000000000000
     Width = 600.000000000000000000
     TabOrder = 1
-    object btnRect: TButton
-      Height = 22.000000000000000000
-      Position.X = 408.000000000000000000
-      Position.Y = 8.000000000000000000
-      TabOrder = 0
-      Text = 'AddRect'
-      Width = 80.000000000000000000
-      OnClick = btnRectClick
-    end
-    object lblStartPoint: TLabel
-      Height = 17.000000000000000000
-      Position.X = 16.000000000000000000
-      Position.Y = 16.000000000000000000
-      Text = 'Start Point '
-      Width = 64.000000000000000000
-    end
-    object edtStartPointX: TEdit
-      Touch.InteractiveGestures = [igLongTap, igDoubleTap]
-      TabOrder = 2
-      Text = '10'
-      Position.X = 96.000000000000000000
-      Position.Y = 11.000000000000000000
-      Width = 49.000000000000000000
-      Height = 22.000000000000000000
-      KillFocusByReturn = False
-    end
-    object edtFinalPointX: TEdit
-      Touch.InteractiveGestures = [igLongTap, igDoubleTap]
-      TabOrder = 3
-      Text = '200'
-      Position.X = 96.000000000000000000
-      Position.Y = 43.000000000000000000
-      Width = 48.000000000000000000
-      Height = 22.000000000000000000
-      KillFocusByReturn = False
-    end
-    object lblFinalPoint: TLabel
-      Height = 17.000000000000000000
-      Position.X = 16.000000000000000000
-      Position.Y = 48.000000000000000000
-      Text = 'Final Point'
-      Width = 57.000000000000000000
-    end
-    object edtStartPointY: TEdit
-      Touch.InteractiveGestures = [igLongTap, igDoubleTap]
-      TabOrder = 5
-      Text = '10'
-      Position.X = 152.000000000000000000
-      Position.Y = 11.000000000000000000
-      Width = 49.000000000000000000
-      Height = 22.000000000000000000
-      KillFocusByReturn = False
-    end
-    object edtFinalPointY: TEdit
-      Touch.InteractiveGestures = [igLongTap, igDoubleTap]
-      TabOrder = 6
-      Text = '200'
-      Position.X = 152.000000000000000000
-      Position.Y = 43.000000000000000000
-      Width = 48.000000000000000000
-      Height = 22.000000000000000000
-      KillFocusByReturn = False
-    end
-    object btnAddLine: TButton
-      Height = 22.000000000000000000
-      Position.X = 408.000000000000000000
-      Position.Y = 40.000000000000000000
-      TabOrder = 7
-      Text = 'AddLine'
-      Width = 80.000000000000000000
-      OnClick = btnAddLineClick
-    end
     object btnClearImage: TButton
       Height = 22.000000000000000000
-      Position.X = 208.000000000000000000
+      Position.X = 16.000000000000000000
       Position.Y = 8.000000000000000000
-      TabOrder = 8
+      TabOrder = 0
       Text = 'ClearImage'
       Width = 80.000000000000000000
       OnClick = btnClearImageClick
     end
     object btnDrawAll: TButton
       Height = 22.000000000000000000
-      Position.X = 208.000000000000000000
-      Position.Y = 40.000000000000000000
-      TabOrder = 9
+      Position.X = 120.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 1
       Text = 'DrawAll'
       Width = 80.000000000000000000
       OnClick = btnDrawAllClick
@@ -147,9 +75,9 @@ object fmMain: TfmMain
       DisableFocusEffect = False
       Height = 22.000000000000000000
       ItemIndex = 0
-      Position.X = 296.000000000000000000
+      Position.X = 216.000000000000000000
       Position.Y = 8.000000000000000000
-      TabOrder = 10
+      TabOrder = 2
       Width = 100.000000000000000000
     end
   end

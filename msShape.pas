@@ -10,10 +10,15 @@ type
  TmsShape = class
  protected
   FStartPoint, FFinalPoint: TPointF;
+  FNeedsSecondClick : Boolean;
   procedure DrawShape(const aCanvas : TCanvas); virtual; abstract;
+  procedure DoLogic; virtual; abstract;
  public
-  Constructor Create(const aStartPoint, aFinalPoint: TPointF); overload;
+  constructor Create(const aStartPoint, aFinalPoint: TPointF); virtual;
   procedure DrawTo(const aCanvas : TCanvas);
+  property StartPoint : TPointF read FStartPoint write FStartPoint;
+  property FinalPoint : TPointF read FFinalPoint write FFinalPoint;
+  class function IsNeedsSecondClick : Boolean; virtual; abstract;
  end;
 
 implementation
@@ -26,9 +31,9 @@ end;
 
 procedure TmsShape.DrawTo(const aCanvas: TCanvas);
 begin
-  aCanvas.BeginScene;
-  DrawShape(aCanvas);
-  aCanvas.EndScene;
+ aCanvas.BeginScene;
+ DrawShape(aCanvas);
+ aCanvas.EndScene;
 end;
 
 
