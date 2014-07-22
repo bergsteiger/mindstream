@@ -134,7 +134,9 @@ begin
  FPressed := True;
  FStartPos := TPointF.Create(X, Y);
 
- case cbbPrimitives.ItemIndex of
+ FDrawness.AddPrimitive(RmsShape(cbbPrimitives.items.Objects[cbbPrimitives.ItemIndex]).Create(TPointF.Create(X,Y),TPointF.Create(X+100,Y+100)));
+ FDrawness.DrawLastPrimitive(imgMain.Bitmap.Canvas);
+{ case cbbPrimitives.ItemIndex of
   0 : begin // Line
    if FIsFirstClick then FIsFirstClick := False
    else begin
@@ -152,7 +154,9 @@ begin
    FDrawness.AddPrimitive(TmsRectangle.Create(FStartPos, TPointF.Create(X+100, Y+100)));
    FDrawness.DrawLastPrimitive(imgMain.Bitmap.Canvas);
   end;
- end;
+ end;    }
+
+
 end;
 
 procedure TfmMain.imgMainMouseUp(Sender: TObject; Button: TMouseButton;
