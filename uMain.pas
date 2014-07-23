@@ -35,7 +35,7 @@ type
     procedure cbbPrimitivesChange(Sender: TObject);
   private
    FStartPos,
-   FLastPoint : TPointF;
+   FFinalPoint : TPointF;
    FPressed: Boolean;
    FDrawness: TmsDrawness;
    FIsFirstClick: Boolean;
@@ -55,8 +55,7 @@ uses
 
 procedure TfmMain.btnClearImageClick(Sender: TObject);
 begin
- imgMain.Bitmap.Clear(TAlphaColorRec.White);
-// imgMain.InvalidateRect(TRectF.Create(0,0,500,500));
+ FDrawness.Clear(imgMain.Bitmap.Canvas);
 end;
 
 procedure TfmMain.btnDrawAllClick(Sender: TObject);
@@ -103,28 +102,44 @@ end;
 procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 var
- ShapeObject : TmsShape;
+ l_ShapeObject : TmsShape;
 begin
  FPressed := True;
  FStartPos := TPointF.Create(X, Y);
 
+ if FIsFirstClick then
+ begin
+  FIsFirstClick := False;
+  l_ShapeObject := FDrawness.CurrentClass.Create(FStartPos, FFinalPoint);
+  FDrawness.AddPrimitive(l_ShapeObject);
+ end
+ else
+ begin
+  FIsFirstClick := True;
+  FFinalPoint := TPointF.Create(X, Y);
+
+  FDrawness.CurrentAddedShape.FinalPoint := FFinalPoint;
+  FDrawness.DrawTo(imgMain.Bitmap.Canvas, TPointF.Create(0,0));
+ end;
+
+{
  if FDrawness.CurrentClass.IsNeedsSecondClick then
  begin
   if FIsFirstClick then FIsFirstClick := False
   else
   begin
    FIsFirstClick := True;
-   ShapeObject := FDrawness.CurrentClass.Create(FStartPos, FLastPoint);
+   ShapeObject := FDrawness.CurrentClass.Create(FStartPos, FFinalPoint);
    FDrawness.AddPrimitive(ShapeObject);
    FDrawness.DrawLastPrimitive(imgMain.Bitmap.Canvas, TPointF.Create(0,0));
   end;
-  FLastPoint := TPointF.Create(X, Y);
  end else
  begin
-  ShapeObject := FDrawness.CurrentClass.Create(FStartPos, FLastPoint);
+  ShapeObject := FDrawness.CurrentClass.Create(FStartPos, FFinalPoint);
   FDrawness.AddPrimitive(ShapeObject);
   FDrawness.DrawLastPrimitive(imgMain.Bitmap.Canvas, TPointF.Create(0,0));
  end;
+ }
 end;
 
 procedure TfmMain.imgMainMouseUp(Sender: TObject; Button: TMouseButton;

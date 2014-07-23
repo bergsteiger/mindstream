@@ -7,6 +7,7 @@ uses
  Generics.Collections,
  System.SysUtils,
  System.Types,
+ System.UITypes,
  msShape,
  msRegisteredPrimitives;
 
@@ -22,8 +23,9 @@ type
   destructor Destroy; override;
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
   procedure AddPrimitive(const aShape : TmsShape);
-  procedure DrawLastPrimitive(const aCanvas : TCanvas; const aOrigin : TPointF);
+  procedure Clear(const aCanvas : TCanvas);
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
+  function CurrentAddedShape: TmsShape;
  end;
 
 implementation
@@ -35,9 +37,21 @@ begin
  FShapeList.Add(aShape);
 end;
 
+procedure TmsDrawness.Clear(const aCanvas: TCanvas);
+begin
+  aCanvas.BeginScene;
+  aCanvas.Clear(TAlphaColorRec.Null);
+  aCanvas.EndScene;
+end;
+
 constructor TmsDrawness.Create;
 begin
  FShapeList := TShapeList.Create();
+end;
+
+function TmsDrawness.CurrentAddedShape: TmsShape;
+begin
+ result := FShapeList.Last;
 end;
 
 destructor TmsDrawness.Destroy;
@@ -46,15 +60,12 @@ begin
  inherited;
 end;
 
-procedure TmsDrawness.DrawLastPrimitive(const aCanvas: TCanvas; const aOrigin : TPointF);
-begin
- FShapeList.Last.DrawTo(aCanvas, aOrigin);
-end;
-
 procedure TmsDrawness.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 var
  i : Integer;
 begin
+ Clear(aCanvas);
+
  for i:= 0 to FShapeList.Count-1
   do FShapeList[i].DrawTo(aCanvas, aOrigin);
 end;
