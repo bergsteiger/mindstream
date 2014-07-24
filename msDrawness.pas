@@ -22,13 +22,13 @@ type
   FCanvas : TCanvas;
  private
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
+  function CurrentAddedShape: TmsShape;
  public
   constructor Create(aCanvas: TCanvas);
   destructor Destroy; override;
   procedure AddPrimitive(const aStart: TPointF; const aFinish: TPointF);
   procedure Clear(const aCanvas : TCanvas);
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
-  function CurrentAddedShape: TmsShape;
   procedure FinalizeCurrentShape(const aFinish: TPointF);
   procedure Invalidate;
   function ShapeFinalized: Boolean;
