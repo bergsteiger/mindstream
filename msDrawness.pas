@@ -31,6 +31,7 @@ type
   function CurrentAddedShape: TmsShape;
   procedure FinalizeCurrentShape(const aFinish: TPointF);
   procedure Invalidate;
+  function ShapeFinalized: Boolean;
  end;
 
 implementation
@@ -93,6 +94,11 @@ end;
 procedure TmsDrawness.Invalidate;
 begin
  DrawTo(FCanvas, TPointF.Create(0,0));
+end;
+
+function TmsDrawness.ShapeFinalized: Boolean;
+begin
+ Result := (CurrentAddedShape = nil);
 end;
 
 end.

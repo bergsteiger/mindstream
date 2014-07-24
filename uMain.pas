@@ -100,7 +100,7 @@ var
 begin
  l_ClickPoint := TPointF.Create(X, Y);
 
- if (FDrawness.CurrentAddedShape = nil) then
+ if FDrawness.ShapeFinalized then
  // - мы НЕ ДОБАВЛЯЛИ примитива - надо его ДОБАВИТЬ
   FDrawness.AddPrimitive(l_ClickPoint, l_ClickPoint)
  else
