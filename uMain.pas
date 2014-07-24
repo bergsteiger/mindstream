@@ -116,8 +116,8 @@ begin
   FIsFirstClick := True;
 
   FDrawness.CurrentAddedShape.FinalPoint := TPointF.Create(X, Y);
-  FDrawness.DrawTo(imgMain.Bitmap.Canvas, FOrigin);
  end;
+ FDrawness.DrawTo(imgMain.Bitmap.Canvas, FOrigin);
 
 {
  if FDrawness.CurrentClass.IsNeedsSecondClick then
