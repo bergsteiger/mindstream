@@ -35,6 +35,7 @@ type
     procedure cbbPrimitivesChange(Sender: TObject);
   private
    FStartPos : TPointF;
+   FOrigin : TPointF;
    FPressed: Boolean;
    FDrawness: TmsDrawness;
    FIsFirstClick: Boolean;
@@ -73,6 +74,7 @@ var
 begin
  imgMain.Bitmap := TBitmap.Create(Round(pnlMain.Width), Round(pnlMain.Height));
  imgMain.Bitmap.Clear(TAlphaColorRec.White);
+ FOrigin := TPointF.Create(0,0);
 
  FDrawness := TmsDrawness.Create;
 
@@ -114,7 +116,7 @@ begin
   FIsFirstClick := True;
 
   FDrawness.CurrentAddedShape.FinalPoint := TPointF.Create(X, Y);
-  FDrawness.DrawTo(imgMain.Bitmap.Canvas, TPointF.Create(0,0));
+  FDrawness.DrawTo(imgMain.Bitmap.Canvas, FOrigin);
  end;
 
 {
