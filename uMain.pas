@@ -97,15 +97,15 @@ end;
 procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 var
- l_StartPoint : TPointF;
+ l_ClickPoint : TPointF;
 begin
- l_StartPoint := TPointF.Create(X, Y);
+ l_ClickPoint := TPointF.Create(X, Y);
 
  if (FDrawness.CurrentAddedShape = nil) then
  // - мы НЕ ДОБАВЛЯЛИ примитива - надо его ДОБАВИТЬ
-  FDrawness.AddPrimitive(l_StartPoint, l_StartPoint)
+  FDrawness.AddPrimitive(l_ClickPoint, l_ClickPoint)
  else
-  FDrawness.FinalizeCurrentShape(l_StartPoint);
+  FDrawness.FinalizeCurrentShape(l_ClickPoint);
  FDrawness.DrawTo(imgMain.Bitmap.Canvas, FOrigin);
 end;
 
