@@ -103,7 +103,8 @@ var
 begin
  l_StartPoint := TPointF.Create(X, Y);
 
- if FIsFirstClick then
+ if (FDrawness.CurrentAddedShape = nil) then
+ // - мы НЕ ДОБАВЛЯЛИ примитива - надо его ДОБАВИТЬ
  begin
   FIsFirstClick := False;
   FDrawness.AddPrimitive(l_StartPoint, l_StartPoint);
@@ -112,7 +113,7 @@ begin
  begin
   FIsFirstClick := True;
 
-  FDrawness.CurrentAddedShape.FinalPoint := TPointF.Create(X, Y);
+  FDrawness.FinalizeCurrentShape(TPointF.Create(X, Y));
  end;
  FDrawness.DrawTo(imgMain.Bitmap.Canvas, FOrigin);
 end;

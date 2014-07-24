@@ -27,6 +27,7 @@ type
   procedure Clear(const aCanvas : TCanvas);
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
   function CurrentAddedShape: TmsShape;
+  procedure FinalizeCurrentShape(const aFinish: TPointF);
  end;
 
 implementation
@@ -53,6 +54,7 @@ end;
 constructor TmsDrawness.Create;
 begin
  FShapeList := TShapeList.Create;
+ FCurrentAddedShape := nil;
 end;
 
 function TmsDrawness.CurrentAddedShape: TmsShape;
@@ -73,6 +75,13 @@ begin
  Clear(aCanvas);
  for i:= 0 to FShapeList.Count-1
   do FShapeList[i].DrawTo(aCanvas, aOrigin);
+end;
+
+procedure TmsDrawness.FinalizeCurrentShape(const aFinish: TPointF);
+begin
+  Assert(CurrentAddedShape <> nil);
+  CurrentAddedShape.FinalPoint := aFinish;
+  FCurrentAddedShape := nil;
 end;
 
 end.
