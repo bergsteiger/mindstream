@@ -26,7 +26,7 @@ type
  public
   constructor Create(aCanvas: TCanvas);
   destructor Destroy; override;
-  procedure AddPrimitive(const aStart: TPointF; const aFinish: TPointF);
+  procedure AddShape(const aStart: TPointF; const aFinish: TPointF);
   procedure Clear(const aCanvas : TCanvas);
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
   procedure FinalizeCurrentShape(const aFinish: TPointF);
@@ -38,7 +38,7 @@ implementation
 
 { TDrawness }
 
-procedure TmsDrawness.AddPrimitive(const aStart: TPointF; const aFinish: TPointF);
+procedure TmsDrawness.AddShape(const aStart: TPointF; const aFinish: TPointF);
 begin
  Assert(CurrentClass <> nil);
  FCurrentAddedShape := CurrentClass.Create(aStart, aFinish);
