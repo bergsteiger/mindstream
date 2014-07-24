@@ -20,6 +20,7 @@ type
   FCurrentClass : RmsShape;
   FCurrentAddedShape : TmsShape;
   FCanvas : TCanvas;
+  FOrigin : TPointF;
  private
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
   function CurrentAddedShape: TmsShape;
@@ -61,6 +62,7 @@ begin
  FShapeList := TShapeList.Create;
  FCurrentAddedShape := nil;
  FCanvas := aCanvas;
+ FOrigin := TPointF.Create(0, 0)
 end;
 
 function TmsDrawness.CurrentAddedShape: TmsShape;
@@ -93,7 +95,7 @@ end;
 
 procedure TmsDrawness.Invalidate;
 begin
- DrawTo(FCanvas, TPointF.Create(0,0));
+ DrawTo(FCanvas, FOrigin);
 end;
 
 function TmsDrawness.ShapeFinalized: Boolean;
