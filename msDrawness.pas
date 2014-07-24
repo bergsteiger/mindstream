@@ -29,7 +29,7 @@ type
   procedure AddShape(const aStart: TPointF; const aFinish: TPointF);
   procedure Clear(const aCanvas : TCanvas);
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
-  procedure FinalizeCurrentShape(const aFinish: TPointF);
+  procedure FinalizeShape(const aFinish: TPointF);
   procedure Invalidate;
   function ShapeFinalized: Boolean;
  end;
@@ -83,7 +83,7 @@ begin
   do FShapeList[i].DrawTo(aCanvas, aOrigin);
 end;
 
-procedure TmsDrawness.FinalizeCurrentShape(const aFinish: TPointF);
+procedure TmsDrawness.FinalizeShape(const aFinish: TPointF);
 begin
   Assert(CurrentAddedShape <> nil);
   CurrentAddedShape.FinalPoint := aFinish;

@@ -104,7 +104,7 @@ begin
  // - мы НЕ ДОБАВЛЯЛИ примитива - надо его ДОБАВИТЬ
   FDrawness.AddShape(l_ClickPoint, l_ClickPoint)
  else
-  FDrawness.FinalizeCurrentShape(l_ClickPoint);
+  FDrawness.FinalizeShape(l_ClickPoint);
 end;
 
 procedure TfmMain.miAboutClick(Sender: TObject);
