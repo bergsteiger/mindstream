@@ -20,15 +20,17 @@ type
   FCurrentClass : RmsShape;
   FCurrentAddedShape : TmsShape;
   FCanvas : TCanvas;
+ private
+  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
  public
   constructor Create(aCanvas: TCanvas);
   destructor Destroy; override;
-  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
   procedure AddPrimitive(const aStart: TPointF; const aFinish: TPointF);
   procedure Clear(const aCanvas : TCanvas);
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
   function CurrentAddedShape: TmsShape;
   procedure FinalizeCurrentShape(const aFinish: TPointF);
+  procedure Invalidate;
  end;
 
 implementation
@@ -43,6 +45,7 @@ begin
  if not FCurrentAddedShape.IsNeedsSecondClick then
  // - если не надо SecondClick, то наш примитив - завершён
   FCurrentAddedShape := nil;
+  Invalidate;
 end;
 
 procedure TmsDrawness.Clear(const aCanvas: TCanvas);
@@ -84,6 +87,12 @@ begin
   Assert(CurrentAddedShape <> nil);
   CurrentAddedShape.FinalPoint := aFinish;
   FCurrentAddedShape := nil;
+  Invalidate;
+end;
+
+procedure TmsDrawness.Invalidate;
+begin
+ DrawTo(FCanvas, TPointF.Create(0,0));
 end;
 
 end.

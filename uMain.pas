@@ -55,7 +55,7 @@ end;
 
 procedure TfmMain.btnDrawAllClick(Sender: TObject);
 begin
- FDrawness.DrawTo(imgMain.Bitmap.Canvas, TPointF.Create(25, 25));
+ FDrawness.Invalidate;
 end;
 
 procedure TfmMain.cbbPrimitivesChange(Sender: TObject);
@@ -105,7 +105,6 @@ begin
   FDrawness.AddPrimitive(l_ClickPoint, l_ClickPoint)
  else
   FDrawness.FinalizeCurrentShape(l_ClickPoint);
- FDrawness.DrawTo(imgMain.Bitmap.Canvas, FOrigin);
 end;
 
 procedure TfmMain.miAboutClick(Sender: TObject);
