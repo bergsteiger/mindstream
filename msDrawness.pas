@@ -18,6 +18,7 @@ type
  private
   FShapeList : TShapeList;
   FCurrentClass : RmsShape;
+  FCurrentAddedShape : TmsShape;
  public
   constructor Create;
   destructor Destroy; override;
@@ -35,7 +36,8 @@ implementation
 procedure TmsDrawness.AddPrimitive(const aStart: TPointF; const aFinish: TPointF);
 begin
  Assert(CurrentClass <> nil);
- FShapeList.Add(CurrentClass.Create(aStart, aFinish));
+ FCurrentAddedShape := CurrentClass.Create(aStart, aFinish);
+ FShapeList.Add(FCurrentAddedShape);
 end;
 
 procedure TmsDrawness.Clear(const aCanvas: TCanvas);
@@ -52,12 +54,12 @@ end;
 
 function TmsDrawness.CurrentAddedShape: TmsShape;
 begin
- result := FShapeList.Last;
+ Result := FCurrentAddedShape;
 end;
 
 destructor TmsDrawness.Destroy;
 begin
- freeandnil(FShapeList);
+ FreeAndNil(FShapeList);
  inherited;
 end;
 
@@ -66,7 +68,6 @@ var
  i : Integer;
 begin
  Clear(aCanvas);
-
  for i:= 0 to FShapeList.Count-1
   do FShapeList[i].DrawTo(aCanvas, aOrigin);
 end;
