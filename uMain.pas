@@ -27,15 +27,12 @@ type
       Shift: TShiftState; X, Y: Single);
     procedure imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Single);
-    procedure imgMainMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Single);
     procedure FormDestroy(Sender: TObject);
     procedure btnClearImageClick(Sender: TObject);
     procedure btnDrawAllClick(Sender: TObject);
     procedure cbbPrimitivesChange(Sender: TObject);
   private
    FOrigin : TPointF;
-   FPressed: Boolean;
    FDrawness: TmsDrawness;
    FIsFirstClick: Boolean;
   public
@@ -104,7 +101,6 @@ procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;
 var
  l_StartPoint : TPointF;
 begin
- FPressed := True;
  l_StartPoint := TPointF.Create(X, Y);
 
  if FIsFirstClick then
@@ -119,12 +115,6 @@ begin
   FDrawness.CurrentAddedShape.FinalPoint := TPointF.Create(X, Y);
  end;
  FDrawness.DrawTo(imgMain.Bitmap.Canvas, FOrigin);
-end;
-
-procedure TfmMain.imgMainMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Single);
-begin
- FPressed := False;
 end;
 
 procedure TfmMain.miAboutClick(Sender: TObject);
