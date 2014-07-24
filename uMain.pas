@@ -34,7 +34,6 @@ type
   private
    FOrigin : TPointF;
    FDrawness: TmsDrawness;
-   FIsFirstClick: Boolean;
   public
     { Public declarations }
   end;
@@ -75,7 +74,6 @@ begin
  FDrawness := TmsDrawness.Create;
 
  //Первое нажатие всегда первое :)
- FIsFirstClick := True;
 
  for i := 0 to TmsRegisteredPrimitives.GetInstance.PrimitivesCount-1 do
   cbbPrimitives.Items.AddObject(TmsRegisteredPrimitives.GetInstance.Primitives[i].ClassName,
@@ -105,16 +103,9 @@ begin
 
  if (FDrawness.CurrentAddedShape = nil) then
  // - мы НЕ ДОБАВЛЯЛИ примитива - надо его ДОБАВИТЬ
- begin
-  FIsFirstClick := False;
-  FDrawness.AddPrimitive(l_StartPoint, l_StartPoint);
- end
+  FDrawness.AddPrimitive(l_StartPoint, l_StartPoint)
  else
- begin
-  FIsFirstClick := True;
-
   FDrawness.FinalizeCurrentShape(TPointF.Create(X, Y));
- end;
  FDrawness.DrawTo(imgMain.Bitmap.Canvas, FOrigin);
 end;
 
