@@ -34,8 +34,7 @@ type
     procedure btnDrawAllClick(Sender: TObject);
     procedure cbbPrimitivesChange(Sender: TObject);
   private
-   FStartPos,
-   FFinalPoint : TPointF;
+   FStartPos : TPointF;
    FPressed: Boolean;
    FDrawness: TmsDrawness;
    FIsFirstClick: Boolean;
@@ -101,8 +100,6 @@ end;
 
 procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
-var
- l_ShapeObject : TmsShape;
 begin
  FPressed := True;
  FStartPos := TPointF.Create(X, Y);
@@ -110,15 +107,13 @@ begin
  if FIsFirstClick then
  begin
   FIsFirstClick := False;
-  l_ShapeObject := FDrawness.CurrentClass.Create(FStartPos, FFinalPoint);
-  FDrawness.AddPrimitive(l_ShapeObject);
+  FDrawness.AddPrimitive(FStartPos, FStartPos);
  end
  else
  begin
   FIsFirstClick := True;
-  FFinalPoint := TPointF.Create(X, Y);
 
-  FDrawness.CurrentAddedShape.FinalPoint := FFinalPoint;
+  FDrawness.CurrentAddedShape.FinalPoint := TPointF.Create(X, Y);
   FDrawness.DrawTo(imgMain.Bitmap.Canvas, TPointF.Create(0,0));
  end;
 

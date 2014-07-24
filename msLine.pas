@@ -21,7 +21,6 @@ implementation
 constructor TmsLine.Create(const aStartPoint, aFinalPoint: TPointF);
 begin
  inherited;
- FNeedsSecondClick := True;
 end;
 
 procedure TmsLine.DoLogic;

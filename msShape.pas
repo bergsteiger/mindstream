@@ -10,7 +10,6 @@ type
  TmsShape = class
  protected
   FStartPoint, FFinalPoint: TPointF;
-  FNeedsSecondClick : Boolean;
   procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
   procedure DoLogic; virtual; abstract;
  public

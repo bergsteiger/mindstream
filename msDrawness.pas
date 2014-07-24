@@ -22,7 +22,7 @@ type
   constructor Create;
   destructor Destroy; override;
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
-  procedure AddPrimitive(const aShape : TmsShape);
+  procedure AddPrimitive(const aStart: TPointF; const aFinish: TPointF);
   procedure Clear(const aCanvas : TCanvas);
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
   function CurrentAddedShape: TmsShape;
@@ -32,9 +32,10 @@ implementation
 
 { TDrawness }
 
-procedure TmsDrawness.AddPrimitive(const aShape: TmsShape);
+procedure TmsDrawness.AddPrimitive(const aStart: TPointF; const aFinish: TPointF);
 begin
- FShapeList.Add(aShape);
+ Assert(CurrentClass <> nil);
+ FShapeList.Add(CurrentClass.Create(aStart, aFinish));
 end;
 
 procedure TmsDrawness.Clear(const aCanvas: TCanvas);
@@ -46,7 +47,7 @@ end;
 
 constructor TmsDrawness.Create;
 begin
- FShapeList := TShapeList.Create();
+ FShapeList := TShapeList.Create;
 end;
 
 function TmsDrawness.CurrentAddedShape: TmsShape;
