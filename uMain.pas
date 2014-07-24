@@ -105,7 +105,7 @@ begin
  // - мы НЕ ДОБАВЛЯЛИ примитива - надо его ДОБАВИТЬ
   FDrawness.AddPrimitive(l_StartPoint, l_StartPoint)
  else
-  FDrawness.FinalizeCurrentShape(TPointF.Create(X, Y));
+  FDrawness.FinalizeCurrentShape(l_StartPoint);
  FDrawness.DrawTo(imgMain.Bitmap.Canvas, FOrigin);
 end;
 
