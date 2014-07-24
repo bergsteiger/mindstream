@@ -19,8 +19,9 @@ type
   FShapeList : TShapeList;
   FCurrentClass : RmsShape;
   FCurrentAddedShape : TmsShape;
+  FCanvas : TCanvas;
  public
-  constructor Create;
+  constructor Create(aCanvas: TCanvas);
   destructor Destroy; override;
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
   procedure AddPrimitive(const aStart: TPointF; const aFinish: TPointF);
@@ -51,10 +52,11 @@ begin
   aCanvas.EndScene;
 end;
 
-constructor TmsDrawness.Create;
+constructor TmsDrawness.Create(aCanvas: TCanvas);
 begin
  FShapeList := TShapeList.Create;
  FCurrentAddedShape := nil;
+ FCanvas := aCanvas;
 end;
 
 function TmsDrawness.CurrentAddedShape: TmsShape;

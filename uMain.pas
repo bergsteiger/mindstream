@@ -71,7 +71,7 @@ begin
  imgMain.Bitmap.Clear(TAlphaColorRec.White);
  FOrigin := TPointF.Create(0,0);
 
- FDrawness := TmsDrawness.Create;
+ FDrawness := TmsDrawness.Create(Self.Canvas);
 
  //Первое нажатие всегда первое :)
 
@@ -92,7 +92,6 @@ procedure TfmMain.imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
 begin
  Caption := 'x = ' + FloatToStr(X) + '; y = ' + FloatToStr(Y);
 end;
-
 
 procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
