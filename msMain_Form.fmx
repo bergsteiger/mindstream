@@ -1,0 +1,78 @@
+object msMainForm: TmsMainForm
+  Left = 0
+  Top = 0
+  Caption = 'Mind Stream'
+  ClientHeight = 567
+  ClientWidth = 384
+  FormFactor.Width = 1440
+  FormFactor.Height = 900
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMobile = True
+  DesignerWidth = 384
+  DesignerHeight = 592
+  DesignerDeviceName = 'Google Nexus 4'
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+  object Header: TToolBar
+    Height = 48.000000000000000000
+    TabOrder = 0
+    Width = 384.000000000000000000
+    object HeaderLabel: TLabel
+      Height = 48.000000000000000000
+      StyleLookup = 'toollabel'
+      TextSettings.HorzAlign = Center
+      Text = 'Mind Stream'
+      Width = 384.000000000000000000
+    end
+  end
+  object Footer: TToolBar
+    Height = 48.000000000000000000
+    Position.Y = 48.000000000000000000
+    StyleLookup = 'bottomtoolbar'
+    TabOrder = 1
+    Width = 384.000000000000000000
+    object cbShapes: TComboBox
+      DisableFocusEffect = False
+      Height = 32.000000000000000000
+      Position.X = 16.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 1
+      Width = 113.000000000000000000
+    end
+    object btClear: TButton
+      Height = 32.000000000000000000
+      Position.X = 312.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 2
+      Text = 'Clear'
+      Width = 65.000000000000000000
+      OnClick = btClearClick
+    end
+    object cbDiagramm: TComboBox
+      DisableFocusEffect = False
+      Height = 32.000000000000000000
+      Position.X = 144.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 0
+      Width = 97.000000000000000000
+    end
+    object btAdd: TButton
+      Height = 32.000000000000000000
+      Position.X = 248.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 3
+      Text = 'Add'
+      Width = 57.000000000000000000
+    end
+  end
+  object imgMain: TImage
+    MultiResBitmap = <
+      item
+      end>
+    Height = 465.000000000000000000
+    Position.Y = 96.000000000000000000
+    Width = 384.000000000000000000
+  end
+end

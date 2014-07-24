@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="7bq9fjf60fg_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="delphi:e_class:src:MindStream:msShape.@unitclass">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msShape.TmsShapeList">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,242,36" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msShape.RmsShape">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="271,1,86,67" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msShape.TmsShape">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="72,65,189,252" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msShape.TmsShape.FStartPoint" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msShape.TmsShape.StartPoint" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.Register()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.FillColor()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.StrokeDash()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.DoDrawTo(FMX.Graphics.TCanvas,System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.DoDrawDebugInfo(FMX.Graphics.TCanvas,System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.Create(System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.DrawTo(FMX.Graphics.TCanvas,System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.IsNeedsSecondClick()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.EndTo(System.Types.TPointF)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msShape.RmsShapeList">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="395,1,208,36" />
+    </reference>
+  </view>
+</nodeSet>
