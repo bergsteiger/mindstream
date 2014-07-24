@@ -71,7 +71,7 @@ begin
  imgMain.Bitmap.Clear(TAlphaColorRec.White);
  FOrigin := TPointF.Create(0,0);
 
- FDrawness := TmsDrawness.Create(Self.Canvas);
+ FDrawness := TmsDrawness.Create(imgMain.Bitmap.Canvas);
 
  //Первое нажатие всегда первое :)
 
