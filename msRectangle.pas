@@ -29,7 +29,6 @@ const
 constructor TmsRectangle.Create(const aStartPoint, aFinalPoint: TPointF);
 begin
  inherited;
- FNeedsSecondClick := False;
  FFinalPoint:= TPointF.Create(FStartPoint.X + c_RectangleWidth,
                               FStartPoint.Y + c_RectangleHeight);
 end;
