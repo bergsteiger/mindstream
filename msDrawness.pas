@@ -9,7 +9,8 @@ uses
  System.Types,
  System.UITypes,
  msShape,
- msRegisteredPrimitives;
+ msRegisteredPrimitives,
+ msPointCircle;
 
 type
  TShapeList = TObjectList<TmsShape>;
@@ -44,6 +45,7 @@ begin
  Assert(CurrentClass <> nil);
  FCurrentAddedShape := CurrentClass.Create(aStart, aFinish);
  FShapeList.Add(FCurrentAddedShape);
+ FShapeList.Add(TmsPointCircle.Create(aStart, aFinish));
  if not FCurrentAddedShape.IsNeedsSecondClick then
  // - если не надо SecondClick, то наш примитив - завершён
   FCurrentAddedShape := nil;
@@ -80,7 +82,6 @@ procedure TmsDrawness.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 var
  i : Integer;
 begin
- Clear(aCanvas);
  for i:= 0 to FShapeList.Count-1
   do FShapeList[i].DrawTo(aCanvas, aOrigin);
 end;
@@ -88,13 +89,15 @@ end;
 procedure TmsDrawness.FinalizeShape(const aFinish: TPointF);
 begin
   Assert(CurrentAddedShape <> nil);
-  CurrentAddedShape.FinalPoint := aFinish;
+  CurrentAddedShape.FinishPoint := aFinish;
   FCurrentAddedShape := nil;
+  FShapeList.Add(TmsPointCircle.Create(aFinish, aFinish));
   Invalidate;
 end;
 
 procedure TmsDrawness.Invalidate;
 begin
+ Clear(FCanvas);
  DrawTo(FCanvas, FOrigin);
 end;
 

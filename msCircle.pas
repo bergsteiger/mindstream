@@ -1,14 +1,15 @@
-unit msPointCircle;
+unit msCircle;
 
 interface
 
 uses
- FMX.Graphics,
+ msShape,
  System.Types,
- msShape;
+ FMX.Graphics,
+ FMX.Types;
 
 type
- TmsPointCircle = class(TmsShape)
+ TmsCircle = class(TmsShape)
  protected
   procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
   procedure DoLogic; override;
@@ -19,25 +20,22 @@ type
 
 implementation
 
-{ TmsPointCircle }
-
 const
- c_CircleRadius = 10;
+ c_CircleRadius = 50;
 
-constructor TmsPointCircle.Create(const aStartPoint, aFinishPoint: TPointF);
-begin
-  inherited;
+{ TmsCircle }
 
-end;
-
-procedure TmsPointCircle.DoLogic;
+constructor TmsCircle.Create(const aStartPoint, aFinishPoint: TPointF);
 begin
  inherited;
-
 end;
 
-procedure TmsPointCircle.DrawShape(const aCanvas: TCanvas;
-                                   const aOrigin : TPointF);
+procedure TmsCircle.DoLogic;
+begin
+  inherited;
+end;
+
+procedure TmsCircle.DrawShape(const aCanvas: TCanvas; const aOrigin : TPointF);
 var
  l_StartPoint, l_FinalPoint: TPointF;
 begin
@@ -49,11 +47,15 @@ begin
 
  aCanvas.DrawEllipse(TRectF.Create(l_StartPoint.Add(aOrigin),
                                    l_FinalPoint.Add(aOrigin)), 1);
+
+ aCanvas.DrawEllipse(TRectF.Create(FStartPoint.add(aOrigin),
+                                   FFinishPoint.add(aOrigin)),
+                                   1);
 end;
 
-class function TmsPointCircle.IsNeedsSecondClick: Boolean;
+class function TmsCircle.IsNeedsSecondClick: Boolean;
 begin
-  Result := False;
+ Result := False;
 end;
 
 end.

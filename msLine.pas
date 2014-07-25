@@ -11,14 +11,14 @@ type
   procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
   procedure DoLogic; override;
  public
-  constructor Create(const aStartPoint, aFinalPoint: TPointF); override;
+  constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
   class function IsNeedsSecondClick : Boolean; override;
  end;
 
 implementation
 { TLine }
 
-constructor TmsLine.Create(const aStartPoint, aFinalPoint: TPointF);
+constructor TmsLine.Create(const aStartPoint, aFinishPoint: TPointF);
 begin
  inherited;
 end;
@@ -32,7 +32,7 @@ end;
 procedure TmsLine.DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF);
 begin
  aCanvas.DrawLine(FStartPoint.Add(aOrigin),
-                  FFinalPoint.add(aOrigin), 1);
+                  FFinishPoint.add(aOrigin), 1);
 end;
 
 class function TmsLine.IsNeedsSecondClick: Boolean;

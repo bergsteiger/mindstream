@@ -8,7 +8,8 @@ uses
   msRegisteredPrimitives in 'msRegisteredPrimitives.pas',
   msLine in 'msLine.pas',
   msRectangle in 'msRectangle.pas',
-  msPointCircle in 'msPointCircle.pas';
+  msPointCircle in 'msPointCircle.pas',
+  msCircle in 'msCircle.pas';
 
 {$R *.res}
 

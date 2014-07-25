@@ -3,7 +3,7 @@ unit msRegisteredPrimitives;
 interface
 
 uses
- msShape, Generics.Collections, msLine, msRectangle;
+ msShape, Generics.Collections, msLine, msRectangle, msCircle, msPointCircle;
 
 type
  RmsShape = class of TmsShape;
@@ -86,5 +86,6 @@ initialization
 
  TmsRegisteredPrimitives.GetInstance.AddPrimitive(TmsLine);
  TmsRegisteredPrimitives.GetInstance.AddPrimitive(TmsRectangle);
-
+ TmsRegisteredPrimitives.GetInstance.AddPrimitive(TmsCircle);
+// TmsRegisteredPrimitives.GetInstance.AddPrimitive(TmsPointCircle);
 end.

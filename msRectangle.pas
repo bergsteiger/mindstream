@@ -14,7 +14,7 @@ type
   procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
   procedure DoLogic; override;
  public
-  constructor Create(const aStartPoint, aFinalPoint: TPointF); override;
+  constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
   class function IsNeedsSecondClick : Boolean; override;
  end;
 
@@ -26,10 +26,10 @@ const
 
 { TmsRectangle }
 
-constructor TmsRectangle.Create(const aStartPoint, aFinalPoint: TPointF);
+constructor TmsRectangle.Create(const aStartPoint, aFinishPoint: TPointF);
 begin
  inherited;
- FFinalPoint:= TPointF.Create(FStartPoint.X + c_RectangleWidth,
+ FFinishPoint:= TPointF.Create(FStartPoint.X + c_RectangleWidth,
                               FStartPoint.Y + c_RectangleHeight);
 end;
 
@@ -42,7 +42,7 @@ end;
 procedure TmsRectangle.DrawShape(const aCanvas: TCanvas; const aOrigin : TPointF);
 begin
  aCanvas.DrawRect(TRectF.Create(FStartPoint.add(aOrigin),
-                                FFinalPoint.add(aOrigin)),
+                                FFinishPoint.add(aOrigin)),
                                 0, 0,
                                 AllCorners, 1,
                                 TCornerType.ctRound);
