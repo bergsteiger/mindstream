@@ -32,7 +32,6 @@ type
     procedure cbbPrimitivesChange(Sender: TObject);
     procedure FormResize(Sender: TObject);
   private
-   FOrigin : TPointF;
    FDiagramm: TmsDiagramm;
   public
     { Public declarations }
@@ -66,11 +65,8 @@ var
 begin
  imgMain.Bitmap := TBitmap.Create(Round(imgMain.Width), Round(imgMain.Height));
  imgMain.Bitmap.Clear(TAlphaColorRec.Null);
- FOrigin := TPointF.Create(0,0);
 
  FDiagramm := TmsDiagramm.Create(imgMain.Bitmap.Canvas);
-
- //Первое нажатие всегда первое :)
 
  for l_Class in TmsRegisteredPrimitives.Instance.Primitives do
   cbbPrimitives.Items.AddObject(l_Class.ClassName, TObject(l_Class));
@@ -86,8 +82,6 @@ end;
 procedure TfmMain.FormResize(Sender: TObject);
 begin
  imgMain.Bitmap := TBitmap.Create(Round(imgMain.Width), Round(imgMain.Height));
-(* imgMain.Bitmap.Width := Round(pnlMain.Width);
- imgMain.Bitmap.Height := Round(pnlMain.Height);*)
  FDiagramm.CanvasChanged(imgMain.Bitmap.Canvas);
 end;
 
