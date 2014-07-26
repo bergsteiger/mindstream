@@ -45,7 +45,6 @@ begin
  Assert(CurrentClass <> nil);
  FCurrentAddedShape := CurrentClass.Create(aStart, aStart);
  FShapeList.Add(FCurrentAddedShape);
- //FShapeList.Add(TmsPointCircle.Create(aStart, aFinish));
  if not FCurrentAddedShape.IsNeedsSecondClick then
  // - если не надо SecondClick, то наш примитив - завершён
   FCurrentAddedShape := nil;
@@ -54,9 +53,12 @@ end;
 
 procedure TmsDrawness.Clear(const aCanvas: TCanvas);
 begin
-  aCanvas.BeginScene;
+ aCanvas.BeginScene;
+ try
   aCanvas.Clear(TAlphaColorRec.Null);
+ finally
   aCanvas.EndScene;
+ end;//try..finally
 end;
 
 constructor TmsDrawness.Create(aCanvas: TCanvas);
@@ -84,20 +86,19 @@ var
 begin
  aCanvas.BeginScene;
  try
-   for i:= 0 to FShapeList.Count-1
-    do FShapeList[i].DrawTo(aCanvas, aOrigin);
+  for i:= 0 to FShapeList.Count-1
+   do FShapeList[i].DrawTo(aCanvas, aOrigin);
  finally
-   aCanvas.EndScene;
- end;
+  aCanvas.EndScene;
+ end;//try..finally
 end;
 
 procedure TmsDrawness.EndShape(const aFinish: TPointF);
 begin
-  Assert(CurrentAddedShape <> nil);
-  CurrentAddedShape.FinishPoint := aFinish;
-  FCurrentAddedShape := nil;
-  //FShapeList.Add(TmsPointCircle.Create(aFinish, aFinish));
-  Invalidate;
+ Assert(CurrentAddedShape <> nil);
+ CurrentAddedShape.FinishPoint := aFinish;
+ FCurrentAddedShape := nil;
+ Invalidate;
 end;
 
 procedure TmsDrawness.Invalidate;
