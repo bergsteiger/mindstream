@@ -103,6 +103,7 @@ begin
  FCanvas := nil;
  FOrigin := TPointF.Create(0, 0);
  ResizeTo(anImage);
+ FCurrentClass := AllowedShapes.First;
 end;
 
 procedure TmsDiagramm.ResizeTo(anImage: TImage);

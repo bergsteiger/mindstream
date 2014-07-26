@@ -62,10 +62,7 @@ end;
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
  FDiagramm := TmsDiagramm.Create(imgMain);
-
  FDiagramm.AllowedShapesToList(cbbPrimitives.Items);
-
- cbbPrimitivesChange(nil);
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
