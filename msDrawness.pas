@@ -45,7 +45,7 @@ begin
  Assert(CurrentClass <> nil);
  FCurrentAddedShape := CurrentClass.Create(aStart, aFinish);
  FShapeList.Add(FCurrentAddedShape);
- FShapeList.Add(TmsPointCircle.Create(aStart, aFinish));
+ //FShapeList.Add(TmsPointCircle.Create(aStart, aFinish));
  if not FCurrentAddedShape.IsNeedsSecondClick then
  // - если не надо SecondClick, то наш примитив - завершён
   FCurrentAddedShape := nil;
@@ -91,7 +91,7 @@ begin
   Assert(CurrentAddedShape <> nil);
   CurrentAddedShape.FinishPoint := aFinish;
   FCurrentAddedShape := nil;
-  FShapeList.Add(TmsPointCircle.Create(aFinish, aFinish));
+  //FShapeList.Add(TmsPointCircle.Create(aFinish, aFinish));
   Invalidate;
 end;
 
