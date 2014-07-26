@@ -11,7 +11,7 @@ uses
 type
  TmsLine = class(TmsShape)
  protected
-  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
   class function IsNeedsSecondClick : Boolean; override;
  end;
@@ -25,7 +25,7 @@ uses
 
 { TLine }
 
-procedure TmsLine.DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
+procedure TmsLine.DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
 var
  l_Proxy : TmsShape;
 begin

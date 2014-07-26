@@ -18,9 +18,10 @@ type
   property FinishPoint : TPointF read FFinishPoint;
   class procedure Register;
   function FillColor: TAlphaColor; virtual;
+  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); virtual;
-  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
+  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
   class function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aFinishPoint: TPointF);
  end;
@@ -55,6 +56,12 @@ end;
 class function TmsShape.IsNeedsSecondClick : Boolean;
 begin
  Result := false;
+end;
+
+procedure TmsShape.DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
+begin
+ aCanvas.Fill.Color := FillColor;
+ DoDrawTo(aCanvas, aOrigin);
 end;
 
 end.

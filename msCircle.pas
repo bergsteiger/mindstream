@@ -13,7 +13,7 @@ type
  TmsCircle = class(TmsShape)
  protected
   class function Radius: Integer; virtual;
-  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
  end;
@@ -33,7 +33,7 @@ begin
                   TPointF.Create(aStartPoint.X + Radius, aStartPoint.Y + Radius));
 end;
 
-procedure TmsCircle.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
+procedure TmsCircle.DoDrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 begin
  aCanvas.DrawEllipse(TRectF.Create(StartPoint.Add(aOrigin),
                                    FinishPoint.Add(aOrigin)), 1);

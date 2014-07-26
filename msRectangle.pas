@@ -6,7 +6,8 @@ uses
  msShape,
  System.Types,
  FMX.Graphics,
- FMX.Types
+ FMX.Types,
+ System.UITypes
  ;
 
 type
@@ -15,16 +16,13 @@ type
   class function CornerRadius: Single; virtual;
   class function InitialWidth: Single; virtual;
   class function InitialHeight: Single; virtual;
-  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  function FillColor: TAlphaColor; override;
+  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
  end;
 
 implementation
-
-uses
- System.UITypes
- ;
 
 { TmsRectangle }
 
@@ -50,9 +48,13 @@ begin
  Result := 0;
 end;
 
-procedure TmsRectangle.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
+function TmsRectangle.FillColor: TAlphaColor;
 begin
- aCanvas.Fill.Color := TAlphaColorRec.White;
+ Result := TAlphaColorRec.White;
+end;
+
+procedure TmsRectangle.DoDrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
+begin
  aCanvas.DrawRect(TRectF.Create(StartPoint.Add(aOrigin),
                                 FinishPoint.Add(aOrigin)),
                   CornerRadius,
