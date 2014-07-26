@@ -49,7 +49,7 @@ begin
  if not FCurrentAddedShape.IsNeedsSecondClick then
  // - если не надо SecondClick, то наш примитив - завершён
   FCurrentAddedShape := nil;
-  Invalidate;
+ Invalidate;
 end;
 
 procedure TmsDrawness.Clear(const aCanvas: TCanvas);
