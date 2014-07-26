@@ -37,7 +37,7 @@ constructor TmsDiagramms.Create(anImage: TImage);
 begin
  inherited Create;
  f_Diagramms := TmsDiagrammList.Create;
- f_CurrentDiagramm := TmsDiagramm.Create(anImage);
+ f_CurrentDiagramm := TmsDiagramm.Create(anImage, IntToStr(f_Diagramms.Count + 1));
  f_Diagramms.Add(f_CurrentDiagramm);
 end;
 

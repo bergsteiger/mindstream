@@ -23,6 +23,7 @@ type
   FCurrentAddedShape : TmsShape;
   FCanvas : TCanvas;
   FOrigin : TPointF;
+  f_Name : String;
  private
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
   function CurrentAddedShape: TmsShape;
@@ -33,7 +34,7 @@ type
   procedure CanvasChanged(aCanvas: TCanvas);
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
  public
-  constructor Create(anImage: TImage);
+  constructor Create(anImage: TImage; const aName: String);
   procedure ResizeTo(anImage: TImage);
   destructor Destroy; override;
   procedure ProcessClick(const aStart: TPointF);
@@ -41,6 +42,7 @@ type
   procedure Invalidate;
   procedure AllowedShapesToList(aList: TStrings);
   procedure SelectShape(aList: TStrings; anIndex: Integer);
+  property Name : String read f_Name;
  end;//TmsDiagramm
 
 implementation
@@ -89,7 +91,7 @@ begin
  Invalidate;
 end;
 
-constructor TmsDiagramm.Create(anImage: TImage);
+constructor TmsDiagramm.Create(anImage: TImage; const aName: String);
 begin
  inherited Create;
  FShapeList := TmsShapeList.Create;
@@ -98,6 +100,7 @@ begin
  FOrigin := TPointF.Create(0, 0);
  ResizeTo(anImage);
  FCurrentClass := AllowedShapes.First;
+ f_Name := aName;
 end;
 
 procedure TmsDiagramm.ResizeTo(anImage: TImage);
