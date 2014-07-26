@@ -1,4 +1,4 @@
-unit HeaderFooterTemplate;
+unit msMain_Form;
 
 interface
 
@@ -10,18 +10,20 @@ uses
   ;
 
 type
-  THeaderFooterForm = class(TForm)
+  TmsMainForm = class(TForm)
     Header: TToolBar;
     Footer: TToolBar;
     HeaderLabel: TLabel;
     imgMain: TImage;
     cbShapes: TComboBox;
+    btClear: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
     procedure cbShapesChange(Sender: TObject);
     procedure imgMainResize(Sender: TObject);
+    procedure btClearClick(Sender: TObject);
   private
     { Private declarations }
     FDiagramm : TmsDiagramm;
@@ -30,35 +32,41 @@ type
   end;
 
 var
-  HeaderFooterForm: THeaderFooterForm;
+  msMainForm: TmsMainForm;
 
 implementation
 
 {$R *.fmx}
 
-procedure THeaderFooterForm.cbShapesChange(Sender: TObject);
+procedure TmsMainForm.btClearClick(Sender: TObject);
+begin
+ FDiagramm.Clear;
+end;
+
+procedure TmsMainForm.cbShapesChange(Sender: TObject);
 begin
  FDiagramm.SelectShape(cbShapes.Items, cbShapes.ItemIndex);
 end;
 
-procedure THeaderFooterForm.FormCreate(Sender: TObject);
+procedure TmsMainForm.FormCreate(Sender: TObject);
 begin
  FDiagramm := TmsDiagramm.Create(imgMain);
  FDiagramm.AllowedShapesToList(cbShapes.Items);
+ cbShapes.ItemIndex := 0;
 end;
 
-procedure THeaderFooterForm.FormDestroy(Sender: TObject);
+procedure TmsMainForm.FormDestroy(Sender: TObject);
 begin
  FreeAndNil(FDiagramm);
 end;
 
-procedure THeaderFooterForm.imgMainMouseDown(Sender: TObject;
+procedure TmsMainForm.imgMainMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
  FDiagramm.ProcessClick(TPointF.Create(X, Y));
 end;
 
-procedure THeaderFooterForm.imgMainResize(Sender: TObject);
+procedure TmsMainForm.imgMainResize(Sender: TObject);
 begin
  FDiagramm.ResizeTo(imgMain);
 end;

@@ -11,7 +11,8 @@ uses
  msShape,
  msPointCircle,
  System.Classes,
- FMX.Objects
+ FMX.Objects,
+ msRegisteredShapes
  ;
 
 type
@@ -28,7 +29,7 @@ type
   procedure BeginShape(const aStart: TPointF);
   procedure EndShape(const aFinish: TPointF);
   function ShapeIsEnded: Boolean;
-  class function AllowedShapes: RmsShapeList;
+  class function AllowedShapes: TmsRegisteredShapes;
   procedure CanvasChanged(aCanvas: TCanvas);
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
  public
@@ -44,13 +45,9 @@ type
 
 implementation
 
-uses
- msRegisteredPrimitives
- ;
-
-class function TmsDiagramm.AllowedShapes: RmsShapeList;
+class function TmsDiagramm.AllowedShapes: TmsRegisteredShapes;
 begin
- Result := TmsRegisteredPrimitives.Instance.Primitives;
+ Result := TmsRegisteredShapes.Instance;
 end;
 
 procedure TmsDiagramm.AllowedShapesToList(aList: TStrings);
@@ -78,7 +75,7 @@ end;
 procedure TmsDiagramm.BeginShape(const aStart: TPointF);
 begin
  Assert(CurrentClass <> nil);
- FCurrentAddedShape := CurrentClass.Create(aStart, aStart);
+ FCurrentAddedShape := CurrentClass.Create(aStart);
  FShapeList.Add(FCurrentAddedShape);
  if not FCurrentAddedShape.IsNeedsSecondClick then
  // - если не надо SecondClick, то наш примитив - завершён
@@ -88,12 +85,8 @@ end;
 
 procedure TmsDiagramm.Clear;
 begin
- FCanvas.BeginScene;
- try
-  FCanvas.Clear(TAlphaColorRec.Null);
- finally
-  FCanvas.EndScene;
- end;//try..finally
+ FShapeList.Clear;
+ Invalidate;
 end;
 
 constructor TmsDiagramm.Create(anImage: TImage);
@@ -152,8 +145,13 @@ end;
 
 procedure TmsDiagramm.Invalidate;
 begin
- Clear;
- DrawTo(FCanvas, FOrigin);
+ FCanvas.BeginScene;
+ try
+  FCanvas.Clear(TAlphaColorRec.Null);
+  DrawTo(FCanvas, FOrigin);
+ finally
+  FCanvas.EndScene;
+ end;//try..finally
 end;
 
 function TmsDiagramm.ShapeIsEnded: Boolean;

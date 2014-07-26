@@ -10,10 +10,14 @@ uses
 
 type
  TmsLine = class(TmsShape)
+ private
+  FFinishPoint: TPointF;
  protected
   procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
   class function IsNeedsSecondClick : Boolean; override;
+  procedure EndTo(const aFinishPoint: TPointF); override;
+  constructor Create(const aStartPoint: TPointF); override;
  end;
 
 implementation
@@ -23,15 +27,24 @@ uses
  msPointCircle
  ;
 
-{ TLine }
+constructor TmsLine.Create(const aStartPoint: TPointF);
+begin
+ inherited;
+ FFinishPoint := aStartPoint;
+end;
+
+procedure TmsLine.EndTo(const aFinishPoint: TPointF);
+begin
+ FFinishPoint := aFinishPoint;
+end;
 
 procedure TmsLine.DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
 var
  l_Proxy : TmsShape;
 begin
- if (StartPoint = FinishPoint) then
+ if (StartPoint = FFinishPoint) then
  begin
-  l_Proxy := TmsPointCircle.Create(StartPoint, StartPoint);
+  l_Proxy := TmsPointCircle.Create(StartPoint);
   try
    l_Proxy.DrawTo(aCanvas, aOrigin);
   finally
@@ -40,7 +53,7 @@ begin
  end//StartPoint = FinishPoint
  else
   aCanvas.DrawLine(StartPoint.Add(aOrigin),
-                   FinishPoint.Add(aOrigin), 1);
+                   FFinishPoint.Add(aOrigin), 1);
 end;
 
 class function TmsLine.IsNeedsSecondClick: Boolean;

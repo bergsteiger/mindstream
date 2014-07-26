@@ -4,18 +4,19 @@ uses
   System.StartUpCopy,
   FMX.MobilePreview,
   FMX.Forms,
-  HeaderFooterTemplate in 'HeaderFooterTemplate.pas' {HeaderFooterForm},
+  msMain_Form in 'msMain_Form.pas' {msMainForm},
   msLine,
   msRectangle,
   msCircle,
   msUseCaseLikeEllipse,
-  msRoundedRectangle
+  msRoundedRectangle,
+  msTriangle
   ;
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.CreateForm(THeaderFooterForm, HeaderFooterForm);
+  Application.CreateForm(TmsMainForm, msMainForm);
   Application.Run;
 end.

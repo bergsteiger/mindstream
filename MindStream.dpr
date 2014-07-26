@@ -5,13 +5,14 @@ uses
   uMain in 'uMain.pas' {fmMain},
   msDiagramm in 'msDiagramm.pas',
   msShape in 'msShape.pas',
-  msRegisteredPrimitives in 'msRegisteredPrimitives.pas',
+  msRegisteredShapes in 'msRegisteredShapes.pas',
   msLine in 'msLine.pas',
   msRectangle in 'msRectangle.pas',
   msPointCircle in 'msPointCircle.pas',
   msCircle in 'msCircle.pas',
   msRoundedRectangle in 'msRoundedRectangle.pas',
-  msUseCaseLikeEllipse in 'msUseCaseLikeEllipse.pas';
+  msUseCaseLikeEllipse in 'msUseCaseLikeEllipse.pas',
+  msTriangle in 'msTriangle.pas';
 
 {$R *.res}
 

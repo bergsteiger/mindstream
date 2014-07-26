@@ -1,7 +1,7 @@
-object HeaderFooterForm: THeaderFooterForm
+object msMainForm: TmsMainForm
   Left = 0
   Top = 0
-  Caption = 'Header Footer Form'
+  Caption = 'Mind Stream'
   ClientHeight = 567
   ClientWidth = 384
   FormFactor.Width = 1440
@@ -27,6 +27,14 @@ object HeaderFooterForm: THeaderFooterForm
       Text = 'Mind Stream'
       Width = 384.000000000000000000
     end
+  end
+  object Footer: TToolBar
+    Align = Bottom
+    Height = 48.000000000000000000
+    Position.Y = 519.000000000000000000
+    StyleLookup = 'bottomtoolbar'
+    TabOrder = 1
+    Width = 384.000000000000000000
     object cbShapes: TComboBox
       DisableFocusEffect = False
       Height = 32.000000000000000000
@@ -36,14 +44,15 @@ object HeaderFooterForm: THeaderFooterForm
       Width = 113.000000000000000000
       OnChange = cbShapesChange
     end
-  end
-  object Footer: TToolBar
-    Align = Bottom
-    Height = 48.000000000000000000
-    Position.Y = 519.000000000000000000
-    StyleLookup = 'bottomtoolbar'
-    TabOrder = 1
-    Width = 384.000000000000000000
+    object btClear: TButton
+      Height = 32.000000000000000000
+      Position.X = 136.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 2
+      Text = 'Clear'
+      Width = 73.000000000000000000
+      OnClick = btClearClick
+    end
   end
   object imgMain: TImage
     MultiResBitmap = <

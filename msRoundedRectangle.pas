@@ -28,7 +28,7 @@ end;
 
 class function TmsRoundedRectangle.InitialWidth: Single;
 begin
- Result := 150;
+ Result := 90;
 end;
 
 class function TmsRoundedRectangle.InitialHeight: Single;
