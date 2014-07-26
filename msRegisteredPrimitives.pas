@@ -3,7 +3,9 @@ unit msRegisteredPrimitives;
 interface
 
 uses
- msShape, Generics.Collections, msLine, msRectangle, msCircle, msPointCircle;
+ msShape,
+ Generics.Collections
+ ;
 
 type
  RmsShape = class of TmsShape;
@@ -26,7 +28,12 @@ type
 implementation
 
 uses
- SysUtils
+ SysUtils,
+
+ msLine,
+ msRectangle,
+ msCircle,
+ msPointCircle
  ;
 
 class destructor TmsRegisteredPrimitives.Fini;

@@ -43,9 +43,6 @@ var
 
  implementation
 
-uses
- msShape, msLine, msRectangle, msPointCircle;
-
 {$R *.fmx}
 
 procedure TfmMain.btnClearImageClick(Sender: TObject);
