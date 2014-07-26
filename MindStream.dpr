@@ -13,7 +13,8 @@ uses
   msRoundedRectangle in 'msRoundedRectangle.pas',
   msUseCaseLikeEllipse in 'msUseCaseLikeEllipse.pas',
   msTriangle in 'msTriangle.pas',
-  msDiagramms in 'msDiagramms.pas';
+  msDiagramms in 'msDiagramms.pas',
+  msDiagrammsController in 'msDiagrammsController.pas';
 
 {$R *.res}
 
