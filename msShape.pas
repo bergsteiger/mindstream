@@ -17,6 +17,7 @@ type
   property StartPoint : TPointF read FStartPoint;
   class procedure Register;
   function FillColor: TAlphaColor; virtual;
+  function StrokeDash: TStrokeDash; virtual;
   procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
  public
   constructor Create(const aStartPoint: TPointF); virtual;
@@ -47,6 +48,11 @@ begin
  Result := TAlphaColorRec.Null;
 end;
 
+function TmsShape.StrokeDash: TStrokeDash;
+begin
+ Result := TStrokeDash.Solid;
+end;
+
 constructor TmsShape.Create(const aStartPoint: TPointF);
 begin
  FStartPoint := aStartPoint;
@@ -65,6 +71,7 @@ end;
 procedure TmsShape.DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
 begin
  aCanvas.Fill.Color := FillColor;
+ aCanvas.Stroke.Dash := StrokeDash;
  DoDrawTo(aCanvas, aOrigin);
 end;
 
