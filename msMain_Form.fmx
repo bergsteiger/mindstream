@@ -42,7 +42,6 @@ object msMainForm: TmsMainForm
       Position.Y = 8.000000000000000000
       TabOrder = 1
       Width = 113.000000000000000000
-      OnChange = cbShapesChange
     end
     object btClear: TButton
       Height = 32.000000000000000000
@@ -60,7 +59,6 @@ object msMainForm: TmsMainForm
       Position.Y = 8.000000000000000000
       TabOrder = 4
       Width = 97.000000000000000000
-      OnChange = cbDiagrammChange
     end
     object btAdd: TButton
       Height = 32.000000000000000000
@@ -69,7 +67,6 @@ object msMainForm: TmsMainForm
       TabOrder = 5
       Text = 'Add'
       Width = 57.000000000000000000
-      OnClick = btAddClick
     end
   end
   object imgMain: TImage
@@ -80,6 +77,5 @@ object msMainForm: TmsMainForm
     Height = 471.000000000000000000
     Width = 384.000000000000000000
     OnMouseDown = imgMainMouseDown
-    OnResize = imgMainResize
   end
 end

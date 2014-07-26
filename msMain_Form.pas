@@ -7,7 +7,8 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
 
   msDiagramm, FMX.Objects, FMX.ListBox,
-  msDiagramms
+  msDiagramms,
+  msDiagrammsController
   ;
 
 type
@@ -24,14 +25,10 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
-    procedure cbShapesChange(Sender: TObject);
-    procedure imgMainResize(Sender: TObject);
     procedure btClearClick(Sender: TObject);
-    procedure cbDiagrammChange(Sender: TObject);
-    procedure btAddClick(Sender: TObject);
   private
     { Private declarations }
-    FDiagramm : TmsDiagramms;
+    FDiagramm : TmsDiagrammsController;
   public
     { Public declarations }
   end;
@@ -43,35 +40,14 @@ implementation
 
 {$R *.fmx}
 
-procedure TmsMainForm.btAddClick(Sender: TObject);
-begin
- FDiagramm.AddDiagramm(imgMain, cbDiagramm.Items);
- cbDiagramm.ItemIndex := FDiagramm.CurrentDiagrammIndex;
- cbShapes.ItemIndex := FDiagramm.CurrentShapeClassIndex;
-end;
-
 procedure TmsMainForm.btClearClick(Sender: TObject);
 begin
  FDiagramm.Clear;
 end;
 
-procedure TmsMainForm.cbDiagrammChange(Sender: TObject);
-begin
- FDiagramm.SelectDiagramm(cbDiagramm.ItemIndex);
- cbShapes.ItemIndex := FDiagramm.CurrentShapeClassIndex;
-end;
-
-procedure TmsMainForm.cbShapesChange(Sender: TObject);
-begin
- FDiagramm.SelectShape(cbShapes.Items, cbShapes.ItemIndex);
-end;
-
 procedure TmsMainForm.FormCreate(Sender: TObject);
 begin
- FDiagramm := TmsDiagramms.Create(imgMain, cbDiagramm.Items);
- FDiagramm.AllowedShapesToList(cbShapes.Items);
- cbShapes.ItemIndex := FDiagramm.CurrentShapeClassIndex;
- cbDiagramm.ItemIndex := FDiagramm.CurrentDiagrammIndex;
+ FDiagramm := TmsDiagrammsController.Create(imgMain, cbShapes, cbDiagramm, btAdd);
 end;
 
 procedure TmsMainForm.FormDestroy(Sender: TObject);
@@ -83,11 +59,6 @@ procedure TmsMainForm.imgMainMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
  FDiagramm.ProcessClick(TPointF.Create(X, Y));
-end;
-
-procedure TmsMainForm.imgMainResize(Sender: TObject);
-begin
- FDiagramm.ResizeTo(imgMain);
 end;
 
 end.
