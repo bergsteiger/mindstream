@@ -16,7 +16,7 @@ type
   class var FInstance: TmsRegisteredPrimitives;
   constructor Create;
  public
-  class function GetInstance: TmsRegisteredPrimitives;
+  class function Instance: TmsRegisteredPrimitives;
   procedure AddPrimitive(const aValue : RmsShape);
   property Primitives: TmsRegistered read FmsRegistered;
  end;
@@ -34,7 +34,7 @@ begin
  FmsRegistered := TmsRegistered.Create;
 end;
 
-class function TmsRegisteredPrimitives.GetInstance: TmsRegisteredPrimitives;
+class function TmsRegisteredPrimitives.Instance: TmsRegisteredPrimitives;
 begin
  if (FInstance = nil) then
   FInstance := TmsRegisteredPrimitives.Create;
@@ -42,8 +42,7 @@ begin
 end;
 
 initialization
- TmsRegisteredPrimitives.GetInstance.AddPrimitive(TmsLine);
- TmsRegisteredPrimitives.GetInstance.AddPrimitive(TmsRectangle);
- TmsRegisteredPrimitives.GetInstance.AddPrimitive(TmsCircle);
-// TmsRegisteredPrimitives.GetInstance.AddPrimitive(TmsPointCircle);
+ TmsRegisteredPrimitives.Instance.AddPrimitive(TmsLine);
+ TmsRegisteredPrimitives.Instance.AddPrimitive(TmsRectangle);
+ TmsRegisteredPrimitives.Instance.AddPrimitive(TmsCircle);
 end.

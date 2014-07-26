@@ -75,7 +75,7 @@ begin
 
  //Первое нажатие всегда первое :)
 
- for l_Class in TmsRegisteredPrimitives.GetInstance.Primitives do
+ for l_Class in TmsRegisteredPrimitives.Instance.Primitives do
   cbbPrimitives.Items.AddObject(l_Class.ClassName, TObject(l_Class));
 
  cbbPrimitivesChange(nil);
