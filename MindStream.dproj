@@ -88,7 +88,7 @@
             <Form>fmMain</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="msDrawness.pas"/>
+        <DCCReference Include="msDiagramm.pas"/>
         <DCCReference Include="msShape.pas"/>
         <DCCReference Include="msRegisteredPrimitives.pas"/>
         <DCCReference Include="msLine.pas"/>
@@ -96,6 +96,7 @@
         <DCCReference Include="msPointCircle.pas"/>
         <DCCReference Include="msCircle.pas"/>
         <DCCReference Include="msRoundedRectange.pas"/>
+        <DCCReference Include="msUseCaseLikeEllipse.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
