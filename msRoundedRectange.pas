@@ -6,7 +6,8 @@ uses
  msRectangle,
  System.Types,
  FMX.Graphics,
- FMX.Types
+ FMX.Types,
+ System.UITypes
  ;
 
 type
@@ -15,6 +16,7 @@ type
   class function CornerRadius: Single; override;
   class function InitialWidth: Single; override;
   class function InitialHeight: Single; override;
+  function FillColor: TAlphaColor; override;
  end;//TmsRoundedRectangle
 
 implementation
@@ -32,6 +34,11 @@ end;
 class function TmsRoundedRectangle.InitialHeight: Single;
 begin
  Result := InitialWidth;
+end;
+
+function TmsRoundedRectangle.FillColor: TAlphaColor;
+begin
+ Result := TAlphaColorRec.Blue;
 end;
 
 initialization
