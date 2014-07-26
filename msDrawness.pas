@@ -28,10 +28,10 @@ type
  public
   constructor Create(aCanvas: TCanvas);
   destructor Destroy; override;
-  procedure AddShape(const aStart: TPointF);
+  procedure BeginShape(const aStart: TPointF);
   procedure Clear(const aCanvas : TCanvas);
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
-  procedure FinalizeShape(const aFinish: TPointF);
+  procedure EndShape(const aFinish: TPointF);
   procedure Invalidate;
   function ShapeFinalized: Boolean;
  end;
@@ -40,7 +40,7 @@ implementation
 
 { TDrawness }
 
-procedure TmsDrawness.AddShape(const aStart: TPointF);
+procedure TmsDrawness.BeginShape(const aStart: TPointF);
 begin
  Assert(CurrentClass <> nil);
  FCurrentAddedShape := CurrentClass.Create(aStart, aStart);
@@ -86,7 +86,7 @@ begin
   do FShapeList[i].DrawTo(aCanvas, aOrigin);
 end;
 
-procedure TmsDrawness.FinalizeShape(const aFinish: TPointF);
+procedure TmsDrawness.EndShape(const aFinish: TPointF);
 begin
   Assert(CurrentAddedShape <> nil);
   CurrentAddedShape.FinishPoint := aFinish;
