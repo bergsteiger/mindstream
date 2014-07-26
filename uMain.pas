@@ -27,8 +27,6 @@ type
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Single);
     procedure imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Single);
     procedure FormDestroy(Sender: TObject);
@@ -65,12 +63,6 @@ procedure TfmMain.imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Single);
 begin
  Caption := 'x = ' + FloatToStr(X) + '; y = ' + FloatToStr(Y);
-end;
-
-procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Single);
-begin
- FDiagramm.ProcessClick(TPointF.Create(X, Y));
 end;
 
 procedure TfmMain.miAboutClick(Sender: TObject);
