@@ -9,7 +9,8 @@ uses
  System.Types,
  System.UITypes,
  msShape,
- msPointCircle
+ msPointCircle,
+ System.Classes
  ;
 
 type
@@ -34,6 +35,7 @@ type
   procedure Invalidate;
   function ShapeIsEnded: Boolean;
   class function AllowedShapes: RmsShapeList;
+  procedure AllowedShapesToList(aList: TStrings);
  end;
 
 implementation
@@ -45,6 +47,14 @@ uses
 class function TmsDiagramm.AllowedShapes: RmsShapeList;
 begin
  Result := TmsRegisteredPrimitives.Instance.Primitives;
+end;
+
+procedure TmsDiagramm.AllowedShapesToList(aList: TStrings);
+var
+ l_Class : RmsShape;
+begin
+ for l_Class in AllowedShapes do
+  aList.AddObject(l_Class.ClassName, TObject(l_Class));
 end;
 
 procedure TmsDiagramm.BeginShape(const aStart: TPointF);

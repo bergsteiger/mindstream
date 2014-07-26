@@ -64,16 +64,13 @@ begin
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
-var
- l_Class : RmsShape;
 begin
  imgMain.Bitmap := TBitmap.Create(Round(imgMain.Width), Round(imgMain.Height));
  imgMain.Bitmap.Clear(TAlphaColorRec.Null);
 
  FDiagramm := TmsDiagramm.Create(imgMain.Bitmap.Canvas);
 
- for l_Class in FDiagramm.AllowedShapes do
-  cbbPrimitives.Items.AddObject(l_Class.ClassName, TObject(l_Class));
+ FDiagramm.AllowedShapesToList(cbbPrimitives.Items);
 
  cbbPrimitivesChange(nil);
 end;
