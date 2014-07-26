@@ -17,7 +17,6 @@ type
     pnlTop: TPanel;
     imgMain: TImage;
     btnClearImage: TButton;
-    btnDrawAll: TButton;
     cbbPrimitives: TComboBox;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
@@ -28,7 +27,6 @@ type
       Y: Single);
     procedure FormDestroy(Sender: TObject);
     procedure btnClearImageClick(Sender: TObject);
-    procedure btnDrawAllClick(Sender: TObject);
     procedure cbbPrimitivesChange(Sender: TObject);
     procedure imgMainResize(Sender: TObject);
   private
@@ -47,11 +45,6 @@ implementation
 procedure TfmMain.btnClearImageClick(Sender: TObject);
 begin
  FDiagramm.Clear;
-end;
-
-procedure TfmMain.btnDrawAllClick(Sender: TObject);
-begin
- FDiagramm.Invalidate;
 end;
 
 procedure TfmMain.cbbPrimitivesChange(Sender: TObject);
