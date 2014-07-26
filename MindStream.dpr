@@ -15,8 +15,10 @@ uses
   msTriangle in 'msTriangle.pas',
   msDiagramms in 'msDiagramms.pas',
   msDiagrammsController in 'msDiagrammsController.pas',
-  msDotLine in 'msDotLine.pas',
-  msDashLine in 'msDashLine.pas';
+  msDashDotLine in 'msDashDotLine.pas',
+  msDashLine in 'msDashLine.pas',
+  msDotLine in 'msDotLine.pas'
+  ;
 
 {$R *.res}
 
