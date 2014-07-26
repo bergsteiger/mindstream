@@ -12,6 +12,7 @@ type
  protected
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
+  constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
   class function IsNeedsSecondClick : Boolean; override;
  end;
 
@@ -22,19 +23,17 @@ implementation
 const
  c_CircleRadius = 10;
 
-procedure TmsPointCircle.DrawTo(const aCanvas: TCanvas;
-                                   const aOrigin : TPointF);
-var
- l_StartPoint, l_FinalPoint: TPointF;
+constructor TmsPointCircle.Create(const aStartPoint, aFinishPoint: TPointF);
 begin
- l_StartPoint := TPointF.Create(StartPoint.X - c_CircleRadius,
-                                StartPoint.Y - c_CircleRadius);
+ inherited Create(TPointF.Create(aStartPoint.X - c_CircleRadius, aStartPoint.Y - c_CircleRadius),
+                  TPointF.Create(aStartPoint.X + c_CircleRadius, aStartPoint.Y + c_CircleRadius));
+end;
 
- l_FinalPoint := TPointF.Create(StartPoint.X + c_CircleRadius,
-                                StartPoint.Y + c_CircleRadius);
-
- aCanvas.DrawEllipse(TRectF.Create(l_StartPoint.Add(aOrigin),
-                                   l_FinalPoint.Add(aOrigin)), 1);
+procedure TmsPointCircle.DrawTo(const aCanvas: TCanvas;
+                                const aOrigin : TPointF);
+begin
+ aCanvas.DrawEllipse(TRectF.Create(StartPoint.Add(aOrigin),
+                                   FinishPoint.Add(aOrigin)), 1);
 end;
 
 class function TmsPointCircle.IsNeedsSecondClick: Boolean;
