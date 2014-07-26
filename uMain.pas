@@ -8,7 +8,8 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   FMX.Objects, FMX.Menus, FMX.Edit, FMX.ListBox, msDiagramm,
 
-  msDiagramms
+  msDiagramms,
+  msDiagrammsController
   ;
 
 type
@@ -32,12 +33,8 @@ type
       Y: Single);
     procedure FormDestroy(Sender: TObject);
     procedure btnClearImageClick(Sender: TObject);
-    procedure cbShapesChange(Sender: TObject);
-    procedure imgMainResize(Sender: TObject);
-    procedure btAddDiagrammClick(Sender: TObject);
-    procedure cbDiagrammChange(Sender: TObject);
   private
-   FDiagramm: TmsDiagramms;
+   FDiagramm: TmsDiagrammsController;
   public
     { Public declarations }
   end;
@@ -49,35 +46,14 @@ implementation
 
 {$R *.fmx}
 
-procedure TfmMain.btAddDiagrammClick(Sender: TObject);
-begin
- FDiagramm.AddDiagramm(imgMain, cbDiagramm.Items);
- cbDiagramm.ItemIndex := FDiagramm.CurrentDiagrammIndex;
- cbShapes.ItemIndex := FDiagramm.CurrentShapeClassIndex;
-end;
-
 procedure TfmMain.btnClearImageClick(Sender: TObject);
 begin
  FDiagramm.Clear;
 end;
 
-procedure TfmMain.cbShapesChange(Sender: TObject);
-begin
- FDiagramm.SelectShape(cbShapes.Items, cbShapes.ItemIndex);
-end;
-
-procedure TfmMain.cbDiagrammChange(Sender: TObject);
-begin
- FDiagramm.SelectDiagramm(cbDiagramm.ItemIndex);
- cbShapes.ItemIndex := FDiagramm.CurrentShapeClassIndex;
-end;
-
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
- FDiagramm := TmsDiagramms.Create(imgMain, cbDiagramm.Items);
- FDiagramm.AllowedShapesToList(cbShapes.Items);
- cbShapes.ItemIndex := FDiagramm.CurrentShapeClassIndex;
- cbDiagramm.ItemIndex := FDiagramm.CurrentDiagrammIndex;
+ FDiagramm := TmsDiagrammsController.Create(imgMain, cbShapes, cbDiagramm, btAddDiagramm);
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
@@ -91,11 +67,6 @@ begin
  Caption := 'x = ' + FloatToStr(X) + '; y = ' + FloatToStr(Y);
 end;
 
-procedure TfmMain.imgMainResize(Sender: TObject);
-begin
- FDiagramm.ResizeTo(imgMain);
-end;
-
 procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 begin
@@ -104,12 +75,12 @@ end;
 
 procedure TfmMain.miAboutClick(Sender: TObject);
 begin
- ShowMessage(self.Caption);
+ ShowMessage(Self.Caption);
 end;
 
 procedure TfmMain.miExitClick(Sender: TObject);
 begin
- self.Close;
+ Self.Close;
 end;
 
 end.

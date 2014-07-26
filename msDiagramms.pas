@@ -101,5 +101,5 @@ begin
  Result := f_CurrentDiagramm.CurrentShapeClassIndex;
 end;
 
-
 end.
+

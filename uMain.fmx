@@ -40,7 +40,6 @@ object fmMain: TfmMain
     Width = 600.000000000000000000
     OnMouseDown = imgMainMouseDown
     OnMouseMove = imgMainMouseMove
-    OnResize = imgMainResize
   end
   object pnlTop: TPanel
     Align = Top
@@ -64,7 +63,6 @@ object fmMain: TfmMain
       Position.Y = 8.000000000000000000
       TabOrder = 1
       Width = 100.000000000000000000
-      OnChange = cbShapesChange
     end
     object cbDiagramm: TComboBox
       DisableFocusEffect = False
@@ -73,7 +71,6 @@ object fmMain: TfmMain
       Position.Y = 8.000000000000000000
       TabOrder = 3
       Width = 100.000000000000000000
-      OnChange = cbDiagrammChange
     end
     object btAddDiagramm: TButton
       Height = 22.000000000000000000
@@ -82,7 +79,6 @@ object fmMain: TfmMain
       TabOrder = 4
       Text = 'Add'
       Width = 80.000000000000000000
-      OnClick = btAddDiagrammClick
     end
   end
 end
