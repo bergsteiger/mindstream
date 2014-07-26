@@ -5,7 +5,8 @@ uses
  FMX.Graphics,
  System.Types,
  FMX.Types,
- System.UITypes
+ System.UITypes,
+ Generics.Collections
  ;
 
 type
@@ -25,6 +26,12 @@ type
   class function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aFinishPoint: TPointF);
  end;
+
+ RmsShape = class of TmsShape;
+
+ RmsShapeList = TList<RmsShape>;
+
+ TmsShapeList = TObjectList<TmsShape>;
 
 implementation
 

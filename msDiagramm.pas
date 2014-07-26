@@ -9,15 +9,13 @@ uses
  System.Types,
  System.UITypes,
  msShape,
- msRegisteredPrimitives,
- msPointCircle;
+ msPointCircle
+ ;
 
 type
- TShapeList = TObjectList<TmsShape>;
-
- TmsDiagramm = class
+ TmsDiagramm = class(TObject)
  private
-  FShapeList : TShapeList;
+  FShapeList : TmsShapeList;
   FCurrentClass : RmsShape;
   FCurrentAddedShape : TmsShape;
   FCanvas : TCanvas;
@@ -64,7 +62,7 @@ end;
 
 constructor TmsDiagramm.Create(aCanvas: TCanvas);
 begin
- FShapeList := TShapeList.Create;
+ FShapeList := TmsShapeList.Create;
  FCurrentAddedShape := nil;
  FCanvas := aCanvas;
  FOrigin := TPointF.Create(0, 0)

@@ -42,6 +42,10 @@ var
 
 implementation
 
+uses
+ msShape
+ ;
+
 {$R *.fmx}
 
 procedure TfmMain.btnClearImageClick(Sender: TObject);
@@ -56,7 +60,7 @@ end;
 
 procedure TfmMain.cbbPrimitivesChange(Sender: TObject);
 begin
- FDiagramm.CurrentClass := RmsShape(cbbPrimitives.items.Objects[cbbPrimitives.ItemIndex]);
+ FDiagramm.CurrentClass := RmsShape(cbbPrimitives.Items.Objects[cbbPrimitives.ItemIndex]);
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);

@@ -3,25 +3,20 @@ unit msRegisteredPrimitives;
 interface
 
 uses
- msShape,
- Generics.Collections
+ msShape
  ;
 
 type
- RmsShape = class of TmsShape;
-
- TmsRegistered = TList<RmsShape>;
-
  TmsRegisteredPrimitives  = class
  strict private
-  f_Registered : TmsRegistered;
+  f_Registered : RmsShapeList;
   class var FInstance: TmsRegisteredPrimitives;
   constructor Create;
   class destructor Fini;
  public
   class function Instance: TmsRegisteredPrimitives;
   procedure AddPrimitive(const aValue : RmsShape);
-  property Primitives: TmsRegistered read f_Registered;
+  property Primitives: RmsShapeList read f_Registered;
   destructor Destroy; override;
  end;
 
@@ -50,7 +45,7 @@ end;
 constructor TmsRegisteredPrimitives.Create;
 begin
  inherited;
- f_Registered := TmsRegistered.Create;
+ f_Registered := RmsShapeList.Create;
 end;
 
 class function TmsRegisteredPrimitives.Instance: TmsRegisteredPrimitives;
