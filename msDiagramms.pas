@@ -18,15 +18,15 @@ type
   f_Diagramms : TmsDiagrammList;
   f_CurrentDiagramm : TmsDiagramm;
  public
-  constructor Create(anImage: TImage);
+  constructor Create(anImage: TImage; aList: TStrings);
   destructor Destroy; override;
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure AllowedShapesToList(aList: TStrings);
   procedure ResizeTo(anImage: TImage);
-  procedure DiagramsToList(aList: TStrings);
-  procedure AddDiagramm(anImage: TImage);
+(*  procedure DiagramsToList(aList: TStrings);*)
+  procedure AddDiagramm(anImage: TImage; aList: TStrings);
   function CurrentDiagrammIndex: Integer;
   procedure SelectDiagramm(anIndex: Integer);
  end;//TmsDiagramms
@@ -37,17 +37,18 @@ uses
  System.SysUtils
  ;
 
-constructor TmsDiagramms.Create(anImage: TImage);
+constructor TmsDiagramms.Create(anImage: TImage; aList: TStrings);
 begin
  inherited Create;
  f_Diagramms := TmsDiagrammList.Create;
- AddDiagramm(anImage);
+ AddDiagramm(anImage, aList);
 end;
 
-procedure TmsDiagramms.AddDiagramm(anImage: TImage);
+procedure TmsDiagramms.AddDiagramm(anImage: TImage; aList: TStrings);
 begin
  f_CurrentDiagramm := TmsDiagramm.Create(anImage, IntToStr(f_Diagramms.Count + 1));
  f_Diagramms.Add(f_CurrentDiagramm);
+ aList.AddObject(f_CurrentDiagramm.Name, f_CurrentDiagramm);
  f_CurrentDiagramm.Invalidate;
 end;
 
@@ -64,14 +65,14 @@ begin
  f_CurrentDiagramm.Invalidate;
 end;
 
-procedure TmsDiagramms.DiagramsToList(aList: TStrings);
+(*procedure TmsDiagramms.DiagramsToList(aList: TStrings);
 var
  l_D : TmsDiagramm;
 begin
  aList.Clear;
  for l_D in f_Diagramms do
   aList.AddObject(l_D.Name, l_D);
-end;
+end;*)
 
 destructor TmsDiagramms.Destroy;
 begin
