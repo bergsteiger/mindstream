@@ -3,7 +3,10 @@ unit msLine;
 interface
 
 uses
- msShape, FMX.Graphics, System.Types;
+ msShape,
+ FMX.Graphics,
+ System.Types
+ ;
 
 type
  TmsLine = class(TmsShape)

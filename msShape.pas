@@ -4,7 +4,8 @@ interface
 uses
  FMX.Graphics,
  System.Types,
- FMX.Types;
+ FMX.Types
+ ;
 
 type
  TmsShape = class abstract (TObject)

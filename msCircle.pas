@@ -6,7 +6,8 @@ uses
  msShape,
  System.Types,
  FMX.Graphics,
- FMX.Types;
+ FMX.Types
+ ;
 
 type
  TmsCircle = class(TmsShape)
