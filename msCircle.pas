@@ -19,10 +19,6 @@ type
 
 implementation
 
-uses
- msRegisteredPrimitives
- ;
-
 { TmsCircle }
 
 class function TmsCircle.Radius: Integer;
@@ -43,6 +39,6 @@ begin
 end;
 
 initialization
- TmsRegisteredPrimitives.Instance.AddPrimitive(TmsCircle);
+ TmsCircle.Register;
 
 end.

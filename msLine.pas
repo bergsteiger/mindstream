@@ -17,8 +17,7 @@ implementation
 
 uses
  SysUtils,
- msPointCircle,
- msRegisteredPrimitives
+ msPointCircle
  ;
 
 { TLine }
@@ -47,6 +46,6 @@ begin
 end;
 
 initialization
- TmsRegisteredPrimitives.Instance.AddPrimitive(TmsLine);
+ TmsLine.Register;
 
 end.

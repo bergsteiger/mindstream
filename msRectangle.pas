@@ -6,8 +6,7 @@ uses
  msShape,
  System.Types,
  FMX.Graphics,
- FMX.Types,
- msRegisteredPrimitives
+ FMX.Types
  ;
 
 type
@@ -43,6 +42,6 @@ begin
 end;
 
 initialization
- TmsRegisteredPrimitives.Instance.AddPrimitive(TmsRectangle);
+ TmsRectangle.Register;
 
 end.
