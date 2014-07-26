@@ -82,8 +82,13 @@ procedure TmsDrawness.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 var
  i : Integer;
 begin
- for i:= 0 to FShapeList.Count-1
-  do FShapeList[i].DrawTo(aCanvas, aOrigin);
+ aCanvas.BeginScene;
+ try
+   for i:= 0 to FShapeList.Count-1
+    do FShapeList[i].DrawTo(aCanvas, aOrigin);
+ finally
+   aCanvas.EndScene;
+ end;
 end;
 
 procedure TmsDrawness.EndShape(const aFinish: TPointF);

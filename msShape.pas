@@ -29,9 +29,9 @@ end;
 
 procedure TmsShape.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 begin
- aCanvas.BeginScene;
+ //aCanvas.BeginScene;
  DrawShape(aCanvas, aOrigin);
- aCanvas.EndScene;
+ //aCanvas.EndScene;
 end;
 
 
