@@ -9,7 +9,6 @@ object fmMain: TfmMain
   FormFactor.Devices = [Desktop, iPhone, iPad]
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  OnResize = FormResize
   DesignerMobile = False
   DesignerWidth = 0
   DesignerHeight = 0
@@ -41,6 +40,7 @@ object fmMain: TfmMain
     Width = 600.000000000000000000
     OnMouseDown = imgMainMouseDown
     OnMouseMove = imgMainMouseMove
+    OnResize = imgMainResize
   end
   object pnlTop: TPanel
     Align = Top

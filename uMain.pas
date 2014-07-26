@@ -30,7 +30,7 @@ type
     procedure btnClearImageClick(Sender: TObject);
     procedure btnDrawAllClick(Sender: TObject);
     procedure cbbPrimitivesChange(Sender: TObject);
-    procedure FormResize(Sender: TObject);
+    procedure imgMainResize(Sender: TObject);
   private
    FDiagramm: TmsDiagramm;
   public
@@ -80,16 +80,16 @@ begin
  FreeAndNil(FDiagramm);
 end;
 
-procedure TfmMain.FormResize(Sender: TObject);
-begin
- imgMain.Bitmap := TBitmap.Create(Round(imgMain.Width), Round(imgMain.Height));
- FDiagramm.CanvasChanged(imgMain.Bitmap.Canvas);
-end;
-
 procedure TfmMain.imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Single);
 begin
  Caption := 'x = ' + FloatToStr(X) + '; y = ' + FloatToStr(Y);
+end;
+
+procedure TfmMain.imgMainResize(Sender: TObject);
+begin
+ imgMain.Bitmap := TBitmap.Create(Round(imgMain.Width), Round(imgMain.Height));
+ FDiagramm.CanvasChanged(imgMain.Bitmap.Canvas);
 end;
 
 procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;
