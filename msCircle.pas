@@ -11,6 +11,7 @@ uses
 type
  TmsCircle = class(TmsShape)
  protected
+  class function Radius: Integer; virtual;
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
@@ -18,15 +19,17 @@ type
 
 implementation
 
-const
- c_CircleRadius = 50;
-
 { TmsCircle }
+
+class function TmsCircle.Radius: Integer;
+begin
+ Result := 50;
+end;
 
 constructor TmsCircle.Create(const aStartPoint, aFinishPoint: TPointF);
 begin
- inherited Create(TPointF.Create(aStartPoint.X - c_CircleRadius, aStartPoint.Y - c_CircleRadius),
-                  TPointF.Create(aStartPoint.X + c_CircleRadius, aStartPoint.Y + c_CircleRadius));
+ inherited Create(TPointF.Create(aStartPoint.X - Radius, aStartPoint.Y - Radius),
+                  TPointF.Create(aStartPoint.X + Radius, aStartPoint.Y + Radius));
 end;
 
 procedure TmsCircle.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
