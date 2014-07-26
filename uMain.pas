@@ -51,8 +51,8 @@ implementation
 
 procedure TfmMain.btAddDiagrammClick(Sender: TObject);
 begin
- FDiagramm.AddDiagramm(imgMain);
  cbDiargamm.BeginUpdate;
+ FDiagramm.AddDiagramm(imgMain);
  cbDiargamm.ItemIndex := -1;
  FDiagramm.DiagramsToList(cbDiargamm.Items);
  cbDiargamm.ItemIndex := FDiagramm.CurrentDiagrammIndex;
