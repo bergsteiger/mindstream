@@ -33,7 +33,7 @@ type
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
   procedure EndShape(const aFinish: TPointF);
   procedure Invalidate;
-  function ShapeFinalized: Boolean;
+  function ShapeIsEnded: Boolean;
  end;
 
 implementation
@@ -101,7 +101,7 @@ begin
  DrawTo(FCanvas, FOrigin);
 end;
 
-function TmsDrawness.ShapeFinalized: Boolean;
+function TmsDrawness.ShapeIsEnded: Boolean;
 begin
  Result := (CurrentAddedShape = nil);
 end;
