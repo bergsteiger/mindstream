@@ -34,8 +34,8 @@ end;
 
 procedure TmsRectangle.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 begin
- aCanvas.DrawRect(TRectF.Create(FStartPoint.Add(aOrigin),
-                                FFinishPoint.Add(aOrigin)),
+ aCanvas.DrawRect(TRectF.Create(StartPoint.Add(aOrigin),
+                                FinishPoint.Add(aOrigin)),
                                 0, 0,
                                 AllCorners, 1,
                                 TCornerType.ctRound);

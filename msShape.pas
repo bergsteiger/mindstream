@@ -8,9 +8,10 @@ uses
 
 type
  TmsShape = class
- protected
+ private
   FStartPoint: TPointF;
   FFinishPoint: TPointF;
+ protected
   property StartPoint : TPointF read FStartPoint;
   property FinishPoint : TPointF read FFinishPoint;
  public

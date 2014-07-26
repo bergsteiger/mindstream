@@ -27,11 +27,11 @@ procedure TmsPointCircle.DrawTo(const aCanvas: TCanvas;
 var
  l_StartPoint, l_FinalPoint: TPointF;
 begin
- l_StartPoint.X := FStartPoint.X - c_CircleRadius;
- l_StartPoint.Y := FStartPoint.Y - c_CircleRadius;
+ l_StartPoint.X := StartPoint.X - c_CircleRadius;
+ l_StartPoint.Y := StartPoint.Y - c_CircleRadius;
 
- l_FinalPoint.X := FStartPoint.X + c_CircleRadius;
- l_FinalPoint.Y := FStartPoint.Y + c_CircleRadius;
+ l_FinalPoint.X := StartPoint.X + c_CircleRadius;
+ l_FinalPoint.Y := StartPoint.Y + c_CircleRadius;
 
  aCanvas.DrawEllipse(TRectF.Create(l_StartPoint.Add(aOrigin),
                                    l_FinalPoint.Add(aOrigin)), 1);

@@ -18,8 +18,8 @@ implementation
 
 procedure TmsLine.DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
 begin
- aCanvas.DrawLine(FStartPoint.Add(aOrigin),
-                  FFinishPoint.add(aOrigin), 1);
+ aCanvas.DrawLine(StartPoint.Add(aOrigin),
+                  FinishPoint.Add(aOrigin), 1);
 end;
 
 class function TmsLine.IsNeedsSecondClick: Boolean;
