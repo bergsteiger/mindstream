@@ -65,10 +65,7 @@ end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
- imgMain.Bitmap := TBitmap.Create(Round(imgMain.Width), Round(imgMain.Height));
- imgMain.Bitmap.Clear(TAlphaColorRec.Null);
-
- FDiagramm := TmsDiagramm.Create(imgMain.Bitmap.Canvas);
+ FDiagramm := TmsDiagramm.Create(imgMain);
 
  FDiagramm.AllowedShapesToList(cbbPrimitives.Items);
 

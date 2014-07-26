@@ -31,7 +31,7 @@ type
   class function AllowedShapes: RmsShapeList;
   procedure CanvasChanged(aCanvas: TCanvas);
  public
-  constructor Create(aCanvas: TCanvas);
+  constructor Create(anImage: TImage);
   procedure ResizeTo(anImage: TImage);
   destructor Destroy; override;
   procedure ProcessClick(const aStart: TPointF);
@@ -90,12 +90,13 @@ begin
  end;//try..finally
 end;
 
-constructor TmsDiagramm.Create(aCanvas: TCanvas);
+constructor TmsDiagramm.Create(anImage: TImage);
 begin
  FShapeList := TmsShapeList.Create;
  FCurrentAddedShape := nil;
- FCanvas := aCanvas;
- FOrigin := TPointF.Create(0, 0)
+ FCanvas := nil;
+ FOrigin := TPointF.Create(0, 0);
+ ResizeTo(anImage);
 end;
 
 procedure TmsDiagramm.ResizeTo(anImage: TImage);
