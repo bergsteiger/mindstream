@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   Generics.Collections,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Objects, FMX.Menus, FMX.Edit, FMX.ListBox, msDrawness, msRegisteredPrimitives;
+  FMX.Objects, FMX.Menus, FMX.Edit, FMX.ListBox, msDiagramm, msRegisteredPrimitives;
 
 type
   TfmMain = class(TForm)
@@ -34,7 +34,7 @@ type
     procedure FormResize(Sender: TObject);
   private
    FOrigin : TPointF;
-   FDrawness: TmsDrawness;
+   FDrawness: TmsDiagramm;
   public
     { Public declarations }
   end;
@@ -69,7 +69,7 @@ begin
  imgMain.Bitmap.Clear(TAlphaColorRec.Null);
  FOrigin := TPointF.Create(0,0);
 
- FDrawness := TmsDrawness.Create(imgMain.Bitmap.Canvas);
+ FDrawness := TmsDiagramm.Create(imgMain.Bitmap.Canvas);
 
  //Первое нажатие всегда первое :)
 

@@ -1,4 +1,4 @@
-unit msDrawness;
+unit msDiagramm;
 
 interface
 
@@ -15,7 +15,7 @@ uses
 type
  TShapeList = TObjectList<TmsShape>;
 
- TmsDrawness = class
+ TmsDiagramm = class
  private
   FShapeList : TShapeList;
   FCurrentClass : RmsShape;
@@ -41,7 +41,7 @@ implementation
 
 { TDrawness }
 
-procedure TmsDrawness.BeginShape(const aStart: TPointF);
+procedure TmsDiagramm.BeginShape(const aStart: TPointF);
 begin
  Assert(CurrentClass <> nil);
  FCurrentAddedShape := CurrentClass.Create(aStart, aStart);
@@ -52,7 +52,7 @@ begin
  Invalidate;
 end;
 
-procedure TmsDrawness.Clear(const aCanvas: TCanvas);
+procedure TmsDiagramm.Clear(const aCanvas: TCanvas);
 begin
  aCanvas.BeginScene;
  try
@@ -62,7 +62,7 @@ begin
  end;//try..finally
 end;
 
-constructor TmsDrawness.Create(aCanvas: TCanvas);
+constructor TmsDiagramm.Create(aCanvas: TCanvas);
 begin
  FShapeList := TShapeList.Create;
  FCurrentAddedShape := nil;
@@ -70,24 +70,24 @@ begin
  FOrigin := TPointF.Create(0, 0)
 end;
 
-procedure TmsDrawness.CanvasChanged(aCanvas: TCanvas);
+procedure TmsDiagramm.CanvasChanged(aCanvas: TCanvas);
 begin
  FCanvas := aCanvas;
  Invalidate;
 end;
 
-function TmsDrawness.CurrentAddedShape: TmsShape;
+function TmsDiagramm.CurrentAddedShape: TmsShape;
 begin
  Result := FCurrentAddedShape;
 end;
 
-destructor TmsDrawness.Destroy;
+destructor TmsDiagramm.Destroy;
 begin
  FreeAndNil(FShapeList);
  inherited;
 end;
 
-procedure TmsDrawness.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
+procedure TmsDiagramm.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 var
  l_Shape : TmsShape;
 begin
@@ -100,7 +100,7 @@ begin
  end;//try..finally
 end;
 
-procedure TmsDrawness.EndShape(const aFinish: TPointF);
+procedure TmsDiagramm.EndShape(const aFinish: TPointF);
 begin
  Assert(CurrentAddedShape <> nil);
  CurrentAddedShape.EndTo(aFinish);
@@ -108,13 +108,13 @@ begin
  Invalidate;
 end;
 
-procedure TmsDrawness.Invalidate;
+procedure TmsDiagramm.Invalidate;
 begin
  Clear(FCanvas);
  DrawTo(FCanvas, FOrigin);
 end;
 
-function TmsDrawness.ShapeIsEnded: Boolean;
+function TmsDiagramm.ShapeIsEnded: Boolean;
 begin
  Result := (CurrentAddedShape = nil);
 end;
