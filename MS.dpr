@@ -10,7 +10,10 @@ uses
   msCircle,
   msUseCaseLikeEllipse,
   msRoundedRectangle,
-  msTriangle
+  msTriangle,
+  msDashDotLine in 'msDashDotLine.pas',
+  msDashLine in 'msDashLine.pas',
+  msDotLine in 'msDotLine.pas'
   ;
 
 {$R *.res}
