@@ -17,8 +17,8 @@ uses
   msDiagrammsController in 'msDiagrammsController.pas',
   msDashDotLine in 'msDashDotLine.pas',
   msDashLine in 'msDashLine.pas',
-  msDotLine in 'msDotLine.pas'
-  ;
+  msDotLine in 'msDotLine.pas',
+  msLineWithArrow in 'msLineWithArrow.pas';
 
 {$R *.res}
 
