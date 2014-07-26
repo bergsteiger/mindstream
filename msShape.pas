@@ -4,7 +4,8 @@ interface
 uses
  FMX.Graphics,
  System.Types,
- FMX.Types
+ FMX.Types,
+ System.UITypes
  ;
 
 type
@@ -16,6 +17,7 @@ type
   property StartPoint : TPointF read FStartPoint;
   property FinishPoint : TPointF read FFinishPoint;
   class procedure Register;
+  function FillColor: TAlphaColor; virtual;
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); virtual;
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
@@ -32,6 +34,11 @@ uses
 class procedure TmsShape.Register;
 begin
  TmsRegisteredPrimitives.Instance.AddPrimitive(Self);
+end;
+
+function TmsShape.FillColor: TAlphaColor;
+begin
+ Result := TAlphaColorRec.Null;
 end;
 
 constructor TmsShape.Create(const aStartPoint, aFinishPoint: TPointF);

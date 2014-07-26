@@ -22,6 +22,10 @@ type
 
 implementation
 
+uses
+ System.UITypes
+ ;
+
 { TmsRectangle }
 
 class function TmsRectangle.InitialWidth: Single;
@@ -48,7 +52,15 @@ end;
 
 procedure TmsRectangle.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 begin
+ aCanvas.Fill.Color := TAlphaColorRec.White;
  aCanvas.DrawRect(TRectF.Create(StartPoint.Add(aOrigin),
+                                FinishPoint.Add(aOrigin)),
+                  CornerRadius,
+                  CornerRadius,
+                  AllCorners,
+                  1,
+                  TCornerType.ctRound);
+ aCanvas.FillRect(TRectF.Create(StartPoint.Add(aOrigin),
                                 FinishPoint.Add(aOrigin)),
                   CornerRadius,
                   CornerRadius,
