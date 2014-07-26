@@ -7,7 +7,10 @@ uses
  FMX.ListBox,
  FMX.StdCtrls,
  msDiagramms,
- System.Types
+ System.Types,
+ FMX.Forms,
+ System.Classes,
+ System.UITypes
  ;
 
 type
@@ -22,6 +25,8 @@ type
   procedure imgMainResize(Sender: TObject);
   procedure cbShapesChange(Sender: TObject);
   procedure btAddDiagrammClick(Sender: TObject);
+  procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Single);
  public
   constructor Create(aImage: TImage; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton);
   destructor Destroy; override;
@@ -50,6 +55,7 @@ begin
  imgMain.OnResize := imgMainResize;
  cbShapes.OnChange := cbShapesChange;
  btAddDiagramm.OnClick := btAddDiagrammClick;
+ imgMain.OnMouseDown := imgMainMouseDown;
 end;
 
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
@@ -88,6 +94,12 @@ end;
 procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
 begin
  FDiagramm.ProcessClick(aStart);
+end;
+
+procedure TmsDiagrammsController.imgMainMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Single);
+begin
+ Self.ProcessClick(TPointF.Create(X, Y));
 end;
 
 end.

@@ -23,8 +23,6 @@ type
     btAdd: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Single);
     procedure btClearClick(Sender: TObject);
   private
     { Private declarations }
@@ -53,12 +51,6 @@ end;
 procedure TmsMainForm.FormDestroy(Sender: TObject);
 begin
  FreeAndNil(FDiagramm);
-end;
-
-procedure TmsMainForm.imgMainMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Single);
-begin
- FDiagramm.ProcessClick(TPointF.Create(X, Y));
 end;
 
 end.
