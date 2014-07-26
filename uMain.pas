@@ -51,9 +51,9 @@ implementation
 
 procedure TfmMain.btAddDiagrammClick(Sender: TObject);
 begin
- FDiagramm.AddDiagramm(imgMain, cbDiargamm.Items);
- cbDiargamm.ItemIndex := FDiagramm.CurrentDiagrammIndex;
- cbbPrimitives.ItemIndex := FDiagramm.CurrentShapeClassIndex;
+ FDiagramm.AddDiagramm(imgMain, cbDiagramm.Items);
+ cbDiagramm.ItemIndex := FDiagramm.CurrentDiagrammIndex;
+ cbShapes.ItemIndex := FDiagramm.CurrentShapeClassIndex;
 end;
 
 procedure TfmMain.btnClearImageClick(Sender: TObject);
@@ -63,21 +63,21 @@ end;
 
 procedure TfmMain.cbShapesChange(Sender: TObject);
 begin
- FDiagramm.SelectShape(cbbPrimitives.Items, cbbPrimitives.ItemIndex);
+ FDiagramm.SelectShape(cbShapes.Items, cbShapes.ItemIndex);
 end;
 
 procedure TfmMain.cbDiagrammChange(Sender: TObject);
 begin
- FDiagramm.SelectDiagramm(cbDiargamm.ItemIndex);
- cbbPrimitives.ItemIndex := FDiagramm.CurrentShapeClassIndex;
+ FDiagramm.SelectDiagramm(cbDiagramm.ItemIndex);
+ cbShapes.ItemIndex := FDiagramm.CurrentShapeClassIndex;
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
- FDiagramm := TmsDiagramms.Create(imgMain, cbDiargamm.Items);
- FDiagramm.AllowedShapesToList(cbbPrimitives.Items);
- cbbPrimitives.ItemIndex := FDiagramm.CurrentShapeClassIndex;
- cbDiargamm.ItemIndex := FDiagramm.CurrentDiagrammIndex;
+ FDiagramm := TmsDiagramms.Create(imgMain, cbDiagramm.Items);
+ FDiagramm.AllowedShapesToList(cbShapes.Items);
+ cbShapes.ItemIndex := FDiagramm.CurrentShapeClassIndex;
+ cbDiagramm.ItemIndex := FDiagramm.CurrentDiagrammIndex;
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
