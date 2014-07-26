@@ -11,7 +11,6 @@ type
  protected
   FStartPoint, FFinishPoint: TPointF;
   procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
-  procedure DoLogic; virtual; abstract;
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); virtual;
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);

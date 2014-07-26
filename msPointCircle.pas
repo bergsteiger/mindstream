@@ -11,7 +11,6 @@ type
  TmsPointCircle = class(TmsShape)
  protected
   procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
-  procedure DoLogic; override;
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
   class function IsNeedsSecondClick : Boolean; override;
@@ -27,12 +26,6 @@ const
 constructor TmsPointCircle.Create(const aStartPoint, aFinishPoint: TPointF);
 begin
   inherited;
-
-end;
-
-procedure TmsPointCircle.DoLogic;
-begin
- inherited;
 
 end;
 

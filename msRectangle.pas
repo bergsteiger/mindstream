@@ -12,7 +12,6 @@ type
  TmsRectangle = class(TmsShape)
  protected
   procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
-  procedure DoLogic; override;
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
   class function IsNeedsSecondClick : Boolean; override;
@@ -31,12 +30,6 @@ begin
  inherited;
  FFinishPoint:= TPointF.Create(FStartPoint.X + c_RectangleWidth,
                               FStartPoint.Y + c_RectangleHeight);
-end;
-
-procedure TmsRectangle.DoLogic;
-begin
-  inherited;
-
 end;
 
 procedure TmsRectangle.DrawShape(const aCanvas: TCanvas; const aOrigin : TPointF);

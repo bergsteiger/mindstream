@@ -9,7 +9,6 @@ type
  TmsLine = class(TmsShape)
  protected
   procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
-  procedure DoLogic; override;
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
   class function IsNeedsSecondClick : Boolean; override;
@@ -21,12 +20,6 @@ implementation
 constructor TmsLine.Create(const aStartPoint, aFinishPoint: TPointF);
 begin
  inherited;
-end;
-
-procedure TmsLine.DoLogic;
-begin
- inherited;
-
 end;
 
 procedure TmsLine.DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF);
