@@ -17,7 +17,7 @@ type
   constructor Create(const aStartPoint, aFinishPoint: TPointF); virtual;
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
   class function IsNeedsSecondClick : Boolean; virtual; abstract;
-  procedure EndTo(aFinishPoint: TPointF);
+  procedure EndTo(const aFinishPoint: TPointF);
  end;
 
 implementation
@@ -28,7 +28,7 @@ begin
  FFinishPoint := aFinishPoint;
 end;
 
-procedure TmsShape.EndTo(aFinishPoint: TPointF);
+procedure TmsShape.EndTo(const aFinishPoint: TPointF);
 begin
  FFinishPoint := aFinishPoint;
 end;
