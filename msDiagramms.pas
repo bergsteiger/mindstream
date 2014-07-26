@@ -26,6 +26,8 @@ type
   procedure AllowedShapesToList(aList: TStrings);
   procedure ResizeTo(anImage: TImage);
   procedure DiagramsToList(aList: TStrings);
+  procedure AddDiagramm(anImage: TImage);
+  function CurrentDiagrammIndex: Integer;
  end;//TmsDiagramms
 
 implementation
@@ -38,8 +40,19 @@ constructor TmsDiagramms.Create(anImage: TImage);
 begin
  inherited Create;
  f_Diagramms := TmsDiagrammList.Create;
+ AddDiagramm(anImage);
+end;
+
+procedure TmsDiagramms.AddDiagramm(anImage: TImage);
+begin
  f_CurrentDiagramm := TmsDiagramm.Create(anImage, IntToStr(f_Diagramms.Count + 1));
  f_Diagramms.Add(f_CurrentDiagramm);
+ f_CurrentDiagramm.Invalidate;
+end;
+
+function TmsDiagramms.CurrentDiagrammIndex: Integer;
+begin
+ Result := f_Diagramms.IndexOf(f_CurrentDiagramm);
 end;
 
 procedure TmsDiagramms.DiagramsToList(aList: TStrings);
