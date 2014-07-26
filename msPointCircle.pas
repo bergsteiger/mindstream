@@ -5,34 +5,23 @@ interface
 uses
  FMX.Graphics,
  System.Types,
- msShape;
+ msShape,
+ msCircle
+ ;
 
 type
- TmsPointCircle = class(TmsShape)
+ TmsPointCircle = class(TmsCircle)
  protected
-  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
- public
-  constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
+  class function Radius: Integer; override;
  end;
 
 implementation
 
 { TmsPointCircle }
 
-const
- c_CircleRadius = 10;
-
-constructor TmsPointCircle.Create(const aStartPoint, aFinishPoint: TPointF);
+class function TmsPointCircle.Radius: Integer;
 begin
- inherited Create(TPointF.Create(aStartPoint.X - c_CircleRadius, aStartPoint.Y - c_CircleRadius),
-                  TPointF.Create(aStartPoint.X + c_CircleRadius, aStartPoint.Y + c_CircleRadius));
-end;
-
-procedure TmsPointCircle.DrawTo(const aCanvas: TCanvas;
-                                const aOrigin : TPointF);
-begin
- aCanvas.DrawEllipse(TRectF.Create(StartPoint.Add(aOrigin),
-                                   FinishPoint.Add(aOrigin)), 1);
+ Result := 10;
 end;
 
 end.
