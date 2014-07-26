@@ -27,15 +27,15 @@ const
 
 constructor TmsRectangle.Create(const aStartPoint, aFinishPoint: TPointF);
 begin
- inherited;
- FFinishPoint:= TPointF.Create(FStartPoint.X + c_RectangleWidth,
-                              FStartPoint.Y + c_RectangleHeight);
+ inherited Create(aStartPoint,
+                  TPointF.Create(aStartPoint.X + c_RectangleWidth,
+                                 aStartPoint.Y + c_RectangleHeight));
 end;
 
 procedure TmsRectangle.DrawShape(const aCanvas: TCanvas; const aOrigin : TPointF);
 begin
- aCanvas.DrawRect(TRectF.Create(FStartPoint.add(aOrigin),
-                                FFinishPoint.add(aOrigin)),
+ aCanvas.DrawRect(TRectF.Create(FStartPoint.Add(aOrigin),
+                                FFinishPoint.Add(aOrigin)),
                                 0, 0,
                                 AllCorners, 1,
                                 TCornerType.ctRound);

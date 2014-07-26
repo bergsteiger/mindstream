@@ -10,17 +10,11 @@ type
  protected
   procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
-  constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
   class function IsNeedsSecondClick : Boolean; override;
  end;
 
 implementation
 { TLine }
-
-constructor TmsLine.Create(const aStartPoint, aFinishPoint: TPointF);
-begin
- inherited;
-end;
 
 procedure TmsLine.DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF);
 begin

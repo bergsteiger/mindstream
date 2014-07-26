@@ -12,7 +12,6 @@ type
  protected
   procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
-  constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
   class function IsNeedsSecondClick : Boolean; override;
  end;
 
@@ -22,12 +21,6 @@ implementation
 
 const
  c_CircleRadius = 10;
-
-constructor TmsPointCircle.Create(const aStartPoint, aFinishPoint: TPointF);
-begin
-  inherited;
-
-end;
 
 procedure TmsPointCircle.DrawShape(const aCanvas: TCanvas;
                                    const aOrigin : TPointF);

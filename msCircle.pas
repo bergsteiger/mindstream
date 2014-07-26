@@ -13,7 +13,6 @@ type
  protected
   procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
-  constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
   class function IsNeedsSecondClick : Boolean; override;
  end;
 
@@ -23,11 +22,6 @@ const
  c_CircleRadius = 50;
 
 { TmsCircle }
-
-constructor TmsCircle.Create(const aStartPoint, aFinishPoint: TPointF);
-begin
- inherited;
-end;
 
 procedure TmsCircle.DrawShape(const aCanvas: TCanvas; const aOrigin : TPointF);
 var
@@ -42,8 +36,8 @@ begin
  aCanvas.DrawEllipse(TRectF.Create(l_StartPoint.Add(aOrigin),
                                    l_FinalPoint.Add(aOrigin)), 1);
 
- aCanvas.DrawEllipse(TRectF.Create(FStartPoint.add(aOrigin),
-                                   FFinishPoint.add(aOrigin)),
+ aCanvas.DrawEllipse(TRectF.Create(FStartPoint.Add(aOrigin),
+                                   FFinishPoint.Add(aOrigin)),
                                    1);
 end;
 
