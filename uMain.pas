@@ -34,7 +34,7 @@ type
     procedure FormResize(Sender: TObject);
   private
    FOrigin : TPointF;
-   FDrawness: TmsDiagramm;
+   FDiagramm: TmsDiagramm;
   public
     { Public declarations }
   end;
@@ -48,17 +48,17 @@ implementation
 
 procedure TfmMain.btnClearImageClick(Sender: TObject);
 begin
- FDrawness.Clear;
+ FDiagramm.Clear;
 end;
 
 procedure TfmMain.btnDrawAllClick(Sender: TObject);
 begin
- FDrawness.Invalidate;
+ FDiagramm.Invalidate;
 end;
 
 procedure TfmMain.cbbPrimitivesChange(Sender: TObject);
 begin
- FDrawness.CurrentClass := RmsShape(cbbPrimitives.items.Objects[cbbPrimitives.ItemIndex]);
+ FDiagramm.CurrentClass := RmsShape(cbbPrimitives.items.Objects[cbbPrimitives.ItemIndex]);
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
@@ -69,7 +69,7 @@ begin
  imgMain.Bitmap.Clear(TAlphaColorRec.Null);
  FOrigin := TPointF.Create(0,0);
 
- FDrawness := TmsDiagramm.Create(imgMain.Bitmap.Canvas);
+ FDiagramm := TmsDiagramm.Create(imgMain.Bitmap.Canvas);
 
  //Первое нажатие всегда первое :)
 
@@ -81,7 +81,7 @@ end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
 begin
- FreeAndNil(FDrawness);
+ FreeAndNil(FDiagramm);
 end;
 
 procedure TfmMain.FormResize(Sender: TObject);
@@ -89,7 +89,7 @@ begin
  imgMain.Bitmap := TBitmap.Create(Round(pnlMain.Width), Round(pnlMain.Height));
 (* imgMain.Bitmap.Width := Round(pnlMain.Width);
  imgMain.Bitmap.Height := Round(pnlMain.Height);*)
- FDrawness.CanvasChanged(imgMain.Bitmap.Canvas);
+ FDiagramm.CanvasChanged(imgMain.Bitmap.Canvas);
 end;
 
 procedure TfmMain.imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -105,11 +105,11 @@ var
 begin
  l_ClickPoint := TPointF.Create(X, Y);
 
- if FDrawness.ShapeIsEnded then
+ if FDiagramm.ShapeIsEnded then
  // - мы НЕ ДОБАВЛЯЛИ примитива - надо его ДОБАВИТЬ
-  FDrawness.BeginShape(l_ClickPoint)
+  FDiagramm.BeginShape(l_ClickPoint)
  else
-  FDrawness.EndShape(l_ClickPoint);
+  FDiagramm.EndShape(l_ClickPoint);
 end;
 
 procedure TfmMain.miAboutClick(Sender: TObject);
