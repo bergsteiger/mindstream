@@ -25,7 +25,6 @@ type
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure AllowedShapesToList(aList: TStrings);
   procedure ResizeTo(anImage: TImage);
-(*  procedure DiagramsToList(aList: TStrings);*)
   procedure AddDiagramm(anImage: TImage; aList: TStrings);
   function CurrentDiagrammIndex: Integer;
   procedure SelectDiagramm(anIndex: Integer);
@@ -49,7 +48,7 @@ begin
  f_CurrentDiagramm := TmsDiagramm.Create(anImage, IntToStr(f_Diagramms.Count + 1));
  f_Diagramms.Add(f_CurrentDiagramm);
  aList.AddObject(f_CurrentDiagramm.Name, f_CurrentDiagramm);
- f_CurrentDiagramm.Invalidate;
+ //f_CurrentDiagramm.Invalidate;
 end;
 
 function TmsDiagramms.CurrentDiagrammIndex: Integer;
@@ -64,15 +63,6 @@ begin
  f_CurrentDiagramm := f_Diagramms.Items[anIndex];
  f_CurrentDiagramm.Invalidate;
 end;
-
-(*procedure TmsDiagramms.DiagramsToList(aList: TStrings);
-var
- l_D : TmsDiagramm;
-begin
- aList.Clear;
- for l_D in f_Diagramms do
-  aList.AddObject(l_D.Name, l_D);
-end;*)
 
 destructor TmsDiagramms.Destroy;
 begin
