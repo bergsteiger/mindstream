@@ -9,7 +9,8 @@ uses
   msLine in 'msLine.pas',
   msRectangle in 'msRectangle.pas',
   msPointCircle in 'msPointCircle.pas',
-  msCircle in 'msCircle.pas';
+  msCircle in 'msCircle.pas',
+  msRoundedRectange in 'msRoundedRectange.pas';
 
 {$R *.res}
 
