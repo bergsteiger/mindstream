@@ -9,6 +9,7 @@ object fmMain: TfmMain
   FormFactor.Devices = [Desktop, iPhone, iPad]
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnResize = FormResize
   DesignerMobile = False
   DesignerWidth = 0
   DesignerHeight = 0
@@ -32,6 +33,7 @@ object fmMain: TfmMain
     end
   end
   object pnlMain: TPanel
+    Align = Client
     Height = 559.000000000000000000
     Width = 600.000000000000000000
     TabOrder = 0
@@ -39,6 +41,7 @@ object fmMain: TfmMain
       MultiResBitmap = <
         item
         end>
+      Align = Client
       Height = 559.000000000000000000
       Width = 600.000000000000000000
       OnMouseDown = imgMainMouseDown
@@ -46,6 +49,7 @@ object fmMain: TfmMain
     end
   end
   object pnlTop: TPanel
+    Align = Top
     Height = 41.000000000000000000
     Width = 600.000000000000000000
     TabOrder = 1

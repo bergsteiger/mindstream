@@ -27,6 +27,7 @@ type
   function CurrentAddedShape: TmsShape;
  public
   constructor Create(aCanvas: TCanvas);
+  procedure CanvasChanged(aCanvas: TCanvas);
   destructor Destroy; override;
   procedure BeginShape(const aStart: TPointF);
   procedure Clear(const aCanvas : TCanvas);
@@ -67,6 +68,12 @@ begin
  FCurrentAddedShape := nil;
  FCanvas := aCanvas;
  FOrigin := TPointF.Create(0, 0)
+end;
+
+procedure TmsDrawness.CanvasChanged(aCanvas: TCanvas);
+begin
+ FCanvas := aCanvas;
+ Invalidate;
 end;
 
 function TmsDrawness.CurrentAddedShape: TmsShape;

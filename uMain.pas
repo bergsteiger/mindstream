@@ -31,6 +31,7 @@ type
     procedure btnClearImageClick(Sender: TObject);
     procedure btnDrawAllClick(Sender: TObject);
     procedure cbbPrimitivesChange(Sender: TObject);
+    procedure FormResize(Sender: TObject);
   private
    FOrigin : TPointF;
    FDrawness: TmsDrawness;
@@ -65,7 +66,7 @@ var
  l_Class : RmsShape;
 begin
  imgMain.Bitmap := TBitmap.Create(Round(pnlMain.Width), Round(pnlMain.Height));
- imgMain.Bitmap.Clear(TAlphaColorRec.White);
+ imgMain.Bitmap.Clear(TAlphaColorRec.Null);
  FOrigin := TPointF.Create(0,0);
 
  FDrawness := TmsDrawness.Create(imgMain.Bitmap.Canvas);
@@ -81,6 +82,14 @@ end;
 procedure TfmMain.FormDestroy(Sender: TObject);
 begin
  FreeAndNil(FDrawness);
+end;
+
+procedure TfmMain.FormResize(Sender: TObject);
+begin
+ imgMain.Bitmap := TBitmap.Create(Round(pnlMain.Width), Round(pnlMain.Height));
+(* imgMain.Bitmap.Width := Round(pnlMain.Width);
+ imgMain.Bitmap.Height := Round(pnlMain.Height);*)
+ FDrawness.CanvasChanged(imgMain.Bitmap.Canvas);
 end;
 
 procedure TfmMain.imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
