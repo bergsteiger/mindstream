@@ -24,17 +24,18 @@ type
  private
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
   function CurrentAddedShape: TmsShape;
+  procedure BeginShape(const aStart: TPointF);
+  procedure EndShape(const aFinish: TPointF);
+  function ShapeIsEnded: Boolean;
+  class function AllowedShapes: RmsShapeList;
  public
   constructor Create(aCanvas: TCanvas);
   procedure CanvasChanged(aCanvas: TCanvas);
   destructor Destroy; override;
-  procedure BeginShape(const aStart: TPointF);
+  procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
-  procedure EndShape(const aFinish: TPointF);
   procedure Invalidate;
-  function ShapeIsEnded: Boolean;
-  class function AllowedShapes: RmsShapeList;
   procedure AllowedShapesToList(aList: TStrings);
  end;
 
@@ -55,6 +56,15 @@ var
 begin
  for l_Class in AllowedShapes do
   aList.AddObject(l_Class.ClassName, TObject(l_Class));
+end;
+
+procedure TmsDiagramm.ProcessClick(const aStart: TPointF);
+begin
+ if ShapeIsEnded then
+ // - ìû ÍÅ ÄÎÁÀÂËßËÈ ïğèìèòèâà - íàäî åãî ÄÎÁÀÂÈÒÜ
+  BeginShape(aStart)
+ else
+  EndShape(aStart);
 end;
 
 procedure TmsDiagramm.BeginShape(const aStart: TPointF);

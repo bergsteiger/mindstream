@@ -94,16 +94,8 @@ end;
 
 procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
-var
- l_ClickPoint : TPointF;
 begin
- l_ClickPoint := TPointF.Create(X, Y);
-
- if FDiagramm.ShapeIsEnded then
- // - мы НЕ ДОБАВЛЯЛИ примитива - надо его ДОБАВИТЬ
-  FDiagramm.BeginShape(l_ClickPoint)
- else
-  FDiagramm.EndShape(l_ClickPoint);
+ FDiagramm.ProcessClick(TPointF.Create(X, Y));
 end;
 
 procedure TfmMain.miAboutClick(Sender: TObject);
