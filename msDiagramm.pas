@@ -56,6 +56,7 @@ procedure TmsDiagramm.AllowedShapesToList(aList: TStrings);
 var
  l_Class : RmsShape;
 begin
+ aList.Clear;
  for l_Class in AllowedShapes do
   aList.AddObject(l_Class.ClassName, TObject(l_Class));
 end;

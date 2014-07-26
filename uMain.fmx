@@ -66,5 +66,13 @@ object fmMain: TfmMain
       Width = 100.000000000000000000
       OnChange = cbbPrimitivesChange
     end
+    object cbDiargamm: TComboBox
+      DisableFocusEffect = False
+      Height = 22.000000000000000000
+      Position.X = 216.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 3
+      Width = 100.000000000000000000
+    end
   end
 end

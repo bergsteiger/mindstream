@@ -21,6 +21,7 @@ type
     imgMain: TImage;
     btnClearImage: TButton;
     cbbPrimitives: TComboBox;
+    cbDiargamm: TComboBox;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -59,6 +60,9 @@ procedure TfmMain.FormCreate(Sender: TObject);
 begin
  FDiagramm := TmsDiagramms.Create(imgMain);
  FDiagramm.AllowedShapesToList(cbbPrimitives.Items);
+ cbbPrimitives.ItemIndex := 0;
+ FDiagramm.DiagramsToList(cbDiargamm.Items);
+ cbDiargamm.ItemIndex := 0;
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
