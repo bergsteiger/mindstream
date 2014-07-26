@@ -15,6 +15,7 @@ type
   f_Registered : TmsRegistered;
   class var FInstance: TmsRegisteredPrimitives;
   constructor Create;
+  class destructor Fini;
  public
   class function Instance: TmsRegisteredPrimitives;
   procedure AddPrimitive(const aValue : RmsShape);
@@ -27,6 +28,11 @@ implementation
 uses
  SysUtils
  ;
+
+class destructor TmsRegisteredPrimitives.Fini;
+begin
+ FreeAndNil(FInstance);
+end;
 
 destructor TmsRegisteredPrimitives.Destroy;
 begin
