@@ -18,7 +18,7 @@ implementation
 
 class function TmsUseCaseLikeEllipse.InitialRadiusY: Integer;
 begin
- Result := 40;
+ Result := 35;
 end;
 
 function TmsUseCaseLikeEllipse.FillColor: TAlphaColor;
