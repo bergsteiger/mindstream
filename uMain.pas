@@ -14,7 +14,6 @@ type
     miFile: TMenuItem;
     miExit: TMenuItem;
     miAbout: TMenuItem;
-    pnlMain: TPanel;
     pnlTop: TPanel;
     imgMain: TImage;
     btnClearImage: TButton;
@@ -65,7 +64,7 @@ procedure TfmMain.FormCreate(Sender: TObject);
 var
  l_Class : RmsShape;
 begin
- imgMain.Bitmap := TBitmap.Create(Round(pnlMain.Width), Round(pnlMain.Height));
+ imgMain.Bitmap := TBitmap.Create(Round(imgMain.Width), Round(imgMain.Height));
  imgMain.Bitmap.Clear(TAlphaColorRec.Null);
  FOrigin := TPointF.Create(0,0);
 
@@ -86,7 +85,7 @@ end;
 
 procedure TfmMain.FormResize(Sender: TObject);
 begin
- imgMain.Bitmap := TBitmap.Create(Round(pnlMain.Width), Round(pnlMain.Height));
+ imgMain.Bitmap := TBitmap.Create(Round(imgMain.Width), Round(imgMain.Height));
 (* imgMain.Bitmap.Width := Round(pnlMain.Width);
  imgMain.Bitmap.Height := Round(pnlMain.Height);*)
  FDiagramm.CanvasChanged(imgMain.Bitmap.Canvas);

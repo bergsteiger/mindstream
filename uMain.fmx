@@ -32,21 +32,15 @@ object fmMain: TfmMain
       OnClick = miAboutClick
     end
   end
-  object pnlMain: TPanel
+  object imgMain: TImage
+    MultiResBitmap = <
+      item
+      end>
     Align = Client
     Height = 559.000000000000000000
     Width = 600.000000000000000000
-    TabOrder = 0
-    object imgMain: TImage
-      MultiResBitmap = <
-        item
-        end>
-      Align = Client
-      Height = 559.000000000000000000
-      Width = 600.000000000000000000
-      OnMouseDown = imgMainMouseDown
-      OnMouseMove = imgMainMouseMove
-    end
+    OnMouseDown = imgMainMouseDown
+    OnMouseMove = imgMainMouseMove
   end
   object pnlTop: TPanel
     Align = Top
