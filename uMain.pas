@@ -53,6 +53,7 @@ procedure TfmMain.btAddDiagrammClick(Sender: TObject);
 begin
  FDiagramm.AddDiagramm(imgMain, cbDiargamm.Items);
  cbDiargamm.ItemIndex := FDiagramm.CurrentDiagrammIndex;
+ cbbPrimitives.ItemIndex := FDiagramm.CurrentShapeClassIndex;
 end;
 
 procedure TfmMain.btnClearImageClick(Sender: TObject);
@@ -68,13 +69,14 @@ end;
 procedure TfmMain.cbDiargammChange(Sender: TObject);
 begin
  FDiagramm.SelectDiagramm(cbDiargamm.ItemIndex);
+ cbbPrimitives.ItemIndex := FDiagramm.CurrentShapeClassIndex;
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
  FDiagramm := TmsDiagramms.Create(imgMain, cbDiargamm.Items);
  FDiagramm.AllowedShapesToList(cbbPrimitives.Items);
- cbbPrimitives.ItemIndex := 0;
+ cbbPrimitives.ItemIndex := FDiagramm.CurrentShapeClassIndex;
  cbDiargamm.ItemIndex := FDiagramm.CurrentDiagrammIndex;
 end;
 

@@ -43,6 +43,7 @@ type
   procedure AllowedShapesToList(aList: TStrings);
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   property Name : String read f_Name;
+  function CurrentShapeClassIndex: Integer;
  end;//TmsDiagramm
 
 implementation
@@ -59,6 +60,11 @@ begin
  aList.Clear;
  for l_Class in AllowedShapes do
   aList.AddObject(l_Class.ClassName, TObject(l_Class));
+end;
+
+function TmsDiagramm.CurrentShapeClassIndex: Integer;
+begin
+ Result := AllowedShapes.IndexOf(FCurrentClass);
 end;
 
 procedure TmsDiagramm.SelectShape(aList: TStrings; anIndex: Integer);

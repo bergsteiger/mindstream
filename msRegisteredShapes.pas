@@ -19,6 +19,7 @@ type
   procedure Register(const aValue : RmsShape);
   destructor Destroy; override;
   function GetEnumerator: RmsShapeList.TEnumerator;
+  function IndexOf(const aValue : RmsShape): Integer;
  end;//TmsRegisteredShapes
 
 implementation
@@ -64,6 +65,11 @@ begin
  if (f_Instance = nil) then
   f_Instance := TmsRegisteredShapes.Create;
  Result := f_Instance;
+end;
+
+function TmsRegisteredShapes.IndexOf(const aValue : RmsShape): Integer;
+begin
+ Result := f_Registered.IndexOf(aValue);
 end;
 
 end.

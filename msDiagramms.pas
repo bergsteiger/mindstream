@@ -28,6 +28,7 @@ type
   procedure AddDiagramm(anImage: TImage; aList: TStrings);
   function CurrentDiagrammIndex: Integer;
   procedure SelectDiagramm(anIndex: Integer);
+  function CurrentShapeClassIndex: Integer;
  end;//TmsDiagramms
 
 implementation
@@ -94,5 +95,11 @@ procedure TmsDiagramms.ResizeTo(anImage: TImage);
 begin
  f_CurrentDiagramm.ResizeTo(anImage);
 end;
+
+function TmsDiagramms.CurrentShapeClassIndex: Integer;
+begin
+ Result := f_CurrentDiagramm.CurrentShapeClassIndex;
+end;
+
 
 end.
