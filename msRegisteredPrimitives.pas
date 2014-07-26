@@ -12,26 +12,37 @@ type
 
  TmsRegisteredPrimitives  = class
  strict private
-  FmsRegistered : TmsRegistered;
+  f_Registered : TmsRegistered;
   class var FInstance: TmsRegisteredPrimitives;
   constructor Create;
  public
   class function Instance: TmsRegisteredPrimitives;
   procedure AddPrimitive(const aValue : RmsShape);
-  property Primitives: TmsRegistered read FmsRegistered;
+  property Primitives: TmsRegistered read f_Registered;
+  destructor Destroy; override;
  end;
 
 implementation
 
+uses
+ SysUtils
+ ;
+
+destructor TmsRegisteredPrimitives.Destroy;
+begin
+ FreeAndNil(f_Registered);
+ inherited;
+end;
+
 procedure TmsRegisteredPrimitives.AddPrimitive(const aValue: RmsShape);
 begin
- FmsRegistered.Add(aValue);
+ f_Registered.Add(aValue);
 end;
 
 constructor TmsRegisteredPrimitives.Create;
 begin
  inherited;
- FmsRegistered := TmsRegistered.Create;
+ f_Registered := TmsRegistered.Create;
 end;
 
 class function TmsRegisteredPrimitives.Instance: TmsRegisteredPrimitives;
