@@ -30,17 +30,17 @@ type
   function ShapeIsEnded: Boolean;
   class function AllowedShapes: RmsShapeList;
   procedure CanvasChanged(aCanvas: TCanvas);
+  property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
  public
   constructor Create(anImage: TImage);
   procedure ResizeTo(anImage: TImage);
   destructor Destroy; override;
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
-  property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
   procedure Invalidate;
   procedure AllowedShapesToList(aList: TStrings);
   procedure SelectShape(aList: TStrings; anIndex: Integer);
- end;
+ end;//TmsDiagramm
 
 implementation
 
