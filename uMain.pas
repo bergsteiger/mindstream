@@ -102,7 +102,7 @@ begin
 
  if FDrawness.ShapeFinalized then
  // - мы НЕ ДОБАВЛЯЛИ примитива - надо его ДОБАВИТЬ
-  FDrawness.AddShape(l_ClickPoint, l_ClickPoint)
+  FDrawness.AddShape(l_ClickPoint)
  else
   FDrawness.FinalizeShape(l_ClickPoint);
 end;

@@ -28,7 +28,7 @@ type
  public
   constructor Create(aCanvas: TCanvas);
   destructor Destroy; override;
-  procedure AddShape(const aStart: TPointF; const aFinish: TPointF);
+  procedure AddShape(const aStart: TPointF);
   procedure Clear(const aCanvas : TCanvas);
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
   procedure FinalizeShape(const aFinish: TPointF);
@@ -40,10 +40,10 @@ implementation
 
 { TDrawness }
 
-procedure TmsDrawness.AddShape(const aStart: TPointF; const aFinish: TPointF);
+procedure TmsDrawness.AddShape(const aStart: TPointF);
 begin
  Assert(CurrentClass <> nil);
- FCurrentAddedShape := CurrentClass.Create(aStart, aFinish);
+ FCurrentAddedShape := CurrentClass.Create(aStart, aStart);
  FShapeList.Add(FCurrentAddedShape);
  //FShapeList.Add(TmsPointCircle.Create(aStart, aFinish));
  if not FCurrentAddedShape.IsNeedsSecondClick then
