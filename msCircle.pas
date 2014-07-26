@@ -36,9 +36,9 @@ begin
  aCanvas.DrawEllipse(TRectF.Create(l_StartPoint.Add(aOrigin),
                                    l_FinalPoint.Add(aOrigin)), 1);
 
- aCanvas.DrawEllipse(TRectF.Create(FStartPoint.Add(aOrigin),
+(* aCanvas.DrawEllipse(TRectF.Create(FStartPoint.Add(aOrigin),
                                    FFinishPoint.Add(aOrigin)),
-                                   1);
+                                   1);*)
 end;
 
 class function TmsCircle.IsNeedsSecondClick: Boolean;
