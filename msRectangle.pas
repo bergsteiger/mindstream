@@ -13,6 +13,8 @@ type
  TmsRectangle = class(TmsShape)
  protected
   class function CornerRadius: Single; virtual;
+  class function InitialWidth: Single; virtual;
+  class function InitialHeight: Single; virtual;
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
@@ -20,17 +22,23 @@ type
 
 implementation
 
-const
- c_RectangleHeight = 150;
- c_RectangleWidth = 100;
-
 { TmsRectangle }
+
+class function TmsRectangle.InitialWidth: Single;
+begin
+ Result := 100;
+end;
+
+class function TmsRectangle.InitialHeight: Single;
+begin
+ Result := 150;
+end;
 
 constructor TmsRectangle.Create(const aStartPoint, aFinishPoint: TPointF);
 begin
  inherited Create(aStartPoint,
-                  TPointF.Create(aStartPoint.X + c_RectangleWidth,
-                                 aStartPoint.Y + c_RectangleHeight));
+                  TPointF.Create(aStartPoint.X + InitialWidth,
+                                 aStartPoint.Y + InitialHeight));
 end;
 
 class function TmsRectangle.CornerRadius: Single;
