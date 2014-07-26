@@ -39,6 +39,7 @@ type
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
   procedure Invalidate;
   procedure AllowedShapesToList(aList: TStrings);
+  procedure SelectShape(aList: TStrings; anIndex: Integer);
  end;
 
 implementation
@@ -58,6 +59,11 @@ var
 begin
  for l_Class in AllowedShapes do
   aList.AddObject(l_Class.ClassName, TObject(l_Class));
+end;
+
+procedure TmsDiagramm.SelectShape(aList: TStrings; anIndex: Integer);
+begin
+ CurrentClass := RmsShape(aList.Objects[anIndex]);
 end;
 
 procedure TmsDiagramm.ProcessClick(const aStart: TPointF);
