@@ -12,10 +12,11 @@ type
   FStartPoint, FFinishPoint: TPointF;
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); virtual;
-  property StartPoint : TPointF read FStartPoint write FStartPoint;
-  property FinishPoint : TPointF read FFinishPoint write FFinishPoint;
+  property StartPoint : TPointF read FStartPoint;
+  property FinishPoint : TPointF read FFinishPoint;
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
   class function IsNeedsSecondClick : Boolean; virtual; abstract;
+  procedure EndTo(aFinishPoint: TPointF);
  end;
 
 implementation
@@ -23,6 +24,11 @@ implementation
 constructor TmsShape.Create(const aStartPoint, aFinishPoint: TPointF);
 begin
  FStartPoint := aStartPoint;
+ FFinishPoint := aFinishPoint;
+end;
+
+procedure TmsShape.EndTo(aFinishPoint: TPointF);
+begin
  FFinishPoint := aFinishPoint;
 end;
 

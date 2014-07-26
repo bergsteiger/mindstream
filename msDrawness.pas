@@ -96,7 +96,7 @@ end;
 procedure TmsDrawness.EndShape(const aFinish: TPointF);
 begin
  Assert(CurrentAddedShape <> nil);
- CurrentAddedShape.FinishPoint := aFinish;
+ CurrentAddedShape.EndTo(aFinish);
  FCurrentAddedShape := nil;
  Invalidate;
 end;
