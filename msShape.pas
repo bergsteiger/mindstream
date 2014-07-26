@@ -9,11 +9,12 @@ uses
 type
  TmsShape = class
  protected
-  FStartPoint, FFinishPoint: TPointF;
- public
-  constructor Create(const aStartPoint, aFinishPoint: TPointF); virtual;
+  FStartPoint: TPointF;
+  FFinishPoint: TPointF;
   property StartPoint : TPointF read FStartPoint;
   property FinishPoint : TPointF read FFinishPoint;
+ public
+  constructor Create(const aStartPoint, aFinishPoint: TPointF); virtual;
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
   class function IsNeedsSecondClick : Boolean; virtual; abstract;
   procedure EndTo(aFinishPoint: TPointF);
