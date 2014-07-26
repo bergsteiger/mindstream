@@ -12,7 +12,8 @@ uses
   msCircle in 'msCircle.pas',
   msRoundedRectangle in 'msRoundedRectangle.pas',
   msUseCaseLikeEllipse in 'msUseCaseLikeEllipse.pas',
-  msTriangle in 'msTriangle.pas';
+  msTriangle in 'msTriangle.pas',
+  msDiagramms in 'msDiagramms.pas';
 
 {$R *.res}
 
