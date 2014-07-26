@@ -6,7 +6,10 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   Generics.Collections,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Objects, FMX.Menus, FMX.Edit, FMX.ListBox, msDiagramm;
+  FMX.Objects, FMX.Menus, FMX.Edit, FMX.ListBox, msDiagramm,
+
+  msDiagramms
+  ;
 
 type
   TfmMain = class(TForm)
@@ -30,7 +33,7 @@ type
     procedure cbbPrimitivesChange(Sender: TObject);
     procedure imgMainResize(Sender: TObject);
   private
-   FDiagramm: TmsDiagramm;
+   FDiagramm: TmsDiagramms;
   public
     { Public declarations }
   end;
@@ -54,7 +57,7 @@ end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
- FDiagramm := TmsDiagramm.Create(imgMain);
+ FDiagramm := TmsDiagramms.Create(imgMain);
  FDiagramm.AllowedShapesToList(cbbPrimitives.Items);
 end;
 

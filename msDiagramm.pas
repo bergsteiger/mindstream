@@ -91,6 +91,7 @@ end;
 
 constructor TmsDiagramm.Create(anImage: TImage);
 begin
+ inherited Create;
  FShapeList := TmsShapeList.Create;
  FCurrentAddedShape := nil;
  FCanvas := nil;
