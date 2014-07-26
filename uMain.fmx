@@ -73,6 +73,7 @@ object fmMain: TfmMain
       Position.Y = 8.000000000000000000
       TabOrder = 3
       Width = 100.000000000000000000
+      OnChange = cbDiargammChange
     end
     object btAddDiagramm: TButton
       Height = 22.000000000000000000

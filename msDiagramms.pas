@@ -28,6 +28,7 @@ type
   procedure DiagramsToList(aList: TStrings);
   procedure AddDiagramm(anImage: TImage);
   function CurrentDiagrammIndex: Integer;
+  procedure SelectDiagramm(anIndex: Integer);
  end;//TmsDiagramms
 
 implementation
@@ -53,6 +54,14 @@ end;
 function TmsDiagramms.CurrentDiagrammIndex: Integer;
 begin
  Result := f_Diagramms.IndexOf(f_CurrentDiagramm);
+end;
+
+procedure TmsDiagramms.SelectDiagramm(anIndex: Integer);
+begin
+ if (anIndex < 0) OR (anIndex >= f_Diagramms.Count) then
+  Exit;
+ f_CurrentDiagramm := f_Diagramms.Items[anIndex];
+ f_CurrentDiagramm.Invalidate;
 end;
 
 procedure TmsDiagramms.DiagramsToList(aList: TStrings);
