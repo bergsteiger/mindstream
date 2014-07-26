@@ -14,7 +14,6 @@ type
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
-  class function IsNeedsSecondClick : Boolean; override;
  end;
 
 implementation
@@ -39,11 +38,6 @@ begin
                                 0, 0,
                                 AllCorners, 1,
                                 TCornerType.ctRound);
-end;
-
-class function TmsRectangle.IsNeedsSecondClick: Boolean;
-begin
- Result := False;
 end;
 
 end.

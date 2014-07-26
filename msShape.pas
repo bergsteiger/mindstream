@@ -7,7 +7,7 @@ uses
  FMX.Types;
 
 type
- TmsShape = class
+ TmsShape = class abstract (TObject)
  private
   FStartPoint: TPointF;
   FFinishPoint: TPointF;
@@ -17,7 +17,7 @@ type
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); virtual;
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
-  class function IsNeedsSecondClick : Boolean; virtual; abstract;
+  class function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aFinishPoint: TPointF);
  end;
 
@@ -32,6 +32,11 @@ end;
 procedure TmsShape.EndTo(const aFinishPoint: TPointF);
 begin
  FFinishPoint := aFinishPoint;
+end;
+
+class function TmsShape.IsNeedsSecondClick : Boolean;
+begin
+ Result := false;
 end;
 
 end.
