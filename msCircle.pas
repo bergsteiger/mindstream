@@ -44,10 +44,10 @@ procedure TmsCircle.DoDrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 begin
  aCanvas.DrawEllipse(TRectF.Create(StartPoint.Add(aOrigin),
                                    FinishPoint.Add(aOrigin)),
-                                   1);
+                     1);
  aCanvas.FillEllipse(TRectF.Create(StartPoint.Add(aOrigin),
                                    FinishPoint.Add(aOrigin)),
-                                   1);
+                     0.5);
 end;
 
 initialization
