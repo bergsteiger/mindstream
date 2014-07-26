@@ -88,8 +88,7 @@ end;
 
 procedure TfmMain.imgMainResize(Sender: TObject);
 begin
- imgMain.Bitmap := TBitmap.Create(Round(imgMain.Width), Round(imgMain.Height));
- FDiagramm.CanvasChanged(imgMain.Bitmap.Canvas);
+ FDiagramm.ResizeTo(imgMain);
 end;
 
 procedure TfmMain.imgMainMouseDown(Sender: TObject; Button: TMouseButton;

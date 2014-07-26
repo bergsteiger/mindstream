@@ -10,7 +10,8 @@ uses
  System.UITypes,
  msShape,
  msPointCircle,
- System.Classes
+ System.Classes,
+ FMX.Objects
  ;
 
 type
@@ -28,9 +29,10 @@ type
   procedure EndShape(const aFinish: TPointF);
   function ShapeIsEnded: Boolean;
   class function AllowedShapes: RmsShapeList;
+  procedure CanvasChanged(aCanvas: TCanvas);
  public
   constructor Create(aCanvas: TCanvas);
-  procedure CanvasChanged(aCanvas: TCanvas);
+  procedure ResizeTo(anImage: TImage);
   destructor Destroy; override;
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
@@ -94,6 +96,12 @@ begin
  FCurrentAddedShape := nil;
  FCanvas := aCanvas;
  FOrigin := TPointF.Create(0, 0)
+end;
+
+procedure TmsDiagramm.ResizeTo(anImage: TImage);
+begin
+ anImage.Bitmap := TBitmap.Create(Round(anImage.Width), Round(anImage.Height));
+ CanvasChanged(anImage.Bitmap.Canvas);
 end;
 
 procedure TmsDiagramm.CanvasChanged(aCanvas: TCanvas);
