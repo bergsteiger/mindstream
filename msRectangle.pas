@@ -12,6 +12,7 @@ uses
 type
  TmsRectangle = class(TmsShape)
  protected
+  class function CornerRadius: Single; virtual;
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
@@ -32,11 +33,17 @@ begin
                                  aStartPoint.Y + c_RectangleHeight));
 end;
 
+class function TmsRectangle.CornerRadius: Single;
+begin
+ Result := 0;
+end;
+
 procedure TmsRectangle.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 begin
  aCanvas.DrawRect(TRectF.Create(StartPoint.Add(aOrigin),
                                 FinishPoint.Add(aOrigin)),
-                  0, 0,
+                  CornerRadius,
+                  CornerRadius,
                   AllCorners,
                   1,
                   TCornerType.ctRound);

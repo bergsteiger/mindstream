@@ -12,18 +12,14 @@ uses
 type
  TmsRoundedRectangle = class(TmsRectangle)
  protected
-  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  class function CornerRadius: Single; override;
  end;//TmsRoundedRectangle
 
 implementation
 
-procedure TmsRoundedRectangle.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
+class function TmsRoundedRectangle.CornerRadius: Single;
 begin
- aCanvas.DrawRect(TRectF.Create(StartPoint.Add(aOrigin),
-                                FinishPoint.Add(aOrigin)),
-                  10, 10,
-                  AllCorners, 1,
-                  TCornerType.ctRound);
+ Result := 10;
 end;
 
 initialization
