@@ -56,7 +56,7 @@ object fmMain: TfmMain
       Width = 80.000000000000000000
       OnClick = btnClearImageClick
     end
-    object cbbPrimitives: TComboBox
+    object cbShapes: TComboBox
       DisableFocusEffect = False
       Height = 22.000000000000000000
       ItemIndex = 0
@@ -64,16 +64,16 @@ object fmMain: TfmMain
       Position.Y = 8.000000000000000000
       TabOrder = 1
       Width = 100.000000000000000000
-      OnChange = cbbPrimitivesChange
+      OnChange = cbShapesChange
     end
-    object cbDiargamm: TComboBox
+    object cbDiagramm: TComboBox
       DisableFocusEffect = False
       Height = 22.000000000000000000
       Position.X = 216.000000000000000000
       Position.Y = 8.000000000000000000
       TabOrder = 3
       Width = 100.000000000000000000
-      OnChange = cbDiargammChange
+      OnChange = cbDiagrammChange
     end
     object btAddDiagramm: TButton
       Height = 22.000000000000000000

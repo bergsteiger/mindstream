@@ -46,12 +46,30 @@ object msMainForm: TmsMainForm
     end
     object btClear: TButton
       Height = 32.000000000000000000
-      Position.X = 136.000000000000000000
+      Position.X = 312.000000000000000000
       Position.Y = 8.000000000000000000
       TabOrder = 2
       Text = 'Clear'
-      Width = 73.000000000000000000
+      Width = 65.000000000000000000
       OnClick = btClearClick
+    end
+    object cbDiagramm: TComboBox
+      DisableFocusEffect = False
+      Height = 32.000000000000000000
+      Position.X = 144.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 4
+      Width = 97.000000000000000000
+      OnChange = cbDiagrammChange
+    end
+    object btAdd: TButton
+      Height = 32.000000000000000000
+      Position.X = 248.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 5
+      Text = 'Add'
+      Width = 57.000000000000000000
+      OnClick = btAddClick
     end
   end
   object imgMain: TImage

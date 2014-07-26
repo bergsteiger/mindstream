@@ -18,6 +18,8 @@ type
     imgMain: TImage;
     cbShapes: TComboBox;
     btClear: TButton;
+    cbDiagramm: TComboBox;
+    btAdd: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton;
@@ -25,6 +27,8 @@ type
     procedure cbShapesChange(Sender: TObject);
     procedure imgMainResize(Sender: TObject);
     procedure btClearClick(Sender: TObject);
+    procedure cbDiagrammChange(Sender: TObject);
+    procedure btAddClick(Sender: TObject);
   private
     { Private declarations }
     FDiagramm : TmsDiagramms;
@@ -39,9 +43,22 @@ implementation
 
 {$R *.fmx}
 
+procedure TmsMainForm.btAddClick(Sender: TObject);
+begin
+ FDiagramm.AddDiagramm(imgMain, cbDiagramm.Items);
+ cbDiagramm.ItemIndex := FDiagramm.CurrentDiagrammIndex;
+ cbShapes.ItemIndex := FDiagramm.CurrentShapeClassIndex;
+end;
+
 procedure TmsMainForm.btClearClick(Sender: TObject);
 begin
  FDiagramm.Clear;
+end;
+
+procedure TmsMainForm.cbDiagrammChange(Sender: TObject);
+begin
+ FDiagramm.SelectDiagramm(cbDiagramm.ItemIndex);
+ cbShapes.ItemIndex := FDiagramm.CurrentShapeClassIndex;
 end;
 
 procedure TmsMainForm.cbShapesChange(Sender: TObject);
@@ -51,9 +68,10 @@ end;
 
 procedure TmsMainForm.FormCreate(Sender: TObject);
 begin
- FDiagramm := TmsDiagramms.Create(imgMain, nil);
+ FDiagramm := TmsDiagramms.Create(imgMain, cbDiagramm.Items);
  FDiagramm.AllowedShapesToList(cbShapes.Items);
  cbShapes.ItemIndex := FDiagramm.CurrentShapeClassIndex;
+ cbDiagramm.ItemIndex := FDiagramm.CurrentDiagrammIndex;
 end;
 
 procedure TmsMainForm.FormDestroy(Sender: TObject);

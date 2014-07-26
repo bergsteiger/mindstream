@@ -20,8 +20,8 @@ type
     pnlTop: TPanel;
     imgMain: TImage;
     btnClearImage: TButton;
-    cbbPrimitives: TComboBox;
-    cbDiargamm: TComboBox;
+    cbShapes: TComboBox;
+    cbDiagramm: TComboBox;
     btAddDiagramm: TButton;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
@@ -32,10 +32,10 @@ type
       Y: Single);
     procedure FormDestroy(Sender: TObject);
     procedure btnClearImageClick(Sender: TObject);
-    procedure cbbPrimitivesChange(Sender: TObject);
+    procedure cbShapesChange(Sender: TObject);
     procedure imgMainResize(Sender: TObject);
     procedure btAddDiagrammClick(Sender: TObject);
-    procedure cbDiargammChange(Sender: TObject);
+    procedure cbDiagrammChange(Sender: TObject);
   private
    FDiagramm: TmsDiagramms;
   public
@@ -61,12 +61,12 @@ begin
  FDiagramm.Clear;
 end;
 
-procedure TfmMain.cbbPrimitivesChange(Sender: TObject);
+procedure TfmMain.cbShapesChange(Sender: TObject);
 begin
  FDiagramm.SelectShape(cbbPrimitives.Items, cbbPrimitives.ItemIndex);
 end;
 
-procedure TfmMain.cbDiargammChange(Sender: TObject);
+procedure TfmMain.cbDiagrammChange(Sender: TObject);
 begin
  FDiagramm.SelectDiagramm(cbDiargamm.ItemIndex);
  cbbPrimitives.ItemIndex := FDiagramm.CurrentShapeClassIndex;
