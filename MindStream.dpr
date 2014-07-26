@@ -10,7 +10,7 @@ uses
   msRectangle in 'msRectangle.pas',
   msPointCircle in 'msPointCircle.pas',
   msCircle in 'msCircle.pas',
-  msRoundedRectange in 'msRoundedRectange.pas',
+  msRoundedRectangle in 'msRoundedRectangle.pas',
   msUseCaseLikeEllipse in 'msUseCaseLikeEllipse.pas';
 
 {$R *.res}

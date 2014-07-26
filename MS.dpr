@@ -9,7 +9,7 @@ uses
   msRectangle,
   msCircle,
   msUseCaseLikeEllipse,
-  msRoundedRectange
+  msRoundedRectangle
   ;
 
 {$R *.res}
