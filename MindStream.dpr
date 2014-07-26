@@ -14,7 +14,9 @@ uses
   msUseCaseLikeEllipse in 'msUseCaseLikeEllipse.pas',
   msTriangle in 'msTriangle.pas',
   msDiagramms in 'msDiagramms.pas',
-  msDiagrammsController in 'msDiagrammsController.pas';
+  msDiagrammsController in 'msDiagrammsController.pas',
+  msDotLine in 'msDotLine.pas',
+  msDashLine in 'msDashLine.pas';
 
 {$R *.res}
 
