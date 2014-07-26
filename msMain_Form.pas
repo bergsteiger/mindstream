@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
 
-  msDiagramm, FMX.Objects, FMX.ListBox
+  msDiagramm, FMX.Objects, FMX.ListBox,
+  msDiagramms
   ;
 
 type
@@ -26,7 +27,7 @@ type
     procedure btClearClick(Sender: TObject);
   private
     { Private declarations }
-    FDiagramm : TmsDiagramm;
+    FDiagramm : TmsDiagramms;
   public
     { Public declarations }
   end;
@@ -50,9 +51,9 @@ end;
 
 procedure TmsMainForm.FormCreate(Sender: TObject);
 begin
- FDiagramm := TmsDiagramm.Create(imgMain);
+ FDiagramm := TmsDiagramms.Create(imgMain, nil);
  FDiagramm.AllowedShapesToList(cbShapes.Items);
- cbShapes.ItemIndex := 0;
+ cbShapes.ItemIndex := FDiagramm.CurrentShapeClassIndex;
 end;
 
 procedure TmsMainForm.FormDestroy(Sender: TObject);
