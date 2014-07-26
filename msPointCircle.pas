@@ -13,7 +13,7 @@ uses
 type
  TmsPointCircle = class(TmsCircle)
  protected
-  class function Radius: Integer; override;
+  class function InitialRadius: Integer; override;
   function FillColor: TAlphaColor; override;
  end;
 
@@ -21,7 +21,7 @@ implementation
 
 { TmsPointCircle }
 
-class function TmsPointCircle.Radius: Integer;
+class function TmsPointCircle.InitialRadius: Integer;
 begin
  Result := 10;
 end;

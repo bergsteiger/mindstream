@@ -13,7 +13,7 @@ uses
 type
  TmsCircle = class(TmsShape)
  protected
-  class function Radius: Integer; virtual;
+  class function InitialRadius: Integer; virtual;
   function FillColor: TAlphaColor; override;
   procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
@@ -24,7 +24,7 @@ implementation
 
 { TmsCircle }
 
-class function TmsCircle.Radius: Integer;
+class function TmsCircle.InitialRadius: Integer;
 begin
  Result := 50;
 end;
@@ -36,8 +36,8 @@ end;
 
 constructor TmsCircle.Create(const aStartPoint, aFinishPoint: TPointF);
 begin
- inherited Create(TPointF.Create(aStartPoint.X - Radius, aStartPoint.Y - Radius),
-                  TPointF.Create(aStartPoint.X + Radius, aStartPoint.Y + Radius));
+ inherited Create(TPointF.Create(aStartPoint.X - InitialRadius, aStartPoint.Y - InitialRadius),
+                  TPointF.Create(aStartPoint.X + InitialRadius, aStartPoint.Y + InitialRadius));
 end;
 
 procedure TmsCircle.DoDrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
