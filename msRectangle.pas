@@ -67,7 +67,7 @@ begin
                   CornerRadius,
                   CornerRadius,
                   AllCorners,
-                  1,
+                  0.5,
                   TCornerType.ctRound);
 end;
 
