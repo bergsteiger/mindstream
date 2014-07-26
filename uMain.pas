@@ -65,7 +65,7 @@ end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
 var
- i : Integer;
+ l_Class : RmsShape;
 begin
  imgMain.Bitmap := TBitmap.Create(Round(pnlMain.Width), Round(pnlMain.Height));
  imgMain.Bitmap.Clear(TAlphaColorRec.White);
@@ -75,9 +75,8 @@ begin
 
  //Первое нажатие всегда первое :)
 
- for i := 0 to TmsRegisteredPrimitives.GetInstance.PrimitivesCount-1 do
-  cbbPrimitives.Items.AddObject(TmsRegisteredPrimitives.GetInstance.Primitives[i].ClassName,
-                                TObject(TmsRegisteredPrimitives.GetInstance.Primitives[i]));
+ for l_Class in TmsRegisteredPrimitives.GetInstance.Primitives do
+  cbbPrimitives.Items.AddObject(l_Class.ClassName, TObject(l_Class));
 
  cbbPrimitivesChange(nil);
 end;
