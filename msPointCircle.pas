@@ -10,7 +10,7 @@ uses
 type
  TmsPointCircle = class(TmsShape)
  protected
-  procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
   class function IsNeedsSecondClick : Boolean; override;
  end;
@@ -22,7 +22,7 @@ implementation
 const
  c_CircleRadius = 10;
 
-procedure TmsPointCircle.DrawShape(const aCanvas: TCanvas;
+procedure TmsPointCircle.DrawTo(const aCanvas: TCanvas;
                                    const aOrigin : TPointF);
 var
  l_StartPoint, l_FinalPoint: TPointF;

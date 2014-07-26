@@ -8,7 +8,7 @@ uses
 type
  TmsLine = class(TmsShape)
  protected
-  procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
   class function IsNeedsSecondClick : Boolean; override;
  end;
@@ -16,7 +16,7 @@ type
 implementation
 { TLine }
 
-procedure TmsLine.DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF);
+procedure TmsLine.DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
 begin
  aCanvas.DrawLine(FStartPoint.Add(aOrigin),
                   FFinishPoint.add(aOrigin), 1);

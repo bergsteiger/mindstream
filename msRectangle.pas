@@ -11,7 +11,7 @@ uses
 type
  TmsRectangle = class(TmsShape)
  protected
-  procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
   constructor Create(const aStartPoint, aFinishPoint: TPointF); override;
   class function IsNeedsSecondClick : Boolean; override;
@@ -32,7 +32,7 @@ begin
                                  aStartPoint.Y + c_RectangleHeight));
 end;
 
-procedure TmsRectangle.DrawShape(const aCanvas: TCanvas; const aOrigin : TPointF);
+procedure TmsRectangle.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 begin
  aCanvas.DrawRect(TRectF.Create(FStartPoint.Add(aOrigin),
                                 FFinishPoint.Add(aOrigin)),

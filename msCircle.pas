@@ -11,7 +11,7 @@ uses
 type
  TmsCircle = class(TmsShape)
  protected
-  procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  public
   class function IsNeedsSecondClick : Boolean; override;
  end;
@@ -23,7 +23,7 @@ const
 
 { TmsCircle }
 
-procedure TmsCircle.DrawShape(const aCanvas: TCanvas; const aOrigin : TPointF);
+procedure TmsCircle.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 var
  l_StartPoint, l_FinalPoint: TPointF;
 begin
