@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   Generics.Collections,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Objects, FMX.Menus, FMX.Edit, FMX.ListBox, msDiagramm, msRegisteredPrimitives;
+  FMX.Objects, FMX.Menus, FMX.Edit, FMX.ListBox, msDiagramm;
 
 type
   TfmMain = class(TForm)
@@ -72,7 +72,7 @@ begin
 
  FDiagramm := TmsDiagramm.Create(imgMain.Bitmap.Canvas);
 
- for l_Class in TmsRegisteredPrimitives.Instance.Primitives do
+ for l_Class in FDiagramm.AllowedShapes do
   cbbPrimitives.Items.AddObject(l_Class.ClassName, TObject(l_Class));
 
  cbbPrimitivesChange(nil);

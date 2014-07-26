@@ -33,11 +33,19 @@ type
   procedure EndShape(const aFinish: TPointF);
   procedure Invalidate;
   function ShapeIsEnded: Boolean;
+  class function AllowedShapes: RmsShapeList;
  end;
 
 implementation
 
-{ TDrawness }
+uses
+ msRegisteredPrimitives
+ ;
+
+class function TmsDiagramm.AllowedShapes: RmsShapeList;
+begin
+ Result := TmsRegisteredPrimitives.Instance.Primitives;
+end;
 
 procedure TmsDiagramm.BeginShape(const aStart: TPointF);
 begin
