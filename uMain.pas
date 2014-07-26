@@ -48,7 +48,7 @@ implementation
 
 procedure TfmMain.btnClearImageClick(Sender: TObject);
 begin
- FDrawness.Clear(imgMain.Bitmap.Canvas);
+ FDrawness.Clear;
 end;
 
 procedure TfmMain.btnDrawAllClick(Sender: TObject);

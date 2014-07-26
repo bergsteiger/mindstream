@@ -30,7 +30,7 @@ type
   procedure CanvasChanged(aCanvas: TCanvas);
   destructor Destroy; override;
   procedure BeginShape(const aStart: TPointF);
-  procedure Clear(const aCanvas : TCanvas);
+  procedure Clear;
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
   procedure EndShape(const aFinish: TPointF);
   procedure Invalidate;
@@ -52,13 +52,13 @@ begin
  Invalidate;
 end;
 
-procedure TmsDiagramm.Clear(const aCanvas: TCanvas);
+procedure TmsDiagramm.Clear;
 begin
- aCanvas.BeginScene;
+ FCanvas.BeginScene;
  try
-  aCanvas.Clear(TAlphaColorRec.Null);
+  FCanvas.Clear(TAlphaColorRec.Null);
  finally
-  aCanvas.EndScene;
+  FCanvas.EndScene;
  end;//try..finally
 end;
 
@@ -110,7 +110,7 @@ end;
 
 procedure TmsDiagramm.Invalidate;
 begin
- Clear(FCanvas);
+ Clear;
  DrawTo(FCanvas, FOrigin);
 end;
 
