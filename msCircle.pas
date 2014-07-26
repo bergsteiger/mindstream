@@ -19,6 +19,10 @@ type
 
 implementation
 
+uses
+ msRegisteredPrimitives
+ ;
+
 { TmsCircle }
 
 class function TmsCircle.Radius: Integer;
@@ -37,5 +41,8 @@ begin
  aCanvas.DrawEllipse(TRectF.Create(StartPoint.Add(aOrigin),
                                    FinishPoint.Add(aOrigin)), 1);
 end;
+
+initialization
+ TmsRegisteredPrimitives.Instance.AddPrimitive(TmsCircle);
 
 end.

@@ -28,12 +28,7 @@ type
 implementation
 
 uses
- SysUtils,
-
- msLine,
- msRectangle,
- msCircle,
- msPointCircle
+ SysUtils
  ;
 
 class destructor TmsRegisteredPrimitives.Fini;
@@ -65,8 +60,4 @@ begin
  Result := FInstance;
 end;
 
-initialization
- TmsRegisteredPrimitives.Instance.AddPrimitive(TmsLine);
- TmsRegisteredPrimitives.Instance.AddPrimitive(TmsRectangle);
- TmsRegisteredPrimitives.Instance.AddPrimitive(TmsCircle);
 end.

@@ -6,7 +6,9 @@ uses
  msShape,
  System.Types,
  FMX.Graphics,
- FMX.Types;
+ FMX.Types,
+ msRegisteredPrimitives
+ ;
 
 type
  TmsRectangle = class(TmsShape)
@@ -39,5 +41,8 @@ begin
                                 AllCorners, 1,
                                 TCornerType.ctRound);
 end;
+
+initialization
+ TmsRegisteredPrimitives.Instance.AddPrimitive(TmsRectangle);
 
 end.

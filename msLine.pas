@@ -17,7 +17,8 @@ implementation
 
 uses
  SysUtils,
- msPointCircle
+ msPointCircle,
+ msRegisteredPrimitives
  ;
 
 { TLine }
@@ -44,5 +45,8 @@ class function TmsLine.IsNeedsSecondClick: Boolean;
 begin
  Result := True;
 end;
+
+initialization
+ TmsRegisteredPrimitives.Instance.AddPrimitive(TmsLine);
 
 end.
