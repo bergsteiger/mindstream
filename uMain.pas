@@ -35,6 +35,7 @@ type
     procedure cbbPrimitivesChange(Sender: TObject);
     procedure imgMainResize(Sender: TObject);
     procedure btAddDiagrammClick(Sender: TObject);
+    procedure cbDiargammChange(Sender: TObject);
   private
    FDiagramm: TmsDiagramms;
   public
@@ -51,9 +52,11 @@ implementation
 procedure TfmMain.btAddDiagrammClick(Sender: TObject);
 begin
  FDiagramm.AddDiagramm(imgMain);
+ cbDiargamm.BeginUpdate;
+ cbDiargamm.ItemIndex := -1;
  FDiagramm.DiagramsToList(cbDiargamm.Items);
  cbDiargamm.ItemIndex := FDiagramm.CurrentDiagrammIndex;
- //cbDiargamm.Invalidate;
+ cbDiargamm.EndUpdate;
 end;
 
 procedure TfmMain.btnClearImageClick(Sender: TObject);
@@ -64,6 +67,11 @@ end;
 procedure TfmMain.cbbPrimitivesChange(Sender: TObject);
 begin
  FDiagramm.SelectShape(cbbPrimitives.Items, cbbPrimitives.ItemIndex);
+end;
+
+procedure TfmMain.cbDiargammChange(Sender: TObject);
+begin
+ FDiagramm.SelectDiagramm(cbDiargamm.ItemIndex);
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
