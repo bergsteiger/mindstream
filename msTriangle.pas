@@ -20,7 +20,7 @@ type
 implementation
 
 uses
- System.Math.Vectors
+ System.Math
  ;
 
 function TmsTriangle.FillColor: TAlphaColor;

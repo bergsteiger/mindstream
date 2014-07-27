@@ -17,7 +17,7 @@ implementation
 
 function TmsDashDotLine.StrokeDash: TStrokeDash;
 begin
- Result := TStrokeDash.DashDot;
+ Result := TStrokeDash.sdDashDot;
 end;
 
 initialization

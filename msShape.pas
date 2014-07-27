@@ -50,7 +50,7 @@ end;
 
 function TmsShape.StrokeDash: TStrokeDash;
 begin
- Result := TStrokeDash.Solid;
+ Result := TStrokeDash.sdSolid;
 end;
 
 constructor TmsShape.Create(const aStartPoint: TPointF);
