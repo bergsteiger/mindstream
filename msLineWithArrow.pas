@@ -3,10 +3,10 @@ unit msLineWithArrow;
 interface
 
 uses
+ msShape,
  msLine,
  FMX.Graphics,
- System.Types,
- msSmallTriangle;
+ System.Types;
 
 type
  TmsLineWithArrow = class(TmsLine)
@@ -15,15 +15,23 @@ type
  end;//TmsLineWithArrow
 
 implementation
-
+uses
+ msSmallTriangle,
+ SysUtils;
 { TmsLineWithArrow }
 
 procedure TmsLineWithArrow.DoDrawTo(const aCanvas: TCanvas;
   const aOrigin: TPointF);
+var
+  l_Proxy : TmsShape;
 begin
   inherited;
-  aCanvas.DrawLine(StartPoint.Add(aOrigin),
-                   TPointF.Create(0,0), 1);
+  l_Proxy := TmsSmallTriangle.Create(StartPoint);
+  try
+   l_Proxy.DrawTo(aCanvas, aOrigin);
+  finally
+   FreeAndNil(l_Proxy);
+  end;//try..finally
 end;
 
 initialization
