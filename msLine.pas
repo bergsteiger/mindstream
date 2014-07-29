@@ -14,6 +14,7 @@ type
   FFinishPoint: TPointF;
  protected
   procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  //procedure DrawArrow(const aPoint : TPointF); virtual;
  public
   class function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aFinishPoint: TPointF); override;
