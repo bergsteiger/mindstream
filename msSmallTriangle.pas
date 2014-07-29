@@ -35,7 +35,4 @@ begin
  Result := 20;
 end;
 
-initialization
- TmsSmallTriangle.Register;
-
 end.
