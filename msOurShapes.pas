@@ -11,7 +11,8 @@ uses
   msDashDotLine,
   msDashLine,
   msDotLine,
-  msLineWithArrow
+  msLineWithArrow,
+  msTriangle1
   ;
 
 implementation
