@@ -6,7 +6,7 @@ object msMainForm: TmsMainForm
   ClientWidth = 384
   FormFactor.Width = 1440
   FormFactor.Height = 900
-  FormFactor.Devices = [dkDesktop, dkiPhone, dkiPad]
+  FormFactor.Devices = [Desktop, iPhone, iPad]
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   DesignerMobile = True
@@ -22,6 +22,7 @@ object msMainForm: TmsMainForm
     object HeaderLabel: TLabel
       Height = 48.000000000000000000
       StyleLookup = 'toollabel'
+      TextSettings.HorzAlign = Center
       Text = 'Mind Stream'
       Width = 384.000000000000000000
     end

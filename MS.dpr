@@ -14,7 +14,8 @@ uses
   msDashDotLine in 'msDashDotLine.pas',
   msDashLine in 'msDashLine.pas',
   msDotLine in 'msDotLine.pas',
-  msLineWithArrow in 'msLineWithArrow.pas'
+  msLineWithArrow in 'msLineWithArrow.pas',
+  msOurShapes
   ;
 
 {$R *.res}

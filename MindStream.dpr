@@ -19,7 +19,8 @@ uses
   msDashLine in 'msDashLine.pas',
   msDotLine in 'msDotLine.pas',
   msLineWithArrow in 'msLineWithArrow.pas',
-  msSmallTriangle in 'msSmallTriangle.pas';
+  msSmallTriangle in 'msSmallTriangle.pas',
+  msOurShapes in 'msOurShapes.pas';
 
 {$R *.res}
 
