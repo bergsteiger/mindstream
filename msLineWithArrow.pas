@@ -18,23 +18,30 @@ implementation
 
 uses
  msSmallTriangle,
- SysUtils
+ SysUtils,
+ System.Math.Vectors
  ;
 
 procedure TmsLineWithArrow.DoDrawTo(const aCanvas: TCanvas;
   const aOrigin: TPointF);
 var
-  l_Proxy : TmsShape;
+ l_Proxy : TmsShape;
+ l_Old : TMatrix;
 begin
  inherited;
  if (StartPoint <> FinishPoint) then
  begin
-  l_Proxy := TmsSmallTriangle.Create(FinishPoint);
+  l_Old := aCanvas.Matrix;
   try
-   l_Proxy.DrawTo(aCanvas, aOrigin);
+   l_Proxy := TmsSmallTriangle.Create(FinishPoint);
+   try
+    l_Proxy.DrawTo(aCanvas, aOrigin);
+   finally
+    FreeAndNil(l_Proxy);
+   end;//try..finally
   finally
-   FreeAndNil(l_Proxy);
-  end;//try..finally
+   aCanvas.SetMatrix(l_Old);
+  end;
  end;//(StartPoint <> FinishPoint)
 end;
 
