@@ -19,7 +19,7 @@ implementation
 uses
  msSmallTriangle,
  SysUtils,
- System.Math.Vectors
+ System.Math
  ;
 
 procedure TmsLineWithArrow.DoDrawTo(const aCanvas: TCanvas;
@@ -27,6 +27,15 @@ procedure TmsLineWithArrow.DoDrawTo(const aCanvas: TCanvas;
 var
  l_Proxy : TmsShape;
  l_Old : TMatrix;
+
+  Angle: Single;
+  R: TRectF;
+  S: String;
+  H: Single;
+  Matrix: TMatrix;
+
+  TranslateMatrix, ScaleMatrix, RotMatrix: TMatrix;
+  M1, M2: TMatrix;
 begin
  inherited;
  if (StartPoint <> FinishPoint) then
@@ -35,6 +44,12 @@ begin
   try
    l_Proxy := TmsSmallTriangle.Create(FinishPoint);
    try
+    Angle := -(DegToRad(30));
+    Matrix := TMatrix.CreateRotation(Angle);
+    Matrix.m31 :=  TmsSmallTriangle.InitialHeight * (1 - Cos(Angle)) + Sin(Angle);
+    Matrix.m32 := -Sin(Angle) * TmsSmallTriangle.InitialHeight;
+    aCanvas.SetMatrix(Matrix);
+
     l_Proxy.DrawTo(aCanvas, aOrigin);
    finally
     FreeAndNil(l_Proxy);

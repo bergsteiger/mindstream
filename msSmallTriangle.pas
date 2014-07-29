@@ -13,8 +13,9 @@ uses
 type
  TmsSmallTriangle = class(TmsTriangle1)
  protected
-  class function InitialHeight: Single; override;
   function FillColor: TAlphaColor; override;
+ public
+  class function InitialHeight: Single; override;
  end;//TmsSmallTriangle
 
 implementation

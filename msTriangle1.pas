@@ -4,8 +4,9 @@ interface
 
 uses
  msTriangle,
- System.Math.Vectors,
- System.UITypes
+ System.Math,
+ System.UITypes,
+ System.Types
  ;
 
 type
@@ -16,10 +17,6 @@ type
  end;//TmsTriangle1
 
 implementation
-
-uses
- System.Types
- ;
 
 function TmsTriangle1.FillColor: TAlphaColor;
 begin

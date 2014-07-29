@@ -7,8 +7,7 @@ uses
  System.Types,
  FMX.Graphics,
  FMX.Types,
- System.UITypes,
- System.Math.Vectors
+ System.UITypes
  ;
 
 type
@@ -23,8 +22,7 @@ type
 implementation
 
 uses
- System.Math
- ;
+ System.Math;
 
 function TmsTriangle.FillColor: TAlphaColor;
 begin
