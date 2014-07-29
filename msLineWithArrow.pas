@@ -15,10 +15,11 @@ type
  end;//TmsLineWithArrow
 
 implementation
+
 uses
  msSmallTriangle,
- SysUtils;
-{ TmsLineWithArrow }
+ SysUtils
+ ;
 
 procedure TmsLineWithArrow.DoDrawTo(const aCanvas: TCanvas;
   const aOrigin: TPointF);
