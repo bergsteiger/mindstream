@@ -3,7 +3,7 @@ unit msSmallTriangle;
 interface
 
 uses
- msTriangle,
+ msTriangle1,
  System.Types,
  FMX.Graphics,
  FMX.Types,
@@ -11,11 +11,10 @@ uses
  ;
 
 type
- TmsSmallTriangle = class(TmsTriangle)
+ TmsSmallTriangle = class(TmsTriangle1)
  protected
   class function InitialHeight: Single; override;
   function FillColor: TAlphaColor; override;
-
  end;//TmsSmallTriangle
 
 implementation
