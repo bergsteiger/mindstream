@@ -27,14 +27,8 @@ procedure TmsLineWithArrow.DoDrawTo(const aCanvas: TCanvas;
   const aOrigin: TPointF);
 var
  l_Proxy : TmsShape;
- //l_Old : TMatrix;
-
  l_OriginalMatrix: TMatrix;
-  //ShiftMatrix: TMatrix;
-  //RotationMatrix: TMatrix;
-  //ShiftBackMatrix: TMatrix;
  l_Matrix: TMatrix;
-
  l_Angle : Single;
  l_CenterPoint : TPointF;
 begin
