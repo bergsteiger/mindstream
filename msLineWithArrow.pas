@@ -53,7 +53,7 @@ begin
     Matrix := Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
     Matrix := Matrix * TMatrix.CreateRotation(Angle);
     Matrix := Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
-    aCanvas.SetMatrix(Matrix);
+    aCanvas.SetMatrix(Matrix * OriginalMatrix);
 
     l_Proxy.DrawTo(aCanvas, aOrigin);
    finally
