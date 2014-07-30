@@ -39,7 +39,24 @@ begin
   try
    l_Proxy := TmsSmallTriangle.Create(FinishPoint);
    try
-    l_Angle := -(DegToRad(90));
+    if SameValue(StartPoint.X, FinishPoint.X) then
+    begin
+     if (StartPoint.Y < FinishPoint.Y) then
+      l_Angle := pi / 2
+     else
+      l_Angle := - pi / 2;
+    end
+    else
+    if SameValue(StartPoint.Y, FinishPoint.Y) then
+    begin
+     if (StartPoint.X < FinishPoint.X) then
+      l_Angle := 0
+     else
+      l_Angle := pi;
+    end
+    else
+     // - тут надо посчитать через теорему Пифагора
+     l_Angle := -(DegToRad(45));
 
     l_CenterPoint := TPointF.Create(FinishPoint.X{ + aCanvas.Matrix.m31}, FinishPoint.Y{ + aCanvas.Matrix.m32});
 
