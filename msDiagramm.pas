@@ -84,7 +84,7 @@ end;
 procedure TmsDiagramm.BeginShape(const aStart: TPointF);
 begin
  Assert(CurrentClass <> nil);
- FCurrentAddedShape := CurrentClass.Create(aStart);
+ FCurrentAddedShape := CurrentClass.Create(aStart, FShapeList);
  FShapeList.Add(FCurrentAddedShape);
  if not FCurrentAddedShape.IsNeedsSecondClick then
  // - если не надо SecondClick, то наш примитив - завершён

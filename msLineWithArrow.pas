@@ -42,7 +42,7 @@ begin
  begin
   l_OriginalMatrix := aCanvas.Matrix;
   try
-   l_Proxy := TmsSmallTriangle.Create(FinishPoint);
+   l_Proxy := TmsSmallTriangle.Create(FinishPoint, nil {!!!});
    try
     // in Radian
     l_Angle := GetArrowAngleRotation;

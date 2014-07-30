@@ -15,7 +15,7 @@ type
  public
   class function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aFinishPoint: TPointF); override;
-  constructor Create(const aStartPoint: TPointF); override;
+  constructor Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList); override;
  end;
 
 implementation
@@ -25,7 +25,7 @@ uses
  msPointCircle
  ;
 
-constructor TmsLine.Create(const aStartPoint: TPointF);
+constructor TmsLine.Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList);
 begin
  inherited;
  FinishPoint := aStartPoint;
@@ -42,7 +42,7 @@ var
 begin
  if (StartPoint = FinishPoint) then
  begin
-  l_Proxy := TmsPointCircle.Create(StartPoint);
+  l_Proxy := TmsPointCircle.Create(StartPoint, nil {!!!});
   try
    l_Proxy.DrawTo(aCanvas, aOrigin);
   finally
