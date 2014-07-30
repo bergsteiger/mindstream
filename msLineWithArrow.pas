@@ -44,7 +44,7 @@ begin
   try
    l_Proxy := TmsSmallTriangle.Create(FinishPoint);
    try
-    Angle := -(DegToRad(30));
+    Angle := -(DegToRad(90));
 
     l_CenterPoint := TPointF.Create(FinishPoint.X + aCanvas.Matrix.m31, FinishPoint.Y + aCanvas.Matrix.m32);
     OriginalMatrix := aCanvas.Matrix;
