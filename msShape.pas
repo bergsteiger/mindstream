@@ -10,6 +10,11 @@ uses
  ;
 
 type
+ TmsShape = class;
+
+ TmsShapeList = TObjectList<TmsShape>;
+ // - ќбъ€вл€ем список примитивов заранее, чтобы его можно было принимать в конструктор
+
  TmsShape = class abstract (TObject)
  private
   FStartPoint,
@@ -39,7 +44,7 @@ type
 
  RmsShapeList = TList<RmsShape>;
 
- TmsShapeList = TObjectList<TmsShape>;
+ //TmsShapeList = TObjectList<TmsShape>;
 
 implementation
 
