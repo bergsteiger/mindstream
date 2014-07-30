@@ -43,14 +43,17 @@ begin
   try
    l_Proxy := TmsSmallTriangle.Create(FinishPoint);
    try
+    // in Radian
     l_Angle := GetArrowAngleRotation;
 
-    l_CenterPoint := TPointF.Create(FinishPoint.X{ + aCanvas.Matrix.m31}, FinishPoint.Y{ + aCanvas.Matrix.m32});
+    // create a point around which will rotate
+    l_CenterPoint := TPointF.Create(FinishPoint.X, FinishPoint.Y);
 
     l_Matrix := l_OriginalMatrix;
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
     l_Matrix := l_Matrix * TMatrix.CreateRotation(l_Angle);
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
+
     aCanvas.SetMatrix(l_Matrix);
 
     l_Proxy.DrawTo(aCanvas, aOrigin);

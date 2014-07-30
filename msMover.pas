@@ -16,13 +16,15 @@ type
   function StrokeDash: TStrokeDash; override;
   function FillColor: TAlphaColor; override;
   function StrokeColor: TAlphaColor; override;
+  function StrokeThickness: Single; override;
  end;//TmsMover
 
 implementation
 
 uses
  msRectangle,
- FMX.Types;
+ FMX.Types,
+ System.SysUtils;
 { TmsMover }
 
 procedure TmsMover.DoDrawTo(const aCanvas: TCanvas; const aOrigin: TPointF);
@@ -31,7 +33,9 @@ var
 begin
  inherited;
  aCanvas.Fill.Color := FillColor;
- aCanvas.Stroke.Thickness := 4;
+
+ DoDrawDebugInfo(aCanvas, 'X=' + FloatToStr(StartPoint.X) + '; ' +
+                          'Y=' + FloatToStr(StartPoint.Y) + '; ');
 
  l_Finish := TPointF.Create(StartPoint.X + 150,
                             StartPoint.Y + 150);
@@ -66,6 +70,11 @@ end;
 function TmsMover.StrokeDash: TStrokeDash;
 begin
  Result :=  TStrokeDash.sdDashDot;
+end;
+
+function TmsMover.StrokeThickness: Single;
+begin
+ Result := 4;
 end;
 
 initialization

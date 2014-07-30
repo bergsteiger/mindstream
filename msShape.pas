@@ -19,8 +19,12 @@ type
   function FillColor: TAlphaColor; virtual;
   function StrokeDash: TStrokeDash; virtual;
   function StrokeColor: TAlphaColor; virtual;
+  function StrokeThickness: Single; virtual;
+
+  procedure DoFill(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
+
   procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
-  procedure DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
+  class procedure DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
 
   property StartPoint : TPointF read FStartPoint;
   property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
@@ -55,12 +59,17 @@ end;
 
 function TmsShape.StrokeColor: TAlphaColor;
 begin
- Result := TAlphaColorRec.Null;
+ Result := TAlphaColorRec.Black;
 end;
 
 function TmsShape.StrokeDash: TStrokeDash;
 begin
  Result := TStrokeDash.sdSolid;
+end;
+
+function TmsShape.StrokeThickness: Single;
+begin
+Result := 1;
 end;
 
 constructor TmsShape.Create(const aStartPoint: TPointF);
@@ -78,18 +87,21 @@ begin
  Result := false;
 end;
 
-procedure TmsShape.DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
+class procedure TmsShape.DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
 var
  l_TextRect : TRectF;
+ l_OriginalColor : TAlphaColor;
 begin
   ////// Debug
-  aCanvas.Fill.Color := TAlphaColors.Black;
+  l_OriginalColor := aCanvas.Fill.Color;
+  aCanvas.Fill.Color := TAlphaColorRec.Black;
   l_TextRect := TRectF.Create(0, 0, 150, 150);
 
   aCanvas.ClearRect(l_TextRect);
   aCanvas.FillText(l_TextRect, aText, False, 1, [],
                    TTextAlign.taLeading,
                    TTextAlign.taTrailing);
+  aCanvas.Fill.Color := l_OriginalColor;
 end;
 
 procedure TmsShape.DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
@@ -97,6 +109,7 @@ begin
  aCanvas.Fill.Color := FillColor;
  aCanvas.Stroke.Dash := StrokeDash;
  aCanvas.Stroke.Color := StrokeColor;
+ aCanvas.Stroke.Thickness := StrokeThickness;
  DoDrawTo(aCanvas, aOrigin);
 end;
 
