@@ -19,7 +19,8 @@ implementation
 uses
  msSmallTriangle,
  SysUtils,
- System.Math
+ System.Math,
+ System.Math.Vectors
  ;
 
 procedure TmsLineWithArrow.DoDrawTo(const aCanvas: TCanvas;

@@ -37,7 +37,8 @@ type
 implementation
 
 uses
- System.SysUtils
+ System.SysUtils,
+ FMX.Types
  ;
 
 constructor TmsDiagrammsController.Create(aImage: TImage; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton);
@@ -56,6 +57,7 @@ begin
  cbShapes.OnChange := cbShapesChange;
  btAddDiagramm.OnClick := btAddDiagrammClick;
  imgMain.OnMouseDown := imgMainMouseDown;
+ imgMain.Align := TAlignLayout.Client;
 end;
 
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
