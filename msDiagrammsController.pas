@@ -57,7 +57,7 @@ begin
  cbShapes.OnChange := cbShapesChange;
  btAddDiagramm.OnClick := btAddDiagrammClick;
  imgMain.OnMouseDown := imgMainMouseDown;
- imgMain.Align := TAlignLayout.Client;
+ imgMain.Align := TAlignLayout.alClient;
 end;
 
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
