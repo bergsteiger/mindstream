@@ -38,6 +38,7 @@ type
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
   class function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aFinishPoint: TPointF); virtual;
+  function ContainsPt(const aPoint: TPointF): Boolean; virtual; abstract;
  end;
 
  RmsShape = class of TmsShape;
