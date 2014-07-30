@@ -12,14 +12,18 @@ uses
 type
  TmsShape = class abstract (TObject)
  private
-  FStartPoint: TPointF;
+  FStartPoint,
+  FFinishPoint: TPointF;
  protected
-  property StartPoint : TPointF read FStartPoint;
   class procedure Register;
   function FillColor: TAlphaColor; virtual;
   function StrokeDash: TStrokeDash; virtual;
+  function StrokeColor: TAlphaColor; virtual;
   procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
   procedure DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
+
+  property StartPoint : TPointF read FStartPoint;
+  property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
  public
   constructor Create(const aStartPoint: TPointF); virtual;
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
@@ -45,6 +49,11 @@ begin
 end;
 
 function TmsShape.FillColor: TAlphaColor;
+begin
+ Result := TAlphaColorRec.Null;
+end;
+
+function TmsShape.StrokeColor: TAlphaColor;
 begin
  Result := TAlphaColorRec.Null;
 end;
@@ -87,6 +96,7 @@ procedure TmsShape.DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
 begin
  aCanvas.Fill.Color := FillColor;
  aCanvas.Stroke.Dash := StrokeDash;
+ aCanvas.Stroke.Color := StrokeColor;
  DoDrawTo(aCanvas, aOrigin);
 end;
 
