@@ -27,40 +27,39 @@ procedure TmsLineWithArrow.DoDrawTo(const aCanvas: TCanvas;
   const aOrigin: TPointF);
 var
  l_Proxy : TmsShape;
- l_Old : TMatrix;
+ //l_Old : TMatrix;
 
-  OriginalMatrix: TMatrix;
-  ShiftMatrix: TMatrix;
-  RotationMatrix: TMatrix;
-  ShiftBackMatrix: TMatrix;
-  Matrix: TMatrix;
+ l_OriginalMatrix: TMatrix;
+  //ShiftMatrix: TMatrix;
+  //RotationMatrix: TMatrix;
+  //ShiftBackMatrix: TMatrix;
+ l_Matrix: TMatrix;
 
-  Angle : Single;
+ l_Angle : Single;
  l_CenterPoint : TPointF;
 begin
  inherited;
  if (StartPoint <> FinishPoint) then
  begin
+  l_OriginalMatrix := aCanvas.Matrix;
   try
    l_Proxy := TmsSmallTriangle.Create(FinishPoint);
    try
-    Angle := -(DegToRad(90));
+    l_Angle := -(DegToRad(90));
 
-    l_CenterPoint := TPointF.Create(FinishPoint.X + aCanvas.Matrix.m31, FinishPoint.Y + aCanvas.Matrix.m32);
-    OriginalMatrix := aCanvas.Matrix;
+    l_CenterPoint := TPointF.Create(FinishPoint.X{ + aCanvas.Matrix.m31}, FinishPoint.Y{ + aCanvas.Matrix.m32});
 
-    Matrix := aCanvas.Matrix;
-    Matrix := Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
-    Matrix := Matrix * TMatrix.CreateRotation(Angle);
-    Matrix := Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
-    aCanvas.SetMatrix(Matrix * OriginalMatrix);
+    l_Matrix := l_OriginalMatrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
+    l_Matrix := l_Matrix * TMatrix.CreateRotation(l_Angle);
+    l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
+    aCanvas.SetMatrix(l_Matrix);
 
     l_Proxy.DrawTo(aCanvas, aOrigin);
    finally
     FreeAndNil(l_Proxy);
    end;//try..finally
   finally
-    aCanvas.SetMatrix(OriginalMatrix);
+    aCanvas.SetMatrix(l_OriginalMatrix);
   end;
  end;//(StartPoint <> FinishPoint)
 end;
