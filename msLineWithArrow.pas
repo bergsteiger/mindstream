@@ -60,15 +60,6 @@ begin
   finally
     aCanvas.SetMatrix(l_OriginalMatrix);
   end;
-
-  ////// Debug
-  aCanvas.Fill.Color := TAlphaColors.Black;
-  l_TextRect := TRectF.Create(0, 0, 150, 150);
-
-  aCanvas.ClearRect(l_TextRect);
-  aCanvas.FillText(l_TextRect, FloatToStr(RadToDeg(GetArrowAngleRotation)), False, 1, [],
-                   TTextAlign.taLeading,
-                   TTextAlign.taTrailing);
  end;//(StartPoint <> FinishPoint)
 end;
 
@@ -76,42 +67,43 @@ function TmsLineWithArrow.GetArrowAngleRotation: single;
 var
  l_ALength, l_CLength,
  l_AlphaAngle,
- l_X, l_Y, l_Angle : Single;
+ l_X, l_Y, l_RotationAngle : Single;
  l_PointC : TPointF;
- l_Minus : SmallInt;
+ l_Invert : SmallInt;
 begin
  Result := 0;
- l_X := ( FinishPoint.X - StartPoint.X ) * ( FinishPoint.X - StartPoint.X );
- l_Y := ( FinishPoint.Y - StartPoint.Y ) * ( FinishPoint.Y - StartPoint.Y );
+
+ // ‘ормула расчета расто€ний между двум€ точками
+ l_X := (FinishPoint.X - StartPoint.X) * (FinishPoint.X - StartPoint.X);
+ l_Y := (FinishPoint.Y - StartPoint.Y) * (FinishPoint.Y - StartPoint.Y);
  l_CLength := sqrt( l_X + l_Y);
 
  l_PointC := TPointF.Create(FinishPoint.X, StartPoint.Y);
 
- l_X := ( l_PointC.X - StartPoint.X ) * ( l_PointC.X - StartPoint.X ); l_Y := ( l_PointC.Y - StartPoint.Y ) * ( l_PointC.Y - StartPoint.Y );
+ // ‘ормула расчета расто€ний между двум€ точками
+ l_X := (l_PointC.X - StartPoint.X) * (l_PointC.X - StartPoint.X); l_Y := (l_PointC.Y - StartPoint.Y) * (l_PointC.Y - StartPoint.Y);
  l_ALength := sqrt( l_X + l_Y);
 
  // In Radian
  l_AlphaAngle := ArcSin(l_ALength / l_CLength);
 
- l_Angle := 0;
- l_Minus := 1;
+ l_RotationAngle := 0;
+ l_Invert := 1;
 
  if FinishPoint.X > StartPoint.X then
  begin
-//  l_Angle := DegToRad(270);
-  l_Angle := Pi / 2 * 3;
+  l_RotationAngle := Pi / 2 * 3;
   if FinishPoint.Y > StartPoint.Y then
-   l_Minus := -1;
+   l_Invert := -1;
  end
  else
  begin
-//  l_Angle := DegToRad(90);
-  l_Angle := Pi / 2;
+  l_RotationAngle := Pi / 2;
   if FinishPoint.Y < StartPoint.Y then
-   l_Minus := -1;
+   l_Invert := -1;
  end;
 
- Result := l_Minus * (l_AlphaAngle + l_Angle);
+ Result := l_Invert * (l_AlphaAngle + l_RotationAngle);
 end;
 
 

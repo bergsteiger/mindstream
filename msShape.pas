@@ -19,6 +19,7 @@ type
   function FillColor: TAlphaColor; virtual;
   function StrokeDash: TStrokeDash; virtual;
   procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
+  procedure DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
  public
   constructor Create(const aStartPoint: TPointF); virtual;
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
@@ -66,6 +67,20 @@ end;
 class function TmsShape.IsNeedsSecondClick : Boolean;
 begin
  Result := false;
+end;
+
+procedure TmsShape.DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
+var
+ l_TextRect : TRectF;
+begin
+  ////// Debug
+  aCanvas.Fill.Color := TAlphaColors.Black;
+  l_TextRect := TRectF.Create(0, 0, 150, 150);
+
+  aCanvas.ClearRect(l_TextRect);
+  aCanvas.FillText(l_TextRect, aText, False, 1, [],
+                   TTextAlign.taLeading,
+                   TTextAlign.taTrailing);
 end;
 
 procedure TmsShape.DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
