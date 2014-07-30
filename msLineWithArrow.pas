@@ -22,7 +22,8 @@ uses
  SysUtils,
  System.Math,
  System.UITypes,
- FMX.Types
+ FMX.Types,
+ System.Math.Vectors
  ;
 
 procedure TmsLineWithArrow.DoDrawTo(const aCanvas: TCanvas;

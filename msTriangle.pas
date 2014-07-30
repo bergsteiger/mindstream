@@ -7,7 +7,9 @@ uses
  System.Types,
  FMX.Graphics,
  FMX.Types,
- System.UITypes;
+ System.UITypes,
+ System.Math.Vectors
+ ;
 
 type
  TmsTriangle = class(TmsShape)
