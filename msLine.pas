@@ -3,42 +3,66 @@ unit msLine;
 interface
 
 uses
- msShape, FMX.Graphics, System.Types;
+ msShape,
+ FMX.Graphics,
+ System.Types
+ ;
 
 type
  TmsLine = class(TmsShape)
+ private
+  FFinishPoint: TPointF;
  protected
-  procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
-  procedure DoLogic; override;
+  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  property FinishPoint : TPointF Read FFinishPoint;
  public
-  constructor Create(const aStartPoint, aFinalPoint: TPointF); override;
   class function IsNeedsSecondClick : Boolean; override;
+  procedure EndTo(const aFinishPoint: TPointF); override;
+  constructor Create(const aStartPoint: TPointF); override;
  end;
 
 implementation
-{ TLine }
 
-constructor TmsLine.Create(const aStartPoint, aFinalPoint: TPointF);
+uses
+ SysUtils,
+ msPointCircle
+ ;
+
+constructor TmsLine.Create(const aStartPoint: TPointF);
 begin
  inherited;
- FNeedsSecondClick := True;
+ FFinishPoint := aStartPoint;
 end;
 
-procedure TmsLine.DoLogic;
+procedure TmsLine.EndTo(const aFinishPoint: TPointF);
 begin
- inherited;
-
+ FFinishPoint := aFinishPoint;
 end;
 
-procedure TmsLine.DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF);
+procedure TmsLine.DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
+var
+ l_Proxy : TmsShape;
 begin
- aCanvas.DrawLine(FStartPoint.Add(aOrigin),
-                  FFinalPoint.add(aOrigin), 1);
+ if (StartPoint = FFinishPoint) then
+ begin
+  l_Proxy := TmsPointCircle.Create(StartPoint);
+  try
+   l_Proxy.DrawTo(aCanvas, aOrigin);
+  finally
+   FreeAndNil(l_Proxy);
+  end;//try..finally
+ end//StartPoint = FinishPoint
+ else
+  aCanvas.DrawLine(StartPoint.Add(aOrigin),
+                   FFinishPoint.Add(aOrigin), 1);
 end;
 
 class function TmsLine.IsNeedsSecondClick: Boolean;
 begin
  Result := True;
 end;
+
+initialization
+ TmsLine.Register;
 
 end.

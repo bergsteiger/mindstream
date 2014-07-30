@@ -6,52 +6,67 @@ uses
  msShape,
  System.Types,
  FMX.Graphics,
- FMX.Types;
+ FMX.Types,
+ System.UITypes
+ ;
 
 type
  TmsRectangle = class(TmsShape)
  protected
-  procedure DrawShape(const aCanvas : TCanvas; const aOrigin : TPointF); override;
-  procedure DoLogic; override;
- public
-  constructor Create(const aStartPoint, aFinalPoint: TPointF); override;
-  class function IsNeedsSecondClick : Boolean; override;
+  class function CornerRadius: Single; virtual;
+  class function InitialWidth: Single; virtual;
+  class function InitialHeight: Single; virtual;
+  function FillColor: TAlphaColor; override;
+  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
  end;
 
 implementation
 
-const
- c_RectangleHeight = 150;
- c_RectangleWidth = 100;
-
 { TmsRectangle }
 
-constructor TmsRectangle.Create(const aStartPoint, aFinalPoint: TPointF);
+class function TmsRectangle.InitialWidth: Single;
 begin
- inherited;
- FNeedsSecondClick := False;
- FFinalPoint:= TPointF.Create(FStartPoint.X + c_RectangleWidth,
-                              FStartPoint.Y + c_RectangleHeight);
+ Result := 100;
 end;
 
-procedure TmsRectangle.DoLogic;
+class function TmsRectangle.InitialHeight: Single;
 begin
-  inherited;
-
+ Result := 90;
 end;
 
-procedure TmsRectangle.DrawShape(const aCanvas: TCanvas; const aOrigin : TPointF);
+class function TmsRectangle.CornerRadius: Single;
 begin
- aCanvas.DrawRect(TRectF.Create(FStartPoint.add(aOrigin),
-                                FFinalPoint.add(aOrigin)),
-                                0, 0,
-                                AllCorners, 1,
-                                TCornerType.ctRound);
+ Result := 0;
 end;
 
-class function TmsRectangle.IsNeedsSecondClick: Boolean;
+function TmsRectangle.FillColor: TAlphaColor;
 begin
- Result := False;
+ Result := TAlphaColorRec.White;
 end;
+
+procedure TmsRectangle.DoDrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
+var
+ l_Finish : TPointF;
+begin
+ l_Finish := TPointF.Create(StartPoint.X + InitialWidth,
+                            StartPoint.Y + InitialHeight);
+ aCanvas.DrawRect(TRectF.Create(StartPoint.Add(aOrigin),
+                                l_Finish.Add(aOrigin)),
+                  CornerRadius,
+                  CornerRadius,
+                  AllCorners,
+                  1,
+                  TCornerType.ctRound);
+ aCanvas.FillRect(TRectF.Create(StartPoint.Add(aOrigin),
+                                l_Finish.Add(aOrigin)),
+                  CornerRadius,
+                  CornerRadius,
+                  AllCorners,
+                  0.5,
+                  TCornerType.ctRound);
+end;
+
+initialization
+ TmsRectangle.Register;
 
 end.

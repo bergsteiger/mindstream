@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleName</key>
+    <string>MS</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>MS</string>
+	<key>CFBundleIdentifier</key>
+	<string>MS</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleVersion</key>
+	<string>1.0.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>LSRequiresIPhoneOS</key>
+	<string>true</string>
+	<key>CFBundleAllowMixedLocalizations</key>
+	<string>YES</string>
+	<key>CFBundleExecutable</key>
+	<string>MS</string>
+	<key>CFBundleResourceSpecification</key>
+	<string>ResourceRules.plist</string>
+	<key>UIDeviceFamily</key>
+	<array>
+	      <integer>1</integer>
+	      <integer>2</integer>
+	</array>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleIconFiles</key>
+	<array>
+	<string>FM_ApplicationIcon_57x57</string>
+	<string>FM_ApplicationIcon_114x114</string>
+	<string>FM_ApplicationIcon_72x72</string>
+	<string>FM_ApplicationIcon_144x144</string>
+	<string>FM_ApplicationIcon_76x76</string>
+	<string>FM_ApplicationIcon_152x152</string>
+	<string>FM_ApplicationIcon_60x60</string>
+	<string>FM_ApplicationIcon_120x120</string>
+	</array>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+	<string>armv7</string>
+	</array>
+</dict>
+</plist>

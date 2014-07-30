@@ -31,25 +31,15 @@ object fmMain: TfmMain
       OnClick = miAboutClick
     end
   end
-  object pnlMain: TPanel
-    Align = alClient
+  object imgMain: TImage
+    MultiResBitmap = <
+      item
+      end>
     Height = 559.000000000000000000
     Width = 600.000000000000000000
-    TabOrder = 0
-    object imgMain: TImage
-      MultiResBitmap = <
-        item
-        end>
-      Align = alClient
-      Height = 559.000000000000000000
-      Width = 600.000000000000000000
-      OnMouseDown = imgMainMouseDown
-      OnMouseMove = imgMainMouseMove
-      OnMouseUp = imgMainMouseUp
-    end
+    OnMouseMove = imgMainMouseMove
   end
   object pnlTop: TPanel
-    Align = alTop
     Height = 41.000000000000000000
     Width = 600.000000000000000000
     TabOrder = 1
@@ -58,28 +48,34 @@ object fmMain: TfmMain
       Position.X = 16.000000000000000000
       Position.Y = 8.000000000000000000
       TabOrder = 0
-      Text = 'ClearImage'
+      Text = 'Clear'
       Width = 80.000000000000000000
       OnClick = btnClearImageClick
     end
-    object btnDrawAll: TButton
-      Height = 22.000000000000000000
-      Position.X = 120.000000000000000000
-      Position.Y = 8.000000000000000000
-      TabOrder = 1
-      Text = 'DrawAll'
-      Width = 80.000000000000000000
-      OnClick = btnDrawAllClick
-    end
-    object cbbPrimitives: TComboBox
+    object cbShapes: TComboBox
       DisableFocusEffect = False
       Height = 22.000000000000000000
       ItemIndex = 0
+      Position.X = 104.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 1
+      Width = 100.000000000000000000
+    end
+    object cbDiagramm: TComboBox
+      DisableFocusEffect = False
+      Height = 22.000000000000000000
       Position.X = 216.000000000000000000
       Position.Y = 8.000000000000000000
-      TabOrder = 2
+      TabOrder = 3
       Width = 100.000000000000000000
-      OnChange = cbbPrimitivesChange
+    end
+    object btAddDiagramm: TButton
+      Height = 22.000000000000000000
+      Position.X = 328.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 2
+      Text = 'Add'
+      Width = 80.000000000000000000
     end
   end
 end
