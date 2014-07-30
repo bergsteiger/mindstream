@@ -43,7 +43,8 @@ begin
 
     l_CenterPoint := TPointF.Create(FinishPoint.X{ + aCanvas.Matrix.m31}, FinishPoint.Y{ + aCanvas.Matrix.m32});
 
-    l_Matrix := l_OriginalMatrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
+    l_Matrix := l_OriginalMatrix;
+    l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
     l_Matrix := l_Matrix * TMatrix.CreateRotation(l_Angle);
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
     aCanvas.SetMatrix(l_Matrix);
