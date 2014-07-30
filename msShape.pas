@@ -39,6 +39,7 @@ type
   class function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aFinishPoint: TPointF); virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual; abstract;
+  class function ShapeByPt(const aPoint: TPointF; aList: TmsShapeList): TmsShape;
  end;
 
  RmsShape = class of TmsShape;
@@ -117,6 +118,23 @@ begin
  aCanvas.Stroke.Color := StrokeColor;
  aCanvas.Stroke.Thickness := StrokeThickness;
  DoDrawTo(aCanvas, aOrigin);
+end;
+
+class function TmsShape.ShapeByPt(const aPoint: TPointF; aList: TmsShapeList): TmsShape;
+var
+ l_Shape : TmsShape;
+ l_Index : Integer;
+begin
+ Result := nil;
+ for l_Index := aList.Count - 1 downto 0 do
+ begin
+  l_Shape := aList.Items[l_Index];
+  if l_Shape.ContainsPt(aPoint) then
+  begin
+   Result := l_Shape;
+   Exit;
+  end;//l_Shape.ContainsPt(aPoint)
+ end;//for l_Index
 end;
 
 end.
