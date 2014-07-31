@@ -123,11 +123,17 @@ procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
 begin
  aCtx.rCanvas.Fill.Color := FillColor;
  if aCtx.rMoving then
-  aCtx.rCanvas.Stroke.Dash := TStrokeDash.sdDashDot
+ begin
+  aCtx.rCanvas.Stroke.Dash := TStrokeDash.sdDashDot;
+  aCtx.rCanvas.Stroke.Color := TAlphaColors.Darkmagenta;
+  aCtx.rCanvas.Stroke.Thickness := 4;
+ end
  else
+ begin
   aCtx.rCanvas.Stroke.Dash := StrokeDash;
- aCtx.rCanvas.Stroke.Color := StrokeColor;
- aCtx.rCanvas.Stroke.Thickness := StrokeThickness;
+  aCtx.rCanvas.Stroke.Color := StrokeColor;
+  aCtx.rCanvas.Stroke.Thickness := StrokeThickness;
+ end;
  DoDrawTo(aCtx);
 end;
 
