@@ -17,7 +17,7 @@ type
   class function InitialWidth: Single; virtual;
   class function InitialHeight: Single; virtual;
   function FillColor: TAlphaColor; override;
-  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;
 
 implementation
@@ -44,21 +44,21 @@ begin
  Result := TAlphaColorRec.White;
 end;
 
-procedure TmsRectangle.DoDrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
+procedure TmsRectangle.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Finish : TPointF;
 begin
  l_Finish := TPointF.Create(StartPoint.X + InitialWidth,
                             StartPoint.Y + InitialHeight);
- aCanvas.DrawRect(TRectF.Create(StartPoint.Add(aOrigin),
-                                l_Finish.Add(aOrigin)),
+ aCtx.rCanvas.DrawRect(TRectF.Create(StartPoint,
+                                l_Finish),
                   CornerRadius,
                   CornerRadius,
                   AllCorners,
                   1,
                   TCornerType.ctRound);
- aCanvas.FillRect(TRectF.Create(StartPoint.Add(aOrigin),
-                                l_Finish.Add(aOrigin)),
+ aCtx.rCanvas.FillRect(TRectF.Create(StartPoint,
+                                l_Finish),
                   CornerRadius,
                   CornerRadius,
                   AllCorners,

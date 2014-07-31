@@ -12,7 +12,7 @@ uses
 type
  TmsMover = class(TmsShape)
  protected
-  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function StrokeDash: TStrokeDash; override;
   function FillColor: TAlphaColor; override;
   function StrokeColor: TAlphaColor; override;
@@ -27,20 +27,20 @@ uses
  System.SysUtils;
 { TmsMover }
 
-procedure TmsMover.DoDrawTo(const aCanvas: TCanvas; const aOrigin: TPointF);
+procedure TmsMover.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Finish : TPointF;
 begin
  inherited;
- aCanvas.Fill.Color := FillColor;
+ aCtx.rCanvas.Fill.Color := FillColor;
 
- DoDrawDebugInfo(aCanvas, 'X=' + FloatToStr(StartPoint.X) + '; ' +
+ DoDrawDebugInfo(aCtx.rCanvas, 'X=' + FloatToStr(StartPoint.X) + '; ' +
                           'Y=' + FloatToStr(StartPoint.Y) + '; ');
 
  l_Finish := TPointF.Create(StartPoint.X + 150,
                             StartPoint.Y + 150);
 
- aCanvas.DrawRect(TRectF.Create(StartPoint,
+ aCtx.rCanvas.DrawRect(TRectF.Create(StartPoint,
                                 l_Finish),
                                 0,
                                 0,
@@ -48,7 +48,7 @@ begin
                                 0.5,
                                 TCornerType.ctRound);
 
- aCanvas.FillRect(TRectF.Create(StartPoint,
+ aCtx.rCanvas.FillRect(TRectF.Create(StartPoint,
                                 l_Finish),
                                 0,
                                 0,

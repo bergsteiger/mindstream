@@ -16,7 +16,7 @@ type
   class function InitialRadiusX: Integer; virtual;
   class function InitialRadiusY: Integer; virtual;
   function FillColor: TAlphaColor; override;
-  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;
 
 implementation
@@ -38,18 +38,18 @@ begin
  Result := TAlphaColorRec.Red;
 end;
 
-procedure TmsCircle.DoDrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
+procedure TmsCircle.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Start  : TPointF;
  l_Finish : TPointF;
 begin
  l_Start := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
  l_Finish := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
- aCanvas.DrawEllipse(TRectF.Create(l_Start.Add(aOrigin),
-                                   l_Finish.Add(aOrigin)),
+ aCtx.rCanvas.DrawEllipse(TRectF.Create(l_Start,
+                                   l_Finish),
                      1);
- aCanvas.FillEllipse(TRectF.Create(l_Start.Add(aOrigin),
-                                   l_Finish.Add(aOrigin)),
+ aCtx.rCanvas.FillEllipse(TRectF.Create(l_Start,
+                                   l_Finish),
                      0.5);
 end;
 

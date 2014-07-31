@@ -140,7 +140,7 @@ begin
  aCanvas.BeginScene;
  try
   for l_Shape in FShapeList do
-   l_Shape.DrawTo(aCanvas, aOrigin);
+   l_Shape.DrawTo(TmsDrawContext.Create(aCanvas, aOrigin));
  finally
   aCanvas.EndScene;
  end;//try..finally

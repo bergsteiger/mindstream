@@ -15,6 +15,13 @@ type
  TmsShapeList = TObjectList<TmsShape>;
  // - ќбъ€вл€ем список примитивов заранее, чтобы его можно было принимать в конструктор
 
+ TmsDrawContext  = record
+  public
+   rCanvas : TCanvas;
+   rOrigin : TPointF;
+   constructor Create(const aCanvas : TCanvas; const aOrigin : TPointF);
+ end;//TmsDrawContext
+
  TmsShape = class abstract (TObject)
  private
   FStartPoint,
@@ -28,14 +35,14 @@ type
 
   procedure DoFill(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
 
-  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
+  procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   class procedure DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
 
   property StartPoint : TPointF read FStartPoint;
   property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
  public
   constructor Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList); virtual;
-  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
+  procedure DrawTo(const aCtx: TmsDrawContext);
   class function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aFinishPoint: TPointF); virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual; abstract;
@@ -111,13 +118,13 @@ begin
   aCanvas.Fill.Color := l_OriginalColor;
 end;
 
-procedure TmsShape.DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
+procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
 begin
- aCanvas.Fill.Color := FillColor;
- aCanvas.Stroke.Dash := StrokeDash;
- aCanvas.Stroke.Color := StrokeColor;
- aCanvas.Stroke.Thickness := StrokeThickness;
- DoDrawTo(aCanvas, aOrigin);
+ aCtx.rCanvas.Fill.Color := FillColor;
+ aCtx.rCanvas.Stroke.Dash := StrokeDash;
+ aCtx.rCanvas.Stroke.Color := StrokeColor;
+ aCtx.rCanvas.Stroke.Thickness := StrokeThickness;
+ DoDrawTo(aCtx);
 end;
 
 class function TmsShape.ShapeByPt(const aPoint: TPointF; aList: TmsShapeList): TmsShape;
@@ -135,6 +142,12 @@ begin
    Exit;
   end;//l_Shape.ContainsPt(aPoint)
  end;//for l_Index
+end;
+
+constructor TmsDrawContext.Create(const aCanvas : TCanvas; const aOrigin : TPointF);
+begin
+ rCanvas := aCanvas;
+ rOrigin := aOrigin;
 end;
 
 end.

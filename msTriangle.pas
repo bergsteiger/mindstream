@@ -17,7 +17,7 @@ type
   class function InitialHeight: Single; virtual;
   function Polygon: TPolygon; virtual;
   function FillColor: TAlphaColor; override;
-  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsTriangle
 
 implementation
@@ -47,13 +47,13 @@ begin
  Result[3] := Result[0];
 end;
 
-procedure TmsTriangle.DoDrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
+procedure TmsTriangle.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_P : TPolygon;
 begin
  l_P := Polygon;
- aCanvas.DrawPolygon(l_P, 1);
- aCanvas.FillPolygon(l_P, 0.5);
+ aCtx.rCanvas.DrawPolygon(l_P, 1);
+ aCtx.rCanvas.FillPolygon(l_P, 0.5);
 end;
 
 initialization

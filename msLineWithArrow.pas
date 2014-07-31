@@ -11,7 +11,7 @@ uses
 type
  TmsLineWithArrow = class(TmsLine)
  protected
-  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetArrowAngleRotation : Single;
  end;//TmsLineWithArrow
 
@@ -26,8 +26,7 @@ uses
  System.Math.Vectors
  ;
 
-procedure TmsLineWithArrow.DoDrawTo(const aCanvas: TCanvas;
-  const aOrigin: TPointF);
+procedure TmsLineWithArrow.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Proxy : TmsShape;
  l_OriginalMatrix: TMatrix;
@@ -40,7 +39,7 @@ begin
  inherited;
  if (StartPoint <> FinishPoint) then
  begin
-  l_OriginalMatrix := aCanvas.Matrix;
+  l_OriginalMatrix := aCtx.rCanvas.Matrix;
   try
    l_Proxy := TmsSmallTriangle.Create(FinishPoint, nil {!!!});
    try
@@ -55,14 +54,14 @@ begin
     l_Matrix := l_Matrix * TMatrix.CreateRotation(l_Angle);
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
 
-    aCanvas.SetMatrix(l_Matrix);
+    aCtx.rCanvas.SetMatrix(l_Matrix);
 
-    l_Proxy.DrawTo(aCanvas, aOrigin);
+    l_Proxy.DrawTo(aCtx);
    finally
     FreeAndNil(l_Proxy);
    end;//try..finally
   finally
-    aCanvas.SetMatrix(l_OriginalMatrix);
+    aCtx.rCanvas.SetMatrix(l_OriginalMatrix);
   end;
  end;//(StartPoint <> FinishPoint)
 end;

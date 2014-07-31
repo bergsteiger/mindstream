@@ -11,7 +11,7 @@ uses
 type
  TmsLine = class(TmsShape)
  protected
-  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
   class function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aFinishPoint: TPointF); override;
@@ -36,7 +36,7 @@ begin
  FinishPoint := aFinishPoint;
 end;
 
-procedure TmsLine.DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
+procedure TmsLine.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Proxy : TmsShape;
 begin
@@ -44,14 +44,14 @@ begin
  begin
   l_Proxy := TmsPointCircle.Create(StartPoint, nil {!!!});
   try
-   l_Proxy.DrawTo(aCanvas, aOrigin);
+   l_Proxy.DrawTo(aCtx);
   finally
    FreeAndNil(l_Proxy);
   end;//try..finally
  end//StartPoint = FinishPoint
  else
-  aCanvas.DrawLine(StartPoint.Add(aOrigin),
-                   FinishPoint.Add(aOrigin), 1);
+  aCtx.rCanvas.DrawLine(StartPoint,
+                   FinishPoint, 1);
 end;
 
 class function TmsLine.IsNeedsSecondClick: Boolean;
