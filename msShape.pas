@@ -19,6 +19,7 @@ type
   public
    rCanvas : TCanvas;
    rOrigin : TPointF;
+   rMoving : Boolean; // - определяем, что текущий рисуемый примитив - двигается
    constructor Create(const aCanvas : TCanvas; const aOrigin : TPointF);
  end;//TmsDrawContext
 
@@ -121,7 +122,10 @@ end;
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
 begin
  aCtx.rCanvas.Fill.Color := FillColor;
- aCtx.rCanvas.Stroke.Dash := StrokeDash;
+ if aCtx.rMoving then
+  aCtx.rCanvas.Stroke.Dash := TStrokeDash.sdDashDot
+ else
+  aCtx.rCanvas.Stroke.Dash := StrokeDash;
  aCtx.rCanvas.Stroke.Color := StrokeColor;
  aCtx.rCanvas.Stroke.Thickness := StrokeThickness;
  DoDrawTo(aCtx);
@@ -148,6 +152,7 @@ constructor TmsDrawContext.Create(const aCanvas : TCanvas; const aOrigin : TPoin
 begin
  rCanvas := aCanvas;
  rOrigin := aOrigin;
+ rMoving := false;
 end;
 
 end.

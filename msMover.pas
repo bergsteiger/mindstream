@@ -30,9 +30,13 @@ uses
 procedure TmsMover.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Finish : TPointF;
+ l_Ctx : TmsDrawContext;
 begin
  inherited;
  aCtx.rCanvas.Fill.Color := FillColor;
+
+ l_Ctx.rMoving := true;
+ // А вот тут надо вызвать f_Moving.DrawTo(l_Ctx);
 
  DoDrawDebugInfo(aCtx.rCanvas, 'X=' + FloatToStr(StartPoint.X) + '; ' +
                           'Y=' + FloatToStr(StartPoint.Y) + '; ');
