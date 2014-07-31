@@ -34,8 +34,6 @@ type
   function StrokeColor: TAlphaColor; virtual;
   function StrokeThickness: Single; virtual;
 
-  procedure DoFill(const aCanvas : TCanvas; const aOrigin : TPointF); virtual; abstract;
-
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   class procedure DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
 
