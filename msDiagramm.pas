@@ -77,22 +77,12 @@ begin
 end;
 
 procedure TmsDiagramm.ProcessClick(const aStart: TPointF);
-var
- l_Ctx : TmsDrawContext;
 begin
- if CurrentClass = TmsMover then
- begin
-  l_Ctx := TmsDrawContext.Create(FCanvas, FOrigin);
-  FMovingShape := CurrentClass.Create(aStart, FShapeList);
-  FMovingShape.DrawTo(l_Ctx);
- end
- else begin
   if ShapeIsEnded then
   // - ìû ÍÅ ÄÎÁÀÂËßËÈ ïğèìèòèâà - íàäî åãî ÄÎÁÀÂÈÒÜ
    BeginShape(aStart)
   else
    EndShape(aStart);
- end;// FCurrentAddedShape is TmsMover
 end;
 
 procedure TmsDiagramm.BeginShape(const aStart: TPointF);
