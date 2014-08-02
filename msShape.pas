@@ -33,6 +33,7 @@ type
   function StrokeDash: TStrokeDash; virtual;
   function StrokeColor: TAlphaColor; virtual;
   function StrokeThickness: Single; virtual;
+  function ContainsPt(const aPoint: TPointF): Boolean; virtual;
 
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   class procedure DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
@@ -44,7 +45,6 @@ type
   procedure DrawTo(const aCtx: TmsDrawContext);
   class function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aFinishPoint: TPointF); virtual;
-  function ContainsPt(const aPoint: TPointF): Boolean; virtual; abstract;
   class function ShapeByPt(const aPoint: TPointF; aList: TmsShapeList): TmsShape;
  end;
 
@@ -85,6 +85,11 @@ begin
 Result := 1;
 end;
 
+function TmsShape.ContainsPt(const aPoint: TPointF): Boolean;
+begin
+ Result := False;
+end;
+
 constructor TmsShape.Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList);
 begin
  FStartPoint := aStartPoint;
@@ -119,6 +124,8 @@ end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
 begin
+ DoDrawDebugInfo(aCtx.rCanvas, ClassName);
+
  aCtx.rCanvas.Fill.Color := FillColor;
  if aCtx.rMoving then
  begin

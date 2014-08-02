@@ -6,8 +6,8 @@ uses
  msTriangle,
  System.Math,
  System.UITypes,
- System.Types,
- System.Math.Vectors
+ System.Types
+// System.Math.Vectors
  ;
 
 type

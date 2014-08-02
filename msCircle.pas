@@ -17,6 +17,8 @@ type
   class function InitialRadiusY: Integer; virtual;
   function FillColor: TAlphaColor; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
+ public
+  function ContainsPt(const aPoint: TPointF): Boolean; override;
  end;
 
 implementation
@@ -36,6 +38,11 @@ end;
 function TmsCircle.FillColor: TAlphaColor;
 begin
  Result := TAlphaColorRec.Red;
+end;
+
+function TmsCircle.ContainsPt(const aPoint: TPointF): Boolean;
+begin
+ Result := False;
 end;
 
 procedure TmsCircle.DoDrawTo(const aCtx: TmsDrawContext);

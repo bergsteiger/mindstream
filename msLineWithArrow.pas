@@ -22,8 +22,8 @@ uses
  SysUtils,
  System.Math,
  System.UITypes,
- FMX.Types,
- System.Math.Vectors
+ FMX.Types
+// System.Math.Vectors
  ;
 
 procedure TmsLineWithArrow.DoDrawTo(const aCtx: TmsDrawContext);

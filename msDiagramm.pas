@@ -21,6 +21,7 @@ type
   FShapeList : TmsShapeList;
   FCurrentClass : RmsShape;
   FCurrentAddedShape : TmsShape;
+  FMovingShape : TmsShape;
   FCanvas : TCanvas;
   FOrigin : TPointF;
   f_Name : String;
@@ -48,6 +49,9 @@ type
 
 implementation
 
+uses
+ msMover;
+
 class function TmsDiagramm.AllowedShapes: TmsRegisteredShapes;
 begin
  Result := TmsRegisteredShapes.Instance;
@@ -73,12 +77,22 @@ begin
 end;
 
 procedure TmsDiagramm.ProcessClick(const aStart: TPointF);
+var
+ l_Ctx : TmsDrawContext;
 begin
- if ShapeIsEnded then
- // - ìû ÍÅ ÄÎÁÀÂËßËÈ ïğèìèòèâà - íàäî åãî ÄÎÁÀÂÈÒÜ
-  BeginShape(aStart)
- else
-  EndShape(aStart);
+ if CurrentClass = TmsMover then
+ begin
+  l_Ctx := TmsDrawContext.Create(FCanvas, FOrigin);
+  FMovingShape := CurrentClass.Create(aStart, FShapeList);
+  FMovingShape.DrawTo(l_Ctx);
+ end
+ else begin
+  if ShapeIsEnded then
+  // - ìû ÍÅ ÄÎÁÀÂËßËÈ ïğèìèòèâà - íàäî åãî ÄÎÁÀÂÈÒÜ
+   BeginShape(aStart)
+  else
+   EndShape(aStart);
+ end;// FCurrentAddedShape is TmsMover
 end;
 
 procedure TmsDiagramm.BeginShape(const aStart: TPointF);

@@ -16,7 +16,10 @@ type
   class function CornerRadius: Single; virtual;
   class function InitialWidth: Single; virtual;
   class function InitialHeight: Single; virtual;
+
   function FillColor: TAlphaColor; override;
+  function ContainsPt(const aPoint: TPointF): Boolean; override;
+
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;
 
@@ -32,6 +35,18 @@ end;
 class function TmsRectangle.InitialHeight: Single;
 begin
  Result := 90;
+end;
+
+function TmsRectangle.ContainsPt(const aPoint: TPointF): Boolean;
+var
+ l_Finish : TPointF;
+ l_Rect: TRectF;
+begin
+ Result := False;
+ l_Finish := TPointF.Create(StartPoint.X + InitialWidth,
+                            StartPoint.Y + InitialHeight);
+ l_Rect := TRectF.Create(StartPoint,l_Finish);
+ Result := l_Rect.Contains(aPoint);
 end;
 
 class function TmsRectangle.CornerRadius: Single;
