@@ -15,10 +15,10 @@ type
   f_Moving : TmsShape;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  function StrokeDash: TStrokeDash; override;
+(*  function StrokeDash: TStrokeDash; override;
   function FillColor: TAlphaColor; override;
   function StrokeColor: TAlphaColor; override;
-  function StrokeThickness: Single; override;
+  function StrokeThickness: Single; override;*)
  public
   constructor Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList); override;
  end;//TmsMover
@@ -55,7 +55,7 @@ begin
  //DoDrawDebugInfo(l_Ctx.rCanvas, ClassName);
 end;
 
-function TmsMover.FillColor: TAlphaColor;
+(*function TmsMover.FillColor: TAlphaColor;
 begin
  Result := TAlphaColorRec.Darkred;
 end;
@@ -73,7 +73,7 @@ end;
 function TmsMover.StrokeThickness: Single;
 begin
  Result := 4;
-end;
+end;*)
 
 initialization
  TmsMover.Register;
