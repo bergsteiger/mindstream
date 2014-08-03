@@ -13,6 +13,7 @@ type
  TmsMover = class(TmsShape)
  private
   f_Moving : TmsShape;
+  f_ListWithOtherShapes : TmsShapeList;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
@@ -33,6 +34,7 @@ constructor TmsMover.Create(const aStartPoint: TPointF;
 begin
  inherited;
  f_Moving := ShapeByPt(aStartPoint, aListWithOtherShapes);
+ f_ListWithOtherShapes := aListWithOtherShapes;
 end;
 
 class function TmsMover.IsNeedsSecondClick : Boolean;
@@ -44,6 +46,8 @@ procedure TmsMover.EndTo(const aFinishPoint: TPointF);
 begin
  if (f_Moving <> nil) then
   f_Moving.MoveTo(aFinishPoint);
+ f_ListWithOtherShapes.Remove(Self);
+ // - теперь надо —≈Ѕя удалить
 end;
 
 procedure TmsMover.DoDrawTo(const aCtx: TmsDrawContext);
