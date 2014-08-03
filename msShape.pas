@@ -25,8 +25,7 @@ type
 
  TmsShape = class abstract (TObject)
  private
-  FStartPoint,
-  FFinishPoint: TPointF;
+  FStartPoint: TPointF;
  protected
   class procedure Register;
   function FillColor: TAlphaColor; virtual;
@@ -39,7 +38,6 @@ type
 //  class procedure DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
 
   property StartPoint : TPointF read FStartPoint;
-  property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
   constructor Create(const aStartPoint: TPointF); virtual;
  public
   procedure DrawTo(const aCtx: TmsDrawContext);

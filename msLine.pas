@@ -10,9 +10,12 @@ uses
 
 type
  TmsLine = class(TmsShape)
+ private
+  FFinishPoint: TPointF;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   constructor Create(const aStartPoint: TPointF); override;
+  property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
  public
   class function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aFinishPoint: TPointF); override;
