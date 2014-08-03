@@ -17,7 +17,7 @@ type
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   constructor Create(const aStartPoint: TPointF; aMoving: TmsShape);
  public
-  class function Make(const aStartPoint: TPointF; aShapeByPt: TmsShapeByPt): TmsShape; override;
+  class function Make(const aCtx: TmsMakeShapeContext): TmsShape; override;
   function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aFinishPoint: TPointF; var NeedRemove: Boolean); override;
  end;//TmsMover
@@ -35,13 +35,13 @@ begin
  f_Moving := aMoving;
 end;
 
-class function TmsMover.Make(const aStartPoint: TPointF; aShapeByPt: TmsShapeByPt): TmsShape;
+class function TmsMover.Make(const aCtx: TmsMakeShapeContext): TmsShape;
 var
  l_Moving : TmsShape;
 begin
- l_Moving := aShapeByPt(aStartPoint);
+ l_Moving := aCtx.rShapeByPt(aCtx.rStartPoint);
  if (l_Moving <> nil) then
-  Result := Create(aStartPoint, l_Moving)
+  Result := Create(aCtx.rStartPoint, l_Moving)
  else
   Result := nil;
 end;

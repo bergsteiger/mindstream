@@ -22,6 +22,13 @@ type
    constructor Create(const aCanvas : TCanvas; const aOrigin : TPointF);
  end;//TmsDrawContext
 
+ TmsMakeShapeContext = record
+  public
+   rStartPoint: TPointF;
+   rShapeByPt: TmsShapeByPt;
+   constructor Create(aStartPoint: TPointF; aShapeByPt: TmsShapeByPt);
+ end;//TmsMakeShapeContext
+
  TmsShape = class abstract (TObject)
  private
   FStartPoint: TPointF;
@@ -42,7 +49,7 @@ type
   function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aFinishPoint: TPointF; var NeedRemove: Boolean); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
-  class function Make(const aStartPoint: TPointF; aShapeByPt: TmsShapeByPt): TmsShape; virtual;
+  class function Make(const aCtx: TmsMakeShapeContext): TmsShape; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
  end;//TmsShape
 
@@ -56,9 +63,9 @@ uses
   msRegisteredShapes
   ;
 
-class function TmsShape.Make(const aStartPoint: TPointF; aShapeByPt: TmsShapeByPt): TmsShape;
+class function TmsShape.Make(const aCtx: TmsMakeShapeContext): TmsShape;
 begin
- Result := Create(aStartPoint);
+ Result := Create(aCtx.rStartPoint);
 end;
 
 class procedure TmsShape.Register;
@@ -154,6 +161,12 @@ begin
  rCanvas := aCanvas;
  rOrigin := aOrigin;
  rMoving := false;
+end;
+
+constructor TmsMakeShapeContext.Create(aStartPoint: TPointF; aShapeByPt: TmsShapeByPt);
+begin
+ rStartPoint := aStartPoint;
+ rShapeByPt := aShapeByPt;
 end;
 
 end.
