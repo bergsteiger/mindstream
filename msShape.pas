@@ -45,6 +45,7 @@ type
   procedure DrawTo(const aCtx: TmsDrawContext);
   class function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aFinishPoint: TPointF); virtual;
+  procedure MoveTo(const aFinishPoint: TPointF); virtual;
   class function ShapeByPt(const aPoint: TPointF; aList: TmsShapeList): TmsShape;
  end;
 
@@ -92,12 +93,18 @@ end;
 
 constructor TmsShape.Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList);
 begin
+ inherited Create;
  FStartPoint := aStartPoint;
 end;
 
 procedure TmsShape.EndTo(const aFinishPoint: TPointF);
 begin
  Assert(false, 'Примитив ' + ClassName + ' не может быть завершён');
+end;
+
+procedure TmsShape.MoveTo(const aFinishPoint: TPointF);
+begin
+ FStartPoint := aFinishPoint;
 end;
 
 class function TmsShape.IsNeedsSecondClick : Boolean;

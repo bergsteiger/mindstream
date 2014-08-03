@@ -21,6 +21,8 @@ type
   function StrokeThickness: Single; override;*)
  public
   constructor Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList); override;
+  class function IsNeedsSecondClick : Boolean; override;
+  procedure EndTo(const aFinishPoint: TPointF); override;
  end;//TmsMover
 
 implementation
@@ -35,6 +37,17 @@ constructor TmsMover.Create(const aStartPoint: TPointF;
 begin
  inherited;
  f_Moving := ShapeByPt(aStartPoint, aListWithOtherShapes);
+end;
+
+class function TmsMover.IsNeedsSecondClick : Boolean;
+begin
+ Result := true;
+end;
+
+procedure TmsMover.EndTo(const aFinishPoint: TPointF);
+begin
+ if (f_Moving <> nil) then
+  f_Moving.MoveTo(aFinishPoint);
 end;
 
 procedure TmsMover.DoDrawTo(const aCtx: TmsDrawContext);
