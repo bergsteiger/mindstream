@@ -7,7 +7,10 @@ uses
  System.Math,
  System.UITypes,
  System.Types
- , System.Math.Vectors
+ {$IfDef VER270}
+ , 
+ System.Math.Vectors
+ {$EndIf}
  ;
 
 type

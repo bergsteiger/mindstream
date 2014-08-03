@@ -8,7 +8,10 @@ uses
  FMX.Graphics,
  FMX.Types,
  System.UITypes
- ,System.Math.Vectors
+ {$IfDef VER270}
+ ,
+ System.Math.Vectors
+ {$EndIf}
  ;
 
 type

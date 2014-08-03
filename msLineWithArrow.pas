@@ -6,7 +6,8 @@ uses
  msShape,
  msLine,
  FMX.Graphics,
- System.Types;
+ System.Types
+ ;
 
 type
  TmsLineWithArrow = class(TmsLine)
@@ -23,7 +24,10 @@ uses
  System.Math,
  System.UITypes,
  FMX.Types
- , System.Math.Vectors
+ {$IfDef VER270}
+ , 
+ System.Math.Vectors
+ {$EndIf}
  ;
 
 procedure TmsLineWithArrow.DoDrawTo(const aCtx: TmsDrawContext);
