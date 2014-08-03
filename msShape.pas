@@ -146,13 +146,13 @@ begin
   aCtx.rCanvas.Stroke.Dash := TStrokeDash.sdDashDot;
   aCtx.rCanvas.Stroke.Color := TAlphaColors.Darkmagenta;
   aCtx.rCanvas.Stroke.Thickness := 4;
- end
+ end//aCtx.rMoving
  else
  begin
   aCtx.rCanvas.Stroke.Dash := StrokeDash;
   aCtx.rCanvas.Stroke.Color := StrokeColor;
   aCtx.rCanvas.Stroke.Thickness := StrokeThickness;
- end;
+ end;//aCtx.rMoving
  DoDrawTo(aCtx);
 end;
 
