@@ -13,7 +13,7 @@ type
  TmsShape = class;
 
  TmsShapeList = TObjectList<TmsShape>;
- // - ќбъ€вл€ем список примитивов заранее, чтобы его можно было принимать в конструктор
+ // - ќбъ€вл€ем список примитивов заранее, чтобы его можно было принимать в фабричный метод
 
  TmsDrawContext  = record
   public
@@ -53,8 +53,6 @@ type
  RmsShape = class of TmsShape;
 
  RmsShapeList = TList<RmsShape>;
-
- //TmsShapeList = TObjectList<TmsShape>;
 
 implementation
 
