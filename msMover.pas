@@ -63,20 +63,14 @@ end;
 
 procedure TmsMover.DoDrawTo(const aCtx: TmsDrawContext);
 var
- //l_Finish : TPointF;
  l_Ctx : TmsDrawContext;
 begin
- inherited;
- //aCtx.rCanvas.Fill.Color := FillColor;
-
  if (f_Moving <> nil) then
  begin
   l_Ctx := aCtx;
   l_Ctx.rMoving := True;
   f_Moving.DrawTo(l_Ctx);
  end;//f_Moving <> nil
-
- //DoDrawDebugInfo(l_Ctx.rCanvas, ClassName);
 end;
 
 initialization
