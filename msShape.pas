@@ -39,12 +39,12 @@ type
 
   property StartPoint : TPointF read FStartPoint;
   constructor Create(const aStartPoint: TPointF); virtual;
+  class function ShapeByPt(const aPoint: TPointF; aList: TmsShapeList): TmsShape;
  public
   procedure DrawTo(const aCtx: TmsDrawContext);
   class function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aFinishPoint: TPointF); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
-  class function ShapeByPt(const aPoint: TPointF; aList: TmsShapeList): TmsShape;
   class function Make(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList): TmsShape; virtual;
  end;//TmsShape
 
