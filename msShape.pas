@@ -36,7 +36,7 @@ type
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
 
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
-  class procedure DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
+//  class procedure DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
 
   property StartPoint : TPointF read FStartPoint;
   property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
@@ -105,7 +105,7 @@ begin
  Result := false;
 end;
 
-class procedure TmsShape.DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
+(*class procedure TmsShape.DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
 var
  l_TextRect : TRectF;
  l_OriginalColor : TAlphaColor;
@@ -120,11 +120,11 @@ begin
                    TTextAlign.taLeading,
                    TTextAlign.taTrailing);
   aCanvas.Fill.Color := l_OriginalColor;
-end;
+end;*)
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
 begin
- DoDrawDebugInfo(aCtx.rCanvas, ClassName);
+ //DoDrawDebugInfo(aCtx.rCanvas, ClassName);
 
  aCtx.rCanvas.Fill.Color := FillColor;
  if aCtx.rMoving then
