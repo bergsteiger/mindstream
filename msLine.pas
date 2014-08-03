@@ -17,7 +17,7 @@ type
   constructor Create(const aStartPoint: TPointF); override;
   property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
  public
-  class function IsNeedsSecondClick : Boolean; override;
+  function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aFinishPoint: TPointF; var NeedRemove: Boolean); override;
   procedure MoveTo(const aFinishPoint: TPointF); override;
  end;
@@ -63,9 +63,9 @@ begin
                    FinishPoint, 1);
 end;
 
-class function TmsLine.IsNeedsSecondClick: Boolean;
+function TmsLine.IsNeedsSecondClick: Boolean;
 begin
- Result := True;
+ Result := true;
 end;
 
 initialization

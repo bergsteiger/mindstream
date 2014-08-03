@@ -18,7 +18,7 @@ type
   constructor Create(const aStartPoint: TPointF; aMoving: TmsShape);
  public
   class function Make(const aStartPoint: TPointF; aShapeByPt: TmsShapeByPt): TmsShape; override;
-  class function IsNeedsSecondClick : Boolean; override;
+  function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aFinishPoint: TPointF; var NeedRemove: Boolean); override;
  end;//TmsMover
 
@@ -46,7 +46,7 @@ begin
   Result := nil;
 end;
 
-class function TmsMover.IsNeedsSecondClick : Boolean;
+function TmsMover.IsNeedsSecondClick : Boolean;
 begin
  Result := true;
 end;

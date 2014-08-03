@@ -39,7 +39,7 @@ type
   constructor Create(const aStartPoint: TPointF); virtual;
  public
   procedure DrawTo(const aCtx: TmsDrawContext);
-  class function IsNeedsSecondClick : Boolean; virtual;
+  function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aFinishPoint: TPointF; var NeedRemove: Boolean); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   class function Make(const aStartPoint: TPointF; aShapeByPt: TmsShapeByPt): TmsShape; virtual;
@@ -107,7 +107,7 @@ begin
  FStartPoint := aFinishPoint;
 end;
 
-class function TmsShape.IsNeedsSecondClick : Boolean;
+function TmsShape.IsNeedsSecondClick : Boolean;
 begin
  Result := false;
 end;
