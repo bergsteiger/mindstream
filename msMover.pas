@@ -45,9 +45,7 @@ begin
  Result := nil;
  l_Moving := ShapeByPt(aStartPoint, aListWithOtherShapes);
  if (l_Moving <> nil) then
- begin
   Result := Create(aStartPoint, aListWithOtherShapes, l_Moving);
- end;//l_Moving <> nil
 end;
 
 class function TmsMover.IsNeedsSecondClick : Boolean;
