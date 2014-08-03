@@ -40,7 +40,7 @@ type
 
   property StartPoint : TPointF read FStartPoint;
   property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
-  constructor Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList); virtual;
+  constructor Create(const aStartPoint: TPointF); virtual;
  public
   procedure DrawTo(const aCtx: TmsDrawContext);
   class function IsNeedsSecondClick : Boolean; virtual;
@@ -64,7 +64,7 @@ uses
 
 class function TmsShape.Make(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList): TmsShape;
 begin
- Result := Create(aStartPoint, aListWithOtherShapes);
+ Result := Create(aStartPoint);
 end;
 
 class procedure TmsShape.Register;
@@ -97,7 +97,7 @@ begin
  Result := False;
 end;
 
-constructor TmsShape.Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList);
+constructor TmsShape.Create(const aStartPoint: TPointF);
 begin
  inherited Create;
  FStartPoint := aStartPoint;

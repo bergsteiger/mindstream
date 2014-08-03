@@ -41,7 +41,7 @@ begin
  begin
   l_OriginalMatrix := aCtx.rCanvas.Matrix;
   try
-   l_Proxy := TmsSmallTriangle.Create(FinishPoint, nil {!!!});
+   l_Proxy := TmsSmallTriangle.Create(FinishPoint);
    try
     // in Radian
     l_Angle := GetArrowAngleRotation;

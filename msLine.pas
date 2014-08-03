@@ -12,7 +12,7 @@ type
  TmsLine = class(TmsShape)
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  constructor Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList); override;
+  constructor Create(const aStartPoint: TPointF); override;
  public
   class function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aFinishPoint: TPointF); override;
@@ -25,7 +25,7 @@ uses
  msPointCircle
  ;
 
-constructor TmsLine.Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList);
+constructor TmsLine.Create(const aStartPoint: TPointF);
 begin
  inherited;
  FinishPoint := aStartPoint;
@@ -42,7 +42,7 @@ var
 begin
  if (StartPoint = FinishPoint) then
  begin
-  l_Proxy := TmsPointCircle.Create(StartPoint, nil {!!!});
+  l_Proxy := TmsPointCircle.Create(StartPoint);
   try
    l_Proxy.DrawTo(aCtx);
   finally

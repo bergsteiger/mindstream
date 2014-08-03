@@ -32,7 +32,7 @@ uses
 
 constructor TmsMover.Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList; aMoving: TmsShape);
 begin
- inherited Create(aStartPoint, aListWithOtherShapes);
+ inherited Create(aStartPoint);
  f_ListWithOtherShapes := aListWithOtherShapes;
  f_Moving := aMoving;
 end;
