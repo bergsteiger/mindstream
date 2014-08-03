@@ -47,7 +47,7 @@ type
   procedure EndTo(const aFinishPoint: TPointF); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   class function ShapeByPt(const aPoint: TPointF; aList: TmsShapeList): TmsShape;
-  class function Make(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList): TmsShape;
+  class function Make(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList): TmsShape; virtual;
  end;//TmsShape
 
  RmsShape = class of TmsShape;

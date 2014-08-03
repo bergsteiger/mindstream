@@ -12,10 +12,10 @@ type
  TmsLine = class(TmsShape)
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
+  constructor Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList); override;
  public
   class function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aFinishPoint: TPointF); override;
-  constructor Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList); override;
  end;
 
 implementation
