@@ -16,6 +16,7 @@ type
  public
   class function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aFinishPoint: TPointF); override;
+  procedure MoveTo(const aFinishPoint: TPointF); override;
  end;
 
 implementation
@@ -34,6 +35,11 @@ end;
 procedure TmsLine.EndTo(const aFinishPoint: TPointF);
 begin
  FinishPoint := aFinishPoint;
+end;
+
+procedure TmsLine.MoveTo(const aFinishPoint: TPointF);
+begin
+ Assert(false, 'Примитив ' + ClassName + ' не может быть перемещён');
 end;
 
 procedure TmsLine.DoDrawTo(const aCtx: TmsDrawContext);
