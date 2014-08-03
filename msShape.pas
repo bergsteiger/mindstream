@@ -12,8 +12,7 @@ uses
 type
  TmsShape = class;
 
- TmsShapeList = TObjectList<TmsShape>;
- // - Объявляем список примитивов заранее, чтобы его можно было принимать в фабричный метод
+ TmsShapeByPt = function (const aPoint: TPointF): TmsShape of object;
 
  TmsDrawContext  = record
   public
@@ -32,20 +31,19 @@ type
   function StrokeDash: TStrokeDash; virtual;
   function StrokeColor: TAlphaColor; virtual;
   function StrokeThickness: Single; virtual;
-  function ContainsPt(const aPoint: TPointF): Boolean; virtual;
 
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
 //  class procedure DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
 
   property StartPoint : TPointF read FStartPoint;
   constructor Create(const aStartPoint: TPointF); virtual;
-  class function ShapeByPt(const aPoint: TPointF; aList: TmsShapeList): TmsShape;
  public
   procedure DrawTo(const aCtx: TmsDrawContext);
   class function IsNeedsSecondClick : Boolean; virtual;
-  procedure EndTo(const aFinishPoint: TPointF); virtual;
+  procedure EndTo(const aFinishPoint: TPointF; var NeedRemove: Boolean); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
-  class function Make(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList): TmsShape; virtual;
+  class function Make(const aStartPoint: TPointF; aShapeByPt: TmsShapeByPt): TmsShape; virtual;
+  function ContainsPt(const aPoint: TPointF): Boolean; virtual;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
@@ -58,7 +56,7 @@ uses
   msRegisteredShapes
   ;
 
-class function TmsShape.Make(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList): TmsShape;
+class function TmsShape.Make(const aStartPoint: TPointF; aShapeByPt: TmsShapeByPt): TmsShape;
 begin
  Result := Create(aStartPoint);
 end;
@@ -99,7 +97,7 @@ begin
  FStartPoint := aStartPoint;
 end;
 
-procedure TmsShape.EndTo(const aFinishPoint: TPointF);
+procedure TmsShape.EndTo(const aFinishPoint: TPointF; var NeedRemove: Boolean);
 begin
  Assert(false, 'Примитив ' + ClassName + ' не может быть завершён');
 end;
@@ -149,23 +147,6 @@ begin
   aCtx.rCanvas.Stroke.Thickness := StrokeThickness;
  end;
  DoDrawTo(aCtx);
-end;
-
-class function TmsShape.ShapeByPt(const aPoint: TPointF; aList: TmsShapeList): TmsShape;
-var
- l_Shape : TmsShape;
- l_Index : Integer;
-begin
- Result := nil;
- for l_Index := aList.Count - 1 downto 0 do
- begin
-  l_Shape := aList.Items[l_Index];
-  if l_Shape.ContainsPt(aPoint) then
-  begin
-   Result := l_Shape;
-   Exit;
-  end;//l_Shape.ContainsPt(aPoint)
- end;//for l_Index
 end;
 
 constructor TmsDrawContext.Create(const aCanvas : TCanvas; const aOrigin : TPointF);

@@ -16,6 +16,8 @@ uses
  ;
 
 type
+ TmsShapeList = TObjectList<TmsShape>;
+
  TmsDiagramm = class(TObject)
  private
   FShapeList : TmsShapeList;
@@ -33,6 +35,7 @@ type
   function ShapeIsEnded: Boolean;
   class function AllowedShapes: TmsRegisteredShapes;
   procedure CanvasChanged(aCanvas: TCanvas);
+  function ShapeByPt(const aPoint: TPointF): TmsShape;
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
  public
   constructor Create(anImage: TImage; const aName: String);
@@ -88,7 +91,7 @@ end;
 procedure TmsDiagramm.BeginShape(const aStart: TPointF);
 begin
  Assert(CurrentClass <> nil);
- FCurrentAddedShape := CurrentClass.Make(aStart, FShapeList);
+ FCurrentAddedShape := CurrentClass.Make(aStart, Self.ShapeByPt);
  if (FCurrentAddedShape <> nil) then
  begin
   FShapeList.Add(FCurrentAddedShape);
@@ -154,9 +157,14 @@ begin
 end;
 
 procedure TmsDiagramm.EndShape(const aFinish: TPointF);
+var
+ l_NeedRemove : Boolean;
 begin
  Assert(CurrentAddedShape <> nil);
- CurrentAddedShape.EndTo(aFinish);
+ l_NeedRemove := false;
+ CurrentAddedShape.EndTo(aFinish, l_NeedRemove);
+ if l_NeedRemove then
+  FShapeList.Remove(CurrentAddedShape);
  FCurrentAddedShape := nil;
  Invalidate;
 end;
@@ -175,6 +183,23 @@ end;
 function TmsDiagramm.ShapeIsEnded: Boolean;
 begin
  Result := (CurrentAddedShape = nil);
+end;
+
+function TmsDiagramm.ShapeByPt(const aPoint: TPointF): TmsShape;
+var
+ l_Shape : TmsShape;
+ l_Index : Integer;
+begin
+ Result := nil;
+ for l_Index := FShapeList.Count - 1 downto 0 do
+ begin
+  l_Shape := FShapeList.Items[l_Index];
+  if l_Shape.ContainsPt(aPoint) then
+  begin
+   Result := l_Shape;
+   Exit;
+  end;//l_Shape.ContainsPt(aPoint)
+ end;//for l_Index
 end;
 
 end.

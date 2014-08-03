@@ -13,14 +13,13 @@ type
  TmsMover = class(TmsShape)
  private
   f_Moving : TmsShape;
-  f_ListWithOtherShapes : TmsShapeList;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  constructor Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList; aMoving: TmsShape);
+  constructor Create(const aStartPoint: TPointF; aMoving: TmsShape);
  public
-  class function Make(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList): TmsShape; override;
+  class function Make(const aStartPoint: TPointF; aShapeByPt: TmsShapeByPt): TmsShape; override;
   class function IsNeedsSecondClick : Boolean; override;
-  procedure EndTo(const aFinishPoint: TPointF); override;
+  procedure EndTo(const aFinishPoint: TPointF; var NeedRemove: Boolean); override;
  end;//TmsMover
 
 implementation
@@ -30,21 +29,19 @@ uses
  FMX.Types,
  System.SysUtils;
 
-constructor TmsMover.Create(const aStartPoint: TPointF; aListWithOtherShapes: TmsShapeList; aMoving: TmsShape);
+constructor TmsMover.Create(const aStartPoint: TPointF; aMoving: TmsShape);
 begin
  inherited Create(aStartPoint);
- f_ListWithOtherShapes := aListWithOtherShapes;
  f_Moving := aMoving;
 end;
 
-class function TmsMover.Make(const aStartPoint: TPointF;
-  aListWithOtherShapes: TmsShapeList): TmsShape;
+class function TmsMover.Make(const aStartPoint: TPointF; aShapeByPt: TmsShapeByPt): TmsShape;
 var
  l_Moving : TmsShape;
 begin
- l_Moving := ShapeByPt(aStartPoint, aListWithOtherShapes);
+ l_Moving := aShapeByPt(aStartPoint);
  if (l_Moving <> nil) then
-  Result := Create(aStartPoint, aListWithOtherShapes, l_Moving)
+  Result := Create(aStartPoint, l_Moving)
  else
   Result := nil;
 end;
@@ -54,11 +51,11 @@ begin
  Result := true;
 end;
 
-procedure TmsMover.EndTo(const aFinishPoint: TPointF);
+procedure TmsMover.EndTo(const aFinishPoint: TPointF; var NeedRemove: Boolean);
 begin
  if (f_Moving <> nil) then
   f_Moving.MoveTo(aFinishPoint);
- f_ListWithOtherShapes.Remove(Self);
+ NeedRemove := true;
  // - теперь надо —≈Ѕя удалить
 end;
 
