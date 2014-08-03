@@ -42,10 +42,11 @@ class function TmsMover.Make(const aStartPoint: TPointF;
 var
  l_Moving : TmsShape;
 begin
- Result := nil;
  l_Moving := ShapeByPt(aStartPoint, aListWithOtherShapes);
  if (l_Moving <> nil) then
-  Result := Create(aStartPoint, aListWithOtherShapes, l_Moving);
+  Result := Create(aStartPoint, aListWithOtherShapes, l_Moving)
+ else
+  Result := nil;
 end;
 
 class function TmsMover.IsNeedsSecondClick : Boolean;
