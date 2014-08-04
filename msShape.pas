@@ -63,7 +63,6 @@ type
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
 
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
-//  class procedure DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
 
   property StartPoint : TPointF read FStartPoint;
   constructor Create(const aStartPoint: TPointF); virtual;
