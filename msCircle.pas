@@ -38,18 +38,18 @@ end;
 
 function TmsCircle.ContainsPt(const aPoint: TPointF): Boolean;
 var
- f_StartRectPoint, f_FinishRectPoint : TPointF;
+ l_StartRectPoint, l_FinishRectPoint : TPointF;
  l_x0, l_y0, l_a, l_b : Integer;
 begin
  Result := False;
 
- f_StartRectPoint := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
- f_FinishRectPoint := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
+ l_StartRectPoint := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
+ l_FinishRectPoint := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
 
- l_x0 := Round(f_StartRectPoint.X + f_FinishRectPoint.X) div 2;
- l_y0 := Round(f_StartRectPoint.Y + f_FinishRectPoint.Y) div 2;
- l_a := Round(f_FinishRectPoint.X - f_StartRectPoint.X) div 2;
- l_b := Round(f_FinishRectPoint.Y - f_StartRectPoint.Y) div 2;
+ l_x0 := Round(l_StartRectPoint.X + l_FinishRectPoint.X) div 2;
+ l_y0 := Round(l_StartRectPoint.Y + l_FinishRectPoint.Y) div 2;
+ l_a := Round(l_FinishRectPoint.X - l_StartRectPoint.X) div 2;
+ l_b := Round(l_FinishRectPoint.Y - l_StartRectPoint.Y) div 2;
 
  Result := Sqr((aPoint.X - l_x0)/l_a)+
            Sqr((aPoint.Y - l_y0)/l_b) <= 1.0;
@@ -57,13 +57,13 @@ end;
 
 procedure TmsCircle.DoDrawTo(const aCtx: TmsDrawContext);
 var
- f_StartRectPoint, f_FinishRectPoint : TPointF;
+ l_StartRectPoint, l_FinishRectPoint : TPointF;
 begin
- f_StartRectPoint := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
- f_FinishRectPoint := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
+ l_StartRectPoint := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
+ l_FinishRectPoint := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
 
- aCtx.rCanvas.DrawEllipse(TRectF.Create(f_StartRectPoint, f_FinishRectPoint), 1);
- aCtx.rCanvas.FillEllipse(TRectF.Create(f_StartRectPoint, f_FinishRectPoint), 0.5);
+ aCtx.rCanvas.DrawEllipse(TRectF.Create(l_StartRectPoint, l_FinishRectPoint), 1);
+ aCtx.rCanvas.FillEllipse(TRectF.Create(l_StartRectPoint, l_FinishRectPoint), 0.5);
 end;
 
 function TmsCircle.DrawOptionsContext: TmsDrawOptionsContext;
