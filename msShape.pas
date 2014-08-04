@@ -58,7 +58,6 @@ type
   FStartPoint: TPointF;
  protected
   class procedure Register;
-  function StrokeThickness: Single; virtual;
 
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
@@ -96,11 +95,6 @@ end;
 class procedure TmsShape.Register;
 begin
  TmsRegisteredShapes.Instance.Register(Self);
-end;
-
-function TmsShape.StrokeThickness: Single;
-begin
- Result := 1;
 end;
 
 function TmsShape.ContainsPt(const aPoint: TPointF): Boolean;
