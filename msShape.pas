@@ -10,6 +10,13 @@ uses
  ;
 
 type
+ TmsInterfaced = class abstract(TObject)
+ protected
+  function QueryInterface(const IID: TGUID; out Obj): HResult; stdcall;
+  function _AddRef: Integer; stdcall;
+  function _Release: Integer; stdcall;
+ end;//TmsInterfaced
+
  TmsShape = class;
 
  ImsShapeByPt = interface
@@ -171,6 +178,21 @@ constructor TmsMakeShapeContext.Create(aStartPoint: TPointF; const aShapeByPt: I
 begin
  rStartPoint := aStartPoint;
  rShapeByPt := aShapeByPt;
+end;
+
+function TmsInterfaced.QueryInterface(const IID: TGUID; out Obj): HResult;
+begin
+ Result := E_NoInterface;
+end;
+
+function TmsInterfaced._AddRef: Integer;
+begin
+ Result := -1;
+end;
+
+function TmsInterfaced._Release: Integer;
+begin
+ Result := -1;
 end;
 
 end.
