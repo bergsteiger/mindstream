@@ -62,14 +62,11 @@ type
  TmsShape = class abstract (TObject)
  private
   FStartPoint: TPointF;
+  function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
  protected
   class procedure Register;
-
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
-  function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
-
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
-
   property StartPoint : TPointF read FStartPoint;
   constructor Create(const aStartPoint: TPointF); virtual;
  public
