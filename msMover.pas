@@ -19,7 +19,7 @@ type
  public
   class function Make(const aCtx: TmsMakeShapeContext): TmsShape; override;
   function IsNeedsSecondClick : Boolean; override;
-  procedure EndTo(const aFinishPoint: TPointF; var NeedRemove: Boolean); override;
+  procedure EndTo(const aFinishPoint: TPointF; const aRemover: ImsShapeRemover); override;
  end;//TmsMover
 
 implementation
@@ -51,11 +51,12 @@ begin
  Result := true;
 end;
 
-procedure TmsMover.EndTo(const aFinishPoint: TPointF; var NeedRemove: Boolean);
+procedure TmsMover.EndTo(const aFinishPoint: TPointF; const aRemover: ImsShapeRemover);
 begin
  if (f_Moving <> nil) then
   f_Moving.MoveTo(aFinishPoint);
- NeedRemove := true;
+ f_Moving := nil;
+ aRemover.RemoveShape(Self);
  // - теперь надо —≈Ѕя удалить
 end;
 

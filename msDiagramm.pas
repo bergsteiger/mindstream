@@ -18,7 +18,7 @@ uses
 type
  TmsShapeList = TObjectList<TmsShape>;
 
- TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt)
+ TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapeRemover)
  private
   FShapeList : TmsShapeList;
   FCurrentClass : RmsShape;
@@ -36,6 +36,7 @@ type
   class function AllowedShapes: TmsRegisteredShapes;
   procedure CanvasChanged(aCanvas: TCanvas);
   function ShapeByPt(const aPoint: TPointF): TmsShape;
+  procedure RemoveShape(aShape: TmsShape);
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
  public
   constructor Create(anImage: TImage; const aName: String);
@@ -157,14 +158,9 @@ begin
 end;
 
 procedure TmsDiagramm.EndShape(const aFinish: TPointF);
-var
- l_NeedRemove : Boolean;
 begin
  Assert(CurrentAddedShape <> nil);
- l_NeedRemove := false;
- CurrentAddedShape.EndTo(aFinish, l_NeedRemove);
- if l_NeedRemove then
-  FShapeList.Remove(CurrentAddedShape);
+ CurrentAddedShape.EndTo(aFinish, Self);
  FCurrentAddedShape := nil;
  Invalidate;
 end;
@@ -200,6 +196,11 @@ begin
    Exit;
   end;//l_Shape.ContainsPt(aPoint)
  end;//for l_Index
+end;
+
+procedure TmsDiagramm.RemoveShape(aShape: TmsShape);
+begin
+ FShapeList.Remove(aShape);
 end;
 
 end.

@@ -23,6 +23,10 @@ type
   function ShapeByPt(const aPoint: TPointF): TmsShape;
  end;//ImsShapeByPt
 
+ ImsShapeRemover = interface
+  procedure RemoveShape(aShape: TmsShape);
+ end;//ImsShapeRemover
+
  TmsShapeByPt = function (const aPoint: TPointF): TmsShape of object;
 
  TmsDrawContext  = record
@@ -58,7 +62,7 @@ type
  public
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean; virtual;
-  procedure EndTo(const aFinishPoint: TPointF; var NeedRemove: Boolean); virtual;
+  procedure EndTo(const aFinishPoint: TPointF; const aRemover: ImsShapeRemover); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   class function Make(const aCtx: TmsMakeShapeContext): TmsShape; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
@@ -115,7 +119,7 @@ begin
  FStartPoint := aStartPoint;
 end;
 
-procedure TmsShape.EndTo(const aFinishPoint: TPointF; var NeedRemove: Boolean);
+procedure TmsShape.EndTo(const aFinishPoint: TPointF; const aRemover: ImsShapeRemover);
 begin
  Assert(false, 'Примитив ' + ClassName + ' не может быть завершён');
 end;
