@@ -48,6 +48,8 @@ type
    constructor Create(aStartPoint: TPointF; const aShapesController: ImsShapesController);
  end;//TmsMakeShapeContext
 
+ TmsEndShapeContext = TmsMakeShapeContext;
+
  TmsDrawOptionsContext = record
   public
    rFillColor: TAlphaColor;
@@ -73,7 +75,7 @@ type
  public
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean; virtual;
-  procedure EndTo(const aFinishPoint: TPointF; const aRemover: ImsShapeRemover); virtual;
+  procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
   // - тут ќѕя“№ Ќјѕ–јЎ»¬ј≈“—я "котекст"
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   class function Make(const aCtx: TmsMakeShapeContext): TmsShape; virtual;
@@ -111,7 +113,7 @@ begin
  FStartPoint := aStartPoint;
 end;
 
-procedure TmsShape.EndTo(const aFinishPoint: TPointF; const aRemover: ImsShapeRemover);
+procedure TmsShape.EndTo(const aCtx: TmsEndShapeContext);
 begin
  Assert(false, 'ѕримитив ' + ClassName + ' не может быть завершЄн');
 end;

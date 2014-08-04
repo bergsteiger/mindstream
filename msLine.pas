@@ -18,7 +18,7 @@ type
   property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
  public
   function IsNeedsSecondClick : Boolean; override;
-  procedure EndTo(const aFinishPoint: TPointF; const aRemover: ImsShapeRemover); override;
+  procedure EndTo(const aCtx: TmsEndShapeContext); override;
   procedure MoveTo(const aFinishPoint: TPointF); override;
  end;
 
@@ -35,9 +35,9 @@ begin
  FinishPoint := aStartPoint;
 end;
 
-procedure TmsLine.EndTo(const aFinishPoint: TPointF; const aRemover: ImsShapeRemover);
+procedure TmsLine.EndTo(const aCtx: TmsEndShapeContext);
 begin
- FinishPoint := aFinishPoint;
+ FinishPoint := aCtx.rStartPoint;
 end;
 
 procedure TmsLine.MoveTo(const aFinishPoint: TPointF);

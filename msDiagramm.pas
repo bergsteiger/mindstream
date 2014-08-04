@@ -160,7 +160,7 @@ end;
 procedure TmsDiagramm.EndShape(const aFinish: TPointF);
 begin
  Assert(CurrentAddedShape <> nil);
- CurrentAddedShape.EndTo(aFinish, Self);
+ CurrentAddedShape.EndTo(TmsEndShapeContext.Create(aFinish, Self));
  FCurrentAddedShape := nil;
  Invalidate;
 end;
