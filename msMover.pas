@@ -39,7 +39,7 @@ class function TmsMover.Make(const aCtx: TmsMakeShapeContext): TmsShape;
 var
  l_Moving : TmsShape;
 begin
- l_Moving := aCtx.rShapeByPt(aCtx.rStartPoint);
+ l_Moving := aCtx.rShapeByPt.ShapeByPt(aCtx.rStartPoint);
  if (l_Moving <> nil) then
   Result := Create(aCtx.rStartPoint, l_Moving)
  else

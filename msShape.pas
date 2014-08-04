@@ -12,6 +12,10 @@ uses
 type
  TmsShape = class;
 
+ ImsShapeByPt = interface
+  function ShapeByPt(const aPoint: TPointF): TmsShape;
+ end;//ImsShapeByPt
+
  TmsShapeByPt = function (const aPoint: TPointF): TmsShape of object;
 
  TmsDrawContext  = record
@@ -25,8 +29,8 @@ type
  TmsMakeShapeContext = record
   public
    rStartPoint: TPointF;
-   rShapeByPt: TmsShapeByPt;
-   constructor Create(aStartPoint: TPointF; aShapeByPt: TmsShapeByPt);
+   rShapeByPt: ImsShapeByPt;
+   constructor Create(aStartPoint: TPointF; const aShapeByPt: ImsShapeByPt);
  end;//TmsMakeShapeContext
 
  TmsShape = class abstract (TObject)
@@ -163,7 +167,7 @@ begin
  rMoving := false;
 end;
 
-constructor TmsMakeShapeContext.Create(aStartPoint: TPointF; aShapeByPt: TmsShapeByPt);
+constructor TmsMakeShapeContext.Create(aStartPoint: TPointF; const aShapeByPt: ImsShapeByPt);
 begin
  rStartPoint := aStartPoint;
  rShapeByPt := aShapeByPt;

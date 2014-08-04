@@ -18,7 +18,11 @@ uses
 type
  TmsShapeList = TObjectList<TmsShape>;
 
- TmsDiagramm = class(TObject)
+ TmsDiagramm = class(TObject, ImsShapeByPt)
+ private
+  function QueryInterface(const IID: TGUID; out Obj): HResult; stdcall;
+  function _AddRef: Integer; stdcall;
+  function _Release: Integer; stdcall;
  private
   FShapeList : TmsShapeList;
   FCurrentClass : RmsShape;
@@ -91,7 +95,7 @@ end;
 procedure TmsDiagramm.BeginShape(const aStart: TPointF);
 begin
  Assert(CurrentClass <> nil);
- FCurrentAddedShape := CurrentClass.Make(TmsMakeShapeContext.Create(aStart, Self.ShapeByPt));
+ FCurrentAddedShape := CurrentClass.Make(TmsMakeShapeContext.Create(aStart, Self));
  if (FCurrentAddedShape <> nil) then
  begin
   FShapeList.Add(FCurrentAddedShape);
@@ -200,6 +204,21 @@ begin
    Exit;
   end;//l_Shape.ContainsPt(aPoint)
  end;//for l_Index
+end;
+
+function TmsDiagramm.QueryInterface(const IID: TGUID; out Obj): HResult;
+begin
+ Result := E_NoInterface;
+end;
+
+function TmsDiagramm._AddRef: Integer;
+begin
+ Result := -1;
+end;
+
+function TmsDiagramm._Release: Integer;
+begin
+ Result := -1;
 end;
 
 end.
