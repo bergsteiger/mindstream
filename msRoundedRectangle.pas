@@ -18,7 +18,7 @@ type
   class function InitialWidth: Single; override;
   class function InitialHeight: Single; override;
 
-  function DrawOptionsContext: TmsDrawOptionsContext; override;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsRoundedRectangle
 
 implementation
@@ -38,9 +38,10 @@ begin
  Result := InitialWidth;
 end;
 
-function TmsRoundedRectangle.DrawOptionsContext: TmsDrawOptionsContext;
+procedure TmsRoundedRectangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
- Result.FillColor := TAlphaColorRec.Blue;
+ inherited;
+ theCtx.rFillColor := TAlphaColorRec.Blue;
 end;
 
 initialization

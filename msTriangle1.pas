@@ -18,16 +18,17 @@ type
  TmsTriangle1 = class(TmsTriangle)
  protected
   function Polygon: TPolygon; override;
-  function DrawOptionsContext: TmsDrawOptionsContext; override;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsTriangle1
 
 implementation
 
 
 
-function TmsTriangle1.DrawOptionsContext: TmsDrawOptionsContext;
+procedure TmsTriangle1.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
- Result.FillColor := TAlphaColorRec.Coral;
+ inherited;
+ theCtx.rFillColor := TAlphaColorRec.Coral;
 end;
 
 function TmsTriangle1.Polygon: TPolygon;

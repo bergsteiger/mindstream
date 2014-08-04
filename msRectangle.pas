@@ -20,7 +20,7 @@ type
   class function InitialHeight: Single; virtual;
 
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  function DrawOptionsContext: TmsDrawOptionsContext; override;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
   function ContainsPt(const aPoint: TPointF): Boolean; override;
  end;
@@ -83,9 +83,10 @@ begin
                   TCornerType.ctRound);
 end;
 
-function TmsRectangle.DrawOptionsContext: TmsDrawOptionsContext;
+procedure TmsRectangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
- Result.FillColor := TAlphaColorRec.White;;
+ inherited;
+ theCtx.rFillColor := TAlphaColorRec.White;;
 end;
 
 initialization

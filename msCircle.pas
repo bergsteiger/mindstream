@@ -16,7 +16,7 @@ type
   class function InitialRadiusX: Integer; virtual;
   class function InitialRadiusY: Integer; virtual;
 
-  function DrawOptionsContext: TmsDrawOptionsContext; override;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
   function ContainsPt(const aPoint: TPointF): Boolean; override;
@@ -66,9 +66,10 @@ begin
  aCtx.rCanvas.FillEllipse(TRectF.Create(l_StartRectPoint, l_FinishRectPoint), 0.5);
 end;
 
-function TmsCircle.DrawOptionsContext: TmsDrawOptionsContext;
+procedure TmsCircle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
- Result.FillColor := TAlphaColorRec.Red;
+ inherited;
+ theCtx.rFillColor := TAlphaColorRec.Red;
 end;
 
 initialization

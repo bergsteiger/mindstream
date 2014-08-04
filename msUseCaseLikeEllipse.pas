@@ -13,7 +13,7 @@ type
  protected
   class function InitialRadiusY: Integer; override;
 
-  function DrawOptionsContext: TmsDrawOptionsContext; override;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsUseCaseLikeEllipse
 
 implementation
@@ -23,9 +23,10 @@ begin
  Result := 35;
 end;
 
-function TmsUseCaseLikeEllipse.DrawOptionsContext: TmsDrawOptionsContext;
+procedure TmsUseCaseLikeEllipse.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
- Result.FillColor := TAlphaColorRec.Yellow;
+ inherited;
+ theCtx.rFillColor := TAlphaColorRec.Yellow;
 end;
 
 initialization

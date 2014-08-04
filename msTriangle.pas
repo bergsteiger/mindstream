@@ -20,7 +20,7 @@ type
   class function InitialHeight: Single; virtual;
   function Polygon: TPolygon; virtual;
 
-  function DrawOptionsContext: TmsDrawOptionsContext; override;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
 
   function ContainsPt(const aPoint: TPointF): Boolean; override;
 
@@ -78,10 +78,11 @@ begin
  aCtx.rCanvas.FillPolygon(l_P, 0.5);
 end;
 
-function TmsTriangle.DrawOptionsContext: TmsDrawOptionsContext;
+procedure TmsTriangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
- Result.FillColor := TAlphaColorRec.Green;
- end;
+ inherited;
+ theCtx.rFillColor := TAlphaColorRec.Green;
+end;
 
 initialization
  TmsTriangle.Register;

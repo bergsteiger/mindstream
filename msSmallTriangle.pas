@@ -14,7 +14,7 @@ uses
 type
  TmsSmallTriangle = class(TmsTriangle1)
  protected
-  function DrawOptionsContext: TmsDrawOptionsContext; override;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
   class function InitialHeight: Single; override;
  end;//TmsSmallTriangle
@@ -25,11 +25,10 @@ uses
  System.Math
  ;
 
-{ TmsSmallTriangle }
-
-function TmsSmallTriangle.DrawOptionsContext: TmsDrawOptionsContext;
+procedure TmsSmallTriangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
- Result.FillColor := TAlphaColorRec.Aquamarine;
+ inherited;
+ theCtx.rFillColor := TAlphaColorRec.Aquamarine;
 end;
 
 class function TmsSmallTriangle.InitialHeight: Single;
