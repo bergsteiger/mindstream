@@ -58,7 +58,6 @@ type
   FStartPoint: TPointF;
  protected
   class procedure Register;
-  function StrokeDash: TStrokeDash; virtual;
   function StrokeColor: TAlphaColor; virtual;
   function StrokeThickness: Single; virtual;
 
@@ -103,11 +102,6 @@ end;
 function TmsShape.StrokeColor: TAlphaColor;
 begin
  Result := TAlphaColorRec.Black;
-end;
-
-function TmsShape.StrokeDash: TStrokeDash;
-begin
- Result := TStrokeDash.sdSolid;
 end;
 
 function TmsShape.StrokeThickness: Single;

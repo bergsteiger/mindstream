@@ -12,8 +12,6 @@ uses
 
 type
  TmsRectangle = class(TmsShape)
-  private
-    function FillColor: TAlphaColor;
  protected
   class function CornerRadius: Single; virtual;
   class function InitialWidth: Single; virtual;
@@ -54,11 +52,6 @@ end;
 class function TmsRectangle.CornerRadius: Single;
 begin
  Result := 0;
-end;
-
-function TmsRectangle.FillColor: TAlphaColor;
-begin
- Result := TAlphaColorRec.White;
 end;
 
 procedure TmsRectangle.DoDrawTo(const aCtx: TmsDrawContext);
