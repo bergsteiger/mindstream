@@ -15,10 +15,11 @@ type
  protected
   class function InitialRadiusX: Integer; virtual;
   class function InitialRadiusY: Integer; virtual;
+
   function FillColor: TAlphaColor; override;
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
- public
   function ContainsPt(const aPoint: TPointF): Boolean; override;
+
+  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;
 
 implementation
@@ -41,23 +42,33 @@ begin
 end;
 
 function TmsCircle.ContainsPt(const aPoint: TPointF): Boolean;
+var
+ f_StartRectPoint, f_FinishRectPoint : TPointF;
+ l_x0, l_y0, l_a, l_b : Integer;
 begin
  Result := False;
+
+ f_StartRectPoint := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
+ f_FinishRectPoint := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
+
+ l_x0 := Round(f_StartRectPoint.X + f_FinishRectPoint.X) div 2;
+ l_y0 := Round(f_StartRectPoint.Y + f_FinishRectPoint.Y) div 2;
+ l_a := Round(f_FinishRectPoint.X - f_StartRectPoint.X) div 2;
+ l_b := Round(f_FinishRectPoint.Y - f_StartRectPoint.Y) div 2;
+
+ Result := Sqr((aPoint.X - l_x0)/l_a)+
+           Sqr((aPoint.Y - l_y0)/l_b) <= 1.0;
 end;
 
 procedure TmsCircle.DoDrawTo(const aCtx: TmsDrawContext);
 var
- l_Start  : TPointF;
- l_Finish : TPointF;
+ f_StartRectPoint, f_FinishRectPoint : TPointF;
 begin
- l_Start := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
- l_Finish := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
- aCtx.rCanvas.DrawEllipse(TRectF.Create(l_Start,
-                                   l_Finish),
-                     1);
- aCtx.rCanvas.FillEllipse(TRectF.Create(l_Start,
-                                   l_Finish),
-                     0.5);
+ f_StartRectPoint := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
+ f_FinishRectPoint := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
+
+ aCtx.rCanvas.DrawEllipse(TRectF.Create(f_StartRectPoint, f_FinishRectPoint), 1);
+ aCtx.rCanvas.FillEllipse(TRectF.Create(f_StartRectPoint, f_FinishRectPoint), 0.5);
 end;
 
 initialization

@@ -20,6 +20,8 @@ type
   class function InitialHeight: Single; virtual;
   function Polygon: TPolygon; virtual;
   function FillColor: TAlphaColor; override;
+  function ContainsPt(const aPoint: TPointF): Boolean; override;
+
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsTriangle
 
@@ -48,6 +50,26 @@ begin
  Result[2] := TPointF.Create(StartPoint.X,
                         StartPoint.Y - InitialHeight / 2);
  Result[3] := Result[0];
+end;
+
+function TmsTriangle.ContainsPt(const aPoint: TPointF): Boolean;
+var
+ i,j : integer;
+Begin
+ Result := False;
+ j := High(Polygon);
+ For i := Low(Polygon) to High(Polygon) do begin
+  if (
+      (((Polygon[i].y <= aPoint.y) and (aPoint.y < Polygon[j].y)) or
+         ((Polygon[j].y <= aPoint.y) and (aPoint.y < Polygon[i].y)))
+      and
+        (aPoint.x < ((Polygon[j].x - Polygon[i].x) *
+                     (aPoint.y - Polygon[i].y) /
+                     (Polygon[j].y - Polygon[i].y) + Polygon[i].x))
+     ) then
+   Result := not Result;
+  j := i
+ end;
 end;
 
 procedure TmsTriangle.DoDrawTo(const aCtx: TmsDrawContext);
