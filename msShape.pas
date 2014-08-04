@@ -76,7 +76,6 @@ type
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
-  // - òóò ÎÏßÒÜ ÍÀÏĞÀØÈÂÀÅÒÑß "êîòåêñò"
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   class function Make(const aCtx: TmsMakeShapeContext): TmsShape; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
