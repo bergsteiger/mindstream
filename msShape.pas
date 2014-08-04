@@ -27,6 +27,9 @@ type
   procedure RemoveShape(aShape: TmsShape);
  end;//ImsShapeRemover
 
+ ImsShapesController = interface(ImsShapeByPt)
+ end;//ImsShapesController
+
  TmsShapeByPt = function (const aPoint: TPointF): TmsShape of object;
 
  TmsDrawContext  = record
@@ -40,8 +43,8 @@ type
  TmsMakeShapeContext = record
   public
    rStartPoint: TPointF;
-   rShapeByPt: ImsShapeByPt;
-   constructor Create(aStartPoint: TPointF; const aShapeByPt: ImsShapeByPt);
+   rShapesController: ImsShapesController;
+   constructor Create(aStartPoint: TPointF; const aShapesController: ImsShapesController);
  end;//TmsMakeShapeContext
 
  TmsDrawOptionsContext = record
@@ -152,10 +155,10 @@ begin
  rMoving := false;
 end;
 
-constructor TmsMakeShapeContext.Create(aStartPoint: TPointF; const aShapeByPt: ImsShapeByPt);
+constructor TmsMakeShapeContext.Create(aStartPoint: TPointF; const aShapesController: ImsShapesController);
 begin
  rStartPoint := aStartPoint;
- rShapeByPt := aShapeByPt;
+ rShapesController := aShapesController;
 end;
 
 function TmsInterfacedNonRefcounted.QueryInterface(const IID: TGUID; out Obj): HResult;

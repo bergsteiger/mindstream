@@ -18,7 +18,7 @@ uses
 type
  TmsShapeList = TObjectList<TmsShape>;
 
- TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapeRemover)
+ TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapeRemover, ImsShapesController)
  private
   FShapeList : TmsShapeList;
   FCurrentClass : RmsShape;
