@@ -33,8 +33,6 @@ type
  // - тут бы иметь МНОЖЕСТВЕННОЕ наследование интерфейсов, но Delphi его не поддерживает
  // А вот с UML - мы его ПОТОМ СГЕНЕРИРУЕМ
 
- TmsShapeByPt = function (const aPoint: TPointF): TmsShape of object;
-
  TmsDrawContext  = record
   public
    rCanvas : TCanvas;
