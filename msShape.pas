@@ -10,12 +10,12 @@ uses
  ;
 
 type
- TmsInterfaced = class abstract(TObject)
+ TmsInterfacedNonRefcounted = class abstract(TObject)
  protected
   function QueryInterface(const IID: TGUID; out Obj): HResult; stdcall;
   function _AddRef: Integer; stdcall;
   function _Release: Integer; stdcall;
- end;//TmsInterfaced
+ end;//TmsInterfacedNonRefcounted
 
  TmsShape = class;
 
@@ -180,17 +180,17 @@ begin
  rShapeByPt := aShapeByPt;
 end;
 
-function TmsInterfaced.QueryInterface(const IID: TGUID; out Obj): HResult;
+function TmsInterfacedNonRefcounted.QueryInterface(const IID: TGUID; out Obj): HResult;
 begin
  Result := E_NoInterface;
 end;
 
-function TmsInterfaced._AddRef: Integer;
+function TmsInterfacedNonRefcounted._AddRef: Integer;
 begin
  Result := -1;
 end;
 
-function TmsInterfaced._Release: Integer;
+function TmsInterfacedNonRefcounted._Release: Integer;
 begin
  Result := -1;
 end;
