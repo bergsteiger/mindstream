@@ -139,7 +139,7 @@ procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
 var
  l_Ctx : TmsDrawOptionsContext;
 begin
- l_Ctx :=  DrawOptionsContext(aCtx);
+ l_Ctx := DrawOptionsContext(aCtx);
  aCtx.rCanvas.Fill.Color := l_Ctx.rFillColor;
  aCtx.rCanvas.Stroke.Dash := l_Ctx.rStrokeDash;
  aCtx.rCanvas.Stroke.Color := l_Ctx.rStrokeColor;
