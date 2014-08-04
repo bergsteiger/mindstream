@@ -58,7 +58,6 @@ type
   FStartPoint: TPointF;
  protected
   class procedure Register;
-  function StrokeColor: TAlphaColor; virtual;
   function StrokeThickness: Single; virtual;
 
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
@@ -97,11 +96,6 @@ end;
 class procedure TmsShape.Register;
 begin
  TmsRegisteredShapes.Instance.Register(Self);
-end;
-
-function TmsShape.StrokeColor: TAlphaColor;
-begin
- Result := TAlphaColorRec.Black;
 end;
 
 function TmsShape.StrokeThickness: Single;
