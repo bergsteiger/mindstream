@@ -3,6 +3,7 @@ unit msTriangle1;
 interface
 
 uses
+ msShape,
  msTriangle,
  System.Math,
  System.UITypes,
@@ -17,14 +18,16 @@ type
  TmsTriangle1 = class(TmsTriangle)
  protected
   function Polygon: TPolygon; override;
-  function FillColor: TAlphaColor; override;
+  function DrawOptionsContext: TmsDrawOptionsContext; override;
  end;//TmsTriangle1
 
 implementation
 
-function TmsTriangle1.FillColor: TAlphaColor;
+
+
+function TmsTriangle1.DrawOptionsContext: TmsDrawOptionsContext;
 begin
- Result := TAlphaColorRec.Coral;
+ Result.FillColor := TAlphaColorRec.Coral;
 end;
 
 function TmsTriangle1.Polygon: TPolygon;

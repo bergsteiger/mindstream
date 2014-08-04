@@ -12,15 +12,17 @@ uses
 
 type
  TmsRectangle = class(TmsShape)
+  private
+    function FillColor: TAlphaColor;
  protected
   class function CornerRadius: Single; virtual;
   class function InitialWidth: Single; virtual;
   class function InitialHeight: Single; virtual;
 
-  function FillColor: TAlphaColor; override;
-  function ContainsPt(const aPoint: TPointF): Boolean; override;
-
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
+  function DrawOptionsContext: TmsDrawOptionsContext; override;
+ public
+  function ContainsPt(const aPoint: TPointF): Boolean; override;
  end;
 
 implementation
@@ -79,6 +81,11 @@ begin
                   AllCorners,
                   0.5,
                   TCornerType.ctRound);
+end;
+
+function TmsRectangle.DrawOptionsContext: TmsDrawOptionsContext;
+begin
+ Result.FillColor := TAlphaColorRec.White;;
 end;
 
 initialization

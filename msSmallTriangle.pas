@@ -3,6 +3,7 @@ unit msSmallTriangle;
 interface
 
 uses
+ msShape,
  msTriangle1,
  System.Types,
  FMX.Graphics,
@@ -13,7 +14,7 @@ uses
 type
  TmsSmallTriangle = class(TmsTriangle1)
  protected
-  function FillColor: TAlphaColor; override;
+  function DrawOptionsContext: TmsDrawOptionsContext; override;
  public
   class function InitialHeight: Single; override;
  end;//TmsSmallTriangle
@@ -26,9 +27,9 @@ uses
 
 { TmsSmallTriangle }
 
-function TmsSmallTriangle.FillColor: TAlphaColor;
+function TmsSmallTriangle.DrawOptionsContext: TmsDrawOptionsContext;
 begin
-  Result := TAlphaColorRec.Aquamarine;
+ Result.FillColor := TAlphaColorRec.Aquamarine;
 end;
 
 class function TmsSmallTriangle.InitialHeight: Single;

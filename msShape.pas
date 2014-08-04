@@ -44,15 +44,25 @@ type
    constructor Create(aStartPoint: TPointF; const aShapeByPt: ImsShapeByPt);
  end;//TmsMakeShapeContext
 
+ TmsDrawOptionsContext = record
+  public
+  FillColor: TAlphaColor;
+//  StrokeDash: TStrokeDash;
+//  StrokeColor: TAlphaColor;
+//  StrokeThickness: Single;
+ end;
+
  TmsShape = class abstract (TObject)
  private
   FStartPoint: TPointF;
  protected
   class procedure Register;
-  function FillColor: TAlphaColor; virtual;
+//  function FillColor: TAlphaColor; virtual;
   function StrokeDash: TStrokeDash; virtual;
   function StrokeColor: TAlphaColor; virtual;
   function StrokeThickness: Single; virtual;
+
+  function DrawOptionsContext: TmsDrawOptionsContext; virtual;
 
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
 //  class procedure DoDrawDebugInfo(const aCanvas : TCanvas; const aText: string);
@@ -87,11 +97,6 @@ end;
 class procedure TmsShape.Register;
 begin
  TmsRegisteredShapes.Instance.Register(Self);
-end;
-
-function TmsShape.FillColor: TAlphaColor;
-begin
- Result := TAlphaColorRec.Null;
 end;
 
 function TmsShape.StrokeColor: TAlphaColor;
@@ -152,11 +157,18 @@ begin
   aCanvas.Fill.Color := l_OriginalColor;
 end;*)
 
+function TmsShape.DrawOptionsContext: TmsDrawOptionsContext;
+begin
+ Result.FillColor := TAlphaColorRec.Null;
+
+
+end;
+
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
 begin
  //DoDrawDebugInfo(aCtx.rCanvas, ClassName);
 
- aCtx.rCanvas.Fill.Color := FillColor;
+ aCtx.rCanvas.Fill.Color :=  DrawOptionsContext.FillColor;
  if aCtx.rMoving then
  begin
   aCtx.rCanvas.Stroke.Dash := TStrokeDash.sdDashDot;

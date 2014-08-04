@@ -14,7 +14,7 @@ type
  TmsPointCircle = class(TmsCircle)
  protected
   class function InitialRadiusX: Integer; override;
-  function FillColor: TAlphaColor; override;
+  function DrawOptionsContext: TmsDrawOptionsContext; override;
  end;
 
 implementation
@@ -26,9 +26,9 @@ begin
  Result := 10;
 end;
 
-function TmsPointCircle.FillColor: TAlphaColor;
+function TmsPointCircle.DrawOptionsContext: TmsDrawOptionsContext;
 begin
- Result := TAlphaColorRec.Null;
+ Result.FillColor := TAlphaColorRec.Red;
 end;
 
 end.

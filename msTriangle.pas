@@ -19,7 +19,9 @@ type
  protected
   class function InitialHeight: Single; virtual;
   function Polygon: TPolygon; virtual;
-  function FillColor: TAlphaColor; override;
+
+  function DrawOptionsContext: TmsDrawOptionsContext; override;
+
   function ContainsPt(const aPoint: TPointF): Boolean; override;
 
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
@@ -29,11 +31,6 @@ implementation
 
 uses
  System.Math;
-
-function TmsTriangle.FillColor: TAlphaColor;
-begin
- Result := TAlphaColorRec.Green;
-end;
 
 class function TmsTriangle.InitialHeight: Single;
 begin
@@ -80,6 +77,11 @@ begin
  aCtx.rCanvas.DrawPolygon(l_P, 1);
  aCtx.rCanvas.FillPolygon(l_P, 0.5);
 end;
+
+function TmsTriangle.DrawOptionsContext: TmsDrawOptionsContext;
+begin
+ Result.FillColor := TAlphaColorRec.Green;
+ end;
 
 initialization
  TmsTriangle.Register;

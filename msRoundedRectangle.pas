@@ -3,6 +3,7 @@ unit msRoundedRectangle;
 interface
 
 uses
+ msShape,
  msRectangle,
  System.Types,
  FMX.Graphics,
@@ -16,7 +17,8 @@ type
   class function CornerRadius: Single; override;
   class function InitialWidth: Single; override;
   class function InitialHeight: Single; override;
-  function FillColor: TAlphaColor; override;
+
+  function DrawOptionsContext: TmsDrawOptionsContext; override;
  end;//TmsRoundedRectangle
 
 implementation
@@ -36,9 +38,9 @@ begin
  Result := InitialWidth;
 end;
 
-function TmsRoundedRectangle.FillColor: TAlphaColor;
+function TmsRoundedRectangle.DrawOptionsContext: TmsDrawOptionsContext;
 begin
- Result := TAlphaColorRec.Blue;
+ Result.FillColor := TAlphaColorRec.Blue;
 end;
 
 initialization

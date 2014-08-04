@@ -3,6 +3,7 @@ unit msUseCaseLikeEllipse;
 interface
 
 uses
+ msShape,
  msCircle,
  System.UITypes
  ;
@@ -11,7 +12,8 @@ type
  TmsUseCaseLikeEllipse = class(TmsCircle)
  protected
   class function InitialRadiusY: Integer; override;
-  function FillColor: TAlphaColor; override;
+
+  function DrawOptionsContext: TmsDrawOptionsContext; override;
  end;//TmsUseCaseLikeEllipse
 
 implementation
@@ -21,9 +23,9 @@ begin
  Result := 35;
 end;
 
-function TmsUseCaseLikeEllipse.FillColor: TAlphaColor;
+function TmsUseCaseLikeEllipse.DrawOptionsContext: TmsDrawOptionsContext;
 begin
- Result := TAlphaColorRec.Yellow;
+ Result.FillColor := TAlphaColorRec.Yellow;
 end;
 
 initialization
