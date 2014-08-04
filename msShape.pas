@@ -28,7 +28,10 @@ type
  end;//ImsShapeRemover
 
  ImsShapesController = interface(ImsShapeByPt)
+  procedure RemoveShape(aShape: TmsShape);
  end;//ImsShapesController
+ // - тут бы иметь МНОЖЕСТВЕННОЕ наследование интерфейсов, но Delphi его не поддерживает
+ // А вот с UML - мы его ПОТОМ СГЕНЕРИРУЕМ
 
  TmsShapeByPt = function (const aPoint: TPointF): TmsShape of object;
 
