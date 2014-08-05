@@ -64,6 +64,7 @@ type
 
  ImsShape = interface
   procedure DrawTo(const aCtx: TmsDrawContext);
+  function IsNeedsSecondClick : Boolean;
  end;//ImsShape
 
  TmsShape = class abstract (TmsInterfacedRefcounted, ImsShape)
