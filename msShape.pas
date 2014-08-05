@@ -105,6 +105,20 @@ type
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
  public
   class function Make(const aCtx: TmsMakeShapeContext): ImsShape; virtual;
+  // - фабричный метод, который создаёт экземпляр класса как интерфейс
+  //   про "фабричный метод вообще" - написано тут:
+  //   - http://icoder.ucoz.ru/blog/factory_method/2013-04-30-24
+  //   - http://ru.wikipedia.org/wiki/%D0%A4%D0%B0%D0%B1%D1%80%D0%B8%D1%87%D0%BD%D1%8B%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
+  //   - http://sergeyteplyakov.blogspot.ru/2014/07/blog-post.html
+  //
+  // Зачем НУЖЕН "наш конкретный" фабричный метод?
+  // Во-первых - чтобы ПЕРЕОПРЕДЕЛИТЬ бизнес-логику. Как например в TmsMover.Make.
+  // И это - ГЛАВНОЕ.
+  // А во-вторых потому что:
+  // - http://18delphi.blogspot.ru/2013/04/blog-post_7483.html
+  // - http://www.gunsmoker.ru/2013/04/plugins-9.html
+  //
+  // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
   procedure DrawTo(const aCtx: TmsDrawContext);
  end;//TmsShape
 
