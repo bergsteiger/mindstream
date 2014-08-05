@@ -62,7 +62,7 @@ type
    constructor Create(const aCtx: TmsDrawContext);
  end;//TmsDrawOptionsContext
 
- TmsShape = class abstract (TObject)
+ TmsShape = class abstract (TmsInterfacedRefcounted)
  private
   FStartPoint: TPointF;
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
