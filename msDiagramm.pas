@@ -17,6 +17,8 @@ uses
 
 type
  TmsShapeList = class(TObjectList<TmsShape>)
+ public
+  function ShapeByPt(const aPoint: TPointF): TmsShape;
  end;//TmsShapeList
 
  TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapeRemover, ImsShapesController)
@@ -183,25 +185,31 @@ begin
 end;
 
 function TmsDiagramm.ShapeByPt(const aPoint: TPointF): TmsShape;
+
+begin
+ Result := FShapeList.ShapeByPt(aPoint);
+end;
+
+procedure TmsDiagramm.RemoveShape(aShape: TmsShape);
+begin
+ FShapeList.Remove(aShape);
+end;
+
+function TmsShapeList.ShapeByPt(const aPoint: TPointF): TmsShape;
 var
  l_Shape : TmsShape;
  l_Index : Integer;
 begin
  Result := nil;
- for l_Index := FShapeList.Count - 1 downto 0 do
+ for l_Index := Self.Count - 1 downto 0 do
  begin
-  l_Shape := FShapeList.Items[l_Index];
+  l_Shape := Self.Items[l_Index];
   if l_Shape.ContainsPt(aPoint) then
   begin
    Result := l_Shape;
    Exit;
   end;//l_Shape.ContainsPt(aPoint)
  end;//for l_Index
-end;
-
-procedure TmsDiagramm.RemoveShape(aShape: TmsShape);
-begin
- FShapeList.Remove(aShape);
 end;
 
 end.
