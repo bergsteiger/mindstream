@@ -47,7 +47,7 @@ end;
 
 procedure TmsDiagramms.AddDiagramm(anImage: TImage; aList: TStrings);
 begin
- f_CurrentDiagramm := TmsDiagramm.Create(anImage, IntToStr(f_Diagramms.Count + 1));
+ f_CurrentDiagramm := TmsDiagramm.Create(anImage, 'Диаграмма №' + IntToStr(f_Diagramms.Count + 1));
  f_Diagramms.Add(f_CurrentDiagramm);
  if (aList <> nil) then
   aList.AddObject(f_CurrentDiagramm.Name, f_CurrentDiagramm);
