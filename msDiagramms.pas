@@ -11,7 +11,8 @@ uses
  ;
 
 type
- TmsDiagrammList = TObjectList<TmsDiagramm>;
+ TmsDiagrammList = class(TObjectList<TmsDiagramm>)
+ end;//TmsDiagrammList
 
  TmsDiagramms = class(TObject)
  private

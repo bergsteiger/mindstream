@@ -80,7 +80,8 @@ type
 
  RmsShape = class of TmsShape;
 
- RmsShapeList = TList<RmsShape>;
+ RmsShapeList = class(TList<RmsShape>)
+ end;//RmsShapeList
 
 implementation
 

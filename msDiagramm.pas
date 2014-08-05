@@ -16,7 +16,8 @@ uses
  ;
 
 type
- TmsShapeList = TObjectList<TmsShape>;
+ TmsShapeList = class(TObjectList<TmsShape>)
+ end;//TmsShapeList
 
  TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapeRemover, ImsShapesController)
  private
