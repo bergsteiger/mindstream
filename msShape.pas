@@ -17,6 +17,9 @@ type
   function _Release: Integer; stdcall;
  end;//TmsInterfacedNonRefcounted
 
+ TmsInterfacedRefcounted = class(TInterfacedObject)
+ end;//TmsInterfacedRefcounted
+
  TmsShape = class;
 
  ImsShapeByPt = interface
