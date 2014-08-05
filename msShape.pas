@@ -20,18 +20,18 @@ type
  TmsInterfacedRefcounted = class(TInterfacedObject)
  end;//TmsInterfacedRefcounted
 
- TmsShape = class;
+ ImsShape = interface;
 
  ImsShapeByPt = interface
-  function ShapeByPt(const aPoint: TPointF): TmsShape;
+  function ShapeByPt(const aPoint: TPointF): ImsShape;
  end;//ImsShapeByPt
 
  ImsShapeRemover = interface
-  procedure RemoveShape(aShape: TmsShape);
+  procedure RemoveShape(const aShape: ImsShape);
  end;//ImsShapeRemover
 
  ImsShapesController = interface(ImsShapeByPt)
-  procedure RemoveShape(aShape: TmsShape);
+  procedure RemoveShape(const aShape: ImsShape);
  end;//ImsShapesController
  // - тут бы иметь МНОЖЕСТВЕННОЕ наследование интерфейсов, но Delphi его не поддерживает
  // А вот с UML - мы его ПОТОМ СГЕНЕРИРУЕМ
@@ -65,6 +65,9 @@ type
  ImsShape = interface
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean;
+  procedure EndTo(const aCtx: TmsEndShapeContext);
+  function ContainsPt(const aPoint: TPointF): Boolean;
+  procedure MoveTo(const aFinishPoint: TPointF);
  end;//ImsShape
 
  TmsShape = class abstract (TmsInterfacedRefcounted, ImsShape)
@@ -82,7 +85,7 @@ type
   function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
-  class function Make(const aCtx: TmsMakeShapeContext): TmsShape; virtual;
+  class function Make(const aCtx: TmsMakeShapeContext): ImsShape; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
  end;//TmsShape
 
@@ -97,7 +100,7 @@ uses
   msRegisteredShapes
   ;
 
-class function TmsShape.Make(const aCtx: TmsMakeShapeContext): TmsShape;
+class function TmsShape.Make(const aCtx: TmsMakeShapeContext): ImsShape;
 begin
  Result := Create(aCtx.rStartPoint);
 end;

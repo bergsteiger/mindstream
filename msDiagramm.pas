@@ -16,30 +16,30 @@ uses
  ;
 
 type
- TmsShapeList = class(TObjectList<TmsShape>)
+ TmsShapeList = class(TList<ImsShape>)
  public
-  function ShapeByPt(const aPoint: TPointF): TmsShape;
+  function ShapeByPt(const aPoint: TPointF): ImsShape;
  end;//TmsShapeList
 
  TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapeRemover, ImsShapesController)
  private
   FShapeList : TmsShapeList;
   FCurrentClass : RmsShape;
-  FCurrentAddedShape : TmsShape;
+  FCurrentAddedShape : ImsShape;
   FMovingShape : TmsShape;
   FCanvas : TCanvas;
   FOrigin : TPointF;
   f_Name : String;
  private
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
-  function CurrentAddedShape: TmsShape;
+  function CurrentAddedShape: ImsShape;
   procedure BeginShape(const aStart: TPointF);
   procedure EndShape(const aFinish: TPointF);
   function ShapeIsEnded: Boolean;
   class function AllowedShapes: TmsRegisteredShapes;
   procedure CanvasChanged(aCanvas: TCanvas);
-  function ShapeByPt(const aPoint: TPointF): TmsShape;
-  procedure RemoveShape(aShape: TmsShape);
+  function ShapeByPt(const aPoint: TPointF): ImsShape;
+  procedure RemoveShape(const aShape: ImsShape);
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
  public
   constructor Create(anImage: TImage; const aName: String);
@@ -136,7 +136,7 @@ begin
  Invalidate;
 end;
 
-function TmsDiagramm.CurrentAddedShape: TmsShape;
+function TmsDiagramm.CurrentAddedShape: ImsShape;
 begin
  Result := FCurrentAddedShape;
 end;
@@ -149,7 +149,7 @@ end;
 
 procedure TmsDiagramm.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 var
- l_Shape : TmsShape;
+ l_Shape : ImsShape;
 begin
  aCanvas.BeginScene;
  try
@@ -184,20 +184,20 @@ begin
  Result := (CurrentAddedShape = nil);
 end;
 
-function TmsDiagramm.ShapeByPt(const aPoint: TPointF): TmsShape;
+function TmsDiagramm.ShapeByPt(const aPoint: TPointF): ImsShape;
 
 begin
  Result := FShapeList.ShapeByPt(aPoint);
 end;
 
-procedure TmsDiagramm.RemoveShape(aShape: TmsShape);
+procedure TmsDiagramm.RemoveShape(const aShape: ImsShape);
 begin
  FShapeList.Remove(aShape);
 end;
 
-function TmsShapeList.ShapeByPt(const aPoint: TPointF): TmsShape;
+function TmsShapeList.ShapeByPt(const aPoint: TPointF): ImsShape;
 var
- l_Shape : TmsShape;
+ l_Shape : ImsShape;
  l_Index : Integer;
 begin
  Result := nil;

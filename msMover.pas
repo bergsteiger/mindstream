@@ -12,12 +12,12 @@ uses
 type
  TmsMover = class(TmsShape)
  private
-  f_Moving : TmsShape;
+  f_Moving : ImsShape;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  constructor Create(const aStartPoint: TPointF; aMoving: TmsShape);
+  constructor Create(const aStartPoint: TPointF; const aMoving: ImsShape);
  public
-  class function Make(const aCtx: TmsMakeShapeContext): TmsShape; override;
+  class function Make(const aCtx: TmsMakeShapeContext): ImsShape; override;
   function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aCtx: TmsEndShapeContext); override;
  end;//TmsMover
@@ -29,15 +29,15 @@ uses
  FMX.Types,
  System.SysUtils;
 
-constructor TmsMover.Create(const aStartPoint: TPointF; aMoving: TmsShape);
+constructor TmsMover.Create(const aStartPoint: TPointF; const aMoving: ImsShape);
 begin
  inherited Create(aStartPoint);
  f_Moving := aMoving;
 end;
 
-class function TmsMover.Make(const aCtx: TmsMakeShapeContext): TmsShape;
+class function TmsMover.Make(const aCtx: TmsMakeShapeContext): ImsShape;
 var
- l_Moving : TmsShape;
+ l_Moving : ImsShape;
 begin
  l_Moving := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
  if (l_Moving <> nil) then
