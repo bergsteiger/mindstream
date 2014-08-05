@@ -11,13 +11,25 @@ uses
 
 type
  TmsInterfacedNonRefcounted = class abstract(TObject)
+  // - реализация объектов реализующих интерфейсы, но БЕЗ подсчёта ссылок
+  //   т.е. присваиваемы объект - НЕ ЗАХВАТЫВАЕТСЯ и "владелец" - НЕ УПРАВЛЯЕТ временем жизни
+  //   Зачем? Чтобы избежать кросс-ссылок.
+  //   От TmsInterfacedNonRefcounted должны наследоваться объекты-контейнеры,
+  //   которые хотят сообщать своим "детям" свои интерфейсы.
+  //
+  //   Тут есть одна ТОНКОСТЬ - объект-контейнер - в СВОЮ очередь может являться
+  //   "ребёнком", но мы это потом - РАЗРУЛИМ, когда дойдём.
  protected
   function QueryInterface(const IID: TGUID; out Obj): HResult; stdcall;
   function _AddRef: Integer; stdcall;
   function _Release: Integer; stdcall;
  end;//TmsInterfacedNonRefcounted
 
- TmsInterfacedRefcounted = class(TInterfacedObject)
+ TmsInterfacedRefcounted = class abstract(TInterfacedObject)
+  // Реализация объектов, реализующих интерфейсы. С ПОДСЧЁТОМ ссылок.
+  //
+  // НЕ САМАЯ хорошая реализация, лучше реализация тут - http://18delphi.blogspot.ru/2013/04/iunknown.html
+  // но в учётом ARC - пользуемся пока "нативной реализаией"
  end;//TmsInterfacedRefcounted
 
  ImsShape = interface;
