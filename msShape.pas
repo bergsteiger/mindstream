@@ -99,13 +99,13 @@ type
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   property StartPoint : TPointF read FStartPoint;
   constructor Create(const aStartPoint: TPointF); virtual;
- public
-  procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
-  class function Make(const aCtx: TmsMakeShapeContext): ImsShape; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
+ public
+  class function Make(const aCtx: TmsMakeShapeContext): ImsShape; virtual;
+  procedure DrawTo(const aCtx: TmsDrawContext);
  end;//TmsShape
 
  RmsShape = class of TmsShape;
