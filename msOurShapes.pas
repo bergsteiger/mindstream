@@ -13,25 +13,28 @@ uses
   msDotLine,
   msLineWithArrow,
   msTriangle1,
-  msMover
+  msMover,
+  msRegisteredShapes
   ;
 
 implementation
 
 procedure RegisterOurShapes;
 begin
- TmsLine.Register;
- TmsRectangle.Register;
- TmsCircle.Register;
- TmsRoundedRectangle.Register;
- TmsUseCaseLikeEllipse.Register;
- TmsTriangle.Register;
- TmsDashDotLine.Register;
- TmsDashLine.Register;
- TmsDotLine.Register;
- TmsLineWithArrow.Register;
- TmsTriangle1.Register;
- TmsMover.Register;
+ TmsRegisteredShapes.Instance.Register([
+  TmsLine,
+  TmsRectangle,
+  TmsCircle,
+  TmsRoundedRectangle,
+  TmsUseCaseLikeEllipse,
+  TmsTriangle,
+  TmsDashDotLine,
+  TmsDashLine,
+  TmsDotLine,
+  TmsLineWithArrow,
+  TmsTriangle1,
+  TmsMover
+ ]);
 end;
 
 initialization

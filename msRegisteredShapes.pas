@@ -16,10 +16,11 @@ type
  public
   class function Instance: TmsRegisteredShapes;
   function First: RmsShape;
-  procedure Register(const aValue : RmsShape);
+  procedure Register(const aValue: RmsShape); overload;
+  procedure Register(const aShapes: array of RmsShape); overload;
   destructor Destroy; override;
   function GetEnumerator: RmsShapeList.TEnumerator;
-  function IndexOf(const aValue : RmsShape): Integer;
+  function IndexOf(const aValue: RmsShape): Integer;
  end;//TmsRegisteredShapes
 
 implementation
@@ -53,6 +54,14 @@ procedure TmsRegisteredShapes.Register(const aValue: RmsShape);
 begin
  Assert(f_Registered.IndexOf(aValue) < 0);
  f_Registered.Add(aValue);
+end;
+
+procedure TmsRegisteredShapes.Register(const aShapes: array of RmsShape);
+var
+ l_Index : Integer;
+begin
+ for l_Index := Low(aShapes) to High(aShapes) do
+  Self.Register(aShapes[l_Index]);
 end;
 
 constructor TmsRegisteredShapes.Create;
