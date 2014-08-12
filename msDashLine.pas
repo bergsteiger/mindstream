@@ -22,8 +22,5 @@ begin
  theCtx.rStrokeDash := TStrokeDash.sdDash;
 end;
 
-initialization
- TmsDashLine.Register;
-
 end.
 

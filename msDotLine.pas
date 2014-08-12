@@ -22,7 +22,4 @@ begin
  theCtx.rStrokeDash := TStrokeDash.sdDot;
 end;
 
-initialization
- TmsDotLine.Register;
-
 end.

@@ -26,6 +26,12 @@ begin
  TmsRoundedRectangle.Register;
  TmsUseCaseLikeEllipse.Register;
  TmsTriangle.Register;
+ TmsDashDotLine.Register;
+ TmsDashLine.Register;
+ TmsDotLine.Register;
+ TmsLineWithArrow.Register;
+ TmsTriangle1.Register;
+ TmsMover.Register;
 end;
 
 initialization

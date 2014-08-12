@@ -72,7 +72,4 @@ begin
  end;//f_Moving <> nil
 end;
 
-initialization
- TmsMover.Register;
-
 end.

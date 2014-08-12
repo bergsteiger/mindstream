@@ -113,9 +113,5 @@ begin
  Result := l_Invert * (l_AlphaAngle + l_RotationAngle);
 end;
 
-
-initialization
- TmsLineWithArrow.Register;
-
 end.
 
