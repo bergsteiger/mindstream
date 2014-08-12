@@ -78,8 +78,6 @@ var
  l_PointC : TPointF;
  l_Invert : SmallInt;
 begin
- Result := 0;
-
  // ‘ормула расчета расто€ний между двум€ точками
  l_X := (FinishPoint.X - StartPoint.X) * (FinishPoint.X - StartPoint.X);
  l_Y := (FinishPoint.Y - StartPoint.Y) * (FinishPoint.Y - StartPoint.Y);

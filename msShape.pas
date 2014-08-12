@@ -126,28 +126,15 @@ type
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
   procedure DrawTo(const aCtx: TmsDrawContext);
-  class procedure Register;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
 
- RmsShapeList = class(TList<RmsShape>)
- end;//RmsShapeList
-
 implementation
-
-uses
-  msRegisteredShapes
-  ;
 
 class function TmsShape.Make(const aCtx: TmsMakeShapeContext): ImsShape;
 begin
  Result := Create(aCtx.rStartPoint);
-end;
-
-class procedure TmsShape.Register;
-begin
- TmsRegisteredShapes.Instance.Register(Self);
 end;
 
 function TmsShape.ContainsPt(const aPoint: TPointF): Boolean;

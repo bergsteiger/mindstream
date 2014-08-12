@@ -3,10 +3,13 @@ unit msRegisteredShapes;
 interface
 
 uses
- msShape
+ msShape,
+ Generics.Collections
  ;
 
 type
+ RmsShapeList = TList<RmsShape>;
+
  TmsRegisteredShapes = class
  strict private
   f_Registered : RmsShapeList;
@@ -26,7 +29,7 @@ type
 implementation
 
 uses
- SysUtils
+ System.SysUtils
  ;
 
 function TmsRegisteredShapes.First: RmsShape;
