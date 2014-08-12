@@ -18,4 +18,17 @@ uses
 
 implementation
 
+procedure RegisterOurShapes;
+begin
+ TmsLine.Register;
+ TmsRectangle.Register;
+ TmsCircle.Register;
+ TmsRoundedRectangle.Register;
+ TmsUseCaseLikeEllipse.Register;
+ TmsTriangle.Register;
+end;
+
+initialization
+ RegisterOurShapes;
+
 end.

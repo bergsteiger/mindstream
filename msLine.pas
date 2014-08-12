@@ -68,7 +68,4 @@ begin
  Result := true;
 end;
 
-initialization
- TmsLine.Register;
-
 end.

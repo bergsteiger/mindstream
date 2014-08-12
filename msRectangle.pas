@@ -82,7 +82,4 @@ begin
  theCtx.rFillColor := TAlphaColorRec.White;;
 end;
 
-initialization
- TmsRectangle.Register;
-
 end.

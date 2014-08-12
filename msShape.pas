@@ -101,7 +101,6 @@ type
   FStartPoint: TPointF;
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
  protected
-  class procedure Register;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   property StartPoint : TPointF read FStartPoint;
@@ -127,6 +126,7 @@ type
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
   procedure DrawTo(const aCtx: TmsDrawContext);
+  class procedure Register;
  end;//TmsShape
 
  RmsShape = class of TmsShape;

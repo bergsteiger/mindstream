@@ -44,7 +44,4 @@ begin
  theCtx.rFillColor := TAlphaColorRec.Blue;
 end;
 
-initialization
- TmsRoundedRectangle.Register;
-
 end.

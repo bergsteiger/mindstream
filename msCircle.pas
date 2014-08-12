@@ -72,8 +72,5 @@ begin
  theCtx.rFillColor := TAlphaColorRec.Red;
 end;
 
-initialization
- TmsCircle.Register;
-
 end.
 

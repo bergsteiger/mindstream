@@ -84,7 +84,4 @@ begin
  theCtx.rFillColor := TAlphaColorRec.Green;
 end;
 
-initialization
- TmsTriangle.Register;
-
 end.

@@ -29,8 +29,5 @@ begin
  theCtx.rFillColor := TAlphaColorRec.Yellow;
 end;
 
-initialization
- TmsUseCaseLikeEllipse.Register;
-
 end.
 
