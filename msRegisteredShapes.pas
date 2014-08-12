@@ -51,6 +51,7 @@ end;
 
 procedure TmsRegisteredShapes.Register(const aValue: RmsShape);
 begin
+ Assert(f_Registered.IndexOf(aValue) < 0);
  f_Registered.Add(aValue);
 end;
 
