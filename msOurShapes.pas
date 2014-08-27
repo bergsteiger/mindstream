@@ -12,7 +12,7 @@ uses
   msDashLine,
   msDotLine,
   msLineWithArrow,
-  msTriangle1,
+  msTriangleDirectionRight,
   msMover,
   msRegisteredShapes
   ;

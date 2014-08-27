@@ -4,7 +4,7 @@ interface
 
 uses
  msShape,
- msTriangle1,
+ msTriangleDirectionRight,
  System.Types,
  FMX.Graphics,
  FMX.Types,
@@ -12,7 +12,7 @@ uses
  ;
 
 type
- TmsSmallTriangle = class(TmsTriangle1)
+ TmsSmallTriangle = class(TmsTriangleDirectionRight)
  protected
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public

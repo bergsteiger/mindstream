@@ -3,8 +3,7 @@ unit msRegisteredShapes;
 interface
 
 uses
- msShape,
- Generics.Collections
+ msShape
  ;
 
 type
@@ -23,8 +22,9 @@ type
   procedure Register(const aShapes: array of RmsShape); overload;
   destructor Destroy; override;
   function GetEnumerator: RmsShapeList.TEnumerator;
-  function IndexOf(const aValue: RmsShape): Integer;
- end;//TmsRegisteredShapes
+    function IndexOf(const aValue: RmsShape): Integer;
+    function Func: Integer;
+  end;//TmsRegisteredShapes
 
 implementation
 
@@ -83,6 +83,10 @@ end;
 function TmsRegisteredShapes.IndexOf(const aValue : RmsShape): Integer;
 begin
  Result := f_Registered.IndexOf(aValue);
+end;
+
+function TmsRegisteredShapes.Func: Integer;
+begin
 end;
 
 end.

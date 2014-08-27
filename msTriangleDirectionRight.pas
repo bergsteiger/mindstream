@@ -1,4 +1,4 @@
-unit msTriangle1;
+unit msTriangleDirectionRight;
 
 interface
 
@@ -15,7 +15,7 @@ uses
  ;
 
 type
- TmsTriangle1 = class(TmsTriangle)
+ TmsTriangleDirectionRight = class(TmsTriangle)
  protected
   function Polygon: TPolygon; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
@@ -23,13 +23,15 @@ type
 
 implementation
 
-procedure TmsTriangle1.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+
+
+procedure TmsTriangleDirectionRight.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
  theCtx.rFillColor := TAlphaColorRec.Coral;
 end;
 
-function TmsTriangle1.Polygon: TPolygon;
+function TmsTriangleDirectionRight.Polygon: TPolygon;
 begin
  SetLength(Result, 4);
  Result[0] := TPointF.Create(StartPoint.X - InitialHeight / 2,
@@ -40,5 +42,8 @@ begin
                         StartPoint.Y);
  Result[3] := Result[0];
 end;
+
+initialization
+ TmsTriangleDirectionRight.Register;
 
 end.

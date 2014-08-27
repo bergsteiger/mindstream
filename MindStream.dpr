@@ -21,7 +21,7 @@ uses
   msLineWithArrow in 'msLineWithArrow.pas',
   msSmallTriangle in 'msSmallTriangle.pas',
   msOurShapes in 'msOurShapes.pas',
-  msTriangle1 in 'msTriangle1.pas',
+  msTriangleDirectionRight in 'msTriangleDirectionRight.pas',
   msMover in 'msMover.pas';
 
 {$R *.res}
