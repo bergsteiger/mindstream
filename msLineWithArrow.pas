@@ -6,12 +6,13 @@ uses
  msShape,
  msLine,
  FMX.Graphics,
- System.Types;
+ System.Types
+ ;
 
 type
  TmsLineWithArrow = class(TmsLine)
  protected
-  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetArrowAngleRotation : Single;
  end;//TmsLineWithArrow
 
@@ -23,10 +24,13 @@ uses
  System.Math,
  System.UITypes,
  FMX.Types
+ {$IfDef VER270}
+ , 
+ System.Math.Vectors
+ {$EndIf}
  ;
 
-procedure TmsLineWithArrow.DoDrawTo(const aCanvas: TCanvas;
-  const aOrigin: TPointF);
+procedure TmsLineWithArrow.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Proxy : TmsShape;
  l_OriginalMatrix: TMatrix;
@@ -39,26 +43,29 @@ begin
  inherited;
  if (StartPoint <> FinishPoint) then
  begin
-  l_OriginalMatrix := aCanvas.Matrix;
+  l_OriginalMatrix := aCtx.rCanvas.Matrix;
   try
    l_Proxy := TmsSmallTriangle.Create(FinishPoint);
    try
+    // in Radian
     l_Angle := GetArrowAngleRotation;
 
-    l_CenterPoint := TPointF.Create(FinishPoint.X{ + aCanvas.Matrix.m31}, FinishPoint.Y{ + aCanvas.Matrix.m32});
+    // create a point around which will rotate
+    l_CenterPoint := TPointF.Create(FinishPoint.X, FinishPoint.Y);
 
     l_Matrix := l_OriginalMatrix;
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
     l_Matrix := l_Matrix * TMatrix.CreateRotation(l_Angle);
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
-    aCanvas.SetMatrix(l_Matrix);
 
-    l_Proxy.DrawTo(aCanvas, aOrigin);
+    aCtx.rCanvas.SetMatrix(l_Matrix);
+
+    l_Proxy.DrawTo(aCtx);
    finally
     FreeAndNil(l_Proxy);
    end;//try..finally
   finally
-    aCanvas.SetMatrix(l_OriginalMatrix);
+    aCtx.rCanvas.SetMatrix(l_OriginalMatrix);
   end;
  end;//(StartPoint <> FinishPoint)
 end;
@@ -71,8 +78,6 @@ var
  l_PointC : TPointF;
  l_Invert : SmallInt;
 begin
- Result := 0;
-
  // ‘ормула расчета расто€ний между двум€ точками
  l_X := (FinishPoint.X - StartPoint.X) * (FinishPoint.X - StartPoint.X);
  l_Y := (FinishPoint.Y - StartPoint.Y) * (FinishPoint.Y - StartPoint.Y);
@@ -105,10 +110,6 @@ begin
 
  Result := l_Invert * (l_AlphaAngle + l_RotationAngle);
 end;
-
-
-initialization
- TmsLineWithArrow.Register;
 
 end.
 

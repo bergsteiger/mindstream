@@ -106,7 +106,8 @@
         <DCCReference Include="msLineWithArrow.pas"/>
         <DCCReference Include="msSmallTriangle.pas"/>
         <DCCReference Include="msOurShapes.pas"/>
-        <DCCReference Include="msTriangle1.pas"/>
+        <DCCReference Include="msTriangleDirectionRight.pas"/>
+        <DCCReference Include="msMover.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>
@@ -129,6 +130,8 @@
         <None Include="ModelSupport_MindStream\msCircle\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msTriangle1\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msMover\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msTriangleDirectionRight\default.txvpck"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

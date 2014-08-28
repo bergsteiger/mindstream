@@ -12,9 +12,32 @@ uses
   msDashLine,
   msDotLine,
   msLineWithArrow,
-  msTriangle1
+  msTriangleDirectionRight,
+  msMover,
+  msRegisteredShapes
   ;
 
 implementation
+
+procedure RegisterOurShapes;
+begin
+ TmsRegisteredShapes.Instance.Register([
+  TmsLine,
+  TmsRectangle,
+  TmsCircle,
+  TmsRoundedRectangle,
+  TmsUseCaseLikeEllipse,
+  TmsTriangle,
+  TmsDashDotLine,
+  TmsDashLine,
+  TmsDotLine,
+  TmsLineWithArrow,
+  TmsTriangleDirectionRight,
+  TmsMover
+ ]);
+end;
+
+initialization
+ RegisterOurShapes;
 
 end.

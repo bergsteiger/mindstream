@@ -16,22 +16,30 @@ uses
  ;
 
 type
- TmsDiagramm = class(TObject)
+ TmsShapeList = class(TList<ImsShape>)
+ public
+  function ShapeByPt(const aPoint: TPointF): ImsShape;
+ end;//TmsShapeList
+
+ TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapesController)
  private
   FShapeList : TmsShapeList;
   FCurrentClass : RmsShape;
-  FCurrentAddedShape : TmsShape;
+  FCurrentAddedShape : ImsShape;
+  FMovingShape : TmsShape;
   FCanvas : TCanvas;
   FOrigin : TPointF;
   f_Name : String;
  private
   procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
-  function CurrentAddedShape: TmsShape;
+  function CurrentAddedShape: ImsShape;
   procedure BeginShape(const aStart: TPointF);
   procedure EndShape(const aFinish: TPointF);
   function ShapeIsEnded: Boolean;
   class function AllowedShapes: TmsRegisteredShapes;
   procedure CanvasChanged(aCanvas: TCanvas);
+  function ShapeByPt(const aPoint: TPointF): ImsShape;
+  procedure RemoveShape(const aShape: ImsShape);
   property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
  public
   constructor Create(anImage: TImage; const aName: String);
@@ -47,6 +55,9 @@ type
  end;//TmsDiagramm
 
 implementation
+
+uses
+ msMover;
 
 class function TmsDiagramm.AllowedShapes: TmsRegisteredShapes;
 begin
@@ -74,22 +85,25 @@ end;
 
 procedure TmsDiagramm.ProcessClick(const aStart: TPointF);
 begin
- if ShapeIsEnded then
- // - мы Ќ≈ ƒќЅј¬ЋяЋ» примитива - надо его ƒќЅј¬»“№
-  BeginShape(aStart)
- else
-  EndShape(aStart);
+  if ShapeIsEnded then
+  // - мы Ќ≈ ƒќЅј¬ЋяЋ» примитива - надо его ƒќЅј¬»“№
+   BeginShape(aStart)
+  else
+   EndShape(aStart);
 end;
 
 procedure TmsDiagramm.BeginShape(const aStart: TPointF);
 begin
  Assert(CurrentClass <> nil);
- FCurrentAddedShape := CurrentClass.Create(aStart);
- FShapeList.Add(FCurrentAddedShape);
- if not FCurrentAddedShape.IsNeedsSecondClick then
- // - если не надо SecondClick, то наш примитив - завершЄн
-  FCurrentAddedShape := nil;
- Invalidate;
+ FCurrentAddedShape := CurrentClass.Make(TmsMakeShapeContext.Create(aStart, Self));
+ if (FCurrentAddedShape <> nil) then
+ begin
+  FShapeList.Add(FCurrentAddedShape);
+  if not FCurrentAddedShape.IsNeedsSecondClick then
+  // - если не надо SecondClick, то наш примитив - завершЄн
+   FCurrentAddedShape := nil;
+  Invalidate;
+ end;//FCurrentAddedShape <> nil
 end;
 
 procedure TmsDiagramm.Clear;
@@ -122,7 +136,7 @@ begin
  Invalidate;
 end;
 
-function TmsDiagramm.CurrentAddedShape: TmsShape;
+function TmsDiagramm.CurrentAddedShape: ImsShape;
 begin
  Result := FCurrentAddedShape;
 end;
@@ -135,12 +149,12 @@ end;
 
 procedure TmsDiagramm.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
 var
- l_Shape : TmsShape;
+ l_Shape : ImsShape;
 begin
  aCanvas.BeginScene;
  try
   for l_Shape in FShapeList do
-   l_Shape.DrawTo(aCanvas, aOrigin);
+   l_Shape.DrawTo(TmsDrawContext.Create(aCanvas, aOrigin));
  finally
   aCanvas.EndScene;
  end;//try..finally
@@ -149,7 +163,7 @@ end;
 procedure TmsDiagramm.EndShape(const aFinish: TPointF);
 begin
  Assert(CurrentAddedShape <> nil);
- CurrentAddedShape.EndTo(aFinish);
+ CurrentAddedShape.EndTo(TmsEndShapeContext.Create(aFinish, Self));
  FCurrentAddedShape := nil;
  Invalidate;
 end;
@@ -168,6 +182,34 @@ end;
 function TmsDiagramm.ShapeIsEnded: Boolean;
 begin
  Result := (CurrentAddedShape = nil);
+end;
+
+function TmsDiagramm.ShapeByPt(const aPoint: TPointF): ImsShape;
+
+begin
+ Result := FShapeList.ShapeByPt(aPoint);
+end;
+
+procedure TmsDiagramm.RemoveShape(const aShape: ImsShape);
+begin
+ FShapeList.Remove(aShape);
+end;
+
+function TmsShapeList.ShapeByPt(const aPoint: TPointF): ImsShape;
+var
+ l_Shape : ImsShape;
+ l_Index : Integer;
+begin
+ Result := nil;
+ for l_Index := Self.Count - 1 downto 0 do
+ begin
+  l_Shape := Self.Items[l_Index];
+  if l_Shape.ContainsPt(aPoint) then
+  begin
+   Result := l_Shape;
+   Exit;
+  end;//l_Shape.ContainsPt(aPoint)
+ end;//for l_Index
 end;
 
 end.

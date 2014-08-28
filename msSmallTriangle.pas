@@ -3,7 +3,8 @@ unit msSmallTriangle;
 interface
 
 uses
- msTriangle1,
+ msShape,
+ msTriangleDirectionRight,
  System.Types,
  FMX.Graphics,
  FMX.Types,
@@ -11,9 +12,9 @@ uses
  ;
 
 type
- TmsSmallTriangle = class(TmsTriangle1)
+ TmsSmallTriangle = class(TmsTriangleDirectionRight)
  protected
-  function FillColor: TAlphaColor; override;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
   class function InitialHeight: Single; override;
  end;//TmsSmallTriangle
@@ -24,11 +25,10 @@ uses
  System.Math
  ;
 
-{ TmsSmallTriangle }
-
-function TmsSmallTriangle.FillColor: TAlphaColor;
+procedure TmsSmallTriangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
-  Result := TAlphaColorRec.Aquamarine;
+ inherited;
+ theCtx.rFillColor := TAlphaColorRec.Aquamarine;
 end;
 
 class function TmsSmallTriangle.InitialHeight: Single;

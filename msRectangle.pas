@@ -16,8 +16,11 @@ type
   class function CornerRadius: Single; virtual;
   class function InitialWidth: Single; virtual;
   class function InitialHeight: Single; virtual;
-  function FillColor: TAlphaColor; override;
-  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+
+  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
+ public
+  function ContainsPt(const aPoint: TPointF): Boolean; override;
  end;
 
 implementation
@@ -34,31 +37,38 @@ begin
  Result := 90;
 end;
 
+function TmsRectangle.ContainsPt(const aPoint: TPointF): Boolean;
+var
+ l_Finish : TPointF;
+ l_Rect: TRectF;
+begin
+ Result := False;
+ l_Finish := TPointF.Create(StartPoint.X + InitialWidth,
+                            StartPoint.Y + InitialHeight);
+ l_Rect := TRectF.Create(StartPoint,l_Finish);
+ Result := l_Rect.Contains(aPoint);
+end;
+
 class function TmsRectangle.CornerRadius: Single;
 begin
  Result := 0;
 end;
 
-function TmsRectangle.FillColor: TAlphaColor;
-begin
- Result := TAlphaColorRec.White;
-end;
-
-procedure TmsRectangle.DoDrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
+procedure TmsRectangle.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Finish : TPointF;
 begin
  l_Finish := TPointF.Create(StartPoint.X + InitialWidth,
                             StartPoint.Y + InitialHeight);
- aCanvas.DrawRect(TRectF.Create(StartPoint.Add(aOrigin),
-                                l_Finish.Add(aOrigin)),
+ aCtx.rCanvas.DrawRect(TRectF.Create(StartPoint,
+                                l_Finish),
                   CornerRadius,
                   CornerRadius,
                   AllCorners,
                   1,
                   TCornerType.ctRound);
- aCanvas.FillRect(TRectF.Create(StartPoint.Add(aOrigin),
-                                l_Finish.Add(aOrigin)),
+ aCtx.rCanvas.FillRect(TRectF.Create(StartPoint,
+                                l_Finish),
                   CornerRadius,
                   CornerRadius,
                   AllCorners,
@@ -66,7 +76,10 @@ begin
                   TCornerType.ctRound);
 end;
 
-initialization
- TmsRectangle.Register;
+procedure TmsRectangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+begin
+ inherited;
+ theCtx.rFillColor := TAlphaColorRec.White;;
+end;
 
 end.

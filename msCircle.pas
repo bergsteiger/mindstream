@@ -15,8 +15,11 @@ type
  protected
   class function InitialRadiusX: Integer; virtual;
   class function InitialRadiusY: Integer; virtual;
-  function FillColor: TAlphaColor; override;
-  procedure DoDrawTo(const aCanvas : TCanvas; const aOrigin : TPointF); override;
+
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
+  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
+ public
+  function ContainsPt(const aPoint: TPointF): Boolean; override;
  end;
 
 implementation
@@ -33,27 +36,41 @@ begin
  Result := InitialRadiusX;
 end;
 
-function TmsCircle.FillColor: TAlphaColor;
-begin
- Result := TAlphaColorRec.Red;
-end;
-
-procedure TmsCircle.DoDrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
+function TmsCircle.ContainsPt(const aPoint: TPointF): Boolean;
 var
- l_Start  : TPointF;
- l_Finish : TPointF;
+ l_StartRectPoint, l_FinishRectPoint : TPointF;
+ l_x0, l_y0, l_a, l_b : Integer;
 begin
- l_Start := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
- l_Finish := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
- aCanvas.DrawEllipse(TRectF.Create(l_Start.Add(aOrigin),
-                                   l_Finish.Add(aOrigin)),
-                     1);
- aCanvas.FillEllipse(TRectF.Create(l_Start.Add(aOrigin),
-                                   l_Finish.Add(aOrigin)),
-                     0.5);
+ Result := False;
+
+ l_StartRectPoint := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
+ l_FinishRectPoint := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
+
+ l_x0 := Round(l_StartRectPoint.X + l_FinishRectPoint.X) div 2;
+ l_y0 := Round(l_StartRectPoint.Y + l_FinishRectPoint.Y) div 2;
+ l_a := Round(l_FinishRectPoint.X - l_StartRectPoint.X) div 2;
+ l_b := Round(l_FinishRectPoint.Y - l_StartRectPoint.Y) div 2;
+
+ Result := Sqr((aPoint.X - l_x0)/l_a)+
+           Sqr((aPoint.Y - l_y0)/l_b) <= 1.0;
 end;
 
-initialization
- TmsCircle.Register;
+procedure TmsCircle.DoDrawTo(const aCtx: TmsDrawContext);
+var
+ l_StartRectPoint, l_FinishRectPoint : TPointF;
+begin
+ l_StartRectPoint := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
+ l_FinishRectPoint := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
+
+ aCtx.rCanvas.DrawEllipse(TRectF.Create(l_StartRectPoint, l_FinishRectPoint), 1);
+ aCtx.rCanvas.FillEllipse(TRectF.Create(l_StartRectPoint, l_FinishRectPoint), 0.5);
+end;
+
+procedure TmsCircle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+begin
+ inherited;
+ theCtx.rFillColor := TAlphaColorRec.Red;
+end;
 
 end.
+

@@ -4,24 +4,23 @@ interface
 
 uses
  msLine,
- FMX.Graphics
+ FMX.Graphics,
+ msShape
  ;
 
 type
  TmsDashLine = class(TmsLine)
  protected
-  function StrokeDash: TStrokeDash; override;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsDashLine
 
 implementation
 
-function TmsDashLine.StrokeDash: TStrokeDash;
+procedure TmsDashLine.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
- Result := TStrokeDash.sdDash;
+ inherited;
+ theCtx.rStrokeDash := TStrokeDash.sdDash;
 end;
-
-initialization
- TmsDashLine.Register;
 
 end.
 
