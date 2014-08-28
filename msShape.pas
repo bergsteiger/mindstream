@@ -45,10 +45,6 @@ type
   function ShapeByPt(const aPoint: TPointF): ImsShape;
  end;//ImsShapeByPt
 
- ImsShapeRemover = interface
-  procedure RemoveShape(const aShape: ImsShape);
- end;//ImsShapeRemover
-
  ImsShapesController = interface(ImsShapeByPt)
   procedure RemoveShape(const aShape: ImsShape);
  end;//ImsShapesController
