@@ -3,7 +3,8 @@ unit msRegisteredShapes;
 interface
 
 uses
- msShape
+ msShape,
+ Generics.Collections
  ;
 
 type

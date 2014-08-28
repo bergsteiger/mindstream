@@ -32,7 +32,7 @@ begin
   TmsDashLine,
   TmsDotLine,
   TmsLineWithArrow,
-  TmsTriangle1,
+  TmsTriangleDirectionRight,
   TmsMover
  ]);
 end;

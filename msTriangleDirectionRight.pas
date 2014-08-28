@@ -23,8 +23,6 @@ type
 
 implementation
 
-
-
 procedure TmsTriangleDirectionRight.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
@@ -42,8 +40,5 @@ begin
                         StartPoint.Y);
  Result[3] := Result[0];
 end;
-
-initialization
- TmsTriangleDirectionRight.Register;
 
 end.
