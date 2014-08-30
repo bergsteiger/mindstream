@@ -21,14 +21,14 @@ object fmGUITestRunner: TfmGUITestRunner
     TabOrder = 0
     Width = 393.000000000000000000
   end
-  object btnAdditem: TButton
+  object btnAddItem: TButton
     Height = 22.000000000000000000
     Position.X = 72.000000000000000000
     Position.Y = 8.000000000000000000
     TabOrder = 1
-    Text = 'btnAdditem'
+    Text = 'btnAddItem'
     Width = 80.000000000000000000
-    OnClick = btnAdditemClick
+    OnClick = btnAddItemClick
   end
   object btnGetSelectedItems: TButton
     Height = 22.000000000000000000

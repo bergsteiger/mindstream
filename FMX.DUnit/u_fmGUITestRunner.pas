@@ -10,9 +10,9 @@ uses
 type
  TfmGUITestRunner = class(TForm)
   tvTests: TTreeView;
-  btnAdditem: TButton;
+    btnAddItem: TButton;
     btnGetSelectedItems: TButton;
-  procedure btnAdditemClick(Sender: TObject);
+  procedure btnAddItemClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnGetSelectedItemsClick(Sender: TObject);
  private
@@ -26,22 +26,37 @@ var
 
 implementation
 
+uses
+ System.Generics.Collections;
 {$R *.fmx}
 
-procedure TraverseTree(const aTree : TTreeViewItem; var ResultMessage : string);
+procedure TraverseTreeItems(const aTree : TTreeViewItem; var ResultList : TList<TTreeViewItem>);
 var
  i : Integer;
 begin
  for i := 0 to Pred(aTree.Count)  do
  begin
   if aTree.Items[i].IsChecked
-   then ResultMessage := ResultMessage + aTree.Items[i].Text + ';';
+   then ResultList.Add(aTree.Items[i]);
 
-  TraverseTree(aTree.Items[i], ResultMessage);
+  TraverseTreeItems(aTree.Items[i], ResultList);
  end;
 end;
 
-procedure TfmGUITestRunner.btnAdditemClick(Sender: TObject);
+procedure TraverseTree(const aTree: TTreeView; var ResultList : TList<TTreeViewItem>);
+var
+ i : integer;
+begin
+ for i := 0 to Pred(aTree.Count) do
+ begin
+  if aTree.Items[i].IsChecked then
+   ResultList.Add(aTree.Items[i]);
+
+  TraverseTreeItems(aTree.Items[i], ResultList);
+ end;
+end;
+
+procedure TfmGUITestRunner.btnAddItemClick(Sender: TObject);
 var
  l_TreeViewItem: TTreeViewItem;
 begin
@@ -61,18 +76,20 @@ end;
 
 procedure TfmGUITestRunner.btnGetSelectedItemsClick(Sender: TObject);
 var
- l_ResutlMsg : string;
- i : integer;
+ ResultList : TList<TTreeViewItem>;
+ l_Item: TTreeViewItem;
+ l_ResutlMsg: string;
 begin
- l_ResutlMsg := '';
- for i := 0 to Pred(tvTests.Count) do
- begin
-  if tvTests.Items[i].IsChecked then
-   l_ResutlMsg := l_ResutlMsg + tvTests.Items[i].Text + ';';
-  TraverseTree(tvTests.Items[i], l_ResutlMsg);
- end;
+ ResultList := TList<TTreeViewItem>.Create;
+
+ TraverseTree(tvTests, ResultList);
+
+ for l_Item in ResultList do
+  l_ResutlMsg := l_ResutlMsg + l_Item.Text + ';';
 
  ShowMessage(l_ResutlMsg);
+
+ FreeAndNil(ResultList);
 end;
 
 procedure TfmGUITestRunner.FormCreate(Sender: TObject);
