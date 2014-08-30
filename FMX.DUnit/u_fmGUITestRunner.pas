@@ -11,8 +11,10 @@ type
  TfmGUITestRunner = class(TForm)
   tvTests: TTreeView;
   btnAdditem: TButton;
+    btnGetSelectedItems: TButton;
   procedure btnAdditemClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnGetSelectedItemsClick(Sender: TObject);
  private
   { Private declarations }
  public
@@ -25,6 +27,19 @@ var
 implementation
 
 {$R *.fmx}
+
+procedure TraverseTree(const aTree : TTreeViewItem; var ResultMessage : string);
+var
+ i : Integer;
+begin
+ for i := 0 to Pred(aTree.Count)  do
+ begin
+  if aTree.Items[i].IsChecked
+   then ResultMessage := ResultMessage + aTree.Items[i].Text + ';';
+
+  TraverseTree(aTree.Items[i], ResultMessage);
+ end;
+end;
 
 procedure TfmGUITestRunner.btnAdditemClick(Sender: TObject);
 var
@@ -40,8 +55,24 @@ begin
  else
   tvTests.Selected.AddObject(l_TreeViewItem);
 
- tvTests.EndUpdate;
  tvTests.InvalidateContentSize;
+ tvTests.EndUpdate;
+end;
+
+procedure TfmGUITestRunner.btnGetSelectedItemsClick(Sender: TObject);
+var
+ l_ResutlMsg : string;
+ i : integer;
+begin
+ l_ResutlMsg := '';
+ for i := 0 to Pred(tvTests.Count) do
+ begin
+  if tvTests.Items[i].IsChecked then
+   l_ResutlMsg := l_ResutlMsg + tvTests.Items[i].Text + ';';
+  TraverseTree(tvTests.Items[i], l_ResutlMsg);
+ end;
+
+ ShowMessage(l_ResutlMsg);
 end;
 
 procedure TfmGUITestRunner.FormCreate(Sender: TObject);
