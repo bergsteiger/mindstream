@@ -30,17 +30,15 @@ uses
  System.Generics.Collections;
 {$R *.fmx}
 
-procedure TraverseTreeItems(const aTree : TTreeViewItem; var ResultList : TList<TTreeViewItem>);
+procedure TraverseTreeItems(const anItem : TTreeViewItem; var ResultList : TList<TTreeViewItem>);
 var
  i : Integer;
 begin
- for i := 0 to Pred(aTree.Count)  do
- begin
-  if aTree.Items[i].IsChecked
-   then ResultList.Add(aTree.Items[i]);
+ if anItem.IsChecked then
+  ResultList.Add(anItem);
 
-  TraverseTreeItems(aTree.Items[i], ResultList);
- end;
+ for i := 0 to Pred(anItem.Count)  do
+  TraverseTreeItems(anItem.Items[i], ResultList);
 end;
 
 procedure TraverseTree(const aTree: TTreeView; var ResultList : TList<TTreeViewItem>);
@@ -48,12 +46,7 @@ var
  i : integer;
 begin
  for i := 0 to Pred(aTree.Count) do
- begin
-  if aTree.Items[i].IsChecked then
-   ResultList.Add(aTree.Items[i]);
-
   TraverseTreeItems(aTree.Items[i], ResultList);
- end;
 end;
 
 procedure TfmGUITestRunner.btnAddItemClick(Sender: TObject);
