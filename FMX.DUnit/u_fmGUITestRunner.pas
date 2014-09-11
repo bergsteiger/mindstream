@@ -3,6 +3,7 @@ unit u_fmGUITestRunner;
 interface
 
 uses
+ TestFramework,
  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
  FMX.Layouts, FMX.TreeView;
@@ -10,16 +11,27 @@ uses
 type
  TfmGUITestRunner = class(TForm)
   tvTests: TTreeView;
-    btnAddItem: TButton;
-    btnGetSelectedItems: TButton;
+  btnAddItem: TButton;
+  btnGetSelectedItems: TButton;
   procedure btnAddItemClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure btnGetSelectedItemsClick(Sender: TObject);
+  procedure FormCreate(Sender: TObject);
+  procedure btnGetSelectedItemsClick(Sender: TObject);
+  procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
  private
-  { Private declarations }
+ protected
+  FSuite: ITest;
+  FTests: TInterfaceList;
+  procedure SetSuite(Value: ITest);
+  procedure InitTree;
  public
-  { Public declarations }
+  {: The test suite to be run in this runner }
+  property Suite: ITest read FSuite write SetSuite;
+
  end;
+
+procedure RunTestModeless(aTest: ITest);
+procedure RunRegisteredTestsModeless;
 
 var
  fmGUITestRunner: TfmGUITestRunner;
@@ -29,6 +41,22 @@ implementation
 uses
  System.Generics.Collections;
 {$R *.fmx}
+
+procedure RunTestModeless(aTest: ITest);
+var
+ l_GUI :TfmGUITestRunner;
+begin
+// l_GUI := TfmGUITestRunner.create(nil);
+//  оменты д€л статьи, что бы мне потом легче было.
+ Application.CreateForm(TfmGUITestRunner, l_GUI);
+ l_GUI.Suite := aTest;
+ l_GUI.Show;
+end;
+
+procedure RunRegisteredTestsModeless;
+begin
+ RunTestModeless(registeredTests)
+end;
 
 procedure TraverseTreeItems(const anItem : TTreeViewItem; var ResultList : TList<TTreeViewItem>);
 var
@@ -85,9 +113,46 @@ begin
  FreeAndNil(ResultList);
 end;
 
+procedure TfmGUITestRunner.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+ Application.Terminate;
+end;
+
 procedure TfmGUITestRunner.FormCreate(Sender: TObject);
 begin
+ inherited;
  tvTests.ShowCheckboxes := True;
+
+ FTests := TInterfaceList.Create;
+end;
+
+procedure TfmGUITestRunner.FormDestroy(Sender: TObject);
+begin
+ Suite := nil;
+ FreeAndNil(FTests);
+ inherited;
+end;
+
+procedure TfmGUITestRunner.InitTree;
+begin
+ FTests.Clear;
+
+end;
+
+procedure TfmGUITestRunner.SetSuite(Value: ITest);
+begin
+ //FSuite, ≈щЄ не создана, так как Application.CreateForm на самом деле, если его не пнуть €вно - "не создает сука, нормальных форм, а лишь ссылки на будущие классы.
+ // „то соответсвенно вли€ет на члены класса, которые совсем не nil, как им бы положено быть"
+
+ // Ѕочина вылезет в System._IntfCopy(var Dest: IInterface; const Source: IInterface);
+ // ј вылезет потому что у нас в Dest будет блокированный указатель, а не nil.
+
+ // ƒаже если мы таку строчку пропишем, это до фени
+ FSuite := nil;
+ FSuite := value;
+
+ if FSuite <> nil then
+  InitTree;
 end;
 
 end.

@@ -8,6 +8,8 @@ object fmGUITestRunner: TfmGUITestRunner
   FormFactor.Height = 480
   FormFactor.Devices = [dkDesktop, dkiPhone, dkiPad]
   OnCreate = FormCreate
+  OnClose = FormClose
+  OnDestroy = FormDestroy
   DesignerMobile = False
   DesignerWidth = 0
   DesignerHeight = 0
