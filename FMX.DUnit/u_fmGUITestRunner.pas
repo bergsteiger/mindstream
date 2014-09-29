@@ -126,14 +126,18 @@ begin
 
   l_TreeViewItem := TTreeViewItem.Create(self);
   l_TreeViewItem.Text := ATest.Name;
-  aRootNode.AddObject(l_TreeViewItem);
+
+  if aRootNode=nil then
+    TestTree.AddObject(l_TreeViewItem)
+  else
+    aRootNode.AddObject(l_TreeViewItem);
 
   FTests.Add(ATest);
 
   TestTests := ATest.Tests;
   for i := 0 to TestTests.count - 1 do
   begin
-    FillTestTree(aRootNode, TestTests[i] as ITest);
+    FillTestTree(l_TreeViewItem, TestTests[i] as ITest);
   end;
 end;
 
@@ -146,10 +150,7 @@ begin
 
   TestTree.BeginUpdate;
 
-  l_TreeViewItem := TTreeViewItem.Create(nil);
-  l_TreeViewItem.Text := 'Root';
-  TestTree.AddObject(l_TreeViewItem);
-  fillTestTree(l_TreeViewItem, Suite);
+  FillTestTree(nil, Suite);
 
   TestTree.EndUpdate;
 end;
