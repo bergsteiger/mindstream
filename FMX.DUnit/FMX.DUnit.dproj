@@ -179,6 +179,17 @@
         </DCCReference>
         <DCCReference Include="u_FirstTest.pas"/>
         <DCCReference Include="u_TCounter.pas"/>
+        <DCCReference Include="u_SecondTest.pas"/>
+        <None Include="ModelSupport_FMX.DUnit\default.txaPackage"/>
+        <None Include="ModelSupport_FMX.DUnit\default.txvpck"/>
+        <None Include="ModelSupport_FMX.DUnit\FMX\DUnit\default.txaPackage"/>
+        <None Include="ModelSupport_FMX.DUnit\FMX\DUnit\default.txvpck"/>
+        <None Include="ModelSupport_FMX.DUnit\u_SecondTest\default.txvpck"/>
+        <None Include="ModelSupport_FMX.DUnit\u_FirstTest\default.txvpck"/>
+        <None Include="ModelSupport_FMX.DUnit\FMX\default.txvpck"/>
+        <None Include="ModelSupport_FMX.DUnit\u_fmGUITestRunner\default.txvpck"/>
+        <None Include="ModelSupport_FMX.DUnit\u_TCounter\default.txvpck"/>
+        <None Include="ModelSupport_FMX.DUnit\Sequence Diagram1.txvint"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -255,14 +266,27 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment>
-                <DeployFile LocalName="Win32\Debug\FMX.DUnit.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="ModelSupport_FMX.DUnit\u_SecondTest\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\FMX.DUnit.rsm" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName="ModelSupport_FMX.DUnit\default.txaPackage" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
-                        <RemoteName>FMX.DUnit.rsm</RemoteName>
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_FMX.DUnit\u_TCounter\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win32\Debug\FMX.DUnit.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>FMX_DUnit.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -271,6 +295,48 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                     <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_FMX.DUnit\FMX\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_FMX.DUnit\FMX\DUnit\default.txaPackage" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_FMX.DUnit\u_FirstTest\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_FMX.DUnit\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_FMX.DUnit\Sequence Diagram1.txvint" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_FMX.DUnit\FMX\DUnit\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_FMX.DUnit\u_fmGUITestRunner\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

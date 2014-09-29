@@ -2,7 +2,7 @@ object fmGUITestRunner: TfmGUITestRunner
   Left = 0
   Top = 0
   Caption = 'fmGUITestRunner'
-  ClientHeight = 410
+  ClientHeight = 486
   ClientWidth = 425
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -13,15 +13,15 @@ object fmGUITestRunner: TfmGUITestRunner
   DesignerMasterStyle = 0
   object TestTree: TTreeView
     Position.X = 16.000000000000000000
-    Position.Y = 48.000000000000000000
+    Position.Y = 96.000000000000000000
     Size.Width = 393.000000000000000000
-    Size.Height = 337.000000000000000000
+    Size.Height = 289.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
   end
   object btnAddItem: TButton
     Position.X = 72.000000000000000000
-    Position.Y = 8.000000000000000000
+    Position.Y = 56.000000000000000000
     Size.Width = 80.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
@@ -31,12 +31,28 @@ object fmGUITestRunner: TfmGUITestRunner
   end
   object btnGetSelectedItems: TButton
     Position.X = 176.000000000000000000
-    Position.Y = 8.000000000000000000
+    Position.Y = 56.000000000000000000
     Size.Width = 153.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 2
     Text = 'btnGetSelectedItems'
     OnClick = btnGetSelectedItemsClick
+  end
+  object ToolBar1: TToolBar
+    Size.Width = 425.000000000000000000
+    Size.Height = 33.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    object btRunAllTest: TSpeedButton
+      Position.X = 40.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 49.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'playtoolbutton'
+      Text = 'btRunAllTest'
+      OnClick = btRunAllTestClick
+    end
   end
 end

@@ -3,7 +3,8 @@ uses
   FMX.Forms,
   u_fmGUITestRunner in 'u_fmGUITestRunner.pas' {fmGUITestRunner},
   u_FirstTest in 'u_FirstTest.pas',
-  u_TCounter in 'u_TCounter.pas';
+  u_TCounter in 'u_TCounter.pas',
+  u_SecondTest in 'u_SecondTest.pas';
 
 {$R *.res}
 

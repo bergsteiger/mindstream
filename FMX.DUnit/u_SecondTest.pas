@@ -1,4 +1,4 @@
-unit u_FirstTest;
+unit u_SecondTest;
 
 interface
 
@@ -7,7 +7,7 @@ uses
   ;
 
 type
-  TFirstTest = class(TTestCase)
+  TSecondTest = class(TTestCase)
    published
     procedure DoIt;
     procedure OtherDoIt;
@@ -15,17 +15,17 @@ type
 
 implementation
 
-procedure TFirstTest.DoIt;
+procedure TSecondTest.DoIt;
 begin
  Check(true);
 end;
 
-procedure TFirstTest.OtherDoIt;
+procedure TSecondTest.OtherDoIt;
 begin
  Check(True);
 end;
 
 initialization
- TestFramework.RegisterTest(TFirstTest.Suite);
+ TestFramework.RegisterTest(TSecondTest.Suite);
 end.
 
