@@ -10,7 +10,7 @@ uses
 
 type
  TfmGUITestRunner = class(TForm)
-  tvTests: TTreeView;
+  TestTree: TTreeView;
   btnAddItem: TButton;
   btnGetSelectedItems: TButton;
   procedure btnAddItemClick(Sender: TObject);
@@ -24,6 +24,8 @@ type
   FTests: TInterfaceList;
   procedure SetSuite(Value: ITest);
   procedure InitTree;
+  procedure FillTestTree(aTest: ITest); overload;
+  procedure FillTestTree(aRootNode: TTreeViewItem; ATest: ITest); overload;
  public
   {: The test suite to be run in this runner }
   property Suite: ITest read FSuite write SetSuite;
@@ -48,7 +50,7 @@ var
 begin
 // l_GUI := TfmGUITestRunner.create(nil);
 // Коменты дял статьи, что бы мне потом легче было.
- Application.CreateForm(TfmGUITestRunner, l_GUI);
+ l_GUI := TfmGUITestRunner.Create(nil);
  l_GUI.Suite := aTest;
  l_GUI.Show;
 end;
@@ -81,18 +83,18 @@ procedure TfmGUITestRunner.btnAddItemClick(Sender: TObject);
 var
  l_TreeViewItem: TTreeViewItem;
 begin
- tvTests.BeginUpdate;
+ TestTree.BeginUpdate;
 
  l_TreeViewItem := TTreeViewItem.Create(self);
- l_TreeViewItem.Text := 'Item' + IntToStr(tvTests.GlobalCount);
+ l_TreeViewItem.Text := 'Item' + IntToStr(TestTree.GlobalCount);
 
- if tvTests.Selected = nil then
-  tvTests.AddObject(l_TreeViewItem)
+ if TestTree.Selected = nil then
+  TestTree.AddObject(l_TreeViewItem)
  else
-  tvTests.Selected.AddObject(l_TreeViewItem);
+  TestTree.Selected.AddObject(l_TreeViewItem);
 
- tvTests.InvalidateContentSize;
- tvTests.EndUpdate;
+ TestTree.InvalidateContentSize;
+ TestTree.EndUpdate;
 end;
 
 procedure TfmGUITestRunner.btnGetSelectedItemsClick(Sender: TObject);
@@ -103,7 +105,7 @@ var
 begin
  ResultList := TList<TTreeViewItem>.Create;
 
- TraverseTree(tvTests, ResultList);
+ TraverseTree(TestTree, ResultList);
 
  for l_Item in ResultList do
   l_ResutlMsg := l_ResutlMsg + l_Item.Text + ';';
@@ -111,6 +113,45 @@ begin
  ShowMessage(l_ResutlMsg);
 
  FreeAndNil(ResultList);
+end;
+
+procedure TfmGUITestRunner.FillTestTree(aRootNode: TTreeViewItem; ATest: ITest);
+var
+  TestTests: IInterfaceList;
+  i: Integer;
+  l_TreeViewItem : TTreeViewItem;
+begin
+  if ATest = nil then
+    EXIT;
+
+  l_TreeViewItem := TTreeViewItem.Create(self);
+  l_TreeViewItem.Text := ATest.Name;
+  aRootNode.AddObject(l_TreeViewItem);
+
+  FTests.Add(ATest);
+
+  TestTests := ATest.Tests;
+  for i := 0 to TestTests.count - 1 do
+  begin
+    FillTestTree(aRootNode, TestTests[i] as ITest);
+  end;
+end;
+
+procedure TfmGUITestRunner.FillTestTree(ATest: ITest);
+var
+  l_TreeViewItem : TTreeViewItem;
+begin
+  TestTree.Clear;
+  FTests.Clear;
+
+  TestTree.BeginUpdate;
+
+  l_TreeViewItem := TTreeViewItem.Create(nil);
+  l_TreeViewItem.Text := 'Root';
+  TestTree.AddObject(l_TreeViewItem);
+  fillTestTree(l_TreeViewItem, Suite);
+
+  TestTree.EndUpdate;
 end;
 
 procedure TfmGUITestRunner.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -121,7 +162,7 @@ end;
 procedure TfmGUITestRunner.FormCreate(Sender: TObject);
 begin
  inherited;
- tvTests.ShowCheckboxes := True;
+ TestTree.ShowCheckboxes := True;
 
  FTests := TInterfaceList.Create;
 end;
@@ -136,7 +177,14 @@ end;
 procedure TfmGUITestRunner.InitTree;
 begin
  FTests.Clear;
-
+ FillTestTree(Suite);
+{ FillTestTree(Suite);
+Setup;
+if HideTestNodesOnOpenAction.Checked then
+  HideTestNodesAction.Execute
+else
+  ExpandAllNodesAction.Execute;
+TestTree.Selected := TestTree.Items.GetFirstNode;}
 end;
 
 procedure TfmGUITestRunner.SetSuite(Value: ITest);

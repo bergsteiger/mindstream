@@ -6,39 +6,37 @@ object fmGUITestRunner: TfmGUITestRunner
   ClientWidth = 425
   FormFactor.Width = 320
   FormFactor.Height = 480
-  FormFactor.Devices = [dkDesktop, dkiPhone, dkiPad]
+  FormFactor.Devices = [Desktop, iPhone, iPad]
   OnCreate = FormCreate
   OnClose = FormClose
   OnDestroy = FormDestroy
-  DesignerMobile = False
-  DesignerWidth = 0
-  DesignerHeight = 0
-  DesignerDeviceName = ''
-  DesignerOrientation = 0
-  DesignerOSVersion = ''
-  object tvTests: TTreeView
-    Height = 337.000000000000000000
+  DesignerMasterStyle = 0
+  object TestTree: TTreeView
     Position.X = 16.000000000000000000
     Position.Y = 48.000000000000000000
+    Size.Width = 393.000000000000000000
+    Size.Height = 337.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 0
-    Width = 393.000000000000000000
   end
   object btnAddItem: TButton
-    Height = 22.000000000000000000
     Position.X = 72.000000000000000000
     Position.Y = 8.000000000000000000
+    Size.Width = 80.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 1
     Text = 'btnAddItem'
-    Width = 80.000000000000000000
     OnClick = btnAddItemClick
   end
   object btnGetSelectedItems: TButton
-    Height = 22.000000000000000000
     Position.X = 176.000000000000000000
     Position.Y = 8.000000000000000000
+    Size.Width = 153.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 2
     Text = 'btnGetSelectedItems'
-    Width = 153.000000000000000000
     OnClick = btnGetSelectedItemsClick
   end
 end
