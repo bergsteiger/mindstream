@@ -70,7 +70,8 @@ var
 implementation
 
 uses
- System.Generics.Collections;
+ System.Generics.Collections,
+ System.Rtti;
 {$R *.fmx}
 
 procedure RunTestModeless(aTest: ITest);
@@ -177,13 +178,18 @@ var
  TestTests: IInterfaceList;
  i: Integer;
  l_TreeViewItem: TTreeViewItem;
+ l_TestValue : TValue;
 begin
  if aTest = nil then
   EXIT;
 
  l_TreeViewItem := TTreeViewItem.Create(self);
- l_TreeViewItem.Text := aTest.Name;
  l_TreeViewItem.IsChecked := True;
+
+ TValue.Make(@aTest, TypeInfo(ITest), l_TestValue);
+
+ l_TreeViewItem.Data := l_TestValue;
+ l_TreeViewItem.Text := aTest.Name + l_TreeViewItem.Text;
 
  if aRootNode = nil then
   TestTree.AddObject(l_TreeViewItem)
@@ -276,10 +282,11 @@ end;
 
 function TfmGUITestRunner.ShouldRunTest(test: ITest): Boolean;
 begin
- if FSelectedTests = nil then
+ Result:= True;
+{ if FSelectedTests = nil then
    Result := test.Enabled
  else
-   Result := FSelectedTests.IndexOf(test as ITest) >= 0;
+   Result := FSelectedTests.IndexOf(test as ITest) >= 0;}
 end;
 
 procedure TfmGUITestRunner.StartTest(test: ITest);
