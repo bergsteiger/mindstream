@@ -2,25 +2,26 @@ object fmGUITestRunner: TfmGUITestRunner
   Left = 0
   Top = 0
   Caption = 'fmGUITestRunner'
-  ClientHeight = 486
-  ClientWidth = 425
+  ClientHeight = 636
+  ClientWidth = 695
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop, iPhone, iPad]
   OnCreate = FormCreate
   OnClose = FormClose
   OnDestroy = FormDestroy
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object TestTree: TTreeView
     Position.X = 16.000000000000000000
     Position.Y = 96.000000000000000000
-    Size.Width = 393.000000000000000000
-    Size.Height = 289.000000000000000000
+    Size.Width = 449.000000000000000000
+    Size.Height = 265.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
   end
   object btnAddItem: TButton
-    Position.X = 72.000000000000000000
+    Position.X = 16.000000000000000000
     Position.Y = 56.000000000000000000
     Size.Width = 80.000000000000000000
     Size.Height = 22.000000000000000000
@@ -30,22 +31,22 @@ object fmGUITestRunner: TfmGUITestRunner
     OnClick = btnAddItemClick
   end
   object btnGetSelectedItems: TButton
-    Position.X = 176.000000000000000000
+    Position.X = 120.000000000000000000
     Position.Y = 56.000000000000000000
     Size.Width = 153.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 2
+    TabOrder = 5
     Text = 'btnGetSelectedItems'
     OnClick = btnGetSelectedItemsClick
   end
   object ToolBar1: TToolBar
-    Size.Width = 425.000000000000000000
+    Size.Width = 695.000000000000000000
     Size.Height = 33.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 4
+    TabOrder = 7
     object btRunAllTest: TSpeedButton
-      Position.X = 40.000000000000000000
+      Position.X = 16.000000000000000000
       Position.Y = 8.000000000000000000
       Size.Width = 49.000000000000000000
       Size.Height = 22.000000000000000000
@@ -54,5 +55,48 @@ object fmGUITestRunner: TfmGUITestRunner
       Text = 'btRunAllTest'
       OnClick = btRunAllTestClick
     end
+  end
+  object btnAddListViewItem: TButton
+    Position.X = 24.000000000000000000
+    Position.Y = 368.000000000000000000
+    Size.Width = 129.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    Text = 'btnAddListViewItem'
+    OnClick = btnAddListViewItemClick
+  end
+  object lvResult: TListView
+    ItemAppearanceClassName = 'TListItemAppearance'
+    ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    EditMode = True
+    Position.X = 16.000000000000000000
+    Position.Y = 400.000000000000000000
+    Size.Width = 257.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 8
+  end
+  object btnNodeToTest: TButton
+    Position.X = 296.000000000000000000
+    Position.Y = 56.000000000000000000
+    Size.Width = 113.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'btnNodeToTest'
+    OnClick = btnNodeToTestClick
+  end
+  object btnTestToNode: TButton
+    Position.X = 424.000000000000000000
+    Position.Y = 56.000000000000000000
+    Size.Width = 113.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = 'btnTestToNode'
+    OnClick = btnTestToNodeClick
   end
 end
