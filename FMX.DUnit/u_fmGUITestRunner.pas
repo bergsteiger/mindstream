@@ -344,33 +344,12 @@ var
 
  i: Integer;
 begin
- { Set up the GUI nodes in the test nodes. We do it here because the form,
-   the tree and all its tree nodes get recreated in TCustomForm.ShowModal
-   in D8+ so we cannot do it sooner.
-   This method is also called after loading test libraries }
-
- { node := TestTree.Items.GetFirstNode;
-   while assigned(node) do
-   begin
-   // Get and check the test for the tree node
-
-   test := NodeToTest(node);
-   assert(Assigned(test));
-
-   // Save the tree node in the test and get the next tree node
-
-   test.GUIObject := node;
-
-   node := node.GetNext;
-   end; }
-
- //Assert(False);
-{ TODO : Добавить рекурсивный вызов для всех детей. }
  for i := 0 to Pred(aNode.Count) do
  begin
   l_Test := NodeToTest(aNode.Items[i]);
   assert(Assigned(l_Test));
   l_Test.GUIObject := aNode.Items[i];
+  SetupGUINodes(aNode.Items[i]);
  end;
 end;
 
