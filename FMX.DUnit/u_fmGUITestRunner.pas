@@ -8,27 +8,24 @@ uses
  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
  FMX.Layouts, FMX.TreeView, FMX.ListView.Types, FMX.ListView;
 
+const
+ c_ColorOk = TAlphaColorRec.Green;
+ c_ColorFailure = TAlphaColorRec.Fuchsia;
+ c_ColorError = TAlphaColorRec.Red;
+
 type
  TfmGUITestRunner = class(TForm, ITestListener)
   TestTree: TTreeView;
-  btnAddItem: TButton;
   btnGetSelectedItems: TButton;
   ToolBar1: TToolBar;
   btRunAllTest: TSpeedButton;
-  btnAddListViewItem: TButton;
-  lvResult: TListView;
-  btnNodeToTest: TButton;
-    btnTestToNode: TButton;
   procedure btnAddItemClick(Sender: TObject);
   procedure FormCreate(Sender: TObject);
   procedure btnGetSelectedItemsClick(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
   procedure FormClose(Sender: TObject; var Action: TCloseAction);
   procedure btRunAllTestClick(Sender: TObject);
-  procedure btnAddListViewItemClick(Sender: TObject);
-  procedure btnNodeToTestClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure btnTestToNodeClick(Sender: TObject);
+  procedure FormShow(Sender: TObject);
  protected
   FSuite: ITest;
   FTests: TInterfaceList;
@@ -42,14 +39,14 @@ type
   procedure FillTestTree(aRootNode: TTreeViewItem; aTest: ITest); overload;
   procedure RunTheTest(aTest: ITest);
 
-  procedure UpdateStatus(const fullUpdate: Boolean);
-
   function NodeToTest(node: TTreeViewItem): ITest;
   function TestToNode(test: ITest): TTreeViewItem;
   function SelectedTest: ITest;
   procedure ListSelectedTests;
 
   procedure SetupGUINodes(aNode: TTreeViewItem);
+
+  procedure SetTreeNodeFont(aNode :TTreeViewItem; aColor: TAlphaColor);
  public
   { : The test suite to be run in this runner }
   property Suite: ITest read FSuite write SetSuite;
@@ -59,8 +56,8 @@ type
   procedure TestingStarts;
   procedure StartTest(aTest: ITest);
 
-  procedure AddSuccess(test: ITest);
-  procedure AddError(error: TTestFailure);
+  procedure AddSuccess(aTest: ITest);
+  procedure AddError(aFailure: TTestFailure);
   procedure AddFailure(Failure: TTestFailure);
 
   procedure EndTest(test: ITest);
@@ -118,19 +115,23 @@ begin
   TraverseTreeItems(aTree.Items[i], ResultList);
 end;
 
-procedure TfmGUITestRunner.AddError(error: TTestFailure);
+procedure TfmGUITestRunner.AddError(aFailure: TTestFailure);
 begin
- assert(False);
+  SetTreeNodeFont(TestToNode(aFailure.failedTest), c_ColorError);
 end;
 
 procedure TfmGUITestRunner.AddFailure(Failure: TTestFailure);
 begin
- assert(False);
+  SetTreeNodeFont(TestToNode(failure.failedTest), c_ColorFailure);
 end;
 
-procedure TfmGUITestRunner.AddSuccess(test: ITest);
+procedure TfmGUITestRunner.AddSuccess(aTest: ITest);
 begin
- assert(False);
+ Assert(Assigned(aTest));
+ if not IsTestMethod(aTest) then
+  SetTreeNodeFont(TestToNode(aTest), c_ColorOk)
+// else
+//  Assert(False);
 end;
 
 procedure TfmGUITestRunner.btnAddItemClick(Sender: TObject);
@@ -151,16 +152,6 @@ begin
  TestTree.EndUpdate;
 end;
 
-procedure TfmGUITestRunner.btnAddListViewItemClick(Sender: TObject);
-var
- l_Item: TListViewItem;
-begin
- lvResult.BeginUpdate;
- l_Item := lvResult.Items.Add;
- l_Item.Text := 'Result';
- lvResult.EndUpdate;
-end;
-
 procedure TfmGUITestRunner.btnGetSelectedItemsClick(Sender: TObject);
 var
  ResultList: TList<TTreeViewItem>;
@@ -179,20 +170,8 @@ begin
  FreeAndNil(ResultList);
 end;
 
-procedure TfmGUITestRunner.btnNodeToTestClick(Sender: TObject);
-var
- l_TTreeViewItem: TTreeViewItem;
- l_Test: ITest;
-begin
- l_TTreeViewItem := TestTree.Selected;
- assert(l_Test = nil);
- l_Test := NodeToTest(l_TTreeViewItem);
- ShowMessage(l_Test.Name);
-end;
-
 procedure TfmGUITestRunner.btRunAllTestClick(Sender: TObject);
 begin
- ShowMessage('RunAll');
  if Suite = nil then
   EXIT;
 
@@ -200,14 +179,13 @@ begin
  RunTheTest(Suite);
 end;
 
-procedure TfmGUITestRunner.btnTestToNodeClick(Sender: TObject);
-begin
- ShowMessage((TestToNode(FTests.Items[2] as ITest)).Text);
-end;
-
 procedure TfmGUITestRunner.EndTest(test: ITest);
 begin
- assert(False);
+ // Закомител, потому как тут надо обновлять общую информацию о результатах
+ // тестов. А нам пока нечего показывать.
+ // И если будет утверждение, то после первого захода сюда, результаты не отображаются
+ // Пока так, однозначно TODO
+ // assert(False);
 end;
 
 procedure TfmGUITestRunner.FillTestTree(aRootNode: TTreeViewItem; aTest: ITest);
@@ -275,8 +253,8 @@ end;
 
 procedure TfmGUITestRunner.FormShow(Sender: TObject);
 var
- i: integer;
- l_Test : ITest;
+ i: Integer;
+ l_Test: ITest;
 begin
  for i := 0 to Pred(TestTree.Count) do
  begin
@@ -337,6 +315,13 @@ begin
   InitTree;
 end;
 
+procedure TfmGUITestRunner.SetTreeNodeFont(aNode: TTreeViewItem;
+                                           aColor: TAlphaColor);
+begin
+ aNode.StyledSettings := [];
+ aNode.FontColor := aColor;
+end;
+
 procedure TfmGUITestRunner.SetupGUINodes(aNode: TTreeViewItem);
 var
  l_Node: TTreeViewItem;
@@ -366,18 +351,18 @@ procedure TfmGUITestRunner.StartTest(aTest: ITest);
 var
  l_Node: TTreeViewItem;
 begin
- assert(assigned(TestResult));
- assert(assigned(aTest));
+ assert(Assigned(TestResult));
+ assert(Assigned(aTest));
  l_Node := TestToNode(aTest);
- assert(assigned(l_Node));
- // SetTreeNodeImage(node, imgRunning);
+ assert(Assigned(l_Node));
+
+ SetTreeNodeFont(l_Node, c_ColorOk);
  { if ShowTestedNodeAction.Checked then
    begin
    MakeNodeVisible(node);
    TestTree.Update;
    end;
    ClearStatusMessage; }
- UpdateStatus(False);
 end;
 
 procedure TfmGUITestRunner.Status(test: ITest; const Msg: string);
@@ -387,27 +372,21 @@ end;
 
 procedure TfmGUITestRunner.TestingEnds(TestResult: TTestResult);
 begin
- assert(False);
+  FTotalTime := TestResult.TotalTime;
 end;
 
 procedure TfmGUITestRunner.TestingStarts;
 begin
  FTotalTime := 0;
- UpdateStatus(True);
 end;
 
 function TfmGUITestRunner.TestToNode(test: ITest): TTreeViewItem;
 begin
-  assert(assigned(test));
+ assert(Assigned(test));
 
-  Result := test.GUIObject as TTreeViewItem;
+ Result := test.GUIObject as TTreeViewItem;
 
-  assert(assigned(Result));
-end;
-
-procedure TfmGUITestRunner.UpdateStatus(const fullUpdate: Boolean);
-begin
- assert(False);
+ assert(Assigned(Result));
 end;
 
 end.
