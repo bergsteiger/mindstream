@@ -12,6 +12,7 @@ type
     procedure DoIt;
     procedure OtherDoIt;
     procedure ErrorTest;
+    procedure SecondErrorTest;
   end;//TFirstTest
 
 implementation
@@ -29,6 +30,11 @@ end;
 procedure TSecondTest.OtherDoIt;
 begin
  Check(True);
+end;
+
+procedure TSecondTest.SecondErrorTest;
+begin
+ Check(False);
 end;
 
 initialization

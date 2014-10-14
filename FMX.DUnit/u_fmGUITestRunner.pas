@@ -19,12 +19,15 @@ type
   btnGetSelectedItems: TButton;
   ToolBar1: TToolBar;
   btRunAllTest: TSpeedButton;
+  lvFailureListView: TListView;
+  Button1: TButton;
   procedure FormCreate(Sender: TObject);
   procedure btnGetSelectedItemsClick(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
   procedure FormClose(Sender: TObject; var Action: TCloseAction);
   procedure btRunAllTestClick(Sender: TObject);
   procedure FormShow(Sender: TObject);
+  procedure Button1Click(Sender: TObject);
  protected
   FSuite: ITest;
   FTests: TInterfaceList;
@@ -46,6 +49,8 @@ type
   procedure SetupGUINodes(aNode: TTreeViewItem);
 
   procedure SetTreeNodeFont(aNode :TTreeViewItem; aColor: TAlphaColor);
+
+  function AddFailureItem(aFailure: TTestFailure): TListViewItem;
  public
   property Suite: ITest read FSuite write SetSuite;
   property TestResult: TTestResult read FTestResult write FTestResult;
@@ -56,7 +61,7 @@ type
 
   procedure AddSuccess(aTest: ITest);
   procedure AddError(aFailure: TTestFailure);
-  procedure AddFailure(Failure: TTestFailure);
+  procedure AddFailure(aFailure: TTestFailure);
 
   procedure EndTest(test: ITest);
   procedure TestingEnds(aTestResult: TTestResult);
@@ -113,13 +118,47 @@ begin
 end;
 
 procedure TfmGUITestRunner.AddError(aFailure: TTestFailure);
+var
+ l_ListViewItem : TListViewItem;
 begin
   SetTreeNodeFont(TestToNode(aFailure.failedTest), c_ColorError);
+
+ l_ListViewItem := AddFailureItem(aFailure);
+// l_ListViewItem.
 end;
 
-procedure TfmGUITestRunner.AddFailure(Failure: TTestFailure);
+procedure TfmGUITestRunner.AddFailure(aFailure: TTestFailure);
+var
+ l_ListViewItem : TListViewItem;
 begin
-  SetTreeNodeFont(TestToNode(failure.failedTest), c_ColorFailure);
+  SetTreeNodeFont(TestToNode(aFailure.failedTest), c_ColorFailure);
+
+  l_ListViewItem := AddFailureItem(aFailure);
+end;
+
+function TfmGUITestRunner.AddFailureItem(aFailure: TTestFailure): TListViewItem;
+var
+  l_Item : TListViewItem;
+  l_Node : TTreeViewItem;
+begin
+  assert(assigned(aFailure));
+  l_Item := lvFailureListView.Items.Add;
+
+  l_Item.Text := aFailure.failedTest.Name + '; ' +
+               aFailure.thrownExceptionName  + '; ' +
+               aFailure.thrownExceptionMessage + '; ' +
+               aFailure.LocationInfo  + '; ' +
+               aFailure.AddressInfo  + '; ' +
+               aFailure.StackTrace;
+
+  l_Node := testToNode(aFailure.failedTest);
+  while l_Node <> nil do
+  begin
+    l_Node.Expand;
+    l_Node := l_Node.ParentItem;
+  end;
+
+  Result := l_Item;
 end;
 
 procedure TfmGUITestRunner.AddSuccess(aTest: ITest);
@@ -153,6 +192,25 @@ begin
   Exit;
 
  RunTheTest(Suite);
+end;
+
+procedure TfmGUITestRunner.Button1Click(Sender: TObject);
+var
+  Item: TListViewItem;
+  TextObject: TListItemText;
+  I: Integer;
+begin
+  for I := 0 to 10 do
+  begin
+    Item := lvFailureListView.Items.Add;
+    Item.Text := 'Item ' + I.ToString;
+    TextObject := TListItemText.Create(Item);
+    TextObject.Name := 'SubCaption';
+    TextObject.PlaceOffset.Point := TPointF.Create(100, 0);
+    TextObject.Font.Size := Random(20) + 5;
+    TextObject.Height := Item.Height;
+    TextObject.Text := 'Sub caption';
+  end;
 end;
 
 procedure TfmGUITestRunner.EndTest(test: ITest);

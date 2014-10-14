@@ -2,7 +2,7 @@ object fmGUITestRunner: TfmGUITestRunner
   Left = 0
   Top = 0
   Caption = 'fmGUITestRunner'
-  ClientHeight = 530
+  ClientHeight = 643
   ClientWidth = 454
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -16,7 +16,7 @@ object fmGUITestRunner: TfmGUITestRunner
     Position.X = 16.000000000000000000
     Position.Y = 96.000000000000000000
     Size.Width = 417.000000000000000000
-    Size.Height = 401.000000000000000000
+    Size.Height = 273.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
   end
@@ -45,5 +45,24 @@ object fmGUITestRunner: TfmGUITestRunner
       Text = 'btRunAllTest'
       OnClick = btRunAllTestClick
     end
+  end
+  object lvFailureListView: TListView
+    ItemAppearanceClassName = 'TListItemAppearance'
+    ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    Position.X = 24.000000000000000000
+    Position.Y = 416.000000000000000000
+    Size.Width = 409.000000000000000000
+    Size.Height = 201.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+  end
+  object Button1: TButton
+    Position.X = 56.000000000000000000
+    Position.Y = 384.000000000000000000
+    TabOrder = 5
+    Text = 'Button1'
+    OnClick = Button1Click
   end
 end
