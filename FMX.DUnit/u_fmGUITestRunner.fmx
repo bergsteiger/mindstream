@@ -2,8 +2,8 @@ object fmGUITestRunner: TfmGUITestRunner
   Left = 0
   Top = 0
   Caption = 'fmGUITestRunner'
-  ClientHeight = 643
-  ClientWidth = 454
+  ClientHeight = 570
+  ClientWidth = 448
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop, iPhone, iPad]
@@ -14,27 +14,18 @@ object fmGUITestRunner: TfmGUITestRunner
   DesignerMasterStyle = 0
   object TestTree: TTreeView
     Position.X = 16.000000000000000000
-    Position.Y = 96.000000000000000000
+    Position.Y = 40.000000000000000000
     Size.Width = 417.000000000000000000
     Size.Height = 273.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
-  end
-  object btnGetSelectedItems: TButton
-    Position.X = 16.000000000000000000
-    Position.Y = 56.000000000000000000
-    Size.Width = 153.000000000000000000
-    Size.Height = 22.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 1
-    Text = 'btnGetSelectedItems'
-    OnClick = btnGetSelectedItemsClick
+    OnChangeCheck = TestTreeChangeCheck
   end
   object ToolBar1: TToolBar
-    Size.Width = 454.000000000000000000
+    Size.Width = 448.000000000000000000
     Size.Height = 33.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 3
+    TabOrder = 2
     object btRunAllTest: TSpeedButton
       Position.X = 16.000000000000000000
       Position.Y = 8.000000000000000000
@@ -51,18 +42,18 @@ object fmGUITestRunner: TfmGUITestRunner
     ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
     HeaderAppearanceClassName = 'TListHeaderObjects'
     FooterAppearanceClassName = 'TListHeaderObjects'
-    Position.X = 24.000000000000000000
-    Position.Y = 416.000000000000000000
+    Position.X = 16.000000000000000000
+    Position.Y = 344.000000000000000000
     Size.Width = 409.000000000000000000
     Size.Height = 201.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 4
+    TabOrder = 3
   end
-  object Button1: TButton
-    Position.X = 56.000000000000000000
-    Position.Y = 384.000000000000000000
-    TabOrder = 5
-    Text = 'Button1'
-    OnClick = Button1Click
+  object lblResult: TLabel
+    StyledSettings = [Family, Size, FontColor]
+    Position.X = 16.000000000000000000
+    Position.Y = 328.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    Text = 'Result'
   end
 end
