@@ -23,11 +23,8 @@ uses
  SysUtils,
  System.Math,
  System.UITypes,
- FMX.Types
- {$IfDef VER270}
- , 
+ FMX.Types,
  System.Math.Vectors
- {$EndIf}
  ;
 
 procedure TmsLineWithArrow.DoDrawTo(const aCtx: TmsDrawContext);

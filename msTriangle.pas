@@ -7,11 +7,8 @@ uses
  System.Types,
  FMX.Graphics,
  FMX.Types,
- System.UITypes
- {$IfDef VER270}
- ,
+ System.UITypes,
  System.Math.Vectors
- {$EndIf}
  ;
 
 type
