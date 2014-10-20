@@ -24,7 +24,7 @@ end;
 
 procedure TSecondTest.ErrorTest;
 begin
- Check(False);
+ raise ExceptionClass.Create('Error Message');
 end;
 
 procedure TSecondTest.OtherDoIt;
