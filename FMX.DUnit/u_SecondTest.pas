@@ -17,14 +17,22 @@ type
 
 implementation
 
+uses
+  SysUtils
+  ;
+
 procedure TSecondTest.DoIt;
 begin
  Check(true);
 end;
 
+type
+ EmyException = class(Exception)
+ end;//EmyException
+
 procedure TSecondTest.ErrorTest;
 begin
- raise ExceptionClass.Create('Error Message');
+ raise EmyException.Create('Error Message');
 end;
 
 procedure TSecondTest.OtherDoIt;
