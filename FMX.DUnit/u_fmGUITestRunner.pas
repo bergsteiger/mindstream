@@ -29,6 +29,7 @@ type
   FSuite: ITest;
   FTestResult: TTestResult;
   FTests: TInterfaceList;
+  FTestResult: TTestResult;
   FSelectedTests: TInterfaceList;
   FTotalTime: Int64;
 
