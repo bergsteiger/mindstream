@@ -32,7 +32,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure btnClearImageClick(Sender: TObject);
   private
-   FDiagramm: TmsDiagrammsController;
+   FDiagrammsController: TmsDiagrammsController;
   public
     { Public declarations }
   end;
@@ -46,17 +46,17 @@ implementation
 
 procedure TfmMain.btnClearImageClick(Sender: TObject);
 begin
- FDiagramm.Clear;
+ FDiagrammsController.Clear;
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
- FDiagramm := TmsDiagrammsController.Create(imgMain, cbShapes, cbDiagramm, btAddDiagramm);
+ FDiagrammsController := TmsDiagrammsController.Create(imgMain, cbShapes, cbDiagramm, btAddDiagramm);
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
 begin
- FreeAndNil(FDiagramm);
+ FreeAndNil(FDiagrammsController);
 end;
 
 procedure TfmMain.imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,

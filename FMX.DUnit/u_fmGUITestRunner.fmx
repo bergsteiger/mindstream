@@ -4,36 +4,38 @@ object fmGUITestRunner: TfmGUITestRunner
   Caption = 'fmGUITestRunner'
   ClientHeight = 570
   ClientWidth = 448
+  Position = poScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
-  FormFactor.Devices = [Desktop, iPhone, iPad]
+  FormFactor.Devices = [dkDesktop, dkiPhone, dkiPad]
   OnCreate = FormCreate
-  OnClose = FormClose
   OnDestroy = FormDestroy
   OnShow = FormShow
-  DesignerMasterStyle = 0
+  DesignerMobile = False
+  DesignerWidth = 0
+  DesignerHeight = 0
+  DesignerDeviceName = ''
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
   object TestTree: TTreeView
+    Height = 289.000000000000000000
     Position.X = 16.000000000000000000
     Position.Y = 40.000000000000000000
-    Size.Width = 417.000000000000000000
-    Size.Height = 273.000000000000000000
-    Size.PlatformDefault = False
     TabOrder = 0
+    Width = 425.000000000000000000
     OnChangeCheck = TestTreeChangeCheck
   end
   object ToolBar1: TToolBar
-    Size.Width = 448.000000000000000000
-    Size.Height = 33.000000000000000000
-    Size.PlatformDefault = False
+    Height = 40.000000000000000000
     TabOrder = 2
+    Width = 448.000000000000000000
     object btRunAllTest: TSpeedButton
+      Height = 22.000000000000000000
       Position.X = 16.000000000000000000
       Position.Y = 8.000000000000000000
-      Size.Width = 49.000000000000000000
-      Size.Height = 22.000000000000000000
-      Size.PlatformDefault = False
       StyleLookup = 'playtoolbutton'
       Text = 'btRunAllTest'
+      Width = 80.000000000000000000
       OnClick = btRunAllTestClick
     end
   end
@@ -42,18 +44,17 @@ object fmGUITestRunner: TfmGUITestRunner
     ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
     HeaderAppearanceClassName = 'TListHeaderObjects'
     FooterAppearanceClassName = 'TListHeaderObjects'
+    Height = 217.000000000000000000
     Position.X = 16.000000000000000000
     Position.Y = 344.000000000000000000
-    Size.Width = 409.000000000000000000
-    Size.Height = 201.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 3
+    TabOrder = 1
+    Width = 425.000000000000000000
   end
   object lblResult: TLabel
-    StyledSettings = [Family, Size, FontColor]
+    Height = 17.000000000000000000
     Position.X = 16.000000000000000000
     Position.Y = 328.000000000000000000
-    TextSettings.Font.Style = [fsBold]
     Text = 'Result'
+    Width = 120.000000000000000000
   end
 end

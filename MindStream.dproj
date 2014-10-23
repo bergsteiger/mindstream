@@ -195,6 +195,10 @@
         <DCCReference Include="msOurShapes.pas"/>
         <DCCReference Include="msTriangleDirectionRight.pas"/>
         <DCCReference Include="msMover.pas"/>
+        <DCCReference Include="FMX.DUnit\u_fmGUITestRunner.pas">
+            <Form>fmGUITestRunner</Form>
+        </DCCReference>
+        <DCCReference Include="Tests\FirstTest.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>
@@ -219,6 +223,8 @@
         <None Include="ModelSupport_MindStream\msTriangle1\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msMover\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msTriangleDirectionRight\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\u_fmGUITestRunner\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\FirstTest\default.txvpck"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

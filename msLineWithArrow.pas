@@ -23,9 +23,13 @@ uses
  SysUtils,
  System.Math,
  System.UITypes,
- FMX.Types,
+ FMX.Types
+ {$IFDEF VER270}
+ ,
  System.Math.Vectors
+ {$ENDIF}
  ;
+
 
 procedure TmsLineWithArrow.DoDrawTo(const aCtx: TmsDrawContext);
 var

@@ -7,8 +7,11 @@ uses
  msTriangle,
  System.Math,
  System.UITypes,
- System.Types,
+ System.Types
+ {$IFDEF VER270}
+ ,
  System.Math.Vectors
+ {$ENDIF}
  ;
 
 type

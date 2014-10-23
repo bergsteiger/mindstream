@@ -22,12 +22,15 @@ uses
   msSmallTriangle in 'msSmallTriangle.pas',
   msOurShapes in 'msOurShapes.pas',
   msTriangleDirectionRight in 'msTriangleDirectionRight.pas',
-  msMover in 'msMover.pas';
+  msMover in 'msMover.pas',
+  u_fmGUITestRunner in 'FMX.DUnit\u_fmGUITestRunner.pas' {fmGUITestRunner},
+  FirstTest in 'Tests\FirstTest.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TfmMain, fmMain);
+  u_fmGUITestRunner.RunRegisteredTestsModeless;
   Application.Run;
 end.

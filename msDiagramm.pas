@@ -21,7 +21,7 @@ type
   function ShapeByPt(const aPoint: TPointF): ImsShape;
  end;//TmsShapeList
 
- TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapesController)
+ TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapesController, IInvokable)
  private
   FShapeList : TmsShapeList;
   FCurrentClass : RmsShape;
