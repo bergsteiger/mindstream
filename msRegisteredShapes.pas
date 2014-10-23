@@ -23,8 +23,8 @@ type
   procedure Register(const aShapes: array of RmsShape); overload;
   destructor Destroy; override;
   function GetEnumerator: RmsShapeList.TEnumerator;
-    function IndexOf(const aValue: RmsShape): Integer;
-    function Func: Integer;
+  function IndexOf(const aValue: RmsShape): Integer;
+  function Func: Integer;
   end;//TmsRegisteredShapes
 
 implementation

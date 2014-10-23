@@ -24,7 +24,8 @@ uses
   msTriangleDirectionRight in 'msTriangleDirectionRight.pas',
   msMover in 'msMover.pas',
   u_fmGUITestRunner in 'FMX.DUnit\u_fmGUITestRunner.pas' {fmGUITestRunner},
-  FirstTest in 'Tests\FirstTest.pas';
+  FirstTest in 'Tests\FirstTest.pas',
+  RegisteredShapesTest in 'Tests\RegisteredShapesTest.pas';
 
 {$R *.res}
 
