@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="pkvo9cfsu7l1vwgzf_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="design:view:::hon984w3lsoh6onof_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,100,104" />
+      <reference referencedUin="design:view:::0dy23ax6usohah0em_v" />
+    </reference>
+    <reference referencedUin="design:view:::bgd9ftofpsoadryne_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="129,1,100,121" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_SecondTest.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_SecondTest.TSecondTest" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_SecondTest.EmyException" />
+    </reference>
+    <reference referencedUin="design:view:::6ijjzb8rson7h05s_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="283,1,133,121" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::35ke04k0sso6ehpip_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="283,171,100,121" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_TCounter.TCounter" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_TCounter.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::gwenpassssor8lmcg_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="164,190,100,121" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_FirstTest.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_FirstTest.TFirstTest" />
+    </reference>
+    <reference referencedUin="design:view:::g5jsirqyjabp4x9ej_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="320,80,104,123" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TStatusToResultAdapter" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TMethodEnumerator" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.PObject" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TConverter&lt;1&gt;" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.IMemLeakMonitor" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TTestSuite" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.EDunitException" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITestListener" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITestSuite" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.RunCountAttribute" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.IDUnitMemLeakMonitor" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TListIterator" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITestDecorator" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TAllowedLeakArray" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.EStopTestsFailure" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TGenericTestCase" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITestListenerX" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TTestFailure" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TTestCaseClass" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TAbstractTest" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TValueData" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ExceptionClass" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TTestMethod" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TTestProc" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITest" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.EBreakingTestFailure" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TTestResult" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ETestFailure" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TTestCase" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.@unitclass" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.EPostTestFailure" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.IStatusListener" />
+      <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ETestError" />
+    </reference>
+    <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITestListenerX">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="0,380,190,96" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListenerX.StartSuite(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListenerX.EndSuite(TestFramework.ITest)" />
+      <reference referencedUin="delphi:l_conn:lib:DelphiWin32:TestFramework.ITestListenerX:TestFramework.ITestListener">
+        <property name="sourceAnchor" value="95,380" />
+        <property name="targetAnchor" value="95,200" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITestListener">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="0,0,205,200" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListener.TestingStarts()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListener.StartTest(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListener.AddSuccess(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListener.AddError(TestFramework.TTestFailure)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListener.AddFailure(TestFramework.TTestFailure)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListener.EndTest(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListener.TestingEnds(TestFramework.TTestResult)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListener.ShouldRunTest(TestFramework.ITest)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITestDecorator">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="800,0,192,98" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestDecorator.GetTest()" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITestDecorator.Test" />
+      <reference referencedUin="delphi:l_ast:lib:DelphiWin32:TestFramework.ITestDecorator.Test">
+        <property name="sourceAnchor" value="888,98" />
+        <property name="targetAnchor" value="888,158" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_conn:lib:DelphiWin32:TestFramework.ITestDecorator:TestFramework.ITest">
+        <property name="sourceAnchor" value="896,98" />
+        <property name="targetAnchor" value="896,158" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TTestCase">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1934,1810,170,71" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestCase.fMethod" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestCase.Invoke(TestFramework.TTestCase.TTestMethod)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestCase.RunWithFixture(TestFramework.TTestResult)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestCase.RunTest(TestFramework.TTestResult)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestCase.Create(System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestCase.Suite()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestCase.Run(TestFramework.TTestResult)" />
+      <reference referencedUin="delphi:l_conn:lib:DelphiWin32:TestFramework.TTestCase:TestFramework.TAbstractTest">
+        <property name="sourceAnchor" value="2077,1810" />
+        <property name="targetAnchor" value="2077,1717" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TTestResult">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="0,760,343,867" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FTotalTime" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FFailures" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FErrors" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FOverRides" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FListeners" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FRootTest" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FRunTests" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FStop" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FBreakOnFailures" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FFailsIfNoChecksExecuted" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FIgnoresMemoryLeakInSetUpTearDown" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FMemoryLeakIgnoredInSetupOrTearDown" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FFailsIfMemoryLeaked" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FMethodPtr" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FStatusAdapter" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.Run(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.RunTestSetup(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.RunTestTearDown(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.RunTestRun(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.TestingStarts()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.StartSuite(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.StartTest(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.ShouldRunTest(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.Status(TestFramework.ITest,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.EndSuite(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.EndTest(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.TestingEnds()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.Create()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.Destroy()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.AddListener(TestFramework.ITestListener)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.RunSuite(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.AddSuccess(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.AddFailure(TestFramework.ITest,System.SysUtils.Exception,System.Pointer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.AddError(TestFramework.ITest,System.SysUtils.Exception,System.Pointer,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.Stop()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.ShouldStop()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.RunCount()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.ErrorCount()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.FailureCount()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.GetError(System.Integer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.GetFailure(System.Integer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.WasStopped()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestResult.WasSuccessful()" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TTestResult.BreakOnFailures" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TTestResult.FailsIfNoChecksExecuted" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TTestResult.FailsIfMemoryLeaked" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TTestResult.IgnoresMemoryLeakInSetUpTearDown" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TTestResult.MemoryLeakIgnoredInSetupOrTearDown" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TTestResult.TotalTime" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TTestResult.Errors" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TTestResult.Failures" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TTestResult.OverRides" />
+      <reference referencedUin="delphi:l_ast:lib:DelphiWin32:TestFramework.TTestResult.FRootTest">
+        <property name="sourceAnchor" value="343,905" />
+        <property name="targetAnchor" value="579,905" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:lib:DelphiWin32:TestFramework.TTestResult.Failures">
+        <property name="sourceAnchor" value="343,1465" />
+        <property name="targetAnchor" value="800,1465" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:lib:DelphiWin32:TestFramework.TTestResult.Errors">
+        <property name="sourceAnchor" value="343,1473" />
+        <property name="targetAnchor" value="800,1473" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITestSuite">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="595,1,165,96" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestSuite.AddTest(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestSuite.AddSuite(TestFramework.ITestSuite)" />
+      <reference referencedUin="delphi:l_conn:lib:DelphiWin32:TestFramework.ITestSuite:TestFramework.ITest">
+        <property name="sourceAnchor" value="677,97" />
+        <property name="targetAnchor" value="677,158" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITest">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="579,158,490,892" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetName()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.CountTestCases()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.CountEnabledTestCases()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.Tests()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SetUp()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.TearDown()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.Run()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.RunWithFixture(TestFramework.TTestResult)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.RunTest(TestFramework.TTestResult)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetTestMethodInvoked()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SetTestMethodInvoked(System.Boolean)" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.TestMethodInvoked" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetEnabled()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SetEnabled(System.Boolean)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SetStartTime(System.Int64)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetStartTime()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SetStopTime(System.Int64)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetStopTime()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.ElapsedTestTime()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetRunCount()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SetRunCount(System.Integer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SetStatusListener(TestFramework.IStatusListener)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetStatus()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.LoadConfiguration(System.IniFiles.TCustomIniFile,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SaveConfiguration(System.IniFiles.TCustomIniFile,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SetGUIObject(System.TObject)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetGUIObject()" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.RunCount" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.Name" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.Enabled" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.GUIObject" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.Status" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.StartTime" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.StopTime" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SetFailsOnNoChecksExecuted(System.Boolean)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetFailsOnNoChecksExecuted()" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.FailsOnNoChecksExecuted" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetFailsOnMemoryLeak()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SetFailsOnMemoryLeak(System.Boolean)" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.FailsOnMemoryLeak" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetAllowedMemoryLeakSize()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SetAllowedMemoryLeakSize(System.Integer)" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.AllowedMemoryLeakSize" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetFailsOnMemoryRecovery()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SetFailsOnMemoryRecovery(System.Boolean)" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.FailsOnMemoryRecovery" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SetAllowedLeakArray(System.Integer[])" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetIgnoreSetUpTearDownLeaks()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SetIgnoreSetUpTearDownLeaks(System.Boolean)" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.IgnoreSetUpTearDownLeaks" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetAllowedLeak()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetAllowedLeaksIterator()" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.AllowedLeaksIterator" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.Run(TestFramework.TTestResult)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TTestSuite">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2444,644,169,71" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestSuite.FTests" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestSuite.RunTest(TestFramework.TTestResult)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestSuite.Create()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestSuite.CountTestCases()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestSuite.CountEnabledTestCases()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestSuite.Tests()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestSuite.AddTest(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestSuite.AddTests(TestFramework.TTestCaseClass)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestSuite.AddSuite(TestFramework.ITestSuite)">
+        <property name="$hidden" value="True" />
+      </reference>
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestSuite.LoadConfiguration(System.IniFiles.TCustomIniFile,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestSuite.SaveConfiguration(System.IniFiles.TCustomIniFile,System.string)" />
+      <reference referencedUin="delphi:l_conn:lib:DelphiWin32:TestFramework.TTestSuite:TestFramework.TAbstractTest">
+        <property name="sourceAnchor" value="2444,762" />
+        <property name="targetAnchor" value="2342,762" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TAbstractTest">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1813,10,187,87" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FTestName" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FEnabled" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FStartTime" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FStopTime" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FRunCount" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FStatusListener" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FStatusStrings" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FExpectedException" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FCheckCalled" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FFailsOnNoChecksExecuted" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FFailsOnMemoryLeak" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FTestMethodInvoked" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FFailsOnMemoryRecovery" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FIgnoreSetUpTearDownLeaks" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FMemoryLeakIgnoredInSetupTearDown" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FAllowedLeakList" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FAllowedLeakListIndex" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TAbstractTest.FGUIObject" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.Invoke(TestFramework.TAbstractTest.Invoke.TTestMethod)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.RunWithFixture(TestFramework.TTestResult)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.RunTest(TestFramework.TTestResult)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetUp()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.TearDown()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetStartTime(System.Int64)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetStartTime()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetStopTime(System.Int64)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetStopTime()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetRunCount()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetRunCount(System.Integer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetGUIObject(System.TObject)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetGUIObject()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetFailsOnNoChecksExecuted(System.Boolean)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetFailsOnNoChecksExecuted()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetFailsOnMemoryLeak()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetFailsOnMemoryLeak(System.Boolean)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetMemDiffStr(System.Pointer,System.Pointer,System.Cardinal,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetAllowedMemoryLeakSize()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetAllowedMemoryLeakSize(System.Integer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetFailsOnMemoryRecovery()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetFailsOnMemoryRecovery(System.Boolean)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetIgnoreSetUpTearDownLeaks()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetIgnoreSetUpTearDownLeaks(System.Boolean)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetMemoryLeakIgnoredInSetupTearDown()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetMemoryLeakIgnoredInSetupTearDown(System.Boolean)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetAllowedLeakArray(System.Integer[])" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetAllowedLeak()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetAllowedLeaksIterator()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.Create(System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.Destroy()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetName()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetEnabled()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetEnabled(System.Boolean)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.Tests()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CountTestCases()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CountEnabledTestCases()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.Run()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetTestMethodInvoked()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetTestMethodInvoked(System.Boolean)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.ElapsedTestTime()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SetStatusListener(TestFramework.IStatusListener)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.Status(System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.GetStatus()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.LoadConfiguration(System.string,System.Boolean,System.Boolean)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.SaveConfiguration(System.string,System.Boolean,System.Boolean)" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TAbstractTest.Name" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TAbstractTest.Enabled" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.BoolToStr(System.Boolean)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.Check(System.Boolean,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckTrue(System.Boolean,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckFalse(System.Boolean,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckEquals(System.Extended,System.Extended,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckEqualsString(System.string,System.string,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckEqualsWideString(System.WideString,System.WideString,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckEqualsMem(System.Pointer,System.Pointer,System.Cardinal,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckEqualsBin(System.Cardinal,System.Cardinal,System.string,System.Integer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckEqualsHex(System.Cardinal,System.Cardinal,System.string,System.Integer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckNotEquals(System.Integer,System.Integer,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckNotEqualsString(System.string,System.string,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckNotEqualsWideString(System.WideString,System.WideString,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckNotEqualsMem(System.Pointer,System.Pointer,System.Cardinal,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckNotEqualsBin(System.Cardinal,System.Cardinal,System.string,System.Integer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckNotEqualsHex(System.Cardinal,System.Cardinal,System.string,System.Integer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckNotNull(System.IInterface,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckNull(System.IInterface,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckSame(System.IInterface,System.IInterface,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckException(TestFramework.TAbstractTest.CheckException.TTestMethod,System.TClass,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckInherits(System.TClass,System.TClass,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckIs(System.TObject,System.TClass,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CompareFloatRelative(System.Extended,System.Extended)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.Fail(System.string,System.Pointer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.FailEquals(System.string,System.string,System.string,System.Pointer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.FailNotEquals(System.string,System.string,System.string,System.Pointer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.FailNotSame(System.string,System.string,System.string,System.Pointer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.EqualsErrorMessage(System.string,System.string,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.NotEqualsErrorMessage(System.string,System.string,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.NotSameErrorMessage(System.string,System.string,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.StopTests(System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckMethodIsNotEmpty(System.Pointer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.StartExpectingException(TestFramework.ExceptionClass)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.StopExpectingException(System.string)" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TAbstractTest.ExpectedException" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TAbstractTest.FailsOnNoChecksExecuted" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TAbstractTest.FailsOnMemoryLeak" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TAbstractTest.TestMethodInvoked" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TAbstractTest.AllowedMemoryLeakSize" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TAbstractTest.AllowedLeaksIterator" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TAbstractTest.FailsOnMemoryRecovery" />
+      <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TAbstractTest.IgnoreSetUpTearDownLeaks" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.Invoke(TestFramework.TTestCase.TTestMethod)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckEqualsWideString(System.string,System.string,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TAbstractTest.CheckNotEqualsWideString(System.string,System.string,System.string)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TTestFailure">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="800,1320,254,310" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestFailure.FFailedTest" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestFailure.FThrownExceptionClass" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestFailure.FThrownExceptionMessage" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestFailure.FThrownExceptionAddress" />
+      <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestFailure.FStackTrace" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestFailure.CaptureStackTrace(System.SysUtils.Exception,System.Pointer)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestFailure.Create(TestFramework.ITest,System.SysUtils.Exception,System.Pointer,System.string)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestFailure.FailedTest()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestFailure.ThrownExceptionClass()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestFailure.ThrownExceptionName()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestFailure.ThrownExceptionMessage()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestFailure.ThrownExceptionAddress()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestFailure.LocationInfo()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestFailure.AddressInfo()" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestFailure.StackTrace()" />
+      <reference referencedUin="delphi:l_ast:lib:DelphiWin32:TestFramework.TTestFailure.FFailedTest">
+        <property name="sourceAnchor" value="927,1320" />
+        <property name="targetAnchor" value="927,1050" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="260,0,248,657" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.TestTree" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.ToolBar1" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.btRunAllTest" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.lvFailureListView" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.lblResult" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.FormCreate(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.FormDestroy(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.FormClose(System.TObject,ref@System.UITypes.TCloseAction)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.btRunAllTestClick(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.FormShow(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.TestTreeChangeCheck(System.TObject)" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.FSuite" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.FTests" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.FSelectedTests" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.FTotalTime" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.SetSuite(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.InitTree()" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.FillTestTree(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.FillTestTree(FMX.TreeView.TTreeViewItem,TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.RunTheTest(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.NodeToTest(FMX.TreeView.TTreeViewItem)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.TestToNode(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.SetupGUINodes(FMX.TreeView.TTreeViewItem)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.SetTreeNodeFont(FMX.TreeView.TTreeViewItem,System.UITypes.TAlphaColor)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.AddFailureNode(TestFramework.TTestFailure)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.SetNodeEnabled(FMX.TreeView.TTreeViewItem,System.Boolean)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.ClearResult()" />
+      <reference referencedUin="delphi:e_property:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.Suite" />
+      <reference referencedUin="delphi:e_property:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.TestResult" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.TestingStarts()" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.StartTest(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.AddSuccess(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.AddError(TestFramework.TTestFailure)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.AddFailure(TestFramework.TTestFailure)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.EndTest(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.TestingEnds(TestFramework.TTestResult)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.ShouldRunTest(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.Status(TestFramework.ITest,System.string)" />
+      <reference referencedUin="delphi:l_impl:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner:TestFramework.ITestListener">
+        <property name="sourceAnchor" value="260,100" />
+        <property name="targetAnchor" value="205,100" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.FSuite">
+        <property name="sourceAnchor" value="508,407" />
+        <property name="targetAnchor" value="579,407" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.Suite">
+        <property name="sourceAnchor" value="508,399" />
+        <property name="targetAnchor" value="579,399" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.TestResult">
+        <property name="sourceAnchor" value="301,657" />
+        <property name="targetAnchor" value="301,760" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+  </view>
+</nodeSet>
