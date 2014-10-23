@@ -29,8 +29,9 @@ type
  protected
   FSuite: ITest;
   FTests: TInterfaceList;
+  FTestResult: TTestResult;
   FSelectedTests: TInterfaceList;
-    FTotalTime: Int64;
+  FTotalTime: Int64;
 
   procedure SetSuite(aValue: ITest);
   procedure InitTree;
