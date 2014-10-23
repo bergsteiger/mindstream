@@ -30,8 +30,7 @@ type
   FSuite: ITest;
   FTests: TInterfaceList;
   FSelectedTests: TInterfaceList;
-  FTestResult: TTestResult;
-  FTotalTime: Int64;
+    FTotalTime: Int64;
 
   procedure SetSuite(aValue: ITest);
   procedure InitTree;
