@@ -11,6 +11,7 @@ type
    published
     procedure DoIt;
     procedure FailureTest;
+    procedure DoItAgain;
   end;//TFirstTest
 
 implementation
@@ -20,6 +21,11 @@ uses
   ;
 
 procedure TFirstTest.DoIt;
+begin
+ Check(true);
+end;
+
+procedure TFirstTest.DoItAgain;
 begin
  Check(true);
 end;
