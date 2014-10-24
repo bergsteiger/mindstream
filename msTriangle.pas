@@ -8,7 +8,7 @@ uses
  FMX.Graphics,
  FMX.Types,
  System.UITypes
- {$IFDEF VER270}
+ {$IF DEFined(VER270) OR DEFined(VER280)}
  ,
  System.Math.Vectors
  {$ENDIF}

@@ -24,7 +24,7 @@ uses
  System.Math,
  System.UITypes,
  FMX.Types
- {$IFDEF VER270}
+ {$IF DEFined(VER270) OR DEFined(VER280)}
  ,
  System.Math.Vectors
  {$ENDIF}

@@ -4,38 +4,36 @@ object fmGUITestRunner: TfmGUITestRunner
   Caption = 'fmGUITestRunner'
   ClientHeight = 570
   ClientWidth = 448
-  Position = poScreenCenter
+  Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
-  FormFactor.Devices = [dkDesktop, dkiPhone, dkiPad]
+  FormFactor.Devices = [Desktop, iPhone, iPad]
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  DesignerMobile = False
-  DesignerWidth = 0
-  DesignerHeight = 0
-  DesignerDeviceName = ''
-  DesignerOrientation = 0
-  DesignerOSVersion = ''
+  DesignerMasterStyle = 0
   object TestTree: TTreeView
-    Height = 289.000000000000000000
     Position.X = 16.000000000000000000
     Position.Y = 40.000000000000000000
+    Size.Width = 425.000000000000000000
+    Size.Height = 289.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 0
-    Width = 425.000000000000000000
     OnChangeCheck = TestTreeChangeCheck
   end
   object ToolBar1: TToolBar
-    Height = 40.000000000000000000
+    Size.Width = 448.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 2
-    Width = 448.000000000000000000
     object btRunAllTest: TSpeedButton
-      Height = 22.000000000000000000
       Position.X = 16.000000000000000000
       Position.Y = 8.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
       StyleLookup = 'playtoolbutton'
       Text = 'btRunAllTest'
-      Width = 80.000000000000000000
       OnClick = btRunAllTestClick
     end
   end
@@ -44,17 +42,19 @@ object fmGUITestRunner: TfmGUITestRunner
     ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
     HeaderAppearanceClassName = 'TListHeaderObjects'
     FooterAppearanceClassName = 'TListHeaderObjects'
-    Height = 217.000000000000000000
     Position.X = 16.000000000000000000
     Position.Y = 344.000000000000000000
+    Size.Width = 425.000000000000000000
+    Size.Height = 217.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 1
-    Width = 425.000000000000000000
   end
   object lblResult: TLabel
-    Height = 17.000000000000000000
     Position.X = 16.000000000000000000
     Position.Y = 328.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
     Text = 'Result'
-    Width = 120.000000000000000000
   end
 end
