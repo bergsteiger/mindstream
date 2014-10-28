@@ -20,7 +20,7 @@ type
 
   TestTmsPointCircle = class(TTestCase)
   strict private
-    FmsPointCircle: TmsPointCircle;
+    FmsPointCircle: ImsShape;
   public
     procedure SetUp; override;
     procedure TearDown; override;
@@ -30,12 +30,11 @@ implementation
 
 procedure TestTmsPointCircle.SetUp;
 begin
-  FmsPointCircle := TmsPointCircle.Create;
+  FmsPointCircle := TmsPointCircle.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil));
 end;
 
 procedure TestTmsPointCircle.TearDown;
 begin
-  FmsPointCircle.Free;
   FmsPointCircle := nil;
 end;
 

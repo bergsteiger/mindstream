@@ -19,7 +19,7 @@ type
 
   TestTmsLine = class(TTestCase)
   strict private
-    FmsLine: TmsLine;
+    FmsLine: ImsShape;
   public
     procedure SetUp; override;
     procedure TearDown; override;
@@ -33,12 +33,11 @@ implementation
 
 procedure TestTmsLine.SetUp;
 begin
-  FmsLine := TmsLine.Create;
+  FmsLine := TmsLine.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil));
 end;
 
 procedure TestTmsLine.TearDown;
 begin
-  FmsLine.Free;
   FmsLine := nil;
 end;
 

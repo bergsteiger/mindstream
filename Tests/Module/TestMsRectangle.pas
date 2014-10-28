@@ -20,7 +20,7 @@ type
 
   TestTmsRectangle = class(TTestCase)
   strict private
-    FmsRectangle: TmsRectangle;
+    FmsRectangle: ImsShape;
   public
     procedure SetUp; override;
     procedure TearDown; override;
@@ -32,12 +32,11 @@ implementation
 
 procedure TestTmsRectangle.SetUp;
 begin
-  FmsRectangle := TmsRectangle.Create;
+  FmsRectangle := TmsRectangle.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil));
 end;
 
 procedure TestTmsRectangle.TearDown;
 begin
-  FmsRectangle.Free;
   FmsRectangle := nil;
 end;
 
