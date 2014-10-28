@@ -198,8 +198,8 @@
         <DCCReference Include="FMX.DUnit\u_fmGUITestRunner.pas">
             <Form>fmGUITestRunner</Form>
         </DCCReference>
-        <DCCReference Include="Tests\FirstTest.pas"/>
-        <DCCReference Include="Tests\RegisteredShapesTest.pas"/>
+        <DCCReference Include="Tests\Module\FirstTest.pas"/>
+        <DCCReference Include="Tests\Integrated\RegisteredShapesTest.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>
