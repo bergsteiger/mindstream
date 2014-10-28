@@ -100,13 +100,13 @@ type
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   property StartPoint : TPointF read FStartPoint;
-  constructor Create(const aStartPoint: TPointF); virtual;
+  constructor CreateInner(const aStartPoint: TPointF); virtual;
   function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
  public
-  class function Make(const aCtx: TmsMakeShapeContext): ImsShape; virtual;
+  class function Create(const aCtx: TmsMakeShapeContext): ImsShape; virtual;
   // - фабричный метод, который создаЄт экземпл€р класса как интерфейс
   //   про "фабричный метод вообще" - написано тут:
   //   - http://icoder.ucoz.ru/blog/factory_method/2013-04-30-24
@@ -128,9 +128,9 @@ type
 
 implementation
 
-class function TmsShape.Make(const aCtx: TmsMakeShapeContext): ImsShape;
+class function TmsShape.Create(const aCtx: TmsMakeShapeContext): ImsShape;
 begin
- Result := Create(aCtx.rStartPoint);
+ Result := CreateInner(aCtx.rStartPoint);
 end;
 
 function TmsShape.ContainsPt(const aPoint: TPointF): Boolean;
@@ -138,7 +138,7 @@ begin
  Result := False;
 end;
 
-constructor TmsShape.Create(const aStartPoint: TPointF);
+constructor TmsShape.CreateInner(const aStartPoint: TPointF);
 begin
  inherited Create;
  FStartPoint := aStartPoint;

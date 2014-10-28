@@ -14,7 +14,7 @@ type
   FFinishPoint: TPointF;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  constructor Create(const aStartPoint: TPointF); override;
+  constructor CreateInner(const aStartPoint: TPointF); override;
   property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
  public
   function IsNeedsSecondClick : Boolean; override;
@@ -29,7 +29,7 @@ uses
  msPointCircle
  ;
 
-constructor TmsLine.Create(const aStartPoint: TPointF);
+constructor TmsLine.CreateInner(const aStartPoint: TPointF);
 begin
  inherited;
  FinishPoint := aStartPoint;
@@ -51,7 +51,7 @@ var
 begin
  if (StartPoint = FinishPoint) then
  begin
-  l_Proxy := TmsPointCircle.Create(StartPoint);
+  l_Proxy := TmsPointCircle.CreateInner(StartPoint);
   try
    l_Proxy.DrawTo(aCtx);
   finally

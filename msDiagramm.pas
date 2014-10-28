@@ -95,7 +95,7 @@ end;
 procedure TmsDiagramm.BeginShape(const aStart: TPointF);
 begin
  Assert(CurrentClass <> nil);
- FCurrentAddedShape := CurrentClass.Make(TmsMakeShapeContext.Create(aStart, Self));
+ FCurrentAddedShape := CurrentClass.Create(TmsMakeShapeContext.Create(aStart, Self));
  if (FCurrentAddedShape <> nil) then
  begin
   FShapeList.Add(FCurrentAddedShape);
