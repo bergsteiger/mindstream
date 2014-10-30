@@ -31,6 +31,10 @@ type
 
 implementation
 
+uses
+  System.SysUtils
+  ;
+
 procedure TestTmsLine.SetUp;
 begin
   FmsLine := TmsLine.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil));
@@ -62,6 +66,7 @@ procedure TestTmsLine.TestMoveTo;
 var
   aFinishPoint: TPointF;
 begin
+  ExpectedException := EAssertionFailed;
   // TODO: Setup method call parameters
   FmsLine.MoveTo(aFinishPoint);
   // TODO: Validate method results
