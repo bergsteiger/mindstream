@@ -32,6 +32,7 @@ end;
 
 procedure TFirstTest.FailureTest;
 begin
+ //ExpectedException := ETestFailure;
  Check(False);
 end;
 
