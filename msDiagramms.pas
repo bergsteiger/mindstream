@@ -30,6 +30,7 @@ type
   function CurrentDiagrammIndex: Integer;
   procedure SelectDiagramm(anIndex: Integer);
   function CurrentShapeClassIndex: Integer;
+  procedure Serialize;
  end;//TmsDiagramms
 
 implementation
@@ -85,6 +86,11 @@ end;
 procedure TmsDiagramms.SelectShape(aList: TStrings; anIndex: Integer);
 begin
  f_CurrentDiagramm.SelectShape(aList, anIndex);
+end;
+
+procedure TmsDiagramms.Serialize;
+begin
+ f_CurrentDiagramm.Serialize;
 end;
 
 procedure TmsDiagramms.AllowedShapesToList(aList: TStrings);

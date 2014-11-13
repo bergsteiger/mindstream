@@ -52,6 +52,7 @@ type
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   property Name : String read f_Name;
   function CurrentShapeClassIndex: Integer;
+  procedure Serialize;
  end;//TmsDiagramm
 
 implementation
@@ -81,6 +82,11 @@ end;
 procedure TmsDiagramm.SelectShape(aList: TStrings; anIndex: Integer);
 begin
  CurrentClass := RmsShape(aList.Objects[anIndex]);
+end;
+
+procedure TmsDiagramm.Serialize;
+begin
+
 end;
 
 procedure TmsDiagramm.ProcessClick(const aStart: TPointF);

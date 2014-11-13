@@ -20,6 +20,8 @@ type
   cbShapes: TComboBox;
   cbDiagramm: TComboBox;
   btAddDiagramm: TButton;
+  btSaveDiagramm: TButton;
+  btLoadDiagramm: TButton;
   FDiagramms: TmsDiagramms;
   procedure cbDiagrammChange(Sender: TObject);
   procedure imgMainResize(Sender: TObject);
@@ -27,8 +29,11 @@ type
   procedure btAddDiagrammClick(Sender: TObject);
   procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
+  procedure btSaveDiagrammClick(Sender: TObject);
+  procedure btLoadDiagrammClick(Sender: TObject);
+  procedure Serialize(aDiagramm: TmsDiagramms);
  public
-  constructor Create(aImage: TImage; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton);
+  constructor Create(aImage: TImage; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton);
   destructor Destroy; override;
   procedure Clear;
   procedure ProcessClick(const aStart: TPointF);
@@ -41,13 +46,20 @@ uses
  FMX.Types
  ;
 
-constructor TmsDiagrammsController.Create(aImage: TImage; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton);
+constructor TmsDiagrammsController.Create(aImage: TImage;
+                                          aShapes: TComboBox;
+                                          aDiagramm: TComboBox;
+                                          aAddDiagramm: TButton;
+                                          aSaveDiagramm: TButton;
+                                          aLoadDiagramm: TButton);
 begin
  inherited Create;
  imgMain := aImage;
  cbShapes := aShapes;
  cbDiagramm := aDiagramm;
  btAddDiagramm := aAddDiagramm;
+ btSaveDiagramm := aSaveDiagramm;
+ btLoadDiagramm := aLoadDiagramm;
  FDiagramms := TmsDiagramms.Create(imgMain, cbDiagramm.Items);
  FDiagramms.AllowedShapesToList(cbShapes.Items);
  cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
@@ -56,8 +68,20 @@ begin
  imgMain.OnResize := imgMainResize;
  cbShapes.OnChange := cbShapesChange;
  btAddDiagramm.OnClick := btAddDiagrammClick;
+ btSaveDiagramm.OnClick := btSaveDiagrammClick;
+ btLoadDiagramm.OnClick := btLoadDiagrammClick;
  imgMain.OnMouseDown := imgMainMouseDown;
  imgMain.Align := TAlignLayout.alClient;
+end;
+
+procedure TmsDiagrammsController.btLoadDiagrammClick(Sender: TObject);
+begin
+
+end;
+
+procedure TmsDiagrammsController.btSaveDiagrammClick(Sender: TObject);
+begin
+ Serialize(FDiagramms);
 end;
 
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
@@ -96,6 +120,11 @@ end;
 procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
 begin
  FDiagramms.ProcessClick(aStart);
+end;
+
+procedure TmsDiagrammsController.Serialize(aDiagramm: TmsDiagramms);
+begin
+ aDiagramm.Serialize;
 end;
 
 procedure TmsDiagrammsController.imgMainMouseDown(Sender: TObject;

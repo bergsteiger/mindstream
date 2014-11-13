@@ -24,6 +24,8 @@ type
     cbShapes: TComboBox;
     cbDiagramm: TComboBox;
     btAddDiagramm: TButton;
+    btSaveDiagramm: TButton;
+    btLoadDiagramm: TButton;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -51,7 +53,12 @@ end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
- FDiagrammsController := TmsDiagrammsController.Create(imgMain, cbShapes, cbDiagramm, btAddDiagramm);
+ FDiagrammsController := TmsDiagrammsController.Create(imgMain,
+                                                       cbShapes,
+                                                       cbDiagramm,
+                                                       btAddDiagramm,
+                                                       btSaveDiagramm,
+                                                       btLoadDiagramm);
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
