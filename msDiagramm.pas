@@ -53,6 +53,7 @@ type
   property Name : String read f_Name;
   function CurrentShapeClassIndex: Integer;
   procedure Serialize;
+  function DeSerialize: TmsShapeList;
  end;//TmsDiagramm
 
 implementation
@@ -86,7 +87,7 @@ end;
 
 procedure TmsDiagramm.Serialize;
 begin
-
+ assert(false);
 end;
 
 procedure TmsDiagramm.ProcessClick(const aStart: TPointF);
@@ -145,6 +146,11 @@ end;
 function TmsDiagramm.CurrentAddedShape: ImsShape;
 begin
  Result := FCurrentAddedShape;
+end;
+
+function TmsDiagramm.DeSerialize: TmsShapeList;
+begin
+ assert(false);
 end;
 
 destructor TmsDiagramm.Destroy;

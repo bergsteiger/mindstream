@@ -31,6 +31,7 @@ type
   procedure SelectDiagramm(anIndex: Integer);
   function CurrentShapeClassIndex: Integer;
   procedure Serialize;
+  function DeSerialize: TmsShapeList;
  end;//TmsDiagramms
 
 implementation
@@ -65,6 +66,11 @@ begin
   Exit;
  f_CurrentDiagramm := f_Diagramms.Items[anIndex];
  f_CurrentDiagramm.Invalidate;
+end;
+
+function TmsDiagramms.DeSerialize: TmsShapeList;
+begin
+ Result := f_CurrentDiagramm.DeSerialize;
 end;
 
 destructor TmsDiagramms.Destroy;

@@ -76,7 +76,7 @@ end;
 
 procedure TmsDiagrammsController.btLoadDiagrammClick(Sender: TObject);
 begin
-
+ FDiagramms.DeSerialize;
 end;
 
 procedure TmsDiagrammsController.btSaveDiagrammClick(Sender: TObject);
