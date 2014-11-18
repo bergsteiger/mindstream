@@ -12,7 +12,10 @@ uses
  msPointCircle,
  System.Classes,
  FMX.Objects,
- msRegisteredShapes
+ msRegisteredShapes,
+ FMX.Dialogs,
+ System.JSON,
+ Data.DBXJSONReflect
  ;
 
 type
@@ -86,8 +89,18 @@ begin
 end;
 
 procedure TmsDiagramm.Serialize;
+var
+ l_SaveDialog: TSaveDialog;
+ Mar: TJSONMarshal;  //Serializer
+ UnMar: TJSONUnMarshal;  //UnSerializer
+ SerializedKid: TJSONObject;  //Serialized for of object
 begin
- assert(false);
+ if l_SaveDialog.Execute then
+ begin
+
+ end
+ else
+  assert(false);
 end;
 
 procedure TmsDiagramm.ProcessClick(const aStart: TPointF);

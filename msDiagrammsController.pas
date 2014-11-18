@@ -32,6 +32,7 @@ type
   procedure btSaveDiagrammClick(Sender: TObject);
   procedure btLoadDiagrammClick(Sender: TObject);
   procedure Serialize(aDiagramm: TmsDiagramms);
+  procedure DeSerialize(aDiagramm: TmsDiagramms);
  public
   constructor Create(aImage: TImage; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton);
   destructor Destroy; override;
@@ -105,6 +106,11 @@ begin
  FDiagramms.AddDiagramm(imgMain, cbDiagramm.Items);
  cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
  cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
+end;
+
+procedure TmsDiagrammsController.DeSerialize(aDiagramm: TmsDiagramms);
+begin
+ aDiagramm.DeSerialize;
 end;
 
 destructor TmsDiagrammsController.Destroy;
