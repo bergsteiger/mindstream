@@ -39,19 +39,32 @@ begin
  try
   l_Marshal := TJSONMarshal.Create;
 
-   l_Marshal.RegisterConverter(msDiagramm.TmsShapeList, 'FItems',
-    function(Data: TObject): TStringConverter
-//    var
-//    l_msShapeList: TmsShapeList;
-//    l_msShape: TmsShape;
-//    i: integer;
-    begin
-    //    l_msShapeList := TmsShapeList.Create();
-    //    SetLength(Result, Data);
-    {    if l_msShapeList.Count <> 0 then
-    for l_msShape in l_msShapeList do
-    Result := Result + l_msShapeList;}
-    end);
+   l_Marshal.RegisterConverter(TmsDiagramm, 'FShapeList',
+      function(Data: TObject; Field: string): TListOfObjects
+  //    var
+  //    l_msShapeList: TmsShapeList;
+  //    l_msShape: TmsShape;
+  //    i: integer;
+      var
+       l_Shape : ImsShape;
+        l_Index : Integer;
+      begin
+       Assert(Field = 'FShapeList');
+       SetLength(Result, (Data As TmsDiagramm).ShapeList.Count);
+       l_Index := 0;
+       for l_Shape in (Data As TmsDiagramm).ShapeList do
+       begin
+         Result[l_Index] := l_Shape.HackInstance;
+         Inc(l_Index);
+       end;//for l_Shape
+
+      //    l_msShapeList := TmsShapeList.Create();
+      //    SetLength(Result, Data);
+      {    if l_msShapeList.Count <> 0 then
+      for l_msShape in l_msShapeList do
+      Result := Result + l_msShapeList;}
+      end
+    );
 
   l_StringList := TStringList.Create;
   try
