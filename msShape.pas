@@ -90,7 +90,7 @@ type
   procedure EndTo(const aCtx: TmsEndShapeContext);
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
-  function InstanceOf: TObject;
+  function HackInstance: TObject;
  end;//ImsShape
 
  TmsShape = class abstract (TmsInterfacedRefcounted, ImsShape)

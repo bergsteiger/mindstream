@@ -51,11 +51,11 @@ begin
     SetLength(Result, l_msShapeList.Count);
     if l_msShapeList.Count <> 0 then
      for l_msShape in l_msShapeList do
-      Result[i] := l_msShape.InstanceOf;
+      Result[i] := l_msShape.HackInstance;
    end);
 
   l_StringList := TStringList.Create;
-  l_Json := l_Marshal.Marshal(aDiagramm.InstanceOf) as TJSONObject;
+  l_Json := l_Marshal.Marshal(aDiagramm.HackInstance) as TJSONObject;
 
   l_StringList.Add(l_Json.tostring);
   // l_StringList.SaveToFile(l_SaveDialog.FileName);

@@ -62,7 +62,7 @@ type
   function CurrentShapeClassIndex: Integer;
   procedure Serialize;
   procedure DeSerialize;
-  function InstanceOf: TObject;
+  function HackInstance: TObject;
  end; // TmsDiagramm
 
 implementation
@@ -241,7 +241,7 @@ begin
  Invalidate;
 end;
 
-function TmsDiagramm.InstanceOf: TObject;
+function TmsDiagramm.HackInstance: TObject;
 begin
  Result := Self;
 end;
