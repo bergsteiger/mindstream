@@ -55,13 +55,14 @@ type
   property Name: String read f_Name;
   function CurrentShapeClassIndex: Integer;
   procedure Serialize;
-  function DeSerialize: TmsShapeList;
+  procedure DeSerialize;
  end; // TmsDiagramm
 
 implementation
 
 uses
- msMover;
+ msMover,
+ msCircle;
 
 class function TmsDiagramm.AllowedShapes: TmsRegisteredShapes;
 begin
@@ -91,8 +92,6 @@ procedure TmsDiagramm.Serialize;
 var
  l_SaveDialog: TSaveDialog;
  l_Marshal: TJSONMarshal; // Serializer
- // l_UnMarshal: TJSONUnMarshal;  //UnSerializer
- l_SerializedKid: TJSONObject; // Serialized for of object
  l_Json: TJSONObject;
  l_JsonArray: TJSONArray;
  l_StringList: TStringList;
@@ -131,7 +130,6 @@ begin
    FreeAndNil(l_StringList);
    FreeAndNil(l_Marshal);
   end;
-
  end
  else
   assert(false);
@@ -197,9 +195,68 @@ begin
  Result := FCurrentAddedShape;
 end;
 
-function TmsDiagramm.DeSerialize: TmsShapeList;
+procedure TmsDiagramm.DeSerialize;
+var
+ l_OpenDialog: TOpenDialog;
+ l_StringList: TStringList;
+ l_JSONObject: TJSONObject;
+
+ i, j, z: Integer;
+
+ jp: TJSONPair;
+ ja: TJSONArray;
+ l_JsonArray: TJSONArray;
+
+ jjp: TJSONPair;
+ l_JsonValue: TJSONValue;
+
+ l_Context: TmsMakeShapeContext;
+
+ l_StartPoint: TPointF;
+ l_Shape: ImsShape;
+
+ l_Str: string;
+
+ Enum: TJSONArrayEnumerator;
 begin
- assert(false);
+ Clear;
+
+ l_OpenDialog := TOpenDialog.Create(nil);
+ if l_OpenDialog.Execute then
+ begin
+  l_StringList := TStringList.Create;
+  l_StringList.LoadFromFile(l_OpenDialog.FileName);
+
+  l_JSONObject := TJSONObject.ParseJSONValue(l_StringList.Text) as TJSONObject;
+
+  for i := 0 to l_JSONObject.Count - 1 do
+  begin
+   jp := l_JSONObject.Pairs[i];
+   ja := jp.JsonValue as TJSONArray;
+   for j := 0 to ja.GetCount   do
+   begin
+    jp := (ja.Items[j] as TJSONObject).Pairs[j];
+    // for z := 0 to (jp as TJSONObject).count -1 do
+    // ShowMessage((jp as TJSONObject).pairs[z].tostring );
+   jp.find
+    showmessage(jp.JsonString.Value)
+    // showmessage(ja.Items[j].GetValue<string>('FStartPoint'));
+   end;
+
+   l_StartPoint := TPointF.Create(50, 50);
+   l_Context := TmsMakeShapeContext.Create(l_StartPoint, Self);
+   l_Shape := TmsCircle.Create(l_Context);
+   FShapeList.Add(l_Shape);
+   Invalidate;
+  end;
+
+  FreeAndNil(l_StringList);
+  FreeAndNil(l_JSONObject);
+ end
+ else
+  assert(false);
+
+ FreeAndNil(l_OpenDialog);
 end;
 
 destructor TmsDiagramm.Destroy;
@@ -262,7 +319,7 @@ var
  l_Index: Integer;
 begin
  Result := nil;
- for l_Index := Self.count - 1 downto 0 do
+ for l_Index := Self.Count - 1 downto 0 do
  begin
   l_Shape := Self.Items[l_Index];
   if l_Shape.ContainsPt(aPoint) then
