@@ -55,7 +55,7 @@ begin
 
   l_StringList := TStringList.Create;
   try
-   l_Json := l_Marshal.Marshal(aDiagramm.HackInstance) as TJSONObject;
+   l_Json := l_Marshal.Marshal(aDiagramm) as TJSONObject;
   except
    on E: Exception do
     ShowMessage(E.ClassName + ' поднята ошибка, с сообщением : ' + E.Message);
