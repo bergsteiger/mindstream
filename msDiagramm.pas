@@ -25,11 +25,17 @@ type
 
  TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapesController, IInvokable)
  private
+  [JSONMarshalled(True)]
   FShapeList: TmsShapeList;
+  [JSONMarshalled(False)]
   FCurrentClass: RmsShape;
+  [JSONMarshalled(False)]
   FCurrentAddedShape: ImsShape;
+  [JSONMarshalled(False)]
   FMovingShape: TmsShape;
+  [JSONMarshalled(False)]
   FCanvas: TCanvas;
+  [JSONMarshalled(False)]
   FOrigin: TPointF;
   f_Name: String;
  private
@@ -56,13 +62,15 @@ type
   function CurrentShapeClassIndex: Integer;
   procedure Serialize;
   procedure DeSerialize;
+  function InstanceOf: TObject;
  end; // TmsDiagramm
 
 implementation
 
 uses
  msMover,
- msCircle;
+ msCircle,
+ msSerializeController;
 
 class function TmsDiagramm.AllowedShapes: TmsRegisteredShapes;
 begin
@@ -89,52 +97,8 @@ begin
 end;
 
 procedure TmsDiagramm.Serialize;
-var
- l_SaveDialog: TSaveDialog;
- l_Marshal: TJSONMarshal; // Serializer
- l_Json: TJSONObject;
- l_JsonArray: TJSONArray;
- l_StringList: TStringList;
- l_msShape: ImsShape;
 begin
- l_SaveDialog := TSaveDialog.Create(nil);
- if l_SaveDialog.Execute then
- begin
-  try
-   l_Marshal := TJSONMarshal.Create;
-
-   { l_Marshal.RegisterConverter(TmsShapeList, 'FShapeList',
-     function(Data: TObject; Field: String): TListOfObjects
-     var
-     l_msShapeList: TmsShapeList;
-     i: integer;
-     begin
-     l_msShapeList := TmsShapeList.Create();
-     SetLength(Result, l_msShapeList.Count);
-     if l_msShapeList.Count <> 0
-     then for i := 0 to l_msShapeList.Count - 1
-     do Result[i] := TObject(l_msShapeList[i]);
-     end); }
-   l_StringList := TStringList.Create;
-   l_JsonArray := TJSONArray.Create;
-   for l_msShape in FShapeList do
-   begin
-    l_Json := l_Marshal.Marshal(TObject(l_msShape)) as TJSONObject;
-    l_JsonArray.Add(l_Json);
-   end;
-   l_Json := TJSONObject.Create(TJSONPair.Create('MindStream', l_JsonArray));
-   l_StringList.Add(l_Json.tostring);
-   l_StringList.SaveToFile(l_SaveDialog.FileName);
-  finally
-   FreeAndNil(l_Json);
-   FreeAndNil(l_StringList);
-   FreeAndNil(l_Marshal);
-  end;
- end
- else
-  assert(false);
-
- FreeAndNil(l_SaveDialog);
+ TmsSerializeController.Serialize(self);
 end;
 
 procedure TmsDiagramm.ProcessClick(const aStart: TPointF);
@@ -233,15 +197,6 @@ begin
   begin
    jp := l_JSONObject.Pairs[i];
    ja := jp.JsonValue as TJSONArray;
-   for j := 0 to ja.GetCount   do
-   begin
-    jp := (ja.Items[j] as TJSONObject).Pairs[j];
-    // for z := 0 to (jp as TJSONObject).count -1 do
-    // ShowMessage((jp as TJSONObject).pairs[z].tostring );
-   jp.find
-    showmessage(jp.JsonString.Value)
-    // showmessage(ja.Items[j].GetValue<string>('FStartPoint'));
-   end;
 
    l_StartPoint := TPointF.Create(50, 50);
    l_Context := TmsMakeShapeContext.Create(l_StartPoint, Self);
@@ -284,6 +239,11 @@ begin
  CurrentAddedShape.EndTo(TmsEndShapeContext.Create(aFinish, Self));
  FCurrentAddedShape := nil;
  Invalidate;
+end;
+
+function TmsDiagramm.InstanceOf: TObject;
+begin
+ Result := Self;
 end;
 
 procedure TmsDiagramm.Invalidate;

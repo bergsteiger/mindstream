@@ -29,7 +29,8 @@ uses
   TestMsLine in 'Tests\Module\TestMsLine.pas',
   TestMsRectangle in 'Tests\Module\TestMsRectangle.pas',
   TestMsPointCircle in 'Tests\Module\TestMsPointCircle.pas',
-  TestMsCircle in 'Tests\Module\TestMsCircle.pas';
+  TestMsCircle in 'Tests\Module\TestMsCircle.pas',
+  msSerializeController in 'msSerializeController.pas';
 
 {$R *.res}
 

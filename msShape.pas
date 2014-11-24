@@ -90,6 +90,7 @@ type
   procedure EndTo(const aCtx: TmsEndShapeContext);
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
+  function InstanceOf: TObject;
  end;//ImsShape
 
  TmsShape = class abstract (TmsInterfacedRefcounted, ImsShape)
@@ -122,6 +123,7 @@ type
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
   procedure DrawTo(const aCtx: TmsDrawContext);
+  function InstanceOf: TObject;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
@@ -152,6 +154,11 @@ end;
 procedure TmsShape.MoveTo(const aFinishPoint: TPointF);
 begin
  FStartPoint := aFinishPoint;
+end;
+
+function TmsShape.InstanceOf: TObject;
+begin
+ Result := Self;
 end;
 
 function TmsShape.IsNeedsSecondClick : Boolean;
