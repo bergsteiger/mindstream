@@ -24,7 +24,6 @@ type
   destructor Destroy; override;
   function GetEnumerator: RmsShapeList.TEnumerator;
   function IndexOf(const aValue: RmsShape): Integer;
-  function Func: Integer;
   end;//TmsRegisteredShapes
 
 implementation
@@ -84,10 +83,6 @@ end;
 function TmsRegisteredShapes.IndexOf(const aValue : RmsShape): Integer;
 begin
  Result := f_Registered.IndexOf(aValue);
-end;
-
-function TmsRegisteredShapes.Func: Integer;
-begin
 end;
 
 end.
