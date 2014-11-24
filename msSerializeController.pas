@@ -39,19 +39,19 @@ begin
  try
   l_Marshal := TJSONMarshal.Create;
 
-  { l_Marshal.RegisterConverter(msDiagramm.TmsShapeList, 'FItems',
+   l_Marshal.RegisterConverter(msDiagramm.TmsShapeList, 'FItems',
     function(Data: TObject): TStringConverter
-    var
-    l_msShapeList: TmsShapeList;
-    l_msShape: TmsShape;
-    i: integer;
+//    var
+//    l_msShapeList: TmsShapeList;
+//    l_msShape: TmsShape;
+//    i: integer;
     begin
     //    l_msShapeList := TmsShapeList.Create();
     //    SetLength(Result, Data);
     {    if l_msShapeList.Count <> 0 then
     for l_msShape in l_msShapeList do
-    Result := Result + l_msShapeList;
-    end); }
+    Result := Result + l_msShapeList;}
+    end);
 
   l_StringList := TStringList.Create;
   try
