@@ -37,7 +37,7 @@ type
   FCanvas: TCanvas;
   [JSONMarshalled(False)]
   FOrigin: TPointF;
-  f_Name: String;
+  fName: String;
  private
   procedure DrawTo(const aCanvas: TCanvas; const aOrigin: TPointF);
   function CurrentAddedShape: ImsShape;
@@ -58,7 +58,8 @@ type
   procedure Invalidate;
   procedure AllowedShapesToList(aList: TStrings);
   procedure SelectShape(aList: TStrings; anIndex: Integer);
-  property Name: String read f_Name;
+  property Name: String read fName;
+  property ShapeList: TmsShapeList read fShapeList;
   function CurrentShapeClassIndex: Integer;
   procedure Serialize;
   procedure DeSerialize;
@@ -139,7 +140,7 @@ begin
  FOrigin := TPointF.Create(0, 0);
  ResizeTo(anImage);
  FCurrentClass := AllowedShapes.First;
- f_Name := aName;
+ fName := aName;
 end;
 
 procedure TmsDiagramm.ResizeTo(anImage: TImage);
@@ -243,7 +244,7 @@ end;
 
 function TmsDiagramm.HackInstance: TObject;
 begin
- Result := Self;
+ Result := Self as TObject;
 end;
 
 procedure TmsDiagramm.Invalidate;

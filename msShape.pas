@@ -100,7 +100,6 @@ type
  protected
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
-  property StartPoint : TPointF read FStartPoint;
   constructor CreateInner(const aStartPoint: TPointF); virtual;
   function IsNeedsSecondClick : Boolean; virtual;
   procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
@@ -123,7 +122,8 @@ type
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
   procedure DrawTo(const aCtx: TmsDrawContext);
-  function InstanceOf: TObject;
+  function HackInstance: TObject;
+  property StartPoint : TPointF read FStartPoint;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
@@ -156,9 +156,9 @@ begin
  FStartPoint := aFinishPoint;
 end;
 
-function TmsShape.InstanceOf: TObject;
+function TmsShape.HackInstance: TObject;
 begin
- Result := Self;
+ Result := Self as TObject;
 end;
 
 function TmsShape.IsNeedsSecondClick : Boolean;
