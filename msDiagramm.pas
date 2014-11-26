@@ -58,8 +58,8 @@ type
   procedure Invalidate;
   procedure AllowedShapesToList(aList: TStrings);
   procedure SelectShape(aList: TStrings; anIndex: Integer);
-  property Name: String read fName;
-  property ShapeList: TmsShapeList read fShapeList;
+  property Name: String read fName write fName;
+  property ShapeList: TmsShapeList read fShapeList write fShapeList;
   function CurrentShapeClassIndex: Integer;
   procedure Serialize;
   procedure DeSerialize;
@@ -161,58 +161,11 @@ begin
 end;
 
 procedure TmsDiagramm.DeSerialize;
-var
- l_OpenDialog: TOpenDialog;
- l_StringList: TStringList;
- l_JSONObject: TJSONObject;
-
- i, j, z: Integer;
-
- jp: TJSONPair;
- ja: TJSONArray;
- l_JsonArray: TJSONArray;
-
- jjp: TJSONPair;
- l_JsonValue: TJSONValue;
-
- l_Context: TmsMakeShapeContext;
-
- l_StartPoint: TPointF;
- l_Shape: ImsShape;
-
- l_Str: string;
-
- Enum: TJSONArrayEnumerator;
 begin
- Clear;
-
- l_OpenDialog := TOpenDialog.Create(nil);
- if l_OpenDialog.Execute then
- begin
-  l_StringList := TStringList.Create;
-  l_StringList.LoadFromFile(l_OpenDialog.FileName);
-
-  l_JSONObject := TJSONObject.ParseJSONValue(l_StringList.Text) as TJSONObject;
-
-  for i := 0 to l_JSONObject.Count - 1 do
-  begin
-   jp := l_JSONObject.Pairs[i];
-   ja := jp.JsonValue as TJSONArray;
-
-   l_StartPoint := TPointF.Create(50, 50);
-   l_Context := TmsMakeShapeContext.Create(l_StartPoint, Self);
-   l_Shape := TmsCircle.Create(l_Context);
-   FShapeList.Add(l_Shape);
-   Invalidate;
-  end;
-
-  FreeAndNil(l_StringList);
-  FreeAndNil(l_JSONObject);
- end
- else
-  assert(false);
-
- FreeAndNil(l_OpenDialog);
+ clear;
+ Self.ShapeList := TmsSerializeController.DeSerialize.ShapeList;
+ Self.Name := TmsSerializeController.DeSerialize.Name;
+ Invalidate;
 end;
 
 destructor TmsDiagramm.Destroy;
