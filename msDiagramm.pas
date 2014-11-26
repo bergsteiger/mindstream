@@ -73,6 +73,9 @@ uses
  msCircle,
  msSerializeController;
 
+const
+ c_FileName = 'Serialize.json';
+
 class function TmsDiagramm.AllowedShapes: TmsRegisteredShapes;
 begin
  Result := TmsRegisteredShapes.Instance;
@@ -99,7 +102,7 @@ end;
 
 procedure TmsDiagramm.Serialize;
 begin
- TmsSerializeController.Serialize(self);
+ TmsSerializeController.Serialize(c_FileName, self);
 end;
 
 procedure TmsDiagramm.ProcessClick(const aStart: TPointF);
@@ -163,8 +166,8 @@ end;
 procedure TmsDiagramm.DeSerialize;
 begin
  clear;
- Self.ShapeList := TmsSerializeController.DeSerialize.ShapeList;
- Self.Name := TmsSerializeController.DeSerialize.Name;
+ Self.ShapeList := TmsSerializeController.DeSerialize(c_FileName).ShapeList;
+ Self.Name := TmsSerializeController.DeSerialize(c_FileName).Name;
  Invalidate;
 end;
 

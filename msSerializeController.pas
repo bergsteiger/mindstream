@@ -10,8 +10,8 @@ uses
 type
  TmsSerializeController = class(TObject)
  public
-  class procedure Serialize(aDiagramm: TmsDiagramm);
-  class function DeSerialize: TmsDiagramm;
+  class procedure Serialize(const aFileName: string; const aDiagramm: TmsDiagramm);
+  class function DeSerialize(const aFileName: string): TmsDiagramm;
  end; // TmsDiagrammsController
 
 implementation
@@ -22,11 +22,9 @@ uses
  FMX.Dialogs,
  System.SysUtils;
 
-const
- c_FileName = 'Serialize.json';
  { TmsSerializeController }
 
-class function TmsSerializeController.DeSerialize: TmsDiagramm;
+class function TmsSerializeController.DeSerialize(const aFileName: string): TmsDiagramm;
 var
  l_UnMarshal: TJSONUnMarshal;
  l_StringList: TStringList;
@@ -53,7 +51,7 @@ begin
    end);
 
   l_StringList := TStringList.Create;
-  l_StringList.LoadFromFile(c_FileName);
+  l_StringList.LoadFromFile(aFileName);
 
   Result := l_UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text)) as TmsDiagramm;
 
@@ -63,7 +61,8 @@ begin
  end;
 end;
 
-class procedure TmsSerializeController.Serialize(aDiagramm: TmsDiagramm);
+class procedure TmsSerializeController.Serialize(const aFileName: string;
+                                                 const aDiagramm: TmsDiagramm);
 var
  // l_SaveDialog: TSaveDialog;
  l_Marshal: TJSONMarshal; // Serializer
@@ -102,7 +101,7 @@ begin
 
   l_StringList.Add(l_Json.tostring);
   // l_StringList.SaveToFile(l_SaveDialog.FileName);
-  l_StringList.SaveToFile(c_FileName);
+  l_StringList.SaveToFile(aFileName);
  finally
   FreeAndNil(l_Json);
   FreeAndNil(l_StringList);
