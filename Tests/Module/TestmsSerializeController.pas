@@ -59,7 +59,8 @@ implementation
   msRectangle,
   msCircle,
   System.Types,
-  System.Classes
+  System.Classes,
+  Winapi.Windows
   ;
 
 function TestSerializeTriangle.ShapeClass: RmsShape;
@@ -86,20 +87,27 @@ var
  l_FileNameTest : String;
  l_FileNameEtalon : String;
 begin
- l_FileNameTest := ClassName + '_'+ Name + '.json';
- l_FileNameEtalon := l_FileNameTest + '.etalon.json';
+ l_FileNameTest := ExtractFilePath(ParamStr(0)) + ClassName + '_'+ Name + '.json';
  TmsSerializeController.Serialize(l_FileNameTest, aDiagramm);
-  // TODO: Validate method results
- l_FileSerialized := TStringList.Create;
- l_FileSerialized.LoadFromFile(l_FileNameTest);
 
- l_FileEtalon := TStringList.Create;
- l_FileEtalon.LoadFromFile(l_FileNameEtalon);
+ l_FileNameEtalon := l_FileNameTest + '.etalon.json';
+ if FileExists(l_FileNameEtalon) then
+ begin
+  l_FileSerialized := TStringList.Create;
+  l_FileSerialized.LoadFromFile(l_FileNameTest);
 
- CheckTrue(l_FileEtalon.Equals(l_FileSerialized));
+  l_FileEtalon := TStringList.Create;
+  l_FileEtalon.LoadFromFile(l_FileNameEtalon);
 
- FreeAndNil(l_FileSerialized);
- FreeAndNil(l_FileEtalon);
+  CheckTrue(l_FileEtalon.Equals(l_FileSerialized));
+
+  FreeAndNil(l_FileSerialized);
+  FreeAndNil(l_FileEtalon);
+ end
+ else
+ begin
+  CopyFile(PWideChar(l_FileNameTest),PWideChar(l_FileNameEtalon),True);
+ end;
 end;
 
 procedure TestTmsSerializeController.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
