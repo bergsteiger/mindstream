@@ -24,18 +24,27 @@ uses
 type
   TmsDiagrammCheck = reference to procedure (aDiagramm : TmsDiagramm);
 
-  TestTmsSerializeController = class abstract(TTestCase)
+  TestTmsSerializeControllerPrim = class abstract(TTestCase)
   protected
-    function ShapeClass: RmsShape; virtual; abstract;
     function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
     procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
     procedure CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
-    procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
+    procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck; aShapeClass: RmsShape);
+  end;//TestTmsSerializeControllerPrim
+
+  TestTmsSerializeController = class abstract(TestTmsSerializeControllerPrim)
+  protected
+    function ShapeClass: RmsShape; virtual; abstract;
   published
     procedure TestSerialize;
     procedure TestDeSerialize;
     procedure TestDeSerializeViaShapeCheck;
   end;//TestTmsSerializeController
+
+  TestTmsSerializeControllerForAll = class(TestTmsSerializeControllerPrim)
+  published
+    procedure TestSerialize;
+  end;//TestTmsSerializeControllerForAll
 
   TestSerializeTriangle = class(TestTmsSerializeController)
   protected
@@ -65,6 +74,8 @@ implementation
   msRectangle,
   msCircle,
   msRoundedRectangle,
+  msRegisteredShapes,
+  msMover,
   System.Types,
   System.Classes,
   Winapi.Windows
@@ -93,12 +104,12 @@ end;
  const
   c_DiagramName = 'First Diagram';
 
-function TestTmsSerializeController.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
+function TestTmsSerializeControllerPrim.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
 begin
  Result := ExtractFilePath(ParamStr(0)) + ClassName + '_' + aTestName + '_' + aShapeClass.ClassName + '.json';
 end;
 
-procedure TestTmsSerializeController.SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
+procedure TestTmsSerializeControllerPrim.SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
 var
  l_FileSerialized, l_FileEtalon: TStringList;
  l_FileNameTest : String;
@@ -127,7 +138,7 @@ begin
  end;
 end;
 
-procedure TestTmsSerializeController.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
+procedure TestTmsSerializeControllerPrim.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
 var
  l_Diagramm: TmsDiagramm;
  l_Image: TImage;
@@ -151,12 +162,12 @@ begin
  CreateDiagrammWithShapeAndSaveAndCheck(ShapeClass);
 end;
 
-procedure TestTmsSerializeController.DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
+procedure TestTmsSerializeControllerPrim.DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck; aShapeClass: RmsShape);
 var
  l_Diagramm : TmsDiagramm;
  l_FileNameTest: string;
 begin
- l_FileNameTest := MakeFileName('TestSerialize', ShapeClass);
+ l_FileNameTest := MakeFileName('TestSerialize', aShapeClass);
  l_Diagramm := TmsSerializeController.DeSerialize(l_FileNameTest);
  try
   aCheck(l_Diagramm);
@@ -172,6 +183,7 @@ begin
   begin
    SaveDiagrammAndCheck(ShapeClass, aDiagramm);
   end
+ , ShapeClass
  );
 end;
 
@@ -184,7 +196,19 @@ begin
    Check(aDiagramm.ShapeList.Count = 1);
    Check(aDiagramm.ShapeList[0].HackInstance.ClassType = ShapeClass);
   end
+ , ShapeClass
  );
+end;
+
+procedure TestTmsSerializeControllerForAll.TestSerialize;
+var
+ l_ShapeClass : RmsShape;
+begin
+ for l_ShapeClass in TmsRegisteredShapes.Instance do
+ begin
+  if not l_ShapeClass.InheritsFrom(TmsMover) then
+   CreateDiagrammWithShapeAndSaveAndCheck(l_ShapeClass);
+ end;//for l_ShapeClass
 end;
 
 initialization
@@ -193,5 +217,6 @@ initialization
   RegisterTest(TestSerializeRectangle.Suite);
   RegisterTest(TestSerializeCircle.Suite);
   RegisterTest(TestSerializeRoundedRectangle.Suite);
+  RegisterTest(TestTmsSerializeControllerForAll.Suite);
 end.
 
