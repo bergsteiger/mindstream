@@ -23,6 +23,7 @@ uses
 
 type
   TmsDiagrammCheck = reference to procedure (aDiagramm : TmsDiagramm);
+  TmsShapeClassCheck = reference to procedure (aShapeClass : RmsShape);
 
   TestTmsSerializeControllerPrim = class abstract(TTestCase)
   protected
@@ -44,6 +45,8 @@ type
   end;//TestTmsSerializeController
 
   TestTmsSerializeControllerForAll = class(TestTmsSerializeControllerPrim)
+  protected
+    procedure CheckShapes(aCheck: TmsShapeClassCheck);
   published
     procedure TestSerialize;
     procedure TestDeSerialize;
@@ -213,26 +216,35 @@ begin
  TestDeSerializeViaShapeCheckForShapeClass(ShapeClass);
 end;
 
-procedure TestTmsSerializeControllerForAll.TestSerialize;
+procedure TestTmsSerializeControllerForAll.CheckShapes(aCheck: TmsShapeClassCheck);
 var
  l_ShapeClass : RmsShape;
 begin
  for l_ShapeClass in TmsRegisteredShapes.Instance do
  begin
   if not l_ShapeClass.InheritsFrom(TmsMover) then
-   CreateDiagrammWithShapeAndSaveAndCheck(l_ShapeClass);
+   aCheck(l_ShapeClass);
  end;//for l_ShapeClass
 end;
 
-procedure TestTmsSerializeControllerForAll.TestDeSerialize;
-var
- l_ShapeClass : RmsShape;
+procedure TestTmsSerializeControllerForAll.TestSerialize;
 begin
- for l_ShapeClass in TmsRegisteredShapes.Instance do
- begin
-  if not l_ShapeClass.InheritsFrom(TmsMover) then
-   TestDeSerializeForShapeClass(l_ShapeClass);
- end;//for l_ShapeClass
+ CheckShapes(
+  procedure (aShapeClass: RmsShape)
+  begin
+   CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass);
+  end
+ );
+end;
+
+procedure TestTmsSerializeControllerForAll.TestDeSerialize;
+begin
+ CheckShapes(
+  procedure (aShapeClass: RmsShape)
+  begin
+   TestDeSerializeForShapeClass(aShapeClass);
+  end
+ );
 end;
 
 initialization
