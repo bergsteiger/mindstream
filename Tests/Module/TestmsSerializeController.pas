@@ -24,27 +24,60 @@ uses
 type
   // Test methods for class TmsSerializeController
 
-  TestTmsSerializeController = class(TTestCase)
+  TestTmsSerializeController = class abstract(TTestCase)
   strict private
     FmsDiagramm: TmsDiagramm;
     FImage: TImage;
+  protected
+    function ShapeClass: RmsShape; virtual; abstract;
   public
     procedure SetUp; override;
     procedure TearDown; override;
   published
     procedure TestSerialize;
     procedure TestDeSerialize;
-  end;
+  end;//TestTmsSerializeController
+
+  TestSerializeTriangle = class(TestTmsSerializeController)
+  protected
+    function ShapeClass: RmsShape; override;
+  end;//TestSerializeTriangle
+
+  TestSerializeRectangle = class(TestTmsSerializeController)
+  protected
+    function ShapeClass: RmsShape; override;
+  end;//TestSerializeRectangle
+
+  TestSerializeCircle = class(TestTmsSerializeController)
+  protected
+    function ShapeClass: RmsShape; override;
+  end;//TestSerializeCircle
 
 implementation
 
  uses
   System.SysUtils,
   msTriangle,
-  msShape,
+  msRectangle,
+  msCircle,
   System.Types,
   System.Classes
   ;
+
+function TestSerializeTriangle.ShapeClass: RmsShape;
+begin
+ Result := TmsTriangle;
+end;
+
+function TestSerializeRectangle.ShapeClass: RmsShape;
+begin
+ Result := TmsRectangle;
+end;
+
+function TestSerializeCircle.ShapeClass: RmsShape;
+begin
+ Result := TmsCircle;
+end;
 
  const
   c_DiagramName = 'First Diagram';
@@ -69,7 +102,7 @@ var
 begin
  l_FileNameTest := ClassName + '_'+ Name + '.json';
  l_FileNameEtalon := l_FileNameTest + '.etalon.json';
- FmsDiagramm.ShapeList.Add(TmsTriangle.Create(TmsMakeShapeContext.Create(TPointF.Create(10, 10),nil)));
+ FmsDiagramm.ShapeList.Add(ShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(10, 10),nil)));
   // TODO: Setup method call parameters
  TmsSerializeController.Serialize(l_FileNameTest, FmsDiagramm);
   // TODO: Validate method results
@@ -97,6 +130,8 @@ end;
 
 initialization
   // Register any test cases with the test runner
-  RegisterTest(TestTmsSerializeController.Suite);
+  RegisterTest(TestSerializeTriangle.Suite);
+  RegisterTest(TestSerializeRectangle.Suite);
+  RegisterTest(TestSerializeCircle.Suite);
 end.
 
