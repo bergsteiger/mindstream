@@ -17,7 +17,8 @@ uses
   Data.DBXJSONReflect,
   JSON,
   FMX.Objects,
-  msDiagramm
+  msDiagramm,
+  msShape
   ;
 
 type
@@ -47,8 +48,6 @@ implementation
 
  const
   c_DiagramName = 'First Diagram';
-  c_FileNameTest = 'SerializeTest.json';
-  c_FileNameEtalon = 'SerializeEtalon.json';
 
 procedure TestTmsSerializeController.SetUp;
 begin
@@ -65,16 +64,20 @@ end;
 procedure TestTmsSerializeController.TestSerialize;
 var
   l_FileSerialized, l_FileEtalon: TStringList;
+  l_FileNameTest : String;
+  l_FileNameEtalon : String;
 begin
+ l_FileNameTest := ClassName + '_'+ Name + '.json';
+ l_FileNameEtalon := l_FileNameTest + '.etalon.json';
  FmsDiagramm.ShapeList.Add(TmsTriangle.Create(TmsMakeShapeContext.Create(TPointF.Create(10, 10),nil)));
   // TODO: Setup method call parameters
- TmsSerializeController.Serialize(c_FileNameTest, FmsDiagramm);
+ TmsSerializeController.Serialize(l_FileNameTest, FmsDiagramm);
   // TODO: Validate method results
  l_FileSerialized := TStringList.Create;
- l_FileSerialized.LoadFromFile(c_FileNameTest);
+ l_FileSerialized.LoadFromFile(l_FileNameTest);
 
  l_FileEtalon := TStringList.Create;
- l_FileEtalon.LoadFromFile(c_FileNameEtalon);
+ l_FileEtalon.LoadFromFile(l_FileNameEtalon);
 
  CheckTrue(l_FileEtalon.Equals(l_FileSerialized));
 
