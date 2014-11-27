@@ -28,6 +28,7 @@ type
   protected
     function ShapeClass: RmsShape; virtual; abstract;
     procedure SaveDiagrammAndCheck(aDiagramm: TmsDiagramm);
+    procedure CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
   published
     procedure TestSerialize;
     procedure TestDeSerialize;
@@ -79,9 +80,9 @@ end;
 
 procedure TestTmsSerializeController.SaveDiagrammAndCheck(aDiagramm: TmsDiagramm);
 var
-  l_FileSerialized, l_FileEtalon: TStringList;
-  l_FileNameTest : String;
-  l_FileNameEtalon : String;
+ l_FileSerialized, l_FileEtalon: TStringList;
+ l_FileNameTest : String;
+ l_FileNameEtalon : String;
 begin
  l_FileNameTest := ClassName + '_'+ Name + '.json';
  l_FileNameEtalon := l_FileNameTest + '.etalon.json';
@@ -99,16 +100,16 @@ begin
  FreeAndNil(l_FileEtalon);
 end;
 
-procedure TestTmsSerializeController.TestSerialize;
+procedure TestTmsSerializeController.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
 var
-  l_Diagramm: TmsDiagramm;
-  l_Image: TImage;
+ l_Diagramm: TmsDiagramm;
+ l_Image: TImage;
 begin
  l_Image:= TImage.Create(nil);
  try
   l_Diagramm := TmsDiagramm.Create(l_Image, c_DiagramName);
   try
-   l_Diagramm.ShapeList.Add(ShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(10, 10),nil)));
+   l_Diagramm.ShapeList.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(10, 10),nil)));
    SaveDiagrammAndCheck(l_Diagramm);
   finally
    FreeAndNil(l_Image);
@@ -118,19 +119,23 @@ begin
  end;//try..finally
 end;
 
+procedure TestTmsSerializeController.TestSerialize;
+begin
+ CreateDiagrammWithShapeAndSaveAndCheck(ShapeClass);
+end;
+
 procedure TestTmsSerializeController.TestDeSerialize;
 var
   l_Diagramm : TmsDiagramm;
   l_FileNameTest: string;
 begin
  l_FileNameTest := ClassName + '_'+ 'TestSerialize' + '.json';
-  // TODO: Setup method call parameters
-  l_Diagramm := TmsSerializeController.DeSerialize(l_FileNameTest);
-  try
-   SaveDiagrammAndCheck(l_Diagramm);
-  finally
-   FreeAndNil(l_Diagramm);
-  end;
+ l_Diagramm := TmsSerializeController.DeSerialize(l_FileNameTest);
+ try
+  SaveDiagrammAndCheck(l_Diagramm);
+ finally
+  FreeAndNil(l_Diagramm);
+ end;//try..finally
 end;
 
 initialization
