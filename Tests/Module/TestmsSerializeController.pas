@@ -51,6 +51,11 @@ type
     function ShapeClass: RmsShape; override;
   end;//TestSerializeCircle
 
+  TestSerializeRoundedRectangle = class(TestTmsSerializeController)
+  protected
+    function ShapeClass: RmsShape; override;
+  end;//TestSerializeRoundedRectangle
+
 implementation
 
  uses
@@ -58,6 +63,7 @@ implementation
   msTriangle,
   msRectangle,
   msCircle,
+  msRoundedRectangle,
   System.Types,
   System.Classes,
   Winapi.Windows
@@ -76,6 +82,11 @@ end;
 function TestSerializeCircle.ShapeClass: RmsShape;
 begin
  Result := TmsCircle;
+end;
+
+function TestSerializeRoundedRectangle.ShapeClass: RmsShape;
+begin
+ Result := TmsRoundedRectangle;
 end;
 
  const
@@ -175,5 +186,6 @@ initialization
   RegisterTest(TestSerializeTriangle.Suite);
   RegisterTest(TestSerializeRectangle.Suite);
   RegisterTest(TestSerializeCircle.Suite);
+  RegisterTest(TestSerializeRoundedRectangle.Suite);
 end.
 
