@@ -20,7 +20,9 @@ uses
  System.Classes,
  msShape,
  FMX.Dialogs,
- System.SysUtils;
+ System.SysUtils,
+ msRegisteredShapes
+ ;
 
  { TmsSerializeController }
 
@@ -68,6 +70,7 @@ var
  l_Marshal: TJSONMarshal; // Serializer
  l_Json: TJSONObject;
  l_StringList: TStringList;
+ l_ShapeClass : RmsShape;
 begin
  // l_SaveDialog := TSaveDialog.Create(nil);
  // if l_SaveDialog.Execute then
@@ -89,7 +92,17 @@ begin
      Result[l_Index] := l_Shape.HackInstance;
      Inc(l_Index);
     end; // for l_Shape
-   end);
+   end
+  );
+
+  for l_ShapeClass in TmsRegisteredShapes.Instance do
+   l_Marshal.RegisterJSONMarshalled(l_ShapeClass, 'FRefCount', false);
+(*  l_Marshal.RegisterConverter(TmsShape, 'FRefCount',
+   function(Data: TObject; Field: string): string
+   begin
+    Result := '';
+   end
+  );*)
 
   l_StringList := TStringList.Create;
   try
