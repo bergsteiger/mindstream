@@ -25,15 +25,9 @@ type
   // Test methods for class TmsSerializeController
 
   TestTmsSerializeController = class abstract(TTestCase)
-  strict private
-    FmsDiagramm: TmsDiagramm;
-    FImage: TImage;
   protected
     function ShapeClass: RmsShape; virtual; abstract;
     procedure SaveDiagrammAndCheck(aDiagramm: TmsDiagramm);
-  public
-    procedure SetUp; override;
-    procedure TearDown; override;
   published
     procedure TestSerialize;
     procedure TestDeSerialize;
@@ -83,18 +77,6 @@ end;
  const
   c_DiagramName = 'First Diagram';
 
-procedure TestTmsSerializeController.SetUp;
-begin
- FImage:= TImage.Create(nil);
- FmsDiagramm := TmsDiagramm.Create(FImage, c_DiagramName);
-end;
-
-procedure TestTmsSerializeController.TearDown;
-begin
- FreeAndNil(FImage);
- FreeAndNil(FmsDiagramm);
-end;
-
 procedure TestTmsSerializeController.SaveDiagrammAndCheck(aDiagramm: TmsDiagramm);
 var
   l_FileSerialized, l_FileEtalon: TStringList;
@@ -103,7 +85,7 @@ var
 begin
  l_FileNameTest := ClassName + '_'+ Name + '.json';
  l_FileNameEtalon := l_FileNameTest + '.etalon.json';
- TmsSerializeController.Serialize(l_FileNameTest, FmsDiagramm);
+ TmsSerializeController.Serialize(l_FileNameTest, aDiagramm);
   // TODO: Validate method results
  l_FileSerialized := TStringList.Create;
  l_FileSerialized.LoadFromFile(l_FileNameTest);
@@ -118,21 +100,37 @@ begin
 end;
 
 procedure TestTmsSerializeController.TestSerialize;
+var
+  l_Diagramm: TmsDiagramm;
+  l_Image: TImage;
 begin
- FmsDiagramm.ShapeList.Add(ShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(10, 10),nil)));
- SaveDiagrammAndCheck(FmsDiagramm);
+ l_Image:= TImage.Create(nil);
+ try
+  l_Diagramm := TmsDiagramm.Create(l_Image, c_DiagramName);
+  try
+   l_Diagramm.ShapeList.Add(ShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(10, 10),nil)));
+   SaveDiagrammAndCheck(l_Diagramm);
+  finally
+   FreeAndNil(l_Image);
+  end;
+ finally
+  FreeAndNil(l_Diagramm);
+ end;//try..finally
 end;
 
 procedure TestTmsSerializeController.TestDeSerialize;
 var
-  ReturnValue: TmsDiagramm;
+  l_Diagramm : TmsDiagramm;
   l_FileNameTest: string;
 begin
  l_FileNameTest := ClassName + '_'+ 'TestSerialize' + '.json';
   // TODO: Setup method call parameters
-  ReturnValue := TmsSerializeController.DeSerialize(l_FileNameTest);
-  FreeAndNil(ReturnValue);
-  // TODO: Validate method results
+  l_Diagramm := TmsSerializeController.DeSerialize(l_FileNameTest);
+  try
+
+  finally
+   FreeAndNil(l_Diagramm);
+  end;
 end;
 
 initialization
