@@ -64,14 +64,9 @@ end;
 
 procedure TestTmsSerializeController.TestSerialize;
 var
-  l_msTriangle: ImsShape;
-  l_msMakeShapeContext: TmsMakeShapeContext;
   l_FileSerialized, l_FileEtalon: TStringList;
 begin
- l_msMakeShapeContext := TmsMakeShapeContext.Create(TPointF.Create(10, 10),
-                                                    nil);
- l_msTriangle := TmsTriangle.Create(l_msMakeShapeContext);
- FmsDiagramm.ShapeList.Add(l_msTriangle);
+ FmsDiagramm.ShapeList.Add(TmsTriangle.Create(TmsMakeShapeContext.Create(TPointF.Create(10, 10),nil)));
   // TODO: Setup method call parameters
  TmsSerializeController.Serialize(c_FileNameTest, FmsDiagramm);
   // TODO: Validate method results
@@ -85,7 +80,6 @@ begin
 
  FreeAndNil(l_FileSerialized);
  FreeAndNil(l_FileEtalon);
- l_msTriangle := nil;
 end;
 
 procedure TestTmsSerializeController.TestDeSerialize;
