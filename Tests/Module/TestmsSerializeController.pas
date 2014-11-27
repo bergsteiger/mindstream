@@ -27,6 +27,7 @@ type
   TestTmsSerializeController = class abstract(TTestCase)
   protected
     function ShapeClass: RmsShape; virtual; abstract;
+    function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
     procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
     procedure CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
     procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
@@ -92,13 +93,18 @@ end;
  const
   c_DiagramName = 'First Diagram';
 
-procedure TestTmsSerializeController.SaveDiagrammAndCheck(aShapeClass: RmsShape;aDiagramm: TmsDiagramm);
+function TestTmsSerializeController.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
+begin
+ Result := ExtractFilePath(ParamStr(0)) + ClassName + '_' + aTestName + '_' + aShapeClass.ClassName + '.json';
+end;
+
+procedure TestTmsSerializeController.SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
 var
  l_FileSerialized, l_FileEtalon: TStringList;
  l_FileNameTest : String;
  l_FileNameEtalon : String;
 begin
- l_FileNameTest := ExtractFilePath(ParamStr(0)) + ClassName + '_' + Name + '_' + aShapeClass.ClassName + '.json';
+ l_FileNameTest := MakeFileName(Name, aShapeClass);
  TmsSerializeController.Serialize(l_FileNameTest, aDiagramm);
 
  l_FileNameEtalon := l_FileNameTest + '.etalon.json';
@@ -147,10 +153,10 @@ end;
 
 procedure TestTmsSerializeController.DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
 var
-  l_Diagramm : TmsDiagramm;
-  l_FileNameTest: string;
+ l_Diagramm : TmsDiagramm;
+ l_FileNameTest: string;
 begin
- l_FileNameTest := ClassName + '_'+ 'TestSerialize' + '_' + ShapeClass.ClassName + '.json';
+ l_FileNameTest := MakeFileName('TestSerialize', ShapeClass);
  l_Diagramm := TmsSerializeController.DeSerialize(l_FileNameTest);
  try
   aCheck(l_Diagramm);
