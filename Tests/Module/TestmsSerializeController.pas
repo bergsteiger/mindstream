@@ -30,6 +30,7 @@ type
     FImage: TImage;
   protected
     function ShapeClass: RmsShape; virtual; abstract;
+    procedure SaveDiagrammAndCheck(aDiagramm: TmsDiagramm);
   public
     procedure SetUp; override;
     procedure TearDown; override;
@@ -94,7 +95,7 @@ begin
  FreeAndNil(FmsDiagramm);
 end;
 
-procedure TestTmsSerializeController.TestSerialize;
+procedure TestTmsSerializeController.SaveDiagrammAndCheck(aDiagramm: TmsDiagramm);
 var
   l_FileSerialized, l_FileEtalon: TStringList;
   l_FileNameTest : String;
@@ -102,8 +103,6 @@ var
 begin
  l_FileNameTest := ClassName + '_'+ Name + '.json';
  l_FileNameEtalon := l_FileNameTest + '.etalon.json';
- FmsDiagramm.ShapeList.Add(ShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(10, 10),nil)));
-  // TODO: Setup method call parameters
  TmsSerializeController.Serialize(l_FileNameTest, FmsDiagramm);
   // TODO: Validate method results
  l_FileSerialized := TStringList.Create;
@@ -118,13 +117,21 @@ begin
  FreeAndNil(l_FileEtalon);
 end;
 
+procedure TestTmsSerializeController.TestSerialize;
+begin
+ FmsDiagramm.ShapeList.Add(ShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(10, 10),nil)));
+ SaveDiagrammAndCheck(FmsDiagramm);
+end;
+
 procedure TestTmsSerializeController.TestDeSerialize;
 var
   ReturnValue: TmsDiagramm;
-  aFileName: string;
+  l_FileNameTest: string;
 begin
+ l_FileNameTest := ClassName + '_'+ 'TestSerialize' + '.json';
   // TODO: Setup method call parameters
-  ReturnValue := TmsSerializeController.DeSerialize(aFileName);
+  ReturnValue := TmsSerializeController.DeSerialize(l_FileNameTest);
+  FreeAndNil(ReturnValue);
   // TODO: Validate method results
 end;
 
