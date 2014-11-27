@@ -22,13 +22,14 @@ uses
   ;
 
 type
-  // Test methods for class TmsSerializeController
+  TmsDiagrammCheck = reference to procedure (aDiagramm : TmsDiagramm);
 
   TestTmsSerializeController = class abstract(TTestCase)
   protected
     function ShapeClass: RmsShape; virtual; abstract;
     procedure SaveDiagrammAndCheck(aDiagramm: TmsDiagramm);
     procedure CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
+    procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
   published
     procedure TestSerialize;
     procedure TestDeSerialize;
@@ -125,7 +126,7 @@ begin
  CreateDiagrammWithShapeAndSaveAndCheck(ShapeClass);
 end;
 
-procedure TestTmsSerializeController.TestDeSerialize;
+procedure TestTmsSerializeController.DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
 var
   l_Diagramm : TmsDiagramm;
   l_FileNameTest: string;
@@ -133,10 +134,20 @@ begin
  l_FileNameTest := ClassName + '_'+ 'TestSerialize' + '.json';
  l_Diagramm := TmsSerializeController.DeSerialize(l_FileNameTest);
  try
-  SaveDiagrammAndCheck(l_Diagramm);
+  aCheck(l_Diagramm);
  finally
   FreeAndNil(l_Diagramm);
  end;//try..finally
+end;
+
+procedure TestTmsSerializeController.TestDeSerialize;
+begin
+ DeserializeDiargammAndCheck(
+  procedure (aDiagramm: TmsDiagramm)
+  begin
+   SaveDiagrammAndCheck(aDiagramm);
+  end
+ );
 end;
 
 procedure TestTmsSerializeController.TestDeSerializeViaShapeCheck;
