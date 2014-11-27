@@ -50,6 +50,7 @@ type
   published
     procedure TestSerialize;
     procedure TestDeSerialize;
+    procedure TestDeSerializeViaShapeCheck;
   end;//TestTmsSerializeControllerForAll
 
   TestSerializeTriangle = class(TestTmsSerializeController)
@@ -243,6 +244,16 @@ begin
   procedure (aShapeClass: RmsShape)
   begin
    TestDeSerializeForShapeClass(aShapeClass);
+  end
+ );
+end;
+
+procedure TestTmsSerializeControllerForAll.TestDeSerializeViaShapeCheck;
+begin
+ CheckShapes(
+  procedure (aShapeClass: RmsShape)
+  begin
+   TestDeSerializeViaShapeCheckForShapeClass(aShapeClass);
   end
  );
 end;
