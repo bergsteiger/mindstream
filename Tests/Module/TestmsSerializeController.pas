@@ -31,6 +31,7 @@ type
     procedure CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
     procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck; aShapeClass: RmsShape);
     procedure TestDeSerializeForShapeClass(aShapeClass: RmsShape);
+    procedure TestDeSerializeViaShapeCheckForShapeClass(aShapeClass: RmsShape);
   end;//TestTmsSerializeControllerPrim
 
   TestTmsSerializeController = class abstract(TestTmsSerializeControllerPrim)
@@ -194,17 +195,22 @@ begin
  TestDeSerializeForShapeClass(ShapeClass);
 end;
 
-procedure TestTmsSerializeController.TestDeSerializeViaShapeCheck;
+procedure TestTmsSerializeControllerPrim.TestDeSerializeViaShapeCheckForShapeClass(aShapeClass: RmsShape);
 begin
  DeserializeDiargammAndCheck(
   procedure (aDiagramm: TmsDiagramm)
   begin
    Check(aDiagramm.ShapeList <> nil);
    Check(aDiagramm.ShapeList.Count = 1);
-   Check(aDiagramm.ShapeList[0].HackInstance.ClassType = ShapeClass);
+   Check(aDiagramm.ShapeList[0].HackInstance.ClassType = aShapeClass);
   end
- , ShapeClass
+ , aShapeClass
  );
+end;
+
+procedure TestTmsSerializeController.TestDeSerializeViaShapeCheck;
+begin
+ TestDeSerializeViaShapeCheckForShapeClass(ShapeClass);
 end;
 
 procedure TestTmsSerializeControllerForAll.TestSerialize;
