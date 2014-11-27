@@ -127,7 +127,7 @@ begin
   // TODO: Setup method call parameters
   l_Diagramm := TmsSerializeController.DeSerialize(l_FileNameTest);
   try
-
+   SaveDiagrammAndCheck(l_Diagramm);
   finally
    FreeAndNil(l_Diagramm);
   end;
