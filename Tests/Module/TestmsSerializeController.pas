@@ -151,19 +151,15 @@ begin
 end;
 
 procedure TestTmsSerializeController.TestDeSerializeViaShapeCheck;
-var
-  l_Diagramm : TmsDiagramm;
-  l_FileNameTest: string;
 begin
- l_FileNameTest := ClassName + '_'+ 'TestSerialize' + '.json';
- l_Diagramm := TmsSerializeController.DeSerialize(l_FileNameTest);
- try
-  Check(l_Diagramm.ShapeList <> nil);
-  Check(l_Diagramm.ShapeList.Count = 1);
-  Check(l_Diagramm.ShapeList[0].HackInstance.ClassType = ShapeClass);
- finally
-  FreeAndNil(l_Diagramm);
- end;//try..finally
+ DeserializeDiargammAndCheck(
+  procedure (aDiagramm: TmsDiagramm)
+  begin
+   Check(aDiagramm.ShapeList <> nil);
+   Check(aDiagramm.ShapeList.Count = 1);
+   Check(aDiagramm.ShapeList[0].HackInstance.ClassType = ShapeClass);
+  end
+ );
 end;
 
 initialization
