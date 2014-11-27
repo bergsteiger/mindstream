@@ -45,6 +45,7 @@ type
   TestTmsSerializeControllerForAll = class(TestTmsSerializeControllerPrim)
   published
     procedure TestSerialize;
+    procedure TestDeSerialize;
   end;//TestTmsSerializeControllerForAll
 
   TestSerializeTriangle = class(TestTmsSerializeController)
@@ -214,6 +215,17 @@ begin
  begin
   if not l_ShapeClass.InheritsFrom(TmsMover) then
    CreateDiagrammWithShapeAndSaveAndCheck(l_ShapeClass);
+ end;//for l_ShapeClass
+end;
+
+procedure TestTmsSerializeControllerForAll.TestDeSerialize;
+var
+ l_ShapeClass : RmsShape;
+begin
+ for l_ShapeClass in TmsRegisteredShapes.Instance do
+ begin
+  if not l_ShapeClass.InheritsFrom(TmsMover) then
+   TestDeSerializeForShapeClass(l_ShapeClass);
  end;//for l_ShapeClass
 end;
 
