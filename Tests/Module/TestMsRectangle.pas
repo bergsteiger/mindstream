@@ -52,6 +52,6 @@ end;
 
 initialization
   // Register any test cases with the test runner
-  RegisterTest(TestTmsRectangle.Suite);
+//  RegisterTest(TestTmsRectangle.Suite);
 end.
 

@@ -30,7 +30,8 @@ uses
   TestMsRectangle in 'Tests\Module\TestMsRectangle.pas',
   TestMsPointCircle in 'Tests\Module\TestMsPointCircle.pas',
   TestMsCircle in 'Tests\Module\TestMsCircle.pas',
-  msSerializeController in 'msSerializeController.pas';
+  msSerializeController in 'msSerializeController.pas',
+  TestmsSerializeController in 'Tests\Module\TestmsSerializeController.pas';
 
 {$R *.res}
 

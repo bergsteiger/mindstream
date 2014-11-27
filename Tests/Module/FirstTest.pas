@@ -37,6 +37,6 @@ begin
 end;
 
 initialization
- TestFramework.RegisterTest(TFirstTest.Suite);
+// TestFramework.RegisterTest(TFirstTest.Suite);
 end.
 

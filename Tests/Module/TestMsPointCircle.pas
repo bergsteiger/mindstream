@@ -40,6 +40,6 @@ end;
 
 initialization
   // Register any test cases with the test runner
-  RegisterTest(TestTmsPointCircle.Suite);
+//  RegisterTest(TestTmsPointCircle.Suite);
 end.
 
