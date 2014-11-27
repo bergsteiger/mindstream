@@ -32,6 +32,7 @@ type
   published
     procedure TestSerialize;
     procedure TestDeSerialize;
+    procedure TestDeSerializeViaShapeCheck;
   end;//TestTmsSerializeController
 
   TestSerializeTriangle = class(TestTmsSerializeController)
@@ -133,6 +134,22 @@ begin
  l_Diagramm := TmsSerializeController.DeSerialize(l_FileNameTest);
  try
   SaveDiagrammAndCheck(l_Diagramm);
+ finally
+  FreeAndNil(l_Diagramm);
+ end;//try..finally
+end;
+
+procedure TestTmsSerializeController.TestDeSerializeViaShapeCheck;
+var
+  l_Diagramm : TmsDiagramm;
+  l_FileNameTest: string;
+begin
+ l_FileNameTest := ClassName + '_'+ 'TestSerialize' + '.json';
+ l_Diagramm := TmsSerializeController.DeSerialize(l_FileNameTest);
+ try
+  Check(l_Diagramm.ShapeList <> nil);
+  Check(l_Diagramm.ShapeList.Count = 1);
+  Check(l_Diagramm.ShapeList[0].HackInstance.ClassType = ShapeClass);
  finally
   FreeAndNil(l_Diagramm);
  end;//try..finally
