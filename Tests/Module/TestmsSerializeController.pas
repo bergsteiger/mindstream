@@ -267,18 +267,13 @@ begin
 end;
 
 procedure TestTmsSerializeController.TestShapeName;
-var
- l_FileNameTest : String;
- l_FS : TFileStream;
 begin
- l_FileNameTest := TestResultsFileName(ShapeClass);
- l_FS := TFileStream.Create(l_FileNameTest, fmCreate);
- try
-  l_FS.Write(AnsiString(ShapeClass.ClassName)[1], Length(ShapeClass.ClassName));
- finally
-  FreeAndNil(l_FS);
- end;//try..finally
- CheckFileWithEtalon(l_FileNameTest);
+ OutToFileAndCheck(
+  procedure (aFile: TFileStream)
+  begin
+   aFile.Write(AnsiString(ShapeClass.ClassName)[1], Length(ShapeClass.ClassName));
+  end
+ );
 end;
 
 class procedure TmsShapeTestPrim.CheckShapes(aCheck: TmsShapeClassCheck);
