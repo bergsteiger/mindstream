@@ -10,7 +10,8 @@ uses
   FMX.Objects,
   msDiagramm,
   msShape,
-  msRegisteredShapes
+  msRegisteredShapes,
+  System.Types
   ;
 
 type
@@ -24,6 +25,9 @@ type
 
   TestTmsSerializeControllerPrim = class abstract(TmsShapeTestPrim)
   protected
+   f_Coords : array of TPoint;
+  protected
+    procedure SetUp; override;
     procedure CheckFileWithEtalon(const aFileName: String);
     function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
     function TestResultsFileName(aShapeClass: RmsShape): String;
@@ -102,7 +106,6 @@ implementation
   msCircle,
   msRoundedRectangle,
   msMover,
-  System.Types,
   System.Classes,
   Winapi.Windows,
   System.Rtti,
@@ -183,27 +186,37 @@ begin
  Result := 10;
 end;
 
+procedure TestTmsSerializeControllerPrim.SetUp;
+var
+ l_Index : Integer;
+ l_X : Integer;
+ l_Y : Integer;
+begin
+ inherited;
+ RandSeed := 10;
+ SetLength(f_Coords, ShapesCount);
+ for l_Index := 0 to Pred(ShapesCount) do
+ begin
+  l_X := Random(100);
+  l_Y := Random(200);
+  f_Coords[l_Index] := TPoint.Create(l_X, l_Y);
+ end;//for l_Index
+end;
+
 procedure TestTmsSerializeControllerPrim.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
 const
  c_DiagramName = 'First Diagram';
 var
  l_Diagramm: TmsDiagramm;
  l_Image: TImage;
- l_Index : Integer;
- l_X : Integer;
- l_Y : Integer;
+ l_P : TPoint;
 begin
- RandSeed := 10;
  l_Image:= TImage.Create(nil);
  try
   l_Diagramm := TmsDiagramm.Create(l_Image, c_DiagramName);
   try
-   for l_Index := 0 to Pred(ShapesCount) do
-   begin
-    l_X := Random(100);
-    l_Y := Random(200);
-    l_Diagramm.ShapeList.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_X, l_Y), nil)));
-   end;//for l_Index
+   for l_P in f_Coords do
+    l_Diagramm.ShapeList.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil)));
    SaveDiagrammAndCheck(aShapeClass, l_Diagramm);
   finally
    FreeAndNil(l_Image);
@@ -260,6 +273,7 @@ begin
   begin
    Check(aDiagramm.ShapeList <> nil);
    Check(aDiagramm.ShapeList.Count = ShapesCount);
+   Check(Length(f_Coords) = aDiagramm.ShapeList.Count);
    Check(aDiagramm.ShapeList[0].HackInstance.ClassType = aShapeClass);
   end
  , aShapeClass
