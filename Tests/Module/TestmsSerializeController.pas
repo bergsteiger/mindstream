@@ -360,11 +360,13 @@ begin
   var
    l_Method: TRttiMethod;
    l_DiagrammName : String;
+   l_Seed : Intger;
   begin
+   l_Seed := Random(High(l_Seed));
    l_DiagrammName := 'Диаграмма №' + IntToStr(Random(10));
    for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
     if (l_Method.Visibility = mvPublished) then
-      AddTest(RmsParametrizedShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name, cSeed, l_DiagrammName), aShapeClass));
+      AddTest(RmsParametrizedShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name, l_Seed, l_DiagrammName), aShapeClass));
   end
  );
 end;
