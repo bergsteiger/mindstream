@@ -26,6 +26,7 @@ type
   TestTmsSerializeControllerPrim = class abstract(TmsShapeTestPrim)
   protected
    f_Coords : array of TPoint;
+   f_DiagrammName : String;
   protected
     procedure SetUp; override;
     procedure CheckFileWithEtalon(const aFileName: String);
@@ -148,6 +149,7 @@ var
 begin
  inherited;
  RandSeed := 10;
+ f_DiagrammName := 'Диаграмма №' + IntToStr(Random(10));
  SetLength(f_Coords, ShapesCount);
  for l_Index := 0 to Pred(ShapesCount) do
  begin
@@ -157,9 +159,6 @@ begin
  end;//for l_Index
 end;
 
-const
- c_DiagramName = 'First Diagram';
-
 procedure TestTmsSerializeControllerPrim.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
 var
  l_Diagramm: TmsDiagramm;
@@ -168,7 +167,7 @@ var
 begin
  l_Image:= TImage.Create(nil);
  try
-  l_Diagramm := TmsDiagramm.Create(l_Image, c_DiagramName);
+  l_Diagramm := TmsDiagramm.Create(l_Image, f_DiagrammName);
   try
    for l_P in f_Coords do
     l_Diagramm.ShapeList.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil)));
@@ -229,7 +228,7 @@ begin
    l_Shape : TmsShape;
    l_Index : Integer;
   begin
-   Check(aDiagramm.Name = c_DiagramName);
+   Check(aDiagramm.Name = f_DiagrammName);
    Check(aDiagramm.ShapeList <> nil);
    Check(aDiagramm.ShapeList.Count = ShapesCount);
    Check(Length(f_Coords) = aDiagramm.ShapeList.Count);
