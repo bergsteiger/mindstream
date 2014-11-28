@@ -10,7 +10,7 @@ type
   TFirstTest = class(TTestCase)
    published
     procedure DoIt;
-    procedure FailureTest;
+//    procedure FailureTest;
     procedure DoItAgain;
   end;//TFirstTest
 
@@ -30,13 +30,13 @@ begin
  Check(true);
 end;
 
-procedure TFirstTest.FailureTest;
+(*procedure TFirstTest.FailureTest;
 begin
  //ExpectedException := ETestFailure;
  Check(False);
-end;
+end;*)
 
 initialization
-// TestFramework.RegisterTest(TFirstTest.Suite);
+ TestFramework.RegisterTest(TFirstTest.Suite);
 end.
 

@@ -51,6 +51,6 @@ begin
 end;
 
 initialization
-// TestFramework.RegisterTest(TRegisteredShapesTest.Suite);
+ TestFramework.RegisterTest(TRegisteredShapesTest.Suite);
 end.
 
