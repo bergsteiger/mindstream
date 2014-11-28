@@ -61,11 +61,6 @@ type
 
   RmsParametrizedShapeTest = class of TmsParametrizedShapeTest;
 
-  TmsParametrizedTestSerialize = class(TmsParametrizedShapeTest)
-  public
-   constructor Create(MethodName: string; aShapeClass: RmsShape); override;
-  end;//TmsParametrizedTestSerialize
-
  TmsParametrizedShapeTestSuite = class(TTestSuite)
   public
    procedure AddTests(testClass: TTestCaseClass); override;
@@ -294,11 +289,6 @@ begin
  inherited Create(MethodName);
  f_ShapeClass := aShapeClass;
  FTestName := MethodName + '.' + f_ShapeClass.ClassName;
-end;
-
-constructor TmsParametrizedTestSerialize.Create(MethodName: string; aShapeClass: RmsShape);
-begin
- inherited Create(MethodName, aShapeClass);
 end;
 
 // TmsParametrizedShapeTestSuite
