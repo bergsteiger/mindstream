@@ -11,13 +11,13 @@ uses
   msDiagramm,
   msShape,
   msRegisteredShapes,
-  System.Types
+  System.Types,
+  System.Classes
   ;
 
 type
   TmsDiagrammCheck = reference to procedure (aDiagramm : TmsDiagramm);
   TmsShapeClassCheck = TmsShapeClassLambda;
-
   TmsShapeTestPrim = class abstract(TTestCase)
   public
     class procedure CheckShapes(aCheck: TmsShapeClassCheck);
@@ -41,9 +41,12 @@ type
     procedure TestDeSerializeViaShapeCheckForShapeClass(aShapeClass: RmsShape);
   end;//TestTmsSerializeControllerPrim
 
+  TmsFileLambda = reference to procedure (aFile: TFileStream);
+
   TestTmsSerializeController = class abstract(TestTmsSerializeControllerPrim)
   protected
     function ShapeClass: RmsShape; virtual; abstract;
+    procedure OutToFileAndCheck(aLambda: TmsFileLambda);
   published
     procedure TestSerialize;
     procedure TestDeSerialize;
@@ -81,7 +84,6 @@ implementation
   msCircle,
   msRoundedRectangle,
   msMover,
-  System.Classes,
   Winapi.Windows,
   System.Rtti,
   System.TypInfo
@@ -247,6 +249,21 @@ end;
 procedure TestTmsSerializeController.TestDeSerializeViaShapeCheck;
 begin
  TestDeSerializeViaShapeCheckForShapeClass(ShapeClass);
+end;
+
+procedure TestTmsSerializeController.OutToFileAndCheck(aLambda: TmsFileLambda);
+var
+ l_FileNameTest : String;
+ l_FS : TFileStream;
+begin
+ l_FileNameTest := TestResultsFileName(ShapeClass);
+ l_FS := TFileStream.Create(l_FileNameTest, fmCreate);
+ try
+  aLambda(l_FS);
+ finally
+  FreeAndNil(l_FS);
+ end;//try..finally
+ CheckFileWithEtalon(l_FileNameTest);
 end;
 
 procedure TestTmsSerializeController.TestShapeName;
