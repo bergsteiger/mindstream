@@ -42,7 +42,7 @@ type
     procedure TestSerialize;
     procedure TestDeSerialize;
     procedure TestDeSerializeViaShapeCheck;
-    procedure FakeTest;
+    procedure TestShapeName;
   end;//TestTmsSerializeController
 
   TmsParametrizedShapeTest = class(TestTmsSerializeController)
@@ -252,7 +252,7 @@ begin
  TestDeSerializeViaShapeCheckForShapeClass(ShapeClass);
 end;
 
-procedure TestTmsSerializeController.FakeTest;
+procedure TestTmsSerializeController.TestShapeName;
 var
  l_FileNameTest : String;
  l_FS : TFileStream;
