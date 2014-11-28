@@ -50,6 +50,20 @@ type
     procedure TestDeSerializeViaShapeCheck;
   end;//TestTmsSerializeController
 
+  TmsParametrizedShapeTest = class(TestTmsSerializeController)
+  private
+   f_ShapeClass : RmsShape;
+  protected
+    function ShapeClass: RmsShape; override;
+  public
+   constructor Create(MethodName: string; aShapeClass: RmsShape); virtual;
+  end;//TmsParametrizedShapeTest
+
+  TmsParametrizedTestSerialize = class(TmsParametrizedShapeTest)
+  public
+   constructor Create(MethodName: string; aShapeClass: RmsShape); override;
+  end;//TmsParametrizedTestSerialize
+
   TestTmsSerializeControllerForAll = class(TestTmsSerializeControllerPrim)
   published
     procedure TestSerialize;
@@ -259,6 +273,23 @@ begin
    TestDeSerializeViaShapeCheckForShapeClass(aShapeClass);
   end
  );
+end;
+
+function TmsParametrizedShapeTest.ShapeClass: RmsShape;
+begin
+ Result := f_ShapeClass;
+end;
+
+constructor TmsParametrizedShapeTest.Create(MethodName: string; aShapeClass: RmsShape);
+begin
+ inherited Create(MethodName);
+ f_ShapeClass := aShapeClass;
+end;
+
+constructor TmsParametrizedTestSerialize.Create(MethodName: string; aShapeClass: RmsShape);
+begin
+ inherited Create(MethodName, aShapeClass);
+ FMethod := TestSerialize;
 end;
 
 initialization
