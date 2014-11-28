@@ -312,37 +312,19 @@ end;
 
 procedure TmsParametrizedShapeTestSuite.AddTests(testClass: TTestCaseClass);
 var
-  LMethod: TRttiMethod;
+ l_Method: TRttiMethod;
 begin
  Assert(testClass.InheritsFrom(TmsParametrizedShapeTest));
- for LMethod in TRttiContext.Create.GetType(testClass).GetMethods do
-   if (LMethod.Visibility = mvPublished) then
+ for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
+   if (l_Method.Visibility = mvPublished) then
    begin
     TmsShapeTestPrim.CheckShapes(
      procedure (aShapeClass: RmsShape)
      begin
-      AddTest(RmsParametrizedShapeTest(testClass).Create(LMethod.Name, aShapeClass));
+      AddTest(RmsParametrizedShapeTest(testClass).Create(l_Method.Name, aShapeClass));
      end
     );
    end;//LMethod.Visibility = mvPublished
-(* TmsShapeTestPrim.CheckShapes(
-  procedure (aShapeClass: RmsShape)
-  begin
-   AddTest(RmsParametrizedShapeTest(testClass).Create('TestSerialize', aShapeClass));
-  end
- );
- TmsShapeTestPrim.CheckShapes(
-  procedure (aShapeClass: RmsShape)
-  begin
-   AddTest(RmsParametrizedShapeTest(testClass).Create('TestDeSerialize', aShapeClass));
-  end
- );
- TmsShapeTestPrim.CheckShapes(
-  procedure (aShapeClass: RmsShape)
-  begin
-   AddTest(RmsParametrizedShapeTest(testClass).Create('TestDeSerializeViaShapeCheck', aShapeClass));
-  end
- );*)
 end;
 
 initialization
