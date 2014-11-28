@@ -70,7 +70,6 @@ var
  l_Marshal: TJSONMarshal; // Serializer
  l_Json: TJSONObject;
  l_StringList: TStringList;
- l_ShapeClass : RmsShape;
 begin
  // l_SaveDialog := TSaveDialog.Create(nil);
  // if l_SaveDialog.Execute then
@@ -95,14 +94,12 @@ begin
    end
   );
 
-  for l_ShapeClass in TmsRegisteredShapes.Instance do
-   l_Marshal.RegisterJSONMarshalled(l_ShapeClass, 'FRefCount', false);
-(*  l_Marshal.RegisterConverter(TmsShape, 'FRefCount',
-   function(Data: TObject; Field: string): string
+  TmsRegisteredShapes.IterateShapes(
+   procedure (aShapeClass: RmsShape)
    begin
-    Result := '';
+    l_Marshal.RegisterJSONMarshalled(aShapeClass, 'FRefCount', false);
    end
-  );*)
+  );
 
   l_StringList := TStringList.Create;
   try
