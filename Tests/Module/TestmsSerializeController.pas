@@ -351,8 +351,6 @@ begin
 end;
 
 procedure TmsParametrizedShapeTestSuite.AddTests(testClass: TTestCaseClass);
-const
- cSeed = 10;
 begin
  Assert(testClass.InheritsFrom(TmsParametrizedShapeTest));
 
