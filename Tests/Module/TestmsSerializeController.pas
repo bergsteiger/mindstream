@@ -270,11 +270,18 @@ procedure TestTmsSerializeControllerPrim.TestDeSerializeViaShapeCheckForShapeCla
 begin
  DeserializeDiargammAndCheck(
   procedure (aDiagramm: TmsDiagramm)
+  var
+   l_Shape : TmsShape;
+   l_Index : Integer;
   begin
    Check(aDiagramm.ShapeList <> nil);
    Check(aDiagramm.ShapeList.Count = ShapesCount);
    Check(Length(f_Coords) = aDiagramm.ShapeList.Count);
-   Check(aDiagramm.ShapeList[0].HackInstance.ClassType = aShapeClass);
+   for l_Index := 0 to Pred(aDiagramm.ShapeList.Count) do
+   begin
+    l_Shape := aDiagramm.ShapeList[l_Index].HackInstance As TmsShape;
+    Check(l_Shape.ClassType = aShapeClass);
+   end;//for l_Shape
   end
  , aShapeClass
  );
