@@ -28,6 +28,7 @@ type
     function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
     function TestResultsFileName(aShapeClass: RmsShape): String;
     procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
+    function ShapesCount: Integer;
     procedure CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
     function TestSerializeMethodName: String; virtual;
     procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck; aShapeClass: RmsShape);
@@ -173,18 +174,27 @@ begin
  CheckFileWithEtalon(l_FileNameTest);
 end;
 
+function TestTmsSerializeControllerPrim.ShapesCount: Integer;
+begin
+ Result := 10;
+end;
+
 procedure TestTmsSerializeControllerPrim.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
 const
  c_DiagramName = 'First Diagram';
 var
  l_Diagramm: TmsDiagramm;
  l_Image: TImage;
+ l_Index : Integer;
 begin
  l_Image:= TImage.Create(nil);
  try
   l_Diagramm := TmsDiagramm.Create(l_Image, c_DiagramName);
   try
-   l_Diagramm.ShapeList.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(10, 10),nil)));
+   for l_Index := 0 to Pred(ShapesCount) do
+   begin
+    l_Diagramm.ShapeList.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(10, 10), nil)));
+   end;//for l_Index
    SaveDiagrammAndCheck(aShapeClass, l_Diagramm);
   finally
    FreeAndNil(l_Image);
@@ -240,7 +250,7 @@ begin
   procedure (aDiagramm: TmsDiagramm)
   begin
    Check(aDiagramm.ShapeList <> nil);
-   Check(aDiagramm.ShapeList.Count = 1);
+   Check(aDiagramm.ShapeList.Count = ShapesCount);
    Check(aDiagramm.ShapeList[0].HackInstance.ClassType = aShapeClass);
   end
  , aShapeClass
