@@ -26,13 +26,13 @@ type
   TmsShapeTestContext = record
    rMethodName: string;
    rSeed: Integer;
-   constructor Create(aMethodName: string; aSeed: Integer);
+   rDiagrammName : String;
+   constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName : String);
   end;//TmsShapeTestContext
 
   TestTmsSerializeControllerPrim = class abstract(TmsShapeTestPrim)
   protected
    f_Coords : array of TPoint;
-   f_DiagrammName : String;
    f_Context : TmsShapeTestContext;
   protected
     procedure SetUp; override;
@@ -152,10 +152,11 @@ begin
  Result := 10;
 end;
 
-constructor TmsShapeTestContext.Create(aMethodName: string; aSeed: Integer);
+constructor TmsShapeTestContext.Create(aMethodName: string; aSeed: Integer; aDiagrammName : String);
 begin
  rMethodName := aMethodName;
  rSeed := aSeed;
+ rDiagrammName := aDiagrammName;
 end;
 
 procedure TestTmsSerializeControllerPrim.SetUp;
@@ -166,7 +167,6 @@ var
 begin
  inherited;
  RandSeed := f_Context.rSeed;
- f_DiagrammName := 'Диаграмма №' + IntToStr(Random(10));
  SetLength(f_Coords, ShapesCount);
  for l_Index := 0 to Pred(ShapesCount) do
  begin
@@ -184,7 +184,7 @@ var
 begin
  l_Image:= TImage.Create(nil);
  try
-  l_Diagramm := TmsDiagramm.Create(l_Image, f_DiagrammName);
+  l_Diagramm := TmsDiagramm.Create(l_Image, f_Context.rDiagrammName);
   try
    for l_P in f_Coords do
     l_Diagramm.ShapeList.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil)));
@@ -251,7 +251,7 @@ begin
    l_Shape : TmsShape;
    l_Index : Integer;
   begin
-   Check(aDiagramm.Name = f_DiagrammName);
+   Check(aDiagramm.Name = f_Context.rDiagrammName);
    Check(aDiagramm.ShapeList <> nil);
    Check(aDiagramm.ShapeList.Count = ShapesCount);
    Check(Length(f_Coords) = aDiagramm.ShapeList.Count);
@@ -302,7 +302,7 @@ begin
  OutToFileAndCheck(
   procedure (aFile: TFileStream)
   begin
-   aFile.Write(AnsiString(f_DiagrammName)[1], Length(f_DiagrammName));
+   aFile.Write(AnsiString(f_Context.rDiagrammName)[1], Length(f_Context.rDiagrammName));
   end
  );
 end;
@@ -352,20 +352,22 @@ procedure TmsParametrizedShapeTestSuite.AddTests(testClass: TTestCaseClass);
 const
  cSeed = 10;
 var
- l_Method: TRttiMethod;
+ l_DiagrammName : String;
 begin
- RandSeed := 10;
  Assert(testClass.InheritsFrom(TmsParametrizedShapeTest));
- for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
-   if (l_Method.Visibility = mvPublished) then
-   begin
-    TmsShapeTestPrim.CheckShapes(
-     procedure (aShapeClass: RmsShape)
-     begin
-      AddTest(RmsParametrizedShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name, cSeed), aShapeClass));
-     end
-    );
-   end;//LMethod.Visibility = mvPublished
+
+ RandSeed := 10;
+ l_DiagrammName := 'Диаграмма №' + IntToStr(Random(10));
+ TmsShapeTestPrim.CheckShapes(
+  procedure (aShapeClass: RmsShape)
+  var
+   l_Method: TRttiMethod;
+  begin
+   for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
+    if (l_Method.Visibility = mvPublished) then
+      AddTest(RmsParametrizedShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name, cSeed, l_DiagrammName), aShapeClass));
+  end
+ );
 end;
 
 initialization
