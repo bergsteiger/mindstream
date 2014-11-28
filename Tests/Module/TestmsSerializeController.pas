@@ -190,6 +190,8 @@ var
  l_Diagramm: TmsDiagramm;
  l_Image: TImage;
  l_Index : Integer;
+ l_X : Integer;
+ l_Y : Integer;
 begin
  RandSeed := 10;
  l_Image:= TImage.Create(nil);
@@ -198,7 +200,9 @@ begin
   try
    for l_Index := 0 to Pred(ShapesCount) do
    begin
-    l_Diagramm.ShapeList.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(10, 10), nil)));
+    l_X := Random(100);
+    l_Y := Random(200);
+    l_Diagramm.ShapeList.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_X, l_Y), nil)));
    end;//for l_Index
    SaveDiagrammAndCheck(aShapeClass, l_Diagramm);
   finally
