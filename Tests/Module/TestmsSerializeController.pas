@@ -27,7 +27,8 @@ type
    rMethodName: string;
    rSeed: Integer;
    rDiagrammName : String;
-   constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName : String);
+   rShapesCount : Integer;
+   constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName : String; aShapesCount : Integer);
   end;//TmsShapeTestContext
 
   TestTmsSerializeControllerPrim = class abstract(TmsShapeTestPrim)
@@ -149,14 +150,15 @@ end;
 
 function TestTmsSerializeControllerPrim.ShapesCount: Integer;
 begin
- Result := 10;
+ Result := f_Context.rShapesCount;
 end;
 
-constructor TmsShapeTestContext.Create(aMethodName: string; aSeed: Integer; aDiagrammName : String);
+constructor TmsShapeTestContext.Create(aMethodName: string; aSeed: Integer; aDiagrammName : String; aShapesCount : Integer);
 begin
  rMethodName := aMethodName;
  rSeed := aSeed;
  rDiagrammName := aDiagrammName;
+ rShapesCount := aShapesCount;
 end;
 
 procedure TestTmsSerializeControllerPrim.SetUp;
@@ -360,13 +362,15 @@ begin
   var
    l_Method: TRttiMethod;
    l_DiagrammName : String;
-   l_Seed : Intger;
+   l_Seed : Integer;
+   l_ShapesCount : Integer;
   begin
    l_Seed := Random(High(l_Seed));
    l_DiagrammName := 'Диаграмма №' + IntToStr(Random(10));
+   l_ShapesCount := Random(1000) + 1;
    for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
     if (l_Method.Visibility = mvPublished) then
-      AddTest(RmsParametrizedShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name, l_Seed, l_DiagrammName), aShapeClass));
+      AddTest(RmsParametrizedShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name, l_Seed, l_DiagrammName, l_ShapesCount), aShapeClass));
   end
  );
 end;
