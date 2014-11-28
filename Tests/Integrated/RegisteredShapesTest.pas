@@ -27,12 +27,15 @@ uses
 
 procedure TRegisteredShapesTest.ShapesRegistredCountEqual_12;
 var
- l_Shape : RmsShape;
  l_Result : integer;
 begin
  l_Result := 0;
- for l_Shape in TmsRegisteredShapes.Instance do
-  inc(l_Result);
+ TmsRegisteredShapes.IterateShapes(
+  procedure (aShapeClass: RmsShape)
+  begin
+   inc(l_Result);
+  end
+ );
 
  CheckTrue(l_Result = 12);
 end;
