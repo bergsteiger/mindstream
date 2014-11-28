@@ -191,6 +191,7 @@ var
  l_Image: TImage;
  l_Index : Integer;
 begin
+ RandSeed := 10;
  l_Image:= TImage.Create(nil);
  try
   l_Diagramm := TmsDiagramm.Create(l_Image, c_DiagramName);
