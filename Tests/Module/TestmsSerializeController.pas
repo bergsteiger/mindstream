@@ -203,9 +203,10 @@ begin
  end;//for l_Index
 end;
 
-procedure TestTmsSerializeControllerPrim.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
 const
  c_DiagramName = 'First Diagram';
+
+procedure TestTmsSerializeControllerPrim.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
 var
  l_Diagramm: TmsDiagramm;
  l_Image: TImage;
@@ -274,6 +275,7 @@ begin
    l_Shape : TmsShape;
    l_Index : Integer;
   begin
+   Check(aDiagramm.Name = c_DiagramName);
    Check(aDiagramm.ShapeList <> nil);
    Check(aDiagramm.ShapeList.Count = ShapesCount);
    Check(Length(f_Coords) = aDiagramm.ShapeList.Count);
