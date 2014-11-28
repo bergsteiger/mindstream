@@ -70,26 +70,6 @@ type
    class function Make: ITest;
  end;//TmsParametrizedShapeTestSuite
 
-  TestSerializeTriangle = class(TestTmsSerializeController)
-  protected
-    function ShapeClass: RmsShape; override;
-  end;//TestSerializeTriangle
-
-  TestSerializeRectangle = class(TestTmsSerializeController)
-  protected
-    function ShapeClass: RmsShape; override;
-  end;//TestSerializeRectangle
-
-  TestSerializeCircle = class(TestTmsSerializeController)
-  protected
-    function ShapeClass: RmsShape; override;
-  end;//TestSerializeCircle
-
-  TestSerializeRoundedRectangle = class(TestTmsSerializeController)
-  protected
-    function ShapeClass: RmsShape; override;
-  end;//TestSerializeRoundedRectangle
-
 implementation
 
  uses
@@ -104,26 +84,6 @@ implementation
   System.Rtti,
   System.TypInfo
   ;
-
-function TestSerializeTriangle.ShapeClass: RmsShape;
-begin
- Result := TmsTriangle;
-end;
-
-function TestSerializeRectangle.ShapeClass: RmsShape;
-begin
- Result := TmsRectangle;
-end;
-
-function TestSerializeCircle.ShapeClass: RmsShape;
-begin
- Result := TmsCircle;
-end;
-
-function TestSerializeRoundedRectangle.ShapeClass: RmsShape;
-begin
- Result := TmsRoundedRectangle;
-end;
 
 function TestTmsSerializeControllerPrim.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
 var
@@ -363,10 +323,6 @@ begin
 end;
 
 initialization
-  RegisterTest(TestSerializeTriangle.Suite);
-  RegisterTest(TestSerializeRectangle.Suite);
-  RegisterTest(TestSerializeCircle.Suite);
-  RegisterTest(TestSerializeRoundedRectangle.Suite);
   RegisterTest(TmsParametrizedShapeTestSuite.Make);
 end.
 
