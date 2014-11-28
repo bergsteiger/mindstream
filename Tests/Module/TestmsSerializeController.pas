@@ -59,10 +59,19 @@ type
    constructor Create(MethodName: string; aShapeClass: RmsShape); virtual;
   end;//TmsParametrizedShapeTest
 
+  RmsParametrizedShapeTest = class of TmsParametrizedShapeTest;
+
   TmsParametrizedTestSerialize = class(TmsParametrizedShapeTest)
   public
    constructor Create(MethodName: string; aShapeClass: RmsShape); override;
   end;//TmsParametrizedTestSerialize
+
+ TmsParametrizedShapeTestSuite = class(TTestSuite)
+  public
+   procedure AddTests(testClass: TTestCaseClass); override;
+   constructor Create;
+   class function Make: ITest;
+ end;//TmsParametrizedShapeTestSuite
 
   TestTmsSerializeControllerForAll = class(TestTmsSerializeControllerPrim)
   published
@@ -284,12 +293,35 @@ constructor TmsParametrizedShapeTest.Create(MethodName: string; aShapeClass: Rms
 begin
  inherited Create(MethodName);
  f_ShapeClass := aShapeClass;
+ FTestName := MethodName + '.' + f_ShapeClass.ClassName;
 end;
 
 constructor TmsParametrizedTestSerialize.Create(MethodName: string; aShapeClass: RmsShape);
 begin
  inherited Create(MethodName, aShapeClass);
- FMethod := TestSerialize;
+end;
+
+// TmsParametrizedShapeTestSuite
+
+constructor TmsParametrizedShapeTestSuite.Create;
+begin
+ inherited Create(TmsParametrizedTestSerialize);
+end;
+
+class function TmsParametrizedShapeTestSuite.Make: ITest;
+begin
+ Result := Create;
+end;
+
+procedure TmsParametrizedShapeTestSuite.AddTests(testClass: TTestCaseClass);
+begin
+ Assert(testClass.InheritsFrom(TmsParametrizedShapeTest));
+ TmsShapeTestPrim.CheckShapes(
+  procedure (aShapeClass: RmsShape)
+  begin
+   AddTest(RmsParametrizedShapeTest(testClass).Create('TestSerialize', aShapeClass));
+  end
+ );
 end;
 
 initialization
@@ -299,5 +331,6 @@ initialization
   RegisterTest(TestSerializeCircle.Suite);
   RegisterTest(TestSerializeRoundedRectangle.Suite);
   RegisterTest(TestTmsSerializeControllerForAll.Suite);
+  RegisterTest(TmsParametrizedShapeTestSuite.Make);
 end.
 
