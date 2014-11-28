@@ -202,7 +202,7 @@ begin
    SaveDiagrammAndCheck(aShapeClass, l_Diagramm);
   finally
    FreeAndNil(l_Image);
-  end;
+  end;//try..finally
  finally
   FreeAndNil(l_Diagramm);
  end;//try..finally
