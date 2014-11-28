@@ -47,7 +47,7 @@ type
 
   TestTmsSerializeControllerForAll = class(TestTmsSerializeControllerPrim)
   protected
-    procedure CheckShapes(aCheck: TmsShapeClassCheck);
+    class procedure CheckShapes(aCheck: TmsShapeClassCheck);
   published
     procedure TestSerialize;
     procedure TestDeSerialize;
@@ -217,7 +217,7 @@ begin
  TestDeSerializeViaShapeCheckForShapeClass(ShapeClass);
 end;
 
-procedure TestTmsSerializeControllerForAll.CheckShapes(aCheck: TmsShapeClassCheck);
+class procedure TestTmsSerializeControllerForAll.CheckShapes(aCheck: TmsShapeClassCheck);
 begin
  TmsRegisteredShapes.IterateShapes(
   procedure (aShapeClass: RmsShape)
