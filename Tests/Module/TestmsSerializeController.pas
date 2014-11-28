@@ -40,6 +40,7 @@ type
     procedure TestSerialize;
     procedure TestDeSerialize;
     procedure TestDeSerializeViaShapeCheck;
+    procedure FakeTest;
   end;//TestTmsSerializeController
 
   TmsParametrizedShapeTest = class(TestTmsSerializeController)
@@ -237,6 +238,11 @@ end;
 procedure TestTmsSerializeController.TestDeSerializeViaShapeCheck;
 begin
  TestDeSerializeViaShapeCheckForShapeClass(ShapeClass);
+end;
+
+procedure TestTmsSerializeController.FakeTest;
+begin
+ Check(ShapeClass.ClassName = ShapeClass.ClassName);
 end;
 
 class procedure TmsShapeTestPrim.CheckShapes(aCheck: TmsShapeClassCheck);
