@@ -140,7 +140,7 @@ var
  l_FileSerialized, l_FileEtalon: TStringList;
  l_FileNameEtalon : String;
 begin
- l_FileNameEtalon := aFileName + '.etalon.json';
+ l_FileNameEtalon := aFileName + '.etalon' + ExtractFileExt(aFileName);
  if FileExists(l_FileNameEtalon) then
  begin
   l_FileSerialized := TStringList.Create;
