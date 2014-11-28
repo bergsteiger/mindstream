@@ -63,12 +63,12 @@ type
 
   RmsParametrizedShapeTest = class of TmsParametrizedShapeTest;
 
- TmsParametrizedShapeTestSuite = class(TTestSuite)
+  TmsParametrizedShapeTestSuite = class(TTestSuite)
   public
    procedure AddTests(testClass: TTestCaseClass); override;
    constructor Create;
    class function Make: ITest;
- end;//TmsParametrizedShapeTestSuite
+  end;//TmsParametrizedShapeTestSuite
 
 implementation
 
