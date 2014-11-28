@@ -74,6 +74,6 @@ end;
 
 initialization
   // Register any test cases with the test runner
-//  RegisterTest(TestTmsLine.Suite);
+  RegisterTest(TestTmsLine.Suite);
 end.
 
