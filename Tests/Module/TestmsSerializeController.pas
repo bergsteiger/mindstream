@@ -305,7 +305,7 @@ end;
 
 constructor TmsParametrizedShapeTestSuite.Create;
 begin
- inherited Create(TmsParametrizedTestSerialize);
+ inherited Create(TmsParametrizedShapeTest);
 end;
 
 class function TmsParametrizedShapeTestSuite.Make: ITest;
