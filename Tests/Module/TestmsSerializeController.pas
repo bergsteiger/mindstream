@@ -18,12 +18,13 @@ uses
   JSON,
   FMX.Objects,
   msDiagramm,
-  msShape
+  msShape,
+  msRegisteredShapes
   ;
 
 type
   TmsDiagrammCheck = reference to procedure (aDiagramm : TmsDiagramm);
-  TmsShapeClassCheck = reference to procedure (aShapeClass : RmsShape);
+  TmsShapeClassCheck = TmsShapeClassLambda;
 
   TestTmsSerializeControllerPrim = class abstract(TTestCase)
   protected
@@ -81,7 +82,6 @@ implementation
   msRectangle,
   msCircle,
   msRoundedRectangle,
-  msRegisteredShapes,
   msMover,
   System.Types,
   System.Classes,
@@ -218,14 +218,14 @@ begin
 end;
 
 procedure TestTmsSerializeControllerForAll.CheckShapes(aCheck: TmsShapeClassCheck);
-var
- l_ShapeClass : RmsShape;
 begin
- for l_ShapeClass in TmsRegisteredShapes.Instance do
- begin
-  if not l_ShapeClass.InheritsFrom(TmsMover) then
-   aCheck(l_ShapeClass);
- end;//for l_ShapeClass
+ TmsRegisteredShapes.IterateShapes(
+  procedure (aShapeClass: RmsShape)
+  begin
+   if not aShapeClass.InheritsFrom(TmsMover) then
+    aCheck(aShapeClass);
+  end
+ );
 end;
 
 procedure TestTmsSerializeControllerForAll.TestSerialize;
