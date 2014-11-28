@@ -25,7 +25,8 @@ type
 
   TmsShapeTestContext = record
    rMethodName: string;
-   constructor Create(aMethodName: string);
+   rSeed: Integer;
+   constructor Create(aMethodName: string; aSeed: Integer);
   end;//TmsShapeTestContext
 
   TestTmsSerializeControllerPrim = class abstract(TmsShapeTestPrim)
@@ -139,7 +140,6 @@ end;
 
 procedure TestTmsSerializeControllerPrim.SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
 var
- l_FileSerialized, l_FileEtalon: TStringList;
  l_FileNameTest : String;
 begin
  l_FileNameTest := TestResultsFileName(aShapeClass);
@@ -152,9 +152,10 @@ begin
  Result := 10;
 end;
 
-constructor TmsShapeTestContext.Create(aMethodName: string);
+constructor TmsShapeTestContext.Create(aMethodName: string; aSeed: Integer);
 begin
  rMethodName := aMethodName;
+ rSeed := aSeed;
 end;
 
 procedure TestTmsSerializeControllerPrim.SetUp;
@@ -164,7 +165,7 @@ var
  l_Y : Integer;
 begin
  inherited;
- RandSeed := 10;
+ RandSeed := f_Context.rSeed;
  f_DiagrammName := 'Диаграмма №' + IntToStr(Random(10));
  SetLength(f_Coords, ShapesCount);
  for l_Index := 0 to Pred(ShapesCount) do
@@ -348,9 +349,12 @@ begin
 end;
 
 procedure TmsParametrizedShapeTestSuite.AddTests(testClass: TTestCaseClass);
+const
+ cSeed = 10;
 var
  l_Method: TRttiMethod;
 begin
+ RandSeed := 10;
  Assert(testClass.InheritsFrom(TmsParametrizedShapeTest));
  for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
    if (l_Method.Visibility = mvPublished) then
@@ -358,7 +362,7 @@ begin
     TmsShapeTestPrim.CheckShapes(
      procedure (aShapeClass: RmsShape)
      begin
-      AddTest(RmsParametrizedShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name), aShapeClass));
+      AddTest(RmsParametrizedShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name, cSeed), aShapeClass));
      end
     );
    end;//LMethod.Visibility = mvPublished
