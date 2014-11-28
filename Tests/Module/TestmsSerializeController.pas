@@ -24,6 +24,7 @@ type
 
   TestTmsSerializeControllerPrim = class abstract(TmsShapeTestPrim)
   protected
+    procedure CheckFileWithEtalon(const aFileName: String);
     function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
     procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
     procedure CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
@@ -134,20 +135,16 @@ begin
  Result := ExtractFilePath(ParamStr(0)) + ClassName + '_' + aTestName + '_' + aShapeClass.ClassName + '.json';
 end;
 
-procedure TestTmsSerializeControllerPrim.SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
+procedure TestTmsSerializeControllerPrim.CheckFileWithEtalon(const aFileName: String);
 var
  l_FileSerialized, l_FileEtalon: TStringList;
- l_FileNameTest : String;
  l_FileNameEtalon : String;
 begin
- l_FileNameTest := MakeFileName(Name, aShapeClass);
- TmsSerializeController.Serialize(l_FileNameTest, aDiagramm);
-
- l_FileNameEtalon := l_FileNameTest + '.etalon.json';
+ l_FileNameEtalon := aFileName + '.etalon.json';
  if FileExists(l_FileNameEtalon) then
  begin
   l_FileSerialized := TStringList.Create;
-  l_FileSerialized.LoadFromFile(l_FileNameTest);
+  l_FileSerialized.LoadFromFile(aFileName);
 
   l_FileEtalon := TStringList.Create;
   l_FileEtalon.LoadFromFile(l_FileNameEtalon);
@@ -156,11 +153,21 @@ begin
 
   FreeAndNil(l_FileSerialized);
   FreeAndNil(l_FileEtalon);
- end
+ end//FileExists(l_FileNameEtalon)
  else
  begin
-  CopyFile(PWideChar(l_FileNameTest),PWideChar(l_FileNameEtalon),True);
- end;
+  CopyFile(PWideChar(aFileName),PWideChar(l_FileNameEtalon),True);
+ end;//FileExists(l_FileNameEtalon)
+end;
+
+procedure TestTmsSerializeControllerPrim.SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
+var
+ l_FileSerialized, l_FileEtalon: TStringList;
+ l_FileNameTest : String;
+begin
+ l_FileNameTest := MakeFileName(Name, aShapeClass);
+ TmsSerializeController.Serialize(l_FileNameTest, aDiagramm);
+ CheckFileWithEtalon(l_FileNameTest);
 end;
 
 procedure TestTmsSerializeControllerPrim.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
