@@ -100,7 +100,9 @@ implementation
   msMover,
   System.Types,
   System.Classes,
-  Winapi.Windows
+  Winapi.Windows,
+  System.Rtti,
+  System.TypInfo
   ;
 
 function TestSerializeTriangle.ShapeClass: RmsShape;
@@ -309,9 +311,21 @@ begin
 end;
 
 procedure TmsParametrizedShapeTestSuite.AddTests(testClass: TTestCaseClass);
+var
+  LMethod: TRttiMethod;
 begin
  Assert(testClass.InheritsFrom(TmsParametrizedShapeTest));
- TmsShapeTestPrim.CheckShapes(
+ for LMethod in TRttiContext.Create.GetType(testClass).GetMethods do
+   if (LMethod.Visibility = mvPublished) then
+   begin
+    TmsShapeTestPrim.CheckShapes(
+     procedure (aShapeClass: RmsShape)
+     begin
+      AddTest(RmsParametrizedShapeTest(testClass).Create(LMethod.Name, aShapeClass));
+     end
+    );
+   end;//LMethod.Visibility = mvPublished
+(* TmsShapeTestPrim.CheckShapes(
   procedure (aShapeClass: RmsShape)
   begin
    AddTest(RmsParametrizedShapeTest(testClass).Create('TestSerialize', aShapeClass));
@@ -328,7 +342,7 @@ begin
   begin
    AddTest(RmsParametrizedShapeTest(testClass).Create('TestDeSerializeViaShapeCheck', aShapeClass));
   end
- );
+ );*)
 end;
 
 initialization
