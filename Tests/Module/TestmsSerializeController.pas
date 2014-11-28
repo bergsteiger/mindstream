@@ -26,7 +26,12 @@ type
   TmsDiagrammCheck = reference to procedure (aDiagramm : TmsDiagramm);
   TmsShapeClassCheck = TmsShapeClassLambda;
 
-  TestTmsSerializeControllerPrim = class abstract(TTestCase)
+  TmsShapeTestPrim = class abstract(TTestCase)
+  public
+    class procedure CheckShapes(aCheck: TmsShapeClassCheck);
+  end;//TmsShapeTestPrim
+
+  TestTmsSerializeControllerPrim = class abstract(TmsShapeTestPrim)
   protected
     function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
     procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
@@ -34,8 +39,6 @@ type
     procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck; aShapeClass: RmsShape);
     procedure TestDeSerializeForShapeClass(aShapeClass: RmsShape);
     procedure TestDeSerializeViaShapeCheckForShapeClass(aShapeClass: RmsShape);
-  public
-    class procedure CheckShapes(aCheck: TmsShapeClassCheck);
   end;//TestTmsSerializeControllerPrim
 
   TestTmsSerializeController = class abstract(TestTmsSerializeControllerPrim)
@@ -217,7 +220,7 @@ begin
  TestDeSerializeViaShapeCheckForShapeClass(ShapeClass);
 end;
 
-class procedure TestTmsSerializeControllerPrim.CheckShapes(aCheck: TmsShapeClassCheck);
+class procedure TmsShapeTestPrim.CheckShapes(aCheck: TmsShapeClassCheck);
 begin
  TmsRegisteredShapes.IterateShapes(
   procedure (aShapeClass: RmsShape)
