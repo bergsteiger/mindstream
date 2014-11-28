@@ -260,7 +260,6 @@ begin
  l_FileNameTest := TestResultsFileName(ShapeClass);
  l_FS := TFileStream.Create(l_FileNameTest, fmCreate);
  try
-  Check(ShapeClass.ClassName = ShapeClass.ClassName);
   l_FS.Write(AnsiString(ShapeClass.ClassName)[1], Length(ShapeClass.ClassName));
  finally
   FreeAndNil(l_FS);
