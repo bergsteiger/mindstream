@@ -63,7 +63,7 @@ type
     function ShapeClass: RmsShape; override;
     function TestSerializeMethodName: String; override;
   public
-   constructor Create(MethodName: string; aShapeClass: RmsShape); virtual;
+   constructor Create(MethodName: string; aShapeClass: RmsShape);
   end;//TmsParametrizedShapeTest
 
   RmsParametrizedShapeTest = class of TmsParametrizedShapeTest;
