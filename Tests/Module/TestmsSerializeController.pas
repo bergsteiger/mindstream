@@ -52,6 +52,7 @@ type
     procedure TestDeSerialize;
     procedure TestDeSerializeViaShapeCheck;
     procedure TestShapeName;
+    procedure TestDiagrammName;
   end;//TestTmsSerializeController
 
   TmsParametrizedShapeTest = class(TestTmsSerializeController)
@@ -272,6 +273,16 @@ begin
   procedure (aFile: TFileStream)
   begin
    aFile.Write(AnsiString(ShapeClass.ClassName)[1], Length(ShapeClass.ClassName));
+  end
+ );
+end;
+
+procedure TestTmsSerializeController.TestDiagrammName;
+begin
+ OutToFileAndCheck(
+  procedure (aFile: TFileStream)
+  begin
+   aFile.Write(AnsiString(f_DiagrammName)[1], Length(f_DiagrammName));
   end
  );
 end;
