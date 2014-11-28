@@ -281,6 +281,8 @@ begin
    begin
     l_Shape := aDiagramm.ShapeList[l_Index].HackInstance As TmsShape;
     Check(l_Shape.ClassType = aShapeClass);
+    Check(l_Shape.StartPoint.X = f_Coords[l_Index].X);
+    Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y);
    end;//for l_Shape
   end
  , aShapeClass
