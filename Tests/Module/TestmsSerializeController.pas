@@ -26,6 +26,7 @@ type
   protected
     procedure CheckFileWithEtalon(const aFileName: String);
     function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
+    function TestResultsFileName(aShapeClass: RmsShape): String;
     procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
     procedure CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
     function TestSerializeMethodName: String; virtual;
@@ -157,12 +158,17 @@ begin
  end;//FileExists(l_FileNameEtalon)
 end;
 
+function TestTmsSerializeControllerPrim.TestResultsFileName(aShapeClass: RmsShape): String;
+begin
+ Result := MakeFileName(Name, aShapeClass);
+end;
+
 procedure TestTmsSerializeControllerPrim.SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
 var
  l_FileSerialized, l_FileEtalon: TStringList;
  l_FileNameTest : String;
 begin
- l_FileNameTest := MakeFileName(Name, aShapeClass);
+ l_FileNameTest := TestResultsFileName(aShapeClass);
  TmsSerializeController.Serialize(l_FileNameTest, aDiagramm);
  CheckFileWithEtalon(l_FileNameTest);
 end;
