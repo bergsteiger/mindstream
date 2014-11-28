@@ -351,18 +351,17 @@ end;
 procedure TmsParametrizedShapeTestSuite.AddTests(testClass: TTestCaseClass);
 const
  cSeed = 10;
-var
- l_DiagrammName : String;
 begin
  Assert(testClass.InheritsFrom(TmsParametrizedShapeTest));
 
  RandSeed := 10;
- l_DiagrammName := 'Диаграмма №' + IntToStr(Random(10));
  TmsShapeTestPrim.CheckShapes(
   procedure (aShapeClass: RmsShape)
   var
    l_Method: TRttiMethod;
+   l_DiagrammName : String;
   begin
+   l_DiagrammName := 'Диаграмма №' + IntToStr(Random(10));
    for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
     if (l_Method.Visibility = mvPublished) then
       AddTest(RmsParametrizedShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name, cSeed, l_DiagrammName), aShapeClass));
