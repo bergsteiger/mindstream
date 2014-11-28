@@ -265,6 +265,7 @@ begin
  finally
   FreeAndNil(l_FS);
  end;//try..finally
+ CheckFileWithEtalon(l_FileNameTest);
 end;
 
 class procedure TmsShapeTestPrim.CheckShapes(aCheck: TmsShapeClassCheck);
