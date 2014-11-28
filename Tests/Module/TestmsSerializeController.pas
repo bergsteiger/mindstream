@@ -327,15 +327,15 @@ end;
 
 function TmsParametrizedShapeTest.TestSerializeMethodName: String;
 begin
- Result := inherited TestSerializeMethodName + f_TestSerializeMethodName;
+ Result := f_TestSerializeMethodName + inherited TestSerializeMethodName;
 end;
 
 constructor TmsParametrizedShapeTest.Create(const aContext: TmsShapeTestContext; aShapeClass: RmsShape);
 begin
  inherited Create(aContext);
  f_ShapeClass := aShapeClass;
- FTestName := aContext.rMethodName + '.' + f_ShapeClass.ClassName;
- f_TestSerializeMethodName := '.' + f_ShapeClass.ClassName;
+ FTestName := f_ShapeClass.ClassName + '.' + aContext.rMethodName;
+ f_TestSerializeMethodName := f_ShapeClass.ClassName + '.';
 end;
 
 // TmsParametrizedShapeTestSuite
