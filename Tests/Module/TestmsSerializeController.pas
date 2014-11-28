@@ -64,10 +64,11 @@ type
   RmsParametrizedShapeTest = class of TmsParametrizedShapeTest;
 
   TmsParametrizedShapeTestSuite = class(TTestSuite)
+  private
+   constructor CreatePrim;
   public
    procedure AddTests(testClass: TTestCaseClass); override;
-   constructor Create;
-   class function Make: ITest;
+   class function Create: ITest;
   end;//TmsParametrizedShapeTestSuite
 
 implementation
@@ -295,14 +296,14 @@ end;
 
 // TmsParametrizedShapeTestSuite
 
-constructor TmsParametrizedShapeTestSuite.Create;
+constructor TmsParametrizedShapeTestSuite.CreatePrim;
 begin
  inherited Create(TmsParametrizedShapeTest);
 end;
 
-class function TmsParametrizedShapeTestSuite.Make: ITest;
+class function TmsParametrizedShapeTestSuite.Create: ITest;
 begin
- Result := Create;
+ Result := CreatePrim;
 end;
 
 procedure TmsParametrizedShapeTestSuite.AddTests(testClass: TTestCaseClass);
@@ -323,6 +324,6 @@ begin
 end;
 
 initialization
-  RegisterTest(TmsParametrizedShapeTestSuite.Make);
+  RegisterTest(TmsParametrizedShapeTestSuite.Create);
 end.
 
