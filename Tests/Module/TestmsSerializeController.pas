@@ -127,9 +127,6 @@ begin
  Result := TmsRoundedRectangle;
 end;
 
- const
-  c_DiagramName = 'First Diagram';
-
 function TestTmsSerializeControllerPrim.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
 begin
  Result := ExtractFilePath(ParamStr(0)) + ClassName + '_' + aTestName + '_' + aShapeClass.ClassName + '.json';
@@ -171,6 +168,8 @@ begin
 end;
 
 procedure TestTmsSerializeControllerPrim.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
+const
+ c_DiagramName = 'First Diagram';
 var
  l_Diagramm: TmsDiagramm;
  l_Image: TImage;
