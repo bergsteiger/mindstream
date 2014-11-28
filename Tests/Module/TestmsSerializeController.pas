@@ -130,8 +130,12 @@ begin
 end;
 
 function TestTmsSerializeControllerPrim.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
+var
+ l_Folder : String;
 begin
- Result := ExtractFilePath(ParamStr(0)) + ClassName + '_' + aTestName + '_' + aShapeClass.ClassName + '.json';
+ l_Folder := ExtractFilePath(ParamStr(0)) + 'TestResults\';
+ ForceDirectories(l_Folder);
+ Result := l_Folder + ClassName + '_' + aTestName + '_' + aShapeClass.ClassName + '.json';
 end;
 
 procedure TestTmsSerializeControllerPrim.CheckFileWithEtalon(const aFileName: String);
