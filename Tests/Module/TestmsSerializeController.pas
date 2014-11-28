@@ -5,9 +5,6 @@ interface
 uses
   TestFramework,
   msSerializeController,
-  Data.DBXJSONReflect,
-  JSON,
-  FMX.Objects,
   msDiagramm,
   msShape,
   msRegisteredShapes,
@@ -97,7 +94,8 @@ implementation
   msMover,
   Winapi.Windows,
   System.Rtti,
-  System.TypInfo
+  System.TypInfo,
+  FMX.Objects
   ;
 
 function TestTmsSerializeControllerPrim.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
