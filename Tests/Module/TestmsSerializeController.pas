@@ -70,13 +70,6 @@ type
    class function Make: ITest;
  end;//TmsParametrizedShapeTestSuite
 
-  TestTmsSerializeControllerForAll = class(TestTmsSerializeControllerPrim)
-  published
-    procedure TestSerialize;
-    procedure TestDeSerialize;
-    procedure TestDeSerializeViaShapeCheck;
-  end;//TestTmsSerializeControllerForAll
-
   TestSerializeTriangle = class(TestTmsSerializeController)
   protected
     function ShapeClass: RmsShape; override;
@@ -322,36 +315,6 @@ begin
  );
 end;
 
-procedure TestTmsSerializeControllerForAll.TestSerialize;
-begin
- CheckShapes(
-  procedure (aShapeClass: RmsShape)
-  begin
-   CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass);
-  end
- );
-end;
-
-procedure TestTmsSerializeControllerForAll.TestDeSerialize;
-begin
- CheckShapes(
-  procedure (aShapeClass: RmsShape)
-  begin
-   TestDeSerializeForShapeClass(aShapeClass);
-  end
- );
-end;
-
-procedure TestTmsSerializeControllerForAll.TestDeSerializeViaShapeCheck;
-begin
- CheckShapes(
-  procedure (aShapeClass: RmsShape)
-  begin
-   TestDeSerializeViaShapeCheckForShapeClass(aShapeClass);
-  end
- );
-end;
-
 function TmsParametrizedShapeTest.ShapeClass: RmsShape;
 begin
  Result := f_ShapeClass;
@@ -404,7 +367,6 @@ initialization
   RegisterTest(TestSerializeRectangle.Suite);
   RegisterTest(TestSerializeCircle.Suite);
   RegisterTest(TestSerializeRoundedRectangle.Suite);
-  RegisterTest(TestTmsSerializeControllerForAll.Suite);
   RegisterTest(TmsParametrizedShapeTestSuite.Make);
 end.
 
