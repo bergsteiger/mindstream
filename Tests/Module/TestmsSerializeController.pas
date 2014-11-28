@@ -332,6 +332,12 @@ begin
    AddTest(RmsParametrizedShapeTest(testClass).Create('TestDeSerialize', aShapeClass));
   end
  );
+ TmsShapeTestPrim.CheckShapes(
+  procedure (aShapeClass: RmsShape)
+  begin
+   AddTest(RmsParametrizedShapeTest(testClass).Create('TestDeSerializeViaShapeCheck', aShapeClass));
+  end
+ );
 end;
 
 initialization
