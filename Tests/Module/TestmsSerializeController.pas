@@ -182,7 +182,7 @@ var
  l_Diagramm: TmsDiagramm;
  l_Image: TImage;
 begin
- l_Image := TImage.Create(nil);
+ l_Image := nil;
  try
   l_Diagramm := TmsDiagramm.Create(l_Image, aName);
   try

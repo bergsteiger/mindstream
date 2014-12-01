@@ -153,8 +153,11 @@ end;
 
 procedure TmsDiagramm.ResizeTo(anImage: TImage);
 begin
- anImage.Bitmap := TBitmap.Create(Round(anImage.Width), Round(anImage.Height));
- CanvasChanged(anImage.Bitmap.Canvas);
+ if (anImage <> nil) then
+ begin
+  anImage.Bitmap := TBitmap.Create(Round(anImage.Width), Round(anImage.Height));
+  CanvasChanged(anImage.Bitmap.Canvas);
+ end;//anImage <> nil
 end;
 
 procedure TmsDiagramm.CanvasChanged(aCanvas: TCanvas);
@@ -221,13 +224,16 @@ end;
 
 procedure TmsDiagramm.Invalidate;
 begin
- FCanvas.BeginScene;
- try
-  FCanvas.Clear(TAlphaColorRec.Null);
-  DrawTo(FCanvas, FOrigin);
- finally
-  FCanvas.EndScene;
- end; // try..finally
+ if (FCanvas <> nil) then
+ begin
+  FCanvas.BeginScene;
+  try
+   FCanvas.Clear(TAlphaColorRec.Null);
+   DrawTo(FCanvas, FOrigin);
+  finally
+   FCanvas.EndScene;
+  end;//try..finally
+ end;//FCanvas <> nil
 end;
 
 function TmsDiagramm.ShapeIsEnded: Boolean;
