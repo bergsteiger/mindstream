@@ -76,7 +76,7 @@ uses
  msSerializeController;
 
 const
- c_FileName = 'Serialize.json';
+ c_FileName = '.json';
 
 class function TmsDiagramm.AllowedShapes: TmsRegisteredShapes;
 begin
@@ -104,7 +104,7 @@ end;
 
 procedure TmsDiagramm.Serialize;
 begin
- TmsSerializeController.Serialize(c_FileName, self);
+ TmsSerializeController.Serialize(Self.Name + c_FileName, self);
 end;
 
 procedure TmsDiagramm.ProcessClick(const aStart: TPointF);
@@ -171,7 +171,7 @@ var
  l_D : TmsDiagramm;
 begin
  Clear;
- l_D := TmsSerializeController.DeSerialize(c_FileName);
+ l_D := TmsSerializeController.DeSerialize(Self.Name + c_FileName);
  try
   Self.ShapeList := l_D.ShapeList;
   Self.Name := l_D.Name;
