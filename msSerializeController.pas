@@ -121,18 +121,22 @@ var
 begin
  l_StringList := TStringList.Create;
  try
+  l_Json := nil;
   try
-   l_Json := Marshal.Marshal(aDiagramm) as TJSONObject;
-  except
-   on E: Exception do
-    ShowMessage(E.ClassName + ' поднята ошибка, с сообщением : ' + E.Message);
-  end;
-  l_StringList.Add(l_Json.tostring);
+   try
+    l_Json := Marshal.Marshal(aDiagramm) as TJSONObject;
+   except
+    on E: Exception do
+     ShowMessage(E.ClassName + ' поднята ошибка, с сообщением : ' + E.Message);
+   end;
+   l_StringList.Add(l_Json.tostring);
+  finally
+   FreeAndNil(l_Json);
+  end;//try..finally
   l_StringList.SaveToFile(aFileName);
  finally
-  FreeAndNil(l_Json);
   FreeAndNil(l_StringList);
- end;
+ end;//try..finally
 end;
 
 end.
