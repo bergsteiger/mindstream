@@ -73,7 +73,8 @@ implementation
 uses
  msMover,
  msCircle,
- msSerializeController;
+ msSerializeController
+ ;
 
 const
  c_FileName = '.json';
@@ -171,7 +172,12 @@ var
  l_D : TmsDiagramm;
 begin
  Clear;
- l_D := TmsSerializeController.DeSerialize(Self.Name + c_FileName);
+ try
+  l_D := TmsSerializeController.DeSerialize(Self.Name + c_FileName);
+ except
+  on EFOpenError do
+   Exit;
+ end;//try..except
  try
   Self.ShapeList := l_D.ShapeList;
   Self.Name := l_D.Name;

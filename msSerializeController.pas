@@ -39,7 +39,7 @@ begin
   f_UnMarshal := TJSONUnMarshal.Create;
 
   f_UnMarshal.RegisterReverter(TmsDiagramm, 'FShapeList',
-   procedure(Data: TObject; Field: String; Args: TListOfObjects)
+   procedure (Data: TObject; Field: String; Args: TListOfObjects)
    var
     l_Object: TObject;
     l_Diagramm : TmsDiagramm;
@@ -72,7 +72,7 @@ begin
   f_Marshal := TJSONMarshal.Create;
 
   f_Marshal.RegisterConverter(TmsDiagramm, 'FShapeList',
-   function(Data: TObject; Field: string): TListOfObjects
+   function (Data: TObject; Field: string): TListOfObjects
    var
     l_Shape: ImsShape;
     l_Index: Integer;
