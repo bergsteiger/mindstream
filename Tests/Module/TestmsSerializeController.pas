@@ -29,6 +29,8 @@ type
    constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName : String; aShapesCount : Integer; aShapeClass: RmsShape);
   end;//TmsShapeTestContext
 
+  TmsFileLambda = reference to procedure (aFile: TFileStream);
+
   TestTmsSerializeControllerPrim = class abstract(TmsShapeTestPrim)
   protected
    f_Coords : array of TPoint;
@@ -46,15 +48,12 @@ type
     procedure TestDeSerializeForShapeClass(aShapeClass: RmsShape);
     procedure TestDeSerializeViaShapeCheckForShapeClass(aShapeClass: RmsShape);
     function ShapeClass: RmsShape;
+    procedure OutToFileAndCheck(aLambda: TmsFileLambda);
   public
    constructor Create(const aContext: TmsShapeTestContext); virtual;
   end;//TestTmsSerializeControllerPrim
 
-  TmsFileLambda = reference to procedure (aFile: TFileStream);
-
   TestTmsSerializeController = class abstract(TestTmsSerializeControllerPrim)
-  protected
-    procedure OutToFileAndCheck(aLambda: TmsFileLambda);
   published
     procedure TestSerialize;
     procedure TestDeSerialize;
@@ -272,7 +271,7 @@ begin
  TestDeSerializeViaShapeCheckForShapeClass(ShapeClass);
 end;
 
-procedure TestTmsSerializeController.OutToFileAndCheck(aLambda: TmsFileLambda);
+procedure TestTmsSerializeControllerPrim.OutToFileAndCheck(aLambda: TmsFileLambda);
 var
  l_FileNameTest : String;
  l_FS : TFileStream;
