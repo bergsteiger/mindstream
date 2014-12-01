@@ -18,7 +18,8 @@ uses
   msTriangleDirectionRight,
   msMover,
   msRegisteredShapes,
-  msRedRectangle
+  msRedRectangle,
+  msGreenRectangle
   ;
 
 procedure RegisterOurShapes;
@@ -36,7 +37,8 @@ begin
   TmsLineWithArrow,
   TmsTriangleDirectionRight,
   TmsMover,
-  TmsRedRectangle
+  TmsRedRectangle,
+  TmsGreenRectangle
  ]);
 end;
 
