@@ -9,9 +9,13 @@ uses
 
 type
  TmsSerializeController = class(TObject)
+ strict private
+  class var f_Marshal : TJSONMarshal;
+  class function Marshal: TJSONMarshal;
  public
   class procedure Serialize(const aFileName: string; const aDiagramm: TmsDiagramm);
   class function DeSerialize(const aFileName: string): TmsDiagramm;
+  class destructor Destroy;
  end; // TmsDiagrammsController
 
 implementation
@@ -63,21 +67,18 @@ begin
  end;
 end;
 
-class procedure TmsSerializeController.Serialize(const aFileName: string;
-                                                 const aDiagramm: TmsDiagramm);
-var
- // l_SaveDialog: TSaveDialog;
- l_Marshal: TJSONMarshal; // Serializer
- l_Json: TJSONObject;
- l_StringList: TStringList;
+class destructor TmsSerializeController.Destroy;
 begin
- // l_SaveDialog := TSaveDialog.Create(nil);
- // if l_SaveDialog.Execute then
- // begin
- try
-  l_Marshal := TJSONMarshal.Create;
+ FreeAndNil(f_Marshal);
+end;
 
-  l_Marshal.RegisterConverter(TmsDiagramm, 'FShapeList',
+class function TmsSerializeController.Marshal: TJSONMarshal;
+begin
+ if (f_Marshal = nil) then
+ begin
+  f_Marshal := TJSONMarshal.Create;
+
+  f_Marshal.RegisterConverter(TmsDiagramm, 'FShapeList',
    function(Data: TObject; Field: string): TListOfObjects
    var
     l_Shape: ImsShape;
@@ -97,9 +98,22 @@ begin
   TmsRegisteredShapes.IterateShapes(
    procedure (aShapeClass: RmsShape)
    begin
-    l_Marshal.RegisterJSONMarshalled(aShapeClass, 'FRefCount', false);
+    f_Marshal.RegisterJSONMarshalled(aShapeClass, 'FRefCount', false);
    end
   );
+ end;//f_Marshal = nil
+ Result := f_Marshal;
+end;
+
+class procedure TmsSerializeController.Serialize(const aFileName: string;
+                                                 const aDiagramm: TmsDiagramm);
+var
+ l_Marshal: TJSONMarshal; // Serializer
+ l_Json: TJSONObject;
+ l_StringList: TStringList;
+begin
+ try
+  l_Marshal := Marshal;
 
   l_StringList := TStringList.Create;
   try
@@ -115,13 +129,7 @@ begin
  finally
   FreeAndNil(l_Json);
   FreeAndNil(l_StringList);
-  FreeAndNil(l_Marshal);
  end;
- // end
- // else
- // assert(false);
-
- // FreeAndNil(l_SaveDialog);
 end;
 
 end.
