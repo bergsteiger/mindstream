@@ -22,7 +22,7 @@ uses
   msSmallTriangle in 'ConcreteShapes\msSmallTriangle.pas',
   msOurShapes in 'msOurShapes.pas',
   msTriangleDirectionRight in 'ConcreteShapes\msTriangleDirectionRight.pas',
-  msMover in 'ConcreteShapes\msMover.pas',
+  msMover in 'ShapeTools\msMover.pas',
   u_fmGUITestRunner in 'FMX.DUnit\u_fmGUITestRunner.pas' {fmGUITestRunner},
   FirstTest in 'Tests\Module\FirstTest.pas',
   RegisteredShapesTest in 'Tests\Integrated\RegisteredShapesTest.pas' {/ - тут "банальные" интеграционные тесты (https: /ru.wikipedia.org/wiki/%D0%98%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%BE%D0%B5_%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)},
