@@ -46,7 +46,6 @@ begin
     l_msShape: TmsShape;
    begin
     l_Diagramm := TmsDiagramm(Data);
-    l_Diagramm.ShapeList := TmsShapeList.Create;
     assert(l_Diagramm <> nil);
 
     for l_Object in Args do

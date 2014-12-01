@@ -49,6 +49,8 @@ type
   function ShapeByPt(const aPoint: TPointF): ImsShape;
   procedure RemoveShape(const aShape: ImsShape);
   property CurrentClass: RmsShape read FCurrentClass write FCurrentClass;
+  function pm_GetShapeList: TmsShapeList;
+  procedure pm_SetShapeList(aValue: TmsShapeList);
  public
   constructor Create(anImage: TImage; const aName: String);
   procedure ResizeTo(anImage: TImage);
@@ -59,7 +61,7 @@ type
   procedure AllowedShapesToList(aList: TStrings);
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   property Name: String read fName write fName;
-  property ShapeList: TmsShapeList read fShapeList write fShapeList;
+  property ShapeList: TmsShapeList read pm_GetShapeList write pm_SetShapeList;
   function CurrentShapeClassIndex: Integer;
   procedure Serialize;
   procedure DeSerialize;
@@ -130,7 +132,8 @@ end;
 
 procedure TmsDiagramm.Clear;
 begin
- FShapeList.Clear;
+ if (FShapeList <> nil) then
+  FShapeList.Clear;
  Invalidate;
 end;
 
@@ -164,10 +167,17 @@ begin
 end;
 
 procedure TmsDiagramm.DeSerialize;
+var
+ l_D : TmsDiagramm;
 begin
- clear;
- Self.ShapeList := TmsSerializeController.DeSerialize(c_FileName).ShapeList;
- Self.Name := TmsSerializeController.DeSerialize(c_FileName).Name;
+ Clear;
+ l_D := TmsSerializeController.DeSerialize(c_FileName);
+ try
+  Self.ShapeList := l_D.ShapeList;
+  Self.Name := l_D.Name;
+ finally
+  FreeAndNil(l_D);
+ end;//try..finally
  Invalidate;
 end;
 
@@ -183,6 +193,7 @@ var
 begin
  aCanvas.BeginScene;
  try
+  Assert(FShapeList <> nil);
   for l_Shape in FShapeList do
    l_Shape.DrawTo(TmsDrawContext.Create(aCanvas, aOrigin));
  finally
@@ -227,7 +238,30 @@ end;
 
 procedure TmsDiagramm.RemoveShape(const aShape: ImsShape);
 begin
+ Assert(FShapeList <> nil);
  FShapeList.Remove(aShape);
+end;
+
+function TmsDiagramm.pm_GetShapeList: TmsShapeList;
+begin
+ if (FShapeList = nil) then
+  FShapeList := TmsShapeList.Create;
+  Result := FShapeList;
+end;
+
+procedure TmsDiagramm.pm_SetShapeList(aValue: TmsShapeList);
+var
+ l_Shape : ImsShape;
+begin
+ if (FShapeList <> nil) then
+  FShapeList.Clear;
+ if (aValue <> nil) then
+  for l_Shape in aValue do
+  begin
+   if (FShapeList = nil) then
+    FShapeList := TmsShapeList.Create;
+   FShapeList.Add(l_Shape);
+  end;//for l_Shape in aValue
 end;
 
 function TmsShapeList.ShapeByPt(const aPoint: TPointF): ImsShape;
