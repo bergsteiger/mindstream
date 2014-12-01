@@ -225,11 +225,8 @@ procedure TestTmsSerializeControllerPrim.DeserializeDiargammAndCheck(aCheck: Tms
 begin
  CreateDiagrammAndCheck(
   procedure (aDiagramm : TmsDiagramm)
-  var
-   l_FileNameTest: string;
   begin
-   l_FileNameTest := MakeFileName(TestSerializeMethodName, aShapeClass);
-   TmsSerializeController.DeSerialize(l_FileNameTest, aDiagramm);
+   TmsSerializeController.DeSerialize(MakeFileName(TestSerializeMethodName, aShapeClass), aDiagramm);
    aCheck(aDiagramm);
   end
   , ''
