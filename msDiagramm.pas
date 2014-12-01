@@ -65,8 +65,9 @@ type
   function CurrentShapeClassIndex: Integer;
   procedure Serialize;
   procedure DeSerialize;
+  procedure Assign(anOther: TmsDiagramm);
   function HackInstance: TObject;
- end; // TmsDiagramm
+ end;//TmsDiagramm
 
 implementation
 
@@ -167,6 +168,13 @@ begin
  Result := FCurrentAddedShape;
 end;
 
+procedure TmsDiagramm.Assign(anOther: TmsDiagramm);
+begin
+ Self.ShapeList := anOther.ShapeList;
+ Self.Name := anOther.Name;
+ Self.Invalidate;
+end;
+
 procedure TmsDiagramm.DeSerialize;
 var
  l_D : TmsDiagramm;
@@ -179,12 +187,10 @@ begin
    Exit;
  end;//try..except
  try
-  Self.ShapeList := l_D.ShapeList;
-  Self.Name := l_D.Name;
+  Self.Assign(l_D);
  finally
   FreeAndNil(l_D);
  end;//try..finally
- Invalidate;
 end;
 
 destructor TmsDiagramm.Destroy;
