@@ -43,6 +43,7 @@ type
     function TestResultsFileName(aShapeClass: RmsShape): String;
     procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
     function ShapesCount: Integer;
+    procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
     procedure CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
     function TestSerializeMethodName: String; virtual;
     procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck; aShapeClass: RmsShape);
@@ -176,25 +177,38 @@ begin
  end;//for l_Index
 end;
 
-procedure TestTmsSerializeControllerPrim.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
+procedure TestTmsSerializeControllerPrim.CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
 var
  l_Diagramm: TmsDiagramm;
  l_Image: TImage;
- l_P : TPoint;
 begin
- l_Image:= TImage.Create(nil);
+ l_Image := TImage.Create(nil);
  try
-  l_Diagramm := TmsDiagramm.Create(l_Image, f_Context.rDiagrammName);
+  l_Diagramm := TmsDiagramm.Create(l_Image, aName);
   try
-   for l_P in f_Coords do
-    l_Diagramm.ShapeList.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil)));
-   SaveDiagrammAndCheck(aShapeClass, l_Diagramm);
+   aCheck(l_Diagramm);
   finally
-   FreeAndNil(l_Image);
+   FreeAndNil(l_Diagramm);
   end;//try..finally
  finally
-  FreeAndNil(l_Diagramm);
+  FreeAndNil(l_Image);
  end;//try..finally
+
+end;
+
+procedure TestTmsSerializeControllerPrim.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
+begin
+ CreateDiagrammAndCheck(
+  procedure (aDiagramm : TmsDiagramm)
+  var
+   l_P : TPoint;
+  begin
+   for l_P in f_Coords do
+    aDiagramm.ShapeList.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil)));
+   SaveDiagrammAndCheck(aShapeClass, aDiagramm);
+  end
+  , f_Context.rDiagrammName
+ );
 end;
 
 procedure TestTmsSerializeController.TestSerialize;
@@ -208,17 +222,18 @@ begin
 end;
 
 procedure TestTmsSerializeControllerPrim.DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck; aShapeClass: RmsShape);
-var
- l_Diagramm : TmsDiagramm;
- l_FileNameTest: string;
 begin
- l_FileNameTest := MakeFileName(TestSerializeMethodName, aShapeClass);
- l_Diagramm := TmsSerializeController.DeSerialize(l_FileNameTest);
- try
-  aCheck(l_Diagramm);
- finally
-  FreeAndNil(l_Diagramm);
- end;//try..finally
+ CreateDiagrammAndCheck(
+  procedure (aDiagramm : TmsDiagramm)
+  var
+   l_FileNameTest: string;
+  begin
+   l_FileNameTest := MakeFileName(TestSerializeMethodName, aShapeClass);
+   TmsSerializeController.DeSerialize(l_FileNameTest, aDiagramm);
+   aCheck(aDiagramm);
+  end
+  , ''
+ );
 end;
 
 procedure TestTmsSerializeControllerPrim.TestDeSerializeForShapeClass(aShapeClass: RmsShape);

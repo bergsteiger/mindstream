@@ -176,21 +176,14 @@ begin
 end;
 
 procedure TmsDiagramm.DeSerialize;
-var
- l_D : TmsDiagramm;
 begin
  Clear;
  try
-  l_D := TmsSerializeController.DeSerialize(Self.Name + c_FileName);
+ TmsSerializeController.DeSerialize(Self.Name + c_FileName, Self);
  except
   on EFOpenError do
    Exit;
  end;//try..except
- try
-  Self.Assign(l_D);
- finally
-  FreeAndNil(l_D);
- end;//try..finally
 end;
 
 destructor TmsDiagramm.Destroy;

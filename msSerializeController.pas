@@ -16,7 +16,7 @@ type
   class function UnMarshal: TJSONUnMarshal;
  public
   class procedure Serialize(const aFileName: string; aDiagramm: TmsDiagramm);
-  class function DeSerialize(const aFileName: string): TmsDiagramm;
+  class procedure DeSerialize(const aFileName: string; aDiagramm: TmsDiagramm);
   class destructor Destroy;
  end; // TmsDiagrammsController
 
@@ -98,14 +98,20 @@ begin
  Result := f_Marshal;
 end;
 
-class function TmsSerializeController.DeSerialize(const aFileName: string): TmsDiagramm;
+class procedure TmsSerializeController.DeSerialize(const aFileName: string; aDiagramm: TmsDiagramm);
 var
  l_StringList: TStringList;
+ l_D : TmsDiagramm;
 begin
  l_StringList := TStringList.Create;
  try
   l_StringList.LoadFromFile(aFileName);
-  Result := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text)) as TmsDiagramm;
+  l_D := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text)) as TmsDiagramm;
+  try
+   aDiagramm.Assign(l_D);
+  finally
+   FreeAndNil(l_D);
+  end;//try..finally
  finally
   FreeAndNil(l_StringList);
  end;//try..finally
