@@ -127,7 +127,7 @@ begin
    except
     on E: Exception do
      ShowMessage(E.ClassName + ' поднята ошибка, с сообщением : ' + E.Message);
-   end;
+   end;//try..except
    l_StringList.Add(l_Json.toString);
   finally
    FreeAndNil(l_Json);
