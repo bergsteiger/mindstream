@@ -71,7 +71,7 @@ begin
   Result := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text)) as TmsDiagramm;
  finally
   FreeAndNil(l_StringList);
- end;
+ end;//try..finally
 end;
 
 class destructor TmsSerializeController.Destroy;
@@ -129,7 +129,7 @@ begin
     on E: Exception do
      ShowMessage(E.ClassName + ' поднята ошибка, с сообщением : ' + E.Message);
    end;
-   l_StringList.Add(l_Json.tostring);
+   l_StringList.Add(l_Json.toString);
   finally
    FreeAndNil(l_Json);
   end;//try..finally
