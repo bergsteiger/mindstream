@@ -180,18 +180,12 @@ end;
 procedure TestTmsSerializeControllerPrim.CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
 var
  l_Diagramm: TmsDiagramm;
- l_Image: TImage;
 begin
- l_Image := nil;
+ l_Diagramm := TmsDiagramm.Create(nil, aName);
  try
-  l_Diagramm := TmsDiagramm.Create(l_Image, aName);
-  try
-   aCheck(l_Diagramm);
-  finally
-   FreeAndNil(l_Diagramm);
-  end;//try..finally
+  aCheck(l_Diagramm);
  finally
-  FreeAndNil(l_Image);
+  FreeAndNil(l_Diagramm);
  end;//try..finally
 end;
 
