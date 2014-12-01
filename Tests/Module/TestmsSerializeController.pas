@@ -25,7 +25,8 @@ type
    rSeed: Integer;
    rDiagrammName : String;
    rShapesCount : Integer;
-   constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName : String; aShapesCount : Integer);
+   rShapeClass: RmsShape;
+   constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName : String; aShapesCount : Integer; aShapeClass: RmsShape);
   end;//TmsShapeTestContext
 
   TestTmsSerializeControllerPrim = class abstract(TmsShapeTestPrim)
@@ -44,15 +45,15 @@ type
     procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck; aShapeClass: RmsShape);
     procedure TestDeSerializeForShapeClass(aShapeClass: RmsShape);
     procedure TestDeSerializeViaShapeCheckForShapeClass(aShapeClass: RmsShape);
+    function ShapeClass: RmsShape;
   public
-   constructor Create(const aContext: TmsShapeTestContext);
+   constructor Create(const aContext: TmsShapeTestContext); virtual;
   end;//TestTmsSerializeControllerPrim
 
   TmsFileLambda = reference to procedure (aFile: TFileStream);
 
   TestTmsSerializeController = class abstract(TestTmsSerializeControllerPrim)
   protected
-    function ShapeClass: RmsShape; virtual; abstract;
     procedure OutToFileAndCheck(aLambda: TmsFileLambda);
   published
     procedure TestSerialize;
@@ -64,13 +65,11 @@ type
 
   TmsParametrizedShapeTest = class(TestTmsSerializeController)
   private
-   f_ShapeClass : RmsShape;
    f_TestSerializeMethodName : String;
   protected
-    function ShapeClass: RmsShape; override;
     function TestSerializeMethodName: String; override;
   public
-   constructor Create(const aContext: TmsShapeTestContext; aShapeClass: RmsShape);
+   constructor Create(const aContext: TmsShapeTestContext); override;
   end;//TmsParametrizedShapeTest
 
   RmsParametrizedShapeTest = class of TmsParametrizedShapeTest;
@@ -151,12 +150,13 @@ begin
  Result := f_Context.rShapesCount;
 end;
 
-constructor TmsShapeTestContext.Create(aMethodName: string; aSeed: Integer; aDiagrammName : String; aShapesCount : Integer);
+constructor TmsShapeTestContext.Create(aMethodName: string; aSeed: Integer; aDiagrammName : String; aShapesCount : Integer; aShapeClass: RmsShape);
 begin
  rMethodName := aMethodName;
  rSeed := aSeed;
  rDiagrammName := aDiagrammName;
  rShapesCount := aShapesCount;
+ rShapeClass := aShapeClass
 end;
 
 procedure TestTmsSerializeControllerPrim.SetUp;
@@ -318,9 +318,9 @@ begin
  );
 end;
 
-function TmsParametrizedShapeTest.ShapeClass: RmsShape;
+function TestTmsSerializeControllerPrim.ShapeClass: RmsShape;
 begin
- Result := f_ShapeClass;
+ Result := f_Context.rShapeClass;
 end;
 
 function TmsParametrizedShapeTest.TestSerializeMethodName: String;
@@ -328,12 +328,11 @@ begin
  Result := f_TestSerializeMethodName + inherited TestSerializeMethodName;
 end;
 
-constructor TmsParametrizedShapeTest.Create(const aContext: TmsShapeTestContext; aShapeClass: RmsShape);
+constructor TmsParametrizedShapeTest.Create(const aContext: TmsShapeTestContext);
 begin
  inherited Create(aContext);
- f_ShapeClass := aShapeClass;
- FTestName := f_ShapeClass.ClassName + '.' + aContext.rMethodName;
- f_TestSerializeMethodName := f_ShapeClass.ClassName + '.';
+ FTestName := f_Context.rShapeClass.ClassName + '.' + aContext.rMethodName;
+ f_TestSerializeMethodName := f_Context.rShapeClass.ClassName + '.';
 end;
 
 // TmsParametrizedShapeTestSuite
@@ -366,7 +365,7 @@ begin
    l_ShapesCount := Random(1000) + 1;
    for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
     if (l_Method.Visibility = mvPublished) then
-      AddTest(RmsParametrizedShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name, l_Seed, l_DiagrammName, l_ShapesCount), aShapeClass));
+      AddTest(RmsParametrizedShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name, l_Seed, l_DiagrammName, l_ShapesCount, aShapeClass)));
   end
  );
 end;
