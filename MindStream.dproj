@@ -179,23 +179,23 @@
         <DCCReference Include="msDiagramm.pas"/>
         <DCCReference Include="msShape.pas"/>
         <DCCReference Include="msRegisteredShapes.pas"/>
-        <DCCReference Include="msLine.pas"/>
-        <DCCReference Include="msRectangle.pas"/>
-        <DCCReference Include="msPointCircle.pas"/>
-        <DCCReference Include="msCircle.pas"/>
-        <DCCReference Include="msRoundedRectangle.pas"/>
-        <DCCReference Include="msUseCaseLikeEllipse.pas"/>
-        <DCCReference Include="msTriangle.pas"/>
+        <DCCReference Include="ConcreteShapes\msLine.pas"/>
+        <DCCReference Include="ConcreteShapes\msRectangle.pas"/>
+        <DCCReference Include="ConcreteShapes\msPointCircle.pas"/>
+        <DCCReference Include="ConcreteShapes\msCircle.pas"/>
+        <DCCReference Include="ConcreteShapes\msRoundedRectangle.pas"/>
+        <DCCReference Include="ConcreteShapes\msUseCaseLikeEllipse.pas"/>
+        <DCCReference Include="ConcreteShapes\msTriangle.pas"/>
         <DCCReference Include="msDiagramms.pas"/>
         <DCCReference Include="msDiagrammsController.pas"/>
-        <DCCReference Include="msDashDotLine.pas"/>
-        <DCCReference Include="msDashLine.pas"/>
-        <DCCReference Include="msDotLine.pas"/>
-        <DCCReference Include="msLineWithArrow.pas"/>
-        <DCCReference Include="msSmallTriangle.pas"/>
+        <DCCReference Include="ConcreteShapes\msDashDotLine.pas"/>
+        <DCCReference Include="ConcreteShapes\msDashLine.pas"/>
+        <DCCReference Include="ConcreteShapes\msDotLine.pas"/>
+        <DCCReference Include="ConcreteShapes\msLineWithArrow.pas"/>
+        <DCCReference Include="ConcreteShapes\msSmallTriangle.pas"/>
         <DCCReference Include="msOurShapes.pas"/>
-        <DCCReference Include="msTriangleDirectionRight.pas"/>
-        <DCCReference Include="msMover.pas"/>
+        <DCCReference Include="ConcreteShapes\msTriangleDirectionRight.pas"/>
+        <DCCReference Include="ConcreteShapes\msMover.pas"/>
         <DCCReference Include="FMX.DUnit\u_fmGUITestRunner.pas">
             <Form>fmGUITestRunner</Form>
         </DCCReference>
@@ -210,7 +210,8 @@
         <DCCReference Include="Tests\Module\TestMsCircle.pas"/>
         <DCCReference Include="msSerializeController.pas"/>
         <DCCReference Include="Tests\Module\TestmsSerializeController.pas"/>
-        <DCCReference Include="msGreenRectangle.pas"/>
+        <DCCReference Include="ConcreteShapes\msRedRectangle.pas"/>
+        <DCCReference Include="ConcreteShapes\msGreenRectangle.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>
