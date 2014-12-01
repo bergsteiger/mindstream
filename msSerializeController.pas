@@ -101,7 +101,6 @@ end;
 
 class function TmsSerializeController.DeSerialize(const aFileName: string): TmsDiagramm;
 var
- l_UnMarshal: TJSONUnMarshal;
  l_StringList: TStringList;
 begin
  l_StringList := TStringList.Create;
