@@ -193,7 +193,6 @@ begin
  finally
   FreeAndNil(l_Image);
  end;//try..finally
-
 end;
 
 procedure TestTmsSerializeControllerPrim.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
