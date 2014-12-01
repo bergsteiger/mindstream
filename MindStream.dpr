@@ -4,7 +4,7 @@ uses
   FMX.Forms,
   uMain in 'uMain.pas' {fmMain},
   msDiagramm in 'msDiagramm.pas',
-  msShape in 'msShape.pas',
+  msShape in 'AbstractShapes\msShape.pas',
   msRegisteredShapes in 'msRegisteredShapes.pas',
   msLine in 'ConcreteShapes\msLine.pas',
   msRectangle in 'ConcreteShapes\msRectangle.pas',

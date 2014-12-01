@@ -177,7 +177,7 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="msDiagramm.pas"/>
-        <DCCReference Include="msShape.pas"/>
+        <DCCReference Include="AbstractShapes\msShape.pas"/>
         <DCCReference Include="msRegisteredShapes.pas"/>
         <DCCReference Include="ConcreteShapes\msLine.pas"/>
         <DCCReference Include="ConcreteShapes\msRectangle.pas"/>
