@@ -15,7 +15,7 @@ type
   class function Marshal: TJSONMarshal;
   class function UnMarshal: TJSONUnMarshal;
  public
-  class procedure Serialize(const aFileName: string; const aDiagramm: TmsDiagramm);
+  class procedure Serialize(const aFileName: string; aDiagramm: TmsDiagramm);
   class function DeSerialize(const aFileName: string): TmsDiagramm;
   class destructor Destroy;
  end; // TmsDiagrammsController
@@ -112,7 +112,7 @@ begin
 end;
 
 class procedure TmsSerializeController.Serialize(const aFileName: string;
-                                                 const aDiagramm: TmsDiagramm);
+                                                 aDiagramm: TmsDiagramm);
 var
  l_Json: TJSONObject;
  l_StringList: TStringList;
