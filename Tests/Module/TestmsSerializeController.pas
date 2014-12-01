@@ -13,8 +13,8 @@ uses
   ;
 
 type
-  TmsDiagrammCheck = reference to procedure (aDiagramm : TmsDiagramm);
   TmsShapeClassCheck = TmsShapeClassLambda;
+
   TmsShapeTestPrim = class abstract(TTestCase)
   public
     class procedure CheckShapes(aCheck: TmsShapeClassCheck);
@@ -30,6 +30,7 @@ type
   end;//TmsShapeTestContext
 
   TmsFileLambda = reference to procedure (aFile: TFileStream);
+  TmsDiagrammCheck = reference to procedure (aDiagramm : TmsDiagramm);
 
   TestTmsSerializeControllerPrim = class abstract(TmsShapeTestPrim)
   protected
