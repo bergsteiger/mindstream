@@ -11,7 +11,9 @@ type
  TmsSerializeController = class(TObject)
  strict private
   class var f_Marshal : TJSONMarshal;
+  class var f_UnMarshal : TJSONUnMarshal;
   class function Marshal: TJSONMarshal;
+  class function UnMarshal: TJSONUnMarshal;
  public
   class procedure Serialize(const aFileName: string; const aDiagramm: TmsDiagramm);
   class function DeSerialize(const aFileName: string): TmsDiagramm;
@@ -30,15 +32,13 @@ uses
 
  { TmsSerializeController }
 
-class function TmsSerializeController.DeSerialize(const aFileName: string): TmsDiagramm;
-var
- l_UnMarshal: TJSONUnMarshal;
- l_StringList: TStringList;
+class function TmsSerializeController.UnMarshal: TJSONUnMarshal;
 begin
- try
-  l_UnMarshal := TJSONUnMarshal.Create;
+ if (f_UnMarshal = nil) then
+ begin
+  f_UnMarshal := TJSONUnMarshal.Create;
 
-  l_UnMarshal.RegisterReverter(TmsDiagramm, 'FShapeList',
+  f_UnMarshal.RegisterReverter(TmsDiagramm, 'FShapeList',
    procedure(Data: TObject; Field: String; Args: TListOfObjects)
    var
     l_Object: TObject;
@@ -53,16 +53,23 @@ begin
     begin
      l_msShape := l_Object as TmsShape;
      l_Diagramm.ShapeList.Add(l_msShape);
-    end
-   end);
+    end//for l_Object
+   end
+  );//f_UnMarshal.RegisterReverter
+ end;//f_UnMarshal = nil
+ Result := f_UnMarshal;
+end;
 
-  l_StringList := TStringList.Create;
+class function TmsSerializeController.DeSerialize(const aFileName: string): TmsDiagramm;
+var
+ l_UnMarshal: TJSONUnMarshal;
+ l_StringList: TStringList;
+begin
+ l_StringList := TStringList.Create;
+ try
   l_StringList.LoadFromFile(aFileName);
-
-  Result := l_UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text)) as TmsDiagramm;
-
+  Result := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text)) as TmsDiagramm;
  finally
-  FreeAndNil(l_UnMarshal);
   FreeAndNil(l_StringList);
  end;
 end;
@@ -70,6 +77,7 @@ end;
 class destructor TmsSerializeController.Destroy;
 begin
  FreeAndNil(f_Marshal);
+ FreeAndNil(f_UnMarshal);
 end;
 
 class function TmsSerializeController.Marshal: TJSONMarshal;
@@ -93,14 +101,14 @@ begin
      Inc(l_Index);
     end; // for l_Shape
    end
-  );
+  );//f_Marshal.RegisterConverter
 
   TmsRegisteredShapes.IterateShapes(
    procedure (aShapeClass: RmsShape)
    begin
     f_Marshal.RegisterJSONMarshalled(aShapeClass, 'FRefCount', false);
    end
-  );
+  );//TmsRegisteredShapes.IterateShapes
  end;//f_Marshal = nil
  Result := f_Marshal;
 end;
@@ -108,23 +116,18 @@ end;
 class procedure TmsSerializeController.Serialize(const aFileName: string;
                                                  const aDiagramm: TmsDiagramm);
 var
- l_Marshal: TJSONMarshal; // Serializer
  l_Json: TJSONObject;
  l_StringList: TStringList;
 begin
+ l_StringList := TStringList.Create;
  try
-  l_Marshal := Marshal;
-
-  l_StringList := TStringList.Create;
   try
-   l_Json := l_Marshal.Marshal(aDiagramm) as TJSONObject;
+   l_Json := Marshal.Marshal(aDiagramm) as TJSONObject;
   except
    on E: Exception do
     ShowMessage(E.ClassName + ' поднята ошибка, с сообщением : ' + E.Message);
   end;
-
   l_StringList.Add(l_Json.tostring);
-  // l_StringList.SaveToFile(l_SaveDialog.FileName);
   l_StringList.SaveToFile(aFileName);
  finally
   FreeAndNil(l_Json);
