@@ -27,7 +27,8 @@ uses
  msShape,
  FMX.Dialogs,
  System.SysUtils,
- msRegisteredShapes
+ msRegisteredShapes,
+ msCoreObjects
  ;
 
  { TmsSerializeController }
@@ -100,10 +101,10 @@ end;
 
 class procedure TmsSerializeController.DeSerialize(const aFileName: string; aDiagramm: TmsDiagramm);
 var
- l_StringList: TStringList;
+ l_StringList: TmsStringList;
  l_D : TmsDiagramm;
 begin
- l_StringList := TStringList.Create;
+ l_StringList := TmsStringList.Create;
  try
   l_StringList.LoadFromFile(aFileName);
   l_D := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text)) as TmsDiagramm;
@@ -121,9 +122,9 @@ class procedure TmsSerializeController.Serialize(const aFileName: string;
                                                  aDiagramm: TmsDiagramm);
 var
  l_Json: TJSONObject;
- l_StringList: TStringList;
+ l_StringList: TmsStringList;
 begin
- l_StringList := TStringList.Create;
+ l_StringList := TmsStringList.Create;
  try
   l_Json := nil;
   try

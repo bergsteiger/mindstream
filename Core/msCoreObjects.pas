@@ -29,6 +29,15 @@ type
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
  end;//TmsWatchedObject
 
+ TmsStringList = class abstract(TStringList)
+ // -  ласс, который умеетконтроллировать создание/уничтожение своих экземпл€ров
+ public
+  class function NewInstance: TObject; override;
+  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
+  procedure FreeInstance; override;
+  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
+ end;//TmsStringList
+
  TmsInterfacedNonRefcounted = class abstract(TmsWatchedObject)
   // - реализаци€ объектов реализующих интерфейсы, но Ѕ≈« подсчЄта ссылок
   //   т.е. присваиваемы объект - Ќ≈ «ј’¬ј“џ¬ј≈“—я и "владелец" - Ќ≈ ”ѕ–ј¬Ћя≈“ временем жизни
@@ -140,6 +149,20 @@ begin
 end;
 
 procedure TmsWatchedObject.FreeInstance;
+begin
+ TmsObjectsWatcher.ObjectDestroyed(Self);
+ inherited;
+end;
+
+// TmsStringList
+
+class function TmsStringList.NewInstance: TObject;
+begin
+ Result := inherited NewInstance;
+ TmsObjectsWatcher.ObjectCreated(Result);
+end;
+
+procedure TmsStringList.FreeInstance;
 begin
  TmsObjectsWatcher.ObjectDestroyed(Self);
  inherited;

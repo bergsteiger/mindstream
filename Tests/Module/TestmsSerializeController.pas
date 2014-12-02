@@ -95,7 +95,8 @@ implementation
   Winapi.Windows,
   System.Rtti,
   System.TypInfo,
-  FMX.Objects
+  FMX.Objects,
+  msCoreObjects
   ;
 
 function TestTmsSerializeControllerPrim.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
@@ -109,22 +110,27 @@ end;
 
 procedure TestTmsSerializeControllerPrim.CheckFileWithEtalon(const aFileName: String);
 var
- l_FileSerialized, l_FileEtalon: TStringList;
+ l_FileSerialized, l_FileEtalon: TmsStringList;
  l_FileNameEtalon : String;
 begin
  l_FileNameEtalon := aFileName + '.etalon' + ExtractFileExt(aFileName);
  if FileExists(l_FileNameEtalon) then
  begin
-  l_FileSerialized := TStringList.Create;
-  l_FileSerialized.LoadFromFile(aFileName);
+  l_FileSerialized := TmsStringList.Create;
+  try
+   l_FileEtalon := TmsStringList.Create;
+   try
+    l_FileSerialized.LoadFromFile(aFileName);
 
-  l_FileEtalon := TStringList.Create;
-  l_FileEtalon.LoadFromFile(l_FileNameEtalon);
+    l_FileEtalon.LoadFromFile(l_FileNameEtalon);
 
-  CheckTrue(l_FileEtalon.Equals(l_FileSerialized));
-
-  FreeAndNil(l_FileSerialized);
-  FreeAndNil(l_FileEtalon);
+    CheckTrue(l_FileEtalon.Equals(l_FileSerialized));
+   finally
+    FreeAndNil(l_FileSerialized);
+   end;//try..finally
+  finally
+   FreeAndNil(l_FileEtalon);
+  end;//try..finally
  end//FileExists(l_FileNameEtalon)
  else
  begin
