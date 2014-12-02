@@ -3,6 +3,13 @@ unit msCoreObjects;
 interface
 
 type
+ TmsObjectsWatcher = class
+  // - следилка за объектами
+ public
+  class procedure ObjectCreated(anObject: TObject);
+  class procedure ObjectDestroyed(anObject: TObject);
+ end;//TmsObjectsWatcher
+
  TmsInterfacedNonRefcounted = class abstract(TObject)
   // - реализаци€ объектов реализующих интерфейсы, но Ѕ≈« подсчЄта ссылок
   //   т.е. присваиваемы объект - Ќ≈ «ј’¬ј“џ¬ј≈“—я и "владелец" - Ќ≈ ”ѕ–ј¬Ћя≈“ временем жизни
@@ -39,13 +46,27 @@ type
 
 implementation
 
+// TmsObjectsWatcher
+
+class procedure TmsObjectsWatcher.ObjectCreated(anObject: TObject);
+begin
+end;
+
+class procedure TmsObjectsWatcher.ObjectDestroyed(anObject: TObject);
+begin
+end;
+
+// TmsInterfacedNonRefcounted
+
 class function TmsInterfacedNonRefcounted.NewInstance: TObject;
 begin
  Result := inherited NewInstance;
+ TmsObjectsWatcher.ObjectCreated(Result);
 end;
 
 procedure TmsInterfacedNonRefcounted.FreeInstance;
 begin
+ TmsObjectsWatcher.ObjectDestroyed(Self);
  inherited;
 end;
 

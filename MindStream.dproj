@@ -172,9 +172,9 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
+        <DCCReference Include="Core\msCoreObjects.pas"/>
         <DCCReference Include="uMain.pas">
             <Form>fmMain</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="msDiagramm.pas"/>
         <DCCReference Include="AbstractShapes\msShape.pas"/>
@@ -212,7 +212,6 @@
         <DCCReference Include="Tests\Module\TestmsSerializeController.pas"/>
         <DCCReference Include="ConcreteShapes\msRedRectangle.pas"/>
         <DCCReference Include="ConcreteShapes\msGreenRectangle.pas"/>
-        <DCCReference Include="Core\msCoreObjects.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>

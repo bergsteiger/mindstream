@@ -1,6 +1,7 @@
 program MindStream;
 
 uses
+  msCoreObjects in 'Core\msCoreObjects.pas',
   FMX.Forms,
   uMain in 'uMain.pas' {fmMain},
   msDiagramm in 'msDiagramm.pas',
@@ -33,8 +34,8 @@ uses
   msSerializeController in 'msSerializeController.pas',
   TestmsSerializeController in 'Tests\Module\TestmsSerializeController.pas',
   msRedRectangle in 'ConcreteShapes\msRedRectangle.pas',
-  msGreenRectangle in 'ConcreteShapes\msGreenRectangle.pas',
-  msCoreObjects in 'Core\msCoreObjects.pas';
+  msGreenRectangle in 'ConcreteShapes\msGreenRectangle.pas'
+  ;
 
 {$R *.res}
 
