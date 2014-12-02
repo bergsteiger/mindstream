@@ -5,6 +5,7 @@ interface
 type
  TmsObjectsWatcher = class
   // - следилка за объектами
+  // НЕ является ПОТОКОБЕЗОПАСНОЙ
  public
   class procedure ObjectCreated(anObject: TObject);
   class procedure ObjectDestroyed(anObject: TObject);
@@ -42,6 +43,11 @@ type
   // - http://18delphi.blogspot.ru/2013/07/2.html
   // - http://18delphi.blogspot.ru/2013/07/2_18.html
   // - http://18delphi.blogspot.ru/2013/07/blog-post_8789.html
+ public
+  class function NewInstance: TObject; override;
+  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
+  procedure FreeInstance; override;
+  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
  end;//TmsInterfacedRefcounted
 
 implementation
@@ -83,6 +89,20 @@ end;
 function TmsInterfacedNonRefcounted._Release: Integer;
 begin
  Result := -1;
+end;
+
+//TmsInterfacedRefcounted
+
+class function TmsInterfacedRefcounted.NewInstance: TObject;
+begin
+ Result := inherited NewInstance;
+ TmsObjectsWatcher.ObjectCreated(Result);
+end;
+
+procedure TmsInterfacedRefcounted.FreeInstance;
+begin
+ TmsObjectsWatcher.ObjectDestroyed(Self);
+ inherited;
 end;
 
 end.
