@@ -33,7 +33,8 @@ uses
   msSerializeController in 'msSerializeController.pas',
   TestmsSerializeController in 'Tests\Module\TestmsSerializeController.pas',
   msRedRectangle in 'ConcreteShapes\msRedRectangle.pas',
-  msGreenRectangle in 'ConcreteShapes\msGreenRectangle.pas';
+  msGreenRectangle in 'ConcreteShapes\msGreenRectangle.pas',
+  msCoreObjects in 'Core\msCoreObjects.pas';
 
 {$R *.res}
 

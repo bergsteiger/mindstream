@@ -15,7 +15,9 @@ uses
  msRegisteredShapes,
  FMX.Dialogs,
  System.JSON,
- Data.DBXJSONReflect;
+ Data.DBXJSONReflect,
+ msCoreObjects
+ ;
 
 type
  TmsShapeList = class(TList<ImsShape>)

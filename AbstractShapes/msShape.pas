@@ -6,39 +6,11 @@ uses
  System.Types,
  FMX.Types,
  System.UITypes,
- Generics.Collections
+ Generics.Collections,
+ msCoreObjects
  ;
 
 type
- TmsInterfacedNonRefcounted = class abstract(TObject)
-  // - реализация объектов реализующих интерфейсы, но БЕЗ подсчёта ссылок
-  //   т.е. присваиваемы объект - НЕ ЗАХВАТЫВАЕТСЯ и "владелец" - НЕ УПРАВЛЯЕТ временем жизни
-  //   Зачем? Чтобы избежать кросс-ссылок.
-  //   От TmsInterfacedNonRefcounted должны наследоваться объекты-контейнеры,
-  //   которые хотят сообщать своим "детям" свои интерфейсы.
-  //
-  //   Тут есть одна ТОНКОСТЬ - объект-контейнер - в СВОЮ очередь может являться
-  //   "ребёнком", но мы это потом - РАЗРУЛИМ, когда дойдём.
- protected
-  function QueryInterface(const IID: TGUID; out Obj): HResult; stdcall;
-  function _AddRef: Integer; stdcall;
-  function _Release: Integer; stdcall;
- end;//TmsInterfacedNonRefcounted
-
- TmsInterfacedRefcounted = class abstract(TInterfacedObject)
-  // Реализация объектов, реализующих интерфейсы. С ПОДСЧЁТОМ ссылок.
-  //
-  // НЕ САМАЯ хорошая реализация, лучше реализация тут - http://18delphi.blogspot.ru/2013/04/iunknown.html
-  // но в учётом ARC - пользуемся пока "нативной реализаией"
-  //
-  // Таже ещё есть вот что "почитать":
-  // - http://18delphi.blogspot.ru/2013/07/blog-post_3683.html
-  // - http://18delphi.blogspot.ru/2013/07/1.html
-  // - http://18delphi.blogspot.ru/2013/07/2.html
-  // - http://18delphi.blogspot.ru/2013/07/2_18.html
-  // - http://18delphi.blogspot.ru/2013/07/blog-post_8789.html
- end;//TmsInterfacedRefcounted
-
  ImsShape = interface;
 
  ImsShapeByPt = interface
@@ -200,21 +172,6 @@ constructor TmsMakeShapeContext.Create(aStartPoint: TPointF; const aShapesContro
 begin
  rStartPoint := aStartPoint;
  rShapesController := aShapesController;
-end;
-
-function TmsInterfacedNonRefcounted.QueryInterface(const IID: TGUID; out Obj): HResult;
-begin
- Result := E_NoInterface;
-end;
-
-function TmsInterfacedNonRefcounted._AddRef: Integer;
-begin
- Result := -1;
-end;
-
-function TmsInterfacedNonRefcounted._Release: Integer;
-begin
- Result := -1;
 end;
 
 constructor TmsDrawOptionsContext.Create(const aCtx: TmsDrawContext);
