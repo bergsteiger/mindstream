@@ -12,6 +12,9 @@ type
   //
   //   Тут есть одна ТОНКОСТЬ - объект-контейнер - в СВОЮ очередь может являться
   //   "ребёнком", но мы это потом - РАЗРУЛИМ, когда дойдём.
+ public
+  class function NewInstance: TObject; override;
+  procedure FreeInstance; override;
  protected
   function QueryInterface(const IID: TGUID; out Obj): HResult; stdcall;
   function _AddRef: Integer; stdcall;
@@ -33,6 +36,16 @@ type
  end;//TmsInterfacedRefcounted
 
 implementation
+
+class function TmsInterfacedNonRefcounted.NewInstance: TObject;
+begin
+ Result := inherited NewInstance;
+end;
+
+procedure TmsInterfacedNonRefcounted.FreeInstance;
+begin
+ inherited;
+end;
 
 function TmsInterfacedNonRefcounted.QueryInterface(const IID: TGUID; out Obj): HResult;
 begin
