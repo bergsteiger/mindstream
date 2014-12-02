@@ -94,11 +94,17 @@ begin
 end;
 
 class destructor TmsObjectsWatcher.Destroy;
-const
- cEOL : ANSIString = #13#10;
 var
  l_FS : TFileStream;
- l_Str : ANSIString;
+
+ procedure OutLn(const aStr: ANSIString);
+ const
+  cEOL : ANSIString = #13#10;
+ begin//OutLn
+  l_FS.Write(aStr[1], Length(aStr));
+  l_FS.Write(cEOL[1], Length(cEOL));
+ end;//OutLn
+
 begin
  if (f_ObjectsCreatedCount > 0) then
  begin
@@ -107,9 +113,7 @@ begin
   // Далее выводим статистику неосвобождённых объектов в лог:
   l_FS := TFileStream.Create(ParamStr(0) + '.objects.log', fmCreate);
   try
-   l_Str := 'Неосвобождено объектов: ' + IntToStr(f_ObjectsCreatedCount);
-   l_FS.Write(l_Str[1], Length(l_Str));
-   l_FS.Write(cEOL[1], Length(cEOL));
+   OutLn('Неосвобождено объектов: ' + IntToStr(f_ObjectsCreatedCount));
   finally
    FreeAndNil(l_FS);
   end;//try..finally
