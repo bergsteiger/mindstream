@@ -14,7 +14,9 @@ type
   //   "ребЄнком", но мы это потом - –ј«–”Ћ»ћ, когда дойдЄм.
  public
   class function NewInstance: TObject; override;
+  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
   procedure FreeInstance; override;
+  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
  protected
   function QueryInterface(const IID: TGUID; out Obj): HResult; stdcall;
   function _AddRef: Integer; stdcall;
