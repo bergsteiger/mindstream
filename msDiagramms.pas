@@ -7,14 +7,15 @@ uses
  Generics.Collections,
  System.Types,
  FMX.Objects,
- System.Classes
+ System.Classes,
+ msCoreObjects
  ;
 
 type
  TmsDiagrammList = class(TObjectList<TmsDiagramm>)
  end;//TmsDiagrammList
 
- TmsDiagramms = class(TObject)
+ TmsDiagramms = class(TmsWatchedObject)
  private
   f_Diagramms : TmsDiagrammList;
   f_CurrentDiagramm : TmsDiagramm;

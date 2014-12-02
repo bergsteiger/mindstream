@@ -8,7 +8,7 @@ uses
  Data.DBXJSONReflect;
 
 type
- TmsSerializeController = class(TObject)
+ TmsSerializeController = class
  strict private
   class var f_Marshal : TJSONMarshal;
   class var f_UnMarshal : TJSONUnMarshal;

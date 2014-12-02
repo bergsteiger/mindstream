@@ -14,7 +14,16 @@ type
   class destructor Destroy;
  end;//TmsObjectsWatcher
 
- TmsInterfacedNonRefcounted = class abstract(TObject)
+ TmsWatchedObject = class abstract(TObject)
+ // - Класс, который умеетконтроллировать создание/уничтожение своих экземпляров
+ public
+  class function NewInstance: TObject; override;
+  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
+  procedure FreeInstance; override;
+  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
+ end;//TmsWatchedObject
+
+ TmsInterfacedNonRefcounted = class abstract(TmsWatchedObject)
   // - реализация объектов реализующих интерфейсы, но БЕЗ подсчёта ссылок
   //   т.е. присваиваемы объект - НЕ ЗАХВАТЫВАЕТСЯ и "владелец" - НЕ УПРАВЛЯЕТ временем жизни
   //   Зачем? Чтобы избежать кросс-ссылок.
@@ -23,11 +32,6 @@ type
   //
   //   Тут есть одна ТОНКОСТЬ - объект-контейнер - в СВОЮ очередь может являться
   //   "ребёнком", но мы это потом - РАЗРУЛИМ, когда дойдём.
- public
-  class function NewInstance: TObject; override;
-  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
-  procedure FreeInstance; override;
-  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
  protected
   function QueryInterface(const IID: TGUID; out Obj): HResult; stdcall;
   function _AddRef: Integer; stdcall;
@@ -73,19 +77,21 @@ begin
  Assert(f_ObjectsCreatedCount = 0, 'Какие-то объекты не освобождены');
 end;
 
-// TmsInterfacedNonRefcounted
+// TmsWatchedObject
 
-class function TmsInterfacedNonRefcounted.NewInstance: TObject;
+class function TmsWatchedObject.NewInstance: TObject;
 begin
  Result := inherited NewInstance;
  TmsObjectsWatcher.ObjectCreated(Result);
 end;
 
-procedure TmsInterfacedNonRefcounted.FreeInstance;
+procedure TmsWatchedObject.FreeInstance;
 begin
  TmsObjectsWatcher.ObjectDestroyed(Self);
  inherited;
 end;
+
+// TmsInterfacedNonRefcounted
 
 function TmsInterfacedNonRefcounted.QueryInterface(const IID: TGUID; out Obj): HResult;
 begin

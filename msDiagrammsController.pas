@@ -10,11 +10,12 @@ uses
  System.Types,
  FMX.Forms,
  System.Classes,
- System.UITypes
+ System.UITypes,
+ msCoreObjects
  ;
 
 type
- TmsDiagrammsController = class(TObject)
+ TmsDiagrammsController = class(TmsWatchedObject)
  private
   imgMain: TImage;
   cbShapes: TComboBox;
