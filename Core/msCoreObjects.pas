@@ -118,7 +118,8 @@ begin
    OutLn('Неосвобождено объектов: ' + IntToStr(f_ObjectsCreatedCount));
    for l_Index := 0 to Pred(f_ObjectsCreated.Count) do
    begin
-    OutLn(f_ObjectsCreated[l_Index] + ' : ' + IntToStr(Integer(f_ObjectsCreated.Objects[l_Index])));
+    if Integer(f_ObjectsCreated.Objects[l_Index]) > 0 then
+     OutLn(f_ObjectsCreated[l_Index] + ' : ' + IntToStr(Integer(f_ObjectsCreated.Objects[l_Index])));
    end;//for l_Index
   finally
    FreeAndNil(l_FS);
