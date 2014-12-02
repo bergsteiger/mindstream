@@ -185,7 +185,7 @@ begin
  try
   aCheck(l_Diagramm);
  finally
-  //FreeAndNil(l_Diagramm);
+  FreeAndNil(l_Diagramm);
  end;//try..finally
 end;
 
