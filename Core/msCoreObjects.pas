@@ -2,12 +2,18 @@ unit msCoreObjects;
 
 interface
 
+uses
+ System.Classes
+ ;
+
 type
  TmsObjectsWatcher = class
   // - следилка за объектами
   // НЕ является ПОТОКОБЕЗОПАСНОЙ
  private
   class var f_ObjectsCreatedCount : Integer;
+  class var f_ObjectsCreated: TStringList;
+  // ms-help://embarcadero.rs_xe7/libraries/System.Classes.TStringList.html
  public
   class procedure ObjectCreated(anObject: TObject);
   class procedure ObjectDestroyed(anObject: TObject);
@@ -59,11 +65,26 @@ type
 
 implementation
 
+uses
+ System.SysUtils
+ ;
+
 // TmsObjectsWatcher
 
 class procedure TmsObjectsWatcher.ObjectCreated(anObject: TObject);
+var
+ l_ClassName : String;
+ l_Index : Integer;
 begin
  Inc(f_ObjectsCreatedCount);
+ if (f_ObjectsCreated = nil) then
+  f_ObjectsCreated := TStringList.Create;
+ l_ClassName := anObject.ClassName;
+ l_Index := f_ObjectsCreated.IndexOf(l_ClassName);
+ if (l_Index < 0) then
+  f_ObjectsCreated.AddObject(l_ClassName, TObject(0))
+ else
+  f_ObjectsCreated.Objects[l_Index] := TObject(Integer(f_ObjectsCreated.Objects[l_Index]) + 1)
 end;
 
 class procedure TmsObjectsWatcher.ObjectDestroyed(anObject: TObject);
@@ -75,6 +96,7 @@ end;
 class destructor TmsObjectsWatcher.Destroy;
 begin
  Assert(f_ObjectsCreatedCount = 0, 'Какие-то объекты не освобождены');
+ FreeAndNil(f_ObjectsCreated);
 end;
 
 // TmsWatchedObject
