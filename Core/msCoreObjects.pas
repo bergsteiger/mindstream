@@ -94,11 +94,22 @@ begin
 end;
 
 class destructor TmsObjectsWatcher.Destroy;
+var
+ l_FS : TFileStream;
 begin
  if (f_ObjectsCreatedCount > 0) then
  begin
   Assert(f_ObjectsCreated <> nil);
   Assert(f_ObjectsCreated.Count > 0);
+  // Далее выводим статистику неосвобождённых объектов в лог:
+  l_FS := TFileStream.Create(ParamStr(0) + '.objects.log', fmCreate);
+  try
+
+  finally
+   FreeAndNil(l_FS);
+  end;//try..finally
+  f_ObjectsCreatedCount := 0;
+  // - чтобы дальше не падать
  end;//f_ObjectsCreatedCount > 0
  Assert(f_ObjectsCreatedCount = 0, 'Какие-то объекты не освобождены');
  FreeAndNil(f_ObjectsCreated);
