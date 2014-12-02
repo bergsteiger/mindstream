@@ -6,9 +6,12 @@ type
  TmsObjectsWatcher = class
   // - следилка за объектами
   // НЕ является ПОТОКОБЕЗОПАСНОЙ
+ private
+  class var f_ObjectsCreatedCount : Integer;
  public
   class procedure ObjectCreated(anObject: TObject);
   class procedure ObjectDestroyed(anObject: TObject);
+  class destructor Destroy;
  end;//TmsObjectsWatcher
 
  TmsInterfacedNonRefcounted = class abstract(TObject)
@@ -56,10 +59,18 @@ implementation
 
 class procedure TmsObjectsWatcher.ObjectCreated(anObject: TObject);
 begin
+ Inc(f_ObjectsCreatedCount);
 end;
 
 class procedure TmsObjectsWatcher.ObjectDestroyed(anObject: TObject);
 begin
+ Assert(f_ObjectsCreatedCount > 0, 'Какие-то объекты уже были освобождены несколько раз');
+ Dec(f_ObjectsCreatedCount);
+end;
+
+class destructor TmsObjectsWatcher.Destroy;
+begin
+ Assert(f_ObjectsCreatedCount = 0, 'Какие-то объекты не освобождены');
 end;
 
 // TmsInterfacedNonRefcounted
