@@ -105,6 +105,8 @@ var
   l_FS.Write(cEOL[1], Length(cEOL));
  end;//OutLn
 
+var
+ l_Index : Integer;
 begin
  if (f_ObjectsCreatedCount > 0) then
  begin
@@ -114,6 +116,10 @@ begin
   l_FS := TFileStream.Create(ParamStr(0) + '.objects.log', fmCreate);
   try
    OutLn('Неосвобождено объектов: ' + IntToStr(f_ObjectsCreatedCount));
+   for l_Index := 0 to Pred(f_ObjectsCreated.Count) do
+   begin
+    OutLn(f_ObjectsCreated[l_Index] + ' : ' + IntToStr(Integer(f_ObjectsCreated.Objects[l_Index])));
+   end;//for l_Index
   finally
    FreeAndNil(l_FS);
   end;//try..finally
