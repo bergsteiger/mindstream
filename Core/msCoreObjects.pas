@@ -25,6 +25,7 @@ type
  TmsClassInstanceCount = record
   public
    rCount : Integer;
+   rMaxCount : Integer;
    constructor Create(aCount: Integer);
    constructor IncCreate(const anOther: TmsClassInstanceCount);
    constructor DecCreate(const anOther: TmsClassInstanceCount);
@@ -102,7 +103,8 @@ type
 implementation
 
 uses
- System.SysUtils
+ System.SysUtils,
+ Math
  ;
 
 // TmsClassInstanceCount
@@ -110,12 +112,14 @@ uses
 constructor TmsClassInstanceCount.Create(aCount: Integer);
 begin
  rCount := aCount;
+ rMaxCount := 0;
 end;
 
 constructor TmsClassInstanceCount.IncCreate(const anOther: TmsClassInstanceCount);
 begin
  Self := anOther;
  Inc(rCount);
+ rMaxCount := Max(anOther.rMaxCount, rCount);
 end;
 
 constructor TmsClassInstanceCount.DecCreate(const anOther: TmsClassInstanceCount);
@@ -218,7 +222,7 @@ begin
      for l_Key in f_ObjectsCreated.Keys do
      begin
       l_Value := f_ObjectsCreated[l_Key];
-      aLog.ToLog(l_Key + ' : ' + IntToStr(l_Value.rCount));
+      aLog.ToLog(l_Key + ' Неосвобождено: ' + IntToStr(l_Value.rCount) + ' Максимально распределено: ' + IntToStr(l_Value.rMaxCount));
      end;//for l_Key
     end
    );
