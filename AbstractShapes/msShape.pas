@@ -97,6 +97,7 @@ type
   procedure DrawTo(const aCtx: TmsDrawContext);
   property StartPoint : TPointF read FStartPoint;
   class function IsTool: Boolean; virtual;
+  class function IsForToolbar: Boolean; virtual;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
@@ -153,6 +154,11 @@ end;
 class function TmsShape.IsTool: Boolean;
 begin
  Result := false;
+end;
+
+class function TmsShape.IsForToolbar: Boolean;
+begin
+ Result := true;
 end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);

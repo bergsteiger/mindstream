@@ -98,7 +98,8 @@ var
 begin
  aList.Clear;
  for l_Class in AllowedShapes do
-  aList.AddObject(l_Class.ClassName, TObject(l_Class));
+  if l_Class.IsForToolbar then
+   aList.AddObject(l_Class.ClassName, TObject(l_Class));
 end;
 
 function TmsDiagramm.CurrentShapeClassIndex: Integer;
