@@ -130,7 +130,7 @@ end;
 
 function TmsShape.HackInstance: TObject;
 begin
- Result := Self as TObject;
+ Result := Self;
 end;
 
 function TmsShape.IsNeedsSecondClick : Boolean;

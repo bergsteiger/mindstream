@@ -230,7 +230,7 @@ end;
 
 function TmsDiagramm.HackInstance: TObject;
 begin
- Result := Self as TObject;
+ Result := Self;
 end;
 
 procedure TmsDiagramm.Invalidate;
