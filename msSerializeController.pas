@@ -8,7 +8,7 @@ uses
  Data.DBXJSONReflect;
 
 type
- TmsSerializeController = class
+ TmsSerializeControllerXXX<TClassToSerialize> = class
  strict private
   class var f_Marshal : TJSONMarshal;
   class var f_UnMarshal : TJSONUnMarshal;
@@ -18,7 +18,10 @@ type
   class procedure Serialize(const aFileName: string; aDiagramm: TmsDiagramm);
   class procedure DeSerialize(const aFileName: string; aDiagramm: TmsDiagramm);
   class destructor Destroy;
- end;//TmsSerializeController
+ end;//TmsSerializeControllerXXX
+
+ TmsDiagrammSerializeController = class(TmsSerializeControllerXXX<TmsDiagramm>)
+ end;//TmsDiagrammSerializeController
 
 implementation
 
@@ -33,7 +36,7 @@ uses
 
  { TmsSerializeController }
 
-class function TmsSerializeController.UnMarshal: TJSONUnMarshal;
+class function TmsSerializeControllerXXX<TClassToSerialize>.UnMarshal: TJSONUnMarshal;
 begin
  if (f_UnMarshal = nil) then
  begin
@@ -61,13 +64,13 @@ begin
  Result := f_UnMarshal;
 end;
 
-class destructor TmsSerializeController.Destroy;
+class destructor TmsSerializeControllerXXX<TClassToSerialize>.Destroy;
 begin
  FreeAndNil(f_Marshal);
  FreeAndNil(f_UnMarshal);
 end;
 
-class function TmsSerializeController.Marshal: TJSONMarshal;
+class function TmsSerializeControllerXXX<TClassToSerialize>.Marshal: TJSONMarshal;
 begin
  if (f_Marshal = nil) then
  begin
@@ -100,7 +103,7 @@ begin
  Result := f_Marshal;
 end;
 
-class procedure TmsSerializeController.DeSerialize(const aFileName: string; aDiagramm: TmsDiagramm);
+class procedure TmsSerializeControllerXXX<TClassToSerialize>.DeSerialize(const aFileName: string; aDiagramm: TmsDiagramm);
 var
  l_StringList: TmsStringList;
  l_D : TmsDiagramm;
@@ -119,7 +122,7 @@ begin
  end;//try..finally
 end;
 
-class procedure TmsSerializeController.Serialize(const aFileName: string;
+class procedure TmsSerializeControllerXXX<TClassToSerialize>.Serialize(const aFileName: string;
                                                  aDiagramm: TmsDiagramm);
 var
  l_Json: TJSONObject;
