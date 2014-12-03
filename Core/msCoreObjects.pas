@@ -22,7 +22,15 @@ type
    procedure ToLog(const aString: AnsiString);
  end;//TmsLog
 
- TmsClassInstanceCountList = TDictionary<String, Integer>;
+ TmsClassInstanceCount = record
+  public
+   rCount : Integer;
+   constructor Create(aCount: Integer);
+   constructor IncCreate(const anOther: TmsClassInstanceCount);
+   constructor DecCreate(const anOther: TmsClassInstanceCount);
+ end;//TmsClassInstanceCount
+
+ TmsClassInstanceCountList = TDictionary<String, TmsClassInstanceCount>;
  // ms-help://embarcadero.rs_xe7/libraries/System.Generics.Collections.TDictionary.html
 
  TmsObjectsWatcher = class
@@ -97,6 +105,24 @@ uses
  System.SysUtils
  ;
 
+// TmsClassInstanceCount
+
+constructor TmsClassInstanceCount.Create(aCount: Integer);
+begin
+ rCount := aCount;
+end;
+
+constructor TmsClassInstanceCount.IncCreate(const anOther: TmsClassInstanceCount);
+begin
+ Self := anOther;
+ Inc(rCount);
+end;
+
+constructor TmsClassInstanceCount.DecCreate(const anOther: TmsClassInstanceCount);
+begin
+ Self := anOther;
+ Dec(rCount);
+end;
 // TmsObjectsWatcher
 
 class procedure TmsObjectsWatcher.CreateObject(aClass: TClass; var theInstance: TObject);
@@ -125,9 +151,9 @@ begin
   f_ObjectsCreated := TmsClassInstanceCountList.Create;
  l_ClassName := anObject.ClassName;
  if (not f_ObjectsCreated.ContainsKey(l_ClassName)) then
-  f_ObjectsCreated.Add(l_ClassName, 1)
+  f_ObjectsCreated.Add(l_ClassName, TmsClassInstanceCount.Create(1))
  else
-  f_ObjectsCreated.Items[l_ClassName] := f_ObjectsCreated.Items[l_ClassName] + 1;
+  f_ObjectsCreated.Items[l_ClassName] := TmsClassInstanceCount.IncCreate(f_ObjectsCreated.Items[l_ClassName]);
 end;
 
 class procedure TmsObjectsWatcher.ObjectDestroyed(anObject: TObject);
@@ -139,7 +165,7 @@ begin
  begin
   l_ClassName := anObject.ClassName;
   if f_ObjectsCreated.ContainsKey(l_ClassName) then
-   f_ObjectsCreated.Items[l_ClassName] := f_ObjectsCreated.Items[l_ClassName] - 1;
+   f_ObjectsCreated.Items[l_ClassName] := TmsClassInstanceCount.DecCreate(f_ObjectsCreated.Items[l_ClassName]);
  end;//f_ObjectsCreated <> nil
  Dec(f_ObjectsCreatedCount);
 end;
@@ -189,7 +215,7 @@ begin
     begin
      aLog.ToLog('Неосвобождено объектов: ' + IntToStr(f_ObjectsCreatedCount));
      for l_Key in f_ObjectsCreated.Keys do
-      aLog.ToLog(l_Key + ' : ' + IntToStr(f_ObjectsCreated[l_Key]));
+      aLog.ToLog(l_Key + ' : ' + IntToStr(f_ObjectsCreated[l_Key].rCount));
     end
    );
   end;//f_ObjectsCreated.Count > 0
