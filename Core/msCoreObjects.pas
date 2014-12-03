@@ -19,7 +19,7 @@ type
   class var f_ObjectsCreated: TmsClassInstanceCountList;
  public
   class procedure ObjectCreated(anObject: TObject);
-  class procedure ObjectDestroyed(anObject: TObject);
+  class function ObjectDestroyed(anObject: TObject): Boolean;
   class destructor Destroy;
  end;//TmsObjectsWatcher
 
@@ -97,7 +97,7 @@ begin
   f_ObjectsCreated.Items[l_ClassName] := f_ObjectsCreated.Items[l_ClassName] + 1;
 end;
 
-class procedure TmsObjectsWatcher.ObjectDestroyed(anObject: TObject);
+class function TmsObjectsWatcher.ObjectDestroyed(anObject: TObject): Boolean;
 var
  l_ClassName : String;
 begin
@@ -156,8 +156,8 @@ end;
 
 procedure TmsWatchedObject.FreeInstance;
 begin
- TmsObjectsWatcher.ObjectDestroyed(Self);
- inherited;
+ if TmsObjectsWatcher.ObjectDestroyed(Self) then
+  inherited;
 end;
 
 // TmsStringList
@@ -170,8 +170,8 @@ end;
 
 procedure TmsStringList.FreeInstance;
 begin
- TmsObjectsWatcher.ObjectDestroyed(Self);
- inherited;
+ if TmsObjectsWatcher.ObjectDestroyed(Self) then
+  inherited;
 end;
 
 // TmsInterfacedNonRefcounted
@@ -201,8 +201,8 @@ end;
 
 procedure TmsInterfacedRefcounted.FreeInstance;
 begin
- TmsObjectsWatcher.ObjectDestroyed(Self);
- inherited;
+ if TmsObjectsWatcher.ObjectDestroyed(Self) then
+  inherited;
 end;
 
 end.
