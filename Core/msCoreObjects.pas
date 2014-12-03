@@ -212,10 +212,14 @@ begin
     procedure (aLog: TmsLog)
     var
      l_Key : String;
+     l_Value : TmsClassInstanceCount;
     begin
      aLog.ToLog('Неосвобождено объектов: ' + IntToStr(f_ObjectsCreatedCount));
      for l_Key in f_ObjectsCreated.Keys do
-      aLog.ToLog(l_Key + ' : ' + IntToStr(f_ObjectsCreated[l_Key].rCount));
+     begin
+      l_Value := f_ObjectsCreated[l_Key];
+      aLog.ToLog(l_Key + ' : ' + IntToStr(l_Value.rCount));
+     end;//for l_Key
     end
    );
   end;//f_ObjectsCreated.Count > 0
