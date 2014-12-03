@@ -24,7 +24,7 @@ type
  end;//TmsObjectsWatcher
 
  TmsWatchedObject = class abstract(TObject)
- // -  ласс, который умеетконтроллировать создание/уничтожение своих экземпл€ров
+ // -  ласс, который умеет контроллировать создание/уничтожение своих экземпл€ров
  public
   class function NewInstance: TObject; override;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
@@ -33,7 +33,7 @@ type
  end;//TmsWatchedObject
 
  TmsStringList = class abstract(TStringList)
- // -  ласс, который умеетконтроллировать создание/уничтожение своих экземпл€ров
+ // -  ласс, который умеет контроллировать создание/уничтожение своих экземпл€ров
  public
   class function NewInstance: TObject; override;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
