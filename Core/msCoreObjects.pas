@@ -32,8 +32,10 @@ type
   class var f_ObjectsCreatedCount : Integer;
   class var f_ObjectsCreated: TmsClassInstanceCountList;
  public
+  class procedure CreateObject(aClass: TClass; var theInstance: TObject);
+  class procedure DestroyObject(anObject: TObject);
   class procedure ObjectCreated(anObject: TObject);
-  class function ObjectDestroyed(anObject: TObject): Boolean;
+  class procedure ObjectDestroyed(anObject: TObject);
   class destructor Destroy;
  end;//TmsObjectsWatcher
 
@@ -97,6 +99,20 @@ uses
 
 // TmsObjectsWatcher
 
+class procedure TmsObjectsWatcher.CreateObject(aClass: TClass; var theInstance: TObject);
+begin
+ GetMem(Pointer(theInstance), aClass.InstanceSize);
+ aClass.InitInstance(theInstance);
+ ObjectCreated(theInstance);
+end;
+
+class procedure TmsObjectsWatcher.DestroyObject(anObject: TObject);
+begin
+ ObjectDestroyed(anObject);
+ anObject.CleanupInstance;
+ FreeMem(Pointer(anObject));
+end;
+
 class procedure TmsObjectsWatcher.ObjectCreated(anObject: TObject);
 var
  l_ClassName : String;
@@ -111,7 +127,7 @@ begin
   f_ObjectsCreated.Items[l_ClassName] := f_ObjectsCreated.Items[l_ClassName] + 1;
 end;
 
-class function TmsObjectsWatcher.ObjectDestroyed(anObject: TObject): Boolean;
+class procedure TmsObjectsWatcher.ObjectDestroyed(anObject: TObject);
 var
  l_ClassName : String;
 begin
@@ -183,28 +199,24 @@ end;
 
 class function TmsWatchedObject.NewInstance: TObject;
 begin
- Result := inherited NewInstance;
- TmsObjectsWatcher.ObjectCreated(Result);
+ TmsObjectsWatcher.CreateObject(Self, Result);
 end;
 
 procedure TmsWatchedObject.FreeInstance;
 begin
- if TmsObjectsWatcher.ObjectDestroyed(Self) then
-  inherited;
+ TmsObjectsWatcher.DestroyObject(Self);
 end;
 
 // TmsStringList
 
 class function TmsStringList.NewInstance: TObject;
 begin
- Result := inherited NewInstance;
- TmsObjectsWatcher.ObjectCreated(Result);
+ TmsObjectsWatcher.CreateObject(Self, Result);
 end;
 
 procedure TmsStringList.FreeInstance;
 begin
- if TmsObjectsWatcher.ObjectDestroyed(Self) then
-  inherited;
+ TmsObjectsWatcher.DestroyObject(Self);
 end;
 
 // TmsInterfacedNonRefcounted
@@ -234,8 +246,8 @@ end;
 
 procedure TmsInterfacedRefcounted.FreeInstance;
 begin
- if TmsObjectsWatcher.ObjectDestroyed(Self) then
-  inherited;
+ TmsObjectsWatcher.ObjectDestroyed(Self);
+ inherited;
 end;
 
 end.
