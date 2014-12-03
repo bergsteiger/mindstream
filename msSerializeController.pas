@@ -18,7 +18,7 @@ type
   class procedure Serialize(const aFileName: string; aDiagramm: TmsDiagramm);
   class procedure DeSerialize(const aFileName: string; aDiagramm: TmsDiagramm);
   class destructor Destroy;
- end; // TmsDiagrammsController
+ end;//TmsSerializeController
 
 implementation
 
