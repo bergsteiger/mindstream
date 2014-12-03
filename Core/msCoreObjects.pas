@@ -159,6 +159,9 @@ end;
 
 class procedure TmsObjectsWatcher.DestroyObject(anObject: TObject);
 begin
+ if (f_DefferedObjects <> nil) then
+  if (f_DefferedObjects.IndexOf(anObject) >= 0)then
+   raise Exception.Create('Объект класса ' + anObject.ClassName + ' уже был освобождён');
  ObjectDestroyed(anObject);
  anObject.CleanupInstance;
  FreeMem(Pointer(anObject));
