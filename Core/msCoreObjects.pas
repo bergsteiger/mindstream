@@ -8,6 +8,20 @@ uses
  ;
 
 type
+ TmsLog = class;
+
+ TmsLogLambda = reference to procedure (aLog: TmsLog);
+
+ TmsLog = class
+  strict private
+   f_FS : TFileStream;
+  public
+   class procedure Log(const aFileName: String; aLambda: TmsLogLambda);
+   constructor Create(const aFileName: String);
+   destructor Destroy; override;
+   procedure ToLog(const aString: AnsiString);
+ end;//TmsLog
+
  TmsClassInstanceCountList = TDictionary<String, Integer>;
  // ms-help://embarcadero.rs_xe7/libraries/System.Generics.Collections.TDictionary.html
 
@@ -111,35 +125,54 @@ begin
  Dec(f_ObjectsCreatedCount);
 end;
 
+class procedure TmsLog.Log(const aFileName: String; aLambda: TmsLogLambda);
+var
+ l_Log : TmsLog;
+begin
+ l_Log := TmsLog.Create(aFileName);
+ try
+  aLambda(l_Log);
+ finally
+  FreeAndNil(l_Log);
+ end;//try..finally
+end;
+
+constructor TmsLog.Create(const aFileName: String);
+begin
+ inherited Create;
+ f_FS := TFileStream.Create(aFileName, fmCreate);
+end;
+
+destructor TmsLog.Destroy;
+begin
+ FreeAndNil(f_FS);
+ inherited;
+end;
+
+procedure TmsLog.ToLog(const aString: AnsiString);
+const
+ cEOL : ANSIString = #13#10;
+begin//OutLn
+ f_FS.Write(aString[1], Length(aString));
+ f_FS.Write(cEOL[1], Length(cEOL));
+end;//OutLn
+
 class destructor TmsObjectsWatcher.Destroy;
-var
- l_FS : TFileStream;
-
- procedure OutLn(const aStr: ANSIString);
- const
-  cEOL : ANSIString = #13#10;
- begin//OutLn
-  l_FS.Write(aStr[1], Length(aStr));
-  l_FS.Write(cEOL[1], Length(cEOL));
- end;//OutLn
-
-var
- l_Key : String;
 begin
  if (f_ObjectsCreated <> nil) then
   if (f_ObjectsCreated.Count > 0) then
   begin
    // Далее выводим статистику неосвобождённых объектов в лог:
-   l_FS := TFileStream.Create(ParamStr(0) + '.objects.log', fmCreate);
-   try
-    OutLn('Неосвобождено объектов: ' + IntToStr(f_ObjectsCreatedCount));
-    for l_Key in f_ObjectsCreated.Keys do
+   TmsLog.Log(ParamStr(0) + '.objects.log',
+    procedure (aLog: TmsLog)
+    var
+     l_Key : String;
     begin
-     OutLn(l_Key + ' : ' + IntToStr(f_ObjectsCreated[l_Key]));
-    end;//for l_Index
-   finally
-    FreeAndNil(l_FS);
-   end;//try..finally
+     aLog.ToLog('Неосвобождено объектов: ' + IntToStr(f_ObjectsCreatedCount));
+     for l_Key in f_ObjectsCreated.Keys do
+      aLog.ToLog(l_Key + ' : ' + IntToStr(f_ObjectsCreated[l_Key]));
+    end
+   );
   end;//f_ObjectsCreated.Count > 0
  FreeAndNil(f_ObjectsCreated);
  if (f_ObjectsCreatedCount > 0) then
