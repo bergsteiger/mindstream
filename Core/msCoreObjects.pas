@@ -92,14 +92,22 @@ begin
   f_ObjectsCreated := TmsClassInstanceCountList.Create;
  l_ClassName := anObject.ClassName;
  if (not f_ObjectsCreated.ContainsKey(l_ClassName)) then
-  f_ObjectsCreated.Add(l_ClassName, 0)
+  f_ObjectsCreated.Add(l_ClassName, 1)
  else
   f_ObjectsCreated.Items[l_ClassName] := f_ObjectsCreated.Items[l_ClassName] + 1;
 end;
 
 class procedure TmsObjectsWatcher.ObjectDestroyed(anObject: TObject);
+var
+ l_ClassName : String;
 begin
  Assert(f_ObjectsCreatedCount > 0, 'Какие-то объекты уже были освобождены несколько раз');
+ if (f_ObjectsCreated <> nil) then
+ begin
+  l_ClassName := anObject.ClassName;
+  if f_ObjectsCreated.ContainsKey(l_ClassName) then
+   f_ObjectsCreated.Items[l_ClassName] := f_ObjectsCreated.Items[l_ClassName] - 1;
+ end;//f_ObjectsCreated <> nil
  Dec(f_ObjectsCreatedCount);
 end;
 
@@ -135,9 +143,9 @@ begin
     FreeAndNil(l_FS);
    end;//try..finally
   end;//f_ObjectsCreated.Count > 0
+ FreeAndNil(f_ObjectsCreated);
  if (f_ObjectsCreatedCount > 0) then
   raise Exception.Create('Какие-то объекты не освобождены: ' + IntToStr(f_ObjectsCreatedCount));
- FreeAndNil(f_ObjectsCreated);
 end;
 
 // TmsWatchedObject
