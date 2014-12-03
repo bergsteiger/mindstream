@@ -27,6 +27,10 @@ type
  end; // TmsShapeList
 
  TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapesController, {IInvokable,} ImsObjectWrap, ImsSerializable)
+ // - Выделяем интерфейс ImsObjectWrap.
+ //   Смешно - если TmsDiagramm его реализет НАПРЯМУЮ, то всё хорошо.
+ //   А если через ImsSerializable, то - AV.
+ //   Про это можно писать отдельную статью.
  private
   [JSONMarshalled(True)]
   FShapeList: TmsShapeList;
