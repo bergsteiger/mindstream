@@ -5,7 +5,9 @@ interface
 uses
  JSON,
  msDiagramm,
- Data.DBXJSONReflect;
+ Data.DBXJSONReflect,
+ msSerializeInterfaces
+ ;
 
 type
  TmsMarshal<TClassToSerialize : ImsSerializable> = class
