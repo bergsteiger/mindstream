@@ -136,10 +136,9 @@ begin
   finally
    FreeAndNil(l_FS);
   end;//try..finally
-  f_ObjectsCreatedCount := 0;
-  // - чтобы дальше не падать
  end;//f_ObjectsCreatedCount > 0
- Assert(f_ObjectsCreatedCount = 0, 'Какие-то объекты не освобождены');
+ if (f_ObjectsCreatedCount > 0) then
+  raise Exception.Create('Какие-то объекты не освобождены: ' + IntToStr(f_ObjectsCreatedCount));
  FreeAndNil(f_ObjectsCreated);
 end;
 
