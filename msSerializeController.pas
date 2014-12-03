@@ -8,7 +8,7 @@ uses
  Data.DBXJSONReflect;
 
 type
- TmsSerializeControllerXXX<TClassToSerialize> = class
+ TmsSerializeControllerXXX<TClassToSerialize : ImsSerializable> = class
  // - шаблонизируем, ибо мы скоро будем сериализовать и другие классы.
  strict private
   class var f_Marshal : TJSONMarshal;
@@ -16,8 +16,8 @@ type
   class function Marshal: TJSONMarshal;
   class function UnMarshal: TJSONUnMarshal;
  public
-  class procedure Serialize(const aFileName: string; aDiagramm: TmsDiagramm);
-  class procedure DeSerialize(const aFileName: string; aDiagramm: TmsDiagramm);
+  class procedure Serialize(const aFileName: string; aDiagramm: TClassToSerialize);
+  class procedure DeSerialize(const aFileName: string; aDiagramm: TClassToSerialize);
   class destructor Destroy;
  end;//TmsSerializeControllerXXX
 
@@ -104,17 +104,21 @@ begin
  Result := f_Marshal;
 end;
 
-class procedure TmsSerializeControllerXXX<TClassToSerialize>.DeSerialize(const aFileName: string; aDiagramm: TmsDiagramm);
+class procedure TmsSerializeControllerXXX<TClassToSerialize>.DeSerialize(const aFileName: string; aDiagramm: TClassToSerialize);
 var
  l_StringList: TmsStringList;
- l_D : TmsDiagramm;
+ l_D : TObject;
+ l_S : ImsSerializable;
 begin
  l_StringList := TmsStringList.Create;
  try
   l_StringList.LoadFromFile(aFileName);
-  l_D := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text)) as TmsDiagramm;
+  l_D := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text));
   try
-   aDiagramm.Assign(l_D);
+   if Supports(l_D, ImsSerializable, l_S) then
+    aDiagramm.Assign(l_S)
+   else
+    Assert(false);
   finally
    FreeAndNil(l_D);
   end;//try..finally
@@ -124,7 +128,7 @@ begin
 end;
 
 class procedure TmsSerializeControllerXXX<TClassToSerialize>.Serialize(const aFileName: string;
-                                                 aDiagramm: TmsDiagramm);
+                                                 aDiagramm: TClassToSerialize);
 var
  l_Json: TJSONObject;
  l_StringList: TmsStringList;
@@ -134,7 +138,7 @@ begin
   l_Json := nil;
   try
    try
-    l_Json := Marshal.Marshal(aDiagramm) as TJSONObject;
+    l_Json := Marshal.Marshal(aDiagramm.HackInstance) as TJSONObject;
    except
     on E: Exception do
      ShowMessage(E.ClassName + ' поднята ошибка, с сообщением : ' + E.Message);

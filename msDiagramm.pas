@@ -25,7 +25,13 @@ type
   function ShapeByPt(const aPoint: TPointF): ImsShape;
  end; // TmsShapeList
 
- TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapesController, IInvokable)
+ ImsSerializable = interface
+ ['{11C7EA88-2267-4B6B-A5E0-2A3D1B135131}']
+  procedure Assign(const anOther : ImsSerializable);
+  function HackInstance: TObject;
+ end;//ImsSerializable
+
+ TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapesController, IInvokable, ImsSerializable)
  private
   [JSONMarshalled(True)]
   FShapeList: TmsShapeList;
@@ -53,6 +59,7 @@ type
   property CurrentClass: RmsShape read FCurrentClass write FCurrentClass;
   function pm_GetShapeList: TmsShapeList;
   procedure pm_SetShapeList(aValue: TmsShapeList);
+  function HackInstance: TObject;
  public
   constructor Create(anImage: TImage; const aName: String);
   procedure ResizeTo(anImage: TImage);
@@ -67,8 +74,7 @@ type
   function CurrentShapeClassIndex: Integer;
   procedure Serialize;
   procedure DeSerialize;
-  procedure Assign(anOther: TmsDiagramm);
-  function HackInstance: TObject;
+  procedure Assign(const anOther : ImsSerializable);
  end;//TmsDiagramm
 
 implementation
@@ -173,10 +179,13 @@ begin
  Result := FCurrentAddedShape;
 end;
 
-procedure TmsDiagramm.Assign(anOther: TmsDiagramm);
+procedure TmsDiagramm.Assign(const anOther : ImsSerializable);
+var
+ l_D : TmsDiagramm;
 begin
- Self.ShapeList := anOther.ShapeList;
- Self.Name := anOther.Name;
+ l_D := anOther.HackInstance As TmsDiagramm;
+ Self.ShapeList := l_D.ShapeList;
+ Self.Name := l_D.Name;
  Self.Invalidate;
 end;
 
