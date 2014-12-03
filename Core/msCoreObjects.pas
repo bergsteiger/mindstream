@@ -112,7 +112,7 @@ uses
 constructor TmsClassInstanceCount.Create(aCount: Integer);
 begin
  rCount := aCount;
- rMaxCount := 0;
+ rMaxCount := rCount;
 end;
 
 constructor TmsClassInstanceCount.IncCreate(const anOther: TmsClassInstanceCount);
