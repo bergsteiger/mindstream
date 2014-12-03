@@ -90,7 +90,7 @@ begin
     l_Index := 0;
     for l_Shape in (Data As TmsDiagramm).ShapeList do
     begin
-     Result[l_Index] := l_Shape.HackInstance;
+     Result[l_Index] := (l_Shape As ImsObjectWrap).HackInstance;
      Inc(l_Index);
     end; // for l_Shape
    end

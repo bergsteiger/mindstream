@@ -7,7 +7,8 @@ uses
  FMX.Types,
  System.UITypes,
  Generics.Collections,
- msCoreObjects
+ msCoreObjects,
+ msSerializeInterfaces
  ;
 
 type
@@ -62,10 +63,9 @@ type
   procedure EndTo(const aCtx: TmsEndShapeContext);
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
-  function HackInstance: TObject;
  end;//ImsShape
 
- TmsShape = class abstract (TmsInterfacedRefcounted, ImsShape)
+ TmsShape = class abstract (TmsInterfacedRefcounted, ImsShape, ImsObjectWrap)
  private
   FStartPoint: TPointF;
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
