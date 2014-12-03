@@ -164,6 +164,8 @@ begin
    raise Exception.Create('Объект класса ' + anObject.ClassName + ' уже был освобождён');
  ObjectDestroyed(anObject);
  anObject.CleanupInstance;
+ if (f_DefferedObjects = nil) then
+  f_DefferedObjects := TmsDefferedObjects.Create;
  FreeMem(Pointer(anObject));
 end;
 
