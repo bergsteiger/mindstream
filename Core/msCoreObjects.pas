@@ -129,7 +129,7 @@ class procedure TmsLog.Log(const aFileName: String; aLambda: TmsLogLambda);
 var
  l_Log : TmsLog;
 begin
- l_Log := TmsLog.Create(aFileName);
+ l_Log := Create(aFileName);
  try
   aLambda(l_Log);
  finally
