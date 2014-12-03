@@ -102,6 +102,9 @@ uses
 class procedure TmsObjectsWatcher.CreateObject(aClass: TClass; var theInstance: TObject);
 begin
  GetMem(Pointer(theInstance), aClass.InstanceSize);
+ // - распределяем память подобъекты сами. Зачем?
+ //   Чтобы следить за повторным удалением.
+ //   http://programmingmindstream.blogspot.ru/2014/11/blog-post_8.html
  aClass.InitInstance(theInstance);
  ObjectCreated(theInstance);
 end;
