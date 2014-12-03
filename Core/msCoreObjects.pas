@@ -9,6 +9,7 @@ uses
 
 type
  TmsClassInstanceCountList = TDictionary<String, Integer>;
+ // ms-help://embarcadero.rs_xe7/libraries/System.Generics.Collections.TDictionary.html
 
  TmsObjectsWatcher = class
   // - следилка за объектами
@@ -16,7 +17,6 @@ type
  private
   class var f_ObjectsCreatedCount : Integer;
   class var f_ObjectsCreated: TmsClassInstanceCountList;
-  // ms-help://embarcadero.rs_xe7/libraries/System.Classes.TStringList.html
  public
   class procedure ObjectCreated(anObject: TObject);
   class procedure ObjectDestroyed(anObject: TObject);
