@@ -3,10 +3,20 @@ unit msCoreObjects;
 interface
 
 uses
- System.Classes
+ System.Classes,
+ System.Generics.Collections
  ;
 
 type
+ TmsClassInstanceCount = record
+ public
+  rClassName : String;
+  rInstanceCount : Integer;
+  constructor Create(const aClassName : String; anInstanceCount : Integer);
+ end;//TmsClassInstanceCount
+
+ TmsClassInstanceCountList = TList<TmsClassInstanceCount>;
+
  TmsObjectsWatcher = class
   // - следилка за объектами
   // НЕ является ПОТОКОБЕЗОПАСНОЙ
@@ -77,6 +87,14 @@ implementation
 uses
  System.SysUtils
  ;
+
+// TmsClassInstanceCount
+
+constructor TmsClassInstanceCount.Create(const aClassName : String; anInstanceCount : Integer);
+begin
+ rClassName := aClassName;
+ rInstanceCount := anInstanceCount;
+end;
 
 // TmsObjectsWatcher
 
