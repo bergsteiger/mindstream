@@ -243,15 +243,13 @@ end;
 
 class function TmsInterfacedRefcounted.NewInstance: TObject;
 begin
- Result := inherited NewInstance;
+ TmsObjectsWatcher.CreateObject(Self, Result);
  TmsInterfacedRefcounted(Result).FRefCount := 1;
- TmsObjectsWatcher.ObjectCreated(Result);
 end;
 
 procedure TmsInterfacedRefcounted.FreeInstance;
 begin
- TmsObjectsWatcher.ObjectDestroyed(Self);
- inherited;
+ TmsObjectsWatcher.DestroyObject(Self);
 end;
 
 end.
