@@ -166,7 +166,8 @@ begin
  anObject.CleanupInstance;
  if (f_DefferedObjects = nil) then
   f_DefferedObjects := TmsDefferedObjects.Create;
- FreeMem(Pointer(anObject));
+ f_DefferedObjects.Add(anObject);
+ //FreeMem(Pointer(anObject));
 end;
 
 class procedure TmsObjectsWatcher.ObjectCreated(anObject: TObject);
