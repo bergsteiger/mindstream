@@ -124,8 +124,7 @@ var
  end;//OutLn
 
 var
- l_Index : Integer;
- l_A : TArray<TPair<String, Integer>>;
+ l_Key : String;
 begin
  if (f_ObjectsCreated <> nil) then
   if (f_ObjectsCreated.Count > 0) then
@@ -134,10 +133,9 @@ begin
    l_FS := TFileStream.Create(ParamStr(0) + '.objects.log', fmCreate);
    try
     OutLn('Неосвобождено объектов: ' + IntToStr(f_ObjectsCreatedCount));
-    l_A := f_ObjectsCreated.ToArray;
-    for l_Index := 0 to Pred(f_ObjectsCreated.Count) do
+    for l_Key in f_ObjectsCreated.Keys do
     begin
-     OutLn(l_A[l_Index].Key + ' : ' + IntToStr(l_A[l_Index].Value));
+     OutLn(l_Key + ' : ' + IntToStr(f_ObjectsCreated[l_Key]));
     end;//for l_Index
    finally
     FreeAndNil(l_FS);
