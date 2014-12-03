@@ -8,13 +8,6 @@ uses
  ;
 
 type
- TmsClassInstanceCount = record
- public
-  rClassName : String;
-  rInstanceCount : Integer;
-  constructor Create(const aClassName : String; anInstanceCount : Integer);
- end;//TmsClassInstanceCount
-
  TmsClassInstanceCountList = TDictionary<String, Integer>;
 
  TmsObjectsWatcher = class
@@ -87,14 +80,6 @@ implementation
 uses
  System.SysUtils
  ;
-
-// TmsClassInstanceCount
-
-constructor TmsClassInstanceCount.Create(const aClassName : String; anInstanceCount : Integer);
-begin
- rClassName := aClassName;
- rInstanceCount := anInstanceCount;
-end;
 
 // TmsObjectsWatcher
 
