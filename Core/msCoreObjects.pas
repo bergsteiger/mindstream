@@ -119,24 +119,22 @@ var
  l_Index : Integer;
  l_A : TArray<TPair<String, Integer>>;
 begin
- if (f_ObjectsCreatedCount > 0) then
- begin
-  Assert(f_ObjectsCreated <> nil);
-  Assert(f_ObjectsCreated.Count > 0);
-  // Далее выводим статистику неосвобождённых объектов в лог:
-  l_FS := TFileStream.Create(ParamStr(0) + '.objects.log', fmCreate);
-  try
-   OutLn('Неосвобождено объектов: ' + IntToStr(f_ObjectsCreatedCount));
-   l_A := f_ObjectsCreated.ToArray;
-   for l_Index := 0 to Pred(f_ObjectsCreated.Count) do
-   begin
-    if (l_A[l_Index].Value > 0) then
+ if (f_ObjectsCreated <> nil) then
+  if (f_ObjectsCreated.Count > 0) then
+  begin
+   // Далее выводим статистику неосвобождённых объектов в лог:
+   l_FS := TFileStream.Create(ParamStr(0) + '.objects.log', fmCreate);
+   try
+    OutLn('Неосвобождено объектов: ' + IntToStr(f_ObjectsCreatedCount));
+    l_A := f_ObjectsCreated.ToArray;
+    for l_Index := 0 to Pred(f_ObjectsCreated.Count) do
+    begin
      OutLn(l_A[l_Index].Key + ' : ' + IntToStr(l_A[l_Index].Value));
-   end;//for l_Index
-  finally
-   FreeAndNil(l_FS);
-  end;//try..finally
- end;//f_ObjectsCreatedCount > 0
+    end;//for l_Index
+   finally
+    FreeAndNil(l_FS);
+   end;//try..finally
+  end;//f_ObjectsCreated.Count > 0
  if (f_ObjectsCreatedCount > 0) then
   raise Exception.Create('Какие-то объекты не освобождены: ' + IntToStr(f_ObjectsCreatedCount));
  FreeAndNil(f_ObjectsCreated);
