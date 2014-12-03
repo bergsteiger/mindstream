@@ -22,7 +22,7 @@ type
   // НЕ является ПОТОКОБЕЗОПАСНОЙ
  private
   class var f_ObjectsCreatedCount : Integer;
-  class var f_ObjectsCreated: TStringList;
+  class var f_ObjectsCreated: TmsClassInstanceCountList;
   // ms-help://embarcadero.rs_xe7/libraries/System.Classes.TStringList.html
  public
   class procedure ObjectCreated(anObject: TObject);
@@ -101,17 +101,15 @@ end;
 class procedure TmsObjectsWatcher.ObjectCreated(anObject: TObject);
 var
  l_ClassName : String;
- l_Index : Integer;
 begin
  Inc(f_ObjectsCreatedCount);
  if (f_ObjectsCreated = nil) then
-  f_ObjectsCreated := TStringList.Create;
+  f_ObjectsCreated := TmsClassInstanceCountList.Create;
  l_ClassName := anObject.ClassName;
- l_Index := f_ObjectsCreated.IndexOf(l_ClassName);
- if (l_Index < 0) then
-  f_ObjectsCreated.AddObject(l_ClassName, TObject(0))
+ if (not f_ObjectsCreated.ContainsKey(l_ClassName)) then
+  f_ObjectsCreated.Add(l_ClassName, 0)
  else
-  f_ObjectsCreated.Objects[l_Index] := TObject(Integer(f_ObjectsCreated.Objects[l_Index]) + 1)
+  f_ObjectsCreated.Items[l_ClassName] := f_ObjectsCreated.Items[l_ClassName] + 1;
 end;
 
 class procedure TmsObjectsWatcher.ObjectDestroyed(anObject: TObject);
@@ -134,6 +132,7 @@ var
 
 var
  l_Index : Integer;
+ l_A : TArray<TPair<String, Integer>>;
 begin
  if (f_ObjectsCreatedCount > 0) then
  begin
@@ -143,10 +142,11 @@ begin
   l_FS := TFileStream.Create(ParamStr(0) + '.objects.log', fmCreate);
   try
    OutLn('Неосвобождено объектов: ' + IntToStr(f_ObjectsCreatedCount));
+   l_A := f_ObjectsCreated.ToArray;
    for l_Index := 0 to Pred(f_ObjectsCreated.Count) do
    begin
-    if Integer(f_ObjectsCreated.Objects[l_Index]) > 0 then
-     OutLn(f_ObjectsCreated[l_Index] + ' : ' + IntToStr(Integer(f_ObjectsCreated.Objects[l_Index])));
+    if (l_A[l_Index].Value > 0) then
+     OutLn(l_A[l_Index].Key + ' : ' + IntToStr(l_A[l_Index].Value));
    end;//for l_Index
   finally
    FreeAndNil(l_FS);
