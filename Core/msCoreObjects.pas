@@ -244,6 +244,7 @@ end;
 class function TmsInterfacedRefcounted.NewInstance: TObject;
 begin
  Result := inherited NewInstance;
+ TmsInterfacedRefcounted(Result).FRefCount := 1;
  TmsObjectsWatcher.ObjectCreated(Result);
 end;
 
