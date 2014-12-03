@@ -15,7 +15,7 @@ type
   constructor Create(const aClassName : String; anInstanceCount : Integer);
  end;//TmsClassInstanceCount
 
- TmsClassInstanceCountList = TList<TmsClassInstanceCount>;
+ TmsClassInstanceCountList = TDictionary<String, Integer>;
 
  TmsObjectsWatcher = class
   // - следилка за объектами
