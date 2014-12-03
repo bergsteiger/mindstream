@@ -34,12 +34,20 @@ type
  TmsClassInstanceCountList = TDictionary<String, TmsClassInstanceCount>;
  // ms-help://embarcadero.rs_xe7/libraries/System.Generics.Collections.TDictionary.html
 
+ TmsDefferedObjects = class(TList<TObject>)
+ // - список отложенных объектов
+ //   http://programmingmindstream.blogspot.ru/2014/11/blog-post_8.html
+ public
+  destructor Destroy; override;
+ end;//TmsDefferedObjects
+
  TmsObjectsWatcher = class
   // - следилка за объектами
   // НЕ является ПОТОКОБЕЗОПАСНОЙ
  private
   class var f_ObjectsCreatedCount : Integer;
   class var f_ObjectsCreated: TmsClassInstanceCountList;
+  class var f_DefferedObjects : TmsDefferedObjects;
  public
   class procedure CreateObject(aClass: TClass; var theInstance: TObject);
   class procedure DestroyObject(anObject: TObject);
@@ -127,6 +135,16 @@ begin
  Self := anOther;
  Dec(rCount);
 end;
+
+destructor TmsDefferedObjects.Destroy;
+var
+ l_Object : TObject;
+begin
+ for l_Object in Self do
+  FreeMem(Pointer(l_Object), l_Object.InstanceSize);
+ inherited;
+end;
+
 // TmsObjectsWatcher
 
 class procedure TmsObjectsWatcher.CreateObject(aClass: TClass; var theInstance: TObject);
@@ -228,6 +246,7 @@ begin
    );
   end;//f_ObjectsCreated.Count > 0
  FreeAndNil(f_ObjectsCreated);
+ FreeAndNil(f_DefferedObjects);
  if (f_ObjectsCreatedCount > 0) then
   raise Exception.Create('Какие-то объекты не освобождены: ' + IntToStr(f_ObjectsCreatedCount));
 end;
