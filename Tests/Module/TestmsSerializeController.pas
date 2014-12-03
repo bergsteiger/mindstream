@@ -147,7 +147,7 @@ var
  l_FileNameTest : String;
 begin
  l_FileNameTest := TestResultsFileName(aShapeClass);
- TmsDiagrammSerializeController.Serialize(l_FileNameTest, aDiagramm);
+ TmsDiagrammMarshal.Serialize(l_FileNameTest, aDiagramm);
  CheckFileWithEtalon(l_FileNameTest);
 end;
 
@@ -224,7 +224,7 @@ begin
  CreateDiagrammAndCheck(
   procedure (aDiagramm : TmsDiagramm)
   begin
-   TmsDiagrammSerializeController.DeSerialize(MakeFileName(TestSerializeMethodName, aShapeClass), aDiagramm);
+   TmsDiagrammMarshal.DeSerialize(MakeFileName(TestSerializeMethodName, aShapeClass), aDiagramm);
    aCheck(aDiagramm);
   end
   , ''

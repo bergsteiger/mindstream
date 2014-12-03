@@ -8,7 +8,7 @@ uses
  Data.DBXJSONReflect;
 
 type
- TmsSerializeControllerXXX<TClassToSerialize : ImsSerializable> = class
+ TmsMarshal<TClassToSerialize : ImsSerializable> = class
  // - шаблонизируем, ибо мы скоро будем сериализовать и другие классы.
  strict private
   class var f_Marshal : TJSONMarshal;
@@ -19,10 +19,10 @@ type
   class procedure Serialize(const aFileName: string; aDiagramm: TClassToSerialize);
   class procedure DeSerialize(const aFileName: string; aDiagramm: TClassToSerialize);
   class destructor Destroy;
- end;//TmsSerializeControllerXXX
+ end;//TmsMarshal
 
- TmsDiagrammSerializeController = class(TmsSerializeControllerXXX<TmsDiagramm>)
- end;//TmsDiagrammSerializeController
+ TmsDiagrammMarshal = class(TmsMarshal<TmsDiagramm>)
+ end;//TmsDiagrammMarshal
 
 implementation
 
@@ -37,7 +37,7 @@ uses
 
  { TmsSerializeController }
 
-class function TmsSerializeControllerXXX<TClassToSerialize>.UnMarshal: TJSONUnMarshal;
+class function TmsMarshal<TClassToSerialize>.UnMarshal: TJSONUnMarshal;
 begin
  if (f_UnMarshal = nil) then
  begin
@@ -65,13 +65,13 @@ begin
  Result := f_UnMarshal;
 end;
 
-class destructor TmsSerializeControllerXXX<TClassToSerialize>.Destroy;
+class destructor TmsMarshal<TClassToSerialize>.Destroy;
 begin
  FreeAndNil(f_Marshal);
  FreeAndNil(f_UnMarshal);
 end;
 
-class function TmsSerializeControllerXXX<TClassToSerialize>.Marshal: TJSONMarshal;
+class function TmsMarshal<TClassToSerialize>.Marshal: TJSONMarshal;
 begin
  if (f_Marshal = nil) then
  begin
@@ -104,7 +104,7 @@ begin
  Result := f_Marshal;
 end;
 
-class procedure TmsSerializeControllerXXX<TClassToSerialize>.DeSerialize(const aFileName: string; aDiagramm: TClassToSerialize);
+class procedure TmsMarshal<TClassToSerialize>.DeSerialize(const aFileName: string; aDiagramm: TClassToSerialize);
 var
  l_StringList: TmsStringList;
  l_D : TObject;
@@ -127,7 +127,7 @@ begin
  end;//try..finally
 end;
 
-class procedure TmsSerializeControllerXXX<TClassToSerialize>.Serialize(const aFileName: string;
+class procedure TmsMarshal<TClassToSerialize>.Serialize(const aFileName: string;
                                                  aDiagramm: TClassToSerialize);
 var
  l_Json: TJSONObject;

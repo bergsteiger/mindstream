@@ -114,7 +114,7 @@ end;
 
 procedure TmsDiagramm.Serialize;
 begin
- TmsDiagrammSerializeController.Serialize(Self.Name + c_FileName, self);
+ TmsDiagrammMarshal.Serialize(Self.Name + c_FileName, self);
 end;
 
 procedure TmsDiagramm.ProcessClick(const aStart: TPointF);
@@ -193,7 +193,7 @@ procedure TmsDiagramm.DeSerialize;
 begin
  Clear;
  try
-  TmsDiagrammSerializeController.DeSerialize(Self.Name + c_FileName, Self);
+  TmsDiagrammMarshal.DeSerialize(Self.Name + c_FileName, Self);
  except
   on EFOpenError do
    Exit;
