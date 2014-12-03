@@ -158,6 +158,10 @@ begin
 end;
 
 class procedure TmsObjectsWatcher.DestroyObject(anObject: TObject);
+const
+ cMaxDefferedObjectsCount = 1000;
+var
+ l_P : Pointer;
 begin
  if (f_DefferedObjects <> nil) then
   if (f_DefferedObjects.IndexOf(anObject) >= 0)then
@@ -167,6 +171,12 @@ begin
  if (f_DefferedObjects = nil) then
   f_DefferedObjects := TmsDefferedObjects.Create;
  f_DefferedObjects.Add(anObject);
+ if (f_DefferedObjects.Count > cMaxDefferedObjectsCount) then
+ begin
+  l_P := f_DefferedObjects.First;
+  FreeMem(l_P);
+  f_DefferedObjects.Delete(0);
+ end;//f_DefferedObjects.Count > cMaxDefferedObjectsCount
  //FreeMem(Pointer(anObject));
 end;
 
