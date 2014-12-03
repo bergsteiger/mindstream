@@ -87,7 +87,6 @@ implementation
 
  uses
   System.SysUtils,
-  msMover,
   Winapi.Windows,
   System.Rtti,
   System.TypInfo,
@@ -318,7 +317,7 @@ begin
  TmsRegisteredShapes.IterateShapes(
   procedure (aShapeClass: RmsShape)
   begin
-   if not aShapeClass.InheritsFrom(TmsMover) then
+   if not aShapeClass.IsTool then
     aCheck(aShapeClass);
   end
  );

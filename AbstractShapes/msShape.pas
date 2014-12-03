@@ -77,6 +77,7 @@ type
   procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
+  function HackInstance: TObject;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; virtual;
   // - фабричный метод, который создаёт экземпляр класса как интерфейс
@@ -94,8 +95,8 @@ type
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
   procedure DrawTo(const aCtx: TmsDrawContext);
-  function HackInstance: TObject;
   property StartPoint : TPointF read FStartPoint;
+  class function IsTool: Boolean; virtual;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
@@ -147,6 +148,11 @@ function TmsShape.DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptions
 begin
  Result := TmsDrawOptionsContext.Create(aCtx);
  TransformDrawOptionsContext(Result);
+end;
+
+class function TmsShape.IsTool: Boolean;
+begin
+ Result := false;
 end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
