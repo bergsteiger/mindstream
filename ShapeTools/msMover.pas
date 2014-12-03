@@ -6,11 +6,12 @@ uses
  msShape,
  FMX.Graphics,
  System.Types,
- System.UITypes
+ System.UITypes,
+ msTool
  ;
 
 type
- TmsMover = class(TmsShape)
+ TmsMover = class(TmsTool)
  private
   f_Moving : ImsShape;
  protected
@@ -20,7 +21,6 @@ type
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
   function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aCtx: TmsEndShapeContext); override;
-  class function IsTool: Boolean; override;
  end;//TmsMover
 
 implementation
@@ -59,11 +59,6 @@ begin
  f_Moving := nil;
  aCtx.rShapesController.RemoveShape(Self);
  // - теперь надо —≈Ѕя удалить
-end;
-
-class function TmsMover.IsTool: Boolean;
-begin
- Result := true;
 end;
 
 procedure TmsMover.DoDrawTo(const aCtx: TmsDrawContext);
