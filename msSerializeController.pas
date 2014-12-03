@@ -46,6 +46,7 @@ begin
     l_Diagramm : TmsDiagramm;
     l_msShape: TmsShape;
    begin
+    Assert(Data Is TmsDiagramm);
     l_Diagramm := TmsDiagramm(Data);
     assert(l_Diagramm <> nil);
 
