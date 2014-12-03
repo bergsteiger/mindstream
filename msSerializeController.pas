@@ -9,6 +9,7 @@ uses
 
 type
  TmsSerializeControllerXXX<TClassToSerialize> = class
+ // - шаблонизируем, ибо мы скоро будем сериализовать и другие классы.
  strict private
   class var f_Marshal : TJSONMarshal;
   class var f_UnMarshal : TJSONUnMarshal;
