@@ -9,7 +9,8 @@ uses
   msShape,
   msRegisteredShapes,
   System.Types,
-  System.Classes
+  System.Classes,
+  msCoreObjects
   ;
 
 type
@@ -29,7 +30,6 @@ type
    constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName : String; aShapesCount : Integer; aShapeClass: RmsShape);
   end;//TmsShapeTestContext
 
-  TmsFileLambda = reference to procedure (aFile: TFileStream);
   TmsDiagrammCheck = reference to procedure (aDiagramm : TmsDiagramm);
 
   TestTmsSerializeControllerPrim = class abstract(TmsShapeTestPrim)
@@ -50,7 +50,7 @@ type
     procedure TestDeSerializeForShapeClass(aShapeClass: RmsShape);
     procedure TestDeSerializeViaShapeCheckForShapeClass(aShapeClass: RmsShape);
     function ShapeClass: RmsShape;
-    procedure OutToFileAndCheck(aLambda: TmsFileLambda);
+    procedure OutToFileAndCheck(aLambda: TmsLogLambda);
   public
    constructor Create(const aContext: TmsShapeTestContext); virtual;
   end;//TestTmsSerializeControllerPrim
@@ -95,8 +95,7 @@ implementation
   Winapi.Windows,
   System.Rtti,
   System.TypInfo,
-  FMX.Objects,
-  msCoreObjects
+  FMX.Objects
   ;
 
 function TestTmsSerializeControllerPrim.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
@@ -283,27 +282,26 @@ begin
  TestDeSerializeViaShapeCheckForShapeClass(ShapeClass);
 end;
 
-procedure TestTmsSerializeControllerPrim.OutToFileAndCheck(aLambda: TmsFileLambda);
+procedure TestTmsSerializeControllerPrim.OutToFileAndCheck(aLambda: TmsLogLambda);
 var
  l_FileNameTest : String;
- l_FS : TFileStream;
 begin
  l_FileNameTest := TestResultsFileName(ShapeClass);
- l_FS := TFileStream.Create(l_FileNameTest, fmCreate);
- try
-  aLambda(l_FS);
- finally
-  FreeAndNil(l_FS);
- end;//try..finally
+ TmsLog.Log(l_FileNameTest,
+  procedure (aLog: TmsLog)
+  begin
+   aLambda(aLog);
+  end
+ );
  CheckFileWithEtalon(l_FileNameTest);
 end;
 
 procedure TestTmsSerializeController.TestShapeName;
 begin
  OutToFileAndCheck(
-  procedure (aFile: TFileStream)
+  procedure (aLog: TmsLog)
   begin
-   aFile.Write(AnsiString(ShapeClass.ClassName)[1], Length(ShapeClass.ClassName));
+   aLog.ToLog(ShapeClass.ClassName);
   end
  );
 end;
@@ -311,9 +309,9 @@ end;
 procedure TestTmsSerializeController.TestDiagrammName;
 begin
  OutToFileAndCheck(
-  procedure (aFile: TFileStream)
+  procedure (aLog: TmsLog)
   begin
-   aFile.Write(AnsiString(f_Context.rDiagrammName)[1], Length(f_Context.rDiagrammName));
+   aLog.ToLog(f_Context.rDiagrammName);
   end
  );
 end;
