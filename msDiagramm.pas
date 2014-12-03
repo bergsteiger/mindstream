@@ -26,7 +26,7 @@ type
   function ShapeByPt(const aPoint: TPointF): ImsShape;
  end; // TmsShapeList
 
- TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapesController, IInvokable, ImsSerializable)
+ TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapesController, {IInvokable,} ImsObjectWrap, ImsSerializable)
  private
   [JSONMarshalled(True)]
   FShapeList: TmsShapeList;
