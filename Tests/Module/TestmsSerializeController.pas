@@ -4,7 +4,7 @@ interface
 
 uses
   TestFramework,
-  msSerializeController,
+  msMarshal,
   msDiagramm,
   msShape,
   msRegisteredShapes,

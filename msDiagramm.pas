@@ -80,7 +80,7 @@ implementation
 uses
  msMover,
  msCircle,
- msSerializeController
+ msMarshal
  ;
 
 const
