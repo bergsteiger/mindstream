@@ -1,9 +1,13 @@
 ﻿{$IfNDef TmsMarshal_uses_intf}
 
- JSON,
- Data.DBXJSONReflect
+// interface
 
 {$Define TmsMarshal_uses_intf}
+
+// uses
+
+ JSON,
+ Data.DBXJSONReflect
 
 {$Else TmsMarshal_uses_intf}
 
@@ -26,6 +30,21 @@
  end;//TmsMarshal
 
 {$Else TmsMarshal}
+
+// implementation
+
+{$IfNDef TmsMarshal_uses_impl}
+
+// uses
+ msShape,
+ SysUtils,
+ msSerializeInterfaces,
+ msRegisteredShapes,
+ msCoreObjects
+
+{$Define TmsMarshal_uses_impl}
+
+{$Else TmsMarshal_uses_impl}
 
 // TmsMarshal
 
@@ -135,6 +154,8 @@ begin
   FreeAndNil(l_StringList);
  end;//try..finally
 end;
+
+{$EndIf TmsMarshal_uses_impl}
 
 {$EndIf TmsMarshal}
 {$EndIf TmsMarshal_uses_intf}

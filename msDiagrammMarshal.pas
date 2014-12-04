@@ -18,11 +18,7 @@ type
 implementation
 
 uses
- msShape,
- SysUtils,
- msSerializeInterfaces,
- msRegisteredShapes,
- msCoreObjects
+ {$Include msMarshal.mixin.pas}
  ;
 
 {$Include msMarshal.mixin.pas}
