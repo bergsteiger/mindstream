@@ -2,8 +2,14 @@ unit msInterfacedRefcounted;
 
 interface
 
+uses
+ {$Include msWatchedObject.mixin.pas}
+;
+
 type
- TmsInterfacedRefcounted = class abstract(TInterfacedObject)
+ TmsWatchedObjectParent = TInterfacedObject;
+ {$Include msWatchedObject.mixin.pas}
+ TmsInterfacedRefcounted = class abstract(TmsWatchedObject)
   // Реализация объектов, реализующих интерфейсы. С ПОДСЧЁТОМ ссылок.
   //
   // НЕ САМАЯ хорошая реализация, лучше реализация тут - http://18delphi.blogspot.ru/2013/04/iunknown.html
@@ -18,27 +24,22 @@ type
  public
   class function NewInstance: TObject; override;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
-  procedure FreeInstance; override;
-  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
  end;//TmsInterfacedRefcounted
 
 implementation
 
 uses
- msCoreObjects
+ {$Include msWatchedObject.mixin.pas}
  ;
 
-//TmsInterfacedRefcounted
+{$Include msWatchedObject.mixin.pas}
+
+// TmsInterfacedRefcounted
 
 class function TmsInterfacedRefcounted.NewInstance: TObject;
 begin
- TmsObjectsWatcher.CreateObject(Self, Result);
+ Result := inherited NewInstance;
  TmsInterfacedRefcounted(Result).FRefCount := 1;
-end;
-
-procedure TmsInterfacedRefcounted.FreeInstance;
-begin
- TmsObjectsWatcher.DestroyObject(Self);
 end;
 
 end.
