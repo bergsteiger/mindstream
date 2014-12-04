@@ -8,7 +8,8 @@ uses
  System.UITypes,
  Generics.Collections,
  msCoreObjects,
- msSerializeInterfaces
+ msSerializeInterfaces,
+ msInterfacedRefcounted
  ;
 
 type
