@@ -4,7 +4,6 @@ interface
 
 uses
   TestFramework,
-  msMarshal,
   msDiagramm,
   msShape,
   msRegisteredShapes,
@@ -91,7 +90,8 @@ implementation
   System.Rtti,
   System.TypInfo,
   FMX.Objects,
-  msSerializeInterfaces
+  msSerializeInterfaces,
+  msDiagrammMarshal
   ;
 
 function TestTmsSerializeControllerPrim.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;

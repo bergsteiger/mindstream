@@ -80,7 +80,7 @@ implementation
 uses
  msMover,
  msCircle,
- msMarshal
+ msDiagrammMarshal
  ;
 
 const
