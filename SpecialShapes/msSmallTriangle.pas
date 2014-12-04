@@ -17,6 +17,7 @@ type
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
   class function InitialHeight: Single; override;
+  class function IsForToolbar: Boolean; override;
  end;//TmsSmallTriangle
 
 implementation
@@ -34,6 +35,11 @@ end;
 class function TmsSmallTriangle.InitialHeight: Single;
 begin
  Result := 20;
+end;
+
+class function TmsSmallTriangle.IsForToolbar: Boolean;
+begin
+ Result := false;
 end;
 
 end.

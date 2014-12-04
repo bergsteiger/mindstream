@@ -9,7 +9,7 @@ uses
   msRegisteredShapes in 'msRegisteredShapes.pas',
   msLine in 'ConcreteShapes\msLine.pas',
   msRectangle in 'ConcreteShapes\msRectangle.pas',
-  msPointCircle in 'ConcreteShapes\msPointCircle.pas',
+  msPointCircle in 'SpecialShapes\msPointCircle.pas',
   msCircle in 'ConcreteShapes\msCircle.pas',
   msRoundedRectangle in 'ConcreteShapes\msRoundedRectangle.pas',
   msUseCaseLikeEllipse in 'ConcreteShapes\msUseCaseLikeEllipse.pas',
@@ -20,7 +20,7 @@ uses
   msDashLine in 'ConcreteShapes\msDashLine.pas',
   msDotLine in 'ConcreteShapes\msDotLine.pas',
   msLineWithArrow in 'ConcreteShapes\msLineWithArrow.pas',
-  msSmallTriangle in 'ConcreteShapes\msSmallTriangle.pas',
+  msSmallTriangle in 'SpecialShapes\msSmallTriangle.pas',
   msOurShapes in 'msOurShapes.pas',
   msTriangleDirectionRight in 'ConcreteShapes\msTriangleDirectionRight.pas',
   msMover in 'ShapeTools\msMover.pas',
@@ -34,8 +34,9 @@ uses
   msSerializeController in 'msSerializeController.pas',
   TestmsSerializeController in 'Tests\Module\TestmsSerializeController.pas',
   msRedRectangle in 'ConcreteShapes\msRedRectangle.pas',
-  msGreenRectangle in 'ConcreteShapes\msGreenRectangle.pas'
-  ;
+  msGreenRectangle in 'ConcreteShapes\msGreenRectangle.pas',
+  msSerializeInterfaces in 'msSerializeInterfaces.pas',
+  msTool in 'ShapeTools\msTool.pas';
 
 {$R *.res}
 

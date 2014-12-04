@@ -19,7 +19,11 @@ uses
   msMover,
   msRegisteredShapes,
   msRedRectangle,
-  msGreenRectangle
+  msGreenRectangle,
+
+  // special shapes
+  msPointCircle,
+  msSmallTriangle
   ;
 
 procedure RegisterOurShapes;
@@ -38,7 +42,11 @@ begin
   TmsTriangleDirectionRight,
   TmsMover,
   TmsRedRectangle,
-  TmsGreenRectangle
+  TmsGreenRectangle,
+
+  // special shapes
+  TmsPointCircle,
+  TmsSmallTriangle
  ]);
 end;
 

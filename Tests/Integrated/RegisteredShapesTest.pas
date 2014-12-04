@@ -33,7 +33,8 @@ begin
  TmsRegisteredShapes.IterateShapes(
   procedure (aShapeClass: RmsShape)
   begin
-   inc(l_Result);
+   if aShapeClass.IsForToolbar then
+    inc(l_Result);
   end
  );
  CheckTrue(l_Result = 14);

@@ -181,7 +181,7 @@
         <DCCReference Include="msRegisteredShapes.pas"/>
         <DCCReference Include="ConcreteShapes\msLine.pas"/>
         <DCCReference Include="ConcreteShapes\msRectangle.pas"/>
-        <DCCReference Include="ConcreteShapes\msPointCircle.pas"/>
+        <DCCReference Include="SpecialShapes\msPointCircle.pas"/>
         <DCCReference Include="ConcreteShapes\msCircle.pas"/>
         <DCCReference Include="ConcreteShapes\msRoundedRectangle.pas"/>
         <DCCReference Include="ConcreteShapes\msUseCaseLikeEllipse.pas"/>
@@ -192,7 +192,7 @@
         <DCCReference Include="ConcreteShapes\msDashLine.pas"/>
         <DCCReference Include="ConcreteShapes\msDotLine.pas"/>
         <DCCReference Include="ConcreteShapes\msLineWithArrow.pas"/>
-        <DCCReference Include="ConcreteShapes\msSmallTriangle.pas"/>
+        <DCCReference Include="SpecialShapes\msSmallTriangle.pas"/>
         <DCCReference Include="msOurShapes.pas"/>
         <DCCReference Include="ConcreteShapes\msTriangleDirectionRight.pas"/>
         <DCCReference Include="ShapeTools\msMover.pas"/>
@@ -212,6 +212,8 @@
         <DCCReference Include="Tests\Module\TestmsSerializeController.pas"/>
         <DCCReference Include="ConcreteShapes\msRedRectangle.pas"/>
         <DCCReference Include="ConcreteShapes\msGreenRectangle.pas"/>
+        <DCCReference Include="msSerializeInterfaces.pas"/>
+        <DCCReference Include="ShapeTools\msTool.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>
