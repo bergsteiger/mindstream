@@ -7,6 +7,7 @@ uses
  ;
 
 type
+ TmsWatchedObjectParent = TObject;
  {$Include msWatchedObject.mixin.pas}
  TmsWatchedObjectInstance = class abstract(TmsWatchedObject)
  end;//TmsWatchedObjectInstance
