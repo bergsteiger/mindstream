@@ -4,8 +4,8 @@ unit msDiagrammMarshal;
 interface
 
 uses
- JSON,
- Data.DBXJSONReflect,
+ {$Include msMarshal.mixin.pas}
+ ,
  msDiagramm
  ;
 

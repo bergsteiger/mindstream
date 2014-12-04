@@ -1,4 +1,13 @@
-﻿{$IfNDef TmsMarshal}
+﻿{$IfNDef TmsMarshal_uses_intf}
+
+ JSON,
+ Data.DBXJSONReflect
+
+{$Define TmsMarshal_uses_intf}
+
+{$Else TmsMarshal_uses_intf}
+
+{$IfNDef TmsMarshal}
 // http://programmingmindstream.blogspot.ru/2014/12/generic-2.html
 
 {$Define TmsMarshal}
@@ -128,3 +137,4 @@ begin
 end;
 
 {$EndIf TmsMarshal}
+{$EndIf TmsMarshal_uses_intf}
