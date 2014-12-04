@@ -56,15 +56,6 @@ type
   class destructor Destroy;
  end;//TmsObjectsWatcher
 
- TmsWatchedObject = class abstract(TObject)
- // -  ласс, который умеет контроллировать создание/уничтожение своих экземпл€ров
- public
-  class function NewInstance: TObject; override;
-  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
-  procedure FreeInstance; override;
-  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
- end;//TmsWatchedObject
-
  TmsStringList = class abstract(TStringList)
  // -  ласс, который умеет контроллировать создание/уничтожение своих экземпл€ров
  public
@@ -250,18 +241,6 @@ begin
  FreeAndNil(f_DefferedObjects);
  if (f_ObjectsCreatedCount > 0) then
   raise Exception.Create(' акие-то объекты не освобождены: ' + IntToStr(f_ObjectsCreatedCount));
-end;
-
-// TmsWatchedObject
-
-class function TmsWatchedObject.NewInstance: TObject;
-begin
- TmsObjectsWatcher.CreateObject(Self, Result);
-end;
-
-procedure TmsWatchedObject.FreeInstance;
-begin
- TmsObjectsWatcher.DestroyObject(Self);
 end;
 
 // TmsStringList

@@ -3,11 +3,11 @@ unit msInterfacedNonRefcounted;
 interface
 
 uses
- msCoreObjects
+ msWatchedObjectInstance
  ;
 
 type
- TmsInterfacedNonRefcounted = class abstract(TmsWatchedObject)
+ TmsInterfacedNonRefcounted = class abstract(TmsWatchedObjectInstance)
   // - реализация объектов реализующих интерфейсы, но БЕЗ подсчёта ссылок
   //   т.е. присваиваемый объект - НЕ ЗАХВАТЫВАЕТСЯ и "владелец" - НЕ УПРАВЛЯЕТ временем жизни
   //   Зачем? Чтобы избежать кросс-ссылок.
@@ -23,6 +23,7 @@ type
  end;//TmsInterfacedNonRefcounted
 
 implementation
+
 
 // TmsInterfacedNonRefcounted
 

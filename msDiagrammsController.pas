@@ -11,7 +11,8 @@ uses
  FMX.Forms,
  System.Classes,
  System.UITypes,
- msCoreObjects
+ msCoreObjects,
+ msWatchedObjectInstance
  ;
 
 type

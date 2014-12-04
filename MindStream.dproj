@@ -214,6 +214,8 @@
         <DCCReference Include="msSerializeInterfaces.pas"/>
         <DCCReference Include="ShapeTools\msTool.pas"/>
         <DCCReference Include="msDiagrammMarshal.pas"/>
+        <DCCReference Include="Core\msInterfacedNonRefcounted.pas"/>
+        <DCCReference Include="Core\msWatchedObjectInstance.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>

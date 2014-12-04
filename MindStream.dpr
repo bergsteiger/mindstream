@@ -36,7 +36,9 @@ uses
   msGreenRectangle in 'ConcreteShapes\msGreenRectangle.pas',
   msSerializeInterfaces in 'msSerializeInterfaces.pas',
   msTool in 'ShapeTools\msTool.pas',
-  msDiagrammMarshal in 'msDiagrammMarshal.pas';
+  msDiagrammMarshal in 'msDiagrammMarshal.pas',
+  msInterfacedNonRefcounted in 'Core\msInterfacedNonRefcounted.pas',
+  msWatchedObjectInstance in 'Core\msWatchedObjectInstance.pas';
 
 {$R *.res}
 
