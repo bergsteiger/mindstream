@@ -1,4 +1,5 @@
 unit msDiagrammMarshal;
+// http://programmingmindstream.blogspot.ru/2014/12/generic-2.html
 
 interface
 

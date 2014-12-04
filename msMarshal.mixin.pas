@@ -1,4 +1,5 @@
 ﻿{$IfNDef TmsMarshal}
+// http://programmingmindstream.blogspot.ru/2014/12/generic-2.html
 
 {$Define TmsMarshal}
 
