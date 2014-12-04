@@ -17,7 +17,8 @@ uses
  System.JSON,
  Data.DBXJSONReflect,
  msCoreObjects,
- msSerializeInterfaces
+ msSerializeInterfaces,
+ msInterfacedNonRefcounted
  ;
 
 type
