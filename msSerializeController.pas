@@ -18,8 +18,8 @@ type
   class function Marshal: TJSONMarshal;
   class function UnMarshal: TJSONUnMarshal;
  public
-  class procedure Serialize(const aFileName: string; aDiagramm: TClassToSerialize);
-  class procedure DeSerialize(const aFileName: string; aDiagramm: TClassToSerialize);
+  class procedure Serialize(const aFileName: string; const aDiagramm: TClassToSerialize);
+  class procedure DeSerialize(const aFileName: string; const aDiagramm: TClassToSerialize);
   class destructor Destroy;
  end;//TmsMarshal
 
@@ -106,7 +106,7 @@ begin
  Result := f_Marshal;
 end;
 
-class procedure TmsMarshal<TClassToSerialize>.DeSerialize(const aFileName: string; aDiagramm: TClassToSerialize);
+class procedure TmsMarshal<TClassToSerialize>.DeSerialize(const aFileName: string; const aDiagramm: TClassToSerialize);
 var
  l_StringList: TmsStringList;
  l_D : TObject;
@@ -130,7 +130,7 @@ begin
 end;
 
 class procedure TmsMarshal<TClassToSerialize>.Serialize(const aFileName: string;
-                                                 aDiagramm: TClassToSerialize);
+                                                 const aDiagramm: TClassToSerialize);
 var
  l_Json: TJSONObject;
  l_StringList: TmsStringList;
