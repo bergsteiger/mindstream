@@ -57,3 +57,4 @@ initialization
  TestFramework.RegisterTest(TRegisteredShapesTest.Suite);
 end.
 
+

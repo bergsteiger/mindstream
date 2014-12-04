@@ -1,16 +1,8 @@
-﻿unit msMarshal;
+﻿{$IfNDef TmsMarshal}
 
-interface
+{$Define TmsMarshal}
 
-uses
- JSON,
- msDiagramm,
- Data.DBXJSONReflect,
- msSerializeInterfaces
- ;
-
-type
- TmsMarshal<TClassToSerialize : class> = class
+ TmsMarshal = class
  // - шаблонизируем, ибо мы скоро будем сериализовать и другие классы.
  strict private
   class var f_Marshal : TJSONMarshal;
@@ -23,23 +15,11 @@ type
   class destructor Destroy;
  end;//TmsMarshal
 
- TmsDiagrammMarshal = class(TmsMarshal<TmsDiagramm>)
- end;//TmsDiagrammMarshal
+{$Else TmsMarshal}
 
-implementation
+// TmsMarshal
 
-uses
- System.Classes,
- msShape,
- FMX.Dialogs,
- System.SysUtils,
- msRegisteredShapes,
- msCoreObjects
- ;
-
- { TmsSerializeController }
-
-class function TmsMarshal<TClassToSerialize>.UnMarshal: TJSONUnMarshal;
+class function TmsMarshal.UnMarshal: TJSONUnMarshal;
 begin
  if (f_UnMarshal = nil) then
  begin
@@ -67,13 +47,13 @@ begin
  Result := f_UnMarshal;
 end;
 
-class destructor TmsMarshal<TClassToSerialize>.Destroy;
+class destructor TmsMarshal.Destroy;
 begin
  FreeAndNil(f_Marshal);
  FreeAndNil(f_UnMarshal);
 end;
 
-class function TmsMarshal<TClassToSerialize>.Marshal: TJSONMarshal;
+class function TmsMarshal.Marshal: TJSONMarshal;
 begin
  if (f_Marshal = nil) then
  begin
@@ -106,20 +86,17 @@ begin
  Result := f_Marshal;
 end;
 
-class procedure TmsMarshal<TClassToSerialize>.DeSerialize(const aFileName: string; const aDiagramm: TClassToSerialize);
+class procedure TmsMarshal.DeSerialize(const aFileName: string; const aDiagramm: TClassToSerialize);
 var
  l_StringList: TmsStringList;
- l_D : TObject;
+ l_D : TClassToSerialize;
 begin
  l_StringList := TmsStringList.Create;
  try
   l_StringList.LoadFromFile(aFileName);
-  l_D := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text));
+  l_D := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text)) As TClassToSerialize;
   try
-   if (aDiagramm Is TmsDiagramm) then
-    (aDiagramm As TmsDiagramm).Assign(l_D As TmsDiagramm)
-   else
-    Assert(false);
+    aDiagramm.Assign(l_D);
   finally
    FreeAndNil(l_D);
   end;//try..finally
@@ -128,7 +105,7 @@ begin
  end;//try..finally
 end;
 
-class procedure TmsMarshal<TClassToSerialize>.Serialize(const aFileName: string;
+class procedure TmsMarshal.Serialize(const aFileName: string;
                                                  const aDiagramm: TClassToSerialize);
 var
  l_Json: TJSONObject;
@@ -138,12 +115,7 @@ begin
  try
   l_Json := nil;
   try
-   try
-    l_Json := Marshal.Marshal(aDiagramm) as TJSONObject;
-   except
-    on E: Exception do
-     ShowMessage(E.ClassName + ' поднята ошибка, с сообщением : ' + E.Message);
-   end;//try..except
+   l_Json := Marshal.Marshal(aDiagramm) as TJSONObject;
    l_StringList.Add(l_Json.toString);
   finally
    FreeAndNil(l_Json);
@@ -154,4 +126,4 @@ begin
  end;//try..finally
 end;
 
-end.
+{$EndIf TmsMarshal}
