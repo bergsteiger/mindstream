@@ -91,7 +91,8 @@ implementation
   System.TypInfo,
   FMX.Objects,
   msSerializeInterfaces,
-  msDiagrammMarshal
+  msDiagrammMarshal,
+  msStringList
   ;
 
 function TestTmsSerializeControllerPrim.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;

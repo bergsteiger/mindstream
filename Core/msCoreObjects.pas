@@ -56,15 +56,6 @@ type
   class destructor Destroy;
  end;//TmsObjectsWatcher
 
- TmsStringList = class abstract(TStringList)
- // - Класс, который умеет контроллировать создание/уничтожение своих экземпляров
- public
-  class function NewInstance: TObject; override;
-  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
-  procedure FreeInstance; override;
-  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
- end;//TmsStringList
-
  TmsInterfacedRefcounted = class abstract(TInterfacedObject)
   // Реализация объектов, реализующих интерфейсы. С ПОДСЧЁТОМ ссылок.
   //
@@ -241,18 +232,6 @@ begin
  FreeAndNil(f_DefferedObjects);
  if (f_ObjectsCreatedCount > 0) then
   raise Exception.Create('Какие-то объекты не освобождены: ' + IntToStr(f_ObjectsCreatedCount));
-end;
-
-// TmsStringList
-
-class function TmsStringList.NewInstance: TObject;
-begin
- TmsObjectsWatcher.CreateObject(Self, Result);
-end;
-
-procedure TmsStringList.FreeInstance;
-begin
- TmsObjectsWatcher.DestroyObject(Self);
 end;
 
 //TmsInterfacedRefcounted

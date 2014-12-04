@@ -40,7 +40,8 @@
  SysUtils,
  msSerializeInterfaces,
  msRegisteredShapes,
- msCoreObjects
+ msCoreObjects,
+ msStringList
 
 {$Define TmsMarshal_uses_impl}
 
