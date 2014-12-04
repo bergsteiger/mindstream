@@ -10,7 +10,7 @@ uses
  ;
 
 type
- TmsMarshal<TClassToSerialize : ImsSerializable> = class
+ TmsMarshal<TClassToSerialize : class> = class
  // - шаблонизируем, ибо мы скоро будем сериализовать и другие классы.
  strict private
   class var f_Marshal : TJSONMarshal;
@@ -110,15 +110,14 @@ class procedure TmsMarshal<TClassToSerialize>.DeSerialize(const aFileName: strin
 var
  l_StringList: TmsStringList;
  l_D : TObject;
- l_S : ImsSerializable;
 begin
  l_StringList := TmsStringList.Create;
  try
   l_StringList.LoadFromFile(aFileName);
   l_D := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text));
   try
-   if Supports(l_D, ImsSerializable, l_S) then
-    aDiagramm.Assign(l_S)
+   if (aDiagramm Is TmsDiagramm) then
+    (aDiagramm As TmsDiagramm).Assign(l_D As TmsDiagramm)
    else
     Assert(false);
   finally
@@ -140,7 +139,7 @@ begin
   l_Json := nil;
   try
    try
-    l_Json := Marshal.Marshal(aDiagramm.HackInstance) as TJSONObject;
+    l_Json := Marshal.Marshal(aDiagramm) as TJSONObject;
    except
     on E: Exception do
      ShowMessage(E.ClassName + ' поднята ошибка, с сообщением : ' + E.Message);

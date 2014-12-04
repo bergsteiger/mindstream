@@ -26,7 +26,7 @@ type
   function ShapeByPt(const aPoint: TPointF): ImsShape;
  end; // TmsShapeList
 
- TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapesController, {IInvokable,} ImsObjectWrap, ImsSerializable)
+ TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapesController)
  // - Выделяем интерфейс ImsObjectWrap.
  //   Смешно - если TmsDiagramm его реализет НАПРЯМУЮ, то всё хорошо.
  //   А если через ImsSerializable, то - AV.
@@ -58,7 +58,6 @@ type
   property CurrentClass: RmsShape read FCurrentClass write FCurrentClass;
   function pm_GetShapeList: TmsShapeList;
   procedure pm_SetShapeList(aValue: TmsShapeList);
-  function HackInstance: TObject;
  public
   constructor Create(anImage: TImage; const aName: String);
   procedure ResizeTo(anImage: TImage);
@@ -73,7 +72,7 @@ type
   function CurrentShapeClassIndex: Integer;
   procedure Serialize;
   procedure DeSerialize;
-  procedure Assign(const anOther : ImsSerializable);
+  procedure Assign(const anOther : TmsDiagramm);
  end;//TmsDiagramm
 
 implementation
@@ -179,13 +178,10 @@ begin
  Result := FCurrentAddedShape;
 end;
 
-procedure TmsDiagramm.Assign(const anOther : ImsSerializable);
-var
- l_D : TmsDiagramm;
+procedure TmsDiagramm.Assign(const anOther : TmsDiagramm);
 begin
- l_D := anOther.HackInstance As TmsDiagramm;
- Self.ShapeList := l_D.ShapeList;
- Self.Name := l_D.Name;
+ Self.ShapeList := anOther.ShapeList;
+ Self.Name := anOther.Name;
  Self.Invalidate;
 end;
 
@@ -226,11 +222,6 @@ begin
  CurrentAddedShape.EndTo(TmsEndShapeContext.Create(aFinish, Self));
  FCurrentAddedShape := nil;
  Invalidate;
-end;
-
-function TmsDiagramm.HackInstance: TObject;
-begin
- Result := Self;
 end;
 
 procedure TmsDiagramm.Invalidate;

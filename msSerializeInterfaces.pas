@@ -8,11 +8,6 @@ type
   function HackInstance: TObject;
  end;//ImsObjectWrap
 
- ImsSerializable = interface(ImsObjectWrap)
- ['{11C7EA88-2267-4B6B-A5E0-2A3D1B135131}']
-  procedure Assign(const anOther : ImsSerializable);
- end;//ImsSerializable
-
 implementation
 
 end.
