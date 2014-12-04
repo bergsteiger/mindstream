@@ -1,21 +1,21 @@
-﻿{$IfNDef TmsMarshal_uses_intf}
+﻿{$IfNDef TmsWatchedObject_uses_intf}
 
 // interface
 
-{$Define TmsMarshal_uses_intf}
+{$Define TmsWatchedObject_uses_intf}
 
 // uses
 
  msCoreObjects
 
-{$Else TmsMarshal_uses_intf}
+{$Else TmsWatchedObject_uses_intf}
 
-{$IfNDef TmsMarshal}
+{$IfNDef TmsWatchedObject}
 // http://programmingmindstream.blogspot.ru/2014/12/generic-2.html
 
-{$Define TmsMarshal}
+{$Define TmsWatchedObject}
 
- TmsWatchedObject = class abstract(TObject)
+ TmsWatchedObject = class abstract(TmsWatchedObjectParent)
  // - Класс, который умеет контроллировать создание/уничтожение своих экземпляров
  public
   class function NewInstance: TObject; override;
@@ -24,18 +24,18 @@
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
  end;//TmsWatchedObject
 
-{$Else TmsMarshal}
+{$Else TmsWatchedObject}
 
 // implementation
 
-{$IfNDef TmsMarshal_uses_impl}
+{$IfNDef TmsWatchedObject_uses_impl}
 
 // uses
  SysUtils
 
-{$Define TmsMarshal_uses_impl}
+{$Define TmsWatchedObject_uses_impl}
 
-{$Else TmsMarshal_uses_impl}
+{$Else TmsWatchedObject_uses_impl}
 
 // TmsWatchedObject
 
@@ -49,7 +49,7 @@ begin
  TmsObjectsWatcher.DestroyObject(Self);
 end;
 
-{$EndIf TmsMarshal_uses_impl}
+{$EndIf TmsWatchedObject_uses_impl}
 
-{$EndIf TmsMarshal}
-{$EndIf TmsMarshal_uses_intf}
+{$EndIf TmsWatchedObject}
+{$EndIf TmsWatchedObject_uses_intf}
