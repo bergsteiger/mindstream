@@ -22,7 +22,7 @@ type
   [JSONMarshalled(True)]
   f_Diagramms : TmsDiagrammList;
   [JSONMarshalled(False)]
-  f_CurrentDiagramm : TmsDiagramm;
+  f_CurrentDiagramm : Integer;
   function pm_GetCurrentDiagramm: TmsDiagramm;
   function pm_GetDiagramms: TmsDiagrammList;
   procedure pm_SetDiagramms(aValue: TmsDiagrammList);
@@ -59,7 +59,7 @@ end;
 
 function TmsDiagramms.pm_GetCurrentDiagramm: TmsDiagramm;
 begin
- Result := f_CurrentDiagramm;
+ Result := f_Diagramms[f_CurrentDiagramm];
 end;
 
 function TmsDiagramms.pm_GetDiagramms: TmsDiagrammList;
@@ -85,23 +85,27 @@ begin
 end;
 
 procedure TmsDiagramms.AddDiagramm(anImage: TImage; aList: TStrings);
+var
+ l_D : TmsDiagramm;
 begin
- f_CurrentDiagramm := TmsDiagramm.Create(anImage, 'Диаграмма №' + IntToStr(f_Diagramms.Count + 1));
- f_Diagramms.Add(f_CurrentDiagramm);
+ l_D := TmsDiagramm.Create(anImage, 'Диаграмма №' + IntToStr(f_Diagramms.Count + 1));
+ f_Diagramms.Add(l_D);
+ f_CurrentDiagramm := f_Diagramms.IndexOf(l_D);
  if (aList <> nil) then
-  aList.AddObject(f_CurrentDiagramm.Name, f_CurrentDiagramm);
+  aList.Add(l_D.Name);
+//  aList.AddObject(l_D.Name, TObject(f_CurrentDiagramm));
 end;
 
 function TmsDiagramms.CurrentDiagrammIndex: Integer;
 begin
- Result := f_Diagramms.IndexOf(f_CurrentDiagramm);
+ Result := f_CurrentDiagramm;
 end;
 
 procedure TmsDiagramms.SelectDiagramm(anIndex: Integer);
 begin
  if (anIndex < 0) OR (anIndex >= f_Diagramms.Count) then
   Exit;
- f_CurrentDiagramm := f_Diagramms.Items[anIndex];
+ f_CurrentDiagramm := anIndex;
  CurrentDiagramm.Invalidate;
 end;
 
