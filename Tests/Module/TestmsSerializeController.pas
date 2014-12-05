@@ -18,6 +18,8 @@ type
   TmsShapeTestPrim = class abstract(TTestCase)
   public
     class procedure CheckShapes(aCheck: TmsShapeClassCheck);
+    function TestResultsFileName(aShapeClass: RmsShape): String;
+    function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
   end;//TmsShapeTestPrim
 
   TmsShapeTestContext = record
@@ -38,8 +40,6 @@ type
   protected
     procedure SetUp; override;
     procedure CheckFileWithEtalon(const aFileName: String);
-    function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
-    function TestResultsFileName(aShapeClass: RmsShape): String;
     procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
     function ShapesCount: Integer;
     procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
@@ -87,7 +87,7 @@ implementation
   msStringList
   ;
 
-function TestTmsSerializeControllerPrim.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
+function TmsShapeTestPrim.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
 var
  l_Folder : String;
 begin
@@ -126,7 +126,7 @@ begin
  end;//FileExists(l_FileNameEtalon)
 end;
 
-function TestTmsSerializeControllerPrim.TestResultsFileName(aShapeClass: RmsShape): String;
+function TmsShapeTestPrim.TestResultsFileName(aShapeClass: RmsShape): String;
 begin
  Result := MakeFileName(Name, aShapeClass);
 end;
