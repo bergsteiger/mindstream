@@ -197,14 +197,12 @@ begin
    TmsLog.Log(ParamStr(0) + '.objects.log',
     procedure (aLog: TmsLog)
     var
-     l_Key : String;
-     l_Value : TmsClassInstanceCount;
+     l_Item : TPair<String, TmsClassInstanceCount>;
     begin
      aLog.ToLog('Неосвобождено объектов: ' + IntToStr(f_ObjectsCreatedCount));
-     for l_Key in f_ObjectsCreated.Keys do
+     for l_Item in f_ObjectsCreated do
      begin
-      l_Value := f_ObjectsCreated[l_Key];
-      aLog.ToLog(l_Key + ' Неосвобождено: ' + IntToStr(l_Value.rCount) + ' Максимально распределено: ' + IntToStr(l_Value.rMaxCount));
+      aLog.ToLog(l_Item.Key + ' Неосвобождено: ' + IntToStr(l_Item.Value.rCount) + ' Максимально распределено: ' + IntToStr(l_Item.Value.rMaxCount));
      end;//for l_Key
     end
    );
