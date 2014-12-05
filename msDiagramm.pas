@@ -29,7 +29,8 @@ type
  end; // TmsShapeList
 
  TmsItemsHolderParent = TmsInterfacedNonRefcounted;
- TmsItem = ImsShape;
+ TmsItemGet = ImsShape;
+ TmsItemSet = TmsShape;
  TmsItemsList = TmsShapeList;
  {$Include msItemsHolder.mixin.pas}
  TmsDiagramm = class(TmsItemsHolder, ImsShapeByPt, ImsShapesController)

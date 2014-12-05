@@ -31,6 +31,7 @@
   property Items: TmsItemsList read pm_GetItems write pm_SetItems;
   procedure Assign(anOther : TmsItemsHolder);
   class procedure RegisterInMarshal(aMarshal: TJSONMarshal);
+  class procedure RegisterInUnMarshal(aMarshal: TJSONUnMarshal);
  end;//TmsItemsHolder
 
 {$Else TmsItemsHolder_intf}
@@ -70,7 +71,7 @@ end;
 
 procedure TmsItemsHolder.pm_SetItems(aValue: TmsItemsList);
 var
- l_Item : TmsItem;
+ l_Item : TmsItemGet;
 begin
  if (f_Items <> nil) then
   f_Items.Clear;
@@ -113,7 +114,7 @@ begin
    aMarshal.RegisterConverter(Self, l_FieldName,
     function (Data: TObject; Field: String): TListOfObjects
     var
-     l_Item: TmsItem;
+     l_Item: TmsItemGet;
      l_Index: Integer;
     begin
      Assert(Field = l_FieldName);
@@ -126,6 +127,36 @@ begin
      end;//for l_Item
     end
    );//aMarshal.RegisterConverter
+  end
+ );//RegisterItemsLike
+end;
+
+class procedure TmsItemsHolder.RegisterInUnMarshal(aMarshal: TJSONUnMarshal);
+begin
+ RegisterItemsLike(
+  procedure (aField: TRttiField)
+  var
+   l_FieldName : String;
+  begin
+   l_FieldName := aField.Name;
+   aMarshal.RegisterReverter(TmsDiagramm, l_FieldName,
+    procedure (Data: TObject; Field: String; Args: TListOfObjects)
+    var
+     l_Object: TObject;
+     l_Diagramm : TmsItemsHolder;
+     l_Item: TmsItemSet;
+    begin
+     Assert(Data Is TmsItemsHolder);
+     l_Diagramm := TmsItemsHolder(Data);
+     Assert(l_Diagramm <> nil);
+
+     for l_Object in Args do
+     begin
+      l_Item := l_Object as TmsItemSet;
+      l_Diagramm.Items.Add(l_Item);
+     end//for l_Object
+    end
+   );//aMarshal.RegisterReverter
   end
  );//RegisterItemsLike
 end;

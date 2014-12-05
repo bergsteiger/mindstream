@@ -19,7 +19,8 @@ type
  end;//TmsDiagrammList
 
  TmsItemsHolderParent = TmsWatchedObject;
- TmsItem = TmsDiagramm;
+ TmsItemGet = TmsDiagramm;
+ TmsItemSet = TmsDiagramm;
  TmsItemsList = TmsDiagrammList;
  {$Include msItemsHolder.mixin.pas}
  TmsDiagramms = class(TmsItemsHolder)
