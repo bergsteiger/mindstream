@@ -15,11 +15,15 @@ uses
 type
   TmsShapeClassCheck = TmsShapeClassLambda;
 
+  TmsDiagrammCheck = reference to procedure (aDiagramm : TmsDiagramm);
+
   TmsShapeTestPrim = class abstract(TTestCase)
-  public
-    class procedure CheckShapes(aCheck: TmsShapeClassCheck);
+  protected
     function TestResultsFileName(aShapeClass: RmsShape): String;
     function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
+    procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
+  public
+    class procedure CheckShapes(aCheck: TmsShapeClassCheck);
   end;//TmsShapeTestPrim
 
   TmsShapeTestContext = record
@@ -31,8 +35,6 @@ type
    constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName : String; aShapesCount : Integer; aShapeClass: RmsShape);
   end;//TmsShapeTestContext
 
-  TmsDiagrammCheck = reference to procedure (aDiagramm : TmsDiagramm);
-
   TestTmsSerializeControllerPrim = class abstract(TmsShapeTestPrim)
   protected
    f_Coords : array of TPoint;
@@ -42,7 +44,6 @@ type
     procedure CheckFileWithEtalon(const aFileName: String);
     procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
     function ShapesCount: Integer;
-    procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
     procedure CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
     function TestSerializeMethodName: String; virtual;
     procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck; aShapeClass: RmsShape);
@@ -171,7 +172,7 @@ begin
  end;//for l_Index
 end;
 
-procedure TestTmsSerializeControllerPrim.CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
+procedure TmsShapeTestPrim.CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
 var
  l_Diagramm: TmsDiagramm;
 begin
