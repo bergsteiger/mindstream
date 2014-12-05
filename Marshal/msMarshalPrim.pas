@@ -43,22 +43,7 @@ begin
   f_Marshal := TJSONMarshal.Create;
 
   TmsDiagramm.RegisterInMarshal(f_Marshal);
-  f_Marshal.RegisterConverter(TmsDiagramms, 'f_Items',
-   function (Data: TObject; Field: string): TListOfObjects
-   var
-    l_D: TmsDiagramm;
-    l_Index: Integer;
-   begin
-    Assert(Field = 'FShapeList');
-    SetLength(Result, (Data As TmsDiagramms).Items.Count);
-    l_Index := 0;
-    for l_D in (Data As TmsDiagramms).Items do
-    begin
-     Result[l_Index] := l_D;
-     Inc(l_Index);
-    end; // for l_Shape
-   end
-  );//f_Marshal.RegisterConverter
+  TmsDiagramms.RegisterInMarshal(f_Marshal);
 
   TmsRegisteredShapes.IterateShapes(
    procedure (aShapeClass: RmsShape)
