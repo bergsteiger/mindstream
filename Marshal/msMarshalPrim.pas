@@ -41,10 +41,8 @@ begin
  if (f_Marshal = nil) then
  begin
   f_Marshal := TJSONMarshal.Create;
-
   TmsDiagramm.RegisterInMarshal(f_Marshal);
   TmsDiagramms.RegisterInMarshal(f_Marshal);
-
   TmsRegisteredShapes.IterateShapes(
    procedure (aShapeClass: RmsShape)
    begin
@@ -60,26 +58,8 @@ begin
  if (f_UnMarshal = nil) then
  begin
   f_UnMarshal := TJSONUnMarshal.Create;
-
   TmsDiagramm.RegisterInUnMarshal(f_UnMarshal);
-  f_UnMarshal.RegisterReverter(TmsDiagramms, 'f_Items',
-   procedure (Data: TObject; Field: String; Args: TListOfObjects)
-   var
-    l_Object: TObject;
-    l_Diagramms : TmsDiagramms;
-    l_D: TmsDiagramm;
-   begin
-    Assert(Data Is TmsDiagramms);
-    l_Diagramms := TmsDiagramms(Data);
-    assert(l_Diagramms <> nil);
-
-    for l_Object in Args do
-    begin
-     l_D := l_Object as TmsDiagramm;
-     l_Diagramms.Items.Add(l_D);
-    end//for l_Object
-   end
-  );//f_UnMarshal.RegisterReverter
+  TmsDiagramms.RegisterInUnMarshal(f_UnMarshal);
  end;//f_UnMarshal = nil
  Result := f_UnMarshal;
 end;

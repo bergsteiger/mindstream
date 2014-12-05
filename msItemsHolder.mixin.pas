@@ -139,21 +139,21 @@ begin
    l_FieldName : String;
   begin
    l_FieldName := aField.Name;
-   aMarshal.RegisterReverter(TmsDiagramm, l_FieldName,
+   aMarshal.RegisterReverter(Self, l_FieldName,
     procedure (Data: TObject; Field: String; Args: TListOfObjects)
     var
      l_Object: TObject;
-     l_Diagramm : TmsItemsHolder;
+     l_Holder : TmsItemsHolder;
      l_Item: TmsItemSet;
     begin
-     Assert(Data Is TmsItemsHolder);
-     l_Diagramm := TmsItemsHolder(Data);
-     Assert(l_Diagramm <> nil);
+     Assert(Field = l_FieldName);
+     l_Holder := Data As TmsItemsHolder;
+     Assert(l_Holder <> nil);
 
      for l_Object in Args do
      begin
       l_Item := l_Object as TmsItemSet;
-      l_Diagramm.Items.Add(l_Item);
+      l_Holder.Items.Add(l_Item);
      end//for l_Object
     end
    );//aMarshal.RegisterReverter
