@@ -99,7 +99,7 @@ begin
    begin
     aLambda(l_Field);
     Exit;
-   end;
+   end;//l_Field.Name = 'f_Items'
  Assert(false, 'Не найдено поля для Items');
 end;
 
