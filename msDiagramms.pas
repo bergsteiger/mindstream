@@ -42,6 +42,7 @@ type
   procedure DeSerialize;
   property Diagramms: TmsDiagrammList read pm_GetDiagramms write pm_SetDiagramms;
   property CurrentDiagramm: TmsDiagramm read pm_GetCurrentDiagramm;
+  procedure Assign(anOther: TmsDiagramms);
  end;//TmsDiagramms
 
 implementation
@@ -112,6 +113,13 @@ end;
 procedure TmsDiagramms.DeSerialize;
 begin
  CurrentDiagramm.DeSerialize;
+end;
+
+procedure TmsDiagramms.Assign(anOther: TmsDiagramms);
+begin
+ Self.Diagramms := anOther.Diagramms;
+ Self.f_CurrentDiagramm := anOther.CurrentDiagrammIndex;
+ CurrentDiagramm.Invalidate;
 end;
 
 destructor TmsDiagramms.Destroy;

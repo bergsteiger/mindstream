@@ -37,6 +37,7 @@ uses
   msSerializeInterfaces in 'msSerializeInterfaces.pas',
   msTool in 'ShapeTools\msTool.pas',
   msDiagrammMarshal in 'Marshal\msDiagrammMarshal.pas',
+  msDiagrammsMarshal in 'Marshal\msDiagrammsMarshal.pas',
   msInterfacedNonRefcounted in 'Core\msInterfacedNonRefcounted.pas',
   msWatchedObjectInstance in 'Core\msWatchedObjectInstance.pas',
   msStringList in 'Core\msStringList.pas',
