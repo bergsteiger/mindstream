@@ -4,6 +4,7 @@ interface
 
 uses
  {$Include msItemsHolder.mixin.pas}
+ ,
  FMX.Graphics,
  Generics.Collections,
  System.SysUtils,
@@ -16,7 +17,6 @@ uses
  msRegisteredShapes,
  FMX.Dialogs,
  System.JSON,
- Data.DBXJSONReflect,
  msCoreObjects,
  msSerializeInterfaces,
  msInterfacedNonRefcounted
@@ -28,8 +28,10 @@ type
   function ShapeByPt(const aPoint: TPointF): ImsShape;
  end; // TmsShapeList
 
+ TmsItemsHolderParent = TmsInterfacedNonRefcounted;
+ TmsItemsList = TmsShapeList;
  {$Include msItemsHolder.mixin.pas}
- TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapesController)
+ TmsDiagramm = class(TmsItemsHolder, ImsShapeByPt, ImsShapesController)
  // - Выделяем интерфейс ImsObjectWrap.
  //   Смешно - если TmsDiagramm его реализет НАПРЯМУЮ, то всё хорошо.
  //   А если через ImsSerializable, то - AV.
@@ -41,8 +43,6 @@ type
   FCurrentClass: RmsShape;
   [JSONMarshalled(False)]
   FCurrentAddedShape: ImsShape;
-  [JSONMarshalled(False)]
-  FMovingShape: TmsShape;
   [JSONMarshalled(False)]
   FCanvas: TCanvas;
   [JSONMarshalled(False)]
