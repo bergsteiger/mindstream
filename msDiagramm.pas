@@ -3,6 +3,7 @@ unit msDiagramm;
 interface
 
 uses
+ {$Include msItemsHolder.mixin.pas}
  FMX.Graphics,
  Generics.Collections,
  System.SysUtils,
@@ -27,6 +28,7 @@ type
   function ShapeByPt(const aPoint: TPointF): ImsShape;
  end; // TmsShapeList
 
+ {$Include msItemsHolder.mixin.pas}
  TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapesController)
  // - Выделяем интерфейс ImsObjectWrap.
  //   Смешно - если TmsDiagramm его реализет НАПРЯМУЮ, то всё хорошо.
@@ -79,10 +81,13 @@ type
 implementation
 
 uses
+ {$Include msItemsHolder.mixin.pas}
  msMover,
  msCircle,
  msDiagrammMarshal
  ;
+
+{$Include msItemsHolder.mixin.pas}
 
 const
  c_FileName = '.json';
