@@ -59,16 +59,16 @@ begin
    end
   );//f_Marshal.RegisterConverter
 
-  f_Marshal.RegisterConverter(TmsDiagramms, 'f_Diagramms',
+  f_Marshal.RegisterConverter(TmsDiagramms, 'f_Items',
    function (Data: TObject; Field: string): TListOfObjects
    var
     l_D: TmsDiagramm;
     l_Index: Integer;
    begin
     Assert(Field = 'FShapeList');
-    SetLength(Result, (Data As TmsDiagramms).Diagramms.Count);
+    SetLength(Result, (Data As TmsDiagramms).Items.Count);
     l_Index := 0;
-    for l_D in (Data As TmsDiagramms).Diagramms do
+    for l_D in (Data As TmsDiagramms).Items do
     begin
      Result[l_Index] := l_D;
      Inc(l_Index);
@@ -111,7 +111,7 @@ begin
    end
   );//f_UnMarshal.RegisterReverter
 
-  f_UnMarshal.RegisterReverter(TmsDiagramms, 'f_Diagramms',
+  f_UnMarshal.RegisterReverter(TmsDiagramms, 'f_Items',
    procedure (Data: TObject; Field: String; Args: TListOfObjects)
    var
     l_Object: TObject;
@@ -125,7 +125,7 @@ begin
     for l_Object in Args do
     begin
      l_D := l_Object as TmsDiagramm;
-     l_Diagramms.Diagramms.Add(l_D);
+     l_Diagramms.Items.Add(l_D);
     end//for l_Object
    end
   );//f_UnMarshal.RegisterReverter
