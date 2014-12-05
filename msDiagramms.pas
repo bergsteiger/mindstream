@@ -21,7 +21,7 @@ type
  private
   [JSONMarshalled(True)]
   f_Diagramms : TmsDiagrammList;
-  [JSONMarshalled(False)]
+  [JSONMarshalled(True)]
   f_CurrentDiagramm : Integer;
   function pm_GetCurrentDiagramm: TmsDiagramm;
   function pm_GetDiagramms: TmsDiagrammList;

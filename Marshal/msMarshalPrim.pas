@@ -23,6 +23,7 @@ uses
  SysUtils,
  msShape,
  msDiagramm,
+ msDiagramms,
  msSerializeInterfaces,
  msRegisteredShapes
  ;
@@ -53,6 +54,23 @@ begin
     for l_Shape in (Data As TmsDiagramm).ShapeList do
     begin
      Result[l_Index] := (l_Shape As ImsObjectWrap).HackInstance;
+     Inc(l_Index);
+    end; // for l_Shape
+   end
+  );//f_Marshal.RegisterConverter
+
+  f_Marshal.RegisterConverter(TmsDiagramms, 'f_Diagramms',
+   function (Data: TObject; Field: string): TListOfObjects
+   var
+    l_D: TmsDiagramm;
+    l_Index: Integer;
+   begin
+    Assert(Field = 'FShapeList');
+    SetLength(Result, (Data As TmsDiagramms).Diagramms.Count);
+    l_Index := 0;
+    for l_D in (Data As TmsDiagramms).Diagramms do
+    begin
+     Result[l_Index] := l_D;
      Inc(l_Index);
     end; // for l_Shape
    end
@@ -89,6 +107,25 @@ begin
     begin
      l_msShape := l_Object as TmsShape;
      l_Diagramm.ShapeList.Add(l_msShape);
+    end//for l_Object
+   end
+  );//f_UnMarshal.RegisterReverter
+
+  f_UnMarshal.RegisterReverter(TmsDiagramms, 'f_Diagramms',
+   procedure (Data: TObject; Field: String; Args: TListOfObjects)
+   var
+    l_Object: TObject;
+    l_Diagramms : TmsDiagramms;
+    l_D: TmsDiagramm;
+   begin
+    Assert(Data Is TmsDiagramms);
+    l_Diagramms := TmsDiagramms(Data);
+    assert(l_Diagramms <> nil);
+
+    for l_Object in Args do
+    begin
+     l_D := l_Object as TmsDiagramm;
+     l_Diagramms.Diagramms.Add(l_D);
     end//for l_Object
    end
   );//f_UnMarshal.RegisterReverter
