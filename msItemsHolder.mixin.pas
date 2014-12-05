@@ -26,6 +26,7 @@
   destructor Destroy; override;
   property Items: TmsItemsList read pm_GetItems write pm_SetItems;
   procedure Assign(anOther : TmsItemsHolder);
+  class procedure RegisterInMarshal(aMarshal: TJSONMarshal);
  end;//TmsItemsHolder
 
 {$Else TmsItemsHolder_intf}
@@ -80,6 +81,26 @@ end;
 procedure TmsItemsHolder.Assign(anOther : TmsItemsHolder);
 begin
  Self.Items := anOther.Items;
+end;
+
+class procedure TmsItemsHolder.RegisterInMarshal(aMarshal: TJSONMarshal);
+begin
+ aMarshal.RegisterConverter(Self, 'f_Items',
+  function (Data: TObject; Field: string): TListOfObjects
+  var
+   l_Item: TmsItem;
+   l_Index: Integer;
+  begin
+   Assert(Field = 'f_Items');
+   SetLength(Result, (Data As TmsItemsHolder).Items.Count);
+   l_Index := 0;
+   for l_Item in (Data As TmsItemsHolder).Items do
+   begin
+    Result[l_Index] := l_Item.toObject;
+    Inc(l_Index);
+   end;//for l_Item
+  end
+ );//aMarshal.RegisterConverter
 end;
 
 {$EndIf TmsItemsHolder_uses_impl}

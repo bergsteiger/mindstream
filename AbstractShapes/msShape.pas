@@ -64,9 +64,10 @@ type
   procedure EndTo(const aCtx: TmsEndShapeContext);
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
+  function toObject: TObject;
  end;//ImsShape
 
- TmsShape = class abstract (TmsInterfacedRefcounted, ImsShape, ImsObjectWrap)
+ TmsShape = class abstract (TmsInterfacedRefcounted, ImsShape)
  private
   FStartPoint: TPointF;
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
@@ -78,7 +79,7 @@ type
   procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
-  function HackInstance: TObject;
+  function toObject: TObject;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; virtual;
   // - фабричный метод, который создаёт экземпляр класса как интерфейс
@@ -131,7 +132,7 @@ begin
  FStartPoint := aFinishPoint;
 end;
 
-function TmsShape.HackInstance: TObject;
+function TmsShape.toObject: TObject;
 begin
  Result := Self;
 end;

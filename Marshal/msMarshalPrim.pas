@@ -53,7 +53,7 @@ begin
     l_Index := 0;
     for l_Shape in (Data As TmsDiagramm).Items do
     begin
-     Result[l_Index] := (l_Shape As ImsObjectWrap).HackInstance;
+     Result[l_Index] := l_Shape.toObject;
      Inc(l_Index);
     end; // for l_Shape
    end

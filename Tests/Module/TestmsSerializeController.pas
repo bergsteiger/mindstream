@@ -264,7 +264,7 @@ begin
    Check(Length(f_Coords) = aDiagramm.Items.Count);
    for l_Index := 0 to Pred(aDiagramm.Items.Count) do
    begin
-    l_Shape := (aDiagramm.Items[l_Index] As ImsObjectWrap).HackInstance As TmsShape;
+    l_Shape := aDiagramm.Items[l_Index].toObject As TmsShape;
     Check(l_Shape.ClassType = aShapeClass);
     Check(l_Shape.StartPoint.X = f_Coords[l_Index].X);
     Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y);
