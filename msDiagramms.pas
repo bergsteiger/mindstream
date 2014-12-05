@@ -23,6 +23,7 @@ type
   f_Diagramms : TmsDiagrammList;
   [JSONMarshalled(False)]
   f_CurrentDiagramm : TmsDiagramm;
+  function pm_GetCurrentDiagramm: TmsDiagramm;
   function pm_GetDiagramms: TmsDiagrammList;
   procedure pm_SetDiagramms(aValue: TmsDiagrammList);
  public
@@ -40,6 +41,7 @@ type
   procedure Serialize;
   procedure DeSerialize;
   property Diagramms: TmsDiagrammList read pm_GetDiagramms write pm_SetDiagramms;
+  property CurrentDiagramm: TmsDiagramm read pm_GetCurrentDiagramm;
  end;//TmsDiagramms
 
 implementation
@@ -53,6 +55,11 @@ begin
  inherited Create;
  f_Diagramms := TmsDiagrammList.Create;
  AddDiagramm(anImage, aList);
+end;
+
+function TmsDiagramms.pm_GetCurrentDiagramm: TmsDiagramm;
+begin
+ Result := f_CurrentDiagramm;
 end;
 
 function TmsDiagramms.pm_GetDiagramms: TmsDiagrammList;
@@ -95,12 +102,12 @@ begin
  if (anIndex < 0) OR (anIndex >= f_Diagramms.Count) then
   Exit;
  f_CurrentDiagramm := f_Diagramms.Items[anIndex];
- f_CurrentDiagramm.Invalidate;
+ CurrentDiagramm.Invalidate;
 end;
 
 procedure TmsDiagramms.DeSerialize;
 begin
- f_CurrentDiagramm.DeSerialize;
+ CurrentDiagramm.DeSerialize;
 end;
 
 destructor TmsDiagramms.Destroy;
@@ -111,37 +118,37 @@ end;
 
 procedure TmsDiagramms.ProcessClick(const aStart: TPointF);
 begin
- f_CurrentDiagramm.ProcessClick(aStart);
+ CurrentDiagramm.ProcessClick(aStart);
 end;
 
 procedure TmsDiagramms.Clear;
 begin
- f_CurrentDiagramm.Clear;
+ CurrentDiagramm.Clear;
 end;
 
 procedure TmsDiagramms.SelectShape(aList: TStrings; anIndex: Integer);
 begin
- f_CurrentDiagramm.SelectShape(aList, anIndex);
+ CurrentDiagramm.SelectShape(aList, anIndex);
 end;
 
 procedure TmsDiagramms.Serialize;
 begin
- f_CurrentDiagramm.Serialize;
+ CurrentDiagramm.Serialize;
 end;
 
 procedure TmsDiagramms.AllowedShapesToList(aList: TStrings);
 begin
- f_CurrentDiagramm.AllowedShapesToList(aList);
+ CurrentDiagramm.AllowedShapesToList(aList);
 end;
 
 procedure TmsDiagramms.ResizeTo(anImage: TImage);
 begin
- f_CurrentDiagramm.ResizeTo(anImage);
+ CurrentDiagramm.ResizeTo(anImage);
 end;
 
 function TmsDiagramms.CurrentShapeClassIndex: Integer;
 begin
- Result := f_CurrentDiagramm.CurrentShapeClassIndex;
+ Result := CurrentDiagramm.CurrentShapeClassIndex;
 end;
 
 end.
