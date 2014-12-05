@@ -22,6 +22,7 @@ type
     function TestResultsFileName(aShapeClass: RmsShape): String;
     function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
     procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
+    procedure CheckFileWithEtalon(const aFileName: String);
   public
     class procedure CheckShapes(aCheck: TmsShapeClassCheck);
   end;//TmsShapeTestPrim
@@ -41,7 +42,6 @@ type
    f_Context : TmsShapeTestContext;
   protected
     procedure SetUp; override;
-    procedure CheckFileWithEtalon(const aFileName: String);
     procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
     function ShapesCount: Integer;
     procedure CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
@@ -97,7 +97,7 @@ begin
  Result := l_Folder + ClassName + '_' + aTestName + '_' + aShapeClass.ClassName + '.json';
 end;
 
-procedure TestTmsSerializeControllerPrim.CheckFileWithEtalon(const aFileName: String);
+procedure TmsShapeTestPrim.CheckFileWithEtalon(const aFileName: String);
 var
  l_FileSerialized, l_FileEtalon: TmsStringList;
  l_FileNameEtalon : String;
