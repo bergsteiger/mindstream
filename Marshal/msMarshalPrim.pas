@@ -42,16 +42,16 @@ begin
  begin
   f_Marshal := TJSONMarshal.Create;
 
-  f_Marshal.RegisterConverter(TmsDiagramm, 'FShapeList',
+  f_Marshal.RegisterConverter(TmsDiagramm, 'f_Items',
    function (Data: TObject; Field: string): TListOfObjects
    var
     l_Shape: ImsShape;
     l_Index: Integer;
    begin
-    Assert(Field = 'FShapeList');
-    SetLength(Result, (Data As TmsDiagramm).ShapeList.Count);
+    Assert(Field = 'f_Items');
+    SetLength(Result, (Data As TmsDiagramm).Items.Count);
     l_Index := 0;
-    for l_Shape in (Data As TmsDiagramm).ShapeList do
+    for l_Shape in (Data As TmsDiagramm).Items do
     begin
      Result[l_Index] := (l_Shape As ImsObjectWrap).HackInstance;
      Inc(l_Index);
@@ -92,7 +92,7 @@ begin
  begin
   f_UnMarshal := TJSONUnMarshal.Create;
 
-  f_UnMarshal.RegisterReverter(TmsDiagramm, 'FShapeList',
+  f_UnMarshal.RegisterReverter(TmsDiagramm, 'f_Items',
    procedure (Data: TObject; Field: String; Args: TListOfObjects)
    var
     l_Object: TObject;
@@ -106,7 +106,7 @@ begin
     for l_Object in Args do
     begin
      l_msShape := l_Object as TmsShape;
-     l_Diagramm.ShapeList.Add(l_msShape);
+     l_Diagramm.Items.Add(l_msShape);
     end//for l_Object
    end
   );//f_UnMarshal.RegisterReverter

@@ -66,7 +66,7 @@ procedure TestTmsLine.TestMoveTo;
 var
   aFinishPoint: TPointF;
 begin
-  ExpectedException := EAssertionFailed;
+  ExpectedException := EmsLineCannotBeMoved;
   // TODO: Setup method call parameters
   FmsLine.MoveTo(aFinishPoint);
   // TODO: Validate method results

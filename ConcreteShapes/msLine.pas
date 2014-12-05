@@ -5,7 +5,8 @@ interface
 uses
  msShape,
  FMX.Graphics,
- System.Types
+ System.Types,
+ SysUtils
  ;
 
 type
@@ -20,12 +21,14 @@ type
   function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aCtx: TmsEndShapeContext); override;
   procedure MoveTo(const aFinishPoint: TPointF); override;
- end;
+ end;//TmsLine
+
+ EmsLineCannotBeMoved = class(Exception)
+ end;//EmsLineCannotBeMoved
 
 implementation
 
 uses
- SysUtils,
  msPointCircle
  ;
 
@@ -42,7 +45,7 @@ end;
 
 procedure TmsLine.MoveTo(const aFinishPoint: TPointF);
 begin
- Assert(false, 'Примитив ' + ClassName + ' не может быть перемещён');
+ raise EmsLineCannotBeMoved.Create('Примитив ' + ClassName + ' не может быть перемещён');
 end;
 
 procedure TmsLine.DoDrawTo(const aCtx: TmsDrawContext);

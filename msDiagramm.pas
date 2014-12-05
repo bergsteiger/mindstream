@@ -29,6 +29,7 @@ type
  end; // TmsShapeList
 
  TmsItemsHolderParent = TmsInterfacedNonRefcounted;
+ TmsItem = ImsShape;
  TmsItemsList = TmsShapeList;
  {$Include msItemsHolder.mixin.pas}
  TmsDiagramm = class(TmsItemsHolder, ImsShapeByPt, ImsShapesController)
@@ -37,8 +38,6 @@ type
  //   А если через ImsSerializable, то - AV.
  //   Про это можно писать отдельную статью.
  private
-  [JSONMarshalled(True)]
-  FShapeList: TmsShapeList;
   [JSONMarshalled(False)]
   FCurrentClass: RmsShape;
   [JSONMarshalled(False)]
@@ -59,19 +58,15 @@ type
   function ShapeByPt(const aPoint: TPointF): ImsShape;
   procedure RemoveShape(const aShape: ImsShape);
   property CurrentClass: RmsShape read FCurrentClass write FCurrentClass;
-  function pm_GetShapeList: TmsShapeList;
-  procedure pm_SetShapeList(aValue: TmsShapeList);
  public
   constructor Create(anImage: TImage; const aName: String);
   procedure ResizeTo(anImage: TImage);
-  destructor Destroy; override;
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
   procedure Invalidate;
   procedure AllowedShapesToList(aList: TStrings);
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   property Name: String read fName write fName;
-  property ShapeList: TmsShapeList read pm_GetShapeList write pm_SetShapeList;
   function CurrentShapeClassIndex: Integer;
   procedure Serialize;
   procedure DeSerialize;
@@ -137,7 +132,7 @@ begin
  FCurrentAddedShape := CurrentClass.Create(TmsMakeShapeContext.Create(aStart, Self));
  if (FCurrentAddedShape <> nil) then
  begin
-  FShapeList.Add(FCurrentAddedShape);
+  Items.Add(FCurrentAddedShape);
   if not FCurrentAddedShape.IsNeedsSecondClick then
    // - если не надо SecondClick, то наш примитив - завершён
    FCurrentAddedShape := nil;
@@ -147,15 +142,14 @@ end;
 
 procedure TmsDiagramm.Clear;
 begin
- if (FShapeList <> nil) then
-  FShapeList.Clear;
+ if (f_Items <> nil) then
+  f_Items.Clear;
  Invalidate;
 end;
 
 constructor TmsDiagramm.Create(anImage: TImage; const aName: String);
 begin
  inherited Create;
- FShapeList := TmsShapeList.Create;
  FCurrentAddedShape := nil;
  FCanvas := nil;
  FOrigin := TPointF.Create(0, 0);
@@ -186,7 +180,7 @@ end;
 
 procedure TmsDiagramm.Assign(const anOther : TmsDiagramm);
 begin
- Self.ShapeList := anOther.ShapeList;
+ Self.Items := anOther.Items;
  Self.Name := anOther.Name;
  Self.Invalidate;
 end;
@@ -202,20 +196,14 @@ begin
  end;//try..except
 end;
 
-destructor TmsDiagramm.Destroy;
-begin
- FreeAndNil(FShapeList);
- inherited;
-end;
-
 procedure TmsDiagramm.DrawTo(const aCanvas: TCanvas; const aOrigin: TPointF);
 var
  l_Shape: ImsShape;
 begin
  aCanvas.BeginScene;
  try
-  Assert(FShapeList <> nil);
-  for l_Shape in FShapeList do
+  Assert(f_Items <> nil);
+  for l_Shape in f_Items do
    l_Shape.DrawTo(TmsDrawContext.Create(aCanvas, aOrigin));
  finally
   aCanvas.EndScene;
@@ -252,35 +240,13 @@ end;
 function TmsDiagramm.ShapeByPt(const aPoint: TPointF): ImsShape;
 
 begin
- Result := FShapeList.ShapeByPt(aPoint);
+ Result := f_Items.ShapeByPt(aPoint);
 end;
 
 procedure TmsDiagramm.RemoveShape(const aShape: ImsShape);
 begin
- Assert(FShapeList <> nil);
- FShapeList.Remove(aShape);
-end;
-
-function TmsDiagramm.pm_GetShapeList: TmsShapeList;
-begin
- if (FShapeList = nil) then
-  FShapeList := TmsShapeList.Create;
- Result := FShapeList;
-end;
-
-procedure TmsDiagramm.pm_SetShapeList(aValue: TmsShapeList);
-var
- l_Shape : ImsShape;
-begin
- if (FShapeList <> nil) then
-  FShapeList.Clear;
- if (aValue <> nil) then
-  for l_Shape in aValue do
-  begin
-   if (FShapeList = nil) then
-    FShapeList := TmsShapeList.Create;
-   FShapeList.Add(l_Shape);
-  end;//for l_Shape in aValue
+ Assert(f_Items <> nil);
+ f_Items.Remove(aShape);
 end;
 
 function TmsShapeList.ShapeByPt(const aPoint: TPointF): ImsShape;

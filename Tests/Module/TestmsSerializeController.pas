@@ -199,7 +199,7 @@ begin
    l_P : TPoint;
   begin
    for l_P in f_Coords do
-    aDiagramm.ShapeList.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil)));
+    aDiagramm.Items.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil)));
    SaveDiagrammAndCheck(aShapeClass, aDiagramm);
   end
   , f_Context.rDiagrammName
@@ -259,12 +259,12 @@ begin
    l_Index : Integer;
   begin
    Check(aDiagramm.Name = f_Context.rDiagrammName);
-   Check(aDiagramm.ShapeList <> nil);
-   Check(aDiagramm.ShapeList.Count = ShapesCount);
-   Check(Length(f_Coords) = aDiagramm.ShapeList.Count);
-   for l_Index := 0 to Pred(aDiagramm.ShapeList.Count) do
+   Check(aDiagramm.Items <> nil);
+   Check(aDiagramm.Items.Count = ShapesCount);
+   Check(Length(f_Coords) = aDiagramm.Items.Count);
+   for l_Index := 0 to Pred(aDiagramm.Items.Count) do
    begin
-    l_Shape := (aDiagramm.ShapeList[l_Index] As ImsObjectWrap).HackInstance As TmsShape;
+    l_Shape := (aDiagramm.Items[l_Index] As ImsObjectWrap).HackInstance As TmsShape;
     Check(l_Shape.ClassType = aShapeClass);
     Check(l_Shape.StartPoint.X = f_Coords[l_Index].X);
     Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y);
