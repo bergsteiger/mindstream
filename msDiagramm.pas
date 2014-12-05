@@ -180,7 +180,7 @@ end;
 
 procedure TmsDiagramm.Assign(const anOther : TmsDiagramm);
 begin
- Self.Items := anOther.Items;
+ inherited Assign(anOther);
  Self.Name := anOther.Name;
  Self.Invalidate;
 end;

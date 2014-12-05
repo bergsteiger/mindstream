@@ -25,6 +25,7 @@
   constructor Create;
   destructor Destroy; override;
   property Items: TmsItemsList read pm_GetItems write pm_SetItems;
+  procedure Assign(anOther : TmsItemsHolder);
  end;//TmsItemsHolder
 
 {$Else TmsItemsHolder_intf}
@@ -74,6 +75,11 @@ begin
     f_Items := TmsItemsList.Create;
    f_Items.Add(l_Item);
   end;//for l_Shape in aValue
+end;
+
+procedure TmsItemsHolder.Assign(anOther : TmsItemsHolder);
+begin
+ Self.Items := anOther.Items;
 end;
 
 {$EndIf TmsItemsHolder_uses_impl}
