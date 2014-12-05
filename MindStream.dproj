@@ -213,11 +213,12 @@
         <DCCReference Include="ConcreteShapes\msGreenRectangle.pas"/>
         <DCCReference Include="msSerializeInterfaces.pas"/>
         <DCCReference Include="ShapeTools\msTool.pas"/>
-        <DCCReference Include="msDiagrammMarshal.pas"/>
+        <DCCReference Include="Marshal\msDiagrammMarshal.pas"/>
         <DCCReference Include="Core\msInterfacedNonRefcounted.pas"/>
         <DCCReference Include="Core\msWatchedObjectInstance.pas"/>
         <DCCReference Include="Core\msStringList.pas"/>
         <DCCReference Include="Core\msInterfacedRefcounted.pas"/>
+        <DCCReference Include="Marshal\msMarshalPrim.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>

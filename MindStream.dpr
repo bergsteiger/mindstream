@@ -36,11 +36,12 @@ uses
   msGreenRectangle in 'ConcreteShapes\msGreenRectangle.pas',
   msSerializeInterfaces in 'msSerializeInterfaces.pas',
   msTool in 'ShapeTools\msTool.pas',
-  msDiagrammMarshal in 'msDiagrammMarshal.pas',
+  msDiagrammMarshal in 'Marshal\msDiagrammMarshal.pas',
   msInterfacedNonRefcounted in 'Core\msInterfacedNonRefcounted.pas',
   msWatchedObjectInstance in 'Core\msWatchedObjectInstance.pas',
   msStringList in 'Core\msStringList.pas',
-  msInterfacedRefcounted in 'Core\msInterfacedRefcounted.pas';
+  msInterfacedRefcounted in 'Core\msInterfacedRefcounted.pas',
+  msMarshalPrim in 'Marshal\msMarshalPrim.pas';
 
 {$R *.res}
 
