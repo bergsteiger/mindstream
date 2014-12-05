@@ -3,21 +3,26 @@ unit msDiagramms;
 interface
 
 uses
+ {$Include msItemsHolder.mixin.pas}
+ ,
  msDiagramm,
  Generics.Collections,
  System.Types,
  FMX.Objects,
  System.Classes,
  msCoreObjects,
- msWatchedObjectInstance,
- Data.DBXJSONReflect
+ msWatchedObjectInstance
  ;
 
 type
  TmsDiagrammList = class(TObjectList<TmsDiagramm>)
  end;//TmsDiagrammList
 
- TmsDiagramms = class(TmsWatchedObject)
+ TmsItemsHolderParent = TmsWatchedObject;
+ TmsItem = TmsDiagramm;
+ TmsItemsList = TmsDiagrammList;
+ {$Include msItemsHolder.mixin.pas}
+ TmsDiagramms = class(TmsItemsHolder)
  private
   [JSONMarshalled(True)]
   f_Diagramms : TmsDiagrammList;
@@ -48,8 +53,13 @@ type
 implementation
 
 uses
+ {$Include msItemsHolder.mixin.pas}
  System.SysUtils
  ;
+
+{$Include msItemsHolder.mixin.pas}
+
+// TmsDiagramms
 
 constructor TmsDiagramms.Create(anImage: TImage; aList: TStrings);
 begin
@@ -117,6 +127,7 @@ end;
 
 procedure TmsDiagramms.Assign(anOther: TmsDiagramms);
 begin
+ inherited Assign(anOther);
  Self.Diagramms := anOther.Diagramms;
  Self.f_CurrentDiagramm := anOther.CurrentDiagrammIndex;
  CurrentDiagramm.Invalidate;
