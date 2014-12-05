@@ -61,25 +61,7 @@ begin
  begin
   f_UnMarshal := TJSONUnMarshal.Create;
 
-  f_UnMarshal.RegisterReverter(TmsDiagramm, 'f_Items',
-   procedure (Data: TObject; Field: String; Args: TListOfObjects)
-   var
-    l_Object: TObject;
-    l_Diagramm : TmsDiagramm;
-    l_msShape: TmsShape;
-   begin
-    Assert(Data Is TmsDiagramm);
-    l_Diagramm := TmsDiagramm(Data);
-    assert(l_Diagramm <> nil);
-
-    for l_Object in Args do
-    begin
-     l_msShape := l_Object as TmsShape;
-     l_Diagramm.Items.Add(l_msShape);
-    end//for l_Object
-   end
-  );//f_UnMarshal.RegisterReverter
-
+  TmsDiagramm.RegisterInUnMarshal(f_UnMarshal);
   f_UnMarshal.RegisterReverter(TmsDiagramms, 'f_Items',
    procedure (Data: TObject; Field: String; Args: TListOfObjects)
    var
