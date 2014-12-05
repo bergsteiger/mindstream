@@ -77,6 +77,7 @@ implementation
 
 uses
  {$Include msItemsHolder.mixin.pas}
+ ,
  msMover,
  msCircle,
  msDiagrammMarshal

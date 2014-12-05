@@ -6,7 +6,8 @@
 {$Define TmsItemsHolder_uses_intf}
 
 // uses
- Data.DBXJSONReflect
+ Data.DBXJSONReflect,
+ System.Rtti
 
 {$Else TmsItemsHolder_uses_intf}
 
@@ -15,12 +16,15 @@
 
 {$Define TmsItemsHolder_intf}
 
+ TmsRttiFieldLambda = reference to procedure (aField: TRttiField);
+
  TmsItemsHolder = class(TmsItemsHolderParent)
  private
   [JSONMarshalled(True)]
   f_Items : TmsItemsList;
   function pm_GetItems: TmsItemsList;
   procedure pm_SetItems(aValue: TmsItemsList);
+  class procedure RegisterItemsLike(aLambda: TmsRttiFieldLambda);
  public
   constructor Create;
   destructor Destroy; override;
@@ -36,6 +40,7 @@
 {$IfNDef TmsItemsHolder_uses_impl}
 
 // uses
+  System.TypInfo
 
 {$Define TmsItemsHolder_uses_impl}
 
@@ -83,24 +88,46 @@ begin
  Self.Items := anOther.Items;
 end;
 
+class procedure TmsItemsHolder.RegisterItemsLike(aLambda: TmsRttiFieldLambda);
+var
+ l_Field : TRttiField;
+begin
+ for l_Field in TRttiContext.Create.GetType(Self).GetFields do
+  if (l_Field.Visibility = mvPrivate) then
+   if (l_Field.Name = 'f_Items') then
+   begin
+    aLambda(l_Field);
+    Exit;
+   end;
+ Assert(false, 'Не найдено поля для Items');
+end;
+
 class procedure TmsItemsHolder.RegisterInMarshal(aMarshal: TJSONMarshal);
 begin
- aMarshal.RegisterConverter(Self, 'f_Items',
-  function (Data: TObject; Field: string): TListOfObjects
+ RegisterItemsLike(
+  procedure (aField: TRttiField)
   var
-   l_Item: TmsItem;
-   l_Index: Integer;
+   l_FieldName : String;
   begin
-   Assert(Field = 'f_Items');
-   SetLength(Result, (Data As TmsItemsHolder).Items.Count);
-   l_Index := 0;
-   for l_Item in (Data As TmsItemsHolder).Items do
-   begin
-    Result[l_Index] := l_Item.toObject;
-    Inc(l_Index);
-   end;//for l_Item
+   l_FieldName := aField.Name;
+   aMarshal.RegisterConverter(Self, l_FieldName,
+    function (Data: TObject; Field: String): TListOfObjects
+    var
+     l_Item: TmsItem;
+     l_Index: Integer;
+    begin
+     Assert(Field = l_FieldName);
+     SetLength(Result, (Data As TmsItemsHolder).Items.Count);
+     l_Index := 0;
+     for l_Item in (Data As TmsItemsHolder).Items do
+     begin
+      Result[l_Index] := l_Item.toObject;
+      Inc(l_Index);
+     end;//for l_Item
+    end
+   );//aMarshal.RegisterConverter
   end
- );//aMarshal.RegisterConverter
+ );//RegisterItemsLike
 end;
 
 {$EndIf TmsItemsHolder_uses_impl}
