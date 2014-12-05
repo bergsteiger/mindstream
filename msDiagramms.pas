@@ -9,7 +9,8 @@ uses
  FMX.Objects,
  System.Classes,
  msCoreObjects,
- msWatchedObjectInstance
+ msWatchedObjectInstance,
+ Data.DBXJSONReflect
  ;
 
 type
@@ -18,8 +19,12 @@ type
 
  TmsDiagramms = class(TmsWatchedObject)
  private
+  [JSONMarshalled(True)]
   f_Diagramms : TmsDiagrammList;
+  [JSONMarshalled(False)]
   f_CurrentDiagramm : TmsDiagramm;
+  function pm_GetDiagramms: TmsDiagrammList;
+  procedure pm_SetDiagramms(aValue: TmsDiagrammList);
  public
   constructor Create(anImage: TImage; aList: TStrings);
   destructor Destroy; override;
@@ -34,6 +39,7 @@ type
   function CurrentShapeClassIndex: Integer;
   procedure Serialize;
   procedure DeSerialize;
+  property Diagramms: TmsDiagrammList read pm_GetDiagramms write pm_SetDiagramms;
  end;//TmsDiagramms
 
 implementation
@@ -47,6 +53,28 @@ begin
  inherited Create;
  f_Diagramms := TmsDiagrammList.Create;
  AddDiagramm(anImage, aList);
+end;
+
+function TmsDiagramms.pm_GetDiagramms: TmsDiagrammList;
+begin
+ if (f_Diagramms = nil) then
+  f_Diagramms := TmsDiagrammList.Create;
+ Result := f_Diagramms;
+end;
+
+procedure TmsDiagramms.pm_SetDiagramms(aValue: TmsDiagrammList);
+var
+ l_D : TmsDiagramm;
+begin
+ if (f_Diagramms <> nil) then
+  f_Diagramms.Clear;
+ if (aValue <> nil) then
+  for l_D in aValue do
+  begin
+   if (f_Diagramms = nil) then
+    f_Diagramms := TmsDiagrammList.Create;
+   f_Diagramms.Add(l_D);
+  end;//for l_D in aValue
 end;
 
 procedure TmsDiagramms.AddDiagramm(anImage: TImage; aList: TStrings);

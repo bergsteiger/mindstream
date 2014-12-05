@@ -260,7 +260,7 @@ function TmsDiagramm.pm_GetShapeList: TmsShapeList;
 begin
  if (FShapeList = nil) then
   FShapeList := TmsShapeList.Create;
-  Result := FShapeList;
+ Result := FShapeList;
 end;
 
 procedure TmsDiagramm.pm_SetShapeList(aValue: TmsShapeList);
