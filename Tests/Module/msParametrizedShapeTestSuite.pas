@@ -4,32 +4,45 @@ interface
 
 uses
  TestFramework,
- msShape
+ msShape,
+ TestmsSerializeController
  ;
 
 type
   TmsParametrizedShapeTestSuite = class(TTestSuite)
   private
    constructor CreatePrim;
+  protected
+   class function TestClass: RmsShapeTest; virtual; abstract;
   public
    procedure AddTests(testClass: TTestCaseClass); override;
    class function Create: ITest;
   end;//TmsParametrizedShapeTestSuite
+
+  TmsShapesTest = class(TmsParametrizedShapeTestSuite)
+  protected
+   class function TestClass: RmsShapeTest; override;
+  end;//TmsShapesTest
 
 implementation
 
 uses
  System.TypInfo,
  System.Rtti,
- SysUtils,
- TestmsSerializeController
+ SysUtils
  ;
 
+// TmsShapesTest
+
+class function TmsShapesTest.TestClass: RmsShapeTest;
+begin
+ Result := TmsShapeTest;
+end;
 // TmsParametrizedShapeTestSuite
 
 constructor TmsParametrizedShapeTestSuite.CreatePrim;
 begin
- inherited Create(TmsShapeTest);
+ inherited Create(TestClass);
 end;
 
 class function TmsParametrizedShapeTestSuite.Create: ITest;
@@ -61,6 +74,6 @@ begin
 end;
 
 initialization
-  RegisterTest(TmsParametrizedShapeTestSuite.Create);
+ RegisterTest(TmsShapesTest.Create);
 
 end.

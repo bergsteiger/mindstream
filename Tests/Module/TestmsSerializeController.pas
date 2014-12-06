@@ -36,7 +36,7 @@ type
     function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
     procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
     procedure CheckFileWithEtalon(const aFileName: String);
-    procedure SaveDiagramm(const aFileName: String; aDiagramm: TmsDiagramm);
+    procedure SaveDiagramm(const aFileName: String; aDiagramm: TmsDiagramm); virtual;
     procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
     procedure OutToFileAndCheck(aLambda: TmsLogLambda);
     function ShapeClass: RmsShape;
@@ -58,6 +58,11 @@ type
   published
     procedure TestSerialize;
   end;//TmsCustomShapeTest
+
+  TmsDiagrammTest = class(TmsCustomShapeTest)
+  protected
+    procedure SaveDiagramm(const aFileName: String; aDiagramm: TmsDiagramm); override;
+  end;//TmsDiagrammTest
 
   TmsShapeTest = class(TmsCustomShapeTest)
   published
@@ -319,6 +324,13 @@ end;
 function TmsShapeTestPrim.ShapeClass: RmsShape;
 begin
  Result := f_Context.rShapeClass;
+end;
+
+// TmsDiagrammTest
+
+procedure TmsDiagrammTest.SaveDiagramm(const aFileName: String; aDiagramm: TmsDiagramm);
+begin
+ inherited;
 end;
 
 end.
