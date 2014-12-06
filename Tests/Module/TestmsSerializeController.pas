@@ -29,6 +29,7 @@ type
   TmsShapeTestPrim = class abstract(TTestCase)
   protected
    f_Context : TmsShapeTestContext;
+   f_TestSerializeMethodName : String;
   protected
     function TestResultsFileName(aShapeClass: RmsShape): String;
     function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
@@ -39,13 +40,12 @@ type
     function ShapeClass: RmsShape;
   public
     class procedure CheckShapes(aCheck: TmsShapeClassCheck);
-    constructor Create(const aContext: TmsShapeTestContext); virtual;
+    constructor Create(const aContext: TmsShapeTestContext);
   end;//TmsShapeTestPrim
 
   TestTmsSerializeControllerPrim = class abstract(TmsShapeTestPrim)
   protected
    f_Coords : array of TPoint;
-   f_TestSerializeMethodName : String;
   protected
     procedure SetUp; override;
     function ShapesCount: Integer;
@@ -56,21 +56,16 @@ type
     procedure TestDeSerializeViaShapeCheckForShapeClass(aShapeClass: RmsShape);
   end;//TestTmsSerializeControllerPrim
 
-  TestTmsSerializeController = class abstract(TestTmsSerializeControllerPrim)
+  TmsShapeTest = class (TestTmsSerializeControllerPrim)
   published
     procedure TestSerialize;
     procedure TestDeSerialize;
     procedure TestDeSerializeViaShapeCheck;
     procedure TestShapeName;
     procedure TestDiagrammName;
-  end;//TestTmsSerializeController
+  end;//TmsShapeTest
 
-  TmsParametrizedShapeTest = class(TestTmsSerializeController)
-  public
-   constructor Create(const aContext: TmsShapeTestContext); override;
-  end;//TmsParametrizedShapeTest
-
-  RmsParametrizedShapeTest = class of TmsParametrizedShapeTest;
+  RmsShapeTest = class of TmsShapeTest;
 
 implementation
 
@@ -196,7 +191,7 @@ begin
  );
 end;
 
-procedure TestTmsSerializeController.TestSerialize;
+procedure TmsShapeTest.TestSerialize;
 begin
  CreateDiagrammWithShapeAndSaveAndCheck(ShapeClass);
 end;
@@ -229,7 +224,7 @@ begin
  );
 end;
 
-procedure TestTmsSerializeController.TestDeSerialize;
+procedure TmsShapeTest.TestDeSerialize;
 begin
  TestDeSerializeForShapeClass(ShapeClass);
 end;
@@ -238,6 +233,8 @@ constructor TmsShapeTestPrim.Create(const aContext: TmsShapeTestContext);
 begin
  inherited Create(aContext.rMethodName);
  f_Context := aContext;
+ FTestName := f_Context.rShapeClass.ClassName + '.' + aContext.rMethodName;
+ f_TestSerializeMethodName := f_Context.rShapeClass.ClassName + '.';
 end;
 
 procedure TestTmsSerializeControllerPrim.TestDeSerializeViaShapeCheckForShapeClass(aShapeClass: RmsShape);
@@ -264,7 +261,7 @@ begin
  );
 end;
 
-procedure TestTmsSerializeController.TestDeSerializeViaShapeCheck;
+procedure TmsShapeTest.TestDeSerializeViaShapeCheck;
 begin
  TestDeSerializeViaShapeCheckForShapeClass(ShapeClass);
 end;
@@ -283,7 +280,7 @@ begin
  CheckFileWithEtalon(l_FileNameTest);
 end;
 
-procedure TestTmsSerializeController.TestShapeName;
+procedure TmsShapeTest.TestShapeName;
 begin
  OutToFileAndCheck(
   procedure (aLog: TmsLog)
@@ -293,7 +290,7 @@ begin
  );
 end;
 
-procedure TestTmsSerializeController.TestDiagrammName;
+procedure TmsShapeTest.TestDiagrammName;
 begin
  OutToFileAndCheck(
   procedure (aLog: TmsLog)
@@ -317,13 +314,6 @@ end;
 function TmsShapeTestPrim.ShapeClass: RmsShape;
 begin
  Result := f_Context.rShapeClass;
-end;
-
-constructor TmsParametrizedShapeTest.Create(const aContext: TmsShapeTestContext);
-begin
- inherited Create(aContext);
- FTestName := f_Context.rShapeClass.ClassName + '.' + aContext.rMethodName;
- f_TestSerializeMethodName := f_Context.rShapeClass.ClassName + '.';
 end;
 
 end.

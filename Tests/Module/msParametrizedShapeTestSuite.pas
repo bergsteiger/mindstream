@@ -29,7 +29,7 @@ uses
 
 constructor TmsParametrizedShapeTestSuite.CreatePrim;
 begin
- inherited Create(TmsParametrizedShapeTest);
+ inherited Create(TmsShapeTest);
 end;
 
 class function TmsParametrizedShapeTestSuite.Create: ITest;
@@ -39,7 +39,7 @@ end;
 
 procedure TmsParametrizedShapeTestSuite.AddTests(testClass: TTestCaseClass);
 begin
- Assert(testClass.InheritsFrom(TmsParametrizedShapeTest));
+ Assert(testClass.InheritsFrom(TmsShapeTest));
 
  RandSeed := 10;
  TmsShapeTestPrim.CheckShapes(
@@ -55,7 +55,7 @@ begin
    l_ShapesCount := Random(1000) + 1;
    for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
     if (l_Method.Visibility = mvPublished) then
-      AddTest(RmsParametrizedShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name, l_Seed, l_DiagrammName, l_ShapesCount, aShapeClass)));
+      AddTest(RmsShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name, l_Seed, l_DiagrammName, l_ShapesCount, aShapeClass)));
   end
  );
 end;
