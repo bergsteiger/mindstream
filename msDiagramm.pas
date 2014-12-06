@@ -19,7 +19,8 @@ uses
  System.JSON,
  msCoreObjects,
  msSerializeInterfaces,
- msInterfacedNonRefcounted
+ msInterfacedNonRefcounted,
+ msInterfacedRefcounted
  ;
 
 type
@@ -28,12 +29,16 @@ type
   function ShapeByPt(const aPoint: TPointF): ImsShape;
  end; // TmsShapeList
 
- TmsItemsHolderParent = TmsInterfacedNonRefcounted;
+ ImsDiagramm = interface
+  function toObject: TObject;
+ end;//ImsDiagramm
+
+ TmsItemsHolderParent = TmsInterfacedRefcounted{TmsInterfacedNonRefcounted};
  TmsItemGet = ImsShape;
  TmsItemSet = TmsShape;
  TmsItemsList = TmsShapeList;
  {$Include msItemsHolder.mixin.pas}
- TmsDiagramm = class(TmsItemsHolder, ImsShapeByPt, ImsShapesController)
+ TmsDiagramm = class(TmsItemsHolder, ImsDiagramm, ImsShapeByPt, ImsShapesController)
  // - Выделяем интерфейс ImsObjectWrap.
  //   Смешно - если TmsDiagramm его реализет НАПРЯМУЮ, то всё хорошо.
  //   А если через ImsSerializable, то - AV.

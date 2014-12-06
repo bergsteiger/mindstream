@@ -15,11 +15,11 @@ uses
  ;
 
 type
- TmsDiagrammList = class(TObjectList<TmsDiagramm>)
+ TmsDiagrammList = class(TList<ImsDiagramm>)
  end;//TmsDiagrammList
 
  TmsItemsHolderParent = TmsWatchedObject;
- TmsItemGet = TmsDiagramm;
+ TmsItemGet = ImsDiagramm;
  TmsItemSet = TmsDiagramm;
  TmsItemsList = TmsDiagrammList;
  {$Include msItemsHolder.mixin.pas}
@@ -66,7 +66,7 @@ end;
 
 function TmsDiagramms.pm_GetCurrentDiagramm: TmsDiagramm;
 begin
- Result := Items[f_CurrentDiagramm];
+ Result := Items[f_CurrentDiagramm].toObject As TmsDiagramm;
 end;
 
 procedure TmsDiagramms.AddDiagramm(anImage: TImage; aList: TStrings);

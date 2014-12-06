@@ -42,7 +42,9 @@ uses
   msWatchedObjectInstance in 'Core\msWatchedObjectInstance.pas',
   msStringList in 'Core\msStringList.pas',
   msInterfacedRefcounted in 'Core\msInterfacedRefcounted.pas',
-  msMarshalPrim in 'Marshal\msMarshalPrim.pas';
+  msMarshalPrim in 'Marshal\msMarshalPrim.pas',
+  msParametrizedShapeTestSuite in 'Tests\Module\msParametrizedShapeTestSuite.pas'
+  ;
 
 {$R *.res}
 

@@ -49,6 +49,7 @@ begin
     f_Marshal.RegisterJSONMarshalled(aShapeClass, 'FRefCount', false);
    end
   );//TmsRegisteredShapes.IterateShapes
+  f_Marshal.RegisterJSONMarshalled(TmsDiagramm, 'FRefCount', false);
  end;//f_Marshal = nil
  Result := f_Marshal;
 end;
