@@ -79,12 +79,14 @@ end;
 procedure TmsDiagrammsController.btLoadDiagrammClick(Sender: TObject);
 var
  l_D : ImsDiagramm;
+ l_I : Integer;
 begin
+ l_I := FDiagramms.CurrentDiagrammIndex;
  FDiagramms.DeSerialize;
  cbDiagramm.Clear;
  for l_D in FDiagramms.Items do
   cbDiagramm.Items.Add((l_D.toObject As TmsDiagramm).Name);
- cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
+ cbDiagramm.ItemIndex := l_I;
 end;
 
 procedure TmsDiagrammsController.btSaveDiagrammClick(Sender: TObject);
