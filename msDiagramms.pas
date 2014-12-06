@@ -50,7 +50,8 @@ implementation
 uses
  {$Include msItemsHolder.mixin.pas}
  ,
- System.SysUtils
+ System.SysUtils,
+ msDiagrammsMarshal
  ;
 
 {$Include msItemsHolder.mixin.pas}
@@ -93,9 +94,13 @@ begin
  CurrentDiagramm.Invalidate;
 end;
 
+const
+ c_FileName = 'All.json';
+
 procedure TmsDiagramms.DeSerialize;
 begin
- CurrentDiagramm.DeSerialize;
+ TmsDiagrammsMarshal.DeSerialize(c_FileName, self);
+// CurrentDiagramm.DeSerialize;
 end;
 
 procedure TmsDiagramms.Assign(anOther: TmsDiagramms);
@@ -122,7 +127,8 @@ end;
 
 procedure TmsDiagramms.Serialize;
 begin
- CurrentDiagramm.Serialize;
+ TmsDiagrammsMarshal.Serialize(c_FileName, self);
+// CurrentDiagramm.Serialize;
 end;
 
 procedure TmsDiagramms.AllowedShapesToList(aList: TStrings);
