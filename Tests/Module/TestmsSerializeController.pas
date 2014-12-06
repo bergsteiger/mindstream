@@ -357,6 +357,7 @@ begin
   TmsDiagrammsMarshal.DeSerialize(MakeFileName(TestSerializeMethodName, f_Context.rShapeClass), l_Diagramms);
   l_FileName := TestResultsFileName(f_Context.rShapeClass);
   TmsDiagrammsMarshal.Serialize(l_FileName, l_Diagramms);
+  CheckFileWithEtalon(l_FileName);
  finally
   FreeAndNil(l_Diagramms);
  end;//try..finally
