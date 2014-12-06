@@ -36,6 +36,7 @@ type
     function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
     procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
     procedure CheckFileWithEtalon(const aFileName: String);
+    procedure SaveDiagramm(const aFileName: String; aDiagramm: TmsDiagramm);
     procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
     procedure OutToFileAndCheck(aLambda: TmsLogLambda);
     function ShapeClass: RmsShape;
@@ -119,12 +120,17 @@ begin
  Result := MakeFileName(Name, aShapeClass);
 end;
 
+procedure TmsShapeTestPrim.SaveDiagramm(const aFileName: String; aDiagramm: TmsDiagramm);
+begin
+ TmsDiagrammMarshal.Serialize(aFileName, aDiagramm);
+end;
+
 procedure TmsShapeTestPrim.SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
 var
  l_FileNameTest : String;
 begin
  l_FileNameTest := TestResultsFileName(aShapeClass);
- TmsDiagrammMarshal.Serialize(l_FileNameTest, aDiagramm);
+ SaveDiagramm(l_FileNameTest, aDiagramm);
  CheckFileWithEtalon(l_FileNameTest);
 end;
 
