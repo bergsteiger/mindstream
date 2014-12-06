@@ -120,6 +120,7 @@ end;
 destructor TmsDiagrammsController.Destroy;
 begin
  FreeAndNil(FDiagramms);
+ inherited;
 end;
 
 procedure TmsDiagrammsController.Clear;
