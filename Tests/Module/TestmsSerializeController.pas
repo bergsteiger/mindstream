@@ -43,6 +43,8 @@ type
     constructor Create(const aContext: TmsShapeTestContext);
   end;//TmsShapeTestPrim
 
+  RmsShapeTest = class of TmsShapeTestPrim;
+
   TestTmsSerializeControllerPrim = class abstract(TmsShapeTestPrim)
   protected
    f_Coords : array of TPoint;
@@ -64,8 +66,6 @@ type
     procedure TestShapeName;
     procedure TestDiagrammName;
   end;//TmsShapeTest
-
-  RmsShapeTest = class of TmsShapeTest;
 
 implementation
 
