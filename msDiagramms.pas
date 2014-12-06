@@ -27,6 +27,8 @@ type
  private
   [JSONMarshalled(True)]
   f_CurrentDiagramm : Integer;
+  [JSONMarshalled(False)]
+  f_Image: TImage;
   function pm_GetCurrentDiagramm: TmsDiagramm;
  public
   constructor Create(anImage: TImage; aList: TStrings);
@@ -61,6 +63,7 @@ uses
 constructor TmsDiagramms.Create(anImage: TImage; aList: TStrings);
 begin
  inherited Create;
+ f_Image := anImage;
  AddDiagramm(anImage, aList);
 end;
 
@@ -104,8 +107,12 @@ begin
 end;
 
 procedure TmsDiagramms.Assign(anOther: TmsDiagramms);
+var
+ l_D : ImsDiagramm;
 begin
  inherited Assign(anOther);
+ for l_D in Items do
+  (l_D.toObject As TmsDiagramm).ResizeTo(f_Image);
  Self.f_CurrentDiagramm := anOther.CurrentDiagrammIndex;
  CurrentDiagramm.Invalidate;
 end;
