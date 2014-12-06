@@ -62,6 +62,8 @@ type
   TmsDiagrammTest = class(TmsCustomShapeTest)
   protected
     procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); override;
+  published
+    procedure TestDeSerialize;
   end;//TmsDiagrammTest
 
   TmsShapeTest = class(TmsCustomShapeTest)
@@ -340,6 +342,21 @@ begin
  try
   l_Diagramms.Items.Add(aDiagramm);
   TmsDiagrammsMarshal.Serialize(aFileName, l_Diagramms);
+ finally
+  FreeAndNil(l_Diagramms);
+ end;//try..finally
+end;
+
+procedure TmsDiagrammTest.TestDeSerialize;
+var
+ l_Diagramms : TmsDiagramms;
+ l_FileName : String;
+begin
+ l_Diagramms := TmsDiagramms.Create(nil, nil);
+ try
+  TmsDiagrammsMarshal.DeSerialize(MakeFileName(TestSerializeMethodName, f_Context.rShapeClass), l_Diagramms);
+  l_FileName := TestResultsFileName(f_Context.rShapeClass);
+  TmsDiagrammsMarshal.Serialize(l_FileName, l_Diagramms);
  finally
   FreeAndNil(l_Diagramms);
  end;//try..finally
