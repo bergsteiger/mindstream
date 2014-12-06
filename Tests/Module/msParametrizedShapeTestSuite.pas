@@ -24,6 +24,11 @@ type
    class function TestClass: RmsShapeTest; override;
   end;//TmsShapesTest
 
+  TmsDiagrammsTest = class(TmsParametrizedShapeTestSuite)
+  protected
+   class function TestClass: RmsShapeTest; override;
+  end;//TmsDiagrammsTest
+
 implementation
 
 uses
@@ -38,6 +43,14 @@ class function TmsShapesTest.TestClass: RmsShapeTest;
 begin
  Result := TmsShapeTest;
 end;
+
+// TmsDiagrammsTest
+
+class function TmsDiagrammsTest.TestClass: RmsShapeTest;
+begin
+ Result := TmsDiagrammTest;
+end;
+
 // TmsParametrizedShapeTestSuite
 
 constructor TmsParametrizedShapeTestSuite.CreatePrim;
@@ -52,7 +65,7 @@ end;
 
 procedure TmsParametrizedShapeTestSuite.AddTests(testClass: TTestCaseClass);
 begin
- Assert(testClass.InheritsFrom(TmsShapeTest));
+ Assert(testClass.InheritsFrom(TmsShapeTestPrim));
 
  RandSeed := 10;
  TmsShapeTestPrim.CheckShapes(
@@ -75,5 +88,6 @@ end;
 
 initialization
  RegisterTest(TmsShapesTest.Create);
+ RegisterTest(TmsDiagrammsTest.Create);
 
 end.
