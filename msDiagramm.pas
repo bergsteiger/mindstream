@@ -63,7 +63,6 @@ type
   procedure CanvasChanged(aCanvas: TCanvas);
   function ShapeByPt(const aPoint: TPointF): ImsShape;
   procedure RemoveShape(const aShape: ImsShape);
-  property CurrentClass: RmsShape read FCurrentClass write FCurrentClass;
  public
   constructor Create(anImage: TImage; const aName: String);
   procedure ResizeTo(anImage: TImage);
@@ -77,6 +76,7 @@ type
   procedure Serialize;
   procedure DeSerialize;
   procedure Assign(const anOther : TmsDiagramm);
+  property CurrentClass: RmsShape read FCurrentClass write FCurrentClass;
  end;//TmsDiagramm
 
 implementation
@@ -116,7 +116,10 @@ end;
 
 procedure TmsDiagramm.SelectShape(aList: TStrings; anIndex: Integer);
 begin
- CurrentClass := RmsShape(aList.Objects[anIndex]);
+ if (anIndex < 0) then
+  CurrentClass :=  TmsRegisteredShapes.Instance.First
+ else
+  CurrentClass := RmsShape(aList.Objects[anIndex]);
 end;
 
 procedure TmsDiagramm.Serialize;

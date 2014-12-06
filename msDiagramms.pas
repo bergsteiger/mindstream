@@ -53,7 +53,8 @@ uses
  {$Include msItemsHolder.mixin.pas}
  ,
  System.SysUtils,
- msDiagrammsMarshal
+ msDiagrammsMarshal,
+ msRegisteredShapes
  ;
 
 {$Include msItemsHolder.mixin.pas}
@@ -112,7 +113,10 @@ var
 begin
  inherited Assign(anOther);
  for l_D in Items do
+ begin
   (l_D.toObject As TmsDiagramm).ResizeTo(f_Image);
+  (l_D.toObject As TmsDiagramm).CurrentClass := TmsRegisteredShapes.Instance.First;
+ end;//for l_D
  Self.f_CurrentDiagramm := anOther.CurrentDiagrammIndex;
  CurrentDiagramm.Invalidate;
 end;

@@ -33,8 +33,6 @@ type
       Shift: TShiftState; X, Y: Single);
   procedure btSaveDiagrammClick(Sender: TObject);
   procedure btLoadDiagrammClick(Sender: TObject);
-  procedure Serialize(aDiagramm: TmsDiagramms);
-  procedure DeSerialize(aDiagramm: TmsDiagramms);
  public
   constructor Create(aImage: TImage; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton);
   destructor Destroy; override;
@@ -46,7 +44,8 @@ implementation
 
 uses
  System.SysUtils,
- FMX.Types
+ FMX.Types,
+ msDiagramm
  ;
 
 constructor TmsDiagrammsController.Create(aImage: TImage;
@@ -78,13 +77,19 @@ begin
 end;
 
 procedure TmsDiagrammsController.btLoadDiagrammClick(Sender: TObject);
+var
+ l_D : ImsDiagramm;
 begin
  FDiagramms.DeSerialize;
+ cbDiagramm.Clear;
+ for l_D in FDiagramms.Items do
+  cbDiagramm.Items.Add((l_D.toObject As TmsDiagramm).Name);
+ cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
 end;
 
 procedure TmsDiagrammsController.btSaveDiagrammClick(Sender: TObject);
 begin
- Serialize(FDiagramms);
+ FDiagramms.Serialize;
 end;
 
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
@@ -110,11 +115,6 @@ begin
  cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
 end;
 
-procedure TmsDiagrammsController.DeSerialize(aDiagramm: TmsDiagramms);
-begin
- aDiagramm.DeSerialize;
-end;
-
 destructor TmsDiagrammsController.Destroy;
 begin
  FreeAndNil(FDiagramms);
@@ -128,11 +128,6 @@ end;
 procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
 begin
  FDiagramms.ProcessClick(aStart);
-end;
-
-procedure TmsDiagrammsController.Serialize(aDiagramm: TmsDiagramms);
-begin
- aDiagramm.Serialize;
 end;
 
 procedure TmsDiagrammsController.imgMainMouseDown(Sender: TObject;
