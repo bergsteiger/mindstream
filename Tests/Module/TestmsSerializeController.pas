@@ -15,7 +15,7 @@ uses
 type
   TmsShapeClassCheck = TmsShapeClassLambda;
 
-  TmsDiagrammCheck = reference to procedure (aDiagramm : TmsDiagramm);
+  TmsDiagrammCheck = reference to procedure (const aDiagramm : ImsDiagramm);
 
   TmsShapeTestContext = record
    rMethodName: string;
@@ -36,8 +36,8 @@ type
     function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
     procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
     procedure CheckFileWithEtalon(const aFileName: String);
-    procedure SaveDiagramm(const aFileName: String; aDiagramm: TmsDiagramm); virtual;
-    procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
+    procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); virtual;
+    procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; const aDiagramm: ImsDiagramm);
     procedure OutToFileAndCheck(aLambda: TmsLogLambda);
     function ShapeClass: RmsShape;
     procedure SetUp; override;
@@ -61,7 +61,7 @@ type
 
   TmsDiagrammTest = class(TmsCustomShapeTest)
   protected
-    procedure SaveDiagramm(const aFileName: String; aDiagramm: TmsDiagramm); override;
+    procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); override;
   end;//TmsDiagrammTest
 
   TmsShapeTest = class(TmsCustomShapeTest)
@@ -82,7 +82,9 @@ implementation
   FMX.Objects,
   msSerializeInterfaces,
   msDiagrammMarshal,
-  msStringList
+  msDiagrammsMarshal,
+  msStringList,
+  msDiagramms
   ;
 
 function TmsShapeTestPrim.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
@@ -129,12 +131,12 @@ begin
  Result := MakeFileName(Name, aShapeClass);
 end;
 
-procedure TmsShapeTestPrim.SaveDiagramm(const aFileName: String; aDiagramm: TmsDiagramm);
+procedure TmsShapeTestPrim.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 begin
- TmsDiagrammMarshal.Serialize(aFileName, aDiagramm);
+ TmsDiagrammMarshal.Serialize(aFileName, aDiagramm.toObject As TmsDiagramm);
 end;
 
-procedure TmsShapeTestPrim.SaveDiagrammAndCheck(aShapeClass: RmsShape; aDiagramm: TmsDiagramm);
+procedure TmsShapeTestPrim.SaveDiagrammAndCheck(aShapeClass: RmsShape; const aDiagramm: ImsDiagramm);
 var
  l_FileNameTest : String;
 begin
@@ -176,25 +178,25 @@ end;
 
 procedure TmsShapeTestPrim.CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
 var
- l_Diagramm: TmsDiagramm;
+ l_Diagramm: ImsDiagramm;
 begin
  l_Diagramm := TmsDiagramm.Create(nil, aName);
  try
   aCheck(l_Diagramm);
  finally
-  FreeAndNil(l_Diagramm);
+  l_Diagramm := nil;
  end;//try..finally
 end;
 
 procedure TmsShapeTestPrim.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
 begin
  CreateDiagrammAndCheck(
-  procedure (aDiagramm : TmsDiagramm)
+  procedure (const aDiagramm : ImsDiagramm)
   var
    l_P : TPoint;
   begin
    for l_P in f_Coords do
-    aDiagramm.Items.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil)));
+    (aDiagramm.toObject As TmsDiagramm).Items.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil)));
    SaveDiagrammAndCheck(aShapeClass, aDiagramm);
   end
   , f_Context.rDiagrammName
@@ -214,9 +216,9 @@ end;
 procedure TmsShapeTestPrim.DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck; aShapeClass: RmsShape);
 begin
  CreateDiagrammAndCheck(
-  procedure (aDiagramm : TmsDiagramm)
+  procedure (const aDiagramm : ImsDiagramm)
   begin
-   TmsDiagrammMarshal.DeSerialize(MakeFileName(TestSerializeMethodName, aShapeClass), aDiagramm);
+   TmsDiagrammMarshal.DeSerialize(MakeFileName(TestSerializeMethodName, aShapeClass), aDiagramm.toObject As TmsDiagramm);
    aCheck(aDiagramm);
   end
   , ''
@@ -226,7 +228,7 @@ end;
 procedure TmsShapeTestPrim.TestDeSerializeForShapeClass(aShapeClass: RmsShape);
 begin
  DeserializeDiargammAndCheck(
-  procedure (aDiagramm: TmsDiagramm)
+  procedure (const aDiagramm: ImsDiagramm)
   begin
    SaveDiagrammAndCheck(aShapeClass, aDiagramm);
   end
@@ -250,18 +252,20 @@ end;
 procedure TmsShapeTestPrim.TestDeSerializeViaShapeCheckForShapeClass(aShapeClass: RmsShape);
 begin
  DeserializeDiargammAndCheck(
-  procedure (aDiagramm: TmsDiagramm)
+  procedure (const aDiagramm: ImsDiagramm)
   var
    l_Shape : TmsShape;
    l_Index : Integer;
+   l_D : TmsDiagramm;
   begin
-   Check(aDiagramm.Name = f_Context.rDiagrammName);
-   Check(aDiagramm.Items <> nil);
-   Check(aDiagramm.Items.Count = ShapesCount);
-   Check(Length(f_Coords) = aDiagramm.Items.Count);
-   for l_Index := 0 to Pred(aDiagramm.Items.Count) do
+   l_D := aDiagramm.toObject As TmsDiagramm;
+   Check(l_D.Name = f_Context.rDiagrammName);
+   Check(l_D.Items <> nil);
+   Check(l_D.Items.Count = ShapesCount);
+   Check(Length(f_Coords) = l_D.Items.Count);
+   for l_Index := 0 to Pred(l_D.Items.Count) do
    begin
-    l_Shape := aDiagramm.Items[l_Index].toObject As TmsShape;
+    l_Shape := l_D.Items[l_Index].toObject As TmsShape;
     Check(l_Shape.ClassType = aShapeClass);
     Check(l_Shape.StartPoint.X = f_Coords[l_Index].X);
     Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y);
@@ -328,9 +332,17 @@ end;
 
 // TmsDiagrammTest
 
-procedure TmsDiagrammTest.SaveDiagramm(const aFileName: String; aDiagramm: TmsDiagramm);
+procedure TmsDiagrammTest.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
+var
+ l_Diagramms : TmsDiagramms;
 begin
- inherited;
+ l_Diagramms := TmsDiagramms.Create(nil, nil);
+ try
+  l_Diagramms.Items.Add(aDiagramm);
+  TmsDiagrammsMarshal.Serialize(aFileName, l_Diagramms);
+ finally
+  FreeAndNil(l_Diagramms);
+ end;//try..finally
 end;
 
 end.
