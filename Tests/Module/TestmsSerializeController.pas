@@ -54,9 +54,13 @@ type
 
   RmsShapeTest = class of TmsShapeTestPrim;
 
-  TmsShapeTest = class (TmsShapeTestPrim)
+  TmsCustomShapeTest = class(TmsShapeTestPrim)
   published
     procedure TestSerialize;
+  end;//TmsCustomShapeTest
+
+  TmsShapeTest = class(TmsCustomShapeTest)
+  published
     procedure TestDeSerialize;
     procedure TestDeSerializeViaShapeCheck;
     procedure TestShapeName;
@@ -192,7 +196,7 @@ begin
  );
 end;
 
-procedure TmsShapeTest.TestSerialize;
+procedure TmsCustomShapeTest.TestSerialize;
 begin
  CreateDiagrammWithShapeAndSaveAndCheck(ShapeClass);
 end;
