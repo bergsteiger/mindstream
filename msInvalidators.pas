@@ -42,7 +42,12 @@ begin
 end;
 
 class procedure TmsInvalidators.InvalidateDiagramm(aDiagramm: TmsDiagramm);
+var
+ l_Subscriber : Pointer;
 begin
+ if (f_Subscribers <> nil) then
+  for l_Subscriber in f_Subscribers do
+   ImsIvalidator(l_Subscriber).InvalidateDiagramm(aDiagramm);
 end;
 
 class procedure TmsInvalidators.Subscribe(const anInvalidator: ImsIvalidator);
@@ -50,13 +55,14 @@ class procedure TmsInvalidators.Subscribe(const anInvalidator: ImsIvalidator);
 begin
  if (f_Subscribers = nil) then
   f_Subscribers := TmsInvalidatorsList.Create;
+ f_Subscribers.Add(Pointer(anInvalidator));
 end;
 
 class procedure TmsInvalidators.UnSubscribe(const anInvalidator: ImsIvalidator);
 // - отписываемся
 begin
  if (f_Subscribers <> nil) then
-  f_Subscribers.Add(Pointer(anInvalidator));
+  f_Subscribers.Remove(Pointer(anInvalidator));
 end;
 
 end.
