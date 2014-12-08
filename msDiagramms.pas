@@ -6,7 +6,6 @@ uses
  {$Include msItemsHolder.mixin.pas}
  ,
  msDiagramm,
- Generics.Collections,
  System.Types,
  FMX.Objects,
  System.Classes,
@@ -15,13 +14,8 @@ uses
  ;
 
 type
- TmsDiagrammList = class(TList<ImsDiagramm>)
- end;//TmsDiagrammList
-
  TmsItemsHolderParent = TmsWatchedObject;
  TmsItemGet = ImsDiagramm;
- TmsItemSet = TmsDiagramm;
- TmsItemsList = TmsDiagrammList;
  {$Include msItemsHolder.mixin.pas}
  TmsDiagramms = class(TmsItemsHolder)
  private

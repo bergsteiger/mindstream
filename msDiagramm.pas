@@ -6,7 +6,6 @@ uses
  {$Include msItemsHolder.mixin.pas}
  ,
  FMX.Graphics,
- Generics.Collections,
  System.SysUtils,
  System.Types,
  System.UITypes,
@@ -24,9 +23,6 @@ uses
  ;
 
 type
- TmsShapeList = class(TList<ImsShape>)
- end;//TmsShapeList
-
  ImsDiagramm = interface
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
   function toObject: TObject;
@@ -36,8 +32,6 @@ type
 
  TmsItemsHolderParent = TmsInterfacedRefcounted{TmsInterfacedNonRefcounted};
  TmsItemGet = ImsShape;
- TmsItemSet = TmsShape;
- TmsItemsList = TmsShapeList;
  {$Include msItemsHolder.mixin.pas}
  TmsDiagramm = class(TmsItemsHolder, ImsDiagramm, ImsShapeByPt, ImsShapesController)
  // - Âûהוכÿול טםעונפויס ImsObjectWrap.

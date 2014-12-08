@@ -6,6 +6,7 @@
 {$Define TmsItemsHolder_uses_intf}
 
 // uses
+ Generics.Collections,
  Data.DBXJSONReflect,
  System.Rtti
 
@@ -17,6 +18,8 @@
 {$Define TmsItemsHolder_intf}
 
  TmsRttiFieldLambda = reference to procedure (aField: TRttiField);
+
+ TmsItemsList = TList<TmsItemGet>;
 
  TmsItemsHolder = class(TmsItemsHolderParent)
  private
@@ -144,7 +147,6 @@ begin
     var
      l_Object: TObject;
      l_Holder : TmsItemsHolder;
-     l_Item: TmsItemSet;
      l_ItemI : TmsItemGet;
     begin
      Assert(Field = l_FieldName);
@@ -153,8 +155,7 @@ begin
 
      for l_Object in Args do
      begin
-      l_Item := l_Object as TmsItemSet;
-      if Supports(l_Item, TmsItemGet, l_ItemI) then
+      if Supports(l_Object, TmsItemGet, l_ItemI) then
        l_Holder.Items.Add(l_ItemI)
       else
        raise Exception.Create(l_Object.ClassName + ' не поддерживает нужный интерфейс');
