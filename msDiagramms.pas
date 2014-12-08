@@ -41,6 +41,7 @@ type
   procedure DeSerialize;
   property CurrentDiagramm: TmsDiagramm read pm_GetCurrentDiagramm;
   procedure Assign(anOther: TmsDiagramms);
+  destructor Destroy; override;
  end;//TmsDiagramms
 
 implementation
@@ -52,7 +53,8 @@ uses
  FMX.Graphics,
  System.UITypes,
  msDiagrammsMarshal,
- msRegisteredShapes
+ msRegisteredShapes,
+ msInvalidators
  ;
 
 {$Include msItemsHolder.mixin.pas}
@@ -66,6 +68,11 @@ begin
  AddDiagramm(anImage, aList);
 end;
 
+destructor TmsDiagramms.Destroy;
+begin
+ inherited;
+end;
+
 function TmsDiagramms.pm_GetCurrentDiagramm: TmsDiagramm;
 begin
  Result := Items[f_CurrentDiagramm].toObject As TmsDiagramm;
@@ -75,20 +82,21 @@ procedure TmsDiagramms.InvalidateDiagramm(aDiagramm: TmsDiagramm);
 var
  l_Canvas : TCanvas;
 begin
- if (aDiagramm = CurrentDiagramm) then
- begin
-  l_Canvas := f_Image.Canvas;
-  if (l_Canvas <> nil) then
+ if (f_Image <> nil) then
+  if (aDiagramm = CurrentDiagramm) then
   begin
-   l_Canvas.BeginScene;
-   try
-    l_Canvas.Clear(TAlphaColorRec.Null);
-    aDiagramm.DrawTo(l_Canvas);
-   finally
-    l_Canvas.EndScene;
-   end;//try..finally
-  end;//FCanvas <> nil
- end;//aDiagramm = CurrentDiagramm
+   l_Canvas := f_Image.Canvas;
+   if (l_Canvas <> nil) then
+   begin
+    l_Canvas.BeginScene;
+    try
+     l_Canvas.Clear(TAlphaColorRec.Null);
+     aDiagramm.DrawTo(l_Canvas);
+    finally
+     l_Canvas.EndScene;
+    end;//try..finally
+   end;//FCanvas <> nil
+  end;//aDiagramm = CurrentDiagramm
 end;
 
 procedure TmsDiagramms.AddDiagramm(anImage: TImage; aList: TStrings);
