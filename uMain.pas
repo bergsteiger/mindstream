@@ -45,6 +45,10 @@ var
 
 implementation
 
+uses
+ System.Math.Vectors
+ ;
+
 {$R *.fmx}
 
 procedure TfmMain.btnClearImageClick(Sender: TObject);
@@ -75,6 +79,7 @@ end;
 
 procedure TfmMain.imgMainPaint(Sender: TObject; Canvas: TCanvas);
 begin
+ Canvas.SetMatrix(TMatrix.Identity);
  FDiagrammsController.CurrentDiagramm.DrawTo(Canvas);
 end;
 
