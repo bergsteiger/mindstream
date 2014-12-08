@@ -16,6 +16,10 @@ type
  *)
 
  TmsInvalidators = class
+ strict private
+  class var f_Subscribers : TmsInvalidatorsList;
+ public
+  class destructor Destroy;
  public
   class procedure InvalidateDiagramm(aDiagramm: TmsDiagramm);
   class procedure Subscribe(const anInvalidator: ImsIvalidator);
@@ -26,7 +30,16 @@ type
 
 implementation
 
+uses
+ SysUtils
+ ;
+
 // TmsInvalidators
+
+class destructor TmsInvalidators.Destroy;
+begin
+ FreeAndNil(f_Subscribers);
+end;
 
 class procedure TmsInvalidators.InvalidateDiagramm(aDiagramm: TmsDiagramm);
 begin
