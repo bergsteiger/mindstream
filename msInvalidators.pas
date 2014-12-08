@@ -48,11 +48,15 @@ end;
 class procedure TmsInvalidators.Subscribe(const anInvalidator: ImsIvalidator);
 // - подписываемся
 begin
+ if (f_Subscribers = nil) then
+  f_Subscribers := TmsInvalidatorsList.Create;
 end;
 
 class procedure TmsInvalidators.UnSubscribe(const anInvalidator: ImsIvalidator);
 // - отписываемся
 begin
+ if (f_Subscribers <> nil) then
+  f_Subscribers.Add(Pointer(anInvalidator));
 end;
 
 end.
