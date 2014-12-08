@@ -12,13 +12,14 @@ uses
  System.Classes,
  System.UITypes,
  msCoreObjects,
- msWatchedObjectInstance
+ msWatchedObjectInstance,
+ msDiagramm
  ;
 
 type
  TmsDiagrammsController = class(TmsWatchedObject)
  private
-  imgMain: TImage;
+  imgMain: TPaintBox;
   cbShapes: TComboBox;
   cbDiagramm: TComboBox;
   btAddDiagramm: TButton;
@@ -33,22 +34,23 @@ type
       Shift: TShiftState; X, Y: Single);
   procedure btSaveDiagrammClick(Sender: TObject);
   procedure btLoadDiagrammClick(Sender: TObject);
+  function pm_GetCurrentDiagramm: TmsDiagramm;
  public
-  constructor Create(aImage: TImage; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton);
+  constructor Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton);
   destructor Destroy; override;
   procedure Clear;
   procedure ProcessClick(const aStart: TPointF);
+  property CurrentDiagramm: TmsDiagramm read pm_GetCurrentDiagramm;
  end;//TmsDiagrammsController
 
 implementation
 
 uses
  System.SysUtils,
- FMX.Types,
- msDiagramm
+ FMX.Types
  ;
 
-constructor TmsDiagrammsController.Create(aImage: TImage;
+constructor TmsDiagrammsController.Create(aImage: TPaintBox;
                                           aShapes: TComboBox;
                                           aDiagramm: TComboBox;
                                           aAddDiagramm: TButton;
@@ -74,6 +76,11 @@ begin
  btLoadDiagramm.OnClick := btLoadDiagrammClick;
  imgMain.OnMouseDown := imgMainMouseDown;
  imgMain.Align := TAlignLayout.alClient;
+end;
+
+function TmsDiagrammsController.pm_GetCurrentDiagramm: TmsDiagramm;
+begin
+ Result := FDiagramms.CurrentDiagramm;
 end;
 
 procedure TmsDiagrammsController.btLoadDiagrammClick(Sender: TObject);
@@ -102,7 +109,6 @@ end;
 
 procedure TmsDiagrammsController.imgMainResize(Sender: TObject);
 begin
- FDiagramms.ResizeTo(imgMain);
 end;
 
 procedure TmsDiagrammsController.cbShapesChange(Sender: TObject);

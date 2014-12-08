@@ -19,7 +19,7 @@ type
     miExit: TMenuItem;
     miAbout: TMenuItem;
     pnlTop: TPanel;
-    imgMain: TImage;
+    imgMain: TPaintBox;
     btnClearImage: TButton;
     cbShapes: TComboBox;
     cbDiagramm: TComboBox;
@@ -33,6 +33,7 @@ type
       Y: Single);
     procedure FormDestroy(Sender: TObject);
     procedure btnClearImageClick(Sender: TObject);
+    procedure imgMainPaint(Sender: TObject; Canvas: TCanvas);
   private
    FDiagrammsController: TmsDiagrammsController;
   public
@@ -70,6 +71,11 @@ procedure TfmMain.imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Single);
 begin
  Caption := 'x = ' + FloatToStr(X) + '; y = ' + FloatToStr(Y);
+end;
+
+procedure TfmMain.imgMainPaint(Sender: TObject; Canvas: TCanvas);
+begin
+ FDiagrammsController.CurrentDiagramm.DrawTo(Canvas);
 end;
 
 procedure TfmMain.miAboutClick(Sender: TObject);

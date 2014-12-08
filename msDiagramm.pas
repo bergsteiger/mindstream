@@ -43,8 +43,6 @@ type
   FCurrentClass: RmsShape;
   [JSONMarshalled(False)]
   FCurrentAddedShape: ImsShape;
-  [JSONMarshalled(False)]
-  FCanvas: TCanvas;
   [JSONMarshalled(True)]
   fName: String;
  private
@@ -57,9 +55,9 @@ type
   function ShapeByPt(const aPoint: TPointF): ImsShape;
   procedure RemoveShape(const aShape: ImsShape);
   function Get_Name: String;
-  constructor CreatePrim(anImage: TImage; const aName: String);
+  constructor CreatePrim(anImage: TPaintBox; const aName: String);
  public
-  class function Create(anImage: TImage; const aName: String): ImsDiagramm;
+  class function Create(anImage: TPaintBox; const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
   procedure ResizeTo(anImage: TImage);
   procedure ProcessClick(const aStart: TPointF);
@@ -158,17 +156,15 @@ begin
  Invalidate;
 end;
 
-class function TmsDiagramm.Create(anImage: TImage; const aName: String): ImsDiagramm;
+class function TmsDiagramm.Create(anImage: TPaintBox; const aName: String): ImsDiagramm;
 begin
  Result := CreatePrim(anImage, aName);
 end;
 
-constructor TmsDiagramm.CreatePrim(anImage: TImage; const aName: String);
+constructor TmsDiagramm.CreatePrim(anImage: TPaintBox; const aName: String);
 begin
  inherited Create;
  FCurrentAddedShape := nil;
- FCanvas := nil;
- ResizeTo(anImage);
  FCurrentClass := AllowedShapes.First;
  fName := aName;
 end;
@@ -189,7 +185,6 @@ end;
 
 procedure TmsDiagramm.CanvasChanged(aCanvas: TCanvas);
 begin
- FCanvas := aCanvas;
  Invalidate;
 end;
 
@@ -241,16 +236,6 @@ end;
 procedure TmsDiagramm.Invalidate;
 begin
  TmsInvalidators.InvalidateDiagramm(Self);
- if (FCanvas <> nil) then
- begin
-  FCanvas.BeginScene;
-  try
-   FCanvas.Clear(TAlphaColorRec.Null);
-   DrawTo(FCanvas);
-  finally
-   FCanvas.EndScene;
-  end;//try..finally
- end;//FCanvas <> nil
 end;
 
 function TmsDiagramm.ShapeIsEnded: Boolean;

@@ -26,75 +26,87 @@ object fmMain: TfmMain
       OnClick = miAboutClick
     end
   end
-  object imgMain: TImage
-    MultiResBitmap = <
-      item
-      end>
+  object pnlAll: TPanel
+    Align = Client
     Size.Width = 600.000000000000000000
-    Size.Height = 559.000000000000000000
+    Size.Height = 600.000000000000000000
     Size.PlatformDefault = False
-    OnMouseMove = imgMainMouseMove
-  end
-  object pnlTop: TPanel
-    Size.Width = 600.000000000000000000
-    Size.Height = 41.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 1
-    object btnClearImage: TButton
-      Position.X = 16.000000000000000000
-      Position.Y = 8.000000000000000000
-      Size.Width = 80.000000000000000000
-      Size.Height = 22.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 0
-      Text = 'Clear'
-      OnClick = btnClearImageClick
-    end
-    object cbShapes: TComboBox
-      DisableFocusEffect = False
-      ItemIndex = 0
-      Position.X = 104.000000000000000000
-      Position.Y = 8.000000000000000000
-      Size.Width = 100.000000000000000000
-      Size.Height = 22.000000000000000000
+    object pnlTop: TPanel
+      Align = Top
+      Size.Width = 600.000000000000000000
+      Size.Height = 41.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
+      object btnClearImage: TButton
+        Position.X = 16.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Clear'
+        OnClick = btnClearImageClick
+      end
+      object cbShapes: TComboBox
+        DisableFocusEffect = False
+        ItemIndex = 0
+        Position.X = 104.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+      end
+      object cbDiagramm: TComboBox
+        DisableFocusEffect = False
+        Position.X = 216.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+      end
+      object btAddDiagramm: TButton
+        Position.X = 328.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Text = 'Add'
+      end
+      object btSaveDiagramm: TButton
+        Position.X = 416.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Text = 'Save Picture'
+      end
+      object btLoadDiagramm: TButton
+        Position.X = 504.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = 'Load Picture'
+      end
     end
-    object cbDiagramm: TComboBox
-      DisableFocusEffect = False
-      Position.X = 216.000000000000000000
-      Position.Y = 8.000000000000000000
-      Size.Width = 100.000000000000000000
-      Size.Height = 22.000000000000000000
+    object pnlBottom: TPanel
+      Align = Client
+      Size.Width = 600.000000000000000000
+      Size.Height = 559.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 5
-    end
-    object btAddDiagramm: TButton
-      Position.X = 328.000000000000000000
-      Position.Y = 8.000000000000000000
-      Size.Width = 80.000000000000000000
-      Size.Height = 22.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 4
-      Text = 'Add'
-    end
-    object btSaveDiagramm: TButton
-      Position.X = 416.000000000000000000
-      Position.Y = 8.000000000000000000
-      Size.Width = 80.000000000000000000
-      Size.Height = 22.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 3
-      Text = 'Save Picture'
-    end
-    object btLoadDiagramm: TButton
-      Position.X = 504.000000000000000000
-      Position.Y = 8.000000000000000000
-      Size.Width = 80.000000000000000000
-      Size.Height = 22.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 2
-      Text = 'Load Picture'
+      object imgMain: TPaintBox
+        Align = Client
+        Size.Width = 600.000000000000000000
+        Size.Height = 559.000000000000000000
+        Size.PlatformDefault = False
+        OnMouseMove = imgMainMouseMove
+        OnPaint = imgMainPaint
+      end
     end
   end
 end

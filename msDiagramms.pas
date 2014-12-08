@@ -23,18 +23,18 @@ type
   [JSONMarshalled(True)]
   f_CurrentDiagramm : Integer;
   [JSONMarshalled(False)]
-  f_Image: TImage;
+  f_Image: TPaintBox;
   function pm_GetCurrentDiagramm: TmsDiagramm;
   procedure InvalidateDiagramm(aDiagramm: TmsDiagramm);
  public
-  constructor Create(anImage: TImage; aList: TStrings);
+  constructor Create(anImage: TPaintBox; aList: TStrings);
   procedure AfterConstruction; override;
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure AllowedShapesToList(aList: TStrings);
   procedure ResizeTo(anImage: TImage);
-  procedure AddDiagramm(anImage: TImage; aList: TStrings);
+  procedure AddDiagramm(anImage: TPaintBox; aList: TStrings);
   function CurrentDiagrammIndex: Integer;
   procedure SelectDiagramm(anIndex: Integer);
   function CurrentShapeClassIndex: Integer;
@@ -62,7 +62,7 @@ uses
 
 // TmsDiagramms
 
-constructor TmsDiagramms.Create(anImage: TImage; aList: TStrings);
+constructor TmsDiagramms.Create(anImage: TPaintBox; aList: TStrings);
 begin
  inherited Create;
  f_Image := anImage;
@@ -93,21 +93,23 @@ begin
  if (f_Image <> nil) then
   if (aDiagramm = CurrentDiagramm) then
   begin
+   f_Image.Repaint;
+   Exit;
    l_Canvas := f_Image.Canvas;
    if (l_Canvas <> nil) then
    begin
     l_Canvas.BeginScene;
     try
-     l_Canvas.Clear(TAlphaColorRec.Null);
+     l_Canvas.Clear(TAlphaColorRec.White);
      aDiagramm.DrawTo(l_Canvas);
     finally
      l_Canvas.EndScene;
     end;//try..finally
-   end;//FCanvas <> nil
+   end;//l_Canvas <> nil
   end;//aDiagramm = CurrentDiagramm
 end;
 
-procedure TmsDiagramms.AddDiagramm(anImage: TImage; aList: TStrings);
+procedure TmsDiagramms.AddDiagramm(anImage: TPaintBox; aList: TStrings);
 var
  l_D : ImsDiagramm;
 begin
@@ -148,7 +150,6 @@ begin
  inherited Assign(anOther);
  for l_D in Items do
  begin
-  (l_D.toObject As TmsDiagramm).ResizeTo(f_Image);
   (l_D.toObject As TmsDiagramm).CurrentClass := TmsRegisteredShapes.Instance.First;
  end;//for l_D
  Self.f_CurrentDiagramm := anOther.CurrentDiagrammIndex;
@@ -183,7 +184,8 @@ end;
 
 procedure TmsDiagramms.ResizeTo(anImage: TImage);
 begin
- CurrentDiagramm.ResizeTo(anImage);
+ //f_Image.Bitmap := TBitmap.Create(Round(anImage.Width), Round(anImage.Height));
+ //CurrentDiagramm.ResizeTo(anImage);
 end;
 
 function TmsDiagramms.CurrentShapeClassIndex: Integer;
