@@ -27,7 +27,7 @@ type
  TmsShapeList = class(TList<ImsShape>)
  public
   function ShapeByPt(const aPoint: TPointF): ImsShape;
- end; // TmsShapeList
+ end;//TmsShapeList
 
  ImsDiagramm = interface
   function toObject: TObject;
