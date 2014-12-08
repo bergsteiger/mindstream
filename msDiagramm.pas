@@ -48,7 +48,6 @@ type
   [JSONMarshalled(True)]
   fName: String;
  private
-  procedure DrawTo(const aCanvas: TCanvas);
   function CurrentAddedShape: ImsShape;
   procedure BeginShape(const aStart: TPointF);
   procedure EndShape(const aFinish: TPointF);
@@ -61,6 +60,7 @@ type
   constructor CreatePrim(anImage: TImage; const aName: String);
  public
   class function Create(anImage: TImage; const aName: String): ImsDiagramm;
+  procedure DrawTo(const aCanvas: TCanvas);
   procedure ResizeTo(anImage: TImage);
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;

@@ -10,20 +10,22 @@ uses
  FMX.Objects,
  System.Classes,
  msCoreObjects,
- msWatchedObjectInstance
+ msWatchedObjectInstance,
+ msInterfacedNonRefcounted
  ;
 
 type
- TmsItemsHolderParent = TmsWatchedObject;
+ TmsItemsHolderParent = TmsInterfacedNonRefcounted;
  TmsItem = ImsDiagramm;
  {$Include msItemsHolder.mixin.pas}
- TmsDiagramms = class(TmsItemsHolder)
+ TmsDiagramms = class(TmsItemsHolder, ImsIvalidator)
  private
   [JSONMarshalled(True)]
   f_CurrentDiagramm : Integer;
   [JSONMarshalled(False)]
   f_Image: TImage;
   function pm_GetCurrentDiagramm: TmsDiagramm;
+  procedure InvalidateDiagramm(aDiagramm: TmsDiagramm);
  public
   constructor Create(anImage: TImage; aList: TStrings);
   procedure ProcessClick(const aStart: TPointF);
@@ -47,6 +49,8 @@ uses
  {$Include msItemsHolder.mixin.pas}
  ,
  System.SysUtils,
+ FMX.Graphics,
+ System.UITypes,
  msDiagrammsMarshal,
  msRegisteredShapes
  ;
@@ -65,6 +69,26 @@ end;
 function TmsDiagramms.pm_GetCurrentDiagramm: TmsDiagramm;
 begin
  Result := Items[f_CurrentDiagramm].toObject As TmsDiagramm;
+end;
+
+procedure TmsDiagramms.InvalidateDiagramm(aDiagramm: TmsDiagramm);
+var
+ l_Canvas : TCanvas;
+begin
+ if (aDiagramm = CurrentDiagramm) then
+ begin
+  l_Canvas := f_Image.Canvas;
+  if (l_Canvas <> nil) then
+  begin
+   l_Canvas.BeginScene;
+   try
+    l_Canvas.Clear(TAlphaColorRec.Null);
+    aDiagramm.DrawTo(l_Canvas);
+   finally
+    l_Canvas.EndScene;
+   end;//try..finally
+  end;//FCanvas <> nil
+ end;//aDiagramm = CurrentDiagramm
 end;
 
 procedure TmsDiagramms.AddDiagramm(anImage: TImage; aList: TStrings);
