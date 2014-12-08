@@ -86,7 +86,8 @@ uses
  ,
  msMover,
  msCircle,
- msDiagrammMarshal
+ msDiagrammMarshal,
+ msInvalidators
  ;
 
 {$Include msItemsHolder.mixin.pas}
@@ -239,6 +240,7 @@ end;
 
 procedure TmsDiagramm.Invalidate;
 begin
+ TmsInvalidators.InvalidateDiagramm(Self);
  if (FCanvas <> nil) then
  begin
   FCanvas.BeginScene;
