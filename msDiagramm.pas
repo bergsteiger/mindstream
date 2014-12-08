@@ -47,6 +47,7 @@ type
   FCanvas: TCanvas;
   [JSONMarshalled(False)]
   FOrigin: TPointF;
+  [JSONMarshalled(True)]
   fName: String;
  private
   procedure DrawTo(const aCanvas: TCanvas; const aOrigin: TPointF);
