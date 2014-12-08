@@ -15,7 +15,7 @@ uses
 
 type
  TmsItemsHolderParent = TmsWatchedObject;
- TmsItemGet = ImsDiagramm;
+ TmsItem = ImsDiagramm;
  {$Include msItemsHolder.mixin.pas}
  TmsDiagramms = class(TmsItemsHolder)
  private

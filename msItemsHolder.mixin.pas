@@ -19,7 +19,7 @@
 
  TmsRttiFieldLambda = reference to procedure (aField: TRttiField);
 
- TmsItemsList = TList<TmsItemGet>;
+ TmsItemsList = TList<TmsItem>;
 
  TmsItemsHolder = class(TmsItemsHolderParent)
  private
@@ -74,7 +74,7 @@ end;
 
 procedure TmsItemsHolder.pm_SetItems(aValue: TmsItemsList);
 var
- l_Item : TmsItemGet;
+ l_Item : TmsItem;
 begin
  if (f_Items <> nil) then
   f_Items.Clear;
@@ -117,7 +117,7 @@ begin
    aMarshal.RegisterConverter(Self, l_FieldName,
     function (Data: TObject; Field: String): TListOfObjects
     var
-     l_Item: TmsItemGet;
+     l_Item: TmsItem;
      l_Index: Integer;
     begin
      Assert(Field = l_FieldName);
@@ -147,7 +147,7 @@ begin
     var
      l_Object: TObject;
      l_Holder : TmsItemsHolder;
-     l_ItemI : TmsItemGet;
+     l_ItemI : TmsItem;
     begin
      Assert(Field = l_FieldName);
      l_Holder := Data As TmsItemsHolder;
@@ -155,7 +155,7 @@ begin
 
      for l_Object in Args do
      begin
-      if Supports(l_Object, TmsItemGet, l_ItemI) then
+      if Supports(l_Object, TmsItem, l_ItemI) then
        l_Holder.Items.Add(l_ItemI)
       else
        raise Exception.Create(l_Object.ClassName + ' не поддерживает нужный интерфейс');

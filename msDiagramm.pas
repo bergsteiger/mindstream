@@ -31,7 +31,7 @@ type
  end;//ImsDiagramm
 
  TmsItemsHolderParent = TmsInterfacedRefcounted{TmsInterfacedNonRefcounted};
- TmsItemGet = ImsShape;
+ TmsItem = ImsShape;
  {$Include msItemsHolder.mixin.pas}
  TmsDiagramm = class(TmsItemsHolder, ImsDiagramm, ImsShapeByPt, ImsShapesController)
  // - Âûהוכÿול טםעונפויס ImsObjectWrap.
