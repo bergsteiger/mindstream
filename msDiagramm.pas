@@ -25,8 +25,6 @@ uses
 
 type
  TmsShapeList = class(TList<ImsShape>)
- public
-  function ShapeByPt(const aPoint: TPointF): ImsShape;
  end;//TmsShapeList
 
  ImsDiagramm = interface
@@ -262,32 +260,26 @@ begin
 end;
 
 function TmsDiagramm.ShapeByPt(const aPoint: TPointF): ImsShape;
-
-begin
- Result := f_Items.ShapeByPt(aPoint);
-end;
-
-procedure TmsDiagramm.RemoveShape(const aShape: ImsShape);
-begin
- Assert(f_Items <> nil);
- f_Items.Remove(aShape);
-end;
-
-function TmsShapeList.ShapeByPt(const aPoint: TPointF): ImsShape;
 var
  l_Shape: ImsShape;
  l_Index: Integer;
 begin
  Result := nil;
- for l_Index := Self.Count - 1 downto 0 do
+ for l_Index := f_Items.Count - 1 downto 0 do
  begin
-  l_Shape := Self.Items[l_Index];
+  l_Shape := f_Items.Items[l_Index];
   if l_Shape.ContainsPt(aPoint) then
   begin
    Result := l_Shape;
    Exit;
   end; // l_Shape.ContainsPt(aPoint)
  end; // for l_Index
+end;
+
+procedure TmsDiagramm.RemoveShape(const aShape: ImsShape);
+begin
+ Assert(f_Items <> nil);
+ f_Items.Remove(aShape);
 end;
 
 end.
