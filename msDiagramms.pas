@@ -28,6 +28,7 @@ type
   procedure InvalidateDiagramm(aDiagramm: TmsDiagramm);
  public
   constructor Create(anImage: TImage; aList: TStrings);
+  procedure AfterConstruction; override;
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
@@ -68,8 +69,15 @@ begin
  AddDiagramm(anImage, aList);
 end;
 
+procedure TmsDiagramms.AfterConstruction;
+begin
+ TmsInvalidators.Subscribe(Self);
+ inherited;
+end;
+
 destructor TmsDiagramms.Destroy;
 begin
+ TmsInvalidators.UnSubscribe(Self);
  inherited;
 end;
 
