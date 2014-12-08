@@ -31,6 +31,8 @@ type
 
  ImsDiagramm = interface
   function toObject: TObject;
+  function Get_Name: String;
+  property Name: String read Get_Name;
  end;//ImsDiagramm
 
  TmsItemsHolderParent = TmsInterfacedRefcounted{TmsInterfacedNonRefcounted};
@@ -63,8 +65,10 @@ type
   procedure CanvasChanged(aCanvas: TCanvas);
   function ShapeByPt(const aPoint: TPointF): ImsShape;
   procedure RemoveShape(const aShape: ImsShape);
+  function Get_Name: String;
+  constructor CreatePrim(anImage: TImage; const aName: String);
  public
-  constructor Create(anImage: TImage; const aName: String);
+  class function Create(anImage: TImage; const aName: String): ImsDiagramm;
   procedure ResizeTo(anImage: TImage);
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
@@ -157,7 +161,12 @@ begin
  Invalidate;
 end;
 
-constructor TmsDiagramm.Create(anImage: TImage; const aName: String);
+class function TmsDiagramm.Create(anImage: TImage; const aName: String): ImsDiagramm;
+begin
+ Result := CreatePrim(anImage, aName);
+end;
+
+constructor TmsDiagramm.CreatePrim(anImage: TImage; const aName: String);
 begin
  inherited Create;
  FCurrentAddedShape := nil;
@@ -166,6 +175,11 @@ begin
  ResizeTo(anImage);
  FCurrentClass := AllowedShapes.First;
  fName := aName;
+end;
+
+function TmsDiagramm.Get_Name: String;
+begin
+ Result := FName;
 end;
 
 procedure TmsDiagramm.ResizeTo(anImage: TImage);

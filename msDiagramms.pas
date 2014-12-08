@@ -75,7 +75,7 @@ end;
 
 procedure TmsDiagramms.AddDiagramm(anImage: TImage; aList: TStrings);
 var
- l_D : TmsDiagramm;
+ l_D : ImsDiagramm;
 begin
  l_D := TmsDiagramm.Create(anImage, 'Диаграмма №' + IntToStr(Items.Count + 1));
  Items.Add(l_D);
