@@ -45,12 +45,10 @@ type
   FCurrentAddedShape: ImsShape;
   [JSONMarshalled(False)]
   FCanvas: TCanvas;
-  [JSONMarshalled(False)]
-  FOrigin: TPointF;
   [JSONMarshalled(True)]
   fName: String;
  private
-  procedure DrawTo(const aCanvas: TCanvas; const aOrigin: TPointF);
+  procedure DrawTo(const aCanvas: TCanvas);
   function CurrentAddedShape: ImsShape;
   procedure BeginShape(const aStart: TPointF);
   procedure EndShape(const aFinish: TPointF);
@@ -165,7 +163,6 @@ begin
  inherited Create;
  FCurrentAddedShape := nil;
  FCanvas := nil;
- FOrigin := TPointF.Create(0, 0);
  ResizeTo(anImage);
  FCurrentClass := AllowedShapes.First;
  fName := aName;
@@ -214,7 +211,7 @@ begin
  end;//try..except
 end;
 
-procedure TmsDiagramm.DrawTo(const aCanvas: TCanvas; const aOrigin: TPointF);
+procedure TmsDiagramm.DrawTo(const aCanvas: TCanvas);
 var
  l_Shape: ImsShape;
 begin
@@ -222,7 +219,7 @@ begin
  try
   Assert(f_Items <> nil);
   for l_Shape in f_Items do
-   l_Shape.DrawTo(TmsDrawContext.Create(aCanvas, aOrigin));
+   l_Shape.DrawTo(TmsDrawContext.Create(aCanvas));
  finally
   aCanvas.EndScene;
  end; // try..finally
@@ -243,7 +240,7 @@ begin
   FCanvas.BeginScene;
   try
    FCanvas.Clear(TAlphaColorRec.Null);
-   DrawTo(FCanvas, FOrigin);
+   DrawTo(FCanvas);
   finally
    FCanvas.EndScene;
   end;//try..finally

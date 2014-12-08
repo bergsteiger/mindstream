@@ -35,9 +35,8 @@ type
  // Всё - БАНАЛЬНО. Чтобы НЕ ТРОГАТЬ сигнатуры методов. Мысль понятна?
   public
    rCanvas : TCanvas;
-   rOrigin : TPointF;
    rMoving : Boolean; // - определяем, что текущий рисуемый примитив - двигается
-   constructor Create(const aCanvas : TCanvas; const aOrigin : TPointF);
+   constructor Create(const aCanvas : TCanvas);
  end;//TmsDrawContext
 
  TmsMakeShapeContext = record
@@ -176,10 +175,9 @@ begin
  DoDrawTo(aCtx);
 end;
 
-constructor TmsDrawContext.Create(const aCanvas : TCanvas; const aOrigin : TPointF);
+constructor TmsDrawContext.Create(const aCanvas : TCanvas);
 begin
  rCanvas := aCanvas;
- rOrigin := aOrigin;
  rMoving := false;
 end;
 
