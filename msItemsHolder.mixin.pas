@@ -145,6 +145,7 @@ begin
      l_Object: TObject;
      l_Holder : TmsItemsHolder;
      l_Item: TmsItemSet;
+     l_ItemI : TmsItemGet;
     begin
      Assert(Field = l_FieldName);
      l_Holder := Data As TmsItemsHolder;
@@ -153,7 +154,10 @@ begin
      for l_Object in Args do
      begin
       l_Item := l_Object as TmsItemSet;
-      l_Holder.Items.Add(l_Item);
+      if Supports(l_Item, TmsItemGet, l_ItemI) then
+       l_Holder.Items.Add(l_ItemI)
+      else
+       raise Exception.Create(l_Object.ClassName + ' не поддерживает нужный интерфейс');
      end//for l_Object
     end
    );//aMarshal.RegisterReverter

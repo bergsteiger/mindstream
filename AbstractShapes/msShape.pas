@@ -59,6 +59,7 @@ type
  end;//TmsDrawOptionsContext
 
  ImsShape = interface
+ ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean;
   procedure EndTo(const aCtx: TmsEndShapeContext);
