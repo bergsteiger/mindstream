@@ -43,8 +43,8 @@ uses
   msStringList in 'Core\msStringList.pas',
   msInterfacedRefcounted in 'Core\msInterfacedRefcounted.pas',
   msMarshalPrim in 'Marshal\msMarshalPrim.pas',
-  msParametrizedShapeTestSuite in 'Tests\Module\msParametrizedShapeTestSuite.pas'
-  ;
+  msParametrizedShapeTestSuite in 'Tests\Module\msParametrizedShapeTestSuite.pas',
+  msInvalidators in 'msInvalidators.pas';
 
 {$R *.res}
 
