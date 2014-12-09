@@ -33,7 +33,6 @@ type
   procedure Clear;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure AllowedShapesToList(aList: TStrings);
-  procedure ResizeTo(anImage: TImage);
   procedure AddDiagramm(aList: TStrings);
   function CurrentDiagrammIndex: Integer;
   procedure SelectDiagramm(anIndex: Integer);
@@ -92,21 +91,7 @@ var
 begin
  if (f_Image <> nil) then
   if (aDiagramm = CurrentDiagramm) then
-  begin
    f_Image.Repaint;
-   Exit;
-   l_Canvas := f_Image.Canvas;
-   if (l_Canvas <> nil) then
-   begin
-    l_Canvas.BeginScene;
-    try
-     l_Canvas.Clear(TAlphaColorRec.White);
-     aDiagramm.DrawTo(l_Canvas);
-    finally
-     l_Canvas.EndScene;
-    end;//try..finally
-   end;//l_Canvas <> nil
-  end;//aDiagramm = CurrentDiagramm
 end;
 
 procedure TmsDiagramms.AddDiagramm(aList: TStrings);
@@ -118,7 +103,6 @@ begin
  f_CurrentDiagramm := Items.IndexOf(l_D);
  if (aList <> nil) then
   aList.Add(l_D.Name);
-//  aList.AddObject(l_D.Name, TObject(f_CurrentDiagramm));
 end;
 
 function TmsDiagramms.CurrentDiagrammIndex: Integer;
@@ -140,7 +124,6 @@ const
 procedure TmsDiagramms.DeSerialize;
 begin
  TmsDiagrammsMarshal.DeSerialize(c_FileName, self);
-// CurrentDiagramm.DeSerialize;
 end;
 
 procedure TmsDiagramms.Assign(anOther: TmsDiagramms);
@@ -174,18 +157,11 @@ end;
 procedure TmsDiagramms.Serialize;
 begin
  TmsDiagrammsMarshal.Serialize(c_FileName, self);
-// CurrentDiagramm.Serialize;
 end;
 
 procedure TmsDiagramms.AllowedShapesToList(aList: TStrings);
 begin
  CurrentDiagramm.AllowedShapesToList(aList);
-end;
-
-procedure TmsDiagramms.ResizeTo(anImage: TImage);
-begin
- //f_Image.Bitmap := TBitmap.Create(Round(anImage.Width), Round(anImage.Height));
- //CurrentDiagramm.ResizeTo(anImage);
 end;
 
 function TmsDiagramms.CurrentShapeClassIndex: Integer;

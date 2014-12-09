@@ -6,6 +6,7 @@ uses
  FMX.Objects,
  FMX.ListBox,
  FMX.StdCtrls,
+ FMX.Graphics,
  msDiagramms,
  System.Types,
  FMX.Forms,
@@ -41,6 +42,7 @@ type
   procedure Clear;
   procedure ProcessClick(const aStart: TPointF);
   property CurrentDiagramm: TmsDiagramm read pm_GetCurrentDiagramm;
+  procedure DrawTo(const aCanvas: TCanvas);
  end;//TmsDiagrammsController
 
 implementation
@@ -137,6 +139,11 @@ end;
 procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
 begin
  FDiagramms.ProcessClick(aStart);
+end;
+
+procedure TmsDiagrammsController.DrawTo(const aCanvas: TCanvas);
+begin
+ CurrentDiagramm.DrawTo(aCanvas);
 end;
 
 procedure TmsDiagrammsController.imgMainMouseDown(Sender: TObject;

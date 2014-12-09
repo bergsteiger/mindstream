@@ -80,7 +80,7 @@ end;
 procedure TfmMain.imgMainPaint(Sender: TObject; Canvas: TCanvas);
 begin
  Canvas.SetMatrix(TMatrix.Identity);
- FDiagrammsController.CurrentDiagramm.DrawTo(Canvas);
+ FDiagrammsController.DrawTo(Canvas);
 end;
 
 procedure TfmMain.miAboutClick(Sender: TObject);
