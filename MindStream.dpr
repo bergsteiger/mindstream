@@ -31,7 +31,7 @@ uses
   TestMsRectangle in 'Tests\Module\TestMsRectangle.pas',
   TestMsPointCircle in 'Tests\Module\TestMsPointCircle.pas',
   TestMsCircle in 'Tests\Module\TestMsCircle.pas',
-  TestmsSerializeController in 'Tests\Module\TestmsSerializeController.pas',
+  msShapeTest in 'Tests\Module\msShapeTest.pas',
   msRedRectangle in 'ConcreteShapes\msRedRectangle.pas',
   msGreenRectangle in 'ConcreteShapes\msGreenRectangle.pas',
   msSerializeInterfaces in 'msSerializeInterfaces.pas',

@@ -1,4 +1,4 @@
-unit TestmsSerializeController;
+unit msShapeTest;
 
 interface
 

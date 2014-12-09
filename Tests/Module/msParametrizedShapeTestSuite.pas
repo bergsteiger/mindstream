@@ -5,7 +5,7 @@ interface
 uses
  TestFramework,
  msShape,
- TestmsSerializeController
+ msShapeTest
  ;
 
 type

@@ -218,7 +218,7 @@
         <DCCReference Include="Tests\Module\TestMsRectangle.pas"/>
         <DCCReference Include="Tests\Module\TestMsPointCircle.pas"/>
         <DCCReference Include="Tests\Module\TestMsCircle.pas"/>
-        <DCCReference Include="Tests\Module\TestmsSerializeController.pas"/>
+        <DCCReference Include="Tests\Module\msShapeTest.pas"/>
         <DCCReference Include="ConcreteShapes\msRedRectangle.pas"/>
         <DCCReference Include="ConcreteShapes\msGreenRectangle.pas"/>
         <DCCReference Include="msSerializeInterfaces.pas"/>
@@ -485,13 +485,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msDotLine\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msDotLine\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -741,7 +741,7 @@
                 </DeployClass>
                 <DeployClass Name="ProjectOSXEntitlements">
                     <Platform Name="OSX32">
-                        <RemoteDir>../</RemoteDir>
+                        <RemoteDir>Contents</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -827,7 +827,6 @@
                 </DeployClass>
                 <DeployClass Name="ProjectiOSEntitlements">
                     <Platform Name="iOSDevice">
-                        <RemoteDir>../</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
