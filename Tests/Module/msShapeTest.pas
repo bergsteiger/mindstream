@@ -43,7 +43,7 @@ type
     function ShapesCount: Integer;
     procedure CreateDiagrammWithShapeAndSaveAndCheck;
     function TestSerializeMethodName: String;
-    procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck; aShapeClass: RmsShape);
+    procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
     procedure TestDeSerializeForShapeClass(aShapeClass: RmsShape);
     procedure TestDeSerializeViaShapeCheckForShapeClass(aShapeClass: RmsShape);
   public
@@ -214,7 +214,7 @@ begin
  Result := f_TestSerializeMethodName + 'TestSerialize';
 end;
 
-procedure TmsShapeTestPrim.DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck; aShapeClass: RmsShape);
+procedure TmsShapeTestPrim.DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
 begin
  CreateDiagrammAndCheck(
   procedure (const aDiagramm : ImsDiagramm)
@@ -235,7 +235,6 @@ begin
   begin
    SaveDiagrammAndCheck(aDiagramm);
   end
- , aShapeClass
  );
 end;
 
@@ -274,7 +273,6 @@ begin
     Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y);
    end;//for l_Shape
   end
- , aShapeClass
  );
 end;
 
