@@ -182,7 +182,7 @@ procedure TmsShapeTestPrim.CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; con
 var
  l_Diagramm: ImsDiagramm;
 begin
- l_Diagramm := TmsDiagramm.Create(nil, aName);
+ l_Diagramm := TmsDiagramm.Create(aName);
  try
   aCheck(l_Diagramm);
  finally

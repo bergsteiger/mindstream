@@ -34,7 +34,7 @@ type
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure AllowedShapesToList(aList: TStrings);
   procedure ResizeTo(anImage: TImage);
-  procedure AddDiagramm(anImage: TPaintBox; aList: TStrings);
+  procedure AddDiagramm(aList: TStrings);
   function CurrentDiagrammIndex: Integer;
   procedure SelectDiagramm(anIndex: Integer);
   function CurrentShapeClassIndex: Integer;
@@ -66,7 +66,7 @@ constructor TmsDiagramms.Create(anImage: TPaintBox; aList: TStrings);
 begin
  inherited Create;
  f_Image := anImage;
- AddDiagramm(anImage, aList);
+ AddDiagramm(aList);
 end;
 
 procedure TmsDiagramms.AfterConstruction;
@@ -109,11 +109,11 @@ begin
   end;//aDiagramm = CurrentDiagramm
 end;
 
-procedure TmsDiagramms.AddDiagramm(anImage: TPaintBox; aList: TStrings);
+procedure TmsDiagramms.AddDiagramm(aList: TStrings);
 var
  l_D : ImsDiagramm;
 begin
- l_D := TmsDiagramm.Create(anImage, 'Диаграмма №' + IntToStr(Items.Count + 1));
+ l_D := TmsDiagramm.Create('Диаграмма №' + IntToStr(Items.Count + 1));
  Items.Add(l_D);
  f_CurrentDiagramm := Items.IndexOf(l_D);
  if (aList <> nil) then

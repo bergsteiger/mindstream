@@ -118,7 +118,7 @@ end;
 
 procedure TmsDiagrammsController.btAddDiagrammClick(Sender: TObject);
 begin
- FDiagramms.AddDiagramm(imgMain, cbDiagramm.Items);
+ FDiagramms.AddDiagramm(cbDiagramm.Items);
  cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
  cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
 end;

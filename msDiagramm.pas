@@ -54,9 +54,9 @@ type
   function ShapeByPt(const aPoint: TPointF): ImsShape;
   procedure RemoveShape(const aShape: ImsShape);
   function Get_Name: String;
-  constructor CreatePrim(anImage: TPaintBox; const aName: String);
+  constructor CreatePrim(const aName: String);
  public
-  class function Create(anImage: TPaintBox; const aName: String): ImsDiagramm;
+  class function Create(const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
@@ -154,12 +154,12 @@ begin
  Invalidate;
 end;
 
-class function TmsDiagramm.Create(anImage: TPaintBox; const aName: String): ImsDiagramm;
+class function TmsDiagramm.Create(const aName: String): ImsDiagramm;
 begin
- Result := CreatePrim(anImage, aName);
+ Result := CreatePrim(aName);
 end;
 
-constructor TmsDiagramm.CreatePrim(anImage: TPaintBox; const aName: String);
+constructor TmsDiagramm.CreatePrim(const aName: String);
 begin
  inherited Create;
  FCurrentAddedShape := nil;
