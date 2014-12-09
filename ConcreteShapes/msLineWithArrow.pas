@@ -54,10 +54,15 @@ begin
     // create a point around which will rotate
     l_CenterPoint := TPointF.Create(FinishPoint.X, FinishPoint.Y);
 
-    l_Matrix := l_OriginalMatrix;
+    l_Matrix := l_OriginalMatrix * l_OriginalMatrix.Inverse;
+    // - —Ќ»ћј≈ћ оригинальную матрицу
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
     l_Matrix := l_Matrix * TMatrix.CreateRotation(l_Angle);
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
+    l_Matrix := l_Matrix * l_OriginalMatrix;
+    // - ѕ–»ћ≈Ќя≈ћ оригинальную матрицу
+    // »наче например ќ–»√»ЌјЋ№Ќџ… параллельный перенос - не будет работать.
+    // https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B0%D0%BB%D0%BB%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81
 
     aCtx.rCanvas.SetMatrix(l_Matrix);
 
@@ -67,7 +72,8 @@ begin
    end;//try..finally
   finally
     aCtx.rCanvas.SetMatrix(l_OriginalMatrix);
-  end;
+    // - восстанавливаем ќ–»√»ЌјЋ№Ќ”ё матрицу
+  end;//try..finally
  end;//(StartPoint <> FinishPoint)
 end;
 
