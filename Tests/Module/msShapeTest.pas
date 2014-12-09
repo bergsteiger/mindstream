@@ -45,7 +45,7 @@ type
     function TestSerializeMethodName: String;
     procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
     procedure TestDeSerializeForShapeClass;
-    procedure TestDeSerializeViaShapeCheckForShapeClass(aShapeClass: RmsShape);
+    procedure TestDeSerializeViaShapeCheckForShapeClass;
   public
     class procedure CheckShapes(aCheck: TmsShapeClassCheck);
     constructor Create(const aContext: TmsShapeTestContext);
@@ -251,7 +251,7 @@ begin
  f_TestSerializeMethodName := f_Context.rShapeClass.ClassName + '.';
 end;
 
-procedure TmsShapeTestPrim.TestDeSerializeViaShapeCheckForShapeClass(aShapeClass: RmsShape);
+procedure TmsShapeTestPrim.TestDeSerializeViaShapeCheckForShapeClass;
 begin
  DeserializeDiargammAndCheck(
   procedure (const aDiagramm: ImsDiagramm)
@@ -268,7 +268,7 @@ begin
    for l_Index := 0 to Pred(l_D.Items.Count) do
    begin
     l_Shape := l_D.Items[l_Index].toObject As TmsShape;
-    Check(l_Shape.ClassType = aShapeClass);
+    Check(l_Shape.ClassType = f_Context.rShapeClass);
     Check(l_Shape.StartPoint.X = f_Coords[l_Index].X);
     Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y);
    end;//for l_Shape
@@ -278,7 +278,7 @@ end;
 
 procedure TmsShapeTest.TestDeSerializeViaShapeCheck;
 begin
- TestDeSerializeViaShapeCheckForShapeClass(f_Context.rShapeClass);
+ TestDeSerializeViaShapeCheckForShapeClass;
 end;
 
 procedure TmsShapeTestPrim.OutToFileAndCheck(aLambda: TmsLogLambda);
