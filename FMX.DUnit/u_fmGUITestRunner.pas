@@ -22,12 +22,12 @@ type
   lblResult: TLabel;
   procedure FormCreate(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
-  procedure FormClose(Sender: TObject; var Action: TCloseAction);
   procedure btRunAllTestClick(Sender: TObject);
   procedure FormShow(Sender: TObject);
   procedure TestTreeChangeCheck(Sender: TObject);
  protected
   FSuite: ITest;
+  FTestResult: TTestResult;
   FTests: TInterfaceList;
   FTestResult: TTestResult;
   FSelectedTests: TInterfaceList;
@@ -81,7 +81,9 @@ implementation
 
 uses
  System.Generics.Collections,
- System.TypInfo;
+ System.TypInfo
+ ;
+
 {$R *.fmx}
 
 procedure RunTestModeless(aTest: ITest);
@@ -98,7 +100,8 @@ begin
  RunTestModeless(registeredTests)
 end;
 
-procedure TraverseTreeItems(const anItem: TTreeViewItem; var ResultList: TList<TTreeViewItem>);
+procedure TraverseTreeItems(const anItem: TTreeViewItem;
+  var ResultList: TList<TTreeViewItem>);
 var
  l_Index: Integer;
 begin
@@ -109,7 +112,8 @@ begin
   TraverseTreeItems(anItem.Items[l_Index], ResultList);
 end;
 
-procedure TraverseTree(const aTree: TTreeView; var ResultList: TList<TTreeViewItem>);
+procedure TraverseTree(const aTree: TTreeView;
+  var ResultList: TList<TTreeViewItem>);
 var
  l_Index: Integer;
 begin
@@ -143,8 +147,9 @@ begin
  assert(assigned(aFailure));
  l_Item := lvFailureListView.Items.Add;
 
- l_Item.Text := aFailure.failedTest.Name + '; ' + aFailure.thrownExceptionName + '; ' + aFailure.thrownExceptionMessage + '; ' +
-  aFailure.LocationInfo + '; ' + aFailure.AddressInfo + '; ' + aFailure.StackTrace;
+ l_Item.Text := aFailure.failedTest.Name + '; ' + aFailure.thrownExceptionName +
+   '; ' + aFailure.thrownExceptionMessage + '; ' + aFailure.LocationInfo + '; '
+   + aFailure.AddressInfo + '; ' + aFailure.StackTrace;
 
  l_Node := TestToNode(aFailure.failedTest);
  while l_Node <> nil do
@@ -222,11 +227,6 @@ begin
  TestTree.EndUpdate;
 end;
 
-procedure TfmGUITestRunner.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
- Application.Terminate;
-end;
-
 procedure TfmGUITestRunner.FormCreate(Sender: TObject);
 begin
  inherited;
@@ -293,10 +293,16 @@ begin
   InitTree;
 end;
 
-procedure TfmGUITestRunner.SetTreeNodeFont(aNode: TTreeViewItem; aColor: TAlphaColor);
+procedure TfmGUITestRunner.SetTreeNodeFont(aNode: TTreeViewItem;
+  aColor: TAlphaColor);
 begin
  // Пока не укажешь какие из настроек стиля разрешены к работе, они работать не будут
- aNode.StyledSettings := aNode.StyledSettings - [TStyledSetting.FontColor, TStyledSetting.Style];
+ aNode.StyledSettings := aNode.StyledSettings -
+ {$IF DEFined(VER270) OR DEFined(VER280)} [TStyledSetting.FontColor, TStyledSetting.Style];
+{$ENDIF}
+{$IFDEF VER260} [TStyledSetting.ssFontColor, TStyledSetting.ssStyle]
+ ;
+{$ENDIF}
  aNode.Font.Style := [TFontStyle.fsBold];
  aNode.FontColor := aColor;
 end;
@@ -317,12 +323,8 @@ end;
 
 function TfmGUITestRunner.ShouldRunTest(aTest: ITest): Boolean;
 var
- l_Test : ITest;
+ l_Test: ITest;
 begin
-{ if FSelectedTests = nil then
-  Result := aTest.Enabled
- else
- l_Test Result := FSelectedTests.IndexOf(aTest as ITest) >= 0;}
  l_Test := aTest;
  Result := l_Test.Enabled
 end;
@@ -368,7 +370,8 @@ begin
  SetNodeEnabled(Sender as TTreeViewItem, (Sender as TTreeViewItem).IsChecked);
 end;
 
-procedure TfmGUITestRunner.SetNodeEnabled(aNode: TTreeViewItem; aValue: Boolean);
+procedure TfmGUITestRunner.SetNodeEnabled(aNode: TTreeViewItem;
+  aValue: Boolean);
 var
  l_Test: ITest;
 begin
@@ -378,3 +381,4 @@ begin
 end;
 
 end.
+

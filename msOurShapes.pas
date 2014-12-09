@@ -1,6 +1,9 @@
 unit msOurShapes;
 
 interface
+
+implementation
+
 uses
   msLine,
   msRectangle,
@@ -14,10 +17,14 @@ uses
   msLineWithArrow,
   msTriangleDirectionRight,
   msMover,
-  msRegisteredShapes
-  ;
+  msRegisteredShapes,
+  msRedRectangle,
+  msGreenRectangle,
 
-implementation
+  // special shapes
+  msPointCircle,
+  msSmallTriangle
+  ;
 
 procedure RegisterOurShapes;
 begin
@@ -33,7 +40,13 @@ begin
   TmsDotLine,
   TmsLineWithArrow,
   TmsTriangleDirectionRight,
-  TmsMover
+  TmsMover,
+  TmsRedRectangle,
+  TmsGreenRectangle,
+
+  // special shapes
+  TmsPointCircle,
+  TmsSmallTriangle
  ]);
 end;
 

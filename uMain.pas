@@ -19,11 +19,13 @@ type
     miExit: TMenuItem;
     miAbout: TMenuItem;
     pnlTop: TPanel;
-    imgMain: TImage;
+    imgMain: TPaintBox;
     btnClearImage: TButton;
     cbShapes: TComboBox;
     cbDiagramm: TComboBox;
     btAddDiagramm: TButton;
+    btSaveDiagramm: TButton;
+    btLoadDiagramm: TButton;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -31,8 +33,9 @@ type
       Y: Single);
     procedure FormDestroy(Sender: TObject);
     procedure btnClearImageClick(Sender: TObject);
+    procedure imgMainPaint(Sender: TObject; Canvas: TCanvas);
   private
-   FDiagramm: TmsDiagrammsController;
+   FDiagrammsController: TmsDiagrammsController;
   public
     { Public declarations }
   end;
@@ -42,27 +45,42 @@ var
 
 implementation
 
+uses
+ System.Math.Vectors
+ ;
+
 {$R *.fmx}
 
 procedure TfmMain.btnClearImageClick(Sender: TObject);
 begin
- FDiagramm.Clear;
+ FDiagrammsController.Clear;
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
- FDiagramm := TmsDiagrammsController.Create(imgMain, cbShapes, cbDiagramm, btAddDiagramm);
+ FDiagrammsController := TmsDiagrammsController.Create(imgMain,
+                                                       cbShapes,
+                                                       cbDiagramm,
+                                                       btAddDiagramm,
+                                                       btSaveDiagramm,
+                                                       btLoadDiagramm);
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
 begin
- FreeAndNil(FDiagramm);
+ FreeAndNil(FDiagrammsController);
 end;
 
 procedure TfmMain.imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Single);
 begin
  Caption := 'x = ' + FloatToStr(X) + '; y = ' + FloatToStr(Y);
+end;
+
+procedure TfmMain.imgMainPaint(Sender: TObject; Canvas: TCanvas);
+begin
+ Canvas.SetMatrix(TMatrix.Identity);
+ FDiagrammsController.CurrentDiagramm.DrawTo(Canvas);
 end;
 
 procedure TfmMain.miAboutClick(Sender: TObject);
