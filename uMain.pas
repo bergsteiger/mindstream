@@ -79,7 +79,7 @@ end;
 
 procedure TfmMain.imgMainPaint(Sender: TObject; Canvas: TCanvas);
 begin
- Canvas.SetMatrix(TMatrix.Identity);
+ Canvas.SetMatrix(Canvas.Matrix * Canvas.Matrix.Inverse);
  FDiagrammsController.DrawTo(Canvas);
 end;
 
