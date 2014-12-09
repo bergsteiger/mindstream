@@ -51,8 +51,7 @@ begin
     // in Radian
     l_Angle := GetArrowAngleRotation;
 
-    // create a point around which will rotate
-    l_CenterPoint := TPointF.Create(FinishPoint.X, FinishPoint.Y);
+    l_CenterPoint := FinishPoint;
 
     l_Matrix := TMatrix.Identity;
     // - СНИМАЕМ оригинальную матрицу
