@@ -221,6 +221,8 @@ begin
   procedure (const aDiagramm : ImsDiagramm)
   begin
    TmsDiagrammMarshal.DeSerialize(MakeFileName(TestSerializeMethodName, aShapeClass), aDiagramm.toObject As TmsDiagramm);
+   // - берём результаты от ПРЕДЫДУЩИХ тестов, НЕКОШЕРНО с точки зрения TDD
+   //   НО! Чертовски эффективно.
    aCheck(aDiagramm);
   end
   , ''
@@ -355,6 +357,8 @@ begin
  l_Diagramms := TmsDiagramms.Create(nil, nil);
  try
   TmsDiagrammsMarshal.DeSerialize(MakeFileName(TestSerializeMethodName, f_Context.rShapeClass), l_Diagramms);
+  // - берём результаты от ПРЕДЫДУЩИХ тестов, НЕКОШЕРНО с точки зрения TDD
+  //   НО! Чертовски эффективно.
   l_FileName := TestResultsFileName(f_Context.rShapeClass);
   TmsDiagrammsMarshal.Serialize(l_FileName, l_Diagramms);
   CheckFileWithEtalon(l_FileName);
