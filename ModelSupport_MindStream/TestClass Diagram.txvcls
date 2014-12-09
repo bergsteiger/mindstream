@@ -4,9 +4,9 @@
     <property name="$metaclass" value="Class Diagram" />
     <property name="$name" value="TestClass Diagram" />
     <reference referencedUin="design:view:::c50fsg4xqdq_v">
-      <property name="$shortcutReference" value="true" />
       <property name="$hidden" value="True" />
-      <property name="bounds" value="240,200,163,138" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="240,200,162,138" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsParametrizedShapeTestSuite" />
       <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsDiagrammCheck" />
@@ -19,6 +19,10 @@
       <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.@unitclass" />
       <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsShapeTestContext" />
       <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TestTmsSerializeController" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsShapeTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.RmsShapeTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsDiagrammTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsCustomShapeTest" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TestTmsSerializeController">
       <property name="$shortcutReference" value="true" />
@@ -39,13 +43,15 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsShapeTestContext">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="475,160,297,160" />
+      <property name="bounds" value="440,640,297,175" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_field:src:MindStream:TestmsSerializeController.TmsShapeTestContext.rMethodName" />
       <reference referencedUin="delphi:e_field:src:MindStream:TestmsSerializeController.TmsShapeTestContext.rSeed" />
       <reference referencedUin="delphi:e_field:src:MindStream:TestmsSerializeController.TmsShapeTestContext.rDiagrammName" />
       <reference referencedUin="delphi:e_field:src:MindStream:TestmsSerializeController.TmsShapeTestContext.rShapesCount" />
       <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestContext.Create(System.string,System.Integer,System.string,System.Integer)" />
+      <reference referencedUin="delphi:e_field:src:MindStream:TestmsSerializeController.TmsShapeTestContext.rShapeClass" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestContext.Create(System.string,System.Integer,System.string,System.Integer,msShape.RmsShape)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.@unitclass">
       <property name="$shortcutReference" value="true" />
@@ -106,12 +112,37 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsShapeTestPrim">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="45,10,279,98" />
+      <property name="bounds" value="440,180,279,385" />
+      <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.CheckShapes(msRegisteredShapes.TmsShapeClassLambda)" />
+      <reference referencedUin="delphi:e_field:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.f_Context" />
+      <reference referencedUin="delphi:e_field:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.f_TestSerializeMethodName" />
+      <reference referencedUin="delphi:e_field:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.f_Coords" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.TestResultsFileName(msShape.RmsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.MakeFileName(System.string,msShape.RmsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.CreateDiagrammAndCheck(TestmsSerializeController.TmsDiagrammCheck,System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.CheckFileWithEtalon(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.SaveDiagramm(System.string,msDiagramm.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.SaveDiagrammAndCheck(msShape.RmsShape,msDiagramm.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.OutToFileAndCheck(msCoreObjects.TmsLogLambda)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.ShapeClass()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.SetUp()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.ShapesCount()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.CreateDiagrammWithShapeAndSaveAndCheck(msShape.RmsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.TestSerializeMethodName()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.DeserializeDiargammAndCheck(TestmsSerializeController.TmsDiagrammCheck,msShape.RmsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.TestDeSerializeForShapeClass(msShape.RmsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.TestDeSerializeViaShapeCheckForShapeClass(msShape.RmsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.Create(TestmsSerializeController.TmsShapeTestContext)" />
+      <reference referencedUin="delphi:l_ast:src:MindStream:TestmsSerializeController.TmsShapeTestPrim.f_Context">
+        <property name="sourceAnchor" value="579,565" />
+        <property name="targetAnchor" value="579,640" />
+        <property name="bendpoints" value="" />
+      </reference>
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsDiagrammCheck">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="480,20,286,36" />
+      <property name="bounds" value="1540,40,286,36" />
       <property name="location_set_by_user" value="True" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsParametrizedShapeTestSuite">
@@ -121,6 +152,105 @@
       <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsParametrizedShapeTestSuite.CreatePrim()" />
       <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsParametrizedShapeTestSuite.AddTests(TestFramework.TTestCaseClass)" />
       <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsParametrizedShapeTestSuite.Create()" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msParametrizedShapeTestSuite.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="545,562,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msParametrizedShapeTestSuite.TmsShapesTest">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1080,500,296,84" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msParametrizedShapeTestSuite.TmsShapesTest.TestClass()" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msParametrizedShapeTestSuite.TmsShapesTest:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite">
+        <property name="sourceAnchor" value="1298,500" />
+        <property name="targetAnchor" value="1298,423" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msParametrizedShapeTestSuite.TmsDiagrammsTest">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1460,500,318,84" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msParametrizedShapeTestSuite.TmsDiagrammsTest.TestClass()" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msParametrizedShapeTestSuite.TmsDiagrammsTest:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite">
+        <property name="sourceAnchor" value="1538,500" />
+        <property name="targetAnchor" value="1538,423" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1220,280,396,143" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite.CreatePrim()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite.TestClass()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite.AddTests(TestFramework.TTestCaseClass)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite.Create()" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:RegisteredShapesTest.TRegisteredShapesTest">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1200,20,287,128" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:RegisteredShapesTest.TRegisteredShapesTest.ShapesRegistredCountEqual_12()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:RegisteredShapesTest.TRegisteredShapesTest.TestFirstShape()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:RegisteredShapesTest.TRegisteredShapesTest.TestIndexOfTmsLine()" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:TestMsCircle.TestTmsCircle">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="928,20,176,145" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:MindStream:TestMsCircle.TestTmsCircle.FmsCircle" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestMsCircle.TestTmsCircle.SetUp()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestMsCircle.TestTmsCircle.TearDown()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestMsCircle.TestTmsCircle.TestContainsPt()" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsCustomShapeTest">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="440,20,297,84" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsCustomShapeTest.TestSerialize()" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:TestmsSerializeController.TmsCustomShapeTest:TestmsSerializeController.TmsShapeTestPrim">
+        <property name="sourceAnchor" value="579,104" />
+        <property name="targetAnchor" value="579,180" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsDiagrammTest">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="80,220,275,99" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsDiagrammTest.SaveDiagramm(System.string,msDiagramm.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsDiagrammTest.TestDeSerialize()" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:TestmsSerializeController.TmsDiagrammTest:TestmsSerializeController.TmsCustomShapeTest">
+        <property name="sourceAnchor" value="304,220" />
+        <property name="targetAnchor" value="512,104" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsShapeTest">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="840,220,253,129" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTest.TestDeSerialize()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTest.TestDeSerializeViaShapeCheck()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTest.TestShapeName()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:TestmsSerializeController.TmsShapeTest.TestDiagrammName()" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:TestmsSerializeController.TmsShapeTest:TestmsSerializeController.TmsCustomShapeTest">
+        <property name="sourceAnchor" value="857,220" />
+        <property name="targetAnchor" value="659,104" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.RmsShapeTest">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1540,180,254,67" />
+      <property name="location_set_by_user" value="True" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsShapeClassCheck">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1540,100,288,36" />
+      <property name="location_set_by_user" value="True" />
     </reference>
   </view>
 </nodeSet>

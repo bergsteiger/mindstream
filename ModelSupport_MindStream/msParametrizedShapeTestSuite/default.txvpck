@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="x798g24xah6uw3oi_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="delphi:e_class:src:MindStream:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,207,143" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite.CreatePrim()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite.TestClass()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite.AddTests(TestFramework.TTestCaseClass)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite.Create()" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msParametrizedShapeTestSuite.TmsDiagrammsTest">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="236,1,159,84" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msParametrizedShapeTestSuite.TmsDiagrammsTest.TestClass()" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msParametrizedShapeTestSuite.TmsDiagrammsTest:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite">
+        <property name="sourceAnchor" value="236,47" />
+        <property name="targetAnchor" value="217,47" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msParametrizedShapeTestSuite.TmsShapesTest">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="236,104,159,84" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msParametrizedShapeTestSuite.TmsShapesTest.TestClass()" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msParametrizedShapeTestSuite.TmsShapesTest:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite">
+        <property name="sourceAnchor" value="236,128" />
+        <property name="targetAnchor" value="217,128" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msParametrizedShapeTestSuite.@unitclass">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+  </view>
+</nodeSet>
