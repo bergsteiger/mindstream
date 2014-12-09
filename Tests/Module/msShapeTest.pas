@@ -37,7 +37,7 @@ type
     procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
     procedure CheckFileWithEtalon(const aFileName: String);
     procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); virtual;
-    procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; const aDiagramm: ImsDiagramm);
+    procedure SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm);
     procedure OutToFileAndCheck(aLambda: TmsLogLambda);
     procedure SetUp; override;
     function ShapesCount: Integer;
@@ -137,7 +137,7 @@ begin
  TmsDiagrammMarshal.Serialize(aFileName, aDiagramm.toObject As TmsDiagramm);
 end;
 
-procedure TmsShapeTestPrim.SaveDiagrammAndCheck(aShapeClass: RmsShape; const aDiagramm: ImsDiagramm);
+procedure TmsShapeTestPrim.SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm);
 var
  l_FileNameTest : String;
 begin
@@ -198,7 +198,7 @@ begin
   begin
    for l_P in f_Coords do
     (aDiagramm.toObject As TmsDiagramm).Items.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil)));
-   SaveDiagrammAndCheck(aShapeClass, aDiagramm);
+   SaveDiagrammAndCheck(aDiagramm);
   end
   , f_Context.rDiagrammName
  );
@@ -233,7 +233,7 @@ begin
  DeserializeDiargammAndCheck(
   procedure (const aDiagramm: ImsDiagramm)
   begin
-   SaveDiagrammAndCheck(aShapeClass, aDiagramm);
+   SaveDiagrammAndCheck(aDiagramm);
   end
  , aShapeClass
  );
