@@ -39,7 +39,6 @@ type
     procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); virtual;
     procedure SaveDiagrammAndCheck(aShapeClass: RmsShape; const aDiagramm: ImsDiagramm);
     procedure OutToFileAndCheck(aLambda: TmsLogLambda);
-    function ShapeClass: RmsShape;
     procedure SetUp; override;
     function ShapesCount: Integer;
     procedure CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
@@ -207,7 +206,7 @@ end;
 
 procedure TmsCustomShapeTest.TestSerialize;
 begin
- CreateDiagrammWithShapeAndSaveAndCheck(ShapeClass);
+ CreateDiagrammWithShapeAndSaveAndCheck(f_Context.rShapeClass);
 end;
 
 function TmsShapeTestPrim.TestSerializeMethodName: String;
@@ -242,7 +241,7 @@ end;
 
 procedure TmsShapeTest.TestDeSerialize;
 begin
- TestDeSerializeForShapeClass(ShapeClass);
+ TestDeSerializeForShapeClass(f_Context.rShapeClass);
 end;
 
 constructor TmsShapeTestPrim.Create(const aContext: TmsShapeTestContext);
@@ -281,14 +280,14 @@ end;
 
 procedure TmsShapeTest.TestDeSerializeViaShapeCheck;
 begin
- TestDeSerializeViaShapeCheckForShapeClass(ShapeClass);
+ TestDeSerializeViaShapeCheckForShapeClass(f_Context.rShapeClass);
 end;
 
 procedure TmsShapeTestPrim.OutToFileAndCheck(aLambda: TmsLogLambda);
 var
  l_FileNameTest : String;
 begin
- l_FileNameTest := TestResultsFileName(ShapeClass);
+ l_FileNameTest := TestResultsFileName(f_Context.rShapeClass);
  TmsLog.Log(l_FileNameTest,
   procedure (aLog: TmsLog)
   begin
@@ -303,7 +302,7 @@ begin
  OutToFileAndCheck(
   procedure (aLog: TmsLog)
   begin
-   aLog.ToLog(ShapeClass.ClassName);
+   aLog.ToLog(f_Context.rShapeClass.ClassName);
   end
  );
 end;
@@ -327,11 +326,6 @@ begin
     aCheck(aShapeClass);
   end
  );
-end;
-
-function TmsShapeTestPrim.ShapeClass: RmsShape;
-begin
- Result := f_Context.rShapeClass;
 end;
 
 // TmsDiagrammTest
