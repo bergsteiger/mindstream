@@ -3,103 +3,86 @@ unit msDiagramms;
 interface
 
 uses
- msDiagramm,
- Generics.Collections,
  System.Types,
  FMX.Objects,
- System.Classes
+ System.Classes,
+ msCoreObjects,
+ msShape,
+ Data.DBXJSONReflect,
+ msDiagramm,
+ msInterfaces,
+ msDiagrammsList
  ;
 
 type
- TmsDiagrammList = class(TObjectList<TmsDiagramm>)
- end;//TmsDiagrammList
-
- TmsDiagramms = class(TObject)
+ TmsDiagramms = class(TmsDiagrammsList, ImsDiagramms)
  private
-  f_Diagramms : TmsDiagrammList;
-  f_CurrentDiagramm : TmsDiagramm;
+  constructor CreatePrim;
+ protected
+  procedure DiagrammAdded(const aDiagramm: ImsDiagramm); override;
+  procedure Serialize;
+  procedure DeSerialize;
+  procedure SaveTo(const aFileName: String); override;
+  procedure LoadFrom(const aFileName: String); override;
  public
-  constructor Create(anImage: TImage; aList: TStrings);
-  destructor Destroy; override;
-  procedure ProcessClick(const aStart: TPointF);
-  procedure Clear;
-  procedure SelectShape(aList: TStrings; anIndex: Integer);
-  procedure AllowedShapesToList(aList: TStrings);
-  procedure ResizeTo(anImage: TImage);
-  procedure AddDiagramm(anImage: TImage; aList: TStrings);
-  function CurrentDiagrammIndex: Integer;
-  procedure SelectDiagramm(anIndex: Integer);
-  function CurrentShapeClassIndex: Integer;
+  class function Create: ImsDiagramms;
+  procedure Assign(anOther: TmsDiagramms);
  end;//TmsDiagramms
 
 implementation
 
 uses
- System.SysUtils
+ System.SysUtils,
+ FMX.Graphics,
+ System.UITypes,
+ msDiagrammsMarshal,
+ msRegisteredShapes,
+ msInvalidators
  ;
 
-constructor TmsDiagramms.Create(anImage: TImage; aList: TStrings);
+// TmsDiagramms
+
+class function TmsDiagramms.Create: ImsDiagramms;
+begin
+ Result := CreatePrim;
+end;
+
+constructor TmsDiagramms.CreatePrim;
 begin
  inherited Create;
- f_Diagramms := TmsDiagrammList.Create;
- AddDiagramm(anImage, aList);
 end;
 
-procedure TmsDiagramms.AddDiagramm(anImage: TImage; aList: TStrings);
+procedure TmsDiagramms.DiagrammAdded(const aDiagramm: ImsDiagramm);
 begin
- f_CurrentDiagramm := TmsDiagramm.Create(anImage, 'Диаграмма №' + IntToStr(f_Diagramms.Count + 1));
- f_Diagramms.Add(f_CurrentDiagramm);
- if (aList <> nil) then
-  aList.AddObject(f_CurrentDiagramm.Name, f_CurrentDiagramm);
-end;
-
-function TmsDiagramms.CurrentDiagrammIndex: Integer;
-begin
- Result := f_Diagramms.IndexOf(f_CurrentDiagramm);
-end;
-
-procedure TmsDiagramms.SelectDiagramm(anIndex: Integer);
-begin
- if (anIndex < 0) OR (anIndex >= f_Diagramms.Count) then
-  Exit;
- f_CurrentDiagramm := f_Diagramms.Items[anIndex];
- f_CurrentDiagramm.Invalidate;
-end;
-
-destructor TmsDiagramms.Destroy;
-begin
- FreeAndNil(f_Diagramms);
  inherited;
 end;
 
-procedure TmsDiagramms.ProcessClick(const aStart: TPointF);
+const
+ c_FileName = 'All.json';
+
+procedure TmsDiagramms.DeSerialize;
 begin
- f_CurrentDiagramm.ProcessClick(aStart);
+ TmsDiagrammsMarshal.DeSerialize(c_FileName, self);
 end;
 
-procedure TmsDiagramms.Clear;
+procedure TmsDiagramms.Assign(anOther: TmsDiagramms);
 begin
- f_CurrentDiagramm.Clear;
+ inherited Assign(anOther);
 end;
 
-procedure TmsDiagramms.SelectShape(aList: TStrings; anIndex: Integer);
+procedure TmsDiagramms.Serialize;
 begin
- f_CurrentDiagramm.SelectShape(aList, anIndex);
+ TmsDiagrammsMarshal.Serialize(c_FileName, self);
 end;
 
-procedure TmsDiagramms.AllowedShapesToList(aList: TStrings);
+procedure TmsDiagramms.SaveTo(const aFileName: String);
 begin
- f_CurrentDiagramm.AllowedShapesToList(aList);
+ TmsDiagrammsMarshal.Serialize(aFileName, Self);
 end;
 
-procedure TmsDiagramms.ResizeTo(anImage: TImage);
+procedure TmsDiagramms.LoadFrom(const aFileName: String);
 begin
- f_CurrentDiagramm.ResizeTo(anImage);
-end;
-
-function TmsDiagramms.CurrentShapeClassIndex: Integer;
-begin
- Result := f_CurrentDiagramm.CurrentShapeClassIndex;
+ TmsDiagrammsMarshal.DeSerialize(aFileName, Self);
 end;
 
 end.

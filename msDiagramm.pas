@@ -1,10 +1,15 @@
-unit msDiagramm;
+п»їunit msDiagramm;
 
 interface
 
 uses
+{$INCLUDE msItemsHolder.mixin.pas}
+ ,
+{$Include msPersistent.mixin.pas}
+,
+{$Include msShapesProvider.mixin.pas}
+ msInterfaces,
  FMX.Graphics,
- Generics.Collections,
  System.SysUtils,
  System.Types,
  System.UITypes,
@@ -12,128 +17,189 @@ uses
  msPointCircle,
  System.Classes,
  FMX.Objects,
- msRegisteredShapes
- ;
+ msRegisteredShapes,
+ FMX.Dialogs,
+ System.JSON,
+ msCoreObjects,
+ msInterfacedRefcounted;
 
 type
- TmsShapeList = class(TList<ImsShape>)
- public
-  function ShapeByPt(const aPoint: TPointF): ImsShape;
- end;//TmsShapeList
+ TmsItemsHolderParent = TmsInterfacedRefcounted;
+ TmsItem = ImsShape;
+{$Include msItemsHolder.mixin.pas}
+ TmsPersistentParent = TmsItemsHolder;
+{$Include msPersistent.mixin.pas}
+ TmsShapesProviderParent = TmsPersistent;
+{$Include msShapesProvider.mixin.pas}
 
- TmsDiagramm = class(TmsInterfacedNonRefcounted, ImsShapeByPt, ImsShapesController)
+ TmsDiagramm = class(TmsShapesProvider, ImsDiagramm, ImsShapeByPt, ImsShapesController)
+ // - Р’С‹РґРµР»СЏРµРј РёРЅС‚РµСЂС„РµР№СЃ ImsObjectWrap.
+ //   РЎРјРµС€РЅРѕ - РµСЃР»Рё TmsDiagramm РµРіРѕ СЂРµР°Р»РёР·РµС‚ РќРђРџР РЇРњРЈР®, С‚Рѕ РІСЃС‘ С…РѕСЂРѕС€Рѕ.
+ //   Рђ РµСЃР»Рё С‡РµСЂРµР· ImsSerializable, С‚Рѕ - AV.
+ //   РџСЂРѕ СЌС‚Рѕ РјРѕР¶РЅРѕ РїРёСЃР°С‚СЊ РѕС‚РґРµР»СЊРЅСѓСЋ СЃС‚Р°С‚СЊСЋ.
  private
-  FShapeList : TmsShapeList;
-  FCurrentClass : RmsShape;
-  FCurrentAddedShape : ImsShape;
-  FMovingShape : TmsShape;
-  FCanvas : TCanvas;
-  FOrigin : TPointF;
-  f_Name : String;
+  [JSONMarshalled(False)]
+  FCurrentAddedShape: ImsShape;
+  [JSONMarshalled(True)]
+  fName: String;
  private
-  procedure DrawTo(const aCanvas : TCanvas; const aOrigin : TPointF);
   function CurrentAddedShape: ImsShape;
-  procedure BeginShape(const aStart: TPointF);
-  procedure EndShape(const aFinish: TPointF);
+  procedure BeginShape(const aClickContext: TmsClickContext);
+  procedure EndShape(const aFinish: TPointF; aDiagrammsHolder: ImsDiagrammsHolder);
   function ShapeIsEnded: Boolean;
-  class function AllowedShapes: TmsRegisteredShapes;
-  procedure CanvasChanged(aCanvas: TCanvas);
   function ShapeByPt(const aPoint: TPointF): ImsShape;
   procedure RemoveShape(const aShape: ImsShape);
-  property CurrentClass : RmsShape read FCurrentClass write FCurrentClass;
+  function Get_Name: String;
+  constructor CreatePrim(const aName: String);
+  function AddShape(const aShape: ImsShape): ImsShape;
+  function GetMax: TPointF;
+ protected
+  procedure SaveTo(const aFileName: String); override;
+  procedure LoadFrom(const aFileName: String); override;
  public
-  constructor Create(anImage: TImage; const aName: String);
-  procedure ResizeTo(anImage: TImage);
-  destructor Destroy; override;
-  procedure ProcessClick(const aStart: TPointF);
+  class function Create(const aName: String): ImsDiagramm;
+  procedure DrawTo(const aCanvas: TCanvas);
+  procedure ProcessClick(const aClickContext: TmsClickContext);
   procedure Clear;
   procedure Invalidate;
-  procedure AllowedShapesToList(aList: TStrings);
-  procedure SelectShape(aList: TStrings; anIndex: Integer);
-  property Name : String read f_Name;
-  function CurrentShapeClassIndex: Integer;
- end;//TmsDiagramm
+  property Name: String read fName write fName;
+  procedure Serialize;
+  procedure DeSerialize;
+  procedure SaveToPng(const aFileName: String);
+  procedure Assign(const anOther: TmsDiagramm);
+ end; // TmsDiagramm
 
 implementation
 
 uses
- msMover;
+{$Include msItemsHolder.mixin.pas}
+{$Include msPersistent.mixin.pas}
+  ,
+{$Include msShapesProvider.mixin.pas}
+ msMover,
+ msCircle,
+ msDiagrammMarshal,
+ msInvalidators,
+ msShapesForToolbar,
+ msDiagrammsController,
+ System.Math.Vectors,
+ msTestConstants
+ ;
 
-class function TmsDiagramm.AllowedShapes: TmsRegisteredShapes;
+{$Include msItemsHolder.mixin.pas}
+{$Include msPersistent.mixin.pas}
+{$Include msShapesProvider.mixin.pas}
+
+const
+ c_FileName = '.json';
+
+procedure TmsDiagramm.Serialize;
 begin
- Result := TmsRegisteredShapes.Instance;
+ TmsDiagrammMarshal.Serialize(Self.Name + c_FileName, Self);
 end;
 
-procedure TmsDiagramm.AllowedShapesToList(aList: TStrings);
-var
- l_Class : RmsShape;
+procedure TmsDiagramm.ProcessClick(const aClickContext: TmsClickContext);
 begin
- aList.Clear;
- for l_Class in AllowedShapes do
-  aList.AddObject(l_Class.ClassName, TObject(l_Class));
+ if ShapeIsEnded then
+ // - РјС‹ РќР• Р”РћР‘РђР’Р›РЇР›Р РїСЂРёРјРёС‚РёРІР° - РЅР°РґРѕ РµРіРѕ Р”РћР‘РђР’РРўР¬
+  BeginShape(aClickContext)
+ else
+  EndShape(aClickContext.rClickPoint, aClickContext.rDiagrammsHolder);
 end;
 
-function TmsDiagramm.CurrentShapeClassIndex: Integer;
+procedure TmsDiagramm.BeginShape(const aClickContext: TmsClickContext);
 begin
- Result := AllowedShapes.IndexOf(FCurrentClass);
-end;
-
-procedure TmsDiagramm.SelectShape(aList: TStrings; anIndex: Integer);
-begin
- CurrentClass := RmsShape(aList.Objects[anIndex]);
-end;
-
-procedure TmsDiagramm.ProcessClick(const aStart: TPointF);
-begin
-  if ShapeIsEnded then
-  // - мы НЕ ДОБАВЛЯЛИ примитива - надо его ДОБАВИТЬ
-   BeginShape(aStart)
-  else
-   EndShape(aStart);
-end;
-
-procedure TmsDiagramm.BeginShape(const aStart: TPointF);
-begin
- Assert(CurrentClass <> nil);
- FCurrentAddedShape := CurrentClass.Make(TmsMakeShapeContext.Create(aStart, Self));
+ FCurrentAddedShape := aClickContext.rShapeCreator.CreateShape(TmsMakeShapeContext.Create(aClickContext.rClickPoint, Self, aClickContext.rDiagrammsHolder));
  if (FCurrentAddedShape <> nil) then
  begin
-  FShapeList.Add(FCurrentAddedShape);
+  Items.Add(FCurrentAddedShape);
   if not FCurrentAddedShape.IsNeedsSecondClick then
-  // - если не надо SecondClick, то наш примитив - завершён
+  // - РµСЃР»Рё РЅРµ РЅР°РґРѕ SecondClick, С‚Рѕ РЅР°С€ РїСЂРёРјРёС‚РёРІ - Р·Р°РІРµСЂС€С‘РЅ
    FCurrentAddedShape := nil;
   Invalidate;
- end;//FCurrentAddedShape <> nil
+ end; // FCurrentAddedShape <> nil
 end;
 
 procedure TmsDiagramm.Clear;
 begin
- FShapeList.Clear;
+ if (f_Items <> nil) then
+  f_Items.Clear;
  Invalidate;
 end;
 
-constructor TmsDiagramm.Create(anImage: TImage; const aName: String);
+class function TmsDiagramm.Create(const aName: String): ImsDiagramm;
+begin
+ Result := CreatePrim(aName);
+end;
+
+constructor TmsDiagramm.CreatePrim(const aName: String);
 begin
  inherited Create;
- FShapeList := TmsShapeList.Create;
  FCurrentAddedShape := nil;
- FCanvas := nil;
- FOrigin := TPointF.Create(0, 0);
- ResizeTo(anImage);
- FCurrentClass := AllowedShapes.First;
- f_Name := aName;
+ fName := aName;
 end;
 
-procedure TmsDiagramm.ResizeTo(anImage: TImage);
+procedure TmsDiagramm.SaveTo(const aFileName: String);
 begin
- anImage.Bitmap := TBitmap.Create(Round(anImage.Width), Round(anImage.Height));
- CanvasChanged(anImage.Bitmap.Canvas);
+ TmsDiagrammMarshal.Serialize(aFileName, Self);
 end;
 
-procedure TmsDiagramm.CanvasChanged(aCanvas: TCanvas);
+procedure TmsDiagramm.SaveToPng(const aFileName: string);
+var
+ l_BitmapBuffer: TBitmap;
+ l_SourceRect: TRectF;
+ l_OriginalMatrix: TMatrix;
+ l_Max : TPointF;
 begin
- FCanvas := aCanvas;
- Invalidate;
+ // Р¤РёРєСЃРёСЂСѓРµРј СЂР°Р·РјРµСЂ СЃРЅРёРјР°РµРјРѕР№ РѕР±Р»Р°СЃС‚Рё
+ l_Max := GetMax;
+ Assert(l_Max.X > 0);
+ Assert(l_Max.Y > 0);
+ l_SourceRect := TRectF.Create(0, 0, l_Max.X, l_Max.Y);
+ // РЎРѕР·РґР°РµРј РІСЂРµРјРµРЅРЅС‹Р№ Р±СѓС„РµСЂ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ СЃРєСЂРёРЅС€РѕС‚Р°
+ l_BitmapBuffer := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
+ try
+  l_OriginalMatrix := TMatrix.Identity;
+  l_OriginalMatrix := l_OriginalMatrix * l_BitmapBuffer.Canvas.Matrix;
+  l_BitmapBuffer.Canvas.SetMatrix(l_OriginalMatrix);
+  Self.DrawTo(l_BitmapBuffer.Canvas);
+  l_BitmapBuffer.SaveToFile(aFileName);
+ finally
+  FreeAndNil(l_BitmapBuffer);
+ end;
+end;
+
+procedure TmsDiagramm.LoadFrom(const aFileName: String);
+begin
+ TmsDiagrammMarshal.DeSerialize(aFileName, Self);
+end;
+
+function TmsDiagramm.AddShape(const aShape: ImsShape): ImsShape;
+begin
+ Items.Add(aShape);
+ Result := aShape;
+end;
+
+function TmsDiagramm.GetMax: TPointF;
+var
+ l_Shape : ImsShape;
+ l_BR : TPointF;
+begin
+ Result.X := 0;
+ Result.Y := 0;
+ for l_Shape in f_Items do
+ begin
+  l_BR := l_Shape.DrawBounds.BottomRight;
+  if (l_BR.X > Result.X) then
+   Result.X := l_BR.X;
+  if (l_BR.Y > Result.Y) then
+   Result.Y := l_BR.Y;
+ end;//for l_Shape in f_Items
+end;
+
+function TmsDiagramm.Get_Name: String;
+begin
+ Result := fName;
 end;
 
 function TmsDiagramm.CurrentAddedShape: ImsShape;
@@ -141,42 +207,53 @@ begin
  Result := FCurrentAddedShape;
 end;
 
-destructor TmsDiagramm.Destroy;
+procedure TmsDiagramm.Assign(const anOther: TmsDiagramm);
 begin
- FreeAndNil(FShapeList);
- inherited;
+ inherited Assign(anOther);
+ Self.Name := anOther.Name;
+ Self.Invalidate;
 end;
 
-procedure TmsDiagramm.DrawTo(const aCanvas: TCanvas; const aOrigin : TPointF);
+procedure TmsDiagramm.DeSerialize;
+begin
+ Clear;
+ try
+  TmsDiagrammMarshal.DeSerialize(Self.Name + c_FileName, Self);
+ except
+  on EFOpenError do
+   Exit;
+ end; // try..except
+end;
+
+procedure TmsDiagramm.DrawTo(const aCanvas: TCanvas);
 var
- l_Shape : ImsShape;
+ l_Shape: ImsShape;
 begin
  aCanvas.BeginScene;
  try
-  for l_Shape in FShapeList do
-   l_Shape.DrawTo(TmsDrawContext.Create(aCanvas, aOrigin));
+  if (f_Items = nil) then
+  // - если заггрузить диаграммы, а потом провалиться на N+1 уровней -
+  //   мы как раз сюда попадём
+   Exit;
+  Assert(f_Items <> nil);
+  for l_Shape in f_Items do
+   l_Shape.DrawTo(TmsDrawContext.Create(aCanvas));
  finally
   aCanvas.EndScene;
- end;//try..finally
+ end; // try..finally
 end;
 
-procedure TmsDiagramm.EndShape(const aFinish: TPointF);
+procedure TmsDiagramm.EndShape(const aFinish: TPointF; aDiagrammsHolder: ImsDiagrammsHolder);
 begin
  Assert(CurrentAddedShape <> nil);
- CurrentAddedShape.EndTo(TmsEndShapeContext.Create(aFinish, Self));
+ CurrentAddedShape.EndTo(TmsEndShapeContext.Create(aFinish, Self, aDiagrammsHolder));
  FCurrentAddedShape := nil;
  Invalidate;
 end;
 
 procedure TmsDiagramm.Invalidate;
 begin
- FCanvas.BeginScene;
- try
-  FCanvas.Clear(TAlphaColorRec.Null);
-  DrawTo(FCanvas, FOrigin);
- finally
-  FCanvas.EndScene;
- end;//try..finally
+ TmsInvalidators.InvalidateDiagramm(Self);
 end;
 
 function TmsDiagramm.ShapeIsEnded: Boolean;
@@ -185,31 +262,31 @@ begin
 end;
 
 function TmsDiagramm.ShapeByPt(const aPoint: TPointF): ImsShape;
-
-begin
- Result := FShapeList.ShapeByPt(aPoint);
-end;
-
-procedure TmsDiagramm.RemoveShape(const aShape: ImsShape);
-begin
- FShapeList.Remove(aShape);
-end;
-
-function TmsShapeList.ShapeByPt(const aPoint: TPointF): ImsShape;
 var
- l_Shape : ImsShape;
- l_Index : Integer;
+ l_Shape: ImsShape;
+ l_Index: Integer;
 begin
  Result := nil;
- for l_Index := Self.Count - 1 downto 0 do
+  if (f_Items = nil) then
+  // - если заггрузить диаграммы, а потом провалиться на N+1 уровней -
+  //   мы как раз сюда попадём
+   Exit;
+ for l_Index := f_Items.Count - 1 downto 0 do
  begin
-  l_Shape := Self.Items[l_Index];
+  l_Shape := f_Items.Items[l_Index];
   if l_Shape.ContainsPt(aPoint) then
   begin
    Result := l_Shape;
    Exit;
-  end;//l_Shape.ContainsPt(aPoint)
- end;//for l_Index
+  end; // l_Shape.ContainsPt(aPoint)
+ end; // for l_Index
+end;
+
+procedure TmsDiagramm.RemoveShape(const aShape: ImsShape);
+begin
+ Assert(f_Items <> nil);
+ f_Items.Remove(aShape);
+ Invalidate;
 end;
 
 end.

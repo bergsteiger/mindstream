@@ -1,6 +1,9 @@
 unit msOurShapes;
 
 interface
+
+implementation
+
 uses
   msLine,
   msRectangle,
@@ -13,11 +16,27 @@ uses
   msDotLine,
   msLineWithArrow,
   msTriangleDirectionRight,
-  msMover,
-  msRegisteredShapes
-  ;
+  msRegisteredShapes,
+  msRedRectangle,
+  msGreenRectangle,
+  msPolygonShape,
 
-implementation
+  // utility shapes
+  msMover,
+  msPicker,
+  msUpToParent,
+  msSwapParents,
+  msShapeRemover,
+
+  // special shapes
+  msPointCircle,
+  msSmallTriangle,
+  msGreenCircle,
+
+  // shapes for toolbar buttons
+  msBlackTriangle,
+  msMoverIcon
+  ;
 
 procedure RegisterOurShapes;
 begin
@@ -33,7 +52,24 @@ begin
   TmsDotLine,
   TmsLineWithArrow,
   TmsTriangleDirectionRight,
-  TmsMover
+  TmsRedRectangle,
+  TmsGreenRectangle,
+
+  // special shapes
+  TmsPointCircle,
+  TmsSmallTriangle,
+  TmsGreenCircle,
+
+  // utility shapes
+  TmsMover,
+  TmsPicker,
+  TmsUpToParent,
+  TmsSwapParents,
+  TmsShapeRemover,
+
+  // shapes for buttons
+  TmsBlackTriangle,
+  TmsMoverIcon
  ]);
 end;
 
