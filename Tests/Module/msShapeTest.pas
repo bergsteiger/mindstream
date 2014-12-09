@@ -44,7 +44,7 @@ type
     procedure CreateDiagrammWithShapeAndSaveAndCheck;
     function TestSerializeMethodName: String;
     procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
-    procedure TestDeSerializeForShapeClass(aShapeClass: RmsShape);
+    procedure TestDeSerializeForShapeClass;
     procedure TestDeSerializeViaShapeCheckForShapeClass(aShapeClass: RmsShape);
   public
     class procedure CheckShapes(aCheck: TmsShapeClassCheck);
@@ -228,7 +228,7 @@ begin
  );
 end;
 
-procedure TmsShapeTestPrim.TestDeSerializeForShapeClass(aShapeClass: RmsShape);
+procedure TmsShapeTestPrim.TestDeSerializeForShapeClass;
 begin
  DeserializeDiargammAndCheck(
   procedure (const aDiagramm: ImsDiagramm)
@@ -240,7 +240,7 @@ end;
 
 procedure TmsShapeTest.TestDeSerialize;
 begin
- TestDeSerializeForShapeClass(f_Context.rShapeClass);
+ TestDeSerializeForShapeClass;
 end;
 
 constructor TmsShapeTestPrim.Create(const aContext: TmsShapeTestContext);
