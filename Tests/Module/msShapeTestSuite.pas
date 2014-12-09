@@ -1,4 +1,4 @@
-unit msParametrizedShapeTestSuite;
+unit msShapeTestSuite;
 
 interface
 
