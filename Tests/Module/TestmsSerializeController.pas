@@ -32,7 +32,7 @@ type
    f_TestSerializeMethodName : String;
    f_Coords : array of TPoint;
   protected
-    function TestResultsFileName(aShapeClass: RmsShape): String;
+    function TestResultsFileName: String;
     function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
     procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
     procedure CheckFileWithEtalon(const aFileName: String);
@@ -127,9 +127,9 @@ begin
  end;//FileExists(l_FileNameEtalon)
 end;
 
-function TmsShapeTestPrim.TestResultsFileName(aShapeClass: RmsShape): String;
+function TmsShapeTestPrim.TestResultsFileName: String;
 begin
- Result := MakeFileName(Name, aShapeClass);
+ Result := MakeFileName(Name, f_Context.rShapeClass);
 end;
 
 procedure TmsShapeTestPrim.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
@@ -141,7 +141,7 @@ procedure TmsShapeTestPrim.SaveDiagrammAndCheck(aShapeClass: RmsShape; const aDi
 var
  l_FileNameTest : String;
 begin
- l_FileNameTest := TestResultsFileName(aShapeClass);
+ l_FileNameTest := TestResultsFileName;
  SaveDiagramm(l_FileNameTest, aDiagramm);
  CheckFileWithEtalon(l_FileNameTest);
 end;
@@ -287,7 +287,7 @@ procedure TmsShapeTestPrim.OutToFileAndCheck(aLambda: TmsLogLambda);
 var
  l_FileNameTest : String;
 begin
- l_FileNameTest := TestResultsFileName(f_Context.rShapeClass);
+ l_FileNameTest := TestResultsFileName;
  TmsLog.Log(l_FileNameTest,
   procedure (aLog: TmsLog)
   begin
@@ -353,7 +353,7 @@ begin
   TmsDiagrammsMarshal.DeSerialize(MakeFileName(TestSerializeMethodName, f_Context.rShapeClass), l_Diagramms);
   // - берём результаты от ПРЕДЫДУЩИХ тестов, НЕКОШЕРНО с точки зрения TDD
   //   НО! Чертовски эффективно.
-  l_FileName := TestResultsFileName(f_Context.rShapeClass);
+  l_FileName := TestResultsFileName;
   TmsDiagrammsMarshal.Serialize(l_FileName, l_Diagramms);
   CheckFileWithEtalon(l_FileName);
  finally
