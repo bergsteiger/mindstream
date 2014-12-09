@@ -54,18 +54,24 @@ begin
     l_CenterPoint := FinishPoint;
 
     l_Matrix := TMatrix.Identity;
-    // - —Ќ»ћј≈ћ оригинальную матрицу
+    // - —Ќ»ћј≈ћ оригинальную матрицу, точнее берЄм ≈ƒ»Ќ»„Ќ”ё матрицу
+    // https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
+    // - задаЄм точку, вокруг которой вертим
     l_Matrix := l_Matrix * TMatrix.CreateRotation(l_Angle);
+    // - задаЄм угол поворота
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
+    // - задаЄм начало координат
     l_Matrix := l_Matrix * l_OriginalMatrix;
     // - ѕ–»ћ≈Ќя≈ћ оригинальную матрицу
     // »наче например ќ–»√»ЌјЋ№Ќџ… параллельный перенос - не будет работать.
     // https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B0%D0%BB%D0%BB%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81
 
     aCtx.rCanvas.SetMatrix(l_Matrix);
+    // - примен€ем нашу "комплексную" матрицу
 
     l_Proxy.DrawTo(aCtx);
+    // - отрисовываем примитив с учЄтом матрицы преобразований
    finally
     FreeAndNil(l_Proxy);
    end;//try..finally
