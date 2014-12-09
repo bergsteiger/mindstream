@@ -4,32 +4,32 @@ object fmGUITestRunner: TfmGUITestRunner
   Caption = 'fmGUITestRunner'
   ClientHeight = 570
   ClientWidth = 448
+  Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop, iPhone, iPad]
   OnCreate = FormCreate
-  OnClose = FormClose
   OnDestroy = FormDestroy
   OnShow = FormShow
   DesignerMasterStyle = 0
   object TestTree: TTreeView
     Position.X = 16.000000000000000000
     Position.Y = 40.000000000000000000
-    Size.Width = 417.000000000000000000
-    Size.Height = 273.000000000000000000
+    Size.Width = 425.000000000000000000
+    Size.Height = 289.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     OnChangeCheck = TestTreeChangeCheck
   end
   object ToolBar1: TToolBar
     Size.Width = 448.000000000000000000
-    Size.Height = 33.000000000000000000
+    Size.Height = 40.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 2
     object btRunAllTest: TSpeedButton
       Position.X = 16.000000000000000000
       Position.Y = 8.000000000000000000
-      Size.Width = 49.000000000000000000
+      Size.Width = 80.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'playtoolbutton'
@@ -44,16 +44,17 @@ object fmGUITestRunner: TfmGUITestRunner
     FooterAppearanceClassName = 'TListHeaderObjects'
     Position.X = 16.000000000000000000
     Position.Y = 344.000000000000000000
-    Size.Width = 409.000000000000000000
-    Size.Height = 201.000000000000000000
+    Size.Width = 425.000000000000000000
+    Size.Height = 217.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 3
+    TabOrder = 1
   end
   object lblResult: TLabel
-    StyledSettings = [Family, Size, FontColor]
     Position.X = 16.000000000000000000
     Position.Y = 328.000000000000000000
-    TextSettings.Font.Style = [fsBold]
+    Size.Width = 120.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
     Text = 'Result'
   end
 end

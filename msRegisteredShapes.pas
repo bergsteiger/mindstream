@@ -10,6 +10,8 @@ uses
 type
  RmsShapeList = TList<RmsShape>;
 
+ TmsShapeClassLambda = reference to procedure (aShapeClass : RmsShape);
+
  TmsRegisteredShapes = class
  strict private
   f_Registered : RmsShapeList;
@@ -23,9 +25,9 @@ type
   procedure Register(const aShapes: array of RmsShape); overload;
   destructor Destroy; override;
   function GetEnumerator: RmsShapeList.TEnumerator;
-    function IndexOf(const aValue: RmsShape): Integer;
-    function Func: Integer;
-  end;//TmsRegisteredShapes
+  function IndexOf(const aValue: RmsShape): Integer;
+  class procedure IterateShapes(aLambda: TmsShapeClassLambda);
+ end;//TmsRegisteredShapes
 
 implementation
 
@@ -86,8 +88,14 @@ begin
  Result := f_Registered.IndexOf(aValue);
 end;
 
-function TmsRegisteredShapes.Func: Integer;
+class procedure TmsRegisteredShapes.IterateShapes(aLambda: TmsShapeClassLambda);
+var
+ l_ShapeClass : RmsShape;
 begin
+ for l_ShapeClass in Self.Instance do
+ begin
+   aLambda(l_ShapeClass);
+ end;//for l_ShapeClass
 end;
 
 end.
