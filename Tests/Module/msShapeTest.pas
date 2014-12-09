@@ -41,7 +41,7 @@ type
     procedure OutToFileAndCheck(aLambda: TmsLogLambda);
     procedure SetUp; override;
     function ShapesCount: Integer;
-    procedure CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
+    procedure CreateDiagrammWithShapeAndSaveAndCheck;
     function TestSerializeMethodName: String;
     procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck; aShapeClass: RmsShape);
     procedure TestDeSerializeForShapeClass(aShapeClass: RmsShape);
@@ -189,7 +189,7 @@ begin
  end;//try..finally
 end;
 
-procedure TmsShapeTestPrim.CreateDiagrammWithShapeAndSaveAndCheck(aShapeClass: RmsShape);
+procedure TmsShapeTestPrim.CreateDiagrammWithShapeAndSaveAndCheck;
 begin
  CreateDiagrammAndCheck(
   procedure (const aDiagramm : ImsDiagramm)
@@ -197,7 +197,7 @@ begin
    l_P : TPoint;
   begin
    for l_P in f_Coords do
-    (aDiagramm.toObject As TmsDiagramm).Items.Add(aShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil)));
+    (aDiagramm.toObject As TmsDiagramm).Items.Add(f_Context.rShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil)));
    SaveDiagrammAndCheck(aDiagramm);
   end
   , f_Context.rDiagrammName
@@ -206,7 +206,7 @@ end;
 
 procedure TmsCustomShapeTest.TestSerialize;
 begin
- CreateDiagrammWithShapeAndSaveAndCheck(f_Context.rShapeClass);
+ CreateDiagrammWithShapeAndSaveAndCheck;
 end;
 
 function TmsShapeTestPrim.TestSerializeMethodName: String;
