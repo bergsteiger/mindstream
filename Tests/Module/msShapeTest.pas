@@ -33,7 +33,7 @@ type
    f_Coords : array of TPoint;
   protected
     function TestResultsFileName: String;
-    function MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
+    function MakeFileName(const aTestName: String): String;
     procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
     procedure CheckFileWithEtalon(const aFileName: String);
     procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); virtual;
@@ -88,13 +88,13 @@ implementation
   msDiagramms
   ;
 
-function TmsShapeTestPrim.MakeFileName(const aTestName: String; aShapeClass: RmsShape): String;
+function TmsShapeTestPrim.MakeFileName(const aTestName: String): String;
 var
  l_Folder : String;
 begin
  l_Folder := ExtractFilePath(ParamStr(0)) + 'TestResults\';
  ForceDirectories(l_Folder);
- Result := l_Folder + ClassName + '_' + aTestName + '_' + aShapeClass.ClassName + '.json';
+ Result := l_Folder + ClassName + '_' + aTestName + '_' + f_Context.rShapeClass.ClassName + '.json';
 end;
 
 procedure TmsShapeTestPrim.CheckFileWithEtalon(const aFileName: String);
@@ -129,7 +129,7 @@ end;
 
 function TmsShapeTestPrim.TestResultsFileName: String;
 begin
- Result := MakeFileName(Name, f_Context.rShapeClass);
+ Result := MakeFileName(Name);
 end;
 
 procedure TmsShapeTestPrim.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
@@ -219,7 +219,7 @@ begin
  CreateDiagrammAndCheck(
   procedure (const aDiagramm : ImsDiagramm)
   begin
-   TmsDiagrammMarshal.DeSerialize(MakeFileName(TestSerializeMethodName, aShapeClass), aDiagramm.toObject As TmsDiagramm);
+   TmsDiagrammMarshal.DeSerialize(MakeFileName(TestSerializeMethodName), aDiagramm.toObject As TmsDiagramm);
    // - берём результаты от ПРЕДЫДУЩИХ тестов, НЕКОШЕРНО с точки зрения TDD
    //   НО! Чертовски эффективно.
    aCheck(aDiagramm);
@@ -350,7 +350,7 @@ var
 begin
  l_Diagramms := TmsDiagramms.Create(nil, nil);
  try
-  TmsDiagrammsMarshal.DeSerialize(MakeFileName(TestSerializeMethodName, f_Context.rShapeClass), l_Diagramms);
+  TmsDiagrammsMarshal.DeSerialize(MakeFileName(TestSerializeMethodName), l_Diagramms);
   // - берём результаты от ПРЕДЫДУЩИХ тестов, НЕКОШЕРНО с точки зрения TDD
   //   НО! Чертовски эффективно.
   l_FileName := TestResultsFileName;
