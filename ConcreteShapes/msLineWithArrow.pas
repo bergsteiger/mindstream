@@ -54,7 +54,7 @@ begin
     // create a point around which will rotate
     l_CenterPoint := TPointF.Create(FinishPoint.X, FinishPoint.Y);
 
-    l_Matrix := l_OriginalMatrix * l_OriginalMatrix.Inverse;
+    l_Matrix := TMatrix.Identity;
     // - СНИМАЕМ оригинальную матрицу
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
     l_Matrix := l_Matrix * TMatrix.CreateRotation(l_Angle);
