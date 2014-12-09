@@ -51,7 +51,6 @@ type
   procedure EndShape(const aFinish: TPointF);
   function ShapeIsEnded: Boolean;
   class function AllowedShapes: TmsRegisteredShapes;
-  procedure CanvasChanged(aCanvas: TCanvas);
   function ShapeByPt(const aPoint: TPointF): ImsShape;
   procedure RemoveShape(const aShape: ImsShape);
   function Get_Name: String;
@@ -59,7 +58,6 @@ type
  public
   class function Create(anImage: TPaintBox; const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
-  procedure ResizeTo(anImage: TImage);
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
   procedure Invalidate;
@@ -172,20 +170,6 @@ end;
 function TmsDiagramm.Get_Name: String;
 begin
  Result := FName;
-end;
-
-procedure TmsDiagramm.ResizeTo(anImage: TImage);
-begin
- if (anImage <> nil) then
- begin
-  anImage.Bitmap := TBitmap.Create(Round(anImage.Width), Round(anImage.Height));
-  CanvasChanged(anImage.Bitmap.Canvas);
- end;//anImage <> nil
-end;
-
-procedure TmsDiagramm.CanvasChanged(aCanvas: TCanvas);
-begin
- Invalidate;
 end;
 
 function TmsDiagramm.CurrentAddedShape: ImsShape;
