@@ -3,7 +3,8 @@ unit msDiagramms;
 interface
 
 uses
- msDiagramm,
+ {$Include msIvalidator.mixin.pas}
+ ,
  System.Types,
  FMX.Objects,
  System.Classes,
@@ -16,17 +17,18 @@ uses
  ;
 
 type
- TmsDiagramms = class(TmsCustomDiagramms, ImsIvalidator)
+ TmsIvalidatorParent = TmsCustomDiagramms;
+ {$Include msIvalidator.mixin.pas}
+ TmsDiagramms = class(TmsIvalidator)
  private
   [JSONMarshalled(True)]
   f_CurrentDiagramm : Integer;
   [JSONMarshalled(False)]
   f_Image: TPaintBox;
   function pm_GetCurrentDiagramm: TmsDiagramm;
-  procedure InvalidateDiagramm(aDiagramm: TmsDiagramm);
+  procedure DoInvalidateDiagramm(aDiagramm: TmsDiagramm); override;
  public
   constructor Create(anImage: TPaintBox; aList: TStrings);
-  procedure AfterConstruction; override;
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
@@ -39,12 +41,12 @@ type
   procedure DeSerialize;
   property CurrentDiagramm: TmsDiagramm read pm_GetCurrentDiagramm;
   procedure Assign(anOther: TmsDiagramms);
-  destructor Destroy; override;
  end;//TmsDiagramms
 
 implementation
 
 uses
+ {$Include msIvalidator.mixin.pas}
  System.SysUtils,
  FMX.Graphics,
  System.UITypes,
@@ -52,6 +54,8 @@ uses
  msRegisteredShapes,
  msInvalidators
  ;
+
+{$Include msIvalidator.mixin.pas}
 
 // TmsDiagramms
 
@@ -62,24 +66,12 @@ begin
  AddDiagramm(aList);
 end;
 
-procedure TmsDiagramms.AfterConstruction;
-begin
- TmsInvalidators.Subscribe(Self);
- inherited;
-end;
-
-destructor TmsDiagramms.Destroy;
-begin
- TmsInvalidators.UnSubscribe(Self);
- inherited;
-end;
-
 function TmsDiagramms.pm_GetCurrentDiagramm: TmsDiagramm;
 begin
  Result := Items[f_CurrentDiagramm].toObject As TmsDiagramm;
 end;
 
-procedure TmsDiagramms.InvalidateDiagramm(aDiagramm: TmsDiagramm);
+procedure TmsDiagramms.DoInvalidateDiagramm(aDiagramm: TmsDiagramm);
 var
  l_Canvas : TCanvas;
 begin
