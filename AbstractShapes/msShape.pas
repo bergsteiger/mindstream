@@ -75,7 +75,7 @@ type
  ['{F475D5E5-C4C9-4177-AC54-8E54CCB32935}']
  end;//ImsDiagrammPrim
 
- TmsDiagrammsPrim = class abstract(TmsInterfacedNonRefcounted, ImsDiagrammsPrim)
+ TmsDiagrammsPrim = class abstract(TmsInterfacedRefcounted, ImsDiagrammsPrim)
  end;//TmsDiagrammsPrim
 
  TmsShape = class abstract(TmsInterfacedRefcounted, ImsShape)
