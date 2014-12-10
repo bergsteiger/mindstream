@@ -11,11 +11,12 @@ uses
  System.Classes,
  msCoreObjects,
  msWatchedObjectInstance,
- msInterfacedNonRefcounted
+ msInterfacedNonRefcounted,
+ msShape
  ;
 
 type
- TmsItemsHolderParent = TmsInterfacedNonRefcounted;
+ TmsItemsHolderParent = TmsDiagrammsPrim;
  TmsItem = ImsDiagramm;
  {$Include msItemsHolder.mixin.pas}
  TmsDiagramms = class(TmsItemsHolder, ImsIvalidator)

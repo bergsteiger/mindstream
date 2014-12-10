@@ -9,7 +9,8 @@ uses
  Generics.Collections,
  msCoreObjects,
  msSerializeInterfaces,
- msInterfacedRefcounted
+ msInterfacedRefcounted,
+ msInterfacedNonRefcounted
  ;
 
 type
@@ -73,6 +74,9 @@ type
  ImsDiagrammPrim = interface(ImsObjectWrap)
  ['{F475D5E5-C4C9-4177-AC54-8E54CCB32935}']
  end;//ImsDiagrammPrim
+
+ TmsDiagrammsPrim = class(TmsInterfacedNonRefcounted, ImsDiagrammsPrim)
+ end;//TmsDiagrammsPrim
 
  TmsShape = class abstract(TmsInterfacedRefcounted, ImsShape)
  private
