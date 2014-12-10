@@ -20,11 +20,9 @@ type
  private
   [JSONMarshalled(True)]
   f_CurrentDiagramm : Integer;
-  [JSONMarshalled(False)]
-  f_Image: TPaintBox;
   function pm_GetCurrentDiagramm: TmsDiagramm;
  public
-  constructor Create(anImage: TPaintBox; aList: TStrings);
+  constructor Create(aList: TStrings);
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
@@ -51,10 +49,9 @@ uses
 
 // TmsDiagramms
 
-constructor TmsDiagramms.Create(anImage: TPaintBox; aList: TStrings);
+constructor TmsDiagramms.Create(aList: TStrings);
 begin
  inherited Create;
- f_Image := anImage;
  AddDiagramm(aList);
 end;
 

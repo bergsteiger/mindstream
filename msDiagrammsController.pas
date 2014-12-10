@@ -78,7 +78,7 @@ begin
  btAddDiagramm := aAddDiagramm;
  btSaveDiagramm := aSaveDiagramm;
  btLoadDiagramm := aLoadDiagramm;
- FDiagramms := TmsDiagramms.Create(imgMain, cbDiagramm.Items);
+ FDiagramms := TmsDiagramms.Create(cbDiagramm.Items);
  FDiagramms.AllowedShapesToList(cbShapes.Items);
  cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
  cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
