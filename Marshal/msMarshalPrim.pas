@@ -7,7 +7,7 @@ uses
  ;
 
 type
- TmsMarshalPrim = class
+ TmsMarshalPrim = class abstract
  strict private
   class var f_Marshal : TJSONMarshal;
   class var f_UnMarshal : TJSONUnMarshal;
