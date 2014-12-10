@@ -16,11 +16,11 @@ uses
  System.UITypes,
  msCoreObjects,
  msWatchedObjectInstance,
- msInterfacedNonRefcounted
+ msInterfacedRefcounted
  ;
 
 type
- TmsIvalidatorParent = TmsInterfacedNonRefcounted;
+ TmsIvalidatorParent = TmsInterfacedRefcounted;
  {$Include msIvalidator.mixin.pas}
  TmsDiagrammsController = class(TmsIvalidator)
  private
