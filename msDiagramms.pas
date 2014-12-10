@@ -16,13 +16,18 @@ uses
  ;
 
 type
- TmsDiagramms = class(TmsCustomDiagramms)
+ ImsDiagramms = interface(ImsDiagrammsPrim)
+ ['{819BEEBA-97BB-48F1-906E-107E67706D19}']
+ end;//ImsDiagramms
+
+ TmsDiagramms = class(TmsCustomDiagramms, ImsDiagramms)
  private
   [JSONMarshalled(True)]
   f_CurrentDiagramm : Integer;
   function pm_GetCurrentDiagramm: TmsDiagramm;
+  constructor CreatePrim(aList: TStrings);
  public
-  constructor Create(aList: TStrings);
+  class function Create(aList: TStrings): ImsDiagramms;
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
@@ -49,7 +54,12 @@ uses
 
 // TmsDiagramms
 
-constructor TmsDiagramms.Create(aList: TStrings);
+class function TmsDiagramms.Create(aList: TStrings): ImsDiagramms;
+begin
+ Result := CreatePrim(aList);
+end;
+
+constructor TmsDiagramms.CreatePrim(aList: TStrings);
 begin
  inherited Create;
  AddDiagramm(aList);

@@ -330,32 +330,32 @@ end;
 
 procedure TmsDiagrammTest.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 var
- l_Diagramms : TmsDiagramms;
+ l_Diagramms : ImsDiagramms;
 begin
  l_Diagramms := TmsDiagramms.Create(nil);
  try
-  l_Diagramms.Items.Add(aDiagramm);
-  TmsDiagrammsMarshal.Serialize(aFileName, l_Diagramms);
+  (l_Diagramms.toObject As TmsDiagramms).Items.Add(aDiagramm);
+  TmsDiagrammsMarshal.Serialize(aFileName, l_Diagramms.toObject As TmsDiagramms);
  finally
-  FreeAndNil(l_Diagramms);
+  l_Diagramms := nil;
  end;//try..finally
 end;
 
 procedure TmsDiagrammTest.TestDeSerialize;
 var
- l_Diagramms : TmsDiagramms;
+ l_Diagramms : ImsDiagramms;
  l_FileName : String;
 begin
  l_Diagramms := TmsDiagramms.Create(nil);
  try
-  TmsDiagrammsMarshal.DeSerialize(MakeFileName(TestSerializeMethodName), l_Diagramms);
+  TmsDiagrammsMarshal.DeSerialize(MakeFileName(TestSerializeMethodName), l_Diagramms.toObject As TmsDiagramms);
   // - берём результаты от ПРЕДЫДУЩИХ тестов, НЕКОШЕРНО с точки зрения TDD
   //   НО! Чертовски эффективно.
   l_FileName := TestResultsFileName;
-  TmsDiagrammsMarshal.Serialize(l_FileName, l_Diagramms);
+  TmsDiagrammsMarshal.Serialize(l_FileName, l_Diagramms.toObject As TmsDiagramms);
   CheckFileWithEtalon(l_FileName);
  finally
-  FreeAndNil(l_Diagramms);
+  l_Diagramms := nil;
  end;//try..finally
 end;
 
