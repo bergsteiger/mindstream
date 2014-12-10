@@ -57,17 +57,24 @@ type
    constructor Create(const aCtx: TmsDrawContext);
  end;//TmsDrawOptionsContext
 
- ImsShape = interface
+ ImsShape = interface(ImsObjectWrap)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean;
   procedure EndTo(const aCtx: TmsEndShapeContext);
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
-  function toObject: TObject;
  end;//ImsShape
 
- TmsShape = class abstract (TmsInterfacedRefcounted, ImsShape)
+ ImsDiagrammsPrim = interface(ImsObjectWrap)
+ ['{FC90884F-8A48-472C-8AB2-6E5EF0A6F6D6}']
+ end;//ImsDiagrammsPrim
+
+ ImsDiagrammPrim = interface(ImsObjectWrap)
+ ['{F475D5E5-C4C9-4177-AC54-8E54CCB32935}']
+ end;//ImsDiagrammPrim
+
+ TmsShape = class abstract(TmsInterfacedRefcounted, ImsShape)
  private
   FStartPoint: TPointF;
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
@@ -79,7 +86,6 @@ type
   procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
-  function toObject: TObject;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; virtual;
   // - фабричный метод, который создаёт экземпляр класса как интерфейс
@@ -130,11 +136,6 @@ end;
 procedure TmsShape.MoveTo(const aFinishPoint: TPointF);
 begin
  FStartPoint := aFinishPoint;
-end;
-
-function TmsShape.toObject: TObject;
-begin
- Result := Self;
 end;
 
 function TmsShape.IsNeedsSecondClick : Boolean;

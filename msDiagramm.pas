@@ -23,9 +23,8 @@ uses
  ;
 
 type
- ImsDiagramm = interface
+ ImsDiagramm = interface(ImsDiagrammPrim)
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
-  function toObject: TObject;
   function Get_Name: String;
   property Name: String read Get_Name;
  end;//ImsDiagramm
