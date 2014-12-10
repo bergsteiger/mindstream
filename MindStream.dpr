@@ -44,7 +44,8 @@ uses
   msInterfacedRefcounted in 'Core\msInterfacedRefcounted.pas',
   msMarshalPrim in 'Marshal\msMarshalPrim.pas',
   msShapeTestSuite in 'Tests\Module\msShapeTestSuite.pas',
-  msInvalidators in 'msInvalidators.pas';
+  msInvalidators in 'msInvalidators.pas',
+  msCustomDiagramms in 'msCustomDiagramms.pas';
 
 {$R *.res}
 
