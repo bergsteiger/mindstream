@@ -132,7 +132,7 @@ begin
    );//aMarshal.RegisterConverter
   end
  );//RegisterItemsLike
- //aMarshal.RegisterJSONMarshalled(Self, 'FRefCount', false);
+ aMarshal.RegisterJSONMarshalled(Self, 'FRefCount', false);
 end;
 
 class procedure TmsItemsHolder.RegisterInUnMarshal(aMarshal: TJSONUnMarshal);
