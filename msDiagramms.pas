@@ -26,6 +26,7 @@ type
   [JSONMarshalled(False)]
   f_Image: TPaintBox;
   function pm_GetCurrentDiagramm: TmsDiagramm;
+ protected
   procedure DoInvalidateDiagramm(aDiagramm: TmsDiagramm); override;
  public
   constructor Create(anImage: TPaintBox; aList: TStrings);
@@ -47,12 +48,12 @@ implementation
 
 uses
  {$Include msIvalidator.mixin.pas}
+ ,
  System.SysUtils,
  FMX.Graphics,
  System.UITypes,
  msDiagrammsMarshal,
- msRegisteredShapes,
- msInvalidators
+ msRegisteredShapes
  ;
 
 {$Include msIvalidator.mixin.pas}
@@ -72,8 +73,6 @@ begin
 end;
 
 procedure TmsDiagramms.DoInvalidateDiagramm(aDiagramm: TmsDiagramm);
-var
- l_Canvas : TCanvas;
 begin
  if (f_Image <> nil) then
   if (aDiagramm = CurrentDiagramm) then

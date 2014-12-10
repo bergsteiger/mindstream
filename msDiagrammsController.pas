@@ -3,6 +3,8 @@ unit msDiagrammsController;
 interface
 
 uses
+ {$Include msIvalidator.mixin.pas}
+ ,
  FMX.Objects,
  FMX.ListBox,
  FMX.StdCtrls,
@@ -14,11 +16,13 @@ uses
  System.UITypes,
  msCoreObjects,
  msWatchedObjectInstance,
- msDiagramm
+ msInterfacedNonRefcounted
  ;
 
 type
- TmsDiagrammsController = class(TmsWatchedObject)
+ TmsIvalidatorParent = TmsInterfacedNonRefcounted;
+ {$Include msIvalidator.mixin.pas}
+ TmsDiagrammsController = class(TmsIvalidator)
  private
   imgMain: TPaintBox;
   cbShapes: TComboBox;
@@ -36,6 +40,8 @@ type
   procedure btSaveDiagrammClick(Sender: TObject);
   procedure btLoadDiagrammClick(Sender: TObject);
   function pm_GetCurrentDiagramm: TmsDiagramm;
+ protected
+  procedure DoInvalidateDiagramm(aDiagramm: TmsDiagramm); override;
  public
   constructor Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton);
   destructor Destroy; override;
@@ -48,9 +54,15 @@ type
 implementation
 
 uses
+ {$Include msIvalidator.mixin.pas}
+ ,
  System.SysUtils,
  FMX.Types
  ;
+
+{$Include msIvalidator.mixin.pas}
+
+// TmsDiagrammsController
 
 constructor TmsDiagrammsController.Create(aImage: TPaintBox;
                                           aShapes: TComboBox;
@@ -78,6 +90,13 @@ begin
  btLoadDiagramm.OnClick := btLoadDiagrammClick;
  imgMain.OnMouseDown := imgMainMouseDown;
  imgMain.Align := TAlignLayout.alClient;
+end;
+
+procedure TmsDiagrammsController.DoInvalidateDiagramm(aDiagramm: TmsDiagramm);
+begin
+ if (imgMain <> nil) then
+  if (aDiagramm = CurrentDiagramm) then
+   imgMain.Repaint;
 end;
 
 function TmsDiagrammsController.pm_GetCurrentDiagramm: TmsDiagramm;

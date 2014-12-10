@@ -31,6 +31,7 @@
 {$IfNDef TmsIvalidator_impl}
 
 // uses
+ msInvalidators
 
 {$Define TmsIvalidator_impl}
 
