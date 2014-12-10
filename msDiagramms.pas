@@ -3,8 +3,6 @@ unit msDiagramms;
 interface
 
 uses
- {$Include msIvalidator.mixin.pas}
- ,
  System.Types,
  FMX.Objects,
  System.Classes,
@@ -13,21 +11,18 @@ uses
  msInterfacedNonRefcounted,
  msShape,
  msCustomDiagramms,
- Data.DBXJSONReflect
+ Data.DBXJSONReflect,
+ msDiagramm
  ;
 
 type
- TmsIvalidatorParent = TmsCustomDiagramms;
- {$Include msIvalidator.mixin.pas}
- TmsDiagramms = class(TmsIvalidator)
+ TmsDiagramms = class(TmsCustomDiagramms)
  private
   [JSONMarshalled(True)]
   f_CurrentDiagramm : Integer;
   [JSONMarshalled(False)]
   f_Image: TPaintBox;
   function pm_GetCurrentDiagramm: TmsDiagramm;
- protected
-  procedure DoInvalidateDiagramm(aDiagramm: TmsDiagramm); override;
  public
   constructor Create(anImage: TPaintBox; aList: TStrings);
   procedure ProcessClick(const aStart: TPointF);
@@ -47,16 +42,12 @@ type
 implementation
 
 uses
- {$Include msIvalidator.mixin.pas}
- ,
  System.SysUtils,
  FMX.Graphics,
  System.UITypes,
  msDiagrammsMarshal,
  msRegisteredShapes
  ;
-
-{$Include msIvalidator.mixin.pas}
 
 // TmsDiagramms
 
@@ -70,13 +61,6 @@ end;
 function TmsDiagramms.pm_GetCurrentDiagramm: TmsDiagramm;
 begin
  Result := Items[f_CurrentDiagramm].toObject As TmsDiagramm;
-end;
-
-procedure TmsDiagramms.DoInvalidateDiagramm(aDiagramm: TmsDiagramm);
-begin
- if (f_Image <> nil) then
-  if (aDiagramm = CurrentDiagramm) then
-   f_Image.Repaint;
 end;
 
 procedure TmsDiagramms.AddDiagramm(aList: TStrings);
