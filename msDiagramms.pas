@@ -3,8 +3,6 @@ unit msDiagramms;
 interface
 
 uses
- {$Include msItemsHolder.mixin.pas}
- ,
  msDiagramm,
  System.Types,
  FMX.Objects,
@@ -12,14 +10,13 @@ uses
  msCoreObjects,
  msWatchedObjectInstance,
  msInterfacedNonRefcounted,
- msShape
+ msShape,
+ msCustomDiagramms{,
+ Data.DBXJSONReflect}
  ;
 
 type
- TmsItemsHolderParent = TmsDiagrammsPrim;
- TmsItem = ImsDiagramm;
- {$Include msItemsHolder.mixin.pas}
- TmsDiagramms = class(TmsItemsHolder, ImsIvalidator)
+ TmsDiagramms = class(TmsCustomDiagramms, ImsIvalidator)
  private
   [JSONMarshalled(True)]
   f_CurrentDiagramm : Integer;
@@ -48,8 +45,6 @@ type
 implementation
 
 uses
- {$Include msItemsHolder.mixin.pas}
- ,
  System.SysUtils,
  FMX.Graphics,
  System.UITypes,
@@ -57,8 +52,6 @@ uses
  msRegisteredShapes,
  msInvalidators
  ;
-
-{$Include msItemsHolder.mixin.pas}
 
 // TmsDiagramms
 
