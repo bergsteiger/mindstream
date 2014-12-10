@@ -11,8 +11,8 @@ uses
  msWatchedObjectInstance,
  msInterfacedNonRefcounted,
  msShape,
- msCustomDiagramms{,
- Data.DBXJSONReflect}
+ msCustomDiagramms,
+ Data.DBXJSONReflect
  ;
 
 type
