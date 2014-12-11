@@ -4,7 +4,7 @@ interface
 
 uses
  Generics.Collections,
- msDiagramm
+ msInterfaces
  ;
 
 type
@@ -21,7 +21,7 @@ type
  public
   class destructor Destroy;
  public
-  class procedure InvalidateDiagramm(aDiagramm: TmsDiagramm);
+  class procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
   class procedure Subscribe(const anInvalidator: ImsIvalidator);
   // - подписываемся
   class procedure UnSubscribe(const anInvalidator: ImsIvalidator);
@@ -41,7 +41,7 @@ begin
  FreeAndNil(f_Subscribers);
 end;
 
-class procedure TmsInvalidators.InvalidateDiagramm(aDiagramm: TmsDiagramm);
+class procedure TmsInvalidators.InvalidateDiagramm(const aDiagramm: ImsDiagramm);
 var
  l_Subscriber : Pointer;
 begin

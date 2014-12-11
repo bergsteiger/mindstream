@@ -13,10 +13,10 @@
 // http://programmingmindstream.blogspot.ru/2014/12/generic-2.html
 
  TmsIvalidator = class(TmsIvalidatorParent, ImsIvalidator)
- private
-  procedure InvalidateDiagramm(aDiagramm: TmsDiagramm);
  protected
-  procedure DoInvalidateDiagramm(aDiagramm: TmsDiagramm); virtual; abstract;
+  procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
+ protected
+  procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); virtual; abstract;
  public
   procedure AfterConstruction; override;
   destructor Destroy; override;
@@ -39,7 +39,7 @@
 
 // TmsIvalidator
 
-procedure TmsIvalidator.InvalidateDiagramm(aDiagramm: TmsDiagramm);
+procedure TmsIvalidator.InvalidateDiagramm(const aDiagramm: ImsDiagramm);
 begin
  DoInvalidateDiagramm(aDiagramm);
 end;

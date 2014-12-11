@@ -65,10 +65,6 @@ type
   property CurrentClass: RmsShape read FCurrentClass write FCurrentClass;
  end;//TmsDiagramm
 
- ImsIvalidator = interface
-  procedure InvalidateDiagramm(aDiagramm: TmsDiagramm);
- end;//ImsIvalidator
-
 implementation
 
 uses

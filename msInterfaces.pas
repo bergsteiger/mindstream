@@ -4,6 +4,7 @@ interface
 
 uses
  System.Types,
+ System.Classes,
  FMX.Graphics,
  System.UITypes,
  msSerializeInterfaces
@@ -66,12 +67,24 @@ type
  ImsDiagramm = interface(ImsObjectWrap)
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
   function Get_Name: String;
-  property Name: String read Get_Name;
+  procedure Invalidate;
+  procedure ProcessClick(const aStart: TPointF);
+  procedure Clear;
+  procedure SelectShape(aList: TStrings; anIndex: Integer);
+  procedure AllowedShapesToList(aList: TStrings);
+  function CurrentShapeClassIndex: Integer;
+  procedure DrawTo(const aCanvas: TCanvas);
+  property Name: String
+   read Get_Name;
  end;//ImsDiagramm
 
  ImsDiagramms = interface(ImsObjectWrap)
  ['{819BEEBA-97BB-48F1-906E-107E67706D19}']
  end;//ImsDiagramms
+
+ ImsIvalidator = interface
+  procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
+ end;//ImsIvalidator
 
 implementation
 

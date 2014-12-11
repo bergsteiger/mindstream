@@ -41,15 +41,16 @@ type
       Shift: TShiftState; X, Y: Single);
   procedure btSaveDiagrammClick(Sender: TObject);
   procedure btLoadDiagrammClick(Sender: TObject);
-  function pm_GetCurrentDiagramm: TmsDiagramm;
+  function pm_GetCurrentDiagramm: ImsDiagramm;
  protected
-  procedure DoInvalidateDiagramm(aDiagramm: TmsDiagramm); override;
+  procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
  public
   constructor Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton);
   destructor Destroy; override;
   procedure Clear;
   procedure ProcessClick(const aStart: TPointF);
-  property CurrentDiagramm: TmsDiagramm read pm_GetCurrentDiagramm;
+  property CurrentDiagramm: ImsDiagramm
+   read pm_GetCurrentDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
  end;//TmsDiagrammsController
 
@@ -94,14 +95,14 @@ begin
  imgMain.Align := TAlignLayout.alClient;
 end;
 
-procedure TmsDiagrammsController.DoInvalidateDiagramm(aDiagramm: TmsDiagramm);
+procedure TmsDiagrammsController.DoInvalidateDiagramm(const aDiagramm: ImsDiagramm);
 begin
  if (imgMain <> nil) then
   if (aDiagramm = CurrentDiagramm) then
    imgMain.Repaint;
 end;
 
-function TmsDiagrammsController.pm_GetCurrentDiagramm: TmsDiagramm;
+function TmsDiagrammsController.pm_GetCurrentDiagramm: ImsDiagramm;
 begin
  Result := (FDiagramms.toObject As TmsDiagramms).CurrentDiagramm;
 end;
