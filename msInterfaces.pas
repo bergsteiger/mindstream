@@ -80,6 +80,8 @@ type
 
  ImsDiagramms = interface(ImsObjectWrap)
  ['{819BEEBA-97BB-48F1-906E-107E67706D19}']
+  procedure AllowedShapesToList(aList: TStrings);
+  function CurrentShapeClassIndex: Integer;
  end;//ImsDiagramms
 
  ImsIvalidator = interface

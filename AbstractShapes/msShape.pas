@@ -11,11 +11,15 @@ uses
  msSerializeInterfaces,
  msInterfacedRefcounted,
  msInterfacedNonRefcounted,
- msInterfaces
+ msInterfaces,
+ System.Classes
  ;
 
 type
  TmsDiagrammsPrim = class abstract(TmsInterfacedRefcounted, ImsDiagramms)
+  protected
+   procedure AllowedShapesToList(aList: TStrings); virtual; abstract;
+   function CurrentShapeClassIndex: Integer; virtual; abstract;
  end;//TmsDiagrammsPrim
 
  TmsShape = class abstract(TmsInterfacedRefcounted, ImsShape)

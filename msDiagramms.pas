@@ -23,16 +23,17 @@ type
   f_CurrentDiagramm : Integer;
   function pm_GetCurrentDiagramm: ImsDiagramm;
   constructor CreatePrim(aList: TStrings);
+ protected
+  procedure AllowedShapesToList(aList: TStrings); override;
+  function CurrentShapeClassIndex: Integer; override;
  public
   class function Create(aList: TStrings): ImsDiagramms;
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
-  procedure AllowedShapesToList(aList: TStrings);
   procedure AddDiagramm(aList: TStrings);
   function CurrentDiagrammIndex: Integer;
   procedure SelectDiagramm(anIndex: Integer);
-  function CurrentShapeClassIndex: Integer;
   procedure Serialize;
   procedure DeSerialize;
   property CurrentDiagramm: ImsDiagramm

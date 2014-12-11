@@ -82,8 +82,8 @@ begin
  btSaveDiagramm := aSaveDiagramm;
  btLoadDiagramm := aLoadDiagramm;
  FDiagramms := TmsDiagramms.Create(cbDiagramm.Items);
- (FDiagramms.toObject As TmsDiagramms).AllowedShapesToList(cbShapes.Items);
- cbShapes.ItemIndex := (FDiagramms.toObject As TmsDiagramms).CurrentShapeClassIndex;
+ FDiagramms.AllowedShapesToList(cbShapes.Items);
+ cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
  cbDiagramm.ItemIndex := (FDiagramms.toObject As TmsDiagramms).CurrentDiagrammIndex;
  cbDiagramm.OnChange := cbDiagrammChange;
  imgMain.OnResize := imgMainResize;
@@ -128,7 +128,7 @@ end;
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
 begin
  (FDiagramms.toObject As TmsDiagramms).SelectDiagramm(cbDiagramm.ItemIndex);
- cbShapes.ItemIndex := (FDiagramms.toObject As TmsDiagramms).CurrentShapeClassIndex;
+ cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
 end;
 
 procedure TmsDiagrammsController.imgMainResize(Sender: TObject);
@@ -144,7 +144,7 @@ procedure TmsDiagrammsController.btAddDiagrammClick(Sender: TObject);
 begin
  (FDiagramms.toObject As TmsDiagramms).AddDiagramm(cbDiagramm.Items);
  cbDiagramm.ItemIndex := (FDiagramms.toObject As TmsDiagramms).CurrentDiagrammIndex;
- cbShapes.ItemIndex := (FDiagramms.toObject As TmsDiagramms).CurrentShapeClassIndex;
+ cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
 end;
 
 destructor TmsDiagrammsController.Destroy;
