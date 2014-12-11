@@ -20,8 +20,10 @@
  TmsMarshal = class(TmsMarshalPrim)
  // - шаблонизируем, ибо мы скоро будем сериализовать и другие классы.
  public
-  class procedure Serialize(const aFileName: string; const aDiagramm: TClassToSerialize);
-  class procedure DeSerialize(const aFileName: string; const aDiagramm: TClassToSerialize);
+  class procedure Serialize(const aFileName: string;
+                            const aDiagramm: TObject);
+  class procedure DeSerialize(const aFileName: string;
+                              const aDiagramm: TClassToSerialize);
  end;//TmsMarshal
 
 {$Else TmsMarshal}
@@ -41,7 +43,8 @@
 
 // TmsMarshal
 
-class procedure TmsMarshal.DeSerialize(const aFileName: string; const aDiagramm: TClassToSerialize);
+class procedure TmsMarshal.DeSerialize(const aFileName: string;
+                                       const aDiagramm: TClassToSerialize);
 var
  l_StringList: TmsStringList;
  l_D : TClassToSerialize;
@@ -61,7 +64,7 @@ begin
 end;
 
 class procedure TmsMarshal.Serialize(const aFileName: string;
-                                                 const aDiagramm: TClassToSerialize);
+                                     const aDiagramm: TObject);
 var
  l_Json: TJSONObject;
  l_StringList: TmsStringList;
