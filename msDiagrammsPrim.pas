@@ -19,6 +19,7 @@ type
    procedure Serialize; virtual; abstract;
    procedure DeSerialize; virtual; abstract;
    procedure Clear; virtual; abstract;
+   procedure SelectDiagramm(anIndex: Integer); virtual; abstract;
    property CurrentDiagramm: ImsDiagramm
     read pm_GetCurrentDiagramm;
  end;//TmsDiagrammsPrim

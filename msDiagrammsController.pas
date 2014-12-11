@@ -127,7 +127,7 @@ end;
 
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
 begin
- (FDiagramms.toObject As TmsDiagramms).SelectDiagramm(cbDiagramm.ItemIndex);
+ FDiagramms.SelectDiagramm(cbDiagramm.ItemIndex);
  cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
 end;
 

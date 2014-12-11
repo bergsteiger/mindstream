@@ -88,6 +88,7 @@ type
   procedure Serialize;
   procedure DeSerialize;
   procedure Clear;
+  procedure SelectDiagramm(anIndex: Integer);
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;
  end;//ImsDiagramms
