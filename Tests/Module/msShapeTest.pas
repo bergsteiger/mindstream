@@ -135,7 +135,7 @@ end;
 
 procedure TmsShapeTestPrim.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 begin
- TmsDiagrammMarshal.Serialize(aFileName, aDiagramm.toObject As TmsDiagramm);
+ TmsDiagrammMarshal.Serialize(aFileName, aDiagramm.toObject);
 end;
 
 procedure TmsShapeTestPrim.SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm);
@@ -336,7 +336,7 @@ begin
  l_Diagramms := TmsDiagramms.Create(nil);
  try
   (l_Diagramms.toObject As TmsDiagramms).Items.Add(aDiagramm);
-  TmsDiagrammsMarshal.Serialize(aFileName, l_Diagramms.toObject As TmsDiagramms);
+  TmsDiagrammsMarshal.Serialize(aFileName, l_Diagramms.toObject);
  finally
   l_Diagramms := nil;
  end;//try..finally
@@ -353,7 +353,7 @@ begin
   // - берём результаты от ПРЕДЫДУЩИХ тестов, НЕКОШЕРНО с точки зрения TDD
   //   НО! Чертовски эффективно.
   l_FileName := TestResultsFileName;
-  TmsDiagrammsMarshal.Serialize(l_FileName, l_Diagramms.toObject As TmsDiagramms);
+  TmsDiagrammsMarshal.Serialize(l_FileName, l_Diagramms.toObject);
   CheckFileWithEtalon(l_FileName);
  finally
   l_Diagramms := nil;
