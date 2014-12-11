@@ -49,7 +49,7 @@ type
   procedure RemoveShape(const aShape: ImsShape);
   function Get_Name: String;
   constructor CreatePrim(const aName: String);
-  procedure DeSerializeTo(const aFileName: String);
+  procedure DeSerializeFrom(const aFileName: String);
  public
   class function Create(const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
@@ -158,7 +158,7 @@ begin
  fName := aName;
 end;
 
-procedure TmsDiagramm.DeSerializeTo(const aFileName: String);
+procedure TmsDiagramm.DeSerializeFrom(const aFileName: String);
 begin
  TmsDiagrammMarshal.DeSerialize(aFileName, Self);
 end;

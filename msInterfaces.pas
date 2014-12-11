@@ -75,7 +75,7 @@ type
   procedure AllowedShapesToList(aList: TStrings);
   function CurrentShapeClassIndex: Integer;
   procedure DrawTo(const aCanvas: TCanvas);
-  procedure DeSerializeTo(const aFileName: String);
+  procedure DeSerializeFrom(const aFileName: String);
   property Name: String
    read Get_Name;
  end;//ImsDiagramm

@@ -220,7 +220,7 @@ begin
  CreateDiagrammAndCheck(
   procedure (const aDiagramm : ImsDiagramm)
   begin
-   aDiagramm.DeSerializeTo(MakeFileName(TestSerializeMethodName));
+   aDiagramm.DeSerializeFrom(MakeFileName(TestSerializeMethodName));
    // - берём результаты от ПРЕДЫДУЩИХ тестов, НЕКОШЕРНО с точки зрения TDD
    //   НО! Чертовски эффективно.
    aCheck(aDiagramm);
