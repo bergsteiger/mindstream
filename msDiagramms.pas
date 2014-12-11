@@ -12,7 +12,8 @@ uses
  msShape,
  msCustomDiagramms,
  Data.DBXJSONReflect,
- msDiagramm
+ msDiagramm,
+ msInterfaces
  ;
 
 type

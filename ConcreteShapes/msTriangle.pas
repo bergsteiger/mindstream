@@ -12,6 +12,8 @@ uses
  ,
  System.Math.Vectors
  {$ENDIF}
+ ,
+ msInterfaces
  ;
 
 type

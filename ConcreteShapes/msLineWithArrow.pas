@@ -6,7 +6,8 @@ uses
  msShape,
  msLine,
  FMX.Graphics,
- System.Types
+ System.Types,
+ msInterfaces
  ;
 
 type

@@ -6,7 +6,8 @@ uses
  {$Include msItemsHolder.mixin.pas}
  ,
  msShape,
- msDiagramm
+ msDiagramm,
+ msInterfaces
 ;
 
 type

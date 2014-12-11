@@ -12,7 +12,13 @@ unit TestMsLine;
 interface
 
 uses
-  TestFramework, msLine, FMX.Graphics, System.Types, msShape;
+  TestFramework,
+  msLine,
+  FMX.Graphics,
+  System.Types,
+  msShape,
+  msInterfaces
+  ;
 
 type
   // Test methods for class TmsLine
@@ -55,7 +61,7 @@ end;
 
 procedure TestTmsLine.TestEndTo;
 var
-  aCtx: msShape.TmsMakeShapeContext;
+  aCtx: TmsMakeShapeContext;
 begin
   // TODO: Setup method call parameters
   FmsLine.EndTo(aCtx);

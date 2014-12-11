@@ -7,7 +7,8 @@ uses
  FMX.Graphics,
  System.Types,
  System.UITypes,
- msTool
+ msTool,
+ msInterfaces
  ;
 
 type

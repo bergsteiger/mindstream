@@ -5,7 +5,8 @@ interface
 uses
  msLine,
  FMX.Graphics,
- msShape
+ msShape,
+ msInterfaces
  ;
 
 type

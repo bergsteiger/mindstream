@@ -5,7 +5,8 @@ interface
 uses
  msShape,
  msCircle,
- System.UITypes
+ System.UITypes,
+ msInterfaces
  ;
 
 type

@@ -12,8 +12,15 @@ unit TestMsRectangle;
 interface
 
 uses
-  TestFramework, FMX.Types, msShape, System.UITypes, FMX.Graphics, System.Types,
-  msRectangle;
+  TestFramework,
+  FMX.Types,
+  msShape,
+  System.UITypes,
+  FMX.Graphics,
+  System.Types,
+  msRectangle,
+  msInterfaces
+  ;
 
 type
   // Test methods for class TmsRectangle

@@ -13,7 +13,9 @@ interface
 
 uses
   TestFramework, System.UITypes, msPointCircle, msShape, msCircle, FMX.Graphics,
-  System.Types;
+  System.Types,
+  msInterfaces
+  ;
 
 type
   // Test methods for class TmsPointCircle

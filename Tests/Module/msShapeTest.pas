@@ -9,7 +9,8 @@ uses
   msRegisteredShapes,
   System.Types,
   System.Classes,
-  msCoreObjects
+  msCoreObjects,
+  msInterfaces
   ;
 
 type

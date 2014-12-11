@@ -17,7 +17,8 @@ uses
  msCoreObjects,
  msWatchedObjectInstance,
  msInterfacedRefcounted,
- msShape
+ msShape,
+ msInterfaces
  ;
 
 type

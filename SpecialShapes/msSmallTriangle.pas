@@ -8,7 +8,8 @@ uses
  System.Types,
  FMX.Graphics,
  FMX.Types,
- System.UITypes
+ System.UITypes,
+ msInterfaces
  ;
 
 type

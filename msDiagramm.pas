@@ -19,7 +19,8 @@ uses
  msCoreObjects,
  msSerializeInterfaces,
  msInterfacedNonRefcounted,
- msInterfacedRefcounted
+ msInterfacedRefcounted,
+ msInterfaces
  ;
 
 type

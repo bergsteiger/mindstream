@@ -45,7 +45,8 @@ uses
   msMarshalPrim in 'Marshal\msMarshalPrim.pas',
   msShapeTestSuite in 'Tests\Module\msShapeTestSuite.pas',
   msInvalidators in 'msInvalidators.pas',
-  msCustomDiagramms in 'msCustomDiagramms.pas';
+  msCustomDiagramms in 'msCustomDiagramms.pas',
+  msInterfaces in 'msInterfaces.pas';
 
 {$R *.res}
 

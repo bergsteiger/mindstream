@@ -4,7 +4,8 @@ interface
 
 uses
  msShape,
- msRectangle
+ msRectangle,
+ msInterfaces
  ;
 
 type
