@@ -22,6 +22,7 @@ type
    function CurrentShapeClassIndex: Integer; virtual; abstract;
    function CurrentDiagrammIndex: Integer; virtual; abstract;
    function pm_GetCurrentDiagramm: ImsDiagramm; virtual; abstract;
+   procedure AddDiagramm(aList: TStrings); virtual; abstract;
    property CurrentDiagramm: ImsDiagramm
     read pm_GetCurrentDiagramm;
  end;//TmsDiagrammsPrim
