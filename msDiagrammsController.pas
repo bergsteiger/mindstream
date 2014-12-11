@@ -104,7 +104,7 @@ end;
 
 function TmsDiagrammsController.pm_GetCurrentDiagramm: ImsDiagramm;
 begin
- Result := (FDiagramms.toObject As TmsDiagramms).CurrentDiagramm;
+ Result := FDiagramms.CurrentDiagramm;
 end;
 
 procedure TmsDiagrammsController.btLoadDiagrammClick(Sender: TObject);

@@ -83,6 +83,9 @@ type
   procedure AllowedShapesToList(aList: TStrings);
   function CurrentShapeClassIndex: Integer;
   function CurrentDiagrammIndex: Integer;
+  function pm_GetCurrentDiagramm: ImsDiagramm;
+  property CurrentDiagramm: ImsDiagramm
+   read pm_GetCurrentDiagramm;
  end;//ImsDiagramms
 
  ImsIvalidator = interface

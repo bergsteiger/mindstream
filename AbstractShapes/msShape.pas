@@ -21,6 +21,9 @@ type
    procedure AllowedShapesToList(aList: TStrings); virtual; abstract;
    function CurrentShapeClassIndex: Integer; virtual; abstract;
    function CurrentDiagrammIndex: Integer; virtual; abstract;
+   function pm_GetCurrentDiagramm: ImsDiagramm; virtual; abstract;
+   property CurrentDiagramm: ImsDiagramm
+    read pm_GetCurrentDiagramm;
  end;//TmsDiagrammsPrim
 
  TmsShape = class abstract(TmsInterfacedRefcounted, ImsShape)

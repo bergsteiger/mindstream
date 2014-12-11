@@ -21,12 +21,12 @@ type
  private
   [JSONMarshalled(True)]
   f_CurrentDiagramm : Integer;
-  function pm_GetCurrentDiagramm: ImsDiagramm;
   constructor CreatePrim(aList: TStrings);
  protected
   procedure AllowedShapesToList(aList: TStrings); override;
   function CurrentShapeClassIndex: Integer; override;
   function CurrentDiagrammIndex: Integer; override;
+  function pm_GetCurrentDiagramm: ImsDiagramm; override;
  public
   class function Create(aList: TStrings): ImsDiagramms;
   procedure ProcessClick(const aStart: TPointF);
@@ -36,8 +36,6 @@ type
   procedure SelectDiagramm(anIndex: Integer);
   procedure Serialize;
   procedure DeSerialize;
-  property CurrentDiagramm: ImsDiagramm
-   read pm_GetCurrentDiagramm;
   procedure Assign(anOther: TmsDiagramms);
  end;//TmsDiagramms
 
