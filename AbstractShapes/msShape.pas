@@ -16,20 +16,6 @@ uses
  ;
 
 type
- TmsDiagrammsPrim = class abstract(TmsInterfacedRefcounted, ImsDiagramms)
-  protected
-   procedure AllowedShapesToList(aList: TStrings); virtual; abstract;
-   function CurrentShapeClassIndex: Integer; virtual; abstract;
-   function CurrentDiagrammIndex: Integer; virtual; abstract;
-   function pm_GetCurrentDiagramm: ImsDiagramm; virtual; abstract;
-   procedure AddDiagramm(aList: TStrings); virtual; abstract;
-   procedure Serialize; virtual; abstract;
-   procedure DeSerialize; virtual; abstract;
-   procedure Clear; virtual; abstract;
-   property CurrentDiagramm: ImsDiagramm
-    read pm_GetCurrentDiagramm;
- end;//TmsDiagrammsPrim
-
  TmsShape = class abstract(TmsInterfacedRefcounted, ImsShape)
  private
   FStartPoint: TPointF;

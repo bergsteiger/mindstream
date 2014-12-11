@@ -7,7 +7,8 @@ uses
  ,
  msShape,
  msDiagramm,
- msInterfaces
+ msInterfaces,
+ msDiagrammsPrim
 ;
 
 type
