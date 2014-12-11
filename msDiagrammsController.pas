@@ -84,7 +84,7 @@ begin
  FDiagramms := TmsDiagramms.Create(cbDiagramm.Items);
  FDiagramms.AllowedShapesToList(cbShapes.Items);
  cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
- cbDiagramm.ItemIndex := (FDiagramms.toObject As TmsDiagramms).CurrentDiagrammIndex;
+ cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
  cbDiagramm.OnChange := cbDiagrammChange;
  imgMain.OnResize := imgMainResize;
  cbShapes.OnChange := cbShapesChange;
@@ -112,7 +112,7 @@ var
  l_D : ImsDiagramm;
  l_I : Integer;
 begin
- l_I := (FDiagramms.toObject As TmsDiagramms).CurrentDiagrammIndex;
+ l_I := FDiagramms.CurrentDiagrammIndex;
  (FDiagramms.toObject As TmsDiagramms).DeSerialize;
  cbDiagramm.Clear;
  for l_D in (FDiagramms.toObject As TmsDiagramms).Items do
@@ -143,7 +143,7 @@ end;
 procedure TmsDiagrammsController.btAddDiagrammClick(Sender: TObject);
 begin
  (FDiagramms.toObject As TmsDiagramms).AddDiagramm(cbDiagramm.Items);
- cbDiagramm.ItemIndex := (FDiagramms.toObject As TmsDiagramms).CurrentDiagrammIndex;
+ cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
  cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
 end;
 

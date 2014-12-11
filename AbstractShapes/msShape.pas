@@ -20,6 +20,7 @@ type
   protected
    procedure AllowedShapesToList(aList: TStrings); virtual; abstract;
    function CurrentShapeClassIndex: Integer; virtual; abstract;
+   function CurrentDiagrammIndex: Integer; virtual; abstract;
  end;//TmsDiagrammsPrim
 
  TmsShape = class abstract(TmsInterfacedRefcounted, ImsShape)

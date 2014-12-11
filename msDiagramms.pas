@@ -26,13 +26,13 @@ type
  protected
   procedure AllowedShapesToList(aList: TStrings); override;
   function CurrentShapeClassIndex: Integer; override;
+  function CurrentDiagrammIndex: Integer; override;
  public
   class function Create(aList: TStrings): ImsDiagramms;
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure AddDiagramm(aList: TStrings);
-  function CurrentDiagrammIndex: Integer;
   procedure SelectDiagramm(anIndex: Integer);
   procedure Serialize;
   procedure DeSerialize;
