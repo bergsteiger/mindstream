@@ -23,6 +23,7 @@ type
    function CurrentDiagrammIndex: Integer; virtual; abstract;
    function pm_GetCurrentDiagramm: ImsDiagramm; virtual; abstract;
    procedure AddDiagramm(aList: TStrings); virtual; abstract;
+   procedure DeSerialize; virtual; abstract;
    property CurrentDiagramm: ImsDiagramm
     read pm_GetCurrentDiagramm;
  end;//TmsDiagrammsPrim

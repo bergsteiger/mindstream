@@ -113,7 +113,7 @@ var
  l_I : Integer;
 begin
  l_I := FDiagramms.CurrentDiagrammIndex;
- (FDiagramms.toObject As TmsDiagramms).DeSerialize;
+ FDiagramms.DeSerialize;
  cbDiagramm.Clear;
  for l_D in (FDiagramms.toObject As TmsDiagramms).Items do
   cbDiagramm.Items.Add(l_D.Name);

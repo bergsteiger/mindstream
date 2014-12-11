@@ -85,6 +85,7 @@ type
   function CurrentDiagrammIndex: Integer;
   function pm_GetCurrentDiagramm: ImsDiagramm;
   procedure AddDiagramm(aList: TStrings);
+  procedure DeSerialize;
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;
  end;//ImsDiagramms
