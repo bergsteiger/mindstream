@@ -90,6 +90,7 @@ type
   procedure Clear;
   procedure SelectDiagramm(anIndex: Integer);
   procedure SelectShape(aList: TStrings; anIndex: Integer);
+  procedure ProcessClick(const aStart: TPointF);
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;
  end;//ImsDiagramms

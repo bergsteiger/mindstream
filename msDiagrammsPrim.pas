@@ -3,6 +3,7 @@ unit msDiagrammsPrim;
 interface
 
 uses
+ System.Types,
  System.Classes,
  msInterfaces,
  msInterfacedRefcounted
@@ -21,6 +22,7 @@ type
    procedure Clear; virtual; abstract;
    procedure SelectDiagramm(anIndex: Integer); virtual; abstract;
    procedure SelectShape(aList: TStrings; anIndex: Integer); virtual; abstract;
+   procedure ProcessClick(const aStart: TPointF); virtual; abstract;
    property CurrentDiagramm: ImsDiagramm
     read pm_GetCurrentDiagramm;
  end;//TmsDiagrammsPrim

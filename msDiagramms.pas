@@ -33,9 +33,9 @@ type
   procedure Clear; override;
   procedure SelectDiagramm(anIndex: Integer); override;
   procedure SelectShape(aList: TStrings; anIndex: Integer); override;
+  procedure ProcessClick(const aStart: TPointF); override;
  public
   class function Create(aList: TStrings): ImsDiagramms;
-  procedure ProcessClick(const aStart: TPointF);
   procedure Assign(anOther: TmsDiagramms);
  end;//TmsDiagramms
 

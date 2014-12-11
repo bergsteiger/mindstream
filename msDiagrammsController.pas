@@ -160,7 +160,7 @@ end;
 
 procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
 begin
- (FDiagramms.toObject As TmsDiagramms).ProcessClick(aStart);
+ FDiagramms.ProcessClick(aStart);
 end;
 
 procedure TmsDiagrammsController.DrawTo(const aCanvas: TCanvas);
