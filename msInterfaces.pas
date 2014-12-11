@@ -89,7 +89,7 @@ type
   function CurrentShapeClassIndex: Integer;
   function CurrentDiagrammIndex: Integer;
   function pm_GetCurrentDiagramm: ImsDiagramm;
-  procedure AddDiagramm(aList: TStrings);
+  procedure AddNewDiagramm(aList: TStrings);
   procedure Serialize;
   procedure DeSerialize;
   procedure Clear;
@@ -98,6 +98,7 @@ type
   procedure ProcessClick(const aStart: TPointF);
   function GetEnumerator: TmsDiagrammsEnumerator;
   procedure DeSerializeFrom(const aFileName: String);
+  procedure AddDiagramm(const aDiagramm: ImsDiagramm);
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;
  end;//ImsDiagramms

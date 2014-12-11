@@ -335,7 +335,7 @@ var
 begin
  l_Diagramms := TmsDiagramms.Create(nil);
  try
-  (l_Diagramms.toObject As TmsDiagramms).Items.Add(aDiagramm);
+  l_Diagramms.AddDiagramm(aDiagramm);
   TmsDiagrammsMarshal.Serialize(aFileName, l_Diagramms.toObject);
  finally
   l_Diagramms := nil;

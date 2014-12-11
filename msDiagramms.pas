@@ -27,7 +27,7 @@ type
   function CurrentShapeClassIndex: Integer; override;
   function CurrentDiagrammIndex: Integer; override;
   function pm_GetCurrentDiagramm: ImsDiagramm; override;
-  procedure AddDiagramm(aList: TStrings); override;
+  procedure AddNewDiagramm(aList: TStrings); override;
   procedure Serialize; override;
   procedure DeSerialize; override;
   procedure Clear; override;
@@ -59,7 +59,7 @@ end;
 constructor TmsDiagramms.CreatePrim(aList: TStrings);
 begin
  inherited Create;
- AddDiagramm(aList);
+ AddNewDiagramm(aList);
 end;
 
 function TmsDiagramms.pm_GetCurrentDiagramm: ImsDiagramm;
@@ -67,7 +67,7 @@ begin
  Result := Items[f_CurrentDiagramm];
 end;
 
-procedure TmsDiagramms.AddDiagramm(aList: TStrings);
+procedure TmsDiagramms.AddNewDiagramm(aList: TStrings);
 var
  l_D : ImsDiagramm;
 begin

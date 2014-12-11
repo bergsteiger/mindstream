@@ -18,6 +18,7 @@ type
  TmsCustomDiagramms = class abstract(TmsItemsHolder, ImsDiagramms)
  protected
   procedure DeSerializeFrom(const aFileName: String);
+  procedure AddDiagramm(const aDiagramm: ImsDiagramm);
  end;//TmsCustomDiagramms
 
 implementation
@@ -35,6 +36,11 @@ uses
 procedure TmsCustomDiagramms.DeSerializeFrom(const aFileName: String);
 begin
  TmsDiagrammsMarshal.DeSerialize(aFileName, Self As TmsDiagramms);
+end;
+
+procedure TmsCustomDiagramms.AddDiagramm(const aDiagramm: ImsDiagramm);
+begin
+ Items.Add(aDiagramm);
 end;
 
 end.
