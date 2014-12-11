@@ -32,10 +32,10 @@ type
   procedure DeSerialize; override;
   procedure Clear; override;
   procedure SelectDiagramm(anIndex: Integer); override;
+  procedure SelectShape(aList: TStrings; anIndex: Integer); override;
  public
   class function Create(aList: TStrings): ImsDiagramms;
   procedure ProcessClick(const aStart: TPointF);
-  procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure Assign(anOther: TmsDiagramms);
  end;//TmsDiagramms
 

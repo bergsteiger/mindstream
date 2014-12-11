@@ -20,6 +20,7 @@ type
    procedure DeSerialize; virtual; abstract;
    procedure Clear; virtual; abstract;
    procedure SelectDiagramm(anIndex: Integer); virtual; abstract;
+   procedure SelectShape(aList: TStrings; anIndex: Integer); virtual; abstract;
    property CurrentDiagramm: ImsDiagramm
     read pm_GetCurrentDiagramm;
  end;//TmsDiagrammsPrim

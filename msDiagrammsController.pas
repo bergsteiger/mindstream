@@ -137,7 +137,7 @@ end;
 
 procedure TmsDiagrammsController.cbShapesChange(Sender: TObject);
 begin
- (FDiagramms.toObject As TmsDiagramms).SelectShape(cbShapes.Items, cbShapes.ItemIndex);
+ FDiagramms.SelectShape(cbShapes.Items, cbShapes.ItemIndex);
 end;
 
 procedure TmsDiagrammsController.btAddDiagrammClick(Sender: TObject);

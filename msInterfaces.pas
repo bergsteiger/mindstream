@@ -89,6 +89,7 @@ type
   procedure DeSerialize;
   procedure Clear;
   procedure SelectDiagramm(anIndex: Integer);
+  procedure SelectShape(aList: TStrings; anIndex: Integer);
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;
  end;//ImsDiagramms
