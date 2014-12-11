@@ -35,6 +35,7 @@
   procedure Assign(anOther : TmsItemsHolder);
   class procedure RegisterInMarshal(aMarshal: TJSONMarshal);
   class procedure RegisterInUnMarshal(aMarshal: TJSONUnMarshal);
+  function GetEnumerator: TmsItemsList.TEnumerator;
  end;//TmsItemsHolder
 
 {$Else TmsItemsHolder_intf}
@@ -165,6 +166,11 @@ begin
    );//aMarshal.RegisterReverter
   end
  );//RegisterItemsLike
+end;
+
+function TmsItemsHolder.GetEnumerator: TmsItemsList.TEnumerator;
+begin
+ Result := f_Items.GetEnumerator;
 end;
 
 {$EndIf TmsItemsHolder_uses_impl}
