@@ -87,6 +87,7 @@ type
   procedure AddDiagramm(aList: TStrings);
   procedure Serialize;
   procedure DeSerialize;
+  procedure Clear;
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;
  end;//ImsDiagramms

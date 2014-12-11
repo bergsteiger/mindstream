@@ -155,7 +155,7 @@ end;
 
 procedure TmsDiagrammsController.Clear;
 begin
- (FDiagramms.toObject As TmsDiagramms).Clear;
+ FDiagramms.Clear;
 end;
 
 procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);

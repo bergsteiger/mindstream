@@ -25,6 +25,7 @@ type
    procedure AddDiagramm(aList: TStrings); virtual; abstract;
    procedure Serialize; virtual; abstract;
    procedure DeSerialize; virtual; abstract;
+   procedure Clear; virtual; abstract;
    property CurrentDiagramm: ImsDiagramm
     read pm_GetCurrentDiagramm;
  end;//TmsDiagrammsPrim
