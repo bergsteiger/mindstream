@@ -23,6 +23,7 @@ type
    procedure SelectDiagramm(anIndex: Integer); virtual; abstract;
    procedure SelectShape(aList: TStrings; anIndex: Integer); virtual; abstract;
    procedure ProcessClick(const aStart: TPointF); virtual; abstract;
+   function GetEnumerator: TmsDiagrammsEnumerator; virtual; abstract;
    property CurrentDiagramm: ImsDiagramm
     read pm_GetCurrentDiagramm;
  end;//TmsDiagrammsPrim

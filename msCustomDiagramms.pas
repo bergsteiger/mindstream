@@ -16,6 +16,8 @@ type
  TmsItem = ImsDiagramm;
  {$Include msItemsHolder.mixin.pas}
  TmsCustomDiagramms = class abstract(TmsItemsHolder)
+ protected
+  function GetEnumerator: TmsDiagrammsEnumerator; override;
  end;//TmsCustomDiagramms
 
 implementation
@@ -28,4 +30,8 @@ uses
 
 {$Include msItemsHolder.mixin.pas}
 
+function TmsCustomDiagramms.GetEnumerator: TmsDiagrammsEnumerator;
+begin
+ Result := DoGetEnumerator;
+end;
 end.

@@ -7,7 +7,8 @@ uses
  System.Classes,
  FMX.Graphics,
  System.UITypes,
- msSerializeInterfaces
+ msSerializeInterfaces,
+ Generics.Collections
  ;
 
 type
@@ -78,6 +79,8 @@ type
    read Get_Name;
  end;//ImsDiagramm
 
+ TmsDiagrammsEnumerator = TEnumerator<ImsDiagramm>;
+
  ImsDiagramms = interface(ImsObjectWrap)
  ['{819BEEBA-97BB-48F1-906E-107E67706D19}']
   procedure AllowedShapesToList(aList: TStrings);
@@ -91,6 +94,7 @@ type
   procedure SelectDiagramm(anIndex: Integer);
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure ProcessClick(const aStart: TPointF);
+  function GetEnumerator: TmsDiagrammsEnumerator;
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;
  end;//ImsDiagramms

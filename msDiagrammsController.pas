@@ -115,7 +115,7 @@ begin
  l_I := FDiagramms.CurrentDiagrammIndex;
  FDiagramms.DeSerialize;
  cbDiagramm.Clear;
- for l_D in (FDiagramms.toObject As TmsDiagramms).Items do
+ for l_D in FDiagramms do
   cbDiagramm.Items.Add(l_D.Name);
  cbDiagramm.ItemIndex := l_I;
 end;
