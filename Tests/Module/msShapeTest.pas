@@ -349,7 +349,7 @@ var
 begin
  l_Diagramms := TmsDiagramms.Create(nil);
  try
-  TmsDiagrammsMarshal.DeSerialize(MakeFileName(TestSerializeMethodName), l_Diagramms.toObject As TmsDiagramms);
+  l_Diagramms.DeSerializeFrom(MakeFileName(TestSerializeMethodName));
   // - берём результаты от ПРЕДЫДУЩИХ тестов, НЕКОШЕРНО с точки зрения TDD
   //   НО! Чертовски эффективно.
   l_FileName := TestResultsFileName;

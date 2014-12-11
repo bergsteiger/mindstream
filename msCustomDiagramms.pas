@@ -16,6 +16,8 @@ type
  TmsItem = ImsDiagramm;
  {$Include msItemsHolder.mixin.pas}
  TmsCustomDiagramms = class abstract(TmsItemsHolder, ImsDiagramms)
+ protected
+  procedure DeSerializeFrom(const aFileName: String);
  end;//TmsCustomDiagramms
 
 implementation
@@ -23,9 +25,16 @@ implementation
 uses
  {$Include msItemsHolder.mixin.pas}
  ,
- System.SysUtils
+ System.SysUtils,
+ msDiagramms,
+ msDiagrammsMarshal
  ;
 
 {$Include msItemsHolder.mixin.pas}
+
+procedure TmsCustomDiagramms.DeSerializeFrom(const aFileName: String);
+begin
+ TmsDiagrammsMarshal.DeSerialize(aFileName, Self As TmsDiagramms);
+end;
 
 end.

@@ -96,6 +96,7 @@ type
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure ProcessClick(const aStart: TPointF);
   function GetEnumerator: TmsDiagrammsEnumerator;
+  procedure DeSerializeFrom(const aFileName: String);
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;
  end;//ImsDiagramms
