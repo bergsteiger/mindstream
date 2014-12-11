@@ -198,7 +198,7 @@ begin
    l_P : TPoint;
   begin
    for l_P in f_Coords do
-    (aDiagramm.toObject As TmsDiagramm).Items.Add(f_Context.rShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil)));
+    aDiagramm.AddShape(f_Context.rShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil)));
    SaveDiagrammAndCheck(aDiagramm);
   end
   , f_Context.rDiagrammName

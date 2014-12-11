@@ -76,6 +76,7 @@ type
   function CurrentShapeClassIndex: Integer;
   procedure DrawTo(const aCanvas: TCanvas);
   procedure DeSerializeFrom(const aFileName: String);
+  procedure AddShape(const aShape: ImsShape);
   property Name: String
    read Get_Name;
  end;//ImsDiagramm

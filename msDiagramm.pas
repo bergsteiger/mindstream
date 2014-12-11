@@ -50,6 +50,7 @@ type
   function Get_Name: String;
   constructor CreatePrim(const aName: String);
   procedure DeSerializeFrom(const aFileName: String);
+  procedure AddShape(const aShape: ImsShape);
  public
   class function Create(const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
@@ -161,6 +162,11 @@ end;
 procedure TmsDiagramm.DeSerializeFrom(const aFileName: String);
 begin
  TmsDiagrammMarshal.DeSerialize(aFileName, Self);
+end;
+
+procedure TmsDiagramm.AddShape(const aShape: ImsShape);
+begin
+ Items.Add(aShape);
 end;
 
 function TmsDiagramm.Get_Name: String;
