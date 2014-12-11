@@ -16,7 +16,7 @@ uses
  ;
 
 type
- TmsDiagramms = class(TmsCustomDiagramms, ImsDiagramms)
+ TmsDiagramms = class(TmsCustomDiagramms)
  private
   [JSONMarshalled(True)]
   f_CurrentDiagramm : Integer;

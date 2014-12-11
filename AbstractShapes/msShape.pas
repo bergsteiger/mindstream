@@ -67,25 +67,17 @@ type
   procedure MoveTo(const aFinishPoint: TPointF);
  end;//ImsShape
 
- ImsDiagrammsPrim = interface(ImsObjectWrap)
- ['{FC90884F-8A48-472C-8AB2-6E5EF0A6F6D6}']
- end;//ImsDiagrammsPrim
-
- ImsDiagrammPrim = interface(ImsObjectWrap)
- ['{F475D5E5-C4C9-4177-AC54-8E54CCB32935}']
- end;//ImsDiagrammPrim
-
- ImsDiagramm = interface(ImsDiagrammPrim)
+ ImsDiagramm = interface(ImsObjectWrap)
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
   function Get_Name: String;
   property Name: String read Get_Name;
  end;//ImsDiagramm
 
- ImsDiagramms = interface(ImsDiagrammsPrim)
+ ImsDiagramms = interface(ImsObjectWrap)
  ['{819BEEBA-97BB-48F1-906E-107E67706D19}']
  end;//ImsDiagramms
 
- TmsDiagrammsPrim = class abstract(TmsInterfacedRefcounted, ImsDiagrammsPrim)
+ TmsDiagrammsPrim = class abstract(TmsInterfacedRefcounted, ImsDiagramms)
  end;//TmsDiagrammsPrim
 
  TmsShape = class abstract(TmsInterfacedRefcounted, ImsShape)
