@@ -75,6 +75,12 @@ type
  ['{F475D5E5-C4C9-4177-AC54-8E54CCB32935}']
  end;//ImsDiagrammPrim
 
+ ImsDiagramm = interface(ImsDiagrammPrim)
+ ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
+  function Get_Name: String;
+  property Name: String read Get_Name;
+ end;//ImsDiagramm
+
  TmsDiagrammsPrim = class abstract(TmsInterfacedRefcounted, ImsDiagrammsPrim)
  end;//TmsDiagrammsPrim
 

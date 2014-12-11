@@ -23,12 +23,6 @@ uses
  ;
 
 type
- ImsDiagramm = interface(ImsDiagrammPrim)
- ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
-  function Get_Name: String;
-  property Name: String read Get_Name;
- end;//ImsDiagramm
-
  TmsItemsHolderParent = TmsInterfacedRefcounted{TmsInterfacedNonRefcounted};
  TmsItem = ImsShape;
  {$Include msItemsHolder.mixin.pas}

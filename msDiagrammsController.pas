@@ -57,7 +57,8 @@ uses
  {$Include msIvalidator.mixin.pas}
  ,
  System.SysUtils,
- FMX.Types
+ FMX.Types,
+ msShape
  ;
 
 {$Include msIvalidator.mixin.pas}
