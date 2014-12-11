@@ -28,6 +28,7 @@ type
   function CurrentDiagrammIndex: Integer; override;
   function pm_GetCurrentDiagramm: ImsDiagramm; override;
   procedure AddDiagramm(aList: TStrings); override;
+  procedure Serialize; override;
   procedure DeSerialize; override;
  public
   class function Create(aList: TStrings): ImsDiagramms;
@@ -35,7 +36,6 @@ type
   procedure Clear;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure SelectDiagramm(anIndex: Integer);
-  procedure Serialize;
   procedure Assign(anOther: TmsDiagramms);
  end;//TmsDiagramms
 

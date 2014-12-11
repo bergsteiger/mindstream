@@ -122,7 +122,7 @@ end;
 
 procedure TmsDiagrammsController.btSaveDiagrammClick(Sender: TObject);
 begin
- (FDiagramms.toObject As TmsDiagramms).Serialize;
+ FDiagramms.Serialize;
 end;
 
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
