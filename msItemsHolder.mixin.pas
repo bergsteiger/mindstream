@@ -20,6 +20,7 @@
  TmsRttiFieldLambda = reference to procedure (aField: TRttiField);
 
  TmsItemsList = TList<TmsItem>;
+ TmsItemsListEnumerator = TEnumerator<TmsItem>;
 
  TmsItemsHolder = class(TmsItemsHolderParent)
  private
@@ -35,7 +36,7 @@
   procedure Assign(anOther : TmsItemsHolder);
   class procedure RegisterInMarshal(aMarshal: TJSONMarshal);
   class procedure RegisterInUnMarshal(aMarshal: TJSONUnMarshal);
-  function DoGetEnumerator: TmsItemsList.TEnumerator;
+  function GetEnumerator: TmsItemsListEnumerator;
  end;//TmsItemsHolder
 
 {$Else TmsItemsHolder_intf}
@@ -168,7 +169,7 @@ begin
  );//RegisterItemsLike
 end;
 
-function TmsItemsHolder.DoGetEnumerator: TmsItemsList.TEnumerator;
+function TmsItemsHolder.GetEnumerator: TmsItemsListEnumerator;
 begin
  Result := f_Items.GetEnumerator;
 end;

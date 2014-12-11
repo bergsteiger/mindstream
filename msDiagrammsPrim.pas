@@ -10,7 +10,7 @@ uses
  ;
 
 type
- TmsDiagrammsPrim = class abstract(TmsInterfacedRefcounted, ImsDiagramms)
+ TmsDiagrammsPrim = class abstract(TmsInterfacedRefcounted)
   protected
    procedure AllowedShapesToList(aList: TStrings); virtual; abstract;
    function CurrentShapeClassIndex: Integer; virtual; abstract;
@@ -23,7 +23,6 @@ type
    procedure SelectDiagramm(anIndex: Integer); virtual; abstract;
    procedure SelectShape(aList: TStrings; anIndex: Integer); virtual; abstract;
    procedure ProcessClick(const aStart: TPointF); virtual; abstract;
-   function GetEnumerator: TmsDiagrammsEnumerator; virtual; abstract;
    property CurrentDiagramm: ImsDiagramm
     read pm_GetCurrentDiagramm;
  end;//TmsDiagrammsPrim
