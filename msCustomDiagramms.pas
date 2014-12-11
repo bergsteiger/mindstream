@@ -34,4 +34,5 @@ function TmsCustomDiagramms.GetEnumerator: TmsDiagrammsEnumerator;
 begin
  Result := DoGetEnumerator;
 end;
+
 end.
