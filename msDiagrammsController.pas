@@ -16,7 +16,8 @@ uses
  System.UITypes,
  msCoreObjects,
  msWatchedObjectInstance,
- msInterfacedRefcounted
+ msInterfacedRefcounted,
+ msShape
  ;
 
 type
@@ -57,8 +58,7 @@ uses
  {$Include msIvalidator.mixin.pas}
  ,
  System.SysUtils,
- FMX.Types,
- msShape
+ FMX.Types
  ;
 
 {$Include msIvalidator.mixin.pas}

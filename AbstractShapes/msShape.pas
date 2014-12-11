@@ -81,6 +81,10 @@ type
   property Name: String read Get_Name;
  end;//ImsDiagramm
 
+ ImsDiagramms = interface(ImsDiagrammsPrim)
+ ['{819BEEBA-97BB-48F1-906E-107E67706D19}']
+ end;//ImsDiagramms
+
  TmsDiagrammsPrim = class abstract(TmsInterfacedRefcounted, ImsDiagrammsPrim)
  end;//TmsDiagrammsPrim
 

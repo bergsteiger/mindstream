@@ -16,10 +16,6 @@ uses
  ;
 
 type
- ImsDiagramms = interface(ImsDiagrammsPrim)
- ['{819BEEBA-97BB-48F1-906E-107E67706D19}']
- end;//ImsDiagramms
-
  TmsDiagramms = class(TmsCustomDiagramms, ImsDiagramms)
  private
   [JSONMarshalled(True)]
