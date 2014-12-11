@@ -15,6 +15,9 @@ type
   class destructor Destroy;
   class function Marshal: TJSONMarshal;
   class function UnMarshal: TJSONUnMarshal;
+ public
+  class procedure Serialize(const aFileName: string;
+                            const aDiagramm: TObject);
  end;//TmsMarshalPrim
 
 implementation
@@ -25,7 +28,9 @@ uses
  msDiagramm,
  msDiagramms,
  msSerializeInterfaces,
- msRegisteredShapes
+ msRegisteredShapes,
+ JSON,
+ msStringList
  ;
 
 // TmsMarshalPrim
@@ -62,6 +67,27 @@ begin
   TmsDiagramms.RegisterInUnMarshal(f_UnMarshal);
  end;//f_UnMarshal = nil
  Result := f_UnMarshal;
+end;
+
+class procedure TmsMarshalPrim.Serialize(const aFileName: string;
+                                         const aDiagramm: TObject);
+var
+ l_Json: TJSONObject;
+ l_StringList: TmsStringList;
+begin
+ l_StringList := TmsStringList.Create;
+ try
+  l_Json := nil;
+  try
+   l_Json := Marshal.Marshal(aDiagramm) as TJSONObject;
+   l_StringList.Add(l_Json.toString);
+  finally
+   FreeAndNil(l_Json);
+  end;//try..finally
+  l_StringList.SaveToFile(aFileName);
+ finally
+  FreeAndNil(l_StringList);
+ end;//try..finally
 end;
 
 end.
