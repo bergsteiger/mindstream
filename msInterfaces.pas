@@ -65,6 +65,8 @@ type
   procedure MoveTo(const aFinishPoint: TPointF);
  end;//ImsShape
 
+ TmsShapesEnumerator = TEnumerator<ImsShape>;
+
  ImsDiagramm = interface(ImsObjectWrap)
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
   function Get_Name: String;
@@ -77,6 +79,7 @@ type
   procedure DrawTo(const aCanvas: TCanvas);
   procedure DeSerializeFrom(const aFileName: String);
   procedure AddShape(const aShape: ImsShape);
+  function GetEnumerator: TmsShapesEnumerator;
   property Name: String
    read Get_Name;
  end;//ImsDiagramm
