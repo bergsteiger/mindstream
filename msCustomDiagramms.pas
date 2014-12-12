@@ -3,8 +3,6 @@ unit msCustomDiagramms;
 interface
 
 uses
- {$Include msItemsHolder.mixin.pas}
- ,
  msShape,
  msDiagramm,
  msInterfaces,
@@ -15,10 +13,7 @@ uses
 ;
 
 type
- TmsItemsHolderParent = TmsInterfacedRefcounted;
- TmsItem = ImsDiagramm;
- {$Include msItemsHolder.mixin.pas}
- TmsCustomDiagramms = class abstract(TmsItemsHolder, ImsDiagramms)
+ TmsCustomDiagramms = class abstract(TmsDiagrammsList, ImsDiagramms)
  protected
   procedure AllowedShapesToList(aList: TStrings); virtual; abstract;
   function CurrentShapeClassIndex: Integer; virtual; abstract;
@@ -35,25 +30,15 @@ type
    read pm_GetCurrentDiagramm;
   procedure SaveTo(const aFileName: String); virtual; abstract;
   procedure LoadFrom(const aFileName: String); virtual; abstract;
-  procedure AddDiagramm(const aDiagramm: ImsDiagramm);
  end;//TmsCustomDiagramms
 
 implementation
 
 uses
- {$Include msItemsHolder.mixin.pas}
- ,
  System.SysUtils,
  msDiagramms,
  msDiagrammsMarshal
  ;
-
-{$Include msItemsHolder.mixin.pas}
-
-procedure TmsCustomDiagramms.AddDiagramm(const aDiagramm: ImsDiagramm);
-begin
- Items.Add(aDiagramm);
-end;
 
 end.
 
