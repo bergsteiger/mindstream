@@ -15,11 +15,11 @@ uses
  msInterfacedNonRefcounted,
  msInterfaces,
  System.Classes,
- msCustomDiagramms
+ msDiagrammsList
  ;
 
 type
- TmsShape = class abstract(TmsCustomDiagramms, ImsShape)
+ TmsShape = class abstract(TmsDiagrammsList, ImsShape)
  private
   FStartPoint: TPointF;
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;

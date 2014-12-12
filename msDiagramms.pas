@@ -10,7 +10,6 @@ uses
  msWatchedObjectInstance,
  msInterfacedNonRefcounted,
  msShape,
- msCustomDiagramms,
  Data.DBXJSONReflect,
  msDiagramm,
  msInterfaces,
