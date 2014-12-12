@@ -8,15 +8,31 @@ uses
  msShape,
  msDiagramm,
  msInterfaces,
- msDiagrammsPrim
+ msDiagrammsPrim,
+ System.Classes,
+ System.Types,
+ msInterfacedRefcounted
 ;
 
 type
- TmsItemsHolderParent = TmsDiagrammsPrim;
+ TmsItemsHolderParent = TmsInterfacedRefcounted;
  TmsItem = ImsDiagramm;
  {$Include msItemsHolder.mixin.pas}
  TmsCustomDiagramms = class abstract(TmsItemsHolder, ImsDiagramms)
  protected
+  procedure AllowedShapesToList(aList: TStrings); virtual; abstract;
+  function CurrentShapeClassIndex: Integer; virtual; abstract;
+  function CurrentDiagrammIndex: Integer; virtual; abstract;
+  function pm_GetCurrentDiagramm: ImsDiagramm; virtual; abstract;
+  procedure AddNewDiagramm(aList: TStrings); virtual; abstract;
+  procedure Serialize; virtual; abstract;
+  procedure DeSerialize; virtual; abstract;
+  procedure Clear; virtual; abstract;
+  procedure SelectDiagramm(anIndex: Integer); virtual; abstract;
+  procedure SelectShape(aList: TStrings; anIndex: Integer); virtual; abstract;
+  procedure ProcessClick(const aStart: TPointF); virtual; abstract;
+  property CurrentDiagramm: ImsDiagramm
+   read pm_GetCurrentDiagramm;
   procedure SaveTo(const aFileName: String);
   procedure LoadFrom(const aFileName: String);
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
