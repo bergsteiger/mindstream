@@ -60,7 +60,7 @@ type
 
  TmsDiagrammsEnumerator = TEnumerator<ImsDiagramm>;
 
- ImsDiagrammsList = interface(ImsObjectWrap)
+ ImsDiagrammsList = interface(ImsPersistent)
   function GetEnumerator: TmsDiagrammsEnumerator;
  end;//ImsDiagrammsList
 
@@ -78,7 +78,7 @@ type
 
  TmsShapesEnumerator = TEnumerator<ImsShape>;
 
- ImsDiagramm = interface(ImsObjectWrap)
+ ImsDiagramm = interface(ImsPersistent)
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
   function Get_Name: String;
   procedure Invalidate;
