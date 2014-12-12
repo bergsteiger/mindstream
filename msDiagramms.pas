@@ -35,6 +35,7 @@ type
   procedure SelectShape(aList: TStrings; anIndex: Integer); override;
   procedure ProcessClick(const aStart: TPointF); override;
   procedure SaveTo(const aFileName: String); override;
+  procedure LoadFrom(const aFileName: String); override;
  public
   class function Create(aList: TStrings): ImsDiagramms;
   procedure Assign(anOther: TmsDiagramms);
@@ -148,6 +149,10 @@ begin
  TmsDiagrammsMarshal.Serialize(aFileName, Self);
 end;
 
+procedure TmsDiagramms.LoadFrom(const aFileName: String);
+begin
+ TmsDiagrammsMarshal.DeSerialize(aFileName, Self);
+end;
 
 end.
 

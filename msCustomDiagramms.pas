@@ -33,7 +33,7 @@ type
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;
   procedure SaveTo(const aFileName: String); virtual; abstract;
-  procedure LoadFrom(const aFileName: String);
+  procedure LoadFrom(const aFileName: String); virtual; abstract;
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
  end;//TmsCustomDiagramms
 
@@ -48,11 +48,6 @@ uses
  ;
 
 {$Include msItemsHolder.mixin.pas}
-
-procedure TmsCustomDiagramms.LoadFrom(const aFileName: String);
-begin
- TmsDiagrammsMarshal.DeSerialize(aFileName, Self As TmsDiagramms);
-end;
 
 procedure TmsCustomDiagramms.AddDiagramm(const aDiagramm: ImsDiagramm);
 begin
