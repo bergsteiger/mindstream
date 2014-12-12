@@ -60,7 +60,11 @@ type
 
  TmsDiagrammsEnumerator = TEnumerator<ImsDiagramm>;
 
- ImsShape = interface(ImsObjectWrap)
+ ImsDiagrammsList = interface(ImsObjectWrap)
+  function GetEnumerator: TmsDiagrammsEnumerator;
+ end;//ImsDiagrammsList
+
+ ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean;
@@ -68,7 +72,6 @@ type
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
   function pm_GetStartPoint: TPointF;
-  function GetEnumerator: TmsDiagrammsEnumerator;
   property StartPoint: TPointF
    read pm_GetStartPoint;
  end;//ImsShape
@@ -94,7 +97,7 @@ type
    read Get_Name;
  end;//ImsDiagramm
 
- ImsDiagramms = interface(ImsObjectWrap)
+ ImsDiagramms = interface(ImsDiagrammsList)
  ['{819BEEBA-97BB-48F1-906E-107E67706D19}']
   procedure AllowedShapesToList(aList: TStrings);
   function CurrentShapeClassIndex: Integer;
@@ -107,7 +110,6 @@ type
   procedure SelectDiagramm(anIndex: Integer);
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure ProcessClick(const aStart: TPointF);
-  function GetEnumerator: TmsDiagrammsEnumerator;
   procedure SerializeTo(const aFileName: String);
   procedure DeSerializeFrom(const aFileName: String);
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
