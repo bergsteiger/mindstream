@@ -29,6 +29,7 @@
   function pm_GetItems: TmsItemsList;
   procedure pm_SetItems(aValue: TmsItemsList);
   class procedure RegisterItemsLike(aLambda: TmsRttiFieldLambda);
+  function ItemsCount: Integer;
  public
   constructor Create;
   destructor Destroy; override;
@@ -172,6 +173,11 @@ end;
 function TmsItemsHolder.GetEnumerator: TmsItemsListEnumerator;
 begin
  Result := f_Items.GetEnumerator;
+end;
+
+function TmsItemsHolder.ItemsCount: Integer;
+begin
+ Result := Items.Count;
 end;
 
 {$EndIf TmsItemsHolder_uses_impl}

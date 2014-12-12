@@ -257,21 +257,18 @@ begin
  DeserializeDiargammAndCheck(
   procedure (const aDiagramm: ImsDiagramm)
   var
-   l_Shape : TmsShape;
+   l_Shape : ImsShape;
    l_Index : Integer;
-   l_D : TmsDiagramm;
   begin
-   l_D := aDiagramm.toObject As TmsDiagramm;
-   Check(l_D.Name = f_Context.rDiagrammName);
-   Check(l_D.Items <> nil);
-   Check(l_D.Items.Count = ShapesCount);
-   Check(Length(f_Coords) = l_D.Items.Count);
-   for l_Index := 0 to Pred(l_D.Items.Count) do
+   Check(aDiagramm.Name = f_Context.rDiagrammName);
+   Check(Length(f_Coords) = aDiagramm.ItemsCount);
+   l_Index := 0;
+   for l_Shape in aDiagramm do
    begin
-    l_Shape := l_D.Items[l_Index].toObject As TmsShape;
     Check(l_Shape.ClassType = f_Context.rShapeClass);
     Check(l_Shape.StartPoint.X = f_Coords[l_Index].X);
     Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y);
+    Inc(l_Index);
    end;//for l_Shape
   end
  );

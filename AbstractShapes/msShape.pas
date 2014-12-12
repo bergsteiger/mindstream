@@ -20,6 +20,7 @@ type
  private
   FStartPoint: TPointF;
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
+  function pm_GetStartPoint: TPointF;
  protected
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
@@ -88,6 +89,11 @@ end;
 procedure TmsShape.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  // - тут ничего не делаем
+end;
+
+function TmsShape.pm_GetStartPoint: TPointF;
+begin
+ Result := FStartPoint;
 end;
 
 function TmsShape.DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;

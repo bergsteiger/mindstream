@@ -63,6 +63,9 @@ type
   procedure EndTo(const aCtx: TmsEndShapeContext);
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
+  function pm_GetStartPoint: TPointF;
+  property StartPoint: TPointF
+   read pm_GetStartPoint;
  end;//ImsShape
 
  TmsShapesEnumerator = TEnumerator<ImsShape>;
@@ -80,6 +83,7 @@ type
   procedure DeSerializeFrom(const aFileName: String);
   procedure AddShape(const aShape: ImsShape);
   function GetEnumerator: TmsShapesEnumerator;
+  function ItemsCount: Integer;
   property Name: String
    read Get_Name;
  end;//ImsDiagramm
