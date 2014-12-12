@@ -49,6 +49,7 @@ type
   procedure RemoveShape(const aShape: ImsShape);
   function Get_Name: String;
   constructor CreatePrim(const aName: String);
+  procedure SerializeTo(const aFileName: String);
   procedure DeSerializeFrom(const aFileName: String);
   procedure AddShape(const aShape: ImsShape);
  public
@@ -158,6 +159,12 @@ begin
  FCurrentClass := AllowedShapes.First;
  fName := aName;
 end;
+
+procedure TmsDiagramm.SerializeTo(const aFileName: String);
+begin
+ TmsDiagrammMarshal.Serialize(aFileName, Self);
+end;
+
 
 procedure TmsDiagramm.DeSerializeFrom(const aFileName: String);
 begin

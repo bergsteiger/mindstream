@@ -80,6 +80,7 @@ type
   procedure AllowedShapesToList(aList: TStrings);
   function CurrentShapeClassIndex: Integer;
   procedure DrawTo(const aCanvas: TCanvas);
+  procedure SerializeTo(const aFileName: String);
   procedure DeSerializeFrom(const aFileName: String);
   procedure AddShape(const aShape: ImsShape);
   function GetEnumerator: TmsShapesEnumerator;

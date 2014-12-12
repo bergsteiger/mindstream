@@ -135,7 +135,7 @@ end;
 
 procedure TmsShapeTestPrim.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 begin
- TmsDiagrammMarshal.Serialize(aFileName, aDiagramm.toObject);
+ aDiagramm.SerializeTo(aFileName);
 end;
 
 procedure TmsShapeTestPrim.SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm);
