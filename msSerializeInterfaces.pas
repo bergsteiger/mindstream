@@ -6,6 +6,7 @@ type
  ImsObjectWrap = interface
   function toObject: TObject;
   function ClassType: TClass;
+  function EQ(const anOther: ImsObjectWrap): Boolean;
  end;//ImsObjectWrap
 
  ImsPersistent = interface(ImsObjectWrap)
