@@ -14,14 +14,12 @@ uses
  msInterfacedRefcounted,
  msInterfacedNonRefcounted,
  msInterfaces,
- System.Classes
+ System.Classes,
+ msCustomDiagramms
  ;
 
 type
- TmsItemsHolderParent = TmsInterfacedRefcounted;
- TmsItem = ImsDiagramm;
- {$Include msItemsHolder.mixin.pas}
- TmsShape = class abstract(TmsItemsHolder, ImsShape)
+ TmsShape = class abstract(TmsCustomDiagramms, ImsShape)
  private
   FStartPoint: TPointF;
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
@@ -34,8 +32,8 @@ type
   procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
-  procedure SaveTo(const aFileName: String);
-  procedure LoadFrom(const aFileName: String);
+  procedure SaveTo(const aFileName: String); override;
+  procedure LoadFrom(const aFileName: String); override;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; virtual;
   // - фабричный метод, который создаёт экземпляр класса как интерфейс
@@ -64,12 +62,9 @@ type
 implementation
 
 uses
- {$Include msItemsHolder.mixin.pas},
  System.SysUtils,
  msShapeMarshal
  ;
-
-{$Include msItemsHolder.mixin.pas}
 
 class function TmsShape.Create(const aCtx: TmsMakeShapeContext): ImsShape;
 begin

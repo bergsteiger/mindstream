@@ -3,8 +3,6 @@ unit msCustomDiagramms;
 interface
 
 uses
- msShape,
- msDiagramm,
  msInterfaces,
  System.Classes,
  System.Types,

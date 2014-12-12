@@ -5,8 +5,6 @@ interface
 uses
  {$Include msItemsHolder.mixin.pas}
  ,
- msShape,
- msDiagramm,
  msInterfaces,
  System.Classes,
  System.Types,
