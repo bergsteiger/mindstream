@@ -124,6 +124,11 @@ begin
      l_Index: Integer;
     begin
      Assert(Field = l_FieldName);
+     if ((Data As TmsItemsHolder).Items.Count <= 0) then
+     begin
+      Result := nil;
+      Exit;
+     end;//Data As TmsItemsHolder).Items.Count <= 0
      SetLength(Result, (Data As TmsItemsHolder).Items.Count);
      l_Index := 0;
      for l_Item in (Data As TmsItemsHolder).Items do
