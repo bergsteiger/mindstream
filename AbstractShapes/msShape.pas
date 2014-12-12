@@ -1,12 +1,14 @@
 ﻿unit msShape;
 
 interface
+
 uses
+ {$Include msItemsHolder.mixin.pas}
+ ,
  FMX.Graphics,
  System.Types,
  FMX.Types,
  System.UITypes,
- Generics.Collections,
  msCoreObjects,
  msSerializeInterfaces,
  msInterfacedRefcounted,
@@ -16,7 +18,10 @@ uses
  ;
 
 type
- TmsShape = class abstract(TmsInterfacedRefcounted, ImsShape)
+ TmsItemsHolderParent = TmsInterfacedRefcounted;
+ TmsItem = ImsDiagramm;
+ {$Include msItemsHolder.mixin.pas}
+ TmsShape = class abstract(TmsItemsHolder, ImsShape)
  private
   FStartPoint: TPointF;
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
@@ -54,6 +59,13 @@ type
  RmsShape = class of TmsShape;
 
 implementation
+
+uses
+ {$Include msItemsHolder.mixin.pas},
+ System.SysUtils
+ ;
+
+{$Include msItemsHolder.mixin.pas}
 
 class function TmsShape.Create(const aCtx: TmsMakeShapeContext): ImsShape;
 begin

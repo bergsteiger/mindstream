@@ -46,6 +46,7 @@ begin
  if (f_Marshal = nil) then
  begin
   f_Marshal := TJSONMarshal.Create;
+  TmsShape.RegisterInMarshal(f_Marshal);
   TmsDiagramm.RegisterInMarshal(f_Marshal);
   TmsDiagramms.RegisterInMarshal(f_Marshal);
   TmsRegisteredShapes.IterateShapes(
@@ -63,6 +64,7 @@ begin
  if (f_UnMarshal = nil) then
  begin
   f_UnMarshal := TJSONUnMarshal.Create;
+  TmsShape.RegisterInUnMarshal(f_UnMarshal);
   TmsDiagramm.RegisterInUnMarshal(f_UnMarshal);
   TmsDiagramms.RegisterInUnMarshal(f_UnMarshal);
  end;//f_UnMarshal = nil
