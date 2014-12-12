@@ -5,7 +5,7 @@
 {$Define TmsWatchedObject_uses_intf}
 
 // uses
-
+ {$Include msObjectWrap.mixin.pas}
  msCoreObjects
 
 {$Else TmsWatchedObject_uses_intf}
@@ -15,7 +15,9 @@
 
 {$Define TmsWatchedObject}
 
- TmsWatchedObject = class abstract(TmsWatchedObjectParent)
+ TmsObjectWrapParent = TmsWatchedObjectParent;
+ {$Include msObjectWrap.mixin.pas}
+ TmsWatchedObject = class abstract(TmsObjectWrap)
  // - Класс, который умеет контроллировать создание/уничтожение своих экземпляров
  public
   class function NewInstance: TObject; override;
@@ -32,11 +34,14 @@
 {$IfNDef TmsWatchedObject_uses_impl}
 
 // uses
+ {$Include msObjectWrap.mixin.pas}
  SysUtils
 
 {$Define TmsWatchedObject_uses_impl}
 
 {$Else TmsWatchedObject_uses_impl}
+
+{$Include msObjectWrap.mixin.pas}
 
 // TmsWatchedObject
 
