@@ -224,6 +224,7 @@
         <DCCReference Include="msSerializeInterfaces.pas"/>
         <DCCReference Include="ShapeTools\msTool.pas"/>
         <DCCReference Include="Marshal\msDiagrammMarshal.pas"/>
+        <DCCReference Include="Marshal\msShapeMarshal.pas"/>
         <DCCReference Include="Marshal\msDiagrammsMarshal.pas"/>
         <DCCReference Include="Core\msInterfacedNonRefcounted.pas"/>
         <DCCReference Include="Core\msWatchedObjectInstance.pas"/>
@@ -488,13 +489,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msDotLine\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msDotLine\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>

@@ -56,6 +56,7 @@ type
   property StartPoint : TPointF read FStartPoint;
   class function IsTool: Boolean; virtual;
   class function IsForToolbar: Boolean; virtual;
+  procedure Assign(anOther : TmsShape);
  end;//TmsShape
 
  RmsShape = class of TmsShape;
@@ -64,7 +65,8 @@ implementation
 
 uses
  {$Include msItemsHolder.mixin.pas},
- System.SysUtils
+ System.SysUtils,
+ msShapeMarshal
  ;
 
 {$Include msItemsHolder.mixin.pas}
@@ -140,12 +142,18 @@ end;
 
 procedure TmsShape.SerializeTo(const aFileName: String);
 begin
- Assert(false);
+ TmsShapeMarshal.Serialize(aFileName, Self);
 end;
 
 procedure TmsShape.DeSerializeFrom(const aFileName: String);
 begin
- Assert(false);
+ TmsShapeMarshal.DeSerialize(aFileName, Self);
+end;
+
+procedure TmsShape.Assign(anOther : TmsShape);
+begin
+ inherited Assign(anOther);
+ Assert(false, 'Не реализовано');
 end;
 
 end.
