@@ -15,7 +15,6 @@ uses
  System.Classes,
  System.UITypes,
  msCoreObjects,
- msWatchedObjectInstance,
  msInterfacedRefcounted,
  msShape,
  msInterfaces
