@@ -10,6 +10,8 @@
 
 {$IfNDef TmsObjectWrap_intf}
  TmsObjectWrap = class(TmsObjectWrapParent)
+ protected
+  function toObject: TObject;
  end;//TmsObjectWrap
 // http://programmingmindstream.blogspot.ru/2014/12/generic-2.html
 
@@ -28,6 +30,11 @@
 {$Else TmsObjectWrap_uses_impl}
 
 // TmsObjectWrap
+
+function TmsObjectWrap.toObject: TObject;
+begin
+ Result := Self;
+end;
 
 {$EndIf TmsObjectWrap_uses_impl}
 

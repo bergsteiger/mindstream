@@ -24,7 +24,6 @@
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
   procedure FreeInstance; override;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
-  function toObject: TObject;
  end;//TmsWatchedObject
 
 {$Else TmsWatchedObject}
@@ -53,11 +52,6 @@ end;
 procedure TmsWatchedObject.FreeInstance;
 begin
  TmsObjectsWatcher.DestroyObject(Self);
-end;
-
-function TmsWatchedObject.toObject: TObject;
-begin
- Result := Self;
 end;
 
 {$EndIf TmsWatchedObject_uses_impl}
