@@ -6,6 +6,7 @@
 
 // uses
  {$Include msObjectWrap.mixin.pas}
+ ,
  msCoreObjects
 
 {$Else TmsWatchedObject_uses_intf}

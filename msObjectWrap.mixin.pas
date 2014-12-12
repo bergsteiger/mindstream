@@ -5,11 +5,12 @@
 {$Define TmsObjectWrap_uses_intf}
 
 // uses
+ msSerializeInterfaces
 
 {$Else TmsObjectWrap_uses_intf}
 
 {$IfNDef TmsObjectWrap_intf}
- TmsObjectWrap = class(TmsObjectWrapParent)
+ TmsObjectWrap = class(TmsObjectWrapParent{, ImsObjectWrap})
  protected
   function toObject: TObject;
  end;//TmsObjectWrap
