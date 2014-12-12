@@ -10,7 +10,8 @@ uses
  msInterfaces,
  System.Classes,
  System.Types,
- msInterfacedRefcounted
+ msInterfacedRefcounted,
+ msDiagrammsList
 ;
 
 type
