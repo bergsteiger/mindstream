@@ -56,6 +56,10 @@ type
    constructor Create(const aCtx: TmsDrawContext);
  end;//TmsDrawOptionsContext
 
+ ImsDiagramm = interface;
+
+ TmsDiagrammsEnumerator = TEnumerator<ImsDiagramm>;
+
  ImsShape = interface(ImsObjectWrap)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
@@ -64,6 +68,7 @@ type
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
   function pm_GetStartPoint: TPointF;
+  function GetEnumerator: TmsDiagrammsEnumerator;
   property StartPoint: TPointF
    read pm_GetStartPoint;
  end;//ImsShape
@@ -88,8 +93,6 @@ type
   property Name: String
    read Get_Name;
  end;//ImsDiagramm
-
- TmsDiagrammsEnumerator = TEnumerator<ImsDiagramm>;
 
  ImsDiagramms = interface(ImsObjectWrap)
  ['{819BEEBA-97BB-48F1-906E-107E67706D19}']
