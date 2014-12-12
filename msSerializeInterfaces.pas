@@ -6,8 +6,8 @@ type
  ImsObjectWrap = interface
   function toObject: TObject;
   function ClassType: TClass;
-  procedure SerializeTo(const aFileName: String);
-  procedure DeSerializeFrom(const aFileName: String);
+  procedure SaveTo(const aFileName: String);
+  procedure LoadFrom(const aFileName: String);
  end;//ImsObjectWrap
 
 implementation

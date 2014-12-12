@@ -34,8 +34,8 @@ type
   procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
-  procedure SerializeTo(const aFileName: String);
-  procedure DeSerializeFrom(const aFileName: String);
+  procedure SaveTo(const aFileName: String);
+  procedure LoadFrom(const aFileName: String);
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; virtual;
   // - фабричный метод, который создаёт экземпляр класса как интерфейс
@@ -140,12 +140,12 @@ begin
  DoDrawTo(aCtx);
 end;
 
-procedure TmsShape.SerializeTo(const aFileName: String);
+procedure TmsShape.SaveTo(const aFileName: String);
 begin
  TmsShapeMarshal.Serialize(aFileName, Self);
 end;
 
-procedure TmsShape.DeSerializeFrom(const aFileName: String);
+procedure TmsShape.LoadFrom(const aFileName: String);
 begin
  TmsShapeMarshal.DeSerialize(aFileName, Self);
 end;
