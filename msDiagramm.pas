@@ -18,13 +18,12 @@ uses
  System.JSON,
  msCoreObjects,
  msSerializeInterfaces,
- msInterfacedNonRefcounted,
  msInterfacedRefcounted,
  msInterfaces
  ;
 
 type
- TmsItemsHolderParent = TmsInterfacedRefcounted{TmsInterfacedNonRefcounted};
+ TmsItemsHolderParent = TmsInterfacedRefcounted;
  TmsItem = ImsShape;
  {$Include msItemsHolder.mixin.pas}
  TmsDiagramm = class(TmsItemsHolder, ImsDiagramm, ImsShapeByPt, ImsShapesController)

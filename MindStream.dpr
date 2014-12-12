@@ -39,7 +39,6 @@ uses
   msDiagrammMarshal in 'Marshal\msDiagrammMarshal.pas',
   msShapeMarshal in 'Marshal\msShapeMarshal.pas',
   msDiagrammsMarshal in 'Marshal\msDiagrammsMarshal.pas',
-  msInterfacedNonRefcounted in 'Core\msInterfacedNonRefcounted.pas',
   msWatchedObjectInstance in 'Core\msWatchedObjectInstance.pas',
   msStringList in 'Core\msStringList.pas',
   msInterfacedRefcounted in 'Core\msInterfacedRefcounted.pas',

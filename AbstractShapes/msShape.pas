@@ -10,7 +10,6 @@ uses
  msCoreObjects,
  msSerializeInterfaces,
  msInterfacedRefcounted,
- msInterfacedNonRefcounted,
  msInterfaces,
  System.Classes,
  msDiagrammsList

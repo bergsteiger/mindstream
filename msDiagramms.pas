@@ -8,7 +8,6 @@ uses
  System.Classes,
  msCoreObjects,
  msWatchedObjectInstance,
- msInterfacedNonRefcounted,
  msShape,
  Data.DBXJSONReflect,
  msDiagramm,
