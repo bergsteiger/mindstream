@@ -333,7 +333,7 @@ begin
  l_Diagramms := TmsDiagramms.Create(nil);
  try
   l_Diagramms.AddDiagramm(aDiagramm);
-  TmsDiagrammsMarshal.Serialize(aFileName, l_Diagramms.toObject);
+  l_Diagramms.SerializeTo(aFileName);
  finally
   l_Diagramms := nil;
  end;//try..finally
@@ -350,7 +350,7 @@ begin
   // - берём результаты от ПРЕДЫДУЩИХ тестов, НЕКОШЕРНО с точки зрения TDD
   //   НО! Чертовски эффективно.
   l_FileName := TestResultsFileName;
-  TmsDiagrammsMarshal.Serialize(l_FileName, l_Diagramms.toObject);
+  l_Diagramms.SerializeTo(l_FileName);
   CheckFileWithEtalon(l_FileName);
  finally
   l_Diagramms := nil;
