@@ -97,7 +97,7 @@ end;
 procedure TmsDiagrammsController.DoInvalidateDiagramm(const aDiagramm: ImsDiagramm);
 begin
  if (imgMain <> nil) then
-  if (aDiagramm = CurrentDiagramm) then
+  if (aDiagramm.EQ(CurrentDiagramm)) then
    imgMain.Repaint;
 end;
 
