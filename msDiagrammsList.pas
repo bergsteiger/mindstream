@@ -19,9 +19,9 @@ type
  {$Include msItemsHolder.mixin.pas}
  TmsDiagrammsList = class abstract(TmsItemsHolder, ImsDiagrammsList)
  protected
+  procedure AddDiagramm(const aDiagramm: ImsDiagramm);
   procedure SaveTo(const aFileName: String); virtual; abstract;
   procedure LoadFrom(const aFileName: String); virtual; abstract;
-  procedure AddDiagramm(const aDiagramm: ImsDiagramm);
  end;//TmsDiagrammsList
 
 implementation

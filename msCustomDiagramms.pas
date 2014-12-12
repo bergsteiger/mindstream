@@ -28,8 +28,6 @@ type
   procedure ProcessClick(const aStart: TPointF); virtual; abstract;
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;
-  procedure SaveTo(const aFileName: String); virtual; abstract;
-  procedure LoadFrom(const aFileName: String); virtual; abstract;
  end;//TmsCustomDiagramms
 
 implementation
