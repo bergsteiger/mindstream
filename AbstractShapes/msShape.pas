@@ -3,8 +3,6 @@
 interface
 
 uses
- {$Include msItemsHolder.mixin.pas}
- ,
  FMX.Graphics,
  System.Types,
  FMX.Types,
