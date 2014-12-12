@@ -13,29 +13,32 @@ uses
  msCustomDiagramms,
  Data.DBXJSONReflect,
  msDiagramm,
- msInterfaces
+ msInterfaces,
+ msDiagrammsList
  ;
 
 type
- TmsDiagramms = class(TmsCustomDiagramms)
+ TmsDiagramms = class(TmsDiagrammsList, ImsDiagramms)
  private
   [JSONMarshalled(True)]
   f_CurrentDiagramm : Integer;
   constructor CreatePrim(aList: TStrings);
  protected
-  procedure AllowedShapesToList(aList: TStrings); override;
-  function CurrentShapeClassIndex: Integer; override;
-  function CurrentDiagrammIndex: Integer; override;
-  function pm_GetCurrentDiagramm: ImsDiagramm; override;
-  procedure AddNewDiagramm(aList: TStrings); override;
-  procedure Serialize; override;
-  procedure DeSerialize; override;
-  procedure Clear; override;
-  procedure SelectDiagramm(anIndex: Integer); override;
-  procedure SelectShape(aList: TStrings; anIndex: Integer); override;
-  procedure ProcessClick(const aStart: TPointF); override;
+  procedure AllowedShapesToList(aList: TStrings);
+  function CurrentShapeClassIndex: Integer;
+  function CurrentDiagrammIndex: Integer;
+  function pm_GetCurrentDiagramm: ImsDiagramm;
+  procedure AddNewDiagramm(aList: TStrings);
+  procedure Serialize;
+  procedure DeSerialize;
+  procedure Clear;
+  procedure SelectDiagramm(anIndex: Integer);
+  procedure SelectShape(aList: TStrings; anIndex: Integer);
+  procedure ProcessClick(const aStart: TPointF);
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
+  property CurrentDiagramm: ImsDiagramm
+   read pm_GetCurrentDiagramm;
  public
   class function Create(aList: TStrings): ImsDiagramms;
   procedure Assign(anOther: TmsDiagramms);
