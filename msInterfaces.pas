@@ -88,8 +88,6 @@ type
   procedure AllowedShapesToList(aList: TStrings);
   function CurrentShapeClassIndex: Integer;
   procedure DrawTo(const aCanvas: TCanvas);
-  procedure SerializeTo(const aFileName: String);
-  procedure DeSerializeFrom(const aFileName: String);
   procedure AddShape(const aShape: ImsShape);
   function GetEnumerator: TmsShapesEnumerator;
   function ItemsCount: Integer;
@@ -110,8 +108,6 @@ type
   procedure SelectDiagramm(anIndex: Integer);
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure ProcessClick(const aStart: TPointF);
-  procedure SerializeTo(const aFileName: String);
-  procedure DeSerializeFrom(const aFileName: String);
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;

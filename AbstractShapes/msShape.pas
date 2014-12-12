@@ -34,6 +34,8 @@ type
   procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
+  procedure SerializeTo(const aFileName: String);
+  procedure DeSerializeFrom(const aFileName: String);
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; virtual;
   // - фабричный метод, который создаёт экземпляр класса как интерфейс
@@ -134,6 +136,16 @@ begin
  aCtx.rCanvas.Stroke.Color := l_Ctx.rStrokeColor;
  aCtx.rCanvas.Stroke.Thickness := l_Ctx.rStrokeThickness;
  DoDrawTo(aCtx);
+end;
+
+procedure TmsShape.SerializeTo(const aFileName: String);
+begin
+ Assert(false);
+end;
+
+procedure TmsShape.DeSerializeFrom(const aFileName: String);
+begin
+ Assert(false);
 end;
 
 end.
