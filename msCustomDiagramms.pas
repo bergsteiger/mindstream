@@ -8,7 +8,6 @@ uses
  msShape,
  msDiagramm,
  msInterfaces,
- msDiagrammsPrim,
  System.Classes,
  System.Types,
  msInterfacedRefcounted

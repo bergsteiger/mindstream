@@ -47,8 +47,8 @@ uses
   msShapeTestSuite in 'Tests\Module\msShapeTestSuite.pas',
   msInvalidators in 'msInvalidators.pas',
   msCustomDiagramms in 'msCustomDiagramms.pas',
-  msInterfaces in 'msInterfaces.pas',
-  msDiagrammsPrim in 'msDiagrammsPrim.pas';
+  msInterfaces in 'msInterfaces.pas'
+  ;
 
 {$R *.res}
 
