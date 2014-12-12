@@ -32,7 +32,7 @@ type
   procedure ProcessClick(const aStart: TPointF); virtual; abstract;
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;
-  procedure SaveTo(const aFileName: String);
+  procedure SaveTo(const aFileName: String); virtual; abstract;
   procedure LoadFrom(const aFileName: String);
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
  end;//TmsCustomDiagramms
@@ -48,12 +48,6 @@ uses
  ;
 
 {$Include msItemsHolder.mixin.pas}
-
-procedure TmsCustomDiagramms.SaveTo(const aFileName: String);
-begin
- TmsDiagrammsMarshal.Serialize(aFileName, Self);
-end;
-
 
 procedure TmsCustomDiagramms.LoadFrom(const aFileName: String);
 begin
