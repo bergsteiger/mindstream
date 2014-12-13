@@ -5,6 +5,8 @@ interface
 uses
  {$Include msItemsHolder.mixin.pas}
  ,
+ {$Include msPersistent.mixin.pas}
+ ,
  FMX.Graphics,
  System.SysUtils,
  System.Types,
@@ -18,15 +20,16 @@ uses
  System.JSON,
  msCoreObjects,
  msSerializeInterfaces,
- msInterfacedRefcounted,
- msInterfaces
+ msInterfacedRefcounted
  ;
 
 type
  TmsItemsHolderParent = TmsInterfacedRefcounted;
  TmsItem = ImsShape;
  {$Include msItemsHolder.mixin.pas}
- TmsDiagramm = class(TmsItemsHolder, ImsDiagramm, ImsShapeByPt, ImsShapesController)
+ TmsPersistentParent = TmsItemsHolder;
+ {$Include msPersistent.mixin.pas}
+ TmsDiagramm = class(TmsPersistent, ImsDiagramm, ImsShapeByPt, ImsShapesController)
  // - Выделяем интерфейс ImsObjectWrap.
  //   Смешно - если TmsDiagramm его реализет НАПРЯМУЮ, то всё хорошо.
  //   А если через ImsSerializable, то - AV.
@@ -48,8 +51,8 @@ type
   procedure RemoveShape(const aShape: ImsShape);
   function Get_Name: String;
   constructor CreatePrim(const aName: String);
-  procedure SaveTo(const aFileName: String);
-  procedure LoadFrom(const aFileName: String);
+  procedure SaveTo(const aFileName: String); override;
+  procedure LoadFrom(const aFileName: String); override;
   procedure AddShape(const aShape: ImsShape);
  public
   class function Create(const aName: String): ImsDiagramm;
@@ -71,6 +74,7 @@ implementation
 
 uses
  {$Include msItemsHolder.mixin.pas}
+ {$Include msPersistent.mixin.pas}
  ,
  msMover,
  msCircle,
@@ -79,6 +83,7 @@ uses
  ;
 
 {$Include msItemsHolder.mixin.pas}
+{$Include msPersistent.mixin.pas}
 
 const
  c_FileName = '.json';
