@@ -3,9 +3,10 @@ unit msDiagrammsList;
 interface
 
 uses
+ {$Include msPersistent.mixin.pas}
+ ,
  {$Include msItemsHolder.mixin.pas}
  ,
- msInterfaces,
  System.Classes,
  System.Types,
  msInterfacedRefcounted
@@ -15,20 +16,23 @@ type
  TmsItemsHolderParent = TmsInterfacedRefcounted;
  TmsItem = ImsDiagramm;
  {$Include msItemsHolder.mixin.pas}
- TmsDiagrammsList = class abstract(TmsItemsHolder, ImsDiagrammsList)
+ TmsPersistentParent = TmsItemsHolder;
+ {$Include msPersistent.mixin.pas}
+ TmsDiagrammsList = class abstract(TmsPersistent, ImsDiagrammsList)
  protected
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
-  procedure SaveTo(const aFileName: String); virtual; abstract;
-  procedure LoadFrom(const aFileName: String); virtual; abstract;
  end;//TmsDiagrammsList
 
 implementation
 
 uses
+ {$Include msPersistent.mixin.pas}
  {$Include msItemsHolder.mixin.pas}
  ,
  System.SysUtils
  ;
+
+{$Include msPersistent.mixin.pas}
 
 {$Include msItemsHolder.mixin.pas}
 
