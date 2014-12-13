@@ -7,6 +7,7 @@ uses
  ,
  {$Include msItemsHolder.mixin.pas}
  ,
+ msInterfaces,
  System.Classes,
  System.Types,
  msInterfacedRefcounted

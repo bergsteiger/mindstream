@@ -7,6 +7,7 @@ uses
  ,
  {$Include msPersistent.mixin.pas}
  ,
+ msInterfaces,
  FMX.Graphics,
  System.SysUtils,
  System.Types,
@@ -19,7 +20,6 @@ uses
  FMX.Dialogs,
  System.JSON,
  msCoreObjects,
- msSerializeInterfaces,
  msInterfacedRefcounted
  ;
 
