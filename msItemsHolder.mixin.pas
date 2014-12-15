@@ -38,6 +38,7 @@
   class procedure RegisterInMarshal(aMarshal: TJSONMarshal);
   class procedure RegisterInUnMarshal(aMarshal: TJSONUnMarshal);
   function GetEnumerator: TmsItemsListEnumerator;
+  function IndexOf(const anItem: TmsItem): Integer;
  end;//TmsItemsHolder
 
 {$Else TmsItemsHolder_intf}
@@ -178,6 +179,11 @@ end;
 function TmsItemsHolder.GetEnumerator: TmsItemsListEnumerator;
 begin
  Result := f_Items.GetEnumerator;
+end;
+
+function TmsItemsHolder.IndexOf(const anItem: TmsItem): Integer;
+begin
+ Result := Items.IndexOf(anItem);
 end;
 
 function TmsItemsHolder.ItemsCount: Integer;

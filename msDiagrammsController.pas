@@ -23,7 +23,7 @@ uses
 type
  TmsIvalidatorParent = TmsInterfacedRefcounted;
  {$Include msIvalidator.mixin.pas}
- TmsDiagrammsController = class(TmsIvalidator)
+ TmsDiagrammsController = class(TmsIvalidator, ImsDiagrammsListener)
  private
   imgMain: TPaintBox;
   cbShapes: TComboBox;
@@ -41,6 +41,7 @@ type
   procedure btSaveDiagrammClick(Sender: TObject);
   procedure btLoadDiagrammClick(Sender: TObject);
   function pm_GetCurrentDiagramm: ImsDiagramm;
+  procedure DiargammAdded(const aDiagramm: ImsDiagramm);
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
  public
@@ -171,6 +172,12 @@ procedure TmsDiagrammsController.imgMainMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
  Self.ProcessClick(TPointF.Create(X, Y));
+end;
+
+procedure TmsDiagrammsController.DiargammAdded(const aDiagramm: ImsDiagramm);
+begin
+ if (FDiagramms.IndexOf(aDiagramm) >= 0) then
+  cbDiagramm.Items.Add(aDiagramm.Name);
 end;
 
 end.

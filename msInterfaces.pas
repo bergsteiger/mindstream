@@ -62,6 +62,7 @@ type
 
  ImsDiagrammsList = interface(ImsPersistent)
   function GetEnumerator: TmsDiagrammsEnumerator;
+  function IndexOf(const anItem: ImsDiagramm): Integer;
  end;//ImsDiagrammsList
 
  ImsShape = interface(ImsDiagrammsList)
@@ -116,6 +117,10 @@ type
  ImsIvalidator = interface
   procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
  end;//ImsIvalidator
+
+ ImsDiagrammsListener = interface
+  procedure DiargammAdded(const aDiagramm: ImsDiagramm);
+ end;//ImsDiagrammsListener
 
 implementation
 
