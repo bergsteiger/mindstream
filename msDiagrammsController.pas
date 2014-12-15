@@ -60,7 +60,8 @@ uses
  {$Include msIvalidator.mixin.pas}
  ,
  System.SysUtils,
- FMX.Types
+ FMX.Types,
+ msDiagrammsListeners
  ;
 
 {$Include msIvalidator.mixin.pas}
