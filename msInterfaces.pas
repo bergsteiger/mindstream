@@ -63,6 +63,7 @@ type
  ImsDiagrammsList = interface(ImsPersistent)
   function GetEnumerator: TmsDiagrammsEnumerator;
   function IndexOf(const anItem: ImsDiagramm): Integer;
+  function AddNewDiagramm: ImsDiagramm;
  end;//ImsDiagrammsList
 
  ImsShape = interface(ImsDiagrammsList)
@@ -102,7 +103,6 @@ type
   function CurrentShapeClassIndex: Integer;
   function CurrentDiagrammIndex: Integer;
   function pm_GetCurrentDiagramm: ImsDiagramm;
-  function AddNewDiagramm: ImsDiagramm;
   procedure Serialize;
   procedure DeSerialize;
   procedure Clear;
