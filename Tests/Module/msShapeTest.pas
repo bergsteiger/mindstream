@@ -203,27 +203,12 @@ end;
 
 procedure TmsShapeTestPrim.CheckFileWithEtalon(const aFileName: String);
 var
- l_FileSerialized, l_FileEtalon: TmsStringList;
  l_FileNameEtalon : String;
 begin
  l_FileNameEtalon := aFileName + '.etalon' + ExtractFileExt(aFileName);
  if FileExists(l_FileNameEtalon) then
  begin
-  l_FileSerialized := TmsStringList.Create;
-  try
-   l_FileEtalon := TmsStringList.Create;
-   try
-    l_FileSerialized.LoadFromFile(aFileName);
-
-    l_FileEtalon.LoadFromFile(l_FileNameEtalon);
-
-    CheckTrue(l_FileEtalon.Equals(l_FileSerialized));
-   finally
-    FreeAndNil(l_FileSerialized);
-   end;//try..finally
-  finally
-   FreeAndNil(l_FileEtalon);
-  end;//try..finally
+  CheckTrue(l3CompareFiles(l_FileNameEtalon, aFileName));
  end//FileExists(l_FileNameEtalon)
  else
  begin
