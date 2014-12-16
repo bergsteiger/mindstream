@@ -25,7 +25,7 @@ type
   function CurrentShapeClassIndex: Integer;
   function CurrentDiagrammIndex: Integer;
   function pm_GetCurrentDiagramm: ImsDiagramm;
-  procedure AddNewDiagramm;
+  function AddNewDiagramm: ImsDiagramm;
   procedure Serialize;
   procedure DeSerialize;
   procedure Clear;
@@ -69,14 +69,12 @@ begin
  Result := Items[f_CurrentDiagramm];
 end;
 
-procedure TmsDiagramms.AddNewDiagramm;
-var
- l_D : ImsDiagramm;
+function TmsDiagramms.AddNewDiagramm: ImsDiagramm;
 begin
- l_D := TmsDiagramm.Create('Диаграмма №' + IntToStr(Items.Count + 1));
- Items.Add(l_D);
- f_CurrentDiagramm := Items.IndexOf(l_D);
- TmsInvalidators.DiagrammAdded(l_D);
+ Result := TmsDiagramm.Create('Диаграмма №' + IntToStr(Items.Count + 1));
+ Items.Add(Result);
+ f_CurrentDiagramm := Items.IndexOf(Result);
+ TmsInvalidators.DiagrammAdded(Result);
 end;
 
 function TmsDiagramms.CurrentDiagrammIndex: Integer;
