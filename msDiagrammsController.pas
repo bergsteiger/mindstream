@@ -46,7 +46,6 @@ type
   procedure DoDiagrammAdded(const aDiagramm: ImsDiagramm); override;
  public
   constructor Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton);
-  procedure AfterConstruction; override;
   destructor Destroy; override;
   procedure Clear;
   procedure ProcessClick(const aStart: TPointF);
@@ -90,11 +89,6 @@ begin
  btLoadDiagramm.OnClick := btLoadDiagrammClick;
  imgMain.OnMouseDown := imgMainMouseDown;
  imgMain.Align := TAlignLayout.alClient;
-end;
-
-procedure TmsDiagrammsController.AfterConstruction;
-begin
- inherited;
  FDiagramms := TmsDiagramms.Create;
  FDiagramms.AddNewDiagramm;
 end;
