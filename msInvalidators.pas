@@ -22,6 +22,7 @@ type
   class destructor Destroy;
  public
   class procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
+  class procedure DiagrammAdded(const aDiagramm: ImsDiagramm);
   class procedure Subscribe(const anInvalidator: ImsIvalidator);
   // - подписываемся
   class procedure UnSubscribe(const anInvalidator: ImsIvalidator);
@@ -50,12 +51,22 @@ begin
    ImsIvalidator(l_Subscriber).InvalidateDiagramm(aDiagramm);
 end;
 
+class procedure TmsInvalidators.DiagrammAdded(const aDiagramm: ImsDiagramm);
+var
+ l_Subscriber : Pointer;
+begin
+ if (f_Subscribers <> nil) then
+  for l_Subscriber in f_Subscribers do
+   ImsIvalidator(l_Subscriber).DiagrammAdded(aDiagramm);
+end;
+
 class procedure TmsInvalidators.Subscribe(const anInvalidator: ImsIvalidator);
 // - подписываемся
 begin
  if (f_Subscribers = nil) then
   f_Subscribers := TmsInvalidatorsList.Create;
- f_Subscribers.Add(Pointer(anInvalidator));
+ if (f_Subscribers.IndexOf(Pointer(anInvalidator)) < 0) then
+  f_Subscribers.Add(Pointer(anInvalidator));
 end;
 
 class procedure TmsInvalidators.UnSubscribe(const anInvalidator: ImsIvalidator);

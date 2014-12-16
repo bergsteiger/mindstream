@@ -23,7 +23,7 @@ uses
 type
  TmsIvalidatorParent = TmsInterfacedRefcounted;
  {$Include msIvalidator.mixin.pas}
- TmsDiagrammsController = class(TmsIvalidator, ImsDiagrammsListener)
+ TmsDiagrammsController = class(TmsIvalidator)
  private
   imgMain: TPaintBox;
   cbShapes: TComboBox;
@@ -43,9 +43,10 @@ type
   function pm_GetCurrentDiagramm: ImsDiagramm;
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
-  procedure DoDiagrammAdded(const aDiagramm: ImsDiagramm);
+  procedure DoDiagrammAdded(const aDiagramm: ImsDiagramm); override;
  public
   constructor Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton);
+  procedure AfterConstruction; override;
   destructor Destroy; override;
   procedure Clear;
   procedure ProcessClick(const aStart: TPointF);
@@ -81,10 +82,6 @@ begin
  btAddDiagramm := aAddDiagramm;
  btSaveDiagramm := aSaveDiagramm;
  btLoadDiagramm := aLoadDiagramm;
- FDiagramms := TmsDiagramms.Create(cbDiagramm.Items);
- FDiagramms.AllowedShapesToList(cbShapes.Items);
- cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
- cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
  cbDiagramm.OnChange := cbDiagrammChange;
  imgMain.OnResize := imgMainResize;
  cbShapes.OnChange := cbShapesChange;
@@ -93,6 +90,15 @@ begin
  btLoadDiagramm.OnClick := btLoadDiagrammClick;
  imgMain.OnMouseDown := imgMainMouseDown;
  imgMain.Align := TAlignLayout.alClient;
+end;
+
+procedure TmsDiagrammsController.AfterConstruction;
+begin
+ inherited;
+ FDiagramms := TmsDiagramms.Create(cbDiagramm.Items);
+ FDiagramms.AllowedShapesToList(cbShapes.Items);
+ cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
+ cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
 end;
 
 procedure TmsDiagrammsController.DoInvalidateDiagramm(const aDiagramm: ImsDiagramm);
@@ -176,8 +182,9 @@ end;
 
 procedure TmsDiagrammsController.DoDiagrammAdded(const aDiagramm: ImsDiagramm);
 begin
- if (FDiagramms.IndexOf(aDiagramm) >= 0) then
-  cbDiagramm.Items.Add(aDiagramm.Name);
+ if (FDiagramms <> nil) then
+  if (FDiagramms.IndexOf(aDiagramm) >= 0) then
+   cbDiagramm.Items.Add(aDiagramm.Name);
 end;
 
 end.

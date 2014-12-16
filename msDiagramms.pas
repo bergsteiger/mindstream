@@ -48,7 +48,8 @@ uses
  FMX.Graphics,
  System.UITypes,
  msDiagrammsMarshal,
- msRegisteredShapes
+ msRegisteredShapes,
+ msInvalidators
  ;
 
 // TmsDiagramms
@@ -76,8 +77,7 @@ begin
  l_D := TmsDiagramm.Create('Диаграмма №' + IntToStr(Items.Count + 1));
  Items.Add(l_D);
  f_CurrentDiagramm := Items.IndexOf(l_D);
- if (aList <> nil) then
-  aList.Add(l_D.Name);
+ TmsInvalidators.DiagrammAdded(l_D);
 end;
 
 function TmsDiagramms.CurrentDiagrammIndex: Integer;

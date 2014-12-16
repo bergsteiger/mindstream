@@ -119,9 +119,6 @@ type
   procedure DiagrammAdded(const aDiagramm: ImsDiagramm);
  end;//ImsIvalidator
 
- ImsDiagrammsListener = interface
- end;//ImsDiagrammsListener
-
 implementation
 
 // TmsDrawContext
