@@ -99,7 +99,7 @@ begin
  Result := l_Folder + ClassName + '_' + aTestName + '_' + f_Context.rShapeClass.ClassName + '.json';
 end;
 
-procedure l3StripHeader(aStream : TStream; aHeaderBegin : AnsiChar);
+procedure g_StripHeader(aStream : TStream; aHeaderBegin : AnsiChar);
 var
  aCh : AnsiChar;
  aPos : Integer;
@@ -120,11 +120,11 @@ begin
  end;//with aStream
 end;
 
-function l3CompareStreams(const aStream1, aStream2: TStream; aHeaderBegin : AnsiChar = #0): Bool;
+function g_CompareStreams(const aStream1, aStream2: TStream; aHeaderBegin : AnsiChar = #0): Bool;
  //overload;
  {* - сравнивает побайтово два потока. }
 const
- l3ParseBufSize = 1024 * 1024;
+ c_ParseBufSize = 1024 * 1024;
 var
  l_Size  : Long;
  l_Read  : Long;
@@ -137,8 +137,8 @@ begin
  begin
   if (aHeaderBegin <> #0) then
   begin
-   l3StripHeader(aStream1, aHeaderBegin);
-   l3StripHeader(aStream2, aHeaderBegin);
+   g_StripHeader(aStream1, aHeaderBegin);
+   g_StripHeader(aStream2, aHeaderBegin);
   end;//aHeaderBegin <> #0
   Result := false;
   if (aStream1 <> nil) AND (aStream2 <> nil) then
@@ -148,7 +148,7 @@ begin
    begin
     if (l_Size > 0) then
     begin
-     l_Size := Min(l_Size, l3ParseBufSize);
+     l_Size := Min(l_Size, c_ParseBufSize);
      GetMem(l_Buff1, l_Size);
      try
       GetMem(l_Buff2, l_Size);
@@ -182,7 +182,7 @@ begin
  end;//aStream1 = aStream2
 end;
 
-function l3CompareFiles(const aStream1, aStream2: String; aHeaderBegin : AnsiChar = #0): Bool;
+function g_CompareFiles(const aStream1, aStream2: String; aHeaderBegin : AnsiChar = #0): Bool;
  {* - сравнивает побайтово два файла. }
 var
  l_S1 : TStream;
@@ -192,7 +192,7 @@ begin
  try
   l_S2 := TFileStream.Create(aStream2, fmOpenRead);
   try
-   Result := l3CompareStreams(l_S1, l_S2, aHeaderBegin);
+   Result := g_CompareStreams(l_S1, l_S2, aHeaderBegin);
   finally
    FreeAndNil(l_S2);
   end;//try..finally
@@ -208,7 +208,7 @@ begin
  l_FileNameEtalon := aFileName + '.etalon' + ExtractFileExt(aFileName);
  if FileExists(l_FileNameEtalon) then
  begin
-  CheckTrue(l3CompareFiles(l_FileNameEtalon, aFileName));
+  CheckTrue(g_CompareFiles(l_FileNameEtalon, aFileName));
  end//FileExists(l_FileNameEtalon)
  else
  begin
