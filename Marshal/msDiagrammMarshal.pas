@@ -24,3 +24,4 @@ uses
 {$Include msMarshal.mixin.pas}
 
 end.
+
