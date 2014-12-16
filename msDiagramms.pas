@@ -62,7 +62,6 @@ end;
 constructor TmsDiagramms.CreatePrim;
 begin
  inherited Create;
- AddNewDiagramm;
 end;
 
 function TmsDiagramms.pm_GetCurrentDiagramm: ImsDiagramm;

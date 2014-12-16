@@ -96,7 +96,7 @@ procedure TmsDiagrammsController.AfterConstruction;
 begin
  inherited;
  FDiagramms := TmsDiagramms.Create;
- FDiagramms.AllowedShapesToList(cbShapes.Items);
+ FDiagramms.AddNewDiagramm;
 end;
 
 procedure TmsDiagrammsController.DoInvalidateDiagramm(const aDiagramm: ImsDiagramm);
@@ -179,6 +179,9 @@ end;
 procedure TmsDiagrammsController.DoDiagrammAdded(const aDiagramm: ImsDiagramm);
 begin
  if (FDiagramms <> nil) then
+ begin
+  if (cbShapes.Items.Count = 0) then
+   FDiagramms.AllowedShapesToList(cbShapes.Items);
   if (FDiagramms.IndexOf(aDiagramm) >= 0) then
   begin
    cbDiagramm.Items.Add(aDiagramm.Name);
@@ -186,6 +189,7 @@ begin
    FDiagramms.AllowedShapesToList(cbShapes.Items);
    cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
   end;//FDiagramms.IndexOf(aDiagramm) >= 0
+ end;//
 end;
 
 end.
