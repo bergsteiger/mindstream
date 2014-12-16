@@ -330,7 +330,7 @@ procedure TmsDiagrammTest.SaveDiagramm(const aFileName: String; const aDiagramm:
 var
  l_Diagramms : ImsDiagramms;
 begin
- l_Diagramms := TmsDiagramms.Create(nil);
+ l_Diagramms := TmsDiagramms.Create;
  try
   l_Diagramms.AddDiagramm(aDiagramm);
   l_Diagramms.SaveTo(aFileName);
@@ -344,7 +344,7 @@ var
  l_Diagramms : ImsDiagramms;
  l_FileName : String;
 begin
- l_Diagramms := TmsDiagramms.Create(nil);
+ l_Diagramms := TmsDiagramms.Create;
  try
   l_Diagramms.LoadFrom(MakeFileName(TestSerializeMethodName));
   // - берём результаты от ПРЕДЫДУЩИХ тестов, НЕКОШЕРНО с точки зрения TDD

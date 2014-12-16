@@ -102,7 +102,7 @@ type
   function CurrentShapeClassIndex: Integer;
   function CurrentDiagrammIndex: Integer;
   function pm_GetCurrentDiagramm: ImsDiagramm;
-  procedure AddNewDiagramm(aList: TStrings);
+  procedure AddNewDiagramm;
   procedure Serialize;
   procedure DeSerialize;
   procedure Clear;

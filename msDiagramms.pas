@@ -19,13 +19,13 @@ type
  private
   [JSONMarshalled(True)]
   f_CurrentDiagramm : Integer;
-  constructor CreatePrim(aList: TStrings);
+  constructor CreatePrim;
  protected
   procedure AllowedShapesToList(aList: TStrings);
   function CurrentShapeClassIndex: Integer;
   function CurrentDiagrammIndex: Integer;
   function pm_GetCurrentDiagramm: ImsDiagramm;
-  procedure AddNewDiagramm(aList: TStrings);
+  procedure AddNewDiagramm;
   procedure Serialize;
   procedure DeSerialize;
   procedure Clear;
@@ -37,7 +37,7 @@ type
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;
  public
-  class function Create(aList: TStrings): ImsDiagramms;
+  class function Create: ImsDiagramms;
   procedure Assign(anOther: TmsDiagramms);
  end;//TmsDiagramms
 
@@ -54,15 +54,15 @@ uses
 
 // TmsDiagramms
 
-class function TmsDiagramms.Create(aList: TStrings): ImsDiagramms;
+class function TmsDiagramms.Create: ImsDiagramms;
 begin
- Result := CreatePrim(aList);
+ Result := CreatePrim;
 end;
 
-constructor TmsDiagramms.CreatePrim(aList: TStrings);
+constructor TmsDiagramms.CreatePrim;
 begin
  inherited Create;
- AddNewDiagramm(aList);
+ AddNewDiagramm;
 end;
 
 function TmsDiagramms.pm_GetCurrentDiagramm: ImsDiagramm;
@@ -70,7 +70,7 @@ begin
  Result := Items[f_CurrentDiagramm];
 end;
 
-procedure TmsDiagramms.AddNewDiagramm(aList: TStrings);
+procedure TmsDiagramms.AddNewDiagramm;
 var
  l_D : ImsDiagramm;
 begin

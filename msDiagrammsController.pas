@@ -95,10 +95,8 @@ end;
 procedure TmsDiagrammsController.AfterConstruction;
 begin
  inherited;
- FDiagramms := TmsDiagramms.Create(cbDiagramm.Items);
+ FDiagramms := TmsDiagramms.Create;
  FDiagramms.AllowedShapesToList(cbShapes.Items);
- cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
- cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
 end;
 
 procedure TmsDiagrammsController.DoInvalidateDiagramm(const aDiagramm: ImsDiagramm);
@@ -148,9 +146,7 @@ end;
 
 procedure TmsDiagrammsController.btAddDiagrammClick(Sender: TObject);
 begin
- FDiagramms.AddNewDiagramm(cbDiagramm.Items);
- cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
- cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
+ FDiagramms.AddNewDiagramm;
 end;
 
 destructor TmsDiagrammsController.Destroy;
@@ -184,7 +180,12 @@ procedure TmsDiagrammsController.DoDiagrammAdded(const aDiagramm: ImsDiagramm);
 begin
  if (FDiagramms <> nil) then
   if (FDiagramms.IndexOf(aDiagramm) >= 0) then
+  begin
    cbDiagramm.Items.Add(aDiagramm.Name);
+   cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
+   FDiagramms.AllowedShapesToList(cbShapes.Items);
+   cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
+  end;//FDiagramms.IndexOf(aDiagramm) >= 0
 end;
 
 end.
