@@ -116,10 +116,10 @@ type
 
  ImsIvalidator = interface
   procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
+  procedure DiagrammAdded(const aDiagramm: ImsDiagramm);
  end;//ImsIvalidator
 
  ImsDiagrammsListener = interface
-  procedure DiargammAdded(const aDiagramm: ImsDiagramm);
  end;//ImsDiagrammsListener
 
 implementation

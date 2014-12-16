@@ -41,9 +41,9 @@ type
   procedure btSaveDiagrammClick(Sender: TObject);
   procedure btLoadDiagrammClick(Sender: TObject);
   function pm_GetCurrentDiagramm: ImsDiagramm;
-  procedure DiargammAdded(const aDiagramm: ImsDiagramm);
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
+  procedure DoDiagrammAdded(const aDiagramm: ImsDiagramm);
  public
   constructor Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton);
   destructor Destroy; override;
@@ -60,8 +60,7 @@ uses
  {$Include msIvalidator.mixin.pas}
  ,
  System.SysUtils,
- FMX.Types,
- msDiagrammsListeners
+ FMX.Types
  ;
 
 {$Include msIvalidator.mixin.pas}
@@ -175,7 +174,7 @@ begin
  Self.ProcessClick(TPointF.Create(X, Y));
 end;
 
-procedure TmsDiagrammsController.DiargammAdded(const aDiagramm: ImsDiagramm);
+procedure TmsDiagrammsController.DoDiagrammAdded(const aDiagramm: ImsDiagramm);
 begin
  if (FDiagramms.IndexOf(aDiagramm) >= 0) then
   cbDiagramm.Items.Add(aDiagramm.Name);

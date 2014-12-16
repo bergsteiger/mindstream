@@ -15,8 +15,10 @@
  TmsIvalidator = class(TmsIvalidatorParent, ImsIvalidator)
  protected
   procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
+  procedure DiagrammAdded(const aDiagramm: ImsDiagramm);
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); virtual; abstract;
+  procedure DoDiagrammAdded(const aDiagramm: ImsDiagramm); virtual; abstract;
  public
   procedure AfterConstruction; override;
   destructor Destroy; override;
@@ -42,6 +44,11 @@
 procedure TmsIvalidator.InvalidateDiagramm(const aDiagramm: ImsDiagramm);
 begin
  DoInvalidateDiagramm(aDiagramm);
+end;
+
+procedure TmsIvalidator.DiagrammAdded(const aDiagramm: ImsDiagramm);
+begin
+ DoDiagrammAdded(aDiagramm);
 end;
 
 procedure TmsIvalidator.AfterConstruction;
