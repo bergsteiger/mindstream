@@ -87,7 +87,8 @@ implementation
   msDiagrammsMarshal,
   msStringList,
   msDiagramms,
-  Math
+  Math,
+  msStreamUtils
   ;
 
 function TmsShapeTestPrim.MakeFileName(const aTestName: String): String;
@@ -97,108 +98,6 @@ begin
  l_Folder := ExtractFilePath(ParamStr(0)) + 'TestResults\';
  ForceDirectories(l_Folder);
  Result := l_Folder + ClassName + '_' + aTestName + '_' + f_Context.rShapeClass.ClassName + '.json';
-end;
-
-procedure msStripHeader(aStream : TStream; aHeaderBegin : AnsiChar);
-var
- aCh : AnsiChar;
- aPos : Integer;
-begin
- aPos := 0;
- with aStream do
- begin
-  while (Position < Size) do
-  begin
-   Read(aCh, 1);
-   if (aCh <> aHeaderBegin) then
-    break;
-   while (Position < Size) and (aCh <> #10) do
-    Read(aCh, 1);
-   aPos := Position;
-  end;//Position < Size
-  Position := aPos;
- end;//with aStream
-end;
-
-function msCompareStreams(const aStream1, aStream2: TStream; aHeaderBegin : AnsiChar = #0): Bool;
- //overload;
- {* - сравнивает побайтово два потока. }
-const
- l3ParseBufSize = 1024 * 1024;
-var
- l_Size  : Long;
- l_Read  : Long;
- l_Buff1 : PAnsiChar;
- l_Buff2 : PAnsiChar;
-begin
- if (aStream1 = aStream2) then
-  Result := true
- else
- begin
-  if (aHeaderBegin <> #0) then
-  begin
-   msStripHeader(aStream1, aHeaderBegin);
-   msStripHeader(aStream2, aHeaderBegin);
-  end;//aHeaderBegin <> #0
-  Result := false;
-  if (aStream1 <> nil) AND (aStream2 <> nil) then
-  begin
-   l_Size := aStream1.Size - aStream1.Position;
-   if (l_Size = aStream2.Size - aStream2.Position) then
-   begin
-    if (l_Size > 0) then
-    begin
-     l_Size := Min(l_Size, l3ParseBufSize);
-     GetMem(l_Buff1, l_Size);
-     try
-      GetMem(l_Buff2, l_Size);
-      try
-       while true do
-       begin
-        l_Read := aStream1.Read(l_Buff1^, l_Size);
-        if (l_Read <> aStream2.Read(l_Buff2^, l_Size)) then
-         Exit; // - что-то не то с длинной
-        if (l_Read = 0) then
-        begin
-         // - закончили читать
-         Result := true;
-         break;
-        end;//l_Read = 0
-        if not CompareMem(l_Buff1, l_Buff2, l_Size) then
-         break;
-         // - содержимое различается
-       end;//while true
-      finally
-       FreeMem(l_Buff2);
-      end;//try..finally
-     finally
-      FreeMem(l_Buff1);
-     end;//try..finally
-    end//l_Size > 0
-    else
-     Result := true;
-   end;//l_Size = aStream2.Size
-  end;//aStream1 <> nil
- end;//aStream1 = aStream2
-end;
-
-function msCompareFiles(const aStream1, aStream2: String; aHeaderBegin : AnsiChar = #0): Bool;
- {* - сравнивает побайтово два файла. }
-var
- l_S1 : TStream;
- l_S2 : TStream;
-begin
- l_S1 := TFileStream.Create(aStream1, fmOpenRead);
- try
-  l_S2 := TFileStream.Create(aStream2, fmOpenRead);
-  try
-   Result := msCompareStreams(l_S1, l_S2, aHeaderBegin);
-  finally
-   FreeAndNil(l_S2);
-  end;//try..finally
- finally
-  FreeAndNil(l_S1);
- end;//try..finally
 end;
 
 procedure TmsShapeTestPrim.CheckFileWithEtalon(const aFileName: String);

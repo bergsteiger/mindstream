@@ -44,7 +44,8 @@ uses
   msMarshalPrim in 'Marshal\msMarshalPrim.pas',
   msShapeTestSuite in 'Tests\Module\msShapeTestSuite.pas',
   msInvalidators in 'msInvalidators.pas',
-  msInterfaces in 'msInterfaces.pas'
+  msInterfaces in 'msInterfaces.pas',
+  msStreamUtils in 'Core\msStreamUtils.pas'
   ;
 
 {$R *.res}
