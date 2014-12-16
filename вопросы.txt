@@ -1,0 +1,42 @@
+1. unit msInterfacedRefcounted;
+TmsInterfacedRefcounted = class abstract(TmsWatchedObject)
+
+зачем нам тут примесь ? разве нельзя вместо
+
+TmsWatchedObjectParent = TInterfacedObject;
+{$Include msWatchedObject.mixin.pas}
+TmsInterfacedRefcounted = class abstract(TmsWatchedObject)
+
+сделать просто 
+TmsInterfacedRefcounted = class abstract(TInterfacedObject) ?
+
+2. 
+Зачем нам TmsObjectWrap_uses_intf
+TStringList = TmsWatchedObjectParent <- TmsObjectWrapParent <- TmsObjectWrap <- TmsWatchedObject <- TmsStringList
+
+3.
+Почему не проставлену UID в msSerializeInterfaces ?
+
+4.
+msShapeMarshal
+Почему в данном случае не обычные дженерики ? ну и все места применения ?
+
+5. TmsItemsHolder_uses_intf
+Вот тут я полностью согласен с использованием примеси.
+
+6.
+зачем нам msPersistent.mixin.pas ? разве он нужен вообще ? Используем только в диаграмме.
+тем более что мы всё равно реализуем интерфейс ImsDiagramm = interface(ImsPersistent) и он нас и так и так обязует реализовать эти 2 метода.
+
+ ImsPersistent = interface(ImsObjectWrap)
+ procedure SaveTo(const aFileName: String);
+ procedure LoadFrom(const aFileName: String);
+end;//ImsPersistent
+
+7.
+зачем  
+TmsIvalidatorParent = TmsInterfacedRefcounted;
+{$Include msIvalidator.mixin.pas}
+TmsDiagrammsController = class(TmsIvalidator)
+
+Если мы один раз пользуемся, почему не напрямую наследоваться ?
