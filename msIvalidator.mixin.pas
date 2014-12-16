@@ -20,7 +20,7 @@
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); virtual; abstract;
   procedure DoDiagrammAdded(const aDiagramm: ImsDiagramm); virtual; abstract;
  public
-  procedure AfterConstruction; override;
+  class function NewInstance: TObject; override;
   destructor Destroy; override;
  end;//TmsIvalidator
 
@@ -51,10 +51,10 @@ begin
  DoDiagrammAdded(aDiagramm);
 end;
 
-procedure TmsIvalidator.AfterConstruction;
+class function TmsIvalidator.NewInstance: TObject;
 begin
- TmsInvalidators.Subscribe(Self);
- inherited;
+ Result := inherited NewInstance;
+ TmsInvalidators.Subscribe(TmsIvalidator(Result));
 end;
 
 destructor TmsIvalidator.Destroy;
