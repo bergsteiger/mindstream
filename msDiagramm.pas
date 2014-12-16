@@ -53,7 +53,7 @@ type
   constructor CreatePrim(const aName: String);
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
-  procedure AddShape(const aShape: ImsShape);
+  function AddShape(const aShape: ImsShape): ImsShape;
  public
   class function Create(const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
@@ -175,9 +175,10 @@ begin
  TmsDiagrammMarshal.DeSerialize(aFileName, Self);
 end;
 
-procedure TmsDiagramm.AddShape(const aShape: ImsShape);
+function TmsDiagramm.AddShape(const aShape: ImsShape): ImsShape;
 begin
  Items.Add(aShape);
+ Result := aShape;
 end;
 
 function TmsDiagramm.Get_Name: String;

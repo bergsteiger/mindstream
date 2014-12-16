@@ -90,7 +90,7 @@ type
   procedure AllowedShapesToList(aList: TStrings);
   function CurrentShapeClassIndex: Integer;
   procedure DrawTo(const aCanvas: TCanvas);
-  procedure AddShape(const aShape: ImsShape);
+  function AddShape(const aShape: ImsShape): ImsShape;
   function GetEnumerator: TmsShapesEnumerator;
   function ItemsCount: Integer;
   property Name: String
