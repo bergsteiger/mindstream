@@ -18,6 +18,7 @@ implementation
 
 uses
   SysUtils,
+  msShapesForToolbar,
   msRegisteredShapes,
   msShape,
   msLine,
@@ -30,11 +31,11 @@ var
  l_Result : integer;
 begin
  l_Result := 0;
- TmsRegisteredShapes.IterateShapes(
+ TmsShapesForToolbar.IterateShapes(
   procedure (aShapeClass: RmsShape)
   begin
-   if aShapeClass.IsForToolbar then
-    inc(l_Result);
+   Assert(aShapeClass.IsForToolbar);
+   inc(l_Result);
   end
  );
  CheckTrue(l_Result = 14);
