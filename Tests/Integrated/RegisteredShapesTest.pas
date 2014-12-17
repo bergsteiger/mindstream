@@ -18,7 +18,6 @@ implementation
 
 uses
   SysUtils,
-  msShapesForToolbar,
   msRegisteredShapes,
   msShape,
   msLine,
@@ -31,26 +30,23 @@ var
  l_Result : integer;
 begin
  l_Result := 0;
- TmsShapesForToolbar.IterateShapes(
+ TmsRegisteredShapes.IterateShapes(
   procedure (aShapeClass: RmsShape)
   begin
-   Assert(aShapeClass.IsForToolbar);
    Inc(l_Result);
   end
  );
- CheckTrue(l_Result = 14);
+ CheckTrue(l_Result = 16);
 end;
 
 procedure TRegisteredShapesTest.TestFirstShape;
 begin
  CheckTrue(TmsRegisteredShapes.Instance.First = TmsLine);
- CheckTrue(TmsShapesForToolbar.Instance.First = TmsLine);
 end;
 
 procedure TRegisteredShapesTest.TestIndexOfTmsLine;
 begin
  CheckTrue(TmsRegisteredShapes.Instance.IndexOf(TmsLine) = 0);
- CheckTrue(TmsShapesForToolbar.Instance.IndexOf(TmsLine) = 0);
 end;
 
 initialization
