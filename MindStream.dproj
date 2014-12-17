@@ -211,6 +211,10 @@
             <Form>fmGUITestRunner</Form>
         </DCCReference>
         <DCCReference Include="Tests\Module\FirstTest.pas"/>
+        <DCCReference Include="Tests\Integrated\UtilityShapesTest.pas">
+            <Form>/ - тут &quot;банальные&quot; интеграционные тесты (https</Form>
+            <DesignClass>/ru.wikipedia.org/wiki/%D0%98%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%BE%D0%B5_%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)</DesignClass>
+        </DCCReference>
         <DCCReference Include="Tests\Integrated\RegisteredShapesTest.pas">
             <Form>/ - тут &quot;банальные&quot; интеграционные тесты (https</Form>
             <DesignClass>/ru.wikipedia.org/wiki/%D0%98%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%BE%D0%B5_%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)</DesignClass>
@@ -233,7 +237,10 @@
         <DCCReference Include="Tests\Module\msShapeTestSuite.pas"/>
         <DCCReference Include="msInvalidators.pas"/>
         <DCCReference Include="msInterfaces.pas">
-            <Form>$R *.res</Form>
+            <Form>,
+  msStreamUtils in &apos;Core\msStreamUtils.pas&apos;;
+
+{$R *.res</Form>
         </DCCReference>
         <DCCReference Include="Core\msStreamUtils.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
