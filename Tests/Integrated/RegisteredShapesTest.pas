@@ -9,7 +9,7 @@ uses
 type
   TRegisteredShapesTest = class(TTestCase)
    published
-    procedure ShapesRegistredCountEqual_12;
+    procedure ShapesRegistredCount;
     procedure TestFirstShape;
     procedure TestIndexOfTmsLine;
   end;//TRegisteredShapesTest
@@ -26,7 +26,7 @@ uses
   FMX.Graphics
   ;
 
-procedure TRegisteredShapesTest.ShapesRegistredCountEqual_12;
+procedure TRegisteredShapesTest.ShapesRegistredCount;
 var
  l_Result : integer;
 begin
@@ -35,7 +35,7 @@ begin
   procedure (aShapeClass: RmsShape)
   begin
    Assert(aShapeClass.IsForToolbar);
-   inc(l_Result);
+   Inc(l_Result);
   end
  );
  CheckTrue(l_Result = 14);
