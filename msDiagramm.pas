@@ -46,7 +46,6 @@ type
   procedure BeginShape(const aStart: TPointF);
   procedure EndShape(const aFinish: TPointF);
   function ShapeIsEnded: Boolean;
-  class function AllowedShapes: TmsRegisteredShapes;
   function ShapeByPt(const aPoint: TPointF): ImsShape;
   procedure RemoveShape(const aShape: ImsShape);
   function Get_Name: String;
@@ -60,7 +59,7 @@ type
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
   procedure Invalidate;
-  procedure AllowedShapesToList(aList: TStrings);
+  procedure ShapesForToolbarToList(aList: TStrings);
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   property Name: String read fName write fName;
   function CurrentShapeClassIndex: Integer;
@@ -79,7 +78,8 @@ uses
  msMover,
  msCircle,
  msDiagrammMarshal,
- msInvalidators
+ msInvalidators,
+ msShapesForToolbar
  ;
 
 {$Include msItemsHolder.mixin.pas}
@@ -88,30 +88,24 @@ uses
 const
  c_FileName = '.json';
 
-class function TmsDiagramm.AllowedShapes: TmsRegisteredShapes;
-begin
- Result := TmsRegisteredShapes.Instance;
-end;
-
-procedure TmsDiagramm.AllowedShapesToList(aList: TStrings);
+procedure TmsDiagramm.ShapesForToolbarToList(aList: TStrings);
 var
  l_Class: RmsShape;
 begin
  aList.Clear;
- for l_Class in AllowedShapes do
-  if l_Class.IsForToolbar then
-   aList.AddObject(l_Class.ClassName, TObject(l_Class));
+ for l_Class in TmsShapesForToolbar.Instance do
+  aList.AddObject(l_Class.ClassName, TObject(l_Class));
 end;
 
 function TmsDiagramm.CurrentShapeClassIndex: Integer;
 begin
- Result := AllowedShapes.IndexOf(FCurrentClass);
+ Result := TmsShapesForToolbar.Instance.IndexOf(FCurrentClass);
 end;
 
 procedure TmsDiagramm.SelectShape(aList: TStrings; anIndex: Integer);
 begin
  if (anIndex < 0) then
-  CurrentClass :=  TmsRegisteredShapes.Instance.First
+  CurrentClass :=  TmsShapesForToolbar.Instance.First
  else
   CurrentClass := RmsShape(aList.Objects[anIndex]);
 end;
@@ -160,7 +154,7 @@ constructor TmsDiagramm.CreatePrim(const aName: String);
 begin
  inherited Create;
  FCurrentAddedShape := nil;
- FCurrentClass := AllowedShapes.First;
+ FCurrentClass := TmsShapesForToolbar.Instance.First;
  fName := aName;
 end;
 

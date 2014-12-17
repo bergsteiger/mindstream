@@ -175,12 +175,12 @@ begin
  if (FDiagramms <> nil) then
  begin
   if (cbShapes.Items.Count = 0) then
-   FDiagramms.AllowedShapesToList(cbShapes.Items);
+   FDiagramms.ShapesForToolbarToList(cbShapes.Items);
   if (FDiagramms.IndexOf(aDiagramm) >= 0) then
   begin
    cbDiagramm.Items.Add(aDiagramm.Name);
    cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
-   FDiagramms.AllowedShapesToList(cbShapes.Items);
+   FDiagramms.ShapesForToolbarToList(cbShapes.Items);
    cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
   end;//FDiagramms.IndexOf(aDiagramm) >= 0
  end;//
