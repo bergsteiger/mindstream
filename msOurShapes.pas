@@ -16,10 +16,13 @@ uses
   msDotLine,
   msLineWithArrow,
   msTriangleDirectionRight,
-  msMover,
   msRegisteredShapes,
   msRedRectangle,
   msGreenRectangle,
+
+  // utility shapes
+  msMover,
+  msPicker,
 
   // special shapes
   msPointCircle,
@@ -40,13 +43,16 @@ begin
   TmsDotLine,
   TmsLineWithArrow,
   TmsTriangleDirectionRight,
-  TmsMover,
   TmsRedRectangle,
   TmsGreenRectangle,
 
   // special shapes
   TmsPointCircle,
-  TmsSmallTriangle
+  TmsSmallTriangle,
+
+  // utility shapes
+  TmsMover,
+  TmsPicker
  ]);
 end;
 

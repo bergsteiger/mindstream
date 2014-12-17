@@ -37,7 +37,7 @@ begin
    Inc(l_Result);
   end
  );
- CheckTrue(l_Result = 1);
+ CheckTrue(l_Result = 2);
 end;
 
 procedure TUtilityShapesTest.TestFirstShape;
