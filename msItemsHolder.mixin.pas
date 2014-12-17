@@ -22,7 +22,7 @@
  TmsItemsList = TList<TmsItem>;
  TmsItemsListEnumerator = TEnumerator<TmsItem>;
 
- TmsItemsHolder = class(TmsItemsHolderParent)
+ TmsItemsHolder = class abstract(TmsItemsHolderParent)
  private
   [JSONMarshalled(True)]
   f_Items : TmsItemsList;

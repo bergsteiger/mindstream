@@ -12,7 +12,7 @@
 {$IfNDef TmsMixIn_intf}
 // http://programmingmindstream.blogspot.ru/2014/12/generic-2.html
 
- TmsIvalidator = class(TmsIvalidatorParent, ImsIvalidator)
+ TmsIvalidator = class abstract(TmsIvalidatorParent, ImsIvalidator)
  protected
   procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
   procedure DiagrammAdded(const aDiagramm: ImsDiagramm);

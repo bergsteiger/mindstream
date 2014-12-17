@@ -13,7 +13,7 @@
 // http://programmingmindstream.blogspot.ru/2014/12/generic-2.html
 
 {$Define TmsPersistent_intf}
- TmsPersistent = class(TmsPersistentParent{, ImsPersistent})
+ TmsPersistent = class abstract(TmsPersistentParent{, ImsPersistent})
  protected
   procedure SaveTo(const aFileName: String); virtual; abstract;
   procedure LoadFrom(const aFileName: String); virtual; abstract;

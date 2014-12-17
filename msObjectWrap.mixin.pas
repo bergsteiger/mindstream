@@ -10,7 +10,7 @@
 {$Else TmsObjectWrap_uses_intf}
 
 {$IfNDef TmsObjectWrap_intf}
- TmsObjectWrap = class(TmsObjectWrapParent{, ImsObjectWrap})
+ TmsObjectWrap = class abstract(TmsObjectWrapParent{, ImsObjectWrap})
  protected
   function toObject: TObject;
   function EQ(const anOther: ImsObjectWrap): Boolean;
