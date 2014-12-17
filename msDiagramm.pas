@@ -7,6 +7,7 @@ uses
  ,
  {$Include msPersistent.mixin.pas}
  ,
+ {$Include msShapesProvider.mixin.pas}
  msInterfaces,
  FMX.Graphics,
  System.SysUtils,
@@ -29,7 +30,9 @@ type
  {$Include msItemsHolder.mixin.pas}
  TmsPersistentParent = TmsItemsHolder;
  {$Include msPersistent.mixin.pas}
- TmsDiagramm = class(TmsPersistent, ImsDiagramm, ImsShapeByPt, ImsShapesController)
+ TmsShapesProviderParent = TmsPersistent;
+ {$Include msShapesProvider.mixin.pas}
+ TmsDiagramm = class(TmsShapesProvider, ImsDiagramm, ImsShapeByPt, ImsShapesController)
  // - Выделяем интерфейс ImsObjectWrap.
  //   Смешно - если TmsDiagramm его реализет НАПРЯМУЮ, то всё хорошо.
  //   А если через ImsSerializable, то - AV.
@@ -59,7 +62,6 @@ type
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
   procedure Invalidate;
-  procedure ShapesForToolbarToList(aList: TStrings);
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   property Name: String read fName write fName;
   function CurrentShapeClassIndex: Integer;
@@ -75,6 +77,7 @@ uses
  {$Include msItemsHolder.mixin.pas}
  {$Include msPersistent.mixin.pas}
  ,
+ {$Include msShapesProvider.mixin.pas}
  msMover,
  msCircle,
  msDiagrammMarshal,
@@ -83,19 +86,13 @@ uses
  ;
 
 {$Include msItemsHolder.mixin.pas}
+
 {$Include msPersistent.mixin.pas}
+
+{$Include msShapesProvider.mixin.pas}
 
 const
  c_FileName = '.json';
-
-procedure TmsDiagramm.ShapesForToolbarToList(aList: TStrings);
-var
- l_Class: RmsShape;
-begin
- aList.Clear;
- for l_Class in TmsShapesForToolbar.Instance do
-  aList.AddObject(l_Class.ClassName, TObject(l_Class));
-end;
 
 function TmsDiagramm.CurrentShapeClassIndex: Integer;
 begin
