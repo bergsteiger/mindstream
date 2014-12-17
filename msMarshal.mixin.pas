@@ -17,7 +17,7 @@
 
 {$Define TmsMarshal}
 
- TmsMarshal = class(TmsMarshalPrim)
+ TmsMarshal = class abstract(TmsMarshalPrim)
  // - шаблонизируем, ибо мы скоро будем сериализовать и другие классы.
  public
   class procedure DeSerialize(const aFileName: string;

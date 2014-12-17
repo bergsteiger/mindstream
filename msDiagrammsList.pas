@@ -7,6 +7,7 @@ uses
  ,
  {$Include msItemsHolder.mixin.pas}
  ,
+ {$Include msShapesProvider.mixin.pas}
  msInterfaces,
  System.Classes,
  System.Types,
@@ -19,12 +20,13 @@ type
  {$Include msItemsHolder.mixin.pas}
  TmsPersistentParent = TmsItemsHolder;
  {$Include msPersistent.mixin.pas}
- TmsDiagrammsList = class abstract(TmsPersistent, ImsDiagrammsList)
+ TmsShapesProviderParent = TmsPersistent;
+ {$Include msShapesProvider.mixin.pas}
+ TmsDiagrammsList = class abstract(TmsShapesProvider, ImsDiagrammsList)
  protected
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
   function AddNewDiagramm: ImsDiagramm;
   procedure DiagrammAdded(const aDiagramm: ImsDiagramm); virtual;
-  procedure ShapesForToolbarToList(aList: TStrings);
  end;//TmsDiagrammsList
 
 implementation
@@ -33,6 +35,7 @@ uses
  {$Include msPersistent.mixin.pas}
  {$Include msItemsHolder.mixin.pas}
  ,
+ {$Include msShapesProvider.mixin.pas}
  System.SysUtils,
  msDiagramm,
  msInvalidators,
@@ -43,6 +46,8 @@ uses
 {$Include msPersistent.mixin.pas}
 
 {$Include msItemsHolder.mixin.pas}
+
+{$Include msShapesProvider.mixin.pas}
 
 procedure TmsDiagrammsList.AddDiagramm(const aDiagramm: ImsDiagramm);
 begin
@@ -59,15 +64,6 @@ end;
 procedure TmsDiagrammsList.DiagrammAdded(const aDiagramm: ImsDiagramm);
 begin
  TmsInvalidators.DiagrammAdded(aDiagramm);
-end;
-
-procedure TmsDiagrammsList.ShapesForToolbarToList(aList: TStrings);
-var
- l_Class: RmsShape;
-begin
- aList.Clear;
- for l_Class in TmsShapesForToolbar.Instance do
-  aList.AddObject(l_Class.ClassName, TObject(l_Class));
 end;
 
 end.
