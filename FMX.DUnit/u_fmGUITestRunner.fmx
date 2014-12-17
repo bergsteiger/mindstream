@@ -3,7 +3,7 @@ object fmGUITestRunner: TfmGUITestRunner
   Top = 0
   Caption = 'fmGUITestRunner'
   ClientHeight = 570
-  ClientWidth = 448
+  ClientWidth = 675
   Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -12,20 +12,11 @@ object fmGUITestRunner: TfmGUITestRunner
   OnDestroy = FormDestroy
   OnShow = FormShow
   DesignerMasterStyle = 0
-  object TestTree: TTreeView
-    Position.X = 16.000000000000000000
-    Position.Y = 40.000000000000000000
-    Size.Width = 425.000000000000000000
-    Size.Height = 289.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 0
-    OnChangeCheck = TestTreeChangeCheck
-  end
   object ToolBar1: TToolBar
-    Size.Width = 448.000000000000000000
+    Size.Width = 675.000000000000000000
     Size.Height = 40.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 2
+    TabOrder = 0
     object btRunAllTest: TSpeedButton
       Position.X = 16.000000000000000000
       Position.Y = 8.000000000000000000
@@ -36,25 +27,58 @@ object fmGUITestRunner: TfmGUITestRunner
       Text = 'btRunAllTest'
       OnClick = btRunAllTestClick
     end
+    object btnCheckUnckekAll: TSpeedButton
+      Position.X = 112.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'cleareditbutton'
+      Text = 'btRunAllTest'
+      OnClick = btnCheckUnckekAllClick
+    end
   end
-  object lvFailureListView: TListView
-    ItemAppearanceClassName = 'TListItemAppearance'
-    ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
-    HeaderAppearanceClassName = 'TListHeaderObjects'
-    FooterAppearanceClassName = 'TListHeaderObjects'
-    Position.X = 16.000000000000000000
-    Position.Y = 344.000000000000000000
-    Size.Width = 425.000000000000000000
-    Size.Height = 217.000000000000000000
+  object pnlMain: TPanel
+    Align = Top
+    Position.Y = 40.000000000000000000
+    Size.Width = 675.000000000000000000
+    Size.Height = 281.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
+    object tvTestTree: TTreeView
+      Align = Client
+      Size.Width = 675.000000000000000000
+      Size.Height = 281.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      OnChangeCheck = tvTestTreeChangeCheck
+    end
   end
-  object lblResult: TLabel
-    Position.X = 16.000000000000000000
-    Position.Y = 328.000000000000000000
-    Size.Width = 120.000000000000000000
-    Size.Height = 17.000000000000000000
+  object pnlBottom: TPanel
+    Align = Client
+    Size.Width = 675.000000000000000000
+    Size.Height = 249.000000000000000000
     Size.PlatformDefault = False
-    Text = 'Result'
+    TabOrder = 2
+    object lvFailureListView: TListView
+      ItemAppearanceClassName = 'TListItemAppearance'
+      ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+      HeaderAppearanceClassName = 'TListHeaderObjects'
+      FooterAppearanceClassName = 'TListHeaderObjects'
+      Align = Bottom
+      Position.Y = 56.000000000000000000
+      Size.Width = 675.000000000000000000
+      Size.Height = 193.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+    end
+    object lblResult: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 41.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Result'
+    end
   end
 end

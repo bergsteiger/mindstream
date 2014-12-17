@@ -14,17 +14,26 @@ const
  c_ColorError = TAlphaColorRec.Red;
 
 type
+ TDoSomethingViewItem = reference to procedure(const aItem: TTreeViewItem);
+
+// TTreeLambda = reference to procedure(aItem: TTreeViewItem; aViewItemLambda: TViewItemLambda);
+
+type
  TfmGUITestRunner = class(TForm, ITestListener)
-  TestTree: TTreeView;
   ToolBar1: TToolBar;
   btRunAllTest: TSpeedButton;
-  lvFailureListView: TListView;
-  lblResult: TLabel;
+    pnlMain: TPanel;
+    tvTestTree: TTreeView;
+    pnlBottom: TPanel;
+    lvFailureListView: TListView;
+    lblResult: TLabel;
+    btnCheckUnckekAll: TSpeedButton;
   procedure FormCreate(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
   procedure btRunAllTestClick(Sender: TObject);
   procedure FormShow(Sender: TObject);
-  procedure TestTreeChangeCheck(Sender: TObject);
+  procedure tvTestTreeChangeCheck(Sender: TObject);
+    procedure btnCheckUnckekAllClick(Sender: TObject);
  protected
   FSuite: ITest;
   FTestResult: TTestResult;
@@ -50,6 +59,10 @@ type
   procedure SetNodeEnabled(aNode: TTreeViewItem; aValue: Boolean);
 
   procedure ClearResult;
+
+  procedure TraverseTree_(const aTree : TTreeView; aLambda: TDoSomethingViewItem);
+  procedure TraverseNode(const aNode: TTreeViewItem; aLambda: TDoSomethingViewItem);
+
  public
   property Suite: ITest read FSuite write SetSuite;
   property TestResult: TTestResult read FTestResult write FTestResult;
@@ -166,6 +179,18 @@ begin
  SetTreeNodeFont(TestToNode(aTest), c_ColorOk)
 end;
 
+procedure TfmGUITestRunner.btnCheckUnckekAllClick(Sender: TObject);
+begin
+ TraverseTree_(tvTestTree,
+  procedure (const aNode: TTreeViewItem)
+  var
+   l_Index: Integer;
+  begin
+   assert(aNode <> nil);
+   aNode.IsChecked := not aNode.IsChecked;
+  end)
+end;
+
 procedure TfmGUITestRunner.btRunAllTestClick(Sender: TObject);
 begin
  if Suite = nil then
@@ -173,6 +198,26 @@ begin
 
  ClearResult;
  RunTheTest(Suite);
+end;
+
+procedure TfmGUITestRunner.TraverseNode(const aNode: TTreeViewItem; aLambda: TDoSomethingViewItem);
+var
+ l_Index: Integer;
+begin
+ for l_Index := 0 to Pred(aNode.Count) do
+ begin
+  TraverseNode(aNode.Items[l_Index], aLambda);
+  aLambda(aNode.Items[l_Index]);
+ end;
+
+end;
+
+procedure TfmGUITestRunner.TraverseTree_(const aTree : TTreeView; aLambda: TDoSomethingViewItem);
+var
+ l_Index: Integer;
+begin
+ for l_Index := 0 to Pred(aTree.Count) do
+  TraverseNode(aTree.Items[l_Index], aLambda);
 end;
 
 procedure TfmGUITestRunner.ClearResult;
@@ -205,7 +250,7 @@ begin
  l_TreeViewItem.Text := aTest.Name;
 
  if aRootNode = nil then
-  TestTree.AddObject(l_TreeViewItem)
+  tvTestTree.AddObject(l_TreeViewItem)
  else
   aRootNode.AddObject(l_TreeViewItem);
 
@@ -216,20 +261,20 @@ end;
 
 procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
 begin
- TestTree.Clear;
+ tvTestTree.Clear;
  FTests.Clear;
 
- TestTree.BeginUpdate;
+ tvTestTree.BeginUpdate;
 
  FillTestTree(nil, Suite);
 
- TestTree.EndUpdate;
+ tvTestTree.EndUpdate;
 end;
 
 procedure TfmGUITestRunner.FormCreate(Sender: TObject);
 begin
  inherited;
- TestTree.ShowCheckboxes := True;
+ tvTestTree.ShowCheckboxes := True;
 
  FTests := TInterfaceList.Create;
 end;
@@ -246,12 +291,12 @@ var
  l_Index: Integer;
  l_Test: ITest;
 begin
- for l_Index := 0 to Pred(TestTree.Count) do
+ for l_Index := 0 to Pred(tvTestTree.Count) do
  begin
-  l_Test := NodeToTest(TestTree.Items[l_Index]);
+  l_Test := NodeToTest(tvTestTree.Items[l_Index]);
   assert(assigned(l_Test));
-  l_Test.GUIObject := TestTree.Items[l_Index];
-  SetupGUINodes(TestTree.Items[l_Index]);
+  l_Test.GUIObject := tvTestTree.Items[l_Index];
+  SetupGUINodes(tvTestTree.Items[l_Index]);
  end;
 end;
 
@@ -259,7 +304,7 @@ procedure TfmGUITestRunner.InitTree;
 begin
  FTests.Clear;
  FillTestTree(Suite);
- TestTree.ExpandAll;
+ tvTestTree.ExpandAll;
 end;
 
 function TfmGUITestRunner.NodeToTest(aNode: TTreeViewItem): ITest;
@@ -364,7 +409,7 @@ begin
  assert(assigned(Result));
 end;
 
-procedure TfmGUITestRunner.TestTreeChangeCheck(Sender: TObject);
+procedure TfmGUITestRunner.tvTestTreeChangeCheck(Sender: TObject);
 begin
  SetNodeEnabled(Sender as TTreeViewItem, (Sender as TTreeViewItem).IsChecked);
 end;
