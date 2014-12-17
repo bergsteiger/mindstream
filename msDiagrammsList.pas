@@ -24,6 +24,7 @@ type
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
   function AddNewDiagramm: ImsDiagramm;
   procedure DiagrammAdded(const aDiagramm: ImsDiagramm); virtual;
+  procedure ShapesForToolbarToList(aList: TStrings);
  end;//TmsDiagrammsList
 
 implementation
@@ -34,7 +35,9 @@ uses
  ,
  System.SysUtils,
  msDiagramm,
- msInvalidators
+ msInvalidators,
+ msShape,
+ msShapesForToolbar
  ;
 
 {$Include msPersistent.mixin.pas}
@@ -56,6 +59,15 @@ end;
 procedure TmsDiagrammsList.DiagrammAdded(const aDiagramm: ImsDiagramm);
 begin
  TmsInvalidators.DiagrammAdded(aDiagramm);
+end;
+
+procedure TmsDiagrammsList.ShapesForToolbarToList(aList: TStrings);
+var
+ l_Class: RmsShape;
+begin
+ aList.Clear;
+ for l_Class in TmsShapesForToolbar.Instance do
+  aList.AddObject(l_Class.ClassName, TObject(l_Class));
 end;
 
 end.

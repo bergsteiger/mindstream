@@ -61,6 +61,7 @@ type
  TmsDiagrammsEnumerator = TEnumerator<ImsDiagramm>;
 
  ImsShapesProvider = interface(ImsPersistent)
+  procedure ShapesForToolbarToList(aList: TStrings);
  end;//ImsShapesProvider
 
  ImsDiagrammsList = interface(ImsShapesProvider)
@@ -90,7 +91,6 @@ type
   procedure ProcessClick(const aStart: TPointF);
   procedure Clear;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
-  procedure ShapesForToolbarToList(aList: TStrings);
   function CurrentShapeClassIndex: Integer;
   procedure DrawTo(const aCanvas: TCanvas);
   function AddShape(const aShape: ImsShape): ImsShape;
@@ -102,7 +102,6 @@ type
 
  ImsDiagramms = interface(ImsDiagrammsList)
  ['{819BEEBA-97BB-48F1-906E-107E67706D19}']
-  procedure ShapesForToolbarToList(aList: TStrings);
   function CurrentShapeClassIndex: Integer;
   function CurrentDiagrammIndex: Integer;
   function pm_GetCurrentDiagramm: ImsDiagramm;
