@@ -53,7 +53,7 @@ begin
    procedure (aShapeClass: RmsShape)
    begin
     aShapeClass.RegisterInMarshal(f_Marshal);
-    f_Marshal.RegisterJSONMarshalled(aShapeClass, 'FRefCount', false);
+//    f_Marshal.RegisterJSONMarshalled(aShapeClass, 'FRefCount', false);
    end
   );//TmsRegisteredShapes.IterateShapes
  end;//f_Marshal = nil
