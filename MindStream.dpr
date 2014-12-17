@@ -7,6 +7,7 @@ uses
   msDiagramm in 'msDiagramm.pas',
   msShape in 'AbstractShapes\msShape.pas',
   msRegisteredShapes in 'msRegisteredShapes.pas',
+  msUtilityShapes in 'msUtilityShapes.pas',
   msLine in 'ConcreteShapes\msLine.pas',
   msRectangle in 'ConcreteShapes\msRectangle.pas',
   msPointCircle in 'SpecialShapes\msPointCircle.pas',
@@ -45,8 +46,7 @@ uses
   msShapeTestSuite in 'Tests\Module\msShapeTestSuite.pas',
   msInvalidators in 'msInvalidators.pas',
   msInterfaces in 'msInterfaces.pas',
-  msStreamUtils in 'Core\msStreamUtils.pas'
-  ;
+  msStreamUtils in 'Core\msStreamUtils.pas';
 
 {$R *.res}
 
