@@ -42,16 +42,15 @@ begin
 end;
 
 procedure TRegisteredShapesTest.TestFirstShape;
-var
- l_RmsShape: RmsShape;
 begin
- l_RmsShape := TmsRegisteredShapes.Instance.First;
- CheckTrue(l_RmsShape = TmsLine);
+ CheckTrue(TmsRegisteredShapes.Instance.First = TmsLine);
+ CheckTrue(TmsShapesForToolbar.Instance.First = TmsLine);
 end;
 
 procedure TRegisteredShapesTest.TestIndexOfTmsLine;
 begin
  CheckTrue(TmsRegisteredShapes.Instance.IndexOf(TmsLine) = 0);
+ CheckTrue(TmsShapesForToolbar.Instance.IndexOf(TmsLine) = 0);
 end;
 
 initialization
