@@ -21,7 +21,6 @@ type
   f_CurrentDiagramm : Integer;
   constructor CreatePrim;
  protected
-  procedure ShapesForToolbarToList(aList: TStrings);
   function CurrentShapeClassIndex: Integer;
   function CurrentDiagrammIndex: Integer;
   function pm_GetCurrentDiagramm: ImsDiagramm;
@@ -127,11 +126,6 @@ end;
 procedure TmsDiagramms.Serialize;
 begin
  TmsDiagrammsMarshal.Serialize(c_FileName, self);
-end;
-
-procedure TmsDiagramms.ShapesForToolbarToList(aList: TStrings);
-begin
- CurrentDiagramm.ShapesForToolbarToList(aList);
 end;
 
 function TmsDiagramms.CurrentShapeClassIndex: Integer;
