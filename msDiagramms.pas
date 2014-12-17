@@ -21,7 +21,7 @@ type
   f_CurrentDiagramm : Integer;
   constructor CreatePrim;
  protected
-  procedure AllowedShapesToList(aList: TStrings);
+  procedure ShapesForToolbarToList(aList: TStrings);
   function CurrentShapeClassIndex: Integer;
   function CurrentDiagrammIndex: Integer;
   function pm_GetCurrentDiagramm: ImsDiagramm;
@@ -129,9 +129,9 @@ begin
  TmsDiagrammsMarshal.Serialize(c_FileName, self);
 end;
 
-procedure TmsDiagramms.AllowedShapesToList(aList: TStrings);
+procedure TmsDiagramms.ShapesForToolbarToList(aList: TStrings);
 begin
- CurrentDiagramm.AllowedShapesToList(aList);
+ CurrentDiagramm.ShapesForToolbarToList(aList);
 end;
 
 function TmsDiagramms.CurrentShapeClassIndex: Integer;
