@@ -52,6 +52,7 @@ begin
   TmsRegisteredShapes.IterateShapes(
    procedure (aShapeClass: RmsShape)
    begin
+    aShapeClass.RegisterInMarshal(f_Marshal);
     f_Marshal.RegisterJSONMarshalled(aShapeClass, 'FRefCount', false);
    end
   );//TmsRegisteredShapes.IterateShapes
@@ -67,6 +68,12 @@ begin
   TmsShape.RegisterInUnMarshal(f_UnMarshal);
   TmsDiagramm.RegisterInUnMarshal(f_UnMarshal);
   TmsDiagramms.RegisterInUnMarshal(f_UnMarshal);
+  TmsRegisteredShapes.IterateShapes(
+   procedure (aShapeClass: RmsShape)
+   begin
+    aShapeClass.RegisterInUnMarshal(f_UnMarshal);
+   end
+  );//TmsRegisteredShapes.IterateShapes
  end;//f_UnMarshal = nil
  Result := f_UnMarshal;
 end;
