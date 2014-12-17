@@ -160,7 +160,6 @@ begin
  TmsDiagrammMarshal.Serialize(aFileName, Self);
 end;
 
-
 procedure TmsDiagramm.LoadFrom(const aFileName: String);
 begin
  TmsDiagrammMarshal.DeSerialize(aFileName, Self);
