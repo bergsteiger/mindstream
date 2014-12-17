@@ -20,7 +20,8 @@ implementation
 uses
  {$Include msShapeClassListSingleton.mixin.pas}
  ,
- msShapesForToolbar
+ msShapesForToolbar,
+ msUtilityShapes
  ;
 
 {$Include msShapeClassListSingleton.mixin.pas}
@@ -34,6 +35,7 @@ procedure TmsRegisteredShapes.Register(const aValue: RmsShape);
 begin
  inherited;
  TmsShapesForToolbar.Instance.Register(aValue);
+ TmsUtilityShapes.Instance.Register(aValue);
 end;
 
 end.
