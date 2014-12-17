@@ -1,42 +1,106 @@
 1. unit msInterfacedRefcounted;
-TmsInterfacedRefcounted = class abstract(TmsWatchedObject)
+ TmsInterfacedRefcounted = class abstract(TmsWatchedObject)
+ 
+ зачем нам тут примесь ? разве нельзя вместо
+ 
+ TmsWatchedObjectParent = TInterfacedObject;
+ {$Include msWatchedObject.mixin.pas}
+ TmsInterfacedRefcounted = class abstract(TmsWatchedObject)
+ 
+ сделать просто 
+ TmsInterfacedRefcounted = class abstract(TInterfacedObject) ?
+ -------------
+ 1. Можно не отвечать?
+Александр • Tue, 11:54 PM
+да 
+мы здесь реализуем подсчет 
+в TmsWatchwer
+тут оправдано 
+ 2. 
+ Зачем нам TmsObjectWrap_uses_intf
+ TStringList = TmsWatchedObjectParent = TmsObjectWrapParent <- TmsObjectWrap <- TmsWatchedObject <- TmsStringList
+ ------------
+ 2. TmsStringList Нам нужен, чтобы следить за объектами
+за утечками
+Александр • Tue, 11:55 PM
+врап нам зачем
+мы можем легко добавить 2 его метода 
+Tue, 11:55 PM
+или внести в отдельный класс иерархии
+Wrap - чтобы "обобщить код"
+StringList'у - он достался"как лишний", но хуже от этого не удет
+линкер - выкинет
+там нетвиртуальности
 
-зачем нам тут примесь ? разве нельзя вместо
+ 3.
+ Почему не проставлену UID в msSerializeInterfaces ?
+ --------------
+ 3. Потому что UID - не нужен
 
-TmsWatchedObjectParent = TInterfacedObject;
-{$Include msWatchedObject.mixin.pas}
-TmsInterfacedRefcounted = class abstract(TmsWatchedObject)
+ 4.
+ msShapeMarshal
+ Почему в данном случае не обычные дженерики ? ну и все места применения ?
+ -------------
+ 4. Я про эт писал
+потому, что дженерики не позволяют звать методы <T>
+а мы зовём например Assign
+у кого
+"у кого"
+aDiagramm.Assign(l_D);
+const aDiagramm: TClassToSerialize
 
-сделать просто 
-TmsInterfacedRefcounted = class abstract(TInterfacedObject) ?
+ 5. TmsItemsHolder_uses_intf
+ Вот тут я полностью согласен с использованием примеси.
+ 
+ 6.
+ зачем нам msPersistent.mixin.pas ? разве он нужен вообще ? Используем только в диаграмме.
+ тем более что мы всё равно реализуем интерфейс ImsDiagramm = interface(ImsPersistent) и он нас и так и так обязует реализовать эти 2 метода.
+ 
+  ImsPersistent = interface(ImsObjectWrap)
+  procedure SaveTo(const aFileName: String);
+  procedure LoadFrom(const aFileName: String);
+ end;//ImsPersistent
+ ----------
+ зачем нам msPersistent.mixin.pas - он нам ещё понадобится
 
-2. 
-Зачем нам TmsObjectWrap_uses_intf
-TStringList = TmsWatchedObjectParent <- TmsObjectWrapParent <- TmsObjectWrap <- TmsWatchedObject <- TmsStringList
+ 7.
+ зачем  
+ TmsIvalidatorParent = TmsInterfacedRefcounted;
+ {$Include msIvalidator.mixin.pas}
+ TmsDiagrammsController = class(TmsIvalidator)
+ 
+ Если мы один раз пользуемся, почему не напрямую наследоваться ?
+ --------------
+ TmsIvalidatorParent
+потому что он ИСПОЛЬЗОВАЛСЯ два разу УЖЕ
+в процессе рефакторинга
+и ещё понадобится
+Александр • Tue, 11:59 PM
+он только у контролера
+17 mins
+Igor Belyh
+Александр Люлин
+ну это "сейчас" он только там
+а БЫЛ у TmsDiargamms
+посмотрите коммиты
+смысл такой - если класс или "примесь" УЖЕ выделены, то нет большого смысла их "схлопывать" обратно
+чем больше "атомарных" кирпичей, тем лучше
+Александр • 15 mins
+мне кажется 
+15 mins
+Igor Belyh
+вы конечно правы
+просто я не понимаю как мне описать в статье зачем это 
+14 mins
+Igor Belyh
+Александр Люлин
+прав прав ??
+Александр • 14 mins
+7 - подсчёт числа объектов
+8 - зомби-объекты
+так что - 8 аспектов, которые можно описать
+ну или опять разделить
 
-3.
-Почему не проставлену UID в msSerializeInterfaces ?
-
-4.
-msShapeMarshal
-Почему в данном случае не обычные дженерики ? ну и все места применения ?
-
-5. TmsItemsHolder_uses_intf
-Вот тут я полностью согласен с использованием примеси.
-
-6.
-зачем нам msPersistent.mixin.pas ? разве он нужен вообще ? Используем только в диаграмме.
-тем более что мы всё равно реализуем интерфейс ImsDiagramm = interface(ImsPersistent) и он нас и так и так обязует реализовать эти 2 метода.
-
- ImsPersistent = interface(ImsObjectWrap)
- procedure SaveTo(const aFileName: String);
- procedure LoadFrom(const aFileName: String);
-end;//ImsPersistent
-
-7.
-зачем  
-TmsIvalidatorParent = TmsInterfacedRefcounted;
-{$Include msIvalidator.mixin.pas}
-TmsDiagrammsController = class(TmsIvalidator)
-
-Если мы один раз пользуемся, почему не напрямую наследоваться ?
+ -------------
+ 
+ с ответами, но без редактирвания.
