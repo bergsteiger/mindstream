@@ -37,7 +37,7 @@ begin
    Inc(l_Result);
   end
  );
- CheckTrue(l_Result = 14);
+ CheckTrue(l_Result = 15);
 end;
 
 procedure TForToolbarShapesTest.TestFirstShape;
