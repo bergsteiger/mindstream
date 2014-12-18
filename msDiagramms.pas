@@ -17,11 +17,8 @@ uses
 type
  TmsDiagramms = class(TmsDiagrammsList, ImsDiagramms)
  private
-  [JSONMarshalled(True)]
-  f_CurrentDiagramm : Integer;
   constructor CreatePrim;
  protected
-  function CurrentDiagrammIndex: Integer;
   procedure DiagrammAdded(const aDiagramm: ImsDiagramm); override;
   procedure Serialize;
   procedure DeSerialize;
@@ -58,15 +55,7 @@ end;
 
 procedure TmsDiagramms.DiagrammAdded(const aDiagramm: ImsDiagramm);
 begin
- f_CurrentDiagramm := Items.IndexOf(aDiagramm);
  inherited;
-end;
-
-//CurrentDiagrammIndex надо нафиг убить
-
-function TmsDiagramms.CurrentDiagrammIndex: Integer;
-begin
- Result := f_CurrentDiagramm;
 end;
 
 function TmsDiagramms.SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
@@ -93,7 +82,6 @@ end;
 procedure TmsDiagramms.Assign(anOther: TmsDiagramms);
 begin
  inherited Assign(anOther);
- Self.f_CurrentDiagramm := anOther.CurrentDiagrammIndex;
 end;
 
 procedure TmsDiagramms.Serialize;
