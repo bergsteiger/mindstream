@@ -41,8 +41,10 @@ end;
 function TmsObjectWrap.EQ(const anOther: ImsObjectWrap): Boolean;
 begin
  Assert(Self <> nil);
- Assert(anOther <> nil);
- Result := (Self = anOther.toObject);
+ if (anOther = nil) then
+  Result := false
+ else
+  Result := (Self = anOther.toObject);
 end;
 
 {$EndIf TmsObjectWrap_uses_impl}

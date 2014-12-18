@@ -32,8 +32,8 @@ type
   btSaveDiagramm: TButton;
   btLoadDiagramm: TButton;
   FDiagramms: ImsDiagramms;
+  f_CurrentDiagramm : ImsDiagramm;
   procedure cbDiagrammChange(Sender: TObject);
-  procedure imgMainResize(Sender: TObject);
   procedure cbShapesChange(Sender: TObject);
   procedure btAddDiagrammClick(Sender: TObject);
   procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton;
@@ -41,6 +41,7 @@ type
   procedure btSaveDiagrammClick(Sender: TObject);
   procedure btLoadDiagrammClick(Sender: TObject);
   function pm_GetCurrentDiagramm: ImsDiagramm;
+  procedure pm_SetCurrentDiagramm(const aValue: ImsDiagramm);
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramm: ImsDiagramm); override;
@@ -50,7 +51,8 @@ type
   procedure Clear;
   procedure ProcessClick(const aStart: TPointF);
   property CurrentDiagramm: ImsDiagramm
-   read pm_GetCurrentDiagramm;
+   read pm_GetCurrentDiagramm
+   write pm_SetCurrentDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
  end;//TmsDiagrammsController
 
@@ -82,7 +84,6 @@ begin
  btSaveDiagramm := aSaveDiagramm;
  btLoadDiagramm := aLoadDiagramm;
  cbDiagramm.OnChange := cbDiagrammChange;
- imgMain.OnResize := imgMainResize;
  cbShapes.OnChange := cbShapesChange;
  btAddDiagramm.OnClick := btAddDiagrammClick;
  btSaveDiagramm.OnClick := btSaveDiagrammClick;
@@ -102,7 +103,16 @@ end;
 
 function TmsDiagrammsController.pm_GetCurrentDiagramm: ImsDiagramm;
 begin
- Result := FDiagramms.CurrentDiagramm;
+ Result := f_CurrentDiagramm;
+end;
+
+procedure TmsDiagrammsController.pm_SetCurrentDiagramm(const aValue: ImsDiagramm);
+begin
+ if not aValue.EQ(f_CurrentDiagramm) then
+ begin
+  f_CurrentDiagramm := aValue;
+  cbDiagramm.ItemIndex := cbDiagramm.Items.IndexOf(aValue.Name);
+ end;//not aValue.EQ(f_CurrentDiagramm)
 end;
 
 procedure TmsDiagrammsController.btLoadDiagrammClick(Sender: TObject);
@@ -125,11 +135,8 @@ end;
 
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
 begin
- FDiagramms.SelectDiagramm(cbDiagramm.ItemIndex);
-end;
-
-procedure TmsDiagrammsController.imgMainResize(Sender: TObject);
-begin
+ CurrentDiagramm := FDiagramms.SelectDiagramm(cbDiagramm.Items[cbDiagramm.ItemIndex]);
+ CurrentDiagramm.Invalidate;
 end;
 
 procedure TmsDiagrammsController.cbShapesChange(Sender: TObject);
@@ -144,6 +151,7 @@ end;
 
 destructor TmsDiagrammsController.Destroy;
 begin
+ f_CurrentDiagramm := nil;
  FDiagramms := nil;
  inherited;
 end;
@@ -155,7 +163,7 @@ end;
 
 procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
 begin
- FDiagramms.ProcessClick(aStart);
+ CurrentDiagramm.ProcessClick(aStart);
 end;
 
 procedure TmsDiagrammsController.DrawTo(const aCanvas: TCanvas);
@@ -181,7 +189,7 @@ begin
   if (FDiagramms.IndexOf(aDiagramm) >= 0) then
   begin
    cbDiagramm.Items.Add(aDiagramm.Name);
-   cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
+   CurrentDiagramm := aDiagramm;
   end;//FDiagramms.IndexOf(aDiagramm) >= 0
  end;//
 end;

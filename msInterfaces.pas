@@ -106,9 +106,8 @@ type
   procedure Serialize;
   procedure DeSerialize;
   procedure Clear;
-  procedure SelectDiagramm(anIndex: Integer);
+  function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
-  procedure ProcessClick(const aStart: TPointF);
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;

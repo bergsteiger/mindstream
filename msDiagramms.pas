@@ -29,7 +29,6 @@ type
   procedure Clear;
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
-  procedure ProcessClick(const aStart: TPointF);
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
   property CurrentDiagramm: ImsDiagramm
@@ -110,11 +109,6 @@ begin
  end;//for l_D
  Self.f_CurrentDiagramm := anOther.CurrentDiagrammIndex;
  CurrentDiagramm.Invalidate;
-end;
-
-procedure TmsDiagramms.ProcessClick(const aStart: TPointF);
-begin
- CurrentDiagramm.ProcessClick(aStart);
 end;
 
 procedure TmsDiagramms.Clear;
