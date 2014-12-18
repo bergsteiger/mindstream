@@ -27,7 +27,7 @@ type
   procedure Serialize;
   procedure DeSerialize;
   procedure Clear;
-  procedure SelectDiagramm(anIndex: Integer);
+  function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure ProcessClick(const aStart: TPointF);
   procedure SaveTo(const aFileName: String); override;
@@ -78,12 +78,17 @@ begin
  Result := f_CurrentDiagramm;
 end;
 
-procedure TmsDiagramms.SelectDiagramm(anIndex: Integer);
+function TmsDiagramms.SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
+var
+ l_D : ImsDiagramm;
 begin
- if (anIndex < 0) OR (anIndex >= Items.Count) then
-  Exit;
- f_CurrentDiagramm := anIndex;
- CurrentDiagramm.Invalidate;
+ Result := nil;
+ for l_D in Items do
+  if (l_D.Name = aDiagrammName) then
+  begin
+   Result := l_D;
+   break;
+  end;//l_D.Name = aDiagrammName
 end;
 
 const
