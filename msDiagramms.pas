@@ -97,14 +97,8 @@ begin
 end;
 
 procedure TmsDiagramms.Assign(anOther: TmsDiagramms);
-var
- l_D : ImsDiagramm;
 begin
  inherited Assign(anOther);
- for l_D in Items do
- begin
-  (l_D.toObject As TmsDiagramm).CurrentClass := TmsRegisteredShapes.Instance.First;
- end;//for l_D
  Self.f_CurrentDiagramm := anOther.CurrentDiagrammIndex;
  CurrentDiagramm.Invalidate;
 end;

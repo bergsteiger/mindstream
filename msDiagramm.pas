@@ -39,8 +39,6 @@ type
  //   Про это можно писать отдельную статью.
  private
   [JSONMarshalled(False)]
-  FCurrentClass: RmsShape;
-  [JSONMarshalled(False)]
   FCurrentAddedShape: ImsShape;
   [JSONMarshalled(True)]
   fName: String;
@@ -66,7 +64,6 @@ type
   procedure Serialize;
   procedure DeSerialize;
   procedure Assign(const anOther : TmsDiagramm);
-  property CurrentClass: RmsShape read FCurrentClass write FCurrentClass;
  end;//TmsDiagramm
 
 implementation
@@ -136,7 +133,6 @@ constructor TmsDiagramm.CreatePrim(const aName: String);
 begin
  inherited Create;
  FCurrentAddedShape := nil;
- FCurrentClass := TmsShapesForToolbar.Instance.First;
  fName := aName;
 end;
 
