@@ -18,13 +18,13 @@ object fmGUITestRunner: TfmGUITestRunner
     Size.PlatformDefault = False
     TabOrder = 0
     object btRunAllTest: TSpeedButton
-      Position.X = 16.000000000000000000
+      Position.X = 24.000000000000000000
       Position.Y = 8.000000000000000000
       Size.Width = 80.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      StyleLookup = 'playtoolbutton'
-      Text = 'btRunAllTest'
+      StyleLookup = 'cornerbuttonstyle'
+      Text = 'RunAllTest'
       OnClick = btRunAllTestClick
     end
     object btnCheckAll: TSpeedButton
@@ -33,17 +33,17 @@ object fmGUITestRunner: TfmGUITestRunner
       Size.Width = 80.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      StyleLookup = 'cleareditbutton'
-      Text = 'btRunAllTest'
+      StyleLookup = 'cornerbuttonstyle'
+      Text = 'CheckedAll'
       OnClick = btnCheckAllClick
     end
     object btnUncheckAll: TSpeedButton
-      Position.X = 200.000000000000000000
+      Position.X = 184.000000000000000000
       Position.Y = 8.000000000000000000
-      Size.Width = 105.000000000000000000
+      Size.Width = 89.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      StyleLookup = 'deletetoolbutton'
+      StyleLookup = 'cornerbuttonstyle'
       Text = 'UnchekedAll'
       OnClick = btnUncheckAllClick
     end
@@ -76,19 +76,87 @@ object fmGUITestRunner: TfmGUITestRunner
       HeaderAppearanceClassName = 'TListHeaderObjects'
       FooterAppearanceClassName = 'TListHeaderObjects'
       Align = Bottom
-      Position.Y = 56.000000000000000000
+      Position.Y = 40.000000000000000000
       Size.Width = 675.000000000000000000
-      Size.Height = 193.000000000000000000
+      Size.Height = 209.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
     end
-    object lblResult: TLabel
+    object lblTime: TLabel
+      StyledSettings = [FontColor]
       Position.X = 8.000000000000000000
       Position.Y = 8.000000000000000000
-      Size.Width = 41.000000000000000000
-      Size.Height = 17.000000000000000000
+      Size.Width = 65.000000000000000000
+      Size.Height = 25.000000000000000000
       Size.PlatformDefault = False
-      Text = 'Result'
+      TextSettings.Font.Family = 'Segoe UI Semibold'
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      Text = 'Time:'
+    end
+    object lblErros: TLabel
+      StyledSettings = []
+      Position.X = 520.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 65.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Segoe UI Semibold'
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.FontColor = claRed
+      Text = 'Errors:'
+    end
+    object lblErrorCount: TLabel
+      StyledSettings = []
+      Position.X = 600.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 65.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Segoe UI Semibold'
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.FontColor = claRed
+      Text = 'ErrorCount'
+    end
+    object lblFailure: TLabel
+      StyledSettings = []
+      Position.X = 360.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 65.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Segoe UI Semibold'
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.FontColor = claFuchsia
+      Text = 'Failure:'
+    end
+    object lblFailureCount: TLabel
+      StyledSettings = []
+      Position.X = 440.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 65.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Segoe UI Semibold'
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.FontColor = claFuchsia
+      Text = '0'
+    end
+    object lblTimeCount: TLabel
+      StyledSettings = [FontColor]
+      Position.X = 96.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 177.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Segoe UI Semibold'
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      Text = 'TimeCount'
     end
   end
 end

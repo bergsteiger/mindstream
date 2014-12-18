@@ -6,7 +6,7 @@ uses
  TestFramework,
  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
- FMX.Layouts, FMX.TreeView, FMX.ListView.Types, FMX.ListView;
+ FMX.Layouts, FMX.TreeView, FMX.ListView.Types, FMX.ListView, System.Generics.Collections;
 
 const
  c_ColorOk = TAlphaColorRec.Green;
@@ -24,9 +24,14 @@ type
   tvTestTree: TTreeView;
   pnlBottom: TPanel;
   lvFailureListView: TListView;
-  lblResult: TLabel;
+  lblTime: TLabel;
   btnCheckAll: TSpeedButton;
   btnUncheckAll: TSpeedButton;
+  lblErros: TLabel;
+  lblErrorCount: TLabel;
+  lblFailure: TLabel;
+  lblFailureCount: TLabel;
+  lblTimeCount: TLabel;
   procedure FormCreate(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
   procedure btRunAllTestClick(Sender: TObject);
@@ -39,7 +44,9 @@ type
   FTestResult: TTestResult;
   FTests: TInterfaceList;
   FSelectedTests: TInterfaceList;
-  FTotalTime: Int64;
+  FTotalTime: TTime;
+  FRunTime: TTime;
+
 
   procedure SetSuite(aValue: ITest);
   procedure InitTree;
@@ -92,7 +99,6 @@ var
 implementation
 
 uses
- System.Generics.Collections,
  System.TypInfo;
 
 {$R *.fmx}
@@ -223,6 +229,10 @@ begin
  // тестов. А нам пока нечего показывать.
  // И если будет утверждение, то после первого захода сюда, результаты не отображаются
  // Пока, так, однозначно TODO
+ FTotalTime:= FTestResult.TotalTime;
+ lblTimeCount.Text:= DateTimeToStr(FTotalTime);
+ lblErrorCount.Text:= IntToStr(FTestResult.ErrorCount);
+ lblFailureCount.Text:= IntToStr(FTestResult.FailureCount);
  // assert(False);
 end;
 
@@ -236,8 +246,8 @@ begin
   Exit;
 
  l_TreeViewItem := TTreeViewItem.Create(self);
- l_TreeViewItem.IsChecked := True;
 
+ l_TreeViewItem.IsChecked := True;
  l_TreeViewItem.Tag := FTests.Add(aTest);
  l_TreeViewItem.Text := aTest.Name;
 
@@ -257,6 +267,9 @@ begin
  FTests.Clear;
 
  tvTestTree.BeginUpdate;
+
+ { TraverseTree(l_TreeViewItem,
+   procedure ()); }
 
  FillTestTree(nil, Suite);
 
@@ -314,6 +327,8 @@ begin
  try
   TestResult.addListener(self);
   aTest.run(TestResult);
+  FTotalTime := 0;
+  FRunTime := Now;
  finally
   // FErrorCount := TestResult.ErrorCount;
   // FFailureCount := TestResult.FailureCount;
