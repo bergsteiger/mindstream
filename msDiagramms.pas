@@ -70,6 +70,8 @@ begin
  inherited;
 end;
 
+CurrentDiagrammIndex надо нафиг убить
+
 function TmsDiagramms.CurrentDiagrammIndex: Integer;
 begin
  Result := f_CurrentDiagramm;
