@@ -56,12 +56,13 @@ begin
 end;
 
 class procedure TmsInvalidators.InvalidateDiagramm(const aDiagramm: ImsDiagramm);
-var
- l_Subscriber : Pointer;
 begin
- if (f_Subscribers <> nil) then
-  for l_Subscriber in f_Subscribers do
-   ImsIvalidator(l_Subscriber).InvalidateDiagramm(aDiagramm);
+ DoItems(
+  procedure (const anItem: ImsIvalidator)
+  begin
+   anItem.InvalidateDiagramm(aDiagramm)
+  end
+ );
 end;
 
 class procedure TmsInvalidators.DiagrammAdded(const aDiagramm: ImsDiagramm);
