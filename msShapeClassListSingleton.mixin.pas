@@ -23,6 +23,7 @@
   class var f_Instance: TmsShapeClassListSingleton;
   constructor Create;
   class destructor Fini;
+  function pm_GetItems: RmsShapeList;
  public
   class function Instance: TmsShapeClassListSingleton;
   function First: RmsShape;
@@ -32,6 +33,8 @@
   function GetEnumerator: RmsShapeList.TEnumerator;
   function IndexOf(const aValue: RmsShape): Integer;
   class procedure IterateShapes(aLambda: TmsShapeClassLambda);
+  property Items: RmsShapeList
+   read pm_GetItems;
  end;//TmsShapeClassListSingleton
 
 {$Define TmsShapeClassListSingleton_intf}
@@ -64,6 +67,11 @@ end;
 class destructor TmsShapeClassListSingleton.Fini;
 begin
  FreeAndNil(f_Instance);
+end;
+
+function TmsShapeClassListSingleton.pm_GetItems: RmsShapeList;
+begin
+ Result := f_Registered;
 end;
 
 destructor TmsShapeClassListSingleton.Destroy;
