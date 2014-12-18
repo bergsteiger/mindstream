@@ -163,8 +163,6 @@ procedure TfmGUITestRunner.btnCheckAllClick(Sender: TObject);
 begin
  TraverseTree(tvTestTree,
   procedure(const aNode: TTreeViewItem)
-  var
-   l_Index: Integer;
   begin
    assert(aNode <> nil);
    aNode.IsChecked := True;
@@ -175,8 +173,6 @@ procedure TfmGUITestRunner.btnUncheckAllClick(Sender: TObject);
 begin
  TraverseTree(tvTestTree,
   procedure(const aNode: TTreeViewItem)
-  var
-   l_Index: Integer;
   begin
    assert(aNode <> nil);
    aNode.IsChecked := False;
