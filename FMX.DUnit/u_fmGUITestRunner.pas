@@ -262,9 +262,7 @@ procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
  begin//DoFillTestTree
   l_TestTests := aRootNode.Test.Tests;
   for l_Index := 0 to l_TestTests.Count - 1 do
-  begin
    DoFillTestTree(TTestNode.Create(aRootNode, (l_TestTests[l_Index] as ITest)));
-  end;//for l_Index
  end;//DoFillTestTree
 
 begin
