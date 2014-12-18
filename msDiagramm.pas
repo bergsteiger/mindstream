@@ -62,7 +62,6 @@ type
   procedure ProcessClick(const aCurrentClass: TClass; const aStart: TPointF);
   procedure Clear;
   procedure Invalidate;
-  procedure SelectShape(aList: TStrings; anIndex: Integer);
   property Name: String read fName write fName;
   procedure Serialize;
   procedure DeSerialize;
@@ -93,14 +92,6 @@ uses
 const
  c_FileName = '.json';
 
-procedure TmsDiagramm.SelectShape(aList: TStrings; anIndex: Integer);
-begin
- if (anIndex < 0) then
-  CurrentClass :=  TmsShapesForToolbar.Instance.First
- else
-  CurrentClass := RmsShape(aList.Objects[anIndex]);
-end;
-
 procedure TmsDiagramm.Serialize;
 begin
  TmsDiagrammMarshal.Serialize(Self.Name + c_FileName, self);
@@ -118,8 +109,7 @@ end;
 
 procedure TmsDiagramm.BeginShape(const aCurrentClass: RmsShape; const aStart: TPointF);
 begin
- assert(CurrentClass <> nil);
- FCurrentAddedShape := CurrentClass.Create(TmsMakeShapeContext.Create(aStart, Self));
+ FCurrentAddedShape := aCurrentClass.Create(TmsMakeShapeContext.Create(aStart, Self));
  if (FCurrentAddedShape <> nil) then
  begin
   Items.Add(FCurrentAddedShape);

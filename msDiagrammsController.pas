@@ -34,7 +34,6 @@ type
   FDiagramms: ImsDiagramms;
   f_CurrentDiagramm : ImsDiagramm;
   procedure cbDiagrammChange(Sender: TObject);
-  procedure cbShapesChange(Sender: TObject);
   procedure btAddDiagrammClick(Sender: TObject);
   procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
@@ -62,7 +61,8 @@ uses
  {$Include msIvalidator.mixin.pas}
  ,
  System.SysUtils,
- FMX.Types
+ FMX.Types,
+ msShapesForToolbar
  ;
 
 {$Include msIvalidator.mixin.pas}
@@ -84,7 +84,6 @@ begin
  btSaveDiagramm := aSaveDiagramm;
  btLoadDiagramm := aLoadDiagramm;
  cbDiagramm.OnChange := cbDiagrammChange;
- cbShapes.OnChange := cbShapesChange;
  btAddDiagramm.OnClick := btAddDiagrammClick;
  btSaveDiagramm.OnClick := btSaveDiagrammClick;
  btLoadDiagramm.OnClick := btLoadDiagrammClick;
@@ -140,11 +139,6 @@ begin
  CurrentDiagramm.Invalidate;
 end;
 
-procedure TmsDiagrammsController.cbShapesChange(Sender: TObject);
-begin
- FDiagramms.SelectShape(cbShapes.Items, cbShapes.ItemIndex);
-end;
-
 procedure TmsDiagrammsController.btAddDiagrammClick(Sender: TObject);
 begin
  FDiagramms.AddNewDiagramm;
@@ -164,7 +158,7 @@ end;
 
 procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
 begin
- CurrentDiagramm.ProcessClick(aStart);
+ CurrentDiagramm.ProcessClick(TmsShapesForToolbar.Instance.Items[cbShapes.ItemIndex], aStart);
 end;
 
 procedure TmsDiagrammsController.DrawTo(const aCanvas: TCanvas);

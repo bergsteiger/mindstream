@@ -27,7 +27,6 @@ type
   procedure Serialize;
   procedure DeSerialize;
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
-  procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
   property CurrentDiagramm: ImsDiagramm
@@ -108,11 +107,6 @@ begin
  end;//for l_D
  Self.f_CurrentDiagramm := anOther.CurrentDiagrammIndex;
  CurrentDiagramm.Invalidate;
-end;
-
-procedure TmsDiagramms.SelectShape(aList: TStrings; anIndex: Integer);
-begin
- CurrentDiagramm.SelectShape(aList, anIndex);
 end;
 
 procedure TmsDiagramms.Serialize;

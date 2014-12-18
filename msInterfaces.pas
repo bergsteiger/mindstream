@@ -88,9 +88,8 @@ type
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
   function Get_Name: String;
   procedure Invalidate;
-  procedure ProcessClick(const aStart: TPointF);
+  procedure ProcessClick(const aCurrentClass: TClass; const aStart: TPointF);
   procedure Clear;
-  procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure DrawTo(const aCanvas: TCanvas);
   function AddShape(const aShape: ImsShape): ImsShape;
   function GetEnumerator: TmsShapesEnumerator;
@@ -106,7 +105,6 @@ type
   procedure Serialize;
   procedure DeSerialize;
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
-  procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm;
