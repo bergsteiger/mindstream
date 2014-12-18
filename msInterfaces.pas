@@ -68,6 +68,7 @@ type
   function GetEnumerator: TmsDiagrammsEnumerator;
   function IndexOf(const anItem: ImsDiagramm): Integer;
   function AddNewDiagramm: ImsDiagramm;
+  procedure AddDiagramm(const aDiagramm: ImsDiagramm);
  end;//ImsDiagrammsList
 
  ImsShape = interface(ImsDiagrammsList)
@@ -103,7 +104,6 @@ type
   procedure Serialize;
   procedure DeSerialize;
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
-  procedure AddDiagramm(const aDiagramm: ImsDiagramm);
  end;//ImsDiagramms
 
  ImsIvalidator = interface
