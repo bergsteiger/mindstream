@@ -44,8 +44,6 @@ type
   FTestResult: TTestResult;
   FTests: TInterfaceList;
   FSelectedTests: TInterfaceList;
-  FTotalTime: TTime;
-  FRunTime: TTime;
 
 
   procedure SetSuite(aValue: ITest);
@@ -224,13 +222,25 @@ begin
 end;
 
 procedure TfmGUITestRunner.EndTest(test: ITest);
+   function FormatElapsedTime(milli: Int64):string;
+   var
+     h,nn,ss,zzz: Cardinal;
+   begin
+     h := milli div 3600000;
+     milli := milli mod 3600000;
+     nn := milli div 60000;
+     milli := milli mod 60000;
+     ss := milli div 1000;
+     milli := milli mod 1000;
+     zzz := milli;
+     Result := Format('%d:%2.2d:%2.2d.%3.3d', [h, nn, ss, zzz]);
+   end;
 begin
  // Закомител, потому как тут надо обновлять общую информацию о результатах
  // тестов. А нам пока нечего показывать.
  // И если будет утверждение, то после первого захода сюда, результаты не отображаются
  // Пока, так, однозначно TODO
- FTotalTime:= FTestResult.TotalTime;
- lblTimeCount.Text:= DateTimeToStr(FTotalTime);
+ lblTimeCount.Text:= FormatElapsedTime (FTestResult.TotalTime);
  lblErrorCount.Text:= IntToStr(FTestResult.ErrorCount);
  lblFailureCount.Text:= IntToStr(FTestResult.FailureCount);
  // assert(False);
