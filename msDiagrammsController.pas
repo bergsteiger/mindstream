@@ -112,6 +112,7 @@ begin
  begin
   f_CurrentDiagramm := aValue;
   cbDiagramm.ItemIndex := cbDiagramm.Items.IndexOf(aValue.Name);
+  f_CurrentDiagramm.Invalidate;
  end;//not aValue.EQ(f_CurrentDiagramm)
 end;
 
