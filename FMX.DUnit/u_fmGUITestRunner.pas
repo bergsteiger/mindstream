@@ -237,7 +237,17 @@ end;
 
 procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
 
- procedure DoFillTestTree(aRootNode: TTreeViewItem; aTest: ITest);
+ function CreateNode(const aTest: ITest): TTreeViewItem;
+ begin
+  Result := TTreeViewItem.Create(self);
+
+  Result.IsChecked := True;
+  Result.Tag := FTests.Add(aTest);
+  Result.Text := aTest.Name;
+
+ end;
+
+ procedure DoFillTestTree(aRootNode: TTreeViewItem; const aTest: ITest);
  var
   l_TestTests: IInterfaceList;
   l_Index: Integer;
@@ -246,11 +256,7 @@ procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
   if aTest = nil then
    Exit;
 
-  l_TreeViewItem := TTreeViewItem.Create(self);
-
-  l_TreeViewItem.IsChecked := True;
-  l_TreeViewItem.Tag := FTests.Add(aTest);
-  l_TreeViewItem.Text := aTest.Name;
+  l_TreeViewItem := CreateNode(aTest);
 
   if aRootNode = nil then
    tvTestTree.AddObject(l_TreeViewItem)
