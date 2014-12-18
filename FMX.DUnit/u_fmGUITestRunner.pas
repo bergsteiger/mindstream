@@ -49,7 +49,6 @@ type
   procedure SetSuite(aValue: ITest);
   procedure InitTree;
   procedure FillTestTree(aTest: ITest); overload;
-  procedure FillTestTree(aRootNode: TTreeViewItem; aTest: ITest); overload;
   procedure RunTheTest(aTest: ITest);
 
   function NodeToTest(aNode: TTreeViewItem): ITest;
@@ -236,44 +235,43 @@ begin
  // assert(False);
 end;
 
-procedure TfmGUITestRunner.FillTestTree(aRootNode: TTreeViewItem; aTest: ITest);
-var
- l_TestTests: IInterfaceList;
- l_Index: Integer;
- l_TreeViewItem: TTreeViewItem;
-begin
- if aTest = nil then
-  Exit;
-
- l_TreeViewItem := TTreeViewItem.Create(self);
-
- l_TreeViewItem.IsChecked := True;
- l_TreeViewItem.Tag := FTests.Add(aTest);
- l_TreeViewItem.Text := aTest.Name;
-
- if aRootNode = nil then
-  tvTestTree.AddObject(l_TreeViewItem)
- else
-  aRootNode.AddObject(l_TreeViewItem);
-
- l_TestTests := aTest.Tests;
- for l_Index := 0 to l_TestTests.Count - 1 do
-  FillTestTree(l_TreeViewItem, l_TestTests[l_Index] as ITest);
-end;
-
 procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
+
+ procedure DoFillTestTree(aRootNode: TTreeViewItem; aTest: ITest);
+ var
+  l_TestTests: IInterfaceList;
+  l_Index: Integer;
+  l_TreeViewItem: TTreeViewItem;
+ begin
+  if aTest = nil then
+   Exit;
+
+  l_TreeViewItem := TTreeViewItem.Create(self);
+
+  l_TreeViewItem.IsChecked := True;
+  l_TreeViewItem.Tag := FTests.Add(aTest);
+  l_TreeViewItem.Text := aTest.Name;
+
+  if aRootNode = nil then
+   tvTestTree.AddObject(l_TreeViewItem)
+  else
+   aRootNode.AddObject(l_TreeViewItem);
+
+  l_TestTests := aTest.Tests;
+  for l_Index := 0 to l_TestTests.Count - 1 do
+   DoFillTestTree(l_TreeViewItem, l_TestTests[l_Index] as ITest);
+ end;
+
 begin
  tvTestTree.Clear;
  FTests.Clear;
 
  tvTestTree.BeginUpdate;
-
- { TraverseTree(l_TreeViewItem,
-   procedure ()); }
-
- FillTestTree(nil, Suite);
-
- tvTestTree.EndUpdate;
+ try
+  DoFillTestTree(nil, Suite);
+ finally
+  tvTestTree.EndUpdate;
+ end;//try..finally
 end;
 
 procedure TfmGUITestRunner.FormCreate(Sender: TObject);
