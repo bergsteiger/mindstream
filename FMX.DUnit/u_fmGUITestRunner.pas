@@ -260,20 +260,15 @@ procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
   Result := TTestNode.Create(aParent, aTest);
  end;//CreateNode
 
- procedure DoFillTestTree(aRootNode: TTestNode; const aTest: ITest);
+ procedure DoFillTestTree(aRootNode: TTestNode);
  var
   l_TestTests: IInterfaceList;
   l_Index: Integer;
-  l_Test : ITest;
  begin//DoFillTestTree
-  if aTest = nil then
-   Exit;
-
-  l_TestTests := aTest.Tests;
+  l_TestTests := aRootNode.Test.Tests;
   for l_Index := 0 to l_TestTests.Count - 1 do
   begin
-   l_Test := l_TestTests[l_Index] as ITest;
-   DoFillTestTree(CreateNode(l_Test, aRootNode), l_Test);
+   DoFillTestTree(CreateNode(l_TestTests[l_Index] as ITest, aRootNode));
   end;//for l_Index
  end;//DoFillTestTree
 
@@ -282,7 +277,7 @@ begin
 
  tvTestTree.BeginUpdate;
  try
-  DoFillTestTree(CreateNode(Suite, tvTestTree), Suite);
+  DoFillTestTree(CreateNode(Suite, tvTestTree));
  finally
   tvTestTree.EndUpdate;
  end;//try..finally
