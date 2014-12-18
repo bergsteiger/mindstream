@@ -337,8 +337,6 @@ begin
  try
   TestResult.addListener(self);
   aTest.run(TestResult);
-  FTotalTime := 0;
-  FRunTime := Now;
  finally
   // FErrorCount := TestResult.ErrorCount;
   // FFailureCount := TestResult.FailureCount;
@@ -408,12 +406,10 @@ end;
 
 procedure TfmGUITestRunner.TestingEnds(aTestResult: TTestResult);
 begin
- FTotalTime := aTestResult.TotalTime;
 end;
 
 procedure TfmGUITestRunner.TestingStarts;
 begin
- FTotalTime := 0;
 end;
 
 function TfmGUITestRunner.TestToNode(test: ITest): TTreeViewItem;
