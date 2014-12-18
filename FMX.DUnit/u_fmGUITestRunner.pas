@@ -42,7 +42,6 @@ type
  protected
   FSuite: ITest;
   FTestResult: TTestResult;
-  FTests: TInterfaceList;
   FSelectedTests: TInterfaceList;
 
 
@@ -237,25 +236,28 @@ end;
 
 type
  TTestNode = class(TTreeViewItem)
+  private
+   f_Test: ITest;
   public
-   constructor Create(anOwner: TComponent);
+   constructor Create(aParent: TFmxObject; const aTest: ITest);
+   property Test: ITest
+    read f_Test;
  end;//TTestNode
 
-constructor TTestNode.Create(anOwner: TComponent);
+constructor TTestNode.Create(aParent: TFmxObject; const aTest: ITest);
 begin
- inherited Create(anOwner);
+ inherited Create(aParent);
+ IsChecked := True;
+ f_Test := aTest;
+ Text := aTest.Name;
+ aParent.AddObject(Self);
 end;
 
 procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
 
  function CreateNode(const aTest: ITest; aParent: TFmxObject): TTestNode;
  begin//CreateNode
-  Result := TTestNode.Create(self);
-
-  Result.IsChecked := True;
-  Result.Tag := FTests.Add(aTest);
-  Result.Text := aTest.Name;
-  aParent.AddObject(Result);
+  Result := TTestNode.Create(aParent, aTest);
  end;//CreateNode
 
  procedure DoFillTestTree(aRootNode: TTestNode; const aTest: ITest);
@@ -277,7 +279,6 @@ procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
 
 begin
  tvTestTree.Clear;
- FTests.Clear;
 
  tvTestTree.BeginUpdate;
  try
@@ -291,14 +292,11 @@ procedure TfmGUITestRunner.FormCreate(Sender: TObject);
 begin
  inherited;
  tvTestTree.ShowCheckboxes := True;
-
- FTests := TInterfaceList.Create;
 end;
 
 procedure TfmGUITestRunner.FormDestroy(Sender: TObject);
 begin
  Suite := nil;
- FreeAndNil(FTests);
  inherited;
 end;
 
@@ -318,18 +316,13 @@ end;
 
 procedure TfmGUITestRunner.InitTree;
 begin
- FTests.Clear;
  FillTestTree(Suite);
  tvTestTree.ExpandAll;
 end;
 
 function TfmGUITestRunner.NodeToTest(aNode: TTreeViewItem): ITest;
-var
- l_Index: Integer;
 begin
- assert(aNode.Tag >= 0);
- l_Index := aNode.Tag;
- Result := FTests[l_Index] as ITest;
+ Result := (aNode As TTestNode).Test;
 end;
 
 procedure TfmGUITestRunner.RunTheTest(aTest: ITest);
