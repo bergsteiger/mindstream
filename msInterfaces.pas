@@ -105,7 +105,6 @@ type
   function pm_GetCurrentDiagramm: ImsDiagramm;
   procedure Serialize;
   procedure DeSerialize;
-  procedure Clear;
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
