@@ -22,15 +22,12 @@ type
   constructor CreatePrim;
  protected
   function CurrentDiagrammIndex: Integer;
-  function pm_GetCurrentDiagramm: ImsDiagramm;
   procedure DiagrammAdded(const aDiagramm: ImsDiagramm); override;
   procedure Serialize;
   procedure DeSerialize;
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
-  property CurrentDiagramm: ImsDiagramm
-   read pm_GetCurrentDiagramm;
  public
   class function Create: ImsDiagramms;
   procedure Assign(anOther: TmsDiagramms);
@@ -57,11 +54,6 @@ end;
 constructor TmsDiagramms.CreatePrim;
 begin
  inherited Create;
-end;
-
-function TmsDiagramms.pm_GetCurrentDiagramm: ImsDiagramm;
-begin
- Result := Items[f_CurrentDiagramm];
 end;
 
 procedure TmsDiagramms.DiagrammAdded(const aDiagramm: ImsDiagramm);
@@ -102,7 +94,6 @@ procedure TmsDiagramms.Assign(anOther: TmsDiagramms);
 begin
  inherited Assign(anOther);
  Self.f_CurrentDiagramm := anOther.CurrentDiagrammIndex;
- CurrentDiagramm.Invalidate;
 end;
 
 procedure TmsDiagramms.Serialize;
