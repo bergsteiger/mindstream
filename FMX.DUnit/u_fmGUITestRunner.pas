@@ -25,15 +25,15 @@ type
   pnlBottom: TPanel;
   lvFailureListView: TListView;
   lblResult: TLabel;
-    btnCheckAll: TSpeedButton;
-    btnUncheckAll: TSpeedButton;
+  btnCheckAll: TSpeedButton;
+  btnUncheckAll: TSpeedButton;
   procedure FormCreate(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
   procedure btRunAllTestClick(Sender: TObject);
   procedure FormShow(Sender: TObject);
   procedure tvTestTreeChangeCheck(Sender: TObject);
   procedure btnCheckAllClick(Sender: TObject);
-    procedure btnUncheckAllClick(Sender: TObject);
+  procedure btnUncheckAllClick(Sender: TObject);
  protected
   FSuite: ITest;
   FTestResult: TTestResult;
@@ -60,7 +60,7 @@ type
 
   procedure ClearResult;
 
-  procedure TraverseTree_(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
+  procedure TraverseTree(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
   procedure TraverseNode(const aNode: TTreeViewItem; aLambda: TDoSomethingWithNode);
 
  public
@@ -158,7 +158,7 @@ end;
 
 procedure TfmGUITestRunner.btnCheckAllClick(Sender: TObject);
 begin
- TraverseTree_(tvTestTree,
+ TraverseTree(tvTestTree,
   procedure(const aNode: TTreeViewItem)
   var
    l_Index: Integer;
@@ -170,7 +170,7 @@ end;
 
 procedure TfmGUITestRunner.btnUncheckAllClick(Sender: TObject);
 begin
- TraverseTree_(tvTestTree,
+ TraverseTree(tvTestTree,
   procedure(const aNode: TTreeViewItem)
   var
    l_Index: Integer;
@@ -201,7 +201,7 @@ begin
 
 end;
 
-procedure TfmGUITestRunner.TraverseTree_(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
+procedure TfmGUITestRunner.TraverseTree(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
 var
  l_Index: Integer;
 begin
