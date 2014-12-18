@@ -15,11 +15,15 @@ type
   Наблюдатель (англ. Observer) — поведенческий шаблон проектирования. Также известен как «подчинённые» (Dependents), «издатель-подписчик» (Publisher-Subscriber). Создает механизм у класса, который позволяет получать экземпляру объекта этого класса оповещения от других объектов об изменении их состояния, тем самым наблюдая за ними[2].
  *)
 
+ TmsInvalidatorLambda = reference to procedure (const anItem: ImsIvalidator);
+
  TmsInvalidators = class
  strict private
   class var f_Subscribers : TmsInvalidatorsList;
  public
   class destructor Destroy;
+ private
+  class procedure DoItems(aLambda: TmsInvalidatorLambda);
  public
   class procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
   class procedure DiagrammAdded(const aDiagramm: ImsDiagramm);
@@ -42,6 +46,15 @@ begin
  FreeAndNil(f_Subscribers);
 end;
 
+class procedure TmsInvalidators.DoItems(aLambda: TmsInvalidatorLambda);
+var
+ l_Subscriber : Pointer;
+begin
+ if (f_Subscribers <> nil) then
+  for l_Subscriber in f_Subscribers do
+   aLambda(ImsIvalidator(l_Subscriber));
+end;
+
 class procedure TmsInvalidators.InvalidateDiagramm(const aDiagramm: ImsDiagramm);
 var
  l_Subscriber : Pointer;
@@ -52,12 +65,13 @@ begin
 end;
 
 class procedure TmsInvalidators.DiagrammAdded(const aDiagramm: ImsDiagramm);
-var
- l_Subscriber : Pointer;
 begin
- if (f_Subscribers <> nil) then
-  for l_Subscriber in f_Subscribers do
-   ImsIvalidator(l_Subscriber).DiagrammAdded(aDiagramm);
+ DoItems(
+  procedure (const anItem: ImsIvalidator)
+  begin
+   anItem.DiagrammAdded(aDiagramm)
+  end
+ );
 end;
 
 class procedure TmsInvalidators.Subscribe(const anInvalidator: ImsIvalidator);
