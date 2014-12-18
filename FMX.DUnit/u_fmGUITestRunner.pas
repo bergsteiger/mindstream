@@ -238,43 +238,47 @@ end;
 procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
 
  function CreateNode(const aTest: ITest): TTreeViewItem;
- begin
+ begin//CreateNode
   Result := TTreeViewItem.Create(self);
 
   Result.IsChecked := True;
   Result.Tag := FTests.Add(aTest);
   Result.Text := aTest.Name;
 
- end;
+ end;//CreateNode
 
  procedure DoFillTestTree(aRootNode: TTreeViewItem; const aTest: ITest);
  var
   l_TestTests: IInterfaceList;
   l_Index: Integer;
   l_TreeViewItem: TTreeViewItem;
- begin
+  l_Test : ITest;
+ begin//DoFillTestTree
   if aTest = nil then
    Exit;
 
-  l_TreeViewItem := CreateNode(aTest);
-
-  if aRootNode = nil then
-   tvTestTree.AddObject(l_TreeViewItem)
-  else
-   aRootNode.AddObject(l_TreeViewItem);
-
   l_TestTests := aTest.Tests;
   for l_Index := 0 to l_TestTests.Count - 1 do
-   DoFillTestTree(l_TreeViewItem, l_TestTests[l_Index] as ITest);
- end;
+  begin
+   l_Test := l_TestTests[l_Index] as ITest;
+   l_TreeViewItem := CreateNode(l_Test);
+   aRootNode.AddObject(l_TreeViewItem);
 
+   DoFillTestTree(l_TreeViewItem, l_Test);
+  end;//for l_Index
+ end;//DoFillTestTree
+
+var
+ l_Node : TTreeViewItem;
 begin
  tvTestTree.Clear;
  FTests.Clear;
 
  tvTestTree.BeginUpdate;
  try
-  DoFillTestTree(nil, Suite);
+  l_Node := CreateNode(Suite);
+  tvTestTree.AddObject(l_Node);
+  DoFillTestTree(l_Node, Suite);
  finally
   tvTestTree.EndUpdate;
  end;//try..finally
