@@ -36,7 +36,6 @@ type
   procedure FormCreate(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
   procedure btRunAllTestClick(Sender: TObject);
-  procedure FormShow(Sender: TObject);
   procedure tvTestTreeChangeCheck(Sender: TObject);
   procedure btnCheckAllClick(Sender: TObject);
   procedure btnUncheckAllClick(Sender: TObject);
@@ -53,8 +52,6 @@ type
 
   function NodeToTest(aNode: TTreeViewItem): ITest;
   function TestToNode(test: ITest): TTreeViewItem;
-
-  procedure SetupGUINodes(aNode: TTreeViewItem);
 
   procedure SetTreeNodeFont(aNode: TTreeViewItem; aColor: TAlphaColor);
 
@@ -260,6 +257,7 @@ begin
  f_Test := aTest;
  Text := aTest.Name;
  aParent.AddObject(Self);
+ aTest.GUIObject := Self;
 end;
 
 procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
@@ -295,20 +293,6 @@ procedure TfmGUITestRunner.FormDestroy(Sender: TObject);
 begin
  Suite := nil;
  inherited;
-end;
-
-procedure TfmGUITestRunner.FormShow(Sender: TObject);
-var
- l_Index: Integer;
- l_Test: ITest;
-begin
- for l_Index := 0 to Pred(tvTestTree.Count) do
- begin
-  l_Test := NodeToTest(tvTestTree.Items[l_Index]);
-  assert(assigned(l_Test));
-  l_Test.GUIObject := tvTestTree.Items[l_Index];
-  SetupGUINodes(tvTestTree.Items[l_Index]);
- end;
 end;
 
 procedure TfmGUITestRunner.InitTree;
@@ -354,20 +338,6 @@ begin
 {$ENDIF}
  aNode.Font.Style := [TFontStyle.fsBold];
  aNode.FontColor := aColor;
-end;
-
-procedure TfmGUITestRunner.SetupGUINodes(aNode: TTreeViewItem);
-var
- l_Test: ITest;
- l_Index: Integer;
-begin
- for l_Index := 0 to Pred(aNode.Count) do
- begin
-  l_Test := NodeToTest(aNode.Items[l_Index]);
-  assert(assigned(l_Test));
-  l_Test.GUIObject := aNode.Items[l_Index];
-  SetupGUINodes(aNode.Items[l_Index]);
- end;
 end;
 
 function TfmGUITestRunner.ShouldRunTest(aTest: ITest): Boolean;

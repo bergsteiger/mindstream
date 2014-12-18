@@ -10,7 +10,6 @@ object fmGUITestRunner: TfmGUITestRunner
   FormFactor.Devices = [Desktop, iPhone, iPad]
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  OnShow = FormShow
   DesignerMasterStyle = 0
   object ToolBar1: TToolBar
     Size.Width = 675.000000000000000000
