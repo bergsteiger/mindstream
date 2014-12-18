@@ -199,20 +199,15 @@ procedure TfmGUITestRunner.TraverseTree(const aTree: TTreeView; aLambda: TDoSome
   l_Index: Integer;
  begin
   for l_Index := 0 to Pred(aNode.Count) do
-  begin//TraverseNode
    TraverseNode(aNode.Items[l_Index]);
-   aLambda(aNode.Items[l_Index]);
-  end;//TraverseNode
+  aLambda(aNode);
  end;
 
 var
  l_Index: Integer;
 begin
  for l_Index := 0 to Pred(aTree.Count) do
- begin
   TraverseNode(aTree.Items[l_Index]);
-  aLambda(aTree.Items[l_Index]);
- end;
 end;
 
 procedure TfmGUITestRunner.ClearResult;
