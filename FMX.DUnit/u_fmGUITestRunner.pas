@@ -235,11 +235,22 @@ begin
  // assert(False);
 end;
 
+type
+ TTestNode = class(TTreeViewItem)
+  public
+   constructor Create(anOwner: TComponent);
+ end;//TTestNode
+
+constructor TTestNode.Create(anOwner: TComponent);
+begin
+ inherited Create(anOwner);
+end;
+
 procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
 
- function CreateNode(const aTest: ITest; aParent: TFmxObject): TTreeViewItem;
+ function CreateNode(const aTest: ITest; aParent: TFmxObject): TTestNode;
  begin//CreateNode
-  Result := TTreeViewItem.Create(self);
+  Result := TTestNode.Create(self);
 
   Result.IsChecked := True;
   Result.Tag := FTests.Add(aTest);
@@ -247,7 +258,7 @@ procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
   aParent.AddObject(Result);
  end;//CreateNode
 
- procedure DoFillTestTree(aRootNode: TTreeViewItem; const aTest: ITest);
+ procedure DoFillTestTree(aRootNode: TTestNode; const aTest: ITest);
  var
   l_TestTests: IInterfaceList;
   l_Index: Integer;
