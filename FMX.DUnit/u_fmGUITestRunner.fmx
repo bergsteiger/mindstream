@@ -158,5 +158,9 @@ object fmGUITestRunner: TfmGUITestRunner
       TextSettings.Font.Style = [fsBold]
       Text = 'TimeCount'
     end
+    object lblRunned: TLabel
+      Position.X = 216.000000000000000000
+      Position.Y = 16.000000000000000000
+    end
   end
 end

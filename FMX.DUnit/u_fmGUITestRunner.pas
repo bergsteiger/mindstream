@@ -32,6 +32,7 @@ type
   lblFailure: TLabel;
   lblFailureCount: TLabel;
   lblTimeCount: TLabel;
+    lblRunned: TLabel;
   procedure FormCreate(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
   procedure btRunAllTestClick(Sender: TObject);
@@ -43,7 +44,7 @@ type
   FSuite: ITest;
   FTestResult: TTestResult;
   FSelectedTests: TInterfaceList;
-
+  f_Runned : Integer;
 
   procedure SetSuite(aValue: ITest);
   procedure InitTree;
@@ -207,6 +208,7 @@ end;
 procedure TfmGUITestRunner.ClearResult;
 begin
  lvFailureListView.ClearItems;
+ f_Runned := 0;
 end;
 
 procedure TfmGUITestRunner.EndTest(test: ITest);
@@ -231,6 +233,8 @@ begin
  lblTimeCount.Text:= FormatElapsedTime (FTestResult.TotalTime);
  lblErrorCount.Text:= IntToStr(FTestResult.ErrorCount);
  lblFailureCount.Text:= IntToStr(FTestResult.FailureCount);
+ Inc(f_Runned);
+ lblRunned.Text := IntToStr(f_Runned);
  // assert(False);
 end;
 
