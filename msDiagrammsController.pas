@@ -126,7 +126,6 @@ end;
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
 begin
  FDiagramms.SelectDiagramm(cbDiagramm.ItemIndex);
- cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
 end;
 
 procedure TmsDiagrammsController.imgMainResize(Sender: TObject);
@@ -175,13 +174,14 @@ begin
  if (FDiagramms <> nil) then
  begin
   if (cbShapes.Items.Count = 0) then
+  begin
    FDiagramms.ShapesForToolbarToList(cbShapes.Items);
+   cbShapes.ItemIndex := 0;
+  end;//cbShapes.Items.Count = 0
   if (FDiagramms.IndexOf(aDiagramm) >= 0) then
   begin
    cbDiagramm.Items.Add(aDiagramm.Name);
    cbDiagramm.ItemIndex := FDiagramms.CurrentDiagrammIndex;
-   FDiagramms.ShapesForToolbarToList(cbShapes.Items);
-   cbShapes.ItemIndex := FDiagramms.CurrentShapeClassIndex;
   end;//FDiagramms.IndexOf(aDiagramm) >= 0
  end;//
 end;

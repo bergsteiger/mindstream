@@ -64,7 +64,6 @@ type
   procedure Invalidate;
   procedure SelectShape(aList: TStrings; anIndex: Integer);
   property Name: String read fName write fName;
-  function CurrentShapeClassIndex: Integer;
   procedure Serialize;
   procedure DeSerialize;
   procedure Assign(const anOther : TmsDiagramm);
@@ -93,11 +92,6 @@ uses
 
 const
  c_FileName = '.json';
-
-function TmsDiagramm.CurrentShapeClassIndex: Integer;
-begin
- Result := TmsShapesForToolbar.Instance.IndexOf(FCurrentClass);
-end;
 
 procedure TmsDiagramm.SelectShape(aList: TStrings; anIndex: Integer);
 begin
