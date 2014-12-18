@@ -70,7 +70,7 @@ begin
  inherited;
 end;
 
-CurrentDiagrammIndex надо нафиг убить
+//CurrentDiagrammIndex надо нафиг убить
 
 function TmsDiagramms.CurrentDiagrammIndex: Integer;
 begin
