@@ -251,7 +251,6 @@ procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
  var
   l_TestTests: IInterfaceList;
   l_Index: Integer;
-  l_TreeViewItem: TTreeViewItem;
   l_Test : ITest;
  begin//DoFillTestTree
   if aTest = nil then
@@ -261,21 +260,17 @@ procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
   for l_Index := 0 to l_TestTests.Count - 1 do
   begin
    l_Test := l_TestTests[l_Index] as ITest;
-   l_TreeViewItem := CreateNode(l_Test, aRootNode);
-   DoFillTestTree(l_TreeViewItem, l_Test);
+   DoFillTestTree(CreateNode(l_Test, aRootNode), l_Test);
   end;//for l_Index
  end;//DoFillTestTree
 
-var
- l_Node : TTreeViewItem;
 begin
  tvTestTree.Clear;
  FTests.Clear;
 
  tvTestTree.BeginUpdate;
  try
-  l_Node := CreateNode(Suite, tvTestTree);
-  DoFillTestTree(l_Node, Suite);
+  DoFillTestTree(CreateNode(Suite, tvTestTree), Suite);
  finally
   tvTestTree.EndUpdate;
  end;//try..finally
