@@ -120,7 +120,7 @@ var
  l_D : ImsDiagramm;
  l_I : Integer;
 begin
- l_I := FDiagramms.CurrentDiagrammIndex;
+ l_I := cbDiagramm.ItemIndex;
  FDiagramms.DeSerialize;
  cbDiagramm.Clear;
  for l_D in FDiagramms do

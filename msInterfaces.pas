@@ -100,7 +100,6 @@ type
 
  ImsDiagramms = interface(ImsDiagrammsList)
  ['{819BEEBA-97BB-48F1-906E-107E67706D19}']
-  function CurrentDiagrammIndex: Integer;
   procedure Serialize;
   procedure DeSerialize;
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
