@@ -209,6 +209,11 @@ procedure TfmGUITestRunner.ClearResult;
 begin
  lvFailureListView.ClearItems;
  f_Runned := 0;
+ TraverseTree(tvTestTree,
+  procedure(const aNode: TTreeViewItem)
+  begin
+   SetTreeNodeFont(aNode, TAlphaColorRec.Black)
+  end)
 end;
 
 procedure TfmGUITestRunner.EndTest(test: ITest);
