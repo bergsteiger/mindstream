@@ -21,7 +21,6 @@ type
   f_CurrentDiagramm : Integer;
   constructor CreatePrim;
  protected
-  function CurrentShapeClassIndex: Integer;
   function CurrentDiagrammIndex: Integer;
   function pm_GetCurrentDiagramm: ImsDiagramm;
   procedure DiagrammAdded(const aDiagramm: ImsDiagramm); override;
@@ -126,11 +125,6 @@ end;
 procedure TmsDiagramms.Serialize;
 begin
  TmsDiagrammsMarshal.Serialize(c_FileName, self);
-end;
-
-function TmsDiagramms.CurrentShapeClassIndex: Integer;
-begin
- Result := CurrentDiagramm.CurrentShapeClassIndex;
 end;
 
 procedure TmsDiagramms.SaveTo(const aFileName: String);
