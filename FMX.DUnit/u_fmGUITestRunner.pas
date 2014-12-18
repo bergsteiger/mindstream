@@ -66,7 +66,6 @@ type
   procedure ClearResult;
 
   procedure TraverseTree(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
-  procedure TraverseNode(const aNode: TTreeViewItem; aLambda: TDoSomethingWithNode);
 
  public
   property Suite: ITest read FSuite write SetSuite;
@@ -193,25 +192,25 @@ begin
  RunTheTest(Suite);
 end;
 
-procedure TfmGUITestRunner.TraverseNode(const aNode: TTreeViewItem; aLambda: TDoSomethingWithNode);
-var
- l_Index: Integer;
-begin
- for l_Index := 0 to Pred(aNode.Count) do
+procedure TfmGUITestRunner.TraverseTree(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
+
+ procedure TraverseNode(const aNode: TTreeViewItem);
+ var
+  l_Index: Integer;
  begin
-  TraverseNode(aNode.Items[l_Index], aLambda);
-  aLambda(aNode.Items[l_Index]);
+  for l_Index := 0 to Pred(aNode.Count) do
+  begin//TraverseNode
+   TraverseNode(aNode.Items[l_Index]);
+   aLambda(aNode.Items[l_Index]);
+  end;//TraverseNode
  end;
 
-end;
-
-procedure TfmGUITestRunner.TraverseTree(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
 var
  l_Index: Integer;
 begin
  for l_Index := 0 to Pred(aTree.Count) do
  begin
-  TraverseNode(aTree.Items[l_Index], aLambda);
+  TraverseNode(aTree.Items[l_Index]);
   aLambda(aTree.Items[l_Index]);
  end;
 end;
