@@ -12,6 +12,7 @@ type
  TmsShapeCreator = class(TmsInterfacedRefcounted, ImsShapeCreator)
  private
   f_ShapeClass : RmsShape;
+  constructor CreatePrim(aShapeClass: RmsShape);
  protected
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
  end;//TmsShapeCreator
@@ -19,6 +20,12 @@ type
 implementation
 
 // TmsShapeCreator
+
+constructor TmsShapeCreator.CreatePrim(aShapeClass: RmsShape);
+begin
+ inherited Create;
+ f_ShapeClass := aShapeClass;
+end;
 
 function TmsShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 begin
