@@ -31,7 +31,8 @@ type
   btAddDiagramm: TButton;
   btSaveDiagramm: TButton;
   btLoadDiagramm: TButton;
-  FDiagramms: ImsDiagramms;
+  f_DiagrammsRoot: ImsDiagramms;
+  f_CurrentDiagramms : ImsDiagramms;
   f_CurrentDiagramm : ImsDiagramm;
   procedure cbDiagrammChange(Sender: TObject);
   procedure btAddDiagrammClick(Sender: TObject);
@@ -41,9 +42,14 @@ type
   procedure btLoadDiagrammClick(Sender: TObject);
   function pm_GetCurrentDiagramm: ImsDiagramm;
   procedure pm_SetCurrentDiagramm(const aValue: ImsDiagramm);
+  function pm_GetCurrentDiagramms: ImsDiagramms;
+  procedure pm_SetCurrentDiagramms(const aValue: ImsDiagramms);
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramm: ImsDiagramm); override;
+  property CurrentDiagramms : ImsDiagramms
+   read pm_GetCurrentDiagramms
+   write pm_SetCurrentDiagramms;
  public
   constructor Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton);
   destructor Destroy; override;
@@ -89,8 +95,9 @@ begin
  btLoadDiagramm.OnClick := btLoadDiagrammClick;
  imgMain.OnMouseDown := imgMainMouseDown;
  imgMain.Align := TAlignLayout.alClient;
- FDiagramms := TmsDiagramms.Create;
- FDiagramms.AddNewDiagramm;
+ f_DiagrammsRoot := TmsDiagramms.Create;
+ CurrentDiagramms := f_DiagrammsRoot;
+ CurrentDiagramms.AddNewDiagramm;
 end;
 
 procedure TmsDiagrammsController.DoInvalidateDiagramm(const aDiagramm: ImsDiagramm);
@@ -115,39 +122,60 @@ begin
  end;//not aValue.EQ(f_CurrentDiagramm)
 end;
 
+function TmsDiagrammsController.pm_GetCurrentDiagramms: ImsDiagramms;
+begin
+ Result := f_CurrentDiagramms;
+end;
+
+procedure TmsDiagrammsController.pm_SetCurrentDiagramms(const aValue: ImsDiagramms);
+begin
+ if (f_CurrentDiagramms <> aValue) then
+ begin
+  f_CurrentDiagramms := aValue;
+  if (f_CurrentDiagramms <> nil) then
+   if (cbShapes.Items.Count = 0) then
+   begin
+    f_CurrentDiagramms.ShapesForToolbarToList(cbShapes.Items);
+    cbShapes.ItemIndex := 0;
+   end;//cbShapes.Items.Count = 0
+ end;//f_CurrentDiagramms <> aValue
+end;
+
 procedure TmsDiagrammsController.btLoadDiagrammClick(Sender: TObject);
 var
  l_D : ImsDiagramm;
  l_I : Integer;
 begin
  l_I := cbDiagramm.ItemIndex;
- FDiagramms.DeSerialize;
+ f_DiagrammsRoot.DeSerialize;
  cbDiagramm.Clear;
- for l_D in FDiagramms do
+ Assert(f_DiagrammsRoot.EQ(CurrentDiagramms));
+ for l_D in f_DiagrammsRoot do
   cbDiagramm.Items.Add(l_D.Name);
  cbDiagramm.ItemIndex := l_I;
 end;
 
 procedure TmsDiagrammsController.btSaveDiagrammClick(Sender: TObject);
 begin
- FDiagramms.Serialize;
+ f_DiagrammsRoot.Serialize;
 end;
 
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
 begin
- CurrentDiagramm := FDiagramms.SelectDiagramm(cbDiagramm.Items[cbDiagramm.ItemIndex]);
+ CurrentDiagramm := CurrentDiagramms.SelectDiagramm(cbDiagramm.Items[cbDiagramm.ItemIndex]);
  CurrentDiagramm.Invalidate;
 end;
 
 procedure TmsDiagrammsController.btAddDiagrammClick(Sender: TObject);
 begin
- FDiagramms.AddNewDiagramm;
+ CurrentDiagramms.AddNewDiagramm;
 end;
 
 destructor TmsDiagrammsController.Destroy;
 begin
  f_CurrentDiagramm := nil;
- FDiagramms := nil;
+ CurrentDiagramms := nil;
+ f_DiagrammsRoot := nil;
  inherited;
 end;
 
@@ -174,19 +202,14 @@ end;
 
 procedure TmsDiagrammsController.DoDiagrammAdded(const aDiagramm: ImsDiagramm);
 begin
- if (FDiagramms <> nil) then
+ if (CurrentDiagramms <> nil) then
  begin
-  if (cbShapes.Items.Count = 0) then
-  begin
-   FDiagramms.ShapesForToolbarToList(cbShapes.Items);
-   cbShapes.ItemIndex := 0;
-  end;//cbShapes.Items.Count = 0
-  if (FDiagramms.IndexOf(aDiagramm) >= 0) then
+  if (CurrentDiagramms.IndexOf(aDiagramm) >= 0) then
   begin
    cbDiagramm.Items.Add(aDiagramm.Name);
    CurrentDiagramm := aDiagramm;
-  end;//FDiagramms.IndexOf(aDiagramm) >= 0
- end;//
+  end;//CurrentDiagramms.IndexOf(aDiagramm) >= 0
+ end;//CurrentDiagramms <> nil
 end;
 
 end.
