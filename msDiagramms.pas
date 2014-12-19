@@ -22,7 +22,6 @@ type
   procedure DiagrammAdded(const aDiagramm: ImsDiagramm); override;
   procedure Serialize;
   procedure DeSerialize;
-  function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
  public
@@ -56,19 +55,6 @@ end;
 procedure TmsDiagramms.DiagrammAdded(const aDiagramm: ImsDiagramm);
 begin
  inherited;
-end;
-
-function TmsDiagramms.SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
-var
- l_D : ImsDiagramm;
-begin
- Result := nil;
- for l_D in Items do
-  if (l_D.Name = aDiagrammName) then
-  begin
-   Result := l_D;
-   break;
-  end;//l_D.Name = aDiagrammName
 end;
 
 const

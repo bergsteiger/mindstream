@@ -32,7 +32,7 @@ type
   btSaveDiagramm: TButton;
   btLoadDiagramm: TButton;
   f_DiagrammsRoot: ImsDiagramms;
-  f_CurrentDiagramms : ImsDiagramms;
+  f_CurrentDiagramms : ImsDiagrammsList;
   f_CurrentDiagramm : ImsDiagramm;
   procedure cbDiagrammChange(Sender: TObject);
   procedure btAddDiagrammClick(Sender: TObject);
@@ -42,12 +42,12 @@ type
   procedure btLoadDiagrammClick(Sender: TObject);
   function pm_GetCurrentDiagramm: ImsDiagramm;
   procedure pm_SetCurrentDiagramm(const aValue: ImsDiagramm);
-  function pm_GetCurrentDiagramms: ImsDiagramms;
-  procedure pm_SetCurrentDiagramms(const aValue: ImsDiagramms);
+  function pm_GetCurrentDiagramms: ImsDiagrammsList;
+  procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
-  property CurrentDiagramms : ImsDiagramms
+  property CurrentDiagramms : ImsDiagrammsList
    read pm_GetCurrentDiagramms
    write pm_SetCurrentDiagramms;
  public
@@ -124,12 +124,12 @@ begin
  end;//not aValue.EQ(f_CurrentDiagramm)
 end;
 
-function TmsDiagrammsController.pm_GetCurrentDiagramms: ImsDiagramms;
+function TmsDiagrammsController.pm_GetCurrentDiagramms: ImsDiagrammsList;
 begin
  Result := f_CurrentDiagramms;
 end;
 
-procedure TmsDiagrammsController.pm_SetCurrentDiagramms(const aValue: ImsDiagramms);
+procedure TmsDiagrammsController.pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
 var
  l_Index : Integer;
 begin

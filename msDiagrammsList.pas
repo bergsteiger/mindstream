@@ -27,6 +27,7 @@ type
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
   function AddNewDiagramm: ImsDiagramm;
   procedure DiagrammAdded(const aDiagramm: ImsDiagramm); virtual;
+  function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
  end;//TmsDiagrammsList
 
 implementation
@@ -64,6 +65,19 @@ end;
 procedure TmsDiagrammsList.DiagrammAdded(const aDiagramm: ImsDiagramm);
 begin
  TmsInvalidators.DiagrammAdded(Self, aDiagramm);
+end;
+
+function TmsDiagrammsList.SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
+var
+ l_D : ImsDiagramm;
+begin
+ Result := nil;
+ for l_D in Items do
+  if (l_D.Name = aDiagrammName) then
+  begin
+   Result := l_D;
+   break;
+  end;//l_D.Name = aDiagrammName
 end;
 
 end.

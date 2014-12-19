@@ -69,6 +69,7 @@ type
   function IndexOf(const anItem: ImsDiagramm): Integer;
   function AddNewDiagramm: ImsDiagramm;
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
+  function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
  end;//ImsDiagrammsList
 
  ImsShape = interface(ImsDiagrammsList)
@@ -90,6 +91,11 @@ type
  end;//ImsShapeCreator
 
  ImsDiagrammsHolder = interface
+  function pm_GetCurrentDiagramms: ImsDiagrammsList;
+  procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
+  property CurrentDiagramms : ImsDiagrammsList
+   read pm_GetCurrentDiagramms
+   write pm_SetCurrentDiagramms;
  end;//ImsDiagrammsHolder
 
  TmsClickContext = record
@@ -117,7 +123,6 @@ type
  ['{819BEEBA-97BB-48F1-906E-107E67706D19}']
   procedure Serialize;
   procedure DeSerialize;
-  function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
  end;//ImsDiagramms
 
  ImsIvalidator = interface
