@@ -69,7 +69,8 @@ uses
  System.SysUtils,
  FMX.Types,
  msShapesForToolbar,
- Math
+ Math,
+ msShapeCreator
  ;
 
 {$Include msIvalidator.mixin.pas}
@@ -193,7 +194,7 @@ end;
 
 procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
 begin
- CurrentDiagramm.ProcessClick(TmsShapesForToolbar.Instance.Items[cbShapes.ItemIndex], aStart);
+ CurrentDiagramm.ProcessClick(TmsShapeCreator.Create(TmsShapesForToolbar.Instance.Items[cbShapes.ItemIndex]), aStart);
 end;
 
 procedure TmsDiagrammsController.DrawTo(const aCanvas: TCanvas);

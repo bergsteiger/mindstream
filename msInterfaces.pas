@@ -93,7 +93,7 @@ type
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
   function Get_Name: String;
   procedure Invalidate;
-  procedure ProcessClick(const aCurrentClass: TClass; const aStart: TPointF);
+  procedure ProcessClick(const aShapeCreator: ImsShapeCreator; const aStart: TPointF);
   procedure Clear;
   procedure DrawTo(const aCanvas: TCanvas);
   function AddShape(const aShape: ImsShape): ImsShape;
