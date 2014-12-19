@@ -68,7 +68,8 @@ uses
  ,
  System.SysUtils,
  FMX.Types,
- msShapesForToolbar
+ msShapesForToolbar,
+ Math
  ;
 
 {$Include msIvalidator.mixin.pas}
@@ -128,16 +129,22 @@ begin
 end;
 
 procedure TmsDiagrammsController.pm_SetCurrentDiagramms(const aValue: ImsDiagramms);
+var
+ l_Index : Integer;
 begin
  if (f_CurrentDiagramms <> aValue) then
  begin
   f_CurrentDiagramms := aValue;
+  l_Index := cbShapes.ItemIndex;
+  cbShapes.Items.Clear;
   if (f_CurrentDiagramms <> nil) then
-   if (cbShapes.Items.Count = 0) then
-   begin
-    f_CurrentDiagramms.ShapesForToolbarToList(cbShapes.Items);
-    cbShapes.ItemIndex := 0;
-   end;//cbShapes.Items.Count = 0
+  begin
+   f_CurrentDiagramms.ShapesForToolbarToList(cbShapes.Items);
+   if (l_Index < 0) then
+    if (cbShapes.Count > 0) then
+     l_Index := 0;
+   cbShapes.ItemIndex := Min(cbShapes.Count-1, l_Index);
+  end;//f_CurrentDiagramms <> nil
  end;//f_CurrentDiagramms <> aValue
 end;
 
