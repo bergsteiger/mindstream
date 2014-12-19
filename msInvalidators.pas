@@ -26,7 +26,7 @@ type
   class procedure DoItems(aLambda: TmsInvalidatorLambda);
  public
   class procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
-  class procedure DiagrammAdded(const aDiagramm: ImsDiagramm);
+  class procedure DiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);
   class procedure Subscribe(const anInvalidator: ImsIvalidator);
   // - подписываемся
   class procedure UnSubscribe(const anInvalidator: ImsIvalidator);
@@ -65,12 +65,12 @@ begin
  );
 end;
 
-class procedure TmsInvalidators.DiagrammAdded(const aDiagramm: ImsDiagramm);
+class procedure TmsInvalidators.DiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);
 begin
  DoItems(
   procedure (const anItem: ImsIvalidator)
   begin
-   anItem.DiagrammAdded(aDiagramm)
+   anItem.DiagrammAdded(aDiagramms, aDiagramm)
   end
  );
 end;

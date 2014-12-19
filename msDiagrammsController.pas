@@ -46,7 +46,7 @@ type
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagramms);
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
-  procedure DoDiagrammAdded(const aDiagramm: ImsDiagramm); override;
+  procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
   property CurrentDiagramms : ImsDiagramms
    read pm_GetCurrentDiagramms
    write pm_SetCurrentDiagramms;
@@ -200,8 +200,11 @@ begin
  Self.ProcessClick(TPointF.Create(X, Y));
 end;
 
-procedure TmsDiagrammsController.DoDiagrammAdded(const aDiagramm: ImsDiagramm);
+procedure TmsDiagrammsController.DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);
 begin
+ Assert(CurrentDiagramms <> nil);
+ if not CurrentDiagramms.EQ(aDiagramms) then
+  Exit;
  if (CurrentDiagramms <> nil) then
  begin
   if (CurrentDiagramms.IndexOf(aDiagramm) >= 0) then

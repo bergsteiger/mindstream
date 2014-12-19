@@ -108,7 +108,7 @@ type
 
  ImsIvalidator = interface
   procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
-  procedure DiagrammAdded(const aDiagramm: ImsDiagramm);
+  procedure DiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);
  end;//ImsIvalidator
 
 implementation

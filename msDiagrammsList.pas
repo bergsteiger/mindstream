@@ -63,7 +63,7 @@ end;
 
 procedure TmsDiagrammsList.DiagrammAdded(const aDiagramm: ImsDiagramm);
 begin
- TmsInvalidators.DiagrammAdded(aDiagramm);
+ TmsInvalidators.DiagrammAdded(Self, aDiagramm);
 end;
 
 end.
