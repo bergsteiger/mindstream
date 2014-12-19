@@ -89,6 +89,9 @@ type
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
  end;//ImsShapeCreator
 
+ ImsDiagrammsHolder = interface
+ end;//ImsDiagrammsHolder
+
  TmsClickContext = record
   public
    rShapeCreator: ImsShapeCreator;

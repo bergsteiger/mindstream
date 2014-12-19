@@ -23,7 +23,7 @@ uses
 type
  TmsIvalidatorParent = TmsInterfacedRefcounted;
  {$Include msIvalidator.mixin.pas}
- TmsDiagrammsController = class(TmsIvalidator)
+ TmsDiagrammsController = class(TmsIvalidator, ImsDiagrammsHolder)
  private
   imgMain: TPaintBox;
   cbShapes: TComboBox;
