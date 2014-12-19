@@ -85,6 +85,10 @@ type
 
  TmsShapesEnumerator = TEnumerator<ImsShape>;
 
+ ImsShapeCreator = interface
+  function Create(const aContext: TmsMakeShapeContext): ImsShape;
+ end;//ImsShapeCreator
+
  ImsDiagramm = interface(ImsShapesProvider)
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
   function Get_Name: String;
