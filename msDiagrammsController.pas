@@ -23,7 +23,7 @@ uses
 type
  TmsIvalidatorParent = TmsInterfacedRefcounted;
  {$Include msIvalidator.mixin.pas}
- TmsDiagrammsController = class(TmsIvalidator, ImsDiagrammsHolder)
+ TmsDiagrammsController = class(TmsIvalidator)
  private
   imgMain: TPaintBox;
   cbShapes: TComboBox;
@@ -72,6 +72,39 @@ uses
  Math,
  msShapeCreator
  ;
+
+type
+ TmsDiagrammsHolder = class(TmsInterfacedRefcounted, ImsDiagrammsHolder)
+ private
+  f_DiagrammsController : TmsDiagrammsController;
+  constructor CreatePrim(aDiagrammsController : TmsDiagrammsController);
+ protected
+  function pm_GetCurrentDiagramms: ImsDiagrammsList;
+  procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
+ public
+  class function Create(aDiagrammsController : TmsDiagrammsController): ImsDiagrammsHolder;
+ end;//TmsDiagrammsHolder
+
+constructor TmsDiagrammsHolder.CreatePrim(aDiagrammsController : TmsDiagrammsController);
+begin
+ inherited Create;
+ f_DiagrammsController := aDiagrammsController;
+end;
+
+class function TmsDiagrammsHolder.Create(aDiagrammsController : TmsDiagrammsController): ImsDiagrammsHolder;
+begin
+ Result := CreatePrim(aDiagrammsController);
+end;
+
+function TmsDiagrammsHolder.pm_GetCurrentDiagramms: ImsDiagrammsList;
+begin
+ Result := f_DiagrammsController.CurrentDiagramms;
+end;
+
+procedure TmsDiagrammsHolder.pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
+begin
+ f_DiagrammsController.CurrentDiagramms := aValue;
+end;
 
 {$Include msIvalidator.mixin.pas}
 
@@ -194,7 +227,7 @@ end;
 
 procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
 begin
- CurrentDiagramm.ProcessClick(TmsClickContext.Create(TmsShapeCreator.Create(TmsShapesForToolbar.Instance.Items[cbShapes.ItemIndex]), aStart, Self));
+ CurrentDiagramm.ProcessClick(TmsClickContext.Create(TmsShapeCreator.Create(TmsShapesForToolbar.Instance.Items[cbShapes.ItemIndex]), aStart, TmsDiagrammsHolder.Create(Self)));
 end;
 
 procedure TmsDiagrammsController.DrawTo(const aCanvas: TCanvas);
