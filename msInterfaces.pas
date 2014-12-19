@@ -131,6 +131,9 @@ type
   procedure DiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);
  end;//ImsIvalidator
 
+ ImsDiagrammsController = interface
+ end;//ImsDiagrammsController
+
 implementation
 
 // TmsDrawContext
