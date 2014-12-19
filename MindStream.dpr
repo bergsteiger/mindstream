@@ -49,7 +49,8 @@ uses
   msInvalidators in 'msInvalidators.pas',
   msInterfaces in 'msInterfaces.pas',
   msStreamUtils in 'Core\msStreamUtils.pas',
-  msPicker in 'ShapeTools\msPicker.pas';
+  msPicker in 'ShapeTools\msPicker.pas',
+  msShapeCreator in 'msShapeCreator.pas';
 
 {$R *.res}
 
