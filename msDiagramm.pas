@@ -44,7 +44,7 @@ type
   fName: String;
  private
   function CurrentAddedShape: ImsShape;
-  procedure BeginShape(const aShapeCreator: ImsShapeCreator; const aStart: TPointF);
+  procedure BeginShape(const aClickContext: TmsClickContext);
   procedure EndShape(const aFinish: TPointF);
   function ShapeIsEnded: Boolean;
   function ShapeByPt(const aPoint: TPointF): ImsShape;
@@ -57,7 +57,7 @@ type
  public
   class function Create(const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
-  procedure ProcessClick(const aShapeCreator: ImsShapeCreator; const aStart: TPointF);
+  procedure ProcessClick(const aClickContext: TmsClickContext);
   procedure Clear;
   procedure Invalidate;
   property Name: String read fName write fName;
@@ -94,18 +94,18 @@ begin
  TmsDiagrammMarshal.Serialize(Self.Name + c_FileName, self);
 end;
 
-procedure TmsDiagramm.ProcessClick(const aShapeCreator: ImsShapeCreator; const aStart: TPointF);
+procedure TmsDiagramm.ProcessClick(const aClickContext: TmsClickContext);
 begin
  if ShapeIsEnded then
   // - Ï˚ Õ≈ ƒŒ¡¿¬ÀﬂÀ» ÔËÏËÚË‚‡ - Ì‡‰Ó Â„Ó ƒŒ¡¿¬»“‹
-  BeginShape(aShapeCreator, aStart)
+  BeginShape(aClickContext)
  else
-  EndShape(aStart);
+  EndShape(aClickContext.rClickPoint);
 end;
 
-procedure TmsDiagramm.BeginShape(const aShapeCreator: ImsShapeCreator; const aStart: TPointF);
+procedure TmsDiagramm.BeginShape(const aClickContext: TmsClickContext);
 begin
- FCurrentAddedShape := aShapeCreator.CreateShape(TmsMakeShapeContext.Create(aStart, Self));
+ FCurrentAddedShape := aClickContext.rShapeCreator.CreateShape(TmsMakeShapeContext.Create(aClickContext.rClickPoint, Self));
  if (FCurrentAddedShape <> nil) then
  begin
   Items.Add(FCurrentAddedShape);
