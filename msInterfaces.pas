@@ -86,7 +86,7 @@ type
  TmsShapesEnumerator = TEnumerator<ImsShape>;
 
  ImsShapeCreator = interface
-  function Create(const aContext: TmsMakeShapeContext): ImsShape;
+  function CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
  end;//ImsShapeCreator
 
  ImsDiagramm = interface(ImsShapesProvider)

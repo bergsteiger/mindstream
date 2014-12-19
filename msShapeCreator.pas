@@ -4,23 +4,25 @@ interface
 
 uses
  msInterfaces,
- msInterfacedRefcounted
+ msInterfacedRefcounted,
+ msShape
  ;
 
 type
  TmsShapeCreator = class(TmsInterfacedRefcounted, ImsShapeCreator)
+ private
+  f_ShapeClass : RmsShape;
  protected
-  function Create(const aContext: TmsMakeShapeContext): ImsShape;
+  function CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
  end;//TmsShapeCreator
 
 implementation
 
 // TmsShapeCreator
 
-function TmsShapeCreator.Create(const aContext: TmsMakeShapeContext): ImsShape;
+function TmsShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 begin
- Assert(false);
- Result := nil;
+ Result := f_ShapeClass.Create(aContext);
 end;
 
 end.
