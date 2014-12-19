@@ -132,6 +132,8 @@ type
  end;//ImsIvalidator
 
  ImsDiagrammsController = interface
+  procedure Clear;
+  procedure DrawTo(const aCanvas: TCanvas);
  end;//ImsDiagrammsController
 
 implementation

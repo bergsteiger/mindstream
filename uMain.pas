@@ -9,7 +9,8 @@ uses
   FMX.Objects, FMX.Menus, FMX.Edit, FMX.ListBox, msDiagramm,
 
   msDiagramms,
-  msDiagrammsController
+  msDiagrammsController,
+  msInterfaces
   ;
 
 type
@@ -35,7 +36,7 @@ type
     procedure btnClearImageClick(Sender: TObject);
     procedure imgMainPaint(Sender: TObject; Canvas: TCanvas);
   private
-   FDiagrammsController: TmsDiagrammsController;
+   FDiagrammsController: ImsDiagrammsController;
   public
     { Public declarations }
   end;
@@ -68,7 +69,7 @@ end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
 begin
- FreeAndNil(FDiagrammsController);
+ FDiagrammsController := nil;
 end;
 
 procedure TfmMain.imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
