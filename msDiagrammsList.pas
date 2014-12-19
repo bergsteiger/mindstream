@@ -56,7 +56,7 @@ end;
 
 function TmsDiagrammsList.AddNewDiagramm: ImsDiagramm;
 begin
- Result := TmsDiagramm.Create('Диаграмма №' + IntToStr(Items.Count + 1));
+ Result := TmsDiagramm.Create('№' + IntToStr(Items.Count + 1));
  AddDiagramm(Result);
  DiagrammAdded(Result);
 end;
