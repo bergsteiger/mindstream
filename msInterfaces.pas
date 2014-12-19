@@ -89,6 +89,13 @@ type
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
  end;//ImsShapeCreator
 
+ TmsClickContext = record
+  public
+   rShapeCreator: ImsShapeCreator;
+   rClickPoint: TPointF;
+   constructor Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF);
+ end;//TmsClickContext
+
  ImsDiagramm = interface(ImsShapesProvider)
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
   function Get_Name: String;
@@ -150,6 +157,14 @@ begin
   rStrokeColor := TAlphaColorRec.Black;
   rStrokeThickness := 1;
  end;//aCtx.rMoving
+end;
+
+// TmsClickContext
+
+constructor TmsClickContext.Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF);
+begin
+ rShapeCreator := aShapeCreator;
+ rClickPoint := aClickPoint;
 end;
 
 end.
