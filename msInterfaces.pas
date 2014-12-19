@@ -102,7 +102,8 @@ type
   public
    rShapeCreator: ImsShapeCreator;
    rClickPoint: TPointF;
-   constructor Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF);
+   rDiagrammsHolder : ImsDiagrammsHolder;
+   constructor Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF; const aDiagrammsHolder : ImsDiagrammsHolder);
  end;//TmsClickContext
 
  ImsDiagramm = interface(ImsShapesProvider)
@@ -169,10 +170,11 @@ end;
 
 // TmsClickContext
 
-constructor TmsClickContext.Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF);
+constructor TmsClickContext.Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF; const aDiagrammsHolder : ImsDiagrammsHolder);
 begin
  rShapeCreator := aShapeCreator;
  rClickPoint := aClickPoint;
+ rDiagrammsHolder := aDiagrammsHolder;
 end;
 
 end.
