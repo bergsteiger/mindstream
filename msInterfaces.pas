@@ -38,11 +38,14 @@ type
    constructor Create(const aCanvas : TCanvas);
  end;//TmsDrawContext
 
+ ImsDiagrammsHolder = interface;
+
  TmsMakeShapeContext = record
   public
    rStartPoint: TPointF;
    rShapesController: ImsShapesController;
-   constructor Create(aStartPoint: TPointF; const aShapesController: ImsShapesController);
+   rDiagrammsHolder: ImsDiagrammsHolder;
+   constructor Create(aStartPoint: TPointF; const aShapesController: ImsShapesController; aDiagrammsHolder: ImsDiagrammsHolder);
  end;//TmsMakeShapeContext
 
  TmsEndShapeContext = TmsMakeShapeContext;
@@ -148,10 +151,11 @@ end;
 
 // TmsMakeShapeContext
 
-constructor TmsMakeShapeContext.Create(aStartPoint: TPointF; const aShapesController: ImsShapesController);
+constructor TmsMakeShapeContext.Create(aStartPoint: TPointF; const aShapesController: ImsShapesController; aDiagrammsHolder: ImsDiagrammsHolder);
 begin
  rStartPoint := aStartPoint;
  rShapesController := aShapesController;
+ rDiagrammsHolder := aDiagrammsHolder;
 end;
 
 // TmsDrawOptionsContext

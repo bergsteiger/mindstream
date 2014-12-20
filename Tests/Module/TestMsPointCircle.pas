@@ -32,7 +32,7 @@ implementation
 
 procedure TestTmsPointCircle.SetUp;
 begin
-  FmsPointCircle := TmsPointCircle.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil));
+  FmsPointCircle := TmsPointCircle.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
 end;
 
 procedure TestTmsPointCircle.TearDown;

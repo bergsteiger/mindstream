@@ -39,7 +39,7 @@ implementation
 
 procedure TestTmsRectangle.SetUp;
 begin
-  FmsRectangle := TmsRectangle.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil));
+  FmsRectangle := TmsRectangle.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
 end;
 
 procedure TestTmsRectangle.TearDown;

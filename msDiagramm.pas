@@ -45,7 +45,7 @@ type
  private
   function CurrentAddedShape: ImsShape;
   procedure BeginShape(const aClickContext: TmsClickContext);
-  procedure EndShape(const aFinish: TPointF);
+  procedure EndShape(const aFinish: TPointF; aDiagrammsHolder : ImsDiagrammsHolder);
   function ShapeIsEnded: Boolean;
   function ShapeByPt(const aPoint: TPointF): ImsShape;
   procedure RemoveShape(const aShape: ImsShape);
@@ -100,12 +100,12 @@ begin
   // - ìû ÍÅ ÄÎÁÀÂËßËÈ ïğèìèòèâà - íàäî åãî ÄÎÁÀÂÈÒÜ
   BeginShape(aClickContext)
  else
-  EndShape(aClickContext.rClickPoint);
+  EndShape(aClickContext.rClickPoint, aClickContext.rDiagrammsHolder);
 end;
 
 procedure TmsDiagramm.BeginShape(const aClickContext: TmsClickContext);
 begin
- FCurrentAddedShape := aClickContext.rShapeCreator.CreateShape(TmsMakeShapeContext.Create(aClickContext.rClickPoint, Self));
+ FCurrentAddedShape := aClickContext.rShapeCreator.CreateShape(TmsMakeShapeContext.Create(aClickContext.rClickPoint, Self, aClickContext.rDiagrammsHolder));
  if (FCurrentAddedShape <> nil) then
  begin
   Items.Add(FCurrentAddedShape);
@@ -193,10 +193,10 @@ begin
  end; // try..finally
 end;
 
-procedure TmsDiagramm.EndShape(const aFinish: TPointF);
+procedure TmsDiagramm.EndShape(const aFinish: TPointF; aDiagrammsHolder : ImsDiagrammsHolder);
 begin
  assert(CurrentAddedShape <> nil);
- CurrentAddedShape.EndTo(TmsEndShapeContext.Create(aFinish, Self));
+ CurrentAddedShape.EndTo(TmsEndShapeContext.Create(aFinish, Self, aDiagrammsHolder));
  FCurrentAddedShape := nil;
  Invalidate;
 end;

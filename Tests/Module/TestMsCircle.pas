@@ -34,7 +34,7 @@ implementation
 
 procedure TestTmsCircle.SetUp;
 begin
-  FmsCircle := TmsCircle.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil));
+  FmsCircle := TmsCircle.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
 end;
 
 procedure TestTmsCircle.TearDown;

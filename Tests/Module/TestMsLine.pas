@@ -43,7 +43,7 @@ uses
 
 procedure TestTmsLine.SetUp;
 begin
-  FmsLine := TmsLine.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil));
+  FmsLine := TmsLine.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
 end;
 
 procedure TestTmsLine.TearDown;
