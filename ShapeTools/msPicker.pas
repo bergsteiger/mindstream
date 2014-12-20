@@ -20,6 +20,7 @@ class function TmsPicker.Create(const aCtx: TmsMakeShapeContext): ImsShape;
 var
  l_PickedShape : ImsShape;
 begin
+ Result := nil;
  l_PickedShape := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
  if (l_PickedShape = nil) then
   Exit;
