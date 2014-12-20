@@ -156,11 +156,13 @@ end;
 
 procedure TmsDiagrammsController.pm_SetCurrentDiagramm(const aValue: ImsDiagramm);
 begin
- if not aValue.EQ(f_CurrentDiagramm) then
+ if (aValue = nil) OR not aValue.EQ(f_CurrentDiagramm) then
  begin
   f_CurrentDiagramm := aValue;
-  cbDiagramm.ItemIndex := cbDiagramm.Items.IndexOf(aValue.Name);
-  f_CurrentDiagramm.Invalidate;
+  if (aValue <> nil) then
+   cbDiagramm.ItemIndex := cbDiagramm.Items.IndexOf(aValue.Name);
+  if (f_CurrentDiagramm <> nil) then
+   f_CurrentDiagramm.Invalidate;
  end;//not aValue.EQ(f_CurrentDiagramm)
 end;
 
@@ -178,9 +180,12 @@ begin
   f_CurrentDiagramms := aValue;
   l_Index := cbShapes.ItemIndex;
   cbShapes.Items.Clear;
-  if (f_CurrentDiagramms <> nil) then
+  if (f_CurrentDiagramms = nil) then
+   CurrentDiagramm := nil
+  else
   begin
    f_CurrentDiagramms.ShapesForToolbarToList(cbShapes.Items);
+   CurrentDiagramm := f_CurrentDiagramms.FirstDiagramm;
    if (l_Index < 0) then
     if (cbShapes.Count > 0) then
      l_Index := 0;
@@ -210,7 +215,9 @@ end;
 
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
 begin
+ Assert(CurrentDiagramms <> nil);
  CurrentDiagramm := CurrentDiagramms.SelectDiagramm(cbDiagramm.Items[cbDiagramm.ItemIndex]);
+ Assert(CurrentDiagramm <> nil);
  CurrentDiagramm.Invalidate;
 end;
 

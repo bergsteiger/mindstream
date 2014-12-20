@@ -84,7 +84,10 @@ end;
 
 function TmsDiagrammsList.FirstDiagramm: ImsDiagramm;
 begin
- Result := Items.First;
+ if (Items.Count <= 0) then
+  Result := nil
+ else
+  Result := Items.First;
 end;
 
 function TmsDiagrammsList.pm_GetCount: Integer;
