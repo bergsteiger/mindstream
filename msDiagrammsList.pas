@@ -28,6 +28,7 @@ type
   function AddNewDiagramm: ImsDiagramm;
   procedure DiagrammAdded(const aDiagramm: ImsDiagramm); virtual;
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
+  function FirstDiagramm: ImsDiagramm;
   function pm_GetCount: Integer;
  end;//TmsDiagrammsList
 
@@ -79,6 +80,11 @@ begin
    Result := l_D;
    break;
   end;//l_D.Name = aDiagrammName
+end;
+
+function TmsDiagrammsList.FirstDiagramm: ImsDiagramm;
+begin
+ Result := Items.First;
 end;
 
 function TmsDiagrammsList.pm_GetCount: Integer;
