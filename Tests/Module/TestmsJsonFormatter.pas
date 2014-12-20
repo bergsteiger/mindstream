@@ -54,6 +54,7 @@ begin
  l_Result := TStringList.Create;
  // TODO: Setup method call parameters
  l_Result.Text:= TmsFormatter.FormatJson(l_JsonFileBeforeFormat.Text);
+ l_Result.SaveToFile('e:\json.json');
  // TODO: Validate method results
  CheckTrue(l_FileEtalon.Equals(l_Result));
 

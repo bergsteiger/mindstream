@@ -71,7 +71,6 @@ begin
      Result:= Result + l_ch;
   end;// case l_ch of
  end;// for l_ch in aJson
- Result := UTF8Encode(Result)
 end;
 
 end.
