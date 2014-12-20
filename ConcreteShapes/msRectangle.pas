@@ -59,6 +59,8 @@ procedure TmsRectangle.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Finish : TPointF;
 begin
+ StartPoint:= TPointF.Create(StartPoint.X - InitialWidth /2,
+                            StartPoint.Y - InitialHeight/2);
  l_Finish := TPointF.Create(StartPoint.X + InitialWidth,
                             StartPoint.Y + InitialHeight);
  aCtx.rCanvas.DrawRect(TRectF.Create(StartPoint,

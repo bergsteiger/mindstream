@@ -48,7 +48,7 @@ type
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
   procedure DrawTo(const aCtx: TmsDrawContext);
-  property StartPoint : TPointF read FStartPoint;
+  property StartPoint : TPointF read pm_GetStartPoint write FStartPoint;
   class function IsTool: Boolean; virtual;
   class function IsForToolbar: Boolean; virtual;
   procedure Assign(anOther : TmsShape);
