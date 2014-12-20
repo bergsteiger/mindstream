@@ -73,6 +73,9 @@ type
   function AddNewDiagramm: ImsDiagramm;
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
+  function pm_GetCount: Integer;
+  property Count: Integer
+   read pm_GetCount;
  end;//ImsDiagrammsList
 
  ImsShape = interface(ImsDiagrammsList)

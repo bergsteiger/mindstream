@@ -24,7 +24,10 @@ begin
  l_PickedShape := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
  if (l_PickedShape = nil) then
   Exit;
- Result := inherited Create(aCtx);
+ if (l_PickedShape.Count = 0) then
+  l_PickedShape.AddNewDiagramm;
+ aCtx.rDiagrammsHolder.CurrentDiagramms := l_PickedShape;
+// Result := inherited Create(aCtx);
 end;
 
 end.
