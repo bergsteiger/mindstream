@@ -50,8 +50,9 @@ type
   property CurrentDiagramms : ImsDiagrammsList
    read pm_GetCurrentDiagramms
    write pm_SetCurrentDiagramms;
+  constructor CreatePrim(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton);
  public
-  constructor Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton);
+  class function Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton): ImsDiagrammsController;
   destructor Destroy; override;
   procedure Clear;
   procedure ProcessClick(const aStart: TPointF);
@@ -110,7 +111,7 @@ end;
 
 // TmsDiagrammsController
 
-constructor TmsDiagrammsController.Create(aImage: TPaintBox;
+constructor TmsDiagrammsController.CreatePrim(aImage: TPaintBox;
                                           aShapes: TComboBox;
                                           aDiagramm: TComboBox;
                                           aAddDiagramm: TButton;
@@ -134,6 +135,12 @@ begin
  CurrentDiagramms := f_DiagrammsRoot;
  CurrentDiagramms.AddNewDiagramm;
 end;
+
+class function TmsDiagrammsController.Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton): ImsDiagrammsController;
+begin
+ Result := CreatePrim(aImage, aShapes, aDiagramm, aAddDiagramm, aSaveDiagramm, aLoadDiagramm);
+end;
+
 
 procedure TmsDiagrammsController.DoInvalidateDiagramm(const aDiagramm: ImsDiagramm);
 begin
