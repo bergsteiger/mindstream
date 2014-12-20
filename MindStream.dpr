@@ -50,7 +50,9 @@ uses
   msInterfaces in 'msInterfaces.pas',
   msStreamUtils in 'Core\msStreamUtils.pas',
   msPicker in 'ShapeTools\msPicker.pas',
-  msShapeCreator in 'msShapeCreator.pas';
+  msShapeCreator in 'msShapeCreator.pas',
+  msFormatter in 'msFormatter.pas',
+  TestmsJsonFormatter in 'Tests\Module\TestmsJsonFormatter.pas';
 
 {$R *.res}
 
