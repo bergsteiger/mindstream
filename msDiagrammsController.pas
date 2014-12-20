@@ -160,7 +160,11 @@ begin
  begin
   f_CurrentDiagramm := aValue;
   if (aValue <> nil) then
+  begin
+   cbDiagramm.OnChange := nil;
    cbDiagramm.ItemIndex := cbDiagramm.Items.IndexOf(aValue.Name);
+   cbDiagramm.OnChange := cbDiagrammChange;
+  end;//aValue <> nil
   if (f_CurrentDiagramm <> nil) then
    f_CurrentDiagramm.Invalidate;
  end;//not aValue.EQ(f_CurrentDiagramm)
