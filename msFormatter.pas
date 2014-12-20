@@ -50,9 +50,8 @@ begin
   case l_ch of
    '{' :
    begin
-    Result:= Result + l_ch;
     Inc(l_LevelCount);
-    Result:= Result + c_CRLF;
+    Result:= Result + l_ch + c_CRLF;
     l_IsNewLine:= True;
    end;
    '}' :
