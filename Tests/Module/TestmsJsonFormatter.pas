@@ -23,7 +23,6 @@ type
   // Test methods for class TmsSerializeController
 
   TestTmsSerializeController = class(TTestCase)
-  strict private
   published
     procedure TestFormat;
   end;
@@ -33,7 +32,8 @@ implementation
  uses
   System.SysUtils,
   System.Types,
-  System.Classes
+  System.Classes,
+  msStringList
   ;
 
  const
@@ -43,15 +43,15 @@ implementation
 procedure TestTmsSerializeController.TestFormat;
 var
   l_JsonFileBeforeFormat,
-  l_FileEtalon, l_Result: TStringList;
+  l_FileEtalon, l_Result: TmsStringList;
 begin
- l_JsonFileBeforeFormat := TStringList.Create;
+ l_JsonFileBeforeFormat := TmsStringList.Create;
  l_JsonFileBeforeFormat.LoadFromFile(c_JsonBeforeFormat);
 
- l_FileEtalon := TStringList.Create;
+ l_FileEtalon := TmsStringList.Create;
  l_FileEtalon.LoadFromFile(c_FileNameEtalon);
 
- l_Result := TStringList.Create;
+ l_Result := TmsStringList.Create;
  // TODO: Setup method call parameters
  l_Result.Text:= TmsFormatter.FormatJson(l_JsonFileBeforeFormat.Text);
  l_Result.SaveToFile('e:\json.json');
