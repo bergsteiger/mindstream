@@ -46,21 +46,27 @@ var
   l_FileEtalon, l_Result: TmsStringList;
 begin
  l_JsonFileBeforeFormat := TmsStringList.Create;
- l_JsonFileBeforeFormat.LoadFromFile(c_JsonBeforeFormat);
-
- l_FileEtalon := TmsStringList.Create;
- l_FileEtalon.LoadFromFile(c_FileNameEtalon);
-
- l_Result := TmsStringList.Create;
- // TODO: Setup method call parameters
- l_Result.Text:= TmsFormatter.FormatJson(l_JsonFileBeforeFormat.Text);
- l_Result.SaveToFile('e:\json.json');
- // TODO: Validate method results
- CheckTrue(l_FileEtalon.Equals(l_Result));
-
- FreeAndNil(l_Result);
- FreeAndNil(l_JsonFileBeforeFormat);
- FreeAndNil(l_FileEtalon);
+ try
+  l_JsonFileBeforeFormat.LoadFromFile(c_JsonBeforeFormat);
+  l_FileEtalon := TmsStringList.Create;
+  try
+   l_FileEtalon.LoadFromFile(c_FileNameEtalon);
+   l_Result := TmsStringList.Create;
+   try
+    // TODO: Setup method call parameters
+    l_Result.Text:= TmsFormatter.FormatJson(l_JsonFileBeforeFormat.Text);
+    l_Result.SaveToFile('e:\json.json');
+    // TODO: Validate method results
+    CheckTrue(l_FileEtalon.Equals(l_Result));
+   finally
+    FreeAndNil(l_Result);
+   end;//try..finally
+  finally
+   FreeAndNil(l_FileEtalon);
+  end;//try..finally
+ finally
+  FreeAndNil(l_JsonFileBeforeFormat);
+ end;//try..finally
 end;
 
 initialization
