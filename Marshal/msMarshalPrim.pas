@@ -30,7 +30,8 @@ uses
  msSerializeInterfaces,
  msRegisteredShapes,
  JSON,
- msStringList
+ msStringList,
+ msFormatter
  ;
 
 // TmsMarshalPrim
@@ -90,6 +91,7 @@ begin
   try
    l_Json := Marshal.Marshal(aDiagramm) as TJSONObject;
    l_StringList.Add(l_Json.toString);
+   l_StringList.Text:= TmsFormatter.FormatJson(l_StringList.Text);
   finally
    FreeAndNil(l_Json);
   end;//try..finally
