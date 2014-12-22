@@ -136,10 +136,11 @@ begin
  assert(assigned(aFailure));
  l_Item := lvFailureListView.Items.Add;
 
- l_Item.Text := aFailure.failedTest.Name + '; ' + aFailure.thrownExceptionName + '; ' + aFailure.thrownExceptionMessage + '; ' +
+ l_Node := TestToNode(aFailure.failedTest);
+ Assert(l_Node <> nil);
+ l_Item.Text := l_Node.ParentItem.Text + '.' + aFailure.failedTest.Name + '; ' + aFailure.thrownExceptionName + '; ' + aFailure.thrownExceptionMessage + '; ' +
    aFailure.LocationInfo + '; ' + aFailure.AddressInfo + '; ' + aFailure.StackTrace;
 
- l_Node := TestToNode(aFailure.failedTest);
  while l_Node <> nil do
  begin
   l_Node.Expand;
