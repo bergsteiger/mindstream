@@ -48,6 +48,8 @@ type
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
   procedure UpToParent;
   // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
+  procedure SwapParents;
+  // - сигнализируем о том, что надо ѕќћ≈Ќя“№ местами –ќƒ»“≈Ћ№— »≈ диаграммы
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
@@ -86,6 +88,8 @@ type
  protected
   procedure UpToParent;
   // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
+  procedure SwapParents;
+  // - сигнализируем о том, что надо ѕќћ≈Ќя“№ местами –ќƒ»“≈Ћ№— »≈ диаграммы
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
  public
@@ -115,6 +119,12 @@ end;
 
 procedure TmsDiagrammsHolder.UpToParent;
 // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
+begin
+ f_DiagrammsController.UpToParent;
+end;
+
+procedure TmsDiagrammsHolder.SwapParents;
+// - сигнализируем о том, что надо ѕќћ≈Ќя“№ местами –ќƒ»“≈Ћ№— »≈ диаграммы
 begin
  f_DiagrammsController.UpToParent;
 end;
@@ -318,6 +328,24 @@ end;
 
 procedure TmsDiagrammsController.UpToParent;
 // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
+var
+ l_Prev : TmsCurrentDiagrammRec;
+ l_Count : Integer;
+begin
+ if (f_DiagrammStack = nil) then
+  Exit;
+ if (f_DiagrammStack.Count <= 0) then
+  Exit;
+ l_Prev := f_DiagrammStack.Pop;
+ l_Count := f_DiagrammStack.Count;
+ CurrentDiagramms := l_Prev.rDiagramms;
+ CurrentDiagramm := l_Prev.rDiagramm;
+ while (l_Count < f_DiagrammStack.Count) do
+  f_DiagrammStack.Pop;
+end;
+
+procedure TmsDiagrammsController.SwapParents;
+// - сигнализируем о том, что надо ѕќћ≈Ќя“№ местами –ќƒ»“≈Ћ№— »≈ диаграммы
 var
  l_Prev : TmsCurrentDiagrammRec;
  l_Count : Integer;

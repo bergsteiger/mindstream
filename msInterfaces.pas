@@ -101,6 +101,8 @@ type
  ImsDiagrammsHolder = interface
   procedure UpToParent;
   // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
+  procedure SwapParents;
+  // - сигнализируем о том, что надо ѕќћ≈Ќя“№ местами –ќƒ»“≈Ћ№— »≈ диаграммы
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
   property CurrentDiagramms : ImsDiagrammsList
