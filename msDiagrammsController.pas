@@ -221,7 +221,7 @@ begin
  Assert(f_DiagrammsRoot.FirstDiagramm <> nil);
  if l_RootWasChanged then
  begin
-  CurrentDiagramm := f_DiagrammsRoot.SelectDiagramm(f_DiagrammsRoot.FirstDiagramm.Name);
+  CurrentDiagramm := f_DiagrammsRoot.FirstDiagramm;
   Exit;
  end;//l_RootWasChanged
  Assert(cbDiagramm.Items.Count > 0);
