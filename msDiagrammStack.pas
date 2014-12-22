@@ -16,6 +16,8 @@ type
   constructor Create(const aDiagramms : ImsDiagrammsList; const aDiagramm : ImsDiagramm);
  end;//TmsCurrentDiagrammRec
 
+ TmsDiagrammStack = TStack<TmsCurrentDiagrammRec>;
+
 implementation
 
 constructor TmsCurrentDiagrammRec.Create(const aDiagramms : ImsDiagrammsList; const aDiagramm : ImsDiagramm);
