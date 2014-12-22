@@ -52,7 +52,8 @@ uses
   msPicker in 'ShapeTools\msPicker.pas',
   msShapeCreator in 'msShapeCreator.pas',
   msFormatter in 'msFormatter.pas',
-  TestmsJsonFormatter in 'Tests\Module\TestmsJsonFormatter.pas';
+  TestmsJsonFormatter in 'Tests\Module\TestmsJsonFormatter.pas',
+  msDiagrammStack in 'msDiagrammStack.pas';
 
 {$R *.res}
 
