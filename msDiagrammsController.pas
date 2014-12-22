@@ -213,6 +213,9 @@ begin
  Assert(f_DiagrammsRoot.EQ(CurrentDiagramms));
  f_DiagrammsRoot.DiagrammsForToolbarToList(cbDiagramm.Items);
  Assert(f_DiagrammsRoot.FirstDiagramm <> nil);
+ Assert(cbDiagramm.Items.Count > 0);
+ Assert(l_I >= 0);
+ Assert(l_I < cbDiagramm.Items.Count);
  cbDiagramm.ItemIndex := l_I;
 end;
 
