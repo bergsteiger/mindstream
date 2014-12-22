@@ -208,6 +208,8 @@ begin
  f_DiagrammsRoot.DeSerialize;
  cbDiagramm.Clear;
  Assert(f_DiagrammsRoot <> nil);
+ if not f_DiagrammsRoot.EQ(CurrentDiagramms) then
+  CurrentDiagramms := f_DiagrammsRoot;
  Assert(f_DiagrammsRoot.EQ(CurrentDiagramms));
  f_DiagrammsRoot.DiagrammsForToolbarToList(cbDiagramm.Items);
  Assert(f_DiagrammsRoot.FirstDiagramm <> nil);
