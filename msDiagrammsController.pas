@@ -184,6 +184,7 @@ begin
   f_CurrentDiagramms := aValue;
   l_Index := cbShapes.ItemIndex;
   cbShapes.Items.Clear;
+  cbDiagramm.Items.Clear;
   if (f_CurrentDiagramms = nil) then
    CurrentDiagramm := nil
   else
