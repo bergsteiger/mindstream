@@ -185,7 +185,8 @@ begin
  begin
   if (f_CurrentDiagramms <> nil) then
   begin
-   TmsCurrentDiagrammRec.Create(f_CurrentDiagramms, CurrentDiagramm);
+   if (CurrentDiagramm <> nil) then
+    TmsCurrentDiagrammRec.Create(f_CurrentDiagramms, CurrentDiagramm);
   end;//f_CurrentDiagramms <> nil
   f_CurrentDiagramms := aValue;
   l_Index := cbShapes.ItemIndex;
