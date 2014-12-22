@@ -24,6 +24,7 @@ uses
   msMover,
   msPicker,
   msUpToParent,
+  msSwapParents,
 
   // special shapes
   msPointCircle,
