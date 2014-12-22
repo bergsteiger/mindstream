@@ -17,7 +17,8 @@ uses
  msCoreObjects,
  msInterfacedRefcounted,
  msShape,
- msInterfaces
+ msInterfaces,
+ msDiagrammStack
  ;
 
 type
