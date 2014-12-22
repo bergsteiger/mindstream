@@ -50,6 +50,7 @@ uses
   msInterfaces in 'msInterfaces.pas',
   msStreamUtils in 'Core\msStreamUtils.pas',
   msPicker in 'ShapeTools\msPicker.pas',
+  msUpToParent in 'ShapeTools\msUpToParent.pas',
   msShapeCreator in 'msShapeCreator.pas',
   msFormatter in 'msFormatter.pas',
   TestmsJsonFormatter in 'Tests\Module\TestmsJsonFormatter.pas',

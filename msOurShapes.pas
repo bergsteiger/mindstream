@@ -23,6 +23,7 @@ uses
   // utility shapes
   msMover,
   msPicker,
+  msUpToParent,
 
   // special shapes
   msPointCircle,
