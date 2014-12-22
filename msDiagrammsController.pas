@@ -203,16 +203,27 @@ end;
 procedure TmsDiagrammsController.btLoadDiagrammClick(Sender: TObject);
 var
  l_I : Integer;
+ l_RootWasChanged : Boolean;
 begin
+ l_RootWasChanged := false;
  l_I := cbDiagramm.ItemIndex;
  f_DiagrammsRoot.DeSerialize;
  cbDiagramm.Clear;
  Assert(f_DiagrammsRoot <> nil);
  if not f_DiagrammsRoot.EQ(CurrentDiagramms) then
+ begin
   CurrentDiagramms := f_DiagrammsRoot;
+  l_RootWasChanged := true;
+ end;//not f_DiagrammsRoot.EQ(CurrentDiagramms)
  Assert(f_DiagrammsRoot.EQ(CurrentDiagramms));
- f_DiagrammsRoot.DiagrammsForToolbarToList(cbDiagramm.Items);
+ if not l_RootWasChanged then
+  f_DiagrammsRoot.DiagrammsForToolbarToList(cbDiagramm.Items);
  Assert(f_DiagrammsRoot.FirstDiagramm <> nil);
+ if l_RootWasChanged then
+ begin
+  CurrentDiagramm := f_DiagrammsRoot.SelectDiagramm(f_DiagrammsRoot.FirstDiagramm.Name);
+  Exit;
+ end;//l_RootWasChanged
  Assert(cbDiagramm.Items.Count > 0);
  Assert(l_I >= 0);
  Assert(l_I < cbDiagramm.Items.Count);
