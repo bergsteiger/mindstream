@@ -84,8 +84,12 @@ begin
 end;
 
 procedure TmsDiagrammsList.DiagrammsForToolbarToList(aList: TStrings);
+var
+ l_D : ImsDiagramm;
 begin
  aList.Clear;
+ for l_D in Items do
+  aList.Add(l_D.Name);
 end;
 
 function TmsDiagrammsList.FirstDiagramm: ImsDiagramm;
