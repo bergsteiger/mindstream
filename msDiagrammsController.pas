@@ -126,7 +126,7 @@ end;
 procedure TmsDiagrammsHolder.SwapParents;
 // - сигнализируем о том, что надо ѕќћ≈Ќя“№ местами –ќƒ»“≈Ћ№— »≈ диаграммы
 begin
- f_DiagrammsController.UpToParent;
+ f_DiagrammsController.SwapParents;
 end;
 
 {$Include msIvalidator.mixin.pas}
@@ -358,8 +358,9 @@ begin
  l_Count := f_DiagrammStack.Count;
  CurrentDiagramms := l_Prev.rDiagramms;
  CurrentDiagramm := l_Prev.rDiagramm;
- while (l_Count < f_DiagrammStack.Count) do
+(* while (l_Count < f_DiagrammStack.Count) do
   f_DiagrammStack.Pop;
+ f_DiagrammStack.Push(l_Prev);*)
 end;
 
 end.
