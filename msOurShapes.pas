@@ -53,7 +53,8 @@ begin
 
   // utility shapes
   TmsMover,
-  TmsPicker
+  TmsPicker,
+  TmsUpToParent
  ]);
 end;
 
