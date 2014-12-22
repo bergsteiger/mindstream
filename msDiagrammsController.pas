@@ -319,6 +319,10 @@ end;
 procedure TmsDiagrammsController.UpToParent;
 // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
 begin
+ if (f_DiagrammStack = nil) then
+  Exit;
+ if (f_DiagrammStack.Count <= 0) then
+  Exit;
  Assert(false);
 end;
 
