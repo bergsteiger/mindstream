@@ -185,6 +185,10 @@ var
 begin
  aCanvas.BeginScene;
  try
+  if (f_Items = nil) then
+  // - если заггрузить диаграммы, а потом провалиться на N+1 уровней -
+  //   мы как раз сюда попадём
+   Exit;
   Assert(f_Items <> nil);
   for l_Shape in f_Items do
    l_Shape.DrawTo(TmsDrawContext.Create(aCanvas));
@@ -217,6 +221,10 @@ var
  l_Index: Integer;
 begin
  Result := nil;
+  if (f_Items = nil) then
+  // - если заггрузить диаграммы, а потом провалиться на N+1 уровней -
+  //   мы как раз сюда попадём
+   Exit;
  for l_Index := f_Items.Count - 1 downto 0 do
  begin
   l_Shape := f_Items.Items[l_Index];
