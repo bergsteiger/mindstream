@@ -190,6 +190,7 @@ begin
   else
   begin
    f_CurrentDiagramms.ShapesForToolbarToList(cbShapes.Items);
+   f_CurrentDiagramms.DiagrammsForToolbarToList(cbDiagramm.Items);
    CurrentDiagramm := f_CurrentDiagramms.FirstDiagramm;
    if (l_Index < 0) then
     if (cbShapes.Count > 0) then

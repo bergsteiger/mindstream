@@ -74,6 +74,7 @@ type
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
   function FirstDiagramm: ImsDiagramm;
+  procedure DiagrammsForToolbarToList(aList: TStrings);
   function pm_GetCount: Integer;
   property Count: Integer
    read pm_GetCount;
