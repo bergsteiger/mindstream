@@ -46,6 +46,8 @@ type
   procedure pm_SetCurrentDiagramm(const aValue: ImsDiagramm);
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
+  procedure UpToParent;
+  // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
@@ -82,6 +84,8 @@ type
   f_DiagrammsController : TmsDiagrammsController;
   constructor CreatePrim(aDiagrammsController : TmsDiagrammsController);
  protected
+  procedure UpToParent;
+  // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
  public
@@ -107,6 +111,12 @@ end;
 procedure TmsDiagrammsHolder.pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
 begin
  f_DiagrammsController.CurrentDiagramms := aValue;
+end;
+
+procedure TmsDiagrammsHolder.UpToParent;
+// - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
+begin
+ f_DiagrammsController.UpToParent;
 end;
 
 {$Include msIvalidator.mixin.pas}
@@ -298,6 +308,12 @@ begin
    CurrentDiagramm := aDiagramm;
   end;//CurrentDiagramms.IndexOf(aDiagramm) >= 0
  end;//CurrentDiagramms <> nil
+end;
+
+procedure TmsDiagrammsController.UpToParent;
+// - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
+begin
+ Assert(false);
 end;
 
 end.
