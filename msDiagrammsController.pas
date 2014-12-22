@@ -209,6 +209,7 @@ begin
  f_DiagrammsRoot.DeSerialize;
  cbDiagramm.Clear;
  Assert(f_DiagrammsRoot.EQ(CurrentDiagramms));
+ Assert(f_DiagrammsRoot.FirstDiagramm <> nil);
  for l_D in f_DiagrammsRoot do
   cbDiagramm.Items.Add(l_D.Name);
  cbDiagramm.ItemIndex := l_I;
