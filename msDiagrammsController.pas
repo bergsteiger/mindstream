@@ -202,16 +202,14 @@ end;
 
 procedure TmsDiagrammsController.btLoadDiagrammClick(Sender: TObject);
 var
- l_D : ImsDiagramm;
  l_I : Integer;
 begin
  l_I := cbDiagramm.ItemIndex;
  f_DiagrammsRoot.DeSerialize;
  cbDiagramm.Clear;
  Assert(f_DiagrammsRoot.EQ(CurrentDiagramms));
+ f_DiagrammsRoot.DiagrammsForToolbarToList(cbDiagramm.Items);
  Assert(f_DiagrammsRoot.FirstDiagramm <> nil);
- for l_D in f_DiagrammsRoot do
-  cbDiagramm.Items.Add(l_D.Name);
  cbDiagramm.ItemIndex := l_I;
 end;
 
