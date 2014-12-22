@@ -320,13 +320,18 @@ procedure TmsDiagrammsController.UpToParent;
 // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
 var
  l_Prev : TmsCurrentDiagrammRec;
+ l_Count : Integer;
 begin
  if (f_DiagrammStack = nil) then
   Exit;
  if (f_DiagrammStack.Count <= 0) then
   Exit;
  l_Prev := f_DiagrammStack.Pop;
- Assert(false);
+ l_Count := f_DiagrammStack.Count;
+ CurrentDiagramms := l_Prev.rDiagramms;
+ CurrentDiagramm := l_Prev.rDiagramm;
+ while (l_Count < f_DiagrammStack.Count) do
+  f_DiagrammStack.Pop;
 end;
 
 end.
