@@ -24,6 +24,9 @@ constructor TmsCurrentDiagrammRec.Create(const aDiagramms : ImsDiagrammsList; co
 begin
  Assert(aDiagramms <> nil);
  Assert(aDiagramm <> nil);
+ Assert(aDiagramms.IndexOf(aDiagramm) >= 0);
+ rDiagramms := aDiagramms;
+ rDiagramm := aDiagramm;
 end;
 
 end.
