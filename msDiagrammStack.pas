@@ -13,8 +13,15 @@ type
  public
   rDiagramms : ImsDiagrammsList;
   rDiagramm : ImsDiagramm;
+  constructor Create(const aDiagramms : ImsDiagrammsList; const aDiagramm : ImsDiagramm);
  end;//TmsCurrentDiagrammRec
 
 implementation
+
+constructor TmsCurrentDiagrammRec.Create(const aDiagramms : ImsDiagrammsList; const aDiagramm : ImsDiagramm);
+begin
+ Assert(aDiagramms <> nil);
+ Assert(aDiagramm <> nil);
+end;
 
 end.
