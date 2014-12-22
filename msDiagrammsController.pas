@@ -196,7 +196,11 @@ begin
   if (f_CurrentDiagramms <> nil) then
   begin
    if (CurrentDiagramm <> nil) then
-    TmsCurrentDiagrammRec.Create(f_CurrentDiagramms, CurrentDiagramm);
+   begin
+    if (f_DiagrammStack = nil) then
+     f_DiagrammStack := TmsDiagrammStack.Create;
+    f_DiagrammStack.Push(TmsCurrentDiagrammRec.Create(f_CurrentDiagramms, CurrentDiagramm));
+   end;//CurrentDiagramm <> nil
   end;//f_CurrentDiagramms <> nil
   f_CurrentDiagramms := aValue;
   l_Index := cbShapes.ItemIndex;
@@ -224,6 +228,8 @@ var
 begin
  l_RootWasChanged := false;
  l_I := cbDiagramm.ItemIndex;
+ if (f_DiagrammStack <> nil) then
+  f_DiagrammStack.Clear;
  f_DiagrammsRoot.DeSerialize;
  cbDiagramm.Clear;
  Assert(f_DiagrammsRoot <> nil);
