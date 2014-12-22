@@ -35,6 +35,7 @@ type
   f_DiagrammsRoot: ImsDiagramms;
   f_CurrentDiagramms : ImsDiagrammsList;
   f_CurrentDiagramm : ImsDiagramm;
+  f_DiagrammStack: TmsDiagrammStack;
   procedure cbDiagrammChange(Sender: TObject);
   procedure btAddDiagrammClick(Sender: TObject);
   procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton;
@@ -251,6 +252,7 @@ end;
 
 destructor TmsDiagrammsController.Destroy;
 begin
+ FreeAndNil(f_DiagrammStack);
  f_CurrentDiagramm := nil;
  CurrentDiagramms := nil;
  f_DiagrammsRoot := nil;
