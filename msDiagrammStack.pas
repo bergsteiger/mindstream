@@ -8,6 +8,13 @@ uses
  msInterfaces
  ;
 
+type
+ TmsCurrentDiagrammRec = record
+ public
+  rDiagramms : ImsDiagrammsList;
+  rDiagramm : ImsDiagramm;
+ end;//TmsCurrentDiagrammRec
+
 implementation
 
 end.
