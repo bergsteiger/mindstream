@@ -23,13 +23,21 @@ uses
   SysUtils,
   System.Types,
   msRegisteredShapes,
-  uMain
+  FMX.Graphics
   ;
 
 { TTestSaveToPNG }
 
 procedure TTestSaveToPNG.CreateDiagrammWithShapeAndSaveToPNG_AndCheck;
+var
+ l_Bitmap: TBitmap;
+ l_SourceRect: TRectF;
 begin
+ // Фиксируем размер снимаемой области
+ l_SourceRect := TRectF.Create(0, 0, 700, 500);
+ // Создаем временный буфер для получения скриншота
+ l_Bitmap := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
+ try
  CreateDiagrammAndCheck(
   procedure (const aDiagramm : ImsDiagramm)
   var
@@ -41,11 +49,15 @@ begin
    SaveDiagrammAndCheck(aDiagramm,
     procedure (const aFileName: String; const aDiagramm: ImsDiagramm)
     begin
-     aDiagramm.SaveToPng(aFileName, fmMain.imgMain);
+     aDiagramm.DrawTo(l_Bitmap.Canvas);
+     aDiagramm.SaveToPng(aFileName, l_Bitmap.Canvas);
     end)
   end
   , f_Context.rDiagrammName
  );
+ finally
+  FreeAndNil(l_Bitmap);
+ end;
 end;
 
 function TTestSaveToPNG.MakeFileName(const aTestName: string; const aTestFolder: string): String;

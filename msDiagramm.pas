@@ -64,7 +64,7 @@ type
   property Name: String read fName write fName;
   procedure Serialize;
   procedure DeSerialize;
-  procedure SaveToPng(const aFileName: String; const aImage: TPaintBox);
+  procedure SaveToPng(const aFileName: String; aCanvas: TCanvas);
   procedure Assign(const anOther: TmsDiagramm);
  end; // TmsDiagramm
 
@@ -140,25 +140,16 @@ begin
  TmsDiagrammMarshal.Serialize(aFileName, Self);
 end;
 
-procedure TmsDiagramm.SaveToPng(const aFileName: String; const aImage: TPaintBox);
+procedure TmsDiagramm.SaveToPng(const aFileName: String; aCanvas: TCanvas);
 var
  l_BitmapBuffer: TBitmap;
  l_SourceRect: TRectF;
 begin
  // Фиксируем размер снимаемой области
- l_SourceRect := TRectF.Create(0, 0, aImage.Width, aImage.Height);
+ l_SourceRect := TRectF.Create(0, 0, aCanvas.Width, aCanvas.Height);
  // Создаем временный буфер для получения скриншота
  l_BitmapBuffer := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
  try
-  // Переводим канву в режим отрисовки - начинаем процесс отрисовки сцены
-  if l_BitmapBuffer.Canvas.BeginScene then
-   try
-    // Говорим контролу отрисовать себя в канве нашего буфера в указанной области
-    aImage.PaintTo(l_BitmapBuffer.Canvas, l_SourceRect);
-   finally
-    // Завершаем процесс отрисовки, заканчивая формируемую сцену
-    l_BitmapBuffer.Canvas.EndScene;
-   end;
   l_BitmapBuffer.SaveToFile(aFileName);
  finally
   FreeAndNil(l_BitmapBuffer);

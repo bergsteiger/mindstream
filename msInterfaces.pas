@@ -121,7 +121,7 @@ type
   procedure ProcessClick(const aClickContext: TmsClickContext);
   procedure Clear;
   procedure DrawTo(const aCanvas: TCanvas);
-  procedure SaveToPng(const aFileName: String; const aImage: TPaintBox);
+  procedure SaveToPng(const aFileName: String; aCanvas: TCanvas);
   function AddShape(const aShape: ImsShape): ImsShape;
   function GetEnumerator: TmsShapesEnumerator;
   function ItemsCount: Integer;
