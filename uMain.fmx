@@ -3,7 +3,7 @@ object fmMain: TfmMain
   Top = 0
   Caption = 'MindStream'
   ClientHeight = 600
-  ClientWidth = 768
+  ClientWidth = 709
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop, iPhone, iPad]
@@ -28,12 +28,12 @@ object fmMain: TfmMain
   end
   object pnlAll: TPanel
     Align = Client
-    Size.Width = 768.000000000000000000
+    Size.Width = 709.000000000000000000
     Size.Height = 600.000000000000000000
     Size.PlatformDefault = False
     object pnlTop: TPanel
       Align = Top
-      Size.Width = 768.000000000000000000
+      Size.Width = 709.000000000000000000
       Size.Height = 41.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
@@ -105,12 +105,12 @@ object fmMain: TfmMain
     end
     object pnlBottom: TPanel
       Align = Client
-      Size.Width = 768.000000000000000000
+      Size.Width = 709.000000000000000000
       Size.Height = 559.000000000000000000
       Size.PlatformDefault = False
       object imgMain: TPaintBox
         Align = Client
-        Size.Width = 768.000000000000000000
+        Size.Width = 709.000000000000000000
         Size.Height = 559.000000000000000000
         Size.PlatformDefault = False
         OnMouseMove = imgMainMouseMove
