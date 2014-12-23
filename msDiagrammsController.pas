@@ -1,10 +1,10 @@
-unit msDiagrammsController;
+п»їunit msDiagrammsController;
 
 interface
 
 uses
- {$Include msIvalidator.mixin.pas}
- ,
+{$Include msIvalidator.mixin.pas}
+  ,
  FMX.Objects,
  FMX.ListBox,
  FMX.StdCtrls,
@@ -23,7 +23,8 @@ uses
 
 type
  TmsIvalidatorParent = TmsInterfacedRefcounted;
- {$Include msIvalidator.mixin.pas}
+{$Include msIvalidator.mixin.pas}
+
  TmsDiagrammsController = class(TmsIvalidator, ImsDiagrammsController)
  private
   imgMain: TPaintBox;
@@ -32,14 +33,15 @@ type
   btAddDiagramm: TButton;
   btSaveDiagramm: TButton;
   btLoadDiagramm: TButton;
+  btSaveToPNG: TButton;
   f_DiagrammsRoot: ImsDiagramms;
   f_CurrentDiagramms : ImsDiagrammsList;
   f_CurrentDiagramm : ImsDiagramm;
   f_DiagrammStack: TmsDiagrammStack;
   procedure cbDiagrammChange(Sender: TObject);
   procedure btAddDiagrammClick(Sender: TObject);
-  procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Single);
+  procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
+  procedure btSaveToPNGClick(Sender: TObject);
   procedure btSaveDiagrammClick(Sender: TObject);
   procedure btLoadDiagrammClick(Sender: TObject);
   function pm_GetCurrentDiagramm: ImsDiagramm;
@@ -47,62 +49,76 @@ type
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
   procedure UpToParent;
-  // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
+  // - СЃРёРіРЅР°Р»РёР·РёСЂСѓРµРј Рѕ С‚РѕРј, С‡С‚Рѕ РЅР°Рј РЅР°РґРѕ РїРµСЂРµР№С‚Рё Рє Р РћР”РРўР•Р›Р¬РЎРљРћР™ РґРёР°РіСЂР°РјРјРµ
   procedure SwapParents;
-  // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
+  // - СЃРёРіРЅР°Р»РёР·РёСЂСѓРµРј Рѕ С‚РѕРј, С‡С‚Рѕ РЅР°РґРѕ РџРћРњР•РќРЇРўР¬ РјРµСЃС‚Р°РјРё Р РћР”РРўР•Р›Р¬РЎРљРР• РґРёР°РіСЂР°РјРјС‹
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
-  property CurrentDiagramms : ImsDiagrammsList
+  property CurrentDiagramms: ImsDiagrammsList
    read pm_GetCurrentDiagramms
    write pm_SetCurrentDiagramms;
-  constructor CreatePrim(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton);
+  constructor CreatePrim(aImage: TPaintBox;
+                         aShapes: TComboBox;
+                         aDiagramm: TComboBox;
+                         aAddDiagramm: TButton;
+                         aSaveDiagramm: TButton;
+                         aLoadDiagramm: TButton;
+                         aSaveToPng: TButton);
  public
-  class function Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton): ImsDiagrammsController;
+  class function Create(aImage: TPaintBox;
+                        aShapes: TComboBox;
+                        aDiagramm: TComboBox;
+                        aAddDiagramm: TButton;
+                        aSaveDiagramm: TButton;
+                        aLoadDiagramm: TButton;
+                        aSaveToPng: TButton): ImsDiagrammsController;
   destructor Destroy; override;
   procedure Clear;
   procedure ProcessClick(const aStart: TPointF);
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm
    write pm_SetCurrentDiagramm;
+
+  procedure SaveToPng(const aFileName: string);
   procedure DrawTo(const aCanvas: TCanvas);
- end;//TmsDiagrammsController
+ end; // TmsDiagrammsController
 
 implementation
 
 uses
- {$Include msIvalidator.mixin.pas}
- ,
+{$Include msIvalidator.mixin.pas}
+  ,
  System.SysUtils,
  FMX.Types,
  msShapesForToolbar,
  Math,
- msShapeCreator
- ;
+ msShapeCreator,
+ FMX.Dialogs;
 
 type
  TmsDiagrammsHolder = class(TmsInterfacedRefcounted, ImsDiagrammsHolder)
  private
-  f_DiagrammsController : TmsDiagrammsController;
-  constructor CreatePrim(aDiagrammsController : TmsDiagrammsController);
+  f_DiagrammsController: TmsDiagrammsController;
+  constructor CreatePrim(aDiagrammsController: TmsDiagrammsController);
  protected
   procedure UpToParent;
-  // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
+  // - СЃРёРіРЅР°Р»РёР·РёСЂСѓРµРј Рѕ С‚РѕРј, С‡С‚Рѕ РЅР°Рј РЅР°РґРѕ РїРµСЂРµР№С‚Рё Рє Р РћР”РРўР•Р›Р¬РЎРљРћР™ РґРёР°РіСЂР°РјРјРµ
   procedure SwapParents;
-  // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
+  // - СЃРёРіРЅР°Р»РёР·РёСЂСѓРµРј Рѕ С‚РѕРј, С‡С‚Рѕ РЅР°РґРѕ РџРћРњР•РќРЇРўР¬ РјРµСЃС‚Р°РјРё Р РћР”РРўР•Р›Р¬РЎРљРР• РґРёР°РіСЂР°РјРјС‹
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
  public
-  class function Create(aDiagrammsController : TmsDiagrammsController): ImsDiagrammsHolder;
- end;//TmsDiagrammsHolder
+  class function Create(aDiagrammsController: TmsDiagrammsController): ImsDiagrammsHolder;
+ end; // TmsDiagrammsHolder
 
-constructor TmsDiagrammsHolder.CreatePrim(aDiagrammsController : TmsDiagrammsController);
+constructor TmsDiagrammsHolder.CreatePrim(aDiagrammsController: TmsDiagrammsController);
 begin
  inherited Create;
  f_DiagrammsController := aDiagrammsController;
 end;
 
-class function TmsDiagrammsHolder.Create(aDiagrammsController : TmsDiagrammsController): ImsDiagrammsHolder;
+class function TmsDiagrammsHolder.Create(aDiagrammsController: TmsDiagrammsController): ImsDiagrammsHolder;
 begin
  Result := CreatePrim(aDiagrammsController);
 end;
@@ -118,27 +134,22 @@ begin
 end;
 
 procedure TmsDiagrammsHolder.UpToParent;
-// - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
+// - СЃРёРіРЅР°Р»РёР·РёСЂСѓРµРј Рѕ С‚РѕРј, С‡С‚Рѕ РЅР°Рј РЅР°РґРѕ РїРµСЂРµР№С‚Рё Рє Р РћР”РРўР•Р›Р¬РЎРљРћР™ РґРёР°РіСЂР°РјРјРµ
 begin
  f_DiagrammsController.UpToParent;
 end;
 
 procedure TmsDiagrammsHolder.SwapParents;
-// - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
+// - СЃРёРіРЅР°Р»РёР·РёСЂСѓРµРј Рѕ С‚РѕРј, С‡С‚Рѕ РЅР°РґРѕ РџРћРњР•РќРЇРўР¬ РјРµСЃС‚Р°РјРё Р РћР”РРўР•Р›Р¬РЎРљРР• РґРёР°РіСЂР°РјРјС‹
 begin
  f_DiagrammsController.SwapParents;
 end;
 
 {$Include msIvalidator.mixin.pas}
-
 // TmsDiagrammsController
 
-constructor TmsDiagrammsController.CreatePrim(aImage: TPaintBox;
-                                          aShapes: TComboBox;
-                                          aDiagramm: TComboBox;
-                                          aAddDiagramm: TButton;
-                                          aSaveDiagramm: TButton;
-                                          aLoadDiagramm: TButton);
+constructor TmsDiagrammsController.CreatePrim(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton;
+  aSaveDiagramm: TButton; aLoadDiagramm: TButton; aSaveToPng: TButton);
 begin
  inherited Create;
  imgMain := aImage;
@@ -147,22 +158,24 @@ begin
  btAddDiagramm := aAddDiagramm;
  btSaveDiagramm := aSaveDiagramm;
  btLoadDiagramm := aLoadDiagramm;
+ btSaveToPNG := aSaveToPng;
+ btSaveToPNG.OnClick := btSaveToPNGClick;
  cbDiagramm.OnChange := cbDiagrammChange;
  btAddDiagramm.OnClick := btAddDiagrammClick;
  btSaveDiagramm.OnClick := btSaveDiagrammClick;
  btLoadDiagramm.OnClick := btLoadDiagrammClick;
  imgMain.OnMouseDown := imgMainMouseDown;
- imgMain.Align := TAlignLayout.alClient;
+ imgMain.Align := TAlignLayout.Client;
  f_DiagrammsRoot := TmsDiagramms.Create;
  CurrentDiagramms := f_DiagrammsRoot;
  CurrentDiagramms.AddNewDiagramm;
 end;
 
-class function TmsDiagrammsController.Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton; aLoadDiagramm: TButton): ImsDiagrammsController;
+class function TmsDiagrammsController.Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton;
+  aSaveDiagramm: TButton; aLoadDiagramm: TButton; aSaveToPng: TButton): ImsDiagrammsController;
 begin
- Result := CreatePrim(aImage, aShapes, aDiagramm, aAddDiagramm, aSaveDiagramm, aLoadDiagramm);
+ Result := CreatePrim(aImage, aShapes, aDiagramm, aAddDiagramm, aSaveDiagramm, aLoadDiagramm, aSaveToPng);
 end;
-
 
 procedure TmsDiagrammsController.DoInvalidateDiagramm(const aDiagramm: ImsDiagramm);
 begin
@@ -186,10 +199,10 @@ begin
    cbDiagramm.OnChange := nil;
    cbDiagramm.ItemIndex := cbDiagramm.Items.IndexOf(aValue.Name);
    cbDiagramm.OnChange := cbDiagrammChange;
-  end;//aValue <> nil
+  end; // aValue <> nil
   if (f_CurrentDiagramm <> nil) then
    f_CurrentDiagramm.Invalidate;
- end;//not aValue.EQ(f_CurrentDiagramm)
+ end; // not aValue.EQ(f_CurrentDiagramm)
 end;
 
 function TmsDiagrammsController.pm_GetCurrentDiagramms: ImsDiagrammsList;
@@ -199,7 +212,7 @@ end;
 
 procedure TmsDiagrammsController.pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
 var
- l_Index : Integer;
+ l_Index: Integer;
 begin
  if (f_CurrentDiagramms <> aValue) then
  begin
@@ -226,9 +239,9 @@ begin
    if (l_Index < 0) then
     if (cbShapes.Count > 0) then
      l_Index := 0;
-   cbShapes.ItemIndex := Min(cbShapes.Count-1, l_Index);
-  end;//f_CurrentDiagramms <> nil
- end;//f_CurrentDiagramms <> aValue
+   cbShapes.ItemIndex := Min(cbShapes.Count - 1, l_Index);
+  end; // f_CurrentDiagramms <> nil
+ end; // f_CurrentDiagramms <> aValue
 end;
 
 procedure TmsDiagrammsController.btLoadDiagrammClick(Sender: TObject);
@@ -268,6 +281,26 @@ begin
  f_DiagrammsRoot.Serialize;
 end;
 
+procedure TmsDiagrammsController.btSaveToPNGClick(Sender: TObject);
+var
+ l_SaveDialog: TSaveDialog;
+begin
+ l_SaveDialog := TSaveDialog.Create(nil);
+ l_SaveDialog.Filter := 'PNG (*.png)|*.PNG';
+ try
+  l_SaveDialog.Execute;
+  try
+   SaveToPng(l_SaveDialog.FileName + '.png');
+  except
+   on E: Exception do
+    ShowMessage('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё РєР°СЂС‚РёРЅРєРё');
+  end;
+
+ finally
+  FreeAndNil(l_SaveDialog);
+ end;
+end;
+
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
 begin
  Assert(CurrentDiagramms <> nil);
@@ -297,7 +330,13 @@ end;
 
 procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
 begin
- CurrentDiagramm.ProcessClick(TmsClickContext.Create(TmsShapeCreator.Create(TmsShapesForToolbar.Instance.Items[cbShapes.ItemIndex]), aStart, TmsDiagrammsHolder.Create(Self)));
+ CurrentDiagramm.ProcessClick(TmsClickContext.Create(TmsShapeCreator.Create(TmsShapesForToolbar.Instance.Items[cbShapes.ItemIndex]), aStart,
+   TmsDiagrammsHolder.Create(Self)));
+end;
+
+procedure TmsDiagrammsController.SaveToPng(const aFileName: string);
+begin
+ f_CurrentDiagramm.SaveToPng(aFileName);
 end;
 
 procedure TmsDiagrammsController.DrawTo(const aCanvas: TCanvas);
@@ -305,8 +344,7 @@ begin
  CurrentDiagramm.DrawTo(aCanvas);
 end;
 
-procedure TmsDiagrammsController.imgMainMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Single);
+procedure TmsDiagrammsController.imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
  Self.ProcessClick(TPointF.Create(X, Y));
 end;
@@ -322,12 +360,12 @@ begin
   begin
    cbDiagramm.Items.Add(aDiagramm.Name);
    CurrentDiagramm := aDiagramm;
-  end;//CurrentDiagramms.IndexOf(aDiagramm) >= 0
- end;//CurrentDiagramms <> nil
+  end; // CurrentDiagramms.IndexOf(aDiagramm) >= 0
+ end; // CurrentDiagramms <> nil
 end;
 
 procedure TmsDiagrammsController.UpToParent;
-// - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
+// - СЃРёРіРЅР°Р»РёР·РёСЂСѓРµРј Рѕ С‚РѕРј, С‡С‚Рѕ РЅР°Рј РЅР°РґРѕ РїРµСЂРµР№С‚Рё Рє Р РћР”РРўР•Р›Р¬РЎРљРћР™ РґРёР°РіСЂР°РјРјРµ
 var
  l_Prev : TmsCurrentDiagrammRec;
  l_Count : Integer;
@@ -345,7 +383,7 @@ begin
 end;
 
 procedure TmsDiagrammsController.SwapParents;
-// - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
+// - СЃРёРіРЅР°Р»РёР·РёСЂСѓРµРј Рѕ С‚РѕРј, С‡С‚Рѕ РЅР°РґРѕ РџРћРњР•РќРЇРўР¬ РјРµСЃС‚Р°РјРё Р РћР”РРўР•Р›Р¬РЎРљРР• РґРёР°РіСЂР°РјРјС‹
 var
  l_Prev : TmsCurrentDiagrammRec;
  l_Count : Integer;
@@ -364,4 +402,3 @@ begin
 end;
 
 end.
-

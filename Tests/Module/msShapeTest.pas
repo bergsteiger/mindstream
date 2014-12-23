@@ -12,11 +12,15 @@ uses
   msCoreObjects,
   msInterfaces
   ;
+const
+ c_JSON = 'JSON\';
+ c_PNG = 'PNG\';
 
 type
   TmsShapeClassCheck = TmsShapeClassLambda;
 
   TmsDiagrammCheck = reference to procedure (const aDiagramm : ImsDiagramm);
+  TmsDiagrammSaveTo = reference to procedure (const aFileName: String; const aDiagramm: ImsDiagramm);
 
   TmsShapeTestContext = record
    rMethodName: string;
@@ -24,7 +28,7 @@ type
    rDiagrammName : String;
    rShapesCount : Integer;
    rShapeClass: RmsShape;
-   constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName : String; aShapesCount : Integer; aShapeClass: RmsShape);
+   constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; aShapeClass: RmsShape);
   end;//TmsShapeTestContext
 
   TmsShapeTestPrim = class abstract(TTestCase)
@@ -33,12 +37,12 @@ type
    f_TestSerializeMethodName : String;
    f_Coords : array of TPoint;
   protected
-    function TestResultsFileName: String;
-    function MakeFileName(const aTestName: String): String;
+    function TestResultsFileName: String; virtual;
+    function MakeFileName(const aTestName: string; const aTestFolder: string): String; virtual;
     procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
     procedure CheckFileWithEtalon(const aFileName: String);
     procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); virtual;
-    procedure SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm);
+    procedure SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm; aSaveTo: TmsDiagrammSaveTo);
     procedure OutToFileAndCheck(aLambda: TmsLogLambda);
     procedure SetUp; override;
     function ShapesCount: Integer;
@@ -55,6 +59,8 @@ type
   RmsShapeTest = class of TmsShapeTestPrim;
 
   TmsCustomShapeTest = class(TmsShapeTestPrim)
+  protected
+   function MakeFileName(const aTestName: string; const aFileExtension: string): String; override;
   published
     procedure TestSerialize;
   end;//TmsCustomShapeTest
@@ -88,16 +94,17 @@ implementation
   msStringList,
   msDiagramms,
   Math,
-  msStreamUtils
-  ;
+  msStreamUtils,
+  msTestConstants;
 
-function TmsShapeTestPrim.MakeFileName(const aTestName: String): String;
+
+function TmsShapeTestPrim.MakeFileName(const aTestName: string; const aTestFolder: string): String;
 var
  l_Folder : String;
 begin
- l_Folder := ExtractFilePath(ParamStr(0)) + 'TestResults\';
+ l_Folder := ExtractFilePath(ParamStr(0)) + 'TestResults\' + aTestFolder;
  ForceDirectories(l_Folder);
- Result := l_Folder + ClassName + '_' + aTestName + '_' + f_Context.rShapeClass.ClassName + '.json';
+ Result := l_Folder + ClassName + '_' + aTestName + '_' + f_Context.rShapeClass.ClassName;
 end;
 
 procedure TmsShapeTestPrim.CheckFileWithEtalon(const aFileName: String);
@@ -117,7 +124,7 @@ end;
 
 function TmsShapeTestPrim.TestResultsFileName: String;
 begin
- Result := MakeFileName(Name);
+ Result := MakeFileName(Name, c_JSON);
 end;
 
 procedure TmsShapeTestPrim.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
@@ -125,12 +132,12 @@ begin
  aDiagramm.SaveTo(aFileName);
 end;
 
-procedure TmsShapeTestPrim.SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm);
+procedure TmsShapeTestPrim.SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm; aSaveTo: TmsDiagrammSaveTo);
 var
  l_FileNameTest : String;
 begin
  l_FileNameTest := TestResultsFileName;
- SaveDiagramm(l_FileNameTest, aDiagramm);
+ aSaveTo(l_FileNameTest, aDiagramm);
  CheckFileWithEtalon(l_FileNameTest);
 end;
 
@@ -139,13 +146,13 @@ begin
  Result := f_Context.rShapesCount;
 end;
 
-constructor TmsShapeTestContext.Create(aMethodName: string; aSeed: Integer; aDiagrammName : String; aShapesCount : Integer; aShapeClass: RmsShape);
+constructor TmsShapeTestContext.Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; aShapeClass: RmsShape);
 begin
  rMethodName := aMethodName;
  rSeed := aSeed;
  rDiagrammName := aDiagrammName;
  rShapesCount := aShapesCount;
- rShapeClass := aShapeClass
+ rShapeClass := aShapeClass;
 end;
 
 procedure TmsShapeTestPrim.SetUp;
@@ -159,8 +166,8 @@ begin
  SetLength(f_Coords, ShapesCount);
  for l_Index := 0 to Pred(ShapesCount) do
  begin
-  l_X := Random(100);
-  l_Y := Random(200);
+  l_X := Random(c_MaxCanvasWidth);
+  l_Y := Random(c_MaxCanvasHeight);
   f_Coords[l_Index] := TPoint.Create(l_X, l_Y);
  end;//for l_Index
 end;
@@ -186,10 +193,16 @@ begin
   begin
    for l_P in f_Coords do
     aDiagramm.AddShape(f_Context.rShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil, nil))).AddNewDiagramm;
-   SaveDiagrammAndCheck(aDiagramm);
+
+   SaveDiagrammAndCheck(aDiagramm, SaveDiagramm);
   end
   , f_Context.rDiagrammName
  );
+end;
+
+function TmsCustomShapeTest.MakeFileName(const aTestName: string; const aFileExtension: string): String;
+begin
+ Result := inherited + '.json';
 end;
 
 procedure TmsCustomShapeTest.TestSerialize;
@@ -207,7 +220,7 @@ begin
  CreateDiagrammAndCheck(
   procedure (const aDiagramm : ImsDiagramm)
   begin
-   aDiagramm.LoadFrom(MakeFileName(TestSerializeMethodName));
+   aDiagramm.LoadFrom(MakeFileName(TestSerializeMethodName, c_JSON));
    // - берём результаты от ПРЕДЫДУЩИХ тестов, НЕКОШЕРНО с точки зрения TDD
    //   НО! Чертовски эффективно.
    aCheck(aDiagramm);
@@ -221,7 +234,7 @@ begin
  DeserializeDiargammAndCheck(
   procedure (const aDiagramm: ImsDiagramm)
   begin
-   SaveDiagrammAndCheck(aDiagramm);
+   SaveDiagrammAndCheck(aDiagramm, SaveDiagramm);
   end
  );
 end;
@@ -333,7 +346,7 @@ var
 begin
  l_Diagramms := TmsDiagramms.Create;
  try
-  l_Diagramms.LoadFrom(MakeFileName(TestSerializeMethodName));
+  l_Diagramms.LoadFrom(MakeFileName(TestSerializeMethodName, c_JSON));
   // - берём результаты от ПРЕДЫДУЩИХ тестов, НЕКОШЕРНО с точки зрения TDD
   //   НО! Чертовски эффективно.
   l_FileName := TestResultsFileName;

@@ -27,6 +27,7 @@ type
     btAddDiagramm: TButton;
     btSaveDiagramm: TButton;
     btLoadDiagramm: TButton;
+    btnSaveToPNG: TButton;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -64,7 +65,8 @@ begin
                                                        cbDiagramm,
                                                        btAddDiagramm,
                                                        btSaveDiagramm,
-                                                       btLoadDiagramm);
+                                                       btLoadDiagramm,
+                                                       btnSaveToPNG);
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);

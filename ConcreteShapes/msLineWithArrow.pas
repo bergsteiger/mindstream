@@ -1,4 +1,4 @@
-unit msLineWithArrow;
+п»їunit msLineWithArrow;
 
 interface
 
@@ -55,30 +55,30 @@ begin
     l_CenterPoint := FinishPoint;
 
     l_Matrix := TMatrix.Identity;
-    // - СНИМАЕМ оригинальную матрицу, точнее берём ЕДИНИЧНУЮ матрицу
+    // - РЎРќРРњРђР•Рњ РѕСЂРёРіРёРЅР°Р»СЊРЅСѓСЋ РјР°С‚СЂРёС†Сѓ, С‚РѕС‡РЅРµРµ Р±РµСЂС‘Рј Р•Р”РРќРР§РќРЈР® РјР°С‚СЂРёС†Сѓ
     // https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
-    // - задаём точку, вокруг которой вертим
+    // - Р·Р°РґР°С‘Рј С‚РѕС‡РєСѓ, РІРѕРєСЂСѓРі РєРѕС‚РѕСЂРѕР№ РІРµСЂС‚РёРј
     l_Matrix := l_Matrix * TMatrix.CreateRotation(l_Angle);
-    // - задаём угол поворота
+    // - Р·Р°РґР°С‘Рј СѓРіРѕР» РїРѕРІРѕСЂРѕС‚Р°
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
-    // - задаём начало координат
+    // - Р·Р°РґР°С‘Рј РЅР°С‡Р°Р»Рѕ РєРѕРѕСЂРґРёРЅР°С‚
     l_Matrix := l_Matrix * l_OriginalMatrix;
-    // - ПРИМЕНЯЕМ оригинальную матрицу
-    // Иначе например ОРИГИНАЛЬНЫЙ параллельный перенос - не будет работать.
+    // - РџР РРњР•РќРЇР•Рњ РѕСЂРёРіРёРЅР°Р»СЊРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
+    // РРЅР°С‡Рµ РЅР°РїСЂРёРјРµСЂ РћР РР“РРќРђР›Р¬РќР«Р™ РїР°СЂР°Р»Р»РµР»СЊРЅС‹Р№ РїРµСЂРµРЅРѕСЃ - РЅРµ Р±СѓРґРµС‚ СЂР°Р±РѕС‚Р°С‚СЊ.
     // https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B0%D0%BB%D0%BB%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81
 
     aCtx.rCanvas.SetMatrix(l_Matrix);
-    // - применяем нашу "комплексную" матрицу
+    // - РїСЂРёРјРµРЅСЏРµРј РЅР°С€Сѓ "РєРѕРјРїР»РµРєСЃРЅСѓСЋ" РјР°С‚СЂРёС†Сѓ
 
     l_Proxy.DrawTo(aCtx);
-    // - отрисовываем примитив с учётом матрицы преобразований
+    // - РѕС‚СЂРёСЃРѕРІС‹РІР°РµРј РїСЂРёРјРёС‚РёРІ СЃ СѓС‡С‘С‚РѕРј РјР°С‚СЂРёС†С‹ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёР№
    finally
     FreeAndNil(l_Proxy);
    end;//try..finally
   finally
     aCtx.rCanvas.SetMatrix(l_OriginalMatrix);
-    // - восстанавливаем ОРИГИНАЛЬНУЮ матрицу
+    // - РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РћР РР“РРќРђР›Р¬РќРЈР® РјР°С‚СЂРёС†Сѓ
   end;//try..finally
  end;//(StartPoint <> FinishPoint)
 end;
@@ -91,15 +91,18 @@ var
  l_PointC : TPointF;
  l_Invert : SmallInt;
 begin
- // Формула расчета растояний между двумя точками
+ // Р¤РѕСЂРјСѓР»Р° СЂР°СЃС‡РµС‚Р° СЂР°СЃС‚РѕСЏРЅРёР№ РјРµР¶РґСѓ РґРІСѓРјСЏ С‚РѕС‡РєР°РјРё
  l_X := (FinishPoint.X - StartPoint.X) * (FinishPoint.X - StartPoint.X);
- l_Y := (FinishPoint.Y - StartPoint.Y) * (FinishPoint.Y - StartPoint.Y);
+ l_Y := (FinishPoint.Y - StartPoint.Y) * (FinishPoint.Y - StartPoint.Y);
+
  l_CLength := sqrt( l_X + l_Y);
 
  l_PointC := TPointF.Create(FinishPoint.X, StartPoint.Y);
 
- // Формула расчета растояний между двумя точками
- l_X := (l_PointC.X - StartPoint.X) * (l_PointC.X - StartPoint.X); l_Y := (l_PointC.Y - StartPoint.Y) * (l_PointC.Y - StartPoint.Y);
+ // Р¤РѕСЂРјСѓР»Р° СЂР°СЃС‡РµС‚Р° СЂР°СЃС‚РѕСЏРЅРёР№ РјРµР¶РґСѓ РґРІСѓРјСЏ С‚РѕС‡РєР°РјРё
+ l_X := (l_PointC.X - StartPoint.X) * (l_PointC.X - StartPoint.X);
+ l_Y := (l_PointC.Y - StartPoint.Y) * (l_PointC.Y - StartPoint.Y);
+
  l_ALength := sqrt( l_X + l_Y);
 
  // In Radian

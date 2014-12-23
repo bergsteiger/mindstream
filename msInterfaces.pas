@@ -8,7 +8,8 @@ uses
  FMX.Graphics,
  System.UITypes,
  msSerializeInterfaces,
- Generics.Collections
+ Generics.Collections,
+ FMX.Objects
  ;
 
 type
@@ -125,11 +126,12 @@ type
   procedure ProcessClick(const aClickContext: TmsClickContext);
   procedure Clear;
   procedure DrawTo(const aCanvas: TCanvas);
+  procedure SaveToPng(const aFileName: String);
   function AddShape(const aShape: ImsShape): ImsShape;
   function GetEnumerator: TmsShapesEnumerator;
   function ItemsCount: Integer;
   property Name: String
-   read Get_Name;
+  read Get_Name;
  end;//ImsDiagramm
 
  ImsDiagramms = interface(ImsDiagrammsList)

@@ -3,7 +3,7 @@ object fmMain: TfmMain
   Top = 0
   Caption = 'MindStream'
   ClientHeight = 600
-  ClientWidth = 600
+  ClientWidth = 709
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop, iPhone, iPad]
@@ -28,12 +28,12 @@ object fmMain: TfmMain
   end
   object pnlAll: TPanel
     Align = Client
-    Size.Width = 600.000000000000000000
+    Size.Width = 709.000000000000000000
     Size.Height = 600.000000000000000000
     Size.PlatformDefault = False
     object pnlTop: TPanel
       Align = Top
-      Size.Width = 600.000000000000000000
+      Size.Width = 709.000000000000000000
       Size.Height = 41.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
@@ -64,7 +64,7 @@ object fmMain: TfmMain
         Size.Width = 100.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 5
+        TabOrder = 6
       end
       object btAddDiagramm: TButton
         Position.X = 328.000000000000000000
@@ -72,7 +72,7 @@ object fmMain: TfmMain
         Size.Width = 80.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 4
+        TabOrder = 5
         Text = 'Add'
       end
       object btSaveDiagramm: TButton
@@ -81,27 +81,36 @@ object fmMain: TfmMain
         Size.Width = 80.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 3
-        Text = 'Save Picture'
+        TabOrder = 4
+        Text = 'Save To Json'
       end
       object btLoadDiagramm: TButton
         Position.X = 504.000000000000000000
         Position.Y = 8.000000000000000000
-        Size.Width = 80.000000000000000000
+        Size.Width = 97.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 2
-        Text = 'Load Picture'
+        Text = 'Load From Json'
+      end
+      object btnSaveToPNG: TButton
+        Position.X = 608.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Text = 'Save PNG'
       end
     end
     object pnlBottom: TPanel
       Align = Client
-      Size.Width = 600.000000000000000000
+      Size.Width = 709.000000000000000000
       Size.Height = 559.000000000000000000
       Size.PlatformDefault = False
       object imgMain: TPaintBox
         Align = Client
-        Size.Width = 600.000000000000000000
+        Size.Width = 709.000000000000000000
         Size.Height = 559.000000000000000000
         Size.PlatformDefault = False
         OnMouseMove = imgMainMouseMove
