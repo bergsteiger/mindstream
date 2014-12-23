@@ -53,7 +53,8 @@ uses
   msShapeCreator in 'msShapeCreator.pas',
   msFormatter in 'msFormatter.pas',
   TestmsJsonFormatter in 'Tests\Module\TestmsJsonFormatter.pas',
-  TestSaveToPNG in 'Tests\Module\TestSaveToPNG.pas';
+  TestSaveToPNG in 'Tests\Module\TestSaveToPNG.pas',
+  msTestConstants in 'Tests\Module\msTestConstants.pas';
 
 {$R *.res}
 

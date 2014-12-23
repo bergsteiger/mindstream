@@ -94,8 +94,8 @@ implementation
   msStringList,
   msDiagramms,
   Math,
-  msStreamUtils
-  ;
+  msStreamUtils,
+  msTestConstants;
 
 
 function TmsShapeTestPrim.MakeFileName(const aTestName: string; const aTestFolder: string): String;
@@ -166,8 +166,8 @@ begin
  SetLength(f_Coords, ShapesCount);
  for l_Index := 0 to Pred(ShapesCount) do
  begin
-  l_X := Random(100);
-  l_Y := Random(200);
+  l_X := Random(c_MaxCanvasWidth);
+  l_Y := Random(c_MaxCanvasHeight);
   f_Coords[l_Index] := TPoint.Create(l_X, l_Y);
  end;//for l_Index
 end;

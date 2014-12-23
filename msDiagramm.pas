@@ -42,6 +42,8 @@ type
   FCurrentAddedShape: ImsShape;
   [JSONMarshalled(True)]
   fName: String;
+  [JSONMarshalled(False)]
+  f_MaxX, f_MaxY : Single;
  private
   function CurrentAddedShape: ImsShape;
   procedure BeginShape(const aClickContext: TmsClickContext);
@@ -64,7 +66,7 @@ type
   property Name: String read fName write fName;
   procedure Serialize;
   procedure DeSerialize;
-  procedure SaveToPng(const aFileName: String; aCanvas: TCanvas);
+  procedure SaveToPng(const aFileName: String);
   procedure Assign(const anOther: TmsDiagramm);
  end; // TmsDiagramm
 
@@ -80,7 +82,10 @@ uses
  msDiagrammMarshal,
  msInvalidators,
  msShapesForToolbar,
- msDiagrammsController;
+ msDiagrammsController,
+ System.Math.Vectors,
+ msTestConstants
+ ;
 
 {$Include msItemsHolder.mixin.pas}
 {$Include msPersistent.mixin.pas}
@@ -133,6 +138,8 @@ begin
  inherited Create;
  FCurrentAddedShape := nil;
  fName := aName;
+ f_MaxX := 0;
+ f_MaxY := 0;
 end;
 
 procedure TmsDiagramm.SaveTo(const aFileName: String);
@@ -140,16 +147,21 @@ begin
  TmsDiagrammMarshal.Serialize(aFileName, Self);
 end;
 
-procedure TmsDiagramm.SaveToPng(const aFileName: String; aCanvas: TCanvas);
+procedure TmsDiagramm.SaveToPng(const aFileName: string);
 var
  l_BitmapBuffer: TBitmap;
  l_SourceRect: TRectF;
+ l_OriginalMatrix: TMatrix;
 begin
  // Фиксируем размер снимаемой области
- l_SourceRect := TRectF.Create(0, 0, aCanvas.Width, aCanvas.Height);
+ l_SourceRect := TRectF.Create(0, 0, f_MaxX, f_MaxY);
  // Создаем временный буфер для получения скриншота
  l_BitmapBuffer := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
  try
+  l_OriginalMatrix := TMatrix.Identity;
+  l_OriginalMatrix := l_OriginalMatrix * l_BitmapBuffer.Canvas.Matrix;
+  l_BitmapBuffer.Canvas.SetMatrix(l_OriginalMatrix);
+  Self.DrawTo(l_BitmapBuffer.Canvas);
   l_BitmapBuffer.SaveToFile(aFileName);
  finally
   FreeAndNil(l_BitmapBuffer);
@@ -164,6 +176,9 @@ end;
 function TmsDiagramm.AddShape(const aShape: ImsShape): ImsShape;
 begin
  Items.Add(aShape);
+ if aShape.StartPoint.X > f_MaxX then f_MaxX := aShape.StartPoint.X;
+ if aShape.StartPoint.Y > f_MaxY then f_MaxY := aShape.StartPoint.Y;
+
  Result := aShape;
 end;
 

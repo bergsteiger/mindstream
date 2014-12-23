@@ -283,7 +283,7 @@ end;
 
 procedure TmsDiagrammsController.SaveToPng(const aFileName: string);
 begin
- f_CurrentDiagramm.SaveToPng(aFileName, imgMain.Canvas);
+ f_CurrentDiagramm.SaveToPng(aFileName);
 end;
 
 procedure TmsDiagrammsController.DrawTo(const aCanvas: TCanvas);
