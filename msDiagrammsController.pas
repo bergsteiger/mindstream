@@ -3,7 +3,7 @@
 interface
 
 uses
-{$INCLUDE msIvalidator.mixin.pas}
+{$Include msIvalidator.mixin.pas}
   ,
  FMX.Objects,
  FMX.ListBox,
@@ -21,7 +21,7 @@ uses
 
 type
  TmsIvalidatorParent = TmsInterfacedRefcounted;
-{$INCLUDE msIvalidator.mixin.pas}
+{$Include msIvalidator.mixin.pas}
 
  TmsDiagrammsController = class(TmsIvalidator, ImsDiagrammsController)
  private
@@ -45,30 +45,42 @@ type
   procedure pm_SetCurrentDiagramm(const aValue: ImsDiagramm);
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
-  function pm_GetImage: TPaintBox;
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
-  property CurrentDiagramms: ImsDiagrammsList read pm_GetCurrentDiagramms write pm_SetCurrentDiagramms;
-  constructor CreatePrim(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton;
-    aLoadDiagramm: TButton; aSaveToPng: TButton);
+  property CurrentDiagramms: ImsDiagrammsList
+   read pm_GetCurrentDiagramms
+   write pm_SetCurrentDiagramms;
+  constructor CreatePrim(aImage: TPaintBox;
+                         aShapes: TComboBox;
+                         aDiagramm: TComboBox;
+                         aAddDiagramm: TButton;
+                         aSaveDiagramm: TButton;
+                         aLoadDiagramm: TButton;
+                         aSaveToPng: TButton);
  public
-  class function Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton; aSaveDiagramm: TButton;
-    aLoadDiagramm: TButton; aSaveToPng: TButton): ImsDiagrammsController;
+  class function Create(aImage: TPaintBox;
+                        aShapes: TComboBox;
+                        aDiagramm: TComboBox;
+                        aAddDiagramm: TButton;
+                        aSaveDiagramm: TButton;
+                        aLoadDiagramm: TButton;
+                        aSaveToPng: TButton): ImsDiagrammsController;
   destructor Destroy; override;
   procedure Clear;
   procedure ProcessClick(const aStart: TPointF);
-  property CurrentDiagramm: ImsDiagramm read pm_GetCurrentDiagramm write pm_SetCurrentDiagramm;
+  property CurrentDiagramm: ImsDiagramm
+   read pm_GetCurrentDiagramm
+   write pm_SetCurrentDiagramm;
 
   procedure SaveToPng(const aFileName: string);
-  property Image: TPaintBox read pm_GetImage;
   procedure DrawTo(const aCanvas: TCanvas);
  end; // TmsDiagrammsController
 
 implementation
 
 uses
-{$INCLUDE msIvalidator.mixin.pas}
+{$Include msIvalidator.mixin.pas}
   ,
  System.SysUtils,
  FMX.Types,
@@ -110,7 +122,7 @@ begin
  f_DiagrammsController.CurrentDiagramms := aValue;
 end;
 
-{$INCLUDE msIvalidator.mixin.pas}
+{$Include msIvalidator.mixin.pas}
 // TmsDiagrammsController
 
 constructor TmsDiagrammsController.CreatePrim(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton;
@@ -173,11 +185,6 @@ end;
 function TmsDiagrammsController.pm_GetCurrentDiagramms: ImsDiagrammsList;
 begin
  Result := f_CurrentDiagramms;
-end;
-
-function TmsDiagrammsController.pm_GetImage: TPaintBox;
-begin
- Result := imgMain;
 end;
 
 procedure TmsDiagrammsController.pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);

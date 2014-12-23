@@ -4,10 +4,10 @@ interface
 
 uses
 {$INCLUDE msItemsHolder.mixin.pas}
-  ,
-{$INCLUDE msPersistent.mixin.pas}
+ ,
+{$Include msPersistent.mixin.pas}
 ,
-{$INCLUDE msShapesProvider.mixin.pas}
+{$Include msShapesProvider.mixin.pas}
  msInterfaces,
  FMX.Graphics,
  System.SysUtils,
@@ -26,17 +26,17 @@ uses
 type
  TmsItemsHolderParent = TmsInterfacedRefcounted;
  TmsItem = ImsShape;
-{$INCLUDE msItemsHolder.mixin.pas}
+{$Include msItemsHolder.mixin.pas}
  TmsPersistentParent = TmsItemsHolder;
-{$INCLUDE msPersistent.mixin.pas}
+{$Include msPersistent.mixin.pas}
  TmsShapesProviderParent = TmsPersistent;
-{$INCLUDE msShapesProvider.mixin.pas}
+{$Include msShapesProvider.mixin.pas}
 
  TmsDiagramm = class(TmsShapesProvider, ImsDiagramm, ImsShapeByPt, ImsShapesController)
-  // - Âûäåëÿåì èíòåðôåéñ ImsObjectWrap.
-  // Ñìåøíî - åñëè TmsDiagramm åãî ðåàëèçåò ÍÀÏÐßÌÓÞ, òî âñ¸ õîðîøî.
-  // À åñëè ÷åðåç ImsSerializable, òî - AV.
-  // Ïðî ýòî ìîæíî ïèñàòü îòäåëüíóþ ñòàòüþ.
+ // - Выделяем интерфейс ImsObjectWrap.
+ //   Смешно - если TmsDiagramm его реализет НАПРЯМУЮ, то всё хорошо.
+ //   А если через ImsSerializable, то - AV.
+ //   Про это можно писать отдельную статью.
  private
   [JSONMarshalled(False)]
   FCurrentAddedShape: ImsShape;
@@ -70,10 +70,10 @@ type
 implementation
 
 uses
-{$INCLUDE msItemsHolder.mixin.pas}
-{$INCLUDE msPersistent.mixin.pas}
+{$Include msItemsHolder.mixin.pas}
+{$Include msPersistent.mixin.pas}
   ,
-{$INCLUDE msShapesProvider.mixin.pas}
+{$Include msShapesProvider.mixin.pas}
  msMover,
  msCircle,
  msDiagrammMarshal,
@@ -81,9 +81,9 @@ uses
  msShapesForToolbar,
  msDiagrammsController;
 
-{$INCLUDE msItemsHolder.mixin.pas}
-{$INCLUDE msPersistent.mixin.pas}
-{$INCLUDE msShapesProvider.mixin.pas}
+{$Include msItemsHolder.mixin.pas}
+{$Include msPersistent.mixin.pas}
+{$Include msShapesProvider.mixin.pas}
 
 const
  c_FileName = '.json';
@@ -96,7 +96,7 @@ end;
 procedure TmsDiagramm.ProcessClick(const aClickContext: TmsClickContext);
 begin
  if ShapeIsEnded then
-  // - ìû ÍÅ ÄÎÁÀÂËßËÈ ïðèìèòèâà - íàäî åãî ÄÎÁÀÂÈÒÜ
+ // - мы НЕ ДОБАВЛЯЛИ примитива - надо его ДОБАВИТЬ
   BeginShape(aClickContext)
  else
   EndShape(aClickContext.rClickPoint, aClickContext.rDiagrammsHolder);
@@ -104,13 +104,12 @@ end;
 
 procedure TmsDiagramm.BeginShape(const aClickContext: TmsClickContext);
 begin
- FCurrentAddedShape := aClickContext.rShapeCreator.CreateShape(TmsMakeShapeContext.Create(aClickContext.rClickPoint, Self,
-   aClickContext.rDiagrammsHolder));
+ FCurrentAddedShape := aClickContext.rShapeCreator.CreateShape(TmsMakeShapeContext.Create(aClickContext.rClickPoint, Self, aClickContext.rDiagrammsHolder));
  if (FCurrentAddedShape <> nil) then
  begin
   Items.Add(FCurrentAddedShape);
   if not FCurrentAddedShape.IsNeedsSecondClick then
-   // - åñëè íå íàäî SecondClick, òî íàø ïðèìèòèâ - çàâåðø¸í
+  // - если не надо SecondClick, то наш примитив - завершён
    FCurrentAddedShape := nil;
   Invalidate;
  end; // FCurrentAddedShape <> nil
