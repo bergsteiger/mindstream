@@ -34,7 +34,7 @@ type
    f_Coords : array of TPoint;
   protected
     function TestResultsFileName: String;
-    function MakeFileName(const aTestName: String): String;
+    function MakeFileName(const aTestName: String): String; virtual;
     procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
     procedure CheckFileWithEtalon(const aFileName: String);
     procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); virtual;

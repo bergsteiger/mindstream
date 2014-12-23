@@ -1,13 +1,13 @@
-unit msDiagramm;
+﻿unit msDiagramm;
 
 interface
 
 uses
- {$Include msItemsHolder.mixin.pas}
- ,
- {$Include msPersistent.mixin.pas}
- ,
- {$Include msShapesProvider.mixin.pas}
+{$INCLUDE msItemsHolder.mixin.pas}
+  ,
+{$INCLUDE msPersistent.mixin.pas}
+,
+{$INCLUDE msShapesProvider.mixin.pas}
  msInterfaces,
  FMX.Graphics,
  System.SysUtils,
@@ -21,22 +21,22 @@ uses
  FMX.Dialogs,
  System.JSON,
  msCoreObjects,
- msInterfacedRefcounted
- ;
+ msInterfacedRefcounted;
 
 type
  TmsItemsHolderParent = TmsInterfacedRefcounted;
  TmsItem = ImsShape;
- {$Include msItemsHolder.mixin.pas}
+{$INCLUDE msItemsHolder.mixin.pas}
  TmsPersistentParent = TmsItemsHolder;
- {$Include msPersistent.mixin.pas}
+{$INCLUDE msPersistent.mixin.pas}
  TmsShapesProviderParent = TmsPersistent;
- {$Include msShapesProvider.mixin.pas}
+{$INCLUDE msShapesProvider.mixin.pas}
+
  TmsDiagramm = class(TmsShapesProvider, ImsDiagramm, ImsShapeByPt, ImsShapesController)
- // - �������� ��������� ImsObjectWrap.
- //   ������ - ���� TmsDiagramm ��� �������� ��������, �� �� ������.
- //   � ���� ����� ImsSerializable, �� - AV.
- //   ��� ��� ����� ������ ��������� ������.
+  // - Âûäåëÿåì èíòåðôåéñ ImsObjectWrap.
+  // Ñìåøíî - åñëè TmsDiagramm åãî ðåàëèçåò ÍÀÏÐßÌÓÞ, òî âñ¸ õîðîøî.
+  // À åñëè ÷åðåç ImsSerializable, òî - AV.
+  // Ïðî ýòî ìîæíî ïèñàòü îòäåëüíóþ ñòàòüþ.
  private
   [JSONMarshalled(False)]
   FCurrentAddedShape: ImsShape;
@@ -45,7 +45,7 @@ type
  private
   function CurrentAddedShape: ImsShape;
   procedure BeginShape(const aClickContext: TmsClickContext);
-  procedure EndShape(const aFinish: TPointF; aDiagrammsHolder : ImsDiagrammsHolder);
+  procedure EndShape(const aFinish: TPointF; aDiagrammsHolder: ImsDiagrammsHolder);
   function ShapeIsEnded: Boolean;
   function ShapeByPt(const aPoint: TPointF): ImsShape;
   procedure RemoveShape(const aShape: ImsShape);
@@ -63,41 +63,40 @@ type
   property Name: String read fName write fName;
   procedure Serialize;
   procedure DeSerialize;
-  procedure Assign(const anOther : TmsDiagramm);
- end;//TmsDiagramm
+  procedure SaveToPng(const aFileName: String; const aImage: TPaintBox);
+  procedure Assign(const anOther: TmsDiagramm);
+ end; // TmsDiagramm
 
 implementation
 
 uses
- {$Include msItemsHolder.mixin.pas}
- {$Include msPersistent.mixin.pas}
- ,
- {$Include msShapesProvider.mixin.pas}
+{$INCLUDE msItemsHolder.mixin.pas}
+{$INCLUDE msPersistent.mixin.pas}
+  ,
+{$INCLUDE msShapesProvider.mixin.pas}
  msMover,
  msCircle,
  msDiagrammMarshal,
  msInvalidators,
- msShapesForToolbar
- ;
+ msShapesForToolbar,
+ msDiagrammsController;
 
-{$Include msItemsHolder.mixin.pas}
-
-{$Include msPersistent.mixin.pas}
-
-{$Include msShapesProvider.mixin.pas}
+{$INCLUDE msItemsHolder.mixin.pas}
+{$INCLUDE msPersistent.mixin.pas}
+{$INCLUDE msShapesProvider.mixin.pas}
 
 const
  c_FileName = '.json';
 
 procedure TmsDiagramm.Serialize;
 begin
- TmsDiagrammMarshal.Serialize(Self.Name + c_FileName, self);
+ TmsDiagrammMarshal.Serialize(Self.Name + c_FileName, Self);
 end;
 
 procedure TmsDiagramm.ProcessClick(const aClickContext: TmsClickContext);
 begin
  if ShapeIsEnded then
-  // - �� �� ��������� ��������� - ���� ��� ��������
+  // - ìû ÍÅ ÄÎÁÀÂËßËÈ ïðèìèòèâà - íàäî åãî ÄÎÁÀÂÈÒÜ
   BeginShape(aClickContext)
  else
   EndShape(aClickContext.rClickPoint, aClickContext.rDiagrammsHolder);
@@ -105,12 +104,13 @@ end;
 
 procedure TmsDiagramm.BeginShape(const aClickContext: TmsClickContext);
 begin
- FCurrentAddedShape := aClickContext.rShapeCreator.CreateShape(TmsMakeShapeContext.Create(aClickContext.rClickPoint, Self, aClickContext.rDiagrammsHolder));
+ FCurrentAddedShape := aClickContext.rShapeCreator.CreateShape(TmsMakeShapeContext.Create(aClickContext.rClickPoint, Self,
+   aClickContext.rDiagrammsHolder));
  if (FCurrentAddedShape <> nil) then
  begin
   Items.Add(FCurrentAddedShape);
   if not FCurrentAddedShape.IsNeedsSecondClick then
-   // - ���� �� ���� SecondClick, �� ��� �������� - ��������
+   // - åñëè íå íàäî SecondClick, òî íàø ïðèìèòèâ - çàâåðø¸í
    FCurrentAddedShape := nil;
   Invalidate;
  end; // FCurrentAddedShape <> nil
@@ -140,6 +140,31 @@ begin
  TmsDiagrammMarshal.Serialize(aFileName, Self);
 end;
 
+procedure TmsDiagramm.SaveToPng(const aFileName: String; const aImage: TPaintBox);
+var
+ l_BitmapBuffer: TBitmap;
+ l_SourceRect: TRectF;
+begin
+ // Фиксируем размер снимаемой области
+ l_SourceRect := TRectF.Create(0, 0, aImage.Width, aImage.Height);
+ // Создаем временный буфер для получения скриншота
+ l_BitmapBuffer := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
+ try
+  // Переводим канву в режим отрисовки - начинаем процесс отрисовки сцены
+  if l_BitmapBuffer.Canvas.BeginScene then
+   try
+    // Говорим контролу отрисовать себя в канве нашего буфера в указанной области
+    aImage.PaintTo(l_BitmapBuffer.Canvas, l_SourceRect);
+   finally
+    // Завершаем процесс отрисовки, заканчивая формируемую сцену
+    l_BitmapBuffer.Canvas.EndScene;
+   end;
+  l_BitmapBuffer.SaveToFile(aFileName);
+ finally
+  FreeAndNil(l_BitmapBuffer);
+ end;
+end;
+
 procedure TmsDiagramm.LoadFrom(const aFileName: String);
 begin
  TmsDiagrammMarshal.DeSerialize(aFileName, Self);
@@ -153,7 +178,7 @@ end;
 
 function TmsDiagramm.Get_Name: String;
 begin
- Result := FName;
+ Result := fName;
 end;
 
 function TmsDiagramm.CurrentAddedShape: ImsShape;
@@ -161,7 +186,7 @@ begin
  Result := FCurrentAddedShape;
 end;
 
-procedure TmsDiagramm.Assign(const anOther : TmsDiagramm);
+procedure TmsDiagramm.Assign(const anOther: TmsDiagramm);
 begin
  inherited Assign(anOther);
  Self.Name := anOther.Name;
@@ -176,7 +201,7 @@ begin
  except
   on EFOpenError do
    Exit;
- end;//try..except
+ end; // try..except
 end;
 
 procedure TmsDiagramm.DrawTo(const aCanvas: TCanvas);
@@ -193,9 +218,9 @@ begin
  end; // try..finally
 end;
 
-procedure TmsDiagramm.EndShape(const aFinish: TPointF; aDiagrammsHolder : ImsDiagrammsHolder);
+procedure TmsDiagramm.EndShape(const aFinish: TPointF; aDiagrammsHolder: ImsDiagrammsHolder);
 begin
- assert(CurrentAddedShape <> nil);
+ Assert(CurrentAddedShape <> nil);
  CurrentAddedShape.EndTo(TmsEndShapeContext.Create(aFinish, Self, aDiagrammsHolder));
  FCurrentAddedShape := nil;
  Invalidate;
