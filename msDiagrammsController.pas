@@ -142,7 +142,7 @@ begin
  btSaveDiagramm.OnClick := btSaveDiagrammClick;
  btLoadDiagramm.OnClick := btLoadDiagrammClick;
  imgMain.OnMouseDown := imgMainMouseDown;
- imgMain.Align := TAlignLayout.alClient;
+ imgMain.Align := TAlignLayout.Client;
  f_DiagrammsRoot := TmsDiagramms.Create;
  CurrentDiagramms := f_DiagrammsRoot;
  CurrentDiagramms.AddNewDiagramm;

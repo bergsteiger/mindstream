@@ -51,9 +51,10 @@ type
   procedure RemoveShape(const aShape: ImsShape);
   function Get_Name: String;
   constructor CreatePrim(const aName: String);
+  function AddShape(const aShape: ImsShape): ImsShape;
+ protected
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
-  function AddShape(const aShape: ImsShape): ImsShape;
  public
   class function Create(const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
