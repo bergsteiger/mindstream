@@ -55,7 +55,7 @@ begin
    try
     // TODO: Setup method call parameters
     l_Result.Text:= TmsFormatter.FormatJson(l_JsonFileBeforeFormat.Text);
-    l_Result.SaveToFile('e:\json.json');
+    l_Result.SaveToFile(ExtractFilePath(ParamStr(0)) +  '\json.json');
     // TODO: Validate method results
     CheckTrue(l_FileEtalon.Equals(l_Result));
    finally
