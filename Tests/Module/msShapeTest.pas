@@ -37,6 +37,7 @@ type
    f_TestSerializeMethodName : String;
    f_Coords : array of TPoint;
   protected
+   class function ComputerName: AnsiString;
     function TestResultsFileName: String; virtual;
     function MakeFileName(const aTestName: string; const aTestFolder: string): String; virtual;
     procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
@@ -126,6 +127,21 @@ function TmsShapeTestPrim.TestResultsFileName: String;
 begin
  Result := MakeFileName(Name, c_JSON);
 end;
+
+class function TmsShapeTestPrim.ComputerName: AnsiString;
+//#UC START# *4CA45DD902BD_4B2A11BC0255_var*
+var
+ l_CompSize : Integer;
+//#UC END# *4CA45DD902BD_4B2A11BC0255_var*
+begin
+//#UC START# *4CA45DD902BD_4B2A11BC0255_impl*
+ l_CompSize := MAX_COMPUTERNAME_LENGTH + 1;
+ SetLength(Result, l_CompSize);
+
+ Win32Check(GetComputerNameA(PAnsiChar(Result), LongWord(l_CompSize)));
+ SetLength(Result, l_CompSize);
+//#UC END# *4CA45DD902BD_4B2A11BC0255_impl*
+end;//TBaseTest.ComputerName
 
 procedure TmsShapeTestPrim.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 begin
