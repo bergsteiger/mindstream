@@ -54,6 +54,8 @@ begin
 end;
 
 function TTestSaveToPNG.TestResultsFileName: String;
+const
+ c_PNG = 'PNG\';
 begin
  Result := MakeFileName(Name, c_PNG);
 end;

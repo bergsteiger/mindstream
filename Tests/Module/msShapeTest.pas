@@ -12,9 +12,6 @@ uses
   msCoreObjects,
   msInterfaces
   ;
-const
- c_JSON = 'JSON\';
- c_PNG = 'PNG\';
 
 type
   TmsShapeClassCheck = TmsShapeClassLambda;
@@ -122,6 +119,9 @@ begin
   CopyFile(PWideChar(aFileName),PWideChar(l_FileNameEtalon),True);
  end;//FileExists(l_FileNameEtalon)
 end;
+
+const
+ c_JSON = 'JSON\';
 
 function TmsShapeTestPrim.TestResultsFileName: String;
 begin
