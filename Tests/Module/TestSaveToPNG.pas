@@ -57,7 +57,7 @@ function TTestSaveToPNG.TestResultsFileName: String;
 const
  c_PNG = 'PNG\';
 begin
- Result := MakeFileName(Name, c_PNG);
+ Result := MakeFileName(Name, c_PNG + ComputerName + '\');
 end;
 
 initialization
