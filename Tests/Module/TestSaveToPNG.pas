@@ -36,18 +36,7 @@ end;
 
 procedure TTestSaveToPNG.CreateDiagrammWithShapeAndSaveToPNG_AndCheck;
 begin
- CreateDiagrammAndCheck(
-  procedure (const aDiagramm : ImsDiagramm)
-  var
-   l_P : TPoint;
-  begin
-   for l_P in f_Coords do
-    aDiagramm.AddShape(f_Context.rShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil, nil))).AddNewDiagramm;
-
-   SaveDiagrammAndCheck(aDiagramm, SaveDiagramm);
-  end
-  , f_Context.rDiagrammName
- );
+ CreateDiagrammWithShapeAndSaveAndCheck;
 end;
 
 function TTestSaveToPNG.MakeFileName(const aTestName: string; const aTestFolder: string): String;
