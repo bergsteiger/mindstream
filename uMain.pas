@@ -10,7 +10,8 @@ uses
 
   msDiagramms,
   msDiagrammsController,
-  msInterfaces
+  msInterfaces,
+  msShapeButton
   ;
 
 type
@@ -28,6 +29,8 @@ type
     btSaveDiagramm: TButton;
     btLoadDiagramm: TButton;
     btnSaveToPNG: TButton;
+    pnlToolBar: TPanel;
+    btnTriangleShape: TButton;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -36,6 +39,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure btnClearImageClick(Sender: TObject);
     procedure imgMainPaint(Sender: TObject; Canvas: TCanvas);
+    procedure btnTriangleShapeClick(Sender: TObject);
   private
    FDiagrammsController: ImsDiagrammsController;
   public
@@ -48,7 +52,8 @@ var
 implementation
 
 uses
- System.Math.Vectors
+ System.Math.Vectors,
+ msSmallTriangle
  ;
 
 {$R *.fmx}
@@ -56,6 +61,26 @@ uses
 procedure TfmMain.btnClearImageClick(Sender: TObject);
 begin
  FDiagrammsController.Clear;
+end;
+
+procedure TfmMain.btnTriangleShapeClick(Sender: TObject);
+var
+ l_ShapeButton: TmsShapeButton;
+ l_SmallTriangle: ImsShape;
+ l_StartPoint: TPointF;
+
+ l_Button: TButton;
+begin
+ l_StartPoint := TPointF.Create(3, 3);
+ l_SmallTriangle := TmsSmallTriangle.Create(TmsMakeShapeContext.Create(l_StartPoint,nil,nil));
+ l_ShapeButton := TmsShapeButton.Create(l_SmallTriangle);
+// l_ShapeButton.Height := 50;
+// l_ShapeButton.Width := 50;
+// pnlToolBar.AddObject(l_Button);
+ l_Button := TButton.Create(nil);
+ l_Button.Width:= 50;
+ l_Button.Height:= 50;
+ pnlToolBar.AddObject(l_Button);
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);

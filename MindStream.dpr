@@ -57,7 +57,8 @@ uses
   TestmsJsonFormatter in 'Tests\Module\TestmsJsonFormatter.pas',
   msDiagrammStack in 'msDiagrammStack.pas',
   TestSaveToPNG in 'Tests\Module\TestSaveToPNG.pas',
-  msTestConstants in 'Tests\Module\msTestConstants.pas';
+  msTestConstants in 'Tests\Module\msTestConstants.pas',
+  msShapeButton in 'ShapeButtons\msShapeButton.pas';
 
 {$R *.res}
 
