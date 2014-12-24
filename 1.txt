@@ -1,4 +1,4 @@
-procedure TmsShapeTestPrim.CreateDiagrammWithShapeAndSaveAndCheck;
+procedure TTestSaveToPNG.CreateDiagrammWithShapeAndSaveToPNG_AndCheck;
 begin
  CreateDiagrammAndCheck(
   procedure (const aDiagramm : ImsDiagramm)

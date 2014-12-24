@@ -44,11 +44,7 @@ begin
    for l_P in f_Coords do
     aDiagramm.AddShape(f_Context.rShapeClass.Create(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil, nil))).AddNewDiagramm;
 
-   SaveDiagrammAndCheck(aDiagramm,
-    procedure (const aFileName: String; const aDiagramm: ImsDiagramm)
-    begin
-     aDiagramm.SaveToPng(aFileName);
-    end)
+   SaveDiagrammAndCheck(aDiagramm, SaveDiagramm);
   end
   , f_Context.rDiagrammName
  );
