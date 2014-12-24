@@ -13,6 +13,7 @@ type
    protected
     function MakeFileName(const aTestName: string; const aTestFolder: string): String; override;
     function TestResultsFileName: String; override;
+    procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); override;
    published
     procedure CreateDiagrammWithShapeAndSaveToPNG_AndCheck;
   end;//TTestSaveToPNG
@@ -27,6 +28,11 @@ uses
   ;
 
 { TTestSaveToPNG }
+
+procedure TTestSaveToPNG.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
+begin
+ aDiagramm.SaveToPng(aFileName);
+end;
 
 procedure TTestSaveToPNG.CreateDiagrammWithShapeAndSaveToPNG_AndCheck;
 begin
