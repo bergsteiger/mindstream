@@ -21,10 +21,6 @@ public
  constructor Create(AOwner: TComponent; aShape: ImsShape);
 end;
 
- TmsShapeCustomButton = class(TButton)
-  constructor Create(AOwner: TComponent); override;
- end;
-
 implementation
 
 { TmsShapeButton }
@@ -41,14 +37,6 @@ procedure TmsShapeButton.MyPaint(Sender: TObject;
                                const ARect: TRectF);
 begin
  f_Shape.DrawTo(TmsDrawContext.Create(Canvas));
-end;
-
-{ TmsShapeCustomButton }
-
-constructor TmsShapeCustomButton.Create(AOwner: TComponent);
-begin
-  inherited;
-
 end;
 
 end.

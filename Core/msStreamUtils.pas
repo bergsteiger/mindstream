@@ -21,22 +21,22 @@ uses
 
 procedure msStripHeader(aStream : TStream; aHeaderBegin : AnsiChar);
 var
- aCh : AnsiChar;
- aPos : Integer;
+ l_Ch : AnsiChar;
+ l_Pos : Integer;
 begin
- aPos := 0;
+ l_Pos := 0;
  with aStream do
  begin
   while (Position < Size) do
   begin
-   Read(aCh, 1);
-   if (aCh <> aHeaderBegin) then
+   Read(l_Ch, 1);
+   if (l_Ch <> aHeaderBegin) then
     break;
-   while (Position < Size) and (aCh <> #10) do
-    Read(aCh, 1);
-   aPos := Position;
+   while (Position < Size) and (l_Ch <> #10) do
+    Read(l_Ch, 1);
+   l_Pos := Position;
   end;//Position < Size
-  Position := aPos;
+  Position := l_Pos;
  end;//with aStream
 end;
 
