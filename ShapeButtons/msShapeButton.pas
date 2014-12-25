@@ -8,7 +8,8 @@ uses
  FMX.Controls,
  FMX.Graphics,
  System.Types,
- msInterfaces
+ msInterfaces,
+ System.Classes
  ;
 
 type TmsShapeButton = class(TButton)
@@ -17,18 +18,21 @@ private
 protected
  procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
 public
- constructor Create(aShape: ImsShape);
+ constructor Create(AOwner: TComponent; aShape: ImsShape);
 end;
+
+ TmsShapeCustomButton = class(TButton)
+  constructor Create(AOwner: TComponent); override;
+ end;
 
 implementation
 
 { TmsShapeButton }
-constructor TmsShapeButton.Create(aShape: ImsShape);
+constructor TmsShapeButton.Create(AOwner: TComponent; aShape: ImsShape);
 begin
+ inherited Create(AOwner);
+
  f_Shape := aShape;
-
- inherited
-
  OnPaint := MyPaint;
 end;
 
@@ -37,6 +41,14 @@ procedure TmsShapeButton.MyPaint(Sender: TObject;
                                const ARect: TRectF);
 begin
  f_Shape.DrawTo(TmsDrawContext.Create(Canvas));
+end;
+
+{ TmsShapeCustomButton }
+
+constructor TmsShapeCustomButton.Create(AOwner: TComponent);
+begin
+  inherited;
+
 end;
 
 end.

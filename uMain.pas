@@ -68,19 +68,16 @@ var
  l_ShapeButton: TmsShapeButton;
  l_SmallTriangle: ImsShape;
  l_StartPoint: TPointF;
-
- l_Button: TButton;
 begin
- l_StartPoint := TPointF.Create(3, 3);
+ l_StartPoint := TPointF.Create(30, 30);
  l_SmallTriangle := TmsSmallTriangle.Create(TmsMakeShapeContext.Create(l_StartPoint,nil,nil));
- l_ShapeButton := TmsShapeButton.Create(l_SmallTriangle);
-// l_ShapeButton.Height := 50;
-// l_ShapeButton.Width := 50;
-// pnlToolBar.AddObject(l_Button);
- l_Button := TButton.Create(nil);
- l_Button.Width:= 50;
- l_Button.Height:= 50;
- pnlToolBar.AddObject(l_Button);
+
+ l_ShapeButton := TmsShapeButton.Create(nil, l_SmallTriangle);
+ l_ShapeButton.Width := 40;
+ l_ShapeButton.Height := 40;
+ l_ShapeButton.Position.X := 20;
+ l_ShapeButton.Position.Y := 20;
+ pnlToolBar.AddObject(l_ShapeButton);
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
