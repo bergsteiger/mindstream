@@ -24,7 +24,9 @@ end;
 
 implementation
 uses
- System.Math.Vectors
+ System.Math.Vectors,
+ FMX.Dialogs,
+ System.SysUtils
  ;
 { TmsShapeButton }
 constructor TmsShapeButton.Create(AOwner: TComponent; aShape: ImsShape);
@@ -41,8 +43,8 @@ begin
 end;
 
 procedure TmsShapeButton.MyPaint(Sender: TObject;
-                               Canvas: TCanvas;
-                               const ARect: TRectF);
+                                 Canvas: TCanvas;
+                                 const ARect: TRectF);
 var
  l_OriginalMatrix: TMatrix;
  l_Matrix: TMatrix;
@@ -82,8 +84,15 @@ begin
 end;
 
 function TmsShapeButton.ScaleShapeToButton: TPointF;
+var
+ l_WidthCoef, l_HeightCoef: single;
+ l_WidthCoef1, l_HeightCoef1: single;
 begin
- Result:= TPointF.Create(0.5, 0.5)
+// l_WidthCoef1 := f_Shape.StartPoint.X;
+
+ l_WidthCoef:= Self.Width / 100 / 2;
+ l_HeightCoef:= Self.Height / 100 / 2;
+ Result:= TPointF.Create(l_WidthCoef, l_HeightCoef);
 end;
 
 end.
