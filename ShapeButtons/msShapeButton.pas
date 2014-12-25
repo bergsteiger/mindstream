@@ -15,6 +15,7 @@ uses
 type TmsShapeButton = class(TButton)
 private
  f_Shape: ImsShape;
+ function ScaleShapeToButton: TPointF;
 protected
  procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
 public
@@ -46,6 +47,7 @@ var
  l_OriginalMatrix: TMatrix;
  l_Matrix: TMatrix;
  l_CenterPoint: TPointF;
+ l_Scale: TPointF;
 begin
  l_OriginalMatrix := Canvas.Matrix;
  try
@@ -57,7 +59,9 @@ begin
   l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
   // - задаём точку, вокруг которой вертим
 
-  l_Matrix := l_Matrix * TMatrix.CreateScaling(0.5,0.5);
+  l_Scale := ScaleShapeToButton;
+  l_Matrix := l_Matrix * TMatrix.CreateScaling(l_Scale.X, l_Scale.Y);
+
   // - задаём угол поворота
   l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
   // - задаём начало координат
@@ -75,6 +79,11 @@ begin
   Canvas.SetMatrix(l_OriginalMatrix);
   // - восстанавливаем ОРИГИНАЛЬНУЮ матрицу
  end;//try..finally
+end;
+
+function TmsShapeButton.ScaleShapeToButton: TPointF;
+begin
+ Result:= TPointF.Create(0.5, 0.5)
 end;
 
 end.
