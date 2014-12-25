@@ -53,7 +53,8 @@ implementation
 
 uses
  System.Math.Vectors,
- msSmallTriangle
+ msSmallTriangle,
+ msRectangle
  ;
 
 {$R *.fmx}
@@ -65,19 +66,23 @@ end;
 
 procedure TfmMain.btnTriangleShapeClick(Sender: TObject);
 var
- l_ShapeButton: TmsShapeButton;
- l_SmallTriangle: ImsShape;
+ l_ShapeButton, l_ShapeButton1: TmsShapeButton;
+ l_SmallTriangle, l_Rectangle : ImsShape;
  l_StartPoint: TPointF;
 begin
- l_StartPoint := TPointF.Create(30, 30);
+ l_StartPoint := TPointF.Create(20, 20);
  l_SmallTriangle := TmsSmallTriangle.Create(TmsMakeShapeContext.Create(l_StartPoint,nil,nil));
 
  l_ShapeButton := TmsShapeButton.Create(nil, l_SmallTriangle);
- l_ShapeButton.Width := 40;
- l_ShapeButton.Height := 40;
  l_ShapeButton.Position.X := 20;
  l_ShapeButton.Position.Y := 20;
  pnlToolBar.AddObject(l_ShapeButton);
+
+ l_Rectangle := TmsRectangle.Create(TmsMakeShapeContext.Create(l_StartPoint,nil,nil));
+ l_ShapeButton1 := TmsShapeButton.Create(nil, l_Rectangle);
+ l_ShapeButton1.Position.X := 60;
+ l_ShapeButton1.Position.Y := 60;
+ pnlToolBar.AddObject(l_ShapeButton1)
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
