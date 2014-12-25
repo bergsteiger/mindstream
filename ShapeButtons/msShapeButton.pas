@@ -62,8 +62,8 @@ begin
   // - задаём точку, вокруг которой вертим
 
   l_Scale := ScaleShapeToButton;
-  l_Matrix := l_Matrix * TMatrix.CreateScaling(l_Scale.X, l_Scale.Y);
 
+  l_Matrix := l_Matrix * TMatrix.CreateScaling(l_Scale.X, l_Scale.Y);
   // - задаём угол поворота
   l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
   // - задаём начало координат
