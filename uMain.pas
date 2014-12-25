@@ -30,7 +30,6 @@ type
     btLoadDiagramm: TButton;
     btnSaveToPNG: TButton;
     pnlToolBar: TPanel;
-    btnTriangleShape: TButton;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -39,9 +38,9 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure btnClearImageClick(Sender: TObject);
     procedure imgMainPaint(Sender: TObject; Canvas: TCanvas);
-    procedure btnTriangleShapeClick(Sender: TObject);
   private
    FDiagrammsController: ImsDiagrammsController;
+   procedure CreateToolBar;
   public
     { Public declarations }
   end;
@@ -53,7 +52,7 @@ implementation
 
 uses
  System.Math.Vectors,
- msSmallTriangle,
+// msSmallTriangle,
  msRectangle,
  msTriangle
  ;
@@ -65,7 +64,7 @@ begin
  FDiagrammsController.Clear;
 end;
 
-procedure TfmMain.btnTriangleShapeClick(Sender: TObject);
+procedure TfmMain.CreateToolBar;
 var
  l_ShapeButton, l_ShapeButton1: TmsShapeButton;
  l_Triangle, l_Rectangle : ImsShape;
@@ -83,7 +82,9 @@ begin
  l_ShapeButton1 := TmsShapeButton.Create(nil, l_Rectangle);
  l_ShapeButton1.Position.X := l_ShapeButton.Position.X + 40;
  l_ShapeButton1.Position.Y := 20;
- pnlToolBar.AddObject(l_ShapeButton1)
+ pnlToolBar.AddObject(l_ShapeButton1);
+
+// for l_Shape := Low to High do
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
@@ -95,6 +96,7 @@ begin
                                                        btSaveDiagramm,
                                                        btLoadDiagramm,
                                                        btnSaveToPNG);
+ CreateToolBar;
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);

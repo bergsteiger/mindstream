@@ -124,15 +124,6 @@ object fmMain: TfmMain
       Size.Height = 559.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 2
-      object btnTriangleShape: TButton
-        Position.X = 8.000000000000000000
-        Position.Y = 112.000000000000000000
-        Size.Width = 97.000000000000000000
-        Size.Height = 33.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 0
-        OnClick = btnTriangleShapeClick
-      end
     end
   end
 end
