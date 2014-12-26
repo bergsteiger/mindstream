@@ -101,7 +101,7 @@ end;
 procedure TmsShapeButton.MyClick(Sender: TObject);
 begin
  Assert(f_Shapes.Items[f_ShapeIndex] = f_Shape.toObject.ClassName);
- ShowMessage(f_Shape.toObject.ClassName);
+ //ShowMessage(f_Shape.toObject.ClassName);
  f_Shapes.ItemIndex := f_ShapeIndex;
 end;
 
