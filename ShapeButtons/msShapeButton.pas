@@ -41,6 +41,9 @@ constructor TmsShapeButton.Create(AOwner: TComponent; const aShape: ImsShape; aS
 const
  c_Size = 40;
 begin
+ Assert(aShapes <> nil);
+ Assert(aShape <> nil);
+ Assert(aShapeIndex >= 0);
  inherited Create(AOwner);
 
  Width := c_Size;
@@ -99,6 +102,7 @@ procedure TmsShapeButton.MyClick(Sender: TObject);
 begin
  Assert(f_Shapes.Items[f_ShapeIndex] = f_Shape.toObject.ClassName);
  ShowMessage(f_Shape.toObject.ClassName);
+ f_Shapes.ItemIndex := f_ShapeIndex;
 end;
 
 function TmsShapeButton.ScaleShapeToButton: TPointF;
