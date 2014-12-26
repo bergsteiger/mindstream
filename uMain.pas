@@ -10,8 +10,7 @@ uses
 
   msDiagramms,
   msDiagrammsController,
-  msInterfaces,
-  msShapeButton
+  msInterfaces
   ;
 
 type
@@ -58,7 +57,8 @@ uses
  msShape,
  msShapesForToolbar,
  msShapeCreator,
- msTool
+ msTool,
+ msShapeButton
  ;
 
 {$R *.fmx}
