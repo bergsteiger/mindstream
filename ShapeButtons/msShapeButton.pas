@@ -20,7 +20,7 @@ type
    procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
    procedure MyClick(Sender: TObject);
   public
-   constructor Create(AOwner: TComponent; aShape: ImsShape);
+   constructor Create(AOwner: TComponent; const aShape: ImsShape);
  end;
 
 implementation
@@ -34,7 +34,7 @@ uses
 
 // TmsShapeButton
 
-constructor TmsShapeButton.Create(AOwner: TComponent; aShape: ImsShape);
+constructor TmsShapeButton.Create(AOwner: TComponent; const aShape: ImsShape);
 const
  c_Size = 40;
 begin
