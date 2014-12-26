@@ -15,7 +15,7 @@ type
   f_ShapeClass : RmsShape;
   constructor CreatePrim(aShapeClass: RmsShape);
  protected
-  function CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
+  function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; virtual;
  public
   class function Create(aShapeClass: RmsShape): ImsShapeCreator;
  end;//TmsShapeCreator
