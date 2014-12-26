@@ -19,7 +19,7 @@ implementation
 
 class function TmsUpToParent.Create(const aCtx: TmsMakeShapeContext): ImsShape;
 begin
- Result := nil;
+ Result := inherited Create(aCtx);
  aCtx.rDiagrammsHolder.UpToParent;
 end;
 
