@@ -55,7 +55,7 @@ uses
  msTool,
  msShapeButton,
  msShapesForToolbar,
- msCompletedShapeCreator
+ msPaletteShapeCreator
  ;
 
 {$R *.fmx}
@@ -88,7 +88,7 @@ begin
  l_ShapeIndex := 0;
  for l_RmsShape in TmsShapesForToolbar.Instance do
  begin
-  l_Shape := TmsCompletedShapeCreator.Create(l_RmsShape).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(c_ButtonSize / 2,
+  l_Shape := TmsPaletteShapeCreator.Create(l_RmsShape).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(c_ButtonSize / 2,
                                c_ButtonSize / 2), nil, nil));
 
   l_ShapeButton := TmsShapeButton.Create(pnlToolBar, c_ButtonSize, l_Shape, cbShapes, l_ShapeIndex);
