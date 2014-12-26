@@ -58,7 +58,8 @@ uses
   msDiagrammStack in 'msDiagrammStack.pas',
   TestSaveToPNG in 'Tests\Module\TestSaveToPNG.pas',
   msTestConstants in 'Tests\Module\msTestConstants.pas',
-  msShapeButton in 'ShapeButtons\msShapeButton.pas';
+  msShapeButton in 'ShapeButtons\msShapeButton.pas',
+  msCompletedShapeCreator in 'ShapeCreators\msCompletedShapeCreator.pas';
 
 {$R *.res}
 
