@@ -52,7 +52,7 @@ uses
   msPicker in 'ShapeTools\msPicker.pas',
   msUpToParent in 'ShapeTools\msUpToParent.pas',
   msSwapParents in 'ShapeTools\msSwapParents.pas',
-  msShapeCreator in 'msShapeCreator.pas',
+  msShapeCreator in 'ShapeCreators\msShapeCreator.pas',
   msFormatter in 'msFormatter.pas',
   TestmsJsonFormatter in 'Tests\Module\TestmsJsonFormatter.pas',
   msDiagrammStack in 'msDiagrammStack.pas',
