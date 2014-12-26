@@ -40,7 +40,7 @@ type
     procedure imgMainPaint(Sender: TObject; Canvas: TCanvas);
   private
    FDiagrammsController: ImsDiagrammsController;
-   procedure CreateToolBar(const aPanelWidth: Integer);
+   procedure CreateToolBar(const aPanelWidth: Single);
   public
     { Public declarations }
   end;
@@ -57,7 +57,8 @@ uses
  msTriangle,
  msShape,
  msShapesForToolbar,
- msShapeCreator
+ msShapeCreator,
+ msTool
  ;
 
 {$R *.fmx}
@@ -80,7 +81,7 @@ const
 
  function GetColumnCount: Integer;
  begin
-
+  Result := Round(aPanelWidth) div c_ButtonSize;
  end;
 begin
  l_StartPoint := TPointF.Create(c_ButtonSize / 2,
@@ -90,15 +91,22 @@ begin
 
  for l_RmsShape in TmsShapesForToolbar.Instance.Items do
  begin
-  l_Shape := l_RmsShape.Create(TmsMakeShapeContext.Create(l_StartPoint, nil, nil));
+  if not (l_RmsShape.InheritsFrom(TmsTool)) then
+  begin
+   l_Shape := l_RmsShape.Create(TmsMakeShapeContext.Create(l_StartPoint, nil, nil));
 
-  l_ShapeButton := TmsShapeButton.Create(nil, l_Shape);
-  l_ShapeButton.Position.X := l_Column * c_ButtonSize / 2;
-  l_ShapeButton.Position.Y := 0;
+   l_ShapeButton := TmsShapeButton.Create(nil, l_Shape);
+   l_ShapeButton.Position.X := l_Column * c_ButtonSize;
+   l_ShapeButton.Position.Y := l_Row * c_ButtonSize;
 
-  pnlToolBar.AddObject(l_ShapeButton);
-  Inc(l_Column);
-  if l_Column > 2 then Exit;
+   pnlToolBar.AddObject(l_ShapeButton);
+   Inc(l_Column);
+   if l_Column > GetColumnCount-1 then
+   begin
+    l_Column := 0;
+    Inc(l_Row);
+   end;
+  end
  end;
 end;
 
