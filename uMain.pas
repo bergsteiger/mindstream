@@ -98,7 +98,7 @@ begin
    else
     l_Shape := TmsCompletedShapeCreator.Create(l_RmsShape).CreateShape(TmsMakeShapeContext.Create(l_StartPoint, nil, nil));
 
-   l_ShapeButton := TmsShapeButton.Create(pnlToolBar, l_Shape, cbShapes, l_ShapeIndex);
+   l_ShapeButton := TmsShapeButton.Create(pnlToolBar, c_ButtonSize, l_Shape, cbShapes, l_ShapeIndex);
    l_ShapeButton.Position.X := l_Column * c_ButtonSize;
    l_ShapeButton.Position.Y := l_Row * c_ButtonSize;
 
