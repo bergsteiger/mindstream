@@ -20,7 +20,10 @@ implementation
 
 function TmsCompletedShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 begin
- Result := inherited CreateShape(aContext);
+ if ShapeClass.IsTool then
+  Result := nil
+ else
+  Result := inherited CreateShape(aContext);
 end;
 
 end.
