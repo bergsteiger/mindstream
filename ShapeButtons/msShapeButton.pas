@@ -31,7 +31,8 @@ implementation
 uses
  System.Math.Vectors,
  FMX.Dialogs,
- System.SysUtils
+ System.SysUtils,
+ msCompletedShapeCreator
  ;
 
 
