@@ -93,7 +93,7 @@ begin
 
  for l_RmsShape in TmsShapesForToolbar.Instance.Items do
  begin
-  if not (l_RmsShape.InheritsFrom(TmsTool)) then
+  if not l_RmsShape.IsTool then
   begin
    l_Shape := l_RmsShape.Create(TmsMakeShapeContext.Create(l_StartPoint, nil, nil));
 
