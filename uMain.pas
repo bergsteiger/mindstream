@@ -91,7 +91,7 @@ begin
  l_Row := 0;
  l_Column := 0;
 
- for l_RmsShape in TmsShapesForToolbar.Instance.Items do
+ for l_RmsShape in TmsShapesForToolbar.Instance do
  begin
   if not l_RmsShape.IsTool then
   begin
@@ -109,7 +109,7 @@ begin
     Inc(l_Row);
    end;//l_Column > GetColumnCount-1
   end;//if not l_RmsShape.IsTool
- end;//for l_RmsShape in TmsShapesForToolbar.Instance.Items
+ end;//for l_RmsShape in TmsShapesForToolbar.Instance
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
