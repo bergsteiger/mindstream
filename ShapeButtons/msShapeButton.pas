@@ -19,19 +19,21 @@ type
    function ScaleShapeToButton: TPointF;
    procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
    procedure MyClick(Sender: TObject);
-  protected
-
   public
    constructor Create(AOwner: TComponent; aShape: ImsShape);
  end;
 
 implementation
+
 uses
  System.Math.Vectors,
  FMX.Dialogs,
  System.SysUtils
  ;
-{ TmsShapeButton }
+
+
+// TmsShapeButton
+
 constructor TmsShapeButton.Create(AOwner: TComponent; aShape: ImsShape);
 const
  c_Size = 40;
