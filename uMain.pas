@@ -88,26 +88,20 @@ begin
  l_ShapeIndex := 0;
  for l_RmsShape in TmsShapesForToolbar.Instance do
  begin
-  //if not l_RmsShape.IsTool then
+  l_Shape := TmsCompletedShapeCreator.Create(l_RmsShape).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(c_ButtonSize / 2,
+                               c_ButtonSize / 2), nil, nil));
+
+  l_ShapeButton := TmsShapeButton.Create(pnlToolBar, c_ButtonSize, l_Shape, cbShapes, l_ShapeIndex);
+  l_ShapeButton.Position.X := l_Column * c_ButtonSize;
+  l_ShapeButton.Position.Y := l_Row * c_ButtonSize;
+
+  pnlToolBar.AddObject(l_ShapeButton);
+  Inc(l_Column);
+  if (l_Column > GetColumnCount-1) then
   begin
-   if l_RmsShape.IsTool then
-    l_Shape := nil
-   else
-    l_Shape := TmsCompletedShapeCreator.Create(l_RmsShape).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(c_ButtonSize / 2,
-                                c_ButtonSize / 2), nil, nil));
-
-   l_ShapeButton := TmsShapeButton.Create(pnlToolBar, c_ButtonSize, l_Shape, cbShapes, l_ShapeIndex);
-   l_ShapeButton.Position.X := l_Column * c_ButtonSize;
-   l_ShapeButton.Position.Y := l_Row * c_ButtonSize;
-
-   pnlToolBar.AddObject(l_ShapeButton);
-   Inc(l_Column);
-   if (l_Column > GetColumnCount-1) then
-   begin
-    l_Column := 0;
-    Inc(l_Row);
-   end;//l_Column > GetColumnCount-1
-  end;//if not l_RmsShape.IsTool
+   l_Column := 0;
+   Inc(l_Row);
+  end;//l_Column > GetColumnCount-1
   Inc(l_ShapeIndex);
  end;//for l_RmsShape in TmsShapesForToolbar.Instance
 end;
