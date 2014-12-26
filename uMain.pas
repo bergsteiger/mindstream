@@ -78,14 +78,11 @@ const
 var
  l_ShapeButton: TmsShapeButton;
  l_Shape : ImsShape;
- l_StartPoint: TPointF;
  l_RmsShape: RmsShape;
 
  l_Row, l_Column : Integer;
  l_ShapeIndex : Integer;
 begin
- l_StartPoint := TPointF.Create(c_ButtonSize / 2,
-                                c_ButtonSize / 2);
  l_Row := 0;
  l_Column := 0;
  l_ShapeIndex := 0;
@@ -96,7 +93,8 @@ begin
    if l_RmsShape.IsTool then
     l_Shape := nil
    else
-    l_Shape := TmsCompletedShapeCreator.Create(l_RmsShape).CreateShape(TmsMakeShapeContext.Create(l_StartPoint, nil, nil));
+    l_Shape := TmsCompletedShapeCreator.Create(l_RmsShape).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(c_ButtonSize / 2,
+                                c_ButtonSize / 2), nil, nil));
 
    l_ShapeButton := TmsShapeButton.Create(pnlToolBar, c_ButtonSize, l_Shape, cbShapes, l_ShapeIndex);
    l_ShapeButton.Position.X := l_Column * c_ButtonSize;
