@@ -23,7 +23,7 @@ type
    procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
    procedure MyClick(Sender: TObject);
   public
-   constructor Create(AOwner: TComponent; aSize : Integer; const aShape: ImsShape; aShapes: TComboBox; aShapeIndex: Integer);
+   constructor Create(AOwner: TComponent; const aShape: ImsShape; aShapes: TComboBox; aShapeIndex: Integer);
  end;
 
 implementation
@@ -32,21 +32,21 @@ uses
  System.Math.Vectors,
  FMX.Dialogs,
  System.SysUtils,
- msCompletedShapeCreator
+ msPaletteShapeCreator
  ;
 
 
 // TmsShapeButton
 
-constructor TmsShapeButton.Create(AOwner: TComponent; aSize : Integer; const aShape: ImsShape; aShapes: TComboBox; aShapeIndex: Integer);
+constructor TmsShapeButton.Create(AOwner: TComponent; const aShape: ImsShape; aShapes: TComboBox; aShapeIndex: Integer);
 begin
  Assert(aShapes <> nil);
  //Assert(aShape <> nil);
  Assert(aShapeIndex >= 0);
  inherited Create(AOwner);
 
- Width := aSize;
- Height := aSize;
+ Width := TmsPaletteShapeCreator.ButtonSize;
+ Height := TmsPaletteShapeCreator.ButtonSize;
 
  f_Shape := aShape;
  f_Shapes := aShapes;

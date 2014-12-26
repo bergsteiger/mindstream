@@ -88,7 +88,7 @@ begin
   l_Shape := TmsPaletteShapeCreator.Create(l_RmsShape).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(TmsPaletteShapeCreator.ButtonSize / 2,
                                TmsPaletteShapeCreator.ButtonSize / 2), nil, nil));
 
-  l_ShapeButton := TmsShapeButton.Create(pnlToolBar, TmsPaletteShapeCreator.ButtonSize, l_Shape, cbShapes, l_ShapeIndex);
+  l_ShapeButton := TmsShapeButton.Create(pnlToolBar, l_Shape, cbShapes, l_ShapeIndex);
   l_ShapeButton.Position.X := l_Column * TmsPaletteShapeCreator.ButtonSize;
   l_ShapeButton.Position.Y := l_Row * TmsPaletteShapeCreator.ButtonSize;
 
