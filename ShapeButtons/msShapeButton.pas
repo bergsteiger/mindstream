@@ -9,7 +9,8 @@ uses
  FMX.Graphics,
  System.Types,
  msInterfaces,
- System.Classes
+ System.Classes,
+ FMX.ListBox
  ;
 
 type
@@ -20,7 +21,7 @@ type
    procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
    procedure MyClick(Sender: TObject);
   public
-   constructor Create(AOwner: TComponent; const aShape: ImsShape);
+   constructor Create(AOwner: TComponent; const aShape: ImsShape; aShapes: TComboBox);
  end;
 
 implementation
@@ -34,7 +35,7 @@ uses
 
 // TmsShapeButton
 
-constructor TmsShapeButton.Create(AOwner: TComponent; const aShape: ImsShape);
+constructor TmsShapeButton.Create(AOwner: TComponent; const aShape: ImsShape; aShapes: TComboBox);
 const
  c_Size = 40;
 begin
