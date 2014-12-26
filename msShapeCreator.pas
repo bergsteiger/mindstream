@@ -34,9 +34,15 @@ begin
  Result := CreatePrim(aShapeClass);
 end;
 
+type
+ TmsShapeFriend = class(TmsShape)
+ end;//TmsShapeFriend
+
+ RmsShapeFriend = class of TmsShapeFriend;
+
 function TmsShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 begin
- Result := f_ShapeClass.Create(aContext);
+ Result := RmsShapeFriend(f_ShapeClass).Create(aContext);
 end;
 
 end.

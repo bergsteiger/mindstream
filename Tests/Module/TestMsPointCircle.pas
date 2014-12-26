@@ -30,9 +30,13 @@ type
 
 implementation
 
+uses
+ msShapeCreator
+ ;
+
 procedure TestTmsPointCircle.SetUp;
 begin
-  FmsPointCircle := TmsPointCircle.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+  FmsPointCircle := TmsShapeCreator.Create(TmsPointCircle).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
 end;
 
 procedure TestTmsPointCircle.TearDown;

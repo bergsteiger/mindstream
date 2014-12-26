@@ -31,7 +31,6 @@ type
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
- public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; virtual;
   // - фабричный метод, который создаёт экземпляр класса как интерфейс
   //   про "фабричный метод вообще" - написано тут:
@@ -47,6 +46,7 @@ type
   // - http://www.gunsmoker.ru/2013/04/plugins-9.html
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
+ public
   procedure DrawTo(const aCtx: TmsDrawContext);
   property StartPoint : TPointF
    read pm_GetStartPoint;

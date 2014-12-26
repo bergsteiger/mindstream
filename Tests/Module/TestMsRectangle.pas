@@ -37,9 +37,13 @@ type
 
 implementation
 
+uses
+ msShapeCreator
+ ;
+
 procedure TestTmsRectangle.SetUp;
 begin
-  FmsRectangle := TmsRectangle.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+  FmsRectangle := TmsShapeCreator.Create(TmsRectangle).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
 end;
 
 procedure TestTmsRectangle.TearDown;

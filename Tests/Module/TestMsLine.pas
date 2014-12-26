@@ -38,12 +38,13 @@ type
 implementation
 
 uses
-  System.SysUtils
+  System.SysUtils,
+  msShapeCreator
   ;
 
 procedure TestTmsLine.SetUp;
 begin
-  FmsLine := TmsLine.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+  FmsLine := TmsShapeCreator.Create(TmsLine).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
 end;
 
 procedure TestTmsLine.TearDown;

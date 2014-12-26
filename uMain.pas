@@ -51,14 +51,11 @@ implementation
 
 uses
  System.Math.Vectors,
-// msSmallTriangle,
- msRectangle,
- msTriangle,
  msShape,
- msShapesForToolbar,
  msShapeCreator,
  msTool,
- msShapeButton
+ msShapeButton,
+ msShapesForToolbar
  ;
 
 {$R *.fmx}
@@ -99,7 +96,7 @@ begin
    if l_RmsShape.IsTool then
     l_Shape := nil
    else
-    l_Shape := l_RmsShape.Create(TmsMakeShapeContext.Create(l_StartPoint, nil, nil));
+    l_Shape := TmsShapeCreator.Create(l_RmsShape).CreateShape(TmsMakeShapeContext.Create(l_StartPoint, nil, nil));
 
    l_ShapeButton := TmsShapeButton.Create(pnlToolBar, l_Shape, cbShapes, l_ShapeIndex);
    l_ShapeButton.Position.X := l_Column * c_ButtonSize;
