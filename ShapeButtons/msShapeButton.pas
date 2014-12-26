@@ -42,7 +42,7 @@ const
  c_Size = 40;
 begin
  Assert(aShapes <> nil);
- Assert(aShape <> nil);
+ //Assert(aShape <> nil);
  Assert(aShapeIndex >= 0);
  inherited Create(AOwner);
 
@@ -54,7 +54,8 @@ begin
  f_ShapeIndex := aShapeIndex;
  OnPaint := MyPaint;
  OnClick := MyClick;
- Assert(f_Shapes.Items[f_ShapeIndex] = f_Shape.toObject.ClassName);
+
+ Assert((f_Shape = nil) OR (f_Shapes.Items[f_ShapeIndex] = f_Shape.toObject.ClassName));
 end;
 
 procedure TmsShapeButton.MyPaint(Sender: TObject;
@@ -66,6 +67,8 @@ var
  l_CenterPoint: TPointF;
  l_Scale: TPointF;
 begin
+ if (f_Shape = nil) then
+  Exit;
  l_OriginalMatrix := Canvas.Matrix;
  try
   l_CenterPoint := f_Shape.StartPoint;
@@ -100,7 +103,7 @@ end;
 
 procedure TmsShapeButton.MyClick(Sender: TObject);
 begin
- Assert(f_Shapes.Items[f_ShapeIndex] = f_Shape.toObject.ClassName);
+ Assert((f_Shape = nil) OR (f_Shapes.Items[f_ShapeIndex] = f_Shape.toObject.ClassName));
  //ShowMessage(f_Shape.toObject.ClassName);
  f_Shapes.ItemIndex := f_ShapeIndex;
 end;

@@ -94,9 +94,12 @@ begin
  l_ShapeIndex := 0;
  for l_RmsShape in TmsShapesForToolbar.Instance do
  begin
-  if not l_RmsShape.IsTool then
+  //if not l_RmsShape.IsTool then
   begin
-   l_Shape := l_RmsShape.Create(TmsMakeShapeContext.Create(l_StartPoint, nil, nil));
+   if l_RmsShape.IsTool then
+    l_Shape := nil
+   else
+    l_Shape := l_RmsShape.Create(TmsMakeShapeContext.Create(l_StartPoint, nil, nil));
 
    l_ShapeButton := TmsShapeButton.Create(pnlToolBar, l_Shape, cbShapes, l_ShapeIndex);
    l_ShapeButton.Position.X := l_Column * c_ButtonSize;
