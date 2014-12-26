@@ -12,14 +12,13 @@ type
  TmsUpToParent = class(TmsNullClickShape)
   // - утилитный класс дл€ "подъЄма" к ѕ–≈ƒџƒ”ў≈… диаграмме
  public
-  class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
+  class procedure DoNullClick(const aCtx: TmsMakeShapeContext); override;
  end;//TmsUpToParent
 
 implementation
 
-class function TmsUpToParent.Create(const aCtx: TmsMakeShapeContext): ImsShape;
+class procedure TmsUpToParent.DoNullClick(const aCtx: TmsMakeShapeContext);
 begin
- Result := inherited Create(aCtx);
  aCtx.rDiagrammsHolder.UpToParent;
 end;
 
