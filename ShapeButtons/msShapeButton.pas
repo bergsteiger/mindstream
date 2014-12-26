@@ -106,12 +106,8 @@ begin
 end;
 
 function TmsShapeButton.ScaleShapeToButton: TPointF;
-var
- l_WidthCoef, l_HeightCoef: single;
 begin
- l_WidthCoef:= Self.Width / 100 / 2;
- l_HeightCoef:= Self.Height / 100 / 2;
- Result:= TPointF.Create(l_WidthCoef, l_HeightCoef);
+ Result:= TPointF.Create(Self.Width / 100 / 2, Self.Height / 100 / 2);
 end;
 
 end.
