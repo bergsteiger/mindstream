@@ -13,7 +13,12 @@ type
  // создатель TmsShape
  private
   f_ShapeClass : RmsShape;
+  // - класс примитивов для создания
   constructor CreatePrim(aShapeClass: RmsShape);
+ protected
+  property ShapeClass : RmsShape
+  read f_ShapeClass;
+  // - класс примитивов для создания
  protected
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; virtual;
  public
