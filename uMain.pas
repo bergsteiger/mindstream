@@ -69,13 +69,7 @@ begin
 end;
 
 procedure TfmMain.CreateToolBar(const aPanelWidth: Single);
-var
- l_ShapeButton, l_ShapeButton1: TmsShapeButton;
- l_Triangle, l_Rectangle, l_Shape : ImsShape;
- l_StartPoint: TPointF;
- l_RmsShape: RmsShape;
 
- l_Row, l_Column : Integer;
 const
  c_ButtonSize = 40;
 
@@ -83,6 +77,14 @@ const
  begin
   Result := Round(aPanelWidth) div c_ButtonSize;
  end;
+
+var
+ l_ShapeButton, l_ShapeButton1: TmsShapeButton;
+ l_Triangle, l_Rectangle, l_Shape : ImsShape;
+ l_StartPoint: TPointF;
+ l_RmsShape: RmsShape;
+
+ l_Row, l_Column : Integer;
 begin
  l_StartPoint := TPointF.Create(c_ButtonSize / 2,
                                 c_ButtonSize / 2);
