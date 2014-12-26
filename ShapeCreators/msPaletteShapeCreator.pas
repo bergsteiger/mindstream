@@ -3,12 +3,15 @@ unit msPaletteShapeCreator;
 interface
 
 uses
- msCompletedShapeCreator
+ msCompletedShapeCreator,
+ msInterfaces
  ;
 
 type
  TmsPaletteShapeCreator = class(TmsCompletedShapeCreator)
  // создатель TmsShape. ДЛЯ ПАЛИТРЫ!!
+ protected
+  function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; override;
  public
   class function ButtonSize: Integer;
  end;//TmsPaletteShapeCreator
@@ -16,6 +19,14 @@ type
 implementation
 
 // TmsPaletteShapeCreator
+
+function TmsPaletteShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
+begin
+ if ShapeClass.IsTool then
+  Result := nil
+ else
+  Result := inherited CreateShape(aContext);
+end;
 
 class function TmsPaletteShapeCreator.ButtonSize: Integer;
 begin
