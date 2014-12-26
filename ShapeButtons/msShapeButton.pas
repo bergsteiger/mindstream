@@ -18,6 +18,7 @@ type
   private
    f_Shape: ImsShape;
    f_ShapeIndex: Integer;
+   f_Shapes: TComboBox;
    function ScaleShapeToButton: TPointF;
    procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
    procedure MyClick(Sender: TObject);
@@ -46,6 +47,7 @@ begin
  Height := c_Size;
 
  f_Shape := aShape;
+ f_Shapes := aShapes;
  f_ShapeIndex := aShapeIndex;
  OnPaint := MyPaint;
  OnClick := MyClick;
@@ -94,6 +96,7 @@ end;
 
 procedure TmsShapeButton.MyClick(Sender: TObject);
 begin
+ Assert(f_Shapes.Items[f_ShapeIndex] = f_Shape.ClassType.ClassName);
  ShowMessage(f_Shape.toObject.ClassName);
 end;
 
