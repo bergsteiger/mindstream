@@ -74,9 +74,9 @@ const
  c_ButtonSize = 40;
 
  function GetColumnCount: Integer;
- begin
+ begin//GetColumnCount
   Result := Round(aPanelWidth) div c_ButtonSize;
- end;
+ end;//GetColumnCount
 
 var
  l_ShapeButton: TmsShapeButton;
@@ -85,12 +85,13 @@ var
  l_RmsShape: RmsShape;
 
  l_Row, l_Column : Integer;
+ l_ShapeIndex : Integer;
 begin
  l_StartPoint := TPointF.Create(c_ButtonSize / 2,
                                 c_ButtonSize / 2);
  l_Row := 0;
  l_Column := 0;
-
+ l_ShapeIndex := 0;
  for l_RmsShape in TmsShapesForToolbar.Instance do
  begin
   if not l_RmsShape.IsTool then
@@ -109,6 +110,7 @@ begin
     Inc(l_Row);
    end;//l_Column > GetColumnCount-1
   end;//if not l_RmsShape.IsTool
+  Inc(l_ShapeIndex);
  end;//for l_RmsShape in TmsShapesForToolbar.Instance
 end;
 
