@@ -104,7 +104,8 @@ end;
 procedure TmsShapeButton.MyClick(Sender: TObject);
 begin
  Assert((f_Shape = nil) OR (f_Shapes.Items[f_ShapeIndex] = f_Shape.toObject.ClassName));
- //ShowMessage(f_Shape.toObject.ClassName);
+ if (f_Shape = nil) then
+  ShowMessage(f_Shapes.Items[f_ShapeIndex]);
  f_Shapes.ItemIndex := f_ShapeIndex;
 end;
 
