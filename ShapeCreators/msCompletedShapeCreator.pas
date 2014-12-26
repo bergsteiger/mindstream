@@ -21,7 +21,10 @@ implementation
 function TmsCompletedShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 begin
  if ShapeClass.IsTool then
-  Result := nil
+ begin
+  Assert(false);
+  Result := nil;
+ end//ShapeClass.IsTool
  else
   Result := inherited CreateShape(aContext);
 end;
