@@ -10,6 +10,7 @@ uses
 
 type
  TmsShapeCreator = class(TmsInterfacedRefcounted, ImsShapeCreator)
+ // создатель TmsShape
  private
   f_ShapeClass : RmsShape;
   constructor CreatePrim(aShapeClass: RmsShape);

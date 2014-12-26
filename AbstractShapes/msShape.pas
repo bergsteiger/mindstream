@@ -52,6 +52,7 @@ type
    read pm_GetStartPoint;
   class function IsTool: Boolean; virtual;
   class function IsForToolbar: Boolean; virtual;
+  class function IsLineLike: Boolean; virtual;
   procedure Assign(anOther : TmsShape);
  end;//TmsShape
 
@@ -119,6 +120,11 @@ end;
 class function TmsShape.IsForToolbar: Boolean;
 begin
  Result := true;
+end;
+
+class function TmsShape.IsLineLike: Boolean;
+begin
+ Result := false;
 end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
