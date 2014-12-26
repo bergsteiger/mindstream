@@ -79,8 +79,8 @@ const
  end;
 
 var
- l_ShapeButton, l_ShapeButton1: TmsShapeButton;
- l_Triangle, l_Rectangle, l_Shape : ImsShape;
+ l_ShapeButton: TmsShapeButton;
+ l_Shape : ImsShape;
  l_StartPoint: TPointF;
  l_RmsShape: RmsShape;
 
@@ -103,13 +103,13 @@ begin
 
    pnlToolBar.AddObject(l_ShapeButton);
    Inc(l_Column);
-   if l_Column > GetColumnCount-1 then
+   if (l_Column > GetColumnCount-1) then
    begin
     l_Column := 0;
     Inc(l_Row);
-   end;
-  end
- end;
+   end;//l_Column > GetColumnCount-1
+  end;//if not l_RmsShape.IsTool
+ end;//for l_RmsShape in TmsShapesForToolbar.Instance.Items
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
