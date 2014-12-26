@@ -4,11 +4,12 @@ interface
 
 uses
  msInterfaces,
- msTool
+ msTool,
+ msNullClickShape
  ;
 
 type
- TmsSwapParents = class(TmsTool)
+ TmsSwapParents = class(TmsNullClickShape)
   // - утилитный класс ОБМЕНА диаграмм МЕСТАМИ
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;

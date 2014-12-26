@@ -4,11 +4,12 @@ interface
 
 uses
  msInterfaces,
- msTool
+ msTool,
+ msNullClickShape
  ;
 
 type
- TmsUpToParent = class(TmsTool)
+ TmsUpToParent = class(TmsNullClickShape)
   // - утилитный класс дл€ "подъЄма" к ѕ–≈ƒџƒ”ў≈… диаграмме
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;

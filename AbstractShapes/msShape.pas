@@ -53,6 +53,8 @@ type
   class function IsTool: Boolean; virtual;
   class function IsForToolbar: Boolean; virtual;
   class function IsLineLike: Boolean; virtual;
+  class function IsNullClick: Boolean; virtual;
+  //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);
  end;//TmsShape
 
@@ -123,6 +125,11 @@ begin
 end;
 
 class function TmsShape.IsLineLike: Boolean;
+begin
+ Result := false;
+end;
+
+class function TmsShape.IsNullClick: Boolean;
 begin
  Result := false;
 end;
