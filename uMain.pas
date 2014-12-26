@@ -40,7 +40,7 @@ type
     procedure imgMainPaint(Sender: TObject; Canvas: TCanvas);
   private
    FDiagrammsController: ImsDiagrammsController;
-   procedure CreateToolBar;
+   procedure CreateToolBar(const aPanelWidth: Integer);
   public
     { Public declarations }
   end;
@@ -54,7 +54,10 @@ uses
  System.Math.Vectors,
 // msSmallTriangle,
  msRectangle,
- msTriangle
+ msTriangle,
+ msShape,
+ msShapesForToolbar,
+ msShapeCreator
  ;
 
 {$R *.fmx}
@@ -64,27 +67,39 @@ begin
  FDiagrammsController.Clear;
 end;
 
-procedure TfmMain.CreateToolBar;
+procedure TfmMain.CreateToolBar(const aPanelWidth: Single);
 var
  l_ShapeButton, l_ShapeButton1: TmsShapeButton;
- l_Triangle, l_Rectangle : ImsShape;
+ l_Triangle, l_Rectangle, l_Shape : ImsShape;
  l_StartPoint: TPointF;
+ l_RmsShape: RmsShape;
+
+ l_Row, l_Column : Integer;
+const
+ c_ButtonSize = 40;
+
+ function GetColumnCount: Integer;
+ begin
+
+ end;
 begin
- l_StartPoint := TPointF.Create(20, 20);
- l_Triangle := TmsTriangle.Create(TmsMakeShapeContext.Create(l_StartPoint,nil,nil));
+ l_StartPoint := TPointF.Create(c_ButtonSize / 2,
+                                c_ButtonSize / 2);
+ l_Row := 0;
+ l_Column := 0;
 
- l_ShapeButton := TmsShapeButton.Create(nil, l_Triangle);
- l_ShapeButton.Position.X := 20;
- l_ShapeButton.Position.Y := 20;
- pnlToolBar.AddObject(l_ShapeButton);
+ for l_RmsShape in TmsShapesForToolbar.Instance.Items do
+ begin
+  l_Shape := l_RmsShape.Create(TmsMakeShapeContext.Create(l_StartPoint, nil, nil));
 
- l_Rectangle := TmsRectangle.Create(TmsMakeShapeContext.Create(l_StartPoint,nil,nil));
- l_ShapeButton1 := TmsShapeButton.Create(nil, l_Rectangle);
- l_ShapeButton1.Position.X := l_ShapeButton.Position.X + 40;
- l_ShapeButton1.Position.Y := 20;
- pnlToolBar.AddObject(l_ShapeButton1);
+  l_ShapeButton := TmsShapeButton.Create(nil, l_Shape);
+  l_ShapeButton.Position.X := l_Column * c_ButtonSize / 2;
+  l_ShapeButton.Position.Y := 0;
 
-// for l_Shape := Low to High do
+  pnlToolBar.AddObject(l_ShapeButton);
+  Inc(l_Column);
+  if l_Column > 2 then Exit;
+ end;
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
@@ -96,7 +111,7 @@ begin
                                                        btSaveDiagramm,
                                                        btLoadDiagramm,
                                                        btnSaveToPNG);
- CreateToolBar;
+ CreateToolBar(pnlToolBar.Width);
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
