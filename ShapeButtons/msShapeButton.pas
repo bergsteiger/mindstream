@@ -51,7 +51,7 @@ begin
  f_ShapeIndex := aShapeIndex;
  OnPaint := MyPaint;
  OnClick := MyClick;
- Assert(f_Shapes.Items[f_ShapeIndex] = f_Shape.ClassType.ClassName);
+ Assert(f_Shapes.Items[f_ShapeIndex] = f_Shape.toObject.ClassName);
 end;
 
 procedure TmsShapeButton.MyPaint(Sender: TObject;
@@ -97,7 +97,7 @@ end;
 
 procedure TmsShapeButton.MyClick(Sender: TObject);
 begin
- Assert(f_Shapes.Items[f_ShapeIndex] = f_Shape.ClassType.ClassName);
+ Assert(f_Shapes.Items[f_ShapeIndex] = f_Shape.toObject.ClassName);
  ShowMessage(f_Shape.toObject.ClassName);
 end;
 
