@@ -17,11 +17,12 @@ type
  TmsShapeButton = class(TButton)
   private
    f_Shape: ImsShape;
+   f_ShapeIndex: Integer;
    function ScaleShapeToButton: TPointF;
    procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
    procedure MyClick(Sender: TObject);
   public
-   constructor Create(AOwner: TComponent; const aShape: ImsShape; aShapes: TComboBox);
+   constructor Create(AOwner: TComponent; const aShape: ImsShape; aShapes: TComboBox; aShapeIndex: Integer);
  end;
 
 implementation
@@ -35,7 +36,7 @@ uses
 
 // TmsShapeButton
 
-constructor TmsShapeButton.Create(AOwner: TComponent; const aShape: ImsShape; aShapes: TComboBox);
+constructor TmsShapeButton.Create(AOwner: TComponent; const aShape: ImsShape; aShapes: TComboBox; aShapeIndex: Integer);
 const
  c_Size = 40;
 begin
@@ -45,6 +46,7 @@ begin
  Height := c_Size;
 
  f_Shape := aShape;
+ f_ShapeIndex := aShapeIndex;
  OnPaint := MyPaint;
  OnClick := MyClick;
 end;
