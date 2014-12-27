@@ -49,7 +49,7 @@ type
   class procedure DoNullClick(const aCtx: TmsMakeShapeContext); virtual;
   // - обрабатывает "нулевой клик"
  public
-  procedure DrawTo(const aCtx: TmsDrawContext);
+  procedure DrawTo(const aCtx: TmsDrawContext); virtual;
   property StartPoint : TPointF
    read pm_GetStartPoint;
   class function IsTool: Boolean; virtual;
