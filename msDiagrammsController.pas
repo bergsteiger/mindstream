@@ -25,7 +25,7 @@ type
  TmsIvalidatorParent = TmsInterfacedRefcounted;
 {$Include msIvalidator.mixin.pas}
 
- TmsDiagrammsController = class(TmsIvalidator, ImsDiagrammsController)
+ TmsDiagrammsController = class(TmsIvalidator, ImsDiagrammsController, ImsDiagrammsHolder)
  private
   imgMain: TPaintBox;
   cbShapes: TComboBox;

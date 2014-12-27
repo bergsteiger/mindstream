@@ -28,7 +28,7 @@ class function TmsNullClickShape.Create(const aCtx: TmsMakeShapeContext): ImsSha
 begin
  Result := nil;
  // раз НЕТ клика, значит НЕТ и ПРИМИТИВА
- DoNullClick(aCtx);
+ DoNullClick(aCtx.rDiagrammsHolder);
  // - обрабатываем НУЛЕВОЙ клик
 end;
 

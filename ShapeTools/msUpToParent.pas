@@ -12,15 +12,15 @@ type
  TmsUpToParent = class(TmsNullClickShape)
   // - утилитный класс дл€ "подъЄма" к ѕ–≈ƒџƒ”ў≈… диаграмме
  public
-  class function DoNullClick(const aCtx: TmsMakeShapeContext): Boolean; override;
+  class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
  end;//TmsUpToParent
 
 implementation
 
-class function TmsUpToParent.DoNullClick(const aCtx: TmsMakeShapeContext): Boolean;
+class function TmsUpToParent.DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean;
 begin
  Result := true;
- aCtx.rDiagrammsHolder.UpToParent;
+ aHolder.UpToParent;
 end;
 
 end.

@@ -17,6 +17,7 @@ type
   constructor CreateInner(anOtherShapeClass: RmsShape; const aStartPoint: TPointF);
   class function Create(anOtherShapeClass: RmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
   function IsClassTypeNamedAs(const aClassName: String): Boolean; override;
+  function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
  public
   procedure DrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsPaletteShape
@@ -45,6 +46,16 @@ end;
 function TmsPaletteShape.IsClassTypeNamedAs(const aClassName: String): Boolean;
 begin
  Result := (f_OtherShapeClass.ClassName = aClassName);
+end;
+
+type
+ TmsShapeFriend = class(TmsShape)
+ end;//TmsShapeFriend
+ RmsShapeFriend = class of TmsShapeFriend;
+
+function TmsPaletteShape.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
+begin
+ Result := RmsShapeFriend(f_OtherShapeClass).DoNullClick(aHolder);
 end;
 
 end.

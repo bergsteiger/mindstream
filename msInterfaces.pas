@@ -88,7 +88,7 @@ type
   procedure EndTo(const aCtx: TmsEndShapeContext);
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
-  function NullClick(const aCtx: TmsMakeShapeContext): Boolean;
+  function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function pm_GetStartPoint: TPointF;
   property StartPoint: TPointF
    read pm_GetStartPoint;
@@ -101,6 +101,7 @@ type
  end;//ImsShapeCreator
 
  ImsDiagrammsHolder = interface
+ ['{611ECC2D-3D5B-4297-8A2D-9154D4CF17E7}']
   procedure UpToParent;
   // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
   procedure SwapParents;

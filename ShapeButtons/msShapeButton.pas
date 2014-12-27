@@ -19,6 +19,7 @@ type
    f_Shape: ImsShape;
    f_ShapeIndex: Integer;
    f_Shapes: TComboBox;
+   f_Holder : Pointer;
    function ScaleShapeToButton: TPointF;
    procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
    procedure MyClick(Sender: TObject);
@@ -27,7 +28,8 @@ type
                       aShape: RmsShape;
                       aShapes: TComboBox;
                       aColumn: Integer;
-                      aRow: Integer);
+                      aRow: Integer;
+                      const aHolder: ImsDiagrammsHolder);
  end;
 
 implementation
@@ -47,11 +49,14 @@ constructor TmsShapeButton.Create(AOwner: TComponent;
                                   aShape: RmsShape;
                                   aShapes: TComboBox;
                                   aColumn: Integer;
-                                  aRow: Integer);
+                                  aRow: Integer;
+                                  const aHolder: ImsDiagrammsHolder);
 begin
  Assert(aShapes <> nil);
- //Assert(aShape <> nil);
+ Assert(aShape <> nil);
+ Assert(aHolder <> nil);
  inherited Create(AOwner);
+ f_Holder := Pointer(aHolder);
 
  Width := TmsPaletteShapeCreator.ButtonSize;
  Height := TmsPaletteShapeCreator.ButtonSize;
@@ -64,9 +69,7 @@ begin
  OnPaint := MyPaint;
  OnClick := MyClick;
 
- if (f_Shape = nil) then
-  Self.Text := IntToStr(f_ShapeIndex)
- else
+ Assert(f_Shape <> nil);
  if aShape.IsTool then
   Self.Text := IntToStr(f_ShapeIndex)
  else
@@ -124,10 +127,9 @@ end;
 
 procedure TmsShapeButton.MyClick(Sender: TObject);
 begin
- Assert((f_Shape = nil) OR f_Shape.IsClassTypeNamedAs(f_Shapes.Items[f_ShapeIndex]));
- if (f_Shape = nil) then
-  ShowMessage(f_Shapes.Items[f_ShapeIndex]);
- f_Shapes.ItemIndex := f_ShapeIndex;
+ Assert(f_Shape.IsClassTypeNamedAs(f_Shapes.Items[f_ShapeIndex]));
+ if not f_Shape.NullClick(ImsDiagrammsHolder(f_Holder)) then
+  f_Shapes.ItemIndex := f_ShapeIndex;
 end;
 
 function TmsShapeButton.ScaleShapeToButton: TPointF;
