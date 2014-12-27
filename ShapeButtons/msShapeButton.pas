@@ -64,7 +64,10 @@ begin
  OnPaint := MyPaint;
  OnClick := MyClick;
 
- Assert((f_Shape = nil) OR (f_Shapes.Items[f_ShapeIndex] = f_Shape.toObject.ClassName));
+ if (f_Shape = nil) then
+  Self.Text := IntToStr(f_ShapeIndex)
+ else
+  Assert((f_Shapes.Items[f_ShapeIndex] = f_Shape.toObject.ClassName));
 
  Self.Position.X := aColumn * TmsPaletteShapeCreator.ButtonSize;
  Self.Position.Y := aRow * TmsPaletteShapeCreator.ButtonSize;
@@ -81,7 +84,9 @@ var
  l_Scale: TPointF;
 begin
  if (f_Shape = nil) then
+ begin
   Exit;
+ end;//f_Shape = nil
  l_OriginalMatrix := Canvas.Matrix;
  try
   l_CenterPoint := f_Shape.StartPoint;
