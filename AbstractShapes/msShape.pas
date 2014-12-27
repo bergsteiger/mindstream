@@ -46,7 +46,8 @@ type
   // - http://www.gunsmoker.ru/2013/04/plugins-9.html
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
-  class procedure DoNullClick(const aCtx: TmsMakeShapeContext); virtual;
+  class function DoNullClick(const aCtx: TmsMakeShapeContext): Boolean; virtual;
+  function NullClick(const aCtx: TmsMakeShapeContext): Boolean;
   // - обрабатывает "нулевой клик"
  public
   procedure DrawTo(const aCtx: TmsDrawContext); virtual;
@@ -136,10 +137,15 @@ begin
  Result := false;
 end;
 
-class procedure TmsShape.DoNullClick(const aCtx: TmsMakeShapeContext);
+class function TmsShape.DoNullClick(const aCtx: TmsMakeShapeContext): Boolean;
 // - обрабатывает "нулевой клик"
 begin
- Assert(false, 'Не реализовано');
+ Result := false;
+end;
+
+function TmsShape.NullClick(const aCtx: TmsMakeShapeContext): Boolean;
+begin
+ Result := DoNullClick(aCtx);
 end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);

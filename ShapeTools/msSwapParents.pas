@@ -12,13 +12,14 @@ type
  TmsSwapParents = class(TmsNullClickShape)
   // - утилитный класс ОБМЕНА диаграмм МЕСТАМИ
  protected
-  class procedure DoNullClick(const aCtx: TmsMakeShapeContext); override;
+  class function DoNullClick(const aCtx: TmsMakeShapeContext): Boolean; override;
  end;//TmsSwapParents
 
 implementation
 
-class procedure TmsSwapParents.DoNullClick(const aCtx: TmsMakeShapeContext);
+class function TmsSwapParents.DoNullClick(const aCtx: TmsMakeShapeContext): Boolean;
 begin
+ Result := true;
  aCtx.rDiagrammsHolder.SwapParents;
 end;
 

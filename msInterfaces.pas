@@ -88,6 +88,7 @@ type
   procedure EndTo(const aCtx: TmsEndShapeContext);
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
+  function NullClick(const aCtx: TmsMakeShapeContext): Boolean;
   function pm_GetStartPoint: TPointF;
   property StartPoint: TPointF
    read pm_GetStartPoint;
