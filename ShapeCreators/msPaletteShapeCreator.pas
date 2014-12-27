@@ -36,7 +36,7 @@ begin
   Result := nil
  else
  if ShapeClass.IsTool then
-  Result := nil
+  Result := RmsPaletteShapeFriend(TmsPaletteShape).Create(ShapeClass, aContext)
  else
   Result := inherited CreateShape(aContext);
 end;

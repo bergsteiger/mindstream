@@ -67,7 +67,7 @@ begin
  if (f_Shape = nil) then
   Self.Text := IntToStr(f_ShapeIndex)
  else
-  Assert((f_Shapes.Items[f_ShapeIndex] = f_Shape.toObject.ClassName));
+  Assert(f_Shape.IsClassTypeNamedAs(f_Shapes.Items[f_ShapeIndex]));
 
  Self.Position.X := aColumn * TmsPaletteShapeCreator.ButtonSize;
  Self.Position.Y := aRow * TmsPaletteShapeCreator.ButtonSize;
@@ -121,7 +121,7 @@ end;
 
 procedure TmsShapeButton.MyClick(Sender: TObject);
 begin
- Assert((f_Shape = nil) OR (f_Shapes.Items[f_ShapeIndex] = f_Shape.toObject.ClassName));
+ Assert((f_Shape = nil) OR f_Shape.IsClassTypeNamedAs(f_Shapes.Items[f_ShapeIndex]));
  if (f_Shape = nil) then
   ShowMessage(f_Shapes.Items[f_ShapeIndex]);
  f_Shapes.ItemIndex := f_ShapeIndex;

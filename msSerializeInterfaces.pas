@@ -6,6 +6,7 @@ type
  ImsObjectWrap = interface
   function toObject: TObject;
   function ClassType: TClass;
+  function IsClassTypeNamedAs(const aClassName: String): Boolean;
   function EQ(const anOther: ImsObjectWrap): Boolean;
  end;//ImsObjectWrap
 

@@ -41,6 +41,7 @@ class function TmsMover.Create(const aCtx: TmsMakeShapeContext): ImsShape;
 var
  l_Moving : ImsShape;
 begin
+ Assert(aCtx.rShapesController <> nil);
  l_Moving := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
  if (l_Moving <> nil) then
   Result := CreateInner(aCtx.rStartPoint, l_Moving)
