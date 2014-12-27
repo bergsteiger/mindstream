@@ -68,6 +68,9 @@ begin
  if (f_Shape = nil) then
   Self.Text := IntToStr(f_ShapeIndex)
  else
+ if aShape.IsTool then
+  Self.Text := IntToStr(f_ShapeIndex)
+ else
   Assert(f_Shape.IsClassTypeNamedAs(f_Shapes.Items[f_ShapeIndex]));
 
  Self.Position.X := aColumn * TmsPaletteShapeCreator.ButtonSize;
