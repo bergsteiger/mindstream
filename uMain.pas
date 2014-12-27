@@ -73,7 +73,6 @@ procedure TfmMain.CreateToolBar(const aPanelWidth: Single);
  end;//GetColumnCount
 
 var
- l_Shape : ImsShape;
  l_RmsShape: RmsShape;
 
  l_Row, l_Column : Integer;
@@ -84,10 +83,7 @@ begin
  l_ShapeIndex := 0;
  for l_RmsShape in TmsShapesForToolbar.Instance do
  begin
-  l_Shape := TmsPaletteShapeCreator.Create(l_RmsShape).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(TmsPaletteShapeCreator.ButtonSize / 2,
-                               TmsPaletteShapeCreator.ButtonSize / 2), nil, nil));
-
-  pnlToolBar.AddObject(TmsShapeButton.Create(pnlToolBar, l_Shape, cbShapes, l_ShapeIndex, l_Column, l_Row));
+  pnlToolBar.AddObject(TmsShapeButton.Create(pnlToolBar, l_RmsShape, cbShapes, l_ShapeIndex, l_Column, l_Row));
   Inc(l_Column);
   if (l_Column > GetColumnCount-1) then
   begin

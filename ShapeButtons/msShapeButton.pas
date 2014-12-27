@@ -24,7 +24,7 @@ type
    procedure MyClick(Sender: TObject);
   public
    constructor Create(AOwner: TComponent;
-                      const aShape: ImsShape;
+                      aShape: RmsShape;
                       aShapes: TComboBox;
                       aShapeIndex: Integer;
                       aColumn: Integer;
@@ -44,7 +44,7 @@ uses
 // TmsShapeButton
 
 constructor TmsShapeButton.Create(AOwner: TComponent;
-                                  const aShape: ImsShape;
+                                  aShape: RmsShape;
                                   aShapes: TComboBox;
                                   aShapeIndex: Integer;
                                   aColumn: Integer;
@@ -58,7 +58,8 @@ begin
  Width := TmsPaletteShapeCreator.ButtonSize;
  Height := TmsPaletteShapeCreator.ButtonSize;
 
- f_Shape := aShape;
+ f_Shape := TmsPaletteShapeCreator.Create(aShape).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(TmsPaletteShapeCreator.ButtonSize / 2,
+                              TmsPaletteShapeCreator.ButtonSize / 2), nil, nil));
  f_Shapes := aShapes;
  f_ShapeIndex := aShapeIndex;
  OnPaint := MyPaint;
