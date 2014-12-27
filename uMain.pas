@@ -76,11 +76,9 @@ var
  l_RmsShape: RmsShape;
 
  l_Row, l_Column : Integer;
- l_ShapeIndex : Integer;
 begin
  l_Row := 0;
  l_Column := 0;
- l_ShapeIndex := 0;
  for l_RmsShape in TmsShapesForToolbar.Instance do
  begin
   pnlToolBar.AddObject(TmsShapeButton.Create(pnlToolBar, l_RmsShape, cbShapes, l_Column, l_Row));
@@ -90,7 +88,6 @@ begin
    l_Column := 0;
    Inc(l_Row);
   end;//l_Column > GetColumnCount-1
-  Inc(l_ShapeIndex);
  end;//for l_RmsShape in TmsShapesForToolbar.Instance
 end;
 
