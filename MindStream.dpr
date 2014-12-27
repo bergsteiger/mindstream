@@ -61,7 +61,8 @@ uses
   msShapeButton in 'ShapeButtons\msShapeButton.pas',
   msCompletedShapeCreator in 'ShapeCreators\msCompletedShapeCreator.pas',
   msPaletteShapeCreator in 'ShapeCreators\msPaletteShapeCreator.pas',
-  msNullClickShape in 'ShapeTools\msNullClickShape.pas';
+  msNullClickShape in 'ShapeTools\msNullClickShape.pas',
+  msPaletteShape in 'ShapeTools\PaletteShapes\msPaletteShape.pas';
 
 {$R *.res}
 
