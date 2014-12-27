@@ -33,7 +33,7 @@ type
 function TmsPaletteShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 begin
  if ShapeClass.IsNullClick then
-  Result := nil
+  Result := RmsPaletteShapeFriend(TmsPaletteShape).Create(ShapeClass, aContext)
  else
  if ShapeClass.IsTool then
   Result := RmsPaletteShapeFriend(TmsPaletteShape).Create(ShapeClass, aContext)
