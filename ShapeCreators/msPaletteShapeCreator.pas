@@ -22,6 +22,9 @@ implementation
 
 function TmsPaletteShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 begin
+ if ShapeClass.IsNullClick then
+  Result := nil
+ else
  if ShapeClass.IsTool then
   Result := nil
  else
