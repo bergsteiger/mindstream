@@ -24,6 +24,12 @@ uses
 
 // TmsPaletteShapeCreator
 
+type
+ TmsPaletteShapeFriend = class(TmsPaletteShape)
+ end;//TmsPaletteShapeFriend
+
+ RmsPaletteShapeFriend = class of TmsPaletteShapeFriend;
+
 function TmsPaletteShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 begin
  if ShapeClass.IsNullClick then
