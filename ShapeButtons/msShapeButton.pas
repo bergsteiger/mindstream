@@ -26,7 +26,6 @@ type
    constructor Create(AOwner: TComponent;
                       aShape: RmsShape;
                       aShapes: TComboBox;
-                      aShapeIndex: Integer;
                       aColumn: Integer;
                       aRow: Integer);
  end;
@@ -47,19 +46,18 @@ uses
 constructor TmsShapeButton.Create(AOwner: TComponent;
                                   aShape: RmsShape;
                                   aShapes: TComboBox;
-                                  aShapeIndex: Integer;
                                   aColumn: Integer;
                                   aRow: Integer);
 begin
  Assert(aShapes <> nil);
  //Assert(aShape <> nil);
- Assert(aShapeIndex >= 0);
  inherited Create(AOwner);
 
  Width := TmsPaletteShapeCreator.ButtonSize;
  Height := TmsPaletteShapeCreator.ButtonSize;
 
  f_ShapeIndex := TmsShapesForToolbar.Instance.IndexOf(aShape);
+ Assert(f_ShapeIndex >= 0);
  f_Shape := TmsPaletteShapeCreator.Create(aShape).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(TmsPaletteShapeCreator.ButtonSize / 2,
                               TmsPaletteShapeCreator.ButtonSize / 2), nil, nil));
  f_Shapes := aShapes;
