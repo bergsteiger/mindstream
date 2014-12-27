@@ -19,7 +19,7 @@ type
    f_Shape: ImsShape;
    f_ShapeIndex: Integer;
    f_Shapes: TComboBox;
-   f_Holder : Pointer;
+   f_Holder : ImsDiagrammsHolder;
    function ScaleShapeToButton: TPointF;
    procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
    procedure MyClick(Sender: TObject);
@@ -56,7 +56,7 @@ begin
  Assert(aShape <> nil);
  Assert(aHolder <> nil);
  inherited Create(AOwner);
- f_Holder := Pointer(aHolder);
+ f_Holder := aHolder;
 
  Width := TmsPaletteShapeCreator.ButtonSize;
  Height := TmsPaletteShapeCreator.ButtonSize;
