@@ -150,6 +150,7 @@ type
  ImsDiagrammsController = interface
   procedure Clear;
   procedure DrawTo(const aCanvas: TCanvas);
+  function As_ImsDiagrammsHolder: ImsDiagrammsHolder;
  end;//ImsDiagrammsController
 
 implementation

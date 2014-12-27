@@ -81,7 +81,7 @@ begin
  l_Column := 0;
  for l_RmsShape in TmsShapesForToolbar.Instance do
  begin
-  pnlToolBar.AddObject(TmsShapeButton.Create(pnlToolBar, l_RmsShape, cbShapes, l_Column, l_Row, FDiagrammsController As ImsDiagrammsHolder));
+  pnlToolBar.AddObject(TmsShapeButton.Create(pnlToolBar, l_RmsShape, cbShapes, l_Column, l_Row, FDiagrammsController.As_ImsDiagrammsHolder));
   Inc(l_Column);
   if (l_Column > GetColumnCount-1) then
   begin

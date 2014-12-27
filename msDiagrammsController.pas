@@ -25,7 +25,7 @@ type
  TmsIvalidatorParent = TmsInterfacedRefcounted;
 {$Include msIvalidator.mixin.pas}
 
- TmsDiagrammsController = class(TmsIvalidator, ImsDiagrammsController, ImsDiagrammsHolder)
+ TmsDiagrammsController = class(TmsIvalidator, ImsDiagrammsController)
  private
   imgMain: TPaintBox;
   cbShapes: TComboBox;
@@ -82,6 +82,7 @@ type
 
   procedure SaveToPng(const aFileName: string);
   procedure DrawTo(const aCanvas: TCanvas);
+  function As_ImsDiagrammsHolder: ImsDiagrammsHolder;
  end; // TmsDiagrammsController
 
 implementation
@@ -331,7 +332,7 @@ end;
 procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
 begin
  CurrentDiagramm.ProcessClick(TmsClickContext.Create(TmsShapeCreator.Create(TmsShapesForToolbar.Instance.Items[cbShapes.ItemIndex]), aStart,
-   TmsDiagrammsHolder.Create(Self)));
+   Self.As_ImsDiagrammsHolder));
 end;
 
 procedure TmsDiagrammsController.SaveToPng(const aFileName: string);
@@ -342,6 +343,11 @@ end;
 procedure TmsDiagrammsController.DrawTo(const aCanvas: TCanvas);
 begin
  CurrentDiagramm.DrawTo(aCanvas);
+end;
+
+function TmsDiagrammsController.As_ImsDiagrammsHolder: ImsDiagrammsHolder;
+begin
+ Result := TmsDiagrammsHolder.Create(Self);
 end;
 
 procedure TmsDiagrammsController.imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
