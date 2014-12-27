@@ -37,7 +37,8 @@ uses
  System.Math.Vectors,
  FMX.Dialogs,
  System.SysUtils,
- msPaletteShapeCreator
+ msPaletteShapeCreator,
+ msShapesForToolbar
  ;
 
 
@@ -58,10 +59,10 @@ begin
  Width := TmsPaletteShapeCreator.ButtonSize;
  Height := TmsPaletteShapeCreator.ButtonSize;
 
+ f_ShapeIndex := TmsShapesForToolbar.Instance.IndexOf(aShape);
  f_Shape := TmsPaletteShapeCreator.Create(aShape).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(TmsPaletteShapeCreator.ButtonSize / 2,
                               TmsPaletteShapeCreator.ButtonSize / 2), nil, nil));
  f_Shapes := aShapes;
- f_ShapeIndex := aShapeIndex;
  OnPaint := MyPaint;
  OnClick := MyClick;
 
