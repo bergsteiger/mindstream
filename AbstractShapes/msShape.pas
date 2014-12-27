@@ -46,6 +46,8 @@ type
   // - http://www.gunsmoker.ru/2013/04/plugins-9.html
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
+  class procedure DoNullClick(const aCtx: TmsMakeShapeContext); virtual; abstract;
+  // - обрабатывает "нулевой клик"
  public
   procedure DrawTo(const aCtx: TmsDrawContext);
   property StartPoint : TPointF

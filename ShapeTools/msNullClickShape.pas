@@ -9,8 +9,6 @@ uses
 
 type
  TmsNullClickShape = class abstract(TmsTool)
- protected
-  class procedure DoNullClick(const aCtx: TmsMakeShapeContext); virtual; abstract;
  public
   class function IsNullClick: Boolean; override;
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
