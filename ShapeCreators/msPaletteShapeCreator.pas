@@ -18,6 +18,10 @@ type
 
 implementation
 
+uses
+ msPaletteShape
+ ;
+
 // TmsPaletteShapeCreator
 
 function TmsPaletteShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
