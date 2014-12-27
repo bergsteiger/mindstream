@@ -1,4 +1,4 @@
-unit msPaletteShape;
+п»їunit msPaletteShape;
 
 interface
 
@@ -28,8 +28,8 @@ implementation
 
 procedure TmsPaletteShape.DrawTo(const aCtx: TmsDrawContext);
 begin
- // - ничего не рисуем.
- //   ПОКА!!
+ // - РЅРёС‡РµРіРѕ РЅРµ СЂРёСЃСѓРµРј.
+ //   РџРћРљРђ!!
 end;
 
 constructor TmsPaletteShape.CreateInner(anOtherShapeClass: RmsShape; const aStartPoint: TPointF);
