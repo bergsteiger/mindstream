@@ -154,6 +154,8 @@ var
  l_OriginalMatrix: TMatrix;
 begin
  // Фиксируем размер снимаемой области
+ Assert(f_MaxX > 0);
+ Assert(f_MaxY > 0);
  l_SourceRect := TRectF.Create(0, 0, f_MaxX, f_MaxY);
  // Создаем временный буфер для получения скриншота
  l_BitmapBuffer := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
