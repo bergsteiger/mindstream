@@ -25,6 +25,7 @@ uses
   msPicker,
   msUpToParent,
   msSwapParents,
+  msShapeRemover,
 
   // special shapes
   msPointCircle,
@@ -56,7 +57,8 @@ begin
   TmsMover,
   TmsPicker,
   TmsUpToParent,
-  TmsSwapParents
+  TmsSwapParents,
+  TmsShapeRemover
  ]);
 end;
 

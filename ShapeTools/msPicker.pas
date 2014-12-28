@@ -1,4 +1,4 @@
-unit msPicker;
+п»їunit msPicker;
 
 interface
 
@@ -9,7 +9,7 @@ uses
 
 type
  TmsPicker = class(TmsTool)
-  // - утилитный класс для "проваливания" внутрь примитивов
+  // - СѓС‚РёР»РёС‚РЅС‹Р№ РєР»Р°СЃСЃ РґР»СЏ "РїСЂРѕРІР°Р»РёРІР°РЅРёСЏ" РІРЅСѓС‚СЂСЊ РїСЂРёРјРёС‚РёРІРѕРІ
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
  end;//TmsPicker

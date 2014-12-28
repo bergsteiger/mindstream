@@ -130,6 +130,7 @@ type
   procedure DrawTo(const aCanvas: TCanvas);
   procedure SaveToPng(const aFileName: String);
   function AddShape(const aShape: ImsShape): ImsShape;
+  procedure RemoveShape(const aShape: ImsShape);
   function GetEnumerator: TmsShapesEnumerator;
   function ItemsCount: Integer;
   property Name: String

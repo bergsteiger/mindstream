@@ -271,6 +271,7 @@ procedure TmsDiagramm.RemoveShape(const aShape: ImsShape);
 begin
  Assert(f_Items <> nil);
  f_Items.Remove(aShape);
+ Invalidate;
 end;
 
 end.
