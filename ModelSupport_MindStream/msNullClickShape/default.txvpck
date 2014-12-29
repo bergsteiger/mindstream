@@ -4,5 +4,14 @@
     <property name="$defaultDiagram" value="true" />
     <property name="$metaclass" value="Package Diagram" />
     <property name="$name" value="default" />
+    <reference referencedUin="delphi:e_class:src:MindStream:msNullClickShape.@unitclass">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msNullClickShape.TmsNullClickShape">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,133,113" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msNullClickShape.TmsNullClickShape.IsNullClick()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msNullClickShape.TmsNullClickShape.Create(msInterfaces.TmsMakeShapeContext)" />
+    </reference>
   </view>
 </nodeSet>
