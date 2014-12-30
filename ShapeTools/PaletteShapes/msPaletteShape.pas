@@ -19,6 +19,7 @@ type
   class function Create(anOtherShapeClass: RmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
   function IsClassTypeNamedAs(const aClassName: String): Boolean; override;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
+  function DrawBounds: TRectF; override;
  public
   procedure DrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsPaletteShape
@@ -27,15 +28,23 @@ implementation
 
 // TmsPaletteShape
 
-procedure TmsPaletteShape.DrawTo(const aCtx: TmsDrawContext);
+function TmsPaletteShape.DrawBounds: TRectF;
 var
  l_StartRectPoint, l_FinishRectPoint : TPointF;
 begin
  l_StartRectPoint := TPointF.Create(StartPoint.X - 50, StartPoint.Y - 50);
  l_FinishRectPoint := TPointF.Create(StartPoint.X + 50, StartPoint.Y + 50);
+ Result := TRectF.Create(l_StartRectPoint, l_FinishRectPoint);
+end;
 
- aCtx.rCanvas.DrawEllipse(TRectF.Create(l_StartRectPoint, l_FinishRectPoint), 1);
- aCtx.rCanvas.FillEllipse(TRectF.Create(l_StartRectPoint, l_FinishRectPoint), 0.5);
+procedure TmsPaletteShape.DrawTo(const aCtx: TmsDrawContext);
+var
+ l_Rect : TRectF;
+begin
+ l_Rect := DrawBounds;
+
+ aCtx.rCanvas.DrawEllipse(l_Rect, 1);
+ aCtx.rCanvas.FillEllipse(l_Rect, 0.5);
 end;
 
 constructor TmsPaletteShape.CreateInner(anOtherShapeClass: RmsShape; const aStartPoint: TPointF);

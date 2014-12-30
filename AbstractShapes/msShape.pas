@@ -152,6 +152,7 @@ end;
 function TmsShape.DrawBounds: TRectF;
 begin
  Result := TRectF.Create(FStartPoint, FStartPoint);
+ Assert(false);
 end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);

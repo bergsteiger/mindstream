@@ -21,6 +21,7 @@ type
  protected
   class function InitialHeight: Single; virtual;
   function Polygon: TPolygon; virtual;
+  function DrawBounds: TRectF; override;
 
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
 
@@ -37,6 +38,31 @@ uses
 class function TmsTriangle.InitialHeight: Single;
 begin
  Result := 100;
+end;
+
+function TmsTriangle.DrawBounds: TRectF;
+var
+ l_Pl : TPolygon;
+ l_P : TPointF;
+begin
+ l_Pl := Polygon;
+ Result.Left := High(Integer);
+ Result.Top := High(Integer);
+ Result.Right := Low(Integer);
+ Result.Bottom := Low(Integer);
+ for l_P in l_PL do
+ begin
+  if (l_P.X < Result.Left) then
+   Result.Left := l_P.X;
+  if (l_P.X > Result.Right) then
+   Result.Right := l_P.X;
+
+  if (l_P.Y < Result.Top) then
+   Result.Top := l_P.Y;
+  if (l_P.Y > Result.Bottom) then
+   Result.Bottom := l_P.Y;
+ end;//l_P in l_PL
+ //Result := PolygonBounds(Polygon);
 end;
 
 function TmsTriangle.Polygon: TPolygon;
