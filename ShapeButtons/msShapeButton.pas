@@ -99,7 +99,8 @@ begin
  end;//f_Shape = nil
  l_OriginalMatrix := Canvas.Matrix;
  try
-  l_CenterPoint := f_Shape.StartPoint;
+//  l_CenterPoint := f_Shape.StartPoint;
+  l_CenterPoint := f_Shape.DrawBounds.TopLeft;
 
   l_Matrix := TMatrix.Identity;
   // - СНИМАЕМ оригинальную матрицу, точнее берём ЕДИНИЧНУЮ матрицу
