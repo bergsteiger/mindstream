@@ -5,7 +5,8 @@ interface
 uses
  msInterfaces,
  msShape,
- System.Types
+ System.Types,
+ msRectangle
  ;
 
 type
@@ -27,9 +28,14 @@ implementation
 // TmsPaletteShape
 
 procedure TmsPaletteShape.DrawTo(const aCtx: TmsDrawContext);
+var
+ l_StartRectPoint, l_FinishRectPoint : TPointF;
 begin
- // - ничего не рисуем.
- //   ПОКА!!
+ l_StartRectPoint := TPointF.Create(StartPoint.X - 50, StartPoint.Y - 50);
+ l_FinishRectPoint := TPointF.Create(StartPoint.X + 50, StartPoint.Y + 50);
+
+ aCtx.rCanvas.DrawEllipse(TRectF.Create(l_StartRectPoint, l_FinishRectPoint), 1);
+ aCtx.rCanvas.FillEllipse(TRectF.Create(l_StartRectPoint, l_FinishRectPoint), 0.5);
 end;
 
 constructor TmsPaletteShape.CreateInner(anOtherShapeClass: RmsShape; const aStartPoint: TPointF);
