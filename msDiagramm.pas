@@ -183,15 +183,17 @@ end;
 function TmsDiagramm.GetMax: TPointF;
 var
  l_Shape : ImsShape;
+ l_BR : TPointF;
 begin
  Result.X := 0;
  Result.Y := 0;
  for l_Shape in f_Items do
  begin
-  if (l_Shape.StartPoint.X > Result.X) then
-   Result.X := l_Shape.StartPoint.X;
-  if (l_Shape.StartPoint.Y > Result.Y) then
-   Result.Y := l_Shape.StartPoint.Y;
+  l_BR := l_Shape.StartPoint;
+  if (l_BR.X > Result.X) then
+   Result.X := l_BR.X;
+  if (l_BR.Y > Result.Y) then
+   Result.Y := l_BR.Y;
  end;//for l_Shape in f_Items
 end;
 
