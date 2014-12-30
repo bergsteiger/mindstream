@@ -94,7 +94,8 @@ implementation
   Math,
   msStreamUtils,
   msTestConstants,
-  msShapeCreator
+  msShapeCreator,
+  msCompletedShapeCreator
   ;
 
 function TmsShapeTestPrim.MakeFileName(const aTestName: string; const aTestFolder: string): String;
@@ -209,7 +210,7 @@ begin
    l_P : TPoint;
   begin
    for l_P in f_Coords do
-    aDiagramm.AddShape(TmsShapeCreator.Create(f_Context.rShapeClass).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil, nil))).AddNewDiagramm;
+    aDiagramm.AddShape(TmsCompletedShapeCreator.Create(f_Context.rShapeClass).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil, nil))).AddNewDiagramm;
 
    SaveDiagrammAndCheck(aDiagramm, SaveDiagramm);
   end
