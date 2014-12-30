@@ -42,8 +42,6 @@ type
   FCurrentAddedShape: ImsShape;
   [JSONMarshalled(True)]
   fName: String;
-  [JSONMarshalled(False)]
-  f_MaxX, f_MaxY : Single;
  private
   function CurrentAddedShape: ImsShape;
   procedure BeginShape(const aClickContext: TmsClickContext);
@@ -140,8 +138,6 @@ begin
  inherited Create;
  FCurrentAddedShape := nil;
  fName := aName;
- f_MaxX := 0;
- f_MaxY := 0;
 end;
 
 procedure TmsDiagramm.SaveTo(const aFileName: String);
