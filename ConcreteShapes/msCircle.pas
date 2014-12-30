@@ -42,11 +42,14 @@ function TmsCircle.ContainsPt(const aPoint: TPointF): Boolean;
 var
  l_StartRectPoint, l_FinishRectPoint : TPointF;
  l_x0, l_y0, l_a, l_b : Integer;
+ l_Rect : TRectF;
 begin
  Result := False;
 
- l_StartRectPoint := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
- l_FinishRectPoint := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
+ l_Rect := DrawBounds;
+
+ l_StartRectPoint := l_Rect.TopLeft;
+ l_FinishRectPoint := l_Rect.BottomRight;
 
  l_x0 := Round(l_StartRectPoint.X + l_FinishRectPoint.X) div 2;
  l_y0 := Round(l_StartRectPoint.Y + l_FinishRectPoint.Y) div 2;
