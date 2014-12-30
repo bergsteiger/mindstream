@@ -29,7 +29,8 @@ uses
 
   // special shapes
   msPointCircle,
-  msSmallTriangle
+  msSmallTriangle,
+  msGreenCircle
   ;
 
 procedure RegisterOurShapes;
@@ -52,6 +53,7 @@ begin
   // special shapes
   TmsPointCircle,
   TmsSmallTriangle,
+  TmsGreenCircle,
 
   // utility shapes
   TmsMover,
