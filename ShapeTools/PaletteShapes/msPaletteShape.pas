@@ -14,6 +14,7 @@ type
  TmsPaletteShape = class(TmsShape)
  private
   f_OtherShapeClass : RmsShape;
+  f_Proxy : ImsShape;
  protected
   constructor CreateInner(anOtherShapeClass: RmsShape; const aStartPoint: TPointF);
   class function Create(anOtherShapeClass: RmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
@@ -26,31 +27,27 @@ type
 
 implementation
 
+uses
+ msGreenCircle
+ ;
+
 // TmsPaletteShape
 
 function TmsPaletteShape.DrawBounds: TRectF;
-var
- l_StartRectPoint, l_FinishRectPoint : TPointF;
 begin
- l_StartRectPoint := TPointF.Create(StartPoint.X - 50, StartPoint.Y - 50);
- l_FinishRectPoint := TPointF.Create(StartPoint.X + 50, StartPoint.Y + 50);
- Result := TRectF.Create(l_StartRectPoint, l_FinishRectPoint);
+ Result :=  f_Proxy.DrawBounds;
 end;
 
 procedure TmsPaletteShape.DrawTo(const aCtx: TmsDrawContext);
-var
- l_Rect : TRectF;
 begin
- l_Rect := DrawBounds;
-
- aCtx.rCanvas.DrawEllipse(l_Rect, 1);
- aCtx.rCanvas.FillEllipse(l_Rect, 0.5);
+ f_Proxy.DrawTo(aCtx);
 end;
 
 constructor TmsPaletteShape.CreateInner(anOtherShapeClass: RmsShape; const aStartPoint: TPointF);
 begin
  inherited CreateInner(aStartPoint);
  f_OtherShapeClass := anOtherShapeClass;
+ f_Proxy := TmsGreenCircle.Create(TmsMakeShapeContext.Create(StartPoint, nil, nil));
 end;
 
 class function TmsPaletteShape.Create(anOtherShapeClass: RmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
