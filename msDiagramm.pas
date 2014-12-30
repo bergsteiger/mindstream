@@ -52,8 +52,7 @@ type
   function Get_Name: String;
   constructor CreatePrim(const aName: String);
   function AddShape(const aShape: ImsShape): ImsShape;
-  function GetMaxX: Single;
-  function GetMaxY: Single;
+  function GetMax: TPointF;
  protected
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
@@ -150,11 +149,13 @@ var
  l_BitmapBuffer: TBitmap;
  l_SourceRect: TRectF;
  l_OriginalMatrix: TMatrix;
+ l_Max : TPointF;
 begin
  // Фиксируем размер снимаемой области
- Assert(GetMaxX > 0);
- Assert(GetMaxY > 0);
- l_SourceRect := TRectF.Create(0, 0, GetMaxX, GetMaxY);
+ l_Max := GetMax;
+ Assert(l_Max.X > 0);
+ Assert(l_Max.Y > 0);
+ l_SourceRect := TRectF.Create(0, 0, l_Max.X, l_Max.Y);
  // Создаем временный буфер для получения скриншота
  l_BitmapBuffer := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
  try
@@ -179,22 +180,19 @@ begin
  Result := aShape;
 end;
 
-function TmsDiagramm.GetMaxX: Single;
+function TmsDiagramm.GetMax: TPointF;
 var
  l_Shape : ImsShape;
 begin
- Result := 0;
+ Result.X := 0;
+ Result.Y := 0;
  for l_Shape in f_Items do
-  if l_Shape.StartPoint.X > Result then Result := l_Shape.StartPoint.X;
-end;
-
-function TmsDiagramm.GetMaxY: Single;
-var
- l_Shape : ImsShape;
-begin
- Result := 0;
- for l_Shape in f_Items do
-  if l_Shape.StartPoint.Y > Result then Result := l_Shape.StartPoint.Y;
+ begin
+  if (l_Shape.StartPoint.X > Result.X) then
+   Result.X := l_Shape.StartPoint.X;
+  if (l_Shape.StartPoint.Y > Result.Y) then
+   Result.Y := l_Shape.StartPoint.Y;
+ end;//for l_Shape in f_Items
 end;
 
 function TmsDiagramm.Get_Name: String;
