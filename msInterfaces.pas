@@ -89,6 +89,7 @@ type
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
+  function DrawBounds: TRectF;
   function pm_GetStartPoint: TPointF;
   property StartPoint: TPointF
    read pm_GetStartPoint;
