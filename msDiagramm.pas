@@ -54,6 +54,8 @@ type
   function Get_Name: String;
   constructor CreatePrim(const aName: String);
   function AddShape(const aShape: ImsShape): ImsShape;
+  function GetMaxX: Single;
+  function GetMaxY: Single;
  protected
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
@@ -154,9 +156,9 @@ var
  l_OriginalMatrix: TMatrix;
 begin
  // Фиксируем размер снимаемой области
- Assert(f_MaxX > 0);
- Assert(f_MaxY > 0);
- l_SourceRect := TRectF.Create(0, 0, f_MaxX, f_MaxY);
+ Assert(GetMaxX > 0);
+ Assert(GetMaxY > 0);
+ l_SourceRect := TRectF.Create(0, 0, GetMaxX, GetMaxY);
  // Создаем временный буфер для получения скриншота
  l_BitmapBuffer := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
  try
@@ -178,10 +180,25 @@ end;
 function TmsDiagramm.AddShape(const aShape: ImsShape): ImsShape;
 begin
  Items.Add(aShape);
- if aShape.StartPoint.X > f_MaxX then f_MaxX := aShape.StartPoint.X;
- if aShape.StartPoint.Y > f_MaxY then f_MaxY := aShape.StartPoint.Y;
-
  Result := aShape;
+end;
+
+function TmsDiagramm.GetMaxX: Single;
+var
+ l_Shape : ImsShape;
+begin
+ Result := 0;
+ for l_Shape in f_Items do
+  if l_Shape.StartPoint.X > Result then Result := l_Shape.StartPoint.X;
+end;
+
+function TmsDiagramm.GetMaxY: Single;
+var
+ l_Shape : ImsShape;
+begin
+ Result := 0;
+ for l_Shape in f_Items do
+  if l_Shape.StartPoint.Y > Result then Result := l_Shape.StartPoint.Y;
 end;
 
 function TmsDiagramm.Get_Name: String;
