@@ -17,6 +17,7 @@ type
   class function InitialRadiusX: Integer; virtual;
   class function InitialRadiusY: Integer; virtual;
 
+  function DrawBounds: TRectF; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
@@ -56,15 +57,20 @@ begin
            Sqr((aPoint.Y - l_y0)/l_b) <= 1.0;
 end;
 
+function TmsCircle.DrawBounds: TRectF;
+begin
+ Result := TRectF.Create(TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY),
+                         TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY));
+end;
+
 procedure TmsCircle.DoDrawTo(const aCtx: TmsDrawContext);
 var
- l_StartRectPoint, l_FinishRectPoint : TPointF;
+ l_Rect : TRectF;
 begin
- l_StartRectPoint := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
- l_FinishRectPoint := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
+ l_Rect := DrawBounds;
 
- aCtx.rCanvas.DrawEllipse(TRectF.Create(l_StartRectPoint, l_FinishRectPoint), 1);
- aCtx.rCanvas.FillEllipse(TRectF.Create(l_StartRectPoint, l_FinishRectPoint), 0.5);
+ aCtx.rCanvas.DrawEllipse(l_Rect, 1);
+ aCtx.rCanvas.FillEllipse(l_Rect, 0.5);
 end;
 
 procedure TmsCircle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);

@@ -18,7 +18,7 @@ type
   class function InitialWidth: Single; virtual;
   class function InitialHeight: Single; virtual;
 
-  function DrawBounds: TRectF;
+  function DrawBounds: TRectF; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public

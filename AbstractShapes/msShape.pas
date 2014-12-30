@@ -49,6 +49,7 @@ type
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   // - обрабатывает "нулевой клик"
+  function DrawBounds: TRectF; virtual;
  public
   procedure DrawTo(const aCtx: TmsDrawContext); virtual;
   property StartPoint : TPointF
@@ -146,6 +147,11 @@ end;
 function TmsShape.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
 begin
  Result := DoNullClick(aHolder);
+end;
+
+function TmsShape.DrawBounds: TRectF;
+begin
+ Result := TRectF.Create(FStartPoint, FStartPoint);
 end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
