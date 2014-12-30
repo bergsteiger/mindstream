@@ -12,32 +12,22 @@ uses
  ;
 
 type
- TmsPointContext = record
-  fStartPoint, fFinalPoint: TPointF;
- constructor Create(const aStartPoint, aFinalPoint: TPointF);
- end;
-
  TmsRectangle = class(TmsShape)
  protected
   class function CornerRadius: Single; virtual;
   class function InitialWidth: Single; virtual;
   class function InitialHeight: Single; virtual;
 
-  function GetCoordinateForDraw: TmsPointContext;
+  function GetCoordinateForDraw: TRectF;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
   function ContainsPt(const aPoint: TPointF): Boolean; override;
- end;
+ end;//TmsRectangle
 
 implementation
 
 { TmsRectangle }
-constructor TmsPointContext.Create(const aStartPoint, aFinalPoint: TPointF);
-begin
- fStartPoint := aStartPoint;
- fFinalPoint := aFinalPoint;
-end;
 
 class function TmsRectangle.InitialWidth: Single;
 begin
@@ -50,15 +40,8 @@ begin
 end;
 
 function TmsRectangle.ContainsPt(const aPoint: TPointF): Boolean;
-var
- l_msPointContext: TmsPointContext;
- l_Rect: TRectF;
 begin
- Result := False;
- l_msPointContext := GetCoordinateForDraw;
- l_Rect := TRectF.Create(l_msPointContext.fStartPoint,
-                         l_msPointContext.fFinalPoint);
- Result := l_Rect.Contains(aPoint);
+ Result := GetCoordinateForDraw.Contains(aPoint);
 end;
 
 class function TmsRectangle.CornerRadius: Single;
@@ -68,18 +51,16 @@ end;
 
 procedure TmsRectangle.DoDrawTo(const aCtx: TmsDrawContext);
 var
- l_msPointContext: TmsPointContext;
+ l_msPointContext: TRectF;
 begin
  l_msPointContext := GetCoordinateForDraw;
- aCtx.rCanvas.DrawRect(TRectF.Create(l_msPointContext.fStartPoint,
-                                     l_msPointContext.fFinalPoint),
+ aCtx.rCanvas.DrawRect(l_msPointContext,
                   CornerRadius,
                   CornerRadius,
                   AllCorners,
                   1,
                   TCornerType.ctRound);
- aCtx.rCanvas.FillRect(TRectF.Create(l_msPointContext.fStartPoint,
-                                     l_msPointContext.fFinalPoint),
+ aCtx.rCanvas.FillRect(l_msPointContext,
                   CornerRadius,
                   CornerRadius,
                   AllCorners,
@@ -87,7 +68,7 @@ begin
                   TCornerType.ctRound);
 end;
 
-function TmsRectangle.GetCoordinateForDraw: TmsPointContext;
+function TmsRectangle.GetCoordinateForDraw: TRectF;
 var
  l_StartPoint, l_FinalPoint : TPointF;
 begin
@@ -95,7 +76,7 @@ begin
                                StartPoint.Y - InitialHeight / 2);
  l_FinalPoint := TPointF.Create(StartPoint.X + InitialWidth / 2,
                             StartPoint.Y + InitialHeight / 2);
- Result := TmsPointContext.Create(l_StartPoint, l_FinalPoint);
+ Result := TRectF.Create(l_StartPoint, l_FinalPoint);
 end;
 
 procedure TmsRectangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
