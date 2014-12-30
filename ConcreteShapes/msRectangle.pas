@@ -23,7 +23,7 @@ type
   class function InitialWidth: Single; virtual;
   class function InitialHeight: Single; virtual;
 
-  function GetCoordinateForDraw(aStartPoint: TPointf): TmsPointContext;
+  function GetCoordinateForDraw: TmsPointContext;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
@@ -55,7 +55,7 @@ var
  l_Rect: TRectF;
 begin
  Result := False;
- l_msPointContext := GetCoordinateForDraw(StartPoint);
+ l_msPointContext := GetCoordinateForDraw;
  l_Rect := TRectF.Create(l_msPointContext.fStartPoint,
                          l_msPointContext.fFinalPoint);
  Result := l_Rect.Contains(aPoint);
@@ -70,7 +70,7 @@ procedure TmsRectangle.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_msPointContext: TmsPointContext;
 begin
- l_msPointContext := GetCoordinateForDraw(StartPoint);
+ l_msPointContext := GetCoordinateForDraw;
  aCtx.rCanvas.DrawRect(TRectF.Create(l_msPointContext.fStartPoint,
                                      l_msPointContext.fFinalPoint),
                   CornerRadius,
@@ -87,7 +87,7 @@ begin
                   TCornerType.ctRound);
 end;
 
-function TmsRectangle.GetCoordinateForDraw(aStartPoint: TPointf): TmsPointContext;
+function TmsRectangle.GetCoordinateForDraw: TmsPointContext;
 var
  l_StartPoint, l_FinalPoint : TPointF;
 begin
