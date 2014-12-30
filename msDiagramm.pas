@@ -189,7 +189,7 @@ begin
  Result.Y := 0;
  for l_Shape in f_Items do
  begin
-  l_BR := l_Shape.StartPoint;
+  l_BR := l_Shape.DrawBounds.BottomRight;
   if (l_BR.X > Result.X) then
    Result.X := l_BR.X;
   if (l_BR.Y > Result.Y) then
