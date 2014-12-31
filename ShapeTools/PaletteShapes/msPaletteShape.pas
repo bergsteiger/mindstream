@@ -53,8 +53,7 @@ constructor TmsPaletteShape.CreateInner(anOtherShapeClass: RmsShape; const aStar
 begin
  inherited CreateInner(aStartPoint);
  f_OtherShapeClass := anOtherShapeClass;
- if f_OtherShapeClass.IsTool then
-  f_Proxy := TmsMover.ButtonShape(aStartPoint);
+ f_Proxy := f_OtherShapeClass.ButtonShape(aStartPoint);
 end;
 
 class function TmsPaletteShape.Create(anOtherShapeClass: RmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
