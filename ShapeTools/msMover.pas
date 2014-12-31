@@ -20,6 +20,7 @@ type
   constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
+  class function ButtonShape(const aStartPoint: TPointF): ImsShape; override;
   function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aCtx: TmsEndShapeContext); override;
  end;//TmsMover
@@ -27,7 +28,7 @@ type
 implementation
 
 uses
- msRectangle,
+ msBlackTriangle,
  FMX.Types,
  System.SysUtils;
 
@@ -35,6 +36,11 @@ constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsS
 begin
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
+end;
+
+class function TmsMover.ButtonShape(const aStartPoint: TPointF): ImsShape;
+begin
+ Result := TmsBlackTriangle.Create(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
 end;
 
 class function TmsMover.Create(const aCtx: TmsMakeShapeContext): ImsShape;

@@ -30,7 +30,10 @@ uses
   // special shapes
   msPointCircle,
   msSmallTriangle,
-  msGreenCircle
+  msGreenCircle,
+
+  // shapes for toolbar buttons
+  msBlackTriangle
   ;
 
 procedure RegisterOurShapes;
@@ -60,7 +63,10 @@ begin
   TmsPicker,
   TmsUpToParent,
   TmsSwapParents,
-  TmsShapeRemover
+  TmsShapeRemover,
+
+  // shapes for buttons
+  TmsBlackTriangle
  ]);
 end;
 

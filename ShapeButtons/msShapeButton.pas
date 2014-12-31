@@ -63,17 +63,20 @@ begin
 
  f_ShapeIndex := TmsShapesForToolbar.Instance.IndexOf(aShape);
  Assert(f_ShapeIndex >= 0);
- f_Shape := TmsPaletteShapeCreator.Create(aShape).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(TmsPaletteShapeCreator.ButtonSize / 2,
-                              TmsPaletteShapeCreator.ButtonSize / 2), nil, nil));
+ f_Shape := TmsPaletteShapeCreator.Create(aShape).CreateShape
+                                     (TmsMakeShapeContext.Create
+                                      (TPointF.Create
+                                       (TmsPaletteShapeCreator.ButtonSize / 2,
+                                        TmsPaletteShapeCreator.ButtonSize / 2),
+                                        nil,
+                                        nil)
+                                      );
  f_Shapes := aShapes;
  OnPaint := MyPaint;
  OnClick := MyClick;
 
  Assert(f_Shape <> nil);
- if aShape.IsTool then
-  Self.Text := IntToStr(f_ShapeIndex)
- else
-  Assert(f_Shape.IsClassTypeNamedAs(f_Shapes.Items[f_ShapeIndex]));
+ Assert(f_Shape.IsClassTypeNamedAs(f_Shapes.Items[f_ShapeIndex]));
 
  Self.Position.X := aColumn * TmsPaletteShapeCreator.ButtonSize;
  Self.Position.Y := aRow * TmsPaletteShapeCreator.ButtonSize;

@@ -25,10 +25,16 @@ type
   procedure DrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsPaletteShape
 
+type
+ TmsShapeFriend = class(TmsShape)
+ end;//TmsShapeFriend
+ RmsShapeFriend = class of TmsShapeFriend;
+
 implementation
 
 uses
- msGreenCircle
+ msGreenCircle,
+ msMover
  ;
 
 // TmsPaletteShape
@@ -47,7 +53,8 @@ constructor TmsPaletteShape.CreateInner(anOtherShapeClass: RmsShape; const aStar
 begin
  inherited CreateInner(aStartPoint);
  f_OtherShapeClass := anOtherShapeClass;
- f_Proxy := TmsGreenCircle.Create(TmsMakeShapeContext.Create(StartPoint, nil, nil));
+ if f_OtherShapeClass.IsTool then
+  f_Proxy := TmsMover.ButtonShape(aStartPoint);
 end;
 
 class function TmsPaletteShape.Create(anOtherShapeClass: RmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
@@ -59,11 +66,6 @@ function TmsPaletteShape.IsClassTypeNamedAs(const aClassName: String): Boolean;
 begin
  Result := (f_OtherShapeClass.ClassName = aClassName);
 end;
-
-type
- TmsShapeFriend = class(TmsShape)
- end;//TmsShapeFriend
- RmsShapeFriend = class of TmsShapeFriend;
 
 function TmsPaletteShape.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
 begin

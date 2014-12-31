@@ -25,6 +25,12 @@ type
   class function Create(aShapeClass: RmsShape): ImsShapeCreator;
  end;//TmsShapeCreator
 
+ TmsShapeFriend = class(TmsShape)
+ end;//TmsShapeFriend
+
+ RmsShapeFriend = class of TmsShapeFriend;
+
+
 implementation
 
 // TmsShapeCreator
@@ -39,12 +45,6 @@ class function TmsShapeCreator.Create(aShapeClass: RmsShape): ImsShapeCreator;
 begin
  Result := CreatePrim(aShapeClass);
 end;
-
-type
- TmsShapeFriend = class(TmsShape)
- end;//TmsShapeFriend
-
- RmsShapeFriend = class of TmsShapeFriend;
 
 function TmsShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 begin

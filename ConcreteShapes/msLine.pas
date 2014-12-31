@@ -75,8 +75,7 @@ begin
   end;//try..finally
  end//StartPoint = FinishPoint
  else
-  aCtx.rCanvas.DrawLine(StartPoint,
-                   FinishPoint, 1);
+  aCtx.rCanvas.DrawLine(StartPoint,FinishPoint, 1);
 end;
 
 function TmsLine.IsNeedsSecondClick: Boolean;
