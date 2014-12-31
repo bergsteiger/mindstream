@@ -33,8 +33,7 @@ uses
   msGreenCircle,
 
   // shapes for toolbar buttons
-  msBlackTriangle,
-  msMoverShapeButton
+  msBlackTriangle
   ;
 
 procedure RegisterOurShapes;
@@ -67,8 +66,7 @@ begin
   TmsShapeRemover,
 
   // shapes for buttons
-  TmsBlackTriangle,
-  TmsMoverShapeButton
+  TmsBlackTriangle
  ]);
 end;
 

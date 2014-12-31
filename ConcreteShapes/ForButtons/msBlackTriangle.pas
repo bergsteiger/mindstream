@@ -12,6 +12,8 @@ type
  TmsBlackTriangle = class(TmsTriangle)
  protected
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
+  public
+   class function IsForToolbar: Boolean; override;
  end;//TmsBlackTriangle
 
 implementation
@@ -22,6 +24,11 @@ procedure TmsBlackTriangle.TransformDrawOptionsContext(var theCtx: TmsDrawOption
 begin
   inherited;
  theCtx.rFillColor := TAlphaColorRec.Black;
+end;
+
+class function TmsBlackTriangle.IsForToolbar: Boolean;
+begin
+ Result := false;
 end;
 
 end.
