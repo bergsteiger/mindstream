@@ -7,12 +7,14 @@ uses
  msLine,
  FMX.Graphics,
  System.Types,
- msInterfaces
+ msInterfaces,
+ System.Math.Vectors
  ;
 
 type
  TmsLineWithArrow = class(TmsLine)
  protected
+  function GetFinishPoint: TPointF; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetArrowAngleRotation : Single;
   function GetDrawBounds: TRectF; override;
@@ -26,10 +28,6 @@ uses
  System.Math,
  System.UITypes,
  FMX.Types
- {$IF DEFined(VER270) OR DEFined(VER280)}
- ,
- System.Math.Vectors
- {$ENDIF}
  ;
 
 
@@ -40,16 +38,21 @@ var
  l_Matrix: TMatrix;
  l_Angle : Single;
  l_CenterPoint,
- l_FinishPoint : TPointF;
+ l_LineFinishPoint : TPointF;
+ l_Polygon : TPolygon;
+
 begin
  inherited;
  if (StartPoint <> FinishPoint) then
  begin
   l_OriginalMatrix := aCtx.rCanvas.Matrix;
   try
-   l_FinishPoint := TPointF.Create(FinishPoint.X + TmsSmallTriangle.InitialHeight / 2,
-                                   FinishPoint.Y);
-   l_Proxy := TmsSmallTriangle.CreateInner(l_FinishPoint);
+   l_LineFinishPoint := TPointF.Create(FinishPoint.X - TmsSmallTriangle.InitialHeight / 2,
+                                       FinishPoint.Y);
+   l_Proxy := TmsSmallTriangle.CreateInner(l_LineFinishPoint);
+
+   // Координаты треугольника мы получить можем, но вот как их обработать ?
+   l_Polygon := (l_Proxy as TmsSmallTriangle).GetPolygon;
    try
     // in Radian
     l_Angle := GetArrowAngleRotation;
@@ -60,12 +63,16 @@ begin
     // - СНИМАЕМ оригинальную матрицу, точнее берём ЕДИНИЧНУЮ матрицу
     // https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
+
     // - задаём точку, вокруг которой вертим
     l_Matrix := l_Matrix * TMatrix.CreateRotation(l_Angle);
+
     // - задаём угол поворота
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
+
     // - задаём начало координат
     l_Matrix := l_Matrix * l_OriginalMatrix;
+
     // - ПРИМЕНЯЕМ оригинальную матрицу
     // Иначе например ОРИГИНАЛЬНЫЙ параллельный перенос - не будет работать.
     // https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B0%D0%BB%D0%BB%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81
@@ -80,7 +87,7 @@ begin
    end;//try..finally
   finally
     aCtx.rCanvas.SetMatrix(l_OriginalMatrix);
-    // - восстанавливаем ОРИГИНАЛЬНУЮ матрицу
+  // - восстанавливаем ОРИГИНАЛЬНУЮ матрицу
   end;//try..finally
  end;//(StartPoint <> FinishPoint)
 end;
@@ -142,6 +149,15 @@ begin
   Result.Bottom := Result.Top + TmsSmallTriangle.InitialHeight;
   Result.Top := Result.Top - TmsSmallTriangle.InitialHeight;
  end;//SameValue(Result.Top, Result.Bottom)
+end;
+
+function TmsLineWithArrow.GetFinishPoint: TPointF;
+begin
+ // Вот тут, по идее, надо возвращать координату середины стороны,
+ //  через которую прходит линия.
+ // Сделать я это не смог, потому что не знаю как правильно после поворота треугольника
+ // получить новые координаты вершин.
+ Result := inherited;
 end;
 
 end.

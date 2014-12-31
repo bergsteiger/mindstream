@@ -7,12 +7,8 @@ uses
  System.Types,
  FMX.Graphics,
  FMX.Types,
- System.UITypes
- {$IF DEFined(VER270) OR DEFined(VER280)}
- ,
- System.Math.Vectors
- {$ENDIF}
- ,
+ System.UITypes,
+ System.Math.Vectors,
  msInterfaces
  ;
 
@@ -69,11 +65,11 @@ function TmsTriangle.Polygon: TPolygon;
 begin
  SetLength(Result, 4);
  Result[0] := TPointF.Create(StartPoint.X - InitialHeight / 2,
-                        StartPoint.Y + InitialHeight / 2);
+                             StartPoint.Y + InitialHeight / 2);
  Result[1] := TPointF.Create(StartPoint.X + InitialHeight / 2,
-                        StartPoint.Y + InitialHeight / 2);
+                             StartPoint.Y + InitialHeight / 2);
  Result[2] := TPointF.Create(StartPoint.X,
-                        StartPoint.Y - InitialHeight / 2);
+                             StartPoint.Y - InitialHeight / 2);
  Result[3] := Result[0];
 end;
 
