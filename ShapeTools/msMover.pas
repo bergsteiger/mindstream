@@ -30,7 +30,10 @@ implementation
 uses
  msBlackTriangle,
  FMX.Types,
- System.SysUtils;
+ System.SysUtils,
+ msLine,
+ msLineWithArrow
+ ;
 
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
 begin
@@ -40,7 +43,8 @@ end;
 
 class function TmsMover.ButtonShape(const aStartPoint: TPointF): ImsShape;
 begin
- Result := TmsBlackTriangle.Create(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
+ Result := TmsLineWithArrow.CreateCompleted(TPointF.Create(50, 50), TPointF.Create(0, 0));
+// Result := TmsBlackTriangle.Create(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
 end;
 
 class function TmsMover.Create(const aCtx: TmsMakeShapeContext): ImsShape;

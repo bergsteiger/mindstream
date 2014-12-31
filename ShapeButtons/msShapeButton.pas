@@ -145,9 +145,9 @@ var
  l_B : TRectF;
 begin
  l_B := f_Shape.DrawBounds;
- Result:= TPointF.Create((Self.Width - cBorder * 2) / (l_B.Right - l_B.Left),
+ Result:= TPointF.Create((Self.Width - cBorder * 2) / Abs(l_B.Right - l_B.Left),
                          // 100 тут это "ширина фигуры" мы потом её честно посчитаем
-                         (Self.Height - cBorder * 2) / 100);
+                         (Self.Height - cBorder * 2) / Abs(l_B.Bottom - l_B.Top));
 end;
 
 end.

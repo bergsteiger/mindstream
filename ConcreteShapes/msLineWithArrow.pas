@@ -15,6 +15,7 @@ type
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetArrowAngleRotation : Single;
+  function DrawBounds: TRectF; override;
  end;//TmsLineWithArrow
 
 implementation
@@ -125,6 +126,21 @@ begin
  end;
 
  Result := l_Invert * (l_AlphaAngle + l_RotationAngle);
+end;
+
+function TmsLineWithArrow.DrawBounds: TRectF;
+begin
+ Result := inherited DrawBounds;
+ if SameValue(Result.Left, Result.Right) then
+ begin
+  Result.Right := Result.Left + TmsSmallTriangle.InitialHeight;
+  Result.Left := Result.Left - TmsSmallTriangle.InitialHeight;
+ end;//SameValue(Result.Left, Result.Right)
+ if SameValue(Result.Top, Result.Bottom) then
+ begin
+  Result.Bottom := Result.Top + TmsSmallTriangle.InitialHeight;
+  Result.Top := Result.Top - TmsSmallTriangle.InitialHeight;
+ end;//SameValue(Result.Top, Result.Bottom)
 end;
 
 end.
