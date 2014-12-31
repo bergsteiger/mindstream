@@ -18,7 +18,7 @@ type
   class function InitialWidth: Single; virtual;
   class function InitialHeight: Single; virtual;
 
-  function DrawBounds: TRectF; override;
+  function GetDrawBounds: TRectF; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
@@ -68,7 +68,7 @@ begin
                   TCornerType.ctRound);
 end;
 
-function TmsRectangle.DrawBounds: TRectF;
+function TmsRectangle.GetDrawBounds: TRectF;
 var
  l_StartPoint, l_FinalPoint : TPointF;
 begin

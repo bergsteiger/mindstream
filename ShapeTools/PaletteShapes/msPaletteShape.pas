@@ -20,7 +20,7 @@ type
   class function Create(anOtherShapeClass: RmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
   function IsClassTypeNamedAs(const aClassName: String): Boolean; override;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
-  function DrawBounds: TRectF; override;
+  function GetDrawBounds: TRectF; override;
  public
   procedure DrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsPaletteShape
@@ -39,9 +39,9 @@ uses
 
 // TmsPaletteShape
 
-function TmsPaletteShape.DrawBounds: TRectF;
+function TmsPaletteShape.GetDrawBounds: TRectF;
 begin
- Result :=  f_Proxy.DrawBounds;
+ Result := f_Proxy.DrawBounds;
 end;
 
 procedure TmsPaletteShape.DrawTo(const aCtx: TmsDrawContext);

@@ -21,7 +21,7 @@ type
  protected
   class function InitialHeight: Single; virtual;
   function Polygon: TPolygon; virtual;
-  function DrawBounds: TRectF; override;
+  function GetDrawBounds: TRectF; override;
 
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
 
@@ -40,7 +40,7 @@ begin
  Result := 100;
 end;
 
-function TmsTriangle.DrawBounds: TRectF;
+function TmsTriangle.GetDrawBounds: TRectF;
 var
  l_Pl : TPolygon;
  l_P : TPointF;

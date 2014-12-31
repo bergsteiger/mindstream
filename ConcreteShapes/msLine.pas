@@ -18,7 +18,7 @@ type
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   constructor CreateInner(const aStartPoint: TPointF); override;
   class function IsLineLike: Boolean; override;
-  function DrawBounds: TRectF; override;
+  function GetDrawBounds: TRectF; override;
   property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
  public
   function IsNeedsSecondClick : Boolean; override;
@@ -47,7 +47,7 @@ begin
  Result := true;
 end;
 
-function TmsLine.DrawBounds: TRectF;
+function TmsLine.GetDrawBounds: TRectF;
 begin
  Result := TRectF.Create(StartPoint, FinishPoint);
 end;

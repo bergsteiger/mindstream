@@ -17,7 +17,7 @@ type
   class function InitialRadiusX: Integer; virtual;
   class function InitialRadiusY: Integer; virtual;
 
-  function DrawBounds: TRectF; override;
+  function GetDrawBounds: TRectF; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
@@ -60,7 +60,7 @@ begin
            Sqr((aPoint.Y - l_y0)/l_b) <= 1.0;
 end;
 
-function TmsCircle.DrawBounds: TRectF;
+function TmsCircle.GetDrawBounds: TRectF;
 begin
  Result := TRectF.Create(TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY),
                          TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY));

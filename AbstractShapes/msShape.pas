@@ -49,7 +49,8 @@ type
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   // - обрабатывает "нулевой клик"
-  function DrawBounds: TRectF; virtual;
+  function GetDrawBounds: TRectF; virtual;
+  function DrawBounds: TRectF;
  public
   // В радианах
   procedure Rotate(const aCtx: TmsDrawContext; const aAngle: Single);
@@ -189,10 +190,15 @@ begin
  Result := DoNullClick(aHolder);
 end;
 
-function TmsShape.DrawBounds: TRectF;
+function TmsShape.GetDrawBounds: TRectF;
 begin
  Result := TRectF.Create(FStartPoint, FStartPoint);
  Assert(false);
+end;
+
+function TmsShape.DrawBounds: TRectF;
+begin
+ Result := GetDrawBounds;
 end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
