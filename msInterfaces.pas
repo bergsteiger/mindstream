@@ -91,6 +91,7 @@ type
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function DrawBounds: TRectF;
   function pm_GetStartPoint: TPointF;
+  procedure Rotate(const aCtx: TmsDrawContext; const aAngle: Single);
   property StartPoint: TPointF
    read pm_GetStartPoint;
  end;//ImsShape

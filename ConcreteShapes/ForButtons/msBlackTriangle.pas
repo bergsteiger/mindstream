@@ -5,7 +5,8 @@ interface
 uses
  System.UITypes,
  msInterfaces,
- msTriangle
+ msTriangle,
+ System.Types
  ;
 
 type
