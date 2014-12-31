@@ -65,7 +65,9 @@ uses
   msPaletteShape in 'ShapeTools\PaletteShapes\msPaletteShape.pas',
   msShapeRemover in 'ShapeTools\msShapeRemover.pas',
   msGreenCircle in 'SpecialShapes\msGreenCircle.pas',
-  msBlackTriangle in 'ConcreteShapes\ForButtons\msBlackTriangle.pas';
+  msBlackTriangle in 'ConcreteShapes\ForButtons\msBlackTriangle.pas',
+  msMoverShapeButton in 'ConcreteShapes\ForButtons\msMoverShapeButton.pas',
+  msBlackRectangle in 'ConcreteShapes\ForButtons\msBlackRectangle.pas';
 
 {$R *.res}
 
