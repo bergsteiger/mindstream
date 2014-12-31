@@ -36,7 +36,7 @@ begin
    Inc(l_Result);
   end
  );
- CheckTrue(l_Result = 21);
+ CheckTrue(l_Result = 22);
 end;
 
 procedure TRegisteredShapesTest.TestFirstShape;
