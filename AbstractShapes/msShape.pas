@@ -197,8 +197,22 @@ begin
 end;
 
 function TmsShape.DrawBounds: TRectF;
+var
+ l_Tmp : Single;
 begin
  Result := GetDrawBounds;
+ if (Result.Top > Result.Bottom) then
+ begin
+  l_Tmp := Result.Bottom;
+  Result.Bottom := Result.Top;
+  Result.Top := l_Tmp;
+ end;//Result.Top > Result.Bottom
+ if (Result.Left > Result.Right) then
+ begin
+  l_Tmp := Result.Right;
+  Result.Right := Result.Left;
+  Result.Left := l_Tmp;
+ end;//Result.Left > Result.Right
 end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
