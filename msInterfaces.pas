@@ -91,7 +91,6 @@ type
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function DrawBounds: TRectF;
   function pm_GetStartPoint: TPointF;
-  procedure Rotate(const aCtx: TmsDrawContext; const aAngle: Single);
   property StartPoint: TPointF
    read pm_GetStartPoint;
  end;//ImsShape
@@ -182,13 +181,13 @@ begin
  rFillColor :=  TAlphaColorRec.Null;
  if aCtx.rMoving then
  begin
-  rStrokeDash := TStrokeDash.sdDashDot;
+  rStrokeDash := TStrokeDash.DashDot;
   rStrokeColor := TAlphaColors.Darkmagenta;
   rStrokeThickness := 4;
  end//aCtx.rMoving
  else
  begin
-  rStrokeDash := TStrokeDash.sdSolid;
+  rStrokeDash := TStrokeDash.Solid;
   rStrokeColor := TAlphaColorRec.Black;
   rStrokeThickness := 1;
  end;//aCtx.rMoving

@@ -59,13 +59,13 @@ begin
                   CornerRadius,
                   AllCorners,
                   1,
-                  TCornerType.ctRound);
+                  TCornerType.Round);
  aCtx.rCanvas.FillRect(l_msPointContext,
                   CornerRadius,
                   CornerRadius,
                   AllCorners,
                   0.5,
-                  TCornerType.ctRound);
+                  TCornerType.Round);
 end;
 
 function TmsRectangle.GetDrawBounds: TRectF;

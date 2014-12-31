@@ -52,9 +52,6 @@ type
   function GetDrawBounds: TRectF; virtual;
   function DrawBounds: TRectF;
  public
-  // В радианах
-  procedure Rotate(const aCtx: TmsDrawContext; const aAngle: Single);
-
   procedure DrawTo(const aCtx: TmsDrawContext); virtual;
   property StartPoint : TPointF
    read pm_GetStartPoint;
@@ -116,41 +113,6 @@ end;
 function TmsShape.pm_GetStartPoint: TPointF;
 begin
  Result := FStartPoint;
-end;
-
-procedure TmsShape.Rotate(const aCtx: TmsDrawContext; const aAngle: Single);
-var
- l_OriginalMatrix: TMatrix;
- l_Matrix: TMatrix;
- l_CenterPoint : TPointF;
-begin
- l_OriginalMatrix := aCtx.rCanvas.Matrix;
- try
-  l_CenterPoint := StartPoint;
-
-  l_Matrix := TMatrix.Identity;
-  // - СНИМАЕМ оригинальную матрицу, точнее берём ЕДИНИЧНУЮ матрицу
-  // https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0
-  l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
-  // - задаём точку, вокруг которой вертим
-  l_Matrix := l_Matrix * TMatrix.CreateRotation(aAngle);
-  // - задаём угол поворота
-  l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
-  // - задаём начало координат
-  l_Matrix := l_Matrix * l_OriginalMatrix;
-  // - ПРИМЕНЯЕМ оригинальную матрицу
-  // Иначе например ОРИГИНАЛЬНЫЙ параллельный перенос - не будет работать.
-  // https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B0%D0%BB%D0%BB%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81
-
-  aCtx.rCanvas.SetMatrix(l_Matrix);
-  // - применяем нашу "комплексную" матрицу
-
-  Self.DrawTo(aCtx);
-  // - отрисовываем примитив с учётом матрицы преобразований
- finally
-  aCtx.rCanvas.SetMatrix(l_OriginalMatrix);
-  // - восстанавливаем ОРИГИНАЛЬНУЮ матрицу
- end;//try..finally
 end;
 
 function TmsShape.DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;

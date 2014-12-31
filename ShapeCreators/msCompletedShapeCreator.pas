@@ -26,7 +26,6 @@ uses
 function TmsCompletedShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 var
  l_EndPont : TPointF;
- l_Shape: ImsShape;
 begin
  if ShapeClass.IsTool then
  begin

@@ -20,7 +20,7 @@ implementation
 procedure TmsDashLine.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rStrokeDash := TStrokeDash.sdDash;
+ theCtx.rStrokeDash := TStrokeDash.Dash;
 end;
 
 end.

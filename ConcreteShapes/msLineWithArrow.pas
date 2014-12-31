@@ -39,16 +39,17 @@ var
  l_OriginalMatrix: TMatrix;
  l_Matrix: TMatrix;
  l_Angle : Single;
- l_CenterPoint : TPointF;
-
- l_TextRect : TRectF;
+ l_CenterPoint,
+ l_FinishPoint : TPointF;
 begin
  inherited;
  if (StartPoint <> FinishPoint) then
  begin
   l_OriginalMatrix := aCtx.rCanvas.Matrix;
   try
-   l_Proxy := TmsSmallTriangle.CreateInner(FinishPoint);
+   l_FinishPoint := TPointF.Create(FinishPoint.X + TmsSmallTriangle.InitialHeight / 2,
+                                   FinishPoint.Y);
+   l_Proxy := TmsSmallTriangle.CreateInner(l_FinishPoint);
    try
     // in Radian
     l_Angle := GetArrowAngleRotation;
