@@ -18,9 +18,6 @@ uses
 type
  TmsShape = class abstract(TmsDiagrammsList, ImsShape)
  private
- private
-  f_ButtonShape: ImsShape;
-
   FStartPoint: TPointF;
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
   function pm_GetStartPoint: TPointF;
@@ -66,8 +63,6 @@ type
   class function IsNullClick: Boolean; virtual;
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);
-
-  property ButtonShape : ImsShape read f_ButtonShape write f_ButtonShape;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
