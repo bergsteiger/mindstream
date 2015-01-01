@@ -1,17 +1,19 @@
-﻿unit msPolygonShape;
+﻿unit msMoverIcon;
 
 interface
 
 uses
  msInterfaces,
- msTool,
  System.Types,
- System.Math.Vectors
+ System.Math.Vectors,
+ msPolygonShape
  ;
 
 type
- TmsPolygonShape = class abstract(TmsTool)
+ TmsMoverIcon = class(TmsPolygonShape)
   // - класс для реализации полигональных объектов
+ private
+
  protected
   function Polygon: TPolygon; virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
@@ -20,19 +22,19 @@ type
 
 implementation
 
-{ TmsPolygonShape }
-function TmsPolygonShape.GetDrawBounds: TRectF;
+{ TmsMoverIcon }
+function TmsMoverIcon.GetDrawBounds: TRectF;
 begin
  Result := TRectF.Create(0,0,100,100);
 end;
 
 
-function TmsPolygonShape.Polygon: TPolygon;
+function TmsMoverIcon.Polygon: TPolygon;
 begin
 
 end;
 
-procedure TmsPolygonShape.DoDrawTo(const aCtx: TmsDrawContext);
+procedure TmsMoverIcon.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_P : TPolygon;
 begin

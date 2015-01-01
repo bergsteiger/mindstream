@@ -20,7 +20,7 @@ uses
   SysUtils,
   msUtilityShapes,
   msShape,
-  msMover,
+  msPolygonShape,
   FMX.Objects,
   FMX.Graphics
   ;
@@ -37,17 +37,17 @@ begin
    Inc(l_Result);
   end
  );
- CheckTrue(l_Result = 5);
+ CheckTrue(l_Result = 6);
 end;
 
 procedure TUtilityShapesTest.TestFirstShape;
 begin
- CheckTrue(TmsUtilityShapes.Instance.First = TmsMover);
+ CheckTrue(TmsUtilityShapes.Instance.First = TmsPolygonShape);
 end;
 
 procedure TUtilityShapesTest.TestIndexOfTmsLine;
 begin
- CheckTrue(TmsUtilityShapes.Instance.IndexOf(TmsMover) = 0);
+ CheckTrue(TmsUtilityShapes.Instance.IndexOf(TmsPolygonShape) = 0);
 end;
 
 initialization
