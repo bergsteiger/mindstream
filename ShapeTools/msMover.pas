@@ -32,7 +32,7 @@ uses
  FMX.Types,
  System.SysUtils,
  msLine,
- msLineWithArrow
+ msMoverIcon
  ;
 
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
@@ -43,8 +43,7 @@ end;
 
 class function TmsMover.ButtonShape(const aStartPoint: TPointF): ImsShape;
 begin
- Result := TmsLineWithArrow.CreateCompleted(TPointF.Create(50, 50), TPointF.Create(0, 0));
-// Result := TmsBlackTriangle.Create(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
+ Result := TmsMoverIcon.CreateInner(TPointF.Create(50, 50));
 end;
 
 class function TmsMover.Create(const aCtx: TmsMakeShapeContext): ImsShape;
