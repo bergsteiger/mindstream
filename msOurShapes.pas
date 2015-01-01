@@ -19,6 +19,7 @@ uses
   msRegisteredShapes,
   msRedRectangle,
   msGreenRectangle,
+  msPolygonShape,
 
   // utility shapes
   msMover,
@@ -52,6 +53,9 @@ begin
   TmsTriangleDirectionRight,
   TmsRedRectangle,
   TmsGreenRectangle,
+
+  // polygon shapes
+  TmsPolygonShape,
 
   // special shapes
   TmsPointCircle,
