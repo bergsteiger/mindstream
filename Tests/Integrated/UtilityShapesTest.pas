@@ -33,11 +33,11 @@ begin
  TmsUtilityShapes.IterateShapes(
   procedure (aShapeClass: RmsShape)
   begin
-   Assert(aShapeClass.IsForToolbar);
+//   Assert(aShapeClass.IsForToolbar);
    Inc(l_Result);
   end
  );
- CheckTrue(l_Result = 5, ' ????? 5 - ???????? ' + IntToStr(l_Result));
+ CheckTrue(l_Result = 6, ' Expected 6 - Get ' + IntToStr(l_Result));
 end;
 
 procedure TUtilityShapesTest.TestFirstShape;
