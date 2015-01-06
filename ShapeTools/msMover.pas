@@ -31,8 +31,8 @@ uses
  msBlackTriangle,
  FMX.Types,
  System.SysUtils,
- msLine,
- msMoverIcon
+ msMoverIcon,
+ msLineWithArrow
  ;
 
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
@@ -43,7 +43,8 @@ end;
 
 class function TmsMover.ButtonShape(const aStartPoint: TPointF): ImsShape;
 begin
- Result := TmsMoverIcon.CreateInner(TPointF.Create(50, 50));
+// Result := TmsMoverIcon.CreateInner(TPointF.Create(50, 50));
+ Result := TmsLineWithArrow.CreateCompleted(TPointF.Create(50, 50), TPointF.Create(0, 0));
 end;
 
 class function TmsMover.Create(const aCtx: TmsMakeShapeContext): ImsShape;
