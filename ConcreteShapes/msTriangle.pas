@@ -16,7 +16,7 @@ type
  TmsTriangle = class(TmsPolygonShape)
  protected
   class function InitialHeight: Single; virtual;
-  function Polygon: TPolygon; virtual;
+  function Polygon: TPolygon; override;
   function GetDrawBounds: TRectF; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;

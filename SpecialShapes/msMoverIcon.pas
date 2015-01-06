@@ -19,9 +19,11 @@ type
   function BuildArrow(const aStartPoint: TPointF; const aDirection: TTmsDirection): TPolygon;
  protected
   class function CreateIcon(const aStartPoint: TPointF): ImsShape;
-  function Polygon: TPolygon; virtual;
+  function Polygon: TPolygon; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
+  public
+   class function IsForToolbar: Boolean; override;
  end;//TmsPolygonShape
 
 implementation
@@ -59,11 +61,15 @@ begin
 end;
 
 
+class function TmsMoverIcon.IsForToolbar: Boolean;
+begin
+ Result := True;
+end;
+
 function TmsMoverIcon.Polygon: TPolygon;
 var
  l_Polygon : TPolygon;
  l_StartPoint, l_Point: TPointF;
- l_RectF: TRectF;
 begin
  l_StartPoint := StartPoint;
 

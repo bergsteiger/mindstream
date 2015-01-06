@@ -37,7 +37,7 @@ begin
    Inc(l_Result);
   end
  );
- CheckTrue(l_Result = 6);
+ CheckTrue(l_Result = 5, ' ????? 5 - ???????? ' + IntToStr(l_Result));
 end;
 
 procedure TUtilityShapesTest.TestFirstShape;
