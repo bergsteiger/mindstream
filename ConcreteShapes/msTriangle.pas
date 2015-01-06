@@ -9,11 +9,11 @@ uses
  System.UITypes,
  System.Math.Vectors,
  msInterfaces,
- msShape
+ msPolygonShape
  ;
 
 type
- TmsTriangle = class(TmsShape)
+ TmsTriangle = class(TmsPolygonShape)
  protected
   class function InitialHeight: Single; virtual;
   function Polygon: TPolygon; virtual;
@@ -22,6 +22,8 @@ type
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
 
   function ContainsPt(const aPoint: TPointF): Boolean; override;
+  public
+   class function IsForToolbar: Boolean; override;
  end;//TmsTriangle
 
 implementation
@@ -32,6 +34,11 @@ uses
 class function TmsTriangle.InitialHeight: Single;
 begin
  Result := 100;
+end;
+
+class function TmsTriangle.IsForToolbar: Boolean;
+begin
+ Result := True;
 end;
 
 function TmsTriangle.GetDrawBounds: TRectF;

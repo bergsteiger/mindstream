@@ -4,18 +4,20 @@ interface
 
 uses
  msInterfaces,
- msTool,
+ msShape,
  System.Types,
  System.Math.Vectors
  ;
 
 type
- TmsPolygonShape = class abstract(TmsTool)
+ TmsPolygonShape = class abstract(TmsShape)
   // - класс для реализации полигональных объектов
  protected
   function Polygon: TPolygon; virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
+ public
+  class function IsForToolbar: Boolean; override;
  end;//TmsPolygonShape
 
 implementation
@@ -27,9 +29,14 @@ begin
 end;
 
 
+class function TmsPolygonShape.IsForToolbar: Boolean;
+begin
+ Result := False;
+end;
+
 function TmsPolygonShape.Polygon: TPolygon;
 begin
-
+ assert(False);
 end;
 
 procedure TmsPolygonShape.DoDrawTo(const aCtx: TmsDrawContext);
