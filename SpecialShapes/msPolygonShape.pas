@@ -18,6 +18,7 @@ type
   function GetDrawBounds: TRectF; override;
  public
   class function IsForToolbar: Boolean; override;
+  class function IsTool: Boolean; override;
  end;//TmsPolygonShape
 
 implementation
@@ -34,13 +35,9 @@ begin
  Result := False;
 end;
 
-{procedure TmsPolygonShape.DoDrawTo(const aCtx: TmsDrawContext);
-var
- l_P : TPolygon;
+class function TmsPolygonShape.IsTool: Boolean;
 begin
- l_P := Polygon;
- aCtx.rCanvas.DrawPolygon(l_P, 1);
- aCtx.rCanvas.FillPolygon(l_P, 0.5);
-end;  }
+ Result := True;
+end;
 
 end.

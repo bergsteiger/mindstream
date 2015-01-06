@@ -24,6 +24,7 @@ type
   function ContainsPt(const aPoint: TPointF): Boolean; override;
   public
    class function IsForToolbar: Boolean; override;
+   class function IsTool: Boolean; override;
  end;//TmsTriangle
 
 implementation
@@ -39,6 +40,11 @@ end;
 class function TmsTriangle.IsForToolbar: Boolean;
 begin
  Result := True;
+end;
+
+class function TmsTriangle.IsTool: Boolean;
+begin
+ Result := False;
 end;
 
 function TmsTriangle.GetDrawBounds: TRectF;
