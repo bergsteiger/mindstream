@@ -54,7 +54,6 @@ begin
   TmsTriangleDirectionRight,
   TmsRedRectangle,
   TmsGreenRectangle,
-  TmsMoverIcon,
 
   // special shapes
   TmsPointCircle,
@@ -69,7 +68,8 @@ begin
   TmsShapeRemover,
 
   // shapes for buttons
-  TmsBlackTriangle
+  TmsBlackTriangle,
+  TmsMoverIcon
  ]);
 end;
 

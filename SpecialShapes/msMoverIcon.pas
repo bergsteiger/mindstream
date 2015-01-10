@@ -15,10 +15,10 @@ type
 type
  TmsMoverIcon = class(TmsPolygonShape)
  protected
-  class function CreateIcon(const aStartPoint: TPointF): ImsShape;
   function Polygon: TPolygon; override;
-  public
-   class function IsForToolbar: Boolean; override;
+ public
+  class function IsForToolbar: Boolean; override;
+  class function CreateIcon(const aStartPoint: TPointF): ImsShape;
  end;//TmsPolygonShape
 
 implementation
