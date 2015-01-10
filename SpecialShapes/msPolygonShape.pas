@@ -13,7 +13,8 @@ type
  TmsPolygonShape = class abstract(TmsShape)
   // - класс для реализации полигональных объектов
  protected
-  function Polygon: TPolygon; virtual; abstract;
+  function Polygon: TPolygon;
+  function GetPolygon: TPolygon; virtual; abstract;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
  end;//TmsPolygonShape
@@ -47,6 +48,12 @@ begin
  //Result := PolygonBounds(Polygon);
 end;
 
+
+function TmsPolygonShape.Polygon: TPolygon;
+begin
+ Result := GetPolygon;
+ Assert(Length(Result) > 3);
+end;
 
 procedure TmsPolygonShape.DoDrawTo(const aCtx: TmsDrawContext);
 var

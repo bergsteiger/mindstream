@@ -16,7 +16,7 @@ type
  TmsTriangle = class(TmsPolygonShape)
  protected
   class function InitialHeight: Single; virtual;
-  function Polygon: TPolygon; override;
+  function GetPolygon: TPolygon; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
 
   function ContainsPt(const aPoint: TPointF): Boolean; override;
@@ -39,7 +39,7 @@ begin
  Result := True;
 end;
 
-function TmsTriangle.Polygon: TPolygon;
+function TmsTriangle.GetPolygon: TPolygon;
 begin
  SetLength(Result, 4);
  Result[0] := TPointF.Create(StartPoint.X - InitialHeight / 2,

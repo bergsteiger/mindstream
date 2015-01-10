@@ -15,7 +15,7 @@ type
 type
  TmsMoverIcon = class(TmsPolygonShape)
  protected
-  function Polygon: TPolygon; override;
+  function GetPolygon: TPolygon; override;
  public
   class function IsForToolbar: Boolean; override;
   class function CreateIcon(const aStartPoint: TPointF): ImsShape;
@@ -30,7 +30,7 @@ begin
  Result := false;
 end;
 
-function TmsMoverIcon.Polygon: TPolygon;
+function TmsMoverIcon.GetPolygon: TPolygon;
 
 const
  c_ArrowLength = 30;

@@ -19,7 +19,7 @@ uses
 type
  TmsTriangleDirectionRight = class(TmsTriangle)
  protected
-  function Polygon: TPolygon; override;
+  function GetPolygon: TPolygon; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsTriangle1
 
@@ -31,7 +31,7 @@ begin
  theCtx.rFillColor := TAlphaColorRec.Coral;
 end;
 
-function TmsTriangleDirectionRight.Polygon: TPolygon;
+function TmsTriangleDirectionRight.GetPolygon: TPolygon;
 begin
  SetLength(Result, 4);
  Result[0] := TPointF.Create(StartPoint.X - InitialHeight / 2,
