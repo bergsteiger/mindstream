@@ -17,7 +17,6 @@ type
  protected
   class function InitialHeight: Single; virtual;
   function Polygon: TPolygon; override;
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
 
   function ContainsPt(const aPoint: TPointF): Boolean; override;
@@ -76,15 +75,6 @@ procedure TmsTriangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsCont
 begin
  inherited;
  theCtx.rFillColor := TAlphaColorRec.Green;
-end;
-
-procedure TmsTriangle.DoDrawTo(const aCtx: TmsDrawContext);
-var
- l_P : TPolygon;
-begin
- l_P := Polygon;
- aCtx.rCanvas.DrawPolygon(l_P, 1);
- aCtx.rCanvas.FillPolygon(l_P, 0.5);
 end;
 
 end.

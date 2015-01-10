@@ -14,13 +14,14 @@ type
   // - класс для реализации полигональных объектов
  protected
   function Polygon: TPolygon; virtual; abstract;
-//  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
+  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
  end;//TmsPolygonShape
 
 implementation
 
-{ TmsPolygonShape }
+// TmsPolygonShape
+
 function TmsPolygonShape.GetDrawBounds: TRectF;
 var
  l_Pl : TPolygon;
@@ -46,5 +47,14 @@ begin
  //Result := PolygonBounds(Polygon);
 end;
 
+
+procedure TmsPolygonShape.DoDrawTo(const aCtx: TmsDrawContext);
+var
+ l_P : TPolygon;
+begin
+ l_P := Polygon;
+ aCtx.rCanvas.DrawPolygon(l_P, 1);
+ aCtx.rCanvas.FillPolygon(l_P, 0.5);
+end;
 
 end.
