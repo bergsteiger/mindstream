@@ -112,7 +112,6 @@ begin
  // In Radian
  l_AlphaAngle := ArcSin(l_ALength / l_CLength);
 
- l_RotationAngle := 0;
  l_Invert := 1;
 
  if (FinishPoint.X > StartPoint.X) then

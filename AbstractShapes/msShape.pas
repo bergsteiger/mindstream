@@ -31,7 +31,9 @@ type
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
-  class function Create(const aCtx: TmsMakeShapeContext): ImsShape; virtual;
+ public
+  class function Create(const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
+  class function Create(const aStartPoint: TPointF): ImsShape; overload;
   // - фабричный метод, который создаёт экземпляр класса как интерфейс
   //   про "фабричный метод вообще" - написано тут:
   //   - http://icoder.ucoz.ru/blog/factory_method/2013-04-30-24
@@ -46,6 +48,7 @@ type
   // - http://www.gunsmoker.ru/2013/04/plugins-9.html
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
+ protected
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   // - обрабатывает "нулевой клик"
@@ -76,7 +79,12 @@ uses
 
 class function TmsShape.Create(const aCtx: TmsMakeShapeContext): ImsShape;
 begin
- Result := CreateInner(aCtx.rStartPoint);
+ Result := Create(aCtx.rStartPoint);
+end;
+
+class function TmsShape.Create(const aStartPoint: TPointF): ImsShape;
+begin
+ Result := CreateInner(aStartPoint);
 end;
 
 function TmsShape.ContainsPt(const aPoint: TPointF): Boolean;
