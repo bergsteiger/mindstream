@@ -115,18 +115,18 @@ begin
  l_RotationAngle := 0;
  l_Invert := 1;
 
- if FinishPoint.X > StartPoint.X then
+ if (FinishPoint.X > StartPoint.X) then
  begin
   l_RotationAngle := Pi / 2 * 3;
   if FinishPoint.Y > StartPoint.Y then
    l_Invert := -1;
- end
+ end//FinishPoint.X > StartPoint.X
  else
  begin
   l_RotationAngle := Pi / 2;
   if FinishPoint.Y < StartPoint.Y then
    l_Invert := -1;
- end;
+ end;//FinishPoint.X > StartPoint.X
 
  Result := l_Invert * (l_AlphaAngle + l_RotationAngle);
 end;
@@ -147,12 +147,17 @@ begin
 end;
 
 function TmsLineWithArrow.GetFinishPoint: TPointF;
+var
+ l_Angle : Single;
 begin
+ l_Angle := GetArrowAngleRotation;
+ Result := TPointF.Create(FinishPoint.X - TmsSmallTriangle.InitialHeight * Cos(l_Angle),
+                          FinishPoint.Y - TmsSmallTriangle.InitialHeight * Sin(l_Angle));
  // Вот тут, по идее, надо возвращать координату середины стороны,
  //  через которую прходит линия.
  // Сделать я это не смог, потому что не знаю как правильно после поворота треугольника
  // получить новые координаты вершин.
- Result := inherited GetFinishPoint;
+ //Result := inherited GetFinishPoint;
 end;
 
 end.
