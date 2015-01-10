@@ -76,16 +76,16 @@ end;
 
 procedure TmsLine.DoDrawTo(const aCtx: TmsDrawContext);
 var
- l_Proxy : TmsShape;
+ l_Proxy : ImsShape;
  l_FinishPoint: TPointF;
 begin
  if (StartPoint = FinishPoint) then
  begin
-  l_Proxy := TmsPointCircle.CreateInner(StartPoint);
+  l_Proxy := TmsPointCircle.Create(StartPoint);
   try
    l_Proxy.DrawTo(aCtx);
   finally
-   FreeAndNil(l_Proxy);
+   l_Proxy := nil;
   end;//try..finally
  end//StartPoint = FinishPoint
  else

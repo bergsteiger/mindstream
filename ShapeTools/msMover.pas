@@ -44,7 +44,7 @@ end;
 class function TmsMover.ButtonShape(const aStartPoint: TPointF): ImsShape;
 begin
 // Result := TmsMoverIcon.CreateIcon(TPointF.Create(50, 50));
- Result := TmsMoverIcon.CreateInner(TPointF.Create(50, 50));
+ Result := TmsMoverIcon.Create(TPointF.Create(50, 50));
 // Result := TmsLineWithArrow.CreateCompleted(TPointF.Create(50, 50), TPointF.Create(0, 0));
 end;
 

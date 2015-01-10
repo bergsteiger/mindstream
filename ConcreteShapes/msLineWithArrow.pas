@@ -33,7 +33,7 @@ uses
 
 procedure TmsLineWithArrow.DoDrawTo(const aCtx: TmsDrawContext);
 var
- l_Proxy : TmsShape;
+ l_Proxy : ImsShape;
  l_OriginalMatrix: TMatrix;
  l_Matrix: TMatrix;
  l_Angle : Single;
@@ -47,7 +47,7 @@ begin
   try
    l_LineFinishPoint := TPointF.Create(FinishPoint.X - TmsSmallTriangle.InitialHeight / 2,
                                        FinishPoint.Y);
-   l_Proxy := TmsSmallTriangle.CreateInner(l_LineFinishPoint);
+   l_Proxy := TmsSmallTriangle.Create(l_LineFinishPoint);
    try
     // in Radian
     l_Angle := GetArrowAngleRotation;
@@ -78,7 +78,7 @@ begin
     l_Proxy.DrawTo(aCtx);
     // - отрисовываем примитив с учётом матрицы преобразований
    finally
-    FreeAndNil(l_Proxy);
+    l_Proxy := nil;
    end;//try..finally
   finally
     aCtx.rCanvas.SetMatrix(l_OriginalMatrix);
