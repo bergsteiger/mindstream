@@ -39,8 +39,6 @@ var
  l_Angle : Single;
  l_CenterPoint,
  l_LineFinishPoint : TPointF;
- l_Polygon : TPolygon;
-
 begin
  inherited;
  if (StartPoint <> FinishPoint) then
@@ -50,9 +48,6 @@ begin
    l_LineFinishPoint := TPointF.Create(FinishPoint.X - TmsSmallTriangle.InitialHeight / 2,
                                        FinishPoint.Y);
    l_Proxy := TmsSmallTriangle.CreateInner(l_LineFinishPoint);
-
-   // Координаты треугольника мы получить можем, но вот как их обработать ?
-   l_Polygon := (l_Proxy as TmsSmallTriangle).GetPolygon;
    try
     // in Radian
     l_Angle := GetArrowAngleRotation;
