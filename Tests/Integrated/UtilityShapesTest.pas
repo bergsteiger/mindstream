@@ -20,7 +20,7 @@ uses
   SysUtils,
   msUtilityShapes,
   msShape,
-  msPolygonShape,
+  msMover,
   FMX.Objects,
   FMX.Graphics
   ;
@@ -33,22 +33,21 @@ begin
  TmsUtilityShapes.IterateShapes(
   procedure (aShapeClass: RmsShape)
   begin
- // Убрал так как падал тест
- //   Assert(aShapeClass.IsForToolbar);
+   Assert(aShapeClass.IsForToolbar);
    Inc(l_Result);
   end
  );
- CheckTrue(l_Result = 6, ' Expected 6 - Get ' + IntToStr(l_Result));
+ CheckTrue(l_Result = 5, ' Expected 5 - Get ' + IntToStr(l_Result));
 end;
 
 procedure TUtilityShapesTest.TestFirstShape;
 begin
- CheckTrue(TmsUtilityShapes.Instance.First = TmsPolygonShape);
+ CheckTrue(TmsUtilityShapes.Instance.First = TmsMover);
 end;
 
 procedure TUtilityShapesTest.TestIndexOfTmsLine;
 begin
- CheckTrue(TmsUtilityShapes.Instance.IndexOf(TmsPolygonShape) = 0);
+ CheckTrue(TmsUtilityShapes.Instance.IndexOf(TmsMover) = 0);
 end;
 
 initialization

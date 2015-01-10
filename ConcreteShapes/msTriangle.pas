@@ -17,14 +17,12 @@ type
  protected
   class function InitialHeight: Single; virtual;
   function Polygon: TPolygon; override;
-  function GetDrawBounds: TRectF; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
 
   function ContainsPt(const aPoint: TPointF): Boolean; override;
   public
    class function IsForToolbar: Boolean; override;
-   class function IsTool: Boolean; override;
  end;//TmsTriangle
 
 implementation
@@ -40,36 +38,6 @@ end;
 class function TmsTriangle.IsForToolbar: Boolean;
 begin
  Result := True;
-end;
-
-class function TmsTriangle.IsTool: Boolean;
-begin
- Result := False;
-end;
-
-function TmsTriangle.GetDrawBounds: TRectF;
-var
- l_Pl : TPolygon;
- l_P : TPointF;
-begin
- l_Pl := Polygon;
- Result.Left := High(Integer);
- Result.Top := High(Integer);
- Result.Right := Low(Integer);
- Result.Bottom := Low(Integer);
- for l_P in l_PL do
- begin
-  if (l_P.X < Result.Left) then
-   Result.Left := l_P.X;
-  if (l_P.X > Result.Right) then
-   Result.Right := l_P.X;
-
-  if (l_P.Y < Result.Top) then
-   Result.Top := l_P.Y;
-  if (l_P.Y > Result.Bottom) then
-   Result.Bottom := l_P.Y;
- end;//l_P in l_PL
- //Result := PolygonBounds(Polygon);
 end;
 
 function TmsTriangle.Polygon: TPolygon;

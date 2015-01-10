@@ -36,7 +36,7 @@ begin
    Inc(l_Result);
   end
  );
- CheckTrue(l_Result = 23);
+ CheckTrue(l_Result = 22,  ' Expected 22 - Get ' + IntToStr(l_Result));
 end;
 
 procedure TRegisteredShapesTest.TestFirstShape;
