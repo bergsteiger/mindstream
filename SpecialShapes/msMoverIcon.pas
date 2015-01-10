@@ -15,8 +15,6 @@ type
 type
  TmsMoverIcon = class(TmsPolygonShape)
   // - класс для реализации полигональных объектов
- private
-  function BuildArrow(const aStartPoint: TPointF; const aDirection: TTmsDirection): TPolygon;
  protected
   class function CreateIcon(const aStartPoint: TPointF): ImsShape;
   function Polygon: TPolygon; override;
@@ -40,6 +38,90 @@ begin
 end;
 
 function TmsMoverIcon.Polygon: TPolygon;
+
+ function BuildArrow(const aStartPoint: TPointF;
+   const aDirection: TTmsDirection): TPolygon;
+ var
+  l_Polygon : TPolygon;
+  l_Point: TPointF;
+  l_X, l_Y : Single;
+  l_Invert : SmallInt;
+
+ begin
+  l_Invert := 1;
+  SetLength(l_Polygon, 7);
+
+  l_Point := aStartPoint;
+  l_Polygon[0] := l_Point;
+
+  if (dLeft in aDirection) or (dBottom in aDirection) then
+   l_Invert := -1;
+
+  if (dTop in aDirection) or
+     (dBottom in aDirection) then
+  begin
+   l_Y := l_Point.Y - (c_ArrowLength * l_Invert);
+   l_Point := TPointF.Create(l_Point.X, l_Y);
+   l_Polygon[1] := l_Point;
+
+   l_X := l_Point.X - (c_TriangleWidth * l_Invert);
+   l_Point := TPointF.Create(l_X, l_Point.Y);
+   l_Polygon[2] := l_Point;
+
+   l_X := l_Point.X + (c_TriangleWidth + c_ArrowWidth / 2) * l_Invert;
+   l_Y := l_Point.Y - (c_TriangleHeight * l_Invert);
+   l_Point := TPointF.Create(l_X, l_Y);
+   l_Polygon[3] := l_Point;
+
+   l_X := l_Point.X + (c_TriangleWidth + c_ArrowWidth / 2) * l_Invert;
+   l_Y := l_Point.Y + (c_TriangleHeight * l_Invert);
+   l_Point := TPointF.Create(l_X, l_Y);
+   l_Polygon[4] := l_Point;
+
+   l_X := l_Point.X - (c_TriangleWidth * l_Invert);
+   l_Y := l_Point.Y;
+   l_Point := TPointF.Create(l_X, l_Y);
+   l_Polygon[5] := l_Point;
+
+   l_Y := l_Point.Y + (c_ArrowLength * l_invert);
+   l_Point := TPointF.Create(l_Point.X, l_Y);
+   l_Polygon[6] := l_Point;
+   Result := l_Polygon;
+  end;
+
+  if (dRight in aDirection) or
+     (dLeft in aDirection) then
+  begin
+   l_X := l_Point.X + (c_ArrowLength * l_Invert);
+   l_Point := TPointF.Create(l_X, l_Point.Y);
+   l_Polygon[1] := l_Point;
+
+   l_Y :=  l_Point.Y - (c_TriangleWidth * l_Invert);
+   l_Point := TPointF.Create(l_Point.X, l_Y);
+   l_Polygon[2] := l_Point;
+
+   l_X := l_Point.X + (c_TriangleHeight * l_Invert);
+   l_Y := l_Point.Y + (c_TriangleWidth + c_ArrowWidth / 2) * l_Invert;
+   l_Point := TPointF.Create(l_X, l_Y);
+   l_Polygon[3] := l_Point;
+
+   l_X := l_Point.X - (c_TriangleHeight * l_Invert);
+   l_Y := l_Point.Y + (c_TriangleWidth + c_ArrowWidth / 2) * l_Invert;
+   l_Point := TPointF.Create(l_X, l_Y);
+   l_Polygon[4] := l_Point;
+
+   l_Y := l_Point.Y - (c_TriangleWidth * l_Invert);
+   l_Point := TPointF.Create(l_Point.X, l_Y);;
+   l_Polygon[5] := l_Point;
+
+   l_X := l_Point.X - (c_ArrowLength * l_Invert);
+   l_Point := TPointF.Create(l_X, l_Point.Y);
+   l_Polygon[6] := l_Point;
+   Result := l_Polygon;
+  end;
+
+ end;
+
 var
  l_Polygon : TPolygon;
  l_StartPoint, l_Point: TPointF;
@@ -62,89 +144,6 @@ begin
  l_Point := (l_Polygon[High(l_Polygon)]);
  l_Polygon := l_Polygon + BuildArrow(l_Point, [TmsDirection.dLeft]);
  // Нарисовали стрелку влево
-
-end;
-
-function TmsMoverIcon.BuildArrow(const aStartPoint: TPointF;
-  const aDirection: TTmsDirection): TPolygon;
-var
- l_Polygon : TPolygon;
- l_Point: TPointF;
- l_X, l_Y : Single;
- l_Invert : SmallInt;
-
-begin
- l_Invert := 1;
- SetLength(l_Polygon, 7);
-
- l_Point := aStartPoint;
- l_Polygon[0] := l_Point;
-
- if (dLeft in aDirection) or (dBottom in aDirection) then
-  l_Invert := -1;
-
- if (dTop in aDirection) or
-    (dBottom in aDirection) then
- begin
-  l_Y := l_Point.Y - (c_ArrowLength * l_Invert);
-  l_Point := TPointF.Create(l_Point.X, l_Y);
-  l_Polygon[1] := l_Point;
-
-  l_X := l_Point.X - (c_TriangleWidth * l_Invert);
-  l_Point := TPointF.Create(l_X, l_Point.Y);
-  l_Polygon[2] := l_Point;
-
-  l_X := l_Point.X + (c_TriangleWidth + c_ArrowWidth / 2) * l_Invert;
-  l_Y := l_Point.Y - (c_TriangleHeight * l_Invert);
-  l_Point := TPointF.Create(l_X, l_Y);
-  l_Polygon[3] := l_Point;
-
-  l_X := l_Point.X + (c_TriangleWidth + c_ArrowWidth / 2) * l_Invert;
-  l_Y := l_Point.Y + (c_TriangleHeight * l_Invert);
-  l_Point := TPointF.Create(l_X, l_Y);
-  l_Polygon[4] := l_Point;
-
-  l_X := l_Point.X - (c_TriangleWidth * l_Invert);
-  l_Y := l_Point.Y;
-  l_Point := TPointF.Create(l_X, l_Y);
-  l_Polygon[5] := l_Point;
-
-  l_Y := l_Point.Y + (c_ArrowLength * l_invert);
-  l_Point := TPointF.Create(l_Point.X, l_Y);
-  l_Polygon[6] := l_Point;
-  Result := l_Polygon;
- end;
-
- if (dRight in aDirection) or
-    (dLeft in aDirection) then
- begin
-  l_X := l_Point.X + (c_ArrowLength * l_Invert);
-  l_Point := TPointF.Create(l_X, l_Point.Y);
-  l_Polygon[1] := l_Point;
-
-  l_Y :=  l_Point.Y - (c_TriangleWidth * l_Invert);
-  l_Point := TPointF.Create(l_Point.X, l_Y);
-  l_Polygon[2] := l_Point;
-
-  l_X := l_Point.X + (c_TriangleHeight * l_Invert);
-  l_Y := l_Point.Y + (c_TriangleWidth + c_ArrowWidth / 2) * l_Invert;
-  l_Point := TPointF.Create(l_X, l_Y);
-  l_Polygon[3] := l_Point;
-
-  l_X := l_Point.X - (c_TriangleHeight * l_Invert);
-  l_Y := l_Point.Y + (c_TriangleWidth + c_ArrowWidth / 2) * l_Invert;
-  l_Point := TPointF.Create(l_X, l_Y);
-  l_Polygon[4] := l_Point;
-
-  l_Y := l_Point.Y - (c_TriangleWidth * l_Invert);
-  l_Point := TPointF.Create(l_Point.X, l_Y);;
-  l_Polygon[5] := l_Point;
-
-  l_X := l_Point.X - (c_ArrowLength * l_Invert);
-  l_Point := TPointF.Create(l_X, l_Point.Y);
-  l_Polygon[6] := l_Point;
-  Result := l_Polygon;
- end;
 
 end;
 
