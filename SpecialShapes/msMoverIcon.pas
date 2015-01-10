@@ -27,7 +27,7 @@ implementation
 
 class function TmsMoverIcon.IsForToolbar: Boolean;
 begin
- Result := True;
+ Result := false;
 end;
 
 function TmsMoverIcon.Polygon: TPolygon;

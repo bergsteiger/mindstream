@@ -37,7 +37,7 @@ begin
    Inc(l_Result);
   end
  );
- CheckTrue(l_Result = 18, ' ????? 18 - ???????? ' + IntToStr(l_Result));
+ CheckTrue(l_Result = 18, ' Expected 18 - Get ' + IntToStr(l_Result));
 end;
 
 procedure TForToolbarShapesTest.TestFirstShape;
