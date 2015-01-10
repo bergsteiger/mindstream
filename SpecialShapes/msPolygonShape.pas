@@ -16,9 +16,6 @@ type
   function Polygon: TPolygon; virtual; abstract;
 //  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
- public
-  class function IsForToolbar: Boolean; override;
-  class function IsTool: Boolean; override;
  end;//TmsPolygonShape
 
 implementation
@@ -49,15 +46,5 @@ begin
  //Result := PolygonBounds(Polygon);
 end;
 
-
-class function TmsPolygonShape.IsForToolbar: Boolean;
-begin
- Result := False;
-end;
-
-class function TmsPolygonShape.IsTool: Boolean;
-begin
- Result := True;
-end;
 
 end.

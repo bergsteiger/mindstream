@@ -55,7 +55,7 @@ begin
   TmsGreenRectangle,
 
   // polygon shapes
-  TmsPolygonShape,
+  //TmsPolygonShape,
 
   // special shapes
   TmsPointCircle,
