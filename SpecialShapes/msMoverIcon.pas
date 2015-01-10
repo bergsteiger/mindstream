@@ -145,6 +145,7 @@ begin
  // Нарисовали стрелку влево
 
 // l_Polygon := l_Polygon + [l_Polygon[0]];
+ Result := l_Polygon;
 end;
 
 class function TmsMoverIcon.CreateIcon(const aStartPoint: TPointF): ImsShape;
