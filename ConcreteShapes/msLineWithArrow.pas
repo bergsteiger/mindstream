@@ -14,7 +14,7 @@ uses
 type
  TmsLineWithArrow = class(TmsLine)
  protected
-  function GetFinishPoint: TPointF; override;
+  function GetFinishPointForDraw: TPointF; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetArrowAngleRotation : Single;
   function GetDrawBounds: TRectF; override;
@@ -146,7 +146,7 @@ begin
  end;//SameValue(Result.Top, Result.Bottom)
 end;
 
-function TmsLineWithArrow.GetFinishPoint: TPointF;
+function TmsLineWithArrow.GetFinishPointForDraw: TPointF;
 var
  l_Angle : Single;
 begin
@@ -157,7 +157,7 @@ begin
  //  через которую прходит линия.
  // Сделать я это не смог, потому что не знаю как правильно после поворота треугольника
  // получить новые координаты вершин.
- //Result := inherited GetFinishPoint;
+ //Result := inherited GetFinishPointForDraw;
 end;
 
 end.

@@ -19,7 +19,7 @@ type
   constructor CreateInner(const aStartPoint: TPointF); override;
   class function IsLineLike: Boolean; override;
   function GetDrawBounds: TRectF; override;
-  function GetFinishPoint: TPointF; virtual;
+  function GetFinishPointForDraw: TPointF; virtual;
   property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
  public
   function IsNeedsSecondClick : Boolean; override;
@@ -53,7 +53,7 @@ begin
  Result := TRectF.Create(StartPoint, FinishPoint);
 end;
 
-function TmsLine.GetFinishPoint: TPointF;
+function TmsLine.GetFinishPointForDraw: TPointF;
 begin
  Result := FinishPoint;
 end;
@@ -90,7 +90,7 @@ begin
  end//StartPoint = FinishPoint
  else
  begin
-  l_FinishPoint := GetFinishPoint;
+  l_FinishPoint := GetFinishPointForDraw;
   aCtx.rCanvas.DrawLine(StartPoint,l_FinishPoint, 1);
  end;//StartPoint = FinishPoint
 end;
