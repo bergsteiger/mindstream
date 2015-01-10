@@ -21,7 +21,6 @@ type
   class function CreateIcon(const aStartPoint: TPointF): ImsShape;
   function Polygon: TPolygon; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  function GetDrawBounds: TRectF; override;
   public
    class function IsForToolbar: Boolean; override;
  end;//TmsPolygonShape
@@ -35,31 +34,6 @@ const
  c_TriangleHeight = 20;
 
 { TmsMoverIcon }
-function TmsMoverIcon.GetDrawBounds: TRectF;
-var
- l_Pl : TPolygon;
- l_P : TPointF;
-begin
- l_Pl := Polygon;
- Result.Left := High(Integer);
- Result.Top := High(Integer);
- Result.Right := Low(Integer);
- Result.Bottom := Low(Integer);
- for l_P in l_PL do
- begin
-  if (l_P.X < Result.Left) then
-   Result.Left := l_P.X;
-  if (l_P.X > Result.Right) then
-   Result.Right := l_P.X;
-
-  if (l_P.Y < Result.Top) then
-   Result.Top := l_P.Y;
-  if (l_P.Y > Result.Bottom) then
-   Result.Bottom := l_P.Y;
- end;//l_P in l_PL
- //Result := PolygonBounds(Polygon);
-end;
-
 
 class function TmsMoverIcon.IsForToolbar: Boolean;
 begin
