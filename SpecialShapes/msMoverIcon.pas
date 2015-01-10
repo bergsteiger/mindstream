@@ -20,7 +20,6 @@ type
  protected
   class function CreateIcon(const aStartPoint: TPointF): ImsShape;
   function Polygon: TPolygon; override;
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   public
    class function IsForToolbar: Boolean; override;
  end;//TmsPolygonShape
@@ -152,15 +151,6 @@ end;
 class function TmsMoverIcon.CreateIcon(const aStartPoint: TPointF): ImsShape;
 begin
  Result := Self.Create(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
-end;
-
-procedure TmsMoverIcon.DoDrawTo(const aCtx: TmsDrawContext);
-var
- l_P : TPolygon;
-begin
- l_P := Polygon;
- aCtx.rCanvas.DrawPolygon(l_P, 1);
- aCtx.rCanvas.FillPolygon(l_P, 0.5);
 end;
 
 end.
