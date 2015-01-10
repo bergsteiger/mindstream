@@ -32,8 +32,9 @@ type
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
- public
+ protected
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
+ public
   class function Create(const aStartPoint: TPointF): ImsShape; overload;
   // - фабричный метод, который создаёт экземпляр класса как интерфейс
   //   про "фабричный метод вообще" - написано тут:

@@ -25,7 +25,7 @@ uses
 
 class function TmsTool.ButtonShape(const aStartPoint: TPointF): ImsShape;
 begin
- Result := TmsGreenCircle.Create(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
+ Result := TmsGreenCircle.Create(aStartPoint);
 end;
 
 class function TmsTool.IsTool: Boolean;
