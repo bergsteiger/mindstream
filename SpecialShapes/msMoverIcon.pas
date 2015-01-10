@@ -18,7 +18,6 @@ type
   function GetPolygon: TPolygon; override;
  public
   class function IsForToolbar: Boolean; override;
-  class function CreateIcon(const aStartPoint: TPointF): ImsShape;
  end;//TmsPolygonShape
 
 implementation
@@ -146,11 +145,6 @@ begin
 
 // l_Polygon := l_Polygon + [l_Polygon[0]];
  Result := l_Polygon;
-end;
-
-class function TmsMoverIcon.CreateIcon(const aStartPoint: TPointF): ImsShape;
-begin
- Result := Self.Create(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
 end;
 
 end.
