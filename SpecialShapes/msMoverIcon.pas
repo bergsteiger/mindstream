@@ -14,7 +14,6 @@ type
 
 type
  TmsMoverIcon = class(TmsPolygonShape)
-  // - класс для реализации полигональных объектов
  protected
   class function CreateIcon(const aStartPoint: TPointF): ImsShape;
   function Polygon: TPolygon; override;
