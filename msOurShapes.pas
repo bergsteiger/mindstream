@@ -34,7 +34,8 @@ uses
   msGreenCircle,
 
   // shapes for toolbar buttons
-  msBlackTriangle
+  msBlackTriangle,
+  msMoverIcon
   ;
 
 procedure RegisterOurShapes;
@@ -53,9 +54,7 @@ begin
   TmsTriangleDirectionRight,
   TmsRedRectangle,
   TmsGreenRectangle,
-
-  // polygon shapes
-  //TmsPolygonShape,
+  TmsMoverIcon,
 
   // special shapes
   TmsPointCircle,
