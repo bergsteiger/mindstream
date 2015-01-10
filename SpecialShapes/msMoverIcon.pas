@@ -23,12 +23,6 @@ type
 
 implementation
 
-const
- c_ArrowLength = 30;
- c_ArrowWidth = 15;
- c_TriangleWidth = 10;
- c_TriangleHeight = 20;
-
 { TmsMoverIcon }
 
 class function TmsMoverIcon.IsForToolbar: Boolean;
@@ -37,6 +31,12 @@ begin
 end;
 
 function TmsMoverIcon.Polygon: TPolygon;
+
+const
+ c_ArrowLength = 30;
+ c_ArrowWidth = 15;
+ c_TriangleWidth = 10;
+ c_TriangleHeight = 20;
 
  function BuildArrow(const aStartPoint: TPointF;
    const aDirection: TTmsDirection): TPolygon;
@@ -144,6 +144,7 @@ begin
  l_Polygon := l_Polygon + BuildArrow(l_Point, [TmsDirection.dLeft]);
  // Нарисовали стрелку влево
 
+// l_Polygon := l_Polygon + [l_Polygon[0]];
 end;
 
 class function TmsMoverIcon.CreateIcon(const aStartPoint: TPointF): ImsShape;
