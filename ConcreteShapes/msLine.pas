@@ -88,10 +88,11 @@ begin
    FreeAndNil(l_Proxy);
   end;//try..finally
  end//StartPoint = FinishPoint
- else begin
+ else
+ begin
   l_FinishPoint := GetFinishPoint;
   aCtx.rCanvas.DrawLine(StartPoint,l_FinishPoint, 1);
- end;
+ end;//StartPoint = FinishPoint
 end;
 
 function TmsLine.IsNeedsSecondClick: Boolean;
