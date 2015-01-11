@@ -143,11 +143,14 @@ end;
 function TmsShapeButton.ScaleShapeToButton: TPointF;
 var
  l_B : TRectF;
+ l_W : Single;
+ l_H : Single;
 begin
  l_B := f_Shape.DrawBounds;
- Result:= TPointF.Create((Self.Width - cBorder * 2) / Abs(l_B.Right - l_B.Left),
-                         // 100 тут это "ширина фигуры" мы потом её честно посчитаем
-                         (Self.Height - cBorder * 2) / Abs(l_B.Bottom - l_B.Top));
+ l_W := Abs(l_B.Right - l_B.Left);
+ l_H := Abs(l_B.Bottom - l_B.Top);
+ Result:= TPointF.Create((Self.Width - cBorder * 2) / l_W,
+                         (Self.Height - cBorder * 2) / l_H);
 end;
 
 end.
