@@ -96,6 +96,7 @@ var
  l_Matrix: TMatrix;
  l_CenterPoint: TPointF;
  l_Scale: TPointF;
+ l_B : TRectF;
 begin
  if (f_Shape = nil) then
  begin
@@ -104,7 +105,8 @@ begin
  l_OriginalMatrix := Canvas.Matrix;
  try
 //  l_CenterPoint := f_Shape.StartPoint;
-  l_CenterPoint := f_Shape.DrawBounds.TopLeft;
+  l_B := f_Shape.DrawBounds;
+  l_CenterPoint := l_B.TopLeft;
 
   l_Matrix := TMatrix.Identity;
   // - СНИМАЕМ оригинальную матрицу, точнее берём ЕДИНИЧНУЮ матрицу
