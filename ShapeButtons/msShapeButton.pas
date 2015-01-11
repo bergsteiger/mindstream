@@ -130,7 +130,9 @@ begin
   l_DY := 0;
   l_D := (l_W * l_Scale.X) - (l_H * l_Scale.Y);
   if (l_D > 0) then
-   l_DY := l_D / 2;
+   l_DY := l_D / 2
+  else
+   l_DX := -l_D / 2;
   l_Matrix := l_Matrix * TMatrix.CreateTranslation(cBorder + l_DX, cBorder + l_DY);
   // - задаём начало координат - относительно кнопки
   l_Matrix := l_Matrix * l_OriginalMatrix;
