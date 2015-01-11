@@ -67,8 +67,8 @@ begin
  f_Shape := TmsPaletteShapeCreator.Create(aShape).CreateShape
                                      (TmsMakeShapeContext.Create
                                       (TPointF.Create
-                                       (TmsPaletteShapeCreator.ButtonSize / 2,
-                                        TmsPaletteShapeCreator.ButtonSize / 2),
+                                       (0{TmsPaletteShapeCreator.ButtonSize / 2},
+                                        0{TmsPaletteShapeCreator.ButtonSize / 2}),
                                         nil,
                                         nil)
                                       );
