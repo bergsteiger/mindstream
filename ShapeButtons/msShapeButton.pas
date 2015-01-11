@@ -100,6 +100,7 @@ var
  l_W : Single;
  l_H : Single;
  l_M : Single;
+ l_DX, l_DY : Single;
 begin
  if (f_Shape = nil) then
  begin
@@ -125,8 +126,12 @@ begin
 
   l_Matrix := l_Matrix * TMatrix.CreateScaling(l_Scale.X, l_Scale.Y);
   // - задаём  шкалу
-//  l_D := (Self.Width * l_Scale.X) - (Self.Height * l_Scale.Y);
-  l_Matrix := l_Matrix * TMatrix.CreateTranslation(cBorder, cBorder);
+  l_DX := 0;
+  l_DY := 0;
+  l_D := (l_W * l_Scale.X) - (l_H * l_Scale.Y);
+  if (l_D > 0) then
+   l_DY := l_D / 2;
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(cBorder + l_DX, cBorder + l_DY);
   // - задаём начало координат - относительно кнопки
   l_Matrix := l_Matrix * l_OriginalMatrix;
   // - ПРИМЕНЯЕМ оригинальную матрицу
