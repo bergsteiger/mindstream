@@ -83,13 +83,13 @@ begin
 
 end;
 
+procedure TmsShapeButton.MyPaint(Sender: TObject;
+                                 Canvas: TCanvas;
+                                 const ARect: TRectF);
 const
  cBorder = 10;
  // - отступ от края кнопки до фигуры
 
-procedure TmsShapeButton.MyPaint(Sender: TObject;
-                                 Canvas: TCanvas;
-                                 const ARect: TRectF);
 var
  l_OriginalMatrix: TMatrix;
  l_Matrix: TMatrix;
