@@ -39,7 +39,8 @@ uses
  FMX.Dialogs,
  System.SysUtils,
  msPaletteShapeCreator,
- msShapesForToolbar
+ msShapesForToolbar,
+ Math
  ;
 
 
@@ -145,12 +146,14 @@ var
  l_B : TRectF;
  l_W : Single;
  l_H : Single;
+ l_M : Single;
 begin
  l_B := f_Shape.DrawBounds;
  l_W := Abs(l_B.Right - l_B.Left);
  l_H := Abs(l_B.Bottom - l_B.Top);
- Result:= TPointF.Create((Self.Width - cBorder * 2) / l_W,
-                         (Self.Height - cBorder * 2) / l_H);
+ l_M := Max(l_H, l_W);
+ Result:= TPointF.Create((Self.Width - cBorder * 2) / l_M,
+                         (Self.Height - cBorder * 2) / l_M);
 end;
 
 end.
