@@ -20,7 +20,6 @@ type
    f_ShapeIndex: Integer;
    f_Shapes: TComboBox;
    f_Holder : ImsDiagrammsHolder;
-   function ScaleShapeToButton: TPointF;
    procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
    procedure MyClick(Sender: TObject);
   public
@@ -97,6 +96,10 @@ var
  l_CenterPoint: TPointF;
  l_Scale: TPointF;
  l_B : TRectF;
+ l_D : Single;
+ l_W : Single;
+ l_H : Single;
+ l_M : Single;
 begin
  if (f_Shape = nil) then
  begin
@@ -114,10 +117,15 @@ begin
   l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X, -l_CenterPoint.Y);
   // - сдвигаем начало координат для фигуры
 
-  l_Scale := ScaleShapeToButton;
+  l_W := Abs(l_B.Right - l_B.Left);
+  l_H := Abs(l_B.Bottom - l_B.Top);
+  l_M := Max(l_H, l_W);
+  l_Scale := TPointF.Create((Self.Width - cBorder * 2) / l_M,
+                            (Self.Height - cBorder * 2) / l_M);
 
   l_Matrix := l_Matrix * TMatrix.CreateScaling(l_Scale.X, l_Scale.Y);
   // - задаём  шкалу
+//  l_D := (Self.Width * l_Scale.X) - (Self.Height * l_Scale.Y);
   l_Matrix := l_Matrix * TMatrix.CreateTranslation(cBorder, cBorder);
   // - задаём начало координат - относительно кнопки
   l_Matrix := l_Matrix * l_OriginalMatrix;
@@ -141,21 +149,6 @@ begin
  Assert(f_Shape.IsClassTypeNamedAs(f_Shapes.Items[f_ShapeIndex]));
  if not f_Shape.NullClick(ImsDiagrammsHolder(f_Holder)) then
   f_Shapes.ItemIndex := f_ShapeIndex;
-end;
-
-function TmsShapeButton.ScaleShapeToButton: TPointF;
-var
- l_B : TRectF;
- l_W : Single;
- l_H : Single;
- l_M : Single;
-begin
- l_B := f_Shape.DrawBounds;
- l_W := Abs(l_B.Right - l_B.Left);
- l_H := Abs(l_B.Bottom - l_B.Top);
- l_M := Max(l_H, l_W);
- Result:= TPointF.Create((Self.Width - cBorder * 2) / l_M,
-                         (Self.Height - cBorder * 2) / l_M);
 end;
 
 end.
