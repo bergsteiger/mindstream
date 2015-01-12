@@ -22,7 +22,7 @@ type
  strict protected
   function pm_GetStartPoint: TPointF; virtual;
   constructor CreateInner(const aStartPoint: TPointF); virtual;
-  procedure SetStartPoint(const aStartPoint: TPointF); virtual; abstract;
+  procedure SetStartPoint(const aStartPoint: TPointF); virtual;
  protected
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
@@ -123,6 +123,11 @@ end;
 function TmsShape.pm_GetStartPoint: TPointF;
 begin
  Result := TPointF.Create(0, 0);
+ Assert(false, 'Abstract method');
+end;
+
+procedure TmsShape.SetStartPoint(const aStartPoint: TPointF);
+begin
  Assert(false, 'Abstract method');
 end;
 
