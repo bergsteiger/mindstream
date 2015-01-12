@@ -22,7 +22,7 @@ object fmGUITestRunner: TfmGUITestRunner
       Size.Width = 80.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      StyleLookup = 'cornerbuttonstyle'
+      StyleLookup = 'buttonstyle'
       Text = 'RunAllTest'
       OnClick = btRunAllTestClick
     end
@@ -32,8 +32,8 @@ object fmGUITestRunner: TfmGUITestRunner
       Size.Width = 80.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      StyleLookup = 'cornerbuttonstyle'
-      Text = 'CheckedAll'
+      StyleLookup = 'buttonstyle'
+      Text = 'Check All'
       OnClick = btnCheckAllClick
     end
     object btnUncheckAll: TSpeedButton
@@ -42,8 +42,8 @@ object fmGUITestRunner: TfmGUITestRunner
       Size.Width = 89.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      StyleLookup = 'cornerbuttonstyle'
-      Text = 'UnchekedAll'
+      StyleLookup = 'buttonstyle'
+      Text = 'UnCheck All'
       OnClick = btnUncheckAllClick
     end
   end
