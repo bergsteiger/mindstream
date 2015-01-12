@@ -13,7 +13,9 @@ interface
 
 uses
   TestFramework, System.UITypes, msPointCircle, msShape, msCircle, FMX.Graphics,
-  System.Types;
+  System.Types,
+  msInterfaces
+  ;
 
 type
   // Test methods for class TmsPointCircle
@@ -28,9 +30,13 @@ type
 
 implementation
 
+uses
+ msShapeCreator
+ ;
+
 procedure TestTmsPointCircle.SetUp;
 begin
-  FmsPointCircle := TmsPointCircle.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil));
+  FmsPointCircle := TmsShapeCreator.Create(TmsPointCircle).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
 end;
 
 procedure TestTmsPointCircle.TearDown;

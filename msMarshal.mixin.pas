@@ -17,11 +17,11 @@
 
 {$Define TmsMarshal}
 
- TmsMarshal = class(TmsMarshalPrim)
+ TmsMarshal = class abstract(TmsMarshalPrim)
  // - шаблонизируем, ибо мы скоро будем сериализовать и другие классы.
  public
-  class procedure Serialize(const aFileName: string; const aDiagramm: TClassToSerialize);
-  class procedure DeSerialize(const aFileName: string; const aDiagramm: TClassToSerialize);
+  class procedure DeSerialize(const aFileName: string;
+                              const aDiagramm: TClassToSerialize);
  end;//TmsMarshal
 
 {$Else TmsMarshal}
@@ -41,7 +41,8 @@
 
 // TmsMarshal
 
-class procedure TmsMarshal.DeSerialize(const aFileName: string; const aDiagramm: TClassToSerialize);
+class procedure TmsMarshal.DeSerialize(const aFileName: string;
+                                       const aDiagramm: TClassToSerialize);
 var
  l_StringList: TmsStringList;
  l_D : TClassToSerialize;
@@ -55,27 +56,6 @@ begin
   finally
    FreeAndNil(l_D);
   end;//try..finally
- finally
-  FreeAndNil(l_StringList);
- end;//try..finally
-end;
-
-class procedure TmsMarshal.Serialize(const aFileName: string;
-                                                 const aDiagramm: TClassToSerialize);
-var
- l_Json: TJSONObject;
- l_StringList: TmsStringList;
-begin
- l_StringList := TmsStringList.Create;
- try
-  l_Json := nil;
-  try
-   l_Json := Marshal.Marshal(aDiagramm) as TJSONObject;
-   l_StringList.Add(l_Json.toString);
-  finally
-   FreeAndNil(l_Json);
-  end;//try..finally
-  l_StringList.SaveToFile(aFileName);
  finally
   FreeAndNil(l_StringList);
  end;//try..finally

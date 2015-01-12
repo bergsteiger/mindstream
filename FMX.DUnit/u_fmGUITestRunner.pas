@@ -6,7 +6,7 @@ uses
  TestFramework,
  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
- FMX.Layouts, FMX.TreeView, FMX.ListView.Types, FMX.ListView;
+ FMX.Layouts, FMX.TreeView, FMX.ListView.Types, FMX.ListView, System.Generics.Collections;
 
 const
  c_ColorOk = TAlphaColorRec.Green;
@@ -14,35 +14,44 @@ const
  c_ColorError = TAlphaColorRec.Red;
 
 type
+ TDoSomethingWithNode = reference to procedure(const aItem: TTreeViewItem);
+
+type
  TfmGUITestRunner = class(TForm, ITestListener)
-  TestTree: TTreeView;
   ToolBar1: TToolBar;
   btRunAllTest: TSpeedButton;
+  pnlMain: TPanel;
+  tvTestTree: TTreeView;
+  pnlBottom: TPanel;
   lvFailureListView: TListView;
-  lblResult: TLabel;
+  lblTime: TLabel;
+  btnCheckAll: TSpeedButton;
+  btnUncheckAll: TSpeedButton;
+  lblErros: TLabel;
+  lblErrorCount: TLabel;
+  lblFailure: TLabel;
+  lblFailureCount: TLabel;
+  lblTimeCount: TLabel;
+    lblRunned: TLabel;
   procedure FormCreate(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
   procedure btRunAllTestClick(Sender: TObject);
-  procedure FormShow(Sender: TObject);
-  procedure TestTreeChangeCheck(Sender: TObject);
+  procedure tvTestTreeChangeCheck(Sender: TObject);
+  procedure btnCheckAllClick(Sender: TObject);
+  procedure btnUncheckAllClick(Sender: TObject);
  protected
   FSuite: ITest;
   FTestResult: TTestResult;
-  FTests: TInterfaceList;
-  FTestResult: TTestResult;
   FSelectedTests: TInterfaceList;
-  FTotalTime: Int64;
+  f_Runned : Integer;
 
   procedure SetSuite(aValue: ITest);
   procedure InitTree;
   procedure FillTestTree(aTest: ITest); overload;
-  procedure FillTestTree(aRootNode: TTreeViewItem; aTest: ITest); overload;
   procedure RunTheTest(aTest: ITest);
 
   function NodeToTest(aNode: TTreeViewItem): ITest;
   function TestToNode(test: ITest): TTreeViewItem;
-
-  procedure SetupGUINodes(aNode: TTreeViewItem);
 
   procedure SetTreeNodeFont(aNode: TTreeViewItem; aColor: TAlphaColor);
 
@@ -51,6 +60,9 @@ type
   procedure SetNodeEnabled(aNode: TTreeViewItem; aValue: Boolean);
 
   procedure ClearResult;
+
+  procedure TraverseTree(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
+
  public
   property Suite: ITest read FSuite write SetSuite;
   property TestResult: TTestResult read FTestResult write FTestResult;
@@ -80,9 +92,7 @@ var
 implementation
 
 uses
- System.Generics.Collections,
- System.TypInfo
- ;
+ System.TypInfo;
 
 {$R *.fmx}
 
@@ -98,27 +108,6 @@ end;
 procedure RunRegisteredTestsModeless;
 begin
  RunTestModeless(registeredTests)
-end;
-
-procedure TraverseTreeItems(const anItem: TTreeViewItem;
-  var ResultList: TList<TTreeViewItem>);
-var
- l_Index: Integer;
-begin
- if anItem.IsChecked then
-  ResultList.Add(anItem);
-
- for l_Index := 0 to Pred(anItem.Count) do
-  TraverseTreeItems(anItem.Items[l_Index], ResultList);
-end;
-
-procedure TraverseTree(const aTree: TTreeView;
-  var ResultList: TList<TTreeViewItem>);
-var
- l_Index: Integer;
-begin
- for l_Index := 0 to Pred(aTree.Count) do
-  TraverseTreeItems(aTree.Items[l_Index], ResultList);
 end;
 
 procedure TfmGUITestRunner.AddError(aFailure: TTestFailure);
@@ -147,11 +136,11 @@ begin
  assert(assigned(aFailure));
  l_Item := lvFailureListView.Items.Add;
 
- l_Item.Text := aFailure.failedTest.Name + '; ' + aFailure.thrownExceptionName +
-   '; ' + aFailure.thrownExceptionMessage + '; ' + aFailure.LocationInfo + '; '
-   + aFailure.AddressInfo + '; ' + aFailure.StackTrace;
-
  l_Node := TestToNode(aFailure.failedTest);
+ Assert(l_Node <> nil);
+ l_Item.Text := l_Node.ParentItem.Text + '.' + aFailure.failedTest.Name + '; ' + aFailure.thrownExceptionName + '; ' + aFailure.thrownExceptionMessage + '; ' +
+   aFailure.LocationInfo + '; ' + aFailure.AddressInfo + '; ' + aFailure.StackTrace;
+
  while l_Node <> nil do
  begin
   l_Node.Expand;
@@ -167,6 +156,26 @@ begin
  SetTreeNodeFont(TestToNode(aTest), c_ColorOk)
 end;
 
+procedure TfmGUITestRunner.btnCheckAllClick(Sender: TObject);
+begin
+ TraverseTree(tvTestTree,
+  procedure(const aNode: TTreeViewItem)
+  begin
+   assert(aNode <> nil);
+   aNode.IsChecked := True;
+  end)
+end;
+
+procedure TfmGUITestRunner.btnUncheckAllClick(Sender: TObject);
+begin
+ TraverseTree(tvTestTree,
+  procedure(const aNode: TTreeViewItem)
+  begin
+   assert(aNode <> nil);
+   aNode.IsChecked := False;
+  end)
+end;
+
 procedure TfmGUITestRunner.btRunAllTestClick(Sender: TObject);
 begin
  if Suite = nil then
@@ -176,100 +185,126 @@ begin
  RunTheTest(Suite);
 end;
 
+procedure TfmGUITestRunner.TraverseTree(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
+
+ procedure TraverseNode(const aNode: TTreeViewItem);
+ var
+  l_Index: Integer;
+ begin
+  for l_Index := 0 to Pred(aNode.Count) do
+   TraverseNode(aNode.Items[l_Index]);
+  aLambda(aNode);
+ end;
+
+var
+ l_Index: Integer;
+begin
+ for l_Index := 0 to Pred(aTree.Count) do
+  TraverseNode(aTree.Items[l_Index]);
+end;
+
 procedure TfmGUITestRunner.ClearResult;
 begin
  lvFailureListView.ClearItems;
+ f_Runned := 0;
+ TraverseTree(tvTestTree,
+  procedure(const aNode: TTreeViewItem)
+  begin
+   SetTreeNodeFont(aNode, TAlphaColorRec.Black)
+  end)
 end;
 
 procedure TfmGUITestRunner.EndTest(test: ITest);
+   function FormatElapsedTime(milli: Int64):string;
+   var
+     h,nn,ss,zzz: Cardinal;
+   begin
+     h := milli div 3600000;
+     milli := milli mod 3600000;
+     nn := milli div 60000;
+     milli := milli mod 60000;
+     ss := milli div 1000;
+     milli := milli mod 1000;
+     zzz := milli;
+     Result := Format('%d:%2.2d:%2.2d.%3.3d', [h, nn, ss, zzz]);
+   end;
 begin
  // Закомител, потому как тут надо обновлять общую информацию о результатах
  // тестов. А нам пока нечего показывать.
  // И если будет утверждение, то после первого захода сюда, результаты не отображаются
  // Пока, так, однозначно TODO
+ lblTimeCount.Text:= FormatElapsedTime (FTestResult.TotalTime);
+ lblErrorCount.Text:= IntToStr(FTestResult.ErrorCount);
+ lblFailureCount.Text:= IntToStr(FTestResult.FailureCount);
+ Inc(f_Runned);
+ lblRunned.Text := IntToStr(f_Runned);
  // assert(False);
 end;
 
-procedure TfmGUITestRunner.FillTestTree(aRootNode: TTreeViewItem; aTest: ITest);
-var
- l_TestTests: IInterfaceList;
- l_Index: Integer;
- l_TreeViewItem: TTreeViewItem;
+type
+ TTestNode = class(TTreeViewItem)
+  private
+   f_Test: ITest;
+  public
+   constructor Create(aParent: TFmxObject; const aTest: ITest);
+   property Test: ITest
+    read f_Test;
+ end;//TTestNode
+
+constructor TTestNode.Create(aParent: TFmxObject; const aTest: ITest);
 begin
- if aTest = nil then
-  Exit;
-
- l_TreeViewItem := TTreeViewItem.Create(self);
- l_TreeViewItem.IsChecked := True;
-
- l_TreeViewItem.Tag := FTests.Add(aTest);
- l_TreeViewItem.Text := aTest.Name;
-
- if aRootNode = nil then
-  TestTree.AddObject(l_TreeViewItem)
- else
-  aRootNode.AddObject(l_TreeViewItem);
-
- l_TestTests := aTest.Tests;
- for l_Index := 0 to l_TestTests.Count - 1 do
-  FillTestTree(l_TreeViewItem, l_TestTests[l_Index] as ITest);
+ inherited Create(aParent);
+ IsChecked := True;
+ f_Test := aTest;
+ Text := aTest.Name;
+ aParent.AddObject(Self);
+ aTest.GUIObject := Self;
 end;
 
 procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
+
+ procedure DoFillTestTree(aRootNode: TTestNode);
+ var
+  l_TestTests: IInterfaceList;
+  l_Index: Integer;
+ begin//DoFillTestTree
+  l_TestTests := aRootNode.Test.Tests;
+  for l_Index := 0 to l_TestTests.Count - 1 do
+   DoFillTestTree(TTestNode.Create(aRootNode, (l_TestTests[l_Index] as ITest)));
+ end;//DoFillTestTree
+
 begin
- TestTree.Clear;
- FTests.Clear;
+ tvTestTree.Clear;
 
- TestTree.BeginUpdate;
-
- FillTestTree(nil, Suite);
-
- TestTree.EndUpdate;
+ tvTestTree.BeginUpdate;
+ try
+  DoFillTestTree(TTestNode.Create(tvTestTree, Suite));
+ finally
+  tvTestTree.EndUpdate;
+ end;//try..finally
 end;
 
 procedure TfmGUITestRunner.FormCreate(Sender: TObject);
 begin
  inherited;
- TestTree.ShowCheckboxes := True;
-
- FTests := TInterfaceList.Create;
+ tvTestTree.ShowCheckboxes := True;
 end;
 
 procedure TfmGUITestRunner.FormDestroy(Sender: TObject);
 begin
  Suite := nil;
- FreeAndNil(FTests);
  inherited;
-end;
-
-procedure TfmGUITestRunner.FormShow(Sender: TObject);
-var
- l_Index: Integer;
- l_Test: ITest;
-begin
- for l_Index := 0 to Pred(TestTree.Count) do
- begin
-  l_Test := NodeToTest(TestTree.Items[l_Index]);
-  assert(assigned(l_Test));
-  l_Test.GUIObject := TestTree.Items[l_Index];
-  SetupGUINodes(TestTree.Items[l_Index]);
- end;
 end;
 
 procedure TfmGUITestRunner.InitTree;
 begin
- FTests.Clear;
  FillTestTree(Suite);
- TestTree.ExpandAll;
+ tvTestTree.ExpandAll;
 end;
 
 function TfmGUITestRunner.NodeToTest(aNode: TTreeViewItem): ITest;
-var
- l_Index: Integer;
 begin
- assert(aNode.Tag >= 0);
- l_Index := aNode.Tag;
- Result := FTests[l_Index] as ITest;
+ Result := (aNode As TTestNode).Test;
 end;
 
 procedure TfmGUITestRunner.RunTheTest(aTest: ITest);
@@ -293,32 +328,17 @@ begin
   InitTree;
 end;
 
-procedure TfmGUITestRunner.SetTreeNodeFont(aNode: TTreeViewItem;
-  aColor: TAlphaColor);
+procedure TfmGUITestRunner.SetTreeNodeFont(aNode: TTreeViewItem; aColor: TAlphaColor);
 begin
  // Пока не укажешь какие из настроек стиля разрешены к работе, они работать не будут
  aNode.StyledSettings := aNode.StyledSettings -
- {$IF DEFined(VER270) OR DEFined(VER280)} [TStyledSetting.FontColor, TStyledSetting.Style];
+{$IF DEFined(VER270) OR DEFined(VER280)} [TStyledSetting.FontColor, TStyledSetting.Style];
 {$ENDIF}
 {$IFDEF VER260} [TStyledSetting.ssFontColor, TStyledSetting.ssStyle]
  ;
 {$ENDIF}
  aNode.Font.Style := [TFontStyle.fsBold];
  aNode.FontColor := aColor;
-end;
-
-procedure TfmGUITestRunner.SetupGUINodes(aNode: TTreeViewItem);
-var
- l_Test: ITest;
- l_Index: Integer;
-begin
- for l_Index := 0 to Pred(aNode.Count) do
- begin
-  l_Test := NodeToTest(aNode.Items[l_Index]);
-  assert(assigned(l_Test));
-  l_Test.GUIObject := aNode.Items[l_Index];
-  SetupGUINodes(aNode.Items[l_Index]);
- end;
 end;
 
 function TfmGUITestRunner.ShouldRunTest(aTest: ITest): Boolean;
@@ -348,12 +368,10 @@ end;
 
 procedure TfmGUITestRunner.TestingEnds(aTestResult: TTestResult);
 begin
- FTotalTime := aTestResult.TotalTime;
 end;
 
 procedure TfmGUITestRunner.TestingStarts;
 begin
- FTotalTime := 0;
 end;
 
 function TfmGUITestRunner.TestToNode(test: ITest): TTreeViewItem;
@@ -365,13 +383,12 @@ begin
  assert(assigned(Result));
 end;
 
-procedure TfmGUITestRunner.TestTreeChangeCheck(Sender: TObject);
+procedure TfmGUITestRunner.tvTestTreeChangeCheck(Sender: TObject);
 begin
  SetNodeEnabled(Sender as TTreeViewItem, (Sender as TTreeViewItem).IsChecked);
 end;
 
-procedure TfmGUITestRunner.SetNodeEnabled(aNode: TTreeViewItem;
-  aValue: Boolean);
+procedure TfmGUITestRunner.SetNodeEnabled(aNode: TTreeViewItem; aValue: Boolean);
 var
  l_Test: ITest;
 begin
@@ -381,4 +398,3 @@ begin
 end;
 
 end.
-

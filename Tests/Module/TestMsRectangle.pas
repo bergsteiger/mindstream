@@ -12,8 +12,15 @@ unit TestMsRectangle;
 interface
 
 uses
-  TestFramework, FMX.Types, msShape, System.UITypes, FMX.Graphics, System.Types,
-  msRectangle;
+  TestFramework,
+  FMX.Types,
+  msShape,
+  System.UITypes,
+  FMX.Graphics,
+  System.Types,
+  msRectangle,
+  msInterfaces
+  ;
 
 type
   // Test methods for class TmsRectangle
@@ -30,9 +37,13 @@ type
 
 implementation
 
+uses
+ msShapeCreator
+ ;
+
 procedure TestTmsRectangle.SetUp;
 begin
-  FmsRectangle := TmsRectangle.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil));
+  FmsRectangle := TmsShapeCreator.Create(TmsRectangle).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
 end;
 
 procedure TestTmsRectangle.TearDown;

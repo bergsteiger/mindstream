@@ -5,7 +5,8 @@ interface
 uses
  msLine,
  FMX.Graphics,
- msShape
+ msShape,
+ msInterfaces
  ;
 
 type
@@ -19,7 +20,7 @@ implementation
 procedure TmsDotLine.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rStrokeDash := TStrokeDash.sdDot;
+ theCtx.rStrokeDash := TStrokeDash.Dot;
 end;
 
 end.

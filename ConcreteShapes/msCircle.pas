@@ -7,7 +7,8 @@ uses
  System.Types,
  FMX.Graphics,
  FMX.Types,
- System.UITypes
+ System.UITypes,
+ msInterfaces
  ;
 
 type
@@ -16,6 +17,7 @@ type
   class function InitialRadiusX: Integer; virtual;
   class function InitialRadiusY: Integer; virtual;
 
+  function GetDrawBounds: TRectF; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
@@ -40,11 +42,14 @@ function TmsCircle.ContainsPt(const aPoint: TPointF): Boolean;
 var
  l_StartRectPoint, l_FinishRectPoint : TPointF;
  l_x0, l_y0, l_a, l_b : Integer;
+ l_Rect : TRectF;
 begin
  Result := False;
 
- l_StartRectPoint := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
- l_FinishRectPoint := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
+ l_Rect := DrawBounds;
+
+ l_StartRectPoint := l_Rect.TopLeft;
+ l_FinishRectPoint := l_Rect.BottomRight;
 
  l_x0 := Round(l_StartRectPoint.X + l_FinishRectPoint.X) div 2;
  l_y0 := Round(l_StartRectPoint.Y + l_FinishRectPoint.Y) div 2;
@@ -55,15 +60,20 @@ begin
            Sqr((aPoint.Y - l_y0)/l_b) <= 1.0;
 end;
 
+function TmsCircle.GetDrawBounds: TRectF;
+begin
+ Result := TRectF.Create(TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY),
+                         TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY));
+end;
+
 procedure TmsCircle.DoDrawTo(const aCtx: TmsDrawContext);
 var
- l_StartRectPoint, l_FinishRectPoint : TPointF;
+ l_Rect : TRectF;
 begin
- l_StartRectPoint := TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY);
- l_FinishRectPoint := TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY);
+ l_Rect := DrawBounds;
 
- aCtx.rCanvas.DrawEllipse(TRectF.Create(l_StartRectPoint, l_FinishRectPoint), 1);
- aCtx.rCanvas.FillEllipse(TRectF.Create(l_StartRectPoint, l_FinishRectPoint), 0.5);
+ aCtx.rCanvas.DrawEllipse(l_Rect, 1);
+ aCtx.rCanvas.FillEllipse(l_Rect, 0.5);
 end;
 
 procedure TmsCircle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);

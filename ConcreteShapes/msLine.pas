@@ -6,7 +6,8 @@ uses
  msShape,
  FMX.Graphics,
  System.Types,
- SysUtils
+ SysUtils,
+ msInterfaces
  ;
 
 type
@@ -16,11 +17,15 @@ type
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   constructor CreateInner(const aStartPoint: TPointF); override;
+  class function IsLineLike: Boolean; override;
+  function GetDrawBounds: TRectF; override;
+  function GetFinishPointForDraw: TPointF; virtual;
   property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
  public
   function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aCtx: TmsEndShapeContext); override;
   procedure MoveTo(const aFinishPoint: TPointF); override;
+  class function CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
  end;//TmsLine
 
  EmsLineCannotBeMoved = class(Exception)
@@ -38,6 +43,21 @@ begin
  FinishPoint := aStartPoint;
 end;
 
+class function TmsLine.IsLineLike: Boolean;
+begin
+ Result := true;
+end;
+
+function TmsLine.GetDrawBounds: TRectF;
+begin
+ Result := TRectF.Create(StartPoint, FinishPoint);
+end;
+
+function TmsLine.GetFinishPointForDraw: TPointF;
+begin
+ Result := FinishPoint;
+end;
+
 procedure TmsLine.EndTo(const aCtx: TmsEndShapeContext);
 begin
  FinishPoint := aCtx.rStartPoint;
@@ -48,22 +68,31 @@ begin
  raise EmsLineCannotBeMoved.Create('Примитив ' + ClassName + ' не может быть перемещён');
 end;
 
+class function TmsLine.CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
+begin
+ Result := Self.Create(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
+ Result.EndTo(TmsEndShapeContext.Create(aFinishPoint, nil, nil));
+end;
+
 procedure TmsLine.DoDrawTo(const aCtx: TmsDrawContext);
 var
- l_Proxy : TmsShape;
+ l_Proxy : ImsShape;
+ l_FinishPoint: TPointF;
 begin
  if (StartPoint = FinishPoint) then
  begin
-  l_Proxy := TmsPointCircle.CreateInner(StartPoint);
+  l_Proxy := TmsPointCircle.Create(StartPoint);
   try
    l_Proxy.DrawTo(aCtx);
   finally
-   FreeAndNil(l_Proxy);
+   l_Proxy := nil;
   end;//try..finally
  end//StartPoint = FinishPoint
  else
-  aCtx.rCanvas.DrawLine(StartPoint,
-                   FinishPoint, 1);
+ begin
+  l_FinishPoint := GetFinishPointForDraw;
+  aCtx.rCanvas.DrawLine(StartPoint,l_FinishPoint, 1);
+ end;//StartPoint = FinishPoint
 end;
 
 function TmsLine.IsNeedsSecondClick: Boolean;

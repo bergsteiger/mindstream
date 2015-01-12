@@ -12,7 +12,13 @@ unit TestMsLine;
 interface
 
 uses
-  TestFramework, msLine, FMX.Graphics, System.Types, msShape;
+  TestFramework,
+  msLine,
+  FMX.Graphics,
+  System.Types,
+  msShape,
+  msInterfaces
+  ;
 
 type
   // Test methods for class TmsLine
@@ -32,12 +38,13 @@ type
 implementation
 
 uses
-  System.SysUtils
+  System.SysUtils,
+  msShapeCreator
   ;
 
 procedure TestTmsLine.SetUp;
 begin
-  FmsLine := TmsLine.Create(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil));
+  FmsLine := TmsShapeCreator.Create(TmsLine).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
 end;
 
 procedure TestTmsLine.TearDown;
@@ -55,7 +62,7 @@ end;
 
 procedure TestTmsLine.TestEndTo;
 var
-  aCtx: msShape.TmsMakeShapeContext;
+  aCtx: TmsMakeShapeContext;
 begin
   // TODO: Setup method call parameters
   FmsLine.EndTo(aCtx);

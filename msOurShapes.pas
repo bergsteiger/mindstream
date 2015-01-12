@@ -16,14 +16,26 @@ uses
   msDotLine,
   msLineWithArrow,
   msTriangleDirectionRight,
-  msMover,
   msRegisteredShapes,
   msRedRectangle,
   msGreenRectangle,
+  msPolygonShape,
+
+  // utility shapes
+  msMover,
+  msPicker,
+  msUpToParent,
+  msSwapParents,
+  msShapeRemover,
 
   // special shapes
   msPointCircle,
-  msSmallTriangle
+  msSmallTriangle,
+  msGreenCircle,
+
+  // shapes for toolbar buttons
+  msBlackTriangle,
+  msMoverIcon
   ;
 
 procedure RegisterOurShapes;
@@ -40,13 +52,24 @@ begin
   TmsDotLine,
   TmsLineWithArrow,
   TmsTriangleDirectionRight,
-  TmsMover,
   TmsRedRectangle,
   TmsGreenRectangle,
 
   // special shapes
   TmsPointCircle,
-  TmsSmallTriangle
+  TmsSmallTriangle,
+  TmsGreenCircle,
+
+  // utility shapes
+  TmsMover,
+  TmsPicker,
+  TmsUpToParent,
+  TmsSwapParents,
+  TmsShapeRemover,
+
+  // shapes for buttons
+  TmsBlackTriangle,
+  TmsMoverIcon
  ]);
 end;
 
