@@ -9,7 +9,8 @@ uses
   FMX.Objects, FMX.Menus, FMX.Edit, FMX.ListBox, msDiagramm,
 
   msDiagramms,
-  msDiagrammsController
+  msDiagrammsController,
+  msInterfaces
   ;
 
 type
@@ -26,6 +27,8 @@ type
     btAddDiagramm: TButton;
     btSaveDiagramm: TButton;
     btLoadDiagramm: TButton;
+    btnSaveToPNG: TButton;
+    pnlToolBar: TPanel;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -35,7 +38,8 @@ type
     procedure btnClearImageClick(Sender: TObject);
     procedure imgMainPaint(Sender: TObject; Canvas: TCanvas);
   private
-   FDiagrammsController: TmsDiagrammsController;
+   FDiagrammsController: ImsDiagrammsController;
+   procedure CreateToolBar(const aPanelWidth: Single);
   public
     { Public declarations }
   end;
@@ -46,7 +50,12 @@ var
 implementation
 
 uses
- System.Math.Vectors
+ System.Math.Vectors,
+ msShape,
+ msTool,
+ msShapeButton,
+ msShapesForToolbar,
+ msPaletteShapeCreator
  ;
 
 {$R *.fmx}
@@ -56,6 +65,32 @@ begin
  FDiagrammsController.Clear;
 end;
 
+procedure TfmMain.CreateToolBar(const aPanelWidth: Single);
+
+ function GetColumnCount: Integer;
+ begin//GetColumnCount
+  Result := Round(aPanelWidth) div TmsPaletteShapeCreator.ButtonSize;
+ end;//GetColumnCount
+
+var
+ l_RmsShape: RmsShape;
+
+ l_Row, l_Column : Integer;
+begin
+ l_Row := 0;
+ l_Column := 0;
+ for l_RmsShape in TmsShapesForToolbar.Instance do
+ begin
+  pnlToolBar.AddObject(TmsShapeButton.Create(pnlToolBar, l_RmsShape, cbShapes, l_Column, l_Row, FDiagrammsController.As_ImsDiagrammsHolder));
+  Inc(l_Column);
+  if (l_Column > GetColumnCount-1) then
+  begin
+   l_Column := 0;
+   Inc(l_Row);
+  end;//l_Column > GetColumnCount-1
+ end;//for l_RmsShape in TmsShapesForToolbar.Instance
+end;
+
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
  FDiagrammsController := TmsDiagrammsController.Create(imgMain,
@@ -63,12 +98,14 @@ begin
                                                        cbDiagramm,
                                                        btAddDiagramm,
                                                        btSaveDiagramm,
-                                                       btLoadDiagramm);
+                                                       btLoadDiagramm,
+                                                       btnSaveToPNG);
+ CreateToolBar(pnlToolBar.Width);
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
 begin
- FreeAndNil(FDiagrammsController);
+ FDiagrammsController := nil;
 end;
 
 procedure TfmMain.imgMainMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -79,8 +116,7 @@ end;
 
 procedure TfmMain.imgMainPaint(Sender: TObject; Canvas: TCanvas);
 begin
- Canvas.SetMatrix(TMatrix.Identity);
- FDiagrammsController.CurrentDiagramm.DrawTo(Canvas);
+ FDiagrammsController.DrawTo(Canvas);
 end;
 
 procedure TfmMain.miAboutClick(Sender: TObject);

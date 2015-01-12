@@ -3,28 +3,25 @@ unit msTriangle;
 interface
 
 uses
- msShape,
  System.Types,
  FMX.Graphics,
  FMX.Types,
- System.UITypes
- {$IF DEFined(VER270) OR DEFined(VER280)}
- ,
- System.Math.Vectors
- {$ENDIF}
+ System.UITypes,
+ System.Math.Vectors,
+ msInterfaces,
+ msPolygonShape
  ;
 
 type
- TmsTriangle = class(TmsShape)
+ TmsTriangle = class(TmsPolygonShape)
  protected
   class function InitialHeight: Single; virtual;
-  function Polygon: TPolygon; virtual;
-
+  function GetPolygon: TPolygon; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
 
   function ContainsPt(const aPoint: TPointF): Boolean; override;
-
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
+  public
+   class function IsForToolbar: Boolean; override;
  end;//TmsTriangle
 
 implementation
@@ -37,15 +34,20 @@ begin
  Result := 100;
 end;
 
-function TmsTriangle.Polygon: TPolygon;
+class function TmsTriangle.IsForToolbar: Boolean;
+begin
+ Result := True;
+end;
+
+function TmsTriangle.GetPolygon: TPolygon;
 begin
  SetLength(Result, 4);
  Result[0] := TPointF.Create(StartPoint.X - InitialHeight / 2,
-                        StartPoint.Y + InitialHeight / 2);
+                             StartPoint.Y + InitialHeight / 2);
  Result[1] := TPointF.Create(StartPoint.X + InitialHeight / 2,
-                        StartPoint.Y + InitialHeight / 2);
+                             StartPoint.Y + InitialHeight / 2);
  Result[2] := TPointF.Create(StartPoint.X,
-                        StartPoint.Y - InitialHeight / 2);
+                             StartPoint.Y - InitialHeight / 2);
  Result[3] := Result[0];
 end;
 
@@ -67,15 +69,6 @@ Begin
    Result := not Result;
   j := i
  end;
-end;
-
-procedure TmsTriangle.DoDrawTo(const aCtx: TmsDrawContext);
-var
- l_P : TPolygon;
-begin
- l_P := Polygon;
- aCtx.rCanvas.DrawPolygon(l_P, 1);
- aCtx.rCanvas.FillPolygon(l_P, 0.5);
 end;
 
 procedure TmsTriangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);

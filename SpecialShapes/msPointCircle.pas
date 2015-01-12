@@ -7,7 +7,8 @@ uses
  System.Types,
  msShape,
  msCircle,
- System.UITypes
+ System.UITypes,
+ msInterfaces
  ;
 
 type
@@ -40,4 +41,6 @@ begin
 end;
 
 end.
+
+
 

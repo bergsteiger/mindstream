@@ -7,7 +7,8 @@ uses
  FMX.Graphics,
  System.Types,
  System.UITypes,
- msTool
+ msTool,
+ msInterfaces
  ;
 
 type
@@ -19,6 +20,7 @@ type
   constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
+  class function ButtonShape(const aStartPoint: TPointF): ImsShape; override;
   function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aCtx: TmsEndShapeContext); override;
  end;//TmsMover
@@ -26,9 +28,12 @@ type
 implementation
 
 uses
- msRectangle,
+ msBlackTriangle,
  FMX.Types,
- System.SysUtils;
+ System.SysUtils,
+ msMoverIcon,
+ msLineWithArrow
+ ;
 
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
 begin
@@ -36,10 +41,18 @@ begin
  f_Moving := aMoving;
 end;
 
+class function TmsMover.ButtonShape(const aStartPoint: TPointF): ImsShape;
+begin
+// Result := TmsMoverIcon.CreateIcon(TPointF.Create(50, 50));
+ Result := TmsMoverIcon.Create(TPointF.Create(50, 50));
+// Result := TmsLineWithArrow.CreateCompleted(TPointF.Create(50, 50), TPointF.Create(0, 0));
+end;
+
 class function TmsMover.Create(const aCtx: TmsMakeShapeContext): ImsShape;
 var
  l_Moving : ImsShape;
 begin
+ Assert(aCtx.rShapesController <> nil);
  l_Moving := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
  if (l_Moving <> nil) then
   Result := CreateInner(aCtx.rStartPoint, l_Moving)
@@ -74,3 +87,4 @@ begin
 end;
 
 end.
+

@@ -21,7 +21,7 @@
     <reference referencedUin="design:view:::l2uvud30ovt_v">
       <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="172,171,100,138" />
+      <property name="bounds" value="172,171,100,121" />
       <reference referencedUin="delphi:e_class:src:MindStream:msDiagramms.TmsDiagramms" />
       <reference referencedUin="delphi:e_class:src:MindStream:msDiagramms.TmsDiagrammList" />
       <reference referencedUin="delphi:e_class:src:MindStream:msDiagramms.@unitclass" />
@@ -41,7 +41,7 @@
     <reference referencedUin="design:view:::7bq9fjf60fg_v">
       <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="63,180,100,123" />
+      <property name="bounds" value="63,180,100,121" />
       <reference referencedUin="delphi:e_class:src:MindStream:msShape.@unitclass" />
       <reference referencedUin="delphi:e_class:src:MindStream:msShape.TmsShapeList" />
       <reference referencedUin="delphi:e_class:src:MindStream:msShape.RmsShape" />
@@ -71,11 +71,14 @@
       <property name="bounds" value="588,1,153,121" />
       <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsController.@unitclass" />
       <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsController.TmsDiagrammsController" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsController.TmsIvalidatorParent" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsController.TmsDiagrammsHolder" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsController.TmsIvalidator" />
     </reference>
     <reference referencedUin="design:view:::9tx1b36ayys_v">
       <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="392,341,100,140" />
+      <property name="bounds" value="392,341,100,138" />
       <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsDiagramm" />
       <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.@unitclass" />
       <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsShapeList" />
@@ -86,11 +89,16 @@
       <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.ImsIvalidator" />
       <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsItemsList" />
       <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsItem" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsItemsListEnumerator" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsShapesProvider" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsShapesProviderParent" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsPersistent" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsPersistentParent" />
     </reference>
     <reference referencedUin="design:view:::h9ordc3276s_v">
       <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="243,384,110,121" />
+      <property name="bounds" value="243,384,111,121" />
       <reference referencedUin="delphi:e_class:src:MindStream:msSmallTriangle.@unitclass" />
       <reference referencedUin="delphi:e_class:src:MindStream:msSmallTriangle.TmsSmallTriangle" />
     </reference>
@@ -128,6 +136,7 @@
       <property name="bounds" value="459,573,100,121" />
       <reference referencedUin="delphi:e_class:src:MindStream:msRectangle.@unitclass" />
       <reference referencedUin="delphi:e_class:src:MindStream:msRectangle.TmsRectangle" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msRectangle.TmsPointContext" />
     </reference>
     <reference referencedUin="design:view:::79vli96x6jl_v">
       <property name="$hidden" value="True" />
@@ -137,6 +146,7 @@
       <reference referencedUin="delphi:e_class:src:MindStream:msRegisteredShapes.@unitclass" />
       <reference referencedUin="delphi:e_class:src:MindStream:msRegisteredShapes.RmsShapeList" />
       <reference referencedUin="delphi:e_class:src:MindStream:msRegisteredShapes.TmsShapeClassLambda" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msRegisteredShapes.TmsShapeClassListSingleton" />
     </reference>
     <reference referencedUin="design:view:::begw4bcgbn_v">
       <property name="$hidden" value="True" />
@@ -181,7 +191,7 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msShape.TmsShape">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="626,840,271,298" />
+      <property name="bounds" value="2620,140,271,462" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_field:src:MindStream:msShape.TmsShape.FStartPoint" />
       <reference referencedUin="delphi:e_property:src:MindStream:msShape.TmsShape.StartPoint" />
@@ -224,10 +234,33 @@
         <property name="targetAnchor" value="761,784" />
         <property name="bendpoints" value="" />
       </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.DrawOptionsContext(msInterfaces.TmsDrawContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.pm_GetStartPoint()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.DoDrawTo(msInterfaces.TmsDrawContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.EndTo(msInterfaces.TmsMakeShapeContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.SaveTo(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.LoadFrom(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.Create(msInterfaces.TmsMakeShapeContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.DrawTo(msInterfaces.TmsDrawContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.Assign(msShape.TmsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.DoNullClick(msInterfaces.ImsDiagrammsHolder)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.NullClick(msInterfaces.ImsDiagrammsHolder)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.IsLineLike()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.IsNullClick()" />
+      <reference referencedUin="delphi:l_impl:src:MindStream:msShape.TmsShape:msInterfaces.ImsShape">
+        <property name="sourceAnchor" value="2620,496" />
+        <property name="targetAnchor" value="1829,1328" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.DrawBounds()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.GetDrawBounds()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.Rotate(msInterfaces.TmsDrawContext,System.Single)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShape.TmsShape.ButtonShape(System.Types.TPointF)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msShape.RmsShape">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="340,140,135,67" />
+      <property name="bounds" value="1586,1879,135,67" />
       <property name="location_set_by_user" value="True" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msShape.@unitclass">
@@ -250,20 +283,25 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msTriangle.TmsTriangle">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="0,980,186,144" />
+      <property name="bounds" value="2480,820,186,159" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msTriangle.TmsTriangle.InitialHeight()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msTriangle.TmsTriangle.Polygon()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msTriangle.TmsTriangle.FillColor()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msTriangle.TmsTriangle.DoDrawTo(FMX.Graphics.TCanvas,System.Types.TPointF)" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msTriangle.TmsTriangle:msShape.TmsShape">
-        <property name="sourceAnchor" value="186,1052" />
-        <property name="targetAnchor" value="626,1052" />
+        <property name="sourceAnchor" value="2643,820" />
+        <property name="targetAnchor" value="2643,602" />
         <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
       </reference>
       <reference referencedUin="delphi:e_method:src:MindStream:msTriangle.TmsTriangle.DoDrawTo(msShape.TmsDrawContext)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msTriangle.TmsTriangle.TransformDrawOptionsContext(ref@msShape.TmsDrawOptionsContext)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msTriangle.TmsTriangle.ContainsPt(System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msTriangle.TmsTriangle.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msTriangle.TmsTriangle.DoDrawTo(msInterfaces.TmsDrawContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msTriangle.TmsTriangle.DrawBounds()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msTriangle.TmsTriangle.GetDrawBounds()" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:MindStream.@unitclass">
       <property name="$shortcutReference" value="true" />
@@ -271,25 +309,29 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msCircle.TmsCircle">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1020,860,186,144" />
+      <property name="bounds" value="2780,820,186,159" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msCircle.TmsCircle.InitialRadiusX()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msCircle.TmsCircle.InitialRadiusY()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msCircle.TmsCircle.FillColor()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msCircle.TmsCircle.DoDrawTo(FMX.Graphics.TCanvas,System.Types.TPointF)" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msCircle.TmsCircle:msShape.TmsShape">
-        <property name="sourceAnchor" value="1020,932" />
-        <property name="targetAnchor" value="897,932" />
+        <property name="sourceAnchor" value="2835,820" />
+        <property name="targetAnchor" value="2835,602" />
         <property name="bendpoints" value="" />
         <property name="bounds_setted_by_user" value="True" />
       </reference>
       <reference referencedUin="delphi:e_method:src:MindStream:msCircle.TmsCircle.DoDrawTo(msShape.TmsDrawContext)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msCircle.TmsCircle.TransformDrawOptionsContext(ref@msShape.TmsDrawOptionsContext)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msCircle.TmsCircle.ContainsPt(System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msCircle.TmsCircle.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msCircle.TmsCircle.DoDrawTo(msInterfaces.TmsDrawContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msCircle.TmsCircle.DrawBounds()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msCircle.TmsCircle.GetDrawBounds()" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msLine.TmsLine">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1019,1080,189,178" />
+      <property name="bounds" value="3160,795,189,238" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_field:src:MindStream:msLine.TmsLine.FFinishPoint" />
       <reference referencedUin="delphi:e_method:src:MindStream:msLine.TmsLine.DoDrawTo(FMX.Graphics.TCanvas,System.Types.TPointF)" />
@@ -298,8 +340,8 @@
       <reference referencedUin="delphi:e_method:src:MindStream:msLine.TmsLine.EndTo(System.Types.TPointF)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msLine.TmsLine.Create(System.Types.TPointF)" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msLine.TmsLine:msShape.TmsShape">
-        <property name="sourceAnchor" value="1019,1109" />
-        <property name="targetAnchor" value="897,1109" />
+        <property name="sourceAnchor" value="3160,796" />
+        <property name="targetAnchor" value="2891,503" />
         <property name="bendpoints" value="" />
       </reference>
       <reference referencedUin="delphi:e_method:src:MindStream:msLine.TmsLine.DoDrawTo(msShape.TmsDrawContext)" />
@@ -307,58 +349,72 @@
       <reference referencedUin="delphi:e_method:src:MindStream:msLine.TmsLine.EndTo(msShape.TmsMakeShapeContext)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msLine.TmsLine.MoveTo(System.Types.TPointF)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msLine.TmsLine.CreateInner(System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msLine.TmsLine.DoDrawTo(msInterfaces.TmsDrawContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msLine.TmsLine.EndTo(msInterfaces.TmsMakeShapeContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msLine.TmsLine.IsLineLike()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msLine.TmsLine.DrawBounds()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msLine.TmsLine.GetDrawBounds()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msLine.TmsLine.CreateCompleted(System.Types.TPointF,System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msLine.TmsLine.GetFinishPoint()" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msDashDotLine.TmsDashDotLine">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1390,1020,208,84" />
+      <property name="bounds" value="3000,1080,208,84" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msDashDotLine.TmsDashDotLine.StrokeDash()" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msDashDotLine.TmsDashDotLine:msLine.TmsLine">
-        <property name="sourceAnchor" value="1390,1092" />
-        <property name="targetAnchor" value="1208,1092" />
+        <property name="sourceAnchor" value="3184,1080" />
+        <property name="targetAnchor" value="3184,1033" />
         <property name="bendpoints" value="" />
         <property name="bounds_setted_by_user" value="True" />
       </reference>
       <reference referencedUin="delphi:e_method:src:MindStream:msDashDotLine.TmsDashDotLine.TransformDrawOptionsContext(ref@msShape.TmsDrawOptionsContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDashDotLine.TmsDashDotLine.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msDashLine.TmsDashLine">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1401,1180,186,84" />
+      <property name="bounds" value="3380,1200,186,84" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msDashLine.TmsDashLine.StrokeDash()" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msDashLine.TmsDashLine:msLine.TmsLine">
-        <property name="sourceAnchor" value="1401,1219" />
-        <property name="targetAnchor" value="1208,1219" />
+        <property name="sourceAnchor" value="3445,1200" />
+        <property name="targetAnchor" value="3333,1033" />
         <property name="bendpoints" value="" />
         <property name="bounds_setted_by_user" value="True" />
       </reference>
       <reference referencedUin="delphi:e_method:src:MindStream:msDashLine.TmsDashLine.TransformDrawOptionsContext(ref@msShape.TmsDrawOptionsContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDashLine.TmsDashLine.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msDotLine.TmsDotLine">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1401,1420,186,84" />
+      <property name="bounds" value="3220,1320,186,84" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msDotLine.TmsDotLine.StrokeDash()" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msDotLine.TmsDotLine:msLine.TmsLine">
-        <property name="sourceAnchor" value="1439,1420" />
-        <property name="targetAnchor" value="1208,1242" />
+        <property name="sourceAnchor" value="3284,1320" />
+        <property name="targetAnchor" value="3284,1033" />
         <property name="bendpoints" value="" />
         <property name="bounds_setted_by_user" value="True" />
       </reference>
       <reference referencedUin="delphi:e_method:src:MindStream:msDotLine.TmsDotLine.TransformDrawOptionsContext(ref@msShape.TmsDrawOptionsContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDotLine.TmsDotLine.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msLineWithArrow.TmsLineWithArrow">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1000,1400,227,99" />
+      <property name="bounds" value="3440,1020,227,129" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msLineWithArrow.TmsLineWithArrow.DoDrawTo(FMX.Graphics.TCanvas,System.Types.TPointF)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msLineWithArrow.TmsLineWithArrow.GetArrowAngleRotation()" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msLineWithArrow.TmsLineWithArrow:msLine.TmsLine">
-        <property name="sourceAnchor" value="1113,1400" />
-        <property name="targetAnchor" value="1113,1258" />
+        <property name="sourceAnchor" value="3466,1020" />
+        <property name="targetAnchor" value="3349,952" />
         <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
       </reference>
       <reference referencedUin="delphi:e_method:src:MindStream:msLineWithArrow.TmsLineWithArrow.DoDrawTo(msShape.TmsDrawContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msLineWithArrow.TmsLineWithArrow.DoDrawTo(msInterfaces.TmsDrawContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msLineWithArrow.TmsLineWithArrow.GetDrawBounds()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msLineWithArrow.TmsLineWithArrow.GetFinishPoint()" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msOurShapes.@unitclass">
       <property name="$shortcutReference" value="true" />
@@ -367,22 +423,23 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msPointCircle.TmsPointCircle">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1410,740,186,114" />
+      <property name="bounds" value="2680,1080,186,114" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msPointCircle.TmsPointCircle.InitialRadiusX()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msPointCircle.TmsPointCircle.FillColor()" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msPointCircle.TmsPointCircle:msCircle.TmsCircle">
-        <property name="sourceAnchor" value="1410,828" />
-        <property name="targetAnchor" value="1206,899" />
+        <property name="sourceAnchor" value="2823,1080" />
+        <property name="targetAnchor" value="2823,979" />
         <property name="bendpoints" value="" />
         <property name="bounds_setted_by_user" value="True" />
       </reference>
       <reference referencedUin="delphi:e_method:src:MindStream:msPointCircle.TmsPointCircle.TransformDrawOptionsContext(ref@msShape.TmsDrawOptionsContext)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msPointCircle.TmsPointCircle.IsForToolbar()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msPointCircle.TmsPointCircle.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msRectangle.TmsRectangle">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="668,1180,186,159" />
+      <property name="bounds" value="3700,812,186,174" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msRectangle.TmsRectangle.CornerRadius()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msRectangle.TmsRectangle.InitialWidth()" />
@@ -390,21 +447,27 @@
       <reference referencedUin="delphi:e_method:src:MindStream:msRectangle.TmsRectangle.FillColor()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msRectangle.TmsRectangle.DoDrawTo(FMX.Graphics.TCanvas,System.Types.TPointF)" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msRectangle.TmsRectangle:msShape.TmsShape">
-        <property name="sourceAnchor" value="761,1180" />
-        <property name="targetAnchor" value="761,1138" />
+        <property name="sourceAnchor" value="3700,849" />
+        <property name="targetAnchor" value="2891,426" />
         <property name="bendpoints" value="" />
       </reference>
       <reference referencedUin="delphi:e_method:src:MindStream:msRectangle.TmsRectangle.DoDrawTo(msShape.TmsDrawContext)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msRectangle.TmsRectangle.TransformDrawOptionsContext(ref@msShape.TmsDrawOptionsContext)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msRectangle.TmsRectangle.ContainsPt(System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msRectangle.TmsRectangle.GetCoordinateForDraw(System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msRectangle.TmsRectangle.DoDrawTo(msInterfaces.TmsDrawContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msRectangle.TmsRectangle.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msRectangle.TmsRectangle.DrawBounds()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msRectangle.TmsRectangle.GetDrawBounds()" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msRegisteredShapes.@unitclass">
       <property name="$shortcutReference" value="true" />
       <property name="bounds" value="927,105,0,0" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msRegisteredShapes.TmsRegisteredShapes">
+      <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1040,460,271,251" />
+      <property name="bounds" value="-240,2040,271,83" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_field:src:MindStream:msRegisteredShapes.TmsRegisteredShapes.f_Registered" />
       <reference referencedUin="delphi:e_field:src:MindStream:msRegisteredShapes.TmsRegisteredShapes.f_Instance" />
@@ -437,18 +500,19 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msRoundedRectangle.TmsRoundedRectangle">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="622,1380,279,129" />
+      <property name="bounds" value="3980,1120,280,129" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msRoundedRectangle.TmsRoundedRectangle.CornerRadius()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msRoundedRectangle.TmsRoundedRectangle.InitialWidth()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msRoundedRectangle.TmsRoundedRectangle.InitialHeight()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msRoundedRectangle.TmsRoundedRectangle.FillColor()" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msRoundedRectangle.TmsRoundedRectangle:msRectangle.TmsRectangle">
-        <property name="sourceAnchor" value="761,1380" />
-        <property name="targetAnchor" value="761,1339" />
+        <property name="sourceAnchor" value="4047,1120" />
+        <property name="targetAnchor" value="3886,980" />
         <property name="bendpoints" value="" />
       </reference>
       <reference referencedUin="delphi:e_method:src:MindStream:msRoundedRectangle.TmsRoundedRectangle.TransformDrawOptionsContext(ref@msShape.TmsDrawOptionsContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msRoundedRectangle.TmsRoundedRectangle.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msTriangle1.TmsTriangle1">
       <property name="$shortcutReference" value="true" />
@@ -465,7 +529,7 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msSmallTriangle.TmsSmallTriangle">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="0,1400,218,114" />
+      <property name="bounds" value="2349,1280,218,129" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msSmallTriangle.TmsSmallTriangle.FillColor()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msSmallTriangle.TmsSmallTriangle.InitialHeight()" />
@@ -477,24 +541,27 @@
       </reference>
       <reference referencedUin="delphi:e_method:src:MindStream:msSmallTriangle.TmsSmallTriangle.TransformDrawOptionsContext(ref@msShape.TmsDrawOptionsContext)" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msSmallTriangle.TmsSmallTriangle:msTriangleDirectionRight.TmsTriangleDirectionRight">
-        <property name="sourceAnchor" value="109,1400" />
-        <property name="targetAnchor" value="109,1299" />
+        <property name="sourceAnchor" value="2458,1280" />
+        <property name="targetAnchor" value="2458,1179" />
         <property name="bendpoints" value="" />
       </reference>
       <reference referencedUin="delphi:e_method:src:MindStream:msSmallTriangle.TmsSmallTriangle.IsForToolbar()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msSmallTriangle.TmsSmallTriangle.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msSmallTriangle.TmsSmallTriangle.GetPolygon()" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msUseCaseLikeEllipse.TmsUseCaseLikeEllipse">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1350,880,289,99" />
+      <property name="bounds" value="2760,1300,289,99" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msUseCaseLikeEllipse.TmsUseCaseLikeEllipse.InitialRadiusY()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msUseCaseLikeEllipse.TmsUseCaseLikeEllipse.FillColor()" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msUseCaseLikeEllipse.TmsUseCaseLikeEllipse:msCircle.TmsCircle">
-        <property name="sourceAnchor" value="1350,929" />
-        <property name="targetAnchor" value="1206,929" />
+        <property name="sourceAnchor" value="2873,1300" />
+        <property name="targetAnchor" value="2873,979" />
         <property name="bendpoints" value="" />
       </reference>
       <reference referencedUin="delphi:e_method:src:MindStream:msUseCaseLikeEllipse.TmsUseCaseLikeEllipse.TransformDrawOptionsContext(ref@msShape.TmsDrawOptionsContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUseCaseLikeEllipse.TmsUseCaseLikeEllipse.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.@unitclass">
       <property name="$shortcutReference" value="true" />
@@ -503,7 +570,7 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsDiagramm">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="646,-160,230,504" />
+      <property name="bounds" value="1320,1080,192,433" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_field:src:MindStream:msDiagramm.TmsDiagramm.FShapeList" />
       <reference referencedUin="delphi:e_field:src:MindStream:msDiagramm.TmsDiagramm.FCurrentClass" />
@@ -540,8 +607,8 @@
         <property name="bendpoints" value="" />
       </reference>
       <reference referencedUin="delphi:l_ast:src:MindStream:msDiagramm.TmsDiagramm.FCurrentAddedShape">
-        <property name="sourceAnchor" value="646,216" />
-        <property name="targetAnchor" value="385,500" />
+        <property name="sourceAnchor" value="1512,1416" />
+        <property name="targetAnchor" value="1640,1416" />
         <property name="bendpoints" value="" />
         <property name="bounds_setted_by_user" value="True" />
       </reference>
@@ -592,10 +659,46 @@
       <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.Create(FMX.Objects.TPaintBox,System.string)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.DrawTo(FMX.Graphics.TCanvas)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.Assign(msDiagramm.TmsDiagramm)" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagramm.TmsDiagramm.f_MaxX" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagramm.TmsDiagramm.f_MaxY" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.BeginShape(msInterfaces.TmsClickContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.EndShape(System.Types.TPointF,msInterfaces.ImsDiagrammsHolder)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.RemoveShape(msInterfaces.ImsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.CreatePrim(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.AddShape(msInterfaces.ImsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.SaveTo(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.LoadFrom(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.Create(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.ProcessClick(msInterfaces.TmsClickContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.SaveToPng(System.string)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msDiagramm.TmsDiagramm:msDiagramm.TmsShapesProvider">
+        <property name="sourceAnchor" value="1416,1080" />
+        <property name="targetAnchor" value="1416,1038" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_impl:src:MindStream:msDiagramm.TmsDiagramm:msInterfaces.ImsShapesController">
+        <property name="sourceAnchor" value="1320,1200" />
+        <property name="targetAnchor" value="1112,1200" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+      <reference referencedUin="delphi:l_impl:src:MindStream:msDiagramm.TmsDiagramm:msInterfaces.ImsShapeByPt">
+        <property name="sourceAnchor" value="1320,1100" />
+        <property name="targetAnchor" value="1095,1100" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+      <reference referencedUin="delphi:l_impl:src:MindStream:msDiagramm.TmsDiagramm:msInterfaces.ImsDiagramm">
+        <property name="sourceAnchor" value="1320,1176" />
+        <property name="targetAnchor" value="756,473" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.GetMax()" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsController.TmsDiagrammsController">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1300,-20,303,373" />
+      <property name="bounds" value="340,540,303,612" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.imgMain" />
       <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.cbShapes" />
@@ -633,14 +736,69 @@
       <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.Create(FMX.Objects.TPaintBox,FMX.ListBox.TComboBox,FMX.ListBox.TComboBox,FMX.StdCtrls.TButton,FMX.StdCtrls.TButton,FMX.StdCtrls.TButton)" />
       <reference referencedUin="delphi:e_property:src:MindStream:msDiagrammsController.TmsDiagrammsController.CurrentDiagramm" />
       <reference referencedUin="delphi:l_ast:src:MindStream:msDiagrammsController.TmsDiagrammsController.CurrentDiagramm">
-        <property name="sourceAnchor" value="1300,162" />
-        <property name="targetAnchor" value="876,162" />
+        <property name="sourceAnchor" value="583,540" />
+        <property name="targetAnchor" value="583,473" />
         <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
       </reference>
       <reference referencedUin="delphi:l_gnt:src:MindStream:msDiagrammsController.TmsDiagrammsController:msWatchedObjectInstance.TmsWatchedObject">
         <property name="sourceAnchor" value="1387,-20" />
         <property name="targetAnchor" value="1387,-177" />
         <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.btSaveToPNG" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_DiagrammsRoot" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_CurrentDiagramms" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_CurrentDiagramm" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_DiagrammStack" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.btSaveToPNGClick(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.pm_SetCurrentDiagramm(msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.pm_GetCurrentDiagramms()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.pm_SetCurrentDiagramms(msInterfaces.ImsDiagrammsList)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.UpToParent()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.SwapParents()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.DoInvalidateDiagramm(msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.DoDiagrammAdded(msInterfaces.ImsDiagrammsList,msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msDiagrammsController.TmsDiagrammsController.CurrentDiagramms" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.CreatePrim(FMX.Objects.TPaintBox,FMX.ListBox.TComboBox,FMX.ListBox.TComboBox,FMX.StdCtrls.TButton,FMX.StdCtrls.TButton,FMX.StdCtrls.TButton,FMX.StdCtrls.TButton)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.Create(FMX.Objects.TPaintBox,FMX.ListBox.TComboBox,FMX.ListBox.TComboBox,FMX.StdCtrls.TButton,FMX.StdCtrls.TButton,FMX.StdCtrls.TButton,FMX.StdCtrls.TButton)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.SaveToPng(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.DrawTo(FMX.Graphics.TCanvas)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.As_ImsDiagrammsHolder()" />
+      <reference referencedUin="delphi:l_ast:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_DiagrammStack">
+        <property name="sourceAnchor" value="481,539" />
+        <property name="targetAnchor" value="481,215" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_CurrentDiagramm">
+        <property name="sourceAnchor" value="591,540" />
+        <property name="targetAnchor" value="591,473" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msDiagrammsController.TmsDiagrammsController.CurrentDiagramms">
+        <property name="sourceAnchor" value="643,744" />
+        <property name="targetAnchor" value="1280,340" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_CurrentDiagramms">
+        <property name="sourceAnchor" value="643,749" />
+        <property name="targetAnchor" value="1280,345" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+      <reference referencedUin="delphi:l_impl:src:MindStream:msDiagrammsController.TmsDiagrammsController:msInterfaces.ImsDiagrammsController">
+        <property name="sourceAnchor" value="378,540" />
+        <property name="targetAnchor" value="378,151" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_DiagrammsRoot">
+        <property name="sourceAnchor" value="643,558" />
+        <property name="targetAnchor" value="1280,558" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
       </reference>
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsController.@unitclass">
@@ -659,7 +817,7 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msDiagramms.TmsDiagramms">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="940,-380,242,399" />
+      <property name="bounds" value="1280,620,191,203" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_field:src:MindStream:msDiagramms.TmsDiagramms.f_Diagramms" />
       <reference referencedUin="delphi:e_field:src:MindStream:msDiagramms.TmsDiagramms.f_CurrentDiagramm" />
@@ -699,6 +857,17 @@
         <property name="targetAnchor" value="876,-70" />
         <property name="bendpoints" value="" />
       </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramms.TmsDiagramms.CreatePrim()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramms.TmsDiagramms.DiagrammAdded(msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramms.TmsDiagramms.SaveTo(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramms.TmsDiagramms.LoadFrom(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramms.TmsDiagramms.Create()" />
+      <reference referencedUin="delphi:l_impl:src:MindStream:msDiagramms.TmsDiagramms:msInterfaces.ImsDiagramms">
+        <property name="sourceAnchor" value="1369,620" />
+        <property name="targetAnchor" value="1369,576" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
     </reference>
     <reference referencedUin="design:view:::27msvmpua56g2yzvl_v">
       <property name="$hidden" value="True" />
@@ -710,7 +879,7 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msMover.TmsMover">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="0,780,189,161" />
+      <property name="bounds" value="1620,740,189,176" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msMover.TmsMover.DoDrawTo(msShape.TmsDrawContext)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msMover.TmsMover.StrokeDash()" />
@@ -729,8 +898,8 @@
       <reference referencedUin="delphi:e_method:src:MindStream:msMover.TmsMover.IsNeedsSecondClick()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msMover.TmsMover.EndTo(msShape.TmsMakeShapeContext)" />
       <reference referencedUin="delphi:l_ast:src:MindStream:msMover.TmsMover.f_Moving">
-        <property name="sourceAnchor" value="156,780" />
-        <property name="targetAnchor" value="252,656" />
+        <property name="sourceAnchor" value="1724,916" />
+        <property name="targetAnchor" value="1724,1320" />
         <property name="bendpoints" value="" />
         <property name="bounds_setted_by_user" value="True" />
       </reference>
@@ -738,10 +907,18 @@
       <reference referencedUin="delphi:e_method:src:MindStream:msMover.TmsMover.CreateInner(System.Types.TPointF,msShape.ImsShape)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msMover.TmsMover.Create(msShape.TmsMakeShapeContext)" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msMover.TmsMover:msTool.TmsTool">
-        <property name="sourceAnchor" value="189,920" />
-        <property name="targetAnchor" value="320,920" />
+        <property name="sourceAnchor" value="1763,740" />
+        <property name="targetAnchor" value="1988,339" />
         <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
       </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msMover.TmsMover.DoDrawTo(msInterfaces.TmsDrawContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msMover.TmsMover.CreateInner(System.Types.TPointF,msInterfaces.ImsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msMover.TmsMover.Create(msInterfaces.TmsMakeShapeContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msMover.TmsMover.EndTo(msInterfaces.TmsMakeShapeContext)" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msMover.TmsMover.FFinishPoint" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msMover.TmsMover.FinishPoint" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msMover.TmsMover.ButtonShape(System.Types.TPointF)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msShape.TmsInterfacedNonRefcounted">
       <property name="$shortcutReference" value="true" />
@@ -815,29 +992,32 @@
     <reference referencedUin="design:view:::ihytdko74aj_v">
       <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1380,100,159,121" />
+      <property name="bounds" value="1380,100,160,121" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_class:src:MindStream:msTriangleDirectionRight.@unitclass" />
       <reference referencedUin="delphi:e_class:src:MindStream:msTriangleDirectionRight.TmsTriangleDirectionRight" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msTriangleDirectionRight.TmsTriangleDirectionRight">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="0,1200,316,99" />
+      <property name="bounds" value="2300,1080,316,99" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msTriangleDirectionRight.TmsTriangleDirectionRight.Polygon()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msTriangleDirectionRight.TmsTriangleDirectionRight.TransformDrawOptionsContext(ref@msShape.TmsDrawOptionsContext)" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msTriangleDirectionRight.TmsTriangleDirectionRight:msTriangle.TmsTriangle">
-        <property name="sourceAnchor" value="93,1200" />
-        <property name="targetAnchor" value="93,1124" />
+        <property name="sourceAnchor" value="2548,1080" />
+        <property name="targetAnchor" value="2548,979" />
         <property name="bendpoints" value="" />
       </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msTriangleDirectionRight.TmsTriangleDirectionRight.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
     </reference>
     <reference referencedUin="design:view:::svgge0p9bpt_v">
       <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="190,204,133,121" />
+      <property name="bounds" value="190,204,133,138" />
       <reference referencedUin="delphi:e_class:src:MindStream:u_fmGUITestRunner.@unitclass" />
       <reference referencedUin="delphi:e_class:src:MindStream:u_fmGUITestRunner.TfmGUITestRunner" />
+      <reference referencedUin="delphi:e_class:src:MindStream:u_fmGUITestRunner.TDoSomethingWithNode" />
+      <reference referencedUin="delphi:e_class:src:MindStream:u_fmGUITestRunner.TTestNode" />
     </reference>
     <reference referencedUin="design:view:::742u540dyip_v">
       <property name="$hidden" value="True" />
@@ -852,26 +1032,6 @@
       <property name="bounds" value="397,206,114,121" />
       <reference referencedUin="delphi:e_class:src:MindStream:TestMsRectangle.@unitclass" />
       <reference referencedUin="delphi:e_class:src:MindStream:TestMsRectangle.TestTmsRectangle" />
-    </reference>
-    <reference referencedUin="design:view:::c50fsg4xqdq_v">
-      <property name="$hidden" value="True" />
-      <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="324,374,162,138" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsParametrizedShapeTestSuite" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsDiagrammCheck" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsShapeTestPrim" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TestTmsSerializeControllerPrim" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsFileLambda" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsParametrizedShapeTest" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsShapeClassCheck" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.RmsParametrizedShapeTest" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.@unitclass" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsShapeTestContext" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TestTmsSerializeController" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsShapeTest" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.RmsShapeTest" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsDiagrammTest" />
-      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsCustomShapeTest" />
     </reference>
     <reference referencedUin="design:view:::l64y58l64vs_v">
       <property name="$hidden" value="True" />
@@ -910,7 +1070,7 @@
     </reference>
     <reference referencedUin="design:view:::8r7m54tqh2m_v">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="20,2000,124,42" />
+      <property name="bounds" value="420,2400,124,42" />
       <property name="location_set_by_user" value="True" />
     </reference>
     <reference referencedUin="design:view:::hrpzjwv8qrp_v">
@@ -936,16 +1096,6 @@
       <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammMarshal.TClassToSerialize" />
       <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammMarshal.TmsMarshal" />
     </reference>
-    <reference referencedUin="design:view:::4ugs51tno01uvlcg_v">
-      <property name="$hidden" value="True" />
-      <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="40,1580,168,121" />
-      <property name="location_set_by_user" value="True" />
-      <reference referencedUin="delphi:e_class:src:MindStream:msWatchedObjectInstance.@unitclass" />
-      <reference referencedUin="delphi:e_class:src:MindStream:msWatchedObjectInstance.TmsWatchedObject" />
-      <reference referencedUin="delphi:e_class:src:MindStream:msWatchedObjectInstance.TmsWatchedObjectInstance" />
-      <reference referencedUin="delphi:e_class:src:MindStream:msWatchedObjectInstance.TmsWatchedObjectParent" />
-    </reference>
     <reference referencedUin="design:view:::hypwv1wotabpt4if_v">
       <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
@@ -969,25 +1119,19 @@
       <reference referencedUin="delphi:e_class:src:MindStream:msTool.@unitclass" />
       <reference referencedUin="delphi:e_class:src:MindStream:msTool.TmsTool" />
     </reference>
-    <reference referencedUin="design:view:::eqrgad5txei4667s_v">
-      <property name="$hidden" value="True" />
-      <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1300,1120,178,121" />
-      <property name="location_set_by_user" value="True" />
-      <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedNonRefcounted.@unitclass" />
-      <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedNonRefcounted.TmsInterfacedNonRefcounted" />
-    </reference>
     <reference referencedUin="design:view:::wurees5msfrkit0q_v">
       <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="200,1560,138,119" />
+      <property name="bounds" value="200,1560,138,121" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_class:src:MindStream:msSerializeInterfaces.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msSerializeInterfaces.ImsPersistent" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msSerializeInterfaces.ImsObjectWrap" />
     </reference>
     <reference referencedUin="design:view:::x798g24xah6uw3oi_v">
       <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="720,1640,199,121" />
+      <property name="bounds" value="720,1640,199,102" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_class:src:MindStream:msParametrizedShapeTestSuite.TmsParametrizedShapeTestSuite" />
       <reference referencedUin="delphi:e_class:src:MindStream:msParametrizedShapeTestSuite.TmsDiagrammsTest" />
@@ -1005,11 +1149,13 @@
     <reference referencedUin="design:view:::twprgt2pxjrakrdm_v">
       <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="501,1107,154,121" />
+      <property name="bounds" value="501,1107,155,121" />
       <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedRefcounted.TmsInterfacedRefcounted" />
       <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedRefcounted.TmsWatchedObjectParent" />
       <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedRefcounted.TmsWatchedObject" />
       <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedRefcounted.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedRefcounted.TmsObjectWrapParent" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedRefcounted.TmsObjectWrap" />
     </reference>
     <reference referencedUin="design:view:::4ucbxe3z6ljq0b2s_v">
       <property name="$hidden" value="True" />
@@ -1024,11 +1170,12 @@
     <reference referencedUin="design:view:::jiha57zpnmarsvxt_v">
       <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="260,2320,100,121" />
+      <property name="bounds" value="260,2320,100,138" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_class:src:MindStream:msInvalidators.@unitclass" />
       <reference referencedUin="delphi:e_class:src:MindStream:msInvalidators.TmsInvalidatorsList" />
       <reference referencedUin="delphi:e_class:src:MindStream:msInvalidators.TmsInvalidators" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInvalidators.TmsInvalidatorLambda" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedNonRefcounted.TmsInterfacedNonRefcounted">
       <property name="$hidden" value="True" />
@@ -1057,29 +1204,32 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msTool.TmsTool">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="320,900,110,84" />
+      <property name="bounds" value="1940,240,157,99" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msTool.TmsTool.IsTool()" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msTool.TmsTool:msShape.TmsShape">
-        <property name="sourceAnchor" value="430,942" />
-        <property name="targetAnchor" value="626,942" />
+        <property name="sourceAnchor" value="2097,282" />
+        <property name="targetAnchor" value="2620,282" />
         <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
       </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msTool.TmsTool.ButtonShape(System.Types.TPointF)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msRedRectangle.TmsRedRectangle">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="340,1400,222,84" />
+      <property name="bounds" value="3680,1060,223,84" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msRedRectangle.TmsRedRectangle.TransformDrawOptionsContext(ref@msShape.TmsDrawOptionsContext)" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msRedRectangle.TmsRedRectangle:msRectangle.TmsRectangle">
-        <property name="sourceAnchor" value="521,1400" />
-        <property name="targetAnchor" value="668,1313" />
+        <property name="sourceAnchor" value="3793,1060" />
+        <property name="targetAnchor" value="3793,986" />
         <property name="bendpoints" value="" />
       </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msRedRectangle.TmsRedRectangle.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msInvalidators.TmsInvalidators">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="20,1700,206,146" />
+      <property name="bounds" value="2340,1840,206,176" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_field:src:MindStream:msInvalidators.TmsInvalidators.f_Subscribers" />
       <reference referencedUin="delphi:e_method:src:MindStream:msInvalidators.TmsInvalidators.Destroy()" />
@@ -1087,26 +1237,33 @@
       <reference referencedUin="delphi:e_method:src:MindStream:msInvalidators.TmsInvalidators.Subscribe(msDiagramm.ImsIvalidator)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msInvalidators.TmsInvalidators.UnSubscribe(msDiagramm.ImsIvalidator)" />
       <reference referencedUin="delphi:l_ast:src:MindStream:msInvalidators.TmsInvalidators.f_Subscribers">
-        <property name="sourceAnchor" value="123,1700" />
-        <property name="targetAnchor" value="123,1636" />
+        <property name="sourceAnchor" value="2443,1840" />
+        <property name="targetAnchor" value="2443,1796" />
         <property name="bendpoints" value="" />
       </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msInvalidators.TmsInvalidators.DoItems(msInvalidators.TmsInvalidatorLambda)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInvalidators.TmsInvalidators.InvalidateDiagramm(msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInvalidators.TmsInvalidators.DiagrammAdded(msInterfaces.ImsDiagrammsList,msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInvalidators.TmsInvalidators.Subscribe(msInterfaces.ImsIvalidator)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInvalidators.TmsInvalidators.UnSubscribe(msInterfaces.ImsIvalidator)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msInvalidators.TmsInvalidatorsList">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="20,1600,213,36" />
+      <property name="bounds" value="2340,1760,214,36" />
       <property name="location_set_by_user" value="True" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msGreenRectangle.TmsGreenRectangle">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="340,1260,247,84" />
+      <property name="bounds" value="4040,980,247,84" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msGreenRectangle.TmsGreenRectangle.TransformDrawOptionsContext(ref@msShape.TmsDrawOptionsContext)" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msGreenRectangle.TmsGreenRectangle:msRectangle.TmsRectangle">
-        <property name="sourceAnchor" value="587,1299" />
-        <property name="targetAnchor" value="668,1299" />
+        <property name="sourceAnchor" value="4040,983" />
+        <property name="targetAnchor" value="3885,983" />
         <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
       </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msGreenRectangle.TmsGreenRectangle.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedRefcounted.@unitclass">
       <property name="$shortcutReference" value="true" />
@@ -1114,7 +1271,7 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedRefcounted.TmsWatchedObject">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="640,520,271,128" />
+      <property name="bounds" value="1266,1639,271,113" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msInterfacedRefcounted.TmsWatchedObject.NewInstance()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msInterfacedRefcounted.TmsWatchedObject.FreeInstance()" />
@@ -1125,25 +1282,22 @@
         <property name="bendpoints" value="" />
       </reference>
     </reference>
-    <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedRefcounted.TmsWatchedObjectParent">
-      <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="640,440,271,36" />
-      <property name="location_set_by_user" value="True" />
-    </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedRefcounted.TmsInterfacedRefcounted">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="622,700,306,84" />
+      <property name="bounds" value="1248,1819,306,99" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msInterfacedRefcounted.TmsInterfacedRefcounted.NewInstance()" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msInterfacedRefcounted.TmsInterfacedRefcounted:msInterfacedRefcounted.TmsWatchedObject">
-        <property name="sourceAnchor" value="775,700" />
-        <property name="targetAnchor" value="775,648" />
+        <property name="sourceAnchor" value="1401,1819" />
+        <property name="targetAnchor" value="1401,1752" />
         <property name="bendpoints" value="" />
       </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfacedRefcounted.TmsInterfacedRefcounted.IsClassTypeNamedAs(System.string)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msCoreObjects.TmsClassInstanceCount">
+      <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1200,1860,246,160" />
+      <property name="bounds" value="-240,1400,247,85" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_field:src:MindStream:msCoreObjects.TmsClassInstanceCount.rCount" />
       <reference referencedUin="delphi:e_field:src:MindStream:msCoreObjects.TmsClassInstanceCount.rMaxCount" />
@@ -1157,7 +1311,7 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msCoreObjects.TmsObjectsWatcher">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1200,1860,266,191" />
+      <property name="bounds" value="3606,1840,266,191" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_field:src:MindStream:msCoreObjects.TmsObjectsWatcher.f_ObjectsCreatedCount" />
       <reference referencedUin="delphi:e_field:src:MindStream:msCoreObjects.TmsObjectsWatcher.f_ObjectsCreated" />
@@ -1168,24 +1322,26 @@
       <reference referencedUin="delphi:e_method:src:MindStream:msCoreObjects.TmsObjectsWatcher.ObjectDestroyed(System.TObject)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msCoreObjects.TmsObjectsWatcher.Destroy()" />
       <reference referencedUin="delphi:l_ast:src:MindStream:msCoreObjects.TmsObjectsWatcher.f_DefferedObjects">
-        <property name="sourceAnchor" value="1423,1860" />
-        <property name="targetAnchor" value="1423,1758" />
+        <property name="sourceAnchor" value="3739,2031" />
+        <property name="targetAnchor" value="3739,2101" />
         <property name="bendpoints" value="" />
       </reference>
       <reference referencedUin="delphi:l_ast:src:MindStream:msCoreObjects.TmsObjectsWatcher.f_ObjectsCreated">
-        <property name="sourceAnchor" value="1333,1860" />
-        <property name="targetAnchor" value="1333,1596" />
+        <property name="sourceAnchor" value="3739,1840" />
+        <property name="targetAnchor" value="3739,1776" />
         <property name="bendpoints" value="" />
       </reference>
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msCoreObjects.TmsLogLambda">
+      <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="940,1560,199,36" />
+      <property name="bounds" value="3620,160,199,36" />
       <property name="location_set_by_user" value="True" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msCoreObjects.TmsLog">
+      <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1160,1660,153,146" />
+      <property name="bounds" value="-240,2200,153,71" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_field:src:MindStream:msCoreObjects.TmsLog.f_FS" />
       <reference referencedUin="delphi:e_method:src:MindStream:msCoreObjects.TmsLog.Log(System.string,msCoreObjects.TmsLogLambda)" />
@@ -1195,13 +1351,13 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msCoreObjects.TmsDefferedObjects">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1380,1660,252,98" />
+      <property name="bounds" value="3613,2101,252,98" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msCoreObjects.TmsDefferedObjects.Destroy()" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msCoreObjects.TmsClassInstanceCountList">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="1180,1560,439,36" />
+      <property name="bounds" value="3520,1740,439,36" />
       <property name="location_set_by_user" value="True" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msSerializeInterfaces.@unitclass">
@@ -1210,20 +1366,15 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammMarshal.TmsMarshal">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="338,1807,210,69" />
+      <property name="bounds" value="1800,2260,210,69" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammMarshal.TmsMarshal.Serialize(System.string,msDiagramm.TmsDiagramm)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammMarshal.TmsMarshal.DeSerialize(System.string,msDiagramm.TmsDiagramm)" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msDiagrammMarshal.TmsMarshal:msMarshalPrim.TmsMarshalPrim">
-        <property name="sourceAnchor" value="442,1807" />
-        <property name="targetAnchor" value="442,1746" />
+        <property name="sourceAnchor" value="1949,2260" />
+        <property name="targetAnchor" value="2060,2176" />
         <property name="bendpoints" value="" />
       </reference>
-    </reference>
-    <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammMarshal.TClassToSerialize">
-      <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="680,1560,207,36" />
-      <property name="location_set_by_user" value="True" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammMarshal.@unitclass">
       <property name="$shortcutReference" value="true" />
@@ -1231,11 +1382,11 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammMarshal.TmsDiagrammMarshal">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="318,1927,269,67" />
+      <property name="bounds" value="1770,2380,270,67" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msDiagrammMarshal.TmsDiagrammMarshal:msDiagrammMarshal.TmsMarshal">
-        <property name="sourceAnchor" value="443,1927" />
-        <property name="targetAnchor" value="443,1876" />
+        <property name="sourceAnchor" value="1905,2380" />
+        <property name="targetAnchor" value="1905,2329" />
         <property name="bendpoints" value="" />
       </reference>
     </reference>
@@ -1245,40 +1396,36 @@
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsMarshal.TmsMarshal">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="680,1900,217,69" />
+      <property name="bounds" value="2340,2260,217,69" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsMarshal.TmsMarshal.Serialize(System.string,msDiagramms.TmsDiagramms)" />
       <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsMarshal.TmsMarshal.DeSerialize(System.string,msDiagramms.TmsDiagramms)" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msDiagrammsMarshal.TmsMarshal:msMarshalPrim.TmsMarshalPrim">
-        <property name="sourceAnchor" value="743,1900" />
-        <property name="targetAnchor" value="538,1746" />
+        <property name="sourceAnchor" value="2398,2260" />
+        <property name="targetAnchor" value="2264,2168" />
         <property name="bendpoints" value="" />
       </reference>
     </reference>
-    <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsMarshal.TClassToSerialize">
-      <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="680,1640,213,36" />
-      <property name="location_set_by_user" value="True" />
-    </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsMarshal.TmsDiagrammsMarshal">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="640,1740,282,67" />
+      <property name="bounds" value="2307,2380,282,67" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:l_gnt:src:MindStream:msDiagrammsMarshal.TmsDiagrammsMarshal:msDiagrammsMarshal.TmsMarshal">
-        <property name="sourceAnchor" value="788,1807" />
-        <property name="targetAnchor" value="788,1900" />
+        <property name="sourceAnchor" value="2448,2380" />
+        <property name="targetAnchor" value="2448,2329" />
         <property name="bendpoints" value="" />
       </reference>
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msMarshalPrim.TmsMarshalPrim">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="340,1600,204,146" />
+      <property name="bounds" value="2060,2020,204,161" />
       <property name="location_set_by_user" value="True" />
       <reference referencedUin="delphi:e_field:src:MindStream:msMarshalPrim.TmsMarshalPrim.f_Marshal" />
       <reference referencedUin="delphi:e_field:src:MindStream:msMarshalPrim.TmsMarshalPrim.f_UnMarshal" />
       <reference referencedUin="delphi:e_method:src:MindStream:msMarshalPrim.TmsMarshalPrim.Destroy()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msMarshalPrim.TmsMarshalPrim.Marshal()" />
       <reference referencedUin="delphi:e_method:src:MindStream:msMarshalPrim.TmsMarshalPrim.UnMarshal()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msMarshalPrim.TmsMarshalPrim.Serialize(System.string,System.TObject)" />
     </reference>
     <reference referencedUin="delphi:e_class:src:MindStream:msWatchedObjectInstance.TmsWatchedObjectParent">
       <property name="$shortcutReference" value="true" />
@@ -1311,6 +1458,936 @@
     <reference referencedUin="delphi:e_class:src:MindStream:msWatchedObjectInstance.@unitclass">
       <property name="$shortcutReference" value="true" />
       <property name="bounds" value="980,1837,0,0" />
+    </reference>
+    <reference referencedUin="uml:package:MindStream:src:TestmsSerializeController">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="324,374,162,138" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsParametrizedShapeTestSuite" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsDiagrammCheck" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsShapeTestPrim" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TestTmsSerializeControllerPrim" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsFileLambda" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsParametrizedShapeTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsShapeClassCheck" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.RmsParametrizedShapeTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsShapeTestContext" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TestTmsSerializeController" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsShapeTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.RmsShapeTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsDiagrammTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsSerializeController.TmsCustomShapeTest" />
+    </reference>
+    <reference referencedUin="uml:package:MindStream:src:msWatchedObjectInstance">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="40,1580,168,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msWatchedObjectInstance.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msWatchedObjectInstance.TmsWatchedObject" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msWatchedObjectInstance.TmsWatchedObjectInstance" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msWatchedObjectInstance.TmsWatchedObjectParent" />
+    </reference>
+    <reference referencedUin="uml:package:MindStream:src:msInterfacedNonRefcounted">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1300,1120,178,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedNonRefcounted.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfacedNonRefcounted.TmsInterfacedNonRefcounted" />
+    </reference>
+    <reference referencedUin="design:view:::04jv5oa1nts_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1300,2840,100,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msFormatter.TmsFormatter" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msFormatter.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::nru4qyvbztm_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,1400,101,121" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msUpToParent.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msUpToParent.TmsUpToParent" />
+    </reference>
+    <reference referencedUin="design:view:::itaqgbvy99q_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="121,180,123,121" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTestSuite.TmsParametrizedShapeTestSuite" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTestSuite.TmsDiagrammsTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTestSuite.TmsShapesTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTestSuite.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTestSuite.TmsDiagrammsToPNGTest" />
+    </reference>
+    <reference referencedUin="design:view:::lyx33meg0mt_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="340,-240,114,119" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msTestConstants.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::rtt3la4lx0f_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="440,-40,139,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsJsonFormatter.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestmsJsonFormatter.TestTmsSerializeController" />
+    </reference>
+    <reference referencedUin="design:view:::e2n6akwn9pj_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1360,2820,106,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeButton.TmsShapeButton" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeButton.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::pk18apt0ghs_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1168,2820,108,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msSwapParents.TmsSwapParents" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msSwapParents.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::nywme0d38di_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1360,2640,123,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammStack.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammStack.TmsDiagrammStack" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammStack.TmsCurrentDiagrammRec" />
+    </reference>
+    <reference referencedUin="design:view:::u197g6155si_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1168,2640,100,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msPicker.TmsPicker" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msPicker.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::j221pcz00am_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1300,2420,100,119" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msStreamUtils.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::0c98pvb7yim_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1133,2370,111,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeCreator.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeCreator.TmsShapeCreator" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeCreator.TmsShapeFriend" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeCreator.RmsShapeFriend" />
+    </reference>
+    <reference referencedUin="design:view:::ywjqtn538ai_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="987,2640,100,123" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsShapeByPt" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsShapesProvider" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsDiagrammsHolder" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsShapeCreator" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsShape" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.TmsMakeShapeContext" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.TmsEndShapeContext" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsDiagrammsController" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.TmsClickContext" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsDiagrammsList" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.TmsShapesEnumerator" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.TmsDrawContext" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsDiagramm" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.TmsDiagrammsEnumerator" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsIvalidator" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsShapesController" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.TmsDrawOptionsContext" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsDiagramms" />
+    </reference>
+    <reference referencedUin="design:view:::701toeiwtqi_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="949,1,146,121" />
+      <reference referencedUin="delphi:e_class:src:MindStream:ForToolbarShapesTest.TForToolbarShapesTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:ForToolbarShapesTest.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::7702nykzxyr_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="949,171,115,121" />
+      <reference referencedUin="delphi:e_class:src:MindStream:UtilityShapesTest.TUtilityShapesTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:UtilityShapesTest.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::wibufptbdqi_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,1100,100,138" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTest.TmsShapeClassCheck" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTest.TmsShapeTestContext" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTest.RmsShapeTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTest.TmsDiagrammCheck" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTest.TmsDiagrammSaveTo" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTest.TmsShapeTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTest.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTest.TmsCustomShapeTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTest.TmsDiagrammTest" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeTest.TmsShapeTestPrim" />
+    </reference>
+    <reference referencedUin="design:view:::zwjxk659flg_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="820,2200,107,138" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msUtilityShapes.RmsShapeList" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msUtilityShapes.TmsUtilityShapes" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msUtilityShapes.TmsShapeClassLambda" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msUtilityShapes.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::7z5kd25l18t_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2040,1880,111,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestSaveToPNG.TTestSaveToPNG" />
+      <reference referencedUin="delphi:e_class:src:MindStream:TestSaveToPNG.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::9eph2mpb1of_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1480,2040,114,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeMarshal.TClassToSerialize" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeMarshal.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeMarshal.TmsShapeMarshal" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeMarshal.TmsMarshal" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsItemsHolder">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2600,1900,243,282" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagramm.TmsItemsHolder.f_Items" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsItemsHolder.pm_GetItems()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsItemsHolder.pm_SetItems(System.Generics.Collections.TList&lt;msDiagramm.TmsItem&gt;)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsItemsHolder.RegisterItemsLike(msDiagramm.TmsRttiFieldLambda)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsItemsHolder.ItemsCount()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsItemsHolder.Create()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsItemsHolder.Destroy()" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msDiagramm.TmsItemsHolder.Items" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsItemsHolder.Assign(msDiagramm.TmsItemsHolder)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsItemsHolder.RegisterInMarshal(Data.DBXJSONReflect.TJSONMarshal)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsItemsHolder.RegisterInUnMarshal(Data.DBXJSONReflect.TJSONUnMarshal)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsItemsHolder.GetEnumerator()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsItemsHolder.IndexOf(msInterfaces.ImsShape)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msDiagramm.TmsItemsHolder:msDiagramm.TmsItemsHolderParent">
+        <property name="sourceAnchor" value="2721,1900" />
+        <property name="targetAnchor" value="2721,1796" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msDiagramm.TmsItemsHolder.Items">
+        <property name="sourceAnchor" value="2793,1900" />
+        <property name="targetAnchor" value="2793,1869" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msDiagramm.TmsItemsHolder.f_Items">
+        <property name="sourceAnchor" value="2801,1900" />
+        <property name="targetAnchor" value="2801,1869" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsPersistent">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2080,1840,176,113" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsPersistent.SaveTo(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsPersistent.LoadFrom(System.string)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msDiagramm.TmsPersistent:msDiagramm.TmsPersistentParent">
+        <property name="sourceAnchor" value="2168,1840" />
+        <property name="targetAnchor" value="2168,1796" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsShapesProvider">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1320,940,210,98" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsShapesProvider.ShapesForToolbarToList(System.Classes.TStrings)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msDiagramm.TmsShapesProvider:msDiagramm.TmsShapesProviderParent">
+        <property name="sourceAnchor" value="1425,940" />
+        <property name="targetAnchor" value="1425,896" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsRttiFieldLambda">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="3620,40,213,36" />
+      <property name="location_set_by_user" value="True" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsPersistentParent">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2060,1760,233,36" />
+      <property name="location_set_by_user" value="True" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsItemsHolderParent">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2600,1760,298,36" />
+      <property name="location_set_by_user" value="True" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsShapesProviderParent">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1300,860,255,36" />
+      <property name="location_set_by_user" value="True" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsItemsList">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2760,1820,154,49" />
+      <property name="location_set_by_user" value="True" />
+    </reference>
+    <reference referencedUin="design:view:::240o4lbbjdp_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2620,1780,109,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShape.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShape.RmsShapeFriend" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShape.RmsPaletteShape" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShape.TmsShapeFriend" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShape.TmsPaletteShape" />
+    </reference>
+    <reference referencedUin="design:view:::bqltdqwyzfl_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1520,1860,120,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeRemover.TmsShapeRemover" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msShapeRemover.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::m3105x8vcdj_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="995,1970,173,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msCompletedShapeCreator.TmsCompletedShapeCreator" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msCompletedShapeCreator.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::7cve50qo6ci_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2400,1360,152,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShapeCreator.TmsPaletteShapeCreator" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShapeCreator.TmsPaletteShapeFriend" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShapeCreator.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShapeCreator.RmsPaletteShapeFriend" />
+    </reference>
+    <reference referencedUin="design:view:::s2l2plocxef_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1940,1900,119,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msNullClickShape.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msNullClickShape.TmsNullClickShape" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShape.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="3094,1838,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShape.TmsPaletteShape">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1980,1280,214,191" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msPaletteShape.TmsPaletteShape.f_OtherShapeClass" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msPaletteShape.TmsPaletteShape.CreateInner(msShape.RmsShape,System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msPaletteShape.TmsPaletteShape.Create(msShape.RmsShape,msInterfaces.TmsMakeShapeContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msPaletteShape.TmsPaletteShape.IsClassTypeNamedAs(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msPaletteShape.TmsPaletteShape.NullClick(msInterfaces.ImsDiagrammsHolder)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msPaletteShape.TmsPaletteShape.DrawTo(msInterfaces.TmsDrawContext)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msPaletteShape.TmsPaletteShape:msShape.TmsShape">
+        <property name="sourceAnchor" value="2149,1280" />
+        <property name="targetAnchor" value="2620,561" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msPaletteShape.TmsPaletteShape.f_OtherShapeClass">
+        <property name="sourceAnchor" value="2009,1471" />
+        <property name="targetAnchor" value="1680,1879" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+      <reference referencedUin="delphi:e_field:src:MindStream:msPaletteShape.TmsPaletteShape.f_Proxy" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msPaletteShape.TmsPaletteShape.DrawBounds()" />
+      <reference referencedUin="delphi:l_ast:src:MindStream:msPaletteShape.TmsPaletteShape.f_Proxy">
+        <property name="sourceAnchor" value="1980,1395" />
+        <property name="targetAnchor" value="1829,1395" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msPaletteShape.TmsPaletteShape.GetDrawBounds()" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShape.TmsShapeFriend">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2320,320,211,67" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msPaletteShape.TmsShapeFriend:msShape.TmsShape">
+        <property name="sourceAnchor" value="2531,353" />
+        <property name="targetAnchor" value="2620,353" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShapeCreator.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2450,1448,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShapeCreator.TmsPaletteShapeFriend">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1980,1540,294,67" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msPaletteShapeCreator.TmsPaletteShapeFriend:msPaletteShape.TmsPaletteShape">
+        <property name="sourceAnchor" value="2087,1540" />
+        <property name="targetAnchor" value="2087,1471" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msPaletteShapeCreator.TmsPaletteShapeCreator">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1246,2319,300,99" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msPaletteShapeCreator.TmsPaletteShapeCreator.CreateShape(msInterfaces.TmsMakeShapeContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msPaletteShapeCreator.TmsPaletteShapeCreator.ButtonSize()" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msPaletteShapeCreator.TmsPaletteShapeCreator:msCompletedShapeCreator.TmsCompletedShapeCreator">
+        <property name="sourceAnchor" value="1396,2319" />
+        <property name="targetAnchor" value="1396,2263" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msUpToParent.TmsUpToParent">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1860,660,198,99" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUpToParent.TmsUpToParent.DoNullClick(msInterfaces.ImsDiagrammsHolder)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msUpToParent.TmsUpToParent:msNullClickShape.TmsNullClickShape">
+        <property name="sourceAnchor" value="1989,660" />
+        <property name="targetAnchor" value="1989,579" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msUpToParent.TmsUpToParent.ButtonShape(System.Types.TPointF)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msNullClickShape.TmsNullClickShape">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1920,480,235,99" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msNullClickShape.TmsNullClickShape.IsNullClick()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msNullClickShape.TmsNullClickShape.Create(msInterfaces.TmsMakeShapeContext)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msNullClickShape.TmsNullClickShape:msTool.TmsTool">
+        <property name="sourceAnchor" value="1995,480" />
+        <property name="targetAnchor" value="1995,339" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msNullClickShape.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="404,674,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msShapeRemover.TmsShapeRemover">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2200,520,238,84" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShapeRemover.TmsShapeRemover.Create(msInterfaces.TmsMakeShapeContext)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msShapeRemover.TmsShapeRemover:msTool.TmsTool">
+        <property name="sourceAnchor" value="2270,520" />
+        <property name="targetAnchor" value="2072,339" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msShapeRemover.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2016,1718,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msShapeMarshal.TmsShapeMarshal">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2059,2380,225,67" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msShapeMarshal.TmsShapeMarshal:msShapeMarshal.TmsMarshal">
+        <property name="sourceAnchor" value="2171,2380" />
+        <property name="targetAnchor" value="2171,2329" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msShapeMarshal.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1780,1862,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msShapeMarshal.TmsMarshal">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2077,2260,188,69" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShapeMarshal.TmsMarshal.DeSerialize(System.string,msShape.TmsShape)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msShapeMarshal.TmsMarshal:msMarshalPrim.TmsMarshalPrim">
+        <property name="sourceAnchor" value="2170,2260" />
+        <property name="targetAnchor" value="2170,2181" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msCompletedShapeCreator.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1524,1841,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msCompletedShapeCreator.TmsCompletedShapeCreator">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1226,2179,344,84" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msCompletedShapeCreator.TmsCompletedShapeCreator.CreateShape(msInterfaces.TmsMakeShapeContext)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msCompletedShapeCreator.TmsCompletedShapeCreator:msShapeCreator.TmsShapeCreator">
+        <property name="sourceAnchor" value="1401,2179" />
+        <property name="targetAnchor" value="1401,2127" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msUtilityShapes.TmsUtilityShapes">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2963,2021,211,99" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUtilityShapes.TmsUtilityShapes.Instance()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUtilityShapes.TmsUtilityShapes.Register(msShape.RmsShape)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msUtilityShapes.TmsUtilityShapes:msUtilityShapes.TmsShapeClassListSingleton">
+        <property name="sourceAnchor" value="3068,2021" />
+        <property name="targetAnchor" value="3068,1958" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msUtilityShapes.RmsShapeList">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="3326,1790,155,63" />
+      <property name="location_set_by_user" value="True" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msUtilityShapes.TmsShapeClassLambda">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="3620,100,251,36" />
+      <property name="location_set_by_user" value="True" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msUtilityShapes.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1420,1966,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2949,1740,279,218" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.f_Registered" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.f_Instance" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.Create()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.Fini()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.pm_GetItems()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.Instance()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.First()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.Register(msShape.RmsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.Register(msShape.RmsShape[])" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.Destroy()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.GetEnumerator()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.IndexOf(msShape.RmsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.IterateShapes(msUtilityShapes.TmsShapeClassLambda)" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.Items" />
+      <reference referencedUin="delphi:l_ast:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.f_Registered">
+        <property name="sourceAnchor" value="3228,1821" />
+        <property name="targetAnchor" value="3326,1821" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.f_Instance">
+        <property name="sourceAnchor" value="3228,1950" />
+        <property name="targetAnchor" value="3220,1958" />
+        <property name="bendpoints" value="3261,1950,3261,1991,3220,1991" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msUtilityShapes.TmsShapeClassListSingleton.Items">
+        <property name="sourceAnchor" value="3228,1813" />
+        <property name="targetAnchor" value="3326,1813" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msShapeCreator.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1078,2176,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msShapeCreator.TmsShapeFriend">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2320,420,213,67" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msShapeCreator.TmsShapeFriend:msShape.TmsShape">
+        <property name="sourceAnchor" value="2533,453" />
+        <property name="targetAnchor" value="2620,453" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msShapeCreator.TmsShapeCreator">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1291,1979,220,148" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msShapeCreator.TmsShapeCreator.f_ShapeClass" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShapeCreator.TmsShapeCreator.CreatePrim(msShape.RmsShape)" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msShapeCreator.TmsShapeCreator.ShapeClass" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShapeCreator.TmsShapeCreator.CreateShape(msInterfaces.TmsMakeShapeContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShapeCreator.TmsShapeCreator.Create(msShape.RmsShape)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msShapeCreator.TmsShapeCreator:msInterfacedRefcounted.TmsInterfacedRefcounted">
+        <property name="sourceAnchor" value="1401,1979" />
+        <property name="targetAnchor" value="1401,1918" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msShapeCreator.TmsShapeCreator.f_ShapeClass">
+        <property name="sourceAnchor" value="1511,2022" />
+        <property name="targetAnchor" value="1631,1946" />
+        <property name="bendpoints" value="1587,2022,1631,1970" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msShapeCreator.TmsShapeCreator.ShapeClass">
+        <property name="sourceAnchor" value="1511,1985" />
+        <property name="targetAnchor" value="1586,1944" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+      <reference referencedUin="delphi:l_impl:src:MindStream:msShapeCreator.TmsShapeCreator:msInterfaces.ImsShapeCreator">
+        <property name="sourceAnchor" value="1291,2009" />
+        <property name="targetAnchor" value="598,2009" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msStreamUtils.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1678,2295,0,0" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msStreamUtils.@unitclass.msStripHeader(System.Classes.TStream,System.AnsiChar)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msStreamUtils.@unitclass.msCompareStreams(System.Classes.TStream,System.Classes.TStream,System.AnsiChar)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msStreamUtils.@unitclass.msCompareFiles(System.string,System.string,System.AnsiChar)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammStack.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1725,2582,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammStack.TmsDiagrammStack">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="400,180,338,36" />
+      <property name="location_set_by_user" value="True" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammStack.TmsCurrentDiagrammRec">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="880,240,276,130" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammStack.TmsCurrentDiagrammRec.rDiagramms" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammStack.TmsCurrentDiagrammRec.rDiagramm" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammStack.TmsCurrentDiagrammRec.Create(msInterfaces.ImsDiagrammsList,msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:l_ast:src:MindStream:msDiagrammStack.TmsCurrentDiagrammRec.rDiagramm">
+        <property name="sourceAnchor" value="880,305" />
+        <property name="targetAnchor" value="785,305" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msDiagrammStack.TmsCurrentDiagrammRec.rDiagramms">
+        <property name="sourceAnchor" value="1156,301" />
+        <property name="targetAnchor" value="1280,301" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msPicker.TmsPicker">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1660,460,157,99" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msPicker.TmsPicker.Create(msInterfaces.TmsMakeShapeContext)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msPicker.TmsPicker:msTool.TmsTool">
+        <property name="sourceAnchor" value="1799,460" />
+        <property name="targetAnchor" value="1954,339" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msPicker.TmsPicker.ButtonShape(System.Types.TPointF)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msPicker.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1522,2579,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msShapeButton.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1278,2608,0,0" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msShapeButton.@unitclass.cBorder" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msShapeButton.TmsShapeButton">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="926,1639,208,205" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msShapeButton.TmsShapeButton.f_Shape" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msShapeButton.TmsShapeButton.f_ShapeIndex" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msShapeButton.TmsShapeButton.f_Shapes" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msShapeButton.TmsShapeButton.f_Holder" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShapeButton.TmsShapeButton.ScaleShapeToButton()" />
+      <reference referencedUin="delphi:l_ast:src:MindStream:msShapeButton.TmsShapeButton.f_Holder">
+        <property name="sourceAnchor" value="926,1665" />
+        <property name="targetAnchor" value="618,1443" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msShapeButton.TmsShapeButton.f_Shape">
+        <property name="sourceAnchor" value="1134,1693" />
+        <property name="targetAnchor" value="1640,1463" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msShapeButton.TmsShapeButton.MyPaint(msShapeButton.TObject,msShapeButton.TCanvas,msShapeButton.TRectF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShapeButton.TmsShapeButton.MyClick(msShapeButton.TObject)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShapeButton.TmsShapeButton.Create(msShapeButton.TComponent,msShape.RmsShape,msShapeButton.TComboBox,System.Integer,System.Integer,msInterfaces.ImsDiagrammsHolder)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShapeButton.TmsShapeButton.MyPaint(System.TObject,FMX.Graphics.TCanvas,System.Types.TRectF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShapeButton.TmsShapeButton.MyClick(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msShapeButton.TmsShapeButton.Create(System.Classes.TComponent,msShape.RmsShape,FMX.ListBox.TComboBox,System.Integer,System.Integer,msInterfaces.ImsDiagrammsHolder)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msSwapParents.TmsSwapParents">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2100,640,212,99" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msSwapParents.TmsSwapParents.DoNullClick(msInterfaces.ImsDiagrammsHolder)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msSwapParents.TmsSwapParents:msNullClickShape.TmsNullClickShape">
+        <property name="sourceAnchor" value="2127,640" />
+        <property name="targetAnchor" value="2127,579" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msSwapParents.TmsSwapParents.ButtonShape(System.Types.TPointF)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msSwapParents.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1672,2773,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msFormatter.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1094,2494,0,0" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msFormatter.@unitclass.c_Tab" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msFormatter.@unitclass.c_CRLF" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.TmsMakeShapeContext">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="881,1280,250,145" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msInterfaces.TmsMakeShapeContext.rStartPoint" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msInterfaces.TmsMakeShapeContext.rShapesController" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msInterfaces.TmsMakeShapeContext.rDiagrammsHolder" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.TmsMakeShapeContext.Create(System.Types.TPointF,msInterfaces.ImsShapesController,msInterfaces.ImsDiagrammsHolder)" />
+      <reference referencedUin="delphi:l_ast:src:MindStream:msInterfaces.TmsMakeShapeContext.rShapesController">
+        <property name="sourceAnchor" value="1006,1280" />
+        <property name="targetAnchor" value="1006,1241" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msInterfaces.TmsMakeShapeContext.rDiagrammsHolder">
+        <property name="sourceAnchor" value="881,1362" />
+        <property name="targetAnchor" value="661,1362" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.TmsDrawContext">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="-240,1840,191,85" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msInterfaces.TmsDrawContext.rCanvas" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msInterfaces.TmsDrawContext.rMoving" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.TmsDrawContext.Create(FMX.Graphics.TCanvas)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsShapesController">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="900,1160,212,81" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsShapesController.RemoveShape(msInterfaces.ImsShape)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msInterfaces.ImsShapesController:msInterfaces.ImsShapeByPt">
+        <property name="sourceAnchor" value="1006,1160" />
+        <property name="targetAnchor" value="1006,1121" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsShapeByPt">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="918,1040,177,81" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsShapeByPt.ShapeByPt(System.Types.TPointF)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsDiagramm">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="540,240,245,233" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.Get_Name()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.Invalidate()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.ProcessClick(msInterfaces.TmsClickContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.Clear()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.DrawTo(FMX.Graphics.TCanvas)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.SaveToPng(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.AddShape(msInterfaces.ImsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.RemoveShape(msInterfaces.ImsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.GetEnumerator()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.ItemsCount()" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msInterfaces.ImsDiagramm.Name" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msInterfaces.ImsDiagramm:msInterfaces.ImsShapesProvider">
+        <property name="sourceAnchor" value="782,240" />
+        <property name="targetAnchor" value="892,135" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsDiagrammsList">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1280,160,266,203" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsList.GetEnumerator()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsList.IndexOf(msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsList.AddNewDiagramm()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsList.AddDiagramm(msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsList.SelectDiagramm(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsList.FirstDiagramm()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsList.DiagrammsForToolbarToList(System.Classes.TStrings)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsList.pm_GetCount()" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msInterfaces.ImsDiagrammsList.Count" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msInterfaces.ImsDiagrammsList:msInterfaces.ImsShapesProvider">
+        <property name="sourceAnchor" value="1280,211" />
+        <property name="targetAnchor" value="1044,124" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.TmsClickContext">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="386,1659,250,145" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msInterfaces.TmsClickContext.rShapeCreator" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msInterfaces.TmsClickContext.rClickPoint" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msInterfaces.TmsClickContext.rDiagrammsHolder" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.TmsClickContext.Create(msInterfaces.ImsShapeCreator,System.Types.TPointF,msInterfaces.ImsDiagrammsHolder)" />
+      <reference referencedUin="delphi:l_ast:src:MindStream:msInterfaces.TmsClickContext.rDiagrammsHolder">
+        <property name="sourceAnchor" value="511,1659" />
+        <property name="targetAnchor" value="511,1443" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msInterfaces.TmsClickContext.rShapeCreator">
+        <property name="sourceAnchor" value="502,1804" />
+        <property name="targetAnchor" value="502,1959" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsIvalidator">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1620,140,165,96" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsIvalidator.InvalidateDiagramm(msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsIvalidator.DiagrammAdded(msInterfaces.ImsDiagrammsList,msInterfaces.ImsDiagramm)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1641,2336,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsDiagrammsController">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="300,40,290,111" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsController.Clear()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsController.DrawTo(FMX.Graphics.TCanvas)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsController.As_ImsDiagrammsHolder()" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsShapesProvider">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="840,40,204,95" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsShapesProvider.ShapesForToolbarToList(System.Classes.TStrings)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsDiagrammsHolder">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="380,1300,281,143" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsHolder.UpToParent()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsHolder.SwapParents()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsHolder.pm_GetCurrentDiagramms()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsHolder.pm_SetCurrentDiagramms(msInterfaces.ImsDiagrammsList)" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msInterfaces.ImsDiagrammsHolder.CurrentDiagramms" />
+      <reference referencedUin="delphi:l_ast:src:MindStream:msInterfaces.ImsDiagrammsHolder.CurrentDiagramms">
+        <property name="sourceAnchor" value="577,1300" />
+        <property name="targetAnchor" value="1330,363" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsShapeCreator">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="406,1959,192,81" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsShapeCreator.CreateShape(msInterfaces.TmsMakeShapeContext)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.TmsDrawOptionsContext">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="-240,1620,235,85" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msInterfaces.TmsDrawOptionsContext.rFillColor" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msInterfaces.TmsDrawOptionsContext.rStrokeDash" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msInterfaces.TmsDrawOptionsContext.rStrokeColor" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msInterfaces.TmsDrawOptionsContext.rStrokeThickness" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.TmsDrawOptionsContext.Create(msInterfaces.TmsDrawContext)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsShape">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1640,1320,189,203" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsShape.DrawTo(msInterfaces.TmsDrawContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsShape.IsNeedsSecondClick()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsShape.EndTo(msInterfaces.TmsMakeShapeContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsShape.ContainsPt(System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsShape.MoveTo(System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsShape.NullClick(msInterfaces.ImsDiagrammsHolder)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsShape.pm_GetStartPoint()" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msInterfaces.ImsShape.StartPoint" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msInterfaces.ImsShape:msInterfaces.ImsDiagrammsList">
+        <property name="sourceAnchor" value="1706,1320" />
+        <property name="targetAnchor" value="1440,363" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsShape.DrawBounds()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsShape.Rotate(msInterfaces.TmsDrawContext,System.Single)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsDiagramms">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1280,480,178,96" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramms.Serialize()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramms.DeSerialize()" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msInterfaces.ImsDiagramms:msInterfaces.ImsDiagrammsList">
+        <property name="sourceAnchor" value="1369,480" />
+        <property name="targetAnchor" value="1369,363" />
+        <property name="bendpoints" value="" />
+        <property name="bounds_setted_by_user" value="True" />
+      </reference>
+    </reference>
+    <reference referencedUin="design:view:::x26csxgtxq_v">
+      <property name="$hidden" value="True" />
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="160,120,100,121" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msGreenCircle.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msGreenCircle.TmsGreenCircle" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msGreenCircle.TmsGreenCircle">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="2920,1180,198,99" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msGreenCircle.TmsGreenCircle.TransformDrawOptionsContext(ref@msInterfaces.TmsDrawOptionsContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msGreenCircle.TmsGreenCircle.IsForToolbar()" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msGreenCircle.TmsGreenCircle:msCircle.TmsCircle">
+        <property name="sourceAnchor" value="2943,1180" />
+        <property name="targetAnchor" value="2943,979" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msGreenCircle.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="716,287,0,0" />
+    </reference>
+    <reference referencedUin="design:view:::mowuel4cyn011xien_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,147,151" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msBlackTriangle.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:MindStream:msBlackTriangle.TmsBlackTriangle" />
     </reference>
   </view>
 </nodeSet>

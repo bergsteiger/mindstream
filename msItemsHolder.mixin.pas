@@ -20,14 +20,16 @@
  TmsRttiFieldLambda = reference to procedure (aField: TRttiField);
 
  TmsItemsList = TList<TmsItem>;
+ TmsItemsListEnumerator = TEnumerator<TmsItem>;
 
- TmsItemsHolder = class(TmsItemsHolderParent)
+ TmsItemsHolder = class abstract(TmsItemsHolderParent)
  private
   [JSONMarshalled(True)]
   f_Items : TmsItemsList;
   function pm_GetItems: TmsItemsList;
   procedure pm_SetItems(aValue: TmsItemsList);
   class procedure RegisterItemsLike(aLambda: TmsRttiFieldLambda);
+  function ItemsCount: Integer;
  public
   constructor Create;
   destructor Destroy; override;
@@ -35,6 +37,8 @@
   procedure Assign(anOther : TmsItemsHolder);
   class procedure RegisterInMarshal(aMarshal: TJSONMarshal);
   class procedure RegisterInUnMarshal(aMarshal: TJSONUnMarshal);
+  function GetEnumerator: TmsItemsListEnumerator;
+  function IndexOf(const anItem: TmsItem): Integer;
  end;//TmsItemsHolder
 
 {$Else TmsItemsHolder_intf}
@@ -121,6 +125,11 @@ begin
      l_Index: Integer;
     begin
      Assert(Field = l_FieldName);
+     if ((Data As TmsItemsHolder).Items.Count <= 0) then
+     begin
+      Result := nil;
+      Exit;
+     end;//Data As TmsItemsHolder).Items.Count <= 0
      SetLength(Result, (Data As TmsItemsHolder).Items.Count);
      l_Index := 0;
      for l_Item in (Data As TmsItemsHolder).Items do
@@ -132,6 +141,7 @@ begin
    );//aMarshal.RegisterConverter
   end
  );//RegisterItemsLike
+ aMarshal.RegisterJSONMarshalled(Self, 'FRefCount', false);
 end;
 
 class procedure TmsItemsHolder.RegisterInUnMarshal(aMarshal: TJSONUnMarshal);
@@ -164,6 +174,21 @@ begin
    );//aMarshal.RegisterReverter
   end
  );//RegisterItemsLike
+end;
+
+function TmsItemsHolder.GetEnumerator: TmsItemsListEnumerator;
+begin
+ Result := f_Items.GetEnumerator;
+end;
+
+function TmsItemsHolder.IndexOf(const anItem: TmsItem): Integer;
+begin
+ Result := Items.IndexOf(anItem);
+end;
+
+function TmsItemsHolder.ItemsCount: Integer;
+begin
+ Result := Items.Count;
 end;
 
 {$EndIf TmsItemsHolder_uses_impl}

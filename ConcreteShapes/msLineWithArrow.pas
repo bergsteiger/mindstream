@@ -1,4 +1,4 @@
-unit msLineWithArrow;
+﻿unit msLineWithArrow;
 
 interface
 
@@ -6,14 +6,18 @@ uses
  msShape,
  msLine,
  FMX.Graphics,
- System.Types
+ System.Types,
+ msInterfaces,
+ System.Math.Vectors
  ;
 
 type
  TmsLineWithArrow = class(TmsLine)
  protected
+  function GetFinishPointForDraw: TPointF; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetArrowAngleRotation : Single;
+  function GetDrawBounds: TRectF; override;
  end;//TmsLineWithArrow
 
 implementation
@@ -24,50 +28,62 @@ uses
  System.Math,
  System.UITypes,
  FMX.Types
- {$IF DEFined(VER270) OR DEFined(VER280)}
- ,
- System.Math.Vectors
- {$ENDIF}
  ;
 
 
 procedure TmsLineWithArrow.DoDrawTo(const aCtx: TmsDrawContext);
 var
- l_Proxy : TmsShape;
+ l_Proxy : ImsShape;
  l_OriginalMatrix: TMatrix;
  l_Matrix: TMatrix;
  l_Angle : Single;
- l_CenterPoint : TPointF;
-
- l_TextRect : TRectF;
+ l_CenterPoint,
+ l_LineFinishPoint : TPointF;
 begin
  inherited;
  if (StartPoint <> FinishPoint) then
  begin
   l_OriginalMatrix := aCtx.rCanvas.Matrix;
   try
-   l_Proxy := TmsSmallTriangle.CreateInner(FinishPoint);
+   l_LineFinishPoint := TPointF.Create(FinishPoint.X - TmsSmallTriangle.InitialHeight / 2,
+                                       FinishPoint.Y);
+   l_Proxy := TmsSmallTriangle.Create(l_LineFinishPoint);
    try
     // in Radian
     l_Angle := GetArrowAngleRotation;
 
-    // create a point around which will rotate
-    l_CenterPoint := TPointF.Create(FinishPoint.X, FinishPoint.Y);
+    l_CenterPoint := FinishPoint;
 
-    l_Matrix := l_OriginalMatrix;
+    l_Matrix := TMatrix.Identity;
+    // - СНИМАЕМ оригинальную матрицу, точнее берём ЕДИНИЧНУЮ матрицу
+    // https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
+
+    // - задаём точку, вокруг которой вертим
     l_Matrix := l_Matrix * TMatrix.CreateRotation(l_Angle);
+
+    // - задаём угол поворота
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
 
+    // - задаём начало координат
+    l_Matrix := l_Matrix * l_OriginalMatrix;
+
+    // - ПРИМЕНЯЕМ оригинальную матрицу
+    // Иначе например ОРИГИНАЛЬНЫЙ параллельный перенос - не будет работать.
+    // https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B0%D0%BB%D0%BB%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81
+
     aCtx.rCanvas.SetMatrix(l_Matrix);
+    // - применяем нашу "комплексную" матрицу
 
     l_Proxy.DrawTo(aCtx);
+    // - отрисовываем примитив с учётом матрицы преобразований
    finally
-    FreeAndNil(l_Proxy);
+    l_Proxy := nil;
    end;//try..finally
   finally
     aCtx.rCanvas.SetMatrix(l_OriginalMatrix);
-  end;
+  // - восстанавливаем ОРИГИНАЛЬНУЮ матрицу
+  end;//try..finally
  end;//(StartPoint <> FinishPoint)
 end;
 
@@ -79,37 +95,68 @@ var
  l_PointC : TPointF;
  l_Invert : SmallInt;
 begin
- // ������� ������� ��������� ����� ����� �������
+ // Формула расчета растояний между двумя точками
  l_X := (FinishPoint.X - StartPoint.X) * (FinishPoint.X - StartPoint.X);
- l_Y := (FinishPoint.Y - StartPoint.Y) * (FinishPoint.Y - StartPoint.Y);
+ l_Y := (FinishPoint.Y - StartPoint.Y) * (FinishPoint.Y - StartPoint.Y);
+
  l_CLength := sqrt( l_X + l_Y);
 
  l_PointC := TPointF.Create(FinishPoint.X, StartPoint.Y);
 
- // ������� ������� ��������� ����� ����� �������
- l_X := (l_PointC.X - StartPoint.X) * (l_PointC.X - StartPoint.X); l_Y := (l_PointC.Y - StartPoint.Y) * (l_PointC.Y - StartPoint.Y);
+ // Формула расчета растояний между двумя точками
+ l_X := (l_PointC.X - StartPoint.X) * (l_PointC.X - StartPoint.X);
+ l_Y := (l_PointC.Y - StartPoint.Y) * (l_PointC.Y - StartPoint.Y);
+
  l_ALength := sqrt( l_X + l_Y);
 
  // In Radian
  l_AlphaAngle := ArcSin(l_ALength / l_CLength);
 
- l_RotationAngle := 0;
  l_Invert := 1;
 
- if FinishPoint.X > StartPoint.X then
+ if (FinishPoint.X > StartPoint.X) then
  begin
   l_RotationAngle := Pi / 2 * 3;
   if FinishPoint.Y > StartPoint.Y then
    l_Invert := -1;
- end
+ end//FinishPoint.X > StartPoint.X
  else
  begin
   l_RotationAngle := Pi / 2;
   if FinishPoint.Y < StartPoint.Y then
    l_Invert := -1;
- end;
+ end;//FinishPoint.X > StartPoint.X
 
  Result := l_Invert * (l_AlphaAngle + l_RotationAngle);
+end;
+
+function TmsLineWithArrow.GetDrawBounds: TRectF;
+begin
+ Result := inherited GetDrawBounds;
+ if SameValue(Result.Left, Result.Right) then
+ begin
+  Result.Right := Result.Left + TmsSmallTriangle.InitialHeight;
+  Result.Left := Result.Left - TmsSmallTriangle.InitialHeight;
+ end;//SameValue(Result.Left, Result.Right)
+ if SameValue(Result.Top, Result.Bottom) then
+ begin
+  Result.Bottom := Result.Top + TmsSmallTriangle.InitialHeight;
+  Result.Top := Result.Top - TmsSmallTriangle.InitialHeight;
+ end;//SameValue(Result.Top, Result.Bottom)
+end;
+
+function TmsLineWithArrow.GetFinishPointForDraw: TPointF;
+var
+ l_Angle : Single;
+begin
+ l_Angle := GetArrowAngleRotation;
+ Result := TPointF.Create(FinishPoint.X - TmsSmallTriangle.InitialHeight * Cos(l_Angle),
+                          FinishPoint.Y - TmsSmallTriangle.InitialHeight * Sin(l_Angle));
+ // Вот тут, по идее, надо возвращать координату середины стороны,
+ //  через которую прходит линия.
+ // Сделать я это не смог, потому что не знаю как правильно после поворота треугольника
+ // получить новые координаты вершин.
+ //Result := inherited GetFinishPointForDraw;
 end;
 
 end.

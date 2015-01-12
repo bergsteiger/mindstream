@@ -5,7 +5,8 @@
 {$Define TmsWatchedObject_uses_intf}
 
 // uses
-
+ {$Include msObjectWrap.mixin.pas}
+ ,
  msCoreObjects
 
 {$Else TmsWatchedObject_uses_intf}
@@ -15,14 +16,15 @@
 
 {$Define TmsWatchedObject}
 
- TmsWatchedObject = class abstract(TmsWatchedObjectParent)
+ TmsObjectWrapParent = TmsWatchedObjectParent;
+ {$Include msObjectWrap.mixin.pas}
+ TmsWatchedObject = class abstract(TmsObjectWrap)
  // - Класс, который умеет контроллировать создание/уничтожение своих экземпляров
  public
   class function NewInstance: TObject; override;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
   procedure FreeInstance; override;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
-  function toObject: TObject;
  end;//TmsWatchedObject
 
 {$Else TmsWatchedObject}
@@ -32,11 +34,14 @@
 {$IfNDef TmsWatchedObject_uses_impl}
 
 // uses
+ {$Include msObjectWrap.mixin.pas}
  SysUtils
 
 {$Define TmsWatchedObject_uses_impl}
 
 {$Else TmsWatchedObject_uses_impl}
+
+{$Include msObjectWrap.mixin.pas}
 
 // TmsWatchedObject
 
@@ -48,11 +53,6 @@ end;
 procedure TmsWatchedObject.FreeInstance;
 begin
  TmsObjectsWatcher.DestroyObject(Self);
-end;
-
-function TmsWatchedObject.toObject: TObject;
-begin
- Result := Self;
 end;
 
 {$EndIf TmsWatchedObject_uses_impl}

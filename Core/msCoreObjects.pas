@@ -1,4 +1,4 @@
-unit msCoreObjects;
+п»їunit msCoreObjects;
 
 interface
 
@@ -35,15 +35,15 @@ type
  // ms-help://embarcadero.rs_xe7/libraries/System.Generics.Collections.TDictionary.html
 
  TmsDefferedObjects = class(TList<TObject>)
- // - список отложенных объектов
+ // - СЃРїРёСЃРѕРє РѕС‚Р»РѕР¶РµРЅРЅС‹С… РѕР±СЉРµРєС‚РѕРІ
  //   http://programmingmindstream.blogspot.ru/2014/11/blog-post_8.html
  public
   destructor Destroy; override;
  end;//TmsDefferedObjects
 
  TmsObjectsWatcher = class
-  // - следилка за объектами
-  // НЕ является ПОТОКОБЕЗОПАСНОЙ
+  // - СЃР»РµРґРёР»РєР° Р·Р° РѕР±СЉРµРєС‚Р°РјРё
+  // РќР• СЏРІР»СЏРµС‚СЃСЏ РџРћРўРћРљРћР‘Р•Р—РћРџРђРЎРќРћР™
  private
   class var f_ObjectsCreatedCount : Integer;
   class var f_ObjectsCreated: TmsClassInstanceCountList;
@@ -98,8 +98,8 @@ end;
 class procedure TmsObjectsWatcher.CreateObject(aClass: TClass; var theInstance: TObject);
 begin
  GetMem(Pointer(theInstance), aClass.InstanceSize);
- // - распределяем память подобъекты сами. Зачем?
- //   Чтобы следить за повторным удалением.
+ // - СЂР°СЃРїСЂРµРґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґРѕР±СЉРµРєС‚С‹ СЃР°РјРё. Р—Р°С‡РµРј?
+ //   Р§С‚РѕР±С‹ СЃР»РµРґРёС‚СЊ Р·Р° РїРѕРІС‚РѕСЂРЅС‹Рј СѓРґР°Р»РµРЅРёРµРј.
  //   http://programmingmindstream.blogspot.ru/2014/11/blog-post_8.html
  aClass.InitInstance(theInstance);
  ObjectCreated(theInstance);
@@ -113,7 +113,7 @@ var
 begin
  if (f_DefferedObjects <> nil) then
   if (f_DefferedObjects.IndexOf(anObject) >= 0)then
-   raise Exception.Create('Объект класса ' + anObject.ClassName + ' уже был освобождён');
+   raise Exception.Create('РћР±СЉРµРєС‚ РєР»Р°СЃСЃР° ' + anObject.ClassName + ' СѓР¶Рµ Р±С‹Р» РѕСЃРІРѕР±РѕР¶РґС‘РЅ');
  ObjectDestroyed(anObject);
  anObject.CleanupInstance;
  if (f_DefferedObjects = nil) then
@@ -146,7 +146,7 @@ class procedure TmsObjectsWatcher.ObjectDestroyed(anObject: TObject);
 var
  l_ClassName : String;
 begin
- Assert(f_ObjectsCreatedCount > 0, 'Какие-то объекты уже были освобождены несколько раз');
+ Assert(f_ObjectsCreatedCount > 0, 'РљР°РєРёРµ-С‚Рѕ РѕР±СЉРµРєС‚С‹ СѓР¶Рµ Р±С‹Р»Рё РѕСЃРІРѕР±РѕР¶РґРµРЅС‹ РЅРµСЃРєРѕР»СЊРєРѕ СЂР°Р·');
  if (f_ObjectsCreated <> nil) then
  begin
   l_ClassName := anObject.ClassName;
@@ -193,16 +193,16 @@ begin
  if (f_ObjectsCreated <> nil) then
   if (f_ObjectsCreated.Count > 0) then
   begin
-   // Далее выводим статистику неосвобождённых объектов в лог:
+   // Р”Р°Р»РµРµ РІС‹РІРѕРґРёРј СЃС‚Р°С‚РёСЃС‚РёРєСѓ РЅРµРѕСЃРІРѕР±РѕР¶РґС‘РЅРЅС‹С… РѕР±СЉРµРєС‚РѕРІ РІ Р»РѕРі:
    TmsLog.Log(ParamStr(0) + '.objects.log',
     procedure (aLog: TmsLog)
     var
      l_Item : TPair<String, TmsClassInstanceCount>;
     begin
-     aLog.ToLog('Неосвобождено объектов: ' + IntToStr(f_ObjectsCreatedCount));
+     aLog.ToLog('РќРµРѕСЃРІРѕР±РѕР¶РґРµРЅРѕ РѕР±СЉРµРєС‚РѕРІ: ' + IntToStr(f_ObjectsCreatedCount));
      for l_Item in f_ObjectsCreated do
      begin
-      aLog.ToLog(l_Item.Key + ' Неосвобождено: ' + IntToStr(l_Item.Value.rCount) + ' Максимально распределено: ' + IntToStr(l_Item.Value.rMaxCount));
+      aLog.ToLog(l_Item.Key + ' РќРµРѕСЃРІРѕР±РѕР¶РґРµРЅРѕ: ' + IntToStr(l_Item.Value.rCount) + ' РњР°РєСЃРёРјР°Р»СЊРЅРѕ СЂР°СЃРїСЂРµРґРµР»РµРЅРѕ: ' + IntToStr(l_Item.Value.rMaxCount));
      end;//for l_Key
     end
    );
@@ -210,7 +210,7 @@ begin
  FreeAndNil(f_ObjectsCreated);
  FreeAndNil(f_DefferedObjects);
  if (f_ObjectsCreatedCount > 0) then
-  raise Exception.Create('Какие-то объекты не освобождены: ' + IntToStr(f_ObjectsCreatedCount));
+  raise Exception.Create('РљР°РєРёРµ-С‚Рѕ РѕР±СЉРµРєС‚С‹ РЅРµ РѕСЃРІРѕР±РѕР¶РґРµРЅС‹: ' + IntToStr(f_ObjectsCreatedCount));
 end;
 
 end.

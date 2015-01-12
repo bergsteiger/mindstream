@@ -4,7 +4,7 @@ interface
 
 uses
  Generics.Collections,
- msDiagramm
+ msInterfaces
  ;
 
 type
@@ -15,13 +15,18 @@ type
   Наблюдатель (англ. Observer) — поведенческий шаблон проектирования. Также известен как «подчинённые» (Dependents), «издатель-подписчик» (Publisher-Subscriber). Создает механизм у класса, который позволяет получать экземпляру объекта этого класса оповещения от других объектов об изменении их состояния, тем самым наблюдая за ними[2].
  *)
 
+ TmsInvalidatorLambda = reference to procedure (const anItem: ImsIvalidator);
+
  TmsInvalidators = class
  strict private
   class var f_Subscribers : TmsInvalidatorsList;
  public
   class destructor Destroy;
+ private
+  class procedure DoItems(aLambda: TmsInvalidatorLambda);
  public
-  class procedure InvalidateDiagramm(aDiagramm: TmsDiagramm);
+  class procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
+  class procedure DiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);
   class procedure Subscribe(const anInvalidator: ImsIvalidator);
   // - подписываемся
   class procedure UnSubscribe(const anInvalidator: ImsIvalidator);
@@ -41,13 +46,33 @@ begin
  FreeAndNil(f_Subscribers);
 end;
 
-class procedure TmsInvalidators.InvalidateDiagramm(aDiagramm: TmsDiagramm);
+class procedure TmsInvalidators.DoItems(aLambda: TmsInvalidatorLambda);
 var
  l_Subscriber : Pointer;
 begin
  if (f_Subscribers <> nil) then
   for l_Subscriber in f_Subscribers do
-   ImsIvalidator(l_Subscriber).InvalidateDiagramm(aDiagramm);
+   aLambda(ImsIvalidator(l_Subscriber));
+end;
+
+class procedure TmsInvalidators.InvalidateDiagramm(const aDiagramm: ImsDiagramm);
+begin
+ DoItems(
+  procedure (const anItem: ImsIvalidator)
+  begin
+   anItem.InvalidateDiagramm(aDiagramm)
+  end
+ );
+end;
+
+class procedure TmsInvalidators.DiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);
+begin
+ DoItems(
+  procedure (const anItem: ImsIvalidator)
+  begin
+   anItem.DiagrammAdded(aDiagramms, aDiagramm)
+  end
+ );
 end;
 
 class procedure TmsInvalidators.Subscribe(const anInvalidator: ImsIvalidator);
@@ -55,7 +80,8 @@ class procedure TmsInvalidators.Subscribe(const anInvalidator: ImsIvalidator);
 begin
  if (f_Subscribers = nil) then
   f_Subscribers := TmsInvalidatorsList.Create;
- f_Subscribers.Add(Pointer(anInvalidator));
+ if (f_Subscribers.IndexOf(Pointer(anInvalidator)) < 0) then
+  f_Subscribers.Add(Pointer(anInvalidator));
 end;
 
 class procedure TmsInvalidators.UnSubscribe(const anInvalidator: ImsIvalidator);

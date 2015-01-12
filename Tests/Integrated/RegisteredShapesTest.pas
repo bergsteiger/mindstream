@@ -9,7 +9,7 @@ uses
 type
   TRegisteredShapesTest = class(TTestCase)
    published
-    procedure ShapesRegistredCountEqual_12;
+    procedure ShapesRegistredCount;
     procedure TestFirstShape;
     procedure TestIndexOfTmsLine;
   end;//TRegisteredShapesTest
@@ -25,7 +25,7 @@ uses
   FMX.Graphics
   ;
 
-procedure TRegisteredShapesTest.ShapesRegistredCountEqual_12;
+procedure TRegisteredShapesTest.ShapesRegistredCount;
 var
  l_Result : integer;
 begin
@@ -33,19 +33,15 @@ begin
  TmsRegisteredShapes.IterateShapes(
   procedure (aShapeClass: RmsShape)
   begin
-   if aShapeClass.IsForToolbar then
-    inc(l_Result);
+   Inc(l_Result);
   end
  );
- CheckTrue(l_Result = 14);
+ CheckTrue(l_Result = 23,  ' Expected 23 - Get ' + IntToStr(l_Result));
 end;
 
 procedure TRegisteredShapesTest.TestFirstShape;
-var
- l_RmsShape: RmsShape;
 begin
- l_RmsShape := TmsRegisteredShapes.Instance.First;
- CheckTrue(l_RmsShape = TmsLine);
+ CheckTrue(TmsRegisteredShapes.Instance.First = TmsLine);
 end;
 
 procedure TRegisteredShapesTest.TestIndexOfTmsLine;
@@ -56,5 +52,6 @@ end;
 initialization
  TestFramework.RegisterTest(TRegisteredShapesTest.Suite);
 end.
+
 
 

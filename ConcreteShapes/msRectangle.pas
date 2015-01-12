@@ -1,4 +1,4 @@
-unit msRectangle;
+﻿unit msRectangle;
 
 interface
 
@@ -7,7 +7,8 @@ uses
  System.Types,
  FMX.Graphics,
  FMX.Types,
- System.UITypes
+ System.UITypes,
+ msInterfaces
  ;
 
 type
@@ -17,11 +18,12 @@ type
   class function InitialWidth: Single; virtual;
   class function InitialHeight: Single; virtual;
 
+  function GetDrawBounds: TRectF; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
   function ContainsPt(const aPoint: TPointF): Boolean; override;
- end;
+ end;//TmsRectangle
 
 implementation
 
@@ -38,15 +40,8 @@ begin
 end;
 
 function TmsRectangle.ContainsPt(const aPoint: TPointF): Boolean;
-var
- l_Finish : TPointF;
- l_Rect: TRectF;
 begin
- Result := False;
- l_Finish := TPointF.Create(StartPoint.X + InitialWidth,
-                            StartPoint.Y + InitialHeight);
- l_Rect := TRectF.Create(StartPoint,l_Finish);
- Result := l_Rect.Contains(aPoint);
+ Result := DrawBounds.Contains(aPoint);
 end;
 
 class function TmsRectangle.CornerRadius: Single;
@@ -56,30 +51,40 @@ end;
 
 procedure TmsRectangle.DoDrawTo(const aCtx: TmsDrawContext);
 var
- l_Finish : TPointF;
+ l_msPointContext: TRectF;
 begin
- l_Finish := TPointF.Create(StartPoint.X + InitialWidth,
-                            StartPoint.Y + InitialHeight);
- aCtx.rCanvas.DrawRect(TRectF.Create(StartPoint,
-                                l_Finish),
+ l_msPointContext := DrawBounds;
+ aCtx.rCanvas.DrawRect(l_msPointContext,
                   CornerRadius,
                   CornerRadius,
                   AllCorners,
                   1,
-                  TCornerType.ctRound);
- aCtx.rCanvas.FillRect(TRectF.Create(StartPoint,
-                                l_Finish),
+                  TCornerType.Round);
+ aCtx.rCanvas.FillRect(l_msPointContext,
                   CornerRadius,
                   CornerRadius,
                   AllCorners,
                   0.5,
-                  TCornerType.ctRound);
+                  TCornerType.Round);
+end;
+
+function TmsRectangle.GetDrawBounds: TRectF;
+var
+ l_StartPoint, l_FinalPoint : TPointF;
+begin
+ l_StartPoint := TPointF.Create(StartPoint.X - InitialWidth / 2,
+                               StartPoint.Y - InitialHeight / 2);
+ l_FinalPoint := TPointF.Create(StartPoint.X + InitialWidth / 2,
+                            StartPoint.Y + InitialHeight / 2);
+ Result := TRectF.Create(l_StartPoint, l_FinalPoint);
 end;
 
 procedure TmsRectangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rFillColor := TAlphaColorRec.White;;
+ theCtx.rFillColor := TAlphaColorRec.White;
 end;
 
 end.
+
+

@@ -8,7 +8,9 @@ uses
  System.Types,
  FMX.Graphics,
  FMX.Types,
- System.UITypes
+ System.UITypes,
+ msInterfaces,
+ System.Math.Vectors
  ;
 
 type
@@ -16,20 +18,22 @@ type
  protected
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
+  function GetPolygon : TPolygon;
   class function InitialHeight: Single; override;
   class function IsForToolbar: Boolean; override;
  end;//TmsSmallTriangle
 
 implementation
 
-uses
- System.Math
- ;
-
 procedure TmsSmallTriangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
  theCtx.rFillColor := TAlphaColorRec.Aquamarine;
+end;
+
+function TmsSmallTriangle.GetPolygon: TPolygon;
+begin
+ Result := inherited Polygon;
 end;
 
 class function TmsSmallTriangle.InitialHeight: Single;
@@ -41,5 +45,4 @@ class function TmsSmallTriangle.IsForToolbar: Boolean;
 begin
  Result := false;
 end;
-
 end.
