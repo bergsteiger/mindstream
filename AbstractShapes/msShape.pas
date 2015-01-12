@@ -18,11 +18,11 @@ uses
 type
  TmsShape = class abstract(TmsDiagrammsList, ImsShape)
  private
-  FStartPoint: TPointF;
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
-  function pm_GetStartPoint: TPointF;
  strict protected
+  function pm_GetStartPoint: TPointF; virtual;
   constructor CreateInner(const aStartPoint: TPointF); virtual;
+  procedure SetStartPoint(const aStartPoint: TPointF); virtual; abstract;
  protected
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
@@ -97,7 +97,7 @@ end;
 constructor TmsShape.CreateInner(const aStartPoint: TPointF);
 begin
  inherited Create;
- FStartPoint := aStartPoint;
+ SetStartPoint(aStartPoint);
 end;
 
 procedure TmsShape.EndTo(const aCtx: TmsEndShapeContext);
@@ -107,7 +107,7 @@ end;
 
 procedure TmsShape.MoveTo(const aFinishPoint: TPointF);
 begin
- FStartPoint := aFinishPoint;
+ SetStartPoint(aFinishPoint);
 end;
 
 function TmsShape.IsNeedsSecondClick : Boolean;
@@ -122,7 +122,8 @@ end;
 
 function TmsShape.pm_GetStartPoint: TPointF;
 begin
- Result := FStartPoint;
+ Result := TPointF.Create(0, 0);
+ Assert(false, 'Abstract method');
 end;
 
 function TmsShape.DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
@@ -164,7 +165,7 @@ end;
 
 function TmsShape.GetDrawBounds: TRectF;
 begin
- Result := TRectF.Create(FStartPoint, FStartPoint);
+ Result := TRectF.Create(StartPoint, StartPoint);
  Assert(false);
 end;
 
