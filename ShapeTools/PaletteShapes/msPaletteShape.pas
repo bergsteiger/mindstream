@@ -16,6 +16,7 @@ type
   f_OtherShapeClass : RmsShape;
   f_Proxy : ImsShape;
  protected
+  procedure SetStartPoint(const aStartPoint: TPointF); override;
   constructor CreateInner(anOtherShapeClass: RmsShape; const aStartPoint: TPointF);
   class function Create(anOtherShapeClass: RmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
   function IsClassTypeNamedAs(const aClassName: String): Boolean; override;
@@ -47,6 +48,11 @@ end;
 procedure TmsPaletteShape.DrawTo(const aCtx: TmsDrawContext);
 begin
  f_Proxy.DrawTo(aCtx);
+end;
+
+procedure TmsPaletteShape.SetStartPoint(const aStartPoint: TPointF);
+begin
+ // - ничего не делаем. ПРЕДНАМЕРЕННО.
 end;
 
 constructor TmsPaletteShape.CreateInner(anOtherShapeClass: RmsShape; const aStartPoint: TPointF);

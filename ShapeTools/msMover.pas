@@ -17,6 +17,7 @@ type
   f_Moving : ImsShape;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
+  procedure SetStartPoint(const aStartPoint: TPointF); override;
   constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
@@ -34,6 +35,13 @@ uses
  msMoverIcon,
  msLineWithArrow
  ;
+
+// TmsMover
+
+procedure TmsMover.SetStartPoint(const aStartPoint: TPointF);
+begin
+ // - םטקודמ םו הוכאול. ÏÐÅÄÍÀÌÅÐÅÍÍÎ.
+end;
 
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
 begin

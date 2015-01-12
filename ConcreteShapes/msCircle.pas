@@ -8,11 +8,12 @@ uses
  FMX.Graphics,
  FMX.Types,
  System.UITypes,
- msInterfaces
+ msInterfaces,
+ msPointedShape
  ;
 
 type
- TmsCircle = class(TmsShape)
+ TmsCircle = class(TmsPointedShape)
  protected
   class function InitialRadiusX: Integer; virtual;
   class function InitialRadiusY: Integer; virtual;

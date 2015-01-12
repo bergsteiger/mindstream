@@ -7,11 +7,12 @@ uses
  FMX.Graphics,
  System.Types,
  SysUtils,
- msInterfaces
+ msInterfaces,
+ msPointedShape
  ;
 
 type
- TmsLine = class(TmsShape)
+ TmsLine = class(TmsPointedShape)
  private
   FFinishPoint: TPointF;
  protected

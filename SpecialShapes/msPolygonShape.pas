@@ -6,11 +6,12 @@ uses
  msInterfaces,
  msShape,
  System.Types,
- System.Math.Vectors
+ System.Math.Vectors,
+ msPointedShape
  ;
 
 type
- TmsPolygonShape = class abstract(TmsShape)
+ TmsPolygonShape = class abstract(TmsPointedShape)
   // - класс для реализации полигональных объектов
  protected
   function Polygon: TPolygon;
