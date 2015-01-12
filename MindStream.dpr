@@ -67,7 +67,8 @@ uses
   msGreenCircle in 'SpecialShapes\msGreenCircle.pas',
   msBlackTriangle in 'ConcreteShapes\ForButtons\msBlackTriangle.pas',
   msPolygonShape in 'SpecialShapes\msPolygonShape.pas',
-  msMoverIcon in 'SpecialShapes\msMoverIcon.pas';
+  msMoverIcon in 'SpecialShapes\msMoverIcon.pas',
+  msPointedShape in 'AbstractShapes\msPointedShape.pas';
 
 {$R *.res}
 
