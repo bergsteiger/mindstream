@@ -74,7 +74,8 @@ uses
   msSpecialArrow in 'AbstractShapes\msSpecialArrow.pas',
   msLeftArrow in 'SpecialShapes\ForButtons\msLeftArrow.pas',
   msRightArrow in 'SpecialShapes\ForButtons\msRightArrow.pas',
-  msRemoverIcon in 'SpecialShapes\ForButtons\msRemoverIcon.pas'
+  msRemoverIcon in 'SpecialShapes\ForButtons\msRemoverIcon.pas',
+  msShapesGroup in 'ContainerShapes\msShapesGroup.pas'
   ;
 
 {$R *.res}
