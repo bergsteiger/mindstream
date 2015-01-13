@@ -33,7 +33,7 @@ end;
 
 class function TmsSwapParents.ButtonShape: ImsShape;
 begin
- Result := TmsLeftArrow.Create;
+ Result := TmsShapesGroup.Create([TmsLeftArrow.Create]);
 end;
 
 end.
