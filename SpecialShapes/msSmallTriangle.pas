@@ -32,7 +32,7 @@ end;
 
 class function TmsSmallTriangle.InitialHeight: Single;
 begin
- Result := 21;
+ Result := 20;
 end;
 
 class function TmsSmallTriangle.IsForToolbar: Boolean;
