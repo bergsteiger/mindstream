@@ -224,6 +224,7 @@ end;
 class function TmsShape.ButtonShape(const aStartPoint: TPointF): ImsShape;
 begin
  Result := nil;
+ Assert(false, 'Не реализовано');
 end;
 
 end.
