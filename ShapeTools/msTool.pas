@@ -5,11 +5,12 @@ interface
 uses
  msShape,
  msInterfaces,
- System.Types
+ System.Types,
+ msPointlessShape
  ;
 
 type
- TmsTool = class(TmsShape)
+ TmsTool = class(TmsPointlessShape)
  public
   class function ButtonShape: ImsShape; override;
   class function IsTool: Boolean; override;

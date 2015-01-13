@@ -17,7 +17,6 @@ type
   f_Moving : ImsShape;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  procedure SetStartPoint(const aStartPoint: TPointF); override;
   constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
@@ -38,11 +37,6 @@ uses
 
 // TmsMover
 
-procedure TmsMover.SetStartPoint(const aStartPoint: TPointF);
-begin
- // - םטקודמ םו הוכאול. ÏÐÅÄÍÀÌÅÐÅÍÍÎ.
-end;
-
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
 begin
  inherited CreateInner(aStartPoint);
@@ -51,9 +45,7 @@ end;
 
 class function TmsMover.ButtonShape: ImsShape;
 begin
-// Result := TmsMoverIcon.CreateIcon(TPointF.Create(50, 50));
  Result := TmsMoverIcon.Create(TPointF.Create(50, 50));
-// Result := TmsLineWithArrow.CreateCompleted(TPointF.Create(50, 50), TPointF.Create(0, 0));
 end;
 
 class function TmsMover.Create(const aCtx: TmsMakeShapeContext): ImsShape;
