@@ -7,20 +7,20 @@ uses
  System.Types,
  Generics.Collections,
  msInterfaces,
- msShape
+ msShape,
+ msPointlessShape
  ;
 
 type
  TmsShapesList = class(TList<ImsShape>)
  end;//TmsShapesList
 
- TmsShapesGroup = class(TmsShape)
+ TmsShapesGroup = class(TmsPointlessShape)
  private
   f_Shapes : TmsShapesList;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
-  procedure SetStartPoint(const aStartPoint: TPointF); override;
   constructor CreateInner(const aShapes: array of ImsShape);
  public
   class function Create(const aShapes: array of ImsShape): ImsShape;
@@ -85,11 +85,6 @@ begin
   Result.Right := Max(Result.Right, l_R.Right);
   Result.Bottom := Max(Result.Bottom, l_R.Bottom);
  end;//for l_Shape
-end;
-
-procedure TmsShapesGroup.SetStartPoint(const aStartPoint: TPointF);
-begin
- // - ничего не делаем. СПЕЦИАЛЬНО.
 end;
 
 end.
