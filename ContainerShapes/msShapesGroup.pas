@@ -20,6 +20,7 @@ type
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
+  constructor CreateInner(const aShapes: array of ImsShape);
  public
   destructor Destroy; override;
  end;//TmsShapesGroup
@@ -32,6 +33,16 @@ uses
  ;
 
 // TmsShapesGroup
+
+constructor TmsShapesGroup.CreateInner(const aShapes: array of ImsShape);
+var
+ l_Shape : ImsShape;
+begin
+ inherited CreateInner(TPointF.Create(0, 0));
+ f_Shapes := TmsShapesList.Create;
+ for l_Shape in aShapes do
+  f_Shapes.Add(l_Shape);
+end;
 
 destructor TmsShapesGroup.Destroy;
 begin
