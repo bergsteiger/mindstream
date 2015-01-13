@@ -20,7 +20,7 @@ type
 implementation
 
 uses
- msLineWithArrow
+ msLeftArrow
  ;
 
 class function TmsSwapParents.DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean;
@@ -31,7 +31,7 @@ end;
 
 class function TmsSwapParents.ButtonShape(const aStartPoint: TPointF): ImsShape;
 begin
- Result := TmsLineWithArrow.CreateCompleted(TPointF.Create(50, 0), TPointF.Create(0, 0));
+ Result := TmsLeftArrow.Create;
 end;
 
 end.

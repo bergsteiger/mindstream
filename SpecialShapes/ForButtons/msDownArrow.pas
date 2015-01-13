@@ -23,7 +23,7 @@ uses
 
 class function TmsDownArrow.Create: ImsShape;
 begin
- Result := CreateCompleted(TPointF.Create(0, 0), TPointF.Create(0, InitialLength));
+ Result := CreateCompletedInternal(TPointF.Create(0, 0), TPointF.Create(0, InitialLength));
 end;
 
 end.
