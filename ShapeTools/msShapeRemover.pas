@@ -16,6 +16,10 @@ type
 
 implementation
 
+uses
+ msRemoverIcon
+ ;
+
 class function TmsShapeRemover.Create(const aCtx: TmsMakeShapeContext): ImsShape;
 var
  l_ShapeToRemove: ImsShape;

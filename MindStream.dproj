@@ -256,7 +256,18 @@
         <DCCReference Include="ShapeTools\msShapeRemover.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msGreenCircle.pas"/>
         <DCCReference Include="ConcreteShapes\ForButtons\msBlackTriangle.pas">
-            <Form>$R *.res</Form>
+            <Form>,
+  msPolygonShape in &apos;AbstractShapes\msPolygonShape.pas&apos;,
+  msMoverIcon in &apos;SpecialShapes\ForButtons\msMoverIcon.pas&apos;,
+  msPointedShape in &apos;AbstractShapes\msPointedShape.pas&apos;,
+  msUpArrow in &apos;SpecialShapes\ForButtons\msUpArrow.pas&apos;,
+  msDownArrow in &apos;SpecialShapes\ForButtons\msDownArrow.pas&apos;,
+  msSpecialArrow in &apos;AbstractShapes\msSpecialArrow.pas&apos;,
+  msLeftArrow in &apos;SpecialShapes\ForButtons\msLeftArrow.pas&apos;,
+  msRightArrow in &apos;SpecialShapes\ForButtons\msRightArrow.pas&apos;,
+  msRemoverIcon in &apos;SpecialShapes\ForButtons\msRemoverIcon.pas&apos;;
+
+{$R *.res</Form>
         </DCCReference>
         <DCCReference Include="AbstractShapes\msPolygonShape.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msMoverIcon.pas"/>
@@ -266,6 +277,7 @@
         <DCCReference Include="AbstractShapes\msSpecialArrow.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msLeftArrow.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msRightArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msRemoverIcon.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>
