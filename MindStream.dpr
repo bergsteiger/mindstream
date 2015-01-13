@@ -70,7 +70,8 @@ uses
   msMoverIcon in 'SpecialShapes\ForButtons\msMoverIcon.pas',
   msPointedShape in 'AbstractShapes\msPointedShape.pas',
   msUpArrow in 'SpecialShapes\ForButtons\msUpArrow.pas',
-  msDownArrow in 'SpecialShapes\ForButtons\msDownArrow.pas'
+  msDownArrow in 'SpecialShapes\ForButtons\msDownArrow.pas',
+  msSpecialArrow in 'AbstractShapes\msSpecialArrow.pas'
   ;
 
 {$R *.res}
