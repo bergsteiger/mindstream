@@ -20,7 +20,6 @@ type
 implementation
 
 uses
- msLineWithArrow,
  msUpArrow
  ;
 
@@ -32,7 +31,7 @@ end;
 
 class function TmsUpToParent.ButtonShape(const aStartPoint: TPointF): ImsShape;
 begin
- Result := TmsLineWithArrow.CreateCompleted(TPointF.Create(0, 50), TPointF.Create(0, 0));
+ Result := TmsUpArrow.Create;
 end;
 
 end.
