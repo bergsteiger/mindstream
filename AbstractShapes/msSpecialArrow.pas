@@ -16,6 +16,8 @@ type
  public
   class procedure CreateCompleted;
   // - метод, который надо скрыть
+  class function Create: ImsShape; virtual; abstract;
+  // - метод, который “≈ѕ≈–№ надо вызывать
  end;//TmsSpecialArrow
 
 implementation

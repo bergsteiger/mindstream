@@ -10,7 +10,7 @@ uses
 type
  TmsUpArrow = class(TmsSpecialArrow)
  public
-  class function Create: ImsShape;
+  class function Create: ImsShape; override;
  end;//TmsUpArrow
 
 implementation
