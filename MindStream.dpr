@@ -71,7 +71,8 @@ uses
   msPointedShape in 'AbstractShapes\msPointedShape.pas',
   msUpArrow in 'SpecialShapes\ForButtons\msUpArrow.pas',
   msDownArrow in 'SpecialShapes\ForButtons\msDownArrow.pas',
-  msSpecialArrow in 'AbstractShapes\msSpecialArrow.pas'
+  msSpecialArrow in 'AbstractShapes\msSpecialArrow.pas',
+  msLeftArrow in 'SpecialShapes\ForButtons\msLeftArrow.pas'
   ;
 
 {$R *.res}
