@@ -3,12 +3,11 @@ unit msRemoverIcon;
 interface
 
 uses
- msInterfaces,
- msGreenCircle
+ msInterfaces
  ;
 
 type
- TmsRemoverIcon = class(TmsGreenCircle)
+ TmsRemoverIcon = class
  public
   class function Create: ImsShape;
  end;//TmsRemoverIcon
