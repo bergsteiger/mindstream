@@ -15,6 +15,7 @@ type
   class function CreateCompletedInternal(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
  public
   class procedure CreateCompleted;
+  // - метод, который надо скрыть
  end;//TmsSpecialArrow
 
 implementation
