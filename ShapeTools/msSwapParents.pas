@@ -22,7 +22,9 @@ implementation
 uses
  msLeftArrow,
  msRightArrow,
- msShapesGroup
+ msLineWithArrow,
+ msShapesGroup,
+ msSmallTriangle
  ;
 
 class function TmsSwapParents.DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean;
@@ -33,7 +35,7 @@ end;
 
 class function TmsSwapParents.ButtonShape: ImsShape;
 begin
- Result := TmsShapesGroup.Create([TmsLeftArrow.Create, TmsRightArrow.Create]);
+ Result := TmsShapesGroup.Create([TmsLeftArrow.Create, TmsLineWithArrow.CreateCompleted(TPointF.Create(TmsSmallTriangle.InitialHeight, 0), TPointF.Create(TmsLeftArrow.InitialLength, 0))]);
 end;
 
 end.
