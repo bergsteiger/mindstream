@@ -64,10 +64,10 @@ uses
   msNullClickShape in 'ShapeTools\msNullClickShape.pas',
   msPaletteShape in 'ShapeTools\PaletteShapes\msPaletteShape.pas',
   msShapeRemover in 'ShapeTools\msShapeRemover.pas',
-  msGreenCircle in 'SpecialShapes\msGreenCircle.pas',
+  msGreenCircle in 'SpecialShapes\ForButtons\msGreenCircle.pas',
   msBlackTriangle in 'ConcreteShapes\ForButtons\msBlackTriangle.pas',
   msPolygonShape in 'AbstractShapes\msPolygonShape.pas',
-  msMoverIcon in 'SpecialShapes\msMoverIcon.pas',
+  msMoverIcon in 'SpecialShapes\ForButtons\msMoverIcon.pas',
   msPointedShape in 'AbstractShapes\msPointedShape.pas';
 
 {$R *.res}
