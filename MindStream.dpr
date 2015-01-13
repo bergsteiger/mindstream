@@ -27,7 +27,6 @@ uses
   msMover in 'ShapeTools\msMover.pas',
   u_fmGUITestRunner in 'FMX.DUnit\u_fmGUITestRunner.pas' {fmGUITestRunner},
   FirstTest in 'Tests\Module\FirstTest.pas',
-  UtilityShapesTest in 'Tests\Integrated\UtilityShapesTest.pas',
   TestMsLine in 'Tests\Module\TestMsLine.pas',
   TestMsRectangle in 'Tests\Module\TestMsRectangle.pas',
   TestMsPointCircle in 'Tests\Module\TestMsPointCircle.pas',
@@ -76,7 +75,9 @@ uses
   msShapesGroup in 'ContainerShapes\msShapesGroup.pas',
   msPointlessShape in 'AbstractShapes\msPointlessShape.pas',
   ForToolbarShapesTest in 'Tests\Integrated\ForToolbarShapesTest.pas',
-  RegisteredShapesTest in 'Tests\Integrated\RegisteredShapesTest.pas'
+  RegisteredShapesTest in 'Tests\Integrated\RegisteredShapesTest.pas',
+  msSwapParentsIcon in 'SpecialShapes\ForButtons\msSwapParentsIcon.pas',
+  UtilityShapesTest in 'Tests\Integrated\UtilityShapesTest.pas'
   ;
 
 {$R *.res}
