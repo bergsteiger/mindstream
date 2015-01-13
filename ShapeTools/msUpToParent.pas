@@ -20,7 +20,8 @@ type
 implementation
 
 uses
- msLineWithArrow
+ msLineWithArrow,
+ msUpArrow
  ;
 
 class function TmsUpToParent.DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean;
