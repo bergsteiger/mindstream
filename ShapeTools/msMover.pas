@@ -21,7 +21,7 @@ type
   constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
-  class function ButtonShape(const aStartPoint: TPointF): ImsShape; override;
+  class function ButtonShape: ImsShape; override;
   function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aCtx: TmsEndShapeContext); override;
  end;//TmsMover
@@ -49,7 +49,7 @@ begin
  f_Moving := aMoving;
 end;
 
-class function TmsMover.ButtonShape(const aStartPoint: TPointF): ImsShape;
+class function TmsMover.ButtonShape: ImsShape;
 begin
 // Result := TmsMoverIcon.CreateIcon(TPointF.Create(50, 50));
  Result := TmsMoverIcon.Create(TPointF.Create(50, 50));

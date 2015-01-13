@@ -66,7 +66,7 @@ type
   class function IsNullClick: Boolean; virtual;
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);
-  class function ButtonShape(const aStartPoint: TPointF): ImsShape; virtual;
+  class function ButtonShape: ImsShape; virtual;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
@@ -221,7 +221,7 @@ begin
  Assert(false, 'Не реализовано');
 end;
 
-class function TmsShape.ButtonShape(const aStartPoint: TPointF): ImsShape;
+class function TmsShape.ButtonShape: ImsShape;
 begin
  Result := nil;
  Assert(false, 'Не реализовано');

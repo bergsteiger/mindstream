@@ -13,7 +13,7 @@ type
   // - утилитный класс для "проваливания" внутрь примитивов
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
-  class function ButtonShape(const aStartPoint: TPointF): ImsShape; override;
+  class function ButtonShape: ImsShape; override;
  end;//TmsPicker
 
 implementation
@@ -36,7 +36,7 @@ begin
 // Result := inherited Create(aCtx);
 end;
 
-class function TmsPicker.ButtonShape(const aStartPoint: TPointF): ImsShape;
+class function TmsPicker.ButtonShape: ImsShape;
 begin
  Result := TmsDownArrow.Create;
 end;

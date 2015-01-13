@@ -13,7 +13,7 @@ type
   // - утилитный класс для уничтожения примитивов
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
-  class function ButtonShape(const aStartPoint: TPointF): ImsShape; override;
+  class function ButtonShape: ImsShape; override;
  end;//TmsPicker
 
 implementation
@@ -35,7 +35,7 @@ begin
  aCtx.rShapesController.RemoveShape(l_ShapeToRemove);
 end;
 
-class function TmsShapeRemover.ButtonShape(const aStartPoint: TPointF): ImsShape;
+class function TmsShapeRemover.ButtonShape: ImsShape;
 begin
  Result := TmsRemoverIcon.Create;
 end;

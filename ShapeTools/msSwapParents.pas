@@ -14,7 +14,7 @@ type
   // - утилитный класс ОБМЕНА диаграмм МЕСТАМИ
  protected
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
-  class function ButtonShape(const aStartPoint: TPointF): ImsShape; override;
+  class function ButtonShape: ImsShape; override;
  end;//TmsSwapParents
 
 implementation
@@ -29,7 +29,7 @@ begin
  aHolder.SwapParents;
 end;
 
-class function TmsSwapParents.ButtonShape(const aStartPoint: TPointF): ImsShape;
+class function TmsSwapParents.ButtonShape: ImsShape;
 begin
  Result := TmsLeftArrow.Create;
 end;

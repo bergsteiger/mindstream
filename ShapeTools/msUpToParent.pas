@@ -14,7 +14,7 @@ type
   // - утилитный класс дл€ "подъЄма" к ѕ–≈ƒџƒ”ў≈… диаграмме
  public
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
-  class function ButtonShape(const aStartPoint: TPointF): ImsShape; override;
+  class function ButtonShape: ImsShape; override;
  end;//TmsUpToParent
 
 implementation
@@ -29,7 +29,7 @@ begin
  aHolder.UpToParent;
 end;
 
-class function TmsUpToParent.ButtonShape(const aStartPoint: TPointF): ImsShape;
+class function TmsUpToParent.ButtonShape: ImsShape;
 begin
  Result := TmsUpArrow.Create;
 end;
