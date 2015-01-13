@@ -3,6 +3,7 @@
 interface
 
 uses
+ System.Types,
  msInterfaces,
  msTool
  ;
@@ -12,6 +13,7 @@ type
   // - утилитный класс для уничтожения примитивов
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
+  class function ButtonShape(const aStartPoint: TPointF): ImsShape; override;
  end;//TmsPicker
 
 implementation
@@ -19,6 +21,8 @@ implementation
 uses
  msRemoverIcon
  ;
+
+// TmsShapeRemover
 
 class function TmsShapeRemover.Create(const aCtx: TmsMakeShapeContext): ImsShape;
 var
@@ -29,6 +33,11 @@ begin
  if (l_ShapeToRemove = nil) then
   Exit;
  aCtx.rShapesController.RemoveShape(l_ShapeToRemove);
+end;
+
+class function TmsShapeRemover.ButtonShape(const aStartPoint: TPointF): ImsShape;
+begin
+ Result := TmsRemoverIcon.Create(aStartPoint);
 end;
 
 end.
