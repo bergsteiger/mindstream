@@ -21,7 +21,8 @@ implementation
 
 uses
  msLeftArrow,
- msRightArrow
+ msRightArrow,
+ msShapesGroup
  ;
 
 class function TmsSwapParents.DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean;
