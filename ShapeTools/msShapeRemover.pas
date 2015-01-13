@@ -37,7 +37,7 @@ end;
 
 class function TmsShapeRemover.ButtonShape(const aStartPoint: TPointF): ImsShape;
 begin
- Result := TmsRemoverIcon.Create(aStartPoint);
+ Result := TmsRemoverIcon.Create;
 end;
 
 end.
