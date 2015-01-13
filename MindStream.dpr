@@ -28,8 +28,6 @@ uses
   u_fmGUITestRunner in 'FMX.DUnit\u_fmGUITestRunner.pas' {fmGUITestRunner},
   FirstTest in 'Tests\Module\FirstTest.pas',
   UtilityShapesTest in 'Tests\Integrated\UtilityShapesTest.pas',
-  ForToolbarShapesTest in 'Tests\Integrated\ForToolbarShapesTest.pas',
-  RegisteredShapesTest in 'Tests\Integrated\RegisteredShapesTest.pas',
   TestMsLine in 'Tests\Module\TestMsLine.pas',
   TestMsRectangle in 'Tests\Module\TestMsRectangle.pas',
   TestMsPointCircle in 'Tests\Module\TestMsPointCircle.pas',
@@ -75,7 +73,10 @@ uses
   msLeftArrow in 'SpecialShapes\ForButtons\msLeftArrow.pas',
   msRightArrow in 'SpecialShapes\ForButtons\msRightArrow.pas',
   msRemoverIcon in 'SpecialShapes\ForButtons\msRemoverIcon.pas',
-  msShapesGroup in 'ContainerShapes\msShapesGroup.pas'
+  msShapesGroup in 'ContainerShapes\msShapesGroup.pas',
+  msPointlessShape in 'AbstractShapes\msPointlessShape.pas',
+  ForToolbarShapesTest in 'Tests\Integrated\ForToolbarShapesTest.pas',
+  RegisteredShapesTest in 'Tests\Integrated\RegisteredShapesTest.pas'
   ;
 
 {$R *.res}
