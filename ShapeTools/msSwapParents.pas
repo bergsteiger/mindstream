@@ -20,7 +20,8 @@ type
 implementation
 
 uses
- msLeftArrow
+ msLeftArrow,
+ msRightArrow
  ;
 
 class function TmsSwapParents.DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean;
