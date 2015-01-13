@@ -22,6 +22,7 @@ type
   function GetDrawBounds: TRectF; override;
   constructor CreateInner(const aShapes: array of ImsShape);
  public
+  class function Create(const aShapes: array of ImsShape): ImsShape;
   destructor Destroy; override;
  end;//TmsShapesGroup
 
@@ -34,10 +35,16 @@ uses
 
 // TmsShapesGroup
 
+class function TmsShapesGroup.Create(const aShapes: array of ImsShape): ImsShape;
+begin
+ Result := CreateInner(aShapes);
+end;
+
 constructor TmsShapesGroup.CreateInner(const aShapes: array of ImsShape);
 var
  l_Shape : ImsShape;
 begin
+ Assert(Length(aShapes) > 0, 'Пустую группу примитивов глупо создавать');
  inherited CreateInner(TPointF.Create(0, 0));
  f_Shapes := TmsShapesList.Create;
  for l_Shape in aShapes do
