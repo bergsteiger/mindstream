@@ -36,7 +36,7 @@ end;
 
 class function TmsSwapParents.ButtonShape: ImsShape;
 begin
- Result := TmsShapesGroup.Create([TmsLeftArrow.Create, TmsLineWithArrow.CreateCompleted(TPointF.Create(TmsSmallTriangle.InitialHeight, 0), TPointF.Create(TmsLeftArrow.InitialLength, 0))]);
+ Result := TmsSwapParentsIcon.Create;
 end;
 
 end.
