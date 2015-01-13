@@ -72,7 +72,8 @@ uses
   msUpArrow in 'SpecialShapes\ForButtons\msUpArrow.pas',
   msDownArrow in 'SpecialShapes\ForButtons\msDownArrow.pas',
   msSpecialArrow in 'AbstractShapes\msSpecialArrow.pas',
-  msLeftArrow in 'SpecialShapes\ForButtons\msLeftArrow.pas'
+  msLeftArrow in 'SpecialShapes\ForButtons\msLeftArrow.pas',
+  msRightArrow in 'SpecialShapes\ForButtons\msRightArrow.pas'
   ;
 
 {$R *.res}
