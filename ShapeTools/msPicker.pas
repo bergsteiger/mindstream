@@ -19,7 +19,7 @@ type
 implementation
 
 uses
- msLineWithArrow
+ msDownArrow
  ;
 
 class function TmsPicker.Create(const aCtx: TmsMakeShapeContext): ImsShape;
@@ -38,7 +38,7 @@ end;
 
 class function TmsPicker.ButtonShape(const aStartPoint: TPointF): ImsShape;
 begin
- Result := TmsLineWithArrow.CreateCompleted(TPointF.Create(0, 0), TPointF.Create(0, 50));
+ Result := TmsDownArrow.Create;
 end;
 
 end.
