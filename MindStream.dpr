@@ -69,7 +69,8 @@ uses
   msPolygonShape in 'AbstractShapes\msPolygonShape.pas',
   msMoverIcon in 'SpecialShapes\ForButtons\msMoverIcon.pas',
   msPointedShape in 'AbstractShapes\msPointedShape.pas',
-  msUpArrow in 'SpecialShapes\ForButtons\msUpArrow.pas'
+  msUpArrow in 'SpecialShapes\ForButtons\msUpArrow.pas',
+  msDownArrow in 'SpecialShapes\ForButtons\msDownArrow.pas'
   ;
 
 {$R *.res}
