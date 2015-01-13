@@ -258,7 +258,7 @@
         <DCCReference Include="ConcreteShapes\ForButtons\msBlackTriangle.pas">
             <Form>$R *.res</Form>
         </DCCReference>
-        <DCCReference Include="SpecialShapes\msPolygonShape.pas"/>
+        <DCCReference Include="AbstractShapes\msPolygonShape.pas"/>
         <DCCReference Include="SpecialShapes\msMoverIcon.pas"/>
         <DCCReference Include="AbstractShapes\msPointedShape.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>

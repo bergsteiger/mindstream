@@ -66,7 +66,7 @@ uses
   msShapeRemover in 'ShapeTools\msShapeRemover.pas',
   msGreenCircle in 'SpecialShapes\msGreenCircle.pas',
   msBlackTriangle in 'ConcreteShapes\ForButtons\msBlackTriangle.pas',
-  msPolygonShape in 'SpecialShapes\msPolygonShape.pas',
+  msPolygonShape in 'AbstractShapes\msPolygonShape.pas',
   msMoverIcon in 'SpecialShapes\msMoverIcon.pas',
   msPointedShape in 'AbstractShapes\msPointedShape.pas';
 
