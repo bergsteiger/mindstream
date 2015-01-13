@@ -7,7 +7,7 @@ uses
  ;
 
 type
- TmsSpecialArrow = class(TmsLineWithArrow)
+ TmsSpecialArrow = class abstract(TmsLineWithArrow)
  protected
   class function InitialLength: Integer;
  end;//TmsSpecialArrow

@@ -4,11 +4,11 @@ interface
 
 uses
  msInterfaces,
- msLineWithArrow
+ msSpecialArrow
  ;
 
 type
- TmsDownArrow = class(TmsLineWithArrow)
+ TmsDownArrow = class(TmsSpecialArrow)
  public
   class function Create: ImsShape;
  end;//TmsDownArrow
@@ -23,7 +23,7 @@ uses
 
 class function TmsDownArrow.Create: ImsShape;
 begin
- Result := TmsLineWithArrow.CreateCompleted(TPointF.Create(0, 0), TPointF.Create(0, 50));
+ Result := CreateCompleted(TPointF.Create(0, 0), TPointF.Create(0, InitialLength));
 end;
 
 end.

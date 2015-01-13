@@ -4,11 +4,11 @@ interface
 
 uses
  msInterfaces,
- msLineWithArrow
+ msSpecialArrow
  ;
 
 type
- TmsUpArrow = class(TmsLineWithArrow)
+ TmsUpArrow = class(TmsSpecialArrow)
  public
   class function Create: ImsShape;
  end;//TmsUpArrow
@@ -23,7 +23,7 @@ uses
 
 class function TmsUpArrow.Create: ImsShape;
 begin
- Result := TmsLineWithArrow.CreateCompleted(TPointF.Create(0, 50), TPointF.Create(0, 0));
+ Result := CreateCompleted(TPointF.Create(0, InitialLength), TPointF.Create(0, 0));
 end;
 
 end.
