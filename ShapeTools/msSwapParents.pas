@@ -24,7 +24,8 @@ uses
  msRightArrow,
  msLineWithArrow,
  msShapesGroup,
- msSmallTriangle
+ msSmallTriangle,
+ msSwapParentsIcon
  ;
 
 class function TmsSwapParents.DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean;
