@@ -18,7 +18,7 @@ type
  protected
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
-  function GetPolygon : TPolygon;
+  //function GetPolygon : TPolygon;
   class function InitialHeight: Single; override;
   class function IsForToolbar: Boolean; override;
  end;//TmsSmallTriangle
@@ -31,10 +31,10 @@ begin
  theCtx.rFillColor := TAlphaColorRec.Aquamarine;
 end;
 
-function TmsSmallTriangle.GetPolygon: TPolygon;
-begin
- Result := inherited Polygon;
-end;
+//function TmsSmallTriangle.GetPolygon: TPolygon;
+//begin
+// Result := inherited Polygon;
+//end;
 
 class function TmsSmallTriangle.InitialHeight: Single;
 begin
