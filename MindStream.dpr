@@ -77,7 +77,8 @@ uses
   ForToolbarShapesTest in 'Tests\Integrated\ForToolbarShapesTest.pas',
   RegisteredShapesTest in 'Tests\Integrated\RegisteredShapesTest.pas',
   msSwapParentsIcon in 'SpecialShapes\ForButtons\msSwapParentsIcon.pas',
-  UtilityShapesTest in 'Tests\Integrated\UtilityShapesTest.pas'
+  UtilityShapesTest in 'Tests\Integrated\UtilityShapesTest.pas',
+  msPickerIcon in 'SpecialShapes\ForButtons\msPickerIcon.pas'
   ;
 
 {$R *.res}

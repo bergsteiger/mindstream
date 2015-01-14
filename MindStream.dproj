@@ -274,13 +274,13 @@
         <DCCReference Include="Tests\Integrated\ForToolbarShapesTest.pas"/>
         <DCCReference Include="Tests\Integrated\RegisteredShapesTest.pas">
             <Form>,
-  msSwapParentsIcon in &apos;SpecialShapes\ForButtons\msSwapParentsIcon.pas&apos;
-  ;
+  msSwapParentsIcon in &apos;SpecialShapes\ForButtons\msSwapParentsIcon.pas&apos;;
 
 {$R *.res</Form>
         </DCCReference>
         <DCCReference Include="SpecialShapes\ForButtons\msSwapParentsIcon.pas"/>
         <DCCReference Include="Tests\Integrated\UtilityShapesTest.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msPickerIcon.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>
