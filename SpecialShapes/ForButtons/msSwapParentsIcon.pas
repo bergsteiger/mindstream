@@ -3,13 +3,14 @@ unit msSwapParentsIcon;
 interface
 
 uses
- msInterfaces
+ msInterfaces,
+ msButtonIcon
  ;
 
 type
- TmsSwapParentsIcon = class
+ TmsSwapParentsIcon = class(TmsButtonIcon)
  public
-  class function Create: ImsShape;
+  class function Create: ImsShape; override;
  end;//TmsSwapParentsIcon
 
 implementation
