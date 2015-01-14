@@ -77,10 +77,16 @@ begin
 end;
 
 procedure TmsMover.EndTo(const aCtx: TmsEndShapeContext);
+var
+ l_FloatingButton : ImsShape;
 begin
  if (f_Moving <> nil) then
   f_Moving.MoveTo(aCtx.rStartPoint);
  f_Moving := nil;
+ if (f_FloatingButtons <> nil) then
+  for l_FloatingButton in f_FloatingButtons do
+   aCtx.rShapesController.RemoveShape(l_FloatingButton);
+   // - надо удалить "плавающие кнопки".
  aCtx.rShapesController.RemoveShape(Self);
  // - теперь надо —≈Ѕя удалить
 end;
