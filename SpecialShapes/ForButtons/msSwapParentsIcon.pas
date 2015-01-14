@@ -20,7 +20,8 @@ uses
  msShapesGroup,
  msLeftArrow,
  msLineWithArrow,
- msSmallTriangle
+ msSmallTriangle,
+ msFolderIcon
  ;
 
 // TmsSwapParentsIcon
@@ -33,6 +34,7 @@ begin
                                   TmsLineWithArrow.CreateCompleted(TPointF.Create(cLength / 2, 0), TPointF.Create(0, 0)),
                                   TmsLineWithArrow.CreateCompleted(TPointF.Create(cLength / 2, 0), TPointF.Create(cLength, 0))
                                  ]);
+ Result := TmsShapesGroup.Create([TmsFolderIcon.Create, Result]);
 end;
 
 end.
