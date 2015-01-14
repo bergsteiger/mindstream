@@ -26,7 +26,7 @@ uses
 
 class function TmsSwapParentsIcon.Create: ImsShape;
 const
- cLength = 100;
+ cLength = 60;
 begin
  Result := TmsShapesGroup.Create([
                                   TmsLineWithArrow.CreateCompleted(TPointF.Create(cLength / 2, 0), TPointF.Create(0, 0)),
