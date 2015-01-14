@@ -16,14 +16,15 @@ type
 implementation
 
 uses
- msDownArrow
+ msDownArrow,
+ msShapesGroup
  ;
 
 // TmsPickerIcon
 
 class function TmsPickerIcon.Create: ImsShape;
 begin
- Result := TmsDownArrow.Create;
+ Result := TmsShapesGroup.Create([TmsDownArrow.Create]);
 end;
 
 end.
