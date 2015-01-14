@@ -6,17 +6,17 @@ uses
  msInterfaces,
  msShape,
  System.Types,
- msRectangle
+ msRectangle,
+ msPointlessShape
  ;
 
 type
  RmsPaletteShape = class of TmsPaletteShape;
- TmsPaletteShape = class(TmsShape)
+ TmsPaletteShape = class(TmsPointlessShape)
  private
   f_OtherShapeClass : RmsShape;
   f_Proxy : ImsShape;
  protected
-  procedure SetStartPoint(const aStartPoint: TPointF); override;
   constructor CreateInner(anOtherShapeClass: RmsShape; const aStartPoint: TPointF);
   class function Create(anOtherShapeClass: RmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
   function IsClassTypeNamedAs(const aClassName: String): Boolean; override;
@@ -50,16 +50,11 @@ begin
  f_Proxy.DrawTo(aCtx);
 end;
 
-procedure TmsPaletteShape.SetStartPoint(const aStartPoint: TPointF);
-begin
- // - ничего не делаем. ПРЕДНАМЕРЕННО.
-end;
-
 constructor TmsPaletteShape.CreateInner(anOtherShapeClass: RmsShape; const aStartPoint: TPointF);
 begin
  inherited CreateInner(aStartPoint);
  f_OtherShapeClass := anOtherShapeClass;
- f_Proxy := f_OtherShapeClass.ButtonShape(aStartPoint);
+ f_Proxy := f_OtherShapeClass.ButtonShape;
 end;
 
 class function TmsPaletteShape.Create(anOtherShapeClass: RmsShape; const aCtx: TmsMakeShapeContext): ImsShape;

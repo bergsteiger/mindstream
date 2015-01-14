@@ -17,11 +17,10 @@ type
   f_Moving : ImsShape;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  procedure SetStartPoint(const aStartPoint: TPointF); override;
   constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
-  class function ButtonShape(const aStartPoint: TPointF): ImsShape; override;
+  class function ButtonShape: ImsShape; override;
   function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aCtx: TmsEndShapeContext); override;
  end;//TmsMover
@@ -38,22 +37,15 @@ uses
 
 // TmsMover
 
-procedure TmsMover.SetStartPoint(const aStartPoint: TPointF);
-begin
- // - ÌË˜Â„Ó ÌÂ ‰ÂÎ‡ÂÏ. œ–≈ƒÕ¿Ã≈–≈ÕÕŒ.
-end;
-
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
 begin
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
 end;
 
-class function TmsMover.ButtonShape(const aStartPoint: TPointF): ImsShape;
+class function TmsMover.ButtonShape: ImsShape;
 begin
-// Result := TmsMoverIcon.CreateIcon(TPointF.Create(50, 50));
  Result := TmsMoverIcon.Create(TPointF.Create(50, 50));
-// Result := TmsLineWithArrow.CreateCompleted(TPointF.Create(50, 50), TPointF.Create(0, 0));
 end;
 
 class function TmsMover.Create(const aCtx: TmsMakeShapeContext): ImsShape;

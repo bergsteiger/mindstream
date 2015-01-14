@@ -14,13 +14,13 @@ type
   // - утилитный класс дл€ "подъЄма" к ѕ–≈ƒџƒ”ў≈… диаграмме
  public
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
-  class function ButtonShape(const aStartPoint: TPointF): ImsShape; override;
+  class function ButtonShape: ImsShape; override;
  end;//TmsUpToParent
 
 implementation
 
 uses
- msLineWithArrow
+ msUpToParentIcon
  ;
 
 class function TmsUpToParent.DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean;
@@ -29,9 +29,9 @@ begin
  aHolder.UpToParent;
 end;
 
-class function TmsUpToParent.ButtonShape(const aStartPoint: TPointF): ImsShape;
+class function TmsUpToParent.ButtonShape: ImsShape;
 begin
- Result := TmsLineWithArrow.CreateCompleted(TPointF.Create(0, 50), TPointF.Create(0, 0));
+ Result := TmsUpToParentIcon.Create;
 end;
 
 end.

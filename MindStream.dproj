@@ -211,15 +211,6 @@
             <Form>fmGUITestRunner</Form>
         </DCCReference>
         <DCCReference Include="Tests\Module\FirstTest.pas"/>
-        <DCCReference Include="Tests\Integrated\UtilityShapesTest.pas">
-            <Form>/ - тут &quot;банальные&quot; интеграционные тесты (https</Form>
-            <DesignClass>/ru.wikipedia.org/wiki/%D0%98%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%BE%D0%B5_%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Tests\Integrated\ForToolbarShapesTest.pas">
-            <Form>/ - тут &quot;банальные&quot; интеграционные тесты (https</Form>
-            <DesignClass>/ru.wikipedia.org/wiki/%D0%98%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%BE%D0%B5_%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Tests\Integrated\RegisteredShapesTest.pas"/>
         <DCCReference Include="Tests\Module\TestMsLine.pas"/>
         <DCCReference Include="Tests\Module\TestMsRectangle.pas"/>
         <DCCReference Include="Tests\Module\TestMsPointCircle.pas"/>
@@ -256,11 +247,46 @@
         <DCCReference Include="ShapeTools\msShapeRemover.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msGreenCircle.pas"/>
         <DCCReference Include="ConcreteShapes\ForButtons\msBlackTriangle.pas">
-            <Form>$R *.res</Form>
+            <Form>,
+  msPolygonShape in &apos;AbstractShapes\msPolygonShape.pas&apos;,
+  msMoverIcon in &apos;SpecialShapes\ForButtons\msMoverIcon.pas&apos;,
+  msPointedShape in &apos;AbstractShapes\msPointedShape.pas&apos;,
+  msUpArrow in &apos;SpecialShapes\ForButtons\msUpArrow.pas&apos;,
+  msDownArrow in &apos;SpecialShapes\ForButtons\msDownArrow.pas&apos;,
+  msSpecialArrow in &apos;AbstractShapes\msSpecialArrow.pas&apos;,
+  msLeftArrow in &apos;SpecialShapes\ForButtons\msLeftArrow.pas&apos;,
+  msRightArrow in &apos;SpecialShapes\ForButtons\msRightArrow.pas&apos;,
+  msRemoverIcon in &apos;SpecialShapes\ForButtons\msRemoverIcon.pas&apos;,
+  msShapesGroup in &apos;ContainerShapes\msShapesGroup.pas&apos;,
+  msPointlessShape in &apos;AbstractShapes\msPointlessShape.pas&apos;,
+  ForToolbarShapesTest in &apos;Tests\Integrated\ForToolbarShapesTest.pas&apos;,
+  RegisteredShapesTest in &apos;Tests\Integrated\RegisteredShapesTest.pas&apos;,
+  msSwapParentsIcon in &apos;SpecialShapes\ForButtons\msSwapParentsIcon.pas&apos;,
+  UtilityShapesTest in &apos;Tests\Integrated\UtilityShapesTest.pas&apos;,
+  msPickerIcon in &apos;SpecialShapes\ForButtons\msPickerIcon.pas&apos;,
+  msUpToParentIcon in &apos;SpecialShapes\ForButtons\msUpToParentIcon.pas&apos;,
+  msButtonIcon in &apos;SpecialShapes\ForButtons\msButtonIcon.pas&apos;;
+
+{$R *.res</Form>
         </DCCReference>
         <DCCReference Include="AbstractShapes\msPolygonShape.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msMoverIcon.pas"/>
         <DCCReference Include="AbstractShapes\msPointedShape.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msUpArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msDownArrow.pas"/>
+        <DCCReference Include="AbstractShapes\msSpecialArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msLeftArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msRightArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msRemoverIcon.pas"/>
+        <DCCReference Include="ContainerShapes\msShapesGroup.pas"/>
+        <DCCReference Include="AbstractShapes\msPointlessShape.pas"/>
+        <DCCReference Include="Tests\Integrated\ForToolbarShapesTest.pas"/>
+        <DCCReference Include="Tests\Integrated\RegisteredShapesTest.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msSwapParentsIcon.pas"/>
+        <DCCReference Include="Tests\Integrated\UtilityShapesTest.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msPickerIcon.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msUpToParentIcon.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msButtonIcon.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>
