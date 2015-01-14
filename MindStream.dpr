@@ -4,6 +4,7 @@ uses
   msCoreObjects in 'Core\msCoreObjects.pas',
   FMX.Forms,
   uMain in 'uMain.pas' {fmMain},
+  u_fmGUITestRunner in 'FMX.DUnit\u_fmGUITestRunner.pas' {fmGUITestRunner},
   msDiagramm in 'msDiagramm.pas',
   msShape in 'AbstractShapes\msShape.pas',
   msRegisteredShapes in 'msRegisteredShapes.pas',
@@ -25,7 +26,6 @@ uses
   msOurShapes in 'msOurShapes.pas',
   msTriangleDirectionRight in 'ConcreteShapes\msTriangleDirectionRight.pas',
   msMover in 'ShapeTools\msMover.pas',
-  u_fmGUITestRunner in 'FMX.DUnit\u_fmGUITestRunner.pas' {fmGUITestRunner},
   FirstTest in 'Tests\Module\FirstTest.pas',
   TestMsLine in 'Tests\Module\TestMsLine.pas',
   TestMsRectangle in 'Tests\Module\TestMsRectangle.pas',
@@ -80,7 +80,8 @@ uses
   UtilityShapesTest in 'Tests\Integrated\UtilityShapesTest.pas',
   msPickerIcon in 'SpecialShapes\ForButtons\msPickerIcon.pas',
   msUpToParentIcon in 'SpecialShapes\ForButtons\msUpToParentIcon.pas',
-  msButtonIcon in 'SpecialShapes\ForButtons\msButtonIcon.pas'
+  msButtonIcon in 'SpecialShapes\ForButtons\msButtonIcon.pas',
+  msFolderIcon in 'SpecialShapes\ForButtons\msFolderIcon.pas'
   ;
 
 {$R *.res}
