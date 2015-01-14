@@ -8,18 +8,23 @@ uses
  System.Types,
  System.UITypes,
  msTool,
- msInterfaces
+ msInterfaces,
+ msShapesList
  ;
 
 type
  TmsMover = class(TmsTool)
  private
   f_Moving : ImsShape;
+  f_FloatingButtons : TmsShapesList;
+  // - кнопки "плавающие" вокруг примитива f_Moving.
+  //   https://bitbucket.org/ingword/mindstream/issue/43/------------------------------------------
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
+  destructor Destroy; override;
   class function ButtonShape: ImsShape; override;
   function IsNeedsSecondClick : Boolean; override;
   procedure EndTo(const aCtx: TmsEndShapeContext); override;
@@ -58,6 +63,12 @@ begin
   Result := CreateInner(aCtx.rStartPoint, l_Moving)
  else
   Result := nil;
+end;
+
+destructor TmsMover.Destroy;
+begin
+ inherited;
+ FreeAndNil(f_FloatingButtons);
 end;
 
 function TmsMover.IsNeedsSecondClick : Boolean;
