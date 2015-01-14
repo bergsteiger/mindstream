@@ -78,7 +78,8 @@ uses
   RegisteredShapesTest in 'Tests\Integrated\RegisteredShapesTest.pas',
   msSwapParentsIcon in 'SpecialShapes\ForButtons\msSwapParentsIcon.pas',
   UtilityShapesTest in 'Tests\Integrated\UtilityShapesTest.pas',
-  msPickerIcon in 'SpecialShapes\ForButtons\msPickerIcon.pas'
+  msPickerIcon in 'SpecialShapes\ForButtons\msPickerIcon.pas',
+  msUpToParentIcon in 'SpecialShapes\ForButtons\msUpToParentIcon.pas'
   ;
 
 {$R *.res}
