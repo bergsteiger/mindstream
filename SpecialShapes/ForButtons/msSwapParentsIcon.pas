@@ -25,8 +25,13 @@ uses
 // TmsSwapParentsIcon
 
 class function TmsSwapParentsIcon.Create: ImsShape;
+const
+ cLength = 100;
 begin
- Result := TmsShapesGroup.Create([TmsLeftArrow.Create, TmsLineWithArrow.CreateCompleted(TPointF.Create(TmsSmallTriangle.InitialHeight, 0), TPointF.Create(TmsLeftArrow.InitialLength, 0))]);
+ Result := TmsShapesGroup.Create([
+                                  TmsLineWithArrow.CreateCompleted(TPointF.Create(cLength / 2, 0), TPointF.Create(0, 0)),
+                                  TmsLineWithArrow.CreateCompleted(TPointF.Create(cLength / 2, 0), TPointF.Create(cLength, 0))
+                                 ]);
 end;
 
 end.
