@@ -46,6 +46,8 @@ constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsS
 begin
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
+ Assert(f_FloatingButtons = nil);
+ f_FloatingButtons := TmsShapesList.Create;
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
