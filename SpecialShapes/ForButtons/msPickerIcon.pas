@@ -17,14 +17,15 @@ implementation
 
 uses
  msDownArrow,
- msShapesGroup
+ msShapesGroup,
+ msFolderIcon
  ;
 
 // TmsPickerIcon
 
 class function TmsPickerIcon.Create: ImsShape;
 begin
- Result := TmsShapesGroup.Create([TmsDownArrow.Create]);
+ Result := TmsShapesGroup.Create([TmsFolderIcon.Create, TmsDownArrow.Create]);
 end;
 
 end.
