@@ -21,6 +21,7 @@ type
 
  ImsShapesController = interface(ImsShapeByPt)
   procedure RemoveShape(const aShape: ImsShape);
+  function AddShape(const aShape: ImsShape): ImsShape;
  end;//ImsShapesController
  // - тут бы иметь МНОЖЕСТВЕННОЕ наследование интерфейсов, но Delphi его не поддерживает
  // А вот с UML - мы его ПОТОМ СГЕНЕРИРУЕМ
@@ -46,7 +47,7 @@ type
    rStartPoint: TPointF;
    rShapesController: ImsShapesController;
    rDiagrammsHolder: ImsDiagrammsHolder;
-   constructor Create(aStartPoint: TPointF; const aShapesController: ImsShapesController; aDiagrammsHolder: ImsDiagrammsHolder);
+   constructor Create(aStartPoint: TPointF; const aShapesController: ImsShapesController; const aDiagrammsHolder: ImsDiagrammsHolder);
  end;//TmsMakeShapeContext
 
  TmsEndShapeContext = TmsMakeShapeContext;
@@ -167,7 +168,7 @@ end;
 
 // TmsMakeShapeContext
 
-constructor TmsMakeShapeContext.Create(aStartPoint: TPointF; const aShapesController: ImsShapesController; aDiagrammsHolder: ImsDiagrammsHolder);
+constructor TmsMakeShapeContext.Create(aStartPoint: TPointF; const aShapesController: ImsShapesController; const aDiagrammsHolder: ImsDiagrammsHolder);
 begin
  rStartPoint := aStartPoint;
  rShapesController := aShapesController;
