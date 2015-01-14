@@ -21,7 +21,7 @@ type
   //   https://bitbucket.org/ingword/mindstream/issue/43/------------------------------------------
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
+  constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
   destructor Destroy; override;
@@ -42,7 +42,7 @@ uses
 
 // TmsMover
 
-constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
+constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
 begin
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
@@ -60,7 +60,9 @@ begin
  Assert(aCtx.rShapesController <> nil);
  l_Moving := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
  if (l_Moving <> nil) then
-  Result := CreateInner(aCtx.rStartPoint, l_Moving)
+ begin
+  Result := CreateInner(aCtx.rStartPoint, l_Moving, aCtx.rShapesController);
+ end//l_Moving <> nil
  else
   Result := nil;
 end;
