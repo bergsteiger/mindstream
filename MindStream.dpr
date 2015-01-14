@@ -84,8 +84,6 @@ uses
   msFolderIcon in 'SpecialShapes\ForButtons\msFolderIcon.pas'
   ;
 
-  // - чисто для проверки MERGE
-
 {$R *.res}
 
 begin
