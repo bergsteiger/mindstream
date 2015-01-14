@@ -20,7 +20,7 @@ type
 implementation
 
 uses
- msUpArrow
+ msUpToParentIcon
  ;
 
 class function TmsUpToParent.DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean;
@@ -31,7 +31,7 @@ end;
 
 class function TmsUpToParent.ButtonShape: ImsShape;
 begin
- Result := TmsUpArrow.Create;
+ Result := TmsUpToParentIcon.Create;
 end;
 
 end.
