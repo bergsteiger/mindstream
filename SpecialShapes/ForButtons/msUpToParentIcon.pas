@@ -16,14 +16,16 @@ type
 implementation
 
 uses
- msUpArrow
+ msUpArrow,
+ msFolderIcon,
+ msShapesGroup
  ;
 
 // TmsUpToParentIcon
 
 class function TmsUpToParentIcon.Create: ImsShape;
 begin
- Result := TmsUpArrow.Create;
+ Result := TmsShapesGroup.Create([TmsFolderIcon.Create, TmsUpArrow.Create]);
 end;
 
 end.
