@@ -3,13 +3,14 @@ unit msPickerIcon;
 interface
 
 uses
- msInterfaces
+ msInterfaces,
+ msButtonIcon
  ;
 
 type
- TmsPickerIcon = class
+ TmsPickerIcon = class(TmsButtonIcon)
  public
-  class function Create: ImsShape;
+  class function Create: ImsShape; override;
  end;//TmsPickerIcon
 
 implementation

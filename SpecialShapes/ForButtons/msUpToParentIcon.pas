@@ -3,13 +3,14 @@ unit msUpToParentIcon;
 interface
 
 uses
- msInterfaces
+ msInterfaces,
+ msButtonIcon
  ;
 
 type
- TmsUpToParentIcon = class
+ TmsUpToParentIcon = class(TmsButtonIcon)
  public
-  class function Create: ImsShape;
+  class function Create: ImsShape; override;
  end;//TmsUpToParentIcon
 
 implementation
