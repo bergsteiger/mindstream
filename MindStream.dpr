@@ -81,7 +81,8 @@ uses
   msPickerIcon in 'SpecialShapes\ForButtons\msPickerIcon.pas',
   msUpToParentIcon in 'SpecialShapes\ForButtons\msUpToParentIcon.pas',
   msButtonIcon in 'SpecialShapes\ForButtons\msButtonIcon.pas',
-  msFolderIcon in 'SpecialShapes\ForButtons\msFolderIcon.pas'
+  msFolderIcon in 'SpecialShapes\ForButtons\msFolderIcon.pas',
+  msShapesList in 'msShapesList.pas'
   ;
 
 {$R *.res}
