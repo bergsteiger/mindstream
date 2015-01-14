@@ -19,7 +19,7 @@ type
 implementation
 
 uses
- msDownArrow
+ msPickerIcon
  ;
 
 class function TmsPicker.Create(const aCtx: TmsMakeShapeContext): ImsShape;
@@ -38,7 +38,7 @@ end;
 
 class function TmsPicker.ButtonShape: ImsShape;
 begin
- Result := TmsDownArrow.Create;
+ Result := TmsPickerIcon.Create;
 end;
 
 end.
