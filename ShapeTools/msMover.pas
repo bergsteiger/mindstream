@@ -51,8 +51,14 @@ uses
 // TmsMover
 
 function TmsMover.AddButton(const aButton: ImsShape): ImsShape;
+var
+ l_B : TRectF;
+ l_Mid : TPointF;
 begin
  Assert(f_FloatingButtons <> nil);
+ l_B := aButton.DrawBounds;
+ l_Mid.X := (l_B.Left + l_B.Right) / 2;
+ l_Mid.Y := (l_B.Top + l_B.Bottom) / 2;
  Result := f_FloatingButtons.AddShape(TmsShapesGroup.Create([
             TmsCircle.Create(aButton.StartPoint),
             aButton
