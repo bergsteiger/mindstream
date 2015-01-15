@@ -44,12 +44,15 @@ uses
 // TmsMover
 
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
+var
+ l_B : TRectF;
 begin
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
  Assert(f_FloatingButtons = nil);
  f_FloatingButtons := TmsShapesList.Create;
- aController.AddShape(f_FloatingButtons.AddShape(TmsUpArrow.Create(TPointF.Create(f_Moving.DrawBounds.Left, f_Moving.DrawBounds.Top))));
+ l_B := f_Moving.DrawBounds;
+ aController.AddShape(f_FloatingButtons.AddShape(TmsUpArrow.Create(TPointF.Create(l_B.Left, l_B.Top))));
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
