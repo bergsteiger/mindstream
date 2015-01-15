@@ -82,7 +82,8 @@ uses
   msUpToParentIcon in 'SpecialShapes\ForButtons\msUpToParentIcon.pas',
   msButtonIcon in 'SpecialShapes\ForButtons\msButtonIcon.pas',
   msFolderIcon in 'SpecialShapes\ForButtons\msFolderIcon.pas',
-  msShapesList in 'msShapesList.pas'
+  msShapesList in 'msShapesList.pas',
+  msCircleWithRadius in 'ConcreteShapes\msCircleWithRadius.pas'
   ;
 
 {$R *.res}
