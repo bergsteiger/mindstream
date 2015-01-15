@@ -22,6 +22,7 @@ type
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
+  function AddButton(const aButton: ImsShape): ImsShape;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
   destructor Destroy; override;
@@ -38,10 +39,17 @@ uses
  System.SysUtils,
  msMoverIcon,
  msLineWithArrow,
- msUpArrow
+ msUpArrow,
+ msDownArrow
  ;
 
 // TmsMover
+
+function TmsMover.AddButton(const aButton: ImsShape): ImsShape;
+begin
+ Assert(f_FloatingButtons <> nil);
+ Result := f_FloatingButtons.AddShape(aButton);
+end;
 
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
 var
@@ -52,7 +60,8 @@ begin
  Assert(f_FloatingButtons = nil);
  f_FloatingButtons := TmsShapesList.Create;
  l_B := f_Moving.DrawBounds;
- aController.AddShape(f_FloatingButtons.AddShape(TmsUpArrow.Create(TPointF.Create(l_B.Left, l_B.Top))));
+ aController.AddShape(AddButton(TmsUpArrow.Create(TPointF.Create(l_B.Left, l_B.Top))));
+ aController.AddShape(AddButton(TmsDownArrow.Create(TPointF.Create(l_B.Left, l_B.Bottom))));
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
