@@ -40,7 +40,9 @@ uses
  msMoverIcon,
  msLineWithArrow,
  msUpArrow,
- msDownArrow
+ msDownArrow,
+ msLeftArrow,
+ msRightArrow
  ;
 
 // TmsMover
