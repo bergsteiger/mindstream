@@ -65,6 +65,7 @@ begin
  f_FloatingButtons := TmsShapesList.Create;
  l_B := f_Moving.DrawBounds;
  l_Mid.X := (l_B.Left + l_B.Right) / 2;
+ l_Mid.Y := (l_B.Top + l_B.Left) / 2;
  aController.AddShape(AddButton(TmsUpArrow.Create(TPointF.Create(l_Mid.X, l_B.Top - TmsSpecialArrow.InitialLength))));
  aController.AddShape(AddButton(TmsDownArrow.Create(TPointF.Create(l_Mid.X, l_B.Bottom))));
 end;
