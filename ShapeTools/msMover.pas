@@ -57,16 +57,16 @@ end;
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
 var
  l_B : TRectF;
- l_MidX : Single;
+ l_Mid : TPointF;
 begin
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
  Assert(f_FloatingButtons = nil);
  f_FloatingButtons := TmsShapesList.Create;
  l_B := f_Moving.DrawBounds;
- l_MidX := (l_B.Left + l_B.Right) / 2;
- aController.AddShape(AddButton(TmsUpArrow.Create(TPointF.Create(l_MidX, l_B.Top - TmsSpecialArrow.InitialLength))));
- aController.AddShape(AddButton(TmsDownArrow.Create(TPointF.Create(l_MidX, l_B.Bottom))));
+ l_Mid.X := (l_B.Left + l_B.Right) / 2;
+ aController.AddShape(AddButton(TmsUpArrow.Create(TPointF.Create(l_Mid.X, l_B.Top - TmsSpecialArrow.InitialLength))));
+ aController.AddShape(AddButton(TmsDownArrow.Create(TPointF.Create(l_Mid.X, l_B.Bottom))));
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
