@@ -37,7 +37,8 @@ uses
  FMX.Types,
  System.SysUtils,
  msMoverIcon,
- msLineWithArrow
+ msLineWithArrow,
+ msUpArrow
  ;
 
 // TmsMover
@@ -48,6 +49,7 @@ begin
  f_Moving := aMoving;
  Assert(f_FloatingButtons = nil);
  f_FloatingButtons := TmsShapesList.Create;
+ aController.AddShape(f_FloatingButtons.AddShape(TmsUpArrow.Create(aStartPoint)));
 end;
 
 class function TmsMover.ButtonShape: ImsShape;

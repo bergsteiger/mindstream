@@ -13,6 +13,8 @@ type
  TmsWatchedObjectParent = class(TList<ImsShape>);
  {$Include msWatchedObject.mixin.pas}
  TmsShapesList = class(TmsWatchedObject)
+ public
+  function AddShape(const aShape: ImsShape): ImsShape;
  end;//TmsShapesList
 
 implementation
@@ -22,5 +24,11 @@ uses
  ;
 
 {$Include msWatchedObject.mixin.pas}
+
+function TmsShapesList.AddShape(const aShape: ImsShape): ImsShape;
+begin
+ Add(aShape);
+ Result := aShape;
+end;
 
 end.
