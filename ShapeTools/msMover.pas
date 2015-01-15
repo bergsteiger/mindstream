@@ -49,7 +49,7 @@ begin
  f_Moving := aMoving;
  Assert(f_FloatingButtons = nil);
  f_FloatingButtons := TmsShapesList.Create;
- aController.AddShape(f_FloatingButtons.AddShape(TmsUpArrow.Create(aStartPoint)));
+ aController.AddShape(f_FloatingButtons.AddShape(TmsUpArrow.Create(TPointF.Create(f_Moving.DrawBounds.Left, f_Moving.DrawBounds.Top))));
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
