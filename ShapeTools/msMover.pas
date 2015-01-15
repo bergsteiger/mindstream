@@ -43,7 +43,8 @@ uses
  msUpArrow,
  msDownArrow,
  msLeftArrow,
- msRightArrow
+ msRightArrow,
+ msShapesGroup
  ;
 
 // TmsMover
@@ -51,7 +52,7 @@ uses
 function TmsMover.AddButton(const aButton: ImsShape): ImsShape;
 begin
  Assert(f_FloatingButtons <> nil);
- Result := f_FloatingButtons.AddShape(aButton);
+ Result := f_FloatingButtons.AddShape(TmsShapesGroup.Create([aButton]));
 end;
 
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
