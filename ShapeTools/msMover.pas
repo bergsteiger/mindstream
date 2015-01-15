@@ -39,6 +39,7 @@ uses
  System.SysUtils,
  msMoverIcon,
  msLineWithArrow,
+ msSpecialArrow,
  msUpArrow,
  msDownArrow,
  msLeftArrow,
@@ -64,7 +65,7 @@ begin
  f_FloatingButtons := TmsShapesList.Create;
  l_B := f_Moving.DrawBounds;
  l_MidX := (l_B.Left + l_B.Right) / 2;
- aController.AddShape(AddButton(TmsUpArrow.Create(TPointF.Create(l_MidX, l_B.Top))));
+ aController.AddShape(AddButton(TmsUpArrow.Create(TPointF.Create(l_MidX, l_B.Top - TmsSpecialArrow.InitialLength))));
  aController.AddShape(AddButton(TmsDownArrow.Create(TPointF.Create(l_MidX, l_B.Bottom))));
 end;
 
