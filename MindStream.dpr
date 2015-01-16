@@ -86,7 +86,9 @@ uses
   msCircleWithRadius in 'ConcreteShapes\msCircleWithRadius.pas',
   msShapeClassList in 'msShapeClassList.pas',
   msLoggedTest in 'Tests\Core\msLoggedTest.pas',
-  msRegisteredShapesTestPrim in 'Tests\Abstract\msRegisteredShapesTestPrim.pas';
+  msRegisteredShapesTestPrim in 'Tests\Abstract\msRegisteredShapesTestPrim.pas',
+  msProxyShape in 'ContainerShapes\msProxyShape.pas'
+  ;
 
 {$R *.res}
 
