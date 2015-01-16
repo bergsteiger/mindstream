@@ -13,15 +13,15 @@ type
    protected
     function ShapeClassList: TmsShapeClassList; virtual; abstract;
     function FileExtension: String; override;
+   published
+    procedure ShapesRegistredCount;
+    procedure TestFirstShape;
+    procedure TestIndexOfTmsLine;
   end;//TmsRegisteredShapesTestPrim
 
   TRegisteredShapesTest = class(TmsRegisteredShapesTestPrim)
    protected
     function ShapeClassList: TmsShapeClassList; override;
-   published
-    procedure ShapesRegistredCount;
-    procedure TestFirstShape;
-    procedure TestIndexOfTmsLine;
   end;//TRegisteredShapesTest
 
 implementation
@@ -43,14 +43,7 @@ begin
  Result := '.registered';
 end;
 
-// TRegisteredShapesTest
-
-function TRegisteredShapesTest.ShapeClassList: TmsShapeClassList;
-begin
- Result := TmsRegisteredShapes.Instance;
-end;
-
-procedure TRegisteredShapesTest.ShapesRegistredCount;
+procedure TmsRegisteredShapesTestPrim.ShapesRegistredCount;
 begin
  OutToFileAndCheck(procedure (aLog: TmsLog)
   var
@@ -68,7 +61,7 @@ begin
  );
 end;
 
-procedure TRegisteredShapesTest.TestFirstShape;
+procedure TmsRegisteredShapesTestPrim.TestFirstShape;
 begin
  OutToFileAndCheck(procedure (aLog: TmsLog)
   begin
@@ -77,13 +70,20 @@ begin
  );
 end;
 
-procedure TRegisteredShapesTest.TestIndexOfTmsLine;
+procedure TmsRegisteredShapesTestPrim.TestIndexOfTmsLine;
 begin
  OutToFileAndCheck(procedure (aLog: TmsLog)
   begin
    aLog.ToLog(IntToStr(ShapeClassList.IndexOf(TmsLine)));
   end
  );
+end;
+
+// TRegisteredShapesTest
+
+function TRegisteredShapesTest.ShapeClassList: TmsShapeClassList;
+begin
+ Result := TmsRegisteredShapes.Instance;
 end;
 
 initialization
