@@ -138,10 +138,9 @@ begin
  begin
   l_ShapeOnPoint := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
   if (l_ShapeOnPoint <> nil) then
-  begin
-   Result := false;
-  end//l_ShapeOnPoint <> nil
-  else
+   if l_ShapeOnPoint.ClickInDiagramm then
+    Result := false;
+  if Result then
    f_Moving.MoveTo(aCtx.rStartPoint);
  end;//f_Moving <> nil
  if Result then

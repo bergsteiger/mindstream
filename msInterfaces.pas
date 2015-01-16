@@ -90,6 +90,8 @@ type
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
+  function ClickInDiagramm: Boolean;
+  // - ткнули в примитив внутри диаграммы
   function DrawBounds: TRectF;
   function pm_GetStartPoint: TPointF;
   property StartPoint: TPointF

@@ -15,6 +15,7 @@ type
   constructor CreateInner(const aShapeToDeal: ImsShape; const aShape: ImsShape);
   property ShapeToDeal : ImsShape
    read f_ShapeToDeal;
+  function ClickInDiagramm: Boolean; override;
  public
   class function Create(const aShapeToDeal: ImsShape; const aShape: ImsShape): ImsShape;
   destructor Destroy; override;
@@ -37,6 +38,11 @@ begin
  Assert(aShapeToDeal <> nil);
  inherited CreateInner(aShape);
  f_ShapeToDeal := aShapeToDeal;
+end;
+
+function TmsShapeTool.ClickInDiagramm: Boolean;
+begin
+ Result := true;
 end;
 
 destructor TmsShapeTool.Destroy;
