@@ -8,7 +8,10 @@ uses
   ;
 
 type
-  TRegisteredShapesTest = class(TmsLoggedTest)
+  TmsRegisteredShapesTestPrim = class abstract(TmsLoggedTest)
+  end;//TmsRegisteredShapesTestPrim
+
+  TRegisteredShapesTest = class(TmsRegisteredShapesTestPrim)
    published
     procedure ShapesRegistredCount;
     procedure TestFirstShape;
