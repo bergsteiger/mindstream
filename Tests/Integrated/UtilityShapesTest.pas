@@ -4,11 +4,17 @@
 interface
 
 uses
-  TestFrameWork
+  TestFrameWork,
+  msRegisteredShapesTestPrim,
+  msShapeClassList,
+  msShape
   ;
 
 type
-  TUtilityShapesTest = class(TTestCase)
+  TUtilityShapesTest = class(TmsRegisteredShapesTestPrim)
+   protected
+    function ShapeClassList: TmsShapeClassList; override;
+    procedure CheckShapeClass(aShapeClass: RmsShape); override;
    published
     procedure ShapesRegistredCount;
     procedure TestFirstShape;
@@ -20,11 +26,23 @@ implementation
 uses
   SysUtils,
   msUtilityShapes,
-  msShape,
   msMover,
   FMX.Objects,
   FMX.Graphics
   ;
+
+// TUtilityShapesTest
+
+function TUtilityShapesTest.ShapeClassList: TmsShapeClassList;
+begin
+ Result := TmsUtilityShapes.Instance;
+end;
+
+procedure TUtilityShapesTest.CheckShapeClass(aShapeClass: RmsShape);
+begin
+ inherited;
+ Assert(aShapeClass.IsForToolbar);
+end;
 
 procedure TUtilityShapesTest.ShapesRegistredCount;
 var
