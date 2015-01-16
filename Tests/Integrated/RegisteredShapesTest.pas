@@ -12,6 +12,7 @@ type
   TmsRegisteredShapesTestPrim = class abstract(TmsLoggedTest)
    protected
     function ShapeClassList: TmsShapeClassList; virtual; abstract;
+    function FileExtension: String; override;
   end;//TmsRegisteredShapesTestPrim
 
   TRegisteredShapesTest = class(TmsRegisteredShapesTestPrim)
@@ -33,6 +34,13 @@ uses
   FMX.Objects,
   FMX.Graphics
   ;
+
+// TmsRegisteredShapesTestPrim
+
+function TmsRegisteredShapesTestPrim.FileExtension: String;
+begin
+ Result := '.registered';
+end;
 
 // TRegisteredShapesTest
 
