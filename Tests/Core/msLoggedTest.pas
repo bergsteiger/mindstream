@@ -16,6 +16,7 @@ type
     function ContextName: String; virtual;
     procedure CheckFileWithEtalon(const aFileName: String);
     function InnerFolders: String; virtual;
+    function FileExtension: String; virtual;
   end;//TmsLoggedTest
 
 implementation
@@ -28,13 +29,18 @@ uses
 
 // TmsLoggedTest
 
+function TmsLoggedTest.FileExtension: String;
+begin
+ Result := '';
+end;
+
 function TmsLoggedTest.MakeFileName(const aTestName: string; const aTestFolder: string): String;
 var
  l_Folder : String;
 begin
  l_Folder := ExtractFilePath(ParamStr(0)) + 'TestResults\' + aTestFolder;
  ForceDirectories(l_Folder);
- Result := l_Folder + ClassName + '_' + aTestName + ContextName;
+ Result := l_Folder + ClassName + '_' + aTestName + ContextName + FileExtension;
 end;
 
 function TmsLoggedTest.ContextName: String;
