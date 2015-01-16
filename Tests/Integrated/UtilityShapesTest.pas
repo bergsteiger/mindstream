@@ -41,7 +41,7 @@ end;
 procedure TUtilityShapesTest.CheckShapeClass(aShapeClass: RmsShape);
 begin
  inherited;
- Assert(aShapeClass.IsForToolbar);
+ Assert(aShapeClass.IsTool);
 end;
 
 procedure TUtilityShapesTest.ShapesRegistredCount;
