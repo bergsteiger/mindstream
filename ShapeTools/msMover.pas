@@ -49,7 +49,8 @@ uses
  msCircle,
  msCircleWithRadius,
  Math,
- msProxyShape
+ msProxyShape,
+ msMoveShapeUp
  ;
 
 // TmsMover
@@ -92,7 +93,7 @@ begin
  l_B := f_Moving.DrawBounds;
  l_Mid.X := (l_B.Left + l_B.Right) / 2;
  l_Mid.Y := (l_B.Top + l_B.Bottom) / 2;
- aController.AddShape(AddButton(TmsShapeTool, TmsUpArrow.Create(TPointF.Create(l_Mid.X, l_B.Top - TmsSpecialArrow.InitialLength - cShift))));
+ aController.AddShape(AddButton(TmsMoveShapeUp, TmsUpArrow.Create(TPointF.Create(l_Mid.X, l_B.Top - TmsSpecialArrow.InitialLength - cShift))));
  aController.AddShape(AddButton(TmsShapeTool, TmsDownArrow.Create(TPointF.Create(l_Mid.X, l_B.Bottom + cShift))));
  aController.AddShape(AddButton(TmsShapeTool, TmsLeftArrow.Create(TPointF.Create(l_B.Left - TmsSpecialArrow.InitialLength - cShift, l_Mid.Y))));
  aController.AddShape(AddButton(TmsShapeTool, TmsRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_Mid.Y))));

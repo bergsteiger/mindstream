@@ -88,8 +88,8 @@ uses
   msLoggedTest in 'Tests\Core\msLoggedTest.pas',
   msRegisteredShapesTestPrim in 'Tests\Abstract\msRegisteredShapesTestPrim.pas',
   msProxyShape in 'ContainerShapes\msProxyShape.pas',
-  msShapeTool in 'ContainerShapes\msShapeTool.pas'
-  ;
+  msShapeTool in 'ContainerShapes\msShapeTool.pas',
+  msMoveShapeUp in 'ShapeTools\FloatingButtons\msMoveShapeUp.pas';
 
 {$R *.res}
 
