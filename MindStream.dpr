@@ -87,7 +87,8 @@ uses
   msShapeClassList in 'msShapeClassList.pas',
   msLoggedTest in 'Tests\Core\msLoggedTest.pas',
   msRegisteredShapesTestPrim in 'Tests\Abstract\msRegisteredShapesTestPrim.pas',
-  msProxyShape in 'ContainerShapes\msProxyShape.pas'
+  msProxyShape in 'ContainerShapes\msProxyShape.pas',
+  msShapeTool in 'ContainerShapes\msShapeTool.pas'
   ;
 
 {$R *.res}
