@@ -16,6 +16,7 @@ type
   property ShapeToDeal : ImsShape
    read f_ShapeToDeal;
   function ClickInDiagramm: Boolean; override;
+  procedure ProcessClickInDiagramm; virtual;
  public
   class function Create(const aShapeToDeal: ImsShape; const aShape: ImsShape): ImsShape;
   destructor Destroy; override;
@@ -43,6 +44,12 @@ end;
 function TmsShapeTool.ClickInDiagramm: Boolean;
 begin
  Result := true;
+ ProcessClickInDiagramm
+end;
+
+procedure TmsShapeTool.ProcessClickInDiagramm;
+begin
+ // - ничего не делаем. ОСОЗНАННО. НО! И не падаем.
 end;
 
 destructor TmsShapeTool.Destroy;
