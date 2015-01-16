@@ -15,10 +15,6 @@ type
    protected
     function ShapeClassList: TmsShapeClassList; override;
     procedure CheckShapeClass(aShapeClass: RmsShape); override;
-   published
-    procedure ShapesRegistredCount;
-    procedure TestFirstShape;
-    procedure TestIndexOfTmsLine;
   end;//TUtilityShapesTest
 
 implementation
@@ -44,33 +40,9 @@ begin
  Assert(aShapeClass.IsTool);
 end;
 
-procedure TUtilityShapesTest.ShapesRegistredCount;
-var
- l_Result : integer;
-begin
- l_Result := 0;
- TmsUtilityShapes.IterateShapes(
-  procedure (aShapeClass: RmsShape)
-  begin
-   Assert(aShapeClass.IsForToolbar);
-   Inc(l_Result);
-  end
- );
- CheckTrue(l_Result = 5, ' Expected 5 - Get ' + IntToStr(l_Result));
-end;
-
-procedure TUtilityShapesTest.TestFirstShape;
-begin
- CheckTrue(TmsUtilityShapes.Instance.First = TmsMover);
-end;
-
-procedure TUtilityShapesTest.TestIndexOfTmsLine;
-begin
- CheckTrue(TmsUtilityShapes.Instance.IndexOf(TmsMover) = 0);
-end;
-
 initialization
  TestFramework.RegisterTest(TUtilityShapesTest.Suite);
+
 end.
 
 
