@@ -4,6 +4,7 @@ interface
 
 uses
  msLoggedTest,
+ msShape,
  msShapeClassList
  ;
 
@@ -12,6 +13,7 @@ type
    protected
     function ShapeClassList: TmsShapeClassList; virtual; abstract;
     function FileExtension: String; override;
+    procedure CheckShapeClass(aShapeClass: RmsShape); virtual;
    published
     procedure ShapesRegistredCount;
     procedure TestFirstShape;
@@ -23,7 +25,6 @@ implementation
 uses
  SysUtils,
  msCoreObjects,
- msShape,
  msLine
  ;
 
@@ -32,6 +33,10 @@ uses
 function TmsRegisteredShapesTestPrim.FileExtension: String;
 begin
  Result := '.registered';
+end;
+
+procedure TmsRegisteredShapesTestPrim.CheckShapeClass(aShapeClass: RmsShape);
+begin
 end;
 
 procedure TmsRegisteredShapesTestPrim.ShapesRegistredCount;
@@ -44,6 +49,7 @@ begin
    ShapeClassList.IterateShapes(
     procedure (aShapeClass: RmsShape)
     begin
+     CheckShapeClass(aShapeClass);
      Inc(l_Result);
     end
    );
