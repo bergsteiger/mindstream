@@ -5,11 +5,16 @@ interface
 
 uses
   TestFrameWork,
-  msRegisteredShapesTestPrim
+  msRegisteredShapesTestPrim,
+  msShapeClassList,
+  msShape
   ;
 
 type
-  TForToolbarShapesTest = class(TTestCase)
+  TForToolbarShapesTest = class(TmsRegisteredShapesTestPrim)
+   protected
+    function ShapeClassList: TmsShapeClassList; override;
+    procedure CheckShapeClass(aShapeClass: RmsShape); override;
    published
     procedure ShapesRegistredCount;
     procedure TestFirstShape;
@@ -21,11 +26,23 @@ implementation
 uses
   SysUtils,
   msShapesForToolbar,
-  msShape,
   msLine,
   FMX.Objects,
   FMX.Graphics
   ;
+
+// TForToolbarShapesTest
+
+function TForToolbarShapesTest.ShapeClassList: TmsShapeClassList;
+begin
+ Result := TmsShapesForToolbar.Instance;
+end;
+
+procedure TForToolbarShapesTest.CheckShapeClass(aShapeClass: RmsShape);
+begin
+ inherited;
+ Assert(aShapeClass.IsForToolbar);
+end;
 
 procedure TForToolbarShapesTest.ShapesRegistredCount;
 var
