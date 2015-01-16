@@ -86,7 +86,7 @@ type
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean;
-  procedure EndTo(const aCtx: TmsEndShapeContext);
+  function EndTo(const aCtx: TmsEndShapeContext): Boolean;
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;

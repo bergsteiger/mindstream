@@ -20,11 +20,7 @@ type
 implementation
 
 uses
-  SysUtils,
-  msUtilityShapes,
-  msMover,
-  FMX.Objects,
-  FMX.Graphics
+  msUtilityShapes
   ;
 
 // TUtilityShapesTest

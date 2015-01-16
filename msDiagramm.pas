@@ -246,8 +246,8 @@ end;
 procedure TmsDiagramm.EndShape(const aFinish: TPointF; aDiagrammsHolder: ImsDiagrammsHolder);
 begin
  Assert(CurrentAddedShape <> nil);
- CurrentAddedShape.EndTo(TmsEndShapeContext.Create(aFinish, Self, aDiagrammsHolder));
- FCurrentAddedShape := nil;
+ if CurrentAddedShape.EndTo(TmsEndShapeContext.Create(aFinish, Self, aDiagrammsHolder)) then
+  FCurrentAddedShape := nil;
  Invalidate;
 end;
 

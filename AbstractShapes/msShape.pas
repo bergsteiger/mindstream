@@ -27,7 +27,7 @@ type
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   function IsNeedsSecondClick : Boolean; virtual;
-  procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
+  function EndTo(const aCtx: TmsEndShapeContext): Boolean; virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
   procedure SaveTo(const aFileName: String); override;
@@ -100,8 +100,9 @@ begin
  SetStartPoint(aStartPoint);
 end;
 
-procedure TmsShape.EndTo(const aCtx: TmsEndShapeContext);
+function TmsShape.EndTo(const aCtx: TmsEndShapeContext): Boolean;
 begin
+ Result := true;
  Assert(false, 'Примитив ' + ClassName + ' не может быть завершён');
 end;
 
