@@ -4,14 +4,19 @@ interface
 
 uses
   TestFrameWork,
-  msLoggedTest
+  msLoggedTest,
+  msShapeClassList
   ;
 
 type
   TmsRegisteredShapesTestPrim = class abstract(TmsLoggedTest)
+   protected
+    function ShapeClassList: TmsShapeClassList; virtual; abstract;
   end;//TmsRegisteredShapesTestPrim
 
   TRegisteredShapesTest = class(TmsRegisteredShapesTestPrim)
+   protected
+    function ShapeClassList: TmsShapeClassList; override;
    published
     procedure ShapesRegistredCount;
     procedure TestFirstShape;
@@ -29,12 +34,19 @@ uses
   FMX.Graphics
   ;
 
+// TRegisteredShapesTest
+
+function TRegisteredShapesTest.ShapeClassList: TmsShapeClassList;
+begin
+ Result := TmsRegisteredShapes.Instance;
+end;
+
 procedure TRegisteredShapesTest.ShapesRegistredCount;
 var
  l_Result : integer;
 begin
  l_Result := 0;
- TmsRegisteredShapes.IterateShapes(
+ ShapeClassList.IterateShapes(
   procedure (aShapeClass: RmsShape)
   begin
    Inc(l_Result);
@@ -45,12 +57,12 @@ end;
 
 procedure TRegisteredShapesTest.TestFirstShape;
 begin
- CheckTrue(TmsRegisteredShapes.Instance.First = TmsLine);
+ CheckTrue(ShapeClassList.First = TmsLine);
 end;
 
 procedure TRegisteredShapesTest.TestIndexOfTmsLine;
 begin
- CheckTrue(TmsRegisteredShapes.Instance.IndexOf(TmsLine) = 0);
+ CheckTrue(ShapeClassList.IndexOf(TmsLine) = 0);
 end;
 
 initialization
