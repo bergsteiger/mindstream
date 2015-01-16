@@ -269,7 +269,8 @@
   msFolderIcon in &apos;SpecialShapes\ForButtons\msFolderIcon.pas&apos;,
   msShapesList in &apos;msShapesList.pas&apos;,
   msCircleWithRadius in &apos;ConcreteShapes\msCircleWithRadius.pas&apos;,
-  msShapeClassList in &apos;msShapeClassList.pas&apos;;
+  msShapeClassList in &apos;msShapeClassList.pas&apos;,
+  msLoggedTest in &apos;Tests\Core\msLoggedTest.pas&apos;;
 
 {$R *.res</Form>
         </DCCReference>
@@ -295,6 +296,7 @@
         <DCCReference Include="msShapesList.pas"/>
         <DCCReference Include="ConcreteShapes\msCircleWithRadius.pas"/>
         <DCCReference Include="msShapeClassList.pas"/>
+        <DCCReference Include="Tests\Core\msLoggedTest.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>

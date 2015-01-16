@@ -84,7 +84,8 @@ uses
   msFolderIcon in 'SpecialShapes\ForButtons\msFolderIcon.pas',
   msShapesList in 'msShapesList.pas',
   msCircleWithRadius in 'ConcreteShapes\msCircleWithRadius.pas',
-  msShapeClassList in 'msShapeClassList.pas';
+  msShapeClassList in 'msShapeClassList.pas',
+  msLoggedTest in 'Tests\Core\msLoggedTest.pas';
 
 {$R *.res}
 
