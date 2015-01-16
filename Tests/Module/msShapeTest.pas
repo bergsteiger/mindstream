@@ -58,7 +58,7 @@ type
 
   TmsCustomShapeTest = class(TmsShapeTestPrim)
   protected
-   function MakeFileName(const aTestName: string; const aTestFolder: string): String; override;
+   function FileExtension: String; override;
   published
     procedure TestSerialize;
   end;//TmsCustomShapeTest
@@ -199,9 +199,9 @@ begin
  );
 end;
 
-function TmsCustomShapeTest.MakeFileName(const aTestName: string; const aTestFolder: string): String;
+function TmsCustomShapeTest.FileExtension: String;
 begin
- Result := inherited + '.json';
+ Result := '.json';
 end;
 
 procedure TmsCustomShapeTest.TestSerialize;

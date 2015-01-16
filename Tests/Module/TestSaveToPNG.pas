@@ -11,7 +11,7 @@ uses
 type
   TTestSaveToPNG = class(TmsShapeTestPrim)
    protected
-    function MakeFileName(const aTestName: string; const aTestFolder: string): String; override;
+    function FileExtension: String; override;
     function InnerFolders: String; override;
     procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); override;
    published
@@ -39,9 +39,9 @@ begin
  CreateDiagrammWithShapeAndSaveAndCheck;
 end;
 
-function TTestSaveToPNG.MakeFileName(const aTestName: string; const aTestFolder: string): String;
+function TTestSaveToPNG.FileExtension: String;
 begin
- Result := inherited + '.png';
+ Result := '.png';
 end;
 
 function TTestSaveToPNG.InnerFolders: String;
