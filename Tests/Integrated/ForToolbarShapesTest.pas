@@ -4,7 +4,8 @@ unit ForToolbarShapesTest;
 interface
 
 uses
-  TestFrameWork
+  TestFrameWork,
+  msRegisteredShapesTestPrim
   ;
 
 type
