@@ -79,7 +79,11 @@ end;
 
 procedure TRegisteredShapesTest.TestIndexOfTmsLine;
 begin
- CheckTrue(ShapeClassList.IndexOf(TmsLine) = 0);
+ OutToFileAndCheck(procedure (aLog: TmsLog)
+  begin
+   aLog.ToLog(IntToStr(ShapeClassList.IndexOf(TmsLine)));
+  end
+ );
 end;
 
 initialization
