@@ -7,7 +7,9 @@ uses
  System.Types,
  System.Math.Vectors,
  FMX.Graphics,
- System.SysUtils
+ System.SysUtils,
+ msInterfaces,
+ System.UITypes
  ;
 
 type
@@ -16,6 +18,7 @@ type
   // - класс для реализации SVG Уха
  protected
   function Polygon: TPolygon; override;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsPolygonShape
 
 implementation
@@ -40,6 +43,13 @@ begin
  Result := l_PolygonSVG;
 
  FreeAndNil(l_PD);
+end;
+
+procedure TmsSVG_UHO.TransformDrawOptionsContext(
+  var theCtx: TmsDrawOptionsContext);
+begin
+  inherited;
+ theCtx.rFillColor := TAlphaColorRec.Green;
 end;
 
 end.
