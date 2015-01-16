@@ -28,7 +28,7 @@ type
   destructor Destroy; override;
   class function ButtonShape: ImsShape; override;
   function IsNeedsSecondClick : Boolean; override;
-  procedure EndTo(const aCtx: TmsEndShapeContext); override;
+  function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
  end;//TmsMover
 
 implementation
@@ -128,10 +128,11 @@ begin
  Result := true;
 end;
 
-procedure TmsMover.EndTo(const aCtx: TmsEndShapeContext);
+function TmsMover.EndTo(const aCtx: TmsEndShapeContext): Boolean;
 var
  l_FloatingButton : ImsShape;
 begin
+ Result := true;
  if (f_Moving <> nil) then
   f_Moving.MoveTo(aCtx.rStartPoint);
  f_Moving := nil;
