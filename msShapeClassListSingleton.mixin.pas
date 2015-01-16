@@ -5,6 +5,7 @@
 {$Define TmsShapeClassListSingleton_uses_intf}
 
 // uses
+ msShapeClassList,
  msShape,
  Generics.Collections
 
@@ -13,11 +14,7 @@
 {$IfNDef TmsShapeClassListSingleton_intf}
 // http://programmingmindstream.blogspot.ru/2014/12/generic-2.html
 
- RmsShapeList = TList<RmsShape>;
-
- TmsShapeClassLambda = reference to procedure (aShapeClass : RmsShape);
-
- TmsShapeClassListSingleton = class
+ TmsShapeClassListSingleton = class(TmsShapeClassList)
  strict private
   f_Registered : RmsShapeList;
   class var f_Instance: TmsShapeClassListSingleton;

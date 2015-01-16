@@ -83,8 +83,8 @@ uses
   msButtonIcon in 'SpecialShapes\ForButtons\msButtonIcon.pas',
   msFolderIcon in 'SpecialShapes\ForButtons\msFolderIcon.pas',
   msShapesList in 'msShapesList.pas',
-  msCircleWithRadius in 'ConcreteShapes\msCircleWithRadius.pas'
-  ;
+  msCircleWithRadius in 'ConcreteShapes\msCircleWithRadius.pas',
+  msShapeClassList in 'msShapeClassList.pas';
 
 {$R *.res}
 

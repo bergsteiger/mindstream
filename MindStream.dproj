@@ -266,7 +266,10 @@
   msPickerIcon in &apos;SpecialShapes\ForButtons\msPickerIcon.pas&apos;,
   msUpToParentIcon in &apos;SpecialShapes\ForButtons\msUpToParentIcon.pas&apos;,
   msButtonIcon in &apos;SpecialShapes\ForButtons\msButtonIcon.pas&apos;,
-  msFolderIcon in &apos;SpecialShapes\ForButtons\msFolderIcon.pas&apos;;
+  msFolderIcon in &apos;SpecialShapes\ForButtons\msFolderIcon.pas&apos;,
+  msShapesList in &apos;msShapesList.pas&apos;,
+  msCircleWithRadius in &apos;ConcreteShapes\msCircleWithRadius.pas&apos;,
+  msShapeClassList in &apos;msShapeClassList.pas&apos;;
 
 {$R *.res</Form>
         </DCCReference>
@@ -291,6 +294,7 @@
         <DCCReference Include="SpecialShapes\ForButtons\msFolderIcon.pas"/>
         <DCCReference Include="msShapesList.pas"/>
         <DCCReference Include="ConcreteShapes\msCircleWithRadius.pas"/>
+        <DCCReference Include="msShapeClassList.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>

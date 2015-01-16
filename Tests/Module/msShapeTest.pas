@@ -10,7 +10,8 @@ uses
   System.Types,
   System.Classes,
   msCoreObjects,
-  msInterfaces
+  msInterfaces,
+  msShapeClassList
   ;
 
 type
