@@ -56,20 +56,20 @@ end;
 
 procedure TmsProxyShape.DoDrawTo(const aCtx: TmsDrawContext);
 begin
- Assert(f_Shape <> nil);
- f_Shape.DrawTo(aCtx);
+ Assert(ShapeToShow <> nil);
+ ShapeToShow.DrawTo(aCtx);
 end;
 
 function TmsProxyShape.GetDrawBounds: TRectF;
 begin
- Assert(f_Shape <> nil);
- Result := f_Shape.DrawBounds;
+ Assert(ShapeToShow <> nil);
+ Result := ShapeToShow.DrawBounds;
 end;
 
 function TmsProxyShape.ContainsPt(const aPoint: TPointF): Boolean;
 begin
- Assert(f_Shape <> nil);
- Result := f_Shape.ContainsPt(aPoint);
+ Assert(ShapeToShow <> nil);
+ Result := ShapeToShow.ContainsPt(aPoint);
 end;
 
 end.
