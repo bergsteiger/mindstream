@@ -12,7 +12,7 @@ type
   TTestSaveToPNG = class(TmsShapeTestPrim)
    protected
     function MakeFileName(const aTestName: string; const aTestFolder: string): String; override;
-    function TestResultsFileName: String; override;
+    function InnerFolders: String; override;
     procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); override;
    published
     procedure CreateDiagrammWithShapeAndSaveToPNG_AndCheck;
@@ -27,7 +27,7 @@ uses
   FMX.Graphics
   ;
 
-{ TTestSaveToPNG }
+// TTestSaveToPNG
 
 procedure TTestSaveToPNG.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 begin
@@ -44,13 +44,12 @@ begin
  Result := inherited + '.png';
 end;
 
-function TTestSaveToPNG.TestResultsFileName: String;
+function TTestSaveToPNG.InnerFolders: String;
 const
  c_PNG = 'PNG\';
 begin
- Result := MakeFileName(Name, c_PNG + ComputerName + '\');
+ Result := c_PNG + ComputerName + '\';
 end;
 
-initialization
 end.
 
