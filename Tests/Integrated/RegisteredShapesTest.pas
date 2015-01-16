@@ -3,11 +3,12 @@ unit RegisteredShapesTest;
 interface
 
 uses
-  TestFrameWork
+  TestFrameWork,
+  msLoggedTest
   ;
 
 type
-  TRegisteredShapesTest = class(TTestCase)
+  TRegisteredShapesTest = class(TmsLoggedTest)
    published
     procedure ShapesRegistredCount;
     procedure TestFirstShape;
