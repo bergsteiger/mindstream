@@ -48,7 +48,8 @@ uses
  msCircle,
  msCircleWithRadius,
  Math,
- msProxyShape
+ msProxyShape,
+ msShapeTool
  ;
 
 // TmsMover
@@ -66,7 +67,8 @@ begin
  l_Mid.X := (l_B.Left + l_B.Right) / 2;
  l_Mid.Y := (l_B.Top + l_B.Bottom) / 2;
  Result := f_FloatingButtons.AddShape(
-            TmsProxyShape.Create(
+            TmsShapeTool.Create(
+             f_Moving,
              TmsShapesGroup.Create([
               TmsCircleWithRadius.Create(l_Mid,
                                          Max(-(l_B.Left - l_B.Right),
