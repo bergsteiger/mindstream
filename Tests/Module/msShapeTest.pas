@@ -15,6 +15,9 @@ uses
   ;
 
 type
+  TmsLoggedTest = class abstract(TTestCase)
+  end;//TmsLoggedTest
+
   TmsShapeClassCheck = TmsShapeClassLambda;
 
   TmsDiagrammCheck = reference to procedure (const aDiagramm : ImsDiagramm);
@@ -29,7 +32,7 @@ type
    constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; aShapeClass: RmsShape);
   end;//TmsShapeTestContext
 
-  TmsShapeTestPrim = class abstract(TTestCase)
+  TmsShapeTestPrim = class abstract(TmsLoggedTest)
   protected
    f_Context : TmsShapeTestContext;
    f_TestSerializeMethodName : String;
