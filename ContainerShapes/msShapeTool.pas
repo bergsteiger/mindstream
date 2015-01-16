@@ -21,6 +21,8 @@ type
   class function IsTool: Boolean; override;
  end;//TmsShapeTool
 
+ RmsShapeTool = class of TmsShapeTool;
+
 implementation
 
 // TmsProxyShape

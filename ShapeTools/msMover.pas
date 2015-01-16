@@ -9,7 +9,8 @@ uses
  System.UITypes,
  msTool,
  msInterfaces,
- msShapesList
+ msShapesList,
+ msShapeTool
  ;
 
 type
@@ -22,7 +23,7 @@ type
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
-  function AddButton(const aButton: ImsShape): ImsShape;
+  function AddButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
   destructor Destroy; override;
@@ -48,8 +49,7 @@ uses
  msCircle,
  msCircleWithRadius,
  Math,
- msProxyShape,
- msShapeTool
+ msProxyShape
  ;
 
 // TmsMover
@@ -57,7 +57,7 @@ uses
 const
  cShift = 12;
 
-function TmsMover.AddButton(const aButton: ImsShape): ImsShape;
+function TmsMover.AddButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
 var
  l_B : TRectF;
  l_Mid : TPointF;
@@ -67,7 +67,7 @@ begin
  l_Mid.X := (l_B.Left + l_B.Right) / 2;
  l_Mid.Y := (l_B.Top + l_B.Bottom) / 2;
  Result := f_FloatingButtons.AddShape(
-            TmsShapeTool.Create(
+            aToolClass.Create(
              f_Moving,
              TmsShapesGroup.Create([
               TmsCircleWithRadius.Create(l_Mid,
@@ -92,10 +92,10 @@ begin
  l_B := f_Moving.DrawBounds;
  l_Mid.X := (l_B.Left + l_B.Right) / 2;
  l_Mid.Y := (l_B.Top + l_B.Bottom) / 2;
- aController.AddShape(AddButton(TmsUpArrow.Create(TPointF.Create(l_Mid.X, l_B.Top - TmsSpecialArrow.InitialLength - cShift))));
- aController.AddShape(AddButton(TmsDownArrow.Create(TPointF.Create(l_Mid.X, l_B.Bottom + cShift))));
- aController.AddShape(AddButton(TmsLeftArrow.Create(TPointF.Create(l_B.Left - TmsSpecialArrow.InitialLength - cShift, l_Mid.Y))));
- aController.AddShape(AddButton(TmsRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_Mid.Y))));
+ aController.AddShape(AddButton(TmsShapeTool, TmsUpArrow.Create(TPointF.Create(l_Mid.X, l_B.Top - TmsSpecialArrow.InitialLength - cShift))));
+ aController.AddShape(AddButton(TmsShapeTool, TmsDownArrow.Create(TPointF.Create(l_Mid.X, l_B.Bottom + cShift))));
+ aController.AddShape(AddButton(TmsShapeTool, TmsLeftArrow.Create(TPointF.Create(l_B.Left - TmsSpecialArrow.InitialLength - cShift, l_Mid.Y))));
+ aController.AddShape(AddButton(TmsShapeTool, TmsRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_Mid.Y))));
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
