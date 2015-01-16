@@ -4,7 +4,7 @@ interface
 
 uses
  msInterfaces,
- msShape,
+ msPointedShape,
  System.Types,
  System.Math.Vectors,
  FMX.Graphics,
@@ -12,11 +12,11 @@ uses
  ;
 
 type
- TmsSVG_Shape = class(TmsShape)
+ TmsSVG_Shape = class abstract(TmsPointedShape)
 // TmsSVG_Shape = class abstract(TmsShape)
   // - класс для реализации SVG объектов
  protected
-  function Polygon: TPolygon; virtual;
+  function Polygon: TPolygon; virtual; abstract;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
  end;//TmsPolygonShape
@@ -48,27 +48,6 @@ begin
    Result.Bottom := l_P.Y;
  end;//l_P in l_PL
  //Result := PolygonBounds(Polygon);
-end;
-
-
-function TmsSVG_Shape.Polygon: TPolygon;
-{const
- с_InitialHeight = 150;
-var
- l_PolygonSVG : TPolygon;
- l_SVG_String: string;
- l_PD: TPathData;
- l_Point: TPointF;          }
-begin
- {l_PD := TPathData.Create;
-
- l_SVG_String := 'M 100,0,  L 200,100, L 100,200, L 0,100, L 100,0';
-
- l_PD.Data := l_SVG_String;
- l_Point:= l_PD.FlattenToPolygon(l_PolygonSVG);
- Result := l_PolygonSVG;
-
- FreeAndNil(l_PD);}
 end;
 
 procedure TmsSVG_Shape.DoDrawTo(const aCtx: TmsDrawContext);
