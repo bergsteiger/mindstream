@@ -32,7 +32,8 @@ uses
   msShape,
   msLine,
   FMX.Objects,
-  FMX.Graphics
+  FMX.Graphics,
+  msCoreObjects
   ;
 
 // TmsRegisteredShapesTestPrim
@@ -50,17 +51,21 @@ begin
 end;
 
 procedure TRegisteredShapesTest.ShapesRegistredCount;
-var
- l_Result : integer;
 begin
- l_Result := 0;
- ShapeClassList.IterateShapes(
-  procedure (aShapeClass: RmsShape)
+ OutToFileAndCheck(procedure (aLog: TmsLog)
+  var
+   l_Result : integer;
   begin
-   Inc(l_Result);
+   l_Result := 0;
+   ShapeClassList.IterateShapes(
+    procedure (aShapeClass: RmsShape)
+    begin
+     Inc(l_Result);
+    end
+   );
+   aLog.ToLog(IntToStr(l_Result));
   end
  );
- CheckTrue(l_Result = 23,  ' Expected 23 - Get ' + IntToStr(l_Result));
 end;
 
 procedure TRegisteredShapesTest.TestFirstShape;
