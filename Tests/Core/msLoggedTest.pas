@@ -11,7 +11,7 @@ type
   TmsLoggedTest = class abstract(TTestCase)
   protected
     procedure OutToFileAndCheck(aLambda: TmsLogLambda);
-    function TestResultsFileName: String; virtual;
+    function TestResultsFileName: String;
     function MakeFileName(const aTestName: string; const aTestFolder: string): String; virtual;
     function ContextName: String; virtual;
     procedure CheckFileWithEtalon(const aFileName: String);
