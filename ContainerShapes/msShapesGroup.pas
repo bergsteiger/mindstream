@@ -8,13 +8,11 @@ uses
  Generics.Collections,
  msInterfaces,
  msShape,
- msPointlessShape
+ msPointlessShape,
+ msShapesList
  ;
 
 type
- TmsShapesList = class(TList<ImsShape>)
- end;//TmsShapesList
-
  TmsShapesGroup = class(TmsPointlessShape)
  private
   f_Shapes : TmsShapesList;

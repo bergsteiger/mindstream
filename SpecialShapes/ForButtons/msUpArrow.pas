@@ -3,6 +3,7 @@ unit msUpArrow;
 interface
 
 uses
+ System.Types,
  msInterfaces,
  msSpecialArrow
  ;
@@ -10,20 +11,16 @@ uses
 type
  TmsUpArrow = class(TmsSpecialArrow)
  public
-  class function Create: ImsShape; override;
+  class function Create(const aPointedPoint: TPointF): ImsShape; override;
  end;//TmsUpArrow
 
 implementation
 
-uses
- System.Types
- ;
-
 // TmsUpArrow
 
-class function TmsUpArrow.Create: ImsShape;
+class function TmsUpArrow.Create(const aPointedPoint: TPointF): ImsShape;
 begin
- Result := CreateCompletedInternal(TPointF.Create(0, InitialLength), TPointF.Create(0, 0));
+ Result := CreateCompletedInternal(TPointF.Create(aPointedPoint.X, aPointedPoint.Y + InitialLength), TPointF.Create(aPointedPoint.X, aPointedPoint.Y));
 end;
 
 end.

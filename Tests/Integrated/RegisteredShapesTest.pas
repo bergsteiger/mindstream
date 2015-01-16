@@ -3,15 +3,16 @@ unit RegisteredShapesTest;
 interface
 
 uses
-  TestFrameWork
+  TestFrameWork,
+  msLoggedTest,
+  msShapeClassList,
+  msRegisteredShapesTestPrim
   ;
 
 type
-  TRegisteredShapesTest = class(TTestCase)
-   published
-    procedure ShapesRegistredCount;
-    procedure TestFirstShape;
-    procedure TestIndexOfTmsLine;
+  TRegisteredShapesTest = class(TmsRegisteredShapesTestPrim)
+   protected
+    function ShapeClassList: TmsShapeClassList; override;
   end;//TRegisteredShapesTest
 
 implementation
@@ -22,35 +23,20 @@ uses
   msShape,
   msLine,
   FMX.Objects,
-  FMX.Graphics
+  FMX.Graphics,
+  msCoreObjects
   ;
 
-procedure TRegisteredShapesTest.ShapesRegistredCount;
-var
- l_Result : integer;
-begin
- l_Result := 0;
- TmsRegisteredShapes.IterateShapes(
-  procedure (aShapeClass: RmsShape)
-  begin
-   Inc(l_Result);
-  end
- );
- CheckTrue(l_Result = 23,  ' Expected 23 - Get ' + IntToStr(l_Result));
-end;
+// TRegisteredShapesTest
 
-procedure TRegisteredShapesTest.TestFirstShape;
+function TRegisteredShapesTest.ShapeClassList: TmsShapeClassList;
 begin
- CheckTrue(TmsRegisteredShapes.Instance.First = TmsLine);
-end;
-
-procedure TRegisteredShapesTest.TestIndexOfTmsLine;
-begin
- CheckTrue(TmsRegisteredShapes.Instance.IndexOf(TmsLine) = 0);
+ Result := TmsRegisteredShapes.Instance;
 end;
 
 initialization
  TestFramework.RegisterTest(TRegisteredShapesTest.Suite);
+
 end.
 
 

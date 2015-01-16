@@ -4,15 +4,17 @@
 interface
 
 uses
-  TestFrameWork
+  TestFrameWork,
+  msRegisteredShapesTestPrim,
+  msShapeClassList,
+  msShape
   ;
 
 type
-  TUtilityShapesTest = class(TTestCase)
-   published
-    procedure ShapesRegistredCount;
-    procedure TestFirstShape;
-    procedure TestIndexOfTmsLine;
+  TUtilityShapesTest = class(TmsRegisteredShapesTestPrim)
+   protected
+    function ShapeClassList: TmsShapeClassList; override;
+    procedure CheckShapeClass(aShapeClass: RmsShape); override;
   end;//TUtilityShapesTest
 
 implementation
@@ -20,39 +22,27 @@ implementation
 uses
   SysUtils,
   msUtilityShapes,
-  msShape,
   msMover,
   FMX.Objects,
   FMX.Graphics
   ;
 
-procedure TUtilityShapesTest.ShapesRegistredCount;
-var
- l_Result : integer;
+// TUtilityShapesTest
+
+function TUtilityShapesTest.ShapeClassList: TmsShapeClassList;
 begin
- l_Result := 0;
- TmsUtilityShapes.IterateShapes(
-  procedure (aShapeClass: RmsShape)
-  begin
-   Assert(aShapeClass.IsForToolbar);
-   Inc(l_Result);
-  end
- );
- CheckTrue(l_Result = 5, ' Expected 5 - Get ' + IntToStr(l_Result));
+ Result := TmsUtilityShapes.Instance;
 end;
 
-procedure TUtilityShapesTest.TestFirstShape;
+procedure TUtilityShapesTest.CheckShapeClass(aShapeClass: RmsShape);
 begin
- CheckTrue(TmsUtilityShapes.Instance.First = TmsMover);
-end;
-
-procedure TUtilityShapesTest.TestIndexOfTmsLine;
-begin
- CheckTrue(TmsUtilityShapes.Instance.IndexOf(TmsMover) = 0);
+ inherited;
+ Assert(aShapeClass.IsTool);
 end;
 
 initialization
  TestFramework.RegisterTest(TUtilityShapesTest.Suite);
+
 end.
 
 
