@@ -18,13 +18,7 @@ type
 implementation
 
 uses
-  SysUtils,
-  msRegisteredShapes,
-  msShape,
-  msLine,
-  FMX.Objects,
-  FMX.Graphics,
-  msCoreObjects
+  msRegisteredShapes
   ;
 
 // TRegisteredShapesTest

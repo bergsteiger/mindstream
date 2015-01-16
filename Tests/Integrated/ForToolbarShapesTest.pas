@@ -20,11 +20,7 @@ type
 implementation
 
 uses
-  SysUtils,
-  msShapesForToolbar,
-  msLine,
-  FMX.Objects,
-  FMX.Graphics
+  msShapesForToolbar
   ;
 
 // TForToolbarShapesTest
