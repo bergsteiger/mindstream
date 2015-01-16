@@ -130,18 +130,30 @@ end;
 
 function TmsMover.EndTo(const aCtx: TmsEndShapeContext): Boolean;
 var
+ l_ShapeOnPoint : ImsShape;
  l_FloatingButton : ImsShape;
 begin
  Result := true;
  if (f_Moving <> nil) then
-  f_Moving.MoveTo(aCtx.rStartPoint);
- f_Moving := nil;
- if (f_FloatingButtons <> nil) then
-  for l_FloatingButton in f_FloatingButtons do
-   aCtx.rShapesController.RemoveShape(l_FloatingButton);
-   // - надо удалить "плавающие кнопки".
- aCtx.rShapesController.RemoveShape(Self);
- // - теперь надо —≈Ѕя удалить
+ begin
+  l_ShapeOnPoint := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
+  if (l_ShapeOnPoint <> nil) then
+  begin
+   Result := false;
+  end//l_ShapeOnPoint <> nil
+  else
+   f_Moving.MoveTo(aCtx.rStartPoint);
+ end;//f_Moving <> nil
+ if Result then
+ begin
+  f_Moving := nil;
+  if (f_FloatingButtons <> nil) then
+   for l_FloatingButton in f_FloatingButtons do
+    aCtx.rShapesController.RemoveShape(l_FloatingButton);
+    // - надо удалить "плавающие кнопки".
+  aCtx.rShapesController.RemoveShape(Self);
+  // - теперь надо —≈Ѕя удалить
+ end;//Result
 end;
 
 procedure TmsMover.DoDrawTo(const aCtx: TmsDrawContext);
