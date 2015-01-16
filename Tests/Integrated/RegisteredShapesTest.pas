@@ -70,7 +70,11 @@ end;
 
 procedure TRegisteredShapesTest.TestFirstShape;
 begin
- CheckTrue(ShapeClassList.First = TmsLine);
+ OutToFileAndCheck(procedure (aLog: TmsLog)
+  begin
+   aLog.ToLog(ShapeClassList.First.ClassName);
+  end
+ );
 end;
 
 procedure TRegisteredShapesTest.TestIndexOfTmsLine;
