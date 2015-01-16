@@ -22,6 +22,7 @@ type
     function MakeFileName(const aTestName: string; const aTestFolder: string): String; virtual;
     function ContextName: String; virtual;
     procedure CheckFileWithEtalon(const aFileName: String);
+    function InnerFolders: String; virtual;
   end;//TmsLoggedTest
 
   TmsShapeClassCheck = TmsShapeClassLambda;
@@ -56,6 +57,7 @@ type
     procedure TestDeSerializeForShapeClass;
     procedure TestDeSerializeViaShapeCheckForShapeClass;
     function ContextName: String; override;
+    function InnerFolders: String; override;
   public
     class procedure CheckShapes(aCheck: TmsShapeClassCheck);
     constructor Create(const aContext: TmsShapeTestContext);
@@ -139,12 +141,22 @@ begin
  end;//FileExists(l_FileNameEtalon)
 end;
 
+function TmsLoggedTest.TestResultsFileName: String;
+begin
+ Result := MakeFileName(Name, InnerFolders);
+end;
+
+function TmsLoggedTest.InnerFolders: String;
+begin
+ Result := '';
+end;
+
 const
  c_JSON = 'JSON\';
 
-function TmsLoggedTest.TestResultsFileName: String;
+function TmsShapeTestPrim.InnerFolders: String;
 begin
- Result := MakeFileName(Name, c_JSON);
+ Result := c_JSON;
 end;
 
 class function TmsShapeTestPrim.ComputerName: AnsiString;
