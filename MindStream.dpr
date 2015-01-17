@@ -90,7 +90,8 @@ uses
   msProxyShape in 'ContainerShapes\msProxyShape.pas',
   msShapeTool in 'ContainerShapes\msShapeTool.pas',
   msMoveShapeUp in 'ShapeTools\FloatingButtons\msMoveShapeUp.pas',
-  msMoveShapeDown in 'ShapeTools\FloatingButtons\msMoveShapeDown.pas';
+  msMoveShapeDown in 'ShapeTools\FloatingButtons\msMoveShapeDown.pas',
+  msMoveShapeLeft in 'ShapeTools\FloatingButtons\msMoveShapeLeft.pas';
 
 {$R *.res}
 
