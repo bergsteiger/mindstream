@@ -91,7 +91,8 @@ uses
   msShapeTool in 'ContainerShapes\msShapeTool.pas',
   msMoveShapeUp in 'ShapeTools\FloatingButtons\msMoveShapeUp.pas',
   msMoveShapeDown in 'ShapeTools\FloatingButtons\msMoveShapeDown.pas',
-  msMoveShapeLeft in 'ShapeTools\FloatingButtons\msMoveShapeLeft.pas';
+  msMoveShapeLeft in 'ShapeTools\FloatingButtons\msMoveShapeLeft.pas',
+  msMoveShapeRight in 'ShapeTools\FloatingButtons\msMoveShapeRight.pas';
 
 {$R *.res}
 
