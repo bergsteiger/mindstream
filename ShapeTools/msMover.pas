@@ -20,6 +20,7 @@ type
   f_FloatingButtons : TmsShapesList;
   // - кнопки "плавающие" вокруг примитива f_Moving.
   //   https://bitbucket.org/ingword/mindstream/issue/43/------------------------------------------
+  f_WasMoved : Boolean;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
@@ -140,9 +141,13 @@ begin
   l_ShapeOnPoint := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
   if (l_ShapeOnPoint <> nil) then
    if l_ShapeOnPoint.ClickInDiagramm then
+   begin
+    f_WasMoved := true;
     Result := false;
-  if Result then
-   f_Moving.MoveTo(aCtx.rStartPoint);
+   end;//l_ShapeOnPoint.ClickInDiagramm
+  if not f_WasMoved then
+   if Result then
+    f_Moving.MoveTo(aCtx.rStartPoint);
  end;//f_Moving <> nil
  if Result then
  begin
