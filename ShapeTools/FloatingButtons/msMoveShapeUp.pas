@@ -14,10 +14,15 @@ type
 
 implementation
 
+uses
+ System.Types
+ ;
+
 // TmsMoveShapeUp
 
 procedure TmsMoveShapeUp.ProcessClickInDiagramm;
 begin
+ ShapeToDeal.MoveTo(ShapeToDeal.StartPoint + TPointF.Create(0, -1))
 end;
 
 end.
