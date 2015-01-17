@@ -89,7 +89,8 @@ uses
   msRegisteredShapesTestPrim in 'Tests\Abstract\msRegisteredShapesTestPrim.pas',
   msProxyShape in 'ContainerShapes\msProxyShape.pas',
   msShapeTool in 'ContainerShapes\msShapeTool.pas',
-  msMoveShapeUp in 'ShapeTools\FloatingButtons\msMoveShapeUp.pas';
+  msMoveShapeUp in 'ShapeTools\FloatingButtons\msMoveShapeUp.pas',
+  msMoveShapeDown in 'ShapeTools\FloatingButtons\msMoveShapeDown.pas';
 
 {$R *.res}
 
