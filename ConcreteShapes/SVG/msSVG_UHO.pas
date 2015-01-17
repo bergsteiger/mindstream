@@ -36,7 +36,11 @@ var
 begin
  l_PD := TPathData.Create;
 
- l_SVG_String := 'M 100,0,  L 200,100, L 100,200, L 0,100, L 100,0';
+ l_SVG_String := 'M 40,40, L 100,40, L 100,80, L 40,80, L 40,40' +
+ // begin UHO
+ 'L 40,20' +
+ 'L 60, 20' +
+ 'L 60, 40';
 
  l_PD.Data := l_SVG_String;
  l_Point:= l_PD.FlattenToPolygon(l_PolygonSVG);
@@ -49,7 +53,7 @@ procedure TmsSVG_UHO.TransformDrawOptionsContext(
   var theCtx: TmsDrawOptionsContext);
 begin
   inherited;
- theCtx.rFillColor := TAlphaColorRec.Green;
+ theCtx.rFillColor := TAlphaColorRec.Azure;
 end;
 
 end.
