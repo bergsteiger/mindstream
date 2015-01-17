@@ -62,7 +62,7 @@ uses
   msPaletteShape in 'ShapeTools\PaletteShapes\msPaletteShape.pas',
   msShapeRemover in 'ShapeTools\msShapeRemover.pas',
   msGreenCircle in 'SpecialShapes\ForButtons\msGreenCircle.pas',
-  msBlackTriangle in 'ConcreteShapes\ForButtons\msBlackTriangle.pas',
+  msBlackTriangle in 'ConcreteShapes\ForButtons\msBlackTriangle.pas' {,
   msPolygonShape in 'AbstractShapes\msPolygonShape.pas',
   msMoverIcon in 'SpecialShapes\ForButtons\msMoverIcon.pas',
   msPointedShape in 'AbstractShapes\msPointedShape.pas',
@@ -81,8 +81,30 @@ uses
   msPickerIcon in 'SpecialShapes\ForButtons\msPickerIcon.pas',
   msUpToParentIcon in 'SpecialShapes\ForButtons\msUpToParentIcon.pas',
   msButtonIcon in 'SpecialShapes\ForButtons\msButtonIcon.pas',
-  msFolderIcon in 'SpecialShapes\ForButtons\msFolderIcon.pas'
-  ;
+  msFolderIcon in 'SpecialShapes\ForButtons\msFolderIcon.pas';
+
+{$R *.res},
+  msPolygonShape in 'AbstractShapes\msPolygonShape.pas',
+  msMoverIcon in 'SpecialShapes\ForButtons\msMoverIcon.pas',
+  msPointedShape in 'AbstractShapes\msPointedShape.pas',
+  msUpArrow in 'SpecialShapes\ForButtons\msUpArrow.pas',
+  msDownArrow in 'SpecialShapes\ForButtons\msDownArrow.pas',
+  msSpecialArrow in 'AbstractShapes\msSpecialArrow.pas',
+  msLeftArrow in 'SpecialShapes\ForButtons\msLeftArrow.pas',
+  msRightArrow in 'SpecialShapes\ForButtons\msRightArrow.pas',
+  msRemoverIcon in 'SpecialShapes\ForButtons\msRemoverIcon.pas',
+  msShapesGroup in 'ContainerShapes\msShapesGroup.pas',
+  msPointlessShape in 'AbstractShapes\msPointlessShape.pas',
+  ForToolbarShapesTest in 'Tests\Integrated\ForToolbarShapesTest.pas',
+  RegisteredShapesTest in 'Tests\Integrated\RegisteredShapesTest.pas',
+  msSwapParentsIcon in 'SpecialShapes\ForButtons\msSwapParentsIcon.pas',
+  UtilityShapesTest in 'Tests\Integrated\UtilityShapesTest.pas',
+  msPickerIcon in 'SpecialShapes\ForButtons\msPickerIcon.pas',
+  msUpToParentIcon in 'SpecialShapes\ForButtons\msUpToParentIcon.pas',
+  msButtonIcon in 'SpecialShapes\ForButtons\msButtonIcon.pas',
+  msFolderIcon in 'SpecialShapes\ForButtons\msFolderIcon.pas',
+  msSVG_Shape in 'AbstractShapes\msSVG_Shape.pas',
+  msSVG_UHO in 'ConcreteShapes\SVG\msSVG_UHO.pas';
 
 {$R *.res}
 
