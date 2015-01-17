@@ -54,6 +54,8 @@ type
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   // - обрабатывает "нулевой клик"
+  function ClickInDiagramm: Boolean; virtual;
+  // - ткнули в примитив внутри диаграммы
   function GetDrawBounds: TRectF; virtual;
   function DrawBounds: TRectF;
  public
@@ -167,6 +169,11 @@ end;
 function TmsShape.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
 begin
  Result := DoNullClick(aHolder);
+end;
+
+function TmsShape.ClickInDiagramm: Boolean;
+begin
+ Result := false;
 end;
 
 function TmsShape.GetDrawBounds: TRectF;
