@@ -18,6 +18,7 @@ type
   function GetPolygon: TPolygon; virtual; abstract;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
+  class function PolygonBounds(const aPolygon: TPolygon): TRectF;
   function ContainsPt(const aPoint: TPointF): Boolean; override;
  end;//TmsPolygonShape
 
@@ -25,17 +26,15 @@ implementation
 
 // TmsPolygonShape
 
-function TmsPolygonShape.GetDrawBounds: TRectF;
+class function TmsPolygonShape.PolygonBounds(const aPolygon: TPolygon): TRectF;
 var
- l_Pl : TPolygon;
  l_P : TPointF;
 begin
- l_Pl := Polygon;
  Result.Left := High(Integer);
  Result.Top := High(Integer);
  Result.Right := Low(Integer);
  Result.Bottom := Low(Integer);
- for l_P in l_PL do
+ for l_P in aPolygon do
  begin
   if (l_P.X < Result.Left) then
    Result.Left := l_P.X;
@@ -50,6 +49,10 @@ begin
  //Result := PolygonBounds(Polygon);
 end;
 
+function TmsPolygonShape.GetDrawBounds: TRectF;
+begin
+ Result := PolygonBounds(Polygon);
+end;
 
 function TmsPolygonShape.Polygon: TPolygon;
 begin
