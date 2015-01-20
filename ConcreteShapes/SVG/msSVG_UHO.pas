@@ -35,18 +35,20 @@ var
  l_Point: TPointF;
 begin
  l_PD := TPathData.Create;
+ try
 
- l_SVG_String := 'M 40,40, L 100,40, L 100,80, L 40,80, L 40,40' +
- // begin UHO
- 'L 40,20' +
- 'L 60, 20' +
- 'L 60, 40';
+  l_SVG_String := 'M 40,40, L 100,40, L 100,80, L 40,80, L 40,40' +
+  // begin UHO
+  'L 40,20' +
+  'L 60, 20' +
+  'L 60, 40';
 
- l_PD.Data := l_SVG_String;
- l_Point:= l_PD.FlattenToPolygon(l_PolygonSVG);
- Result := l_PolygonSVG;
-
- FreeAndNil(l_PD);
+  l_PD.Data := l_SVG_String;
+  l_Point:= l_PD.FlattenToPolygon(l_PolygonSVG);
+  Result := l_PolygonSVG;
+ finally
+  FreeAndNil(l_PD);
+ end;//try..finally
 end;
 
 procedure TmsSVG_UHO.TransformDrawOptionsContext(
