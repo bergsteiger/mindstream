@@ -18,6 +18,7 @@ type
   function GetPolygon: TPolygon; virtual; abstract;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
+  function ContainsPt(const aPoint: TPointF): Boolean; override;
  end;//TmsPolygonShape
 
 implementation
@@ -63,6 +64,27 @@ begin
  l_P := Polygon;
  aCtx.rCanvas.DrawPolygon(l_P, 1);
  aCtx.rCanvas.FillPolygon(l_P, 0.5);
+end;
+
+function TmsPolygonShape.ContainsPt(const aPoint: TPointF): Boolean;
+var
+ i,j : integer;
+Begin
+ Result := False;
+ j := High(Polygon);
+ for i := Low(Polygon) to High(Polygon) do
+ begin
+  if (
+      (((Polygon[i].y <= aPoint.y) and (aPoint.y < Polygon[j].y)) or
+         ((Polygon[j].y <= aPoint.y) and (aPoint.y < Polygon[i].y)))
+      and
+        (aPoint.x < ((Polygon[j].x - Polygon[i].x) *
+                     (aPoint.y - Polygon[i].y) /
+                     (Polygon[j].y - Polygon[i].y) + Polygon[i].x))
+     ) then
+   Result := not Result;
+  j := i
+ end;
 end;
 
 end.

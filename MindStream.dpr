@@ -82,6 +82,8 @@ uses
   msUpToParentIcon in 'SpecialShapes\ForButtons\msUpToParentIcon.pas',
   msButtonIcon in 'SpecialShapes\ForButtons\msButtonIcon.pas',
   msFolderIcon in 'SpecialShapes\ForButtons\msFolderIcon.pas',
+  msSVGShape in 'AbstractShapes\msSVGShape.pas',
+  msFolder in 'ConcreteShapes\SVG\msFolder.pas',
   msShapesList in 'msShapesList.pas',
   msCircleWithRadius in 'ConcreteShapes\msCircleWithRadius.pas',
   msShapeClassList in 'msShapeClassList.pas',
