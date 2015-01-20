@@ -35,12 +35,14 @@ var
  l_SVG_String: string;
  l_PD: TPathData;
  l_Point: TPointF;
+ l_R :TRectF;
 begin
  l_PD := TPathData.Create;
  try
   l_SVG_String := GetPolygonSVG;
   l_PD.Data := l_SVG_String;
   l_Point:= l_PD.FlattenToPolygon(l_PolygonSVG);
+  l_R := PolygonBounds(l_PolygonSVG);
   Result := l_PolygonSVG;
  finally
   FreeAndNil(l_PD);
