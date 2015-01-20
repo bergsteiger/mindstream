@@ -18,9 +18,14 @@ type
   function GetPolygon: TPolygon; override; final;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetPolygonSVG: String; virtual; abstract;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsSVGShape
 
 implementation
+
+uses
+ System.UITypes
+ ;
 
 // TmsSVGShape
 
@@ -53,6 +58,13 @@ begin
   aCtx.rCanvas.SetMatrix(l_OriginalMatrix);
   // - восстанавливаем ОРИГИНАЛЬНУЮ матрицу
  end;//try..finally
+end;
+
+procedure TmsSVGShape.TransformDrawOptionsContext(
+  var theCtx: TmsDrawOptionsContext);
+begin
+  inherited;
+ theCtx.rFillColor := TAlphaColorRec.Azure;
 end;
 
 end.

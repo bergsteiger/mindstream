@@ -17,12 +17,11 @@ type
  // - "папка"
  protected
   function GetPolygonSVG: String; override;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsFolder
 
 implementation
 
-// TmsSVG_UHO
+// TmsFolder
 
 function TmsFolder.GetPolygonSVG: String;
 begin
@@ -31,13 +30,6 @@ begin
   'L 40,20' +
   'L 60, 20' +
   'L 60, 40';
-end;
-
-procedure TmsFolder.TransformDrawOptionsContext(
-  var theCtx: TmsDrawOptionsContext);
-begin
-  inherited;
- theCtx.rFillColor := TAlphaColorRec.Azure;
 end;
 
 end.
