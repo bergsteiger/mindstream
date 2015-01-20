@@ -8,7 +8,7 @@ uses
  ;
 
 type
- TmsFolderIcon = class(TmsRectangle)
+ TmsFolderIcon = class(TmsFolder{TmsRectangle})
  end;//TmsFolderIcon
 
 implementation
