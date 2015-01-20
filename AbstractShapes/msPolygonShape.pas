@@ -72,7 +72,8 @@ var
 Begin
  Result := False;
  j := High(Polygon);
- For i := Low(Polygon) to High(Polygon) do begin
+ for i := Low(Polygon) to High(Polygon) do
+ begin
   if (
       (((Polygon[i].y <= aPoint.y) and (aPoint.y < Polygon[j].y)) or
          ((Polygon[j].y <= aPoint.y) and (aPoint.y < Polygon[i].y)))
