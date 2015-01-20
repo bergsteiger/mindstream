@@ -17,37 +17,11 @@ type
   // - класс для реализации SVG объектов
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  function GetDrawBounds: TRectF; override;
  end;//TmsPolygonShape
 
 implementation
 
 // TmsPolygonShape
-
-function TmsSVG_Shape.GetDrawBounds: TRectF;
-var
- l_Pl : TPolygon;
- l_P : TPointF;
-begin
- l_Pl := Polygon;
- Result.Left := High(Integer);
- Result.Top := High(Integer);
- Result.Right := Low(Integer);
- Result.Bottom := Low(Integer);
- for l_P in l_PL do
- begin
-  if (l_P.X < Result.Left) then
-   Result.Left := l_P.X;
-  if (l_P.X > Result.Right) then
-   Result.Right := l_P.X;
-
-  if (l_P.Y < Result.Top) then
-   Result.Top := l_P.Y;
-  if (l_P.Y > Result.Bottom) then
-   Result.Bottom := l_P.Y;
- end;//l_P in l_PL
- //Result := PolygonBounds(Polygon);
-end;
 
 procedure TmsSVG_Shape.DoDrawTo(const aCtx: TmsDrawContext);
 var
