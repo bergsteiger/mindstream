@@ -21,6 +21,7 @@ type
 
  ImsShapesController = interface(ImsShapeByPt)
   procedure RemoveShape(const aShape: ImsShape);
+  function AddShape(const aShape: ImsShape): ImsShape;
  end;//ImsShapesController
  // - тут бы иметь МНОЖЕСТВЕННОЕ наследование интерфейсов, но Delphi его не поддерживает
  // А вот с UML - мы его ПОТОМ СГЕНЕРИРУЕМ
@@ -46,7 +47,7 @@ type
    rStartPoint: TPointF;
    rShapesController: ImsShapesController;
    rDiagrammsHolder: ImsDiagrammsHolder;
-   constructor Create(aStartPoint: TPointF; const aShapesController: ImsShapesController; aDiagrammsHolder: ImsDiagrammsHolder);
+   constructor Create(aStartPoint: TPointF; const aShapesController: ImsShapesController; const aDiagrammsHolder: ImsDiagrammsHolder);
  end;//TmsMakeShapeContext
 
  TmsEndShapeContext = TmsMakeShapeContext;
@@ -85,10 +86,12 @@ type
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean;
-  procedure EndTo(const aCtx: TmsEndShapeContext);
+  function EndTo(const aCtx: TmsEndShapeContext): Boolean;
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
+  function ClickInDiagramm: Boolean;
+  // - ткнули в примитив внутри диаграммы
   function DrawBounds: TRectF;
   function pm_GetStartPoint: TPointF;
   property StartPoint: TPointF
@@ -167,7 +170,7 @@ end;
 
 // TmsMakeShapeContext
 
-constructor TmsMakeShapeContext.Create(aStartPoint: TPointF; const aShapesController: ImsShapesController; aDiagrammsHolder: ImsDiagrammsHolder);
+constructor TmsMakeShapeContext.Create(aStartPoint: TPointF; const aShapesController: ImsShapesController; const aDiagrammsHolder: ImsDiagrammsHolder);
 begin
  rStartPoint := aStartPoint;
  rShapesController := aShapesController;
