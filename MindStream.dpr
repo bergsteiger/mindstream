@@ -83,7 +83,8 @@ uses
   msButtonIcon in 'SpecialShapes\ForButtons\msButtonIcon.pas',
   msFolderIcon in 'SpecialShapes\ForButtons\msFolderIcon.pas',
   msSVG_Shape in 'AbstractShapes\msSVG_Shape.pas',
-  msSVG_UHO in 'ConcreteShapes\SVG\msSVG_UHO.pas';
+  msFolder in 'ConcreteShapes\SVG\msFolder.pas'
+  ;
 
 {$R *.res}
 

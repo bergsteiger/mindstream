@@ -38,7 +38,7 @@ uses
   msMoverIcon,
 
   // SVG Shapes
-  msSVG_UHO
+  msFolder
   ;
 
 procedure RegisterOurShapes;
@@ -75,7 +75,7 @@ begin
   TmsMoverIcon,
 
   // SVG Shapes
-  TmsSVG_UHO
+  TmsFolder
  ]);
 end;
 
