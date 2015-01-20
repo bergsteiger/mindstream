@@ -14,16 +14,25 @@ uses
 
 type
  TmsSVG_UHO = class(TmsSVG_Shape)
-// TmsSVG_Shape = class abstract(TmsShape)
-  // - класс для реализации SVG Уха
+ // - "папка"
  protected
   function GetPolygon: TPolygon; override;
+  function GetPolygonSVG: String; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsPolygonShape
 
 implementation
 
-// TmsPolygonShape
+// TmsSVG_UHO
+
+function TmsSVG_UHO.GetPolygonSVG: String;
+begin
+  Result := 'M 40,40, L 100,40, L 100,80, L 40,80, L 40,40' +
+  // begin UHO
+  'L 40,20' +
+  'L 60, 20' +
+  'L 60, 40';
+end;
 
 function TmsSVG_UHO.GetPolygon: TPolygon;
 var
@@ -34,12 +43,7 @@ var
 begin
  l_PD := TPathData.Create;
  try
-  l_SVG_String := 'M 40,40, L 100,40, L 100,80, L 40,80, L 40,40' +
-  // begin UHO
-  'L 40,20' +
-  'L 60, 20' +
-  'L 60, 40';
-
+  l_SVG_String := GetPolygonSVG;
   l_PD.Data := l_SVG_String;
   l_Point:= l_PD.FlattenToPolygon(l_PolygonSVG);
   Result := l_PolygonSVG;

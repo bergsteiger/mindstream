@@ -16,6 +16,7 @@ type
  // - базовый класс для реализации SVG объектов
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
+  function GetPolygonSVG: String; virtual; abstract;
  end;//TmsPolygonShape
 
 implementation
