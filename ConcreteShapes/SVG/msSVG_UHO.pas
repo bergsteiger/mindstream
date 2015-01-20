@@ -26,8 +26,6 @@ implementation
 // TmsPolygonShape
 
 function TmsSVG_UHO.Polygon: TPolygon;
-const
- с_InitialHeight = 150;
 var
  l_PolygonSVG : TPolygon;
  l_SVG_String: string;
@@ -36,7 +34,6 @@ var
 begin
  l_PD := TPathData.Create;
  try
-
   l_SVG_String := 'M 40,40, L 100,40, L 100,80, L 40,80, L 40,40' +
   // begin UHO
   'L 40,20' +
