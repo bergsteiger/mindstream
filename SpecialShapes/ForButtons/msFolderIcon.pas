@@ -3,7 +3,8 @@ unit msFolderIcon;
 interface
 
 uses
- msRectangle
+ msRectangle,
+ msFolder
  ;
 
 type
