@@ -17,7 +17,7 @@ type
 // TmsSVG_Shape = class abstract(TmsShape)
   // - класс для реализации SVG Уха
  protected
-  function Polygon: TPolygon; override;
+  function GetPolygon: TPolygon; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsPolygonShape
 
@@ -25,7 +25,7 @@ implementation
 
 // TmsPolygonShape
 
-function TmsSVG_UHO.Polygon: TPolygon;
+function TmsSVG_UHO.GetPolygon: TPolygon;
 var
  l_PolygonSVG : TPolygon;
  l_SVG_String: string;
