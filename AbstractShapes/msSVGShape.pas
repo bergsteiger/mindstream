@@ -1,4 +1,4 @@
-﻿unit msSVG_Shape;
+﻿unit msSVGShape;
 
 interface
 
@@ -12,19 +12,19 @@ uses
  ;
 
 type
- TmsSVG_Shape = class abstract(TmsPolygonShape)
+ TmsSVGShape = class abstract(TmsPolygonShape)
  // - базовый класс для реализации SVG объектов
  protected
   function GetPolygon: TPolygon; override; final;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetPolygonSVG: String; virtual; abstract;
- end;//TmsPolygonShape
+ end;//TmsSVGShape
 
 implementation
 
-// TmsSVG_Shape
+// TmsSVGShape
 
-function TmsSVG_Shape.GetPolygon: TPolygon;
+function TmsSVGShape.GetPolygon: TPolygon;
 var
  l_PolygonSVG : TPolygon;
  l_SVG_String: string;
@@ -42,7 +42,7 @@ begin
  end;//try..finally
 end;
 
-procedure TmsSVG_Shape.DoDrawTo(const aCtx: TmsDrawContext);
+procedure TmsSVGShape.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_OriginalMatrix: TMatrix;
 begin

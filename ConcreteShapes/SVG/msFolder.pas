@@ -3,7 +3,7 @@
 interface
 
 uses
- msSVG_Shape,
+ msSVGShape,
  System.Types,
  System.Math.Vectors,
  FMX.Graphics,
@@ -13,7 +13,7 @@ uses
  ;
 
 type
- TmsFolder = class(TmsSVG_Shape)
+ TmsFolder = class(TmsSVGShape)
  // - "папка"
  protected
   function GetPolygonSVG: String; override;
