@@ -50,7 +50,7 @@ end;
 procedure TmsSVGShape.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_OriginalMatrix: TMatrix;
- l_Matrix: TMatrix;
+(* l_Matrix: TMatrix;*)
 begin
  l_OriginalMatrix := aCtx.rCanvas.Matrix;
  try
