@@ -12,14 +12,14 @@ uses
 type
  TmsUseCaseLikeEllipse = class(TmsCircle)
  protected
-  class function InitialRadiusY: Integer; override;
+  function InitialRadiusY: Integer; override;
 
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsUseCaseLikeEllipse
 
 implementation
 
-class function TmsUseCaseLikeEllipse.InitialRadiusY: Integer;
+function TmsUseCaseLikeEllipse.InitialRadiusY: Integer;
 begin
  Result := 35;
 end;

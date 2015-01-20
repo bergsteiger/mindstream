@@ -4,55 +4,41 @@ unit ForToolbarShapesTest;
 interface
 
 uses
-  TestFrameWork
+  TestFrameWork,
+  msRegisteredShapesTestPrim,
+  msShapeClassList,
+  msShape
   ;
 
 type
-  TForToolbarShapesTest = class(TTestCase)
-   published
-    procedure ShapesRegistredCount;
-    procedure TestFirstShape;
-    procedure TestIndexOfTmsLine;
+  TForToolbarShapesTest = class(TmsRegisteredShapesTestPrim)
+   protected
+    function ShapeClassList: TmsShapeClassList; override;
+    procedure CheckShapeClass(aShapeClass: RmsShape); override;
   end;//TForToolbarShapesTest
 
 implementation
 
 uses
-  SysUtils,
-  msShapesForToolbar,
-  msShape,
-  msLine,
-  FMX.Objects,
-  FMX.Graphics
+  msShapesForToolbar
   ;
 
-procedure TForToolbarShapesTest.ShapesRegistredCount;
-var
- l_Result : integer;
+// TForToolbarShapesTest
+
+function TForToolbarShapesTest.ShapeClassList: TmsShapeClassList;
 begin
- l_Result := 0;
- TmsShapesForToolbar.IterateShapes(
-  procedure (aShapeClass: RmsShape)
-  begin
-   Assert(aShapeClass.IsForToolbar);
-   Inc(l_Result);
-  end
- );
- CheckTrue(l_Result = 19, ' Expected 19 - Get ' + IntToStr(l_Result));
+ Result := TmsShapesForToolbar.Instance;
 end;
 
-procedure TForToolbarShapesTest.TestFirstShape;
+procedure TForToolbarShapesTest.CheckShapeClass(aShapeClass: RmsShape);
 begin
- CheckTrue(TmsShapesForToolbar.Instance.First = TmsLine);
-end;
-
-procedure TForToolbarShapesTest.TestIndexOfTmsLine;
-begin
- CheckTrue(TmsShapesForToolbar.Instance.IndexOf(TmsLine) = 0);
+ inherited;
+ Assert(aShapeClass.IsForToolbar);
 end;
 
 initialization
  TestFramework.RegisterTest(TForToolbarShapesTest.Suite);
+
 end.
 
 

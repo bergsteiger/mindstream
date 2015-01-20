@@ -15,8 +15,8 @@ uses
 type
  TmsCircle = class(TmsPointedShape)
  protected
-  class function InitialRadiusX: Integer; virtual;
-  class function InitialRadiusY: Integer; virtual;
+  function InitialRadiusX: Integer; virtual;
+  function InitialRadiusY: Integer; virtual;
 
   function GetDrawBounds: TRectF; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
@@ -29,12 +29,12 @@ implementation
 
 { TmsCircle }
 
-class function TmsCircle.InitialRadiusX: Integer;
+function TmsCircle.InitialRadiusX: Integer;
 begin
  Result := 50;
 end;
 
-class function TmsCircle.InitialRadiusY: Integer;
+function TmsCircle.InitialRadiusY: Integer;
 begin
  Result := InitialRadiusX;
 end;

@@ -3,6 +3,7 @@ unit msRemoverIcon;
 interface
 
 uses
+ System.Types,
  msInterfaces,
  msButtonIcon
  ;
@@ -10,24 +11,23 @@ uses
 type
  TmsRemoverIcon = class(TmsButtonIcon)
  public
-  class function Create: ImsShape; override;
+  class function Create(const aCenter: TPointF): ImsShape; override;
  end;//TmsRemoverIcon
 
 implementation
 
 uses
- System.Types,
  msLine,
  msShapesGroup
  ;
 
 // TmsRemoverIcon
 
-class function TmsRemoverIcon.Create: ImsShape;
+class function TmsRemoverIcon.Create(const aCenter: TPointF): ImsShape;
 begin
  Result := TmsShapesGroup.Create([
-  TmsLine.CreateCompleted(TPointF.Create(0, 0), TPointF.Create(50, 50)),
-  TmsLine.CreateCompleted(TPointF.Create(50, 0), TPointF.Create(0, 50))
+  TmsLine.CreateCompleted(aCenter, aCenter + TPointF.Create(50, 50)),
+  TmsLine.CreateCompleted(aCenter + TPointF.Create(50, 0), aCenter + TPointF.Create(0, 50))
   ]);
 end;
 

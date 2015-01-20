@@ -83,8 +83,18 @@ uses
   msButtonIcon in 'SpecialShapes\ForButtons\msButtonIcon.pas',
   msFolderIcon in 'SpecialShapes\ForButtons\msFolderIcon.pas',
   msSVGShape in 'AbstractShapes\msSVGShape.pas',
-  msFolder in 'ConcreteShapes\SVG\msFolder.pas'
-  ;
+  msFolder in 'ConcreteShapes\SVG\msFolder.pas',
+  msShapesList in 'msShapesList.pas',
+  msCircleWithRadius in 'ConcreteShapes\msCircleWithRadius.pas',
+  msShapeClassList in 'msShapeClassList.pas',
+  msLoggedTest in 'Tests\Core\msLoggedTest.pas',
+  msRegisteredShapesTestPrim in 'Tests\Abstract\msRegisteredShapesTestPrim.pas',
+  msProxyShape in 'ContainerShapes\msProxyShape.pas',
+  msShapeTool in 'ContainerShapes\msShapeTool.pas',
+  msMoveShapeUp in 'ShapeTools\FloatingButtons\msMoveShapeUp.pas',
+  msMoveShapeDown in 'ShapeTools\FloatingButtons\msMoveShapeDown.pas',
+  msMoveShapeLeft in 'ShapeTools\FloatingButtons\msMoveShapeLeft.pas',
+  msMoveShapeRight in 'ShapeTools\FloatingButtons\msMoveShapeRight.pas';
 
 {$R *.res}
 
