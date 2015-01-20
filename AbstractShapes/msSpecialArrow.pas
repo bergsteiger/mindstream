@@ -16,19 +16,13 @@ type
   class function InitialLength: Integer;
   class procedure CreateCompleted;
   // - метод, который надо скрыть
-  class function Create: ImsShape; overload;
-  class function Create(const aPointedPoint: TPointF): ImsShape; overload; virtual; abstract;
+  class function Create: ImsShape; virtual; abstract;
   // - метод, который “≈ѕ≈–№ надо вызывать
  end;//TmsSpecialArrow
 
 implementation
 
 // TmsSpecialArrow
-
-class function TmsSpecialArrow.Create: ImsShape;
-begin
- Result := Create(TPointF.Create(0, 0));
-end;
 
 class function TmsSpecialArrow.CreateCompletedInternal(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
 begin

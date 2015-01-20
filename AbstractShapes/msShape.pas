@@ -27,7 +27,7 @@ type
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   function IsNeedsSecondClick : Boolean; virtual;
-  function EndTo(const aCtx: TmsEndShapeContext): Boolean; virtual;
+  procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
   procedure SaveTo(const aFileName: String); override;
@@ -54,8 +54,6 @@ type
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   // - обрабатывает "нулевой клик"
-  function ClickInDiagramm: Boolean; virtual;
-  // - ткнули в примитив внутри диаграммы
   function GetDrawBounds: TRectF; virtual;
   function DrawBounds: TRectF;
  public
@@ -102,9 +100,8 @@ begin
  SetStartPoint(aStartPoint);
 end;
 
-function TmsShape.EndTo(const aCtx: TmsEndShapeContext): Boolean;
+procedure TmsShape.EndTo(const aCtx: TmsEndShapeContext);
 begin
- Result := true;
  Assert(false, 'Примитив ' + ClassName + ' не может быть завершён');
 end;
 
@@ -169,11 +166,6 @@ end;
 function TmsShape.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
 begin
  Result := DoNullClick(aHolder);
-end;
-
-function TmsShape.ClickInDiagramm: Boolean;
-begin
- Result := false;
 end;
 
 function TmsShape.GetDrawBounds: TRectF;

@@ -14,7 +14,7 @@ uses
 type
  TmsPointCircle = class(TmsCircle)
  protected
-  function InitialRadiusX: Integer; override;
+  class function InitialRadiusX: Integer; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
   class function IsForToolbar: Boolean; override;
@@ -24,7 +24,7 @@ implementation
 
 { TmsPointCircle }
 
-function TmsPointCircle.InitialRadiusX: Integer;
+class function TmsPointCircle.InitialRadiusX: Integer;
 begin
  Result := 10;
 end;
