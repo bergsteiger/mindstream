@@ -50,9 +50,13 @@ end;
 procedure TmsSVGShape.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_OriginalMatrix: TMatrix;
+ l_Matrix: TMatrix;
 begin
  l_OriginalMatrix := aCtx.rCanvas.Matrix;
  try
+  l_Matrix := TMatrix.CreateTranslation(StartPoint.X, StartPoint.Y);
+  l_Matrix := l_Matrix * l_OriginalMatrix;
+  aCtx.rCanvas.SetMatrix(l_Matrix);
   inherited;
  finally
   aCtx.rCanvas.SetMatrix(l_OriginalMatrix);
