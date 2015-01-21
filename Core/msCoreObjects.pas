@@ -210,7 +210,11 @@ begin
  FreeAndNil(f_ObjectsCreated);
  FreeAndNil(f_DefferedObjects);
  if (f_ObjectsCreatedCount > 0) then
-  raise Exception.Create('Какие-то объекты не освобождены: ' + IntToStr(f_ObjectsCreatedCount));
+  try
+   raise Exception.Create('Какие-то объекты не освобождены: ' + IntToStr(f_ObjectsCreatedCount));
+  except
+   // давим пока наше исключение, чтобы дальше не летело AV
+  end;//try..except
 end;
 
 end.

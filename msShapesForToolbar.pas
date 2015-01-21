@@ -12,7 +12,7 @@ type
  TmsShapesForToolbar = class(TmsShapeClassListSingleton)
  public
   class function Instance: TmsShapesForToolbar;
-  procedure Register(const aValue: RmsShape); override;
+  procedure RegisterMC(const aValue: MCmsShape); override;
  end;//TmsShapesForToolbar
 
 implementation
@@ -28,7 +28,7 @@ begin
  Result := inherited Instance As TmsShapesForToolbar;
 end;
 
-procedure TmsShapesForToolbar.Register(const aValue: RmsShape);
+procedure TmsShapesForToolbar.RegisterMC(const aValue: MCmsShape);
 begin
  if aValue.IsForToolbar then
   inherited;

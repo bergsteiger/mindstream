@@ -9,7 +9,8 @@ uses
  System.UITypes,
  msSerializeInterfaces,
  Generics.Collections,
- FMX.Objects
+ FMX.Objects,
+ Data.DBXJSONReflect
  ;
 
 type
@@ -104,8 +105,8 @@ type
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
  end;//ImsShapeCreator
 
- ImsShapeClass = interface
- end;//ImsShapeClass
+ TmsJSONMarshal = TJSONMarshal;
+ TmsJSONUnMarshal = TJSONUnMarshal;
 
  ImsDiagrammsHolder = interface
  ['{611ECC2D-3D5B-4297-8A2D-9154D4CF17E7}']
@@ -119,6 +120,19 @@ type
    read pm_GetCurrentDiagramms
    write pm_SetCurrentDiagramms;
  end;//ImsDiagrammsHolder
+
+ ImsShapeClass = interface
+  function IsForToolbar: Boolean;
+  function IsTool: Boolean;
+  function Creator: ImsShapeCreator;
+  function Name: String;
+  procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
+  procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
+  function IsNullClick: Boolean;
+  function ButtonShape: ImsShape;
+  function IsOurInstance(const aShape: ImsShape): Boolean;
+  function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
+ end;//ImsShapeClass
 
  TmsClickContext = record
   public

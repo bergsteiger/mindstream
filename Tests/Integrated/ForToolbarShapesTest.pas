@@ -14,7 +14,7 @@ type
   TForToolbarShapesTest = class(TmsRegisteredShapesTestPrim)
    protected
     function ShapeClassList: TmsShapeClassList; override;
-    procedure CheckShapeClass(aShapeClass: RmsShape); override;
+    procedure CheckShapeClass(const aShapeClass: MCmsShape); override;
   end;//TForToolbarShapesTest
 
 implementation
@@ -30,7 +30,7 @@ begin
  Result := TmsShapesForToolbar.Instance;
 end;
 
-procedure TForToolbarShapesTest.CheckShapeClass(aShapeClass: RmsShape);
+procedure TForToolbarShapesTest.CheckShapeClass(const aShapeClass: MCmsShape);
 begin
  inherited;
  Assert(aShapeClass.IsForToolbar);

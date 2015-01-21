@@ -14,7 +14,7 @@ type
   TUtilityShapesTest = class(TmsRegisteredShapesTestPrim)
    protected
     function ShapeClassList: TmsShapeClassList; override;
-    procedure CheckShapeClass(aShapeClass: RmsShape); override;
+    procedure CheckShapeClass(const aShapeClass: MCmsShape); override;
   end;//TUtilityShapesTest
 
 implementation
@@ -30,7 +30,7 @@ begin
  Result := TmsUtilityShapes.Instance;
 end;
 
-procedure TUtilityShapesTest.CheckShapeClass(aShapeClass: RmsShape);
+procedure TUtilityShapesTest.CheckShapeClass(const aShapeClass: MCmsShape);
 begin
  inherited;
  Assert(aShapeClass.IsTool);

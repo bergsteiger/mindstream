@@ -10,7 +10,7 @@ uses
  ;
 
 type
- MCmsShape = {ImsShapeClass}RmsShape;
+ MCmsShape = msShape.MCmsShape;
  TmsShapeClassListItems = TList<MCmsShape>;
 
  TmsShapeClassLambda = reference to procedure (const aShapeClass : MCmsShape);
@@ -23,10 +23,12 @@ type
   function pm_GetItems: TmsShapeClassListItems;
  public
   function First: MCmsShape;
-  procedure Register(const aValue: RmsShape); overload; virtual;
+  procedure RegisterMC(const aValue: MCmsShape); virtual;
+  procedure Register(const aValue: RmsShape); overload;
   procedure Register(const aShapes: array of RmsShape); overload;
   procedure Cleanup; override;
   function GetEnumerator: TmsShapeClassListItems.TEnumerator;
+  function IndexOfMC(const aValue: MCmsShape): Integer;
   function IndexOf(const aValue: RmsShape): Integer;
   procedure IterateShapes(aLambda: TmsShapeClassLambda);
   property Items: TmsShapeClassListItems
@@ -36,7 +38,8 @@ type
 implementation
 
 uses
- SysUtils
+ SysUtils,
+ msShapeClass
  ;
 
 // TmsShapeClassList
@@ -68,10 +71,15 @@ begin
  inherited;
 end;
 
+procedure TmsShapeClassList.RegisterMC(const aValue: MCmsShape);
+begin
+ Assert(IndexOfMC(aValue) < 0);
+ f_Registered.Add(aValue);
+end;
+
 procedure TmsShapeClassList.Register(const aValue: RmsShape);
 begin
- Assert(IndexOf(aValue) < 0);
- f_Registered.Add(aValue);
+ RegisterMC(TmsShapeClass.Create(aValue));
 end;
 
 procedure TmsShapeClassList.Register(const aShapes: array of RmsShape);
@@ -82,9 +90,16 @@ begin
   Self.Register(aShapes[l_Index]);
 end;
 
-function TmsShapeClassList.IndexOf(const aValue : RmsShape): Integer;
+function TmsShapeClassList.IndexOfMC(const aValue: MCmsShape): Integer;
 begin
  Result := f_Registered.IndexOf(aValue);
+end;
+
+function TmsShapeClassList.IndexOf(const aValue : RmsShape): Integer;
+begin
+ Result := -1;
+ Assert(false, 'Недоделано');
+ //Result := f_Registered.IndexOf(aValue);
 end;
 
 procedure TmsShapeClassList.IterateShapes(aLambda: TmsShapeClassLambda);

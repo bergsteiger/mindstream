@@ -54,11 +54,11 @@ end;
 
 class procedure TmsShapeClassListSingleton.IterateShapes(aLambda: TmsShapeClassLambda);
 var
- l_ShapeClass : RmsShape;
+ l_ShapeClass : MCmsShape;
 begin
  for l_ShapeClass in Self.Instance do
  begin
-   aLambda(l_ShapeClass);
+  aLambda(l_ShapeClass);
  end;//for l_ShapeClass
 end;
 
