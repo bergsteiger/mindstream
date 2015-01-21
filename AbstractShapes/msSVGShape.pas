@@ -31,9 +31,7 @@ uses
 function TmsSVGShape.GetPolygon: TPolygon;
 var
  l_PolygonSVG : TPolygon;
- l_SVG_String: string;
  l_PD: TPathData;
- {l_Point: TPointF;}
  l_R : TRectF;
  l_P : TPointF;
  l_Mid : TPointF;
@@ -41,9 +39,8 @@ var
 begin
  l_PD := TPathData.Create;
  try
-  l_SVG_String := GetPolygonSVG;
-  l_PD.Data := l_SVG_String;
-  {l_Point:= }l_PD.FlattenToPolygon(l_PolygonSVG);
+  l_PD.Data := GetPolygonSVG;
+  l_PD.FlattenToPolygon(l_PolygonSVG);
   l_R := PolygonBounds(l_PolygonSVG);
 
   l_StartPoint := StartPoint;
