@@ -16,7 +16,6 @@ type
  // - базовый класс для реализации SVG объектов
  protected
   function GetPolygon: TPolygon; override; final;
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetPolygonSVG: String; virtual; abstract;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsSVGShape
@@ -59,27 +58,9 @@ begin
  end;//try..finally
 end;
 
-procedure TmsSVGShape.DoDrawTo(const aCtx: TmsDrawContext);
-var
- l_OriginalMatrix: TMatrix;
-(* l_Matrix: TMatrix;*)
+procedure TmsSVGShape.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
- l_OriginalMatrix := aCtx.rCanvas.Matrix;
- try
-(*  l_Matrix := TMatrix.CreateTranslation(StartPoint.X, StartPoint.Y);
-  l_Matrix := l_Matrix * l_OriginalMatrix;
-  aCtx.rCanvas.SetMatrix(l_Matrix);*)
-  inherited;
- finally
-  aCtx.rCanvas.SetMatrix(l_OriginalMatrix);
-  // - восстанавливаем ОРИГИНАЛЬНУЮ матрицу
- end;//try..finally
-end;
-
-procedure TmsSVGShape.TransformDrawOptionsContext(
-  var theCtx: TmsDrawOptionsContext);
-begin
-  inherited;
+ inherited;
  theCtx.rFillColor := TAlphaColorRec.Azure;
 end;
 
