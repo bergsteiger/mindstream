@@ -73,7 +73,7 @@ type
                         aSaveDiagramm: TButton;
                         aLoadDiagramm: TButton;
                         aSaveToPng: TButton): ImsDiagrammsController;
-  destructor Destroy; override;
+  procedure Cleanup; override;
   procedure Clear;
   procedure ProcessClick(const aStart: TPointF);
   property CurrentDiagramm: ImsDiagramm
@@ -315,7 +315,7 @@ begin
  CurrentDiagramms.AddNewDiagramm;
 end;
 
-destructor TmsDiagrammsController.Destroy;
+procedure TmsDiagrammsController.Cleanup;
 begin
  FreeAndNil(f_DiagrammStack);
  f_CurrentDiagramm := nil;

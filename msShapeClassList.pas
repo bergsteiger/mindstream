@@ -5,7 +5,8 @@ interface
 uses
  msInterfaces,
  msShape,
- Generics.Collections
+ Generics.Collections,
+ msObject
  ;
 
 type
@@ -14,7 +15,7 @@ type
 
  TmsShapeClassLambda = reference to procedure (const aShapeClass : TmsShapeClassListItem);
 
- TmsShapeClassList = class
+ TmsShapeClassList = class(TmsObject)
  strict protected
   f_Registered : RmsShapeList;
   constructor Create;
@@ -24,7 +25,7 @@ type
   function First: TmsShapeClassListItem;
   procedure Register(const aValue: RmsShape); overload; virtual;
   procedure Register(const aShapes: array of RmsShape); overload;
-  destructor Destroy; override;
+  procedure Cleanup; override;
   function GetEnumerator: RmsShapeList.TEnumerator;
   function IndexOf(const aValue: RmsShape): Integer;
   procedure IterateShapes(aLambda: TmsShapeClassLambda);
@@ -61,7 +62,7 @@ begin
  Result := f_Registered.GetEnumerator;
 end;
 
-destructor TmsShapeClassList.Destroy;
+procedure TmsShapeClassList.Cleanup;
 begin
  FreeAndNil(f_Registered);
  inherited;

@@ -23,7 +23,7 @@
   procedure Cleanup; virtual;
   // - функция для очистки состояния объекта. Её надо перекрывать ВМЕСТО Destroy.
  public
-  destructor Destroy; override;
+  destructor Destroy; override; final;
  end;//TmsWatchedObjectPrim
 
  TmsWatchedObject = class abstract(TmsWatchedObjectPrim)
@@ -33,6 +33,7 @@
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
   procedure FreeInstance; override;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
+  procedure Destroy; reintroduce;
  end;//TmsWatchedObject
 
 {$Else TmsWatchedObject}
@@ -63,6 +64,11 @@ begin
 end;
 
 // TmsWatchedObject
+
+procedure TmsWatchedObject.Destroy;
+begin
+ raise Exception.Create('Надо использовать FreeAndNil, а не Destroy');
+end;
 
 class function TmsWatchedObject.NewInstance: TObject;
 begin

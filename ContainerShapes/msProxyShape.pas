@@ -24,7 +24,7 @@ type
    read f_Shape;
  public
   class function Create(const aShape: ImsShape): ImsShape;
-  destructor Destroy; override;
+  procedure Cleanup; override;
  end;//TmsProxyShape
 
 implementation
@@ -48,7 +48,7 @@ begin
  f_Shape := aShape;
 end;
 
-destructor TmsProxyShape.Destroy;
+procedure TmsProxyShape.Cleanup;
 begin
  f_Shape := nil;
  inherited;

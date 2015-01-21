@@ -224,6 +224,7 @@
         <DCCReference Include="Marshal\msShapeMarshal.pas"/>
         <DCCReference Include="Marshal\msDiagrammsMarshal.pas"/>
         <DCCReference Include="Core\msStringList.pas"/>
+        <DCCReference Include="Core\msObject.pas"/>
         <DCCReference Include="Core\msInterfacedRefcounted.pas"/>
         <DCCReference Include="Marshal\msMarshalPrim.pas"/>
         <DCCReference Include="Tests\Module\msShapeTestSuite.pas"/>
@@ -246,30 +247,7 @@
         <DCCReference Include="ShapeTools\PaletteShapes\msPaletteShape.pas"/>
         <DCCReference Include="ShapeTools\msShapeRemover.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msGreenCircle.pas"/>
-        <DCCReference Include="ConcreteShapes\ForButtons\msBlackTriangle.pas">
-            <Form>,
-  msPolygonShape in &apos;AbstractShapes\msPolygonShape.pas&apos;,
-  msMoverIcon in &apos;SpecialShapes\ForButtons\msMoverIcon.pas&apos;,
-  msPointedShape in &apos;AbstractShapes\msPointedShape.pas&apos;,
-  msUpArrow in &apos;SpecialShapes\ForButtons\msUpArrow.pas&apos;,
-  msDownArrow in &apos;SpecialShapes\ForButtons\msDownArrow.pas&apos;,
-  msSpecialArrow in &apos;AbstractShapes\msSpecialArrow.pas&apos;,
-  msLeftArrow in &apos;SpecialShapes\ForButtons\msLeftArrow.pas&apos;,
-  msRightArrow in &apos;SpecialShapes\ForButtons\msRightArrow.pas&apos;,
-  msRemoverIcon in &apos;SpecialShapes\ForButtons\msRemoverIcon.pas&apos;,
-  msShapesGroup in &apos;ContainerShapes\msShapesGroup.pas&apos;,
-  msPointlessShape in &apos;AbstractShapes\msPointlessShape.pas&apos;,
-  ForToolbarShapesTest in &apos;Tests\Integrated\ForToolbarShapesTest.pas&apos;,
-  RegisteredShapesTest in &apos;Tests\Integrated\RegisteredShapesTest.pas&apos;,
-  msSwapParentsIcon in &apos;SpecialShapes\ForButtons\msSwapParentsIcon.pas&apos;,
-  UtilityShapesTest in &apos;Tests\Integrated\UtilityShapesTest.pas&apos;,
-  msPickerIcon in &apos;SpecialShapes\ForButtons\msPickerIcon.pas&apos;,
-  msUpToParentIcon in &apos;SpecialShapes\ForButtons\msUpToParentIcon.pas&apos;,
-  msButtonIcon in &apos;SpecialShapes\ForButtons\msButtonIcon.pas&apos;,
-  msFolderIcon in &apos;SpecialShapes\ForButtons\msFolderIcon.pas&apos;;
-
-{$R *.res</Form>
-        </DCCReference>
+        <DCCReference Include="ConcreteShapes\ForButtons\msBlackTriangle.pas"/>
         <DCCReference Include="AbstractShapes\msPolygonShape.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msMoverIcon.pas"/>
         <DCCReference Include="AbstractShapes\msPointedShape.pas"/>
@@ -291,6 +269,17 @@
         <DCCReference Include="SpecialShapes\ForButtons\msFolderIcon.pas"/>
         <DCCReference Include="AbstractShapes\msSVGShape.pas"/>
         <DCCReference Include="ConcreteShapes\SVG\msFolder.pas"/>
+        <DCCReference Include="msShapesList.pas"/>
+        <DCCReference Include="ConcreteShapes\msCircleWithRadius.pas"/>
+        <DCCReference Include="msShapeClassList.pas"/>
+        <DCCReference Include="Tests\Core\msLoggedTest.pas"/>
+        <DCCReference Include="Tests\Abstract\msRegisteredShapesTestPrim.pas"/>
+        <DCCReference Include="ContainerShapes\msProxyShape.pas"/>
+        <DCCReference Include="ContainerShapes\msShapeTool.pas"/>
+        <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeUp.pas"/>
+        <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeDown.pas"/>
+        <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeLeft.pas"/>
+        <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeRight.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>

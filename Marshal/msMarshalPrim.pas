@@ -12,7 +12,7 @@ type
   class var f_Marshal : TJSONMarshal;
   class var f_UnMarshal : TJSONUnMarshal;
  protected
-  class destructor Destroy;
+  class destructor Fini;
   class function Marshal: TJSONMarshal;
   class function UnMarshal: TJSONUnMarshal;
  public
@@ -37,7 +37,7 @@ uses
 
 // TmsMarshalPrim
 
-class destructor TmsMarshalPrim.Destroy;
+class destructor TmsMarshalPrim.Fini;
 begin
  FreeAndNil(f_Marshal);
  FreeAndNil(f_UnMarshal);

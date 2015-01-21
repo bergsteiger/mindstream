@@ -19,7 +19,7 @@ type
   procedure ProcessClickInDiagramm; virtual;
  public
   class function Create(const aShapeToDeal: ImsShape; const aShape: ImsShape): ImsShape;
-  destructor Destroy; override;
+  procedure Cleanup; override;
   class function IsTool: Boolean; override;
  end;//TmsShapeTool
 
@@ -52,7 +52,7 @@ begin
  // - ничего не делаем. ОСОЗНАННО. НО! И не падаем.
 end;
 
-destructor TmsShapeTool.Destroy;
+procedure TmsShapeTool.Cleanup;
 begin
  f_ShapeToDeal := nil;
  inherited;

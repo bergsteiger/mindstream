@@ -40,6 +40,7 @@ uses
   msShapeMarshal in 'Marshal\msShapeMarshal.pas',
   msDiagrammsMarshal in 'Marshal\msDiagrammsMarshal.pas',
   msStringList in 'Core\msStringList.pas',
+  msObject in 'Core\msObject.pas',
   msInterfacedRefcounted in 'Core\msInterfacedRefcounted.pas',
   msMarshalPrim in 'Marshal\msMarshalPrim.pas',
   msShapeTestSuite in 'Tests\Module\msShapeTestSuite.pas',
