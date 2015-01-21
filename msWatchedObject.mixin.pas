@@ -29,7 +29,7 @@
  public
   class function NewInstance: TObject; override; final;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
-  procedure FreeInstance; override;
+  procedure FreeInstance; override; final;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
   destructor Destroy; override; final;
  end;//TmsWatchedObjectPrim
