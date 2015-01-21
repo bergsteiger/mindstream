@@ -9,9 +9,9 @@ uses
  ;
 
 type
- RmsShapeList = TList<RmsShape>;
+ RmsShapeList = TList<ImsShapeClass>;
 
- TmsShapeClassLambda = reference to procedure (aShapeClass : RmsShape);
+ TmsShapeClassLambda = reference to procedure (const aShapeClass : ImsShapeClass);
 
  TmsShapeClassList = class
  strict protected
@@ -20,7 +20,7 @@ type
  strict private
   function pm_GetItems: RmsShapeList;
  public
-  function First: RmsShape;
+  function First: ImsShapeClass;
   procedure Register(const aValue: RmsShape); overload; virtual;
   procedure Register(const aShapes: array of RmsShape); overload;
   destructor Destroy; override;
@@ -50,7 +50,7 @@ begin
  Result := f_Registered;
 end;
 
-function TmsShapeClassList.First: RmsShape;
+function TmsShapeClassList.First: ImsShapeClass;
 begin
  Result := f_Registered.First;
 end;
@@ -68,7 +68,7 @@ end;
 
 procedure TmsShapeClassList.Register(const aValue: RmsShape);
 begin
- Assert(f_Registered.IndexOf(aValue) < 0);
+ Assert(IndexOf(aValue) < 0);
  f_Registered.Add(aValue);
 end;
 
@@ -87,7 +87,7 @@ end;
 
 procedure TmsShapeClassList.IterateShapes(aLambda: TmsShapeClassLambda);
 var
- l_ShapeClass : RmsShape;
+ l_ShapeClass : ImsShapeClass;
 begin
  for l_ShapeClass in Self do
  begin
