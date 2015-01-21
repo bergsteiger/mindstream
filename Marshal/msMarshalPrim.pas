@@ -52,7 +52,7 @@ begin
   TmsDiagramm.RegisterInMarshal(f_Marshal);
   TmsDiagramms.RegisterInMarshal(f_Marshal);
   TmsRegisteredShapes.IterateShapes(
-   procedure (const aShapeClass: msShapeClass)
+   procedure (const aShapeClass: MCmsShape)
    begin
     aShapeClass.RegisterInMarshal(f_Marshal);
 //    f_Marshal.RegisterJSONMarshalled(aShapeClass, 'FRefCount', false);
@@ -71,7 +71,7 @@ begin
   TmsDiagramm.RegisterInUnMarshal(f_UnMarshal);
   TmsDiagramms.RegisterInUnMarshal(f_UnMarshal);
   TmsRegisteredShapes.IterateShapes(
-   procedure (const aShapeClass: msShapeClass)
+   procedure (const aShapeClass: MCmsShape)
    begin
     aShapeClass.RegisterInUnMarshal(f_UnMarshal);
    end

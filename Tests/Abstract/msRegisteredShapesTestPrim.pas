@@ -47,7 +47,7 @@ begin
   begin
    l_Result := 0;
    ShapeClassList.IterateShapes(
-    procedure (const aShapeClass: msShapeClass)
+    procedure (const aShapeClass: MCmsShape)
     begin
      CheckShapeClass(aShapeClass);
      Inc(l_Result);

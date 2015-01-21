@@ -77,7 +77,7 @@ begin
 
  RandSeed := 10;
  TmsShapeTestPrim.CheckShapes(
-  procedure (const aShapeClass: msShapeClass)
+  procedure (const aShapeClass: MCmsShape)
   var
    l_Method: TRttiMethod;
    l_DiagrammName : String;
