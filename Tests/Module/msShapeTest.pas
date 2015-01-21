@@ -10,7 +10,9 @@ uses
   System.Types,
   System.Classes,
   msCoreObjects,
-  msInterfaces
+  msInterfaces,
+  msShapeClassList,
+  msLoggedTest
   ;
 
 type
@@ -28,20 +30,16 @@ type
    constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; aShapeClass: RmsShape);
   end;//TmsShapeTestContext
 
-  TmsShapeTestPrim = class abstract(TTestCase)
+  TmsShapeTestPrim = class abstract(TmsLoggedTest)
   protected
    f_Context : TmsShapeTestContext;
    f_TestSerializeMethodName : String;
    f_Coords : array of TPoint;
   protected
    class function ComputerName: AnsiString;
-    function TestResultsFileName: String; virtual;
-    function MakeFileName(const aTestName: string; const aTestFolder: string): String; virtual;
     procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
-    procedure CheckFileWithEtalon(const aFileName: String);
     procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); virtual;
     procedure SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm; aSaveTo: TmsDiagrammSaveTo);
-    procedure OutToFileAndCheck(aLambda: TmsLogLambda);
     procedure SetUp; override;
     function ShapesCount: Integer;
     procedure CreateDiagrammWithShapeAndSaveAndCheck;
@@ -49,6 +47,8 @@ type
     procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
     procedure TestDeSerializeForShapeClass;
     procedure TestDeSerializeViaShapeCheckForShapeClass;
+    function ContextName: String; override;
+    function InnerFolders: String; override;
   public
     class procedure CheckShapes(aCheck: TmsShapeClassCheck);
     constructor Create(const aContext: TmsShapeTestContext);
@@ -58,7 +58,7 @@ type
 
   TmsCustomShapeTest = class(TmsShapeTestPrim)
   protected
-   function MakeFileName(const aTestName: string; const aFileExtension: string): String; override;
+   function FileExtension: String; override;
   published
     procedure TestSerialize;
   end;//TmsCustomShapeTest
@@ -98,36 +98,17 @@ implementation
   msCompletedShapeCreator
   ;
 
-function TmsShapeTestPrim.MakeFileName(const aTestName: string; const aTestFolder: string): String;
-var
- l_Folder : String;
+function TmsShapeTestPrim.ContextName: String;
 begin
- l_Folder := ExtractFilePath(ParamStr(0)) + 'TestResults\' + aTestFolder;
- ForceDirectories(l_Folder);
- Result := l_Folder + ClassName + '_' + aTestName + '_' + f_Context.rShapeClass.ClassName;
-end;
-
-procedure TmsShapeTestPrim.CheckFileWithEtalon(const aFileName: String);
-var
- l_FileNameEtalon : String;
-begin
- l_FileNameEtalon := aFileName + '.etalon' + ExtractFileExt(aFileName);
- if FileExists(l_FileNameEtalon) then
- begin
-  CheckTrue(msCompareFiles(l_FileNameEtalon, aFileName));
- end//FileExists(l_FileNameEtalon)
- else
- begin
-  CopyFile(PWideChar(aFileName),PWideChar(l_FileNameEtalon),True);
- end;//FileExists(l_FileNameEtalon)
+ Result := '_' + f_Context.rShapeClass.ClassName;
 end;
 
 const
  c_JSON = 'JSON\';
 
-function TmsShapeTestPrim.TestResultsFileName: String;
+function TmsShapeTestPrim.InnerFolders: String;
 begin
- Result := MakeFileName(Name, c_JSON);
+ Result := c_JSON;
 end;
 
 class function TmsShapeTestPrim.ComputerName: AnsiString;
@@ -218,9 +199,9 @@ begin
  );
 end;
 
-function TmsCustomShapeTest.MakeFileName(const aTestName: string; const aFileExtension: string): String;
+function TmsCustomShapeTest.FileExtension: String;
 begin
- Result := inherited + '.json';
+ Result := '.json';
 end;
 
 procedure TmsCustomShapeTest.TestSerialize;
@@ -295,20 +276,6 @@ end;
 procedure TmsShapeTest.TestDeSerializeViaShapeCheck;
 begin
  TestDeSerializeViaShapeCheckForShapeClass;
-end;
-
-procedure TmsShapeTestPrim.OutToFileAndCheck(aLambda: TmsLogLambda);
-var
- l_FileNameTest : String;
-begin
- l_FileNameTest := TestResultsFileName;
- TmsLog.Log(l_FileNameTest,
-  procedure (aLog: TmsLog)
-  begin
-   aLambda(aLog);
-  end
- );
- CheckFileWithEtalon(l_FileNameTest);
 end;
 
 procedure TmsShapeTest.TestShapeName;

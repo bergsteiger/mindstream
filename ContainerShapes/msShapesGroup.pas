@@ -8,19 +8,18 @@ uses
  Generics.Collections,
  msInterfaces,
  msShape,
- msPointlessShape
+ msPointlessShape,
+ msShapesList
  ;
 
 type
- TmsShapesList = class(TList<ImsShape>)
- end;//TmsShapesList
-
  TmsShapesGroup = class(TmsPointlessShape)
  private
   f_Shapes : TmsShapesList;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
+  function ContainsPt(const aPoint: TPointF): Boolean; override;
   constructor CreateInner(const aShapes: array of ImsShape);
  public
   class function Create(const aShapes: array of ImsShape): ImsShape;
@@ -85,6 +84,20 @@ begin
   Result.Right := Max(Result.Right, l_R.Right);
   Result.Bottom := Max(Result.Bottom, l_R.Bottom);
  end;//for l_Shape
+end;
+
+function TmsShapesGroup.ContainsPt(const aPoint: TPointF): Boolean;
+var
+ l_Shape : ImsShape;
+begin
+ Assert(f_Shapes <> nil);
+ Result := false;
+ for l_Shape in f_Shapes do
+  if l_Shape.ContainsPt(aPoint) then
+  begin
+   Result := true;
+   Exit;
+  end;//l_Shape.ContainsPt(aPoint)
 end;
 
 end.

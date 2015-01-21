@@ -3,11 +3,12 @@ unit msFolderIcon;
 interface
 
 uses
- msRectangle
+ msRectangle,
+ msFolder
  ;
 
 type
- TmsFolderIcon = class(TmsRectangle)
+ TmsFolderIcon = class(TmsFolder{TmsRectangle})
  end;//TmsFolderIcon
 
 implementation

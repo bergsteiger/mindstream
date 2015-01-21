@@ -8,21 +8,29 @@ uses
  System.Types,
  System.UITypes,
  msTool,
- msInterfaces
+ msInterfaces,
+ msShapesList,
+ msShapeTool
  ;
 
 type
  TmsMover = class(TmsTool)
  private
   f_Moving : ImsShape;
+  f_FloatingButtons : TmsShapesList;
+  // - кнопки "плавающие" вокруг примитива f_Moving.
+  //   https://bitbucket.org/ingword/mindstream/issue/43/------------------------------------------
+  f_WasMoved : Boolean;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
+  constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
+  function AddButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
+  destructor Destroy; override;
   class function ButtonShape: ImsShape; override;
   function IsNeedsSecondClick : Boolean; override;
-  procedure EndTo(const aCtx: TmsEndShapeContext); override;
+  function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
  end;//TmsMover
 
 implementation
@@ -32,15 +40,70 @@ uses
  FMX.Types,
  System.SysUtils,
  msMoverIcon,
- msLineWithArrow
+ msLineWithArrow,
+ msSpecialArrow,
+ msUpArrow,
+ msDownArrow,
+ msLeftArrow,
+ msRightArrow,
+ msShapesGroup,
+ msCircle,
+ msCircleWithRadius,
+ Math,
+ msProxyShape,
+ msMoveShapeUp,
+ msMoveShapeDown,
+ msMoveShapeLeft,
+ msMoveShapeRight,
+ msShapeRemover,
+ msRemoverIcon
  ;
 
 // TmsMover
 
-constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape);
+const
+ cShift = 12;
+
+function TmsMover.AddButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
+var
+ l_B : TRectF;
+ l_Mid : TPointF;
+begin
+ Assert(f_FloatingButtons <> nil);
+ l_B := aButton.DrawBounds;
+ l_Mid.X := (l_B.Left + l_B.Right) / 2;
+ l_Mid.Y := (l_B.Top + l_B.Bottom) / 2;
+ Result := f_FloatingButtons.AddShape(
+            aToolClass.Create(
+             f_Moving,
+             TmsShapesGroup.Create([
+              TmsCircleWithRadius.Create(l_Mid,
+                                         Max(-(l_B.Left - l_B.Right),
+                                             -(l_B.Top - l_B.Bottom)) / 2
+                                             + cShift / 2 ),
+              aButton
+             ])
+            )
+           );
+end;
+
+constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
+var
+ l_B : TRectF;
+ l_Mid : TPointF;
 begin
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
+ Assert(f_FloatingButtons = nil);
+ f_FloatingButtons := TmsShapesList.Create;
+ l_B := f_Moving.DrawBounds;
+ l_Mid.X := (l_B.Left + l_B.Right) / 2;
+ l_Mid.Y := (l_B.Top + l_B.Bottom) / 2;
+ aController.AddShape(AddButton(TmsMoveShapeUp, TmsUpArrow.Create(TPointF.Create(l_Mid.X, l_B.Top - TmsSpecialArrow.InitialLength - cShift))));
+ aController.AddShape(AddButton(TmsMoveShapeDown, TmsDownArrow.Create(TPointF.Create(l_Mid.X, l_B.Bottom + cShift))));
+ aController.AddShape(AddButton(TmsMoveShapeLeft, TmsLeftArrow.Create(TPointF.Create(l_B.Left - TmsSpecialArrow.InitialLength - cShift, l_Mid.Y))));
+ aController.AddShape(AddButton(TmsMoveShapeRight, TmsRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_Mid.Y))));
+ aController.AddShape(AddButton(TmsShapeTool, TmsRemoverIcon.Create(TPointF.Create(l_B.Right + cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift))));
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
@@ -55,9 +118,17 @@ begin
  Assert(aCtx.rShapesController <> nil);
  l_Moving := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
  if (l_Moving <> nil) then
-  Result := CreateInner(aCtx.rStartPoint, l_Moving)
+ begin
+  Result := CreateInner(aCtx.rStartPoint, l_Moving, aCtx.rShapesController);
+ end//l_Moving <> nil
  else
   Result := nil;
+end;
+
+destructor TmsMover.Destroy;
+begin
+ inherited;
+ FreeAndNil(f_FloatingButtons);
 end;
 
 function TmsMover.IsNeedsSecondClick : Boolean;
@@ -65,13 +136,35 @@ begin
  Result := true;
 end;
 
-procedure TmsMover.EndTo(const aCtx: TmsEndShapeContext);
+function TmsMover.EndTo(const aCtx: TmsEndShapeContext): Boolean;
+var
+ l_ShapeOnPoint : ImsShape;
+ l_FloatingButton : ImsShape;
 begin
+ Result := true;
  if (f_Moving <> nil) then
-  f_Moving.MoveTo(aCtx.rStartPoint);
- f_Moving := nil;
- aCtx.rShapesController.RemoveShape(Self);
- // - теперь надо —≈Ѕя удалить
+ begin
+  l_ShapeOnPoint := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
+  if (l_ShapeOnPoint <> nil) then
+   if l_ShapeOnPoint.ClickInDiagramm then
+   begin
+    f_WasMoved := true;
+    Result := false;
+   end;//l_ShapeOnPoint.ClickInDiagramm
+  if not f_WasMoved then
+   if Result then
+    f_Moving.MoveTo(aCtx.rStartPoint);
+ end;//f_Moving <> nil
+ if Result then
+ begin
+  f_Moving := nil;
+  if (f_FloatingButtons <> nil) then
+   for l_FloatingButton in f_FloatingButtons do
+    aCtx.rShapesController.RemoveShape(l_FloatingButton);
+    // - надо удалить "плавающие кнопки".
+  aCtx.rShapesController.RemoveShape(Self);
+  // - теперь надо —≈Ѕя удалить
+ end;//Result
 end;
 
 procedure TmsMover.DoDrawTo(const aCtx: TmsDrawContext);
