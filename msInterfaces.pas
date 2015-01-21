@@ -104,6 +104,9 @@ type
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
  end;//ImsShapeCreator
 
+ ImsShapeClass = interface
+ end;//ImsShapeClass
+
  ImsDiagrammsHolder = interface
  ['{611ECC2D-3D5B-4297-8A2D-9154D4CF17E7}']
   procedure UpToParent;
