@@ -51,8 +51,8 @@ begin
   Result := nil;
   for l_P in l_PolygonSVG do
   begin
-   l_Mid := (l_R.BottomRight - l_R.TopLeft) / 2;
-   Result := Result + [(l_P - l_R.TopLeft - l_Mid) + l_StartPoint];
+   l_Mid := (l_R.BottomRight + l_R.TopLeft) / 2;
+   Result := Result + [(l_P - l_Mid) + l_StartPoint];
   end;//for l_P in l_PolygonSVG
  finally
   FreeAndNil(l_PD);
