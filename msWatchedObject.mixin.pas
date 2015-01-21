@@ -33,7 +33,7 @@
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
   procedure FreeInstance; override;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
-  procedure Destroy; reintroduce;
+  procedure Destroy(var aDummy); reintroduce;
   procedure Free(var aDummy); reintroduce;
  end;//TmsWatchedObject
 
@@ -66,7 +66,7 @@ end;
 
 // TmsWatchedObject
 
-procedure TmsWatchedObject.Destroy;
+procedure TmsWatchedObject.Destroy(var aDummy);
 begin
  raise Exception.Create('Надо использовать FreeAndNil, а не Destroy');
 end;
