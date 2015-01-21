@@ -34,7 +34,7 @@ var
  l_PolygonSVG : TPolygon;
  l_SVG_String: string;
  l_PD: TPathData;
- l_Point: TPointF;
+ {l_Point: TPointF;}
  l_R : TRectF;
  l_P : TPointF;
  l_StartPoint : TPointF;
@@ -43,13 +43,15 @@ begin
  try
   l_SVG_String := GetPolygonSVG;
   l_PD.Data := l_SVG_String;
-  l_Point:= l_PD.FlattenToPolygon(l_PolygonSVG);
+  {l_Point:= }l_PD.FlattenToPolygon(l_PolygonSVG);
   l_R := PolygonBounds(l_PolygonSVG);
 
   l_StartPoint := StartPoint;
   Result := nil;
   for l_P in l_PolygonSVG do
+  begin
    Result := Result + [(l_P - l_R.TopLeft) + l_StartPoint];
+  end;//for l_P in l_PolygonSVG
  finally
   FreeAndNil(l_PD);
  end;//try..finally
