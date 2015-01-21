@@ -301,7 +301,7 @@ end;
 class procedure TmsShapeTestPrim.CheckShapes(aCheck: TmsShapeClassCheck);
 begin
  TmsRegisteredShapes.IterateShapes(
-  procedure (const aShapeClass: TmsShapeClassListItem)
+  procedure (const aShapeClass: msShapeClass)
   begin
    if not aShapeClass.IsTool then
     aCheck(aShapeClass);
