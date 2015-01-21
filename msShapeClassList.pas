@@ -92,7 +92,7 @@ var
 begin
  for l_ShapeClass in Self do
  begin
-   aLambda(l_ShapeClass);
+  aLambda(l_ShapeClass);
  end;//for l_ShapeClass
 end;
 
