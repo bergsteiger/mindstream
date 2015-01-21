@@ -3,6 +3,7 @@ unit msShapeClassList;
 interface
 
 uses
+ msInterfaces,
  msShape,
  Generics.Collections
  ;
