@@ -23,7 +23,8 @@ type
   function pm_GetItems: TmsShapeClassListItems;
  public
   function First: MCmsShape;
-  procedure RegisterMC(const aValue: MCmsShape); virtual;
+  procedure RegisterMC(const aValue: MCmsShape); overload; virtual;
+  procedure RegisterMC(const aShapes: array of MCmsShape); overload;
   procedure Register(const aValue: RmsShape); overload;
   procedure Register(const aShapes: array of RmsShape); overload;
   procedure Cleanup; override;
@@ -77,6 +78,14 @@ begin
  f_Registered.Add(aValue);
 end;
 
+procedure TmsShapeClassList.RegisterMC(const aShapes: array of MCmsShape);
+var
+ l_Shape : MCmsShape;
+begin
+ for l_Shape in aShapes do
+  Self.RegisterMC(l_Shape);
+end;
+
 procedure TmsShapeClassList.Register(const aValue: RmsShape);
 begin
  RegisterMC(TmsShapeClass.Create(aValue));
@@ -84,10 +93,10 @@ end;
 
 procedure TmsShapeClassList.Register(const aShapes: array of RmsShape);
 var
- l_Index : Integer;
+ l_Shape : RmsShape;
 begin
- for l_Index := Low(aShapes) to High(aShapes) do
-  Self.Register(aShapes[l_Index]);
+ for l_Shape in aShapes do
+  Self.Register(l_Shape);
 end;
 
 function TmsShapeClassList.IndexOfMC(const aValue: MCmsShape): Integer;
@@ -96,10 +105,20 @@ begin
 end;
 
 function TmsShapeClassList.IndexOf(const aValue : RmsShape): Integer;
+var
+ l_Shape : MCmsShape;
+ I : Integer;
 begin
  Result := -1;
- Assert(false, 'Недоделано');
- //Result := f_Registered.IndexOf(aValue);
+ for I := 0 to Pred(f_Registered.Count) do
+ begin
+  l_Shape := f_Registered.Items[I];
+  if (l_Shape.Name = aValue.ClassName) then
+  begin
+   Result := I;
+   Exit;
+  end;//l_Shape.Name = aValue.ClassName
+ end;//for I
 end;
 
 procedure TmsShapeClassList.IterateShapes(aLambda: TmsShapeClassLambda);
