@@ -41,7 +41,8 @@ uses
  System.TypInfo,
  System.Rtti,
  SysUtils,
- TestSaveToPNG
+ TestSaveToPNG,
+ msShapeClassList
  ;
 
 // TmsShapesTest
@@ -76,7 +77,7 @@ begin
 
  RandSeed := 10;
  TmsShapeTestPrim.CheckShapes(
-  procedure (aShapeClass: RmsShape)
+  procedure (const aShapeClass: TmsShapeClassListItem)
   var
    l_Method: TRttiMethod;
    l_DiagrammName : String;
