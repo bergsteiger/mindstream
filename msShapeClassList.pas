@@ -11,25 +11,25 @@ uses
 
 type
  msShapeClass = {ImsShapeClass}RmsShape;
- RmsShapeList = TList<msShapeClass>;
+ TmsShapeClassListItems = TList<msShapeClass>;
 
  TmsShapeClassLambda = reference to procedure (const aShapeClass : msShapeClass);
 
  TmsShapeClassList = class(TmsObject)
  strict protected
-  f_Registered : RmsShapeList;
+  f_Registered : TmsShapeClassListItems;
   constructor Create;
  strict private
-  function pm_GetItems: RmsShapeList;
+  function pm_GetItems: TmsShapeClassListItems;
  public
   function First: msShapeClass;
   procedure Register(const aValue: RmsShape); overload; virtual;
   procedure Register(const aShapes: array of RmsShape); overload;
   procedure Cleanup; override;
-  function GetEnumerator: RmsShapeList.TEnumerator;
+  function GetEnumerator: TmsShapeClassListItems.TEnumerator;
   function IndexOf(const aValue: RmsShape): Integer;
   procedure IterateShapes(aLambda: TmsShapeClassLambda);
-  property Items: RmsShapeList
+  property Items: TmsShapeClassListItems
    read pm_GetItems;
  end;//TmsShapeClassList
 
@@ -44,10 +44,10 @@ uses
 constructor TmsShapeClassList.Create;
 begin
  inherited;
- f_Registered := RmsShapeList.Create;
+ f_Registered := TmsShapeClassListItems.Create;
 end;
 
-function TmsShapeClassList.pm_GetItems: RmsShapeList;
+function TmsShapeClassList.pm_GetItems: TmsShapeClassListItems;
 begin
  Result := f_Registered;
 end;
@@ -57,7 +57,7 @@ begin
  Result := f_Registered.First;
 end;
 
-function TmsShapeClassList.GetEnumerator: RmsShapeList.TEnumerator;
+function TmsShapeClassList.GetEnumerator: TmsShapeClassListItems.TEnumerator;
 begin
  Result := f_Registered.GetEnumerator;
 end;
