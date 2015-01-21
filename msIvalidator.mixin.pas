@@ -19,9 +19,8 @@
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); virtual; abstract;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); virtual; abstract;
- public
-  class function NewInstance: TObject; override;
-  procedure Cleanup; override;
+  procedure InstanceAllocated; override;
+  procedure InstanceWillBeDestroyed; override;
  end;//TmsIvalidator
 
 {$Define TmsMixIn_intf}
@@ -51,13 +50,13 @@ begin
  DoDiagrammAdded(aDiagramms, aDiagramm);
 end;
 
-class function TmsIvalidator.NewInstance: TObject;
+procedure TmsIvalidator.InstanceAllocated;
 begin
- Result := inherited NewInstance;
- TmsInvalidators.Subscribe(TmsIvalidator(Result));
+ inherited;
+ TmsInvalidators.Subscribe(Self);
 end;
 
-procedure TmsIvalidator.Cleanup;
+procedure TmsIvalidator.InstanceWillBeDestroyed;
 begin
  TmsInvalidators.UnSubscribe(Self);
  inherited;

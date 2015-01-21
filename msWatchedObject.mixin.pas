@@ -22,16 +22,24 @@
  protected
   procedure Cleanup; virtual;
   // - функция для очистки состояния объекта. Её надо перекрывать ВМЕСТО Destroy.
+  procedure InstanceAllocated; virtual;
+  // - функция для инициализации объекта СРАЗУ после его создания. Ещё ДО конструктора.
+  procedure InstanceWillBeDestroyed; virtual;
+  // - функция вызываемая ПОСЛЕ деструктора, но ПЕРЕД реальным освобождением объекта
  public
+  class function NewInstance: TObject; override; final;
+  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
+  procedure FreeInstance; override;
+  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
   destructor Destroy; override; final;
  end;//TmsWatchedObjectPrim
 
  TmsWatchedObject = class abstract(TmsWatchedObjectPrim)
  // - Класс, который умеет контроллировать создание/уничтожение своих экземпляров
  public
-  class function NewInstance: TObject; override;
+  procedure NewInstance(var aDummy); reintroduce;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
-  procedure FreeInstance; override;
+  procedure FreeInstance(var aDummy); reintroduce;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
   procedure Destroy(var aDummy); reintroduce;
   procedure Free(var aDummy); reintroduce;
@@ -64,6 +72,28 @@ begin
  inherited;
 end;
 
+procedure TmsWatchedObjectPrim.InstanceAllocated;
+begin
+ // - Ничего не делаем
+end;
+
+procedure TmsWatchedObjectPrim.InstanceWillBeDestroyed;
+begin
+ // - Ничего не делаем
+end;
+
+class function TmsWatchedObjectPrim.NewInstance: TObject;
+begin
+ TmsObjectsWatcher.CreateObject(Self, Result);
+ TmsWatchedObjectPrim(Result).InstanceAllocated
+end;
+
+procedure TmsWatchedObjectPrim.FreeInstance;
+begin
+ Self.InstanceWillBeDestroyed;
+ TmsObjectsWatcher.DestroyObject(Self);
+end;
+
 // TmsWatchedObject
 
 procedure TmsWatchedObject.Destroy(var aDummy);
@@ -76,14 +106,14 @@ begin
  raise Exception.Create('Надо использовать FreeAndNil, а не Free');
 end;
 
-class function TmsWatchedObject.NewInstance: TObject;
+procedure TmsWatchedObject.NewInstance(var aDummy);
 begin
- TmsObjectsWatcher.CreateObject(Self, Result);
+ raise Exception.Create('Нельзя ни перекрывать, ни вызывать NewInstance');
 end;
 
-procedure TmsWatchedObject.FreeInstance;
+procedure TmsWatchedObject.FreeInstance(var aDummy);
 begin
- TmsObjectsWatcher.DestroyObject(Self);
+ raise Exception.Create('Нельзя ни перекрывать, ни вызывать FreeInstance');
 end;
 
 {$EndIf TmsWatchedObject_uses_impl}
