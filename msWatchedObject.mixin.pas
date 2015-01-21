@@ -18,7 +18,15 @@
 
  TmsObjectWrapParent = TmsWatchedObjectParent;
  {$Include msObjectWrap.mixin.pas}
- TmsWatchedObject = class abstract(TmsObjectWrap)
+ TmsWatchedObjectPrim = class abstract(TmsObjectWrap)
+ protected
+  procedure Cleanup; virtual;
+  // - функция для очистки состояния объекта. Её надо перекрывать ВМЕСТО Destroy.
+ public
+  destructor Destroy; override;
+ end;//TmsWatchedObjectPrim
+
+ TmsWatchedObject = class abstract(TmsWatchedObjectPrim)
  // - Класс, который умеет контроллировать создание/уничтожение своих экземпляров
  public
   class function NewInstance: TObject; override;
@@ -42,6 +50,17 @@
 {$Else TmsWatchedObject_uses_impl}
 
 {$Include msObjectWrap.mixin.pas}
+
+procedure TmsWatchedObjectPrim.Cleanup;
+begin
+ // - Ничего не делаем
+end;
+
+destructor TmsWatchedObjectPrim.Destroy;
+begin
+ Cleanup;
+ inherited;
+end;
 
 // TmsWatchedObject
 
