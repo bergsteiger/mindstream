@@ -26,7 +26,7 @@ type
    rSeed: Integer;
    rDiagrammName : String;
    rShapesCount : Integer;
-   rShapeClass: MCmsShape;
+   rShapeClass: Pointer;
    constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; const aShapeClass: MCmsShape);
   end;//TmsShapeTestContext
 
@@ -47,6 +47,7 @@ type
     procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
     procedure TestDeSerializeForShapeClass;
     procedure TestDeSerializeViaShapeCheckForShapeClass;
+    function ShapeClass: MCmsShape;
     function ContextName: String; override;
     function InnerFolders: String; override;
     constructor CreateInner(const aContext: TmsShapeTestContext);
@@ -100,9 +101,16 @@ implementation
   msCompletedShapeCreator
   ;
 
+// TmsShapeTestPrim
+
+function TmsShapeTestPrim.ShapeClass: MCmsShape;
+begin
+ Result := MCmsShape(f_Context.rShapeClass);
+end;
+
 function TmsShapeTestPrim.ContextName: String;
 begin
- Result := '_' + f_Context.rShapeClass.Name;
+ Result := '_' + Self.ShapeClass.Name;
 end;
 
 const
@@ -153,7 +161,7 @@ begin
  rSeed := aSeed;
  rDiagrammName := aDiagrammName;
  rShapesCount := aShapesCount;
- rShapeClass := aShapeClass;
+ rShapeClass := Pointer(aShapeClass);
 end;
 
 procedure TmsShapeTestPrim.SetUp;
@@ -193,7 +201,7 @@ begin
    l_P : TPoint;
   begin
    for l_P in f_Coords do
-    aDiagramm.AddShape(TmsCompletedShapeCreator.Create(f_Context.rShapeClass).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil, nil))).AddNewDiagramm;
+    aDiagramm.AddShape(TmsCompletedShapeCreator.Create(Self.ShapeClass).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil, nil))).AddNewDiagramm;
 
    SaveDiagrammAndCheck(aDiagramm, SaveDiagramm);
   end
@@ -249,8 +257,8 @@ constructor TmsShapeTestPrim.CreateInner(const aContext: TmsShapeTestContext);
 begin
  inherited Create(aContext.rMethodName);
  f_Context := aContext;
- FTestName := f_Context.rShapeClass.Name + '.' + aContext.rMethodName;
- f_TestSerializeMethodName := f_Context.rShapeClass.Name + '.';
+ FTestName := Self.ShapeClass.Name + '.' + aContext.rMethodName;
+ f_TestSerializeMethodName := Self.ShapeClass.Name + '.';
 end;
 
 class function TmsShapeTestPrim.Create(const aContext: TmsShapeTestContext): ITest;
@@ -277,7 +285,7 @@ begin
    l_Index := 0;
    for l_Shape in aDiagramm do
    begin
-    Check(f_Context.rShapeClass.IsOurInstance(l_Shape));
+    Check(Self.ShapeClass.IsOurInstance(l_Shape));
     Check(l_Shape.StartPoint.X = f_Coords[l_Index].X);
     Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y);
     Inc(l_Index);
@@ -296,7 +304,7 @@ begin
  OutToFileAndCheck(
   procedure (aLog: TmsLog)
   begin
-   aLog.ToLog(f_Context.rShapeClass.Name);
+   aLog.ToLog(Self.ShapeClass.Name);
   end
  );
 end;
