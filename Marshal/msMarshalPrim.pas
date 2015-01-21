@@ -31,7 +31,8 @@ uses
  msRegisteredShapes,
  JSON,
  msStringList,
- msFormatter
+ msFormatter,
+ msShapeClassList
  ;
 
 // TmsMarshalPrim
@@ -51,7 +52,7 @@ begin
   TmsDiagramm.RegisterInMarshal(f_Marshal);
   TmsDiagramms.RegisterInMarshal(f_Marshal);
   TmsRegisteredShapes.IterateShapes(
-   procedure (aShapeClass: RmsShape)
+   procedure (const aShapeClass: TmsShapeClassListItem)
    begin
     aShapeClass.RegisterInMarshal(f_Marshal);
 //    f_Marshal.RegisterJSONMarshalled(aShapeClass, 'FRefCount', false);
@@ -70,7 +71,7 @@ begin
   TmsDiagramm.RegisterInUnMarshal(f_UnMarshal);
   TmsDiagramms.RegisterInUnMarshal(f_UnMarshal);
   TmsRegisteredShapes.IterateShapes(
-   procedure (aShapeClass: RmsShape)
+   procedure (const aShapeClass: TmsShapeClassListItem)
    begin
     aShapeClass.RegisterInUnMarshal(f_UnMarshal);
    end
