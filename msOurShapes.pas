@@ -23,6 +23,7 @@ uses
   msBlackTriangle,
   msBlackRectangle,
   msGreenCircle,
+  msPointCircle,
 
   // utility shapes
   msMover,
@@ -32,7 +33,6 @@ uses
   msShapeRemover,
 
   // special shapes
-  msPointCircle,
   msSmallTriangle,
 
   // shapes for toolbar buttons
