@@ -20,6 +20,8 @@ uses
   msRedRectangle,
   msGreenRectangle,
   msPolygonShape,
+  msBlackTriangle,
+  msBlackRectangle,
 
   // utility shapes
   msMover,
@@ -34,7 +36,6 @@ uses
   msGreenCircle,
 
   // shapes for toolbar buttons
-  msBlackTriangle,
   msMoverIcon,
 
   // SVG Shapes
@@ -44,6 +45,7 @@ uses
 procedure RegisterOurShapes;
 begin
  TmsRegisteredShapes.Instance.Register([
+  // concrete shapes
   TmsLine,
   TmsRectangle,
   TmsCircle,
@@ -61,6 +63,8 @@ begin
   // special shapes
   TmsPointCircle,
   TmsSmallTriangle,
+
+  // concrete shapes
   TmsGreenCircle,
 
   // utility shapes
@@ -71,11 +75,14 @@ begin
   TmsShapeRemover,
 
   // shapes for buttons
-  TmsBlackTriangle,
   TmsMoverIcon,
 
   // SVG Shapes
-  TmsFolder
+  TmsFolder,
+
+  // concrete shapes
+  TmsBlackTriangle,
+  TmsBlackRectangle
  ]);
 end;
 
