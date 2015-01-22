@@ -13,6 +13,7 @@ type
  public
   class function Instance: TmsRegisteredShapes;
   procedure RegisterMC(const aValue: MCmsShape); override;
+  procedure IterateShapes(aLambda: TmsShapeClassLambda); override;
  end;//TmsRegisteredShapes
 
 implementation
@@ -36,6 +37,11 @@ begin
  inherited;
  TmsShapesForToolbar.Instance.RegisterMC(aValue);
  TmsUtilityShapes.Instance.RegisterMC(aValue);
+end;
+
+procedure TmsRegisteredShapes.IterateShapes(aLambda: TmsShapeClassLambda);
+begin
+ inherited;
 end;
 
 end.
