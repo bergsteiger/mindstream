@@ -331,7 +331,7 @@ end;
 
 procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
 begin
- CurrentDiagramm.ProcessClick(TmsClickContext.Create(TmsShapesForToolbar.Instance.Items[cbShapes.ItemIndex].Creator, aStart,
+ CurrentDiagramm.ProcessClick(TmsClickContext.Create(TmsShapesForToolbar.Instance.ByName(cbShapes.Items[cbShapes.ItemIndex]).Creator, aStart,
    Self.As_ImsDiagrammsHolder));
 end;
 

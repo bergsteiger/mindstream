@@ -16,8 +16,8 @@ uses
 type
  TmsShapeButton = class(TButton)
   private
+   f_ShapeClass : MCmsShape;
    f_Shape: ImsShape;
-   f_ShapeIndex: Integer;
    f_Shapes: TComboBox;
    f_Holder : ImsDiagrammsHolder;
    procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
@@ -43,7 +43,6 @@ uses
  Math
  ;
 
-
 // TmsShapeButton
 
 constructor TmsShapeButton.Create(AOwner: TComponent;
@@ -62,8 +61,7 @@ begin
  Width := TmsPaletteShapeCreator.ButtonSize;
  Height := TmsPaletteShapeCreator.ButtonSize;
 
- f_ShapeIndex := TmsShapesForToolbar.Instance.IndexOfMC(aShape);
- Assert(f_ShapeIndex >= 0);
+ f_ShapeClass := aShape;
  f_Shape := TmsPaletteShapeCreator.Create(aShape).CreateShape
                                      (TmsMakeShapeContext.Create
                                       (TPointF.Create
@@ -77,7 +75,6 @@ begin
  OnClick := MyClick;
 
  Assert(f_Shape <> nil);
- Assert(f_Shape.IsClassTypeNamedAs(f_Shapes.Items[f_ShapeIndex]));
 
  Self.Position.X := aColumn * TmsPaletteShapeCreator.ButtonSize;
  Self.Position.Y := aRow * TmsPaletteShapeCreator.ButtonSize;
@@ -87,6 +84,7 @@ end;
 destructor TmsShapeButton.Destroy;
 begin
  f_Shape := nil;
+ f_ShapeClass := nil;
  inherited;
 end;
 
@@ -160,9 +158,8 @@ end;
 
 procedure TmsShapeButton.MyClick(Sender: TObject);
 begin
- Assert(f_Shape.IsClassTypeNamedAs(f_Shapes.Items[f_ShapeIndex]));
  if not f_Shape.NullClick(ImsDiagrammsHolder(f_Holder)) then
-  f_Shapes.ItemIndex := f_ShapeIndex;
+  f_Shapes.ItemIndex := f_Shapes.Items.IndexOf(f_ShapeClass.Name);
 end;
 
 end.

@@ -71,7 +71,7 @@ procedure TmsRegisteredShapesTestPrim.TestIndexOfTmsLine;
 begin
  OutToFileAndCheck(procedure (aLog: TmsLog)
   begin
-   aLog.ToLog(IntToStr(ShapeClassList.IndexOf(TmsLine)));
+   aLog.ToLog(BoolToStr(ShapeClassList.ByName(TmsLine.ClassName) <> nil));
   end
  );
 end;

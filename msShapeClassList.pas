@@ -21,6 +21,9 @@ type
   constructor Create;
  strict private
   function pm_GetItems: TmsShapeClassListItems;
+ protected
+  function GetEnumerator: TmsShapeClassListItems.TEnumerator;
+  function IndexOf(const aValue: String): Integer;
  public
   function First: MCmsShape;
   procedure RegisterMC(const aValue: MCmsShape); overload; virtual;
@@ -28,12 +31,10 @@ type
   procedure Register(const aValue: RmsShape); overload;
   procedure Register(const aShapes: array of RmsShape); overload;
   procedure Cleanup; override;
-  function GetEnumerator: TmsShapeClassListItems.TEnumerator;
-  function IndexOfMC(const aValue: MCmsShape): Integer;
-  function IndexOf(const aValue: RmsShape): Integer;
+  function ByName(const aValue: String): MCmsShape;
   procedure IterateShapes(aLambda: TmsShapeClassLambda); virtual;
-  property Items: TmsShapeClassListItems
-   read pm_GetItems;
+(*  property Items: TmsShapeClassListItems
+   read pm_GetItems;*)
  end;//TmsShapeClassList
 
 implementation
@@ -74,7 +75,7 @@ end;
 
 procedure TmsShapeClassList.RegisterMC(const aValue: MCmsShape);
 begin
- Assert(IndexOfMC(aValue) < 0);
+ Assert(IndexOf(aValue.Name) < 0);
  f_Registered.Add(aValue);
 end;
 
@@ -99,12 +100,7 @@ begin
   Self.Register(l_Shape);
 end;
 
-function TmsShapeClassList.IndexOfMC(const aValue: MCmsShape): Integer;
-begin
- Result := f_Registered.IndexOf(aValue);
-end;
-
-function TmsShapeClassList.IndexOf(const aValue : RmsShape): Integer;
+function TmsShapeClassList.IndexOf(const aValue: String): Integer;
 var
  l_Shape : MCmsShape;
  I : Integer;
@@ -113,9 +109,26 @@ begin
  for I := 0 to Pred(f_Registered.Count) do
  begin
   l_Shape := f_Registered.Items[I];
-  if (l_Shape.Name = aValue.ClassName) then
+  if (l_Shape.Name = aValue) then
   begin
    Result := I;
+   Exit;
+  end;//l_Shape.Name = aValue.ClassName
+ end;//for I
+end;
+
+function TmsShapeClassList.ByName(const aValue: String): MCmsShape;
+var
+ l_Shape : MCmsShape;
+ I : Integer;
+begin
+ Result := nil;
+ for I := 0 to Pred(f_Registered.Count) do
+ begin
+  l_Shape := f_Registered.Items[I];
+  if (l_Shape.Name = aValue) then
+  begin
+   Result := l_Shape;
    Exit;
   end;//l_Shape.Name = aValue.ClassName
  end;//for I
@@ -125,10 +138,12 @@ procedure TmsShapeClassList.IterateShapes(aLambda: TmsShapeClassLambda);
 var
  l_ShapeClass : MCmsShape;
 begin
- for l_ShapeClass in Self do
- begin
-  aLambda(l_ShapeClass);
- end;//for l_ShapeClass
+ for l_ShapeClass in f_Registered do
+  if not l_ShapeClass.IsTool then
+   aLambda(l_ShapeClass);
+ for l_ShapeClass in f_Registered do
+  if l_ShapeClass.IsTool then
+   aLambda(l_ShapeClass);
 end;
 
 end.
