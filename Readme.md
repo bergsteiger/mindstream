@@ -1,7 +1,7 @@
 MindStream (в перспективе) представляет собой кросс-платформенное ПО, для управления предприятием. Удобный графический интерфейс позволяет с легкостью отслеживать работу бизнес-процессов компании на любом устройстве, и  в любом уровне детализации. 
 На данный момент приложение выглядит так:
 
-![PreAlpha](http://2.bp.blogspot.com/-R57bTGC5t4Y/VJ59FTCEwLI/AAAAAAAAKXg/SHbpkLVgm_A/s1600/MindStream3.gif)
+![PreAlpha](http://habrastorage.org/files/044/a6a/882/044a6a882c0f464ba99485a8b6c72b0d.gif)
 
 Статьи [рассказывающее о эволюции](http://programmingmindstream.blogspot.com/2014/11/mindstream.html "Содержание статей о MindStream") продукта.
 
