@@ -35,7 +35,10 @@ uses
 
   // shapes for toolbar buttons
   msBlackTriangle,
-  msMoverIcon
+  msMoverIcon,
+
+  // SVG Shapes
+  msFolder
   ;
 
 procedure RegisterOurShapes;
@@ -69,7 +72,10 @@ begin
 
   // shapes for buttons
   TmsBlackTriangle,
-  TmsMoverIcon
+  TmsMoverIcon,
+
+  // SVG Shapes
+  TmsFolder
  ]);
 end;
 

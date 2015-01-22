@@ -30,6 +30,7 @@ uses
  FMX.Types
  ;
 
+ // TmsLineWithArrow
 
 procedure TmsLineWithArrow.DoDrawTo(const aCtx: TmsDrawContext);
 var
@@ -152,11 +153,6 @@ begin
  l_Angle := GetArrowAngleRotation;
  Result := TPointF.Create(FinishPoint.X - TmsSmallTriangle.InitialHeight * Cos(l_Angle),
                           FinishPoint.Y - TmsSmallTriangle.InitialHeight * Sin(l_Angle));
- // Вот тут, по идее, надо возвращать координату середины стороны,
- //  через которую прходит линия.
- // Сделать я это не смог, потому что не знаю как правильно после поворота треугольника
- // получить новые координаты вершин.
- //Result := inherited GetFinishPointForDraw;
 end;
 
 end.

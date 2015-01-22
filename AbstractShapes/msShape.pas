@@ -18,16 +18,16 @@ uses
 type
  TmsShape = class abstract(TmsDiagrammsList, ImsShape)
  private
-  FStartPoint: TPointF;
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
-  function pm_GetStartPoint: TPointF;
  strict protected
+  function pm_GetStartPoint: TPointF; virtual;
   constructor CreateInner(const aStartPoint: TPointF); virtual;
+  procedure SetStartPoint(const aStartPoint: TPointF); virtual;
  protected
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   function IsNeedsSecondClick : Boolean; virtual;
-  procedure EndTo(const aCtx: TmsEndShapeContext); virtual;
+  function EndTo(const aCtx: TmsEndShapeContext): Boolean; virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
   procedure SaveTo(const aFileName: String); override;
@@ -50,10 +50,13 @@ type
   // - http://www.gunsmoker.ru/2013/04/plugins-9.html
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
- protected
+ public
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   // - обрабатывает "нулевой клик"
+ protected
+  function ClickInDiagramm: Boolean; virtual;
+  // - ткнули в примитив внутри диаграммы
   function GetDrawBounds: TRectF; virtual;
   function DrawBounds: TRectF;
  public
@@ -66,10 +69,13 @@ type
   class function IsNullClick: Boolean; virtual;
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);
-  class function ButtonShape(const aStartPoint: TPointF): ImsShape; virtual;
+  class function ButtonShape: ImsShape; virtual;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
+
+ MCmsShape = ImsShapeClass;
+// MCmsShape = RmsShape;
 
 implementation
 
@@ -97,17 +103,18 @@ end;
 constructor TmsShape.CreateInner(const aStartPoint: TPointF);
 begin
  inherited Create;
- FStartPoint := aStartPoint;
+ SetStartPoint(aStartPoint);
 end;
 
-procedure TmsShape.EndTo(const aCtx: TmsEndShapeContext);
+function TmsShape.EndTo(const aCtx: TmsEndShapeContext): Boolean;
 begin
+ Result := true;
  Assert(false, 'Примитив ' + ClassName + ' не может быть завершён');
 end;
 
 procedure TmsShape.MoveTo(const aFinishPoint: TPointF);
 begin
- FStartPoint := aFinishPoint;
+ SetStartPoint(aFinishPoint);
 end;
 
 function TmsShape.IsNeedsSecondClick : Boolean;
@@ -122,7 +129,13 @@ end;
 
 function TmsShape.pm_GetStartPoint: TPointF;
 begin
- Result := FStartPoint;
+ Result := TPointF.Create(0, 0);
+ Assert(false, 'Abstract method');
+end;
+
+procedure TmsShape.SetStartPoint(const aStartPoint: TPointF);
+begin
+ Assert(false, 'Abstract method');
 end;
 
 function TmsShape.DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
@@ -162,9 +175,14 @@ begin
  Result := DoNullClick(aHolder);
 end;
 
+function TmsShape.ClickInDiagramm: Boolean;
+begin
+ Result := false;
+end;
+
 function TmsShape.GetDrawBounds: TRectF;
 begin
- Result := TRectF.Create(FStartPoint, FStartPoint);
+ Result := TRectF.Create(StartPoint, StartPoint);
  Assert(false);
 end;
 
@@ -215,9 +233,10 @@ begin
  Assert(false, 'Не реализовано');
 end;
 
-class function TmsShape.ButtonShape(const aStartPoint: TPointF): ImsShape;
+class function TmsShape.ButtonShape: ImsShape;
 begin
  Result := nil;
+ Assert(false, 'Не реализовано');
 end;
 
 end.

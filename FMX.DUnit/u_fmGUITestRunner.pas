@@ -41,8 +41,10 @@ type
   procedure btnUncheckAllClick(Sender: TObject);
  protected
   FSuite: ITest;
+  FTests: TInterfaceList;
   FTestResult: TTestResult;
   FSelectedTests: TInterfaceList;
+  FTotalTime: Int64;
   f_Runned : Integer;
 
   procedure SetSuite(aValue: ITest);

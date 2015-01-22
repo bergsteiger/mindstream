@@ -6,18 +6,19 @@ uses
  msInterfaces,
  msShape,
  System.Types,
- msRectangle
+ msRectangle,
+ msPointlessShape
  ;
 
 type
  RmsPaletteShape = class of TmsPaletteShape;
- TmsPaletteShape = class(TmsShape)
+ TmsPaletteShape = class(TmsPointlessShape)
  private
-  f_OtherShapeClass : RmsShape;
+  f_OtherShapeClass : MCmsShape;
   f_Proxy : ImsShape;
  protected
-  constructor CreateInner(anOtherShapeClass: RmsShape; const aStartPoint: TPointF);
-  class function Create(anOtherShapeClass: RmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
+  constructor CreateInner(const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF);
+  class function Create(const anOtherShapeClass: MCmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
   function IsClassTypeNamedAs(const aClassName: String): Boolean; override;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
   function GetDrawBounds: TRectF; override;
@@ -28,7 +29,6 @@ type
 type
  TmsShapeFriend = class(TmsShape)
  end;//TmsShapeFriend
- RmsShapeFriend = class of TmsShapeFriend;
 
 implementation
 
@@ -49,26 +49,26 @@ begin
  f_Proxy.DrawTo(aCtx);
 end;
 
-constructor TmsPaletteShape.CreateInner(anOtherShapeClass: RmsShape; const aStartPoint: TPointF);
+constructor TmsPaletteShape.CreateInner(const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF);
 begin
  inherited CreateInner(aStartPoint);
  f_OtherShapeClass := anOtherShapeClass;
- f_Proxy := f_OtherShapeClass.ButtonShape(aStartPoint);
+ f_Proxy := f_OtherShapeClass.ButtonShape;
 end;
 
-class function TmsPaletteShape.Create(anOtherShapeClass: RmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
+class function TmsPaletteShape.Create(const anOtherShapeClass: MCmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
 begin
  Result := CreateInner(anOtherShapeClass, aCtx.rStartPoint);
 end;
 
 function TmsPaletteShape.IsClassTypeNamedAs(const aClassName: String): Boolean;
 begin
- Result := (f_OtherShapeClass.ClassName = aClassName);
+ Result := (f_OtherShapeClass.Name = aClassName);
 end;
 
 function TmsPaletteShape.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
 begin
- Result := RmsShapeFriend(f_OtherShapeClass).DoNullClick(aHolder);
+ Result := f_OtherShapeClass.NullClick(aHolder);
 end;
 
 end.

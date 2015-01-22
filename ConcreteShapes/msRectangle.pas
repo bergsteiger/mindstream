@@ -8,11 +8,12 @@ uses
  FMX.Graphics,
  FMX.Types,
  System.UITypes,
- msInterfaces
+ msInterfaces,
+ msPointedShape
  ;
 
 type
- TmsRectangle = class(TmsShape)
+ TmsRectangle = class(TmsPointedShape)
  protected
   class function CornerRadius: Single; virtual;
   class function InitialWidth: Single; virtual;

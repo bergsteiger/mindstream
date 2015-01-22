@@ -32,7 +32,7 @@
   function ItemsCount: Integer;
  public
   constructor Create;
-  destructor Destroy; override;
+  procedure Cleanup; override;
   property Items: TmsItemsList read pm_GetItems write pm_SetItems;
   procedure Assign(anOther : TmsItemsHolder);
   class procedure RegisterInMarshal(aMarshal: TJSONMarshal);
@@ -63,7 +63,7 @@ begin
  f_Items := TmsItemsList.Create;
 end;
 
-destructor TmsItemsHolder.Destroy;
+procedure TmsItemsHolder.Cleanup;
 begin
  FreeAndNil(f_Items);
  inherited;
