@@ -73,7 +73,7 @@ procedure TfmMain.CreateToolBar(const aPanelWidth: Single);
  end;//GetColumnCount
 
 var
- l_RmsShape: RmsShape;
+ l_RmsShape: MCmsShape;
 
  l_Row, l_Column : Integer;
 begin

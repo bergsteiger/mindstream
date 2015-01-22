@@ -23,7 +23,7 @@ type
   constructor CreateInner(const aShapes: array of ImsShape);
  public
   class function Create(const aShapes: array of ImsShape): ImsShape;
-  destructor Destroy; override;
+  procedure Cleanup; override;
  end;//TmsShapesGroup
 
 implementation
@@ -51,7 +51,7 @@ begin
   f_Shapes.Add(l_Shape);
 end;
 
-destructor TmsShapesGroup.Destroy;
+procedure TmsShapesGroup.Cleanup;
 begin
  FreeAndNil(f_Shapes);
  inherited;

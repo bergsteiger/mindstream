@@ -13,7 +13,7 @@ type
    protected
     function ShapeClassList: TmsShapeClassList; virtual; abstract;
     function FileExtension: String; override;
-    procedure CheckShapeClass(aShapeClass: RmsShape); virtual;
+    procedure CheckShapeClass(const aShapeClass: MCmsShape); virtual;
    published
     procedure ShapesRegistredCount;
     procedure TestFirstShape;
@@ -35,7 +35,7 @@ begin
  Result := '.registered';
 end;
 
-procedure TmsRegisteredShapesTestPrim.CheckShapeClass(aShapeClass: RmsShape);
+procedure TmsRegisteredShapesTestPrim.CheckShapeClass(const aShapeClass: MCmsShape);
 begin
 end;
 
@@ -47,7 +47,7 @@ begin
   begin
    l_Result := 0;
    ShapeClassList.IterateShapes(
-    procedure (aShapeClass: RmsShape)
+    procedure (const aShapeClass: MCmsShape)
     begin
      CheckShapeClass(aShapeClass);
      Inc(l_Result);
@@ -62,7 +62,7 @@ procedure TmsRegisteredShapesTestPrim.TestFirstShape;
 begin
  OutToFileAndCheck(procedure (aLog: TmsLog)
   begin
-   aLog.ToLog(ShapeClassList.First.ClassName);
+   aLog.ToLog(ShapeClassList.First.Name);
   end
  );
 end;

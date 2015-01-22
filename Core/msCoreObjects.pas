@@ -53,7 +53,7 @@ type
   class procedure DestroyObject(anObject: TObject);
   class procedure ObjectCreated(anObject: TObject);
   class procedure ObjectDestroyed(anObject: TObject);
-  class destructor Destroy;
+  class destructor Fini;
  end;//TmsObjectsWatcher
 
 implementation
@@ -188,7 +188,7 @@ begin//OutLn
  f_FS.Write(cEOL[1], Length(cEOL));
 end;//OutLn
 
-class destructor TmsObjectsWatcher.Destroy;
+class destructor TmsObjectsWatcher.Fini;
 begin
  if (f_ObjectsCreated <> nil) then
   if (f_ObjectsCreated.Count > 0) then
@@ -210,7 +210,11 @@ begin
  FreeAndNil(f_ObjectsCreated);
  FreeAndNil(f_DefferedObjects);
  if (f_ObjectsCreatedCount > 0) then
-  raise Exception.Create('Какие-то объекты не освобождены: ' + IntToStr(f_ObjectsCreatedCount));
+  try
+   raise Exception.Create('Какие-то объекты не освобождены: ' + IntToStr(f_ObjectsCreatedCount));
+  except
+   // давим пока наше исключение, чтобы дальше не летело AV
+  end;//try..except
 end;
 
 end.

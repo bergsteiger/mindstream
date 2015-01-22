@@ -50,10 +50,11 @@ type
   // - http://www.gunsmoker.ru/2013/04/plugins-9.html
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
- protected
+ public
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   // - обрабатывает "нулевой клик"
+ protected
   function ClickInDiagramm: Boolean; virtual;
   // - ткнули в примитив внутри диаграммы
   function GetDrawBounds: TRectF; virtual;
@@ -72,6 +73,9 @@ type
  end;//TmsShape
 
  RmsShape = class of TmsShape;
+
+ MCmsShape = ImsShapeClass;
+// MCmsShape = RmsShape;
 
 implementation
 

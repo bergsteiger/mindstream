@@ -26,8 +26,8 @@ type
    rSeed: Integer;
    rDiagrammName : String;
    rShapesCount : Integer;
-   rShapeClass: RmsShape;
-   constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; aShapeClass: RmsShape);
+   rShapeClass: Pointer;
+   constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; const aShapeClass: MCmsShape);
   end;//TmsShapeTestContext
 
   TmsShapeTestPrim = class abstract(TmsLoggedTest)
@@ -47,11 +47,14 @@ type
     procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
     procedure TestDeSerializeForShapeClass;
     procedure TestDeSerializeViaShapeCheckForShapeClass;
+    function ShapeClass: MCmsShape;
     function ContextName: String; override;
     function InnerFolders: String; override;
+    constructor CreateInner(const aContext: TmsShapeTestContext);
   public
     class procedure CheckShapes(aCheck: TmsShapeClassCheck);
-    constructor Create(const aContext: TmsShapeTestContext);
+    class function Create(const aContext: TmsShapeTestContext): ITest;
+    destructor Destroy; override;
   end;//TmsShapeTestPrim
 
   RmsShapeTest = class of TmsShapeTestPrim;
@@ -98,9 +101,16 @@ implementation
   msCompletedShapeCreator
   ;
 
+// TmsShapeTestPrim
+
+function TmsShapeTestPrim.ShapeClass: MCmsShape;
+begin
+ Result := MCmsShape(f_Context.rShapeClass);
+end;
+
 function TmsShapeTestPrim.ContextName: String;
 begin
- Result := '_' + f_Context.rShapeClass.ClassName;
+ Result := '_' + Self.ShapeClass.Name;
 end;
 
 const
@@ -145,13 +155,13 @@ begin
  Result := f_Context.rShapesCount;
 end;
 
-constructor TmsShapeTestContext.Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; aShapeClass: RmsShape);
+constructor TmsShapeTestContext.Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; const aShapeClass: MCmsShape);
 begin
  rMethodName := aMethodName;
  rSeed := aSeed;
  rDiagrammName := aDiagrammName;
  rShapesCount := aShapesCount;
- rShapeClass := aShapeClass;
+ rShapeClass := Pointer(aShapeClass);
 end;
 
 procedure TmsShapeTestPrim.SetUp;
@@ -191,7 +201,7 @@ begin
    l_P : TPoint;
   begin
    for l_P in f_Coords do
-    aDiagramm.AddShape(TmsCompletedShapeCreator.Create(f_Context.rShapeClass).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil, nil))).AddNewDiagramm;
+    aDiagramm.AddShape(TmsCompletedShapeCreator.Create(Self.ShapeClass).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil, nil))).AddNewDiagramm;
 
    SaveDiagrammAndCheck(aDiagramm, SaveDiagramm);
   end
@@ -243,12 +253,23 @@ begin
  TestDeSerializeForShapeClass;
 end;
 
-constructor TmsShapeTestPrim.Create(const aContext: TmsShapeTestContext);
+constructor TmsShapeTestPrim.CreateInner(const aContext: TmsShapeTestContext);
 begin
  inherited Create(aContext.rMethodName);
  f_Context := aContext;
- FTestName := f_Context.rShapeClass.ClassName + '.' + aContext.rMethodName;
- f_TestSerializeMethodName := f_Context.rShapeClass.ClassName + '.';
+ FTestName := Self.ShapeClass.Name + '.' + aContext.rMethodName;
+ f_TestSerializeMethodName := Self.ShapeClass.Name + '.';
+end;
+
+class function TmsShapeTestPrim.Create(const aContext: TmsShapeTestContext): ITest;
+begin
+ Result := CreateInner(aContext);
+end;
+
+destructor TmsShapeTestPrim.Destroy;
+begin
+ Finalize(f_Context);
+ inherited;
 end;
 
 procedure TmsShapeTestPrim.TestDeSerializeViaShapeCheckForShapeClass;
@@ -264,7 +285,7 @@ begin
    l_Index := 0;
    for l_Shape in aDiagramm do
    begin
-    Check(l_Shape.ClassType = f_Context.rShapeClass);
+    Check(Self.ShapeClass.IsOurInstance(l_Shape));
     Check(l_Shape.StartPoint.X = f_Coords[l_Index].X);
     Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y);
     Inc(l_Index);
@@ -283,7 +304,7 @@ begin
  OutToFileAndCheck(
   procedure (aLog: TmsLog)
   begin
-   aLog.ToLog(f_Context.rShapeClass.ClassName);
+   aLog.ToLog(Self.ShapeClass.Name);
   end
  );
 end;
@@ -301,7 +322,7 @@ end;
 class procedure TmsShapeTestPrim.CheckShapes(aCheck: TmsShapeClassCheck);
 begin
  TmsRegisteredShapes.IterateShapes(
-  procedure (aShapeClass: RmsShape)
+  procedure (const aShapeClass: MCmsShape)
   begin
    if not aShapeClass.IsTool then
     aCheck(aShapeClass);

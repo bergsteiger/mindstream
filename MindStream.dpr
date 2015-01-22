@@ -40,6 +40,7 @@ uses
   msShapeMarshal in 'Marshal\msShapeMarshal.pas',
   msDiagrammsMarshal in 'Marshal\msDiagrammsMarshal.pas',
   msStringList in 'Core\msStringList.pas',
+  msObject in 'Core\msObject.pas',
   msInterfacedRefcounted in 'Core\msInterfacedRefcounted.pas',
   msMarshalPrim in 'Marshal\msMarshalPrim.pas',
   msShapeTestSuite in 'Tests\Module\msShapeTestSuite.pas',
@@ -94,7 +95,8 @@ uses
   msMoveShapeUp in 'ShapeTools\FloatingButtons\msMoveShapeUp.pas',
   msMoveShapeDown in 'ShapeTools\FloatingButtons\msMoveShapeDown.pas',
   msMoveShapeLeft in 'ShapeTools\FloatingButtons\msMoveShapeLeft.pas',
-  msMoveShapeRight in 'ShapeTools\FloatingButtons\msMoveShapeRight.pas';
+  msMoveShapeRight in 'ShapeTools\FloatingButtons\msMoveShapeRight.pas',
+  msShapeClass in 'MetaShapes\msShapeClass.pas';
 
 {$R *.res}
 

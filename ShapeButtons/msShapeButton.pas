@@ -24,11 +24,12 @@ type
    procedure MyClick(Sender: TObject);
   public
    constructor Create(AOwner: TComponent;
-                      aShape: RmsShape;
+                      const aShape: MCmsShape;
                       aShapes: TComboBox;
                       aColumn: Integer;
                       aRow: Integer;
                       const aHolder: ImsDiagrammsHolder);
+  destructor Destroy; override;
  end;
 
 implementation
@@ -46,7 +47,7 @@ uses
 // TmsShapeButton
 
 constructor TmsShapeButton.Create(AOwner: TComponent;
-                                  aShape: RmsShape;
+                                  const aShape: MCmsShape;
                                   aShapes: TComboBox;
                                   aColumn: Integer;
                                   aRow: Integer;
@@ -61,7 +62,7 @@ begin
  Width := TmsPaletteShapeCreator.ButtonSize;
  Height := TmsPaletteShapeCreator.ButtonSize;
 
- f_ShapeIndex := TmsShapesForToolbar.Instance.IndexOf(aShape);
+ f_ShapeIndex := TmsShapesForToolbar.Instance.IndexOfMC(aShape);
  Assert(f_ShapeIndex >= 0);
  f_Shape := TmsPaletteShapeCreator.Create(aShape).CreateShape
                                      (TmsMakeShapeContext.Create
@@ -81,6 +82,12 @@ begin
  Self.Position.X := aColumn * TmsPaletteShapeCreator.ButtonSize;
  Self.Position.Y := aRow * TmsPaletteShapeCreator.ButtonSize;
 
+end;
+
+destructor TmsShapeButton.Destroy;
+begin
+ f_Shape := nil;
+ inherited;
 end;
 
 procedure TmsShapeButton.MyPaint(Sender: TObject;

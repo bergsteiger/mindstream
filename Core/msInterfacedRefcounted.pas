@@ -23,8 +23,7 @@ type
   // - http://18delphi.blogspot.ru/2013/07/blog-post_8789.html
  protected
   function IsClassTypeNamedAs(const aClassName: String): Boolean; virtual;
- public
-  class function NewInstance: TObject; override;
+  procedure InstanceAllocated; override;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
  end;//TmsInterfacedRefcounted
 
@@ -38,10 +37,10 @@ uses
 
 // TmsInterfacedRefcounted
 
-class function TmsInterfacedRefcounted.NewInstance: TObject;
+procedure TmsInterfacedRefcounted.InstanceAllocated;
 begin
- Result := inherited NewInstance;
- TmsInterfacedRefcounted(Result).FRefCount := 1;
+ inherited;
+ FRefCount := 1;
 end;
 
 function TmsInterfacedRefcounted.IsClassTypeNamedAs(const aClassName: String): Boolean;

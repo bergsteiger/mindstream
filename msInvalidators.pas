@@ -21,7 +21,7 @@ type
  strict private
   class var f_Subscribers : TmsInvalidatorsList;
  public
-  class destructor Destroy;
+  class destructor Fini;
  private
   class procedure DoItems(aLambda: TmsInvalidatorLambda);
  public
@@ -41,7 +41,7 @@ uses
 
 // TmsInvalidators
 
-class destructor TmsInvalidators.Destroy;
+class destructor TmsInvalidators.Fini;
 begin
  FreeAndNil(f_Subscribers);
 end;

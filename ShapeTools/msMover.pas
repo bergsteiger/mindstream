@@ -27,7 +27,7 @@ type
   function AddButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
-  destructor Destroy; override;
+  procedure Cleanup; override;
   class function ButtonShape: ImsShape; override;
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
@@ -125,7 +125,7 @@ begin
   Result := nil;
 end;
 
-destructor TmsMover.Destroy;
+procedure TmsMover.Cleanup;
 begin
  inherited;
  FreeAndNil(f_FloatingButtons);

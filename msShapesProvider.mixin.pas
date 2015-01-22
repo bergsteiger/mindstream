@@ -34,11 +34,11 @@
 
 procedure TmsShapesProvider.ShapesForToolbarToList(aList: TStrings);
 var
- l_Class: RmsShape;
+ l_Class: MCmsShape;
 begin
  aList.Clear;
  for l_Class in TmsShapesForToolbar.Instance do
-  aList.AddObject(l_Class.ClassName, TObject(l_Class));
+  aList.AddObject(l_Class.Name, nil{TObject(l_Class)});
 end;
 
 {$EndIf TmsShapesProvider_uses_impl}
