@@ -14,11 +14,11 @@ type
  RmsPaletteShape = class of TmsPaletteShape;
  TmsPaletteShape = class(TmsPointlessShape)
  private
-  f_OtherShapeClass : ImsShapeClass;
+  f_OtherShapeClass : MCmsShape;
   f_Proxy : ImsShape;
  protected
-  constructor CreateInner(const anOtherShapeClass: ImsShapeClass; const aStartPoint: TPointF);
-  class function Create(const anOtherShapeClass: ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape;
+  constructor CreateInner(const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF);
+  class function Create(const anOtherShapeClass: MCmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
   function IsClassTypeNamedAs(const aClassName: String): Boolean; override;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
   function GetDrawBounds: TRectF; override;
@@ -49,14 +49,14 @@ begin
  f_Proxy.DrawTo(aCtx);
 end;
 
-constructor TmsPaletteShape.CreateInner(const anOtherShapeClass: ImsShapeClass; const aStartPoint: TPointF);
+constructor TmsPaletteShape.CreateInner(const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF);
 begin
  inherited CreateInner(aStartPoint);
  f_OtherShapeClass := anOtherShapeClass;
  f_Proxy := f_OtherShapeClass.ButtonShape;
 end;
 
-class function TmsPaletteShape.Create(const anOtherShapeClass: ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape;
+class function TmsPaletteShape.Create(const anOtherShapeClass: MCmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
 begin
  Result := CreateInner(anOtherShapeClass, aCtx.rStartPoint);
 end;

@@ -5,25 +5,26 @@ interface
 uses
  msShapeCreator,
  msInterfaces,
- msInterfacedRefcounted
+ msInterfacedRefcounted,
+ msShape
  ;
 
 type
  TmsCompletedShapeCreator = class(TmsInterfacedRefcounted, ImsShapeCreator)
  // создатель TmsShape. Но! ЗАКОНЧЕННЫХ ПРИМИТИВОВ
  private
-  f_ShapeClass : ImsShapeClass;
+  f_ShapeClass : MCmsShape;
   // - класс примитивов для создания
-  constructor CreatePrim(const aShapeClass: ImsShapeClass);
+  constructor CreatePrim(const aShapeClass: MCmsShape);
  protected
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; virtual;
   procedure Cleanup; override;
  protected
-  property ShapeClass : ImsShapeClass
+  property ShapeClass : MCmsShape
   read f_ShapeClass;
   // - класс примитивов для создания
  public
-  class function Create(const aShapeClass: ImsShapeClass): ImsShapeCreator;
+  class function Create(const aShapeClass: MCmsShape): ImsShapeCreator;
  end;//TmsCompletedShapeCreator
 
 implementation
@@ -35,13 +36,13 @@ uses
 
 // TmsCompletedShapeCreator
 
-constructor TmsCompletedShapeCreator.CreatePrim(const aShapeClass: ImsShapeClass);
+constructor TmsCompletedShapeCreator.CreatePrim(const aShapeClass: MCmsShape);
 begin
  inherited Create;
  f_ShapeClass := aShapeClass;
 end;
 
-class function TmsCompletedShapeCreator.Create(const aShapeClass: ImsShapeClass): ImsShapeCreator;
+class function TmsCompletedShapeCreator.Create(const aShapeClass: MCmsShape): ImsShapeCreator;
 begin
  Result := CreatePrim(aShapeClass);
 end;
