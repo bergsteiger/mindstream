@@ -64,9 +64,6 @@ begin
   TmsPointCircle,
   TmsSmallTriangle,
 
-  // concrete shapes
-  TmsGreenCircle,
-
   // utility shapes
   TmsMover,
   TmsPicker,
@@ -81,6 +78,7 @@ begin
   TmsFolder,
 
   // concrete shapes
+  TmsGreenCircle,
   TmsBlackTriangle,
   TmsBlackRectangle
  ]);
