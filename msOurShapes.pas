@@ -22,6 +22,7 @@ uses
   msPolygonShape,
   msBlackTriangle,
   msBlackRectangle,
+  msGreenCircle,
 
   // utility shapes
   msMover,
@@ -33,7 +34,6 @@ uses
   // special shapes
   msPointCircle,
   msSmallTriangle,
-  msGreenCircle,
 
   // shapes for toolbar buttons
   msMoverIcon,

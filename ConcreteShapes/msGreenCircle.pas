@@ -11,8 +11,6 @@ type
   TmsGreenCircle = class(TmsCircle)
   protected
    procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
-  public
-   class function IsForToolbar: Boolean; override;
   end;//TmsGreenCircle
 
 implementation
@@ -25,11 +23,6 @@ procedure TmsGreenCircle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsC
 begin
  inherited;
  theCtx.rFillColor := TAlphaColorRec.Green;
-end;
-
-class function TmsGreenCircle.IsForToolbar: Boolean;
-begin
- Result := false;
 end;
 
 end.

@@ -62,7 +62,7 @@ uses
   msNullClickShape in 'ShapeTools\msNullClickShape.pas',
   msPaletteShape in 'ShapeTools\PaletteShapes\msPaletteShape.pas',
   msShapeRemover in 'ShapeTools\msShapeRemover.pas',
-  msGreenCircle in 'SpecialShapes\ForButtons\msGreenCircle.pas',
+  msGreenCircle in 'ConcreteShapes\msGreenCircle.pas',
   msBlackTriangle in 'ConcreteShapes\msBlackTriangle.pas',
   msBlackRectangle in 'ConcreteShapes\msBlackRectangle.pas',
   msPolygonShape in 'AbstractShapes\msPolygonShape.pas',
