@@ -31,7 +31,7 @@ type
   function GetEnumerator: TmsShapeClassListItems.TEnumerator;
   function IndexOfMC(const aValue: MCmsShape): Integer;
   function IndexOf(const aValue: RmsShape): Integer;
-  procedure IterateShapes(aLambda: TmsShapeClassLambda);
+  procedure IterateShapes(aLambda: TmsShapeClassLambda); virtual;
   property Items: TmsShapeClassListItems
    read pm_GetItems;
  end;//TmsShapeClassList

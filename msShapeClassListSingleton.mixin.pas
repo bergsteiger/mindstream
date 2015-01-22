@@ -20,7 +20,7 @@
   class destructor Fini;
  public
   class function Instance: TmsShapeClassListSingleton;
-  class procedure IterateShapes(aLambda: TmsShapeClassLambda);
+  class procedure CIterateShapes(aLambda: TmsShapeClassLambda);
  end;//TmsShapeClassListSingleton
 
 {$Define TmsShapeClassListSingleton_intf}
@@ -52,14 +52,9 @@ begin
  Result := f_Instance;
 end;
 
-class procedure TmsShapeClassListSingleton.IterateShapes(aLambda: TmsShapeClassLambda);
-var
- l_ShapeClass : MCmsShape;
+class procedure TmsShapeClassListSingleton.CIterateShapes(aLambda: TmsShapeClassLambda);
 begin
- for l_ShapeClass in Self.Instance do
- begin
-  aLambda(l_ShapeClass);
- end;//for l_ShapeClass
+ Instance.IterateShapes(aLambda);
 end;
 
 {$EndIf TmsShapeClassListSingleton_uses_impl}
