@@ -8,20 +8,6 @@ uses
  ;
 
 type
- TmsLog = class;
-
- TmsLogLambda = reference to procedure (aLog: TmsLog);
-
- TmsLog = class
-  strict private
-   f_FS : TFileStream;
-  public
-   class procedure Log(const aFileName: String; aLambda: TmsLogLambda);
-   constructor Create(const aFileName: String);
-   destructor Destroy; override;
-   procedure ToLog(const aString: AnsiString);
- end;//TmsLog
-
  TmsClassInstanceCount = record
   public
    rCount : Integer;
@@ -53,14 +39,15 @@ type
   class procedure DestroyObject(anObject: TObject);
   class procedure ObjectCreated(anObject: TObject);
   class procedure ObjectDestroyed(anObject: TObject);
-  class destructor Destroy;
+  class destructor Fini;
  end;//TmsObjectsWatcher
 
 implementation
 
 uses
  System.SysUtils,
- Math
+ Math,
+ FMX.DUnit.msLog
  ;
 
 // TmsClassInstanceCount
@@ -156,39 +143,7 @@ begin
  Dec(f_ObjectsCreatedCount);
 end;
 
-class procedure TmsLog.Log(const aFileName: String; aLambda: TmsLogLambda);
-var
- l_Log : TmsLog;
-begin
- l_Log := Create(aFileName);
- try
-  aLambda(l_Log);
- finally
-  FreeAndNil(l_Log);
- end;//try..finally
-end;
-
-constructor TmsLog.Create(const aFileName: String);
-begin
- inherited Create;
- f_FS := TFileStream.Create(aFileName, fmCreate);
-end;
-
-destructor TmsLog.Destroy;
-begin
- FreeAndNil(f_FS);
- inherited;
-end;
-
-procedure TmsLog.ToLog(const aString: AnsiString);
-const
- cEOL : ANSIString = #13#10;
-begin//OutLn
- f_FS.Write(aString[1], Length(aString));
- f_FS.Write(cEOL[1], Length(cEOL));
-end;//OutLn
-
-class destructor TmsObjectsWatcher.Destroy;
+class destructor TmsObjectsWatcher.Fini;
 begin
  if (f_ObjectsCreated <> nil) then
   if (f_ObjectsCreated.Count > 0) then
@@ -210,7 +165,11 @@ begin
  FreeAndNil(f_ObjectsCreated);
  FreeAndNil(f_DefferedObjects);
  if (f_ObjectsCreatedCount > 0) then
-  raise Exception.Create('Какие-то объекты не освобождены: ' + IntToStr(f_ObjectsCreatedCount));
+  try
+   raise Exception.Create('Какие-то объекты не освобождены: ' + IntToStr(f_ObjectsCreatedCount));
+  except
+   // давим пока наше исключение, чтобы дальше не летело AV
+  end;//try..except
 end;
 
 end.

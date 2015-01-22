@@ -12,7 +12,7 @@ type
  TmsUtilityShapes = class(TmsShapeClassListSingleton)
  public
   class function Instance: TmsUtilityShapes;
-  procedure Register(const aValue: RmsShape); override;
+  procedure RegisterMC(const aValue: MCmsShape); override;
  end;//TmsUtilityShapes
 
 implementation
@@ -28,7 +28,7 @@ begin
  Result := inherited Instance As TmsUtilityShapes;
 end;
 
-procedure TmsUtilityShapes.Register(const aValue: RmsShape);
+procedure TmsUtilityShapes.RegisterMC(const aValue: MCmsShape);
 begin
  if aValue.IsTool then
   inherited;

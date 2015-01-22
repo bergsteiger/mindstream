@@ -5,27 +5,24 @@ interface
 uses
  msShape,
  msInterfaces,
- System.Types
+ System.Types,
+ msPointlessShape
  ;
 
 type
- TmsTool = class(TmsShape)
+ TmsTool = class(TmsPointlessShape)
  public
-  class function ButtonShape(const aStartPoint: TPointF): ImsShape; override;
+  class function ButtonShape: ImsShape; override;
   class function IsTool: Boolean; override;
  end;//TmsTool
 
 implementation
 
-uses
- msGreenCircle
- ;
-
 // TmsTool
 
-class function TmsTool.ButtonShape(const aStartPoint: TPointF): ImsShape;
+class function TmsTool.ButtonShape: ImsShape;
 begin
- Result := TmsGreenCircle.Create(aStartPoint);
+ Result := TmsShape.NamedMC('GreenCircle').Creator.CreateShape(TPointF.Create(0, 0));
 end;
 
 class function TmsTool.IsTool: Boolean;

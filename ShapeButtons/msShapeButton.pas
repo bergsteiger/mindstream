@@ -16,19 +16,20 @@ uses
 type
  TmsShapeButton = class(TButton)
   private
+   f_ShapeClass : MCmsShape;
    f_Shape: ImsShape;
-   f_ShapeIndex: Integer;
    f_Shapes: TComboBox;
    f_Holder : ImsDiagrammsHolder;
    procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
    procedure MyClick(Sender: TObject);
   public
    constructor Create(AOwner: TComponent;
-                      aShape: RmsShape;
+                      const aShape: MCmsShape;
                       aShapes: TComboBox;
                       aColumn: Integer;
                       aRow: Integer;
-                      const aHolder: ImsDiagrammsHolder);
+                      const aHolder: ImsDiagrammsHolder); reintroduce;
+  destructor Destroy; override;
  end;
 
 implementation
@@ -39,14 +40,15 @@ uses
  System.SysUtils,
  msPaletteShapeCreator,
  msShapesForToolbar,
- Math
+ Math,
+ System.UITypes,
+ FMX.Types
  ;
-
 
 // TmsShapeButton
 
 constructor TmsShapeButton.Create(AOwner: TComponent;
-                                  aShape: RmsShape;
+                                  const aShape: MCmsShape;
                                   aShapes: TComboBox;
                                   aColumn: Integer;
                                   aRow: Integer;
@@ -61,8 +63,7 @@ begin
  Width := TmsPaletteShapeCreator.ButtonSize;
  Height := TmsPaletteShapeCreator.ButtonSize;
 
- f_ShapeIndex := TmsShapesForToolbar.Instance.IndexOf(aShape);
- Assert(f_ShapeIndex >= 0);
+ f_ShapeClass := aShape;
  f_Shape := TmsPaletteShapeCreator.Create(aShape).CreateShape
                                      (TmsMakeShapeContext.Create
                                       (TPointF.Create
@@ -76,11 +77,17 @@ begin
  OnClick := MyClick;
 
  Assert(f_Shape <> nil);
- Assert(f_Shape.IsClassTypeNamedAs(f_Shapes.Items[f_ShapeIndex]));
 
  Self.Position.X := aColumn * TmsPaletteShapeCreator.ButtonSize;
  Self.Position.Y := aRow * TmsPaletteShapeCreator.ButtonSize;
 
+end;
+
+destructor TmsShapeButton.Destroy;
+begin
+ f_Shape := nil;
+ f_ShapeClass := nil;
+ inherited;
 end;
 
 procedure TmsShapeButton.MyPaint(Sender: TObject;
@@ -89,6 +96,7 @@ procedure TmsShapeButton.MyPaint(Sender: TObject;
 const
  cBorder = 10;
  // - отступ от края кнопки до фигуры
+ cButtonSize = 40;
 
 var
  l_OriginalMatrix: TMatrix;
@@ -110,6 +118,17 @@ begin
  try
 //  l_CenterPoint := f_Shape.StartPoint;
   l_B := f_Shape.DrawBounds;
+
+  if f_ShapeClass.IsNullClick then
+   Canvas.Fill.Color := TAlphaColorRec.Lightblue
+  else
+   if f_ShapeClass.IsTool then
+    Canvas.Fill.Color := TAlphaColorRec.Bisque
+  else
+   Canvas.Fill.Color := TAlphaColorRec.Null;
+
+  Canvas.FillRect(TRectF.Create(0, 0, cButtonSize, cButtonSize), 0, 0, AllCorners, 0.3);
+
   l_CenterPoint := l_B.TopLeft;
 
   l_Matrix := TMatrix.Identity;
@@ -153,9 +172,9 @@ end;
 
 procedure TmsShapeButton.MyClick(Sender: TObject);
 begin
- Assert(f_Shape.IsClassTypeNamedAs(f_Shapes.Items[f_ShapeIndex]));
  if not f_Shape.NullClick(ImsDiagrammsHolder(f_Holder)) then
-  f_Shapes.ItemIndex := f_ShapeIndex;
+  f_Shapes.ItemIndex := f_Shapes.Items.IndexOf(f_ShapeClass.Name);
 end;
 
 end.
+

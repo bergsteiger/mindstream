@@ -12,7 +12,7 @@ type
   class var f_Marshal : TJSONMarshal;
   class var f_UnMarshal : TJSONUnMarshal;
  protected
-  class destructor Destroy;
+  class destructor Fini;
   class function Marshal: TJSONMarshal;
   class function UnMarshal: TJSONUnMarshal;
  public
@@ -31,12 +31,13 @@ uses
  msRegisteredShapes,
  JSON,
  msStringList,
- msFormatter
+ msFormatter,
+ msShapeClassList
  ;
 
 // TmsMarshalPrim
 
-class destructor TmsMarshalPrim.Destroy;
+class destructor TmsMarshalPrim.Fini;
 begin
  FreeAndNil(f_Marshal);
  FreeAndNil(f_UnMarshal);
@@ -50,8 +51,8 @@ begin
   TmsShape.RegisterInMarshal(f_Marshal);
   TmsDiagramm.RegisterInMarshal(f_Marshal);
   TmsDiagramms.RegisterInMarshal(f_Marshal);
-  TmsRegisteredShapes.IterateShapes(
-   procedure (aShapeClass: RmsShape)
+  TmsRegisteredShapes.Instance.IterateShapes(
+   procedure (const aShapeClass: MCmsShape)
    begin
     aShapeClass.RegisterInMarshal(f_Marshal);
 //    f_Marshal.RegisterJSONMarshalled(aShapeClass, 'FRefCount', false);
@@ -69,8 +70,8 @@ begin
   TmsShape.RegisterInUnMarshal(f_UnMarshal);
   TmsDiagramm.RegisterInUnMarshal(f_UnMarshal);
   TmsDiagramms.RegisterInUnMarshal(f_UnMarshal);
-  TmsRegisteredShapes.IterateShapes(
-   procedure (aShapeClass: RmsShape)
+  TmsRegisteredShapes.Instance.IterateShapes(
+   procedure (const aShapeClass: MCmsShape)
    begin
     aShapeClass.RegisterInUnMarshal(f_UnMarshal);
    end

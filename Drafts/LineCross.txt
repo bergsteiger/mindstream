@@ -1,0 +1,235 @@
+https://bitbucket.org/ingword/mindstream/src/8991728832609ee5d7003fde81e04c74d16e8825/Drafts/LineCross.txt?at=B158_lulin
+
+Задача:
+ Сделать чтобы объект на который указывает Connector, "привязался" не к центру фигуры, а к границе
+  https://bitbucket.org/ingword/mindstream/issue/158/connector
+
+Список литературы:
+ Скалярное произведение
+  https://ru.wikipedia.org/wiki/%D0%A1%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5
+ Векторное произведение
+  https://ru.wikipedia.org/wiki/%D0%92%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5
+ Координаты точки пересечения двух прямых - примеры нахождения.
+  http://www.cleverstudents.ru/line_and_plane/intersection_point_of_straight_lines.html
+ Коллинеарность векторов, условия коллинеарности векторов.
+  http://ru.onlinemschool.com/math/library/vector/colinearity/
+ Структуры геометрических данных, основные операции
+  http://algolist.manual.ru/maths/geom/datastruct.php
+   int Edge::cross(Edge &e, double &t)
+ Пересечение: Прямая(отрезок) и прямая (отрезок)
+  http://algolist.manual.ru/maths/geom/intersect/lineline2d.php
+
+Будем действовать в духе:
+ Пишем простой интерпретатор на C++ с помощью TDD
+  http://programmingmindstream.blogspot.ru/2014/08/c-tdd.html
+
+Алгоритмы от Мишы Костицына:
+
+Ищем точку пересечения прямых:
+
+procedure FindCross(X1, Y1, X2, Y2, Xa, Ya, Xb, Yb: Extended; var aX, aY: Extended);
+begin
+ aY := ((X2 - X1) * (Yb - Ya) * Y1 - (Xb - Xa) * (Y2 - Y1) * Ya + (Xa - X1) * (Y2 - Y1) * (Yb - Ya)) /
+      ((X2 - X1) * (Yb - Ya) - (Xb - Xa) * (Y2 - Y1));
+ aX := (X2 - X1) * (Y - Y1) / (Y2 - Y1) + X1;
+end;
+
+Проверяем, пересекаются ли отрезки:
+
+function LinesCross(X1, Y1, X2, Y2, Xa, Ya, Xb, Yb: Extended; var aX, aY: Extended): Boolean;
+
+ function Btwn(Value, One, Two: Extended): Boolean;
+ begin
+  Result := (Value >= Min(One, Two)) and (Value <= Max(One, Two));
+ end;
+
+begin
+ FindCross(X1, Y1, X2, Y2, Xa, Ya, Xb, Yb, aX, aY);
+ Result := Btwn(aX, X1, X2) and
+           Btwn(aX, Xa, Xb) and
+           Btwn(aY, Y1, Y2) and
+           Btwn(aY, Ya, Yb);
+end;
+
+Осталось перебрать стороны прямоугольника и аккуратно проверить граничные значения, чтобы исключить деление на ноль.
+
+--------
+
+Поправка:
+
+18.02.2015 14:38, Alex W. Lulin пишет:
+> procedure FindCross(X1, Y1, X2, Y2, Xa, Ya, Xb, Yb: Extended; var aX, aY: Extended);
+> begin
+>  aY := ((X2 - X1) * (Yb - Ya) * Y1 - (Xb - Xa) * (Y2 - Y1) * Ya + (Xa - X1) * (Y2 - Y1) * (Yb - Ya)) /
+>       ((X2 - X1) * (Yb - Ya) - (Xb - Xa) * (Y2 - Y1));
+>  aX := (X2 - X1) * (Y - Y1) / (Y2 - Y1) + X1;
+> end; 
+aX := (X2 - X1) * (Y - Y1) / (Y2 - Y1) + X1;
+
+заменить на
+
+aX := (X2 - X1) * (aY - Y1) / (Y2 - Y1) + X1; 
+
+--------
+
+Коммиты:
+ - пишем вводную, раз уж задача оказалась сложной.
+  https://bitbucket.org/ingword/mindstream/commits/3be48b26139c972ddf3f7761763a77333de66f50
+ - добавляем тест TmsLineCrossTest.
+  https://bitbucket.org/ingword/mindstream/commits/e396a5980bf62e7a8794c2d21db25873d0873c47
+ - упавшие тесты для недоделанной функциональности - меня лично НЕРВИРУЮТ, поэтому я предпочитаю писать в лог 'failed'. Хотя это конечно "не в духе классического TDD".
+  https://bitbucket.org/ingword/mindstream/commits/d7c4e0089d840d9d2af67d5b2e489043f537072a
+ - определяем структуру данных с которой мы будем работать.
+  https://bitbucket.org/ingword/mindstream/commits/40fcaf126d8dd8e7a627c4cf442c212e4a35bd39
+ - делаем заготовку вывода линии в лог.
+  https://bitbucket.org/ingword/mindstream/commits/e1415e763e20de27e080960c62c26c2a3e4b8298
+ - добавляем вспомогательную структуру данных TmsPointF.
+  https://bitbucket.org/ingword/mindstream/commits/7491b441ddda404155325f223ec5dda36434c003
+ - добавляем метод TmsPointF.ToLog.
+  https://bitbucket.org/ingword/mindstream/commits/ca9963413efac6be5d33a71d248a357b670e6bbc
+ - сортируем результаты тестов по папкам.
+  https://bitbucket.org/ingword/mindstream/commits/fd73855a0395fe229eac12e6236e3b6ab66b2ac5
+ - добавляем метод TmsPointF.N.
+  https://bitbucket.org/ingword/mindstream/commits/0601a8ccd21b9b8400894f16d2c6237a8c96827f
+ - параметризуем имя теста.
+  https://bitbucket.org/ingword/mindstream/commits/7a40847b7f5d1cfeb7bb54c7d3de5fb74ff3136c
+ - добавляем метод TmsLineF.Cross.
+  https://bitbucket.org/ingword/mindstream/commits/e783606f38d8e22bd3aa008c828aa6ac9ca79a7a
+ - используем TmsLineF.Cross.
+  https://bitbucket.org/ingword/mindstream/commits/66541b8c42dec45ec081def7fc028190d4b3c6f3
+ - добавляем класс TmsLineCrossTestSuite.
+  https://bitbucket.org/ingword/mindstream/commits/0fe04024c35118ba39ff7b4996238a6b1610a487
+ - используем TmsLineCrossTestSuite.
+  https://bitbucket.org/ingword/mindstream/commits/0c37f6219b555a615d17fd4e7e8ffa739ef015d2
+ - добавляем структуру TmsLineFPair.
+  https://bitbucket.org/ingword/mindstream/commits/62de8f85c47b40f30b65e045ff4107a876287b85
+ - добавляем структуру TmsLineFPairs.
+  https://bitbucket.org/ingword/mindstream/commits/5c805d11c30568f8fd6c4820c820ae70accf56fc
+ - используем TmsLineFPairs.
+  https://bitbucket.org/ingword/mindstream/commits/2e2d8d92ce5340b4423f09cce840281b2a730e57
+ - добавляем конструкторы классу TmsLineF.
+  https://bitbucket.org/ingword/mindstream/commits/032c9ef6c0c4fd63e8f22a721ed4d5b39b16db8b
+ - используем TmsLineFPair.
+  https://bitbucket.org/ingword/mindstream/commits/743150bf75865f09c512bd740bbb6a52b0ec710d
+ - расширяем класс TmsLineFPair.
+  https://bitbucket.org/ingword/mindstream/commits/5f4d3a754da09a7af37e9de4d3ee1524fbf082ba
+ - параметризуем TmsLineCrossTest.
+  https://bitbucket.org/ingword/mindstream/commits/e22652caa8da8da452fd766343633f3d08dc1011
+ - расширяем набор тестов.
+  https://bitbucket.org/ingword/mindstream/commits/44f632dd83d9033953b6028996974e76a2eb39fd
+ - добавляем методы TmsLineF.dX, TmsLineF.dY, TmsLineF.Length.
+  https://bitbucket.org/ingword/mindstream/commits/77f01ae7d9ce223a765b0374baa3d046d5a2171e
+ - используем метод TmsLineF.Length.
+  https://bitbucket.org/ingword/mindstream/commits/7345401615c304973a9f06e3c81dc355c3538fe6
+ - дифференцируем тот случай когда и вторая линия имеет нулевую длину.
+  https://bitbucket.org/ingword/mindstream/commits/36211d3324863fe5647560c6dad6e39bd32e20be
+ - отсекаем тот случай, когда вторая линия имеет нулевую длину, а первая - ненулевую.
+  https://bitbucket.org/ingword/mindstream/commits/3c00c60030a3ba2c8c8fd070f81ef539d62cca41
+ - добавляем рандомные тесты.
+  https://bitbucket.org/ingword/mindstream/commits/c27bbda41ca7803a891d71dd5e99c5b3ceef573c
+ - добавляем ещё один граничный случай.
+  https://bitbucket.org/ingword/mindstream/commits/56c534339f0c8dcd025d9312e1fa3881bfaef162
+ - добавляе ещё один вариант перепендикулярности.
+  https://bitbucket.org/ingword/mindstream/commits/388e8742abc2153a5324ff35aaaee25eace7c2b4
+ - расширяем тестовый набор.
+  https://bitbucket.org/ingword/mindstream/commits/49cc737be83b044934e3bb2aa1e98609f088f87c?at=B158_lulin
+ - вводим понятие скалярного произведения.
+  https://bitbucket.org/ingword/mindstream/commits/6dfb9db45fa76b46fe56dd1cc5ad3bd446116253?at=B158_lulin
+ - добавляем функцию определения косинуса угла между векторами.
+  https://bitbucket.org/ingword/mindstream/commits/c40af8783866017619813986ae96d70022f8d9aa
+ - проверяем параллельность прямых.
+  https://bitbucket.org/ingword/mindstream/commits/71d6f36b91a8dbdf9f799a3bacbb0d61c195757f
+ - добавляем тесты параллельности.
+  https://bitbucket.org/ingword/mindstream/commits/2297de81f97ee774eeda7875c96972407a84a607
+ - пишем комментарии.
+  https://bitbucket.org/ingword/mindstream/commits/1e200b5df639744ceed58e15fddb58546cdffe97
+ - СНАЧАЛА проверяем параллельность прямых.
+  https://bitbucket.org/ingword/mindstream/commits/350f4a2c7523ea77e536629dc23144089a66bcfb
+ - Далее тесты прямой параллельной X и диагональной.
+  https://bitbucket.org/ingword/mindstream/commits/f3c585e68d01261ed96b9df3cfcceac595be0c2c
+ - Далее тесты прямой параллельной Y и диагональной.
+  https://bitbucket.org/ingword/mindstream/commits/49790ac333f57308a69f92adc6076e5b27c51938
+ - выделяем процедуру DoCross.
+  https://bitbucket.org/ingword/mindstream/commits/1f44125d9cdb313d93acb493589163a106f007c0
+ - вытаскиваем процедуру DoCross в правильное место.
+  https://bitbucket.org/ingword/mindstream/commits/6e3f995e9b8df763368f89cdcfcfbd40174b19a4
+ - упрощам код.
+  https://bitbucket.org/ingword/mindstream/commits/76680457ac57f6cdd8d22398cc4dbbb0088fefb8
+ - вставляем проверку на граничный случай.
+  https://bitbucket.org/ingword/mindstream/commits/391d31676bfb5a641b0c7124651f703454eaee8f
+ - при граничном случай меняем линии местами.
+  https://bitbucket.org/ingword/mindstream/commits/a2a8afa66752665eea22a56d67d262b94d7c2370
+ - добавляем ещё тест на тот же граничный случай.
+  https://bitbucket.org/ingword/mindstream/commits/170a47e4a0808193191f02d557d4c64262bcc00b
+ - добавляем ещё тест прямой параллельной Y и диагональной.
+  https://bitbucket.org/ingword/mindstream/commits/2dcdcb8a61c793ec1d8fdcb9b57f35ebc0ce5fb0
+ - возвращаем результат, про который забыли.
+  https://bitbucket.org/ingword/mindstream/commits/45a3e7f6fea771098d05f9fe426e30996562855b
+ - упрощаем код.
+  https://bitbucket.org/ingword/mindstream/commits/5310dad62e65480851cd6dda9adb41dd538f95d7
+ - упрощаем код.
+  https://bitbucket.org/ingword/mindstream/commits/e25b3e0ca989a97e2a26cd1bd69d175e12501c38
+ - упрощаем код.
+  https://bitbucket.org/ingword/mindstream/commits/cf8155d5664d1150e73762a8ff27e59a526e9286
+ - выделяем заготовочку для обобщения.
+  https://bitbucket.org/ingword/mindstream/commits/9f40ab6e5c902407cb4663d582ffe1b80e588ad6
+ - переименовываем тест.
+  https://bitbucket.org/ingword/mindstream/commits/5078d28f3833b523bcaba325740c94efd6938330
+ - добавляем метод TmsLineF.SegmentsCross.
+  https://bitbucket.org/ingword/mindstream/commits/6e813548ac20910324685c8a7d40d450151a9283
+ - добавляем тест TmsLineCrossTest.SegmentsCross.
+  https://bitbucket.org/ingword/mindstream/commits/ce6f0aedba72d6af68a6e4e59a8ff2da56651314
+ - упрощаем код.
+  https://bitbucket.org/ingword/mindstream/commits/0f667e37769bd78e604b9ae5331201ebcff0f2e6
+ - упрощаем код.
+  https://bitbucket.org/ingword/mindstream/commits/aa6983f2b3641dca403a155167256cfb4f886568
+ - упрощаем код.
+  https://bitbucket.org/ingword/mindstream/commits/1877ac52dbae97a8287c199660625d390925c5c9
+ - упрощаем код. Фиг бы я тут не ошибся бы, если бы не тесты.
+  https://bitbucket.org/ingword/mindstream/commits/56d3bbfa2f5831c2d81706ba38fae70bd40d8f76
+ - упрощаем код. Фиг бы я тут не ошибся бы, если бы не тесты.
+  https://bitbucket.org/ingword/mindstream/commits/c7e621fad1961a19cdda14be71c73269c4b35fa9
+ - упрощаем код. Фиг бы я тут не ошибся бы, если бы не тесты.
+  https://bitbucket.org/ingword/mindstream/commits/bf101e5e63545f7f10a091d52d6b498f62ab61e4
+ - упрощаем код. Фиг бы я тут не ошибся бы, если бы не тесты.
+  https://bitbucket.org/ingword/mindstream/commits/5a9aad9c2652702dbab9913e2f1a2ec733ee11dd
+ - упрощаем код. Фиг бы я тут не ошибся бы, если бы не тесты.
+  https://bitbucket.org/ingword/mindstream/commits/db4a61beed45d30af1fd9f8c67c592ec02136a7a
+ - упрощаем код.
+  https://bitbucket.org/ingword/mindstream/commits/8f530b987e03cce54306e260c638cc93dd42029c
+ - упрощаем код.
+  https://bitbucket.org/ingword/mindstream/commits/c39832480e7826de60907018230404b4e70d949f
+ - заготовочка.
+  https://bitbucket.org/ingword/mindstream/commits/a1d96d7759ef203fae3a8ab346e5097f19b84233
+ - определяем пересечение именно ОТРЕЗКОВ, а не ЛИНИЙ.
+  https://bitbucket.org/ingword/mindstream/commits/6f4701641dc4a7ab719b7dd3446ac4cdd2467ab4
+ - учитываем погрешность.
+  https://bitbucket.org/ingword/mindstream/commits/b6aecd0922dd87c7199cd7757f51fdd2aa7a57f3
+ - учитываем погрешность.
+  https://bitbucket.org/ingword/mindstream/commits/1e265b4553ba34bdac7fe19ef64ac07edda5593d
+ - Добавляем структуру TmsRectF.
+  https://bitbucket.org/ingword/mindstream/commits/e98bd7f690cab10e473816b227bbef097cff8633
+ - добавляем метод TmsRectF.Cross.
+  https://bitbucket.org/ingword/mindstream/commits/2c18edede430c8a1ad00776b4d8fce400a60d7bc
+ - Заготовочка для TmsConnector.pm_GetStartPoint.
+  https://bitbucket.org/ingword/mindstream/commits/d23c0fbe4968465b214b9e7f61e13614e881d613
+ - заготовочка.
+  https://bitbucket.org/ingword/mindstream/commits/888acb59db316302943caca5735326b6f6b104b2
+ - заготовочка.
+  https://bitbucket.org/ingword/mindstream/commits/b2a28d1dafd09c608c56733b963e6fc559835c5e
+ - почти завелось.
+  https://bitbucket.org/ingword/mindstream/commits/326d8bb45bde98269a72b2c3a80517c318987335
+ - вычисляем и другой конец.
+  https://bitbucket.org/ingword/mindstream/commits/f66fd2f13c7a00154364cad469d819f99f776344
+ - условие параллельности прямых
+  https://bitbucket.org/ingword/mindstream/commits/60013bcffe4fbbaaac46895dd314071ba5aaa9d4
+ - пишем в лог граничный случай.
+  https://bitbucket.org/ingword/mindstream/commits/44dce204c5042dc0a03af2674d2a9532022f6861
+ - добавляем ещё один тест паралелльности прямых.
+  https://bitbucket.org/ingword/mindstream/commits/016b691d572fcd1877782a5ffec40abe0f1626f8
+ - убираем отладочный вывод.
+  https://bitbucket.org/ingword/mindstream/commits/d9d437cb2fd6917428c9b1efdeba2b0454d61ca9
+ - если файл занят, то пытаемся переоткрыть его.
+  https://bitbucket.org/ingword/mindstream/commits/aac8577ca8891c7e62d39331a758357b7e63133e
+ - убираем дурацкую проверку параллельности через угол. Она всё равно - не всегда работает.
+  https://bitbucket.org/ingword/mindstream/commits/d8bc46ceb3dfd2f2439c00ed29022f22c59cbdd7

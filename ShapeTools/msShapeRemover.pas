@@ -3,6 +3,7 @@
 interface
 
 uses
+ System.Types,
  msInterfaces,
  msTool
  ;
@@ -11,21 +12,32 @@ type
  TmsShapeRemover = class(TmsTool)
   // - утилитный класс для уничтожения примитивов
  public
-  class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
+  class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; override;
+  class function ButtonShape: ImsShape; override;
  end;//TmsPicker
 
 implementation
 
-class function TmsShapeRemover.Create(const aCtx: TmsMakeShapeContext): ImsShape;
+uses
+ msRemoverIcon
+ ;
+
+// TmsShapeRemover
+
+class function TmsShapeRemover.Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape;
 var
- l_ShapeRemover: ImsShape;
+ l_ShapeToRemove: ImsShape;
 begin
  Result := nil;
- l_ShapeRemover := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
- if (l_ShapeRemover = nil) then
+ l_ShapeToRemove := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
+ if (l_ShapeToRemove = nil) then
   Exit;
- aCtx.rShapesController.RemoveShape(l_ShapeRemover);
-// Result := inherited Create(aCtx);
+ aCtx.rShapesController.RemoveShape(l_ShapeToRemove);
+end;
+
+class function TmsShapeRemover.ButtonShape: ImsShape;
+begin
+ Result := TmsRemoverIcon.Create;
 end;
 
 end.

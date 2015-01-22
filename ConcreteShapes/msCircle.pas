@@ -8,14 +8,15 @@ uses
  FMX.Graphics,
  FMX.Types,
  System.UITypes,
- msInterfaces
+ msInterfaces,
+ msPointedShape
  ;
 
 type
- TmsCircle = class(TmsShape)
+ TmsCircle = class(TmsPointedShape)
  protected
-  class function InitialRadiusX: Integer; virtual;
-  class function InitialRadiusY: Integer; virtual;
+  function InitialRadiusX: Integer; virtual;
+  function InitialRadiusY: Integer; virtual;
 
   function GetDrawBounds: TRectF; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
@@ -28,12 +29,12 @@ implementation
 
 { TmsCircle }
 
-class function TmsCircle.InitialRadiusX: Integer;
+function TmsCircle.InitialRadiusX: Integer;
 begin
  Result := 50;
 end;
 
-class function TmsCircle.InitialRadiusY: Integer;
+function TmsCircle.InitialRadiusY: Integer;
 begin
  Result := InitialRadiusX;
 end;
@@ -44,9 +45,9 @@ var
  l_x0, l_y0, l_a, l_b : Integer;
  l_Rect : TRectF;
 begin
- Result := False;
-
  l_Rect := DrawBounds;
+
+ //Result := l_Rect.Contains(aPoint);
 
  l_StartRectPoint := l_Rect.TopLeft;
  l_FinishRectPoint := l_Rect.BottomRight;
@@ -73,13 +74,12 @@ begin
  l_Rect := DrawBounds;
 
  aCtx.rCanvas.DrawEllipse(l_Rect, 1);
- aCtx.rCanvas.FillEllipse(l_Rect, 0.5);
+ aCtx.rCanvas.FillEllipse(l_Rect, aCtx.rOpacity);
 end;
 
 procedure TmsCircle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rFillColor := TAlphaColorRec.Red;
 end;
 
 end.

@@ -1,0 +1,288 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+Ни для кого наверное не открою Америку, но всё же напишу.<br />
+<br />
+Можно сделать так:<br />
+<br />
+<pre class="brush:delphi">type
+ EmyException = class(Exception)
+ end;//EmyException
+...
+if not Condition1 then
+ raise EMyException.Create('Some string1');
+...
+if not Condition2 then
+ raise EMyException.Create('Some string2');
+</pre>
+<br />
+А можно так:
+<br />
+<br />
+<pre class="brush:delphi">type
+ EmyException = class(Exception)
+  public
+   class procedure Check(aCondition: Boolean; 
+                         const aMessage: String);
+ end;//EmyException
+...
+class procedure EmyException.Check(aCondition: Boolean; 
+                                   const aMessage: String);
+begin
+ if not aCondition then
+  raise Self.Create(aMessage);
+end;
+...
+EMyException.Check(Condition1, 'Some string1');
+...
+EMyException.Check(Condition2, 'Some string2');
+</pre>
+<br />
+Вроде "то же на то же", и оба варианта - одинаковые.
+<br />
+<br />
+Но по мне - второй вариант - "вкуснее". Да и читабельнее.<br />
+<br />
+И в отладке - полезнее.<br />
+<br />
+Почему в отладке полезнее? Потому, что можно поставить <b>один</b> break-point в EmyException.Check, а не множество по коду.<br />
+<br />
+Возможно в новых версиях Delphi это входит в стандартную библиотеку. Не знаю, честно - не проверял. Но мы этим подходом пользуемся уже <b>очень давно</b>. И он нам нравится.<br />
+<br />
+И его понятное дело - можно расширять и усовершенствовать.<br />
+<br />
+Например - не передавать строку, а "генерировать" её внутри Check. Ну в общем - вариантов масса.<br />
+<br />
+Ну и ещё отмечу - я наблюдал достаточное количество людей, которые забывали raise.<br />
+<br />
+Т.е. писали так:<br />
+<br />
+<pre class="brush:delphi"> Exception.Create('aMessage');
+</pre>
+<br />
+а не так:
+<br />
+<br />
+<pre class="brush:delphi"> raise Exception.Create('aMessage');
+</pre>
+<br />
+Ну и про "расширения".<br />
+<br />
+Можно например так:
+<br />
+<br />
+<pre class="brush:delphi">type
+ TMyPredicate = reference to function (aData: Integer): Boolean;
+ EmyException = class(Exception)
+  public
+   class procedure Check(aCondition: Boolean; 
+                         const aMessage: String); overload;
+   class procedure Check(aCondition: TMyPredicate; 
+                         const aMessage: String; 
+                         aData: Integer); overload;
+ end;//EmyException
+...
+class procedure EmyException.Check(aCondition: Boolean; 
+                                   const aMessage: String);
+begin
+ if not aCondition then
+  raise Self.Create(aMessage);
+end;
+
+class procedure EmyException.Check(aCondition: TMyPredicate; 
+                                   const aMessage: String; 
+                                   aData: Integer);
+begin
+ if not aCondition(aData) then
+  raise Self.Create('InvalidData: ' + IntToStr(aData) + aMessage);
+end;
+
+...
+EMyException.Check(Condition1, 'Some string1');
+...
+EMyException.Check(
+ function (aData: Integer): Boolean; 
+ begin 
+  Result := IsValid(aData); 
+ end;, 
+ 'Some string2', 
+ SomeComplexExpression);
+</pre>
+<br />
+-- ну понятное, дело, что это "макет", а не реально рабочий код.
+<br />
+<br />
+Чем этот "макет" хорош? Тем, что&nbsp;SomeComplexExpression - вычислится <b>один</b> раз.<br />
+<br />
+Понятное дело, что можно и "локальной переменной" обойтись.<br />
+Ну это в простейших случаях.&nbsp;
+<br />
+<br />
+Да и потом, ведь можно написать и так:
+<br />
+<br />
+<pre class="brush:delphi">var
+ SomeLocalData : Integer;
+
+EMyException.Check(
+ function (aData: Integer): Boolean; 
+ begin 
+  Result := (aData = SomeLocalData); 
+ end;, 
+ 'Some string2', 
+ SomeComplexExpression);
+</pre>
+<br />
+Update.&nbsp;
+<br />
+<br />
+По мотивам комментария - <a href="http://programmingmindstream.blogspot.ru/2014/08/blog-post_85.html?showComment=1408566592655#c1216957169742679866">http://programmingmindstream.blogspot.ru/2014/08/blog-post_85.html?showComment=1408566592655#c1216957169742679866</a><br />
+<br />
+Про "просто процедуру" - мы конечно же тоже ими пользовались:
+
+<br />
+<br />
+<pre class="brush:delphi">function Ht(ID : LongInt) : LongInt;
+{var
+ nDosError : SmallInt; // Сюда занесут код, возвращенный ДОС
+ nOperation: SmallInt; // Сюда занесут код операции, приведшей к ошибке
+ lErrstr : array[0..1000] of AnsiChar;
+ lErrstr2 : PAnsiChar;
+}
+begin
+ Result := ID;
+
+ if lNeedStackOut_ErrNum &lt;&gt; 0 then
+ begin
+  l3System.Stack2Log(Format('HTERROR = %d STACK OUT', [lNeedStackOut_ErrNum]));
+  lNeedStackOut_ErrNum := 0;
+ end;
+
+{ if ID = -1 then
+  lErrstr2 := htExtError(nDosError, nOperation, @lErrstr[0]);
+}
+ if ID &lt; 0 then
+  raise EHtErrors.CreateInt(ID);
+end;
+....
+   Ht(htOpenResults(Masks,ROPEN_READ,@FldArr,FldCount));
+....
+     Ht(htDeleteRecords(TmpList));
+....
+     Ht(htOpenResults(ValList,ROPEN_READ,nil,0));
+</pre>
+<br />
+И ещё.<br />
+<br />
+Что случится, если мы напишем так:
+<br />
+<br />
+<pre class="brush:delphi">type
+ EmyException2 = class(EmyException)
+ end;//EmyException2
+
+...
+EmyException2.Check(aCondition, aMessage);
+</pre>
+<br />
+-- исключение какого класса возбудится?<br />
+<br />
+EmyException или EmyException2?<br />
+<br />
+EmyException2 :-) что и "следовало ожидать".<br />
+<br />
+Это к вопросу - "почему метод класса, а не просто функция".<br />
+<br />
+Update.<br />
+<br />
+(В некотором роде в ответ на - http://programmingmindstream.blogspot.ru/2014/08/blog-post_85.html?showComment=1408649403323#c8271514992700352647)<br />
+<br />
+Вот кстати пример, того что написано в самом начале:
+<br />
+<br />
+<pre class="brush:delphi">Em3InvalidStreamPos.Check(Self.IsValidPosition,
+                          aHeader.f_Name,
+                          l_Pos);
+Em3InvalidStreamSize.Check(Self.IsValidPosition,
+                           aHeader.f_Name,
+                           aHeader.f_TOCItemData.rBody.rRealSize);
+Em3InvalidStreamPos.Check(Self.IsValidLink,
+                          aHeader.f_Name,
+                          aHeader.f_TOCItemData.rBody.RTOCBuffRootPosition);
+Em3InvalidStreamPos.Check(Self.IsValidLink,
+                          aHeader.f_Name,
+                          aHeader.f_TOCItemData.rBody.RTOCItemListPosition);
+Em3InvalidStreamPos.Check(Self.IsValidLink,
+                          aHeader.f_Name,
+                          aHeader.f_TOCItemData.RNextPosition);
+</pre>
+<br />
+- IsValidPosition и IsValidLink это предикаты.<br />
+<br />
+Т.е. function (aData: Int64): Boolean of object;<br />
+<br />
+Check в данном случае выглядит так:
+<br />
+<br />
+<pre class="brush:delphi">type
+ TInt64Predicate = function (aData: Int64): Boolean of object;
+...
+class procedure Em3InvalidStreamData.Check(aCondition: TInt64Predicate;
+                                           aName : String;
+                                           aData : Int64);
+begin
+ if not aCondition(aData) then
+  raise Self.CreateFmt('Invalid data %d in file %s', [aName, aData]);
+end; 
+...
+Em3InvalidStreamPos = class(Em3InvalidStreamData);
+
+Em3InvalidStreamSize = class(Em3InvalidStreamData);
+</pre>
+<br />
+-- зачем ещё это нужно?<br />
+<br />
+Ну чтобы с форматками в функции Format не напутать.
+<br />
+<br />
+И не отлаживать "наведённый" exception который вылезет у пользователя, но "не расскажет правду".<br />
+<br />
+Понятное дело, что пример кода - далеко не самый "красивый", но я специально ничего не рафинировал.<br />
+<br />
+Конечно - на вкус и цвет - "все фломастеры разные", но мне лично это нравится больше, чем с "вязанкой" raise.<br />
+<br />
+Попробуйте написать с raise и покажите - что он "будет короче". Я буду рад поучиться.<br />
+<br />
+И кстати да - вывод стека в лог - помогает идентифицировать строку - откуда полетело исключение. Но про это я может быть ещё когда-нибудь напишу отдельно. <br />
+<br />
+(Пока вот <a href="http://programmingmindstream.blogspot.ru/2014/08/blog-post_22.html">тут</a> - идёт некоторая дискуссия)<br />
+<br />
+Update.<br />
+<br />
+Да и оговорюсь.<br />
+<br />
+Можно было бы конечно "сочинить" что-то вроде:
+
+<br />
+<br />
+<pre class="brush:delphi">Em3InvalidStreamPos.Check(Self.IsValidPosition,
+                          aHeader.f_Name,
+                          [l_Pos,
+                           aHeader.f_TOCItemData.rBody.rRealSize,
+                           aHeader.f_TOCItemData.rBody.RTOCBuffRootPosition,
+                           aHeader.f_TOCItemData.rBody.RTOCItemListPosition,
+                           aHeader.f_TOCItemData.RNextPosition]);
+</pre>
+<br />
+-- но я <b>осознанно</b> этого не делаю.<br />
+<br />
+Т.к. конечно запись короче и "читабельнее".
+<br />
+<br />
+Но! В таком варианте - сложнее искать <b>реальный</b> источник ошибки.<br />
+<br />
+Ну и <b>with</b> конечно тоже можно было бы написать. Я знаю. Но <b>я лично</b> - "идеологический противник" with.<br />
+<br />
+Особенно в варианте Delphi, где нет "обратной устойчивости".<br />
+<br />
+Слова "обратная устойчивость" понятны? Или я опять "выдумываю свои термины"?<br />
+<br />
+На всякий случай написал вот что -&nbsp;<a href="http://programmingmindstream.blogspot.ru/2014/08/blog-post_17.html">Коротко. Об "обратной устойчивости"</a></div>
