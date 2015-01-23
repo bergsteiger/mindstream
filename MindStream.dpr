@@ -103,8 +103,8 @@ uses
   msMoveShapeLeft in 'ShapeTools\FloatingButtons\msMoveShapeLeft.pas',
   msMoveShapeRight in 'ShapeTools\FloatingButtons\msMoveShapeRight.pas',
   msShapeClass in 'MetaShapes\msShapeClass.pas',
-  msProxyShapeClass in 'MetaShapes\msProxyShapeClass.pas'
-  ;
+  msProxyShapeClass in 'MetaShapes\msProxyShapeClass.pas',
+  msMoveShapeTool in 'ContainerShapes\msMoveShapeTool.pas';
 
 {$R *.res}
 
