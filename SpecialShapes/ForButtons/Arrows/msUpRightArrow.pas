@@ -1,4 +1,4 @@
-unit msTopRightArrow;
+unit msUpRightArrow;
 
 interface
 
@@ -9,16 +9,16 @@ uses
  ;
 
 type
- TmsTopRightArrow = class(TmsSpecialArrow)
+ TmsUpRightArrow = class(TmsSpecialArrow)
  public
   class function Create(const aPointedPoint: TPointF): ImsShape; override;
- end;//TmsTopRightArrow
+ end;//TmsUpRightArrow
 
 implementation
 
-// TmsTopRightArrow
+// TmsUpRightArrow
 
-class function TmsTopRightArrow.Create(const aPointedPoint: TPointF): ImsShape;
+class function TmsUpRightArrow.Create(const aPointedPoint: TPointF): ImsShape;
 begin
  Result := CreateCompletedInternal(TPointF.Create(aPointedPoint.X, aPointedPoint.Y + InitialLength), TPointF.Create(aPointedPoint.X + InitialLength, aPointedPoint.Y));
 end;

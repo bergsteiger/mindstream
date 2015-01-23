@@ -22,7 +22,7 @@ type
 
 implementation
 
-{ TmsMoverIcon }
+// TmsMoverIcon
 
 class function TmsMoverIcon.IsForToolbar: Boolean;
 begin
