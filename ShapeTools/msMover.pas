@@ -59,7 +59,8 @@ uses
  msRemoverIcon,
  msUpRightArrow,
  msUpLeftArrow,
- msDownRightArrow
+ msDownRightArrow,
+ msDownLeftArrow
  ;
 
 // TmsMover
@@ -109,6 +110,7 @@ begin
  aController.AddShape(AddButton(TmsShapeTool, TmsUpRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift))));
  aController.AddShape(AddButton(TmsShapeTool, TmsUpLeftArrow.Create(TPointF.Create(l_B.Left - TmsSpecialArrow.InitialLength - cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift))));
  aController.AddShape(AddButton(TmsShapeTool, TmsDownRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_B.Bottom + cShift))));
+ aController.AddShape(AddButton(TmsShapeTool, TmsDownLeftArrow.Create(TPointF.Create(l_B.Left - cShift, l_B.Bottom + cShift))));
 end;
 
 class function TmsMover.ButtonShape: ImsShape;

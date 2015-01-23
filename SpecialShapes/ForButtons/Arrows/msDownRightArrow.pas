@@ -16,7 +16,7 @@ type
 
 implementation
 
-// TmsDownArrow
+// TmsDownRightArrow
 
 class function TmsDownRightArrow.Create(const aPointedPoint: TPointF): ImsShape;
 begin
