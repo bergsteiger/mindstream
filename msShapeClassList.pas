@@ -19,10 +19,7 @@ type
  strict protected
   f_Registered : TmsShapeClassListItems;
   constructor Create;
- strict private
-  function pm_GetItems: TmsShapeClassListItems;
  protected
-  function GetEnumerator: TmsShapeClassListItems.TEnumerator;
   function IndexOf(const aValue: String): Integer;
  public
   function First: MCmsShape;
@@ -33,8 +30,6 @@ type
   procedure Cleanup; override;
   function ByName(const aValue: String): MCmsShape;
   procedure IterateShapes(aLambda: TmsShapeClassLambda); virtual;
-(*  property Items: TmsShapeClassListItems
-   read pm_GetItems;*)
  end;//TmsShapeClassList
 
 implementation
@@ -52,19 +47,9 @@ begin
  f_Registered := TmsShapeClassListItems.Create;
 end;
 
-function TmsShapeClassList.pm_GetItems: TmsShapeClassListItems;
-begin
- Result := f_Registered;
-end;
-
 function TmsShapeClassList.First: MCmsShape;
 begin
  Result := f_Registered.First;
-end;
-
-function TmsShapeClassList.GetEnumerator: TmsShapeClassListItems.TEnumerator;
-begin
- Result := f_Registered.GetEnumerator;
 end;
 
 procedure TmsShapeClassList.Cleanup;
