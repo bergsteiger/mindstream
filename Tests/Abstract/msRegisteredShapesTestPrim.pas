@@ -41,7 +41,8 @@ end;
 
 procedure TmsRegisteredShapesTestPrim.ShapesRegistredCount;
 begin
- OutToFileAndCheck(procedure (aLog: TmsLog)
+ OutToFileAndCheck(
+  procedure (aLog: TmsLog)
   var
    l_Result : integer;
   begin
