@@ -62,7 +62,13 @@ procedure TmsRegisteredShapesTestPrim.TestFirstShape;
 begin
  OutToFileAndCheck(procedure (aLog: TmsLog)
   begin
-   aLog.ToLog(ShapeClassList.First.Name);
+   ShapeClassList.IterateShapes(
+    procedure (const aShapeClass: MCmsShape)
+    begin
+     CheckShapeClass(aShapeClass);
+     aLog.ToLog(aShapeClass.Name);
+    end
+   );
   end
  );
 end;

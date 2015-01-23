@@ -21,13 +21,12 @@ type
   constructor Create;
  protected
   function IndexOf(const aValue: String): Integer;
+  procedure Cleanup; override;
  public
-  function First: MCmsShape;
   procedure RegisterMC(const aValue: MCmsShape); overload; virtual;
   procedure RegisterMC(const aShapes: array of MCmsShape); overload;
   procedure Register(const aValue: RmsShape); overload;
   procedure Register(const aShapes: array of RmsShape); overload;
-  procedure Cleanup; override;
   function ByName(const aValue: String): MCmsShape;
   procedure IterateShapes(aLambda: TmsShapeClassLambda); virtual;
  end;//TmsShapeClassList
@@ -45,11 +44,6 @@ constructor TmsShapeClassList.Create;
 begin
  inherited;
  f_Registered := TmsShapeClassListItems.Create;
-end;
-
-function TmsShapeClassList.First: MCmsShape;
-begin
- Result := f_Registered.First;
 end;
 
 procedure TmsShapeClassList.Cleanup;
