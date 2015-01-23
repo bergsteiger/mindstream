@@ -24,6 +24,10 @@ uses
   msBlackRectangle,
   msGreenCircle,
   msPointCircle,
+  msSmallTriangle,
+
+  // SVG Shapes
+  msFolder,
 
   // utility shapes
   msMover,
@@ -32,14 +36,8 @@ uses
   msSwapParents,
   msShapeRemover,
 
-  // special shapes
-  msSmallTriangle,
-
   // shapes for toolbar buttons
-  msMoverIcon,
-
-  // SVG Shapes
-  msFolder
+  msMoverIcon
   ;
 
 procedure RegisterOurShapes;
