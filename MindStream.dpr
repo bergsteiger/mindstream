@@ -71,6 +71,7 @@ uses
   msUpArrow in 'SpecialShapes\ForButtons\Arrows\msUpArrow.pas',
   msDownArrow in 'SpecialShapes\ForButtons\Arrows\msDownArrow.pas',
   msSpecialArrow in 'AbstractShapes\msSpecialArrow.pas',
+  msSpecialDiagonalArrow in 'AbstractShapes\msSpecialDiagonalArrow.pas',
   msLeftArrow in 'SpecialShapes\ForButtons\Arrows\msLeftArrow.pas',
   msRightArrow in 'SpecialShapes\ForButtons\Arrows\msRightArrow.pas',
   msUpRightArrow in 'SpecialShapes\ForButtons\Arrows\msUpRightArrow.pas',
