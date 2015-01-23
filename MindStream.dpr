@@ -75,6 +75,7 @@ uses
   msRightArrow in 'SpecialShapes\ForButtons\Arrows\msRightArrow.pas',
   msUpRightArrow in 'SpecialShapes\ForButtons\Arrows\msUpRightArrow.pas',
   msUpLeftArrow in 'SpecialShapes\ForButtons\Arrows\msUpLeftArrow.pas',
+  msDownRightArrow in 'SpecialShapes\ForButtons\Arrows\msDownRightArrow.pas',
   msRemoverIcon in 'SpecialShapes\ForButtons\msRemoverIcon.pas',
   msShapesGroup in 'ContainerShapes\msShapesGroup.pas',
   msPointlessShape in 'AbstractShapes\msPointlessShape.pas',
