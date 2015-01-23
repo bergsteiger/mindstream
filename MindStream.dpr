@@ -99,6 +99,7 @@ uses
   msProxyShape in 'ContainerShapes\msProxyShape.pas',
   msShapeTool in 'ContainerShapes\msShapeTool.pas',
   msMoveShapeUp in 'ShapeTools\FloatingButtons\msMoveShapeUp.pas',
+  msMoveShapeUpLeft in 'ShapeTools\FloatingButtons\msMoveShapeUpLeft.pas',
   msMoveShapeDown in 'ShapeTools\FloatingButtons\msMoveShapeDown.pas',
   msMoveShapeDownRight in 'ShapeTools\FloatingButtons\msMoveShapeDownRight.pas',
   msMoveShapeDownLeft in 'ShapeTools\FloatingButtons\msMoveShapeDownLeft.pas',
