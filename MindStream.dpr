@@ -73,6 +73,7 @@ uses
   msSpecialArrow in 'AbstractShapes\msSpecialArrow.pas',
   msLeftArrow in 'SpecialShapes\ForButtons\Arrows\msLeftArrow.pas',
   msRightArrow in 'SpecialShapes\ForButtons\Arrows\msRightArrow.pas',
+  msTopRightArrow in 'SpecialShapes\ForButtons\Arrows\msTopRightArrow.pas',
   msRemoverIcon in 'SpecialShapes\ForButtons\msRemoverIcon.pas',
   msShapesGroup in 'ContainerShapes\msShapesGroup.pas',
   msPointlessShape in 'AbstractShapes\msPointlessShape.pas',
