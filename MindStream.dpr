@@ -100,6 +100,7 @@ uses
   msShapeTool in 'ContainerShapes\msShapeTool.pas',
   msMoveShapeUp in 'ShapeTools\FloatingButtons\msMoveShapeUp.pas',
   msMoveShapeDown in 'ShapeTools\FloatingButtons\msMoveShapeDown.pas',
+  msMoveShapeDownRight in 'ShapeTools\FloatingButtons\msMoveShapeDownRight.pas',
   msMoveShapeLeft in 'ShapeTools\FloatingButtons\msMoveShapeLeft.pas',
   msMoveShapeRight in 'ShapeTools\FloatingButtons\msMoveShapeRight.pas',
   msShapeClass in 'MetaShapes\msShapeClass.pas',

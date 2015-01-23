@@ -61,7 +61,8 @@ uses
  msUpLeftArrow,
  msDownRightArrow,
  msDownLeftArrow,
- msSpecialDiagonalArrowBoundsCorrector
+ msSpecialDiagonalArrowBoundsCorrector,
+ msMoveShapeDownRight
  ;
 
 // TmsMover
@@ -110,7 +111,7 @@ begin
  aController.AddShape(AddButton(TmsMoveShapeRight, TmsRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_Mid.Y))));
  aController.AddShape(AddButton(TmsShapeTool, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsUpRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift)))));
  aController.AddShape(AddButton(TmsShapeTool, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsUpLeftArrow.Create(TPointF.Create(l_B.Left - TmsSpecialArrow.InitialLength - cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift)))));
- aController.AddShape(AddButton(TmsShapeTool, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsDownRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_B.Bottom + cShift)))));
+ aController.AddShape(AddButton(TmsMoveShapeDownRight, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsDownRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_B.Bottom + cShift)))));
  aController.AddShape(AddButton(TmsShapeTool, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsDownLeftArrow.Create(TPointF.Create(l_B.Left - cShift, l_B.Bottom + cShift)))));
 end;
 
