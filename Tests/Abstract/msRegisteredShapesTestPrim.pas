@@ -16,7 +16,7 @@ type
     procedure CheckShapeClass(const aShapeClass: MCmsShape); virtual;
    published
     procedure ShapesRegistredCount;
-    procedure TestFirstShape;
+    procedure TestShapes;
     procedure TestIndexOfTmsLine;
   end;//TmsRegisteredShapesTestPrim
 
@@ -58,7 +58,7 @@ begin
  );
 end;
 
-procedure TmsRegisteredShapesTestPrim.TestFirstShape;
+procedure TmsRegisteredShapesTestPrim.TestShapes;
 begin
  OutToFileAndCheck(procedure (aLog: TmsLog)
   begin
