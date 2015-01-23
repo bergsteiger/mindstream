@@ -110,7 +110,8 @@ uses
   msProxyShapeClass in 'MetaShapes\msProxyShapeClass.pas',
   msMoveShapeTool in 'ContainerShapes\msMoveShapeTool.pas',
   msBoundsCorrector in 'ContainerShapes\msBoundsCorrector.pas',
-  msSpecialDiagonalArrowBoundsCorrector in 'ContainerShapes\msSpecialDiagonalArrowBoundsCorrector.pas';
+  msSpecialDiagonalArrowBoundsCorrector in 'ContainerShapes\msSpecialDiagonalArrowBoundsCorrector.pas',
+  msFloatingButtonCircle in 'SpecialShapes\ForButtons\msFloatingButtonCircle.pas';
 
 {$R *.res}
 
