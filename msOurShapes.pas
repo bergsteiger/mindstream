@@ -25,18 +25,12 @@ uses
   msGreenCircle,
   msPointCircle,
   msSmallTriangle,
-
-  // SVG Shapes
   msFolder,
-
-  // utility shapes
   msMover,
   msPicker,
   msUpToParent,
   msSwapParents,
   msShapeRemover,
-
-  // shapes for toolbar buttons
   msMoverIcon
   ;
 
