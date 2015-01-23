@@ -9,16 +9,21 @@ uses
 type
  TmsSpecialDiagonalArrow = class abstract(TmsSpecialArrow)
  public
-  class function InitialLength: Integer; override;
+  class function InitialLength: Extended; override;
  end;//TmsSpecialDiagonalArrow
 
 implementation
 
+uses
+ Math
+ ;
+
 // TmsSpecialDiagonalArrow
 
-class function TmsSpecialDiagonalArrow.InitialLength: Integer;
+class function TmsSpecialDiagonalArrow.InitialLength: Extended;
 begin
- Result := inherited InitialLength;
+ Result := inherited InitialLength / Sqrt(2);
+ // - вспоминаем теорему Пифагора и делим длину на квадратный корень из двух
 end;
 
 end.

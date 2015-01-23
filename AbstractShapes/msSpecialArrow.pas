@@ -13,7 +13,7 @@ type
  protected
   class function CreateCompletedInternal(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
  public
-  class function InitialLength: Integer; virtual;
+  class function InitialLength: Extended; virtual;
   class procedure CreateCompleted;
   // - метод, который надо скрыть
   class function Create: ImsShape; overload;
@@ -40,7 +40,7 @@ begin
  Assert(false, 'Используйте фабрику Create');
 end;
 
-class function TmsSpecialArrow.InitialLength: Integer;
+class function TmsSpecialArrow.InitialLength: Extended;
 begin
  Result := 50;
 end;
