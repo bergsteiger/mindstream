@@ -25,8 +25,19 @@ begin
 end;
 
 function TmsBoundsCorrector.GetDrawBounds: TRectF;
+var
+ l_Mid : TPointF;
+ l_W : Extended;
+ l_H : Extended;
 begin
  Result := inherited GetDrawBounds;
+ l_Mid := (Result.BottomRight + Result.TopLeft) / 2;
+ l_W := (Result.Right - Result.Left) * ExtentCoeff / 2;
+ l_H := (Result.Bottom - Result.Top) * ExtentCoeff / 2;
+ Result.Left := l_Mid.X - l_W;
+ Result.Right := l_Mid.X + l_W;
+ Result.Top := l_Mid.Y - l_W;
+ Result.Bottom := l_Mid.Y + l_W;
 end;
 
 end.
