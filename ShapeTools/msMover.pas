@@ -65,7 +65,8 @@ uses
  msMoveShapeDownRight,
  msMoveShapeDownLeft,
  msMoveShapeUpLeft,
- msMoveShapeUpRight
+ msMoveShapeUpRight,
+ msFloatingButtonCircle
  ;
 
 // TmsMover
@@ -86,7 +87,7 @@ begin
             aToolClass.Create(
              f_Moving,
              TmsShapesGroup.Create([
-              TmsCircleWithRadius.Create(l_Mid,
+              TmsFloatingButtonCircle.Create(l_Mid,
                                          Max(-(l_B.Left - l_B.Right),
                                              -(l_B.Top - l_B.Bottom)) / 2
                                              + cShift / 2 ),
