@@ -105,7 +105,8 @@ uses
   msShapeClass in 'MetaShapes\msShapeClass.pas',
   msProxyShapeClass in 'MetaShapes\msProxyShapeClass.pas',
   msMoveShapeTool in 'ContainerShapes\msMoveShapeTool.pas',
-  msBoundsCorrector in 'ContainerShapes\msBoundsCorrector.pas';
+  msBoundsCorrector in 'ContainerShapes\msBoundsCorrector.pas',
+  msSpecialDiagonalArrowBoundsCorrector in 'ContainerShapes\msSpecialDiagonalArrowBoundsCorrector.pas';
 
 {$R *.res}
 
