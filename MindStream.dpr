@@ -104,7 +104,8 @@ uses
   msMoveShapeRight in 'ShapeTools\FloatingButtons\msMoveShapeRight.pas',
   msShapeClass in 'MetaShapes\msShapeClass.pas',
   msProxyShapeClass in 'MetaShapes\msProxyShapeClass.pas',
-  msMoveShapeTool in 'ContainerShapes\msMoveShapeTool.pas';
+  msMoveShapeTool in 'ContainerShapes\msMoveShapeTool.pas',
+  msBoundsCorrector in 'ContainerShapes\msBoundsCorrector.pas';
 
 {$R *.res}
 
