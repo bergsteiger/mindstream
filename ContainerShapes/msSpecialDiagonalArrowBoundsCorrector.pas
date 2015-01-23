@@ -21,6 +21,7 @@ uses
 class function TmsSpecialDiagonalArrowBoundsCorrector.ExtentCoeff: Extended;
 begin
  Result := TmsSpecialDiagonalArrow.ExtentCoeff;
+// Result := 1.0;
 end;
 
 end.

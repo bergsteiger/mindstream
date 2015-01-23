@@ -11,7 +11,7 @@ uses
 type
  TmsSpecialArrow = class abstract(TmsLineWithArrow)
  protected
-  class function CreateCompletedInternal(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
+  class function CreateCompletedInternal(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape; virtual;
  public
   class function InitialLength: Extended; virtual;
   class procedure CreateCompleted;

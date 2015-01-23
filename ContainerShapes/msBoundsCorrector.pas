@@ -34,10 +34,12 @@ begin
  l_Mid := (Result.BottomRight + Result.TopLeft) / 2;
  l_W := (Result.Right - Result.Left) * ExtentCoeff / 2;
  l_H := (Result.Bottom - Result.Top) * ExtentCoeff / 2;
+// Result.Right := Result.Left + l_W * 2;
+// Result.Bottom := Result.Top + l_H * 2;
  Result.Left := l_Mid.X - l_W;
  Result.Right := l_Mid.X + l_W;
- Result.Top := l_Mid.Y - l_W;
- Result.Bottom := l_Mid.Y + l_W;
+ Result.Top := l_Mid.Y - l_H;
+ Result.Bottom := l_Mid.Y + l_H;
 end;
 
 end.
