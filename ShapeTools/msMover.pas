@@ -60,7 +60,8 @@ uses
  msUpRightArrow,
  msUpLeftArrow,
  msDownRightArrow,
- msDownLeftArrow
+ msDownLeftArrow,
+ msSpecialDiagonalArrowBoundsCorrector
  ;
 
 // TmsMover
@@ -107,10 +108,10 @@ begin
  aController.AddShape(AddButton(TmsMoveShapeDown, TmsDownArrow.Create(TPointF.Create(l_Mid.X, l_B.Bottom + cShift))));
  aController.AddShape(AddButton(TmsMoveShapeLeft, TmsLeftArrow.Create(TPointF.Create(l_B.Left - TmsSpecialArrow.InitialLength - cShift, l_Mid.Y))));
  aController.AddShape(AddButton(TmsMoveShapeRight, TmsRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_Mid.Y))));
- aController.AddShape(AddButton(TmsShapeTool, TmsUpRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift))));
- aController.AddShape(AddButton(TmsShapeTool, TmsUpLeftArrow.Create(TPointF.Create(l_B.Left - TmsSpecialArrow.InitialLength - cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift))));
- aController.AddShape(AddButton(TmsShapeTool, TmsDownRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_B.Bottom + cShift))));
- aController.AddShape(AddButton(TmsShapeTool, TmsDownLeftArrow.Create(TPointF.Create(l_B.Left - cShift, l_B.Bottom + cShift))));
+ aController.AddShape(AddButton(TmsShapeTool, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsUpRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift)))));
+ aController.AddShape(AddButton(TmsShapeTool, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsUpLeftArrow.Create(TPointF.Create(l_B.Left - TmsSpecialArrow.InitialLength - cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift)))));
+ aController.AddShape(AddButton(TmsShapeTool, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsDownRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_B.Bottom + cShift)))));
+ aController.AddShape(AddButton(TmsShapeTool, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsDownLeftArrow.Create(TPointF.Create(l_B.Left - cShift, l_B.Bottom + cShift)))));
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
