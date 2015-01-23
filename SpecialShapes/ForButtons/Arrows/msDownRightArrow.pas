@@ -5,11 +5,12 @@ interface
 uses
  System.Types,
  msInterfaces,
- msSpecialArrow
+ msSpecialArrow,
+ msSpecialDiagonalArrow
  ;
 
 type
- TmsDownRightArrow = class(TmsSpecialArrow)
+ TmsDownRightArrow = class(TmsSpecialDiagonalArrow)
  public
   class function Create(const aPointedPoint: TPointF): ImsShape; override;
  end;//TmsDownRightArrow
