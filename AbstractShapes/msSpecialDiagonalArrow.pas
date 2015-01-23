@@ -37,8 +37,8 @@ end;
 
 class function TmsSpecialDiagonalArrow.ExtentCoeff: Extended;
 begin
- Result := Sqrt(2);
-// Result := 1.0;
+// Result := Sqrt(2);
+ Result := 1.0;
 end;
 
 class function TmsSpecialDiagonalArrow.InitialLength: Extended;
