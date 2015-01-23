@@ -19,7 +19,7 @@ uses
  System.Types
  ;
 
-// TmsMoveShapeUp
+// TmsMoveShapeDown
 
 procedure TmsMoveShapeDown.ProcessClickInDiagramm;
 begin
