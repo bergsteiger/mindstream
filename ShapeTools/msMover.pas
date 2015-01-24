@@ -75,22 +75,13 @@ const
  cShift = 12;
 
 function TmsMover.AddButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
-var
- l_B : TRectF;
- l_Mid : TPointF;
 begin
  Assert(f_FloatingButtons <> nil);
- l_B := aButton.DrawBounds;
- l_Mid.X := (l_B.Left + l_B.Right) / 2;
- l_Mid.Y := (l_B.Top + l_B.Bottom) / 2;
  Result := f_FloatingButtons.AddShape(
             aToolClass.Create(
              f_Moving,
              TmsShapesGroup.Create([
-              TmsFloatingButtonCircle.Create(l_Mid,
-                                         Max(-(l_B.Left - l_B.Right),
-                                             -(l_B.Top - l_B.Bottom)) / 2
-                                             + cShift / 2 ),
+              TmsFloatingButtonCircle.Create(aButton, cShift),
               aButton
              ])
             )
