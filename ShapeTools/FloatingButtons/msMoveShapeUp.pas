@@ -3,11 +3,12 @@ unit msMoveShapeUp;
 interface
 
 uses
- msShapeTool
+ msShapeTool,
+ msMoveShapeTool
  ;
 
 type
- TmsMoveShapeUp = class(TmsShapeTool)
+ TmsMoveShapeUp = class(TmsMoveShapeTool)
  protected
   procedure ProcessClickInDiagramm; override;
  end;//TmsMoveShapeUp

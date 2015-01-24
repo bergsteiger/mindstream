@@ -71,8 +71,13 @@ uses
   msUpArrow in 'SpecialShapes\ForButtons\Arrows\msUpArrow.pas',
   msDownArrow in 'SpecialShapes\ForButtons\Arrows\msDownArrow.pas',
   msSpecialArrow in 'AbstractShapes\msSpecialArrow.pas',
+  msSpecialDiagonalArrow in 'AbstractShapes\msSpecialDiagonalArrow.pas',
   msLeftArrow in 'SpecialShapes\ForButtons\Arrows\msLeftArrow.pas',
   msRightArrow in 'SpecialShapes\ForButtons\Arrows\msRightArrow.pas',
+  msUpRightArrow in 'SpecialShapes\ForButtons\Arrows\msUpRightArrow.pas',
+  msUpLeftArrow in 'SpecialShapes\ForButtons\Arrows\msUpLeftArrow.pas',
+  msDownRightArrow in 'SpecialShapes\ForButtons\Arrows\msDownRightArrow.pas',
+  msDownLeftArrow in 'SpecialShapes\ForButtons\Arrows\msDownLeftArrow.pas',
   msRemoverIcon in 'SpecialShapes\ForButtons\msRemoverIcon.pas',
   msShapesGroup in 'ContainerShapes\msShapesGroup.pas',
   msPointlessShape in 'AbstractShapes\msPointlessShape.pas',
@@ -94,12 +99,19 @@ uses
   msProxyShape in 'ContainerShapes\msProxyShape.pas',
   msShapeTool in 'ContainerShapes\msShapeTool.pas',
   msMoveShapeUp in 'ShapeTools\FloatingButtons\msMoveShapeUp.pas',
+  msMoveShapeUpLeft in 'ShapeTools\FloatingButtons\msMoveShapeUpLeft.pas',
+  msMoveShapeUpRight in 'ShapeTools\FloatingButtons\msMoveShapeUpRight.pas',
   msMoveShapeDown in 'ShapeTools\FloatingButtons\msMoveShapeDown.pas',
+  msMoveShapeDownRight in 'ShapeTools\FloatingButtons\msMoveShapeDownRight.pas',
+  msMoveShapeDownLeft in 'ShapeTools\FloatingButtons\msMoveShapeDownLeft.pas',
   msMoveShapeLeft in 'ShapeTools\FloatingButtons\msMoveShapeLeft.pas',
   msMoveShapeRight in 'ShapeTools\FloatingButtons\msMoveShapeRight.pas',
   msShapeClass in 'MetaShapes\msShapeClass.pas',
-  msProxyShapeClass in 'MetaShapes\msProxyShapeClass.pas'
-  ;
+  msProxyShapeClass in 'MetaShapes\msProxyShapeClass.pas',
+  msMoveShapeTool in 'ContainerShapes\msMoveShapeTool.pas',
+  msBoundsCorrector in 'ContainerShapes\msBoundsCorrector.pas',
+  msSpecialDiagonalArrowBoundsCorrector in 'ContainerShapes\msSpecialDiagonalArrowBoundsCorrector.pas',
+  msFloatingButtonCircle in 'SpecialShapes\ForButtons\msFloatingButtonCircle.pas';
 
 {$R *.res}
 
