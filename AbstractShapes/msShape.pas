@@ -82,7 +82,8 @@ implementation
 uses
  System.SysUtils,
  msShapeMarshal,
- System.Math.Vectors
+ System.Math.Vectors,
+ msRegisteredShapes
  ;
 
 class function TmsShape.Create(const aCtx: TmsMakeShapeContext): ImsShape;
