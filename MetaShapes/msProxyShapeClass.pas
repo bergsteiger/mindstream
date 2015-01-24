@@ -26,13 +26,15 @@ type
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
  public
-  class function Create(const aShapeClass: MCmsShape): ImsShapeClass;
+  class function Create(const aShapeClass: MCmsShape): ImsShapeClass; overload;
+  class function Create(const aShapeClass: RmsShape): ImsShapeClass; overload;
  end;//TmsProxyShapeClass
 
 implementation
 
 uses
- msShapeCreator
+ msShapeCreator,
+ msRegisteredShapes
  ;
 
 // TmsProxyShapeClass
@@ -46,6 +48,11 @@ end;
 class function TmsProxyShapeClass.Create(const aShapeClass: MCmsShape): ImsShapeClass;
 begin
  Result := CreateInner(aShapeClass);
+end;
+
+class function TmsProxyShapeClass.Create(const aShapeClass: RmsShape): ImsShapeClass;
+begin
+ Result := Create(TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName));
 end;
 
 function TmsProxyShapeClass.IsForToolbar: Boolean;
