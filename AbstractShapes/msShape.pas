@@ -21,6 +21,7 @@ type
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
  strict protected
   function pm_GetStartPoint: TPointF; virtual;
+  function pm_GetShapeClass: ImsShapeClass;
   constructor CreateInner(const aStartPoint: TPointF); virtual;
   procedure SetStartPoint(const aStartPoint: TPointF); virtual;
  protected
@@ -132,6 +133,12 @@ function TmsShape.pm_GetStartPoint: TPointF;
 begin
  Result := TPointF.Create(0, 0);
  Assert(false, 'Abstract method');
+end;
+
+function TmsShape.pm_GetShapeClass: ImsShapeClass;
+begin
+ Result := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
+ Assert(Result <> nil);
 end;
 
 procedure TmsShape.SetStartPoint(const aStartPoint: TPointF);

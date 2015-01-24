@@ -97,8 +97,11 @@ type
   // - ткнули в примитив внутри диаграммы
   function DrawBounds: TRectF;
   function pm_GetStartPoint: TPointF;
+  function pm_GetShapeClass: ImsShapeClass;
   property StartPoint: TPointF
    read pm_GetStartPoint;
+  property ShapeClass: ImsShapeClass
+   read pm_GetShapeClass;
  end;//ImsShape
 
  TmsShapesEnumerator = TEnumerator<ImsShape>;
