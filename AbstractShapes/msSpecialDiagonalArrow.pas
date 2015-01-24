@@ -27,6 +27,7 @@ uses
 
 class function TmsSpecialDiagonalArrow.CreateCompletedInternal(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
 var
+ l_Temp : Extended;
  l_StartPoint: TPointF;
  l_FinishPoint: TPointF;
  l_Diff : TPointF;
@@ -38,6 +39,18 @@ begin
  l_Diff.Y := inherited InitialLength / (ExtentCoeff * 2);
  l_StartPoint := l_Mid - l_Diff;
  l_FinishPoint := l_Mid + l_Diff;
+ if (aStartPoint.X > aFinishPoint.X) then
+ begin
+  l_Temp := l_StartPoint.X;
+  l_StartPoint.X := l_FinishPoint.X;
+  l_FinishPoint.X := l_Temp;
+ end;//aStartPoint.X > aFinishPoint.X
+ if (aStartPoint.Y > aFinishPoint.Y) then
+ begin
+  l_Temp := l_StartPoint.Y;
+  l_StartPoint.Y := l_FinishPoint.Y;
+  l_FinishPoint.Y := l_Temp;
+ end;//aStartPoint.Y > aFinishPoint.Y
  Result := inherited CreateCompletedInternal(l_StartPoint, l_FinishPoint);
 end;
 
