@@ -12,11 +12,15 @@ uses
  msInterfacedRefcounted,
  msInterfaces,
  System.Classes,
- msDiagrammsList
+ msDiagrammsList,
+ Data.DBXJSONReflect
  ;
 
 type
  TmsShape = class abstract(TmsDiagrammsList, ImsShape)
+ strict private
+  [JSONMarshalled(True)]
+  f_ShapeClass : ImsShapeClass;
  private
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
  strict protected
@@ -137,7 +141,9 @@ end;
 
 function TmsShape.pm_GetShapeClass: ImsShapeClass;
 begin
- Result := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
+ if (f_ShapeClass = nil) then
+  f_ShapeClass := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
+ Result := f_ShapeClass;
  Assert(Result <> nil);
 end;
 
