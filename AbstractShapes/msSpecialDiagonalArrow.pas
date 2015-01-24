@@ -29,9 +29,15 @@ class function TmsSpecialDiagonalArrow.CreateCompletedInternal(const aStartPoint
 var
  l_StartPoint: TPointF;
  l_FinishPoint: TPointF;
+ l_Diff : TPointF;
+ l_Mid : TPointF;
 begin
- l_StartPoint := aStartPoint;
- l_FinishPoint := aFinishPoint;
+ l_Mid.X := (aStartPoint.X + aFinishPoint.X) / 2;
+ l_Mid.Y := (aStartPoint.Y + aFinishPoint.Y) / 2;
+ l_Diff.X := inherited InitialLength / (ExtentCoeff * 2);
+ l_Diff.Y := inherited InitialLength / (ExtentCoeff * 2);
+ l_StartPoint := l_Mid - l_Diff;
+ l_FinishPoint := l_Mid + l_Diff;
  Result := inherited CreateCompletedInternal(l_StartPoint, l_FinishPoint);
 end;
 
@@ -43,7 +49,8 @@ end;
 
 class function TmsSpecialDiagonalArrow.InitialLength: Extended;
 begin
- Result := inherited InitialLength / ExtentCoeff;
+ Result := inherited InitialLength;
+ //Result := inherited InitialLength / ExtentCoeff;
  // - вспоминаем теорему Пифагора и делим длину на квадратный корень из двух
 end;
 
