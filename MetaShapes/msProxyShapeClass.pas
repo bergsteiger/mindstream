@@ -70,12 +70,14 @@ end;
 function TmsProxyShapeClass.Creator: ImsShapeCreator;
 begin
  Assert(f_ShapeClass <> nil);
+ Assert(false, 'Не реализовано');
  Result := f_ShapeClass.Creator;
 end;
 
 function TmsProxyShapeClass.Name: String;
 begin
  Assert(f_ShapeClass <> nil);
+ Assert(false, 'Не реализовано');
  Result := f_ShapeClass.Name;
 end;
 
