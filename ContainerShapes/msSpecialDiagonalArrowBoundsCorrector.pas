@@ -18,6 +18,8 @@ uses
  msSpecialDiagonalArrow
  ;
 
+// TmsSpecialDiagonalArrowBoundsCorrector
+
 class function TmsSpecialDiagonalArrowBoundsCorrector.ExtentCoeff: Extended;
 begin
  Result := TmsSpecialDiagonalArrow.ExtentCoeff;
