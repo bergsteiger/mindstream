@@ -36,7 +36,8 @@ begin
  l_Mid.X := (aStartPoint.X + aFinishPoint.X) / 2;
  l_Mid.Y := (aStartPoint.Y + aFinishPoint.Y) / 2;
  l_Diff.X := inherited InitialLength / (ExtentCoeff * 2);
- l_Diff.Y := inherited InitialLength / (ExtentCoeff * 2);
+ l_Diff.Y := l_Diff.X;
+// l_Diff.Y := inherited InitialLength / (ExtentCoeff * 2);
  l_StartPoint := l_Mid - l_Diff;
  l_FinishPoint := l_Mid + l_Diff;
  if (aStartPoint.X > aFinishPoint.X) then
