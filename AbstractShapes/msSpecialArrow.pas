@@ -13,7 +13,7 @@ type
  protected
   class function CreateCompletedInternal(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape; virtual;
  public
-  class function InitialLength: Extended; virtual;
+  class function InitialLength: Extended;
   class procedure CreateCompleted;
   // - метод, который надо скрыть
   class function Create: ImsShape; overload;

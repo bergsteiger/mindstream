@@ -13,7 +13,6 @@ type
  protected
   class function CreateCompletedInternal(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape; override;
  public
-  class function InitialLength: Extended; override;
   class function ExtentCoeff: Extended;
  end;//TmsSpecialDiagonalArrow
 
@@ -58,14 +57,8 @@ end;
 class function TmsSpecialDiagonalArrow.ExtentCoeff: Extended;
 begin
  Result := Sqrt(2);
-// Result := 1.0;
-end;
-
-class function TmsSpecialDiagonalArrow.InitialLength: Extended;
-begin
- Result := inherited InitialLength;
- //Result := inherited InitialLength / ExtentCoeff;
  // - вспоминаем теорему Пифагора и делим длину на квадратный корень из двух
+// Result := 1.0;
 end;
 
 end.
