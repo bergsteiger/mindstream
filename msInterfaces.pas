@@ -180,6 +180,10 @@ type
   function As_ImsDiagrammsHolder: ImsDiagrammsHolder;
  end;//ImsDiagrammsController
 
+ ImsEtalonsHolder = interface
+  procedure DeleteEtalonFile;
+ end;
+
 implementation
 
 // TmsDrawContext
