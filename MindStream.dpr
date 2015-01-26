@@ -67,6 +67,7 @@ uses
   msBlackRectangle in 'ConcreteShapes\msBlackRectangle.pas',
   msPolygonShape in 'AbstractShapes\msPolygonShape.pas',
   msMoverIcon in 'SpecialShapes\ForButtons\msMoverIcon.pas',
+  msMoveIcon in 'SpecialShapes\msMoveIcon.pas',
   msPointedShape in 'AbstractShapes\msPointedShape.pas',
   msUpArrow in 'SpecialShapes\ForButtons\Arrows\msUpArrow.pas',
   msDownArrow in 'SpecialShapes\ForButtons\Arrows\msDownArrow.pas',

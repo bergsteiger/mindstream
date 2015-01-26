@@ -32,7 +32,8 @@ uses
   msSwapParents,
   msShapeRemover,
   msMoverIcon,
-  msRemoverIcon
+  msRemoverIcon,
+  msMoveIcon
   ;
 
 // Важно !!!
@@ -76,6 +77,7 @@ begin
   TmsGreenCircle,
   TmsBlackTriangle,
   TmsBlackRectangle,
+  TmsMoveIcon,
 
   // shape for buttons and SVG Shape
   TmsRemoverIcon
