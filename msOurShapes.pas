@@ -1,4 +1,4 @@
-unit msOurShapes;
+﻿unit msOurShapes;
 
 interface
 
@@ -35,6 +35,8 @@ uses
   msRemoverIcon
   ;
 
+// Важно !!!
+// Все новые примитивы добавлять в конец списка
 procedure RegisterOurShapes;
 begin
  TmsRegisteredShapes.Instance.Register([
@@ -64,9 +66,8 @@ begin
   TmsSwapParents,
   TmsShapeRemover,
 
-  // shapes for buttons
+  // shape for buttons
   TmsMoverIcon,
-  TmsRemoverIcon,
 
   // SVG Shapes
   TmsFolder,
@@ -74,7 +75,10 @@ begin
   // concrete shapes
   TmsGreenCircle,
   TmsBlackTriangle,
-  TmsBlackRectangle
+  TmsBlackRectangle,
+
+  // shape for buttons and SVG Shape
+  TmsRemoverIcon
  ]);
 end;
 
