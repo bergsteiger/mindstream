@@ -77,10 +77,8 @@ begin
   TmsGreenCircle,
   TmsBlackTriangle,
   TmsBlackRectangle,
-  TmsMoveIcon,
-
-  // shape for buttons and SVG Shape
-  TmsRemoverIcon
+  TmsRemoverIcon,
+  TmsMoveIcon
  ]);
 end;
 
