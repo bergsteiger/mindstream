@@ -80,6 +80,7 @@ uses
   msDownRightArrow in 'SpecialShapes\ForButtons\Arrows\msDownRightArrow.pas',
   msDownLeftArrow in 'SpecialShapes\ForButtons\Arrows\msDownLeftArrow.pas',
   msRemoverIcon in 'SpecialShapes\ForButtons\msRemoverIcon.pas',
+  msRemoveIcon in 'SpecialShapes\msRemoveIcon.pas',
   msShapesGroup in 'ContainerShapes\msShapesGroup.pas',
   msPointlessShape in 'AbstractShapes\msPointlessShape.pas',
   ForToolbarShapesTest in 'Tests\Integrated\ForToolbarShapesTest.pas',

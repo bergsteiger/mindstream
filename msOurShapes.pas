@@ -33,6 +33,7 @@ uses
   msShapeRemover,
   msMoverIcon,
   msRemoverIcon,
+  msRemoveIcon,
   msMoveIcon
   ;
 
@@ -74,7 +75,7 @@ begin
   TmsGreenCircle,
   TmsBlackTriangle,
   TmsBlackRectangle,
-  TmsRemoverIcon,
+  TmsRemoveIcon,
   TmsMoveIcon
  ]);
 end;
