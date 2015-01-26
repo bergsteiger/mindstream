@@ -3,7 +3,8 @@
 interface
 
 uses
- msSVGShape
+ msSVGShape,
+ msInterfaces
  ;
 
 type
@@ -11,19 +12,28 @@ type
  // - "папка"
  protected
   function GetPolygonSVG: String; override;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsFolder
 
 implementation
+
+uses
+ System.UITypes
+ ;
 
 // TmsFolder
 
 function TmsRemoverIcon.GetPolygonSVG: String;
 begin
-  Result := 'M 40,40, L 100,40, L 100,80, L 40,80, L 40,40' +
-  // begin UHO
-  'L 40,20' +
-  'L 60, 20' +
-  'L 60, 40';
+ Result := 'M 10,30 L 30,10 L 50,30 L 70,10 L 90,30 L 70,50 L 90,70' +
+           'L 70,90 L 50,70 L 30,90 L 10,70 L 30,50 L 30,50 L 10,30';
+end;
+
+procedure TmsRemoverIcon.TransformDrawOptionsContext(
+  var theCtx: TmsDrawOptionsContext);
+begin
+ inherited;
+ theCtx.rFillColor := TAlphaColorRec.Mediumvioletred;
 end;
 
 end.
