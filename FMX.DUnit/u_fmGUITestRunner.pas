@@ -32,13 +32,15 @@ type
   lblFailure: TLabel;
   lblFailureCount: TLabel;
   lblTimeCount: TLabel;
-    lblRunned: TLabel;
+  lblRunned: TLabel;
+  btnDelEtalon: TSpeedButton;
   procedure FormCreate(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
   procedure btRunAllTestClick(Sender: TObject);
   procedure tvTestTreeChangeCheck(Sender: TObject);
   procedure btnCheckAllClick(Sender: TObject);
   procedure btnUncheckAllClick(Sender: TObject);
+  procedure btnDelEtalonClick(Sender: TObject);
  protected
   FSuite: ITest;
   FTests: TInterfaceList;
@@ -66,7 +68,9 @@ type
   procedure TraverseTree(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
 
  public
-  property Suite: ITest read FSuite write SetSuite;
+  property Suite: ITest
+   read FSuite
+   write SetSuite;
   property TestResult: TTestResult read FTestResult write FTestResult;
 
   // IListener
@@ -85,6 +89,16 @@ type
   procedure Status(aTest: ITest; const aMessage: string);
  end;
 
+type
+ TTestNode = class(TTreeViewItem)
+  private
+   f_Test: ITest;
+  public
+   constructor Create(aParent: TFmxObject; const aTest: ITest);
+   property Test: ITest
+    read f_Test;
+ end;//TTestNode
+
 procedure RunTestModeless(aTest: ITest);
 procedure RunRegisteredTestsModeless;
 
@@ -94,7 +108,10 @@ var
 implementation
 
 uses
- System.TypInfo;
+ System.TypInfo,
+ msInterfaces,
+ msShapeTest
+ ;
 
 {$R *.fmx}
 
@@ -165,6 +182,23 @@ begin
   begin
    assert(aNode <> nil);
    aNode.IsChecked := True;
+  end)
+end;
+
+procedure TfmGUITestRunner.btnDelEtalonClick(Sender: TObject);
+begin
+ TraverseTree(tvTestTree,
+  procedure(const aNode: TTreeViewItem)
+  var
+   l_Test : ImsEtalonsHolder;
+  begin
+   assert(aNode <> nil);
+   l_Test := ImsEtalonsHolder(NodeToTest(aNode));
+   if Supports(l_Test, ImsEtalonsHolder) then
+   begin
+    l_Test.DeleteEtalonFile;
+    aNode.IsChecked := False;
+   end;
   end)
 end;
 
@@ -242,16 +276,6 @@ begin
  lblRunned.Text := IntToStr(f_Runned);
  // assert(False);
 end;
-
-type
- TTestNode = class(TTreeViewItem)
-  private
-   f_Test: ITest;
-  public
-   constructor Create(aParent: TFmxObject; const aTest: ITest);
-   property Test: ITest
-    read f_Test;
- end;//TTestNode
 
 constructor TTestNode.Create(aParent: TFmxObject; const aTest: ITest);
 begin

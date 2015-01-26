@@ -46,10 +46,19 @@ object fmGUITestRunner: TfmGUITestRunner
       Text = 'UnCheck All'
       OnClick = btnUncheckAllClick
     end
+    object btnDelEtalon: TSpeedButton
+      Position.X = 560.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 89.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'buttonstyle'
+      Text = 'DelEtalon'
+      OnClick = btnDelEtalonClick
+    end
   end
   object pnlMain: TPanel
-    Align = Top
-    Position.Y = 40.000000000000000000
+    Align = Client
     Size.Width = 675.000000000000000000
     Size.Height = 281.000000000000000000
     Size.PlatformDefault = False
@@ -64,7 +73,8 @@ object fmGUITestRunner: TfmGUITestRunner
     end
   end
   object pnlBottom: TPanel
-    Align = Client
+    Align = Bottom
+    Position.Y = 321.000000000000000000
     Size.Width = 675.000000000000000000
     Size.Height = 249.000000000000000000
     Size.PlatformDefault = False

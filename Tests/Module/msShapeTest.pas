@@ -228,9 +228,12 @@ begin
 end;
 
 procedure TmsShapeTestPrim.DeleteEtalonFile;
+var
+ l_FileName: string;
 begin
- Assert(false);
- DeleteFile(PWideChar(MakeFileName(TestSerializeMethodName, c_JSON)));
+// Assert(false);
+ l_FileName:= MakeFileName(TestSerializeMethodName, c_JSON);
+ DeleteFile(PWideChar(l_FileName));
 end;
 
 procedure TmsShapeTestPrim.DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
