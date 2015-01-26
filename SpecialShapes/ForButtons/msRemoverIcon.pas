@@ -1,34 +1,46 @@
-unit msRemoverIcon;
+﻿unit msRemoverIcon;
 
 interface
 
 uses
- System.Types,
- msInterfaces,
- msButtonIcon
+ msSVGShape,
+ msInterfaces
  ;
 
 type
- TmsRemoverIcon = class(TmsButtonIcon)
+ TmsRemoverIcon = class(TmsSVGShape)
+ // - "Иконка для удаления фигур"
+ protected
+  function GetPolygonSVG: String; override;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
-  class function Create(const aCenter: TPointF): ImsShape; override;
- end;//TmsRemoverIcon
+  class function IsForToolbar: Boolean; override;
+ end;//TmsFolder
 
 implementation
 
 uses
- msLine,
- msShapesGroup
+ System.UITypes
  ;
 
-// TmsRemoverIcon
+// TmsFolder
 
-class function TmsRemoverIcon.Create(const aCenter: TPointF): ImsShape;
+function TmsRemoverIcon.GetPolygonSVG: String;
 begin
- Result := TmsShapesGroup.Create([
-  TmsLine.CreateCompleted(aCenter, aCenter + TPointF.Create(50, 50)),
-  TmsLine.CreateCompleted(aCenter + TPointF.Create(50, 0), aCenter + TPointF.Create(0, 50))
-  ]);
+ Result := 'M 10,30 L 30,10 L 50,30 L 70,10 L 90,30 L 70,50 L 90,70' +
+           'L 70,90 L 50,70 L 30,90 L 10,70 L 30,50 L 30,50 L 10,30';
+end;
+
+class function TmsRemoverIcon.IsForToolbar: Boolean;
+begin
+ Result := False;
+end;
+
+procedure TmsRemoverIcon.TransformDrawOptionsContext(
+  var theCtx: TmsDrawOptionsContext);
+begin
+ inherited;
+ theCtx.rFillColor := TAlphaColorRec.Mediumvioletred;
 end;
 
 end.
