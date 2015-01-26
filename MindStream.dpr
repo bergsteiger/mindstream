@@ -90,6 +90,7 @@ uses
   msPickerIcon in 'SpecialShapes\ForButtons\msPickerIcon.pas',
   msUpToParentIcon in 'SpecialShapes\ForButtons\msUpToParentIcon.pas',
   msButtonIcon in 'SpecialShapes\ForButtons\msButtonIcon.pas',
+  msFolderToolIcon in 'SpecialShapes\ForButtons\msFolderToolIcon.pas',
   msFolderIcon in 'SpecialShapes\ForButtons\msFolderIcon.pas',
   msSVGShape in 'AbstractShapes\msSVGShape.pas',
   msFolder in 'ConcreteShapes\SVG\msFolder.pas',

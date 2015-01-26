@@ -10,7 +10,7 @@ uses
 type
  TmsButtonIcon = class abstract
  public
-  class function Create: ImsShape; overload; virtual; abstract;
+  class function Create: ImsShape; virtual; abstract;
  end;//TmsButtonIcon
 
 implementation
