@@ -5,14 +5,15 @@ interface
 uses
  msSVGShape,
  msInterfaces,
- msButtonIcon
+ msButtonIcon,
+ msFolderToolIcon
  ;
 
 type
- TmsRemoverIcon = class(TmsButtonIcon)
+ TmsRemoverIcon = class(TmsFolderToolIcon)
  // - "Иконка для удаления фигур"
- public
-  class function Create: ImsShape; override;
+ protected
+  class function ToolIcon: ImsShape; override;
  end;//TmsFolder
 
 implementation
@@ -26,9 +27,9 @@ uses
 
 // TmsRemoverIcon
 
-class function TmsRemoverIcon.Create: ImsShape;
+class function TmsRemoverIcon.ToolIcon: ImsShape;
 begin
- Result := TmsShapesGroup.Create([TmsFolderIcon.Create, TmsRemoveIcon.Create]);
+ Result := TmsRemoveIcon.Create;
 end;
 
 end.
