@@ -112,7 +112,7 @@ end;
 
 class function TmsMover.ButtonShape: ImsShape;
 begin
- Result := TmsMoverIcon.Create(TPointF.Create(50, 50));
+ Result := TmsMoverIcon.Create;
 end;
 
 class function TmsMover.Create(const aCtx: TmsMakeShapeContext): ImsShape;
