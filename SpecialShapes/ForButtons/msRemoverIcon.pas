@@ -1,34 +1,29 @@
-unit msRemoverIcon;
+﻿unit msRemoverIcon;
 
 interface
 
 uses
- System.Types,
- msInterfaces,
- msButtonIcon
+ msSVGShape
  ;
 
 type
- TmsRemoverIcon = class(TmsButtonIcon)
- public
-  class function Create(const aCenter: TPointF): ImsShape; override;
- end;//TmsRemoverIcon
+ TmsRemoverIcon = class(TmsSVGShape)
+ // - "папка"
+ protected
+  function GetPolygonSVG: String; override;
+ end;//TmsFolder
 
 implementation
 
-uses
- msLine,
- msShapesGroup
- ;
+// TmsFolder
 
-// TmsRemoverIcon
-
-class function TmsRemoverIcon.Create(const aCenter: TPointF): ImsShape;
+function TmsRemoverIcon.GetPolygonSVG: String;
 begin
- Result := TmsShapesGroup.Create([
-  TmsLine.CreateCompleted(aCenter, aCenter + TPointF.Create(50, 50)),
-  TmsLine.CreateCompleted(aCenter + TPointF.Create(50, 0), aCenter + TPointF.Create(0, 50))
-  ]);
+  Result := 'M 40,40, L 100,40, L 100,80, L 40,80, L 40,40' +
+  // begin UHO
+  'L 40,20' +
+  'L 60, 20' +
+  'L 60, 40';
 end;
 
 end.
