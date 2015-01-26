@@ -7,13 +7,14 @@ uses
  System.Types,
  System.Math.Vectors,
  msPolygonShape,
- msButtonIcon
+ msButtonIcon,
+ msFolderToolIcon
  ;
 
 type
- TmsMoverIcon = class(TmsButtonIcon)
+ TmsMoverIcon = class(TmsFolderToolIcon)
  public
-  class function Create: ImsShape; override;
+  class function ToolIcon: ImsShape; override;
  end;//TmsPolygonShape
 
 implementation
@@ -26,9 +27,9 @@ uses
 
 // TmsMoverIcon
 
-class function TmsMoverIcon.Create: ImsShape;
+class function TmsMoverIcon.ToolIcon: ImsShape;
 begin
- Result := TmsShapesGroup.Create([TmsFolderIcon.Create, TmsMoveIcon.Create]);
+ Result := TmsMoveIcon.Create;
 end;
 
 end.
