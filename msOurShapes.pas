@@ -67,9 +67,6 @@ begin
   TmsSwapParents,
   TmsShapeRemover,
 
-  // shape for buttons
-  TmsMoverIcon,
-
   // SVG Shapes
   TmsFolder,
 
