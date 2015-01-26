@@ -231,8 +231,7 @@ procedure TmsShapeTestPrim.DeleteEtalonFile;
 var
  l_FileName: string;
 begin
-// Assert(false);
- l_FileName:= MakeFileName(TestSerializeMethodName, c_JSON);
+ l_FileName:= TestResultsFileName + '.etalon' + FileExtension;
  DeleteFile(PWideChar(l_FileName));
 end;
 
