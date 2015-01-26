@@ -31,7 +31,8 @@ uses
   msUpToParent,
   msSwapParents,
   msShapeRemover,
-  msMoverIcon
+  msMoverIcon,
+  msRemoverIcon
   ;
 
 procedure RegisterOurShapes;
@@ -65,6 +66,7 @@ begin
 
   // shapes for buttons
   TmsMoverIcon,
+  TmsRemoverIcon,
 
   // SVG Shapes
   TmsFolder,
