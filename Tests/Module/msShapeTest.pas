@@ -30,7 +30,7 @@ type
    constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; const aShapeClass: MCmsShape);
   end;//TmsShapeTestContext
 
-  TmsShapeTestPrim = class abstract(TmsLoggedTest)
+  TmsShapeTestPrim = class abstract(TmsLoggedTest, ImsEtalonsHolder)
   protected
    f_Context : TmsShapeTestContext;
    f_TestSerializeMethodName : String;
@@ -55,6 +55,9 @@ type
     class procedure CheckShapes(aCheck: TmsShapeClassCheck);
     class function Create(const aContext: TmsShapeTestContext): ITest;
     destructor Destroy; override;
+
+    // ImsEtalonsHolder
+    procedure DeleteEtalonFile;
   end;//TmsShapeTestPrim
 
   RmsShapeTest = class of TmsShapeTestPrim;
@@ -222,6 +225,12 @@ end;
 function TmsShapeTestPrim.TestSerializeMethodName: String;
 begin
  Result := f_TestSerializeMethodName + 'TestSerialize';
+end;
+
+procedure TmsShapeTestPrim.DeleteEtalonFile;
+begin
+ Assert(false);
+ DeleteFile(PWideChar(MakeFileName(TestSerializeMethodName, c_JSON)));
 end;
 
 procedure TmsShapeTestPrim.DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
