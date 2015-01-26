@@ -58,7 +58,6 @@ type
 
     // ImsEtalonsHolder
     procedure DeleteEtalonFile;
-    function ShowTestName: string;
   end;//TmsShapeTestPrim
 
   RmsShapeTest = class of TmsShapeTestPrim;
@@ -157,12 +156,6 @@ end;
 function TmsShapeTestPrim.ShapesCount: Integer;
 begin
  Result := f_Context.rShapesCount;
-end;
-
-function TmsShapeTestPrim.ShowTestName: string;
-begin
-// Result := MakeFileName('Test', 'Test');
- Result := 'Test';
 end;
 
 constructor TmsShapeTestContext.Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; const aShapeClass: MCmsShape);
