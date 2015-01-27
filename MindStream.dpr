@@ -117,7 +117,8 @@ uses
   msFloatingButtonCircle in 'SpecialShapes\ForButtons\msFloatingButtonCircle.pas',
   msCoreUtils in 'Core\msCoreUtils.pas',
   msScalingShape in 'ContainerShapes\msScalingShape.pas',
-  msTextShape in 'ConcreteShapes\msTextShape.pas';
+  msTextShape in 'ConcreteShapes\msTextShape.pas',
+  msRectangularShape in 'AbstractShapes\msRectangularShape.pas';
 
 {$R *.res}
 
