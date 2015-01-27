@@ -217,7 +217,7 @@ begin
 
   if not FileExists(l_FileName) then
   begin
-   ShowMessage('Sorry. Diff tool not find...');
+   ShowMessage('Sorry. diff.cmd not find...');
    Exit;
   end;
 
