@@ -8,6 +8,7 @@ uses
  System.Math.Vectors,
  msPolygonShape
  ;
+
 type
  TmsMoveIcon = class(TmsPolygonShape)
  protected
