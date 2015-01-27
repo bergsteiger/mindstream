@@ -25,6 +25,7 @@ implementation
 constructor TmsScalingShape.CreateInner(const aShape: ImsShape; aScale : Extended);
 begin
  inherited CreateInner(aShape);
+// f_Scale := 1 / aScale;
  f_Scale := aScale;
 end;
 
