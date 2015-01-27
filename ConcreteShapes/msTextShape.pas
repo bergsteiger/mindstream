@@ -37,6 +37,8 @@ begin
                        [TFillTextFlag.ftRightToLeft],
                        TTextAlign.taCenter,
                        TTextAlign.taCenter);
+ if aCtx.rMoving then
+  inherited;
 end;
 
 class function TmsTextShape.InitialHeight: Single;
