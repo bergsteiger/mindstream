@@ -34,7 +34,8 @@ uses
   msMoverIcon,
   msRemoverIcon,
   msRemoveIcon,
-  msMoveIcon
+  msMoveIcon,
+  msTextShape
   ;
 
 // Важно !!!
@@ -76,7 +77,8 @@ begin
   TmsBlackTriangle,
   TmsBlackRectangle,
   TmsRemoveIcon,
-  TmsMoveIcon
+  TmsMoveIcon,
+  TmsTextShape
  ]);
 end;
 
