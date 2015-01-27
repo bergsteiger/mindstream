@@ -40,7 +40,9 @@ uses
  System.SysUtils,
  msPaletteShapeCreator,
  msShapesForToolbar,
- Math
+ Math,
+ System.UITypes,
+ FMX.Types
  ;
 
 // TmsShapeButton
@@ -115,6 +117,17 @@ begin
  try
 //  l_CenterPoint := f_Shape.StartPoint;
   l_B := f_Shape.DrawBounds;
+
+  if f_ShapeClass.IsNullClick then
+   Canvas.Fill.Color := TAlphaColorRec.White
+  else
+   if f_ShapeClass.IsTool then
+    Canvas.Fill.Color := TAlphaColorRec.Lightgreen
+  else
+   Canvas.Fill.Color := TAlphaColorRec.Null;
+
+  Canvas.FillRect(TRectF.Create(0, 0, 40, 40), 0, 0, AllCorners, 100);
+
   l_CenterPoint := l_B.TopLeft;
 
   l_Matrix := TMatrix.Identity;
