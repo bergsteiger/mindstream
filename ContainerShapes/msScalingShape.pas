@@ -21,6 +21,10 @@ type
 
 implementation
 
+uses
+ System.Math.Vectors
+ ;
+
 // TmsScalingShape
 
 constructor TmsScalingShape.CreateInner(const aShape: ImsShape; aScale : Extended);
@@ -41,8 +45,16 @@ begin
 end;
 
 procedure TmsScalingShape.DoDrawTo(const aCtx: TmsDrawContext);
+var
+ l_OriginalMatrix: TMatrix;
 begin
- inherited;
+ l_OriginalMatrix := aCtx.rCanvas.Matrix;
+ try
+  inherited;
+ finally
+   aCtx.rCanvas.SetMatrix(l_OriginalMatrix);
+ // - восстанавливаем ОРИГИНАЛЬНУЮ матрицу
+ end;//try..finally
 end;
 
 end.
