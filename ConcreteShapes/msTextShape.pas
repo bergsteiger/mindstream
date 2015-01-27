@@ -34,7 +34,7 @@ begin
                        Text,
                        false,
                        1,
-                       [],
+                       [TFillTextFlag.ftRightToLeft],
                        TTextAlign.taCenter,
                        TTextAlign.taCenter);
  if aCtx.rMoving then

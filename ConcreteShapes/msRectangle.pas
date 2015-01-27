@@ -15,6 +15,10 @@ uses
 type
  TmsRectangle = class(TmsRectangularShape)
  protected
+
+  class function CornerRadius: Single; override;
+  class function InitialWidth: Single; override;
+  class function InitialHeight: Single; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsRectangle
@@ -22,6 +26,22 @@ type
 implementation
 
 { TmsRectangle }
+
+class function TmsRectangle.InitialHeight: Single;
+begin
+ Result := 90;
+end;
+
+class function TmsRectangle.InitialWidth: Single;
+begin
+ Result := 100;
+end;
+
+class function TmsRectangle.CornerRadius: Single;
+begin
+ Result := 0;
+end;
+
 
 procedure TmsRectangle.DoDrawTo(const aCtx: TmsDrawContext);
 var
