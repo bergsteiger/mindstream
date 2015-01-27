@@ -19,7 +19,7 @@ type
   class function InitialHeight: Single; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
- end;
+ end;//TmsTextShape
 
 implementation
 
