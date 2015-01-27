@@ -116,7 +116,8 @@ uses
   msSpecialDiagonalArrowBoundsCorrector in 'ContainerShapes\msSpecialDiagonalArrowBoundsCorrector.pas',
   msFloatingButtonCircle in 'SpecialShapes\ForButtons\msFloatingButtonCircle.pas',
   msCoreUtils in 'Core\msCoreUtils.pas',
-  msScalingShape in 'ContainerShapes\msScalingShape.pas';
+  msScalingShape in 'ContainerShapes\msScalingShape.pas',
+  msTextShape in 'ConcreteShapes\msTextShape.pas';
 
 {$R *.res}
 
