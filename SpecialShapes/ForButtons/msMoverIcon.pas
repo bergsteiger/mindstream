@@ -30,7 +30,7 @@ uses
 
 class function TmsMoverIcon.ToolIcon: ImsShape;
 begin
- Result := TmsScalingShape.Create(TmsMoveIcon.Create, 0.7);
+ Result := TmsScalingShape.Create(TmsMoveIcon.Create(TPointF.Create(20, 20)), 0.7);
 end;
 
 end.
