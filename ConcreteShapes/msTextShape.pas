@@ -3,20 +3,20 @@ unit msTextShape;
 interface
 
 uses
- msShape,
  System.Types,
  FMX.Graphics,
  FMX.Types,
  System.UITypes,
  msInterfaces,
- msRectangle
+ msRectangularShape
  ;
 
 type
- TmsTextShape = class(TmsRectangle)
+ TmsTextShape = class(TmsRectangularShape)
  protected
   class function InitialWidth: Single; override;
   class function InitialHeight: Single; override;
+  function Text: string; virtual;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;
@@ -31,10 +31,10 @@ var
 begin
  l_msPointContext := DrawBounds;
  aCtx.rCanvas.FillText(l_msPointContext,
-                       'ABC',
+                       Text,
                        false,
                        1,
-                       [TFillTextFlag.ftRightToLeft],
+                       [],
                        TTextAlign.taCenter,
                        TTextAlign.taCenter);
  if aCtx.rMoving then
@@ -49,6 +49,11 @@ end;
 class function TmsTextShape.InitialWidth: Single;
 begin
  Result := 21;
+end;
+
+function TmsTextShape.Text: string;
+begin
+ Result := 'ABC';
 end;
 
 procedure TmsTextShape.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
