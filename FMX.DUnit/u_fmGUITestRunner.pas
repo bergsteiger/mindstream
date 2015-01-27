@@ -34,6 +34,7 @@ type
   lblTimeCount: TLabel;
   lblRunned: TLabel;
     btnDeleteEtalon: TSpeedButton;
+    btnUncheckAllSuccesTest: TSpeedButton;
   procedure FormCreate(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
   procedure btRunAllTestClick(Sender: TObject);
@@ -41,6 +42,7 @@ type
   procedure btnCheckAllClick(Sender: TObject);
   procedure btnUncheckAllClick(Sender: TObject);
   procedure btnDeleteEtalonClick(Sender: TObject);
+    procedure btnUncheckAllSuccesTestClick(Sender: TObject);
  protected
   FSuite: ITest;
   FTests: TInterfaceList;
@@ -66,7 +68,7 @@ type
   procedure ClearResult;
 
   procedure TraverseTree(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
-
+  procedure SetFailure(aFailure: TTestFailure);
  public
   property Suite: ITest
    read FSuite
@@ -93,10 +95,14 @@ type
  TTestNode = class(TTreeViewItem)
   private
    f_Test: ITest;
+   f_Failure: Boolean;
   public
    constructor Create(aParent: TFmxObject; const aTest: ITest);
    property Test: ITest
     read f_Test;
+   property Failure: Boolean
+    read f_Failure
+    write f_Failure;
  end;//TTestNode
 
 procedure RunTestModeless(aTest: ITest);
@@ -129,22 +135,20 @@ begin
  RunTestModeless(registeredTests)
 end;
 
-procedure TfmGUITestRunner.AddError(aFailure: TTestFailure);
-var
- l_ListViewItem: TListViewItem;
+procedure TfmGUITestRunner.SetFailure(aFailure: TTestFailure);
 begin
  SetTreeNodeFont(TestToNode(aFailure.failedTest), c_ColorError);
+ AddFailureNode(aFailure);
+end;
 
- l_ListViewItem := AddFailureNode(aFailure);
+procedure TfmGUITestRunner.AddError(aFailure: TTestFailure);
+begin
+ SetFailure(aFailure);
 end;
 
 procedure TfmGUITestRunner.AddFailure(aFailure: TTestFailure);
-var
- l_ListViewItem: TListViewItem;
 begin
- SetTreeNodeFont(TestToNode(aFailure.failedTest), c_ColorFailure);
-
- l_ListViewItem := AddFailureNode(aFailure);
+ SetFailure(aFailure);
 end;
 
 function TfmGUITestRunner.AddFailureNode(aFailure: TTestFailure): TListViewItem;
@@ -157,6 +161,7 @@ begin
 
  l_Node := TestToNode(aFailure.failedTest);
  Assert(l_Node <> nil);
+ (l_Node as TTestNode).f_Failure := True;
  l_Item.Text := l_Node.ParentItem.Text + '.' + aFailure.failedTest.Name + '; ' + aFailure.thrownExceptionName + '; ' + aFailure.thrownExceptionMessage + '; ' +
    aFailure.LocationInfo + '; ' + aFailure.AddressInfo + '; ' + aFailure.StackTrace;
 
@@ -206,6 +211,18 @@ begin
   begin
    assert(aNode <> nil);
    aNode.IsChecked := False;
+  end)
+end;
+
+procedure TfmGUITestRunner.btnUncheckAllSuccesTestClick(Sender: TObject);
+begin
+ TraverseTree(tvTestTree,
+  procedure(const aNode: TTreeViewItem)
+  begin
+   assert(aNode <> nil);
+   if (not (aNode as TTestNode).Failure) and
+      (aNode.Count = 0) then
+    aNode.IsChecked := False;
   end)
 end;
 

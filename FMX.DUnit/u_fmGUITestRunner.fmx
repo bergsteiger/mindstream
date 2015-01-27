@@ -3,7 +3,7 @@ object fmGUITestRunner: TfmGUITestRunner
   Top = 0
   Caption = 'fmGUITestRunner'
   ClientHeight = 570
-  ClientWidth = 675
+  ClientWidth = 677
   Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -12,15 +12,15 @@ object fmGUITestRunner: TfmGUITestRunner
   OnDestroy = FormDestroy
   DesignerMasterStyle = 0
   object ToolBar1: TToolBar
-    Size.Width = 675.000000000000000000
-    Size.Height = 40.000000000000000000
+    Size.Width = 677.000000000000000000
+    Size.Height = 49.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     object btRunAllTest: TSpeedButton
       Position.X = 24.000000000000000000
       Position.Y = 8.000000000000000000
       Size.Width = 80.000000000000000000
-      Size.Height = 22.000000000000000000
+      Size.Height = 33.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'buttonstyle'
       Text = 'RunAllTest'
@@ -30,7 +30,7 @@ object fmGUITestRunner: TfmGUITestRunner
       Position.X = 104.000000000000000000
       Position.Y = 8.000000000000000000
       Size.Width = 80.000000000000000000
-      Size.Height = 22.000000000000000000
+      Size.Height = 33.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'buttonstyle'
       Text = 'Check All'
@@ -40,33 +40,43 @@ object fmGUITestRunner: TfmGUITestRunner
       Position.X = 184.000000000000000000
       Position.Y = 8.000000000000000000
       Size.Width = 89.000000000000000000
-      Size.Height = 22.000000000000000000
+      Size.Height = 33.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'buttonstyle'
       Text = 'UnCheck All'
       OnClick = btnUncheckAllClick
     end
     object btnDeleteEtalon: TSpeedButton
-      Position.X = 536.000000000000000000
+      Position.X = 416.000000000000000000
       Position.Y = 8.000000000000000000
       Size.Width = 121.000000000000000000
-      Size.Height = 22.000000000000000000
+      Size.Height = 33.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'buttonstyle'
       Text = 'Delete Etalon Files'
       OnClick = btnDeleteEtalonClick
     end
+    object btnUncheckAllSuccesTest: TSpeedButton
+      Position.X = 272.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 145.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'buttonstyle'
+      Text = 'Uncheck All Succes Test'
+      OnClick = btnUncheckAllSuccesTestClick
+    end
   end
   object pnlMain: TPanel
     Align = Client
-    Size.Width = 675.000000000000000000
-    Size.Height = 281.000000000000000000
+    Size.Width = 677.000000000000000000
+    Size.Height = 272.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
     object tvTestTree: TTreeView
       Align = Client
-      Size.Width = 675.000000000000000000
-      Size.Height = 281.000000000000000000
+      Size.Width = 677.000000000000000000
+      Size.Height = 272.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
       OnChangeCheck = tvTestTreeChangeCheck
@@ -75,7 +85,7 @@ object fmGUITestRunner: TfmGUITestRunner
   object pnlBottom: TPanel
     Align = Bottom
     Position.Y = 321.000000000000000000
-    Size.Width = 675.000000000000000000
+    Size.Width = 677.000000000000000000
     Size.Height = 249.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 2
@@ -86,7 +96,7 @@ object fmGUITestRunner: TfmGUITestRunner
       FooterAppearanceClassName = 'TListHeaderObjects'
       Align = Bottom
       Position.Y = 40.000000000000000000
-      Size.Width = 675.000000000000000000
+      Size.Width = 677.000000000000000000
       Size.Height = 209.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
