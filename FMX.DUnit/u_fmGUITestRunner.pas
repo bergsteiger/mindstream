@@ -193,10 +193,9 @@ begin
    l_Test : ImsEtalonsHolder;
   begin
    assert(aNode <> nil);
-   if Supports(NodeToTest(aNode), ImsEtalonsHolder, l_Test) then
-   begin
+   if (aNode.IsChecked and
+       Supports(NodeToTest(aNode), ImsEtalonsHolder, l_Test)) then
     l_Test.DeleteEtalonFile;
-   end;
   end)
 end;
 
