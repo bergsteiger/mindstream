@@ -22,7 +22,7 @@ type
   // - http://18delphi.blogspot.ru/2013/07/2_18.html
   // - http://18delphi.blogspot.ru/2013/07/blog-post_8789.html
  protected
-  function IsClassTypeNamedAs(const aClassName: String): Boolean; virtual;
+  //function IsClassTypeNamedAs(const aClassName: String): Boolean; virtual;
   procedure InstanceAllocated; override;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
  end;//TmsInterfacedRefcounted
@@ -43,9 +43,9 @@ begin
  FRefCount := 1;
 end;
 
-function TmsInterfacedRefcounted.IsClassTypeNamedAs(const aClassName: String): Boolean;
+(*function TmsInterfacedRefcounted.IsClassTypeNamedAs(const aClassName: String): Boolean;
 begin
  Result := (ClassName = aClassName);
-end;
+end;*)
 
 end.

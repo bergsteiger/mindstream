@@ -1,4 +1,4 @@
-unit msOurShapes;
+﻿unit msOurShapes;
 
 interface
 
@@ -20,30 +20,30 @@ uses
   msRedRectangle,
   msGreenRectangle,
   msPolygonShape,
-
-  // utility shapes
+  msBlackTriangle,
+  msBlackRectangle,
+  msGreenCircle,
+  msPointCircle,
+  msSmallTriangle,
+  msFolder,
   msMover,
   msPicker,
   msUpToParent,
   msSwapParents,
   msShapeRemover,
-
-  // special shapes
-  msPointCircle,
-  msSmallTriangle,
-  msGreenCircle,
-
-  // shapes for toolbar buttons
-  msBlackTriangle,
   msMoverIcon,
-
-  // SVG Shapes
-  msFolder
+  msRemoverIcon,
+  msRemoveIcon,
+  msMoveIcon,
+  msTextShape
   ;
 
+// Важно !!!
+// Все новые примитивы добавлять в конец списка
 procedure RegisterOurShapes;
 begin
  TmsRegisteredShapes.Instance.Register([
+  // concrete shapes
   TmsLine,
   TmsRectangle,
   TmsCircle,
@@ -61,7 +61,6 @@ begin
   // special shapes
   TmsPointCircle,
   TmsSmallTriangle,
-  TmsGreenCircle,
 
   // utility shapes
   TmsMover,
@@ -70,12 +69,16 @@ begin
   TmsSwapParents,
   TmsShapeRemover,
 
-  // shapes for buttons
-  TmsBlackTriangle,
-  TmsMoverIcon,
-
   // SVG Shapes
-  TmsFolder
+  TmsFolder,
+
+  // concrete shapes
+  TmsGreenCircle,
+  TmsBlackTriangle,
+  TmsBlackRectangle,
+  TmsRemoveIcon,
+  TmsMoveIcon,
+  TmsTextShape
  ]);
 end;
 

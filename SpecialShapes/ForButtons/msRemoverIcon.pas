@@ -1,34 +1,37 @@
-unit msRemoverIcon;
+﻿unit msRemoverIcon;
 
 interface
 
 uses
- System.Types,
+ msSVGShape,
  msInterfaces,
- msButtonIcon
+ msButtonIcon,
+ msFolderToolIcon
  ;
 
 type
- TmsRemoverIcon = class(TmsButtonIcon)
- public
-  class function Create(const aCenter: TPointF): ImsShape; override;
- end;//TmsRemoverIcon
+ TmsRemoverIcon = class(TmsFolderToolIcon)
+ // - "Иконка для удаления фигур"
+ protected
+  class function ToolIcon: ImsShape; override;
+ end;//TmsFolder
 
 implementation
 
 uses
- msLine,
- msShapesGroup
+ System.Types,
+ System.UITypes,
+ msShapesGroup,
+ msFolderIcon,
+ msRemoveIcon,
+ msScalingShape
  ;
 
 // TmsRemoverIcon
 
-class function TmsRemoverIcon.Create(const aCenter: TPointF): ImsShape;
+class function TmsRemoverIcon.ToolIcon: ImsShape;
 begin
- Result := TmsShapesGroup.Create([
-  TmsLine.CreateCompleted(aCenter, aCenter + TPointF.Create(50, 50)),
-  TmsLine.CreateCompleted(aCenter + TPointF.Create(50, 0), aCenter + TPointF.Create(0, 50))
-  ]);
+ Result := TmsScalingShape.Create(TmsRemoveIcon.Create(TPointF.Create(20, 30)), 0.5);
 end;
 
 end.

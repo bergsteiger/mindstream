@@ -12,15 +12,20 @@ uses
  msInterfacedRefcounted,
  msInterfaces,
  System.Classes,
- msDiagrammsList
+ msDiagrammsList,
+ Data.DBXJSONReflect
  ;
 
 type
  TmsShape = class abstract(TmsDiagrammsList, ImsShape)
+ strict private
+  [JSONMarshalled(True)]
+  f_ShapeClass : ImsShapeClass;
  private
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
  strict protected
   function pm_GetStartPoint: TPointF; virtual;
+  function pm_GetShapeClass: ImsShapeClass;
   constructor CreateInner(const aStartPoint: TPointF); virtual;
   procedure SetStartPoint(const aStartPoint: TPointF); virtual;
  protected
@@ -82,7 +87,8 @@ implementation
 uses
  System.SysUtils,
  msShapeMarshal,
- System.Math.Vectors
+ System.Math.Vectors,
+ msRegisteredShapes
  ;
 
 class function TmsShape.Create(const aCtx: TmsMakeShapeContext): ImsShape;
@@ -131,6 +137,14 @@ function TmsShape.pm_GetStartPoint: TPointF;
 begin
  Result := TPointF.Create(0, 0);
  Assert(false, 'Abstract method');
+end;
+
+function TmsShape.pm_GetShapeClass: ImsShapeClass;
+begin
+ if (f_ShapeClass = nil) then
+  f_ShapeClass := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
+ Result := f_ShapeClass;
+ Assert(Result <> nil);
 end;
 
 procedure TmsShape.SetStartPoint(const aStartPoint: TPointF);

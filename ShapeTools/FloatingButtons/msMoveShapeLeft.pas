@@ -3,11 +3,12 @@ unit msMoveShapeLeft;
 interface
 
 uses
- msShapeTool
+ msShapeTool,
+ msMoveShapeTool
  ;
 
 type
- TmsMoveShapeLeft = class(TmsShapeTool)
+ TmsMoveShapeLeft = class(TmsMoveShapeTool)
  protected
   procedure ProcessClickInDiagramm; override;
  end;//TmsMoveShapeLeft
@@ -18,7 +19,7 @@ uses
  System.Types
  ;
 
-// TmsMoveShapeUp
+// TmsMoveShapeLeft
 
 procedure TmsMoveShapeLeft.ProcessClickInDiagramm;
 begin

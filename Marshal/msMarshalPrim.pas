@@ -51,7 +51,7 @@ begin
   TmsShape.RegisterInMarshal(f_Marshal);
   TmsDiagramm.RegisterInMarshal(f_Marshal);
   TmsDiagramms.RegisterInMarshal(f_Marshal);
-  TmsRegisteredShapes.IterateShapes(
+  TmsRegisteredShapes.Instance.IterateShapes(
    procedure (const aShapeClass: MCmsShape)
    begin
     aShapeClass.RegisterInMarshal(f_Marshal);
@@ -70,7 +70,7 @@ begin
   TmsShape.RegisterInUnMarshal(f_UnMarshal);
   TmsDiagramm.RegisterInUnMarshal(f_UnMarshal);
   TmsDiagramms.RegisterInUnMarshal(f_UnMarshal);
-  TmsRegisteredShapes.IterateShapes(
+  TmsRegisteredShapes.Instance.IterateShapes(
    procedure (const aShapeClass: MCmsShape)
    begin
     aShapeClass.RegisterInUnMarshal(f_UnMarshal);

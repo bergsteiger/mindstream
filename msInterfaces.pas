@@ -83,6 +83,8 @@ type
    read pm_GetCount;
  end;//ImsDiagrammsList
 
+ ImsShapeClass = interface;
+
  ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
@@ -95,8 +97,11 @@ type
   // - ткнули в примитив внутри диаграммы
   function DrawBounds: TRectF;
   function pm_GetStartPoint: TPointF;
+  function pm_GetShapeClass: ImsShapeClass;
   property StartPoint: TPointF
    read pm_GetStartPoint;
+  property ShapeClass: ImsShapeClass
+   read pm_GetShapeClass;
  end;//ImsShape
 
  TmsShapesEnumerator = TEnumerator<ImsShape>;
@@ -174,6 +179,11 @@ type
   procedure DrawTo(const aCanvas: TCanvas);
   function As_ImsDiagrammsHolder: ImsDiagrammsHolder;
  end;//ImsDiagrammsController
+
+ ImsEtalonsHolder = interface
+ ['{1758A741-7AB3-404C-ADC0-FF6DDD815535}']
+  procedure DeleteEtalonFile;
+ end;
 
 implementation
 

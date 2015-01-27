@@ -56,7 +56,17 @@ uses
  msMoveShapeLeft,
  msMoveShapeRight,
  msShapeRemover,
- msRemoverIcon
+ msRemoverIcon,
+ msUpRightArrow,
+ msUpLeftArrow,
+ msDownRightArrow,
+ msDownLeftArrow,
+ msSpecialDiagonalArrowBoundsCorrector,
+ msMoveShapeDownRight,
+ msMoveShapeDownLeft,
+ msMoveShapeUpLeft,
+ msMoveShapeUpRight,
+ msFloatingButtonCircle
  ;
 
 // TmsMover
@@ -65,22 +75,13 @@ const
  cShift = 12;
 
 function TmsMover.AddButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
-var
- l_B : TRectF;
- l_Mid : TPointF;
 begin
  Assert(f_FloatingButtons <> nil);
- l_B := aButton.DrawBounds;
- l_Mid.X := (l_B.Left + l_B.Right) / 2;
- l_Mid.Y := (l_B.Top + l_B.Bottom) / 2;
  Result := f_FloatingButtons.AddShape(
             aToolClass.Create(
              f_Moving,
              TmsShapesGroup.Create([
-              TmsCircleWithRadius.Create(l_Mid,
-                                         Max(-(l_B.Left - l_B.Right),
-                                             -(l_B.Top - l_B.Bottom)) / 2
-                                             + cShift / 2 ),
+              TmsFloatingButtonCircle.Create(aButton, cShift),
               aButton
              ])
             )
@@ -103,12 +104,15 @@ begin
  aController.AddShape(AddButton(TmsMoveShapeDown, TmsDownArrow.Create(TPointF.Create(l_Mid.X, l_B.Bottom + cShift))));
  aController.AddShape(AddButton(TmsMoveShapeLeft, TmsLeftArrow.Create(TPointF.Create(l_B.Left - TmsSpecialArrow.InitialLength - cShift, l_Mid.Y))));
  aController.AddShape(AddButton(TmsMoveShapeRight, TmsRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_Mid.Y))));
- aController.AddShape(AddButton(TmsShapeTool, TmsRemoverIcon.Create(TPointF.Create(l_B.Right + cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift))));
+ aController.AddShape(AddButton(TmsMoveShapeUpRight, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsUpRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift)))));
+ aController.AddShape(AddButton(TmsMoveShapeUpLeft, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsUpLeftArrow.Create(TPointF.Create(l_B.Left - TmsSpecialArrow.InitialLength - cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift)))));
+ aController.AddShape(AddButton(TmsMoveShapeDownRight, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsDownRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_B.Bottom + cShift)))));
+ aController.AddShape(AddButton(TmsMoveShapeDownLeft, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsDownLeftArrow.Create(TPointF.Create(l_B.Left - cShift, l_B.Bottom + cShift)))));
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
 begin
- Result := TmsMoverIcon.Create(TPointF.Create(50, 50));
+ Result := TmsMoverIcon.Create;
 end;
 
 class function TmsMover.Create(const aCtx: TmsMakeShapeContext): ImsShape;

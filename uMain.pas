@@ -66,29 +66,27 @@ begin
 end;
 
 procedure TfmMain.CreateToolBar(const aPanelWidth: Single);
-
- function GetColumnCount: Integer;
- begin//GetColumnCount
-  Result := Round(aPanelWidth) div TmsPaletteShapeCreator.ButtonSize;
- end;//GetColumnCount
-
 var
- l_RmsShape: MCmsShape;
-
  l_Row, l_Column : Integer;
 begin
  l_Row := 0;
  l_Column := 0;
- for l_RmsShape in TmsShapesForToolbar.Instance do
- begin
-  pnlToolBar.AddObject(TmsShapeButton.Create(pnlToolBar, l_RmsShape, cbShapes, l_Column, l_Row, FDiagrammsController.As_ImsDiagrammsHolder));
-  Inc(l_Column);
-  if (l_Column > GetColumnCount-1) then
+ TmsShapesForToolbar.Instance.IterateShapes(
+  procedure (const aShapeClass : MCmsShape)
+   function GetColumnCount: Integer;
+   begin//GetColumnCount
+    Result := Round(aPanelWidth) div TmsPaletteShapeCreator.ButtonSize;
+   end;//GetColumnCount
   begin
-   l_Column := 0;
-   Inc(l_Row);
-  end;//l_Column > GetColumnCount-1
- end;//for l_RmsShape in TmsShapesForToolbar.Instance
+   pnlToolBar.AddObject(TmsShapeButton.Create(pnlToolBar, aShapeClass, cbShapes, l_Column, l_Row, FDiagrammsController.As_ImsDiagrammsHolder));
+   Inc(l_Column);
+   if (l_Column > GetColumnCount-1) then
+   begin
+    l_Column := 0;
+    Inc(l_Row);
+   end;//l_Column > GetColumnCount-1
+  end
+ );
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
