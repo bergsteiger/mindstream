@@ -9,7 +9,7 @@ uses
 type
  TmsSpecialDiagonalArrowBoundsCorrector = class(TmsBoundsCorrector)
  protected
-  class function ExtentCoeff: Extended; override;
+  function ExtentCoeff: Extended; override;
  end;//TmsSpecialDiagonalArrowBoundsCorrector
 
 implementation
@@ -20,7 +20,7 @@ uses
 
 // TmsSpecialDiagonalArrowBoundsCorrector
 
-class function TmsSpecialDiagonalArrowBoundsCorrector.ExtentCoeff: Extended;
+function TmsSpecialDiagonalArrowBoundsCorrector.ExtentCoeff: Extended;
 begin
  Result := TmsSpecialDiagonalArrow.ExtentCoeff;
 // Result := 1.0;
