@@ -34,11 +34,18 @@ begin
                        Text,
                        false,
                        1,
-                       [TFillTextFlag.ftRightToLeft],
+                       [],
                        TTextAlign.taCenter,
                        TTextAlign.taCenter);
  if aCtx.rMoving then
-  inherited;
+ begin
+  aCtx.rCanvas.DrawRect(l_msPointContext,
+                   0{CornerRadius},
+                   0{CornerRadius},
+                   AllCorners,
+                   1,
+                   TCornerType.Round);
+ end;//aCtx.rMoving
 end;
 
 class function TmsTextShape.InitialHeight: Single;
