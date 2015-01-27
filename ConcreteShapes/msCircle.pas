@@ -45,8 +45,6 @@ var
  l_x0, l_y0, l_a, l_b : Integer;
  l_Rect : TRectF;
 begin
- Result := False;
-
  l_Rect := DrawBounds;
 
  l_StartRectPoint := l_Rect.TopLeft;

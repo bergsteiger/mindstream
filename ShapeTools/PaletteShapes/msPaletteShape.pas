@@ -17,12 +17,12 @@ type
   f_OtherShapeClass : MCmsShape;
   f_Proxy : ImsShape;
  protected
-  constructor CreateInner(const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF);
+  constructor CreateInner(const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF); reintroduce;
   class function Create(const anOtherShapeClass: MCmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
-  function IsClassTypeNamedAs(const aClassName: String): Boolean; override;
-  function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
+  //function IsClassTypeNamedAs(const aClassName: String): Boolean; override;
   function GetDrawBounds: TRectF; override;
  public
+  function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
   procedure DrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsPaletteShape
 
@@ -61,10 +61,10 @@ begin
  Result := CreateInner(anOtherShapeClass, aCtx.rStartPoint);
 end;
 
-function TmsPaletteShape.IsClassTypeNamedAs(const aClassName: String): Boolean;
+(*function TmsPaletteShape.IsClassTypeNamedAs(const aClassName: String): Boolean;
 begin
  Result := (f_OtherShapeClass.Name = aClassName);
-end;
+end;*)
 
 function TmsPaletteShape.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
 begin

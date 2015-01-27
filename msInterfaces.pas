@@ -28,6 +28,7 @@ type
  // ј вот с UML - мы его ѕќ“ќћ —√≈Ќ≈–»–”≈ћ
 
  TmsDrawContext  = record
+ // [—осто€ние (шаблон проектировани€)|https://ru.wikipedia.org/wiki/%D0%A1%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D0%B5_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)]
  //  онтекст рисовани€.
  // "Ћирика" - тут - http://habrahabr.ru/post/170125/
  // Ќу и "св€занное" - https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%B0%D1%82%D0%B5%D0%B3%D0%B8%D1%8F_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
@@ -83,25 +84,34 @@ type
    read pm_GetCount;
  end;//ImsDiagrammsList
 
+ ImsShapeClass = interface;
+
  ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean;
+  function IsNeedsMouseUp : Boolean;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean;
-  function ContainsPt(const aPoint: TPointF): Boolean;
+  function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function ClickInDiagramm: Boolean;
   // - ткнули в примитив внутри диаграммы
   function DrawBounds: TRectF;
+  procedure MouseMove(const aHolder: ImsDiagrammsHolder; const aPoint: TPointF);
+  // - действите нажатии
   function pm_GetStartPoint: TPointF;
+  function pm_GetShapeClass: ImsShapeClass;
   property StartPoint: TPointF
    read pm_GetStartPoint;
+  property ShapeClass: ImsShapeClass
+   read pm_GetShapeClass;
  end;//ImsShape
 
  TmsShapesEnumerator = TEnumerator<ImsShape>;
 
  ImsShapeCreator = interface
+ // [‘абричный_метод_(шаблон_проектировани€)|https://ru.wikipedia.org/wiki/%D0%A4%D0%B0%D0%B1%D1%80%D0%B8%D1%87%D0%BD%D1%8B%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)]
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
  end;//ImsShapeCreator
 
@@ -114,6 +124,12 @@ type
   // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
   procedure SwapParents;
   // - сигнализируем о том, что надо ѕќћ≈Ќя“№ местами –ќƒ»“≈Ћ№— »≈ диаграммы
+  procedure Scroll(const aDirection: TPointF);
+                // ^ - не стесн€йтесь ставить const перед запис€ми.
+                //  “очнее ставьте ќЅя«ј“≈Ћ№Ќќ !!!2
+  // - скроллинг диаграммы на дельту
+  procedure ResetOrigin;
+  // - восстанавливаем начальную систему координат
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
   property CurrentDiagramms : ImsDiagrammsList
@@ -147,6 +163,8 @@ type
   function Get_Name: String;
   procedure Invalidate;
   procedure ProcessClick(const aClickContext: TmsClickContext);
+  procedure MouseUp(const aClickContex: TmsClickContext);
+  procedure MouseMove(const aShift: TShiftState; const aClickContex: TmsClickContext);
   procedure Clear;
   procedure DrawTo(const aCanvas: TCanvas);
   procedure SaveToPng(const aFileName: String);
@@ -154,6 +172,8 @@ type
   procedure RemoveShape(const aShape: ImsShape);
   function GetEnumerator: TmsShapesEnumerator;
   function ItemsCount: Integer;
+  function FirstShape: ImsShape;
+  function ShapesController: ImsShapesController;
   property Name: String
   read Get_Name;
  end;//ImsDiagramm

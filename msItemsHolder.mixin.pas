@@ -29,6 +29,7 @@
   function pm_GetItems: TmsItemsList;
   procedure pm_SetItems(aValue: TmsItemsList);
   class procedure RegisterItemsLike(aLambda: TmsRttiFieldLambda);
+ protected
   function ItemsCount: Integer;
  public
   constructor Create;

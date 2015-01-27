@@ -12,15 +12,20 @@ uses
  msInterfacedRefcounted,
  msInterfaces,
  System.Classes,
- msDiagrammsList
+ msDiagrammsList,
+ Data.DBXJSONReflect
  ;
 
 type
  TmsShape = class abstract(TmsDiagrammsList, ImsShape)
+ strict private
+  [JSONMarshalled(True)]
+  f_ShapeClass : ImsShapeClass;
  private
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
  strict protected
   function pm_GetStartPoint: TPointF; virtual;
+  function pm_GetShapeClass: ImsShapeClass;
   constructor CreateInner(const aStartPoint: TPointF); virtual;
   procedure SetStartPoint(const aStartPoint: TPointF); virtual;
  protected
@@ -29,9 +34,14 @@ type
   function IsNeedsSecondClick : Boolean; virtual;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
+  function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
+  function IsNeedsMouseUp : Boolean; virtual;
+  //- примитив требует отслеживания MouseUp
+  procedure MouseMove(const aHolder: ImsDiagrammsHolder; const aPoint: TPointF); virtual;
+  // - действие при MouseMove
  protected
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
  public
@@ -59,13 +69,13 @@ type
   // - ткнули в примитив внутри диаграммы
   function GetDrawBounds: TRectF; virtual;
   function DrawBounds: TRectF;
+  class function IsLineLike: Boolean; virtual;
  public
   procedure DrawTo(const aCtx: TmsDrawContext); virtual;
   property StartPoint : TPointF
    read pm_GetStartPoint;
   class function IsTool: Boolean; virtual;
   class function IsForToolbar: Boolean; virtual;
-  class function IsLineLike: Boolean; virtual;
   class function IsNullClick: Boolean; virtual;
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);
@@ -82,17 +92,27 @@ implementation
 uses
  System.SysUtils,
  msShapeMarshal,
- System.Math.Vectors
+ System.Math.Vectors,
+ msRegisteredShapes,
+ msAppLog
  ;
 
 class function TmsShape.Create(const aCtx: TmsMakeShapeContext): ImsShape;
 begin
  Result := Create(aCtx.rStartPoint);
+ TmsAppLog.Instance.ToLog('Create object ' + self.ClassName);
 end;
 
 class function TmsShape.Create(const aStartPoint: TPointF): ImsShape;
 begin
  Result := CreateInner(aStartPoint);
+end;
+
+function TmsShape.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
+begin
+ Result := ContainsPt(aPoint);
+ if Result then
+  theShape := Self;
 end;
 
 function TmsShape.ContainsPt(const aPoint: TPointF): Boolean;
@@ -112,9 +132,19 @@ begin
  Assert(false, 'Примитив ' + ClassName + ' не может быть завершён');
 end;
 
+procedure TmsShape.MouseMove(const aHolder: ImsDiagrammsHolder; const aPoint: TPointF);
+begin
+ // Ничего не делаем, специально
+end;
+
 procedure TmsShape.MoveTo(const aFinishPoint: TPointF);
 begin
  SetStartPoint(aFinishPoint);
+end;
+
+function TmsShape.IsNeedsMouseUp: Boolean;
+begin
+ Result := false;
 end;
 
 function TmsShape.IsNeedsSecondClick : Boolean;
@@ -131,6 +161,14 @@ function TmsShape.pm_GetStartPoint: TPointF;
 begin
  Result := TPointF.Create(0, 0);
  Assert(false, 'Abstract method');
+end;
+
+function TmsShape.pm_GetShapeClass: ImsShapeClass;
+begin
+ if (f_ShapeClass = nil) then
+  f_ShapeClass := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
+ Result := f_ShapeClass;
+ Assert(Result <> nil);
 end;
 
 procedure TmsShape.SetStartPoint(const aStartPoint: TPointF);

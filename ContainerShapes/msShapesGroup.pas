@@ -14,13 +14,15 @@ uses
 
 type
  TmsShapesGroup = class(TmsPointlessShape)
+ // [Декоратор (шаблон проектирования)|https://ru.wikipedia.org/wiki/%D0%94%D0%B5%D0%BA%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)]
+ // [Компоновщик (шаблон проектирования)|https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%BE%D0%B2%D1%89%D0%B8%D0%BA_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)]
  private
   f_Shapes : TmsShapesList;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
-  function ContainsPt(const aPoint: TPointF): Boolean; override;
-  constructor CreateInner(const aShapes: array of ImsShape);
+  function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
+  constructor CreateInner(const aShapes: array of ImsShape); reintroduce;
  public
   class function Create(const aShapes: array of ImsShape): ImsShape;
   procedure Cleanup; override;
@@ -86,18 +88,19 @@ begin
  end;//for l_Shape
 end;
 
-function TmsShapesGroup.ContainsPt(const aPoint: TPointF): Boolean;
+function TmsShapesGroup.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
 var
  l_Shape : ImsShape;
 begin
  Assert(f_Shapes <> nil);
  Result := false;
  for l_Shape in f_Shapes do
-  if l_Shape.ContainsPt(aPoint) then
+  if l_Shape.HitTest(aPoint, theShape) then
   begin
    Result := true;
+   theShape := Self;
    Exit;
-  end;//l_Shape.ContainsPt(aPoint)
+  end;//l_Shape.HitTest(aPoint, theShape)
 end;
 
 end.

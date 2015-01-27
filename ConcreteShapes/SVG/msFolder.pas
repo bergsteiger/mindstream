@@ -3,13 +3,7 @@
 interface
 
 uses
- msSVGShape,
- System.Types,
- System.Math.Vectors,
- FMX.Graphics,
- System.SysUtils,
- msInterfaces,
- System.UITypes
+ msSVGShape
  ;
 
 type

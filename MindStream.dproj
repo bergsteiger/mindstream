@@ -239,6 +239,7 @@
         <DCCReference Include="Tests\Module\TestmsJsonFormatter.pas"/>
         <DCCReference Include="msDiagrammStack.pas"/>
         <DCCReference Include="Tests\Module\TestSaveToPNG.pas"/>
+        <DCCReference Include="Tests\Module\TestSaveMoverToPNG.pas"/>
         <DCCReference Include="Tests\Module\msTestConstants.pas"/>
         <DCCReference Include="ShapeButtons\msShapeButton.pas"/>
         <DCCReference Include="ShapeCreators\msCompletedShapeCreator.pas"/>
@@ -246,17 +247,25 @@
         <DCCReference Include="ShapeTools\msNullClickShape.pas"/>
         <DCCReference Include="ShapeTools\PaletteShapes\msPaletteShape.pas"/>
         <DCCReference Include="ShapeTools\msShapeRemover.pas"/>
-        <DCCReference Include="SpecialShapes\ForButtons\msGreenCircle.pas"/>
-        <DCCReference Include="ConcreteShapes\ForButtons\msBlackTriangle.pas"/>
+        <DCCReference Include="ConcreteShapes\msGreenCircle.pas"/>
+        <DCCReference Include="ConcreteShapes\msBlackTriangle.pas"/>
+        <DCCReference Include="ConcreteShapes\msBlackRectangle.pas"/>
         <DCCReference Include="AbstractShapes\msPolygonShape.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msMoverIcon.pas"/>
+        <DCCReference Include="SpecialShapes\msMoveIcon.pas"/>
         <DCCReference Include="AbstractShapes\msPointedShape.pas"/>
-        <DCCReference Include="SpecialShapes\ForButtons\msUpArrow.pas"/>
-        <DCCReference Include="SpecialShapes\ForButtons\msDownArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msUpArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msDownArrow.pas"/>
         <DCCReference Include="AbstractShapes\msSpecialArrow.pas"/>
-        <DCCReference Include="SpecialShapes\ForButtons\msLeftArrow.pas"/>
-        <DCCReference Include="SpecialShapes\ForButtons\msRightArrow.pas"/>
+        <DCCReference Include="AbstractShapes\msSpecialDiagonalArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msLeftArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msRightArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msUpRightArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msUpLeftArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msDownRightArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msDownLeftArrow.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msRemoverIcon.pas"/>
+        <DCCReference Include="SpecialShapes\msRemoveIcon.pas"/>
         <DCCReference Include="ContainerShapes\msShapesGroup.pas"/>
         <DCCReference Include="AbstractShapes\msPointlessShape.pas"/>
         <DCCReference Include="Tests\Integrated\ForToolbarShapesTest.pas"/>
@@ -266,6 +275,7 @@
         <DCCReference Include="SpecialShapes\ForButtons\msPickerIcon.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msUpToParentIcon.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msButtonIcon.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msFolderToolIcon.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msFolderIcon.pas"/>
         <DCCReference Include="AbstractShapes\msSVGShape.pas"/>
         <DCCReference Include="ConcreteShapes\SVG\msFolder.pas"/>
@@ -277,10 +287,37 @@
         <DCCReference Include="ContainerShapes\msProxyShape.pas"/>
         <DCCReference Include="ContainerShapes\msShapeTool.pas"/>
         <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeUp.pas"/>
+        <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeUpLeft.pas"/>
+        <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeUpRight.pas"/>
         <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeDown.pas"/>
+        <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeDownRight.pas"/>
+        <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeDownLeft.pas"/>
         <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeLeft.pas"/>
         <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeRight.pas"/>
         <DCCReference Include="MetaShapes\msShapeClass.pas"/>
+        <DCCReference Include="MetaShapes\msProxyShapeClass.pas"/>
+        <DCCReference Include="ContainerShapes\msMoveShapeTool.pas"/>
+        <DCCReference Include="ContainerShapes\msBoundsCorrector.pas"/>
+        <DCCReference Include="ContainerShapes\msSpecialDiagonalArrowBoundsCorrector.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msFloatingButtonCircle.pas"/>
+        <DCCReference Include="Core\msCoreUtils.pas"/>
+        <DCCReference Include="ContainerShapes\msScalingShape.pas"/>
+        <DCCReference Include="ConcreteShapes\msTextShape.pas"/>
+        <DCCReference Include="AbstractShapes\msRectangularShape.pas"/>
+        <DCCReference Include="FMX.DUnit\FMX.DUnit.Interfaces.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeUp.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShape.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeDown.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeRight.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeLeft.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeUpLeft.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeUpRight.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeDownLeft.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeDownRight.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapePrim.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeResetOrigin.pas"/>
+        <DCCReference Include="ShapeTools\msScrollingTool.pas"/>
+        <DCCReference Include="Core\msAppLog.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>
@@ -356,6 +393,74 @@
         <None Include="ModelSupport_MindStream\msCompletedShapeCreator\default.txaPackage"/>
         <None Include="ModelSupport_MindStream\msGreenCircle\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msBlackTriangle\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msUpLeftArrow\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msRightArrow\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\FMX\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msScrollShapeUp\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msLoggedTest\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msSwapParentsIcon\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msScrollShapeUpRight\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msMoveShapeDownLeft\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msCircleWithRadius\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msSpecialDiagonalArrow\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msTextShape\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msRectangularShape\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msScrollShapeDownLeft\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msScrollShapePrim\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msMoveShapeTool\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msMoveShapeLeft\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msLeftArrow\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msScrollShapeDown\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msCoreUtils\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msRegisteredShapesTestPrim\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msShapesList\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msMoverIcon\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msMoveShapeRight\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msScrollShapeDownRight\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msProxyShapeClass\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msMoveShapeUpLeft\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msMoveShapeUp\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msBlackRectangle\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msScrollShapeUpLeft\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msUpToParentIcon\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msScalingShape\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msFolderToolIcon\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msProxyShape\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msShapeClass\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msShapesGroup\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msFolder\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msUpArrow\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msSpecialArrow\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msMoveIcon\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msRemoverIcon\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msMoveShapeUpRight\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msFolderIcon\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msPickerIcon\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msDownRightArrow\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msFloatingButtonCircle\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msSVGShape\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msScrollShapeResetOrigin\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msUpRightArrow\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msDownLeftArrow\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msMoveShapeDownRight\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msPointlessShape\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msBoundsCorrector\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msScrollShape\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msScrollShapeRight\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msMoveShapeDown\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msPointedShape\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msButtonIcon\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msObject\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msPolygonShape\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msShapeTool\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msShapeClassList\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msSpecialDiagonalArrowBoundsCorrector\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msDownArrow\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msRemoveIcon\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\msScrollShapeLeft\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\FMX\DUnit\default.txvpck"/>
+        <None Include="ModelSupport_MindStream\FMX\DUnit\Interfaces\default.txaPackage"/>
+        <None Include="ModelSupport_MindStream\Class Diagram.txvcls"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -428,25 +533,19 @@
                 </Source>
             </Delphi.Personality>
             <Deployment>
-                <DeployFile LocalName="ModelSupport_MindStream\msRoundedRectangle\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="Win32\Debug\MindStream.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>MindStream.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msWatchedObjectInstance\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msTestConstants\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msTestConstants\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msTextShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -464,19 +563,25 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msCompletedShapeCreator\default.txaPackage" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msSVGShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msNullClickShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msUpLeftArrow\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msDiagrammStack\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msMoveIcon\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msFloatingButtonCircle\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -488,25 +593,25 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\TestMsCircle\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msSpecialDiagonalArrowBoundsCorrector\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msOurShapes\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msParametrizedShapeTestSuite\default.txaPackage" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msBlackRectangle\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\msInterfacedNonRefcounted\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msScrollShapeDownLeft\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -524,7 +629,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msRectangle\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msRedRectangle\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -536,7 +641,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msRedRectangle\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msScrollShapePrim\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -548,31 +653,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msTool\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msGreenRectangle\default.txaPackage" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\TestMsRectangle\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msShapeCreator\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msSerializeController\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msSpecialDiagonalArrow\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -602,19 +689,25 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msInterfaces\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msButtonIcon\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msGreenCircle\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msShapeClassList\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msDashLine\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msDownArrow\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msRemoveIcon\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -626,25 +719,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msScrollShapeDownRight\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\msSwapParents\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msDotLine\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msInterfacedRefcounted\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -656,7 +737,19 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msSerializeInterfaces\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msScrollShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msMoveShapeLeft\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msMoveShapeUpLeft\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -674,13 +767,19 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msPicker\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msShapesGroup\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\msStreamUtils\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msUpToParentIcon\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -710,7 +809,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msPaletteShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msFolderToolIcon\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -722,19 +821,25 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msShapeRemover\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msRemoverIcon\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msParametrizedShapeTestSuite\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msFolderIcon\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\msDiagrammsMarshal\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msMoveShapeDownRight\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -754,7 +859,19 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\TestmsJsonFormatter\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msCircleWithRadius\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msMoveShapeTool\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msScrollShapeDown\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -767,6 +884,414 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\msDiagramm\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msLeftArrow\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msShapeTool\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msLine\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msCompletedShapeCreator\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msMover\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msPaletteShapeCreator\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msDownRightArrow\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msPointCircle\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\MindStream\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msUpRightArrow\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\Class Diagram.txvcls" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\TestmsSerializeController\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msScalingShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msShapeTest\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msShapesList\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\FirstTest\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msRoundedRectangle\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msCompletedShapeCreator\default.txaPackage" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msWatchedObjectInstance\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\FMX\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msRegisteredShapesTestPrim\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msScrollShapeUpLeft\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msScrollShapeRight\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msPolygonShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msNullClickShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msDiagrammStack\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msScrollShapeResetOrigin\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\TestMsCircle\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msOurShapes\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msBoundsCorrector\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msParametrizedShapeTestSuite\default.txaPackage" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msRectangularShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msRectangle\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msGreenRectangle\default.txaPackage" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\FMX\DUnit\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msTool\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msRightArrow\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msShapeCreator\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msSerializeController\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msPointlessShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msShapeClass\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msInterfaces\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msGreenCircle\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msScrollShapeUpRight\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msDashLine\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msCoreUtils\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msProxyShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msDotLine\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msInterfacedRefcounted\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msScrollShapeUp\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msSerializeInterfaces\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msSpecialArrow\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msMoveShapeRight\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msPicker\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msShapeRemover\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msPaletteShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msFolder\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msSwapParentsIcon\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msParametrizedShapeTestSuite\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msUpArrow\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msMoveShapeUpRight\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msObject\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\TestmsJsonFormatter\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msPointedShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msLoggedTest\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msDownLeftArrow\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -790,25 +1315,19 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msLine\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\msBlackTriangle\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msCompletedShapeCreator\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\FMX\DUnit\Interfaces\default.txaPackage" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msProxyShapeClass\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -826,37 +1345,37 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msMover\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msMoveShapeUp\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msPaletteShapeCreator\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msPickerIcon\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msPointCircle\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msMoveShapeDown\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\MindStream\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msScrollShapeLeft\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msMoverIcon\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\msInvalidators\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\TestmsSerializeController\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -874,13 +1393,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msShapeTest\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\FirstTest\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msMoveShapeDownLeft\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
