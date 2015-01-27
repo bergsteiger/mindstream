@@ -22,14 +22,15 @@ implementation
 uses
  msShapesGroup,
  msFolderIcon,
- msMoveIcon
+ msMoveIcon,
+ msScalingShape
  ;
 
 // TmsMoverIcon
 
 class function TmsMoverIcon.ToolIcon: ImsShape;
 begin
- Result := TmsMoveIcon.Create;
+ Result := TmsScalingShape.Create(TmsMoveIcon.Create, 0.7);
 end;
 
 end.
