@@ -47,9 +47,13 @@ end;
 procedure TmsScalingShape.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_OriginalMatrix: TMatrix;
+ l_Matrix: TMatrix;
 begin
  l_OriginalMatrix := aCtx.rCanvas.Matrix;
  try
+  l_Matrix := TMatrix.CreateScaling(f_Scale, f_Scale);
+  l_Matrix := l_Matrix * l_OriginalMatrix;
+  aCtx.rCanvas.SetMatrix(l_Matrix);
   inherited;
  finally
    aCtx.rCanvas.SetMatrix(l_OriginalMatrix);
