@@ -14,6 +14,7 @@ type
  protected
   function ExtentCoeff: Extended; override;
   constructor CreateInner(const aShape: ImsShape; aScale : Extended);
+  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
   class function Create(const aShape: ImsShape; aScale : Extended): ImsShape;
  end;//TmsScalingShape
@@ -37,6 +38,11 @@ end;
 function TmsScalingShape.ExtentCoeff: Extended;
 begin
  Result := f_Scale;
+end;
+
+procedure TmsScalingShape.DoDrawTo(const aCtx: TmsDrawContext);
+begin
+ inherited;
 end;
 
 end.
