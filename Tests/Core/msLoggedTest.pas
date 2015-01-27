@@ -4,19 +4,23 @@ interface
 
 uses
  TestFramework,
- msCoreObjects
+ msCoreObjects,
+ msInterfaces
  ;
 
 type
-  TmsLoggedTest = class abstract(TTestCase)
+  TmsLoggedTest = class abstract(TTestCase, ImsEtalonsHolder)
   protected
-    procedure OutToFileAndCheck(aLambda: TmsLogLambda);
-    function TestResultsFileName: String;
-    function MakeFileName(const aTestName: string; const aTestFolder: string): String;
-    function ContextName: String; virtual;
-    procedure CheckFileWithEtalon(const aFileName: String);
-    function InnerFolders: String; virtual;
-    function FileExtension: String; virtual;
+   procedure OutToFileAndCheck(aLambda: TmsLogLambda);
+   function TestResultsFileName: String;
+   function MakeFileName(const aTestName: string; const aTestFolder: string): String;
+   function ContextName: String; virtual;
+   procedure CheckFileWithEtalon(const aFileName: String);
+   function InnerFolders: String; virtual;
+   function FileExtension: String; virtual;
+  public
+   // ImsEtalonsHolder
+   procedure DeleteEtalonFile;
   end;//TmsLoggedTest
 
 implementation
@@ -47,6 +51,15 @@ function TmsLoggedTest.ContextName: String;
 begin
  Result := '';
 end;
+
+procedure TmsLoggedTest.DeleteEtalonFile;
+var
+ l_FileName: string;
+begin
+ l_FileName:= TestResultsFileName + '.etalon' + FileExtension;
+ DeleteFile(PWideChar(l_FileName));
+end;
+
 
 procedure TmsLoggedTest.CheckFileWithEtalon(const aFileName: String);
 var
