@@ -215,10 +215,12 @@ begin
  try
   l_FileName := ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\diff.cmd';
 
-  if FileExists(l_FileName) then
-   ShowMessage('good')
-  else
+  if not FileExists(l_FileName) then
+  begin
+   ShowMessage('Sorry. Diff tool not find...');
    Exit;
+  end;
+
 
   FillChar(l_ExecInfo, SizeOf(l_ExecInfo), 0);
   l_ExecInfo.cbSize := SizeOf(l_ExecInfo);
@@ -228,7 +230,6 @@ begin
   l_ExecInfo.lpParameters := PWideChar(' 1.txt 2.txt');
   l_ExecInfo.lpDirectory := PWideChar(ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\');
   l_ExecInfo.nShow := 1;
-// Handle, '', , , '', '', 1
   if not ShellExecuteEx(@l_ExecInfo) then
    RaiseLastOSError;
  except
