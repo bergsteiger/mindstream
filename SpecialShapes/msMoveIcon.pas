@@ -10,7 +10,7 @@ uses
  ;
 type
  TmsDirection = (dTop, dBottom, dRight, dLeft);
- TTmsDirection = set of TmsDirection;
+ TmsDirections = set of TmsDirection;
 
 type
  TmsMoveIcon = class(TmsPolygonShape)
@@ -36,7 +36,7 @@ const
  c_TriangleHeight = 20;
 
  function BuildArrow(const aStartPoint: TPointF;
-   const aDirection: TTmsDirection): TPolygon;
+   const aDirection: TmsDirections): TPolygon;
  var
   l_Polygon : TPolygon;
   l_Point: TPointF;
