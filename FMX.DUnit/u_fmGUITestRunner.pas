@@ -35,6 +35,7 @@ type
   lblRunned: TLabel;
     btnDeleteEtalon: TSpeedButton;
     btnUncheckAllSuccesTest: TSpeedButton;
+    btnDiff: TSpeedButton;
   procedure FormCreate(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
   procedure btRunAllTestClick(Sender: TObject);
@@ -43,6 +44,7 @@ type
   procedure btnUncheckAllClick(Sender: TObject);
   procedure btnDeleteEtalonClick(Sender: TObject);
     procedure btnUncheckAllSuccesTestClick(Sender: TObject);
+    procedure btnDiffClick(Sender: TObject);
  protected
   FSuite: ITest;
   FTests: TInterfaceList;
@@ -116,7 +118,8 @@ implementation
 uses
  System.TypInfo,
  msInterfaces,
- msShapeTest
+ msShapeTest,
+ Shellapi
  ;
 
 {$R *.fmx}
@@ -202,6 +205,36 @@ begin
        Supports(NodeToTest(aNode), ImsEtalonsHolder, l_Test)) then
     l_Test.DeleteEtalonFile;
   end)
+end;
+
+procedure TfmGUITestRunner.btnDiffClick(Sender: TObject);
+var
+ l_FileName: string;
+ l_ExecInfo: TShellExecuteInfo;
+begin
+ try
+  l_FileName := ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\diff.cmd';
+
+  if FileExists(l_FileName) then
+   ShowMessage('good')
+  else
+   Exit;
+
+  FillChar(l_ExecInfo, SizeOf(l_ExecInfo), 0);
+  l_ExecInfo.cbSize := SizeOf(l_ExecInfo);
+  l_ExecInfo.Wnd := 0;
+  l_ExecInfo.lpVerb := PWideChar('');
+  l_ExecInfo.lpFile := PChar(l_FileName);
+  l_ExecInfo.lpParameters := PWideChar(' 1.txt 2.txt');
+  l_ExecInfo.lpDirectory := PWideChar(ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\');
+  l_ExecInfo.nShow := 1;
+// Handle, '', , , '', '', 1
+  if not ShellExecuteEx(@l_ExecInfo) then
+   RaiseLastOSError;
+ except
+  on Ex : EOSError do
+   MessageDlg('Caught an OS error with code: ' + IntToStr(Ex.ErrorCode), TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], 0);
+ end;
 end;
 
 procedure TfmGUITestRunner.btnUncheckAllClick(Sender: TObject);
