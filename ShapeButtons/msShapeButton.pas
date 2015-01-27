@@ -118,11 +118,15 @@ begin
 //  l_CenterPoint := f_Shape.StartPoint;
   l_B := f_Shape.DrawBounds;
 
-  Canvas.Fill.Color := TAlphaColorRec.Aliceblue;
+  if f_ShapeClass.IsNullClick then
+   Canvas.Fill.Color := TAlphaColorRec.Blueviolet
+  else
+   if f_ShapeClass.IsTool then
+    Canvas.Fill.Color := TAlphaColorRec.Greenyellow
+  else
+   Canvas.Fill.Color := TAlphaColorRec.Null;
 
-//  if f_Shape then
-
-  Canvas.FillRect(TRectF.Create(0,0,30,30), 0, 0, AllCorners, 100);
+  Canvas.FillRect(TRectF.Create(0, 0, 40, 40), 0, 0, AllCorners, 100);
 
   l_CenterPoint := l_B.TopLeft;
 
