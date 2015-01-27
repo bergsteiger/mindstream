@@ -22,14 +22,15 @@ uses
  System.UITypes,
  msShapesGroup,
  msFolderIcon,
- msRemoveIcon
+ msRemoveIcon,
+ msScalingShape
  ;
 
 // TmsRemoverIcon
 
 class function TmsRemoverIcon.ToolIcon: ImsShape;
 begin
- Result := TmsRemoveIcon.Create;
+ Result := TmsScalingShape.Create(TmsRemoveIcon.Create, {1.3}0.7);
 end;
 
 end.
