@@ -33,14 +33,14 @@ type
   lblFailureCount: TLabel;
   lblTimeCount: TLabel;
   lblRunned: TLabel;
-  btnDelEtalon: TSpeedButton;
+    btnDeleteEtalon: TSpeedButton;
   procedure FormCreate(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
   procedure btRunAllTestClick(Sender: TObject);
   procedure tvTestTreeChangeCheck(Sender: TObject);
   procedure btnCheckAllClick(Sender: TObject);
   procedure btnUncheckAllClick(Sender: TObject);
-  procedure btnDelEtalonClick(Sender: TObject);
+  procedure btnDeleteEtalonClick(Sender: TObject);
  protected
   FSuite: ITest;
   FTests: TInterfaceList;
@@ -185,7 +185,7 @@ begin
   end)
 end;
 
-procedure TfmGUITestRunner.btnDelEtalonClick(Sender: TObject);
+procedure TfmGUITestRunner.btnDeleteEtalonClick(Sender: TObject);
 begin
  TraverseTree(tvTestTree,
   procedure(const aNode: TTreeViewItem)

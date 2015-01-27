@@ -96,6 +96,7 @@ procedure TmsShapeButton.MyPaint(Sender: TObject;
 const
  cBorder = 10;
  // - отступ от края кнопки до фигуры
+ cButtonSize = 40;
 
 var
  l_OriginalMatrix: TMatrix;
@@ -119,14 +120,14 @@ begin
   l_B := f_Shape.DrawBounds;
 
   if f_ShapeClass.IsNullClick then
-   Canvas.Fill.Color := TAlphaColorRec.White
+   Canvas.Fill.Color := TAlphaColorRec.Lightblue
   else
    if f_ShapeClass.IsTool then
-    Canvas.Fill.Color := TAlphaColorRec.Lightgreen
+    Canvas.Fill.Color := TAlphaColorRec.Bisque
   else
    Canvas.Fill.Color := TAlphaColorRec.Null;
 
-  Canvas.FillRect(TRectF.Create(0, 0, 40, 40), 0, 0, AllCorners, 100);
+  Canvas.FillRect(TRectF.Create(0, 0, cButtonSize, cButtonSize), 0, 0, AllCorners, 0.3);
 
   l_CenterPoint := l_B.TopLeft;
 
