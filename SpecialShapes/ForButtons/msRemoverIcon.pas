@@ -19,6 +19,7 @@ type
 implementation
 
 uses
+ System.Types,
  System.UITypes,
  msShapesGroup,
  msFolderIcon,
@@ -30,7 +31,7 @@ uses
 
 class function TmsRemoverIcon.ToolIcon: ImsShape;
 begin
- Result := TmsScalingShape.Create(TmsRemoveIcon.Create, 0.5);
+ Result := TmsScalingShape.Create(TmsRemoveIcon.Create(TPointF.Create(20, 30)), 0.5);
 end;
 
 end.
