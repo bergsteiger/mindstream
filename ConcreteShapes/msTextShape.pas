@@ -19,7 +19,7 @@ type
   function Text: string; virtual;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
- end;
+ end;//TmsTextShape
 
 implementation
 
