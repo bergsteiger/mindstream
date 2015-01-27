@@ -9,10 +9,6 @@ uses
  msPolygonShape
  ;
 type
- TmsDirection = (dTop, dBottom, dRight, dLeft);
- TmsDirections = set of TmsDirection;
-
-type
  TmsMoveIcon = class(TmsPolygonShape)
  protected
   function GetPolygon: TPolygon; override;
@@ -34,6 +30,10 @@ const
  c_ArrowWidth = 15;
  c_TriangleWidth = 10;
  c_TriangleHeight = 20;
+
+type
+ TmsDirection = (dTop, dBottom, dRight, dLeft);
+ TmsDirections = set of TmsDirection;
 
  function BuildArrow(const aStartPoint: TPointF;
    const aDirection: TmsDirections): TPolygon;
