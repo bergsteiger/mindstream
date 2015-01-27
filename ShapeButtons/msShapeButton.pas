@@ -119,10 +119,10 @@ begin
   l_B := f_Shape.DrawBounds;
 
   if f_ShapeClass.IsNullClick then
-   Canvas.Fill.Color := TAlphaColorRec.Blueviolet
+   Canvas.Fill.Color := TAlphaColorRec.White
   else
    if f_ShapeClass.IsTool then
-    Canvas.Fill.Color := TAlphaColorRec.Greenyellow
+    Canvas.Fill.Color := TAlphaColorRec.Lightgreen
   else
    Canvas.Fill.Color := TAlphaColorRec.Null;
 
