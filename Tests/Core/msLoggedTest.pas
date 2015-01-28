@@ -149,7 +149,7 @@ begin
  l_ExecInfo.Wnd := 0;
  l_ExecInfo.lpVerb := PWideChar('');
  l_ExecInfo.lpFile := PChar(l_cmdFileName);
- l_ExecInfo.lpParameters := PWideChar(' ' + aFileName + ' ' + anEtalonName);
+ l_ExecInfo.lpParameters := PWideChar(' ' + anEtalonName + ' ' + aFileName);
  l_ExecInfo.nShow := 1;
 
  if not ShellExecuteEx(@l_ExecInfo) then
