@@ -23,7 +23,7 @@ type
    // ImsEtalonsHolder
    procedure DeleteEtalonFile;
    procedure RunDiffPrim(const aFileName: String; const anEtalonName: String);
-   procedure RunDiff;
+   function RunDiff: Boolean;
   public
    class function ComputerName: AnsiString;
   end;//TmsLoggedTest
@@ -122,14 +122,15 @@ begin
  CheckFileWithEtalon(l_FileNameTest);
 end;
 
-procedure TmsLoggedTest.RunDiff;
+function TmsLoggedTest.RunDiff: Boolean;
 var
  l_TestFileName : String;
  l_EtalonFileName : String;
 begin
  l_TestFileName:= TestResultsFileName;
  l_EtalonFileName:= l_TestFileName + cEtalon + ExtractFileExt(l_TestFileName);
- if not IsEtalonValid(l_TestFileName, l_EtalonFileName) then
+ Result := not IsEtalonValid(l_TestFileName, l_EtalonFileName);
+ if Result then
   RunDiffPrim(l_TestFileName, l_EtalonFileName);
 end;
 
