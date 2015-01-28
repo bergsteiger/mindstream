@@ -208,6 +208,8 @@ begin
 end;
 
 procedure TfmGUITestRunner.btnDiffClick(Sender: TObject);
+const
+ c_cmdFileName = 'diff.cmd';
 var
  l_cmdFileName,
  l_TestFileName,
@@ -217,9 +219,11 @@ var
  l_Test: ITest;
  l_EtalonHolder: ImsEtalonsHolder;
 begin
- l_cmdFileName := ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\diff.cmd';
-                                  //TmsShapeTestPrim.ComputerName +
 
+ l_cmdFileName := ExtractFilePath(ParamStr(0)) + TmsShapeTestPrim.ComputerName + '_' + c_cmdFileName;
+
+ if not FileExists(l_cmdFileName) then
+  l_cmdFileName := c_cmdFileName;
 
  if not FileExists(l_cmdFileName) then
  begin
@@ -232,7 +236,7 @@ begin
   ShowMessage('Sorry. You dont select node.');
   Exit;
  end;
- l_cmdFileName := ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\diff.cmd';
+
  l_Test:= NodeToTest(tvTestTree.Selected);
  if Supports(l_Test, ImsEtalonsHolder, l_EtalonHolder) then
  begin
@@ -242,6 +246,7 @@ begin
  else
  begin
   ShowMessage('Sorry. EtalonHolder interface not supported.');
+  Exit;
  end;
 
  l_Directory := ExtractFileDir(l_TestFileName);
@@ -252,10 +257,6 @@ begin
  l_ExecInfo.lpVerb := PWideChar('');
  l_ExecInfo.lpFile := PChar(l_cmdFileName);
  l_ExecInfo.lpParameters := PWideChar(' ' + l_TestFileName + ' ' + l_EtalonFileName);
-//  l_ExecInfo.lpParameters := PWideChar(' 1.txt 2.txt');
-// l_ExecInfo.lpParameters := PWideChar(l_TestFileName +' ' + l_EtalonFileName);
-// l_ExecInfo.lpDirectory := PWideChar(ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\');
-// l_ExecInfo.lpDirectory := PWideChar(l_Directory);
  l_ExecInfo.nShow := 1;
 
  try
