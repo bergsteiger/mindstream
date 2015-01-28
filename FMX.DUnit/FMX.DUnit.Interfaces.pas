@@ -1,4 +1,4 @@
-unit TestInterfaces;
+unit FMX.DUnit.Interfaces;
 
 interface
 

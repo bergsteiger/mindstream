@@ -117,8 +117,7 @@ implementation
 
 uses
  System.TypInfo,
- TestInterfaces,
- msShapeTest,
+ FMX.DUnit.Interfaces,
  Shellapi
  ;
 

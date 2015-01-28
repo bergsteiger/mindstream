@@ -119,7 +119,8 @@ uses
   msScalingShape in 'ContainerShapes\msScalingShape.pas',
   msTextShape in 'ConcreteShapes\msTextShape.pas',
   msRectangularShape in 'AbstractShapes\msRectangularShape.pas',
-  TestInterfaces in 'FMX.DUnit\TestInterfaces.pas';
+  FMX.DUnit.Interfaces in 'FMX.DUnit\FMX.DUnit.Interfaces.pas'
+  ;
 
 {$R *.res}
 

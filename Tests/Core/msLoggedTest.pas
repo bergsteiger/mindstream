@@ -5,7 +5,7 @@ interface
 uses
  TestFramework,
  msCoreObjects,
- TestInterfaces
+ FMX.DUnit.Interfaces
  ;
 
 type
