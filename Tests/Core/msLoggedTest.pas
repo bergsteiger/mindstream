@@ -140,6 +140,7 @@ const
 var
  l_cmdFileName : String;
  l_ExecInfo: TShellExecuteInfo;
+ l_Param : String;
 begin
 { TODO 1 -oIngword -cProposal : Добавить вывод ошибок в лог }
  l_cmdFileName := ExtractFilePath(ParamStr(0)) +
@@ -156,7 +157,8 @@ begin
  l_ExecInfo.Wnd := 0;
  l_ExecInfo.lpVerb := PWideChar('');
  l_ExecInfo.lpFile := PChar(l_cmdFileName);
- l_ExecInfo.lpParameters := PWideChar(' ' + anEtalonName + ' ' + aFileName);
+ l_Param := ' ' + '"' + anEtalonName + '"' + ' ' + '"' + aFileName  + '"';
+ l_ExecInfo.lpParameters := PWideChar(l_Param);
  l_ExecInfo.nShow := 1;
 
  if not ShellExecuteEx(@l_ExecInfo) then
