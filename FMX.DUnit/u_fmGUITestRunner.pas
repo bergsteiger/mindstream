@@ -8,11 +8,6 @@ uses
  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
  FMX.Layouts, FMX.TreeView, FMX.ListView.Types, FMX.ListView, System.Generics.Collections;
 
-const
- c_ColorOk = TAlphaColorRec.Green;
- c_ColorError = TAlphaColorRec.Red;
- c_ColorFailure = TAlphaColorRec.Fuchsia;
-
 type
  TDoSomethingWithNode = reference to procedure (const aItem: TTreeViewItem);
 
@@ -137,6 +132,11 @@ procedure RunRegisteredTestsModeless;
 begin
  RunTestModeless(registeredTests)
 end;
+
+const
+ c_ColorOk = TAlphaColorRec.Green;
+ c_ColorError = TAlphaColorRec.Red;
+ c_ColorFailure = TAlphaColorRec.Fuchsia;
 
 procedure TfmGUITestRunner.SetFailed(const aNode: ITest; anError: Boolean);
 begin
