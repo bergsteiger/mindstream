@@ -232,7 +232,7 @@ begin
   ShowMessage('Sorry. You dont select node.');
   Exit;
  end;
-
+ l_cmdFileName := ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\diff.cmd';
  l_Test:= NodeToTest(tvTestTree.Selected);
  if Supports(l_Test, ImsEtalonsHolder, l_EtalonHolder) then
  begin
@@ -252,9 +252,10 @@ begin
  l_ExecInfo.lpVerb := PWideChar('');
  l_ExecInfo.lpFile := PChar(l_cmdFileName);
  l_ExecInfo.lpParameters := PWideChar(' ' + l_TestFileName + ' ' + l_EtalonFileName);
- // l_ExecInfo.lpParameters := PWideChar(' 1.txt 2.txt');
+//  l_ExecInfo.lpParameters := PWideChar(' 1.txt 2.txt');
 // l_ExecInfo.lpParameters := PWideChar(l_TestFileName +' ' + l_EtalonFileName);
- l_ExecInfo.lpDirectory := PWideChar(ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\');
+// l_ExecInfo.lpDirectory := PWideChar(ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\');
+// l_ExecInfo.lpDirectory := PWideChar(l_Directory);
  l_ExecInfo.nShow := 1;
 
  try
