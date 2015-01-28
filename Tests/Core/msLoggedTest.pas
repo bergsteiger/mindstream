@@ -82,7 +82,7 @@ begin
  end//FileExists(l_FileNameEtalon)
  else
  begin
-  CopyFile(PWideChar(aFileName),PWideChar(l_FileNameEtalon),True);
+  CopyFile(PWideChar(aFileName), PWideChar(l_FileNameEtalon),True);
  end;//FileExists(l_FileNameEtalon)
 end;
 
