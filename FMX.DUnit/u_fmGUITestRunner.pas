@@ -71,7 +71,7 @@ type
   procedure ClearResult;
 
   procedure TraverseTree(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
-  procedure SetFailure(aFailure: TTestFailure);
+  procedure SetFailure(aFailure: TTestFailure; anError: Boolean);
  public
   property Suite: ITest
    read FSuite
@@ -142,7 +142,7 @@ begin
  SetTreeNodeFont(aNode, c_ColorError);
 end;
 
-procedure TfmGUITestRunner.SetFailure(aFailure: TTestFailure);
+procedure TfmGUITestRunner.SetFailure(aFailure: TTestFailure; anError: Boolean);
 begin
  SetFailed(aFailure.failedTest);
  AddFailureNode(aFailure);
@@ -150,12 +150,12 @@ end;
 
 procedure TfmGUITestRunner.AddError(aFailure: TTestFailure);
 begin
- SetFailure(aFailure);
+ SetFailure(aFailure, true);
 end;
 
 procedure TfmGUITestRunner.AddFailure(aFailure: TTestFailure);
 begin
- SetFailure(aFailure);
+ SetFailure(aFailure, false);
 end;
 
 function TfmGUITestRunner.AddFailureNode(aFailure: TTestFailure): TListViewItem;
