@@ -190,7 +190,8 @@ begin
   begin
    assert(aNode <> nil);
    aNode.IsChecked := True;
-  end)
+  end
+ );
 end;
 
 procedure TfmGUITestRunner.btnDeleteEtalonClick(Sender: TObject);
@@ -204,29 +205,24 @@ begin
    if (aNode.IsChecked and
        Supports(NodeToTest(aNode), ImsEtalonsHolder, l_Test)) then
     l_Test.DeleteEtalonFile;
-  end)
+  end
+ );
 end;
-{
 
 
-}
 procedure TfmGUITestRunner.btnDiffClick(Sender: TObject);
-var
- l_Test: ITest;
- l_EtalonHolder: ImsEtalonsHolder;
 begin
- if tvTestTree.Selected=nil then
- begin
-  ShowMessage('Sorry. You dont select node.');
-  Exit;
- end;
-
- l_Test:= NodeToTest(tvTestTree.Selected);
- if Supports(l_Test, ImsEtalonsHolder, l_EtalonHolder) then
- begin
-  l_EtalonHolder.RunDiff;
- end;
-
+ TraverseTree(tvTestTree,
+  procedure(const aNode: TTreeViewItem)
+  var
+   l_Test : ImsEtalonsHolder;
+  begin
+   assert(aNode <> nil);
+   if (aNode.IsChecked and
+       Supports(NodeToTest(aNode), ImsEtalonsHolder, l_Test)) then
+    l_Test.RunDiff;
+  end
+ );
 end;
 
 procedure TfmGUITestRunner.btnUncheckAllClick(Sender: TObject);
@@ -236,7 +232,8 @@ begin
   begin
    assert(aNode <> nil);
    aNode.IsChecked := False;
-  end)
+  end
+ );
 end;
 
 procedure TfmGUITestRunner.btnUncheckAllSuccesTestClick(Sender: TObject);
@@ -248,7 +245,8 @@ begin
    if (not (aNode as TTestNode).Failure) and
       (aNode.Count = 0) then
     aNode.IsChecked := False;
-  end)
+  end
+ );
 end;
 
 procedure TfmGUITestRunner.btRunAllTestClick(Sender: TObject);
@@ -286,10 +284,12 @@ begin
   procedure(const aNode: TTreeViewItem)
   begin
    SetTreeNodeFont(aNode, TAlphaColorRec.Black)
-  end)
+  end
+ );
 end;
 
 procedure TfmGUITestRunner.EndTest(test: ITest);
+
    function FormatElapsedTime(milli: Int64):string;
    var
      h,nn,ss,zzz: Cardinal;
@@ -303,6 +303,7 @@ procedure TfmGUITestRunner.EndTest(test: ITest);
      zzz := milli;
      Result := Format('%d:%2.2d:%2.2d.%3.3d', [h, nn, ss, zzz]);
    end;
+
 begin
  // Закомител, потому как тут надо обновлять общую информацию о результатах
  // тестов. А нам пока нечего показывать.
