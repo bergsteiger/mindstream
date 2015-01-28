@@ -73,8 +73,8 @@ end;
 
 function TmsLoggedTest.IsEtalonValid(const aFileName: String; const anEtalonName: String): Boolean;
 begin
- Assert(FileExists(aFileName));
- Assert(FileExists(anEtalonName));
+ Assert(FileExists(aFileName), 'Файл не существует ' + aFileName);
+ Assert(FileExists(anEtalonName), 'Файл не существует ' + anEtalonName);
  Result := msCompareFiles(anEtalonName, aFileName);
 end;
 
