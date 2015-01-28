@@ -124,7 +124,8 @@ var
 begin
  l_TestFileName:= TestResultsFileName;
  l_EtalonFileName:= l_TestFileName + cEtalon + ExtractFileExt(l_TestFileName);
- RunDiffPrim(l_TestFileName, l_EtalonFileName);
+ if not IsEtalonValid(l_TestFileName, l_EtalonFileName) then
+  RunDiffPrim(l_TestFileName, l_EtalonFileName);
 end;
 
 procedure TmsLoggedTest.RunDiffPrim(const aFileName: String; const anEtalonName: String);
