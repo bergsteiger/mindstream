@@ -143,7 +143,7 @@ begin
  Assert(FileExists(l_cmdFileName));
 
  l_TestFileName:= TestResultsFileName;
- l_EtalonFileName:= TestResultsFileName + cEtalon + FileExtension;
+ l_EtalonFileName:= l_TestFileName + cEtalon + ExtractFileExt(l_TestFileName);
 
  FillChar(l_ExecInfo, SizeOf(l_ExecInfo), 0);
  l_ExecInfo.cbSize := SizeOf(l_ExecInfo);
