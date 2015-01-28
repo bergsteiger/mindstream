@@ -10,7 +10,6 @@ uses
 
 const
  c_ColorOk = TAlphaColorRec.Green;
- c_ColorFailure = TAlphaColorRec.Fuchsia;
  c_ColorError = TAlphaColorRec.Red;
 
 type
@@ -214,9 +213,9 @@ begin
  );
 end;
 
-
 procedure TfmGUITestRunner.btnDiffClick(Sender: TObject);
 begin
+ ClearResult;
  TraverseTree(tvTestTree,
   procedure (const aNode: TTreeViewItem)
   var
