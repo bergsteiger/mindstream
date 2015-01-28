@@ -117,8 +117,7 @@ implementation
 
 uses
  System.TypInfo,
- FMX.DUnit.Interfaces,
- Shellapi
+ FMX.DUnit.Interfaces
  ;
 
 {$R *.fmx}
