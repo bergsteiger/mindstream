@@ -14,6 +14,7 @@ type
    procedure OutToFileAndCheck(aLambda: TmsLogLambda);
    function MakeFileName(const aTestName: string; const aTestFolder: string): String;
    function ContextName: String; virtual;
+   function IsEtalonValid(const aFileName: String; const anEtalonName: String): Boolean;
    procedure CheckFileWithEtalon(const aFileName: String);
    function InnerFolders: String; virtual;
    function TestResultsFileName: String;
@@ -65,6 +66,10 @@ begin
  DeleteFile(PWideChar(l_FileName));
 end;
 
+function TmsLoggedTest.IsEtalonValid(const aFileName: String; const anEtalonName: String): Boolean;
+begin
+ Result := msCompareFiles(anEtalonName, aFileName);
+end;
 
 procedure TmsLoggedTest.CheckFileWithEtalon(const aFileName: String);
 var
@@ -73,7 +78,7 @@ begin
  l_FileNameEtalon := aFileName + '.etalon' + ExtractFileExt(aFileName);
  if FileExists(l_FileNameEtalon) then
  begin
-  CheckTrue(msCompareFiles(l_FileNameEtalon, aFileName));
+  CheckTrue(IsEtalonValid(aFileName, l_FileNameEtalon));
  end//FileExists(l_FileNameEtalon)
  else
  begin
