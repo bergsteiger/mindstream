@@ -60,10 +60,12 @@ end;
 
 procedure TmsLoggedTest.DeleteEtalonFile;
 var
- l_FileName: string;
+ l_OutFileName : String;
+ l_EtalonFileName : String;
 begin
- l_FileName:= TestResultsFileName + '.etalon' + FileExtension;
- DeleteFile(PWideChar(l_FileName));
+ l_OutFileName := TestResultsFileName;
+ l_EtalonFileName := l_OutFileName + '.etalon' + ExtractFileExt(l_OutFileName);
+ DeleteFile(PWideChar(l_EtalonFileName));
 end;
 
 function TmsLoggedTest.IsEtalonValid(const aFileName: String; const anEtalonName: String): Boolean;
