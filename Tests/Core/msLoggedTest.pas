@@ -58,13 +58,16 @@ begin
  Result := '';
 end;
 
+const
+ cEtalon = '.etalon';
+
 procedure TmsLoggedTest.DeleteEtalonFile;
 var
  l_OutFileName : String;
  l_EtalonFileName : String;
 begin
  l_OutFileName := TestResultsFileName;
- l_EtalonFileName := l_OutFileName + '.etalon' + ExtractFileExt(l_OutFileName);
+ l_EtalonFileName := l_OutFileName + cEtalon + ExtractFileExt(l_OutFileName);
  DeleteFile(PWideChar(l_EtalonFileName));
 end;
 
@@ -79,7 +82,7 @@ procedure TmsLoggedTest.CheckFileWithEtalon(const aFileName: String);
 var
  l_FileNameEtalon : String;
 begin
- l_FileNameEtalon := aFileName + '.etalon' + ExtractFileExt(aFileName);
+ l_FileNameEtalon := aFileName + cEtalon + ExtractFileExt(aFileName);
  if FileExists(l_FileNameEtalon) then
  begin
   CheckTrue(IsEtalonValid(aFileName, l_FileNameEtalon));
@@ -140,7 +143,7 @@ begin
  Assert(FileExists(l_cmdFileName));
 
  l_TestFileName:= TestResultsFileName;
- l_EtalonFileName:= TestResultsFileName + '.etalon' + FileExtension;
+ l_EtalonFileName:= TestResultsFileName + cEtalon + FileExtension;
 
  FillChar(l_ExecInfo, SizeOf(l_ExecInfo), 0);
  l_ExecInfo.cbSize := SizeOf(l_ExecInfo);
