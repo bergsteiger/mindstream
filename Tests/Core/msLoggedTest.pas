@@ -21,7 +21,7 @@ type
    function FileExtension: String; virtual;
 
    // ImsEtalonsHolder
-   procedure DeleteEtalonFile;
+   procedure DeleteEtalonFile(const aLog: ImsLog);
    procedure RunDiffPrim(const aFileName: String; const anEtalonName: String);
    function RunDiff: Boolean;
   public
@@ -61,7 +61,7 @@ end;
 const
  cEtalon = '.etalon';
 
-procedure TmsLoggedTest.DeleteEtalonFile;
+procedure TmsLoggedTest.DeleteEtalonFile(const aLog: ImsLog);
 var
  l_OutFileName : String;
  l_EtalonFileName : String;

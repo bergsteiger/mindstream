@@ -225,7 +225,7 @@ begin
    assert(aNode <> nil);
    if (aNode.IsChecked and
        Supports(NodeToTest(aNode), ImsEtalonsHolder, l_Test)) then
-    l_Test.DeleteEtalonFile;
+    l_Test.DeleteEtalonFile(Self);
   end
  );
 end;
