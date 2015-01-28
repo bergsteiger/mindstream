@@ -56,7 +56,8 @@ type
   function NodeToTest(aNode: TTreeViewItem): ITest;
   function TestToNode(test: ITest): TTreeViewItem;
 
-  procedure SetFailed(const aNode: ITest; anError: Boolean);
+  procedure SetError(const aNode: ITest);
+  procedure SetFailed(const aNode: ITest);
   procedure SetTreeNodeFont(aNode: TTreeViewItem; aColor: TAlphaColor); overload;
   procedure SetTreeNodeFont(const aNode: ITest; aColor: TAlphaColor); overload;
 
@@ -138,17 +139,22 @@ const
  c_ColorError = TAlphaColorRec.Red;
  c_ColorFailure = TAlphaColorRec.Fuchsia;
 
-procedure TfmGUITestRunner.SetFailed(const aNode: ITest; anError: Boolean);
+procedure TfmGUITestRunner.SetError(const aNode: ITest);
 begin
- if anError then
-  SetTreeNodeFont(aNode, c_ColorError)
- else
-  SetTreeNodeFont(aNode, c_ColorFailure);
+ SetTreeNodeFont(aNode, c_ColorError);
+end;
+
+procedure TfmGUITestRunner.SetFailed(const aNode: ITest);
+begin
+ SetTreeNodeFont(aNode, c_ColorFailure);
 end;
 
 procedure TfmGUITestRunner.SetFailure(aFailure: TTestFailure; anError: Boolean);
 begin
- SetFailed(aFailure.failedTest, anError);
+ if anError then
+  SetError(aFailure.failedTest)
+ else
+  SetFailed(aFailure.failedTest);
  AddFailureNode(aFailure, anError);
 end;
 
@@ -234,7 +240,7 @@ begin
     try
      l_EtalonsHolder.RunDiff;
     except
-     SetFailed(l_Test, true);
+     SetError(l_Test);
     end;//try..finally
    end;//aNode.IsChecked
   end
