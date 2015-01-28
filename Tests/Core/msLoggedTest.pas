@@ -23,6 +23,7 @@ type
    procedure DeleteEtalonFile;
    procedure RunDiff;
   public
+   class function ComputerName: AnsiString;
   end;//TmsLoggedTest
 
 implementation
@@ -31,8 +32,7 @@ uses
  SysUtils,
  msStreamUtils,
  Windows,
- Shellapi,
- msShapeTest
+ ShellAPI
  ;
 
 // TmsLoggedTest
@@ -116,7 +116,7 @@ var
 begin
 { TODO 1 -oIngword -cProposal : Добавить вывод ошибок в лог }
  l_cmdFileName := ExtractFilePath(ParamStr(0)) +
-                  TmsShapeTestPrim.ComputerName + '_' +
+                  Self.ComputerName + '_' +
                   c_cmdFileName;
 
  if not FileExists(l_cmdFileName) then
@@ -136,5 +136,20 @@ begin
  if not ShellExecuteEx(@l_ExecInfo) then
   RaiseLastOSError;
 end;
+
+class function TmsLoggedTest.ComputerName: AnsiString;
+//#UC START# *4CA45DD902BD_4B2A11BC0255_var*
+var
+ l_CompSize : Integer;
+//#UC END# *4CA45DD902BD_4B2A11BC0255_var*
+begin
+//#UC START# *4CA45DD902BD_4B2A11BC0255_impl*
+ l_CompSize := MAX_COMPUTERNAME_LENGTH + 1;
+ SetLength(Result, l_CompSize);
+
+ Win32Check(GetComputerNameA(PAnsiChar(Result), LongWord(l_CompSize)));
+ SetLength(Result, l_CompSize);
+//#UC END# *4CA45DD902BD_4B2A11BC0255_impl*
+end;//TBaseTest.ComputerName
 
 end.

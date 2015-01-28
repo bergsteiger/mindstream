@@ -51,7 +51,6 @@ type
    function InnerFolders: String; override;
    constructor CreateInner(const aContext: TmsShapeTestContext);
   public
-   class function ComputerName: AnsiString;
    class procedure CheckShapes(aCheck: TmsShapeClassCheck);
    class function Create(const aContext: TmsShapeTestContext): ITest;
    destructor Destroy; override;
@@ -120,21 +119,6 @@ function TmsShapeTestPrim.InnerFolders: String;
 begin
  Result := c_JSON;
 end;
-
-class function TmsShapeTestPrim.ComputerName: AnsiString;
-//#UC START# *4CA45DD902BD_4B2A11BC0255_var*
-var
- l_CompSize : Integer;
-//#UC END# *4CA45DD902BD_4B2A11BC0255_var*
-begin
-//#UC START# *4CA45DD902BD_4B2A11BC0255_impl*
- l_CompSize := MAX_COMPUTERNAME_LENGTH + 1;
- SetLength(Result, l_CompSize);
-
- Win32Check(GetComputerNameA(PAnsiChar(Result), LongWord(l_CompSize)));
- SetLength(Result, l_CompSize);
-//#UC END# *4CA45DD902BD_4B2A11BC0255_impl*
-end;//TBaseTest.ComputerName
 
 procedure TmsShapeTestPrim.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 begin
