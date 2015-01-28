@@ -251,7 +251,8 @@ begin
  l_ExecInfo.Wnd := 0;
  l_ExecInfo.lpVerb := PWideChar('');
  l_ExecInfo.lpFile := PChar(l_cmdFileName);
- l_ExecInfo.lpParameters := PWideChar(' 1.txt 2.txt');
+ l_ExecInfo.lpParameters := PWideChar(' ' + l_TestFileName + ' ' + l_EtalonFileName);
+ // l_ExecInfo.lpParameters := PWideChar(' 1.txt 2.txt');
 // l_ExecInfo.lpParameters := PWideChar(l_TestFileName +' ' + l_EtalonFileName);
  l_ExecInfo.lpDirectory := PWideChar(ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\');
  l_ExecInfo.nShow := 1;
