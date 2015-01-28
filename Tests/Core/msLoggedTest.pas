@@ -120,7 +120,7 @@ begin
                   c_cmdFileName;
 
  if not FileExists(l_cmdFileName) then
-  l_cmdFileName := c_cmdFileName;
+  l_cmdFileName := ExtractFilePath(ParamStr(0)) + c_cmdFileName;
 
  Assert(FileExists(l_cmdFileName));
 
