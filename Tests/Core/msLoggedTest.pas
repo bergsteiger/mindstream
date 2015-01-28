@@ -122,6 +122,8 @@ begin
  if not FileExists(l_cmdFileName) then
   l_cmdFileName := c_cmdFileName;
 
+ Assert(FileExists(l_cmdFileName));
+
  l_TestFileName:= TestResultsFileName;
  l_EtalonFileName:= TestResultsFileName + '.etalon' + FileExtension;
 
