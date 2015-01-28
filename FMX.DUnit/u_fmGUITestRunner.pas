@@ -244,7 +244,8 @@ begin
     l_Test := NodeToTest(aNode);
     if Supports(l_Test, ImsEtalonsHolder, l_EtalonsHolder) then
     try
-     l_EtalonsHolder.RunDiff;
+     if l_EtalonsHolder.RunDiff then
+      SetSuccess(l_Test);
     except
      SetError(l_Test);
     end;//try..finally
