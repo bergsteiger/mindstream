@@ -220,12 +220,20 @@ begin
  TraverseTree(tvTestTree,
   procedure (const aNode: TTreeViewItem)
   var
-   l_Test : ImsEtalonsHolder;
+   l_Test : ITest;
+   l_EtalonsHolder : ImsEtalonsHolder;
   begin
    assert(aNode <> nil);
-   if (aNode.IsChecked and
-       Supports(NodeToTest(aNode), ImsEtalonsHolder, l_Test)) then
-    l_Test.RunDiff;
+   if aNode.IsChecked then
+   begin
+    l_Test := NodeToTest(aNode);
+    if Supports(l_Test, ImsEtalonsHolder, l_EtalonsHolder) then
+    try
+     l_EtalonsHolder.RunDiff;
+    except
+     SetFailed(l_Test);
+    end;//try..finally
+   end;//aNode.IsChecked
   end
  );
 end;
