@@ -22,7 +22,7 @@ type
 
    // ImsEtalonsHolder
    procedure DeleteEtalonFile;
-   procedure RunDiffPrim;
+   procedure RunDiffPrim(const aFileName: String; const anEtalonName: String);
    procedure RunDiff;
   public
    class function ComputerName: AnsiString;
@@ -118,18 +118,20 @@ begin
 end;
 
 procedure TmsLoggedTest.RunDiff;
+var
+ l_TestFileName : String;
+ l_EtalonFileName : String;
 begin
- RunDiffPrim;
+ l_TestFileName:= TestResultsFileName;
+ l_EtalonFileName:= l_TestFileName + cEtalon + ExtractFileExt(l_TestFileName);
+ RunDiffPrim(l_TestFileName, l_EtalonFileName);
 end;
 
-procedure TmsLoggedTest.RunDiffPrim;
+procedure TmsLoggedTest.RunDiffPrim(const aFileName: String; const anEtalonName: String);
 const
  c_cmdFileName = 'diff.cmd';
 var
- l_cmdFileName,
- l_TestFileName,
- l_EtalonFileName,
- l_Directory : string;
+ l_cmdFileName : String;
  l_ExecInfo: TShellExecuteInfo;
 begin
 { TODO 1 -oIngword -cProposal : Добавить вывод ошибок в лог }
@@ -142,15 +144,12 @@ begin
 
  Assert(FileExists(l_cmdFileName));
 
- l_TestFileName:= TestResultsFileName;
- l_EtalonFileName:= l_TestFileName + cEtalon + ExtractFileExt(l_TestFileName);
-
  FillChar(l_ExecInfo, SizeOf(l_ExecInfo), 0);
  l_ExecInfo.cbSize := SizeOf(l_ExecInfo);
  l_ExecInfo.Wnd := 0;
  l_ExecInfo.lpVerb := PWideChar('');
  l_ExecInfo.lpFile := PChar(l_cmdFileName);
- l_ExecInfo.lpParameters := PWideChar(' ' + l_TestFileName + ' ' + l_EtalonFileName);
+ l_ExecInfo.lpParameters := PWideChar(' ' + aFileName + ' ' + anEtalonName);
  l_ExecInfo.nShow := 1;
 
  if not ShellExecuteEx(@l_ExecInfo) then
