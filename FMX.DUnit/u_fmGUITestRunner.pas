@@ -6,13 +6,15 @@ uses
  TestFramework,
  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
- FMX.Layouts, FMX.TreeView, FMX.ListView.Types, FMX.ListView, System.Generics.Collections;
+ FMX.Layouts, FMX.TreeView, FMX.ListView.Types, FMX.ListView, System.Generics.Collections,
+ FMX.DUnit.Interfaces
+ ;
 
 type
  TDoSomethingWithNode = reference to procedure (const aItem: TTreeViewItem);
 
 type
- TfmGUITestRunner = class(TForm, ITestListener)
+ TfmGUITestRunner = class(TForm, ITestListener, ImsLog)
   ToolBar1: TToolBar;
   btRunAllTest: TSpeedButton;
   pnlMain: TPanel;
@@ -115,8 +117,7 @@ var
 implementation
 
 uses
- System.TypInfo,
- FMX.DUnit.Interfaces
+ System.TypInfo
  ;
 
 {$R *.fmx}
