@@ -61,7 +61,9 @@ type
   function NodeToTest(aNode: TTreeViewItem): ITest;
   function TestToNode(test: ITest): TTreeViewItem;
 
-  procedure SetTreeNodeFont(aNode: TTreeViewItem; aColor: TAlphaColor);
+  procedure SetFailed(const aNode: ITest);
+  procedure SetTreeNodeFont(aNode: TTreeViewItem; aColor: TAlphaColor); overload;
+  procedure SetTreeNodeFont(const aNode: ITest; aColor: TAlphaColor); overload;
 
   function AddFailureNode(aFailure: TTestFailure): TListViewItem;
 
@@ -136,9 +138,14 @@ begin
  RunTestModeless(registeredTests)
 end;
 
+procedure TfmGUITestRunner.SetFailed(const aNode: ITest);
+begin
+ SetTreeNodeFont(aNode, c_ColorError);
+end;
+
 procedure TfmGUITestRunner.SetFailure(aFailure: TTestFailure);
 begin
- SetTreeNodeFont(TestToNode(aFailure.failedTest), c_ColorError);
+ SetFailed(aFailure.failedTest);
  AddFailureNode(aFailure);
 end;
 
@@ -178,7 +185,7 @@ end;
 procedure TfmGUITestRunner.AddSuccess(aTest: ITest);
 begin
  assert(assigned(aTest));
- SetTreeNodeFont(TestToNode(aTest), c_ColorOk)
+ SetTreeNodeFont(aTest, c_ColorOk)
 end;
 
 procedure TfmGUITestRunner.btnCheckAllClick(Sender: TObject);
@@ -390,6 +397,11 @@ begin
 
  if FSuite <> nil then
   InitTree;
+end;
+
+procedure TfmGUITestRunner.SetTreeNodeFont(const aNode: ITest; aColor: TAlphaColor);
+begin
+ SetTreeNodeFont(TestToNode(aNode), aColor);
 end;
 
 procedure TfmGUITestRunner.SetTreeNodeFont(aNode: TTreeViewItem; aColor: TAlphaColor);
