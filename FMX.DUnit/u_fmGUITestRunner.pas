@@ -58,6 +58,7 @@ type
 
   procedure SetError(const aNode: ITest);
   procedure SetFailed(const aNode: ITest);
+  procedure SetSuccess(const aNode: ITest);
   procedure SetTreeNodeFont(aNode: TTreeViewItem; aColor: TAlphaColor); overload;
   procedure SetTreeNodeFont(const aNode: ITest; aColor: TAlphaColor); overload;
 
@@ -191,10 +192,15 @@ begin
  Result := l_Item;
 end;
 
+procedure TfmGUITestRunner.SetSuccess(const aNode: ITest);
+begin
+ SetTreeNodeFont(aNode, c_ColorOk);
+end;
+
 procedure TfmGUITestRunner.AddSuccess(aTest: ITest);
 begin
  assert(assigned(aTest));
- SetTreeNodeFont(aTest, c_ColorOk)
+ SetSuccess(aTest);
 end;
 
 procedure TfmGUITestRunner.btnCheckAllClick(Sender: TObject);
