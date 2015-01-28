@@ -21,6 +21,7 @@ type
 
    // ImsEtalonsHolder
    procedure DeleteEtalonFile;
+   procedure RunDiffPrim;
    procedure RunDiff;
   public
    class function ComputerName: AnsiString;
@@ -105,6 +106,11 @@ begin
 end;
 
 procedure TmsLoggedTest.RunDiff;
+begin
+ RunDiffPrim;
+end;
+
+procedure TmsLoggedTest.RunDiffPrim;
 const
  c_cmdFileName = 'diff.cmd';
 var
