@@ -206,31 +206,15 @@ begin
     l_Test.DeleteEtalonFile;
   end)
 end;
+{
 
+
+}
 procedure TfmGUITestRunner.btnDiffClick(Sender: TObject);
-const
- c_cmdFileName = 'diff.cmd';
 var
- l_cmdFileName,
- l_TestFileName,
- l_EtalonFileName,
- l_Directory : string;
- l_ExecInfo: TShellExecuteInfo;
  l_Test: ITest;
  l_EtalonHolder: ImsEtalonsHolder;
 begin
-
- l_cmdFileName := ExtractFilePath(ParamStr(0)) + TmsShapeTestPrim.ComputerName + '_' + c_cmdFileName;
-
- if not FileExists(l_cmdFileName) then
-  l_cmdFileName := c_cmdFileName;
-
- if not FileExists(l_cmdFileName) then
- begin
-  ShowMessage('Sorry. diff.cmd not find.');
-  Exit;
- end;
-
  if tvTestTree.Selected=nil then
  begin
   ShowMessage('Sorry. You dont select node.');
@@ -240,32 +224,9 @@ begin
  l_Test:= NodeToTest(tvTestTree.Selected);
  if Supports(l_Test, ImsEtalonsHolder, l_EtalonHolder) then
  begin
-  l_TestFileName:= l_EtalonHolder.TestResultsFileName;
-  l_EtalonFileName:= l_EtalonHolder.TestResultsFileName + '.etalon' + l_EtalonHolder.FileExtension;
- end
- else
- begin
-  ShowMessage('Sorry. EtalonHolder interface not supported.');
-  Exit;
+  l_EtalonHolder.RunDiff;
  end;
 
- l_Directory := ExtractFileDir(l_TestFileName);
-
- FillChar(l_ExecInfo, SizeOf(l_ExecInfo), 0);
- l_ExecInfo.cbSize := SizeOf(l_ExecInfo);
- l_ExecInfo.Wnd := 0;
- l_ExecInfo.lpVerb := PWideChar('');
- l_ExecInfo.lpFile := PChar(l_cmdFileName);
- l_ExecInfo.lpParameters := PWideChar(' ' + l_TestFileName + ' ' + l_EtalonFileName);
- l_ExecInfo.nShow := 1;
-
- try
-  if not ShellExecuteEx(@l_ExecInfo) then
-   RaiseLastOSError;
- except
-  on Ex : EOSError do
-   MessageDlg('Caught an OS error with code: ' + IntToStr(Ex.ErrorCode), TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], 0);
- end;
 end;
 
 procedure TfmGUITestRunner.btnUncheckAllClick(Sender: TObject);

@@ -1,4 +1,4 @@
-unit msLoggedTest;
+﻿unit msLoggedTest;
 
 interface
 
@@ -16,11 +16,12 @@ type
    function ContextName: String; virtual;
    procedure CheckFileWithEtalon(const aFileName: String);
    function InnerFolders: String; virtual;
+   function TestResultsFileName: String;
+   function FileExtension: String; virtual;
 
    // ImsEtalonsHolder
    procedure DeleteEtalonFile;
-   function TestResultsFileName: String;
-   function FileExtension: String; virtual;
+   procedure RunDiff;
   public
   end;//TmsLoggedTest
 
@@ -29,7 +30,9 @@ implementation
 uses
  SysUtils,
  msStreamUtils,
- Windows
+ Windows,
+ Shellapi,
+ msShapeTest
  ;
 
 // TmsLoggedTest
@@ -99,6 +102,39 @@ begin
   end
  );
  CheckFileWithEtalon(l_FileNameTest);
+end;
+
+procedure TmsLoggedTest.RunDiff;
+const
+ c_cmdFileName = 'diff.cmd';
+var
+ l_cmdFileName,
+ l_TestFileName,
+ l_EtalonFileName,
+ l_Directory : string;
+ l_ExecInfo: TShellExecuteInfo;
+begin
+{ TODO 1 -oIngword -cProposal : Добавить вывод ошибок в лог }
+ l_cmdFileName := ExtractFilePath(ParamStr(0)) +
+                  TmsShapeTestPrim.ComputerName + '_' +
+                  c_cmdFileName;
+
+ if not FileExists(l_cmdFileName) then
+  l_cmdFileName := c_cmdFileName;
+
+ l_TestFileName:= TestResultsFileName;
+ l_EtalonFileName:= TestResultsFileName + '.etalon' + FileExtension;
+
+ FillChar(l_ExecInfo, SizeOf(l_ExecInfo), 0);
+ l_ExecInfo.cbSize := SizeOf(l_ExecInfo);
+ l_ExecInfo.Wnd := 0;
+ l_ExecInfo.lpVerb := PWideChar('');
+ l_ExecInfo.lpFile := PChar(l_cmdFileName);
+ l_ExecInfo.lpParameters := PWideChar(' ' + l_TestFileName + ' ' + l_EtalonFileName);
+ l_ExecInfo.nShow := 1;
+
+ if not ShellExecuteEx(@l_ExecInfo) then
+  RaiseLastOSError;
 end;
 
 end.
