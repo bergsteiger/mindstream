@@ -64,7 +64,7 @@ type
   procedure SetTreeNodeFont(aNode: TTreeViewItem; aColor: TAlphaColor); overload;
   procedure SetTreeNodeFont(const aNode: ITest; aColor: TAlphaColor); overload;
 
-  function AddFailureNode(aFailure: TTestFailure): TListViewItem;
+  function AddFailureNode(aFailure: TTestFailure; anError: Boolean): TListViewItem;
 
   procedure SetNodeEnabled(aNode: TTreeViewItem; aValue: Boolean);
 
@@ -145,7 +145,7 @@ end;
 procedure TfmGUITestRunner.SetFailure(aFailure: TTestFailure; anError: Boolean);
 begin
  SetFailed(aFailure.failedTest);
- AddFailureNode(aFailure);
+ AddFailureNode(aFailure, anError);
 end;
 
 procedure TfmGUITestRunner.AddError(aFailure: TTestFailure);
@@ -158,7 +158,7 @@ begin
  SetFailure(aFailure, false);
 end;
 
-function TfmGUITestRunner.AddFailureNode(aFailure: TTestFailure): TListViewItem;
+function TfmGUITestRunner.AddFailureNode(aFailure: TTestFailure; anError: Boolean): TListViewItem;
 var
  l_Item: TListViewItem;
  l_Node: TTreeViewItem;
