@@ -36,25 +36,25 @@ type
    f_TestSerializeMethodName : String;
    f_Coords : array of TPoint;
   protected
-   class function ComputerName: AnsiString;
-    procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
-    procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); virtual;
-    procedure SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm; aSaveTo: TmsDiagrammSaveTo);
-    procedure SetUp; override;
-    function ShapesCount: Integer;
-    procedure CreateDiagrammWithShapeAndSaveAndCheck;
-    function TestSerializeMethodName: String;
-    procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
-    procedure TestDeSerializeForShapeClass;
-    procedure TestDeSerializeViaShapeCheckForShapeClass;
-    function ShapeClass: MCmsShape;
-    function ContextName: String; override;
-    function InnerFolders: String; override;
-    constructor CreateInner(const aContext: TmsShapeTestContext);
+   procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
+   procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); virtual;
+   procedure SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm; aSaveTo: TmsDiagrammSaveTo);
+   procedure SetUp; override;
+   function ShapesCount: Integer;
+   procedure CreateDiagrammWithShapeAndSaveAndCheck;
+   function TestSerializeMethodName: String;
+   procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
+   procedure TestDeSerializeForShapeClass;
+   procedure TestDeSerializeViaShapeCheckForShapeClass;
+   function ShapeClass: MCmsShape;
+   function ContextName: String; override;
+   function InnerFolders: String; override;
+   constructor CreateInner(const aContext: TmsShapeTestContext);
   public
-    class procedure CheckShapes(aCheck: TmsShapeClassCheck);
-    class function Create(const aContext: TmsShapeTestContext): ITest;
-    destructor Destroy; override;
+   class function ComputerName: AnsiString;
+   class procedure CheckShapes(aCheck: TmsShapeClassCheck);
+   class function Create(const aContext: TmsShapeTestContext): ITest;
+   destructor Destroy; override;
   end;//TmsShapeTestPrim
 
   RmsShapeTest = class of TmsShapeTestPrim;

@@ -66,6 +66,16 @@ object fmGUITestRunner: TfmGUITestRunner
       Text = 'Uncheck All Succes Test'
       OnClick = btnUncheckAllSuccesTestClick
     end
+    object btnDiff: TSpeedButton
+      Position.X = 536.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 49.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'buttonstyle'
+      Text = 'Diff'
+      OnClick = btnDiffClick
+    end
   end
   object pnlMain: TPanel
     Align = Client

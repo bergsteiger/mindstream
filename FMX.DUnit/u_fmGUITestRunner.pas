@@ -35,6 +35,7 @@ type
   lblRunned: TLabel;
     btnDeleteEtalon: TSpeedButton;
     btnUncheckAllSuccesTest: TSpeedButton;
+    btnDiff: TSpeedButton;
   procedure FormCreate(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
   procedure btRunAllTestClick(Sender: TObject);
@@ -43,6 +44,7 @@ type
   procedure btnUncheckAllClick(Sender: TObject);
   procedure btnDeleteEtalonClick(Sender: TObject);
     procedure btnUncheckAllSuccesTestClick(Sender: TObject);
+    procedure btnDiffClick(Sender: TObject);
  protected
   FSuite: ITest;
   FTests: TInterfaceList;
@@ -115,8 +117,9 @@ implementation
 
 uses
  System.TypInfo,
- msInterfaces,
- msShapeTest
+ TestInterfaces,
+ msShapeTest,
+ Shellapi
  ;
 
 {$R *.fmx}
@@ -202,6 +205,28 @@ begin
        Supports(NodeToTest(aNode), ImsEtalonsHolder, l_Test)) then
     l_Test.DeleteEtalonFile;
   end)
+end;
+{
+
+
+}
+procedure TfmGUITestRunner.btnDiffClick(Sender: TObject);
+var
+ l_Test: ITest;
+ l_EtalonHolder: ImsEtalonsHolder;
+begin
+ if tvTestTree.Selected=nil then
+ begin
+  ShowMessage('Sorry. You dont select node.');
+  Exit;
+ end;
+
+ l_Test:= NodeToTest(tvTestTree.Selected);
+ if Supports(l_Test, ImsEtalonsHolder, l_EtalonHolder) then
+ begin
+  l_EtalonHolder.RunDiff;
+ end;
+
 end;
 
 procedure TfmGUITestRunner.btnUncheckAllClick(Sender: TObject);
