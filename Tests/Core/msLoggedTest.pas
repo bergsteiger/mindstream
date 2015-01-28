@@ -23,7 +23,7 @@ type
    // ImsEtalonsHolder
    procedure DeleteEtalonFile(const aLog: ImsLog);
    procedure RunDiffPrim(const aFileName: String; const anEtalonName: String);
-   function RunDiff: Boolean;
+   function RunDiff(const aLog: ImsLog): Boolean;
   public
    class function ComputerName: AnsiString;
   end;//TmsLoggedTest
@@ -122,7 +122,7 @@ begin
  CheckFileWithEtalon(l_FileNameTest);
 end;
 
-function TmsLoggedTest.RunDiff: Boolean;
+function TmsLoggedTest.RunDiff(const aLog: ImsLog): Boolean;
 var
  l_TestFileName : String;
  l_EtalonFileName : String;
