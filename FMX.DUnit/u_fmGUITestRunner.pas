@@ -117,7 +117,7 @@ implementation
 
 uses
  System.TypInfo,
- msInterfaces,
+ TestInterfaces,
  msShapeTest,
  Shellapi
  ;

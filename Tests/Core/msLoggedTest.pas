@@ -5,7 +5,7 @@ interface
 uses
  TestFramework,
  msCoreObjects,
- msInterfaces
+ TestInterfaces
  ;
 
 type
