@@ -234,7 +234,7 @@ begin
     try
      l_EtalonsHolder.RunDiff;
     except
-     SetFailed(l_Test, false);
+     SetFailed(l_Test, true);
     end;//try..finally
    end;//aNode.IsChecked
   end
