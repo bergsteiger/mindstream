@@ -11,6 +11,7 @@ uses
 const
  c_ColorOk = TAlphaColorRec.Green;
  c_ColorError = TAlphaColorRec.Red;
+ c_ColorFailure = TAlphaColorRec.Fuchsia;
 
 type
  TDoSomethingWithNode = reference to procedure (const aItem: TTreeViewItem);
