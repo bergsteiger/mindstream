@@ -14,7 +14,7 @@ const
  c_ColorError = TAlphaColorRec.Red;
 
 type
- TDoSomethingWithNode = reference to procedure(const aItem: TTreeViewItem);
+ TDoSomethingWithNode = reference to procedure (const aItem: TTreeViewItem);
 
 type
  TfmGUITestRunner = class(TForm, ITestListener)
@@ -186,7 +186,7 @@ end;
 procedure TfmGUITestRunner.btnCheckAllClick(Sender: TObject);
 begin
  TraverseTree(tvTestTree,
-  procedure(const aNode: TTreeViewItem)
+  procedure (const aNode: TTreeViewItem)
   begin
    assert(aNode <> nil);
    aNode.IsChecked := True;
@@ -197,7 +197,7 @@ end;
 procedure TfmGUITestRunner.btnDeleteEtalonClick(Sender: TObject);
 begin
  TraverseTree(tvTestTree,
-  procedure(const aNode: TTreeViewItem)
+  procedure (const aNode: TTreeViewItem)
   var
    l_Test : ImsEtalonsHolder;
   begin
@@ -213,7 +213,7 @@ end;
 procedure TfmGUITestRunner.btnDiffClick(Sender: TObject);
 begin
  TraverseTree(tvTestTree,
-  procedure(const aNode: TTreeViewItem)
+  procedure (const aNode: TTreeViewItem)
   var
    l_Test : ImsEtalonsHolder;
   begin
@@ -228,7 +228,7 @@ end;
 procedure TfmGUITestRunner.btnUncheckAllClick(Sender: TObject);
 begin
  TraverseTree(tvTestTree,
-  procedure(const aNode: TTreeViewItem)
+  procedure (const aNode: TTreeViewItem)
   begin
    assert(aNode <> nil);
    aNode.IsChecked := False;
@@ -239,7 +239,7 @@ end;
 procedure TfmGUITestRunner.btnUncheckAllSuccesTestClick(Sender: TObject);
 begin
  TraverseTree(tvTestTree,
-  procedure(const aNode: TTreeViewItem)
+  procedure (const aNode: TTreeViewItem)
   begin
    assert(aNode <> nil);
    if (not (aNode as TTestNode).Failure) and
@@ -281,7 +281,7 @@ begin
  lvFailureListView.ClearItems;
  f_Runned := 0;
  TraverseTree(tvTestTree,
-  procedure(const aNode: TTreeViewItem)
+  procedure (const aNode: TTreeViewItem)
   begin
    SetTreeNodeFont(aNode, TAlphaColorRec.Black)
   end
