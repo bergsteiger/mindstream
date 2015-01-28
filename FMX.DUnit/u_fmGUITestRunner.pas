@@ -140,7 +140,10 @@ const
 
 procedure TfmGUITestRunner.SetFailed(const aNode: ITest; anError: Boolean);
 begin
- SetTreeNodeFont(aNode, c_ColorError);
+ if anError then
+  SetTreeNodeFont(aNode, c_ColorError)
+ else
+  SetTreeNodeFont(aNode, c_ColorFailure);
 end;
 
 procedure TfmGUITestRunner.SetFailure(aFailure: TTestFailure; anError: Boolean);
