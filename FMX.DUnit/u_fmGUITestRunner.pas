@@ -209,27 +209,54 @@ end;
 
 procedure TfmGUITestRunner.btnDiffClick(Sender: TObject);
 var
- l_FileName: string;
+ l_cmdFileName,
+ l_TestFileName,
+ l_EtalonFileName,
+ l_Directory : string;
  l_ExecInfo: TShellExecuteInfo;
+ l_Test: ITest;
+ l_EtalonHolder: ImsEtalonsHolder;
 begin
+ l_cmdFileName := ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\diff.cmd';
+                                  //TmsShapeTestPrim.ComputerName +
+
+
+ if not FileExists(l_cmdFileName) then
+ begin
+  ShowMessage('Sorry. diff.cmd not find.');
+  Exit;
+ end;
+
+ if tvTestTree.Selected=nil then
+ begin
+  ShowMessage('Sorry. You dont select node.');
+  Exit;
+ end;
+
+ l_Test:= NodeToTest(tvTestTree.Selected);
+ if Supports(l_Test, ImsEtalonsHolder, l_EtalonHolder) then
+ begin
+  l_TestFileName:= l_EtalonHolder.TestResultsFileName;
+  l_EtalonFileName:= l_EtalonHolder.TestResultsFileName + '.etalon' + l_EtalonHolder.FileExtension;
+ end
+ else
+ begin
+  ShowMessage('Sorry. EtalonHolder interface not supported.');
+ end;
+
+ l_Directory := ExtractFileDir(l_TestFileName);
+
+ FillChar(l_ExecInfo, SizeOf(l_ExecInfo), 0);
+ l_ExecInfo.cbSize := SizeOf(l_ExecInfo);
+ l_ExecInfo.Wnd := 0;
+ l_ExecInfo.lpVerb := PWideChar('');
+ l_ExecInfo.lpFile := PChar(l_cmdFileName);
+ l_ExecInfo.lpParameters := PWideChar(' 1.txt 2.txt');
+// l_ExecInfo.lpParameters := PWideChar(l_TestFileName +' ' + l_EtalonFileName);
+ l_ExecInfo.lpDirectory := PWideChar(ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\');
+ l_ExecInfo.nShow := 1;
+
  try
-  l_FileName := ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\diff.cmd';
-
-  if not FileExists(l_FileName) then
-  begin
-   ShowMessage('Sorry. diff.cmd not find...');
-   Exit;
-  end;
-
-
-  FillChar(l_ExecInfo, SizeOf(l_ExecInfo), 0);
-  l_ExecInfo.cbSize := SizeOf(l_ExecInfo);
-  l_ExecInfo.Wnd := 0;
-  l_ExecInfo.lpVerb := PWideChar('');
-  l_ExecInfo.lpFile := PChar(l_FileName);
-  l_ExecInfo.lpParameters := PWideChar(' 1.txt 2.txt');
-  l_ExecInfo.lpDirectory := PWideChar(ExtractFilePath(ParamStr(0)) + '..\..\FMX.DUnit\Tools\');
-  l_ExecInfo.nShow := 1;
   if not ShellExecuteEx(@l_ExecInfo) then
    RaiseLastOSError;
  except
