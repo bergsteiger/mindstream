@@ -92,6 +92,8 @@ begin
  if FileExists(l_FileNameEtalon) then
  begin
   l_IsEtalonValid := IsEtalonValid(aFileName, l_FileNameEtalon);
+  if not l_IsEtalonValid then
+   RunDiffPrim(aFileName, l_FileNameEtalon);
   CheckTrue(l_IsEtalonValid);
  end//FileExists(l_FileNameEtalon)
  else
