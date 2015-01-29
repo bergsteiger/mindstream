@@ -285,8 +285,6 @@ begin
     l_Node := aNode;
     repeat
      l_Node.IsChecked := True;
-     if not l_Node.HasParent then
-      break;
      l_Node := l_Node.ParentItem;
     until (l_Node = nil);
    end;//(aNode as TTestNode).Failure
