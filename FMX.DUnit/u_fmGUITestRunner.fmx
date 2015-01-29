@@ -56,15 +56,15 @@ object fmGUITestRunner: TfmGUITestRunner
       Text = 'Delete Etalon Files'
       OnClick = btnDeleteEtalonClick
     end
-    object btnUncheckAllSuccesTest: TSpeedButton
+    object btnSelectFailed: TSpeedButton
       Position.X = 272.000000000000000000
       Position.Y = 8.000000000000000000
       Size.Width = 145.000000000000000000
       Size.Height = 33.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'buttonstyle'
-      Text = 'Uncheck All Succes Test'
-      OnClick = btnUncheckAllSuccesTestClick
+      Text = 'Select Failed'
+      OnClick = btnSelectFailedClick
     end
     object btnDiff: TSpeedButton
       Position.X = 536.000000000000000000

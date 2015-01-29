@@ -31,7 +31,7 @@ type
   lblTimeCount: TLabel;
   lblRunned: TLabel;
     btnDeleteEtalon: TSpeedButton;
-    btnUncheckAllSuccesTest: TSpeedButton;
+    btnSelectFailed: TSpeedButton;
     btnDiff: TSpeedButton;
   procedure FormCreate(Sender: TObject);
   procedure FormDestroy(Sender: TObject);
@@ -40,7 +40,7 @@ type
   procedure btnCheckAllClick(Sender: TObject);
   procedure btnUncheckAllClick(Sender: TObject);
   procedure btnDeleteEtalonClick(Sender: TObject);
-    procedure btnUncheckAllSuccesTestClick(Sender: TObject);
+    procedure btnSelectFailedClick(Sender: TObject);
     procedure btnDiffClick(Sender: TObject);
  protected
   FSuite: ITest;
@@ -72,6 +72,9 @@ type
 
   procedure TraverseTree(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
   procedure SetFailure(aFailure: TTestFailure; anError: Boolean);
+  procedure UnCheckAllTest;
+
+  procedure DoCheckItemAndParents(const aNode: TTreeViewItem; const aChecked: boolean);
  public
   property Suite: ITest
    read FSuite
@@ -255,7 +258,7 @@ begin
  );
 end;
 
-procedure TfmGUITestRunner.btnUncheckAllClick(Sender: TObject);
+procedure TfmGUITestRunner.UnCheckAllTest;
 begin
  TraverseTree(tvTestTree,
   procedure (const aNode: TTreeViewItem)
@@ -266,17 +269,26 @@ begin
  );
 end;
 
-procedure TfmGUITestRunner.btnUncheckAllSuccesTestClick(Sender: TObject);
+procedure TfmGUITestRunner.btnUncheckAllClick(Sender: TObject);
 begin
+ UnCheckAllTest;
+end;
+
+procedure TfmGUITestRunner.btnSelectFailedClick(Sender: TObject);
+begin
+ UnCheckAllTest;
  TraverseTree(tvTestTree,
   procedure (const aNode: TTreeViewItem)
   begin
-   assert(aNode <> nil);
-   if (not (aNode as TTestNode).Failure) and
-      (aNode.Count = 0) then
-    aNode.IsChecked := False;
+   if (aNode as TTestNode).Failure then
+   begin
+    aNode.IsChecked := True;
+    if aNode.HasParent then
+     aNode.ParentItem.IsChecked := True;
+   end;
   end
  );
+ tvTestTree.Items[0].IsChecked := True;
 end;
 
 procedure TfmGUITestRunner.btRunAllTestClick(Sender: TObject);
@@ -316,6 +328,15 @@ begin
    SetTreeNodeFont(aNode, TAlphaColorRec.Black)
   end
  );
+end;
+
+
+procedure TfmGUITestRunner.DoCheckItemAndParents(const aNode: TTreeViewItem;
+  const aChecked: boolean);
+begin
+ aNode.IsChecked := aChecked;
+ while not aNode.HasParent do
+  DoCheckItemAndParents(aNode, aChecked);
 end;
 
 procedure TfmGUITestRunner.EndTest(test: ITest);
