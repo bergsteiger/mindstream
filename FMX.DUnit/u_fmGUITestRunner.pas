@@ -99,14 +99,14 @@ type
  TTestNode = class(TTreeViewItem)
   private
    f_Test: ITest;
-   f_Failure: Boolean;
+   f_Failed: Boolean;
   public
    constructor Create(aParent: TFmxObject; const aTest: ITest);
    property Test: ITest
     read f_Test;
-   property Failure: Boolean
-    read f_Failure
-    write f_Failure;
+   property Failed: Boolean
+    read f_Failed
+    write f_Failed;
  end;//TTestNode
 
 procedure RunTestModeless(aTest: ITest);
@@ -181,7 +181,7 @@ begin
 
  l_Node := TestToNode(aFailure.failedTest);
  Assert(l_Node <> nil);
- (l_Node as TTestNode).f_Failure := True;
+ (l_Node as TTestNode).Failed := True;
  l_Item.Text := l_Node.ParentItem.Text + '.' + aFailure.failedTest.Name + '; ' + aFailure.thrownExceptionName + '; ' + aFailure.thrownExceptionMessage + '; ' +
    aFailure.LocationInfo + '; ' + aFailure.AddressInfo + '; ' + aFailure.StackTrace;
 
@@ -280,7 +280,7 @@ begin
   var
    l_Node :TTreeViewItem;
   begin
-   if (aNode as TTestNode).Failure then
+   if (aNode as TTestNode).Failed then
    begin
     l_Node := aNode;
     repeat
