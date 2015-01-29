@@ -86,11 +86,13 @@ end;
 procedure TmsLoggedTest.CheckFileWithEtalon(const aFileName: String);
 var
  l_FileNameEtalon : String;
+ l_IsEtalonValid : Boolean;
 begin
  l_FileNameEtalon := aFileName + cEtalon + ExtractFileExt(aFileName);
  if FileExists(l_FileNameEtalon) then
  begin
-  CheckTrue(IsEtalonValid(aFileName, l_FileNameEtalon));
+  l_IsEtalonValid := IsEtalonValid(aFileName, l_FileNameEtalon);
+  CheckTrue(l_IsEtalonValid);
  end//FileExists(l_FileNameEtalon)
  else
  begin
