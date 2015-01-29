@@ -73,8 +73,6 @@ type
   procedure TraverseTree(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
   procedure SetFailure(aFailure: TTestFailure; anError: Boolean);
   procedure UnCheckAllTest;
-
-  procedure DoCheckItemAndParents(const aNode: TTreeViewItem; const aChecked: boolean);
  public
   property Suite: ITest
    read FSuite
@@ -275,6 +273,8 @@ begin
 end;
 
 procedure TfmGUITestRunner.btnSelectFailedClick(Sender: TObject);
+var
+ l_Node :TTreeViewItem;
 begin
  UnCheckAllTest;
  TraverseTree(tvTestTree,
@@ -282,13 +282,17 @@ begin
   begin
    if (aNode as TTestNode).Failure then
    begin
-    aNode.IsChecked := True;
-    if aNode.HasParent then
-     aNode.ParentItem.IsChecked := True;
+    l_Node := aNode;
+    while true do
+    begin
+     l_Node.IsChecked := True;
+     if (not l_Node.HasParent) or (l_Node.Parent is TTreeView) then
+     break;
+     l_Node := TTreeViewItem(l_Node.Parent);
+    end;
    end;
   end
  );
- tvTestTree.Items[0].IsChecked := True;
 end;
 
 procedure TfmGUITestRunner.btRunAllTestClick(Sender: TObject);
@@ -328,15 +332,6 @@ begin
    SetTreeNodeFont(aNode, TAlphaColorRec.Black)
   end
  );
-end;
-
-
-procedure TfmGUITestRunner.DoCheckItemAndParents(const aNode: TTreeViewItem;
-  const aChecked: boolean);
-begin
- aNode.IsChecked := aChecked;
- while not aNode.HasParent do
-  DoCheckItemAndParents(aNode, aChecked);
 end;
 
 procedure TfmGUITestRunner.EndTest(test: ITest);
@@ -379,7 +374,6 @@ begin
 end;
 
 procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
-
  procedure DoFillTestTree(aRootNode: TTestNode);
  var
   l_TestTests: IInterfaceList;
@@ -507,6 +501,8 @@ end;
 
 procedure TfmGUITestRunner.tvTestTreeChangeCheck(Sender: TObject);
 begin
+ if not (Sender is TTreeViewItem) then Exit;
+
  SetNodeEnabled(Sender as TTreeViewItem, (Sender as TTreeViewItem).IsChecked);
 end;
 
@@ -520,3 +516,4 @@ begin
 end;
 
 end.
+
