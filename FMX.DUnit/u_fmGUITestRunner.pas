@@ -273,24 +273,23 @@ begin
 end;
 
 procedure TfmGUITestRunner.btnSelectFailedClick(Sender: TObject);
-var
- l_Node :TTreeViewItem;
 begin
  UnCheckAllTest;
  TraverseTree(tvTestTree,
   procedure (const aNode: TTreeViewItem)
+  var
+   l_Node :TTreeViewItem;
   begin
    if (aNode as TTestNode).Failure then
    begin
     l_Node := aNode;
-    while true do
-    begin
+    repeat
      l_Node.IsChecked := True;
-     if (not l_Node.HasParent) or (l_Node.Parent is TTreeView) then
-     break;
-     l_Node := TTreeViewItem(l_Node.Parent);
-    end;
-   end;
+     if not l_Node.HasParent then
+      break;
+     l_Node := l_Node.ParentItem;
+    until (l_Node = nil);
+   end;//(aNode as TTestNode).Failure
   end
  );
 end;
