@@ -359,15 +359,16 @@ var
  l_CenterPoint: TPointF;
 begin
  l_OriginalMatrix := aCanvas.Matrix;
- //l_CenterPoint := TPointF.Create(0,0);
- l_CenterPoint := f_Delta;
+ l_CenterPoint := TPointF.Create(0,0);
 
   l_Matrix := TMatrix.Identity;
   // - СНИМАЕМ оригинальную матрицу, точнее берём ЕДИНИЧНУЮ матрицу
   // https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0
   l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X, -l_CenterPoint.Y);
   // - сдвигаем начало координат для фигуры
-  l_Matrix := l_Matrix * TMatrix.CreateTranslation(f_Delta.X, f_Delta.Y);
+  //Matrix := l_Matrix * TMatrix.CreateTranslation(f_Delta.X, f_Delta.Y);
+  l_Matrix := l_Matrix * TMatrix.CreateRotation(Pi / 2);
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
   // - задаём начало координат - относительно дельты
   l_Matrix := l_Matrix * l_OriginalMatrix;
   // - ПРИМЕНЯЕМ оригинальную матрицу
