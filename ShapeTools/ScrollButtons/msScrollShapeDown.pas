@@ -14,14 +14,14 @@ type
  protected
   class function ScrollDelta : TPointF; override;
  public
-  class function ButtonShape: ImsShape; override;
+  class function ArrowShape: ImsShape; override;
  end;//TmsScrollShapeDown
 
 implementation
 
 // TmsScrollShapeDown
 
-class function TmsScrollShapeDown.ButtonShape: ImsShape;
+class function TmsScrollShapeDown.ArrowShape: ImsShape;
 begin
  Result := TmsDownArrow.Create;
 end;

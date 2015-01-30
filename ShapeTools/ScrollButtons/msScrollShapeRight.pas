@@ -10,18 +10,18 @@ uses
  ;
 
 type
- TmsScrollShapeRight= class(TmsScrollShape)
+ TmsScrollShapeRight = class(TmsScrollShape)
  protected
   class function ScrollDelta : TPointF; override;
  public
-  class function ButtonShape: ImsShape; override;
+  class function ArrowShape: ImsShape; override;
  end;//TmsScrollShapeRight
 
 implementation
 
 // TmsScrollShapeRight
 
-class function TmsScrollShapeRight.ButtonShape: ImsShape;
+class function TmsScrollShapeRight.ArrowShape: ImsShape;
 begin
  Result := TmsRightArrow.Create;
 end;
