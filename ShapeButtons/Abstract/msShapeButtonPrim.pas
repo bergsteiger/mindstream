@@ -3,20 +3,18 @@ unit msShapeButtonPrim;
 interface
 
 uses
- msShape,
  FMX.StdCtrls,
- FMX.Controls,
- FMX.Graphics,
- System.Types,
- msInterfaces,
  System.Classes,
- FMX.ListBox
+ FMX.Types,
+ System.UITypes
  ;
 
 type
- TmsShapeButtonPrim = class abstract(TButton)
+ TmsShapeButtonPrim = class abstract (TButton)
+
  end;
 
 implementation
 
+{ TmsShapeButtonPrim }
 end.

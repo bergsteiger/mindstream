@@ -10,16 +10,17 @@ uses
  System.Types,
  msInterfaces,
  System.Classes,
- FMX.ListBox
+ FMX.ListBox,
+ msShapeButtonPrim
  ;
 
 type
- TmsShapeButton = class(TButton)
+ TmsShapeButton = class(TmsShapeButtonPrim)
   private
    f_ShapeClass : MCmsShape;
    f_Shape: ImsShape;
-   f_Shapes: TComboBox;
    f_Holder : ImsDiagrammsHolder;
+   f_Shapes: TComboBox;
    procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
    procedure MyClick(Sender: TObject);
   public
@@ -109,6 +110,9 @@ var
  l_H : Single;
  l_M : Single;
  l_DX, l_DY : Single;
+
+ l_RectF: TRectF;
+ l_StrokeThickness : Single;
 begin
  if (f_Shape = nil) then
  begin
@@ -127,7 +131,14 @@ begin
   else
    Canvas.Fill.Color := TAlphaColorRec.Null;
 
-  Canvas.FillRect(TRectF.Create(0, 0, cButtonSize, cButtonSize), 0, 0, AllCorners, 0.3);
+  l_RectF := TRectF.Create(0, 0, cButtonSize, cButtonSize);
+
+  l_StrokeThickness := Canvas.StrokeThickness;
+
+  Canvas.StrokeThickness := 0.2;
+  Canvas.DrawRect(l_RectF,0,0, AllCorners, 1,TCornerType.Round);
+  Canvas.FillRect(l_RectF, 0, 0, AllCorners, 0.3);
+  Canvas.StrokeThickness := l_StrokeThickness;
 
   l_CenterPoint := l_B.TopLeft;
 
