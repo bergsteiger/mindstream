@@ -22,7 +22,8 @@ type
 implementation
 
 uses
- msShapesGroup
+ msShapesGroup,
+ msRectangle
  ;
 
 // TmsScrollShape
@@ -43,7 +44,7 @@ end;
 
 class function TmsScrollShape.ButtonShape: ImsShape;
 begin
- Result := TmsShapesGroup.Create([ArrowShape]);
+ Result := TmsShapesGroup.Create([TmsRectangle.Create, ArrowShape]);
 end;
 
 end.

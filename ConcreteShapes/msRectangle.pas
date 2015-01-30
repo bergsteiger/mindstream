@@ -15,7 +15,6 @@ uses
 type
  TmsRectangle = class(TmsRectangularShape)
  protected
-
   class function CornerRadius: Single; override;
   class function InitialWidth: Single; override;
   class function InitialHeight: Single; override;
@@ -25,7 +24,7 @@ type
 
 implementation
 
-{ TmsRectangle }
+// TmsRectangle
 
 class function TmsRectangle.InitialHeight: Single;
 begin
