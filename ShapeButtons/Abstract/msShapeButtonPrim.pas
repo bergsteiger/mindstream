@@ -70,6 +70,8 @@ begin
  // в котором дергать метод и inherited.
  // не делал, потому что возможно и не придется, если с TButton получится
  // пока так.
+
+ l_RectF := Self.LocalRect;
  l_StrokeThickness := Canvas.StrokeThickness;
  Canvas.StrokeThickness := 0.2;
  Canvas.DrawRect(l_RectF,0,0, AllCorners, 1, TCornerType.Round);
@@ -90,7 +92,6 @@ begin
   else
    Canvas.Fill.Color := TAlphaColorRec.Null;
 
-  l_RectF := Self.LocalRect;
   Canvas.FillRect(l_RectF, 0, 0, AllCorners, 0.3);
 
   l_B := f_Shape.DrawBounds;
