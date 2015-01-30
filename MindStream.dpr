@@ -121,7 +121,8 @@ uses
   msRectangularShape in 'AbstractShapes\msRectangularShape.pas',
   FMX.DUnit.Interfaces in 'FMX.DUnit\FMX.DUnit.Interfaces.pas',
   msShapeButtonPrim in 'ShapeButtons\Abstract\msShapeButtonPrim.pas',
-  msScrollBarShapeButton in 'ShapeButtons\msScrollBarShapeButton.pas';
+  msScrollBarShapeButton in 'ShapeButtons\msScrollBarShapeButton.pas',
+  msScrollShapeUp in 'ShapeTools\ScrollButtons\msScrollShapeUp.pas';
 
 {$R *.res}
 
