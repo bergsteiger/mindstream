@@ -17,7 +17,7 @@ type
    procedure MyClick(Sender: TObject); override;
   public
    constructor Create(AOwner: TComponent;
-                      const aShape: MCmsShape;
+                      const aMCShape: MCmsShape;
                       const aHolder: ImsDiagrammsHolder);
  end;
 
@@ -29,14 +29,16 @@ uses
 { TmsToolBarShapeButton }
 
 constructor TmsScrollBarShapeButton.Create(AOwner: TComponent;
-                                         const aShape: MCmsShape;
+                                         const aMCShape: MCmsShape;
                                          const aHolder: ImsDiagrammsHolder);
 begin
- inherited Create(AOwner, aShape, aHolder);
+ inherited Create(AOwner, aMCShape, aHolder);
 
  // Пока так
  Width := TmsPaletteShapeCreator.ButtonSize;
  Height := TmsPaletteShapeCreator.ButtonSize;
+
+ //
 end;
 
 procedure TmsScrollBarShapeButton.MyClick(Sender: TObject);
