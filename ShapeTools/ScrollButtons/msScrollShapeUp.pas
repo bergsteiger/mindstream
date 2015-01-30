@@ -11,9 +11,11 @@ uses
 
 type
  TmsScrollShapeUp = class(TmsScrollShape)
+ protected
+  class function ScrollDelta : TPointF; override;
  public
   class function ButtonShape: ImsShape; override;
-  class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
+
  end;//TmsScrollShapeUp
 
 implementation
@@ -24,15 +26,13 @@ implementation
 
 class function TmsScrollShapeUp.ButtonShape: ImsShape;
 begin
- Result := TmsUpArrow.Create(TPointF.Create(0, 0));
+ Result := TmsUpArrow.Create;
 end;
 
 
-class function TmsScrollShapeUp.DoNullClick(
-  const aHolder: ImsDiagrammsHolder): Boolean;
+class function TmsScrollShapeUp.ScrollDelta: TPointF;
 begin
- Result := true;
- aHolder.Scroll(TPointF.Create(0, ScrollDelta));
+ Result := TPointF.Create(0, 5);
 end;
 
 end.

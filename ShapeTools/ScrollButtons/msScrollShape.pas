@@ -3,13 +3,17 @@ unit msScrollShape;
 interface
 
 uses
- msNullClickShape
+ msNullClickShape,
+ msInterfaces,
+ System.Types
  ;
 
 type
  TmsScrollShape = class abstract(TmsNullClickShape)
+ public
+  class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; override; final;
  protected
- class function ScrollDelta : Single; virtual;
+  class function ScrollDelta : TPointF; virtual;
  end;//TmsScrollShape
 
 implementation
@@ -18,9 +22,15 @@ implementation
 
 { TmsScrollShape }
 
-class function TmsScrollShape.ScrollDelta: Single;
+class function TmsScrollShape.DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean;
 begin
- Result := 5;
+ Result := true;
+ aHolder.Scroll(ScrollDelta);
+end;
+
+class function TmsScrollShape.ScrollDelta: TPointF;
+begin
+ Assert(False, 'Реализовать в потомках');
 end;
 
 end.

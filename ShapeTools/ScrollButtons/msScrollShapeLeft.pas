@@ -11,9 +11,10 @@ uses
 
 type
  TmsScrollShapeLeft= class(TmsScrollShape)
+ protected
+  class function ScrollDelta : TPointF; override;
  public
   class function ButtonShape: ImsShape; override;
-  class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
  end;//TmsScrollShapeUp
 
 implementation
@@ -24,15 +25,12 @@ implementation
 
 class function TmsScrollShapeLeft.ButtonShape: ImsShape;
 begin
- Result := TmsLeftArrow.Create(TPointF.Create(0, 0));
+ Result := TmsLeftArrow.Create;
 end;
 
-
-class function TmsScrollShapeLeft.DoNullClick(
-  const aHolder: ImsDiagrammsHolder): Boolean;
+class function TmsScrollShapeLeft.ScrollDelta: TPointF;
 begin
- Result := true;
- aHolder.Scroll(TPointF.Create(ScrollDelta, 0));
+ Result := TPointF.Create(5, 0);
 end;
 
 end.
