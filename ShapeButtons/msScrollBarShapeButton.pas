@@ -18,7 +18,8 @@ type
   public
    constructor Create(AOwner: TComponent;
                       const aMCShape: MCmsShape;
-                      const aHolder: ImsDiagrammsHolder);
+                      const aHolder: ImsDiagrammsHolder;
+                      const aShape: ImsShape);
  end;
 
 implementation
@@ -30,10 +31,12 @@ uses
 
 constructor TmsScrollBarShapeButton.Create(AOwner: TComponent;
                                          const aMCShape: MCmsShape;
-                                         const aHolder: ImsDiagrammsHolder);
+                                         const aHolder: ImsDiagrammsHolder;
+                                         const aShape: ImsShape);
 begin
  inherited Create(AOwner, aMCShape, aHolder);
 
+ f_Shape := aShape;
  // Пока так
  Width := TmsPaletteShapeCreator.ButtonSize;
  Height := TmsPaletteShapeCreator.ButtonSize;
