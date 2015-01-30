@@ -24,15 +24,13 @@ type
  end;// TmsShapeButtonPrim
 
 implementation
-Uses
-  System.Math.Vectors,
-  System.UITypes,
-  FMX.Types,
-  Math
-  ;
-{ TmsShapeButtonPrim }
 
-
+uses
+ System.Math.Vectors,
+ System.UITypes,
+ FMX.Types,
+ Math
+ ;
 { TmsShapeButtonPrim }
 
 procedure TmsShapeButtonPrim.MyClick(Sender: TObject);
@@ -62,6 +60,11 @@ var
  l_StrokeThickness : Single;
 begin
  // DrawBouns
+ // По идее можно вынести в отдельный метод.
+ // a по хорошему сделать TmsBoundedShapeButton
+ // в котором дергать метод и inherited.
+ // не делал, потому что возможно и не придется, если с TButton получится
+ // пока так.
  l_StrokeThickness := Canvas.StrokeThickness;
  Canvas.StrokeThickness := 0.2;
  Canvas.DrawRect(l_RectF,0,0, AllCorners, 1, TCornerType.Round);
