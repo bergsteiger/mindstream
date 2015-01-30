@@ -1,4 +1,4 @@
-﻿unit msShapeButton;
+﻿unit msToolBarShapeButton;
 
 interface
 
@@ -15,7 +15,7 @@ uses
  ;
 
 type
- TmsShapeButton = class(TmsShapeButtonPrim)
+ TmsToolBarShapeButton = class(TmsShapeButtonPrim)
   private
    f_Shapes: TComboBox;
   protected
@@ -44,7 +44,7 @@ uses
 
 // TmsShapeButton
 
-constructor TmsShapeButton.Create(AOwner: TComponent;
+constructor TmsToolBarShapeButton.Create(AOwner: TComponent;
                                   const aShape: MCmsShape;
                                   aShapes: TComboBox;
                                   aColumn: Integer;
@@ -80,7 +80,7 @@ begin
 
 end;
 
-procedure TmsShapeButton.MyClick(Sender: TObject);
+procedure TmsToolBarShapeButton.MyClick(Sender: TObject);
 begin
  if not f_Shape.NullClick(ImsDiagrammsHolder(f_Holder)) then
   f_Shapes.ItemIndex := f_Shapes.Items.IndexOf(f_ShapeClass.Name);
