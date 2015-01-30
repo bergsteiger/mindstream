@@ -27,7 +27,7 @@ type
 
 implementation
 
-// TmsProxyShape
+// TmsShapeTool
 
 class function TmsShapeTool.Create(const aShapeToDeal: ImsShape; const aShape: ImsShape): ImsShape;
 begin
