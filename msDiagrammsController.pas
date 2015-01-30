@@ -358,6 +358,7 @@ var
  l_Matrix: TMatrix;
  l_CenterPoint: TPointF;
 begin
+ aCanvas.BeginScene;
  l_OriginalMatrix := aCanvas.Matrix;
  l_CenterPoint := TPointF.Create(0,0);
 
@@ -366,18 +367,20 @@ begin
   // https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0
   l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X, -l_CenterPoint.Y);
   // - сдвигаем начало координат для фигуры
-  //Matrix := l_Matrix * TMatrix.CreateTranslation(f_Delta.X, f_Delta.Y);
-  l_Matrix := l_Matrix * TMatrix.CreateRotation(Pi / 2);
-  l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(f_Delta.X, f_Delta.Y);
   // - задаём начало координат - относительно дельты
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
+  // - задаём начало координат
   l_Matrix := l_Matrix * l_OriginalMatrix;
   // - ПРИМЕНЯЕМ оригинальную матрицу
   // Иначе например ОРИГИНАЛЬНЫЙ параллельный перенос - не будет работать.
   // https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B0%D0%BB%D0%BB%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81
+ aCanvas.SetMatrix(l_Matrix);
  CurrentDiagramm.DrawTo(aCanvas);
  // - отрисовываем примитив с учётом матрицы преобразований
   aCanvas.SetMatrix(l_OriginalMatrix);
   // - восстанавливаем ОРИГИНАЛЬНУЮ матрицу
+  aCanvas.EndScene;
 end;
 
 function TmsDiagrammsController.As_ImsDiagrammsHolder: ImsDiagrammsHolder;

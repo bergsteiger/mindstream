@@ -229,7 +229,7 @@ procedure TmsDiagramm.DrawTo(const aCanvas: TCanvas);
 var
  l_Shape: ImsShape;
 begin
- aCanvas.BeginScene;
+// aCanvas.BeginScene;
  try
   if (f_Items = nil) then
   // - если заггрузить диаграммы, а потом провалиться на N+1 уровней -
@@ -239,7 +239,7 @@ begin
   for l_Shape in f_Items do
    l_Shape.DrawTo(TmsDrawContext.Create(aCanvas));
  finally
-  aCanvas.EndScene;
+//  aCanvas.EndScene;
  end; // try..finally
 end;
 
