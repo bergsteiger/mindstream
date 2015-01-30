@@ -1,16 +1,16 @@
-unit msScrollShapeUp;
+unit msScrollShapeLeft;
 
 interface
 
 uses
  msScrollShape,
  msInterfaces,
- msUpArrow,
+ msLeftArrow,
  System.Types
  ;
 
 type
- TmsScrollShapeUp = class(TmsScrollShape)
+ TmsScrollShapeLeft= class(TmsScrollShape)
  public
   class function ButtonShape: ImsShape; override;
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
@@ -22,17 +22,18 @@ implementation
 
 { TmsScrollShapeUp }
 
-class function TmsScrollShapeUp.ButtonShape: ImsShape;
+class function TmsScrollShapeLeft.ButtonShape: ImsShape;
 begin
- Result := TmsUpArrow.Create(TPointF.Create(0, 0));
+ Result := TmsLeftArrow.Create(TPointF.Create(0, 0));
 end;
 
 
-class function TmsScrollShapeUp.DoNullClick(
+class function TmsScrollShapeLeft.DoNullClick(
   const aHolder: ImsDiagrammsHolder): Boolean;
 begin
  Result := true;
- aHolder.Scroll(TPointF.Create(0, ScrollDelta));
+ aHolder.Scroll(TPointF.Create(ScrollDelta, 0));
 end;
 
 end.
+

@@ -36,7 +36,10 @@ uses
   msRemoveIcon,
   msMoveIcon,
   msTextShape,
-  msScrollShapeUp
+  msScrollShapeUp,
+  msScrollShapeDown,
+  msScrollShapeRight,
+  msScrollShapeLeft
   ;
 
 // Важно !!!
@@ -79,7 +82,10 @@ begin
   TmsRemoveIcon,
   TmsMoveIcon,
   TmsTextShape,
-  TmsScrollShapeUp
+  TmsScrollShapeUp,
+  TmsScrollShapeDown,
+  TmsScrollShapeRight,
+  TmsScrollShapeLeft
  ]);
 end;
 

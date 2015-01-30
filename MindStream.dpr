@@ -122,7 +122,11 @@ uses
   FMX.DUnit.Interfaces in 'FMX.DUnit\FMX.DUnit.Interfaces.pas',
   msShapeButtonPrim in 'ShapeButtons\Abstract\msShapeButtonPrim.pas',
   msScrollBarShapeButton in 'ShapeButtons\msScrollBarShapeButton.pas',
-  msScrollShapeUp in 'ShapeTools\ScrollButtons\msScrollShapeUp.pas';
+  msScrollShapeUp in 'ShapeTools\ScrollButtons\msScrollShapeUp.pas',
+  msScrollShape in 'ShapeTools\ScrollButtons\msScrollShape.pas',
+  msScrollShapeDown in 'ShapeTools\ScrollButtons\msScrollShapeDown.pas',
+  msScrollShapeRight in 'ShapeTools\ScrollButtons\msScrollShapeRight.pas',
+  msScrollShapeLeft in 'ShapeTools\ScrollButtons\msScrollShapeLeft.pas';
 
 {$R *.res}
 
