@@ -3,9 +3,6 @@
 interface
 
 uses
- FMX.StdCtrls,
- FMX.Controls,
- FMX.Graphics,
  FMX.ListBox,
  System.Types,
  System.Classes,
@@ -32,14 +29,7 @@ type
 implementation
 
 uses
- System.Math.Vectors,
- FMX.Dialogs,
- System.SysUtils,
- msPaletteShapeCreator,
- msShapesForToolbar,
- Math,
- System.UITypes,
- FMX.Types
+ msPaletteShapeCreator
  ;
 
 // TmsShapeButton

@@ -4,11 +4,8 @@ interface
 
 uses
  FMX.StdCtrls,
- FMX.Controls,
  FMX.Graphics,
- FMX.ListBox,
  System.Types,
- System.Classes,
  msShape,
  msInterfaces
  ;
