@@ -304,12 +304,15 @@
         <DCCReference Include="ConcreteShapes\msTextShape.pas"/>
         <DCCReference Include="AbstractShapes\msRectangularShape.pas"/>
         <DCCReference Include="FMX.DUnit\FMX.DUnit.Interfaces.pas"/>
-        <DCCReference Include="ShapeButtons\msScrollBarShapeButton.pas"/>
         <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeUp.pas"/>
         <DCCReference Include="ShapeTools\ScrollButtons\msScrollShape.pas"/>
         <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeDown.pas"/>
         <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeRight.pas"/>
         <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeLeft.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeUpLeft.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeUpRight.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeDownLeft.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeDownRight.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>

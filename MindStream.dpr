@@ -120,12 +120,15 @@ uses
   msTextShape in 'ConcreteShapes\msTextShape.pas',
   msRectangularShape in 'AbstractShapes\msRectangularShape.pas',
   FMX.DUnit.Interfaces in 'FMX.DUnit\FMX.DUnit.Interfaces.pas',
-  msScrollBarShapeButton in 'ShapeButtons\msScrollBarShapeButton.pas',
   msScrollShapeUp in 'ShapeTools\ScrollButtons\msScrollShapeUp.pas',
   msScrollShape in 'ShapeTools\ScrollButtons\msScrollShape.pas',
   msScrollShapeDown in 'ShapeTools\ScrollButtons\msScrollShapeDown.pas',
   msScrollShapeRight in 'ShapeTools\ScrollButtons\msScrollShapeRight.pas',
-  msScrollShapeLeft in 'ShapeTools\ScrollButtons\msScrollShapeLeft.pas';
+  msScrollShapeLeft in 'ShapeTools\ScrollButtons\msScrollShapeLeft.pas',
+  msScrollShapeUpLeft in 'ShapeTools\ScrollButtons\msScrollShapeUpLeft.pas',
+  msScrollShapeUpRight in 'ShapeTools\ScrollButtons\msScrollShapeUpRight.pas',
+  msScrollShapeDownLeft in 'ShapeTools\ScrollButtons\msScrollShapeDownLeft.pas',
+  msScrollShapeDownRight in 'ShapeTools\ScrollButtons\msScrollShapeDownRight.pas';
 
 {$R *.res}
 
