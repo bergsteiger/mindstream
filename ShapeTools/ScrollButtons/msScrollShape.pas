@@ -21,6 +21,10 @@ type
 
 implementation
 
+uses
+ msShapesGroup
+ ;
+
 // TmsScrollShape
 
 class function TmsScrollShape.DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean;
@@ -39,7 +43,7 @@ end;
 
 class function TmsScrollShape.ButtonShape: ImsShape;
 begin
- Result := ArrowShape;
+ Result := TmsShapesGroup.Create([ArrowShape]);
 end;
 
 end.
