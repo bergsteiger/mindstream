@@ -58,8 +58,16 @@ uses
  msShapeButton,
  msShapesForToolbar,
  msPaletteShapeCreator,
- msUpArrow,
- msShapeClass
+ msShapeClass,
+
+ msScrollShapeUp,
+ msScrollShapeDown,
+ msScrollShapeRight,
+ msScrollShapeLeft,
+ msScrollShapeUpLeft,
+ msScrollShapeUpRight,
+ msScrollShapeDownLeft,
+ msScrollShapeDownRight
  ;
 
 {$R *.fmx}
@@ -74,10 +82,10 @@ var
  l_Button : TmsShapeButton;
  l_P: TPointF;
 begin
-{ l_Button := TmsScrollBarShapeButton.Create(pnlBottom,
-                                            TmsShapeClass.Create(TmsUpArrow),
-                                            FDiagrammsController.As_ImsDiagrammsHolder,
-                                            TmsUpArrow.Create(l_Button.LocalRect.CenterPoint));
+{ l_Button := TmsScrollShapeUp.Create(pnlBottom,
+                                   msScrollShapeUp,
+                                   FDiagrammsController.As_ImsDiagrammsHolder,
+                                   TmsUpArrow.Create(l_Button.LocalRect.CenterPoint));Ъ
  pnlBottom.AddObject(l_Button);
  l_P := TPointF.Create(pnlBottom.Width / 2, 0);
  l_Button.Position.X := l_P.X - l_Button.LocalRect.Width / 2;
