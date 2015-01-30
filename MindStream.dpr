@@ -56,7 +56,7 @@ uses
   msDiagrammStack in 'msDiagrammStack.pas',
   TestSaveToPNG in 'Tests\Module\TestSaveToPNG.pas',
   msTestConstants in 'Tests\Module\msTestConstants.pas',
-  msShapeButton in 'ShapeButtons\msShapeButton.pas',
+  msToolBarShapeButton in 'ShapeButtons\msToolBarShapeButton.pas',
   msCompletedShapeCreator in 'ShapeCreators\msCompletedShapeCreator.pas',
   msPaletteShapeCreator in 'ShapeCreators\msPaletteShapeCreator.pas',
   msNullClickShape in 'ShapeTools\msNullClickShape.pas',
@@ -119,8 +119,9 @@ uses
   msScalingShape in 'ContainerShapes\msScalingShape.pas',
   msTextShape in 'ConcreteShapes\msTextShape.pas',
   msRectangularShape in 'AbstractShapes\msRectangularShape.pas',
-  FMX.DUnit.Interfaces in 'FMX.DUnit\FMX.DUnit.Interfaces.pas'
-  ;
+  FMX.DUnit.Interfaces in 'FMX.DUnit\FMX.DUnit.Interfaces.pas',
+  msShapeButtonPrim in 'ShapeButtons\Abstract\msShapeButtonPrim.pas',
+  msScrollBarShapeButton in 'ShapeButtons\msScrollBarShapeButton.pas';
 
 {$R *.res}
 
