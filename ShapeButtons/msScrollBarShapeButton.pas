@@ -46,7 +46,7 @@ end;
 
 procedure TmsScrollBarShapeButton.MyClick(Sender: TObject);
 begin
- f_Holder.Scroll(TPointF.Create(0, -1));
+ f_Holder.Scroll(TPointF.Create(0, 5));
 end;
 
 end.
