@@ -264,6 +264,7 @@ end;
 function TmsDiagramm.ShapeByPt(const aPoint: TPointF): ImsShape;
 var
  l_Shape: ImsShape;
+ l_HitShape: ImsShape;
  l_Index: Integer;
 begin
  Result := nil;
@@ -274,11 +275,11 @@ begin
  for l_Index := f_Items.Count - 1 downto 0 do
  begin
   l_Shape := f_Items.Items[l_Index];
-  if l_Shape.ContainsPt(aPoint) then
+  if l_Shape.HitTest(aPoint, l_HitShape) then
   begin
-   Result := l_Shape;
+   Result := l_HitShape;
    Exit;
-  end; // l_Shape.ContainsPt(aPoint)
+  end; // l_Shape.HitTest(aPoint, l_HitShape)
  end; // for l_Index
 end;
 

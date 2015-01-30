@@ -55,9 +55,10 @@ procedure TestTmsRectangle.TestContainsPt;
 var
   ReturnValue: Boolean;
   aPoint: TPointF;
+  l_HitShape: ImsShape;
 begin
   // TODO: Setup method call parameters
-  ReturnValue := FmsRectangle.ContainsPt(aPoint);
+  ReturnValue := FmsRectangle.HitTest(aPoint, l_HitShape);
   // TODO: Validate method results
 end;
 

@@ -19,7 +19,7 @@ type
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
-  function ContainsPt(const aPoint: TPointF): Boolean; override;
+  function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
   constructor CreateInner(const aShape: ImsShape);
   property ShapeToShow : ImsShape
    read f_Shape;
@@ -67,10 +67,10 @@ begin
  Result := ShapeToShow.DrawBounds;
 end;
 
-function TmsProxyShape.ContainsPt(const aPoint: TPointF): Boolean;
+function TmsProxyShape.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
 begin
  Assert(ShapeToShow <> nil);
- Result := ShapeToShow.ContainsPt(aPoint);
+ Result := ShapeToShow.HitTest(aPoint, theShape);
 end;
 
 end.

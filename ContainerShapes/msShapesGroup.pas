@@ -20,7 +20,7 @@ type
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
-  function ContainsPt(const aPoint: TPointF): Boolean; override;
+  function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
   constructor CreateInner(const aShapes: array of ImsShape);
  public
   class function Create(const aShapes: array of ImsShape): ImsShape;
@@ -87,18 +87,18 @@ begin
  end;//for l_Shape
 end;
 
-function TmsShapesGroup.ContainsPt(const aPoint: TPointF): Boolean;
+function TmsShapesGroup.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
 var
  l_Shape : ImsShape;
 begin
  Assert(f_Shapes <> nil);
  Result := false;
  for l_Shape in f_Shapes do
-  if l_Shape.ContainsPt(aPoint) then
+  if l_Shape.HitTest(aPoint, theShape) then
   begin
    Result := true;
    Exit;
-  end;//l_Shape.ContainsPt(aPoint)
+  end;//l_Shape.HitTest(aPoint, theShape)
 end;
 
 end.
