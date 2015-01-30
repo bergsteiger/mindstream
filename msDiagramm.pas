@@ -229,17 +229,17 @@ procedure TmsDiagramm.DrawTo(const aCanvas: TCanvas);
 var
  l_Shape: ImsShape;
 begin
-// aCanvas.BeginScene;
+ aCanvas.BeginScene;
  try
   if (f_Items = nil) then
-  // - если заггрузить диаграммы, а потом провалиться на N+1 уровней -
-  //   мы как раз сюда попадём
+  // - пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ N+1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ -
+  //   пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
    Exit;
   Assert(f_Items <> nil);
   for l_Shape in f_Items do
    l_Shape.DrawTo(TmsDrawContext.Create(aCanvas));
  finally
-//  aCanvas.EndScene;
+  aCanvas.EndScene;
  end; // try..finally
 end;
 
@@ -268,8 +268,8 @@ var
 begin
  Result := nil;
   if (f_Items = nil) then
-  // - если заггрузить диаграммы, а потом провалиться на N+1 уровней -
-  //   мы как раз сюда попадём
+  // - пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ N+1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ -
+  //   пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
    Exit;
  for l_Index := f_Items.Count - 1 downto 0 do
  begin
