@@ -38,6 +38,7 @@ type
   f_CurrentDiagramms : ImsDiagrammsList;
   f_CurrentDiagramm : ImsDiagramm;
   f_DiagrammStack: TmsDiagrammStack;
+  f_Delta: TPointF;
   procedure cbDiagrammChange(Sender: TObject);
   procedure btAddDiagrammClick(Sender: TObject);
   procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
@@ -52,6 +53,8 @@ type
   // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
   procedure SwapParents;
   // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
+  procedure Scroll(aDirection: TPointF);
+
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
@@ -95,7 +98,8 @@ uses
  msShapesForToolbar,
  Math,
  msShapeCreator,
- FMX.Dialogs;
+ FMX.Dialogs,
+ System.Math.Vectors;
 
 type
  TmsDiagrammsHolder = class(TmsInterfacedRefcounted, ImsDiagrammsHolder)
@@ -107,6 +111,8 @@ type
   // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
   procedure SwapParents;
   // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
+  procedure Scroll(aDirection: TPointF);
+  // - скроллинг диаграммы
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
  public
@@ -138,6 +144,12 @@ procedure TmsDiagrammsHolder.UpToParent;
 // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
 begin
  f_DiagrammsController.UpToParent;
+end;
+
+procedure TmsDiagrammsHolder.Scroll(aDirection: TPointF);
+// - скроллинг диаграммы
+begin
+ f_DiagrammsController.Scroll(aDirection);
 end;
 
 procedure TmsDiagrammsHolder.SwapParents;
@@ -341,8 +353,34 @@ begin
 end;
 
 procedure TmsDiagrammsController.DrawTo(const aCanvas: TCanvas);
+var
+ l_OriginalMatrix: TMatrix;
+ l_Matrix: TMatrix;
+ l_CenterPoint: TPointF;
 begin
+ aCanvas.BeginScene;
+ l_OriginalMatrix := aCanvas.Matrix;
+ l_CenterPoint := TPointF.Create(0,0);
+
+  l_Matrix := TMatrix.Identity;
+  // - СНИМАЕМ оригинальную матрицу, точнее берём ЕДИНИЧНУЮ матрицу
+  // https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X, -l_CenterPoint.Y);
+  // - сдвигаем начало координат для фигуры
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(f_Delta.X, f_Delta.Y);
+  // - задаём начало координат - относительно дельты
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
+  // - задаём начало координат
+  l_Matrix := l_Matrix * l_OriginalMatrix;
+  // - ПРИМЕНЯЕМ оригинальную матрицу
+  // Иначе например ОРИГИНАЛЬНЫЙ параллельный перенос - не будет работать.
+  // https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B0%D0%BB%D0%BB%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81
+ aCanvas.SetMatrix(l_Matrix);
  CurrentDiagramm.DrawTo(aCanvas);
+ // - отрисовываем примитив с учётом матрицы преобразований
+  aCanvas.SetMatrix(l_OriginalMatrix);
+  // - восстанавливаем ОРИГИНАЛЬНУЮ матрицу
+  aCanvas.EndScene;
 end;
 
 function TmsDiagrammsController.As_ImsDiagrammsHolder: ImsDiagrammsHolder;
@@ -407,4 +445,10 @@ begin
  f_DiagrammStack.Push(l_Prev);*)
 end;
 
+procedure TmsDiagrammsController.Scroll(aDirection: TPointF);
+begin
+ f_Delta := TPointF.Create(f_Delta.X + aDirection.X,
+                           f_Delta.Y + aDirection.Y);
+ CurrentDiagramm.Invalidate;
+end;
 end.

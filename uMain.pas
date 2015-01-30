@@ -29,6 +29,7 @@ type
     btLoadDiagramm: TButton;
     btnSaveToPNG: TButton;
     pnlToolBar: TPanel;
+    pnlBottom: TPanel;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -40,6 +41,7 @@ type
   private
    FDiagrammsController: ImsDiagrammsController;
    procedure CreateToolBar(const aPanelWidth: Single);
+   procedure CreateScrollButtons;
   public
     { Public declarations }
   end;
@@ -53,9 +55,12 @@ uses
  System.Math.Vectors,
  msShape,
  msTool,
- msShapeButton,
+ msToolBarShapeButton,
  msShapesForToolbar,
- msPaletteShapeCreator
+ msPaletteShapeCreator,
+ msScrollBarShapeButton,
+ msUpArrow,
+ msShapeClass
  ;
 
 {$R *.fmx}
@@ -63,6 +68,21 @@ uses
 procedure TfmMain.btnClearImageClick(Sender: TObject);
 begin
  FDiagrammsController.Clear;
+end;
+
+procedure TfmMain.CreateScrollButtons;
+var
+ l_Button : TmsScrollBarShapeButton;
+ l_P: TPointF;
+begin
+ l_Button := TmsScrollBarShapeButton.Create(pnlBottom,
+                                            TmsShapeClass.Create(TmsUpArrow),
+                                            FDiagrammsController.As_ImsDiagrammsHolder,
+                                            TmsUpArrow.Create(l_Button.LocalRect.CenterPoint));
+ pnlBottom.AddObject(l_Button);
+ l_P := TPointF.Create(pnlBottom.Width / 2, 0);
+ l_Button.Position.X := l_P.X - l_Button.LocalRect.Width / 2;
+ l_Button.Position.Y := l_P.Y;
 end;
 
 procedure TfmMain.CreateToolBar(const aPanelWidth: Single);
@@ -78,7 +98,7 @@ begin
     Result := Round(aPanelWidth) div TmsPaletteShapeCreator.ButtonSize;
    end;//GetColumnCount
   begin
-   pnlToolBar.AddObject(TmsShapeButton.Create(pnlToolBar, aShapeClass, cbShapes, l_Column, l_Row, FDiagrammsController.As_ImsDiagrammsHolder));
+   pnlToolBar.AddObject(TmsToolBarShapeButton.Create(pnlToolBar, aShapeClass, cbShapes, l_Column, l_Row, FDiagrammsController.As_ImsDiagrammsHolder));
    Inc(l_Column);
    if (l_Column > GetColumnCount-1) then
    begin
@@ -99,6 +119,7 @@ begin
                                                        btLoadDiagramm,
                                                        btnSaveToPNG);
  CreateToolBar(pnlToolBar.Width);
+ CreateScrollButtons;
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
