@@ -36,7 +36,8 @@ uses
  Math,
  msPaletteShapeCreator
  ;
-{ TmsShapeButtonPrim }
+
+// TmsShapeButtonPrim
 
 procedure TmsShapeButtonPrim.MyClick(Sender: TObject);
 begin
