@@ -240,7 +240,7 @@
         <DCCReference Include="msDiagrammStack.pas"/>
         <DCCReference Include="Tests\Module\TestSaveToPNG.pas"/>
         <DCCReference Include="Tests\Module\msTestConstants.pas"/>
-        <DCCReference Include="ShapeButtons\msToolBarShapeButton.pas"/>
+        <DCCReference Include="ShapeButtons\msShapeButton.pas"/>
         <DCCReference Include="ShapeCreators\msCompletedShapeCreator.pas"/>
         <DCCReference Include="ShapeCreators\msPaletteShapeCreator.pas"/>
         <DCCReference Include="ShapeTools\msNullClickShape.pas"/>
@@ -304,7 +304,6 @@
         <DCCReference Include="ConcreteShapes\msTextShape.pas"/>
         <DCCReference Include="AbstractShapes\msRectangularShape.pas"/>
         <DCCReference Include="FMX.DUnit\FMX.DUnit.Interfaces.pas"/>
-        <DCCReference Include="ShapeButtons\Abstract\msShapeButtonPrim.pas"/>
         <DCCReference Include="ShapeButtons\msScrollBarShapeButton.pas"/>
         <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeUp.pas"/>
         <DCCReference Include="ShapeTools\ScrollButtons\msScrollShape.pas"/>
