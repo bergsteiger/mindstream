@@ -34,6 +34,7 @@ type
   function IsNeedsSecondClick : Boolean; virtual;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; virtual;
   procedure MoveTo(const aFinishPoint: TPointF); virtual;
+  function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
@@ -99,6 +100,13 @@ end;
 class function TmsShape.Create(const aStartPoint: TPointF): ImsShape;
 begin
  Result := CreateInner(aStartPoint);
+end;
+
+function TmsShape.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
+begin
+ Result := ContainsPt(aPoint);
+ if Result then
+  theShape := Self;
 end;
 
 function TmsShape.ContainsPt(const aPoint: TPointF): Boolean;

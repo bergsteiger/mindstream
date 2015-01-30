@@ -91,6 +91,7 @@ type
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean;
+  function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
   function ContainsPt(const aPoint: TPointF): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
