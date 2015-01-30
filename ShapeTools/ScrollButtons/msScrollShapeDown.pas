@@ -15,20 +15,16 @@ type
   class function ScrollDelta : TPointF; override;
  public
   class function ButtonShape: ImsShape; override;
- end;//TmsScrollShapeUp
+ end;//TmsScrollShapeDown
 
 implementation
 
-// TmsScrollShapeUp
-
-{ TmsScrollShapeUp }
+// TmsScrollShapeDown
 
 class function TmsScrollShapeDown.ButtonShape: ImsShape;
 begin
  Result := TmsDownArrow.Create;
 end;
-
-
 
 class function TmsScrollShapeDown.ScrollDelta: TPointF;
 begin

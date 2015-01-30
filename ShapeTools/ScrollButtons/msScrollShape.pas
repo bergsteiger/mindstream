@@ -20,8 +20,6 @@ implementation
 
 // TmsScrollShape
 
-{ TmsScrollShape }
-
 class function TmsScrollShape.DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean;
 begin
  Result := true;
@@ -30,6 +28,7 @@ end;
 
 class function TmsScrollShape.ScrollDelta: TPointF;
 begin
+ Result := TPointF.Create(0, 0);
  Assert(False, 'Реализовать в потомках');
 end;
 
