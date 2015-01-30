@@ -97,6 +97,7 @@ begin
   if l_Shape.HitTest(aPoint, theShape) then
   begin
    Result := true;
+   theShape := Self;
    Exit;
   end;//l_Shape.HitTest(aPoint, theShape)
 end;
