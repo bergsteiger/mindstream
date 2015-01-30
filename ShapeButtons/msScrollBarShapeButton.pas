@@ -12,7 +12,7 @@ uses
  ;
 
 type
- TmsToolBarShapeButton = class(TmsShapeButtonPrim)
+ TmsScrollBarShapeButton= class(TmsShapeButtonPrim)
   protected
    procedure MyClick(Sender: TObject); override;
   public
@@ -23,15 +23,23 @@ type
 
 implementation
 
+uses
+ msPaletteShapeCreator
+ ;
 { TmsToolBarShapeButton }
 
-constructor TmsToolBarShapeButton.Create(AOwner: TComponent;
-  const aShape: MCmsShape; const aHolder: ImsDiagrammsHolder);
+constructor TmsScrollBarShapeButton.Create(AOwner: TComponent;
+                                         const aShape: MCmsShape;
+                                         const aHolder: ImsDiagrammsHolder);
 begin
+ inherited Create(AOwner, aShape, aHolder);
 
+ // Пока так
+ Width := TmsPaletteShapeCreator.ButtonSize;
+ Height := TmsPaletteShapeCreator.ButtonSize;
 end;
 
-procedure TmsToolBarShapeButton.MyClick(Sender: TObject);
+procedure TmsScrollBarShapeButton.MyClick(Sender: TObject);
 begin
   inherited;
 
