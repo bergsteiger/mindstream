@@ -71,6 +71,8 @@ function TmsProxyShape.HitTest(const aPoint: TPointF; out theShape: ImsShape): B
 begin
  Assert(ShapeToShow <> nil);
  Result := ShapeToShow.HitTest(aPoint, theShape);
+ if Result then
+  theShape := Self;
 end;
 
 end.
