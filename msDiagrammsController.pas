@@ -52,6 +52,8 @@ type
   // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
   procedure SwapParents;
   // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
+  procedure Scroll(aDirection: TPointF);
+
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
@@ -107,6 +109,8 @@ type
   // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
   procedure SwapParents;
   // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
+  procedure Scroll(aDirection: TPointF);
+  // - скроллинг диаграммы
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
  public
@@ -138,6 +142,12 @@ procedure TmsDiagrammsHolder.UpToParent;
 // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
 begin
  f_DiagrammsController.UpToParent;
+end;
+
+procedure TmsDiagrammsHolder.Scroll(aDirection: TPointF);
+// - скроллинг диаграммы
+begin
+ f_DiagrammsController.Scroll(aDirection);
 end;
 
 procedure TmsDiagrammsHolder.SwapParents;
@@ -407,4 +417,8 @@ begin
  f_DiagrammStack.Push(l_Prev);*)
 end;
 
+procedure TmsDiagrammsController.Scroll(aDirection: TPointF);
+begin
+ Assert(False, 'Не реализовано');
+end;
 end.
