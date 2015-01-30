@@ -42,32 +42,15 @@ constructor TmsToolBarShapeButton.Create(AOwner: TComponent;
                                   const aHolder: ImsDiagrammsHolder);
 begin
  Assert(aShapes <> nil);
- Assert(aShape <> nil);
- Assert(aHolder <> nil);
- inherited Create(AOwner);
- f_Holder := aHolder;
+ inherited Create(AOwner, aShape, aHolder);
 
  Width := TmsPaletteShapeCreator.ButtonSize;
  Height := TmsPaletteShapeCreator.ButtonSize;
 
- f_ShapeClass := aShape;
- f_Shape := TmsPaletteShapeCreator.Create(aShape).CreateShape
-                                     (TmsMakeShapeContext.Create
-                                      (TPointF.Create
-                                       (0{TmsPaletteShapeCreator.ButtonSize / 2},
-                                        0{TmsPaletteShapeCreator.ButtonSize / 2}),
-                                        nil,
-                                        nil)
-                                      );
  f_Shapes := aShapes;
- OnPaint := MyPaint;
- OnClick := MyClick;
-
- Assert(f_Shape <> nil);
 
  Self.Position.X := aColumn * TmsPaletteShapeCreator.ButtonSize;
  Self.Position.Y := aRow * TmsPaletteShapeCreator.ButtonSize;
-
 end;
 
 procedure TmsToolBarShapeButton.MyClick(Sender: TObject);

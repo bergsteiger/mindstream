@@ -5,6 +5,7 @@ interface
 uses
  FMX.StdCtrls,
  FMX.Graphics,
+ System.Classes,
  System.Types,
  msShape,
  msInterfaces
@@ -20,6 +21,9 @@ type
   procedure MyPaint(Sender: TObject; Canvas: TCanvas; const ARect: TRectF); virtual;
   procedure MyClick(Sender: TObject); virtual;
  public
+  constructor Create(AOwner: TComponent;
+                     const aShape: MCmsShape;
+                     const aHolder: ImsDiagrammsHolder);
   destructor Destroy; override;
  end;// TmsShapeButtonPrim
 
@@ -29,7 +33,8 @@ uses
  System.Math.Vectors,
  System.UITypes,
  FMX.Types,
- Math
+ Math,
+ msPaletteShapeCreator
  ;
 { TmsShapeButtonPrim }
 
@@ -128,6 +133,29 @@ begin
   Canvas.SetMatrix(l_OriginalMatrix);
   // - восстанавливаем ОРИГИНАЛЬНУЮ матрицу
  end;//try..finally
+end;
+
+constructor TmsShapeButtonPrim.Create(AOwner: TComponent;
+                                      const aShape: MCmsShape;
+                                      const aHolder: ImsDiagrammsHolder);
+begin
+ Assert(aShape <> nil);
+ Assert(aHolder <> nil);
+
+ inherited Create(AOwner);
+ f_Holder := aHolder;
+ f_ShapeClass := aShape;
+ f_Shape := TmsPaletteShapeCreator.Create(aShape).CreateShape
+                                     (TmsMakeShapeContext.Create
+                                      (TPointF.Create
+                                       (0{TmsPaletteShapeCreator.ButtonSize / 2},
+                                        0{TmsPaletteShapeCreator.ButtonSize / 2}),
+                                        nil,
+                                        nil)
+                                      );
+ Assert(f_Shape <> nil);
+ OnPaint := MyPaint;
+ OnClick := MyClick;
 end;
 
 destructor TmsShapeButtonPrim.Destroy;
