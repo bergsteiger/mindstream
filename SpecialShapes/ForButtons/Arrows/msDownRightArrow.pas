@@ -21,8 +21,7 @@ implementation
 
 class function TmsDownRightArrow.Create(const aPointedPoint: TPointF): ImsShape;
 begin
- Result := CreateCompletedInternal(TPointF.Create(aPointedPoint.X - InitialLength, aPointedPoint.Y - InitialLength),
-                                   TPointF.Create(aPointedPoint.X, aPointedPoint.Y));
+ Result := CreateCompletedInternal(TPointF.Create(aPointedPoint.X, aPointedPoint.Y), TPointF.Create(aPointedPoint.X + InitialLength, aPointedPoint.Y + InitialLength));
 end;
 
 end.
