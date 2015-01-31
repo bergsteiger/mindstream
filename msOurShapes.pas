@@ -43,7 +43,8 @@ uses
   msScrollShapeUpLeft,
   msScrollShapeUpRight,
   msScrollShapeDownLeft,
-  msScrollShapeDownRight
+  msScrollShapeDownRight,
+  msScrollShapeResetOrigin
   ;
 
 // Важно !!!
@@ -93,7 +94,8 @@ begin
   TmsScrollShapeUpLeft,
   TmsScrollShapeUpRight,
   TmsScrollShapeDownLeft,
-  TmsScrollShapeDownRight
+  TmsScrollShapeDownRight,
+  TmsScrollShapeResetOrigin
  ]);
 end;
 

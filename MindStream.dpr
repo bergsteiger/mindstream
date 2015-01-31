@@ -128,7 +128,9 @@ uses
   msScrollShapeUpLeft in 'ShapeTools\ScrollButtons\msScrollShapeUpLeft.pas',
   msScrollShapeUpRight in 'ShapeTools\ScrollButtons\msScrollShapeUpRight.pas',
   msScrollShapeDownLeft in 'ShapeTools\ScrollButtons\msScrollShapeDownLeft.pas',
-  msScrollShapeDownRight in 'ShapeTools\ScrollButtons\msScrollShapeDownRight.pas';
+  msScrollShapeDownRight in 'ShapeTools\ScrollButtons\msScrollShapeDownRight.pas',
+  msScrollShapeResetOrigin in 'msScrollShapeResetOrigin.pas',
+  msScrollShapePrim in 'ShapeTools\ScrollButtons\msScrollShapePrim.pas';
 
 {$R *.res}
 
