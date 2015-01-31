@@ -90,11 +90,77 @@ var
  l_Button : TmsShapeButton;
  l_P: TPointF;
 begin
+ // TmsScrollShapeUpLeft
+ l_Button := BuildButton(TmsShapeClass.Create(TmsScrollShapeUpLeft));
+ pnlBottom.AddObject(l_Button);
+ l_P := TPointF.Create(0, 0);
+ l_Button.Position.X := l_P.X;
+ l_Button.Position.Y := l_P.Y;
+ l_Button.Anchors := [TAnchorKind.akTop, TAnchorKind.akLeft];
+
+ // TmsScrollShapeUp
  l_Button := BuildButton(TmsShapeClass.Create(TmsScrollShapeUp));
  pnlBottom.AddObject(l_Button);
  l_P := TPointF.Create(pnlBottom.Width / 2, 0);
  l_Button.Position.X := l_P.X - l_Button.LocalRect.Width / 2;
  l_Button.Position.Y := l_P.Y;
+ l_Button.Anchors := [TAnchorKind.akTop];
+
+ // TmsScrollShapeUpRight
+ l_Button := BuildButton(TmsShapeClass.Create(TmsScrollShapeUpRight));
+ pnlBottom.AddObject(l_Button);
+ l_P := TPointF.Create(pnlBottom.Width, 0);
+ l_Button.Position.X := l_P.X - l_Button.LocalRect.Width;
+ l_Button.Position.Y := l_P.Y;
+ l_Button.Anchors := [TAnchorKind.akTop, TAnchorKind.akRight];
+
+ // TmsScrollShapeLeft
+ l_Button := BuildButton(TmsShapeClass.Create(TmsScrollShapeLeft));
+ pnlBottom.AddObject(l_Button);
+ l_P := TPointF.Create(0, pnlBottom.Height / 2);
+ l_Button.Position.X := l_P.X;
+ l_Button.Position.Y := l_P.Y - l_Button.LocalRect.Height / 2;
+ l_Button.Anchors := [TAnchorKind.akLeft];
+
+ // TmsScrollShapeRight
+ l_Button := BuildButton(TmsShapeClass.Create(TmsScrollShapeRight));
+ pnlBottom.AddObject(l_Button);
+ l_P := TPointF.Create(pnlBottom.Width, pnlBottom.Height / 2);
+ l_Button.Position.X := l_P.X - l_Button.LocalRect.Width;
+ l_Button.Position.Y := l_P.Y - l_Button.LocalRect.Height / 2;
+ l_Button.Anchors := [TAnchorKind.akRight];
+
+ // TmsScrollShapeDownLeft
+ l_Button := BuildButton(TmsShapeClass.Create(TmsScrollShapeDownLeft));
+ pnlBottom.AddObject(l_Button);
+ l_P := TPointF.Create(0, pnlBottom.Height);
+ l_Button.Position.X := l_P.X;
+ l_Button.Position.Y := l_P.Y - l_Button.LocalRect.Height;
+ l_Button.Anchors := [TAnchorKind.akLeft, TAnchorKind.akBottom];
+
+ // TmsScrollShapeDown
+ l_Button := BuildButton(TmsShapeClass.Create(TmsScrollShapeDown));
+ pnlBottom.AddObject(l_Button);
+ l_P := TPointF.Create(pnlBottom.Width / 2 , pnlBottom.Height);
+ l_Button.Position.X := l_P.X - l_Button.LocalRect.Width / 2;
+ l_Button.Position.Y := l_P.Y - l_Button.LocalRect.Height;
+ l_Button.Anchors := [TAnchorKind.akBottom];
+
+ // TmsScrollShapeDownRight
+ l_Button := BuildButton(TmsShapeClass.Create(TmsScrollShapeDownRight));
+ pnlBottom.AddObject(l_Button);
+ l_P := TPointF.Create(pnlBottom.Width, pnlBottom.Height);
+ l_Button.Position.X := l_P.X - l_Button.LocalRect.Width;
+ l_Button.Position.Y := l_P.Y - l_Button.LocalRect.Height;
+ l_Button.Anchors := [TAnchorKind.akBottom, TAnchorKind.akBottom];
+
+ // TmsScrollShapeResetOrigin
+ l_Button := BuildButton(TmsShapeClass.Create(TmsScrollShapeResetOrigin));
+ pnlBottom.AddObject(l_Button);
+ l_P := TPointF.Create(0, 0);
+ l_Button.Position.X := l_P.X + l_Button.LocalRect.Width;
+ l_Button.Position.Y := l_P.Y;
+ l_Button.Anchors := [TAnchorKind.akTop, TAnchorKind.akLeft];
 end;
 
 procedure TfmMain.CreateToolBar(const aPanelWidth: Single);
