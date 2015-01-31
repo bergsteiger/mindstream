@@ -121,6 +121,8 @@ type
   // - сигнализируем о том, что надо ѕќћ≈Ќя“№ местами –ќƒ»“≈Ћ№— »≈ диаграммы
   procedure Scroll(aDirection: TPointF);
   // - скроллинг диаграммы
+  procedure ResetOrigin;
+  // - восстанавливаем начальную систему координат
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
   property CurrentDiagramms : ImsDiagrammsList

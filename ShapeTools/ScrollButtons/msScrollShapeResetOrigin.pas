@@ -23,8 +23,8 @@ implementation
 class function TmsScrollShapeResetOrigin.DoNullClick(
   const aHolder: ImsDiagrammsHolder): Boolean;
 begin
- Result := False;
- Assert(False, 'не реализовано');
+ Result := True;
+ aHolder.ResetOrigin;
 end;
 end.
 
