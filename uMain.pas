@@ -67,7 +67,8 @@ uses
  msScrollShapeUpLeft,
  msScrollShapeUpRight,
  msScrollShapeDownLeft,
- msScrollShapeDownRight
+ msScrollShapeDownRight,
+ msScrollShapeResetOrigin
  ;
 
 {$R *.fmx}
@@ -78,18 +79,22 @@ begin
 end;
 
 procedure TfmMain.CreateScrollButtons;
+function BuildButton(aShape: ImsShapeClass) : TmsShapeButton;
+begin
+ Result := TmsShapeButton.Create(pnlBottom,
+                                 aShape,
+                                 cbShapes, 0, 0,
+                                 FDiagrammsController.As_ImsDiagrammsHolder);
+end;
 var
  l_Button : TmsShapeButton;
  l_P: TPointF;
 begin
-{ l_Button := TmsScrollShapeUp.Create(pnlBottom,
-                                   msScrollShapeUp,
-                                   FDiagrammsController.As_ImsDiagrammsHolder,
-                                   TmsUpArrow.Create(l_Button.LocalRect.CenterPoint));Ъ
+ l_Button := BuildButton(TmsShapeClass.Create(TmsScrollShapeUp));
  pnlBottom.AddObject(l_Button);
  l_P := TPointF.Create(pnlBottom.Width / 2, 0);
  l_Button.Position.X := l_P.X - l_Button.LocalRect.Width / 2;
- l_Button.Position.Y := l_P.Y;}
+ l_Button.Position.Y := l_P.Y;
 end;
 
 procedure TfmMain.CreateToolBar(const aPanelWidth: Single);
