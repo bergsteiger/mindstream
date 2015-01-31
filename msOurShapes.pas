@@ -39,7 +39,12 @@ uses
   msScrollShapeUp,
   msScrollShapeDown,
   msScrollShapeRight,
-  msScrollShapeLeft
+  msScrollShapeLeft,
+  msScrollShapeUpLeft,
+  msScrollShapeUpRight,
+  msScrollShapeDownLeft,
+  msScrollShapeDownRight,
+  msScrollShapeResetOrigin
   ;
 
 // Важно !!!
@@ -85,7 +90,12 @@ begin
   TmsScrollShapeUp,
   TmsScrollShapeDown,
   TmsScrollShapeRight,
-  TmsScrollShapeLeft
+  TmsScrollShapeLeft,
+  TmsScrollShapeUpLeft,
+  TmsScrollShapeUpRight,
+  TmsScrollShapeDownLeft,
+  TmsScrollShapeDownRight,
+  TmsScrollShapeResetOrigin
  ]);
 end;
 

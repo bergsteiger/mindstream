@@ -56,7 +56,7 @@ uses
   msDiagrammStack in 'msDiagrammStack.pas',
   TestSaveToPNG in 'Tests\Module\TestSaveToPNG.pas',
   msTestConstants in 'Tests\Module\msTestConstants.pas',
-  msToolBarShapeButton in 'ShapeButtons\msToolBarShapeButton.pas',
+  msShapeButton in 'ShapeButtons\msShapeButton.pas',
   msCompletedShapeCreator in 'ShapeCreators\msCompletedShapeCreator.pas',
   msPaletteShapeCreator in 'ShapeCreators\msPaletteShapeCreator.pas',
   msNullClickShape in 'ShapeTools\msNullClickShape.pas',
@@ -120,13 +120,17 @@ uses
   msTextShape in 'ConcreteShapes\msTextShape.pas',
   msRectangularShape in 'AbstractShapes\msRectangularShape.pas',
   FMX.DUnit.Interfaces in 'FMX.DUnit\FMX.DUnit.Interfaces.pas',
-  msShapeButtonPrim in 'ShapeButtons\Abstract\msShapeButtonPrim.pas',
-  msScrollBarShapeButton in 'ShapeButtons\msScrollBarShapeButton.pas',
   msScrollShapeUp in 'ShapeTools\ScrollButtons\msScrollShapeUp.pas',
   msScrollShape in 'ShapeTools\ScrollButtons\msScrollShape.pas',
   msScrollShapeDown in 'ShapeTools\ScrollButtons\msScrollShapeDown.pas',
   msScrollShapeRight in 'ShapeTools\ScrollButtons\msScrollShapeRight.pas',
-  msScrollShapeLeft in 'ShapeTools\ScrollButtons\msScrollShapeLeft.pas';
+  msScrollShapeLeft in 'ShapeTools\ScrollButtons\msScrollShapeLeft.pas',
+  msScrollShapeUpLeft in 'ShapeTools\ScrollButtons\msScrollShapeUpLeft.pas',
+  msScrollShapeUpRight in 'ShapeTools\ScrollButtons\msScrollShapeUpRight.pas',
+  msScrollShapeDownLeft in 'ShapeTools\ScrollButtons\msScrollShapeDownLeft.pas',
+  msScrollShapeDownRight in 'ShapeTools\ScrollButtons\msScrollShapeDownRight.pas',
+  msScrollShapePrim in 'ShapeTools\ScrollButtons\msScrollShapePrim.pas',
+  msScrollShapeResetOrigin in 'ShapeTools\ScrollButtons\msScrollShapeResetOrigin.pas';
 
 {$R *.res}
 

@@ -54,7 +54,9 @@ type
   procedure SwapParents;
   // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
   procedure Scroll(aDirection: TPointF);
-
+  // - скроллинг диаграммы
+  procedure ResetOrigin;
+  // - восстанавливаем начальную систему координат
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
@@ -113,6 +115,8 @@ type
   // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
   procedure Scroll(aDirection: TPointF);
   // - скроллинг диаграммы
+  procedure ResetOrigin;
+  // - восстанавливаем начальную систему координат
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
  public
@@ -138,6 +142,11 @@ end;
 procedure TmsDiagrammsHolder.pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
 begin
  f_DiagrammsController.CurrentDiagramms := aValue;
+end;
+
+procedure TmsDiagrammsHolder.ResetOrigin;
+begin
+ f_DiagrammsController.ResetOrigin;
 end;
 
 procedure TmsDiagrammsHolder.UpToParent;
@@ -345,6 +354,12 @@ procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
 begin
  CurrentDiagramm.ProcessClick(TmsClickContext.Create(TmsShapesForToolbar.Instance.ByName(cbShapes.Items[cbShapes.ItemIndex]).Creator, aStart,
    Self.As_ImsDiagrammsHolder));
+end;
+
+procedure TmsDiagrammsController.ResetOrigin;
+begin
+ f_Delta := TPointF.Create(0, 0);
+ CurrentDiagramm.Invalidate;
 end;
 
 procedure TmsDiagrammsController.SaveToPng(const aFileName: string);

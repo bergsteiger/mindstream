@@ -3,13 +3,13 @@ unit msScrollShape;
 interface
 
 uses
- msNullClickShape,
+ msScrollShapePrim,
  msInterfaces,
  System.Types
  ;
 
 type
- TmsScrollShape = class abstract(TmsNullClickShape)
+ TmsScrollShape = class abstract(TmsScrollShapePrim)
  public
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; override; final;
  protected
