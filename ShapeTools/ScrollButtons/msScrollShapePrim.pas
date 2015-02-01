@@ -18,7 +18,7 @@ implementation
 
 class function TmsScrollShapePrim.IsForToolbar: Boolean;
 begin
- Result := False;
+ Result := True;
 end;
 
 end.
