@@ -19,6 +19,7 @@ type
  end;//TmsScrollShapeResetOrigin
 
 implementation
+
 uses
  msShapesGroup,
  msRemoveIcon,
