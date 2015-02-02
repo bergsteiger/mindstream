@@ -165,19 +165,26 @@ begin
   l_Canvas := l_Bitmap.Canvas;
   l_Canvas.BeginScene;
   try
-   l_Canvas.Fill.Color := TAlphaColorRec.White;
+(*   l_Canvas.Fill.Color := TAlphaColorRec.White;
    l_Canvas.FillRect(TRectF.Create(TPointF.Create(0, 0), TPointF.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height))),
                     0,
                     0,
                     AllCorners,
                     1.0,
-                    TCornerType.Round);
+                    TCornerType.Round);*)
    l_OriginalMatrix := l_Canvas.Matrix;
    try
     l_Matrix := TMatrix.Identity;
     l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_SourceRect.Left, -l_SourceRect.Top);
     l_Matrix := l_Matrix * l_OriginalMatrix;
     l_Canvas.SetMatrix(l_Matrix);
+   l_Canvas.Fill.Color := TAlphaColorRec.White;
+   l_Canvas.FillRect(l_SourceRect,
+                    0,
+                    0,
+                    AllCorners,
+                    1.0,
+                    TCornerType.Round);
     Self.DrawTo(l_Canvas);
    finally
     l_Canvas.SetMatrix(l_OriginalMatrix);
