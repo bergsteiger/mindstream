@@ -55,6 +55,7 @@ uses
   TestmsJsonFormatter in 'Tests\Module\TestmsJsonFormatter.pas',
   msDiagrammStack in 'msDiagrammStack.pas',
   TestSaveToPNG in 'Tests\Module\TestSaveToPNG.pas',
+  TestSaveMoverToPNG in 'Tests\Module\TestSaveMoverToPNG.pas',
   msTestConstants in 'Tests\Module\msTestConstants.pas',
   msShapeButton in 'ShapeButtons\msShapeButton.pas',
   msCompletedShapeCreator in 'ShapeCreators\msCompletedShapeCreator.pas',
