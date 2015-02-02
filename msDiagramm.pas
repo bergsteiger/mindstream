@@ -151,6 +151,7 @@ var
  l_BitmapBuffer: TBitmap;
  l_SourceRect: TRectF;
  l_OriginalMatrix: TMatrix;
+ l_Canvas : TCanvas;
 begin
  // Фиксируем размер снимаемой области
  l_SourceRect := GetDrawBounds;
@@ -159,14 +160,17 @@ begin
  // Создаем временный буфер для получения скриншота
  l_BitmapBuffer := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
  try
-  l_OriginalMatrix := TMatrix.Identity;
-  l_OriginalMatrix := l_OriginalMatrix * l_BitmapBuffer.Canvas.Matrix;
-  l_BitmapBuffer.Canvas.SetMatrix(l_OriginalMatrix);
-  Self.DrawTo(l_BitmapBuffer.Canvas);
+  l_Canvas := l_BitmapBuffer.Canvas;
+  l_OriginalMatrix := l_Canvas.Matrix;
+  try
+   Self.DrawTo(l_Canvas);
+  finally
+   l_Canvas.SetMatrix(l_OriginalMatrix);
+  end;//try..finally
   l_BitmapBuffer.SaveToFile(aFileName);
  finally
   FreeAndNil(l_BitmapBuffer);
- end;
+ end;//try..finally
 end;
 
 procedure TmsDiagramm.LoadFrom(const aFileName: String);
