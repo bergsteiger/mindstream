@@ -85,7 +85,8 @@ uses
  msShapesForToolbar,
  msDiagrammsController,
  System.Math.Vectors,
- System.Math
+ System.Math,
+ FMX.Types
  ;
 
 {$Include msItemsHolder.mixin.pas}
@@ -163,6 +164,13 @@ begin
   l_Canvas := l_Bitmap.Canvas;
   l_Canvas.BeginScene;
   try
+   l_Canvas.Fill.Color := TAlphaColorRec.White;
+   l_Canvas.FillRect(TRectF.Create(TPointF.Create(0, 0), TPointF.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height))),
+                    0,
+                    0,
+                    AllCorners,
+                    1.0,
+                    TCornerType.Round);
    l_OriginalMatrix := l_Canvas.Matrix;
    try
     Self.DrawTo(l_Canvas);
