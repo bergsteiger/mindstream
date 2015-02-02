@@ -28,7 +28,7 @@ end;
 
 class function TmsScrollShapeLeft.ScrollDelta: TPointF;
 begin
- Result := TPointF.Create(5, 0);
+ Result := TPointF.Create(1, 0);
 end;
 
 end.
