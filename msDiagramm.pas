@@ -161,11 +161,16 @@ begin
  l_Bitmap := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
  try
   l_Canvas := l_Bitmap.Canvas;
-  l_OriginalMatrix := l_Canvas.Matrix;
+  l_Canvas.BeginScene;
   try
-   Self.DrawTo(l_Canvas);
+   l_OriginalMatrix := l_Canvas.Matrix;
+   try
+    Self.DrawTo(l_Canvas);
+   finally
+    l_Canvas.SetMatrix(l_OriginalMatrix);
+   end;//try..finally
   finally
-   l_Canvas.SetMatrix(l_OriginalMatrix);
+   l_Canvas.EndScene;
   end;//try..finally
   l_Bitmap.SaveToFile(aFileName);
  finally
