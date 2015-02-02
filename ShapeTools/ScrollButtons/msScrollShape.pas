@@ -31,7 +31,7 @@ uses
 class function TmsScrollShape.DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean;
 begin
  Result := true;
- aHolder.Scroll(ScrollDelta);
+ aHolder.Scroll(ScrollDelta * 5);
 end;
 
 class function TmsScrollShape.ScrollDelta: TPointF;
