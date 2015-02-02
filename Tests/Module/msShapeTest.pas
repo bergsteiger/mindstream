@@ -49,6 +49,7 @@ type
    function ShapeClass: MCmsShape;
    function ContextName: String; override;
    function InnerFolders: String; override;
+   procedure TransformContext(var theContext: TmsShapeTestContext); virtual;
    constructor CreateInner(const aContext: TmsShapeTestContext);
   public
    class procedure CheckShapes(aCheck: TmsShapeClassCheck);
@@ -237,10 +238,15 @@ begin
  TestDeSerializeForShapeClass;
 end;
 
+procedure TmsShapeTestPrim.TransformContext(var theContext: TmsShapeTestContext);
+begin
+end;
+
 constructor TmsShapeTestPrim.CreateInner(const aContext: TmsShapeTestContext);
 begin
  inherited Create(aContext.rMethodName);
  f_Context := aContext;
+ TransformContext(f_Context);
  FTestName := Self.ShapeClass.Name + '.' + aContext.rMethodName;
  f_TestSerializeMethodName := Self.ShapeClass.Name + '.';
 end;

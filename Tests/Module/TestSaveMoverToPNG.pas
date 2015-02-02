@@ -12,6 +12,7 @@ uses
 type
   TTestSaveMoverToPNG = class(TTestSaveToPNG)
   protected
+   procedure TransformContext(var theContext: TmsShapeTestContext); override;
    procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); override;
   end;//TTestSaveMoverToPNG
 
@@ -23,6 +24,12 @@ uses
   ;
 
 // TTestSaveMoverToPNG
+
+procedure TTestSaveMoverToPNG.TransformContext(var theContext: TmsShapeTestContext);
+begin
+ inherited;
+ theContext.rShapesCount := 1;
+end;
 
 procedure TTestSaveMoverToPNG.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 var
