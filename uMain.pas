@@ -152,7 +152,7 @@ begin
  l_P := TPointF.Create(pnlBottom.Width, pnlBottom.Height);
  l_Button.Position.X := l_P.X - l_Button.LocalRect.Width;
  l_Button.Position.Y := l_P.Y - l_Button.LocalRect.Height;
- l_Button.Anchors := [TAnchorKind.akBottom, TAnchorKind.akBottom];
+ l_Button.Anchors := [TAnchorKind.akRight, TAnchorKind.akBottom];
 
  // TmsScrollShapeResetOrigin
  l_Button := BuildButton(TmsShapeClass.Create(TmsScrollShapeResetOrigin));
