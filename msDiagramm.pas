@@ -148,28 +148,28 @@ end;
 
 procedure TmsDiagramm.SaveToPng(const aFileName: string);
 var
- l_BitmapBuffer: TBitmap;
+ l_Bitmap: TBitmap;
  l_SourceRect: TRectF;
  l_OriginalMatrix: TMatrix;
- l_Canvas : TCanvas;
+ l_Canvas: TCanvas;
 begin
  // Фиксируем размер снимаемой области
  l_SourceRect := GetDrawBounds;
  Assert(l_SourceRect.Width > 0);
  Assert(l_SourceRect.Height > 0);
  // Создаем временный буфер для получения скриншота
- l_BitmapBuffer := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
+ l_Bitmap := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
  try
-  l_Canvas := l_BitmapBuffer.Canvas;
+  l_Canvas := l_Bitmap.Canvas;
   l_OriginalMatrix := l_Canvas.Matrix;
   try
    Self.DrawTo(l_Canvas);
   finally
    l_Canvas.SetMatrix(l_OriginalMatrix);
   end;//try..finally
-  l_BitmapBuffer.SaveToFile(aFileName);
+  l_Bitmap.SaveToFile(aFileName);
  finally
-  FreeAndNil(l_BitmapBuffer);
+  FreeAndNil(l_Bitmap);
  end;//try..finally
 end;
 
