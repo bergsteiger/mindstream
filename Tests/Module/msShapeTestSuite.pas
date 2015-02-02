@@ -34,6 +34,10 @@ type
    class function TestClass: RmsShapeTest; override;
   end;//TmsDiagrammsTest
 
+  TmsDiagrammsMoverToPNGTest = class(TmsParametrizedShapeTestSuite)
+  protected
+   class function TestClass: RmsShapeTest; override;
+  end;//TmsDiagrammsMoverToPNGTest
 
 implementation
 
@@ -95,15 +99,23 @@ begin
  );
 end;
 
-{ TmsDiagrammsToPNGTest }
+// TmsDiagrammsToPNGTest
 
 class function TmsDiagrammsToPNGTest.TestClass: RmsShapeTest;
 begin
  Result := TTestSaveToPNG;
 end;
 
+// TmsDiagrammsMoverToPNGTest
+
+class function TmsDiagrammsMoverToPNGTest.TestClass: RmsShapeTest;
+begin
+ Result := TTestSaveMoverToPNG;
+end;
+
 initialization
  RegisterTest(TmsShapesTest.Create);
  RegisterTest(TmsDiagrammsTest.Create);
  RegisterTest(TmsDiagrammsToPNGTest.Create);
+ RegisterTest(TmsDiagrammsMoverToPNGTest.Create);
 end.
