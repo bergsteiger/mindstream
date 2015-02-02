@@ -42,7 +42,8 @@ uses
  System.Rtti,
  SysUtils,
  TestSaveToPNG,
- msShapeClassList
+ msShapeClassList,
+ TestSaveMoverToPNG
  ;
 
 // TmsShapesTest
