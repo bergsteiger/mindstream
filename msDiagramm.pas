@@ -54,7 +54,7 @@ type
   function AddShape(const aShape: ImsShape): ImsShape;
   function FirstShape: ImsShape;
   function ShapesController: ImsShapesController;
-  function GetMax: TPointF;
+  function GetDrawBounds: TRectF;
  protected
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
@@ -85,7 +85,7 @@ uses
  msShapesForToolbar,
  msDiagrammsController,
  System.Math.Vectors,
- msTestConstants
+ System.Math
  ;
 
 {$Include msItemsHolder.mixin.pas}
@@ -151,13 +151,11 @@ var
  l_BitmapBuffer: TBitmap;
  l_SourceRect: TRectF;
  l_OriginalMatrix: TMatrix;
- l_Max : TPointF;
 begin
  // Фиксируем размер снимаемой области
- l_Max := GetMax;
- Assert(l_Max.X > 0);
- Assert(l_Max.Y > 0);
- l_SourceRect := TRectF.Create(0, 0, l_Max.X, l_Max.Y);
+ l_SourceRect := GetDrawBounds;
+ Assert(l_SourceRect.Width > 0);
+ Assert(l_SourceRect.Height > 0);
  // Создаем временный буфер для получения скриншота
  l_BitmapBuffer := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
  try
@@ -192,21 +190,24 @@ begin
  Result := Self;
 end;
 
-function TmsDiagramm.GetMax: TPointF;
+function TmsDiagramm.GetDrawBounds: TRectF;
 var
  l_Shape : ImsShape;
- l_BR : TPointF;
+ l_R : TRectF;
 begin
- Result.X := 0;
- Result.Y := 0;
+ Result.Left := High(Integer);
+ Result.Top := High(Integer);
+ Result.Right := Low(Integer);
+ Result.Bottom := Low(Integer);
+ Assert(f_Items <> nil);
  for l_Shape in f_Items do
  begin
-  l_BR := l_Shape.DrawBounds.BottomRight;
-  if (l_BR.X > Result.X) then
-   Result.X := l_BR.X;
-  if (l_BR.Y > Result.Y) then
-   Result.Y := l_BR.Y;
- end;//for l_Shape in f_Items
+  l_R := l_Shape.DrawBounds;
+  Result.Left := Min(Result.Left, l_R.Left);
+  Result.Top := Min(Result.Top, l_R.Top);
+  Result.Right := Max(Result.Right, l_R.Right);
+  Result.Bottom := Max(Result.Bottom, l_R.Bottom);
+ end;//for l_Shape
 end;
 
 function TmsDiagramm.Get_Name: String;

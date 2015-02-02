@@ -38,6 +38,7 @@ var
  l_Mover : ImsShape;
  l_Ctx : TmsMakeShapeContext;
 begin
+ Assert(aDiagramm.ItemsCount = f_Context.rShapesCount);
  l_ShapeToDeal := aDiagramm.FirstShape;
  l_Class := TmsRegisteredShapes.Instance.ByName(TmsMover.ClassName);
  Assert(l_Class <> nil);
