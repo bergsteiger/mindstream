@@ -153,6 +153,7 @@ var
  l_SourceRect: TRectF;
  l_OriginalMatrix: TMatrix;
  l_Canvas: TCanvas;
+ l_Matrix: TMatrix;
 begin
  // Фиксируем размер снимаемой области
  l_SourceRect := GetDrawBounds;
@@ -173,6 +174,10 @@ begin
                     TCornerType.Round);
    l_OriginalMatrix := l_Canvas.Matrix;
    try
+    l_Matrix := TMatrix.Identity;
+    l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_SourceRect.Left, -l_SourceRect.Top);
+    l_Matrix := l_Matrix * l_OriginalMatrix;
+    l_Canvas.SetMatrix(l_Matrix);
     Self.DrawTo(l_Canvas);
    finally
     l_Canvas.SetMatrix(l_OriginalMatrix);
