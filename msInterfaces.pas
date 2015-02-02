@@ -166,6 +166,7 @@ type
   function GetEnumerator: TmsShapesEnumerator;
   function ItemsCount: Integer;
   function FirstShape: ImsShape;
+  function ShapesController: ImsShapesController;
   property Name: String
   read Get_Name;
  end;//ImsDiagramm

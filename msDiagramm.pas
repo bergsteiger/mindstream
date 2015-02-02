@@ -53,6 +53,7 @@ type
   constructor CreatePrim(const aName: String);
   function AddShape(const aShape: ImsShape): ImsShape;
   function FirstShape: ImsShape;
+  function ShapesController: ImsShapesController;
   function GetMax: TPointF;
  protected
   procedure SaveTo(const aFileName: String); override;
@@ -184,6 +185,11 @@ end;
 function TmsDiagramm.FirstShape: ImsShape;
 begin
  Result := Items.First;
+end;
+
+function TmsDiagramm.ShapesController: ImsShapesController;
+begin
+ Result := Self;
 end;
 
 function TmsDiagramm.GetMax: TPointF;
