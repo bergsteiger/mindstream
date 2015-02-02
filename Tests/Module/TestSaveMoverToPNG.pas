@@ -20,7 +20,10 @@ implementation
 // TTestSaveMoverToPNG
 
 procedure TTestSaveMoverToPNG.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
+var
+ l_ShapeToDeal : ImsShape;
 begin
+ l_ShapeToDeal := aDiagramm.FirstShape;
  inherited;
 end;
 

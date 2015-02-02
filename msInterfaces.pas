@@ -165,6 +165,7 @@ type
   procedure RemoveShape(const aShape: ImsShape);
   function GetEnumerator: TmsShapesEnumerator;
   function ItemsCount: Integer;
+  function FirstShape: ImsShape;
   property Name: String
   read Get_Name;
  end;//ImsDiagramm
