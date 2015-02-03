@@ -31,6 +31,7 @@ type
   class function ButtonShape: ImsShape; override;
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
+  class function RectForButtons(const aShape: ImsShape): TRectF;
  end;//TmsMover
 
 implementation
@@ -88,6 +89,16 @@ begin
            );
 end;
 
+class function TmsMover.RectForButtons(const aShape: ImsShape): TRectF;
+var
+ l_Offset : Single;
+begin
+ Result := aShape.DrawBounds;
+ l_Offset := TmsSpecialArrow.InitialLength + cShift;
+
+ Result.Inflate(l_Offset, l_Offset);
+end;
+
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
 
  function AddDButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
@@ -98,16 +109,12 @@ constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsS
 var
  l_B : TRectF;
  l_Mid : TPointF;
- l_Offset : Single;
 begin
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
  Assert(f_FloatingButtons = nil);
  f_FloatingButtons := TmsShapesList.Create;
- l_B := f_Moving.DrawBounds;
- l_Offset := TmsSpecialArrow.InitialLength + cShift;
-
- l_B.Inflate(l_Offset, l_Offset);
+ l_B := RectForButtons(f_Moving);
 
  l_Mid.X := (l_B.Left + l_B.Right) / 2;
  l_Mid.Y := (l_B.Top + l_B.Bottom) / 2;
