@@ -417,7 +417,7 @@ const
 var
  l_Delta : integer;
 begin
- l_Delta := WheelDelta div cWheelDeltaSpeed;
+ l_Delta := WheelDelta div cWheelDeltaSpeed * 3;
  Scroll(TPointF.Create(0, l_Delta));
 end;
 
