@@ -18,6 +18,8 @@ type
   end;//TTestSaveMoverToPNG
 
   TmsMoverFloatingButtonsTest = class(TTestSaveMoverToPNG)
+  protected
+   procedure MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape); override;
   end;//TmsMoverFloatingButtonsTest
 
 implementation
@@ -53,6 +55,13 @@ begin
  l_Ctx := TmsMakeShapeContext.Create(l_ShapeToDeal.StartPoint, aDiagramm.ShapesController, nil);
  l_Mover := l_Class.Creator.CreateShape(l_Ctx);
  MoverApplied(aDiagramm, l_ShapeToDeal, l_Mover);
+ inherited;
+end;
+
+// TmsMoverFloatingButtonsTest
+
+procedure TmsMoverFloatingButtonsTest.MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape);
+begin
  inherited;
 end;
 
