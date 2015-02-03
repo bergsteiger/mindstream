@@ -31,7 +31,7 @@ implementation
 
 function TmsCircle.InitialRadiusX: Integer;
 begin
- Result := 70;
+ Result := 50;
 end;
 
 function TmsCircle.InitialRadiusY: Integer;
