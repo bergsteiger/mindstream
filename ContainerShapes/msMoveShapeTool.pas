@@ -8,7 +8,7 @@ uses
  ;
 
 type
- TmsMoveShapeTool = class(TmsShapeTool)
+ TmsMoveShapeTool = class abstract(TmsShapeTool)
  protected
   procedure ProcessClickInDiagramm; override; final;
   function Delta: TPointF; virtual; abstract;
