@@ -16,6 +16,9 @@ type
    procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); override;
   end;//TTestSaveMoverToPNG
 
+  TmsMoverFloatingButtonsTest = class(TTestSaveMoverToPNG)
+  end;//TmsMoverFloatingButtonsTest
+
 implementation
 
 uses
