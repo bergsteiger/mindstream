@@ -19,14 +19,15 @@ implementation
 uses
  msDownArrow,
  msShapesGroup,
- msFolderIcon
+ msFolderIcon,
+ System.Types
  ;
 
 // TmsPickerIcon
 
 class function TmsPickerIcon.ToolIcon: ImsShape;
 begin
- Result := TmsDownArrow.Create;
+ Result := TmsDownArrow.Create(TPointF.Create(0, 20));
 end;
 
 end.
