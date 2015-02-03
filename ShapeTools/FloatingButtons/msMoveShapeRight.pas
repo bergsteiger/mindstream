@@ -3,6 +3,7 @@ unit msMoveShapeRight;
 interface
 
 uses
+ System.Types,
  msShapeTool,
  msMoveShapeTool
  ;
@@ -10,20 +11,16 @@ uses
 type
  TmsMoveShapeRight = class(TmsMoveShapeTool)
  protected
-  procedure ProcessClickInDiagramm; override;
+  function Delta: TPointF; override;
  end;//TmsMoveShapeRight
 
 implementation
 
-uses
- System.Types
- ;
-
 // TmsMoveShapeRight
 
-procedure TmsMoveShapeRight.ProcessClickInDiagramm;
+function TmsMoveShapeRight.Delta: TPointF;
 begin
- ShapeToDeal.MoveTo(ShapeToDeal.StartPoint + TPointF.Create(+1, 0))
+ Result := TPointF.Create(+1, 0);
 end;
 
 end.
