@@ -14,6 +14,7 @@ type
   protected
    procedure TransformContext(var theContext: TmsShapeTestContext); override;
    procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); override;
+   procedure MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape); virtual;
   end;//TTestSaveMoverToPNG
 
   TmsMoverFloatingButtonsTest = class(TTestSaveMoverToPNG)
@@ -34,6 +35,10 @@ begin
  theContext.rShapesCount := 1;
 end;
 
+procedure TTestSaveMoverToPNG.MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape);
+begin
+end;
+
 procedure TTestSaveMoverToPNG.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 var
  l_ShapeToDeal : ImsShape;
@@ -47,6 +52,7 @@ begin
  Assert(l_Class <> nil);
  l_Ctx := TmsMakeShapeContext.Create(l_ShapeToDeal.StartPoint, aDiagramm.ShapesController, nil);
  l_Mover := l_Class.Creator.CreateShape(l_Ctx);
+ MoverApplied(aDiagramm, l_ShapeToDeal, l_Mover);
  inherited;
 end;
 
