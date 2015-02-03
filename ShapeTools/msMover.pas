@@ -101,7 +101,7 @@ begin
  l_Mid.X := (l_B.Left + l_B.Right) / 2;
  l_Mid.Y := (l_B.Top + l_B.Bottom) / 2;
  aController.AddShape(AddButton(TmsMoveShapeUp, TmsUpArrow.Create(TPointF.Create(l_Mid.X, l_B.Top - TmsSpecialArrow.InitialLength - cShift))));
- aController.AddShape(AddButton(TmsMoveShapeDown, TmsDownArrow.Create(TPointF.Create(l_Mid.X, l_B.Bottom + cShift))));
+ aController.AddShape(AddButton(TmsMoveShapeDown, TmsDownArrow.Create(TPointF.Create(l_Mid.X, l_B.Bottom + TmsSpecialArrow.InitialLength + cShift))));
  aController.AddShape(AddButton(TmsMoveShapeLeft, TmsLeftArrow.Create(TPointF.Create(l_B.Left - TmsSpecialArrow.InitialLength - cShift, l_Mid.Y))));
  aController.AddShape(AddButton(TmsMoveShapeRight, TmsRightArrow.Create(TPointF.Create(l_B.Right + TmsSpecialArrow.InitialLength + cShift, l_Mid.Y))));
  aController.AddShape(AddButton(TmsMoveShapeUpRight, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsUpRightArrow.Create(TPointF.Create(l_B.Right + TmsSpecialArrow.InitialLength + cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift)))));
