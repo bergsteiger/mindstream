@@ -110,10 +110,6 @@ begin
  l_Offset := TmsSpecialArrow.InitialLength + cShift;
 
  l_B.Inflate(l_Offset, l_Offset);
-(* l_B.Left := l_B.Left - l_Offset;
- l_B.Right := l_B.Right + l_Offset;
- l_B.Top := l_B.Top - l_Offset;
- l_B.Bottom := l_B.Bottom + l_Offset;*)
 
  aController.AddShape(AddButton(TmsMoveShapeLeft, TmsLeftArrow.Create(TPointF.Create(l_B.Left, l_Mid.Y))));
  aController.AddShape(AddButton(TmsMoveShapeRight, TmsRightArrow.Create(TPointF.Create(l_B.Right, l_Mid.Y))));
