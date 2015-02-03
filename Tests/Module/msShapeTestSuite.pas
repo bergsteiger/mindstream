@@ -11,33 +11,11 @@ uses
 type
   TmsParametrizedShapeTestSuite = class(TTestSuite)
   private
-   constructor CreatePrim;
-  protected
-   class function TestClass: RmsShapeTest; virtual; abstract;
+   constructor CreatePrim(aTestClass : RmsShapeTest);
   public
    procedure AddTests(testClass: TTestCaseClass); override;
-   class function Create: ITest;
+   class function Create(aTestClass : RmsShapeTest): ITest;
   end;//TmsParametrizedShapeTestSuite
-
-  TmsShapesTest = class(TmsParametrizedShapeTestSuite)
-  protected
-   class function TestClass: RmsShapeTest; override;
-  end;//TmsShapesTest
-
-  TmsDiagrammsTest = class(TmsParametrizedShapeTestSuite)
-  protected
-   class function TestClass: RmsShapeTest; override;
-  end;//TmsDiagrammsTest
-
-  TmsDiagrammsToPNGTest = class(TmsParametrizedShapeTestSuite)
-  protected
-   class function TestClass: RmsShapeTest; override;
-  end;//TmsDiagrammsTest
-
-  TmsDiagrammsMoverToPNGTest = class(TmsParametrizedShapeTestSuite)
-  protected
-   class function TestClass: RmsShapeTest; override;
-  end;//TmsDiagrammsMoverToPNGTest
 
 implementation
 
@@ -50,30 +28,16 @@ uses
  TestSaveMoverToPNG
  ;
 
-// TmsShapesTest
-
-class function TmsShapesTest.TestClass: RmsShapeTest;
-begin
- Result := TmsShapeTest;
-end;
-
-// TmsDiagrammsTest
-
-class function TmsDiagrammsTest.TestClass: RmsShapeTest;
-begin
- Result := TmsDiagrammTest;
-end;
-
 // TmsParametrizedShapeTestSuite
 
-constructor TmsParametrizedShapeTestSuite.CreatePrim;
+constructor TmsParametrizedShapeTestSuite.CreatePrim(aTestClass : RmsShapeTest);
 begin
- inherited Create(TestClass);
+ inherited Create(aTestClass);
 end;
 
-class function TmsParametrizedShapeTestSuite.Create: ITest;
+class function TmsParametrizedShapeTestSuite.Create(aTestClass : RmsShapeTest): ITest;
 begin
- Result := CreatePrim;
+ Result := CreatePrim(aTestClass);
 end;
 
 procedure TmsParametrizedShapeTestSuite.AddTests(testClass: TTestCaseClass);
@@ -99,23 +63,9 @@ begin
  );
 end;
 
-// TmsDiagrammsToPNGTest
-
-class function TmsDiagrammsToPNGTest.TestClass: RmsShapeTest;
-begin
- Result := TTestSaveToPNG;
-end;
-
-// TmsDiagrammsMoverToPNGTest
-
-class function TmsDiagrammsMoverToPNGTest.TestClass: RmsShapeTest;
-begin
- Result := TTestSaveMoverToPNG;
-end;
-
 initialization
- RegisterTest(TmsShapesTest.Create);
- RegisterTest(TmsDiagrammsTest.Create);
- RegisterTest(TmsDiagrammsToPNGTest.Create);
- RegisterTest(TmsDiagrammsMoverToPNGTest.Create);
+ RegisterTest(TmsParametrizedShapeTestSuite.Create(TmsShapeTest));
+ RegisterTest(TmsParametrizedShapeTestSuite.Create(TmsDiagrammTest));
+ RegisterTest(TmsParametrizedShapeTestSuite.Create(TTestSaveToPNG));
+ RegisterTest(TmsParametrizedShapeTestSuite.Create(TTestSaveMoverToPNG));
 end.
