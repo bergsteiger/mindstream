@@ -1,0 +1,347 @@
+<a href="http://habrahabr.ru/post/232955/">Часть 1.</a>
+<a href="http://habrahabr.ru/post/234801/">Часть 2.</a>
+<a href="http://habrahabr.ru/post/241301/">Часть 3. DUnit + FireMonkey</a>
+<a href="http://habrahabr.ru/post/241377/">Часть 3.1. По мотивам GUIRunner</a> 
+<a href="http://habrahabr.ru/post/245441/">Часть 4. Serialization </a> 
+<a href="http://habrahabr.ru/post/248027/">Часть 5. Тестирование</a>
+
+Здравствуйте дорогие хабровчане. Сегодня я расскажу о том что у нас случилось нового, а также расскажу, какую пользу принесли эталонные тесты, если их использовать правильно. :)
+
+screen1
+
+
+<habracut>
+
+Начну по порядку. 
+
+<a href="http://habrahabr.ru/post/232955/">В прошлой статье</a> я детально рассказал о технике тестирования с использованием эталонов. Наш GUIRunner полностью ориентирован на использование этой техники. Однако в ходе работы на проектом, появились свои нюансы.
+Так, например, в случае изменения любого параметра фигуры, меняются эталонные тесты сохранения в png. 
+Эталон с радиусом круга 30px.            Результат теста сохранения с радиусом 70px.
+                            
+	screen3 					screen4
+
+Что в принципе логично. Для того, что бы сделать все тесты опять “зеленькими”, приходилось идти в папку с эталонами тестов, и вручную прибивать их все. Почему все ? Потому что, элементарно, было лень искать по имени “неверные” эталоны. 
+Нам это порядком поднадоело, и мы добавили несколько новых функций в GUIRunner:
+
+
+Первым делом добавили функцию выбора, исключительно провалившихся тестов. 
+spoiler
+code_begin
+procedure TfmGUITestRunner.btnSelectFailedClick(Sender: TObject);
+begin
+ UnCheckAllTest;
+ TraverseTree(tvTestTree,
+  procedure (const aNode: TTreeViewItem)
+  var
+   l_Node :TTreeViewItem;
+  begin
+   if (aNode as TTestNode).Failed then
+   begin
+    l_Node := aNode;
+    repeat
+     l_Node.IsChecked := True;
+     l_Node := l_Node.ParentItem;
+    until (l_Node = nil);
+   end;//(aNode as TTestNode).Failure
+  end
+ );
+end;
+code_end
+
+После того как мы выделили провалившиеся тесты, удалим эталоны. И заново перезапустим тесты. Метод удаления напишем для нашего базового класса(TmsLoggedTest) который унаследован от TTestCase.
+<spoiler>
+code_begin
+const
+ cEtalon = '.etalon';
+
+procedure TmsLoggedTest.DeleteEtalonFile(const aLog: ImsLog);
+var
+ l_OutFileName : String;
+ l_EtalonFileName : String;
+begin
+ l_OutFileName := TestResultsFileName;
+ l_EtalonFileName := l_OutFileName + cEtalon + ExtractFileExt(l_OutFileName);
+ DeleteFile(PWideChar(l_EtalonFileName));
+end;
+code_end
+
+Так как все объекты тестов в GUIRunner представлены как объекты интерфейсов ITest, а мы не хотим использовать конструкции в стиле (aTest as TmsLoggedTest).DeleteEtalon (делаем мы так не только потому, что это слегка “не кошерно”). Вводим новый интерфейс ImsEtalonsHolder
+<spoiler>
+code_begin
+unit FMX.DUnit.Interfaces;
+
+interface
+
+type
+ ImsLog = interface
+ end;//ImsLog
+
+ ImsEtalonsHolder = interface
+ ['{1758A741-7AB3-404C-ADC0-FF6DDD815535}']
+  procedure DeleteEtalonFile(const aLog: ImsLog);
+  function RunDiff(const aLog: ImsLog): Boolean;
+ end;//ImsEtalonsHolder
+
+implementation
+
+end.
+code_end
+
+После чего функция удаления выглядит так:
+<spoiler>
+code_begin
+procedure TfmGUITestRunner.btnDeleteEtalonClick(Sender: TObject);
+begin
+ TraverseTree(tvTestTree,
+  procedure (const aNode: TTreeViewItem)
+  var
+   l_Test : ImsEtalonsHolder;
+  begin
+   assert(aNode <> nil);
+   if (aNode.IsChecked and
+       Supports(NodeToTest(aNode), ImsEtalonsHolder, l_Test)) then
+    l_Test.DeleteEtalonFile(Self);
+  end
+ );
+end;
+code_end
+
+Чего мы добились, введя новый интерфейс ? Мы добились меньшей связности GUIRunner. Не введи мы интерфейс, все базовые классы должны были бы наследоваться от TmsLoggedTest, который вполне возможно, в нашем, или вашем проекте, будет совсем ненужным. А вот если вы захотите использовать нашу технику тестирования, просто реализуйте интерфейс, который лежит рядом с формой ранера. 
+
+Ну и последняя в списке, но очень важная функция Diff. Реализована она также через интерфейс ImsEtalonHolder, вся суть её сводится к тому что бы запустить *.cmd файл с путем к программе diff, с путями к файлам в качестве параметров:
+<spoiler>
+code_begin
+procedure TfmGUITestRunner.btnDiffClick(Sender: TObject);
+begin
+ ClearResult;
+ TraverseTree(tvTestTree,
+  procedure (const aNode: TTreeViewItem)
+  var
+   l_Test : ITest;
+   l_EtalonsHolder : ImsEtalonsHolder;
+  begin
+   assert(aNode <> nil);
+   if aNode.IsChecked then
+   begin
+    l_Test := NodeToTest(aNode);
+    if Supports(l_Test, ImsEtalonsHolder, l_EtalonsHolder) then
+    try
+     if l_EtalonsHolder.RunDiff(Self) then
+      SetSuccess(l_Test);
+    except
+     SetError(l_Test);
+    end;//try..finally
+   end;//aNode.IsChecked
+  end
+ );
+end;
+code_end
+
+Код метода RunDiff:
+<spoiler>
+code_begin
+function TmsLoggedTest.RunDiff(const aLog: ImsLog): Boolean;
+var
+ l_TestFileName : String;
+ l_EtalonFileName : String;
+begin
+ l_TestFileName:= TestResultsFileName;
+ l_EtalonFileName:= l_TestFileName + cEtalon + ExtractFileExt(l_TestFileName);
+ Result := not IsEtalonValid(l_TestFileName, l_EtalonFileName);
+ if Result then
+  RunDiffPrim(l_TestFileName, l_EtalonFileName);
+end;
+
+procedure TmsLoggedTest.RunDiffPrim(const aFileName: String; const anEtalonName: String);
+const
+ c_cmdFileName = 'diff.cmd';
+var
+ l_cmdFileName : String;
+ l_ExecInfo: TShellExecuteInfo;
+ l_Param : String;
+begin
+{ TODO 1 -oIngword -cProposal : Добавить вывод ошибок в лог }
+ l_cmdFileName := ExtractFilePath(ParamStr(0)) +
+                  Self.ComputerName + '_' +
+                  c_cmdFileName;
+
+ if not FileExists(l_cmdFileName) then
+  l_cmdFileName := ExtractFilePath(ParamStr(0)) + c_cmdFileName;
+
+ Assert(FileExists(l_cmdFileName));
+
+ FillChar(l_ExecInfo, SizeOf(l_ExecInfo), 0);
+ l_ExecInfo.cbSize := SizeOf(l_ExecInfo);
+ l_ExecInfo.Wnd := 0;
+ l_ExecInfo.lpVerb := PWideChar('');
+ l_ExecInfo.lpFile := PChar(l_cmdFileName);
+ l_Param := ' ' + '"' + anEtalonName + '"' + ' ' + '"' + aFileName  + '"';
+ l_ExecInfo.lpParameters := PWideChar(l_Param);
+ l_ExecInfo.nShow := 1;
+
+ if not ShellExecuteEx(@l_ExecInfo) then
+  RaiseLastOSError;
+end;
+code_end
+
+diff.cmd
+<spoiler>
+code_begin
+echo "Differing"
+echo %1 
+echo %2
+fc "%1" "%2"
+pause
+code_end
+	
+В итоге работа стала намного комфортней, отпала необходимость пользоваться файловым менеджером. А сравнение эталонов стало намного удобней и быстрей.
+
+Тут я сделаю маленькую оговорку. Удобство GUIRunner’a требовал мой лид, а я даже на момент реализации всей задачи, несколько не понимал общей выгоды от консольного дифа(сбор автоматической статистики в данный момент не являлся нашей целью).
+Однако расскажу, как все происходило дальше. 
+
+Моя последняя задача по проекту была - создание Scroll’a. Требовалось нарисовать кнопку “вверх” на диаграмме, которая бы - “сдвигала” диаграмму “вниз”.
+
+Напомню читателем структуру, контролера и его связь с диаграммой:
+screen5
+
+
+По сути всё что требовалось, это лишь сделать смещение матрицы Canvas на величину Delta. Так как контролер отвечает за логику, логично это делать в нём. 
+Код метода Scroll
+<spoiler>
+code_begin
+procedure TmsDiagrammsController.DrawTo(const aCanvas: TCanvas);
+var
+ l_OriginalMatrix: TMatrix;
+ l_Matrix: TMatrix;
+ l_CenterPoint: TPointF;
+begin
+ l_OriginalMatrix := aCanvas.Matrix;
+ l_CenterPoint := TPointF.Create(0,0);
+
+  l_Matrix := TMatrix.Identity;
+  // - СНИМАЕМ оригинальную матрицу, точнее берём ЕДИНИЧНУЮ матрицу
+  // https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X, -l_CenterPoint.Y);
+  // - сдвигаем начало координат для фигуры
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(f_Delta.X, f_Delta.Y);
+  // - задаём начало координат - относительно дельты
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
+  // - задаём начало координат
+  l_Matrix := l_Matrix * l_OriginalMatrix;
+  // - ПРИМЕНЯЕМ оригинальную матрицу
+  // Иначе например ОРИГИНАЛЬНЫЙ параллельный перенос - не будет работать.
+  // https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B0%D0%BB%D0%BB%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81
+ aCanvas.SetMatrix(l_Matrix);
+ CurrentDiagramm.DrawTo(aCanvas);
+ // - отрисовываем примитив с учётом матрицы преобразований
+  aCanvas.SetMatrix(l_OriginalMatrix);
+  // - восстанавливаем ОРИГИНАЛЬНУЮ матрицу
+end;
+code_end
+
+Однако метод не работал, после танцев с бубном и советов лида, проблема была локализована. Так как рисование делает диаграмма, то BeginScene и EndScene находятся там. Поменял местами с контролером. Ура. Всё заработало. 
+Запустил тесты, упали только сохранение в png. Консоль выдала что-то сигнализирующее о том что файлы не совпадают. Я с чистой совестью грохнул эталоны. И заново прогнал тесты. Всё сошлось. Комитим. 
+
+Спустя пол часа у меня с лидом состоялся такой диалог:
+<spoiler>
+
+Александр::
+у меня почему-то PNG тесты не сошлись ??
+Игорь:
+правильно
+Александр:
+все
+Igor Belyh
+там же кнопка нарисована
+Александр: 
+почему?
+какая кнопка,
+?
+Igor Belyh
+запустите и увидите
+Александр: 
+блин...
+Igor Belyh
+эталоны прибейте просто
+Александр: 
+а как она на диаграмму влияет?
+вы УЖЕ её в диаграмму вставили?
+Igor Belyh
+ещё
+вчера
+Александр: 
+где она вставляется?
+Igor Belyh
+только не в диграмму
+на форме ман
+майн
+createScroll
+Александр: 
+в каком месте?
+всё равно НЕ понимаю - как она на PNG влияет?
+там же кнопки нету
+Igor Belyh
+она на канве рисуется
+значит в png попадает
+Александр: 
+блин... так канва битмапа
+не путайте меня
+Igor Belyh
+ок
+Александр
+тут канва битмапа
+да и в PNG её НЕТ
+Igor Belyh
+я тоже не вижу
+Александр: 
+так в чём проблема?
+попробуйте разобраться
+Igor Belyh
+не рисует часть файлов
+буду копать
+https://bitbucket.org/ingword/mindstream/commits/782260e369b67aadfa8dad5e19a8525272a36cff
+тут наглядно видно
+Александр: 
+о!
+НЕ ЧАСТЬ, а ВСЕ!!!
+BeginScene?
+Igor Belyh
+думаю да
+я не убрал комментарий
+в диаграмме
+Александр: 
+блин!
+КОНЕЧНО!
+НЕ УБРАЛИ
+Igor Belyh
+косяк
+Александр: 
+Игорь, давайте ОТВЕТСТВЕННЕЕ подходить
+ОСОБЕННО к падениям ТЕСТОВ
+Igor Belyh
+да уж
+Александр: 
+сделайте выводы
+Igor Belyh
+я че то решил что кнпка рисуется, и надо перебить эталоны
+вывод сделал
+уж очень фактически получилось
+вот их применение где в реальности понадобилось
+
+Далее я подсмотрел у лида его дифер(Araxis Merge Compare), и после установки, оценил всю мощь дифа:
+6screen
+
+Как видим, Araxis отлично сравнивает и png файлы, и будь у меня правильно настроен дифф, я бы это сразу заметил. Тем не менее. Ошибка хоть и банальна, но очень поучительная. 
+
+<a href="https://bitbucket.org/ingword/mindstream/">Ссылка на реппозиторий.</a>
+
+p.s.
+Вот так выглядит наш Scroll.
+
+ScrollExample.gif
+
+А это новый интерфейс перемещения фигур:
+
+
+p.s.
+Проект GUIRunner’a скоро обретёт свой реппозиторий и свою бесплатную лицензию. А пока его можно скачать по <a href="https://bitbucket.org/ingword/mindstream/src/9752756b7dd1db21bd794b67e8ec298a0231b951/FMX.DUnit/?at=Developing">этому адресу</a>.

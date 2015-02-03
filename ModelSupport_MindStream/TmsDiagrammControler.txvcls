@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="3ihzm10bvp3d76ptt_v">
+    <property name="$metaclass" value="Class Diagram" />
+    <property name="$name" value="TmsDiagrammControler" />
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="379,274,0,0" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagramm.@unitclass.c_FileName" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsShapesProvider">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1180,440,210,98" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsShapesProvider.ShapesForToolbarToList(System.Classes.TStrings)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msDiagramm.TmsShapesProvider:msDiagramm.TmsShapesProviderParent">
+        <property name="sourceAnchor" value="1285,440" />
+        <property name="targetAnchor" value="1285,376" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsShapesProviderParent">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1160,340,255,36" />
+      <property name="location_set_by_user" value="True" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagramm.TmsDiagramm">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="1180,600,192,459" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagramm.TmsDiagramm.FCurrentAddedShape" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagramm.TmsDiagramm.fName" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.CurrentAddedShape()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.BeginShape(msInterfaces.TmsClickContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.EndShape(System.Types.TPointF,msInterfaces.ImsDiagrammsHolder)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.ShapeIsEnded()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.ShapeByPt(System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.RemoveShape(msInterfaces.ImsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.Get_Name()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.CreatePrim(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.AddShape(msInterfaces.ImsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.GetMax()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.SaveTo(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.LoadFrom(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.Create(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.DrawTo(FMX.Graphics.TCanvas)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.ProcessClick(msInterfaces.TmsClickContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.Clear()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.Invalidate()" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msDiagramm.TmsDiagramm.Name" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.Serialize()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.DeSerialize()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.SaveToPng(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagramm.TmsDiagramm.Assign(msDiagramm.TmsDiagramm)" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msDiagramm.TmsDiagramm:msDiagramm.TmsShapesProvider">
+        <property name="sourceAnchor" value="1276,600" />
+        <property name="targetAnchor" value="1276,538" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_impl:src:MindStream:msDiagramm.TmsDiagramm:msInterfaces.ImsDiagramm">
+        <property name="sourceAnchor" value="1180,723" />
+        <property name="targetAnchor" value="1055,587" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammMarshal.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="224,573,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagramms.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="500,368,0,0" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagramms.@unitclass.c_FileName" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsController.TmsDiagrammsHolder">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="26,588,285,220" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsHolder.f_DiagrammsController" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsHolder.CreatePrim(msDiagrammsController.TmsDiagrammsController)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsHolder.UpToParent()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsHolder.SwapParents()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsHolder.Scroll(System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsHolder.ResetOrigin()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsHolder.pm_GetCurrentDiagramms()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsHolder.pm_SetCurrentDiagramms(msInterfaces.ImsDiagrammsList)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsHolder.Create(msDiagrammsController.TmsDiagrammsController)" />
+      <reference referencedUin="delphi:l_ast:src:MindStream:msDiagrammsController.TmsDiagrammsHolder.f_DiagrammsController">
+        <property name="sourceAnchor" value="311,699" />
+        <property name="targetAnchor" value="412,699" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_impl:src:MindStream:msDiagrammsController.TmsDiagrammsHolder:msInterfaces.ImsDiagrammsHolder">
+        <property name="sourceAnchor" value="163,588" />
+        <property name="targetAnchor" value="163,493" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsController.TmsIvalidator">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="446,128,234,185" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsIvalidator.InvalidateDiagramm(msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsIvalidator.DiagrammAdded(msInterfaces.ImsDiagrammsList,msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsIvalidator.DoInvalidateDiagramm(msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsIvalidator.DoDiagrammAdded(msInterfaces.ImsDiagrammsList,msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsIvalidator.InstanceAllocated()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsIvalidator.InstanceWillBeDestroyed()" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msDiagrammsController.TmsIvalidator:msDiagrammsController.TmsIvalidatorParent">
+        <property name="sourceAnchor" value="563,128" />
+        <property name="targetAnchor" value="563,84" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsController.TmsIvalidatorParent">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="423,48,281,36" />
+      <property name="location_set_by_user" value="True" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsController.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="489,325,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsController.TmsDiagrammsController">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="412,380,303,643" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.imgMain" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.cbShapes" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.cbDiagramm" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.btAddDiagramm" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.btSaveDiagramm" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.btLoadDiagramm" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.btSaveToPNG" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_DiagrammsRoot" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_CurrentDiagramms" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_CurrentDiagramm" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_DiagrammStack" />
+      <reference referencedUin="delphi:e_field:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_Delta" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.cbDiagrammChange(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.btAddDiagrammClick(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.imgMainMouseDown(System.TObject,System.UITypes.TMouseButton,TShiftState,System.Single,System.Single)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.btSaveToPNGClick(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.btSaveDiagrammClick(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.btLoadDiagrammClick(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.pm_GetCurrentDiagramm()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.pm_SetCurrentDiagramm(msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.pm_GetCurrentDiagramms()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.pm_SetCurrentDiagramms(msInterfaces.ImsDiagrammsList)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.UpToParent()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.SwapParents()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.Scroll(System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.ResetOrigin()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.DoInvalidateDiagramm(msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.DoDiagrammAdded(msInterfaces.ImsDiagrammsList,msInterfaces.ImsDiagramm)" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msDiagrammsController.TmsDiagrammsController.CurrentDiagramms" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.CreatePrim(FMX.Objects.TPaintBox,FMX.ListBox.TComboBox,FMX.ListBox.TComboBox,FMX.StdCtrls.TButton,FMX.StdCtrls.TButton,FMX.StdCtrls.TButton,FMX.StdCtrls.TButton)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.Create(FMX.Objects.TPaintBox,FMX.ListBox.TComboBox,FMX.ListBox.TComboBox,FMX.StdCtrls.TButton,FMX.StdCtrls.TButton,FMX.StdCtrls.TButton,FMX.StdCtrls.TButton)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.Cleanup()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.Clear()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.ProcessClick(System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msDiagrammsController.TmsDiagrammsController.CurrentDiagramm" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.SaveToPng(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.DrawTo(FMX.Graphics.TCanvas)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msDiagrammsController.TmsDiagrammsController.As_ImsDiagrammsHolder()" />
+      <reference referencedUin="delphi:l_gnt:src:MindStream:msDiagrammsController.TmsDiagrammsController:msDiagrammsController.TmsIvalidator">
+        <property name="sourceAnchor" value="563,380" />
+        <property name="targetAnchor" value="563,313" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_DiagrammStack">
+        <property name="sourceAnchor" value="412,878" />
+        <property name="targetAnchor" value="337,878" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msDiagrammsController.TmsDiagrammsController.CurrentDiagramm">
+        <property name="sourceAnchor" value="715,475" />
+        <property name="targetAnchor" value="820,475" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_CurrentDiagramm">
+        <property name="sourceAnchor" value="715,483" />
+        <property name="targetAnchor" value="820,483" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:MindStream:msDiagrammsController.TmsDiagrammsController.f_DiagrammsRoot">
+        <property name="sourceAnchor" value="412,981" />
+        <property name="targetAnchor" value="257,981" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_impl:src:MindStream:msDiagrammsController.TmsDiagrammsController:msInterfaces.ImsDiagrammsController">
+        <property name="sourceAnchor" value="412,413" />
+        <property name="targetAnchor" value="274,151" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammsMarshal.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="440,323,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammStack.TmsDiagrammStack">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="-1,860,338,36" />
+      <property name="location_set_by_user" value="True" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msDiagrammStack.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="360,364,0,0" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsDiagramm">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="820,340,245,247" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.Get_Name()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.Invalidate()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.ProcessClick(msInterfaces.TmsClickContext)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.Clear()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.DrawTo(FMX.Graphics.TCanvas)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.SaveToPng(System.string)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.AddShape(msInterfaces.ImsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.RemoveShape(msInterfaces.ImsShape)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.GetEnumerator()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramm.ItemsCount()" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msInterfaces.ImsDiagramm.Name" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsDiagramms">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="79,940,178,110" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramms.Serialize()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagramms.DeSerialize()" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsDiagrammsController">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="100,40,290,111" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsController.Clear()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsController.DrawTo(FMX.Graphics.TCanvas)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsController.As_ImsDiagrammsHolder()" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:MindStream:msInterfaces.ImsDiagrammsHolder">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="20,320,281,173" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsHolder.UpToParent()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsHolder.SwapParents()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsHolder.Scroll(System.Types.TPointF)" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsHolder.ResetOrigin()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsHolder.pm_GetCurrentDiagramms()" />
+      <reference referencedUin="delphi:e_method:src:MindStream:msInterfaces.ImsDiagrammsHolder.pm_SetCurrentDiagramms(msInterfaces.ImsDiagrammsList)" />
+      <reference referencedUin="delphi:e_property:src:MindStream:msInterfaces.ImsDiagrammsHolder.CurrentDiagramms" />
+    </reference>
+  </view>
+</nodeSet>
