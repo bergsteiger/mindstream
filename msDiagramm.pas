@@ -62,6 +62,7 @@ type
   class function Create(const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
   procedure ProcessClick(const aClickContext: TmsClickContext);
+  procedure MouseUp(const aPoint: TPointF);
   procedure Clear;
   procedure Invalidate;
   property Name: String read fName write fName;
@@ -194,6 +195,11 @@ end;
 procedure TmsDiagramm.LoadFrom(const aFileName: String);
 begin
  TmsDiagrammMarshal.DeSerialize(aFileName, Self);
+end;
+
+procedure TmsDiagramm.MouseUp(const aPoint: TPointF);
+begin
+ assert(false);
 end;
 
 function TmsDiagramm.AddShape(const aShape: ImsShape): ImsShape;

@@ -158,6 +158,7 @@ type
   function Get_Name: String;
   procedure Invalidate;
   procedure ProcessClick(const aClickContext: TmsClickContext);
+  procedure MouseUp(const aPoint: TPointF);
   procedure Clear;
   procedure DrawTo(const aCanvas: TCanvas);
   procedure SaveToPng(const aFileName: String);
