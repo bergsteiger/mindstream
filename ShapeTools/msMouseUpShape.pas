@@ -16,8 +16,9 @@ type
   class function ButtonShape: ImsShape; override;
   class function IsTool: Boolean; override;
   class function IsForToolbar: Boolean; override;
-  function IsNeedsMouseUp: Boolean; override;
  protected
+  function IsNeedsMouseUp: Boolean; override;
+  function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsTool
 
@@ -39,6 +40,11 @@ procedure TmsMouseUpShape.DoDrawTo(const aCtx: TmsDrawContext);
 begin
   inherited;
 
+end;
+
+function TmsMouseUpShape.EndTo(const aCtx: TmsEndShapeContext): Boolean;
+begin
+ aCtx.rShapesController.RemoveShape(Self);
 end;
 
 class function TmsMouseUpShape.IsForToolbar: Boolean;
