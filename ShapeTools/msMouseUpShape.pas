@@ -20,6 +20,8 @@ type
   function IsNeedsMouseUp: Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
+ public
+  procedure MouseMove(const aFinishPoint: TPointF); override;
  end;//TmsTool
 
 implementation
@@ -60,6 +62,12 @@ end;
 class function TmsMouseUpShape.IsTool: Boolean;
 begin
  Result := true;
+end;
+
+procedure TmsMouseUpShape.MouseMove(const aFinishPoint: TPointF);
+begin
+  inherited;
+ Assert(false);
 end;
 
 end.

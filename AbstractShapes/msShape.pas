@@ -133,7 +133,6 @@ end;
 procedure TmsShape.MouseMove(const aFinishPoint: TPointF);
 begin
  // Ничего не делаем, специально
- Assert(false);
 end;
 
 procedure TmsShape.MoveTo(const aFinishPoint: TPointF);
