@@ -40,6 +40,8 @@ type
   procedure LoadFrom(const aFileName: String); override;
   function IsNeedsMouseUp : Boolean; virtual;
   //- примитив требует отслеживания MouseUp
+  procedure MouseMove(const aFinishPoint: TPointF); virtual;
+  // - действие при MouseMove
  protected
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
  public
@@ -126,6 +128,12 @@ function TmsShape.EndTo(const aCtx: TmsEndShapeContext): Boolean;
 begin
  Result := true;
  Assert(false, 'Примитив ' + ClassName + ' не может быть завершён');
+end;
+
+procedure TmsShape.MouseMove(const aFinishPoint: TPointF);
+begin
+ // Ничего не делаем, специально
+ Assert(false);
 end;
 
 procedure TmsShape.MoveTo(const aFinishPoint: TPointF);

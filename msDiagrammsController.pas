@@ -44,6 +44,7 @@ type
   procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
   procedure imgMainMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
   procedure imgMainMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; var Handled: Boolean);
+  procedure imgMainMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Single);
   procedure btSaveToPNGClick(Sender: TObject);
   procedure btSaveDiagrammClick(Sender: TObject);
   procedure btLoadDiagrammClick(Sender: TObject);
@@ -192,6 +193,7 @@ begin
  imgMain.OnMouseDown := imgMainMouseDown;
  imgMain.OnMouseWheel := imgMainMouseWheel;
  imgMain.OnMouseUp := imgMainMouseUp;
+ imgMain.OnMouseMove := imgMainMouseMove;
  imgMain.Align := TAlignLayout.Client;
  f_DiagrammsRoot := TmsDiagramms.Create;
  CurrentDiagramms := f_DiagrammsRoot;
@@ -411,6 +413,13 @@ end;
 procedure TmsDiagrammsController.imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
  Self.ProcessClick(TPointF.Create(X, Y));
+end;
+
+
+procedure TmsDiagrammsController.imgMainMouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Single);
+begin
+ CurrentDiagramm.MouseMove(Shift, TPointF.Create(X, Y));
 end;
 
 procedure TmsDiagrammsController.imgMainMouseUp(Sender: TObject;
