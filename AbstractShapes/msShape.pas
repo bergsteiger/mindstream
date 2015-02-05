@@ -74,6 +74,8 @@ type
   class function IsLineLike: Boolean; virtual;
   class function IsNullClick: Boolean; virtual;
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
+  class function IsMouseUp: Boolean; virtual;
+  //- примитив требует отслеживания MouseUp
   procedure Assign(anOther : TmsShape);
   class function ButtonShape: ImsShape; virtual;
  end;//TmsShape
@@ -179,6 +181,11 @@ end;
 class function TmsShape.IsLineLike: Boolean;
 begin
  Result := false;
+end;
+
+class function TmsShape.IsMouseUp: Boolean;
+begin
+ Result := False;
 end;
 
 class function TmsShape.IsNullClick: Boolean;

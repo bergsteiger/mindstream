@@ -16,6 +16,7 @@ type
   class function ButtonShape: ImsShape; override;
   class function IsTool: Boolean; override;
   class function IsForToolbar: Boolean; override;
+  class function IsMouseUp: Boolean; override;
  end;//TmsTool
 
 implementation
@@ -35,6 +36,11 @@ end;
 class function TmsMouseUpShape.IsForToolbar: Boolean;
 begin
  Result := True;
+end;
+
+class function TmsMouseUpShape.IsMouseUp: Boolean;
+begin
+ Result := true;
 end;
 
 class function TmsMouseUpShape.IsTool: Boolean;
