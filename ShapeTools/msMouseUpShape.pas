@@ -16,21 +16,29 @@ type
   class function ButtonShape: ImsShape; override;
   class function IsTool: Boolean; override;
   class function IsForToolbar: Boolean; override;
-  class function IsMouseUp: Boolean; override;
+  function IsNeedsMouseUp: Boolean; override;
+ protected
+  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsTool
 
 implementation
 
 uses
  msCircle,
- msSmallTriangle
+ msTriangle
  ;
 
 // TmsTool
 
 class function TmsMouseUpShape.ButtonShape: ImsShape;
 begin
- Result := TmsShapesGroup.Create([TmsCircle.Create(), TmsSmallTriangle.Create()]); //TmsGreenCircle.Create(TPointF.Create(0, 0));
+ Result := TmsShapesGroup.Create([TmsCircle.Create(), TmsTriangle.Create()]); //TmsGreenCircle.Create(TPointF.Create(0, 0));
+end;
+
+procedure TmsMouseUpShape.DoDrawTo(const aCtx: TmsDrawContext);
+begin
+  inherited;
+
 end;
 
 class function TmsMouseUpShape.IsForToolbar: Boolean;
@@ -38,9 +46,9 @@ begin
  Result := True;
 end;
 
-class function TmsMouseUpShape.IsMouseUp: Boolean;
+function TmsMouseUpShape.IsNeedsMouseUp: Boolean;
 begin
- Result := true;
+ Result := True;
 end;
 
 class function TmsMouseUpShape.IsTool: Boolean;

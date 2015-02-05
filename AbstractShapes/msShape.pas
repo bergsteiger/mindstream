@@ -38,6 +38,8 @@ type
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
+  function IsNeedsMouseUp : Boolean; virtual;
+  //- примитив требует отслеживания MouseUp
  protected
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
  public
@@ -74,8 +76,6 @@ type
   class function IsLineLike: Boolean; virtual;
   class function IsNullClick: Boolean; virtual;
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
-  class function IsMouseUp: Boolean; virtual;
-  //- примитив требует отслеживания MouseUp
   procedure Assign(anOther : TmsShape);
   class function ButtonShape: ImsShape; virtual;
  end;//TmsShape
@@ -133,6 +133,11 @@ begin
  SetStartPoint(aFinishPoint);
 end;
 
+function TmsShape.IsNeedsMouseUp: Boolean;
+begin
+ Result := false;
+end;
+
 function TmsShape.IsNeedsSecondClick : Boolean;
 begin
  Result := false;
@@ -181,11 +186,6 @@ end;
 class function TmsShape.IsLineLike: Boolean;
 begin
  Result := false;
-end;
-
-class function TmsShape.IsMouseUp: Boolean;
-begin
- Result := False;
 end;
 
 class function TmsShape.IsNullClick: Boolean;

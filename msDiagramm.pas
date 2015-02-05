@@ -117,8 +117,9 @@ begin
  if (FCurrentAddedShape <> nil) then
  begin
   Items.Add(FCurrentAddedShape);
-  if not FCurrentAddedShape.IsNeedsSecondClick then
-  // - если не надо SecondClick, то наш примитив - завершён
+  if (not FCurrentAddedShape.IsNeedsSecondClick) and
+     (not FCurrentAddedShape.IsNeedsMouseUp) then
+    // - если не надо SecondClick или MouseUp, то наш примитив - завершён
    FCurrentAddedShape := nil;
   Invalidate;
  end; // FCurrentAddedShape <> nil
@@ -199,7 +200,8 @@ end;
 
 procedure TmsDiagramm.MouseUp(const aPoint: TPointF);
 begin
- assert(false);
+ if Assigned(FCurrentAddedShape) then
+  if CurrentAddedShape.IsNeedsMouseUp then assert(false);
 end;
 
 function TmsDiagramm.AddShape(const aShape: ImsShape): ImsShape;
