@@ -506,8 +506,8 @@ end;
 
 procedure TmsDiagrammsController.Scroll(aDirection: TPointF);
 begin
- f_Delta := TPointF.Create(f_Delta.X + aDirection.X,
-                           f_Delta.Y + aDirection.Y);
+ f_Delta := aDirection + f_Delta;
  CurrentDiagramm.Invalidate;
 end;
+
 end.
