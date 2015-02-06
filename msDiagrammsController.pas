@@ -57,8 +57,6 @@ type
   // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
   procedure Scroll(const aDirection: TPointF);
   // - скроллинг диаграммы на дельту
-  procedure ScrollTo(const aPoint: TPointF);
-  // - скроллинг диаграммы абсолютно
   procedure ResetOrigin;
   // - восстанавливаем начальную систему координат
   procedure MouseUp(const aPoint: TPointF);
@@ -122,8 +120,6 @@ type
   // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
   procedure Scroll(const aDirection: TPointF);
   // - скроллинг диаграммы
-  procedure ScrollTo(const aPoint: TPointF);
-  // - скроллинг диаграммы абсолютно
   procedure ResetOrigin;
   // - восстанавливаем начальную систему координат
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
@@ -168,12 +164,6 @@ procedure TmsDiagrammsHolder.Scroll(const aDirection: TPointF);
 // - скроллинг диаграммы
 begin
  f_DiagrammsController.Scroll(aDirection);
-end;
-
-procedure TmsDiagrammsHolder.ScrollTo(const aPoint: TPointF);
-// - скроллинг диаграммы абсолютно
-begin
- f_DiagrammsController.ScrollTo(aPoint);
 end;
 
 procedure TmsDiagrammsHolder.SwapParents;
@@ -517,13 +507,6 @@ end;
 procedure TmsDiagrammsController.Scroll(const aDirection: TPointF);
 begin
  f_Delta := aDirection + f_Delta;
- CurrentDiagramm.Invalidate;
-end;
-
-procedure TmsDiagrammsController.ScrollTo(const aPoint: TPointF);
-// - скроллинг диаграммы абсолютно
-begin
- f_Delta := aPoint;
  CurrentDiagramm.Invalidate;
 end;
 
