@@ -117,8 +117,6 @@ begin
  l_B := RectForButtons(f_Moving);
 
  l_Mid := (l_B.TopLeft + l_B.BottomRight) / 2;
-(* l_Mid.X := (l_B.Left + l_B.Right) / 2;
- l_Mid.Y := (l_B.Top + l_B.Bottom) / 2;*)
 
  aController.AddShape(AddButton(TmsMoveShapeLeft, TmsLeftArrow.Create(TPointF.Create(l_B.Left, l_Mid.Y))));
  aController.AddShape(AddButton(TmsMoveShapeRight, TmsRightArrow.Create(TPointF.Create(l_B.Right, l_Mid.Y))));
