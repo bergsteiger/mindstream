@@ -430,7 +430,7 @@ end;
 procedure TmsDiagrammsController.imgMainMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Single);
 begin
- Self.MouseMove(Shift, TmsClickContext.Create(nil, TPointF.Create(X, Y), Self.As_ImsDiagrammsHolder));
+ Self.MouseMove(Shift, TmsClickContext.Create(nil, TPointF.Create(X, Y) - f_Delta, Self.As_ImsDiagrammsHolder));
 end;
 
 procedure TmsDiagrammsController.imgMainMouseUp(Sender: TObject;
