@@ -131,7 +131,8 @@ uses
   msScrollShapeDownLeft in 'ShapeTools\ScrollButtons\msScrollShapeDownLeft.pas',
   msScrollShapeDownRight in 'ShapeTools\ScrollButtons\msScrollShapeDownRight.pas',
   msScrollShapePrim in 'ShapeTools\ScrollButtons\msScrollShapePrim.pas',
-  msScrollShapeResetOrigin in 'ShapeTools\ScrollButtons\msScrollShapeResetOrigin.pas';
+  msScrollShapeResetOrigin in 'ShapeTools\ScrollButtons\msScrollShapeResetOrigin.pas',
+  msMouseUpShape in 'ShapeTools\msMouseUpShape.pas';
 
 {$R *.res}
 

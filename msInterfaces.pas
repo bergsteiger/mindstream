@@ -90,6 +90,7 @@ type
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean;
+  function IsNeedsMouseUp : Boolean;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
@@ -97,6 +98,8 @@ type
   function ClickInDiagramm: Boolean;
   // - ткнули в примитив внутри диаграммы
   function DrawBounds: TRectF;
+  procedure MouseMove(const aHolder: ImsDiagrammsHolder; const aPoint: TPointF);
+  // - действите нажатии
   function pm_GetStartPoint: TPointF;
   function pm_GetShapeClass: ImsShapeClass;
   property StartPoint: TPointF
@@ -158,6 +161,8 @@ type
   function Get_Name: String;
   procedure Invalidate;
   procedure ProcessClick(const aClickContext: TmsClickContext);
+  procedure MouseUp(const aClickContex: TmsClickContext);
+  procedure MouseMove(const aShift: TShiftState; const aClickContex: TmsClickContext);
   procedure Clear;
   procedure DrawTo(const aCanvas: TCanvas);
   procedure SaveToPng(const aFileName: String);

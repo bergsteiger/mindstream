@@ -42,7 +42,9 @@ type
   procedure cbDiagrammChange(Sender: TObject);
   procedure btAddDiagrammClick(Sender: TObject);
   procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
+  procedure imgMainMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
   procedure imgMainMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; var Handled: Boolean);
+  procedure imgMainMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Single);
   procedure btSaveToPNGClick(Sender: TObject);
   procedure btSaveDiagrammClick(Sender: TObject);
   procedure btLoadDiagrammClick(Sender: TObject);
@@ -58,6 +60,8 @@ type
   // - скроллинг диаграммы
   procedure ResetOrigin;
   // - восстанавливаем начальную систему координат
+  procedure MouseUp(const aPoint: TPointF);
+  procedure MouseMove(const aShift: TShiftState; const aClickContext: TmsClickContext);
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
@@ -189,6 +193,8 @@ begin
  btLoadDiagramm.OnClick := btLoadDiagrammClick;
  imgMain.OnMouseDown := imgMainMouseDown;
  imgMain.OnMouseWheel := imgMainMouseWheel;
+ imgMain.OnMouseUp := imgMainMouseUp;
+ imgMain.OnMouseMove := imgMainMouseMove;
  imgMain.Align := TAlignLayout.Client;
  f_DiagrammsRoot := TmsDiagramms.Create;
  CurrentDiagramms := f_DiagrammsRoot;
@@ -410,6 +416,20 @@ begin
  Self.ProcessClick(TPointF.Create(X, Y));
 end;
 
+
+procedure TmsDiagrammsController.imgMainMouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Single);
+begin
+////TmsClickContext.Create(nil, TPointF.Create(X, Y), Self.As_ImsDiagrammsHolder)
+ Self.MouseMove(Shift, TmsClickContext.Create(nil, TPointF.Create(X, Y), Self.As_ImsDiagrammsHolder));
+end;
+
+procedure TmsDiagrammsController.imgMainMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Single);
+begin
+ Self.MouseUp(TPointF.Create(X, Y));
+end;
+
 procedure TmsDiagrammsController.imgMainMouseWheel(Sender: TObject;
   Shift: TShiftState; WheelDelta: Integer; var Handled: Boolean);
 const
@@ -419,6 +439,18 @@ var
 begin
  l_Delta := WheelDelta div cWheelDeltaSpeed * 3;
  Scroll(TPointF.Create(0, l_Delta));
+end;
+
+procedure TmsDiagrammsController.MouseMove(const aShift: TShiftState; const aClickContext: TmsClickContext);
+begin
+ CurrentDiagramm.MouseMove(aShift, aClickContext);
+end;
+
+procedure TmsDiagrammsController.MouseUp(const aPoint: TPointF);
+begin
+ CurrentDiagramm.MouseUp(TmsClickContext.Create(TmsShapesForToolbar.Instance.ByName(cbShapes.Items[cbShapes.ItemIndex]).Creator,
+                         aPoint,
+                         Self.As_ImsDiagrammsHolder));
 end;
 
 procedure TmsDiagrammsController.DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);

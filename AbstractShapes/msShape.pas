@@ -38,6 +38,10 @@ type
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
+  function IsNeedsMouseUp : Boolean; virtual;
+  //- примитив требует отслеживания MouseUp
+  procedure MouseMove(const aHolder: ImsDiagrammsHolder; const aPoint: TPointF); virtual;
+  // - действие при MouseMove
  protected
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
  public
@@ -126,9 +130,19 @@ begin
  Assert(false, 'Примитив ' + ClassName + ' не может быть завершён');
 end;
 
+procedure TmsShape.MouseMove(const aHolder: ImsDiagrammsHolder; const aPoint: TPointF);
+begin
+ // Ничего не делаем, специально
+end;
+
 procedure TmsShape.MoveTo(const aFinishPoint: TPointF);
 begin
  SetStartPoint(aFinishPoint);
+end;
+
+function TmsShape.IsNeedsMouseUp: Boolean;
+begin
+ Result := false;
 end;
 
 function TmsShape.IsNeedsSecondClick : Boolean;
