@@ -93,7 +93,8 @@ end;
 
 procedure TmsMouseUpShape.SetStartPoint(const aStartPoint: TPointF);
 begin
-  inherited;
+ inherited;
+ // - не уверен, что Inherited тут концептуально правилен, но пусть пока будет
  FStartPoint := aStartPoint;
 end;
 
