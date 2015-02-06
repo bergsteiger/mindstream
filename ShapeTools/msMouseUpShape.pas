@@ -53,6 +53,11 @@ var
 begin
  l_Proxy := TmsMoveIcon.Create(Self.StartPoint);
  // - люблю я Self.XXX. Мне лично так понятнее. Да и with - меньше лажает.
+ try
+
+ finally
+  l_Proxy := nil;
+ end;///try..fianlly
  //inherited;
  // - а вот тут нам точно ОТ ПРЕДКА ничего рисовать не надо
 end;
@@ -94,7 +99,7 @@ end;
 
 function TmsMouseUpShape.ScrollSpeed: Single;
 begin
- Result := 150;
+ Result := 1{150};
 end;
 
 procedure TmsMouseUpShape.SetStartPoint(const aStartPoint: TPointF);
