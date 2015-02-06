@@ -426,7 +426,7 @@ end;
 procedure TmsDiagrammsController.imgMainMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
- Self.MouseUp(TPointF.Create(X, Y));
+ Self.MouseUp(TPointF.Create(X, Y) - f_Delta);
 end;
 
 procedure TmsDiagrammsController.imgMainMouseWheel(Sender: TObject;
