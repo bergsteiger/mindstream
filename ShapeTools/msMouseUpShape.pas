@@ -36,7 +36,8 @@ implementation
 uses
  msCircle,
  msTriangle,
- msPointCircle
+ msPointCircle,
+ msMoveIcon
  ;
 
 // TmsMouseUpShape
@@ -47,7 +48,11 @@ begin
 end;
 
 procedure TmsMouseUpShape.DoDrawTo(const aCtx: TmsDrawContext);
+var
+ l_Proxy : ImsShape;
 begin
+ l_Proxy := TmsMoveIcon.Create(Self.StartPoint);
+ // - люблю я Self.XXX. Мне лично так понятнее. Да и with - меньше лажает.
  //inherited;
  // - а вот тут нам точно ОТ ПРЕДКА ничего рисовать не надо
 end;
