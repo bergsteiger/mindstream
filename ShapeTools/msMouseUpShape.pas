@@ -29,7 +29,7 @@ type
  public
   procedure MouseMove(const aHolder: ImsDiagrammsHolder;
                       const aPoint: TPointF); override;
- end;//TmsTool
+ end;//TmsMouseUpShape
 
 implementation
 
@@ -39,7 +39,7 @@ uses
  msPointCircle
  ;
 
-// TmsTool
+// TmsMouseUpShape
 
 class function TmsMouseUpShape.ButtonShape: ImsShape;
 begin
@@ -48,8 +48,7 @@ end;
 
 procedure TmsMouseUpShape.DoDrawTo(const aCtx: TmsDrawContext);
 begin
-  inherited;
-
+ inherited;
 end;
 
 function TmsMouseUpShape.EndTo(const aCtx: TmsEndShapeContext): Boolean;
@@ -72,7 +71,6 @@ class function TmsMouseUpShape.IsTool: Boolean;
 begin
  Result := true;
 end;
-
 
 procedure TmsMouseUpShape.MouseMove(const aHolder: ImsDiagrammsHolder;
                                     const aPoint: TPointF);
