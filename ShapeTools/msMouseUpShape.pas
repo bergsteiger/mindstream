@@ -11,7 +11,7 @@ uses
  ;
 
 type
- TmsMouseUpShape = class(TmsTool)
+ TmsScrollingTool = class(TmsTool)
  private
   FStartPoint: TPointF;
  protected
@@ -28,7 +28,7 @@ type
  public
   procedure MouseMove(const aHolder: ImsDiagrammsHolder;
                       const aPoint: TPointF); override;
- end;//TmsMouseUpShape
+ end;//TmsScrollingTool
 
 implementation
 
@@ -40,14 +40,14 @@ uses
  msScalingShape
  ;
 
-// TmsMouseUpShape
+// TmsScrollingTool
 
-class function TmsMouseUpShape.ButtonShape: ImsShape;
+class function TmsScrollingTool.ButtonShape: ImsShape;
 begin
  Result := TmsShapesGroup.Create([TmsCircle.Create(), TmsTriangle.Create()]);
 end;
 
-procedure TmsMouseUpShape.DoDrawTo(const aCtx: TmsDrawContext);
+procedure TmsScrollingTool.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Proxy : ImsShape;
 begin
@@ -62,28 +62,28 @@ begin
  // - а вот тут нам точно ОТ ПРЕДКА ничего рисовать не надо
 end;
 
-function TmsMouseUpShape.EndTo(const aCtx: TmsEndShapeContext): Boolean;
+function TmsScrollingTool.EndTo(const aCtx: TmsEndShapeContext): Boolean;
 begin
  aCtx.rShapesController.RemoveShape(Self);
  Result := True;
 end;
 
-class function TmsMouseUpShape.IsForToolbar: Boolean;
+class function TmsScrollingTool.IsForToolbar: Boolean;
 begin
  Result := True;
 end;
 
-function TmsMouseUpShape.IsNeedsMouseUp: Boolean;
+function TmsScrollingTool.IsNeedsMouseUp: Boolean;
 begin
  Result := True;
 end;
 
-class function TmsMouseUpShape.IsTool: Boolean;
+class function TmsScrollingTool.IsTool: Boolean;
 begin
  Result := true;
 end;
 
-procedure TmsMouseUpShape.MouseMove(const aHolder: ImsDiagrammsHolder;
+procedure TmsScrollingTool.MouseMove(const aHolder: ImsDiagrammsHolder;
                                     const aPoint: TPointF);
 var
  l_Delta : TPointF;
@@ -92,12 +92,12 @@ begin
  aHolder.Scroll(l_Delta);
 end;
 
-function TmsMouseUpShape.pm_GetStartPoint: TPointF;
+function TmsScrollingTool.pm_GetStartPoint: TPointF;
 begin
  Result := FStartPoint;
 end;
 
-procedure TmsMouseUpShape.SetStartPoint(const aStartPoint: TPointF);
+procedure TmsScrollingTool.SetStartPoint(const aStartPoint: TPointF);
 begin
  inherited;
  // - не уверен, что Inherited тут концептуально правилен, но пусть пока будет

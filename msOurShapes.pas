@@ -98,7 +98,7 @@ begin
   TmsScrollShapeDownRight,
   TmsScrollShapeResetOrigin,
 
-  TmsMouseUpShape
+  TmsScrollingTool
  ]);
 end;
 
