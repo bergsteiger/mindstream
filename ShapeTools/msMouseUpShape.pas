@@ -43,7 +43,7 @@ uses
 
 class function TmsMouseUpShape.ButtonShape: ImsShape;
 begin
- Result := TmsShapesGroup.Create([TmsCircle.Create(), TmsTriangle.Create()]); //TmsGreenCircle.Create(TPointF.Create(0, 0));
+ Result := TmsShapesGroup.Create([TmsCircle.Create(), TmsTriangle.Create()]);
 end;
 
 procedure TmsMouseUpShape.DoDrawTo(const aCtx: TmsDrawContext);

@@ -489,14 +489,14 @@ procedure TmsDiagrammsController.SwapParents;
 // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
 var
  l_Prev : TmsCurrentDiagrammRec;
- l_Count : Integer;
+// l_Count : Integer;
 begin
  if (f_DiagrammStack = nil) then
   Exit;
  if (f_DiagrammStack.Count <= 0) then
   Exit;
  l_Prev := f_DiagrammStack.Pop;
- l_Count := f_DiagrammStack.Count;
+// l_Count := f_DiagrammStack.Count;
  CurrentDiagramms := l_Prev.rDiagramms;
  CurrentDiagramm := l_Prev.rDiagramm;
 (* while (l_Count < f_DiagrammStack.Count) do

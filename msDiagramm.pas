@@ -200,8 +200,6 @@ begin
 end;
 
 procedure TmsDiagramm.MouseMove(const aShift: TShiftState; const aClickContext: TmsClickContext);
-var
- l_PointCircle: ImsShape;
 begin
  if FCurrentAddedShape<>nil then
   FCurrentAddedShape.MouseMove(aClickContext.rDiagrammsHolder,
