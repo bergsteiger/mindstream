@@ -54,7 +54,7 @@ begin
  l_Proxy := TmsMoveIcon.Create(Self.StartPoint);
  // - люблю я Self.XXX. Мне лично так понятнее. Да и with - меньше лажает.
  try
-
+  l_Proxy.DrawTo(aCtx);
  finally
   l_Proxy := nil;
  end;///try..fianlly
