@@ -45,7 +45,12 @@ begin
 end;
 
 procedure TmsBoundsCorrector.DoDrawTo(const aCtx: TmsDrawContext);
+var
+ l_Center : TPointF;
+ l_OurCenter : TPointF;
 begin
+ l_Center := ShapeToShow.StartPoint;
+ l_OurCenter := Self.StartPoint;
  inherited;
 end;
 

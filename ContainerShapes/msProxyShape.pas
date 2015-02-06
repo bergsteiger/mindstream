@@ -19,6 +19,7 @@ type
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
+  function pm_GetStartPoint: TPointF; override;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
   constructor CreateInner(const aShape: ImsShape);
   property ShapeToShow : ImsShape
@@ -65,6 +66,14 @@ function TmsProxyShape.GetDrawBounds: TRectF;
 begin
  Assert(ShapeToShow <> nil);
  Result := ShapeToShow.DrawBounds;
+end;
+
+function TmsProxyShape.pm_GetStartPoint: TPointF;
+var
+ l_R : TRectF;
+begin
+ l_R := Self.DrawBounds;
+ Result := (l_R.TopLeft + l_R.BottomRight) / 2;
 end;
 
 function TmsProxyShape.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
