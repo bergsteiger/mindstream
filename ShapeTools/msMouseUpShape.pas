@@ -14,6 +14,7 @@ type
  TmsMouseUpShape = class(TmsTool)
  private
   FStartPoint: TPointF;
+  function ScrollSpeed: Single;
  protected
   procedure SetStartPoint(const aStartPoint: TPointF); override;
   function pm_GetStartPoint: TPointF; override;
@@ -78,13 +79,18 @@ procedure TmsMouseUpShape.MouseMove(const aHolder: ImsDiagrammsHolder;
 var
  l_Delta : TPointF;
 begin
- l_Delta := aPoint - StartPoint;
+ l_Delta := (aPoint - StartPoint) / ScrollSpeed;
  aHolder.Scroll(l_Delta);
 end;
 
 function TmsMouseUpShape.pm_GetStartPoint: TPointF;
 begin
  Result := FStartPoint;
+end;
+
+function TmsMouseUpShape.ScrollSpeed: Single;
+begin
+ Result := 150;
 end;
 
 procedure TmsMouseUpShape.SetStartPoint(const aStartPoint: TPointF);

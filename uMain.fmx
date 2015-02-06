@@ -113,7 +113,6 @@ object fmMain: TfmMain
         Size.Width = 589.000000000000000000
         Size.Height = 559.000000000000000000
         Size.PlatformDefault = False
-        OnMouseMove = imgMainMouseMove
         OnPaint = imgMainPaint
       end
     end
