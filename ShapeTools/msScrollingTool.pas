@@ -51,7 +51,7 @@ procedure TmsScrollingTool.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Proxy : ImsShape;
 begin
- l_Proxy := TmsMoveIcon.Create(Self.StartPoint);
+ l_Proxy := TmsScalingShape.Create(TmsMoveIcon.Create(Self.StartPoint), 0.5);
  // - люблю я Self.XXX. Мне лично так понятнее. Да и with - меньше лажает.
  try
   l_Proxy.DrawTo(aCtx);
