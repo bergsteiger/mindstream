@@ -4,7 +4,8 @@ interface
 
 uses
  System.Types,
- msProxyShape
+ msProxyShape,
+ msInterfaces
  ;
 
 type
@@ -12,6 +13,7 @@ type
  protected
   function GetDrawBounds: TRectF; override;
   function ExtentCoeff: Extended; virtual;
+  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsBoundsCorrector
 
 implementation
@@ -40,6 +42,11 @@ begin
  Result.Right := l_Mid.X + l_W;
  Result.Top := l_Mid.Y - l_H;
  Result.Bottom := l_Mid.Y + l_H;
+end;
+
+procedure TmsBoundsCorrector.DoDrawTo(const aCtx: TmsDrawContext);
+begin
+ inherited;
 end;
 
 end.
