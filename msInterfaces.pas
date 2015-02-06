@@ -124,8 +124,14 @@ type
   // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
   procedure SwapParents;
   // - сигнализируем о том, что надо ѕќћ≈Ќя“№ местами –ќƒ»“≈Ћ№— »≈ диаграммы
-  procedure Scroll(aDirection: TPointF);
-  // - скроллинг диаграммы
+  procedure Scroll(const aDirection: TPointF);
+                // ^ - не стесн€йтесь ставить const перед запис€ми.
+                //  “очнее ставьте ќЅя«ј“≈Ћ№Ќќ !!!2
+  // - скроллинг диаграммы на дельту
+  procedure ScrollTo(const aPoint: TPointF);
+                  // ^ - не стесн€йтесь ставить const перед запис€ми.
+                  //  “очнее ставьте ќЅя«ј“≈Ћ№Ќќ !!!2
+  // - скроллинг диаграммы абсолютно
   procedure ResetOrigin;
   // - восстанавливаем начальную систему координат
   function pm_GetCurrentDiagramms: ImsDiagrammsList;

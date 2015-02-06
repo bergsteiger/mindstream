@@ -88,7 +88,7 @@ procedure TmsMouseUpShape.MouseMove(const aHolder: ImsDiagrammsHolder;
 var
  l_Delta : TPointF;
 begin
- l_Delta := (aPoint - StartPoint) / ScrollSpeed;
+ l_Delta := (aPoint - Self.StartPoint) / ScrollSpeed;
  aHolder.Scroll(l_Delta);
 end;
 
