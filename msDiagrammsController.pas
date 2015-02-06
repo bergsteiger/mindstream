@@ -414,7 +414,7 @@ end;
 
 procedure TmsDiagrammsController.imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
- Self.ProcessClick(TPointF.Create(X, Y));
+ Self.ProcessClick(TPointF.Create(X, Y) - f_Delta);
 end;
 
 procedure TmsDiagrammsController.imgMainMouseMove(Sender: TObject;

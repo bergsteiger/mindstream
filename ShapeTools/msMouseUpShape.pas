@@ -36,7 +36,8 @@ uses
  msCircle,
  msTriangle,
  msPointCircle,
- msMoveIcon
+ msMoveIcon,
+ msScalingShape
  ;
 
 // TmsMouseUpShape
