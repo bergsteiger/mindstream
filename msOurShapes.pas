@@ -45,7 +45,7 @@ uses
   msScrollShapeDownLeft,
   msScrollShapeDownRight,
   msScrollShapeResetOrigin,
-  msMouseUpShape
+  msScrollingTool
   ;
 
 // Важно !!!
