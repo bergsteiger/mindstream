@@ -3,8 +3,8 @@
 interface
 
 uses
-{$Include msIvalidator.mixin.pas}
-  ,
+ {$Include msIvalidator.mixin.pas}
+ ,
  FMX.Objects,
  FMX.ListBox,
  FMX.StdCtrls,
@@ -23,8 +23,7 @@ uses
 
 type
  TmsIvalidatorParent = TmsInterfacedRefcounted;
-{$Include msIvalidator.mixin.pas}
-
+ {$Include msIvalidator.mixin.pas}
  TmsDiagrammsController = class(TmsIvalidator, ImsDiagrammsController)
  private
   imgMain: TPaintBox;
@@ -98,15 +97,16 @@ type
 implementation
 
 uses
-{$Include msIvalidator.mixin.pas}
-  ,
+ {$Include msIvalidator.mixin.pas}
+ ,
  System.SysUtils,
  FMX.Types,
  msShapesForToolbar,
  Math,
  msShapeCreator,
  FMX.Dialogs,
- System.Math.Vectors;
+ System.Math.Vectors
+ ;
 
 type
  TmsDiagrammsHolder = class(TmsInterfacedRefcounted, ImsDiagrammsHolder)
@@ -173,6 +173,7 @@ begin
 end;
 
 {$Include msIvalidator.mixin.pas}
+
 // TmsDiagrammsController
 
 constructor TmsDiagrammsController.CreatePrim(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton;
@@ -328,7 +329,7 @@ begin
 
  finally
   FreeAndNil(l_SaveDialog);
- end;
+ end;//try..finally
 end;
 
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
@@ -415,7 +416,6 @@ procedure TmsDiagrammsController.imgMainMouseDown(Sender: TObject; Button: TMous
 begin
  Self.ProcessClick(TPointF.Create(X, Y));
 end;
-
 
 procedure TmsDiagrammsController.imgMainMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Single);
