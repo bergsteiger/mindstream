@@ -62,8 +62,8 @@ type
   class function Create(const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
   procedure ProcessClick(const aClickContext: TmsClickContext);
-  procedure MouseUp(const aPoint: TPointF);
-  procedure MouseMove(Shift: TShiftState; const aPoint: TPointF);
+  procedure MouseUp(const aClickContext: TmsClickContext);
+  procedure MouseMove(const aShift: TShiftState; const aPoint: TPointF);
   procedure Clear;
   procedure Invalidate;
   property Name: String read fName write fName;
@@ -199,16 +199,19 @@ begin
  TmsDiagrammMarshal.DeSerialize(aFileName, Self);
 end;
 
-procedure TmsDiagramm.MouseMove(Shift: TShiftState; const aPoint: TPointF);
+procedure TmsDiagramm.MouseMove(const aShift: TShiftState; const aPoint: TPointF);
+var
+ l_PointCircle: ImsShape;
 begin
  if FCurrentAddedShape<>nil then
-  FCurrentAddedShape.MouseMove(aPoint);
+  FCurrentAddedShape.MouseMove(Self, aPoint);
 end;
 
-procedure TmsDiagramm.MouseUp(const aPoint: TPointF);
+procedure TmsDiagramm.MouseUp(const aClickContext: TmsClickContext);
 begin
  if Assigned(FCurrentAddedShape) then
-  if CurrentAddedShape.IsNeedsMouseUp then assert(false);
+  if CurrentAddedShape.IsNeedsMouseUp then
+    Self.EndShape(aClickContext.rClickPoint, aClickContext.rDiagrammsHolder);
 end;
 
 function TmsDiagramm.AddShape(const aShape: ImsShape): ImsShape;

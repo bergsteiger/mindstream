@@ -60,6 +60,8 @@ type
   // - скроллинг диаграммы
   procedure ResetOrigin;
   // - восстанавливаем начальную систему координат
+  procedure MouseUp(const aPoint: TPointF);
+  procedure MouseMove(const aShift: TShiftState; const aPoint: TPointF);
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
@@ -84,7 +86,6 @@ type
   procedure Cleanup; override;
   procedure Clear;
   procedure ProcessClick(const aStart: TPointF);
-  procedure MouseUp(const aPoint: TPointF);
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm
    write pm_SetCurrentDiagramm;
@@ -419,7 +420,7 @@ end;
 procedure TmsDiagrammsController.imgMainMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Single);
 begin
- CurrentDiagramm.MouseMove(Shift, TPointF.Create(X, Y));
+ Self.MouseMove(Shift, TPointF.Create(X, Y));
 end;
 
 procedure TmsDiagrammsController.imgMainMouseUp(Sender: TObject;
@@ -439,9 +440,17 @@ begin
  Scroll(TPointF.Create(0, l_Delta));
 end;
 
+procedure TmsDiagrammsController.MouseMove(const aShift: TShiftState;
+  const aPoint: TPointF);
+begin
+ CurrentDiagramm.MouseMove(aShift, aPoint);
+end;
+
 procedure TmsDiagrammsController.MouseUp(const aPoint: TPointF);
 begin
- CurrentDiagramm.MouseUp(aPoint);
+ CurrentDiagramm.MouseUp(TmsClickContext.Create(TmsShapesForToolbar.Instance.ByName(cbShapes.Items[cbShapes.ItemIndex]).Creator,
+                         aPoint,
+                         Self.As_ImsDiagrammsHolder));
 end;
 
 procedure TmsDiagrammsController.DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);

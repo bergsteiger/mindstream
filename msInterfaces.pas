@@ -98,7 +98,7 @@ type
   function ClickInDiagramm: Boolean;
   // - ткнули в примитив внутри диаграммы
   function DrawBounds: TRectF;
-  procedure MouseMove(const aFinishPoint: TPointF);
+  procedure MouseMove(const aDiagramm: ImsDiagramm; const aPoint: TPointF);
   // - действите нажатии
   function pm_GetStartPoint: TPointF;
   function pm_GetShapeClass: ImsShapeClass;
@@ -161,8 +161,8 @@ type
   function Get_Name: String;
   procedure Invalidate;
   procedure ProcessClick(const aClickContext: TmsClickContext);
-  procedure MouseUp(const aPoint: TPointF);
-  procedure MouseMove(Shift: TShiftState; const aPoint: TPointF);
+  procedure MouseUp(const aClickContex: TmsClickContext);
+  procedure MouseMove(const aShift: TShiftState; const aPoint: TPointF);
   procedure Clear;
   procedure DrawTo(const aCanvas: TCanvas);
   procedure SaveToPng(const aFileName: String);

@@ -21,14 +21,15 @@ type
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
-  procedure MouseMove(const aFinishPoint: TPointF); override;
+  procedure MouseMove(const aDiagramm: ImsDiagramm; const aPoint: TPointF); override;
  end;//TmsTool
 
 implementation
 
 uses
  msCircle,
- msTriangle
+ msTriangle,
+ msPointCircle
  ;
 
 // TmsTool
@@ -47,6 +48,7 @@ end;
 function TmsMouseUpShape.EndTo(const aCtx: TmsEndShapeContext): Boolean;
 begin
  aCtx.rShapesController.RemoveShape(Self);
+ Result := True;
 end;
 
 class function TmsMouseUpShape.IsForToolbar: Boolean;
@@ -64,10 +66,12 @@ begin
  Result := true;
 end;
 
-procedure TmsMouseUpShape.MouseMove(const aFinishPoint: TPointF);
+
+procedure TmsMouseUpShape.MouseMove(const aDiagramm: ImsDiagramm;
+  const aPoint: TPointF);
 begin
-  inherited;
- Assert(false);
+ aDiagramm.AddShape(TmsPointCircle.Create(aPoint));
+ aDiagramm.Invalidate;
 end;
 
 end.
