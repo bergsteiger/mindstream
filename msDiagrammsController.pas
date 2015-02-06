@@ -427,6 +427,9 @@ procedure TmsDiagrammsController.imgMainMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
  Self.MouseUp(TPointF.Create(X, Y) - f_Delta);
+                                  // ^ - пока НИ НА что невлияет, но ДЛЯ ПОРЯДКУ.
+                                  // На самом деле - ВЛИЯЕТ. На Line.
+                                  // Хотя - гоню...
 end;
 
 procedure TmsDiagrammsController.imgMainMouseWheel(Sender: TObject;
