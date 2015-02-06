@@ -420,7 +420,6 @@ end;
 procedure TmsDiagrammsController.imgMainMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Single);
 begin
-////TmsClickContext.Create(nil, TPointF.Create(X, Y), Self.As_ImsDiagrammsHolder)
  Self.MouseMove(Shift, TmsClickContext.Create(nil, TPointF.Create(X, Y), Self.As_ImsDiagrammsHolder));
 end;
 
