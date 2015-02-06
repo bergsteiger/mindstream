@@ -48,7 +48,8 @@ end;
 
 procedure TmsMouseUpShape.DoDrawTo(const aCtx: TmsDrawContext);
 begin
- inherited;
+ //inherited;
+ // - а вот тут нам точно ОТ ПРЕДКА ничего рисовать не надо
 end;
 
 function TmsMouseUpShape.EndTo(const aCtx: TmsEndShapeContext): Boolean;
