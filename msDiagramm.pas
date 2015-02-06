@@ -63,7 +63,7 @@ type
   procedure DrawTo(const aCanvas: TCanvas);
   procedure ProcessClick(const aClickContext: TmsClickContext);
   procedure MouseUp(const aClickContext: TmsClickContext);
-  procedure MouseMove(const aShift: TShiftState; const aPoint: TPointF);
+  procedure MouseMove(const aShift: TShiftState; const aClickContext: TmsClickContext);
   procedure Clear;
   procedure Invalidate;
   property Name: String read fName write fName;
@@ -199,14 +199,14 @@ begin
  TmsDiagrammMarshal.DeSerialize(aFileName, Self);
 end;
 
-procedure TmsDiagramm.MouseMove(const aShift: TShiftState; const aPoint: TPointF);
+procedure TmsDiagramm.MouseMove(const aShift: TShiftState; const aClickContext: TmsClickContext);
 var
  l_PointCircle: ImsShape;
 begin
  if FCurrentAddedShape<>nil then
-  FCurrentAddedShape.MouseMove(Self, aPoint);
+  FCurrentAddedShape.MouseMove(aClickContext.rDiagrammsHolder,
+                               aClickContext.rClickPoint)
 end;
-
 procedure TmsDiagramm.MouseUp(const aClickContext: TmsClickContext);
 begin
  if Assigned(FCurrentAddedShape) then

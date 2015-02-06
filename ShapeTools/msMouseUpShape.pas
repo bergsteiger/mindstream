@@ -12,6 +12,11 @@ uses
 
 type
  TmsMouseUpShape = class(TmsTool)
+ private
+  FStartPoint: TPointF;
+ protected
+  procedure SetStartPoint(const aStartPoint: TPointF); override;
+  function pm_GetStartPoint: TPointF; override;
  public
   class function ButtonShape: ImsShape; override;
   class function IsTool: Boolean; override;
@@ -21,7 +26,8 @@ type
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
-  procedure MouseMove(const aDiagramm: ImsDiagramm; const aPoint: TPointF); override;
+  procedure MouseMove(const aHolder: ImsDiagrammsHolder;
+                      const aPoint: TPointF); override;
  end;//TmsTool
 
 implementation
@@ -67,11 +73,24 @@ begin
 end;
 
 
-procedure TmsMouseUpShape.MouseMove(const aDiagramm: ImsDiagramm;
-  const aPoint: TPointF);
+procedure TmsMouseUpShape.MouseMove(const aHolder: ImsDiagrammsHolder;
+                                    const aPoint: TPointF);
+var
+ l_Delta : TPointF;
 begin
- aDiagramm.AddShape(TmsPointCircle.Create(aPoint));
- aDiagramm.Invalidate;
+ l_Delta := aPoint - StartPoint;
+ aHolder.Scroll(l_Delta);
+end;
+
+function TmsMouseUpShape.pm_GetStartPoint: TPointF;
+begin
+ Result := FStartPoint;
+end;
+
+procedure TmsMouseUpShape.SetStartPoint(const aStartPoint: TPointF);
+begin
+  inherited;
+ FStartPoint := aStartPoint;
 end;
 
 end.

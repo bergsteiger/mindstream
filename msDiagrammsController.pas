@@ -61,7 +61,7 @@ type
   procedure ResetOrigin;
   // - восстанавливаем начальную систему координат
   procedure MouseUp(const aPoint: TPointF);
-  procedure MouseMove(const aShift: TShiftState; const aPoint: TPointF);
+  procedure MouseMove(const aShift: TShiftState; const aClickContext: TmsClickContext);
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
@@ -420,7 +420,8 @@ end;
 procedure TmsDiagrammsController.imgMainMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Single);
 begin
- Self.MouseMove(Shift, TPointF.Create(X, Y));
+////TmsClickContext.Create(nil, TPointF.Create(X, Y), Self.As_ImsDiagrammsHolder)
+ Self.MouseMove(Shift, TmsClickContext.Create(nil, TPointF.Create(X, Y), Self.As_ImsDiagrammsHolder));
 end;
 
 procedure TmsDiagrammsController.imgMainMouseUp(Sender: TObject;
@@ -440,10 +441,9 @@ begin
  Scroll(TPointF.Create(0, l_Delta));
 end;
 
-procedure TmsDiagrammsController.MouseMove(const aShift: TShiftState;
-  const aPoint: TPointF);
+procedure TmsDiagrammsController.MouseMove(const aShift: TShiftState; const aClickContext: TmsClickContext);
 begin
- CurrentDiagramm.MouseMove(aShift, aPoint);
+ CurrentDiagramm.MouseMove(aShift, aClickContext);
 end;
 
 procedure TmsDiagrammsController.MouseUp(const aPoint: TPointF);
