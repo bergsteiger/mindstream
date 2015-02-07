@@ -37,14 +37,15 @@ uses
  msTriangle,
  msPointCircle,
  msMoveIcon,
- msScalingShape
+ msScalingShape,
+ msRectangle
  ;
 
 // TmsScrollingTool
 
 class function TmsScrollingTool.ButtonShape: ImsShape;
 begin
- Result := TmsShapesGroup.Create([TmsCircle.Create(), TmsMoveIcon.Create]);
+ Result := TmsShapesGroup.Create([TmsRectangle.Create, TmsMoveIcon.Create]);
 end;
 
 procedure TmsScrollingTool.DoDrawTo(const aCtx: TmsDrawContext);
