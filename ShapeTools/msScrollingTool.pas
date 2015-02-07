@@ -44,7 +44,7 @@ uses
 
 class function TmsScrollingTool.ButtonShape: ImsShape;
 begin
- Result := TmsShapesGroup.Create([TmsCircle.Create(), TmsTriangle.Create()]);
+ Result := TmsShapesGroup.Create([TmsCircle.Create(), TmsMoveIcon.Create]);
 end;
 
 procedure TmsScrollingTool.DoDrawTo(const aCtx: TmsDrawContext);
