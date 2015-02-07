@@ -50,7 +50,8 @@ var
 begin
  l_OriginalMatrix := aCtx.rCanvas.Matrix;
  try
-  l_Matrix := TMatrix.CreateScaling(f_Scale, f_Scale);
+  l_Matrix := TMatrix.Identity;
+  l_Matrix := l_Matrix * TMatrix.CreateScaling(f_Scale, f_Scale);
   l_Matrix := l_Matrix * l_OriginalMatrix;
   aCtx.rCanvas.SetMatrix(l_Matrix);
   inherited;
