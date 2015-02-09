@@ -100,7 +100,7 @@ uses
 class function TmsShape.Create(const aCtx: TmsMakeShapeContext): ImsShape;
 begin
  Result := Create(aCtx.rStartPoint);
- //TmsAppLog.
+ TmsAppLog.Instance.ToLog('Create object ' + self.ClassName);
 end;
 
 class function TmsShape.Create(const aStartPoint: TPointF): ImsShape;
