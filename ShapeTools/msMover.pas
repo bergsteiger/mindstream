@@ -131,15 +131,15 @@ begin
   ms_fbDownLeft: ;
   ms_fbDownRight: ;
 
- TPointF.Create(l_B.Left, l_Mid.Y);
- TPointF.Create(l_B.Right, l_Mid.Y);
- TPointF.Create(l_Mid.X, l_B.Top);
- TPointF.Create(l_Mid.X, l_B.Bottom));
+ Result := TPointF.Create(l_B.Left, l_Mid.Y);
+ Result := TPointF.Create(l_B.Right, l_Mid.Y);
+ Result := TPointF.Create(l_Mid.X, l_B.Top);
+ Result := TPointF.Create(l_Mid.X, l_B.Bottom));
 
- TPointF.Create(l_B.Left, l_B.Top);
- TPointF.Create(l_B.Right, l_B.Top);
- TPointF.Create(l_B.Left, l_B.Bottom);
- TPointF.Create(l_B.Right, l_B.Bottom);
+ Result := TPointF.Create(l_B.Left, l_B.Top);
+ Result := TPointF.Create(l_B.Right, l_B.Top);
+ Result := TPointF.Create(l_B.Left, l_B.Bottom);
+ Result := TPointF.Create(l_B.Right, l_B.Bottom);
 
   else
    Assert(false);
