@@ -122,25 +122,23 @@ begin
  l_Mid := (l_B.TopLeft + l_B.BottomRight) / 2;
 
  case aButton of
-  ms_fbLeft: ;
-  ms_fbRight: ;
-  ms_fbUp: ;
-  ms_fbDown: ;
-  ms_fbUpLeft: ;
-  ms_fbUpRight: ;
-  ms_fbDownLeft: ;
-  ms_fbDownRight: ;
+  ms_fbLeft:
+   Result := TPointF.Create(l_B.Left, l_Mid.Y);
+  ms_fbRight:
+   Result := TPointF.Create(l_B.Right, l_Mid.Y);
+  ms_fbUp:
+   Result := TPointF.Create(l_Mid.X, l_B.Top);
+  ms_fbDown:
+   Result := TPointF.Create(l_Mid.X, l_B.Bottom);
 
- Result := TPointF.Create(l_B.Left, l_Mid.Y);
- Result := TPointF.Create(l_B.Right, l_Mid.Y);
- Result := TPointF.Create(l_Mid.X, l_B.Top);
- Result := TPointF.Create(l_Mid.X, l_B.Bottom));
-
- Result := TPointF.Create(l_B.Left, l_B.Top);
- Result := TPointF.Create(l_B.Right, l_B.Top);
- Result := TPointF.Create(l_B.Left, l_B.Bottom);
- Result := TPointF.Create(l_B.Right, l_B.Bottom);
-
+  ms_fbUpLeft:
+   Result := TPointF.Create(l_B.Left, l_B.Top);
+  ms_fbUpRight:
+   Result := TPointF.Create(l_B.Right, l_B.Top);
+  ms_fbDownLeft:
+   Result := TPointF.Create(l_B.Left, l_B.Bottom);
+  ms_fbDownRight:
+   Result := TPointF.Create(l_B.Right, l_B.Bottom);
   else
    Assert(false);
  end;//case aButton
