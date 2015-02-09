@@ -46,6 +46,7 @@ type
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
   class function RectForButtons(const aShape: ImsShape): TRectF;
   class function BP(aButton: TmsFloatingButton; const aR: TRectF): TPointF;
+  class function ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape): TPointF;
  end;//TmsMover
 
 implementation
@@ -143,6 +144,11 @@ begin
  end;//case aButton
 end;
 
+class function TmsMover.ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape): TPointF;
+begin
+ Result := BP(aButton, RectForButtons(aShape));
+end;
+
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
 
  function AddDButton(aButtonDesc: TmsFloatingButton; aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
@@ -178,16 +184,14 @@ const
   TmsDownRightArrow
  );
 var
- l_B : TRectF;
  l_FB : TmsFloatingButton;
 begin
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
  Assert(f_FloatingButtons = nil);
  f_FloatingButtons := TmsShapesList.Create;
- l_B := RectForButtons(f_Moving);
  for l_FB := Low(TmsFloatingButton) to High(TmsFloatingButton) do
-  aController.AddShape(AddDButton(l_FB, cShapeTool[l_FB], cShapeArrow[l_FB].Create(BP(l_FB, l_B))));
+  aController.AddShape(AddDButton(l_FB, cShapeTool[l_FB], cShapeArrow[l_FB].Create(ButtonPoint(l_FB, f_Moving))));
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
