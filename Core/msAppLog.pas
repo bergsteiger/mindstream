@@ -12,7 +12,7 @@ type
   constructor Create(const aFileName: String);
   destructor Fini;
  public
-  class function GetInstance(const aFileName: String): TmsAppLog;
+  class function Instance(const aFileName: String): TmsAppLog;
   procedure ShowMsg;
  end;
 
@@ -33,7 +33,7 @@ begin
  FreeAndNil(f_Instance);
 end;
 
-class function TmsAppLog.GetInstance(const aFileName: String): TmsAppLog;
+class function TmsAppLog.Instance(const aFileName: String): TmsAppLog;
 begin
  if (f_Instance = nil) then
   f_Instance := Self.Create(aFileName);
