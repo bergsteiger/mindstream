@@ -25,7 +25,7 @@ uses
 
 constructor TmsAppLog.Create(const aFileName: String);
 begin
-// inherited Create(aFileName);
+ inherited Create(aFileName);
 end;
 
 destructor TmsAppLog.Fini;
