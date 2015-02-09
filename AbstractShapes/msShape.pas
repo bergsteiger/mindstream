@@ -93,12 +93,14 @@ uses
  System.SysUtils,
  msShapeMarshal,
  System.Math.Vectors,
- msRegisteredShapes
+ msRegisteredShapes,
+ msAppLog
  ;
 
 class function TmsShape.Create(const aCtx: TmsMakeShapeContext): ImsShape;
 begin
  Result := Create(aCtx.rStartPoint);
+ TmsAppLog.Instance.ToLog('Create object ' + self.ClassName);
 end;
 
 class function TmsShape.Create(const aStartPoint: TPointF): ImsShape;
