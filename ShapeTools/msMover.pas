@@ -14,6 +14,19 @@ uses
  ;
 
 type
+ TmsFloatingButton = (
+  // - http://18delphi.blogspot.ru/2014/05/blog-post.html
+  ms_fbLeft,
+  ms_fbRight,
+  ms_fbUp,
+  ms_fbDown,
+
+  ms_fbUpLeft,
+  ms_fbUpRight,
+  ms_fbDownLeft,
+  ms_fbDownRight
+ );//TmsFloatingButton
+
  TmsMover = class(TmsTool)
  private
   f_Moving : ImsShape;
