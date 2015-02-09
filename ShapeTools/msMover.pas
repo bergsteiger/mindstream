@@ -163,15 +163,15 @@ begin
 
  l_Mid := (l_B.TopLeft + l_B.BottomRight) / 2;
 
- aController.AddShape(AddButton(TmsMoveShapeLeft, TmsLeftArrow.Create(TPointF.Create(l_B.Left, l_Mid.Y))));
- aController.AddShape(AddButton(TmsMoveShapeRight, TmsRightArrow.Create(TPointF.Create(l_B.Right, l_Mid.Y))));
- aController.AddShape(AddButton(TmsMoveShapeUp, TmsUpArrow.Create(TPointF.Create(l_Mid.X, l_B.Top))));
- aController.AddShape(AddButton(TmsMoveShapeDown, TmsDownArrow.Create(TPointF.Create(l_Mid.X, l_B.Bottom))));
+ aController.AddShape(AddButton(TmsMoveShapeLeft, TmsLeftArrow.Create(BP(ms_fbLeft, l_B))));
+ aController.AddShape(AddButton(TmsMoveShapeRight, TmsRightArrow.Create(BP(ms_fbRight, l_B))));
+ aController.AddShape(AddButton(TmsMoveShapeUp, TmsUpArrow.Create(BP(ms_fbUp, l_B))));
+ aController.AddShape(AddButton(TmsMoveShapeDown, TmsDownArrow.Create(BP(ms_fbDown, l_B))));
 
- aController.AddShape(AddDButton(TmsMoveShapeUpLeft, TmsUpLeftArrow.Create(TPointF.Create(l_B.Left, l_B.Top))));
- aController.AddShape(AddDButton(TmsMoveShapeUpRight, TmsUpRightArrow.Create(TPointF.Create(l_B.Right, l_B.Top))));
- aController.AddShape(AddDButton(TmsMoveShapeDownLeft, TmsDownLeftArrow.Create(TPointF.Create(l_B.Left, l_B.Bottom))));
- aController.AddShape(AddDButton(TmsMoveShapeDownRight, TmsDownRightArrow.Create(TPointF.Create(l_B.Right, l_B.Bottom))));
+ aController.AddShape(AddDButton(TmsMoveShapeUpLeft, TmsUpLeftArrow.Create(BP(ms_fbUpLeft, l_B))));
+ aController.AddShape(AddDButton(TmsMoveShapeUpRight, TmsUpRightArrow.Create(BP(ms_fbUpRight, l_B))));
+ aController.AddShape(AddDButton(TmsMoveShapeDownLeft, TmsDownLeftArrow.Create(BP(ms_fbDownLeft, l_B))));
+ aController.AddShape(AddDButton(TmsMoveShapeDownRight, TmsDownRightArrow.Create(BP(ms_fbDownRight, l_B))));
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
