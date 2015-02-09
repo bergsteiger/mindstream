@@ -45,6 +45,7 @@ type
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
   class function RectForButtons(const aShape: ImsShape): TRectF;
+  class function BP(aButton: TmsFloatingButton; const aR: TRectF): TPointF;
  end;//TmsMover
 
 implementation
@@ -110,6 +111,39 @@ begin
  l_Offset := TmsSpecialArrow.InitialLength + cShift;
 
  Result.Inflate(l_Offset, l_Offset);
+end;
+
+class function TmsMover.BP(aButton: TmsFloatingButton; const aR: TRectF): TPointF;
+var
+ l_B : TRectF;
+ l_Mid : TPointF;
+begin
+ l_B := aR;
+ l_Mid := (l_B.TopLeft + l_B.BottomRight) / 2;
+
+ case aButton of
+  ms_fbLeft: ;
+  ms_fbRight: ;
+  ms_fbUp: ;
+  ms_fbDown: ;
+  ms_fbUpLeft: ;
+  ms_fbUpRight: ;
+  ms_fbDownLeft: ;
+  ms_fbDownRight: ;
+
+ TPointF.Create(l_B.Left, l_Mid.Y);
+ TPointF.Create(l_B.Right, l_Mid.Y);
+ TPointF.Create(l_Mid.X, l_B.Top);
+ TPointF.Create(l_Mid.X, l_B.Bottom));
+
+ TPointF.Create(l_B.Left, l_B.Top);
+ TPointF.Create(l_B.Right, l_B.Top);
+ TPointF.Create(l_B.Left, l_B.Bottom);
+ TPointF.Create(l_B.Right, l_B.Bottom);
+
+  else
+   Assert(false);
+ end;//case aButton
 end;
 
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
