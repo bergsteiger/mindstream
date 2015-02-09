@@ -115,30 +115,28 @@ end;
 
 class function TmsMover.BP(aButton: TmsFloatingButton; const aR: TRectF): TPointF;
 var
- l_B : TRectF;
  l_Mid : TPointF;
 begin
- l_B := aR;
- l_Mid := (l_B.TopLeft + l_B.BottomRight) / 2;
+ l_Mid := (aR.TopLeft + aR.BottomRight) / 2;
 
  case aButton of
   ms_fbLeft:
-   Result := TPointF.Create(l_B.Left, l_Mid.Y);
+   Result := TPointF.Create(aR.Left, l_Mid.Y);
   ms_fbRight:
-   Result := TPointF.Create(l_B.Right, l_Mid.Y);
+   Result := TPointF.Create(aR.Right, l_Mid.Y);
   ms_fbUp:
-   Result := TPointF.Create(l_Mid.X, l_B.Top);
+   Result := TPointF.Create(l_Mid.X, aR.Top);
   ms_fbDown:
-   Result := TPointF.Create(l_Mid.X, l_B.Bottom);
+   Result := TPointF.Create(l_Mid.X, aR.Bottom);
 
   ms_fbUpLeft:
-   Result := TPointF.Create(l_B.Left, l_B.Top);
+   Result := TPointF.Create(aR.Left, aR.Top);
   ms_fbUpRight:
-   Result := TPointF.Create(l_B.Right, l_B.Top);
+   Result := TPointF.Create(aR.Right, aR.Top);
   ms_fbDownLeft:
-   Result := TPointF.Create(l_B.Left, l_B.Bottom);
+   Result := TPointF.Create(aR.Left, aR.Bottom);
   ms_fbDownRight:
-   Result := TPointF.Create(l_B.Right, l_B.Bottom);
+   Result := TPointF.Create(aR.Right, aR.Bottom);
   else
    Assert(false);
  end;//case aButton
