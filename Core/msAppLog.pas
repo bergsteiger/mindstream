@@ -12,7 +12,7 @@ type
   constructor Create(const aFileName: String);
   destructor Fini;
  public
-  class function Instance(const aFileName: String): TmsAppLog;
+  class function Instance: TmsAppLog;
   procedure ShowMsg;
  end;
 
@@ -33,10 +33,12 @@ begin
  FreeAndNil(f_Instance);
 end;
 
-class function TmsAppLog.Instance(const aFileName: String): TmsAppLog;
+class function TmsAppLog.Instance: TmsAppLog;
+const
+ c_AppLogFileName = 'Mindstream.App.Log';
 begin
  if (f_Instance = nil) then
-  f_Instance := Self.Create(aFileName);
+  f_Instance := Self.Create(c_AppLogFileName);
  Result := f_Instance;
 end;
 
