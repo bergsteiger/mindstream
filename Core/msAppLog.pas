@@ -1,6 +1,7 @@
 unit msAppLog;
 
 interface
+
 uses
  msCoreObjects
  ;
@@ -14,7 +15,7 @@ type
  public
   class function Instance: TmsAppLog;
   procedure ShowMsg;
- end;
+ end;//TmsAppLog
 
 implementation
 
@@ -22,6 +23,8 @@ uses
  System.SysUtils,
  FMX.Dialogs
  ;
+
+// TmsAppLog
 
 constructor TmsAppLog.Create(const aFileName: String);
 begin
