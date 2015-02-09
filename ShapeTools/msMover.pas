@@ -81,7 +81,8 @@ uses
  msMoveShapeDownLeft,
  msMoveShapeUpLeft,
  msMoveShapeUpRight,
- msFloatingButtonCircle
+ msFloatingButtonCircle,
+ msMoveShapeTool
  ;
 
 // TmsMover
@@ -144,29 +145,49 @@ end;
 
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
 
- function AddDButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
+ function AddDButton(aButtonDesc: TmsFloatingButton; aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
  begin//AddDButton
-  Result := AddButton(aToolClass, TmsSpecialDiagonalArrowBoundsCorrector.Create(aButton));
+  if (aButtonDesc in [ms_fbLeft..ms_fbDown]) then
+   Result := AddButton(aToolClass, aButton)
+  else
+   Result := AddButton(aToolClass, TmsSpecialDiagonalArrowBoundsCorrector.Create(aButton));
  end;//AddDButton
 
+const
+ cShapeTool : array [TmsFloatingButton] of RmsMoveShapeTool = (
+  TmsMoveShapeLeft,
+  TmsMoveShapeRight,
+  TmsMoveShapeUp,
+  TmsMoveShapeDown,
+
+  TmsMoveShapeUpLeft,
+  TmsMoveShapeUpRight,
+  TmsMoveShapeDownLeft,
+  TmsMoveShapeDownRight
+ );
+
+ cShapeArrow : array [TmsFloatingButton] of RmsSpecialArrow = (
+  TmsLeftArrow,
+  TmsRightArrow,
+  TmsUpArrow,
+  TmsDownArrow,
+
+  TmsUpLeftArrow,
+  TmsUpRightArrow,
+  TmsDownLeftArrow,
+  TmsDownRightArrow
+ );
 var
  l_B : TRectF;
+ l_FB : TmsFloatingButton;
 begin
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
  Assert(f_FloatingButtons = nil);
  f_FloatingButtons := TmsShapesList.Create;
  l_B := RectForButtons(f_Moving);
-
- aController.AddShape(AddButton(TmsMoveShapeLeft, TmsLeftArrow.Create(BP(ms_fbLeft, l_B))));
- aController.AddShape(AddButton(TmsMoveShapeRight, TmsRightArrow.Create(BP(ms_fbRight, l_B))));
- aController.AddShape(AddButton(TmsMoveShapeUp, TmsUpArrow.Create(BP(ms_fbUp, l_B))));
- aController.AddShape(AddButton(TmsMoveShapeDown, TmsDownArrow.Create(BP(ms_fbDown, l_B))));
-
- aController.AddShape(AddDButton(TmsMoveShapeUpLeft, TmsUpLeftArrow.Create(BP(ms_fbUpLeft, l_B))));
- aController.AddShape(AddDButton(TmsMoveShapeUpRight, TmsUpRightArrow.Create(BP(ms_fbUpRight, l_B))));
- aController.AddShape(AddDButton(TmsMoveShapeDownLeft, TmsDownLeftArrow.Create(BP(ms_fbDownLeft, l_B))));
- aController.AddShape(AddDButton(TmsMoveShapeDownRight, TmsDownRightArrow.Create(BP(ms_fbDownRight, l_B))));
+ for l_FB := Low(TmsFloatingButton) to High(TmsFloatingButton) do
+  aController.AddShape(AddDButton(l_FB, cShapeTool[l_FB], cShapeArrow[l_FB].Create(BP(l_FB, l_B))));
 end;
 
 class function TmsMover.ButtonShape: ImsShape;

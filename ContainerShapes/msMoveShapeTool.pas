@@ -14,6 +14,8 @@ type
   function Delta: TPointF; virtual; abstract;
  end;//TmsMoveShapeTool
 
+ RmsMoveShapeTool = class of TmsMoveShapeTool;
+
 implementation
 
 // TmsMoveShapeTool
