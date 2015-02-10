@@ -24,6 +24,8 @@ type
   protected
    procedure MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape); override;
    function ContextName: String; override;
+  public
+   class procedure AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda); override;
   end;//TmsMoverFloatingButtonsTest
 
 implementation
@@ -84,6 +86,11 @@ end;
 function TmsMoverFloatingButtonsTest.ContextName: String;
 begin
  Result := GetEnumName(TypeInfo(TmsFloatingButton), Ord(f_Button)) + '_' +  inherited;
+end;
+
+class procedure TmsMoverFloatingButtonsTest.AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda);
+begin
+ inherited;
 end;
 
 end.
