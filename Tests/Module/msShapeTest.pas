@@ -48,6 +48,7 @@ type
    procedure TestDeSerializeForShapeClass;
    procedure TestDeSerializeViaShapeCheckForShapeClass;
    function ShapeClass: MCmsShape;
+   function TestNamePrefix: String; virtual;
    function ContextName: String; override;
    function InnerFolders: String; override;
    procedure TransformContext(var theContext: TmsShapeTestContext); virtual;
@@ -110,9 +111,14 @@ begin
  Result := MCmsShape(f_Context.rShapeClass);
 end;
 
+function TmsShapeTestPrim.TestNamePrefix: String;
+begin
+ Result := Self.ShapeClass.Name;
+end;
+
 function TmsShapeTestPrim.ContextName: String;
 begin
- Result := '_' + Self.ShapeClass.Name;
+ Result := '_' + TestNamePrefix;
 end;
 
 const
@@ -208,7 +214,7 @@ end;
 
 function TmsShapeTestPrim.TestSerializeMethodName: String;
 begin
- Result := Self.ShapeClass.Name + '.' + 'TestSerialize';
+ Result := TestNamePrefix + '.' + 'TestSerialize';
 end;
 
 procedure TmsShapeTestPrim.DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
@@ -249,7 +255,7 @@ begin
  inherited Create(aContext.rMethodName);
  f_Context := aContext;
  TransformContext(f_Context);
- FTestName := Self.ShapeClass.Name + '.' + aContext.rMethodName;
+ FTestName := TestNamePrefix + '.' + aContext.rMethodName;
 end;
 
 class function TmsShapeTestPrim.Create(const aContext: TmsShapeTestContext): ITest;
@@ -300,7 +306,7 @@ begin
  OutToFileAndCheck(
   procedure (aLog: TmsLog)
   begin
-   aLog.ToLog(Self.ShapeClass.Name);
+   aLog.ToLog(TestNamePrefix);
   end
  );
 end;
