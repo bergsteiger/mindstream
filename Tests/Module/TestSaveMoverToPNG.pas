@@ -24,8 +24,10 @@ type
   protected
    procedure MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape); override;
    function ContextName: String; override;
+   constructor CreateInner(const aContext: TmsShapeTestContext);
   public
    class procedure AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda); override;
+   class function Create(const aContext: TmsShapeTestContext): ITest;
   end;//TmsMoverFloatingButtonsTest
 
 implementation
@@ -91,6 +93,16 @@ end;
 class procedure TmsMoverFloatingButtonsTest.AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda);
 begin
  aLambda(Self.Create(aContext));
+end;
+
+constructor TmsMoverFloatingButtonsTest.CreateInner(const aContext: TmsShapeTestContext);
+begin
+ inherited CreateInner(aContext);
+end;
+
+class function TmsMoverFloatingButtonsTest.Create(const aContext: TmsShapeTestContext): ITest;
+begin
+ Result := CreateInner(aContext);
 end;
 
 end.
