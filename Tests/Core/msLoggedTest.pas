@@ -146,7 +146,7 @@ var
 begin
 { TODO 1 -oIngword -cProposal : Добавить вывод ошибок в лог }
  l_cmdFileName := ExtractFilePath(ParamStr(0)) +
-                  Self.ComputerName + '_' +
+                  String(Self.ComputerName) + '_' +
                   c_cmdFileName;
 
  if not FileExists(l_cmdFileName) then

@@ -22,7 +22,7 @@ type
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
-  constructor CreateInner(const aShapes: array of ImsShape);
+  constructor CreateInner(const aShapes: array of ImsShape); reintroduce;
  public
   class function Create(const aShapes: array of ImsShape): ImsShape;
   procedure Cleanup; override;

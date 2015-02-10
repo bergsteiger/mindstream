@@ -69,13 +69,13 @@ type
   // - ткнули в примитив внутри диаграммы
   function GetDrawBounds: TRectF; virtual;
   function DrawBounds: TRectF;
+  class function IsLineLike: Boolean; virtual;
  public
   procedure DrawTo(const aCtx: TmsDrawContext); virtual;
   property StartPoint : TPointF
    read pm_GetStartPoint;
   class function IsTool: Boolean; virtual;
   class function IsForToolbar: Boolean; virtual;
-  class function IsLineLike: Boolean; virtual;
   class function IsNullClick: Boolean; virtual;
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);

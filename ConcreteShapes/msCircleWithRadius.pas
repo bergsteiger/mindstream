@@ -14,7 +14,7 @@ type
   f_Rad : Single;
  protected
   function InitialRadiusX: Integer; override;
-  constructor CreateInner(const aStartPoint: TPointF; aRad: Single);
+  constructor CreateInner(const aStartPoint: TPointF; aRad: Single); reintroduce;
  public
   class function Create(const aStartPoint: TPointF; aRad: Single): ImsShape;
  end;//TmsCircleWithRadius
