@@ -232,6 +232,7 @@ begin
  Result := true;
  if (f_Moving <> nil) then
  begin
+  Assert(aCtx.rShapesController <> nil);
   l_ShapeOnPoint := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
   if (l_ShapeOnPoint <> nil) then
    if l_ShapeOnPoint.ClickInDiagramm then

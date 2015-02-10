@@ -65,8 +65,14 @@ end;
 procedure TmsMoverFloatingButtonsTest.MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape);
 var
  l_ClickPoint : TPointF;
+ l_Ctx : TmsEndShapeContext;
 begin
- l_ClickPoint := TmsMover.ButtonPoint(ms_fbLeft, aShape);
+ if (aMover <> nil) then
+ begin
+  l_ClickPoint := TmsMover.ButtonPoint(ms_fbLeft, aShape);
+  l_Ctx := TmsEndShapeContext.Create(l_ClickPoint, aDiagramm.ShapesController, nil);
+  aMover.EndTo(l_Ctx);
+ end;//aMover <> nil
  inherited;
 end;
 
