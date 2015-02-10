@@ -90,7 +90,7 @@ end;
 
 class procedure TmsMoverFloatingButtonsTest.AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda);
 begin
- inherited;
+ aLambda(Self.Create(aContext));
 end;
 
 end.
