@@ -24,10 +24,10 @@ type
   protected
    procedure MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape); override;
    function ContextName: String; override;
-   constructor CreateInner(const aContext: TmsShapeTestContext);
+   constructor CreateInner(aButton : TmsFloatingButton; const aContext: TmsShapeTestContext);
   public
    class procedure AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda); override;
-   class function Create(const aContext: TmsShapeTestContext): ITest;
+   class function Create(aButton : TmsFloatingButton; const aContext: TmsShapeTestContext): ITest;
   end;//TmsMoverFloatingButtonsTest
 
 implementation
@@ -75,7 +75,6 @@ var
  l_ClickPoint : TPointF;
  l_Ctx : TmsEndShapeContext;
 begin
- f_Button := ms_fbLeft;
  if (aMover <> nil) then
  begin
   l_ClickPoint := TmsMover.ButtonPoint(f_Button, aShape);
@@ -91,18 +90,22 @@ begin
 end;
 
 class procedure TmsMoverFloatingButtonsTest.AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda);
+var
+ l_Button : TmsFloatingButton;
 begin
- aLambda(Self.Create(aContext));
+ for l_Button := Low(TmsFloatingButton) to High(TmsFloatingButton) do
+  aLambda(Self.Create(l_Button, aContext));
 end;
 
-constructor TmsMoverFloatingButtonsTest.CreateInner(const aContext: TmsShapeTestContext);
+constructor TmsMoverFloatingButtonsTest.CreateInner(aButton : TmsFloatingButton; const aContext: TmsShapeTestContext);
 begin
+ f_Button := aButton;
  inherited CreateInner(aContext);
 end;
 
-class function TmsMoverFloatingButtonsTest.Create(const aContext: TmsShapeTestContext): ITest;
+class function TmsMoverFloatingButtonsTest.Create(aButton : TmsFloatingButton; const aContext: TmsShapeTestContext): ITest;
 begin
- Result := CreateInner(aContext);
+ Result := CreateInner(aButton, aContext);
 end;
 
 end.
