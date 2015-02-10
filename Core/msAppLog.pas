@@ -11,7 +11,7 @@ type
  strict private
   class var f_Instance: TmsAppLog;
   constructor Create(const aFileName: String);
-  destructor Fini;
+  class destructor Fini;
  public
   class function Instance: TmsAppLog;
  end;//TmsAppLog
@@ -30,7 +30,7 @@ begin
  inherited Create(aFileName);
 end;
 
-destructor TmsAppLog.Fini;
+class destructor TmsAppLog.Fini;
 begin
  FreeAndNil(f_Instance);
 end;
