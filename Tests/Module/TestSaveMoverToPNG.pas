@@ -25,6 +25,8 @@ type
 implementation
 
 uses
+  System.Types,
+
   msMover,
   msRegisteredShapes
   ;
@@ -61,7 +63,10 @@ end;
 // TmsMoverFloatingButtonsTest
 
 procedure TmsMoverFloatingButtonsTest.MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape);
+var
+ l_ClickPoint : TPointF;
 begin
+ l_ClickPoint := TmsMover.ButtonPoint(ms_fbLeft, aShape);
  inherited;
 end;
 
