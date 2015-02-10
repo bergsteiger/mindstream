@@ -54,7 +54,7 @@ end;
 
 procedure TestTmsLine.TestIsNeedsSecondClick;
 begin
- CheckFalse(FmsLine.IsNeedsSecondClick);
+ CheckTrue(FmsLine.IsNeedsSecondClick);
 end;
 
 procedure TestTmsLine.TestEndTo;
