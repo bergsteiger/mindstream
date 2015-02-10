@@ -84,7 +84,7 @@ type
                         aSaveToPng: TButton): ImsDiagrammsController;
   procedure Cleanup; override;
   procedure Clear;
-  procedure ProcessClick(const aStart: TPointF);
+  procedure MouseDown(const aStart: TPointF);
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm
    write pm_SetCurrentDiagramm;
@@ -360,9 +360,9 @@ begin
  CurrentDiagramm.Clear;
 end;
 
-procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
+procedure TmsDiagrammsController.MouseDown(const aStart: TPointF);
 begin
- CurrentDiagramm.ProcessClick(TmsClickContext.Create(TmsShapesForToolbar.Instance.ByName(cbShapes.Items[cbShapes.ItemIndex]).Creator, aStart,
+ CurrentDiagramm.MouseDown(TmsClickContext.Create(TmsShapesForToolbar.Instance.ByName(cbShapes.Items[cbShapes.ItemIndex]).Creator, aStart,
    Self.As_ImsDiagrammsHolder));
 end;
 
@@ -415,7 +415,7 @@ end;
 
 procedure TmsDiagrammsController.imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
- Self.ProcessClick(TPointF.Create(X, Y) - f_Delta);
+ Self.MouseDown(TPointF.Create(X, Y) - f_Delta);
 end;
 
 procedure TmsDiagrammsController.imgMainMouseMove(Sender: TObject;
