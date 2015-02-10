@@ -20,6 +20,7 @@ type
   TmsMoverFloatingButtonsTest = class(TTestSaveMoverToPNG)
   protected
    procedure MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape); override;
+   function ContextName: String; override;
   end;//TmsMoverFloatingButtonsTest
 
 implementation
@@ -74,6 +75,11 @@ begin
   aMover.EndTo(l_Ctx);
  end;//aMover <> nil
  inherited;
+end;
+
+function TmsMoverFloatingButtonsTest.ContextName: String;
+begin
+ Result := inherited;
 end;
 
 end.
