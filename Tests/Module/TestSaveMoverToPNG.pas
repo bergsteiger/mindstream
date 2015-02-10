@@ -23,7 +23,7 @@ type
    f_Button : TmsFloatingButton;
   protected
    procedure MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape); override;
-   function ContextName: String; override;
+   function TestNamePrefix: String; override;
    constructor CreateInner(aButton : TmsFloatingButton; const aContext: TmsShapeTestContext);
   public
    class procedure AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda); override;
@@ -84,7 +84,7 @@ begin
  inherited;
 end;
 
-function TmsMoverFloatingButtonsTest.ContextName: String;
+function TmsMoverFloatingButtonsTest.TestNamePrefix: String;
 begin
  Result := GetEnumName(TypeInfo(TmsFloatingButton), Ord(f_Button)) + '_' +  inherited;
 end;

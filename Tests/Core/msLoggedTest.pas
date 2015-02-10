@@ -50,7 +50,7 @@ var
 begin
  l_Folder := ExtractFilePath(ParamStr(0)) + 'TestResults\' + aTestFolder;
  ForceDirectories(l_Folder);
- Result := l_Folder + ClassName + '_' + aTestName + ContextName + FileExtension;
+ Result := l_Folder + ClassName + '_' + aTestName + {ContextName + }FileExtension;
 end;
 
 function TmsLoggedTest.ContextName: String;
