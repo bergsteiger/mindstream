@@ -20,9 +20,9 @@ type
   constructor CreateInner(const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF); reintroduce;
   class function Create(const anOtherShapeClass: MCmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
   //function IsClassTypeNamedAs(const aClassName: String): Boolean; override;
-  function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
   function GetDrawBounds: TRectF; override;
  public
+  function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
   procedure DrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsPaletteShape
 

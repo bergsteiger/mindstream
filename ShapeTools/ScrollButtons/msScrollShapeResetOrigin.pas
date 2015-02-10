@@ -11,11 +11,9 @@ uses
 
 type
  TmsScrollShapeResetOrigin = class(TmsScrollShapePrim)
- protected
+ public
   class function ButtonShape: ImsShape; override;
- public
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; override; final;
- public
  end;//TmsScrollShapeResetOrigin
 
 implementation
