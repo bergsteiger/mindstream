@@ -6,7 +6,8 @@ uses
   TestFrameWork,
   msShapeTest,
   msInterfaces,
-  TestSaveToPNG
+  TestSaveToPNG,
+  msMover
   ;
 
 type
@@ -18,6 +19,8 @@ type
   end;//TTestSaveMoverToPNG
 
   TmsMoverFloatingButtonsTest = class(TTestSaveMoverToPNG)
+  private
+   f_Button : TmsFloatingButton;
   protected
    procedure MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape); override;
    function ContextName: String; override;
@@ -28,7 +31,6 @@ implementation
 uses
   System.Types,
 
-  msMover,
   msRegisteredShapes
   ;
 
@@ -68,9 +70,10 @@ var
  l_ClickPoint : TPointF;
  l_Ctx : TmsEndShapeContext;
 begin
+ f_Button := ms_fbLeft;
  if (aMover <> nil) then
  begin
-  l_ClickPoint := TmsMover.ButtonPoint(ms_fbLeft, aShape);
+  l_ClickPoint := TmsMover.ButtonPoint(f_Button, aShape);
   l_Ctx := TmsEndShapeContext.Create(l_ClickPoint, aDiagramm.ShapesController, nil);
   aMover.EndTo(l_Ctx);
  end;//aMover <> nil
