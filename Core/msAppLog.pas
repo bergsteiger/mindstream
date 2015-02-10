@@ -14,7 +14,6 @@ type
   destructor Fini;
  public
   class function Instance: TmsAppLog;
-  procedure ShowMsg;
  end;//TmsAppLog
 
 implementation
@@ -41,13 +40,9 @@ const
  c_AppLogFileName = 'Mindstream.App.Log';
 begin
  if (f_Instance = nil) then
-  f_Instance := Self.Create(c_AppLogFileName);
+  f_Instance := Self.Create(ExtractFilePath(ParamStr(0)) + c_AppLogFileName);
  Result := f_Instance;
 end;
 
-procedure TmsAppLog.ShowMsg;
-begin
- ShowMessage('Hello Log');
-end;
-
 end.
+
