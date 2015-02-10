@@ -194,48 +194,10 @@ begin
 end;
 
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
-
- function AddDButton(aButtonDesc: TmsFloatingButton; aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
- begin//AddDButton
-  if (aButtonDesc in [ms_fbLeft..ms_fbDown]) then
-   Result := AddButton(aToolClass, aButton)
-  else
-   Result := AddButton(aToolClass, TmsSpecialDiagonalArrowBoundsCorrector.Create(aButton));
- end;//AddDButton
-
-const
- cShapeTool : array [TmsFloatingButton] of RmsMoveShapeTool = (
-  TmsMoveShapeLeft,
-  TmsMoveShapeRight,
-  TmsMoveShapeUp,
-  TmsMoveShapeDown,
-
-  TmsMoveShapeUpLeft,
-  TmsMoveShapeUpRight,
-  TmsMoveShapeDownLeft,
-  TmsMoveShapeDownRight
- );
-
- cShapeArrow : array [TmsFloatingButton] of RmsSpecialArrow = (
-  TmsLeftArrow,
-  TmsRightArrow,
-  TmsUpArrow,
-  TmsDownArrow,
-
-  TmsUpLeftArrow,
-  TmsUpRightArrow,
-  TmsDownLeftArrow,
-  TmsDownRightArrow
- );
-var
- l_FB : TmsFloatingButton;
 begin
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
- Assert(f_FloatingButtons = nil);
- f_FloatingButtons := TmsShapesList.Create;
- for l_FB := Low(TmsFloatingButton) to High(TmsFloatingButton) do
-  aController.AddShape(AddDButton(l_FB, cShapeTool[l_FB], cShapeArrow[l_FB].Create(ButtonPoint(l_FB, f_Moving))));
+ CreateFloatingButtons(aController);
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
