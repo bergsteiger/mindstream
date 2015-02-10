@@ -17,7 +17,7 @@ type
   f_OtherShapeClass : MCmsShape;
   f_Proxy : ImsShape;
  protected
-  constructor CreateInner(const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF);
+  constructor CreateInner(const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF); reintroduce;
   class function Create(const anOtherShapeClass: MCmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
   //function IsClassTypeNamedAs(const aClassName: String): Boolean; override;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; override;
