@@ -19,7 +19,8 @@ type
    class procedure Log(const aFileName: String; aLambda: TmsLogLambda);
    constructor Create(const aFileName: String);
    destructor Destroy; override;
-   procedure ToLog(const aString: AnsiString);
+   procedure ToLog(const aString: AnsiString); overload;
+   procedure ToLog(const aString: String); overload;
  end;//TmsLog
 
  TmsClassInstanceCount = record
@@ -187,6 +188,11 @@ begin//OutLn
  f_FS.Write(aString[1], Length(aString));
  f_FS.Write(cEOL[1], Length(cEOL));
 end;//OutLn
+
+procedure TmsLog.ToLog(const aString: String);
+begin
+ ToLog(AnsiString(aString));
+end;
 
 class destructor TmsObjectsWatcher.Fini;
 begin

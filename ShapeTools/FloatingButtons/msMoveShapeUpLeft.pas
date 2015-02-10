@@ -3,6 +3,7 @@ unit msMoveShapeUpLeft;
 interface
 
 uses
+ System.Types,
  msShapeTool,
  msMoveShapeTool
  ;
@@ -10,20 +11,16 @@ uses
 type
  TmsMoveShapeUpLeft = class(TmsMoveShapeTool)
  protected
-  procedure ProcessClickInDiagramm; override;
+  function Delta: TPointF; override;
  end;//TmsMoveShapeUpLeft
 
 implementation
 
-uses
- System.Types
- ;
-
 // TmsMoveShapeUpLeft
 
-procedure TmsMoveShapeUpLeft.ProcessClickInDiagramm;
+function TmsMoveShapeUpLeft.Delta: TPointF;
 begin
- ShapeToDeal.MoveTo(ShapeToDeal.StartPoint + TPointF.Create(-1, -1))
+ Result := TPointF.Create(-1, -1);
 end;
 
 end.

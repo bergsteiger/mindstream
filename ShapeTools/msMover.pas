@@ -14,6 +14,19 @@ uses
  ;
 
 type
+ TmsFloatingButton = (
+  // - http://18delphi.blogspot.ru/2014/05/blog-post.html
+  ms_fbLeft,
+  ms_fbRight,
+  ms_fbUp,
+  ms_fbDown,
+
+  ms_fbUpLeft,
+  ms_fbUpRight,
+  ms_fbDownLeft,
+  ms_fbDownRight
+ );//TmsFloatingButton
+
  TmsMover = class(TmsTool)
  private
   f_Moving : ImsShape;
@@ -23,7 +36,7 @@ type
   f_WasMoved : Boolean;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
+  constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController); reintroduce;
   function AddButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
@@ -31,6 +44,9 @@ type
   class function ButtonShape: ImsShape; override;
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
+  class function RectForButtons(const aShape: ImsShape): TRectF;
+  class function BP(aButton: TmsFloatingButton; const aR: TRectF): TPointF;
+  class function ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape): TPointF;
  end;//TmsMover
 
 implementation
@@ -66,7 +82,8 @@ uses
  msMoveShapeDownLeft,
  msMoveShapeUpLeft,
  msMoveShapeUpRight,
- msFloatingButtonCircle
+ msFloatingButtonCircle,
+ msMoveShapeTool
  ;
 
 // TmsMover
@@ -88,26 +105,93 @@ begin
            );
 end;
 
-constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
+class function TmsMover.RectForButtons(const aShape: ImsShape): TRectF;
 var
- l_B : TRectF;
+ l_Offset : Single;
+begin
+ Result := aShape.DrawBounds;
+ l_Offset := TmsSpecialArrow.InitialLength + cShift;
+
+ Result.Inflate(l_Offset, l_Offset);
+end;
+
+class function TmsMover.BP(aButton: TmsFloatingButton; const aR: TRectF): TPointF;
+var
  l_Mid : TPointF;
+begin
+ l_Mid := (aR.TopLeft + aR.BottomRight) / 2;
+
+ case aButton of
+  ms_fbLeft:
+   Result := TPointF.Create(aR.Left, l_Mid.Y);
+  ms_fbRight:
+   Result := TPointF.Create(aR.Right, l_Mid.Y);
+  ms_fbUp:
+   Result := TPointF.Create(l_Mid.X, aR.Top);
+  ms_fbDown:
+   Result := TPointF.Create(l_Mid.X, aR.Bottom);
+
+  ms_fbUpLeft:
+   Result := TPointF.Create(aR.Left, aR.Top);
+  ms_fbUpRight:
+   Result := TPointF.Create(aR.Right, aR.Top);
+  ms_fbDownLeft:
+   Result := TPointF.Create(aR.Left, aR.Bottom);
+  ms_fbDownRight:
+   Result := TPointF.Create(aR.Right, aR.Bottom);
+  else
+   Assert(false);
+ end;//case aButton
+end;
+
+class function TmsMover.ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape): TPointF;
+begin
+ Result := BP(aButton, RectForButtons(aShape));
+end;
+
+constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
+
+ function AddDButton(aButtonDesc: TmsFloatingButton; aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
+ begin//AddDButton
+  if (aButtonDesc in [ms_fbLeft..ms_fbDown]) then
+   Result := AddButton(aToolClass, aButton)
+  else
+   Result := AddButton(aToolClass, TmsSpecialDiagonalArrowBoundsCorrector.Create(aButton));
+ end;//AddDButton
+
+const
+ cShapeTool : array [TmsFloatingButton] of RmsMoveShapeTool = (
+  TmsMoveShapeLeft,
+  TmsMoveShapeRight,
+  TmsMoveShapeUp,
+  TmsMoveShapeDown,
+
+  TmsMoveShapeUpLeft,
+  TmsMoveShapeUpRight,
+  TmsMoveShapeDownLeft,
+  TmsMoveShapeDownRight
+ );
+
+ cShapeArrow : array [TmsFloatingButton] of RmsSpecialArrow = (
+  TmsLeftArrow,
+  TmsRightArrow,
+  TmsUpArrow,
+  TmsDownArrow,
+
+  TmsUpLeftArrow,
+  TmsUpRightArrow,
+  TmsDownLeftArrow,
+  TmsDownRightArrow
+ );
+var
+ l_FB : TmsFloatingButton;
 begin
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
  Assert(f_FloatingButtons = nil);
  f_FloatingButtons := TmsShapesList.Create;
- l_B := f_Moving.DrawBounds;
- l_Mid.X := (l_B.Left + l_B.Right) / 2;
- l_Mid.Y := (l_B.Top + l_B.Bottom) / 2;
- aController.AddShape(AddButton(TmsMoveShapeUp, TmsUpArrow.Create(TPointF.Create(l_Mid.X, l_B.Top - TmsSpecialArrow.InitialLength - cShift))));
- aController.AddShape(AddButton(TmsMoveShapeDown, TmsDownArrow.Create(TPointF.Create(l_Mid.X, l_B.Bottom + cShift))));
- aController.AddShape(AddButton(TmsMoveShapeLeft, TmsLeftArrow.Create(TPointF.Create(l_B.Left - TmsSpecialArrow.InitialLength - cShift, l_Mid.Y))));
- aController.AddShape(AddButton(TmsMoveShapeRight, TmsRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_Mid.Y))));
- aController.AddShape(AddButton(TmsMoveShapeUpRight, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsUpRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift)))));
- aController.AddShape(AddButton(TmsMoveShapeUpLeft, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsUpLeftArrow.Create(TPointF.Create(l_B.Left - TmsSpecialArrow.InitialLength - cShift, l_B.Top - TmsSpecialArrow.InitialLength - cShift)))));
- aController.AddShape(AddButton(TmsMoveShapeDownRight, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsDownRightArrow.Create(TPointF.Create(l_B.Right + cShift, l_B.Bottom + cShift)))));
- aController.AddShape(AddButton(TmsMoveShapeDownLeft, TmsSpecialDiagonalArrowBoundsCorrector.Create(TmsDownLeftArrow.Create(TPointF.Create(l_B.Left - cShift, l_B.Bottom + cShift)))));
+ for l_FB := Low(TmsFloatingButton) to High(TmsFloatingButton) do
+  aController.AddShape(AddDButton(l_FB, cShapeTool[l_FB], cShapeArrow[l_FB].Create(ButtonPoint(l_FB, f_Moving))));
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
@@ -148,6 +232,7 @@ begin
  Result := true;
  if (f_Moving <> nil) then
  begin
+  Assert(aCtx.rShapesController <> nil);
   l_ShapeOnPoint := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
   if (l_ShapeOnPoint <> nil) then
    if l_ShapeOnPoint.ClickInDiagramm then

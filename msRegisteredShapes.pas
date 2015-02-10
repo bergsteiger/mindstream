@@ -10,6 +10,7 @@ type
  {$Include msShapeClassListSingleton.mixin.pas}
 
  TmsRegisteredShapes = class(TmsShapeClassListSingleton)
+ // [Inversion of control (шаблон проектирования)|https://bitbucket.org/ingword/mindstream/src/5d11d8d3b3047a8200e02ca2d562679f425b5afd/msRegisteredShapes.pas?at=B57]
  public
   class function Instance: TmsRegisteredShapes;
   procedure RegisterMC(const aValue: MCmsShape); override;

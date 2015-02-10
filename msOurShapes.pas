@@ -35,7 +35,17 @@ uses
   msRemoverIcon,
   msRemoveIcon,
   msMoveIcon,
-  msTextShape
+  msTextShape,
+  msScrollShapeUp,
+  msScrollShapeDown,
+  msScrollShapeRight,
+  msScrollShapeLeft,
+  msScrollShapeUpLeft,
+  msScrollShapeUpRight,
+  msScrollShapeDownLeft,
+  msScrollShapeDownRight,
+  msScrollShapeResetOrigin,
+  msScrollingTool
   ;
 
 // Важно !!!
@@ -72,13 +82,23 @@ begin
   // SVG Shapes
   TmsFolder,
 
-  // concrete shapes
   TmsGreenCircle,
   TmsBlackTriangle,
   TmsBlackRectangle,
   TmsRemoveIcon,
   TmsMoveIcon,
-  TmsTextShape
+  TmsTextShape,
+  TmsScrollShapeUp,
+  TmsScrollShapeDown,
+  TmsScrollShapeRight,
+  TmsScrollShapeLeft,
+  TmsScrollShapeUpLeft,
+  TmsScrollShapeUpRight,
+  TmsScrollShapeDownLeft,
+  TmsScrollShapeDownRight,
+  TmsScrollShapeResetOrigin,
+
+  TmsScrollingTool
  ]);
 end;
 

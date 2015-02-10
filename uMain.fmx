@@ -105,22 +105,21 @@ object fmMain: TfmMain
     end
     object pnlBottom: TPanel
       Align = Client
-      Size.Width = 629.000000000000000000
+      Size.Width = 589.000000000000000000
       Size.Height = 559.000000000000000000
       Size.PlatformDefault = False
       object imgMain: TPaintBox
         Align = Client
-        Size.Width = 629.000000000000000000
+        Size.Width = 589.000000000000000000
         Size.Height = 559.000000000000000000
         Size.PlatformDefault = False
-        OnMouseMove = imgMainMouseMove
         OnPaint = imgMainPaint
       end
     end
     object pnlToolBar: TPanel
       Align = Left
       Position.Y = 41.000000000000000000
-      Size.Width = 80.000000000000000000
+      Size.Width = 120.000000000000000000
       Size.Height = 559.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 2

@@ -21,6 +21,8 @@ type
   // - метод, который “≈ѕ≈–№ надо вызывать
  end;//TmsSpecialArrow
 
+ RmsSpecialArrow = class of TmsSpecialArrow;
+
 implementation
 
 // TmsSpecialArrow

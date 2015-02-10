@@ -19,14 +19,15 @@ implementation
 uses
  msUpArrow,
  msFolderIcon,
- msShapesGroup
+ msShapesGroup,
+ System.Types
  ;
 
 // TmsUpToParentIcon
 
 class function TmsUpToParentIcon.ToolIcon: ImsShape;
 begin
- Result := TmsUpArrow.Create;
+ Result := TmsUpArrow.Create(TPointF.Create(0, -30));
 end;
 
 end.

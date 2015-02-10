@@ -28,7 +28,7 @@ type
                       aShapes: TComboBox;
                       aColumn: Integer;
                       aRow: Integer;
-                      const aHolder: ImsDiagrammsHolder);
+                      const aHolder: ImsDiagrammsHolder); reintroduce;
   destructor Destroy; override;
  end;
 
@@ -177,3 +177,4 @@ begin
 end;
 
 end.
+

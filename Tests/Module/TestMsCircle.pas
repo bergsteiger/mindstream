@@ -48,12 +48,9 @@ end;
 
 procedure TestTmsCircle.TestContainsPt;
 var
-  ReturnValue: Boolean;
-  aPoint: TPointF;
+ l_HitShape: ImsShape;
 begin
-  // TODO: Setup method call parameters
-  ReturnValue := FmsCircle.ContainsPt(aPoint);
-  // TODO: Validate method results
+ CheckTrue(FmsCircle.HitTest(TPointF.Create(0, 0), l_HitShape));
 end;
 
 initialization

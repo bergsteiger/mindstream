@@ -22,6 +22,7 @@ type
 implementation
 
 uses
+ System.Types,
  System.Math.Vectors
  ;
 
@@ -45,12 +46,16 @@ end;
 
 procedure TmsScalingShape.DoDrawTo(const aCtx: TmsDrawContext);
 var
+ l_C : TPointF;
  l_OriginalMatrix: TMatrix;
  l_Matrix: TMatrix;
 begin
+ l_C := ShapeToShow.StartPoint;
  l_OriginalMatrix := aCtx.rCanvas.Matrix;
  try
-  l_Matrix := TMatrix.CreateScaling(f_Scale, f_Scale);
+  l_Matrix := TMatrix.Identity;
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_C.X, l_C.Y);
+  l_Matrix := l_Matrix * TMatrix.CreateScaling(f_Scale, f_Scale);
   l_Matrix := l_Matrix * l_OriginalMatrix;
   aCtx.rCanvas.SetMatrix(l_Matrix);
   inherited;
