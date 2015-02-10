@@ -36,11 +36,9 @@ begin
 end;
 
 class function TmsAppLog.Instance: TmsAppLog;
-const
- c_AppLogFileName = 'Mindstream.App.Log';
 begin
  if (f_Instance = nil) then
-  f_Instance := Self.Create(ExtractFilePath(ParamStr(0)) + c_AppLogFileName);
+  f_Instance := Self.Create(ChangeFileExt(ParamStr(0), '.App.Log'));
  Result := f_Instance;
 end;
 
