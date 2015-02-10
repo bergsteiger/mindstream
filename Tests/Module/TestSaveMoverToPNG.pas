@@ -31,7 +31,8 @@ implementation
 uses
   System.Types,
 
-  msRegisteredShapes
+  msRegisteredShapes,
+  TypInfo
   ;
 
 // TTestSaveMoverToPNG
@@ -82,7 +83,7 @@ end;
 
 function TmsMoverFloatingButtonsTest.ContextName: String;
 begin
- Result := inherited;
+ Result := GetEnumName(TypeInfo(TmsFloatingButton), Ord(f_Button)) + '_' +  inherited;
 end;
 
 end.
