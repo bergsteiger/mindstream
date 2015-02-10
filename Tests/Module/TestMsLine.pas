@@ -53,11 +53,8 @@ begin
 end;
 
 procedure TestTmsLine.TestIsNeedsSecondClick;
-var
-  ReturnValue: Boolean;
 begin
-  ReturnValue := FmsLine.IsNeedsSecondClick;
-  // TODO: Validate method results
+ CheckFalse(FmsLine.IsNeedsSecondClick);
 end;
 
 procedure TestTmsLine.TestEndTo;
