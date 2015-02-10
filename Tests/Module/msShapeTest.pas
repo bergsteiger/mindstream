@@ -35,7 +35,6 @@ type
   TmsShapeTestPrim = class abstract(TmsLoggedTest)
   protected
    f_Context : TmsShapeTestContext;
-   f_TestSerializeMethodName : String;
    f_Coords : array of TPoint;
   protected
    procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
@@ -209,7 +208,7 @@ end;
 
 function TmsShapeTestPrim.TestSerializeMethodName: String;
 begin
- Result := f_TestSerializeMethodName + 'TestSerialize';
+ Result := Self.ShapeClass.Name + '.' + 'TestSerialize';
 end;
 
 procedure TmsShapeTestPrim.DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
@@ -251,7 +250,6 @@ begin
  f_Context := aContext;
  TransformContext(f_Context);
  FTestName := Self.ShapeClass.Name + '.' + aContext.rMethodName;
- f_TestSerializeMethodName := Self.ShapeClass.Name + '.';
 end;
 
 class function TmsShapeTestPrim.Create(const aContext: TmsShapeTestContext): ITest;
