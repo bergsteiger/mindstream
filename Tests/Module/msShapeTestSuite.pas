@@ -58,7 +58,14 @@ begin
    l_ShapesCount := Random(1000) + 1;
    for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
     if (l_Method.Visibility = mvPublished) then
-     AddTest(RmsShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name, l_Seed, l_DiagrammName, l_ShapesCount, aShapeClass)));
+    begin
+     RmsShapeTest(testClass).AddTest(TmsShapeTestContext.Create(l_Method.Name, l_Seed, l_DiagrammName, l_ShapesCount, aShapeClass),
+      procedure (ATest: ITest)
+      begin
+       AddTest(aTest);
+      end
+     );
+    end;//l_Method.Visibility = mvPublished
   end
  );
 end;

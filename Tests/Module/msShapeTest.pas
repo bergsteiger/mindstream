@@ -30,6 +30,8 @@ type
    constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; const aShapeClass: MCmsShape);
   end;//TmsShapeTestContext
 
+  TmsAddTestLambda = reference to procedure (ATest: ITest);
+
   TmsShapeTestPrim = class abstract(TmsLoggedTest)
   protected
    f_Context : TmsShapeTestContext;
@@ -55,6 +57,7 @@ type
    class procedure CheckShapes(aCheck: TmsShapeClassCheck);
    class function Create(const aContext: TmsShapeTestContext): ITest;
    destructor Destroy; override;
+   class procedure AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda);
   end;//TmsShapeTestPrim
 
   RmsShapeTest = class of TmsShapeTestPrim;
@@ -260,6 +263,11 @@ destructor TmsShapeTestPrim.Destroy;
 begin
  Finalize(f_Context);
  inherited;
+end;
+
+class procedure TmsShapeTestPrim.AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda);
+begin
+ aLambda(Self.Create(aContext));
 end;
 
 procedure TmsShapeTestPrim.TestDeSerializeViaShapeCheckForShapeClass;
