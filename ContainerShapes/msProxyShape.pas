@@ -21,7 +21,7 @@ type
   function GetDrawBounds: TRectF; override;
   function pm_GetStartPoint: TPointF; override;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
-  constructor CreateInner(const aShape: ImsShape);
+  constructor CreateInner(const aShape: ImsShape); reintroduce;
   property ShapeToShow : ImsShape
    read f_Shape;
  public

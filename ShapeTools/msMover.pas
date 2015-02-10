@@ -36,7 +36,7 @@ type
   f_WasMoved : Boolean;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
+  constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController); reintroduce;
   function AddButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;

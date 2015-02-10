@@ -111,6 +111,7 @@ uses
 type
  TmsDiagrammsHolder = class(TmsInterfacedRefcounted, ImsDiagrammsHolder)
  private
+  [Weak]
   f_DiagrammsController: TmsDiagrammsController;
   constructor CreatePrim(aDiagrammsController: TmsDiagrammsController);
  protected
