@@ -35,8 +35,8 @@ begin
                        false,
                        1,
                        [],
-                       TTextAlign.taCenter,
-                       TTextAlign.taCenter);
+                       TTextAlign.Center,
+                       TTextAlign.Center);
  if aCtx.rMoving then
  begin
   aCtx.rCanvas.DrawRect(l_msPointContext,
