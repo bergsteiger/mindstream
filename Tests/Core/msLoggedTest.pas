@@ -13,7 +13,6 @@ type
   protected
    procedure OutToFileAndCheck(aLambda: TmsLogLambda);
    function MakeFileName(const aTestName: string; const aTestFolder: string): String;
-   function ContextName: String; virtual;
    function IsEtalonValid(const aFileName: String; const anEtalonName: String): Boolean;
    procedure CheckFileWithEtalon(const aFileName: String);
    function InnerFolders: String; virtual;
@@ -50,12 +49,7 @@ var
 begin
  l_Folder := ExtractFilePath(ParamStr(0)) + 'TestResults\' + aTestFolder;
  ForceDirectories(l_Folder);
- Result := l_Folder + ClassName + '_' + aTestName + {ContextName + }FileExtension;
-end;
-
-function TmsLoggedTest.ContextName: String;
-begin
- Result := '';
+ Result := l_Folder + ClassName + '_' + aTestName + FileExtension;
 end;
 
 const

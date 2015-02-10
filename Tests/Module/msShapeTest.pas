@@ -49,7 +49,7 @@ type
    procedure TestDeSerializeViaShapeCheckForShapeClass;
    function ShapeClass: MCmsShape;
    function TestNamePrefix: String; virtual;
-   function ContextName: String; override; final;
+   function ContextName: String;
    function InnerFolders: String; override;
    procedure TransformContext(var theContext: TmsShapeTestContext); virtual;
    constructor CreateInner(const aContext: TmsShapeTestContext);
