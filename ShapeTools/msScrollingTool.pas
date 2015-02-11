@@ -37,7 +37,8 @@ uses
  msPointCircle,
  msMoveIcon,
  msScalingShape,
- msRectangle
+ msRectangle,
+ msMovingPointer
  ;
 
 // TmsScrollingTool
@@ -51,7 +52,7 @@ procedure TmsScrollingTool.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Proxy : ImsShape;
 begin
- l_Proxy := TmsScalingShape.Create(TmsMoveIcon.Create(Self.StartPoint), 0.5);
+ l_Proxy := TmsMovingPointer.Create(Self.StartPoint);
  // - люблю я Self.XXX. Мне лично так понятнее. Да и with - меньше лажает.
  try
   l_Proxy.DrawTo(aCtx);
