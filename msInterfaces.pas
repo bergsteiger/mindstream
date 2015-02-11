@@ -94,7 +94,8 @@ type
    rShapeCreator: ImsShapeCreator;
    rClickPoint: TPointF;
    rDiagrammsHolder : ImsDiagrammsHolder;
-   constructor Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF; const aDiagrammsHolder : ImsDiagrammsHolder);
+   rShift: TShiftState;
+   constructor Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF; const aDiagrammsHolder : ImsDiagrammsHolder; const aShift: TShiftState);
  end;//TmsClickContext
 
  ImsShape = interface(ImsDiagrammsList)
@@ -167,7 +168,7 @@ type
   procedure Invalidate;
   procedure MouseDown(const aClickContext: TmsClickContext);
   procedure MouseUp(const aClickContex: TmsClickContext);
-  procedure MouseMove(const aShift: TShiftState; const aClickContex: TmsClickContext);
+  procedure MouseMove(const aClickContex: TmsClickContext);
   procedure Clear;
   procedure DrawTo(const aCanvas: TCanvas);
   procedure SaveToPng(const aFileName: String);
@@ -238,11 +239,12 @@ end;
 
 // TmsClickContext
 
-constructor TmsClickContext.Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF; const aDiagrammsHolder : ImsDiagrammsHolder);
+constructor TmsClickContext.Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF; const aDiagrammsHolder : ImsDiagrammsHolder; const aShift: TShiftState);
 begin
  rShapeCreator := aShapeCreator;
  rClickPoint := aClickPoint;
  rDiagrammsHolder := aDiagrammsHolder;
+ rShift := aShift;
 end;
 
 end.
