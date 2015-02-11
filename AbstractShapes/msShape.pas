@@ -38,8 +38,6 @@ type
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
-  function IsNeedsMouseUp : Boolean; virtual;
-  //- примитив требует отслеживания MouseUp
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; virtual;
   procedure MouseMove(const aClickContext: TmsEndShapeContext); virtual;
   // - действие при MouseMove
@@ -141,11 +139,6 @@ end;
 procedure TmsShape.MoveTo(const aFinishPoint: TPointF);
 begin
  SetStartPoint(aFinishPoint);
-end;
-
-function TmsShape.IsNeedsMouseUp: Boolean;
-begin
- Result := false;
 end;
 
 function TmsShape.MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
