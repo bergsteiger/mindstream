@@ -101,7 +101,7 @@ type
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean;
   function IsNeedsMouseUp : Boolean;
-  procedure MouseUp(const aClickContex: TmsClickContext);
+  procedure MouseUp(const aClickContext: TmsEndShapeContext);
   function EndTo(const aCtx: TmsEndShapeContext): Boolean;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
