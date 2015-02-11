@@ -91,7 +91,9 @@ uses
  msMoveShapeUpLeft,
  msMoveShapeUpRight,
  msFloatingButtonCircle,
- msMoveShapeTool
+ msMoveShapeTool,
+ msScalingShape,
+ msMoveIcon
  ;
 
 // TmsMover
@@ -321,6 +323,8 @@ procedure TmsMover.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Ctx : TmsDrawContext;
  l_Moving : Boolean;
+var
+ l_Proxy : ImsShape;
 begin
  if (f_Moving <> nil) then
  begin
@@ -332,6 +336,13 @@ begin
   finally
    l_Ctx.rMoving := l_Moving;
   end;//try..finally
+  l_Proxy := TmsScalingShape.Create(TmsMoveIcon.Create(Self.StartPoint), 0.5);
+  // - люблю я Self.XXX. Мне лично так понятнее. Да и with - меньше лажает.
+  try
+   l_Proxy.DrawTo(aCtx);
+  finally
+   l_Proxy := nil;
+  end;///try..fianlly
  end;//f_Moving <> nil
 end;
 
