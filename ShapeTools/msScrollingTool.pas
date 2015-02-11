@@ -26,9 +26,7 @@ type
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
- public
-  procedure MouseMove(const aHolder: ImsDiagrammsHolder;
-                      const aPoint: TPointF); override;
+  procedure MouseMove(const aClickContext: TmsEndShapeContext); override;
  end;//TmsScrollingTool
 
 implementation
@@ -91,13 +89,12 @@ begin
  Result := true;
 end;
 
-procedure TmsScrollingTool.MouseMove(const aHolder: ImsDiagrammsHolder;
-                                    const aPoint: TPointF);
+procedure TmsScrollingTool.MouseMove(const aClickContext: TmsEndShapeContext);
 var
  l_Delta : TPointF;
 begin
- l_Delta := (aPoint - Self.StartPoint);
- aHolder.Scroll(l_Delta);
+ l_Delta := (aClickContext.rStartPoint - Self.StartPoint);
+ aClickContext.rDiagrammsHolder.Scroll(l_Delta);
 end;
 
 function TmsScrollingTool.pm_GetStartPoint: TPointF;

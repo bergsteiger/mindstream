@@ -110,7 +110,7 @@ type
   function ClickInDiagramm: Boolean;
   // - ткнули в примитив внутри диаграммы
   function DrawBounds: TRectF;
-  procedure MouseMove(const aHolder: ImsDiagrammsHolder; const aPoint: TPointF);
+  procedure MouseMove(const aClickContext: TmsEndShapeContext);
   // - действите нажатии
   function pm_GetStartPoint: TPointF;
   function pm_GetShapeClass: ImsShapeClass;

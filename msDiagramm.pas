@@ -202,8 +202,7 @@ end;
 procedure TmsDiagramm.MouseMove(const aShift: TShiftState; const aClickContext: TmsClickContext);
 begin
  if (FCurrentAddedShape <> nil) then
-  FCurrentAddedShape.MouseMove(aClickContext.rDiagrammsHolder,
-                               aClickContext.rClickPoint)
+  FCurrentAddedShape.MouseMove(TmsEndShapeContext.Create(aClickContext.rClickPoint, Self, aClickContext.rDiagrammsHolder));
 end;
 
 procedure TmsDiagramm.MouseUp(const aClickContext: TmsClickContext);

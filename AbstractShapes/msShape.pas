@@ -41,7 +41,7 @@ type
   function IsNeedsMouseUp : Boolean; virtual;
   //- примитив требует отслеживания MouseUp
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; virtual;
-  procedure MouseMove(const aHolder: ImsDiagrammsHolder; const aPoint: TPointF); virtual;
+  procedure MouseMove(const aClickContext: TmsEndShapeContext); virtual;
   // - действие при MouseMove
  protected
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
@@ -133,7 +133,7 @@ begin
  Assert(false, 'Примитив ' + ClassName + ' не может быть завершён');
 end;
 
-procedure TmsShape.MouseMove(const aHolder: ImsDiagrammsHolder; const aPoint: TPointF);
+procedure TmsShape.MouseMove(const aClickContext: TmsEndShapeContext);
 begin
  // Ничего не делаем, специально
 end;
