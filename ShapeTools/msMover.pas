@@ -148,6 +148,7 @@ end;
 
 class function TmsMover.ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape): TPointF;
 begin
+ Assert(aShape <> nil);
  Result := BP(aButton, RectForButtons(aShape));
 end;
 
@@ -203,8 +204,10 @@ end;
 
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
 begin
+ Assert(aMoving <> nil);
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
+ Assert(aController <> nil);
  //CreateFloatingButtons(aController);
 end;
 

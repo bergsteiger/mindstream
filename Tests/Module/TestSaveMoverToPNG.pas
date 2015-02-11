@@ -64,6 +64,8 @@ begin
  Assert(l_Class <> nil);
  l_Ctx := TmsMakeShapeContext.Create(l_ShapeToDeal.StartPoint, aDiagramm.ShapesController, nil);
  l_Mover := l_Class.Creator.CreateShape(l_Ctx);
+ if (l_Mover <> nil) then
+  l_Mover.MouseUp(TmsEndShapeContext.Create(l_ShapeToDeal.StartPoint, aDiagramm.ShapesController, nil));
  MoverApplied(aDiagramm, l_ShapeToDeal, l_Mover);
  inherited;
 end;
