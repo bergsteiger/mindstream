@@ -21,6 +21,7 @@ type
   class function IsLineLike: Boolean; override;
   function GetDrawBounds: TRectF; override;
   function GetFinishPointForDraw: TPointF; virtual;
+  function ContainsPt(const aPoint: TPointF): Boolean; override;
   property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
  public
   function IsNeedsSecondClick : Boolean; override;
@@ -57,6 +58,38 @@ end;
 function TmsLine.GetFinishPointForDraw: TPointF;
 begin
  Result := FinishPoint;
+end;
+
+function TmsLine.ContainsPt(const aPoint: TPointF): Boolean;
+(*
+http://algolist.manual.ru/maths/geom/datastruct.php
+
+enum {LEFT,  RIGHT,  BEYOND,  BEHIND, BETWEEN, ORIGIN, DESTINATION};
+//    ÑËÅÂÀ, ÑÏÐÀÂÀ, ÂÏÅÐÅÄÈ, ÏÎÇÀÄÈ, ÌÅÆÄÓ,   ÍÀ×ÀËÎ, ÊÎÍÅÖ
+
+int Point::classify(Point &p0, Point &pl)
+{
+  Point p2 = *this;
+  Point a = p1 - pO;
+  Point b = p2 - pO;
+  double sa = a. x * b.y - b.x * a.y;
+  if (sa > 0.0)
+    return LEFT;
+  if (sa < 0.0)
+    return RIGHT;
+  if ((a.x * b.x < 0.0) || (a.y * b.y < 0.0))
+    return BEHIND;
+  if (a.length() < b.length())
+    return BEYOND;
+  if (pO == p2)
+    return ORIGIN;
+  if (p1 == p2)
+    return DESTINATION;
+  return BETWEEN;
+}
+*)
+begin
+ Result := inherited;
 end;
 
 function TmsLine.EndTo(const aCtx: TmsEndShapeContext): Boolean;
