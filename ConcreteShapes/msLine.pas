@@ -61,6 +61,7 @@ begin
 end;
 
 function TmsLine.ContainsPt(const aPoint: TPointF): Boolean;
+// https://bitbucket.org/ingword/mindstream/issue/3/tmsline-tmsmover
 (*
 http://algolist.manual.ru/maths/geom/datastruct.php
 
