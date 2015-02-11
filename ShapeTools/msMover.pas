@@ -303,8 +303,12 @@ begin
  if (f_Moving <> nil) then
  begin
   l_Ctx := aCtx;
-  l_Ctx.rMoving := True;
-  f_Moving.DrawTo(l_Ctx);
+  l_Ctx.rMoving := true;
+  try
+   f_Moving.DrawTo(l_Ctx);
+  finally
+   l_Ctx.rMoving := false;
+  end;//try..finally
  end;//f_Moving <> nil
 end;
 
