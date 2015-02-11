@@ -25,7 +25,7 @@ type
   function IsNeedsMouseUp: Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  procedure MouseUp(const aClickContext: TmsEndShapeContext); override;
+  function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
  public
   procedure MouseMove(const aHolder: ImsDiagrammsHolder;
                       const aPoint: TPointF); override;
@@ -64,9 +64,10 @@ begin
  // - а вот тут нам точно ОТ ПРЕДКА ничего рисовать не надо
 end;
 
-procedure TmsScrollingTool.MouseUp(const aClickContext: TmsEndShapeContext);
+function TmsScrollingTool.MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
 begin
  aClickContext.rShapesController.RemoveShape(Self);
+ Result := true;
 end;
 
 function TmsScrollingTool.EndTo(const aCtx: TmsEndShapeContext): Boolean;

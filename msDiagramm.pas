@@ -209,8 +209,10 @@ end;
 procedure TmsDiagramm.MouseUp(const aClickContext: TmsClickContext);
 begin
  if Assigned(FCurrentAddedShape) then
-  if CurrentAddedShape.IsNeedsMouseUp then
-    Self.EndShape(aClickContext);
+  if FCurrentAddedShape.MouseUp(TmsEndShapeContext.Create(aClickContext.rClickPoint, Self, aClickContext.rDiagrammsHolder)) then
+   FCurrentAddedShape := nil;
+(*  if CurrentAddedShape.IsNeedsMouseUp then
+    Self.EndShape(aClickContext);*)
 end;
 
 function TmsDiagramm.AddShape(const aShape: ImsShape): ImsShape;
