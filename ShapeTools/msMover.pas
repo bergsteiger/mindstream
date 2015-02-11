@@ -200,7 +200,7 @@ begin
  CreateFloatingButtons(aController);
 end;
 
-class function TmsMover.ButtonShape: ImsShape;
+class function TmsMover.ButtonShape: ImsShape; {}
 begin
  Result := TmsMoverIcon.Create;
 end;
