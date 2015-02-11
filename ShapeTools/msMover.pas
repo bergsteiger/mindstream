@@ -209,12 +209,17 @@ end;
 function TmsMover.MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
 begin
  Result := false;
- if not f_WasMoved then
-  if (f_FloatingButtons = nil) then
-  begin
-   CreateFloatingButtons(aClickContext.rShapesController);
-   aClickContext.rShapesController.Invalidate;
-  end;//f_FloatingButtons = nil
+ if f_WasMoved then
+ begin
+  aClickContext.rShapesController.RemoveShape(Self);
+  Result := true;
+ end//f_WasMoved
+ else
+ if (f_FloatingButtons = nil) then
+ begin
+  CreateFloatingButtons(aClickContext.rShapesController);
+  aClickContext.rShapesController.Invalidate;
+ end;//f_FloatingButtons = nil
 end;
 
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
