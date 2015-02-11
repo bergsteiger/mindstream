@@ -44,6 +44,7 @@ type
   procedure MouseMove(const aClickContext: TmsEndShapeContext); override;
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
   procedure MoveMovingTo(const aPoint: TPointF);
+  function pm_GetStartPoint: TPointF; override;
   procedure SetStartPoint(const aStartPoint: TPointF); override;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
@@ -204,6 +205,11 @@ procedure TmsMover.MoveMovingTo(const aPoint: TPointF);
 begin
  Assert(f_Moving <> nil);
  f_Moving.MoveTo(aPoint);
+end;
+
+function TmsMover.pm_GetStartPoint: TPointF;
+begin
+ Result := f_Point;
 end;
 
 procedure TmsMover.SetStartPoint(const aStartPoint: TPointF);
