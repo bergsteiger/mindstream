@@ -211,8 +211,11 @@ begin
  Result := false;
  if f_WasMoved then
  begin
-  aClickContext.rShapesController.RemoveShape(Self);
-  Result := true;
+  if (f_FloatingButtons = nil) then
+  begin
+   aClickContext.rShapesController.RemoveShape(Self);
+   Result := true;
+  end;//f_FloatingButtons = nil
  end//f_WasMoved
  else
  if (f_FloatingButtons = nil) then
