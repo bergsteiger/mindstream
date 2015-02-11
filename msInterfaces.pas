@@ -86,11 +86,22 @@ type
 
  ImsShapeClass = interface;
 
+ ImsShapeCreator = interface;
+
+ TmsClickContext = record
+  public
+   rShapeCreator: ImsShapeCreator;
+   rClickPoint: TPointF;
+   rDiagrammsHolder : ImsDiagrammsHolder;
+   constructor Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF; const aDiagrammsHolder : ImsDiagrammsHolder);
+ end;//TmsClickContext
+
  ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean;
   function IsNeedsMouseUp : Boolean;
+  procedure MouseUp(const aClickContex: TmsClickContext);
   function EndTo(const aCtx: TmsEndShapeContext): Boolean;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
@@ -149,14 +160,6 @@ type
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
  end;//ImsShapeClass
-
- TmsClickContext = record
-  public
-   rShapeCreator: ImsShapeCreator;
-   rClickPoint: TPointF;
-   rDiagrammsHolder : ImsDiagrammsHolder;
-   constructor Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF; const aDiagrammsHolder : ImsDiagrammsHolder);
- end;//TmsClickContext
 
  ImsDiagramm = interface(ImsShapesProvider)
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']

@@ -40,6 +40,7 @@ type
   procedure LoadFrom(const aFileName: String); override;
   function IsNeedsMouseUp : Boolean; virtual;
   //- примитив требует отслеживания MouseUp
+  procedure MouseUp(const aClickContex: TmsClickContext); virtual;
   procedure MouseMove(const aHolder: ImsDiagrammsHolder; const aPoint: TPointF); virtual;
   // - действие при MouseMove
  protected
@@ -145,6 +146,11 @@ end;
 function TmsShape.IsNeedsMouseUp: Boolean;
 begin
  Result := false;
+end;
+
+procedure TmsShape.MouseUp(const aClickContex: TmsClickContext);
+begin
+ // - специально ничего не делаем
 end;
 
 function TmsShape.IsNeedsSecondClick : Boolean;
