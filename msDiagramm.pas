@@ -61,7 +61,7 @@ type
  public
   class function Create(const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
-  procedure ProcessClick(const aClickContext: TmsClickContext);
+  procedure MouseDown(const aClickContext: TmsClickContext);
   procedure MouseUp(const aClickContext: TmsClickContext);
   procedure MouseMove(const aShift: TShiftState; const aClickContext: TmsClickContext);
   procedure Clear;
@@ -103,7 +103,7 @@ begin
  TmsDiagrammMarshal.Serialize(Self.Name + c_FileName, Self);
 end;
 
-procedure TmsDiagramm.ProcessClick(const aClickContext: TmsClickContext);
+procedure TmsDiagramm.MouseDown(const aClickContext: TmsClickContext);
 begin
  if ShapeIsEnded then
  // - мы НЕ ДОБАВЛЯЛИ примитива - надо его ДОБАВИТЬ

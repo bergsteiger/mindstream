@@ -162,7 +162,7 @@ type
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
   function Get_Name: String;
   procedure Invalidate;
-  procedure ProcessClick(const aClickContext: TmsClickContext);
+  procedure MouseDown(const aClickContext: TmsClickContext);
   procedure MouseUp(const aClickContex: TmsClickContext);
   procedure MouseMove(const aShift: TShiftState; const aClickContex: TmsClickContext);
   procedure Clear;
