@@ -39,6 +39,7 @@ type
   constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController); reintroduce;
   function AddButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
   procedure CreateFloatingButtons(const aController: ImsShapesController);
+  function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
   procedure Cleanup; override;
@@ -193,11 +194,18 @@ begin
   aController.AddShape(AddDButton(l_FB, cShapeTool[l_FB], cShapeArrow[l_FB].Create(ButtonPoint(l_FB, f_Moving))));
 end;
 
+function TmsMover.MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
+begin
+ Result := false;
+ CreateFloatingButtons(aClickContext.rShapesController);
+ aClickContext.rShapesController.Invalidate;
+end;
+
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
 begin
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
- CreateFloatingButtons(aController);
+ //CreateFloatingButtons(aController);
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
