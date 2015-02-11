@@ -93,7 +93,8 @@ uses
  msFloatingButtonCircle,
  msMoveShapeTool,
  msScalingShape,
- msMoveIcon
+ msMoveIcon,
+ msMovingPointer
  ;
 
 // TmsMover
@@ -337,7 +338,7 @@ begin
   finally
    l_Ctx.rMoving := l_Moving;
   end;//try..finally
-  l_Proxy := TmsScalingShape.Create(TmsMoveIcon.Create(Self.StartPoint), 0.5);
+  l_Proxy := TmsMovingPointer.Create(Self.StartPoint);
   // - люблю я Self.XXX. Мне лично так понятнее. Да и with - меньше лажает.
   try
    l_Proxy.DrawTo(aCtx);
