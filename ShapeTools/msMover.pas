@@ -41,6 +41,7 @@ type
   procedure CreateFloatingButtons(const aController: ImsShapesController);
   procedure MouseMove(const aClickContext: TmsEndShapeContext); override;
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
+  procedure MoveMovingTo(const aPoint: TPointF);
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
   procedure Cleanup; override;
@@ -196,12 +197,18 @@ begin
   aController.AddShape(AddDButton(l_FB, cShapeTool[l_FB], cShapeArrow[l_FB].Create(ButtonPoint(l_FB, f_Moving))));
 end;
 
+procedure TmsMover.MoveMovingTo(const aPoint: TPointF);
+begin
+ Assert(f_Moving <> nil);
+ f_Moving.MoveTo(aPoint);
+end;
+
 procedure TmsMover.MouseMove(const aClickContext: TmsEndShapeContext);
 begin
  if (f_FloatingButtons = nil) then
  begin
   f_WasMoved := true;
-  f_Moving.MoveTo(aClickContext.rStartPoint);
+  MoveMovingTo(aClickContext.rStartPoint);
   aClickContext.rShapesController.Invalidate;
  end;//f_FloatingButtons = nil
 end;
@@ -282,7 +289,7 @@ begin
    end;//l_ShapeOnPoint.ClickInDiagramm
   if not f_WasMoved then
    if Result then
-    f_Moving.MoveTo(aCtx.rStartPoint);
+    MoveMovingTo(aCtx.rStartPoint);
  end;//f_Moving <> nil
  if Result then
  begin
