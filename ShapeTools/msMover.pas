@@ -299,15 +299,17 @@ end;
 procedure TmsMover.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Ctx : TmsDrawContext;
+ l_Moving : Boolean;
 begin
  if (f_Moving <> nil) then
  begin
   l_Ctx := aCtx;
+  l_Moving := l_Ctx.rMoving;
   l_Ctx.rMoving := true;
   try
    f_Moving.DrawTo(l_Ctx);
   finally
-   l_Ctx.rMoving := false;
+   l_Ctx.rMoving := l_Moving;
   end;//try..finally
  end;//f_Moving <> nil
 end;
