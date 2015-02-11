@@ -118,8 +118,7 @@ begin
  if (FCurrentAddedShape <> nil) then
  begin
   Items.Add(FCurrentAddedShape);
-  if (not FCurrentAddedShape.IsNeedsSecondClick) and
-     (not FCurrentAddedShape.IsNeedsMouseUp) then
+  if (not FCurrentAddedShape.IsNeedsSecondClick) then
     // - если не надо SecondClick или MouseUp, то наш примитив - завершён
    FCurrentAddedShape := nil;
   Invalidate;

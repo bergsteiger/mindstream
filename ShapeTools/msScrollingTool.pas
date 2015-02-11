@@ -22,7 +22,7 @@ type
   class function IsTool: Boolean; override;
   class function IsForToolbar: Boolean; override;
  protected
-  function IsNeedsMouseUp: Boolean; override;
+  function IsNeedsSecondClick: Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
@@ -79,7 +79,7 @@ begin
  Result := True;
 end;
 
-function TmsScrollingTool.IsNeedsMouseUp: Boolean;
+function TmsScrollingTool.IsNeedsSecondClick: Boolean;
 begin
  Result := True;
 end;

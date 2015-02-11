@@ -101,7 +101,6 @@ type
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean;
-  function IsNeedsMouseUp : Boolean;
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
