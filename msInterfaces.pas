@@ -23,6 +23,7 @@ type
  ImsShapesController = interface(ImsShapeByPt)
   procedure RemoveShape(const aShape: ImsShape);
   function AddShape(const aShape: ImsShape): ImsShape;
+  procedure Invalidate;
  end;//ImsShapesController
  // - тут бы иметь МНОЖЕСТВЕННОЕ наследование интерфейсов, но Delphi его не поддерживает
  // А вот с UML - мы его ПОТОМ СГЕНЕРИРУЕМ
@@ -86,11 +87,22 @@ type
 
  ImsShapeClass = interface;
 
+ ImsShapeCreator = interface;
+
+ TmsClickContext = record
+  public
+   rShapeCreator: ImsShapeCreator;
+   rClickPoint: TPointF;
+   rDiagrammsHolder : ImsDiagrammsHolder;
+   rShift: TShiftState;
+   constructor Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF; const aDiagrammsHolder : ImsDiagrammsHolder; const aShift: TShiftState);
+ end;//TmsClickContext
+
  ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
   function IsNeedsSecondClick : Boolean;
-  function IsNeedsMouseUp : Boolean;
+  function MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
   procedure MoveTo(const aFinishPoint: TPointF);
@@ -98,7 +110,7 @@ type
   function ClickInDiagramm: Boolean;
   // - ткнули в примитив внутри диаграммы
   function DrawBounds: TRectF;
-  procedure MouseMove(const aHolder: ImsDiagrammsHolder; const aPoint: TPointF);
+  procedure MouseMove(const aClickContext: TmsEndShapeContext);
   // - действите нажатии
   function pm_GetStartPoint: TPointF;
   function pm_GetShapeClass: ImsShapeClass;
@@ -150,21 +162,13 @@ type
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
  end;//ImsShapeClass
 
- TmsClickContext = record
-  public
-   rShapeCreator: ImsShapeCreator;
-   rClickPoint: TPointF;
-   rDiagrammsHolder : ImsDiagrammsHolder;
-   constructor Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF; const aDiagrammsHolder : ImsDiagrammsHolder);
- end;//TmsClickContext
-
  ImsDiagramm = interface(ImsShapesProvider)
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
   function Get_Name: String;
   procedure Invalidate;
-  procedure ProcessClick(const aClickContext: TmsClickContext);
+  procedure MouseDown(const aClickContext: TmsClickContext);
   procedure MouseUp(const aClickContex: TmsClickContext);
-  procedure MouseMove(const aShift: TShiftState; const aClickContex: TmsClickContext);
+  procedure MouseMove(const aClickContex: TmsClickContext);
   procedure Clear;
   procedure DrawTo(const aCanvas: TCanvas);
   procedure SaveToPng(const aFileName: String);
@@ -235,11 +239,12 @@ end;
 
 // TmsClickContext
 
-constructor TmsClickContext.Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF; const aDiagrammsHolder : ImsDiagrammsHolder);
+constructor TmsClickContext.Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF; const aDiagrammsHolder : ImsDiagrammsHolder; const aShift: TShiftState);
 begin
  rShapeCreator := aShapeCreator;
  rClickPoint := aClickPoint;
  rDiagrammsHolder := aDiagrammsHolder;
+ rShift := aShift;
 end;
 
 end.

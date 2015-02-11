@@ -22,12 +22,11 @@ type
   class function IsTool: Boolean; override;
   class function IsForToolbar: Boolean; override;
  protected
-  function IsNeedsMouseUp: Boolean; override;
+  function IsNeedsSecondClick: Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
- public
-  procedure MouseMove(const aHolder: ImsDiagrammsHolder;
-                      const aPoint: TPointF); override;
+  function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
+  procedure MouseMove(const aClickContext: TmsEndShapeContext); override;
  end;//TmsScrollingTool
 
 implementation
@@ -63,6 +62,12 @@ begin
  // - а вот тут нам точно ОТ ПРЕДКА ничего рисовать не надо
 end;
 
+function TmsScrollingTool.MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
+begin
+ aClickContext.rShapesController.RemoveShape(Self);
+ Result := true;
+end;
+
 function TmsScrollingTool.EndTo(const aCtx: TmsEndShapeContext): Boolean;
 begin
  aCtx.rShapesController.RemoveShape(Self);
@@ -74,7 +79,7 @@ begin
  Result := True;
 end;
 
-function TmsScrollingTool.IsNeedsMouseUp: Boolean;
+function TmsScrollingTool.IsNeedsSecondClick: Boolean;
 begin
  Result := True;
 end;
@@ -84,13 +89,12 @@ begin
  Result := true;
 end;
 
-procedure TmsScrollingTool.MouseMove(const aHolder: ImsDiagrammsHolder;
-                                    const aPoint: TPointF);
+procedure TmsScrollingTool.MouseMove(const aClickContext: TmsEndShapeContext);
 var
  l_Delta : TPointF;
 begin
- l_Delta := (aPoint - Self.StartPoint);
- aHolder.Scroll(l_Delta);
+ l_Delta := (aClickContext.rStartPoint - Self.StartPoint);
+ aClickContext.rDiagrammsHolder.Scroll(l_Delta);
 end;
 
 function TmsScrollingTool.pm_GetStartPoint: TPointF;

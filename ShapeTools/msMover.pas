@@ -3,9 +3,9 @@ unit msMover;
 interface
 
 uses
+ System.Types,
  msShape,
  FMX.Graphics,
- System.Types,
  System.UITypes,
  msTool,
  msInterfaces,
@@ -38,6 +38,9 @@ type
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController); reintroduce;
   function AddButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
+  procedure CreateFloatingButtons(const aController: ImsShapesController);
+  procedure MouseMove(const aClickContext: TmsEndShapeContext); override;
+  function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
   procedure Cleanup; override;
@@ -146,10 +149,11 @@ end;
 
 class function TmsMover.ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape): TPointF;
 begin
+ Assert(aShape <> nil);
  Result := BP(aButton, RectForButtons(aShape));
 end;
 
-constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
+procedure TmsMover.CreateFloatingButtons(const aController: ImsShapesController);
 
  function AddDButton(aButtonDesc: TmsFloatingButton; aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
  begin//AddDButton
@@ -186,12 +190,48 @@ const
 var
  l_FB : TmsFloatingButton;
 begin
- inherited CreateInner(aStartPoint);
- f_Moving := aMoving;
  Assert(f_FloatingButtons = nil);
  f_FloatingButtons := TmsShapesList.Create;
  for l_FB := Low(TmsFloatingButton) to High(TmsFloatingButton) do
   aController.AddShape(AddDButton(l_FB, cShapeTool[l_FB], cShapeArrow[l_FB].Create(ButtonPoint(l_FB, f_Moving))));
+end;
+
+procedure TmsMover.MouseMove(const aClickContext: TmsEndShapeContext);
+begin
+ if (f_FloatingButtons = nil) then
+ begin
+  f_WasMoved := true;
+  f_Moving.MoveTo(aClickContext.rStartPoint);
+  aClickContext.rShapesController.Invalidate;
+ end;//f_FloatingButtons = nil
+end;
+
+function TmsMover.MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
+begin
+ Result := false;
+ if f_WasMoved then
+ begin
+  if (f_FloatingButtons = nil) then
+  begin
+   aClickContext.rShapesController.RemoveShape(Self);
+   Result := true;
+  end;//f_FloatingButtons = nil
+ end//f_WasMoved
+ else
+ if (f_FloatingButtons = nil) then
+ begin
+  CreateFloatingButtons(aClickContext.rShapesController);
+  aClickContext.rShapesController.Invalidate;
+ end;//f_FloatingButtons = nil
+end;
+
+constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
+begin
+ Assert(aMoving <> nil);
+ inherited CreateInner(aStartPoint);
+ f_Moving := aMoving;
+ Assert(aController <> nil);
+ //CreateFloatingButtons(aController);
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
