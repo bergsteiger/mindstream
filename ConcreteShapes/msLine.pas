@@ -21,11 +21,13 @@ type
   class function IsLineLike: Boolean; override;
   function GetDrawBounds: TRectF; override;
   function GetFinishPointForDraw: TPointF; virtual;
+  function ContainsPt(const aPoint: TPointF): Boolean; override;
+  class function SamePoint(const A: TPointF; const B: TPointF): Boolean;
   property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
  public
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
-  procedure MoveTo(const aFinishPoint: TPointF); override;
+  procedure MoveTo(const aStartPoint: TPointF; const aFinishPoint: TPointF); override;
   class function CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
  end;//TmsLine
 
@@ -59,15 +61,62 @@ begin
  Result := FinishPoint;
 end;
 
+class function TmsLine.SamePoint(const A: TPointF; const B: TPointF): Boolean;
+const
+ cEpsilon = 5;
+begin
+ Result := (Abs(A.X - B.X) <= cEpsilon) AND (Abs(A.Y - B.Y) <= cEpsilon);
+end;
+
+function TmsLine.ContainsPt(const aPoint: TPointF): Boolean;
+// https://bitbucket.org/ingword/mindstream/issue/3/tmsline-tmsmover
+(*
+http://algolist.manual.ru/maths/geom/datastruct.php
+
+enum {LEFT,  RIGHT,  BEYOND,  BEHIND, BETWEEN, ORIGIN, DESTINATION};
+//    ÑËÅÂÀ, ÑÏÐÀÂÀ, ÂÏÅÐÅÄÈ, ÏÎÇÀÄÈ, ÌÅÆÄÓ,   ÍÀ×ÀËÎ, ÊÎÍÅÖ
+
+int Point::classify(Point &p0, Point &pl)
+{
+  Point p2 = *this;
+  Point a = p1 - pO;
+  Point b = p2 - pO;
+  double sa = a. x * b.y - b.x * a.y;
+  if (sa > 0.0)
+    return LEFT;
+  if (sa < 0.0)
+    return RIGHT;
+  if ((a.x * b.x < 0.0) || (a.y * b.y < 0.0))
+    return BEHIND;
+  if (a.length() < b.length())
+    return BEYOND;
+  if (pO == p2)
+    return ORIGIN;
+  if (p1 == p2)
+    return DESTINATION;
+  return BETWEEN;
+}
+*)
+begin
+ //Result := inherited;
+ Result := SamePoint(Self.StartPoint, aPoint) OR SamePoint(Self.FinishPoint, aPoint);
+end;
+
 function TmsLine.EndTo(const aCtx: TmsEndShapeContext): Boolean;
 begin
  Result := true;
  FinishPoint := aCtx.rStartPoint;
 end;
 
-procedure TmsLine.MoveTo(const aFinishPoint: TPointF);
+procedure TmsLine.MoveTo(const aStartPoint: TPointF; const aFinishPoint: TPointF);
 begin
- raise EmsLineCannotBeMoved.Create('Ïðèìèòèâ ' + ClassName + ' íå ìîæåò áûòü ïåðåìåù¸í');
+ if SamePoint(Self.StartPoint, aStartPoint) then
+  Self.SetStartPoint(aFinishPoint)
+ else
+ if SamePoint(Self.FinishPoint, aStartPoint) then
+  Self.FinishPoint := aFinishPoint
+ else
+  raise EmsLineCannotBeMoved.Create('Ïðèìèòèâ ' + ClassName + ' íå ìîæåò áûòü ïåðåìåù¸í');
 end;
 
 class function TmsLine.CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;

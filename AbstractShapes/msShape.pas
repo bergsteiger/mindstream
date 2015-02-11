@@ -33,14 +33,13 @@ type
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   function IsNeedsSecondClick : Boolean; virtual;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; virtual;
-  procedure MoveTo(const aFinishPoint: TPointF); virtual;
+  procedure MoveTo(const aStartPoint: TPointF; const aFinishPoint: TPointF); virtual;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
-  function IsNeedsMouseUp : Boolean; virtual;
-  //- примитив требует отслеживания MouseUp
-  procedure MouseMove(const aHolder: ImsDiagrammsHolder; const aPoint: TPointF); virtual;
+  function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; virtual;
+  procedure MouseMove(const aClickContext: TmsEndShapeContext); virtual;
   // - действие при MouseMove
  protected
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
@@ -132,19 +131,20 @@ begin
  Assert(false, 'Примитив ' + ClassName + ' не может быть завершён');
 end;
 
-procedure TmsShape.MouseMove(const aHolder: ImsDiagrammsHolder; const aPoint: TPointF);
+procedure TmsShape.MouseMove(const aClickContext: TmsEndShapeContext);
 begin
  // Ничего не делаем, специально
 end;
 
-procedure TmsShape.MoveTo(const aFinishPoint: TPointF);
+procedure TmsShape.MoveTo(const aStartPoint: TPointF; const aFinishPoint: TPointF);
 begin
  SetStartPoint(aFinishPoint);
 end;
 
-function TmsShape.IsNeedsMouseUp: Boolean;
+function TmsShape.MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
 begin
  Result := false;
+ // - специально ничего не делаем
 end;
 
 function TmsShape.IsNeedsSecondClick : Boolean;
