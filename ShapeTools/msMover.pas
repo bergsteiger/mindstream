@@ -198,8 +198,11 @@ end;
 function TmsMover.MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
 begin
  Result := false;
- CreateFloatingButtons(aClickContext.rShapesController);
- aClickContext.rShapesController.Invalidate;
+ if (f_FloatingButtons = nil) then
+ begin
+  CreateFloatingButtons(aClickContext.rShapesController);
+  aClickContext.rShapesController.Invalidate;
+ end;//f_FloatingButtons = nil
 end;
 
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
