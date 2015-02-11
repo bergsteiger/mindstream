@@ -29,6 +29,8 @@ type
 
  TmsMover = class(TmsTool)
  private
+  f_Point : TPointF;
+ private
   f_Moving : ImsShape;
   f_FloatingButtons : TmsShapesList;
   // - кнопки "плавающие" вокруг примитива f_Moving.
@@ -42,6 +44,7 @@ type
   procedure MouseMove(const aClickContext: TmsEndShapeContext); override;
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
   procedure MoveMovingTo(const aPoint: TPointF);
+  procedure SetStartPoint(const aStartPoint: TPointF); override;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
   procedure Cleanup; override;
@@ -201,6 +204,11 @@ procedure TmsMover.MoveMovingTo(const aPoint: TPointF);
 begin
  Assert(f_Moving <> nil);
  f_Moving.MoveTo(aPoint);
+end;
+
+procedure TmsMover.SetStartPoint(const aStartPoint: TPointF);
+begin
+ f_Point := aStartPoint;
 end;
 
 procedure TmsMover.MouseMove(const aClickContext: TmsEndShapeContext);
