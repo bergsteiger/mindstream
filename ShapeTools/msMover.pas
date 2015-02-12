@@ -338,7 +338,7 @@ begin
   finally
    l_Ctx.rMoving := l_Moving;
   end;//try..finally
-  if (f_FloatingButtons = nil) then
+  if (f_FloatingButtons = nil) OR (f_Moving.IsNeedsSecondClick) then
   begin
    l_Proxy := TmsMovingPointer.Create(Self.StartPoint);
    // - люблю я Self.XXX. Мне лично так понятнее. Да и with - меньше лажает.
