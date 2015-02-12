@@ -208,6 +208,9 @@ procedure TmsMover.MoveMovingTo(const aPoint: TPointF);
 begin
  Assert(f_Moving <> nil);
  f_Moving.MoveTo(f_Point, aPoint);
+ //f_Moving.MoveTo(f_Point, f_Moving.StartPoint + (aPoint - f_Point));
+ //- так конечно правильнее, но для линии это НЕ РАБОТАЕТ
+ //  Надо делать MoveBy
  f_Point := aPoint;
 end;
 
@@ -253,8 +256,8 @@ end;
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
 begin
  Assert(aMoving <> nil);
- inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
+ inherited CreateInner(aStartPoint);
  Assert(aController <> nil);
  //CreateFloatingButtons(aController);
 end;
