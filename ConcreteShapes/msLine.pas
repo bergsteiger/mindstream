@@ -98,7 +98,8 @@ int Point::classify(Point &p0, Point &pl)
 }
 *)
 begin
- Result := inherited;
+ //Result := inherited;
+ Result := SamePoint(Self.StartPoint, aPoint);
 end;
 
 function TmsLine.EndTo(const aCtx: TmsEndShapeContext): Boolean;
