@@ -133,8 +133,8 @@ uses
   msScrollShapePrim in 'ShapeTools\ScrollButtons\msScrollShapePrim.pas',
   msScrollShapeResetOrigin in 'ShapeTools\ScrollButtons\msScrollShapeResetOrigin.pas',
   msScrollingTool in 'ShapeTools\msScrollingTool.pas',
-  msAppLog in 'Core\msAppLog.pas'
-  ;
+  msAppLog in 'Core\msAppLog.pas',
+  msMovingPointer in 'msMovingPointer.pas';
 
 {$R *.res}
 
