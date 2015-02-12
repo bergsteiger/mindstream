@@ -22,6 +22,7 @@ type
   function GetDrawBounds: TRectF; override;
   function GetFinishPointForDraw: TPointF; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; override;
+  class function SamePoint(const A: TPointF; const B: TPointF): Boolean;
   property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
  public
   function IsNeedsSecondClick : Boolean; override;
@@ -58,6 +59,13 @@ end;
 function TmsLine.GetFinishPointForDraw: TPointF;
 begin
  Result := FinishPoint;
+end;
+
+class function TmsLine.SamePoint(const A: TPointF; const B: TPointF): Boolean;
+const
+ cEpsilon = 5;
+begin
+ Result := (Abs(A.X - B.X) <= cEpsilon) AND (Abs(A.Y - B.Y) <= cEpsilon);
 end;
 
 function TmsLine.ContainsPt(const aPoint: TPointF): Boolean;
