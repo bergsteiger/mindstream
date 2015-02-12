@@ -110,7 +110,8 @@ end;
 
 procedure TmsLine.MoveTo(const aFinishPoint: TPointF);
 begin
- raise EmsLineCannotBeMoved.Create('Примитив ' + ClassName + ' не может быть перемещён');
+ Self.SetStartPoint(aFinishPoint);
+ //raise EmsLineCannotBeMoved.Create('Примитив ' + ClassName + ' не может быть перемещён');
 end;
 
 class function TmsLine.CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
