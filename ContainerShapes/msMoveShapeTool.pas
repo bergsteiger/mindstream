@@ -23,6 +23,8 @@ implementation
 procedure TmsMoveShapeTool.ProcessClickInDiagramm;
 begin
  ShapeToDeal.MoveTo(ShapeToDeal.StartPoint, ShapeToDeal.StartPoint + Delta);
+ // Тут надо доделать:
+ //  https://bitbucket.org/ingword/mindstream/issue/143/tmsline
 end;
 
 end.
