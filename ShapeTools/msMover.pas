@@ -207,7 +207,7 @@ end;
 procedure TmsMover.MoveMovingTo(const aPoint: TPointF);
 begin
  Assert(f_Moving <> nil);
- f_Moving.MoveTo(aPoint);
+ f_Moving.MoveTo(f_Point, aPoint);
  f_Point := aPoint;
 end;
 

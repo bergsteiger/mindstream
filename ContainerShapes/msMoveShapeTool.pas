@@ -22,7 +22,7 @@ implementation
 
 procedure TmsMoveShapeTool.ProcessClickInDiagramm;
 begin
- ShapeToDeal.MoveTo(ShapeToDeal.StartPoint + Delta);
+ ShapeToDeal.MoveTo(ShapeToDeal.StartPoint, ShapeToDeal.StartPoint + Delta);
 end;
 
 end.
