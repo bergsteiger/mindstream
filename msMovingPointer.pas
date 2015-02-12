@@ -24,7 +24,7 @@ uses
 
 class function TmsMovingPointer.Create(const aPoint: TPointF): ImsShape;
 begin
- Result := TmsScalingShape.Create(TmsMoveIcon.Create(aPoint), 0.25);
+ Result := TmsScalingShape.Create(TmsMoveIcon.Create(aPoint), 0.5);
 end;
 
 end.
