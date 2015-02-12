@@ -3,9 +3,9 @@ unit msMover;
 interface
 
 uses
+ System.Types,
  msShape,
  FMX.Graphics,
- System.Types,
  System.UITypes,
  msTool,
  msInterfaces,
@@ -29,6 +29,8 @@ type
 
  TmsMover = class(TmsTool)
  private
+  f_Point : TPointF;
+ private
   f_Moving : ImsShape;
   f_FloatingButtons : TmsShapesList;
   // - кнопки "плавающие" вокруг примитива f_Moving.
@@ -39,6 +41,11 @@ type
   constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController); reintroduce;
   function AddButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
   procedure CreateFloatingButtons(const aController: ImsShapesController);
+  procedure MouseMove(const aClickContext: TmsEndShapeContext); override;
+  function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
+  procedure MoveMovingTo(const aPoint: TPointF);
+  function pm_GetStartPoint: TPointF; override;
+  procedure SetStartPoint(const aStartPoint: TPointF); override;
  public
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
   procedure Cleanup; override;
@@ -84,7 +91,10 @@ uses
  msMoveShapeUpLeft,
  msMoveShapeUpRight,
  msFloatingButtonCircle,
- msMoveShapeTool
+ msMoveShapeTool,
+ msScalingShape,
+ msMoveIcon,
+ msMovingPointer
  ;
 
 // TmsMover
@@ -147,6 +157,7 @@ end;
 
 class function TmsMover.ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape): TPointF;
 begin
+ Assert(aShape <> nil);
  Result := BP(aButton, RectForButtons(aShape));
 end;
 
@@ -193,11 +204,59 @@ begin
   aController.AddShape(AddDButton(l_FB, cShapeTool[l_FB], cShapeArrow[l_FB].Create(ButtonPoint(l_FB, f_Moving))));
 end;
 
+procedure TmsMover.MoveMovingTo(const aPoint: TPointF);
+begin
+ Assert(f_Moving <> nil);
+ f_Moving.MoveTo(f_Point, aPoint);
+ f_Point := aPoint;
+end;
+
+function TmsMover.pm_GetStartPoint: TPointF;
+begin
+ Result := f_Point;
+end;
+
+procedure TmsMover.SetStartPoint(const aStartPoint: TPointF);
+begin
+ f_Point := aStartPoint;
+end;
+
+procedure TmsMover.MouseMove(const aClickContext: TmsEndShapeContext);
+begin
+ if (f_FloatingButtons = nil) then
+ begin
+  f_WasMoved := true;
+  MoveMovingTo(aClickContext.rStartPoint);
+  aClickContext.rShapesController.Invalidate;
+ end;//f_FloatingButtons = nil
+end;
+
+function TmsMover.MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
+begin
+ Result := false;
+ if f_WasMoved then
+ begin
+  if (f_FloatingButtons = nil) then
+  begin
+   aClickContext.rShapesController.RemoveShape(Self);
+   Result := true;
+  end;//f_FloatingButtons = nil
+ end//f_WasMoved
+ else
+ if (f_FloatingButtons = nil) then
+ begin
+  CreateFloatingButtons(aClickContext.rShapesController);
+  aClickContext.rShapesController.Invalidate;
+ end;//f_FloatingButtons = nil
+end;
+
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
 begin
+ Assert(aMoving <> nil);
  inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
- CreateFloatingButtons(aController);
+ Assert(aController <> nil);
+ //CreateFloatingButtons(aController);
 end;
 
 class function TmsMover.ButtonShape: ImsShape;
@@ -248,7 +307,7 @@ begin
    end;//l_ShapeOnPoint.ClickInDiagramm
   if not f_WasMoved then
    if Result then
-    f_Moving.MoveTo(aCtx.rStartPoint);
+    MoveMovingTo(aCtx.rStartPoint);
  end;//f_Moving <> nil
  if Result then
  begin
@@ -265,12 +324,30 @@ end;
 procedure TmsMover.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Ctx : TmsDrawContext;
+ l_Moving : Boolean;
+var
+ l_Proxy : ImsShape;
 begin
  if (f_Moving <> nil) then
  begin
   l_Ctx := aCtx;
-  l_Ctx.rMoving := True;
-  f_Moving.DrawTo(l_Ctx);
+  l_Moving := l_Ctx.rMoving;
+  l_Ctx.rMoving := true;
+  try
+   f_Moving.DrawTo(l_Ctx);
+  finally
+   l_Ctx.rMoving := l_Moving;
+  end;//try..finally
+  if (f_FloatingButtons = nil) OR (f_Moving.IsNeedsSecondClick) then
+  begin
+   l_Proxy := TmsMovingPointer.Create(Self.StartPoint);
+   // - люблю я Self.XXX. Мне лично так понятнее. Да и with - меньше лажает.
+   try
+    l_Proxy.DrawTo(aCtx);
+   finally
+    l_Proxy := nil;
+   end;///try..fianlly
+  end;//f_FloatingButtons = nil
  end;//f_Moving <> nil
 end;
 

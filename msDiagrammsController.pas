@@ -60,7 +60,7 @@ type
   procedure ResetOrigin;
   // - восстанавливаем начальную систему координат
   procedure MouseUp(const aPoint: TPointF);
-  procedure MouseMove(const aShift: TShiftState; const aClickContext: TmsClickContext);
+  procedure MouseMove(const aClickContext: TmsClickContext);
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
@@ -363,7 +363,7 @@ end;
 procedure TmsDiagrammsController.MouseDown(const aStart: TPointF);
 begin
  CurrentDiagramm.MouseDown(TmsClickContext.Create(TmsShapesForToolbar.Instance.ByName(cbShapes.Items[cbShapes.ItemIndex]).Creator, aStart,
-   Self.As_ImsDiagrammsHolder));
+   Self.As_ImsDiagrammsHolder, []));
 end;
 
 procedure TmsDiagrammsController.ResetOrigin;
@@ -421,7 +421,7 @@ end;
 procedure TmsDiagrammsController.imgMainMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Single);
 begin
- Self.MouseMove(Shift, TmsClickContext.Create(nil, TPointF.Create(X, Y) - f_Delta, Self.As_ImsDiagrammsHolder));
+ Self.MouseMove(TmsClickContext.Create(nil, TPointF.Create(X, Y) - f_Delta, Self.As_ImsDiagrammsHolder, Shift));
 end;
 
 procedure TmsDiagrammsController.imgMainMouseUp(Sender: TObject;
@@ -444,16 +444,17 @@ begin
  Scroll(TPointF.Create(0, l_Delta));
 end;
 
-procedure TmsDiagrammsController.MouseMove(const aShift: TShiftState; const aClickContext: TmsClickContext);
+procedure TmsDiagrammsController.MouseMove(const aClickContext: TmsClickContext);
 begin
- CurrentDiagramm.MouseMove(aShift, aClickContext);
+ CurrentDiagramm.MouseMove(aClickContext);
 end;
 
 procedure TmsDiagrammsController.MouseUp(const aPoint: TPointF);
 begin
  CurrentDiagramm.MouseUp(TmsClickContext.Create(TmsShapesForToolbar.Instance.ByName(cbShapes.Items[cbShapes.ItemIndex]).Creator,
                          aPoint,
-                         Self.As_ImsDiagrammsHolder));
+                         Self.As_ImsDiagrammsHolder,
+                         []));
 end;
 
 procedure TmsDiagrammsController.DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);

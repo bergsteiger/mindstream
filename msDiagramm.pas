@@ -63,7 +63,7 @@ type
   procedure DrawTo(const aCanvas: TCanvas);
   procedure MouseDown(const aClickContext: TmsClickContext);
   procedure MouseUp(const aClickContext: TmsClickContext);
-  procedure MouseMove(const aShift: TShiftState; const aClickContext: TmsClickContext);
+  procedure MouseMove(const aClickContext: TmsClickContext);
   procedure Clear;
   procedure Invalidate;
   property Name: String read fName write fName;
@@ -118,8 +118,7 @@ begin
  if (FCurrentAddedShape <> nil) then
  begin
   Items.Add(FCurrentAddedShape);
-  if (not FCurrentAddedShape.IsNeedsSecondClick) and
-     (not FCurrentAddedShape.IsNeedsMouseUp) then
+  if (not FCurrentAddedShape.IsNeedsSecondClick) then
     // - если не надо SecondClick или MouseUp, то наш примитив - завершён
    FCurrentAddedShape := nil;
   Invalidate;
@@ -199,18 +198,17 @@ begin
  TmsDiagrammMarshal.DeSerialize(aFileName, Self);
 end;
 
-procedure TmsDiagramm.MouseMove(const aShift: TShiftState; const aClickContext: TmsClickContext);
+procedure TmsDiagramm.MouseMove(const aClickContext: TmsClickContext);
 begin
  if (FCurrentAddedShape <> nil) then
-  FCurrentAddedShape.MouseMove(aClickContext.rDiagrammsHolder,
-                               aClickContext.rClickPoint)
+  FCurrentAddedShape.MouseMove(TmsEndShapeContext.Create(aClickContext.rClickPoint, Self, aClickContext.rDiagrammsHolder));
 end;
 
 procedure TmsDiagramm.MouseUp(const aClickContext: TmsClickContext);
 begin
  if Assigned(FCurrentAddedShape) then
-  if CurrentAddedShape.IsNeedsMouseUp then
-    Self.EndShape(aClickContext);
+  if FCurrentAddedShape.MouseUp(TmsEndShapeContext.Create(aClickContext.rClickPoint, Self, aClickContext.rDiagrammsHolder)) then
+   FCurrentAddedShape := nil;
 end;
 
 function TmsDiagramm.AddShape(const aShape: ImsShape): ImsShape;
