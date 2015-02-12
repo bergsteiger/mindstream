@@ -56,7 +56,7 @@ begin
   l_Matrix := TMatrix.Identity;
   l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_C.X, l_C.Y);
   l_Matrix := l_Matrix * TMatrix.CreateScaling(f_Scale, f_Scale);
-  l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_C.X, -l_C.Y);
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_C.X * f_Scale, -l_C.Y * f_Scale);
   l_Matrix := l_Matrix * l_OriginalMatrix;
   aCtx.rCanvas.SetMatrix(l_Matrix);
   inherited;
