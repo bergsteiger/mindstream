@@ -3,7 +3,7 @@ unit msAppLog;
 interface
 
 uses
- msCoreObjects
+ FMX.DUnit.msLog
  ;
 
 type

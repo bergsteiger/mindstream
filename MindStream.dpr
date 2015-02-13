@@ -134,7 +134,8 @@ uses
   msScrollShapeResetOrigin in 'ShapeTools\ScrollButtons\msScrollShapeResetOrigin.pas',
   msScrollingTool in 'ShapeTools\msScrollingTool.pas',
   msAppLog in 'Core\msAppLog.pas',
-  msMovingPointer in 'msMovingPointer.pas';
+  msMovingPointer in 'msMovingPointer.pas',
+  FMX.DUnit.msLog in 'fmx.dunit\FMX.DUnit.msLog.pas';
 
 {$R *.res}
 

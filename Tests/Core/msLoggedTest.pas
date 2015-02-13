@@ -4,8 +4,8 @@ interface
 
 uses
  TestFramework,
- msCoreObjects,
- FMX.DUnit.Interfaces
+ FMX.DUnit.Interfaces,
+ FMX.DUnit.msLog
  ;
 
 type
