@@ -93,7 +93,7 @@ uses
  msShapeMarshal,
  System.Math.Vectors,
  msRegisteredShapes,
- msAppLog
+ FMX.DUnit.msAppLog
  ;
 
 class function TmsShape.Create(const aCtx: TmsMakeShapeContext): ImsShape;
