@@ -19,7 +19,7 @@ uses
 type
  TmsShape = class abstract(TmsDiagrammsList, ImsShape)
  strict private
-  [JSONMarshalled(True)]
+  [JSONMarshalled(False)]
   f_ShapeClass : ImsShapeClass;
  private
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
