@@ -201,13 +201,25 @@ begin
  Assert(f_FloatingButtons = nil);
  f_FloatingButtons := TmsShapesList.Create;
  for l_FB := Low(TmsFloatingButton) to High(TmsFloatingButton) do
-  aController.AddShape(AddDButton(l_FB, cShapeTool[l_FB], cShapeArrow[l_FB].Create(ButtonPoint(l_FB, f_Moving))));
+  aController.AddShape(AddDButton(l_FB,
+                                  cShapeTool[l_FB],
+                                  cShapeArrow[l_FB].Create(ButtonPoint(l_FB, f_Moving))));
+                                  // - тут на самом деле надо не f_Moving а Self
+                                  // А Move - переопределить
+                                  // Тогда починятся:
+                                  // https://bitbucket.org/ingword/mindstream/issue/143/tmsline
+                                  // https://bitbucket.org/ingword/mindstream/issue/145/------------------------------
 end;
 
 procedure TmsMover.MoveMovingTo(const aPoint: TPointF);
 begin
  Assert(f_Moving <> nil);
  f_Moving.MoveTo(f_Point, aPoint);
+ //f_Moving.MoveTo(f_Point, f_Moving.StartPoint + (aPoint - f_Point));
+ //- так конечно правильнее, но для линии это НЕ РАБОТАЕТ
+ //  Надо делать MoveBy
+ // Хотя и БЕЗ MoveBy можно обойтись - вычисляя дельту внутри
+ // Только тогда надо будет ещь про EndTo - не забыть, что там как раз НЕ дельта.
  f_Point := aPoint;
 end;
 
@@ -253,8 +265,8 @@ end;
 constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
 begin
  Assert(aMoving <> nil);
- inherited CreateInner(aStartPoint);
  f_Moving := aMoving;
+ inherited CreateInner(aStartPoint);
  Assert(aController <> nil);
  //CreateFloatingButtons(aController);
 end;
