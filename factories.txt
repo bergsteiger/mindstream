@@ -1,0 +1,258 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+В некотором смысле в продолжение темы поднятой тут -&nbsp;<a href="http://programmingmindstream.blogspot.ru/2014/08/blog-post_85.html">Коротко. О возбуждении исключений</a><br />
+<br />
+Отчасти в продолжение вот этой темы -&nbsp;<a href="http://18delphi.blogspot.ru/2013/04/blog-post_7483.html">Фабричный метод</a><br />
+<br />
+Как можно создавать объект?<br />
+<br />
+Ну конечно же так:<br />
+<br />
+<pre class="brush:delphi">type
+ TmyObject = class
+  public
+   constructor Create(aSomeData: TSomeData);
+ end;//TmyObject
+
+...
+var
+ myObject : TmyObject;
+...
+ myObject := TmyObject.Create(aSomeData);
+</pre>
+<br />
+А можно так:
+<br />
+<br />
+<pre class="brush:delphi">type
+ TmyObject = class
+  protected
+   constructor Create(aSomeData: TSomeData);
+  public
+   class function Make(aSomeData: TSomeData): TmyObject;
+ end;//TmyObject
+
+...
+class function TmyObject.Make(aSomeData: TSomeData): TmyObject;
+begin
+ if IsValidData(aSomeData) then
+  Result := Self.Create(aSomeData)
+ else
+  Result := nil;
+end;
+...
+var
+ myObject : TmyObject;
+...
+ myObject := TmyObject.Make(theConcreteData);
+</pre>
+<br />
+-- в чём разница?&nbsp;
+<br />
+<br />
+А в том, что в "фабричном методе" можно вставить некоторую бизнес-логику.<br />
+<br />
+В нашем случае это - IsValidData(aSomeData).<br />
+<br />
+Но можно пойти дальше:
+
+<br />
+<br />
+<pre class="brush:delphi">interface
+...
+type
+ TmyObject = class
+  protected
+   constructor Create(aSomeData: TSomeData);
+   procedure SomeMethodToOverride; virtual;
+  public
+   class function Make(aSomeData: TSomeData): TmyObject;
+ end;//TmyObject
+...
+implementation
+...
+ TmySpecialObject = class(TmyObject)
+  protected
+   procedure SomeMethodToOverride; override;
+ end;//TmySpecialObject
+
+...
+class function TmyObject.Make(aSomeData: TSomeData): TmyObject;
+begin
+ if IsMySpecialData(aSomeData) then
+  Result := TmySpecialObject.Create(aSomeData) 
+ else
+ if IsValidData(aSomeData) then
+  Result := Self.Create(aSomeData)
+ else
+  Result := nil;
+end;
+...
+var
+ myObject : TmyObject;
+...
+ myObject := TmyObject.Make(theConcreteData);
+</pre>
+<br />
+А можно пойти ещё дальше:
+<br />
+<br />
+<pre class="brush:delphi">interface
+...
+type
+ TmyObject = class
+  protected
+   constructor Create(aSomeData: TSomeData);
+   procedure SomeMethodToOverride; virtual;
+  public
+   class function Make(aSomeData: TSomeData): TmyObject;
+ end;//TmyObject
+...
+implementation
+...
+ TmyNULLObject = class(TmyObject)
+  protected
+   procedure SomeMethodToOverride; override;
+ end;//TmyNULLObject
+
+ TmySpecialObject = class(TmyObject)
+  protected
+   procedure SomeMethodToOverride; override;
+ end;//TmySpecialObject
+
+...
+class function TmyObject.Make(aSomeData: TSomeData): TmyObject;
+begin
+ if IsMySpecialData(aSomeData) then
+  Result := TmySpecialObject.Create(aSomeData) 
+ else
+ if IsValidData(aSomeData) then
+  Result := Self.Create(aSomeData)
+ else
+  Result := TmyNULLObject.Create(aSomeData);
+end;
+...
+var
+ myObject : TmyObject;
+...
+ myObject := TmyObject.Make(theConcreteData);
+</pre>
+<br />
+Ну и можно пойти и ещё дальше:
+
+<br />
+<br />
+<pre class="brush:delphi">interface
+...
+type
+ ImyInterface = interface
+  procedure SomeMethodToOverride;
+ end;//ImyInterface
+
+ TmyObject = class(TIntefacedObject, ImyInterface)
+  protected
+   constructor Create(aSomeData: TSomeData);
+   procedure SomeMethodToOverride; virtual;
+  public
+   class function Make(aSomeData: TSomeData): ImyInterface;
+ end;//TmyObject
+...
+implementation
+...
+ TmyNULLObject = class(TIntefacedObject, ImyInterface)
+  protected
+   procedure SomeMethodToOverride;
+   // - Тут понятное дело override уже не нужен
+   constructor Create(aSomeData: TSomeData);
+  public
+   class function Make(aSomeData: TSomeData): ImyInterface;
+   // - а тут вообще говоря можно "забабахать синглетон"
+ end;//TmyNULLObject
+
+ TmySpecialObject = class(TmyObject)
+  protected
+   procedure SomeMethodToOverride; override;
+ end;//TmySpecialObject
+
+...
+class function TmyObject.Make(aSomeData: TSomeData): ImyInterface;
+begin
+ if IsMySpecialData(aSomeData) then
+  Result := TmySpecialObject.Create(aSomeData) 
+ else
+ if IsValidData(aSomeData) then
+  Result := Self.Create(aSomeData)
+ else
+  Result := TmyNULLObject.Make(aSomeData);
+end;
+...
+var
+ myObject : ImyInterface;
+...
+ myObject := TmyObject.Make(theConcreteData);
+</pre>
+<br />
+Ну вот собственно и всё.<br />
+<br />
+Надеюсь, что это кому-нибудь понравится.
+<br />
+<br />
+Опять же оговорюсь, что это всего лишь "макет".<br />
+<br />
+Да!<br />
+<br />
+И ещё одна краткая ремарка.<br />
+<br />
+Как сделать так, чтобы "не прошли мимо фабрики"?<br />
+<br />
+Т.е. чтобы не вызвали "паразитный умолчательный конструктор". Который от TObject.<br />
+<br />
+А вот так:<br />
+<br />
+<pre class="brush:delphi">type
+ TmyObject = class
+  protected
+   constructor Create(aSomeData: TSomeData); overload;
+  public
+   class function Make(aSomeData: TSomeData): TmyObject;
+   constructor Create; overload;
+ end;//TmyObject
+...
+constructor TmyObject.Create;
+begin
+ Assert(false, 'Надо вызывать фабричный метод, а не унаследованный конструктор');
+end;
+</pre>
+<br />
+А можно сделать ещё "веселее", вот так:
+<br />
+<br />
+<pre class="brush:delphi">type
+ TmyObject = class
+  protected
+   constructor InternalCreate(aSomeData: TSomeData);
+  public
+   class function Make(aSomeData: TSomeData): TmyObject;
+   procedure Create;
+ end;//TmyObject
+...
+procedure TmyObject.Create;
+begin
+ Assert(false, 'Надо вызывать фабричный метод, а не унаследованный конструктор');
+end;
+</pre>
+<br />
+-- тогда ошибочный код вообще компилироваться не будет.<br />
+<br />
+А можно наверное вообще так:
+
+<br />
+<br />
+<pre class="brush:delphi">type
+ TmyObject = class
+  protected
+   constructor InternalCreate(aSomeData: TSomeData);
+  public
+   class function Create(aSomeData: TSomeData): TmyObject;
+ end;//TmyObject
+</pre>
+</div>
