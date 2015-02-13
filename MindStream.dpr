@@ -135,7 +135,8 @@ uses
   msScrollingTool in 'ShapeTools\msScrollingTool.pas',
   FMX.DUnit.msAppLog in 'fmx.dunit\FMX.DUnit.msAppLog.pas',
   msMovingPointer in 'msMovingPointer.pas',
-  FMX.DUnit.msLog in 'fmx.dunit\FMX.DUnit.msLog.pas';
+  FMX.DUnit.msLog in 'fmx.dunit\FMX.DUnit.msLog.pas',
+  msConnector in 'ConcreteShapes\ForUML\msConnector.pas';
 
 {$R *.res}
 
