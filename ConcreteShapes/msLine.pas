@@ -142,7 +142,7 @@ begin
  else
  begin
   l_FinishPoint := GetFinishPointForDraw;
-  aCtx.rCanvas.DrawLine(StartPoint,l_FinishPoint, 1);
+  aCtx.rCanvas.DrawLine(StartPoint, l_FinishPoint, 1);
  end;//StartPoint = FinishPoint
 end;
 
