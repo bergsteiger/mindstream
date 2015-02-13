@@ -9,7 +9,6 @@ uses
   msRegisteredShapes,
   System.Types,
   System.Classes,
-  msCoreObjects,
   msInterfaces,
   msShapeClassList,
   msLoggedTest
@@ -101,7 +100,8 @@ implementation
   msStreamUtils,
   msTestConstants,
   msShapeCreator,
-  msCompletedShapeCreator
+  msCompletedShapeCreator,
+  FMX.DUnit.msLog
   ;
 
 // TmsShapeTestPrim

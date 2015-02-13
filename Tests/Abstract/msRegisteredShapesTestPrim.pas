@@ -24,7 +24,7 @@ implementation
 
 uses
  SysUtils,
- msCoreObjects,
+ FMX.DUnit.msLog,
  msLine
  ;
 
