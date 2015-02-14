@@ -20,6 +20,7 @@ type
   constructor CreateInner(const aCtx: TmsMakeShapeContext); override;
   procedure SetStartPoint(const aStartPoint: TPointF); override;
   function pm_GetStartPoint: TPointF; override;
+  function pm_GetFinishPoint: TPointF; override;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
  end;//TmsConnector
@@ -45,6 +46,11 @@ begin
  if (f_LeftShape <> nil) then
   Result := f_LeftShape.StartPoint
  else
+  Result := inherited;
+end;
+
+function TmsConnector.pm_GetFinishPoint: TPointF;
+begin
   Result := inherited;
 end;
 
