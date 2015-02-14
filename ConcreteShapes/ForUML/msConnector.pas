@@ -6,11 +6,12 @@ uses
  System.Types,
  msInterfaces,
  msLine,
+ msLineWithArrow,
  Data.DBXJSONReflect
  ;
 
 type
- TmsConnector = class(TmsLine)
+ TmsConnector = class(TmsLineWithArrow{TmsLine})
  strict private
   [JSONMarshalled(False)]
   f_LeftShape : ImsShape;
