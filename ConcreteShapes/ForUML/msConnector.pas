@@ -49,6 +49,11 @@ end;
 
 function TmsConnector.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
 begin
+ Result := true;
+ if (f_LeftShape <> nil) AND f_LeftShape.HitTest(aPoint, theShape) then
+  Exit;
+ if (f_RightShape <> nil) AND f_RightShape.HitTest(aPoint, theShape) then
+  Exit;
  Result := inherited;
 end;
 
