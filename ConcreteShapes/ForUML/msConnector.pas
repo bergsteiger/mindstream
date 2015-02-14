@@ -51,6 +51,9 @@ end;
 
 function TmsConnector.pm_GetFinishPoint: TPointF;
 begin
+ if (f_RightShape <> nil) then
+  Result := f_RightShape.StartPoint
+ else
   Result := inherited;
 end;
 
