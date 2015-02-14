@@ -14,16 +14,19 @@ uses
 type
  TmsLine = class(TmsPointedShape)
  private
-  FFinishPoint: TPointF;
+  f_FinishPoint: TPointF;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  constructor CreateInner(const aStartPoint: TPointF); override;
+  constructor CreateInner(const aCtx: TmsMakeShapeContext); override;
   class function IsLineLike: Boolean; override;
   function GetDrawBounds: TRectF; override;
   function GetFinishPointForDraw: TPointF; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; override;
   class function SamePoint(const A: TPointF; const B: TPointF): Boolean;
-  property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
+  function pm_GetFinishPoint: TPointF; virtual;
+  property FinishPoint : TPointF
+   read pm_GetFinishPoint
+   write f_FinishPoint;
  public
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
@@ -40,10 +43,10 @@ uses
  msPointCircle
  ;
 
-constructor TmsLine.CreateInner(const aStartPoint: TPointF);
+constructor TmsLine.CreateInner(const aCtx: TmsMakeShapeContext);
 begin
  inherited;
- FinishPoint := aStartPoint;
+ FinishPoint := aCtx.rStartPoint;
 end;
 
 class function TmsLine.IsLineLike: Boolean;
@@ -66,6 +69,11 @@ const
  cEpsilon = 5;
 begin
  Result := (Abs(A.X - B.X) <= cEpsilon) AND (Abs(A.Y - B.Y) <= cEpsilon);
+end;
+
+function TmsLine.pm_GetFinishPoint: TPointF;
+begin
+ Result := f_FinishPoint;
 end;
 
 function TmsLine.ContainsPt(const aPoint: TPointF): Boolean;
@@ -142,7 +150,7 @@ begin
  else
  begin
   l_FinishPoint := GetFinishPointForDraw;
-  aCtx.rCanvas.DrawLine(StartPoint,l_FinishPoint, 1);
+  aCtx.rCanvas.DrawLine(StartPoint, l_FinishPoint, 1);
  end;//StartPoint = FinishPoint
 end;
 

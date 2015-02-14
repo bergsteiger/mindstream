@@ -46,7 +46,7 @@ end;
 constructor TmsProxyShape.CreateInner(const aShape: ImsShape);
 begin
  Assert(aShape <> nil, 'Пустую группу примитивов глупо создавать');
- inherited CreateInner(TPointF.Create(0, 0));
+ inherited CreateInner(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
  f_Shape := aShape;
 end;
 

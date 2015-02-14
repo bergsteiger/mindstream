@@ -25,7 +25,7 @@ implementation
 
 constructor TmsCircleWithRadius.CreateInner(const aStartPoint: TPointF; aRad: Single);
 begin
- inherited CreateInner(aStartPoint);
+ inherited CreateInner(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
  f_Rad := aRad;
 end;
 

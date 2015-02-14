@@ -45,7 +45,8 @@ uses
   msScrollShapeDownLeft,
   msScrollShapeDownRight,
   msScrollShapeResetOrigin,
-  msScrollingTool
+  msScrollingTool,
+  msConnector
   ;
 
 // Важно !!!
@@ -98,7 +99,9 @@ begin
   TmsScrollShapeDownRight,
   TmsScrollShapeResetOrigin,
 
-  TmsScrollingTool
+  TmsScrollingTool,
+
+  TmsConnector
  ]);
 end;
 

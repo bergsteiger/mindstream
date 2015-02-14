@@ -51,7 +51,7 @@ end;
 
 constructor TmsPaletteShape.CreateInner(const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF);
 begin
- inherited CreateInner(aStartPoint);
+ inherited CreateInner(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
  f_OtherShapeClass := anOtherShapeClass;
  f_Proxy := f_OtherShapeClass.ButtonShape;
 end;

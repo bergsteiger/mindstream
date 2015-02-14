@@ -47,7 +47,7 @@ var
  l_Shape : ImsShape;
 begin
  Assert(Length(aShapes) > 0, 'Пустую группу примитивов глупо создавать');
- inherited CreateInner(TPointF.Create(0, 0));
+ inherited CreateInner(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
  f_Shapes := TmsShapesList.Create;
  for l_Shape in aShapes do
   f_Shapes.Add(l_Shape);
