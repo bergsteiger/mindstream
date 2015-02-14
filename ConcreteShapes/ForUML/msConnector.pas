@@ -60,6 +60,8 @@ end;
 
 function TmsConnector.EndTo(const aCtx: TmsEndShapeContext): Boolean;
 begin
+ if (aCtx.rShapesController <> nil) then
+  f_RightShape := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
  Result := inherited;
 end;
 
