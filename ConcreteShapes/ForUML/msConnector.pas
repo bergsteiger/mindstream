@@ -28,6 +28,8 @@ implementation
 constructor TmsConnector.CreateInner(const aCtx: TmsMakeShapeContext);
 begin
  inherited;
+ if (aCtx.rShapesController <> nil) then
+  f_LeftShape := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
 end;
 
 procedure TmsConnector.SetStartPoint(const aStartPoint: TPointF);
