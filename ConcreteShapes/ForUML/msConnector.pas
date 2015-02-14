@@ -15,6 +15,7 @@ type
   [JSONMarshalled(False)]
   f_LeftShape : ImsShape;
  protected
+  constructor CreateInner(const aCtx: TmsMakeShapeContext); override;
   procedure SetStartPoint(const aStartPoint: TPointF); override;
   function pm_GetStartPoint: TPointF; override;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
@@ -23,6 +24,11 @@ type
 implementation
 
 // TmsConnector
+
+constructor TmsConnector.CreateInner(const aCtx: TmsMakeShapeContext);
+begin
+ inherited;
+end;
 
 procedure TmsConnector.SetStartPoint(const aStartPoint: TPointF);
 begin
