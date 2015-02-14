@@ -39,7 +39,10 @@ end;
 
 function TmsConnector.pm_GetStartPoint: TPointF;
 begin
- Result := inherited;
+ if (f_LeftShape <> nil) then
+  Result := f_LeftShape.StartPoint
+ else
+  Result := inherited;
 end;
 
 function TmsConnector.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
