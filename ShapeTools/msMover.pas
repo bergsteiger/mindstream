@@ -266,7 +266,7 @@ constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsS
 begin
  Assert(aMoving <> nil);
  f_Moving := aMoving;
- inherited CreateInner(aStartPoint);
+ inherited CreateInner(TmsMakeShapeContext.Create(aStartPoint, aController, nil));
  Assert(aController <> nil);
  //CreateFloatingButtons(aController);
 end;

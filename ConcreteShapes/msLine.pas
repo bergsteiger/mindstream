@@ -17,7 +17,7 @@ type
   FFinishPoint: TPointF;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  constructor CreateInner(const aStartPoint: TPointF); override;
+  constructor CreateInner(const aCtx: TmsMakeShapeContext); override;
   class function IsLineLike: Boolean; override;
   function GetDrawBounds: TRectF; override;
   function GetFinishPointForDraw: TPointF; virtual;
@@ -40,10 +40,10 @@ uses
  msPointCircle
  ;
 
-constructor TmsLine.CreateInner(const aStartPoint: TPointF);
+constructor TmsLine.CreateInner(const aCtx: TmsMakeShapeContext);
 begin
  inherited;
- FinishPoint := aStartPoint;
+ FinishPoint := aCtx.rStartPoint;
 end;
 
 class function TmsLine.IsLineLike: Boolean;

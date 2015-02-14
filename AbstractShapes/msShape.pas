@@ -26,7 +26,7 @@ type
  strict protected
   function pm_GetStartPoint: TPointF; virtual;
   function pm_GetShapeClass: ImsShapeClass;
-  constructor CreateInner(const aStartPoint: TPointF); virtual;
+  constructor CreateInner(const aCtx: TmsMakeShapeContext); virtual;
   procedure SetStartPoint(const aStartPoint: TPointF); virtual;
  protected
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
@@ -98,13 +98,13 @@ uses
 
 class function TmsShape.Create(const aCtx: TmsMakeShapeContext): ImsShape;
 begin
- Result := Create(aCtx.rStartPoint);
+ Result := CreateInner(aCtx);
  TmsAppLog.Instance.ToLog('Create object ' + self.ClassName);
 end;
 
 class function TmsShape.Create(const aStartPoint: TPointF): ImsShape;
 begin
- Result := CreateInner(aStartPoint);
+ Result := CreateInner(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
 end;
 
 function TmsShape.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
@@ -119,10 +119,10 @@ begin
  Result := False;
 end;
 
-constructor TmsShape.CreateInner(const aStartPoint: TPointF);
+constructor TmsShape.CreateInner(const aCtx: TmsMakeShapeContext);
 begin
  inherited Create;
- SetStartPoint(aStartPoint);
+ SetStartPoint(aCtx.rStartPoint);
 end;
 
 function TmsShape.EndTo(const aCtx: TmsEndShapeContext): Boolean;
