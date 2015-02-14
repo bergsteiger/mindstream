@@ -14,6 +14,8 @@ type
  strict private
   [JSONMarshalled(False)]
   f_LeftShape : ImsShape;
+  [JSONMarshalled(False)]
+  f_RightShape : ImsShape;
  protected
   constructor CreateInner(const aCtx: TmsMakeShapeContext); override;
   procedure SetStartPoint(const aStartPoint: TPointF); override;
