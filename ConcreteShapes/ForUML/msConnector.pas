@@ -21,6 +21,7 @@ type
   procedure SetStartPoint(const aStartPoint: TPointF); override;
   function pm_GetStartPoint: TPointF; override;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
+  function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
  end;//TmsConnector
 
 implementation
@@ -54,6 +55,11 @@ begin
   Exit;
  if (f_RightShape <> nil) AND f_RightShape.HitTest(aPoint, theShape) then
   Exit;
+ Result := inherited;
+end;
+
+function TmsConnector.EndTo(const aCtx: TmsEndShapeContext): Boolean;
+begin
  Result := inherited;
 end;
 
