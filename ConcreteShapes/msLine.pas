@@ -14,7 +14,7 @@ uses
 type
  TmsLine = class(TmsPointedShape)
  private
-  FFinishPoint: TPointF;
+  f_FinishPoint: TPointF;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   constructor CreateInner(const aCtx: TmsMakeShapeContext); override;
@@ -23,7 +23,9 @@ type
   function GetFinishPointForDraw: TPointF; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; override;
   class function SamePoint(const A: TPointF; const B: TPointF): Boolean;
-  property FinishPoint : TPointF Read FFinishPoint write FFinishPoint;
+  property FinishPoint : TPointF
+   read f_FinishPoint
+   write f_FinishPoint;
  public
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
