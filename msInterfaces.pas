@@ -98,6 +98,14 @@ type
    constructor Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF; const aDiagrammsHolder : ImsDiagrammsHolder; const aShift: TShiftState);
  end;//TmsClickContext
 
+ TmsMoveContext = record
+  public
+   rStartPoint: TPointF;
+   rDelta: TPointF;
+   rShapesController: ImsShapesController;
+   constructor Create(const aStartPoint: TPointF; const aDelta: TPointF; const aShapesController: ImsShapesController);
+ end;//TmsMoveContext
+
  ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
@@ -245,6 +253,15 @@ begin
  rClickPoint := aClickPoint;
  rDiagrammsHolder := aDiagrammsHolder;
  rShift := aShift;
+end;
+
+// TmsMoveContext
+
+constructor TmsMoveContext.Create(const aStartPoint: TPointF; const aDelta: TPointF; const aShapesController: ImsShapesController);
+begin
+ rStartPoint := aStartPoint;
+ rDelta := aDelta;
+ rShapesController := aShapesController;
 end;
 
 end.
