@@ -123,8 +123,8 @@ begin
  else
  if SamePoint(Self.FinishPoint, aCtx.rStartPoint) then
   Self.FinishPoint := Self.FinishPoint + aCtx.rDelta
- else
-  raise EmsLineCannotBeMoved.Create('Примитив ' + ClassName + ' не может быть перемещён');
+(* else
+  raise EmsLineCannotBeMoved.Create('Примитив ' + ClassName + ' не может быть перемещён')*);
 end;
 
 class function TmsLine.CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
