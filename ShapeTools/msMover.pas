@@ -349,6 +349,7 @@ begin
    for l_FloatingButton in f_FloatingButtons do
     aCtx.rShapesController.RemoveShape(l_FloatingButton);
     // - надо удалить "плавающие кнопки".
+  FreeAndNil(f_FloatingButtons);
   aCtx.rShapesController.RemoveShape(Self);
   // - теперь надо —≈Ѕя удалить
  end;//Result
