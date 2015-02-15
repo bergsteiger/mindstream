@@ -234,14 +234,7 @@ end;
 
 procedure TmsMover.MoveMovingTo(const aPoint: TPointF);
 begin
- Assert(f_Moving <> nil);
- f_Moving.MoveTo(f_Point, aPoint);
- //f_Moving.MoveTo(f_Point, f_Moving.StartPoint + (aPoint - f_Point));
- //- так конечно правильнее, но для линии это НЕ РАБОТАЕТ
- //  Надо делать MoveBy
- // Хотя и БЕЗ MoveBy можно обойтись - вычисляя дельту внутри
- // Только тогда надо будет ещь про EndTo - не забыть, что там как раз НЕ дельта.
- f_Point := aPoint;
+ MoveTo(f_Point, aPoint);
 end;
 
 function TmsMover.pm_GetStartPoint: TPointF;
