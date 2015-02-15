@@ -109,7 +109,7 @@ begin
  Assert(f_FloatingButtons <> nil);
  Result := f_FloatingButtons.AddShape(
             aToolClass.Create(
-             Self{f_Moving},
+             {Self}f_Moving,
              TmsShapesGroup.Create([
               TmsFloatingButtonCircle.Create(aButton, cShift),
               aButton
