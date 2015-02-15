@@ -44,7 +44,7 @@ type
   procedure MouseMove(const aClickContext: TmsEndShapeContext); override;
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
   function GetDrawBounds: TRectF; override;
-  procedure MoveTo(const aStartPoint: TPointF; const aFinishPoint: TPointF); override;
+  procedure MoveBy(const aStartPoint: TPointF; const aDelta: TPointF); override;
   procedure MoveMovingTo(const aPoint: TPointF);
   function pm_GetStartPoint: TPointF; override;
   procedure SetStartPoint(const aStartPoint: TPointF); override;
@@ -219,22 +219,22 @@ begin
  Result := f_Moving.DrawBounds;
 end;
 
-procedure TmsMover.MoveTo(const aStartPoint: TPointF; const aFinishPoint: TPointF);
+procedure TmsMover.MoveBy(const aStartPoint: TPointF; const aDelta: TPointF);
 begin
  Assert(f_Moving <> nil);
- f_Moving.MoveTo(f_Point, aFinishPoint);
+ f_Moving.MoveBy(f_Point, aDelta);
  //f_Moving.MoveTo(f_Point, f_Moving.StartPoint + (aPoint - f_Point));
  //- так конечно правильнее, но для линии это НЕ РАБОТАЕТ
  //  Надо делать MoveBy
  // Хотя и БЕЗ MoveBy можно обойтись - вычисляя дельту внутри
  // Только тогда надо будет ещь про EndTo - не забыть, что там как раз НЕ дельта.
- f_Point := aFinishPoint;
- inherited;
+ f_Point := f_Point + aDelta;
+ //inherited;
 end;
 
 procedure TmsMover.MoveMovingTo(const aPoint: TPointF);
 begin
- MoveTo(f_Point, aPoint);
+ MoveBy(f_Point, aPoint - f_Point);
 end;
 
 function TmsMover.pm_GetStartPoint: TPointF;
