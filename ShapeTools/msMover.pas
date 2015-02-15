@@ -43,6 +43,8 @@ type
   procedure CreateFloatingButtons(const aController: ImsShapesController);
   procedure MouseMove(const aClickContext: TmsEndShapeContext); override;
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
+  function GetDrawBounds: TRectF; override;
+  procedure MoveTo(const aStartPoint: TPointF; const aFinishPoint: TPointF); override;
   procedure MoveMovingTo(const aPoint: TPointF);
   function pm_GetStartPoint: TPointF; override;
   procedure SetStartPoint(const aStartPoint: TPointF); override;
@@ -107,7 +109,7 @@ begin
  Assert(f_FloatingButtons <> nil);
  Result := f_FloatingButtons.AddShape(
             aToolClass.Create(
-             f_Moving,
+             Self{f_Moving},
              TmsShapesGroup.Create([
               TmsFloatingButtonCircle.Create(aButton, cShift),
               aButton
@@ -209,6 +211,25 @@ begin
                                   // Тогда починятся:
                                   // https://bitbucket.org/ingword/mindstream/issue/143/tmsline
                                   // https://bitbucket.org/ingword/mindstream/issue/145/------------------------------
+end;
+
+function TmsMover.GetDrawBounds: TRectF;
+begin
+ Assert(f_Moving <> nil);
+ Result := f_Moving.DrawBounds;
+end;
+
+procedure TmsMover.MoveTo(const aStartPoint: TPointF; const aFinishPoint: TPointF);
+begin
+ Assert(f_Moving <> nil);
+ f_Moving.MoveTo(f_Point, aFinishPoint);
+ //f_Moving.MoveTo(f_Point, f_Moving.StartPoint + (aPoint - f_Point));
+ //- так конечно правильнее, но для линии это НЕ РАБОТАЕТ
+ //  Надо делать MoveBy
+ // Хотя и БЕЗ MoveBy можно обойтись - вычисляя дельту внутри
+ // Только тогда надо будет ещь про EndTo - не забыть, что там как раз НЕ дельта.
+ f_Point := aFinishPoint;
+ inherited;
 end;
 
 procedure TmsMover.MoveMovingTo(const aPoint: TPointF);
