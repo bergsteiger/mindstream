@@ -33,6 +33,17 @@ type
   procedure Cleanup; override;
  end;//TmsProxyShape
 
+ TmsWeakProxyShape = class(TmsProxyShapePrim)
+ private
+  f_Shape : Pointer;
+ protected
+  function ShapeToShow: ImsShape; override;
+  constructor CreateInner(const aShape: ImsShape); reintroduce;
+ public
+  class function Create(const aShape: ImsShape): ImsShape;
+  procedure Cleanup; override;
+ end;//TmsWeakProxyShape
+
 implementation
 
 uses
@@ -60,6 +71,31 @@ begin
 end;
 
 procedure TmsProxyShape.Cleanup;
+begin
+ f_Shape := nil;
+ inherited;
+end;
+
+// TmsWeakProxyShape
+
+class function TmsWeakProxyShape.Create(const aShape: ImsShape): ImsShape;
+begin
+ Result := CreateInner(aShape);
+end;
+
+constructor TmsWeakProxyShape.CreateInner(const aShape: ImsShape);
+begin
+ Assert(aShape <> nil, 'Пустую группу примитивов глупо создавать');
+ inherited CreateInner(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+ f_Shape := Pointer(aShape);
+end;
+
+function TmsWeakProxyShape.ShapeToShow: ImsShape;
+begin
+ Result := ImsShape(f_Shape);
+end;
+
+procedure TmsWeakProxyShape.Cleanup;
 begin
  f_Shape := nil;
  inherited;
