@@ -23,6 +23,7 @@ type
   function pm_GetStartPoint: TPointF; override;
   function pm_GetFinishPoint: TPointF; override;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
+  procedure MoveBy(const aCtx: TmsMoveContext); override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
  end;//TmsConnector
 
@@ -66,6 +67,11 @@ begin
  if (f_RightShape <> nil) AND f_RightShape.HitTest(aPoint, theShape) then
   Exit;
  Result := inherited;
+end;
+
+procedure TmsConnector.MoveBy(const aCtx: TmsMoveContext);
+begin
+ inherited;
 end;
 
 function TmsConnector.EndTo(const aCtx: TmsEndShapeContext): Boolean;
