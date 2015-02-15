@@ -33,7 +33,7 @@ type
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   function IsNeedsSecondClick : Boolean; virtual;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; virtual;
-  procedure MoveTo(const aStartPoint: TPointF; const aFinishPoint: TPointF); virtual;
+  procedure MoveBy(const aStartPoint: TPointF; const aDelta: TPointF); virtual;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
   procedure SaveTo(const aFileName: String); override;
@@ -136,9 +136,9 @@ begin
  // Ничего не делаем, специально
 end;
 
-procedure TmsShape.MoveTo(const aStartPoint: TPointF; const aFinishPoint: TPointF);
+procedure TmsShape.MoveBy(const aStartPoint: TPointF; const aDelta: TPointF);
 begin
- SetStartPoint(aFinishPoint);
+ SetStartPoint(StartPoint + aDelta);
 end;
 
 function TmsShape.MouseUp(const aClickContext: TmsEndShapeContext): Boolean;

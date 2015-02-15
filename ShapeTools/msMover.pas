@@ -43,6 +43,8 @@ type
   procedure CreateFloatingButtons(const aController: ImsShapesController);
   procedure MouseMove(const aClickContext: TmsEndShapeContext); override;
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
+  function GetDrawBounds: TRectF; override;
+  procedure MoveBy(const aStartPoint: TPointF; const aDelta: TPointF); override;
   procedure MoveMovingTo(const aPoint: TPointF);
   function pm_GetStartPoint: TPointF; override;
   procedure SetStartPoint(const aStartPoint: TPointF); override;
@@ -107,7 +109,7 @@ begin
  Assert(f_FloatingButtons <> nil);
  Result := f_FloatingButtons.AddShape(
             aToolClass.Create(
-             f_Moving,
+             TmsWeakProxyShape.Create(Self){Self}{f_Moving},
              TmsShapesGroup.Create([
               TmsFloatingButtonCircle.Create(aButton, cShift),
               aButton
@@ -211,16 +213,28 @@ begin
                                   // https://bitbucket.org/ingword/mindstream/issue/145/------------------------------
 end;
 
-procedure TmsMover.MoveMovingTo(const aPoint: TPointF);
+function TmsMover.GetDrawBounds: TRectF;
 begin
  Assert(f_Moving <> nil);
- f_Moving.MoveTo(f_Point, aPoint);
+ Result := f_Moving.DrawBounds;
+end;
+
+procedure TmsMover.MoveBy(const aStartPoint: TPointF; const aDelta: TPointF);
+begin
+ Assert(f_Moving <> nil);
+ f_Moving.MoveBy(f_Point, aDelta);
  //f_Moving.MoveTo(f_Point, f_Moving.StartPoint + (aPoint - f_Point));
  //- так конечно правильнее, но для линии это НЕ РАБОТАЕТ
  //  Надо делать MoveBy
  // Хотя и БЕЗ MoveBy можно обойтись - вычисляя дельту внутри
  // Только тогда надо будет ещь про EndTo - не забыть, что там как раз НЕ дельта.
- f_Point := aPoint;
+ f_Point := f_Point + aDelta;
+ //inherited;
+end;
+
+procedure TmsMover.MoveMovingTo(const aPoint: TPointF);
+begin
+ MoveBy(f_Point, aPoint - f_Point);
 end;
 
 function TmsMover.pm_GetStartPoint: TPointF;
@@ -328,6 +342,7 @@ begin
    for l_FloatingButton in f_FloatingButtons do
     aCtx.rShapesController.RemoveShape(l_FloatingButton);
     // - надо удалить "плавающие кнопки".
+  FreeAndNil(f_FloatingButtons);
   aCtx.rShapesController.RemoveShape(Self);
   // - теперь надо СЕБЯ удалить
  end;//Result
