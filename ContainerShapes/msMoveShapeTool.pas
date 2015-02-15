@@ -4,6 +4,7 @@ interface
 
 uses
  System.Types,
+ msInterfaces,
  msShapeTool
  ;
 
@@ -22,7 +23,7 @@ implementation
 
 procedure TmsMoveShapeTool.ProcessClickInDiagramm;
 begin
- ShapeToDeal.MoveBy(ShapeToDeal.StartPoint, Delta);
+ ShapeToDeal.MoveBy(TmsMoveContext.Create(ShapeToDeal.StartPoint, Delta, nil));
  // Тут надо доделать:
  //  https://bitbucket.org/ingword/mindstream/issue/143/tmsline
 end;

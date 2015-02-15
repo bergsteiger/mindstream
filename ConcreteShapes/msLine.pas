@@ -30,7 +30,7 @@ type
  public
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
-  procedure MoveBy(const aStartPoint: TPointF; const aDelta: TPointF); override;
+  procedure MoveBy(const aCtx: TmsMoveContext); override;
   class function CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
  end;//TmsLine
 
@@ -116,13 +116,13 @@ begin
  FinishPoint := aCtx.rStartPoint;
 end;
 
-procedure TmsLine.MoveBy(const aStartPoint: TPointF; const aDelta: TPointF);
+procedure TmsLine.MoveBy(const aCtx: TmsMoveContext);
 begin
- if SamePoint(Self.StartPoint, aStartPoint) then
-  Self.SetStartPoint(Self.StartPoint + aDelta)
+ if SamePoint(Self.StartPoint, aCtx.rStartPoint) then
+  Self.SetStartPoint(Self.StartPoint + aCtx.rDelta)
  else
- if SamePoint(Self.FinishPoint, aStartPoint) then
-  Self.FinishPoint := Self.FinishPoint + aDelta
+ if SamePoint(Self.FinishPoint, aCtx.rStartPoint) then
+  Self.FinishPoint := Self.FinishPoint + aCtx.rDelta
  else
   raise EmsLineCannotBeMoved.Create('Примитив ' + ClassName + ' не может быть перемещён');
 end;

@@ -113,7 +113,7 @@ type
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
-  procedure MoveBy(const aStartPoint: TPointF; const aDelta: TPointF);
+  procedure MoveBy(const aCtx: TmsMoveContext);
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function ClickInDiagramm: Boolean;
   // - ткнули в примитив внутри диаграммы
