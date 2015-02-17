@@ -123,6 +123,8 @@ end;
 // TmsConnectorDrawTest
 
 procedure TmsConnectorDrawTest.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
+const
+ cDelta = 10;
 var
  l_PrevShape : ImsShape;
  l_Shape : ImsShape;
@@ -138,8 +140,8 @@ begin
    if (l_PrevShape <> nil) then
    begin
     // тут надо будет коннектор создать
-    l_A := l_PrevShape.StartPoint;
-    l_B := l_Shape.StartPoint;
+    l_A := l_PrevShape.StartPoint + TPointF.Create(cDelta, -cDelta);
+    l_B := l_Shape.StartPoint + TPointF.Create(-cDelta, cDelta);
     l_Connector := TmsConnector.CreateCompleted(l_A, l_B);
     aDiagramm.AddShape(l_Connector);
     l_PrevShape := nil;
