@@ -130,7 +130,13 @@ begin
  l_PrevShape := nil;
  for l_Shape in aDiagramm do
  begin
-
+  if (l_PrevShape <> nil) then
+  begin
+   // тут надо будет коннектор создать
+   l_PrevShape := nil;
+  end//l_PrevShape <> nil
+  else
+   l_PrevShape := l_Shape;
  end;//for l_Shape
  inherited;
 end;
