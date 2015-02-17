@@ -48,7 +48,7 @@ function TTestSaveToPNG.InnerFolders: String;
 const
  c_PNG = 'PNG\';
 begin
- Result := c_PNG + String(ComputerName) + '\';
+ Result := c_PNG + ClassName + '\' + String(ComputerName) + '\';
 end;
 
 end.
