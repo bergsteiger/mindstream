@@ -32,6 +32,8 @@ type
 
   TmsConnectorDrawTest = class(TTestSaveToPNG)
    // https://bitbucket.org/ingword/mindstream/issue/167/connector
+  protected
+   procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); override;
   end;//TmsConnectorDrawTest
 
 implementation
@@ -116,6 +118,13 @@ end;
 class function TmsMoverFloatingButtonsTest.Create(aButton : TmsFloatingButton; const aContext: TmsShapeTestContext): ITest;
 begin
  Result := CreateInner(aButton, aContext);
+end;
+
+// TmsConnectorDrawTest
+
+procedure TmsConnectorDrawTest.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
+begin
+ inherited;
 end;
 
 end.
