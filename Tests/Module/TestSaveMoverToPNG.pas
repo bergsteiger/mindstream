@@ -130,7 +130,7 @@ var
  l_B : TPointF;
  l_Connector : ImsShape;
 begin
- //if not f_Context.ShapeClass.IsLineLike then
+ if not f_Context.ShapeClass.IsLineLike then
  begin
   l_PrevShape := nil;
   for l_Shape in aDiagramm do
