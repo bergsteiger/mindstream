@@ -126,6 +126,8 @@ procedure TmsConnectorDrawTest.SaveDiagramm(const aFileName: String; const aDiag
 var
  l_PrevShape : ImsShape;
  l_Shape : ImsShape;
+ l_A : TPointF;
+ l_B : TPointF;
 begin
  l_PrevShape := nil;
  for l_Shape in aDiagramm do
@@ -133,6 +135,8 @@ begin
   if (l_PrevShape <> nil) then
   begin
    // тут надо будет коннектор создать
+   l_A := l_PrevShape.StartPoint;
+   l_B := l_Shape.StartPoint;
    l_PrevShape := nil;
   end//l_PrevShape <> nil
   else
