@@ -139,6 +139,7 @@ begin
    l_A := l_PrevShape.StartPoint;
    l_B := l_Shape.StartPoint;
    l_Connector := TmsConnector.CreateCompleted(l_A, l_B);
+   aDiagramm.AddShape(l_Connector);
    l_PrevShape := nil;
   end//l_PrevShape <> nil
   else
