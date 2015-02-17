@@ -160,6 +160,7 @@ type
  ImsShapeClass = interface
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
+  function IsLineLike: Boolean;
   function Creator: ImsShapeCreator;
   function Name: String;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);

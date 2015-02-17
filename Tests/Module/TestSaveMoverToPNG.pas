@@ -130,21 +130,24 @@ var
  l_B : TPointF;
  l_Connector : ImsShape;
 begin
- l_PrevShape := nil;
- for l_Shape in aDiagramm do
+ //if not f_Context.ShapeClass.IsLineLike then
  begin
-  if (l_PrevShape <> nil) then
+  l_PrevShape := nil;
+  for l_Shape in aDiagramm do
   begin
-   // тут надо будет коннектор создать
-   l_A := l_PrevShape.StartPoint;
-   l_B := l_Shape.StartPoint;
-   l_Connector := TmsConnector.CreateCompleted(l_A, l_B);
-   aDiagramm.AddShape(l_Connector);
-   l_PrevShape := nil;
-  end//l_PrevShape <> nil
-  else
-   l_PrevShape := l_Shape;
- end;//for l_Shape
+   if (l_PrevShape <> nil) then
+   begin
+    // тут надо будет коннектор создать
+    l_A := l_PrevShape.StartPoint;
+    l_B := l_Shape.StartPoint;
+    l_Connector := TmsConnector.CreateCompleted(l_A, l_B);
+    aDiagramm.AddShape(l_Connector);
+    l_PrevShape := nil;
+   end//l_PrevShape <> nil
+   else
+    l_PrevShape := l_Shape;
+  end;//for l_Shape
+ end;//not f_Context.ShapeClass.IsLineLike
  inherited;
 end;
 
