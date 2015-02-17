@@ -33,6 +33,7 @@ type
   TmsConnectorDrawTest = class(TTestSaveToPNG)
    // https://bitbucket.org/ingword/mindstream/issue/167/connector
   protected
+   procedure TransformContext(var theContext: TmsShapeTestContext); override;
    procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); override;
   end;//TmsConnectorDrawTest
 
@@ -121,6 +122,12 @@ begin
 end;
 
 // TmsConnectorDrawTest
+
+procedure TmsConnectorDrawTest.TransformContext(var theContext: TmsShapeTestContext);
+begin
+ inherited;
+ //theContext.rShapesCount := 1;
+end;
 
 procedure TmsConnectorDrawTest.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 const
