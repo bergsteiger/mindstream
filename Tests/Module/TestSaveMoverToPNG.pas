@@ -123,7 +123,15 @@ end;
 // TmsConnectorDrawTest
 
 procedure TmsConnectorDrawTest.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
+var
+ l_PrevShape : ImsShape;
+ l_Shape : ImsShape;
 begin
+ l_PrevShape := nil;
+ for l_Shape in aDiagramm do
+ begin
+
+ end;//for l_Shape
  inherited;
 end;
 
