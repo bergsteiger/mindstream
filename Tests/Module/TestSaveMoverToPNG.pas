@@ -30,7 +30,9 @@ type
    class function Create(aButton : TmsFloatingButton; const aContext: TmsShapeTestContext): ITest;
   end;//TmsMoverFloatingButtonsTest
 
-  // тут будет https://bitbucket.org/ingword/mindstream/issue/167/connector
+  TmsConnectorDrawTest = class(TTestSaveToPNG)
+   // https://bitbucket.org/ingword/mindstream/issue/167/connector
+  end;//TmsConnectorDrawTest
 
 implementation
 
@@ -38,7 +40,9 @@ uses
   System.Types,
 
   msRegisteredShapes,
-  TypInfo
+  TypInfo,
+
+  msConnector
   ;
 
 // TTestSaveMoverToPNG
