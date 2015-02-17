@@ -128,6 +128,7 @@ var
  l_Shape : ImsShape;
  l_A : TPointF;
  l_B : TPointF;
+ l_Connector : ImsShape;
 begin
  l_PrevShape := nil;
  for l_Shape in aDiagramm do
@@ -137,6 +138,7 @@ begin
    // тут надо будет коннектор создать
    l_A := l_PrevShape.StartPoint;
    l_B := l_Shape.StartPoint;
+   l_Connector := TmsConnector.CreateCompleted(l_A, l_B);
    l_PrevShape := nil;
   end//l_PrevShape <> nil
   else
