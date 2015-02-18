@@ -162,7 +162,8 @@ begin
      l_Delta := cDelta;
      l_B := l_Shape.StartPoint + TPointF.Create(-l_Delta, l_Delta);
      l_Connector := TmsConnector.CreateCompleted(l_A, l_B, aDiagramm.ShapesController);
-     aDiagramm.AddShape(l_Connector);
+     l_List.Add(l_Connector);
+     //aDiagramm.AddShape(l_Connector);
      l_Connector := nil;
      //l_PrevShape := l_Shape;
      l_PrevShape := nil;
