@@ -150,7 +150,7 @@ begin
     // тут надо будет коннектор создать
     l_A := l_PrevShape.StartPoint + TPointF.Create(cDelta, -cDelta);
     l_B := l_Shape.StartPoint + TPointF.Create(-cDelta, cDelta);
-    l_Connector := TmsConnector.CreateCompleted(l_A, l_B);
+    l_Connector := TmsConnector.CreateCompleted(l_A, l_B, aDiagramm.ShapesController);
     aDiagramm.AddShape(l_Connector);
     l_PrevShape := nil;
    end//l_PrevShape <> nil
