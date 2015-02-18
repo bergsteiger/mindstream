@@ -40,6 +40,9 @@ begin
 end;
 
 procedure TmsLineCrossTest.DoIt;
+var
+ l_IsCross : Boolean;
+ l_Cross : TmsPointF;
 begin
  OutToFileAndCheck(
   procedure (aLog: TmsLog)
@@ -48,7 +51,10 @@ begin
    f_L1.ToLog(aLog);
    aLog.ToLog('L2:');
    f_L2.ToLog(aLog);
-   aLog.ToLog('failed');
+   aLog.ToLog('Result:');
+   l_IsCross := f_L1.Cross(f_L2, l_Cross);
+   aLog.ToLog(BoolToStr(l_IsCross));
+   l_Cross.ToLog(aLog);
   end
  );
 end;
