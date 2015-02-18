@@ -137,7 +137,7 @@ type
 
 procedure TmsConnectorDrawTest.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 const
- cDelta = 10;
+ cDelta = 10{20};
 var
  l_PrevShape : ImsShape;
  l_Shape : ImsShape;
