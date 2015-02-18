@@ -33,6 +33,8 @@ type
   procedure ToLog(aLog: TmsLog);
   function ToString: String;
   function Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
+  constructor Create(const aA: TmsPointF; const aB: TmsPointF); overload;
+  constructor Create(aAX, aAY: Pixel; aBX, aBY: Pixel); overload;
  end;//TmsLineF
 
  TmsLineFPair = record
@@ -111,6 +113,17 @@ function TmsLineF.Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boole
 begin
  Result := false;
  theCross := TmsPointF.Create(High(Integer), High(Integer));
+end;
+
+constructor TmsLineF.Create(const aA: TmsPointF; const aB: TmsPointF);
+begin
+ A := aA;
+ B := aB;
+end;
+
+constructor TmsLineF.Create(aAX, aAY: Pixel; aBX, aBY: Pixel);
+begin
+ Create(TmsPointF.Create(aAX, aAY), TmsPointF.Create(aBX, aBY));
 end;
 
 // TmsLineFPair
