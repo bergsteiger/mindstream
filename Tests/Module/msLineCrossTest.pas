@@ -3,6 +3,8 @@ unit msLineCrossTest;
 interface
 
 uses
+ TestFrameWork,
+
  msLoggedTest,
  msLineF
  ;
@@ -15,14 +17,29 @@ type
  protected
   function InnerFolders: String; override;
   function  GetName: string; override;
+  constructor CreateInner(const aTestName: String);
+ public
+  class function Create(const aTestName: String): ITest;
  published
   procedure DoIt;
  end;//TmsLineCrossTest
 
+ RmsLineCrossTest = class of TmsLineCrossTest;
+
+type
+  TmsLineCrossTestSuite = class(TTestSuite)
+  private
+   constructor CreatePrim(aTestClass : RmsLineCrossTest);
+  public
+   procedure AddTests(testClass: TTestCaseClass); override;
+   class function Create(aTestClass : RmsLineCrossTest): ITest;
+  end;//TmsLineCrossTestSuite
+
 implementation
 
 uses
- TestFrameWork,
+ System.TypInfo,
+ System.Rtti,
 
  FMX.DUnit.msLog
  ;
@@ -37,6 +54,16 @@ end;
 function TmsLineCrossTest.GetName: string;
 begin
  Result := f_L1.ToString + '_' + f_L2.ToString + '_' + inherited GetName;
+end;
+
+constructor TmsLineCrossTest.CreateInner(const aTestName: String);
+begin
+ inherited Create(aTestName);
+end;
+
+class function TmsLineCrossTest.Create(const aTestName: String): ITest;
+begin
+ Result := CreateInner(aTestName);
 end;
 
 procedure TmsLineCrossTest.DoIt;
@@ -57,6 +84,31 @@ begin
    l_Cross.ToLog(aLog);
   end
  );
+end;
+
+// TmsLineCrossTestSuite
+
+constructor TmsLineCrossTestSuite.CreatePrim(aTestClass : RmsLineCrossTest);
+begin
+ inherited Create(aTestClass);
+end;
+
+class function TmsLineCrossTestSuite.Create(aTestClass : RmsLineCrossTest): ITest;
+begin
+ Result := CreatePrim(aTestClass);
+end;
+
+procedure TmsLineCrossTestSuite.AddTests(testClass: TTestCaseClass);
+var
+ l_Method: TRttiMethod;
+begin
+ Assert(testClass.InheritsFrom(TmsLineCrossTest));
+
+ for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
+  if (l_Method.Visibility = mvPublished) then
+  begin
+   AddTest(TmsLineCrossTest(testClass).Create((l_Method.Name)));
+  end;//l_Method.Visibility = mvPublished
 end;
 
 initialization
