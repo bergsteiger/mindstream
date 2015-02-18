@@ -12,6 +12,8 @@ type
  private
   f_L1 : TmsLineF;
   f_L2 : TmsLineF;
+ protected
+  function InnerFolders: String; override;
  published
   procedure DoIt;
  end;//TmsLineCrossTest
@@ -23,6 +25,13 @@ uses
 
  FMX.DUnit.msLog
  ;
+
+// TmsLineCrossTest
+
+function TmsLineCrossTest.InnerFolders: String;
+begin
+ Result := ClassName + '\';
+end;
 
 procedure TmsLineCrossTest.DoIt;
 begin
