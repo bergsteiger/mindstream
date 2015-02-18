@@ -3,11 +3,15 @@ unit msLineCrossTest;
 interface
 
 uses
- msLoggedTest
+ msLoggedTest,
+ msLineF
  ;
 
 type
  TmsLineCrossTest = class(TmsLoggedTest)
+ private
+  f_L1 : TmsLineF;
+  f_L2 : TmsLineF;
  published
   procedure DoIt;
  end;//TmsLineCrossTest
