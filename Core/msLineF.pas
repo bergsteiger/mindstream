@@ -32,6 +32,7 @@ type
   B : TmsPointF;
   procedure ToLog(aLog: TmsLog);
   function ToString: String;
+  function Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
  end;//TmsLineF
 
 implementation
@@ -95,6 +96,12 @@ end;
 function TmsLineF.ToString: String;
 begin
  Result := A.ToString + '_' + B.ToString;
+end;
+
+function TmsLineF.Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
+begin
+ Result := false;
+ theCross := TmsPointF.Create(High(Integer), High(Integer));
 end;
 
 end.
