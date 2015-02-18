@@ -15,12 +15,19 @@ type
 implementation
 
 uses
- TestFrameWork
+ TestFrameWork,
+
+ FMX.DUnit.msLog
  ;
 
 procedure TmsLineCrossTest.DoIt;
 begin
- CheckTrue(false);
+ OutToFileAndCheck(
+  procedure (aLog: TmsLog)
+  begin
+   aLog.ToLog('failed');
+  end
+ );
 end;
 
 initialization
