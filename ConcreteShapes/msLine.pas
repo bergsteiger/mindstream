@@ -30,8 +30,8 @@ type
  public
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
-  procedure MoveBy(const aStartPoint: TPointF; const aDelta: TPointF); override;
-  class function CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
+  procedure MoveBy(const aCtx: TmsMoveContext); override;
+  class function CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF; const aShapesController: ImsShapesController): ImsShape;
  end;//TmsLine
 
  EmsLineCannotBeMoved = class(Exception)
@@ -116,21 +116,21 @@ begin
  FinishPoint := aCtx.rStartPoint;
 end;
 
-procedure TmsLine.MoveBy(const aStartPoint: TPointF; const aDelta: TPointF);
+procedure TmsLine.MoveBy(const aCtx: TmsMoveContext);
 begin
- if SamePoint(Self.StartPoint, aStartPoint) then
-  Self.SetStartPoint(Self.StartPoint + aDelta)
+ if SamePoint(Self.StartPoint, aCtx.rStartPoint) then
+  Self.SetStartPoint(Self.StartPoint + aCtx.rDelta)
  else
- if SamePoint(Self.FinishPoint, aStartPoint) then
-  Self.FinishPoint := Self.FinishPoint + aDelta
- else
-  raise EmsLineCannotBeMoved.Create('Примитив ' + ClassName + ' не может быть перемещён');
+ if SamePoint(Self.FinishPoint, aCtx.rStartPoint) then
+  Self.FinishPoint := Self.FinishPoint + aCtx.rDelta
+(* else
+  raise EmsLineCannotBeMoved.Create('Примитив ' + ClassName + ' не может быть перемещён')*);
 end;
 
-class function TmsLine.CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
+class function TmsLine.CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF; const aShapesController: ImsShapesController): ImsShape;
 begin
- Result := Self.Create(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
- Result.EndTo(TmsEndShapeContext.Create(aFinishPoint, nil, nil));
+ Result := Self.Create(TmsMakeShapeContext.Create(aStartPoint, aShapesController, nil));
+ Result.EndTo(TmsEndShapeContext.Create(aFinishPoint, aShapesController, nil));
 end;
 
 procedure TmsLine.DoDrawTo(const aCtx: TmsDrawContext);

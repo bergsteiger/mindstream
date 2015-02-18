@@ -45,10 +45,8 @@ begin
 end;
 
 function TTestSaveToPNG.InnerFolders: String;
-const
- c_PNG = 'PNG\';
 begin
- Result := c_PNG + String(ComputerName) + '\';
+ Result := String(ComputerName) + '\' + 'PNG' + '\' + ClassName + '\';
 end;
 
 end.

@@ -72,7 +72,7 @@ var
 begin
   //ExpectedException := EmsLineCannotBeMoved;
   // TODO: Setup method call parameters
-  FmsLine.MoveBy(TPointF.Create(0, 0), TPointF.Create(100, 100));
+  FmsLine.MoveBy(TmsMoveContext.Create(TPointF.Create(0, 0), TPointF.Create(100, 100), nil));
   // TODO: Validate method results
 end;
 

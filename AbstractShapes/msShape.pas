@@ -33,7 +33,7 @@ type
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   function IsNeedsSecondClick : Boolean; virtual;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; virtual;
-  procedure MoveBy(const aStartPoint: TPointF; const aDelta: TPointF); virtual;
+  procedure MoveBy(const aCtx: TmsMoveContext); virtual;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; virtual;
   procedure SaveTo(const aFileName: String); override;
@@ -68,8 +68,8 @@ type
   // - ткнули в примитив внутри диаграммы
   function GetDrawBounds: TRectF; virtual;
   function DrawBounds: TRectF;
-  class function IsLineLike: Boolean; virtual;
  public
+  class function IsLineLike: Boolean; virtual;
   procedure DrawTo(const aCtx: TmsDrawContext); virtual;
   property StartPoint : TPointF
    read pm_GetStartPoint;
@@ -136,9 +136,9 @@ begin
  // Ничего не делаем, специально
 end;
 
-procedure TmsShape.MoveBy(const aStartPoint: TPointF; const aDelta: TPointF);
+procedure TmsShape.MoveBy(const aCtx: TmsMoveContext);
 begin
- SetStartPoint(StartPoint + aDelta);
+ SetStartPoint(StartPoint + aCtx.rDelta);
 end;
 
 function TmsShape.MouseUp(const aClickContext: TmsEndShapeContext): Boolean;

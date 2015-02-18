@@ -44,8 +44,8 @@ type
   procedure MouseMove(const aClickContext: TmsEndShapeContext); override;
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
   function GetDrawBounds: TRectF; override;
-  procedure MoveBy(const aStartPoint: TPointF; const aDelta: TPointF); override;
-  procedure MoveMovingTo(const aPoint: TPointF);
+  procedure MoveBy(const aCtx: TmsMoveContext); override;
+  procedure MoveMovingTo(const aPoint: TPointF; const aShapesController: ImsShapesController);
   function pm_GetStartPoint: TPointF; override;
   procedure SetStartPoint(const aStartPoint: TPointF); override;
  public
@@ -219,22 +219,22 @@ begin
  Result := f_Moving.DrawBounds;
 end;
 
-procedure TmsMover.MoveBy(const aStartPoint: TPointF; const aDelta: TPointF);
+procedure TmsMover.MoveBy(const aCtx: TmsMoveContext);
 begin
  Assert(f_Moving <> nil);
- f_Moving.MoveBy(f_Point, aDelta);
+ f_Moving.MoveBy(TmsMoveContext.Create(f_Point, aCtx.rDelta, aCtx.rShapesController));
  //f_Moving.MoveTo(f_Point, f_Moving.StartPoint + (aPoint - f_Point));
  //- так конечно правильнее, но для линии это НЕ РАБОТАЕТ
  //  Надо делать MoveBy
  // Хотя и БЕЗ MoveBy можно обойтись - вычисляя дельту внутри
  // Только тогда надо будет ещь про EndTo - не забыть, что там как раз НЕ дельта.
- f_Point := f_Point + aDelta;
+ f_Point := f_Point + aCtx.rDelta;
  //inherited;
 end;
 
-procedure TmsMover.MoveMovingTo(const aPoint: TPointF);
+procedure TmsMover.MoveMovingTo(const aPoint: TPointF; const aShapesController: ImsShapesController);
 begin
- MoveBy(f_Point, aPoint - f_Point);
+ MoveBy(TmsMoveContext.Create(f_Point, aPoint - f_Point, aShapesController));
 end;
 
 function TmsMover.pm_GetStartPoint: TPointF;
@@ -252,7 +252,7 @@ begin
  if (f_FloatingButtons = nil) then
  begin
   f_WasMoved := true;
-  MoveMovingTo(aClickContext.rStartPoint);
+  MoveMovingTo(aClickContext.rStartPoint, aClickContext.rShapesController);
   aClickContext.rShapesController.Invalidate;
  end;//f_FloatingButtons = nil
 end;
@@ -333,7 +333,7 @@ begin
    end;//l_ShapeOnPoint.ClickInDiagramm
   if not f_WasMoved then
    if Result then
-    MoveMovingTo(aCtx.rStartPoint);
+    MoveMovingTo(aCtx.rStartPoint, aCtx.rShapesController);
  end;//f_Moving <> nil
  if Result then
  begin

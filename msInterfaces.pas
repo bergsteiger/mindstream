@@ -98,6 +98,14 @@ type
    constructor Create(const aShapeCreator: ImsShapeCreator; const aClickPoint: TPointF; const aDiagrammsHolder : ImsDiagrammsHolder; const aShift: TShiftState);
  end;//TmsClickContext
 
+ TmsMoveContext = record
+  public
+   rStartPoint: TPointF;
+   rDelta: TPointF;
+   rShapesController: ImsShapesController;
+   constructor Create(const aStartPoint: TPointF; const aDelta: TPointF; const aShapesController: ImsShapesController);
+ end;//TmsMoveContext
+
  ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
@@ -105,7 +113,7 @@ type
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
-  procedure MoveBy(const aStartPoint: TPointF; const aDelta: TPointF);
+  procedure MoveBy(const aCtx: TmsMoveContext);
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function ClickInDiagramm: Boolean;
   // - ткнули в примитив внутри диаграммы
@@ -152,6 +160,7 @@ type
  ImsShapeClass = interface
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
+  function IsLineLike: Boolean;
   function Creator: ImsShapeCreator;
   function Name: String;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
@@ -245,6 +254,15 @@ begin
  rClickPoint := aClickPoint;
  rDiagrammsHolder := aDiagrammsHolder;
  rShift := aShift;
+end;
+
+// TmsMoveContext
+
+constructor TmsMoveContext.Create(const aStartPoint: TPointF; const aDelta: TPointF; const aShapesController: ImsShapesController);
+begin
+ rStartPoint := aStartPoint;
+ rDelta := aDelta;
+ rShapesController := aShapesController;
 end;
 
 end.

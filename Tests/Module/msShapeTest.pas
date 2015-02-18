@@ -27,6 +27,7 @@ type
    rShapesCount : Integer;
    rShapeClass: Pointer;
    constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; const aShapeClass: MCmsShape);
+   function ShapeClass: ImsShapeClass;
   end;//TmsShapeTestContext
 
   TmsAddTestLambda = reference to procedure (ATest: ITest);
@@ -108,7 +109,7 @@ implementation
 
 function TmsShapeTestPrim.ShapeClass: MCmsShape;
 begin
- Result := MCmsShape(f_Context.rShapeClass);
+ Result := f_Context.ShapeClass;
 end;
 
 function TmsShapeTestPrim.TestNamePrefix: String;
@@ -155,6 +156,11 @@ begin
  rDiagrammName := aDiagrammName;
  rShapesCount := aShapesCount;
  rShapeClass := Pointer(aShapeClass);
+end;
+
+function TmsShapeTestContext.ShapeClass: ImsShapeClass;
+begin
+ Result := ImsShapeClass(rShapeClass);
 end;
 
 procedure TmsShapeTestPrim.SetUp;

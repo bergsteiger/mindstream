@@ -19,7 +19,7 @@ type
   function GetDrawBounds: TRectF; override;
   function pm_GetStartPoint: TPointF; override;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
-  procedure MoveBy(const aStartPoint: TPointF; const aDelta: TPointF); override;
+  procedure MoveBy(const aCtx: TmsMoveContext); override;
   function ShapeToShow: ImsShape; virtual; abstract;
  end;//TmsProxyShapePrim
 
@@ -133,10 +133,10 @@ begin
   theShape := Self;
 end;
 
-procedure TmsProxyShapePrim.MoveBy(const aStartPoint: TPointF; const aDelta: TPointF);
+procedure TmsProxyShapePrim.MoveBy(const aCtx: TmsMoveContext);
 begin
  Assert(ShapeToShow <> nil);
- ShapeToShow.MoveBy(aStartPoint, aDelta);
+ ShapeToShow.MoveBy(aCtx);
 end;
 
 end.

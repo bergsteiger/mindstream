@@ -17,6 +17,7 @@ type
  protected
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
+  function IsLineLike: Boolean;
   function Creator: ImsShapeCreator;
   function Name: String;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
@@ -58,6 +59,12 @@ function TmsShapeClass.IsTool: Boolean;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.IsTool;
+end;
+
+function TmsShapeClass.IsLineLike: Boolean;
+begin
+ Assert(f_ShapeClass <> nil);
+ Result := f_ShapeClass.IsLineLike;
 end;
 
 function TmsShapeClass.Creator: ImsShapeCreator;
