@@ -139,6 +139,7 @@ var
  l_A : TPointF;
  l_B : TPointF;
  l_Connector : ImsShape;
+ l_Delta: Extended;
 begin
  if not f_Context.ShapeClass.IsLineLike then
  begin
@@ -148,8 +149,10 @@ begin
    if (l_PrevShape <> nil) then
    begin
     // тут надо будет коннектор создать
-    l_A := l_PrevShape.StartPoint + TPointF.Create(cDelta, -cDelta);
-    l_B := l_Shape.StartPoint + TPointF.Create(-cDelta, cDelta);
+    l_Delta := cDelta;
+    l_A := l_PrevShape.StartPoint + TPointF.Create(l_Delta, -l_Delta);
+    l_Delta := cDelta;
+    l_B := l_Shape.StartPoint + TPointF.Create(-l_Delta, l_Delta);
     l_Connector := TmsConnector.CreateCompleted(l_A, l_B, aDiagramm.ShapesController);
     aDiagramm.AddShape(l_Connector);
     l_PrevShape := nil;
