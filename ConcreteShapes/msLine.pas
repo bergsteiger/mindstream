@@ -129,7 +129,7 @@ end;
 
 class function TmsLine.CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF; const aShapesController: ImsShapesController): ImsShape;
 begin
- Result := Self.Create(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
+ Result := Self.Create(TmsMakeShapeContext.Create(aStartPoint, aShapesController, nil));
  Result.EndTo(TmsEndShapeContext.Create(aFinishPoint, nil, nil));
 end;
 
