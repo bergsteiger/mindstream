@@ -16,14 +16,22 @@ type
   P : TPointF;
   constructor Create(const aPoint: TPointF); overload;
   constructor Create(aX: Pixel; aY: Pixel); overload;
+  procedure ToLog(aLog: TmsLog);
+  class function Normalize(const aPt: TmsPointF): TmsPointF; static;
  end;//TmsPointF
 
  TmsLineF = record
  public
+  A : TmsPointF;
+  B : TmsPointF;
   procedure ToLog(aLog: TmsLog);
  end;//TmsLineF
 
 implementation
+
+uses
+ System.SysUtils
+ ;
 
 // TmsPointF
 
@@ -37,11 +45,31 @@ begin
  Create(TPointF.Create(aX, aY));
 end;
 
+procedure TmsPointF.ToLog(aLog: TmsLog);
+var
+ l_N : TmsPointF;
+begin
+ l_N := Normalize(Self);
+ aLog.ToLog('X:');
+ aLog.ToLog(FloatToStr(l_N.P.X));
+ aLog.ToLog('Y:');
+ aLog.ToLog(FloatToStr(l_N.P.Y));
+end;
+
+class function TmsPointF.Normalize(const aPt: TmsPointF): TmsPointF;
+begin
+ Result := aPt;
+end;
+
 // TmsLineF
 
 procedure TmsLineF.ToLog(aLog: TmsLog);
 begin
- aLog.ToLog('dump line');
+ aLog.ToLog('dump line:');
+ aLog.ToLog('A:');
+ A.ToLog(aLog);
+ aLog.ToLog('B:');
+ B.ToLog(aLog);
 end;
 
 end.
