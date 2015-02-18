@@ -35,6 +35,13 @@ type
   function Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
  end;//TmsLineF
 
+ TmsLineFPair = record
+ public
+  L1 : TmsLineF;
+  L2 : TmsLineF;
+  constructor Create(const aL1: TmsLineF; const aL2: TmsLineF);
+ end;//TmsLineFPair
+
 implementation
 
 uses
@@ -102,6 +109,14 @@ function TmsLineF.Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boole
 begin
  Result := false;
  theCross := TmsPointF.Create(High(Integer), High(Integer));
+end;
+
+// TmsLineFPair
+
+constructor TmsLineFPair.Create(const aL1: TmsLineF; const aL2: TmsLineF);
+begin
+ L1 := aL1;
+ L2 := aL2;
 end;
 
 end.
