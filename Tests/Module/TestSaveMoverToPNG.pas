@@ -170,6 +170,9 @@ begin
     else
      l_PrevShape := l_Shape;
    end;//for l_Shape
+
+   for l_Shape in l_List do
+    aDiagramm.AddShape(l_Shape);
   finally
    FreeAndNil(l_List);
   end;//try..finally
