@@ -42,6 +42,8 @@ type
   constructor Create(const aL1: TmsLineF; const aL2: TmsLineF);
  end;//TmsLineFPair
 
+ TmsLineFPairs = array of TmsLineFPair;
+
 implementation
 
 uses
