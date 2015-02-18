@@ -18,6 +18,7 @@ type
   constructor Create(aX: Pixel; aY: Pixel); overload;
   procedure ToLog(aLog: TmsLog);
   class function Normalize(const aPt: TmsPointF): TmsPointF; static;
+  function N: TmsPointF;
  end;//TmsPointF
 
  TmsLineF = record
@@ -49,7 +50,7 @@ procedure TmsPointF.ToLog(aLog: TmsLog);
 var
  l_N : TmsPointF;
 begin
- l_N := Normalize(Self);
+ l_N := Self.N;
  aLog.ToLog('X:');
  aLog.ToLog(FloatToStr(l_N.P.X));
  aLog.ToLog('Y:');
@@ -59,6 +60,11 @@ end;
 class function TmsPointF.Normalize(const aPt: TmsPointF): TmsPointF;
 begin
  Result := aPt;
+end;
+
+function TmsPointF.N: TmsPointF;
+begin
+ Result := Normalize(Self);
 end;
 
 // TmsLineF
