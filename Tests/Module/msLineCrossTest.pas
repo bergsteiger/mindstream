@@ -29,6 +29,10 @@ begin
  OutToFileAndCheck(
   procedure (aLog: TmsLog)
   begin
+   aLog.ToLog('L1:');
+   f_L1.ToLog(aLog);
+   aLog.ToLog('L2:');
+   f_L2.ToLog(aLog);
    aLog.ToLog('failed');
   end
  );
