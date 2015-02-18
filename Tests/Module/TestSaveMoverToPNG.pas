@@ -156,6 +156,7 @@ begin
     l_Connector := TmsConnector.CreateCompleted(l_A, l_B, aDiagramm.ShapesController);
     aDiagramm.AddShape(l_Connector);
     l_Connector := nil;
+    //l_PrevShape := l_Shape;
     l_PrevShape := nil;
    end//l_PrevShape <> nil
    else
