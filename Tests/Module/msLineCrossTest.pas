@@ -107,10 +107,10 @@ begin
  for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
   if (l_Method.Visibility = mvPublished) then
   begin
-   AddTest(TmsLineCrossTest(testClass).Create((l_Method.Name)));
+   AddTest(RmsLineCrossTest(testClass).Create(l_Method.Name));
   end;//l_Method.Visibility = mvPublished
 end;
 
 initialization
- TestFramework.RegisterTest(TmsLineCrossTest.Suite);
+ TestFramework.RegisterTest(TmsLineCrossTestSuite.Create(TmsLineCrossTest));
 end.
