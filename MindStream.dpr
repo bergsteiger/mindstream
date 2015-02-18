@@ -136,7 +136,10 @@ uses
   FMX.DUnit.msAppLog in 'fmx.dunit\FMX.DUnit.msAppLog.pas',
   msMovingPointer in 'msMovingPointer.pas',
   FMX.DUnit.msLog in 'fmx.dunit\FMX.DUnit.msLog.pas',
-  msConnector in 'ConcreteShapes\ForUML\msConnector.pas';
+  msConnector in 'ConcreteShapes\ForUML\msConnector.pas',
+  msLineCrossTest in 'Tests\Module\msLineCrossTest.pas',
+  msLineF in 'Core\msLineF.pas'
+  ;
 
 {$R *.res}
 
