@@ -41,7 +41,9 @@ implementation
 
 uses
   System.Types,
+  System.SysUtils,
   Math,
+  Generics.Collections,
 
   msRegisteredShapes,
   TypInfo,
@@ -130,6 +132,9 @@ begin
  theContext.rShapesCount := Min(theContext.rShapesCount, 6);
 end;
 
+type
+ TmsShapeList = TList<ImsShape>;
+
 procedure TmsConnectorDrawTest.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 const
  cDelta = 10;
@@ -140,28 +145,34 @@ var
  l_B : TPointF;
  l_Connector : ImsShape;
  l_Delta: Extended;
+ l_List : TmsShapeList;
 begin
  if not f_Context.ShapeClass.IsLineLike then
  begin
   l_PrevShape := nil;
-  for l_Shape in aDiagramm do
-  begin
-   if (l_PrevShape <> nil) then
+  l_List := TmsShapeList.Create;
+  try
+   for l_Shape in aDiagramm do
    begin
-    // тут надо будет коннектор создать
-    l_Delta := cDelta;
-    l_A := l_PrevShape.StartPoint + TPointF.Create(l_Delta, -l_Delta);
-    l_Delta := cDelta;
-    l_B := l_Shape.StartPoint + TPointF.Create(-l_Delta, l_Delta);
-    l_Connector := TmsConnector.CreateCompleted(l_A, l_B, aDiagramm.ShapesController);
-    aDiagramm.AddShape(l_Connector);
-    l_Connector := nil;
-    //l_PrevShape := l_Shape;
-    l_PrevShape := nil;
-   end//l_PrevShape <> nil
-   else
-    l_PrevShape := l_Shape;
-  end;//for l_Shape
+    if (l_PrevShape <> nil) then
+    begin
+     // тут надо будет коннектор создать
+     l_Delta := cDelta;
+     l_A := l_PrevShape.StartPoint + TPointF.Create(l_Delta, -l_Delta);
+     l_Delta := cDelta;
+     l_B := l_Shape.StartPoint + TPointF.Create(-l_Delta, l_Delta);
+     l_Connector := TmsConnector.CreateCompleted(l_A, l_B, aDiagramm.ShapesController);
+     aDiagramm.AddShape(l_Connector);
+     l_Connector := nil;
+     //l_PrevShape := l_Shape;
+     l_PrevShape := nil;
+    end//l_PrevShape <> nil
+    else
+     l_PrevShape := l_Shape;
+   end;//for l_Shape
+  finally
+   FreeAndNil(l_List);
+  end;//try..finally
  end;//not f_Context.ShapeClass.IsLineLike
  inherited;
 end;
