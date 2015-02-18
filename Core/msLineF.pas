@@ -19,6 +19,11 @@ type
   procedure ToLog(aLog: TmsLog);
   class function Normalize(const aPt: TmsPointF): TmsPointF; static;
   function N: TmsPointF;
+  function ToString: String;
+  property X: Pixel
+   read P.X;
+  property Y: Pixel
+   read P.Y;
  end;//TmsPointF
 
  TmsLineF = record
@@ -26,6 +31,7 @@ type
   A : TmsPointF;
   B : TmsPointF;
   procedure ToLog(aLog: TmsLog);
+  function ToString: String;
  end;//TmsLineF
 
 implementation
@@ -67,6 +73,14 @@ begin
  Result := Normalize(Self);
 end;
 
+function TmsPointF.ToString: String;
+var
+ l_P : TmsPointF;
+begin
+ l_P := Self.N;
+ Result := FloatToStr(l_P.X) + '_' + FloatToStr(l_P.Y);
+end;
+
 // TmsLineF
 
 procedure TmsLineF.ToLog(aLog: TmsLog);
@@ -76,6 +90,11 @@ begin
  A.ToLog(aLog);
  aLog.ToLog('B:');
  B.ToLog(aLog);
+end;
+
+function TmsLineF.ToString: String;
+begin
+ Result := A.ToString + '_' + B.ToString;
 end;
 
 end.
