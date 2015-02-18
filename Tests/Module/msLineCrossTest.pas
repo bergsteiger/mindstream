@@ -12,8 +12,7 @@ uses
 type
  TmsLineCrossTest = class(TmsLoggedTest)
  private
-  f_L1 : TmsLineF;
-  f_L2 : TmsLineF;
+  f_Lines : TmsLineFPair;
  protected
   function InnerFolders: String; override;
   function  GetName: string; override;
@@ -56,7 +55,7 @@ end;
 
 function TmsLineCrossTest.GetName: string;
 begin
- Result := f_L1.ToString + '_' + f_L2.ToString + '_' + inherited GetName;
+ Result := f_Lines.ToString + '_' + inherited GetName;
 end;
 
 constructor TmsLineCrossTest.CreateInner(const aTestName: String);
@@ -77,12 +76,9 @@ begin
  OutToFileAndCheck(
   procedure (aLog: TmsLog)
   begin
-   aLog.ToLog('L1:');
-   f_L1.ToLog(aLog);
-   aLog.ToLog('L2:');
-   f_L2.ToLog(aLog);
+   f_Lines.ToLog(aLog);
    aLog.ToLog('Result:');
-   l_IsCross := f_L1.Cross(f_L2, l_Cross);
+   l_IsCross := f_Lines.Cross(l_Cross);
    aLog.ToLog(BoolToStr(l_IsCross));
    l_Cross.ToLog(aLog);
   end

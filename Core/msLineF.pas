@@ -42,6 +42,9 @@ type
   L1 : TmsLineF;
   L2 : TmsLineF;
   constructor Create(const aL1: TmsLineF; const aL2: TmsLineF);
+  procedure ToLog(aLog: TmsLog);
+  function ToString: String;
+  function Cross(out theCross: TmsPointF): Boolean;
  end;//TmsLineFPair
 
  TmsLineFPairs = array of TmsLineFPair;
@@ -132,6 +135,24 @@ constructor TmsLineFPair.Create(const aL1: TmsLineF; const aL2: TmsLineF);
 begin
  L1 := aL1;
  L2 := aL2;
+end;
+
+procedure TmsLineFPair.ToLog(aLog: TmsLog);
+begin
+ aLog.ToLog('L1:');
+ L1.ToLog(aLog);
+ aLog.ToLog('L2:');
+ L2.ToLog(aLog);
+end;
+
+function TmsLineFPair.ToString: String;
+begin
+ Result := L1.ToString + '_' + L2.ToString;
+end;
+
+function TmsLineFPair.Cross(out theCross: TmsPointF): Boolean;
+begin
+ Result := L1.Cross(L2, theCross);
 end;
 
 end.
