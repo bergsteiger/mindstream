@@ -1,0 +1,74 @@
+Задача:
+ Сделать чтобы объект на который указывает Connector, "привязался" не к центру фигуры, а к границе
+  https://bitbucket.org/ingword/mindstream/issue/158/connector
+
+Список литературы:
+ Скалярное произведение
+  https://ru.wikipedia.org/wiki/%D0%A1%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5
+ Векторное произведение
+  https://ru.wikipedia.org/wiki/%D0%92%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5
+ Координаты точки пересечения двух прямых - примеры нахождения.
+  http://www.cleverstudents.ru/line_and_plane/intersection_point_of_straight_lines.html
+ Коллинеарность векторов, условия коллинеарности векторов.
+  http://ru.onlinemschool.com/math/library/vector/colinearity/
+ Структуры геометрических данных, основные операции
+  http://algolist.manual.ru/maths/geom/datastruct.php
+   int Edge::cross(Edge &e, double &t)
+ Пересечение: Прямая(отрезок) и прямая (отрезок)
+  http://algolist.manual.ru/maths/geom/intersect/lineline2d.php
+
+Будем действовать в духе:
+ Пишем простой интерпретатор на C++ с помощью TDD
+  http://programmingmindstream.blogspot.ru/2014/08/c-tdd.html
+
+Алгоритмы от Мишы Костицына:
+
+Ищем точку пересечения прямых:
+
+procedure FindCross(X1, Y1, X2, Y2, Xa, Ya, Xb, Yb: Extended; var aX, aY: Extended);
+begin
+ aY := ((X2 - X1) * (Yb - Ya) * Y1 - (Xb - Xa) * (Y2 - Y1) * Ya + (Xa - X1) * (Y2 - Y1) * (Yb - Ya)) /
+      ((X2 - X1) * (Yb - Ya) - (Xb - Xa) * (Y2 - Y1));
+ aX := (X2 - X1) * (Y - Y1) / (Y2 - Y1) + X1;
+end;
+
+Проверяем, пересекаются ли отрезки:
+
+function LinesCross(X1, Y1, X2, Y2, Xa, Ya, Xb, Yb: Extended; var aX, aY: Extended): Boolean;
+
+ function Btwn(Value, One, Two: Extended): Boolean;
+ begin
+  Result := (Value >= Min(One, Two)) and (Value <= Max(One, Two));
+ end;
+
+begin
+ FindCross(X1, Y1, X2, Y2, Xa, Ya, Xb, Yb, aX, aY);
+ Result := Btwn(aX, X1, X2) and
+           Btwn(aX, Xa, Xb) and
+           Btwn(aY, Y1, Y2) and
+           Btwn(aY, Ya, Yb);
+end;
+
+Осталось перебрать стороны прямоугольника и аккуратно проверить граничные значения, чтобы исключить деление на ноль.
+
+--------
+
+Поправка:
+
+18.02.2015 14:38, Alex W. Lulin пишет:
+> procedure FindCross(X1, Y1, X2, Y2, Xa, Ya, Xb, Yb: Extended; var aX, aY: Extended);
+> begin
+>  aY := ((X2 - X1) * (Yb - Ya) * Y1 - (Xb - Xa) * (Y2 - Y1) * Ya + (Xa - X1) * (Y2 - Y1) * (Yb - Ya)) /
+>       ((X2 - X1) * (Yb - Ya) - (Xb - Xa) * (Y2 - Y1));
+>  aX := (X2 - X1) * (Y - Y1) / (Y2 - Y1) + X1;
+> end; 
+aX := (X2 - X1) * (Y - Y1) / (Y2 - Y1) + X1;
+
+заменить на
+
+aX := (X2 - X1) * (aY - Y1) / (Y2 - Y1) + X1; 
+
+--------
+
+Коммиты:
+ 
