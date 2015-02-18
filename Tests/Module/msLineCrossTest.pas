@@ -29,10 +29,13 @@ type
 type
   TmsLineCrossTestSuite = class(TTestSuite)
   private
-   constructor CreatePrim(aTestClass : RmsLineCrossTest);
+   f_Lines : TmsLineFPairs;
+  private
+   constructor CreatePrim(aTestClass : RmsLineCrossTest; const aLines : TmsLineFPairs);
   public
    procedure AddTests(testClass: TTestCaseClass); override;
-   class function Create(aTestClass : RmsLineCrossTest): ITest;
+   class function Create(aTestClass : RmsLineCrossTest; const aLines : TmsLineFPairs): ITest; overload;
+   class function Create(const aLines : TmsLineFPairs): ITest; overload;
   end;//TmsLineCrossTestSuite
 
 implementation
@@ -88,14 +91,20 @@ end;
 
 // TmsLineCrossTestSuite
 
-constructor TmsLineCrossTestSuite.CreatePrim(aTestClass : RmsLineCrossTest);
+constructor TmsLineCrossTestSuite.CreatePrim(aTestClass : RmsLineCrossTest; const aLines : TmsLineFPairs);
 begin
  inherited Create(aTestClass);
+ f_Lines := aLines;
 end;
 
-class function TmsLineCrossTestSuite.Create(aTestClass : RmsLineCrossTest): ITest;
+class function TmsLineCrossTestSuite.Create(aTestClass : RmsLineCrossTest; const aLines : TmsLineFPairs): ITest;
 begin
- Result := CreatePrim(aTestClass);
+ Result := CreatePrim(aTestClass, aLines);
+end;
+
+class function TmsLineCrossTestSuite.Create(const aLines : TmsLineFPairs): ITest;
+begin
+ Result := Create(TmsLineCrossTest, aLines);
 end;
 
 procedure TmsLineCrossTestSuite.AddTests(testClass: TTestCaseClass);
@@ -112,5 +121,10 @@ begin
 end;
 
 initialization
- TestFramework.RegisterTest(TmsLineCrossTestSuite.Create(TmsLineCrossTest));
+ TestFramework.RegisterTest(
+  TmsLineCrossTestSuite.Create(
+   [
+   ]
+  )
+ );
 end.
