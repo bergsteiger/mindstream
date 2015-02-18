@@ -41,6 +41,7 @@ implementation
 
 uses
   System.Types,
+  Math,
 
   msRegisteredShapes,
   TypInfo,
@@ -53,7 +54,7 @@ uses
 procedure TTestSaveMoverToPNG.TransformContext(var theContext: TmsShapeTestContext);
 begin
  inherited;
- theContext.rShapesCount := 1;
+ theContext.rShapesCount := Min(theContext.rShapesCount, 1);
 end;
 
 procedure TTestSaveMoverToPNG.MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape);
@@ -126,7 +127,7 @@ end;
 procedure TmsConnectorDrawTest.TransformContext(var theContext: TmsShapeTestContext);
 begin
  inherited;
- //theContext.rShapesCount := 1;
+ theContext.rShapesCount := Min(theContext.rShapesCount, 6);
 end;
 
 procedure TmsConnectorDrawTest.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
