@@ -161,7 +161,8 @@ begin
      l_R := l_PrevShape.DrawBounds;
      l_Delta := Min(l_R.Width / 2, Min(l_R.Height / 2, cDelta));
      l_A := l_PrevShape.StartPoint + TPointF.Create(l_Delta, -l_Delta);
-     l_Delta := cDelta;
+     l_R := l_Shape.DrawBounds;
+     l_Delta := Min(l_R.Width / 2, Min(l_R.Height / 2, cDelta));
      l_B := l_Shape.StartPoint + TPointF.Create(-l_Delta, l_Delta);
      l_Connector := TmsConnector.CreateCompleted(l_A, l_B, aDiagramm.ShapesController);
      l_List.Add(l_Connector);
