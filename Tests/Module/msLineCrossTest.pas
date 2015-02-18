@@ -124,6 +124,10 @@ initialization
  TestFramework.RegisterTest(
   TmsLineCrossTestSuite.Create(
    [
+    TmsLineFPair.Create(
+     TmsLineF.Create(0, 0, 0, 0),
+     TmsLineF.Create(0, 0, 0, 0)
+    )
    ]
   )
  );
