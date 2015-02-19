@@ -145,7 +145,18 @@ begin
    theCross.Y := Self.A.Y;
    Exit;
   end;//IsZero(anOther.dX)
- end;//IsZero(Self.dY)
+ end//IsZero(Self.dY)
+ else
+ if IsZero(anOther.dY) then
+ begin
+  if IsZero(Self.dX) then
+  begin
+   Result := true;
+   theCross.X := Self.A.X;
+   theCross.Y := anOther.A.Y;
+   Exit;
+  end;//IsZero(Self.dX)
+ end;//IsZero(anOther.dY)
 end;
 
 constructor TmsLineF.Create(const aA: TmsPointF; const aB: TmsPointF);
