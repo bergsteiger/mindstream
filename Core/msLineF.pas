@@ -176,8 +176,12 @@ begin
   end;//IsZero(Self.dX)
  end;//IsZero(anOther.dY)
 
- // Дальше можно по идее применять Мишин алгоритм
- DoCross(Self, anOther, theCross);
+ // Дальше можно по идее применять Мишин алгоритм:
+
+ if IsZero(Self.dY) then
+  DoCross(anOther, Self, theCross)
+ else
+  DoCross(Self, anOther, theCross);
 end;
 
 constructor TmsLineF.Create(const aA: TmsPointF; const aB: TmsPointF);
