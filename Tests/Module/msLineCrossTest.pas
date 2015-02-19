@@ -216,6 +216,16 @@ initialization
     TmsLineFPair.Create(
      TmsLineF.Create(0, 0, 0, 0),
      TmsLineF.Create(1, 1, 1, 1)
+    ),
+
+    TmsLineFPair.Create(
+     TmsLineF.Create(0, 0, 1, 0),
+     TmsLineF.Create(0, 0, 0, 1)
+    ),
+
+    TmsLineFPair.Create(
+     TmsLineF.Create(0, 0, 1, 0),
+     TmsLineF.Create(1, 0, 1, 1)
     )
    ]
   )
