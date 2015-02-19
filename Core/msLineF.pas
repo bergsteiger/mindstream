@@ -121,6 +121,14 @@ begin
 end;
 
 function TmsLineF.Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
+
+ procedure DoCross(const Self: TmsLineF; const anOther: TmsLineF; out theCross: TmsPointF);
+ begin//DoCross
+  theCross.Y := ((Self.B.X - Self.A.X) * (anOther.B.Y - anOther.A.Y) * Self.A.Y - (anOther.B.X - anOther.A.X) * (Self.B.Y - Self.A.Y) * anOther.A.Y + (anOther.A.X - Self.A.X) * (Self.B.Y - Self.A.Y) * (anOther.B.Y - anOther.A.Y)) /
+                ((Self.B.X - Self.A.X) * (anOther.B.Y - anOther.A.Y) - (anOther.B.X - anOther.A.X) * (Self.B.Y - Self.A.Y));
+  theCross.X := (Self.B.X - Self.A.X) * (theCross.Y - Self.A.Y) / (Self.B.Y - Self.A.Y) + Self.A.X;
+ end;//DoCross
+
 begin
  Result := false;
  theCross := TmsPointF.Create(High(Integer), High(Integer));
@@ -169,11 +177,7 @@ begin
  end;//IsZero(anOther.dY)
 
  // Дальше можно по идее применять Мишин алгоритм
- theCross.Y := ((Self.B.X - Self.A.X) * (anOther.B.Y - anOther.A.Y) * Self.A.Y - (anOther.B.X - anOther.A.X) * (Self.B.Y - Self.A.Y) * anOther.A.Y + (anOther.A.X - Self.A.X) * (Self.B.Y - Self.A.Y) * (anOther.B.Y - anOther.A.Y)) /
-               ((Self.B.X - Self.A.X) * (anOther.B.Y - anOther.A.Y) - (anOther.B.X - anOther.A.X) * (Self.B.Y - Self.A.Y));
- theCross.X := (Self.B.X - Self.A.X) * (theCross.Y - Self.A.Y) / (Self.B.Y - Self.A.Y) + Self.A.X;
- // - а вот тут кто-то опять торопится :-(
- // но раз уж вставили, то надо использовать dX и dY, вместо этих колбас
+ DoCross(Self, anOther, theCross);
 end;
 
 constructor TmsLineF.Create(const aA: TmsPointF; const aB: TmsPointF);
