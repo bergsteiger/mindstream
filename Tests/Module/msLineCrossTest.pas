@@ -16,9 +16,9 @@ type
  protected
   function InnerFolders: String; override;
   function  GetName: string; override;
-  constructor CreateInner(const aTestName: String);
+  constructor CreateInner(const aTestName: String; const aLines : TmsLineFPair);
  public
-  class function Create(const aTestName: String): ITest;
+  class function Create(const aTestName: String; const aLines : TmsLineFPair): ITest;
  published
   procedure DoIt;
  end;//TmsLineCrossTest
@@ -58,14 +58,15 @@ begin
  Result := f_Lines.ToString + '_' + inherited GetName;
 end;
 
-constructor TmsLineCrossTest.CreateInner(const aTestName: String);
+constructor TmsLineCrossTest.CreateInner(const aTestName: String; const aLines : TmsLineFPair);
 begin
  inherited Create(aTestName);
+ f_Lines := aLines;
 end;
 
-class function TmsLineCrossTest.Create(const aTestName: String): ITest;
+class function TmsLineCrossTest.Create(const aTestName: String; const aLines : TmsLineFPair): ITest;
 begin
- Result := CreateInner(aTestName);
+ Result := CreateInner(aTestName, aLines);
 end;
 
 procedure TmsLineCrossTest.DoIt;
@@ -89,8 +90,8 @@ end;
 
 constructor TmsLineCrossTestSuite.CreatePrim(aTestClass : RmsLineCrossTest; const aLines : TmsLineFPairs);
 begin
- inherited Create(aTestClass);
  f_Lines := aLines;
+ inherited Create(aTestClass);
 end;
 
 class function TmsLineCrossTestSuite.Create(aTestClass : RmsLineCrossTest; const aLines : TmsLineFPairs): ITest;
@@ -106,14 +107,16 @@ end;
 procedure TmsLineCrossTestSuite.AddTests(testClass: TTestCaseClass);
 var
  l_Method: TRttiMethod;
+ l_Lines : TmsLineFPair;
 begin
  Assert(testClass.InheritsFrom(TmsLineCrossTest));
 
- for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
-  if (l_Method.Visibility = mvPublished) then
-  begin
-   AddTest(RmsLineCrossTest(testClass).Create(l_Method.Name));
-  end;//l_Method.Visibility = mvPublished
+ for l_Lines in f_Lines do
+  for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
+   if (l_Method.Visibility = mvPublished) then
+   begin
+     AddTest(RmsLineCrossTest(testClass).Create(l_Method.Name, l_Lines));
+   end;//l_Method.Visibility = mvPublished
 end;
 
 initialization
