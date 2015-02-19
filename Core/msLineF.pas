@@ -144,7 +144,7 @@ end;
 
 function TmsLineF.Length: Pixel;
 begin
- Result := Sqrt(dX *dX + dY * dY);
+ Result := Sqrt(dX * dX + dY * dY);
 end;
 
 // TmsLineFPair
