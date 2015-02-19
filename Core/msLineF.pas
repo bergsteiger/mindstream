@@ -162,6 +162,12 @@ begin
    theCross.X := anOther.A.X;
    theCross.Y := Self.A.Y;
    Exit;
+  end//IsZero(anOther.dX)
+  else
+  begin
+   DoCross(anOther, Self, theCross);
+   Result := true;
+   Exit;
   end;//IsZero(anOther.dX)
  end//IsZero(Self.dY)
  else
@@ -178,10 +184,7 @@ begin
 
  // Дальше можно по идее применять Мишин алгоритм:
 
- if IsZero(Self.dY) then
-  DoCross(anOther, Self, theCross)
- else
-  DoCross(Self, anOther, theCross);
+ DoCross(Self, anOther, theCross);
  Result := true;
 end;
 
