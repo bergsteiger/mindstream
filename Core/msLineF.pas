@@ -125,6 +125,8 @@ begin
  if IsZero(Self.Length) then
  begin
   theCross.X := 0;
+  if IsZero(anOther.Length) then
+   theCross.Y := 0;
   Exit;
  end;//IsZero(Self.Length)
 end;
