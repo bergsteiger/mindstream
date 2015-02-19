@@ -121,3 +121,5 @@ aX := (X2 - X1) * (aY - Y1) / (Y2 - Y1) + X1;
   https://bitbucket.org/ingword/mindstream/commits/7345401615c304973a9f06e3c81dc355c3538fe6
  - дифференцируем тот случай когда и вторая линия имеет нулевую длину.
   https://bitbucket.org/ingword/mindstream/commits/36211d3324863fe5647560c6dad6e39bd32e20be
+ - отсекаем тот случай, когда вторая линия имеет нулевую длину, а первая - ненулевую.
+  https://bitbucket.org/ingword/mindstream/commits/3c00c60030a3ba2c8c8fd070f81ef539d62cca41

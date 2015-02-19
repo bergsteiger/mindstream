@@ -37,6 +37,11 @@ type
    class function Create(const aLines : TmsLineFPairs): ITest; overload;
   end;//TmsLineCrossTestSuite
 
+  TmsLineCrossTestRandomSuite = class(TmsLineCrossTestSuite)
+  public
+   class function Create: ITest;
+  end;//TmsLineCrossTestRandomSuite
+
 implementation
 
 uses
@@ -118,6 +123,28 @@ begin
    end;//l_Method.Visibility = mvPublished
 end;
 
+// TmsLineCrossTestRandomSuite
+
+class function TmsLineCrossTestRandomSuite.Create: ITest;
+const
+ cCount = 20;
+ cMax = 100;
+var
+ l_Lines : TmsLineFPairs;
+ l_Index : Integer;
+begin
+ SetLength(l_Lines, cCount);
+ RandSeed := 100;
+ for l_Index := 0 to Pred(cCount) do
+ begin
+  l_Lines[l_Index] := TmsLineFPair.Create(
+                       TmsLineF.Create(Random(cMax), Random(cMax), Random(cMax), Random(cMax)),
+                       TmsLineF.Create(Random(cMax), Random(cMax), Random(cMax), Random(cMax))
+                      )
+ end;//for l_Index
+ Result := inherited Create(l_Lines);
+end;
+
 initialization
  TestFramework.RegisterTest(
   TmsLineCrossTestSuite.Create(
@@ -193,4 +220,5 @@ initialization
    ]
   )
  );
+ TestFramework.RegisterTest(TmsLineCrossTestRandomSuite.Create);
 end.
