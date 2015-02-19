@@ -127,7 +127,7 @@ end;
 
 class function TmsLineCrossTestRandomSuite.Create: ITest;
 const
- cCount = 20;
+ cCount = 100;
  cMax = 100;
 var
  l_Lines : TmsLineFPairs;
