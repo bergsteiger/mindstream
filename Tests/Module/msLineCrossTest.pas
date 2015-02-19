@@ -149,6 +149,8 @@ initialization
  TestFramework.RegisterTest(
   TmsLineCrossTestSuite.Create(
    [
+    // Банальные случаи:
+
     TmsLineFPair.Create(
      TmsLineF.Create(0, 0, 0, 0),
      TmsLineF.Create(0, 0, 0, 0)
@@ -218,6 +220,8 @@ initialization
      TmsLineF.Create(1, 1, 1, 1)
     ),
 
+    // Тесты перпендикулярности:
+
     TmsLineFPair.Create(
      TmsLineF.Create(0, 0, 1, 0),
      TmsLineF.Create(0, 0, 0, 1)
@@ -237,6 +241,8 @@ initialization
      TmsLineF.Create(0, 0, 0, 1),
      TmsLineF.Create(0, 1, 1, 1)
     ),
+
+    // Тесты параллельности:
 
     TmsLineFPair.Create(
      TmsLineF.Create(0, 0, 0, 1),
