@@ -182,6 +182,7 @@ begin
   DoCross(anOther, Self, theCross)
  else
   DoCross(Self, anOther, theCross);
+ Result := true;
 end;
 
 constructor TmsLineF.Create(const aA: TmsPointF; const aB: TmsPointF);
