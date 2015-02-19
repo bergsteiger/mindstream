@@ -21,9 +21,11 @@ type
   function N: TmsPointF;
   function ToString: String;
   property X: Pixel
-   read P.X;
+   read P.X
+   write P.X;
   property Y: Pixel
-   read P.Y;
+   read P.Y
+   write P.Y;
  end;//TmsPointF
 
  TmsLineF = record
@@ -55,7 +57,8 @@ type
 implementation
 
 uses
- System.SysUtils
+ System.SysUtils,
+ Math
  ;
 
 // TmsPointF
@@ -119,6 +122,11 @@ function TmsLineF.Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boole
 begin
  Result := false;
  theCross := TmsPointF.Create(High(Integer), High(Integer));
+ if IsZero(Self.Length) then
+ begin
+  theCross.X := 0;
+  Exit;
+ end;//IsZero(Self.Length)
 end;
 
 constructor TmsLineF.Create(const aA: TmsPointF; const aB: TmsPointF);
