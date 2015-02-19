@@ -134,21 +134,21 @@ const
   Result := Random(cMax);
  end;
 
+ function LR: TmsLineF;
+ begin
+  Result := TmsLineF.Create(R, R, R, R);
+ end;
+
 const
  cCount = 100;
 var
  l_Lines : TmsLineFPairs;
  l_Index : Integer;
 begin
- SetLength(l_Lines, cCount);
  RandSeed := 100;
+ SetLength(l_Lines, cCount);
  for l_Index := 0 to Pred(cCount) do
- begin
-  l_Lines[l_Index] := TmsLineFPair.Create(
-                       TmsLineF.Create(R, R, R, R),
-                       TmsLineF.Create(R, R, R, R)
-                      )
- end;//for l_Index
+  l_Lines[l_Index] := TmsLineFPair.Create(LR, LR);
  Result := inherited Create(l_Lines);
 end;
 
