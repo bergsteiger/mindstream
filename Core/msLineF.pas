@@ -35,6 +35,9 @@ type
   procedure ToLog(aLog: TmsLog);
   function ToString: String;
   function Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
+  // - пересечение линий
+  function SegmentsCross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
+  // - пересечение отрезков
   constructor Create(const aA: TmsPointF; const aB: TmsPointF); overload;
   constructor Create(aAX, aAY: Pixel; aBX, aBY: Pixel); overload;
   function dX: Pixel;
@@ -52,6 +55,9 @@ type
   procedure ToLog(aLog: TmsLog);
   function ToString: String;
   function Cross(out theCross: TmsPointF): Boolean;
+  // - пересечение линий
+  function SegmentsCross(out theCross: TmsPointF): Boolean;
+  // - пересечение отрезков
  end;//TmsLineFPair
 
  TmsLineFPairs = array of TmsLineFPair;
@@ -188,6 +194,11 @@ begin
  Result := true;
 end;
 
+function TmsLineF.SegmentsCross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
+begin
+ Result := Cross(anOther, theCross);
+end;
+
 constructor TmsLineF.Create(const aA: TmsPointF; const aB: TmsPointF);
 begin
  A := aA;
@@ -248,6 +259,11 @@ end;
 function TmsLineFPair.Cross(out theCross: TmsPointF): Boolean;
 begin
  Result := L1.Cross(L2, theCross);
+end;
+
+function TmsLineFPair.SegmentsCross(out theCross: TmsPointF): Boolean;
+begin
+ Result := L1.SegmentsCross(L2, theCross);
 end;
 
 end.
