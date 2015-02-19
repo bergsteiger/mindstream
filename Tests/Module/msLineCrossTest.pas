@@ -5,6 +5,8 @@ interface
 uses
  TestFrameWork,
 
+ FMX.DUnit.msLog,
+
  msLoggedTest,
  msLineF
  ;
@@ -17,6 +19,7 @@ type
   function InnerFolders: String; override;
   function  GetName: string; override;
   constructor CreateInner(const aTestName: String; const aLines : TmsLineFPair);
+  procedure DoTest(aLambda: TmsLogLambda);
  public
   class function Create(const aTestName: String; const aLines : TmsLineFPair): ITest;
  published
@@ -46,9 +49,7 @@ implementation
 
 uses
  System.TypInfo,
- System.Rtti,
-
- FMX.DUnit.msLog
+ System.Rtti
  ;
 
 // TmsLineCrossTest
@@ -74,9 +75,7 @@ begin
  Result := CreateInner(aTestName, aLines);
 end;
 
-procedure TmsLineCrossTest.DoIt;
-var
- l_Cross : TmsPointF;
+procedure TmsLineCrossTest.DoTest(aLambda: TmsLogLambda);
 begin
  OutToFileAndCheck(
   procedure (aLog: TmsLog)
@@ -84,6 +83,18 @@ begin
    aLog.ToLog('Parameters:');
    f_Lines.ToLog(aLog);
    aLog.ToLog('Result:');
+   aLambda(aLog);
+  end
+ );
+end;
+
+procedure TmsLineCrossTest.DoIt;
+var
+ l_Cross : TmsPointF;
+begin
+ DoTest(
+  procedure (aLog: TmsLog)
+  begin
    aLog.ToLog(BoolToStr(f_Lines.Cross(l_Cross)));
    l_Cross.ToLog(aLog);
   end
