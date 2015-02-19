@@ -165,6 +165,8 @@ begin
  theCross.Y := ((Self.B.X - Self.A.X) * (anOther.B.Y - anOther.A.Y) * Self.A.Y - (anOther.B.X - anOther.A.X) * (Self.B.Y - Self.A.Y) * anOther.A.Y + (anOther.A.X - Self.A.X) * (Self.B.Y - Self.A.Y) * (anOther.B.Y - anOther.A.Y)) /
                ((Self.B.X - Self.A.X) * (anOther.B.Y - anOther.A.Y) - (anOther.B.X - anOther.A.X) * (Self.B.Y - Self.A.Y));
  theCross.X := (Self.B.X - Self.A.X) * (theCross.Y - Self.A.Y) / (Self.B.Y - Self.A.Y) + Self.A.X;
+ // - а вот тут кто-то опять торопится :-(
+ // но раз уж вставили, то надо использовать dX и dY, вместо этих колбас
 end;
 
 constructor TmsLineF.Create(const aA: TmsPointF; const aB: TmsPointF);
