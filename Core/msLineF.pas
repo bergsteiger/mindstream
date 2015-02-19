@@ -138,6 +138,14 @@ begin
   Exit;
  end;//IsZero(anOther.Length)
 
+ // Дальше нужно проверить параллельность прямых
+ if IsZero(ArcCos(Self.CosA(anOther))) then
+ begin
+  theCross.X := -1;
+  theCross.Y := -1;
+  Exit;
+ end;//IsZero(ArcCos(Self.CosA(anOther)))
+
  if IsZero(Self.dY) then
  begin
   if IsZero(anOther.dX) then
@@ -159,14 +167,6 @@ begin
    Exit;
   end;//IsZero(Self.dX)
  end;//IsZero(anOther.dY)
-
- // Далеше нужно проверить параллельность прямых
- if IsZero(ArcCos(Self.CosA(anOther))) then
- begin
-  theCross.X := -1;
-  theCross.Y := -1;
-  Exit;
- end;//IsZero(ArcCos(Self.CosA(anOther)))
 
  // Дальше можно по идее применять Мишин алгоритм
  theCross.Y := ((Self.B.X - Self.A.X) * (anOther.B.Y - anOther.A.Y) * Self.A.Y - (anOther.B.X - anOther.A.X) * (Self.B.Y - Self.A.Y) * anOther.A.Y + (anOther.A.X - Self.A.X) * (Self.B.Y - Self.A.Y) * (anOther.B.Y - anOther.A.Y)) /
