@@ -23,7 +23,7 @@ type
  public
   class function Create(const aTestName: String; const aLines : TmsLineFPair): ITest;
  published
-  procedure DoIt;
+  procedure Cross;
  end;//TmsLineCrossTest
 
  RmsLineCrossTest = class of TmsLineCrossTest;
@@ -88,7 +88,7 @@ begin
  );
 end;
 
-procedure TmsLineCrossTest.DoIt;
+procedure TmsLineCrossTest.Cross;
 var
  l_Cross : TmsPointF;
 begin
