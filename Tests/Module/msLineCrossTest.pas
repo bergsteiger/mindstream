@@ -24,6 +24,7 @@ type
   class function Create(const aTestName: String; const aLines : TmsLineFPair): ITest;
  published
   procedure Cross;
+  procedure SegmentsCross;
  end;//TmsLineCrossTest
 
  RmsLineCrossTest = class of TmsLineCrossTest;
@@ -96,6 +97,19 @@ begin
   procedure (aLog: TmsLog)
   begin
    aLog.ToLog(BoolToStr(f_Lines.Cross(l_Cross)));
+   l_Cross.ToLog(aLog);
+  end
+ );
+end;
+
+procedure TmsLineCrossTest.SegmentsCross;
+var
+ l_Cross : TmsPointF;
+begin
+ DoTest(
+  procedure (aLog: TmsLog)
+  begin
+   aLog.ToLog(BoolToStr(f_Lines.SegmentsCross(l_Cross)));
    l_Cross.ToLog(aLog);
   end
  );
