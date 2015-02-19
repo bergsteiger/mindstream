@@ -41,6 +41,7 @@ type
   function dY: Pixel;
   function Length: Pixel;
   function ScalarMul(const anOther: TmsLineF): Pixel;
+  function CosA(const anOther: TmsLineF): Single;
  end;//TmsLineF
 
  TmsLineFPair = record
@@ -198,6 +199,11 @@ end;
 function TmsLineF.ScalarMul(const anOther: TmsLineF): Pixel;
 begin
  Result := Self.dX * Self.dY + anOther.dX * anOther.dY;
+end;
+
+function TmsLineF.CosA(const anOther: TmsLineF): Single;
+begin
+ Result := Self.ScalarMul(anOther) / (Self.Length * anOther.Length);
 end;
 
 // TmsLineFPair
