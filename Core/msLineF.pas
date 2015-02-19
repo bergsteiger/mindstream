@@ -161,6 +161,12 @@ begin
  end;//IsZero(anOther.dY)
 
  // Далеше нужно проверить параллельность прямых
+ if IsZero(ArcCos(Self.CosA(anOther))) then
+ begin
+  theCross.X := -1;
+  theCross.Y := -1;
+  Exit;
+ end;//IsZero(ArcCos(Self.CosA(anOther)))
 
  // Дальше можно по идее применять Мишин алгоритм
  theCross.Y := ((Self.B.X - Self.A.X) * (anOther.B.Y - anOther.A.Y) * Self.A.Y - (anOther.B.X - anOther.A.X) * (Self.B.Y - Self.A.Y) * anOther.A.Y + (anOther.A.X - Self.A.X) * (Self.B.Y - Self.A.Y) * (anOther.B.Y - anOther.A.Y)) /
@@ -198,7 +204,7 @@ end;
 
 function TmsLineF.ScalarMul(const anOther: TmsLineF): Pixel;
 begin
- Result := Self.dX * Self.dY + anOther.dX * anOther.dY;
+ Result := Self.dX * anOther.dX + Self.dY * anOther.dY;
 end;
 
 function TmsLineF.CosA(const anOther: TmsLineF): Single;
