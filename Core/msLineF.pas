@@ -35,6 +35,9 @@ type
   function Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
   constructor Create(const aA: TmsPointF; const aB: TmsPointF); overload;
   constructor Create(aAX, aAY: Pixel; aBX, aBY: Pixel); overload;
+  function dX: Pixel;
+  function dY: Pixel;
+  function Length: Pixel;
  end;//TmsLineF
 
  TmsLineFPair = record
@@ -127,6 +130,21 @@ end;
 constructor TmsLineF.Create(aAX, aAY: Pixel; aBX, aBY: Pixel);
 begin
  Create(TmsPointF.Create(aAX, aAY), TmsPointF.Create(aBX, aBY));
+end;
+
+function TmsLineF.dX: Pixel;
+begin
+ Result := B.X - A.X;
+end;
+
+function TmsLineF.dY: Pixel;
+begin
+ Result := B.Y - A.Y;
+end;
+
+function TmsLineF.Length: Pixel;
+begin
+ Result := Sqrt(dX *dX + dY * dY);
 end;
 
 // TmsLineFPair
