@@ -127,6 +127,10 @@ initialization
      TmsLineF.Create(0, 0, 0, 0)
     ),
     TmsLineFPair.Create(
+     TmsLineF.Create(0, 0, 0, 1),
+     TmsLineF.Create(0, 0, 0, 0)
+    ),
+    TmsLineFPair.Create(
      TmsLineF.Create(0, 0, 0, 0),
      TmsLineF.Create(0, 0, 0, 1)
     ),
