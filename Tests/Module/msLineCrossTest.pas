@@ -127,8 +127,15 @@ end;
 
 class function TmsLineCrossTestRandomSuite.Create: ITest;
 const
- cCount = 100;
  cMax = 100;
+
+ function R: Pixel;
+ begin
+  Result := Random(cMax);
+ end;
+
+const
+ cCount = 100;
 var
  l_Lines : TmsLineFPairs;
  l_Index : Integer;
@@ -138,8 +145,8 @@ begin
  for l_Index := 0 to Pred(cCount) do
  begin
   l_Lines[l_Index] := TmsLineFPair.Create(
-                       TmsLineF.Create(Random(cMax), Random(cMax), Random(cMax), Random(cMax)),
-                       TmsLineF.Create(Random(cMax), Random(cMax), Random(cMax), Random(cMax))
+                       TmsLineF.Create(R, R, R, R),
+                       TmsLineF.Create(R, R, R, R)
                       )
  end;//for l_Index
  Result := inherited Create(l_Lines);
