@@ -133,7 +133,7 @@ var
 begin//DoCross
  Assert(not IsZero(Self.dY));
  dXdY := Self.dX * anOther.dY;
- dYdX := anOther.dX * Self.dY;
+ dYdX := Self.dY * anOther.dX;
  theCross.Y := (dXdY * Self.A.Y
                  - dYdX * anOther.A.Y
                  + (anOther.A.X - Self.A.X) * Self.dY * anOther.dY) /
