@@ -129,13 +129,15 @@ end;
 procedure DoCross(const Self: TmsLineF; const anOther: TmsLineF; out theCross: TmsPointF);
 var
  dXdY : Pixel;
+ dYdX : Pixel;
 begin//DoCross
  Assert(not IsZero(Self.dY));
  dXdY := Self.dX * anOther.dY;
+ dYdX := anOther.dX * Self.dY;
  theCross.Y := (dXdY * Self.A.Y
-                 - anOther.dX * Self.dY * anOther.A.Y
+                 - dYdX * anOther.A.Y
                  + (anOther.A.X - Self.A.X) * Self.dY * anOther.dY) /
-               (dXdY - anOther.dX * Self.dY);
+               (dXdY - dYdX);
  theCross.X := Self.dX * (theCross.Y - Self.A.Y) / Self.dY + Self.A.X;
 end;//DoCross
 
