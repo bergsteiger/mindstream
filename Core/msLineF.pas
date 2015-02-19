@@ -40,6 +40,7 @@ type
   function dX: Pixel;
   function dY: Pixel;
   function Length: Pixel;
+  function ScalarMul(const anOther: TmsLineF): Pixel;
  end;//TmsLineF
 
  TmsLineFPair = record
@@ -158,6 +159,8 @@ begin
   end;//IsZero(Self.dX)
  end;//IsZero(anOther.dY)
 
+ // Далеше нужно проверить параллельность прямых
+
  // Дальше можно по идее применять Мишин алгоритм
  theCross.Y := ((Self.B.X - Self.A.X) * (anOther.B.Y - anOther.A.Y) * Self.A.Y - (anOther.B.X - anOther.A.X) * (Self.B.Y - Self.A.Y) * anOther.A.Y + (anOther.A.X - Self.A.X) * (Self.B.Y - Self.A.Y) * (anOther.B.Y - anOther.A.Y)) /
                ((Self.B.X - Self.A.X) * (anOther.B.Y - anOther.A.Y) - (anOther.B.X - anOther.A.X) * (Self.B.Y - Self.A.Y));
@@ -188,6 +191,11 @@ end;
 function TmsLineF.Length: Pixel;
 begin
  Result := Sqrt(dX * dX + dY * dY);
+end;
+
+function TmsLineF.ScalarMul(const anOther: TmsLineF): Pixel;
+begin
+ Result := Self.dX * Self.dY + anOther.dX * anOther.dY;
 end;
 
 // TmsLineFPair
