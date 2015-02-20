@@ -39,6 +39,7 @@ type
   function SegmentsCross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
   // - пересечение отрезков
   constructor Create(const aA: TmsPointF; const aB: TmsPointF); overload;
+  constructor Create(const aA: TPointF; const aB: TPointF); overload;
   constructor Create(aAX, aAY: Pixel; aBX, aBY: Pixel); overload;
   function dX: Pixel;
   function dY: Pixel;
@@ -66,6 +67,7 @@ type
  public
   R : TRectF;
   constructor Create(const aR: TRectF);
+  function Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
  end;//TmsRectF
 
 implementation
@@ -250,6 +252,12 @@ begin
  B := aB;
 end;
 
+constructor TmsLineF.Create(const aA: TPointF; const aB: TPointF);
+begin
+ Create(TmsPointF.Create(aA.X, aA.Y), TmsPointF.Create(aB.X, aB.Y));
+end;
+
+
 constructor TmsLineF.Create(aAX, aAY: Pixel; aBX, aBY: Pixel);
 begin
  Create(TmsPointF.Create(aAX, aAY), TmsPointF.Create(aBX, aBY));
@@ -316,6 +324,11 @@ end;
 constructor TmsRectF.Create(const aR: TRectF);
 begin
  R := aR;
+end;
+
+function TmsRectF.Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
+begin
+ Result := false;
 end;
 
 end.
