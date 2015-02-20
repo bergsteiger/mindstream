@@ -215,8 +215,22 @@ begin
 end;
 
 function TmsLineF.SegmentsCross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
+
+ function Btwn(aValue, aB1, aB2: Pixel): Boolean;
+ var
+  l_Min : Pixel;
+  l_Max : Pixel;
+ begin
+  l_Min := Min(aB1, aB2);
+  l_Max := Max(aB1, aB2);
+  Result := (aValue >= l_Min) and (aValue <= l_Max);
+ end;
+
 begin
  Result := Cross(anOther, theCross);
+ if Result then
+ begin
+ end;//Result
 end;
 
 constructor TmsLineF.Create(const aA: TmsPointF; const aB: TmsPointF);
