@@ -133,6 +133,9 @@ var
  dYdY : Pixel;
 begin//DoCross
  Assert(not IsZero(Self.dY));
+
+ // - теперь тут можно буде вставить ЋёЅќ… ƒ–”√ќ… алгоритм и посмотреть - "что будет"
+
  dXdY := Self.dX * anOther.dY;
  dYdX := Self.dY * anOther.dX;
  dYdY := Self.dY * anOther.dY;
