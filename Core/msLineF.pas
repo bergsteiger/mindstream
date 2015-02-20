@@ -224,7 +224,7 @@ function TmsLineF.SegmentsCross(const anOther: TmsLineF; out theCross: TmsPointF
   l_Min := Min(aB1, aB2);
   l_Max := Max(aB1, aB2);
   Result := ((aValue >= l_Min) OR SameValue(aValue, l_Min)) and
-            (aValue <= l_Max);
+            ((aValue <= l_Max) OR SameValue(aValue, l_Max));
  end;//Btwn
 
 begin
