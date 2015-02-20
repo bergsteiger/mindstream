@@ -142,7 +142,7 @@ var
 begin//DoCross
  Assert(not IsZero(Self.dY));
 
- // - теперь тут можно буде вставить ЛЮБОЙ ДРУГОЙ алгоритм и посмотреть - "что будет"
+ // - теперь тут можно будет вставить ЛЮБОЙ ДРУГОЙ алгоритм и посмотреть - "что будет"
 
  dXdY := Self.dX * anOther.dY;
  dYdX := Self.dY * anOther.dX;
@@ -163,6 +163,8 @@ begin//DoCross
 end;//DoCross
 
 function TmsLineF.Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
+var
+ l_Angle : Single;
 begin
  Result := false;
  theCross := TmsPointF.Create(High(Integer), High(Integer));
@@ -181,7 +183,8 @@ begin
  end;//IsZero(anOther.Length)
 
  // Дальше нужно проверить параллельность прямых
- if IsZero(ArcCos(Self.CosA(anOther))) then
+ l_Angle := ArcCos(Self.CosA(anOther));
+ if IsZero(l_Angle) OR SameValue(l_Angle, pi) then
  begin
   theCross.X := -1;
   theCross.Y := -1;
@@ -199,9 +202,17 @@ begin
   end//IsZero(anOther.dX)
   else
   begin
-   DoCross(anOther, Self, theCross);
-   Result := true;
-   Exit;
+   if IsZero(anOther.dY) then
+   begin
+    Result := false;
+    Exit;
+   end//IsZero(anOther.dY)
+   else
+   begin
+    DoCross(anOther, Self, theCross);
+    Result := true;
+    Exit;
+   end;//IsZero(anOther.dY)
   end;//IsZero(anOther.dX)
  end//IsZero(Self.dY)
  else
@@ -265,12 +276,12 @@ end;
 
 function TmsLineF.dX: Pixel;
 begin
- Result := B.X - A.X;
+ Result := (B.X - A.X);
 end;
 
 function TmsLineF.dY: Pixel;
 begin
- Result := B.Y - A.Y;
+ Result := (B.Y - A.Y);
 end;
 
 function TmsLineF.Length: Pixel;
@@ -333,13 +344,13 @@ var
 begin
  Result := true;
 
- l_R[0] := TmsLineF.Create(R.TopLeft, TPointF.Create(R.Right, R.Top));
- l_R[1] := TmsLineF.Create(TPointF.Create(R.Right, R.Top), R.BottomRight);
- l_R[3] := TmsLineF.Create(R.BottomRight, TPointF.Create(R.Left, R.Bottom));
- l_R[3] := TmsLineF.Create(TPointF.Create(R.Left, R.Bottom), R.TopLeft);
+ l_R[0] := TmsLineF.Create(TPointF.Create(R.Left, R.Top), TPointF.Create(R.Right, R.Top));
+ l_R[1] := TmsLineF.Create(TPointF.Create(R.Right, R.Top), TPointF.Create(R.Right, R.Bottom));
+ l_R[2] := TmsLineF.Create(TPointF.Create(R.Left, R.Bottom), TPointF.Create(R.Right, R.Bottom));
+ l_R[3] := TmsLineF.Create(TPointF.Create(R.Left, R.Top), TPointF.Create(R.Left, R.Bottom));
 
  for l_L in l_R do
-  if l_L.Cross(anOther, theCross) then
+  if l_L.SegmentsCross(anOther, theCross) then
    Exit;
 
  Result := false;

@@ -55,9 +55,12 @@ var
 begin
  if (f_LeftShape <> nil) then
  begin
-  l_A := inherited pm_GetStartPoint;
-//  l_A := f_LeftShape.StartPoint;
-  l_B := inherited pm_GetFinishPoint;
+//  l_A := inherited pm_GetStartPoint;
+  l_A := f_LeftShape.StartPoint;
+  if (f_RightShape <> nil) then
+   l_B := f_RightShape.StartPoint
+  else
+   l_B := inherited pm_GetFinishPoint;
   if TmsRectF.Create(f_LeftShape.DrawBounds).Cross(TmsLineF.Create(l_A, l_B), l_R) then
    Result := l_R.P
   else
