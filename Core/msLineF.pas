@@ -329,12 +329,20 @@ end;
 function TmsRectF.Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
 var
  l_R : array [0..3] of TmsLineF;
+ l_L : TmsLineF;
 begin
- Result := false;
+ Result := true;
+
  l_R[0] := TmsLineF.Create(R.TopLeft, TPointF.Create(R.Right, R.Top));
  l_R[1] := TmsLineF.Create(TPointF.Create(R.Right, R.Top), R.BottomRight);
  l_R[3] := TmsLineF.Create(R.BottomRight, TPointF.Create(R.Left, R.Bottom));
  l_R[3] := TmsLineF.Create(TPointF.Create(R.Left, R.Bottom), R.TopLeft);
+
+ for l_L in l_R do
+  if l_L.Cross(anOther, theCross) then
+   Exit;
+
+ Result := false;
 end;
 
 end.
