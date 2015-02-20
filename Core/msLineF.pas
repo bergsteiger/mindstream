@@ -327,8 +327,14 @@ begin
 end;
 
 function TmsRectF.Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
+var
+ l_R : array [0..3] of TmsLineF;
 begin
  Result := false;
+ l_R[0] := TmsLineF.Create(R.TopLeft, TPointF.Create(R.Right, R.Top));
+ l_R[1] := TmsLineF.Create(TPointF.Create(R.Right, R.Top), R.BottomRight);
+ l_R[3] := TmsLineF.Create(R.BottomRight, TPointF.Create(R.Left, R.Bottom));
+ l_R[3] := TmsLineF.Create(TPointF.Create(R.Left, R.Bottom), R.TopLeft);
 end;
 
 end.
