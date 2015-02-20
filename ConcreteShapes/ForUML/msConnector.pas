@@ -29,6 +29,10 @@ type
 
 implementation
 
+uses
+  msLineF
+  ;
+
 // TmsConnector
 
 constructor TmsConnector.CreateInner(const aCtx: TmsMakeShapeContext);
@@ -44,9 +48,20 @@ begin
 end;
 
 function TmsConnector.pm_GetStartPoint: TPointF;
+var
+ l_A : TPointF;
+ l_B : TPointF;
+ l_R : TmsPointF;
 begin
  if (f_LeftShape <> nil) then
-  Result := f_LeftShape.StartPoint
+ begin
+  l_A := inherited pm_GetStartPoint;
+  l_B := inherited pm_GetFinishPoint;
+  if TmsRectF.Create(f_LeftShape.DrawBounds).Cross(TmsLineF.Create(l_A, l_B), l_R) then
+   Result := l_R.P
+  else
+   Result := f_LeftShape.StartPoint;
+ end//f_LeftShape <> nil
  else
   Result := inherited;
 end;
