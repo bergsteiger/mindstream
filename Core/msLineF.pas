@@ -62,6 +62,12 @@ type
 
  TmsLineFPairs = array of TmsLineFPair;
 
+ TmsRectF = record
+ public
+  R : TRectF;
+  constructor Create(const aR: TRectF);
+ end;//TmsRectF
+
 implementation
 
 uses
@@ -303,6 +309,13 @@ end;
 function TmsLineFPair.SegmentsCross(out theCross: TmsPointF): Boolean;
 begin
  Result := L1.SegmentsCross(L2, theCross);
+end;
+
+// TmsRectF
+
+constructor TmsRectF.Create(const aR: TRectF);
+begin
+ R := aR;
 end;
 
 end.
