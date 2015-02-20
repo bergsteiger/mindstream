@@ -148,6 +148,8 @@ begin//DoCross
  dYdX := Self.dY * anOther.dX;
  dYdY := Self.dY * anOther.dY;
 
+ Assert(not IsZero(dXdY - dYdX));
+
  theCross.Y := (
                  dXdY * Self.A.Y -
                  dYdX * anOther.A.Y +
@@ -184,7 +186,7 @@ begin
 
  // ƒальше нужно проверить параллельность пр€мых
  l_Angle := ArcCos(Self.CosA(anOther));
- if IsZero(l_Angle) OR SameValue(l_Angle, pi) then
+ if IsZero(l_Angle) OR SameValue(l_Angle, pi) OR SameValue(l_Angle, 2 * pi) then
  begin
   theCross.X := -1;
   theCross.Y := -1;

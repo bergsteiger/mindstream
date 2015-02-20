@@ -55,7 +55,6 @@ var
 begin
  if (f_LeftShape <> nil) then
  begin
-//  l_A := inherited pm_GetStartPoint;
   l_A := f_LeftShape.StartPoint;
   if (f_RightShape <> nil) then
    l_B := f_RightShape.StartPoint
@@ -64,16 +63,30 @@ begin
   if TmsRectF.Create(f_LeftShape.DrawBounds).Cross(TmsLineF.Create(l_A, l_B), l_R) then
    Result := l_R.P
   else
-   Result := f_LeftShape.StartPoint;
+   Result := l_A;
  end//f_LeftShape <> nil
  else
   Result := inherited;
 end;
 
 function TmsConnector.pm_GetFinishPoint: TPointF;
+var
+ l_A : TPointF;
+ l_B : TPointF;
+ l_R : TmsPointF;
 begin
  if (f_RightShape <> nil) then
-  Result := f_RightShape.StartPoint
+ begin
+  l_B := f_RightShape.StartPoint;
+  if (f_LeftShape <> nil) then
+   l_A := f_LeftShape.StartPoint
+  else
+   l_A := inherited pm_GetStartPoint;
+  if TmsRectF.Create(f_RightShape.DrawBounds).Cross(TmsLineF.Create(l_A, l_B), l_R) then
+   Result := l_R.P
+  else
+   Result := l_B;
+ end//f_RightShape <> nil
  else
   Result := inherited;
 end;
