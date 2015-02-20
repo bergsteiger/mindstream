@@ -220,16 +220,20 @@ function TmsLineF.SegmentsCross(const anOther: TmsLineF; out theCross: TmsPointF
  var
   l_Min : Pixel;
   l_Max : Pixel;
- begin
+ begin//Btwn
   l_Min := Min(aB1, aB2);
   l_Max := Max(aB1, aB2);
   Result := (aValue >= l_Min) and (aValue <= l_Max);
- end;
+ end;//Btwn
 
 begin
  Result := Cross(anOther, theCross);
  if Result then
  begin
+  Result := Btwn(theCross.X, Self.A.X, Self.B.X) and
+            Btwn(theCross.X, anOther.A.X, anOther.B.X) and
+            Btwn(theCross.Y, Self.A.Y, Self.B.Y) and
+            Btwn(theCross.Y, anOther.A.Y, anOther.B.Y);
  end;//Result
 end;
 
