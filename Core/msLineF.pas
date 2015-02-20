@@ -134,12 +134,13 @@ begin
  Result := A.ToString + '_' + B.ToString;
 end;
 
-procedure DoCross(const Self: TmsLineF; const anOther: TmsLineF; out theCross: TmsPointF);
+function DoCross(const Self: TmsLineF; const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
 var
  dXdY : Pixel;
  dYdX : Pixel;
  dYdY : Pixel;
 begin//DoCross
+ Result := false;
  Assert(not IsZero(Self.dY));
 
  // - теперь тут можно будет вставить ЛЮБОЙ ДРУГОЙ алгоритм и посмотреть - "что будет"
@@ -147,6 +148,9 @@ begin//DoCross
  dXdY := Self.dX * anOther.dY;
  dYdX := Self.dY * anOther.dX;
  dYdY := Self.dY * anOther.dY;
+
+ if IsZero(dXdY - dYdX) then
+  Exit;
 
  Assert(not IsZero(dXdY - dYdX));
 
@@ -162,6 +166,7 @@ begin//DoCross
                Self.dX * (theCross.Y - Self.A.Y)
                 /
                Self.dY;
+ Result := true;
 end;//DoCross
 
 function TmsLineF.Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
@@ -211,8 +216,7 @@ begin
    end//IsZero(anOther.dY)
    else
    begin
-    DoCross(anOther, Self, theCross);
-    Result := true;
+    Result := DoCross(anOther, Self, theCross);
     Exit;
    end;//IsZero(anOther.dY)
   end;//IsZero(anOther.dX)
@@ -231,8 +235,7 @@ begin
 
  // Дальше можно по идее применять Мишин алгоритм:
 
- DoCross(Self, anOther, theCross);
- Result := true;
+ Result := DoCross(Self, anOther, theCross);
 end;
 
 function TmsLineF.SegmentsCross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
