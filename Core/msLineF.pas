@@ -74,7 +74,8 @@ implementation
 
 uses
  System.SysUtils,
- Math
+ Math,
+ FMX.DUnit.msAppLog
  ;
 
 // TmsPointF
