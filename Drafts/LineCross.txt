@@ -231,3 +231,5 @@ aX := (X2 - X1) * (aY - Y1) / (Y2 - Y1) + X1;
   https://bitbucket.org/ingword/mindstream/commits/d9d437cb2fd6917428c9b1efdeba2b0454d61ca9
  - если файл занят, то пытаемся переоткрыть его.
   https://bitbucket.org/ingword/mindstream/commits/aac8577ca8891c7e62d39331a758357b7e63133e
+ - убираем дурацкую проверку параллельности через угол. Она всё равно - не всегда работает.
+  https://bitbucket.org/ingword/mindstream/commits/d8bc46ceb3dfd2f2439c00ed29022f22c59cbdd7
