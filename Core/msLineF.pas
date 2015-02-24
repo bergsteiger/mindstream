@@ -150,7 +150,10 @@ begin//DoCross
  dYdY := Self.dY * anOther.dY;
 
  if IsZero(dXdY - dYdX) then
+ // - условие параллельности прямых
+ begin
   Exit;
+ end;//IsZero(dXdY - dYdX)
 
  Assert(not IsZero(dXdY - dYdX));
 
