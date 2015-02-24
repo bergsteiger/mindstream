@@ -155,6 +155,8 @@ begin//DoCross
  begin
 //  Self.ToLog(TmsAppLog.Instance);
 //  anOther.ToLog(TmsAppLog.Instance);
+  theCross.X := -1;
+  theCross.Y := -1;
   Exit;
  end;//IsZero(dXdY - dYdX)
 
@@ -176,8 +178,8 @@ begin//DoCross
 end;//DoCross
 
 function TmsLineF.Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
-var
- l_Angle : Single;
+(*var
+ l_Angle : Single;*)
 begin
  Result := false;
  theCross := TmsPointF.Create(High(Integer), High(Integer));
@@ -196,13 +198,13 @@ begin
  end;//IsZero(anOther.Length)
 
  // ƒальше нужно проверить параллельность пр€мых
- l_Angle := ArcCos(Self.CosA(anOther));
+(* l_Angle := ArcCos(Self.CosA(anOther));
  if IsZero(l_Angle) OR SameValue(l_Angle, pi) OR SameValue(l_Angle, 2 * pi) then
  begin
   theCross.X := -1;
   theCross.Y := -1;
   Exit;
- end;//IsZero(ArcCos(Self.CosA(anOther)))
+ end;//IsZero(ArcCos(Self.CosA(anOther)))*)
 
  if IsZero(Self.dY) then
  begin
