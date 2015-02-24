@@ -313,6 +313,12 @@ initialization
     TmsLineFPair.Create(
      TmsLineF.Create(0, 0, 0, 1),
      TmsLineF.Create(-1, -1, 1, 1)
+    ),
+
+    // Ещё один случай параллельности прямых
+    TmsLineFPair.Create(
+     TmsLineF.Create(414, 127, 414, 227),
+     TmsLineF.Create(364, 303, 364, 177)
     )
    ]
   )
