@@ -153,8 +153,8 @@ begin//DoCross
  if IsZero(dXdY - dYdX) then
  // - условие параллельности прямых
  begin
-  Self.ToLog(TmsAppLog.Instance);
-  anOther.ToLog(TmsAppLog.Instance);
+//  Self.ToLog(TmsAppLog.Instance);
+//  anOther.ToLog(TmsAppLog.Instance);
   Exit;
  end;//IsZero(dXdY - dYdX)
 
