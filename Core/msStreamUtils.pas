@@ -107,17 +107,22 @@ var
  l_GuardCount : Integer;
 begin
  l_GuardCount := 100;
- while (l_GuardCount > 0) do
+ while true do
  begin
   try
    Result := TFileStream.Create(aName, fmOpenRead);
-   break;
   except
    on EFOpenError do
-    ;
+   begin
+    Dec(l_GuardCount);
+    if (l_GuardCount <= 0) then
+     raise
+    else
+     continue;
+   end;//on EFOpenError
   end;//try..except
-  Dec(l_GuardCount);
- end;//while (l_GuardCount > 0)
+  break;
+ end;//while true
 end;
 
 function msCompareFiles(const aStream1, aStream2: String; aHeaderBegin : AnsiChar = #0): Boolean;

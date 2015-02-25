@@ -46,7 +46,11 @@ uses
   msScrollShapeDownRight,
   msScrollShapeResetOrigin,
   msScrollingTool,
-  msConnector
+  msConnector,
+  msGeneralization,
+  msRealization,
+  msAssociation,
+  msDependency
   ;
 
 // Важно !!!
@@ -101,7 +105,11 @@ begin
 
   TmsScrollingTool,
 
-  TmsConnector
+  TmsConnector,
+  TmsGeneralization,
+  TmsRealization,
+  TmsAssociation,
+  TmsDependency
  ]);
 end;
 
