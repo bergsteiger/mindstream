@@ -53,7 +53,8 @@ uses
   msDependency,
   msClass,
   msInterface,
-  msMixIn
+  msMixIn,
+  msLibrary
   ;
 
 // Важно !!!
@@ -116,7 +117,9 @@ begin
 
   TmsClass,
   TmsInterface,
-  TmsMixIn
+  TmsMixIn,
+
+  TmsLibrary
  ]);
 end;
 
