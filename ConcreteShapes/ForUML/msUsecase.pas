@@ -17,7 +17,9 @@ type
 implementation
 
 uses
- System.UITypes
+ System.Types,
+ System.UITypes,
+ FMX.Types
  ;
 
 procedure TmsUsecase.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
@@ -27,8 +29,23 @@ begin
 end;
 
 procedure TmsUsecase.DoDrawTo(const aCtx: TmsDrawContext);
+var
+ l_R : TRectF;
+ l_R1 : TRectF;
 begin
  inherited;
+ l_R := DrawBounds;
+
+ l_R1 := TRectF.Create(l_R.Left, l_R.Bottom, l_R.Right, l_R.Bottom + 20);
+
+ aCtx.rCanvas.Fill.Color :=  aCtx.rCanvas.Stroke.Color;
+ aCtx.rCanvas.FillText(l_R1,
+                       Stereotype,
+                       false,
+                       1,
+                       [],
+                       TTextAlign.Center,
+                       TTextAlign.Center);
 end;
 
 end.
