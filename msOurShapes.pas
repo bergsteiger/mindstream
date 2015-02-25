@@ -48,7 +48,9 @@ uses
   msScrollingTool,
   msConnector,
   msGeneralization,
-  msRealization
+  msRealization,
+  msAssociation,
+  msDependency
   ;
 
 // Важно !!!
@@ -105,7 +107,9 @@ begin
 
   TmsConnector,
   TmsGeneralization,
-  TmsRealization
+  TmsRealization,
+  TmsAssociation,
+  TmsDependency
  ]);
 end;
 

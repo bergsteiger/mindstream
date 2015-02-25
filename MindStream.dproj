@@ -323,6 +323,10 @@
         <DCCReference Include="ConcreteShapes\ForUML\msConnector.pas"/>
         <DCCReference Include="Tests\Module\msLineCrossTest.pas"/>
         <DCCReference Include="Core\msLineF.pas"/>
+        <DCCReference Include="ConcreteShapes\ForUML\msGeneralization.pas"/>
+        <DCCReference Include="ConcreteShapes\ForUML\msRealization.pas"/>
+        <DCCReference Include="ConcreteShapes\ForUML\msDependency.pas"/>
+        <DCCReference Include="ConcreteShapes\ForUML\msAssociation.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>

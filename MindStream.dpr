@@ -138,8 +138,11 @@ uses
   FMX.DUnit.msLog in 'fmx.dunit\FMX.DUnit.msLog.pas',
   msConnector in 'ConcreteShapes\ForUML\msConnector.pas',
   msLineCrossTest in 'Tests\Module\msLineCrossTest.pas',
-  msLineF in 'Core\msLineF.pas'
-  ;
+  msLineF in 'Core\msLineF.pas',
+  msGeneralization in 'ConcreteShapes\ForUML\msGeneralization.pas',
+  msRealization in 'ConcreteShapes\ForUML\msRealization.pas',
+  msDependency in 'ConcreteShapes\ForUML\msDependency.pas',
+  msAssociation in 'ConcreteShapes\ForUML\msAssociation.pas';
 
 {$R *.res}
 
