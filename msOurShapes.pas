@@ -57,7 +57,8 @@ uses
   msLibrary,
   msProject,
   msSubsystem,
-  msUsecase
+  msUsecase,
+  msUsecaseRealization
   ;
 
 // Важно !!!
@@ -126,7 +127,8 @@ begin
   TmsProject,
   TmsSubsystem,
 
-  TmsUsecase
+  TmsUsecase,
+  TmsUsecaseRealization
  ]);
 end;
 

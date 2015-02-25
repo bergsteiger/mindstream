@@ -36,7 +36,7 @@ begin
  inherited;
  l_R := DrawBounds;
 
- l_R1 := TRectF.Create(l_R.Left, l_R.Bottom, l_R.Right, l_R.Bottom + 20);
+ l_R1 := TRectF.Create(l_R.Left - 20, l_R.Bottom, l_R.Right + 20, l_R.Bottom + 20);
 
  aCtx.rCanvas.Fill.Color :=  aCtx.rCanvas.Stroke.Color;
  aCtx.rCanvas.FillText(l_R1,
