@@ -50,7 +50,8 @@ uses
   msGeneralization,
   msRealization,
   msAssociation,
-  msDependency
+  msDependency,
+  msClass
   ;
 
 // Важно !!!
@@ -109,7 +110,9 @@ begin
   TmsGeneralization,
   TmsRealization,
   TmsAssociation,
-  TmsDependency
+  TmsDependency,
+
+  TmsClass
  ]);
 end;
 
