@@ -143,7 +143,9 @@ uses
   msRealization in 'ConcreteShapes\ForUML\msRealization.pas',
   msDependency in 'ConcreteShapes\ForUML\msDependency.pas',
   msAssociation in 'ConcreteShapes\ForUML\msAssociation.pas',
-  msClass in 'ConcreteShapes\ForUML\msClass.pas';
+  msClass in 'ConcreteShapes\ForUML\msClass.pas',
+  msInterface in 'ConcreteShapes\ForUML\msInterface.pas',
+  msMixIn in 'ConcreteShapes\ForUML\msMixIn.pas';
 
 {$R *.res}
 

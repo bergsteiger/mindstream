@@ -52,7 +52,8 @@ uses
   msAssociation,
   msDependency,
   msClass,
-  msInterface
+  msInterface,
+  msMixIn
   ;
 
 // Важно !!!
@@ -114,7 +115,8 @@ begin
   TmsDependency,
 
   TmsClass,
-  TmsInterface
+  TmsInterface,
+  TmsMixIn
  ]);
 end;
 
