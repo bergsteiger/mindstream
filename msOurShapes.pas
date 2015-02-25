@@ -54,7 +54,8 @@ uses
   msClass,
   msInterface,
   msMixIn,
-  msLibrary
+  msLibrary,
+  msProject
   ;
 
 // Важно !!!
@@ -119,7 +120,8 @@ begin
   TmsInterface,
   TmsMixIn,
 
-  TmsLibrary
+  TmsLibrary,
+  TmsProject
  ]);
 end;
 

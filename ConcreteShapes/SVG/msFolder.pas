@@ -23,7 +23,7 @@ begin
   // begin UHO
   'L 0, 0' +
   'L 40, 0' +
-  'L 40, 0';
+  'L 40, 20';
 end;
 
 end.
