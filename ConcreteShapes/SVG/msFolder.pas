@@ -19,11 +19,11 @@ implementation
 
 function TmsFolder.GetPolygonSVG: String;
 begin
-  Result := 'M 40,40, L 100,40, L 100,80, L 40,80, L 40,40' +
+  Result := 'M 0,20, L 100,20, L 100,90, L 0,90, L 0,20' +
   // begin UHO
-  'L 40,20' +
-  'L 60, 20' +
-  'L 60, 40';
+  'L 0, 0' +
+  'L 40, 0' +
+  'L 40, 20';
 end;
 
 end.

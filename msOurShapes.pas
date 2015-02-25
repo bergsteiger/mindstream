@@ -50,7 +50,13 @@ uses
   msGeneralization,
   msRealization,
   msAssociation,
-  msDependency
+  msDependency,
+  msClass,
+  msInterface,
+  msMixIn,
+  msLibrary,
+  msProject,
+  msSubsystem
   ;
 
 // Важно !!!
@@ -109,7 +115,15 @@ begin
   TmsGeneralization,
   TmsRealization,
   TmsAssociation,
-  TmsDependency
+  TmsDependency,
+
+  TmsClass,
+  TmsInterface,
+  TmsMixIn,
+
+  TmsLibrary,
+  TmsProject,
+  TmsSubsystem
  ]);
 end;
 
