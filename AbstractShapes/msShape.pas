@@ -141,6 +141,7 @@ function TmsShape.Stereotype: String;
 begin
  Result := ClassName;
  Result := Copy(Result, 4, Length(Result) - 3);
+ Result := '<< ' + Result + ' >>';
 end;
 
 procedure TmsShape.MoveBy(const aCtx: TmsMoveContext);

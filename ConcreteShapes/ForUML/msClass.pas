@@ -33,7 +33,7 @@ begin
                        TPointF.Create(l_R.Right, l_R.Top + l_R.Height / 3), 1);
  aCtx.rCanvas.DrawLine(TPointF.Create(l_R.Left, l_R.Top +  2 * l_R.Height / 3),
                        TPointF.Create(l_R.Right, l_R.Top + 2 * l_R.Height / 3), 1);
- l_S := '<< ' + Stereotype + ' >>';
+ l_S := Stereotype;
 
  l_R1 := TRectF.Create(l_R.Left, l_R.Top, l_R.Right, l_R.Top + l_R.Height / 3);
 
