@@ -50,7 +50,8 @@ end;
 
 function TmsClass.Stereotype: String;
 begin
- Result := 'Class';
+ Result := ClassName;
+ Result := Copy(Result, 4, Length(Result) - 3);
 end;
 
 end.

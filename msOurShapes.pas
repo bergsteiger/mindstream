@@ -51,7 +51,8 @@ uses
   msRealization,
   msAssociation,
   msDependency,
-  msClass
+  msClass,
+  msInterface
   ;
 
 // Важно !!!
@@ -112,7 +113,8 @@ begin
   TmsAssociation,
   TmsDependency,
 
-  TmsClass
+  TmsClass,
+  TmsInterface
  ]);
 end;
 
