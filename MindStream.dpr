@@ -148,7 +148,8 @@ uses
   msMixIn in 'ConcreteShapes\ForUML\msMixIn.pas',
   msLibrary in 'ConcreteShapes\ForUML\msLibrary.pas',
   msProject in 'ConcreteShapes\ForUML\msProject.pas',
-  msSubsystem in 'ConcreteShapes\ForUML\msSubsystem.pas';
+  msSubsystem in 'ConcreteShapes\ForUML\msSubsystem.pas',
+  msUsecase in 'ConcreteShapes\ForUML\msUsecase.pas';
 
 {$R *.res}
 

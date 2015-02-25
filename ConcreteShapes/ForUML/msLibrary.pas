@@ -11,7 +11,6 @@ type
  TmsLibrary = class(TmsFolder)
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  function Stereotype: String;
  end;//TmsClass
 
 implementation
@@ -47,12 +46,6 @@ begin
                        [],
                        TTextAlign.Center,
                        TTextAlign.Center);
-end;
-
-function TmsLibrary.Stereotype: String;
-begin
- Result := ClassName;
- Result := Copy(Result, 4, Length(Result) - 3);
 end;
 
 end.

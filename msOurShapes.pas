@@ -56,7 +56,8 @@ uses
   msMixIn,
   msLibrary,
   msProject,
-  msSubsystem
+  msSubsystem,
+  msUsecase
   ;
 
 // Важно !!!
@@ -123,7 +124,9 @@ begin
 
   TmsLibrary,
   TmsProject,
-  TmsSubsystem
+  TmsSubsystem,
+
+  TmsUsecase
  ]);
 end;
 

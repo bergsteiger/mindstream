@@ -41,6 +41,7 @@ type
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; virtual;
   procedure MouseMove(const aClickContext: TmsEndShapeContext); virtual;
   // - действие при MouseMove
+  function Stereotype: String;
  protected
   class function Create(const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
  public
@@ -134,6 +135,12 @@ end;
 procedure TmsShape.MouseMove(const aClickContext: TmsEndShapeContext);
 begin
  // Ничего не делаем, специально
+end;
+
+function TmsShape.Stereotype: String;
+begin
+ Result := ClassName;
+ Result := Copy(Result, 4, Length(Result) - 3);
 end;
 
 procedure TmsShape.MoveBy(const aCtx: TmsMoveContext);
