@@ -55,7 +55,8 @@ uses
   msInterface,
   msMixIn,
   msLibrary,
-  msProject
+  msProject,
+  msSubsystem
   ;
 
 // Важно !!!
@@ -121,7 +122,8 @@ begin
   TmsMixIn,
 
   TmsLibrary,
-  TmsProject
+  TmsProject,
+  TmsSubsystem
  ]);
 end;
 

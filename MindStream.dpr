@@ -147,7 +147,8 @@ uses
   msInterface in 'ConcreteShapes\ForUML\msInterface.pas',
   msMixIn in 'ConcreteShapes\ForUML\msMixIn.pas',
   msLibrary in 'ConcreteShapes\ForUML\msLibrary.pas',
-  msProject in 'ConcreteShapes\ForUML\msProject.pas';
+  msProject in 'ConcreteShapes\ForUML\msProject.pas',
+  msSubsystem in 'ConcreteShapes\ForUML\msSubsystem.pas';
 
 {$R *.res}
 
