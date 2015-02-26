@@ -59,7 +59,6 @@ uses
   msProject,
   msSubsystem,
   msUsecase,
-  msUsecaseRealization,
   msProxyShapeClass,
   msTrivial
   ;

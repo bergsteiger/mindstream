@@ -150,7 +150,6 @@ uses
   msProject in 'ConcreteShapes\ForUML\msProject.pas',
   msSubsystem in 'ConcreteShapes\ForUML\msSubsystem.pas',
   msUsecase in 'ConcreteShapes\ForUML\msUsecase.pas',
-  msUsecaseRealization in 'ConcreteShapes\ForUML\msUsecaseRealization.pas',
   msTrivial in 'ConcreteShapes\ForUML\msTrivial.pas';
 
 {$R *.res}
