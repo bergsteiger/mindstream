@@ -288,14 +288,14 @@ begin
    l_Shape : ImsShape;
    l_Index : Integer;
   begin
-   Check(aDiagramm.Name = f_Context.rDiagrammName);
-   Check(Length(f_Coords) = aDiagramm.ItemsCount);
+   Check(aDiagramm.Name = f_Context.rDiagrammName, 'Не совпадает имя диаграммы');
+   Check(Length(f_Coords) = aDiagramm.ItemsCount, 'Не совпадает число примитивов');
    l_Index := 0;
    for l_Shape in aDiagramm do
    begin
-    Check(Self.ShapeClass.IsOurInstance(l_Shape));
-    Check(l_Shape.StartPoint.X = f_Coords[l_Index].X);
-    Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y);
+    Check(Self.ShapeClass.IsOurInstance(l_Shape), 'Это не наш тип примитива');
+    Check(l_Shape.StartPoint.X = f_Coords[l_Index].X, 'Координаты X не совпадают');
+    Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y, 'Координаты Y не совпадают');
     Inc(l_Index);
    end;//for l_Shape
   end

@@ -135,6 +135,12 @@ type
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
  end;//ImsShapeCreator
 
+ ImsShapeCreatorFriend = interface
+ // - Это "затычка", но пока так. Чтобы не терять темп.
+  ['{59C7ED7A-C4C7-4632-A59C-2CBF070FCA19}']
+  function ShapeClassForCreate: TClass;
+ end;//ImsShapeCreatorFriend
+
  TmsJSONMarshal = TJSONMarshal;
  TmsJSONUnMarshal = TJSONUnMarshal;
 

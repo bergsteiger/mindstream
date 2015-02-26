@@ -9,7 +9,7 @@ uses
  ;
 
 type
- TmsShapeCreator = class(TmsInterfacedRefcounted, ImsShapeCreator)
+ TmsShapeCreator = class(TmsInterfacedRefcounted, ImsShapeCreator, ImsShapeCreatorFriend)
  // создатель TmsShape
  private
   f_ShapeClass : RmsShape;
@@ -22,6 +22,7 @@ type
   // - класс примитивов для создания
  protected
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; virtual;
+  function ShapeClassForCreate: TClass;
  public
   class function Create(const aShapeMC : ImsShapeClass; aShapeClass: RmsShape): ImsShapeCreator; overload;
   class function Create(aShapeClass: RmsShape): ImsShapeCreator; overload;
@@ -61,6 +62,11 @@ end;
 function TmsShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 begin
  Result := RmsShapeFriend(f_ShapeClass).Create(f_ShapeMC, aContext);
+end;
+
+function TmsShapeCreator.ShapeClassForCreate: TClass;
+begin
+ Result := f_ShapeClass;
 end;
 
 end.

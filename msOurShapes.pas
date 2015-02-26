@@ -131,6 +131,10 @@ begin
   TmsUsecase,
   TmsUsecaseRealization
  ]);
+
+ TmsRegisteredShapes.Instance.RegisterMC([
+  TmsProxyShapeClass.Create('Layer', TmsLibrary)
+ ]);
 end;
 
 initialization

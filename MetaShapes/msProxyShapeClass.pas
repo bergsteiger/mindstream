@@ -78,24 +78,30 @@ begin
 end;
 
 function TmsProxyShapeClass.Creator: ImsShapeCreator;
+var
+ l_SC : TClass;
 begin
  Assert(f_ShapeClass <> nil);
- Assert(false, 'Не реализовано');
- Result := f_ShapeClass.Creator;
+ l_SC := (f_ShapeClass.Creator As ImsShapeCreatorFriend).ShapeClassForCreate;
+ Assert(l_SC.InheritsFrom(TmsShape));
+ Result := TmsShapeCreator.Create(Self, RmsShape(l_SC));
+ //Result := f_ShapeClass.Creator;
 end;
 
 function TmsProxyShapeClass.Name: String;
 begin
  Assert(f_ShapeClass <> nil);
- Assert(false, 'Не реализовано');
- Result := f_ShapeClass.Name;
+ Result := f_Name;
+(* Assert(false, 'Не реализовано');
+ Result := f_ShapeClass.Name;*)
 end;
 
 function TmsProxyShapeClass.Stereotype: String;
 begin
  Assert(f_ShapeClass <> nil);
- Assert(false, 'Не реализовано');
- Result := f_ShapeClass.Stereotype;
+ Result := f_Name;
+(* Assert(false, 'Не реализовано');
+ Result := f_ShapeClass.Stereotype;*)
 end;
 
 procedure TmsProxyShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
@@ -126,7 +132,8 @@ function TmsProxyShapeClass.IsOurInstance(const aShape: ImsShape): Boolean;
 begin
  Assert(f_ShapeClass <> nil);
  Assert(aShape.ShapeClass <> nil);
- Result := aShape.ShapeClass.Name = f_ShapeClass.Name;
+ Result := aShape.ShapeClass.Name = Self.f_Name;
+// Result := aShape.ShapeClass.Name = f_ShapeClass.Name;
 end;
 
 function TmsProxyShapeClass.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
