@@ -125,6 +125,8 @@ var
 begin
  Result := aShape.DrawBounds;
  l_Len := TmsSpecialArrow.InitialLength;
+ if atCenter then
+  l_Len := l_Len / 2;
  l_Offset := l_Len + cShift;
 
  Result.Inflate(l_Offset, l_Offset);
