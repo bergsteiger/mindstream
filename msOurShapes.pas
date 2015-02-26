@@ -133,8 +133,8 @@ begin
   TmsUsecase
  ]);
 
- TmsRegisteredShapes.Instance.Register([
-  TmsUsecaseRealization
+ TmsRegisteredShapes.Instance.RegisterMC([
+  TmsProxyShapeClass.Create('UsecaseRealization', TmsUsecase).SetFillColor(TAlphaColorRec.Lightgreen)
  ]);
 
  TmsRegisteredShapes.Instance.Register([
