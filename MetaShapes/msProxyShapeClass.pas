@@ -14,6 +14,7 @@ type
  private
   f_ShapeClass : MCmsShape;
   f_Name : String;
+  f_Stereotype : String;
   f_FillColor : TmsColorRec;
  private
   constructor CreateInner(const aName : String; const aShapeClass: MCmsShape);
@@ -50,7 +51,8 @@ constructor TmsProxyShapeClass.CreateInner(const aName : String; const aShapeCla
 begin
  inherited Create;
  f_ShapeClass := aShapeClass;
- f_Name := aName;
+ f_Stereotype := aName;
+ f_Name := 'Tms' + f_Stereotype;
 end;
 
 class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass;
@@ -103,7 +105,7 @@ end;
 function TmsProxyShapeClass.Stereotype: String;
 begin
  Assert(f_ShapeClass <> nil);
- Result := f_Name;
+ Result := f_Stereotype;
 (* Assert(false, 'Не реализовано');
  Result := f_ShapeClass.Stereotype;*)
 end;
