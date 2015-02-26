@@ -58,7 +58,8 @@ uses
   msProject,
   msSubsystem,
   msUsecase,
-  msUsecaseRealization
+  msUsecaseRealization,
+  msProxyShapeClass
   ;
 
 // Важно !!!
