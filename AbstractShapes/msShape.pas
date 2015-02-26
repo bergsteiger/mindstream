@@ -21,6 +21,8 @@ type
  strict private
   [JSONMarshalled(False)]
   f_ShapeClass : ImsShapeClass;
+  f_ShapeClassName : String;
+  // - тут дублирование данных, но исключительно из-за кривизны маршалинга
  private
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
  strict protected
@@ -132,6 +134,7 @@ constructor TmsShape.CreateInner(const aShapeClass : ImsShapeClass; const aCtx: 
 begin
  Assert(aShapeClass <> nil);
  f_ShapeClass := aShapeClass;
+ f_ShapeClassName := f_ShapeClass.Name;
  inherited Create;
  SetStartPoint(aCtx.rStartPoint);
 end;
