@@ -121,9 +121,11 @@ end;
 class function TmsMover.RectForButtons(const aShape: ImsShape; atCenter: Boolean): TRectF;
 var
  l_Offset : Single;
+ l_Len : Single;
 begin
  Result := aShape.DrawBounds;
- l_Offset := TmsSpecialArrow.InitialLength + cShift;
+ l_Len := TmsSpecialArrow.InitialLength;
+ l_Offset := l_Len + cShift;
 
  Result.Inflate(l_Offset, l_Offset);
 end;
