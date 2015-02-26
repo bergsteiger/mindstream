@@ -28,6 +28,8 @@ type
  strict protected
   function pm_GetStartPoint: TPointF; virtual;
   function pm_GetShapeClass: ImsShapeClass;
+  property ShapeClass: ImsShapeClass
+   read pm_GetShapeClass;
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); virtual;
   procedure SetStartPoint(const aStartPoint: TPointF); virtual;
  protected
@@ -152,8 +154,7 @@ end;
 
 function TmsShape.Stereotype: String;
 begin
- Result := ClassName;
- Result := Copy(Result, 4, Length(Result) - 3);
+ Result := Self.ShapeClass.Stereotype;
  Result := '<< ' + Result + ' >>';
 end;
 

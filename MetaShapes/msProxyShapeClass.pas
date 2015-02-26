@@ -20,6 +20,7 @@ type
   function IsLineLike: Boolean;
   function Creator: ImsShapeCreator;
   function Name: String;
+  function Stereotype: String;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
@@ -86,6 +87,13 @@ begin
  Assert(f_ShapeClass <> nil);
  Assert(false, 'Не реализовано');
  Result := f_ShapeClass.Name;
+end;
+
+function TmsProxyShapeClass.Stereotype: String;
+begin
+ Assert(f_ShapeClass <> nil);
+ Assert(false, 'Не реализовано');
+ Result := f_ShapeClass.Stereotype;
 end;
 
 procedure TmsProxyShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);

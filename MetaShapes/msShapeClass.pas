@@ -26,6 +26,7 @@ type
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
+  function Stereotype: String;
  public
   class function Create(aShapeClass: RmsShape): ImsShapeClass;
  end;//TmsShapeClass
@@ -80,6 +81,13 @@ function TmsShapeClass.Name: String;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.ClassName;
+end;
+
+function TmsShapeClass.Stereotype: String;
+begin
+ Assert(f_ShapeClass <> nil);
+ Result := f_ShapeClass.ClassName;
+ Result := Copy(Result, 4, Length(Result) - 3);
 end;
 
 procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);

@@ -169,6 +169,7 @@ type
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
+  function Stereotype: String;
  end;//ImsShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)
