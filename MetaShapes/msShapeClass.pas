@@ -33,7 +33,8 @@ type
 implementation
 
 uses
- msShapeCreator
+ msShapeCreator,
+ msRegisteredShapes
  ;
 
 // TmsShapeClass
@@ -46,7 +47,9 @@ end;
 
 class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClass;
 begin
- Result := CreateInner(aShapeClass);
+ Result := TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName);
+ if (Result = nil) then
+  Result := CreateInner(aShapeClass);
 end;
 
 function TmsShapeClass.IsForToolbar: Boolean;
