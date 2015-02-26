@@ -186,6 +186,9 @@ type
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
  end;//ImsShapeClass
 
+ ImsTunableShapeClass = interface(ImsShapeClass)
+ end;//ImsTunableShapeClass
+
  ImsDiagramm = interface(ImsShapesProvider)
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
   function Get_Name: String;

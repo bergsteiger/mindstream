@@ -9,7 +9,7 @@ uses
  ;
 
 type
- TmsProxyShapeClass = class(TmsInterfacedRefcounted, ImsShapeClass)
+ TmsProxyShapeClass = class(TmsInterfacedRefcounted, ImsShapeClass, ImsTunableShapeClass)
  private
   f_ShapeClass : MCmsShape;
   f_Name : String;
@@ -31,8 +31,8 @@ type
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
  public
-  class function Create(const aName : String; const aShapeClass: MCmsShape): ImsShapeClass; overload;
-  class function Create(const aName : String; const aShapeClass: RmsShape): ImsShapeClass; overload;
+  class function Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass; overload;
+  class function Create(const aName : String; const aShapeClass: RmsShape): ImsTunableShapeClass; overload;
  end;//TmsProxyShapeClass
 
 implementation
@@ -51,12 +51,12 @@ begin
  f_Name := aName;
 end;
 
-class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: MCmsShape): ImsShapeClass;
+class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass;
 begin
  Result := CreateInner(aName, aShapeClass);
 end;
 
-class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: RmsShape): ImsShapeClass;
+class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: RmsShape): ImsTunableShapeClass;
 begin
  Result := Create(aName, TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName));
 end;
