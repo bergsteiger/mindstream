@@ -49,6 +49,7 @@ var
  l_Shape : ImsShape;
 begin
  Assert(Length(aShapes) > 0, 'Пустую группу примитивов глупо создавать');
+ Assert(aShapeClass <> nil, 'Не задан мета-класс примитива');
  inherited CreateInner(aShapeClass, TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
  f_Shapes := TmsShapesList.Create;
  for l_Shape in aShapes do

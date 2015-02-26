@@ -22,6 +22,7 @@ type
   function Creator: ImsShapeCreator;
   function Name: String;
   function Stereotype: String;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
@@ -102,6 +103,12 @@ begin
  Result := f_Name;
 (* Assert(false, 'Не реализовано');
  Result := f_ShapeClass.Stereotype;*)
+end;
+
+procedure TmsProxyShapeClass.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+begin
+ Assert(f_ShapeClass <> nil);
+ f_ShapeClass.TransformDrawOptionsContext(theCtx);
 end;
 
 procedure TmsProxyShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);

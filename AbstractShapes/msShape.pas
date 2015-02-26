@@ -65,6 +65,7 @@ type
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
   class function Create(const aStartPoint: TPointF): ImsShape; overload;
+  class function Create: ImsShape; overload;
  public
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
@@ -120,6 +121,11 @@ begin
  Result := Create(TmsShapeClass.Create(Self), aStartPoint);
 end;
 
+class function TmsShape.Create: ImsShape;
+begin
+ Result := Create(TPointF.Create(0, 0));
+end;
+
 function TmsShape.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
 begin
  Result := ContainsPt(aPoint);
@@ -137,6 +143,7 @@ begin
  Assert(aShapeClass <> nil);
  f_ShapeClass := aShapeClass;
  f_ShapeClassName := f_ShapeClass.Name;
+ Assert(f_ShapeClassName <> '');
  inherited Create;
  SetStartPoint(aCtx.rStartPoint);
 end;
@@ -202,6 +209,7 @@ function TmsShape.DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptions
 begin
  Result := TmsDrawOptionsContext.Create(aCtx);
  TransformDrawOptionsContext(Result);
+ Self.ShapeClass.TransformDrawOptionsContext(Result);
 end;
 
 class function TmsShape.IsTool: Boolean;

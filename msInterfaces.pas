@@ -178,6 +178,7 @@ type
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function Stereotype: String;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
  end;//ImsShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)

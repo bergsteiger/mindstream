@@ -27,6 +27,7 @@ type
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function Stereotype: String;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
  public
   class function Create(aShapeClass: RmsShape): ImsShapeClass;
  end;//TmsShapeClass
@@ -51,6 +52,7 @@ begin
  Result := TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName);
  if (Result = nil) then
   Result := CreateInner(aShapeClass);
+ Assert(Result <> nil);
 end;
 
 function TmsShapeClass.IsForToolbar: Boolean;
@@ -88,6 +90,11 @@ begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.ClassName;
  Result := Copy(Result, 4, Length(Result) - 3);
+end;
+
+procedure TmsShapeClass.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+begin
+ // - тут ничего не делаем
 end;
 
 procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
