@@ -133,7 +133,8 @@ begin
  ]);
 
  TmsRegisteredShapes.Instance.RegisterMC([
-  TmsProxyShapeClass.Create('Layer', TmsLibrary)
+  TmsProxyShapeClass.Create('Layer', TmsLibrary),
+  TmsProxyShapeClass.Create('Typedef', TmsClass)
  ]);
 end;
 
