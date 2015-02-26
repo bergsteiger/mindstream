@@ -130,6 +130,8 @@ end;
 
 constructor TmsShape.CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext);
 begin
+ Assert(aShapeClass <> nil);
+ f_ShapeClass := aShapeClass;
  inherited Create;
  SetStartPoint(aCtx.rStartPoint);
 end;
