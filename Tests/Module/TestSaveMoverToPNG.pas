@@ -87,7 +87,7 @@ end;
 
 // TmsMoverFloatingButtonsTest
 
-procedure TmsMoverFloatingButtonsTest.MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape);
+procedure TmsMoverFloatingButtonsTest.MoverApplied(const aDiagramm: ImsDiagramm; const aShape: ImsShape; const aMover: ImsShape);
 var
  l_ClickPoint : TPointF;
  l_Ctx : TmsEndShapeContext;
@@ -98,7 +98,7 @@ begin
   l_ClickPoint := TmsMover.ButtonPoint(f_Button, aShape);
   l_Ctx := TmsEndShapeContext.Create(l_ClickPoint, aDiagramm.ShapesController, nil);
 
-//  l_S := TmsPointCircle.Create(l_ClickPoint);
+  CheckFalse(aShape.DrawBounds.Contains(l_ClickPoint), 'Фигура не должна содержать точку клика');
   aMover.EndTo(l_Ctx);
   l_S := TmsPointCircle.Create(l_ClickPoint);
   Assert(l_S.StartPoint = l_ClickPoint);
