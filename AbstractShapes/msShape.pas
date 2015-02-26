@@ -268,13 +268,16 @@ end;
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
 var
  l_Ctx : TmsDrawOptionsContext;
+ l_DrawContext : TmsDrawContext;
 begin
  l_Ctx := DrawOptionsContext(aCtx);
  aCtx.rCanvas.Fill.Color := l_Ctx.rFillColor;
  aCtx.rCanvas.Stroke.Dash := l_Ctx.rStrokeDash;
  aCtx.rCanvas.Stroke.Color := l_Ctx.rStrokeColor;
  aCtx.rCanvas.Stroke.Thickness := l_Ctx.rStrokeThickness;
- DoDrawTo(aCtx);
+ l_DrawContext := aCtx;
+ l_DrawContext.rOpacity := l_Ctx.rOpacity;
+ DoDrawTo(l_DrawContext);
 end;
 
 procedure TmsShape.SaveTo(const aFileName: String);

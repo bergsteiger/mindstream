@@ -40,8 +40,19 @@ type
   public
    rCanvas : TCanvas;
    rMoving : Boolean; // - определяем, что текущий рисуемый примитив - двигается
+   rOpacity: Single;
    constructor Create(const aCanvas : TCanvas);
  end;//TmsDrawContext
+
+ TmsDrawOptionsContext = record
+  public
+   rFillColor: TAlphaColor;
+   rStrokeDash: TStrokeDash;
+   rStrokeColor: TAlphaColor;
+   rStrokeThickness: Single;
+   rOpacity: Single;
+   constructor Create(const aCtx: TmsDrawContext);
+ end;//TmsDrawOptionsContext
 
  ImsDiagrammsHolder = interface;
 
@@ -54,15 +65,6 @@ type
  end;//TmsMakeShapeContext
 
  TmsEndShapeContext = TmsMakeShapeContext;
-
- TmsDrawOptionsContext = record
-  public
-   rFillColor: TAlphaColor;
-   rStrokeDash: TStrokeDash;
-   rStrokeColor: TAlphaColor;
-   rStrokeThickness: Single;
-   constructor Create(const aCtx: TmsDrawContext);
- end;//TmsDrawOptionsContext
 
  ImsDiagramm = interface;
 
@@ -223,6 +225,7 @@ constructor TmsDrawContext.Create(const aCanvas : TCanvas);
 begin
  rCanvas := aCanvas;
  rMoving := false;
+ rOpacity := 0.5;
 end;
 
 // TmsMakeShapeContext
@@ -239,6 +242,7 @@ end;
 constructor TmsDrawOptionsContext.Create(const aCtx: TmsDrawContext);
 begin
  rFillColor :=  TAlphaColorRec.Null;
+ rOpacity := 0.5;
  if aCtx.rMoving then
  begin
   rStrokeDash := TStrokeDash.DashDot;
