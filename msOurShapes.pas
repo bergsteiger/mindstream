@@ -130,7 +130,10 @@ begin
   TmsProject,
   TmsSubsystem,
 
-  TmsUsecase,
+  TmsUsecase
+ ]);
+
+ TmsRegisteredShapes.Instance.Register([
   TmsUsecaseRealization
  ]);
 
