@@ -44,6 +44,11 @@ type
    constructor Create(const aCanvas : TCanvas);
  end;//TmsDrawContext
 
+ TmsColorRec = record
+  rIsSet : Boolean;
+  rValue : TAlphaColor;
+ end;//TmsColorRec
+
  TmsDrawOptionsContext = record
   public
    rFillColor: TAlphaColor;

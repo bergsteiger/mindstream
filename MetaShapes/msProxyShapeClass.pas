@@ -13,6 +13,7 @@ type
  private
   f_ShapeClass : MCmsShape;
   f_Name : String;
+  f_FillColor : TmsColorRec;
  private
   constructor CreateInner(const aName : String; const aShapeClass: MCmsShape);
  protected
@@ -109,6 +110,8 @@ procedure TmsProxyShapeClass.TransformDrawOptionsContext(var theCtx: TmsDrawOpti
 begin
  Assert(f_ShapeClass <> nil);
  f_ShapeClass.TransformDrawOptionsContext(theCtx);
+ if f_FillColor.rIsSet then
+  theCtx.rFillColor := f_FillColor.rValue;
 end;
 
 procedure TmsProxyShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
