@@ -339,8 +339,24 @@ begin
 end;
 
 procedure TmsDiagrammsController.btSaveJSonAndPNGClick(Sender: TObject);
+var
+ l_SaveDialog: TSaveDialog;
 begin
- assert(false, 'not working');
+ l_SaveDialog := TSaveDialog.Create(nil);
+ l_SaveDialog.Filter := '*';
+ try
+  l_SaveDialog.Execute;
+  try
+   f_DiagrammsRoot.SaveTo(l_SaveDialog.FileName + '.json');
+   SaveToPng(l_SaveDialog.FileName + '.png');
+  except
+   on E: Exception do
+    ShowMessage('Произошла ошибка при сохранении');
+  end;
+
+ finally
+  FreeAndNil(l_SaveDialog);
+ end;//try..finally
 end;
 
 procedure TmsDiagrammsController.btSaveToPNGClick(Sender: TObject);
