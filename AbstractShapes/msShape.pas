@@ -187,7 +187,7 @@ end;
 function TmsShape.pm_GetShapeClass: ImsShapeClass;
 begin
  if (f_ShapeClass = nil) then
-  f_ShapeClass := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
+  f_ShapeClass := TmsRegisteredShapes.Instance.ByName(f_ShapeClassName);
  Result := f_ShapeClass;
  Assert(Result <> nil);
 end;
