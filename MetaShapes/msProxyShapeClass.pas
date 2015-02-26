@@ -12,8 +12,9 @@ type
  TmsProxyShapeClass = class(TmsInterfacedRefcounted, ImsShapeClass)
  private
   f_ShapeClass : MCmsShape;
+  f_Name : String;
  private
-  constructor CreateInner(const aShapeClass: MCmsShape);
+  constructor CreateInner(const aName : String; const aShapeClass: MCmsShape);
  protected
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
@@ -28,8 +29,8 @@ type
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
  public
-  class function Create(const aShapeClass: MCmsShape): ImsShapeClass; overload;
-  class function Create(const aShapeClass: RmsShape): ImsShapeClass; overload;
+  class function Create(const aName : String; const aShapeClass: MCmsShape): ImsShapeClass; overload;
+  class function Create(const aName : String; const aShapeClass: RmsShape): ImsShapeClass; overload;
  end;//TmsProxyShapeClass
 
 implementation
@@ -41,20 +42,21 @@ uses
 
 // TmsProxyShapeClass
 
-constructor TmsProxyShapeClass.CreateInner(const aShapeClass: MCmsShape);
+constructor TmsProxyShapeClass.CreateInner(const aName : String; const aShapeClass: MCmsShape);
 begin
  inherited Create;
  f_ShapeClass := aShapeClass;
+ f_Name := aName;
 end;
 
-class function TmsProxyShapeClass.Create(const aShapeClass: MCmsShape): ImsShapeClass;
+class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: MCmsShape): ImsShapeClass;
 begin
- Result := CreateInner(aShapeClass);
+ Result := CreateInner(aName, aShapeClass);
 end;
 
-class function TmsProxyShapeClass.Create(const aShapeClass: RmsShape): ImsShapeClass;
+class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: RmsShape): ImsShapeClass;
 begin
- Result := Create(TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName));
+ Result := Create(aName, TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName));
 end;
 
 function TmsProxyShapeClass.IsForToolbar: Boolean;
