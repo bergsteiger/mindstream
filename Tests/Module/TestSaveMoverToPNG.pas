@@ -98,9 +98,9 @@ begin
   l_ClickPoint := TmsMover.ButtonPoint(f_Button, aShape);
   l_Ctx := TmsEndShapeContext.Create(l_ClickPoint, aDiagramm.ShapesController, nil);
 
-  l_S := TmsPointCircle.Create(l_ClickPoint);
-  aMover.EndTo(l_Ctx);
 //  l_S := TmsPointCircle.Create(l_ClickPoint);
+  aMover.EndTo(l_Ctx);
+  l_S := TmsPointCircle.Create(l_ClickPoint);
   Assert(l_S.StartPoint = l_ClickPoint);
   aDiagramm.AddShape(l_S);
  end;//aMover <> nil
