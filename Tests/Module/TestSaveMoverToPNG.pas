@@ -95,7 +95,7 @@ var
 begin
  if (aMover <> nil) then
  begin
-  l_ClickPoint := TmsMover.ButtonPoint(f_Button, aShape);
+  l_ClickPoint := TmsMover.ButtonPoint(f_Button, aShape, true);
   l_Ctx := TmsEndShapeContext.Create(l_ClickPoint, aDiagramm.ShapesController, nil);
 
   CheckFalse(aShape.DrawBounds.Contains(l_ClickPoint), 'Фигура не должна содержать точку клика');

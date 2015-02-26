@@ -54,9 +54,9 @@ type
   class function ButtonShape: ImsShape; override;
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
-  class function RectForButtons(const aShape: ImsShape): TRectF;
+  class function RectForButtons(const aShape: ImsShape; atCenter: Boolean): TRectF;
   class function BP(aButton: TmsFloatingButton; const aR: TRectF): TPointF;
-  class function ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape): TPointF;
+  class function ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape; atCenter: Boolean): TPointF;
  end;//TmsMover
 
 implementation
@@ -118,7 +118,7 @@ begin
            );
 end;
 
-class function TmsMover.RectForButtons(const aShape: ImsShape): TRectF;
+class function TmsMover.RectForButtons(const aShape: ImsShape; atCenter: Boolean): TRectF;
 var
  l_Offset : Single;
 begin
@@ -157,10 +157,10 @@ begin
  end;//case aButton
 end;
 
-class function TmsMover.ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape): TPointF;
+class function TmsMover.ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape; atCenter: Boolean): TPointF;
 begin
  Assert(aShape <> nil);
- Result := BP(aButton, RectForButtons(aShape));
+ Result := BP(aButton, RectForButtons(aShape, atCenter));
 end;
 
 procedure TmsMover.CreateFloatingButtons(const aController: ImsShapesController);
@@ -205,7 +205,7 @@ begin
  for l_FB := Low(TmsFloatingButton) to High(TmsFloatingButton) do
   aController.AddShape(AddDButton(l_FB,
                                   cShapeTool[l_FB],
-                                  cShapeArrow[l_FB].Create(ButtonPoint(l_FB, f_Moving))));
+                                  cShapeArrow[l_FB].Create(ButtonPoint(l_FB, f_Moving, false))));
                                   // - тут на самом деле надо не f_Moving а Self
                                   // А Move - переопределить
                                   // Тогда починятся:
