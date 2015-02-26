@@ -59,7 +59,8 @@ uses
   msSubsystem,
   msUsecase,
   msUsecaseRealization,
-  msProxyShapeClass
+  msProxyShapeClass,
+  msTrivial
   ;
 
 // Важно !!!
@@ -129,7 +130,8 @@ begin
   TmsSubsystem,
 
   TmsUsecase,
-  TmsUsecaseRealization
+  TmsUsecaseRealization,
+  TmsTrivial
  ]);
 
  TmsRegisteredShapes.Instance.RegisterMC([
