@@ -57,7 +57,7 @@ begin
                   CornerRadius,
                   CornerRadius,
                   AllCorners,
-                  0.5,
+                  aCtx.rOpacity,
                   TCornerType.Round);
 end;
 
