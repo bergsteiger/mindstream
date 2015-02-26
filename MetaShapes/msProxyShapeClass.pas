@@ -3,6 +3,7 @@ unit msProxyShapeClass;
 interface
 
 uses
+ System.UITypes,
  msInterfaces,
  msShape,
  msInterfacedRefcounted
@@ -30,6 +31,7 @@ type
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
+  function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
  public
   class function Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass; overload;
   class function Create(const aName : String; const aShapeClass: RmsShape): ImsTunableShapeClass; overload;
@@ -150,6 +152,13 @@ function TmsProxyShapeClass.NullClick(const aHolder: ImsDiagrammsHolder): Boolea
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.NullClick(aHolder);
+end;
+
+function TmsProxyShapeClass.SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
+begin
+ Result := Self;
+ f_FillColor.rIsSet := true;
+ f_FillColor.rValue := aColor;
 end;
 
 end.

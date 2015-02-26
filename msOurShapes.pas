@@ -5,6 +5,7 @@ interface
 implementation
 
 uses
+  System.UITypes,
   msLine,
   msRectangle,
   msCircle,
@@ -135,8 +136,8 @@ begin
  ]);
 
  TmsRegisteredShapes.Instance.RegisterMC([
-  TmsProxyShapeClass.Create('Layer', TmsLibrary),
-  TmsProxyShapeClass.Create('Typedef', TmsTrivial)
+  TmsProxyShapeClass.Create('Layer', TmsLibrary).SetFillColor(TAlphaColorRec.Lightgray),
+  TmsProxyShapeClass.Create('Typedef', TmsTrivial).SetFillColor(TAlphaColorRec.Gray)
  ]);
 end;
 

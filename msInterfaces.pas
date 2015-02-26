@@ -187,6 +187,7 @@ type
  end;//ImsShapeClass
 
  ImsTunableShapeClass = interface(ImsShapeClass)
+  function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
  end;//ImsTunableShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)
