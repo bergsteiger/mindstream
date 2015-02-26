@@ -131,7 +131,10 @@ begin
   TmsSubsystem,
 
   TmsUsecase,
-  TmsUsecaseRealization,
+  TmsUsecaseRealization
+ ]);
+
+ TmsRegisteredShapes.Instance.Register([
   TmsTrivial
  ]);
 
