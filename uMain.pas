@@ -30,6 +30,7 @@ type
     btnSaveToPNG: TButton;
     pnlToolBar: TPanel;
     pnlBottom: TPanel;
+    btnSaveJsonAndPng: TButton;
     procedure miExitClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -193,7 +194,8 @@ begin
                                                        btAddDiagramm,
                                                        btSaveDiagramm,
                                                        btLoadDiagramm,
-                                                       btnSaveToPNG);
+                                                       btnSaveToPNG,
+                                                       btnSaveJsonAndPng);
  CreateToolBar(pnlToolBar.Width);
  CreateScrollButtons;
 end;
