@@ -21,11 +21,16 @@ type
 
 implementation
 
+uses
+ msShape,
+ msShapeClass
+ ;
+
 // TmsCircleWithRadius
 
 constructor TmsCircleWithRadius.CreateInner(const aStartPoint: TPointF; aRad: Single);
 begin
- inherited CreateInner(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
+ inherited CreateInner(TmsShapeClass.Create(RmsShape(ClassType)),TmsMakeShapeContext.Create(aStartPoint, nil, nil));
  f_Rad := aRad;
 end;
 

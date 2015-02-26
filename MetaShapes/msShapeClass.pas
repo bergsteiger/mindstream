@@ -70,7 +70,7 @@ end;
 function TmsShapeClass.Creator: ImsShapeCreator;
 begin
  Assert(f_ShapeClass <> nil);
- Result := TmsShapeCreator.Create(f_ShapeClass);
+ Result := TmsShapeCreator.Create(Self, f_ShapeClass);
 end;
 
 function TmsShapeClass.Name: String;

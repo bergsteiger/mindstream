@@ -26,7 +26,7 @@ type
  strict protected
   function pm_GetStartPoint: TPointF; virtual;
   function pm_GetShapeClass: ImsShapeClass;
-  constructor CreateInner(const aCtx: TmsMakeShapeContext); virtual;
+  constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); virtual;
   procedure SetStartPoint(const aStartPoint: TPointF); virtual;
  protected
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
@@ -43,9 +43,9 @@ type
   // - действие при MouseMove
   function Stereotype: String;
  protected
-  class function Create(const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
+  class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
  public
-  class function Create(const aStartPoint: TPointF): ImsShape; overload;
+  class function Create(const aShapeClass : ImsShapeClass; const aStartPoint: TPointF): ImsShape; overload;
   // - фабричный метод, который создаёт экземпляр класса как интерфейс
   //   про "фабричный метод вообще" - написано тут:
   //   - http://icoder.ucoz.ru/blog/factory_method/2013-04-30-24
@@ -60,6 +60,7 @@ type
   // - http://www.gunsmoker.ru/2013/04/plugins-9.html
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
+  class function Create(const aStartPoint: TPointF): ImsShape; overload;
  public
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
@@ -94,18 +95,25 @@ uses
  msShapeMarshal,
  System.Math.Vectors,
  msRegisteredShapes,
- FMX.DUnit.msAppLog
+ FMX.DUnit.msAppLog,
+
+ msShapeClass
  ;
 
-class function TmsShape.Create(const aCtx: TmsMakeShapeContext): ImsShape;
+class function TmsShape.Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape;
 begin
- Result := CreateInner(aCtx);
+ Result := CreateInner(aShapeClass, aCtx);
  TmsAppLog.Instance.ToLog('Create object ' + self.ClassName);
+end;
+
+class function TmsShape.Create(const aShapeClass : ImsShapeClass; const aStartPoint: TPointF): ImsShape;
+begin
+ Result := CreateInner(aShapeClass, TmsMakeShapeContext.Create(aStartPoint, nil, nil));
 end;
 
 class function TmsShape.Create(const aStartPoint: TPointF): ImsShape;
 begin
- Result := CreateInner(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
+ Result := Create(TmsShapeClass.Create(Self), aStartPoint);
 end;
 
 function TmsShape.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
@@ -120,7 +128,7 @@ begin
  Result := False;
 end;
 
-constructor TmsShape.CreateInner(const aCtx: TmsMakeShapeContext);
+constructor TmsShape.CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext);
 begin
  inherited Create;
  SetStartPoint(aCtx.rStartPoint);

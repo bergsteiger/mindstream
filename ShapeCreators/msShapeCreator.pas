@@ -14,7 +14,8 @@ type
  private
   f_ShapeClass : RmsShape;
   // - класс примитивов для создания
-  constructor CreatePrim(aShapeClass: RmsShape);
+  f_ShapeMC : ImsShapeClass;
+  constructor CreatePrim(const aShapeMC : ImsShapeClass; aShapeClass: RmsShape);
  protected
   property ShapeClass : RmsShape
   read f_ShapeClass;
@@ -22,7 +23,8 @@ type
  protected
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; virtual;
  public
-  class function Create(aShapeClass: RmsShape): ImsShapeCreator;
+  class function Create(const aShapeMC : ImsShapeClass; aShapeClass: RmsShape): ImsShapeCreator; overload;
+  class function Create(aShapeClass: RmsShape): ImsShapeCreator; overload;
  end;//TmsShapeCreator
 
  TmsShapeFriend = class(TmsShape)
@@ -33,22 +35,32 @@ type
 
 implementation
 
+uses
+ msShapeClass
+ ;
+
 // TmsShapeCreator
 
-constructor TmsShapeCreator.CreatePrim(aShapeClass: RmsShape);
+constructor TmsShapeCreator.CreatePrim(const aShapeMC : ImsShapeClass; aShapeClass: RmsShape);
 begin
  inherited Create;
  f_ShapeClass := aShapeClass;
+ f_ShapeMC := aShapeMC;
+end;
+
+class function TmsShapeCreator.Create(const aShapeMC : ImsShapeClass; aShapeClass: RmsShape): ImsShapeCreator;
+begin
+ Result := CreatePrim(aShapeMC, aShapeClass);
 end;
 
 class function TmsShapeCreator.Create(aShapeClass: RmsShape): ImsShapeCreator;
 begin
- Result := CreatePrim(aShapeClass);
+ Result := Create(TmsShapeClass.Create(aShapeClass), aShapeClass);
 end;
 
 function TmsShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 begin
- Result := RmsShapeFriend(f_ShapeClass).Create(aContext);
+ Result := RmsShapeFriend(f_ShapeClass).Create(f_ShapeMC, aContext);
 end;
 
 end.

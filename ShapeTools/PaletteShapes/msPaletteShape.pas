@@ -34,7 +34,8 @@ implementation
 
 uses
  msGreenCircle,
- msMover
+ msMover,
+ msShapeClass
  ;
 
 // TmsPaletteShape
@@ -51,7 +52,7 @@ end;
 
 constructor TmsPaletteShape.CreateInner(const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF);
 begin
- inherited CreateInner(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
+ inherited CreateInner(TmsShapeClass.Create(RmsShape(ClassType)), TmsMakeShapeContext.Create(aStartPoint, nil, nil));
  f_OtherShapeClass := anOtherShapeClass;
  f_Proxy := f_OtherShapeClass.ButtonShape;
 end;

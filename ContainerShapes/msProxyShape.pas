@@ -49,7 +49,9 @@ implementation
 
 uses
  System.SysUtils,
- System.Math
+ System.Math,
+
+ msShapeClass
  ;
 
 // TmsProxyShape
@@ -62,7 +64,7 @@ end;
 constructor TmsProxyShape.CreateInner(const aShape: ImsShape);
 begin
  Assert(aShape <> nil, 'Пустую группу примитивов глупо создавать');
- inherited CreateInner(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+ inherited CreateInner(TmsShapeClass.Create(RmsShape(ClassType)), TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
  f_Shape := aShape;
 end;
 
@@ -87,7 +89,7 @@ end;
 constructor TmsWeakProxyShape.CreateInner(const aShape: ImsShape);
 begin
  Assert(aShape <> nil, 'Пустую группу примитивов глупо создавать');
- inherited CreateInner(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+ inherited CreateInner(TmsShapeClass.Create(RmsShape(ClassType)), TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
  f_Shape := Pointer(aShape);
 end;
 
