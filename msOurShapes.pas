@@ -53,11 +53,8 @@ uses
   msAssociation,
   msDependency,
   msClass,
-  msInterface,
-  msMixIn,
   msLibrary,
   msUsecase,
-  msProxyShapeClass,
   msTrivial
   ;
 
@@ -122,9 +119,9 @@ begin
   TmsClass
  ]);
 
- TmsRegisteredShapes.Instance.Register([
-  TmsInterface,
-  TmsMixIn
+ TmsRegisteredShapes.Instance.RegisterMC([
+  TmsClass.Specify('Interface').SetFillColor(TAlphaColorRec.Lightblue),
+  TmsClass.Specify('MixIn').SetFillColor(TAlphaColorRec.Lightgreen)
  ]);
 
  TmsRegisteredShapes.Instance.Register([
