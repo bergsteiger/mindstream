@@ -56,8 +56,6 @@ uses
   msInterface,
   msMixIn,
   msLibrary,
-  msProject,
-  msSubsystem,
   msUsecase,
   msProxyShapeClass,
   msTrivial
@@ -125,10 +123,15 @@ begin
   TmsInterface,
   TmsMixIn,
 
-  TmsLibrary,
-  TmsProject,
-  TmsSubsystem,
+  TmsLibrary
+ ]);
 
+ TmsRegisteredShapes.Instance.RegisterMC([
+  TmsLibrary.Specify('Project').SetFillColor(TAlphaColorRec.Lightgreen),
+  TmsLibrary.Specify('Subsystem').SetFillColor(TAlphaColorRec.Lightblue)
+ ]);
+
+ TmsRegisteredShapes.Instance.Register([
   TmsUsecase
  ]);
 
