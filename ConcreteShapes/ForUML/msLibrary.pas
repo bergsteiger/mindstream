@@ -3,6 +3,7 @@ unit msLibrary;
 interface
 
 uses
+ System.Types,
  msInterfaces,
  msFolder
  ;
@@ -10,39 +11,27 @@ uses
 type
  TmsLibrary = class(TmsFolder)
  protected
+  procedure GetStereotypeRect(var aRect: TRectF); override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsClass
 
 implementation
 
 uses
- System.Types,
  FMX.Graphics,
  FMX.Types
  ;
 
+// TmsLibrary
+
+procedure TmsLibrary.GetStereotypeRect(var aRect: TRectF);
+begin
+ aRect := DrawBounds;
+end;
+
 procedure TmsLibrary.DoDrawTo(const aCtx: TmsDrawContext);
-var
- l_R : TRectF;
- l_R1 : TRectF;
 begin
  inherited;
- l_R := DrawBounds;
-(* aCtx.rCanvas.DrawLine(TPointF.Create(l_R.Left, l_R.Top + l_R.Height / 3),
-                       TPointF.Create(l_R.Right, l_R.Top + l_R.Height / 3), 1);
- aCtx.rCanvas.DrawLine(TPointF.Create(l_R.Left, l_R.Top +  2 * l_R.Height / 3),
-                       TPointF.Create(l_R.Right, l_R.Top + 2 * l_R.Height / 3), 1);*)
- l_R1 := l_R;
-(* l_R1 := TRectF.Create(l_R.Left, l_R.Top, l_R.Right, l_R.Top + l_R.Height / 3);*)
-
- aCtx.rCanvas.Fill.Color :=  aCtx.rCanvas.Stroke.Color;
- aCtx.rCanvas.FillText(l_R1,
-                       Stereotype,
-                       false,
-                       1,
-                       [],
-                       TTextAlign.Center,
-                       TTextAlign.Center);
 end;
 
 end.
