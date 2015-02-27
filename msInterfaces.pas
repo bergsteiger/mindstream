@@ -170,6 +170,8 @@ type
    write pm_SetCurrentDiagramms;
  end;//ImsDiagrammsHolder
 
+ ImsTunableShapeClass = interface;
+
  ImsShapeClass = interface
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
@@ -184,6 +186,7 @@ type
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function Stereotype: String;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+  function Inherite(const aName: String): ImsTunableShapeClass;
  end;//ImsShapeClass
 
  ImsTunableShapeClass = interface(ImsShapeClass)

@@ -87,6 +87,7 @@ type
   procedure Assign(anOther : TmsShape);
   class function ButtonShape: ImsShape; virtual;
   class function ShapeMC: ImsShapeClass;
+  class function Inherite(const aName: String): ImsTunableShapeClass;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
@@ -314,6 +315,11 @@ end;
 class function TmsShape.ShapeMC: ImsShapeClass;
 begin
  Result := TmsShapeClass.Create(Self);
+end;
+
+class function TmsShape.Inherite(const aName: String): ImsTunableShapeClass;
+begin
+ Result := ShapeMC.Inherite(aName);
 end;
 
 end.
