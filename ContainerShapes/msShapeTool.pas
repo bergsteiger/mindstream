@@ -35,7 +35,7 @@ uses
 
 class function TmsShapeTool.Create(const aShapeToDeal: ImsShape; const aShape: ImsShape): ImsShape;
 begin
- Result := CreateInner(TmsShapeClass.Create(Self), aShapeToDeal, aShape);
+ Result := CreateInner(Self.ShapeMC, aShapeToDeal, aShape);
 end;
 
 constructor TmsShapeTool.CreateInner(const aShapeClass : ImsShapeClass; const aShapeToDeal: ImsShape; const aShape: ImsShape);

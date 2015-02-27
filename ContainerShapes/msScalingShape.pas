@@ -37,7 +37,7 @@ end;
 
 class function TmsScalingShape.Create(const aShape: ImsShape; aScale : Extended): ImsShape;
 begin
- Result := CreateInner(TmsShapeClass.Create(Self), aShape, aScale);
+ Result := CreateInner(Self.ShapeMC, aShape, aScale);
 end;
 
 function TmsScalingShape.ExtentCoeff: Extended;

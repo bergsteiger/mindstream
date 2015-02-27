@@ -58,7 +58,7 @@ uses
 
 class function TmsProxyShape.Create(const aShape: ImsShape): ImsShape;
 begin
- Result := CreateInner(TmsShapeClass.Create(Self), aShape);
+ Result := CreateInner(Self.ShapeMC, aShape);
 end;
 
 constructor TmsProxyShape.CreateInner(const aShapeClass : ImsShapeClass; const aShape: ImsShape);
@@ -83,7 +83,7 @@ end;
 
 class function TmsWeakProxyShape.Create(const aShape: ImsShape): ImsShape;
 begin
- Result := CreateInner(TmsShapeClass.Create(Self), aShape);
+ Result := CreateInner(Self.ShapeMC, aShape);
 end;
 
 constructor TmsWeakProxyShape.CreateInner(const aShapeClass : ImsShapeClass; const aShape: ImsShape);

@@ -36,7 +36,7 @@ end;
 
 class function TmsCircleWithRadius.Create(const aStartPoint: TPointF; aRad: Single): ImsShape;
 begin
- Result := CreateInner(TmsShapeClass.Create(Self), aStartPoint, aRad);
+ Result := CreateInner(Self.ShapeMC, aStartPoint, aRad);
 end;
 
 function TmsCircleWithRadius.InitialRadiusX: Integer;

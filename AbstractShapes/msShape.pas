@@ -86,6 +86,7 @@ type
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);
   class function ButtonShape: ImsShape; virtual;
+  class function ShapeMC: ImsShapeClass;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
@@ -118,7 +119,7 @@ end;
 
 class function TmsShape.Create(const aStartPoint: TPointF): ImsShape;
 begin
- Result := Create(TmsShapeClass.Create(Self), aStartPoint);
+ Result := Create(Self.ShapeMC, aStartPoint);
 end;
 
 class function TmsShape.Create: ImsShape;
@@ -308,6 +309,11 @@ class function TmsShape.ButtonShape: ImsShape;
 begin
  Result := nil;
  Assert(false, 'Не реализовано');
+end;
+
+class function TmsShape.ShapeMC: ImsShapeClass;
+begin
+ Result := TmsShapeClass.Create(Self);
 end;
 
 end.

@@ -59,7 +59,7 @@ end;
 
 class function TmsPaletteShape.Create(const anOtherShapeClass: MCmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
 begin
- Result := CreateInner(TmsShapeClass.Create(Self), anOtherShapeClass, aCtx.rStartPoint);
+ Result := CreateInner(Self.ShapeMC, anOtherShapeClass, aCtx.rStartPoint);
 end;
 
 (*function TmsPaletteShape.IsClassTypeNamedAs(const aClassName: String): Boolean;
