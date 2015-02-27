@@ -149,7 +149,8 @@ begin
   TmsLibrary.Specify('Layer').SetFillColor(TAlphaColorRec.Lightgray),
   TmsTrivial.Specify('Typedef').SetFillColor(TAlphaColorRec.Gray),
   TmsTrivial.Specify('Exception').SetFillColor(TAlphaColorRec.Red),
-  TmsClass.Specify('Method').SetFillColor(TAlphaColorRec.Purple)
+  TmsClass.Specify('Method').SetFillColor(TAlphaColorRec.Purple),
+  TmsClass.Specify('Program').SetFillColor(TAlphaColorRec.Lime)
  ]);
 end;
 
