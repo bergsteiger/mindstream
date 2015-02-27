@@ -87,7 +87,7 @@ type
   procedure Assign(anOther : TmsShape);
   class function ButtonShape: ImsShape; virtual;
   class function ShapeMC: ImsShapeClass;
-  class function Inherite(const aName: String): ImsTunableShapeClass;
+  class function Specify(const aName: String): ImsTunableShapeClass;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
@@ -104,7 +104,8 @@ uses
  msRegisteredShapes,
  FMX.DUnit.msAppLog,
 
- msShapeClass
+ msShapeClass,
+ msProxyShapeClass
  ;
 
 class function TmsShape.Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape;
@@ -317,9 +318,9 @@ begin
  Result := TmsShapeClass.Create(Self);
 end;
 
-class function TmsShape.Inherite(const aName: String): ImsTunableShapeClass;
+class function TmsShape.Specify(const aName: String): ImsTunableShapeClass;
 begin
- Result := ShapeMC.Inherite(aName);
+ Result := TmsProxyShapeClass.Create(aName, Self);
 end;
 
 end.

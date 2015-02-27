@@ -133,7 +133,7 @@ begin
  ]);
 
  TmsRegisteredShapes.Instance.RegisterMC([
-  TmsProxyShapeClass.Create('UsecaseRealization', TmsUsecase).SetFillColor(TAlphaColorRec.Lightgreen)
+  TmsUsecase.Specify('UsecaseRealization').SetFillColor(TAlphaColorRec.Lightgreen)
  ]);
 
  TmsRegisteredShapes.Instance.Register([
@@ -141,10 +141,10 @@ begin
  ]);
 
  TmsRegisteredShapes.Instance.RegisterMC([
-  TmsProxyShapeClass.Create('Layer', TmsLibrary).SetFillColor(TAlphaColorRec.Lightgray),
-  TmsProxyShapeClass.Create('Typedef', TmsTrivial).SetFillColor(TAlphaColorRec.Gray),
-  TmsProxyShapeClass.Create('Exception', TmsTrivial).SetFillColor(TAlphaColorRec.Red),
-  TmsProxyShapeClass.Create('Method', TmsClass).SetFillColor(TAlphaColorRec.Purple)
+  TmsLibrary.Specify('Layer').SetFillColor(TAlphaColorRec.Lightgray),
+  TmsTrivial.Specify('Typedef').SetFillColor(TAlphaColorRec.Gray),
+  TmsTrivial.Specify('Exception').SetFillColor(TAlphaColorRec.Red),
+  TmsClass.Specify('Method').SetFillColor(TAlphaColorRec.Purple)
  ]);
 end;
 

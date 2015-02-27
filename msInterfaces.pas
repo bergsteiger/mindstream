@@ -186,7 +186,6 @@ type
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function Stereotype: String;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-  function Inherite(const aName: String): ImsTunableShapeClass;
  end;//ImsShapeClass
 
  ImsTunableShapeClass = interface(ImsShapeClass)
