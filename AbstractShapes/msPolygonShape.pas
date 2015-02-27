@@ -57,7 +57,7 @@ end;
 function TmsPolygonShape.Polygon: TPolygon;
 begin
  Result := GetPolygon;
- Assert(Length(Result) > 3);
+ Assert(Length(Result) >= 3);
 end;
 
 procedure TmsPolygonShape.DoDrawTo(const aCtx: TmsDrawContext);
