@@ -75,6 +75,7 @@ type
   // - ткнули в примитив внутри диаграммы
   function GetDrawBounds: TRectF; virtual;
   function DrawBounds: TRectF;
+  procedure GetStereotypeRect(var aRect: TRectF); virtual;
  public
   class function IsLineLike: Boolean; virtual;
   procedure DrawTo(const aCtx: TmsDrawContext); virtual;
@@ -276,10 +277,16 @@ begin
  end;//Result.Left > Result.Right
 end;
 
+procedure TmsShape.GetStereotypeRect(var aRect: TRectF);
+begin
+ // - ничего не делаем. Специально.
+end;
+
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
 var
  l_Ctx : TmsDrawOptionsContext;
  l_DrawContext : TmsDrawContext;
+ l_StereotypeRect : TRectF;
 begin
  l_Ctx := DrawOptionsContext(aCtx);
  aCtx.rCanvas.Fill.Color := l_Ctx.rFillColor;
@@ -289,6 +296,19 @@ begin
  l_DrawContext := aCtx;
  l_DrawContext.rOpacity := l_Ctx.rOpacity;
  DoDrawTo(l_DrawContext);
+ l_StereotypeRect := TRectF.Create(0, 0, 0, 0);
+ GetStereotypeRect(l_StereotypeRect);
+ if (l_StereotypeRect.TopLeft <> l_StereotypeRect.BottomRight) then
+ begin
+  aCtx.rCanvas.Fill.Color := aCtx.rCanvas.Stroke.Color;
+  aCtx.rCanvas.FillText(l_StereotypeRect,
+                        Stereotype,
+                        false,
+                        1,
+                        [],
+                        TTextAlign.Center,
+                        TTextAlign.Center);
+ end;//l_StereotypeRect.TopLeft <> l_StereotypeRect.BottomRight
 end;
 
 procedure TmsShape.SaveTo(const aFileName: String);
