@@ -150,6 +150,8 @@ begin
 end;
 
 procedure TmsDiagramm.SaveToPng(const aFileName: string);
+const
+ cDelta = 10;
 var
  l_Bitmap: TBitmap;
  l_SourceRect: TRectF;
@@ -161,6 +163,7 @@ begin
  l_SourceRect := GetDrawBounds;
  Assert(l_SourceRect.Width > 0);
  Assert(l_SourceRect.Height > 0);
+ l_SourceRect.Inflate(cDelta, cDelta);
  // Создаем временный буфер для получения скриншота
  l_Bitmap := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
  try
@@ -170,7 +173,7 @@ begin
    l_OriginalMatrix := l_Canvas.Matrix;
    try
     l_Matrix := TMatrix.Identity;
-    l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_SourceRect.Left, -l_SourceRect.Top);
+    l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_SourceRect.Left{ - cDelta}, -l_SourceRect.Top{ - cDelta});
     l_Matrix := l_Matrix * l_OriginalMatrix;
     l_Canvas.SetMatrix(l_Matrix);
     l_Canvas.Fill.Color := TAlphaColorRec.White;
