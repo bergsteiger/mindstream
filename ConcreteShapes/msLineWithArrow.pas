@@ -14,6 +14,7 @@ uses
 type
  TmsLineWithArrow = class(TmsLine)
  protected
+  function CreateArrowHeadShape(const aStartPoint: TPointF): ImsShape; virtual;
   function GetFinishPointForDraw: TPointF; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetArrowAngleRotation : Single;
@@ -32,6 +33,11 @@ uses
 
  // TmsLineWithArrow
 
+function TmsLineWithArrow.CreateArrowHeadShape(const aStartPoint: TPointF): ImsShape;
+begin
+ Result := TmsSmallTriangle.Create(aStartPoint);
+end;
+
 procedure TmsLineWithArrow.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Proxy : ImsShape;
@@ -48,7 +54,7 @@ begin
   try
    l_LineFinishPoint := TPointF.Create(FinishPoint.X - TmsSmallTriangle.InitialHeight / 2,
                                        FinishPoint.Y);
-   l_Proxy := TmsSmallTriangle.Create(l_LineFinishPoint);
+   l_Proxy := CreateArrowHeadShape(l_LineFinishPoint);
    try
     // in Radian
     l_Angle := GetArrowAngleRotation;
@@ -58,13 +64,13 @@ begin
     l_Matrix := TMatrix.Identity;
     // - СНИМАЕМ оригинальную матрицу, точнее берём ЕДИНИЧНУЮ матрицу
     // https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0
-    l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X,-l_CenterPoint.Y);
+    l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X, -l_CenterPoint.Y);
 
     // - задаём точку, вокруг которой вертим
     l_Matrix := l_Matrix * TMatrix.CreateRotation(l_Angle);
 
     // - задаём угол поворота
-    l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
+    l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X, l_CenterPoint.Y);
 
     // - задаём начало координат
     l_Matrix := l_Matrix * l_OriginalMatrix;

@@ -4,11 +4,11 @@ interface
 
 uses
  msInterfaces,
- msConnector
+ msDependency
  ;
 
 type
- TmsAssociation = class(TmsConnector)
+ TmsAssociation = class(TmsDependency)
  protected
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsAssociation
@@ -22,7 +22,7 @@ uses
 procedure TmsAssociation.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- //theCtx.rStrokeDash := TStrokeDash.Dash;
+ theCtx.rStrokeDash := TStrokeDash.Solid;
 end;
 
 end.
