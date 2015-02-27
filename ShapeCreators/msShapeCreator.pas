@@ -56,7 +56,7 @@ end;
 
 class function TmsShapeCreator.Create(aShapeClass: RmsShape): ImsShapeCreator;
 begin
- Result := Create(TmsShapeClass.Create(aShapeClass), aShapeClass);
+ Result := Create(aShapeClass.ShapeMC, aShapeClass);
 end;
 
 function TmsShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
