@@ -119,10 +119,15 @@ begin
   TmsAssociation,
   TmsDependency,
 
-  TmsClass,
-  TmsInterface,
-  TmsMixIn,
+  TmsClass
+ ]);
 
+ TmsRegisteredShapes.Instance.Register([
+  TmsInterface,
+  TmsMixIn
+ ]);
+
+ TmsRegisteredShapes.Instance.Register([
   TmsLibrary
  ]);
 
