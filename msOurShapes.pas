@@ -142,7 +142,9 @@ begin
 
  TmsRegisteredShapes.Instance.RegisterMC([
   TmsProxyShapeClass.Create('Layer', TmsLibrary).SetFillColor(TAlphaColorRec.Lightgray),
-  TmsProxyShapeClass.Create('Typedef', TmsTrivial).SetFillColor(TAlphaColorRec.Gray)
+  TmsProxyShapeClass.Create('Typedef', TmsTrivial).SetFillColor(TAlphaColorRec.Gray),
+  TmsProxyShapeClass.Create('Exception', TmsTrivial).SetFillColor(TAlphaColorRec.Red),
+  TmsProxyShapeClass.Create('Method', TmsClass).SetFillColor(TAlphaColorRec.Purple)
  ]);
 end;
 
