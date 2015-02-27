@@ -300,6 +300,8 @@ begin
  GetStereotypeRect(l_StereotypeRect);
  if (l_StereotypeRect.TopLeft <> l_StereotypeRect.BottomRight) then
  begin
+  l_StereotypeRect.Left := l_StereotypeRect.Left - 100;
+  l_StereotypeRect.Right := l_StereotypeRect.Right + 100;
   aCtx.rCanvas.Fill.Color := aCtx.rCanvas.Stroke.Color;
   aCtx.rCanvas.FillText(l_StereotypeRect,
                         Stereotype,
