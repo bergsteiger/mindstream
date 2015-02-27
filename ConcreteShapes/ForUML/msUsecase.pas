@@ -3,6 +3,7 @@ unit msUsecase;
 interface
 
 uses
+ System.Types,
  msInterfaces,
  msUseCaseLikeEllipse
  ;
@@ -10,6 +11,7 @@ uses
 type
  TmsUsecase = class(TmsUseCaseLikeEllipse)
  protected
+  procedure GetStereotypeRect(var aRect: TRectF); override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsUsecase
@@ -17,10 +19,11 @@ type
 implementation
 
 uses
- System.Types,
  System.UITypes,
  FMX.Types
  ;
+
+// TmsUsecase
 
 procedure TmsUsecase.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
@@ -28,24 +31,15 @@ begin
  theCtx.rFillColor := TAlphaColorRec.Lightyellow;
 end;
 
+procedure TmsUsecase.GetStereotypeRect(var aRect: TRectF);
+begin
+ aRect := DrawBounds;
+ aRect := TRectF.Create(aRect.Left - 20, aRect.Bottom, aRect.Right + 20, aRect.Bottom + 20);
+end;
+
 procedure TmsUsecase.DoDrawTo(const aCtx: TmsDrawContext);
-var
- l_R : TRectF;
- l_R1 : TRectF;
 begin
  inherited;
- l_R := DrawBounds;
-
- l_R1 := TRectF.Create(l_R.Left - 20, l_R.Bottom, l_R.Right + 20, l_R.Bottom + 20);
-
- aCtx.rCanvas.Fill.Color :=  aCtx.rCanvas.Stroke.Color;
- aCtx.rCanvas.FillText(l_R1,
-                       Stereotype,
-                       false,
-                       1,
-                       [],
-                       TTextAlign.Center,
-                       TTextAlign.Center);
 end;
 
 end.
