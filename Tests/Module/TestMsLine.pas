@@ -44,7 +44,7 @@ uses
 
 procedure TestTmsLine.SetUp;
 begin
-  FmsLine := TmsShapeCreator.Create(TmsLine).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+  FmsLine := TmsLine.ShapeMC.Creator.CreateShape(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
 end;
 
 procedure TestTmsLine.TearDown;
