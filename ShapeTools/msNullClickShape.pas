@@ -12,7 +12,7 @@ type
  public
   class function IsNullClick: Boolean; override;
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
-  class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override; final;
+  class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; override; final;
  end;//TmsNullClickShape
 
 implementation
@@ -24,7 +24,7 @@ begin
  Result := true;
 end;
 
-class function TmsNullClickShape.Create(const aCtx: TmsMakeShapeContext): ImsShape;
+class function TmsNullClickShape.Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape;
 begin
  Result := nil;
  // раз НЕТ клика, значит НЕТ и ПРИМИТИВА

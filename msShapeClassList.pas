@@ -69,7 +69,7 @@ end;
 
 procedure TmsShapeClassList.Register(const aValue: RmsShape);
 begin
- RegisterMC(TmsShapeClass.Create(aValue));
+ RegisterMC(aValue.ShapeMC);
 end;
 
 procedure TmsShapeClassList.Register(const aShapes: array of RmsShape);

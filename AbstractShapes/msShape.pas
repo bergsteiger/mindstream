@@ -21,12 +21,16 @@ type
  strict private
   [JSONMarshalled(False)]
   f_ShapeClass : ImsShapeClass;
+  f_ShapeClassName : String;
+  // - тут дублирование данных, но исключительно из-за кривизны маршалинга
  private
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
  strict protected
   function pm_GetStartPoint: TPointF; virtual;
   function pm_GetShapeClass: ImsShapeClass;
-  constructor CreateInner(const aCtx: TmsMakeShapeContext); virtual;
+  property ShapeClass: ImsShapeClass
+   read pm_GetShapeClass;
+  constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); virtual;
   procedure SetStartPoint(const aStartPoint: TPointF); virtual;
  protected
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
@@ -41,10 +45,11 @@ type
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; virtual;
   procedure MouseMove(const aClickContext: TmsEndShapeContext); virtual;
   // - действие при MouseMove
+  function Stereotype: String;
  protected
-  class function Create(const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
+  class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
  public
-  class function Create(const aStartPoint: TPointF): ImsShape; overload;
+  class function Create(const aShapeClass : ImsShapeClass; const aStartPoint: TPointF): ImsShape; overload;
   // - фабричный метод, который создаёт экземпляр класса как интерфейс
   //   про "фабричный метод вообще" - написано тут:
   //   - http://icoder.ucoz.ru/blog/factory_method/2013-04-30-24
@@ -59,6 +64,8 @@ type
   // - http://www.gunsmoker.ru/2013/04/plugins-9.html
   //
   // И это "не так важно" как ВО_ПЕРВЫХ, но тоже - ОЧЕНЬ ВАЖНО.
+  class function Create(const aStartPoint: TPointF): ImsShape; overload;
+  class function Create: ImsShape; overload;
  public
   class function DoNullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean; virtual;
@@ -79,6 +86,8 @@ type
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);
   class function ButtonShape: ImsShape; virtual;
+  class function ShapeMC: ImsShapeClass;
+  class function Specify(const aName: String): ImsTunableShapeClass;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
@@ -93,18 +102,31 @@ uses
  msShapeMarshal,
  System.Math.Vectors,
  msRegisteredShapes,
- FMX.DUnit.msAppLog
+ FMX.DUnit.msAppLog,
+
+ msShapeClass,
+ msProxyShapeClass
  ;
 
-class function TmsShape.Create(const aCtx: TmsMakeShapeContext): ImsShape;
+class function TmsShape.Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape;
 begin
- Result := CreateInner(aCtx);
+ Result := CreateInner(aShapeClass, aCtx);
  TmsAppLog.Instance.ToLog('Create object ' + self.ClassName);
+end;
+
+class function TmsShape.Create(const aShapeClass : ImsShapeClass; const aStartPoint: TPointF): ImsShape;
+begin
+ Result := CreateInner(aShapeClass, TmsMakeShapeContext.Create(aStartPoint, nil, nil));
 end;
 
 class function TmsShape.Create(const aStartPoint: TPointF): ImsShape;
 begin
- Result := CreateInner(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
+ Result := Create(Self.ShapeMC, aStartPoint);
+end;
+
+class function TmsShape.Create: ImsShape;
+begin
+ Result := Create(TPointF.Create(0, 0));
 end;
 
 function TmsShape.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
@@ -119,8 +141,12 @@ begin
  Result := False;
 end;
 
-constructor TmsShape.CreateInner(const aCtx: TmsMakeShapeContext);
+constructor TmsShape.CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext);
 begin
+ Assert(aShapeClass <> nil);
+ f_ShapeClass := aShapeClass;
+ f_ShapeClassName := f_ShapeClass.Name;
+ Assert(f_ShapeClassName <> '');
  inherited Create;
  SetStartPoint(aCtx.rStartPoint);
 end;
@@ -134,6 +160,12 @@ end;
 procedure TmsShape.MouseMove(const aClickContext: TmsEndShapeContext);
 begin
  // Ничего не делаем, специально
+end;
+
+function TmsShape.Stereotype: String;
+begin
+ Result := Self.ShapeClass.Stereotype;
+ Result := '<< ' + Result + ' >>';
 end;
 
 procedure TmsShape.MoveBy(const aCtx: TmsMoveContext);
@@ -166,7 +198,7 @@ end;
 function TmsShape.pm_GetShapeClass: ImsShapeClass;
 begin
  if (f_ShapeClass = nil) then
-  f_ShapeClass := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
+  f_ShapeClass := TmsRegisteredShapes.Instance.ByName(f_ShapeClassName);
  Result := f_ShapeClass;
  Assert(Result <> nil);
 end;
@@ -180,6 +212,7 @@ function TmsShape.DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptions
 begin
  Result := TmsDrawOptionsContext.Create(aCtx);
  TransformDrawOptionsContext(Result);
+ Self.ShapeClass.TransformDrawOptionsContext(Result);
 end;
 
 class function TmsShape.IsTool: Boolean;
@@ -246,13 +279,16 @@ end;
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
 var
  l_Ctx : TmsDrawOptionsContext;
+ l_DrawContext : TmsDrawContext;
 begin
  l_Ctx := DrawOptionsContext(aCtx);
  aCtx.rCanvas.Fill.Color := l_Ctx.rFillColor;
  aCtx.rCanvas.Stroke.Dash := l_Ctx.rStrokeDash;
  aCtx.rCanvas.Stroke.Color := l_Ctx.rStrokeColor;
  aCtx.rCanvas.Stroke.Thickness := l_Ctx.rStrokeThickness;
- DoDrawTo(aCtx);
+ l_DrawContext := aCtx;
+ l_DrawContext.rOpacity := l_Ctx.rOpacity;
+ DoDrawTo(l_DrawContext);
 end;
 
 procedure TmsShape.SaveTo(const aFileName: String);
@@ -275,6 +311,16 @@ class function TmsShape.ButtonShape: ImsShape;
 begin
  Result := nil;
  Assert(false, 'Не реализовано');
+end;
+
+class function TmsShape.ShapeMC: ImsShapeClass;
+begin
+ Result := TmsShapeClass.Create(Self);
+end;
+
+class function TmsShape.Specify(const aName: String): ImsTunableShapeClass;
+begin
+ Result := TmsProxyShapeClass.Create(aName, Self);
 end;
 
 end.

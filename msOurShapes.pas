@@ -5,6 +5,7 @@ interface
 implementation
 
 uses
+  System.UITypes,
   msLine,
   msRectangle,
   msCircle,
@@ -52,11 +53,9 @@ uses
   msAssociation,
   msDependency,
   msClass,
-  msInterface,
-  msMixIn,
   msLibrary,
-  msProject,
-  msSubsystem
+  msUsecase,
+  msTrivial
   ;
 
 // Важно !!!
@@ -117,13 +116,41 @@ begin
   TmsAssociation,
   TmsDependency,
 
-  TmsClass,
-  TmsInterface,
-  TmsMixIn,
+  TmsClass
+ ]);
 
-  TmsLibrary,
-  TmsProject,
-  TmsSubsystem
+ TmsRegisteredShapes.Instance.RegisterMC([
+  TmsClass.Specify('Interface').SetFillColor(TAlphaColorRec.Lightblue),
+  TmsClass.Specify('MixIn').SetFillColor(TAlphaColorRec.Lightgreen)
+ ]);
+
+ TmsRegisteredShapes.Instance.Register([
+  TmsLibrary
+ ]);
+
+ TmsRegisteredShapes.Instance.RegisterMC([
+  TmsLibrary.Specify('Project').SetFillColor(TAlphaColorRec.Lightgreen),
+  TmsLibrary.Specify('Subsystem').SetFillColor(TAlphaColorRec.Lightblue)
+ ]);
+
+ TmsRegisteredShapes.Instance.Register([
+  TmsUsecase
+ ]);
+
+ TmsRegisteredShapes.Instance.RegisterMC([
+  TmsUsecase.Specify('UsecaseRealization').SetFillColor(TAlphaColorRec.Lightgreen)
+ ]);
+
+ TmsRegisteredShapes.Instance.Register([
+  TmsTrivial
+ ]);
+
+ TmsRegisteredShapes.Instance.RegisterMC([
+  TmsLibrary.Specify('Layer').SetFillColor(TAlphaColorRec.Lightgray),
+  TmsTrivial.Specify('Typedef').SetFillColor(TAlphaColorRec.Gray),
+  TmsTrivial.Specify('Exception').SetFillColor(TAlphaColorRec.Red),
+  TmsClass.Specify('Method').SetFillColor(TAlphaColorRec.Purple),
+  TmsClass.Specify('Program').SetFillColor(TAlphaColorRec.Lime)
  ]);
 end;
 

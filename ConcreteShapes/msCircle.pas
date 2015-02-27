@@ -47,6 +47,8 @@ var
 begin
  l_Rect := DrawBounds;
 
+ Result := l_Rect.Contains(aPoint);
+
  l_StartRectPoint := l_Rect.TopLeft;
  l_FinishRectPoint := l_Rect.BottomRight;
 
@@ -72,7 +74,7 @@ begin
  l_Rect := DrawBounds;
 
  aCtx.rCanvas.DrawEllipse(l_Rect, 1);
- aCtx.rCanvas.FillEllipse(l_Rect, 0.5);
+ aCtx.rCanvas.FillEllipse(l_Rect, aCtx.rOpacity);
 end;
 
 procedure TmsCircle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);

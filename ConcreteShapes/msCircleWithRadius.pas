@@ -14,24 +14,29 @@ type
   f_Rad : Single;
  protected
   function InitialRadiusX: Integer; override;
-  constructor CreateInner(const aStartPoint: TPointF; aRad: Single); reintroduce;
+  constructor CreateInner(const aShapeClass : ImsShapeClass; const aStartPoint: TPointF; aRad: Single); reintroduce;
  public
   class function Create(const aStartPoint: TPointF; aRad: Single): ImsShape;
  end;//TmsCircleWithRadius
 
 implementation
 
+uses
+ msShape,
+ msShapeClass
+ ;
+
 // TmsCircleWithRadius
 
-constructor TmsCircleWithRadius.CreateInner(const aStartPoint: TPointF; aRad: Single);
+constructor TmsCircleWithRadius.CreateInner(const aShapeClass : ImsShapeClass; const aStartPoint: TPointF; aRad: Single);
 begin
- inherited CreateInner(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
+ inherited CreateInner(aShapeClass, TmsMakeShapeContext.Create(aStartPoint, nil, nil));
  f_Rad := aRad;
 end;
 
 class function TmsCircleWithRadius.Create(const aStartPoint: TPointF; aRad: Single): ImsShape;
 begin
- Result := CreateInner(aStartPoint, aRad);
+ Result := CreateInner(Self.ShapeMC, aStartPoint, aRad);
 end;
 
 function TmsCircleWithRadius.InitialRadiusX: Integer;

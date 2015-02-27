@@ -40,8 +40,24 @@ type
   public
    rCanvas : TCanvas;
    rMoving : Boolean; // - определ€ем, что текущий рисуемый примитив - двигаетс€
+   rOpacity: Single;
    constructor Create(const aCanvas : TCanvas);
  end;//TmsDrawContext
+
+ TmsColorRec = record
+  rIsSet : Boolean;
+  rValue : TAlphaColor;
+ end;//TmsColorRec
+
+ TmsDrawOptionsContext = record
+  public
+   rFillColor: TAlphaColor;
+   rStrokeDash: TStrokeDash;
+   rStrokeColor: TAlphaColor;
+   rStrokeThickness: Single;
+   rOpacity: Single;
+   constructor Create(const aCtx: TmsDrawContext);
+ end;//TmsDrawOptionsContext
 
  ImsDiagrammsHolder = interface;
 
@@ -54,15 +70,6 @@ type
  end;//TmsMakeShapeContext
 
  TmsEndShapeContext = TmsMakeShapeContext;
-
- TmsDrawOptionsContext = record
-  public
-   rFillColor: TAlphaColor;
-   rStrokeDash: TStrokeDash;
-   rStrokeColor: TAlphaColor;
-   rStrokeThickness: Single;
-   constructor Create(const aCtx: TmsDrawContext);
- end;//TmsDrawOptionsContext
 
  ImsDiagramm = interface;
 
@@ -135,6 +142,12 @@ type
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
  end;//ImsShapeCreator
 
+ ImsShapeCreatorFriend = interface
+ // - Ёто "затычка", но пока так. „тобы не тер€ть темп.
+  ['{59C7ED7A-C4C7-4632-A59C-2CBF070FCA19}']
+  function ShapeClassForCreate: TClass;
+ end;//ImsShapeCreatorFriend
+
  TmsJSONMarshal = TJSONMarshal;
  TmsJSONUnMarshal = TJSONUnMarshal;
 
@@ -157,6 +170,8 @@ type
    write pm_SetCurrentDiagramms;
  end;//ImsDiagrammsHolder
 
+ ImsTunableShapeClass = interface;
+
  ImsShapeClass = interface
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
@@ -169,7 +184,13 @@ type
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
+  function Stereotype: String;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
  end;//ImsShapeClass
+
+ ImsTunableShapeClass = interface(ImsShapeClass)
+  function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
+ end;//ImsTunableShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
@@ -216,6 +237,7 @@ constructor TmsDrawContext.Create(const aCanvas : TCanvas);
 begin
  rCanvas := aCanvas;
  rMoving := false;
+ rOpacity := 0.5;
 end;
 
 // TmsMakeShapeContext
@@ -232,6 +254,7 @@ end;
 constructor TmsDrawOptionsContext.Create(const aCtx: TmsDrawContext);
 begin
  rFillColor :=  TAlphaColorRec.Null;
+ rOpacity := 0.5;
  if aCtx.rMoving then
  begin
   rStrokeDash := TStrokeDash.DashDot;

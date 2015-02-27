@@ -38,7 +38,7 @@ type
   f_WasMoved : Boolean;
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  constructor CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController); reintroduce;
+  constructor CreateInner(const aShapeClass : ImsShapeClass; const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController); reintroduce;
   function AddButton(aToolClass: RmsShapeTool; const aButton: ImsShape): ImsShape;
   procedure CreateFloatingButtons(const aController: ImsShapesController);
   procedure MouseMove(const aClickContext: TmsEndShapeContext); override;
@@ -49,14 +49,14 @@ type
   function pm_GetStartPoint: TPointF; override;
   procedure SetStartPoint(const aStartPoint: TPointF); override;
  public
-  class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
+  class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; override;
   procedure Cleanup; override;
   class function ButtonShape: ImsShape; override;
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
-  class function RectForButtons(const aShape: ImsShape): TRectF;
+  class function RectForButtons(const aShape: ImsShape; atCenter: Boolean): TRectF;
   class function BP(aButton: TmsFloatingButton; const aR: TRectF): TPointF;
-  class function ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape): TPointF;
+  class function ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape; atCenter: Boolean): TPointF;
  end;//TmsMover
 
 implementation
@@ -118,12 +118,16 @@ begin
            );
 end;
 
-class function TmsMover.RectForButtons(const aShape: ImsShape): TRectF;
+class function TmsMover.RectForButtons(const aShape: ImsShape; atCenter: Boolean): TRectF;
 var
  l_Offset : Single;
+ l_Len : Single;
 begin
  Result := aShape.DrawBounds;
- l_Offset := TmsSpecialArrow.InitialLength + cShift;
+ l_Len := TmsSpecialArrow.InitialLength;
+ if atCenter then
+  l_Len := l_Len / 2;
+ l_Offset := l_Len + cShift;
 
  Result.Inflate(l_Offset, l_Offset);
 end;
@@ -157,10 +161,10 @@ begin
  end;//case aButton
 end;
 
-class function TmsMover.ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape): TPointF;
+class function TmsMover.ButtonPoint(aButton: TmsFloatingButton; const aShape: ImsShape; atCenter: Boolean): TPointF;
 begin
  Assert(aShape <> nil);
- Result := BP(aButton, RectForButtons(aShape));
+ Result := BP(aButton, RectForButtons(aShape, atCenter));
 end;
 
 procedure TmsMover.CreateFloatingButtons(const aController: ImsShapesController);
@@ -205,7 +209,7 @@ begin
  for l_FB := Low(TmsFloatingButton) to High(TmsFloatingButton) do
   aController.AddShape(AddDButton(l_FB,
                                   cShapeTool[l_FB],
-                                  cShapeArrow[l_FB].Create(ButtonPoint(l_FB, f_Moving))));
+                                  cShapeArrow[l_FB].Create(ButtonPoint(l_FB, f_Moving, false))));
                                   // - тут на самом деле надо не f_Moving а Self
                                   // А Move - переопределить
                                   // Тогда починятся:
@@ -276,11 +280,11 @@ begin
  end;//f_FloatingButtons = nil
 end;
 
-constructor TmsMover.CreateInner(const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
+constructor TmsMover.CreateInner(const aShapeClass : ImsShapeClass; const aStartPoint: TPointF; const aMoving: ImsShape; const aController: ImsShapesController);
 begin
  Assert(aMoving <> nil);
  f_Moving := aMoving;
- inherited CreateInner(TmsMakeShapeContext.Create(aStartPoint, aController, nil));
+ inherited CreateInner(aShapeClass, TmsMakeShapeContext.Create(aStartPoint, aController, nil));
  Assert(aController <> nil);
  //CreateFloatingButtons(aController);
 end;
@@ -290,7 +294,7 @@ begin
  Result := TmsMoverIcon.Create;
 end;
 
-class function TmsMover.Create(const aCtx: TmsMakeShapeContext): ImsShape;
+class function TmsMover.Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape;
 var
  l_Moving : ImsShape;
 begin
@@ -298,7 +302,7 @@ begin
  l_Moving := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
  if (l_Moving <> nil) then
  begin
-  Result := CreateInner(aCtx.rStartPoint, l_Moving, aCtx.rShapesController);
+  Result := CreateInner(aShapeClass, aCtx.rStartPoint, l_Moving, aCtx.rShapesController);
  end//l_Moving <> nil
  else
   Result := nil;

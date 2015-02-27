@@ -22,7 +22,7 @@ type
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
-  constructor CreateInner(const aShapes: array of ImsShape); reintroduce;
+  constructor CreateInner(const aShapeClass : ImsShapeClass; const aShapes: array of ImsShape); reintroduce;
  public
   class function Create(const aShapes: array of ImsShape): ImsShape;
   procedure Cleanup; override;
@@ -32,22 +32,25 @@ implementation
 
 uses
  System.SysUtils,
- System.Math
+ System.Math,
+
+ msShapeClass
  ;
 
 // TmsShapesGroup
 
 class function TmsShapesGroup.Create(const aShapes: array of ImsShape): ImsShape;
 begin
- Result := CreateInner(aShapes);
+ Result := CreateInner(Self.ShapeMC, aShapes);
 end;
 
-constructor TmsShapesGroup.CreateInner(const aShapes: array of ImsShape);
+constructor TmsShapesGroup.CreateInner(const aShapeClass : ImsShapeClass; const aShapes: array of ImsShape);
 var
  l_Shape : ImsShape;
 begin
  Assert(Length(aShapes) > 0, 'Пустую группу примитивов глупо создавать');
- inherited CreateInner(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+ Assert(aShapeClass <> nil, 'Не задан мета-класс примитива');
+ inherited CreateInner(aShapeClass, TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
  f_Shapes := TmsShapesList.Create;
  for l_Shape in aShapes do
   f_Shapes.Add(l_Shape);

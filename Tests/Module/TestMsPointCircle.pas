@@ -36,7 +36,7 @@ uses
 
 procedure TestTmsPointCircle.SetUp;
 begin
-  FmsPointCircle := TmsShapeCreator.Create(TmsPointCircle).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+  FmsPointCircle := TmsPointCircle.ShapeMC.Creator.CreateShape(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
 end;
 
 procedure TestTmsPointCircle.TearDown;

@@ -28,7 +28,7 @@ type
   f_Shape : ImsShape;
  protected
   function ShapeToShow: ImsShape; override;
-  constructor CreateInner(const aShape: ImsShape); reintroduce;
+  constructor CreateInner(const aShapeClass : ImsShapeClass; const aShape: ImsShape); reintroduce;
  public
   class function Create(const aShape: ImsShape): ImsShape;
   procedure Cleanup; override;
@@ -39,7 +39,7 @@ type
   f_Shape : Pointer;
  protected
   function ShapeToShow: ImsShape; override;
-  constructor CreateInner(const aShape: ImsShape); reintroduce;
+  constructor CreateInner(const aShapeClass : ImsShapeClass; const aShape: ImsShape); reintroduce;
  public
   class function Create(const aShape: ImsShape): ImsShape;
   procedure Cleanup; override;
@@ -49,20 +49,22 @@ implementation
 
 uses
  System.SysUtils,
- System.Math
+ System.Math,
+
+ msShapeClass
  ;
 
 // TmsProxyShape
 
 class function TmsProxyShape.Create(const aShape: ImsShape): ImsShape;
 begin
- Result := CreateInner(aShape);
+ Result := CreateInner(Self.ShapeMC, aShape);
 end;
 
-constructor TmsProxyShape.CreateInner(const aShape: ImsShape);
+constructor TmsProxyShape.CreateInner(const aShapeClass : ImsShapeClass; const aShape: ImsShape);
 begin
  Assert(aShape <> nil, 'Пустую группу примитивов глупо создавать');
- inherited CreateInner(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+ inherited CreateInner(aShapeClass, TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
  f_Shape := aShape;
 end;
 
@@ -81,13 +83,13 @@ end;
 
 class function TmsWeakProxyShape.Create(const aShape: ImsShape): ImsShape;
 begin
- Result := CreateInner(aShape);
+ Result := CreateInner(Self.ShapeMC, aShape);
 end;
 
-constructor TmsWeakProxyShape.CreateInner(const aShape: ImsShape);
+constructor TmsWeakProxyShape.CreateInner(const aShapeClass : ImsShapeClass; const aShape: ImsShape);
 begin
  Assert(aShape <> nil, 'Пустую группу примитивов глупо создавать');
- inherited CreateInner(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+ inherited CreateInner(aShapeClass, TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
  f_Shape := Pointer(aShape);
 end;
 

@@ -144,11 +144,9 @@ uses
   msDependency in 'ConcreteShapes\ForUML\msDependency.pas',
   msAssociation in 'ConcreteShapes\ForUML\msAssociation.pas',
   msClass in 'ConcreteShapes\ForUML\msClass.pas',
-  msInterface in 'ConcreteShapes\ForUML\msInterface.pas',
-  msMixIn in 'ConcreteShapes\ForUML\msMixIn.pas',
   msLibrary in 'ConcreteShapes\ForUML\msLibrary.pas',
-  msProject in 'ConcreteShapes\ForUML\msProject.pas',
-  msSubsystem in 'ConcreteShapes\ForUML\msSubsystem.pas';
+  msUsecase in 'ConcreteShapes\ForUML\msUsecase.pas',
+  msTrivial in 'ConcreteShapes\ForUML\msTrivial.pas';
 
 {$R *.res}
 

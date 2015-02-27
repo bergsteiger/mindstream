@@ -48,7 +48,8 @@ uses
   msRegisteredShapes,
   TypInfo,
 
-  msConnector
+  msConnector,
+  msPointCircle
   ;
 
 // TTestSaveMoverToPNG
@@ -72,7 +73,7 @@ var
 begin
  Assert(aDiagramm.ItemsCount = f_Context.rShapesCount);
  l_ShapeToDeal := aDiagramm.FirstShape;
- l_Class := TmsRegisteredShapes.Instance.ByName(TmsMover.ClassName);
+ l_Class := TmsMover.ShapeMC;
  Assert(l_Class <> nil);
  l_Ctx := TmsMakeShapeContext.Create(l_ShapeToDeal.StartPoint, aDiagramm.ShapesController, nil);
  l_Mover := l_Class.Creator.CreateShape(l_Ctx);
@@ -86,16 +87,23 @@ end;
 
 // TmsMoverFloatingButtonsTest
 
-procedure TmsMoverFloatingButtonsTest.MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape);
+procedure TmsMoverFloatingButtonsTest.MoverApplied(const aDiagramm: ImsDiagramm; const aShape: ImsShape; const aMover: ImsShape);
 var
  l_ClickPoint : TPointF;
  l_Ctx : TmsEndShapeContext;
+ l_S : ImsShape;
 begin
  if (aMover <> nil) then
  begin
-  l_ClickPoint := TmsMover.ButtonPoint(f_Button, aShape);
+  l_ClickPoint := TmsMover.ButtonPoint(f_Button, aShape, true);
   l_Ctx := TmsEndShapeContext.Create(l_ClickPoint, aDiagramm.ShapesController, nil);
+
+  CheckFalse(aShape.DrawBounds.Contains(l_ClickPoint), 'Фигура не должна содержать точку клика');
   aMover.EndTo(l_Ctx);
+  CheckFalse(aShape.DrawBounds.Contains(l_ClickPoint), 'Видимо не попали в кнопку и фигура сместилась в точку клика');
+  l_S := TmsPointCircle.Create(l_ClickPoint);
+  Assert(l_S.StartPoint = l_ClickPoint);
+  aDiagramm.AddShape(l_S);
  end;//aMover <> nil
  inherited;
 end;

@@ -26,6 +26,8 @@ type
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
+  function Stereotype: String;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
  public
   class function Create(aShapeClass: RmsShape): ImsShapeClass;
  end;//TmsShapeClass
@@ -33,7 +35,8 @@ type
 implementation
 
 uses
- msShapeCreator
+ msShapeCreator,
+ msRegisteredShapes
  ;
 
 // TmsShapeClass
@@ -46,7 +49,10 @@ end;
 
 class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClass;
 begin
- Result := CreateInner(aShapeClass);
+ Result := TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName);
+ if (Result = nil) then
+  Result := CreateInner(aShapeClass);
+ Assert(Result <> nil);
 end;
 
 function TmsShapeClass.IsForToolbar: Boolean;
@@ -70,13 +76,25 @@ end;
 function TmsShapeClass.Creator: ImsShapeCreator;
 begin
  Assert(f_ShapeClass <> nil);
- Result := TmsShapeCreator.Create(f_ShapeClass);
+ Result := TmsShapeCreator.Create(Self, f_ShapeClass);
 end;
 
 function TmsShapeClass.Name: String;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.ClassName;
+end;
+
+function TmsShapeClass.Stereotype: String;
+begin
+ Assert(f_ShapeClass <> nil);
+ Result := f_ShapeClass.ClassName;
+ Result := Copy(Result, 4, Length(Result) - 3);
+end;
+
+procedure TmsShapeClass.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+begin
+ // - тут ничего не делаем
 end;
 
 procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);

@@ -3,32 +3,39 @@ unit msProxyShapeClass;
 interface
 
 uses
+ System.UITypes,
  msInterfaces,
  msShape,
  msInterfacedRefcounted
  ;
 
 type
- TmsProxyShapeClass = class(TmsInterfacedRefcounted, ImsShapeClass)
+ TmsProxyShapeClass = class(TmsInterfacedRefcounted, ImsShapeClass, ImsTunableShapeClass)
  private
   f_ShapeClass : MCmsShape;
+  f_Name : String;
+  f_Stereotype : String;
+  f_FillColor : TmsColorRec;
  private
-  constructor CreateInner(const aShapeClass: MCmsShape);
+  constructor CreateInner(const aName : String; const aShapeClass: MCmsShape);
  protected
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
   function IsLineLike: Boolean;
   function Creator: ImsShapeCreator;
   function Name: String;
+  function Stereotype: String;
+  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
+  function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
  public
-  class function Create(const aShapeClass: MCmsShape): ImsShapeClass; overload;
-  class function Create(const aShapeClass: RmsShape): ImsShapeClass; overload;
+  class function Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass; overload;
+  class function Create(const aName : String; const aShapeClass: RmsShape): ImsTunableShapeClass; overload;
  end;//TmsProxyShapeClass
 
 implementation
@@ -40,20 +47,22 @@ uses
 
 // TmsProxyShapeClass
 
-constructor TmsProxyShapeClass.CreateInner(const aShapeClass: MCmsShape);
+constructor TmsProxyShapeClass.CreateInner(const aName : String; const aShapeClass: MCmsShape);
 begin
  inherited Create;
  f_ShapeClass := aShapeClass;
+ f_Stereotype := aName;
+ f_Name := 'Tms' + f_Stereotype;
 end;
 
-class function TmsProxyShapeClass.Create(const aShapeClass: MCmsShape): ImsShapeClass;
+class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass;
 begin
- Result := CreateInner(aShapeClass);
+ Result := CreateInner(aName, aShapeClass);
 end;
 
-class function TmsProxyShapeClass.Create(const aShapeClass: RmsShape): ImsShapeClass;
+class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: RmsShape): ImsTunableShapeClass;
 begin
- Result := Create(TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName));
+ Result := Create(aName, aShapeClass.ShapeMC);
 end;
 
 function TmsProxyShapeClass.IsForToolbar: Boolean;
@@ -75,17 +84,38 @@ begin
 end;
 
 function TmsProxyShapeClass.Creator: ImsShapeCreator;
+var
+ l_SC : TClass;
 begin
  Assert(f_ShapeClass <> nil);
- Assert(false, 'Не реализовано');
- Result := f_ShapeClass.Creator;
+ l_SC := (f_ShapeClass.Creator As ImsShapeCreatorFriend).ShapeClassForCreate;
+ Assert(l_SC.InheritsFrom(TmsShape));
+ Result := TmsShapeCreator.Create(Self, RmsShape(l_SC));
+ //Result := f_ShapeClass.Creator;
 end;
 
 function TmsProxyShapeClass.Name: String;
 begin
  Assert(f_ShapeClass <> nil);
- Assert(false, 'Не реализовано');
- Result := f_ShapeClass.Name;
+ Result := f_Name;
+(* Assert(false, 'Не реализовано');
+ Result := f_ShapeClass.Name;*)
+end;
+
+function TmsProxyShapeClass.Stereotype: String;
+begin
+ Assert(f_ShapeClass <> nil);
+ Result := f_Stereotype;
+(* Assert(false, 'Не реализовано');
+ Result := f_ShapeClass.Stereotype;*)
+end;
+
+procedure TmsProxyShapeClass.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+begin
+ Assert(f_ShapeClass <> nil);
+ f_ShapeClass.TransformDrawOptionsContext(theCtx);
+ if f_FillColor.rIsSet then
+  theCtx.rFillColor := f_FillColor.rValue;
 end;
 
 procedure TmsProxyShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
@@ -116,13 +146,21 @@ function TmsProxyShapeClass.IsOurInstance(const aShape: ImsShape): Boolean;
 begin
  Assert(f_ShapeClass <> nil);
  Assert(aShape.ShapeClass <> nil);
- Result := aShape.ShapeClass.Name = f_ShapeClass.Name;
+ Result := aShape.ShapeClass.Name = Self.f_Name;
+// Result := aShape.ShapeClass.Name = f_ShapeClass.Name;
 end;
 
 function TmsProxyShapeClass.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.NullClick(aHolder);
+end;
+
+function TmsProxyShapeClass.SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
+begin
+ Result := Self;
+ f_FillColor.rIsSet := true;
+ f_FillColor.rValue := aColor;
 end;
 
 end.

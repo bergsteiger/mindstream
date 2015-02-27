@@ -17,7 +17,7 @@ type
   f_OtherShapeClass : MCmsShape;
   f_Proxy : ImsShape;
  protected
-  constructor CreateInner(const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF); reintroduce;
+  constructor CreateInner(const aShapeClass : ImsShapeClass; const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF); reintroduce;
   class function Create(const anOtherShapeClass: MCmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
   //function IsClassTypeNamedAs(const aClassName: String): Boolean; override;
   function GetDrawBounds: TRectF; override;
@@ -34,7 +34,8 @@ implementation
 
 uses
  msGreenCircle,
- msMover
+ msMover,
+ msShapeClass
  ;
 
 // TmsPaletteShape
@@ -49,16 +50,16 @@ begin
  f_Proxy.DrawTo(aCtx);
 end;
 
-constructor TmsPaletteShape.CreateInner(const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF);
+constructor TmsPaletteShape.CreateInner(const aShapeClass : ImsShapeClass; const anOtherShapeClass: MCmsShape; const aStartPoint: TPointF);
 begin
- inherited CreateInner(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
+ inherited CreateInner(aShapeClass, TmsMakeShapeContext.Create(aStartPoint, nil, nil));
  f_OtherShapeClass := anOtherShapeClass;
  f_Proxy := f_OtherShapeClass.ButtonShape;
 end;
 
 class function TmsPaletteShape.Create(const anOtherShapeClass: MCmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
 begin
- Result := CreateInner(anOtherShapeClass, aCtx.rStartPoint);
+ Result := CreateInner(Self.ShapeMC, anOtherShapeClass, aCtx.rStartPoint);
 end;
 
 (*function TmsPaletteShape.IsClassTypeNamedAs(const aClassName: String): Boolean;

@@ -9,20 +9,23 @@ uses
  ;
 
 type
- TmsShapeCreator = class(TmsInterfacedRefcounted, ImsShapeCreator)
+ TmsShapeCreator = class(TmsInterfacedRefcounted, ImsShapeCreator, ImsShapeCreatorFriend)
  // создатель TmsShape
  private
   f_ShapeClass : RmsShape;
   // - класс примитивов для создания
-  constructor CreatePrim(aShapeClass: RmsShape);
+  f_ShapeMC : ImsShapeClass;
+  constructor CreatePrim(const aShapeMC : ImsShapeClass; aShapeClass: RmsShape);
  protected
   property ShapeClass : RmsShape
   read f_ShapeClass;
   // - класс примитивов для создания
  protected
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; virtual;
+  function ShapeClassForCreate: TClass;
  public
-  class function Create(aShapeClass: RmsShape): ImsShapeCreator;
+  class function Create(const aShapeMC : ImsShapeClass; aShapeClass: RmsShape): ImsShapeCreator; overload;
+  class function Create(aShapeClass: RmsShape): ImsShapeCreator; overload;
  end;//TmsShapeCreator
 
  TmsShapeFriend = class(TmsShape)
@@ -33,22 +36,37 @@ type
 
 implementation
 
+uses
+ msShapeClass
+ ;
+
 // TmsShapeCreator
 
-constructor TmsShapeCreator.CreatePrim(aShapeClass: RmsShape);
+constructor TmsShapeCreator.CreatePrim(const aShapeMC : ImsShapeClass; aShapeClass: RmsShape);
 begin
  inherited Create;
  f_ShapeClass := aShapeClass;
+ f_ShapeMC := aShapeMC;
+end;
+
+class function TmsShapeCreator.Create(const aShapeMC : ImsShapeClass; aShapeClass: RmsShape): ImsShapeCreator;
+begin
+ Result := CreatePrim(aShapeMC, aShapeClass);
 end;
 
 class function TmsShapeCreator.Create(aShapeClass: RmsShape): ImsShapeCreator;
 begin
- Result := CreatePrim(aShapeClass);
+ Result := Create(aShapeClass.ShapeMC, aShapeClass);
 end;
 
 function TmsShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 begin
- Result := RmsShapeFriend(f_ShapeClass).Create(aContext);
+ Result := RmsShapeFriend(f_ShapeClass).Create(f_ShapeMC, aContext);
+end;
+
+function TmsShapeCreator.ShapeClassForCreate: TClass;
+begin
+ Result := f_ShapeClass;
 end;
 
 end.

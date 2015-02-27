@@ -33,6 +33,7 @@ type
   btSaveDiagramm: TButton;
   btLoadDiagramm: TButton;
   btSaveToPNG: TButton;
+  btSaveJsonAndPNG: TButton;
   f_DiagrammsRoot: ImsDiagramms;
   f_CurrentDiagramms : ImsDiagrammsList;
   f_CurrentDiagramm : ImsDiagramm;
@@ -45,6 +46,7 @@ type
   procedure imgMainMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; var Handled: Boolean);
   procedure imgMainMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Single);
   procedure btSaveToPNGClick(Sender: TObject);
+  procedure btSaveJSonAndPNGClick(Sender: TObject);
   procedure btSaveDiagrammClick(Sender: TObject);
   procedure btLoadDiagrammClick(Sender: TObject);
   function pm_GetCurrentDiagramm: ImsDiagramm;
@@ -73,7 +75,8 @@ type
                          aAddDiagramm: TButton;
                          aSaveDiagramm: TButton;
                          aLoadDiagramm: TButton;
-                         aSaveToPng: TButton);
+                         aSaveToPng: TButton;
+                         aSaveJsonAndPng: TButton);
  public
   class function Create(aImage: TPaintBox;
                         aShapes: TComboBox;
@@ -81,7 +84,8 @@ type
                         aAddDiagramm: TButton;
                         aSaveDiagramm: TButton;
                         aLoadDiagramm: TButton;
-                        aSaveToPng: TButton): ImsDiagrammsController;
+                        aSaveToPng: TButton;
+                        aSaveJsonAndPng: TButton): ImsDiagrammsController;
   procedure Cleanup; override;
   procedure Clear;
   procedure MouseDown(const aStart: TPointF);
@@ -177,8 +181,14 @@ end;
 
 // TmsDiagrammsController
 
-constructor TmsDiagrammsController.CreatePrim(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton;
-  aSaveDiagramm: TButton; aLoadDiagramm: TButton; aSaveToPng: TButton);
+constructor TmsDiagrammsController.CreatePrim(aImage: TPaintBox;
+                                              aShapes: TComboBox;
+                                              aDiagramm: TComboBox;
+                                              aAddDiagramm: TButton;
+                                              aSaveDiagramm: TButton;
+                                              aLoadDiagramm: TButton;
+                                              aSaveToPng: TButton;
+                                              aSaveJsonAndPng: TButton);
 begin
  inherited Create;
  imgMain := aImage;
@@ -188,11 +198,13 @@ begin
  btSaveDiagramm := aSaveDiagramm;
  btLoadDiagramm := aLoadDiagramm;
  btSaveToPNG := aSaveToPng;
+ btSaveJsonAndPNG := aSaveJsonAndPng;
  btSaveToPNG.OnClick := btSaveToPNGClick;
  cbDiagramm.OnChange := cbDiagrammChange;
  btAddDiagramm.OnClick := btAddDiagrammClick;
  btSaveDiagramm.OnClick := btSaveDiagrammClick;
  btLoadDiagramm.OnClick := btLoadDiagrammClick;
+ btSaveJsonAndPNG.OnClick := btSaveJSonAndPNGClick;
  imgMain.OnMouseDown := imgMainMouseDown;
  imgMain.OnMouseWheel := imgMainMouseWheel;
  imgMain.OnMouseUp := imgMainMouseUp;
@@ -203,10 +215,23 @@ begin
  CurrentDiagramms.AddNewDiagramm;
 end;
 
-class function TmsDiagrammsController.Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton;
-  aSaveDiagramm: TButton; aLoadDiagramm: TButton; aSaveToPng: TButton): ImsDiagrammsController;
+class function TmsDiagrammsController.Create(aImage : TPaintBox;
+                                             aShapes  : TComboBox;
+                                             aDiagramm: TComboBox;
+                                             aAddDiagramm: TButton;
+                                             aSaveDiagramm: TButton;
+                                             aLoadDiagramm: TButton;
+                                             aSaveToPng: TButton;
+                                             aSaveJsonAndPng: TButton): ImsDiagrammsController;
 begin
- Result := CreatePrim(aImage, aShapes, aDiagramm, aAddDiagramm, aSaveDiagramm, aLoadDiagramm, aSaveToPng);
+ Result := CreatePrim(aImage,
+                      aShapes,
+                      aDiagramm,
+                      aAddDiagramm,
+                      aSaveDiagramm,
+                      aLoadDiagramm,
+                      aSaveToPng,
+                      aSaveJsonAndPng);
 end;
 
 procedure TmsDiagrammsController.DoInvalidateDiagramm(const aDiagramm: ImsDiagramm);
@@ -311,6 +336,27 @@ end;
 procedure TmsDiagrammsController.btSaveDiagrammClick(Sender: TObject);
 begin
  f_DiagrammsRoot.Serialize;
+end;
+
+procedure TmsDiagrammsController.btSaveJSonAndPNGClick(Sender: TObject);
+var
+ l_SaveDialog: TSaveDialog;
+begin
+ l_SaveDialog := TSaveDialog.Create(nil);
+ l_SaveDialog.Filter := '*';
+ try
+  l_SaveDialog.Execute;
+  try
+   f_DiagrammsRoot.SaveTo(l_SaveDialog.FileName + '.json');
+   SaveToPng(l_SaveDialog.FileName + '.png');
+  except
+   on E: Exception do
+    ShowMessage('Произошла ошибка при сохранении');
+  end;
+
+ finally
+  FreeAndNil(l_SaveDialog);
+ end;//try..finally
 end;
 
 procedure TmsDiagrammsController.btSaveToPNGClick(Sender: TObject);
