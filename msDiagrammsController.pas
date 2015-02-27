@@ -347,8 +347,8 @@ begin
  try
   l_SaveDialog.Execute;
   try
-   f_DiagrammsRoot.SaveTo(l_SaveDialog.FileName + '.json');
-   SaveToPng(l_SaveDialog.FileName + '.png');
+   f_DiagrammsRoot.SaveTo(ChangeFileExt(l_SaveDialog.FileName, '.json'));
+   SaveToPng(ChangeFileExt(l_SaveDialog.FileName, '.png'));
   except
    on E: Exception do
     ShowMessage('Произошла ошибка при сохранении');
