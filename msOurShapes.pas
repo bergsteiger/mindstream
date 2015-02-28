@@ -150,7 +150,10 @@ begin
   TmsTrivial.Specify('Typedef').SetFillColor(TAlphaColorRec.Gray),
   TmsTrivial.Specify('Exception').SetFillColor(TAlphaColorRec.Red),
   TmsClass.Specify('Method').SetFillColor(TAlphaColorRec.Purple),
-  TmsClass.Specify('Program').SetFillColor(TAlphaColorRec.Lime)
+  TmsClass.Specify('Program').SetFillColor(TAlphaColorRec.Lime),
+  TmsDependency.Specify('uses'),
+  TmsDependency.Specify('friend'),
+  TmsDependency.Specify('injects')
  ]);
 end;
 
