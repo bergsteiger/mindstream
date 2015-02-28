@@ -156,7 +156,10 @@ begin
   TmsClass.Specify('Program').SetFillColor(TAlphaColorRec.Lime),
   TmsDependency.Specify('uses'),
   TmsDependency.Specify('friend'),
-  TmsDependency.Specify('injects')
+  TmsDependency.Specify('injects'),
+  TmsAssociation.Specify('property'),
+  TmsAssociation.Specify('readonly'),
+  TmsAssociation.Specify('writeonly')
  ]);
 end;
 
