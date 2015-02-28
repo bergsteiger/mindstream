@@ -142,7 +142,8 @@ end;
 
 procedure TmsConnector.GetStereotypeRect(var aRect: TRectF);
 begin
- aRect := DrawBounds;
+ inherited;
+ //aRect := DrawBounds;
 end;
 
 end.

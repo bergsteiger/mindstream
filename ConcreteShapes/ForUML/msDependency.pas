@@ -14,6 +14,7 @@ type
   function GetFinishPointForDraw: TPointF; override;
   function CreateArrowHeadShape(const aStartPoint: TPointF): ImsShape; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
+  procedure GetStereotypeRect(var aRect: TRectF); override;
  end;//TmsDependency
 
 implementation
@@ -38,6 +39,11 @@ begin
  inherited;
  theCtx.rStrokeDash := TStrokeDash.Dash;
  theCtx.rStrokeThickness := 1.5;
+end;
+
+procedure TmsDependency.GetStereotypeRect(var aRect: TRectF);
+begin
+ aRect := DrawBounds;
 end;
 
 end.
