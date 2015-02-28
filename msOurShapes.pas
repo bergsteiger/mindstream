@@ -18,8 +18,6 @@ uses
   msLineWithArrow,
   msTriangleDirectionRight,
   msRegisteredShapes,
-  msRedRectangle,
-  msGreenRectangle,
   msPolygonShape,
   msBlackTriangle,
   msBlackRectangle,
@@ -74,10 +72,15 @@ begin
   TmsDashLine,
   TmsDotLine,
   TmsLineWithArrow,
-  TmsTriangleDirectionRight,
-  TmsRedRectangle,
-  TmsGreenRectangle,
+  TmsTriangleDirectionRight
+ ]);
 
+ TmsRegisteredShapes.Instance.RegisterMC([
+  TmsRectangle.Specify('RedRectangle').SetFillColor(TAlphaColorRec.Red),
+  TmsRectangle.Specify('GreenRectangle').SetFillColor(TAlphaColorRec.Green)
+ ]);
+
+ TmsRegisteredShapes.Instance.Register([
   // special shapes
   TmsPointCircle,
   TmsSmallTriangle,

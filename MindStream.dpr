@@ -32,8 +32,6 @@ uses
   TestMsPointCircle in 'Tests\Module\TestMsPointCircle.pas',
   TestMsCircle in 'Tests\Module\TestMsCircle.pas',
   msShapeTest in 'Tests\Module\msShapeTest.pas',
-  msRedRectangle in 'ConcreteShapes\msRedRectangle.pas',
-  msGreenRectangle in 'ConcreteShapes\msGreenRectangle.pas',
   msSerializeInterfaces in 'msSerializeInterfaces.pas',
   msTool in 'ShapeTools\msTool.pas',
   msDiagrammMarshal in 'Marshal\msDiagrammMarshal.pas',
