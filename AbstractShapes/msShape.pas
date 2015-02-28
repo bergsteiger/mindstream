@@ -300,6 +300,11 @@ begin
  GetStereotypeRect(l_StereotypeRect);
  if (l_StereotypeRect.TopLeft <> l_StereotypeRect.BottomRight) then
  begin
+  if (l_StereotypeRect.Height < 10) then
+  begin
+   l_StereotypeRect.Top := l_StereotypeRect.Top - 10;
+   l_StereotypeRect.Bottom := l_StereotypeRect.Bottom + 10;
+  end;//l_StereotypeRect.Height < 10
   l_StereotypeRect.Left := l_StereotypeRect.Left - 100;
   l_StereotypeRect.Right := l_StereotypeRect.Right + 100;
   aCtx.rCanvas.Fill.Color := aCtx.rCanvas.Stroke.Color;
