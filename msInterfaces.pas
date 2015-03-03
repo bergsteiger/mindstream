@@ -47,6 +47,7 @@ type
  TmsColorRec = record
   rIsSet : Boolean;
   rValue : TAlphaColor;
+  class operator Implicit(aValue: TAlphaColor): TmsColorRec;
  end;//TmsColorRec
 
  TmsDrawOptionsContext = record
@@ -288,6 +289,14 @@ begin
  rStartPoint := aStartPoint;
  rDelta := aDelta;
  rShapesController := aShapesController;
+end;
+
+// TmsColorRec
+
+class operator TmsColorRec.Implicit(aValue: TAlphaColor): TmsColorRec;
+begin
+ Result.rIsSet := true;
+ Result.rValue := aValue;
 end;
 
 end.

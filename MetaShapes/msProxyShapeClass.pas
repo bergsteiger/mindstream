@@ -159,8 +159,7 @@ end;
 function TmsProxyShapeClass.SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
 begin
  Result := Self;
- f_FillColor.rIsSet := true;
- f_FillColor.rValue := aColor;
+ f_FillColor := aColor;
 end;
 
 end.
