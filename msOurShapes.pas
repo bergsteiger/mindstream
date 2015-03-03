@@ -20,7 +20,6 @@ uses
   msRegisteredShapes,
   msPolygonShape,
   msBlackRectangle,
-  msGreenCircle,
   msPointCircle,
   msSmallTriangle,
   msFolder,
@@ -90,7 +89,7 @@ begin
   // SVG Shapes
   TmsFolder.MC,
 
-  TmsGreenCircle.MC,
+  TmsCircle.Specify('GreenCircle').SetFillColor(TAlphaColorRec.Green),
   TmsTriangle.Specify('BlackTriangle').SetFillColor(TAlphaColorRec.Black),
   TmsBlackRectangle.MC,
   TmsRemoveIcon.MC,

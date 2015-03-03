@@ -62,7 +62,6 @@ type
 implementation
 
 uses
- msBlackTriangle,
  FMX.Types,
  System.SysUtils,
  msMoverIcon,

@@ -88,6 +88,7 @@ type
   procedure Assign(anOther : TmsShape);
   class function ButtonShape: ImsShape; virtual;
   class function MC: ImsShapeClass;
+  class function NamedMC(const aName: String): ImsShapeClass;
   class function Specify(const aName: String): ImsTunableShapeClass;
  end;//TmsShape
 
@@ -343,6 +344,12 @@ end;
 class function TmsShape.MC: ImsShapeClass;
 begin
  Result := TmsShapeClass.Create(Self);
+end;
+
+class function TmsShape.NamedMC(const aName: String): ImsShapeClass;
+begin
+ Result := TmsRegisteredShapes.Instance.ByName(aName);
+ Assert(Result <> nil);
 end;
 
 class function TmsShape.Specify(const aName: String): ImsTunableShapeClass;

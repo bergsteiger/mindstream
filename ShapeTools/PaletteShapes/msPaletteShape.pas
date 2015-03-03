@@ -33,7 +33,6 @@ type
 implementation
 
 uses
- msGreenCircle,
  msMover,
  msShapeClass
  ;
