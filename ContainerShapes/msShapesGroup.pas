@@ -41,7 +41,7 @@ uses
 
 class function TmsShapesGroup.Create(const aShapes: array of ImsShape): ImsShape;
 begin
- Result := CreateInner(Self.ShapeMC, aShapes);
+ Result := CreateInner(Self.MC, aShapes);
 end;
 
 constructor TmsShapesGroup.CreateInner(const aShapeClass : ImsShapeClass; const aShapes: array of ImsShape);

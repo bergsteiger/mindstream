@@ -62,7 +62,7 @@ end;
 
 class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: RmsShape): ImsTunableShapeClass;
 begin
- Result := Create(aName, aShapeClass.ShapeMC);
+ Result := Create(aName, aShapeClass.MC);
 end;
 
 function TmsProxyShapeClass.IsForToolbar: Boolean;

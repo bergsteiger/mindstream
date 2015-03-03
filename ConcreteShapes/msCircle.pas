@@ -47,7 +47,7 @@ var
 begin
  l_Rect := DrawBounds;
 
- Result := l_Rect.Contains(aPoint);
+ //Result := l_Rect.Contains(aPoint);
 
  l_StartRectPoint := l_Rect.TopLeft;
  l_FinishRectPoint := l_Rect.BottomRight;
