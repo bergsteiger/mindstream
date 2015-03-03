@@ -127,8 +127,8 @@ begin
   TmsClass.Specify('MixIn').SetFillColor(TAlphaColorRec.Lightgreen)
  ]);
 
- TmsRegisteredShapes.Instance.Register([
-  TmsLibrary
+ TmsRegisteredShapes.Instance.RegisterMC([
+  TmsLibrary.MC
  ]);
 
  TmsRegisteredShapes.Instance.RegisterMC([
@@ -136,16 +136,16 @@ begin
   TmsLibrary.Specify('Subsystem').SetFillColor(TAlphaColorRec.Lightblue)
  ]);
 
- TmsRegisteredShapes.Instance.Register([
-  TmsUsecase
+ TmsRegisteredShapes.Instance.RegisterMC([
+  TmsUsecase.MC
  ]);
 
  TmsRegisteredShapes.Instance.RegisterMC([
   TmsUsecase.Specify('UsecaseRealization').SetFillColor(TAlphaColorRec.Lightgreen)
  ]);
 
- TmsRegisteredShapes.Instance.Register([
-  TmsTrivial
+ TmsRegisteredShapes.Instance.RegisterMC([
+  TmsTrivial.MC
  ]);
 
  TmsRegisteredShapes.Instance.RegisterMC([
