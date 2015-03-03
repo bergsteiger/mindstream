@@ -15,6 +15,7 @@ type
  private
   f_ShapeClass : RmsShape;
   f_FillColor : TmsColorRec;
+  f_InitialHeight : TmsPixelRec;
  private
   constructor CreateInner(aShapeClass: RmsShape);
  protected
@@ -32,6 +33,7 @@ type
   function Stereotype: String;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
+  function InitialHeight: TmsPixelRec;
  public
   class function Create(aShapeClass: RmsShape): ImsTunableShapeClass;
  end;//TmsShapeClass
@@ -100,6 +102,11 @@ procedure TmsShapeClass.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsCo
 begin
  if f_FillColor.rIsSet then
   theCtx.rFillColor := f_FillColor.rValue;
+end;
+
+function TmsShapeClass.InitialHeight: TmsPixelRec;
+begin
+ Result := f_InitialHeight;
 end;
 
 function TmsShapeClass.SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;

@@ -16,6 +16,7 @@ type
   f_Name : String;
   f_Stereotype : String;
   f_FillColor : TmsColorRec;
+  f_InitialHeight : TmsPixelRec;
  private
   constructor CreateInner(const aName : String; const aShapeClass: MCmsShape);
  protected
@@ -33,6 +34,7 @@ type
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
+  function InitialHeight: TmsPixelRec;
  public
   class function Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass; overload;
   class function Create(const aName : String; const aShapeClass: RmsShape): ImsTunableShapeClass; overload;
@@ -160,6 +162,14 @@ function TmsProxyShapeClass.SetFillColor(aColor: TAlphaColor): ImsTunableShapeCl
 begin
  Result := Self;
  f_FillColor := aColor;
+end;
+
+function TmsProxyShapeClass.InitialHeight: TmsPixelRec;
+begin
+ Assert(f_ShapeClass <> nil);
+ Result := f_InitialHeight;
+ if not Result.rIsSet then
+  Result := f_ShapeClass.InitialHeight;
 end;
 
 end.

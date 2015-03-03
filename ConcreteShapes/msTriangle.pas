@@ -28,8 +28,14 @@ uses
  System.Math;
 
 class function TmsTriangle.InitialHeight: Single;
+var
+ l_V : TmsPixelRec;
 begin
- Result := 100;
+ l_V := Self.MC.InitialHeight;
+ if l_V.rIsSet then
+  Result := l_V.rValue
+ else
+  Result := 100;
 end;
 
 class function TmsTriangle.IsForToolbar: Boolean;
