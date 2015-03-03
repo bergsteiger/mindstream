@@ -19,7 +19,6 @@ uses
   msTriangleDirectionRight,
   msRegisteredShapes,
   msPolygonShape,
-  msBlackTriangle,
   msBlackRectangle,
   msGreenCircle,
   msPointCircle,
@@ -92,7 +91,7 @@ begin
   TmsFolder.MC,
 
   TmsGreenCircle.MC,
-  TmsBlackTriangle.MC,
+  TmsTriangle.Specify('BlackTriangle').SetFillColor(TAlphaColorRec.Black),
   TmsBlackRectangle.MC,
   TmsRemoveIcon.MC,
   TmsMoveIcon.MC,
