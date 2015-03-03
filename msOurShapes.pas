@@ -75,10 +75,8 @@ begin
   TmsTriangleDirectionRight.MC,
 
   TmsRectangle.Specify('RedRectangle').SetFillColor(TAlphaColorRec.Red),
-  TmsRectangle.Specify('GreenRectangle').SetFillColor(TAlphaColorRec.Green)
- ]);
+  TmsRectangle.Specify('GreenRectangle').SetFillColor(TAlphaColorRec.Green),
 
- TmsRegisteredShapes.Instance.RegisterMC([
   // special shapes
   TmsPointCircle.MC,
   TmsSmallTriangle.MC,
