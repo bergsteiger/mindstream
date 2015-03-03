@@ -77,7 +77,7 @@ begin
 
   // special shapes
   TmsPointCircle.MC,
-  TmsSmallTriangle.MC,
+  TmsSmallTriangle.TMC,
 
   // utility shapes
   TmsMover.MC,
