@@ -15,19 +15,13 @@ uses
 
 type
  TmsSmallTriangle = class(TmsTriangleDirectionRight)
- protected
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
   class function InitialHeight: Single; override;
  end;//TmsSmallTriangle
 
 implementation
 
-procedure TmsSmallTriangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- inherited;
- theCtx.rFillColor := TAlphaColorRec.Aquamarine;
-end;
+// TmsSmallTriangle
 
 class function TmsSmallTriangle.InitialHeight: Single;
 begin
