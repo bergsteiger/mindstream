@@ -60,22 +60,20 @@ uses
 // Все новые примитивы добавлять в конец списка
 procedure RegisterOurShapes;
 begin
- TmsRegisteredShapes.Instance.Register([
-  // concrete shapes
-  TmsLine,
-  TmsRectangle,
-  TmsCircle,
-  TmsRoundedRectangle,
-  TmsUseCaseLikeEllipse,
-  TmsTriangle,
-  TmsDashDotLine,
-  TmsDashLine,
-  TmsDotLine,
-  TmsLineWithArrow,
-  TmsTriangleDirectionRight
- ]);
-
  TmsRegisteredShapes.Instance.RegisterMC([
+  // concrete shapes
+  TmsLine.MC,
+  TmsRectangle.MC,
+  TmsCircle.MC,
+  TmsRoundedRectangle.MC,
+  TmsUseCaseLikeEllipse.MC,
+  TmsTriangle.MC,
+  TmsDashDotLine.MC,
+  TmsDashLine.MC,
+  TmsDotLine.MC,
+  TmsLineWithArrow.MC,
+  TmsTriangleDirectionRight.MC,
+
   TmsRectangle.Specify('RedRectangle').SetFillColor(TAlphaColorRec.Red),
   TmsRectangle.Specify('GreenRectangle').SetFillColor(TAlphaColorRec.Green)
  ]);
