@@ -27,10 +27,10 @@ type
   property FinishPoint : TPointF
    read pm_GetFinishPoint
    write f_FinishPoint;
+  procedure MoveBy(const aCtx: TmsMoveContext); override;
  public
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
-  procedure MoveBy(const aCtx: TmsMoveContext); override;
   class function CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF; const aShapesController: ImsShapesController): ImsShape;
  end;//TmsLine
 
