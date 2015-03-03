@@ -3,15 +3,18 @@ unit msShapeClass;
 interface
 
 uses
+ System.UITypes,
+
  msInterfaces,
  msShape,
  msInterfacedRefcounted
  ;
 
 type
- TmsShapeClass = class(TmsInterfacedRefcounted, ImsShapeClass)
+ TmsShapeClass = class(TmsInterfacedRefcounted, ImsShapeClass, ImsTunableShapeClass)
  private
   f_ShapeClass : RmsShape;
+  f_FillColor : TmsColorRec;
  private
   constructor CreateInner(aShapeClass: RmsShape);
  protected
@@ -28,8 +31,9 @@ type
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function Stereotype: String;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+  function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
  public
-  class function Create(aShapeClass: RmsShape): ImsShapeClass;
+  class function Create(aShapeClass: RmsShape): ImsTunableShapeClass;
  end;//TmsShapeClass
 
 implementation
@@ -47,9 +51,9 @@ begin
  f_ShapeClass := aShapeClass;
 end;
 
-class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClass;
+class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsTunableShapeClass;
 begin
- Result := TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName);
+ Result := TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName) As ImsTunableShapeClass;
  if (Result = nil) then
   Result := CreateInner(aShapeClass);
  Assert(Result <> nil);
@@ -95,6 +99,13 @@ end;
 procedure TmsShapeClass.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  // - тут ничего не делаем
+end;
+
+function TmsShapeClass.SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
+begin
+ Result := Self;
+ f_FillColor.rIsSet := true;
+ f_FillColor.rValue := aColor;
 end;
 
 procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
