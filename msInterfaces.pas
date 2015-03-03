@@ -10,7 +10,8 @@ uses
  msSerializeInterfaces,
  Generics.Collections,
  FMX.Objects,
- Data.DBXJSONReflect
+ Data.DBXJSONReflect,
+ msLineF
  ;
 
 type
@@ -49,6 +50,12 @@ type
   rValue : TAlphaColor;
   class operator Implicit(aValue: TAlphaColor): TmsColorRec;
  end;//TmsColorRec
+
+ TmsPixelRec = record
+  rIsSet : Boolean;
+  rValue : Pixel;
+  class operator Implicit(aValue: Pixel): TmsPixelRec;
+ end;//TmsPixelRec
 
  TmsDrawOptionsContext = record
   public
@@ -294,6 +301,14 @@ end;
 // TmsColorRec
 
 class operator TmsColorRec.Implicit(aValue: TAlphaColor): TmsColorRec;
+begin
+ Result.rIsSet := true;
+ Result.rValue := aValue;
+end;
+
+// TmsPixelRec
+
+class operator TmsPixelRec.Implicit(aValue: Pixel): TmsPixelRec;
 begin
  Result.rIsSet := true;
  Result.rValue := aValue;
