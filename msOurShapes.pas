@@ -124,31 +124,19 @@ begin
 
  TmsRegisteredShapes.Instance.RegisterMC([
   TmsClass.Specify('Interface').SetFillColor(TAlphaColorRec.Lightblue),
-  TmsClass.Specify('MixIn').SetFillColor(TAlphaColorRec.Lightgreen)
- ]);
+  TmsClass.Specify('MixIn').SetFillColor(TAlphaColorRec.Lightgreen),
 
- TmsRegisteredShapes.Instance.RegisterMC([
-  TmsLibrary.MC
- ]);
+  TmsLibrary.MC,
 
- TmsRegisteredShapes.Instance.RegisterMC([
   TmsLibrary.Specify('Project').SetFillColor(TAlphaColorRec.Lightgreen),
-  TmsLibrary.Specify('Subsystem').SetFillColor(TAlphaColorRec.Lightblue)
- ]);
+  TmsLibrary.Specify('Subsystem').SetFillColor(TAlphaColorRec.Lightblue),
 
- TmsRegisteredShapes.Instance.RegisterMC([
-  TmsUsecase.MC
- ]);
+  TmsUsecase.MC,
 
- TmsRegisteredShapes.Instance.RegisterMC([
-  TmsUsecase.Specify('UsecaseRealization').SetFillColor(TAlphaColorRec.Lightgreen)
- ]);
+  TmsUsecase.Specify('UsecaseRealization').SetFillColor(TAlphaColorRec.Lightgreen),
 
- TmsRegisteredShapes.Instance.RegisterMC([
-  TmsTrivial.MC
- ]);
+  TmsTrivial.MC,
 
- TmsRegisteredShapes.Instance.RegisterMC([
   TmsLibrary.Specify('Layer').SetFillColor(TAlphaColorRec.Lightgray),
   TmsTrivial.Specify('Typedef').SetFillColor(TAlphaColorRec.Gray),
   TmsTrivial.Specify('Exception').SetFillColor(TAlphaColorRec.Red),
