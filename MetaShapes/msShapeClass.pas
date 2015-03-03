@@ -98,7 +98,8 @@ end;
 
 procedure TmsShapeClass.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
- // - тут ничего не делаем
+ if f_FillColor.rIsSet then
+  theCtx.rFillColor := f_FillColor.rValue;
 end;
 
 function TmsShapeClass.SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
