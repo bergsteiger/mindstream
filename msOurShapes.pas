@@ -78,49 +78,47 @@ begin
   TmsRectangle.Specify('GreenRectangle').SetFillColor(TAlphaColorRec.Green)
  ]);
 
- TmsRegisteredShapes.Instance.Register([
+ TmsRegisteredShapes.Instance.RegisterMC([
   // special shapes
-  TmsPointCircle,
-  TmsSmallTriangle,
+  TmsPointCircle.MC,
+  TmsSmallTriangle.MC,
 
   // utility shapes
-  TmsMover,
-  TmsPicker,
-  TmsUpToParent,
-  TmsSwapParents,
-  TmsShapeRemover,
+  TmsMover.MC,
+  TmsPicker.MC,
+  TmsUpToParent.MC,
+  TmsSwapParents.MC,
+  TmsShapeRemover.MC,
 
   // SVG Shapes
-  TmsFolder,
+  TmsFolder.MC,
 
-  TmsGreenCircle,
-  TmsBlackTriangle,
-  TmsBlackRectangle,
-  TmsRemoveIcon,
-  TmsMoveIcon,
-  TmsTextShape,
-  TmsScrollShapeUp,
-  TmsScrollShapeDown,
-  TmsScrollShapeRight,
-  TmsScrollShapeLeft,
-  TmsScrollShapeUpLeft,
-  TmsScrollShapeUpRight,
-  TmsScrollShapeDownLeft,
-  TmsScrollShapeDownRight,
-  TmsScrollShapeResetOrigin,
+  TmsGreenCircle.MC,
+  TmsBlackTriangle.MC,
+  TmsBlackRectangle.MC,
+  TmsRemoveIcon.MC,
+  TmsMoveIcon.MC,
+  TmsTextShape.MC,
+  TmsScrollShapeUp.MC,
+  TmsScrollShapeDown.MC,
+  TmsScrollShapeRight.MC,
+  TmsScrollShapeLeft.MC,
+  TmsScrollShapeUpLeft.MC,
+  TmsScrollShapeUpRight.MC,
+  TmsScrollShapeDownLeft.MC,
+  TmsScrollShapeDownRight.MC,
+  TmsScrollShapeResetOrigin.MC,
 
-  TmsScrollingTool,
+  TmsScrollingTool.MC,
 
-  TmsConnector,
-  TmsGeneralization,
-  TmsRealization,
-  TmsAssociation,
-  TmsDependency,
+  TmsConnector.MC,
+  TmsGeneralization.MC,
+  TmsRealization.MC,
+  TmsAssociation.MC,
+  TmsDependency.MC,
 
-  TmsClass
- ]);
+  TmsClass.MC,
 
- TmsRegisteredShapes.Instance.RegisterMC([
   TmsClass.Specify('Interface').SetFillColor(TAlphaColorRec.Lightblue),
   TmsClass.Specify('MixIn').SetFillColor(TAlphaColorRec.Lightgreen),
 
