@@ -77,7 +77,7 @@ begin
 
   // special shapes
   TmsPointCircle.MC,
-  TmsSmallTriangle.TMC.SetFillColor(TAlphaColorRec.Aquamarine),
+  TmsSmallTriangle.TMC.SetFillColor(TAlphaColorRec.Aquamarine).SetInitialHeight(20),
 
   // utility shapes
   TmsMover.MC,
