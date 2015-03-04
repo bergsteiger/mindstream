@@ -66,7 +66,6 @@ end;
 procedure TmsTextShape.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rFillColor := TAlphaColorRec.Black;
 end;
 
 end.
