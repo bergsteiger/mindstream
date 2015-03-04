@@ -10,7 +10,7 @@ uses
 type
  TmsArrowHead = class(TmsPolylineShape)
  protected
-  class function InitialHeight: Single; virtual;
+  class function InitialHeight: Single; override;
   function GetPolygon: TPolygon; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public

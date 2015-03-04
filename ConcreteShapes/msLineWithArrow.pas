@@ -14,7 +14,8 @@ uses
 type
  TmsLineWithArrow = class(TmsLine)
  protected
-  function CreateArrowHeadShape(const aStartPoint: TPointF): ImsShape; virtual;
+  function CreateArrowHeadShape(const aStartPoint: TPointF): ImsShape;
+  function ArrowHeadShapeMC: ImsShapeClass; virtual;
   function GetFinishPointForDraw: TPointF; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetArrowAngleRotation : Single;
@@ -35,7 +36,12 @@ uses
 
 function TmsLineWithArrow.CreateArrowHeadShape(const aStartPoint: TPointF): ImsShape;
 begin
- Result := TmsSmallTriangle.Create(aStartPoint);
+ Result := ArrowHeadShapeMC.Creator.CreateShape(aStartPoint);
+end;
+
+function TmsLineWithArrow.ArrowHeadShapeMC: ImsShapeClass;
+begin
+ Result := TmsShape.NamedMC('TmsSmallTriangle');
 end;
 
 procedure TmsLineWithArrow.DoDrawTo(const aCtx: TmsDrawContext);
@@ -52,7 +58,7 @@ begin
  begin
   l_OriginalMatrix := aCtx.rCanvas.Matrix;
   try
-   l_LineFinishPoint := TPointF.Create(FinishPoint.X - TmsSmallTriangle.InitialHeight / 2,
+   l_LineFinishPoint := TPointF.Create(FinishPoint.X - ArrowHeadShapeMC.InitialHeight / 2,
                                        FinishPoint.Y);
    l_Proxy := CreateArrowHeadShape(l_LineFinishPoint);
    try
@@ -142,13 +148,13 @@ begin
  Result := inherited GetDrawBounds;
  if SameValue(Result.Left, Result.Right) then
  begin
-  Result.Right := Result.Left + TmsSmallTriangle.InitialHeight;
-  Result.Left := Result.Left - TmsSmallTriangle.InitialHeight;
+  Result.Right := Result.Left + ArrowHeadShapeMC.InitialHeight;
+  Result.Left := Result.Left - ArrowHeadShapeMC.InitialHeight;
  end;//SameValue(Result.Left, Result.Right)
  if SameValue(Result.Top, Result.Bottom) then
  begin
-  Result.Bottom := Result.Top + TmsSmallTriangle.InitialHeight;
-  Result.Top := Result.Top - TmsSmallTriangle.InitialHeight;
+  Result.Bottom := Result.Top + ArrowHeadShapeMC.InitialHeight;
+  Result.Top := Result.Top - ArrowHeadShapeMC.InitialHeight;
  end;//SameValue(Result.Top, Result.Bottom)
 end;
 
@@ -157,8 +163,8 @@ var
  l_Angle : Single;
 begin
  l_Angle := GetArrowAngleRotation;
- Result := TPointF.Create(FinishPoint.X - TmsSmallTriangle.InitialHeight * Cos(l_Angle),
-                          FinishPoint.Y - TmsSmallTriangle.InitialHeight * Sin(l_Angle));
+ Result := TPointF.Create(FinishPoint.X - ArrowHeadShapeMC.InitialHeight * Cos(l_Angle),
+                          FinishPoint.Y - ArrowHeadShapeMC.InitialHeight * Sin(l_Angle));
 end;
 
 end.

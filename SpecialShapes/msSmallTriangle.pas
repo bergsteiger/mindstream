@@ -15,7 +15,7 @@ uses
 
 type
  TmsSmallTriangle = class(TmsTriangleDirectionRight)
- public
+ protected
   class function InitialHeight: Single; override;
  end;//TmsSmallTriangle
 

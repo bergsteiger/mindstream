@@ -15,7 +15,7 @@ uses
 type
  TmsTriangle = class(TmsPolygonShape)
  protected
-  class function InitialHeight: Single; virtual;
+  class function InitialHeight: Single; override;
   function GetPolygon: TPolygon; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
@@ -28,14 +28,8 @@ uses
  System.Math;
 
 class function TmsTriangle.InitialHeight: Single;
-var
- l_V : TmsPixelRec;
 begin
- l_V := Self.MC.InitialHeight;
- if l_V.rIsSet then
-  Result := l_V.rValue
- else
-  Result := 100;
+ Result := 100;
 end;
 
 class function TmsTriangle.IsForToolbar: Boolean;

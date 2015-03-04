@@ -26,10 +26,6 @@ type
   procedure DrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsPaletteShape
 
-type
- TmsShapeFriend = class(TmsShape)
- end;//TmsShapeFriend
-
 implementation
 
 uses

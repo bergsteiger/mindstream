@@ -12,7 +12,7 @@ type
  TmsDependency = class(TmsConnector)
  protected
   function GetFinishPointForDraw: TPointF; override;
-  function CreateArrowHeadShape(const aStartPoint: TPointF): ImsShape; override;
+  function ArrowHeadShapeMC: ImsShapeClass; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
   procedure GetStereotypeRect(var aRect: TRectF); override;
  end;//TmsDependency
@@ -24,9 +24,9 @@ uses
  msArrowHead
  ;
 
-function TmsDependency.CreateArrowHeadShape(const aStartPoint: TPointF): ImsShape;
+function TmsDependency.ArrowHeadShapeMC: ImsShapeClass;
 begin
- Result := TmsArrowHead.Create(aStartPoint);
+ Result := TmsArrowHead.MC;
 end;
 
 function TmsDependency.GetFinishPointForDraw: TPointF;

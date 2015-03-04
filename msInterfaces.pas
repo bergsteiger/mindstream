@@ -15,6 +15,8 @@ uses
  ;
 
 type
+ Pixel = msLineF.Pixel;
+
  ImsShape = interface;
 
  ImsShapeByPt = interface
@@ -195,7 +197,7 @@ type
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function Stereotype: String;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-  function InitialHeight: TmsPixelRec;
+  function InitialHeight: Pixel;
  end;//ImsShapeClass
 
  ImsTunableShapeClass = interface(ImsShapeClass)

@@ -34,7 +34,7 @@ type
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
-  function InitialHeight: TmsPixelRec;
+  function InitialHeight: Pixel;
  public
   class function Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass; overload;
   class function Create(const aName : String; const aShapeClass: RmsShape): ImsTunableShapeClass; overload;
@@ -164,11 +164,15 @@ begin
  f_FillColor := aColor;
 end;
 
-function TmsProxyShapeClass.InitialHeight: TmsPixelRec;
+function TmsProxyShapeClass.InitialHeight: Pixel;
+var
+ l_V : TmsPixelRec;
 begin
  Assert(f_ShapeClass <> nil);
- Result := f_InitialHeight;
- if not Result.rIsSet then
+ l_V := f_InitialHeight;
+ if l_V.rIsSet then
+  Result := l_V.rValue
+ else
   Result := f_ShapeClass.InitialHeight;
 end;
 

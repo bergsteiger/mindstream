@@ -31,17 +31,17 @@ type
   class function Create(aShapeClass: RmsShape): ImsShapeCreator; overload;
  end;//TmsShapeCreator
 
- TmsShapeFriend = class(TmsShape)
- end;//TmsShapeFriend
-
- RmsShapeFriend = class of TmsShapeFriend;
-
-
 implementation
 
 uses
  msShapeClass
  ;
+
+type
+ TmsShapeFriend = class(TmsShape)
+ end;//TmsShapeFriend
+
+ RmsShapeFriend = class of TmsShapeFriend;
 
 // TmsShapeCreator
 
