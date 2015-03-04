@@ -33,6 +33,7 @@ type
   function Stereotype: String;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
+  function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
   function InitialHeight: Pixel;
  public
   class function Create(aShapeClass: RmsShape): ImsTunableShapeClass;
@@ -126,6 +127,12 @@ function TmsShapeClass.SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
 begin
  Result := Self;
  f_FillColor := aColor;
+end;
+
+function TmsShapeClass.SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
+begin
+ Result := Self;
+ f_InitialHeight := aValue;
 end;
 
 procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);

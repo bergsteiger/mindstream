@@ -203,6 +203,7 @@ type
  ImsTunableShapeClass = interface(ImsShapeClass)
  ['{C74A48CA-3D30-4778-936A-470EEAA1BA2F}']
   function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
+  function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
  end;//ImsTunableShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)
