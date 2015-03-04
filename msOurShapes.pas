@@ -75,7 +75,7 @@ begin
   TmsRectangle.Specify('GreenRectangle').SetFillColor(TAlphaColorRec.Green),
 
   // special shapes
-  TmsPointCircle.MC,
+  TmsPointCircle.TMC.SetFillColor(TAlphaColorRec.Null),
   TmsTriangleDirectionRight.Specify('SmallTriangle').SetFillColor(TAlphaColorRec.Aquamarine).SetInitialHeight(20),
 
   // utility shapes
@@ -91,8 +91,8 @@ begin
   TmsCircle.Specify('GreenCircle').SetFillColor(TAlphaColorRec.Green),
   TmsTriangle.Specify('BlackTriangle').SetFillColor(TAlphaColorRec.Black),
   TmsBlackRectangle.MC,
-  TmsRemoveIcon.MC,
-  TmsMoveIcon.MC,
+  TmsRemoveIcon.TMC.SetFillColor(TAlphaColorRec.Mediumvioletred),
+  TmsMoveIcon.TMC.SetFillColor(TAlphaColorRec.Black),
   TmsTextShape.MC,
   TmsScrollShapeUp.MC,
   TmsScrollShapeDown.MC,
