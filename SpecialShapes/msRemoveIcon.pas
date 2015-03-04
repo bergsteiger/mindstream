@@ -33,7 +33,6 @@ procedure TmsRemoveIcon.TransformDrawOptionsContext(
   var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rFillColor := TAlphaColorRec.Mediumvioletred;
 end;
 
 end.
