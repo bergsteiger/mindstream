@@ -60,9 +60,9 @@ begin
  TmsRegisteredShapes.Instance.RegisterMC([
   // concrete shapes
   TmsLine.MC,
-  TmsRectangle.MC,
-  TmsCircle.MC,
-  TmsRoundedRectangle.MC,
+  TmsRectangle.TMC.SetFillColor(TAlphaColorRec.White),
+  TmsCircle.TMC.SetFillColor(TAlphaColorRec.Red),
+  TmsRoundedRectangle.TMC.SetFillColor(TAlphaColorRec.Blue),
   TmsUseCaseLikeEllipse.TMC.SetFillColor(TAlphaColorRec.Yellow),
   TmsTriangle.TMC.SetFillColor(TAlphaColorRec.Green),
   TmsDashDotLine.MC,
