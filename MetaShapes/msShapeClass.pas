@@ -107,6 +107,7 @@ end;
 
 procedure TmsShapeClass.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
+ Assert(f_ShapeClass <> nil);
  if f_FillColor.rIsSet then
   theCtx.rFillColor := f_FillColor.rValue;
 end;
