@@ -6,11 +6,12 @@ uses
  System.UITypes,
  msInterfaces,
  msShape,
- msInterfacedRefcounted
+ msInterfacedRefcounted,
+ msShapeClassPrim
  ;
 
 type
- TmsProxyShapeClass = class(TmsInterfacedRefcounted, ImsShapeClass, ImsTunableShapeClass)
+ TmsProxyShapeClass = class(TmsShapeClassPrim, ImsShapeClass, ImsTunableShapeClass)
  private
   f_ShapeClass : MCmsShape;
   f_Name : String;

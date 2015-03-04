@@ -7,11 +7,12 @@ uses
 
  msInterfaces,
  msShape,
- msInterfacedRefcounted
+ msInterfacedRefcounted,
+ msShapeClassPrim
  ;
 
 type
- TmsShapeClass = class(TmsInterfacedRefcounted, ImsShapeClass, ImsTunableShapeClass)
+ TmsShapeClass = class(TmsShapeClassPrim, ImsShapeClass, ImsTunableShapeClass)
  private
   f_ShapeClass : RmsShape;
   f_FillColor : TmsColorRec;
