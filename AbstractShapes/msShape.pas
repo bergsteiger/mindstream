@@ -362,6 +362,8 @@ end;
 class function TmsShape.NamedMC(const aName: String): ImsShapeClass;
 begin
  Result := TmsRegisteredShapes.Instance.ByName(aName);
+ if (Result = nil) then
+  Result := TmsRegisteredShapes.Instance.ByName('Tms' + aName);
  Assert(Result <> nil);
 end;
 

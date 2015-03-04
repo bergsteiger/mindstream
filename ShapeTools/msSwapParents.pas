@@ -24,7 +24,6 @@ uses
  msRightArrow,
  msLineWithArrow,
  msShapesGroup,
- msSmallTriangle,
  msSwapParentsIcon
  ;
 

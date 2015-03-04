@@ -25,7 +25,6 @@ type
 implementation
 
 uses
- msSmallTriangle,
  SysUtils,
  System.Math,
  System.UITypes,
@@ -41,7 +40,7 @@ end;
 
 function TmsLineWithArrow.ArrowHeadShapeMC: ImsShapeClass;
 begin
- Result := TmsShape.NamedMC('TmsSmallTriangle');
+ Result := TmsShape.NamedMC('SmallTriangle');
 end;
 
 procedure TmsLineWithArrow.DoDrawTo(const aCtx: TmsDrawContext);

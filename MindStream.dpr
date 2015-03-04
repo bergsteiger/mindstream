@@ -22,7 +22,6 @@ uses
   msDashLine in 'ConcreteShapes\msDashLine.pas',
   msDotLine in 'ConcreteShapes\msDotLine.pas',
   msLineWithArrow in 'ConcreteShapes\msLineWithArrow.pas',
-  msSmallTriangle in 'SpecialShapes\msSmallTriangle.pas',
   msOurShapes in 'msOurShapes.pas',
   msTriangleDirectionRight in 'ConcreteShapes\msTriangleDirectionRight.pas',
   msMover in 'ShapeTools\msMover.pas',

@@ -21,7 +21,6 @@ uses
  msShapesGroup,
  msLeftArrow,
  msLineWithArrow,
- msSmallTriangle,
  msFolderIcon
  ;
 
