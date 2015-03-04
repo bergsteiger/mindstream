@@ -28,7 +28,6 @@ implementation
 procedure TmsTriangleDirectionRight.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rFillColor := TAlphaColorRec.Coral;
 end;
 
 function TmsTriangleDirectionRight.GetPolygon: TPolygon;
