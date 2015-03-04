@@ -108,6 +108,8 @@ end;
 procedure TmsShapeClass.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  Assert(f_ShapeClass <> nil);
+ if (f_ShapeClass.ClassParent.InheritsFrom(TmsShape)) then
+  RmsShape(f_ShapeClass.ClassParent).MC.TransformDrawOptionsContext(theCtx);
  if f_FillColor.rIsSet then
   theCtx.rFillColor := f_FillColor.rValue;
 end;
