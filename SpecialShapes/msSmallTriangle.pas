@@ -15,17 +15,10 @@ uses
 
 type
  TmsSmallTriangle = class(TmsTriangleDirectionRight)
- protected
-  class function InitialHeight: Single; override;
  end;//TmsSmallTriangle
 
 implementation
 
 // TmsSmallTriangle
-
-class function TmsSmallTriangle.InitialHeight: Single;
-begin
- Result := 20;
-end;
 
 end.
