@@ -52,7 +52,6 @@ end;
 procedure TmsTriangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rFillColor := TAlphaColorRec.Green;
 end;
 
 end.
