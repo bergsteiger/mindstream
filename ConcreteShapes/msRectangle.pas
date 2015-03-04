@@ -64,7 +64,6 @@ end;
 procedure TmsRectangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rFillColor := TAlphaColorRec.White;
 end;
 
 end.

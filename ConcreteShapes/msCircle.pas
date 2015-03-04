@@ -80,7 +80,6 @@ end;
 procedure TmsCircle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rFillColor := TAlphaColorRec.Red;
 end;
 
 end.
