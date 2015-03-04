@@ -26,6 +26,7 @@ type
   function Name: String;
   function Stereotype: String;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+  function ParentMC: ImsShapeClass; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
@@ -121,6 +122,11 @@ begin
   theCtx.rFillColor := f_FillColor.rValue;
  if f_StrokeThickness.rIsSet then
   theCtx.rStrokeThickness := f_StrokeThickness.rValue;
+end;
+
+function TmsProxyShapeClass.ParentMC: ImsShapeClass;
+begin
+ Result := f_ShapeClass;
 end;
 
 procedure TmsProxyShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);

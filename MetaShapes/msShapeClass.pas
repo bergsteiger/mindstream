@@ -31,6 +31,7 @@ type
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function Stereotype: String;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+  function ParentMC: ImsShapeClass; override;
   function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
   function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
   function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
@@ -108,12 +109,21 @@ end;
 procedure TmsShapeClass.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  Assert(f_ShapeClass <> nil);
- if (f_ShapeClass.ClassParent.InheritsFrom(TmsShape)) then
-  RmsShape(f_ShapeClass.ClassParent).MC.TransformDrawOptionsContext(theCtx);
+ if (ParentMC <> nil) then
+  ParentMC.TransformDrawOptionsContext(theCtx);
  if f_FillColor.rIsSet then
   theCtx.rFillColor := f_FillColor.rValue;
  if f_StrokeThickness.rIsSet then
   theCtx.rStrokeThickness := f_StrokeThickness.rValue;
+end;
+
+function TmsShapeClass.ParentMC: ImsShapeClass;
+begin
+ Assert(f_ShapeClass <> nil);
+ if (f_ShapeClass.ClassParent.InheritsFrom(TmsShape)) then
+  Result := RmsShape(f_ShapeClass.ClassParent).MC
+ else
+  Result := nil;
 end;
 
 function TmsShapeClass.InitialHeight: Pixel;

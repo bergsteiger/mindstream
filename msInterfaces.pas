@@ -198,6 +198,7 @@ type
   function Stereotype: String;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function InitialHeight: Pixel;
+  function ParentMC: ImsShapeClass;
  end;//ImsShapeClass
 
  ImsTunableShapeClass = interface(ImsShapeClass)
