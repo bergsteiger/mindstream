@@ -17,6 +17,7 @@ type
   f_Stereotype : String;
   f_FillColor : TmsColorRec;
   f_InitialHeight : TmsPixelRec;
+  f_StrokeThickness : TmsPixelRec;
  private
   constructor CreateInner(const aName : String; const aShapeClass: MCmsShape);
  protected
@@ -35,6 +36,7 @@ type
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
   function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
+  function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
   function InitialHeight: Pixel;
  public
   class function Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass; overload;
@@ -119,6 +121,8 @@ begin
  f_ShapeClass.TransformDrawOptionsContext(theCtx);
  if f_FillColor.rIsSet then
   theCtx.rFillColor := f_FillColor.rValue;
+ if f_StrokeThickness.rIsSet then
+  theCtx.rStrokeThickness := f_StrokeThickness.rValue;
 end;
 
 procedure TmsProxyShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
@@ -169,6 +173,12 @@ function TmsProxyShapeClass.SetInitialHeight(aValue: Pixel): ImsTunableShapeClas
 begin
  Result := Self;
  f_InitialHeight := aValue;
+end;
+
+function TmsProxyShapeClass.SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
+begin
+ Result := Self;
+ f_StrokeThickness := aValue;
 end;
 
 function TmsProxyShapeClass.InitialHeight: Pixel;
