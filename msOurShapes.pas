@@ -90,7 +90,7 @@ begin
 
   TmsCircle.Specify('GreenCircle').SetFillColor(TAlphaColorRec.Green),
   TmsTriangle.Specify('BlackTriangle').SetFillColor(TAlphaColorRec.Black),
-  TmsBlackRectangle.MC,
+  TmsBlackRectangle.TMC.SetFillColor(TAlphaColorRec.Black),
   TmsRemoveIcon.TMC.SetFillColor(TAlphaColorRec.Mediumvioletred),
   TmsMoveIcon.TMC.SetFillColor(TAlphaColorRec.Black),
   TmsTextShape.TMC.SetFillColor(TAlphaColorRec.Black),
