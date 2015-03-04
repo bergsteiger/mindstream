@@ -50,7 +50,8 @@ uses
   msClass,
   msLibrary,
   msUsecase,
-  msTrivial
+  msTrivial,
+  msArrowHead
   ;
 
 // Важно !!!
@@ -138,7 +139,9 @@ begin
   TmsDependency.Specify('injects'),
   TmsAssociation.Specify('property'),
   TmsAssociation.Specify('readonly'),
-  TmsAssociation.Specify('writeonly')
+  TmsAssociation.Specify('writeonly'),
+
+  TmsArrowHead.MC
  ]);
 end;
 
