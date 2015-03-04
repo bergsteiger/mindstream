@@ -122,7 +122,7 @@ begin
   TmsLibrary.Specify('Project').SetFillColor(TAlphaColorRec.Lightgreen),
   TmsLibrary.Specify('Subsystem').SetFillColor(TAlphaColorRec.Lightblue),
 
-  TmsUsecase.MC,
+  TmsUsecase.TMC.SetFillColor(TAlphaColorRec.Lightyellow),
 
   TmsUsecase.Specify('UsecaseRealization').SetFillColor(TAlphaColorRec.Lightgreen),
 

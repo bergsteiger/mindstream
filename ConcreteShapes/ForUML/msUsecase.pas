@@ -28,7 +28,6 @@ uses
 procedure TmsUsecase.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rFillColor := TAlphaColorRec.Lightyellow;
 end;
 
 procedure TmsUsecase.GetStereotypeRect(var aRect: TRectF);
