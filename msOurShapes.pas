@@ -21,7 +21,6 @@ uses
   msPolygonShape,
   msBlackRectangle,
   msPointCircle,
-  msSmallTriangle,
   msFolder,
   msMover,
   msPicker,
@@ -77,7 +76,7 @@ begin
 
   // special shapes
   TmsPointCircle.MC,
-  TmsSmallTriangle.TMC.SetFillColor(TAlphaColorRec.Aquamarine).SetInitialHeight(20),
+  TmsTriangleDirectionRight.Specify('SmallTriangle').SetFillColor(TAlphaColorRec.Aquamarine).SetInitialHeight(20),
 
   // utility shapes
   TmsMover.MC,
