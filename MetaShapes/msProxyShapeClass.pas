@@ -16,9 +16,6 @@ type
   f_ShapeClass : MCmsShape;
   f_Name : String;
   f_Stereotype : String;
-  f_FillColor : TmsColorRec;
-  f_InitialHeight : TmsPixelRec;
-  f_StrokeThickness : TmsPixelRec;
  private
   constructor CreateInner(const aName : String; const aShapeClass: MCmsShape);
  protected

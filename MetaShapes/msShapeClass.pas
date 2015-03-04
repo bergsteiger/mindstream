@@ -15,9 +15,6 @@ type
  TmsShapeClass = class(TmsShapeClassPrim, ImsShapeClass, ImsTunableShapeClass)
  private
   f_ShapeClass : RmsShape;
-  f_FillColor : TmsColorRec;
-  f_InitialHeight : TmsPixelRec;
-  f_StrokeThickness : TmsPixelRec;
  private
   constructor CreateInner(aShapeClass: RmsShape);
  protected
