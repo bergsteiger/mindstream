@@ -15,6 +15,7 @@ type
  TmsShapeClass = class(TmsShapeClassPrim, ImsShapeClass, ImsTunableShapeClass)
  private
   f_ShapeClass : RmsShape;
+  f_ParentMC : ImsShapeClass;
  private
   constructor CreateInner(aShapeClass: RmsShape);
  protected
@@ -107,11 +108,15 @@ end;
 
 function TmsShapeClass.ParentMC: ImsShapeClass;
 begin
- Assert(f_ShapeClass <> nil);
- if (f_ShapeClass.ClassParent.InheritsFrom(TmsShape)) then
-  Result := RmsShape(f_ShapeClass.ClassParent).MC
- else
-  Result := nil;
+ if (f_ParentMC = nil) then
+ begin
+  Assert(f_ShapeClass <> nil);
+  if (f_ShapeClass.ClassParent.InheritsFrom(TmsShape)) then
+   f_ParentMC := RmsShape(f_ShapeClass.ClassParent).MC
+  else
+   f_ParentMC := nil;
+ end;//f_ParentMC = nil
+ Result := f_ParentMC;
 end;
 
 function TmsShapeClass.InitialHeight: Pixel;
