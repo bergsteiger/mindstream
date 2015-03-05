@@ -106,6 +106,7 @@ uses
  msShapeMarshal,
  System.Math.Vectors,
  msRegisteredShapes,
+ msNotRegisteredShapes,
  FMX.DUnit.msAppLog,
 
  msShapeClass,

@@ -35,8 +35,7 @@ type
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function InitialHeight: Pixel;
  public
-  class function Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass; overload;
-  class function Create(const aName : String; const aShapeClass: RmsShape): ImsTunableShapeClass; overload;
+  class function Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass;
  end;//TmsProxyShapeClass
 
 implementation
@@ -59,11 +58,6 @@ end;
 class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass;
 begin
  Result := CreateInner(aName, aShapeClass);
-end;
-
-class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: RmsShape): ImsTunableShapeClass;
-begin
- Result := Create(aName, aShapeClass.MC);
 end;
 
 function TmsProxyShapeClass.IsForToolbar: Boolean;
