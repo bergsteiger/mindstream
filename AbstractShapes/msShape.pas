@@ -116,7 +116,7 @@ uses
 class function TmsShape.Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape;
 begin
  Result := CreateInner(aShapeClass, aCtx);
- TmsAppLog.Instance.ToLog('Create object ' + self.ClassName);
+ //TmsAppLog.Instance.ToLog('Create object ' + self.ClassName);
 end;
 
 class function TmsShape.Create(const aShapeClass : ImsShapeClass; const aStartPoint: TPointF): ImsShape;
