@@ -356,7 +356,12 @@ end;
 
 class function TmsShape.TMC: ImsTunableShapeClass;
 begin
- Result := TmsShapeClass.Create(Self);
+ Result := TmsRegisteredShapes.Instance.ByName(Self.ClassName) As ImsTunableShapeClass;
+ if (Result = nil) then
+ begin
+  Result := TmsShapeClass.Create(Self);
+  TmsRegisteredShapes.Instance.RegisterMC(Result);
+ end;//Result = nil
 end;
 
 class function TmsShape.NamedMC(const aName: String): ImsShapeClass;

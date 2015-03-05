@@ -53,7 +53,7 @@ end;
 
 procedure TmsShapeClassList.RegisterMC(const aValue: MCmsShape);
 begin
- Assert(IndexOf(aValue.Name) < 0);
+ Assert(IndexOf(aValue.Name) < 0, 'Стереотип ' + aValue.Stereotype + ' уже зарегистрирован');
  f_Registered.Add(aValue);
 end;
 
