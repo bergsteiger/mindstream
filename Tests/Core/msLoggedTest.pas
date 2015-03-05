@@ -163,7 +163,7 @@ var
  l_ExecInfo: TShellExecuteInfo;
  l_Param : String;
 begin
- if not IsUseDiffer then Exit;
+ //if not IsUseDiffer then Exit;
 
 { TODO 1 -oIngword -cProposal : Добавить вывод ошибок в лог }
  l_cmdFileName := ExtractFilePath(ParamStr(0)) +
