@@ -33,9 +33,6 @@ type
   function Stereotype: String;
   function ParentMC: ImsShapeClass; override;
   function AsTMC: ImsTunableShapeClass; override;
-  function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
-  function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
-  function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
   function InitialHeight: Pixel;
  public
   class function Create(aShapeClass: RmsShape): ImsTunableShapeClass;
@@ -135,24 +132,6 @@ begin
   Result := l_V.rValue
  else
   Result := RmsShapeFriend(f_ShapeClass).InitialHeight;
-end;
-
-function TmsShapeClass.SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
-begin
- Result := Self.AsTMC;
- f_FillColor := aColor;
-end;
-
-function TmsShapeClass.SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
-begin
- Result := Self.AsTMC;
- f_StrokeThickness := aValue;
-end;
-
-function TmsShapeClass.SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
-begin
- Result := Self.AsTMC;
- f_InitialHeight := aValue;
 end;
 
 procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);

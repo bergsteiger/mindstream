@@ -47,6 +47,8 @@ type
    constructor Create(const aCanvas : TCanvas);
  end;//TmsDrawContext
 
+ TAlphaColor = System.UITypes.TAlphaColor;
+
  TmsColorRec = record
   rIsSet : Boolean;
   rValue : TAlphaColor;
