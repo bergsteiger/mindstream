@@ -45,21 +45,25 @@ type
  private
   function CurrentAddedShape: ImsShape;
   procedure BeginShape(const aClickContext: TmsClickContext);
-  procedure EndShape(const aFinish: TPointF; aDiagrammsHolder: ImsDiagrammsHolder);
+  procedure EndShape(const aClickContext: TmsClickContext);
   function ShapeIsEnded: Boolean;
   function ShapeByPt(const aPoint: TPointF): ImsShape;
   procedure RemoveShape(const aShape: ImsShape);
   function Get_Name: String;
   constructor CreatePrim(const aName: String);
   function AddShape(const aShape: ImsShape): ImsShape;
-  function GetMax: TPointF;
+  function FirstShape: ImsShape;
+  function ShapesController: ImsShapesController;
+  function GetDrawBounds: TRectF;
  protected
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
  public
   class function Create(const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
-  procedure ProcessClick(const aClickContext: TmsClickContext);
+  procedure MouseDown(const aClickContext: TmsClickContext);
+  procedure MouseUp(const aClickContext: TmsClickContext);
+  procedure MouseMove(const aClickContext: TmsClickContext);
   procedure Clear;
   procedure Invalidate;
   property Name: String read fName write fName;
@@ -83,7 +87,8 @@ uses
  msShapesForToolbar,
  msDiagrammsController,
  System.Math.Vectors,
- msTestConstants
+ System.Math,
+ FMX.Types
  ;
 
 {$Include msItemsHolder.mixin.pas}
@@ -98,13 +103,13 @@ begin
  TmsDiagrammMarshal.Serialize(Self.Name + c_FileName, Self);
 end;
 
-procedure TmsDiagramm.ProcessClick(const aClickContext: TmsClickContext);
+procedure TmsDiagramm.MouseDown(const aClickContext: TmsClickContext);
 begin
  if ShapeIsEnded then
  // - РјС‹ РќР• Р”РћР‘РђР’Р›РЇР›Р РїСЂРёРјРёС‚РёРІР° - РЅР°РґРѕ РµРіРѕ Р”РћР‘РђР’РРўР¬
   BeginShape(aClickContext)
  else
-  EndShape(aClickContext.rClickPoint, aClickContext.rDiagrammsHolder);
+  EndShape(aClickContext);
 end;
 
 procedure TmsDiagramm.BeginShape(const aClickContext: TmsClickContext);
@@ -113,8 +118,8 @@ begin
  if (FCurrentAddedShape <> nil) then
  begin
   Items.Add(FCurrentAddedShape);
-  if not FCurrentAddedShape.IsNeedsSecondClick then
-  // - РµСЃР»Рё РЅРµ РЅР°РґРѕ SecondClick, С‚Рѕ РЅР°С€ РїСЂРёРјРёС‚РёРІ - Р·Р°РІРµСЂС€С‘РЅ
+  if (not FCurrentAddedShape.IsNeedsSecondClick) then
+    // - РµСЃР»Рё РЅРµ РЅР°РґРѕ SecondClick РёР»Рё MouseUp, С‚Рѕ РЅР°С€ РїСЂРёРјРёС‚РёРІ - Р·Р°РІРµСЂС€С‘РЅ
    FCurrentAddedShape := nil;
   Invalidate;
  end; // FCurrentAddedShape <> nil
@@ -145,33 +150,68 @@ begin
 end;
 
 procedure TmsDiagramm.SaveToPng(const aFileName: string);
+const
+ cDelta = 10;
 var
- l_BitmapBuffer: TBitmap;
+ l_Bitmap: TBitmap;
  l_SourceRect: TRectF;
  l_OriginalMatrix: TMatrix;
- l_Max : TPointF;
+ l_Canvas: TCanvas;
+ l_Matrix: TMatrix;
 begin
  // Р¤РёРєСЃРёСЂСѓРµРј СЂР°Р·РјРµСЂ СЃРЅРёРјР°РµРјРѕР№ РѕР±Р»Р°СЃС‚Рё
- l_Max := GetMax;
- Assert(l_Max.X > 0);
- Assert(l_Max.Y > 0);
- l_SourceRect := TRectF.Create(0, 0, l_Max.X, l_Max.Y);
+ l_SourceRect := GetDrawBounds;
+ Assert(l_SourceRect.Width > 0);
+ Assert(l_SourceRect.Height > 0);
+ l_SourceRect.Inflate(cDelta, cDelta);
  // РЎРѕР·РґР°РµРј РІСЂРµРјРµРЅРЅС‹Р№ Р±СѓС„РµСЂ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ СЃРєСЂРёРЅС€РѕС‚Р°
- l_BitmapBuffer := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
+ l_Bitmap := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
  try
-  l_OriginalMatrix := TMatrix.Identity;
-  l_OriginalMatrix := l_OriginalMatrix * l_BitmapBuffer.Canvas.Matrix;
-  l_BitmapBuffer.Canvas.SetMatrix(l_OriginalMatrix);
-  Self.DrawTo(l_BitmapBuffer.Canvas);
-  l_BitmapBuffer.SaveToFile(aFileName);
+  l_Canvas := l_Bitmap.Canvas;
+  l_Canvas.BeginScene;
+  try
+   l_OriginalMatrix := l_Canvas.Matrix;
+   try
+    l_Matrix := TMatrix.Identity;
+    l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_SourceRect.Left{ - cDelta}, -l_SourceRect.Top{ - cDelta});
+    l_Matrix := l_Matrix * l_OriginalMatrix;
+    l_Canvas.SetMatrix(l_Matrix);
+    l_Canvas.Fill.Color := TAlphaColorRec.White;
+    l_Canvas.FillRect(l_SourceRect,
+                     0,
+                     0,
+                     AllCorners,
+                     1.0,
+                     TCornerType.Round);
+    Self.DrawTo(l_Canvas);
+   finally
+    l_Canvas.SetMatrix(l_OriginalMatrix);
+   end;//try..finally
+  finally
+   l_Canvas.EndScene;
+  end;//try..finally
+  l_Bitmap.SaveToFile(aFileName);
  finally
-  FreeAndNil(l_BitmapBuffer);
- end;
+  FreeAndNil(l_Bitmap);
+ end;//try..finally
 end;
 
 procedure TmsDiagramm.LoadFrom(const aFileName: String);
 begin
  TmsDiagrammMarshal.DeSerialize(aFileName, Self);
+end;
+
+procedure TmsDiagramm.MouseMove(const aClickContext: TmsClickContext);
+begin
+ if (FCurrentAddedShape <> nil) then
+  FCurrentAddedShape.MouseMove(TmsEndShapeContext.Create(aClickContext.rClickPoint, Self, aClickContext.rDiagrammsHolder));
+end;
+
+procedure TmsDiagramm.MouseUp(const aClickContext: TmsClickContext);
+begin
+ if Assigned(FCurrentAddedShape) then
+  if FCurrentAddedShape.MouseUp(TmsEndShapeContext.Create(aClickContext.rClickPoint, Self, aClickContext.rDiagrammsHolder)) then
+   FCurrentAddedShape := nil;
 end;
 
 function TmsDiagramm.AddShape(const aShape: ImsShape): ImsShape;
@@ -180,21 +220,34 @@ begin
  Result := aShape;
 end;
 
-function TmsDiagramm.GetMax: TPointF;
+function TmsDiagramm.FirstShape: ImsShape;
+begin
+ Result := Items.First;
+end;
+
+function TmsDiagramm.ShapesController: ImsShapesController;
+begin
+ Result := Self;
+end;
+
+function TmsDiagramm.GetDrawBounds: TRectF;
 var
  l_Shape : ImsShape;
- l_BR : TPointF;
+ l_R : TRectF;
 begin
- Result.X := 0;
- Result.Y := 0;
+ Result.Left := High(Integer);
+ Result.Top := High(Integer);
+ Result.Right := Low(Integer);
+ Result.Bottom := Low(Integer);
+ Assert(f_Items <> nil);
  for l_Shape in f_Items do
  begin
-  l_BR := l_Shape.DrawBounds.BottomRight;
-  if (l_BR.X > Result.X) then
-   Result.X := l_BR.X;
-  if (l_BR.Y > Result.Y) then
-   Result.Y := l_BR.Y;
- end;//for l_Shape in f_Items
+  l_R := l_Shape.DrawBounds;
+  Result.Left := Min(Result.Left, l_R.Left);
+  Result.Top := Min(Result.Top, l_R.Top);
+  Result.Right := Max(Result.Right, l_R.Right);
+  Result.Bottom := Max(Result.Bottom, l_R.Bottom);
+ end;//for l_Shape
 end;
 
 function TmsDiagramm.Get_Name: String;
@@ -232,8 +285,8 @@ begin
  aCanvas.BeginScene;
  try
   if (f_Items = nil) then
-  // - если заггрузить диаграммы, а потом провалиться на N+1 уровней -
-  //   мы как раз сюда попадём
+  // - пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ N+1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ -
+  //   пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
    Exit;
   Assert(f_Items <> nil);
   for l_Shape in f_Items do
@@ -243,10 +296,10 @@ begin
  end; // try..finally
 end;
 
-procedure TmsDiagramm.EndShape(const aFinish: TPointF; aDiagrammsHolder: ImsDiagrammsHolder);
+procedure TmsDiagramm.EndShape(const aClickContext: TmsClickContext);
 begin
  Assert(CurrentAddedShape <> nil);
- if CurrentAddedShape.EndTo(TmsEndShapeContext.Create(aFinish, Self, aDiagrammsHolder)) then
+ if CurrentAddedShape.EndTo(TmsEndShapeContext.Create(aClickContext.rClickPoint, Self, aClickContext.rDiagrammsHolder)) then
   FCurrentAddedShape := nil;
  Invalidate;
 end;
@@ -264,21 +317,22 @@ end;
 function TmsDiagramm.ShapeByPt(const aPoint: TPointF): ImsShape;
 var
  l_Shape: ImsShape;
+ l_HitShape: ImsShape;
  l_Index: Integer;
 begin
  Result := nil;
   if (f_Items = nil) then
-  // - если заггрузить диаграммы, а потом провалиться на N+1 уровней -
-  //   мы как раз сюда попадём
+  // - пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ N+1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ -
+  //   пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
    Exit;
  for l_Index := f_Items.Count - 1 downto 0 do
  begin
   l_Shape := f_Items.Items[l_Index];
-  if l_Shape.ContainsPt(aPoint) then
+  if l_Shape.HitTest(aPoint, l_HitShape) then
   begin
-   Result := l_Shape;
+   Result := l_HitShape;
    Exit;
-  end; // l_Shape.ContainsPt(aPoint)
+  end; // l_Shape.HitTest(aPoint, l_HitShape)
  end; // for l_Index
 end;
 

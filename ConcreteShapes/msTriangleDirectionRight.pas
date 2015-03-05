@@ -28,17 +28,16 @@ implementation
 procedure TmsTriangleDirectionRight.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rFillColor := TAlphaColorRec.Coral;
 end;
 
 function TmsTriangleDirectionRight.GetPolygon: TPolygon;
 begin
  SetLength(Result, 4);
- Result[0] := TPointF.Create(StartPoint.X - InitialHeight / 2,
-                        StartPoint.Y - InitialHeight / 2);
- Result[1] := TPointF.Create(StartPoint.X - InitialHeight / 2,
-                        StartPoint.Y + InitialHeight / 2);
- Result[2] := TPointF.Create(StartPoint.X + InitialHeight / 2,
+ Result[0] := TPointF.Create(StartPoint.X - ShapeClass.InitialHeight / 2,
+                        StartPoint.Y - ShapeClass.InitialHeight / 2);
+ Result[1] := TPointF.Create(StartPoint.X - ShapeClass.InitialHeight / 2,
+                        StartPoint.Y + ShapeClass.InitialHeight / 2);
+ Result[2] := TPointF.Create(StartPoint.X + ShapeClass.InitialHeight / 2,
                         StartPoint.Y);
  Result[3] := Result[0];
 end;

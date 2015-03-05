@@ -16,7 +16,7 @@ type
     procedure CheckShapeClass(const aShapeClass: MCmsShape); virtual;
    published
     procedure ShapesRegistredCount;
-    procedure TestFirstShape;
+    procedure TestShapes;
     procedure TestIndexOfTmsLine;
   end;//TmsRegisteredShapesTestPrim
 
@@ -24,7 +24,7 @@ implementation
 
 uses
  SysUtils,
- msCoreObjects,
+ FMX.DUnit.msLog,
  msLine
  ;
 
@@ -41,7 +41,8 @@ end;
 
 procedure TmsRegisteredShapesTestPrim.ShapesRegistredCount;
 begin
- OutToFileAndCheck(procedure (aLog: TmsLog)
+ OutToFileAndCheck(
+  procedure (aLog: TmsLog)
   var
    l_Result : integer;
   begin
@@ -58,11 +59,17 @@ begin
  );
 end;
 
-procedure TmsRegisteredShapesTestPrim.TestFirstShape;
+procedure TmsRegisteredShapesTestPrim.TestShapes;
 begin
  OutToFileAndCheck(procedure (aLog: TmsLog)
   begin
-   aLog.ToLog(ShapeClassList.First.Name);
+   ShapeClassList.IterateShapes(
+    procedure (const aShapeClass: MCmsShape)
+    begin
+     CheckShapeClass(aShapeClass);
+     aLog.ToLog(aShapeClass.Name);
+    end
+   );
   end
  );
 end;
@@ -71,7 +78,7 @@ procedure TmsRegisteredShapesTestPrim.TestIndexOfTmsLine;
 begin
  OutToFileAndCheck(procedure (aLog: TmsLog)
   begin
-   aLog.ToLog(IntToStr(ShapeClassList.IndexOf(TmsLine)));
+   aLog.ToLog(BoolToStr(ShapeClassList.ByName(TmsLine.ClassName) <> nil));
   end
  );
 end;

@@ -16,8 +16,6 @@ type
  protected
   function InitialRadiusX: Integer; override;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
- public
-  class function IsForToolbar: Boolean; override;
  end;//TmsPointCircle
 
 implementation
@@ -32,12 +30,6 @@ end;
 procedure TmsPointCircle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rFillColor := TAlphaColorRec.Null;
-end;
-
-class function TmsPointCircle.IsForToolbar: Boolean;
-begin
- Result := false;
 end;
 
 end.

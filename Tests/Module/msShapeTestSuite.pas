@@ -11,29 +11,11 @@ uses
 type
   TmsParametrizedShapeTestSuite = class(TTestSuite)
   private
-   constructor CreatePrim;
-  protected
-   class function TestClass: RmsShapeTest; virtual; abstract;
+   constructor CreatePrim(aTestClass : RmsShapeTest);
   public
    procedure AddTests(testClass: TTestCaseClass); override;
-   class function Create: ITest;
+   class function Create(aTestClass : RmsShapeTest): ITest;
   end;//TmsParametrizedShapeTestSuite
-
-  TmsShapesTest = class(TmsParametrizedShapeTestSuite)
-  protected
-   class function TestClass: RmsShapeTest; override;
-  end;//TmsShapesTest
-
-  TmsDiagrammsTest = class(TmsParametrizedShapeTestSuite)
-  protected
-   class function TestClass: RmsShapeTest; override;
-  end;//TmsDiagrammsTest
-
-  TmsDiagrammsToPNGTest = class(TmsParametrizedShapeTestSuite)
-  protected
-   class function TestClass: RmsShapeTest; override;
-  end;//TmsDiagrammsTest
-
 
 implementation
 
@@ -42,33 +24,20 @@ uses
  System.Rtti,
  SysUtils,
  TestSaveToPNG,
- msShapeClassList
+ msShapeClassList,
+ TestSaveMoverToPNG
  ;
-
-// TmsShapesTest
-
-class function TmsShapesTest.TestClass: RmsShapeTest;
-begin
- Result := TmsShapeTest;
-end;
-
-// TmsDiagrammsTest
-
-class function TmsDiagrammsTest.TestClass: RmsShapeTest;
-begin
- Result := TmsDiagrammTest;
-end;
 
 // TmsParametrizedShapeTestSuite
 
-constructor TmsParametrizedShapeTestSuite.CreatePrim;
+constructor TmsParametrizedShapeTestSuite.CreatePrim(aTestClass : RmsShapeTest);
 begin
- inherited Create(TestClass);
+ inherited Create(aTestClass);
 end;
 
-class function TmsParametrizedShapeTestSuite.Create: ITest;
+class function TmsParametrizedShapeTestSuite.Create(aTestClass : RmsShapeTest): ITest;
 begin
- Result := CreatePrim;
+ Result := CreatePrim(aTestClass);
 end;
 
 procedure TmsParametrizedShapeTestSuite.AddTests(testClass: TTestCaseClass);
@@ -89,20 +58,23 @@ begin
    l_ShapesCount := Random(1000) + 1;
    for l_Method in TRttiContext.Create.GetType(testClass).GetMethods do
     if (l_Method.Visibility = mvPublished) then
-     AddTest(RmsShapeTest(testClass).Create(TmsShapeTestContext.Create(l_Method.Name, l_Seed, l_DiagrammName, l_ShapesCount, aShapeClass)));
+    begin
+     RmsShapeTest(testClass).AddTest(TmsShapeTestContext.Create(l_Method.Name, l_Seed, l_DiagrammName, l_ShapesCount, aShapeClass),
+      procedure (ATest: ITest)
+      begin
+       AddTest(aTest);
+      end
+     );
+    end;//l_Method.Visibility = mvPublished
   end
  );
 end;
 
-{ TmsDiagrammsToPNGTest }
-
-class function TmsDiagrammsToPNGTest.TestClass: RmsShapeTest;
-begin
- Result := TTestSaveToPNG;
-end;
-
 initialization
- RegisterTest(TmsShapesTest.Create);
- RegisterTest(TmsDiagrammsTest.Create);
- RegisterTest(TmsDiagrammsToPNGTest.Create);
+ RegisterTest(TmsParametrizedShapeTestSuite.Create(TmsShapeTest));
+ RegisterTest(TmsParametrizedShapeTestSuite.Create(TmsDiagrammTest));
+ RegisterTest(TmsParametrizedShapeTestSuite.Create(TTestSaveToPNG));
+ RegisterTest(TmsParametrizedShapeTestSuite.Create(TTestSaveMoverToPNG));
+ RegisterTest(TmsParametrizedShapeTestSuite.Create(TmsMoverFloatingButtonsTest));
+ RegisterTest(TmsParametrizedShapeTestSuite.Create(TmsConnectorDrawTest));
 end.

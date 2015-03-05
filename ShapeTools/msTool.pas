@@ -18,15 +18,11 @@ type
 
 implementation
 
-uses
- msGreenCircle
- ;
-
 // TmsTool
 
 class function TmsTool.ButtonShape: ImsShape;
 begin
- Result := TmsGreenCircle.Create(TPointF.Create(0, 0));
+ Result := TmsShape.NamedMC('GreenCircle').Creator.CreateShape(TPointF.Create(0, 0));
 end;
 
 class function TmsTool.IsTool: Boolean;
