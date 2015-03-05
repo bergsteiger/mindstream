@@ -8,7 +8,7 @@ uses
  ;
 
 type
- TmsShapeClassPrim = class abstract(TmsInterfacedRefcounted)
+ TmsShapeClassPrim = class abstract(TmsInterfacedRefcounted, ImsShapeClassTuner)
  protected
   f_FillColor : TmsColorRec;
   f_InitialHeight : TmsPixelRec;

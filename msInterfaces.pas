@@ -185,6 +185,12 @@ type
 
  ImsTunableShapeClass = interface;
 
+ ImsShapeClassTuner = interface
+  function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
+  function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
+  function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
+ end;//ImsShapeClassTuner
+
  ImsShapeClass = interface
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
