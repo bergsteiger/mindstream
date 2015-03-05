@@ -139,19 +139,19 @@ end;
 
 function TmsShapeClass.SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
 begin
- Result := Self;
+ Result := Self.AsTMC;
  f_FillColor := aColor;
 end;
 
 function TmsShapeClass.SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
 begin
- Result := Self;
+ Result := Self.AsTMC;
  f_StrokeThickness := aValue;
 end;
 
 function TmsShapeClass.SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
 begin
- Result := Self;
+ Result := Self.AsTMC;
  f_InitialHeight := aValue;
 end;
 
