@@ -109,7 +109,7 @@ begin
 
   TmsConnector.MC,
   TmsGeneralization.MC,
-  TmsRealization.MC,
+  TmsRealization.TMC.SetStrokeThickness(2),
   TmsAssociation.MC,
   TmsDependency.MC,
 
