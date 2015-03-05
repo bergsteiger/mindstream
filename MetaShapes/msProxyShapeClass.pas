@@ -25,7 +25,6 @@ type
   function Creator: ImsShapeCreator;
   function Name: String;
   function Stereotype: String;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function ParentMC: ImsShapeClass; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
@@ -112,16 +111,6 @@ begin
  Result := f_Stereotype;
 (* Assert(false, 'Не реализовано');
  Result := f_ShapeClass.Stereotype;*)
-end;
-
-procedure TmsProxyShapeClass.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- Assert(f_ShapeClass <> nil);
- f_ShapeClass.TransformDrawOptionsContext(theCtx);
- if f_FillColor.rIsSet then
-  theCtx.rFillColor := f_FillColor.rValue;
- if f_StrokeThickness.rIsSet then
-  theCtx.rStrokeThickness := f_StrokeThickness.rValue;
 end;
 
 function TmsProxyShapeClass.ParentMC: ImsShapeClass;
