@@ -222,15 +222,7 @@ function TmsShape.DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptions
 begin
  Result := TmsDrawOptionsContext.Create(aCtx);
  TransformDrawOptionsContext(Result);
- if Self.Stereotype = '<< uses >>' then
- begin
-  Result.rStrokeThickness := Result.rStrokeThickness;
- end;
  Self.ShapeClass.TransformDrawOptionsContext(Result);
- if Self.Stereotype = '<< uses >>' then
- begin
-  Result.rStrokeThickness := Result.rStrokeThickness;
- end;
 end;
 
 class function TmsShape.IsTool: Boolean;
