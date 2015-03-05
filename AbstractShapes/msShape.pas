@@ -351,7 +351,7 @@ end;
 
 class function TmsShape.MC: ImsShapeClass;
 begin
- Result := TMC;
+ Result := TmsShapeClass.Create(Self);
 end;
 
 class function TmsShape.TMC: ImsTunableShapeClass;
