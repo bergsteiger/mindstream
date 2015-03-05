@@ -141,7 +141,7 @@ begin
   TmsAssociation.Specify('readonly'),
   TmsAssociation.Specify('writeonly'),
 
-  TmsArrowHead.MC
+  TmsArrowHead.TMC.SetStrokeThickness(1.5)
  ]);
 end;
 

@@ -52,7 +52,6 @@ procedure TmsArrowHead.TransformDrawOptionsContext(
   var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rStrokeThickness := 1.5;
 end;
 
 end.
