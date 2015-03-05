@@ -254,7 +254,7 @@ begin
    if aNode.IsChecked then
    begin
     l_Test := NodeToTest(aNode);
-    if Supports(l_Test, ImsEtalonsHolder, l_EtalonsHolder) then
+    if Supports(l_Test, ImsEtalonsHolder, l_EtalonsHolder) then // а тут должны бы быть изменения, но раз все равно писать по новой. то забъем
     try
      if l_EtalonsHolder.RunDiff(Self) then
       SetSuccess(l_Test);
