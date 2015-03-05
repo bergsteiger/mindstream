@@ -61,8 +61,8 @@ end;
 
 class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsTunableShapeClass;
 begin
- Result := TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName) As ImsTunableShapeClass;
- if (Result = nil) then
+(* Result := TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName) As ImsTunableShapeClass;
+ if (Result = nil) then*)
   Result := CreateInner(aShapeClass);
  Assert(Result <> nil);
 end;
