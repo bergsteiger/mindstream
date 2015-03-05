@@ -47,6 +47,10 @@ end;
 
 procedure TmsShapeClassPrim.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
+ if Self.Stereotype = 'uses' then
+ begin
+  theCtx.rStrokeThickness := theCtx.rStrokeThickness;
+ end;
  if (ParentMC <> nil) then
   ParentMC.TransformDrawOptionsContext(theCtx);
  if f_FillColor.rIsSet then
