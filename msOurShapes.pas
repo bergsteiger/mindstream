@@ -59,16 +59,16 @@ uses
 procedure RegisterOurShapes;
 begin
   // concrete shapes
-  TmsLine.MC;
+  TmsLine.TMC;
   TmsRectangle.TMC.SetFillColor(TAlphaColorRec.White);
   TmsCircle.TMC.SetFillColor(TAlphaColorRec.Red);
   TmsRoundedRectangle.TMC.SetFillColor(TAlphaColorRec.Blue);
   TmsUseCaseLikeEllipse.TMC.SetFillColor(TAlphaColorRec.Yellow);
   TmsTriangle.TMC.SetFillColor(TAlphaColorRec.Green);
-  TmsDashDotLine.MC;
-  TmsDashLine.MC;
-  TmsDotLine.MC;
-  TmsLineWithArrow.MC;
+  TmsDashDotLine.TMC;
+  TmsDashLine.TMC;
+  TmsDotLine.TMC;
+  TmsLineWithArrow.TMC;
   TmsTriangleDirectionRight.TMC.SetFillColor(TAlphaColorRec.Coral);
 
   TmsRectangle.Specify('RedRectangle').SetFillColor(TAlphaColorRec.Red);
@@ -79,14 +79,14 @@ begin
   TmsTriangleDirectionRight.Specify('SmallTriangle').SetFillColor(TAlphaColorRec.Aquamarine).SetInitialHeight(20);
 
   // utility shapes
-  TmsMover.MC;
-  TmsPicker.MC;
-  TmsUpToParent.MC;
-  TmsSwapParents.MC;
-  TmsShapeRemover.MC;
+  TmsMover.TMC;
+  TmsPicker.TMC;
+  TmsUpToParent.TMC;
+  TmsSwapParents.TMC;
+  TmsShapeRemover.TMC;
 
   // SVG Shapes
-  TmsFolder.MC;
+  TmsFolder.TMC;
 
   TmsCircle.Specify('GreenCircle').SetFillColor(TAlphaColorRec.Green);
   TmsTriangle.Specify('BlackTriangle').SetFillColor(TAlphaColorRec.Black);
@@ -94,30 +94,30 @@ begin
   TmsRemoveIcon.TMC.SetFillColor(TAlphaColorRec.Mediumvioletred);
   TmsMoveIcon.TMC.SetFillColor(TAlphaColorRec.Black);
   TmsTextShape.TMC.SetFillColor(TAlphaColorRec.Black);
-  TmsScrollShapeUp.MC;
-  TmsScrollShapeDown.MC;
-  TmsScrollShapeRight.MC;
-  TmsScrollShapeLeft.MC;
-  TmsScrollShapeUpLeft.MC;
-  TmsScrollShapeUpRight.MC;
-  TmsScrollShapeDownLeft.MC;
-  TmsScrollShapeDownRight.MC;
-  TmsScrollShapeResetOrigin.MC;
+  TmsScrollShapeUp.TMC;
+  TmsScrollShapeDown.TMC;
+  TmsScrollShapeRight.TMC;
+  TmsScrollShapeLeft.TMC;
+  TmsScrollShapeUpLeft.TMC;
+  TmsScrollShapeUpRight.TMC;
+  TmsScrollShapeDownLeft.TMC;
+  TmsScrollShapeDownRight.TMC;
+  TmsScrollShapeResetOrigin.TMC;
 
-  TmsScrollingTool.MC;
+  TmsScrollingTool.TMC;
 
-  TmsConnector.MC;
-  TmsGeneralization.MC;
+  TmsConnector.TMC;
+  TmsGeneralization.TMC;
   TmsRealization.TMC.SetStrokeThickness(2);
-  TmsAssociation.MC;
+  TmsAssociation.TMC;
   TmsDependency.TMC.SetStrokeThickness(1.5);
 
-  TmsClass.MC;
+  TmsClass.TMC;
 
   TmsClass.Specify('Interface').SetFillColor(TAlphaColorRec.Lightblue);
   TmsClass.Specify('MixIn').SetFillColor(TAlphaColorRec.Lightgreen);
 
-  TmsLibrary.MC;
+  TmsLibrary.TMC;
 
   TmsLibrary.Specify('Project').SetFillColor(TAlphaColorRec.Lightgreen);
   TmsLibrary.Specify('Subsystem').SetFillColor(TAlphaColorRec.Lightblue);
@@ -126,7 +126,7 @@ begin
 
   TmsUsecase.Specify('UsecaseRealization').SetFillColor(TAlphaColorRec.Lightgreen);
 
-  TmsTrivial.MC;
+  TmsTrivial.TMC;
 
   TmsLibrary.Specify('Layer').SetFillColor(TAlphaColorRec.Lightgray);
   TmsTrivial.Specify('Typedef').SetFillColor(TAlphaColorRec.Gray);

@@ -375,6 +375,7 @@ end;
 class function TmsShape.Specify(const aName: String): ImsTunableShapeClass;
 begin
  Result := TmsProxyShapeClass.Create(aName, Self.MC);
+ TmsRegisteredShapes.Instance.RegisterMC(Result);
 end;
 
 end.
