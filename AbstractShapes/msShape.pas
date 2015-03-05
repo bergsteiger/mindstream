@@ -369,7 +369,7 @@ begin
  Result := TmsRegisteredShapes.Instance.ByName(aName);
  if (Result = nil) then
   Result := TmsRegisteredShapes.Instance.ByName('Tms' + aName);
- Assert(Result <> nil);
+ Assert(Result <> nil, 'Стереотип ' + aName + ' не зарегистрирован');
 end;
 
 class function TmsShape.Specify(const aName: String): ImsTunableShapeClass;
