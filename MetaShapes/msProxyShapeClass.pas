@@ -33,9 +33,6 @@ type
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
-  function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
-  function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
-  function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
   function InitialHeight: Pixel;
  public
   class function Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass; overload;
@@ -160,24 +157,6 @@ function TmsProxyShapeClass.NullClick(const aHolder: ImsDiagrammsHolder): Boolea
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.NullClick(aHolder);
-end;
-
-function TmsProxyShapeClass.SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
-begin
- Result := Self;
- f_FillColor := aColor;
-end;
-
-function TmsProxyShapeClass.SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
-begin
- Result := Self;
- f_InitialHeight := aValue;
-end;
-
-function TmsProxyShapeClass.SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
-begin
- Result := Self;
- f_StrokeThickness := aValue;
 end;
 
 function TmsProxyShapeClass.InitialHeight: Pixel;
