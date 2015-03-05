@@ -119,8 +119,8 @@ begin
 end;
 
 function TmsProxyShapePrim.pm_GetStartPoint: TPointF;
-var
- l_R : TRectF;
+(*var
+ l_R : TRectF;*)
 begin
  Result := ShapeToShow.StartPoint;
 (* l_R := Self.DrawBounds;

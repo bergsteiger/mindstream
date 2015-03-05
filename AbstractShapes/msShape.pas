@@ -352,7 +352,11 @@ end;
 
 class function TmsShape.MC: ImsShapeClass;
 begin
- Result := TmsShapeClass.Create(Self);
+ Result := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
+ if (Result = nil) then
+  Result := TmsNotRegisteredShapes.Instance.ByName(Self.ClassName);
+ if (Result = nil) then
+  Result := TmsShapeClass.Create(Self);
 end;
 
 class function TmsShape.TMC: ImsTunableShapeClass;
