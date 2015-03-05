@@ -23,8 +23,7 @@ type
   function IndexOf(const aValue: String): Integer;
   procedure Cleanup; override;
  public
-  procedure RegisterMC(const aValue: MCmsShape); overload; virtual;
-  procedure RegisterMC(const aShapes: array of MCmsShape); overload;
+  procedure RegisterMC(const aValue: MCmsShape); virtual;
   function ByName(const aValue: String): MCmsShape;
   procedure IterateShapes(aLambda: TmsShapeClassLambda); virtual;
   // [Итератор (шаблон проектирования)|https://ru.wikipedia.org/wiki/%D0%98%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)]
@@ -55,14 +54,6 @@ procedure TmsShapeClassList.RegisterMC(const aValue: MCmsShape);
 begin
  Assert(IndexOf(aValue.Name) < 0, 'Стереотип ' + aValue.Stereotype + ' уже зарегистрирован');
  f_Registered.Add(aValue);
-end;
-
-procedure TmsShapeClassList.RegisterMC(const aShapes: array of MCmsShape);
-var
- l_Shape : MCmsShape;
-begin
- for l_Shape in aShapes do
-  Self.RegisterMC(l_Shape);
 end;
 
 function TmsShapeClassList.IndexOf(const aValue: String): Integer;
