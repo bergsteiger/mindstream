@@ -30,7 +30,6 @@ end;
 procedure TmsPointCircle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rFillColor := TAlphaColorRec.Null;
 end;
 
 end.

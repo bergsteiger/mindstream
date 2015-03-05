@@ -46,6 +46,7 @@ type
   procedure MouseMove(const aClickContext: TmsEndShapeContext); virtual;
   // - действие при MouseMove
   function Stereotype: String;
+  class function InitialHeight: Pixel; virtual;
  protected
   class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
  public
@@ -75,6 +76,7 @@ type
   // - ткнули в примитив внутри диаграммы
   function GetDrawBounds: TRectF; virtual;
   function DrawBounds: TRectF;
+  procedure GetStereotypeRect(var aRect: TRectF); virtual;
  public
   class function IsLineLike: Boolean; virtual;
   procedure DrawTo(const aCtx: TmsDrawContext); virtual;
@@ -86,7 +88,9 @@ type
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);
   class function ButtonShape: ImsShape; virtual;
-  class function ShapeMC: ImsShapeClass;
+  class function MC: ImsShapeClass;
+  class function TMC: ImsTunableShapeClass;
+  class function NamedMC(const aName: String): ImsShapeClass;
   class function Specify(const aName: String): ImsTunableShapeClass;
  end;//TmsShape
 
@@ -121,7 +125,7 @@ end;
 
 class function TmsShape.Create(const aStartPoint: TPointF): ImsShape;
 begin
- Result := Create(Self.ShapeMC, aStartPoint);
+ Result := Create(Self.MC, aStartPoint);
 end;
 
 class function TmsShape.Create: ImsShape;
@@ -160,6 +164,12 @@ end;
 procedure TmsShape.MouseMove(const aClickContext: TmsEndShapeContext);
 begin
  // Ничего не делаем, специально
+end;
+
+class function TmsShape.InitialHeight: Pixel;
+begin
+ Result := 0;
+ Assert(false, 'Не реализовано: ' + ClassName);
 end;
 
 function TmsShape.Stereotype: String;
@@ -276,10 +286,16 @@ begin
  end;//Result.Left > Result.Right
 end;
 
+procedure TmsShape.GetStereotypeRect(var aRect: TRectF);
+begin
+ // - ничего не делаем. Специально.
+end;
+
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
 var
  l_Ctx : TmsDrawOptionsContext;
  l_DrawContext : TmsDrawContext;
+ l_StereotypeRect : TRectF;
 begin
  l_Ctx := DrawOptionsContext(aCtx);
  aCtx.rCanvas.Fill.Color := l_Ctx.rFillColor;
@@ -289,6 +305,26 @@ begin
  l_DrawContext := aCtx;
  l_DrawContext.rOpacity := l_Ctx.rOpacity;
  DoDrawTo(l_DrawContext);
+ l_StereotypeRect := TRectF.Create(0, 0, 0, 0);
+ GetStereotypeRect(l_StereotypeRect);
+ if (l_StereotypeRect.TopLeft <> l_StereotypeRect.BottomRight) then
+ begin
+  if (l_StereotypeRect.Height < 10) then
+  begin
+   l_StereotypeRect.Top := l_StereotypeRect.Top - 10;
+   l_StereotypeRect.Bottom := l_StereotypeRect.Bottom + 10;
+  end;//l_StereotypeRect.Height < 10
+  l_StereotypeRect.Left := l_StereotypeRect.Left - 100;
+  l_StereotypeRect.Right := l_StereotypeRect.Right + 100;
+  aCtx.rCanvas.Fill.Color := aCtx.rCanvas.Stroke.Color;
+  aCtx.rCanvas.FillText(l_StereotypeRect,
+                        Stereotype,
+                        false,
+                        1,
+                        [],
+                        TTextAlign.Center,
+                        TTextAlign.Center);
+ end;//l_StereotypeRect.TopLeft <> l_StereotypeRect.BottomRight
 end;
 
 procedure TmsShape.SaveTo(const aFileName: String);
@@ -313,14 +349,27 @@ begin
  Assert(false, 'Не реализовано');
 end;
 
-class function TmsShape.ShapeMC: ImsShapeClass;
+class function TmsShape.MC: ImsShapeClass;
 begin
  Result := TmsShapeClass.Create(Self);
 end;
 
+class function TmsShape.TMC: ImsTunableShapeClass;
+begin
+ Result := TmsShapeClass.Create(Self);
+end;
+
+class function TmsShape.NamedMC(const aName: String): ImsShapeClass;
+begin
+ Result := TmsRegisteredShapes.Instance.ByName(aName);
+ if (Result = nil) then
+  Result := TmsRegisteredShapes.Instance.ByName('Tms' + aName);
+ Assert(Result <> nil);
+end;
+
 class function TmsShape.Specify(const aName: String): ImsTunableShapeClass;
 begin
- Result := TmsProxyShapeClass.Create(aName, Self);
+ Result := TmsProxyShapeClass.Create(aName, Self.MC);
 end;
 
 end.

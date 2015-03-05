@@ -17,10 +17,10 @@ type
   f_Lines : TmsLineFPair;
  protected
   function InnerFolders: String; override;
-  function  GetName: string; override;
   constructor CreateInner(const aTestName: String; const aLines : TmsLineFPair);
   procedure DoTest(aLambda: TmsLogLambda);
  public
+  function  GetName: string; override;
   class function Create(const aTestName: String; const aLines : TmsLineFPair): ITest;
  published
   procedure Cross;

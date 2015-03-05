@@ -3,6 +3,8 @@ unit msShapeCreator;
 interface
 
 uses
+ System.Types,
+
  msInterfaces,
  msInterfacedRefcounted,
  msShape
@@ -21,24 +23,25 @@ type
   read f_ShapeClass;
   // - класс примитивов для создания
  protected
-  function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; virtual;
+  function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; overload; virtual;
+  function CreateShape(const aStartPoint: TPointF): ImsShape; overload;
   function ShapeClassForCreate: TClass;
  public
   class function Create(const aShapeMC : ImsShapeClass; aShapeClass: RmsShape): ImsShapeCreator; overload;
   class function Create(aShapeClass: RmsShape): ImsShapeCreator; overload;
  end;//TmsShapeCreator
 
- TmsShapeFriend = class(TmsShape)
- end;//TmsShapeFriend
-
- RmsShapeFriend = class of TmsShapeFriend;
-
-
 implementation
 
 uses
  msShapeClass
  ;
+
+type
+ TmsShapeFriend = class(TmsShape)
+ end;//TmsShapeFriend
+
+ RmsShapeFriend = class of TmsShapeFriend;
 
 // TmsShapeCreator
 
@@ -56,12 +59,17 @@ end;
 
 class function TmsShapeCreator.Create(aShapeClass: RmsShape): ImsShapeCreator;
 begin
- Result := Create(aShapeClass.ShapeMC, aShapeClass);
+ Result := Create(aShapeClass.MC, aShapeClass);
 end;
 
 function TmsShapeCreator.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 begin
  Result := RmsShapeFriend(f_ShapeClass).Create(f_ShapeMC, aContext);
+end;
+
+function TmsShapeCreator.CreateShape(const aStartPoint: TPointF): ImsShape;
+begin
+ Result := CreateShape(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
 end;
 
 function TmsShapeCreator.ShapeClassForCreate: TClass;

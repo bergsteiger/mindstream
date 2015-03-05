@@ -25,6 +25,7 @@ type
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
   procedure MoveBy(const aCtx: TmsMoveContext); override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
+  procedure GetStereotypeRect(var aRect: TRectF); override;
  end;//TmsConnector
 
 implementation
@@ -137,6 +138,12 @@ begin
  if (aCtx.rShapesController <> nil) then
   f_RightShape := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
  Result := inherited;
+end;
+
+procedure TmsConnector.GetStereotypeRect(var aRect: TRectF);
+begin
+ inherited;
+ //aRect := DrawBounds;
 end;
 
 end.

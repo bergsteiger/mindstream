@@ -3,15 +3,19 @@ unit msShapeClass;
 interface
 
 uses
+ System.UITypes,
+
  msInterfaces,
  msShape,
- msInterfacedRefcounted
+ msInterfacedRefcounted,
+ msShapeClassPrim
  ;
 
 type
- TmsShapeClass = class(TmsInterfacedRefcounted, ImsShapeClass)
+ TmsShapeClass = class(TmsShapeClassPrim, ImsShapeClass, ImsTunableShapeClass)
  private
   f_ShapeClass : RmsShape;
+  f_ParentMC : ImsShapeClass;
  private
   constructor CreateInner(aShapeClass: RmsShape);
  protected
@@ -26,10 +30,12 @@ type
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
-  function Stereotype: String;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+  function Stereotype: String; override;
+  function ParentMC: ImsShapeClass; override;
+  function AsTMC: ImsTunableShapeClass; override;
+  function InitialHeight: Pixel;
  public
-  class function Create(aShapeClass: RmsShape): ImsShapeClass;
+  class function Create(aShapeClass: RmsShape): ImsTunableShapeClass;
  end;//TmsShapeClass
 
 implementation
@@ -39,6 +45,12 @@ uses
  msRegisteredShapes
  ;
 
+type
+ TmsShapeFriend = class(TmsShape)
+ end;//TmsShapeFriend
+
+ RmsShapeFriend = class of TmsShapeFriend;
+
 // TmsShapeClass
 
 constructor TmsShapeClass.CreateInner(aShapeClass: RmsShape);
@@ -47,9 +59,9 @@ begin
  f_ShapeClass := aShapeClass;
 end;
 
-class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClass;
+class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsTunableShapeClass;
 begin
- Result := TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName);
+ Result := TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName) As ImsTunableShapeClass;
  if (Result = nil) then
   Result := CreateInner(aShapeClass);
  Assert(Result <> nil);
@@ -92,9 +104,34 @@ begin
  Result := Copy(Result, 4, Length(Result) - 3);
 end;
 
-procedure TmsShapeClass.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+function TmsShapeClass.ParentMC: ImsShapeClass;
 begin
- // - тут ничего не делаем
+ if (f_ParentMC = nil) then
+ begin
+  Assert(f_ShapeClass <> nil);
+  if (f_ShapeClass.ClassParent.InheritsFrom(TmsShape)) then
+   f_ParentMC := RmsShape(f_ShapeClass.ClassParent).MC
+  else
+   f_ParentMC := nil;
+ end;//f_ParentMC = nil
+ Result := f_ParentMC;
+end;
+
+function TmsShapeClass.AsTMC: ImsTunableShapeClass;
+begin
+ Result := Self;
+end;
+
+function TmsShapeClass.InitialHeight: Pixel;
+var
+ l_V : TmsPixelRec;
+begin
+ Assert(f_ShapeClass <> nil);
+ l_V := f_InitialHeight;
+ if l_V.rIsSet then
+  Result := l_V.rValue
+ else
+  Result := RmsShapeFriend(f_ShapeClass).InitialHeight;
 end;
 
 procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);

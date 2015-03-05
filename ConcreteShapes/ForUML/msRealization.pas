@@ -23,7 +23,6 @@ procedure TmsRealization.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsC
 begin
  inherited;
  theCtx.rStrokeDash := TStrokeDash.Dash;
- theCtx.rStrokeThickness := 2;
 end;
 
 end.

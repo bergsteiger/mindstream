@@ -10,10 +10,13 @@ uses
  msSerializeInterfaces,
  Generics.Collections,
  FMX.Objects,
- Data.DBXJSONReflect
+ Data.DBXJSONReflect,
+ msLineF
  ;
 
 type
+ Pixel = msLineF.Pixel;
+
  ImsShape = interface;
 
  ImsShapeByPt = interface
@@ -44,10 +47,19 @@ type
    constructor Create(const aCanvas : TCanvas);
  end;//TmsDrawContext
 
+ TAlphaColor = System.UITypes.TAlphaColor;
+
  TmsColorRec = record
   rIsSet : Boolean;
   rValue : TAlphaColor;
+  class operator Implicit(aValue: TAlphaColor): TmsColorRec;
  end;//TmsColorRec
+
+ TmsPixelRec = record
+  rIsSet : Boolean;
+  rValue : Pixel;
+  class operator Implicit(aValue: Pixel): TmsPixelRec;
+ end;//TmsPixelRec
 
  TmsDrawOptionsContext = record
   public
@@ -139,7 +151,8 @@ type
 
  ImsShapeCreator = interface
  // [Фабричный_метод_(шаблон_проектирования)|https://ru.wikipedia.org/wiki/%D0%A4%D0%B0%D0%B1%D1%80%D0%B8%D1%87%D0%BD%D1%8B%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)]
-  function CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
+  function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; overload;
+  function CreateShape(const aStartPoint: TPointF): ImsShape; overload;
  end;//ImsShapeCreator
 
  ImsShapeCreatorFriend = interface
@@ -172,6 +185,12 @@ type
 
  ImsTunableShapeClass = interface;
 
+ ImsShapeClassTuner = interface
+  function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
+  function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
+  function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
+ end;//ImsShapeClassTuner
+
  ImsShapeClass = interface
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
@@ -186,10 +205,15 @@ type
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function Stereotype: String;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+  function InitialHeight: Pixel;
+  function ParentMC: ImsShapeClass;
  end;//ImsShapeClass
 
  ImsTunableShapeClass = interface(ImsShapeClass)
+ ['{C74A48CA-3D30-4778-936A-470EEAA1BA2F}']
   function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
+  function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
+  function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
  end;//ImsTunableShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)
@@ -286,6 +310,22 @@ begin
  rStartPoint := aStartPoint;
  rDelta := aDelta;
  rShapesController := aShapesController;
+end;
+
+// TmsColorRec
+
+class operator TmsColorRec.Implicit(aValue: TAlphaColor): TmsColorRec;
+begin
+ Result.rIsSet := true;
+ Result.rValue := aValue;
+end;
+
+// TmsPixelRec
+
+class operator TmsPixelRec.Implicit(aValue: Pixel): TmsPixelRec;
+begin
+ Result.rIsSet := true;
+ Result.rValue := aValue;
 end;
 
 end.

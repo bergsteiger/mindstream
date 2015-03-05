@@ -27,7 +27,6 @@ end;
 procedure TmsUseCaseLikeEllipse.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
  inherited;
- theCtx.rFillColor := TAlphaColorRec.Yellow;
 end;
 
 end.

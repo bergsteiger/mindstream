@@ -22,7 +22,6 @@ uses
   msDashLine in 'ConcreteShapes\msDashLine.pas',
   msDotLine in 'ConcreteShapes\msDotLine.pas',
   msLineWithArrow in 'ConcreteShapes\msLineWithArrow.pas',
-  msSmallTriangle in 'SpecialShapes\msSmallTriangle.pas',
   msOurShapes in 'msOurShapes.pas',
   msTriangleDirectionRight in 'ConcreteShapes\msTriangleDirectionRight.pas',
   msMover in 'ShapeTools\msMover.pas',
@@ -32,8 +31,6 @@ uses
   TestMsPointCircle in 'Tests\Module\TestMsPointCircle.pas',
   TestMsCircle in 'Tests\Module\TestMsCircle.pas',
   msShapeTest in 'Tests\Module\msShapeTest.pas',
-  msRedRectangle in 'ConcreteShapes\msRedRectangle.pas',
-  msGreenRectangle in 'ConcreteShapes\msGreenRectangle.pas',
   msSerializeInterfaces in 'msSerializeInterfaces.pas',
   msTool in 'ShapeTools\msTool.pas',
   msDiagrammMarshal in 'Marshal\msDiagrammMarshal.pas',
@@ -63,8 +60,6 @@ uses
   msNullClickShape in 'ShapeTools\msNullClickShape.pas',
   msPaletteShape in 'ShapeTools\PaletteShapes\msPaletteShape.pas',
   msShapeRemover in 'ShapeTools\msShapeRemover.pas',
-  msGreenCircle in 'ConcreteShapes\msGreenCircle.pas',
-  msBlackTriangle in 'ConcreteShapes\msBlackTriangle.pas',
   msBlackRectangle in 'ConcreteShapes\msBlackRectangle.pas',
   msPolygonShape in 'AbstractShapes\msPolygonShape.pas',
   msMoverIcon in 'SpecialShapes\ForButtons\msMoverIcon.pas',
@@ -146,7 +141,10 @@ uses
   msClass in 'ConcreteShapes\ForUML\msClass.pas',
   msLibrary in 'ConcreteShapes\ForUML\msLibrary.pas',
   msUsecase in 'ConcreteShapes\ForUML\msUsecase.pas',
-  msTrivial in 'ConcreteShapes\ForUML\msTrivial.pas';
+  msTrivial in 'ConcreteShapes\ForUML\msTrivial.pas',
+  msArrowHead in 'ConcreteShapes\msArrowHead.pas',
+  msPolylineShape in 'AbstractShapes\msPolylineShape.pas',
+  msShapeClassPrim in 'MetaShapes\msShapeClassPrim.pas';
 
 {$R *.res}
 

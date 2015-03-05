@@ -26,14 +26,9 @@ type
   procedure DrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsPaletteShape
 
-type
- TmsShapeFriend = class(TmsShape)
- end;//TmsShapeFriend
-
 implementation
 
 uses
- msGreenCircle,
  msMover,
  msShapeClass
  ;
@@ -59,7 +54,7 @@ end;
 
 class function TmsPaletteShape.Create(const anOtherShapeClass: MCmsShape; const aCtx: TmsMakeShapeContext): ImsShape;
 begin
- Result := CreateInner(Self.ShapeMC, anOtherShapeClass, aCtx.rStartPoint);
+ Result := CreateInner(Self.MC, anOtherShapeClass, aCtx.rStartPoint);
 end;
 
 (*function TmsPaletteShape.IsClassTypeNamedAs(const aClassName: String): Boolean;

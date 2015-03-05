@@ -33,8 +33,7 @@ end;
 
 procedure TmsBlackRectangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
 begin
-  inherited;
- theCtx.rFillColor := TAlphaColorRec.Black;
+ inherited;
 end;
 
 end.

@@ -200,7 +200,7 @@ begin
    l_P : TPoint;
   begin
    for l_P in f_Coords do
-    aDiagramm.AddShape(TmsCompletedShapeCreator.Create(Self.ShapeClass).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil, nil))).AddNewDiagramm;
+    aDiagramm.AddShape(TmsCompletedShapeCreator.Create(Self.ShapeClass).CreateShape(TPointF.Create(l_P.X, l_P.Y))).AddNewDiagramm;
 
    SaveDiagrammAndCheck(aDiagramm, SaveDiagramm);
   end
