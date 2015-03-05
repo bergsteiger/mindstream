@@ -16,6 +16,7 @@ type
  protected
   function ParentMC: ImsShapeClass; virtual;
   function AsTMC: ImsTunableShapeClass; virtual;
+  function Stereotype: String; virtual;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
   function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
@@ -35,6 +36,12 @@ end;
 function TmsShapeClassPrim.AsTMC: ImsTunableShapeClass;
 begin
  Result := nil;
+ Assert(false, 'Не реализовано');
+end;
+
+function TmsShapeClassPrim.Stereotype: String;
+begin
+ Result := '';
  Assert(false, 'Не реализовано');
 end;
 

@@ -111,7 +111,7 @@ begin
   TmsGeneralization.MC,
   TmsRealization.TMC.SetStrokeThickness(2),
   TmsAssociation.MC,
-  TmsDependency.MC,
+  TmsDependency.TMC.SetStrokeThickness(1.5),
 
   TmsClass.MC,
 

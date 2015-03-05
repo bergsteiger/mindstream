@@ -38,7 +38,6 @@ procedure TmsDependency.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsCo
 begin
  inherited;
  theCtx.rStrokeDash := TStrokeDash.Dash;
- theCtx.rStrokeThickness := 1.5;
 end;
 
 procedure TmsDependency.GetStereotypeRect(var aRect: TRectF);

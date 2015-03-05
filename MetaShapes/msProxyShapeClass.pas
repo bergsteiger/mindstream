@@ -24,7 +24,7 @@ type
   function IsLineLike: Boolean;
   function Creator: ImsShapeCreator;
   function Name: String;
-  function Stereotype: String;
+  function Stereotype: String; override;
   function ParentMC: ImsShapeClass; override;
   function AsTMC: ImsTunableShapeClass; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);

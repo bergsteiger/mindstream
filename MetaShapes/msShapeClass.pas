@@ -30,7 +30,7 @@ type
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
-  function Stereotype: String;
+  function Stereotype: String; override;
   function ParentMC: ImsShapeClass; override;
   function AsTMC: ImsTunableShapeClass; override;
   function InitialHeight: Pixel;
