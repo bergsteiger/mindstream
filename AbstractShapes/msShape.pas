@@ -356,7 +356,10 @@ begin
  if (Result = nil) then
   Result := TmsNotRegisteredShapes.Instance.ByName(Self.ClassName);
  if (Result = nil) then
+ begin
   Result := TmsShapeClass.Create(Self);
+  TmsNotRegisteredShapes.Instance.RegisterMC(Result);
+ end;//Result = nil
 end;
 
 class function TmsShape.TMC: ImsTunableShapeClass;
