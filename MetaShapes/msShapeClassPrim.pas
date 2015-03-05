@@ -15,6 +15,7 @@ type
   f_StrokeThickness : TmsPixelRec;
  protected
   function ParentMC: ImsShapeClass; virtual;
+  function AsTMC: ImsTunableShapeClass; virtual;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
  end;//TmsShapeClassPrim
 
@@ -23,6 +24,12 @@ implementation
 // TmsShapeClassPrim
 
 function TmsShapeClassPrim.ParentMC: ImsShapeClass;
+begin
+ Result := nil;
+ Assert(false, 'Не реализовано');
+end;
+
+function TmsShapeClassPrim.AsTMC: ImsTunableShapeClass;
 begin
  Result := nil;
  Assert(false, 'Не реализовано');
