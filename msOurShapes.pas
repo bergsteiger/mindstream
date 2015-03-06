@@ -12,7 +12,6 @@ uses
   msRoundedRectangle,
   msUseCaseLikeEllipse,
   msTriangle,
-  msDashDotLine,
   msLineWithArrow,
   msTriangleDirectionRight,
   msRegisteredShapes,
@@ -64,7 +63,7 @@ begin
   TmsRoundedRectangle.TMC.SetFillColor(TAlphaColorRec.Blue);
   TmsUseCaseLikeEllipse.TMC.SetFillColor(TAlphaColorRec.Yellow);
   TmsTriangle.TMC.SetFillColor(TAlphaColorRec.Green);
-  TmsDashDotLine.TMC.SetStrokeDash(TStrokeDash.DashDot);
+  TmsLine.Specify('DashDotLine').SetStrokeDash(TStrokeDash.DashDot);
   TmsLine.Specify('DashLine').SetStrokeDash(TStrokeDash.Dash);
   TmsLine.Specify('DotLine').SetStrokeDash(TStrokeDash.Dot);
   TmsLineWithArrow.TMC;
