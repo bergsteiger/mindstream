@@ -111,7 +111,7 @@ begin
   TmsConnector.TMC;
   TmsGeneralization.TMC;
   TmsRealization.TMC.SetStrokeThickness(2).SetStrokeDash(TStrokeDash.Dash);
-  TmsAssociation.TMC.SetStrokeThickness(1.5);
+  TmsAssociation.TMC.SetStrokeThickness(1.5).SetStrokeDash(TStrokeDash.Solid);
   TmsDependency.TMC.SetStrokeThickness(1.5).SetStrokeDash(TStrokeDash.Dash);
 
   TmsClass.TMC;
