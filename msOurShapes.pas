@@ -66,7 +66,7 @@ begin
   TmsRoundedRectangle.TMC.SetFillColor(TAlphaColorRec.Blue);
   TmsUseCaseLikeEllipse.TMC.SetFillColor(TAlphaColorRec.Yellow);
   TmsTriangle.TMC.SetFillColor(TAlphaColorRec.Green);
-  TmsDashDotLine.TMC;
+  TmsDashDotLine.TMC.SetStrokeDash(TStrokeDash.DashDot);
   TmsDashLine.TMC.SetStrokeDash(TStrokeDash.Dash);
   TmsDotLine.TMC.SetStrokeDash(TStrokeDash.Dot);
   TmsLineWithArrow.TMC;
