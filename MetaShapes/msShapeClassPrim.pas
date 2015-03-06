@@ -13,6 +13,7 @@ type
   f_FillColor : TmsColorRec;
   f_InitialHeight : TmsPixelRec;
   f_StrokeThickness : TmsPixelRec;
+  f_StrokeDash : TmsStrokeDash;
  protected
   function ParentMC: ImsShapeClass; virtual;
   function AsTMC: ImsTunableShapeClass; virtual;
@@ -53,6 +54,8 @@ begin
   theCtx.rFillColor := f_FillColor.rValue;
  if f_StrokeThickness.rIsSet then
   theCtx.rStrokeThickness := f_StrokeThickness.rValue;
+ if f_StrokeDash.rIsSet then
+  theCtx.rStrokeDash := f_StrokeDash.rValue;
 end;
 
 function TmsShapeClassPrim.SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
