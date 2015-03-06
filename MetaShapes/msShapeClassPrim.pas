@@ -19,10 +19,10 @@ type
   function AsTMC: ImsTunableShapeClass; virtual;
   function Stereotype: String; virtual;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-  function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
-  function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
-  function SetStrokeDash(aValue: TStrokeDash): ImsTunableShapeClass;
-  function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
+  function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
+  function SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;
+  function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
+  function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
  end;//TmsShapeClassPrim
 
 implementation
@@ -59,27 +59,27 @@ begin
   theCtx.rStrokeDash := f_StrokeDash.rValue;
 end;
 
-function TmsShapeClassPrim.SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
+function TmsShapeClassPrim.SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
 begin
- Result := Self.AsTMC;
+ Result := Self;
  f_FillColor := aColor;
 end;
 
-function TmsShapeClassPrim.SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
+function TmsShapeClassPrim.SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;
 begin
- Result := Self.AsTMC;
+ Result := Self;
  f_StrokeThickness := aValue;
 end;
 
-function TmsShapeClassPrim.SetStrokeDash(aValue: TStrokeDash): ImsTunableShapeClass;
+function TmsShapeClassPrim.SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
 begin
- Result := Self.AsTMC;
+ Result := Self;
  f_StrokeDash := aValue;
 end;
 
-function TmsShapeClassPrim.SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
+function TmsShapeClassPrim.SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
 begin
- Result := Self.AsTMC;
+ Result := Self;
  f_InitialHeight := aValue;
 end;
 

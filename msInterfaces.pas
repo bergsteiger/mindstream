@@ -198,10 +198,10 @@ type
  ImsTunableShapeClass = interface;
 
  ImsShapeClassTuner = interface
-  function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
-  function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
-  function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
-  function SetStrokeDash(aValue: TStrokeDash): ImsTunableShapeClass;
+  function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
+  function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
+  function SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;
+  function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
  end;//ImsShapeClassTuner
 
  ImsShapeClass = interface
@@ -224,10 +224,10 @@ type
 
  ImsTunableShapeClass = interface(ImsShapeClass)
  ['{C74A48CA-3D30-4778-936A-470EEAA1BA2F}']
-  function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
-  function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
-  function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
-  function SetStrokeDash(aValue: TStrokeDash): ImsTunableShapeClass;
+  function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
+  function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
+  function SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;
+  function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
  end;//ImsTunableShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)
