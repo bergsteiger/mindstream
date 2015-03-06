@@ -14,7 +14,6 @@ uses
   msTriangle,
   msDashDotLine,
   msDashLine,
-  msDotLine,
   msLineWithArrow,
   msTriangleDirectionRight,
   msRegisteredShapes,
@@ -68,7 +67,7 @@ begin
   TmsTriangle.TMC.SetFillColor(TAlphaColorRec.Green);
   TmsDashDotLine.TMC.SetStrokeDash(TStrokeDash.DashDot);
   TmsDashLine.TMC.SetStrokeDash(TStrokeDash.Dash);
-  TmsDotLine.TMC.SetStrokeDash(TStrokeDash.Dot);
+  TmsLine.Specify('DotLine').SetStrokeDash(TStrokeDash.Dot);
   TmsLineWithArrow.TMC;
   TmsTriangleDirectionRight.TMC.SetFillColor(TAlphaColorRec.Coral);
 
