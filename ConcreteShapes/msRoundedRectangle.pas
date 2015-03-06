@@ -18,8 +18,6 @@ type
   class function CornerRadius: Single; override;
   class function InitialWidth: Single; override;
   class function InitialHeight: Single; override;
-
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsRoundedRectangle
 
 implementation
@@ -37,11 +35,6 @@ end;
 class function TmsRoundedRectangle.InitialHeight: Single;
 begin
  Result := InitialWidth;
-end;
-
-procedure TmsRoundedRectangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- inherited;
 end;
 
 end.

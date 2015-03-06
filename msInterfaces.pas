@@ -19,6 +19,8 @@ type
 
  ImsShape = interface;
 
+ TPointF = System.Types.TPointF;
+
  ImsShapeByPt = interface
   function ShapeByPt(const aPoint: TPointF): ImsShape;
  end;//ImsShapeByPt
@@ -48,6 +50,8 @@ type
  end;//TmsDrawContext
 
  TAlphaColor = System.UITypes.TAlphaColor;
+ TAlphaColorRec = System.UITypes.TAlphaColorRec;
+ TStrokeDash = FMX.Graphics.TStrokeDash;
 
  TmsColorRec = record
   rIsSet : Boolean;
@@ -59,6 +63,12 @@ type
   rIsSet : Boolean;
   rValue : Pixel;
   class operator Implicit(aValue: Pixel): TmsPixelRec;
+ end;//TmsPixelRec
+
+ TmsStrokeDash = record
+  rIsSet : Boolean;
+  rValue : TStrokeDash;
+  class operator Implicit(aValue: TStrokeDash): TmsStrokeDash;
  end;//TmsPixelRec
 
  TmsDrawOptionsContext = record
@@ -125,6 +135,8 @@ type
    constructor Create(const aStartPoint: TPointF; const aDelta: TPointF; const aShapesController: ImsShapesController);
  end;//TmsMoveContext
 
+ TRectF = System.Types.TRectF;
+
  ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
@@ -189,6 +201,7 @@ type
   function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
   function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
   function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
+  function SetStrokeDash(aValue: TStrokeDash): ImsTunableShapeClass;
  end;//ImsShapeClassTuner
 
  ImsShapeClass = interface
@@ -214,6 +227,7 @@ type
   function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
   function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
   function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
+  function SetStrokeDash(aValue: TStrokeDash): ImsTunableShapeClass;
  end;//ImsTunableShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)
@@ -323,6 +337,14 @@ end;
 // TmsPixelRec
 
 class operator TmsPixelRec.Implicit(aValue: Pixel): TmsPixelRec;
+begin
+ Result.rIsSet := true;
+ Result.rValue := aValue;
+end;
+
+// TmsStrokeDash
+
+class operator TmsStrokeDash.Implicit(aValue: TStrokeDash): TmsStrokeDash;
 begin
  Result.rIsSet := true;
  Result.rValue := aValue;

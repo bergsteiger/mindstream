@@ -19,7 +19,6 @@ type
   class function InitialWidth: Single; override;
   class function InitialHeight: Single; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsRectangle
 
 implementation
@@ -41,7 +40,6 @@ begin
  Result := 0;
 end;
 
-
 procedure TmsRectangle.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_msPointContext: TRectF;
@@ -59,11 +57,6 @@ begin
                   AllCorners,
                   aCtx.rOpacity,
                   TCornerType.Round);
-end;
-
-procedure TmsRectangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- inherited;
 end;
 
 end.

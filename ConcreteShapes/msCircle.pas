@@ -19,7 +19,6 @@ type
   function InitialRadiusY: Integer; virtual;
 
   function GetDrawBounds: TRectF; override;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
   function ContainsPt(const aPoint: TPointF): Boolean; override;
@@ -47,8 +46,6 @@ var
 begin
  l_Rect := DrawBounds;
 
- //Result := l_Rect.Contains(aPoint);
-
  l_StartRectPoint := l_Rect.TopLeft;
  l_FinishRectPoint := l_Rect.BottomRight;
 
@@ -72,14 +69,8 @@ var
  l_Rect : TRectF;
 begin
  l_Rect := DrawBounds;
-
  aCtx.rCanvas.DrawEllipse(l_Rect, 1);
  aCtx.rCanvas.FillEllipse(l_Rect, aCtx.rOpacity);
-end;
-
-procedure TmsCircle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- inherited;
 end;
 
 end.

@@ -5,7 +5,7 @@ interface
 implementation
 
 uses
-  System.UITypes,
+  msInterfaces,
   msLine,
   msRectangle,
   msCircle,
@@ -14,7 +14,6 @@ uses
   msTriangle,
   msDashDotLine,
   msDashLine,
-  msDotLine,
   msLineWithArrow,
   msTriangleDirectionRight,
   msRegisteredShapes,
@@ -51,7 +50,8 @@ uses
   msLibrary,
   msUsecase,
   msTrivial,
-  msArrowHead
+  msArrowHead,
+  msSVGShape
   ;
 
 // Важно !!!
@@ -65,9 +65,9 @@ begin
   TmsRoundedRectangle.TMC.SetFillColor(TAlphaColorRec.Blue);
   TmsUseCaseLikeEllipse.TMC.SetFillColor(TAlphaColorRec.Yellow);
   TmsTriangle.TMC.SetFillColor(TAlphaColorRec.Green);
-  TmsDashDotLine.TMC;
-  TmsDashLine.TMC;
-  TmsDotLine.TMC;
+  TmsDashDotLine.TMC.SetStrokeDash(TStrokeDash.DashDot);
+  TmsDashLine.TMC.SetStrokeDash(TStrokeDash.Dash);
+  TmsLine.Specify('DotLine').SetStrokeDash(TStrokeDash.Dot);
   TmsLineWithArrow.TMC;
   TmsTriangleDirectionRight.TMC.SetFillColor(TAlphaColorRec.Coral);
 
@@ -86,6 +86,7 @@ begin
   TmsShapeRemover.TMC;
 
   // SVG Shapes
+  TmsSVGShape.NRTMC.SetFillColor(TAlphaColorRec.Azure);
   TmsFolder.TMC;
 
   TmsCircle.Specify('GreenCircle').SetFillColor(TAlphaColorRec.Green);
@@ -108,9 +109,9 @@ begin
 
   TmsConnector.TMC;
   TmsGeneralization.TMC;
-  TmsRealization.TMC.SetStrokeThickness(2);
-  TmsAssociation.TMC;
-  TmsDependency.TMC.SetStrokeThickness(1.5);
+  TmsRealization.TMC.SetStrokeThickness(2).SetStrokeDash(TStrokeDash.Dash);
+  TmsAssociation.TMC.SetStrokeThickness(1.5).SetStrokeDash(TStrokeDash.Solid);
+  TmsDependency.TMC.SetStrokeThickness(1.5).SetStrokeDash(TStrokeDash.Dash);
 
   TmsClass.TMC;
 

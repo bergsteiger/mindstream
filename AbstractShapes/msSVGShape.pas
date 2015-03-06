@@ -17,7 +17,6 @@ type
  protected
   function GetPolygon: TPolygon; override; final;
   function GetPolygonSVG: String; virtual; abstract;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsSVGShape
 
 implementation
@@ -53,12 +52,6 @@ begin
  finally
   FreeAndNil(l_PD);
  end;//try..finally
-end;
-
-procedure TmsSVGShape.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- inherited;
- theCtx.rFillColor := TAlphaColorRec.Azure;
 end;
 
 end.

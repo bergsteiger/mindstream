@@ -4,25 +4,37 @@ interface
 
 uses
  msInterfaces,
- msDependency
+ msConnector
  ;
 
 type
- TmsAssociation = class(TmsDependency)
+ TmsAssociation = class(TmsConnector)
  protected
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
+  function ArrowHeadShapeMC: ImsShapeClass; override;
+  function GetFinishPointForDraw: TPointF; override;
+  procedure GetStereotypeRect(var aRect: TRectF); override;
  end;//TmsAssociation
 
 implementation
 
 uses
- FMX.Graphics
+ FMX.Graphics,
+ msArrowHead
  ;
 
-procedure TmsAssociation.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+function TmsAssociation.ArrowHeadShapeMC: ImsShapeClass;
 begin
- inherited;
- theCtx.rStrokeDash := TStrokeDash.Solid;
+ Result := TmsArrowHead.MC;
+end;
+
+function TmsAssociation.GetFinishPointForDraw: TPointF;
+begin
+ Result := FinishPoint;
+end;
+
+procedure TmsAssociation.GetStereotypeRect(var aRect: TRectF);
+begin
+ aRect := DrawBounds;
 end;
 
 end.

@@ -13,7 +13,6 @@ type
  protected
   procedure GetStereotypeRect(var aRect: TRectF); override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsUsecase
 
 implementation
@@ -24,11 +23,6 @@ uses
  ;
 
 // TmsUsecase
-
-procedure TmsUsecase.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- inherited;
-end;
 
 procedure TmsUsecase.GetStereotypeRect(var aRect: TRectF);
 begin

@@ -20,7 +20,6 @@ uses
   msDiagrammsController in 'msDiagrammsController.pas',
   msDashDotLine in 'ConcreteShapes\msDashDotLine.pas',
   msDashLine in 'ConcreteShapes\msDashLine.pas',
-  msDotLine in 'ConcreteShapes\msDotLine.pas',
   msLineWithArrow in 'ConcreteShapes\msLineWithArrow.pas',
   msOurShapes in 'msOurShapes.pas',
   msTriangleDirectionRight in 'ConcreteShapes\msTriangleDirectionRight.pas',

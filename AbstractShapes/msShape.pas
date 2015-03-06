@@ -88,6 +88,7 @@ type
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);
   class function ButtonShape: ImsShape; virtual;
+  class function NRTMC: ImsTunableShapeClass;
   class function MC: ImsShapeClass;
   class function TMC: ImsTunableShapeClass;
   class function NamedMC(const aName: String): ImsShapeClass;
@@ -97,7 +98,6 @@ type
  RmsShape = class of TmsShape;
 
  MCmsShape = ImsShapeClass;
-// MCmsShape = RmsShape;
 
 implementation
 
@@ -350,16 +350,27 @@ begin
  Assert(false, 'Не реализовано');
 end;
 
-class function TmsShape.MC: ImsShapeClass;
+class function TmsShape.NRTMC: ImsTunableShapeClass;
+var
+ l_R : ImsShapeClass;
 begin
- Result := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
- if (Result = nil) then
-  Result := TmsNotRegisteredShapes.Instance.ByName(Self.ClassName);
- if (Result = nil) then
+ l_R := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
+ if (l_R = nil) then
+  l_R := TmsNotRegisteredShapes.Instance.ByName(Self.ClassName);
+ if (l_R <> nil) then
+ begin
+  Result := l_R As ImsTunableShapeClass;
+ end//l_R <> nil
+ else
  begin
   Result := TmsShapeClass.Create(Self);
   TmsNotRegisteredShapes.Instance.RegisterMC(Result);
  end;//Result = nil
+end;
+
+class function TmsShape.MC: ImsShapeClass;
+begin
+ Result := NRTMC;
 end;
 
 class function TmsShape.TMC: ImsTunableShapeClass;
