@@ -48,6 +48,7 @@ type
  end;//TmsDrawContext
 
  TAlphaColor = System.UITypes.TAlphaColor;
+ TAlphaColorRec = System.UITypes.TAlphaColorRec;
  TStrokeDash = FMX.Graphics.TStrokeDash;
 
  TmsColorRec = record

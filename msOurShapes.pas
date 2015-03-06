@@ -5,7 +5,7 @@ interface
 implementation
 
 uses
-  System.UITypes,
+  msInterfaces,
   msLine,
   msRectangle,
   msCircle,
@@ -110,7 +110,7 @@ begin
 
   TmsConnector.TMC;
   TmsGeneralization.TMC;
-  TmsRealization.TMC.SetStrokeThickness(2);
+  TmsRealization.TMC.SetStrokeThickness(2).SetStrokeDash(TStrokeDash.Dash);
   TmsAssociation.TMC;
   TmsDependency.TMC.SetStrokeThickness(1.5);
 
