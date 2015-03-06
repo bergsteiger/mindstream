@@ -68,7 +68,7 @@ begin
   TmsTriangle.TMC.SetFillColor(TAlphaColorRec.Green);
   TmsDashDotLine.TMC;
   TmsDashLine.TMC;
-  TmsDotLine.TMC;
+  TmsDotLine.TMC.SetStrokeDash(TStrokeDash.Dot);
   TmsLineWithArrow.TMC;
   TmsTriangleDirectionRight.TMC.SetFillColor(TAlphaColorRec.Coral);
 
