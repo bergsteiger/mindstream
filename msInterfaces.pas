@@ -19,6 +19,8 @@ type
 
  ImsShape = interface;
 
+ TPointF = System.Types.TPointF;
+
  ImsShapeByPt = interface
   function ShapeByPt(const aPoint: TPointF): ImsShape;
  end;//ImsShapeByPt
@@ -132,6 +134,8 @@ type
    rShapesController: ImsShapesController;
    constructor Create(const aStartPoint: TPointF; const aDelta: TPointF; const aShapesController: ImsShapesController);
  end;//TmsMoveContext
+
+ TRectF = System.Types.TRectF;
 
  ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
