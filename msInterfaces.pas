@@ -61,6 +61,12 @@ type
   class operator Implicit(aValue: Pixel): TmsPixelRec;
  end;//TmsPixelRec
 
+ TmsStrokeDash = record
+  rIsSet : Boolean;
+  rValue : TStrokeDash;
+  class operator Implicit(aValue: TStrokeDash): TmsStrokeDash;
+ end;//TmsPixelRec
+
  TmsDrawOptionsContext = record
   public
    rFillColor: TAlphaColor;
@@ -323,6 +329,14 @@ end;
 // TmsPixelRec
 
 class operator TmsPixelRec.Implicit(aValue: Pixel): TmsPixelRec;
+begin
+ Result.rIsSet := true;
+ Result.rValue := aValue;
+end;
+
+// TmsStrokeDash
+
+class operator TmsStrokeDash.Implicit(aValue: TStrokeDash): TmsStrokeDash;
 begin
  Result.rIsSet := true;
  Result.rValue := aValue;
