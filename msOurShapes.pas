@@ -87,7 +87,7 @@ begin
   TmsShapeRemover.TMC;
 
   // SVG Shapes
-  TmsSVGShape.MC;
+  TmsSVGShape.NRTMC;
   TmsFolder.TMC;
 
   TmsCircle.Specify('GreenCircle').SetFillColor(TAlphaColorRec.Green);
