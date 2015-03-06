@@ -17,7 +17,6 @@ type
   class function InitialWidth: Single; override;
   class function InitialHeight: Single; override;
   function Text: string; virtual;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsTextShape
 
@@ -61,11 +60,6 @@ end;
 function TmsTextShape.Text: string;
 begin
  Result := 'ABC';
-end;
-
-procedure TmsTextShape.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- inherited;
 end;
 
 end.

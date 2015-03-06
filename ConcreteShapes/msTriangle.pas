@@ -17,7 +17,6 @@ type
  protected
   class function InitialHeight: Single; override;
   function GetPolygon: TPolygon; override;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  public
   class function IsForToolbar: Boolean; override;
  end;//TmsTriangle
@@ -47,11 +46,6 @@ begin
  Result[2] := TPointF.Create(StartPoint.X,
                              StartPoint.Y - ShapeClass.InitialHeight / 2);
  Result[3] := Result[0];
-end;
-
-procedure TmsTriangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- inherited;
 end;
 
 end.
