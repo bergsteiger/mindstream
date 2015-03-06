@@ -51,7 +51,8 @@ uses
   msLibrary,
   msUsecase,
   msTrivial,
-  msArrowHead
+  msArrowHead,
+  msSVGShape
   ;
 
 // Важно !!!
@@ -86,6 +87,7 @@ begin
   TmsShapeRemover.TMC;
 
   // SVG Shapes
+  TmsSVGShape.MC;
   TmsFolder.TMC;
 
   TmsCircle.Specify('GreenCircle').SetFillColor(TAlphaColorRec.Green);
