@@ -13,7 +13,6 @@ uses
   msUseCaseLikeEllipse,
   msTriangle,
   msDashDotLine,
-  msDashLine,
   msLineWithArrow,
   msTriangleDirectionRight,
   msRegisteredShapes,
@@ -66,7 +65,7 @@ begin
   TmsUseCaseLikeEllipse.TMC.SetFillColor(TAlphaColorRec.Yellow);
   TmsTriangle.TMC.SetFillColor(TAlphaColorRec.Green);
   TmsDashDotLine.TMC.SetStrokeDash(TStrokeDash.DashDot);
-  TmsDashLine.TMC.SetStrokeDash(TStrokeDash.Dash);
+  TmsLine.Specify('DashLine').SetStrokeDash(TStrokeDash.Dash);
   TmsLine.Specify('DotLine').SetStrokeDash(TStrokeDash.Dot);
   TmsLineWithArrow.TMC;
   TmsTriangleDirectionRight.TMC.SetFillColor(TAlphaColorRec.Coral);
