@@ -98,7 +98,6 @@ type
  RmsShape = class of TmsShape;
 
  MCmsShape = ImsShapeClass;
-// MCmsShape = RmsShape;
 
 implementation
 
