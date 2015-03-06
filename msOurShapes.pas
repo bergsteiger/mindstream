@@ -67,7 +67,7 @@ begin
   TmsUseCaseLikeEllipse.TMC.SetFillColor(TAlphaColorRec.Yellow);
   TmsTriangle.TMC.SetFillColor(TAlphaColorRec.Green);
   TmsDashDotLine.TMC;
-  TmsDashLine.TMC;
+  TmsDashLine.TMC.SetStrokeDash(TStrokeDash.Dash);
   TmsDotLine.TMC.SetStrokeDash(TStrokeDash.Dot);
   TmsLineWithArrow.TMC;
   TmsTriangleDirectionRight.TMC.SetFillColor(TAlphaColorRec.Coral);
