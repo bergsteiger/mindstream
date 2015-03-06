@@ -48,6 +48,7 @@ type
  end;//TmsDrawContext
 
  TAlphaColor = System.UITypes.TAlphaColor;
+ TStrokeDash = FMX.Graphics.TStrokeDash;
 
  TmsColorRec = record
   rIsSet : Boolean;
@@ -195,6 +196,7 @@ type
   function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
   function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
   function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
+  function SetStrokeDash(aValue: TStrokeDash): ImsTunableShapeClass;
  end;//ImsShapeClassTuner
 
  ImsShapeClass = interface
@@ -220,6 +222,7 @@ type
   function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
   function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
   function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
+  function SetStrokeDash(aValue: TStrokeDash): ImsTunableShapeClass;
  end;//ImsTunableShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)

@@ -21,6 +21,7 @@ type
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
   function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
+  function SetStrokeDash(aValue: TStrokeDash): ImsTunableShapeClass;
   function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
  end;//TmsShapeClassPrim
 
@@ -68,6 +69,12 @@ function TmsShapeClassPrim.SetStrokeThickness(aValue: Pixel): ImsTunableShapeCla
 begin
  Result := Self.AsTMC;
  f_StrokeThickness := aValue;
+end;
+
+function TmsShapeClassPrim.SetStrokeDash(aValue: TStrokeDash): ImsTunableShapeClass;
+begin
+ Result := Self.AsTMC;
+ f_StrokeDash := aValue;
 end;
 
 function TmsShapeClassPrim.SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
