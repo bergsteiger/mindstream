@@ -131,7 +131,7 @@ begin
  if l_V.rIsSet then
   Result := l_V.rValue
  else
-  Result := RmsShapeFriend(f_ShapeClass).InitialHeight;
+  Result := RmsShapeFriend(f_ShapeClass).GetInitialHeight;
 end;
 
 procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
