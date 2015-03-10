@@ -117,33 +117,19 @@ var
  l_PMC : ImsShapeClass;
  l_V : TmsPixelRec;
 begin
- l_PMC := Self.ParentMC;
- if (l_PMC = nil) then
-  l_V.rIsSet := false
- else
-  l_V := l_PMC.InitialHeight;
+ l_V := f_InitialHeight;
  if l_V.rIsSet then
- begin
-  Result := l_V.rValue;
-  l_V := f_InitialHeight;
-  if l_V.rIsSet then
-   Result := l_V.rValue;
- end//l_V.rIsSet
+  Result := l_V.rValue
  else
  begin
-  l_V := f_InitialHeight;
-  if l_V.rIsSet then
-   Result := l_V.rValue
-  else
+  l_PMC := Self.ParentMC;
+  if (l_PMC <> nil) then
   begin
-   if (l_PMC <> nil) then
-   begin
-    Assert(l_PMC.CSHack.InheritsFrom(TmsShape));
-    Result := RmsShapeFriend(l_PMC.CSHack).GetInitialHeight;
-   end//l_PMC <> nil
-   else
-    Result := 1.0;
-  end;//l_V.rIsSet
+   Assert(l_PMC.CSHack.InheritsFrom(TmsShape));
+   Result := RmsShapeFriend(l_PMC.CSHack).GetInitialHeight;
+  end//l_PMC <> nil
+  else
+   Result := 1.0;
  end;//l_V.rIsSet
 end;
 
