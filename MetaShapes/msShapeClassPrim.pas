@@ -24,6 +24,7 @@ type
   function SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;
   function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
   function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
+  function SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
  end;//TmsShapeClassPrim
 
 implementation
@@ -87,6 +88,11 @@ function TmsShapeClassPrim.SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
 begin
  Result := Self;
  f_InitialHeight := aValue;
+end;
+
+function TmsShapeClassPrim.SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
+begin
+ Result := Self.SetInitialHeight(Self.ParentMC.InitialHeight * aValue);
 end;
 
 end.
