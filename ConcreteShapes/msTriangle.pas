@@ -15,7 +15,6 @@ uses
 type
  TmsTriangle = class(TmsPolygonShape)
  protected
-  class function GetInitialHeight: Pixel; override;
   function GetPolygon: TPolygon; override;
  public
   class function IsForToolbar: Boolean; override;
@@ -25,11 +24,6 @@ implementation
 
 uses
  System.Math;
-
-class function TmsTriangle.GetInitialHeight: Pixel;
-begin
- Result := 100;
-end;
 
 class function TmsTriangle.IsForToolbar: Boolean;
 begin

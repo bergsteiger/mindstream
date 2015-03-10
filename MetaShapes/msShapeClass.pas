@@ -33,7 +33,7 @@ type
   function Stereotype: String; override;
   function ParentMC: ImsShapeClass; override;
   function AsMC: ImsShapeClass; override;
-  function InitialHeight: Pixel;
+  function CSHack: TClass; override;
  public
   class function Create(aShapeClass: RmsShape): ImsShapeClassTuner;
  end;//TmsShapeClass
@@ -44,12 +44,6 @@ uses
  msShapeCreator,
  msRegisteredShapes
  ;
-
-type
- TmsShapeFriend = class(TmsShape)
- end;//TmsShapeFriend
-
- RmsShapeFriend = class of TmsShapeFriend;
 
 // TmsShapeClass
 
@@ -120,16 +114,10 @@ begin
  Result := Self;
 end;
 
-function TmsShapeClass.InitialHeight: Pixel;
-var
- l_V : TmsPixelRec;
+function TmsShapeClass.CSHack: TClass;
 begin
  Assert(f_ShapeClass <> nil);
- l_V := f_InitialHeight;
- if l_V.rIsSet then
-  Result := l_V.rValue
- else
-  Result := RmsShapeFriend(f_ShapeClass).GetInitialHeight;
+ Result := f_ShapeClass;
 end;
 
 procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);

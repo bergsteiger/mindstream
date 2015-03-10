@@ -27,13 +27,13 @@ type
   function Stereotype: String; override;
   function ParentMC: ImsShapeClass; override;
   function AsMC: ImsShapeClass; override;
+  function CSHack: TClass; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
-  function InitialHeight: Pixel;
  public
   class function Create(const aName : String; const aShapeClass: MCmsShape): ImsShapeClassTuner;
  end;//TmsProxyShapeClass
@@ -115,6 +115,11 @@ begin
  Result := Self;
 end;
 
+function TmsProxyShapeClass.CSHack: TClass;
+begin
+ Result := f_ShapeClass.CSHack;
+end;
+
 procedure TmsProxyShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
 begin
  Assert(f_ShapeClass <> nil);
@@ -151,18 +156,6 @@ function TmsProxyShapeClass.NullClick(const aHolder: ImsDiagrammsHolder): Boolea
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.NullClick(aHolder);
-end;
-
-function TmsProxyShapeClass.InitialHeight: Pixel;
-var
- l_V : TmsPixelRec;
-begin
- Assert(f_ShapeClass <> nil);
- l_V := f_InitialHeight;
- if l_V.rIsSet then
-  Result := l_V.rValue
- else
-  Result := f_ShapeClass.InitialHeight;
 end;
 
 end.

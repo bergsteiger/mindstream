@@ -18,6 +18,7 @@ type
   function ParentMC: ImsShapeClass; virtual;
   function AsMC: ImsShapeClass; virtual;
   function AsTuner: ImsShapeClassTuner;
+  function CSHack: TClass; virtual;
   function Stereotype: String; virtual;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
@@ -25,9 +26,14 @@ type
   function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
   function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
   function SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
+  function InitialHeight: Pixel;
  end;//TmsShapeClassPrim
 
 implementation
+
+uses
+ msShape
+ ;
 
 // TmsShapeClassPrim
 
@@ -46,6 +52,12 @@ end;
 function TmsShapeClassPrim.AsTuner: ImsShapeClassTuner;
 begin
  Result := Self;
+end;
+
+function TmsShapeClassPrim.CSHack: TClass;
+begin
+ Result := nil;
+ Assert(false, 'Не реализовано');
 end;
 
 function TmsShapeClassPrim.Stereotype: String;
@@ -93,6 +105,46 @@ end;
 function TmsShapeClassPrim.SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
 begin
  Result := Self.SetInitialHeight(Self.ParentMC.InitialHeight * aValue);
+end;
+
+type
+ TmsShapeFriend = class(TmsShape)
+ end;
+ RmsShapeFriend = class of TmsShapeFriend;
+
+function TmsShapeClassPrim.InitialHeight: Pixel;
+var
+ l_PMC : ImsShapeClass;
+ l_V : TmsPixelRec;
+begin
+ l_PMC := Self.ParentMC;
+ if (l_PMC = nil) then
+  l_V.rIsSet := false
+ else
+  l_V := l_PMC.InitialHeight;
+ if l_V.rIsSet then
+ begin
+  Result := l_V.rValue;
+  l_V := f_InitialHeight;
+  if l_V.rIsSet then
+   Result := l_V.rValue;
+ end//l_V.rIsSet
+ else
+ begin
+  l_V := f_InitialHeight;
+  if l_V.rIsSet then
+   Result := l_V.rValue
+  else
+  begin
+   if (l_PMC <> nil) then
+   begin
+    Assert(l_PMC.CSHack.InheritsFrom(TmsShape));
+    Result := RmsShapeFriend(l_PMC.CSHack).GetInitialHeight;
+   end//l_PMC <> nil
+   else
+    Result := 1.0;
+  end;//l_V.rIsSet
+ end;//l_V.rIsSet
 end;
 
 end.
