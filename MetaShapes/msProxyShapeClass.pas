@@ -26,7 +26,6 @@ type
   function Name: String;
   function Stereotype: String; override;
   function ParentMC: ImsShapeClass; override;
-  function AsTMC: ImsTunableShapeClass; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
@@ -108,11 +107,6 @@ end;
 function TmsProxyShapeClass.ParentMC: ImsShapeClass;
 begin
  Result := f_ShapeClass;
-end;
-
-function TmsProxyShapeClass.AsTMC: ImsTunableShapeClass;
-begin
- Result := Self;
 end;
 
 procedure TmsProxyShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
