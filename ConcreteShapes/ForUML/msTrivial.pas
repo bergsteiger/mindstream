@@ -13,7 +13,6 @@ type
  protected
   class function InitialHeight: Pixel; override;
   procedure GetStereotypeRect(var aRect: TRectF); override;
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsTrivial
 
 implementation
@@ -34,11 +33,6 @@ end;
 procedure TmsTrivial.GetStereotypeRect(var aRect: TRectF);
 begin
  aRect := DrawBounds;
-end;
-
-procedure TmsTrivial.DoDrawTo(const aCtx: TmsDrawContext);
-begin
- inherited;
 end;
 
 end.

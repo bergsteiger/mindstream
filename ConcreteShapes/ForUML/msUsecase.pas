@@ -12,7 +12,6 @@ type
  TmsUsecase = class(TmsUseCaseLikeEllipse)
  protected
   procedure GetStereotypeRect(var aRect: TRectF); override;
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsUsecase
 
 implementation
@@ -28,11 +27,6 @@ procedure TmsUsecase.GetStereotypeRect(var aRect: TRectF);
 begin
  aRect := DrawBounds;
  aRect := TRectF.Create(aRect.Left - 20, aRect.Bottom, aRect.Right + 20, aRect.Bottom + 20);
-end;
-
-procedure TmsUsecase.DoDrawTo(const aCtx: TmsDrawContext);
-begin
- inherited;
 end;
 
 end.
