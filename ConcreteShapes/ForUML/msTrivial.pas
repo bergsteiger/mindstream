@@ -11,7 +11,7 @@ uses
 type
  TmsTrivial = class(TmsRectangle)
  protected
-  class function InitialHeight: Single; override;
+  class function InitialHeight: Pixel; override;
   procedure GetStereotypeRect(var aRect: TRectF); override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsTrivial
@@ -26,7 +26,7 @@ uses
 
 // TmsTrivial
 
-class function TmsTrivial.InitialHeight: Single;
+class function TmsTrivial.InitialHeight: Pixel;
 begin
  Result := inherited /3 * 2;
 end;

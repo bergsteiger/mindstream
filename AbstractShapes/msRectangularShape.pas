@@ -18,7 +18,7 @@ type
 
   class function CornerRadius: Single; virtual; abstract;
   class function InitialWidth: Single; virtual; abstract;
-  class function InitialHeight: Single; virtual; abstract;
+  class function InitialHeight: Pixel; virtual; abstract;
  public
   function ContainsPt(const aPoint: TPointF): Boolean; override;
  end; // TmsRectangularShape

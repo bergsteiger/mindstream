@@ -15,7 +15,7 @@ type
  TmsTextShape = class(TmsRectangularShape)
  protected
   class function InitialWidth: Single; override;
-  class function InitialHeight: Single; override;
+  class function InitialHeight: Pixel; override;
   function Text: string; virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsTextShape
@@ -47,7 +47,7 @@ begin
  end;//aCtx.rMoving
 end;
 
-class function TmsTextShape.InitialHeight: Single;
+class function TmsTextShape.InitialHeight: Pixel;
 begin
  Result := 14
 end;

@@ -10,7 +10,7 @@ uses
 type
  TmsArrowHead = class(TmsPolylineShape)
  protected
-  class function InitialHeight: Single; override;
+  class function InitialHeight: Pixel; override;
   function GetPolygon: TPolygon; override;
  public
   class function IsForToolbar: Boolean; override;
@@ -37,7 +37,7 @@ begin
  //Result[3] := ClosePolygon;
 end;
 
-class function TmsArrowHead.InitialHeight: Single;
+class function TmsArrowHead.InitialHeight: Pixel;
 begin
  Result := 20;
 end;

@@ -12,14 +12,14 @@ type
  TmsBlackRectangle = class(TmsRectangle)
  protected
   class function InitialWidth: Single; override;
-  class function InitialHeight: Single; override;
+  class function InitialHeight: Pixel; override;
  end;//TmsBlackRectangle
 
 implementation
 
 { TmsBlackRectangle }
 
-class function TmsBlackRectangle.InitialHeight: Single;
+class function TmsBlackRectangle.InitialHeight: Pixel;
 begin
  Result := 100;
 end;
