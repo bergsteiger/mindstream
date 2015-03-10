@@ -26,6 +26,7 @@ type
   function Name: String;
   function Stereotype: String; override;
   function ParentMC: ImsShapeClass; override;
+  function AsMC: ImsShapeClass; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
@@ -34,7 +35,7 @@ type
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function InitialHeight: Pixel;
  public
-  class function Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass;
+  class function Create(const aName : String; const aShapeClass: MCmsShape): ImsShapeClassTuner;
  end;//TmsProxyShapeClass
 
 implementation
@@ -54,7 +55,7 @@ begin
  f_Name := 'Tms' + f_Stereotype;
 end;
 
-class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass;
+class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: MCmsShape): ImsShapeClassTuner;
 begin
  Result := CreateInner(aName, aShapeClass);
 end;
@@ -107,6 +108,11 @@ end;
 function TmsProxyShapeClass.ParentMC: ImsShapeClass;
 begin
  Result := f_ShapeClass;
+end;
+
+function TmsProxyShapeClass.AsMC: ImsShapeClass;
+begin
+ Result := Self;
 end;
 
 procedure TmsProxyShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);

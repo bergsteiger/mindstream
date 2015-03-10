@@ -87,11 +87,11 @@ type
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);
   class function ButtonShape: ImsShape; virtual;
-  class function NRTMC: ImsTunableShapeClass;
+  class function NRTMC: ImsShapeClassTuner;
   class function MC: ImsShapeClass;
-  class function TMC: ImsTunableShapeClass;
+  class function TMC: ImsShapeClassTuner;
   class function NamedMC(const aName: String): ImsShapeClass;
-  class function Specify(const aName: String): ImsTunableShapeClass;
+  class function Specify(const aName: String): ImsShapeClassTuner;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
@@ -343,7 +343,7 @@ begin
  Assert(false, 'Не реализовано');
 end;
 
-class function TmsShape.NRTMC: ImsTunableShapeClass;
+class function TmsShape.NRTMC: ImsShapeClassTuner;
 var
  l_R : ImsShapeClass;
 begin
@@ -352,27 +352,27 @@ begin
   l_R := TmsNotRegisteredShapes.Instance.ByName(Self.ClassName);
  if (l_R <> nil) then
  begin
-  Result := l_R As ImsTunableShapeClass;
+  Result := l_R As ImsShapeClassTuner;
  end//l_R <> nil
  else
  begin
   Result := TmsShapeClass.Create(Self);
-  TmsNotRegisteredShapes.Instance.RegisterMC(Result);
+  TmsNotRegisteredShapes.Instance.RegisterMC(Result.AsMC);
  end;//Result = nil
 end;
 
 class function TmsShape.MC: ImsShapeClass;
 begin
- Result := NRTMC;
+ Result := NRTMC.AsMC;
 end;
 
-class function TmsShape.TMC: ImsTunableShapeClass;
+class function TmsShape.TMC: ImsShapeClassTuner;
 begin
- Result := TmsRegisteredShapes.Instance.ByName(Self.ClassName) As ImsTunableShapeClass;
+ Result := TmsRegisteredShapes.Instance.ByName(Self.ClassName) As ImsShapeClassTuner;
  if (Result = nil) then
  begin
   Result := TmsShapeClass.Create(Self);
-  TmsRegisteredShapes.Instance.RegisterMC(Result);
+  TmsRegisteredShapes.Instance.RegisterMC(Result.AsMC);
  end;//Result = nil
 end;
 
@@ -384,10 +384,10 @@ begin
  Assert(Result <> nil, 'Стереотип ' + aName + ' не зарегистрирован');
 end;
 
-class function TmsShape.Specify(const aName: String): ImsTunableShapeClass;
+class function TmsShape.Specify(const aName: String): ImsShapeClassTuner;
 begin
  Result := TmsProxyShapeClass.Create(aName, Self.MC);
- TmsRegisteredShapes.Instance.RegisterMC(Result);
+ TmsRegisteredShapes.Instance.RegisterMC(Result.AsMC);
 end;
 
 end.

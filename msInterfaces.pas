@@ -198,6 +198,8 @@ type
  ImsTunableShapeClass = interface;
 
  ImsShapeClassTuner = interface
+ ['{FB853539-6756-44B2-8E62-CC3BF0E01BB1}']
+  function AsMC: ImsShapeClass;
   function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
   function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
   function SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;

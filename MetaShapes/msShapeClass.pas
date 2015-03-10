@@ -32,9 +32,10 @@ type
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function Stereotype: String; override;
   function ParentMC: ImsShapeClass; override;
+  function AsMC: ImsShapeClass; override;
   function InitialHeight: Pixel;
  public
-  class function Create(aShapeClass: RmsShape): ImsTunableShapeClass;
+  class function Create(aShapeClass: RmsShape): ImsShapeClassTuner;
  end;//TmsShapeClass
 
 implementation
@@ -58,7 +59,7 @@ begin
  f_ShapeClass := aShapeClass;
 end;
 
-class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsTunableShapeClass;
+class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClassTuner;
 begin
 (* Result := TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName) As ImsTunableShapeClass;
  if (Result = nil) then*)
@@ -114,6 +115,11 @@ begin
    f_ParentMC := nil;
  end;//f_ParentMC = nil
  Result := f_ParentMC;
+end;
+
+function TmsShapeClass.AsMC: ImsShapeClass;
+begin
+ Result := Self;
 end;
 
 function TmsShapeClass.InitialHeight: Pixel;

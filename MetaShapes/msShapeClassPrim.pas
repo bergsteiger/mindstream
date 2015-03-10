@@ -16,6 +16,7 @@ type
   f_StrokeDash : TmsStrokeDash;
  protected
   function ParentMC: ImsShapeClass; virtual;
+  function AsMC: ImsShapeClass; virtual;
   function Stereotype: String; virtual;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
@@ -29,6 +30,12 @@ implementation
 // TmsShapeClassPrim
 
 function TmsShapeClassPrim.ParentMC: ImsShapeClass;
+begin
+ Result := nil;
+ Assert(false, 'Не реализовано');
+end;
+
+function TmsShapeClassPrim.AsMC: ImsShapeClass;
 begin
  Result := nil;
  Assert(false, 'Не реализовано');
