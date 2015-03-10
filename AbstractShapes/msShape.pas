@@ -33,7 +33,6 @@ type
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); virtual;
   procedure SetStartPoint(const aStartPoint: TPointF); virtual;
  protected
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   function IsNeedsSecondClick : Boolean; virtual;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; virtual;
@@ -195,11 +194,6 @@ begin
  Result := false;
 end;
 
-procedure TmsShape.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- // - тут ничего не делаем
-end;
-
 function TmsShape.pm_GetStartPoint: TPointF;
 begin
  Result := TPointF.Create(0, 0);
@@ -222,7 +216,6 @@ end;
 function TmsShape.DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
 begin
  Result := TmsDrawOptionsContext.Create(aCtx);
- TransformDrawOptionsContext(Result);
  Self.ShapeClass.TransformDrawOptionsContext(Result);
 end;
 
