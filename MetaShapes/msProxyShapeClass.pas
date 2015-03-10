@@ -11,7 +11,7 @@ uses
  ;
 
 type
- TmsProxyShapeClass = class(TmsShapeClassPrim, ImsShapeClass, ImsTunableShapeClass)
+ TmsProxyShapeClass = class(TmsShapeClassPrim, ImsShapeClass)
  private
   f_ShapeClass : MCmsShape;
   f_Name : String;

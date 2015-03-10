@@ -195,10 +195,7 @@ type
    write pm_SetCurrentDiagramms;
  end;//ImsDiagrammsHolder
 
- ImsTunableShapeClass = interface;
-
  ImsShapeClassTuner = interface
- ['{FB853539-6756-44B2-8E62-CC3BF0E01BB1}']
   function AsMC: ImsShapeClass;
   function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
   function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
@@ -222,15 +219,8 @@ type
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function InitialHeight: Pixel;
   function ParentMC: ImsShapeClass;
+  function AsTuner: ImsShapeClassTuner;
  end;//ImsShapeClass
-
- ImsTunableShapeClass = interface(ImsShapeClass)
- ['{C74A48CA-3D30-4778-936A-470EEAA1BA2F}']
-  function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
-  function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
-  function SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;
-  function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
- end;//ImsTunableShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']

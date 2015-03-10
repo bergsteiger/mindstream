@@ -12,7 +12,7 @@ uses
  ;
 
 type
- TmsShapeClass = class(TmsShapeClassPrim, ImsShapeClass, ImsTunableShapeClass)
+ TmsShapeClass = class(TmsShapeClassPrim, ImsShapeClass)
  private
   f_ShapeClass : RmsShape;
   f_ParentMC : ImsShapeClass;
@@ -61,9 +61,7 @@ end;
 
 class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClassTuner;
 begin
-(* Result := TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName) As ImsTunableShapeClass;
- if (Result = nil) then*)
-  Result := CreateInner(aShapeClass);
+ Result := CreateInner(aShapeClass);
  Assert(Result <> nil);
 end;
 

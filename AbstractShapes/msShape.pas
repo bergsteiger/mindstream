@@ -352,7 +352,7 @@ begin
   l_R := TmsNotRegisteredShapes.Instance.ByName(Self.ClassName);
  if (l_R <> nil) then
  begin
-  Result := l_R As ImsShapeClassTuner;
+  Result := l_R.AsTuner;
  end//l_R <> nil
  else
  begin
@@ -367,13 +367,17 @@ begin
 end;
 
 class function TmsShape.TMC: ImsShapeClassTuner;
+var
+ l_MC : ImsShapeClass;
 begin
- Result := TmsRegisteredShapes.Instance.ByName(Self.ClassName) As ImsShapeClassTuner;
- if (Result = nil) then
+ l_MC := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
+ if (l_MC <> nil) then
+  Result := l_MC.AsTuner
+ else
  begin
   Result := TmsShapeClass.Create(Self);
   TmsRegisteredShapes.Instance.RegisterMC(Result.AsMC);
- end;//Result = nil
+ end;//l_MC <> nil
 end;
 
 class function TmsShape.NamedMC(const aName: String): ImsShapeClass;
