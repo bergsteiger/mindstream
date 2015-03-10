@@ -124,12 +124,12 @@ begin
  begin
   l_PMC := Self.ParentMC;
   if (l_PMC <> nil) then
-  begin
-   Assert(l_PMC.CSHack.InheritsFrom(TmsShape));
-   Result := RmsShapeFriend(l_PMC.CSHack).GetInitialHeight;
-  end//l_PMC <> nil
+   Result := l_PMC.InitialHeight
   else
-   Result := 1.0;
+  begin
+   Assert(Self.CSHack.InheritsFrom(TmsShape));
+   Result := RmsShapeFriend(Self.CSHack).GetInitialHeight;
+  end;//l_PMC <> nil
  end;//l_V.rIsSet
 end;
 
