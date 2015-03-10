@@ -125,7 +125,7 @@ begin
 
   TmsUsecase.Specify('UsecaseRealization').SetFillColor(TAlphaColorRec.Lightgreen);
 
-  TmsTrivial.TMC;
+  TmsTrivial.TMC.SetInitialHeightScale( 1 / 3 * 2);
 
   TmsLibrary.Specify('Layer').SetFillColor(TAlphaColorRec.Lightgray);
   TmsTrivial.Specify('Typedef').SetFillColor(TAlphaColorRec.Gray);
