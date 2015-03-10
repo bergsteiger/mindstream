@@ -18,7 +18,7 @@ type
 
   class function CornerRadius: Single; virtual; abstract;
   class function InitialWidth: Single; virtual; abstract;
-  class function InitialHeight: Pixel; virtual; abstract;
+  class function InitialHeight: Pixel; override;
  public
   function ContainsPt(const aPoint: TPointF): Boolean; override;
  end; // TmsRectangularShape
@@ -30,6 +30,12 @@ implementation
 function TmsRectangularShape.ContainsPt(const aPoint: TPointF): Boolean;
 begin
  Result := DrawBounds.Contains(aPoint);
+end;
+
+class function TmsRectangularShape.InitialHeight: Pixel;
+begin
+ Result := 100;
+ Assert(false, 'Не реализовано');
 end;
 
 function TmsRectangularShape.GetDrawBounds: TRectF;
