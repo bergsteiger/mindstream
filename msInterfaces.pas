@@ -177,7 +177,6 @@ type
  TmsJSONUnMarshal = TJSONUnMarshal;
 
  ImsDiagrammsHolder = interface
- ['{611ECC2D-3D5B-4297-8A2D-9154D4CF17E7}']
   procedure UpToParent;
   // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
   procedure SwapParents;
@@ -243,7 +242,6 @@ type
  end;//ImsDiagramm
 
  ImsDiagramms = interface(ImsDiagrammsList)
- ['{819BEEBA-97BB-48F1-906E-107E67706D19}']
   procedure Serialize;
   procedure DeSerialize;
  end;//ImsDiagramms
