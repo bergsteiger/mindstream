@@ -35,7 +35,7 @@ end;
 class function TmsRectangularShape.GetInitialHeight: Pixel;
 begin
  Result := 100;
- Assert(false, 'Не реализовано');
+// Assert(false, 'Не реализовано');
 end;
 
 function TmsRectangularShape.GetDrawBounds: TRectF;

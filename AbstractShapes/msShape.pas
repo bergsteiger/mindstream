@@ -168,8 +168,8 @@ end;
 
 class function TmsShape.GetInitialHeight: Pixel;
 begin
- Result := 0;
- Assert(false, 'Не реализовано: ' + ClassName);
+ Result := 1.0;
+ //Assert(false, 'Не реализовано: ' + ClassName);
 end;
 
 function TmsShape.Stereotype: String;

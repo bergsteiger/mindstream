@@ -18,7 +18,6 @@ type
   function ParentMC: ImsShapeClass; virtual;
   function AsMC: ImsShapeClass; virtual;
   function AsTuner: ImsShapeClassTuner;
-  function CSHack: TClass; virtual;
   function Stereotype: String; virtual;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
@@ -52,12 +51,6 @@ end;
 function TmsShapeClassPrim.AsTuner: ImsShapeClassTuner;
 begin
  Result := Self;
-end;
-
-function TmsShapeClassPrim.CSHack: TClass;
-begin
- Result := nil;
- Assert(false, 'Не реализовано');
 end;
 
 function TmsShapeClassPrim.Stereotype: String;
@@ -107,10 +100,10 @@ begin
  Result := Self.SetInitialHeight(Self.ParentMC.InitialHeight * aValue);
 end;
 
-type
+(*type
  TmsShapeFriend = class(TmsShape)
  end;
- RmsShapeFriend = class of TmsShapeFriend;
+ RmsShapeFriend = class of TmsShapeFriend;*)
 
 function TmsShapeClassPrim.InitialHeight: Pixel;
 var
@@ -127,8 +120,9 @@ begin
    Result := l_PMC.InitialHeight
   else
   begin
-   Assert(Self.CSHack.InheritsFrom(TmsShape));
-   Result := RmsShapeFriend(Self.CSHack).GetInitialHeight;
+   Assert(false);
+(*   Assert(Self.CSHack.InheritsFrom(TmsShape));
+   Result := RmsShapeFriend(Self.CSHack).GetInitialHeight;*)
   end;//l_PMC <> nil
  end;//l_V.rIsSet
 end;

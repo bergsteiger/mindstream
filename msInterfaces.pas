@@ -220,7 +220,6 @@ type
   function InitialHeight: Pixel;
   function ParentMC: ImsShapeClass;
   function AsTuner: ImsShapeClassTuner;
-  function CSHack: TClass;
  end;//ImsShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)

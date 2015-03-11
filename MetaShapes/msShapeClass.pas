@@ -33,7 +33,6 @@ type
   function Stereotype: String; override;
   function ParentMC: ImsShapeClass; override;
   function AsMC: ImsShapeClass; override;
-  function CSHack: TClass; override;
  public
   class function Create(aShapeClass: RmsShape): ImsShapeClassTuner;
  end;//TmsShapeClass
@@ -47,10 +46,16 @@ uses
 
 // TmsShapeClass
 
+type
+ TmsShapeFriend = class(TmsShape)
+ end;
+ RmsShapeFriend = class of TmsShapeFriend;
+
 constructor TmsShapeClass.CreateInner(aShapeClass: RmsShape);
 begin
  inherited Create;
  f_ShapeClass := aShapeClass;
+ SetInitialHeight(RmsShapeFriend(f_ShapeClass).GetInitialHeight);
 end;
 
 class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClassTuner;
@@ -112,12 +117,6 @@ end;
 function TmsShapeClass.AsMC: ImsShapeClass;
 begin
  Result := Self;
-end;
-
-function TmsShapeClass.CSHack: TClass;
-begin
- Assert(f_ShapeClass <> nil);
- Result := f_ShapeClass;
 end;
 
 procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
