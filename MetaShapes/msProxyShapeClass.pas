@@ -52,6 +52,7 @@ begin
  f_ShapeClass := aShapeClass;
  f_Stereotype := aName;
  f_Name := 'Tms' + f_Stereotype;
+ SetInitialHeight(ParentMC.InitialHeight);
 end;
 
 class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: MCmsShape): ImsShapeClassTuner;

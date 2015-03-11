@@ -55,7 +55,10 @@ constructor TmsShapeClass.CreateInner(aShapeClass: RmsShape);
 begin
  inherited Create;
  f_ShapeClass := aShapeClass;
- SetInitialHeight(RmsShapeFriend(f_ShapeClass).GetInitialHeight);
+ if (ParentMC = nil) then
+  SetInitialHeight(RmsShapeFriend(f_ShapeClass).GetInitialHeight)
+ else
+  SetInitialHeight(ParentMC.InitialHeight);
 end;
 
 class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClassTuner;
