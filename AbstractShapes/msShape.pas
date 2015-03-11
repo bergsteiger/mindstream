@@ -168,7 +168,7 @@ end;
 
 class function TmsShape.GetInitialHeight: Pixel;
 begin
- Result := 1.0;
+ Result := 0.0;
  //Assert(false, 'Не реализовано: ' + ClassName);
 end;
 

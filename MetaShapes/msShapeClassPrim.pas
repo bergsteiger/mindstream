@@ -120,7 +120,8 @@ begin
    Result := l_PMC.InitialHeight
   else
   begin
-   Assert(false);
+   Result := 0.0;
+   //Assert(false);
 (*   Assert(Self.CSHack.InheritsFrom(TmsShape));
    Result := RmsShapeFriend(Self.CSHack).GetInitialHeight;*)
   end;//l_PMC <> nil
