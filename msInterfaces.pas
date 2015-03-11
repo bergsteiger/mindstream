@@ -260,6 +260,10 @@ type
 
 implementation
 
+uses
+ Math
+ ;
+
 // TmsDrawContext
 
 constructor TmsDrawContext.Create(const aCanvas : TCanvas);
@@ -329,8 +333,13 @@ end;
 
 class operator TmsPixelRec.Implicit(aValue: Pixel): TmsPixelRec;
 begin
- Result.rIsSet := true;
- Result.rValue := aValue;
+ if IsZero(aValue) OR (aValue < 0) then
+  Result.rIsSet := false
+ else
+ begin
+  Result.rIsSet := true;
+  Result.rValue := aValue;
+ end;//IsZero(aValue) OR (aValue < 0)
 end;
 
 // TmsStrokeDash
