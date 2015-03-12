@@ -39,6 +39,7 @@ type
   f_CurrentDiagramm : ImsDiagramm;
   f_DiagrammStack: TmsDiagrammStack;
   f_Delta: TPointF;
+  f_Holder: ImsDiagrammsHolder;
   procedure cbDiagrammChange(Sender: TObject);
   procedure btAddDiagrammClick(Sender: TObject);
   procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
@@ -398,6 +399,7 @@ begin
  f_CurrentDiagramm := nil;
  CurrentDiagramms := nil;
  f_DiagrammsRoot := nil;
+ f_Holder := nil;
  inherited;
 end;
 
@@ -456,7 +458,9 @@ end;
 
 function TmsDiagrammsController.As_ImsDiagrammsHolder: ImsDiagrammsHolder;
 begin
- Result := TmsDiagrammsHolder.Create(Self);
+ if (f_Holder = nil) then
+  f_Holder := TmsDiagrammsHolder.Create(Self);
+ Result := f_Holder;
 end;
 
 procedure TmsDiagrammsController.imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
