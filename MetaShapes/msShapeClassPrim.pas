@@ -12,6 +12,7 @@ type
  protected
   f_FillColor : TmsColorRec;
   f_InitialHeight : TmsPixelRec;
+  f_InitialWidth : TmsPixelRec;
   f_StrokeThickness : TmsPixelRec;
   f_StrokeDash : TmsStrokeDash;
  protected
@@ -26,6 +27,7 @@ type
   function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
   function SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
   function InitialHeight: Pixel;
+  function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
  end;//TmsShapeClassPrim
 
 implementation
@@ -93,6 +95,12 @@ function TmsShapeClassPrim.SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
 begin
  Result := Self;
  f_InitialHeight := aValue;
+end;
+
+function TmsShapeClassPrim.SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
+begin
+ Result := Self;
+ f_InitialWidth := aValue;
 end;
 
 function TmsShapeClassPrim.SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;

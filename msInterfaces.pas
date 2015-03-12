@@ -201,6 +201,7 @@ type
   function SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
   function SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;
   function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
+  function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
  end;//ImsShapeClassTuner
 
  ImsShapeClass = interface
