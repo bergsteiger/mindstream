@@ -92,7 +92,8 @@ begin
   TmsBlackRectangle.TMC.SetFillColor(TAlphaColorRec.Black).SetInitialHeight(100);
   TmsRemoveIcon.TMC.SetFillColor(TAlphaColorRec.Mediumvioletred);
   TmsMoveIcon.TMC.SetFillColor(TAlphaColorRec.Black);
-  TmsTextShape.TMC.SetFillColor(TAlphaColorRec.Black);
+  TmsTextShape.TMC.SetFillColor(TAlphaColorRec.Black).SetInitialHeight(14);
+  // - вообще говоря это НАДО вычислять из параметров шрифта. НО! ПОТОМ!
   TmsScrollShapeUp.TMC;
   TmsScrollShapeDown.TMC;
   TmsScrollShapeRight.TMC;
