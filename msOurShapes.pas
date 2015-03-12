@@ -89,7 +89,7 @@ begin
 
   TmsCircle.Specify('GreenCircle').SetFillColor(TAlphaColorRec.Green);
   TmsTriangle.Specify('BlackTriangle').SetFillColor(TAlphaColorRec.Black);
-  TmsBlackRectangle.TMC.SetFillColor(TAlphaColorRec.Black).SetInitialHeight(100).SetInitialWidth(15);
+  TmsRectangle.Specify('BlackRectangle').SetFillColor(TAlphaColorRec.Black).SetInitialHeight(100).SetInitialWidth(15);
   TmsRemoveIcon.TMC.SetFillColor(TAlphaColorRec.Mediumvioletred);
   TmsMoveIcon.TMC.SetFillColor(TAlphaColorRec.Black);
   TmsTextShape.TMC.SetFillColor(TAlphaColorRec.Black).SetInitialHeight(14);
