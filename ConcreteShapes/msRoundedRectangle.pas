@@ -17,10 +17,11 @@ type
  protected
   class function CornerRadius: Single; override;
   class function InitialWidth: Single; override;
-  class function GetInitialHeight: Pixel; override;
  end;//TmsRoundedRectangle
 
 implementation
+
+// TmsRoundedRectangle
 
 class function TmsRoundedRectangle.CornerRadius: Single;
 begin
@@ -30,11 +31,6 @@ end;
 class function TmsRoundedRectangle.InitialWidth: Single;
 begin
  Result := 90;
-end;
-
-class function TmsRoundedRectangle.GetInitialHeight: Pixel;
-begin
- Result := InitialWidth;
 end;
 
 end.
