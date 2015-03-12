@@ -83,7 +83,7 @@ type
   property StartPoint : TPointF
    read pm_GetStartPoint;
   class function IsTool: Boolean; virtual;
-  class function IsForToolbar: Boolean; virtual;
+  class function IsForToolbar: Boolean;
   class function IsNullClick: Boolean; virtual;
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);

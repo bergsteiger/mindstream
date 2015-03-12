@@ -16,8 +16,6 @@ type
  TmsTriangle = class(TmsPolygonShape)
  protected
   function GetPolygon: TPolygon; override;
- public
-  class function IsForToolbar: Boolean; override;
  end;//TmsTriangle
 
 implementation
@@ -25,10 +23,7 @@ implementation
 uses
  System.Math;
 
-class function TmsTriangle.IsForToolbar: Boolean;
-begin
- Result := True;
-end;
+// TmsTriangle
 
 function TmsTriangle.GetPolygon: TPolygon;
 begin
