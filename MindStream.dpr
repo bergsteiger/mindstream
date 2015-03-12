@@ -57,7 +57,6 @@ uses
   msNullClickShape in 'ShapeTools\msNullClickShape.pas',
   msPaletteShape in 'ShapeTools\PaletteShapes\msPaletteShape.pas',
   msShapeRemover in 'ShapeTools\msShapeRemover.pas',
-  msBlackRectangle in 'ConcreteShapes\msBlackRectangle.pas',
   msPolygonShape in 'AbstractShapes\msPolygonShape.pas',
   msMoverIcon in 'SpecialShapes\ForButtons\msMoverIcon.pas',
   msMoveIcon in 'SpecialShapes\msMoveIcon.pas',

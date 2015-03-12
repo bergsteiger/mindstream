@@ -16,7 +16,6 @@ uses
   msTriangleDirectionRight,
   msRegisteredShapes,
   msPolygonShape,
-  msBlackRectangle,
   msPointCircle,
   msFolder,
   msMover,
