@@ -11,14 +11,14 @@ uses
 type
  TmsBlackRectangle = class(TmsRectangle)
  protected
-  class function InitialWidth: Single; override;
+  class function GetInitialWidth: Single; override;
  end;//TmsBlackRectangle
 
 implementation
 
-{ TmsBlackRectangle }
+// TmsBlackRectangle
 
-class function TmsBlackRectangle.InitialWidth: Single;
+class function TmsBlackRectangle.GetInitialWidth: Single;
 begin
  Result := 15;
 end;

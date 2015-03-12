@@ -16,7 +16,7 @@ type
  TmsRoundedRectangle = class(TmsRectangle)
  protected
   class function CornerRadius: Single; override;
-  class function InitialWidth: Single; override;
+  class function GetInitialWidth: Single; override;
  end;//TmsRoundedRectangle
 
 implementation
@@ -28,7 +28,7 @@ begin
  Result := 10;
 end;
 
-class function TmsRoundedRectangle.InitialWidth: Single;
+class function TmsRoundedRectangle.GetInitialWidth: Single;
 begin
  Result := 90;
 end;

@@ -17,7 +17,6 @@ type
   function GetDrawBounds: TRectF; override;
 
   class function CornerRadius: Single; virtual; abstract;
-  class function InitialWidth: Single; virtual; abstract;
  public
   function ContainsPt(const aPoint: TPointF): Boolean; override;
  end; // TmsRectangularShape
@@ -35,9 +34,9 @@ function TmsRectangularShape.GetDrawBounds: TRectF;
 var
  l_StartPoint, l_FinalPoint : TPointF;
 begin
- l_StartPoint := TPointF.Create(StartPoint.X - InitialWidth / 2,
+ l_StartPoint := TPointF.Create(StartPoint.X - ShapeClass.InitialWidth / 2,
                                StartPoint.Y - ShapeClass.InitialHeight / 2);
- l_FinalPoint := TPointF.Create(StartPoint.X + InitialWidth / 2,
+ l_FinalPoint := TPointF.Create(StartPoint.X + ShapeClass.InitialWidth / 2,
                             StartPoint.Y + ShapeClass.InitialHeight / 2);
  Result := TRectF.Create(l_StartPoint, l_FinalPoint);
 end;
