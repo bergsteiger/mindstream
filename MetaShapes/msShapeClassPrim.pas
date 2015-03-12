@@ -27,6 +27,7 @@ type
   function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
   function SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
   function InitialHeight: Pixel;
+  function InitialWidth: Pixel;
   function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
  end;//TmsShapeClassPrim
 
@@ -122,12 +123,25 @@ begin
   if (l_PMC <> nil) then
    Result := l_PMC.InitialHeight
   else
-  begin
    Result := 0.0;
-   //Assert(false);
-(*   Assert(Self.CSHack.InheritsFrom(TmsShape));
-   Result := RmsShapeFriend(Self.CSHack).GetInitialHeight;*)
-  end;//l_PMC <> nil
+ end;//l_V.rIsSet
+end;
+
+function TmsShapeClassPrim.InitialWidth: Pixel;
+var
+ l_PMC : ImsShapeClass;
+ l_V : TmsPixelRec;
+begin
+ l_V := f_InitialWidth;
+ if l_V.rIsSet then
+  Result := l_V.rValue
+ else
+ begin
+  l_PMC := Self.ParentMC;
+  if (l_PMC <> nil) then
+   Result := l_PMC.InitialWidth
+  else
+   Result := 0.0;
  end;//l_V.rIsSet
 end;
 

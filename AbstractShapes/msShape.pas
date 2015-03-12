@@ -47,6 +47,7 @@ type
   function Stereotype: String;
  public
   class function GetInitialHeight: Pixel; virtual;
+  class function GetInitialWidth: Pixel; virtual;
  protected
   class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
  public
@@ -170,7 +171,11 @@ end;
 class function TmsShape.GetInitialHeight: Pixel;
 begin
  Result := 0.0;
- //Assert(false, 'Не реализовано: ' + ClassName);
+end;
+
+class function TmsShape.GetInitialWidth: Pixel;
+begin
+ Result := 0.0;
 end;
 
 function TmsShape.Stereotype: String;
