@@ -17,18 +17,12 @@ type
  protected
   class function CornerRadius: Single; override;
   class function InitialWidth: Single; override;
-  class function GetInitialHeight: Pixel; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsRectangle
 
 implementation
 
 // TmsRectangle
-
-class function TmsRectangle.GetInitialHeight: Pixel;
-begin
- Result := 90;
-end;
 
 class function TmsRectangle.InitialWidth: Single;
 begin

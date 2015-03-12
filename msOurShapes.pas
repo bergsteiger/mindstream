@@ -58,7 +58,7 @@ procedure RegisterOurShapes;
 begin
   // concrete shapes
   TmsLine.TMC;
-  TmsRectangle.TMC.SetFillColor(TAlphaColorRec.White);
+  TmsRectangle.TMC.SetFillColor(TAlphaColorRec.White).SetInitialHeight(90);
   TmsCircle.TMC.SetFillColor(TAlphaColorRec.Red);
   TmsRoundedRectangle.TMC.SetFillColor(TAlphaColorRec.Blue).SetInitialHeight(90);
   TmsUseCaseLikeEllipse.TMC.SetFillColor(TAlphaColorRec.Yellow);
