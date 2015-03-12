@@ -140,7 +140,7 @@ begin
   TmsAssociation.Specify('readonly');
   TmsAssociation.Specify('writeonly');
 
-  TmsArrowHead.TMC.SetStrokeThickness(1.5)
+  TmsArrowHead.TMC.SetStrokeThickness(1.5).SetInitialHeight(20);
 end;
 
 initialization
