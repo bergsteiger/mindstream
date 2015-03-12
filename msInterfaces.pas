@@ -177,7 +177,6 @@ type
  TmsJSONUnMarshal = TJSONUnMarshal;
 
  ImsDiagrammsHolder = interface
- ['{611ECC2D-3D5B-4297-8A2D-9154D4CF17E7}']
   procedure UpToParent;
   // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
   procedure SwapParents;
@@ -195,13 +194,13 @@ type
    write pm_SetCurrentDiagramms;
  end;//ImsDiagrammsHolder
 
- ImsTunableShapeClass = interface;
-
  ImsShapeClassTuner = interface
-  function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
-  function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
-  function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
-  function SetStrokeDash(aValue: TStrokeDash): ImsTunableShapeClass;
+  function AsMC: ImsShapeClass;
+  function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
+  function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
+  function SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
+  function SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;
+  function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
  end;//ImsShapeClassTuner
 
  ImsShapeClass = interface
@@ -220,15 +219,8 @@ type
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function InitialHeight: Pixel;
   function ParentMC: ImsShapeClass;
+  function AsTuner: ImsShapeClassTuner;
  end;//ImsShapeClass
-
- ImsTunableShapeClass = interface(ImsShapeClass)
- ['{C74A48CA-3D30-4778-936A-470EEAA1BA2F}']
-  function SetFillColor(aColor: TAlphaColor): ImsTunableShapeClass;
-  function SetInitialHeight(aValue: Pixel): ImsTunableShapeClass;
-  function SetStrokeThickness(aValue: Pixel): ImsTunableShapeClass;
-  function SetStrokeDash(aValue: TStrokeDash): ImsTunableShapeClass;
- end;//ImsTunableShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)
  ['{59F2D068-F06F-4378-9ED4-888DFE8DFAF2}']
@@ -251,7 +243,6 @@ type
  end;//ImsDiagramm
 
  ImsDiagramms = interface(ImsDiagrammsList)
- ['{819BEEBA-97BB-48F1-906E-107E67706D19}']
   procedure Serialize;
   procedure DeSerialize;
  end;//ImsDiagramms
@@ -268,6 +259,10 @@ type
  end;//ImsDiagrammsController
 
 implementation
+
+uses
+ Math
+ ;
 
 // TmsDrawContext
 
@@ -338,8 +333,13 @@ end;
 
 class operator TmsPixelRec.Implicit(aValue: Pixel): TmsPixelRec;
 begin
- Result.rIsSet := true;
- Result.rValue := aValue;
+ if IsZero(aValue) OR (aValue < 0) then
+  Result.rIsSet := false
+ else
+ begin
+  Result.rIsSet := true;
+  Result.rValue := aValue;
+ end;//IsZero(aValue) OR (aValue < 0)
 end;
 
 // TmsStrokeDash

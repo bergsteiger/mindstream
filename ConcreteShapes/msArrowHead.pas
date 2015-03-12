@@ -10,7 +10,7 @@ uses
 type
  TmsArrowHead = class(TmsPolylineShape)
  protected
-  class function InitialHeight: Single; override;
+  class function GetInitialHeight: Pixel; override;
   function GetPolygon: TPolygon; override;
  public
   class function IsForToolbar: Boolean; override;
@@ -28,16 +28,16 @@ uses
 function TmsArrowHead.GetPolygon: TPolygon;
 begin
  SetLength(Result, 3);
- Result[0] := TPointF.Create(StartPoint.X - InitialHeight / 2,
-                        StartPoint.Y + InitialHeight / 2);
- Result[1] := TPointF.Create(StartPoint.X + InitialHeight / 2,
+ Result[0] := TPointF.Create(StartPoint.X - ShapeClass.InitialHeight / 2,
+                        StartPoint.Y + ShapeClass.InitialHeight / 2);
+ Result[1] := TPointF.Create(StartPoint.X + ShapeClass.InitialHeight / 2,
                         StartPoint.Y);
- Result[2] := TPointF.Create(StartPoint.X - InitialHeight / 2,
-                        StartPoint.Y - InitialHeight / 2);
+ Result[2] := TPointF.Create(StartPoint.X - ShapeClass.InitialHeight / 2,
+                        StartPoint.Y - ShapeClass.InitialHeight / 2);
  //Result[3] := ClosePolygon;
 end;
 
-class function TmsArrowHead.InitialHeight: Single;
+class function TmsArrowHead.GetInitialHeight: Pixel;
 begin
  Result := 20;
 end;

@@ -12,8 +12,6 @@ uses
   msRoundedRectangle,
   msUseCaseLikeEllipse,
   msTriangle,
-  msDashDotLine,
-  msDashLine,
   msLineWithArrow,
   msTriangleDirectionRight,
   msRegisteredShapes,
@@ -64,9 +62,9 @@ begin
   TmsCircle.TMC.SetFillColor(TAlphaColorRec.Red);
   TmsRoundedRectangle.TMC.SetFillColor(TAlphaColorRec.Blue);
   TmsUseCaseLikeEllipse.TMC.SetFillColor(TAlphaColorRec.Yellow);
-  TmsTriangle.TMC.SetFillColor(TAlphaColorRec.Green);
-  TmsDashDotLine.TMC.SetStrokeDash(TStrokeDash.DashDot);
-  TmsDashLine.TMC.SetStrokeDash(TStrokeDash.Dash);
+  TmsTriangle.TMC.SetFillColor(TAlphaColorRec.Green).SetInitialHeight(100);
+  TmsLine.Specify('DashDotLine').SetStrokeDash(TStrokeDash.DashDot);
+  TmsLine.Specify('DashLine').SetStrokeDash(TStrokeDash.Dash);
   TmsLine.Specify('DotLine').SetStrokeDash(TStrokeDash.Dot);
   TmsLineWithArrow.TMC;
   TmsTriangleDirectionRight.TMC.SetFillColor(TAlphaColorRec.Coral);
@@ -91,7 +89,7 @@ begin
 
   TmsCircle.Specify('GreenCircle').SetFillColor(TAlphaColorRec.Green);
   TmsTriangle.Specify('BlackTriangle').SetFillColor(TAlphaColorRec.Black);
-  TmsBlackRectangle.TMC.SetFillColor(TAlphaColorRec.Black);
+  TmsBlackRectangle.TMC.SetFillColor(TAlphaColorRec.Black).SetInitialHeight(100);
   TmsRemoveIcon.TMC.SetFillColor(TAlphaColorRec.Mediumvioletred);
   TmsMoveIcon.TMC.SetFillColor(TAlphaColorRec.Black);
   TmsTextShape.TMC.SetFillColor(TAlphaColorRec.Black);
@@ -127,7 +125,7 @@ begin
 
   TmsUsecase.Specify('UsecaseRealization').SetFillColor(TAlphaColorRec.Lightgreen);
 
-  TmsTrivial.TMC;
+  TmsTrivial.TMC.SetInitialHeightScale( 1 / 3 * 2);
 
   TmsLibrary.Specify('Layer').SetFillColor(TAlphaColorRec.Lightgray);
   TmsTrivial.Specify('Typedef').SetFillColor(TAlphaColorRec.Gray);

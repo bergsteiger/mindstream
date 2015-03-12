@@ -11,7 +11,7 @@ uses
  ;
 
 type
- TmsProxyShapeClass = class(TmsShapeClassPrim, ImsShapeClass, ImsTunableShapeClass)
+ TmsProxyShapeClass = class(TmsShapeClassPrim, ImsShapeClass)
  private
   f_ShapeClass : MCmsShape;
   f_Name : String;
@@ -26,16 +26,15 @@ type
   function Name: String;
   function Stereotype: String; override;
   function ParentMC: ImsShapeClass; override;
-  function AsTMC: ImsTunableShapeClass; override;
+  function AsMC: ImsShapeClass; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
-  function InitialHeight: Pixel;
  public
-  class function Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass;
+  class function Create(const aName : String; const aShapeClass: MCmsShape): ImsShapeClassTuner;
  end;//TmsProxyShapeClass
 
 implementation
@@ -53,9 +52,10 @@ begin
  f_ShapeClass := aShapeClass;
  f_Stereotype := aName;
  f_Name := 'Tms' + f_Stereotype;
+ SetInitialHeight(ParentMC.InitialHeight);
 end;
 
-class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: MCmsShape): ImsTunableShapeClass;
+class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: MCmsShape): ImsShapeClassTuner;
 begin
  Result := CreateInner(aName, aShapeClass);
 end;
@@ -110,7 +110,7 @@ begin
  Result := f_ShapeClass;
 end;
 
-function TmsProxyShapeClass.AsTMC: ImsTunableShapeClass;
+function TmsProxyShapeClass.AsMC: ImsShapeClass;
 begin
  Result := Self;
 end;
@@ -151,18 +151,6 @@ function TmsProxyShapeClass.NullClick(const aHolder: ImsDiagrammsHolder): Boolea
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.NullClick(aHolder);
-end;
-
-function TmsProxyShapeClass.InitialHeight: Pixel;
-var
- l_V : TmsPixelRec;
-begin
- Assert(f_ShapeClass <> nil);
- l_V := f_InitialHeight;
- if l_V.rIsSet then
-  Result := l_V.rValue
- else
-  Result := f_ShapeClass.InitialHeight;
 end;
 
 end.

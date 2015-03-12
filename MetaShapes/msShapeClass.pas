@@ -12,7 +12,7 @@ uses
  ;
 
 type
- TmsShapeClass = class(TmsShapeClassPrim, ImsShapeClass, ImsTunableShapeClass)
+ TmsShapeClass = class(TmsShapeClassPrim, ImsShapeClass)
  private
   f_ShapeClass : RmsShape;
   f_ParentMC : ImsShapeClass;
@@ -32,10 +32,9 @@ type
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
   function Stereotype: String; override;
   function ParentMC: ImsShapeClass; override;
-  function AsTMC: ImsTunableShapeClass; override;
-  function InitialHeight: Pixel;
+  function AsMC: ImsShapeClass; override;
  public
-  class function Create(aShapeClass: RmsShape): ImsTunableShapeClass;
+  class function Create(aShapeClass: RmsShape): ImsShapeClassTuner;
  end;//TmsShapeClass
 
 implementation
@@ -45,25 +44,23 @@ uses
  msRegisteredShapes
  ;
 
-type
- TmsShapeFriend = class(TmsShape)
- end;//TmsShapeFriend
-
- RmsShapeFriend = class of TmsShapeFriend;
-
 // TmsShapeClass
 
 constructor TmsShapeClass.CreateInner(aShapeClass: RmsShape);
 begin
  inherited Create;
  f_ShapeClass := aShapeClass;
+ SetInitialHeight(f_ShapeClass.GetInitialHeight);
+ if not f_InitialHeight.rIsSet then
+  if (ParentMC <> nil) then
+   SetInitialHeight(ParentMC.InitialHeight);
+ if not f_InitialHeight.rIsSet then
+  SetInitialHeight(f_ShapeClass.GetInitialHeight);
 end;
 
-class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsTunableShapeClass;
+class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClassTuner;
 begin
-(* Result := TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName) As ImsTunableShapeClass;
- if (Result = nil) then*)
-  Result := CreateInner(aShapeClass);
+ Result := CreateInner(aShapeClass);
  Assert(Result <> nil);
 end;
 
@@ -117,21 +114,9 @@ begin
  Result := f_ParentMC;
 end;
 
-function TmsShapeClass.AsTMC: ImsTunableShapeClass;
+function TmsShapeClass.AsMC: ImsShapeClass;
 begin
  Result := Self;
-end;
-
-function TmsShapeClass.InitialHeight: Pixel;
-var
- l_V : TmsPixelRec;
-begin
- Assert(f_ShapeClass <> nil);
- l_V := f_InitialHeight;
- if l_V.rIsSet then
-  Result := l_V.rValue
- else
-  Result := RmsShapeFriend(f_ShapeClass).InitialHeight;
 end;
 
 procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);

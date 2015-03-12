@@ -33,7 +33,6 @@ type
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); virtual;
   procedure SetStartPoint(const aStartPoint: TPointF); virtual;
  protected
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   function IsNeedsSecondClick : Boolean; virtual;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; virtual;
@@ -46,7 +45,8 @@ type
   procedure MouseMove(const aClickContext: TmsEndShapeContext); virtual;
   // - действие при MouseMove
   function Stereotype: String;
-  class function InitialHeight: Pixel; virtual;
+ public
+  class function GetInitialHeight: Pixel; virtual;
  protected
   class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
  public
@@ -88,11 +88,11 @@ type
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);
   class function ButtonShape: ImsShape; virtual;
-  class function NRTMC: ImsTunableShapeClass;
+  class function NRTMC: ImsShapeClassTuner;
   class function MC: ImsShapeClass;
-  class function TMC: ImsTunableShapeClass;
+  class function TMC: ImsShapeClassTuner;
   class function NamedMC(const aName: String): ImsShapeClass;
-  class function Specify(const aName: String): ImsTunableShapeClass;
+  class function Specify(const aName: String): ImsShapeClassTuner;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
@@ -167,10 +167,10 @@ begin
  // Ничего не делаем, специально
 end;
 
-class function TmsShape.InitialHeight: Pixel;
+class function TmsShape.GetInitialHeight: Pixel;
 begin
- Result := 0;
- Assert(false, 'Не реализовано: ' + ClassName);
+ Result := 0.0;
+ //Assert(false, 'Не реализовано: ' + ClassName);
 end;
 
 function TmsShape.Stereotype: String;
@@ -195,11 +195,6 @@ begin
  Result := false;
 end;
 
-procedure TmsShape.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- // - тут ничего не делаем
-end;
-
 function TmsShape.pm_GetStartPoint: TPointF;
 begin
  Result := TPointF.Create(0, 0);
@@ -222,7 +217,6 @@ end;
 function TmsShape.DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
 begin
  Result := TmsDrawOptionsContext.Create(aCtx);
- TransformDrawOptionsContext(Result);
  Self.ShapeClass.TransformDrawOptionsContext(Result);
 end;
 
@@ -350,7 +344,7 @@ begin
  Assert(false, 'Не реализовано');
 end;
 
-class function TmsShape.NRTMC: ImsTunableShapeClass;
+class function TmsShape.NRTMC: ImsShapeClassTuner;
 var
  l_R : ImsShapeClass;
 begin
@@ -359,28 +353,32 @@ begin
   l_R := TmsNotRegisteredShapes.Instance.ByName(Self.ClassName);
  if (l_R <> nil) then
  begin
-  Result := l_R As ImsTunableShapeClass;
+  Result := l_R.AsTuner;
  end//l_R <> nil
  else
  begin
   Result := TmsShapeClass.Create(Self);
-  TmsNotRegisteredShapes.Instance.RegisterMC(Result);
+  TmsNotRegisteredShapes.Instance.RegisterMC(Result.AsMC);
  end;//Result = nil
 end;
 
 class function TmsShape.MC: ImsShapeClass;
 begin
- Result := NRTMC;
+ Result := NRTMC.AsMC;
 end;
 
-class function TmsShape.TMC: ImsTunableShapeClass;
+class function TmsShape.TMC: ImsShapeClassTuner;
+var
+ l_MC : ImsShapeClass;
 begin
- Result := TmsRegisteredShapes.Instance.ByName(Self.ClassName) As ImsTunableShapeClass;
- if (Result = nil) then
+ l_MC := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
+ if (l_MC <> nil) then
+  Result := l_MC.AsTuner
+ else
  begin
   Result := TmsShapeClass.Create(Self);
-  TmsRegisteredShapes.Instance.RegisterMC(Result);
- end;//Result = nil
+  TmsRegisteredShapes.Instance.RegisterMC(Result.AsMC);
+ end;//l_MC <> nil
 end;
 
 class function TmsShape.NamedMC(const aName: String): ImsShapeClass;
@@ -391,10 +389,10 @@ begin
  Assert(Result <> nil, 'Стереотип ' + aName + ' не зарегистрирован');
 end;
 
-class function TmsShape.Specify(const aName: String): ImsTunableShapeClass;
+class function TmsShape.Specify(const aName: String): ImsShapeClassTuner;
 begin
  Result := TmsProxyShapeClass.Create(aName, Self.MC);
- TmsRegisteredShapes.Instance.RegisterMC(Result);
+ TmsRegisteredShapes.Instance.RegisterMC(Result.AsMC);
 end;
 
 end.
