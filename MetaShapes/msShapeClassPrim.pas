@@ -100,11 +100,6 @@ begin
  Result := Self.SetInitialHeight(Self.ParentMC.InitialHeight * aValue);
 end;
 
-(*type
- TmsShapeFriend = class(TmsShape)
- end;
- RmsShapeFriend = class of TmsShapeFriend;*)
-
 function TmsShapeClassPrim.InitialHeight: Pixel;
 var
  l_PMC : ImsShapeClass;

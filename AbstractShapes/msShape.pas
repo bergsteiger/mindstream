@@ -45,6 +45,7 @@ type
   procedure MouseMove(const aClickContext: TmsEndShapeContext); virtual;
   // - действие при MouseMove
   function Stereotype: String;
+ public
   class function GetInitialHeight: Pixel; virtual;
  protected
   class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;

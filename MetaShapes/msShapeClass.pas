@@ -46,21 +46,16 @@ uses
 
 // TmsShapeClass
 
-type
- TmsShapeFriend = class(TmsShape)
- end;
- RmsShapeFriend = class of TmsShapeFriend;
-
 constructor TmsShapeClass.CreateInner(aShapeClass: RmsShape);
 begin
  inherited Create;
  f_ShapeClass := aShapeClass;
- SetInitialHeight(RmsShapeFriend(f_ShapeClass).GetInitialHeight);
+ SetInitialHeight(f_ShapeClass.GetInitialHeight);
  if not f_InitialHeight.rIsSet then
   if (ParentMC <> nil) then
    SetInitialHeight(ParentMC.InitialHeight);
  if not f_InitialHeight.rIsSet then
-  SetInitialHeight(RmsShapeFriend(f_ShapeClass).GetInitialHeight);
+  SetInitialHeight(f_ShapeClass.GetInitialHeight);
 end;
 
 class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClassTuner;
