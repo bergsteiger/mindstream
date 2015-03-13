@@ -1,0 +1,425 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+Продолжение про инверсию зависимостей.<br />
+<br />
+Исходный пост был тут -&nbsp;<a href="http://programmingmindstream.blogspot.ru/2015/03/blog-post_12.html">Коротко. Ни о чём. Инверсия зависимостей</a>.<br />
+<br />
+Там были две диаграммы:<br />
+<br />
+Диаграмма 1:<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-mNIY3hcnQLY/VQHzS56qOwI/AAAAAAAFtvw/X3lRZPsx7_g/s1600/di1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://4.bp.blogspot.com/-mNIY3hcnQLY/VQHzS56qOwI/AAAAAAAFtvw/X3lRZPsx7_g/s1600/di1.png" height="380" width="400" /></a></div>
+<br />
+<br />
+Диаграмма 2:<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-9Y95jA8JDG0/VQHzpm9vj_I/AAAAAAAFtv4/1ujERVSJJqI/s1600/di2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://4.bp.blogspot.com/-9Y95jA8JDG0/VQHzpm9vj_I/AAAAAAAFtv4/1ujERVSJJqI/s1600/di2.png" height="176" width="400" /></a></div>
+<br />
+Я немного "поколдовал" над шаблонами генерации и диаграммы стали такими:<br />
+<br />
+Диаграмма 1:<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-YJRrfxpS1jQ/VQM6HMXB4_I/AAAAAAAFtwk/n6kWCnpRB2c/s1600/di3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://3.bp.blogspot.com/-YJRrfxpS1jQ/VQM6HMXB4_I/AAAAAAAFtwk/n6kWCnpRB2c/s1600/di3.png" /></a></div>
+<br />
+<br />
+Диаграмма 2:<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-Ebr8lA-7fCA/VQM6dm_civI/AAAAAAAFtws/gn054PbhMug/s1600/di4.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://2.bp.blogspot.com/-Ebr8lA-7fCA/VQM6dm_civI/AAAAAAAFtws/gn054PbhMug/s1600/di4.png" /></a></div>
+Код остался ТЕМ ЖЕ.<br />
+<br />
+Реализация шаблонов:<br />
+<br />
+<pre class="brush:delphi">: ServicePrim::Class
+= SimpleClass::Class
+
+// Функции стереотипа
+
+%f _st_space_key
+ SHD
+
+%f _BeforeClassSpell
+//#UC START# *5502C6A200F5for5502BA9C0354*
+//#UC END# *5502C6A200F5for5502BA9C0354*
+
+%f _AfterClassSpell
+//#UC START# *5502CBD4031Efor5502BA9C0354*
+//#UC END# *5502CBD4031Efor5502BA9C0354*
+
+// Унаследованная реализация
+
+// перекрытие базового стереотипа Delphi интерфейсы и реализация::MDAGenerator
+%f _DoSpell
+//#UC START# *4B2A19E3038Bfor5502BA9C0354*
+ [{%Gx!=true}\
+ [{"%{Tl3ProtoObject}N"=""}%f_find_element(Tl3ProtoObject,Tl3ProtoObject)]\
+ %S%f_make_accessable(%{Tl3ProtoObject}U)\
+ %S%f_add_inheritable(%{Tl3ProtoObject}U)\
+ ]\
+ %S%f_set_up(singleton,true)\
+ %S%f_BeforeClassSpell()\
+ %S%[inherited]\
+ %S%f_AfterClassSpell()
+//#UC END# *4B2A19E3038Bfor5502BA9C0354*
+
+</pre>
+<br />
+<pre class="brush:delphi">: Service::Class
+? Сервис
+= ServicePrim::Class
+
+// Параметры стереотипа
+a f
+/ - тип абстракции
+
+// Функции стереотипа
+
+%f _st_space_key
+ SHD
+
+%f _CheckMixin
+//#UC START# *5502CBF50065for5502BABC0193*
+ [{"%S%{Mixin}N"=""}\
+ &lt;{}{%C#f_IsPureMixIn()=true&amp;"%CN"="M%f_cut_prefix(%f_pas_TypeName(%S),T)"}\
+ %S%f_set_var(Mixin,C)\
+// %f_cycle_break(%S)\
+ &gt;\
+ ]
+//#UC END# *5502CBF50065for5502BABC0193*
+
+%f _CheckFacet
+//#UC START# *5502CC07027Efor5502BABC0193*
+ [{"%S%{Facet}N"=""}\
+ &lt;{}{%t_interface(%C)=true&amp;"%CN"="I%f_cut_prefix(%f_pas_TypeName(%S),T)"}\
+ %S%f_set_var(Facet,C)\
+// %f_cycle_break(%S)\
+ &gt;\
+ ]
+//#UC END# *5502CC07027Efor5502BABC0193*
+
+// Унаследованная реализация
+
+// перекрытие базового стереотипа Delphi интерфейсы и реализация::MDAGenerator
+%f _DoSpell
+//#UC START# *4B2A19E3038Bfor5502BABC0193*
+ %S%[inherited]
+//#UC END# *4B2A19E3038Bfor5502BABC0193*
+
+// перекрытие базового стереотипа ServicePrim::Class
+%f _AfterClassSpell
+//#UC START# *5502CBD4031Efor5502BABC0193*
+ %S%[inherited]
+//#UC END# *5502CBD4031Efor5502BABC0193*
+
+// перекрытие базового стереотипа ServicePrim::Class
+%f _BeforeClassSpell
+//#UC START# *5502C6A200F5for5502BABC0193*
+ %S%f_CheckMixin()\
+ %S%f_CheckFacet()\
+// %f_warning(Mixin: %S%{Mixin}N)\
+// %f_warning(Facet: %S%{Facet}N)\
+
+ [{"%S%{Facet}N"=""}\
+ %S%f_add_class(%SU_Facet,Facet,I%f_cut_prefix(%f_pas_TypeName(%S),T),Facet_Inst)\
+ %{Facet_Inst}%f_set_documentation(Интерфейс сервиса %SN)\
+ %S%f_set_var(Facet,{Facet_Inst})\
+ ]\
+
+ %S%f_add_realized(%S%{Mixin}U)\
+ %S%{Facet}%f_add_realized(%S%{Mixin}U)\
+
+ %S%f_add_attribute(%SU_%S%{Facet}U_Alien,writeonly,Alien : %S%{Facet}U,Attr_Inst)\
+
+ %{Attr_Inst}%f_set_link_type(ref)\
+ %{Attr_Inst}%f_set_up(pm,true)\
+ %{Attr_Inst}%f_set_up(needs field,true)\
+ %{Attr_Inst}%f_set_visibility_type(PublicAccess)\
+ %{Attr_Inst}%f_set_abstraction_type(final)\
+ %{Attr_Inst}%f_set_documentation(Внешняя реализация сервиса %S%{Facet}N)\
+
+ %{Attr_Inst}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{Attr_Inst},%S)set_var,\
+  {-}\
+ )\
+
+ %{Attr_Inst}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{Attr_Inst},%S)set_impl,\
+  Assert((f_Alien = nil) OR (aValue = nil));
+  f_Alien := aValue;\
+ )\
+
+ %f_DoSpellField(%{Attr_Inst})\
+
+// %f_warning(%SN need cleanup: %S%f_NeedCleanupFields())\
+
+ %S%[inherited]
+//#UC END# *5502C6A200F5for5502BABC0193*
+
+// Вложенные стереотипы
+
+: Service::Class::responsibility::Operation
+? Ответственность
+= ClassBase::Class::Operation
+
+// Параметры стереотипа
+v +
+/ - типы видимости
+a f
+/ - тип абстракции
+T 
+/ - может не иметь "цели" (типа/результата)
+m f
+/ - не может быть реализован/иметь перекрытую реализацию
+
+// Генераторы
+// Генерация модели в MDKnow
++ wiki
+//#UC START# *46E6D4BB0339for5502BBDB02C9*
+//#UC END# *46E6D4BB0339for5502BBDB02C9*
+
+// генератор реализации фабрик интерфейсов на java (.java)
++ fctr.java
+//#UC START# *470321C1038Afor5502BBDB02C9*
+//#UC END# *470321C1038Afor5502BBDB02C9*
+
+// Вторая интерфейсная секция стереотипа. Например реализация свойств класса.
++ intf2.pas
+R  
+//#UC START# *477398E501C0for5502BBDB02C9*
+//#UC END# *477398E501C0for5502BBDB02C9*
+
+// 3-я секция интерфейса. Например поле для свойства.
++ intf3.pas
+R  
+//#UC START# *4774D2A20372for5502BBDB02C9*
+//#UC END# *4774D2A20372for5502BBDB02C9*
+
+// Генератор файлов форм (.dfm)
++ dfm
+R  
+//#UC START# *49F5795900ECfor5502BBDB02C9*
+//#UC END# *49F5795900ECfor5502BBDB02C9*
+
+// Скрипты TC (.sd)
++ sd
+R  
+//#UC START# *4DE79AFC0030for5502BBDB02C9*
+//#UC END# *4DE79AFC0030for5502BBDB02C9*
+
+// Хак для [$281531116]
++ link_to_requests_hack
+//#UC START# *4E65F581015Afor5502BBDB02C9*
+//#UC END# *4E65F581015Afor5502BBDB02C9*
+
+// Родные Delphi интерфейсы (.pas)
++ intf.pas
+R  
+//#UC START# *470F1571031Cfor5502BBDB02C9*
+//#UC END# *470F1571031Cfor5502BBDB02C9*
+
+// Реализация на Delphi(.pas)
++ impl.pas
+R  
+//#UC START# *470F15B800CBfor5502BBDB02C9*
+//#UC END# *470F15B800CBfor5502BBDB02C9*
+
+// Функции стереотипа
+%f _st_space_key
+ SHD
+
+// Унаследованная реализация
+
+// реализация абстрактного стереотипа Документация::MDAGenerator
+// вывод описание авто-генерируемых методов в wiki
+%f _wiki_up_add_gen
+//#UC START# *470484D50138for5502BBDB02C9*
+//#UC END# *470484D50138for5502BBDB02C9*
+
+</pre>
+<br />
+<pre class="brush:delphi">: ServiceImplementation::Class
+? Реализация сервиса
+= ServicePrim::Class
+
+// Параметры стереотипа
+a f
+/ - тип абстракции
+
+// Функции стереотипа
+
+%f _st_space_key
+ SHD
+
+// Унаследованная реализация
+
+// перекрытие базового стереотипа Delphi интерфейсы и реализация::MDAGenerator
+%f _DoSpell
+//#UC START# *4B2A19E3038Bfor5502BADD01CB*
+ %S%[inherited]
+//#UC END# *4B2A19E3038Bfor5502BADD01CB*
+
+// перекрытие базового стереотипа ServicePrim::Class
+%f _AfterClassSpell
+//#UC START# *5502CBD4031Efor5502BADD01CB*
+ %S%[inherited]
+//#UC END# *5502CBD4031Efor5502BADD01CB*
+
+// перекрытие базового стереотипа ServicePrim::Class
+%f _BeforeClassSpell
+//#UC START# *5502C6A200F5for5502BADD01CB*
+ &lt;{}{%CC=Dependency&amp;%CS=implements}\
+ %C%T#f_CheckFacet()\
+
+// %f_warning(%C%TN)\
+// %f_warning(%C%T%{Facet}N)\
+// %f_warning(%C%T%{Facet}U)\
+
+ [{"%C%T%{Facet}N"!=""}\
+ %S%f_make_accessable(%C%T%{Facet}U)\
+ %S%f_add_realized(%C%T%{Facet}U)\
+ ]\
+ &gt;\
+
+ %S%f_add_operation(%SU_Ini_Reg_Class,ini,bind (),Op_Instance)\
+ %{Op_Instance}%f_set_documentation(Регистрация %SN)\
+ %{Op_Instance}%f_set_abstraction_type(final)\
+ %{Op_Instance}%f_set_visibility_type(PrivateAccess)\
+ %{Op_Instance}%f_set_uc_content(intf.pas,,\
+ &lt;{\n}{%CC=Dependency&amp;%CS=implements}\
+  %f_pas_TypeName(%C%T).Instance.Alien := %f_pas_TypeName(%S).Instance;\
+ &gt;\
+ )\
+
+ %S%[inherited]
+//#UC END# *5502C6A200F5for5502BADD01CB*
+
+// Вложенные стереотипы
+
+: ServiceImplementation::Class::implements::ClassDependency
+? Указание, что реализуется
+= Delphi интерфейсы и реализация::MDAGenerator
+
+// Генераторы
+// Генерация модели в MDKnow
++ wiki
+//#UC START# *46E6D4BB0339for5502BC8E029A*
+//#UC END# *46E6D4BB0339for5502BC8E029A*
+
+// Родные Delphi интерфейсы (.pas)
++ intf.pas
+R  
+//#UC START# *470F1571031Cfor5502BC8E029A*
+//#UC END# *470F1571031Cfor5502BC8E029A*
+
+// Реализация на Delphi(.pas)
++ impl.pas
+R  
+//#UC START# *470F15B800CBfor5502BC8E029A*
+//#UC END# *470F15B800CBfor5502BC8E029A*
+
+// Вторая интерфейсная секция стереотипа. Например реализация свойств класса.
++ intf2.pas
+R  
+//#UC START# *477398E501C0for5502BC8E029A*
+//#UC END# *477398E501C0for5502BC8E029A*
+
+// 3-я секция интерфейса. Например поле для свойства.
++ intf3.pas
+R  
+//#UC START# *4774D2A20372for5502BC8E029A*
+//#UC END# *4774D2A20372for5502BC8E029A*
+
+// Генератор файлов форм (.dfm)
++ dfm
+R  
+//#UC START# *49F5795900ECfor5502BC8E029A*
+//#UC END# *49F5795900ECfor5502BC8E029A*
+
+// Скрипты TC (.sd)
++ sd
+R  
+//#UC START# *4DE79AFC0030for5502BC8E029A*
+//#UC END# *4DE79AFC0030for5502BC8E029A*
+
+// Хак для [$281531116]
++ link_to_requests_hack
+//#UC START# *4E65F581015Afor5502BC8E029A*
+//#UC END# *4E65F581015Afor5502BC8E029A*
+
+// Функции стереотипа
+%f _st_space_key
+ SHD
+
+// Унаследованная реализация
+
+// реализация абстрактного стереотипа Документация::MDAGenerator
+// проверка ограничений накладываемых на элемент
+%t _constraint
+//#UC START# *4704C0E30186for5502BC8E029A*
+c          {}
+r {""=""}: {}
+//#UC END# *4704C0E30186for5502BC8E029A*
+
+// реализация абстрактного стереотипа Документация::MDAGenerator
+// выводит описание элемента (операция, атрибут) в wiki
+%f _wiki_child_kind
+//#UC START# *4705CBD6003Efor5502BC8E029A*
+//#UC END# *4705CBD6003Efor5502BC8E029A*
+
+// реализация абстрактного стереотипа Документация::MDAGenerator
+// вывод описание авто-генерируемых методов в wiki
+%f _wiki_up_add_gen
+//#UC START# *470484D50138for5502BC8E029A*
+//#UC END# *470484D50138for5502BC8E029A*
+
+</pre>
+<br />
+Шаблоны "на птичьем языке" выглядят конечно устрашающе. Но зато написаны "раз и навсегда". Для <b>большого</b> возможного числа применений.<br />
+<br />
+Небольшая легенда:<br />
+<br />
+%S - это Self.<br />
+%P - родительский элемент.<br />
+%G - это базовые классы.<br />
+%R - это реализуемые интерфейсы.<br />
+%T - это тип выражения.<br />
+%C - это дочерние элементы.<br />
+%CN - имя дочернего элемента. Т.е. на "привычном языке" это - Child.Name.<br />
+%CS - имя стереотипа дочернего элемента.<br />
+%S%{Facet} - значение поля (member) от Self. Т.е. на "привычном языке" это - Self.Facet.<br />
+: ServiceImplementation::Class - объявляет стереотип ServiceImplementation.<br />
+= ServicePrim::Class - наследует его от ServicePrim.<br />
+<br />
+Цикл:
+<br />
+<br />
+<pre class="brush:delphi">&lt;{}{%CS=Dependency}%CN&gt;
+// - перебирает дочерние элементы, которые являются зависимостями и выводит их имена (%CN)
+
+&lt;{}{%t_simple_class(%P)=true}%PN&gt;
+// - перебирает родителей, которые являются "простыми классами" и выводит их имена (%PN)
+</pre>
+<br />
+Оператор if:<br />
+<br />
+<pre class="brush:delphi">[{"%S%{Mixin}N"=""}\
+&lt;{}{%C#f_IsPureMixIn()=true}\
+%S%f_set_var(Mixin,C)&gt;\
+]
+// - if Self.Mixin.Name = ''
+//    for C in Self.Children (if C.IsPureMixIn) do
+//     Self.Mixin := C
+// т.е. если Self.Mixin не установлено, то ищем среди детей, того который является PureMixIn
+</pre>
+<br />
+Как минимум 10-20 <b>уже</b> написанных классов претерпят изменения в соответствии с этой парадгмой. Уж очень надоели паразитные кросс-зависимости между разными библиотеками.<br />
+<br />
+Ведь почему возникают "паразитные" кросс-зависимости?<br />
+<br />
+Не потому, что люди не знают про <a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%B8%D0%BD%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D0%B8_%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B5%D0%B9">инверсию зависимостей</a>&nbsp;(<a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle">Dependency inversion principle</a>).<br />
+<br />
+А потому, что людям зачастую "лень" писать "всё это хозяйство".<br />
+<br />
+Проще "лишний uses написать".<br />
+<br />
+А подчас люди просто не в курсе, что их изменения могут повлиять на соседние проекты.<br />
+<br />
+И это - нормально.<br />
+<br />
+Зато теперь, когда такие паразитные зависимости выявлены, то они разрешатся буквально "в два клика".</div>

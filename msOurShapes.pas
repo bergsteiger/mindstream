@@ -59,7 +59,7 @@ begin
   TmsLine.TMC;
   TmsRectangle.TMC.SetFillColor(TAlphaColorRec.White).SetInitialHeight(90);
   TmsCircle.TMC.SetFillColor(TAlphaColorRec.Red);
-  TmsRoundedRectangle.TMC.SetFillColor(TAlphaColorRec.Blue).SetInitialHeight(90);
+  TmsRoundedRectangle.TMC.SetFillColor(TAlphaColorRec.Blue).SetInitialHeight(90).SetInitialWidth(90);
   TmsUseCaseLikeEllipse.TMC.SetFillColor(TAlphaColorRec.Yellow);
   TmsTriangle.TMC.SetFillColor(TAlphaColorRec.Green).SetInitialHeight(100);
   TmsLine.Specify('DashDotLine').SetStrokeDash(TStrokeDash.DashDot);
