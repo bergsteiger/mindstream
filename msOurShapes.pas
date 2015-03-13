@@ -9,7 +9,6 @@ uses
   msLine,
   msRectangle,
   msCircle,
-  msRoundedRectangle,
   msUseCaseLikeEllipse,
   msTriangle,
   msLineWithArrow,
@@ -62,7 +61,8 @@ begin
    .SetInitialWidth(100)
    .SetCornerRadius(0.0);
   TmsCircle.TMC.SetFillColor(TAlphaColorRec.Red);
-  TmsRoundedRectangle.TMC.SetFillColor(TAlphaColorRec.Blue)
+  TmsRectangle.Specify('RoundedRectangle')
+   .SetFillColor(TAlphaColorRec.Blue)
    .SetInitialHeight(90)
    .SetInitialWidth(90)
    .SetCornerRadius(10);
