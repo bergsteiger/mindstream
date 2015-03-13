@@ -69,7 +69,7 @@ var
  l_Rect : TRectF;
 begin
  l_Rect := DrawBounds;
- aCtx.rCanvas.DrawEllipse(l_Rect, 1);
+ aCtx.rCanvas.DrawEllipse(l_Rect, aCtx.rLineOpacity);
  aCtx.rCanvas.FillEllipse(l_Rect, aCtx.rOpacity);
 end;
 

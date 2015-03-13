@@ -37,7 +37,7 @@ begin
                   CornerRadius,
                   CornerRadius,
                   AllCorners,
-                  1,
+                  aCtx.rLineOpacity,
                   TCornerType.Round);
  aCtx.rCanvas.FillRect(l_msPointContext,
                   CornerRadius,

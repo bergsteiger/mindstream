@@ -291,6 +291,7 @@ begin
  aCtx.rCanvas.Stroke.Thickness := l_Ctx.rStrokeThickness;
  l_DrawContext := aCtx;
  l_DrawContext.rOpacity := l_Ctx.rOpacity;
+ l_DrawContext.rLineOpacity := l_Ctx.rLineOpacity;
  DoDrawTo(l_DrawContext);
  l_StereotypeRect := TRectF.Create(0, 0, 0, 0);
  GetStereotypeRect(l_StereotypeRect);
