@@ -51,9 +51,9 @@ begin
  inherited Create;
  f_ShapeClass := aShapeClass;
 
- if not f_InitialHeight.rIsSet then
+(* if not f_InitialHeight.rIsSet then
   if (ParentMC <> nil) then
-   SetInitialHeight(ParentMC.InitialHeight);
+   SetInitialHeight(ParentMC.InitialHeight);*)
 
  if not f_InitialWidth.rIsSet then
   if (ParentMC <> nil) then
