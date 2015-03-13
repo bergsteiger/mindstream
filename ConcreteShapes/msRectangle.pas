@@ -16,18 +16,12 @@ type
  TmsRectangle = class(TmsRectangularShape)
  protected
   class function CornerRadius: Single; override;
-  class function GetInitialWidth: Single; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsRectangle
 
 implementation
 
 // TmsRectangle
-
-class function TmsRectangle.GetInitialWidth: Single;
-begin
- Result := 100;
-end;
 
 class function TmsRectangle.CornerRadius: Single;
 begin
