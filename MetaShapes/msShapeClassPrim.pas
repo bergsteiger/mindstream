@@ -14,6 +14,7 @@ type
   f_InitialHeight : TmsPixelRec;
   f_InitialWidth : TmsPixelRec;
   f_StrokeThickness : TmsPixelRec;
+  f_CornerRadius : TmsPixelRec;
   f_StrokeDash : TmsStrokeDash;
  protected
   function ParentMC: ImsShapeClass; virtual;
@@ -26,8 +27,10 @@ type
   function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
   function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
   function SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
+  function SetCornerRadius(aValue: Single): ImsShapeClassTuner;
   function InitialHeight: Pixel;
   function InitialWidth: Pixel;
+  function CornerRadius: Pixel;
   function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
  end;//TmsShapeClassPrim
 
@@ -98,6 +101,12 @@ begin
  f_InitialHeight := aValue;
 end;
 
+function TmsShapeClassPrim.SetCornerRadius(aValue: Single): ImsShapeClassTuner;
+begin
+ Result := Self;
+ f_CornerRadius := aValue;
+end;
+
 function TmsShapeClassPrim.SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
 begin
  Result := Self;
@@ -140,6 +149,24 @@ begin
   l_PMC := Self.ParentMC;
   if (l_PMC <> nil) then
    Result := l_PMC.InitialWidth
+  else
+   Result := 0.0;
+ end;//l_V.rIsSet
+end;
+
+function TmsShapeClassPrim.CornerRadius: Pixel;
+var
+ l_PMC : ImsShapeClass;
+ l_V : TmsPixelRec;
+begin
+ l_V := f_CornerRadius;
+ if l_V.rIsSet then
+  Result := l_V.rValue
+ else
+ begin
+  l_PMC := Self.ParentMC;
+  if (l_PMC <> nil) then
+   Result := l_PMC.CornerRadius
   else
    Result := 0.0;
  end;//l_V.rIsSet

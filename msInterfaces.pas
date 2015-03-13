@@ -201,6 +201,7 @@ type
   function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
   function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
   function SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
+  function SetCornerRadius(aValue: Single): ImsShapeClassTuner;
   function SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;
   function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
   function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
@@ -222,6 +223,7 @@ type
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function InitialHeight: Pixel;
   function InitialWidth: Pixel;
+  function CornerRadius: Pixel;
   function ParentMC: ImsShapeClass;
   function AsTuner: ImsShapeClassTuner;
  end;//ImsShapeClass
