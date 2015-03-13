@@ -14,7 +14,7 @@ type
   f_InitialHeight : TmsPixelRec;
   f_InitialWidth : TmsPixelRec;
   f_StrokeThickness : TmsPixelRec;
-  f_CornerRadius : TmsPixelRec;
+  f_CornerRadius : TmsRadiusRec;
   f_StrokeDash : TmsStrokeDash;
  protected
   function ParentMC: ImsShapeClass; virtual;
@@ -157,7 +157,7 @@ end;
 function TmsShapeClassPrim.CornerRadius: Pixel;
 var
  l_PMC : ImsShapeClass;
- l_V : TmsPixelRec;
+ l_V : TmsRadiusRec;
 begin
  l_V := f_CornerRadius;
  if l_V.rIsSet then
@@ -168,7 +168,7 @@ begin
   if (l_PMC <> nil) then
    Result := l_PMC.CornerRadius
   else
-   Result := 0.0;
+   Result := -1.0;
  end;//l_V.rIsSet
 end;
 

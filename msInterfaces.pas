@@ -66,11 +66,17 @@ type
   class operator Implicit(aValue: Pixel): TmsPixelRec;
  end;//TmsPixelRec
 
+ TmsRadiusRec = record
+  rIsSet : Boolean;
+  rValue : Pixel;
+  class operator Implicit(aValue: Pixel): TmsRadiusRec;
+ end;//TmsRadiusRec
+
  TmsStrokeDash = record
   rIsSet : Boolean;
   rValue : TStrokeDash;
   class operator Implicit(aValue: TStrokeDash): TmsStrokeDash;
- end;//TmsPixelRec
+ end;//TmsStrokeDash
 
  TmsDrawOptionsContext = record
   public
@@ -348,6 +354,19 @@ begin
   Result.rIsSet := true;
   Result.rValue := aValue;
  end;//IsZero(aValue) OR (aValue < 0)
+end;
+
+// TmsRadiusRec
+
+class operator TmsRadiusRec.Implicit(aValue: Pixel): TmsRadiusRec;
+begin
+ if (aValue < 0) then
+  Result.rIsSet := false
+ else
+ begin
+  Result.rIsSet := true;
+  Result.rValue := aValue;
+ end;//(aValue < 0)
 end;
 
 // TmsStrokeDash
