@@ -15,8 +15,6 @@ type
  TmsRectangularShape = class abstract(TmsPointedShape)
  protected
   function GetDrawBounds: TRectF; override;
-
-  class function CornerRadius: Single; virtual; abstract;
  public
   function ContainsPt(const aPoint: TPointF): Boolean; override;
  end; // TmsRectangularShape
