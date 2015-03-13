@@ -14,8 +14,6 @@ uses
 type
  TmsTextShape = class(TmsRectangularShape)
  protected
-  class function InitialWidth: Single; override;
-  class function GetInitialHeight: Pixel; override;
   function Text: string; virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsTextShape
@@ -45,16 +43,6 @@ begin
                    1,
                    TCornerType.Round);
  end;//aCtx.rMoving
-end;
-
-class function TmsTextShape.GetInitialHeight: Pixel;
-begin
- Result := 14
-end;
-
-class function TmsTextShape.InitialWidth: Single;
-begin
- Result := 21;
 end;
 
 function TmsTextShape.Text: string;

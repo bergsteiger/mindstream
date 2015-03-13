@@ -46,6 +46,7 @@ type
    rCanvas : TCanvas;
    rMoving : Boolean; // - определяем, что текущий рисуемый примитив - двигается
    rOpacity: Single;
+   rLineOpacity: Single;
    constructor Create(const aCanvas : TCanvas);
  end;//TmsDrawContext
 
@@ -65,11 +66,17 @@ type
   class operator Implicit(aValue: Pixel): TmsPixelRec;
  end;//TmsPixelRec
 
+ TmsRadiusRec = record
+  rIsSet : Boolean;
+  rValue : Pixel;
+  class operator Implicit(aValue: Pixel): TmsRadiusRec;
+ end;//TmsRadiusRec
+
  TmsStrokeDash = record
   rIsSet : Boolean;
   rValue : TStrokeDash;
   class operator Implicit(aValue: TStrokeDash): TmsStrokeDash;
- end;//TmsPixelRec
+ end;//TmsStrokeDash
 
  TmsDrawOptionsContext = record
   public
@@ -78,6 +85,7 @@ type
    rStrokeColor: TAlphaColor;
    rStrokeThickness: Single;
    rOpacity: Single;
+   rLineOpacity: Single;
    constructor Create(const aCtx: TmsDrawContext);
  end;//TmsDrawOptionsContext
 
@@ -199,8 +207,10 @@ type
   function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
   function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
   function SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
+  function SetCornerRadius(aValue: Single): ImsShapeClassTuner;
   function SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;
   function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
+  function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
  end;//ImsShapeClassTuner
 
  ImsShapeClass = interface
@@ -218,6 +228,8 @@ type
   function Stereotype: String;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function InitialHeight: Pixel;
+  function InitialWidth: Pixel;
+  function CornerRadius: Pixel;
   function ParentMC: ImsShapeClass;
   function AsTuner: ImsShapeClassTuner;
  end;//ImsShapeClass
@@ -271,6 +283,7 @@ begin
  rCanvas := aCanvas;
  rMoving := false;
  rOpacity := 0.5;
+ rLineOpacity := 1.0;
 end;
 
 // TmsMakeShapeContext
@@ -288,6 +301,7 @@ constructor TmsDrawOptionsContext.Create(const aCtx: TmsDrawContext);
 begin
  rFillColor :=  TAlphaColorRec.Null;
  rOpacity := 0.5;
+ rLineOpacity := 1.0;
  if aCtx.rMoving then
  begin
   rStrokeDash := TStrokeDash.DashDot;
@@ -340,6 +354,19 @@ begin
   Result.rIsSet := true;
   Result.rValue := aValue;
  end;//IsZero(aValue) OR (aValue < 0)
+end;
+
+// TmsRadiusRec
+
+class operator TmsRadiusRec.Implicit(aValue: Pixel): TmsRadiusRec;
+begin
+ if (aValue < 0) then
+  Result.rIsSet := false
+ else
+ begin
+  Result.rIsSet := true;
+  Result.rValue := aValue;
+ end;//(aValue < 0)
 end;
 
 // TmsStrokeDash

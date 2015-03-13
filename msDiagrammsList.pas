@@ -60,7 +60,7 @@ end;
 
 function TmsDiagrammsList.AddNewDiagramm: ImsDiagramm;
 const
- cN : array [0..4] of String = ('main', 'uses', 'call', 'state', 'inject');
+ cN : array [0..6] of String = ('main', 'methods', 'uses', 'call', 'state', 'inject', 'sequence');
 begin
  if (Items.Count >= Low(cN)) AND (Items.Count <= High(cN)) then
   Result := TmsDiagramm.Create(cN[Items.Count])

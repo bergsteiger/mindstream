@@ -20,7 +20,6 @@ type
  public
   class function ButtonShape: ImsShape; override;
   class function IsTool: Boolean; override;
-  class function IsForToolbar: Boolean; override;
  protected
   function IsNeedsSecondClick: Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
@@ -72,11 +71,6 @@ end;
 function TmsScrollingTool.EndTo(const aCtx: TmsEndShapeContext): Boolean;
 begin
  aCtx.rShapesController.RemoveShape(Self);
- Result := True;
-end;
-
-class function TmsScrollingTool.IsForToolbar: Boolean;
-begin
  Result := True;
 end;
 

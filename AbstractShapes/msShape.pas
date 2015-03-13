@@ -45,8 +45,6 @@ type
   procedure MouseMove(const aClickContext: TmsEndShapeContext); virtual;
   // - действие при MouseMove
   function Stereotype: String;
- public
-  class function GetInitialHeight: Pixel; virtual;
  protected
   class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
  public
@@ -83,7 +81,7 @@ type
   property StartPoint : TPointF
    read pm_GetStartPoint;
   class function IsTool: Boolean; virtual;
-  class function IsForToolbar: Boolean; virtual;
+  class function IsForToolbar: Boolean;
   class function IsNullClick: Boolean; virtual;
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);
@@ -165,12 +163,6 @@ end;
 procedure TmsShape.MouseMove(const aClickContext: TmsEndShapeContext);
 begin
  // Ничего не делаем, специально
-end;
-
-class function TmsShape.GetInitialHeight: Pixel;
-begin
- Result := 0.0;
- //Assert(false, 'Не реализовано: ' + ClassName);
 end;
 
 function TmsShape.Stereotype: String;
@@ -299,6 +291,7 @@ begin
  aCtx.rCanvas.Stroke.Thickness := l_Ctx.rStrokeThickness;
  l_DrawContext := aCtx;
  l_DrawContext.rOpacity := l_Ctx.rOpacity;
+ l_DrawContext.rLineOpacity := l_Ctx.rLineOpacity;
  DoDrawTo(l_DrawContext);
  l_StereotypeRect := TRectF.Create(0, 0, 0, 0);
  GetStereotypeRect(l_StereotypeRect);

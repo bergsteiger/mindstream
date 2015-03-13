@@ -9,14 +9,12 @@ uses
   msLine,
   msRectangle,
   msCircle,
-  msRoundedRectangle,
   msUseCaseLikeEllipse,
   msTriangle,
   msLineWithArrow,
   msTriangleDirectionRight,
   msRegisteredShapes,
   msPolygonShape,
-  msBlackRectangle,
   msPointCircle,
   msFolder,
   msMover,
@@ -58,9 +56,16 @@ procedure RegisterOurShapes;
 begin
   // concrete shapes
   TmsLine.TMC;
-  TmsRectangle.TMC.SetFillColor(TAlphaColorRec.White);
+  TmsRectangle.TMC.SetFillColor(TAlphaColorRec.White)
+   .SetInitialHeight(90)
+   .SetInitialWidth(100)
+   .SetCornerRadius(0.0);
   TmsCircle.TMC.SetFillColor(TAlphaColorRec.Red);
-  TmsRoundedRectangle.TMC.SetFillColor(TAlphaColorRec.Blue);
+  TmsRectangle.Specify('RoundedRectangle')
+   .SetFillColor(TAlphaColorRec.Blue)
+   .SetInitialHeight(90)
+   .SetInitialWidth(90)
+   .SetCornerRadius(10);
   TmsUseCaseLikeEllipse.TMC.SetFillColor(TAlphaColorRec.Yellow);
   TmsTriangle.TMC.SetFillColor(TAlphaColorRec.Green).SetInitialHeight(100);
   TmsLine.Specify('DashDotLine').SetStrokeDash(TStrokeDash.DashDot);
@@ -74,7 +79,9 @@ begin
 
   // special shapes
   TmsPointCircle.TMC.SetFillColor(TAlphaColorRec.Null);
-  TmsTriangleDirectionRight.Specify('SmallTriangle').SetFillColor(TAlphaColorRec.Aquamarine).SetInitialHeight(20);
+  TmsTriangleDirectionRight.Specify('SmallTriangle')
+   .SetFillColor(TAlphaColorRec.Aquamarine)
+   .SetInitialHeight(20);
 
   // utility shapes
   TmsMover.TMC;
@@ -89,10 +96,16 @@ begin
 
   TmsCircle.Specify('GreenCircle').SetFillColor(TAlphaColorRec.Green);
   TmsTriangle.Specify('BlackTriangle').SetFillColor(TAlphaColorRec.Black);
-  TmsBlackRectangle.TMC.SetFillColor(TAlphaColorRec.Black).SetInitialHeight(100);
+  TmsRectangle.Specify('BlackRectangle')
+   .SetFillColor(TAlphaColorRec.Black)
+   .SetInitialHeight(100)
+   .SetInitialWidth(15);
   TmsRemoveIcon.TMC.SetFillColor(TAlphaColorRec.Mediumvioletred);
   TmsMoveIcon.TMC.SetFillColor(TAlphaColorRec.Black);
-  TmsTextShape.TMC.SetFillColor(TAlphaColorRec.Black);
+  TmsTextShape.TMC.SetFillColor(TAlphaColorRec.Black)
+   .SetInitialHeight(14)
+   .SetInitialWidth(21);
+  // - вообще говоря это НАДО вычислять из параметров шрифта. НО! ПОТОМ!
   TmsScrollShapeUp.TMC;
   TmsScrollShapeDown.TMC;
   TmsScrollShapeRight.TMC;
@@ -123,7 +136,8 @@ begin
 
   TmsUsecase.TMC.SetFillColor(TAlphaColorRec.Lightyellow);
 
-  TmsUsecase.Specify('UsecaseRealization').SetFillColor(TAlphaColorRec.Lightgreen);
+  TmsUsecase.Specify('UsecaseRealization')
+   .SetFillColor(TAlphaColorRec.Lightgreen);
 
   TmsTrivial.TMC.SetInitialHeightScale( 1 / 3 * 2);
 
@@ -139,7 +153,7 @@ begin
   TmsAssociation.Specify('readonly');
   TmsAssociation.Specify('writeonly');
 
-  TmsArrowHead.TMC.SetStrokeThickness(1.5)
+  TmsArrowHead.TMC.SetStrokeThickness(1.5).SetInitialHeight(20);
 end;
 
 initialization
