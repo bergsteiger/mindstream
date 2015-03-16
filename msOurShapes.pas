@@ -47,7 +47,8 @@ uses
   msUsecase,
   msTrivial,
   msArrowHead,
-  msSVGShape
+  msSVGShape,
+  msScrollShape
   ;
 
 // Важно !!!
@@ -106,6 +107,8 @@ begin
    .SetInitialHeight(14)
    .SetInitialWidth(21);
   // - вообще говоря это НАДО вычислять из параметров шрифта. НО! ПОТОМ!
+
+  TmsScrollShape.NRTMC;
   TmsScrollShapeUp.TMC;
   TmsScrollShapeDown.TMC;
   TmsScrollShapeRight.TMC;
