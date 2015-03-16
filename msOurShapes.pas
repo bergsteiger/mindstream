@@ -157,36 +157,48 @@ begin
   TmsClass.TMC;
 
   TmsClass.Specify('Interface')
-   .SetFillColor(TAlphaColorRec.Lightblue);
+   .SetFillColor(TAlphaColorRec.Lightblue)
+   ;
   TmsClass.Specify('MixIn')
-   .SetFillColor(TAlphaColorRec.Lightgreen);
+   .SetFillColor(TAlphaColorRec.Lightgreen)
+   ;
 
   TmsLibrary.TMC;
 
   TmsLibrary.Specify('Project')
-   .SetFillColor(TAlphaColorRec.Lightgreen);
+   .SetFillColor(TAlphaColorRec.Lightgreen)
+   ;
   TmsLibrary.Specify('Subsystem')
-   .SetFillColor(TAlphaColorRec.Lightblue);
+   .SetFillColor(TAlphaColorRec.Lightblue)
+   ;
 
   TmsUsecase.TMC
-   .SetFillColor(TAlphaColorRec.Lightyellow);
+   .SetFillColor(TAlphaColorRec.Lightyellow)
+   ;
 
   TmsUsecase.Specify('UsecaseRealization')
-   .SetFillColor(TAlphaColorRec.Lightgreen);
+   .SetFillColor(TAlphaColorRec.Lightgreen)
+   ;
 
   TmsTrivial.TMC
-   .SetInitialHeightScale( 1 / 3 * 2);
+   .SetInitialHeightScale( 1 / 3 * 2)
+   ;
 
   TmsLibrary.Specify('Layer')
-   .SetFillColor(TAlphaColorRec.Lightgray);
+   .SetFillColor(TAlphaColorRec.Lightgray)
+   ;
   TmsTrivial.Specify('Typedef')
-   .SetFillColor(TAlphaColorRec.Gray);
+   .SetFillColor(TAlphaColorRec.Gray)
+   ;
   TmsTrivial.Specify('Exception')
-   .SetFillColor(TAlphaColorRec.Red);
+   .SetFillColor(TAlphaColorRec.Red)
+   ;
   TmsClass.Specify('Method')
-   .SetFillColor(TAlphaColorRec.Purple);
+   .SetFillColor(TAlphaColorRec.Purple)
+   ;
   TmsClass.Specify('Program')
-   .SetFillColor(TAlphaColorRec.Lime);
+   .SetFillColor(TAlphaColorRec.Lime)
+   ;
   TmsDependency.Specify('uses');
   TmsDependency.Specify('friend');
   TmsDependency.Specify('injects');
@@ -196,7 +208,9 @@ begin
 
   TmsArrowHead.TMC
    .SetStrokeThickness(1.5)
-   .SetInitialHeight(20);
+   .SetInitialHeight(20)
+   .SetIsForToolbar(false)
+   ;
 
   TmsConnector.TMC
    ;
