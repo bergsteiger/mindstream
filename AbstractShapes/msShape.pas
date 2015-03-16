@@ -81,7 +81,6 @@ type
   property StartPoint : TPointF
    read pm_GetStartPoint;
   class function IsTool: Boolean; virtual;
-  class function IsForToolbar: Boolean;
   class function IsNullClick: Boolean; virtual;
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);
@@ -215,11 +214,6 @@ end;
 class function TmsShape.IsTool: Boolean;
 begin
  Result := false;
-end;
-
-class function TmsShape.IsForToolbar: Boolean;
-begin
- Result := true;
 end;
 
 class function TmsShape.IsLineLike: Boolean;
