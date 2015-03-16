@@ -48,6 +48,9 @@ uses
 constructor TmsShapeClassPrim.Create;
 begin
  inherited Create;
+ f_IsForToolbar := true;
+ if (ParentMC <> nil) then
+  f_IsForToolbar := ParentMC.IsForToolbar;
 end;
 
 function TmsShapeClassPrim.ParentMC: ImsShapeClass;
