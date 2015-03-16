@@ -211,6 +211,7 @@ type
   function SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;
   function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
   function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
+  function SetIsForToolbar(aValue: Boolean): ImsShapeClassTuner;
  end;//ImsShapeClassTuner
 
  ImsShapeClass = interface
