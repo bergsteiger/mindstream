@@ -19,7 +19,6 @@ type
  private
   constructor CreateInner(aShapeClass: RmsShape);
  protected
-  function IsForToolbar: Boolean;
   function IsTool: Boolean;
   function IsLineLike: Boolean;
   function Creator: ImsShapeCreator;
@@ -56,12 +55,6 @@ class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClassTuner;
 begin
  Result := CreateInner(aShapeClass);
  Assert(Result <> nil);
-end;
-
-function TmsShapeClass.IsForToolbar: Boolean;
-begin
- Assert(f_ShapeClass <> nil);
- Result := f_ShapeClass.IsForToolbar;
 end;
 
 function TmsShapeClass.IsTool: Boolean;

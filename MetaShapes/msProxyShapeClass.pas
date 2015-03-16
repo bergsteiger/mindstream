@@ -19,7 +19,6 @@ type
  private
   constructor CreateInner(const aName : String; const aShapeClass: MCmsShape);
  protected
-  function IsForToolbar: Boolean;
   function IsTool: Boolean;
   function IsLineLike: Boolean;
   function Creator: ImsShapeCreator;
@@ -57,12 +56,6 @@ end;
 class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: MCmsShape): ImsShapeClassTuner;
 begin
  Result := CreateInner(aName, aShapeClass);
-end;
-
-function TmsProxyShapeClass.IsForToolbar: Boolean;
-begin
- Assert(f_ShapeClass <> nil);
- Result := f_ShapeClass.IsForToolbar;
 end;
 
 function TmsProxyShapeClass.IsTool: Boolean;

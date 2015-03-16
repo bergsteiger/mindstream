@@ -33,6 +33,7 @@ type
   function InitialWidth: Pixel;
   function CornerRadius: Pixel;
   function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
+  function IsForToolbar: Boolean;
  public
   constructor Create;
  end;//TmsShapeClassPrim
@@ -122,6 +123,11 @@ function TmsShapeClassPrim.SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
 begin
  Result := Self;
  f_InitialWidth := aValue;
+end;
+
+function TmsShapeClassPrim.IsForToolbar: Boolean;
+begin
+ Result := f_IsForToolbar;
 end;
 
 function TmsShapeClassPrim.SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
