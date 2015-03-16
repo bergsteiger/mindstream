@@ -219,6 +219,10 @@ begin
 
   TmsConnector.TMC
    ;
+
+  TmsUseCaseLikeEllipse.TMC
+   .SetIsForToolbar(false)
+   ;
 end;
 
 initialization
