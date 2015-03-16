@@ -33,7 +33,7 @@ end;
 procedure TForToolbarShapesTest.CheckShapeClass(const aShapeClass: MCmsShape);
 begin
  inherited;
- //Assert(aShapeClass.IsForToolbar);
+ Assert(aShapeClass.IsForToolbar);
 end;
 
 initialization
