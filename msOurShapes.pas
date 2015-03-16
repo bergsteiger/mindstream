@@ -139,12 +139,13 @@ begin
   TmsScrollShapeResetOrigin.TMC;
 
   TmsScrollingTool.TMC
-   .SetIsForToolbar(false)
+//   .SetIsForToolbar(false)
    ;
 
   TmsConnector.TMC;
   TmsGeneralization.TMC;
-  TmsRealization.TMC.SetStrokeThickness(2)
+  TmsRealization.TMC
+   .SetStrokeThickness(2)
    .SetStrokeDash(TStrokeDash.Dash);
   TmsAssociation.TMC
    .SetStrokeThickness(1.5)
