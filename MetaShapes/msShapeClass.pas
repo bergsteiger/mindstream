@@ -48,8 +48,8 @@ uses
 
 constructor TmsShapeClass.CreateInner(aShapeClass: RmsShape);
 begin
- inherited Create;
  f_ShapeClass := aShapeClass;
+ inherited Create;
 end;
 
 class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClassTuner;

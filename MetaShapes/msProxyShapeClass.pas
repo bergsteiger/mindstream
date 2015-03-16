@@ -48,10 +48,10 @@ uses
 
 constructor TmsProxyShapeClass.CreateInner(const aName : String; const aShapeClass: MCmsShape);
 begin
- inherited Create;
  f_ShapeClass := aShapeClass;
  f_Stereotype := aName;
  f_Name := 'Tms' + f_Stereotype;
+ inherited Create;
 end;
 
 class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: MCmsShape): ImsShapeClassTuner;

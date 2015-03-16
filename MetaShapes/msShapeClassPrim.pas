@@ -9,13 +9,14 @@ uses
 
 type
  TmsShapeClassPrim = class abstract(TmsInterfacedRefcounted, ImsShapeClassTuner)
- protected
+ private
   f_FillColor : TmsColorRec;
   f_InitialHeight : TmsPixelRec;
   f_InitialWidth : TmsPixelRec;
   f_StrokeThickness : TmsPixelRec;
   f_CornerRadius : TmsRadiusRec;
   f_StrokeDash : TmsStrokeDash;
+  f_IsForToolbar : Boolean;
  protected
   function ParentMC: ImsShapeClass; virtual;
   function AsMC: ImsShapeClass; virtual;
@@ -32,6 +33,8 @@ type
   function InitialWidth: Pixel;
   function CornerRadius: Pixel;
   function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
+ public
+  constructor Create;
  end;//TmsShapeClassPrim
 
 implementation
@@ -41,6 +44,11 @@ uses
  ;
 
 // TmsShapeClassPrim
+
+constructor TmsShapeClassPrim.Create;
+begin
+ inherited Create;
+end;
 
 function TmsShapeClassPrim.ParentMC: ImsShapeClass;
 begin
