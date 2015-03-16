@@ -48,7 +48,8 @@ uses
   msTrivial,
   msArrowHead,
   msSVGShape,
-  msScrollShape
+  msScrollShape,
+  msScrollShapePrim
   ;
 
 // Важно !!!
@@ -123,7 +124,10 @@ begin
    .SetInitialWidth(21);
   // - вообще говоря это НАДО вычислять из параметров шрифта. НО! ПОТОМ!
 
-  TmsScrollShape.NRTMC;
+  TmsScrollShapePrim.NRTMC
+   .SetIsForToolbar(false);
+  TmsScrollShape.NRTMC
+   .SetIsForToolbar(false);
   TmsScrollShapeUp.TMC;
   TmsScrollShapeDown.TMC;
   TmsScrollShapeRight.TMC;
