@@ -139,7 +139,8 @@ begin
   TmsScrollShapeResetOrigin.TMC;
 
   TmsScrollingTool.TMC
-   .SetIsForToolbar(false);
+   .SetIsForToolbar(false)
+   ;
 
   TmsConnector.TMC;
   TmsGeneralization.TMC;
