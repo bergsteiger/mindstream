@@ -89,10 +89,15 @@ begin
    .SetFillColor(TAlphaColorRec.Green);
 
   // special shapes
-  TmsPointCircle.TMC.SetFillColor(TAlphaColorRec.Null);
+  TmsPointCircle.TMC
+   .SetFillColor(TAlphaColorRec.Null)
+   .SetIsForToolbar(false)
+   ;
   TmsTriangleDirectionRight.Specify('SmallTriangle')
    .SetFillColor(TAlphaColorRec.Aquamarine)
-   .SetInitialHeight(20);
+   .SetInitialHeight(20)
+   .SetIsForToolbar(false)
+   ;
 
   // utility shapes
   TmsMover.TMC;
