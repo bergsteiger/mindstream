@@ -37,7 +37,13 @@ end;
 
 procedure TmsShapesForToolbar.IterateShapes(aLambda: TmsShapeClassLambda);
 begin
- inherited;
+ inherited IterateShapes(
+  procedure (const aShapeClass : MCmsShape)
+  begin
+   if aShapeClass.IsForToolbar then
+    aLambda(aShapeClass);
+  end
+ );
 end;
 
 end.
