@@ -120,7 +120,9 @@ begin
    .SetInitialHeight(100)
    .SetInitialWidth(15);
   TmsRemoveIcon.TMC
-   .SetFillColor(TAlphaColorRec.Mediumvioletred);
+   .SetFillColor(TAlphaColorRec.Mediumvioletred)
+   .SetIsForToolbar(false)
+   ;
   TmsMoveIcon.TMC
    .SetFillColor(TAlphaColorRec.Black);
   TmsTextShape.TMC
@@ -218,6 +220,7 @@ begin
    ;
 
   TmsConnector.TMC
+   .SetIsForToolbar(false)
    ;
 
   TmsUseCaseLikeEllipse.TMC
