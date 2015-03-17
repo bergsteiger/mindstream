@@ -18,7 +18,6 @@ type
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); override;
-  class function IsLineLike: Boolean; override;
   function GetDrawBounds: TRectF; override;
   function GetFinishPointForDraw: TPointF; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; override;
@@ -29,6 +28,7 @@ type
    write f_FinishPoint;
   procedure MoveBy(const aCtx: TmsMoveContext); override;
  public
+  class function IsLineLike: Boolean; override;
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
   class function CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF; const aShapesController: ImsShapesController): ImsShape;
