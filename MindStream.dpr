@@ -3,7 +3,7 @@ program MindStream;
 uses
   //msCoreObjects in 'Core\msCoreObjects.pas',
   FMX.Forms,
-  //uMain in 'uMain.pas' {fmMain},
+  uMain in 'uMain.pas' {fmMain},
   //u_fmGUITestRunner in 'FMX.DUnit\u_fmGUITestRunner.pas' {fmGUITestRunner},
   msDiagramm in 'msDiagramm.pas',
   msShape in 'AbstractShapes\msShape.pas',
@@ -145,7 +145,7 @@ uses
 
 begin
   Application.Initialize;
-  //Application.CreateForm(TfmMain, fmMain);
+  Application.CreateForm(TfmMain, fmMain);
   //u_fmGUITestRunner.RunRegisteredTestsModeless;
   Application.Run;
 end.

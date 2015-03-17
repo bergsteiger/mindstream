@@ -182,6 +182,9 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
+        <DCCReference Include="uMain.pas">
+            <Form>fmMain</Form>
+        </DCCReference>
         <DCCReference Include="msDiagramm.pas"/>
         <DCCReference Include="AbstractShapes\msShape.pas"/>
         <DCCReference Include="msRegisteredShapes.pas"/>
