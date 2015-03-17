@@ -183,9 +183,6 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="Core\msCoreObjects.pas"/>
-        <DCCReference Include="uMain.pas">
-            <Form>fmMain</Form>
-        </DCCReference>
         <DCCReference Include="msDiagramm.pas"/>
         <DCCReference Include="AbstractShapes\msShape.pas"/>
         <DCCReference Include="msRegisteredShapes.pas"/>
@@ -204,13 +201,9 @@
         <DCCReference Include="ShapeTools\msMover.pas"/>
         <DCCReference Include="msSerializeInterfaces.pas"/>
         <DCCReference Include="ShapeTools\msTool.pas"/>
-        <DCCReference Include="Marshal\msDiagrammMarshal.pas"/>
-        <DCCReference Include="Marshal\msShapeMarshal.pas"/>
-        <DCCReference Include="Marshal\msDiagrammsMarshal.pas"/>
         <DCCReference Include="Core\msStringList.pas"/>
         <DCCReference Include="Core\msObject.pas"/>
         <DCCReference Include="Core\msInterfacedRefcounted.pas"/>
-        <DCCReference Include="Marshal\msMarshalPrim.pas"/>
         <DCCReference Include="msInvalidators.pas"/>
         <DCCReference Include="msInterfaces.pas"/>
         <DCCReference Include="ShapeTools\msPicker.pas"/>
@@ -1243,7 +1236,7 @@
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
             </Deployment>
             <Platforms>
-                <Platform value="Android" ActiveMobileDevice="52b4ad11">True</Platform>
+                <Platform value="Android">True</Platform>
                 <Platform value="iOSDevice">False</Platform>
                 <Platform value="iOSSimulator" ActiveMobileDevice="iPhone">False</Platform>
                 <Platform value="OSX32">False</Platform>

@@ -35,7 +35,7 @@ uses
  System.SysUtils,
  FMX.Graphics,
  System.UITypes,
- msDiagrammsMarshal,
+ //msDiagrammsMarshal,
  msRegisteredShapes,
  msInvalidators
  ;
@@ -62,7 +62,8 @@ const
 
 procedure TmsDiagramms.DeSerialize;
 begin
- TmsDiagrammsMarshal.DeSerialize(c_FileName, self);
+ Assert(false);
+ (*TmsDiagrammsMarshal.DeSerialize(c_FileName, self);*)
 end;
 
 procedure TmsDiagramms.Assign(anOther: TmsDiagramms);
@@ -72,17 +73,20 @@ end;
 
 procedure TmsDiagramms.Serialize;
 begin
- TmsDiagrammsMarshal.Serialize(c_FileName, self);
+ Assert(false);
+ (*TmsDiagrammsMarshal.Serialize(c_FileName, self);*)
 end;
 
 procedure TmsDiagramms.SaveTo(const aFileName: String);
 begin
- TmsDiagrammsMarshal.Serialize(aFileName, Self);
+ Assert(false);
+ (*TmsDiagrammsMarshal.Serialize(aFileName, Self);*)
 end;
 
 procedure TmsDiagramms.LoadFrom(const aFileName: String);
 begin
- TmsDiagrammsMarshal.DeSerialize(aFileName, Self);
+ Assert(false);
+ (*TmsDiagrammsMarshal.DeSerialize(aFileName, Self);*)
 end;
 
 end.

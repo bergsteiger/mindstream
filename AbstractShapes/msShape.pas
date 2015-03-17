@@ -100,7 +100,7 @@ implementation
 
 uses
  System.SysUtils,
- msShapeMarshal,
+ //msShapeMarshal,
  System.Math.Vectors,
  msRegisteredShapes,
  msNotRegisteredShapes,
@@ -311,12 +311,14 @@ end;
 
 procedure TmsShape.SaveTo(const aFileName: String);
 begin
- TmsShapeMarshal.Serialize(aFileName, Self);
+ Assert(false);
+ (*TmsShapeMarshal.Serialize(aFileName, Self);*)
 end;
 
 procedure TmsShape.LoadFrom(const aFileName: String);
 begin
- TmsShapeMarshal.DeSerialize(aFileName, Self);
+ Assert(false);
+ (*TmsShapeMarshal.DeSerialize(aFileName, Self);*)
 end;
 
 procedure TmsShape.Assign(anOther : TmsShape);

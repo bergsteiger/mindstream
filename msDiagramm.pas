@@ -82,7 +82,7 @@ uses
 {$Include msShapesProvider.mixin.pas}
  msMover,
  msCircle,
- msDiagrammMarshal,
+ //msDiagrammMarshal,
  msInvalidators,
  msShapesForToolbar,
  msDiagrammsController,
@@ -100,7 +100,8 @@ const
 
 procedure TmsDiagramm.Serialize;
 begin
- TmsDiagrammMarshal.Serialize(Self.Name + c_FileName, Self);
+ Assert(false);
+ (*TmsDiagrammMarshal.Serialize(Self.Name + c_FileName, Self);*)
 end;
 
 procedure TmsDiagramm.MouseDown(const aClickContext: TmsClickContext);
@@ -146,7 +147,8 @@ end;
 
 procedure TmsDiagramm.SaveTo(const aFileName: String);
 begin
- TmsDiagrammMarshal.Serialize(aFileName, Self);
+ Assert(false);
+ (*TmsDiagrammMarshal.Serialize(aFileName, Self);*)
 end;
 
 procedure TmsDiagramm.SaveToPng(const aFileName: string);
@@ -198,7 +200,8 @@ end;
 
 procedure TmsDiagramm.LoadFrom(const aFileName: String);
 begin
- TmsDiagrammMarshal.DeSerialize(aFileName, Self);
+ Assert(false);
+ (*TmsDiagrammMarshal.DeSerialize(aFileName, Self);*)
 end;
 
 procedure TmsDiagramm.MouseMove(const aClickContext: TmsClickContext);
@@ -271,7 +274,8 @@ procedure TmsDiagramm.DeSerialize;
 begin
  Clear;
  try
-  TmsDiagrammMarshal.DeSerialize(Self.Name + c_FileName, Self);
+  Assert(false);
+(*  TmsDiagrammMarshal.DeSerialize(Self.Name + c_FileName, Self);*)
  except
   on EFOpenError do
    Exit;
