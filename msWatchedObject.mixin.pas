@@ -26,23 +26,23 @@
   // - функция для инициализации объекта СРАЗУ после его создания. Ещё ДО конструктора.
   procedure InstanceWillBeDestroyed; virtual;
   // - функция вызываемая ПОСЛЕ деструктора, но ПЕРЕД реальным освобождением объекта
- public
+(* public
   class function NewInstance: TObject; override; final;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
   procedure FreeInstance; override; final;
-  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
+  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html*)
   destructor Destroy; override; final;
  end;//TmsWatchedObjectPrim
 
  TmsWatchedObject = class abstract(TmsWatchedObjectPrim)
  // - Класс, который умеет контроллировать создание/уничтожение своих экземпляров
- public
+(* public
   procedure NewInstance(var aDummy); reintroduce;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
   procedure FreeInstance(var aDummy); reintroduce;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
   procedure Destroy(var aDummy); reintroduce;
-  procedure Free(var aDummy); reintroduce;
+  procedure Free(var aDummy); reintroduce;*)
  end;//TmsWatchedObject
 
 {$Else TmsWatchedObject}
@@ -82,7 +82,7 @@ begin
  // - Ничего не делаем
 end;
 
-class function TmsWatchedObjectPrim.NewInstance: TObject;
+(*class function TmsWatchedObjectPrim.NewInstance: TObject;
 begin
  TmsObjectsWatcher.CreateObject(Self, Result);
  TmsWatchedObjectPrim(Result).InstanceAllocated
@@ -114,7 +114,7 @@ end;
 procedure TmsWatchedObject.FreeInstance(var aDummy);
 begin
  raise Exception.Create('Нельзя ни перекрывать, ни вызывать FreeInstance');
-end;
+end;*)
 
 {$EndIf TmsWatchedObject_uses_impl}
 
