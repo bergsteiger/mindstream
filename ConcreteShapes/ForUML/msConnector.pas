@@ -6,8 +6,8 @@ uses
  System.Types,
  msInterfaces,
  msLine,
- msLineWithArrow,
- Data.DBXJSONReflect
+ msLineWithArrow(*,
+ Data.DBXJSONReflect*)
  ;
 
 type

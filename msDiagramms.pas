@@ -8,7 +8,7 @@ uses
  System.Classes,
  //msCoreObjects,
  msShape,
- Data.DBXJSONReflect,
+ //Data.DBXJSONReflect,
  msDiagramm,
  msInterfaces,
  msDiagrammsList

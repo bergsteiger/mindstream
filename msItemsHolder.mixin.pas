@@ -7,7 +7,7 @@
 
 // uses
  Generics.Collections,
- Data.DBXJSONReflect,
+ //Data.DBXJSONReflect,
  System.Rtti
 
 {$Else TmsItemsHolder_uses_intf}
@@ -36,8 +36,8 @@
   procedure Cleanup; override;
   property Items: TmsItemsList read pm_GetItems write pm_SetItems;
   procedure Assign(anOther : TmsItemsHolder);
-  class procedure RegisterInMarshal(aMarshal: TJSONMarshal);
-  class procedure RegisterInUnMarshal(aMarshal: TJSONUnMarshal);
+(*  class procedure RegisterInMarshal(aMarshal: TJSONMarshal);
+  class procedure RegisterInUnMarshal(aMarshal: TJSONUnMarshal);*)
   function GetEnumerator: TmsItemsListEnumerator;
   function IndexOf(const anItem: TmsItem): Integer;
  end;//TmsItemsHolder
@@ -111,7 +111,7 @@ begin
  Assert(false, 'Не найдено поля для Items');
 end;
 
-class procedure TmsItemsHolder.RegisterInMarshal(aMarshal: TJSONMarshal);
+(*class procedure TmsItemsHolder.RegisterInMarshal(aMarshal: TJSONMarshal);
 begin
  RegisterItemsLike(
   procedure (aField: TRttiField)
@@ -175,7 +175,7 @@ begin
    );//aMarshal.RegisterReverter
   end
  );//RegisterItemsLike
-end;
+end;*)
 
 function TmsItemsHolder.GetEnumerator: TmsItemsListEnumerator;
 begin

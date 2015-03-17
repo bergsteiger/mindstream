@@ -12,8 +12,8 @@ uses
  msInterfacedRefcounted,
  msInterfaces,
  System.Classes,
- msDiagrammsList,
- Data.DBXJSONReflect
+ msDiagrammsList(*,
+ Data.DBXJSONReflect*)
  ;
 
 type
