@@ -1,0 +1,40 @@
+inherited TabbedForm_XLgXhdpiTb: TTabbedForm_XLgXhdpiTb
+  ClientHeight = 1255
+  ClientWidth = 800
+  DesignerMasterStyle = 3
+  inherited HeaderToolBar: TToolBar
+    Size.Width = 800.000000000000000000
+    inherited ToolBarLabel: TLabel
+      Size.Width = 800.000000000000000000
+    end
+  end
+  inherited TabControl1: TTabControl
+    Size.Width = 800.000000000000000000
+    Size.Height = 1207.000000000000000000
+    inherited TabItem1: TTabItem
+      Size.Width = 200.000000000000000000
+    end
+    inherited TabItem2: TTabItem
+      Size.Width = 200.000000000000000000
+    end
+    inherited TabItem3: TTabItem
+      Size.Width = 200.000000000000000000
+    end
+    inherited TabItem4: TTabItem
+      Size.Width = 200.000000000000000000
+    end
+  end
+  inherited GestureManager1: TGestureManager
+    GestureData = <
+      item
+        Control = Owner
+        Collection = <
+          item
+            GestureID = sgiLeft
+          end
+          item
+            GestureID = sgiRight
+          end>
+      end>
+  end
+end
