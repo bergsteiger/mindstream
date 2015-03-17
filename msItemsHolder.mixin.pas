@@ -28,7 +28,7 @@
   f_Items : TmsItemsList;
   function pm_GetItems: TmsItemsList;
   procedure pm_SetItems(aValue: TmsItemsList);
-  class procedure RegisterItemsLike(aLambda: TmsRttiFieldLambda);
+(*  class procedure RegisterItemsLike(aLambda: TmsRttiFieldLambda);*)
  protected
   function ItemsCount: Integer;
  public
@@ -97,7 +97,7 @@ begin
  Self.Items := anOther.Items;
 end;
 
-class procedure TmsItemsHolder.RegisterItemsLike(aLambda: TmsRttiFieldLambda);
+(*class procedure TmsItemsHolder.RegisterItemsLike(aLambda: TmsRttiFieldLambda);
 var
  l_Field : TRttiField;
 begin
@@ -109,7 +109,7 @@ begin
     Exit;
    end;//l_Field.Name = 'f_Items'
  Assert(false, 'Не найдено поля для Items');
-end;
+end;*)
 
 (*class procedure TmsItemsHolder.RegisterInMarshal(aMarshal: TJSONMarshal);
 begin
