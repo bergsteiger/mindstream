@@ -104,7 +104,7 @@ uses
  System.Math.Vectors,
  msRegisteredShapes,
  msNotRegisteredShapes,
- FMX.DUnit.msAppLog,
+ //FMX.DUnit.msAppLog,
 
  msShapeClass,
  msProxyShapeClass

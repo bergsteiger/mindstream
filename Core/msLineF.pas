@@ -3,9 +3,9 @@ unit msLineF;
 interface
 
 uses
- System.Types,
+ System.Types(*,
 
- FMX.DUnit.msLog
+ FMX.DUnit.msLog*)
  ;
 
 type
@@ -16,7 +16,7 @@ type
   P : TPointF;
   constructor Create(const aPoint: TPointF); overload;
   constructor Create(aX: Pixel; aY: Pixel); overload;
-  procedure ToLog(aLog: TmsLog);
+(*  procedure ToLog(aLog: TmsLog);*)
   class function Normalize(const aPt: TmsPointF): TmsPointF; static;
   function N: TmsPointF;
   function ToString: String;
@@ -32,7 +32,7 @@ type
  public
   A : TmsPointF;
   B : TmsPointF;
-  procedure ToLog(aLog: TmsLog);
+(*  procedure ToLog(aLog: TmsLog);*)
   function ToString: String;
   function Cross(const anOther: TmsLineF; out theCross: TmsPointF): Boolean;
   // - пересечение линий
@@ -53,7 +53,7 @@ type
   L1 : TmsLineF;
   L2 : TmsLineF;
   constructor Create(const aL1: TmsLineF; const aL2: TmsLineF);
-  procedure ToLog(aLog: TmsLog);
+(*  procedure ToLog(aLog: TmsLog);*)
   function ToString: String;
   function Cross(out theCross: TmsPointF): Boolean;
   // - пересечение линий
@@ -74,8 +74,8 @@ implementation
 
 uses
  System.SysUtils,
- Math,
- FMX.DUnit.msAppLog
+ Math(*,
+ FMX.DUnit.msAppLog*)
  ;
 
 // TmsPointF
@@ -90,7 +90,7 @@ begin
  Create(TPointF.Create(aX, aY));
 end;
 
-procedure TmsPointF.ToLog(aLog: TmsLog);
+(*procedure TmsPointF.ToLog(aLog: TmsLog);
 var
  l_N : TmsPointF;
 begin
@@ -99,7 +99,7 @@ begin
  aLog.ToLog(FloatToStr(l_N.P.X));
  aLog.ToLog('Y:');
  aLog.ToLog(FloatToStr(l_N.P.Y));
-end;
+end;*)
 
 class function TmsPointF.Normalize(const aPt: TmsPointF): TmsPointF;
 begin
@@ -121,14 +121,14 @@ end;
 
 // TmsLineF
 
-procedure TmsLineF.ToLog(aLog: TmsLog);
+(*procedure TmsLineF.ToLog(aLog: TmsLog);
 begin
  aLog.ToLog('dump line:');
  aLog.ToLog('A:');
  A.ToLog(aLog);
  aLog.ToLog('B:');
  B.ToLog(aLog);
-end;
+end;*)
 
 function TmsLineF.ToString: String;
 begin
@@ -320,13 +320,13 @@ begin
  L2 := aL2;
 end;
 
-procedure TmsLineFPair.ToLog(aLog: TmsLog);
+(*procedure TmsLineFPair.ToLog(aLog: TmsLog);
 begin
  aLog.ToLog('L1:');
  L1.ToLog(aLog);
  aLog.ToLog('L2:');
  L2.ToLog(aLog);
-end;
+end;*)
 
 function TmsLineFPair.ToString: String;
 begin

@@ -6,8 +6,8 @@
         <MainSource>MindStream.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
-        <TargetedPlatforms>1</TargetedPlatforms>
+        <Platform Condition="'$(Platform)'==''">Android</Platform>
+        <TargetedPlatforms>17</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -186,9 +186,6 @@
         <DCCReference Include="uMain.pas">
             <Form>fmMain</Form>
         </DCCReference>
-        <DCCReference Include="FMX.DUnit\u_fmGUITestRunner.pas">
-            <Form>fmGUITestRunner</Form>
-        </DCCReference>
         <DCCReference Include="msDiagramm.pas"/>
         <DCCReference Include="AbstractShapes\msShape.pas"/>
         <DCCReference Include="msRegisteredShapes.pas"/>
@@ -205,12 +202,6 @@
         <DCCReference Include="msOurShapes.pas"/>
         <DCCReference Include="ConcreteShapes\msTriangleDirectionRight.pas"/>
         <DCCReference Include="ShapeTools\msMover.pas"/>
-        <DCCReference Include="Tests\Module\FirstTest.pas"/>
-        <DCCReference Include="Tests\Module\TestMsLine.pas"/>
-        <DCCReference Include="Tests\Module\TestMsRectangle.pas"/>
-        <DCCReference Include="Tests\Module\TestMsPointCircle.pas"/>
-        <DCCReference Include="Tests\Module\TestMsCircle.pas"/>
-        <DCCReference Include="Tests\Module\msShapeTest.pas"/>
         <DCCReference Include="msSerializeInterfaces.pas"/>
         <DCCReference Include="ShapeTools\msTool.pas"/>
         <DCCReference Include="Marshal\msDiagrammMarshal.pas"/>
@@ -229,11 +220,7 @@
         <DCCReference Include="ShapeTools\msSwapParents.pas"/>
         <DCCReference Include="ShapeCreators\msShapeCreator.pas"/>
         <DCCReference Include="msFormatter.pas"/>
-        <DCCReference Include="Tests\Module\TestmsJsonFormatter.pas"/>
         <DCCReference Include="msDiagrammStack.pas"/>
-        <DCCReference Include="Tests\Module\TestSaveToPNG.pas"/>
-        <DCCReference Include="Tests\Module\TestSaveMoverToPNG.pas"/>
-        <DCCReference Include="Tests\Module\msTestConstants.pas"/>
         <DCCReference Include="ShapeButtons\msShapeButton.pas"/>
         <DCCReference Include="ShapeCreators\msCompletedShapeCreator.pas"/>
         <DCCReference Include="ShapeCreators\msPaletteShapeCreator.pas"/>
@@ -258,10 +245,7 @@
         <DCCReference Include="SpecialShapes\msRemoveIcon.pas"/>
         <DCCReference Include="ContainerShapes\msShapesGroup.pas"/>
         <DCCReference Include="AbstractShapes\msPointlessShape.pas"/>
-        <DCCReference Include="Tests\Integrated\ForToolbarShapesTest.pas"/>
-        <DCCReference Include="Tests\Integrated\RegisteredShapesTest.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msSwapParentsIcon.pas"/>
-        <DCCReference Include="Tests\Integrated\UtilityShapesTest.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msPickerIcon.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msUpToParentIcon.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msButtonIcon.pas"/>
@@ -272,8 +256,6 @@
         <DCCReference Include="msShapesList.pas"/>
         <DCCReference Include="ConcreteShapes\msCircleWithRadius.pas"/>
         <DCCReference Include="msShapeClassList.pas"/>
-        <DCCReference Include="Tests\Core\msLoggedTest.pas"/>
-        <DCCReference Include="Tests\Abstract\msRegisteredShapesTestPrim.pas"/>
         <DCCReference Include="ContainerShapes\msProxyShape.pas"/>
         <DCCReference Include="ContainerShapes\msShapeTool.pas"/>
         <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeUp.pas"/>
@@ -307,11 +289,8 @@
         <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapePrim.pas"/>
         <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeResetOrigin.pas"/>
         <DCCReference Include="ShapeTools\msScrollingTool.pas"/>
-        <DCCReference Include="fmx.dunit\FMX.DUnit.msAppLog.pas"/>
         <DCCReference Include="msMovingPointer.pas"/>
-        <DCCReference Include="fmx.dunit\FMX.DUnit.msLog.pas"/>
         <DCCReference Include="ConcreteShapes\ForUML\msConnector.pas"/>
-        <DCCReference Include="Tests\Module\msLineCrossTest.pas"/>
         <DCCReference Include="Core\msLineF.pas"/>
         <DCCReference Include="ConcreteShapes\ForUML\msGeneralization.pas"/>
         <DCCReference Include="ConcreteShapes\ForUML\msRealization.pas"/>
@@ -1266,7 +1245,7 @@
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
             </Deployment>
             <Platforms>
-                <Platform value="Android">False</Platform>
+                <Platform value="Android" ActiveMobileDevice="52b4ad11">True</Platform>
                 <Platform value="iOSDevice">False</Platform>
                 <Platform value="iOSSimulator" ActiveMobileDevice="iPhone">False</Platform>
                 <Platform value="OSX32">False</Platform>

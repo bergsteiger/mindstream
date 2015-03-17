@@ -46,8 +46,8 @@ implementation
 
 uses
  System.SysUtils,
- Math,
- FMX.DUnit.msLog
+ Math{,
+ FMX.DUnit.msLog}
  ;
 
 // TmsClassInstanceCount
@@ -149,7 +149,7 @@ begin
   if (f_ObjectsCreated.Count > 0) then
   begin
    // Далее выводим статистику неосвобождённых объектов в лог:
-   TmsLog.Log(ParamStr(0) + '.objects.log',
+(*   TmsLog.Log(ParamStr(0) + '.objects.log',
     procedure (aLog: TmsLog)
     var
      l_Item : TPair<String, TmsClassInstanceCount>;
@@ -160,7 +160,7 @@ begin
       aLog.ToLog(l_Item.Key + ' Неосвобождено: ' + IntToStr(l_Item.Value.rCount) + ' Максимально распределено: ' + IntToStr(l_Item.Value.rMaxCount));
      end;//for l_Key
     end
-   );
+   );*)
   end;//f_ObjectsCreated.Count > 0
  FreeAndNil(f_ObjectsCreated);
  FreeAndNil(f_DefferedObjects);
