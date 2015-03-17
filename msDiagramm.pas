@@ -20,7 +20,7 @@ uses
  msRegisteredShapes,
  FMX.Dialogs,
  System.JSON,
- msCoreObjects,
+ //msCoreObjects,
  msInterfacedRefcounted;
 
 type

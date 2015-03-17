@@ -1,7 +1,7 @@
 program MindStream;
 
 uses
-  msCoreObjects in 'Core\msCoreObjects.pas',
+  //msCoreObjects in 'Core\msCoreObjects.pas',
   FMX.Forms,
   //uMain in 'uMain.pas' {fmMain},
   //u_fmGUITestRunner in 'FMX.DUnit\u_fmGUITestRunner.pas' {fmGUITestRunner},

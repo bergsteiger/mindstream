@@ -7,7 +7,7 @@ uses
  System.Types,
  FMX.Types,
  System.UITypes,
- msCoreObjects,
+ //msCoreObjects,
  msSerializeInterfaces,
  msInterfacedRefcounted,
  msInterfaces,

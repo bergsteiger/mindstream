@@ -6,7 +6,7 @@ uses
  System.Types,
  FMX.Objects,
  System.Classes,
- msCoreObjects,
+ //msCoreObjects,
  msShape,
  Data.DBXJSONReflect,
  msDiagramm,
