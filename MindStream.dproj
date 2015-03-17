@@ -6,8 +6,8 @@
         <MainSource>MindStream.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
-        <TargetedPlatforms>17</TargetedPlatforms>
+        <Platform Condition="'$(Platform)'==''">Android</Platform>
+        <TargetedPlatforms>19</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -213,7 +213,6 @@
         <DCCReference Include="Marshal\msMarshalPrim.pas"/>
         <DCCReference Include="msInvalidators.pas"/>
         <DCCReference Include="msInterfaces.pas"/>
-        <DCCReference Include="Core\msStreamUtils.pas"/>
         <DCCReference Include="ShapeTools\msPicker.pas"/>
         <DCCReference Include="ShapeTools\msUpToParent.pas"/>
         <DCCReference Include="ShapeTools\msSwapParents.pas"/>
@@ -1249,7 +1248,7 @@
                 <Platform value="iOSSimulator" ActiveMobileDevice="iPhone">False</Platform>
                 <Platform value="OSX32">False</Platform>
                 <Platform value="Win32">True</Platform>
-                <Platform value="Win64">False</Platform>
+                <Platform value="Win64">True</Platform>
             </Platforms>
             <ModelSupport>True</ModelSupport>
         </BorlandProject>

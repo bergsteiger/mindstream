@@ -39,7 +39,7 @@ uses
   //msShapeTestSuite in 'Tests\Module\msShapeTestSuite.pas',
   msInvalidators in 'msInvalidators.pas',
   msInterfaces in 'msInterfaces.pas',
-  msStreamUtils in 'Core\msStreamUtils.pas',
+  //msStreamUtils in 'Core\msStreamUtils.pas',
   msPicker in 'ShapeTools\msPicker.pas',
   msUpToParent in 'ShapeTools\msUpToParent.pas',
   msSwapParents in 'ShapeTools\msSwapParents.pas',
