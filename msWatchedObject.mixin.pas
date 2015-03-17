@@ -26,11 +26,11 @@
   // - функция для инициализации объекта СРАЗУ после его создания. Ещё ДО конструктора.
   procedure InstanceWillBeDestroyed; virtual;
   // - функция вызываемая ПОСЛЕ деструктора, но ПЕРЕД реальным освобождением объекта
-(* public
+ public
   class function NewInstance: TObject; override; final;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
   procedure FreeInstance; override; final;
-  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html*)
+  // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
   destructor Destroy; override; final;
  end;//TmsWatchedObjectPrim
 
@@ -82,21 +82,23 @@ begin
  // - Ничего не делаем
 end;
 
-(*class function TmsWatchedObjectPrim.NewInstance: TObject;
+class function TmsWatchedObjectPrim.NewInstance: TObject;
 begin
- TmsObjectsWatcher.CreateObject(Self, Result);
+ Result := inherited;
+ //TmsObjectsWatcher.CreateObject(Self, Result);
  TmsWatchedObjectPrim(Result).InstanceAllocated
 end;
 
 procedure TmsWatchedObjectPrim.FreeInstance;
 begin
  Self.InstanceWillBeDestroyed;
- TmsObjectsWatcher.DestroyObject(Self);
+ inherited;
+ //TmsObjectsWatcher.DestroyObject(Self);
 end;
 
 // TmsWatchedObject
 
-procedure TmsWatchedObject.Destroy(var aDummy);
+(*procedure TmsWatchedObject.Destroy(var aDummy);
 begin
  raise Exception.Create('Надо использовать FreeAndNil, а не Destroy');
 end;
