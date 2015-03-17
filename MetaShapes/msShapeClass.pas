@@ -23,8 +23,8 @@ type
   function IsLineLike: Boolean;
   function Creator: ImsShapeCreator;
   function Name: String;
-  procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
-  procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
+//  procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
+//  procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
@@ -106,7 +106,7 @@ begin
  Result := Self;
 end;
 
-procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
+(*procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
 begin
  Assert(f_ShapeClass <> nil);
  f_ShapeClass.RegisterInMarshal(aMarshal);
@@ -116,7 +116,7 @@ procedure TmsShapeClass.RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
 begin
  Assert(f_ShapeClass <> nil);
  f_ShapeClass.RegisterInUnMarshal(aMarshal);
-end;
+end;*)
 
 function TmsShapeClass.IsNullClick: Boolean;
 begin

@@ -10,7 +10,7 @@ uses
  msSerializeInterfaces,
  Generics.Collections,
  FMX.Objects,
- Data.DBXJSONReflect,
+ //Data.DBXJSONReflect,
  msLineF
  ;
 
@@ -181,8 +181,8 @@ type
   function ShapeClassForCreate: TClass;
  end;//ImsShapeCreatorFriend
 
- TmsJSONMarshal = TJSONMarshal;
- TmsJSONUnMarshal = TJSONUnMarshal;
+ //TmsJSONMarshal = TJSONMarshal;
+ //TmsJSONUnMarshal = TJSONUnMarshal;
 
  ImsDiagrammsHolder = interface
   procedure UpToParent;
@@ -220,8 +220,8 @@ type
   function IsLineLike: Boolean;
   function Creator: ImsShapeCreator;
   function Name: String;
-  procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
-  procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
+//  procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
+//  procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;

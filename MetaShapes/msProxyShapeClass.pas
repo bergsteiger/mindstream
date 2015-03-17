@@ -26,8 +26,8 @@ type
   function Stereotype: String; override;
   function ParentMC: ImsShapeClass; override;
   function AsMC: ImsShapeClass; override;
-  procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
-  procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
+  //procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
+  //procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
@@ -107,7 +107,7 @@ begin
  Result := Self;
 end;
 
-procedure TmsProxyShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
+(*procedure TmsProxyShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
 begin
  Assert(f_ShapeClass <> nil);
  f_ShapeClass.RegisterInMarshal(aMarshal);
@@ -117,7 +117,7 @@ procedure TmsProxyShapeClass.RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
 begin
  Assert(f_ShapeClass <> nil);
  f_ShapeClass.RegisterInUnMarshal(aMarshal);
-end;
+end;*)
 
 function TmsProxyShapeClass.IsNullClick: Boolean;
 begin
