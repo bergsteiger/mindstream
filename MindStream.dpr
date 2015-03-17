@@ -36,7 +36,7 @@ uses
   msObject in 'Core\msObject.pas',
   msInterfacedRefcounted in 'Core\msInterfacedRefcounted.pas',
   msMarshalPrim in 'Marshal\msMarshalPrim.pas',
-  msShapeTestSuite in 'Tests\Module\msShapeTestSuite.pas',
+  //msShapeTestSuite in 'Tests\Module\msShapeTestSuite.pas',
   msInvalidators in 'msInvalidators.pas',
   msInterfaces in 'msInterfaces.pas',
   msStreamUtils in 'Core\msStreamUtils.pas',
@@ -145,7 +145,7 @@ uses
 
 begin
   Application.Initialize;
-  //Application.CreateForm(TfmMain, fmMain);
+  Application.CreateForm(TfmMain, fmMain);
   //u_fmGUITestRunner.RunRegisteredTestsModeless;
   Application.Run;
 end.
