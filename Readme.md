@@ -35,3 +35,5 @@ Update:
 Процесс шага 2 сделать удобным “графически”, то есть аналитик вносящий “шаблон” мог сделать это и на своем планшете, по дороге домой на метро, или на заднем сиденье Rolls&Roys.
 
 [Актуальная откомпилированная версия](https://bitbucket.org/ingword/mindstream/downloads/MindStream.exe "Заголовок ссылки")
+
+[Android version](https://bitbucket.org/ingword/mindstream/downloads/MindStream.apk)
