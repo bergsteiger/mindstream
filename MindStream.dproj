@@ -186,9 +186,6 @@
         <DCCReference Include="uMain.pas">
             <Form>fmMain</Form>
         </DCCReference>
-        <DCCReference Include="FMX.DUnit\u_fmGUITestRunner.pas">
-            <Form>fmGUITestRunner</Form>
-        </DCCReference>
         <DCCReference Include="msDiagramm.pas"/>
         <DCCReference Include="AbstractShapes\msShape.pas"/>
         <DCCReference Include="msRegisteredShapes.pas"/>
@@ -205,12 +202,6 @@
         <DCCReference Include="msOurShapes.pas"/>
         <DCCReference Include="ConcreteShapes\msTriangleDirectionRight.pas"/>
         <DCCReference Include="ShapeTools\msMover.pas"/>
-        <DCCReference Include="Tests\Module\FirstTest.pas"/>
-        <DCCReference Include="Tests\Module\TestMsLine.pas"/>
-        <DCCReference Include="Tests\Module\TestMsRectangle.pas"/>
-        <DCCReference Include="Tests\Module\TestMsPointCircle.pas"/>
-        <DCCReference Include="Tests\Module\TestMsCircle.pas"/>
-        <DCCReference Include="Tests\Module\msShapeTest.pas"/>
         <DCCReference Include="msSerializeInterfaces.pas"/>
         <DCCReference Include="ShapeTools\msTool.pas"/>
         <DCCReference Include="Marshal\msDiagrammMarshal.pas"/>
@@ -220,7 +211,6 @@
         <DCCReference Include="Core\msObject.pas"/>
         <DCCReference Include="Core\msInterfacedRefcounted.pas"/>
         <DCCReference Include="Marshal\msMarshalPrim.pas"/>
-        <DCCReference Include="Tests\Module\msShapeTestSuite.pas"/>
         <DCCReference Include="msInvalidators.pas"/>
         <DCCReference Include="msInterfaces.pas"/>
         <DCCReference Include="Core\msStreamUtils.pas"/>
@@ -229,11 +219,7 @@
         <DCCReference Include="ShapeTools\msSwapParents.pas"/>
         <DCCReference Include="ShapeCreators\msShapeCreator.pas"/>
         <DCCReference Include="msFormatter.pas"/>
-        <DCCReference Include="Tests\Module\TestmsJsonFormatter.pas"/>
         <DCCReference Include="msDiagrammStack.pas"/>
-        <DCCReference Include="Tests\Module\TestSaveToPNG.pas"/>
-        <DCCReference Include="Tests\Module\TestSaveMoverToPNG.pas"/>
-        <DCCReference Include="Tests\Module\msTestConstants.pas"/>
         <DCCReference Include="ShapeButtons\msShapeButton.pas"/>
         <DCCReference Include="ShapeCreators\msCompletedShapeCreator.pas"/>
         <DCCReference Include="ShapeCreators\msPaletteShapeCreator.pas"/>
@@ -258,10 +244,7 @@
         <DCCReference Include="SpecialShapes\msRemoveIcon.pas"/>
         <DCCReference Include="ContainerShapes\msShapesGroup.pas"/>
         <DCCReference Include="AbstractShapes\msPointlessShape.pas"/>
-        <DCCReference Include="Tests\Integrated\ForToolbarShapesTest.pas"/>
-        <DCCReference Include="Tests\Integrated\RegisteredShapesTest.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msSwapParentsIcon.pas"/>
-        <DCCReference Include="Tests\Integrated\UtilityShapesTest.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msPickerIcon.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msUpToParentIcon.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msButtonIcon.pas"/>
@@ -272,8 +255,6 @@
         <DCCReference Include="msShapesList.pas"/>
         <DCCReference Include="ConcreteShapes\msCircleWithRadius.pas"/>
         <DCCReference Include="msShapeClassList.pas"/>
-        <DCCReference Include="Tests\Core\msLoggedTest.pas"/>
-        <DCCReference Include="Tests\Abstract\msRegisteredShapesTestPrim.pas"/>
         <DCCReference Include="ContainerShapes\msProxyShape.pas"/>
         <DCCReference Include="ContainerShapes\msShapeTool.pas"/>
         <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeUp.pas"/>
@@ -311,7 +292,6 @@
         <DCCReference Include="msMovingPointer.pas"/>
         <DCCReference Include="fmx.dunit\FMX.DUnit.msLog.pas"/>
         <DCCReference Include="ConcreteShapes\ForUML\msConnector.pas"/>
-        <DCCReference Include="Tests\Module\msLineCrossTest.pas"/>
         <DCCReference Include="Core\msLineF.pas"/>
         <DCCReference Include="ConcreteShapes\ForUML\msGeneralization.pas"/>
         <DCCReference Include="ConcreteShapes\ForUML\msRealization.pas"/>
@@ -324,6 +304,26 @@
         <DCCReference Include="ConcreteShapes\msArrowHead.pas"/>
         <DCCReference Include="AbstractShapes\msPolylineShape.pas"/>
         <DCCReference Include="MetaShapes\msShapeClassPrim.pas"/>
+        <DCCReference Include="FMX.DUnit\u_fmGUITestRunner.pas">
+            <Form>fmGUITestRunner</Form>
+        </DCCReference>
+        <DCCReference Include="Tests\Module\FirstTest.pas"/>
+        <DCCReference Include="Tests\Module\TestMsLine.pas"/>
+        <DCCReference Include="Tests\Module\TestMsRectangle.pas"/>
+        <DCCReference Include="Tests\Module\TestMsPointCircle.pas"/>
+        <DCCReference Include="Tests\Module\TestMsCircle.pas"/>
+        <DCCReference Include="Tests\Module\msShapeTest.pas"/>
+        <DCCReference Include="Tests\Module\msShapeTestSuite.pas"/>
+        <DCCReference Include="Tests\Module\TestmsJsonFormatter.pas"/>
+        <DCCReference Include="Tests\Module\TestSaveToPNG.pas"/>
+        <DCCReference Include="Tests\Module\TestSaveMoverToPNG.pas"/>
+        <DCCReference Include="Tests\Module\msTestConstants.pas"/>
+        <DCCReference Include="Tests\Integrated\ForToolbarShapesTest.pas"/>
+        <DCCReference Include="Tests\Integrated\RegisteredShapesTest.pas"/>
+        <DCCReference Include="Tests\Integrated\UtilityShapesTest.pas"/>
+        <DCCReference Include="Tests\Core\msLoggedTest.pas"/>
+        <DCCReference Include="Tests\Abstract\msRegisteredShapesTestPrim.pas"/>
+        <DCCReference Include="Tests\Module\msLineCrossTest.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>
