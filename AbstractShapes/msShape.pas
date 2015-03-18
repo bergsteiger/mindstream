@@ -283,6 +283,11 @@ begin
  aCtx.rCanvas.Stroke.Dash := l_Ctx.rStrokeDash;
  aCtx.rCanvas.Stroke.Color := l_Ctx.rStrokeColor;
  aCtx.rCanvas.Stroke.Thickness := l_Ctx.rStrokeThickness;
+
+  // for Androide Lines
+ aCtx.rCanvas.Stroke.Kind := TBrushKind.Solid;
+ aCtx.rCanvas.Fill.Kind := TBrushKind.Solid;
+
  l_DrawContext := aCtx;
  l_DrawContext.rOpacity := l_Ctx.rOpacity;
  l_DrawContext.rLineOpacity := l_Ctx.rLineOpacity;
