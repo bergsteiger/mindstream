@@ -27,10 +27,11 @@
   procedure InstanceWillBeDestroyed; virtual;
   // - функция вызываемая ПОСЛЕ деструктора, но ПЕРЕД реальным освобождением объекта
  public
-  class function NewInstance: TObject; override; final;
+(*  class function NewInstance: TObject; override; final;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
-  procedure FreeInstance; override; final;
+  procedure FreeInstance; override; final;*)
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
+  constructor Create;
   destructor Destroy; override; final;
  end;//TmsWatchedObjectPrim
 
@@ -66,9 +67,16 @@ begin
  // - Ничего не делаем
 end;
 
+constructor TmsWatchedObjectPrim.Create;
+begin
+ inherited;
+ InstanceAllocated;
+end;
+
 destructor TmsWatchedObjectPrim.Destroy;
 begin
  Cleanup;
+ InstanceWillBeDestroyed;
  inherited;
 end;
 
@@ -82,11 +90,11 @@ begin
  // - Ничего не делаем
 end;
 
-class function TmsWatchedObjectPrim.NewInstance: TObject;
+(*class function TmsWatchedObjectPrim.NewInstance: TObject;
 begin
  Result := inherited;
  //TmsObjectsWatcher.CreateObject(Self, Result);
- TmsWatchedObjectPrim(Result).InstanceAllocated
+ TmsWatchedObjectPrim(Result).InstanceAllocated;
 end;
 
 procedure TmsWatchedObjectPrim.FreeInstance;
@@ -94,7 +102,7 @@ begin
  Self.InstanceWillBeDestroyed;
  inherited;
  //TmsObjectsWatcher.DestroyObject(Self);
-end;
+end;*)
 
 // TmsWatchedObject
 

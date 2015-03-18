@@ -4,6 +4,254 @@
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
     <ItemGroup Condition="'$(Platform)'=='Android'">
+        <DeployFile Include="ModelSupport_MindStream\msSerializeController\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestMsPointCircle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msShapeTest\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\res\drawable-xxhdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msGreenRectangle\default.txaPackage" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txaPackage</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDiagramms\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\mips\libnative-activity.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\library\lib\mips\</RemoteDir>
+            <RemoteName>libMindStream.so</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msRegisteredShapes\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msCoreObjects\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msTool\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\res\drawable-small\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\x86\libnative-activity.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\library\lib\x86\</RemoteDir>
+            <RemoteName>libMindStream.so</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\res\drawable-normal\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msInterfaces\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestClass Diagram.txvcls" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>TestClass Diagram.txvcls</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msCircle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\MindStream\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msUtilityShapes\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\res\drawable-mdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\u_fmGUITestRunner\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\FirstTest\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestMsLine\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msUpToParent\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\RegisteredShapesTest\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDashLine\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDashDotLine\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msLine\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msTriangleDirectionRight\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msPicker\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestSaveToPNG\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="ModelSupport_MindStream\msMover\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
@@ -20,15 +268,304 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\res\drawable-xxhdpi\</RemoteDir>
+        <DeployFile Include="ModelSupport_MindStream\msTriangle1\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msWatchedObjectInstance\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="C:\Users\Public\Documents\Embarcadero\Studio\15.0\PlatformSDKs\android-ndk-r9c\prebuilt\android-arm\gdbserver\gdbserver" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>gdbserver</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Debug\libMindStream.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>libMindStream.so</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msParametrizedShapeTestSuite\default.txaPackage" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txaPackage</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\res\drawable-ldpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\msTriangle1\default.txvpck" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="ModelSupport_MindStream\TestMsCircle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msBlackTriangle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msPointCircle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestMsRectangle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\armeabi\libnative-activity.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\library\lib\armeabi\</RemoteDir>
+            <RemoteName>libMindStream.so</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msOurShapes\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msMarshalPrim\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msTestConstants\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msLineWithArrow\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msNullClickShape\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msCompletedShapeCreator\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\ForToolbarShapesTest\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msInterfacedRefcounted\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDiagrammStack\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msRedRectangle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDiagramm\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDiagrammsMarshal\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msShapeCreator\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\res\drawable-hdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msGreenRectangle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msShapeMarshal\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\uMain\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestmsSerializeController\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Debug\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>AndroidManifest.xml</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msGreenCircle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Debug\styles.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\res\values\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msSmallTriangle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestmsJsonFormatter\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msCompletedShapeCreator\default.txaPackage" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txaPackage</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\UtilityShapesTest\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\assets\internal\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msSerializeInterfaces\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
             <Operation>0</Operation>
@@ -52,18 +589,10 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\default.txvpck" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="ModelSupport_MindStream\msStreamUtils\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
             <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\mips\libnative-activity.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\library\lib\mips\</RemoteDir>
-            <RemoteName>libMindStream.so</RemoteName>
-            <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -76,56 +605,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="C:\Users\Public\Documents\Embarcadero\Studio\15.0\PlatformSDKs\android-ndk-r9c\prebuilt\android-arm\gdbserver\gdbserver" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\library\lib\armeabi-v7a\</RemoteDir>
-            <RemoteName>gdbserver</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\msDiagramms\default.txvpck" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\assets\internal\</RemoteDir>
-            <RemoteName>default.txvpck</RemoteName>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\res\drawable-small\</RemoteDir>
-            <RemoteName>splash_image.png</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Android\Debug\libMindStream.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\library\lib\armeabi-v7a\</RemoteDir>
-            <RemoteName>libMindStream.so</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-            <Required>True</Required>
-        </DeployFile>
-        <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\classes.dex" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\classes\</RemoteDir>
-            <RemoteName>classes.dex</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\res\drawable-xhdpi\</RemoteDir>
-            <RemoteName>ic_launcher.png</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\msDiagramm\default.txvpck" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="ModelSupport_MindStream\msShapeButton\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
             <Operation>0</Operation>
@@ -149,47 +629,23 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\res\drawable-ldpi\</RemoteDir>
+        <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\classes.dex" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\classes\</RemoteDir>
+            <RemoteName>classes.dex</RemoteName>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\res\drawable-xhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\msRegisteredShapes\default.txvpck" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\assets\internal\</RemoteDir>
-            <RemoteName>default.txvpck</RemoteName>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\x86\libnative-activity.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\library\lib\x86\</RemoteDir>
-            <RemoteName>libMindStream.so</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\res\drawable-hdpi\</RemoteDir>
-            <RemoteName>ic_launcher.png</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\res\drawable-normal\</RemoteDir>
-            <RemoteName>splash_image.png</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\msPointCircle\default.txvpck" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="ModelSupport_MindStream\msFormatter\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
             <Operation>0</Operation>
@@ -205,7 +661,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\msCircle\default.txvpck" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="ModelSupport_MindStream\msPaletteShape\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
             <Operation>0</Operation>
@@ -213,7 +669,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\MindStream\default.txvpck" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="ModelSupport_MindStream\msInvalidators\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
             <Operation>0</Operation>
@@ -221,7 +677,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\msOurShapes\default.txvpck" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="ModelSupport_MindStream\msShapeTestSuite\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
             <Operation>0</Operation>
@@ -229,23 +685,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="c:\program files (x86)\embarcadero\studio\15.0\lib\android\debug\armeabi\libnative-activity.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\library\lib\armeabi\</RemoteDir>
-            <RemoteName>libMindStream.so</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\res\drawable-mdpi\</RemoteDir>
-            <RemoteName>ic_launcher.png</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\uMain\default.txvpck" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="ModelSupport_MindStream\msPaletteShapeCreator\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
             <Operation>0</Operation>
@@ -253,7 +693,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="ModelSupport_MindStream\msParametrizedShapeTestSuite\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
             <Operation>0</Operation>
@@ -261,7 +701,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\msLineWithArrow\default.txvpck" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="ModelSupport_MindStream\msSwapParents\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
             <Operation>0</Operation>
@@ -269,23 +709,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Debug\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\</RemoteDir>
-            <RemoteName>AndroidManifest.xml</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Android\Debug\styles.xml" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\res\values\</RemoteDir>
-            <RemoteName>styles.xml</RemoteName>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\msDashLine\default.txvpck" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="ModelSupport_MindStream\msInterfacedNonRefcounted\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
             <Operation>0</Operation>
@@ -293,7 +717,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\msSmallTriangle\default.txvpck" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="ModelSupport_MindStream\msDiagrammMarshal\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
             <Operation>0</Operation>
@@ -301,15 +725,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\msLine\default.txvpck" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\assets\internal\</RemoteDir>
-            <RemoteName>default.txvpck</RemoteName>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\msDashDotLine\default.txvpck" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="ModelSupport_MindStream\msShapeRemover\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
             <Operation>0</Operation>
@@ -318,14 +734,6 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="ModelSupport_MindStream\msShape\default.txvpck" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>MindStream\assets\internal\</RemoteDir>
-            <RemoteName>default.txvpck</RemoteName>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="ModelSupport_MindStream\msTriangleDirectionRight\default.txvpck" Condition="'$(Config)'=='Debug'">
             <RemoteDir>MindStream\assets\internal\</RemoteDir>
             <RemoteName>default.txvpck</RemoteName>
             <Operation>0</Operation>
@@ -343,7 +751,617 @@
         </DeployFile>
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='iOSDevice'"/>
-    <ItemGroup Condition="'$(Platform)'=='Win32'"/>
+    <ItemGroup Condition="'$(Platform)'=='Win32'">
+        <DeployFile Include="Win32\Debug\MindStream.exe" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>MindStream.exe</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msTestConstants\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\UtilityShapesTest\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\u_fmGUITestRunner\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msShapeTestSuite\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msInterfacedNonRefcounted\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msRegisteredShapes\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msTriangle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msRedRectangle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msTriangleDirectionRight\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestMsLine\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestMsRectangle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msUtilityShapes\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msSmallTriangle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\uMain\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestSaveToPNG\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msSwapParents\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msMarshalPrim\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msShapeButton\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msShapeMarshal\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msStreamUtils\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestMsPointCircle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\RegisteredShapesTest\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDiagrammMarshal\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msUpToParent\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDashDotLine\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDiagrammsMarshal\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msGreenRectangle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestClass Diagram.txvcls" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>TestClass Diagram.txvcls</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDiagramm\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msLine\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msCompletedShapeCreator\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msShape\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msMover\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msPaletteShapeCreator\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msPointCircle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\MindStream\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestmsSerializeController\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msShapeTest\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\FirstTest\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msRoundedRectangle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msCompletedShapeCreator\default.txaPackage" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txaPackage</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msWatchedObjectInstance\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msNullClickShape\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDiagrammStack\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestMsCircle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msOurShapes\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msParametrizedShapeTestSuite\default.txaPackage" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txaPackage</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msRectangle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msGreenRectangle\default.txaPackage" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txaPackage</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msTool\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msShapeCreator\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msSerializeController\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msInterfaces\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msGreenCircle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDashLine\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDotLine\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msInterfacedRefcounted\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msSerializeInterfaces\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msPicker\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msShapeRemover\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msPaletteShape\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msParametrizedShapeTestSuite\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\TestmsJsonFormatter\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msTriangle1\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msFormatter\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDiagramms\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msBlackTriangle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msDiagrammsController\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msLineWithArrow\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msInvalidators\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msCircle\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\msCoreObjects\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="ModelSupport_MindStream\ForToolbarShapesTest\default.txvpck" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>MindStream\</RemoteDir>
+            <RemoteName>default.txvpck</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='OSX32'">
         <DeployFile Include="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib">
             <RemoteDir>MindStream.app\Contents\MacOS\</RemoteDir>
