@@ -22,16 +22,16 @@
  protected
   procedure Cleanup; virtual;
   // - функция для очистки состояния объекта. Её надо перекрывать ВМЕСТО Destroy.
-  procedure InstanceAllocated; virtual;
+(*  procedure InstanceAllocated; virtual;
   // - функция для инициализации объекта СРАЗУ после его создания. Ещё ДО конструктора.
   procedure InstanceWillBeDestroyed; virtual;
-  // - функция вызываемая ПОСЛЕ деструктора, но ПЕРЕД реальным освобождением объекта
+  // - функция вызываемая ПОСЛЕ деструктора, но ПЕРЕД реальным освобождением объекта*)
  public
 (*  class function NewInstance: TObject; override; final;
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.NewInstance.html
   procedure FreeInstance; override; final;*)
   // ms-help://embarcadero.rs_xe7/libraries/System.TObject.FreeInstance.html
-  constructor Create;
+(*  constructor Create;*)
   destructor Destroy; override; final;
  end;//TmsWatchedObjectPrim
 
@@ -67,20 +67,20 @@ begin
  // - Ничего не делаем
 end;
 
-constructor TmsWatchedObjectPrim.Create;
+(*constructor TmsWatchedObjectPrim.Create;
 begin
  inherited;
  InstanceAllocated;
-end;
+end;*)
 
 destructor TmsWatchedObjectPrim.Destroy;
 begin
  Cleanup;
- InstanceWillBeDestroyed;
+ //InstanceWillBeDestroyed;
  inherited;
 end;
 
-procedure TmsWatchedObjectPrim.InstanceAllocated;
+(*procedure TmsWatchedObjectPrim.InstanceAllocated;
 begin
  // - Ничего не делаем
 end;
@@ -88,7 +88,7 @@ end;
 procedure TmsWatchedObjectPrim.InstanceWillBeDestroyed;
 begin
  // - Ничего не делаем
-end;
+end;*)
 
 (*class function TmsWatchedObjectPrim.NewInstance: TObject;
 begin

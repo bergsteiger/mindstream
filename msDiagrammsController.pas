@@ -192,6 +192,7 @@ constructor TmsDiagrammsController.CreatePrim(aImage: TPaintBox;
                                               aSaveJsonAndPng: TButton);
 begin
  inherited Create;
+ TmsInvalidators.Subscribe(Self);
  imgMain := aImage;
  cbShapes := aShapes;
  cbDiagramm := aDiagramm;
@@ -395,6 +396,7 @@ end;
 
 procedure TmsDiagrammsController.Cleanup;
 begin
+ TmsInvalidators.UnSubscribe(Self);
  FreeAndNil(f_DiagrammStack);
  f_CurrentDiagramm := nil;
  CurrentDiagramms := nil;
