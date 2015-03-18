@@ -118,7 +118,8 @@ begin
   TmsRectangle.Specify('BlackRectangle')
    .SetFillColor(TAlphaColorRec.Black)
    .SetInitialHeight(100)
-   .SetInitialWidth(15);
+   .SetInitialWidth(15)
+   .SetIsForToolbar(false);
   TmsRemoveIcon.TMC
    .SetFillColor(TAlphaColorRec.Mediumvioletred)
    .SetIsForToolbar(false)
