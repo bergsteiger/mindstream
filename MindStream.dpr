@@ -1,5 +1,7 @@
 program MindStream;
 
+{$Include msDef.inc}
+
 uses
   msCoreObjects in 'Core\msCoreObjects.pas',
   FMX.Forms,
