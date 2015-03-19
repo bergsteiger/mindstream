@@ -3,33 +3,17 @@ unit Core.Obj;
 interface
 
 uses
- msObject
+ msObject,
+ msInterfacedRefcounted
  ;
 
 type
  TCoreObject = class(TmsObject)
  end;//TCoreObject
 
- TCoreInterfacedObject = class(TInterfacedObject)
-  protected
-   procedure Cleanup; virtual;
-  public
-   destructor Destroy; override;
+ TCoreInterfacedObject = class(TmsInterfacedRefcounted)
  end;//TCoreInterfacedObject
 
 implementation
-
-// TCoreInterfacedObject
-
-destructor TCoreInterfacedObject.Destroy;
-begin
-  Cleanup;
-  inherited;
-end;
-
-procedure TCoreInterfacedObject.Cleanup;
-begin
-  // - тут ничего не делаем, потомки всё сделают
-end;
 
 end.
