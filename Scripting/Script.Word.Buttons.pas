@@ -13,6 +13,9 @@ uses
  ;
 
 type
+ EscriptFormNotFound = class(Escript)
+ end;//EscriptFormNotFound
+
  EscriptComponentNotFound = class(Escript)
   public
     class procedure Check(aComponent: TComponent; const aName: String); overload;
@@ -66,7 +69,7 @@ begin
    l_ActiveForm := Screen.Forms[l_Index];
    break;
   end;//Screen.Forms[l_Index].ClassName <> 'TGUITestRunner'
- Assert(l_ActiveForm <> nil);
+ EscriptFormNotFound.Check(l_ActiveForm <> nil);
  l_Component := l_ActiveForm.FindComponent(l_Name);
  EscriptComponentNotFound.Check(l_Component, l_Name);
  aContext.PushObject(l_Component);
