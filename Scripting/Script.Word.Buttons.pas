@@ -16,6 +16,9 @@ type
  EscriptFormNotFound = class(Escript)
  end;//EscriptFormNotFound
 
+ EscriptInvalidClass = class(Escript)
+ end;//EscriptInvalidClass
+
  EscriptStringIsEmpty = class(Escript)
  end;//EscriptStringIsEmpty
 
@@ -89,7 +92,7 @@ var
  l_Component : TComponent;
 begin
  l_Component := aContext.PopObject As TComponent;
- Assert(l_Component Is TButton);
+ EscriptInvalidClass.Check(l_Component Is TButton);
  TControlAccess(l_Component).Click;
 end;
 
