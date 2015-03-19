@@ -2,6 +2,10 @@ unit Core.Obj;
 
 interface
 
+uses
+ msObject
+ ;
+
 type
  TCoreObject = class
    protected
