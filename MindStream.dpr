@@ -135,6 +135,8 @@ uses
   Script.Code in 'Scripting\Script.Code.pas',
   Script.StringWord in 'Scripting\Script.StringWord.pas',
   Script.UnknownToken in 'Scripting\Script.UnknownToken.pas',
+  Script.Word.Examples in 'Scripting\Script.Word.Examples.pas',
+  Script.Word.Buttons in 'Scripting\Script.Word.Buttons.pas',
   Testing.Engine in 'Scripting\Testing\Testing.Engine.pas',
 
   u_fmGUITestRunner in 'FMX.DUnit\u_fmGUITestRunner.pas' {fmGUITestRunner},

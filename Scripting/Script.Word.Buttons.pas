@@ -2,6 +2,8 @@ unit Script.Word.Buttons;
 
 interface
 
+{$Include msDef.inc}
+
 uses
  Script.WordsInterfaces,
  Script.Word
@@ -42,7 +44,11 @@ procedure TkwFindComponent.DoDoIt(aContext: TscriptContext);
 var
  l_Name : String;
  l_Component : TComponent;
+ {$IfDef FMX}
+ l_ActiveForm : TCommonCustomForm;
+ {$Else  FMX}
  l_ActiveForm : TForm;
+ {$EndIf FMX}
  l_Index : Integer;
 begin
  l_Name := aContext.PopString;

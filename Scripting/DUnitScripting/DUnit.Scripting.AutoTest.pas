@@ -10,7 +10,7 @@ type
  TautoTest = class(TTestCase)
    public
     constructor Create(MethodName: string); override;
-   protected
+   published
      procedure DoIt;
  end;//TautoTest
 
@@ -25,8 +25,9 @@ uses
 
 constructor TautoTest.Create(MethodName: string);
 begin
- inherited Create(MethodName);
- FMethod := DoIt;
+ inherited Create('DoIt');
+ //FMethod := DoIt;
+ FTestName := MethodName;
 end;
 
 procedure TautoTest.DoIt;
