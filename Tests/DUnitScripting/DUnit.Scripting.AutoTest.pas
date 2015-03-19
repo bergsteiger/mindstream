@@ -8,6 +8,8 @@ uses
 
 type
  TautoTest = class(TTestCase)
+   private
+    f_TestFile : String;
    public
     constructor Create(MethodName: string); override;
    published
@@ -30,6 +32,7 @@ begin
  //FMethod := DoIt;
  //FTestName := MethodName;
  FTestName := ExtractFileName(MethodName);
+ f_TestFile := MethodName;
 end;
 
 procedure TautoTest.DoIt;
@@ -38,13 +41,12 @@ begin
  TtestEngine.StartTest(FTestName);
  try
  {$EndIf  NoTesting}
-  TScriptEngine.RunScript(FTestName, nil, nil);
+  TScriptEngine.RunScript(f_TestFile, nil, nil);
  {$IfNDef NoTesting}
  finally
   TtestEngine.StopTest;
  end;//try..finally
  {$EndIf  NoTesting}
-// TScriptEngine.RunScript(FTestName, nil, nil);
 end;
 
 end.
