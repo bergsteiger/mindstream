@@ -151,7 +151,7 @@ begin
  l_EtalonFileName:= l_TestFileName + cEtalon + ExtractFileExt(l_TestFileName);
  Result := not IsEtalonValid(l_TestFileName, l_EtalonFileName);
  if Result then
-  RunDiffPrim(l_TestFileName, l_EtalonFileName);
+  RunDiffPrim(l_TestFileName, l_EtalonFileName)
 end;
 
 procedure TmsLoggedTest.RunDiffPrim(const aFileName: String;
@@ -163,7 +163,8 @@ var
  l_ExecInfo: TShellExecuteInfo;
  l_Param : String;
 begin
- //if not IsUseDiffer then Exit;
+ if not IsUseDiffer then
+  Exit;
 
 { TODO 1 -oIngword -cProposal : Добавить вывод ошибок в лог }
  l_cmdFileName := ExtractFilePath(ParamStr(0)) +
