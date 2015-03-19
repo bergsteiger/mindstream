@@ -159,8 +159,8 @@ uses
   msLineCrossTest in 'Tests\Module\msLineCrossTest.pas',
 
   FMX.DUnit.Settings in 'fmx.dunit\FMX.DUnit.Settings.pas',
-  DUnit.Scripting.AutoTest in 'Scripting\DUnitScripting\DUnit.Scripting.AutoTest.pas',
-  DUnit.Scripting.AutoTests in 'Scripting\DUnitScripting\DUnit.Scripting.AutoTests.pas'
+  DUnit.Scripting.AutoTest in 'Tests\DUnitScripting\DUnit.Scripting.AutoTest.pas',
+  DUnit.Scripting.AutoTests in 'Tests\DUnitScripting\DUnit.Scripting.AutoTests.pas'
   ;
 
 {$R *.res}

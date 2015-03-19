@@ -10,7 +10,7 @@ type
  TautoTest = class(TTestCase)
    public
     constructor Create(MethodName: string); override;
-   protected
+   published
      procedure DoIt;
  end;//TautoTest
 
@@ -20,13 +20,16 @@ implementation
 
 uses
   Script.Engine,
-  Testing.Engine
+  Testing.Engine,
+  System.SysUtils
   ;
 
 constructor TautoTest.Create(MethodName: string);
 begin
- inherited Create(MethodName);
- FMethod := DoIt;
+ inherited Create('DoIt');
+ //FMethod := DoIt;
+ //FTestName := MethodName;
+ FTestName := ExtractFileName(MethodName);
 end;
 
 procedure TautoTest.DoIt;
