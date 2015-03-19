@@ -7,11 +7,7 @@ uses
  ;
 
 type
- TCoreObject = class
-   protected
-    procedure Cleanup; virtual;
-   public
-    destructor Destroy; override;
+ TCoreObject = class(TmsObject)
  end;//TCoreObject
 
  TCoreInterfacedObject = class(TInterfacedObject)
@@ -22,19 +18,6 @@ type
  end;//TCoreInterfacedObject
 
 implementation
-
-// TCoreObject
-
-destructor TCoreObject.Destroy;
-begin
-  Cleanup;
-  inherited;
-end;
-
-procedure TCoreObject.Cleanup;
-begin
-  // - тут ничего не делаем, потомки всё сделают
-end;
 
 // TCoreInterfacedObject
 
