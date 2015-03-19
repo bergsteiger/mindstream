@@ -41,7 +41,8 @@ uses
  SysUtils,
  msStreamUtils,
  Windows,
- ShellAPI
+ ShellAPI,
+ FMX.DUnit.Settings
  ;
 
 // TmsLoggedTest
@@ -163,7 +164,10 @@ var
  l_ExecInfo: TShellExecuteInfo;
  l_Param : String;
 begin
- if not IsUseDiffer then
+{ if not IsUseDiffer then
+  Exit;      }
+
+ if not TmsDUnitSettings.Instance.IsUseDiffer then
   Exit;
 
 { TODO 1 -oIngword -cProposal : Добавить вывод ошибок в лог }
