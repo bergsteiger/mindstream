@@ -42,7 +42,7 @@ begin
  TtestEngine.StartTest(FTestName);
  try
  {$EndIf  NoTesting}
-  TScriptEngine.RunScript(f_TestFile, nil, nil);
+  TScriptEngine.RunScript(f_TestFile, TmsAppLog.Instance, nil);
  {$IfNDef NoTesting}
  finally
   TtestEngine.StopTest;
