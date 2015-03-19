@@ -10,8 +10,6 @@ uses
 
 type
   TmsLoggedTest = class abstract(TTestCase, ImsEtalonsHolder)
-  private
-   f_IsUseDiffer : Boolean;
   protected
    procedure OutToFileAndCheck(aLambda: TmsLogLambda);
    function MakeFileName(const aTestName: string; const aTestFolder: string): String;
@@ -25,14 +23,8 @@ type
    procedure DeleteEtalonFile(const aLog: ImsLog);
    procedure RunDiffPrim(const aFileName: String; const anEtalonName: String);
    function RunDiff(const aLog: ImsLog): Boolean;
-   function pm_GetIsUseDiffer : Boolean;
-   procedure pm_SetIsUseDiffer(const aValue : Boolean);
   public
    class function ComputerName: AnsiString;
-
-   property IsUseDiffer: Boolean
-    read pm_GetIsUseDiffer
-    write pm_SetIsUseDiffer;
   end;//TmsLoggedTest
 
 implementation
@@ -41,7 +33,8 @@ uses
  SysUtils,
  msStreamUtils,
  Windows,
- ShellAPI
+ ShellAPI,
+ FMX.DUnit.Settings
  ;
 
 // TmsLoggedTest
@@ -83,16 +76,6 @@ begin
  Assert(FileExists(aFileName), 'Файл не существует ' + aFileName);
  Assert(FileExists(anEtalonName), 'Файл не существует ' + anEtalonName);
  Result := msCompareFiles(anEtalonName, aFileName);
-end;
-
-function TmsLoggedTest.pm_GetIsUseDiffer : Boolean;
-begin
- Result := f_IsUseDiffer;
-end;
-
-procedure TmsLoggedTest.pm_SetIsUseDiffer(const aValue : Boolean);
-begin
- f_IsUseDiffer := aValue;
 end;
 
 procedure TmsLoggedTest.CheckFileWithEtalon(const aFileName: String);
@@ -163,7 +146,7 @@ var
  l_ExecInfo: TShellExecuteInfo;
  l_Param : String;
 begin
- if not IsUseDiffer then
+ if not TmsDUnitSettings.Instance.IsUseDiffer then
   Exit;
 
 { TODO 1 -oIngword -cProposal : Добавить вывод ошибок в лог }
