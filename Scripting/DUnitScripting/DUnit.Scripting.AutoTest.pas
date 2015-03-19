@@ -20,14 +20,16 @@ implementation
 
 uses
   Script.Engine,
-  Testing.Engine
+  Testing.Engine,
+  System.SysUtils
   ;
 
 constructor TautoTest.Create(MethodName: string);
 begin
  inherited Create('DoIt');
  //FMethod := DoIt;
- FTestName := MethodName;
+ //FTestName := MethodName;
+ FTestName := ExtractFileName(MethodName);
 end;
 
 procedure TautoTest.DoIt;
