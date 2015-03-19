@@ -23,7 +23,8 @@ implementation
 uses
   Script.Engine,
   Testing.Engine,
-  System.SysUtils
+  System.SysUtils,
+  FMX.DUnit.msAppLog
   ;
 
 constructor TautoTest.Create(MethodName: string);
