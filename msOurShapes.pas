@@ -62,7 +62,9 @@ begin
    .SetInitialHeight(90)
    .SetInitialWidth(100)
    .SetCornerRadius(0.0);
-  TmsCircle.TMC.SetFillColor(TAlphaColorRec.Red);
+  TmsCircle.TMC
+   .SetFillColor(TAlphaColorRec.Red)
+   ;
   TmsRectangle.Specify('RoundedRectangle')
    .SetFillColor(TAlphaColorRec.Blue)
    .SetInitialHeight(90)
@@ -112,14 +114,17 @@ begin
   TmsFolder.TMC;
 
   TmsCircle.Specify('GreenCircle')
-   .SetFillColor(TAlphaColorRec.Green);
+   .SetFillColor(TAlphaColorRec.Green)
+   ;
   TmsTriangle.Specify('BlackTriangle')
-   .SetFillColor(TAlphaColorRec.Black);
+   .SetFillColor(TAlphaColorRec.Black)
+   ;
   TmsRectangle.Specify('BlackRectangle')
    .SetFillColor(TAlphaColorRec.Black)
    .SetInitialHeight(100)
    .SetInitialWidth(15)
-   .SetIsForToolbar(false);
+   .SetIsForToolbar(false)
+   ;
   TmsRemoveIcon.TMC
    .SetFillColor(TAlphaColorRec.Mediumvioletred)
    .SetIsForToolbar(false)
@@ -135,9 +140,11 @@ begin
   // - вообще говоря это НАДО вычислять из параметров шрифта. НО! ПОТОМ!
 
   TmsScrollShapePrim.NRTMC
-   .SetIsForToolbar(false);
+   .SetIsForToolbar(false)
+   ;
   TmsScrollShape.NRTMC
-   .SetIsForToolbar(false);
+   .SetIsForToolbar(false)
+   ;
   TmsScrollShapeUp.TMC;
   TmsScrollShapeDown.TMC;
   TmsScrollShapeRight.TMC;
@@ -156,13 +163,16 @@ begin
   TmsGeneralization.TMC;
   TmsRealization.TMC
    .SetStrokeThickness(2)
-   .SetStrokeDash(TStrokeDash.Dash);
+   .SetStrokeDash(TStrokeDash.Dash)
+   ;
   TmsAssociation.TMC
    .SetStrokeThickness(1.5)
-   .SetStrokeDash(TStrokeDash.Solid);
+   .SetStrokeDash(TStrokeDash.Solid)
+   ;
   TmsDependency.TMC
    .SetStrokeThickness(1.5)
-   .SetStrokeDash(TStrokeDash.Dash);
+   .SetStrokeDash(TStrokeDash.Dash)
+   ;
 
   TmsClass.TMC;
 
@@ -239,6 +249,10 @@ begin
    ;
 
   TmsDependency.TMC
+   .SetIsForToolbar(false)
+   ;
+
+  TmsCircle.TMC
    .SetIsForToolbar(false)
    ;
 
