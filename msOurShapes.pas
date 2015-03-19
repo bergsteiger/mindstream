@@ -229,6 +229,15 @@ begin
   TmsUseCaseLikeEllipse.TMC
    .SetIsForToolbar(false)
    ;
+
+  TmsTrivial.TMC
+   .SetIsForToolbar(false)
+   ;
+
+  TmsFolder.TMC
+   .SetIsForToolbar(false)
+   ;
+
 end;
 
 initialization
