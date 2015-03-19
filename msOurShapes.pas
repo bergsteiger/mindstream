@@ -238,6 +238,10 @@ begin
    .SetIsForToolbar(false)
    ;
 
+  TmsDependency.TMC
+   .SetIsForToolbar(false)
+   ;
+
 end;
 
 initialization
