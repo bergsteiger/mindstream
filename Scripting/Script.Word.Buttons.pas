@@ -68,7 +68,7 @@ begin
   end;//Screen.Forms[l_Index].ClassName <> 'TGUITestRunner'
  Assert(l_ActiveForm <> nil);
  l_Component := l_ActiveForm.FindComponent(l_Name);
- EscriptComponentNotFound.Check(l_Component <> nil, 'Component ' + l_Name + ' not found');
+ EscriptComponentNotFound.Check(l_Component, l_Name);
  aContext.PushObject(l_Component);
 end;
 
