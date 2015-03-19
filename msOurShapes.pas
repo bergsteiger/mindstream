@@ -125,7 +125,9 @@ begin
    .SetIsForToolbar(false)
    ;
   TmsMoveIcon.TMC
-   .SetFillColor(TAlphaColorRec.Black);
+   .SetFillColor(TAlphaColorRec.Black)
+   .SetIsForToolbar(false)
+   ;
   TmsTextShape.TMC
    .SetFillColor(TAlphaColorRec.Black)
    .SetInitialHeight(14)
