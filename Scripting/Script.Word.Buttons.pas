@@ -5,11 +5,19 @@ interface
 {$Include msDef.inc}
 
 uses
+ System.Classes,
+
+ Script.Interfaces,
  Script.WordsInterfaces,
  Script.Word
  ;
 
 type
+ EscriptComponentNotFound = class(Escript)
+  public
+    class procedure Check(aComponent: TComponent; const aName: String); overload;
+ end;//EscriptComponentNotFound
+
  TkwFindComponent = class(TscriptWord)
   protected
    procedure DoDoIt(aContext: TscriptContext); override;
@@ -23,8 +31,6 @@ type
  implementation
 
 uses
- System.Classes,
-
  Script.Engine,
 
  {$IfDef FMX}
@@ -62,7 +68,7 @@ begin
   end;//Screen.Forms[l_Index].ClassName <> 'TGUITestRunner'
  Assert(l_ActiveForm <> nil);
  l_Component := l_ActiveForm.FindComponent(l_Name);
- Assert(l_Component <> nil);
+ EscriptComponentNotFound.Check(l_Component <> nil, 'Component ' + l_Name + ' not found');
  aContext.PushObject(l_Component);
 end;
 
@@ -79,6 +85,11 @@ begin
  l_Component := aContext.PopObject As TComponent;
  Assert(l_Component Is TButton);
  TControlAccess(l_Component).Click;
+end;
+
+class procedure EscriptComponentNotFound.Check(aComponent: TComponent; const aName: String);
+begin
+ Check(aComponent <> nil, 'Component ' + aName + ' not found');
 end;
 
 initialization
