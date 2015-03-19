@@ -125,7 +125,7 @@ uses
   msPolylineShape in 'AbstractShapes\msPolylineShape.pas',
   msShapeClassPrim in 'MetaShapes\msShapeClassPrim.pas',
   Core.Obj in 'Core\Core.Obj.pas',
-  Script.Interfaces in 'Scripting\Script.Interfaces.pas',
+  Script.Interfaces in 'FMX.DUnit\Script.Interfaces.pas',
   Script.Word in 'Scripting\Script.Word.pas',
   Script.WordsInterfaces in 'Scripting\Script.WordsInterfaces.pas',
   Script.Dictionary in 'Scripting\Script.Dictionary.pas',
