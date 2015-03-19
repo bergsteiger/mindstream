@@ -96,6 +96,8 @@ begin
  TControlAccess(l_Component).Click;
 end;
 
+// EscriptComponentNotFound
+
 class procedure EscriptComponentNotFound.Check(aComponent: TComponent; const aName: String);
 begin
  Check(aComponent <> nil, 'Component ' + aName + ' not found');
