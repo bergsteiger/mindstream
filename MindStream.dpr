@@ -124,16 +124,13 @@ uses
   msArrowHead in 'ConcreteShapes\msArrowHead.pas',
   msPolylineShape in 'AbstractShapes\msPolylineShape.pas',
   msShapeClassPrim in 'MetaShapes\msShapeClassPrim.pas',
-
   Core.Obj in 'Core\Core.Obj.pas',
   Script.Interfaces in 'Scripting\Script.Interfaces.pas',
   Script.Word in 'Scripting\Script.Word.pas',
   Script.WordsInterfaces in 'Scripting\Script.WordsInterfaces.pas',
   Script.Dictionary in 'Scripting\Script.Dictionary.pas',
   Script.Axiomatics in 'Scripting\Script.Axiomatics.pas',
-
   u_fmGUITestRunner in 'FMX.DUnit\u_fmGUITestRunner.pas' {fmGUITestRunner},
-
   FirstTest in 'Tests\Module\FirstTest.pas',
   TestMsLine in 'Tests\Module\TestMsLine.pas',
   TestMsRectangle in 'Tests\Module\TestMsRectangle.pas',
@@ -150,8 +147,8 @@ uses
   UtilityShapesTest in 'Tests\Integrated\UtilityShapesTest.pas',
   msLoggedTest in 'Tests\Core\msLoggedTest.pas',
   msRegisteredShapesTestPrim in 'Tests\Abstract\msRegisteredShapesTestPrim.pas',
-  msLineCrossTest in 'Tests\Module\msLineCrossTest.pas'
-  ;
+  msLineCrossTest in 'Tests\Module\msLineCrossTest.pas',
+  FMX.DUnit.Settings in 'fmx.dunit\FMX.DUnit.Settings.pas';
 
 {$R *.res}
 
