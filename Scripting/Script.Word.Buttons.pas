@@ -16,6 +16,9 @@ type
  EscriptFormNotFound = class(Escript)
  end;//EscriptFormNotFound
 
+ EscriptStringIsEmpty = class(Escript)
+ end;//EscriptStringIsEmpty
+
  EscriptComponentNotFound = class(Escript)
   public
     class procedure Check(aComponent: TComponent; const aName: String); overload;
@@ -61,7 +64,7 @@ var
  l_Index : Integer;
 begin
  l_Name := aContext.PopString;
- Assert(l_Name <> '');
+ EscriptStringIsEmpty.Check(l_Name <> '');
  l_ActiveForm := nil;
  for l_Index := 0 to Pred(Screen.FormCount) do
   if (Screen.Forms[l_Index].ClassName <> 'TGUITestRunner') then
