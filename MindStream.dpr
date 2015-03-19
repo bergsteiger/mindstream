@@ -130,6 +130,13 @@ uses
   Script.WordsInterfaces in 'Scripting\Script.WordsInterfaces.pas',
   Script.Dictionary in 'Scripting\Script.Dictionary.pas',
   Script.Axiomatics in 'Scripting\Script.Axiomatics.pas',
+  Script.Engine in 'Scripting\Script.Engine.pas',
+  Script.Parser in 'Scripting\Script.Parser.pas',
+  Script.Code in 'Scripting\Script.Code.pas',
+  Script.StringWord in 'Scripting\Script.StringWord.pas',
+  Script.UnknownToken in 'Scripting\Script.UnknownToken.pas',
+  Testing.Engine in 'Scripting\Testing\Testing.Engine.pas',
+
   u_fmGUITestRunner in 'FMX.DUnit\u_fmGUITestRunner.pas' {fmGUITestRunner},
   FirstTest in 'Tests\Module\FirstTest.pas',
   TestMsLine in 'Tests\Module\TestMsLine.pas',
@@ -148,7 +155,11 @@ uses
   msLoggedTest in 'Tests\Core\msLoggedTest.pas',
   msRegisteredShapesTestPrim in 'Tests\Abstract\msRegisteredShapesTestPrim.pas',
   msLineCrossTest in 'Tests\Module\msLineCrossTest.pas',
-  FMX.DUnit.Settings in 'fmx.dunit\FMX.DUnit.Settings.pas';
+
+  FMX.DUnit.Settings in 'fmx.dunit\FMX.DUnit.Settings.pas',
+  DUnit.Scripting.AutoTest in 'Scripting\DUnitScripting\DUnit.Scripting.AutoTest.pas',
+  DUnit.Scripting.AutoTests in 'Scripting\DUnitScripting\DUnit.Scripting.AutoTests.pas'
+  ;
 
 {$R *.res}
 
