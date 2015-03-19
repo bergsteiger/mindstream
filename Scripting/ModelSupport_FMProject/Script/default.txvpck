@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="yirect3irrr_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="design:view:::puklydp0jao_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,109,151" />
+      <reference referencedUin="delphi:e_class:src:FMProject:Script.Interfaces.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:FMProject:Script.Interfaces.IscriptLog" />
+    </reference>
+    <reference referencedUin="design:view:::0hub5wnyfyo_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="138,1,122,183" />
+      <reference referencedUin="delphi:e_class:src:FMProject:Script.Parser.TscriptTokenType" />
+      <reference referencedUin="delphi:e_class:src:FMProject:Script.Parser.TscriptParser" />
+      <reference referencedUin="delphi:e_class:src:FMProject:Script.Parser.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::5gn8y1b2juh_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="29,180,100,151" />
+      <reference referencedUin="delphi:e_class:src:FMProject:Script.Engine.TscriptEngine" />
+      <reference referencedUin="delphi:e_class:src:FMProject:Script.Engine.@unitclass" />
+    </reference>
+  </view>
+</nodeSet>

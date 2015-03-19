@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="kwc83te8cne_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="design:view:::f1yiscj2mak_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,100,151" />
+      <reference referencedUin="delphi:e_class:src:FMProject:Core.Obj.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:FMProject:Core.Obj.TCoreObject" />
+    </reference>
+  </view>
+</nodeSet>
