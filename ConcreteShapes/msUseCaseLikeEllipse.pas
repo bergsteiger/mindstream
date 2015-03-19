@@ -11,16 +11,9 @@ uses
 
 type
  TmsUseCaseLikeEllipse = class(TmsCircle)
- protected
-  function InitialRadiusY: Integer; override;
  end;//TmsUseCaseLikeEllipse
 
 implementation
-
-function TmsUseCaseLikeEllipse.InitialRadiusY: Integer;
-begin
- Result := 35;
-end;
 
 end.
 

@@ -64,6 +64,8 @@ begin
    .SetCornerRadius(0.0);
   TmsCircle.TMC
    .SetFillColor(TAlphaColorRec.Red)
+   .SetInitialHeight(100)
+   .SetInitialWidth(100)
    ;
   TmsRectangle.Specify('RoundedRectangle')
    .SetFillColor(TAlphaColorRec.Blue)
@@ -71,29 +73,39 @@ begin
    .SetInitialWidth(90)
    .SetCornerRadius(10);
   TmsUseCaseLikeEllipse.TMC
-   .SetFillColor(TAlphaColorRec.Yellow);
+   .SetFillColor(TAlphaColorRec.Yellow)
+   .SetInitialHeight(70)
+   ;
   TmsTriangle.TMC
    .SetFillColor(TAlphaColorRec.Green)
    .SetInitialHeight(100);
   TmsLine.Specify('DashDotLine')
-   .SetStrokeDash(TStrokeDash.DashDot);
+   .SetStrokeDash(TStrokeDash.DashDot)
+   ;
   TmsLine.Specify('DashLine')
-   .SetStrokeDash(TStrokeDash.Dash);
+   .SetStrokeDash(TStrokeDash.Dash)
+   ;
   TmsLine.Specify('DotLine')
-   .SetStrokeDash(TStrokeDash.Dot);
+   .SetStrokeDash(TStrokeDash.Dot)
+   ;
   TmsLineWithArrow.TMC;
   TmsTriangleDirectionRight.TMC
-   .SetFillColor(TAlphaColorRec.Coral);
+   .SetFillColor(TAlphaColorRec.Coral)
+   ;
 
   TmsRectangle.Specify('RedRectangle')
-   .SetFillColor(TAlphaColorRec.Red);
+   .SetFillColor(TAlphaColorRec.Red)
+   ;
   TmsRectangle.Specify('GreenRectangle')
-   .SetFillColor(TAlphaColorRec.Green);
+   .SetFillColor(TAlphaColorRec.Green)
+   ;
 
   // special shapes
   TmsPointCircle.TMC
    .SetFillColor(TAlphaColorRec.Null)
    .SetIsForToolbar(false)
+   .SetInitialWidth(20)
+   .SetInitialHeight(20)
    ;
   TmsTriangleDirectionRight.Specify('SmallTriangle')
    .SetFillColor(TAlphaColorRec.Aquamarine)
