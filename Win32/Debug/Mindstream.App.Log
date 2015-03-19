@@ -21,10 +21,22 @@
 14: script_ttString: aString2 with spaces
 15: script_ttString: 
 17: script_ttEOF: 
+Enter: TscriptStringWord Key: Строковое значение: "Button1"
+  push script_vtString: Button1 stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: "Button1"
+Enter: TkwFindComponent Key: FindComponent
+  pop script_vtString: Button1 stack size: 0
+Leave: TkwFindComponent Key: FindComponent
 1: script_ttString: Button4
 1: script_ttToken: FindComponent
 1: script_ttToken: ButtonClick
 2: script_ttEOF: 
+Enter: TscriptStringWord Key: Строковое значение: "Button4"
+  push script_vtString: Button4 stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: "Button4"
+Enter: TkwFindComponent Key: FindComponent
+  pop script_vtString: Button4 stack size: 0
+Leave: TkwFindComponent Key: FindComponent
 1: script_ttString: Button2
 1: script_ttToken: FindComponent
 1: script_ttToken: ButtonClick
@@ -48,6 +60,12 @@
 14: script_ttString: aString2 with spaces
 15: script_ttString: 
 17: script_ttEOF: 
+Enter: TscriptStringWord Key: Строковое значение: "Button2"
+  push script_vtString: Button2 stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: "Button2"
+Enter: TkwFindComponent Key: FindComponent
+  pop script_vtString: Button2 stack size: 0
+Leave: TkwFindComponent Key: FindComponent
 1: script_ttString: Button3
 1: script_ttToken: FindComponent
 1: script_ttToken: ButtonClick
@@ -71,3 +89,9 @@
 14: script_ttString: aString2 with spaces
 15: script_ttString: 
 17: script_ttEOF: 
+Enter: TscriptStringWord Key: Строковое значение: "Button3"
+  push script_vtString: Button3 stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: "Button3"
+Enter: TkwFindComponent Key: FindComponent
+  pop script_vtString: Button3 stack size: 0
+Leave: TkwFindComponent Key: FindComponent
