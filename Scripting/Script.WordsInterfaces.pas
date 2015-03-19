@@ -185,7 +185,7 @@ begin
   l_String := aString;
   if (aDetails <> '') then
    l_String := l_String + ': ' + aDetails;
-  f_Log.Log(StringOfChar(#32, f_LogLevel * 2) + l_String);
+  f_Log.ToLog(StringOfChar(#32, f_LogLevel * 2) + l_String);
  end;//f_Log <> nil
 end;
 
