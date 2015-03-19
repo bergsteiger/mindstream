@@ -125,6 +125,13 @@ uses
   msPolylineShape in 'AbstractShapes\msPolylineShape.pas',
   msShapeClassPrim in 'MetaShapes\msShapeClassPrim.pas',
 
+  Core.Obj in 'Scripting\Core\Core.Obj.pas',
+  Script.Interfaces in 'Scripting\Scripting\Script.Interfaces.pas',
+  Script.Word in 'Scripting\Scripting\Script.Word.pas',
+  Script.WordsInterfaces in 'Scripting\Scripting\Script.WordsInterfaces.pas',
+  Script.Dictionary in 'Scripting\Scripting\Script.Dictionary.pas',
+  Script.Axiomatics in 'Scripting\Scripting\Script.Axiomatics.pas',
+
   u_fmGUITestRunner in 'FMX.DUnit\u_fmGUITestRunner.pas' {fmGUITestRunner},
 
   FirstTest in 'Tests\Module\FirstTest.pas',
