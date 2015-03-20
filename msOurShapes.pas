@@ -38,7 +38,6 @@ uses
   msScrollShapeResetOrigin,
   msScrollingTool,
   msConnector,
-  msRealization,
   msAssociation,
   msDependency,
   msClass,
@@ -178,7 +177,8 @@ begin
 
   TmsConnector.Specify('Generalization')
    ;
-  TmsRealization.TMC
+
+  TmsConnector.Specify('Realization')
    .SetStrokeThickness(2)
    .SetStrokeDash(TStrokeDash.Dash)
    ;
