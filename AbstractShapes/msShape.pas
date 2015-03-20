@@ -408,8 +408,7 @@ end;
 
 class function TmsShape.Specify(const aName: String): ImsShapeClassTuner;
 begin
- Result := TmsProxyShapeClass.Create(aName, Self.MC);
- TmsRegisteredShapes.Instance.RegisterMC(Result.AsMC);
+ Result := Self.MC.Specify(aName);
 end;
 
 end.

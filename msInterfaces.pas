@@ -242,6 +242,7 @@ type
   function ParentMC: ImsShapeClass;
   function AsTuner: ImsShapeClassTuner;
   function StereotypePlace: TmsStereotypePlace;
+  function Specify(const aName: String): ImsShapeClassTuner;
  end;//ImsShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)

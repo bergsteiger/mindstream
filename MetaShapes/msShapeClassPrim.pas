@@ -38,6 +38,7 @@ type
   function SetIsForToolbar(aValue: Boolean): ImsShapeClassTuner;
   function SetStereotyPlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
   function StereotypePlace: TmsStereotypePlace;
+  function Specify(const aName: String): ImsShapeClassTuner;
  public
   constructor Create;
  end;//TmsShapeClassPrim
@@ -45,7 +46,9 @@ type
 implementation
 
 uses
- msShape
+ msShape,
+ msProxyShapeClass,
+ msRegisteredShapes
  ;
 
 // TmsShapeClassPrim
@@ -153,6 +156,12 @@ end;
 function TmsShapeClassPrim.StereotypePlace: TmsStereotypePlace;
 begin
  Result := f_StereotypePlace;
+end;
+
+function TmsShapeClassPrim.Specify(const aName: String): ImsShapeClassTuner;
+begin
+ Result := TmsProxyShapeClass.Create(aName, Self.AsMC);
+ TmsRegisteredShapes.Instance.RegisterMC(Result.AsMC);
 end;
 
 function TmsShapeClassPrim.SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
