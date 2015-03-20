@@ -74,7 +74,7 @@ type
   // - ткнули в примитив внутри диаграммы
   function GetDrawBounds: TRectF; virtual;
   function DrawBounds: TRectF;
-  procedure GetStereotypeRect(var aRect: TRectF); virtual;
+  procedure GetStereotypeRect(var aRect: TRectF);
  public
   class function IsLineLike: Boolean; virtual;
   procedure DrawTo(const aCtx: TmsDrawContext); virtual;
