@@ -117,7 +117,6 @@ uses
   msDependency in 'ConcreteShapes\ForUML\msDependency.pas',
   msAssociation in 'ConcreteShapes\ForUML\msAssociation.pas',
   msClass in 'ConcreteShapes\ForUML\msClass.pas',
-  msLibrary in 'ConcreteShapes\ForUML\msLibrary.pas',
   msArrowHead in 'ConcreteShapes\msArrowHead.pas',
   msPolylineShape in 'AbstractShapes\msPolylineShape.pas',
   msShapeClassPrim in 'MetaShapes\msShapeClassPrim.pas',

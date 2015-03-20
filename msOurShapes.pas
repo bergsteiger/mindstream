@@ -43,7 +43,6 @@ uses
   msAssociation,
   msDependency,
   msClass,
-  msLibrary,
   msArrowHead,
   msSVGShape,
   msScrollShape,
@@ -200,14 +199,14 @@ begin
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
-  TmsLibrary.TMC
+  TmsFolder.Specify('Library')
    .SetStereotypePlace(TmsStereotypePlace.Center)
    ;
 
-  TmsLibrary.Specify('Project')
+  TmsShape.NamedMC('Library').Specify('Project')
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
-  TmsLibrary.Specify('Subsystem')
+  TmsShape.NamedMC('Library').Specify('Subsystem')
    .SetFillColor(TAlphaColorRec.Lightblue)
    ;
 
@@ -225,7 +224,7 @@ begin
    .SetStereotypePlace(TmsStereotypePlace.Center)
    ;
 
-  TmsLibrary.Specify('Layer')
+  TmsShape.NamedMC('Library').Specify('Layer')
    .SetFillColor(TAlphaColorRec.Lightgray)
    ;
   TmsShape.NamedMC('Trivial').Specify('Typedef')
