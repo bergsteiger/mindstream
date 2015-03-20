@@ -6,6 +6,7 @@ implementation
 
 uses
   msInterfaces,
+  msShape,
   msLine,
   msRectangle,
   msCircle,
@@ -74,7 +75,7 @@ begin
    .SetCornerRadius(10)
    .SetIsForToolbar(false)
    ;
-  TmsUseCaseLikeEllipse.TMC
+  TmsCircle.Specify('UseCaseLikeEllipse')
    .SetFillColor(TAlphaColorRec.Yellow)
    .SetInitialHeight(70)
    ;
@@ -255,7 +256,7 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsUseCaseLikeEllipse.TMC
+  TmsShape.N('UseCaseLikeEllipse')
    .SetIsForToolbar(false)
    ;
 

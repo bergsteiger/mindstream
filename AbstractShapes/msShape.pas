@@ -89,6 +89,7 @@ type
   class function MC: ImsShapeClass;
   class function TMC: ImsShapeClassTuner;
   class function NamedMC(const aName: String): ImsShapeClass;
+  class function N(const aName: String): ImsShapeClassTuner;
   class function Specify(const aName: String): ImsShapeClassTuner;
  end;//TmsShape
 
@@ -379,6 +380,15 @@ begin
  if (Result = nil) then
   Result := TmsRegisteredShapes.Instance.ByName('Tms' + aName);
  Assert(Result <> nil, 'Стереотип ' + aName + ' не зарегистрирован');
+end;
+
+class function TmsShape.N(const aName: String): ImsShapeClassTuner;
+var
+ l_MC : ImsShapeClass;
+begin
+ l_MC := NamedMC(aName);
+ Assert(l_MC <> nil);
+ Result := l_MC.AsTuner;
 end;
 
 class function TmsShape.Specify(const aName: String): ImsShapeClassTuner;
