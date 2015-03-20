@@ -95,6 +95,7 @@ begin
 
   TmsRectangle.Specify('RedRectangle')
    .SetFillColor(TAlphaColorRec.Red)
+   .SetIsForToolbar(false)
    ;
   TmsRectangle.Specify('GreenRectangle')
    .SetFillColor(TAlphaColorRec.Green)
@@ -127,6 +128,7 @@ begin
 
   TmsCircle.Specify('GreenCircle')
    .SetFillColor(TAlphaColorRec.Green)
+   .SetIsForToolbar(false)
    ;
   TmsTriangle.Specify('BlackTriangle')
    .SetFillColor(TAlphaColorRec.Black)
@@ -265,6 +267,10 @@ begin
    ;
 
   TmsCircle.TMC
+   .SetIsForToolbar(false)
+   ;
+
+  TmsRectangle.TMC
    .SetIsForToolbar(false)
    ;
 
