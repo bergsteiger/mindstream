@@ -184,6 +184,7 @@ begin
   TmsAssociation.TMC
    .SetStrokeThickness(1.5)
    .SetStrokeDash(TStrokeDash.Solid)
+   .SetStereotypePlace(TmsStereotypePlace.Center)
    ;
   TmsDependency.TMC
    .SetStrokeThickness(1.5)

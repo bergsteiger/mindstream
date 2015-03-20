@@ -12,7 +12,6 @@ type
  protected
   function ArrowHeadShapeMC: ImsShapeClass; override;
   function GetFinishPointForDraw: TPointF; override;
-  procedure GetStereotypeRect(var aRect: TRectF); override;
  end;//TmsAssociation
 
 implementation
@@ -30,11 +29,6 @@ end;
 function TmsAssociation.GetFinishPointForDraw: TPointF;
 begin
  Result := FinishPoint;
-end;
-
-procedure TmsAssociation.GetStereotypeRect(var aRect: TRectF);
-begin
- aRect := DrawBounds;
 end;
 
 end.
