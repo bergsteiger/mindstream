@@ -13,8 +13,4 @@ type
 
 implementation
 
-uses
- FMX.Graphics
- ;
-
 end.
