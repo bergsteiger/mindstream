@@ -112,7 +112,6 @@ uses
   FMX.DUnit.msLog in 'fmx.dunit\FMX.DUnit.msLog.pas',
   msConnector in 'ConcreteShapes\ForUML\msConnector.pas',
   msLineF in 'Core\msLineF.pas',
-  msDependency in 'ConcreteShapes\ForUML\msDependency.pas',
   msAssociation in 'ConcreteShapes\ForUML\msAssociation.pas',
   msClass in 'ConcreteShapes\ForUML\msClass.pas',
   msArrowHead in 'ConcreteShapes\msArrowHead.pas',

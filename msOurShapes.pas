@@ -39,7 +39,6 @@ uses
   msScrollingTool,
   msConnector,
   msAssociation,
-  msDependency,
   msClass,
   msArrowHead,
   msSVGShape,
@@ -187,7 +186,7 @@ begin
    .SetStrokeDash(TStrokeDash.Solid)
    .SetStereotypePlace(TmsStereotypePlace.Center)
    ;
-  TmsDependency.TMC
+  TmsAssociation.Specify('Dependency')
    .SetStrokeThickness(1.5)
    .SetStrokeDash(TStrokeDash.Dash)
    ;
@@ -243,9 +242,9 @@ begin
   TmsClass.Specify('Program')
    .SetFillColor(TAlphaColorRec.Lime)
    ;
-  TmsDependency.Specify('uses');
-  TmsDependency.Specify('friend');
-  TmsDependency.Specify('injects');
+  TmsShape.NamedMC('Dependency').Specify('uses');
+  TmsShape.NamedMC('Dependency').Specify('friend');
+  TmsShape.NamedMC('Dependency').Specify('injects');
   TmsAssociation.Specify('property');
   TmsAssociation.Specify('readonly');
   TmsAssociation.Specify('writeonly');
@@ -272,7 +271,7 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsDependency.TMC
+  TmsShape.N('Dependency')
    .SetIsForToolbar(false)
    ;
 
