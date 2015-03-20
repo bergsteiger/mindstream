@@ -276,6 +276,16 @@ begin
  if (l_StereotypePlace = TmsStereotypePlace.None) then
   Exit;
  aRect := Self.DrawBounds;
+ case l_StereotypePlace of
+  TmsStereotypePlace.Center:
+   ;
+  TmsStereotypePlace.Bottom:
+   aRect := TRectF.Create(aRect.Left - 20, aRect.Bottom, aRect.Right + 20, aRect.Bottom + 20);
+  TmsStereotypePlace.OneThirty:
+   aRect := TRectF.Create(aRect.Left, aRect.Top, aRect.Right, aRect.Top + aRect.Height / 3);
+  else
+   Assert(false);
+ end;//case l_StereotypePlace
 end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
