@@ -200,7 +200,9 @@ begin
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
-  TmsLibrary.TMC;
+  TmsLibrary.TMC
+   .SetStereotypePlace(TmsStereotypePlace.Center)
+   ;
 
   TmsLibrary.Specify('Project')
    .SetFillColor(TAlphaColorRec.Lightgreen)
