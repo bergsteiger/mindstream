@@ -78,7 +78,9 @@ begin
    ;
   TmsTriangle.TMC
    .SetFillColor(TAlphaColorRec.Green)
-   .SetInitialHeight(100);
+   .SetInitialHeight(100)
+   .SetIsForToolbar(false)
+   ;
   TmsLine.Specify('DashDotLine')
    .SetStrokeDash(TStrokeDash.DashDot)
    ;

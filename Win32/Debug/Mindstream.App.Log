@@ -95,3 +95,100 @@ Leave: TscriptStringWord Key: Строковое значение: "Button3"
 Enter: TkwFindComponent Key: FindComponent
   pop script_vtString: Button3 stack size: 0
 Leave: TkwFindComponent Key: FindComponent
+1: script_ttString: Button1
+1: script_ttToken: FindComponent
+1: script_ttToken: ButtonClick
+2: script_ttToken: DoNothing
+5: script_ttToken: DoNothing1
+5: script_ttToken: DoNothing2
+6: script_ttToken: DoNothing3
+6: script_ttToken: DoNothing4
+7: script_ttToken: DoNothing5
+7: script_ttToken: DoNothing6
+8: script_ttString: 
+9: script_ttToken: DoNothing7
+10: script_ttToken: DoNothing8
+10: script_ttToken: DoNothing9
+10: script_ttToken: DoNothing10
+11: script_ttToken: DoNothing11
+11: script_ttToken: DoNothing12
+11: script_ttToken: DoNothing13
+11: script_ttToken: DoNothing14
+13: script_ttString: aString1
+14: script_ttString: aString2 with spaces
+15: script_ttString: 
+17: script_ttEOF: 
+Enter: TscriptStringWord Key: Строковое значение: "Button1"
+  push script_vtString: Button1 stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: "Button1"
+Enter: TkwFindComponent Key: FindComponent
+  pop script_vtString: Button1 stack size: 0
+Leave: TkwFindComponent Key: FindComponent
+1: script_ttString: Button4
+1: script_ttToken: FindComponent
+1: script_ttToken: ButtonClick
+2: script_ttEOF: 
+Enter: TscriptStringWord Key: Строковое значение: "Button4"
+  push script_vtString: Button4 stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: "Button4"
+Enter: TkwFindComponent Key: FindComponent
+  pop script_vtString: Button4 stack size: 0
+Leave: TkwFindComponent Key: FindComponent
+1: script_ttString: Button2
+1: script_ttToken: FindComponent
+1: script_ttToken: ButtonClick
+2: script_ttToken: DoNothing
+5: script_ttToken: DoNothing1
+5: script_ttToken: DoNothing2
+6: script_ttToken: DoNothing3
+6: script_ttToken: DoNothing4
+7: script_ttToken: DoNothing5
+7: script_ttToken: DoNothing6
+8: script_ttString: 
+9: script_ttToken: DoNothing7
+10: script_ttToken: DoNothing8
+10: script_ttToken: DoNothing9
+10: script_ttToken: DoNothing10
+11: script_ttToken: DoNothing11
+11: script_ttToken: DoNothing12
+11: script_ttToken: DoNothing13
+11: script_ttToken: DoNothing14
+13: script_ttString: aString1
+14: script_ttString: aString2 with spaces
+15: script_ttString: 
+17: script_ttEOF: 
+Enter: TscriptStringWord Key: Строковое значение: "Button2"
+  push script_vtString: Button2 stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: "Button2"
+Enter: TkwFindComponent Key: FindComponent
+  pop script_vtString: Button2 stack size: 0
+Leave: TkwFindComponent Key: FindComponent
+1: script_ttString: Button3
+1: script_ttToken: FindComponent
+1: script_ttToken: ButtonClick
+2: script_ttToken: DoNothing
+5: script_ttToken: DoNothing1
+5: script_ttToken: DoNothing2
+6: script_ttToken: DoNothing3
+6: script_ttToken: DoNothing4
+7: script_ttToken: DoNothing5
+7: script_ttToken: DoNothing6
+8: script_ttString: 
+9: script_ttToken: DoNothing7
+10: script_ttToken: DoNothing8
+10: script_ttToken: DoNothing9
+10: script_ttToken: DoNothing10
+11: script_ttToken: DoNothing11
+11: script_ttToken: DoNothing12
+11: script_ttToken: DoNothing13
+11: script_ttToken: DoNothing14
+13: script_ttString: aString1
+14: script_ttString: aString2 with spaces
+15: script_ttString: 
+17: script_ttEOF: 
+Enter: TscriptStringWord Key: Строковое значение: "Button3"
+  push script_vtString: Button3 stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: "Button3"
+Enter: TkwFindComponent Key: FindComponent
+  pop script_vtString: Button3 stack size: 0
+Leave: TkwFindComponent Key: FindComponent
