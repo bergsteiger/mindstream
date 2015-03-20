@@ -202,6 +202,13 @@ type
    write pm_SetCurrentDiagramms;
  end;//ImsDiagrammsHolder
 
+ TmsStereotypePlace = (
+  None,
+  Center,
+  Bottom,
+  OneThirty
+ );//TmsStereotypePlace
+
  ImsShapeClassTuner = interface
   function AsMC: ImsShapeClass;
   function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
@@ -212,6 +219,7 @@ type
   function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
   function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
   function SetIsForToolbar(aValue: Boolean): ImsShapeClassTuner;
+  function SetStereotyPlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
  end;//ImsShapeClassTuner
 
  ImsShapeClass = interface
@@ -233,6 +241,7 @@ type
   function CornerRadius: Pixel;
   function ParentMC: ImsShapeClass;
   function AsTuner: ImsShapeClassTuner;
+  function StereotypePlace: TmsStereotypePlace;
  end;//ImsShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)

@@ -17,6 +17,7 @@ type
   f_CornerRadius : TmsRadiusRec;
   f_StrokeDash : TmsStrokeDash;
   f_IsForToolbar : Boolean;
+  f_StereotypePlace: TmsStereotypePlace;
  protected
   function ParentMC: ImsShapeClass; virtual;
   function AsMC: ImsShapeClass; virtual;
@@ -35,6 +36,8 @@ type
   function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
   function IsForToolbar: Boolean;
   function SetIsForToolbar(aValue: Boolean): ImsShapeClassTuner;
+  function SetStereotyPlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
+  function StereotypePlace: TmsStereotypePlace;
  public
   constructor Create;
  end;//TmsShapeClassPrim
@@ -51,8 +54,12 @@ constructor TmsShapeClassPrim.Create;
 begin
  inherited Create;
  f_IsForToolbar := true;
+ f_StereotypePlace := TmsStereotypePlace.None;
  if (ParentMC <> nil) then
+ begin
   f_IsForToolbar := ParentMC.IsForToolbar;
+  f_StereotypePlace := ParentMC.StereotypePlace;
+ end;//ParentMC <> nil
 end;
 
 function TmsShapeClassPrim.ParentMC: ImsShapeClass;
@@ -135,6 +142,17 @@ function TmsShapeClassPrim.SetIsForToolbar(aValue: Boolean): ImsShapeClassTuner;
 begin
  Result := Self;
  f_IsForToolbar := aValue;
+end;
+
+function TmsShapeClassPrim.SetStereotyPlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
+begin
+ Result := Self;
+ f_StereotypePlace := aValue;
+end;
+
+function TmsShapeClassPrim.StereotypePlace: TmsStereotypePlace;
+begin
+ Result := f_StereotypePlace;
 end;
 
 function TmsShapeClassPrim.SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
