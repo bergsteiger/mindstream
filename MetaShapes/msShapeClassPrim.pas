@@ -36,7 +36,7 @@ type
   function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
   function IsForToolbar: Boolean;
   function SetIsForToolbar(aValue: Boolean): ImsShapeClassTuner;
-  function SetStereotyPlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
+  function SetStereotypePlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
   function StereotypePlace: TmsStereotypePlace;
   function Specify(const aName: String): ImsShapeClassTuner;
  public
@@ -147,7 +147,7 @@ begin
  f_IsForToolbar := aValue;
 end;
 
-function TmsShapeClassPrim.SetStereotyPlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
+function TmsShapeClassPrim.SetStereotypePlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
 begin
  Result := Self;
  f_StereotypePlace := aValue;

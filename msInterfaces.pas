@@ -219,7 +219,7 @@ type
   function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
   function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
   function SetIsForToolbar(aValue: Boolean): ImsShapeClassTuner;
-  function SetStereotyPlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
+  function SetStereotypePlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
  end;//ImsShapeClassTuner
 
  ImsShapeClass = interface

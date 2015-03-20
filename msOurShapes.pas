@@ -212,7 +212,7 @@ begin
 
   TmsShape.NamedMC('UseCaseLikeEllipse').Specify('Usecase')
    .SetFillColor(TAlphaColorRec.Lightyellow)
-   .SetStereotyPlace(TmsStereotypePlace.Bottom)
+   .SetStereotypePlace(TmsStereotypePlace.Bottom)
    ;
 
   TmsShape.NamedMC('Usecase').Specify('UsecaseRealization')
@@ -221,6 +221,7 @@ begin
 
   TmsTrivial.TMC
    .SetInitialHeightScale( 1 / 3 * 2 )
+   .SetStereotypePlace(TmsStereotypePlace.Center)
    ;
 
   TmsLibrary.Specify('Layer')
