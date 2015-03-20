@@ -190,7 +190,9 @@ begin
    .SetStrokeDash(TStrokeDash.Dash)
    ;
 
-  TmsClass.TMC;
+  TmsClass.TMC
+   .SetStereotypePlace(TmsStereotypePlace.OneThirty)
+   ;
 
   TmsClass.Specify('Interface')
    .SetFillColor(TAlphaColorRec.Lightblue)

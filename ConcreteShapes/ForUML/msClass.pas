@@ -11,7 +11,6 @@ uses
 type
  TmsClass = class(TmsRectangle)
  protected
-  procedure GetStereotypeRect(var aRect: TRectF); override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsClass
 
@@ -23,12 +22,6 @@ uses
  ;
 
 // TmsClass
-
-procedure TmsClass.GetStereotypeRect(var aRect: TRectF);
-begin
- aRect := DrawBounds;
- aRect := TRectF.Create(aRect.Left, aRect.Top, aRect.Right, aRect.Top + aRect.Height / 3);
-end;
 
 procedure TmsClass.DoDrawTo(const aCtx: TmsDrawContext);
 var
