@@ -10,7 +10,6 @@ uses
   msLine,
   msRectangle,
   msCircle,
-  msUseCaseLikeEllipse,
   msTriangle,
   msLineWithArrow,
   msTriangleDirectionRight,
@@ -214,6 +213,7 @@ begin
 
   TmsUsecase.TMC
    .SetFillColor(TAlphaColorRec.Lightyellow)
+   .SetInitialHeight(70)
    ;
 
   TmsUsecase.Specify('UsecaseRealization')

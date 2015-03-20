@@ -5,11 +5,11 @@ interface
 uses
  System.Types,
  msInterfaces,
- msUseCaseLikeEllipse
+ msCircle
  ;
 
 type
- TmsUsecase = class(TmsUseCaseLikeEllipse)
+ TmsUsecase = class(TmsCircle)
  protected
   procedure GetStereotypeRect(var aRect: TRectF); override;
  end;//TmsUsecase

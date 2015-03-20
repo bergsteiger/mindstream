@@ -14,7 +14,6 @@ uses
   msRectangle in 'ConcreteShapes\msRectangle.pas',
   msPointCircle in 'SpecialShapes\msPointCircle.pas',
   msCircle in 'ConcreteShapes\msCircle.pas',
-  msUseCaseLikeEllipse in 'ConcreteShapes\msUseCaseLikeEllipse.pas',
   msTriangle in 'ConcreteShapes\msTriangle.pas',
   msDiagramms in 'msDiagramms.pas',
   msDiagrammsController in 'msDiagrammsController.pas',
