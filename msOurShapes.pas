@@ -71,7 +71,9 @@ begin
    .SetFillColor(TAlphaColorRec.Blue)
    .SetInitialHeight(90)
    .SetInitialWidth(90)
-   .SetCornerRadius(10);
+   .SetCornerRadius(10)
+   .SetIsForToolbar(false)
+   ;
   TmsUseCaseLikeEllipse.TMC
    .SetFillColor(TAlphaColorRec.Yellow)
    .SetInitialHeight(70)
@@ -101,6 +103,7 @@ begin
    ;
   TmsRectangle.Specify('GreenRectangle')
    .SetFillColor(TAlphaColorRec.Green)
+   .SetIsForToolbar(false)
    ;
 
   // special shapes
