@@ -118,7 +118,6 @@ uses
   msAssociation in 'ConcreteShapes\ForUML\msAssociation.pas',
   msClass in 'ConcreteShapes\ForUML\msClass.pas',
   msLibrary in 'ConcreteShapes\ForUML\msLibrary.pas',
-  msTrivial in 'ConcreteShapes\ForUML\msTrivial.pas',
   msArrowHead in 'ConcreteShapes\msArrowHead.pas',
   msPolylineShape in 'AbstractShapes\msPolylineShape.pas',
   msShapeClassPrim in 'MetaShapes\msShapeClassPrim.pas',

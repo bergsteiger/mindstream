@@ -44,7 +44,6 @@ uses
   msDependency,
   msClass,
   msLibrary,
-  msTrivial,
   msArrowHead,
   msSVGShape,
   msScrollShape,
@@ -219,7 +218,7 @@ begin
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
-  TmsTrivial.TMC
+  TmsRectangle.Specify('Trivial')
    .SetInitialHeightScale( 1 / 3 * 2 )
    .SetStereotypePlace(TmsStereotypePlace.Center)
    ;
@@ -227,10 +226,10 @@ begin
   TmsLibrary.Specify('Layer')
    .SetFillColor(TAlphaColorRec.Lightgray)
    ;
-  TmsTrivial.Specify('Typedef')
+  TmsShape.NamedMC('Trivial').Specify('Typedef')
    .SetFillColor(TAlphaColorRec.Gray)
    ;
-  TmsTrivial.Specify('Exception')
+  TmsShape.NamedMC('Trivial').Specify('Exception')
    .SetFillColor(TAlphaColorRec.Red)
    ;
   TmsClass.Specify('Method')
@@ -260,7 +259,7 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsTrivial.TMC
+  TmsShape.N('Trivial')
    .SetIsForToolbar(false)
    ;
 
