@@ -44,7 +44,6 @@ uses
   msDependency,
   msClass,
   msLibrary,
-  msUsecase,
   msTrivial,
   msArrowHead,
   msSVGShape,
@@ -211,13 +210,12 @@ begin
    .SetFillColor(TAlphaColorRec.Lightblue)
    ;
 
-  TmsUsecase.TMC
+  TmsShape.NamedMC('UseCaseLikeEllipse').Specify('Usecase')
    .SetFillColor(TAlphaColorRec.Lightyellow)
-   .SetInitialHeight(70)
    .SetStereotyPlace(TmsStereotypePlace.Bottom)
    ;
 
-  TmsUsecase.Specify('UsecaseRealization')
+  TmsShape.NamedMC('Usecase').Specify('UsecaseRealization')
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
