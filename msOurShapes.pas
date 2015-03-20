@@ -214,6 +214,7 @@ begin
   TmsUsecase.TMC
    .SetFillColor(TAlphaColorRec.Lightyellow)
    .SetInitialHeight(70)
+   .SetStereotyPlace(TmsStereotypePlace.Bottom)
    ;
 
   TmsUsecase.Specify('UsecaseRealization')
@@ -221,7 +222,7 @@ begin
    ;
 
   TmsTrivial.TMC
-   .SetInitialHeightScale( 1 / 3 * 2)
+   .SetInitialHeightScale( 1 / 3 * 2 )
    ;
 
   TmsLibrary.Specify('Layer')
