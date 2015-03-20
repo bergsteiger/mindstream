@@ -269,8 +269,13 @@ begin
 end;
 
 procedure TmsShape.GetStereotypeRect(var aRect: TRectF);
+var
+ l_StereotypePlace: TmsStereotypePlace;
 begin
- // - ничего не делаем. Специально.
+ l_StereotypePlace := Self.ShapeClass.StereotypePlace;
+ if (l_StereotypePlace = TmsStereotypePlace.None) then
+  Exit;
+ aRect := Self.DrawBounds;
 end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
