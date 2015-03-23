@@ -196,21 +196,8 @@ begin
 end;
 
 function TmsShapeClassPrim.CornerRadius: Pixel;
-var
- l_PMC : ImsShapeClass;
- l_V : TmsRadiusRec;
 begin
- l_V := f_CornerRadius;
- if l_V.rIsSet then
-  Result := l_V.rValue
- else
- begin
-  l_PMC := Self.ParentMC;
-  if (l_PMC <> nil) then
-   Result := l_PMC.CornerRadius
-  else
-   Result := -1.0;
- end;//l_V.rIsSet
+ Result := f_CornerRadius.rValue;
 end;
 
 end.
