@@ -14,7 +14,6 @@ uses
  System.Types,
  System.UITypes,
  msShape,
- msPointCircle,
  System.Classes,
  FMX.Objects,
  msRegisteredShapes,

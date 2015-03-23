@@ -12,7 +12,6 @@ uses
   msUtilityShapes in 'msUtilityShapes.pas',
   msLine in 'ConcreteShapes\msLine.pas',
   msRectangle in 'ConcreteShapes\msRectangle.pas',
-  msPointCircle in 'SpecialShapes\msPointCircle.pas',
   msCircle in 'ConcreteShapes\msCircle.pas',
   msTriangle in 'ConcreteShapes\msTriangle.pas',
   msDiagramms in 'msDiagramms.pas',

@@ -14,7 +14,6 @@ interface
 uses
   TestFramework,
   System.UITypes,
-  msPointCircle,
   msShape,
   msCircle,
   FMX.Graphics,
