@@ -184,21 +184,8 @@ begin
 end;
 
 function TmsShapeClassPrim.InitialHeight: Pixel;
-var
- l_PMC : ImsShapeClass;
- l_V : TmsPixelRec;
 begin
- l_V := f_InitialHeight;
- if l_V.rIsSet then
-  Result := l_V.rValue
- else
- begin
-  l_PMC := Self.ParentMC;
-  if (l_PMC <> nil) then
-   Result := l_PMC.InitialHeight
-  else
-   Result := 0.0;
- end;//l_V.rIsSet
+ Result := f_InitialHeight.rValue;
 end;
 
 function TmsShapeClassPrim.InitialWidth: Pixel;
