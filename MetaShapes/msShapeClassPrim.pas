@@ -39,6 +39,8 @@ type
   function SetStereotypePlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
   function StereotypePlace: TmsStereotypePlace;
   function Specify(const aName: String): ImsShapeClassTuner;
+  function Creator: ImsShapeCreator; virtual; abstract;
+  function CreateShape(const aStartPoint: TPointF): ImsShape; overload;
  public
   constructor Create;
  end;//TmsShapeClassPrim
@@ -162,6 +164,11 @@ function TmsShapeClassPrim.Specify(const aName: String): ImsShapeClassTuner;
 begin
  Result := TmsProxyShapeClass.Create(aName, Self.AsMC);
  TmsRegisteredShapes.Instance.RegisterMC(Result.AsMC);
+end;
+
+function TmsShapeClassPrim.CreateShape(const aStartPoint: TPointF): ImsShape;
+begin
+ Result := Creator.CreateShape(aStartPoint);
 end;
 
 function TmsShapeClassPrim.SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;

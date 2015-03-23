@@ -21,7 +21,7 @@ type
  protected
   function IsTool: Boolean;
   function IsLineLike: Boolean;
-  function Creator: ImsShapeCreator;
+  function Creator: ImsShapeCreator; override;
   function Name: String;
   function Stereotype: String; override;
   function ParentMC: ImsShapeClass; override;
