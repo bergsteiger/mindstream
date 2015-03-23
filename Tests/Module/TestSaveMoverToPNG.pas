@@ -49,7 +49,7 @@ uses
   TypInfo,
 
   msConnector,
-  msPointCircle
+  msShape
   ;
 
 // TTestSaveMoverToPNG
@@ -101,7 +101,7 @@ begin
   CheckFalse(aShape.DrawBounds.Contains(l_ClickPoint), 'Фигура не должна содержать точку клика');
   aMover.EndTo(l_Ctx);
   CheckFalse(aShape.DrawBounds.Contains(l_ClickPoint), 'Видимо не попали в кнопку и фигура сместилась в точку клика');
-  l_S := TmsPointCircle.Create(l_ClickPoint);
+  l_S := TmsShape.NamedMC('PointCircle').CreateShape(l_ClickPoint);
   Assert(l_S.StartPoint = l_ClickPoint);
   aDiagramm.AddShape(l_S);
  end;//aMover <> nil
