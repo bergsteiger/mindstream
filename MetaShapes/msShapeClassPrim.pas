@@ -64,6 +64,7 @@ begin
  if (ParentMC <> nil) then
  begin
   SetInitialHeight(ParentMC.InitialHeight);
+  SetInitialWidth(ParentMC.InitialWidth);
   f_IsForToolbar := ParentMC.IsForToolbar;
   f_StereotypePlace := ParentMC.StereotypePlace;
  end;//ParentMC <> nil
