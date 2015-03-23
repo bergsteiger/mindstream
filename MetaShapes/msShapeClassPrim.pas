@@ -14,7 +14,7 @@ type
   f_InitialHeight : Pixel;
   f_InitialWidth : Pixel;
   f_StrokeThickness : TmsPixelRec;
-  f_CornerRadius : TmsRadiusRec;
+  f_CornerRadius : Pixel;
   f_StrokeDash : TmsStrokeDash;
   f_IsForToolbar : Boolean;
   f_StereotypePlace: TmsStereotypePlace;
@@ -197,7 +197,7 @@ end;
 
 function TmsShapeClassPrim.CornerRadius: Pixel;
 begin
- Result := f_CornerRadius.rValue;
+ Result := f_CornerRadius;
 end;
 
 end.
