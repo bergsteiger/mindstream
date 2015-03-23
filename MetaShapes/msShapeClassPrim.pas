@@ -63,6 +63,7 @@ begin
  f_StereotypePlace := TmsStereotypePlace.None;
  if (ParentMC <> nil) then
  begin
+  SetInitialHeight(ParentMC.InitialHeight);
   f_IsForToolbar := ParentMC.IsForToolbar;
   f_StereotypePlace := ParentMC.StereotypePlace;
  end;//ParentMC <> nil
