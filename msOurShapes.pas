@@ -101,7 +101,7 @@ begin
    ;
 
   // special shapes
-  TmsPointCircle.TMC
+  TmsCircle.Specify('PointCircle')
    .SetFillColor(TAlphaColorRec.Null)
    .SetIsForToolbar(false)
    .SetInitialWidth(20)
