@@ -65,6 +65,7 @@ begin
  begin
   SetInitialHeight(ParentMC.InitialHeight);
   SetInitialWidth(ParentMC.InitialWidth);
+  SetCornerRadius(ParentMC.CornerRadius);
   f_IsForToolbar := ParentMC.IsForToolbar;
   f_StereotypePlace := ParentMC.StereotypePlace;
  end;//ParentMC <> nil
