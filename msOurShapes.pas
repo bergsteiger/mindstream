@@ -53,7 +53,8 @@ begin
   TmsLine.TMC
    .SetIsForToolbar(false)
    ;
-  TmsRectangle.TMC.SetFillColor(TAlphaColorRec.White)
+  TmsRectangle.TMC
+   .SetFillColor(TAlphaColorRec.White)
    .SetInitialHeight(90)
    .SetInitialWidth(100)
    .SetCornerRadius(0.0)
