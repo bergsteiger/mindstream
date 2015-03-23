@@ -117,7 +117,9 @@ begin
   TmsMover.TMC;
   TmsPicker.TMC;
   TmsUpToParent.TMC;
-  TmsSwapParents.TMC;
+  TmsSwapParents.TMC
+   .SetIsForToolbar(false)
+   ;
   TmsShapeRemover.TMC;
 
   // SVG Shapes
