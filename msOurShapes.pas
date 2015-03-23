@@ -50,11 +50,14 @@ uses
 procedure RegisterOurShapes;
 begin
   // concrete shapes
-  TmsLine.TMC;
+  TmsLine.TMC
+   .SetIsForToolbar(false)
+   ;
   TmsRectangle.TMC.SetFillColor(TAlphaColorRec.White)
    .SetInitialHeight(90)
    .SetInitialWidth(100)
-   .SetCornerRadius(0.0);
+   .SetCornerRadius(0.0)
+   ;
   TmsCircle.TMC
    .SetFillColor(TAlphaColorRec.Red)
    .SetInitialHeight(100)
@@ -173,7 +176,9 @@ begin
 //   .SetIsForToolbar(false)
    ;
 
-  TmsConnector.TMC;
+  TmsConnector.TMC
+   .SetIsForToolbar(true)
+   ;
 
   TmsConnector.Specify('Generalization')
    ;
