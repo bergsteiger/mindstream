@@ -67,7 +67,7 @@ begin
  end//ShapeClass.IsTool
  else
  begin
-  Result := ShapeClass.Creator.CreateShape(aContext);
+  Result := ShapeClass.CreateShape(aContext);
   if Result.IsNeedsSecondClick then
   begin
    l_EndPont := aContext.rStartPoint;

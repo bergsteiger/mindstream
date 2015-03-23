@@ -38,7 +38,7 @@ uses
 
 procedure TestTmsCircle.SetUp;
 begin
-  FmsCircle := TmsCircle.MC.Creator.CreateShape(TPointF.Create(0, 0));
+  FmsCircle := TmsCircle.MC.CreateShape(TPointF.Create(0, 0));
 end;
 
 procedure TestTmsCircle.TearDown;

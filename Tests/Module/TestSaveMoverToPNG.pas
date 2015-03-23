@@ -76,7 +76,7 @@ begin
  l_Class := TmsMover.MC;
  Assert(l_Class <> nil);
  l_Ctx := TmsMakeShapeContext.Create(l_ShapeToDeal.StartPoint, aDiagramm.ShapesController, nil);
- l_Mover := l_Class.Creator.CreateShape(l_Ctx);
+ l_Mover := l_Class.CreateShape(l_Ctx);
  if (l_Mover <> nil) then
  begin
   l_Mover.MouseUp(TmsEndShapeContext.Create(l_ShapeToDeal.StartPoint, aDiagramm.ShapesController, nil));
