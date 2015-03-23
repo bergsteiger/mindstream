@@ -11,8 +11,8 @@ type
  TmsShapeClassPrim = class abstract(TmsInterfacedRefcounted, ImsShapeClassTuner)
  private
   f_FillColor : TmsColorRec;
-  f_InitialHeight : TmsPixelRec;
-  f_InitialWidth : TmsPixelRec;
+  f_InitialHeight : Pixel;
+  f_InitialWidth : Pixel;
   f_StrokeThickness : TmsPixelRec;
   f_CornerRadius : TmsRadiusRec;
   f_StrokeDash : TmsStrokeDash;
@@ -186,25 +186,12 @@ end;
 
 function TmsShapeClassPrim.InitialHeight: Pixel;
 begin
- Result := f_InitialHeight.rValue;
+ Result := f_InitialHeight;
 end;
 
 function TmsShapeClassPrim.InitialWidth: Pixel;
-var
- l_PMC : ImsShapeClass;
- l_V : TmsPixelRec;
 begin
- l_V := f_InitialWidth;
- if l_V.rIsSet then
-  Result := l_V.rValue
- else
- begin
-  l_PMC := Self.ParentMC;
-  if (l_PMC <> nil) then
-   Result := l_PMC.InitialWidth
-  else
-   Result := 0.0;
- end;//l_V.rIsSet
+ Result := f_InitialWidth;
 end;
 
 function TmsShapeClassPrim.CornerRadius: Pixel;
