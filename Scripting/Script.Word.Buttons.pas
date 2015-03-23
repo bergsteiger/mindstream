@@ -23,8 +23,8 @@ type
  end;//EscriptStringIsEmpty
 
  EscriptComponentNotFound = class(Escript)
-  public
-    class procedure Check(aComponent: TComponent; const aName: String); overload;
+ public
+  class procedure Check(aComponent: TComponent; const aName: String); overload;
  end;//EscriptComponentNotFound
 
  TkwFindComponent = class(TscriptWord)
@@ -77,6 +77,13 @@ begin
   end;//Screen.Forms[l_Index].ClassName <> 'TGUITestRunner'
  EscriptFormNotFound.Check(l_ActiveForm <> nil);
  l_Component := l_ActiveForm.FindComponent(l_Name);
+ {$IfDef CanBeComponentIsNil}
+ if (l_Component = nil) then
+ begin
+  aContext.PushObject(l_Component);
+  Exit;
+ end;//l_Component = nil
+ {$EndIf CanBeComponentIsNil}
  EscriptComponentNotFound.Check(l_Component, l_Name);
  aContext.PushObject(l_Component);
 end;
@@ -92,6 +99,12 @@ var
  l_Component : TComponent;
 begin
  l_Component := aContext.PopObject As TComponent;
+ {$IfDef CanBeComponentIsNil}
+ if (l_Component = nil) then
+ begin
+  Exit;
+ end;//l_Component = nil
+ {$EndIf CanBeComponentIsNil}
  EscriptInvalidClass.Check(l_Component Is TButton);
  TControlAccess(l_Component).Click;
 end;

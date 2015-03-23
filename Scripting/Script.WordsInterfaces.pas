@@ -139,6 +139,11 @@ begin
    Result := rAsString;
   script_vtObject:
   begin
+   if (rAsObject = nil) then
+   begin
+    Result := 'nil';
+    Exit;
+   end;//rAsObject = nil
    Result := rAsObject.ClassName;
    if (rAsObject Is TComponent) then
     Result := TComponent(rAsObject).Name + ': ' + Result;
