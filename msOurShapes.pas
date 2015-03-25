@@ -36,7 +36,6 @@ uses
   msScrollingTool,
   msConnector,
   msAssociation,
-  msClass,
   msArrowHead,
   msSVGShape,
   msScrollShape,
@@ -209,15 +208,15 @@ begin
    .SetStrokeDash(TStrokeDash.Dash)
    ;
 
-  TmsClass.TMC
+  TmsRectangle.Specify('Class')
    .SetStereotypePlace(TmsStereotypePlace.OneThirty)
    .SetAdditionalLinesH([1 /3, 2 / 3])
    ;
 
-  TmsClass.Specify('Interface')
+  TmsShape.NamedMC('Class').Specify('Interface')
    .SetFillColor(TAlphaColorRec.Lightblue)
    ;
-  TmsClass.Specify('MixIn')
+  TmsShape.NamedMC('Class').Specify('MixIn')
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
@@ -255,10 +254,10 @@ begin
   TmsShape.NamedMC('Trivial').Specify('Exception')
    .SetFillColor(TAlphaColorRec.Red)
    ;
-  TmsClass.Specify('Method')
+  TmsShape.NamedMC('Class').Specify('Method')
    .SetFillColor(TAlphaColorRec.Purple)
    ;
-  TmsClass.Specify('Program')
+  TmsShape.NamedMC('Class').Specify('Program')
    .SetFillColor(TAlphaColorRec.Lime)
    ;
   TmsShape.NamedMC('Dependency').Specify('uses');
