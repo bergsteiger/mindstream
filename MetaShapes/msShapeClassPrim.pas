@@ -57,18 +57,21 @@ uses
 // TmsShapeClassPrim
 
 constructor TmsShapeClassPrim.Create;
+var
+ l_PMC : ImsShapeClass;
 begin
  inherited Create;
  f_IsForToolbar := true;
  f_StereotypePlace := TmsStereotypePlace.None;
- if (ParentMC <> nil) then
+ l_PMC := ParentMC;
+ if (l_PMC <> nil) then
  begin
-  SetInitialHeight(ParentMC.InitialHeight);
-  SetInitialWidth(ParentMC.InitialWidth);
-  SetCornerRadius(ParentMC.CornerRadius);
-  f_IsForToolbar := ParentMC.IsForToolbar;
-  f_StereotypePlace := ParentMC.StereotypePlace;
- end;//ParentMC <> nil
+  SetInitialHeight(l_PMC.InitialHeight);
+  SetInitialWidth(l_PMC.InitialWidth);
+  SetCornerRadius(l_PMC.CornerRadius);
+  f_IsForToolbar := l_PMC.IsForToolbar;
+  f_StereotypePlace := l_PMC.StereotypePlace;
+ end;//l_PMC <> nil
 end;
 
 function TmsShapeClassPrim.ParentMC: ImsShapeClass;
