@@ -15,7 +15,6 @@ uses
   msTriangleDirectionRight,
   msRegisteredShapes,
   msPolygonShape,
-  msFolder,
   msMover,
   msPicker,
   msUpToParent,
@@ -129,7 +128,7 @@ begin
   TmsSVGShape.NRTMC
    .SetFillColor(TAlphaColorRec.Azure);
 
-  TmsFolder.TMC
+  TmsSVGShape.Specify('Folder')
    .SetSVGCode(
     'M 0,20, L 100,20, L 100,90, L 0,90, L 0,20' +
     // begin UHO
@@ -222,7 +221,7 @@ begin
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
-  TmsFolder.Specify('Library')
+  TmsShape.NamedMC('Folder').Specify('Library')
    .SetStereotypePlace(TmsStereotypePlace.Center)
    ;
 
@@ -287,7 +286,7 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsFolder.TMC
+  TmsShape.N('Folder')
    .SetIsForToolbar(false)
    ;
 

@@ -169,6 +169,7 @@ end;
 function TmsShapeClassPrim.SetSVGCode(const aValue: String): ImsShapeClassTuner;
 begin
  Result := Self;
+ Assert(aValue <> '');
  f_SVGCode := aValue;
 end;
 

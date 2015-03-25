@@ -37,7 +37,8 @@ var
 begin
  l_PD := TPathData.Create;
  try
-  l_PD.Data := Self.MC.SVGCode;
+  Assert(Self.ShapeClass.SVGCode <> '');
+  l_PD.Data := Self.ShapeClass.SVGCode;
   l_PD.FlattenToPolygon(l_PolygonSVG);
   l_R := PolygonBounds(l_PolygonSVG);
 
