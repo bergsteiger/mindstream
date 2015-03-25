@@ -22,7 +22,7 @@ type
   function IsTool: Boolean;
   function IsLineLike: Boolean;
   function Creator: ImsShapeCreator; override;
-  function Name: String;
+  function GetName: String; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
@@ -75,7 +75,7 @@ begin
  Result := TmsShapeCreator.Create(Self, f_ShapeClass);
 end;
 
-function TmsShapeClass.Name: String;
+function TmsShapeClass.GetName: String;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.ClassName;

@@ -48,6 +48,8 @@ type
   function Creator: ImsShapeCreator; virtual; abstract;
   function CreateShape(const aStartPoint: TPointF): ImsShape; overload;
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; overload;
+  function Name: String;
+  function GetName: String; virtual; abstract;
  public
   constructor Create;
  end;//TmsShapeClassPrim
@@ -212,6 +214,11 @@ end;
 function TmsShapeClassPrim.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
 begin
  Result := Creator.CreateShape(aContext);
+end;
+
+function TmsShapeClassPrim.Name: String;
+begin
+ Result := GetName;
 end;
 
 function TmsShapeClassPrim.SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;

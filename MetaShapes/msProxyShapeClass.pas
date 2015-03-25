@@ -22,7 +22,7 @@ type
   function IsTool: Boolean;
   function IsLineLike: Boolean;
   function Creator: ImsShapeCreator; override;
-  function Name: String;
+  function GetName: String; override;
   function Stereotype: String; override;
   function ParentMC: ImsShapeClass; override;
   function AsMC: ImsShapeClass; override;
@@ -81,20 +81,16 @@ begin
  //Result := f_ShapeClass.Creator;
 end;
 
-function TmsProxyShapeClass.Name: String;
+function TmsProxyShapeClass.GetName: String;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_Name;
-(* Assert(false, 'Не реализовано');
- Result := f_ShapeClass.Name;*)
 end;
 
 function TmsProxyShapeClass.Stereotype: String;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_Stereotype;
-(* Assert(false, 'Не реализовано');
- Result := f_ShapeClass.Stereotype;*)
 end;
 
 function TmsProxyShapeClass.ParentMC: ImsShapeClass;
