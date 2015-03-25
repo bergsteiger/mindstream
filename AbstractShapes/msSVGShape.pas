@@ -16,7 +16,6 @@ type
  // - базовый класс для реализации SVG объектов
  protected
   function GetPolygon: TPolygon; override; final;
-  function GetPolygonSVG: String; virtual; abstract;
  end;//TmsSVGShape
 
 implementation
@@ -38,7 +37,7 @@ var
 begin
  l_PD := TPathData.Create;
  try
-  l_PD.Data := GetPolygonSVG;
+  l_PD.Data := Self.MC.SVGCode;
   l_PD.FlattenToPolygon(l_PolygonSVG);
   l_R := PolygonBounds(l_PolygonSVG);
 

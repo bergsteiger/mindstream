@@ -18,6 +18,7 @@ type
   f_StrokeDash : TmsStrokeDash;
   f_IsForToolbar : Boolean;
   f_StereotypePlace: TmsStereotypePlace;
+  f_SVGCode : String;
  protected
   function ParentMC: ImsShapeClass; virtual;
   function AsMC: ImsShapeClass; virtual;
@@ -37,7 +38,9 @@ type
   function IsForToolbar: Boolean;
   function SetIsForToolbar(aValue: Boolean): ImsShapeClassTuner;
   function SetStereotypePlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
+  function SetSVGCode(const aValue: String): ImsShapeClassTuner;
   function StereotypePlace: TmsStereotypePlace;
+  function SVGCode: String;
   function Specify(const aName: String): ImsShapeClassTuner;
   function Creator: ImsShapeCreator; virtual; abstract;
   function CreateShape(const aStartPoint: TPointF): ImsShape; overload;
@@ -71,6 +74,7 @@ begin
   SetCornerRadius(l_PMC.CornerRadius);
   f_IsForToolbar := l_PMC.IsForToolbar;
   f_StereotypePlace := l_PMC.StereotypePlace;
+  f_SVGCode := l_PMC.SVGCode;
  end;//l_PMC <> nil
 end;
 
@@ -162,9 +166,20 @@ begin
  f_StereotypePlace := aValue;
 end;
 
+function TmsShapeClassPrim.SetSVGCode(const aValue: String): ImsShapeClassTuner;
+begin
+ Result := Self;
+ f_SVGCode := aValue;
+end;
+
 function TmsShapeClassPrim.StereotypePlace: TmsStereotypePlace;
 begin
  Result := f_StereotypePlace;
+end;
+
+function TmsShapeClassPrim.SVGCode: String;
+begin
+ Result := f_SVGCode;
 end;
 
 function TmsShapeClassPrim.Specify(const aName: String): ImsShapeClassTuner;

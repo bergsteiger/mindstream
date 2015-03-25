@@ -220,6 +220,7 @@ type
   function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
   function SetIsForToolbar(aValue: Boolean): ImsShapeClassTuner;
   function SetStereotypePlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
+  function SetSVGCode(const aValue: String): ImsShapeClassTuner;
  end;//ImsShapeClassTuner
 
  ImsShapeClass = interface
@@ -242,6 +243,7 @@ type
   function ParentMC: ImsShapeClass;
   function AsTuner: ImsShapeClassTuner;
   function StereotypePlace: TmsStereotypePlace;
+  function SVGCode: String;
   function Specify(const aName: String): ImsShapeClassTuner;
   function CreateShape(const aStartPoint: TPointF): ImsShape; overload;
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; overload;

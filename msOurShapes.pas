@@ -128,7 +128,16 @@ begin
   // SVG Shapes
   TmsSVGShape.NRTMC
    .SetFillColor(TAlphaColorRec.Azure);
-  TmsFolder.TMC;
+
+  TmsFolder.TMC
+   .SetSVGCode(
+    'M 0,20, L 100,20, L 100,90, L 0,90, L 0,20' +
+    // begin UHO
+    'L 0, 0' +
+    'L 40, 0' +
+    'L 40, 20'
+   )
+   ;
 
   TmsCircle.Specify('GreenCircle')
    .SetFillColor(TAlphaColorRec.Green)
@@ -146,6 +155,10 @@ begin
   TmsRemoveIcon.TMC
    .SetFillColor(TAlphaColorRec.Mediumvioletred)
    .SetIsForToolbar(false)
+   .SetSVGCode(
+    'M 10,30 L 30,10 L 50,30 L 70,10 L 90,30 L 70,50 L 90,70' +
+    'L 70,90 L 50,70 L 30,90 L 10,70 L 30,50 L 30,50 L 10,30'
+   )
    ;
   TmsMoveIcon.TMC
    .SetFillColor(TAlphaColorRec.Black)
