@@ -19,6 +19,7 @@ type
   f_IsForToolbar : Boolean;
   f_StereotypePlace: TmsStereotypePlace;
   f_SVGCode : String;
+  f_AdditionalLinesH : TmsAdditionalLineCoeff;
  protected
   function ParentMC: ImsShapeClass; virtual;
   function AsMC: ImsShapeClass; virtual;
@@ -39,8 +40,10 @@ type
   function SetIsForToolbar(aValue: Boolean): ImsShapeClassTuner;
   function SetStereotypePlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
   function SetSVGCode(const aValue: String): ImsShapeClassTuner;
+  function SetAdditionalLinesH(const aValue: TmsAdditionalLineCoeff): ImsShapeClassTuner;
   function StereotypePlace: TmsStereotypePlace;
   function SVGCode: String;
+  function AdditionalLinesH: TmsAdditionalLineCoeff;
   function Specify(const aName: String): ImsShapeClassTuner;
   function Creator: ImsShapeCreator; virtual; abstract;
   function CreateShape(const aStartPoint: TPointF): ImsShape; overload;
@@ -75,6 +78,7 @@ begin
   f_IsForToolbar := l_PMC.IsForToolbar;
   f_StereotypePlace := l_PMC.StereotypePlace;
   f_SVGCode := l_PMC.SVGCode;
+  f_AdditionalLinesH := l_PMC.AdditionalLinesH;
  end;//l_PMC <> nil
 end;
 
@@ -173,6 +177,12 @@ begin
  f_SVGCode := aValue;
 end;
 
+function TmsShapeClassPrim.SetAdditionalLinesH(const aValue: TmsAdditionalLineCoeff): ImsShapeClassTuner;
+begin
+ Result := Self;
+ f_AdditionalLinesH := aValue;
+end;
+
 function TmsShapeClassPrim.StereotypePlace: TmsStereotypePlace;
 begin
  Result := f_StereotypePlace;
@@ -181,6 +191,11 @@ end;
 function TmsShapeClassPrim.SVGCode: String;
 begin
  Result := f_SVGCode;
+end;
+
+function TmsShapeClassPrim.AdditionalLinesH: TmsAdditionalLineCoeff;
+begin
+ Result := f_AdditionalLinesH;
 end;
 
 function TmsShapeClassPrim.Specify(const aName: String): ImsShapeClassTuner;

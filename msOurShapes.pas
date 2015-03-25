@@ -211,6 +211,7 @@ begin
 
   TmsClass.TMC
    .SetStereotypePlace(TmsStereotypePlace.OneThirty)
+   .SetAdditionalLinesH([1 /3, 2 / 3])
    ;
 
   TmsClass.Specify('Interface')
