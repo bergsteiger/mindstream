@@ -293,6 +293,10 @@ var
  l_Ctx : TmsDrawOptionsContext;
  l_DrawContext : TmsDrawContext;
  l_StereotypeRect : TRectF;
+var
+ l_R: TRectF;
+ l_AL : TmsAdditionalLineCoeff;
+ l_C : Single;
 begin
  l_Ctx := DrawOptionsContext(aCtx);
  aCtx.rCanvas.Fill.Color := l_Ctx.rFillColor;
@@ -308,6 +312,13 @@ begin
  l_DrawContext.rOpacity := l_Ctx.rOpacity;
  l_DrawContext.rLineOpacity := l_Ctx.rLineOpacity;
  DoDrawTo(l_DrawContext);
+
+ l_R := DrawBounds;
+ l_AL := ShapeClass.AdditionalLinesH;
+ for l_C in l_AL do
+  aCtx.rCanvas.DrawLine(TPointF.Create(l_R.Left, l_R.Top + l_R.Height * l_C),
+                        TPointF.Create(l_R.Right, l_R.Top + l_R.Height * l_C), aCtx.rLineOpacity);
+
  l_StereotypeRect := TRectF.Create(0, 0, 0, 0);
  GetStereotypeRect(l_StereotypeRect);
  if (l_StereotypeRect.TopLeft <> l_StereotypeRect.BottomRight) then
