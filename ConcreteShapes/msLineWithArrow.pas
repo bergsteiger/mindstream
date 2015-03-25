@@ -35,7 +35,7 @@ uses
 
 function TmsLineWithArrow.CreateArrowHeadShape(const aStartPoint: TPointF): ImsShape;
 begin
- Result := ArrowHeadShapeMC.Creator.CreateShape(aStartPoint);
+ Result := ArrowHeadShapeMC.CreateShape(aStartPoint);
 end;
 
 function TmsLineWithArrow.ArrowHeadShapeMC: ImsShapeClass;

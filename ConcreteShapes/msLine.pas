@@ -40,7 +40,6 @@ type
 implementation
 
 uses
- msPointCircle,
  msShapeClass
  ;
 
@@ -141,7 +140,7 @@ var
 begin
  if (StartPoint = FinishPoint) then
  begin
-  l_Proxy := TmsPointCircle.Create(StartPoint);
+  l_Proxy := TmsShape.NamedMC('PointCircle').CreateShape(StartPoint);
   try
    l_Proxy.DrawTo(aCtx);
   finally

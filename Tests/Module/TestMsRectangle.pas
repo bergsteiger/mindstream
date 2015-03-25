@@ -43,7 +43,7 @@ uses
 
 procedure TestTmsRectangle.SetUp;
 begin
-  FmsRectangle := TmsRectangle.MC.Creator.CreateShape(TPointF.Create(0, 0));
+  FmsRectangle := TmsRectangle.MC.CreateShape(TPointF.Create(0, 0));
 end;
 
 procedure TestTmsRectangle.TearDown;

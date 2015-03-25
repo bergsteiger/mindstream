@@ -22,7 +22,7 @@ implementation
 
 class function TmsTool.ButtonShape: ImsShape;
 begin
- Result := TmsShape.NamedMC('GreenCircle').Creator.CreateShape(TPointF.Create(0, 0));
+ Result := TmsShape.NamedMC('GreenCircle').CreateShape(TPointF.Create(0, 0));
 end;
 
 class function TmsTool.IsTool: Boolean;

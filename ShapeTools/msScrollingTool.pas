@@ -33,7 +33,6 @@ implementation
 uses
  msCircle,
  msTriangle,
- msPointCircle,
  msMoveIcon,
  msScalingShape,
  msRectangle,

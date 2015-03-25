@@ -30,12 +30,12 @@ implementation
 
 function TmsCircle.InitialRadiusX: Integer;
 begin
- Result := 50;
+ Result := Round(Self.ShapeClass.InitialWidth / 2);
 end;
 
 function TmsCircle.InitialRadiusY: Integer;
 begin
- Result := InitialRadiusX;
+ Result := Round(Self.ShapeClass.InitialHeight / 2);
 end;
 
 function TmsCircle.ContainsPt(const aPoint: TPointF): Boolean;

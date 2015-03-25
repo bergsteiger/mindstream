@@ -202,6 +202,15 @@ type
    write pm_SetCurrentDiagramms;
  end;//ImsDiagrammsHolder
 
+ TmsStereotypePlace = (
+  None,
+  Center,
+  Bottom,
+  OneThirty
+ );//TmsStereotypePlace
+
+ TmsAdditionalLineCoeff = array of Single;
+
  ImsShapeClassTuner = interface
   function AsMC: ImsShapeClass;
   function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
@@ -211,6 +220,10 @@ type
   function SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;
   function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
   function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
+  function SetIsForToolbar(aValue: Boolean): ImsShapeClassTuner;
+  function SetStereotypePlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
+  function SetSVGCode(const aValue: String): ImsShapeClassTuner;
+  function SetAdditionalLinesH(const aValue: TmsAdditionalLineCoeff): ImsShapeClassTuner;
  end;//ImsShapeClassTuner
 
  ImsShapeClass = interface
@@ -232,6 +245,12 @@ type
   function CornerRadius: Pixel;
   function ParentMC: ImsShapeClass;
   function AsTuner: ImsShapeClassTuner;
+  function StereotypePlace: TmsStereotypePlace;
+  function SVGCode: String;
+  function AdditionalLinesH: TmsAdditionalLineCoeff;
+  function Specify(const aName: String): ImsShapeClassTuner;
+  function CreateShape(const aStartPoint: TPointF): ImsShape; overload;
+  function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; overload;
  end;//ImsShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)

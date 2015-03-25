@@ -3,9 +3,7 @@
 interface
 
 uses
- msSVGShape,
  msInterfaces,
- msButtonIcon,
  msFolderToolIcon
  ;
 

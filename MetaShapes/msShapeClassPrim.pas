@@ -11,12 +11,15 @@ type
  TmsShapeClassPrim = class abstract(TmsInterfacedRefcounted, ImsShapeClassTuner)
  private
   f_FillColor : TmsColorRec;
-  f_InitialHeight : TmsPixelRec;
-  f_InitialWidth : TmsPixelRec;
+  f_InitialHeight : Pixel;
+  f_InitialWidth : Pixel;
   f_StrokeThickness : TmsPixelRec;
-  f_CornerRadius : TmsRadiusRec;
+  f_CornerRadius : Pixel;
   f_StrokeDash : TmsStrokeDash;
   f_IsForToolbar : Boolean;
+  f_StereotypePlace: TmsStereotypePlace;
+  f_SVGCode : String;
+  f_AdditionalLinesH : TmsAdditionalLineCoeff;
  protected
   function ParentMC: ImsShapeClass; virtual;
   function AsMC: ImsShapeClass; virtual;
@@ -34,6 +37,17 @@ type
   function CornerRadius: Pixel;
   function SetInitialWidth(aValue: Pixel): ImsShapeClassTuner;
   function IsForToolbar: Boolean;
+  function SetIsForToolbar(aValue: Boolean): ImsShapeClassTuner;
+  function SetStereotypePlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
+  function SetSVGCode(const aValue: String): ImsShapeClassTuner;
+  function SetAdditionalLinesH(const aValue: TmsAdditionalLineCoeff): ImsShapeClassTuner;
+  function StereotypePlace: TmsStereotypePlace;
+  function SVGCode: String;
+  function AdditionalLinesH: TmsAdditionalLineCoeff;
+  function Specify(const aName: String): ImsShapeClassTuner;
+  function Creator: ImsShapeCreator; virtual; abstract;
+  function CreateShape(const aStartPoint: TPointF): ImsShape; overload;
+  function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; overload;
  public
   constructor Create;
  end;//TmsShapeClassPrim
@@ -41,17 +55,31 @@ type
 implementation
 
 uses
- msShape
+ msShape,
+ msProxyShapeClass,
+ msRegisteredShapes
  ;
 
 // TmsShapeClassPrim
 
 constructor TmsShapeClassPrim.Create;
+var
+ l_PMC : ImsShapeClass;
 begin
  inherited Create;
  f_IsForToolbar := true;
- if (ParentMC <> nil) then
-  f_IsForToolbar := ParentMC.IsForToolbar;
+ f_StereotypePlace := TmsStereotypePlace.None;
+ l_PMC := ParentMC;
+ if (l_PMC <> nil) then
+ begin
+  SetInitialHeight(l_PMC.InitialHeight);
+  SetInitialWidth(l_PMC.InitialWidth);
+  SetCornerRadius(l_PMC.CornerRadius);
+  f_IsForToolbar := l_PMC.IsForToolbar;
+  f_StereotypePlace := l_PMC.StereotypePlace;
+  f_SVGCode := l_PMC.SVGCode;
+  f_AdditionalLinesH := l_PMC.AdditionalLinesH;
+ end;//l_PMC <> nil
 end;
 
 function TmsShapeClassPrim.ParentMC: ImsShapeClass;
@@ -130,63 +158,80 @@ begin
  Result := f_IsForToolbar;
 end;
 
+function TmsShapeClassPrim.SetIsForToolbar(aValue: Boolean): ImsShapeClassTuner;
+begin
+ Result := Self;
+ f_IsForToolbar := aValue;
+end;
+
+function TmsShapeClassPrim.SetStereotypePlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
+begin
+ Result := Self;
+ f_StereotypePlace := aValue;
+end;
+
+function TmsShapeClassPrim.SetSVGCode(const aValue: String): ImsShapeClassTuner;
+begin
+ Result := Self;
+ Assert(aValue <> '');
+ f_SVGCode := aValue;
+end;
+
+function TmsShapeClassPrim.SetAdditionalLinesH(const aValue: TmsAdditionalLineCoeff): ImsShapeClassTuner;
+begin
+ Result := Self;
+ f_AdditionalLinesH := aValue;
+end;
+
+function TmsShapeClassPrim.StereotypePlace: TmsStereotypePlace;
+begin
+ Result := f_StereotypePlace;
+end;
+
+function TmsShapeClassPrim.SVGCode: String;
+begin
+ Result := f_SVGCode;
+end;
+
+function TmsShapeClassPrim.AdditionalLinesH: TmsAdditionalLineCoeff;
+begin
+ Result := f_AdditionalLinesH;
+end;
+
+function TmsShapeClassPrim.Specify(const aName: String): ImsShapeClassTuner;
+begin
+ Result := TmsProxyShapeClass.Create(aName, Self.AsMC);
+ TmsRegisteredShapes.Instance.RegisterMC(Result.AsMC);
+end;
+
+function TmsShapeClassPrim.CreateShape(const aStartPoint: TPointF): ImsShape;
+begin
+ Result := Creator.CreateShape(aStartPoint);
+end;
+
+function TmsShapeClassPrim.CreateShape(const aContext: TmsMakeShapeContext): ImsShape;
+begin
+ Result := Creator.CreateShape(aContext);
+end;
+
 function TmsShapeClassPrim.SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
 begin
  Result := Self.SetInitialHeight(Self.ParentMC.InitialHeight * aValue);
 end;
 
 function TmsShapeClassPrim.InitialHeight: Pixel;
-var
- l_PMC : ImsShapeClass;
- l_V : TmsPixelRec;
 begin
- l_V := f_InitialHeight;
- if l_V.rIsSet then
-  Result := l_V.rValue
- else
- begin
-  l_PMC := Self.ParentMC;
-  if (l_PMC <> nil) then
-   Result := l_PMC.InitialHeight
-  else
-   Result := 0.0;
- end;//l_V.rIsSet
+ Result := f_InitialHeight;
 end;
 
 function TmsShapeClassPrim.InitialWidth: Pixel;
-var
- l_PMC : ImsShapeClass;
- l_V : TmsPixelRec;
 begin
- l_V := f_InitialWidth;
- if l_V.rIsSet then
-  Result := l_V.rValue
- else
- begin
-  l_PMC := Self.ParentMC;
-  if (l_PMC <> nil) then
-   Result := l_PMC.InitialWidth
-  else
-   Result := 0.0;
- end;//l_V.rIsSet
+ Result := f_InitialWidth;
 end;
 
 function TmsShapeClassPrim.CornerRadius: Pixel;
-var
- l_PMC : ImsShapeClass;
- l_V : TmsRadiusRec;
 begin
- l_V := f_CornerRadius;
- if l_V.rIsSet then
-  Result := l_V.rValue
- else
- begin
-  l_PMC := Self.ParentMC;
-  if (l_PMC <> nil) then
-   Result := l_PMC.CornerRadius
-  else
-   Result := -1.0;
- end;//l_V.rIsSet
+ Result := f_CornerRadius;
 end;
 
 end.

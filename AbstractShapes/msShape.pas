@@ -74,7 +74,7 @@ type
   // - ткнули в примитив внутри диаграммы
   function GetDrawBounds: TRectF; virtual;
   function DrawBounds: TRectF;
-  procedure GetStereotypeRect(var aRect: TRectF); virtual;
+  procedure GetStereotypeRect(var aRect: TRectF);
  public
   class function IsLineLike: Boolean; virtual;
   procedure DrawTo(const aCtx: TmsDrawContext); virtual;
@@ -89,6 +89,7 @@ type
   class function MC: ImsShapeClass;
   class function TMC: ImsShapeClassTuner;
   class function NamedMC(const aName: String): ImsShapeClass;
+  class function N(const aName: String): ImsShapeClassTuner;
   class function Specify(const aName: String): ImsShapeClassTuner;
  end;//TmsShape
 
@@ -268,8 +269,23 @@ begin
 end;
 
 procedure TmsShape.GetStereotypeRect(var aRect: TRectF);
+var
+ l_StereotypePlace: TmsStereotypePlace;
 begin
- // - ничего не делаем. Специально.
+ l_StereotypePlace := Self.ShapeClass.StereotypePlace;
+ if (l_StereotypePlace = TmsStereotypePlace.None) then
+  Exit;
+ aRect := Self.DrawBounds;
+ case l_StereotypePlace of
+  TmsStereotypePlace.Center:
+   ;
+  TmsStereotypePlace.Bottom:
+   aRect := TRectF.Create(aRect.Left - 20, aRect.Bottom, aRect.Right + 20, aRect.Bottom + 20);
+  TmsStereotypePlace.OneThirty:
+   aRect := TRectF.Create(aRect.Left, aRect.Top, aRect.Right, aRect.Top + aRect.Height / 3);
+  else
+   Assert(false);
+ end;//case l_StereotypePlace
 end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
@@ -381,10 +397,18 @@ begin
  Assert(Result <> nil, 'Стереотип ' + aName + ' не зарегистрирован');
 end;
 
+class function TmsShape.N(const aName: String): ImsShapeClassTuner;
+var
+ l_MC : ImsShapeClass;
+begin
+ l_MC := NamedMC(aName);
+ Assert(l_MC <> nil);
+ Result := l_MC.AsTuner;
+end;
+
 class function TmsShape.Specify(const aName: String): ImsShapeClassTuner;
 begin
- Result := TmsProxyShapeClass.Create(aName, Self.MC);
- TmsRegisteredShapes.Instance.RegisterMC(Result.AsMC);
+ Result := Self.MC.Specify(aName);
 end;
 
 end.

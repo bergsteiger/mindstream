@@ -43,7 +43,7 @@ begin
  TtestEngine.StartTest('Initialization');
  try
  {$EndIf  NoTesting}
-  for l_FileName in TDirectory.GetFiles(ExtractFilePath(ParamStr(0)), '*.script') do
+  for l_FileName in TDirectory.GetFiles(ExtractFilePath(ParamStr(0)) + '\Scripts', '*.script') do
   begin
    {$IfNDef NoTesting}
    TtestEngine.CurrentTest.SocketMetric(TtestSocket.Create(Self, 'AddTests')).PutValue(l_FileName);
