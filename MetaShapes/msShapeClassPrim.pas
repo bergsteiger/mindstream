@@ -57,6 +57,7 @@ type
 implementation
 
 uses
+ System.StrUtils,
  msShape,
  msProxyShapeClass,
  msRegisteredShapes
@@ -219,6 +220,8 @@ end;
 function TmsShapeClassPrim.Name: String;
 begin
  Result := GetName;
+(* if ANSIStartsText('Tms', Result) then
+  Result := Copy(Result, 4, Length(Result) - 3);*)
 end;
 
 function TmsShapeClassPrim.SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
