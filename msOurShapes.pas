@@ -22,7 +22,6 @@ uses
   msShapeRemover,
   msMoverIcon,
   msRemoverIcon,
-  msRemoveIcon,
   msMoveIcon,
   msTextShape,
   msScrollShapeUp,
@@ -151,7 +150,7 @@ begin
    .SetInitialWidth(15)
    .SetIsForToolbar(false)
    ;
-  TmsRemoveIcon.TMC
+  TmsSVGShape.Specify('RemoveIcon')
    .SetFillColor(TAlphaColorRec.Mediumvioletred)
    .SetIsForToolbar(false)
    .SetSVGCode(
