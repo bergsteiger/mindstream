@@ -44,6 +44,7 @@ type
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; virtual;
   procedure MouseMove(const aClickContext: TmsEndShapeContext); virtual;
   // - действие при MouseMove
+  function Name: String;
   function Stereotype: String;
  protected
   class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
@@ -163,6 +164,11 @@ end;
 procedure TmsShape.MouseMove(const aClickContext: TmsEndShapeContext);
 begin
  // Ничего не делаем, специально
+end;
+
+function TmsShape.Name: String;
+begin
+ Result := Self.ShapeClass.Name;
 end;
 
 function TmsShape.Stereotype: String;
@@ -289,10 +295,16 @@ begin
 end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
+const
+ cNameDelta = 20;
 var
  l_Ctx : TmsDrawOptionsContext;
  l_DrawContext : TmsDrawContext;
  l_StereotypeRect : TRectF;
+var
+ l_R: TRectF;
+ l_AL : TmsAdditionalLineCoeff;
+ l_C : Single;
 begin
  l_Ctx := DrawOptionsContext(aCtx);
  aCtx.rCanvas.Fill.Color := l_Ctx.rFillColor;
@@ -308,6 +320,16 @@ begin
  l_DrawContext.rOpacity := l_Ctx.rOpacity;
  l_DrawContext.rLineOpacity := l_Ctx.rLineOpacity;
  DoDrawTo(l_DrawContext);
+
+ l_AL := ShapeClass.AdditionalLinesH;
+ if (Length(l_AL) > 0) then
+ begin
+  l_R := DrawBounds;
+  for l_C in l_AL do
+   aCtx.rCanvas.DrawLine(TPointF.Create(l_R.Left, l_R.Top + l_R.Height * l_C),
+                         TPointF.Create(l_R.Right, l_R.Top + l_R.Height * l_C), aCtx.rLineOpacity);
+ end;//Length(l_AL) > 0
+
  l_StereotypeRect := TRectF.Create(0, 0, 0, 0);
  GetStereotypeRect(l_StereotypeRect);
  if (l_StereotypeRect.TopLeft <> l_StereotypeRect.BottomRight) then
@@ -321,12 +343,25 @@ begin
   l_StereotypeRect.Right := l_StereotypeRect.Right + 100;
   aCtx.rCanvas.Fill.Color := aCtx.rCanvas.Stroke.Color;
   aCtx.rCanvas.FillText(l_StereotypeRect,
-                        Stereotype,
+                        Self.Stereotype,
                         false,
-                        1,
+                        aCtx.rLineOpacity,
                         [],
                         TTextAlign.Center,
                         TTextAlign.Center);
+
+  if (Self.Name <> '') then
+  begin
+   l_StereotypeRect.Top := l_StereotypeRect.Top + cNameDelta;
+   l_StereotypeRect.Bottom := l_StereotypeRect.Bottom + cNameDelta;
+   aCtx.rCanvas.FillText(l_StereotypeRect,
+                         Self.Name,
+                         false,
+                         aCtx.rLineOpacity,
+                         [],
+                         TTextAlign.Center,
+                         TTextAlign.Center);
+  end;//Self.Name <> ''
  end;//l_StereotypeRect.TopLeft <> l_StereotypeRect.BottomRight
 end;
 
@@ -392,8 +427,6 @@ end;
 class function TmsShape.NamedMC(const aName: String): ImsShapeClass;
 begin
  Result := TmsRegisteredShapes.Instance.ByName(aName);
- if (Result = nil) then
-  Result := TmsRegisteredShapes.Instance.ByName('Tms' + aName);
  Assert(Result <> nil, 'Стереотип ' + aName + ' не зарегистрирован');
 end;
 

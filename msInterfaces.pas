@@ -165,6 +165,7 @@ type
    read pm_GetStartPoint;
   property ShapeClass: ImsShapeClass
    read pm_GetShapeClass;
+  function Name: String;
  end;//ImsShape
 
  TmsShapesEnumerator = TEnumerator<ImsShape>;
@@ -226,19 +227,28 @@ type
   function SetAdditionalLinesH(const aValue: TmsAdditionalLineCoeff): ImsShapeClassTuner;
  end;//ImsShapeClassTuner
 
+ TmsShapeClassName = record
+  rValue : String;
+  class operator Implicit(const aValue: String): TmsShapeClassName;
+  class operator Implicit(const aSelf: TmsShapeClassName): String;
+  class operator Equal(const A: TmsShapeClassName; const B: TmsShapeClassName): Boolean;
+ end;//TmsShapeClassName
+
+ TmsShapeStereotype = TmsShapeClassName;
+
  ImsShapeClass = interface
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
   function IsLineLike: Boolean;
   function Creator: ImsShapeCreator;
-  function Name: String;
+  function Name: TmsShapeClassName;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
-  function Stereotype: String;
+  function Stereotype: TmsShapeStereotype;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function InitialHeight: Pixel;
   function InitialWidth: Pixel;
@@ -292,7 +302,8 @@ type
 implementation
 
 uses
- Math
+ Math,
+ System.StrUtils
  ;
 
 // TmsDrawContext
@@ -394,6 +405,27 @@ class operator TmsStrokeDash.Implicit(aValue: TStrokeDash): TmsStrokeDash;
 begin
  Result.rIsSet := true;
  Result.rValue := aValue;
+end;
+
+// TmsShapeClassName
+
+class operator TmsShapeClassName.Implicit(const aValue: String): TmsShapeClassName;
+const
+ cPref = 'Tms';
+begin
+ Result.rValue := aValue;
+ if ANSIStartsText(cPref, Result.rValue) then
+  Result.rValue := Copy(Result.rValue, Length(cPref) + 1, Length(Result.rValue) - Length(cPref));
+end;
+
+class operator TmsShapeClassName.Implicit(const aSelf: TmsShapeClassName): String;
+begin
+ Result := aSelf.rValue;
+end;
+
+class operator TmsShapeClassName.Equal(const A: TmsShapeClassName; const B: TmsShapeClassName): Boolean;
+begin
+ Result := (A.rValue = B.rValue);
 end;
 
 end.

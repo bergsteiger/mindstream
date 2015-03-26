@@ -20,7 +20,7 @@ type
   f_Registered : TmsShapeClassListItems;
   constructor Create;
  protected
-  function IndexOf(const aValue: String): Integer;
+  function IndexOf(const aValue: TmsShapeClassName): Integer;
   procedure Cleanup; override;
  public
   procedure RegisterMC(const aValue: MCmsShape); virtual;
@@ -32,6 +32,7 @@ type
 implementation
 
 uses
+ System.StrUtils,
  SysUtils,
  msShapeClass
  ;
@@ -56,7 +57,7 @@ begin
  f_Registered.Add(aValue);
 end;
 
-function TmsShapeClassList.IndexOf(const aValue: String): Integer;
+function TmsShapeClassList.IndexOf(const aValue: TmsShapeClassName): Integer;
 var
  l_Shape : MCmsShape;
  I : Integer;
@@ -69,25 +70,18 @@ begin
   begin
    Result := I;
    Exit;
-  end;//l_Shape.Name = aValue.ClassName
+  end;//l_Shape.Name = l_Value
  end;//for I
 end;
 
 function TmsShapeClassList.ByName(const aValue: String): MCmsShape;
 var
- l_Shape : MCmsShape;
  I : Integer;
 begin
  Result := nil;
- for I := 0 to Pred(f_Registered.Count) do
- begin
-  l_Shape := f_Registered.Items[I];
-  if (l_Shape.Name = aValue) then
-  begin
-   Result := l_Shape;
-   Exit;
-  end;//l_Shape.Name = aValue.ClassName
- end;//for I
+ I := IndexOf(aValue);
+ if (I >= 0) then
+  Result := f_Registered.Items[I];
 end;
 
 procedure TmsShapeClassList.IterateShapes(aLambda: TmsShapeClassLambda);

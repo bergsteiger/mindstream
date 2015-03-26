@@ -57,11 +57,6 @@ begin
  Result := CreateInner(Self.MC, anOtherShapeClass, aCtx.rStartPoint);
 end;
 
-(*function TmsPaletteShape.IsClassTypeNamedAs(const aClassName: String): Boolean;
-begin
- Result := (f_OtherShapeClass.Name = aClassName);
-end;*)
-
 function TmsPaletteShape.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
 begin
  Result := f_OtherShapeClass.NullClick(aHolder);

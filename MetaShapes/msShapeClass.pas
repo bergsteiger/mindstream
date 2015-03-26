@@ -22,14 +22,14 @@ type
   function IsTool: Boolean;
   function IsLineLike: Boolean;
   function Creator: ImsShapeCreator; override;
-  function Name: String;
+  function GetName: String; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
-  function Stereotype: String; override;
+  function Stereotype: TmsShapeStereotype; override;
   function ParentMC: ImsShapeClass; override;
   function AsMC: ImsShapeClass; override;
  public
@@ -75,17 +75,16 @@ begin
  Result := TmsShapeCreator.Create(Self, f_ShapeClass);
 end;
 
-function TmsShapeClass.Name: String;
+function TmsShapeClass.GetName: String;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.ClassName;
 end;
 
-function TmsShapeClass.Stereotype: String;
+function TmsShapeClass.Stereotype: TmsShapeStereotype;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.ClassName;
- Result := Copy(Result, 4, Length(Result) - 3);
 end;
 
 function TmsShapeClass.ParentMC: ImsShapeClass;

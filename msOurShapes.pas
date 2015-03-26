@@ -301,6 +301,11 @@ begin
    .SetIsForToolbar(false)
    ;
 
+  TmsShape.NamedMC('UsecaseRealization').Specify('UsecaseRealizationFake')
+   .SetAdditionalLinesH([1 /3, 2 / 3])
+   .SetIsForToolbar(false)
+   ;
+
 end;
 
 initialization

@@ -14,16 +14,15 @@ type
  TmsProxyShapeClass = class(TmsShapeClassPrim, ImsShapeClass)
  private
   f_ShapeClass : MCmsShape;
-  f_Name : String;
-  f_Stereotype : String;
+  f_Name : TmsShapeClassName;
  private
   constructor CreateInner(const aName : String; const aShapeClass: MCmsShape);
  protected
   function IsTool: Boolean;
   function IsLineLike: Boolean;
   function Creator: ImsShapeCreator; override;
-  function Name: String;
-  function Stereotype: String; override;
+  function GetName: String; override;
+  function Stereotype: TmsShapeStereotype; override;
   function ParentMC: ImsShapeClass; override;
   function AsMC: ImsShapeClass; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
@@ -48,8 +47,7 @@ uses
 constructor TmsProxyShapeClass.CreateInner(const aName : String; const aShapeClass: MCmsShape);
 begin
  f_ShapeClass := aShapeClass;
- f_Stereotype := aName;
- f_Name := 'Tms' + f_Stereotype;
+ f_Name := aName;
  inherited Create;
 end;
 
@@ -81,20 +79,14 @@ begin
  //Result := f_ShapeClass.Creator;
 end;
 
-function TmsProxyShapeClass.Name: String;
+function TmsProxyShapeClass.GetName: String;
 begin
- Assert(f_ShapeClass <> nil);
  Result := f_Name;
-(* Assert(false, 'Не реализовано');
- Result := f_ShapeClass.Name;*)
 end;
 
-function TmsProxyShapeClass.Stereotype: String;
+function TmsProxyShapeClass.Stereotype: TmsShapeStereotype;
 begin
- Assert(f_ShapeClass <> nil);
- Result := f_Stereotype;
-(* Assert(false, 'Не реализовано');
- Result := f_ShapeClass.Stereotype;*)
+ Result := f_Name;
 end;
 
 function TmsProxyShapeClass.ParentMC: ImsShapeClass;
@@ -135,8 +127,7 @@ function TmsProxyShapeClass.IsOurInstance(const aShape: ImsShape): Boolean;
 begin
  Assert(f_ShapeClass <> nil);
  Assert(aShape.ShapeClass <> nil);
- Result := aShape.ShapeClass.Name = Self.f_Name;
-// Result := aShape.ShapeClass.Name = f_ShapeClass.Name;
+ Result := Self.f_Name = aShape.ShapeClass.Name;
 end;
 
 function TmsProxyShapeClass.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
