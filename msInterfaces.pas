@@ -226,6 +226,12 @@ type
   function SetAdditionalLinesH(const aValue: TmsAdditionalLineCoeff): ImsShapeClassTuner;
  end;//ImsShapeClassTuner
 
+ TmsShapeClassName = record
+  rValue : String;
+  class operator Implicit(const aValue: String): TmsShapeClassName;
+  class operator Explicit(const aSelf: TmsShapeClassName): String;
+ end;//TmsShapeClassName
+
  ImsShapeClass = interface
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
@@ -394,6 +400,18 @@ class operator TmsStrokeDash.Implicit(aValue: TStrokeDash): TmsStrokeDash;
 begin
  Result.rIsSet := true;
  Result.rValue := aValue;
+end;
+
+// TmsShapeClassName
+
+class operator TmsShapeClassName.Implicit(const aValue: String): TmsShapeClassName;
+begin
+ Result.rValue := aValue;
+end;
+
+class operator TmsShapeClassName.Explicit(const aSelf: TmsShapeClassName): String;
+begin
+ Result := aSelf.rValue;
 end;
 
 end.
