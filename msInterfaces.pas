@@ -230,11 +230,8 @@ type
   rValue : String;
   class operator Implicit(const aValue: String): TmsShapeClassName;
   class operator Explicit(const aSelf: TmsShapeClassName): String; overload;
-  class operator Implicit(const aSelf: TmsShapeClassName): String; overload;
-//  class operator Equal(const A: TmsShapeClassName; const B: String): Boolean;
-//  function EQ(const aValue: String): Boolean; overload;
+  class operator Implicit(const aSelf: TmsShapeClassName): String;
   class operator Equal(const A: TmsShapeClassName; const B: TmsShapeClassName): Boolean;
-//  function EQ(const aValue: TmsShapeClassName): Boolean; overload;
  end;//TmsShapeClassName
 
  TmsShapeStereotype = TmsShapeClassName;
@@ -431,24 +428,9 @@ begin
  Result := aSelf.rValue;
 end;
 
-(*class operator TmsShapeClassName.Equal(const A: TmsShapeClassName; const B: String): Boolean;
-begin
- Result := (A.rValue = B);
-end;*)
-
-(*function TmsShapeClassName.EQ(const aValue: String): Boolean;
-begin
- Result := (Self.rValue = aValue);
-end;*)
-
 class operator TmsShapeClassName.Equal(const A: TmsShapeClassName; const B: TmsShapeClassName): Boolean;
 begin
  Result := (A.rValue = B.rValue);
 end;
-
-(*function TmsShapeClassName.EQ(const aValue: TmsShapeClassName): Boolean;
-begin
- Result := (Self.rValue = aValue.rValue);
-end;*)
 
 end.
