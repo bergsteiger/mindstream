@@ -229,7 +229,7 @@ type
  TmsShapeClassName = record
   rValue : String;
   class operator Implicit(const aValue: String): TmsShapeClassName;
-  class operator Explicit(const aSelf: TmsShapeClassName): String; overload;
+  class operator Explicit(const aSelf: TmsShapeClassName): String;
   class operator Implicit(const aSelf: TmsShapeClassName): String;
   class operator Equal(const A: TmsShapeClassName; const B: TmsShapeClassName): Boolean;
  end;//TmsShapeClassName
