@@ -295,6 +295,8 @@ begin
 end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
+const
+ cNameDelta = 20;
 var
  l_Ctx : TmsDrawOptionsContext;
  l_DrawContext : TmsDrawContext;
@@ -341,9 +343,19 @@ begin
   l_StereotypeRect.Right := l_StereotypeRect.Right + 100;
   aCtx.rCanvas.Fill.Color := aCtx.rCanvas.Stroke.Color;
   aCtx.rCanvas.FillText(l_StereotypeRect,
-                        Stereotype,
+                        Self.Stereotype,
                         false,
-                        1,
+                        aCtx.rLineOpacity,
+                        [],
+                        TTextAlign.Center,
+                        TTextAlign.Center);
+
+  l_StereotypeRect.Top := l_StereotypeRect.Top + cNameDelta;
+  l_StereotypeRect.Bottom := l_StereotypeRect.Bottom + cNameDelta;
+  aCtx.rCanvas.FillText(l_StereotypeRect,
+                        Self.Name,
+                        false,
+                        aCtx.rLineOpacity,
                         [],
                         TTextAlign.Center,
                         TTextAlign.Center);
