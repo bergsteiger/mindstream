@@ -43,9 +43,4 @@ begin
  FRefCount := 1;
 end;
 
-(*function TmsInterfacedRefcounted.IsClassTypeNamedAs(const aClassName: String): Boolean;
-begin
- Result := (ClassName = aClassName);
-end;*)
-
 end.

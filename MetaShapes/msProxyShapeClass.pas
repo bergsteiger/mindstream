@@ -132,7 +132,6 @@ begin
  Assert(f_ShapeClass <> nil);
  Assert(aShape.ShapeClass <> nil);
  Result := aShape.ShapeClass.Name = Self.f_Name;
-// Result := aShape.ShapeClass.Name = f_ShapeClass.Name;
 end;
 
 function TmsProxyShapeClass.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;

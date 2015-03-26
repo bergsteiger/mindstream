@@ -313,11 +313,14 @@ begin
  l_DrawContext.rLineOpacity := l_Ctx.rLineOpacity;
  DoDrawTo(l_DrawContext);
 
- l_R := DrawBounds;
  l_AL := ShapeClass.AdditionalLinesH;
- for l_C in l_AL do
-  aCtx.rCanvas.DrawLine(TPointF.Create(l_R.Left, l_R.Top + l_R.Height * l_C),
-                        TPointF.Create(l_R.Right, l_R.Top + l_R.Height * l_C), aCtx.rLineOpacity);
+ if (Length(l_AL) > 0) then
+ begin
+  l_R := DrawBounds;
+  for l_C in l_AL do
+   aCtx.rCanvas.DrawLine(TPointF.Create(l_R.Left, l_R.Top + l_R.Height * l_C),
+                         TPointF.Create(l_R.Right, l_R.Top + l_R.Height * l_C), aCtx.rLineOpacity);
+ end;//Length(l_AL) > 0
 
  l_StereotypeRect := TRectF.Create(0, 0, 0, 0);
  GetStereotypeRect(l_StereotypeRect);
@@ -367,6 +370,8 @@ class function TmsShape.NRTMC: ImsShapeClassTuner;
 var
  l_R : ImsShapeClass;
 begin
+ if Self.ClassName = 'TmsShape' then
+  l_R := nil;
  l_R := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
  if (l_R = nil) then
   l_R := TmsNotRegisteredShapes.Instance.ByName(Self.ClassName);
@@ -403,8 +408,8 @@ end;
 class function TmsShape.NamedMC(const aName: String): ImsShapeClass;
 begin
  Result := TmsRegisteredShapes.Instance.ByName(aName);
- if (Result = nil) then
-  Result := TmsRegisteredShapes.Instance.ByName('Tms' + aName);
+// if (Result = nil) then
+//  Result := TmsRegisteredShapes.Instance.ByName('Tms' + aName);
  Assert(Result <> nil, 'Стереотип ' + aName + ' не зарегистрирован');
 end;
 

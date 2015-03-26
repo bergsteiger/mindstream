@@ -32,6 +32,7 @@ type
 implementation
 
 uses
+ System.StrUtils,
  SysUtils,
  msShapeClass
  ;
@@ -60,34 +61,31 @@ function TmsShapeClassList.IndexOf(const aValue: String): Integer;
 var
  l_Shape : MCmsShape;
  I : Integer;
+ l_Value : String;
 begin
+ l_Value := aValue;
+ if ANSIStartsText('Tms', l_Value) then
+  l_Value := Copy(l_Value, 4, Length(l_Value) - 3);
  Result := -1;
  for I := 0 to Pred(f_Registered.Count) do
  begin
   l_Shape := f_Registered.Items[I];
-  if (l_Shape.Name = aValue) then
+  if (l_Shape.Name = l_Value) then
   begin
    Result := I;
    Exit;
-  end;//l_Shape.Name = aValue.ClassName
+  end;//l_Shape.Name = l_Value
  end;//for I
 end;
 
 function TmsShapeClassList.ByName(const aValue: String): MCmsShape;
 var
- l_Shape : MCmsShape;
  I : Integer;
 begin
  Result := nil;
- for I := 0 to Pred(f_Registered.Count) do
- begin
-  l_Shape := f_Registered.Items[I];
-  if (l_Shape.Name = aValue) then
-  begin
-   Result := l_Shape;
-   Exit;
-  end;//l_Shape.Name = aValue.ClassName
- end;//for I
+ I := IndexOf(aValue);
+ if (I >= 0) then
+  Result := f_Registered.Items[I];
 end;
 
 procedure TmsShapeClassList.IterateShapes(aLambda: TmsShapeClassLambda);
