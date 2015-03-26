@@ -15,7 +15,6 @@ type
  private
   f_ShapeClass : MCmsShape;
   f_Name : TmsShapeClassName;
-  f_Stereotype : TmsShapeClassName;
  private
   constructor CreateInner(const aName : String; const aShapeClass: MCmsShape);
  protected
@@ -48,8 +47,7 @@ uses
 constructor TmsProxyShapeClass.CreateInner(const aName : String; const aShapeClass: MCmsShape);
 begin
  f_ShapeClass := aShapeClass;
- f_Stereotype := aName;
- f_Name := f_Stereotype;
+ f_Name := aName;
  inherited Create;
 end;
 
@@ -83,14 +81,12 @@ end;
 
 function TmsProxyShapeClass.GetName: String;
 begin
- Assert(f_ShapeClass <> nil);
  Result := f_Name;
 end;
 
 function TmsProxyShapeClass.Stereotype: TmsShapeStereotype;
 begin
- Assert(f_ShapeClass <> nil);
- Result := f_Stereotype;
+ Result := f_Name;
 end;
 
 function TmsProxyShapeClass.ParentMC: ImsShapeClass;
