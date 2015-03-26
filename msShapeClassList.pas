@@ -66,7 +66,7 @@ begin
  for I := 0 to Pred(f_Registered.Count) do
  begin
   l_Shape := f_Registered.Items[I];
-  if (l_Shape.Name.EQ(aValue)) then
+  if (l_Shape.Name = aValue) then
   begin
    Result := I;
    Exit;

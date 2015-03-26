@@ -127,7 +127,7 @@ function TmsProxyShapeClass.IsOurInstance(const aShape: ImsShape): Boolean;
 begin
  Assert(f_ShapeClass <> nil);
  Assert(aShape.ShapeClass <> nil);
- Result := Self.f_Name.EQ(aShape.ShapeClass.Name);
+ Result := Self.f_Name = aShape.ShapeClass.Name;
 end;
 
 function TmsProxyShapeClass.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
