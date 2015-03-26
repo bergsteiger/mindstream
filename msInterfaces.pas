@@ -229,7 +229,8 @@ type
  TmsShapeClassName = record
   rValue : String;
   class operator Implicit(const aValue: String): TmsShapeClassName;
-  class operator Explicit(const aSelf: TmsShapeClassName): String;
+  class operator Explicit(const aSelf: TmsShapeClassName): String; overload;
+  class operator Implicit(const aSelf: TmsShapeClassName): String; overload;
   function EQ(const aValue: String): Boolean; overload;
   function EQ(const aValue: TmsShapeClassName): Boolean; overload;
  end;//TmsShapeClassName
@@ -410,13 +411,20 @@ end;
 // TmsShapeClassName
 
 class operator TmsShapeClassName.Implicit(const aValue: String): TmsShapeClassName;
+const
+ cPref = 'Tms';
 begin
  Result.rValue := aValue;
- if ANSIStartsText('Tms', Result.rValue) then
-  Result.rValue := Copy(Result.rValue, 4, Length(Result.rValue) - 3);
+ if ANSIStartsText(cPref, Result.rValue) then
+  Result.rValue := Copy(Result.rValue, Length(cPref) + 1, Length(Result.rValue) - Length(cPref));
 end;
 
 class operator TmsShapeClassName.Explicit(const aSelf: TmsShapeClassName): String;
+begin
+ Result := aSelf.rValue;
+end;
+
+class operator TmsShapeClassName.Implicit(const aSelf: TmsShapeClassName): String;
 begin
  Result := aSelf.rValue;
 end;

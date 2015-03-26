@@ -38,7 +38,7 @@ begin
  TmsShapesForToolbar.Instance.IterateShapes(
   procedure (const aShapeClass : MCmsShape)
   begin
-   aList.Add(String(aShapeClass.Name));
+   aList.Add(aShapeClass.Name);
   end
  );
 end;

@@ -173,7 +173,7 @@ end;
 procedure TmsShapeButton.MyClick(Sender: TObject);
 begin
  if not f_Shape.NullClick(ImsDiagrammsHolder(f_Holder)) then
-  f_Shapes.ItemIndex := f_Shapes.Items.IndexOf(String(f_ShapeClass.Name));
+  f_Shapes.ItemIndex := f_Shapes.Items.IndexOf(f_ShapeClass.Name);
 end;
 
 end.

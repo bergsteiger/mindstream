@@ -84,7 +84,7 @@ end;
 function TmsProxyShapeClass.GetName: String;
 begin
  Assert(f_ShapeClass <> nil);
- Result := String(f_Name);
+ Result := f_Name;
 end;
 
 function TmsProxyShapeClass.Stereotype: TmsShapeStereotype;
