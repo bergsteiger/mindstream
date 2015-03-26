@@ -370,8 +370,6 @@ class function TmsShape.NRTMC: ImsShapeClassTuner;
 var
  l_R : ImsShapeClass;
 begin
- if Self.ClassName = 'TmsShape' then
-  l_R := nil;
  l_R := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
  if (l_R = nil) then
   l_R := TmsNotRegisteredShapes.Instance.ByName(Self.ClassName);
@@ -408,8 +406,6 @@ end;
 class function TmsShape.NamedMC(const aName: String): ImsShapeClass;
 begin
  Result := TmsRegisteredShapes.Instance.ByName(aName);
-// if (Result = nil) then
-//  Result := TmsRegisteredShapes.Instance.ByName('Tms' + aName);
  Assert(Result <> nil, 'Стереотип ' + aName + ' не зарегистрирован');
 end;
 
