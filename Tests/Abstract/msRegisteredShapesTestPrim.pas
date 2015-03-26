@@ -73,7 +73,8 @@ begin
      aLog.ToLog(' InitialWidth = ' + aShapeClass.InitialWidth.ToString);
      aLog.ToLog(' InitialHeight = ' + aShapeClass.InitialHeight.ToString);
      aLog.ToLog(' CornerRadius = ' + aShapeClass.CornerRadius.ToString);
-     aLog.ToLog(' IsForToolbar = ' + aShapeClass.IsForToolbar.ToString);
+//     aLog.ToLog(' IsForToolbar = ' + aShapeClass.IsForToolbar.ToString);
+     aLog.ToLog(' IsForToolbar = ' + GetEnumName(TypeInfo(Boolean), Ord(aShapeClass.IsForToolbar)));
      aLog.ToLog(' StereotypePlace = ' + GetEnumName(TypeInfo(TmsStereotypePlace), Ord(aShapeClass.StereotypePlace)));
      aLog.ToLog(' SVGCode = ' + aShapeClass.SVGCode);
     end
