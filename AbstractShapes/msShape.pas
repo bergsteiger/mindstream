@@ -350,15 +350,18 @@ begin
                         TTextAlign.Center,
                         TTextAlign.Center);
 
-  l_StereotypeRect.Top := l_StereotypeRect.Top + cNameDelta;
-  l_StereotypeRect.Bottom := l_StereotypeRect.Bottom + cNameDelta;
-  aCtx.rCanvas.FillText(l_StereotypeRect,
-                        Self.Name,
-                        false,
-                        aCtx.rLineOpacity,
-                        [],
-                        TTextAlign.Center,
-                        TTextAlign.Center);
+  if (Self.Name <> '') then
+  begin
+   l_StereotypeRect.Top := l_StereotypeRect.Top + cNameDelta;
+   l_StereotypeRect.Bottom := l_StereotypeRect.Bottom + cNameDelta;
+   aCtx.rCanvas.FillText(l_StereotypeRect,
+                         Self.Name,
+                         false,
+                         aCtx.rLineOpacity,
+                         [],
+                         TTextAlign.Center,
+                         TTextAlign.Center);
+  end;//Self.Name <> ''
  end;//l_StereotypeRect.TopLeft <> l_StereotypeRect.BottomRight
 end;
 
