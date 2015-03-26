@@ -49,7 +49,7 @@ constructor TmsProxyShapeClass.CreateInner(const aName : String; const aShapeCla
 begin
  f_ShapeClass := aShapeClass;
  f_Stereotype := aName;
- f_Name := 'Tms' + f_Stereotype;
+ f_Name := f_Stereotype;
  inherited Create;
 end;
 
