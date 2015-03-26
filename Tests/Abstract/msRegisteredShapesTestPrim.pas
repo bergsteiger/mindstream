@@ -25,7 +25,9 @@ implementation
 uses
  SysUtils,
  FMX.DUnit.msLog,
- msLine
+ msLine,
+ System.TypInfo,
+ msInterfaces
  ;
 
 // TmsRegisteredShapesTestPrim
@@ -68,6 +70,12 @@ begin
     begin
      CheckShapeClass(aShapeClass);
      aLog.ToLog(aShapeClass.Name);
+     aLog.ToLog(' InitialWidth = ' + aShapeClass.InitialWidth.ToString);
+     aLog.ToLog(' InitialHeight = ' + aShapeClass.InitialHeight.ToString);
+     aLog.ToLog(' CornerRadius = ' + aShapeClass.CornerRadius.ToString);
+     aLog.ToLog(' IsForToolbar = ' + aShapeClass.IsForToolbar.ToString);
+     aLog.ToLog(' StereotypePlace = ' + GetEnumName(TypeInfo(TmsStereotypePlace), Ord(aShapeClass.StereotypePlace)));
+     aLog.ToLog(' SVGCode = ' + aShapeClass.SVGCode);
     end
    );
   end
