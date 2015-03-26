@@ -14,8 +14,8 @@ type
  TmsProxyShapeClass = class(TmsShapeClassPrim, ImsShapeClass)
  private
   f_ShapeClass : MCmsShape;
-  f_Name : String;
-  f_Stereotype : String;
+  f_Name : TmsShapeClassName;
+  f_Stereotype : TmsShapeClassName;
  private
   constructor CreateInner(const aName : String; const aShapeClass: MCmsShape);
  protected
@@ -23,7 +23,7 @@ type
   function IsLineLike: Boolean;
   function Creator: ImsShapeCreator; override;
   function GetName: String; override;
-  function Stereotype: String; override;
+  function Stereotype: TmsShapeStereotype; override;
   function ParentMC: ImsShapeClass; override;
   function AsMC: ImsShapeClass; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
@@ -84,10 +84,10 @@ end;
 function TmsProxyShapeClass.GetName: String;
 begin
  Assert(f_ShapeClass <> nil);
- Result := f_Name;
+ Result := String(f_Name);
 end;
 
-function TmsProxyShapeClass.Stereotype: String;
+function TmsProxyShapeClass.Stereotype: TmsShapeStereotype;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_Stereotype;
@@ -131,7 +131,7 @@ function TmsProxyShapeClass.IsOurInstance(const aShape: ImsShape): Boolean;
 begin
  Assert(f_ShapeClass <> nil);
  Assert(aShape.ShapeClass <> nil);
- Result := aShape.ShapeClass.Name = Self.f_Name;
+ Result := Self.f_Name.EQ(aShape.ShapeClass.Name);
 end;
 
 function TmsProxyShapeClass.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;

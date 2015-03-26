@@ -114,7 +114,7 @@ end;
 
 function TmsShapeTestPrim.TestNamePrefix: String;
 begin
- Result := Self.ShapeClass.Name;
+ Result := String(Self.ShapeClass.Name);
 end;
 
 function TmsShapeTestPrim.ContextName: String;

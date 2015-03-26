@@ -67,7 +67,7 @@ begin
     procedure (const aShapeClass: MCmsShape)
     begin
      CheckShapeClass(aShapeClass);
-     aLog.ToLog(aShapeClass.Name);
+     aLog.ToLog(String(aShapeClass.Name));
     end
    );
   end

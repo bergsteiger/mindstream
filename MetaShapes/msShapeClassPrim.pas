@@ -24,7 +24,7 @@ type
   function ParentMC: ImsShapeClass; virtual;
   function AsMC: ImsShapeClass; virtual;
   function AsTuner: ImsShapeClassTuner;
-  function Stereotype: String; virtual;
+  function Stereotype: TmsShapeStereotype; virtual;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
   function SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;
@@ -48,7 +48,7 @@ type
   function Creator: ImsShapeCreator; virtual; abstract;
   function CreateShape(const aStartPoint: TPointF): ImsShape; overload;
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; overload;
-  function Name: String;
+  function Name: TmsShapeClassName;
   function GetName: String; virtual; abstract;
  public
   constructor Create;
@@ -102,7 +102,7 @@ begin
  Result := Self;
 end;
 
-function TmsShapeClassPrim.Stereotype: String;
+function TmsShapeClassPrim.Stereotype: TmsShapeStereotype;
 begin
  Result := '';
  Assert(false, 'Не реализовано');
@@ -217,11 +217,9 @@ begin
  Result := Creator.CreateShape(aContext);
 end;
 
-function TmsShapeClassPrim.Name: String;
+function TmsShapeClassPrim.Name: TmsShapeClassName;
 begin
  Result := GetName;
- if ANSIStartsText('Tms', Result) then
-  Result := Copy(Result, 4, Length(Result) - 3);
 end;
 
 function TmsShapeClassPrim.SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;

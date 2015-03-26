@@ -20,7 +20,7 @@ type
   f_Registered : TmsShapeClassListItems;
   constructor Create;
  protected
-  function IndexOf(const aValue: String): Integer;
+  function IndexOf(const aValue: TmsShapeClassName): Integer;
   procedure Cleanup; override;
  public
   procedure RegisterMC(const aValue: MCmsShape); virtual;
@@ -53,24 +53,20 @@ end;
 
 procedure TmsShapeClassList.RegisterMC(const aValue: MCmsShape);
 begin
- Assert(IndexOf(aValue.Name) < 0, 'Стереотип ' + aValue.Stereotype + ' уже зарегистрирован');
+ Assert(IndexOf(aValue.Name) < 0, 'Стереотип ' + String(aValue.Stereotype) + ' уже зарегистрирован');
  f_Registered.Add(aValue);
 end;
 
-function TmsShapeClassList.IndexOf(const aValue: String): Integer;
+function TmsShapeClassList.IndexOf(const aValue: TmsShapeClassName): Integer;
 var
  l_Shape : MCmsShape;
  I : Integer;
- l_Value : String;
 begin
- l_Value := aValue;
- if ANSIStartsText('Tms', l_Value) then
-  l_Value := Copy(l_Value, 4, Length(l_Value) - 3);
  Result := -1;
  for I := 0 to Pred(f_Registered.Count) do
  begin
   l_Shape := f_Registered.Items[I];
-  if (l_Shape.Name = l_Value) then
+  if (l_Shape.Name.EQ(aValue)) then
   begin
    Result := I;
    Exit;

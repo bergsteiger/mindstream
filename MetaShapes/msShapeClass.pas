@@ -29,7 +29,7 @@ type
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
-  function Stereotype: String; override;
+  function Stereotype: TmsShapeStereotype; override;
   function ParentMC: ImsShapeClass; override;
   function AsMC: ImsShapeClass; override;
  public
@@ -81,11 +81,10 @@ begin
  Result := f_ShapeClass.ClassName;
 end;
 
-function TmsShapeClass.Stereotype: String;
+function TmsShapeClass.Stereotype: TmsShapeStereotype;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.ClassName;
- Result := Copy(Result, 4, Length(Result) - 3);
 end;
 
 function TmsShapeClass.ParentMC: ImsShapeClass;

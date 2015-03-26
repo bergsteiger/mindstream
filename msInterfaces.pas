@@ -230,21 +230,25 @@ type
   rValue : String;
   class operator Implicit(const aValue: String): TmsShapeClassName;
   class operator Explicit(const aSelf: TmsShapeClassName): String;
+  function EQ(const aValue: String): Boolean; overload;
+  function EQ(const aValue: TmsShapeClassName): Boolean; overload;
  end;//TmsShapeClassName
+
+ TmsShapeStereotype = TmsShapeClassName;
 
  ImsShapeClass = interface
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
   function IsLineLike: Boolean;
   function Creator: ImsShapeCreator;
-  function Name: String;
+  function Name: TmsShapeClassName;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
-  function Stereotype: String;
+  function Stereotype: TmsShapeStereotype;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function InitialHeight: Pixel;
   function InitialWidth: Pixel;
@@ -298,7 +302,8 @@ type
 implementation
 
 uses
- Math
+ Math,
+ System.StrUtils
  ;
 
 // TmsDrawContext
@@ -407,11 +412,23 @@ end;
 class operator TmsShapeClassName.Implicit(const aValue: String): TmsShapeClassName;
 begin
  Result.rValue := aValue;
+ if ANSIStartsText('Tms', Result.rValue) then
+  Result.rValue := Copy(Result.rValue, 4, Length(Result.rValue) - 3);
 end;
 
 class operator TmsShapeClassName.Explicit(const aSelf: TmsShapeClassName): String;
 begin
  Result := aSelf.rValue;
+end;
+
+function TmsShapeClassName.EQ(const aValue: String): Boolean;
+begin
+ Result := (Self.rValue = aValue);
+end;
+
+function TmsShapeClassName.EQ(const aValue: TmsShapeClassName): Boolean;
+begin
+ Result := (Self.rValue = aValue.rValue);
 end;
 
 end.

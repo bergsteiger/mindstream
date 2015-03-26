@@ -148,7 +148,7 @@ constructor TmsShape.CreateInner(const aShapeClass : ImsShapeClass; const aCtx: 
 begin
  Assert(aShapeClass <> nil);
  f_ShapeClass := aShapeClass;
- f_ShapeClassName := f_ShapeClass.Name;
+ f_ShapeClassName := String(f_ShapeClass.Name);
  Assert(f_ShapeClassName <> '');
  inherited Create;
  SetStartPoint(aCtx.rStartPoint);
@@ -167,7 +167,7 @@ end;
 
 function TmsShape.Stereotype: String;
 begin
- Result := Self.ShapeClass.Stereotype;
+ Result := String(Self.ShapeClass.Stereotype);
  Result := '<< ' + Result + ' >>';
 end;
 
