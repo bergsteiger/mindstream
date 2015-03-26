@@ -231,7 +231,8 @@ type
   class operator Implicit(const aValue: String): TmsShapeClassName;
   class operator Explicit(const aSelf: TmsShapeClassName): String; overload;
   class operator Implicit(const aSelf: TmsShapeClassName): String; overload;
-  function EQ(const aValue: String): Boolean; overload;
+  class operator Equal(const A: TmsShapeClassName; const B: String): Boolean;
+//  function EQ(const aValue: String): Boolean; overload;
   function EQ(const aValue: TmsShapeClassName): Boolean; overload;
  end;//TmsShapeClassName
 
@@ -429,10 +430,15 @@ begin
  Result := aSelf.rValue;
 end;
 
-function TmsShapeClassName.EQ(const aValue: String): Boolean;
+class operator TmsShapeClassName.Equal(const A: TmsShapeClassName; const B: String): Boolean;
+begin
+ Result := (A.rValue = B);
+end;
+
+(*function TmsShapeClassName.EQ(const aValue: String): Boolean;
 begin
  Result := (Self.rValue = aValue);
-end;
+end;*)
 
 function TmsShapeClassName.EQ(const aValue: TmsShapeClassName): Boolean;
 begin
