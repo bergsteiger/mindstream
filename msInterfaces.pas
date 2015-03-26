@@ -165,6 +165,7 @@ type
    read pm_GetStartPoint;
   property ShapeClass: ImsShapeClass
    read pm_GetShapeClass;
+  function Name: String;
  end;//ImsShape
 
  TmsShapesEnumerator = TEnumerator<ImsShape>;
