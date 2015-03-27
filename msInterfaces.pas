@@ -200,6 +200,8 @@ type
   // - скроллинг диаграммы на дельту
   procedure ResetOrigin;
   // - восстанавливаем начальную систему координат
+  function GenerateUID(const aShape: ImsShape): TmsShapeUID;
+  // - создаёт UID для примитива aShape
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
   property CurrentDiagramms : ImsDiagrammsList
