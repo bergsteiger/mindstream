@@ -17,6 +17,8 @@ type
   f_LeftShape : ImsShape;
   [JSONMarshalled(False)]
   f_RightShape : ImsShape;
+  f_UIDLeft
+  f_UIDRight
  protected
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); override;
   procedure SetStartPoint(const aStartPoint: TPointF); override;
