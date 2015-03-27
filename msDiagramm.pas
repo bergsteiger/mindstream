@@ -51,6 +51,7 @@ type
   function Get_Name: String;
   constructor CreatePrim(const aName: String);
   function AddShape(const aShape: ImsShape): ImsShape;
+  function ShapeCount: Integer;
   function FirstShape: ImsShape;
   function ShapesController: ImsShapesController;
   function GetDrawBounds: TRectF;
@@ -217,6 +218,11 @@ function TmsDiagramm.AddShape(const aShape: ImsShape): ImsShape;
 begin
  Items.Add(aShape);
  Result := aShape;
+end;
+
+function TmsDiagramm.ShapeCount: Integer;
+begin
+ Result := Items.Count;
 end;
 
 function TmsDiagramm.FirstShape: ImsShape;
