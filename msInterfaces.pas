@@ -146,6 +146,8 @@ type
 
  TRectF = System.Types.TRectF;
 
+ TmsShapeUID = Int64;
+
  ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
@@ -160,6 +162,7 @@ type
   function DrawBounds: TRectF;
   procedure MouseMove(const aClickContext: TmsEndShapeContext);
   // - действите нажатии
+  function UID: TmsShapeUID;
   function pm_GetStartPoint: TPointF;
   function pm_GetShapeClass: ImsShapeClass;
   property StartPoint: TPointF
@@ -193,10 +196,12 @@ type
   // - сигнализируем о том, что надо ѕќћ≈Ќя“№ местами –ќƒ»“≈Ћ№— »≈ диаграммы
   procedure Scroll(const aDirection: TPointF);
                 // ^ - не стесн€йтесь ставить const перед запис€ми.
-                //  “очнее ставьте ќЅя«ј“≈Ћ№Ќќ !!!2
+                //  “очнее ставьте ќЅя«ј“≈Ћ№Ќќ !!!
   // - скроллинг диаграммы на дельту
   procedure ResetOrigin;
   // - восстанавливаем начальную систему координат
+  function GenerateUID(const aShape: ImsShape): TmsShapeUID;
+  // - создаЄт UID дл€ примитива aShape
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
   property CurrentDiagramms : ImsDiagrammsList

@@ -24,6 +24,7 @@ type
   f_ShapeClassName : String;
   // - тут дублирование данных, но исключительно из-за кривизны маршалинга
   f_Name : String;
+  f_UID: TmsShapeUID;
  private
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
  strict protected
@@ -45,6 +46,7 @@ type
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; virtual;
   procedure MouseMove(const aClickContext: TmsEndShapeContext); virtual;
   // - действие при MouseMove
+  function UID: TmsShapeUID;
   function Name: String;
   function Stereotype: String;
  protected
@@ -153,8 +155,11 @@ begin
  f_ShapeClassName := f_ShapeClass.Name;
  Assert(f_ShapeClassName <> '');
  f_Name := f_ShapeClassName;
+ f_UID := 0;
  if (aCtx.rShapesController <> nil) then
   f_Name := f_Name + IntToStr(aCtx.rShapesController.ShapeCount + 1);
+ if (aCtx.rDiagrammsHolder <> nil) then
+  f_UID := aCtx.rDiagrammsHolder.GenerateUID(Self);
  inherited Create;
  SetStartPoint(aCtx.rStartPoint);
 end;
@@ -168,6 +173,11 @@ end;
 procedure TmsShape.MouseMove(const aClickContext: TmsEndShapeContext);
 begin
  // Ничего не делаем, специально
+end;
+
+function TmsShape.UID: TmsShapeUID;
+begin
+ Result := f_UID;
 end;
 
 function TmsShape.Name: String;

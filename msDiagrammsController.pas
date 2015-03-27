@@ -40,6 +40,7 @@ type
   f_DiagrammStack: TmsDiagrammStack;
   f_Delta: TPointF;
   f_Holder: ImsDiagrammsHolder;
+  f_UID: TmsShapeUID;
   procedure cbDiagrammChange(Sender: TObject);
   procedure btAddDiagrammClick(Sender: TObject);
   procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
@@ -62,6 +63,7 @@ type
   // - скроллинг диаграммы на дельту
   procedure ResetOrigin;
   // - восстанавливаем начальную систему координат
+  function GenerateUID(const aShape: ImsShape): TmsShapeUID;
   procedure MouseUp(const aPoint: TPointF);
   procedure MouseMove(const aClickContext: TmsClickContext);
  protected
@@ -128,6 +130,7 @@ type
   // - скроллинг диаграммы
   procedure ResetOrigin;
   // - восстанавливаем начальную систему координат
+  function GenerateUID(const aShape: ImsShape): TmsShapeUID;
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
  public
@@ -158,6 +161,11 @@ end;
 procedure TmsDiagrammsHolder.ResetOrigin;
 begin
  f_DiagrammsController.ResetOrigin;
+end;
+
+function TmsDiagrammsHolder.GenerateUID(const aShape: ImsShape): TmsShapeUID;
+begin
+ Result := f_DiagrammsController.GenerateUID(aShape);
 end;
 
 procedure TmsDiagrammsHolder.UpToParent;
@@ -418,6 +426,12 @@ procedure TmsDiagrammsController.ResetOrigin;
 begin
  f_Delta := TPointF.Create(0, 0);
  CurrentDiagramm.Invalidate;
+end;
+
+function TmsDiagrammsController.GenerateUID(const aShape: ImsShape): TmsShapeUID;
+begin
+ Inc(f_UID);
+ Result := f_UID;
 end;
 
 procedure TmsDiagrammsController.SaveToPng(const aFileName: string);

@@ -36,6 +36,7 @@ type
   protected
    f_Context : TmsShapeTestContext;
    f_Coords : array of TPoint;
+   f_UID: TmsShapeUID;
   protected
    procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
    procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); virtual;
@@ -64,6 +65,7 @@ type
    // - скроллинг диаграммы на дельту
    procedure ResetOrigin;
    // - восстанавливаем начальную систему координат
+   function GenerateUID(const aShape: ImsShape): TmsShapeUID;
    function pm_GetCurrentDiagramms: ImsDiagrammsList;
    procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
   public
@@ -182,6 +184,7 @@ var
  l_X : Integer;
  l_Y : Integer;
 begin
+ f_UID := 0;
  inherited;
  RandSeed := f_Context.rSeed;
  SetLength(f_Coords, ShapesCount);
@@ -305,6 +308,12 @@ end;
 procedure TmsShapeTestPrim.ResetOrigin;
 begin
  Assert(false);
+end;
+
+function TmsShapeTestPrim.GenerateUID(const aShape: ImsShape): TmsShapeUID;
+begin
+ Inc(f_UID);
+ Result := f_UID;
 end;
 
 function TmsShapeTestPrim.pm_GetCurrentDiagramms: ImsDiagrammsList;
