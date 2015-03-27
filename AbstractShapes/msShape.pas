@@ -23,6 +23,7 @@ type
   f_ShapeClass : ImsShapeClass;
   f_ShapeClassName : String;
   // - тут дублирование данных, но исключительно из-за кривизны маршалинга
+  f_Name : String;
  private
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
  strict protected
@@ -151,6 +152,9 @@ begin
  f_ShapeClass := aShapeClass;
  f_ShapeClassName := f_ShapeClass.Name;
  Assert(f_ShapeClassName <> '');
+ f_Name := f_ShapeClassName;
+ if (aCtx.rShapesController <> nil) then
+  f_Name := f_Name + IntToStr(aCtx.rShapesController.ShapeCount + 1);
  inherited Create;
  SetStartPoint(aCtx.rStartPoint);
 end;
@@ -168,7 +172,7 @@ end;
 
 function TmsShape.Name: String;
 begin
- Result := Self.ShapeClass.Name;
+ Result := f_Name;
 end;
 
 function TmsShape.Stereotype: String;

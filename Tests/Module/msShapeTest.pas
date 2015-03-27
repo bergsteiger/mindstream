@@ -32,7 +32,7 @@ type
 
   TmsAddTestLambda = reference to procedure (ATest: ITest);
 
-  TmsShapeTestPrim = class abstract(TmsLoggedTest)
+  TmsShapeTestPrim = class abstract(TmsLoggedTest, ImsDiagrammsHolder)
   protected
    f_Context : TmsShapeTestContext;
    f_Coords : array of TPoint;
@@ -53,6 +53,19 @@ type
    function InnerFolders: String; override;
    procedure TransformContext(var theContext: TmsShapeTestContext); virtual;
    constructor CreateInner(const aContext: TmsShapeTestContext);
+   // ImsDiagrammsHolder
+   procedure UpToParent;
+   // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
+   procedure SwapParents;
+   // - сигнализируем о том, что надо ѕќћ≈Ќя“№ местами –ќƒ»“≈Ћ№— »≈ диаграммы
+   procedure Scroll(const aDirection: TPointF);
+                 // ^ - не стесн€йтесь ставить const перед запис€ми.
+                 //  “очнее ставьте ќЅя«ј“≈Ћ№Ќќ !!!2
+   // - скроллинг диаграммы на дельту
+   procedure ResetOrigin;
+   // - восстанавливаем начальную систему координат
+   function pm_GetCurrentDiagramms: ImsDiagrammsList;
+   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
   public
    class procedure CheckShapes(aCheck: TmsShapeClassCheck);
    class function Create(const aContext: TmsShapeTestContext): ITest;
@@ -200,7 +213,17 @@ begin
    l_P : TPoint;
   begin
    for l_P in f_Coords do
-    aDiagramm.AddShape(TmsCompletedShapeCreator.Create(Self.ShapeClass).CreateShape(TPointF.Create(l_P.X, l_P.Y))).AddNewDiagramm;
+    aDiagramm.AddShape(
+     TmsCompletedShapeCreator.Create(Self.ShapeClass)
+      .CreateShape(
+       TmsMakeShapeContext.Create(
+        TPointF.Create(l_P.X, l_P.Y),
+        aDiagramm.ShapesController,
+        Self
+       )
+      )
+    )
+    .AddNewDiagramm;
 
    SaveDiagrammAndCheck(aDiagramm, SaveDiagramm);
   end
@@ -262,6 +285,37 @@ begin
  f_Context := aContext;
  TransformContext(f_Context);
  FTestName := TestNamePrefix + '.' + aContext.rMethodName;
+end;
+
+procedure TmsShapeTestPrim.UpToParent;
+begin
+ Assert(false);
+end;
+
+procedure TmsShapeTestPrim.SwapParents;
+begin
+ Assert(false);
+end;
+
+procedure TmsShapeTestPrim.Scroll(const aDirection: TPointF);
+begin
+ Assert(false);
+end;
+
+procedure TmsShapeTestPrim.ResetOrigin;
+begin
+ Assert(false);
+end;
+
+function TmsShapeTestPrim.pm_GetCurrentDiagramms: ImsDiagrammsList;
+begin
+ Result := nil;
+ Assert(false);
+end;
+
+procedure TmsShapeTestPrim.pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
+begin
+ Assert(false);
 end;
 
 class function TmsShapeTestPrim.Create(const aContext: TmsShapeTestContext): ITest;

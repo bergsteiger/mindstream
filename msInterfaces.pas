@@ -29,6 +29,7 @@ type
   procedure RemoveShape(const aShape: ImsShape);
   function AddShape(const aShape: ImsShape): ImsShape;
   procedure Invalidate;
+  function ShapeCount: Integer;
  end;//ImsShapesController
  // - тут бы иметь МНОЖЕСТВЕННОЕ наследование интерфейсов, но Delphi его не поддерживает
  // А вот с UML - мы его ПОТОМ СГЕНЕРИРУЕМ
