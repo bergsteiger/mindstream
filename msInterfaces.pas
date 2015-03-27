@@ -294,10 +294,10 @@ type
   procedure DeSerialize;
  end;//ImsDiagramms
 
- ImsIvalidator = interface
+ ImsInvalidator = interface
   procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
   procedure DiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);
- end;//ImsIvalidator
+ end;//ImsInvalidator
 
  ImsDiagrammsController = interface
   procedure Clear;

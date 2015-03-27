@@ -3,7 +3,7 @@
 interface
 
 uses
- {$Include msIvalidator.mixin.pas}
+ {$Include msInvalidator.mixin.pas}
  ,
  FMX.Objects,
  FMX.ListBox,
@@ -22,9 +22,9 @@ uses
  ;
 
 type
- TmsIvalidatorParent = TmsInterfacedRefcounted;
- {$Include msIvalidator.mixin.pas}
- TmsDiagrammsController = class(TmsIvalidator, ImsDiagrammsController)
+ TmsInvalidatorParent = TmsInterfacedRefcounted;
+ {$Include msInvalidator.mixin.pas}
+ TmsDiagrammsController = class(TmsInvalidator, ImsDiagrammsController)
  private
   imgMain: TPaintBox;
   cbShapes: TComboBox;
@@ -104,7 +104,7 @@ type
 implementation
 
 uses
- {$Include msIvalidator.mixin.pas}
+ {$Include msInvalidator.mixin.pas}
  ,
  System.SysUtils,
  FMX.Types,
@@ -186,7 +186,7 @@ begin
  f_DiagrammsController.SwapParents;
 end;
 
-{$Include msIvalidator.mixin.pas}
+{$Include msInvalidator.mixin.pas}
 
 // TmsDiagrammsController
 
