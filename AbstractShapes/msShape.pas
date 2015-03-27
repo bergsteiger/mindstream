@@ -153,8 +153,8 @@ begin
  f_ShapeClassName := f_ShapeClass.Name;
  Assert(f_ShapeClassName <> '');
  f_Name := f_ShapeClassName;
-(* if (aCtx.rShapesController. then
-  *)
+ if (aCtx.rShapesController <> nil) then
+  f_Name := f_Name + IntToStr(aCtx.rShapesController.ShapeCount + 1);
  inherited Create;
  SetStartPoint(aCtx.rStartPoint);
 end;
