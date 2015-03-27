@@ -146,6 +146,8 @@ type
 
  TRectF = System.Types.TRectF;
 
+ TmsShapeUID = Int64;
+
  ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
@@ -160,6 +162,7 @@ type
   function DrawBounds: TRectF;
   procedure MouseMove(const aClickContext: TmsEndShapeContext);
   // - действите нажатии
+  function UID: TmsShapeUID;
   function pm_GetStartPoint: TPointF;
   function pm_GetShapeClass: ImsShapeClass;
   property StartPoint: TPointF
