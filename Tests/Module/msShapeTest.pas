@@ -184,6 +184,7 @@ var
  l_X : Integer;
  l_Y : Integer;
 begin
+ f_UID := 0;
  inherited;
  RandSeed := f_Context.rSeed;
  SetLength(f_Coords, ShapesCount);

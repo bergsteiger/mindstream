@@ -158,6 +158,8 @@ begin
  f_UID := 0;
  if (aCtx.rShapesController <> nil) then
   f_Name := f_Name + IntToStr(aCtx.rShapesController.ShapeCount + 1);
+ if (aCtx.rDiagrammsHolder <> nil) then
+  f_UID := aCtx.rDiagrammsHolder.GenerateUID(Self);
  inherited Create;
  SetStartPoint(aCtx.rStartPoint);
 end;
