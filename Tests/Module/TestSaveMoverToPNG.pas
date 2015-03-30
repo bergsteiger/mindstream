@@ -14,7 +14,7 @@ type
   TTestSaveMoverToPNG = class(TTestSaveToPNG)
   protected
    procedure TransformContext(var theContext: TmsShapeTestContext); override;
-   procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); override;
+   procedure ModifyDiagramm(const aDiagramm: ImsDiagramm); override;
    procedure MoverApplied(const aDiagramm: ImsDiagramm; const aShape :ImsShape; const aMover: ImsShape); virtual;
   end;//TTestSaveMoverToPNG
 
@@ -34,7 +34,7 @@ type
    // https://bitbucket.org/ingword/mindstream/issue/167/connector
   protected
    procedure TransformContext(var theContext: TmsShapeTestContext); override;
-   procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); override;
+   procedure ModifyDiagramm(const aDiagramm: ImsDiagramm); override;
   end;//TmsConnectorDrawTest
 
 implementation
@@ -64,7 +64,7 @@ procedure TTestSaveMoverToPNG.MoverApplied(const aDiagramm: ImsDiagramm; const a
 begin
 end;
 
-procedure TTestSaveMoverToPNG.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
+procedure TTestSaveMoverToPNG.ModifyDiagramm(const aDiagramm: ImsDiagramm);
 var
  l_ShapeToDeal : ImsShape;
  l_Class : ImsShapeClass;
@@ -140,7 +140,7 @@ begin
  theContext.rShapesCount := Min(theContext.rShapesCount, 6);
 end;
 
-procedure TmsConnectorDrawTest.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
+procedure TmsConnectorDrawTest.ModifyDiagramm(const aDiagramm: ImsDiagramm);
 begin
  if not f_Context.ShapeClass.IsLineLike then
   AddConnectorsToDiagramm(aDiagramm);
