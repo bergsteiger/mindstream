@@ -372,7 +372,7 @@ begin
     l_R := l_Shape.DrawBounds;
     l_Delta := Min((l_R.Width - 1) / 2, Min((l_R.Height - 1) / 2, cDelta));
     l_B := l_Shape.StartPoint + TPointF.Create(-l_Delta, l_Delta);
-    l_Connector := TmsConnector.CreateCompleted(l_A, l_B, aDiagramm.ShapesController);
+    l_Connector := TmsConnector.CreateCompleted(l_A, l_B, aDiagramm.ShapesController, Self);
     l_List.Add(l_Connector);
     //aDiagramm.AddShape(l_Connector);
     l_Connector := nil;
