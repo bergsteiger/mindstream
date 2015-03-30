@@ -71,6 +71,7 @@ var
  l_Mover : ImsShape;
  l_Ctx : TmsMakeShapeContext;
 begin
+ inherited;
  Assert(aDiagramm.ItemsCount = f_Context.rShapesCount);
  l_ShapeToDeal := aDiagramm.FirstShape;
  l_Class := TmsMover.MC;
@@ -82,7 +83,6 @@ begin
   l_Mover.MouseUp(TmsEndShapeContext.Create(l_ShapeToDeal.StartPoint, aDiagramm.ShapesController, nil));
   MoverApplied(aDiagramm, l_ShapeToDeal, l_Mover);
  end;//l_Mover <> nil
- inherited;
 end;
 
 // TmsMoverFloatingButtonsTest
@@ -142,9 +142,9 @@ end;
 
 procedure TmsConnectorDrawTest.ModifyDiagramm(const aDiagramm: ImsDiagramm);
 begin
+ inherited;
  if not f_Context.ShapeClass.IsLineLike then
   AddConnectorsToDiagramm(aDiagramm);
- inherited;
 end;
 
 end.

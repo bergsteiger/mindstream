@@ -104,6 +104,7 @@ type
   TmsShapeWithConnectorTest = class(TmsCustomShapeTest)
   protected
    procedure TransformContext(var theContext: TmsShapeTestContext); override;
+   procedure ModifyDiagramm(const aDiagramm: ImsDiagramm); override;
   end;//TmsShapeWithConnectorTest
 
 implementation
@@ -502,6 +503,11 @@ procedure TmsShapeWithConnectorTest.TransformContext(var theContext: TmsShapeTes
 begin
  inherited;
  theContext.rShapesCount := Min(theContext.rShapesCount, 6);
+end;
+
+procedure TmsShapeWithConnectorTest.ModifyDiagramm(const aDiagramm: ImsDiagramm);
+begin
+ inherited;
 end;
 
 end.
