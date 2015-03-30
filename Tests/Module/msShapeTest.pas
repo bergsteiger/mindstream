@@ -100,6 +100,9 @@ type
     procedure TestDiagrammName;
   end;//TmsShapeTest
 
+  TmsShapeWithConnectorTest = class(TmsCustomShapeTest)
+  end;//TmsShapeWithConnectorTest
+
 implementation
 
  uses
