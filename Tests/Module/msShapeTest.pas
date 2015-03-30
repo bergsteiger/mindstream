@@ -118,7 +118,9 @@ implementation
   msTestConstants,
   msShapeCreator,
   msCompletedShapeCreator,
-  FMX.DUnit.msLog
+  FMX.DUnit.msLog,
+  Generics.Collections,
+  msConnector
   ;
 
 // TmsShapeTestPrim
@@ -329,7 +331,50 @@ begin
 end;
 
 procedure TmsShapeTestPrim.AddConnectorsToDiagramm(const aDiagramm: ImsDiagramm);
+type
+ TmsShapeList = TList<ImsShape>;
+const
+ cDelta = 10{20};
+var
+ l_PrevShape : ImsShape;
+ l_Shape : ImsShape;
+ l_A : TPointF;
+ l_B : TPointF;
+ l_Connector : ImsShape;
+ l_Delta: Extended;
+ l_List : TmsShapeList;
+ l_R : TRectF;
 begin
+ l_PrevShape := nil;
+ l_List := TmsShapeList.Create;
+ try
+  for l_Shape in aDiagramm do
+  begin
+   if (l_PrevShape <> nil) then
+   begin
+    // тут надо будет коннектор создать
+    l_R := l_PrevShape.DrawBounds;
+    l_Delta := Min((l_R.Width - 1) / 2, Min((l_R.Height - 1) / 2, cDelta));
+    l_A := l_PrevShape.StartPoint + TPointF.Create(l_Delta, -l_Delta);
+    l_R := l_Shape.DrawBounds;
+    l_Delta := Min((l_R.Width - 1) / 2, Min((l_R.Height - 1) / 2, cDelta));
+    l_B := l_Shape.StartPoint + TPointF.Create(-l_Delta, l_Delta);
+    l_Connector := TmsConnector.CreateCompleted(l_A, l_B, aDiagramm.ShapesController);
+    l_List.Add(l_Connector);
+    //aDiagramm.AddShape(l_Connector);
+    l_Connector := nil;
+    //l_PrevShape := l_Shape;
+    l_PrevShape := nil;
+   end//l_PrevShape <> nil
+   else
+    l_PrevShape := l_Shape;
+  end;//for l_Shape
+
+  for l_Shape in l_List do
+   aDiagramm.AddShape(l_Shape);
+ finally
+  FreeAndNil(l_List);
+ end;//try..finally
 end;
 
 class function TmsShapeTestPrim.Create(const aContext: TmsShapeTestContext): ITest;
