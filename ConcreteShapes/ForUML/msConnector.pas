@@ -17,8 +17,8 @@ type
   f_LeftShape : ImsShape;
   [JSONMarshalled(False)]
   f_RightShape : ImsShape;
-  f_UIDLeft
-  f_UIDRight
+  f_UIDLeft : TmsShapeUID;
+  f_UIDRight : TmsShapeUID;
  protected
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); override;
   procedure SetStartPoint(const aStartPoint: TPointF); override;
@@ -41,7 +41,11 @@ constructor TmsConnector.CreateInner(const aShapeClass : ImsShapeClass; const aC
 begin
  inherited;
  if (aCtx.rShapesController <> nil) then
+ begin
   f_LeftShape := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
+  if (f_LeftShape <> nil) then
+   f_UIDLeft := f_LeftShape.UID;
+ end;//aCtx.rShapesController <> nil
 end;
 
 procedure TmsConnector.SetStartPoint(const aStartPoint: TPointF);
@@ -137,7 +141,11 @@ end;
 function TmsConnector.EndTo(const aCtx: TmsEndShapeContext): Boolean;
 begin
  if (aCtx.rShapesController <> nil) then
+ begin
   f_RightShape := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
+  if (f_RightShape <> nil) then
+   f_UIDRight := f_RightShape.UID;
+ end;//aCtx.rShapesController <> nil
  Result := inherited;
 end;
 
