@@ -40,6 +40,7 @@ type
   protected
    procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
    procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); virtual;
+   procedure ModifyDiagramm(const aDiagramm: ImsDiagramm); virtual;
    procedure SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm; aSaveTo: TmsDiagrammSaveTo);
    procedure SetUp; override;
    function ShapesCount: Integer;
@@ -101,6 +102,8 @@ type
   end;//TmsShapeTest
 
   TmsShapeWithConnectorTest = class(TmsCustomShapeTest)
+  protected
+   procedure TransformContext(var theContext: TmsShapeTestContext); override;
   end;//TmsShapeWithConnectorTest
 
 implementation
@@ -214,6 +217,11 @@ begin
  end;//try..finally
 end;
 
+procedure TmsShapeTestPrim.ModifyDiagramm(const aDiagramm: ImsDiagramm);
+begin
+ // - ничего не делаем
+end;
+
 procedure TmsShapeTestPrim.CreateDiagrammWithShapeAndSaveAndCheck;
 begin
  CreateDiagrammAndCheck(
@@ -234,6 +242,7 @@ begin
     )
     .AddNewDiagramm;
 
+   ModifyDiagramm(aDiagramm);
    SaveDiagrammAndCheck(aDiagramm, SaveDiagramm);
   end
   , f_Context.rDiagrammName
@@ -485,6 +494,13 @@ begin
  finally
   l_Diagramms := nil;
  end;//try..finally
+end;
+
+// TmsShapeWithConnectorTest
+
+procedure TmsShapeWithConnectorTest.TransformContext(var theContext: TmsShapeTestContext);
+begin
+ inherited;
 end;
 
 end.
