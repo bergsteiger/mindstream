@@ -140,10 +140,9 @@ begin
  theContext.rShapesCount := Min(theContext.rShapesCount, 6);
 end;
 
+procedure TmsConnectorDrawTest.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 type
  TmsShapeList = TList<ImsShape>;
-
-procedure TmsConnectorDrawTest.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 const
  cDelta = 10{20};
 var

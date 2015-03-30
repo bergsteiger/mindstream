@@ -68,6 +68,7 @@ type
    function GenerateUID(const aShape: ImsShape): TmsShapeUID;
    function pm_GetCurrentDiagramms: ImsDiagrammsList;
    procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
+   procedure AddConnectorsToDiagramm(const aDiagramm: ImsDiagramm);
   public
    class procedure CheckShapes(aCheck: TmsShapeClassCheck);
    class function Create(const aContext: TmsShapeTestContext): ITest;
@@ -325,6 +326,10 @@ end;
 procedure TmsShapeTestPrim.pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
 begin
  Assert(false);
+end;
+
+procedure TmsShapeTestPrim.AddConnectorsToDiagramm(const aDiagramm: ImsDiagramm);
+begin
 end;
 
 class function TmsShapeTestPrim.Create(const aContext: TmsShapeTestContext): ITest;
