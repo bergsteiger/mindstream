@@ -501,6 +501,7 @@ end;
 procedure TmsShapeWithConnectorTest.TransformContext(var theContext: TmsShapeTestContext);
 begin
  inherited;
+ theContext.rShapesCount := Min(theContext.rShapesCount, 6);
 end;
 
 end.
