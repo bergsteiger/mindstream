@@ -21,7 +21,7 @@
  // - шаблонизируем, ибо мы скоро будем сериализовать и другие классы.
  public
   class procedure DeSerialize(const aFileName: string;
-                              const aDiagramm: TClassToSerialize);
+                              const aRessurected: TClassToSerialize);
  end;//TmsMarshal
 
 {$Else TmsMarshal}
@@ -41,20 +41,28 @@
 
 // TmsMarshal
 
+type
+ TInterfacedObjectFriend = class(TInterfacedObject)
+ end;//TInterfacedObjectFriend
+
 class procedure TmsMarshal.DeSerialize(const aFileName: string;
-                                       const aDiagramm: TClassToSerialize);
+                                       const aRessurected: TClassToSerialize);
 var
  l_StringList: TmsStringList;
  l_D : TClassToSerialize;
+ l_I : IUnknown;
 begin
  l_StringList := TmsStringList.Create;
  try
   l_StringList.LoadFromFile(aFileName);
   l_D := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text)) As TClassToSerialize;
   try
-   aDiagramm.Assign(l_D);
+   aRessurected.Assign(l_D);
   finally
-   FreeAndNil(l_D);
+   if not (l_D Is TInterfacedObject) then
+    FreeAndNil(l_D)
+   else
+    TInterfacedObjectFriend(l_D)._Release;
   end;//try..finally
  finally
   FreeAndNil(l_StringList);

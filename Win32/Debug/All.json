@@ -7,7 +7,34 @@
 			"id": 2,
 			"fields": {
 				"fName": "main",
-				"f_Items": []
+				"f_Items": [{
+					"type": "msTextShape.TmsTextShape",
+					"id": 3,
+					"fields": {
+						"FStartPoint": [[220,
+						66],
+						220,
+						66],
+						"f_ShapeClassName": "TextShape",
+						"f_Name": "TextShape1",
+						"f_UID": 1,
+						"f_Items": []
+					}
+				},
+				{
+					"type": "msTextShape.TmsTextShape",
+					"id": 4,
+					"fields": {
+						"FStartPoint": [[299,
+						142],
+						299,
+						142],
+						"f_ShapeClassName": "TextShape",
+						"f_Name": "TextShape2",
+						"f_UID": 2,
+						"f_Items": []
+					}
+				}]
 			}
 		}]
 	}
