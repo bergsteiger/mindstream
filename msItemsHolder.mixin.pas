@@ -33,6 +33,8 @@
   function ItemsCount: Integer;
  private
   property Items: TmsItemsList read pm_GetItems write pm_SetItems;
+ protected
+  procedure ItemAdded(const anItem: TmsItem); virtual;
  public
   constructor Create;
   procedure Cleanup; override;
@@ -41,7 +43,7 @@
   class procedure RegisterInUnMarshal(aMarshal: TJSONUnMarshal);
   function GetEnumerator: TmsItemsListEnumerator;
   function IndexOf(const anItem: TmsItem): Integer;
-  procedure Add(anItem: TmsItem);
+  procedure Add(const anItem: TmsItem);
  end;//TmsItemsHolder
 
 {$Else TmsItemsHolder_intf}
@@ -194,9 +196,14 @@ begin
  Result := Items.Count;
 end;
 
-procedure TmsItemsHolder.Add(anItem: TmsItem);
+procedure TmsItemsHolder.ItemAdded(const anItem: TmsItem);
+begin
+end;
+
+procedure TmsItemsHolder.Add(const anItem: TmsItem);
 begin
  Items.Add(anItem);
+ ItemAdded(anItem);
 end;
 
 {$EndIf TmsItemsHolder_uses_impl}
