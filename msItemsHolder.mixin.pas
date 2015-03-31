@@ -31,10 +31,10 @@
   class procedure RegisterItemsLike(aLambda: TmsRttiFieldLambda);
  protected
   function ItemsCount: Integer;
+  property Items: TmsItemsList read pm_GetItems write pm_SetItems;
  public
   constructor Create;
   procedure Cleanup; override;
-  property Items: TmsItemsList read pm_GetItems write pm_SetItems;
   procedure Assign(anOther : TmsItemsHolder);
   class procedure RegisterInMarshal(aMarshal: TJSONMarshal);
   class procedure RegisterInUnMarshal(aMarshal: TJSONUnMarshal);
@@ -126,12 +126,12 @@ begin
      l_Index: Integer;
     begin
      Assert(Field = l_FieldName);
-     if ((Data As TmsItemsHolder).Items.Count <= 0) then
+     if ((Data As TmsItemsHolder).ItemsCount <= 0) then
      begin
       Result := nil;
       Exit;
-     end;//Data As TmsItemsHolder).Items.Count <= 0
-     SetLength(Result, (Data As TmsItemsHolder).Items.Count);
+     end;//Data As TmsItemsHolder).ItemsCount <= 0
+     SetLength(Result, (Data As TmsItemsHolder).ItemsCount);
      l_Index := 0;
      for l_Item in (Data As TmsItemsHolder).Items do
      begin
