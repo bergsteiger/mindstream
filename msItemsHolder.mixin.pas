@@ -40,6 +40,7 @@
   class procedure RegisterInUnMarshal(aMarshal: TJSONUnMarshal);
   function GetEnumerator: TmsItemsListEnumerator;
   function IndexOf(const anItem: TmsItem): Integer;
+  procedure Add(anItem: TmsItem);
  end;//TmsItemsHolder
 
 {$Else TmsItemsHolder_intf}
@@ -88,7 +89,7 @@ begin
   begin
    if (f_Items = nil) then
     f_Items := TmsItemsList.Create;
-   f_Items.Add(l_Item);
+   Self.Add(l_Item);
   end;//for l_Shape in aValue
 end;
 
@@ -167,7 +168,7 @@ begin
      for l_Object in Args do
      begin
       if Supports(l_Object, TmsItem, l_ItemI) then
-       l_Holder.Items.Add(l_ItemI)
+       l_Holder.Add(l_ItemI)
       else
        raise Exception.Create(l_Object.ClassName + ' не поддерживает нужный интерфейс');
      end//for l_Object
@@ -190,6 +191,11 @@ end;
 function TmsItemsHolder.ItemsCount: Integer;
 begin
  Result := Items.Count;
+end;
+
+procedure TmsItemsHolder.Add(anItem: TmsItem);
+begin
+ Items.Add(anItem);
 end;
 
 {$EndIf TmsItemsHolder_uses_impl}
