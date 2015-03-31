@@ -26,7 +26,7 @@ type
  protected
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
   function AddNewDiagramm: ImsDiagramm;
-  procedure DiagrammAdded(const aDiagramm: ImsDiagramm);
+  procedure ItemAdded(const aDiagramm: ImsDiagramm); override;
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
   procedure DiagrammsForToolbarToList(aList: TStrings);
   function FirstDiagramm: ImsDiagramm;
@@ -55,23 +55,23 @@ uses
 
 procedure TmsDiagrammsList.AddDiagramm(const aDiagramm: ImsDiagramm);
 begin
- Items.Add(aDiagramm);
+ Self.Add(aDiagramm);
 end;
 
 function TmsDiagrammsList.AddNewDiagramm: ImsDiagramm;
 const
  cN : array [0..6] of String = ('main', 'methods', 'uses', 'call', 'state', 'inject', 'sequence');
 begin
- if (Items.Count >= Low(cN)) AND (Items.Count <= High(cN)) then
-  Result := TmsDiagramm.Create(cN[Items.Count])
+ if (Self.ItemsCount >= Low(cN)) AND (Self.ItemsCount <= High(cN)) then
+  Result := TmsDiagramm.Create(cN[Self.ItemsCount])
  else
-  Result := TmsDiagramm.Create('¹' + IntToStr(Items.Count + 1));
+  Result := TmsDiagramm.Create('¹' + IntToStr(Self.ItemsCount + 1));
  AddDiagramm(Result);
- DiagrammAdded(Result);
 end;
 
-procedure TmsDiagrammsList.DiagrammAdded(const aDiagramm: ImsDiagramm);
+procedure TmsDiagrammsList.ItemAdded(const aDiagramm: ImsDiagramm);
 begin
+ inherited;
  TmsInvalidators.DiagrammAdded(Self, aDiagramm);
 end;
 
@@ -80,7 +80,7 @@ var
  l_D : ImsDiagramm;
 begin
  Result := nil;
- for l_D in Items do
+ for l_D in Self do
   if (l_D.Name = aDiagrammName) then
   begin
    Result := l_D;
@@ -93,13 +93,13 @@ var
  l_D : ImsDiagramm;
 begin
  aList.Clear;
- for l_D in Items do
+ for l_D in Self do
   aList.Add(l_D.Name);
 end;
 
 function TmsDiagrammsList.FirstDiagramm: ImsDiagramm;
 begin
- if (Items.Count <= 0) then
+ if (Self.ItemsCount <= 0) then
   Result := nil
  else
   Result := Items.First;
@@ -107,7 +107,7 @@ end;
 
 function TmsDiagrammsList.pm_GetCount: Integer;
 begin
- Result := Items.Count;
+ Result := Self.ItemsCount;
 end;
 
 end.
