@@ -134,7 +134,7 @@ begin
      end;//Data As TmsItemsHolder).ItemsCount <= 0
      SetLength(Result, (Data As TmsItemsHolder).ItemsCount);
      l_Index := 0;
-     for l_Item in (Data As TmsItemsHolder).Items do
+     for l_Item in (Data As TmsItemsHolder) do
      begin
       Result[l_Index] := l_Item.toObject;
       Inc(l_Index);
