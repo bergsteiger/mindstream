@@ -19,7 +19,6 @@ type
  private
   constructor CreatePrim;
  protected
-  procedure DiagrammAdded(const aDiagramm: ImsDiagramm); override;
   procedure Serialize;
   procedure DeSerialize;
   procedure SaveTo(const aFileName: String); override;
@@ -50,11 +49,6 @@ end;
 constructor TmsDiagramms.CreatePrim;
 begin
  inherited Create;
-end;
-
-procedure TmsDiagramms.DiagrammAdded(const aDiagramm: ImsDiagramm);
-begin
- inherited;
 end;
 
 const
