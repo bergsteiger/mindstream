@@ -26,7 +26,7 @@ type
  protected
   procedure AddDiagramm(const aDiagramm: ImsDiagramm);
   function AddNewDiagramm: ImsDiagramm;
-  procedure DiagrammAdded(const aDiagramm: ImsDiagramm); virtual;
+  procedure DiagrammAdded(const aDiagramm: ImsDiagramm);
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
   procedure DiagrammsForToolbarToList(aList: TStrings);
   function FirstDiagramm: ImsDiagramm;
