@@ -32,7 +32,7 @@
  protected
   function ItemsCount: Integer;
  private
-  property Items: TmsItemsList read pm_GetItems write pm_SetItems;
+  property _Items: TmsItemsList read pm_GetItems write pm_SetItems;
  protected
   procedure ItemAdded(const anItem: TmsItem); virtual;
  public
@@ -98,7 +98,7 @@ end;
 
 procedure TmsItemsHolder.Assign(anOther : TmsItemsHolder);
 begin
- Self.Items := anOther.Items;
+ Self._Items := anOther._Items;
 end;
 
 class procedure TmsItemsHolder.RegisterItemsLike(aLambda: TmsRttiFieldLambda);
@@ -188,12 +188,12 @@ end;
 
 function TmsItemsHolder.IndexOf(const anItem: TmsItem): Integer;
 begin
- Result := Items.IndexOf(anItem);
+ Result := _Items.IndexOf(anItem);
 end;
 
 function TmsItemsHolder.ItemsCount: Integer;
 begin
- Result := Items.Count;
+ Result := _Items.Count;
 end;
 
 procedure TmsItemsHolder.ItemAdded(const anItem: TmsItem);
@@ -202,7 +202,7 @@ end;
 
 procedure TmsItemsHolder.Add(const anItem: TmsItem);
 begin
- Items.Add(anItem);
+ _Items.Add(anItem);
  ItemAdded(anItem);
 end;
 

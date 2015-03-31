@@ -114,7 +114,7 @@ type
   function GetEnumerator: TmsDiagrammsEnumerator;
   function IndexOf(const anItem: ImsDiagramm): Integer;
   function AddNewDiagramm: ImsDiagramm;
-  procedure AddDiagramm(const aDiagramm: ImsDiagramm);
+  procedure Add(const aDiagramm: ImsDiagramm);
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
   function FirstDiagramm: ImsDiagramm;
   procedure DiagrammsForToolbarToList(aList: TStrings);

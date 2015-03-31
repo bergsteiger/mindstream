@@ -472,7 +472,7 @@ var
 begin
  l_Diagramms := TmsDiagramms.Create;
  try
-  l_Diagramms.AddDiagramm(aDiagramm);
+  l_Diagramms.Add(aDiagramm);
   l_Diagramms.SaveTo(aFileName);
  finally
   l_Diagramms := nil;

@@ -58,6 +58,7 @@ type
  protected
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
+  procedure Cleanup; override;
  public
   class function Create(const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
@@ -95,6 +96,14 @@ uses
 {$Include msPersistent.mixin.pas}
 {$Include msShapesProvider.mixin.pas}
 
+// TmsDiagramm
+
+procedure TmsDiagramm.Cleanup;
+begin
+ // - перекрыто чисто для отладки
+ inherited;
+end;
+
 const
  c_FileName = '.json';
 
@@ -117,7 +126,7 @@ begin
  FCurrentAddedShape := aClickContext.rShapeCreator.CreateShape(TmsMakeShapeContext.Create(aClickContext.rClickPoint, Self, aClickContext.rDiagrammsHolder));
  if (FCurrentAddedShape <> nil) then
  begin
-  Items.Add(FCurrentAddedShape);
+  Self.Add(FCurrentAddedShape);
   if (not FCurrentAddedShape.IsNeedsSecondClick) then
     // - если не надо SecondClick или MouseUp, то наш примитив - завершён
    FCurrentAddedShape := nil;
@@ -216,18 +225,18 @@ end;
 
 function TmsDiagramm.AddShape(const aShape: ImsShape): ImsShape;
 begin
- Items.Add(aShape);
+ Self.Add(aShape);
  Result := aShape;
 end;
 
 function TmsDiagramm.ShapeCount: Integer;
 begin
- Result := Items.Count;
+ Result := Self.ItemsCount;
 end;
 
 function TmsDiagramm.FirstShape: ImsShape;
 begin
- Result := Items.First;
+ Result := _Items.First;
 end;
 
 function TmsDiagramm.ShapesController: ImsShapesController;

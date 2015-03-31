@@ -24,13 +24,13 @@ type
  {$Include msShapesProvider.mixin.pas}
  TmsDiagrammsList = class abstract(TmsShapesProvider, ImsDiagrammsList)
  protected
-  procedure AddDiagramm(const aDiagramm: ImsDiagramm);
   function AddNewDiagramm: ImsDiagramm;
   procedure ItemAdded(const aDiagramm: ImsDiagramm); override;
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
   procedure DiagrammsForToolbarToList(aList: TStrings);
   function FirstDiagramm: ImsDiagramm;
   function pm_GetCount: Integer;
+  procedure Cleanup; override;
  end;//TmsDiagrammsList
 
 implementation
@@ -53,9 +53,12 @@ uses
 
 {$Include msShapesProvider.mixin.pas}
 
-procedure TmsDiagrammsList.AddDiagramm(const aDiagramm: ImsDiagramm);
+// TmsDiagrammsList
+
+procedure TmsDiagrammsList.Cleanup;
 begin
- Self.Add(aDiagramm);
+ // - перекрыто чисто для отладки
+ inherited;
 end;
 
 function TmsDiagrammsList.AddNewDiagramm: ImsDiagramm;
@@ -66,7 +69,7 @@ begin
   Result := TmsDiagramm.Create(cN[Self.ItemsCount])
  else
   Result := TmsDiagramm.Create('№' + IntToStr(Self.ItemsCount + 1));
- AddDiagramm(Result);
+ Self.Add(Result);
 end;
 
 procedure TmsDiagrammsList.ItemAdded(const aDiagramm: ImsDiagramm);
@@ -102,7 +105,7 @@ begin
  if (Self.ItemsCount <= 0) then
   Result := nil
  else
-  Result := Items.First;
+  Result := _Items.First;
 end;
 
 function TmsDiagrammsList.pm_GetCount: Integer;
