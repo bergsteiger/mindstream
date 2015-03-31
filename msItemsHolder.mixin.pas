@@ -31,6 +31,7 @@
   class procedure RegisterItemsLike(aLambda: TmsRttiFieldLambda);
  protected
   function ItemsCount: Integer;
+ private
   property Items: TmsItemsList read pm_GetItems write pm_SetItems;
  public
   constructor Create;
