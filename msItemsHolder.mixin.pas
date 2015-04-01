@@ -177,6 +177,7 @@ begin
        Assert(l_C > 1);
        l_Holder.Add(l_ItemI);
        l_C := l_ItemI._Release;
+       //l_ItemI._Release;
        l_ItemI := nil;
       end//Supports(l_Object, TmsItem, l_ItemI)
       else
