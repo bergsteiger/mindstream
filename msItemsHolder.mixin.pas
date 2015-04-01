@@ -169,17 +169,23 @@ begin
      l_Holder := Data As TmsItemsHolder;
      Assert(l_Holder <> nil);
 
-     for l_Object in Args do
-     begin
-      if Supports(l_Object, TmsItem, l_ItemI) then
-       try
-        l_Holder.Add(l_ItemI);
-       finally
-        l_ItemI := nil;
-       end
-      else
-       raise Exception.Create(l_Object.ClassName + ' не поддерживает нужный интерфейс');
-     end//for l_Object
+     l_C := l_Holder._AddRef;
+     try
+      for l_Object in Args do
+      begin
+       if Supports(l_Object, TmsItem, l_ItemI) then
+        try
+         l_Holder.Add(l_ItemI);
+        finally
+         l_ItemI := nil;
+        end
+       else
+        raise Exception.Create(l_Object.ClassName + ' не поддерживает нужный интерфейс');
+      end//for l_Object
+     finally
+      if (l_C > 1) then
+       l_Holder._Release;
+     end;//try..finally
     end
    );//aMarshal.RegisterReverter
   end
