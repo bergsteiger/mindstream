@@ -55,7 +55,7 @@ begin
   try
    aRessurected.Assign(l_D);
   finally
-//   FreeAndNil(l_D)
+//   FreeAndNil(l_D);
    if not (l_D Is TInterfacedObject) then
     FreeAndNil(l_D)
    else

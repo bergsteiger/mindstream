@@ -163,6 +163,7 @@ begin
      l_Object: TObject;
      l_Holder : TmsItemsHolder;
      l_ItemI : TmsItem;
+     l_C : Integer;
     begin
      Assert(Field = l_FieldName);
      l_Holder := Data As TmsItemsHolder;
@@ -172,7 +173,11 @@ begin
      begin
       if Supports(l_Object, TmsItem, l_ItemI) then
       begin
-       l_Holder.Add(l_ItemI)
+       l_C := l_ItemI._AddRef;
+//       Assert(l_C > 1);
+       l_Holder.Add(l_ItemI);
+       l_C := l_ItemI._Release;
+       l_ItemI := nil;
       end//Supports(l_Object, TmsItem, l_ItemI)
       else
        raise Exception.Create(l_Object.ClassName + ' не поддерживает нужный интерфейс');
