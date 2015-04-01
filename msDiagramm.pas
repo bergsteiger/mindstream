@@ -90,7 +90,8 @@ uses
  msDiagrammsController,
  System.Math.Vectors,
  System.Math,
- FMX.Types
+ FMX.Types,
+ msTotalShapesList
  ;
 
 {$Include msItemsHolder.mixin.pas}
@@ -108,6 +109,7 @@ end;
 procedure TmsDiagramm.ItemAdded(const anItem: ImsShape);
 begin
  inherited;
+ TmsTotalShapesList.ShapeAdded(anItem);
 end;
 
 const
