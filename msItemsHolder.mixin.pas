@@ -170,6 +170,7 @@ begin
      Assert(l_Holder <> nil);
 
      l_C := l_Holder._AddRef;
+     Assert(l_C > 0);
      try
       for l_Object in Args do
       begin
