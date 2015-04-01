@@ -185,8 +185,9 @@ begin
         raise Exception.Create(l_Object.ClassName + ' не поддерживает нужный интерфейс');
       end//for l_Object
      finally
-      if (l_C > 1) then
-       l_Holder._Release;
+      if (l_C = 1) then
+       TmsGarbageCollector.Instance.Add(l_Holder);
+      l_Holder._Release;
      end;//try..finally
     end
    );//aMarshal.RegisterReverter
