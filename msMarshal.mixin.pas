@@ -62,7 +62,10 @@ begin
    if not (l_D Is TInterfacedObject) then
     FreeAndNil(l_D)
    else
-    TInterfacedObjectFriend(l_D)._Release;
+    while true do
+    // - раз мы выше звали FreeAndNil для TInterfacedObject, то надо "убить его до конца"
+     if (TInterfacedObjectFriend(l_D)._Release = 0) then
+      break;
   end;//try..finally
  finally
   FreeAndNil(l_StringList);
