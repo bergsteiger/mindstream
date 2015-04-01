@@ -33,7 +33,8 @@
 // uses
  SysUtils,
  msCoreObjects,
- msStringList
+ msStringList,
+ msGarbageCollector
 
 {$Define TmsMarshal_uses_impl}
 

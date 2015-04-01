@@ -21,6 +21,7 @@ uses
   DUnit.Scripting.AutoTest,
   System.IOUtils,
   System.SysUtils,
+  System.Types,
   Testing.Engine
   ;
 

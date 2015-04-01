@@ -53,7 +53,8 @@
 {$IfNDef TmsItemsHolder_uses_impl}
 
 // uses
-  System.TypInfo
+  System.TypInfo,
+  msGarbageCollector
 
 {$Define TmsItemsHolder_uses_impl}
 
