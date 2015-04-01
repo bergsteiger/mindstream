@@ -2,6 +2,10 @@ unit msGarbageCollector;
 
 interface
 
+uses
+ Generics.Collections
+ ;
+
 type
  TmsGarbageCollector = class
   //  ласс позвол€ющий боротьс€ с http://programmingmindstream.blogspot.com/2015/04/json-unmarshal-tinterfacedobject.html
