@@ -67,6 +67,7 @@ begin
       break;
     //FreeAndNil(l_Ressurected);
    end;//else
+   TmsGarbageCollector.Instance.Clear;
   end;//try..finally
  finally
   FreeAndNil(l_StringList);
