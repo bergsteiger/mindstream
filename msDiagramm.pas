@@ -339,9 +339,9 @@ begin
   // - ���� ���������� ���������, � ����� ����������� �� N+1 ������� -
   //   �� ��� ��� ���� ������
    Exit;
- for l_Index := f_Items.Count - 1 downto 0 do
+ for l_Index := ItemsCount - 1 downto 0 do
  begin
-  l_Shape := f_Items.Items[l_Index];
+  l_Shape := _Items.Items[l_Index];
   if l_Shape.HitTest(aPoint, l_HitShape) then
   begin
    Result := l_HitShape;
@@ -353,7 +353,7 @@ end;
 procedure TmsDiagramm.RemoveShape(const aShape: ImsShape);
 begin
  Assert(f_Items <> nil);
- f_Items.Remove(aShape);
+ _Items.Remove(aShape);
  Invalidate;
 end;
 
