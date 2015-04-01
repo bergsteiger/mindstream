@@ -35,6 +35,7 @@
   property _Items: TmsItemsList read pm_GetItems write pm_SetItems;
  protected
   procedure ItemAdded(const anItem: TmsItem); virtual;
+  function FirstItem: TmsItem;
  public
   constructor Create;
   procedure Cleanup; override;
@@ -218,6 +219,11 @@ procedure TmsItemsHolder.Add(const anItem: TmsItem);
 begin
  _Items.Add(anItem);
  ItemAdded(anItem);
+end;
+
+function TmsItemsHolder.FirstItem: TmsItem;
+begin
+ Result := _Items.First;
 end;
 
 {$EndIf TmsItemsHolder_uses_impl}

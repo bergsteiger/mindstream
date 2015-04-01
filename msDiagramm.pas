@@ -236,7 +236,7 @@ end;
 
 function TmsDiagramm.FirstShape: ImsShape;
 begin
- Result := _Items.First;
+ Result := Self.FirstItem;
 end;
 
 function TmsDiagramm.ShapesController: ImsShapesController;

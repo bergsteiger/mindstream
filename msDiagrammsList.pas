@@ -105,7 +105,7 @@ begin
  if (Self.ItemsCount <= 0) then
   Result := nil
  else
-  Result := _Items.First;
+  Result := Self.FirstItem;
 end;
 
 function TmsDiagrammsList.pm_GetCount: Integer;
