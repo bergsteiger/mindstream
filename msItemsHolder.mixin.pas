@@ -171,7 +171,9 @@ begin
      for l_Object in Args do
      begin
       if Supports(l_Object, TmsItem, l_ItemI) then
+      begin
        l_Holder.Add(l_ItemI)
+      end//Supports(l_Object, TmsItem, l_ItemI)
       else
        raise Exception.Create(l_Object.ClassName + ' не поддерживает нужный интерфейс');
      end//for l_Object
