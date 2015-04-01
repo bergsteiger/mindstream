@@ -13,7 +13,7 @@
 				88],
 				"f_ShapeClassName": "PointCircle",
 				"f_Name": "PointCircle1",
-				"f_UID": 1,
+				"f_UID": [1],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 3,
@@ -34,7 +34,7 @@
 				796],
 				"f_ShapeClassName": "PointCircle",
 				"f_Name": "PointCircle2",
-				"f_UID": 2,
+				"f_UID": [2],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 5,
@@ -55,7 +55,7 @@
 				1035],
 				"f_ShapeClassName": "PointCircle",
 				"f_Name": "PointCircle3",
-				"f_UID": 3,
+				"f_UID": [3],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 7,
@@ -76,7 +76,7 @@
 				1589],
 				"f_ShapeClassName": "PointCircle",
 				"f_Name": "PointCircle4",
-				"f_UID": 4,
+				"f_UID": [4],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 9,
@@ -97,7 +97,7 @@
 				315],
 				"f_ShapeClassName": "PointCircle",
 				"f_Name": "PointCircle5",
-				"f_UID": 5,
+				"f_UID": [5],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 11,
@@ -118,7 +118,7 @@
 				1239],
 				"f_ShapeClassName": "PointCircle",
 				"f_Name": "PointCircle6",
-				"f_UID": 6,
+				"f_UID": [6],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 13,
@@ -133,8 +133,8 @@
 			"type": "msConnector.TmsConnector",
 			"id": 14,
 			"fields": {
-				"f_UIDLeft": 0,
-				"f_UIDRight": 0,
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
 				"f_FinishPoint": [[933.5,
 				805.5],
 				933.5,
@@ -145,7 +145,7 @@
 				78.5],
 				"f_ShapeClassName": "Connector",
 				"f_Name": "Connector7",
-				"f_UID": 7,
+				"f_UID": [7],
 				"f_Items": []
 			}
 		},
@@ -153,8 +153,8 @@
 			"type": "msConnector.TmsConnector",
 			"id": 15,
 			"fields": {
-				"f_UIDLeft": 0,
-				"f_UIDRight": 0,
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
 				"f_FinishPoint": [[574.5,
 				1598.5],
 				574.5,
@@ -165,7 +165,7 @@
 				1025.5],
 				"f_ShapeClassName": "Connector",
 				"f_Name": "Connector7",
-				"f_UID": 8,
+				"f_UID": [8],
 				"f_Items": []
 			}
 		},
@@ -173,8 +173,8 @@
 			"type": "msConnector.TmsConnector",
 			"id": 16,
 			"fields": {
-				"f_UIDLeft": 0,
-				"f_UIDRight": 0,
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
 				"f_FinishPoint": [[159.5,
 				1248.5],
 				159.5,
@@ -185,7 +185,7 @@
 				305.5],
 				"f_ShapeClassName": "Connector",
 				"f_Name": "Connector7",
-				"f_UID": 9,
+				"f_UID": [9],
 				"f_Items": []
 			}
 		}]

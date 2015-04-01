@@ -13,7 +13,7 @@
 				1512],
 				"f_ShapeClassName": "Class",
 				"f_Name": "Class1",
-				"f_UID": 1,
+				"f_UID": [1],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 3,
@@ -34,7 +34,7 @@
 				779],
 				"f_ShapeClassName": "Class",
 				"f_Name": "Class2",
-				"f_UID": 2,
+				"f_UID": [2],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 5,
@@ -55,7 +55,7 @@
 				1355],
 				"f_ShapeClassName": "Class",
 				"f_Name": "Class3",
-				"f_UID": 3,
+				"f_UID": [3],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 7,
@@ -76,7 +76,7 @@
 				1837],
 				"f_ShapeClassName": "Class",
 				"f_Name": "Class4",
-				"f_UID": 4,
+				"f_UID": [4],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 9,
@@ -97,7 +97,7 @@
 				1380],
 				"f_ShapeClassName": "Class",
 				"f_Name": "Class5",
-				"f_UID": 5,
+				"f_UID": [5],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 11,
@@ -118,7 +118,7 @@
 				454],
 				"f_ShapeClassName": "Class",
 				"f_Name": "Class6",
-				"f_UID": 6,
+				"f_UID": [6],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 13,
@@ -133,8 +133,8 @@
 			"type": "msConnector.TmsConnector",
 			"id": 14,
 			"fields": {
-				"f_UIDLeft": 1,
-				"f_UIDRight": 2,
+				"f_UIDLeft": [1],
+				"f_UIDRight": [2],
 				"f_FinishPoint": [[704,
 				789],
 				704,
@@ -145,7 +145,7 @@
 				1502],
 				"f_ShapeClassName": "Connector",
 				"f_Name": "Connector7",
-				"f_UID": 7,
+				"f_UID": [7],
 				"f_Items": []
 			}
 		},
@@ -153,8 +153,8 @@
 			"type": "msConnector.TmsConnector",
 			"id": 15,
 			"fields": {
-				"f_UIDLeft": 3,
-				"f_UIDRight": 4,
+				"f_UIDLeft": [3],
+				"f_UIDRight": [4],
 				"f_FinishPoint": [[663,
 				1847],
 				663,
@@ -165,7 +165,7 @@
 				1345],
 				"f_ShapeClassName": "Connector",
 				"f_Name": "Connector7",
-				"f_UID": 8,
+				"f_UID": [8],
 				"f_Items": []
 			}
 		},
@@ -173,8 +173,8 @@
 			"type": "msConnector.TmsConnector",
 			"id": 16,
 			"fields": {
-				"f_UIDLeft": 5,
-				"f_UIDRight": 6,
+				"f_UIDLeft": [5],
+				"f_UIDRight": [6],
 				"f_FinishPoint": [[818,
 				464],
 				818,
@@ -185,7 +185,7 @@
 				1370],
 				"f_ShapeClassName": "Connector",
 				"f_Name": "Connector7",
-				"f_UID": 9,
+				"f_UID": [9],
 				"f_Items": []
 			}
 		}]

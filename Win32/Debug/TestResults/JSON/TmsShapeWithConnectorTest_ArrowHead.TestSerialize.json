@@ -13,7 +13,7 @@
 				1077],
 				"f_ShapeClassName": "ArrowHead",
 				"f_Name": "ArrowHead1",
-				"f_UID": 1,
+				"f_UID": [1],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 3,
@@ -34,7 +34,7 @@
 				1576],
 				"f_ShapeClassName": "ArrowHead",
 				"f_Name": "ArrowHead2",
-				"f_UID": 2,
+				"f_UID": [2],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 5,
@@ -55,7 +55,7 @@
 				1378],
 				"f_ShapeClassName": "ArrowHead",
 				"f_Name": "ArrowHead3",
-				"f_UID": 3,
+				"f_UID": [3],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 7,
@@ -76,7 +76,7 @@
 				487],
 				"f_ShapeClassName": "ArrowHead",
 				"f_Name": "ArrowHead4",
-				"f_UID": 4,
+				"f_UID": [4],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 9,
@@ -97,7 +97,7 @@
 				204],
 				"f_ShapeClassName": "ArrowHead",
 				"f_Name": "ArrowHead5",
-				"f_UID": 5,
+				"f_UID": [5],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 11,
@@ -118,7 +118,7 @@
 				1420],
 				"f_ShapeClassName": "ArrowHead",
 				"f_Name": "ArrowHead6",
-				"f_UID": 6,
+				"f_UID": [6],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 13,
@@ -133,8 +133,8 @@
 			"type": "msConnector.TmsConnector",
 			"id": 14,
 			"fields": {
-				"f_UIDLeft": 0,
-				"f_UIDRight": 2,
+				"f_UIDLeft": [0],
+				"f_UIDRight": [2],
 				"f_FinishPoint": [[974.5,
 				1585.5],
 				974.5,
@@ -145,7 +145,7 @@
 				1067.5],
 				"f_ShapeClassName": "Connector",
 				"f_Name": "Connector7",
-				"f_UID": 7,
+				"f_UID": [7],
 				"f_Items": []
 			}
 		},
@@ -153,8 +153,8 @@
 			"type": "msConnector.TmsConnector",
 			"id": 15,
 			"fields": {
-				"f_UIDLeft": 0,
-				"f_UIDRight": 4,
+				"f_UIDLeft": [0],
+				"f_UIDRight": [4],
 				"f_FinishPoint": [[704.5,
 				496.5],
 				704.5,
@@ -165,7 +165,7 @@
 				1368.5],
 				"f_ShapeClassName": "Connector",
 				"f_Name": "Connector7",
-				"f_UID": 8,
+				"f_UID": [8],
 				"f_Items": []
 			}
 		},
@@ -173,8 +173,8 @@
 			"type": "msConnector.TmsConnector",
 			"id": 16,
 			"fields": {
-				"f_UIDLeft": 0,
-				"f_UIDRight": 6,
+				"f_UIDLeft": [0],
+				"f_UIDRight": [6],
 				"f_FinishPoint": [[271.5,
 				1429.5],
 				271.5,
@@ -185,7 +185,7 @@
 				194.5],
 				"f_ShapeClassName": "Connector",
 				"f_Name": "Connector7",
-				"f_UID": 9,
+				"f_UID": [9],
 				"f_Items": []
 			}
 		}]

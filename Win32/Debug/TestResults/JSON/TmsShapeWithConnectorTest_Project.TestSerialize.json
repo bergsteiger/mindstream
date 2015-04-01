@@ -13,7 +13,7 @@
 				740],
 				"f_ShapeClassName": "Project",
 				"f_Name": "Project1",
-				"f_UID": 1,
+				"f_UID": [1],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 3,
@@ -34,7 +34,7 @@
 				756],
 				"f_ShapeClassName": "Project",
 				"f_Name": "Project2",
-				"f_UID": 2,
+				"f_UID": [2],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 5,
@@ -55,7 +55,7 @@
 				184],
 				"f_ShapeClassName": "Project",
 				"f_Name": "Project3",
-				"f_UID": 3,
+				"f_UID": [3],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 7,
@@ -76,7 +76,7 @@
 				1781],
 				"f_ShapeClassName": "Project",
 				"f_Name": "Project4",
-				"f_UID": 4,
+				"f_UID": [4],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 9,
@@ -97,7 +97,7 @@
 				1640],
 				"f_ShapeClassName": "Project",
 				"f_Name": "Project5",
-				"f_UID": 5,
+				"f_UID": [5],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 11,
@@ -118,7 +118,7 @@
 				182],
 				"f_ShapeClassName": "Project",
 				"f_Name": "Project6",
-				"f_UID": 6,
+				"f_UID": [6],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 13,
@@ -133,8 +133,8 @@
 			"type": "msConnector.TmsConnector",
 			"id": 14,
 			"fields": {
-				"f_UIDLeft": 1,
-				"f_UIDRight": 2,
+				"f_UIDLeft": [1],
+				"f_UIDRight": [2],
 				"f_FinishPoint": [[575,
 				766],
 				575,
@@ -145,7 +145,7 @@
 				730],
 				"f_ShapeClassName": "Connector",
 				"f_Name": "Connector7",
-				"f_UID": 7,
+				"f_UID": [7],
 				"f_Items": []
 			}
 		},
@@ -153,8 +153,8 @@
 			"type": "msConnector.TmsConnector",
 			"id": 15,
 			"fields": {
-				"f_UIDLeft": 3,
-				"f_UIDRight": 4,
+				"f_UIDLeft": [3],
+				"f_UIDRight": [4],
 				"f_FinishPoint": [[849,
 				1791],
 				849,
@@ -165,7 +165,7 @@
 				174],
 				"f_ShapeClassName": "Connector",
 				"f_Name": "Connector7",
-				"f_UID": 8,
+				"f_UID": [8],
 				"f_Items": []
 			}
 		},
@@ -173,8 +173,8 @@
 			"type": "msConnector.TmsConnector",
 			"id": 16,
 			"fields": {
-				"f_UIDLeft": 5,
-				"f_UIDRight": 6,
+				"f_UIDLeft": [5],
+				"f_UIDRight": [6],
 				"f_FinishPoint": [[136,
 				192],
 				136,
@@ -185,7 +185,7 @@
 				1630],
 				"f_ShapeClassName": "Connector",
 				"f_Name": "Connector7",
-				"f_UID": 9,
+				"f_UID": [9],
 				"f_Items": []
 			}
 		}]
