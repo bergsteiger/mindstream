@@ -1,0 +1,169 @@
+{
+	"type": "msDiagramm.TmsDiagramm",
+	"id": 1,
+	"fields": {
+		"fName": "Диаграмма №7",
+		"f_Items": [{
+			"type": "msAssociation.TmsAssociation",
+			"id": 2,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[449,
+				1316],
+				449,
+				1316],
+				"FStartPoint": [[349,
+				1216],
+				349,
+				1216],
+				"f_ShapeClassName": "friend",
+				"f_Name": "friend1",
+				"f_UID": [1],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 3,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 4,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[759,
+				291],
+				759,
+				291],
+				"FStartPoint": [[659,
+				191],
+				659,
+				191],
+				"f_ShapeClassName": "friend",
+				"f_Name": "friend2",
+				"f_UID": [2],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 5,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 6,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[496,
+				1781],
+				496,
+				1781],
+				"FStartPoint": [[396,
+				1681],
+				396,
+				1681],
+				"f_ShapeClassName": "friend",
+				"f_Name": "friend3",
+				"f_UID": [3],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 7,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 8,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[837,
+				1555],
+				837,
+				1555],
+				"FStartPoint": [[737,
+				1455],
+				737,
+				1455],
+				"f_ShapeClassName": "friend",
+				"f_Name": "friend4",
+				"f_UID": [4],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 9,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 10,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[186,
+				1137],
+				186,
+				1137],
+				"FStartPoint": [[86,
+				1037],
+				86,
+				1037],
+				"f_ShapeClassName": "friend",
+				"f_Name": "friend5",
+				"f_UID": [5],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 11,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 12,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[246,
+				694],
+				246,
+				694],
+				"FStartPoint": [[146,
+				594],
+				146,
+				594],
+				"f_ShapeClassName": "friend",
+				"f_Name": "friend6",
+				"f_UID": [6],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 13,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		}]
+	}
+}

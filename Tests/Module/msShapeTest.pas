@@ -40,6 +40,7 @@ type
   protected
    procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
    procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); virtual;
+   procedure ModifyDiagramm(const aDiagramm: ImsDiagramm); virtual;
    procedure SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm; aSaveTo: TmsDiagrammSaveTo);
    procedure SetUp; override;
    function ShapesCount: Integer;
@@ -68,6 +69,7 @@ type
    function GenerateUID(const aShape: ImsShape): TmsShapeUID;
    function pm_GetCurrentDiagramms: ImsDiagrammsList;
    procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
+   procedure AddConnectorsToDiagramm(const aDiagramm: ImsDiagramm);
   public
    class procedure CheckShapes(aCheck: TmsShapeClassCheck);
    class function Create(const aContext: TmsShapeTestContext): ITest;
@@ -99,6 +101,12 @@ type
     procedure TestDiagrammName;
   end;//TmsShapeTest
 
+  TmsShapeWithConnectorTest = class(TmsCustomShapeTest)
+  protected
+   procedure TransformContext(var theContext: TmsShapeTestContext); override;
+   procedure ModifyDiagramm(const aDiagramm: ImsDiagramm); override;
+  end;//TmsShapeWithConnectorTest
+
 implementation
 
  uses
@@ -117,7 +125,9 @@ implementation
   msTestConstants,
   msShapeCreator,
   msCompletedShapeCreator,
-  FMX.DUnit.msLog
+  FMX.DUnit.msLog,
+  Generics.Collections,
+  msConnector
   ;
 
 // TmsShapeTestPrim
@@ -208,6 +218,11 @@ begin
  end;//try..finally
 end;
 
+procedure TmsShapeTestPrim.ModifyDiagramm(const aDiagramm: ImsDiagramm);
+begin
+ // - ничего не делаем
+end;
+
 procedure TmsShapeTestPrim.CreateDiagrammWithShapeAndSaveAndCheck;
 begin
  CreateDiagrammAndCheck(
@@ -228,6 +243,7 @@ begin
     )
     .AddNewDiagramm;
 
+   ModifyDiagramm(aDiagramm);
    SaveDiagrammAndCheck(aDiagramm, SaveDiagramm);
   end
   , f_Context.rDiagrammName
@@ -327,6 +343,53 @@ begin
  Assert(false);
 end;
 
+procedure TmsShapeTestPrim.AddConnectorsToDiagramm(const aDiagramm: ImsDiagramm);
+type
+ TmsShapeList = TList<ImsShape>;
+const
+ cDelta = 10{20};
+var
+ l_PrevShape : ImsShape;
+ l_Shape : ImsShape;
+ l_A : TPointF;
+ l_B : TPointF;
+ l_Connector : ImsShape;
+ l_Delta: Extended;
+ l_List : TmsShapeList;
+ l_R : TRectF;
+begin
+ l_PrevShape := nil;
+ l_List := TmsShapeList.Create;
+ try
+  for l_Shape in aDiagramm do
+  begin
+   if (l_PrevShape <> nil) then
+   begin
+    // тут надо будет коннектор создать
+    l_R := l_PrevShape.DrawBounds;
+    l_Delta := Min((l_R.Width - 1) / 2, Min((l_R.Height - 1) / 2, cDelta));
+    l_A := l_PrevShape.StartPoint + TPointF.Create(l_Delta, -l_Delta);
+    l_R := l_Shape.DrawBounds;
+    l_Delta := Min((l_R.Width - 1) / 2, Min((l_R.Height - 1) / 2, cDelta));
+    l_B := l_Shape.StartPoint + TPointF.Create(-l_Delta, l_Delta);
+    l_Connector := TmsConnector.CreateCompleted(l_A, l_B, aDiagramm.ShapesController, Self);
+    l_List.Add(l_Connector);
+    //aDiagramm.AddShape(l_Connector);
+    l_Connector := nil;
+    //l_PrevShape := l_Shape;
+    l_PrevShape := nil;
+   end//l_PrevShape <> nil
+   else
+    l_PrevShape := l_Shape;
+  end;//for l_Shape
+
+  for l_Shape in l_List do
+   aDiagramm.AddShape(l_Shape);
+ finally
+  FreeAndNil(l_List);
+ end;//try..finally
+end;
+
 class function TmsShapeTestPrim.Create(const aContext: TmsShapeTestContext): ITest;
 begin
  Result := CreateInner(aContext);
@@ -409,7 +472,7 @@ var
 begin
  l_Diagramms := TmsDiagramms.Create;
  try
-  l_Diagramms.AddDiagramm(aDiagramm);
+  l_Diagramms.Add(aDiagramm);
   l_Diagramms.SaveTo(aFileName);
  finally
   l_Diagramms := nil;
@@ -432,6 +495,21 @@ begin
  finally
   l_Diagramms := nil;
  end;//try..finally
+end;
+
+// TmsShapeWithConnectorTest
+
+procedure TmsShapeWithConnectorTest.TransformContext(var theContext: TmsShapeTestContext);
+begin
+ inherited;
+ theContext.rShapesCount := Min(theContext.rShapesCount, 6);
+end;
+
+procedure TmsShapeWithConnectorTest.ModifyDiagramm(const aDiagramm: ImsDiagramm);
+begin
+ inherited;
+ if not f_Context.ShapeClass.IsLineLike then
+  AddConnectorsToDiagramm(aDiagramm);
 end;
 
 end.

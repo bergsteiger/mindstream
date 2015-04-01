@@ -19,11 +19,11 @@ type
  private
   constructor CreatePrim;
  protected
-  procedure DiagrammAdded(const aDiagramm: ImsDiagramm); override;
   procedure Serialize;
   procedure DeSerialize;
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
+  procedure Cleanup; override;
  public
   class function Create: ImsDiagramms;
   procedure Assign(anOther: TmsDiagramms);
@@ -42,6 +42,12 @@ uses
 
 // TmsDiagramms
 
+procedure TmsDiagramms.Cleanup;
+begin
+ // - перекрыто чисто для отладки
+ inherited;
+end;
+
 class function TmsDiagramms.Create: ImsDiagramms;
 begin
  Result := CreatePrim;
@@ -50,11 +56,6 @@ end;
 constructor TmsDiagramms.CreatePrim;
 begin
  inherited Create;
-end;
-
-procedure TmsDiagramms.DiagrammAdded(const aDiagramm: ImsDiagramm);
-begin
- inherited;
 end;
 
 const

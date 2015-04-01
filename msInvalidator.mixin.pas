@@ -1,18 +1,18 @@
-﻿{$IfNDef TmsIvalidator_intf}
+﻿{$IfNDef TmsInvalidator_intf}
 
 // interface
 
-{$Define TmsIvalidator_intf}
+{$Define TmsInvalidator_intf}
 
 // uses
  msDiagramm
 
-{$Else TmsIvalidator_intf}
+{$Else TmsInvalidator_intf}
 
 {$IfNDef TmsMixIn_intf}
 // http://programmingmindstream.blogspot.ru/2014/12/generic-2.html
 
- TmsIvalidator = class abstract(TmsIvalidatorParent, ImsIvalidator)
+ TmsInvalidator = class abstract(TmsInvalidatorParent, ImsInvalidator)
  protected
   procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
   procedure DiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);
@@ -21,7 +21,7 @@
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); virtual; abstract;
   procedure InstanceAllocated; override;
   procedure InstanceWillBeDestroyed; override;
- end;//TmsIvalidator
+ end;//TmsInvalidator
 
 {$Define TmsMixIn_intf}
 
@@ -29,40 +29,40 @@
 
 // implementation
 
-{$IfNDef TmsIvalidator_impl}
+{$IfNDef TmsInvalidator_impl}
 
 // uses
  msInvalidators
 
-{$Define TmsIvalidator_impl}
+{$Define TmsInvalidator_impl}
 
-{$Else TmsIvalidator_impl}
+{$Else TmsInvalidator_impl}
 
-// TmsIvalidator
+// TmsInvalidator
 
-procedure TmsIvalidator.InvalidateDiagramm(const aDiagramm: ImsDiagramm);
+procedure TmsInvalidator.InvalidateDiagramm(const aDiagramm: ImsDiagramm);
 begin
  DoInvalidateDiagramm(aDiagramm);
 end;
 
-procedure TmsIvalidator.DiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);
+procedure TmsInvalidator.DiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);
 begin
  DoDiagrammAdded(aDiagramms, aDiagramm);
 end;
 
-procedure TmsIvalidator.InstanceAllocated;
+procedure TmsInvalidator.InstanceAllocated;
 begin
  inherited;
  TmsInvalidators.Subscribe(Self);
 end;
 
-procedure TmsIvalidator.InstanceWillBeDestroyed;
+procedure TmsInvalidator.InstanceWillBeDestroyed;
 begin
  TmsInvalidators.UnSubscribe(Self);
  inherited;
 end;
 
-{$EndIf TmsIvalidator_impl}
+{$EndIf TmsInvalidator_impl}
 
 {$EndIf TmsMixIn_intf}
-{$EndIf TmsIvalidator_intf}
+{$EndIf TmsInvalidator_intf}

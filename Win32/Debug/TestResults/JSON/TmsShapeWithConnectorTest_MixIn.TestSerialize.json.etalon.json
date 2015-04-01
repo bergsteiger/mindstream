@@ -1,0 +1,193 @@
+{
+	"type": "msDiagramm.TmsDiagramm",
+	"id": 1,
+	"fields": {
+		"fName": "Диаграмма №7",
+		"f_Items": [{
+			"type": "msRectangle.TmsRectangle",
+			"id": 2,
+			"fields": {
+				"FStartPoint": [[825,
+				468],
+				825,
+				468],
+				"f_ShapeClassName": "MixIn",
+				"f_Name": "MixIn1",
+				"f_UID": [1],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 3,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msRectangle.TmsRectangle",
+			"id": 4,
+			"fields": {
+				"FStartPoint": [[89,
+				1329],
+				89,
+				1329],
+				"f_ShapeClassName": "MixIn",
+				"f_Name": "MixIn2",
+				"f_UID": [2],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 5,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msRectangle.TmsRectangle",
+			"id": 6,
+			"fields": {
+				"FStartPoint": [[418,
+				1548],
+				418,
+				1548],
+				"f_ShapeClassName": "MixIn",
+				"f_Name": "MixIn3",
+				"f_UID": [3],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 7,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msRectangle.TmsRectangle",
+			"id": 8,
+			"fields": {
+				"FStartPoint": [[711,
+				1109],
+				711,
+				1109],
+				"f_ShapeClassName": "MixIn",
+				"f_Name": "MixIn4",
+				"f_UID": [4],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 9,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msRectangle.TmsRectangle",
+			"id": 10,
+			"fields": {
+				"FStartPoint": [[629,
+				1807],
+				629,
+				1807],
+				"f_ShapeClassName": "MixIn",
+				"f_Name": "MixIn5",
+				"f_UID": [5],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 11,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msRectangle.TmsRectangle",
+			"id": 12,
+			"fields": {
+				"FStartPoint": [[102,
+				90],
+				102,
+				90],
+				"f_ShapeClassName": "MixIn",
+				"f_Name": "MixIn6",
+				"f_UID": [6],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 13,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 14,
+			"fields": {
+				"f_UIDLeft": [1],
+				"f_UIDRight": [2],
+				"f_FinishPoint": [[79,
+				1339],
+				79,
+				1339],
+				"FStartPoint": [[835,
+				458],
+				835,
+				458],
+				"f_ShapeClassName": "Connector",
+				"f_Name": "Connector7",
+				"f_UID": [7],
+				"f_Items": []
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 15,
+			"fields": {
+				"f_UIDLeft": [3],
+				"f_UIDRight": [4],
+				"f_FinishPoint": [[701,
+				1119],
+				701,
+				1119],
+				"FStartPoint": [[428,
+				1538],
+				428,
+				1538],
+				"f_ShapeClassName": "Connector",
+				"f_Name": "Connector7",
+				"f_UID": [8],
+				"f_Items": []
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 16,
+			"fields": {
+				"f_UIDLeft": [5],
+				"f_UIDRight": [6],
+				"f_FinishPoint": [[92,
+				100],
+				92,
+				100],
+				"FStartPoint": [[639,
+				1797],
+				639,
+				1797],
+				"f_ShapeClassName": "Connector",
+				"f_Name": "Connector7",
+				"f_UID": [9],
+				"f_Items": []
+			}
+		}]
+	}
+}

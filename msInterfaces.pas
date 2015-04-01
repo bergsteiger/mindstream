@@ -114,7 +114,7 @@ type
   function GetEnumerator: TmsDiagrammsEnumerator;
   function IndexOf(const anItem: ImsDiagramm): Integer;
   function AddNewDiagramm: ImsDiagramm;
-  procedure AddDiagramm(const aDiagramm: ImsDiagramm);
+  procedure Add(const aDiagramm: ImsDiagramm);
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
   function FirstDiagramm: ImsDiagramm;
   procedure DiagrammsForToolbarToList(aList: TStrings);
@@ -146,7 +146,12 @@ type
 
  TRectF = System.Types.TRectF;
 
- TmsShapeUID = Int64;
+ TmsShapeUID = record
+  rValue: Int64;
+  public
+   class operator Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
+   class operator Implicit(aValue: Int64): TmsShapeUID;
+ end;//TmsShapeUID
 
  ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
@@ -294,10 +299,10 @@ type
   procedure DeSerialize;
  end;//ImsDiagramms
 
- ImsIvalidator = interface
+ ImsInvalidator = interface
   procedure InvalidateDiagramm(const aDiagramm: ImsDiagramm);
   procedure DiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);
- end;//ImsIvalidator
+ end;//ImsInvalidator
 
  ImsDiagrammsController = interface
   procedure Clear;
@@ -432,6 +437,18 @@ end;
 class operator TmsShapeClassName.Equal(const A: TmsShapeClassName; const B: TmsShapeClassName): Boolean;
 begin
  Result := (A.rValue = B.rValue);
+end;
+
+// TmsShapeUID
+
+class operator TmsShapeUID.Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
+begin
+ Result.rValue := anUID.rValue + aDelta;
+end;
+
+class operator TmsShapeUID.Implicit(aValue: Int64): TmsShapeUID;
+begin
+ Result.rValue := aValue;
 end;
 
 end.

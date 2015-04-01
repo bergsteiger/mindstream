@@ -7,8 +7,7 @@ uses
  Generics.Collections,
  msInterfaces,
  msShape,
- msPointlessShape,
- msShapesList
+ msPointlessShape
  ;
 
 type

@@ -1,0 +1,169 @@
+{
+	"type": "msDiagramm.TmsDiagramm",
+	"id": 1,
+	"fields": {
+		"fName": "Диаграмма №2",
+		"f_Items": [{
+			"type": "msConnector.TmsConnector",
+			"id": 2,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[168,
+				1299],
+				168,
+				1299],
+				"FStartPoint": [[68,
+				1199],
+				68,
+				1199],
+				"f_ShapeClassName": "Realization",
+				"f_Name": "Realization1",
+				"f_UID": [1],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 3,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 4,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[439,
+				711],
+				439,
+				711],
+				"FStartPoint": [[339,
+				611],
+				339,
+				611],
+				"f_ShapeClassName": "Realization",
+				"f_Name": "Realization2",
+				"f_UID": [2],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 5,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 6,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[1055,
+				174],
+				1055,
+				174],
+				"FStartPoint": [[955,
+				74],
+				955,
+				74],
+				"f_ShapeClassName": "Realization",
+				"f_Name": "Realization3",
+				"f_UID": [3],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 7,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 8,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[550,
+				304],
+				550,
+				304],
+				"FStartPoint": [[450,
+				204],
+				450,
+				204],
+				"f_ShapeClassName": "Realization",
+				"f_Name": "Realization4",
+				"f_UID": [4],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 9,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 10,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[378,
+				2003],
+				378,
+				2003],
+				"FStartPoint": [[278,
+				1903],
+				278,
+				1903],
+				"f_ShapeClassName": "Realization",
+				"f_Name": "Realization5",
+				"f_UID": [5],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 11,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 12,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[621,
+				2039],
+				621,
+				2039],
+				"FStartPoint": [[521,
+				1939],
+				521,
+				1939],
+				"f_ShapeClassName": "Realization",
+				"f_Name": "Realization6",
+				"f_UID": [6],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 13,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		}]
+	}
+}
