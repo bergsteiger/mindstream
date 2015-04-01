@@ -72,20 +72,10 @@ begin
  Self.Add(Result);
 end;
 
-type
- TInterfacedObjectFriend = class(TInterfacedObject)
- end;//TInterfacedObjectFriend
-
 procedure TmsDiagrammsList.ItemAdded(const aDiagramm: ImsDiagramm);
-var
- l_C : Integer;
 begin
  inherited;
- l_C := Self._AddRef;
- Assert(l_C > 0);
  TmsInvalidators.DiagrammAdded(Self, aDiagramm);
- if (l_C > 1) then
-  TInterfacedObjectFriend(Self)._Release;
 end;
 
 function TmsDiagrammsList.SelectDiagramm(const aDiagrammName: String): ImsDiagramm;

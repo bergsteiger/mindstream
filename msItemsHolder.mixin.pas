@@ -200,10 +200,20 @@ procedure TmsItemsHolder.ItemAdded(const anItem: TmsItem);
 begin
 end;
 
+type
+ TInterfacedObjectFriend = class(TInterfacedObject)
+ end;//TInterfacedObjectFriend
+
 procedure TmsItemsHolder.Add(const anItem: TmsItem);
+var
+ l_C : Integer;
 begin
  _Items.Add(anItem);
+ l_C := Self._AddRef;
+ Assert(l_C > 0);
  ItemAdded(anItem);
+ if (l_C > 1) then
+  TInterfacedObjectFriend(Self)._Release;
 end;
 
 {$EndIf TmsItemsHolder_uses_impl}
