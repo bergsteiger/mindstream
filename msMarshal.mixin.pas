@@ -59,13 +59,17 @@ begin
   try
    aRessurected.Assign(l_D);
   finally
+//   FreeAndNil(l_D)
    if not (l_D Is TInterfacedObject) then
     FreeAndNil(l_D)
    else
+   begin
     while true do
     // - раз мы выше звали FreeAndNil для TInterfacedObject, то надо "убить его до конца"
-     if (TInterfacedObjectFriend(l_D)._Release = 0) then
+     if (TInterfacedObjectFriend(l_D)._Release <= 0) then
       break;
+    //FreeAndNil(l_D);
+   end;//else
   end;//try..finally
  finally
   FreeAndNil(l_StringList);

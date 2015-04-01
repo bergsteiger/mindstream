@@ -23,6 +23,7 @@ type
   procedure DeSerialize;
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
+  procedure Cleanup; override;
  public
   class function Create: ImsDiagramms;
   procedure Assign(anOther: TmsDiagramms);
@@ -40,6 +41,12 @@ uses
  ;
 
 // TmsDiagramms
+
+procedure TmsDiagramms.Cleanup;
+begin
+ // - перекрыто чисто для отладки
+ inherited;
+end;
 
 class function TmsDiagramms.Create: ImsDiagramms;
 begin
