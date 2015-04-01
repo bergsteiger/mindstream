@@ -21,7 +21,7 @@
  // - шаблонизируем, ибо мы скоро будем сериализовать и другие классы.
  public
   class procedure DeSerialize(const aFileName: string;
-                              const aRessurected: TClassToSerialize);
+                              const anObjToAssign: TClassToSerialize);
  end;//TmsMarshal
 
 {$Else TmsMarshal}
@@ -42,29 +42,29 @@
 // TmsMarshal
 
 class procedure TmsMarshal.DeSerialize(const aFileName: string;
-                                       const aRessurected: TClassToSerialize);
+                                       const anObjToAssign: TClassToSerialize);
 var
  l_StringList: TmsStringList;
- l_D : TClassToSerialize;
+ l_Ressurected : TClassToSerialize;
  l_I : IUnknown;
 begin
  l_StringList := TmsStringList.Create;
  try
   l_StringList.LoadFromFile(aFileName);
-  l_D := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text)) As TClassToSerialize;
+  l_Ressurected := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text)) As TClassToSerialize;
   try
-   aRessurected.Assign(l_D);
+   anObjToAssign.Assign(l_Ressurected);
   finally
-//   FreeAndNil(l_D);
-   if not (l_D Is TInterfacedObject) then
-    FreeAndNil(l_D)
+//   FreeAndNil(l_Ressurected);
+   if not (l_Ressurected Is TInterfacedObject) then
+    FreeAndNil(l_Ressurected)
    else
    begin
     while true do
     // - раз мы выше звали FreeAndNil для TInterfacedObject, то надо "убить его до конца"
-     if (IUnknown(TInterfacedObject(l_D))._Release <= 0) then
+     if (IUnknown(TInterfacedObject(l_Ressurected))._Release <= 0) then
       break;
-    //FreeAndNil(l_D);
+    //FreeAndNil(l_Ressurected);
    end;//else
   end;//try..finally
  finally
