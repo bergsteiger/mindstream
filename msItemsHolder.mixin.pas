@@ -174,7 +174,7 @@ begin
       if Supports(l_Object, TmsItem, l_ItemI) then
       begin
        l_C := l_ItemI._AddRef;
-//       Assert(l_C > 1);
+       Assert(l_C > 1);
        l_Holder.Add(l_ItemI);
        l_C := l_ItemI._Release;
        l_ItemI := nil;
