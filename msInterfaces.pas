@@ -146,7 +146,12 @@ type
 
  TRectF = System.Types.TRectF;
 
- TmsShapeUID = Int64;
+ TmsShapeUID = record
+  rValue: Int64;
+  public
+   class operator Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
+   class operator Implicit(aValue: Int64): TmsShapeUID;
+ end;//TmsShapeUID
 
  ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
@@ -432,6 +437,18 @@ end;
 class operator TmsShapeClassName.Equal(const A: TmsShapeClassName; const B: TmsShapeClassName): Boolean;
 begin
  Result := (A.rValue = B.rValue);
+end;
+
+// TmsShapeUID
+
+class operator TmsShapeUID.Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
+begin
+ Result.rValue := anUID.rValue + aDelta;
+end;
+
+class operator TmsShapeUID.Implicit(aValue: Int64): TmsShapeUID;
+begin
+ Result.rValue := aValue;
 end;
 
 end.
