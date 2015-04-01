@@ -41,10 +41,6 @@
 
 // TmsMarshal
 
-type
- TInterfacedObjectFriend = class(TInterfacedObject)
- end;//TInterfacedObjectFriend
-
 class procedure TmsMarshal.DeSerialize(const aFileName: string;
                                        const aRessurected: TClassToSerialize);
 var
@@ -66,7 +62,7 @@ begin
    begin
     while true do
     // - раз мы выше звали FreeAndNil для TInterfacedObject, то надо "убить его до конца"
-     if (TInterfacedObjectFriend(l_D)._Release <= 0) then
+     if (IUnknown(TInterfacedObject(l_D))._Release <= 0) then
       break;
     //FreeAndNil(l_D);
    end;//else
