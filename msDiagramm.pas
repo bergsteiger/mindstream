@@ -59,6 +59,7 @@ type
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
   procedure Cleanup; override;
+  procedure ItemAdded(const anItem: ImsShape); override;
  public
   class function Create(const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
@@ -101,6 +102,11 @@ uses
 procedure TmsDiagramm.Cleanup;
 begin
  // - перекрыто чисто для отладки
+ inherited;
+end;
+
+procedure TmsDiagramm.ItemAdded(const anItem: ImsShape);
+begin
  inherited;
 end;
 
