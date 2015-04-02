@@ -35,7 +35,7 @@ type
 
  TmsWeakProxyShape = class(TmsProxyShapePrim)
  private
-  f_Shape : Pointer;
+  f_Shape : TmsWeakShapeRef;
  protected
   function ShapeToShow: ImsShape; override;
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aShape: ImsShape); reintroduce;
@@ -89,12 +89,12 @@ constructor TmsWeakProxyShape.CreateInner(const aShapeClass : ImsShapeClass; con
 begin
  Assert(aShape <> nil, 'Пустую группу примитивов глупо создавать');
  inherited CreateInner(aShapeClass, TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
- f_Shape := Pointer(aShape);
+ f_Shape := aShape;
 end;
 
 function TmsWeakProxyShape.ShapeToShow: ImsShape;
 begin
- Result := ImsShape(f_Shape);
+ Result := f_Shape;
 end;
 
 procedure TmsWeakProxyShape.Cleanup;
