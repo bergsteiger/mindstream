@@ -47,7 +47,7 @@ class procedure TmsMarshal.DeSerialize(const aFileName: string;
 var
  l_StringList: TmsStringList;
  l_Ressurected : TClassToSerialize;
- l_I : IUnknown;
+// l_I : IUnknown;
 begin
  l_StringList := TmsStringList.Create;
  try
