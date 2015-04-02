@@ -334,6 +334,8 @@ type
   function As_ImsDiagrammsHolder: ImsDiagrammsHolder;
  end;//ImsDiagrammsController
 
+ TmsWeakInvalidatorRef = TmsWeakInterfaceRef<ImsInvalidator>;
+
 implementation
 
 uses
