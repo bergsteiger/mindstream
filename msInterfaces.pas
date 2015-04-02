@@ -177,7 +177,20 @@ type
   function Name: String;
  end;//ImsShape
 
- TmsWeakShapeRef = record
+ TmsWeakInterfaceRef<T> = record
+ // Слабая ссылка на интерфейс
+  rShape : Pointer;
+  constructor Create(const aShape: T);
+  function AsShape: ImsShape;
+  class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: TmsWeakInterfaceRef<T>): Boolean;
+  class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: T): Boolean;
+  class operator Implicit(const aShape: T): TmsWeakInterfaceRef<T>;
+ end;//TmsWeakInterfaceRef
+
+ TmsWeakShapeRef = TmsWeakInterfaceRef<ImsShape>;
+
+ // Слабая ссылка на ImsShape
+(* TmsWeakShapeRef = record
  // Слабая ссылка на ImsShape
   rShape : Pointer;
   constructor Create(const aShape: ImsShape);
@@ -185,7 +198,7 @@ type
   class operator Equal(const A: TmsWeakShapeRef; const B: TmsWeakShapeRef): Boolean;
   class operator Equal(const A: TmsWeakShapeRef; const B: ImsShape): Boolean;
   class operator Implicit(const aShape: ImsShape): TmsWeakShapeRef;
- end;//TmsWeakShapeRef
+ end;//TmsWeakShapeRef*)
 
  TmsShapesEnumerator = TEnumerator<ImsShape>;
 
@@ -461,7 +474,39 @@ begin
  Result.rValue := aValue;
 end;
 
-// TmsWeakShapeRef
+// TmsWeakInterfaceRef<T>
+
+constructor TmsWeakInterfaceRef<T>.Create(const aShape: T);
+begin
+ Assert(SizeOf(T) = SizeOf(IUnknown));
+ Move(aShape, Self.rShape, SizeOf(T));
+end;
+
+function TmsWeakInterfaceRef<T>.AsShape: ImsShape;
+begin
+ Result := ImsShape(Self.rShape);
+end;
+
+class operator TmsWeakInterfaceRef<T>.Equal(const A: TmsWeakInterfaceRef<T>; const B: TmsWeakInterfaceRef<T>): Boolean;
+begin
+ Result := (A.rShape = B.rShape);
+end;
+
+class operator TmsWeakInterfaceRef<T>.Equal(const A: TmsWeakInterfaceRef<T>; const B: T): Boolean;
+var
+ l_P : Pointer;
+begin
+ Assert(SizeOf(T) = SizeOf(Pointer));
+ Move(B, l_P, SizeOf(T));
+ Result := (A.rShape = l_P);
+end;
+
+class operator TmsWeakInterfaceRef<T>.Implicit(const aShape: T): TmsWeakInterfaceRef<T>;
+begin
+ Result := TmsWeakInterfaceRef<T>.Create(aShape);
+end;
+
+(*// TmsWeakShapeRef
 
 constructor TmsWeakShapeRef.Create(const aShape: ImsShape);
 begin
@@ -486,6 +531,6 @@ end;
 class operator TmsWeakShapeRef.Implicit(const aShape: ImsShape): TmsWeakShapeRef;
 begin
  Result := TmsWeakShapeRef.Create(aShape);
-end;
+end;*)
 
 end.
