@@ -3,6 +3,8 @@ unit msTotalShapesList;
 interface
 
 uses
+ Generics.Collections,
+
  msInterfaces
  ;
 
@@ -10,6 +12,7 @@ type
  TmsTotalShapesList = class
   public
    class procedure ShapeAdded(const aShape: ImsShape);
+   class procedure ShapeDestroyed(const aShape: ImsShape);
  end;//TmsTotalShapesList
 
 implementation
@@ -17,6 +20,10 @@ implementation
 // TmsTotalShapesList
 
 class procedure TmsTotalShapesList.ShapeAdded(const aShape: ImsShape);
+begin
+end;
+
+class procedure TmsTotalShapesList.ShapeDestroyed(const aShape: ImsShape);
 begin
 end;
 
