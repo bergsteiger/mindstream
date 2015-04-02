@@ -74,7 +74,7 @@ type
    class procedure CheckShapes(aCheck: TmsShapeClassCheck);
    class function Create(const aContext: TmsShapeTestContext): ITest;
    destructor Destroy; override;
-   class procedure AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda); virtual;
+   class procedure AddTest(const aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda); virtual;
   end;//TmsShapeTestPrim
 
   RmsShapeTest = class of TmsShapeTestPrim;
@@ -401,7 +401,7 @@ begin
  inherited;
 end;
 
-class procedure TmsShapeTestPrim.AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda);
+class procedure TmsShapeTestPrim.AddTest(const aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda);
 begin
  aLambda(Self.Create(aContext));
 end;

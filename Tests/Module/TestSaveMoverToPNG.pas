@@ -26,7 +26,7 @@ type
    function TestNamePrefix: String; override;
    constructor CreateInner(aButton : TmsFloatingButton; const aContext: TmsShapeTestContext);
   public
-   class procedure AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda); override;
+   class procedure AddTest(const aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda); override;
    class function Create(aButton : TmsFloatingButton; const aContext: TmsShapeTestContext): ITest;
   end;//TmsMoverFloatingButtonsTest
 
@@ -113,7 +113,7 @@ begin
  Result := GetEnumName(TypeInfo(TmsFloatingButton), Ord(f_Button)) + '_' +  inherited;
 end;
 
-class procedure TmsMoverFloatingButtonsTest.AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda);
+class procedure TmsMoverFloatingButtonsTest.AddTest(const aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda);
 var
  l_Button : TmsFloatingButton;
 begin
