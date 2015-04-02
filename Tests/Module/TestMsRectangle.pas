@@ -43,7 +43,7 @@ uses
 
 procedure TestTmsRectangle.SetUp;
 begin
-  FmsRectangle := TmsShapeCreator.Create(TmsRectangle).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+  FmsRectangle := TmsRectangle.MC.CreateShape(TPointF.Create(0, 0));
 end;
 
 procedure TestTmsRectangle.TearDown;
@@ -53,12 +53,9 @@ end;
 
 procedure TestTmsRectangle.TestContainsPt;
 var
-  ReturnValue: Boolean;
-  aPoint: TPointF;
+ l_HitShape: ImsShape;
 begin
-  // TODO: Setup method call parameters
-  ReturnValue := FmsRectangle.ContainsPt(aPoint);
-  // TODO: Validate method results
+ CheckTrue(FmsRectangle.HitTest(TPointF.Create(0, 0), l_HitShape));
 end;
 
 initialization

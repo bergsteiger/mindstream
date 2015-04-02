@@ -1,0 +1,169 @@
+{
+	"type": "msDiagramm.TmsDiagramm",
+	"id": 1,
+	"fields": {
+		"fName": "Диаграмма №5",
+		"f_Items": [{
+			"type": "msConnector.TmsConnector",
+			"id": 2,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[339,
+				1312],
+				339,
+				1312],
+				"FStartPoint": [[239,
+				1212],
+				239,
+				1212],
+				"f_ShapeClassName": "Generalization",
+				"f_Name": "Generalization1",
+				"f_UID": [1],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 3,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 4,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[453,
+				1392],
+				453,
+				1392],
+				"FStartPoint": [[353,
+				1292],
+				353,
+				1292],
+				"f_ShapeClassName": "Generalization",
+				"f_Name": "Generalization2",
+				"f_UID": [2],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 5,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 6,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[166,
+				320],
+				166,
+				320],
+				"FStartPoint": [[66,
+				220],
+				66,
+				220],
+				"f_ShapeClassName": "Generalization",
+				"f_Name": "Generalization3",
+				"f_UID": [3],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 7,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 8,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[226,
+				1675],
+				226,
+				1675],
+				"FStartPoint": [[126,
+				1575],
+				126,
+				1575],
+				"f_ShapeClassName": "Generalization",
+				"f_Name": "Generalization4",
+				"f_UID": [4],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 9,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 10,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[404,
+				1324],
+				404,
+				1324],
+				"FStartPoint": [[304,
+				1224],
+				304,
+				1224],
+				"f_ShapeClassName": "Generalization",
+				"f_Name": "Generalization5",
+				"f_UID": [5],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 11,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 12,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[585,
+				729],
+				585,
+				729],
+				"FStartPoint": [[485,
+				629],
+				485,
+				629],
+				"f_ShapeClassName": "Generalization",
+				"f_Name": "Generalization6",
+				"f_UID": [6],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 13,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		}]
+	}
+}

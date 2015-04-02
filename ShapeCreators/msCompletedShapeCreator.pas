@@ -3,6 +3,8 @@ unit msCompletedShapeCreator;
 interface
 
 uses
+ System.Types,
+
  msShapeCreator,
  msInterfaces,
  msInterfacedRefcounted,
@@ -17,7 +19,8 @@ type
   // - класс примитивов для создания
   constructor CreatePrim(const aShapeClass: MCmsShape);
  protected
-  function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; virtual;
+  function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; overload; virtual;
+  function CreateShape(const aStartPoint: TPointF): ImsShape; overload;
   procedure Cleanup; override;
  protected
   property ShapeClass : MCmsShape
@@ -30,7 +33,6 @@ type
 implementation
 
 uses
-  System.Types,
   msTool
   ;
 
@@ -65,7 +67,7 @@ begin
  end//ShapeClass.IsTool
  else
  begin
-  Result := ShapeClass.Creator.CreateShape(aContext);
+  Result := ShapeClass.CreateShape(aContext);
   if Result.IsNeedsSecondClick then
   begin
    l_EndPont := aContext.rStartPoint;
@@ -73,6 +75,11 @@ begin
    Result.EndTo(TmsEndShapeContext.Create(l_EndPont, aContext.rShapesController, aContext.rDiagrammsHolder));
   end;//Result.IsNeedsSecondClick
  end;//ShapeClass.IsTool
+end;
+
+function TmsCompletedShapeCreator.CreateShape(const aStartPoint: TPointF): ImsShape;
+begin
+ Result := CreateShape(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
 end;
 
 end.

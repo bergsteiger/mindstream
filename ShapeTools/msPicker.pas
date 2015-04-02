@@ -12,7 +12,7 @@ type
  TmsPicker = class(TmsTool)
   // - утилитный класс для "проваливания" внутрь примитивов
  public
-  class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
+  class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; override;
   class function ButtonShape: ImsShape; override;
  end;//TmsPicker
 
@@ -22,7 +22,7 @@ uses
  msPickerIcon
  ;
 
-class function TmsPicker.Create(const aCtx: TmsMakeShapeContext): ImsShape;
+class function TmsPicker.Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape;
 var
  l_PickedShape : ImsShape;
 begin

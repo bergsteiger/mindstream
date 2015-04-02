@@ -9,7 +9,6 @@ uses
   msRegisteredShapes,
   System.Types,
   System.Classes,
-  msCoreObjects,
   msInterfaces,
   msShapeClassList,
   msLoggedTest
@@ -28,33 +27,54 @@ type
    rShapesCount : Integer;
    rShapeClass: Pointer;
    constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; const aShapeClass: MCmsShape);
+   function ShapeClass: ImsShapeClass;
   end;//TmsShapeTestContext
 
-  TmsShapeTestPrim = class abstract(TmsLoggedTest)
+  TmsAddTestLambda = reference to procedure (ATest: ITest);
+
+  TmsShapeTestPrim = class abstract(TmsLoggedTest, ImsDiagrammsHolder)
   protected
    f_Context : TmsShapeTestContext;
-   f_TestSerializeMethodName : String;
    f_Coords : array of TPoint;
+   f_UID: TmsShapeUID;
   protected
-   class function ComputerName: AnsiString;
-    procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
-    procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); virtual;
-    procedure SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm; aSaveTo: TmsDiagrammSaveTo);
-    procedure SetUp; override;
-    function ShapesCount: Integer;
-    procedure CreateDiagrammWithShapeAndSaveAndCheck;
-    function TestSerializeMethodName: String;
-    procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
-    procedure TestDeSerializeForShapeClass;
-    procedure TestDeSerializeViaShapeCheckForShapeClass;
-    function ShapeClass: MCmsShape;
-    function ContextName: String; override;
-    function InnerFolders: String; override;
-    constructor CreateInner(const aContext: TmsShapeTestContext);
+   procedure CreateDiagrammAndCheck(aCheck : TmsDiagrammCheck; const aName: String);
+   procedure SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm); virtual;
+   procedure ModifyDiagramm(const aDiagramm: ImsDiagramm); virtual;
+   procedure SaveDiagrammAndCheck(const aDiagramm: ImsDiagramm; aSaveTo: TmsDiagrammSaveTo);
+   procedure SetUp; override;
+   function ShapesCount: Integer;
+   procedure CreateDiagrammWithShapeAndSaveAndCheck;
+   function TestSerializeMethodName: String;
+   procedure DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
+   procedure TestDeSerializeForShapeClass;
+   procedure TestDeSerializeViaShapeCheckForShapeClass;
+   function ShapeClass: MCmsShape;
+   function TestNamePrefix: String; virtual;
+   function ContextName: String;
+   function InnerFolders: String; override;
+   procedure TransformContext(var theContext: TmsShapeTestContext); virtual;
+   constructor CreateInner(const aContext: TmsShapeTestContext);
+   // ImsDiagrammsHolder
+   procedure UpToParent;
+   // - сигнализируем о том, что нам надо перейти к –ќƒ»“≈Ћ№— ќ… диаграмме
+   procedure SwapParents;
+   // - сигнализируем о том, что надо ѕќћ≈Ќя“№ местами –ќƒ»“≈Ћ№— »≈ диаграммы
+   procedure Scroll(const aDirection: TPointF);
+                 // ^ - не стесн€йтесь ставить const перед запис€ми.
+                 //  “очнее ставьте ќЅя«ј“≈Ћ№Ќќ !!!2
+   // - скроллинг диаграммы на дельту
+   procedure ResetOrigin;
+   // - восстанавливаем начальную систему координат
+   function GenerateUID(const aShape: ImsShape): TmsShapeUID;
+   function pm_GetCurrentDiagramms: ImsDiagrammsList;
+   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
+   procedure AddConnectorsToDiagramm(const aDiagramm: ImsDiagramm);
   public
-    class procedure CheckShapes(aCheck: TmsShapeClassCheck);
-    class function Create(const aContext: TmsShapeTestContext): ITest;
-    destructor Destroy; override;
+   class procedure CheckShapes(aCheck: TmsShapeClassCheck);
+   class function Create(const aContext: TmsShapeTestContext): ITest;
+   destructor Destroy; override;
+   class procedure AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda); virtual;
   end;//TmsShapeTestPrim
 
   RmsShapeTest = class of TmsShapeTestPrim;
@@ -81,6 +101,12 @@ type
     procedure TestDiagrammName;
   end;//TmsShapeTest
 
+  TmsShapeWithConnectorTest = class(TmsCustomShapeTest)
+  protected
+   procedure TransformContext(var theContext: TmsShapeTestContext); override;
+   procedure ModifyDiagramm(const aDiagramm: ImsDiagramm); override;
+  end;//TmsShapeWithConnectorTest
+
 implementation
 
  uses
@@ -98,19 +124,27 @@ implementation
   msStreamUtils,
   msTestConstants,
   msShapeCreator,
-  msCompletedShapeCreator
+  msCompletedShapeCreator,
+  FMX.DUnit.msLog,
+  Generics.Collections,
+  msConnector
   ;
 
 // TmsShapeTestPrim
 
 function TmsShapeTestPrim.ShapeClass: MCmsShape;
 begin
- Result := MCmsShape(f_Context.rShapeClass);
+ Result := f_Context.ShapeClass;
+end;
+
+function TmsShapeTestPrim.TestNamePrefix: String;
+begin
+ Result := Self.ShapeClass.Name;
 end;
 
 function TmsShapeTestPrim.ContextName: String;
 begin
- Result := '_' + Self.ShapeClass.Name;
+ Result := '_' + TestNamePrefix;
 end;
 
 const
@@ -120,21 +154,6 @@ function TmsShapeTestPrim.InnerFolders: String;
 begin
  Result := c_JSON;
 end;
-
-class function TmsShapeTestPrim.ComputerName: AnsiString;
-//#UC START# *4CA45DD902BD_4B2A11BC0255_var*
-var
- l_CompSize : Integer;
-//#UC END# *4CA45DD902BD_4B2A11BC0255_var*
-begin
-//#UC START# *4CA45DD902BD_4B2A11BC0255_impl*
- l_CompSize := MAX_COMPUTERNAME_LENGTH + 1;
- SetLength(Result, l_CompSize);
-
- Win32Check(GetComputerNameA(PAnsiChar(Result), LongWord(l_CompSize)));
- SetLength(Result, l_CompSize);
-//#UC END# *4CA45DD902BD_4B2A11BC0255_impl*
-end;//TBaseTest.ComputerName
 
 procedure TmsShapeTestPrim.SaveDiagramm(const aFileName: String; const aDiagramm: ImsDiagramm);
 begin
@@ -164,12 +183,18 @@ begin
  rShapeClass := Pointer(aShapeClass);
 end;
 
+function TmsShapeTestContext.ShapeClass: ImsShapeClass;
+begin
+ Result := ImsShapeClass(rShapeClass);
+end;
+
 procedure TmsShapeTestPrim.SetUp;
 var
  l_Index : Integer;
  l_X : Integer;
  l_Y : Integer;
 begin
+ f_UID := 0;
  inherited;
  RandSeed := f_Context.rSeed;
  SetLength(f_Coords, ShapesCount);
@@ -193,6 +218,11 @@ begin
  end;//try..finally
 end;
 
+procedure TmsShapeTestPrim.ModifyDiagramm(const aDiagramm: ImsDiagramm);
+begin
+ // - ничего не делаем
+end;
+
 procedure TmsShapeTestPrim.CreateDiagrammWithShapeAndSaveAndCheck;
 begin
  CreateDiagrammAndCheck(
@@ -201,8 +231,19 @@ begin
    l_P : TPoint;
   begin
    for l_P in f_Coords do
-    aDiagramm.AddShape(TmsCompletedShapeCreator.Create(Self.ShapeClass).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(l_P.X, l_P.Y), nil, nil))).AddNewDiagramm;
+    aDiagramm.AddShape(
+     TmsCompletedShapeCreator.Create(Self.ShapeClass)
+      .CreateShape(
+       TmsMakeShapeContext.Create(
+        TPointF.Create(l_P.X, l_P.Y),
+        aDiagramm.ShapesController,
+        Self
+       )
+      )
+    )
+    .AddNewDiagramm;
 
+   ModifyDiagramm(aDiagramm);
    SaveDiagrammAndCheck(aDiagramm, SaveDiagramm);
   end
   , f_Context.rDiagrammName
@@ -221,7 +262,7 @@ end;
 
 function TmsShapeTestPrim.TestSerializeMethodName: String;
 begin
- Result := f_TestSerializeMethodName + 'TestSerialize';
+ Result := TestNamePrefix + '.' + 'TestSerialize';
 end;
 
 procedure TmsShapeTestPrim.DeserializeDiargammAndCheck(aCheck: TmsDiagrammCheck);
@@ -253,12 +294,100 @@ begin
  TestDeSerializeForShapeClass;
 end;
 
+procedure TmsShapeTestPrim.TransformContext(var theContext: TmsShapeTestContext);
+begin
+end;
+
 constructor TmsShapeTestPrim.CreateInner(const aContext: TmsShapeTestContext);
 begin
  inherited Create(aContext.rMethodName);
  f_Context := aContext;
- FTestName := Self.ShapeClass.Name + '.' + aContext.rMethodName;
- f_TestSerializeMethodName := Self.ShapeClass.Name + '.';
+ TransformContext(f_Context);
+ FTestName := TestNamePrefix + '.' + aContext.rMethodName;
+end;
+
+procedure TmsShapeTestPrim.UpToParent;
+begin
+ Assert(false);
+end;
+
+procedure TmsShapeTestPrim.SwapParents;
+begin
+ Assert(false);
+end;
+
+procedure TmsShapeTestPrim.Scroll(const aDirection: TPointF);
+begin
+ Assert(false);
+end;
+
+procedure TmsShapeTestPrim.ResetOrigin;
+begin
+ Assert(false);
+end;
+
+function TmsShapeTestPrim.GenerateUID(const aShape: ImsShape): TmsShapeUID;
+begin
+ Inc(f_UID);
+ Result := f_UID;
+end;
+
+function TmsShapeTestPrim.pm_GetCurrentDiagramms: ImsDiagrammsList;
+begin
+ Result := nil;
+ Assert(false);
+end;
+
+procedure TmsShapeTestPrim.pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
+begin
+ Assert(false);
+end;
+
+procedure TmsShapeTestPrim.AddConnectorsToDiagramm(const aDiagramm: ImsDiagramm);
+type
+ TmsShapeList = TList<ImsShape>;
+const
+ cDelta = 10{20};
+var
+ l_PrevShape : ImsShape;
+ l_Shape : ImsShape;
+ l_A : TPointF;
+ l_B : TPointF;
+ l_Connector : ImsShape;
+ l_Delta: Extended;
+ l_List : TmsShapeList;
+ l_R : TRectF;
+begin
+ l_PrevShape := nil;
+ l_List := TmsShapeList.Create;
+ try
+  for l_Shape in aDiagramm do
+  begin
+   if (l_PrevShape <> nil) then
+   begin
+    // тут надо будет коннектор создать
+    l_R := l_PrevShape.DrawBounds;
+    l_Delta := Min((l_R.Width - 1) / 2, Min((l_R.Height - 1) / 2, cDelta));
+    l_A := l_PrevShape.StartPoint + TPointF.Create(l_Delta, -l_Delta);
+    l_R := l_Shape.DrawBounds;
+    l_Delta := Min((l_R.Width - 1) / 2, Min((l_R.Height - 1) / 2, cDelta));
+    l_B := l_Shape.StartPoint + TPointF.Create(-l_Delta, l_Delta);
+    l_Connector := TmsConnector.CreateCompleted(l_A, l_B, aDiagramm.ShapesController, Self);
+    l_List.Add(l_Connector);
+    //aDiagramm.AddShape(l_Connector);
+    l_Connector := nil;
+    //l_PrevShape := l_Shape;
+    l_PrevShape := nil;
+   end//l_PrevShape <> nil
+   else
+    l_PrevShape := l_Shape;
+  end;//for l_Shape
+
+  for l_Shape in l_List do
+   aDiagramm.AddShape(l_Shape);
+ finally
+  FreeAndNil(l_List);
+ end;//try..finally
 end;
 
 class function TmsShapeTestPrim.Create(const aContext: TmsShapeTestContext): ITest;
@@ -272,6 +401,11 @@ begin
  inherited;
 end;
 
+class procedure TmsShapeTestPrim.AddTest(aContext: TmsShapeTestContext; aLambda: TmsAddTestLambda);
+begin
+ aLambda(Self.Create(aContext));
+end;
+
 procedure TmsShapeTestPrim.TestDeSerializeViaShapeCheckForShapeClass;
 begin
  DeserializeDiargammAndCheck(
@@ -280,14 +414,14 @@ begin
    l_Shape : ImsShape;
    l_Index : Integer;
   begin
-   Check(aDiagramm.Name = f_Context.rDiagrammName);
-   Check(Length(f_Coords) = aDiagramm.ItemsCount);
+   Check(aDiagramm.Name = f_Context.rDiagrammName, 'Ќе совпадает им€ диаграммы');
+   Check(Length(f_Coords) = aDiagramm.ItemsCount, 'Ќе совпадает число примитивов');
    l_Index := 0;
    for l_Shape in aDiagramm do
    begin
-    Check(Self.ShapeClass.IsOurInstance(l_Shape));
-    Check(l_Shape.StartPoint.X = f_Coords[l_Index].X);
-    Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y);
+    Check(Self.ShapeClass.IsOurInstance(l_Shape), 'Ёто не наш тип примитива');
+    Check(l_Shape.StartPoint.X = f_Coords[l_Index].X, ' оординаты X не совпадают');
+    Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y, ' оординаты Y не совпадают');
     Inc(l_Index);
    end;//for l_Shape
   end
@@ -304,7 +438,7 @@ begin
  OutToFileAndCheck(
   procedure (aLog: TmsLog)
   begin
-   aLog.ToLog(Self.ShapeClass.Name);
+   aLog.ToLog(TestNamePrefix);
   end
  );
 end;
@@ -321,7 +455,7 @@ end;
 
 class procedure TmsShapeTestPrim.CheckShapes(aCheck: TmsShapeClassCheck);
 begin
- TmsRegisteredShapes.IterateShapes(
+ TmsRegisteredShapes.Instance.IterateShapes(
   procedure (const aShapeClass: MCmsShape)
   begin
    if not aShapeClass.IsTool then
@@ -338,7 +472,7 @@ var
 begin
  l_Diagramms := TmsDiagramms.Create;
  try
-  l_Diagramms.AddDiagramm(aDiagramm);
+  l_Diagramms.Add(aDiagramm);
   l_Diagramms.SaveTo(aFileName);
  finally
   l_Diagramms := nil;
@@ -361,6 +495,21 @@ begin
  finally
   l_Diagramms := nil;
  end;//try..finally
+end;
+
+// TmsShapeWithConnectorTest
+
+procedure TmsShapeWithConnectorTest.TransformContext(var theContext: TmsShapeTestContext);
+begin
+ inherited;
+ theContext.rShapesCount := Min(theContext.rShapesCount, 6);
+end;
+
+procedure TmsShapeWithConnectorTest.ModifyDiagramm(const aDiagramm: ImsDiagramm);
+begin
+ inherited;
+ if not f_Context.ShapeClass.IsLineLike then
+  AddConnectorsToDiagramm(aDiagramm);
 end;
 
 end.

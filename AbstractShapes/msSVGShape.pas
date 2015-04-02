@@ -16,8 +16,6 @@ type
  // - базовый класс для реализации SVG объектов
  protected
   function GetPolygon: TPolygon; override; final;
-  function GetPolygonSVG: String; virtual; abstract;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsSVGShape
 
 implementation
@@ -39,7 +37,8 @@ var
 begin
  l_PD := TPathData.Create;
  try
-  l_PD.Data := GetPolygonSVG;
+  Assert(Self.ShapeClass.SVGCode <> '');
+  l_PD.Data := Self.ShapeClass.SVGCode;
   l_PD.FlattenToPolygon(l_PolygonSVG);
   l_R := PolygonBounds(l_PolygonSVG);
 
@@ -53,12 +52,6 @@ begin
  finally
   FreeAndNil(l_PD);
  end;//try..finally
-end;
-
-procedure TmsSVGShape.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- inherited;
- theCtx.rFillColor := TAlphaColorRec.Azure;
 end;
 
 end.

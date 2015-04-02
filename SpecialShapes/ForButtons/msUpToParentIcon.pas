@@ -4,13 +4,14 @@ interface
 
 uses
  msInterfaces,
- msButtonIcon
+ msButtonIcon,
+ msFolderToolIcon
  ;
 
 type
- TmsUpToParentIcon = class(TmsButtonIcon)
+ TmsUpToParentIcon = class(TmsFolderToolIcon)
  public
-  class function Create: ImsShape; override;
+  class function ToolIcon: ImsShape; override;
  end;//TmsUpToParentIcon
 
 implementation
@@ -18,14 +19,15 @@ implementation
 uses
  msUpArrow,
  msFolderIcon,
- msShapesGroup
+ msShapesGroup,
+ System.Types
  ;
 
 // TmsUpToParentIcon
 
-class function TmsUpToParentIcon.Create: ImsShape;
+class function TmsUpToParentIcon.ToolIcon: ImsShape;
 begin
- Result := TmsShapesGroup.Create([TmsFolderIcon.Create, TmsUpArrow.Create]);
+ Result := TmsUpArrow.Create(TPointF.Create(0, -30));
 end;
 
 end.

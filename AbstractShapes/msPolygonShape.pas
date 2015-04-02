@@ -57,7 +57,7 @@ end;
 function TmsPolygonShape.Polygon: TPolygon;
 begin
  Result := GetPolygon;
- Assert(Length(Result) > 3);
+ Assert(Length(Result) >= 3);
 end;
 
 procedure TmsPolygonShape.DoDrawTo(const aCtx: TmsDrawContext);
@@ -65,8 +65,8 @@ var
  l_P : TPolygon;
 begin
  l_P := Polygon;
- aCtx.rCanvas.DrawPolygon(l_P, 1);
- aCtx.rCanvas.FillPolygon(l_P, 0.5);
+ aCtx.rCanvas.DrawPolygon(l_P, aCtx.rLineOpacity);
+ aCtx.rCanvas.FillPolygon(l_P, aCtx.rOpacity);
 end;
 
 function TmsPolygonShape.ContainsPt(const aPoint: TPointF): Boolean;

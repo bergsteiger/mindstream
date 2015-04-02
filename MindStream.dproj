@@ -7,7 +7,7 @@
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
-        <TargetedPlatforms>1</TargetedPlatforms>
+        <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -186,38 +186,20 @@
         <DCCReference Include="uMain.pas">
             <Form>fmMain</Form>
         </DCCReference>
-        <DCCReference Include="FMX.DUnit\u_fmGUITestRunner.pas">
-            <Form>fmGUITestRunner</Form>
-        </DCCReference>
         <DCCReference Include="msDiagramm.pas"/>
         <DCCReference Include="AbstractShapes\msShape.pas"/>
         <DCCReference Include="msRegisteredShapes.pas"/>
         <DCCReference Include="msUtilityShapes.pas"/>
         <DCCReference Include="ConcreteShapes\msLine.pas"/>
         <DCCReference Include="ConcreteShapes\msRectangle.pas"/>
-        <DCCReference Include="SpecialShapes\msPointCircle.pas"/>
         <DCCReference Include="ConcreteShapes\msCircle.pas"/>
-        <DCCReference Include="ConcreteShapes\msRoundedRectangle.pas"/>
-        <DCCReference Include="ConcreteShapes\msUseCaseLikeEllipse.pas"/>
         <DCCReference Include="ConcreteShapes\msTriangle.pas"/>
         <DCCReference Include="msDiagramms.pas"/>
         <DCCReference Include="msDiagrammsController.pas"/>
-        <DCCReference Include="ConcreteShapes\msDashDotLine.pas"/>
-        <DCCReference Include="ConcreteShapes\msDashLine.pas"/>
-        <DCCReference Include="ConcreteShapes\msDotLine.pas"/>
         <DCCReference Include="ConcreteShapes\msLineWithArrow.pas"/>
-        <DCCReference Include="SpecialShapes\msSmallTriangle.pas"/>
         <DCCReference Include="msOurShapes.pas"/>
         <DCCReference Include="ConcreteShapes\msTriangleDirectionRight.pas"/>
         <DCCReference Include="ShapeTools\msMover.pas"/>
-        <DCCReference Include="Tests\Module\FirstTest.pas"/>
-        <DCCReference Include="Tests\Module\TestMsLine.pas"/>
-        <DCCReference Include="Tests\Module\TestMsRectangle.pas"/>
-        <DCCReference Include="Tests\Module\TestMsPointCircle.pas"/>
-        <DCCReference Include="Tests\Module\TestMsCircle.pas"/>
-        <DCCReference Include="Tests\Module\msShapeTest.pas"/>
-        <DCCReference Include="ConcreteShapes\msRedRectangle.pas"/>
-        <DCCReference Include="ConcreteShapes\msGreenRectangle.pas"/>
         <DCCReference Include="msSerializeInterfaces.pas"/>
         <DCCReference Include="ShapeTools\msTool.pas"/>
         <DCCReference Include="Marshal\msDiagrammMarshal.pas"/>
@@ -227,7 +209,6 @@
         <DCCReference Include="Core\msObject.pas"/>
         <DCCReference Include="Core\msInterfacedRefcounted.pas"/>
         <DCCReference Include="Marshal\msMarshalPrim.pas"/>
-        <DCCReference Include="Tests\Module\msShapeTestSuite.pas"/>
         <DCCReference Include="msInvalidators.pas"/>
         <DCCReference Include="msInterfaces.pas"/>
         <DCCReference Include="Core\msStreamUtils.pas"/>
@@ -236,51 +217,120 @@
         <DCCReference Include="ShapeTools\msSwapParents.pas"/>
         <DCCReference Include="ShapeCreators\msShapeCreator.pas"/>
         <DCCReference Include="msFormatter.pas"/>
-        <DCCReference Include="Tests\Module\TestmsJsonFormatter.pas"/>
         <DCCReference Include="msDiagrammStack.pas"/>
-        <DCCReference Include="Tests\Module\TestSaveToPNG.pas"/>
-        <DCCReference Include="Tests\Module\msTestConstants.pas"/>
         <DCCReference Include="ShapeButtons\msShapeButton.pas"/>
         <DCCReference Include="ShapeCreators\msCompletedShapeCreator.pas"/>
         <DCCReference Include="ShapeCreators\msPaletteShapeCreator.pas"/>
         <DCCReference Include="ShapeTools\msNullClickShape.pas"/>
         <DCCReference Include="ShapeTools\PaletteShapes\msPaletteShape.pas"/>
         <DCCReference Include="ShapeTools\msShapeRemover.pas"/>
-        <DCCReference Include="SpecialShapes\ForButtons\msGreenCircle.pas"/>
-        <DCCReference Include="ConcreteShapes\ForButtons\msBlackTriangle.pas"/>
         <DCCReference Include="AbstractShapes\msPolygonShape.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msMoverIcon.pas"/>
+        <DCCReference Include="SpecialShapes\msMoveIcon.pas"/>
         <DCCReference Include="AbstractShapes\msPointedShape.pas"/>
-        <DCCReference Include="SpecialShapes\ForButtons\msUpArrow.pas"/>
-        <DCCReference Include="SpecialShapes\ForButtons\msDownArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msUpArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msDownArrow.pas"/>
         <DCCReference Include="AbstractShapes\msSpecialArrow.pas"/>
-        <DCCReference Include="SpecialShapes\ForButtons\msLeftArrow.pas"/>
-        <DCCReference Include="SpecialShapes\ForButtons\msRightArrow.pas"/>
+        <DCCReference Include="AbstractShapes\msSpecialDiagonalArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msLeftArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msRightArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msUpRightArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msUpLeftArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msDownRightArrow.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\Arrows\msDownLeftArrow.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msRemoverIcon.pas"/>
+        <DCCReference Include="SpecialShapes\msRemoveIcon.pas"/>
         <DCCReference Include="ContainerShapes\msShapesGroup.pas"/>
         <DCCReference Include="AbstractShapes\msPointlessShape.pas"/>
-        <DCCReference Include="Tests\Integrated\ForToolbarShapesTest.pas"/>
-        <DCCReference Include="Tests\Integrated\RegisteredShapesTest.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msSwapParentsIcon.pas"/>
-        <DCCReference Include="Tests\Integrated\UtilityShapesTest.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msPickerIcon.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msUpToParentIcon.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msButtonIcon.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msFolderToolIcon.pas"/>
         <DCCReference Include="SpecialShapes\ForButtons\msFolderIcon.pas"/>
         <DCCReference Include="AbstractShapes\msSVGShape.pas"/>
-        <DCCReference Include="ConcreteShapes\SVG\msFolder.pas"/>
         <DCCReference Include="msShapesList.pas"/>
         <DCCReference Include="ConcreteShapes\msCircleWithRadius.pas"/>
         <DCCReference Include="msShapeClassList.pas"/>
-        <DCCReference Include="Tests\Core\msLoggedTest.pas"/>
-        <DCCReference Include="Tests\Abstract\msRegisteredShapesTestPrim.pas"/>
         <DCCReference Include="ContainerShapes\msProxyShape.pas"/>
         <DCCReference Include="ContainerShapes\msShapeTool.pas"/>
         <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeUp.pas"/>
+        <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeUpLeft.pas"/>
+        <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeUpRight.pas"/>
         <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeDown.pas"/>
+        <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeDownRight.pas"/>
+        <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeDownLeft.pas"/>
         <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeLeft.pas"/>
         <DCCReference Include="ShapeTools\FloatingButtons\msMoveShapeRight.pas"/>
         <DCCReference Include="MetaShapes\msShapeClass.pas"/>
+        <DCCReference Include="MetaShapes\msProxyShapeClass.pas"/>
+        <DCCReference Include="ContainerShapes\msMoveShapeTool.pas"/>
+        <DCCReference Include="ContainerShapes\msBoundsCorrector.pas"/>
+        <DCCReference Include="ContainerShapes\msSpecialDiagonalArrowBoundsCorrector.pas"/>
+        <DCCReference Include="SpecialShapes\ForButtons\msFloatingButtonCircle.pas"/>
+        <DCCReference Include="Core\msCoreUtils.pas"/>
+        <DCCReference Include="ContainerShapes\msScalingShape.pas"/>
+        <DCCReference Include="ConcreteShapes\msTextShape.pas"/>
+        <DCCReference Include="AbstractShapes\msRectangularShape.pas"/>
+        <DCCReference Include="FMX.DUnit\FMX.DUnit.Interfaces.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeUp.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShape.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeDown.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeRight.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeLeft.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeUpLeft.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeUpRight.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeDownLeft.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeDownRight.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapePrim.pas"/>
+        <DCCReference Include="ShapeTools\ScrollButtons\msScrollShapeResetOrigin.pas"/>
+        <DCCReference Include="ShapeTools\msScrollingTool.pas"/>
+        <DCCReference Include="fmx.dunit\FMX.DUnit.msAppLog.pas"/>
+        <DCCReference Include="msMovingPointer.pas"/>
+        <DCCReference Include="fmx.dunit\FMX.DUnit.msLog.pas"/>
+        <DCCReference Include="ConcreteShapes\ForUML\msConnector.pas"/>
+        <DCCReference Include="Core\msLineF.pas"/>
+        <DCCReference Include="ConcreteShapes\ForUML\msAssociation.pas"/>
+        <DCCReference Include="ConcreteShapes\msArrowHead.pas"/>
+        <DCCReference Include="AbstractShapes\msPolylineShape.pas"/>
+        <DCCReference Include="MetaShapes\msShapeClassPrim.pas"/>
+        <DCCReference Include="Core\Core.Obj.pas"/>
+        <DCCReference Include="FMX.DUnit\Script.Interfaces.pas"/>
+        <DCCReference Include="Scripting\Script.Word.pas"/>
+        <DCCReference Include="Scripting\Script.WordsInterfaces.pas"/>
+        <DCCReference Include="Scripting\Script.Dictionary.pas"/>
+        <DCCReference Include="Scripting\Script.Axiomatics.pas"/>
+        <DCCReference Include="Scripting\Script.Engine.pas"/>
+        <DCCReference Include="Scripting\Script.Parser.pas"/>
+        <DCCReference Include="Scripting\Script.Code.pas"/>
+        <DCCReference Include="Scripting\Script.StringWord.pas"/>
+        <DCCReference Include="Scripting\Script.UnknownToken.pas"/>
+        <DCCReference Include="Scripting\Script.Word.Examples.pas"/>
+        <DCCReference Include="Scripting\Script.Word.Buttons.pas"/>
+        <DCCReference Include="Scripting\Testing\Testing.Engine.pas"/>
+        <DCCReference Include="FMX.DUnit\u_fmGUITestRunner.pas">
+            <Form>fmGUITestRunner</Form>
+        </DCCReference>
+        <DCCReference Include="Tests\Module\FirstTest.pas"/>
+        <DCCReference Include="Tests\Module\TestMsLine.pas"/>
+        <DCCReference Include="Tests\Module\TestMsRectangle.pas"/>
+        <DCCReference Include="Tests\Module\TestMsPointCircle.pas"/>
+        <DCCReference Include="Tests\Module\TestMsCircle.pas"/>
+        <DCCReference Include="Tests\Module\msShapeTest.pas"/>
+        <DCCReference Include="Tests\Module\msShapeTestSuite.pas"/>
+        <DCCReference Include="Tests\Module\TestmsJsonFormatter.pas"/>
+        <DCCReference Include="Tests\Module\TestSaveToPNG.pas"/>
+        <DCCReference Include="Tests\Module\TestSaveMoverToPNG.pas"/>
+        <DCCReference Include="Tests\Module\msTestConstants.pas"/>
+        <DCCReference Include="Tests\Integrated\ForToolbarShapesTest.pas"/>
+        <DCCReference Include="Tests\Integrated\RegisteredShapesTest.pas"/>
+        <DCCReference Include="Tests\Integrated\UtilityShapesTest.pas"/>
+        <DCCReference Include="Tests\Core\msLoggedTest.pas"/>
+        <DCCReference Include="Tests\Abstract\msRegisteredShapesTestPrim.pas"/>
+        <DCCReference Include="Tests\Module\msLineCrossTest.pas"/>
+        <DCCReference Include="fmx.dunit\FMX.DUnit.Settings.pas"/>
+        <DCCReference Include="Tests\DUnitScripting\DUnit.Scripting.AutoTest.pas"/>
+        <DCCReference Include="Tests\DUnitScripting\DUnit.Scripting.AutoTests.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>
@@ -440,13 +490,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msWatchedObjectInstance\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msTestConstants\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msTestConstants\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msCompletedShapeCreator\default.txaPackage" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -464,7 +514,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msCompletedShapeCreator\default.txaPackage" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msWatchedObjectInstance\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -524,7 +574,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msRectangle\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msRedRectangle\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -536,7 +586,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msRedRectangle\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msRectangle\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -548,13 +598,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msTool\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msGreenRectangle\default.txaPackage" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msGreenRectangle\default.txaPackage" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msTool\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -632,6 +682,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msMarshalPrim\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\msDotLine\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -645,12 +701,6 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\msInterfacedRefcounted\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msMarshalPrim\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -710,7 +760,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msPaletteShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msShapeRemover\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -722,19 +772,19 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msShapeRemover\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msParametrizedShapeTestSuite\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MindStream\msPaletteShape\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\msDiagrammsMarshal\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msParametrizedShapeTestSuite\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -814,18 +864,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msDiagrammsController\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msLineWithArrow\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\msMover\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -833,6 +871,18 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\msPaletteShapeCreator\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msDiagrammsController\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msLineWithArrow\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -862,6 +912,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="ModelSupport_MindStream\msShapeTest\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\msCircle\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -869,12 +925,6 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="ModelSupport_MindStream\msCoreObjects\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="ModelSupport_MindStream\msShapeTest\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -1228,7 +1278,7 @@
                 <Platform value="iOSSimulator" ActiveMobileDevice="iPhone">False</Platform>
                 <Platform value="OSX32">False</Platform>
                 <Platform value="Win32">True</Platform>
-                <Platform value="Win64">False</Platform>
+                <Platform value="Win64">True</Platform>
             </Platforms>
             <ModelSupport>True</ModelSupport>
         </BorlandProject>

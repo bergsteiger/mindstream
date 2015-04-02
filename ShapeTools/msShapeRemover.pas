@@ -12,7 +12,7 @@ type
  TmsShapeRemover = class(TmsTool)
   // - утилитный класс для уничтожения примитивов
  public
-  class function Create(const aCtx: TmsMakeShapeContext): ImsShape; override;
+  class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; override;
   class function ButtonShape: ImsShape; override;
  end;//TmsPicker
 
@@ -24,7 +24,7 @@ uses
 
 // TmsShapeRemover
 
-class function TmsShapeRemover.Create(const aCtx: TmsMakeShapeContext): ImsShape;
+class function TmsShapeRemover.Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape;
 var
  l_ShapeToRemove: ImsShape;
 begin

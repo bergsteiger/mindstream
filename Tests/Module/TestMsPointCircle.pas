@@ -12,7 +12,11 @@ unit TestMsPointCircle;
 interface
 
 uses
-  TestFramework, System.UITypes, msPointCircle, msShape, msCircle, FMX.Graphics,
+  TestFramework,
+  System.UITypes,
+  msShape,
+  msCircle,
+  FMX.Graphics,
   System.Types,
   msInterfaces
   ;
@@ -36,7 +40,7 @@ uses
 
 procedure TestTmsPointCircle.SetUp;
 begin
-  FmsPointCircle := TmsShapeCreator.Create(TmsPointCircle).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+  FmsPointCircle := TmsShape.NamedMC('PointCircle').CreateShape(TPointF.Create(0, 0));
 end;
 
 procedure TestTmsPointCircle.TearDown;

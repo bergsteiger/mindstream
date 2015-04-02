@@ -4,13 +4,14 @@ interface
 
 uses
  msInterfaces,
- msButtonIcon
+ msButtonIcon,
+ msFolderToolIcon
  ;
 
 type
- TmsPickerIcon = class(TmsButtonIcon)
+ TmsPickerIcon = class(TmsFolderToolIcon)
  public
-  class function Create: ImsShape; override;
+  class function ToolIcon: ImsShape; override;
  end;//TmsPickerIcon
 
 implementation
@@ -18,14 +19,15 @@ implementation
 uses
  msDownArrow,
  msShapesGroup,
- msFolderIcon
+ msFolderIcon,
+ System.Types
  ;
 
 // TmsPickerIcon
 
-class function TmsPickerIcon.Create: ImsShape;
+class function TmsPickerIcon.ToolIcon: ImsShape;
 begin
- Result := TmsShapesGroup.Create([TmsFolderIcon.Create, TmsDownArrow.Create]);
+ Result := TmsDownArrow.Create(TPointF.Create(0, 20));
 end;
 
 end.

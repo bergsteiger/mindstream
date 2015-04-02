@@ -29,16 +29,22 @@
   function pm_GetItems: TmsItemsList;
   procedure pm_SetItems(aValue: TmsItemsList);
   class procedure RegisterItemsLike(aLambda: TmsRttiFieldLambda);
+ protected
   function ItemsCount: Integer;
+ private
+  property _Items: TmsItemsList read pm_GetItems write pm_SetItems;
+ protected
+  procedure ItemAdded(const anItem: TmsItem); virtual;
+  function FirstItem: TmsItem;
  public
   constructor Create;
   procedure Cleanup; override;
-  property Items: TmsItemsList read pm_GetItems write pm_SetItems;
   procedure Assign(anOther : TmsItemsHolder);
   class procedure RegisterInMarshal(aMarshal: TJSONMarshal);
   class procedure RegisterInUnMarshal(aMarshal: TJSONUnMarshal);
   function GetEnumerator: TmsItemsListEnumerator;
   function IndexOf(const anItem: TmsItem): Integer;
+  procedure Add(const anItem: TmsItem);
  end;//TmsItemsHolder
 
 {$Else TmsItemsHolder_intf}
@@ -48,7 +54,8 @@
 {$IfNDef TmsItemsHolder_uses_impl}
 
 // uses
-  System.TypInfo
+  System.TypInfo,
+  msGarbageCollector
 
 {$Define TmsItemsHolder_uses_impl}
 
@@ -87,13 +94,13 @@ begin
   begin
    if (f_Items = nil) then
     f_Items := TmsItemsList.Create;
-   f_Items.Add(l_Item);
+   Self.Add(l_Item);
   end;//for l_Shape in aValue
 end;
 
 procedure TmsItemsHolder.Assign(anOther : TmsItemsHolder);
 begin
- Self.Items := anOther.Items;
+ Self._Items := anOther._Items;
 end;
 
 class procedure TmsItemsHolder.RegisterItemsLike(aLambda: TmsRttiFieldLambda);
@@ -125,14 +132,14 @@ begin
      l_Index: Integer;
     begin
      Assert(Field = l_FieldName);
-     if ((Data As TmsItemsHolder).Items.Count <= 0) then
+     if ((Data As TmsItemsHolder).ItemsCount <= 0) then
      begin
       Result := nil;
       Exit;
-     end;//Data As TmsItemsHolder).Items.Count <= 0
-     SetLength(Result, (Data As TmsItemsHolder).Items.Count);
+     end;//Data As TmsItemsHolder).ItemsCount <= 0
+     SetLength(Result, (Data As TmsItemsHolder).ItemsCount);
      l_Index := 0;
-     for l_Item in (Data As TmsItemsHolder).Items do
+     for l_Item in (Data As TmsItemsHolder) do
      begin
       Result[l_Index] := l_Item.toObject;
       Inc(l_Index);
@@ -158,18 +165,31 @@ begin
      l_Object: TObject;
      l_Holder : TmsItemsHolder;
      l_ItemI : TmsItem;
+     l_C : Integer;
     begin
      Assert(Field = l_FieldName);
      l_Holder := Data As TmsItemsHolder;
      Assert(l_Holder <> nil);
 
-     for l_Object in Args do
-     begin
-      if Supports(l_Object, TmsItem, l_ItemI) then
-       l_Holder.Items.Add(l_ItemI)
-      else
-       raise Exception.Create(l_Object.ClassName + ' не поддерживает нужный интерфейс');
-     end//for l_Object
+     l_C := l_Holder._AddRef;
+     Assert(l_C > 0);
+     try
+      for l_Object in Args do
+      begin
+       if Supports(l_Object, TmsItem, l_ItemI) then
+        try
+         l_Holder.Add(l_ItemI);
+        finally
+         l_ItemI := nil;
+        end
+       else
+        raise Exception.Create(l_Object.ClassName + ' не поддерживает нужный интерфейс');
+      end//for l_Object
+     finally
+      if (l_C = 1) then
+       TmsGarbageCollector.Instance.Add(l_Holder);
+      l_Holder._Release;
+     end;//try..finally
     end
    );//aMarshal.RegisterReverter
   end
@@ -183,12 +203,27 @@ end;
 
 function TmsItemsHolder.IndexOf(const anItem: TmsItem): Integer;
 begin
- Result := Items.IndexOf(anItem);
+ Result := _Items.IndexOf(anItem);
 end;
 
 function TmsItemsHolder.ItemsCount: Integer;
 begin
- Result := Items.Count;
+ Result := _Items.Count;
+end;
+
+procedure TmsItemsHolder.ItemAdded(const anItem: TmsItem);
+begin
+end;
+
+procedure TmsItemsHolder.Add(const anItem: TmsItem);
+begin
+ _Items.Add(anItem);
+ ItemAdded(anItem);
+end;
+
+function TmsItemsHolder.FirstItem: TmsItem;
+begin
+ Result := _Items.First;
 end;
 
 {$EndIf TmsItemsHolder_uses_impl}

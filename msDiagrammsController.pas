@@ -3,8 +3,8 @@
 interface
 
 uses
-{$Include msIvalidator.mixin.pas}
-  ,
+ {$Include msInvalidator.mixin.pas}
+ ,
  FMX.Objects,
  FMX.ListBox,
  FMX.StdCtrls,
@@ -22,10 +22,9 @@ uses
  ;
 
 type
- TmsIvalidatorParent = TmsInterfacedRefcounted;
-{$Include msIvalidator.mixin.pas}
-
- TmsDiagrammsController = class(TmsIvalidator, ImsDiagrammsController)
+ TmsInvalidatorParent = TmsInterfacedRefcounted;
+ {$Include msInvalidator.mixin.pas}
+ TmsDiagrammsController = class(TmsInvalidator, ImsDiagrammsController)
  private
   imgMain: TPaintBox;
   cbShapes: TComboBox;
@@ -34,14 +33,22 @@ type
   btSaveDiagramm: TButton;
   btLoadDiagramm: TButton;
   btSaveToPNG: TButton;
+  btSaveJsonAndPNG: TButton;
   f_DiagrammsRoot: ImsDiagramms;
   f_CurrentDiagramms : ImsDiagrammsList;
   f_CurrentDiagramm : ImsDiagramm;
   f_DiagrammStack: TmsDiagrammStack;
+  f_Delta: TPointF;
+  f_Holder: ImsDiagrammsHolder;
+  f_UID: TmsShapeUID;
   procedure cbDiagrammChange(Sender: TObject);
   procedure btAddDiagrammClick(Sender: TObject);
   procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
+  procedure imgMainMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
+  procedure imgMainMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; var Handled: Boolean);
+  procedure imgMainMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Single);
   procedure btSaveToPNGClick(Sender: TObject);
+  procedure btSaveJSonAndPNGClick(Sender: TObject);
   procedure btSaveDiagrammClick(Sender: TObject);
   procedure btLoadDiagrammClick(Sender: TObject);
   function pm_GetCurrentDiagramm: ImsDiagramm;
@@ -52,6 +59,13 @@ type
   // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
   procedure SwapParents;
   // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
+  procedure Scroll(const aDirection: TPointF);
+  // - скроллинг диаграммы на дельту
+  procedure ResetOrigin;
+  // - восстанавливаем начальную систему координат
+  function GenerateUID(const aShape: ImsShape): TmsShapeUID;
+  procedure MouseUp(const aPoint: TPointF);
+  procedure MouseMove(const aClickContext: TmsClickContext);
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
@@ -64,7 +78,8 @@ type
                          aAddDiagramm: TButton;
                          aSaveDiagramm: TButton;
                          aLoadDiagramm: TButton;
-                         aSaveToPng: TButton);
+                         aSaveToPng: TButton;
+                         aSaveJsonAndPng: TButton);
  public
   class function Create(aImage: TPaintBox;
                         aShapes: TComboBox;
@@ -72,10 +87,11 @@ type
                         aAddDiagramm: TButton;
                         aSaveDiagramm: TButton;
                         aLoadDiagramm: TButton;
-                        aSaveToPng: TButton): ImsDiagrammsController;
+                        aSaveToPng: TButton;
+                        aSaveJsonAndPng: TButton): ImsDiagrammsController;
   procedure Cleanup; override;
   procedure Clear;
-  procedure ProcessClick(const aStart: TPointF);
+  procedure MouseDown(const aStart: TPointF);
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm
    write pm_SetCurrentDiagramm;
@@ -88,18 +104,21 @@ type
 implementation
 
 uses
-{$Include msIvalidator.mixin.pas}
-  ,
+ {$Include msInvalidator.mixin.pas}
+ ,
  System.SysUtils,
  FMX.Types,
  msShapesForToolbar,
  Math,
  msShapeCreator,
- FMX.Dialogs;
+ FMX.Dialogs,
+ System.Math.Vectors
+ ;
 
 type
  TmsDiagrammsHolder = class(TmsInterfacedRefcounted, ImsDiagrammsHolder)
  private
+  [Weak]
   f_DiagrammsController: TmsDiagrammsController;
   constructor CreatePrim(aDiagrammsController: TmsDiagrammsController);
  protected
@@ -107,6 +126,11 @@ type
   // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
   procedure SwapParents;
   // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
+  procedure Scroll(const aDirection: TPointF);
+  // - скроллинг диаграммы
+  procedure ResetOrigin;
+  // - восстанавливаем начальную систему координат
+  function GenerateUID(const aShape: ImsShape): TmsShapeUID;
   function pm_GetCurrentDiagramms: ImsDiagrammsList;
   procedure pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
  public
@@ -134,10 +158,26 @@ begin
  f_DiagrammsController.CurrentDiagramms := aValue;
 end;
 
+procedure TmsDiagrammsHolder.ResetOrigin;
+begin
+ f_DiagrammsController.ResetOrigin;
+end;
+
+function TmsDiagrammsHolder.GenerateUID(const aShape: ImsShape): TmsShapeUID;
+begin
+ Result := f_DiagrammsController.GenerateUID(aShape);
+end;
+
 procedure TmsDiagrammsHolder.UpToParent;
 // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
 begin
  f_DiagrammsController.UpToParent;
+end;
+
+procedure TmsDiagrammsHolder.Scroll(const aDirection: TPointF);
+// - скроллинг диаграммы
+begin
+ f_DiagrammsController.Scroll(aDirection);
 end;
 
 procedure TmsDiagrammsHolder.SwapParents;
@@ -146,11 +186,18 @@ begin
  f_DiagrammsController.SwapParents;
 end;
 
-{$Include msIvalidator.mixin.pas}
+{$Include msInvalidator.mixin.pas}
+
 // TmsDiagrammsController
 
-constructor TmsDiagrammsController.CreatePrim(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton;
-  aSaveDiagramm: TButton; aLoadDiagramm: TButton; aSaveToPng: TButton);
+constructor TmsDiagrammsController.CreatePrim(aImage: TPaintBox;
+                                              aShapes: TComboBox;
+                                              aDiagramm: TComboBox;
+                                              aAddDiagramm: TButton;
+                                              aSaveDiagramm: TButton;
+                                              aLoadDiagramm: TButton;
+                                              aSaveToPng: TButton;
+                                              aSaveJsonAndPng: TButton);
 begin
  inherited Create;
  imgMain := aImage;
@@ -160,22 +207,40 @@ begin
  btSaveDiagramm := aSaveDiagramm;
  btLoadDiagramm := aLoadDiagramm;
  btSaveToPNG := aSaveToPng;
+ btSaveJsonAndPNG := aSaveJsonAndPng;
  btSaveToPNG.OnClick := btSaveToPNGClick;
  cbDiagramm.OnChange := cbDiagrammChange;
  btAddDiagramm.OnClick := btAddDiagrammClick;
  btSaveDiagramm.OnClick := btSaveDiagrammClick;
  btLoadDiagramm.OnClick := btLoadDiagrammClick;
+ btSaveJsonAndPNG.OnClick := btSaveJSonAndPNGClick;
  imgMain.OnMouseDown := imgMainMouseDown;
+ imgMain.OnMouseWheel := imgMainMouseWheel;
+ imgMain.OnMouseUp := imgMainMouseUp;
+ imgMain.OnMouseMove := imgMainMouseMove;
  imgMain.Align := TAlignLayout.Client;
  f_DiagrammsRoot := TmsDiagramms.Create;
  CurrentDiagramms := f_DiagrammsRoot;
  CurrentDiagramms.AddNewDiagramm;
 end;
 
-class function TmsDiagrammsController.Create(aImage: TPaintBox; aShapes: TComboBox; aDiagramm: TComboBox; aAddDiagramm: TButton;
-  aSaveDiagramm: TButton; aLoadDiagramm: TButton; aSaveToPng: TButton): ImsDiagrammsController;
+class function TmsDiagrammsController.Create(aImage : TPaintBox;
+                                             aShapes  : TComboBox;
+                                             aDiagramm: TComboBox;
+                                             aAddDiagramm: TButton;
+                                             aSaveDiagramm: TButton;
+                                             aLoadDiagramm: TButton;
+                                             aSaveToPng: TButton;
+                                             aSaveJsonAndPng: TButton): ImsDiagrammsController;
 begin
- Result := CreatePrim(aImage, aShapes, aDiagramm, aAddDiagramm, aSaveDiagramm, aLoadDiagramm, aSaveToPng);
+ Result := CreatePrim(aImage,
+                      aShapes,
+                      aDiagramm,
+                      aAddDiagramm,
+                      aSaveDiagramm,
+                      aLoadDiagramm,
+                      aSaveToPng,
+                      aSaveJsonAndPng);
 end;
 
 procedure TmsDiagrammsController.DoInvalidateDiagramm(const aDiagramm: ImsDiagramm);
@@ -282,6 +347,27 @@ begin
  f_DiagrammsRoot.Serialize;
 end;
 
+procedure TmsDiagrammsController.btSaveJSonAndPNGClick(Sender: TObject);
+var
+ l_SaveDialog: TSaveDialog;
+begin
+ l_SaveDialog := TSaveDialog.Create(nil);
+ l_SaveDialog.Filter := '*';
+ try
+  l_SaveDialog.Execute;
+  try
+   f_DiagrammsRoot.SaveTo(ChangeFileExt(l_SaveDialog.FileName, '.json'));
+   SaveToPng(ChangeFileExt(l_SaveDialog.FileName, '.png'));
+  except
+   on E: Exception do
+    ShowMessage('Произошла ошибка при сохранении');
+  end;
+
+ finally
+  FreeAndNil(l_SaveDialog);
+ end;//try..finally
+end;
+
 procedure TmsDiagrammsController.btSaveToPNGClick(Sender: TObject);
 var
  l_SaveDialog: TSaveDialog;
@@ -299,7 +385,7 @@ begin
 
  finally
   FreeAndNil(l_SaveDialog);
- end;
+ end;//try..finally
 end;
 
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
@@ -321,6 +407,7 @@ begin
  f_CurrentDiagramm := nil;
  CurrentDiagramms := nil;
  f_DiagrammsRoot := nil;
+ f_Holder := nil;
  inherited;
 end;
 
@@ -329,10 +416,22 @@ begin
  CurrentDiagramm.Clear;
 end;
 
-procedure TmsDiagrammsController.ProcessClick(const aStart: TPointF);
+procedure TmsDiagrammsController.MouseDown(const aStart: TPointF);
 begin
- CurrentDiagramm.ProcessClick(TmsClickContext.Create(TmsShapesForToolbar.Instance.Items[cbShapes.ItemIndex].Creator, aStart,
-   Self.As_ImsDiagrammsHolder));
+ CurrentDiagramm.MouseDown(TmsClickContext.Create(TmsShapesForToolbar.Instance.ByName(cbShapes.Items[cbShapes.ItemIndex]).Creator, aStart,
+   Self.As_ImsDiagrammsHolder, []));
+end;
+
+procedure TmsDiagrammsController.ResetOrigin;
+begin
+ f_Delta := TPointF.Create(0, 0);
+ CurrentDiagramm.Invalidate;
+end;
+
+function TmsDiagrammsController.GenerateUID(const aShape: ImsShape): TmsShapeUID;
+begin
+ Inc(f_UID);
+ Result := f_UID;
 end;
 
 procedure TmsDiagrammsController.SaveToPng(const aFileName: string);
@@ -341,18 +440,85 @@ begin
 end;
 
 procedure TmsDiagrammsController.DrawTo(const aCanvas: TCanvas);
+var
+ l_OriginalMatrix: TMatrix;
+ l_Matrix: TMatrix;
+ l_CenterPoint: TPointF;
 begin
+ aCanvas.BeginScene;
+ l_OriginalMatrix := aCanvas.Matrix;
+ l_CenterPoint := TPointF.Create(0,0);
+
+  l_Matrix := TMatrix.Identity;
+  // - СНИМАЕМ оригинальную матрицу, точнее берём ЕДИНИЧНУЮ матрицу
+  // https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_CenterPoint.X, -l_CenterPoint.Y);
+  // - сдвигаем начало координат для фигуры
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(f_Delta.X, f_Delta.Y);
+  // - задаём начало координат - относительно дельты
+  l_Matrix := l_Matrix * TMatrix.CreateTranslation(l_CenterPoint.X,l_CenterPoint.Y);
+  // - задаём начало координат
+  l_Matrix := l_Matrix * l_OriginalMatrix;
+  // - ПРИМЕНЯЕМ оригинальную матрицу
+  // Иначе например ОРИГИНАЛЬНЫЙ параллельный перенос - не будет работать.
+  // https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B0%D0%BB%D0%BB%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81
+ aCanvas.SetMatrix(l_Matrix);
  CurrentDiagramm.DrawTo(aCanvas);
+ // - отрисовываем примитив с учётом матрицы преобразований
+  aCanvas.SetMatrix(l_OriginalMatrix);
+  // - восстанавливаем ОРИГИНАЛЬНУЮ матрицу
+  aCanvas.EndScene;
 end;
 
 function TmsDiagrammsController.As_ImsDiagrammsHolder: ImsDiagrammsHolder;
 begin
- Result := TmsDiagrammsHolder.Create(Self);
+ if (f_Holder = nil) then
+  f_Holder := TmsDiagrammsHolder.Create(Self);
+ Result := f_Holder;
 end;
 
 procedure TmsDiagrammsController.imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
- Self.ProcessClick(TPointF.Create(X, Y));
+ Self.MouseDown(TPointF.Create(X, Y) - f_Delta);
+end;
+
+procedure TmsDiagrammsController.imgMainMouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Single);
+begin
+ Self.MouseMove(TmsClickContext.Create(nil, TPointF.Create(X, Y) - f_Delta, Self.As_ImsDiagrammsHolder, Shift));
+end;
+
+procedure TmsDiagrammsController.imgMainMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Single);
+begin
+ Self.MouseUp(TPointF.Create(X, Y) - f_Delta);
+                                  // ^ - пока НИ НА что невлияет, но ДЛЯ ПОРЯДКУ.
+                                  // На самом деле - ВЛИЯЕТ. На Line.
+                                  // Хотя - гоню...
+end;
+
+procedure TmsDiagrammsController.imgMainMouseWheel(Sender: TObject;
+  Shift: TShiftState; WheelDelta: Integer; var Handled: Boolean);
+const
+ cWheelDeltaSpeed = 120;
+var
+ l_Delta : integer;
+begin
+ l_Delta := WheelDelta div cWheelDeltaSpeed * 3;
+ Scroll(TPointF.Create(0, l_Delta));
+end;
+
+procedure TmsDiagrammsController.MouseMove(const aClickContext: TmsClickContext);
+begin
+ CurrentDiagramm.MouseMove(aClickContext);
+end;
+
+procedure TmsDiagrammsController.MouseUp(const aPoint: TPointF);
+begin
+ CurrentDiagramm.MouseUp(TmsClickContext.Create(TmsShapesForToolbar.Instance.ByName(cbShapes.Items[cbShapes.ItemIndex]).Creator,
+                         aPoint,
+                         Self.As_ImsDiagrammsHolder,
+                         []));
 end;
 
 procedure TmsDiagrammsController.DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm);
@@ -392,19 +558,25 @@ procedure TmsDiagrammsController.SwapParents;
 // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
 var
  l_Prev : TmsCurrentDiagrammRec;
- l_Count : Integer;
+// l_Count : Integer;
 begin
  if (f_DiagrammStack = nil) then
   Exit;
  if (f_DiagrammStack.Count <= 0) then
   Exit;
  l_Prev := f_DiagrammStack.Pop;
- l_Count := f_DiagrammStack.Count;
+// l_Count := f_DiagrammStack.Count;
  CurrentDiagramms := l_Prev.rDiagramms;
  CurrentDiagramm := l_Prev.rDiagramm;
 (* while (l_Count < f_DiagrammStack.Count) do
   f_DiagrammStack.Pop;
  f_DiagrammStack.Push(l_Prev);*)
+end;
+
+procedure TmsDiagrammsController.Scroll(const aDirection: TPointF);
+begin
+ f_Delta := aDirection + f_Delta;
+ CurrentDiagramm.Invalidate;
 end;
 
 end.

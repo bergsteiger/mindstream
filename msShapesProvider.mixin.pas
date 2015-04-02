@@ -33,12 +33,14 @@
 // TmsShapesProvider
 
 procedure TmsShapesProvider.ShapesForToolbarToList(aList: TStrings);
-var
- l_Class: MCmsShape;
 begin
  aList.Clear;
- for l_Class in TmsShapesForToolbar.Instance do
-  aList.AddObject(l_Class.Name, nil{TObject(l_Class)});
+ TmsShapesForToolbar.Instance.IterateShapes(
+  procedure (const aShapeClass : MCmsShape)
+  begin
+   aList.Add(aShapeClass.Name);
+  end
+ );
 end;
 
 {$EndIf TmsShapesProvider_uses_impl}

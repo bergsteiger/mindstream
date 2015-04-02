@@ -1,0 +1,239 @@
+1: script_ttString: Button1
+1: script_ttToken: FindComponent
+1: script_ttToken: ButtonClick
+2: script_ttToken: DoNothing
+5: script_ttToken: DoNothing1
+5: script_ttToken: DoNothing2
+6: script_ttToken: DoNothing3
+6: script_ttToken: DoNothing4
+7: script_ttToken: DoNothing5
+7: script_ttToken: DoNothing6
+8: script_ttString: 
+9: script_ttToken: DoNothing7
+10: script_ttToken: DoNothing8
+10: script_ttToken: DoNothing9
+10: script_ttToken: DoNothing10
+11: script_ttToken: DoNothing11
+11: script_ttToken: DoNothing12
+11: script_ttToken: DoNothing13
+11: script_ttToken: DoNothing14
+13: script_ttString: aString1
+14: script_ttString: aString2 with spaces
+15: script_ttString: 
+17: script_ttEOF: 
+Enter: TscriptStringWord Key: Строковое значение: "Button1"
+  push script_vtString: Button1 stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: "Button1"
+Enter: TkwFindComponent Key: FindComponent
+  pop script_vtString: Button1 stack size: 0
+  push script_vtObject: nil stack size: 1
+Leave: TkwFindComponent Key: FindComponent
+Enter: TkwButtonClick Key: ButtonClick
+  pop script_vtObject: nil stack size: 0
+Leave: TkwButtonClick Key: ButtonClick
+Enter: TscriptWordExample1 Key: DoNothing: Example 1
+Leave: TscriptWordExample1 Key: DoNothing: Example 1
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing1"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing1"
+Enter: TscriptWordExample2 Key: DoNothing2: Example 2
+Leave: TscriptWordExample2 Key: DoNothing2: Example 2
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing3"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing3"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing4"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing4"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing5"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing5"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing6"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing6"
+Enter: TscriptStringWord Key: Строковое значение: ""
+  push script_vtString:  stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: ""
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing7"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing7"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing8"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing8"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing9"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing9"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing10"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing10"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing11"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing11"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing12"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing12"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing13"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing13"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing14"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing14"
+Enter: TscriptStringWord Key: Строковое значение: "aString1"
+  push script_vtString: aString1 stack size: 2
+Leave: TscriptStringWord Key: Строковое значение: "aString1"
+Enter: TscriptStringWord Key: Строковое значение: "aString2 with spaces"
+  push script_vtString: aString2 with spaces stack size: 3
+Leave: TscriptStringWord Key: Строковое значение: "aString2 with spaces"
+Enter: TscriptStringWord Key: Строковое значение: ""
+  push script_vtString:  stack size: 4
+Leave: TscriptStringWord Key: Строковое значение: ""
+1: script_ttString: Button4
+1: script_ttToken: FindComponent
+1: script_ttToken: ButtonClick
+2: script_ttEOF: 
+Enter: TscriptStringWord Key: Строковое значение: "Button4"
+  push script_vtString: Button4 stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: "Button4"
+Enter: TkwFindComponent Key: FindComponent
+  pop script_vtString: Button4 stack size: 0
+  push script_vtObject: nil stack size: 1
+Leave: TkwFindComponent Key: FindComponent
+Enter: TkwButtonClick Key: ButtonClick
+  pop script_vtObject: nil stack size: 0
+Leave: TkwButtonClick Key: ButtonClick
+1: script_ttString: Button2
+1: script_ttToken: FindComponent
+1: script_ttToken: ButtonClick
+2: script_ttToken: DoNothing
+5: script_ttToken: DoNothing1
+5: script_ttToken: DoNothing2
+6: script_ttToken: DoNothing3
+6: script_ttToken: DoNothing4
+7: script_ttToken: DoNothing5
+7: script_ttToken: DoNothing6
+8: script_ttString: 
+9: script_ttToken: DoNothing7
+10: script_ttToken: DoNothing8
+10: script_ttToken: DoNothing9
+10: script_ttToken: DoNothing10
+11: script_ttToken: DoNothing11
+11: script_ttToken: DoNothing12
+11: script_ttToken: DoNothing13
+11: script_ttToken: DoNothing14
+13: script_ttString: aString1
+14: script_ttString: aString2 with spaces
+15: script_ttString: 
+17: script_ttEOF: 
+Enter: TscriptStringWord Key: Строковое значение: "Button2"
+  push script_vtString: Button2 stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: "Button2"
+Enter: TkwFindComponent Key: FindComponent
+  pop script_vtString: Button2 stack size: 0
+  push script_vtObject: nil stack size: 1
+Leave: TkwFindComponent Key: FindComponent
+Enter: TkwButtonClick Key: ButtonClick
+  pop script_vtObject: nil stack size: 0
+Leave: TkwButtonClick Key: ButtonClick
+Enter: TscriptWordExample1 Key: DoNothing: Example 1
+Leave: TscriptWordExample1 Key: DoNothing: Example 1
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing1"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing1"
+Enter: TscriptWordExample2 Key: DoNothing2: Example 2
+Leave: TscriptWordExample2 Key: DoNothing2: Example 2
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing3"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing3"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing4"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing4"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing5"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing5"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing6"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing6"
+Enter: TscriptStringWord Key: Строковое значение: ""
+  push script_vtString:  stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: ""
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing7"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing7"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing8"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing8"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing9"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing9"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing10"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing10"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing11"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing11"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing12"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing12"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing13"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing13"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing14"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing14"
+Enter: TscriptStringWord Key: Строковое значение: "aString1"
+  push script_vtString: aString1 stack size: 2
+Leave: TscriptStringWord Key: Строковое значение: "aString1"
+Enter: TscriptStringWord Key: Строковое значение: "aString2 with spaces"
+  push script_vtString: aString2 with spaces stack size: 3
+Leave: TscriptStringWord Key: Строковое значение: "aString2 with spaces"
+Enter: TscriptStringWord Key: Строковое значение: ""
+  push script_vtString:  stack size: 4
+Leave: TscriptStringWord Key: Строковое значение: ""
+1: script_ttString: Button3
+1: script_ttToken: FindComponent
+1: script_ttToken: ButtonClick
+2: script_ttToken: DoNothing
+5: script_ttToken: DoNothing1
+5: script_ttToken: DoNothing2
+6: script_ttToken: DoNothing3
+6: script_ttToken: DoNothing4
+7: script_ttToken: DoNothing5
+7: script_ttToken: DoNothing6
+8: script_ttString: 
+9: script_ttToken: DoNothing7
+10: script_ttToken: DoNothing8
+10: script_ttToken: DoNothing9
+10: script_ttToken: DoNothing10
+11: script_ttToken: DoNothing11
+11: script_ttToken: DoNothing12
+11: script_ttToken: DoNothing13
+11: script_ttToken: DoNothing14
+13: script_ttString: aString1
+14: script_ttString: aString2 with spaces
+15: script_ttString: 
+17: script_ttEOF: 
+Enter: TscriptStringWord Key: Строковое значение: "Button3"
+  push script_vtString: Button3 stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: "Button3"
+Enter: TkwFindComponent Key: FindComponent
+  pop script_vtString: Button3 stack size: 0
+  push script_vtObject: nil stack size: 1
+Leave: TkwFindComponent Key: FindComponent
+Enter: TkwButtonClick Key: ButtonClick
+  pop script_vtObject: nil stack size: 0
+Leave: TkwButtonClick Key: ButtonClick
+Enter: TscriptWordExample1 Key: DoNothing: Example 1
+Leave: TscriptWordExample1 Key: DoNothing: Example 1
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing1"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing1"
+Enter: TscriptWordExample2 Key: DoNothing2: Example 2
+Leave: TscriptWordExample2 Key: DoNothing2: Example 2
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing3"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing3"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing4"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing4"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing5"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing5"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing6"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing6"
+Enter: TscriptStringWord Key: Строковое значение: ""
+  push script_vtString:  stack size: 1
+Leave: TscriptStringWord Key: Строковое значение: ""
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing7"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing7"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing8"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing8"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing9"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing9"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing10"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing10"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing11"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing11"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing12"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing12"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing13"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing13"
+Enter: TscriptUnknownToken Key: Неизвестный токен: "DoNothing14"
+Leave: TscriptUnknownToken Key: Неизвестный токен: "DoNothing14"
+Enter: TscriptStringWord Key: Строковое значение: "aString1"
+  push script_vtString: aString1 stack size: 2
+Leave: TscriptStringWord Key: Строковое значение: "aString1"
+Enter: TscriptStringWord Key: Строковое значение: "aString2 with spaces"
+  push script_vtString: aString2 with spaces stack size: 3
+Leave: TscriptStringWord Key: Строковое значение: "aString2 with spaces"
+Enter: TscriptStringWord Key: Строковое значение: ""
+  push script_vtString:  stack size: 4
+Leave: TscriptStringWord Key: Строковое значение: ""

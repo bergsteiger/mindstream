@@ -102,15 +102,38 @@ begin
  end;//aStream1 = aStream2
 end;
 
+function msOpenReadForce(const aName: String): TStream;
+var
+ l_GuardCount : Integer;
+begin
+ l_GuardCount := 100;
+ while true do
+ begin
+  try
+   Result := TFileStream.Create(aName, fmOpenRead);
+  except
+   on EFOpenError do
+   begin
+    Dec(l_GuardCount);
+    if (l_GuardCount <= 0) then
+     raise
+    else
+     continue;
+   end;//on EFOpenError
+  end;//try..except
+  break;
+ end;//while true
+end;
+
 function msCompareFiles(const aStream1, aStream2: String; aHeaderBegin : AnsiChar = #0): Boolean;
  {* - сравнивает побайтово два файла. }
 var
  l_S1 : TStream;
  l_S2 : TStream;
 begin
- l_S1 := TFileStream.Create(aStream1, fmOpenRead);
+ l_S1 := msOpenReadForce(aStream1);
  try
-  l_S2 := TFileStream.Create(aStream2, fmOpenRead);
+  l_S2 := msOpenReadForce(aStream2);
   try
    Result := msCompareStreams(l_S1, l_S2, aHeaderBegin);
   finally

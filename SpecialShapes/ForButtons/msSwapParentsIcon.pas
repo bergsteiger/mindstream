@@ -4,13 +4,14 @@ interface
 
 uses
  msInterfaces,
- msButtonIcon
+ msButtonIcon,
+ msFolderToolIcon
  ;
 
 type
- TmsSwapParentsIcon = class(TmsButtonIcon)
+ TmsSwapParentsIcon = class(TmsFolderToolIcon)
  public
-  class function Create: ImsShape; override;
+  class function ToolIcon: ImsShape; override;
  end;//TmsSwapParentsIcon
 
 implementation
@@ -20,21 +21,19 @@ uses
  msShapesGroup,
  msLeftArrow,
  msLineWithArrow,
- msSmallTriangle,
  msFolderIcon
  ;
 
 // TmsSwapParentsIcon
 
-class function TmsSwapParentsIcon.Create: ImsShape;
+class function TmsSwapParentsIcon.ToolIcon: ImsShape;
 const
  cLength = 60;
 begin
  Result := TmsShapesGroup.Create([
-                                  TmsLineWithArrow.CreateCompleted(TPointF.Create(cLength / 2, 0), TPointF.Create(0, 0)),
-                                  TmsLineWithArrow.CreateCompleted(TPointF.Create(cLength / 2, 0), TPointF.Create(cLength, 0))
+                                  TmsLineWithArrow.CreateCompleted(TPointF.Create(cLength / 2, 0), TPointF.Create(0, 0), nil, nil),
+                                  TmsLineWithArrow.CreateCompleted(TPointF.Create(cLength / 2, 0), TPointF.Create(cLength, 0), nil, nil)
                                  ]);
- Result := TmsShapesGroup.Create([TmsFolderIcon.Create, Result]);
 end;
 
 end.

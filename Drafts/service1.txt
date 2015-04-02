@@ -1,0 +1,37 @@
+: ServicePrim::Class
+= SimpleClass::Class
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Функции стереотипа
+
+%f _st_space_key
+	SHD
+
+%f _BeforeClassSpell
+//#UC START# *5502C6A200F5for5502BA9C0354*
+//#UC END# *5502C6A200F5for5502BA9C0354*
+
+%f _AfterClassSpell
+//#UC START# *5502CBD4031Efor5502BA9C0354*
+//#UC END# *5502CBD4031Efor5502BA9C0354*
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Унаследованная реализация
+
+// перекрытие базового стереотипа Delphi интерфейсы и реализация::MDAGenerator
+%f _DoSpell
+//#UC START# *4B2A19E3038Bfor5502BA9C0354*
+	[{%Gx!=true}\
+	[{"%{Tl3ProtoObject}N"=""}%f_find_element(Tl3ProtoObject,Tl3ProtoObject)]\
+	%S%f_make_accessable(%{Tl3ProtoObject}U)\
+	%S%f_add_inheritable(%{Tl3ProtoObject}U)\
+	]\
+	%S%f_set_up(singleton,true)\
+	%S%f_BeforeClassSpell()\
+	%S%[inherited]\
+	%S%f_AfterClassSpell()
+//#UC END# *4B2A19E3038Bfor5502BA9C0354*
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+

@@ -2,6 +2,8 @@ MindStream (в перспективе) представляет собой кр�
 На данный момент приложение выглядит так:
 
 ![PreAlpha](http://habrastorage.org/files/044/a6a/882/044a6a882c0f464ba99485a8b6c72b0d.gif)
+Update:
+![PreAlpha](http://4.bp.blogspot.com/-_QzVPzygqp8/VMK-cJIo9oI/AAAAAAAAKbA/uIFZFkePju4/s1600/MindStream_NewMoverGUI.gif)
 
 Статьи [рассказывающее о эволюции](http://programmingmindstream.blogspot.com/2014/11/mindstream.html "Содержание статей о MindStream") продукта.
 

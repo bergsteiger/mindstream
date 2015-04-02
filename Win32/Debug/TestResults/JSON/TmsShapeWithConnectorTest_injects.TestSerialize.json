@@ -1,0 +1,169 @@
+{
+	"type": "msDiagramm.TmsDiagramm",
+	"id": 1,
+	"fields": {
+		"fName": "Диаграмма №0",
+		"f_Items": [{
+			"type": "msAssociation.TmsAssociation",
+			"id": 2,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[598,
+				1391],
+				598,
+				1391],
+				"FStartPoint": [[498,
+				1291],
+				498,
+				1291],
+				"f_ShapeClassName": "injects",
+				"f_Name": "injects1",
+				"f_UID": [1],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 3,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 4,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[517,
+				1161],
+				517,
+				1161],
+				"FStartPoint": [[417,
+				1061],
+				417,
+				1061],
+				"f_ShapeClassName": "injects",
+				"f_Name": "injects2",
+				"f_UID": [2],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 5,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 6,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[1089,
+				332],
+				1089,
+				332],
+				"FStartPoint": [[989,
+				232],
+				989,
+				232],
+				"f_ShapeClassName": "injects",
+				"f_Name": "injects3",
+				"f_UID": [3],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 7,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 8,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[1050,
+				1445],
+				1050,
+				1445],
+				"FStartPoint": [[950,
+				1345],
+				950,
+				1345],
+				"f_ShapeClassName": "injects",
+				"f_Name": "injects4",
+				"f_UID": [4],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 9,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 10,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[1090,
+				292],
+				1090,
+				292],
+				"FStartPoint": [[990,
+				192],
+				990,
+				192],
+				"f_ShapeClassName": "injects",
+				"f_Name": "injects5",
+				"f_UID": [5],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 11,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 12,
+			"fields": {
+				"f_UIDLeft": [0],
+				"f_UIDRight": [0],
+				"f_FinishPoint": [[469,
+				1147],
+				469,
+				1147],
+				"FStartPoint": [[369,
+				1047],
+				369,
+				1047],
+				"f_ShapeClassName": "injects",
+				"f_Name": "injects6",
+				"f_UID": [6],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 13,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		}]
+	}
+}
