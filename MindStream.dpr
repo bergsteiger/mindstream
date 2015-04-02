@@ -150,7 +150,9 @@ uses
 
   FMX.DUnit.Settings in 'fmx.dunit\FMX.DUnit.Settings.pas',
   DUnit.Scripting.AutoTest in 'Tests\DUnitScripting\DUnit.Scripting.AutoTest.pas',
-  DUnit.Scripting.AutoTests in 'Tests\DUnitScripting\DUnit.Scripting.AutoTests.pas'
+  DUnit.Scripting.AutoTests in 'Tests\DUnitScripting\DUnit.Scripting.AutoTests.pas',
+
+  msGarbageCollector in 'Patches\msGarbageCollector.pas'
   ;
 
 {$R *.res}
