@@ -336,7 +336,7 @@ type
 
  TmsWeakInvalidatorRef = TmsWeakInterfaceRef<ImsInvalidator>;
 
- TmsWeakShapeClassRef = TmsWeakInterfaceRef<ImsShapeClass>;
+ //TmsWeakShapeClassRef = TmsWeakInterfaceRef<ImsShapeClass>;
 
 implementation
 
