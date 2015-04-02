@@ -9,6 +9,8 @@ uses
  ;
 
 type
+ TmsWeakShapeRefList = TList<TmsWeakShapeRef>;
+
  TmsTotalShapesList = class
   public
    class procedure ShapeAdded(const aShape: ImsShape);
