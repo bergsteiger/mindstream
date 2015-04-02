@@ -177,6 +177,10 @@ type
   function Name: String;
  end;//ImsShape
 
+ TmsWeakShapeRef = record
+  rShape : Pointer;
+ end;//TmsWeakShapeRef
+
  TmsShapesEnumerator = TEnumerator<ImsShape>;
 
  ImsShapeCreator = interface
