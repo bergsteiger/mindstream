@@ -25,8 +25,8 @@ type
    rSeed: Integer;
    rDiagrammName : String;
    rShapesCount : Integer;
-   rShapeClass: Pointer;
-   constructor Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; const aShapeClass: MCmsShape);
+   rShapeClass: TmsWeakShapeClassRef;
+   constructor Create(const aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; const aShapeClass: MCmsShape);
    function ShapeClass: ImsShapeClass;
   end;//TmsShapeTestContext
 
@@ -174,18 +174,18 @@ begin
  Result := f_Context.rShapesCount;
 end;
 
-constructor TmsShapeTestContext.Create(aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; const aShapeClass: MCmsShape);
+constructor TmsShapeTestContext.Create(const aMethodName: string; aSeed: Integer; aDiagrammName: string; aShapesCount: Integer; const aShapeClass: MCmsShape);
 begin
  rMethodName := aMethodName;
  rSeed := aSeed;
  rDiagrammName := aDiagrammName;
  rShapesCount := aShapesCount;
- rShapeClass := Pointer(aShapeClass);
+ rShapeClass := aShapeClass;
 end;
 
 function TmsShapeTestContext.ShapeClass: ImsShapeClass;
 begin
- Result := ImsShapeClass(rShapeClass);
+ Result := rShapeClass;
 end;
 
 procedure TmsShapeTestPrim.SetUp;
