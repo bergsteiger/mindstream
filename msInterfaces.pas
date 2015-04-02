@@ -519,31 +519,4 @@ begin
  Result := TmsWeakInterfaceRef<T>.Create(aShape);
 end;
 
-(*// TmsWeakShapeRef
-
-constructor TmsWeakShapeRef.Create(const aShape: ImsShape);
-begin
- Self.rShape := Pointer(aShape);
-end;
-
-function TmsWeakShapeRef.AsShape: ImsShape;
-begin
- Result := ImsShape(Self.rShape);
-end;
-
-class operator TmsWeakShapeRef.Equal(const A: TmsWeakShapeRef; const B: TmsWeakShapeRef): Boolean;
-begin
- Result := (A.rShape = B.rShape);
-end;
-
-class operator TmsWeakShapeRef.Equal(const A: TmsWeakShapeRef; const B: ImsShape): Boolean;
-begin
- Result := (A.rShape = Pointer(B));
-end;
-
-class operator TmsWeakShapeRef.Implicit(const aShape: ImsShape): TmsWeakShapeRef;
-begin
- Result := TmsWeakShapeRef.Create(aShape);
-end;*)
-
 end.
