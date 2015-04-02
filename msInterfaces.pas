@@ -181,11 +181,11 @@ type
  // Слабая ссылка на интерфейс
   rRef : Pointer;
   constructor Create(const aShape: T);
-  function AsRef: T;
+  function AsRef: T; inline;
   class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: TmsWeakInterfaceRef<T>): Boolean;
   class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: T): Boolean;
   class operator Implicit(const aShape: T): TmsWeakInterfaceRef<T>;
-  class operator Implicit(const aValue: TmsWeakInterfaceRef<T>): T;
+  class operator Implicit(const aValue: TmsWeakInterfaceRef<T>): T; inline;
  end;//TmsWeakInterfaceRef
 
  TmsWeakShapeRef = TmsWeakInterfaceRef<ImsShape>;
