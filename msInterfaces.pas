@@ -178,7 +178,10 @@ type
  end;//ImsShape
 
  TmsWeakShapeRef = record
+ // Слабая ссылка на ImsShape
   rShape : Pointer;
+  constructor Create(const aShape: ImsShape);
+  function AsShape: ImsShape;
  end;//TmsWeakShapeRef
 
  TmsShapesEnumerator = TEnumerator<ImsShape>;
@@ -453,6 +456,18 @@ end;
 class operator TmsShapeUID.Implicit(aValue: Int64): TmsShapeUID;
 begin
  Result.rValue := aValue;
+end;
+
+// TmsWeakShapeRef
+
+constructor TmsWeakShapeRef.Create(const aShape: ImsShape);
+begin
+ Self.rShape := Pointer(aShape);
+end;
+
+function TmsWeakShapeRef.AsShape: ImsShape;
+begin
+ Result := ImsShape(Self.rShape);
 end;
 
 end.
