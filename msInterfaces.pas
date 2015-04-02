@@ -181,10 +181,11 @@ type
  // Слабая ссылка на интерфейс
   rShape : Pointer;
   constructor Create(const aShape: T);
-  function AsShape: ImsShape;
+  function AsRef: T;
   class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: TmsWeakInterfaceRef<T>): Boolean;
   class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: T): Boolean;
   class operator Implicit(const aShape: T): TmsWeakInterfaceRef<T>;
+  class operator Implicit(const aValue: TmsWeakInterfaceRef<T>): T;
  end;//TmsWeakInterfaceRef
 
  TmsWeakShapeRef = TmsWeakInterfaceRef<ImsShape>;
@@ -482,9 +483,15 @@ begin
  Move(aShape, Self.rShape, SizeOf(T));
 end;
 
-function TmsWeakInterfaceRef<T>.AsShape: ImsShape;
+function TmsWeakInterfaceRef<T>.AsRef: T;
 begin
- Result := ImsShape(Self.rShape);
+ Assert(SizeOf(T) = SizeOf(Result));
+ Move(Self.rShape, Result, SizeOf(T));
+end;
+
+class operator TmsWeakInterfaceRef<T>.Implicit(const aValue: TmsWeakInterfaceRef<T>): T;
+begin
+ Result := aValue.AsRef;
 end;
 
 class operator TmsWeakInterfaceRef<T>.Equal(const A: TmsWeakInterfaceRef<T>; const B: TmsWeakInterfaceRef<T>): Boolean;
