@@ -182,6 +182,9 @@ type
   rShape : Pointer;
   constructor Create(const aShape: ImsShape);
   function AsShape: ImsShape;
+  class operator Equal(const A: TmsWeakShapeRef; const B: TmsWeakShapeRef): Boolean;
+  class operator Equal(const A: TmsWeakShapeRef; const B: ImsShape): Boolean;
+  class operator Implicit(const aShape: ImsShape): TmsWeakShapeRef;
  end;//TmsWeakShapeRef
 
  TmsShapesEnumerator = TEnumerator<ImsShape>;
@@ -468,6 +471,21 @@ end;
 function TmsWeakShapeRef.AsShape: ImsShape;
 begin
  Result := ImsShape(Self.rShape);
+end;
+
+class operator TmsWeakShapeRef.Equal(const A: TmsWeakShapeRef; const B: TmsWeakShapeRef): Boolean;
+begin
+ Result := (A.rShape = B.rShape);
+end;
+
+class operator TmsWeakShapeRef.Equal(const A: TmsWeakShapeRef; const B: ImsShape): Boolean;
+begin
+ Result := (A.rShape = Pointer(B));
+end;
+
+class operator TmsWeakShapeRef.Implicit(const aShape: ImsShape): TmsWeakShapeRef;
+begin
+ Result := TmsWeakShapeRef.Create(aShape);
 end;
 
 end.
