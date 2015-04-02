@@ -177,7 +177,7 @@ type
   function Name: String;
  end;//ImsShape
 
- TmsWeakInterfaceRef<T> = record
+ TmsWeakInterfaceRef<T: IUnknown> = record
  // Слабая ссылка на интерфейс
   rRef : Pointer;
   constructor Create(const aShape: T);
@@ -489,6 +489,7 @@ function TmsWeakInterfaceRef<T>.AsRef: T;
 begin
  Assert(SizeOf(T) = SizeOf(Result));
  Move(Self.rRef, Result, SizeOf(T));
+ Result._AddRef;
 end;
 
 class operator TmsWeakInterfaceRef<T>.Implicit(const aValue: TmsWeakInterfaceRef<T>): T;

@@ -463,6 +463,7 @@ begin
   // Иначе например ОРИГИНАЛЬНЫЙ параллельный перенос - не будет работать.
   // https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B0%D0%BB%D0%BB%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81
  aCanvas.SetMatrix(l_Matrix);
+ Assert(CurrentDiagramm <> nil);
  CurrentDiagramm.DrawTo(aCanvas);
  // - отрисовываем примитив с учётом матрицы преобразований
   aCanvas.SetMatrix(l_OriginalMatrix);
@@ -510,6 +511,7 @@ end;
 
 procedure TmsDiagrammsController.MouseMove(const aClickContext: TmsClickContext);
 begin
+ Assert(CurrentDiagramm <> nil);
  CurrentDiagramm.MouseMove(aClickContext);
 end;
 
