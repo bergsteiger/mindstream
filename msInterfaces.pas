@@ -179,7 +179,7 @@ type
 
  TmsWeakInterfaceRef<T> = record
  // Слабая ссылка на интерфейс
-  rShape : Pointer;
+  rRef : Pointer;
   constructor Create(const aShape: T);
   function AsRef: T;
   class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: TmsWeakInterfaceRef<T>): Boolean;
@@ -480,13 +480,13 @@ end;
 constructor TmsWeakInterfaceRef<T>.Create(const aShape: T);
 begin
  Assert(SizeOf(T) = SizeOf(IUnknown));
- Move(aShape, Self.rShape, SizeOf(T));
+ Move(aShape, Self.rRef, SizeOf(T));
 end;
 
 function TmsWeakInterfaceRef<T>.AsRef: T;
 begin
  Assert(SizeOf(T) = SizeOf(Result));
- Move(Self.rShape, Result, SizeOf(T));
+ Move(Self.rRef, Result, SizeOf(T));
 end;
 
 class operator TmsWeakInterfaceRef<T>.Implicit(const aValue: TmsWeakInterfaceRef<T>): T;
@@ -496,7 +496,7 @@ end;
 
 class operator TmsWeakInterfaceRef<T>.Equal(const A: TmsWeakInterfaceRef<T>; const B: TmsWeakInterfaceRef<T>): Boolean;
 begin
- Result := (A.rShape = B.rShape);
+ Result := (A.rRef = B.rRef);
 end;
 
 class operator TmsWeakInterfaceRef<T>.Equal(const A: TmsWeakInterfaceRef<T>; const B: T): Boolean;
@@ -505,7 +505,7 @@ var
 begin
  Assert(SizeOf(T) = SizeOf(Pointer));
  Move(B, l_P, SizeOf(T));
- Result := (A.rShape = l_P);
+ Result := (A.rRef = l_P);
 end;
 
 class operator TmsWeakInterfaceRef<T>.Implicit(const aShape: T): TmsWeakInterfaceRef<T>;
