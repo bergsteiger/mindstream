@@ -508,7 +508,7 @@ end;
 procedure TmsShapeWithConnectorTest.ModifyDiagramm(const aDiagramm: ImsDiagramm);
 begin
  inherited;
- if not f_Context.ShapeClass.IsLineLike then
+ if not Self.ShapeClass.IsLineLike then
   AddConnectorsToDiagramm(aDiagramm);
 end;
 
