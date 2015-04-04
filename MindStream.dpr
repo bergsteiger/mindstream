@@ -128,7 +128,6 @@ uses
   Script.Word.Examples in 'Scripting\Script.Word.Examples.pas',
   Script.Word.Buttons in 'Scripting\Script.Word.Buttons.pas',
   Testing.Engine in 'Scripting\Testing\Testing.Engine.pas',
-
   u_fmGUITestRunner in 'FMX.DUnit\u_fmGUITestRunner.pas' {fmGUITestRunner},
   FirstTest in 'Tests\Module\FirstTest.pas',
   TestMsLine in 'Tests\Module\TestMsLine.pas',
@@ -147,13 +146,11 @@ uses
   msLoggedTest in 'Tests\Core\msLoggedTest.pas',
   msRegisteredShapesTestPrim in 'Tests\Abstract\msRegisteredShapesTestPrim.pas',
   msLineCrossTest in 'Tests\Module\msLineCrossTest.pas',
-
   FMX.DUnit.Settings in 'fmx.dunit\FMX.DUnit.Settings.pas',
   DUnit.Scripting.AutoTest in 'Tests\DUnitScripting\DUnit.Scripting.AutoTest.pas',
   DUnit.Scripting.AutoTests in 'Tests\DUnitScripting\DUnit.Scripting.AutoTests.pas',
-
-  msGarbageCollector in 'Patches\msGarbageCollector.pas'
-  ;
+  msGarbageCollector in 'Patches\msGarbageCollector.pas',
+  msActor in 'ConcreteShapes\msActor.pas';
 
 {$R *.res}
 

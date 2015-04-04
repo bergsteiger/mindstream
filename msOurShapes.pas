@@ -39,7 +39,8 @@ uses
   msArrowHead,
   msSVGShape,
   msScrollShape,
-  msScrollShapePrim
+  msScrollShapePrim,
+  msActor
   ;
 
 // Важно !!!
@@ -306,6 +307,8 @@ begin
    .SetIsForToolbar(false)
    ;
 
+  TmsActor.Specify('Actor')
+    .SetInitialHeight(40);
 end;
 
 initialization
