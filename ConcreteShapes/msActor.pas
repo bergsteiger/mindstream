@@ -8,12 +8,12 @@ uses
   System.Types,
   System.Math.Vectors,
   FMX.Graphics,
-  System.SysUtils,
-  msSVGShape;
+  System.SysUtils;
 
 type
-  TmsActor = class (TmsSVGShape)
+  TmsActor = class (TmsPolygonShape)
   protected
+    function GetPolygon: TPolygon; override;
     procedure DoDrawTo(const aCtx: TmsDrawContext); override;
     function GetDrawBounds: TRectF; override;
   end;
@@ -24,56 +24,65 @@ implementation
 
 procedure TmsActor.DoDrawTo(const aCtx: TmsDrawContext);
 var
-  vHalfQuater: Pixel;
-  vBounds: TRectF;
-  vRect: TRectF;
+  l_HeightHalfQuater: Pixel;
+  l_CircleRect: TRectF;
 
-  vFromPoint: TPointF;
-  vToPoint: TPointF;
-  vSVGCode: string;
-  vBody: TPolygon;
+  l_StartPoint: TPointF;
+  l_EndPoint: TPointF;
 begin
-  vBounds :=  GetDrawBounds;
-  vHalfQuater :=  vBounds.Height / 8;
+  l_HeightHalfQuater :=  GetDrawBounds.Height / 8;
 
-  vRect.Create(
-    StartPoint.X - vHalfQuater,
-    StartPoint.Y - 4 * vHalfQuater,
-    StartPoint.X + vHalfQuater,
-    StartPoint.Y - 2 *vHalfQuater
+  l_CircleRect.Create(
+    StartPoint.X - l_HeightHalfQuater,
+    StartPoint.Y - 4 * l_HeightHalfQuater,
+    StartPoint.X + l_HeightHalfQuater,
+    StartPoint.Y - 2 *l_HeightHalfQuater
   );
-  aCtx.rCanvas.DrawEllipse(vRect, aCtx.rLineOpacity);
-  aCtx.rCanvas.FillEllipse(vRect, aCtx.rOpacity);
+  aCtx.rCanvas.DrawEllipse(l_CircleRect, aCtx.rLineOpacity);
+  aCtx.rCanvas.FillEllipse(l_CircleRect, aCtx.rOpacity);
 
-  vFromPoint  :=  TPointF.Create(StartPoint.X - 2 * vHalfQuater, StartPoint.Y - 1 * vHalfQuater);
-  vToPoint  :=  TPointF.Create(StartPoint.X + 2 * vHalfQuater, vFromPoint.Y);
-  aCtx.rCanvas.DrawLine(vFromPoint, vToPoint, aCtx.rLineOpacity);
+  l_StartPoint  :=  TPointF.Create(StartPoint.X - 2 * l_HeightHalfQuater, StartPoint.Y - 1 * l_HeightHalfQuater);
+  l_EndPoint  :=  TPointF.Create(StartPoint.X + 2 * l_HeightHalfQuater, l_StartPoint.Y);
+  aCtx.rCanvas.DrawLine(l_StartPoint, l_EndPoint, aCtx.rLineOpacity);
 
-  vFromPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y - 2 * vHalfQuater);
-  vToPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y + 2 * vHalfQuater);
-  aCtx.rCanvas.DrawLine(vFromPoint, vToPoint, aCtx.rLineOpacity);
+  l_StartPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y - 2 * l_HeightHalfQuater);
+  l_EndPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y + 2 * l_HeightHalfQuater);
+  aCtx.rCanvas.DrawLine(l_StartPoint, l_EndPoint, aCtx.rLineOpacity);
 
-  vFromPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y + 2 * vHalfQuater);
-  vToPoint  :=  TPointF.Create(StartPoint.X - 2 * vHalfQuater, StartPoint.Y + 4 * vHalfQuater);
-  aCtx.rCanvas.DrawLine(vFromPoint, vToPoint, aCtx.rLineOpacity);
+  l_StartPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y + 2 * l_HeightHalfQuater);
+  l_EndPoint  :=  TPointF.Create(StartPoint.X - 2 * l_HeightHalfQuater, StartPoint.Y + 4 * l_HeightHalfQuater);
+  aCtx.rCanvas.DrawLine(l_StartPoint, l_EndPoint, aCtx.rLineOpacity);
 
-  vFromPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y + 2 * vHalfQuater);
-  vToPoint  :=  TPointF.Create(StartPoint.X + 2 * vHalfQuater, StartPoint.Y + 4 * vHalfQuater);
-  aCtx.rCanvas.DrawLine(vFromPoint, vToPoint, aCtx.rLineOpacity);
+  l_StartPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y + 2 * l_HeightHalfQuater);
+  l_EndPoint  :=  TPointF.Create(StartPoint.X + 2 * l_HeightHalfQuater, StartPoint.Y + 4 * l_HeightHalfQuater);
+  aCtx.rCanvas.DrawLine(l_StartPoint, l_EndPoint, aCtx.rLineOpacity);
 end;
 
 function TmsActor.GetDrawBounds: TRectF;
 var
-  vQuater: Extended;
+  l_HeightQuater: Extended;
 begin
-  vQuater :=  Self.ShapeClass.InitialHeight / 4;
+  l_HeightQuater :=  Self.ShapeClass.InitialHeight / 4;
 
   Result.Create(
-    StartPoint.X - vQuater,
-    StartPoint.Y - 2 * vQuater,
-    StartPoint.X + vQuater,
-    StartPoint.Y + 2 * vQuater
+    StartPoint.X - l_HeightQuater,
+    StartPoint.Y - 2 * l_HeightQuater,
+    StartPoint.X + l_HeightQuater,
+    StartPoint.Y + 2 * l_HeightQuater
   );
+end;
+
+function TmsActor.GetPolygon: TPolygon;
+var
+  l_Bounds: TRectF;
+begin
+  SetLength(Result, 5);
+  l_Bounds  :=  GetDrawBounds;
+  Result[0] :=  TPointF.Create(StartPoint.X, l_Bounds.Top);
+  Result[1] :=  TPointF.Create(l_Bounds.Left, StartPoint.Y);
+  Result[2] :=  TPointF.Create(l_Bounds.Right, StartPoint.Y);
+  Result[3] :=  TPointF.Create(l_Bounds.Left, l_Bounds.Bottom);
+  Result[4] :=  TPointF.Create(l_Bounds.Right, l_Bounds.Bottom);
 end;
 
 end.
