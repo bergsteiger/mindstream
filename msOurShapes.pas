@@ -51,7 +51,8 @@ uses
   msLibrary,
   msUsecase,
   msTrivial,
-  msArrowHead
+  msArrowHead,
+  msActor
   ;
 
 // Важно !!!
@@ -141,7 +142,8 @@ begin
   TmsAssociation.Specify('readonly'),
   TmsAssociation.Specify('writeonly'),
 
-  TmsArrowHead.TMC.SetStrokeThickness(1.5)
+  TmsArrowHead.TMC.SetStrokeThickness(1.5),
+  TmsActor.MC
  ]);
 end;
 

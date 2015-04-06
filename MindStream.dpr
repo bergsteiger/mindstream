@@ -144,13 +144,14 @@ uses
   msTrivial in 'ConcreteShapes\ForUML\msTrivial.pas',
   msArrowHead in 'ConcreteShapes\msArrowHead.pas',
   msPolylineShape in 'AbstractShapes\msPolylineShape.pas',
-  msShapeClassPrim in 'MetaShapes\msShapeClassPrim.pas';
+  msShapeClassPrim in 'MetaShapes\msShapeClassPrim.pas',
+  msActor in 'ConcreteShapes\msActor.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TfmMain, fmMain);
-  u_fmGUITestRunner.RunRegisteredTestsModeless;
+  //_fmGUITestRunner.RunRegisteredTestsModeless;
   Application.Run;
 end.
