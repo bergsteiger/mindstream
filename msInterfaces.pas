@@ -495,9 +495,10 @@ end;
 function TmsWeakInterfaceRef<T>.AsRef: T;
 begin
  Assert(SizeOf(Self.rRef) = SizeOf(Result));
- Result := nil;
+ Result := PT(@Self.rRef)^;
+(* Result := nil;
  Move(Self.rRef, Result, SizeOf(T));
- Result._AddRef;
+ Result._AddRef;*)
 end;
 
 class operator TmsWeakInterfaceRef<T>.Implicit(const aValue: TmsWeakInterfaceRef<T>): T;
