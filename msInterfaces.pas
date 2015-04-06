@@ -186,8 +186,8 @@ type
   function AsRef: T; inline;
  public
   constructor Create(const aT: T);
-  class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: TmsWeakInterfaceRef<T>): Boolean;
-  class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: T): Boolean;
+  class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: TmsWeakInterfaceRef<T>): Boolean; inline;
+  class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: T): Boolean; inline;
   class operator Implicit(const aValue: T): TmsWeakInterfaceRef<T>; inline;
   class operator Implicit(const aValue: TmsWeakInterfaceRef<T>): T; inline;
  end;//TmsWeakInterfaceRef
