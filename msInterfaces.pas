@@ -179,7 +179,9 @@ type
 
  TmsWeakInterfaceRef<T: IUnknown> = record
  // Слабая ссылка на интерфейс
+ private
   rRef : Pointer;
+ public
   constructor Create(const aShape: T);
   function AsRef: T; inline;
   class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: TmsWeakInterfaceRef<T>): Boolean;
