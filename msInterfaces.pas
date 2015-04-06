@@ -483,14 +483,14 @@ end;
 
 constructor TmsWeakInterfaceRef<T>.Create(const aShape: T);
 begin
- Assert(SizeOf(T) = SizeOf(IUnknown));
+ Assert(SizeOf(aShape) = SizeOf(Self.rRef));
  Move(aShape, Self.rRef, SizeOf(T));
 end;
 
 function TmsWeakInterfaceRef<T>.AsRef: T;
 begin
  Result := nil;
- Assert(SizeOf(T) = SizeOf(Result));
+ Assert(SizeOf(Self.rRef) = SizeOf(Result));
  Move(Self.rRef, Result, SizeOf(T));
  Result._AddRef;
 end;
@@ -509,7 +509,7 @@ class operator TmsWeakInterfaceRef<T>.Equal(const A: TmsWeakInterfaceRef<T>; con
 var
  l_P : Pointer;
 begin
- Assert(SizeOf(T) = SizeOf(Pointer));
+ Assert(SizeOf(B) = SizeOf(l_P));
  Move(B, l_P, SizeOf(T));
  Result := (A.rRef = l_P);
 end;
