@@ -177,7 +177,7 @@ type
   function Name: String;
  end;//ImsShape
 
- TmsWeakInterfaceRef<T: IUnknown> = record
+ TmsWeakInterfaceRef<T{: IUnknown}> = record
  // Слабая ссылка на интерфейс
  private
   type PT = ^T;
