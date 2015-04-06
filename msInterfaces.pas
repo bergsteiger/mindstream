@@ -484,7 +484,8 @@ end;
 constructor TmsWeakInterfaceRef<T>.Create(const aShape: T);
 begin
  Assert(SizeOf(aShape) = SizeOf(Self.rRef));
- Move(aShape, Self.rRef, SizeOf(T));
+ Self.rRef := PPointer(@aShape)^;
+ //Move(aShape, Self.rRef, SizeOf(T));
 end;
 
 function TmsWeakInterfaceRef<T>.AsRef: T;
