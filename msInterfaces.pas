@@ -180,6 +180,8 @@ type
  TmsWeakInterfaceRef<T: IUnknown> = record
  // Слабая ссылка на интерфейс
  private
+  type PT = ^T;
+ private
   rRef : Pointer;
   function AsRef: T; inline;
  public
