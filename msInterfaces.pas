@@ -194,17 +194,6 @@ type
 
  TmsWeakShapeRef = TmsWeakInterfaceRef<ImsShape>;
 
- // Слабая ссылка на ImsShape
-(* TmsWeakShapeRef = record
- // Слабая ссылка на ImsShape
-  rShape : Pointer;
-  constructor Create(const aShape: ImsShape);
-  function AsShape: ImsShape;
-  class operator Equal(const A: TmsWeakShapeRef; const B: TmsWeakShapeRef): Boolean;
-  class operator Equal(const A: TmsWeakShapeRef; const B: ImsShape): Boolean;
-  class operator Implicit(const aShape: ImsShape): TmsWeakShapeRef;
- end;//TmsWeakShapeRef*)
-
  TmsShapesEnumerator = TEnumerator<ImsShape>;
 
  ImsShapeCreator = interface
@@ -512,13 +501,9 @@ begin
 end;
 
 class operator TmsWeakInterfaceRef<T>.Equal(const A: TmsWeakInterfaceRef<T>; const B: T): Boolean;
-(*var
- l_P : Pointer;*)
 begin
  Assert(SizeOf(B) = SizeOf(A));
  Result := (A.rRef = PPointer(@B)^);
-(* Move(B, l_P, SizeOf(T));
- Result := (A.rRef = l_P);*)
 end;
 
 class operator TmsWeakInterfaceRef<T>.Implicit(const aValue: T): TmsWeakInterfaceRef<T>;
