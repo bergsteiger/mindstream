@@ -185,10 +185,10 @@ type
   rRef : Pointer;
   function AsRef: T; inline;
  public
-  constructor Create(const aShape: T);
+  constructor Create(const aT: T);
   class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: TmsWeakInterfaceRef<T>): Boolean;
   class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: T): Boolean;
-  class operator Implicit(const aShape: T): TmsWeakInterfaceRef<T>;
+  class operator Implicit(const aValue: T): TmsWeakInterfaceRef<T>; inline;
   class operator Implicit(const aValue: TmsWeakInterfaceRef<T>): T; inline;
  end;//TmsWeakInterfaceRef
 
@@ -485,11 +485,11 @@ end;
 
 // TmsWeakInterfaceRef<T>
 
-constructor TmsWeakInterfaceRef<T>.Create(const aShape: T);
+constructor TmsWeakInterfaceRef<T>.Create(const aT: T);
 begin
- Assert(SizeOf(aShape) = SizeOf(Self.rRef));
- Self.rRef := PPointer(@aShape)^;
- //Move(aShape, Self.rRef, SizeOf(T));
+ Assert(SizeOf(aT) = SizeOf(Self.rRef));
+ Self.rRef := PPointer(@aT)^;
+ //Move(aT, Self.rRef, SizeOf(T));
 end;
 
 function TmsWeakInterfaceRef<T>.AsRef: T;
@@ -521,9 +521,9 @@ begin
  Result := (A.rRef = l_P);*)
 end;
 
-class operator TmsWeakInterfaceRef<T>.Implicit(const aShape: T): TmsWeakInterfaceRef<T>;
+class operator TmsWeakInterfaceRef<T>.Implicit(const aValue: T): TmsWeakInterfaceRef<T>;
 begin
- Result := TmsWeakInterfaceRef<T>.Create(aShape);
+ Result := TmsWeakInterfaceRef<T>.Create(aValue);
 end;
 
 end.
