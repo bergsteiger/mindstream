@@ -490,8 +490,8 @@ end;
 
 function TmsWeakInterfaceRef<T>.AsRef: T;
 begin
- Result := nil;
  Assert(SizeOf(Self.rRef) = SizeOf(Result));
+ Result := nil;
  Move(Self.rRef, Result, SizeOf(T));
  Result._AddRef;
 end;
