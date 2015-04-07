@@ -247,6 +247,7 @@ type
  ImsShapeClassTuner = interface
   function AsMC: ImsShapeClass;
   function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
+  function SetStrokeColor(aColor: TAlphaColor): ImsShapeClassTuner;
   function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
   function SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
   function SetCornerRadius(aValue: Single): ImsShapeClassTuner;
@@ -365,7 +366,7 @@ end;
 
 constructor TmsDrawOptionsContext.Create(const aCtx: TmsDrawContext);
 begin
- rFillColor :=  TAlphaColorRec.Null;
+ rFillColor := TAlphaColorRec.Null;
  rOpacity := 0.5;
  rLineOpacity := 1.0;
  if aCtx.rMoving then

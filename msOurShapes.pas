@@ -313,6 +313,10 @@ begin
 
   TmsActor.Specify('User')
    ;
+
+  TmsActor.Specify('RedActor')
+   .SetStrokeColor(TAlphaColorRec.Red)
+   ;
 end;
 
 initialization
