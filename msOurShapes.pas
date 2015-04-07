@@ -307,8 +307,9 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsActor.Specify('Actor')
-    .SetInitialHeight(60);
+  TmsActor.TMC
+   .SetInitialHeight(60)
+   ;
 end;
 
 initialization
