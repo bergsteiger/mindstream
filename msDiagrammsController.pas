@@ -116,7 +116,7 @@ uses
  ;
 
 type
- TmsDiagrammsControllerWeakRef = TmsWeakInterfaceRef<TmsDiagrammsController>;
+ TmsDiagrammsControllerWeakRef = TmsWeakRef<TmsDiagrammsController>;
 
  TmsDiagrammsHolder = class(TmsInterfacedRefcounted, ImsDiagrammsHolder)
  private

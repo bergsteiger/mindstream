@@ -180,7 +180,7 @@ type
   function Name: String;
  end;//ImsShape
 
- TmsWeakInterfaceRef<T> = record
+ TmsWeakRef<T> = record
  // Слабая ссылка на интерфейс
  private
   type PT = ^T;
@@ -189,13 +189,13 @@ type
  public
   function AsRef: T; inline;
   constructor Create(const aT: T);
-  class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: TmsWeakInterfaceRef<T>): Boolean; inline;
-  class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: T): Boolean; inline;
-  class operator Implicit(const aValue: T): TmsWeakInterfaceRef<T>; inline;
-  class operator Implicit(const aValue: TmsWeakInterfaceRef<T>): T; inline;
- end;//TmsWeakInterfaceRef
+  class operator Equal(const A: TmsWeakRef<T>; const B: TmsWeakRef<T>): Boolean; inline;
+  class operator Equal(const A: TmsWeakRef<T>; const B: T): Boolean; inline;
+  class operator Implicit(const aValue: T): TmsWeakRef<T>; inline;
+  class operator Implicit(const aValue: TmsWeakRef<T>): T; inline;
+ end;//TmsWeakRef
 
- TmsWeakShapeRef = TmsWeakInterfaceRef<ImsShape>;
+ TmsWeakShapeRef = TmsWeakRef<ImsShape>;
 
  TmsShapesEnumerator = TEnumerator<ImsShape>;
 
@@ -331,9 +331,9 @@ type
   function As_ImsDiagrammsHolder: ImsDiagrammsHolder;
  end;//ImsDiagrammsController
 
- TmsWeakInvalidatorRef = TmsWeakInterfaceRef<ImsInvalidator>;
+ TmsWeakInvalidatorRef = TmsWeakRef<ImsInvalidator>;
 
- TmsWeakShapeClassRef = TmsWeakInterfaceRef<ImsShapeClass>;
+ TmsWeakShapeClassRef = TmsWeakRef<ImsShapeClass>;
 
 implementation
 
@@ -476,43 +476,39 @@ begin
  Result.rValue := aValue;
 end;
 
-// TmsWeakInterfaceRef<T>
+// TmsWeakRef<T>
 
-constructor TmsWeakInterfaceRef<T>.Create(const aT: T);
+constructor TmsWeakRef<T>.Create(const aT: T);
 begin
  Assert(SizeOf(aT) = SizeOf(Self.rRef));
  Self.rRef := PPointer(@aT)^;
- //Move(aT, Self.rRef, SizeOf(T));
 end;
 
-function TmsWeakInterfaceRef<T>.AsRef: T;
+function TmsWeakRef<T>.AsRef: T;
 begin
  Assert(SizeOf(Self.rRef) = SizeOf(Result));
  Result := PT(@Self.rRef)^;
-(* Result := nil;
- Move(Self.rRef, Result, SizeOf(T));
- Result._AddRef;*)
 end;
 
-class operator TmsWeakInterfaceRef<T>.Implicit(const aValue: TmsWeakInterfaceRef<T>): T;
+class operator TmsWeakRef<T>.Implicit(const aValue: TmsWeakRef<T>): T;
 begin
  Result := aValue.AsRef;
 end;
 
-class operator TmsWeakInterfaceRef<T>.Equal(const A: TmsWeakInterfaceRef<T>; const B: TmsWeakInterfaceRef<T>): Boolean;
+class operator TmsWeakRef<T>.Equal(const A: TmsWeakRef<T>; const B: TmsWeakRef<T>): Boolean;
 begin
  Result := (A.rRef = B.rRef);
 end;
 
-class operator TmsWeakInterfaceRef<T>.Equal(const A: TmsWeakInterfaceRef<T>; const B: T): Boolean;
+class operator TmsWeakRef<T>.Equal(const A: TmsWeakRef<T>; const B: T): Boolean;
 begin
  Assert(SizeOf(B) = SizeOf(A));
  Result := (A.rRef = PPointer(@B)^);
 end;
 
-class operator TmsWeakInterfaceRef<T>.Implicit(const aValue: T): TmsWeakInterfaceRef<T>;
+class operator TmsWeakRef<T>.Implicit(const aValue: T): TmsWeakRef<T>;
 begin
- Result := TmsWeakInterfaceRef<T>.Create(aValue);
+ Result := TmsWeakRef<T>.Create(aValue);
 end;
 
 end.
