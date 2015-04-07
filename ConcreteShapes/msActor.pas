@@ -5,8 +5,8 @@ interface
 uses
   msInterfaces,
   msPolygonShape,
-  FMX.Graphics,
-  System.SysUtils;
+  FMX.Graphics
+  ;
 
 type
   TmsActor = class (TmsPolygonShape)
