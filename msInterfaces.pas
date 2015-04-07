@@ -11,11 +11,14 @@ uses
  Generics.Collections,
  FMX.Objects,
  Data.DBXJSONReflect,
- msLineF
+ msLineF,
+ System.Math.Vectors
  ;
 
 type
  Pixel = msLineF.Pixel;
+
+ TPolygon = System.Math.Vectors.TPolygon;
 
  ImsShape = interface;
 
