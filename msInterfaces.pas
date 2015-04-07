@@ -183,6 +183,7 @@ type
   type PT = ^T;
  private
   rRef : Pointer;
+ private
   function AsRef: T; inline;
  public
   constructor Create(const aT: T);
