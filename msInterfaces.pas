@@ -180,15 +180,14 @@ type
   function Name: String;
  end;//ImsShape
 
- TmsWeakInterfaceRef<T{: IUnknown}> = record
+ TmsWeakInterfaceRef<T> = record
  // Слабая ссылка на интерфейс
  private
   type PT = ^T;
  private
   rRef : Pointer;
- private
-  function AsRef: T; inline;
  public
+  function AsRef: T; inline;
   constructor Create(const aT: T);
   class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: TmsWeakInterfaceRef<T>): Boolean; inline;
   class operator Equal(const A: TmsWeakInterfaceRef<T>; const B: T): Boolean; inline;

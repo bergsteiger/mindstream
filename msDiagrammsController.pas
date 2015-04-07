@@ -69,9 +69,6 @@ type
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
-  property CurrentDiagramms: ImsDiagrammsList
-   read pm_GetCurrentDiagramms
-   write pm_SetCurrentDiagramms;
   constructor CreatePrim(aImage: TPaintBox;
                          aShapes: TComboBox;
                          aDiagramm: TComboBox;
@@ -95,6 +92,9 @@ type
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm
    write pm_SetCurrentDiagramm;
+  property CurrentDiagramms: ImsDiagrammsList
+   read pm_GetCurrentDiagramms
+   write pm_SetCurrentDiagramms;
 
   procedure SaveToPng(const aFileName: string);
   procedure DrawTo(const aCanvas: TCanvas);
@@ -116,10 +116,11 @@ uses
  ;
 
 type
+ TmsDiagrammsControllerWeakRef = TmsWeakInterfaceRef<TmsDiagrammsController>;
+
  TmsDiagrammsHolder = class(TmsInterfacedRefcounted, ImsDiagrammsHolder)
  private
-  [Weak]
-  f_DiagrammsController: TmsDiagrammsController;
+  f_DiagrammsController: TmsDiagrammsControllerWeakRef;
   constructor CreatePrim(aDiagrammsController: TmsDiagrammsController);
  protected
   procedure UpToParent;
@@ -150,40 +151,40 @@ end;
 
 function TmsDiagrammsHolder.pm_GetCurrentDiagramms: ImsDiagrammsList;
 begin
- Result := f_DiagrammsController.CurrentDiagramms;
+ Result := f_DiagrammsController.AsRef.CurrentDiagramms;
 end;
 
 procedure TmsDiagrammsHolder.pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
 begin
- f_DiagrammsController.CurrentDiagramms := aValue;
+ f_DiagrammsController.AsRef.CurrentDiagramms := aValue;
 end;
 
 procedure TmsDiagrammsHolder.ResetOrigin;
 begin
- f_DiagrammsController.ResetOrigin;
+ f_DiagrammsController.AsRef.ResetOrigin;
 end;
 
 function TmsDiagrammsHolder.GenerateUID(const aShape: ImsShape): TmsShapeUID;
 begin
- Result := f_DiagrammsController.GenerateUID(aShape);
+ Result := f_DiagrammsController.AsRef.GenerateUID(aShape);
 end;
 
 procedure TmsDiagrammsHolder.UpToParent;
 // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
 begin
- f_DiagrammsController.UpToParent;
+ f_DiagrammsController.AsRef.UpToParent;
 end;
 
 procedure TmsDiagrammsHolder.Scroll(const aDirection: TPointF);
 // - скроллинг диаграммы
 begin
- f_DiagrammsController.Scroll(aDirection);
+ f_DiagrammsController.AsRef.Scroll(aDirection);
 end;
 
 procedure TmsDiagrammsHolder.SwapParents;
 // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
 begin
- f_DiagrammsController.SwapParents;
+ f_DiagrammsController.AsRef.SwapParents;
 end;
 
 {$Include msInvalidator.mixin.pas}
