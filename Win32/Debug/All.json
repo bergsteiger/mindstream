@@ -8,16 +8,50 @@
 			"fields": {
 				"fName": "main",
 				"f_Items": [{
-					"type": "msTextShape.TmsTextShape",
+					"type": "msCircle.TmsCircle",
 					"id": 3,
 					"fields": {
-						"FStartPoint": [[276,
-						184],
-						276,
-						184],
-						"f_ShapeClassName": "TextShape",
-						"f_Name": "TextShape1",
+						"FStartPoint": [[229,
+						199],
+						229,
+						199],
+						"f_ShapeClassName": "Usecase",
+						"f_Name": "Usecase1",
 						"f_UID": [1],
+						"f_Items": []
+					}
+				},
+				{
+					"type": "msCircle.TmsCircle",
+					"id": 4,
+					"fields": {
+						"FStartPoint": [[478,
+						267],
+						478,
+						267],
+						"f_ShapeClassName": "UsecaseRealization",
+						"f_Name": "UsecaseRealization2",
+						"f_UID": [2],
+						"f_Items": []
+					}
+				},
+				{
+					"type": "msConnector.TmsConnector",
+					"id": 5,
+					"fields": {
+						"f_UIDLeft": [2],
+						"f_UIDRight": [1],
+						"f_FinishPoint": [[229,
+						194],
+						229,
+						194],
+						"FStartPoint": [[475,
+						266],
+						475,
+						266],
+						"f_ShapeClassName": "Realization",
+						"f_Name": "Realization3",
+						"f_UID": [3],
 						"f_Items": []
 					}
 				}]
