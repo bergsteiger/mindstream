@@ -16,11 +16,11 @@ type
     function GetPolygon: TPolygon; override;
     procedure DoDrawTo(const aCtx: TmsDrawContext); override;
     function GetDrawBounds: TRectF; override;
-  end;
+  end;//TmsActor
 
 implementation
 
-{ TmsActor }
+// TmsActor
 
 procedure TmsActor.DoDrawTo(const aCtx: TmsDrawContext);
 var
