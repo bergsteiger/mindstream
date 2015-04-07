@@ -308,7 +308,7 @@ begin
    ;
 
   TmsActor.Specify('Actor')
-    .SetInitialHeight(40);
+    .SetInitialHeight(60);
 end;
 
 initialization
