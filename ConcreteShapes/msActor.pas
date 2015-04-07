@@ -5,8 +5,6 @@ interface
 uses
   msInterfaces,
   msPolygonShape,
-  System.Types,
-  System.Math.Vectors,
   FMX.Graphics,
   System.SysUtils;
 
