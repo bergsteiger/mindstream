@@ -122,6 +122,9 @@ type
  private
   f_DiagrammsController: TmsDiagrammsControllerWeakRef;
   constructor CreatePrim(aDiagrammsController: TmsDiagrammsController);
+  function pm_GetDiagrammsController: TmsDiagrammsController;
+  property DiagrammsController: TmsDiagrammsController
+   read pm_GetDiagrammsController;
  protected
   procedure UpToParent;
   // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
@@ -144,6 +147,11 @@ begin
  f_DiagrammsController := aDiagrammsController;
 end;
 
+function TmsDiagrammsHolder.pm_GetDiagrammsController: TmsDiagrammsController;
+begin
+ Result := f_DiagrammsController;
+end;
+
 class function TmsDiagrammsHolder.Create(aDiagrammsController: TmsDiagrammsController): ImsDiagrammsHolder;
 begin
  Result := CreatePrim(aDiagrammsController);
@@ -151,40 +159,40 @@ end;
 
 function TmsDiagrammsHolder.pm_GetCurrentDiagramms: ImsDiagrammsList;
 begin
- Result := f_DiagrammsController.AsRef.CurrentDiagramms;
+ Result := DiagrammsController.CurrentDiagramms;
 end;
 
 procedure TmsDiagrammsHolder.pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
 begin
- f_DiagrammsController.AsRef.CurrentDiagramms := aValue;
+ DiagrammsController.CurrentDiagramms := aValue;
 end;
 
 procedure TmsDiagrammsHolder.ResetOrigin;
 begin
- f_DiagrammsController.AsRef.ResetOrigin;
+ DiagrammsController.ResetOrigin;
 end;
 
 function TmsDiagrammsHolder.GenerateUID(const aShape: ImsShape): TmsShapeUID;
 begin
- Result := f_DiagrammsController.AsRef.GenerateUID(aShape);
+ Result := DiagrammsController.GenerateUID(aShape);
 end;
 
 procedure TmsDiagrammsHolder.UpToParent;
 // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
 begin
- f_DiagrammsController.AsRef.UpToParent;
+ DiagrammsController.UpToParent;
 end;
 
 procedure TmsDiagrammsHolder.Scroll(const aDirection: TPointF);
 // - скроллинг диаграммы
 begin
- f_DiagrammsController.AsRef.Scroll(aDirection);
+ DiagrammsController.Scroll(aDirection);
 end;
 
 procedure TmsDiagrammsHolder.SwapParents;
 // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
 begin
- f_DiagrammsController.AsRef.SwapParents;
+ DiagrammsController.SwapParents;
 end;
 
 {$Include msInvalidator.mixin.pas}
