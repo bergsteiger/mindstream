@@ -310,6 +310,9 @@ begin
   TmsActor.TMC
    .SetInitialHeight(60)
    ;
+
+  TmsActor.Specify('User')
+   ;
 end;
 
 initialization
