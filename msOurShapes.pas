@@ -5,23 +5,16 @@ interface
 implementation
 
 uses
-  System.UITypes,
+  msInterfaces,
+  msShape,
   msLine,
   msRectangle,
   msCircle,
-  msRoundedRectangle,
-  msUseCaseLikeEllipse,
   msTriangle,
-  msDashDotLine,
-  msDashLine,
-  msDotLine,
   msLineWithArrow,
   msTriangleDirectionRight,
   msRegisteredShapes,
   msPolygonShape,
-  msBlackRectangle,
-  msPointCircle,
-  msFolder,
   msMover,
   msPicker,
   msUpToParent,
@@ -29,7 +22,6 @@ uses
   msShapeRemover,
   msMoverIcon,
   msRemoverIcon,
-  msRemoveIcon,
   msMoveIcon,
   msTextShape,
   msScrollShapeUp,
@@ -43,15 +35,11 @@ uses
   msScrollShapeResetOrigin,
   msScrollingTool,
   msConnector,
-  msGeneralization,
-  msRealization,
   msAssociation,
-  msDependency,
-  msClass,
-  msLibrary,
-  msUsecase,
-  msTrivial,
   msArrowHead,
+  msSVGShape,
+  msScrollShape,
+  msScrollShapePrim,
   msActor
   ;
 
@@ -59,92 +47,276 @@ uses
 // Все новые примитивы добавлять в конец списка
 procedure RegisterOurShapes;
 begin
- TmsRegisteredShapes.Instance.RegisterMC([
   // concrete shapes
-  TmsLine.MC,
-  TmsRectangle.TMC.SetFillColor(TAlphaColorRec.White),
-  TmsCircle.TMC.SetFillColor(TAlphaColorRec.Red),
-  TmsRoundedRectangle.TMC.SetFillColor(TAlphaColorRec.Blue),
-  TmsUseCaseLikeEllipse.TMC.SetFillColor(TAlphaColorRec.Yellow),
-  TmsTriangle.TMC.SetFillColor(TAlphaColorRec.Green),
-  TmsDashDotLine.MC,
-  TmsDashLine.MC,
-  TmsDotLine.MC,
-  TmsLineWithArrow.MC,
-  TmsTriangleDirectionRight.TMC.SetFillColor(TAlphaColorRec.Coral),
+  TmsLine.TMC
+   .SetIsForToolbar(false)
+   ;
+  TmsRectangle.TMC
+   .SetFillColor(TAlphaColorRec.White)
+   .SetInitialHeight(90)
+   .SetInitialWidth(100)
+   .SetCornerRadius(0.0)
+   ;
+  TmsCircle.TMC
+   .SetFillColor(TAlphaColorRec.Red)
+   .SetInitialHeight(100)
+   .SetInitialWidth(100)
+   ;
+  TmsRectangle.Specify('RoundedRectangle')
+   .SetFillColor(TAlphaColorRec.Blue)
+   .SetInitialHeight(90)
+   .SetInitialWidth(90)
+   .SetCornerRadius(10)
+   .SetIsForToolbar(false)
+   ;
+  TmsCircle.Specify('UseCaseLikeEllipse')
+   .SetFillColor(TAlphaColorRec.Yellow)
+   .SetInitialHeight(70)
+   ;
+  TmsTriangle.TMC
+   .SetFillColor(TAlphaColorRec.Green)
+   .SetInitialHeight(100)
+   .SetIsForToolbar(false)
+   ;
+  TmsLine.Specify('DashDotLine')
+   .SetStrokeDash(TStrokeDash.DashDot)
+   ;
+  TmsLine.Specify('DashLine')
+   .SetStrokeDash(TStrokeDash.Dash)
+   ;
+  TmsLine.Specify('DotLine')
+   .SetStrokeDash(TStrokeDash.Dot)
+   ;
+  TmsLineWithArrow.TMC;
+  TmsTriangleDirectionRight.TMC
+   .SetFillColor(TAlphaColorRec.Coral)
+   ;
 
-  TmsRectangle.Specify('RedRectangle').SetFillColor(TAlphaColorRec.Red),
-  TmsRectangle.Specify('GreenRectangle').SetFillColor(TAlphaColorRec.Green),
+  TmsRectangle.Specify('RedRectangle')
+   .SetFillColor(TAlphaColorRec.Red)
+   .SetIsForToolbar(false)
+   ;
+  TmsRectangle.Specify('GreenRectangle')
+   .SetFillColor(TAlphaColorRec.Green)
+   .SetIsForToolbar(false)
+   ;
 
   // special shapes
-  TmsPointCircle.TMC.SetFillColor(TAlphaColorRec.Null),
-  TmsTriangleDirectionRight.Specify('SmallTriangle').SetFillColor(TAlphaColorRec.Aquamarine).SetInitialHeight(20),
+  TmsCircle.Specify('PointCircle')
+   .SetFillColor(TAlphaColorRec.Null)
+   .SetIsForToolbar(false)
+   .SetInitialWidth(20)
+   .SetInitialHeight(20)
+   ;
+  TmsTriangleDirectionRight.Specify('SmallTriangle')
+   .SetFillColor(TAlphaColorRec.Aquamarine)
+   .SetInitialHeight(20)
+   .SetIsForToolbar(false)
+   ;
 
   // utility shapes
-  TmsMover.MC,
-  TmsPicker.MC,
-  TmsUpToParent.MC,
-  TmsSwapParents.MC,
-  TmsShapeRemover.MC,
+  TmsMover.TMC;
+  TmsPicker.TMC;
+  TmsUpToParent.TMC;
+  TmsSwapParents.TMC
+   .SetIsForToolbar(false)
+   ;
+  TmsShapeRemover.TMC;
 
   // SVG Shapes
-  TmsFolder.MC,
+  TmsSVGShape.NRTMC
+   .SetFillColor(TAlphaColorRec.Azure);
 
-  TmsCircle.Specify('GreenCircle').SetFillColor(TAlphaColorRec.Green),
-  TmsTriangle.Specify('BlackTriangle').SetFillColor(TAlphaColorRec.Black),
-  TmsBlackRectangle.TMC.SetFillColor(TAlphaColorRec.Black),
-  TmsRemoveIcon.TMC.SetFillColor(TAlphaColorRec.Mediumvioletred),
-  TmsMoveIcon.TMC.SetFillColor(TAlphaColorRec.Black),
-  TmsTextShape.TMC.SetFillColor(TAlphaColorRec.Black),
-  TmsScrollShapeUp.MC,
-  TmsScrollShapeDown.MC,
-  TmsScrollShapeRight.MC,
-  TmsScrollShapeLeft.MC,
-  TmsScrollShapeUpLeft.MC,
-  TmsScrollShapeUpRight.MC,
-  TmsScrollShapeDownLeft.MC,
-  TmsScrollShapeDownRight.MC,
-  TmsScrollShapeResetOrigin.MC,
+  TmsSVGShape.Specify('Folder')
+   .SetSVGCode(
+    'M 0,20, L 100,20, L 100,90, L 0,90, L 0,20' +
+    // begin UHO
+    'L 0, 0' +
+    'L 40, 0' +
+    'L 40, 20'
+   )
+   ;
 
-  TmsScrollingTool.MC,
+  TmsCircle.Specify('GreenCircle')
+   .SetFillColor(TAlphaColorRec.Green)
+   .SetIsForToolbar(false)
+   ;
+  TmsTriangle.Specify('BlackTriangle')
+   .SetFillColor(TAlphaColorRec.Black)
+   ;
+  TmsRectangle.Specify('BlackRectangle')
+   .SetFillColor(TAlphaColorRec.Black)
+   .SetInitialHeight(100)
+   .SetInitialWidth(15)
+   .SetIsForToolbar(false)
+   ;
+  TmsSVGShape.Specify('RemoveIcon')
+   .SetFillColor(TAlphaColorRec.Mediumvioletred)
+   .SetIsForToolbar(false)
+   .SetSVGCode(
+    'M 10,30 L 30,10 L 50,30 L 70,10 L 90,30 L 70,50 L 90,70' +
+    'L 70,90 L 50,70 L 30,90 L 10,70 L 30,50 L 30,50 L 10,30'
+   )
+   ;
+  TmsMoveIcon.TMC
+   .SetFillColor(TAlphaColorRec.Black)
+   .SetIsForToolbar(false)
+   ;
+  TmsTextShape.TMC
+   .SetFillColor(TAlphaColorRec.Black)
+   .SetInitialHeight(14)
+   .SetInitialWidth(21);
+  // - вообще говоря это НАДО вычислять из параметров шрифта. НО! ПОТОМ!
 
-  TmsConnector.MC,
-  TmsGeneralization.MC,
-  TmsRealization.TMC.SetStrokeThickness(2),
-  TmsAssociation.MC,
-  TmsDependency.TMC.SetStrokeThickness(1.5),
+  TmsScrollShapePrim.NRTMC
+   .SetIsForToolbar(false)
+   ;
+  TmsScrollShape.NRTMC
+   .SetIsForToolbar(false)
+   ;
+  TmsScrollShapeUp.TMC;
+  TmsScrollShapeDown.TMC;
+  TmsScrollShapeRight.TMC;
+  TmsScrollShapeLeft.TMC;
+  TmsScrollShapeUpLeft.TMC;
+  TmsScrollShapeUpRight.TMC;
+  TmsScrollShapeDownLeft.TMC;
+  TmsScrollShapeDownRight.TMC;
+  TmsScrollShapeResetOrigin.TMC;
 
-  TmsClass.MC,
+  TmsScrollingTool.TMC
+//   .SetIsForToolbar(false)
+   ;
 
-  TmsClass.Specify('Interface').SetFillColor(TAlphaColorRec.Lightblue),
-  TmsClass.Specify('MixIn').SetFillColor(TAlphaColorRec.Lightgreen),
+  TmsConnector.TMC
+   .SetIsForToolbar(true)
+   ;
 
-  TmsLibrary.MC,
+  TmsConnector.Specify('Generalization')
+   ;
 
-  TmsLibrary.Specify('Project').SetFillColor(TAlphaColorRec.Lightgreen),
-  TmsLibrary.Specify('Subsystem').SetFillColor(TAlphaColorRec.Lightblue),
+  TmsConnector.Specify('Realization')
+   .SetStrokeThickness(2)
+   .SetStrokeDash(TStrokeDash.Dash)
+   ;
+  TmsAssociation.TMC
+   .SetStrokeThickness(1.5)
+   .SetStrokeDash(TStrokeDash.Solid)
+   .SetStereotypePlace(TmsStereotypePlace.Center)
+   ;
+  TmsAssociation.Specify('Dependency')
+   .SetStrokeThickness(1.5)
+   .SetStrokeDash(TStrokeDash.Dash)
+   ;
 
-  TmsUsecase.TMC.SetFillColor(TAlphaColorRec.Lightyellow),
+  TmsRectangle.Specify('Class')
+   .SetStereotypePlace(TmsStereotypePlace.OneThirty)
+   .SetAdditionalLinesH([1 /3, 2 / 3])
+   ;
 
-  TmsUsecase.Specify('UsecaseRealization').SetFillColor(TAlphaColorRec.Lightgreen),
+  TmsShape.NamedMC('Class').Specify('Interface')
+   .SetFillColor(TAlphaColorRec.Lightblue)
+   ;
+  TmsShape.NamedMC('Class').Specify('MixIn')
+   .SetFillColor(TAlphaColorRec.Lightgreen)
+   ;
 
-  TmsTrivial.MC,
+  TmsShape.NamedMC('Folder').Specify('Library')
+   .SetStereotypePlace(TmsStereotypePlace.Center)
+   ;
 
-  TmsLibrary.Specify('Layer').SetFillColor(TAlphaColorRec.Lightgray),
-  TmsTrivial.Specify('Typedef').SetFillColor(TAlphaColorRec.Gray),
-  TmsTrivial.Specify('Exception').SetFillColor(TAlphaColorRec.Red),
-  TmsClass.Specify('Method').SetFillColor(TAlphaColorRec.Purple),
-  TmsClass.Specify('Program').SetFillColor(TAlphaColorRec.Lime),
-  TmsDependency.Specify('uses'),
-  TmsDependency.Specify('friend'),
-  TmsDependency.Specify('injects'),
-  TmsAssociation.Specify('property'),
-  TmsAssociation.Specify('readonly'),
-  TmsAssociation.Specify('writeonly'),
+  TmsShape.NamedMC('Library').Specify('Project')
+   .SetFillColor(TAlphaColorRec.Lightgreen)
+   ;
+  TmsShape.NamedMC('Library').Specify('Subsystem')
+   .SetFillColor(TAlphaColorRec.Lightblue)
+   ;
 
-  TmsArrowHead.TMC.SetStrokeThickness(1.5),
-  TmsActor.MC
- ]);
+  TmsShape.NamedMC('UseCaseLikeEllipse').Specify('Usecase')
+   .SetFillColor(TAlphaColorRec.Lightyellow)
+   .SetStereotypePlace(TmsStereotypePlace.Bottom)
+   ;
+
+  TmsShape.NamedMC('Usecase').Specify('UsecaseRealization')
+   .SetFillColor(TAlphaColorRec.Lightgreen)
+   ;
+
+  TmsRectangle.Specify('Trivial')
+   .SetInitialHeightScale( 1 / 3 * 2 )
+   .SetStereotypePlace(TmsStereotypePlace.Center)
+   ;
+
+  TmsShape.NamedMC('Library').Specify('Layer')
+   .SetFillColor(TAlphaColorRec.Lightgray)
+   ;
+  TmsShape.NamedMC('Trivial').Specify('Typedef')
+   .SetFillColor(TAlphaColorRec.Gray)
+   ;
+  TmsShape.NamedMC('Trivial').Specify('Exception')
+   .SetFillColor(TAlphaColorRec.Red)
+   ;
+  TmsShape.NamedMC('Class').Specify('Method')
+   .SetFillColor(TAlphaColorRec.Purple)
+   ;
+  TmsShape.NamedMC('Class').Specify('Program')
+   .SetFillColor(TAlphaColorRec.Lime)
+   ;
+  TmsShape.NamedMC('Dependency').Specify('uses');
+  TmsShape.NamedMC('Dependency').Specify('friend');
+  TmsShape.NamedMC('Dependency').Specify('injects');
+  TmsAssociation.Specify('property');
+  TmsAssociation.Specify('readonly');
+  TmsAssociation.Specify('writeonly');
+
+  TmsArrowHead.TMC
+   .SetStrokeThickness(1.5)
+   .SetInitialHeight(20)
+   .SetIsForToolbar(false)
+   ;
+
+  TmsConnector.TMC
+   .SetIsForToolbar(false)
+   ;
+
+  TmsShape.N('UseCaseLikeEllipse')
+   .SetIsForToolbar(false)
+   ;
+
+  TmsShape.N('Trivial')
+   .SetIsForToolbar(false)
+   ;
+
+  TmsShape.N('Folder')
+   .SetIsForToolbar(false)
+   ;
+
+  TmsShape.N('Dependency')
+   .SetIsForToolbar(false)
+   ;
+
+  TmsCircle.TMC
+   .SetIsForToolbar(false)
+   ;
+
+  TmsRectangle.TMC
+   .SetIsForToolbar(false)
+   ;
+
+  TmsShape.NamedMC('UsecaseRealization').Specify('UsecaseRealizationFake')
+   .SetAdditionalLinesH([1 /3, 2 / 3])
+   .SetIsForToolbar(false)
+   ;
+
+  TmsActor.TMC
+   .SetInitialHeight(60)
+   ;
+
+  TmsActor.Specify('User')
+   ;
+
+  TmsActor.Specify('RedActor')
+   .SetStrokeColor(TAlphaColorRec.Red)
+   ;
 end;
 
 initialization

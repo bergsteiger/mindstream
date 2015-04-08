@@ -31,7 +31,10 @@ type
  public
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
-  class function CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF; const aShapesController: ImsShapesController): ImsShape;
+  class function CreateCompleted(const aStartPoint: TPointF;
+                                 const aFinishPoint: TPointF;
+                                 const aShapesController: ImsShapesController;
+                                 const aDiagrammsHolder: ImsDiagrammsHolder): ImsShape;
  end;//TmsLine
 
  EmsLineCannotBeMoved = class(Exception)
@@ -40,7 +43,6 @@ type
 implementation
 
 uses
- msPointCircle,
  msShapeClass
  ;
 
@@ -128,10 +130,13 @@ begin
   raise EmsLineCannotBeMoved.Create('Примитив ' + ClassName + ' не может быть перемещён')*);
 end;
 
-class function TmsLine.CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF; const aShapesController: ImsShapesController): ImsShape;
+class function TmsLine.CreateCompleted(const aStartPoint: TPointF;
+                                       const aFinishPoint: TPointF;
+                                       const aShapesController: ImsShapesController;
+                                       const aDiagrammsHolder: ImsDiagrammsHolder): ImsShape;
 begin
- Result := Self.Create(Self.MC, TmsMakeShapeContext.Create(aStartPoint, aShapesController, nil));
- Result.EndTo(TmsEndShapeContext.Create(aFinishPoint, aShapesController, nil));
+ Result := Self.Create(Self.MC, TmsMakeShapeContext.Create(aStartPoint, aShapesController, aDiagrammsHolder));
+ Result.EndTo(TmsEndShapeContext.Create(aFinishPoint, aShapesController, aDiagrammsHolder));
 end;
 
 procedure TmsLine.DoDrawTo(const aCtx: TmsDrawContext);
@@ -141,7 +146,7 @@ var
 begin
  if (StartPoint = FinishPoint) then
  begin
-  l_Proxy := TmsPointCircle.Create(StartPoint);
+  l_Proxy := TmsShape.NamedMC('PointCircle').CreateShape(StartPoint);
   try
    l_Proxy.DrawTo(aCtx);
   finally

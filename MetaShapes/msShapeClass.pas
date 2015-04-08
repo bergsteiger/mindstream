@@ -12,30 +12,28 @@ uses
  ;
 
 type
- TmsShapeClass = class(TmsShapeClassPrim, ImsShapeClass, ImsTunableShapeClass)
+ TmsShapeClass = class(TmsShapeClassPrim, ImsShapeClass)
  private
   f_ShapeClass : RmsShape;
   f_ParentMC : ImsShapeClass;
  private
   constructor CreateInner(aShapeClass: RmsShape);
  protected
-  function IsForToolbar: Boolean;
   function IsTool: Boolean;
   function IsLineLike: Boolean;
-  function Creator: ImsShapeCreator;
-  function Name: String;
+  function Creator: ImsShapeCreator; override;
+  function GetName: String; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
-  function Stereotype: String; override;
+  function Stereotype: TmsShapeStereotype; override;
   function ParentMC: ImsShapeClass; override;
-  function AsTMC: ImsTunableShapeClass; override;
-  function InitialHeight: Pixel;
+  function AsMC: ImsShapeClass; override;
  public
-  class function Create(aShapeClass: RmsShape): ImsTunableShapeClass;
+  class function Create(aShapeClass: RmsShape): ImsShapeClassTuner;
  end;//TmsShapeClass
 
 implementation
@@ -45,32 +43,18 @@ uses
  msRegisteredShapes
  ;
 
-type
- TmsShapeFriend = class(TmsShape)
- end;//TmsShapeFriend
-
- RmsShapeFriend = class of TmsShapeFriend;
-
 // TmsShapeClass
 
 constructor TmsShapeClass.CreateInner(aShapeClass: RmsShape);
 begin
- inherited Create;
  f_ShapeClass := aShapeClass;
+ inherited Create;
 end;
 
-class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsTunableShapeClass;
+class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClassTuner;
 begin
- Result := TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName) As ImsTunableShapeClass;
- if (Result = nil) then
-  Result := CreateInner(aShapeClass);
+ Result := CreateInner(aShapeClass);
  Assert(Result <> nil);
-end;
-
-function TmsShapeClass.IsForToolbar: Boolean;
-begin
- Assert(f_ShapeClass <> nil);
- Result := f_ShapeClass.IsForToolbar;
 end;
 
 function TmsShapeClass.IsTool: Boolean;
@@ -91,17 +75,16 @@ begin
  Result := TmsShapeCreator.Create(Self, f_ShapeClass);
 end;
 
-function TmsShapeClass.Name: String;
+function TmsShapeClass.GetName: String;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.ClassName;
 end;
 
-function TmsShapeClass.Stereotype: String;
+function TmsShapeClass.Stereotype: TmsShapeStereotype;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.ClassName;
- Result := Copy(Result, 4, Length(Result) - 3);
 end;
 
 function TmsShapeClass.ParentMC: ImsShapeClass;
@@ -117,21 +100,9 @@ begin
  Result := f_ParentMC;
 end;
 
-function TmsShapeClass.AsTMC: ImsTunableShapeClass;
+function TmsShapeClass.AsMC: ImsShapeClass;
 begin
  Result := Self;
-end;
-
-function TmsShapeClass.InitialHeight: Pixel;
-var
- l_V : TmsPixelRec;
-begin
- Assert(f_ShapeClass <> nil);
- l_V := f_InitialHeight;
- if l_V.rIsSet then
-  Result := l_V.rValue
- else
-  Result := RmsShapeFriend(f_ShapeClass).InitialHeight;
 end;
 
 procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);

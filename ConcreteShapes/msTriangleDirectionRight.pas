@@ -20,15 +20,9 @@ type
  TmsTriangleDirectionRight = class(TmsTriangle)
  protected
   function GetPolygon: TPolygon; override;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsTriangle1
 
 implementation
-
-procedure TmsTriangleDirectionRight.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- inherited;
-end;
 
 function TmsTriangleDirectionRight.GetPolygon: TPolygon;
 begin

@@ -65,7 +65,7 @@ var
  l_P : TPolygon;
 begin
  l_P := Polygon;
- aCtx.rCanvas.DrawPolygon(l_P, 1);
+ aCtx.rCanvas.DrawPolygon(l_P, aCtx.rLineOpacity);
  aCtx.rCanvas.FillPolygon(l_P, aCtx.rOpacity);
 end;
 

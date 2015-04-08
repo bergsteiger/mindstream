@@ -14,6 +14,7 @@ type
   f_Rad : Single;
  protected
   function InitialRadiusX: Integer; override;
+  function InitialRadiusY: Integer; override;
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aStartPoint: TPointF; aRad: Single); reintroduce;
  public
   class function Create(const aStartPoint: TPointF; aRad: Single): ImsShape;
@@ -40,6 +41,11 @@ begin
 end;
 
 function TmsCircleWithRadius.InitialRadiusX: Integer;
+begin
+ Result := Round(f_Rad);
+end;
+
+function TmsCircleWithRadius.InitialRadiusY: Integer;
 begin
  Result := Round(f_Rad);
 end;

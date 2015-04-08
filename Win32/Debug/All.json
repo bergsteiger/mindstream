@@ -6,16 +6,18 @@
 			"type": "msDiagramm.TmsDiagramm",
 			"id": 2,
 			"fields": {
-				"fName": "¹1",
+				"fName": "main",
 				"f_Items": [{
-					"type": "msCircle.TmsCircle",
+					"type": "msActor.TmsActor",
 					"id": 3,
 					"fields": {
-						"FStartPoint": [[118,
-						178],
-						118,
-						178],
-						"f_ShapeClassName": "TmsCircle",
+						"FStartPoint": [[102,
+						323],
+						102,
+						323],
+						"f_ShapeClassName": "Actor",
+						"f_Name": "Actor1",
+						"f_UID": [1],
 						"f_Items": []
 					}
 				},
@@ -23,23 +25,33 @@
 					"type": "msCircle.TmsCircle",
 					"id": 4,
 					"fields": {
-						"FStartPoint": [[344,
-						275],
-						344,
-						275],
-						"f_ShapeClassName": "TmsCircle",
+						"FStartPoint": [[402,
+						256],
+						402,
+						256],
+						"f_ShapeClassName": "Usecase",
+						"f_Name": "Usecase2",
+						"f_UID": [2],
 						"f_Items": []
 					}
 				},
 				{
-					"type": "msCircle.TmsCircle",
+					"type": "msAssociation.TmsAssociation",
 					"id": 5,
 					"fields": {
-						"FStartPoint": [[474,
-						171],
-						474,
-						171],
-						"f_ShapeClassName": "TmsCircle",
+						"f_UIDLeft": [1],
+						"f_UIDRight": [2],
+						"f_FinishPoint": [[281,
+						190],
+						281,
+						190],
+						"FStartPoint": [[110,
+						269],
+						110,
+						269],
+						"f_ShapeClassName": "uses",
+						"f_Name": "uses3",
+						"f_UID": [3],
 						"f_Items": []
 					}
 				}]

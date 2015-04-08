@@ -34,7 +34,7 @@ end;
 
 class function TmsSpecialArrow.CreateCompletedInternal(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
 begin
- Result := inherited CreateCompleted(aStartPoint, aFinishPoint, nil);
+ Result := inherited CreateCompleted(aStartPoint, aFinishPoint, nil, nil);
 end;
 
 class procedure TmsSpecialArrow.CreateCompleted;

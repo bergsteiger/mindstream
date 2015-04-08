@@ -23,6 +23,8 @@ type
   f_ShapeClass : ImsShapeClass;
   f_ShapeClassName : String;
   // - тут дублирование данных, но исключительно из-за кривизны маршалинга
+  f_Name : String;
+  f_UID: TmsShapeUID;
  private
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
  strict protected
@@ -33,7 +35,6 @@ type
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); virtual;
   procedure SetStartPoint(const aStartPoint: TPointF); virtual;
  protected
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
   function IsNeedsSecondClick : Boolean; virtual;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; virtual;
@@ -45,8 +46,9 @@ type
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; virtual;
   procedure MouseMove(const aClickContext: TmsEndShapeContext); virtual;
   // - действие при MouseMove
+  function UID: TmsShapeUID;
+  function Name: String;
   function Stereotype: String;
-  class function InitialHeight: Pixel; virtual;
  protected
   class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
  public
@@ -76,28 +78,29 @@ type
   // - ткнули в примитив внутри диаграммы
   function GetDrawBounds: TRectF; virtual;
   function DrawBounds: TRectF;
-  procedure GetStereotypeRect(var aRect: TRectF); virtual;
+  procedure GetStereotypeRect(var aRect: TRectF);
+  procedure Cleanup; override;
  public
   class function IsLineLike: Boolean; virtual;
   procedure DrawTo(const aCtx: TmsDrawContext); virtual;
   property StartPoint : TPointF
    read pm_GetStartPoint;
   class function IsTool: Boolean; virtual;
-  class function IsForToolbar: Boolean; virtual;
   class function IsNullClick: Boolean; virtual;
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
   procedure Assign(anOther : TmsShape);
   class function ButtonShape: ImsShape; virtual;
+  class function NRTMC: ImsShapeClassTuner;
   class function MC: ImsShapeClass;
-  class function TMC: ImsTunableShapeClass;
+  class function TMC: ImsShapeClassTuner;
   class function NamedMC(const aName: String): ImsShapeClass;
-  class function Specify(const aName: String): ImsTunableShapeClass;
+  class function N(const aName: String): ImsShapeClassTuner;
+  class function Specify(const aName: String): ImsShapeClassTuner;
  end;//TmsShape
 
  RmsShape = class of TmsShape;
 
  MCmsShape = ImsShapeClass;
-// MCmsShape = RmsShape;
 
 implementation
 
@@ -106,16 +109,26 @@ uses
  msShapeMarshal,
  System.Math.Vectors,
  msRegisteredShapes,
+ msNotRegisteredShapes,
  FMX.DUnit.msAppLog,
 
  msShapeClass,
- msProxyShapeClass
+ msProxyShapeClass,
+ msTotalShapesList
  ;
+
+// TmsShape
+
+procedure TmsShape.Cleanup;
+begin
+ TmsTotalShapesList.ShapeDestroyed(Self);
+ inherited;
+end;
 
 class function TmsShape.Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape;
 begin
  Result := CreateInner(aShapeClass, aCtx);
- TmsAppLog.Instance.ToLog('Create object ' + self.ClassName);
+ //TmsAppLog.Instance.ToLog('Create object ' + self.ClassName);
 end;
 
 class function TmsShape.Create(const aShapeClass : ImsShapeClass; const aStartPoint: TPointF): ImsShape;
@@ -151,6 +164,12 @@ begin
  f_ShapeClass := aShapeClass;
  f_ShapeClassName := f_ShapeClass.Name;
  Assert(f_ShapeClassName <> '');
+ f_Name := f_ShapeClassName;
+ f_UID := 0;
+ if (aCtx.rShapesController <> nil) then
+  f_Name := f_Name + IntToStr(aCtx.rShapesController.ShapeCount + 1);
+ if (aCtx.rDiagrammsHolder <> nil) then
+  f_UID := aCtx.rDiagrammsHolder.GenerateUID(Self);
  inherited Create;
  SetStartPoint(aCtx.rStartPoint);
 end;
@@ -166,10 +185,14 @@ begin
  // Ничего не делаем, специально
 end;
 
-class function TmsShape.InitialHeight: Pixel;
+function TmsShape.UID: TmsShapeUID;
 begin
- Result := 0;
- Assert(false, 'Не реализовано: ' + ClassName);
+ Result := f_UID;
+end;
+
+function TmsShape.Name: String;
+begin
+ Result := f_Name;
 end;
 
 function TmsShape.Stereotype: String;
@@ -194,11 +217,6 @@ begin
  Result := false;
 end;
 
-procedure TmsShape.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- // - тут ничего не делаем
-end;
-
 function TmsShape.pm_GetStartPoint: TPointF;
 begin
  Result := TPointF.Create(0, 0);
@@ -221,18 +239,12 @@ end;
 function TmsShape.DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
 begin
  Result := TmsDrawOptionsContext.Create(aCtx);
- TransformDrawOptionsContext(Result);
  Self.ShapeClass.TransformDrawOptionsContext(Result);
 end;
 
 class function TmsShape.IsTool: Boolean;
 begin
  Result := false;
-end;
-
-class function TmsShape.IsForToolbar: Boolean;
-begin
- Result := true;
 end;
 
 class function TmsShape.IsLineLike: Boolean;
@@ -287,24 +299,61 @@ begin
 end;
 
 procedure TmsShape.GetStereotypeRect(var aRect: TRectF);
+var
+ l_StereotypePlace: TmsStereotypePlace;
 begin
- // - ничего не делаем. Специально.
+ l_StereotypePlace := Self.ShapeClass.StereotypePlace;
+ if (l_StereotypePlace = TmsStereotypePlace.None) then
+  Exit;
+ aRect := Self.DrawBounds;
+ case l_StereotypePlace of
+  TmsStereotypePlace.Center:
+   ;
+  TmsStereotypePlace.Bottom:
+   aRect := TRectF.Create(aRect.Left - 20, aRect.Bottom, aRect.Right + 20, aRect.Bottom + 20);
+  TmsStereotypePlace.OneThirty:
+   aRect := TRectF.Create(aRect.Left, aRect.Top, aRect.Right, aRect.Top + aRect.Height / 3);
+  else
+   Assert(false);
+ end;//case l_StereotypePlace
 end;
 
 procedure TmsShape.DrawTo(const aCtx: TmsDrawContext);
+const
+ cNameDelta = 20;
 var
  l_Ctx : TmsDrawOptionsContext;
  l_DrawContext : TmsDrawContext;
  l_StereotypeRect : TRectF;
+var
+ l_R: TRectF;
+ l_AL : TmsAdditionalLineCoeff;
+ l_C : Single;
 begin
  l_Ctx := DrawOptionsContext(aCtx);
  aCtx.rCanvas.Fill.Color := l_Ctx.rFillColor;
  aCtx.rCanvas.Stroke.Dash := l_Ctx.rStrokeDash;
  aCtx.rCanvas.Stroke.Color := l_Ctx.rStrokeColor;
  aCtx.rCanvas.Stroke.Thickness := l_Ctx.rStrokeThickness;
+
+  // for Androide Lines
+ aCtx.rCanvas.Stroke.Kind := TBrushKind.Solid;
+ aCtx.rCanvas.Fill.Kind := TBrushKind.Solid;
+
  l_DrawContext := aCtx;
  l_DrawContext.rOpacity := l_Ctx.rOpacity;
+ l_DrawContext.rLineOpacity := l_Ctx.rLineOpacity;
  DoDrawTo(l_DrawContext);
+
+ l_AL := ShapeClass.AdditionalLinesH;
+ if (Length(l_AL) > 0) then
+ begin
+  l_R := DrawBounds;
+  for l_C in l_AL do
+   aCtx.rCanvas.DrawLine(TPointF.Create(l_R.Left, l_R.Top + l_R.Height * l_C),
+                         TPointF.Create(l_R.Right, l_R.Top + l_R.Height * l_C), aCtx.rLineOpacity);
+ end;//Length(l_AL) > 0
+
  l_StereotypeRect := TRectF.Create(0, 0, 0, 0);
  GetStereotypeRect(l_StereotypeRect);
  if (l_StereotypeRect.TopLeft <> l_StereotypeRect.BottomRight) then
@@ -318,12 +367,25 @@ begin
   l_StereotypeRect.Right := l_StereotypeRect.Right + 100;
   aCtx.rCanvas.Fill.Color := aCtx.rCanvas.Stroke.Color;
   aCtx.rCanvas.FillText(l_StereotypeRect,
-                        Stereotype,
+                        Self.Stereotype,
                         false,
-                        1,
+                        aCtx.rLineOpacity,
                         [],
                         TTextAlign.Center,
                         TTextAlign.Center);
+
+  if (Self.Name <> '') then
+  begin
+   l_StereotypeRect.Top := l_StereotypeRect.Top + cNameDelta;
+   l_StereotypeRect.Bottom := l_StereotypeRect.Bottom + cNameDelta;
+   aCtx.rCanvas.FillText(l_StereotypeRect,
+                         Self.Name,
+                         false,
+                         aCtx.rLineOpacity,
+                         [],
+                         TTextAlign.Center,
+                         TTextAlign.Center);
+  end;//Self.Name <> ''
  end;//l_StereotypeRect.TopLeft <> l_StereotypeRect.BottomRight
 end;
 
@@ -349,27 +411,61 @@ begin
  Assert(false, 'Не реализовано');
 end;
 
-class function TmsShape.MC: ImsShapeClass;
+class function TmsShape.NRTMC: ImsShapeClassTuner;
+var
+ l_R : ImsShapeClass;
 begin
- Result := TmsShapeClass.Create(Self);
+ l_R := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
+ if (l_R = nil) then
+  l_R := TmsNotRegisteredShapes.Instance.ByName(Self.ClassName);
+ if (l_R <> nil) then
+ begin
+  Result := l_R.AsTuner;
+ end//l_R <> nil
+ else
+ begin
+  Result := TmsShapeClass.Create(Self);
+  TmsNotRegisteredShapes.Instance.RegisterMC(Result.AsMC);
+ end;//Result = nil
 end;
 
-class function TmsShape.TMC: ImsTunableShapeClass;
+class function TmsShape.MC: ImsShapeClass;
 begin
- Result := TmsShapeClass.Create(Self);
+ Result := NRTMC.AsMC;
+end;
+
+class function TmsShape.TMC: ImsShapeClassTuner;
+var
+ l_MC : ImsShapeClass;
+begin
+ l_MC := TmsRegisteredShapes.Instance.ByName(Self.ClassName);
+ if (l_MC <> nil) then
+  Result := l_MC.AsTuner
+ else
+ begin
+  Result := TmsShapeClass.Create(Self);
+  TmsRegisteredShapes.Instance.RegisterMC(Result.AsMC);
+ end;//l_MC <> nil
 end;
 
 class function TmsShape.NamedMC(const aName: String): ImsShapeClass;
 begin
  Result := TmsRegisteredShapes.Instance.ByName(aName);
- if (Result = nil) then
-  Result := TmsRegisteredShapes.Instance.ByName('Tms' + aName);
- Assert(Result <> nil);
+ Assert(Result <> nil, 'Стереотип ' + aName + ' не зарегистрирован');
 end;
 
-class function TmsShape.Specify(const aName: String): ImsTunableShapeClass;
+class function TmsShape.N(const aName: String): ImsShapeClassTuner;
+var
+ l_MC : ImsShapeClass;
 begin
- Result := TmsProxyShapeClass.Create(aName, Self.MC);
+ l_MC := NamedMC(aName);
+ Assert(l_MC <> nil);
+ Result := l_MC.AsTuner;
+end;
+
+class function TmsShape.Specify(const aName: String): ImsShapeClassTuner;
+begin
+ Result := Self.MC.Specify(aName);
 end;
 
 end.

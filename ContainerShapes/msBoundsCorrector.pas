@@ -13,7 +13,6 @@ type
  protected
   function GetDrawBounds: TRectF; override;
   function ExtentCoeff: Extended; virtual;
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsBoundsCorrector
 
 implementation
@@ -42,16 +41,6 @@ begin
  Result.Right := l_Mid.X + l_W;
  Result.Top := l_Mid.Y - l_H;
  Result.Bottom := l_Mid.Y + l_H;
-end;
-
-procedure TmsBoundsCorrector.DoDrawTo(const aCtx: TmsDrawContext);
-var
- l_Center : TPointF;
- l_OurCenter : TPointF;
-begin
- l_Center := ShapeToShow.StartPoint;
- l_OurCenter := Self.StartPoint;
- inherited;
 end;
 
 end.

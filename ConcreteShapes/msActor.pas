@@ -3,133 +3,85 @@ unit msActor;
 interface
 
 uses
- System.Math.Vectors,
- System.SysUtils,
- msShape,
- System.Types,
- FMX.Graphics,
- FMX.Types,
- System.UITypes,
- msDiagramm,
- msInterfaces,
- msLine,
- msCircle,
- msCircleWithRadius
- ;
+  msInterfaces,
+  msPolygonShape,
+  FMX.Graphics
+  ;
 
 type
- TmsActor = class(TmsCircle)
- protected
-
-  function InitialRadiusX: Integer; override;
-  function ActorHeadRadius: Integer;
-  function CreateActorHeadShape(const aStartPoint: TPointF): ImsShape;
-  function ActorHeadShapeMC: ImsShapeClass;
-  function GetDrawBounds: TRectF;
-  function GetPolygon: TPolygon;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
- public
- end;
+  TmsActor = class (TmsPolygonShape)
+  // Мне так кажется, что данный примитив можно разбить на три - TmsPolygonShape, TmsCircle и TmsShapeGroup.
+  protected
+    function GetPolygon: TPolygon; override;
+    procedure DoDrawTo(const aCtx: TmsDrawContext); override;
+    function GetDrawBounds: TRectF; override;
+  end;//TmsActor
 
 implementation
 
-{ TmsActor }
-function TmsActor.InitialRadiusX: Integer;
-begin
- Result := ActorHeadRadius;
-end;
-
-function TmsActor.ActorHeadRadius: Integer;
-begin
- Result := 10;
-end;
-
-function TmsActor.CreateActorHeadShape(const aStartPoint: TPointF): ImsShape;
-begin
-  Result := ActorHeadShapeMC.Creator.CreateShape(aStartPoint);
-end;
-
-function TmsActor.ActorHeadShapeMC: ImsShapeClass;
-begin
-  result := TmsShape.NamedMC('PointCircle');
-end;
-
-function TmsActor.GetDrawBounds: TRectF;
-begin
- Result := TRectF.Create(TPointF.Create(StartPoint.X - 0.5*ActorHeadRadius, StartPoint.Y - 2*ActorHeadRadius),
-                         TPointF.Create(StartPoint.X + 0.5*ActorHeadRadius, StartPoint.Y - ActorHeadRadius));
-end;
-
-function TmsActor.GetPolygon: TPolygon;
-begin
- SetLength(Result, 3);
- Result[0] := TPointF.Create(StartPoint.X - ActorHeadRadius,
-                        StartPoint.Y + 3*ActorHeadRadius);
- Result[1] := TPointF.Create(StartPoint.X,
-                        StartPoint.Y + ActorHeadRadius);
- Result[2] := TPointF.Create(StartPoint.X + ActorHeadRadius,
-                        StartPoint.Y + 3*ActorHeadRadius);
-end;
-
+// TmsActor
 
 procedure TmsActor.DoDrawTo(const aCtx: TmsDrawContext);
 var
- l_Proxy: ImsShape;
- l_msCircleRect: TRectF;
- l_Rect : TRectF;
- l_Path: TPathData;
- l_P: TPolygon;
- i: integer;
- l_HeadCenterPoint,
- l_LineStartPoint,
- l_LineFinishPoint: TPointF;
+  l_HeightHalfQuater: Pixel;
+  l_CircleRect: TRectF;
+
+  l_StartPoint: TPointF;
+  l_EndPoint: TPointF;
 begin
- l_msCircleRect := GetDrawBounds;
- l_Rect := DrawBounds;
+  l_HeightHalfQuater :=  GetDrawBounds.Height / 8;
 
- // Head of actor
- l_HeadCenterPoint := TPointF.Create(StartPoint.X,
-                                StartPoint.Y - ActorHeadRadius);
+  l_CircleRect.Create(
+    StartPoint.X - l_HeightHalfQuater,
+    StartPoint.Y - 4 * l_HeightHalfQuater,
+    StartPoint.X + l_HeightHalfQuater,
+    StartPoint.Y - 2 *l_HeightHalfQuater
+  );
+  aCtx.rCanvas.DrawEllipse(l_CircleRect, aCtx.rLineOpacity);
+  aCtx.rCanvas.FillEllipse(l_CircleRect, aCtx.rOpacity);
 
- //l_Proxy := CreateActorHeadShape(l_HeadCenterPoint);
- //l_Proxy.DrawTo(aCtx);
+  l_StartPoint  :=  TPointF.Create(StartPoint.X - 2 * l_HeightHalfQuater, StartPoint.Y - 1 * l_HeightHalfQuater);
+  l_EndPoint  :=  TPointF.Create(StartPoint.X + 2 * l_HeightHalfQuater, l_StartPoint.Y);
+  aCtx.rCanvas.DrawLine(l_StartPoint, l_EndPoint, aCtx.rLineOpacity);
 
- aCtx.rCanvas.DrawEllipse(l_msCircleRect, 1);
+  l_StartPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y - 2 * l_HeightHalfQuater);
+  l_EndPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y + 2 * l_HeightHalfQuater);
+  aCtx.rCanvas.DrawLine(l_StartPoint, l_EndPoint, aCtx.rLineOpacity);
 
+  l_StartPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y + 2 * l_HeightHalfQuater);
+  l_EndPoint  :=  TPointF.Create(StartPoint.X - 2 * l_HeightHalfQuater, StartPoint.Y + 4 * l_HeightHalfQuater);
+  aCtx.rCanvas.DrawLine(l_StartPoint, l_EndPoint, aCtx.rLineOpacity);
 
- //Hands of actor - manual paint
- l_LineStartPoint := PointF(StartPoint.X - 1.5*ActorHeadRadius ,
-                        StartPoint.Y - 0.5*ActorHeadRadius);
- l_LineFinishPoint := PointF(StartPoint.X + 1.5*ActorHeadRadius ,
-                        StartPoint.Y - 0.5*ActorHeadRadius);
- //l_Proxy := TmsLine.CreateCompleted(l_LineStartPoint, l_LineFinishPoint, ShapeController - ???);
- aCtx.rCanvas.DrawLine(l_LineStartPoint, l_LineFinishPoint, 1);
-
- //Body of actor
- l_LineStartPoint := PointF(StartPoint.X,
-                        StartPoint.Y - ActorHeadRadius);
- l_LineFinishPoint := PointF(StartPoint.X,
-                        StartPoint.Y + ActorHeadRadius);
- aCtx.rCanvas.DrawLine(l_LineStartPoint, l_LineFinishPoint, 1);
-
- l_P := GetPolygon;
- l_Path := TPathData.Create;
- try
-  for I := 0 to High(l_P) do
-   if I = 0
-    then l_Path.MoveTo(l_P[I])
-    else l_Path.LineTo(l_P[I]);
-  aCtx.rCanvas.DrawPath(l_Path, 1);
- finally
-  FreeAndNil(l_Path);
- end;
- //inherited;
+  l_StartPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y + 2 * l_HeightHalfQuater);
+  l_EndPoint  :=  TPointF.Create(StartPoint.X + 2 * l_HeightHalfQuater, StartPoint.Y + 4 * l_HeightHalfQuater);
+  aCtx.rCanvas.DrawLine(l_StartPoint, l_EndPoint, aCtx.rLineOpacity);
 end;
 
-procedure TmsActor.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
+function TmsActor.GetDrawBounds: TRectF;
+var
+  l_HeightQuater: Extended;
 begin
- inherited;
+  l_HeightQuater :=  Self.ShapeClass.InitialHeight / 4;
+
+  Result.Create(
+    StartPoint.X - l_HeightQuater,
+    StartPoint.Y - 2 * l_HeightQuater,
+    StartPoint.X + l_HeightQuater,
+    StartPoint.Y + 2 * l_HeightQuater
+  );
+end;
+
+function TmsActor.GetPolygon: TPolygon;
+var
+  l_Bounds: TRectF;
+begin
+  SetLength(Result, 5);
+  l_Bounds  :=  GetDrawBounds;
+  Result[0] :=  TPointF.Create(StartPoint.X, l_Bounds.Top);
+  Result[1] :=  TPointF.Create(l_Bounds.Left, StartPoint.Y);
+  Result[2] :=  TPointF.Create(l_Bounds.Right, StartPoint.Y);
+  Result[3] :=  TPointF.Create(l_Bounds.Left, l_Bounds.Bottom);
+  Result[4] :=  TPointF.Create(l_Bounds.Right, l_Bounds.Bottom);
 end;
 
 end.

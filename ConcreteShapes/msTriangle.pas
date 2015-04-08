@@ -15,11 +15,7 @@ uses
 type
  TmsTriangle = class(TmsPolygonShape)
  protected
-  class function InitialHeight: Single; override;
   function GetPolygon: TPolygon; override;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
- public
-  class function IsForToolbar: Boolean; override;
  end;//TmsTriangle
 
 implementation
@@ -27,15 +23,7 @@ implementation
 uses
  System.Math;
 
-class function TmsTriangle.InitialHeight: Single;
-begin
- Result := 100;
-end;
-
-class function TmsTriangle.IsForToolbar: Boolean;
-begin
- Result := True;
-end;
+// TmsTriangle
 
 function TmsTriangle.GetPolygon: TPolygon;
 begin
@@ -47,11 +35,6 @@ begin
  Result[2] := TPointF.Create(StartPoint.X,
                              StartPoint.Y - ShapeClass.InitialHeight / 2);
  Result[3] := Result[0];
-end;
-
-procedure TmsTriangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- inherited;
 end;
 
 end.
