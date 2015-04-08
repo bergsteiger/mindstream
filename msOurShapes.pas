@@ -39,7 +39,8 @@ uses
   msArrowHead,
   msSVGShape,
   msScrollShape,
-  msScrollShapePrim
+  msScrollShapePrim,
+  msActor
   ;
 
 // Важно !!!
@@ -306,6 +307,16 @@ begin
    .SetIsForToolbar(false)
    ;
 
+  TmsActor.TMC
+   .SetInitialHeight(60)
+   ;
+
+  TmsActor.Specify('User')
+   ;
+
+  TmsActor.Specify('RedActor')
+   .SetStrokeColor(TAlphaColorRec.Red)
+   ;
 end;
 
 initialization

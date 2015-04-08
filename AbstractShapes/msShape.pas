@@ -79,8 +79,10 @@ type
   function GetDrawBounds: TRectF; virtual;
   function DrawBounds: TRectF;
   procedure GetStereotypeRect(var aRect: TRectF);
+  procedure Cleanup; override;
  public
   class function IsLineLike: Boolean; virtual;
+  class function IsConnectorLike: Boolean; virtual;
   procedure DrawTo(const aCtx: TmsDrawContext); virtual;
   property StartPoint : TPointF
    read pm_GetStartPoint;
@@ -112,8 +114,17 @@ uses
  FMX.DUnit.msAppLog,
 
  msShapeClass,
- msProxyShapeClass
+ msProxyShapeClass,
+ msTotalShapesList
  ;
+
+// TmsShape
+
+procedure TmsShape.Cleanup;
+begin
+ TmsTotalShapesList.ShapeDestroyed(Self);
+ inherited;
+end;
 
 class function TmsShape.Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape;
 begin
@@ -238,6 +249,11 @@ begin
 end;
 
 class function TmsShape.IsLineLike: Boolean;
+begin
+ Result := false;
+end;
+
+class function TmsShape.IsConnectorLike: Boolean;
 begin
  Result := false;
 end;

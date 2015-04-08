@@ -11,6 +11,7 @@ type
  TmsShapeClassPrim = class abstract(TmsInterfacedRefcounted, ImsShapeClassTuner)
  private
   f_FillColor : TmsColorRec;
+  f_StrokeColor : TmsColorRec;
   f_InitialHeight : Pixel;
   f_InitialWidth : Pixel;
   f_StrokeThickness : TmsPixelRec;
@@ -27,6 +28,7 @@ type
   function Stereotype: TmsShapeStereotype; virtual;
   procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
   function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
+  function SetStrokeColor(aColor: TAlphaColor): ImsShapeClassTuner;
   function SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;
   function SetStrokeDash(aValue: TStrokeDash): ImsShapeClassTuner;
   function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
@@ -114,6 +116,8 @@ begin
   ParentMC.TransformDrawOptionsContext(theCtx);
  if f_FillColor.rIsSet then
   theCtx.rFillColor := f_FillColor.rValue;
+ if f_StrokeColor.rIsSet then
+  theCtx.rStrokeColor := f_StrokeColor.rValue;
  if f_StrokeThickness.rIsSet then
   theCtx.rStrokeThickness := f_StrokeThickness.rValue;
  if f_StrokeDash.rIsSet then
@@ -124,6 +128,12 @@ function TmsShapeClassPrim.SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner
 begin
  Result := Self;
  f_FillColor := aColor;
+end;
+
+function TmsShapeClassPrim.SetStrokeColor(aColor: TAlphaColor): ImsShapeClassTuner;
+begin
+ Result := Self;
+ f_StrokeColor := aColor;
 end;
 
 function TmsShapeClassPrim.SetStrokeThickness(aValue: Pixel): ImsShapeClassTuner;

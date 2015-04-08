@@ -20,6 +20,7 @@ type
  protected
   function IsTool: Boolean;
   function IsLineLike: Boolean;
+  function IsConnectorLike: Boolean;
   function Creator: ImsShapeCreator; override;
   function GetName: String; override;
   function Stereotype: TmsShapeStereotype; override;
@@ -66,6 +67,12 @@ function TmsProxyShapeClass.IsLineLike: Boolean;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.IsLineLike;
+end;
+
+function TmsProxyShapeClass.IsConnectorLike: Boolean;
+begin
+ Assert(f_ShapeClass <> nil);
+ Result := f_ShapeClass.IsConnectorLike;
 end;
 
 function TmsProxyShapeClass.Creator: ImsShapeCreator;

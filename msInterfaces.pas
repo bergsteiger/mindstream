@@ -11,11 +11,14 @@ uses
  Generics.Collections,
  FMX.Objects,
  Data.DBXJSONReflect,
- msLineF
+ msLineF,
+ System.Math.Vectors
  ;
 
 type
  Pixel = msLineF.Pixel;
+
+ TPolygon = System.Math.Vectors.TPolygon;
 
  ImsShape = interface;
 
@@ -114,7 +117,7 @@ type
   function GetEnumerator: TmsDiagrammsEnumerator;
   function IndexOf(const anItem: ImsDiagramm): Integer;
   function AddNewDiagramm: ImsDiagramm;
-  procedure AddDiagramm(const aDiagramm: ImsDiagramm);
+  procedure Add(const aDiagramm: ImsDiagramm);
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
   function FirstDiagramm: ImsDiagramm;
   procedure DiagrammsForToolbarToList(aList: TStrings);
@@ -146,7 +149,32 @@ type
 
  TRectF = System.Types.TRectF;
 
- TmsShapeUID = Int64;
+ // TGUID.NewGUID - чтобы не забыть
+
+ TmsUID = record
+  public
+   rLo: Int64;
+   rHi: Int64;
+  public
+   class operator Add(anUID: TmsUID; aDelta: Int64): TmsUID;
+   class operator Subtract(anUID: TmsUID; aDelta: Int64): TmsUID;
+   constructor Create(const aGUID: TGUID);
+   class function CreateNew: TmsUID; static;
+   function IsNull: Boolean;
+ end;//TmsUID
+
+ TmsShapeUID = record
+  public
+   rValue: TmsUID;
+  public
+   constructor Create(const aGUID: TGUID);
+   class function CreateNew: TmsShapeUID; static;
+   class operator Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
+   class operator Subtract(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
+   class operator Implicit(aValue: Int64): TmsShapeUID;
+   class operator Implicit(const aValue: TmsUID): TmsShapeUID;
+   function IsNull: Boolean;
+ end;//TmsShapeUID
 
  ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
@@ -171,6 +199,23 @@ type
    read pm_GetShapeClass;
   function Name: String;
  end;//ImsShape
+
+ TmsWeakRef<T> = record
+ // Слабая ссылка на интерфейс
+ private
+  type PT = ^T;
+ private
+  rRef : Pointer;
+ public
+  function AsRef: T; inline;
+  constructor Create(const aT: T);
+  class operator Equal(const A: TmsWeakRef<T>; const B: TmsWeakRef<T>): Boolean; inline;
+  class operator Equal(const A: TmsWeakRef<T>; const B: T): Boolean; inline;
+  class operator Implicit(const aValue: T): TmsWeakRef<T>; inline;
+  class operator Implicit(const aValue: TmsWeakRef<T>): T; inline;
+ end;//TmsWeakRef
+
+ TmsWeakShapeRef = TmsWeakRef<ImsShape>;
 
  TmsShapesEnumerator = TEnumerator<ImsShape>;
 
@@ -221,6 +266,7 @@ type
  ImsShapeClassTuner = interface
   function AsMC: ImsShapeClass;
   function SetFillColor(aColor: TAlphaColor): ImsShapeClassTuner;
+  function SetStrokeColor(aColor: TAlphaColor): ImsShapeClassTuner;
   function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
   function SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
   function SetCornerRadius(aValue: Single): ImsShapeClassTuner;
@@ -246,6 +292,7 @@ type
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
   function IsLineLike: Boolean;
+  function IsConnectorLike: Boolean;
   function Creator: ImsShapeCreator;
   function Name: TmsShapeClassName;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
@@ -305,11 +352,16 @@ type
   function As_ImsDiagrammsHolder: ImsDiagrammsHolder;
  end;//ImsDiagrammsController
 
+ TmsWeakInvalidatorRef = TmsWeakRef<ImsInvalidator>;
+
+ TmsWeakShapeClassRef = TmsWeakRef<ImsShapeClass>;
+
 implementation
 
 uses
  Math,
- System.StrUtils
+ System.StrUtils,
+ System.SysUtils
  ;
 
 // TmsDrawContext
@@ -335,7 +387,7 @@ end;
 
 constructor TmsDrawOptionsContext.Create(const aCtx: TmsDrawContext);
 begin
- rFillColor :=  TAlphaColorRec.Null;
+ rFillColor := TAlphaColorRec.Null;
  rOpacity := 0.5;
  rLineOpacity := 1.0;
  if aCtx.rMoving then
@@ -432,6 +484,130 @@ end;
 class operator TmsShapeClassName.Equal(const A: TmsShapeClassName; const B: TmsShapeClassName): Boolean;
 begin
  Result := (A.rValue = B.rValue);
+end;
+
+// TmsUID
+
+class function TmsUID.CreateNew: TmsUID;
+begin
+ Result := TmsUID.Create(TGUID.NewGUID);
+end;
+
+constructor TmsUID.Create(const aGUID: TGUID);
+begin
+ Assert(SizeOf(Self) = SizeOf(aGUID));
+ Move(aGUID, Self, SizeOf(Self));
+end;
+
+class operator TmsUID.Add(anUID: TmsUID; aDelta: Int64): TmsUID;
+begin
+ Result := anUID;
+ Assert(SizeOf(anUID) = SizeOf(TGUID));
+ Assert(aDelta >= 0);
+ if (aDelta > 0) then
+ begin
+  if (anUID.rLo - aDelta < High(anUID.rLo)) then
+  begin
+   Result.rLo := anUID.rLo + aDelta;
+   Result.rHi := 0;
+  end//anUID.rLo - aDelta < High(anUID.rLo)
+  else
+  begin
+   Assert(false, 'Не реализовано');
+   Assert(anUID.rHi - aDelta < High(anUID.rHi), 'Не реализовано');
+   Result.rHi := anUID.rHi + 1;
+   Result.rLo := 0;
+   Result := Result + (aDelta - 1);
+  end;//anUID.rLo - aDelta < High(anUID.rLo)
+ end;//aDelta > 0
+end;
+
+class operator TmsUID.Subtract(anUID: TmsUID; aDelta: Int64): TmsUID;
+begin
+ Result := anUID;
+ Assert(aDelta >= 0);
+ if (aDelta > 0) then
+ begin
+  Assert(false, 'Не реализовано');
+ end;//aDelta > 0
+end;
+
+function TmsUID.IsNull: Boolean;
+begin
+ Result := (rLo = 0) AND (rHi = 0);
+end;
+
+// TmsShapeUID
+
+constructor TmsShapeUID.Create(const aGUID: TGUID);
+begin
+ rValue := TmsUID.Create(aGUID);
+end;
+
+class function TmsShapeUID.CreateNew: TmsShapeUID;
+begin
+ Result.rValue := TmsUID.CreateNew;
+end;
+
+class operator TmsShapeUID.Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
+begin
+ Result.rValue := anUID.rValue + aDelta;
+end;
+
+class operator TmsShapeUID.Subtract(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
+begin
+ Result.rValue := anUID.rValue - aDelta;
+end;
+
+class operator TmsShapeUID.Implicit(aValue: Int64): TmsShapeUID;
+begin
+ Result.rValue.rLo := aValue;
+ Result.rValue.rHi := 0;
+end;
+
+class operator TmsShapeUID.Implicit(const aValue: TmsUID): TmsShapeUID;
+begin
+ Result.rValue := aValue;
+end;
+
+function TmsShapeUID.IsNull: Boolean;
+begin
+ Result := rValue.IsNull;
+end;
+
+// TmsWeakRef<T>
+
+constructor TmsWeakRef<T>.Create(const aT: T);
+begin
+ Assert(SizeOf(aT) = SizeOf(Self.rRef));
+ Self.rRef := PPointer(@aT)^;
+end;
+
+function TmsWeakRef<T>.AsRef: T;
+begin
+ Assert(SizeOf(Self.rRef) = SizeOf(Result));
+ Result := PT(@Self.rRef)^;
+end;
+
+class operator TmsWeakRef<T>.Implicit(const aValue: TmsWeakRef<T>): T;
+begin
+ Result := aValue.AsRef;
+end;
+
+class operator TmsWeakRef<T>.Equal(const A: TmsWeakRef<T>; const B: TmsWeakRef<T>): Boolean;
+begin
+ Result := (A.rRef = B.rRef);
+end;
+
+class operator TmsWeakRef<T>.Equal(const A: TmsWeakRef<T>; const B: T): Boolean;
+begin
+ Assert(SizeOf(B) = SizeOf(A));
+ Result := (A.rRef = PPointer(@B)^);
+end;
+
+class operator TmsWeakRef<T>.Implicit(const aValue: T): TmsWeakRef<T>;
+begin
+ Result := TmsWeakRef<T>.Create(aValue);
 end;
 
 end.

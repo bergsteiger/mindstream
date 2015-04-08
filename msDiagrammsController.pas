@@ -40,7 +40,6 @@ type
   f_DiagrammStack: TmsDiagrammStack;
   f_Delta: TPointF;
   f_Holder: ImsDiagrammsHolder;
-  f_UID: TmsShapeUID;
   procedure cbDiagrammChange(Sender: TObject);
   procedure btAddDiagrammClick(Sender: TObject);
   procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
@@ -69,9 +68,6 @@ type
  protected
   procedure DoInvalidateDiagramm(const aDiagramm: ImsDiagramm); override;
   procedure DoDiagrammAdded(const aDiagramms: ImsDiagrammsList; const aDiagramm: ImsDiagramm); override;
-  property CurrentDiagramms: ImsDiagrammsList
-   read pm_GetCurrentDiagramms
-   write pm_SetCurrentDiagramms;
   constructor CreatePrim(aImage: TPaintBox;
                          aShapes: TComboBox;
                          aDiagramm: TComboBox;
@@ -95,6 +91,9 @@ type
   property CurrentDiagramm: ImsDiagramm
    read pm_GetCurrentDiagramm
    write pm_SetCurrentDiagramm;
+  property CurrentDiagramms: ImsDiagrammsList
+   read pm_GetCurrentDiagramms
+   write pm_SetCurrentDiagramms;
 
   procedure SaveToPng(const aFileName: string);
   procedure DrawTo(const aCanvas: TCanvas);
@@ -112,15 +111,20 @@ uses
  Math,
  msShapeCreator,
  FMX.Dialogs,
- System.Math.Vectors
+ System.Math.Vectors,
+ msTotalShapesList
  ;
 
 type
+ TmsDiagrammsControllerWeakRef = TmsWeakRef<TmsDiagrammsController>;
+
  TmsDiagrammsHolder = class(TmsInterfacedRefcounted, ImsDiagrammsHolder)
  private
-  [Weak]
-  f_DiagrammsController: TmsDiagrammsController;
+  f_DiagrammsController: TmsDiagrammsControllerWeakRef;
   constructor CreatePrim(aDiagrammsController: TmsDiagrammsController);
+  function pm_GetDiagrammsController: TmsDiagrammsController;
+  property DiagrammsController: TmsDiagrammsController
+   read pm_GetDiagrammsController;
  protected
   procedure UpToParent;
   // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
@@ -143,6 +147,11 @@ begin
  f_DiagrammsController := aDiagrammsController;
 end;
 
+function TmsDiagrammsHolder.pm_GetDiagrammsController: TmsDiagrammsController;
+begin
+ Result := f_DiagrammsController;
+end;
+
 class function TmsDiagrammsHolder.Create(aDiagrammsController: TmsDiagrammsController): ImsDiagrammsHolder;
 begin
  Result := CreatePrim(aDiagrammsController);
@@ -150,40 +159,40 @@ end;
 
 function TmsDiagrammsHolder.pm_GetCurrentDiagramms: ImsDiagrammsList;
 begin
- Result := f_DiagrammsController.CurrentDiagramms;
+ Result := DiagrammsController.CurrentDiagramms;
 end;
 
 procedure TmsDiagrammsHolder.pm_SetCurrentDiagramms(const aValue: ImsDiagrammsList);
 begin
- f_DiagrammsController.CurrentDiagramms := aValue;
+ DiagrammsController.CurrentDiagramms := aValue;
 end;
 
 procedure TmsDiagrammsHolder.ResetOrigin;
 begin
- f_DiagrammsController.ResetOrigin;
+ DiagrammsController.ResetOrigin;
 end;
 
 function TmsDiagrammsHolder.GenerateUID(const aShape: ImsShape): TmsShapeUID;
 begin
- Result := f_DiagrammsController.GenerateUID(aShape);
+ Result := DiagrammsController.GenerateUID(aShape);
 end;
 
 procedure TmsDiagrammsHolder.UpToParent;
 // - сигнализируем о том, что нам надо перейти к РОДИТЕЛЬСКОЙ диаграмме
 begin
- f_DiagrammsController.UpToParent;
+ DiagrammsController.UpToParent;
 end;
 
 procedure TmsDiagrammsHolder.Scroll(const aDirection: TPointF);
 // - скроллинг диаграммы
 begin
- f_DiagrammsController.Scroll(aDirection);
+ DiagrammsController.Scroll(aDirection);
 end;
 
 procedure TmsDiagrammsHolder.SwapParents;
 // - сигнализируем о том, что надо ПОМЕНЯТЬ местами РОДИТЕЛЬСКИЕ диаграммы
 begin
- f_DiagrammsController.SwapParents;
+ DiagrammsController.SwapParents;
 end;
 
 {$Include msInvalidator.mixin.pas}
@@ -430,8 +439,7 @@ end;
 
 function TmsDiagrammsController.GenerateUID(const aShape: ImsShape): TmsShapeUID;
 begin
- Inc(f_UID);
- Result := f_UID;
+ Result := TmsTotalShapesList.GenerateUID(aShape);
 end;
 
 procedure TmsDiagrammsController.SaveToPng(const aFileName: string);
@@ -463,6 +471,7 @@ begin
   // Иначе например ОРИГИНАЛЬНЫЙ параллельный перенос - не будет работать.
   // https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B0%D0%BB%D0%BB%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81
  aCanvas.SetMatrix(l_Matrix);
+ Assert(CurrentDiagramm <> nil);
  CurrentDiagramm.DrawTo(aCanvas);
  // - отрисовываем примитив с учётом матрицы преобразований
   aCanvas.SetMatrix(l_OriginalMatrix);
@@ -510,6 +519,7 @@ end;
 
 procedure TmsDiagrammsController.MouseMove(const aClickContext: TmsClickContext);
 begin
+ Assert(CurrentDiagramm <> nil);
  CurrentDiagramm.MouseMove(aClickContext);
 end;
 

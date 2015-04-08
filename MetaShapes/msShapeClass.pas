@@ -21,6 +21,7 @@ type
  protected
   function IsTool: Boolean;
   function IsLineLike: Boolean;
+  function IsConnectorLike: Boolean;
   function Creator: ImsShapeCreator; override;
   function GetName: String; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
@@ -67,6 +68,12 @@ function TmsShapeClass.IsLineLike: Boolean;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.IsLineLike;
+end;
+
+function TmsShapeClass.IsConnectorLike: Boolean;
+begin
+ Assert(f_ShapeClass <> nil);
+ Result := f_ShapeClass.IsConnectorLike;
 end;
 
 function TmsShapeClass.Creator: ImsShapeCreator;
