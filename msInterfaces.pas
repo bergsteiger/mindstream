@@ -149,6 +149,15 @@ type
 
  TRectF = System.Types.TRectF;
 
+ TmsUID = record
+  public
+   rLo: Int64;
+   rHi: Int64;
+  public
+   class operator Add(anUID: TmsUID; aDelta: Int64): TmsUID;
+   class operator Subtract(anUID: TmsUID; aDelta: Int64): TmsUID;
+ end;//TmsUID
+
  TmsShapeUID = record
   public
    rValue: Int64;
@@ -464,6 +473,37 @@ end;
 class operator TmsShapeClassName.Equal(const A: TmsShapeClassName; const B: TmsShapeClassName): Boolean;
 begin
  Result := (A.rValue = B.rValue);
+end;
+
+// TmsUID
+
+class operator TmsUID.Add(anUID: TmsUID; aDelta: Int64): TmsUID;
+begin
+ Assert(aDelta >= 0);
+ if (aDelta > 0) then
+ begin
+  if (anUID.rLo - aDelta < High(anUID.rLo)) then
+   Result.rLo := anUID.rLo + aDelta
+  else
+  begin
+   Assert(false, 'Не реализовано');
+  end;//anUID.rLo - aDelta < High(anUID.rLo)
+ end//aDelta > 0
+ else
+  Result := anUID;
+end;
+
+class operator TmsUID.Subtract(anUID: TmsUID; aDelta: Int64): TmsUID;
+begin
+ Assert(aDelta <= 0);
+ if (aDelta < 0) then
+ begin
+  Assert(false, 'Не реализовано');
+  Result.rLo := 0{anUID.rValue + aDelta};
+  Result.rHi := 0{anUID.rValue + aDelta};
+ end//aDelta < 0
+ else
+  Result := anUID;
 end;
 
 // TmsShapeUID
