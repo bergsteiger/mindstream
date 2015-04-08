@@ -487,6 +487,8 @@ begin
   else
   begin
    Assert(false, 'Не реализовано');
+   Result.rLo := 0;
+   Result.rHi := 0;
   end;//anUID.rLo - aDelta < High(anUID.rLo)
  end//aDelta > 0
  else
@@ -499,8 +501,8 @@ begin
  if (aDelta < 0) then
  begin
   Assert(false, 'Не реализовано');
-  Result.rLo := 0{anUID.rValue + aDelta};
-  Result.rHi := 0{anUID.rValue + aDelta};
+  Result.rLo := 0;
+  Result.rHi := 0;
  end//aDelta < 0
  else
   Result := anUID;
