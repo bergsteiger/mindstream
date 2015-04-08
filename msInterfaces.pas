@@ -150,7 +150,8 @@ type
  TRectF = System.Types.TRectF;
 
  TmsShapeUID = record
-  rValue: Int64;
+  public
+   rValue: Int64;
   public
    class operator Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
    class operator Subtract(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
