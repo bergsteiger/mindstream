@@ -13,7 +13,8 @@
 				205],
 				"f_ShapeClassName": "TriangleDirectionRight",
 				"f_Name": "TriangleDirectionRight1",
-				"f_UID": [1],
+				"f_UID": [[1,
+				0]],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 3,
@@ -34,7 +35,8 @@
 				942],
 				"f_ShapeClassName": "TriangleDirectionRight",
 				"f_Name": "TriangleDirectionRight2",
-				"f_UID": [2],
+				"f_UID": [[2,
+				0]],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 5,
@@ -55,7 +57,8 @@
 				471],
 				"f_ShapeClassName": "TriangleDirectionRight",
 				"f_Name": "TriangleDirectionRight3",
-				"f_UID": [3],
+				"f_UID": [[3,
+				0]],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 7,
@@ -76,7 +79,8 @@
 				708],
 				"f_ShapeClassName": "TriangleDirectionRight",
 				"f_Name": "TriangleDirectionRight4",
-				"f_UID": [4],
+				"f_UID": [[4,
+				0]],
 				"f_Items": [{
 					"type": "msDiagramm.TmsDiagramm",
 					"id": 9,
@@ -91,8 +95,10 @@
 			"type": "msConnector.TmsConnector",
 			"id": 10,
 			"fields": {
-				"f_UIDLeft": [1],
-				"f_UIDRight": [2],
+				"f_UIDLeft": [[1,
+				0]],
+				"f_UIDRight": [[2,
+				0]],
 				"f_FinishPoint": [[820,
 				952],
 				820,
@@ -103,7 +109,8 @@
 				195],
 				"f_ShapeClassName": "Connector",
 				"f_Name": "Connector5",
-				"f_UID": [5],
+				"f_UID": [[5,
+				0]],
 				"f_Items": []
 			}
 		},
@@ -111,8 +118,10 @@
 			"type": "msConnector.TmsConnector",
 			"id": 11,
 			"fields": {
-				"f_UIDLeft": [3],
-				"f_UIDRight": [4],
+				"f_UIDLeft": [[3,
+				0]],
+				"f_UIDRight": [[4,
+				0]],
 				"f_FinishPoint": [[868,
 				718],
 				868,
@@ -123,7 +132,8 @@
 				461],
 				"f_ShapeClassName": "Connector",
 				"f_Name": "Connector5",
-				"f_UID": [6],
+				"f_UID": [[6,
+				0]],
 				"f_Items": []
 			}
 		}]

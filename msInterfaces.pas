@@ -160,11 +160,12 @@ type
 
  TmsShapeUID = record
   public
-   rValue: Int64;
+   rValue: TmsUID;
   public
    class operator Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
    class operator Subtract(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
    class operator Implicit(aValue: Int64): TmsShapeUID;
+   class operator Implicit(const aValue: TmsUID): TmsShapeUID;
  end;//TmsShapeUID
 
  ImsShape = interface(ImsDiagrammsList)
@@ -483,12 +484,15 @@ begin
  if (aDelta > 0) then
  begin
   if (anUID.rLo - aDelta < High(anUID.rLo)) then
-   Result.rLo := anUID.rLo + aDelta
+  begin
+   Result.rLo := anUID.rLo + aDelta;
+   Result.rHi := 0;
+  end//anUID.rLo - aDelta < High(anUID.rLo)
   else
   begin
    Assert(false, 'Не реализовано');
    Assert(anUID.rHi - aDelta < High(anUID.rHi), 'Не реализовано');
-   Result.rHi := Result.rHi + 1;
+   Result.rHi := anUID.rHi + 1;
    Result.rLo := 0;
    Result := Result + (aDelta - 1);
   end;//anUID.rLo - aDelta < High(anUID.rLo)
@@ -528,13 +532,19 @@ begin
  Assert(aDelta <= 0);
  if (aDelta < 0) then
  begin
-  Result.rValue := anUID.rValue + aDelta;
+  Result.rValue := anUID.rValue - aDelta;
  end//aDelta < 0
  else
   Result := anUID;
 end;
 
 class operator TmsShapeUID.Implicit(aValue: Int64): TmsShapeUID;
+begin
+ Result.rValue.rLo := aValue;
+ Result.rValue.rHi := 0;
+end;
+
+class operator TmsShapeUID.Implicit(const aValue: TmsUID): TmsShapeUID;
 begin
  Result.rValue := aValue;
 end;
