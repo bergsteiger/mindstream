@@ -10,10 +10,12 @@ uses
 
 type
  TmsWeakShapeRefList = TList<TmsWeakShapeRef>;
+ TmsShapeByUIDMap = TDictionary<TmsShapeUID, TmsWeakShapeRef>;
 
  TmsTotalShapesList = class
  strict private
   class var f_ShapesPlainList : TmsWeakShapeRefList;
+  class var f_Map : TmsShapeByUIDMap;
   class function ShapesPlainList: TmsWeakShapeRefList;
  public
   class destructor Fini;
@@ -35,6 +37,7 @@ uses
 class destructor TmsTotalShapesList.Fini;
 begin
  FreeAndNil(f_ShapesPlainList);
+ FreeAndNil(f_Map);
 end;
 
 class function TmsTotalShapesList.ShapesPlainList: TmsWeakShapeRefList;
