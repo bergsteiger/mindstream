@@ -506,11 +506,11 @@ end;
 class operator TmsUID.Subtract(anUID: TmsUID; aDelta: Int64): TmsUID;
 begin
  Result := anUID;
- Assert(aDelta <= 0);
- if (aDelta < 0) then
+ Assert(aDelta >= 0);
+ if (aDelta > 0) then
  begin
   Assert(false, 'Не реализовано');
- end;//aDelta < 0
+ end;//aDelta > 0
 end;
 
 // TmsShapeUID
