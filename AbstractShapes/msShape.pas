@@ -82,6 +82,7 @@ type
   procedure Cleanup; override;
  public
   class function IsLineLike: Boolean; virtual;
+  class function IsConnectorLike: Boolean; virtual;
   procedure DrawTo(const aCtx: TmsDrawContext); virtual;
   property StartPoint : TPointF
    read pm_GetStartPoint;
@@ -248,6 +249,11 @@ begin
 end;
 
 class function TmsShape.IsLineLike: Boolean;
+begin
+ Result := false;
+end;
+
+class function TmsShape.IsConnectorLike: Boolean;
 begin
  Result := false;
 end;

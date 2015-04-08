@@ -31,6 +31,8 @@ type
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
   procedure MoveBy(const aCtx: TmsMoveContext); override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
+ public
+  class function IsConnectorLike: Boolean; override;
  end;//TmsConnector
 
 implementation
@@ -160,6 +162,11 @@ begin
    f_UIDRight := f_RightShape.UID;
  end;//aCtx.rShapesController <> nil
  Result := inherited;
+end;
+
+class function TmsConnector.IsConnectorLike: Boolean;
+begin
+ Result := true;
 end;
 
 end.

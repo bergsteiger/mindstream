@@ -292,6 +292,7 @@ type
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
   function IsLineLike: Boolean;
+  function IsConnectorLike: Boolean;
   function Creator: ImsShapeCreator;
   function Name: TmsShapeClassName;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
