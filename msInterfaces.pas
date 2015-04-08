@@ -483,6 +483,7 @@ end;
 class operator TmsUID.Add(anUID: TmsUID; aDelta: Int64): TmsUID;
 begin
  Result := anUID;
+ Assert(SizeOf(anUID) = SizeOf(TGUID));
  Assert(aDelta >= 0);
  if (aDelta > 0) then
  begin
