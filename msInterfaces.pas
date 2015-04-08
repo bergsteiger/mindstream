@@ -158,12 +158,14 @@ type
   public
    class operator Add(anUID: TmsUID; aDelta: Int64): TmsUID;
    class operator Subtract(anUID: TmsUID; aDelta: Int64): TmsUID;
+   constructor Create(const aGUID: TGUID);
  end;//TmsUID
 
  TmsShapeUID = record
   public
    rValue: TmsUID;
   public
+   constructor Create(const aGUID: TGUID);
    class operator Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
    class operator Subtract(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
    class operator Implicit(aValue: Int64): TmsShapeUID;
@@ -480,6 +482,12 @@ end;
 
 // TmsUID
 
+constructor TmsUID.Create(const aGUID: TGUID);
+begin
+ Assert(SizeOf(Self) = SizeOf(aGUID));
+ Move(aGUID, Self, SizeOf(Self));
+end;
+
 class operator TmsUID.Add(anUID: TmsUID; aDelta: Int64): TmsUID;
 begin
  Result := anUID;
@@ -514,6 +522,11 @@ begin
 end;
 
 // TmsShapeUID
+
+constructor TmsShapeUID.Create(const aGUID: TGUID);
+begin
+ rValue := TmsUID.Create(aGUID);
+end;
 
 class operator TmsShapeUID.Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
 begin
