@@ -40,7 +40,6 @@ type
   f_DiagrammStack: TmsDiagrammStack;
   f_Delta: TPointF;
   f_Holder: ImsDiagrammsHolder;
-  f_UID: TmsShapeUID;
   procedure cbDiagrammChange(Sender: TObject);
   procedure btAddDiagrammClick(Sender: TObject);
   procedure imgMainMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
@@ -112,7 +111,8 @@ uses
  Math,
  msShapeCreator,
  FMX.Dialogs,
- System.Math.Vectors
+ System.Math.Vectors,
+ msTotalShapesList
  ;
 
 type
@@ -439,8 +439,7 @@ end;
 
 function TmsDiagrammsController.GenerateUID(const aShape: ImsShape): TmsShapeUID;
 begin
- Inc(f_UID);
- Result := f_UID;
+ Result := TmsTotalShapesList.GenerateUID(aShape);
 end;
 
 procedure TmsDiagrammsController.SaveToPng(const aFileName: string);

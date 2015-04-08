@@ -20,6 +20,8 @@ type
   public
    class procedure ShapeAdded(const aShape: ImsShape);
    class procedure ShapeDestroyed(const aShape: ImsShape);
+   class function GenerateUID(const aShape: ImsShape): TmsShapeUID;
+   // - создаёт UID для примитива aShape
  end;//TmsTotalShapesList
 
 implementation
@@ -54,6 +56,11 @@ begin
  if (f_ShapesPlainList <> nil) then
   f_ShapesPlainList.Remove(aShape)
 //  f_ShapesPlainList.Remove(TmsWeakShapeRef.Create(aShape))
+end;
+
+class function TmsTotalShapesList.GenerateUID(const aShape: ImsShape): TmsShapeUID;
+begin
+ Result := TmsShapeUID.CreateNew;
 end;
 
 end.
