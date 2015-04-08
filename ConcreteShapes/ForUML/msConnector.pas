@@ -36,7 +36,8 @@ type
 implementation
 
 uses
-  msLineF
+  msLineF,
+  msTotalShapesList
   ;
 
 // TmsConnector
@@ -54,6 +55,9 @@ end;
 
 function TmsConnector.pm_GetLeftShape: ImsShape;
 begin
+ if (f_LeftShape = nil) then
+  if not f_UIDLeft.IsNull then
+   f_LeftShape := TmsTotalShapesList.ShapeByUID(f_UIDLeft);
  Result := f_LeftShape;
 end;
 

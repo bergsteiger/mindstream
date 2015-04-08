@@ -84,6 +84,7 @@ end;
 class function TmsTotalShapesList.ShapeByUID(const aUID: TmsShapeUID): ImsShape;
 begin
  Assert(f_Map <> nil);
+ Assert(not aUID.IsNull);
  Result := f_Map[aUID];
 end;
 
