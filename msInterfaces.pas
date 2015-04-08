@@ -153,6 +153,7 @@ type
   rValue: Int64;
   public
    class operator Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
+   class operator Subtract(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
    class operator Implicit(aValue: Int64): TmsShapeUID;
  end;//TmsShapeUID
 
@@ -468,7 +469,24 @@ end;
 
 class operator TmsShapeUID.Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
 begin
- Result.rValue := anUID.rValue + aDelta;
+ Assert(aDelta >= 0);
+ if (aDelta > 0) then
+ begin
+  Result.rValue := anUID.rValue + aDelta;
+ end//aDelta > 0
+ else
+  Result := anUID;
+end;
+
+class operator TmsShapeUID.Subtract(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
+begin
+ Assert(aDelta <= 0);
+ if (aDelta < 0) then
+ begin
+  Result.rValue := anUID.rValue + aDelta;
+ end//aDelta > 0
+ else
+  Result := anUID;
 end;
 
 class operator TmsShapeUID.Implicit(aValue: Int64): TmsShapeUID;
