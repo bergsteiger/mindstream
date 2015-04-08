@@ -484,7 +484,7 @@ begin
  if (aDelta < 0) then
  begin
   Result.rValue := anUID.rValue + aDelta;
- end//aDelta > 0
+ end//aDelta < 0
  else
   Result := anUID;
 end;
