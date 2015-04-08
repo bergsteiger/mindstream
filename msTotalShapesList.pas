@@ -25,6 +25,7 @@ type
    class procedure ShapeDestroyed(const aShape: ImsShape);
    class function GenerateUID(const aShape: ImsShape): TmsShapeUID;
    // - создаёт UID для примитива aShape
+   class function ShapeByUID(const aUID: TmsShapeUID): ImsShape;
  end;//TmsTotalShapesList
 
 implementation
@@ -78,6 +79,12 @@ end;
 class function TmsTotalShapesList.GenerateUID(const aShape: ImsShape): TmsShapeUID;
 begin
  Result := TmsShapeUID.CreateNew;
+end;
+
+class function TmsTotalShapesList.ShapeByUID(const aUID: TmsShapeUID): ImsShape;
+begin
+ Assert(f_Map <> nil);
+ Result := f_Map[aUID];
 end;
 
 end.
