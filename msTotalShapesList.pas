@@ -17,6 +17,7 @@ type
   class var f_ShapesPlainList : TmsWeakShapeRefList;
   class var f_Map : TmsShapeByUIDMap;
   class function ShapesPlainList: TmsWeakShapeRefList;
+  class function Map: TmsShapeByUIDMap;
  public
   class destructor Fini;
   public
@@ -47,18 +48,31 @@ begin
  Result := f_ShapesPlainList;
 end;
 
+class function TmsTotalShapesList.Map: TmsShapeByUIDMap;
+begin
+ if (f_Map = nil) then
+  f_Map := TmsShapeByUIDMap.Create;
+ Result := f_Map;
+end;
+
 class procedure TmsTotalShapesList.ShapeAdded(const aShape: ImsShape);
 begin
  with ShapesPlainList do
   if (IndexOf(aShape) < 0) then
    Add(aShape);
+ Map.Remove(aShape.UID);
+ // - потому, что при ДЕСЕРИАЛИЗАЦИИ есть ДВЕ копии примитива
+ //   одна - десериализуемая
+ //   вторая - добавляемая
+ Map.Add(aShape.UID, aShape);
 end;
 
 class procedure TmsTotalShapesList.ShapeDestroyed(const aShape: ImsShape);
 begin
  if (f_ShapesPlainList <> nil) then
-  f_ShapesPlainList.Remove(aShape)
-//  f_ShapesPlainList.Remove(TmsWeakShapeRef.Create(aShape))
+  f_ShapesPlainList.Remove(aShape);
+ if (f_Map <> nil) then
+  f_Map.Remove(aShape.UID);
 end;
 
 class function TmsTotalShapesList.GenerateUID(const aShape: ImsShape): TmsShapeUID;
