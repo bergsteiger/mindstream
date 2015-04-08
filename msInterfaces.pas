@@ -480,6 +480,7 @@ end;
 
 class operator TmsUID.Add(anUID: TmsUID; aDelta: Int64): TmsUID;
 begin
+ Result := anUID;
  Assert(aDelta >= 0);
  if (aDelta > 0) then
  begin
@@ -496,22 +497,17 @@ begin
    Result.rLo := 0;
    Result := Result + (aDelta - 1);
   end;//anUID.rLo - aDelta < High(anUID.rLo)
- end//aDelta > 0
- else
-  Result := anUID;
+ end;//aDelta > 0
 end;
 
 class operator TmsUID.Subtract(anUID: TmsUID; aDelta: Int64): TmsUID;
 begin
+ Result := anUID;
  Assert(aDelta <= 0);
  if (aDelta < 0) then
  begin
   Assert(false, 'Не реализовано');
-  Result.rLo := 0;
-  Result.rHi := 0;
- end//aDelta < 0
- else
-  Result := anUID;
+ end;//aDelta < 0
 end;
 
 // TmsShapeUID
