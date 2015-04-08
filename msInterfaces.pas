@@ -160,6 +160,7 @@ type
    class operator Subtract(anUID: TmsUID; aDelta: Int64): TmsUID;
    constructor Create(const aGUID: TGUID);
    class function CreateNew: TmsUID; static;
+   function IsNull: Boolean;
  end;//TmsUID
 
  TmsShapeUID = record
@@ -172,6 +173,7 @@ type
    class operator Subtract(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
    class operator Implicit(aValue: Int64): TmsShapeUID;
    class operator Implicit(const aValue: TmsUID): TmsShapeUID;
+   function IsNull: Boolean;
  end;//TmsShapeUID
 
  ImsShape = interface(ImsDiagrammsList)
@@ -529,6 +531,11 @@ begin
  end;//aDelta > 0
 end;
 
+function TmsUID.IsNull: Boolean;
+begin
+ Result := (rLo = 0) AND (rHi = 0);
+end;
+
 // TmsShapeUID
 
 constructor TmsShapeUID.Create(const aGUID: TGUID);
@@ -560,6 +567,11 @@ end;
 class operator TmsShapeUID.Implicit(const aValue: TmsUID): TmsShapeUID;
 begin
  Result.rValue := aValue;
+end;
+
+function TmsShapeUID.IsNull: Boolean;
+begin
+ Result := rValue.IsNull;
 end;
 
 // TmsWeakRef<T>
