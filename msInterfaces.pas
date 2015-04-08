@@ -149,6 +149,8 @@ type
 
  TRectF = System.Types.TRectF;
 
+ // TGUID.NewGUID - чтобы не забыть
+
  TmsUID = record
   public
    rLo: Int64;
