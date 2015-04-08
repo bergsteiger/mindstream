@@ -159,6 +159,7 @@ type
    class operator Add(anUID: TmsUID; aDelta: Int64): TmsUID;
    class operator Subtract(anUID: TmsUID; aDelta: Int64): TmsUID;
    constructor Create(const aGUID: TGUID);
+   class function CreateNew: TmsUID; static;
  end;//TmsUID
 
  TmsShapeUID = record
@@ -166,6 +167,7 @@ type
    rValue: TmsUID;
   public
    constructor Create(const aGUID: TGUID);
+   class function CreateNew: TmsShapeUID; static;
    class operator Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
    class operator Subtract(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
    class operator Implicit(aValue: Int64): TmsShapeUID;
@@ -355,7 +357,8 @@ implementation
 
 uses
  Math,
- System.StrUtils
+ System.StrUtils,
+ System.SysUtils
  ;
 
 // TmsDrawContext
@@ -482,6 +485,11 @@ end;
 
 // TmsUID
 
+class function TmsUID.CreateNew: TmsUID;
+begin
+ Result := TmsUID.Create(TGUID.NewGUID);
+end;
+
 constructor TmsUID.Create(const aGUID: TGUID);
 begin
  Assert(SizeOf(Self) = SizeOf(aGUID));
@@ -526,6 +534,11 @@ end;
 constructor TmsShapeUID.Create(const aGUID: TGUID);
 begin
  rValue := TmsUID.Create(aGUID);
+end;
+
+class function TmsShapeUID.CreateNew: TmsShapeUID;
+begin
+ Result.rValue := TmsUID.CreateNew;
 end;
 
 class operator TmsShapeUID.Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
