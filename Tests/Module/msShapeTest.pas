@@ -420,8 +420,11 @@ begin
    for l_Shape in aDiagramm do
    begin
     Check(Self.ShapeClass.IsOurInstance(l_Shape), 'Это не наш тип примитива');
-    Check(l_Shape.StartPoint.X = f_Coords[l_Index].X, 'Координаты X не совпадают');
-    Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y, 'Координаты Y не совпадают');
+    if not Self.ShapeClass.IsConnectorLike then
+    begin
+     Check(l_Shape.StartPoint.X = f_Coords[l_Index].X, 'Координаты X не совпадают');
+     Check(l_Shape.StartPoint.Y = f_Coords[l_Index].Y, 'Координаты Y не совпадают');
+    end;//not Self.ShapeClass.IsConnectorLike
     Inc(l_Index);
    end;//for l_Shape
   end

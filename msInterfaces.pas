@@ -158,16 +158,22 @@ type
   public
    class operator Add(anUID: TmsUID; aDelta: Int64): TmsUID;
    class operator Subtract(anUID: TmsUID; aDelta: Int64): TmsUID;
+   constructor Create(const aGUID: TGUID);
+   class function CreateNew: TmsUID; static;
+   function IsNull: Boolean;
  end;//TmsUID
 
  TmsShapeUID = record
   public
    rValue: TmsUID;
   public
+   constructor Create(const aGUID: TGUID);
+   class function CreateNew: TmsShapeUID; static;
    class operator Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
    class operator Subtract(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
    class operator Implicit(aValue: Int64): TmsShapeUID;
    class operator Implicit(const aValue: TmsUID): TmsShapeUID;
+   function IsNull: Boolean;
  end;//TmsShapeUID
 
  ImsShape = interface(ImsDiagrammsList)
@@ -286,6 +292,7 @@ type
   function IsForToolbar: Boolean;
   function IsTool: Boolean;
   function IsLineLike: Boolean;
+  function IsConnectorLike: Boolean;
   function Creator: ImsShapeCreator;
   function Name: TmsShapeClassName;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
@@ -353,7 +360,8 @@ implementation
 
 uses
  Math,
- System.StrUtils
+ System.StrUtils,
+ System.SysUtils
  ;
 
 // TmsDrawContext
@@ -480,6 +488,17 @@ end;
 
 // TmsUID
 
+class function TmsUID.CreateNew: TmsUID;
+begin
+ Result := TmsUID.Create(TGUID.NewGUID);
+end;
+
+constructor TmsUID.Create(const aGUID: TGUID);
+begin
+ Assert(SizeOf(Self) = SizeOf(aGUID));
+ Move(aGUID, Self, SizeOf(Self));
+end;
+
 class operator TmsUID.Add(anUID: TmsUID; aDelta: Int64): TmsUID;
 begin
  Result := anUID;
@@ -513,7 +532,22 @@ begin
  end;//aDelta > 0
 end;
 
+function TmsUID.IsNull: Boolean;
+begin
+ Result := (rLo = 0) AND (rHi = 0);
+end;
+
 // TmsShapeUID
+
+constructor TmsShapeUID.Create(const aGUID: TGUID);
+begin
+ rValue := TmsUID.Create(aGUID);
+end;
+
+class function TmsShapeUID.CreateNew: TmsShapeUID;
+begin
+ Result.rValue := TmsUID.CreateNew;
+end;
 
 class operator TmsShapeUID.Add(anUID: TmsShapeUID; aDelta: Int64): TmsShapeUID;
 begin
@@ -534,6 +568,11 @@ end;
 class operator TmsShapeUID.Implicit(const aValue: TmsUID): TmsShapeUID;
 begin
  Result.rValue := aValue;
+end;
+
+function TmsShapeUID.IsNull: Boolean;
+begin
+ Result := rValue.IsNull;
 end;
 
 // TmsWeakRef<T>

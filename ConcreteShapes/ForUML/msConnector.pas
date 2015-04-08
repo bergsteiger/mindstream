@@ -19,6 +19,13 @@ type
   f_RightShape : ImsShape;
   f_UIDLeft : TmsShapeUID;
   f_UIDRight : TmsShapeUID;
+ private
+  function pm_GetLeftShape: ImsShape;
+  property LeftShape : ImsShape
+   read pm_GetLeftShape;
+  function pm_GetRightShape: ImsShape;
+  property RightShape : ImsShape
+   read pm_GetRightShape;
  protected
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); override;
   procedure SetStartPoint(const aStartPoint: TPointF); override;
@@ -27,13 +34,15 @@ type
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
   procedure MoveBy(const aCtx: TmsMoveContext); override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
-  procedure GetStereotypeRect(var aRect: TRectF); override;
+ public
+  class function IsConnectorLike: Boolean; override;
  end;//TmsConnector
 
 implementation
 
 uses
-  msLineF
+  msLineF,
+  msTotalShapesList
   ;
 
 // TmsConnector
@@ -49,6 +58,22 @@ begin
  end;//aCtx.rShapesController <> nil
 end;
 
+function TmsConnector.pm_GetLeftShape: ImsShape;
+begin
+ if (f_LeftShape = nil) then
+  if not f_UIDLeft.IsNull then
+   f_LeftShape := TmsTotalShapesList.ShapeByUID(f_UIDLeft);
+ Result := f_LeftShape;
+end;
+
+function TmsConnector.pm_GetRightShape: ImsShape;
+begin
+ if (f_RightShape = nil) then
+  if not f_UIDRight.IsNull then
+   f_RightShape := TmsTotalShapesList.ShapeByUID(f_UIDRight);
+ Result := f_RightShape;
+end;
+
 procedure TmsConnector.SetStartPoint(const aStartPoint: TPointF);
 begin
  inherited;
@@ -60,18 +85,18 @@ var
  l_B : TPointF;
  l_R : TmsPointF;
 begin
- if (f_LeftShape <> nil) then
+ if (LeftShape <> nil) then
  begin
-  l_A := f_LeftShape.StartPoint;
-  if (f_RightShape <> nil) then
-   l_B := f_RightShape.StartPoint
+  l_A := LeftShape.StartPoint;
+  if (RightShape <> nil) then
+   l_B := RightShape.StartPoint
   else
    l_B := inherited pm_GetFinishPoint;
-  if TmsRectF.Create(f_LeftShape.DrawBounds).Cross(TmsLineF.Create(l_A, l_B), l_R) then
+  if TmsRectF.Create(LeftShape.DrawBounds).Cross(TmsLineF.Create(l_A, l_B), l_R) then
    Result := l_R.P
   else
    Result := l_A;
- end//f_LeftShape <> nil
+ end//LeftShape <> nil
  else
   Result := inherited;
 end;
@@ -82,18 +107,18 @@ var
  l_B : TPointF;
  l_R : TmsPointF;
 begin
- if (f_RightShape <> nil) then
+ if (RightShape <> nil) then
  begin
-  l_B := f_RightShape.StartPoint;
-  if (f_LeftShape <> nil) then
-   l_A := f_LeftShape.StartPoint
+  l_B := RightShape.StartPoint;
+  if (LeftShape <> nil) then
+   l_A := LeftShape.StartPoint
   else
    l_A := inherited pm_GetStartPoint;
-  if TmsRectF.Create(f_RightShape.DrawBounds).Cross(TmsLineF.Create(l_A, l_B), l_R) then
+  if TmsRectF.Create(RightShape.DrawBounds).Cross(TmsLineF.Create(l_A, l_B), l_R) then
    Result := l_R.P
   else
    Result := l_B;
- end//f_RightShape <> nil
+ end//RightShape <> nil
  else
   Result := inherited;
 end;
@@ -101,9 +126,9 @@ end;
 function TmsConnector.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
 begin
  Result := true;
- if (f_LeftShape <> nil) AND f_LeftShape.HitTest(aPoint, theShape) then
+ if (LeftShape <> nil) AND LeftShape.HitTest(aPoint, theShape) then
   Exit;
- if (f_RightShape <> nil) AND f_RightShape.HitTest(aPoint, theShape) then
+ if (RightShape <> nil) AND RightShape.HitTest(aPoint, theShape) then
   Exit;
  Result := inherited;
 end;
@@ -114,28 +139,28 @@ procedure TmsConnector.MoveBy(const aCtx: TmsMoveContext);
 begin
 (* if (aCtx.rShapesController <> nil) then
  begin
-  if (f_RightShape = nil) then
+  if (RightShape = nil) then
   begin
    if SamePoint(Self.FinishPoint, aCtx.rStartPoint) then
    begin
-    f_RightShape := aCtx.rShapesController.ShapeByPt(Self.FinishPoint + aCtx.rDelta);
-    if Self.EQ(f_RightShape) then
-     f_RightShape := nil;
+    RightShape := aCtx.rShapesController.ShapeByPt(Self.FinishPoint + aCtx.rDelta);
+    if Self.EQ(RightShape) then
+     RightShape := nil;
    end;//SamePoint(Self.FinishPoint, aCtx.rStartPoint)
-  end;//f_RightShape = nil
+  end;//RightShape = nil
  end;//aCtx.rShapesController <> nil
 
- if (f_LeftShape <> nil) AND SamePoint(aCtx.rStartPoint, Self.StartPoint) then
+ if (LeftShape <> nil) AND SamePoint(aCtx.rStartPoint, Self.StartPoint) then
  begin
-  f_LeftShape.MoveBy(aCtx);
+  LeftShape.MoveBy(aCtx);
   Exit;
- end;//f_LeftShape <> nil
+ end;//LeftShape <> nil
 
- if (f_RightShape <> nil) AND f_RightShape.HitTest(aCtx.rStartPoint + aCtx.rDelta, l_Shape) then
+ if (RightShape <> nil) AND RightShape.HitTest(aCtx.rStartPoint + aCtx.rDelta, l_Shape) then
  begin
-  f_RightShape.MoveBy(aCtx);
+  RightShape.MoveBy(aCtx);
   Exit;
- end;//f_RightShape <> nil*)
+ end;//RightShape <> nil*)
  inherited;
 end;
 
@@ -150,10 +175,9 @@ begin
  Result := inherited;
 end;
 
-procedure TmsConnector.GetStereotypeRect(var aRect: TRectF);
+class function TmsConnector.IsConnectorLike: Boolean;
 begin
- inherited;
- //aRect := DrawBounds;
+ Result := true;
 end;
 
 end.
