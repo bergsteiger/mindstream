@@ -1,0 +1,24 @@
+Тест K290951667
+
+ Параметры: (  "Открывать документы из списка в текущем окне" )
+ Выполнить ( 
+  OBJECT VAR l_QC
+  ППР
+  "Убедиться, что фокус в редакторе"
+  focused:control:push >>> l_QC
+  'AT_CLASS' 'My Class A' l_QC pop:QueryCard:SetAttribute
+  'AT_CLASS' 'My Class C' l_QC pop:QueryCard:SetAttribute
+  "Нажать Искать"
+  "Проверить информацию о списке и первый документ"
+  ППР
+  // редактор теперь новый, так что надо получить его заново
+  "Убедиться, что фокус в редакторе"
+  focused:control:push >>> l_QC 
+  'AT_CLASS' 'My Class A' l_QC pop:QueryCard:SetAttribute
+  'AT_CLASS' 'My Class D' l_QC pop:QueryCard:SetAttribute
+  "Нажать Искать"
+  "Проверить информацию о списке и первый документ"
+ )
+;
+
+K290951667

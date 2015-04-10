@@ -1,0 +1,28 @@
+USES
+ WordsTranslation.script
+;
+
+PROCEDURE "Убедиться, что фокус в редакторе"
+ OBJECT VAR l_Control
+ focused:control:push =: l_Control
+ l_Control ЯВЛЯЕТСЯ class::TevCustomEditorWindow 
+  [ 'Фокус не в редакторе, а в ' l_Control pop:component:Name ':' l_Control pop:object:ClassName ] strings:Cat 
+   ASSERTS
+;
+
+PROCEDURE "Сравнить выделенный текст редактора с эталоном" OBJECT IN anEditor
+ STRING VAR "Выделенный текст"
+ "Убедиться, что фокус в редакторе"
+ anEditor pop:editor:GetSelectionText "Заменить непечатаемые символы" =: "Выделенный текст"
+ "Выделенный текст" .
+; // "Сравнить выделенный текст редактора с эталоном"
+
+STRING FUNCTION "Узнать выделенный текст текущего редактора"
+ "Убедиться, что фокус в редакторе"
+ Result := ( "Контрол в фокусе" pop:editor:GetSelectionText "Заменить непечатаемые символы" ) 
+; // "Узнать выделенный текст текущего редактора"
+
+PROCEDURE "Сравнить выделенный текст текущего редактора с эталоном"
+ "Убедиться, что фокус в редакторе"
+ "Сравнить выделенный текст редактора {(focused:control:push)} с эталоном"
+; // "Сравнить выделенный текст текущего редактора с эталоном"

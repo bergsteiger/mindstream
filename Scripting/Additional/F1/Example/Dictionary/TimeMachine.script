@@ -1,0 +1,26 @@
+USES
+ Reminders.script
+;
+
+: "Установить дату машины времени Нажать на медаль и проверить наличие баллона"
+
+  /* Стек */ timemachine:SetDate
+
+  "Нажать на медаль {('WarnTimeMachineWarning')} и проверить наличие баллона"
+;
+
+// $Id: TimeMachine.script,v 1.3 2011/05/10 14:15:49 lulin Exp $
+
+// $Log: TimeMachine.script,v $
+// Revision 1.3  2011/05/10 14:15:49  lulin
+// {RequestLink:236719181}.
+// №28.
+//
+// Revision 1.2  2011/05/06 15:49:38  lulin
+// - делаем "предложения".
+//
+// Revision 1.1  2011/05/06 12:50:49  lulin
+// {RequestLink:265410566}.
+// - выделяем общий код.
+//
+  

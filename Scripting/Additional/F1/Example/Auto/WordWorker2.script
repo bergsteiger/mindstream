@@ -1,0 +1,15 @@
+: TestWordWorker2
+
+ operator X 
+   ^ IN aString
+   ^ IN WordToWork
+  aString DO .
+  WordToWork DO .
+ ; // X
+ 
+ X 'A' 1
+ 2 .
+ 
+;
+
+TestWordWorker2

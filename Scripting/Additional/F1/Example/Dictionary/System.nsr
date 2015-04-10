@@ -1,0 +1,60 @@
+!TOPIC 99
+!REFDOC
+!BELONGS GAR\CUS\NTSS\RUS
+!NAME Типик, содержащий служебные скрипты
+
+!BLOCK 1001 Правовой календарь
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+: K349114873
+!STYLE J 0 72 0
+	vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+	TRY
+!STYLE J 0 72 0
+		ППР_Prim
+!STYLE J 0 72 0
+		false 'Editor' QueryCard:SetCanSaveState
+!STYLE J 0 72 0
+		'AT_TEXT_NAME' true focused:control:push pop:QueryCard:Attribute:SetCollapsed
+!STYLE J 0 72 0
+		'AT_TYPE' true focused:control:push pop:QueryCard:Attribute:SetCollapsed
+!STYLE J 0 72 0
+		'AT_REG_IN_MU' true focused:control:push pop:QueryCard:Attribute:SetCollapsed
+!STYLE J 0 72 0
+		'AT_NORM' true focused:control:push pop:QueryCard:Attribute:SetCollapsed
+!STYLE J 0 72 0
+		'AT_LC_IN_DATE' false focused:control:push pop:QueryCard:Attribute:SetCollapsed
+!STYLE J 0 72 0
+		'AT_LC_IN_DATE' focused:control:push pop:QueryCard:Attribute:SetFocus
+!STYLE J 0 72 0
+	FINALLY
+!STYLE J 0 72 0
+		vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+	END ;
+!STYLE J 0 72 0
+K349114873
+!BLOCKEND 1001
+
+!BLOCK 1002 Поиск По Реквизитам
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+моп::Поиск_Поиск_по_реквизитам
+!BLOCKEND 1002
+
+!BLOCK 1003 Список Редакций
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+оп::Редакции_документа_Список_редакций
+!BLOCKEND 1003
+
+!BLOCK 1004 Справка к документу
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+оп::Документ_Справка_к_документу
+!BLOCKEND 1004

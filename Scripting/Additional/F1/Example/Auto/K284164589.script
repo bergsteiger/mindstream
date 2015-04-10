@@ -1,0 +1,31 @@
+Тест K284164589
+
+ PROCEDURE Fill
+  OBJECT VAR l_QC
+  focused:control:push >>> l_QC
+  "Убедиться, что фокус в редакторе"
+  'AT_PHARM_NAME' 'Аргинин' l_QC pop:QueryCard:SetAttribute
+  //'AT_PHARM_NAME' 'Абомин' l_QC pop:QueryCard:SetAttribute
+  //'AT_PHARM_TEXT' 'test1' l_QC pop:QueryCard:SetAttribute
+  'AT_PHARM_ATC' 'A. Пищеварительный тракт и обмен веществ' l_QC pop:QueryCard:SetAttribute
+  'AT_PHARM_ATC' 'B. Препараты влияющие на кроветворение и кровь' l_QC pop:QueryCard:SetAttribute
+  //1 'AT_PHARM_ATC' 'B. Препараты влияющие на кроветворение и кровь' l_QC pop:QueryCard:Attribute:SetWithLogicOperation
+ ;
+
+ Параметры: (  "Открывать документы из списка в текущем окне" )
+ Выполнить (  
+  @ Fill RunInpharmSearch
+  //"Проверить информацию о списке и первый документ"
+  // - так нельзя, т.к. операция "информация о списке" для данного типа сборки - ЗАПРЕЩЕНА
+  //"Открыть информацию о списке"
+  // - так нельзя, т.к. операция "информация о списке" для данного типа сборки - ЗАПРЕЩЕНА
+  //"Перевести фокус в {('ListInfoViewer')} на форме {(форма::ListInfo)}"
+  // - так нельзя, т.к. вкладка - ЗАКРЫТА, нужно указывать флажок Force
+  true ANYUSERTYPE 'ListInfoViewer' форма::ListInfo TryFocusOnForm ASSERT
+  "Сравнить текст информации о списке с эталоном"
+  "Перевести фокус в список"
+  "Открыть текущий документ списка и сравнить его с эталоном"
+ )
+;
+
+K284164589

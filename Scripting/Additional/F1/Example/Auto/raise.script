@@ -1,0 +1,12 @@
+VAR WasException
+
+false >>> WasException
+
+TRY
+ 'Тестовое исключение' RAISE
+EXCEPT
+ true >>> WasException
+ "Сравнить текущее исключение с эталоном"
+END
+
+WasException ASSERT

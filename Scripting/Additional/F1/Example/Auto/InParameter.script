@@ -1,0 +1,11 @@
+: InParameter IN A IN B
+ A . B .
+;
+
+: "Напечатать два значения"
+ InParameter
+;
+
+2 'Hello' InParameter
+
+"Напечатать два значения {(10)} {('Привет')}"

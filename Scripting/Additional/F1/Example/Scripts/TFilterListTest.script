@@ -1,0 +1,59 @@
+USES 
+ Controls.script
+ Reminders.script
+ Filters.script
+ DocumentList.script
+ HLTCLike.script
+;
+
+: FilterListTest
+// - вызывает список всех документов, фильтрует его и проверяет что появилась соответствующая медаль
+// {RequestLink:259892768}
+
+BEGIN
+  "Список всех документов"
+  "Применить фильтр с именем {('05. Книги')}"
+  "Открыть фильтры и выбрать первый Нажать на медаль и проверить наличие баллона"
+END
+;
+
+FilterListTest
+
+// $Id: TFilterListTest.script,v 1.11 2013/10/02 06:15:15 a.trofimov Exp $
+
+// $Log: TFilterListTest.script,v $
+// Revision 1.11  2013/10/02 06:15:15  a.trofimov
+// Обновляю эталоны. Поправил 1 тест из-за первого фильтра
+//
+// Revision 1.10  2011/06/26 12:57:42  lulin
+// {RequestLink:269085062}.
+//
+// Revision 1.9  2011/05/26 18:16:22  lulin
+// {RequestLink:266895862}.
+//
+// Revision 1.8  2011/05/06 15:49:40  lulin
+// - делаем "предложения".
+//
+// Revision 1.7  2011/05/06 12:28:20  lulin
+// {RequestLink:265410566}.
+// - выделяем общий код.
+//
+// Revision 1.6  2011/05/06 12:14:52  lulin
+// {RequestLink:265410566}.
+// - выделяем общий код.
+//
+// Revision 1.5  2011/05/06 11:58:03  lulin
+// {RequestLink:265410566}.
+// - делаем тест.
+//
+// Revision 1.4  2011/05/04 16:17:11  lulin
+// {RequestLink:265404457}.
+//
+// Revision 1.3  2011/04/29 15:26:54  lulin
+// {RequestLink:259892768}.
+// - используем begin..end. Просто так. Для примера.
+//
+// Revision 1.1  2011/04/29 12:45:59  lulin
+// {RequestLink:259892768}.
+// - обрабатываем ссылку для выключения фильтров.
+//

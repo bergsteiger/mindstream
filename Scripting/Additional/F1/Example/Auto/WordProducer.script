@@ -1,0 +1,110 @@
+: TestWordProducer
+
+ WordProducer <<Facet>>
+ WordProducer <<Interface>>
+
+ : N
+  @SELF pop:Word:Producer pop:object:ClassName .
+ ;
+ 
+ <<Facet>> A
+  'A' .
+  @SELF pop:object:ClassName .
+  @SELF pop:Word:Name .
+  @SELF pop:Word:Parent pop:object:ClassName .
+  @SELF pop:Word:Parent pop:Word:Name .
+  @SELF pop:Word:Parent pop:Word:Parent pop:object:ClassName .
+  //@SELF pop:Word:Parent pop:Word:Parent pop:Word:Parent pop:object:ClassName .
+  @SELF pop:Word:Producer pop:object:ClassName .
+  @SELF pop:Word:Producer pop:Word:Name .
+  //@SELF pop:Word:Producer pop:Word:Producer pop:object:ClassName .
+  VAR XXX
+  
+  @ XXX pop:object:ClassName .
+  @ XXX pop:Word:Name .
+  @ XXX pop:Word:Producer pop:object:ClassName .
+  @ XXX pop:Word:Producer pop:Word:Name .
+ ;
+ 
+ NamedWordProducer INHERITS %G
+ 
+ <<Facet>> B
+ 
+  INHERITS
+   A
+  ;
+  
+  'B' .
+ ;
+ 
+ <<Interface>> C
+  'C' .
+  @SELF pop:object:ClassName .
+  @SELF pop:Word:Parent pop:object:ClassName .
+  @SELF pop:Word:Parent pop:Word:Parent pop:object:ClassName .
+  @SELF pop:Word:Producer pop:object:ClassName .
+  //@SELF pop:Word:Producer pop:Word:Producer pop:object:ClassName .
+ ;
+ 
+ N A B C
+ 
+ StereotypeProducer MDAClass
+ <<MDAClass>> SimpleClass
+  'Hello' .
+ ;
+ 
+ <<SimpleClass>> TObject
+ ; // TObject
+ 
+ <<SimpleClass>> Tl3Base
+ 
+  INHERITS
+   TObject
+  ;
+  
+  'World' .
+ ; // Tl3Base
+ 
+ Tl3Base
+ @ Tl3Base pop:Word:Name .
+ @ Tl3Base pop:object:ClassName .
+ @ Tl3Base pop:Word:Parent pop:object:ClassName .
+ @ Tl3Base pop:Word:Parent pop:Word:Parent pop:object:ClassName .
+ @ Tl3Base pop:Word:Producer pop:Word:Name .
+ // - тут ожидаем <<SimpleClass>>, но скорее всего - это не так
+ @ Tl3Base pop:Word:Producer pop:Word:Producer pop:Word:Name .
+ // - тут ожидаем <<MDAClass>>
+ //@ Tl3Base pop:Word:Producer pop:Word:Producer pop:Word:Producer pop:Word:Name .
+ // - тут ожидаем StereotypeProducer
+ // Но ПАДАЕТ, т.к. он не является TkwCompiledWord, надо будет видимо спустить WordProducer на TkwWord
+ //@ Tl3Base pop:Word:Producer pop:Word:Producer pop:Word:Producer pop:Word:Producer pop:Word:Name .
+ // - тут ожидаем ''
+ 
+ ClassProducer DefineClass
+ 
+ DefineClass TSomeClass
+ 
+  INHERITS
+   Tl3Base
+  ;
+
+  : "Это метод нашего класса"
+  ;
+  
+  'Bang!' .
+ ;
+ 
+ TSomeClass
+ @ TSomeClass pop:Word:Name .
+ @ TSomeClass pop:object:ClassName .
+ @ TSomeClass pop:Word:Parent pop:object:ClassName .
+ @ TSomeClass pop:Word:Parent pop:Word:Parent pop:object:ClassName .
+ @ TSomeClass pop:Word:Producer pop:Word:Name .
+ // - тут ожидаем DefineClass
+ //@ TSomeClass pop:Word:Producer pop:Word:Producer pop:Word:Name .
+ // - тут ожидаем ClassProducer
+ // Но ПАДАЕТ, т.к. он не является TkwCompiledWord, надо будет видимо спустить WordProducer на TkwWord
+ 
+;
+
+TestWordProducer

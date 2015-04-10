@@ -1,0 +1,23 @@
+Тест TEmitString 
+
+ PROCEDURE Wait
+  3 LOOP ProcessMessages
+ ;
+
+ Параметры: (  "Открывать документы из списка в текущем окне" )
+ Выполнить ( 
+  ОсновноеМеню 
+  ППР
+  "Ввести строку {('конституция')}"
+  'Down' key 
+  "Ввести строку {('РФ')}"
+  Ok 
+  Wait
+  "Перевести фокус в список"
+  ProcessMessages
+  'Enter' key
+  ProcessMessages
+ )
+; // TEmitString
+
+TEmitString

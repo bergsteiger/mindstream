@@ -1,0 +1,16 @@
+: TestImmediateWordWorker2
+
+ IMMEDIATE operator X 
+   ^ IN aString
+   ^ IN aWordToWork
+  aString DO .
+  aWordToWork DO .
+ ; // X
+ 
+ 2 .
+ 
+ X 'A' 1
+ 
+;
+
+TestImmediateWordWorker2

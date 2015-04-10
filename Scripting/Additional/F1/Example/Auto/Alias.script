@@ -1,0 +1,13 @@
+: AliasTest
+
+ : N
+  'Hello' .
+ ;
+ 
+ WordAlias theAlias N
+ 
+ theAlias
+
+;
+
+AliasTest

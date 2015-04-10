@@ -1,0 +1,23 @@
+// Разработчик: Селянкин Владимир
+
+: K318377771
+
+ : Действия
+  OBJECT VAR l_QC
+  ППР
+  focused:control:push >>> l_QC
+  "Нажать на медаль {("Синяя медаль о наличии консультаций")} и проверить наличие баллона"
+  OBJECT VAR "Баллон"
+  "Синяя медаль о наличии консультаций" byname:control:push pop:Reminder:FindEditor pop:control:GetAnotherParentForm pop:control:GetAnotherParentForm =: "Баллон"
+  "Установить фокус в {(l_QC)}"
+  "Убедиться, что фокус в редакторе"
+  'AT_TYPE' l_QC pop:QueryCard:Attribute:SetFocus
+  "Нажать {('Ctrl+Down')}"
+  "Баллон" "Узнать, виден ли контрол" ! 'Баллон открыт, хотя не должен.' ASSERTS
+  "Нажать {('Esc')}"
+ ;
+
+ "Добавить синюю медаль консультаций и сделать {(@ Действия)}"
+;
+
+K318377771

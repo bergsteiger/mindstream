@@ -1,0 +1,5254 @@
+// Словарь WordsTranslation.script
+// Русские обёртки на скриптовые слова
+
+//-
+//--
+//!
+//!=0
+//%%
+//%INCLUDES
+//&
+//&&
+//(
+//*
+//*/
+//.
+///
+//:
+//::
+//:=
+//?
+//?!=
+//?==
+//?DUP
+//@
+//@SELF
+//[
+//[:]
+//[
+//[]
+//[CallerAndWordWorker]
+//[CallerWorker]
+//[EXPORTED]
+//[i]
+//[IF]
+//[WordWorker]
+//]
+//|
+//||
+//~
+//+
+//+!
+//++
+//<
+//<>
+//<0
+//=:
+//=:^
+//==
+//=0
+//>
+//->
+//>>>
+//>>>[]
+//>>>^
+//>>>L[]
+//>0
+//2*
+//2/
+//2DROP
+//2DUP
+//2OVER
+//2SWAP
+//ABSTRACT
+//AGGREGATION
+//application:ActionIdle
+
+//application:CancelHint
+WordAlias "Убрать хинт" application:CancelHint
+
+//application:GetLastHint
+//application:IsHintVisible
+//ARRAY
+//array:Clear
+//array:Count
+//array:New
+//AskWindowToCloseItself
+//ASSERT
+//ASSERTS
+//AutolinkProducer
+//BEGIN
+//BeginWait:Print
+//BOOLEAN
+//BREAK
+//BREAK-ITERATOR
+//browse
+
+//byhandle:control:push
+OBJECT FUNCTION "Найти контрол по дескриптору" INTEGER IN aHandle
+ aHandle byhandle:control:push >>> Result
+;
+WordAlias "Найти контрол по дескриптору в стеке" byhandle:control:push
+
+//byname:control:push
+OBJECT FUNCTION "Найти контрол по имени" STRING IN aName
+ aName byname:control:push >>> Result
+;
+
+WordAlias "Найти контрол по имени в стеке" byname:control:push
+
+//cc:ActionItem
+//cc:AllDeselect
+//cc:AllInvSelect
+//cc:AllSelect
+//cc:Back
+//cc:BotOfPage
+//cc:BotRightCell
+//cc:CompleteDate
+//cc:CompleteTime
+
+//cc:Copy
+WordAlias "Копировать, но не через Правку" cc:Copy
+
+//cc:CtrlChar
+//cc:Cut
+//cc:Dec
+//cc:Del
+//cc:DelBol
+//cc:DelEol
+//cc:DelLine
+//cc:DelWord
+//cc:DelWordLeft
+//cc:DelWordRight
+
+//cc:Down
+WordAlias "Стрелка вниз" cc:Down
+
+: "Переходим к следующему термину"
+  cc:Down
+  OnTest
+;
+
+//cc:End
+WordAlias "Перейти к первоначальной редакции" cc:End
+WordAlias "В конец строки" cc:End
+WordAlias "Перейти к концу" cc:End
+WordAlias "Перейти к концу списка" cc:End
+
+//cc:EndSelBlock
+//cc:ExtBotOfPage
+
+//cc:ExtendDown
+WordAlias "Добавить к выделенным элементам списка следующий документ" cc:ExtendDown
+
+//cc:ExtendEnd
+WordAlias "Выделить текущую строку" cc:ExtendEnd
+
+//cc:ExtendHome
+//cc:ExtendLeft
+
+//cc:ExtendPgDn
+WordAlias "Выделить страницу вниз" cc:ExtendPgDn
+
+//cc:ExtendPgUp
+WordAlias "Выделить страницу вверх" cc:ExtendPgUp
+
+//cc:ExtendRight
+WordAlias "Выделить справа" cc:ExtendRight
+
+//cc:ExtendUp
+WordAlias "Выделить еще один документ, выше текущего" cc:ExtendUp
+
+//cc:ExtFirstPage
+//cc:ExtLastPage
+//cc:ExtTopOfPage
+
+//cc:ExtWordLeft
+WordAlias "Выделить слово слева" cc:ExtWordLeft
+
+//cc:ExtWordRight
+WordAlias "Выделить слово справа" cc:ExtWordRight
+
+//cc:FastFindNext
+
+//cc:FirstPage
+WordAlias "В начало документа" cc:FirstPage
+
+//cc:GotoMarker0
+//cc:GotoMarker1
+//cc:GotoMarker2
+//cc:GotoMarker3
+//cc:GotoMarker4
+//cc:GotoMarker5
+//cc:GotoMarker6
+//cc:GotoMarker7
+//cc:GotoMarker8
+//cc:GotoMarker9
+
+//cc:Home
+WordAlias "Переместиться в начало дерева" cc:Home
+WordAlias "Переместиться в начало строки" cc:Home
+
+//cc:Inc
+//cc:Ins
+
+//cc:LastPage
+WordAlias "В конец документа" cc:LastPage
+
+//cc:Left
+WordAlias "Влево" cc:Left
+
+//cc:MoveDown
+//cc:MoveLeft
+//cc:MoveRight
+//cc:MoveUp
+//cc:NewLine
+
+//cc:NextPage
+WordAlias "На страницу вниз" cc:NextPage
+
+//cc:PageLeft
+//cc:PageRight
+//cc:Paste
+
+//cc:PrevPage
+WordAlias "На страницу вверх" cc:PrevPage
+
+//cc:Redo
+WordAlias Shift-Ctrl-Z cc:Redo
+
+//cc:Restore
+
+//cc:Right
+WordAlias "Разворачиваем текущий узел дерева" cc:Right
+WordAlias "Вправо" cc:Right
+WordAlias "Установить курсор в соседнюю ячейку (справа)" cc:Right
+
+//cc:ScrollDown
+//cc:ScrollUp
+
+//cc:Select
+WordAlias "Выделить текущий элемент" cc:Select
+WordAlias "Снять выделение с чекбокса" "Выделить текущий элемент" 
+
+//cc:SetMarker0
+//cc:SetMarker1
+//cc:SetMarker2
+//cc:SetMarker3
+//cc:SetMarker4
+//cc:SetMarker5
+//cc:SetMarker6
+//cc:SetMarker7
+//cc:SetMarker8
+//cc:SetMarker9
+//cc:StartSelBlock
+//cc:Tab
+//cc:TableEdit
+//cc:TopLeftCell
+//cc:TopOfPage
+//cc:TreeAllExpand
+//cc:TreeCollapse
+//cc:TreeExpand
+
+//cc:Undo
+WordAlias Ctrl-Z cc:Undo
+
+//cc:Up
+
+//cc:WordLeft
+//cc:WordRight
+//CF_EVEREST
+//CF_HTML
+//CF_XML
+//CHAR
+//char:Dupe
+//char:ToString
+//CLASS
+//class::TAACContainerForm
+//class::TAACContainerPrimForm
+//class::TAACContentsContainerForm
+//class::TAACTextContainerPrimForm
+//class::TAbstractDropDown
+//class::TAbstractHistoryForm
+//class::TafwBaseControl
+//class::TafwControl
+//class::TafwControlPrim
+//class::TafwCustomCommonControl
+//class::TafwCustomCommonControlPrim
+//class::TafwCustomCommonTextControl
+//class::TafwCustomCommonTextControlPrim
+//class::TafwInputControl
+//class::TafwTextControl
+//class::TafwTextControlPrim
+//class::TAttributesForm
+//class::TBaseChatWindowForm
+//class::TBaseChatWindowOptionsForm
+//class::TBaseHistoryWindowForm
+//class::TBaseSearchContainerForm
+//class::TBasicAction
+//class::TButton
+//class::TButtonControl
+//class::Tcf_Settings
+//class::TcfAttributeSelect
+//class::TcfFolders
+//class::TcfFoldersInfo
+//class::TcfOldSituationSearch
+//class::TcfSaveLoad
+//class::TChangesBetweenEditonsForm
+//class::TChatHistoryForm
+//class::TChatWindowForm
+//class::TChildForm
+//class::TCollection
+//class::TCommonDialog
+//class::TComponent
+//class::TContactListForm
+//class::TContentsForm
+//class::TControl
+//class::TControlScrollBar
+//class::TCreateFilterForm
+//class::TctAbstractEdit
+//class::TctButtonEdit
+//class::TCustomCheckBox
+//class::TCustomComboTree
+//class::TCustomControl
+//class::TCustomEdit
+//class::TCustomForm
+//class::TCustomGroupBox
+//class::TCustomImageList
+//class::TCustomLabel
+//class::TCustomMaskEdit
+//class::TCustomToolbar97
+//class::TCustomToolbarButton97
+//class::TCustomToolWindow97
+//class::TDictionContainerForm
+//class::TDiffForm
+//class::TDiffOptionsForm
+//class::TDock97
+//class::TDocNumberQueryForm
+//class::TDocumentWithFlashForm
+//class::TDropDownTree
+//class::TEditableBox
+//class::TEditionsContainerForm
+//class::TeeButton
+//class::TeeCheckBox
+//class::TeeCustomCheckBox
+//class::TeeCustomEditor
+//class::TeeCustomMemo
+//class::TeeCustomPreviewPanel
+//class::TeeCustomSubPanel
+//class::TeeCustomTreeView
+//class::TeeEditor
+//class::TeeEditorExport
+//class::TeeEditorExportModelPart
+//class::TeeMemo
+//class::TeeMemoWithEditOperations
+//class::TeeRadioButton
+//class::TeeSubPanel
+//class::TeeSubPanelExport
+//class::TeeTextSource
+//class::TeeTextSourceExport
+//class::TeeTreeView
+//class::TeeTreeViewExport
+//class::TefAbout
+//class::TefEULA
+//class::TefList
+//class::TefListInfo
+//class::TefPreviewForm
+//class::TefProgressIndicator
+//class::TefRubricator
+//class::TefStartupTips
+//class::TefTreeAttributeFirstLevel
+//class::TefTreeAttributeSelect
+//class::TelCustomButtonEdit
+//class::TelCustomEdit
+//class::TElCustomPageControl
+//class::TElTabSheet
+//class::TElXPThemedControl
+//class::Ten_BaseSearchCard
+//class::Ten_CommonDiction
+//class::Ten_ConfigurationList
+//class::Ten_ConsultationMark
+//class::Ten_DefineSearchDate
+//class::Ten_MainMenuNew
+//class::Ten_MedicFirmList
+//class::Ten_MedicListSynchroView
+//class::Ten_MedicMainMenu
+//class::Ten_Navigator
+//class::Ten_PageSetup
+//class::Ten_PictureInfo
+//class::Ten_PrintDialog
+//class::Ten_SimpleMainMenu
+//class::Ten_TasksPanel
+//class::Ten_TurnOffTimeMachine
+//class::Ten_TurnOnTimeMachine
+//class::TenCompInfo
+//class::TenDiction
+//class::TenFilters
+//class::TenFoldersElementInfo
+//class::TenFoldersTree
+//class::TenLongProcessMessage
+//class::TenNewsLine
+//class::TenQueryCard
+//class::TenSelectedAttributes
+//class::TenShutdown
+//class::TenUnderControl
+//class::TevCustomChatMemo
+//class::TevCustomEdit
+//class::TevCustomEditor
+//class::TevCustomEditorModelPart
+//class::TevCustomEditorWindow
+//class::TevCustomEditorWindowModelPart
+//class::TevCustomEditorWindowPrim
+//class::TevCustomLinkedToolPanel
+//class::TevCustomMemo
+//class::TevCustomSubDescriptors
+//class::TevCustomSubPanel
+//class::TevCustomTextSource
+//class::TevCustomToolPanel
+//class::TevEditor
+//class::TevEditorWindowTextSource
+//class::TevEditorWithOperations
+//class::TevMultiSelectEditorWindow
+//class::TevQueryCardEditor
+//class::TevTunedEditor
+//class::TExTextForm
+//class::TExTextOptionsForm
+//class::TFakeBox
+//class::TfcSynchroView
+//class::TFont
+//class::TForm
+//class::TGraphic
+//class::TGraphicControl
+//class::TGraphicsObject
+//class::TIcon
+//class::TIEView
+//class::TImage
+//class::TImageEnIO
+//class::TImageEnProc
+//class::TImageEnView
+//class::TInpharmMainMenuForm
+//class::TInterfacedPersistent
+//class::TInternetAgentForm
+//class::Tl3Canvas
+//class::Tl3CanvasPrim
+//class::Tl3CastablePersistent
+//class::Tl3CBase
+//class::Tl3ControlCanvas
+//class::Tl3CustomStrings
+//class::Tl3Form
+//class::Tl3HackPersistentOwner
+//class::Tl3HackPersistentOwner1
+//class::Tl3InterfacedComponent
+//class::Tl3ProgressComponent
+//class::Tl3ProtoObject
+//class::Tl3ProtoObjectWithCOMQI
+//class::Tl3ProtoPersistent
+//class::Tl3ProtoPersistentDataContainer
+//class::Tl3ProtoPersistentRefList
+//class::Tl3SimpleDataContainer
+//class::Tl3SimpleObject
+//class::Tl3SimpleObjectPrim
+//class::Tl3StringList
+//class::Tl3StringList1
+//class::Tl3StringList2
+//class::Tl3StringListPrim
+//class::Tl3Strings
+//class::Tl3WinControlCanvas
+//class::TLeftEditionForm
+//class::TListAnalizeForm
+//class::TListAnalizerForm
+//class::TLogoForm
+//class::TMainForm
+//class::TMainMenu
+//class::TMainMenuWithBaseSearchSupportForm
+//class::TMainOptionsForm
+//class::TMainPrimForm
+//class::TMainWithRemindersForm
+//class::TMemoryUsageDlg
+//class::TMenu
+//class::TMenuItem
+//class::TNemesisMainForm
+//class::TnevControl
+//class::TNewBaseSearchForDFMForm
+//class::TNewBaseSearchForm
+//class::TnpCustomPanel
+//class::TnscChatMemo
+//class::TnscComboBox
+//class::TnscComboBoxWithReadOnly
+//class::TnscContextFilter
+//class::TnscCustomChatMemo
+//class::TnscCustomHideField
+//class::TnscCustomPreviewPanel
+//class::TnscCustomReminder
+//class::TnscCustomReminderModelPart
+//class::TnscCustomTasksPanelView
+//class::TnscCustomTreeComboWithHistory
+//class::TnscEdit
+//class::TnscEditor
+//class::TnscEditWithoutPlusMinusShortcut
+//class::TnscFocusLabel
+//class::TnscFormsPageControl
+//class::TnscHideField
+//class::TnscNavigator
+//class::TnscPageControl
+//class::TnscPreviewPanel
+//class::TnscReminder
+//class::TnscRemindersLine
+//class::TnscSimpleEditor
+//class::TnscSimpleEditorForDialogs
+//class::TnscStatusBar
+//class::TnscTasksPanelTreeView
+//class::TnscTasksPanelView
+//class::TnscTextSource
+//class::TnscTreeComboWithHistory
+//class::TnscTreeComboWithHistoryAndOperations
+//class::TnscTreeView
+//class::TnscTreeViewHotTruck
+//class::TnsLoginForm
+//class::TnsMainWindow
+//class::TnsRegistrationForm
+//class::TnsRememberPasswordForm
+//class::TObject
+//class::TOfficeLikeMainForm
+//class::TOvcBase
+//class::TOvcColors
+//class::TOvcController
+//class::TOwnedCollection
+//class::TPaintBox
+//class::TParentForm
+//class::TPersistent
+//class::TPicture
+//class::TPictureForm
+//class::TPopupMenu
+//class::TPrimAttributeSelectForm
+//class::TPrimAttributeSelectOptionsForm
+//class::TPrimAttributesForm
+//class::TPrimAttributesOptionsForm
+//class::TPrimBaseSearchCardForm
+//class::TPrimBaseSearchContainerForm
+//class::TPrimBaseSearchForm
+//class::TPrimBaseSearchOptionsForm
+//class::TPrimChangesBetweenEditonsForm
+//class::TPrimChildForm
+//class::TPrimCommonDictionForm
+//class::TPrimCommonDictionOptionsForm
+//class::TPrimConfigurationListForm
+//class::TPrimConsultationMarkForm
+//class::TPrimConsultationMarkOptionsForm
+//class::TPrimContactListForm
+//class::TPrimContactListOptionsForm
+//class::TPrimContentsForm
+//class::TPrimContentsOptionsForm
+//class::TPrimCreateFilterForm
+//class::TPrimCustomizeTasksPanelForm
+//class::TPrimCustomizeToolsForm
+//class::TPrimDefineSearchDateForm
+//class::TPrimDictionContainerForm
+//class::TPrimDictionForm
+//class::TPrimDictionOptionsForm
+//class::TPrimDockedWarningForm
+//class::TPrimDocNumberQueryForm
+//class::TPrimDocNumberQueryOptionsForm
+//class::TPrimDocumentWithFlashForm
+//class::TPrimDocumentWithFlashOptionsForm
+//class::TPrimEditionsContainerForm
+//class::TPrimEULAForm
+//class::TPrimFiltersForm
+//class::TPrimFiltersOptionsForm
+//class::TPrimFoldersElementInfoForm
+//class::TPrimFoldersElementInfoOptionsForm
+//class::TPrimFoldersForm
+//class::TPrimFoldersInfoForm
+//class::TPrimFoldersInfoOptionsForm
+//class::TPrimFoldersOptionsForm
+//class::TPrimFoldersTreeForm
+//class::TPrimFoldersTreeOptionsForm
+//class::TPrimInternetAgentForm
+//class::TPrimLeftEditionForm
+//class::TPrimLegalMainMenuForm
+//class::TPrimListAnalizeForm
+//class::TPrimListAnalizerForm
+//class::TPrimListForm
+//class::TPrimListInfoForm
+//class::TPrimListInfoOptionsForm
+//class::TPrimListOptionsForm
+//class::TPrimLoginForm
+//class::TPrimLongProcessForm
+//class::TPrimMainForm
+//class::TPrimMainMenuForm
+//class::TPrimMainMenuNewForm
+//class::TPrimMainOptionsForm
+//class::TPrimMedicFirmListForm
+//class::TPrimMedicFirmListOptionsForm
+//class::TPrimMedicListSynchroViewForm
+//class::TPrimNavigatorForm
+//class::TPrimNavigatorOptionsForm
+//class::TPrimNewsLineForm
+//class::TPrimNewsLineOptionsForm
+//class::TPrimOldSituationSearchForm
+//class::TPrimOldSituationSearchOptionsForm
+//class::TPrimPageSetupForm
+//class::TPrimPageSetupOptionsForm
+//class::TPrimParentForm
+//class::TPrimPictureForm
+//class::TPrimPictureInfoForm
+//class::TPrimPictureInfoOptionsForm
+//class::TPrimPictureOptionsForm
+//class::TPrimPreviewForm
+//class::TPrimPrintDialogForm
+//class::TPrimPrintDialogOptionsForm
+//class::TPrimProgressIndicatorForm
+//class::TPrimQueryCardForm
+//class::TPrimQueryCardOptionsForm
+//class::TPrimRedactionsForm
+//class::TPrimRedactionsOptionsForm
+//class::TPrimRememberPasswordForm
+//class::TPrimRightEditionForm
+//class::TPrimRubricatorForm
+//class::TPrimSaveLoadForm
+//class::TPrimSaveLoadOptionsForBaseSearchForm
+//class::TPrimSaveLoadOptionsForm
+//class::TPrimSaveLoadOptionsWithUserTypesForm
+//class::TPrimSelectedAttributesForm
+//class::TPrimSelectedAttributesOptionsForm
+//class::TPrimSelfInfoForm
+//class::TPrimSettingsForm
+//class::TPrimShutDownForm
+//class::TPrimSimpleMainMenuForm
+//class::TPrimStartupTipsForm
+//class::TPrimStyleEditorContainerForm
+//class::TPrimStyleEditorContainerOptionsForm
+//class::TPrimStyleEditorExampleForm
+//class::TPrimStyleEditorFontForm
+//class::TPrimStyleEditorNavigatorForm
+//class::TPrimSynchroViewForm
+//class::TPrimSynchroViewOptionsForm
+//class::TPrimTasksPanelForm
+//class::TPrimTreeAttributeFirstLevelForm
+//class::TPrimTreeAttributeSelectForm
+//class::TPrimTreeAttributeSelectOptionsForm
+//class::TPrimTurnOffTimeMachineForm
+//class::TPrimTurnOffTimeMachineOptionsForm
+//class::TPrimTurnOnTimeMachineForm
+//class::TPrimTurnOnTimeMachineOptionsForm
+//class::TPrimUnderControlForm
+//class::TPrimUnderControlOptionsForm
+//class::TPrimWarningBaloonOptionsForm
+//class::TPrimWarningForm
+//class::TPrimWarningOptionsForm
+//class::TPrimWorkJournalForm
+//class::TPrimWorkJournalOptionsForm
+//class::TPrintDialog
+//class::TProgressBar
+//class::TRadioButton
+//class::TRedactionsForm
+//class::TRightEditionForm
+//class::TScrollingWinControl
+//class::TSelfInfoForm
+//class::TShellAndMonitoringsMainForm
+//class::TSizeConstraints
+//class::TStyleEditorContainerForm
+//class::TStyleEditorExampleForm
+//class::TStyleEditorFontForm
+//class::TStyleEditorNavigatorForm
+//class::TSynchroView_WarningBaloonForm
+//class::Ttb97Control
+//class::Ttb97CustomGraphicControl
+//class::Ttb97GraphicControl
+//class::Ttb97GraphicTextControl
+//class::Ttb97MoreButton
+//class::TTextForm
+//class::TTimer
+//class::TToolbar97
+//class::TTranslation_WarningBaloonForm
+//class::TTreeAttributeForm
+//class::TUserCR1_WarningBaloonForm
+//class::TUserCR2_WarningBaloonForm
+//class::TvcmBaseCollection
+//class::TvcmBaseEntities
+//class::TvcmBaseMenuManager
+//class::TvcmComboBox
+//class::TvcmComponent
+//class::TvcmContainerForm
+//class::TvcmContainerFormModelPart
+//class::TvcmCustomizeTasksPanelForm
+//class::TvcmCustomizeToolsForm
+//class::TvcmEntityForm
+//class::TvcmEntityFormModelPart
+//class::TvcmFakeBox
+//class::TvcmForm
+//class::TvcmFormStyle
+//class::TvcmInterfacedForm
+//class::TvcmMainForm
+//class::TvcmMainFormModelPart
+//class::TvcmProfilersCollection
+//class::TvcmTextForm
+//class::TvcmToolbar
+//class::TvcmToolbarDef
+//class::TvcmUserInteractiveForm
+//class::TvcmZonesCollection
+//class::TvgBounds
+//class::TvgBrush
+//class::TvgButton
+//class::TvgCloseButton
+//class::TvgComboBox
+//class::TvgComponent
+//class::TvgControl
+//class::TvgCustomButton
+//class::TvgCustomControl
+//class::TvgCustomObject
+//class::TvgCustomResources
+//class::TvgCustomScene
+//class::TvgFont
+//class::TvgLayout
+//class::TvgNonVGLayout
+//class::TvgObject
+//class::TvgPathButton
+//class::TvgPathData
+//class::TvgPersistent
+//class::TvgPosition
+//class::TvgRectangle
+//class::TvgScene
+//class::TvgScenePrim
+//class::TvgShape
+//class::TvgText
+//class::TvgTextControl
+//class::TvgVisualObject
+//class::TvtComboBoxQS
+//class::TvtCustomCombo
+//class::TvtCustomCommonPanel
+//class::TvtCustomDateEdit
+//class::TvtCustomGroupBox
+//class::TvtCustomHeader
+//class::TvtCustomHideField
+//class::TvtCustomLabel
+//class::TvtCustomLabelPrim
+//class::TvtCustomLister
+//class::TvtCustomOutliner
+//class::TvtCustomPanel
+//class::TvtCustomPreviewPanel
+//class::TvtCustomReminder
+//class::TvtCustomSizeablePanel
+//class::TvtDateEdit
+//class::TvtDblClickDateEdit
+//class::TvtFocusLabel
+//class::TvtGroupBox
+//class::TvtHideField
+//class::TvtItemStorageViewer
+//class::TvtLabel
+//class::TvtLister
+//class::TvtListerHeader
+//class::TvtNavigator
+//class::TvtNonFixedPngImageList
+//class::TvtNonFixedPngImageListPrim
+//class::TvtOutlinerWithDragDrop
+//class::TvtOutlinerWithQuickSearch
+//class::TvtPanel
+//class::TvtPngImageList
+//class::TvtPngImageListPrim
+//class::TvtProportionalCustomPanel
+//class::TvtProportionalPanel
+//class::TvtRadioButton
+//class::TvtReminder
+//class::TvtReminderModelPart
+//class::TvtRemindersLine
+//class::TvtRemindersLineModelPart
+//class::TvtScrollBar
+//class::TvtSimpleCustomCombo
+//class::TvtSizeablePanel
+//class::TvtSpinEdit
+//class::TWarningBaloonForm
+//class::TWarningForm
+//class::TWinControl
+//class::TWorkJournalForm
+//ClassProducer
+
+//clipboard:clear
+WordAlias "Очистить буфер обмена" clipboard:clear
+
+//clipboard:GetFormattedText
+: "Записать содержимое буфера в эталон"
+ 0 clipboard:GetFormattedText .
+;
+
+//ClearDocumentContextSearchHistory
+//ClearPharmContextSearchHistory
+
+: "Записать содержимое буфера в эталон в формате" STRING INTEGER IN aFormat
+ aFormat clipboard:GetFormattedText .
+;
+
+//clipboard:SetText
+: "Копировать в буфер строку" STRING IN aText
+ aText clipboard:SetText
+;
+
+//CloseWindow
+WordAlias "Закрыть сохраненное окно" wnd:CloseWindow
+WordAlias "Закрыть окно по дескриптору из стека" wnd:CloseWindow
+
+: "Закрыть окно по дескриптору" INTEGER IN aHandle
+ aHandle wnd:CloseWindow
+;
+
+//CompareStr
+//CompareText
+//Config:Restore
+
+//configurations:GetCount
+//configurations:GetActiveConfiguration
+//configuration:GetName
+//configuration:GetType
+//configuration:GetID
+//configurations:GetConfiguration
+//configuration:GetName
+//configuration:Activate
+
+//CONST
+//CONSTANT
+//CONTINUE
+//control:MouseLeftClick
+//control:MouseMiddleClick
+//control:MouseRightClick
+//Ctx:PushCompiler
+//Ctx:PushFinder
+//current:exception:ClassName
+//current:exception:Message
+//DECLARED
+//DEFAULT
+//DeleteFile
+//desktop:Height
+//desktop:Width
+//DiffIterator:HasNext
+//DiffIterator:HasPrev
+//DiffIterator:Next
+//DiffIterator:Prev
+//DIV
+//DO
+//document:InternalId
+
+//document:LikeState
+WordAlias "Узнать, какая оценка поставлена документу" document:LikeState
+
+//document:SetBookmark
+
+//documentscache:Clear
+WordAlias "Удалить документы из кеша" documentscache:Clear
+
+//DROP
+//DUP
+
+//emitstring
+: "Ввести строку" STRING IN aString
+ aString emitstring
+;
+
+: "Ввести" STRING IN aString
+ aString emitstring
+ nil =: aString
+;
+
+: "Начинаем набирать" STRING IN aString
+ aString emitstring
+;
+
+//EndsStr
+//EndsText
+//EndWait:Print
+
+//EtalonNeedsComputerName
+WordAlias "Создать эталон по имени компьютера" EtalonNeedsComputerName
+
+//EtalonNeedsOSName
+WordAlias "Создать эталон по имени ОС компьютера" EtalonNeedsOSName
+
+//EtalonNeeds64
+WordAlias "Создать отдельный эталон для х64 разрядного компьютера" EtalonNeeds64
+
+//EXIT
+//f1::ImportConsultation
+
+//f1::WasBeep
+WordAlias "Узнать, корректен ли контекст (был ли звуковой сигнал)" f1::WasBeep
+
+//f1:BaseDate
+: "Сравнить дату базы с эталоном"
+ f1:BaseDate .
+;
+
+//f1:ComplectName
+: "Сравнить имя комплекта с эталоном"
+ f1:ComplectName .
+;
+
+//f1:ComplectOwner
+: "Сравнить владельца комплекта с эталоном"
+ f1:ComplectOwner .
+;
+
+//false
+//FILE
+//file:EOF
+//file:OpenRead
+//file:OpenWrite
+//file:ReadLines
+//file:ReadLn
+//file:ReadWStrLn
+//file:WriteChar
+//file:WriteLn
+//file:WriteStr
+//file:WriteWStr
+//file:WriteWStrLn
+//filternode:IsChangeable
+//filters:Open
+//FINAL
+
+//FindWindowByCaption
+WordAlias "Найти окно по имени Caption" FindWindowByCaption
+WordAlias "Найти окно с заголовком" FindWindowByCaption
+
+//focused:control:push
+WordAlias "Контрол в фокусе" focused:control:push
+
+//FOR
+//form:Needs
+//FORWARD
+//FUNCTION
+//generators:Execute
+//generators:Link
+//GetForegroundWindow
+//GetLocalDate
+//GetLocalDateTime
+//GetLocalTime
+//GetTickCount
+
+//font:BackColor
+WordAlias "Узнать цвет фона" font:BackColor
+
+//font:Size
+WordAlias "Узнать размер" font:Size
+
+//font:Name
+WordAlias "Узнать название" font:Name
+
+//font:Color
+WordAlias "Узнать цвет" font:Color
+
+//font:IsItalic
+WordAlias "Узнать наклонный ли шрифт?" font:IsItalic
+
+//font:IsBold
+WordAlias "Узнать жирный ли шрифт?" font:IsBold
+
+//font:IsUnderline
+WordAlias "Узнать подчеркнутый ли шрифт?" font:IsUnderline
+
+//font:IsStrikeOut
+WordAlias "Узнать перечеркнутый ли шрифт?" font:IsStrikeOut
+
+//HALT
+
+//HardKey
+: "Симулировать нажатие" STRING IN aString
+ aString HardKey
+ OnTest
+;
+
+//help
+
+//history:DeleteBackItem
+WordAlias "Удалить последний элемент истории" history:DeleteBackItem
+
+//IF
+//IN
+//INCLUDE
+//INCLUDES
+//INHERITED
+//InitedVarProducer
+//INTEGER
+//INTERFACE
+//IntToStr
+//IsArray
+//IsBracket
+//IsChar
+//IsClass
+//IsInt
+//IsIntf
+//IsMyDocumentsEmpty
+//IsObj
+//IsString
+
+//IsUnder64
+WordAlias "Система x64?" IsUnder64
+
+//IsVoid
+//IsWString
+//ITERATE
+//ITERATEBACK
+//IterateCode
+//IterateForms
+//IterateMembers
+
+//KeyDown
+: "Зажать кнопку" STRING IN aString
+ aString KeyDown
+ OnTest
+;
+
+//KeyUp
+: "Отпустить кнопку" STRING IN aString
+ aString KeyUp
+ OnTest
+;
+
+//LINK
+//LOOP
+
+//MainScreen:Height
+WordAlias "Узнать разрешение основного монитора по вертикали" MainScreen:Height
+
+//MainScreen:Width
+WordAlias "Узнать разрешение основного монитора по горизонтали" MainScreen:Width
+
+//menuitem:Click
+
+//menuitem:GetCaption
+WordAlias "Узнать заголовок элемента меню" menuitem:GetCaption
+
+//menuitem:GetCount
+WordAlias "Узнать количество элементов меню" menuitem:GetCount
+
+//menuitem:GetItem
+WordAlias "Элемент меню" menuitem:GetItem
+
+//menuitem:GetMenuHeight
+WordAlias "Узнать высоту меню" menuitem:GetMenuHeight
+
+//menuitem:IsEnabled
+WordAlias "Узнать активность элемента меню" menuitem:IsEnabled
+
+//menuitem:IsVisible
+WordAlias "Узнать, видим ли элемент меню" menuitem:IsVisible
+
+//MOD
+//MODAL
+
+//mouse:GetCursorIndex
+//WordAlias "Узнать индекс курсора мыши" mouse:GetCursorIndex
+
+//mouse:GetCursorNameByIndex
+//WordAlias "Узнать имя индекс курсора мыши" mouse:GetCursorNameByIndex
+
+//mouse:GetCursorPosition
+WordAlias "Запомнить позицию мыши" mouse:GetCursorPosition
+
+//Mouse:LeftDown
+//Mouse:LeftUp
+//Mouse:MiddleDown
+//Mouse:MiddleUp
+//Mouse:RightDown
+//Mouse:RightUp
+
+//mouse:SetCursorPosition
+WordAlias "Установить курсор мыши по координатам" mouse:SetCursorPosition
+
+: "Восстановить позицию мыши" 
+ mouse:SetCursorPosition
+ ProcessMessages
+;
+
+//Mouse:WheelDown
+: "Симулировать прокрутку колесом мыши вниз раз" INTEGER IN aCount
+ aCount Mouse:WheelDown
+;
+WordAlias "Симулировать прокрутку колесом мыши вниз раза" "Симулировать прокрутку колесом мыши вниз раз"
+
+//Mouse:WheelUp
+: "Симулировать прокрутку колесом мыши вверх раз" INTEGER IN aCount
+ aCount Mouse:WheelUp
+;
+WordAlias "Симулировать прокрутку колесом мыши вверх раза" "Симулировать прокрутку колесом мыши вверх раз"
+
+//Msg
+//NamedAutolinkProducer
+//NamedInitedVarProducer
+//NamedWordProducer
+//nil
+//NIP
+//Node:Flags
+//Node:IsFirst
+
+//Node:IsLast
+WordAlias "Предыдущая нода" Node:IsLast
+
+//Node:Text
+WordAlias "Текст ноды" Node:Text
+
+//NOP
+WordAlias "Закрыть диалог по крестику" NOP
+
+//NotImplemented
+//OBJECT
+
+//Ok
+: "Нажать Ok"
+ Ok
+ OnTest
+;
+
+WordAlias "Нажать Искать" "Нажать Ok"
+
+//OVER
+//OVERRIDE
+//Para:BoolA
+//Para:BoolW
+//Para:GetParent
+//Para:IntA
+//Para:IntW
+//Para:StrA
+//Para:StyleName
+
+//Para:Text
+WordAlias "Текст параграфа" Para:Text
+
+//PICK
+
+//pop:ComboBox:DropDown
+WordAlias "Выпадающий список комбобокса" pop:ComboBox:DropDown
+
+//pop:ComboBox:GetItemIndex
+WordAlias "Узнать индекс текущего значения в комбобоксе" pop:ComboBox:GetItemIndex
+
+//pop:ComboBox:IndexOf
+//pop:ComboBox:SelectItem
+
+//pop:ComboBox:SetItemIndex
+WordAlias "Установить значение в комбобоксе" pop:ComboBox:SetItemIndex
+
+//pop:ComboTree:CurrentNode
+//pop:Compiler:SetToCtx
+//pop:component:ComponentCount
+//pop:component:FindComponent
+//pop:component:GetComponent
+
+//pop:component:Name
+WordAlias "Имя компонента" pop:component:Name
+
+//pop:control:CanFocus
+BOOLEAN FUNCTION "Может ли контрол получить фокус" OBJECT IN aControl
+ aControl pop:control:CanFocus >>> Result
+;
+
+: "Убедиться, что контрол может получить фокус" OBJECT IN aControl
+ "Может ли контрол {(aControl)} получить фокус" 'Контрол не может получить фокус' ASSERTS
+;
+
+//pop:control:Caption
+
+//pop:control:Click
+PROCEDURE "Кликнуть" OBJECT IN aControl
+ Если ( aControl ЯВЛЯЕТСЯ class::TvgReminder ) то
+  (
+  aControl pop:Reminder:Click
+  )
+ иначе
+  ( 
+   aControl pop:control:Click
+  ) 
+;
+
+//pop:control:ClientToScreen
+//pop:control:ControlCount
+
+//pop:control:Enabled
+PROCEDURE "Проверить, активен ли контрол ?" OBJECT IN aControl
+ aControl pop:control:Enabled .
+; // "Проверить, активен ли контрол?" 
+
+BOOLEAN FUNCTION "Убедиться, что контрол неактивен" OBJECT IN aControl
+ aControl pop:control:Enabled ! >>> Result
+; // "Убедиться, что контрол неактивен"
+
+WordAlias "Убедиться, что контрол активен" pop:control:Enabled
+
+//pop:control:FindControlByName
+WordAlias "Найти контрол по имени на форме" pop:control:FindControlByName
+
+//pop:control:FindVGControlByName
+WordAlias "Найти VG-контрол по имени" pop:control:FindVGControlByName
+
+//pop:control:Focused
+BOOLEAN FUNCTION "Фокус находится в контроле" OBJECT IN aControl
+ aControl pop:control:Focused >>> Result
+;
+
+: "Убедиться, что фокус находится в контроле" OBJECT IN aControl
+ "Фокус находится в контроле {(aControl)}" 'Фокус уехал' ASSERTS
+;
+
+//pop:control:GetAnotherParentForm
+WordAlias "Получить родительскую форму" pop:control:GetAnotherParentForm
+
+//pop:control:GetColor
+: "Сравнить цвет контрола с эталоном"
+ pop:control:GetColor .
+; // "Сравнить цвет контрола с эталоном"
+
+//pop:control:GetControl
+
+//pop:control:GetFont
+WordAlias "Получить шрифт контрола" pop:control:GetFont
+
+//pop:control:GetHandle
+//pop:control:GetHeight
+WordAlias "Померить высоту" pop:control:GetHeight
+
+//pop:control:GetHint
+//pop:control:GetLeft
+WordAlias "Померить отступ слева" pop:control:GetLeft
+
+//pop:control:GetMainForm
+WordAlias "Узнать главную форму" pop:control:GetMainForm
+
+//pop:control:GetParent
+OBJECT FUNCTION "Родительский объект" OBJECT IN aControl 
+ Если ( aControl ЯВЛЯЕТСЯ class::TvgReminder ) то
+  (
+   aControl pop:component:Owner pop:component:Owner =: Result
+  )
+ иначе
+  ( 
+   aControl pop:control:GetParent =: Result
+  ) 
+;
+ 
+WordAlias "Перейти к родительской форме" "Родительский объект"
+
+//pop:control:GetParentForm
+WordAlias "Родительская форма контрола" pop:control:GetParentForm
+
+//pop:control:GetPopupMenu
+//pop:control:GetTop
+INTEGER FUNCTION "Померить отступ сверху"  OBJECT IN aControl
+ Если ( aControl ЯВЛЯЕТСЯ class::TvgReminder ) то
+  (
+   0 =: Result
+   false 'Функциональность утеряна' ASSERTS
+   //aControl pop:control:GetTop =: Result
+  )
+ иначе
+  (
+   aControl pop:control:GetTop =: Result
+  )
+;  
+
+//pop:control:GetTopParentForm
+WordAlias "Нижняя форма" pop:control:GetTopParentForm
+
+//pop:control:GetWidth
+WordAlias "Померить ширину" pop:control:GetWidth
+
+//pop:control:Hide
+
+//pop:control:HScrollerVisible
+WordAlias "Узнать, есть ли у контрола горизонтальный скроллер" pop:control:HScrollerVisible
+
+//pop:control:MouseWheelDown
+//pop:control:MouseWheelUp
+
+//pop:control:Name
+WordAlias "Узнать имя контрола" pop:control:Name
+
+//pop:control:ScreenToClient
+
+//pop:control:ScrollInfo
+WordAlias "Информация о скроллбаре" pop:control:ScrollInfo
+
+//pop:control:ScrollInfo:Min
+WordAlias "Узнать минимальное положение скроллера" pop:control:ScrollInfo:Min
+
+//pop:control:ScrollInfo:Max
+WordAlias "Узнать максимальное положение скроллера" pop:control:ScrollInfo:Max
+
+//pop:control:ScrollInfo:PageSize
+WordAlias "Узнать размер экрана" pop:control:ScrollInfo:PageSize
+
+//pop:control:ScrollInfo:Position
+WordAlias "Узнать положение скроллера" pop:control:ScrollInfo:Position
+
+//pop:control:SetColor
+
+//pop:control:SetFocus
+: "Установить фокус" OBJECT IN aControl
+ aControl pop:control:SetFocus 'Не удалось установить фокус' ASSERTS
+; // "Установить фокус"
+
+WordAlias "Установить фокус в" "Установить фокус"
+
+//pop:control:SetHeight
+PROCEDURE "Установить высоту" INTEGER IN aHeight OBJECT IN aControl
+ aHeight aControl pop:control:SetHeight
+ OnTest
+; // "Установить высоту"
+
+//pop:control:SetLeft
+//pop:control:SetTop
+
+//pop:control:SetWidth
+PROCEDURE "Установить ширину" INTEGER IN aWith OBJECT IN aControl
+ aWith aControl pop:control:SetWidth
+ OnTest
+; // "Установить ширину"
+
+//pop:control:Show
+//pop:control:Undock
+//pop:control:Visible
+BOOLEAN FUNCTION "Узнать, виден ли контрол" OBJECT IN aControl
+ Если ( aControl ЯВЛЯЕТСЯ class::TvgReminder ) то
+  (
+   aControl pop:Reminder:Visible =: Result
+  )
+ иначе
+  ( 
+   aControl pop:control:Visible =: Result
+  ) 
+; 
+
+: "Проверить, что контрол невидимый" OBJECT IN aControl
+ aControl "Узнать, виден ли контрол" ! 'Данный контрол видимый' ASSERTS
+;
+
+: "Проверить, что контрол видимый" OBJECT IN aControl
+ aControl "Узнать, виден ли контрол" 'Данный контрол невидимый' ASSERTS
+;
+
+//pop:control:VScrollerVisible
+: "Проверить, что у контрола есть вертикальный скроллер" OBJECT IN aControl
+ aControl  pop:control:VScrollerVisible 'У данного контрола нет скроллера' ASSERTS
+;
+: "Проверить, что у контрола нет вертикального скроллера" OBJECT IN aControl
+ aControl  pop:control:VScrollerVisible ! 'У данного контрола есть скроллер!' ASSERTS
+;
+WordAlias "Узнать, есть ли у контрола вертикальный скроллер" pop:control:VScrollerVisible
+
+//pop:editor:AtTop
+//pop:editor:BlockResize
+//pop:editor:CheckContinueCells
+//pop:editor:CheckWithEtalon
+//pop:editor:CopyAndPaste2DocumentBottom
+//pop:editor:CurrentText
+
+//pop:editor:CursorCoordsToScreen
+WordAlias "Координаты курсора относительно левого верхнего угла монитора" pop:editor:CursorCoordsToScreen
+
+//pop:editor:DeleteComment
+//pop:editor:DeleteRow
+//pop:editor:DocumentTailVisible
+//pop:editor:DP2LP
+//pop:editor:GetAllowRubberTables
+//pop:editor:GetDrawLines
+//pop:editor:GetDrawSpecial
+//pop:editor:GetLeftIndentDelta
+
+//pop:editor:GetLMargin
+WordAlias "Левый отступ контрола" pop:editor:GetLMargin
+
+//pop:editor:GetParaByID
+
+//pop:editor:GetSelectionText
+WordAlias "Выделенный текст редактора" pop:editor:GetSelectionText
+
+//pop:editor:GetSelectionTextInFormat
+WordAlias "Взять выделенный текст для сравнения в определенном формате" pop:editor:GetSelectionTextInFormat
+
+//pop:editor:GetShowDocumentParts
+//pop:editor:GetWebStyle
+
+//pop:editor:GetWrapLimit
+WordAlias "Узнать конечную координату заливки редактора" pop:editor:GetWrapLimit
+
+//pop:editor:HasComment
+//pop:editor:InsertRow
+//pop:editor:InsertSectionBreak
+//pop:editor:InsertTable
+//pop:editor:JumpToHyperlink
+//pop:editor:LP2DP
+//pop:editor:MergeCells
+//pop:editor:MergeTables
+//pop:editor:MergeTablesWithTimer
+//pop:editor:NextHyperlink
+//pop:editor:ParaCoordsToScreen
+
+//pop:editor:ParaDown
+: "Перейти на параграф вниз в редакторе" OBJECT IN anEditor
+ anEditor pop:editor:ParaDown
+;
+
+//pop:editor:ParaEnd
+//pop:editor:ParaEndCoordsToScreen
+//pop:editor:ParaHome
+//pop:editor:ParaMiddleCoordsToScreen
+
+//pop:editor:ParaUp
+: "Перейти на параграф вверх в редакторе" OBJECT IN anEditor
+ anEditor pop:editor:ParaUp
+;
+
+//pop:editor:PasteRTF
+WordAlias "Вставить текст из документа" pop:editor:PasteRTF
+
+//pop:editor:PrevHyperlink
+//pop:editor:PrintAcnhor
+//pop:editor:PrintTableCellsParams
+
+//pop:editor:PushParaFromCursor
+WordAlias "Параграф редактора, в котором находится курсор" pop:editor:PushParaFromCursor
+
+//pop:editor:RepaintAndCheckWithEtalon
+WordAlias "Перерисовать редактор и сохранить результат в файл с расширением .shapes" pop:editor:RepaintAndCheckWithEtalon
+
+//pop:editor:RepaintTableLinesAndCheckWithEtalon
+//pop:editor:ResizeTableColumn
+//pop:editor:ResizeTableColumnEX
+//pop:editor:ScrollBottom
+//pop:editor:ScrollLineDown
+//pop:editor:ScrollLineUp
+//pop:editor:ScrollTo
+
+//pop:editor:SelectAll
+: "Выделить все в редакторе" OBJECT IN anEditor
+ anEditor pop:editor:SelectAll
+;
+WordAlias "Выделить всё в редакторе" "Выделить все в редакторе"
+
+//pop:editor:SelectCellByMouse
+
+//pop:editor:SelectCells
+WordAlias "Выделить ячейки" pop:editor:SelectCells
+
+//pop:editor:SelectCellsVertical
+//pop:editor:SelectColumn
+//pop:editor:SelectPara
+
+//pop:editor:SelectTable
+: "Выделить таблицу в редакторе" OBJECT IN anEditor
+ anEditor pop:editor:SelectTable
+;
+
+//pop:editor:SetAllowRubberTables
+//pop:editor:SetCursorByPoint
+//pop:editor:SetDrawLines
+//pop:editor:SetDrawSpecial
+//pop:editor:SetShowDocumentParts
+//pop:editor:SetWebStyle
+//pop:editor:SplitCell
+//pop:editor:SplitTable
+//pop:editor:TextToFile
+//pop:editor:UpdateCursorFromHotSpot
+//pop:editor:UpdateCursorFromHotSpotEx
+//pop:editor:WheelScroll
+//pop:Finder:SetToCtx
+//pop:flash:GetFrame
+//pop:form:Close
+
+//pop:form:FindMenuItem
+WordAlias "Найти элементы меню на форме " pop:form:FindMenuItem
+
+//pop:form:FormStyle
+//pop:form:GetWindowState
+//pop:form:HasControl
+//pop:form:MDIChildCount
+//pop:form:MDIChildren
+
+//pop:form:ModalResult
+WordAlias "Узнать, какой ModalResult у модального окна" pop:form:ModalResult
+
+//pop:form:Next
+//pop:form:SetWindowState
+
+//pop:HideField:GetCaption
+WordAlias "Узнать заголовок контрола во вкладке" pop:HideField:GetCaption
+
+//pop:Lister:FooterCaption
+
+//pop:Lister:GetCurrent
+WordAlias "Узнать номер позиции фокуса в списке" pop:Lister:GetCurrent
+
+//pop:Lister:GetSelected
+WordAlias "Узнать, выделен ли элемент в списке" pop:Lister:GetSelected
+
+//pop:Lister:SelectWithShift
+WordAlias "Выделить с помощью Shift" pop:Lister:SelectWithShift
+
+//pop:object:ClassName
+: "Сравнить с эталоном класс объекта"
+ pop:object:ClassName .
+; // "Сравнить с эталоном класс объекта"
+
+//pop:object:GetFloatProp
+: "Сравнить с эталоном нецелочисленную переменную объекта (но округленную до целого числа)"
+ pop:object:GetFloatProp .
+; // "Сравнить с эталоном нецелочисленную переменную объекта (но округленную до целого числа)"
+
+//pop:object:GetInterfaceProp
+
+//pop:object:GetObjProp
+WordAlias "Свойства объекта" pop:object:GetObjProp
+
+//pop:object:GetOrdProp
+: "Сравнить с эталоном численную переменную объекта"
+ pop:object:GetOrdProp .
+; // "Сравнить с эталоном численную переменную объекта"
+WordAlias "Узнать численную переменную объекта" pop:object:GetOrdProp
+
+//pop:object:GetStrProp
+: "Сравнить с эталоном строковую переменную объекта"
+ pop:object:GetStrProp .
+; // "Сравнить с эталоном строковую переменную объекта"
+
+//pop:object:HasProp
+: "Узнать, существует ли свойство у объекта" STRING IN aProp OBJECT IN anObj
+ aProp anObj pop:object:HasProp
+;
+
+//pop:object:Inherits
+
+//pop:object:IsNil
+WordAlias "Узнать, существует ли объект" pop:object:IsNil
+
+//pop:object:RTTIInfo
+//pop:object:SetFloatProp
+//pop:object:SetOrdProp
+//pop:object:SetStrProp
+
+//pop:PageControl:FindPageByCaption
+WordAlias "Найти вкладку по имени" pop:PageControl:FindPageByCaption
+
+//pop:PageControl:GetAllPageCaptions
+
+//pop:PageControl:PageByIndex
+WordAlias "Найти вкладку по индексу" pop:PageControl:PageByIndex
+
+//pop:PageControl:PageCaptionByIndex
+//pop:QueryCard:Attribute:GetCollapsed
+
+//pop:QueryCard:Attribute:GetFocus
+WordAlias "Узнать в каком поле КЗ стоит фокус" pop:QueryCard:Attribute:GetFocus
+
+//pop:QueryCard:Attribute:GetLogicOperation
+//pop:QueryCard:Attribute:IsLogicOperationEnabled
+
+//pop:QueryCard:Attribute:SetCollapsed
+WordAlias "Установить свернутость группы КЗ" pop:QueryCard:Attribute:SetCollapsed
+
+//pop:QueryCard:Attribute:SetFocus
+WordAlias "Установить фокус в поле КЗ" pop:QueryCard:Attribute:SetFocus
+
+//pop:QueryCard:Attribute:SetWithLogicOperation
+WordAlias "Ввести текст в поле КЗ с операцией" pop:QueryCard:Attribute:SetWithLogicOperation
+
+//pop:QueryCard:GetCurrentReqName
+WordAlias "Узнать имя поля КЗ" pop:QueryCard:GetCurrentReqName
+
+//pop:QueryCard:SetAttribute
+
+//pop:RadioButton:GetChecked
+WordAlias "Узнать, отмечен ли RadioButton?" pop:RadioButton:GetChecked
+
+//pop:RadioButton:SetChecked
+WordAlias "Нажать на RadioButton" pop:RadioButton:SetChecked
+
+//pop:RadioGroup:GetItemIdex
+//pop:RadioGroup:SetItemIndex
+
+//pop:reminder:FindEditor
+WordAlias "Найти редактор баллона" pop:Reminder:FindEditor
+
+//pop:reminder:IsBaloonVisible
+
+//pop:reminder:Move
+WordAlias "Переместить медаль" pop:Reminder:Move
+
+//pop:Reminder:Caption 
+//pop:Reminder:Hint
+//pop:Reminder:Flash
+//pop:Reminder:ImageIndex
+//pop:Reminder:Name
+//pop:Reminder:PopupForm 
+//pop:Reminder:UserType
+//pop:Reminder:TextBackColor
+//pop:Reminder:ShowHint
+//pop:Reminder:Visible
+//pop:Reminder:GetPopupMenu
+//pop:RemindersLine:Count
+//pop:RemindersLine:ClientToScreen 
+//pop:RemindersLine:Left 
+//pop:RemindersLine:Top
+//pop:RemindersLine:AbsLeft 
+//pop:RemindersLine:AbsTop
+//pop:RemindersLine:Width
+//pop:RemindersLine:Height 
+//pop:RemindersLine:Visible
+
+//pop:SpinEdit:GetValue
+//pop:SpinEdit:SetValue
+
+//pop:StatusBarButton:IsDown
+: "Нажата ли кнопка статусбара?"
+ pop:StatusBarButton:IsDown .
+; // "Нажата ли кнопка статусбара?"
+
+//pop:TB97Button:GetIsDown
+
+//pop:TreeView:ExportSelectionWithFormat
+WordAlias "Сравнить выделенные элементы списка в нужном формате" pop:TreeView:ExportSelectionWithFormat
+
+//pop:vcm:form:FormID
+//pop:vcm:form:IsFloatingState
+//pop:vcm:form:IsFloatingStateAndParentNotVisible
+//pop:vcm:form:UserType
+//pop:Word:Name
+//pop:Word:Parent
+//pop:Word:Producer
+//pop:Word:PublicateInMainDictionary
+//PRIVATE
+//PROCEDURE
+//ProcessFilesWithMask
+//ProcessMessages
+//ProcessSubDirs
+//PROTECTED
+//PUBLIC
+//QueryCard:SetCanSaveState
+//RAISE
+//Random
+//Randomize
+//REALIZE
+//REDEFINEABLE
+//REDEFINITION
+//REFERENCE
+//RenameFile
+//RestoreSettings
+//RGB2String
+//ROLL
+//ROT
+//-ROT
+//RULES
+//SameStr
+//SameText
+//ScreenCount
+//screen:Height
+//screen:Width
+
+//script:FileName
+WordAlias "Полный путь скрипта" script:FileName
+
+//SEALED
+
+//SetForegroundWindow
+WordAlias "Восстановить активное окно" wnd:SetForeground
+
+//SetLocalDate
+//SetLocalDateTime
+//SetLocalTime
+//SetRandSeed
+//ShiftDate
+//ShiftTime
+//SLEEP
+//StartsStr
+//StartsText
+//StartTimer
+//StatusBar:OrderedControl
+//StatusBar:OrderedControlsCount
+//StatusBar:OrderIndex
+//StereotypeProducer
+//StereotypeStereotypeProducer
+//StopTimer
+//StopTimerEx
+//STRING
+//string:[i]
+//string:+!
+//string:++!
+//string:CodePage
+//string:ConsistsOf
+//string:HasAnyOf
+//string:Len
+//string:--Len!
+
+//string:Pos
+INTEGER FUNCTION "Позиция строки в эталоне" STRING IN aString STRING IN anEtalon
+ Result := ( anEtalon aString string:Pos )
+;
+
+//string:PosEx
+//string:Replace
+//string:ReplaceFirst
+//string:RSplitTo!
+//string:Split
+//string:SplitTo!
+//string:ToChar
+//StrToInt
+//StyleTable:Changed
+//StyleTable:Changing
+//StyleTable:Restore
+//StyleTable:SaveToFile
+//SUMMONED
+//SWAP
+//sysutils:ChangeFileExt
+//sysutils:DirectoryExists
+//sysutils:ExtractFileDrive
+
+//sysutils:ExtractFileName
+WordAlias "Имя скрипта" sysutils:ExtractFileName
+
+//sysutils:ExtractFilePath
+//sysutils:FileExists
+//sysutils:ForceDirectories
+//tests:CheckEtalon
+//tests:CheckOutputWithInput
+//text:Replace
+//text:ReplaceFirst
+//textform:GetDocumentID
+//textform:SetNeedShowIntranetWarning
+//textpara:SetStyleByID
+//THREAD
+
+//timemachine:SetDate
+: "Устанавливаем дату машины времени" STRING IN aDate
+ aDate timemachine:SetDate
+;
+
+PROCEDURE "Выключаем машину времени" 
+ "Устанавливаем дату машины времени {('')}"
+; // "Выключаем машину времени"
+
+//ToPrintable
+//tree:CheckFlag
+//tree:ChildrenCount
+//tree:CollapseAll
+
+//tree:CurrentNode
+WordAlias "Текущая нода дерева" tree:CurrentNode
+
+//tree:CurrentNode:IsExpanded
+//tree:ExpandAll
+//tree:GetItem
+//tree:GetItem:Bounds
+
+//tree:GetItem:Height
+WordAlias "Высота ноды дерева" tree:GetItem:Height
+
+//tree:GetItem:Left
+//tree:GetItem:Top
+//tree:GetItem:Width
+
+//tree:GetItemImageIndex
+WordAlias "Узнать индекс иконки в дереве " tree:GetItemImageIndex
+
+//tree:GetItemsCount
+WordAlias "Узнать количество элементов дерева" tree:GetItemsCount
+
+//tree:GetSelected
+WordAlias "Узнать, выделена ли нода дерева?" tree:GetSelected
+
+//tree:SaveState2File
+
+//tree:SetSelected
+WordAlias "Изменить отмеченность ноды дерева" tree:SetSelected
+
+//tree:развернуть
+//true
+//TRY
+//TryFocusOnForm
+//TUCK
+//USES
+//VAR
+//VarProducer
+//vcm:Dispatcher:BeginOp
+//vcm:Dispatcher:EndOp
+//vcm:Dispatcher:Lock
+//vcm:Dispatcher:Unlock
+//vcm:ExportHelp
+//vcm:FindForm
+//vcm:History:GetBackCount
+//vcm:History:GetBackItem
+//vcm:History:GetForwardCount
+//vcm:History:GetForwardItem
+
+//vg:control:Click
+WordAlias "Кликаем контрол , принадлежащий VG-сцене" vg:control:Click
+
+//vg:control:CountSiblingLikeMe
+
+//vg:control:GetIsChecked
+WordAlias "Узнать, выбран ли VG-контрол" vg:control:GetIsChecked
+
+//vg:control:Enabled
+//vg:control:Name
+//vg:control:SetIsChecked
+//vg:control:Left
+//vg:control:Top
+//vg:control:Width
+//vg:control:Height
+//vg:control:LeftInScene
+//vg:control:TopInScene
+//vg:control:Scene
+//vg:ComboBox:ItemHeight
+//VIRTUAL
+//wait:Cancel
+//wait:Choice
+//wait:No
+//wait:Ok
+//wait:Yes
+//waited:?
+//WHILE
+//WindowFromPoint
+//WindowIsMine
+//WinExec
+//WordAlias
+//WordAliasByRef
+//WordProducer
+//WORDWORKER
+//WORDWORKER2
+//W-STRING
+//WString:[]
+//WString:[]++!
+//WString:[i]
+//WString:+
+//WString:+!
+//WString:++
+//WString:++!
+//WString:CodePage
+//WString:ConsistsOf
+//WString:Ends
+//WString:EndsText
+//WString:HasAnyOf
+//WString:IsNil
+//WString:Len
+//WString:--Len!
+//WString:RSplitTo!
+//WString:SplitTo!
+//WString:Starts
+//WString:StartsText
+//WString:ToString
+//компонент::EditionsStateIcons
+//компонент::f_TextSource
+//компонент::FlashTimer
+//компонент::ieIO
+//компонент::ieProc
+//компонент::ilButtons
+//компонент::RemindersLine
+//компонент::ShutdownTimer
+//компонент::TextSource
+//контрол::AdapterCaptionLabel
+//контрол::AdapterCaptionLabel:push
+//контрол::AdapterInfoLabel
+//контрол::AdapterInfoLabel:push
+//контрол::AreaCombo
+//контрол::AreaCombo:push
+//контрол::AttributeTree
+//контрол::AttributeTree:push
+//контрол::BackgroundPanel
+//контрол::BackgroundPanel:push
+//контрол::BaseSearchPanel
+//контрол::BaseSearchPanel:push
+//контрол::Border
+//контрол::Border:push
+//контрол::BottomEditor
+//контрол::BottomEditor:push
+//контрол::BottomPanel
+//контрол::BottomPanel:push
+//контрол::cbInternal
+//контрол::cbInternal:push
+//контрол::cbOddEven
+//контрол::cbOddEven:push
+//контрол::cbPrinter
+//контрол::cbPrinter:push
+//контрол::cbPrintInfo
+//контрол::cbPrintInfo:push
+//контрол::cbShared
+//контрол::cbShared:push
+//контрол::cfList
+//контрол::cfList:push
+//контрол::ChildZone
+//контрол::ChildZone:push
+//контрол::ChildZonePanel
+//контрол::ChildZonePanel:push
+//контрол::ClientZone
+//контрол::ClientZone:push
+//контрол::CloseBtn
+//контрол::CloseBtn:push
+//контрол::CollateCheckBox
+//контрол::CollateCheckBox:push
+//контрол::ContentsTree
+//контрол::ContentsTree:push
+//контрол::ContextEdit
+//контрол::ContextEdit:push
+//контрол::ContextEditPanel
+//контрол::ContextEditPanel:push
+//контрол::ContextFilter
+//контрол::ContextFilter:push
+//контрол::ControlledChangingWarning
+//контрол::ControlledChangingWarning:push
+//контрол::CopyrightCaptionLabel
+//контрол::CopyrightCaptionLabel:push
+//контрол::DateList
+//контрол::DateList:push
+//контрол::deChangeDate
+//контрол::deChangeDate:push
+//контрол::deDate
+//контрол::deDate:push
+//контрол::DocView
+//контрол::DocView:push
+//контрол::DropButton
+//контрол::DropButton:push
+//контрол::edCopyCount
+//контрол::edCopyCount:push
+//контрол::EditionChoose
+//контрол::EditionChoose:push
+//контрол::EditionLink
+//контрол::EditionLink:push
+//контрол::Editor
+//контрол::Editor:push
+//контрол::edNumber
+//контрол::edNumber:push
+//контрол::edPrintInterval
+//контрол::edPrintInterval:push
+//контрол::edWriteToUs
+//контрол::edWriteToUs:push
+//контрол::ElementName
+//контрол::ElementName:push
+//контрол::EMailCaptionLabel
+//контрол::EMailCaptionLabel:push
+//контрол::EMailLabel
+//контрол::EMailLabel:push
+//контрол::ExampleLabel
+//контрол::ExampleLabel:push
+//контрол::f_StyleTreeView
+//контрол::f_StyleTreeView:push
+//контрол::FilterName
+//контрол::FilterName:push
+//контрол::FiltersList
+//контрол::FiltersList:push
+//контрол::FindBackBtn
+//контрол::FindBackBtn:push
+//контрол::FindBtn
+//контрол::FindBtn:push
+//контрол::FirstLevelContent
+//контрол::FirstLevelContent:push
+//контрол::flAttributeSearch
+//контрол::flAttributeSearch:push
+//контрол::flDictionSearch
+//контрол::flDictionSearch:push
+//контрол::flPublishedSourceSearch
+//контрол::flPublishedSourceSearch:push
+//контрол::flSitiationSearch
+//контрол::flSitiationSearch:push
+//контрол::FoldersTree
+//контрол::FoldersTree:push
+//контрол::FoundCountLabel
+//контрол::FoundCountLabel:push
+//контрол::Header
+//контрол::Header:push
+//контрол::hfLastOpenDocs
+//контрол::hfLastOpenDocs:push
+//контрол::hfLastOpenDocsRightEdge
+//контрол::hfLastOpenDocsRightEdge:push
+//контрол::hfLawNews
+//контрол::hfLawNews:push
+//контрол::hfReferences
+//контрол::hfReferences:push
+//контрол::hfTaxes
+//контрол::hfTaxes:push
+//контрол::HistoryEditor
+//контрол::HistoryEditor:push
+//контрол::HScroll
+//контрол::HScroll:push
+//контрол::ieBanner
+//контрол::ieBanner:push
+//контрол::ieViewer
+//контрол::ieViewer:push
+//контрол::Info
+//контрол::Info:push
+//контрол::InfoName
+//контрол::InfoName:push
+//контрол::InnerBorder
+//контрол::InnerBorder:push
+//контрол::JournalTree
+//контрол::JournalTree:push
+//контрол::Layout1
+//контрол::Layout1:push
+//контрол::Layout2
+//контрол::Layout2:push
+//контрол::Layout3
+//контрол::Layout3:push
+//контрол::lbHeader
+//контрол::lbHeader:push
+//контрол::lblLinkToContent
+//контрол::lblLinkToContent:push
+//контрол::lblSeeAlso
+//контрол::lblSeeAlso:push
+//контрол::LeftNavigator
+//контрол::LeftNavigator:push
+//контрол::ListPanel
+//контрол::ListPanel:push
+//контрол::ListTree
+//контрол::ListTree:push
+//контрол::LoginCaptionLabel
+//контрол::LoginCaptionLabel:push
+//контрол::LoginLabel
+//контрол::LoginLabel:push
+//контрол::lstBookmarks
+//контрол::lstBookmarks:push
+//контрол::lstComments
+//контрол::lstComments:push
+//контрол::lstExternalObjects
+//контрол::lstExternalObjects:push
+//контрол::MainPageTab
+//контрол::MainPageTab:push
+//контрол::MainZone
+//контрол::MainZone:push
+//контрол::mComment
+//контрол::mComment:push
+//контрол::MoreTab
+//контрол::MoreTab:push
+//контрол::MostOuterRectangle
+//контрол::MostOuterRectangle:push
+//контрол::NameLabel
+//контрол::NameLabel:push
+//контрол::NavigatorTree
+//контрол::NavigatorTree:push
+//контрол::NavigatorZone
+//контрол::NavigatorZone:push
+//контрол::OkButton
+//контрол::OkButton:push
+//контрол::OldBaseWarning
+//контрол::OldBaseWarning:push
+//контрол::OwnerCaptionLabel
+//контрол::OwnerCaptionLabel:push
+//контрол::OwnerLabel
+//контрол::OwnerLabel:push
+//контрол::ParentZone
+//контрол::ParentZone:push
+//контрол::ParentZonePanel
+//контрол::ParentZonePanel:push
+//контрол::pbCourtsOnline
+//контрол::pbCourtsOnline:push
+//контрол::pbExpert
+//контрол::pbExpert:push
+//контрол::pbHeader
+//контрол::pbHeader:push
+//контрол::pbIcon
+//контрол::pbIcon:push
+//контрол::pbIntranet
+//контрол::pbIntranet:push
+//контрол::pbLinkToContent
+//контрол::pbLinkToContent:push
+//контрол::pbLogo
+//контрол::pbLogo:push
+//контрол::pbOnLine
+//контрол::pbOnLine:push
+//контрол::pnBack
+//контрол::pnBack:push
+//контрол::pnBackground
+//контрол::pnBackground:push
+//контрол::pnCaption
+//контрол::pnCaption:push
+//контрол::pnHeader
+//контрол::pnHeader:push
+//контрол::pnlBanner
+//контрол::pnlBanner:push
+//контрол::pnlBaseSearch
+//контрол::pnlBaseSearch:push
+//контрол::pnlBaseSearchZone
+//контрол::pnlBaseSearchZone:push
+//контрол::pnLeft
+//контрол::pnLeft:push
+//контрол::pnLeftEx
+//контрол::pnLeftEx:push
+//контрол::pnLeftForScroll
+//контрол::pnLeftForScroll:push
+//контрол::pnlExpert
+//контрол::pnlExpert:push
+//контрол::pnLinkToContent
+//контрол::pnLinkToContent:push
+//контрол::pnlLeftTop
+//контрол::pnlLeftTop:push
+//контрол::pnlLogo
+//контрол::pnlLogo:push
+//контрол::pnlMain
+//контрол::pnlMain:push
+//контрол::pnlOnLine
+//контрол::pnlOnLine:push
+//контрол::pnlRightTop
+//контрол::pnlRightTop:push
+//контрол::pnlSearches
+//контрол::pnlSearches:push
+//контрол::pnRight
+//контрол::pnRight:push
+//контрол::pnRightEx
+//контрол::pnRightEx:push
+//контрол::pnRightForScroll
+//контрол::pnRightForScroll:push
+//контрол::pnSeeAlso
+//контрол::pnSeeAlso:push
+//контрол::pnWorkArea
+//контрол::pnWorkArea:push
+//контрол::pnWriteToUs
+//контрол::pnWriteToUs:push
+//контрол::poDocumentNames
+//контрол::poDocumentNames:push
+//контрол::poDocumentTexts
+//контрол::poDocumentTexts:push
+//контрол::PreviewGroupBox
+//контрол::PreviewGroupBox:push
+//контрол::PreviewPanel
+//контрол::PreviewPanel:push
+//контрол::ProgressBar
+//контрол::ProgressBar:push
+//контрол::QueryExampleLabel
+//контрол::QueryExampleLabel:push
+//контрол::rb_totmChangeDate
+//контрол::rb_totmChangeDate:push
+//контрол::rb_totmGotoActualRedaction
+//контрол::rb_totmGotoActualRedaction:push
+//контрол::rb_totmOnCurrentRedation
+//контрол::rb_totmOnCurrentRedation:push
+//контрол::rb_totmOnDate
+//контрол::rb_totmOnDate:push
+//контрол::rb_totmStayInCurrentRedaction
+//контрол::rb_totmStayInCurrentRedaction:push
+//контрол::rbPrintAll
+//контрол::rbPrintAll:push
+//контрол::rbPrintCurrent
+//контрол::rbPrintCurrent:push
+//контрол::rbPrintInterval
+//контрол::rbPrintInterval:push
+//контрол::rbPrintSelected
+//контрол::rbPrintSelected:push
+//контрол::Rectangle1
+//контрол::Rectangle1:push
+//контрол::RedactionTree
+//контрол::RedactionTree:push
+//контрол::remListFiltered
+//контрол::remListFiltered:push
+//контрол::remListModified
+//контрол::remListModified:push
+//контрол::remNewChatMessages
+//контрол::remNewChatMessages:push
+//контрол::remOnlineDead
+//контрол::remOnlineDead:push
+//контрол::remTimeMachineWarning
+//контрол::remTimeMachineWarning:push
+//контрол::remUnreadConsultations
+//контрол::remUnreadConsultations:push
+//контрол::RightNavigator
+//контрол::RightNavigator:push
+//контрол::RubricatorList
+//контрол::RubricatorList:push
+//контрол::scrLeft
+//контрол::scrLeft:push
+//контрол::scrRight
+//контрол::scrRight:push
+//контрол::SelectedTree
+//контрол::SelectedTree:push
+//контрол::SettingsPageControl
+//контрол::SettingsPageControl:push
+//контрол::ShellCaptionLabel
+//контрол::ShellCaptionLabel:push
+//контрол::ShellInfoLabel
+//контрол::ShellInfoLabel:push
+//контрол::ShowCheckBox
+//контрол::ShowCheckBox:push
+//контрол::StatusBar
+//контрол::StatusBar:push
+//контрол::SubPanel
+//контрол::SubPanel:push
+//контрол::Tasks
+//контрол::Tasks:push
+//контрол::Text
+//контрол::Text:push
+//контрол::TopPanel
+//контрол::TopPanel:push
+//контрол::tpvMain
+//контрол::tpvMain:push
+//контрол::trContactList
+//контрол::trContactList:push
+//контрол::TrialModeWarning
+//контрол::TrialModeWarning:push
+//контрол::tvAttributes
+//контрол::tvAttributes:push
+//контрол::tvConfs
+//контрол::tvConfs:push
+//контрол::tvLastOpenDocs
+//контрол::tvLastOpenDocs:push
+//контрол::tvLawNews
+//контрол::tvLawNews:push
+//контрол::tvList
+//контрол::tvList:push
+//контрол::tvReferences
+//контрол::tvReferences:push
+//контрол::tvTaxes
+//контрол::tvTaxes:push
+//контрол::UnderControlList
+//контрол::UnderControlList:push
+//контрол::UserCaptionLabel
+//контрол::UserCaptionLabel:push
+//контрол::UserCountCaptionLabel
+//контрол::UserCountCaptionLabel:push
+//контрол::UserCountLabel
+//контрол::UserCountLabel:push
+//контрол::UserInfoGroupBox
+//контрол::UserInfoGroupBox:push
+//контрол::UserNameLabel
+//контрол::UserNameLabel:push
+//контрол::vgScene1
+//контрол::vgScene1:push
+//контрол::Viewer
+//контрол::Viewer:push
+//контрол::WarnInactualDocument
+//контрол::WarnInactualDocument:push
+//контрол::WarningText
+//контрол::WarningText:push
+//контрол::WarnIsAbolished
+//контрол::WarnIsAbolished:push
+//контрол::WarnJuror
+//контрол::WarnJuror:push
+//контрол::WarnOnControl
+//контрол::WarnOnControl:push
+//контрол::WarnPreActive
+//контрол::WarnPreActive:push
+//контрол::WarnRedaction
+//контрол::WarnRedaction:push
+//контрол::WarnTimeMachineException
+//контрол::WarnTimeMachineException:push
+//контрол::WarnTimeMachineOn
+//контрол::WarnTimeMachineOn:push
+//контрол::WarnTimeMachineWarning
+//контрол::WarnTimeMachineWarning:push
+//контрол::WordsTree
+//контрол::WordsTree:push
+//контрол::ztChild
+//контрол::ztChild:push
+//моп::Документ_Открыть_документ_по_номеру
+//моп::Журнал_работы_OpenJournal
+
+//моп::Интернет-агент_Новости_онлайн
+: "Новости онлайн"
+ моп::Интернет-агент_Новости_онлайн
+ OnTest
+;
+
+//моп::Инфарм_Основное_меню_ИнФарм
+: "Основное меню ИнФарм"
+ моп::Инфарм_Основное_меню_ИнФарм
+ OnTest
+;
+
+//моп::Инфарм_Словарь_медицинских_терминов
+: "Словарь медицинских терминов"
+ моп::Инфарм_Словарь_медицинских_терминов
+ OnTest
+;
+
+//моп::Инфарм_Список_выпускаемых_препаратов
+
+//моп::Инфарм_Фармацевтические_фирмы
+: "Список фармацевтических фирм"
+ моп::Инфарм_Фармацевтические_фирмы
+ OnTest
+;
+
+//моп::Мониторинги_Новостная_лента
+
+//моп::Мониторинги_Обзор_изменений_законодательства
+: "Обзор изменений законодательства"
+ моп::Мониторинги_Обзор_изменений_законодательства
+ OnTest
+;
+
+//моп::Настройка_панели_задач_Настройка...
+//моп::Настройка_системы_Доступные_операции...
+//моп::Настройка_системы_Закрепить_панели_инструментов
+//моп::Настройка_системы_Настройка...
+//моп::Настройка_системы_Размер_кнопок
+//моп::Окна_OpenIntranet
+
+//моп::Окна_Информация_о_комплекте
+: "Информация о комплекте"
+ моп::Окна_Информация_о_комплекте
+ OnTest
+;
+
+//моп::Окна_Меню_(вкладка)
+: "Меню во вкладке без проверки"
+ моп::Окна_Меню_(вкладка)
+ OnTest
+; // "Меню во вкладке без проверки"
+
+//моп::Окна_Настройка_страницы...
+: "Настройка страницы"
+ моп::Окна_Настройка_страницы...
+ OnTest
+; // "Настройка страницы"
+
+//моп::Окна_Основное_меню
+//моп::Окна_Основное_меню_системы_ГАРАНТ
+//моп::Окна_Панель_задач
+//моп::Окна_Письмо_разработчикам
+//моп::Окна_Правовой_навигатор
+//моп::Окна_Справочная_информация
+
+//моп::Окна_Условия_использования
+WordAlias "Условия использования" моп::Окна_Условия_использования
+
+//моп::Папки_Документы_на_контроле
+: "Открыть вкладку Документы на контроле"
+ моп::Папки_Документы_на_контроле
+ OnTest
+;
+
+//моп::Папки_Мои_документы
+
+//моп::Папки_Мои_консультации
+: "Открыть вкладку консультаций" 
+ моп::Папки_Мои_консультации
+ // - тут есть правда засада, открытая вкладка имеет свойство закрываться,
+ //   это надо будет доделать проверкой наличия формы уже на экране
+ 3 LOOP OnTest
+;
+
+//моп::Папки_Моя_информация
+
+//моп::Поиск_BaseSearch
+WordAlias БП моп::Поиск_BaseSearch
+
+: "Нажатием F4 открываем панель БП"
+ БП
+ OnTest
+;
+
+: "Сбросить тип БП"
+ БП
+ // - чтобы сбросить вкладку во 'Все документы'
+;
+
+//моп::Поиск_DocumentsWithoutClass
+//моп::Поиск_DocumentsWithoutIncluded
+//моп::Поиск_DocumentsWithoutKey
+
+//моп::Поиск_OpenConsult
+: ППО
+ моп::Поиск_OpenConsult
+ OnTest
+;
+
+//моп::Поиск_PublishSourceSearch
+: ППИО
+ моп::Поиск_PublishSourceSearch
+ OnTest
+;
+
+//моп::Поиск_StartENO
+//моп::Поиск_Поиск
+
+//моп::Поиск_Поиск_лекарственных_средств
+: "Поиск лекарственного средства"
+ моп::Поиск_Поиск_лекарственных_средств
+ OnTest
+;
+
+//моп::Поиск_Поиск_по_реквизитам
+
+//моп::Поиск_Поиск_по_ситуации
+: ППС
+ моп::Поиск_Поиск_по_ситуации
+ OnTest
+; // "Поработать с расширенной конфигурацией"
+
+//моп::Совет_дня_ShowDayTips
+WordAlias "Советы дня" моп::Совет_дня_ShowDayTips
+
+//моп::Список_документов_из_файла_Открыть_список_документов_из_файла
+
+//моп::Толковый_словарь_Толковый_словарь
+: "Толковый словарь"
+ моп::Толковый_словарь_Толковый_словарь
+ OnTest
+; 
+
+//моп::Установки_Автоматический_вход_в_систему
+//моп::Установки_Выбор_конфигурации
+
+//моп::Установки_Изменить_мои_регистрационные_данные...
+: "Изменить мои регистрационные данные"
+ моп::Установки_Изменить_мои_регистрационные_данные...
+ OnTest
+; 
+
+//моп::Установки_Настройка_конфигурации...
+WordAlias "Настройка конфигурации" моп::Установки_Настройка_конфигурации...
+
+//моп::Установки_Редактор_стилей...
+WordAlias "Редактор стилей" моп::Установки_Редактор_стилей...
+// !!! не использовать в таком виде !!! брать WORDWORKER "Выполнить с редактором стилей" !!!
+
+//моп::Установки_Список_конфигураций
+
+//моп::Чат_OpenContactList
+WordAlias "Открыть вкладку с контактами" моп::Чат_OpenContactList
+
+//оп::enIntranetSourcePoint_opGoToIntranet
+//оп::enOpenable_opOpenInNewWindow
+//оп::http://mdp.garant.ru/pages/viewpage.action?pageId=236719144_opFake
+
+//оп::Атрибут_И
+WordAlias "Выбрать атрибут И" оп::Атрибут_И
+
+//оп::Атрибут_ИЛИ
+WordAlias "Выбрать атрибут ИЛИ" оп::Атрибут_ИЛИ
+
+//оп::Атрибут_ИЛИ_(shortcut)
+
+//оп::Атрибут_Копировать_текущий_атрибут
+WordAlias "Копировать текущий атрибут" оп::Атрибут_Копировать_текущий_атрибут
+
+//оп::Атрибут_КРОМЕ
+//оп::Атрибуты_Печать
+
+//оп::Визуальные_Английский_язык
+WordAlias "Переключиться на английский язык" оп::Визуальные_Английский_язык
+
+//оп::Визуальные_Испанский_язык
+WordAlias "Переключиться на испанский язык" оп::Визуальные_Испанский_язык
+
+//оп::Визуальные_Итальянский_язык
+WordAlias "Переключиться на итальянский язык" оп::Визуальные_Итальянский_язык
+
+//оп::Визуальные_Немецкий_язык
+WordAlias "Переключиться на немецкий язык" оп::Визуальные_Немецкий_язык
+
+//оп::Визуальные_Русский_язык
+WordAlias "Переключиться на русский язык" оп::Визуальные_Русский_язык
+
+//оп::Визуальные_Французский_язык
+WordAlias "Переключиться на французский язык" оп::Визуальные_Французский_язык
+
+//оп::Вложенные_формы_Закрыть
+: "Закрыть текущую вкладку"
+ оп::Вложенные_формы_Закрыть
+ OnTest
+;
+
+//оп::Встроенный_объект_Открыть_(во_внешнем_приложении)
+//оп::Встроенный_объект_Сохранить_(экспорт)
+//оп::Выбор_действия_Добавить
+//оп::Выбор_действия_Ок
+//оп::Выбор_действия_Отмена
+
+//оп::Выделенные_элементы_Анализ_списка...
+WordAlias "Анализ списка" оп::Выделенные_элементы_Анализ_списка...
+
+//оп::Выделенные_элементы_Копировать_в_новый_список
+
+//оп::Выделенные_элементы_Найти_в_Толковом_словаре
+: "Найти выделенное в толковом словаре"
+ оп::Выделенные_элементы_Найти_в_Толковом_словаре
+ OnTest
+; // "Найти выделенное в толковом словаре"
+
+//оп::Выделенные_элементы_Очистить_условия
+WordAlias "Очистить условия" оп::Выделенные_элементы_Очистить_условия
+
+//оп::Выделенные_элементы_Поставить_ссылку...
+//оп::Выделенные_элементы_Ссылки_из_фрагмента
+
+//оп::Выделенные_элементы_Ссылки_на_фрагмент
+WordAlias "Выделенные элементы - Ссылки на фрагмент" оп::Выделенные_элементы_Ссылки_на_фрагмент
+
+//оп::Вычисляемые_поля_Внутренний_номер
+//оп::Вычисляемые_поля_Дата_редакции
+//оп::Вычисляемые_поля_Количество_страниц
+//оп::Вычисляемые_поля_Название_документа
+//оп::Вычисляемые_поля_Название_документа_целиком
+//оп::Вычисляемые_поля_Номер_страницы
+//оп::Вычисляемые_поля_Позиция_в_файле
+//оп::Вычисляемые_поля_Размер
+//оп::Вычисляемые_поля_Система_ГАРАНТ
+//оп::Вычисляемые_поля_Текущая_дата
+//оп::Вычисляемые_поля_Текущее_время
+
+//оп::Гипертекстовая_ссылка_Открыть_ссылку_в_новой_вкладке
+WordAlias "Открыть гиперссылку в новой вкладке" оп::Гипертекстовая_ссылка_Открыть_ссылку_в_новой_вкладке
+
+//оп::Гипертекстовая_ссылка_Открыть_гиперссылку_в_новом_окне
+WordAlias "Открыть гиперссылку в новом окне" оп::Гипертекстовая_ссылка_Открыть_ссылку_в_новом_окне
+
+//оп::Гипертекстовая_ссылка_Перейти_по_гиперссылке
+: "Перейти по текущей ссылке"
+ оп::Гипертекстовая_ссылка_Перейти_по_гиперссылке
+ OnTest
+;
+
+//оп::Гипертекстовая_ссылка_Предыдущая_ссылка
+WordAlias "Перейти к предыдущей ссылке" оп::Гипертекстовая_ссылка_Предыдущая_ссылка
+
+//оп::Гипертекстовая_ссылка_Следующая_ссылка
+WordAlias "Перейти к следующей ссылке" оп::Гипертекстовая_ссылка_Следующая_ссылка
+
+//оп::Гипертекстовая_ссылка_Удалить_гиперссылку
+//оп::Группы_пользователей_Изменить_доступ_к_информационным_блокам
+//оп::Группы_пользователей_Переименовать
+
+//оп::Группы_пользователей_Создать_новую_группу
+WordAlias "Создать новую группу" оп::Группы_пользователей_Создать_новую_группу
+
+//оп::Дерево_Перенос_по_словам
+WordAlias "Перенос по словам" оп::Дерево_Перенос_по_словам
+
+//оп::Дерево_Развернуть_все
+: "Развернуть текущее дерево"
+ оп::Дерево_Развернуть_все
+ OnTest
+; // "Развернуть текущее дерево"
+
+//оп::Дерево_Свернуть_все
+: "Свернуть текущее дерево"
+ оп::Дерево_Свернуть_все
+ OnTest
+; // "Свернуть текущее дерево"
+
+//оп::Документ_opShowDocumentPicture
+//оп::Документ_Аннотация
+
+//оп::Документ_Вернуться_в_список
+WordAlias "Вернуться в список" оп::Документ_Вернуться_в_список
+
+//оп::Документ_Включить/выключить_информацию_об_изменениях_документа
+
+//оп::Документ_Графическая_копия_официальной_публикации
+WordAlias "Открыть графическую копию официальной публикации" оп::Документ_Графическая_копия_официальной_публикации
+
+//оп::Документ_Изменения_в_документе
+//оп::Документ_Информация_о_документе
+//оп::Документ_Комментарии
+
+//оп::Документ_Не_нравится
+WordAlias "Документ не нравится" оп::Документ_Не_нравится
+
+//оп::Документ_Нравится
+WordAlias "Документ нравится" оп::Документ_Нравится
+
+//оп::Документ_Обзор_изменений_документа
+: "Обзор изменений документа"
+ оп::Документ_Обзор_изменений_документа
+ //ProcessMessages
+ OnTest
+;
+
+WordAlias ОИД "Обзор изменений документа"
+WordAlias "Вызываем ОИД" "Обзор изменений документа"
+
+//оп::Документ_Открыть
+//оп::Документ_Открыть_в_новом_окне
+//оп::Документ_Открыть_документ_в_новом_окне
+//оп::Документ_Открыть_документ_в_текущей_окне
+
+//оп::Документ_Открыть_документ_в_текущем_окне
+WordAlias "Открыть документ в текущем окне" оп::Документ_Открыть_документ_в_текущем_окне
+
+//оп::Документ_Перейти_на_закладку
+//оп::Документ_Печатать_документ/справку
+//оп::Документ_Печать
+//оп::Документ_Печать...
+//оп::Документ_Показать/скрыть_комментарии_ГАРАНТа
+//оп::Документ_Показать/скрыть_мои_комментарии
+//оп::Документ_Показать_изменения
+//оп::Документ_Показывать_выделенный_фрагмент
+//оп::Документ_Показывать_технические_комментарии
+//оп::Документ_Показывать_цветным
+//оп::Документ_Пользовательские_ссылки_на_документ_(ссылки_из_документа)_1
+//оп::Документ_Пользовательские_ссылки_на_документ_(ссылки_из_документа)_2
+//оп::Документ_Поставить_на_контроль
+
+//оп::Документ_Похожие_документы
+WordAlias "Похожие документы" оп::Документ_Похожие_документы
+
+//оп::Документ_Предварительный_просмотр_печати
+WordAlias "Предварительный просмотр печати документа" оп::Документ_Предварительный_просмотр_печати
+
+//оп::Документ_Предыдущий_документ_в_списке
+WordAlias "Предыдущий документ в списке" оп::Документ_Предыдущий_документ_в_списке
+
+//оп::Документ_Синонимы_по_международному_названию
+
+//оп::Документ_Следующий_документ_в_списке
+WordAlias "Следующий документ в списке" оп::Документ_Следующий_документ_в_списке 
+
+//оп::Документ_Создать_ссылку_на_документ
+WordAlias "Создать ссылку на документ" оп::Документ_Создать_ссылку_на_документ
+
+//оп::Документ_Сохранить_(экспорт)...
+//оп::Документ_Список_выпускаемых_препаратов
+//оп::Документ_Список_литературы
+//оп::Документ_Справка_к_документу
+
+//оп::Документ_Сравнение_редакций
+: СР
+ оп::Документ_Сравнение_редакций
+ //ProcessMessages
+ OnTest
+;
+
+WordAlias "Сравнение редакций" СР
+
+//оп::Документ_Ссылки_из_документа
+: "Ссылки из документа"
+ оп::Документ_Ссылки_из_документа
+ OnTest
+;
+
+//оп::Документ_Ссылки_из_документа_(вид_информации)
+
+//оп::Документ_Ссылки_на_документ
+WordAlias "Ссылки на документ" оп::Документ_Ссылки_на_документ
+
+//оп::Документ_Ссылки_на_документ_(вид_информации)
+//оп::Документ_Структура_документа
+//оп::Документ_Термины_Толкового_словаря
+
+//оп::Документ_Установить_закладку...
+WordAlias "Установить закладку" оп::Документ_Установить_закладку...
+
+//оп::Журнал_Очистить
+//оп::Завершение_работы_Восстановить
+//оп::Завершение_работы_Восстановить_все
+
+//оп::Завершение_работы_Добавить
+WordAlias "Добавить к списку" оп::Завершение_работы_Добавить
+
+//оп::Завершение_работы_Записать_по_умолчанию
+
+//оп::Завершение_работы_Ок
+WordAlias "Нажать Ок" оп::Завершение_работы_Ок
+
+//оп::Завершение_работы_Отмена
+WordAlias "Нажать Нет" оп::Завершение_работы_Отмена
+
+//оп::Завершение_работы_Очистить
+WordAlias "Очистить КЗ" оп::Завершение_работы_Очистить
+
+//оп::Завершение_работы_Перезаписать
+//оп::Завершение_работы_Применить
+//оп::Завершение_работы_Сохранить
+//оп::Завершение_работы_Справка
+//оп::Закладка_(иконка)_Изменить_имя_и_комментарий_закладки
+//оп::Закладка_(иконка)_Удалить_закладку
+
+//оп::Закладки_на_пункт_оглавления_Установить_закладку_на_фрагмент
+WordAlias "Установить закладку на фрагмент" оп::Закладки_на_пункт_оглавления_Установить_закладку_на_фрагмент
+
+//оп::Запрос_История_запросов
+//оп::Запрос_Тип_поиска
+//оп::Значения_по_умолчанию_Восстановить
+//оп::Иконка_предупреждения_Выключить_Машину_времени
+
+//оп::Иконка_предупреждения_Выключить_Машину_времени_и_перейти_в_актуальную_редакцию
+WordAlias "Выключить Машину времени и перейти в актуальную редакцию" оп::Иконка_предупреждения_Выключить_Машину_времени_и_перейти_в_актуальную_редакцию
+
+//оп::Иконка_предупреждения_Открыть_актуальную_редакцию
+//оп::Интервал_дат_Открыть_новостную_ленту
+//оп::Информация_Копировать
+//оп::Информация_Копировать_в_формате_RTF
+//оп::Информация_Печать
+
+//оп::История_Вперед
+WordAlias "Вперёд по истории без перерисовки" оп::История_Вперед
+
+: "Вперёд по истории"
+ "Вперёд по истории без перерисовки"
+ OnTest
+; 
+
+//оп::История_Назад
+WordAlias "Назад по истории без перерисовки" оп::История_Назад
+
+: "Назад по истории"
+ "Назад по истории без перерисовки"
+ OnTest
+; // "Назад по истории"
+
+WordAlias "Назад по Истории" "Назад по истории"
+WordAlias "Возвращаемся по истории назад" "Назад по истории"
+
+//оп::Картинка_Во_все_окно
+//оп::Картинка_Изменить_масштаб
+//оп::Картинка_Масштаб_1:1
+
+//оп::Картинка_Открыть
+WordAlias "Открыть картинку" оп::Картинка_Открыть_в_текущем_окне
+
+//оп::Картинка_Открыть_в_новом_окне
+//оп::Картинка_Печать
+//оп::Картинка_Сохранить_(экспорт)
+//оп::Картинка_Увеличить
+//оп::Картинка_Уменьшить
+//оп::Кеш_документов_Запретить
+//оп::Кеш_документов_Очистить
+//оп::Консультация_Импортировать...
+//оп::Консультация_Информация_о_консультации
+//оп::Консультация_Открыть_для_просмотра
+//оп::Консультация_Оценить_ответ
+//оп::Контекстное_меню_конфигурации_Восстановить
+
+//оп::Контекстное_меню_конфигурации_Восстановить_все
+WordAlias "Восстановить все настройки на вкладке Конфигурации" оп::Контекстное_меню_конфигурации_Восстановить_все
+
+//оп::Контекстное_меню_конфигурации_Записать_по_умолчанию
+
+//оп::Контекстное_меню_конфигурации_Копировать
+WordAlias "Копировать текущую конфигурацию" оп::Контекстное_меню_конфигурации_Копировать
+
+//оп::Контекстное_меню_конфигурации_О_конфигурации
+//оп::Контекстное_меню_конфигурации_Редактировать
+//оп::Контекстное_меню_конфигурации_Сделать_активной
+
+//оп::Контекстное_меню_конфигурации_Удалить
+WordAlias "Удалить конфигурацию" оп::Контекстное_меню_конфигурации_Удалить
+
+//оп::Контролируемый_объект_Открыть_документ
+//оп::Контролируемый_объект_Сбросить_статус_"изменен"
+//оп::Логическая_операция_И
+//оп::Логическая_операция_ИЛИ
+//оп::Логическая_операция_КРОМЕ
+
+//оп::Машина_времени_Включить_Машину_времени
+WordAlias "Включить Машину Времени (показать диалог)" оп::Машина_времени_Включить_Машину_времени
+
+//оп::Меню_Спрятать_левый_навигатор
+//оп::Меню_Спрятать_правый_навигатор
+//оп::Мой_комментарий_(иконка)_Скрыть/Показать
+//оп::Мой_комментарий_(иконка)_Удалить_комментарий
+
+//оп::Мой_комментарий_Удалить_комментарий
+WordAlias "Контекстной операцией удаляем комментарий" оп::Мой_комментарий_Удалить_комментарий
+
+//оп::Настройки_панели_меток_Показ_информации_о_метках
+//оп::Настройки_панели_меток_Показывать_блоки_в_тексте
+
+//оп::Настройки_панели_меток_Показывать_метки
+WordAlias "Показывать метки" оп::Настройки_панели_меток_Показывать_метки
+
+//оп::Настройки_панели_меток_Показывать_спецсимволы
+//оп::Окна_Выход
+
+//оп::Окна_Закрыть_все,_кроме_текущего
+PROCEDURE "Закрыть все окна кроме текущего"
+ оп::Окна_Закрыть_все,_кроме_текущего
+ "Дождаться переключения вкладок"
+;
+
+//оп::Окна_Новое
+WordAlias "Открыть новое окно гаранта" оп::Окна_Новое
+
+//оп::Окна_Расход_памяти_в_оболочке
+//оп::Окна_Список_открытых_окон
+//оп::Окна_Упорядочить_каскадом
+//оп::Окна_Упорядочить_по_вертикали
+//оп::Окна_Упорядочить_по_горизонтали
+//оп::Операции_карточки_Выбрать_реквизиты
+
+//оп::Операции_карточки_Добавить_новый
+WordAlias "Добавить ещё один атрибут" оп::Операции_карточки_Добавить_новый
+
+//оп::Операции_карточки_Развернуть\Свернуть
+//оп::Операции_карточки_Удалить_все
+//оп::Операции_редактирования_даты_opCurrentDate
+//оп::Операции_редактирования_даты_Вставить
+//оп::Операции_редактирования_даты_Вырезать
+//оп::Операции_редактирования_даты_Копировать
+//оп::Операции_редактирования_даты_Удалить
+//оп::Панель_задач_Включить_Машину_времени_с_календарной_даты\Выключить_Машину_времени
+//оп::Панель_новостей_Новая_индивидуальная_лента
+//оп::Панель_новостей_Редактировать_индивидуальную_ленту
+//оп::Панель_новостей_Удалить_индивидуальную_ленту
+//оп::Панель_новостей_Экспортировать_все_индивидуальные_ленты_в_файл
+//оп::Панель_новостей_Экспортировать_выделенные_ленты_в_XML
+//оп::Панель_сабов_редактора_Скопировать_позицию
+//оп::Папка_Импорт_информации_в_папку...
+//оп::Папка_Открыть_общий_доступ
+//оп::Папка_Поставить_на_контроль
+//оп::Папка_Сместиться_к_первому_выбранному
+//оп::Папка_Снять_с_контроля
+
+//оп::Папка_Создать_папку
+WordAlias "Создать папку" оп::Папка_Создать_папку
+
+//оп::Папка_Экспорт_информации_из_папки...
+//оп::Папки_Фильтрация_элементов_папок_по_типу
+//оп::Печать_Печать
+//оп::Печать_Предварительный_просмотр
+
+//оп::Пользователи_Запретить_всем_использование_услуги_Правового_консалтинга
+WordAlias "Запретить всем использование услуги Правового консалтинга" оп::Пользователи_Запретить_всем_использование_услуги_Правового_консалтинга
+
+//оп::Пользователи_Не_удалять_при_бездействии
+//оп::Пользователи_Отключить_пользователя
+//оп::Пользователи_Отменить_для_выделенных_пользователей_режим_привилегий
+
+//оп::Пользователи_Разрешить/Запретить_авторегистрацию_новых_пользователей
+WordAlias "Разрешить/Запретить авторегистрацию новых пользователей" оп::Пользователи_Разрешить/Запретить_авторегистрацию_новых_пользователей
+
+//оп::Пользователи_Разрешить/Запретить_вновь_созданным_пользователям_использование_услуги_Правового_консалтинга
+//оп::Пользователи_Разрешить_всем_использование_услуги_Правового_консалтинга
+//оп::Пользователи_Сделать_выделенных_пользователей_привилегированными
+
+//оп::Пользователи_Создать_нового_пользователя
+WordAlias "Создать нового пользователя" оп::Пользователи_Создать_нового_пользователя
+
+//оп::Пользователи_Фильтр_пользователей
+//оп::Правка_Возврат_изменений
+
+//оп::Правка_Вставить
+WordAlias "Вставить" оп::Правка_Вставить
+
+//оп::Правка_Выделить_все
+: "Выделить всё"
+ оп::Правка_Выделить_все
+ OnTest
+; // "Выделить всё"
+
+: "Выделить текст в поле"
+ оп::Правка_Выделить_все
+ OnTest
+;
+
+WordAlias "Клавиатурой или мышью выделяем текст в поле" "Выделить текст в поле"
+
+//оп::Правка_Вырезать
+WordAlias "Вырезать" оп::Правка_Вырезать
+
+//оп::Правка_Копировать
+WordAlias "Копировать" оп::Правка_Копировать
+
+//оп::Правка_Найти_далее
+: "Найти далее без проверки"
+ оп::Правка_Найти_далее
+ //3 LOOP ProcessMessages
+ OnTest
+; 
+
+//оп::Правка_Отмена_изменений
+WordAlias "Правка - Отмена изменений" оп::Правка_Отмена_изменений
+
+//оп::Правка_Подсвечивать_найденный_контекст
+
+//оп::Правка_Поиск_контекста...
+: "Поиск контекста"
+ оп::Правка_Поиск_контекста...
+ //3 LOOP ProcessMessages
+ OnTest
+;
+
+WordAlias "Контекстный поиск" "Поиск контекста"
+WordAlias "Вызываем форму контекстного поиска" "Контекстный поиск"
+
+//оп::Правка_Предыдущий_найденный
+: "Вернуться к найденному без проверки"
+ оп::Правка_Предыдущий_найденный
+ //3 LOOP ProcessMessages
+ OnTest
+;
+
+//оп::Правка_Снять_выделение
+WordAlias "Снять выделение" оп::Правка_Снять_выделение
+
+//оп::Правка_Удалить
+WordAlias "Удалить" оп::Правка_Удалить
+
+//оп::Предварительный_просмотр_Отдалить
+//оп::Предварительный_просмотр_По_ширине_листа_
+//оп::Предварительный_просмотр_Приблизить
+//оп::Предварительный_просмотр_Страница_целиком
+//оп::Предупреждение_(медаль)_opRemListFiltered
+//оп::Предупреждение_(медаль)_opRemListModified
+//оп::Предупреждение_(медаль)_opRemListTimeMachineWarning
+//оп::Предупреждение_(медаль)_opRemMWControlledChangingWarning
+//оп::Предупреждение_(медаль)_opRemMWOldBaseWarning
+//оп::Предупреждение_(медаль)_opRemMWTrialModeWarning
+//оп::Предупреждение_(медаль)_opRemNewChatMessages
+//оп::Предупреждение_(медаль)_opRemOnlineDead
+//оп::Предупреждение_(медаль)_opRemWarnRedaction
+//оп::Предупреждение_(медаль)_opRemWarnTimeMachineOn
+//оп::Предупреждение_(медаль)_opViewInactualDocument
+//оп::Предупреждение_(на_контроле)_Открыть_вкладку_"Документы_на_контроле"
+//оп::Предупреждение_(на_контроле)_Показать_изменения
+
+//оп::Предупреждение_(на_контроле)_Построить_список_изменившихся_документов_на_контроле
+WordAlias "Построить список изменившихся документов на контроле" оп::Предупреждение_(на_контроле)_Построить_список_изменившихся_документов_на_контроле
+
+//оп::Предупреждение_(на_контроле)_Сбросить_статус_"изменен"
+//оп::Предупреждение_(на_контроле)_Скрыть_предупреждающий_знак
+//оп::Предупреждение_(на_контроле)_Способ_сброса_статуса_"изменен"
+//оп::Предупреждение_(юридическое)_Показать_текст_предупреждения
+//оп::Предупреждение_для_Машины_времени_Включить/Выключить_Машину_времени_
+//оп::Предупреждение_для_Машины_времени_Показать_текст_предупреждения
+//оп::Предупреждение_дополнительное_ShowInfo
+//оп::Предупреждение_о_не_вступлении_в_силу_ShowInfo
+//оп::Предупреждение_о_неактуальной_редакции_Открыть_актуальную_редакцию
+//оп::Предупреждение_о_неактуальной_редакции_Показать_текст_предупреждения
+//оп::Предупреждение_о_фильтрованном_списке_Отменить_все_фильтры
+//оп::Пункт_меню_Информация_об_элементе
+//оп::Пункт_меню_Открыть
+//оп::Пункт_оглавления_-_Заголовок_документ_Заголовок_пункта_оглавления
+//оп::Пункт_оглавления_-_Заголовок_документ_Печать_документа
+//оп::Пункт_оглавления_-_Заголовок_документ_Печать_документа...
+//оп::Пункт_оглавления_-_Заголовок_документ_Пользовательские_ссылки_на_документ_(ссылки_из_документа)_1
+//оп::Пункт_оглавления_-_Заголовок_документ_Пользовательские_ссылки_на_документ_(ссылки_из_документа)_2
+//оп::Пункт_оглавления_-_Заголовок_документ_Ссылки_на_документ
+//оп::Пункт_оглавления_-_Заголовок_документ_Установить_закладку_на_документ...
+//оп::Пункт_оглавления_-_Заголовок_документ_Экспорт_документа_в_MS-Word
+
+//оп::Пункт_оглавления_Выделить_фрагмент
+WordAlias "Выделить фрагмент из оглавления" оп::Пункт_оглавления_Выделить_фрагмент
+
+//оп::Пункт_оглавления_Копировать_фрагмент
+WordAlias "Копировать фрагмент из оглавления" оп::Пункт_оглавления_Копировать_фрагмент
+
+//оп::Пункт_оглавления_Печать_фрагмента
+//оп::Пункт_оглавления_Печать_фрагмента...
+
+//оп::Пункт_оглавления_Предварительный_просмотр_печати_фрагмента
+WordAlias "Предварительный просмотр печати фрагмента пунктов оглавления" оп::Пункт_оглавления_Предварительный_просмотр_печати_фрагмента
+
+//оп::Пункт_оглавления_Ссылки_из_фрагмента
+WordAlias "Ссылки из фрагмента оглавления" оп::Пункт_оглавления_Ссылки_из_фрагмента
+
+//оп::Пункт_оглавления_Ссылки_из_фрагмента_(вид_информации)
+
+//оп::Пункт_оглавления_Ссылки_на_фрагмент
+WordAlias "Ссылки на фрагмент оглавления" оп::Пункт_оглавления_Ссылки_на_фрагмент
+
+//оп::Пункт_оглавления_Ссылки_на_фрагмент_(вид_информации)
+//оп::Пункт_оглавления_Экспорт_фрагмента_в_MS-Word
+//оп::Раздел_навигатора_Открыть
+//оп::Редакции_документа_Актуальная_редакция
+
+//оп::Редакции_документа_Предыдущая_редакция
+WordAlias "Переходим в предыдущую редакцию" оп::Редакции_документа_Предыдущая_редакция
+
+//оп::Редакции_документа_Следующая_редакция
+WordAlias "Переходим в следующую редакцию" оп::Редакции_документа_Следующая_редакция
+
+//оп::Редакции_документа_Список_редакций
+
+//оп::Редакции_Построить_обзор_изменений
+: "Построить обзор изменений для выбранных редакций"
+ оп::Редакции_Построить_обзор_изменений
+ OnTest
+;
+
+//оп::Редакции_Сравнить_редакции
+WordAlias "Сравнить выбранные редакции" оп::Редакции_Сравнить_редакции
+
+//оп::Редакция_Вернуться_в_текст_документа
+: "Вернуться в текст документа"
+ оп::Редакция_Вернуться_в_текст_документа
+ OnTest
+ // - даём отрисоваться и пройти всем OnTest
+;
+
+//оп::Редакция_Открыть_в_новом_окне
+: "Открыть текущую редакцию в новом окне"
+ оп::Редакция_Открыть_в_новом_окне
+ OnTest
+;
+
+//оп::Редакция_Предыдущее_изменение
+WordAlias "Предыдущее изменение" оп::Редакция_Предыдущее_изменение
+
+//оп::Редакция_Следующее_изменение
+WordAlias "Следующее изменение" оп::Редакция_Следующее_изменение
+
+//оп::Синхронный_просмотр_Аннотация_к_документу
+//оп::Синхронный_просмотр_ИНФАРМ_Информация_о_документе
+//оп::Синхронный_просмотр_ИНФАРМ_Список_препаратов
+//оп::Синхронный_просмотр_ИНФАРМ_Текст_документа
+//оп::Синхронный_просмотр_Информация_о_документе
+//оп::Синхронный_просмотр_Настраиваемая_вкладка_связанных_документов_1
+//оп::Синхронный_просмотр_Настраиваемая_вкладка_связанных_документов_2
+//оп::Синхронный_просмотр_Похожие_документы
+//оп::Синхронный_просмотр_Список_ссылок_из_документа
+//оп::Синхронный_просмотр_Список_ссылок_на_документ
+//оп::Синхронный_просмотр_Справка_к_документу
+//оп::Синхронный_просмотр_Текст_документа
+//оп::Система_Список_закладок...
+//оп::Система_Статус_связи_с_ППО
+
+//оп::Совещание_онлайн_Добавить_пользователя
+WordAlias "Добавить пользователя для переписки" оп::Совещание_онлайн_Добавить_пользователя
+
+//оп::Совещание_онлайн_История_переписки
+WordAlias "Открыть историю переписки" оп::Совещание_онлайн_История_переписки
+
+//оп::Совещание_онлайн_Отправить_сообщение
+WordAlias "Отправить сообщение в чате" оп::Совещание_онлайн_Отправить_сообщение
+
+//оп::Совещание_онлайн_Очистить_историю
+WordAlias "Очистить историю переписки" оп::Совещание_онлайн_Очистить_историю
+
+//оп::Совещание_онлайн_Фильтр_пользователей
+//оп::Сохраненный_запрос_Выполнить_запрос
+//оп::Сохраненный_запрос_Добавить_фильтр_из_сохраненных_запросов
+//оп::Сохраненный_запрос_Использовать_как_фильтр
+//оп::Сохраненный_запрос_Открыть_карточку_запроса
+//оп::Список_(контекстные_операции)_Искать_по_источнику_опубликования_в_текущем_списке
+//оп::Список_(контекстные_операции)_Искать_по_реквизитам_в_текущем_списке
+//оп::Список_(контекстные_операции)_Искать_препараты_в_текущем_списке
+
+//оп::Список_(контекстные_операции)_Открыть_текущий_список
+WordAlias "Открыть текущий список" оп::Список_(контекстные_операции)_Открыть_текущий_список
+
+//оп::Список_(контекстные_операции)_Открыть_текущий_список_в_новом_окне
+WordAlias "Открыть текущий список в новом окне" оп::Список_(контекстные_операции)_Открыть_текущий_список_в_новом_окне
+
+//оп::Список_opCloseForm
+//оп::Список_opIsOnActivePage
+//оп::Список_opSetCRListType
+//оп::Список_opSetSearchContext
+//оп::Список_Вычесть_список...
+//оп::Список_Дополнить_список...
+//оп::Список_Искать_в_текущем_списке
+//оп::Список_Открыть_текущий_список
+//оп::Список_Открыть_текущий_список_в_новом_окне
+//оп::Список_Пересечь_со_списком...
+//оп::Список_Построить_полный_список
+//оп::Список_Работа_со_списком
+//оп::Список_Сортировать_список
+//оп::Список_Справка_к_списку
+
+//оп::Список_Установить_направление_сортировки
+WordAlias "Изменить направление сортировки" оп::Список_Установить_направление_сортировки
+
+//оп::Список_Уточнить_список
+: "Анализ\Уточнить список"
+ оп::Список_Уточнить_список
+ OnTest
+; // "Анализ\Уточнить список"
+
+//оп::Список_фармацевтических_фирм_Фильтр_по_странам
+//оп::Список_Экспорт_списка_в_XML
+//оп::Справка_Гарант_в_Интернет
+//оп::Справка_Горячая_информация
+//оп::Справка_Горячие_клавиши
+//оп::Справка_Книга_отзывов_и_предложений
+//оп::Справка_Контактная_информация
+//оп::Справка_Новые_возможности
+
+//оп::Справка_О_программе...
+WordAlias "О программе..." оп::Справка_О_программе...
+
+//оп::Справка_Руководство_пользователя
+//оп::Ссылки_на_документ/Ссылки_из_документа_Выбрать_тип
+//оп::Таблица_Вставить_колонку
+
+//оп::Таблица_Вставить_строку
+WordAlias "Вставить строку в таблицу" оп::Таблица_Вставить_строку
+
+//оп::Таблица_Вставить_таблицу
+WordAlias "Вставить таблицу" оп::Таблица_Вставить_таблицу
+
+//оп::Таблица_Удалить_колонку
+//оп::Таблица_Удалить_строку
+//оп::Текст_Выделить_текущее_слово
+//оп::Текст_Выделить_текущий_абзац
+
+//оп::Текст_Добавить_мой_комментарий
+WordAlias "Добавить комментарий через контекстное меню" оп::Текст_Добавить_мой_комментарий
+
+//оп::Текст_Изменить_имя_и_комментарий_закладки
+
+//оп::Текст_Открыть_текущий_документ_в_новом_окне
+WordAlias "Открыть в новом окне" оп::Текст_Открыть_текущий_документ_в_новом_окне
+
+//оп::Текст_Поставить_на_контроль
+//оп::Текст_Слово_влево
+//оп::Текст_Слово_вправо
+//оп::Текст_Создать_ссылку_на_документ
+//оп::Текст_Удалить_закладку
+//оп::Текст_Установить_закладку...
+//оп::Тематики_рассылки_Все_поступления_в_продукт_ПРАЙМ
+//оп::Файл_Выбрать_из_Моих документов...
+//оп::Файл_Переслать_по_E-mail
+//оп::Файл_Печать
+
+//оп::Файл_Печать...
+: "Ctrl-P" 
+ оп::Файл_Печать...
+ OnTest
+; // "Ctrl-P"
+
+//оп::Файл_Предварительный_просмотр
+: "Предварительный просмотр"
+ оп::Файл_Предварительный_просмотр
+ OnTest
+; // "Предварительный просмотр"
+
+: "Предварительный просмотр с эталонами"
+ BeginWait:Print
+ TRY
+  "Предварительный просмотр"
+ FINALLY
+  EndWait:Print
+ END
+; // "Предварительный просмотр с эталонами"
+
+//оп::Файл_Создать_ссылку_на_документ
+
+//оп::Файл_Сохранить_в_Мои_документы...
+WordAlias "Сохранить в Мои документы" оп::Файл_Сохранить_в_Мои_документы...
+
+//оп::Файл_Сохранить_в_файл...
+//оп::Файл_Экспорт_в_MS-Word
+//оп::Фильтр_Добавить_фильтр_из_сохраненных_запросов
+//оп::Фильтр_Переименовать
+//оп::Фильтр_Применить_фильтр
+//оп::Фильтр_Применять_автоматически
+
+//оп::Фильтр_Редактировать_фильтр
+WordAlias "Редактировать фильтр" оп::Фильтр_Редактировать_фильтр
+
+//оп::Фильтры_Отменить_все_фильтры
+WordAlias "Отменить все фильтры" оп::Фильтры_Отменить_все_фильтры
+
+//оп::Фильтры_Применить_фильтры_заново
+
+//оп::Фильтры_Создать_новый_фильтр
+WordAlias "Создать новый фильтр" оп::Фильтры_Создать_новый_фильтр
+
+//оп::Фильтры_Фильтры
+//оп::Фильтры_Фильтры_(вкладка)
+
+//оп::Центр_управления_контролем_Добавить_сохраненный_документ_на_контроль
+WordAlias "Добавить сохраненный документ на контроль" оп::Центр_управления_контролем_Добавить_сохраненный_документ_на_контроль
+
+//оп::Центр_управления_контролем_Сбросить_статус_"изменен"_у_всех_объектов
+//оп::Центр_управления_контролем_Сортировать
+
+//оп::Центр_управления_контролем_Список_изменившихся_документов_на_контроле
+: "Список изменившихся документов на контроле"
+ оп::Центр_управления_контролем_Список_изменившихся_документов_на_контроле
+ OnTest
+;
+
+//оп::Шрифт_Жирный
+//оп::Шрифт_Курсив
+//оп::Шрифт_Перечеркнутый
+//оп::Шрифт_Подчеркнутый
+
+//оп::Шрифты_Увеличить_шрифт
+: "Увеличить шрифт"
+ оп::Шрифты_Увеличить_шрифт
+ OnTest
+;
+
+//оп::Шрифты_Уменьшить_шрифт
+: "Уменьшить шрифт"
+ оп::Шрифты_Уменьшить_шрифт
+ OnTest
+;
+
+//оп::Элемент_папок_На_контроле
+//оп::Элемент_папок_Открыть
+//оп::Элемент_папок_Открыть_в_новом_окне
+//оп::Элемент_папок_Показать_свойства
+//оп::Элемент_папок_Свойства
+//оп::Элемент_папок_Экспорт_для_интеграции
+//ОсновноеМеню
+//Открыть
+
+//ППР_Prim
+WordAlias "ППР без перерисовки" ППР_Prim
+
+//ППС_Преемственная_Prim
+//ППС_Стандартная_Prim
+//тип_формы::AACContainer
+//тип_формы::AACContentsContainer
+//тип_формы::Analize
+//тип_формы::astFirstLevel
+//тип_формы::astNone
+//тип_формы::astOneLevel
+//тип_формы::astTaxesPublishSearch
+//тип_формы::BaseSearch
+//тип_формы::cfCreate
+//тип_формы::cfRename
+//тип_формы::chatAddContact
+//тип_формы::chatContacts
+//тип_формы::ControlledChangingWarning
+//тип_формы::cutForDiction
+//тип_формы::cutOldKeyWord
+//тип_формы::cutSettings
+//тип_формы::cutUsual
+//тип_формы::cwChat
+//тип_формы::dftAACContentsLeft
+//тип_формы::dftAACContentsRight
+//тип_формы::dftAACLeft
+//тип_формы::dftAACRight
+//тип_формы::dftAnnotation
+//тип_формы::dftAnnotationSynchroView
+//тип_формы::dftAutoreferat
+//тип_формы::dftAutoreferatAfterSearch
+//тип_формы::dftConsultation
+//тип_формы::dftDictEntry
+//тип_формы::dftDictSubEntry
+//тип_формы::dftDocSynchroView
+//тип_формы::dftDocument
+//тип_формы::dftDrug
+//тип_формы::dftDrugSynchroView
+//тип_формы::dftMedDictEntry
+//тип_формы::dftMedicFirm
+//тип_формы::dftMedicFirmSynchroView
+//тип_формы::dftNone
+//тип_формы::dftRelatedDoc
+//тип_формы::dftRelatedSynchroView
+//тип_формы::dftTips
+//тип_формы::dftTranslation
+//тип_формы::DocumentChanges
+//тип_формы::dwftMain
+//тип_формы::dwftSynchro
+//тип_формы::Fake
+//тип_формы::fAttributeSynchroView
+//тип_формы::fDocAttribute
+//тип_формы::flSituation
+//тип_формы::lftConsultation
+//тип_формы::lftCorrespondent
+//тип_формы::lftCorrespondentsSynchroForm
+//тип_формы::lftDrugInternationalNameSynonyms
+//тип_формы::lftDrugInternationalNameSynonymsSynchroForm
+//тип_формы::lftDrugList
+//тип_формы::lftNone
+//тип_формы::lftProducedDrugs
+//тип_формы::lftProducedDrugsSynchroForm
+//тип_формы::lftRCToPart
+//тип_формы::lftRespondent
+//тип_формы::lftRespondentsSynchroForm
+//тип_формы::lftSimilarDocuments
+//тип_формы::lftSimilarDocumentsSynchroView
+//тип_формы::lftSynchroView
+//тип_формы::lftUserCR1
+//тип_формы::lftUserCR2
+//тип_формы::lftUserCRList1_SynchorForm
+//тип_формы::lftUserCRList2_SynchorForm
+//тип_формы::liListInfo
+//тип_формы::listAnalize
+//тип_формы::mflMain
+//тип_формы::mlsfDrugList
+//тип_формы::mlsfMedicFirm
+//тип_формы::nltMain
+//тип_формы::OldBaseWarning
+//тип_формы::pfImage
+//тип_формы::pstNone
+//тип_формы::remListFiltered
+//тип_формы::remListModified
+//тип_формы::remOnlineDead
+//тип_формы::remTimeMachineWarning
+//тип_формы::remUnreadConsultations
+//тип_формы::sftNone
+//тип_формы::slqtAttribute
+//тип_формы::slqtBaseSearch
+//тип_формы::slqtConsult
+//тип_формы::slqtDiction
+//тип_формы::slqtFilters
+//тип_формы::slqtInpharmSearch
+//тип_формы::slqtKW
+//тип_формы::slqtLegislationReview
+//тип_формы::slqtMedicDiction
+//тип_формы::slqtOldKW
+//тип_формы::slqtPostingOrder
+//тип_формы::slqtPublishSource
+//тип_формы::svSynchroView
+//тип_формы::tpMain
+//тип_формы::TrialModeWarning
+//тип_формы::ut_About
+//тип_формы::ut_BaseSearchCard
+//тип_формы::ut_CompInfo
+//тип_формы::ut_CustomizeTasksPanel
+//тип_формы::ut_CustomizeTools
+//тип_формы::ut_DefineSearchDate
+//тип_формы::ut_DocNumberQuery
+//тип_формы::ut_EULA
+//тип_формы::ut_Login
+//тип_формы::ut_Logo
+//тип_формы::ut_LongProcess
+//тип_формы::ut_MemoryUsage
+//тип_формы::ut_mmmMain
+//тип_формы::ut_PictureInfo
+//тип_формы::ut_PrintDialog
+//тип_формы::ut_ProgressIndicator
+//тип_формы::ut_RegistrationForm
+//тип_формы::ut_RememberPassword
+//тип_формы::ut_SelfInfo
+//тип_формы::ut_StartupTips
+//тип_формы::ut_StyleEditorFont
+//тип_формы::ut_StyleEditorNavigator
+//тип_формы::ut_TurnOffTimeMachine
+//тип_формы::ut_TurnOnTimeMachine
+//тип_формы::utAttributeSelect
+//тип_формы::utChatHistory
+//тип_формы::utcmMain
+//тип_формы::utConfigurationList
+//тип_формы::utContents
+//тип_формы::utDiction
+//тип_формы::utDrugContents
+//тип_формы::utEditionsContainer
+//тип_формы::utFilters
+//тип_формы::utFolders
+//тип_формы::utFoldersInfoContainer
+//тип_формы::utFoldersProperty
+//тип_формы::utFoldersTree
+//тип_формы::utHistory
+//тип_формы::utInternetAgent
+//тип_формы::utLeftEdition
+//тип_формы::utMainMenuNew
+//тип_формы::utMainWindow
+//тип_формы::utMedicDiction
+//тип_формы::utNavigator
+//тип_формы::utPrintPreview
+//тип_формы::utqcAttributeSearch
+//тип_формы::utqcInpharmSearch
+//тип_формы::utqcLegislationReview
+//тип_формы::utqcPostingOrder
+//тип_формы::utqcSendConsultation
+//тип_формы::utRedaction
+//тип_формы::utRightEdition
+//тип_формы::utRubricatorList
+//тип_формы::utSaveOpen
+//тип_формы::utSelectedAttributes
+//тип_формы::utSimpleMainMenu
+//тип_формы::utSingleSearch
+//тип_формы::utStyleEditorContainer
+//тип_формы::utStyleEditorExample
+//тип_формы::utTips
+//тип_формы::utUnderControl
+//тип_формы::utWorkJournal
+//тип_формы::WarnInactualDocument
+//тип_формы::Warning
+//тип_формы::WarnIsAbolished
+//тип_формы::WarnJuror
+//тип_формы::WarnOnControl
+//тип_формы::WarnPreActive
+//тип_формы::WarnRedaction
+//тип_формы::WarnTimeMachineException
+//тип_формы::WarnTimeMachineOn
+//тип_формы::WarnTimeMachineWarning
+//форма::AACContainer
+//форма::AACContentsContainer
+//форма::About
+//форма::Attributes
+//форма::AttributeSelect
+//форма::BaseSearchCard
+//форма::BaseSearchContainer
+//форма::ChangesBetweenEditons
+//форма::ChatHistory
+//форма::ChatWindow
+//форма::Child
+//форма::CommonDiction
+//форма::CompInfo
+//форма::ConfigurationList
+//форма::ConsultationMark
+//форма::ContactList
+//форма::Contents
+//форма::CreateFilter
+//форма::CustomizeTasksPanel
+//форма::CustomizeTools
+//форма::DefineSearchDate
+//форма::Diction
+//форма::DictionContainer
+//форма::DocNumberQuery
+//форма::DocumentWithFlash
+//форма::EditionsContainer
+//форма::EULA
+//форма::Filters
+//форма::Folders
+//форма::FoldersElementInfo
+//форма::FoldersInfo
+//форма::FoldersTree
+//форма::InternetAgent
+//форма::LeftEdition
+//форма::List
+//форма::ListAnalize
+//форма::ListAnalizer
+//форма::ListInfo
+//форма::Login
+//форма::Logo
+//форма::LongProcess
+//форма::MainMenuNew
+//форма::MainWindow
+//форма::MedicFirmList
+//форма::MedicListSynchroView
+//форма::MedicMainMenu
+//форма::MemoryUsage
+//форма::Navigator
+//форма::NewBaseSearch
+//форма::NewsLine
+//форма::OldSituationSearch
+//форма::PageSetup
+//форма::Parent
+//форма::Picture
+//форма::PictureInfo
+//форма::Preview
+//форма::PreviewForm
+//форма::PrintDialog
+//форма::ProgressIndicator
+//форма::QueryCard
+//форма::Redactions
+//форма::RegistrationForm
+//форма::RememberPassword
+//форма::RightEdition
+//форма::Rubricator
+//форма::SaveLoad
+//форма::SelectedAttributes
+//форма::SelfInfo
+//форма::Settings
+//форма::ShutDown
+//форма::SimpleMainMenu
+//форма::StartupTips
+//форма::StyleEditorContainer
+//форма::StyleEditorExample
+//форма::StyleEditorFont
+//форма::StyleEditorNavigator
+//форма::SynchroView
+//форма::SynchroView_WarningBaloon
+//форма::TasksPanel
+//форма::Text
+//форма::Translation_WarningBaloon
+//форма::TreeAttributeFirstLevel
+//форма::TreeAttributeSelect
+//форма::TurnOffTimeMachine
+//форма::TurnOnTimeMachine
+//форма::UnderControl
+//форма::UserCR1_WarningBaloon
+//форма::UserCR2_WarningBaloon
+//форма::Warning
+//форма::WarningBaloon
+//форма::WorkJournal
+//--!
+//: : "! Тест в разработке"
+//: : "Ctrl-P"
+//: : "А активна ли вкладка предупреждения?"
+//CONST : "ААК-содержание"
+//: : "Анализ списка"
+//: : "Анализ\Уточнить список"
+//: : "Боремся с плавающим оглавлением"
+//: : "В БП ищем контекст по типу и проверяем получившийся список"
+// STRING IN : aContext
+// STRING IN : aType
+//; // "В БП ищем контекст по типу и проверяем получившийся список"
+//: : "В БП ищем контекст по типу"
+// STRING IN : aString
+// STRING IN : aType
+// VAR : l_VG
+//; // "В БП ищем контекст по типу"
+//: : "В БП ищем контекст"
+// STRING IN : aString
+//; // "В БП ищем контекст"
+//: : "В документе не должно быть комментариев"
+// BOOLEAN VAR : "Было удаление комментария"
+// BOOLEAN VAR : "Есть комментарии"
+// INTEGER VAR : "Номер документа"
+// INTEGER VAR : l_Guard
+//; // "В документе не должно быть комментариев"
+//: : "В конец документа"
+//: : "В левом окне из комбобокса выбрать редакцию с 15.08.2004 по 17.08.2004"
+//: : "В левом окне из комбобокса выбрать редакцию с текстом"
+// VAR : "Предельное количество"
+// STRING IN : aText
+// STRING VAR : l_Text
+// OBJECT VAR : l_Tree
+//; // "В левом окне из комбобокса выбрать редакцию с текстом"
+//: : "В начало документа"
+//: : "в поле 'Вступление в силу' поставить"
+// STRING IN : aStr
+//; // "в поле 'Вступление в силу' поставить"
+//: : "в поле 'Дата принятия ПО' ввести"
+// STRING IN : aStr
+//; // "в поле 'Дата принятия ПО' ввести"
+//: : "в поле 'Дата принятия С' ввести"
+// STRING IN : aStr
+//; // "в поле 'Дата принятия С' ввести"
+//: : "в поле 'Искать в недействующих редакциях' поставить"
+// STRING IN : aStr
+//; // "в поле 'Искать в недействующих редакциях' поставить"
+//: : "в поле 'Орган/Источник' ввести с операцией"
+// INTEGER IN : aL
+// STRING IN : aStr
+//; // "в поле 'Орган/Источник' ввести с операцией"
+//: : "в поле 'Орган/Источник' ввести"
+// STRING IN : aStr
+//; // "в поле 'Орган/Источник' ввести"
+//: : "в поле 'Орган/Источник' ОИЗ ввести"
+// STRING IN : aStr
+//; // "в поле 'Орган/Источник' ОИЗ ввести"
+//: : "в поле 'Слова в названии' ввести"
+// STRING IN : aStr
+//; // "в поле 'Слова в названии' ввести"
+//: : "в поле 'Слова в тексте' ввести"
+// STRING IN : aStr
+//; // "в поле 'Слова в тексте' ввести"
+//: : "в поле 'Страна' ввести"
+// STRING IN : aStr
+//; // "в поле 'Страна' ввести"
+//: : "в поле 'Тип' ввести с операцией"
+// INTEGER IN : aL
+// STRING IN : aStr
+//; // "в поле 'Тип' ввести с операцией"
+//: : "в поле 'Тип' ввести"
+// STRING IN : aStr
+//; // "в поле 'Тип' ввести"
+//: : "в поле 'Утрата силы' поставить"
+// STRING IN : aStr
+//; // "в поле 'Утрата силы' поставить"
+//: : "Ввести строку"
+// STRING IN : aString
+//; // "Ввести строку"
+//: : "Ввести"
+// STRING IN : aString
+//; // "Ввести"
+//: : "Вернуться в список"
+//: : "Вернуться в текст документа"
+//: : "Вернуться к найденному без проверки"
+//: : "Вернуться к найденному"
+//: : "Вернуться к найденному, что ничего не нашлось"
+//: : "Включить информацию об изменениях документа"
+//: : "Во время фильтрации не должно быть ошибок"
+//: : "Возвращаемся по истории назад"
+//: : "Восстановить активное окно"
+//: : "Восстановить позицию мыши"
+//: : "Вперёд по истории без перерисовки"
+//: : "Вперёд по истории"
+//"Временно выключен"
+//: : "Вставить"
+//: : "Вставляем из буфера обмена любой комментарий в начало документа"
+//: : "Вставляем любой комментарий в начало документа"
+//: : "Встать на последнюю консультацию"
+//: : "Выбрать атрибут ИЛИ"
+//: : "Выбрать 'Текущая страница'"
+// OBJECT VAR : "Текущая страница"
+//; // "Выбрать 'Текущая страница'"
+//: : "Выделить весь текст"
+//: : "Выделить всё"
+//: : "Выделить параграфов"
+// INTEGER IN : aCount
+// OBJECT VAR : l_Editor
+//; // "Выделить параграфов"
+//: : "Выделить текст в поле"
+//: : "Выделить текущий элемент"
+//: : "Вызвать диалог печати по CTRL-P, в поле 'Номера страниц' ввести и нажать 'Печать'"
+// STRING IN : aSym
+// : : Действия
+//; // "Вызвать диалог печати по CTRL-P, в поле 'Номера страниц' ввести и нажать 'Печать'"
+//: : "Вызвать диалог печати по CTRL-P, в поле 'Сделать копий' ввести и нажать 'Печать'"
+// STRING IN : aSym
+// : : Действия
+//; // "Вызвать диалог печати по CTRL-P, в поле 'Сделать копий' ввести и нажать 'Печать'"
+//: : "Вызвать диалог печати по CTRL-P, выбрать в области печати 'Текущая страница' и нажать 'Печать'"
+// : : Действия
+// : : Действия1
+//; // "Вызвать диалог печати по CTRL-P, выбрать в области печати 'Текущая страница' и нажать 'Печать'"
+//: : "Вызвать из главного меню"
+// STRING IN : aItem
+//; // "Вызвать из главного меню"
+//: : "Вызвать Список редакций из статусной строки и сделать"
+// IN : aProc
+// : : Действия
+//; // "Вызвать Список редакций из статусной строки и сделать"
+//: : "Вызвать Список редакций из статусной строки"
+//: : "Вызываем ОИД"
+//: : "Вызываем форму контекстного поиска"
+//: : "Выключаем машину времени"
+//: : "Выключить информацию об изменениях документа"
+//"выполнить для всех контролов"
+//: : "Выполнить и восстановить фокус"
+// OBJECT IN : aProc
+// VAR : l_Control
+//; // "Выполнить и восстановить фокус"
+//: : "Выполнить и если было исключение, то выполнить"
+// IN : aProc1
+// IN : aProc2
+//; // "Выполнить и если было исключение, то выполнить"
+//: : "Выполнить обработав исключение"
+// STRING IN : anException
+// OBJECT IN : aProc
+//; // "Выполнить обработав исключение"
+//"Выполнить подавив исключение"
+//: : "Выполнить с базой"
+// STRING VAR : "Новая база"
+// STRING VAR : "Предыдущая база"
+// STRING IN : aBase
+// OBJECT IN : aProc
+//; // "Выполнить с базой"
+//: : "Выполнить с включёнными версионными комментариями"
+// IN : aProc
+//; // "Выполнить с включёнными версионными комментариями"
+//: : "Выполнить с выключенными версионными комментариями"
+// IN : aProc
+//; // "Выполнить с выключенными версионными комментариями"
+//: : "Выполнить с документами на контроле"
+// IN : aProc
+//; // "Выполнить с документами на контроле"
+//: : "Выполнить с документом установленным на контроль"
+// IN : aDoc
+// IN : aProc
+//; // "Выполнить с документом установленным на контроль"
+//: : "Выполнить с импортированой консультацией"
+// IN : aProc
+//; // "Выполнить с импортированой консультацией"
+//: : "Выполнить с меню во вкладке и закрыть её"
+// IN : aProc
+//; // "Выполнить с меню во вкладке и закрыть её"
+//: : "Выполнить с новым окном Гаранта и переключиться на предыдущее окно"
+// IN : aProc
+// VAR : l_Main
+//; // "Выполнить с новым окном Гаранта и переключиться на предыдущее окно"
+//: : "Выполнить с переключённой базой"
+// IN : aProc
+//; // "Выполнить с переключённой базой"
+//"Выполнить с пунктом меню 'информация об изменениях документа'"
+//"Выполнить с пунктом меню 'сортировка списка'"
+//: : "Выполнить со вкладкой консультаций"
+// IN : aProc
+//; // "Выполнить со вкладкой консультаций"
+//: : "Выполняем . Проверяем, что комментарий таки удалился из базы и подчищаем за собой"
+// IN : aProc
+//; // "Выполняем . Проверяем, что комментарий таки удалился из базы и подчищаем за собой"
+//: : "Выставить форме размеры и"
+// OBJECT IN : aProc
+// INTEGER IN : formH
+// INTEGER IN : formW
+//; // "Выставить форме размеры и"
+//: : "Выставить форме размеры ширину левой части ААК в и"
+// OBJECT IN : aProc
+// INTEGER IN : aW
+// INTEGER IN : formH
+// INTEGER IN : formW
+// : : Действия
+//  OBJECT VAR : "Сплиттер"
+//  INTEGER VAR : width_left_aak
+// ; // Действия
+//; // "Выставить форме размеры ширину левой части ААК в и"
+//: : "Выставить форме размеры ширину навигатора в и"
+// OBJECT IN : aProc
+// INTEGER IN : aW
+// INTEGER IN : formH
+// INTEGER IN : formW
+// : : Действия
+//  INTEGER VAR : width_navigator
+// ; // Действия
+//; // "Выставить форме размеры ширину навигатора в и"
+//: : "Дать системе перерисоваться"
+//: : "Двойной клик"
+//: : "Добавить ещё один атрибут"
+//CONST : "Договор о создании союзного государства"
+//: : "Дождаться переключения вкладок"
+//: : "Документ не нравится"
+//: : "Документ нравится"
+//: : "Жёлтая медаль с восклицательным знаком"
+//: : "Жёлтая медаль с часами"
+//: : "Жмём кнопку Искать раз"
+// INTEGER IN : aCount
+//; // "Жмём кнопку Искать раз"
+//: : "Задержка имени Жени Кусакина"
+//: : "Зажать левую кнопку мыши"
+//: : "Зажать правую кнопку мыши"
+//: : "Зажать среднюю кнопку мыши"
+//: : "Закончить перебор контролов"
+//: : "Закрываем БП"
+//: : "Закрываем форму контекстного поиска"
+//: : "Закрыть F1."
+//: : "Закрыть вкладку Документы на контроле"
+//: : "Закрыть вкладку консультаций"
+//: : "Закрыть вкладку Мои документы"
+// BOOLEAN VAR : l_Found
+//; // "Закрыть вкладку Мои документы"
+//: : "Закрыть вкладку ПЗ"
+// OBJECT VAR : "Панель задач"
+//; // "Закрыть вкладку ПЗ"
+//: : "Закрыть все окна кроме текущего"
+//: : "Закрыть журнал работы"
+// BOOLEAN VAR : l_Found
+//; // "Закрыть журнал работы"
+//: : "Закрыть информацию о документе"
+// OBJECT VAR : "Область вкладок"
+//; // "Закрыть информацию о документе"
+//: : "Закрыть меню во вкладке"
+//: : "Закрыть плавающее оглавление"
+//: : "Закрыть синюю медаль документов на контроле"
+//: : "Закрыть сохраненное окно"
+//: : "Закрыть список конфигураций"
+// BOOLEAN VAR : l_Found
+//; // "Закрыть список конфигураций"
+//: : "Закрыть структуру документа"
+// BOOLEAN VAR : l_Found
+//; // "Закрыть структуру документа"
+//: : "Закрыть текущую вкладку"
+//: : "Закрыть фильтры"
+// BOOLEAN VAR : l_Found
+//; // "Закрыть фильтры"
+//: : "Закрыть форму по крестику"
+// OBJECT VAR : "Крестик"
+// OBJECT VAR : "Текущая форма"
+// STRING IN : aForm
+//; // "Закрыть форму по крестику"
+//STRING FUNCTION : "Заменить непечатаемые символы"
+// STRING IN : aStr
+// STRING VAR : Result
+//; // "Заменить непечатаемые символы"
+//: : "Записать содержимое буфера в эталон в формате"
+// INTEGER STRING IN : aFormat
+//; // "Записать содержимое буфера в эталон в формате"
+//: : "Записать содержимое буфера в эталон"
+//: : "Запомнить позицию мыши и выполнить"
+// IN : aProc
+//; // "Запомнить позицию мыши и выполнить"
+//: : "Запомнить позицию мыши"
+//: : "Запомнить ширину левого навигатора и выполнить"
+// IN : aProc
+// VAR : aWidht
+//; // "Запомнить ширину левого навигатора и выполнить"
+//: : "Зелёная медаль МВ"
+//: : "и проверить наличие диалога с кнопкой Ok"
+// IN : aProc
+//; // "и проверить наличие диалога с кнопкой Ok"
+//: : "и проверить наличие диалога с кнопкой Да"
+// IN : aProc
+//; // "и проверить наличие диалога с кнопкой Да"
+//: : "и проверить наличие диалога с кнопкой Нет"
+// IN : aProc
+//; // "и проверить наличие диалога с кнопкой Нет"
+//: : "и проверить наличие диалога с кнопкой Ок"
+// IN : aProc
+//; // "и проверить наличие диалога с кнопкой Ок"
+//: : "и проверить наличие диалога с кнопкой"
+// INTEGER IN : aButton
+// IN : aProc
+//; // "и проверить наличие диалога с кнопкой"
+//: : "и проверить наличие диалога"
+// IN : aProc
+//; // "и проверить наличие диалога"
+//: : "и проверить отсутствие диалога"
+// IN : aProc
+//; // "и проверить отсутствие диалога"
+//BOOLEAN FUNCTION : "Имеет ли документ на контроле статус изменён?"
+// INTEGER IN : aItem
+// BOOLEAN VAR : Result
+//; // "Имеет ли документ на контроле статус изменён?"
+//: : "Импортировать консультацию"
+// VAR : l_File
+//; // "Импортировать консультацию"
+//: : "Импортировать консультацию, проверить наличие баллона и текст консультации"
+// : : Действия
+//  : : Действия
+//   : : TryHarder
+//    : : TryHarder1
+//   ; // TryHarder
+//  ; // Действия
+// ; // Действия
+//; // "Импортировать консультацию, проверить наличие баллона и текст консультации"
+//: : "Информация о комплекте"
+//CONST : "Информация о пустом списке"
+//: : "Исключение машины времени"
+//: : "Ищем в названии и в тексте"
+// STRING IN : aStr1
+// STRING IN : aStr2
+// OBJECT VAR : l_QC
+//; // "Ищем в названии и в тексте"
+//: : "Ищем в названии"
+// STRING IN : aStr1
+// OBJECT VAR : l_QC
+//; // "Ищем в названии"
+//: : "Ищем контекст и проверяем, что он нашёлся"
+// STRING IN : aContext
+// VAR : l_WasDialog
+//; // "Ищем контекст и проверяем, что он нашёлся"
+//: : "Ищем контекст"
+// STRING IN : aText
+// : : Действия
+//; // "Ищем контекст"
+//: : "Клавиатурой или мышью выделяем текст в поле"
+//: : "Клик левой кнопкой мыши"
+//: : "Клик по встроенному скроллеру редактора в фокусе"
+//: : "Клик по встроенному скроллеру редактора"
+// VAR : H
+// OBJECT IN : l_Editor
+// VAR : W
+// VAR : X
+// VAR : Y
+//; // "Клик по встроенному скроллеру редактора"
+//: : "Клик правой кнопкой мыши"
+//: : "Клик средней кнопкой мыши"
+//: : "Кликнуть по скроллеру в левой половине ААК"
+// OBJECT VAR : "Скроллер"
+// OBJECT VAR : "Текущая форма"
+//; // "Кликнуть по скроллеру в левой половине ААК"
+//: : "Кликнуть"
+//: : "Кнопка автораспахивания левого навигатора"
+// OBJECT VAR : "Кнопка придочивания"
+// OBJECT VAR : "Левый навигатор"
+// OBJECT VAR : "Основная форма приложения"
+// OBJECT VAR : "Форма в которую вставлено оглавление"
+//; // "Кнопка автораспахивания левого навигатора"
+//OBJECT FUNCTION : "Кнопка свертывания левого навигатора"
+// OBJECT VAR : Result
+//; // "Кнопка свертывания левого навигатора"
+//: : "Количество элементов статусбара окна"
+// OBJECT VAR : "Статусбар"
+// OBJECT IN : aWindow
+//; // "Количество элементов статусбара окна"
+//: : "коммента не будет."
+//: : "Контекстной операцией удаляем комментарий"
+//: : "Контекстный поиск"
+//BOOLEAN FUNCTION : "Контрол является формой с именем ?"
+// OBJECT IN : aControl
+// STRING IN : aName
+// BOOLEAN VAR : Result
+//; // "Контрол является формой с именем ?"
+//: : "Копировать в буфер строку"
+// IN : aText
+//; // "Копировать в буфер строку"
+//: : "Копировать"
+//: : "Красная медаль МВ"
+//: : "Красная медаль с вопросительным знаком"
+//: : "Красная медаль с восклицательным знаком"
+//: : "Красная медаль с крестом"
+//OBJECT FUNCTION : "Левый навигатор"
+// OBJECT VAR : Result
+//; // "Левый навигатор"
+//: : "Лекарственные средства, разрешённые к применению"
+//: : "Машина времени включена"
+//: : "Медаль отфильтрованного списка"
+//: : "Меню во вкладке без проверки"
+//: : "Меню во вкладке"
+//: : "Мои документы"
+// BOOLEAN VAR : l_Found
+//; // "Мои документы"
+//: : "На страницу вниз"
+//: : "Нажатием F4 открываем панель БП"
+//: : "Нажатием F7 открываем ППР"
+//: : "Нажать Del"
+//: : "Нажать Ok"
+//: : "Нажать в текущем редакторе на ссылку на графическую копию"
+// VAR : Editor
+// VAR : x
+// VAR : y
+//; // "Нажать в текущем редакторе на ссылку на графическую копию"
+//: : "Нажать Искать"
+//: : "Нажать на жёлтую медаль с восклицательным знаком и проверить наличие баллона"
+//: : "Нажать на жёлтую медаль с часами и проверить наличие баллона"
+//: : "Нажать на зелёную медаль МВ и проверить наличие баллона"
+//: : "Нажать на красную медаль МВ и проверить наличие баллона"
+//: : "Нажать на красную медаль с вопросительным знаком и проверить наличие баллона"
+//: : "Нажать на красную медаль с крестом и проверить наличие баллона"
+//: : "Нажать на медаль и проверить наличие баллона"
+// STRING IN : aReminder
+// : : Действия1
+// : : Действия2
+//  VAR : l_Count
+//  VAR : l_File
+// ; // Действия2
+//; // "Нажать на медаль и проверить наличие баллона"
+//: : "Нажать на синюю медаль МГО и проверить наличие баллона"
+//: : "Нажать на синюю медаль о наличии консультаций и проверить наличие баллона"
+//: : "Нажать на ссылку в баллоне МГО"
+//: : "Нажать на ссылку в баллоне медали"
+// OBJECT VAR : "Редактор из баллона"
+// STRING IN : medal
+//; // "Нажать на ссылку в баллоне медали"
+//: : "Нажать"
+// STRING IN : aString
+//; // "Нажать"
+//: : "Назад по истории без перерисовки"
+//: : "Назад по истории"
+//: : "Назад по Истории"
+//: : "Найти выделенное в толковом словаре"
+//OBJECT FUNCTION : "Найти главное окно для контрола"
+// OBJECT IN : "Контрол"
+// OBJECT VAR : Result
+//; // "Найти главное окно для контрола"
+//OBJECT FUNCTION : "Найти главное окно"
+// OBJECT VAR : Result
+//; // "Найти главное окно"
+//: : "Найти далее без проверки"
+//: : "Найти далее и убедиться, что ничего не нашлось"
+//: : "Найти далее"
+//OBJECT FUNCTION : "Найти контрол на форме"
+// STRING IN : aControl
+// OBJECT IN : aForm
+// OBJECT VAR : Result
+//; // "Найти контрол на форме"
+//: : "Найти максимальное значение в массиве"
+// IN : aMass
+// INTEGER VAR : it
+// INTEGER VAR : max
+//; // "Найти максимальное значение в массиве"
+//: : "Найти минимальное значение в массиве"
+// IN : aMass
+// INTEGER VAR : it
+// INTEGER VAR : min
+//; // "Найти минимальное значение в массиве"
+//OBJECT FUNCTION : "Найти на главной форме форму с типом и именем"
+// STRING IN : aForm
+// INTEGER IN : aUserType
+// OBJECT VAR : Result
+// : : Действия
+//  OBJECT IN : Контрол
+// ; // Действия
+//; // "Найти на главной форме форму с типом и именем"
+//OBJECT FUNCTION : "Найти область вкладок"
+// OBJECT VAR : Result
+// : : Действия
+//  OBJECT IN : Контрол
+// ; // Действия
+//; // "Найти область вкладок"
+//OBJECT FUNCTION : "Найти окно атрибутов"
+// OBJECT VAR : Result
+//; // "Найти окно атрибутов"
+//OBJECT FUNCTION : "Найти окно по имени для контрола"
+// VAR : "Имя класса главного окна"
+// STRING IN : "Имя окна"
+// OBJECT IN : "Контрол"
+// OBJECT VAR : Result
+//; // "Найти окно по имени для контрола"
+//OBJECT FUNCTION : "Найти окно по имени"
+// STRING IN : "Имя окна"
+// OBJECT VAR : Result
+//; // "Найти окно по имени"
+//OBJECT FUNCTION : "Найти основное меню"
+// OBJECT VAR : Result
+//; // "Найти основное меню"
+//OBJECT FUNCTION : "Найти панель меток"
+// OBJECT VAR : Result
+//; // "Найти панель меток"
+//OBJECT FUNCTION : "Найти плашку в ААК"
+// OBJECT VAR : Result
+//; // "Найти плашку в ААК"
+//OBJECT FUNCTION : "Найти саб-панель"
+// OBJECT VAR : Result
+//; // "Найти саб-панель"
+//OBJECT FUNCTION : "Найти сплиттер в ААК"
+// OBJECT VAR : "Текущая форма"
+// OBJECT VAR : Result
+//; // "Найти сплиттер в ААК"
+//: : "Найти среднее значение в массиве"
+// IN : aMass
+// INTEGER VAR : aver
+// INTEGER VAR : sum
+//; // "Найти среднее значение в массиве"
+//OBJECT FUNCTION : "Найти форму ААК"
+// OBJECT VAR : Result
+//; // "Найти форму ААК"
+//: : "Напечатать иерархию вложенности контролов"
+// : : "Печатаем контрол"
+//  IN : aControl
+// ; // "Печатаем контрол"
+// OBJECT IN : aControl
+//; // "Напечатать иерархию вложенности контролов"
+//: : "Начинаем набирать"
+// STRING IN : aString
+//; // "Начинаем набирать"
+//"начинается с"
+//"НЕ РАВНО"
+//"НЕ ЯВЛЯЕТСЯ"
+//: : "Новости онлайн"
+//: : "Обзор изменений документа"
+//: : "Обзор изменений законодательства"
+//: : "Обновить главное меню приложения"
+//: : "Основное меню ИнФарм"
+//: : "Ответить два раза Да для"
+// IN : aProc
+//; // "Ответить два раза Да для"
+//: : "Ответить один раз Да для"
+// IN : aProc
+//; // "Ответить один раз Да для"
+//: : "Открываем 2006 документ"
+// : : "Таки открываем"
+//; // "Открываем 2006 документ"
+//: : "Открываем аннотацию"
+//: : "Открываем вкладку Справка"
+//: : "Открываем вкладку 'Судебная практика'"
+//: : "Открываем вторую пользовательскую вкладку"
+//: : "Открываем Конституцию"
+//: : "Открываем НК из ОМ"
+//: : "Открываем НК"
+//: : "Открываем новостную ленту"
+//: : "Открываем первую пользовательскую вкладку"
+//: : "Открываем Справку из меню"
+//: : "Открываем справку"
+//: : "Открываем Справку"
+//: : "Открываем"
+//: : "Открыта ли форма БП?"
+//: : "Открыть в новом окне"
+//: : "Открыть вкладку Документы на контроле"
+//: : "Открыть вкладку консультаций"
+//: : "Открыть вкладку на всё окно"
+// OBJECT VAR : "Кнопка открытия в текущем окне"
+// OBJECT VAR : "Текущая форма"
+// OBJECT VAR : "Текущий контрол"
+//; // "Открыть вкладку на всё окно"
+//: : "Открыть вкладку Перевод"
+//: : "Открыть вкладку Предупреждение с жёлтой медали с восклицательным знаком"
+//: : "Открыть вкладку Предупреждение с жёлтой медали с часами"
+//: : "Открыть вкладку синхронного просмотра текста без сравнения с эталоном"
+//: : "Открыть вкладку синхронного просмотра текста"
+//: : "Открыть вкладку Список редакций"
+//: : "Открыть вкладку"
+// IN : aProc
+// IN : aUserType
+//; // "Открыть вкладку"
+//: : "Открыть ГК"
+//: : "Открыть Гражданский кодекс"
+//: : "Открыть документ в текущем окне"
+//: : "Открыть документ через диалог ввода номера"
+// STRING IN : aDoc
+//; // "Открыть документ через диалог ввода номера"
+//: : "Открыть журнал работы"
+// BOOLEAN VAR : l_Found
+//; // "Открыть журнал работы"
+//: : "Открыть и войти в Конституцию"
+//: : "Открыть информацию о документе"
+// OBJECT VAR : "Область вкладок"
+//; // "Открыть информацию о документе"
+//: : "Открыть информацию о списке"
+//: : "Открыть Конституцию"
+//: : "Открыть любую редакцию в новом окне"
+//: : "Открыть мои документы и выполнить"
+// IN : aProc
+//; // "Открыть мои документы и выполнить"
+//: : "Открыть НК"
+//: : "Открыть новое окно гаранта"
+//: : "Открыть новое окно Гаранта. Переключиться на старое. Выполнить и закрыть новое окно"
+// IN : aProc
+// VAR : l_Main
+// : : Действия
+//; // "Открыть новое окно Гаранта. Переключиться на старое. Выполнить и закрыть новое окно"
+//: : "Открыть панель задач и выполнить"
+// IN : aProc
+//; // "Открыть панель задач и выполнить"
+//: : "Открыть по внешнему номеру"
+// IN : aNum
+//; // "Открыть по внешнему номеру"
+//: : "Открыть список документов с комментариями"
+//: : "Открыть список конфигураций и перевести туда фокус"
+//: : "Открыть список конфигураций"
+// BOOLEAN VAR : l_Found
+//; // "Открыть список конфигураций"
+//: : "Открыть структуру документа"
+// BOOLEAN VAR : l_Found
+//; // "Открыть структуру документа"
+//: : "Открыть текущий документ списка и сравнить его с эталоном"
+//: : "Открыть текущий документ списка"
+// OBJECT VAR : Parent
+//; // "Открыть текущий документ списка"
+//: : "Открыть текущую редакцию в новом окне"
+//: : "Открыть фильтры и выбрать второй Нажать на медаль и проверить наличие баллона"
+//: : "Открыть фильтры и выбрать второй"
+//: : "Открыть фильтры и выбрать первый Нажать на медаль и проверить наличие баллона"
+//: : "Открыть фильтры и выбрать первый"
+//: : "Открыть фильтры и выбрать пятый"
+//: : "Открыть фильтры и выбрать третий Нажать на медаль и проверить наличие баллона"
+//: : "Открыть фильтры и выбрать третий"
+//: : "Открыть фильтры и выбрать четвёртый"
+//: : "Открыть фильтры и выбрать"
+// INTEGER IN : aNode
+//; // "Открыть фильтры и выбрать"
+//: : "Открыть фильтры и выполнить Нажать на медаль и проверить наличие баллона"
+// IN : aProc
+//; // "Открыть фильтры и выполнить Нажать на медаль и проверить наличие баллона"
+//: : "Открыть фильтры и отменить"
+// INTEGER IN : aNode
+//; // "Открыть фильтры и отменить"
+//: : "Открыть фильтры и установить выбранность фильтра в"
+// INTEGER IN : aNode
+// BOOLEAN IN : aSelected
+// : : Действия
+//; // "Открыть фильтры и установить выбранность фильтра в"
+//: : "Открыть фильтры"
+// BOOLEAN VAR : l_Found
+//; // "Открыть фильтры"
+//: : "Отменить все фильтры"
+//: : "Отпустить левую кнопку мыши"
+//: : "Отпустить правую кнопку мыши"
+//: : "Отпустить среднюю кнопку мыши"
+//: : "Очистить журнал работы"
+//: : "Очистить историю"
+//: : "Очистить КЗ"
+//: : "Параграф содержит"
+// STRING IN : aStr
+// VAR : l_Text
+//; // "Параграф содержит"
+//: : "Перебрать иерархию вложенности контролов"
+// OBJECT IN : aControl
+// IN : aProc
+//; // "Перебрать иерархию вложенности контролов"
+//: : "Перевести фокус в дерево медицинских терминов"
+//: : "Перевести фокус в дерево редакций"
+//: : "Перевести фокус в дерево терминов"
+//: : "Перевести фокус в документ"
+//: : "Перевести фокус в Документы на контроле"
+//: : "Перевести фокус в закладки"
+//: : "Перевести фокус в комментарии"
+//: : "Перевести фокус в консультации"
+//: : "Перевести фокус в левую половину ААК"
+//: : "Перевести фокус в левую редакцию"
+//: : "Перевести фокус в на форме типа"
+// STRING IN : aControl
+// STRING IN : aForm
+// INTEGER IN : aUserType
+//; // "Перевести фокус в на форме типа"
+//: : "Перевести фокус в на форме"
+// STRING IN : aControl
+// STRING IN : aForm
+//; // "Перевести фокус в на форме"
+//: : "Перевести фокус в оглавление"
+//: : "Перевести фокус в панель контекстного поиска на вкладке Структура документа"
+//: : "Перевести фокус в поле 'Вид правовой информации' в ППР"
+//: : "Перевести фокус в поле 'Дата принятия' в ППР"
+//: : "Перевести фокус в поле 'Номер' в ППР"
+//: : "Перевести фокус в поле 'Тип' в ППР"
+//: : "Перевести фокус в последние открытые документы"
+//: : "Перевести фокус в правую половину ААК"
+//: : "Перевести фокус в правую редакцию"
+//: : "Перевести фокус в список внешних объектов"
+//: : "Перевести фокус в список редакций левой редакции"
+//: : "Перевести фокус в список редакций правой редакции"
+//: : "Перевести фокус в список"
+//: : "Перевести фокус в текст"
+//: : "Перезаписать фильтр с именем новым параметром для"
+// IN : aKZ
+// STRING IN : aName
+// IN : aProc
+// INTERFACE VAR : l_Node
+// : : Действия
+// VAR : Сделано
+//; // "Перезаписать фильтр с именем новым параметром для"
+//: : "Перейти к первоначальной редакции"
+//: : "Перейти к предыдущей ссылке"
+//: : "Перейти к следующей ссылке"
+//: : "Перейти на параграф вверх"
+//: : "Перейти на параграф вниз"
+//: : "Перейти на элемент свёрнутого списка"
+// INTEGER IN : aItem
+//; // "Перейти на элемент свёрнутого списка"
+//BOOLEAN FUNCTION : "Перейти по ссылке в дереве"
+// : : "Ищем ноду по контексту"
+//  INTEGER VAR : "Предельное количество"
+//  IN : aProc
+//  VAR : l_CompareOp
+//  INTERFACE VAR : l_Node
+//  BOOLEAN VAR : Сделано
+// ; // "Ищем ноду по контексту"
+// STRING IN : aContext
+// STRING IN : aControl
+// STRING VAR : l_Name
+// BOOLEAN VAR : Result
+//; // "Перейти по ссылке в дереве"
+//: : "Перейти по ссылке на в области"
+// STRING IN : aContext
+// STRING IN : aControl
+//; // "Перейти по ссылке на в области"
+//: : "Перейти по ссылке 'Напишите нам' в ААК"
+//: : "Перейти по текущей ссылке"
+//: : "Переключаем базы"
+//: : "Переключиться на вкладку"
+// OBJECT VAR : "Закладка"
+// STRING IN : aName
+// INTEGER VAR : Ind
+//; // "Переключиться на вкладку"
+//: : "Переключиться на конфигурацию"
+// STRING IN : aContext
+//; // "Переключиться на конфигурацию"
+//: : "Переключить базу на"
+// STRING IN : aNewBase
+//; // "Переключить базу на"
+//: : "Переключиться на вкладку в БП"
+// STRING IN : aType
+//; // "Переключиться на вкладку в БП"
+//: : "Переместиться в начало дерева"
+//: : "Перенести элемент оглавления в текст"
+// OBJECT VAR : "Элемент оглавления"
+// INTEGER IN : aItem
+// INTEGER VAR : i_left
+// INTEGER VAR : i_top
+// INTEGER VAR : i_width
+//; // "Перенести элемент оглавления в текст"
+//: : "Перенос по словам"
+//: : "Переход к следующему термину с фокусом в тексте"
+//: : "Переходим в предыдущую редакцию"
+//: : "Переходим в следующую редакцию"
+//: : "Переходим к следующему термину"
+//: : "Поиск контекста"
+//: : "Поиск лекарственного средства"
+//: : "Получить заголовок контрола"
+// OBJECT IN : aControl
+//; // "Получить заголовок контрола"
+//: : "Получить заголовок текущего контрола"
+//: : "Получить имя вкладки с индексом"
+// INTEGER IN : aItem
+//; // "Получить имя вкладки с индексом"
+//: : "Получить имя текущего элемента дерева"
+// STRING IN : aControl
+// INTERFACE VAR : l_Node
+//; // "Получить имя текущего элемента дерева"
+//: : "Получить маскимальное, минимальное и среднее значения для массива"
+// IN : aMass
+// INTEGER VAR : aver
+// INTEGER VAR : max
+// INTEGER VAR : min
+//; // "Получить маскимальное, минимальное и среднее значения для массива"
+//: : "Получить оценку документа"
+//: : "Получить пути к старой и новой базам"
+// VAR : "Входной файл"
+// STRING VAR : "Имя входного файла"
+// STRING VAR : "Новая база"
+// : : "Обработать строку входного файла"
+//  "Строка начинается с"
+//  IN : "Строка считанная из входного файла"
+//  STRING VAR : l_String
+// ; // "Обработать строку входного файла"
+// STRING VAR : "Старая база"
+// STRING IN : aNewBase
+// INTEGER VAR : l_BaseNum
+//; // "Получить пути к старой и новой базам"
+//: : "Получить размеры и координаты контрола"
+// OBJECT IN : aControl
+//; // "Получить размеры и координаты контрола"
+//: : "Получить родительскую форму"
+//: : "Получить список в массив"
+// IN : aMassive
+// INTERFACE VAR : l_Node
+// INTERFACE VAR : l_Node_next
+// BOOLEAN VAR : Сделано
+//; // "Получить список в массив"
+//: : "Померить высоту"
+//: : "Померить минимальную ширину правой и левой частей ААК"
+// OBJECT VAR : "Левая часть ААК"
+// OBJECT VAR : "Правая часть ААК"
+// INTEGER VAR : width_aak
+// INTEGER VAR : width_form
+//; // "Померить минимальную ширину правой и левой частей ААК"
+//: : "Померить отступ сверху"
+//: : "Померить отступ слева"
+//: : "Померить ширину"
+//: : "Померить время и сравнить с эталоном"
+// IN : aProc
+// VAR : l_TimerNumS
+//; // "Померить время и сравнить с эталоном"
+//: : "Померить время"
+// IN : aProc
+// VAR : l_TimerNumS
+//; // "Померить время"
+//: : "Поработать с переключённой базой"
+// IN : aProc
+//; // "Поработать с переключённой базой"
+//: : "Поработать с расширенной конфигурацией"
+// IN : aProc
+//; // "Поработать с расширенной конфигурацией"
+//: : "Поставить на контроль и выполнить"
+// IN : aProc
+//; // "Поставить на контроль и выполнить"
+//: : "Поставить на контроль"
+//: : "Поставить на контроль, подавив Нарушен баланс скобок Wait"
+//: : "Поставить пользовательский комментарий из одной строки, например 12345."
+//: : "Поставить фокус в дерево ситуаций второго уровня в Стандартной ППС"
+//: : "Поставить фокус в левую половину ААК"
+//: : "Поставить фокус в левую половину ААК-Содержания"
+//: : "Поставить фокус в правую половину ААК"
+//: : "Поставить фокус в правую половину ААК-Содержания"
+//: : "Построить обзор изменений для выбранных редакций"
+//: : "Построить список по первой ветке рубрикатора с историей"
+//: : "Построить список по первой ветке рубрикатора"
+//: : "Построить список ссылок на фрагмент и сравнить его с эталоном"
+//: : "Посчитать количество кнопок для типов БП"
+//: : "Потянуть вертикальный скроллер вниз"
+//: : "ППР без перерисовки"
+//: : "ППС Преемственная"
+//: : "ППС Стандартная"
+//: : "Предварительный просмотр с эталонами"
+//: : "Предварительный просмотр"
+//: : "Предыдущее изменение"
+//: : "Предыдущий документ в списке"
+//: : "При помощи Shift выделяем элементов"
+// IN : aNum
+// VAR : l_Finish
+//; // "При помощи Shift выделяем элементов"
+//: : "Проверить активность вкладки Предупреждение"
+//: : "Проверить активную закладку области вкладок"
+// OBJECT VAR : "Область вкладок"
+//; // "Проверить активную закладку области вкладок"
+//: : "Проверить видимость пунктов меню связанных с комментариями"
+//: : "Проверить видимость пунктов меню связанных с сортировкой списка"
+//: : "Проверить вкладку документа"
+// IN : aUserType
+//; // "Проверить вкладку документа"
+//: : "Проверить иерархию вложенности текущего контрола"
+//: : "Проверить информацию о списке и первый документ"
+//: : "Проверить информацию о списке"
+//: : "Проверить навигацию по ссылкам"
+//: : "Проверить наличие комментария и удалить его"
+// IN : aProc
+//; // "Проверить наличие комментария и удалить его"
+//: : "Проверить наличие формы БП"
+//: : "Проверить наличие формы с баллоном"
+//: : "Проверить, что дерево атрибутов документа не пустое"
+// INTERFACE VAR : l_Node
+//; // "Проверить, что дерево атрибутов документа не пустое"
+//: : "Проверить что номер кадра флеша равен"
+// IN : aNum
+//; // "Проверить что номер кадра флеша равен"
+//: : "Проверить, выбран ли фильтр"
+// INTEGER IN : aNode
+// OBJECT VAR : aTree
+//; // "Проверить, выбран ли фильтр"
+//: : "Проверить, что в главном окне есть скроллер"
+//: : "Проверить, что в главном окне нет скроллера"
+//: : "Проверить, что в контекстном меню нет операции Сравнение редакций"
+//: : "Проверить, что в левой половине ААК скроллер есть"
+// OBJECT VAR : "Скроллер"
+// OBJECT VAR : "Текущая форма"
+//; // "Проверить, что в левой половине ААК скроллер есть"
+//: : "Проверить, что вкладка с атрибутами документа видимая"
+// OBJECT VAR : "Форма с атрибутами документа"
+//; // "Проверить, что вкладка с атрибутами документа видимая"
+//: : "Проверить, что высоты контролов больше 0"
+// : : "Печатаем контрол"
+//  IN : aControl
+// ; // "Печатаем контрол"
+// OBJECT IN : aControl
+//; // "Проверить, что высоты контролов больше 0"
+//: : "Проверить, что имя комментария в оглавлении поменялось"
+//: : "Проверить, что контрол видимый"
+// OBJECT IN : aControl
+//; // "Проверить, что контрол видимый"
+//: : "Проверить, что контрол невидимый"
+// OBJECT IN : aControl
+//; // "Проверить, что контрол невидимый"
+//: : "Проверить, что курсор вне ссылки"
+//: : "Проверить, что курсор над ссылкой"
+//: : "Проверить, что массив совпадает с массивом"
+// IN : aMass1
+// IN : aMass2
+// INTEGER VAR : item
+//; // "Проверить, что массив совпадает с массивом"
+//: : "Проверить, что медаль полностью видна"
+// : : "Получить окно по координатам и проверить, что оно совпадает с медалью"
+// STRING IN : aReminder
+// INTEGER VAR : m_height
+// INTEGER VAR : m_height_half
+// INTEGER VAR : m_left
+// INTEGER VAR : m_top
+// INTEGER VAR : m_width
+// INTEGER VAR : m_width_half
+// INTEGER VAR : X
+// INTEGER VAR : Y
+//; // "Проверить, что медаль полностью видна"
+//: : "Проверить, что находимся в ОМ"
+//: : "Проверить, что НЕ открыта форма БП"
+//: : "Проверить, что нельзя перевести фокус в комментарии"
+//: : "Проверить, что нельзя перевести фокус в на форме типа"
+// STRING IN : aControl
+// STRING IN : aForm
+// INTEGER IN : aUserType
+//; // "Проверить, что нельзя перевести фокус в на форме типа"
+//: : "Проверить, что нельзя перевести фокус в на форме"
+// STRING IN : aControl
+// STRING IN : aForm
+//; // "Проверить, что нельзя перевести фокус в на форме"
+//: : "Проверить, что открыта форма БП"
+//: : "Проверить, что попали в Новости-онлайн"
+//: : "Проверить, что скроллера в левой части ААК нет"
+// OBJECT VAR : "Скроллер"
+// OBJECT VAR : "Текущая форма"
+// OBJECT VAR : "Текущий контрол"
+//; // "Проверить, что скроллера в левой части ААК нет"
+//: : "Проверить, что текущая конфигурация стандартная"
+//: : "Проверить, что текущий контрол - браузер"
+//: : "Проверить, что удалось перевести фокус в оглавление"
+//: : "Проверить, что форма БП вставлена в нужную зону"
+// VAR : l_Form
+//; // "Проверить, что форма БП вставлена в нужную зону"
+//: : "Проверить, что форма БП одна"
+//: : "Проверяем наличие комментария в текущем редакторе"
+//: : "Проверяем отсутствие комментария в текущем редакторе"
+//: : "Проверяем отсутствие крестика непосредственно в текущей форме"
+// OBJECT VAR : "Кнопка закрытия"
+// OBJECT VAR : "Объект в котором ищем кнопку закрытия"
+// OBJECT VAR : "Текущий контрол"
+// OBJECT VAR : "Форма оглавления"
+// CONST : BtnClose
+//; // "Проверяем отсутствие крестика непосредственно в текущей форме"
+//: : "Проверяем отсутствие крестика"
+// OBJECT VAR : "Кнопка закрытия"
+// OBJECT VAR : "Форма плавающего навигатора"
+//; // "Проверяем отсутствие крестика"
+//: : "Проверяем, что баллон у красной медали МВ не видим"
+//: : "Проверяем, что баллон у медали не видим"
+// STRING IN : aReminder
+//; // "Проверяем, что баллон у медали не видим"
+//: : "Проверяем, что в кнопке Ещё выбран тип"
+// STRING IN : aType
+//; // "Проверяем, что в кнопке Ещё выбран тип"
+//: : "Прокрутить документ от конца к началу"
+// : : "Достигли начала документа"
+// : : "Не достигли начала документа"
+// VAR : "Предельное количество"
+//; // "Прокрутить документ от конца к началу"
+//: : "Пролистать список поэлементно вниз"
+// INTERFACE VAR : l_Node
+// INTERFACE VAR : l_Node_next
+// BOOLEAN VAR : Сделано
+//; // "Пролистать список поэлементно вниз"
+//: : "Пункт меню видим?"
+// OBJECT IN : anItem
+//; // "Пункт меню видим?"
+//"раз повторить"
+//: : "раз"
+// INTEGER IN : aCount
+// IN : aProc
+//; // "раз"
+//"раза повторить"
+//: : "раза"
+// INTEGER IN : aCount
+// IN : aProc
+//; // "раза"
+//: : "Развернуть окно"
+// OBJECT IN : "Окно"
+// CONST : wsMaximized
+//; // "Развернуть окно"
+//: : "Развернуть текущее дерево"
+//: : "Разворачиваем текущий узел дерева"
+//: : "Редактор стилей"
+//: : "Сбрасываем вкладку БП в умолчательное состояние"
+//: : "Сбросить тип БП"
+//: : "Свернуть окно"
+// OBJECT IN : "Окно"
+// CONST : wsMinimized
+//; // "Свернуть окно"
+//: : "Свернуть текущее дерево"
+//: : "Сворачиваем дерево оглавления"
+//: : "Сделать в расширенной конфигурации"
+// IN : aProc
+//; // "Сделать в расширенной конфигурации"
+//: : "Сделать вкладку меню неплавающей"
+//: : "Сделать вкладку меню плавающей"
+//: : "Сделать вкладку на форме неплавающей"
+// OBJECT VAR : "Текущий контрол"
+// OBJECT VAR : "Форма вкладки"
+// STRING IN : aControl
+// STRING IN : aForm
+//; // "Сделать вкладку на форме неплавающей"
+//: : "Сделать вкладку на форме плавающей"
+// OBJECT VAR : "Текущий контрол"
+// OBJECT VAR : "Форма вкладки"
+// STRING IN : aControl
+// STRING IN : aForm
+//; // "Сделать вкладку на форме плавающей"
+//: : "Сделать левый навигатор автораспахивающимся"
+// OBJECT VAR : l_DockButton
+//; // "Сделать левый навигатор автораспахивающимся"
+//: : "Сделать левый навигатор НЕавтораспахивающимся"
+// OBJECT VAR : l_DockButton
+//; // "Сделать левый навигатор НЕавтораспахивающимся"
+//: : "Сделать левый навигатор развернутым"
+//: : "Сделать левый навигатор свернутым"
+//: : "Сделать оглавление неплавающим"
+// : : X1
+// : : X2
+//; // "Сделать оглавление неплавающим"
+//: : "Сделать оглавление плавающим"
+// : : X1
+// : : X2
+//; // "Сделать оглавление плавающим"
+//: : "Сделать с изменением состояния и размеров окна"
+// OBJECT IN : aForm
+// OBJECT IN : aProc
+// VAR : aState
+// VAR : H
+// VAR : L
+// VAR : T
+// VAR : W
+//; // "Сделать с изменением состояния и размеров окна"
+//: : "Сделать с комментариями в документе"
+// IN : aDoc
+// IN : aProc
+//; // "Сделать с комментариями в документе"
+//: : "Сделать фильтр автоприменяемым"
+// INTEGER IN : aItem
+//; // "Сделать фильтр автоприменяемым"
+//: : "Сделать фильтр НЕавтоприменяемым"
+// INTEGER IN : aItem
+//; // "Сделать фильтр НЕавтоприменяемым"
+//: : "Симулировать нажатие"
+// STRING IN : aString
+//; // "Симулировать нажатие"
+//: : "Синяя медаль документов на контроле"
+//: : "Синяя медаль МГО"
+//: : "Синяя медаль о наличии консультаций"
+//: : "Синяя медаль с конвертом"
+//: : "Синяя медаль, сообщающая, что документ изменился"
+//: : "Скопировать одно слово в буфер"
+//: : "Скроллируем вверх раз"
+// INTEGER IN : aCount
+// OBJECT VAR : l_Editor
+//; // "Скроллируем вверх раз"
+//: : "Скроллируем вниз раз"
+// INTEGER IN : aCount
+// OBJECT VAR : l_Editor
+//; // "Скроллируем вниз раз"
+//: : "Следующее изменение"
+//: : "Следующий документ в списке"
+//: : "Словарь медицинских терминов"
+//: : "См. ежедневные поступления новых документов в разделе Новости онлайн"
+// OBJECT VAR : "Рубрикатор"
+//; // "См. ежедневные поступления новых документов в разделе Новости онлайн"
+//: : "Снять выделение"
+//: : "Снять с контроля"
+//: : "Советы дня"
+//: : "Создать фильтр с именем и с параметром для"
+// IN : aKZ
+// STRING IN : aName
+// IN : aProc
+// : : Действия1
+//  : : Действия2
+// ; // Действия1
+//; // "Создать фильтр с именем и с параметром для"
+//: : "Сохранить активное окно"
+//: : "Сохранить выделенный текст в формате"
+// STRING VAR : "Выделенный текст"
+// INTEGER STRING IN : aFormat
+//; // "Сохранить выделенный текст в формате"
+//: : "Сохранить таблицу стилей и сравнить с эталоном"
+// STRING VAR : StylesFile
+//; // "Сохранить таблицу стилей и сравнить с эталоном"
+//: : "Список всех документов"
+//: : "Список изменившихся документов на контроле"
+//: : "Список редакций без перевода фокуса"
+//: : "Список редакций"
+//: : "Список фармацевтических фирм"
+//: : "Спускаемся в дереве на уровень вниз"
+//: : "Сравнение редакций"
+//: : "Сравнить абзац с эталоном"
+//: : "Сравнить владельца комплекта с эталоном"
+//: : "Сравнить выбранные редакции"
+//: : "Сравнить выделенный текст текущего редактора с эталоном в формате"
+// INTEGER STRING IN : aFormat
+//; // "Сравнить выделенный текст текущего редактора с эталоном в формате"
+//: : "Сравнить выделенный текст текущего редактора с эталоном"
+// STRING VAR : "Выделенный текст"
+//; // "Сравнить выделенный текст текущего редактора с эталоном"
+//: : "Сравнить дату базы с эталоном"
+//: : "Сравнить даты обеих редакций с эталоном"
+//: : "Сравнить дерево атрибутов модального окна с эталоном"
+//: : "Сравнить заголовок окна оболочки с эталоном"
+//: : "Сравнить заголовок текущей формы с эталоном"
+//: : "Сравнить иконку элемента в списке с эталоном"
+// INTEGER IN : aItem
+// STRING IN : aList
+//; // "Сравнить иконку элемента в списке с эталоном"
+//: : "Сравнить имя комплекта с эталоном"
+//: : "Сравнить информацию о базе с эталоном"
+//: : "Сравнить историю навигации с эталоном"
+// VAR : l_Index
+//; // "Сравнить историю навигации с эталоном"
+//: : "Сравнить контекстное меню для контрола для точки с эталоном"
+// OBJECT IN : aControl
+// INTEGER IN : anX
+// INTEGER IN : anY
+//; // "Сравнить контекстное меню для контрола для точки с эталоном"
+//: : "Сравнить контекстное меню для контрола с эталоном"
+// OBJECT IN : aControl
+//; // "Сравнить контекстное меню для контрола с эталоном"
+//: : "Сравнить контекстное меню для точки с эталоном"
+// INTEGER IN : anX
+// INTEGER IN : anY
+//; // "Сравнить контекстное меню для точки с эталоном"
+//: : "Сравнить контекстное меню контрола с эталоном"
+// STRING IN : aControl
+// : : DoItem
+// INTEGER VAR : l_Indent
+//; // "Сравнить контекстное меню контрола с эталоном"
+//: : "Сравнить контекстное меню с эталоном"
+//: : "Сравнить левую часть ААК-Содержания с эталоном"
+//: : "Сравнить меню с эталоном"
+// OBJECT IN : aMenu
+// : : DoItem
+// INTEGER VAR : l_Indent
+//; // "Сравнить меню с эталоном"
+//: : "Сравнить обе редакции с эталоном"
+//: : "Сравнить область вкладок с эталоном"
+//: : "Сравнить оценку документа с эталоном"
+//: : "Сравнить первого ребёнка дерева с эталоном"
+// STRING IN : aList
+//; // "Сравнить первого ребёнка дерева с эталоном"
+//: : "Сравнить ПЗ с эталоном"
+// : : Действия
+//  OBJECT IN : aControl
+//  : : Действия1
+//   OBJECT IN : aControl
+//  ; // Действия1
+// ; // Действия
+//; // "Сравнить ПЗ с эталоном"
+//: : "Сравнить правую часть ААК-Содержания с эталоном"
+//: : "Сравнить развёрнутый список с эталоном"
+// STRING IN : aList
+//; // "Сравнить развёрнутый список с эталоном"
+//: : "Сравнить с эталоном пункт главного меню"
+// STRING IN : aItem
+//; // "Сравнить с эталоном пункт главного меню"
+//: : "Сравнить содержимое тулбаров с эталоном"
+// : : "Получить содержимое тулбаров"
+// : : Действия
+//  OBJECT IN : aObj
+// ; // Действия
+//; // "Сравнить содержимое тулбаров с эталоном"
+//: : "Сравнить список документов с эталоном"
+//: : "Сравнить список документов типа с эталоном"
+// INTEGER IN : aListType
+//; // "Сравнить список документов типа с эталоном"
+//: : "Сравнить список изменённых параграфов с эталоном"
+// OBJECT VAR : l_Editor
+//; // "Сравнить список изменённых параграфов с эталоном"
+//: : "Сравнить список последних открытых документов с эталоном"
+//: : "Сравнить список с эталоном"
+// OBJECT IN : aList
+//; // "Сравнить список с эталоном"
+//: : "Сравнить статусбар окна с эталоном"
+// OBJECT VAR : "Панель статусбара"
+// OBJECT IN : aWindow
+// CONST : cSeparator
+// INTEGER VAR : item
+// STRING VAR : str1
+// STRING VAR : str2
+//; // "Сравнить статусбар окна с эталоном"
+//: : "Сравнить статусбар с эталоном"
+//: : "Сравнить текст информации о списке с эталоном"
+//: : "Сравнить текст обоих частей ААК с эталоном"
+//: : "Сравнить текст обоих частей ААК-Содержания с эталоном"
+//: : "Сравнить текст редактора с эталоном"
+// STRING IN : anEdit
+// VAR : l_File
+// OBJECT VAR : Parent
+//; // "Сравнить текст редактора с эталоном"
+//: : "Сравнить текст с эталоном"
+//: : "Сравнить текущее исключение с эталоном"
+// VAR : l_ClassName
+// VAR : l_Message
+// VAR : l_Message_out
+//; // "Сравнить текущее исключение с эталоном"
+//: : "Сравнить текущие абзацы обеих редакций с эталоном"
+//: : "Сравнить текущий список с эталоном"
+//: : "Сравнить фильтр с именем с эталоном для"
+// IN : aKZ
+// STRING IN : aName
+// INTERFACE VAR : l_Node
+// VAR : Сделано
+//; // "Сравнить фильтр с именем с эталоном для"
+//: : "Ссылки из документа"
+//: : "Ссылки из фрагмента оглавления"
+//: : "Ссылки на документ"
+//: : "Ссылки на фрагмент оглавления"
+//: : "Ставим указатель мыши на конец текущего параграфа редактора со смещением"
+// OBJECT IN : aEditor
+// INTEGER IN : aX
+// INTEGER IN : aY
+// VAR : x
+// VAR : y
+//; // "Ставим указатель мыши на конец текущего параграфа редактора со смещением"
+//: : "Ставим указатель мыши на ссылку в баллоне синей медали о наличии консультаций"
+//: : "Стрелка вверх"
+//: : "Стрелка вниз"
+//"тест с падением"
+//: : "Толковый словарь"
+//: : "Тут приехала эмуляция изменения документа МГО"
+//: : "Убедиться, что БП присутствует на форме и померить его высоту"
+// OBJECT VAR : "Базовый поиск"
+// OBJECT IN : aForm
+//; // "Убедиться, что БП присутствует на форме и померить его высоту"
+//: : "Убедиться, что документ на контроле имеет статус изменён"
+// INTEGER IN : aItem
+//; // "Убедиться, что документ на контроле имеет статус изменён"
+//: : "Убедиться, что фильтр автоприменяемый"
+// INTEGER IN : aItem
+//; // "Убедиться, что фильтр автоприменяемый"
+//: : "Убедиться, что фокус в редакторе"
+//: : "Увеличить шрифт"
+//: : "Удалить документ с вкладки Документы на контроле, подавив Нарушен баланс скобок Wait"
+//: : "Удалить последний элемент истории"
+//: : "Удалить последнюю консультацию"
+//: : "Удалить текущий комментарий и проверить что он удалился"
+//: : "Удалить текущий элемент списка Нажать на медаль и проверить наличие баллона"
+//: : "Удалить текущий элемент списка"
+// VAR : l_ClassName
+// VAR : l_Control
+// VAR : l_UserType
+//; // "Удалить текущий элемент списка"
+//: : "Удалить фильтр с именем для"
+// IN : aKZ
+// STRING IN : aName
+// INTERFACE VAR : l_Node
+// VAR : Сделано
+//; // "Удалить фильтр с именем для"
+//: : "Удалить"
+//BOOLEAN FUNCTION : "Удалось перевести фокус в ?"
+// STRING IN : aControl
+// BOOLEAN VAR : Result
+// : : Действия
+//  OBJECT IN : aObj
+// ; // Действия
+//; // "Удалось перевести фокус в ?"
+//: : "Удалось перевести фокус в оглавление?"
+//: : "Узел дерева открыт"
+//: : "Уменьшить окно"
+// OBJECT IN : "Окно"
+// CONST : wsNormal
+//; // "Уменьшить окно"
+//: : "Уменьшить шрифт"
+//: : "Устанавливаем дату машины времени"
+// STRING IN : aDate
+//; // "Устанавливаем дату машины времени"
+//: : "Установить в редакторе указатель мыши на точку для вызова КМ"
+// OBJECT IN : Editor
+// VAR : x
+// INTEGER IN : X0
+// VAR : y
+// INTEGER IN : Y0
+//; // "Установить в редакторе указатель мыши на точку для вызова КМ"
+//: : "Установить высоту"
+//: : "Установить закладку на документ"
+// : : Действия
+//  OBJECT VAR : "Кнопка ОК"
+//  OBJECT VAR : "Форма сохранения в МД"
+// ; // Действия
+//; // "Установить закладку на документ"
+//: : "Установить курсор мыши на левый край редактора"
+// VAR : Editor
+// VAR : x
+// VAR : y
+//; // "Установить курсор мыши на левый край редактора"
+//: : "Установить курсор мыши на правый край редактора"
+// VAR : Editor
+// VAR : x
+// VAR : y
+//; // "Установить курсор мыши на правый край редактора"
+//: : "Установить курсор мыши посередине редактора"
+// VAR : Editor
+// VAR : x
+// VAR : y
+//; // "Установить курсор мыши посередине редактора"
+//: : "Установить курсор мыши чуть левее левого края редактора"
+// VAR : Editor
+// VAR : x
+// VAR : y
+//; // "Установить курсор мыши чуть левее левого края редактора"
+//: : "Установить курсор мыши чуть левее правого края редактора"
+// VAR : Editor
+// VAR : x
+// VAR : y
+//; // "Установить курсор мыши чуть левее правого края редактора"
+//: : "Установить курсор мыши чуть правее левого края редактора"
+// VAR : Editor
+// VAR : x
+// VAR : y
+//; // "Установить курсор мыши чуть правее левого края редактора"
+//: : "Установить курсор мыши чуть правее правого края редактора"
+// VAR : Editor
+// VAR : x
+// VAR : y
+//; // "Установить курсор мыши чуть правее правого края редактора"
+//: : "Установить окно оболочки на передний план"
+//: : "Установить указатель мыши на точку для вызова КМ для панели меток рядом с редактором"
+// VAR : x
+// INTEGER IN : X0
+// VAR : y
+// INTEGER IN : Y0
+//; // "Установить указатель мыши на точку для вызова КМ для панели меток рядом с редактором"
+//: : "Установить фокус в атрибуты документа"
+//: : "Установить фокус в баллон зелёной медали МВ"
+//: : "Установить фокус в баллон синей медаль о наличии консультаций"
+//: : "Установить фокус в документ"
+// : : FindGlobally
+// : : FindLocally
+// OBJECT VAR : l_FocusedControl
+//; // "Установить фокус в документ"
+//: : "Установить фокус в контекстный фильтр вкладки Меню"
+//: : "Установить фокус в меню во вкладке"
+//: : "Установить фокус в"
+// OBJECT IN : aControl
+//; // "Установить фокус в"
+//: : "Установить фокус во вкладку Фильтры"
+//: : "Установить фокус во флеш"
+// OBJECT VAR : Parent
+//; // "Установить фокус во флеш"
+//: : "Установить ширину"
+//CONST : "Форма документа"
+//CONST : "Форма списка"
+//OBJECT FUNCTION : "Элемент статусбара окна"
+// OBJECT VAR : "Статусбар"
+// INTEGER IN : aItem
+// OBJECT IN : aWindow
+// OBJECT VAR : Result
+//; // "Элемент статусбара окна"
+//CONST : "Энциклопедия решений. Аренда"
+//BOOLEAN FUNCTION : "Является ли фильтр автоприменяемым?"
+// INTEGER IN : aItem
+// BOOLEAN VAR : Result
+//; // "Является ли фильтр автоприменяемым?"
+//++!
+//=-
+//=+
+//CONST : ActivePageProperty
+//CONST : ANYUSERTYPE
+//: : array:HasString
+// [] IN : anArray
+// STRING IN : aString
+// VAR : l_Result
+//; // array:HasString
+//: : array:StringCount
+// [] IN : anArray
+// STRING IN : aString
+// VAR : l_Result
+//; // array:StringCount
+//: : ASSUME
+// STRING IN : aStr
+//; // ASSUME
+//CONST : cBmpClose
+//CONST : cBreak
+//CONST : CF_RTF
+//: : ChangesBetweenEditonsForm
+//: : CheckCommentAndDeleteIfExists
+// IN : aProc
+//; // CheckCommentAndDeleteIfExists
+//: : Ctrl-Z
+//STRING FUNCTION : CutNumbers
+// VAR : "Символ"
+// STRING IN : "Текущая строка"
+// CONST : "Цифры"
+// STRING VAR : Result
+//; // CutNumbers
+//CONST : cWaitDelta
+//: : dftAnnotation
+//: : dftDocSynchroView
+//: : dftRelatedDoc
+//: : dftTranslation
+//CONST : DocInfoTabCaption
+//CONST : DocumentFlash
+//: : DocumentText
+//EnumerateControls
+//CONST : evd::id_ActiveInterval
+//CONST : evd::id_Address
+//CONST : evd::id_Alarm
+//CONST : evd::id_AnnoTopic
+//CONST : evd::id_Attr
+//CONST : evd::id_AttrName
+//CONST : evd::id_AttrValue
+//CONST : evd::id_AutoClass
+//CONST : evd::id_AutoreferatDocument
+//CONST : evd::id_BitmapPara
+//CONST : evd::id_Block
+//CONST : evd::id_Bookmark
+//CONST : evd::id_Bool
+//CONST : evd::id_Bullet
+//CONST : evd::id_Check
+//CONST : evd::id_Cloak
+//CONST : evd::id_Color
+//CONST : evd::id_CommentPara
+//CONST : evd::id_ContentsElement
+//CONST : evd::id_ControlPara
+//CONST : evd::id_ControlsBlock
+//CONST : evd::id_Date
+//CONST : evd::id_DecorTextPara
+//CONST : evd::id_DictEntry
+//CONST : evd::id_DictEntryBlock
+//CONST : evd::id_DictItem
+//CONST : evd::id_DictItemEx
+//CONST : evd::id_DictRec
+//CONST : evd::id_Division
+//CONST : evd::id_DocSubLayer
+//CONST : evd::id_Document
+//CONST : evd::id_DocumentSub
+//CONST : evd::id_Empty
+//CONST : evd::id_Enum
+//CONST : evd::id_ExtDataPara
+//CONST : evd::id_Font
+//CONST : evd::id_FontName
+//CONST : evd::id_Footer
+//CONST : evd::id_Formula
+//CONST : evd::id_Frame
+//CONST : evd::id_FramePart
+//CONST : evd::id_Handle
+//CONST : evd::id_Header
+//CONST : evd::id_HFParent
+//CONST : evd::id_HyperLink
+//CONST : evd::id_ImageListBitmap
+//CONST : evd::id_Inch
+//CONST : evd::id_IUnknown
+//CONST : evd::id_Justification
+//CONST : evd::id_l3Base
+//CONST : evd::id_LeafPara
+//CONST : evd::id_LeafParaDecorationsHolder
+//CONST : evd::id_List
+//CONST : evd::id_LogRecord
+//CONST : evd::id_LogRecordPrim
+//CONST : evd::id_Long
+//CONST : evd::id_Mark
+//CONST : evd::id_NodeGroup
+//CONST : evd::id_NSRCEnd
+//CONST : evd::id_NSRCRsr0
+//CONST : evd::id_NSRCRsr1
+//CONST : evd::id_NSRCRsr2
+//CONST : evd::id_NSRCRsr3
+//CONST : evd::id_NSRCTag
+//CONST : evd::id_NumANDDate
+//CONST : evd::id_Object
+//CONST : evd::id_ObjectSegment
+//CONST : evd::id_ObjectWithHandle
+//CONST : evd::id_OList
+//CONST : evd::id_PageBreak
+//CONST : evd::id_PageProperties
+//CONST : evd::id_Para
+//CONST : evd::id_ParaList
+//CONST : evd::id_Participant
+//CONST : evd::id_PercentSign
+//CONST : evd::id_PIRec
+//CONST : evd::id_Position
+//CONST : evd::id_QueryCard
+//CONST : evd::id_RawData
+//CONST : evd::id_ReqCell
+//CONST : evd::id_ReqGroup
+//CONST : evd::id_ReqRow
+//CONST : evd::id_Reserved2
+//CONST : evd::id_Reserved6
+//CONST : evd::id_Rsr2
+//CONST : evd::id_Rsr3
+//CONST : evd::id_Rsr4
+//CONST : evd::id_SbLHandle
+//CONST : evd::id_SBS
+//CONST : evd::id_SBSCell
+//CONST : evd::id_SBSRow
+//CONST : evd::id_SectionBreak
+//CONST : evd::id_Segment
+//CONST : evd::id_SegmentsLayer
+//CONST : evd::id_SgLHandle
+//CONST : evd::id_SimpleDocument
+//CONST : evd::id_SimpleDocumentTextPara
+//CONST : evd::id_Stage
+//CONST : evd::id_StagePrim
+//CONST : evd::id_String
+//CONST : evd::id_Style
+//CONST : evd::id_StyledLeafPara
+//CONST : evd::id_Sub
+//CONST : evd::id_SubLayer
+//CONST : evd::id_Table
+//CONST : evd::id_TableColumn
+//CONST : evd::id_TableRow
+//CONST : evd::id_TableTextPara
+//CONST : evd::id_TabStop
+//CONST : evd::id_Tag
+//CONST : evd::id_TagBody
+//CONST : evd::id_TagName
+//CONST : evd::id_TextPara
+//CONST : evd::id_TextRsr10
+//CONST : evd::id_TextRsr11
+//CONST : evd::id_TextRsr12
+//CONST : evd::id_TextRsr13
+//CONST : evd::id_TextRsr14
+//CONST : evd::id_TextRsr15
+//CONST : evd::id_TextRsr16
+//CONST : evd::id_TextRsr17
+//CONST : evd::id_TextRsr18
+//CONST : evd::id_TextRsr19
+//CONST : evd::id_TextRsr4
+//CONST : evd::id_TextRsr5
+//CONST : evd::id_TextRsr6
+//CONST : evd::id_TextRsr7
+//CONST : evd::id_TextRsr8
+//CONST : evd::id_TextRsr9
+//CONST : evd::id_TextSegment
+//CONST : evd::id_TextStyle
+//CONST : evd::id_Time
+//CONST : evd::id_TinyDocument
+//CONST : evd::id_TreePara
+//CONST : evd::id_Type
+//CONST : evd::id_Version
+//CONST : evd::id_XML
+//CONST : evd::id_XMLTag
+//CONST : evd::ti_AccGroups
+//CONST : evd::ti_ActiveIntervals
+//CONST : evd::ti_Alarms
+//CONST : evd::ti_AllChildrenCount
+//CONST : evd::ti_AllowHyphen
+//CONST : evd::ti_AlternateText
+//CONST : evd::ti_AnnoClasses
+//CONST : evd::ti_Apply2Para
+//CONST : evd::ti_AutoClasses
+//CONST : evd::ti_BackColor
+//CONST : evd::ti_BaseLine
+//CONST : evd::ti_Bitmap
+//CONST : evd::ti_Bold
+//CONST : evd::ti_Bullet
+//CONST : evd::ti_CardType
+//CONST : evd::ti_CaseDocParticipants
+//CONST : evd::ti_Checks
+//CONST : evd::ti_Children
+//CONST : evd::ti_Classes
+//CONST : evd::ti_CodePage
+//CONST : evd::ti_Collapsed
+//CONST : evd::ti_Comment
+//CONST : evd::ti_CompareContentsLevel
+//CONST : evd::ti_ContentsLevel5
+//CONST : evd::ti_ContentsLevel6
+//CONST : evd::ti_DefaultNode
+//CONST : evd::ti_DefaultText
+//CONST : evd::ti_DeltaX
+//CONST : evd::ti_DeltaY
+//CONST : evd::ti_DocID
+//CONST : evd::ti_DPI
+//CONST : evd::ti_Enabled
+//CONST : evd::ti_ExcludeSuper
+//CONST : evd::ti_ExternalHandle
+//CONST : evd::ti_ExternalNextVerLink
+//CONST : evd::ti_ExternalPath
+//CONST : evd::ti_ExternalVerLink
+//CONST : evd::ti_FilterType
+//CONST : evd::ti_Finish
+//CONST : evd::ti_FirstIndent
+//CONST : evd::ti_FirstLineIndent
+//CONST : evd::ti_FixedHeight
+//CONST : evd::ti_FixedWidth
+//CONST : evd::ti_Flags
+//CONST : evd::ti_Flat
+//CONST : evd::ti_Font
+//CONST : evd::ti_FontParamRsr1
+//CONST : evd::ti_FontParamRsr2
+//CONST : evd::ti_FontParamRsr3
+//CONST : evd::ti_FontParamRsr4
+//CONST : evd::ti_Footers
+//CONST : evd::ti_ForeColor
+//CONST : evd::ti_Formatted
+//CONST : evd::ti_Frame
+//CONST : evd::ti_FrameDown
+//CONST : evd::ti_FrameLeft
+//CONST : evd::ti_FrameRight
+//CONST : evd::ti_FrameUp
+//CONST : evd::ti_Groups
+//CONST : evd::ti_Handle
+//CONST : evd::ti_HasAnno
+//CONST : evd::ti_HeaderHasOwnSpace
+//CONST : evd::ti_Headers
+//CONST : evd::ti_Height
+//CONST : evd::ti_ImageIndex
+//CONST : evd::ti_InContents
+//CONST : evd::ti_Index
+//CONST : evd::ti_InternalHandle
+//CONST : evd::ti_InternalNextVerLink
+//CONST : evd::ti_InternalVerLink
+//CONST : evd::ti_IsActive
+//CONST : evd::ti_IsChangeableFont
+//CONST : evd::ti_IsPeriodic
+//CONST : evd::ti_Italic
+//CONST : evd::ti_Justification
+//CONST : evd::ti_KeyWords
+//CONST : evd::ti_Language
+//CONST : evd::ti_LayerID
+//CONST : evd::ti_LeftIndent
+//CONST : evd::ti_LimitWidth
+//CONST : evd::ti_LineSpacing
+//CONST : evd::ti_LineType
+//CONST : evd::ti_LinkComment
+//CONST : evd::ti_LinkedDocuments
+//CONST : evd::ti_Loaded
+//CONST : evd::ti_LogRecords
+//CONST : evd::ti_Map
+//CONST : evd::ti_MaxHyperlinkHandle
+//CONST : evd::ti_MaxSubID
+//CONST : evd::ti_MaxTextLength
+//CONST : evd::ti_MDPPageID
+//CONST : evd::ti_MergeStatus
+//CONST : evd::ti_ModelControl
+//CONST : evd::ti_Modified
+//CONST : evd::ti_Multy
+//CONST : evd::ti_Name
+//CONST : evd::ti_NameComment
+//CONST : evd::ti_NoCompare
+//CONST : evd::ti_NodeVisibleIndex
+//CONST : evd::ti_Norm
+//CONST : evd::ti_NumANDDates
+//CONST : evd::ti_Number
+//CONST : evd::ti_NumList
+//CONST : evd::ti_Object
+//CONST : evd::ti_OldChildren
+//CONST : evd::ti_OldNSRC
+//CONST : evd::ti_Operations
+//CONST : evd::ti_Orientation
+//CONST : evd::ti_Pages
+//CONST : evd::ti_Paras
+//CONST : evd::ti_PercentSign
+//CONST : evd::ti_Pitch
+//CONST : evd::ti_Prefix
+//CONST : evd::ti_PriceLevel
+//CONST : evd::ti_PrintFontSize
+//CONST : evd::ti_Priority
+//CONST : evd::ti_Private
+//CONST : evd::ti_PublishedIn
+//CONST : evd::ti_RelExternalHandle
+//CONST : evd::ti_RelInternalHandle
+//CONST : evd::ti_ReqID
+//CONST : evd::ti_ReqKind
+//CONST : evd::ti_Required
+//CONST : evd::ti_Revision
+//CONST : evd::ti_RightIndent
+//CONST : evd::ti_Rubber
+//CONST : evd::ti_Script
+//CONST : evd::ti_SegmentParamRsr2
+//CONST : evd::ti_SegmentParamRsr3
+//CONST : evd::ti_SegmentParamRsr4
+//CONST : evd::ti_SegmentParamRsr5
+//CONST : evd::ti_Segments
+//CONST : evd::ti_ServiceInfo
+//CONST : evd::ti_ShortName
+//CONST : evd::ti_Size
+//CONST : evd::ti_SortDate
+//CONST : evd::ti_Source
+//CONST : evd::ti_Sources
+//CONST : evd::ti_SpaceAfter
+//CONST : evd::ti_SpaceBefore
+//CONST : evd::ti_Stages
+//CONST : evd::ti_Start
+//CONST : evd::ti_StateCount
+//CONST : evd::ti_StateIndex
+//CONST : evd::ti_Strikeout
+//CONST : evd::ti_StrParamRsr2
+//CONST : evd::ti_StrParamRsr3
+//CONST : evd::ti_StrParamRsr4
+//CONST : evd::ti_Style
+//CONST : evd::ti_StyleParamRsr1
+//CONST : evd::ti_SubID
+//CONST : evd::ti_Subs
+//CONST : evd::ti_SysLogRecords
+//CONST : evd::ti_TabStops
+//CONST : evd::ti_Territory
+//CONST : evd::ti_Text
+//CONST : evd::ti_TextRsr4
+//CONST : evd::ti_TextRsr5
+//CONST : evd::ti_TextRsr6
+//CONST : evd::ti_TextRsr7
+//CONST : evd::ti_TextRsr8
+//CONST : evd::ti_TextRsr9
+//CONST : evd::ti_Time
+//CONST : evd::ti_Type
+//CONST : evd::ti_Types
+//CONST : evd::ti_Underline
+//CONST : evd::ti_Upper
+//CONST : evd::ti_Urgency
+//CONST : evd::ti_URL
+//CONST : evd::ti_User
+//CONST : evd::ti_UserType
+//CONST : evd::ti_Valid
+//CONST : evd::ti_Value
+//CONST : evd::ti_Versions
+//CONST : evd::ti_VerticalAligment
+//CONST : evd::ti_ViewKind
+//CONST : evd::ti_Visible
+//CONST : evd::ti_VisibleToUser
+//CONST : evd::ti_Warnings
+//CONST : evd::ti_Weight
+//CONST : evd::ti_Width
+//CONST : evd::ti_Zoom
+//: : FiltersList
+//CONST : FM_OPEN
+//CONST : fsMDIChild
+//CONST : fsMDIForm
+//CONST : fsNormal
+//CONST : fsStayOnTop
+//VAR : g_EtalonCount
+//[] ARRAY : g_RemindersWasOuted
+//VAR : g_TimerNum
+//CONST : LLO_AND
+//CONST : LLO_AND_NOT
+//CONST : LLO_NONE
+//CONST : LLO_OR
+//CONST : mbNo
+//CONST : mbOk
+//CONST : mbYes
+//CONST : nfExpanded
+//: : OK_DIALOG
+// IN : aProc
+//; // OK_DIALOG
+//: : OnTest
+//: : OperationOnControl
+// STRING IN : aControl
+// IN : anOp
+// OBJECT VAR : Parent
+//; // OperationOnControl
+//CONST : remListModified
+//: : RunInpharmSearch
+// IN : aProc
+//; // RunInpharmSearch
+//: : Shift-Ctrl-Z
+//: : strings:Cat
+// : : DoCat
+//  STRING IN : aStr1
+//  STRING IN : aStr2
+// ; // DoCat
+// [] ARRAY : Tmp
+//; // strings:Cat
+//CONST : tb24Date
+//STRING VAR : tb24Name
+//CONST : tb27Date
+//STRING VAR : tb27Name
+//: : ToDo
+// STRING IN : aString
+//; // ToDo
+//TotalEnum
+//: : tvList
+//: : UNASSUME
+// STRING IN : aStr
+//; // UNASSUME
+//: : VOID
+// VAR : l_Void
+//; // VOID
+//анти-тест
+//: : БАЗА
+// STRING IN : aStr
+//; // БАЗА
+//БОЛЬШЕ
+//: : БП
+//CONST : ГК
+//ДА
+//И
+//ИЛИ
+//CONST : КОАП
+//CONST : Конституция
+//МЕНЬШЕ
+//НЕ
+//НЕРАВНО
+//НЕТ
+//НЕЯВЛЯЕТСЯ
+//CONST : НК
+//: : ОИД
+//: : ОМ
+//: : ПЗ
+// OBJECT VAR : "Панель задач"
+//; // ПЗ
+//ПОКА
+//: : ППИО
+//: : ППО
+//: : ППР
+//: : ППС
+//CONST : Простое_предупреждение
+//РАВНО
+//раз
+//раза
+//: : СР
+//: : ТБ24
+//: : ТБ27
+//CONST : тироксин
+//: : Форма_документа
+//ЯВЛЯЕТСЯ

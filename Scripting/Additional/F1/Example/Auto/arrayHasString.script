@@ -1,0 +1,8 @@
+: arrayHasString
+ [ 'мама' 'папа' ] 'мама' array:HasString .
+ [ 'мама' 'папа' ] 'папа' array:HasString .
+ [ 'мама' 'папа' ] 'бабушка' array:HasString .
+ [ 'мама' 'папа' ] 'папа' array:HasString .
+;
+
+arrayHasString

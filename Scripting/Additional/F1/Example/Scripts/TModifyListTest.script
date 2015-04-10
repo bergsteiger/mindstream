@@ -1,0 +1,73 @@
+USES 
+ Controls.script
+ Reminders.script
+ DocumentList.script
+ HLTCLike.script
+;
+
+: ModifyListTest
+// - вызывает список всех документов, модифицирует его и провер€ет что по€вилась соответствующа€ медаль
+// {RequestLink:259892768}
+
+BEGIN
+  "—писок всех документов"
+  "”далить текущий элемент списка Ќажать на медаль и проверить наличие баллона"
+END
+;
+
+ModifyListTest
+
+// $Id: TModifyListTest.script,v 1.16 2011/06/26 12:57:42 lulin Exp $
+
+// $Log: TModifyListTest.script,v $
+// Revision 1.16  2011/06/26 12:57:42  lulin
+// {RequestLink:269085062}.
+//
+// Revision 1.15  2011/05/26 18:16:22  lulin
+// {RequestLink:266895862}.
+//
+// Revision 1.14  2011/05/06 15:49:40  lulin
+// - делаем "предложени€".
+//
+// Revision 1.13  2011/05/06 13:05:19  lulin
+// {RequestLink:265410566}.
+// - выкидываем ненужные константы.
+//
+// Revision 1.12  2011/05/06 12:51:08  lulin
+// {RequestLink:265410566}.
+// - выдел€ем общий код.
+//
+// Revision 1.11  2011/05/06 12:14:52  lulin
+// {RequestLink:265410566}.
+// - выдел€ем общий код.
+//
+// Revision 1.10  2011/05/06 11:58:03  lulin
+// {RequestLink:265410566}.
+// - делаем тест.
+//
+// Revision 1.9  2011/05/04 17:57:53  lulin
+// {RequestLink:265404457}.
+//
+// Revision 1.8  2011/05/04 16:17:11  lulin
+// {RequestLink:265404457}.
+//
+// Revision 1.7  2011/04/29 15:15:47  lulin
+// {RequestLink:259892768}.
+// - используем try..finally.
+//
+// Revision 1.6  2011/04/28 19:37:25  lulin
+// {RequestLink:259892768}.
+// - добавл€ем константы.
+//
+// Revision 1.5  2011/04/28 18:39:37  lulin
+// {RequestLink:259892768}.
+// - прикручиваем баллоны к медал€м списков.
+//
+// Revision 1.4  2011/04/28 14:47:17  lulin
+// {RequestLink:259892768}.
+// - написал комментарии.
+//
+// Revision 1.3  2011/04/28 14:34:42  lulin
+// {RequestLink:259892768}.
+// - написан комментарий.
+//

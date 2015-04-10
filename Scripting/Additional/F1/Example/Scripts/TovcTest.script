@@ -1,0 +1,13 @@
+USES
+ HLTCLike.script
+ F1ControlsDefinition.script
+; 
+
+: Ctrl-End
+ ProcessMessages 
+ "”становить фокус в документ"
+ ProcessMessages 
+ cc:LastPage
+;
+
+ќсновноећеню 10003000 ќткрыть Ctrl-End

@@ -1,0 +1,12 @@
+: RandomTest
+ 20 SetRandSeed
+ 5 LOOP ( 100 Random . )
+
+ 20 SetRandSeed
+ 5 LOOP ( 100 Random . )
+
+ 50 SetRandSeed
+ 5 LOOP ( 100 Random . )
+;
+
+RandomTest

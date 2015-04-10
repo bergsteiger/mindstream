@@ -1,0 +1,13 @@
+// Разработчик: Селянкин Владимир
+
+: K342860478
+ ППР
+ "Убедиться, что фокус в редакторе"
+ 'AT_NORM' focused:control:push pop:QueryCard:Attribute:SetFocus
+ 5 раз "Стрелка вниз"
+ "Нажать {('Tab')}"
+ focused:control:push pop:QueryCard:GetCurrentReqName .
+ // Напечатать имя поля/блока, в котором курсор.
+; // K342860478
+
+K342860478

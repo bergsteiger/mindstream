@@ -1,0 +1,24 @@
+USES
+ WordsTranslation.script
+ @\SysUtils.script
+ @\Controls.script
+ Forms.script
+;
+
+BOOLEAN FUNCTION "Удалось перевести фокус в ?" STRING IN aControl
+
+ false =: Result
+
+ : Действия OBJECT IN aObj
+  Если ( aControl РАВНО ( aObj pop:control:Name ) ) то
+   ( aObj pop:control:SetFocus =: Result
+    "Закончить перебор контролов"
+   )
+ ;
+
+ "Главное окно" "Выполнить для всех контролов" Действия
+;
+
+: "Привести координаты для контрола к экранным" OBJECT IN X OBJECT IN Y OBJECT IN aControl
+ X DO Y DO aControl pop:control:ClientToScreen =:^ Y =:^ X
+;

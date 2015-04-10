@@ -1,0 +1,624 @@
+!TOPIC 57960388 Скрипты для заполнения КЗ для 7.9
+!REFDOC
+!BELONGS ARM\PRA\BBB\FOR\CUS\PRI\MOS\MSP\PRO\BAN\GBH\ARB\MED\REA\STR\GAR\NAL\ARH\LAN\CRI\COM\INPHARM\KZ_MP\ENO\CONSULT\ONLINE\BBB2011\PK2\USN\COMJUR\DMJ\ENZ\GOSZAK\EEK\SUDEP_VS
+!VINCLUDED 21/04/2007
+!BLOCK 19818 Документы Минюста
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Федеральные министерства и ведомства\Минюст России (Министерство юстиции РФ)')} с операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 19819 Приказы Минюста
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Тип' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_TYPE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Тип' ввести {('Приказ')} с операцией {(0)}"
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Федеральные министерства и ведомства\Минюст России (Министерство юстиции РФ)')} с операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 19820 Распоряжения Минюста
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Тип' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_TYPE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Тип' ввести {('Распоряжение')} с операцией {(0)}"
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Федеральные министерства и ведомства\Минюст России (Министерство юстиции РФ)')} с операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 19821 Письма Минюста
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Тип' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_TYPE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Тип' ввести {('Письмо')} с операцией {(0)}"
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Федеральные министерства и ведомства\Минюст России (Министерство юстиции РФ)')} с операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 99990 Судебный Департамент при Верховном Суде России
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Органы судебной власти РФ и СССР\Судебный Департамент при Верховном Суде России')} с операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 99991 Совет Судей РФ
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Органы судебной власти РФ и СССР\Органы судейского сообщества\Совет судей Российской Федерации')} с операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 99993 Дисциплинарное судебное присутствие
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Органы судебной власти РФ и СССР\Дисциплинарное судебное присутствие')} с операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 99994 Управления Судебного Департамента по субъектам
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Органы судебной власти РФ и СССР\Суды
+общей юрисдикции\Чувашская Республика  -  Чувашия\Управление   судебного
+департамента при Верховном Суде РФ в Чувашской Республике')} с операцией
+{(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 99995 Управления Судебного Департамента по субъектам
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Органы судебной власти РФ и СССР\Суды
+общей юрисдикции\Краснодарский край\Управление Судебного департамента в
+Краснодарском крае')} с операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 99996 Управления Судебного Департамента по субъектам
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Органы судебной власти РФ и СССР\Суды
+общей юрисдикции\Ивановская область\Управление  Судебного   департамента
+при Верховном Суде РФ в Ивановской области')} с операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 99997 Управления Судебного Департамента по субъектам
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Органы судебной власти РФ и СССР\Суды
+общей   юрисдикции\Калининградская    область\Управление       Судебного
+департамента в Калининградской области')} с операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 99998 Управления Судебного Департамента по субъектам
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Органы судебной власти РФ и СССР\Суды
+общей  юрисдикции\Липецкая  область\Управление  судебного   департамента
+Липецкой области')} с операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 99999 Управления Судебного Департамента по субъектам
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Органы судебной власти РФ и СССР\Суды
+общей юрисдикции\Оренбургская область\Управление Судебного департамента
+в Оренбургской области')} с операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 10000 Управления Судебного Департамента по субъектам
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Органы судебной власти РФ и СССР\Суды
+общей юрисдикции\Саратовская область\Управление судебного   департамента
+Саратовской области')} с операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 10001 Решение Коллегии Евразийской экономической комиссии
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Тип' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_TYPE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Тип' ввести {('Решение')} с операцией {(0)}"
+!STYLE J 0 72 0
+ "в поле  'Орган/Источник'  ввести  {('Международные   организации\Органы
+власти  ЕврАзЭС\Коллегия  Евразийской  экономической       комиссии')} с
+операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND
+
+!BLOCK 10002 Решения, Приказы и Письма Комиссии Таможенного союза
+!STYLE J 0 72 0
+script:
+!STYLE J 0 72 0
+OBJECT VAR l_QC
+!STYLE J 0 72 0
+: "в поле 'Тип' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_TYPE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+: "в поле 'Орган/Источник' ввести с операцией" STRING IN aStr INTEGER IN aL
+!STYLE J 0 72 0
+ aL 'AT_SOURCE' aStr l_QC pop:QueryCard:Attribute:SetWithLogicOperation 
+!STYLE J 0 72 0
+ ;
+!STYLE J 0 72 0
+vcm:Dispatcher:Lock
+!STYLE J 0 72 0
+TRY
+!STYLE J 0 72 0
+ ППР
+!STYLE J 0 72 0
+ focused:control:push >>> l_QC
+!STYLE J 0 72 0
+ class::TevQueryCardEditor l_QC pop:object:Inherits ASSERT // проверка, что фокус там где нам надо
+!STYLE J 0 72 0
+ "в поле 'Тип' ввести {('Решение')} с операцией {(0)}"
+!STYLE J 0 72 0
+ "в поле 'Тип' ввести {('Приказ')} с операцией {(0)}"
+!STYLE J 0 72 0
+ "в поле 'Тип' ввести {('Письмо')} с операцией {(0)}"
+!STYLE J 0 72 0
+ "в поле 'Орган/Источник' ввести {('Международные организации\Органы власти ЕврАзЭС\Комиссия Таможенного союза (КТС)')} с операцией {(0)}"
+!STYLE J 0 72 0
+ Ok
+!STYLE J 0 72 0
+ history:DeleteBackItem
+!STYLE J 0 72 0
+FINALLY
+!STYLE J 0 72 0
+ vcm:Dispatcher:Unlock
+!STYLE J 0 72 0
+END
+!BLOCKEND

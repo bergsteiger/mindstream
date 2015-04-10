@@ -1,0 +1,16 @@
+// Разработчик: Селянкин Владимир
+
+: K379243728
+ 
+ : Действия
+  OBJECT VAR "О программе"
+  focused:control:push pop:control:GetAnotherParentForm =: "О программе"
+  контрол::LoginLabel "О программе" pop:control:FindControlByName pop:control:Caption CutNumbers .
+  контрол::UserNameLabel "О программе" pop:control:FindControlByName pop:control:Caption CutNumbers .
+  контрол::EMailLabel "О программе" pop:control:FindControlByName pop:control:Caption .
+ ;
+
+ @ ( оп::Справка_О_программе... ) MODAL ( Действия )
+;
+
+K379243728

@@ -1,0 +1,18 @@
+//тесты для проверки правильности фильтрации поля Номер в ППР (эталоны для базы preview_10_08_13): [$482754771]
+
+PROCEDURE K483398384
+
+ INTEGER VAR aContext
+ STRING VAR aContext_str
+ 0 >>> aContext
+ 11 раз ( 
+  Если ( aContext "МЕНЬШЕ ИЛИ РАВНО" 9 ) то
+   ( [ '123' aContext IntToStr ] strings:Cat >>> aContext_str )
+  иначе
+   ( [ '123-' ] strings:Cat >>> aContext_str )
+  "Ввести контекст {(aContext_str)} в контекстный фильтр модального окна 'Номер' и, если он корректен и кол-во номеров меньше 100 000, сравнить их с эталоном"
+  ++! aContext 
+ ) 
+;
+
+K483398384

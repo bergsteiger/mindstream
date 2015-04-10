@@ -1,0 +1,238 @@
+USES
+ WordsTranslation.script
+ @\SysUtils.script
+ ProjectSpecificControls.script
+;
+
+WORDWORKER EnumerateControls OBJECT IN aParent
+ aParent ЯВЛЯЕТСЯ class::TWinControl ? (
+  INTEGER VAR I
+  I := 0
+  aParent pop:control:ControlCount LOOP ( I aParent pop:control:GetControl WordToWork DO ++! I )
+ )
+;
+
+WORDWORKER TotalEnum OBJECT IN aControl
+
+ FORWARD DoItem
+
+ : DoItem OBJECT IN aControl
+  aControl ( WordToWork DO )
+  aControl EnumerateControls DoItem
+ ;
+
+ aControl DoItem
+;
+
+CONST cBreak 'BreakTotalEnum'
+
+WORDWORKER "выполнить для всех контролов" OBJECT IN aControl
+ "Выполнить {(@ ( aControl TotalEnum ( WordToWork DO ) ) )} обработав исключение {(cBreak)}"
+;
+
+WordAlias "Выполнить для всех контролов" "выполнить для всех контролов"
+
+: "Закончить перебор контролов"
+ cBreak RAISE
+;
+
+OBJECT FUNCTION "Найти контрол на форме" STRING IN aControl OBJECT IN aForm
+ aControl aForm pop:control:FindControlByName =: Result
+ Result pop:object:IsNil ! 'Не удалось найти ' aControl Cat
+  ASSERTS 
+; // "Найти контрол на форме"
+
+OBJECT FUNCTION "Найти контрол по имени на форме" STRING IN aControl OBJECT IN aForm
+ "Найти контрол {(aControl)} на форме {(aForm)}" =: Result
+ Result pop:object:IsNil ! 
+ [ 'Не нашли контрол ' aControl ] strings:Cat
+ ASSERTS
+; // "Найти контрол по имени на форме"
+
+BOOLEAN FUNCTION "Контрол является формой с именем ?" OBJECT IN aControl STRING IN aName
+
+ ( aControl ЯВЛЯЕТСЯ class::TvcmForm ) И
+ ( aControl pop:vcm:form:FormID РАВНО aName ) =: Result
+;
+
+OBJECT FUNCTION "Найти на главной форме форму с типом и именем" INTEGER IN aUserType STRING IN aForm
+
+ : Действия OBJECT IN Контрол
+  ( "Контрол {(Контрол)} является формой с именем {(aForm)} ?" ) И
+  (
+    ( aUserType РАВНО ANYUSERTYPE ) ИЛИ
+    ( Контрол pop:vcm:form:UserType РАВНО aUserType ) 
+  ) ? (  
+    Контрол =: Result
+    "Закончить перебор контролов"
+  )
+ ;    
+   
+ focused:control:push pop:control:GetTopParentForm "Выполнить для всех контролов" Действия 
+;
+
+PROCEDURE "Перевести фокус в на форме типа" STRING IN aControl STRING IN aForm INTEGER IN aUserType
+ Если ( true ) то
+  ( false aUserType aControl aForm TryFocusOnForm 
+   [ 'Не удалось поставить фокус в ' aControl ' на форме ' aForm ' типа ' aUserType IntToStr ] strings:Cat 
+    ASSERTS 
+  )
+ иначе
+  ( OBJECT VAR "Контрол"
+ 
+  : Действия OBJECT IN aObj
+   ( aControl РАВНО ( aObj pop:control:Name ) ) ? (
+    aObj =: "Контрол"
+    "Контрол" pop:control:SetFocus
+    "Закончить перебор контролов"
+   )
+  ;
+ 
+  OBJECT VAR "Форма"
+  "Найти на главной форме форму с типом {(aUserType)} и именем {(aForm)}" =: "Форма"
+  "Форма" pop:object:IsNil ! 
+   [ 'Не удалось найти ' aForm ' типа ' aUserType IntToStr ] strings:Cat 
+    ASSERTS
+  "Форма" "Выполнить для всех контролов" Действия
+  "Контрол" pop:object:IsNil ! 
+   [ 'Не удалось поставить фокус в ' aControl ' на форме ' aForm ' типа ' aUserType IntToStr ] strings:Cat
+    ASSERTS 
+ ) 
+;  
+
+PROCEDURE "Перевести фокус в на форме" STRING IN aControl STRING IN aForm
+ "Перевести фокус в на {(aControl)} форме {(aForm)} типа {(ANYUSERTYPE)}"
+; 
+
+PROCEDURE "Получить размеры и координаты контрола" OBJECT IN aControl
+ Если ( aControl "является медалью" ) то
+  (
+   [ 'Left = ' aControl pop:component:Owner pop:RemindersLine:Left IntToStr ] strings:Cat .
+   [ 'Top = ' aControl pop:component:Owner pop:RemindersLine:Top IntToStr ] strings:Cat .
+   [ 'Width = ' aControl pop:component:Owner pop:RemindersLine:Width IntToStr ] strings:Cat .
+   [ 'Height = ' aControl pop:component:Owner pop:RemindersLine:Height IntToStr ] strings:Cat .  
+  )
+ иначе
+  ( 
+   [ 'Left = ' aControl "Померить отступ слева" IntToStr ] strings:Cat .
+   [ 'Top = ' aControl "Померить отступ сверху" IntToStr ] strings:Cat .
+   [ 'Width = ' aControl "Померить ширину" IntToStr ] strings:Cat .
+   [ 'Height = ' aControl "Померить высоту" IntToStr ] strings:Cat .
+  ) 
+; // "Получить размеры и координаты контрола"
+
+PROCEDURE "Сравнить с эталоном размеры контрола" OBJECT IN aControl
+ Если ( aControl "является медалью" ) то
+  (
+   [ 'Width = ' aControl pop:component:Owner pop:RemindersLine:Width IntToStr ] strings:Cat .
+   [ 'Height = ' aControl pop:component:Owner pop:RemindersLine:Height IntToStr ] strings:Cat .  
+  )
+ иначе
+  ( 
+   [ 'Width = ' aControl "Померить ширину" IntToStr ] strings:Cat .
+   [ 'Height = ' aControl "Померить высоту" IntToStr ] strings:Cat .
+  )
+; // "Сравнить с эталоном размеры контрола"
+
+PROCEDURE "Сравнить меню с эталоном расширенно" OBJECT IN aMenu BOOLEAN IN anItemName
+ FORWARD DoItem
+ INTEGER VAR l_Indent 
+ PROCEDURE DoItem OBJECT IN anItem
+  VAR l_Index
+  l_Index := 0
+  anItem menuitem:GetCount LOOP (
+   VAR l_Item
+   l_Index anItem menuitem:GetItem =: l_Item
+   l_Item menuitem:IsVisible ? (
+    [ 
+      l_Indent #32 char:Dupe
+	  anItemName ? ( 'name' l_Item pop:object:GetStrProp ':' Cat )
+      l_Item menuitem:GetCaption
+      l_Item menuitem:IsEnabled ! ? (
+       ' [Запрещён]'
+       ' ' l_Item pop:component:Name
+      )
+    ] strings:Cat .
+    ++! l_Indent
+    TRY
+     l_Item DoItem
+    FINALLY
+     --! l_Indent
+    END // TRY..FINALLY
+   ) // l_Item menuitem:IsVisible
+   ++! l_Index
+  ) // anItem menuitem:GetCount LOOP
+ ; // DoItem
+ 
+ l_Indent := 0
+ 
+ aMenu DoItem
+; // "Сравнить меню с эталоном расширенно"
+
+PROCEDURE "Сравнить меню с эталоном" OBJECT IN aMenu
+ "Сравнить меню {(aMenu)} с эталоном расширенно {(false)}"
+; // "Сравнить меню с эталоном"
+
+PROCEDURE "Сравнить контекстное меню для контрола для точки с эталоном" OBJECT IN aControl INTEGER IN anX INTEGER IN anY
+ OBJECT VAR l_Menu
+ anX anY aControl pop:control:GetPopupMenu >>> l_Menu
+ Если ( l_Menu pop:object:IsNil ) то
+  ( 'У контрола нет контекстного меню' . )
+ иначе
+  ( l_Menu "Сравнить меню с эталоном" )
+; // "Сравнить контекстное меню для контрола для точки с эталоном"
+
+PROCEDURE "Сравнить контекстное меню для точки с эталоном" INTEGER IN anX INTEGER IN anY
+ "Сравнить контекстное меню для контрола {(focused:control:push)} для точки {(anX anY)} с эталоном"
+; // "Сравнить контекстное меню для точки с эталоном"
+
+PROCEDURE "Сравнить контекстное меню с эталоном"
+ "Сравнить контекстное меню для точки {(0 0)} с эталоном"
+; // "Сравнить контекстное меню с эталоном"
+
+PROCEDURE "Сравнить контекстное меню контрола с эталоном расширенно" OBJECT IN aControl
+ OBJECT VAR l_Menu
+ 0 0 aControl pop:control:GetPopupMenu >>> l_Menu
+ "Сравнить меню {(l_Menu)} с эталоном расширенно {(true)}"
+; // "Сравнить контекстное меню с эталоном"
+
+PROCEDURE "Сравнить контекстное меню с эталоном расширенно"
+ "Сравнить контекстное меню {(focused:control:push)} контрола с эталоном расширенно"
+; // "Сравнить контекстное меню с эталоном"
+
+PROCEDURE "Сравнить контекстное меню медали с эталоном" STRING IN aControl
+
+ FORWARD DoItem
+ 
+ INTEGER VAR l_Indent 
+ : DoItem OBJECT IN anItem
+  VAR l_Index
+  0 =: l_Index
+  anItem menuitem:GetCount LOOP (
+   VAR l_Item
+   l_Index anItem menuitem:GetItem =: l_Item
+   l_Item menuitem:IsVisible ? (
+    [ 
+      l_Indent #32 char:Dupe
+      l_Item menuitem:GetCaption 
+    ] strings:Cat .
+    ++! l_Indent
+    TRY
+     l_Item DoItem
+    FINALLY
+     --! l_Indent
+    END // TRY..FINALLY
+   ) // l_Item menuitem:IsVisible
+   ++! l_Index
+  ) // anItem menuitem:GetCount LOOP
+ ; // DoItem
+ 
+ 0 =: l_Indent
+ 
+ aControl byname:control:push pop:Reminder:GetPopupMenu DoItem
+; // "Сравнить контекстное меню медали с эталоном"
+
+BOOLEAN FUNCTION "Удалось перевести фокус в на форме?" STRING IN aControl STRING IN aForm
+ true ANYUSERTYPE aControl  aForm TryFocusOnForm
+ >>> Result
+; 

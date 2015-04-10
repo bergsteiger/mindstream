@@ -1,0 +1,20 @@
+Тест K390577849
+
+ "Открываем {("ААК-содержание")}"
+ OBJECT VAR l_Control 
+ OBJECT VAR "Левая часть ААК"
+ "Найти контрол {(контрол::pnLeft)} на форме {("Главное окно")}" =: "Левая часть ААК"
+ "Левая часть ААК" pop:object:IsNil ! 'Не найдена левая часть ААК' ASSERTS
+ "Найти контрол {(контрол::Text)} на форме {("Левая часть ААК")}"  >>> l_Control 
+ INTEGER VAR width_aak
+ INTEGER VAR width_lmargin
+ INTEGER VAR width_indent_text
+ INTEGER VAR width_WrapLimit
+ "Левая часть ААК" "Померить ширину" >>> width_aak
+ l_Control "Левый отступ контрола" >>> width_lmargin
+ l_Control "Померить отступ слева" >>> width_indent_text
+ l_Control "Узнать конечную координату заливки редактора" >>> width_WrapLimit
+ width_aak ( ( width_lmargin  width_indent_text + ) width_WrapLimit + ) - .
+;
+
+K390577849

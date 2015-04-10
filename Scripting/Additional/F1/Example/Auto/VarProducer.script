@@ -1,0 +1,16 @@
+: TestVarProducer
+
+ VarProducer VarType
+ 
+ STRING VarType A
+ 'Hello' =: A
+ 
+ INTEGER VarType B
+ 23 =: B
+ 
+ A .
+ B .
+ 
+;
+
+TestVarProducer

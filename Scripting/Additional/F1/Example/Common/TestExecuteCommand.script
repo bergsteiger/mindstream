@@ -1,0 +1,276 @@
+// TestExecuteCommand.script
+// Поддержка слова "Выполнить" и другие вспомогательные слова.
+
+USES
+ @\TestUtils.script
+ @\TestParamsDefine.script
+ @\TestWithParameters.script
+;
+
+INTEGER VAR g_XMouseCoord
+INTEGER VAR g_YMouseCoord
+
+PROCEDURE "Запомнить позицию мыши, если нужно"
+ Если g_SaveMouseCoordinate то (
+  mouse:GetCursorPosition >>> g_YMouseCoord >>> g_XMouseCoord	
+ )
+;
+
+PROCEDURE "Восстановление позиции мыши, если нужно"
+ Если g_SaveMouseCoordinate то (
+  g_XMouseCoord g_YMouseCoord mouse:SetCursorPosition
+ )
+;
+
+PROCEDURE "Восстановить настройки конфигурации до теста, если нужно"
+ Если g_ClearInitialSettings то (
+  "Восстановить все настройки текущей конфигурации"	
+ )
+;
+
+PROCEDURE "Изменить настройки"
+ g_InstallSettings CASE
+  g_DontInstallSettings ( )
+  cnInstallOpenDocInCurrentTab ( "Подготовить настройки: открывать документы из списка в текущем окне" )
+  cnInstallSetFontSizeForExportAppearsScreen ( "Подготовить настройки: размер шрифта для экспорта и печати, как он отображается на экране"  )
+  cnInstallOpenDocInCurrentTab_AND_cnInstallSetFontSizeForExportAppearsScreen ( "Подготовить настройки: открывать документы из списка в текущем окне" "Подготовить настройки: размер шрифта для экспорта и печати, как он отображается на экране" )
+  cnInstallSetFontSizeForExportUserValue ( "Подготовить настройки: использовать для экспорта и печати следующий размер шрифта: {(aSetFontSizeForExportUserValue)}" )
+  cnInstallCardRequestSearchBySituationStandard ( "Включаем стиль карточки поиска по ситуации - Стандартная" )
+ END
+;
+
+PROCEDURE "Восстановить настройки конфигурации после теста, если нужно"
+ Если g_ClearSettingsAfterTest то (
+  "Дать системе перерисоваться"
+  "Восстановить все настройки текущей конфигурации"	
+  //  "Закрыть оболочку и зайти заново"
+  // Зачем она тут не помню, но мешается
+ )
+;
+
+PROCEDURE "Очистить строку БП, если нужно"
+ Если g_ClearContextEdit то (
+ "Очистить строку БП"
+ )
+;
+
+PROCEDURE "Импортировать консультацию, если нужно"
+ Если g_NeedImportConsultation то (
+  "Импортировать консультацию, проверить наличие баллона и текст консультации"
+ )
+;
+
+PROCEDURE "Выполнить до теста"
+ "Восстановить настройки конфигурации до теста, если нужно"
+ "Очистить строку БП, если нужно"
+ "Изменить настройки"
+ Если ( g_InstallSettings БОЛЬШЕ 0 ) то 
+  ( true >>> g_ClearSettingsAfterTest )
+ "Импортировать консультацию, если нужно" 
+;
+
+INTEGER VAR aStateMainWindow
+INTEGER VAR LeftIndentMainWindow
+INTEGER VAR TopIndentMainWindow
+INTEGER VAR WidthMainWindow
+INTEGER VAR HeightMainWindow
+
+PROCEDURE "Запомнить первоначальное состояние главного окна"
+ OBJECT VAR MainWindow
+ "Главное окно" >>> MainWindow
+ MainWindow pop:form:GetWindowState >>> aStateMainWindow
+ MainWindow "Померить отступ слева" >>> LeftIndentMainWindow
+ MainWindow "Померить отступ сверху" >>> TopIndentMainWindow
+ MainWindow "Померить ширину" >>> WidthMainWindow
+ MainWindow "Померить высоту" >>> HeightMainWindow
+;
+
+PROCEDURE "Восстановить размеры главному окну, если нужно"
+ ( g_How2Prepare НЕРАВНО 0 ) ? (
+  OBJECT VAR MainWindow
+  "Главное окно" >>> MainWindow
+  aStateMainWindow MainWindow pop:form:SetWindowState
+  LeftIndentMainWindow MainWindow pop:control:SetLeft
+  TopIndentMainWindow MainWindow pop:control:SetTop
+  WidthMainWindow MainWindow "Установить ширину"
+  HeightMainWindow MainWindow "Установить высоту"
+ )
+;
+
+PROCEDURE "Установить главному окну размеры" INTEGER IN formW INTEGER IN formH
+ "Запомнить первоначальное состояние главного окна"
+ "Уменьшить окно {("Главное окно")}"
+ "##Подготовить главное окно к тесту"
+ formW "Главное окно" "Установить ширину"
+ formH "Главное окно" "Установить высоту"
+;
+
+PROCEDURE "Изменить размеры"
+ g_How2Prepare CASE
+  cnNotPrepare ( )
+  cnSetSizeMainWindow ( "Установить главному окну размеры {(aSetWidthMainWindow aSetHeightMainWindow)}" )
+   /* тут еще будут: 
+     - Главное окно + левый навигатор
+     - Главное окно + правый навигатор
+     - Размеры ААК - Оглавления (перемещение сплиттера)
+     - Размеры ААК - Содержания (перемещение сплиттера)
+      ... 
+    */
+ END
+;
+
+PROCEDURE "Восстановить старую базу, если нужно"
+ ( g_SwitchBase РАВНО 2 ) ? (
+  ТБ24
+ )
+ ( g_SwitchBase РАВНО 3 ) ? (
+  "Переключить базу на {("Предыдущая база")}"
+ )
+;
+
+PROCEDURE "Изменить базу"
+ g_SwitchBase CASE
+  cnNotSwitchBase ( )
+  cnInstallBaseTB24 ( ТБ24 )
+  cnInstallBaseTB27 ( ТБ27 )
+  cnInstallBaseName ( "Переключить базу на {("Новая база")}" )
+ END
+;
+
+PROCEDURE "Вернуть фокус в оболочку после переключения баз в конце теста"
+ Если ( g_SwitchBase БОЛЬШЕ 0 ) то (
+  g_SetFocusAfterSwitchBase CASE
+   cnDontProblemSetFocusAfterSwitchBase ( "Ничего не делаем" )
+   cnSetFocusAfterSwitchBaseInBaseSearch ( "Установить фокус в БП после переключения баз" )
+   cnSetFocusAfterSwitchBaseInEditor ( "##Установить фокус в документ после переключения баз" )
+   cnSetFocusAfterSwitchBaseInQueryCard ( "Установить фокус в КЗ после переключения баз" ) 
+  END
+ )
+;
+
+PROCEDURE "Закрыть лишние вкладки"
+ g_ClosePageControl CASE
+  cnDontClosePageControl (  )
+  cnCloseNavigator ( "Закрыть меню во вкладке" )
+  cnCloseTasksPanel ( "Закрыть вкладку ПЗ" )
+  cnCloseFolders ( "Закрыть вкладку Мои документы" )
+  cnCloseUnderControl ( "Закрыть вкладку Документы на контроле" )
+  cnCloseWorkJournal ( "Закрыть журнал работы" )
+  cnCloseConfigurationList ( "Закрыть список конфигураций" )
+  cnCloseContactList ( "Закрыть вкладку Совещание онлайн" )
+ END
+;
+
+PROCEDURE "Выполнить завершающее действие"
+ TRY
+  "Восстановить старую базу, если нужно"
+  "Вернуть фокус в оболочку после переключения баз в конце теста"
+  "Очистить буфер обмена"
+  "Восстановить настройки конфигурации после теста, если нужно"
+  "Закрыть лишние вкладки"
+  "Восстановление позиции мыши, если нужно"
+  "Восстановить размеры главному окну, если нужно"
+ FINALLY
+  g_RunCheckDeleteComments ? (
+   "Открываем документ {(aNumOpenDoc)}"
+   "В документе не должно быть комментариев"
+   "Проверить, что нельзя перевести фокус в комментарии"
+  )
+ g_RunFinalConditionsUserFilters ? (
+  ППР
+  "Удалить пользовательские фильтры"
+  "Поиск лекарственного средства"
+  "Удалить пользовательские фильтры"
+ )
+ END
+;
+
+PROCEDURE "Открываем документ до теста, если нужно"	
+ Если ( g_DocumentIDToOpen ) то (
+  "Открываем документ {(g_OpenDocID)}"
+ )
+;
+
+INTEGER VAR g_MainWindow 
+
+PROCEDURE "Выполняем проверку предусловий"
+ PROCEDURE Действия
+  2 раза ( "Дождаться переключения вкладок" ) 
+  0 "Контрол в фокусе" tree:ChildrenCount раз ( 
+   "Переместиться в начало дерева"
+   "Развернуть текущее дерево"
+   "Стрелка вниз"
+   "Удалить объект и подтвердить удаление"
+  )
+ ;
+
+ g_RunInitialConditions ? (
+  IsMyDocumentsEmpty ! ? (
+   "Открыть мои документы и выполнить {(@ Действия)}"
+  )
+  IsMyDocumentsEmpty 'Не смогли почистить вкладку Мои документы (предусловие)!' ASSERTS 
+  "Убедиться, что в системе нет автоприменяемых фильтров"
+ )
+ g_CheckMainWindow ? (
+  "Сохранить активное окно" >>> g_MainWindow 
+ )
+ g_RunFinalConditionsUserFilters ? (
+  "Убедиться, что нет лишних фильтров"
+ )
+;
+
+PROCEDURE "Проверочное действие"	
+ g_CheckAction CASE
+  cnNoneAction (  )
+  cnCheckValueAreaCombo ( "Сравнить с эталоном текущие значения контрола AreaCombo" ) 
+
+ END
+;
+
+PROCEDURE "Выполняем проверку постусловий"
+ g_CheckMainWindow ? (
+  "Сохранить активное окно" РАВНО g_MainWindow 'В ходе теста перешли на новое окно (постусловие)!' ASSERTS   
+ )
+;
+
+VOID WORDWORKER Выполнить_тест
+ TRY
+  "Открываем документ до теста, если нужно"
+  "Выполнить до теста"
+  "Изменить базу"
+  "Изменить размеры"	
+  "Запомнить позицию мыши, если нужно"
+  WordToWork DO
+  "Проверочное действие"
+ FINALLY
+  "Выполнить завершающее действие"	
+ END
+;
+
+VOID WORDWORKER Выполнить			
+ Если ( ( g_WasInit IsVoid ) ИЛИ ( g_WasInit =0 ) ) то ( "Первоначальные параметры" )	
+ TRY
+  "Выполняем проверку предусловий"
+   g_RunTestOnConfigurations CASE
+   cnDontChangeConfigurations ( 
+    Выполнить_тест ( WordToWork DO )
+   )
+   cnRunTestOnExtendedConfiguration ( 
+    "Переключиться на расширенную конфигурацию и выполнить" (
+     Выполнить_тест ( WordToWork DO )
+    )
+   )
+   cnRunTestOnBothConfigurations (
+    Выполнить_тест ( WordToWork DO )
+    "Переключиться на расширенную конфигурацию и выполнить" (
+     '*********------------Расширенная конфигурация:---------------********' .
+     ОсновноеМеню
+     Выполнить_тест ( WordToWork DO )
+    )  
+   )
+   END
+  "Выполняем проверку постусловий"
+ FINALLY
+  0 >>> g_WasInit // Мало ли сколько раз вызвали...
+ END
+;
