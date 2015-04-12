@@ -35,6 +35,8 @@ type
   btnDiff: TSpeedButton;
     btnSave: TSpeedButton;
     btnLoad: TSpeedButton;
+    OpenDlg: TOpenDialog;
+    SaveDlg: TSaveDialog;
   procedure FormCreate(Sender: TObject);
   procedure btRunAllTestClick(Sender: TObject);
   procedure tvTestTreeChangeCheck(Sender: TObject);
@@ -288,53 +290,35 @@ begin
  UnCheckAllTest;
 end;
 
-const
-  cFileDoesntExists = 'File does not exists.';
-
 procedure TfmGUITestRunner.btnLoadClick(Sender: TObject);
-
-  function TreeUnCheckedItemByText(const ATreeView: TTreeView;
-    const AText: string): TTreeViewItem;
-  var
-    I: Integer;
-    l_Item: TTreeViewItem;
-  begin
-    Result := nil;
-    Assert(Assigned(ATreeView));
-    for I := 0 to ATreeView.GlobalCount - 1 do
-    begin
-      l_Item := ATreeView.ItemByGlobalIndex(I);
-      if Assigned(l_Item)
-       and (CompareText(l_Item.Text, AText) = 0)
-       and not l_Item.IsChecked then
-      begin
-        Result := l_Item;
-        Break;
-      end;
-    end;
-  end;
-
-var
-  l_Node: TTreeViewItem;
-  l_FileReader: TStreamReader;
+ var
+  l_File: TStream;
+  l_Tests: TStrings;
 begin
+  OpenDlg.InitialDir := ExtractFilePath(ParamStr(0));
+  if not OpenDlg.Execute then Exit;
 
-  l_FileReader := TStreamReader.Create(
-    TFileStream.Create(ParamStr(0) + c_TestConfigFile, fmOpenRead),
-    TEncoding.Default
-  );
-
-  l_FileReader.OwnStream;
+  l_File := TFileStream.Create(OpenDlg.FileName, fmOpenRead);
   try
-    while not l_FileReader.EndOfStream do
-    begin
-      l_Node := TreeUnCheckedItemByText(tvTestTree, l_FileReader.ReadLine);
-      if Assigned(l_Node) then
-        l_Node.IsChecked := True;
-    end;
+    l_Tests := TStringList.Create;
+    try
+      l_Tests.LoadFromStream(l_File);
 
+      TraverseTree(tvTestTree,
+        procedure (const aNode: TTreeViewItem)
+        var
+          l_index: Integer;
+        begin
+          l_index := l_Tests.IndexOf(aNode.Text);
+          aNode.IsChecked := (l_index >= 0);
+          if l_index >= 0 then l_Tests.Delete(l_index);
+        end
+        );
+    finally
+      FreeAndNil(l_Tests);
+    end;
   finally
-    FreeAndNil(l_FileReader);
+    FreeAndNil(l_File);
   end;
 end;
 
@@ -343,8 +327,11 @@ procedure TfmGUITestRunner.btnSaveClick(Sender: TObject);
 var
   l_FileWriter: TStreamWriter;
 begin
+  SaveDlg.InitialDir := ExtractFilePath(ParamStr(0));
+  if not SaveDlg.Execute then Exit;
+
   l_FileWriter := TStreamWriter.Create(
-    TFileStream.Create(ParamStr(0) + c_TestConfigFile, fmCreate {or fmOpenWrite}),
+    TFileStream.Create(SaveDlg.FileName, fmCreate),
     TEncoding.Default
   );
   l_FileWriter.OwnStream;

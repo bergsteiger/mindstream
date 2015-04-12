@@ -212,4 +212,13 @@ object fmGUITestRunner: TfmGUITestRunner
       Position.Y = 16.000000000000000000
     end
   end
+  object OpenDlg: TOpenDialog
+    Left = 608
+    Top = 104
+  end
+  object SaveDlg: TSaveDialog
+    Options = [ofHideReadOnly, ofFileMustExist, ofEnableSizing]
+    Left = 552
+    Top = 104
+  end
 end
