@@ -33,6 +33,8 @@ type
   btnDeleteEtalon: TSpeedButton;
   btnSelectFailed: TSpeedButton;
   btnDiff: TSpeedButton;
+    btnSave: TSpeedButton;
+    btnLoad: TSpeedButton;
   procedure FormCreate(Sender: TObject);
   procedure btRunAllTestClick(Sender: TObject);
   procedure tvTestTreeChangeCheck(Sender: TObject);
@@ -42,6 +44,8 @@ type
   procedure btnSelectFailedClick(Sender: TObject);
   procedure btnDiffClick(Sender: TObject);
   procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnSaveClick(Sender: TObject);
+    procedure btnLoadClick(Sender: TObject);
  protected
   FSuite: ITest;
   FTests: TInterfaceList;
@@ -116,6 +120,7 @@ procedure RunRegisteredTestsModeless;
 
 const
  c_ConfigFile = '.DUnit.ini';
+ c_TestConfigFile = '.DUnit.Tests.conf';
 
 var
  fmGUITestRunner: TfmGUITestRunner;
@@ -266,6 +271,7 @@ begin
  );
 end;
 
+
 procedure TfmGUITestRunner.UnCheckAllTest;
 begin
  TraverseTree(tvTestTree,
@@ -280,6 +286,80 @@ end;
 procedure TfmGUITestRunner.btnUncheckAllClick(Sender: TObject);
 begin
  UnCheckAllTest;
+end;
+
+const
+  cFileDoesntExists = 'File does not exists.';
+
+procedure TfmGUITestRunner.btnLoadClick(Sender: TObject);
+
+  function TreeUnCheckedItemByText(const ATreeView: TTreeView;
+    const AText: string): TTreeViewItem;
+  var
+    I: Integer;
+    l_Item: TTreeViewItem;
+  begin
+    Result := nil;
+    Assert(Assigned(ATreeView));
+    for I := 0 to ATreeView.GlobalCount - 1 do
+    begin
+      l_Item := ATreeView.ItemByGlobalIndex(I);
+      if Assigned(l_Item)
+       and (CompareText(l_Item.Text, AText) = 0)
+       and not l_Item.IsChecked then
+      begin
+        Result := l_Item;
+        Break;
+      end;
+    end;
+  end;
+
+var
+  l_Node: TTreeViewItem;
+  l_FileReader: TStreamReader;
+begin
+
+  l_FileReader := TStreamReader.Create(
+    TFileStream.Create(ParamStr(0) + c_TestConfigFile, fmOpenRead),
+    TEncoding.Default
+  );
+
+  l_FileReader.OwnStream;
+  try
+    while not l_FileReader.EndOfStream do
+    begin
+      l_Node := TreeUnCheckedItemByText(tvTestTree, l_FileReader.ReadLine);
+      if Assigned(l_Node) then
+        l_Node.IsChecked := True;
+    end;
+
+  finally
+    FreeAndNil(l_FileReader);
+  end;
+end;
+
+
+procedure TfmGUITestRunner.btnSaveClick(Sender: TObject);
+var
+  l_FileWriter: TStreamWriter;
+begin
+  l_FileWriter := TStreamWriter.Create(
+    TFileStream.Create(ParamStr(0) + c_TestConfigFile, fmCreate {or fmOpenWrite}),
+    TEncoding.Default
+  );
+  l_FileWriter.OwnStream;
+
+  try
+    TraverseTree(tvTestTree,
+    procedure (const aNode: TTreeViewItem)
+    begin
+      if aNode.IsChecked then
+        l_FileWriter.WriteLine(aNode.Text);
+    end
+    );
+  finally
+    FreeAndNil(l_FileWriter);
+  end;
 end;
 
 procedure TfmGUITestRunner.btnSelectFailedClick(Sender: TObject);
@@ -458,9 +538,10 @@ begin
  FSuite := aValue;
  if (FSuite <> nil) then
  begin
+
+  InitTree;
   // Проставляет всем тестам из набора Enabled := False, если находит их в конфиге
   FSuite.LoadConfiguration(ParamStr(0) + c_ConfigFile, False, true);
-  InitTree;
 
   TraverseTree(tvTestTree,
    procedure (const aNode: TTreeViewItem)
