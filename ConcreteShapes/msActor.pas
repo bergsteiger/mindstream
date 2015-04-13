@@ -14,7 +14,6 @@ type
   TmsActor = class(TmsRectangularShape)
   // Мне так кажется, что данный примитив можно разбить на три - TmsPolygonShape, TmsCircle и TmsShapeGroup.
   protected
-    //function GetPolygon: TPolygon; override;
     procedure DoDrawTo(const aCtx: TmsDrawContext); override;
     function GetDrawBounds: TRectF; override;
   end;//TmsActor
