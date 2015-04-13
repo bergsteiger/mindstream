@@ -5,16 +5,18 @@ interface
 uses
   msInterfaces,
   msPolygonShape,
+  msPointedShape,
   FMX.Graphics
   ;
 
 type
-  TmsActor = class (TmsPolygonShape)
+  TmsActor = class(TmsPointedShape{TmsPolygonShape})
   // Мне так кажется, что данный примитив можно разбить на три - TmsPolygonShape, TmsCircle и TmsShapeGroup.
   protected
-    function GetPolygon: TPolygon; override;
+    //function GetPolygon: TPolygon; override;
     procedure DoDrawTo(const aCtx: TmsDrawContext); override;
     function GetDrawBounds: TRectF; override;
+    function ContainsPt(const aPoint: TPointF): Boolean; override;
   end;//TmsActor
 
 implementation
@@ -71,7 +73,12 @@ begin
   );
 end;
 
-function TmsActor.GetPolygon: TPolygon;
+function TmsActor.ContainsPt(const aPoint: TPointF): Boolean;
+begin
+ Result := DrawBounds.Contains(aPoint);
+end;
+
+(*function TmsActor.GetPolygon: TPolygon;
 var
   l_Bounds: TRectF;
 begin
@@ -82,6 +89,6 @@ begin
   Result[2] :=  TPointF.Create(l_Bounds.Right, StartPoint.Y);
   Result[3] :=  TPointF.Create(l_Bounds.Left, l_Bounds.Bottom);
   Result[4] :=  TPointF.Create(l_Bounds.Right, l_Bounds.Bottom);
-end;
+end;*)
 
 end.
