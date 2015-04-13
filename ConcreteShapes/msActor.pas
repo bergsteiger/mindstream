@@ -10,7 +10,7 @@ uses
   ;
 
 type
-  TmsActor = class(TmsPointedShape{TmsPolygonShape})
+  TmsActor = class(TmsPointedShape)
   // Мне так кажется, что данный примитив можно разбить на три - TmsPolygonShape, TmsCircle и TmsShapeGroup.
   protected
     //function GetPolygon: TPolygon; override;
@@ -77,18 +77,5 @@ function TmsActor.ContainsPt(const aPoint: TPointF): Boolean;
 begin
  Result := DrawBounds.Contains(aPoint);
 end;
-
-(*function TmsActor.GetPolygon: TPolygon;
-var
-  l_Bounds: TRectF;
-begin
-  SetLength(Result, 5);
-  l_Bounds  :=  GetDrawBounds;
-  Result[0] :=  TPointF.Create(StartPoint.X, l_Bounds.Top);
-  Result[1] :=  TPointF.Create(l_Bounds.Left, StartPoint.Y);
-  Result[2] :=  TPointF.Create(l_Bounds.Right, StartPoint.Y);
-  Result[3] :=  TPointF.Create(l_Bounds.Left, l_Bounds.Bottom);
-  Result[4] :=  TPointF.Create(l_Bounds.Right, l_Bounds.Bottom);
-end;*)
 
 end.
