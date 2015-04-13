@@ -44,20 +44,20 @@ begin
   aCtx.rCanvas.DrawEllipse(l_CircleRect, aCtx.rLineOpacity);
   aCtx.rCanvas.FillEllipse(l_CircleRect, aCtx.rOpacity);
 
-  l_StartPoint  :=  TPointF.Create(StartPoint.X - 2 * l_DW, StartPoint.Y - 1 * l_DH);
-  l_EndPoint  :=  TPointF.Create(StartPoint.X + 2 * l_DW, l_StartPoint.Y);
+  l_StartPoint := TPointF.Create(StartPoint.X - 2 * l_DW, StartPoint.Y - 1 * l_DH);
+  l_EndPoint := TPointF.Create(StartPoint.X + 2 * l_DW, l_StartPoint.Y);
   aCtx.rCanvas.DrawLine(l_StartPoint, l_EndPoint, aCtx.rLineOpacity);
 
-  l_StartPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y - 2 * l_DH);
-  l_EndPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y + 2 * l_DH);
+  l_StartPoint := TPointF.Create(StartPoint.X, StartPoint.Y - 2 * l_DH);
+  l_EndPoint := TPointF.Create(StartPoint.X, StartPoint.Y + 2 * l_DH);
   aCtx.rCanvas.DrawLine(l_StartPoint, l_EndPoint, aCtx.rLineOpacity);
 
-  l_StartPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y + 2 * l_DH);
-  l_EndPoint  :=  TPointF.Create(StartPoint.X - 2 * l_DW, StartPoint.Y + 4 * l_DH);
+  l_StartPoint := TPointF.Create(StartPoint.X, StartPoint.Y + 2 * l_DH);
+  l_EndPoint := TPointF.Create(StartPoint.X - 2 * l_DW, StartPoint.Y + 4 * l_DH);
   aCtx.rCanvas.DrawLine(l_StartPoint, l_EndPoint, aCtx.rLineOpacity);
 
-  l_StartPoint  :=  TPointF.Create(StartPoint.X, StartPoint.Y + 2 * l_DH);
-  l_EndPoint  :=  TPointF.Create(StartPoint.X + 2 * l_DW, StartPoint.Y + 4 * l_DH);
+  l_StartPoint := TPointF.Create(StartPoint.X, StartPoint.Y + 2 * l_DH);
+  l_EndPoint := TPointF.Create(StartPoint.X + 2 * l_DW, StartPoint.Y + 4 * l_DH);
   aCtx.rCanvas.DrawLine(l_StartPoint, l_EndPoint, aCtx.rLineOpacity);
 end;
 
