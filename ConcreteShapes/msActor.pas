@@ -61,7 +61,7 @@ end;
 
 function TmsActor.GetDrawBounds: TRectF;
 var
-  l_HeightQuater: Extended;
+  l_HeightQuater: Pixel;
 begin
   l_HeightQuater :=  Self.ShapeClass.InitialHeight / 4;
 
