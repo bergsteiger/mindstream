@@ -6,17 +6,17 @@ uses
   msInterfaces,
   msPolygonShape,
   msPointedShape,
+  msRectangularShape,
   FMX.Graphics
   ;
 
 type
-  TmsActor = class(TmsPointedShape)
+  TmsActor = class(TmsRectangularShape)
   // Мне так кажется, что данный примитив можно разбить на три - TmsPolygonShape, TmsCircle и TmsShapeGroup.
   protected
     //function GetPolygon: TPolygon; override;
     procedure DoDrawTo(const aCtx: TmsDrawContext); override;
     function GetDrawBounds: TRectF; override;
-    function ContainsPt(const aPoint: TPointF): Boolean; override;
   end;//TmsActor
 
 implementation
@@ -71,11 +71,6 @@ begin
     StartPoint.X + l_HeightQuater,
     StartPoint.Y + 2 * l_HeightQuater
   );
-end;
-
-function TmsActor.ContainsPt(const aPoint: TPointF): Boolean;
-begin
- Result := DrawBounds.Contains(aPoint);
 end;
 
 end.
