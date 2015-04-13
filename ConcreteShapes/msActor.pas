@@ -31,7 +31,7 @@ var
   l_StartPoint: TPointF;
   l_EndPoint: TPointF;
 begin
-  l_HeightHalfQuater :=  GetDrawBounds.Height / 8;
+  l_HeightHalfQuater := DrawBounds.Height / 8;
 
   l_CircleRect.Create(
     StartPoint.X - l_HeightHalfQuater,
