@@ -13,6 +13,7 @@ uses
 type
   TmsActor = class(TmsRectangularShape)
   // ћне так кажетс€, что данный примитив можно разбить на три - TmsPolygonShape, TmsCircle и TmsShapeGroup.
+  // ѕЋќ’ќ  ј∆≈“—я.
   protected
     procedure DoDrawTo(const aCtx: TmsDrawContext); override;
     function GetDrawBounds: TRectF; override;
