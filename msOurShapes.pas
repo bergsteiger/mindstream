@@ -308,8 +308,8 @@ begin
    ;
 
   TmsActor.TMC
-   .SetInitialHeight(60 / 2)
-   .SetInitialWidth((60 / 2) / 2)
+   .SetInitialHeight(60)
+   .SetInitialWidth(60 / 2)
    ;
 
   TmsActor.Specify('User')

@@ -16,7 +16,6 @@ type
   // окнун йюферяъ.
   protected
     procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-(*    function GetDrawBounds: TRectF; override;*)
   end;//TmsActor
 
 implementation
@@ -60,19 +59,5 @@ begin
   l_EndPoint := TPointF.Create(StartPoint.X + 2 * l_DW, StartPoint.Y + 4 * l_DH);
   aCtx.rCanvas.DrawLine(l_StartPoint, l_EndPoint, aCtx.rLineOpacity);
 end;
-
-(*function TmsActor.GetDrawBounds: TRectF;
-var
-  l_HeightQuater: Pixel;
-begin
-  l_HeightQuater :=  Self.ShapeClass.InitialHeight / 4;
-
-  Result.Create(
-    StartPoint.X - l_HeightQuater,
-    StartPoint.Y - 2 * l_HeightQuater,
-    StartPoint.X + l_HeightQuater,
-    StartPoint.Y + 2 * l_HeightQuater
-  );
-end;*)
 
 end.
