@@ -150,7 +150,8 @@ uses
   DUnit.Scripting.AutoTest in 'Tests\DUnitScripting\DUnit.Scripting.AutoTest.pas',
   DUnit.Scripting.AutoTests in 'Tests\DUnitScripting\DUnit.Scripting.AutoTests.pas',
   msGarbageCollector in 'Patches\msGarbageCollector.pas',
-  msActor in 'ConcreteShapes\msActor.pas';
+  msActor in 'ConcreteShapes\msActor.pas',
+  FMX.DUnit.Utils in 'FMX.DUnit\FMX.DUnit.Utils.pas';
 
 {$R *.res}
 
