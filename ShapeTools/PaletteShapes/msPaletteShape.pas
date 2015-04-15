@@ -6,7 +6,6 @@ uses
  msInterfaces,
  msShape,
  System.Types,
- msRectangle,
  msPointlessShape
  ;
 

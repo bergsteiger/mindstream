@@ -41,7 +41,8 @@ uses
   msSVGShape,
   msScrollShape,
   msScrollShapePrim,
-  msActor
+  msActor,
+  msRectangle
   ;
 
 // Важно !!!
@@ -64,7 +65,7 @@ begin
    .SetInitialHeight(100)
    .SetInitialWidth(100)
    ;
-  TmsShape.NamedMC('Rectangle').Specify('RoundedRectangle')
+  TmsRectangle.MC.Specify('RoundedRectangle')
    .SetFillColor(TAlphaColorRec.Blue)
    .SetInitialHeight(90)
    .SetInitialWidth(90)
@@ -94,11 +95,11 @@ begin
    .SetFillColor(TAlphaColorRec.Coral)
    ;
 
-  TmsShape.NamedMC('Rectangle').Specify('RedRectangle')
+  TmsRectangle.MC.Specify('RedRectangle')
    .SetFillColor(TAlphaColorRec.Red)
    .SetIsForToolbar(false)
    ;
-  TmsShape.NamedMC('Rectangle').Specify('GreenRectangle')
+  TmsRectangle.MC.Specify('GreenRectangle')
    .SetFillColor(TAlphaColorRec.Green)
    .SetIsForToolbar(false)
    ;
@@ -146,7 +147,7 @@ begin
   TmsTriangle.Specify('BlackTriangle')
    .SetFillColor(TAlphaColorRec.Black)
    ;
-  TmsShape.NamedMC('Rectangle').Specify('BlackRectangle')
+  TmsRectangle.MC.Specify('BlackRectangle')
    .SetFillColor(TAlphaColorRec.Black)
    .SetInitialHeight(100)
    .SetInitialWidth(15)
@@ -214,7 +215,7 @@ begin
    .SetStrokeDash(TStrokeDash.Dash)
    ;
 
-  TmsShape.NamedMC('Rectangle').Specify('Class')
+  TmsRectangle.MC.Specify('Class')
    .SetStereotypePlace(TmsStereotypePlace.OneThirty)
    .SetAdditionalLinesH([1 /3, 2 / 3])
    ;
@@ -246,7 +247,7 @@ begin
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
-  TmsShape.NamedMC('Rectangle').Specify('Trivial')
+  TmsRectangle.MC.Specify('Trivial')
    .SetInitialHeightScale( 1 / 3 * 2 )
    .SetStereotypePlace(TmsStereotypePlace.Center)
    ;
@@ -303,7 +304,7 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsShape.NamedMC('Rectangle').AsTuner
+  TmsRectangle.MC.AsTuner
    .SetIsForToolbar(false)
    ;
 

@@ -11,7 +11,6 @@ uses
   msRegisteredShapes in 'msRegisteredShapes.pas',
   msUtilityShapes in 'msUtilityShapes.pas',
   msLine in 'ConcreteShapes\msLine.pas',
-  msRectangle in 'ConcreteShapes\msRectangle.pas',
   msCircle in 'ConcreteShapes\msCircle.pas',
   msTriangle in 'ConcreteShapes\msTriangle.pas',
   msDiagramms in 'msDiagramms.pas',
@@ -151,7 +150,9 @@ uses
   msGarbageCollector in 'Patches\msGarbageCollector.pas',
   msActor in 'ConcreteShapes\msActor.pas',
   msShapeView in 'Views\msShapeView.pas',
-  msTextShapeView in 'Views\msTextShapeView.pas';
+  msTextShapeView in 'Views\msTextShapeView.pas',
+  msRectangleView in 'Views\msRectangleView.pas',
+  msRectangle in 'ConcreteShapes\msRectangle.pas';
 
 {$R *.res}
 

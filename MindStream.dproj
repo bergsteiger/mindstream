@@ -227,7 +227,6 @@
         <DCCReference Include="msRegisteredShapes.pas"/>
         <DCCReference Include="msUtilityShapes.pas"/>
         <DCCReference Include="ConcreteShapes\msLine.pas"/>
-        <DCCReference Include="ConcreteShapes\msRectangle.pas"/>
         <DCCReference Include="ConcreteShapes\msCircle.pas"/>
         <DCCReference Include="ConcreteShapes\msTriangle.pas"/>
         <DCCReference Include="msDiagramms.pas"/>
@@ -370,6 +369,8 @@
         <DCCReference Include="ConcreteShapes\msActor.pas"/>
         <DCCReference Include="Views\msShapeView.pas"/>
         <DCCReference Include="Views\msTextShapeView.pas"/>
+        <DCCReference Include="Views\msRectangleView.pas"/>
+        <DCCReference Include="ConcreteShapes\msRectangle.pas"/>
         <None Include="ModelSupport_MindStream\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msDashDotLine\default.txvpck"/>
         <None Include="ModelSupport_MindStream\msUseCaseLikeEllipse\default.txvpck"/>
