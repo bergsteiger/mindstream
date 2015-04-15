@@ -165,7 +165,9 @@ begin
   TmsTextShape.TMC
    .SetFillColor(TAlphaColorRec.Black)
    .SetInitialHeight(14)
-   .SetInitialWidth(21);
+   .SetInitialWidth(21)
+   .SetText('ABC')
+   ;
   // - вообще говоря это НАДО вычислять из параметров шрифта. НО! ПОТОМ!
 
   TmsScrollShapePrim.NRTMC

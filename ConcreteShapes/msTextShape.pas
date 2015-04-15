@@ -14,7 +14,6 @@ uses
 type
  TmsTextShape = class(TmsRectangularShape)
  protected
-  function Text: string; virtual;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  end;//TmsTextShape
 
@@ -28,7 +27,7 @@ var
 begin
  l_msPointContext := DrawBounds;
  aCtx.rCanvas.FillText(l_msPointContext,
-                       Text,
+                       Self.ShapeClass.Text,
                        false,
                        1,
                        [],
@@ -43,11 +42,6 @@ begin
                    1,
                    TCornerType.Round);
  end;//aCtx.rMoving
-end;
-
-function TmsTextShape.Text: string;
-begin
- Result := 'ABC';
 end;
 
 end.
