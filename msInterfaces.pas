@@ -176,6 +176,9 @@ type
    function IsNull: Boolean;
  end;//TmsShapeUID
 
+ ImsShapeView = interface
+ end;//ImsShapeView
+
  ImsShape = interface(ImsDiagrammsList)
  ['{70D5F6A0-1025-418B-959B-0CF524D8E394}']
   procedure DrawTo(const aCtx: TmsDrawContext);
@@ -277,6 +280,7 @@ type
   function SetStereotypePlace(aValue: TmsStereotypePlace): ImsShapeClassTuner;
   function SetSVGCode(const aValue: String): ImsShapeClassTuner;
   function SetAdditionalLinesH(const aValue: TmsAdditionalLineCoeff): ImsShapeClassTuner;
+  function SetShapeView(const aValue: ImsShapeView): ImsShapeClassTuner;
  end;//ImsShapeClassTuner
 
  TmsShapeClassName = record
@@ -314,6 +318,7 @@ type
   function Specify(const aName: String): ImsShapeClassTuner;
   function CreateShape(const aStartPoint: TPointF): ImsShape; overload;
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; overload;
+  function ShapeView: ImsShapeView;
  end;//ImsShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)

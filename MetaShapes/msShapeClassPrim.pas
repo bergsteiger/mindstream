@@ -21,6 +21,7 @@ type
   f_StereotypePlace: TmsStereotypePlace;
   f_SVGCode : String;
   f_AdditionalLinesH : TmsAdditionalLineCoeff;
+  f_ShapeView : ImsShapeView;
  protected
   function ParentMC: ImsShapeClass; virtual;
   function AsMC: ImsShapeClass; virtual;
@@ -34,6 +35,8 @@ type
   function SetInitialHeight(aValue: Pixel): ImsShapeClassTuner;
   function SetInitialHeightScale(aValue: Single): ImsShapeClassTuner;
   function SetCornerRadius(aValue: Single): ImsShapeClassTuner;
+  function SetShapeView(const aValue: ImsShapeView): ImsShapeClassTuner;
+  function ShapeView: ImsShapeView;
   function InitialHeight: Pixel;
   function InitialWidth: Pixel;
   function CornerRadius: Pixel;
@@ -84,6 +87,7 @@ begin
   f_StereotypePlace := l_PMC.StereotypePlace;
   f_SVGCode := l_PMC.SVGCode;
   f_AdditionalLinesH := l_PMC.AdditionalLinesH;
+  f_ShapeView := l_PMC.ShapeView;
  end;//l_PMC <> nil
 end;
 
@@ -194,6 +198,17 @@ function TmsShapeClassPrim.SetAdditionalLinesH(const aValue: TmsAdditionalLineCo
 begin
  Result := Self;
  f_AdditionalLinesH := aValue;
+end;
+
+function TmsShapeClassPrim.SetShapeView(const aValue: ImsShapeView): ImsShapeClassTuner;
+begin
+ Result := Self;
+ f_ShapeView := aValue;
+end;
+
+function TmsShapeClassPrim.ShapeView: ImsShapeView;
+begin
+ Result := f_ShapeView;
 end;
 
 function TmsShapeClassPrim.StereotypePlace: TmsStereotypePlace;
