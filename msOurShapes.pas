@@ -24,6 +24,7 @@ uses
   msRemoverIcon,
   msMoveIcon,
   msTextShape,
+  msTextShapeView,
   msScrollShapeUp,
   msScrollShapeDown,
   msScrollShapeRight,
@@ -167,6 +168,7 @@ begin
    .SetInitialHeight(14)
    .SetInitialWidth(21)
    .SetText('ABC')
+   .SetShapeView(TmsTextShapeView.Create)
    ;
   // - вообще говоря это НАДО вычислять из параметров шрифта. НО! ПОТОМ!
 
