@@ -9,6 +9,7 @@ uses
   msShape,
   msLine,
   msRectangle,
+  msRectangleView,
   msCircle,
   msTriangle,
   msLineWithArrow,
@@ -57,6 +58,7 @@ begin
    .SetInitialHeight(90)
    .SetInitialWidth(100)
    .SetCornerRadius(0.0)
+   .SetShapeView(TmsRectangleView.Create)
    ;
   TmsCircle.TMC
    .SetFillColor(TAlphaColorRec.Red)
