@@ -8,7 +8,6 @@ uses
   msInterfaces,
   msShape,
   msLine,
-  msRectangle,
   msRectangleView,
   msCircle,
   msTriangle,
@@ -53,7 +52,7 @@ begin
   TmsLine.TMC
    .SetIsForToolbar(false)
    ;
-  TmsRectangle.TMC
+  TmsRectangularShape.Specify('Rectangle')
    .SetFillColor(TAlphaColorRec.White)
    .SetInitialHeight(90)
    .SetInitialWidth(100)
@@ -65,7 +64,7 @@ begin
    .SetInitialHeight(100)
    .SetInitialWidth(100)
    ;
-  TmsRectangle.Specify('RoundedRectangle')
+  TmsShape.NamedMC('Rectangle').Specify('RoundedRectangle')
    .SetFillColor(TAlphaColorRec.Blue)
    .SetInitialHeight(90)
    .SetInitialWidth(90)
@@ -95,11 +94,11 @@ begin
    .SetFillColor(TAlphaColorRec.Coral)
    ;
 
-  TmsRectangle.Specify('RedRectangle')
+  TmsShape.NamedMC('Rectangle').Specify('RedRectangle')
    .SetFillColor(TAlphaColorRec.Red)
    .SetIsForToolbar(false)
    ;
-  TmsRectangle.Specify('GreenRectangle')
+  TmsShape.NamedMC('Rectangle').Specify('GreenRectangle')
    .SetFillColor(TAlphaColorRec.Green)
    .SetIsForToolbar(false)
    ;
@@ -147,7 +146,7 @@ begin
   TmsTriangle.Specify('BlackTriangle')
    .SetFillColor(TAlphaColorRec.Black)
    ;
-  TmsRectangle.Specify('BlackRectangle')
+  TmsShape.NamedMC('Rectangle').Specify('BlackRectangle')
    .SetFillColor(TAlphaColorRec.Black)
    .SetInitialHeight(100)
    .SetInitialWidth(15)
@@ -215,7 +214,7 @@ begin
    .SetStrokeDash(TStrokeDash.Dash)
    ;
 
-  TmsRectangle.Specify('Class')
+  TmsShape.NamedMC('Rectangle').Specify('Class')
    .SetStereotypePlace(TmsStereotypePlace.OneThirty)
    .SetAdditionalLinesH([1 /3, 2 / 3])
    ;
@@ -247,7 +246,7 @@ begin
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
-  TmsRectangle.Specify('Trivial')
+  TmsShape.NamedMC('Rectangle').Specify('Trivial')
    .SetInitialHeightScale( 1 / 3 * 2 )
    .SetStereotypePlace(TmsStereotypePlace.Center)
    ;
@@ -304,7 +303,7 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsRectangle.TMC
+  TmsShape.NamedMC('Rectangle').AsTuner
    .SetIsForToolbar(false)
    ;
 
