@@ -7,7 +7,8 @@ uses
   u_SecondTest in 'u_SecondTest.pas',
   FMX.DUnit.Interfaces in 'FMX.DUnit.Interfaces.pas',
   FMX.DUnit.msAppLog in 'FMX.DUnit.msAppLog.pas',
-  FMX.DUnit.msLog in 'FMX.DUnit.msLog.pas';
+  FMX.DUnit.msLog in 'FMX.DUnit.msLog.pas',
+  FMX.DUnit.Utils in 'FMX.DUnit.Utils.pas';
 
 {$R *.res}
 
