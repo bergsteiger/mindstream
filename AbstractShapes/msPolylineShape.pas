@@ -12,7 +12,7 @@ type
  TmsPolylineShape = class abstract(TmsPolygonShape)
  protected
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
- end;
+ end;//TmsPolylineShape
 
 implementation
 
@@ -20,7 +20,7 @@ uses
  FMX.Types,
  SysUtils;
 
-{ TmsPolygonShape }
+// TmsPolylineShape
 
 procedure TmsPolylineShape.DoDrawTo(const aCtx: TmsDrawContext);
 var

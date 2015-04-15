@@ -23,7 +23,7 @@ uses
   msMoverIcon,
   msRemoverIcon,
   msMoveIcon,
-  msTextShape,
+  msRectangularShape,
   msTextShapeView,
   msScrollShapeUp,
   msScrollShapeDown,
@@ -163,7 +163,7 @@ begin
    .SetFillColor(TAlphaColorRec.Black)
    .SetIsForToolbar(false)
    ;
-  TmsTextShape.TMC
+  TmsRectangularShape.Specify('TextShape')
    .SetFillColor(TAlphaColorRec.Black)
    .SetInitialHeight(14)
    .SetInitialWidth(21)
