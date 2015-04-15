@@ -22,6 +22,7 @@ type
   f_SVGCode : String;
   f_AdditionalLinesH : TmsAdditionalLineCoeff;
   f_ShapeView : ImsShapeView;
+  f_Text : String;
  protected
   function ParentMC: ImsShapeClass; virtual;
   function AsMC: ImsShapeClass; virtual;
@@ -37,6 +38,8 @@ type
   function SetCornerRadius(aValue: Single): ImsShapeClassTuner;
   function SetShapeView(const aValue: ImsShapeView): ImsShapeClassTuner;
   function ShapeView: ImsShapeView;
+  function SetText(const aValue: String): ImsShapeClassTuner;
+  function Text: String;
   function InitialHeight: Pixel;
   function InitialWidth: Pixel;
   function CornerRadius: Pixel;
@@ -88,6 +91,7 @@ begin
   f_SVGCode := l_PMC.SVGCode;
   f_AdditionalLinesH := l_PMC.AdditionalLinesH;
   f_ShapeView := l_PMC.ShapeView;
+  f_Text := l_PMC.Text;
  end;//l_PMC <> nil
 end;
 
@@ -209,6 +213,17 @@ end;
 function TmsShapeClassPrim.ShapeView: ImsShapeView;
 begin
  Result := f_ShapeView;
+end;
+
+function TmsShapeClassPrim.SetText(const aValue: String): ImsShapeClassTuner;
+begin
+ Result := Self;
+ f_Text := aValue;
+end;
+
+function TmsShapeClassPrim.Text: String;
+begin
+ Result := f_Text;
 end;
 
 function TmsShapeClassPrim.StereotypePlace: TmsStereotypePlace;

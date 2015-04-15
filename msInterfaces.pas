@@ -282,6 +282,7 @@ type
   function SetSVGCode(const aValue: String): ImsShapeClassTuner;
   function SetAdditionalLinesH(const aValue: TmsAdditionalLineCoeff): ImsShapeClassTuner;
   function SetShapeView(const aValue: ImsShapeView): ImsShapeClassTuner;
+  function SetText(const aValue: String): ImsShapeClassTuner;
  end;//ImsShapeClassTuner
 
  TmsShapeClassName = record
@@ -320,6 +321,7 @@ type
   function CreateShape(const aStartPoint: TPointF): ImsShape; overload;
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; overload;
   function ShapeView: ImsShapeView;
+  function Text: String;
  end;//ImsShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)
