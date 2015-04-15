@@ -177,6 +177,7 @@ type
  end;//TmsShapeUID
 
  ImsShapeView = interface
+  procedure DrawShape(const aCtx: TmsDrawContext; const aShape: ImsShape);
  end;//ImsShapeView
 
  ImsShape = interface(ImsDiagrammsList)

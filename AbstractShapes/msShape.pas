@@ -35,7 +35,7 @@ type
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); virtual;
   procedure SetStartPoint(const aStartPoint: TPointF); virtual;
  protected
-  procedure DoDrawTo(const aCtx: TmsDrawContext); virtual; abstract;
+  procedure DoDrawTo(const aCtx: TmsDrawContext); virtual;
   function IsNeedsSecondClick : Boolean; virtual;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; virtual;
   procedure MoveBy(const aCtx: TmsMoveContext); virtual;
@@ -211,6 +211,15 @@ function TmsShape.MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
 begin
  Result := false;
  // - специально ничего не делаем
+end;
+
+procedure TmsShape.DoDrawTo(const aCtx: TmsDrawContext);
+var
+ l_V : ImsShapeView;
+begin
+ l_V := ShapeClass.ShapeView;
+ if (l_V <> nil) then
+  l_V.DrawShape(aCtx, Self);
 end;
 
 function TmsShape.IsNeedsSecondClick : Boolean;
