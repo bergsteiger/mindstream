@@ -10,7 +10,7 @@ uses
 type
  TmsShapeView = class(TmsInterfacedRefcounted, ImsShapeView)
   protected
-   procedure DrawShape(const aCtx: TmsDrawContext; const aShape: ImsShape);
+   procedure DrawShape(const aCtx: TmsDrawContext; const aShape: ImsShape); virtual;
   public
    class function Create: ImsShapeView;
  end;//TmsShapeView

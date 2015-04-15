@@ -1,33 +1,33 @@
-unit msTextShape;
+unit msTextShapeView;
 
 interface
 
 uses
- System.Types,
- FMX.Graphics,
- FMX.Types,
- System.UITypes,
  msInterfaces,
- msRectangularShape
+ msShapeView
  ;
 
 type
- TmsTextShape = class(TmsRectangularShape)
- protected
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
- end;//TmsTextShape
+ TmsTextShapeView = class(TmsShapeView)
+  protected
+   procedure DrawShape(const aCtx: TmsDrawContext; const aShape: ImsShape); override;
+ end;//TmsTextShapeView
 
 implementation
 
-// TmsTextShape
+uses
+ FMX.Types
+ ;
 
-procedure TmsTextShape.DoDrawTo(const aCtx: TmsDrawContext);
+// TmsTextShapeView
+
+procedure TmsTextShapeView.DrawShape(const aCtx: TmsDrawContext; const aShape: ImsShape);
 var
  l_msPointContext: TRectF;
 begin
- l_msPointContext := DrawBounds;
+ l_msPointContext := aShape.DrawBounds;
  aCtx.rCanvas.FillText(l_msPointContext,
-                       Self.ShapeClass.Text,
+                       aShape.ShapeClass.Text,
                        false,
                        1,
                        [],
@@ -45,4 +45,3 @@ begin
 end;
 
 end.
-

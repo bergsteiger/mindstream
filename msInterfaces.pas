@@ -12,11 +12,14 @@ uses
  FMX.Objects,
  Data.DBXJSONReflect,
  msLineF,
- System.Math.Vectors
+ System.Math.Vectors,
+ FMX.Types
  ;
 
 type
  Pixel = msLineF.Pixel;
+
+ TTextAlign = FMX.Types.TTextAlign;
 
  TPolygon = System.Math.Vectors.TPolygon;
 
