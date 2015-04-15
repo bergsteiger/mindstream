@@ -10,7 +10,7 @@ uses
 
   msDiagramms,
   msDiagrammsController,
-  msInterfaces
+  msInterfaces, FMX.Controls.Presentation
   ;
 
 type
