@@ -15,9 +15,6 @@ uses
 type
  TmsCircle = class(TmsPointedShape)
  protected
-  function InitialRadiusX: Integer; virtual;
-  function InitialRadiusY: Integer; virtual;
-
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
   function ContainsPt(const aPoint: TPointF): Boolean; override;
@@ -26,16 +23,6 @@ type
 implementation
 
 // TmsCircle
-
-function TmsCircle.InitialRadiusX: Integer;
-begin
- Result := Round(Self.ShapeClass.InitialWidth / 2);
-end;
-
-function TmsCircle.InitialRadiusY: Integer;
-begin
- Result := Round(Self.ShapeClass.InitialHeight / 2);
-end;
 
 function TmsCircle.ContainsPt(const aPoint: TPointF): Boolean;
 var
