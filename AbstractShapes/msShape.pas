@@ -290,8 +290,8 @@ end;
 
 function TmsShape.GetDrawBounds: TRectF;
 begin
- Result := TRectF.Create(StartPoint, StartPoint);
- Assert(false);
+ Result := TRectF.Create(TPointF.Create(StartPoint.X - ShapeClass.InitialWidth / 2, StartPoint.Y - ShapeClass.InitialHeight / 2),
+                         TPointF.Create(StartPoint.X + ShapeClass.InitialWidth / 2, StartPoint.Y + ShapeClass.InitialHeight / 2));
 end;
 
 function TmsShape.DrawBounds: TRectF;

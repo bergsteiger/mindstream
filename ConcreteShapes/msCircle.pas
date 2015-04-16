@@ -18,7 +18,6 @@ type
   function InitialRadiusX: Integer; virtual;
   function InitialRadiusY: Integer; virtual;
 
-  function GetDrawBounds: TRectF; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
   function ContainsPt(const aPoint: TPointF): Boolean; override;
@@ -56,12 +55,6 @@ begin
 
  Result := Sqr((aPoint.X - l_x0)/l_a)+
            Sqr((aPoint.Y - l_y0)/l_b) <= 1.0;
-end;
-
-function TmsCircle.GetDrawBounds: TRectF;
-begin
- Result := TRectF.Create(TPointF.Create(StartPoint.X - InitialRadiusX, StartPoint.Y - InitialRadiusY),
-                         TPointF.Create(StartPoint.X + InitialRadiusX, StartPoint.Y + InitialRadiusY));
 end;
 
 procedure TmsCircle.DoDrawTo(const aCtx: TmsDrawContext);
