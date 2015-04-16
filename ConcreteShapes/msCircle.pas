@@ -14,8 +14,6 @@ uses
 
 type
  TmsCircle = class(TmsPointedShape)
- protected
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
   function ContainsPt(const aPoint: TPointF): Boolean; override;
  end;//TmsCircle
@@ -42,15 +40,6 @@ begin
 
  Result := Sqr((aPoint.X - l_x0)/l_a)+
            Sqr((aPoint.Y - l_y0)/l_b) <= 1.0;
-end;
-
-procedure TmsCircle.DoDrawTo(const aCtx: TmsDrawContext);
-var
- l_Rect : TRectF;
-begin
- l_Rect := DrawBounds;
- aCtx.rCanvas.DrawEllipse(l_Rect, aCtx.rLineOpacity);
- aCtx.rCanvas.FillEllipse(l_Rect, aCtx.rOpacity);
 end;
 
 end.
