@@ -13,6 +13,7 @@ type
  private
   f_Rad : Single;
  protected
+  function pm_GetShapeClass: ImsShapeClass; override;
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aStartPoint: TPointF; aRad: Single); reintroduce;
   function GetDrawBounds: TRectF; override;
  public
@@ -38,6 +39,11 @@ function TmsCircleWithRadius.GetDrawBounds: TRectF;
 begin
  Result := TRectF.Create(TPointF.Create(StartPoint.X - f_Rad, StartPoint.Y - f_Rad),
                          TPointF.Create(StartPoint.X + f_Rad, StartPoint.Y + f_Rad));
+end;
+
+function TmsCircleWithRadius.pm_GetShapeClass: ImsShapeClass;
+begin
+ Result := TmsCircle.MC;
 end;
 
 class function TmsCircleWithRadius.Create(const aStartPoint: TPointF; aRad: Single): ImsShape;
