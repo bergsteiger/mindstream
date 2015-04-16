@@ -322,6 +322,7 @@
         <DCCReference Include="fmx.dunit\FMX.DUnit.msAppLog.pas"/>
         <DCCReference Include="msMovingPointer.pas"/>
         <DCCReference Include="fmx.dunit\FMX.DUnit.msLog.pas"/>
+        <DCCReference Include="fmx.dunit\FMX.DUnit.Utils.pas"/>
         <DCCReference Include="ConcreteShapes\ForUML\msConnector.pas"/>
         <DCCReference Include="Core\msLineF.pas"/>
         <DCCReference Include="ConcreteShapes\ForUML\msAssociation.pas"/>
@@ -1368,13 +1369,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
                 <Platform value="Android">False</Platform>

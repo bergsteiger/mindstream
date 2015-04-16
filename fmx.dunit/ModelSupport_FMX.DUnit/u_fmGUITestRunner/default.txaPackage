@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <node uin="ilnosyss82t8qiqks_n">
+    <property name="$metaclass" value="Pattern" />
+    <property name="$name" value="Iterator" />
+    <property name="PatternUPID" value="{2004-11-30-7-31-41-244-86150}" />
+    <link uin="j6woqrpd92t1vcf7o_l">
+      <property name="$metaclass" value="DesignPatternLink" />
+      <property name="$name" value="TConcreteAggregate" />
+      <property name="@supplierRole" value="_ConcreteAggregate" />
+      <participant referencedUin="design:node:::ilnosyss82t8qiqks_n" role="Client" />
+      <participant referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.TConcreteAggregate" role="Supplier" />
+    </link>
+    <link uin="8xdgfmmz92te3rxyj_l">
+      <property name="$metaclass" value="DesignPatternLink" />
+      <property name="$name" value="TConcreteIterator" />
+      <property name="@supplierRole" value="_ConcreteIterator" />
+      <participant referencedUin="design:node:::ilnosyss82t8qiqks_n" role="Client" />
+      <participant referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.TConcreteIterator" role="Supplier" />
+    </link>
+    <link uin="x6e2uvx602tye9d0r_l">
+      <property name="$metaclass" value="DesignPatternLink" />
+      <property name="$name" value="IAggregate" />
+      <property name="@supplierRole" value="_Aggregate" />
+      <participant referencedUin="design:node:::ilnosyss82t8qiqks_n" role="Client" />
+      <participant referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.IAggregate" role="Supplier" />
+    </link>
+    <link uin="jvxl2vx602t1479lm_l">
+      <property name="$metaclass" value="DesignPatternLink" />
+      <property name="$name" value="IIterator" />
+      <property name="@supplierRole" value="_Iterator" />
+      <participant referencedUin="design:node:::ilnosyss82t8qiqks_n" role="Client" />
+      <participant referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.IIterator" role="Supplier" />
+    </link>
+  </node>
+</nodeSet>

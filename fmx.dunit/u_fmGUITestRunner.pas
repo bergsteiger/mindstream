@@ -3,16 +3,30 @@
 interface
 
 uses
- TestFramework,
- System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
- FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
- FMX.Layouts, FMX.TreeView, FMX.ListView.Types, FMX.ListView, System.Generics.Collections,
- FMX.DUnit.Interfaces, System.Actions, FMX.ActnList, FMX.Controls.Presentation,
-  FMX.Edit
+ TestFramework
+ , System.SysUtils
+ , System.Types
+ , System.UITypes
+ , System.Classes
+ , System.Variants
+ , System.Generics.Collections
+ , System.Actions
+ , FMX.Types
+ , FMX.Graphics
+ , FMX.Controls
+ , FMX.Forms
+ , FMX.Dialogs
+ , FMX.StdCtrls
+ , FMX.Layouts
+ , FMX.TreeView
+ , FMX.ListView.Types
+ , FMX.ListView
+ , FMX.ActnList
+ , FMX.Controls.Presentation
+ , FMX.Edit
+ , FMX.DUnit.Interfaces
+ , FMX.DUnit.Utils
  ;
-
-type
- TDoSomethingWithNode = reference to procedure (const aItem: TTreeViewItem);
 
 type
  TfmGUITestRunner = class(TForm, ITestListener, ImsLog)
@@ -43,10 +57,18 @@ type
   actDelEtalons: TAction;
   edtSearch: TEdit;
   btnCheckAll: TSpeedButton;
-  btnFirst: TSpeedButton;
-  btnSearchNext: TSpeedButton;
-  actSearchFirst: TAction;
-  actSearchNext: TAction;
+  btnFind: TSpeedButton;
+  actFind: TAction;
+  btnFindAndCheck: TSpeedButton;
+  actFindAndCheck: TAction;
+  btnNextTest: TSpeedButton;
+  btnPrevTest: TSpeedButton;
+  actNextTest: TAction;
+  actPrevTest: TAction;
+  btnSave: TSpeedButton;
+  actSave: TAction;
+  actLoad: TAction;
+    btnLoad: TSpeedButton;
   procedure FormCreate(Sender: TObject);
   procedure tvTestTreeChangeCheck(Sender: TObject);
   procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -57,14 +79,18 @@ type
   procedure actUncheckAllExecute(Sender: TObject);
   procedure actSelectFailedExecute(Sender: TObject);
   procedure actDelEtalonsExecute(Sender: TObject);
-  procedure actSearchFirstExecute(Sender: TObject);
-  procedure actSearchNextExecute(Sender: TObject);
+  procedure actFindExecute(Sender: TObject);
+  procedure actFindAndCheckExecute(Sender: TObject);
+  procedure actNextTestExecute(Sender: TObject);
+  procedure actPrevTestExecute(Sender: TObject);
+    procedure actSaveExecute(Sender: TObject);
+    procedure actLoadExecute(Sender: TObject);
  protected
-  FSuite: ITest;
-  FTests: TInterfaceList;
-  FTestResult: TTestResult;
-  FSelectedTests: TInterfaceList;
-  FTotalTime: Int64;
+  f_Suite: ITest;
+  f_Tests: TInterfaceList;
+  f_TestResult: TTestResult;
+  f_SelectedTests: TInterfaceList;
+  f_TotalTime: Int64;
   f_Runned : Integer;
   f_GlobalIndex : integer;
 
@@ -88,15 +114,15 @@ type
 
   procedure ClearResult;
 
-  procedure TraverseTree(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
+
   procedure SetFailure(aFailure: TTestFailure; anError: Boolean);
   procedure UnCheckAllTest;
   procedure TraverseUp(const aNode: TTreeViewItem; aLambda: TDoSomethingWithNode);
  public
   property Suite: ITest
-   read FSuite
+   read f_Suite
    write SetSuite;
-  property TestResult: TTestResult read FTestResult write FTestResult;
+  property TestResult: TTestResult read f_TestResult write f_TestResult;
   destructor Destroy; override;
 
   // IListener
@@ -185,9 +211,12 @@ begin
 end;
 
 procedure TfmGUITestRunner.actCheckAllExecute(Sender: TObject);
+var
+ l_Done: Boolean;
 begin
+ l_Done := False;
  TraverseTree(tvTestTree,
-  procedure (const aNode: TTreeViewItem)
+  procedure (const aNode: TTreeViewItem; var l_Done: Boolean)
   begin
    assert(aNode <> nil);
    aNode.IsChecked := True;
@@ -196,9 +225,12 @@ begin
 end;
 
 procedure TfmGUITestRunner.actDelEtalonsExecute(Sender: TObject);
+var
+ l_Done: Boolean;
 begin
+ l_Done := False;
  TraverseTree(tvTestTree,
-  procedure (const aNode: TTreeViewItem)
+  procedure (const aNode: TTreeViewItem; var l_Done: Boolean)
   var
    l_Test : ImsEtalonsHolder;
   begin
@@ -220,14 +252,14 @@ end;
 
 procedure TfmGUITestRunner.actRunDiffExecute(Sender: TObject);
 var
- l_Prev : Boolean;
+ l_Prev: Boolean;
 begin
  //ClearResult;
  l_Prev := TmsDUnitSettings.Instance.IsUseDiffer;
  TmsDUnitSettings.Instance.IsUseDiffer := true;
  try
   TraverseTree(tvTestTree,
-   procedure (const aNode: TTreeViewItem)
+   procedure (const aNode: TTreeViewItem; var l_Done: Boolean)
    var
     l_Test : ITest;
     l_EtalonsHolder : ImsEtalonsHolder;
@@ -251,69 +283,265 @@ begin
  end;//try..finally
 end;
 
-procedure TfmGUITestRunner.actSearchFirstExecute(Sender: TObject);
+procedure TfmGUITestRunner.actFindAndCheckExecute(Sender: TObject);
 var
- l_Item: TTreeViewItem;
- l_I: Integer;
- l_TestName, l_SearchText : string;
+ l_SearchText : string;
 begin
- l_SearchText := edtSearch.Text;
+ l_SearchText := LowerCase(edtSearch.Text);
  if l_SearchText = '' then Exit;
 
- for l_I := 0 to tvTestTree.GlobalCount - 1 do
- begin
-  l_Item := tvTestTree.ItemByGlobalIndex(l_I);
-  l_TestName := l_Item.Text;
-
-  l_TestName := LowerCase(l_TestName);
-  l_SearchText := LowerCase(l_SearchText);
-
-  if pos(l_SearchText, l_TestName)>0 then
+ TraverseTree(tvTestTree,
+  procedure (const aNode: TTreeViewItem; var l_Done: Boolean)
+  var
+   l_TestName : string;
   begin
-   l_Item.IsSelected := True;
-   f_GlobalIndex := l_I;
-   Exit;
-  end;
- end;
+   assert(aNode <> nil);
+
+   l_TestName := LowerCase(aNode.Text);
+
+   if pos(l_SearchText, l_TestName) > 0 then
+    aNode.IsChecked := True;
+  end
+ );//TraverseTree
 end;
 
-procedure TfmGUITestRunner.actSearchNextExecute(Sender: TObject);
+procedure TfmGUITestRunner.actFindExecute(Sender: TObject);
 var
  l_Item: TTreeViewItem;
- l_I : Integer;
- l_TestName, l_SearchText : string;
+ l_SearchText : string;
+ l_IsCurrent : Boolean;
 begin
- l_SearchText := edtSearch.Text;
+ l_IsCurrent := False;
+
+ l_SearchText := LowerCase(edtSearch.Text);
  if l_SearchText = '' then Exit;
 
- l_Item := tvTestTree.Selected;
- for l_I := f_GlobalIndex + 1 to tvTestTree.GlobalCount - 1 do
+ if not assigned(tvTestTree.Selected) then
  begin
-  l_Item := tvTestTree.ItemByGlobalIndex(l_I);
-  l_TestName := l_Item.Text;
+  TraverseTree(tvTestTree,
+   procedure (const aNode: TTreeViewItem; var l_Done: Boolean)
+   var
+    l_TestName : string;
+   begin
+    assert(aNode <> nil);
 
-  l_TestName := LowerCase(l_TestName);
-  l_SearchText := LowerCase(l_SearchText);
+    l_TestName := LowerCase(aNode.Text);
 
-  if pos(l_SearchText, l_TestName)>0 then
-  begin
-   l_Item.IsSelected := True;
-   f_GlobalIndex := l_I;
-   Exit;
+    if pos(l_SearchText, l_TestName) > 0 then
+    begin
+     aNode.IsSelected := True;
+     l_Done := True;
+    end //pos(l_SearchText, l_TestName) > 0
+   end
+  );//TraverseTree
+ end // not assigned(tvTestTree.Selected)
+ else
+ begin
+  l_Item := tvTestTree.Selected;
+
+  TraverseTree(tvTestTree,
+   procedure (const aNode: TTreeViewItem; var l_Done: Boolean)
+   var
+    l_TestName : string;
+   begin
+    assert(aNode <> nil);
+
+    // Пока не находим текущую выбранную ветку, пропускаем все остальные
+    if not aNode.Equals(l_Item) then
+     // l_IsCurrent означает что прошлая ветка была выбранной.
+     if l_IsCurrent then
+     begin
+      l_TestName := LowerCase(aNode.Text);
+
+      // здесь обычный поиск
+      if pos(l_SearchText, l_TestName) > 0 then
+      begin
+       aNode.IsSelected := True;
+       l_Done := True;
+      end // pos(l_SearchText, l_TestName) > 0
+     end // l_IsSelected
+     else
+      Exit
+
+    else
+     l_IsCurrent := True;
+
+   end
+  );//TraverseTree
+ end; // assigned(tvTestTree.Selected)
+end;
+
+procedure TfmGUITestRunner.actLoadExecute(Sender: TObject);
+var
+ l_File: TStream;
+ l_Tests: TStrings;
+ l_OpenDlg: TOpenDialog;
+begin
+ l_OpenDlg := TOpenDialog.Create(self);
+
+ l_OpenDlg.InitialDir := ExtractFilePath(ParamStr(0));
+ if not l_OpenDlg.Execute then Exit;
+
+ l_File := TFileStream.Create(l_OpenDlg.FileName, fmOpenRead);
+ try
+  l_Tests := TStringList.Create;
+  try
+   l_Tests.LoadFromStream(l_File);
+
+   TraverseTree(tvTestTree,
+    procedure (const aNode: TTreeViewItem; var l_Done : Boolean)
+    var
+     l_index: Integer;
+    begin
+     l_index := l_Tests.IndexOf(aNode.Text);
+     aNode.IsChecked := (l_index >= 0);
+     if l_index >= 0 then l_Tests.Delete(l_index);
+    end
+    );
+  finally
+    FreeAndNil(l_Tests);
   end;
+ finally
+   FreeAndNil(l_File);
  end;
+
+ FreeAndNil(l_OpenDlg);
+end;
+
+procedure TfmGUITestRunner.actNextTestExecute(Sender: TObject);
+var
+ l_Item: TTreeViewItem;
+ l_IsCurrent : Boolean;
+begin
+ if not assigned(tvTestTree.Selected) then
+ begin
+  tvTestTree.Items[0].IsSelected := True;
+ end // not assigned(tvTestTree.Selected)
+ else
+ begin
+  l_Item := tvTestTree.Selected;
+  l_IsCurrent := False;
+
+  TraverseTree(tvTestTree,
+   procedure (const aNode: TTreeViewItem; var l_Done: Boolean)
+   begin
+    assert(aNode <> nil);
+
+    // Пока не находим текущую выбранную ветку, пропускаем все остальные
+    if not aNode.Equals(l_Item) then
+     // l_IsCurrent означает что прошлая ветка была текущей.
+     if l_IsCurrent then
+     begin
+      if aNode.IsChecked then
+      begin
+       aNode.IsSelected := True;
+       l_Done := True;
+      end // aNode.IsChecked
+      else
+       Exit;
+
+     end // l_IsCurrent
+     else
+      Exit
+
+    else
+     l_IsCurrent := True;
+
+   end
+  );//TraverseTree
+ end; // not assigned(tvTestTree.Selected)
+end;
+
+procedure TfmGUITestRunner.actPrevTestExecute(Sender: TObject);
+var
+ l_Item: TTreeViewItem;
+ l_IsCurrent : Boolean;
+
+ l_PrevItem: TTreeViewItem;
+begin
+ if not assigned(tvTestTree.Selected) then
+ begin
+  tvTestTree.Items[0].IsSelected := True;
+ end // not assigned(tvTestTree.Selected)
+ else
+ begin
+  l_PrevItem := nil;
+  l_Item := tvTestTree.Selected;
+  l_IsCurrent := False;
+
+  TraverseTree(tvTestTree,
+   procedure (const aNode: TTreeViewItem; var l_Done: Boolean)
+   begin
+    assert(aNode <> nil);
+
+    // Пока не находим текущую выбранную ветку, пропускаем все остальные
+    if not aNode.Equals(l_Item) then
+     // l_IsCurrent означает что прошлая ветка была текущей.
+     if l_IsCurrent then
+     begin
+      assert(l_PrevItem = nil, 'l_PrevItem <> nil' );
+      l_PrevItem := aNode;
+
+      if l_PrevItem.IsChecked then
+      begin
+       l_PrevItem.IsSelected := True;
+       l_Done := True;
+      end // aNode.IsChecked
+      else
+       Exit;
+     end // l_IsCurrent
+     else
+      Exit
+
+    else
+     l_IsCurrent := True;
+
+   end
+  );//TraverseTree
+ end; // not assigned(tvTestTree.Selected)
+end;
+
+procedure TfmGUITestRunner.actSaveExecute(Sender: TObject);
+var
+  l_FileWriter: TStreamWriter;
+  l_SaveDlg: TSaveDialog;
+begin
+ l_SaveDlg := TSaveDialog.Create(self);
+ l_SaveDlg.InitialDir := ExtractFilePath(ParamStr(0));
+ if not l_SaveDlg.Execute then Exit;
+
+ l_FileWriter := TStreamWriter.Create(
+   TFileStream.Create(l_SaveDlg.FileName, fmCreate),
+   TEncoding.Default
+ );
+
+ l_FileWriter.OwnStream;
+
+ try
+  TraverseTree(tvTestTree,
+  procedure (const aNode: TTreeViewItem; var l_Done: Boolean)
+  begin
+   if aNode.IsChecked then
+    l_FileWriter.WriteLine(aNode.Text);
+  end
+  );
+ finally
+  FreeAndNil(l_FileWriter);
+ end;
+
+ FreeAndNil(l_SaveDlg);
 end;
 
 procedure TfmGUITestRunner.actSelectFailedExecute(Sender: TObject);
 begin
  UnCheckAllTest;
  TraverseTree(tvTestTree,
-  procedure (const aNode: TTreeViewItem)
+  procedure (const aNode: TTreeViewItem; var aDone: Boolean)
   begin
    if (aNode as TTestNode).Failed then
    begin
     TraverseUp(aNode,
-     procedure (const aNode: TTreeViewItem)
+     procedure (const aNode: TTreeViewItem; var aDone: Boolean)
      begin
       aNode.IsChecked := True;
      end
@@ -378,7 +606,7 @@ end;
 procedure TfmGUITestRunner.UnCheckAllTest;
 begin
  TraverseTree(tvTestTree,
-  procedure (const aNode: TTreeViewItem)
+  procedure (const aNode: TTreeViewItem; var aDone: Boolean)
   begin
    assert(aNode <> nil);
    aNode.IsChecked := False;
@@ -391,42 +619,29 @@ begin
  TmsDUnitSettings.Instance.IsUseDiffer := chkIsUseDiffer.IsChecked;
 end;
 
-procedure TfmGUITestRunner.TraverseTree(const aTree: TTreeView; aLambda: TDoSomethingWithNode);
-
- procedure TraverseNode(const aNode: TTreeViewItem);
- var
-  l_Index: Integer;
- begin
-  for l_Index := 0 to Pred(aNode.Count) do
-   TraverseNode(aNode.Items[l_Index]);
-  aLambda(aNode);
- end;
-
-var
- l_Index: Integer;
-begin
- for l_Index := 0 to Pred(aTree.Count) do
-  TraverseNode(aTree.Items[l_Index]);
-end;
-
 procedure TfmGUITestRunner.TraverseUp(const aNode: TTreeViewItem;
                                             aLambda: TDoSomethingWithNode);
 var
- l_Node : TTreeViewItem;
+ l_Node: TTreeViewItem;
+ l_Done: Boolean;
 begin
  l_Node := aNode;
+ l_Done := False;
  repeat
-  aLambda(l_Node);
+  aLambda(l_Node, l_Done);
   l_Node := l_Node.ParentItem;
  until (l_Node = nil);
 end;
 
 procedure TfmGUITestRunner.ClearResult;
+var
+ l_Node: Boolean;
 begin
  lvFailureListView.ClearItems;
  f_Runned := 0;
+ l_Node := False;
  TraverseTree(tvTestTree,
-  procedure (const aNode: TTreeViewItem)
+  procedure (const aNode: TTreeViewItem; var l_Node: Boolean)
   begin
    SetTreeNodeFont(aNode, TAlphaColorRec.Black)
   end
@@ -435,7 +650,7 @@ end;
 
 destructor TfmGUITestRunner.Destroy;
 begin
- FSuite.SaveConfiguration(ParamStr(0) + c_ConfigFile, True, False);
+ f_Suite.SaveConfiguration(ParamStr(0) + c_ConfigFile, True, False);
  Suite := nil;
  inherited;
 end;
@@ -457,9 +672,9 @@ procedure TfmGUITestRunner.EndTest(test: ITest);
    end;
 
 begin
- lblTimeCount.Text:= FormatElapsedTime (FTestResult.TotalTime);
- lblErrorCount.Text:= IntToStr(FTestResult.ErrorCount);
- lblFailureCount.Text:= IntToStr(FTestResult.FailureCount);
+ lblTimeCount.Text:= FormatElapsedTime (f_TestResult.TotalTime);
+ lblErrorCount.Text:= IntToStr(f_TestResult.ErrorCount);
+ lblFailureCount.Text:= IntToStr(f_TestResult.FailureCount);
  Inc(f_Runned);
  lblRunned.Text := IntToStr(f_Runned);
 end;
@@ -479,7 +694,6 @@ procedure TfmGUITestRunner.FillTestTree(aTest: ITest);
  var
   l_TestTests: IInterfaceList;
   l_Index: Integer;
-  l_Node: TTestNode;
  begin//DoFillTestTree
   l_TestTests := aRootNode.Test.Tests;
   for l_Index := 0 to l_TestTests.Count - 1 do
@@ -508,6 +722,9 @@ begin
 end;
 
 procedure TfmGUITestRunner.InitTree;
+var
+ l_Node : TTreeViewItem;
+ l_Test : ITest;
 begin
  FillTestTree(Suite);
  tvTestTree.ExpandAll;
@@ -519,8 +736,6 @@ begin
 end;
 
 procedure TfmGUITestRunner.RunTheTest(aTest: ITest);
-var
- l_Test : ImsEtalonsHolder;
 begin
  TestResult := TTestResult.Create;
  try
@@ -529,24 +744,27 @@ begin
  finally
   // FErrorCount := TestResult.ErrorCount;
   // FFailureCount := TestResult.FailureCount;
-  FreeAndNil(FTestResult);
+  FreeAndNil(f_TestResult);
  end; // try..finnaly
 end;
 
 procedure TfmGUITestRunner.SetSuite(aValue: ITest);
+var
+ l_Done: Boolean;
 begin
- FSuite := aValue;
- if (FSuite <> nil) then
+ f_Suite := aValue;
+ if (f_Suite <> nil) then
  begin
   // Проставляет всем тестам из набора Enabled := False, если находит их в конфиге
-  FSuite.LoadConfiguration(ParamStr(0) + c_ConfigFile, True, False);
+  f_Suite.LoadConfiguration(ParamStr(0) + c_ConfigFile, True, False);
   InitTree;
 
   TraverseTree(tvTestTree,
-   procedure (const aNode: TTreeViewItem)
+   procedure (const aNode: TTreeViewItem; var l_Done: Boolean)
    var
-    l_Test : ITest;
+    l_Test: ITest;
    begin
+    l_Done := False;
     l_Test := NodeToTest(aNode);
 
     assert(l_Test <> nil);
@@ -556,7 +774,7 @@ begin
      aNode.IsChecked := True;
 
      TraverseUp(aNode,
-      procedure (const aParentNode: TTreeViewItem)
+      procedure (const aParentNode: TTreeViewItem; var l_Done: Boolean)
       begin
        aParentNode.IsChecked := True;
       end
@@ -631,15 +849,16 @@ end;
 
 procedure TfmGUITestRunner.tvTestTreeChangeCheck(Sender: TObject);
 var
- l_Node :TTreeViewItem;
- l_IsChecked : Boolean;
+ l_Node: TTreeViewItem;
+ l_IsChecked: Boolean;
+ l_Done: Boolean;
 begin
  if not (Sender is TTreeViewItem) then Exit;
  l_Node := Sender as TTreeViewItem;
  l_IsChecked := l_Node.IsChecked;
 
  TraverseUp(l_Node,
-  procedure (const l_Node: TTreeViewItem)
+  procedure (const l_Node: TTreeViewItem; var l_Done: Boolean)
   begin
    if l_IsChecked then
     l_Node.IsChecked := l_IsChecked;
@@ -658,4 +877,3 @@ begin
 end;
 
 end.
-

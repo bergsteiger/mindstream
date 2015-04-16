@@ -21,9 +21,15 @@
     <reference referencedUin="design:view:::6ijjzb8rson7h05s_v">
       <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="283,1,133,121" />
+      <property name="bounds" value="283,1,133,140" />
       <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner" />
       <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.TTestNode" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.TDoSomethingWithNode" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.IIterator" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.IAggregate" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.TConcreteAggregate" />
+      <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.TConcreteIterator" />
     </reference>
     <reference referencedUin="design:view:::35ke04k0sso6ehpip_v">
       <property name="$hidden" value="True" />
@@ -80,20 +86,18 @@
     </reference>
     <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITestListenerX">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="0,380,190,96" />
-      <property name="location_set_by_user" value="True" />
+      <property name="bounds" value="10,1932,190,96" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListenerX.StartSuite(TestFramework.ITest)" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListenerX.EndSuite(TestFramework.ITest)" />
       <reference referencedUin="delphi:l_conn:lib:DelphiWin32:TestFramework.ITestListenerX:TestFramework.ITestListener">
-        <property name="sourceAnchor" value="95,380" />
-        <property name="targetAnchor" value="95,200" />
+        <property name="sourceAnchor" value="200,1980" />
+        <property name="targetAnchor" value="300,1980" />
         <property name="bendpoints" value="" />
       </reference>
     </reference>
     <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITestListener">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="0,0,205,200" />
-      <property name="location_set_by_user" value="True" />
+      <property name="bounds" value="300,1880,205,200" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListener.TestingStarts()" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListener.StartTest(TestFramework.ITest)" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestListener.AddSuccess(TestFramework.ITest)" />
@@ -105,18 +109,17 @@
     </reference>
     <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITestDecorator">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="800,0,192,98" />
-      <property name="location_set_by_user" value="True" />
+      <property name="bounds" value="1483,10,192,98" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestDecorator.GetTest()" />
       <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITestDecorator.Test" />
       <reference referencedUin="delphi:l_ast:lib:DelphiWin32:TestFramework.ITestDecorator.Test">
-        <property name="sourceAnchor" value="888,98" />
-        <property name="targetAnchor" value="888,158" />
+        <property name="sourceAnchor" value="1547,108" />
+        <property name="targetAnchor" value="1547,356" />
         <property name="bendpoints" value="" />
       </reference>
       <reference referencedUin="delphi:l_conn:lib:DelphiWin32:TestFramework.ITestDecorator:TestFramework.ITest">
-        <property name="sourceAnchor" value="896,98" />
-        <property name="targetAnchor" value="896,158" />
+        <property name="sourceAnchor" value="1611,108" />
+        <property name="targetAnchor" value="1611,356" />
         <property name="bendpoints" value="" />
       </reference>
     </reference>
@@ -139,8 +142,7 @@
     </reference>
     <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TTestResult">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="0,760,343,867" />
-      <property name="location_set_by_user" value="True" />
+      <property name="bounds" value="799,1547,343,867" />
       <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FTotalTime" />
       <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FFailures" />
       <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestResult.FErrors" />
@@ -194,37 +196,35 @@
       <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TTestResult.Failures" />
       <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.TTestResult.OverRides" />
       <reference referencedUin="delphi:l_ast:lib:DelphiWin32:TestFramework.TTestResult.FRootTest">
-        <property name="sourceAnchor" value="343,905" />
-        <property name="targetAnchor" value="579,905" />
+        <property name="sourceAnchor" value="1142,1727" />
+        <property name="targetAnchor" value="1449,1278" />
         <property name="bendpoints" value="" />
       </reference>
       <reference referencedUin="delphi:l_ast:lib:DelphiWin32:TestFramework.TTestResult.Failures">
-        <property name="sourceAnchor" value="343,1465" />
-        <property name="targetAnchor" value="800,1465" />
+        <property name="sourceAnchor" value="1142,1928" />
+        <property name="targetAnchor" value="1522,1928" />
         <property name="bendpoints" value="" />
       </reference>
       <reference referencedUin="delphi:l_ast:lib:DelphiWin32:TestFramework.TTestResult.Errors">
-        <property name="sourceAnchor" value="343,1473" />
-        <property name="targetAnchor" value="800,1473" />
+        <property name="sourceAnchor" value="1142,2031" />
+        <property name="targetAnchor" value="1522,2031" />
         <property name="bendpoints" value="" />
       </reference>
     </reference>
     <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITestSuite">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="595,1,165,96" />
-      <property name="location_set_by_user" value="True" />
+      <property name="bounds" value="1278,11,165,96" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestSuite.AddTest(TestFramework.ITest)" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITestSuite.AddSuite(TestFramework.ITestSuite)" />
       <reference referencedUin="delphi:l_conn:lib:DelphiWin32:TestFramework.ITestSuite:TestFramework.ITest">
-        <property name="sourceAnchor" value="677,97" />
-        <property name="targetAnchor" value="677,158" />
+        <property name="sourceAnchor" value="1319,107" />
+        <property name="targetAnchor" value="1319,356" />
         <property name="bendpoints" value="" />
       </reference>
     </reference>
     <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.ITest">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="579,158,490,892" />
-      <property name="location_set_by_user" value="True" />
+      <property name="bounds" value="1262,356,490,922" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetName()" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.CountTestCases()" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.CountEnabledTestCases()" />
@@ -279,11 +279,13 @@
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.GetAllowedLeaksIterator()" />
       <reference referencedUin="delphi:e_property:lib:DelphiWin32:TestFramework.ITest.AllowedLeaksIterator" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.Run(TestFramework.TTestResult)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.LoadConfiguration(System.string,System.Boolean,System.Boolean)" />
+      <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.ITest.SaveConfiguration(System.string,System.Boolean,System.Boolean)" />
     </reference>
     <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TTestSuite">
       <property name="$hidden" value="True" />
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="2444,644,169,71" />
+      <property name="bounds" value="2444,644,170,71" />
       <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestSuite.FTests" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestSuite.RunTest(TestFramework.TTestResult)" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestSuite.Create()" />
@@ -421,8 +423,7 @@
     </reference>
     <reference referencedUin="delphi:e_class:lib:DelphiWin32:TestFramework.TTestFailure">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="800,1320,254,310" />
-      <property name="location_set_by_user" value="True" />
+      <property name="bounds" value="1522,1825,254,310" />
       <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestFailure.FFailedTest" />
       <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestFailure.FThrownExceptionClass" />
       <reference referencedUin="delphi:e_field:lib:DelphiWin32:TestFramework.TTestFailure.FThrownExceptionMessage" />
@@ -439,15 +440,14 @@
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestFailure.AddressInfo()" />
       <reference referencedUin="delphi:e_method:lib:DelphiWin32:TestFramework.TTestFailure.StackTrace()" />
       <reference referencedUin="delphi:l_ast:lib:DelphiWin32:TestFramework.TTestFailure.FFailedTest">
-        <property name="sourceAnchor" value="927,1320" />
-        <property name="targetAnchor" value="927,1050" />
+        <property name="sourceAnchor" value="1637,1825" />
+        <property name="targetAnchor" value="1637,1278" />
         <property name="bendpoints" value="" />
       </reference>
     </reference>
     <reference referencedUin="delphi:e_class:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner">
       <property name="$shortcutReference" value="true" />
-      <property name="bounds" value="260,0,248,657" />
-      <property name="location_set_by_user" value="True" />
+      <property name="bounds" value="632,168,248,1299" />
       <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.TestTree" />
       <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.ToolBar1" />
       <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.btRunAllTest" />
@@ -487,23 +487,79 @@
       <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.ShouldRunTest(TestFramework.ITest)" />
       <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.Status(TestFramework.ITest,System.string)" />
       <reference referencedUin="delphi:l_impl:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner:TestFramework.ITestListener">
-        <property name="sourceAnchor" value="260,100" />
-        <property name="targetAnchor" value="205,100" />
+        <property name="sourceAnchor" value="729,1467" />
+        <property name="targetAnchor" value="465,1880" />
         <property name="bendpoints" value="" />
       </reference>
       <reference referencedUin="delphi:l_ast:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.FSuite">
-        <property name="sourceAnchor" value="508,407" />
-        <property name="targetAnchor" value="579,407" />
+        <property name="sourceAnchor" value="880,970" />
+        <property name="targetAnchor" value="1262,970" />
         <property name="bendpoints" value="" />
       </reference>
       <reference referencedUin="delphi:l_ast:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.Suite">
-        <property name="sourceAnchor" value="508,399" />
-        <property name="targetAnchor" value="579,399" />
+        <property name="sourceAnchor" value="880,663" />
+        <property name="targetAnchor" value="1262,663" />
         <property name="bendpoints" value="" />
       </reference>
       <reference referencedUin="delphi:l_ast:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.TestResult">
-        <property name="sourceAnchor" value="301,657" />
-        <property name="targetAnchor" value="301,760" />
+        <property name="sourceAnchor" value="826,1467" />
+        <property name="targetAnchor" value="826,1547" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.pnlMain" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.tvTestTree" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.pnlBottom" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.lblTime" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.btnUncheckAll" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.lblErros" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.lblErrorCount" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.lblFailure" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.lblFailureCount" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.lblTimeCount" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.lblRunned" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.btnDeleteEtalon" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.btnSelectFailed" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.btnDiff" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.chkIsUseDiffer" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actlstMain" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actRunAllTest" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actRunDiff" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actCheckAll" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actUncheckAll" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actSelectFailed" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actDelEtalons" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.edtSearch" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.btnCheckAll" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.btnFind" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actFind" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.btnFindAndCheck" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actFindAndCheck" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.tvTestTreeChangeCheck(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.chkIsUseDifferChange(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actRunAllTestExecute(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actRunDiffExecute(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actCheckAllExecute(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actUncheckAllExecute(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actSelectFailedExecute(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actDelEtalonsExecute(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actFindExecute(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.actFindAndCheckExecute(System.TObject)" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.FTestResult" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.f_Runned" />
+      <reference referencedUin="delphi:e_field:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.f_GlobalIndex" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.SetError(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.SetFailed(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.SetSuccess(TestFramework.ITest)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.SetTreeNodeFont(TestFramework.ITest,System.UITypes.TAlphaColor)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.AddFailureNode(TestFramework.TTestFailure,System.Boolean)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.TraverseTree(FMX.TreeView.TTreeView,u_fmGUITestRunner.TDoSomethingWithNode)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.SetFailure(TestFramework.TTestFailure,System.Boolean)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.UnCheckAllTest()" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.TraverseUp(FMX.TreeView.TTreeViewItem,u_fmGUITestRunner.TDoSomethingWithNode)" />
+      <reference referencedUin="delphi:e_method:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.Destroy()" />
+      <reference referencedUin="delphi:l_ast:src:FMX.DUnit:u_fmGUITestRunner.TfmGUITestRunner.FTestResult">
+        <property name="sourceAnchor" value="853,1467" />
+        <property name="targetAnchor" value="853,1547" />
         <property name="bendpoints" value="" />
       </reference>
     </reference>
