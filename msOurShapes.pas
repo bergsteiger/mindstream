@@ -43,7 +43,8 @@ uses
   msScrollShapePrim,
   msActor,
   msRectangle,
-  msCircleView
+  msCircleView,
+  msLineView
   ;
 
 // Важно !!!
@@ -53,6 +54,7 @@ begin
   // concrete shapes
   TmsLine.TMC
    .SetIsForToolbar(false)
+   .SetShapeView(TmsLineView.Create)
    ;
   TmsRectangularShape.Specify('Rectangle')
    .SetFillColor(TAlphaColorRec.White)
