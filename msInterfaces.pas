@@ -198,6 +198,8 @@ type
   procedure MouseMove(const aClickContext: TmsEndShapeContext);
   // - действите нажатии
   function UID: TmsShapeUID;
+  function RotationAngle: Single;
+  function ArrowHeadShapeMC: ImsShapeClass;
   function pm_GetStartPoint: TPointF;
   function pm_GetFinishPoint: TPointF;
   function pm_GetShapeClass: ImsShapeClass;

@@ -35,12 +35,12 @@ begin
  begin
   l_OriginalMatrix := aCtx.rCanvas.Matrix;
   try
-   l_LineFinishPoint := TPointF.Create(aShape.FinishPoint.X - ArrowHeadShapeMC.InitialHeight / 2,
+   l_LineFinishPoint := TPointF.Create(aShape.FinishPoint.X - aShape.ArrowHeadShapeMC.InitialHeight / 2,
                                        aShape.FinishPoint.Y);
-   l_Proxy := CreateArrowHeadShape(l_LineFinishPoint);
+   l_Proxy := aShape.ArrowHeadShapeMC.CreateShape(l_LineFinishPoint);
    try
     // in Radian
-    l_Angle := GetArrowAngleRotation;
+    l_Angle := aShape.RotationAngle;
 
     l_CenterPoint := aShape.FinishPoint;
 

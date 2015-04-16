@@ -30,6 +30,8 @@ type
  strict protected
   function pm_GetStartPoint: TPointF; virtual;
   function pm_GetFinishPoint: TPointF; virtual;
+  function RotationAngle: Single;
+  function ArrowHeadShapeMC: ImsShapeClass; virtual;
   function pm_GetShapeClass: ImsShapeClass; virtual;
   property ShapeClass: ImsShapeClass
    read pm_GetShapeClass;
@@ -87,6 +89,8 @@ type
   procedure DrawTo(const aCtx: TmsDrawContext); virtual;
   property StartPoint : TPointF
    read pm_GetStartPoint;
+  property FinishPoint : TPointF
+   read pm_GetFinishPoint;
   class function IsTool: Boolean; virtual;
   class function IsNullClick: Boolean; virtual;
   //- примитив НЕ ТРЕБУЕТ кликов. ВООБЩЕ. Как TmsSwapParents или TmsUpToParent
@@ -116,7 +120,8 @@ uses
 
  msShapeClass,
  msProxyShapeClass,
- msTotalShapesList
+ msTotalShapesList,
+ Math
  ;
 
 // TmsShape
@@ -237,6 +242,55 @@ end;
 function TmsShape.pm_GetFinishPoint: TPointF;
 begin
  Result := TPointF.Create(0, 0);
+ Assert(false, 'Abstract method');
+end;
+
+function TmsShape.RotationAngle: Single;
+var
+ l_ALength, l_CLength,
+ l_AlphaAngle,
+ l_X, l_Y, l_RotationAngle : Single;
+ l_PointC : TPointF;
+ l_Invert : SmallInt;
+begin
+ // Формула расчета растояний между двумя точками
+ l_X := (FinishPoint.X - StartPoint.X) * (FinishPoint.X - StartPoint.X);
+ l_Y := (FinishPoint.Y - StartPoint.Y) * (FinishPoint.Y - StartPoint.Y);
+
+ l_CLength := sqrt( l_X + l_Y);
+
+ l_PointC := TPointF.Create(FinishPoint.X, StartPoint.Y);
+
+ // Формула расчета растояний между двумя точками
+ l_X := (l_PointC.X - StartPoint.X) * (l_PointC.X - StartPoint.X);
+ l_Y := (l_PointC.Y - StartPoint.Y) * (l_PointC.Y - StartPoint.Y);
+
+ l_ALength := sqrt( l_X + l_Y);
+
+ // In Radian
+ l_AlphaAngle := ArcSin(l_ALength / l_CLength);
+
+ l_Invert := 1;
+
+ if (FinishPoint.X > StartPoint.X) then
+ begin
+  l_RotationAngle := Pi / 2 * 3;
+  if FinishPoint.Y > StartPoint.Y then
+   l_Invert := -1;
+ end//FinishPoint.X > StartPoint.X
+ else
+ begin
+  l_RotationAngle := Pi / 2;
+  if FinishPoint.Y < StartPoint.Y then
+   l_Invert := -1;
+ end;//FinishPoint.X > StartPoint.X
+
+ Result := l_Invert * (l_AlphaAngle + l_RotationAngle);
+end;
+
+function TmsShape.ArrowHeadShapeMC: ImsShapeClass;
+begin
+ Result := nil;
  Assert(false, 'Abstract method');
 end;
 

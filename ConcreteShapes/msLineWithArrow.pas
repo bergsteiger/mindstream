@@ -14,11 +14,9 @@ uses
 type
  TmsLineWithArrow = class(TmsLine)
  protected
-  function CreateArrowHeadShape(const aStartPoint: TPointF): ImsShape;
-  function ArrowHeadShapeMC: ImsShapeClass; virtual;
+  function ArrowHeadShapeMC: ImsShapeClass; override;
   function GetFinishPointForDraw: TPointF; override;
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  function GetArrowAngleRotation : Single;
   function GetDrawBounds: TRectF; override;
  end;//TmsLineWithArrow
 
@@ -32,11 +30,6 @@ uses
  ;
 
  // TmsLineWithArrow
-
-function TmsLineWithArrow.CreateArrowHeadShape(const aStartPoint: TPointF): ImsShape;
-begin
- Result := ArrowHeadShapeMC.CreateShape(aStartPoint);
-end;
 
 function TmsLineWithArrow.ArrowHeadShapeMC: ImsShapeClass;
 begin
@@ -59,10 +52,10 @@ begin
   try
    l_LineFinishPoint := TPointF.Create(FinishPoint.X - ArrowHeadShapeMC.InitialHeight / 2,
                                        FinishPoint.Y);
-   l_Proxy := CreateArrowHeadShape(l_LineFinishPoint);
+   l_Proxy := ArrowHeadShapeMC.CreateShape(l_LineFinishPoint);
    try
     // in Radian
-    l_Angle := GetArrowAngleRotation;
+    l_Angle := RotationAngle;
 
     l_CenterPoint := FinishPoint;
 
@@ -99,49 +92,6 @@ begin
  end;//(StartPoint <> FinishPoint)
 end;
 
-function TmsLineWithArrow.GetArrowAngleRotation: single;
-var
- l_ALength, l_CLength,
- l_AlphaAngle,
- l_X, l_Y, l_RotationAngle : Single;
- l_PointC : TPointF;
- l_Invert : SmallInt;
-begin
- // Формула расчета растояний между двумя точками
- l_X := (FinishPoint.X - StartPoint.X) * (FinishPoint.X - StartPoint.X);
- l_Y := (FinishPoint.Y - StartPoint.Y) * (FinishPoint.Y - StartPoint.Y);
-
- l_CLength := sqrt( l_X + l_Y);
-
- l_PointC := TPointF.Create(FinishPoint.X, StartPoint.Y);
-
- // Формула расчета растояний между двумя точками
- l_X := (l_PointC.X - StartPoint.X) * (l_PointC.X - StartPoint.X);
- l_Y := (l_PointC.Y - StartPoint.Y) * (l_PointC.Y - StartPoint.Y);
-
- l_ALength := sqrt( l_X + l_Y);
-
- // In Radian
- l_AlphaAngle := ArcSin(l_ALength / l_CLength);
-
- l_Invert := 1;
-
- if (FinishPoint.X > StartPoint.X) then
- begin
-  l_RotationAngle := Pi / 2 * 3;
-  if FinishPoint.Y > StartPoint.Y then
-   l_Invert := -1;
- end//FinishPoint.X > StartPoint.X
- else
- begin
-  l_RotationAngle := Pi / 2;
-  if FinishPoint.Y < StartPoint.Y then
-   l_Invert := -1;
- end;//FinishPoint.X > StartPoint.X
-
- Result := l_Invert * (l_AlphaAngle + l_RotationAngle);
-end;
-
 function TmsLineWithArrow.GetDrawBounds: TRectF;
 begin
  Result := inherited GetDrawBounds;
@@ -161,7 +111,7 @@ function TmsLineWithArrow.GetFinishPointForDraw: TPointF;
 var
  l_Angle : Single;
 begin
- l_Angle := GetArrowAngleRotation;
+ l_Angle := RotationAngle;
  Result := TPointF.Create(FinishPoint.X - ArrowHeadShapeMC.InitialHeight * Cos(l_Angle),
                           FinishPoint.Y - ArrowHeadShapeMC.InitialHeight * Sin(l_Angle));
 end;
