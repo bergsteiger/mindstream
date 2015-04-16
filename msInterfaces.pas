@@ -199,9 +199,12 @@ type
   // - действите нажатии
   function UID: TmsShapeUID;
   function pm_GetStartPoint: TPointF;
+  function pm_GetFinishPoint: TPointF;
   function pm_GetShapeClass: ImsShapeClass;
   property StartPoint: TPointF
    read pm_GetStartPoint;
+  property FinishPoint: TPointF
+   read pm_GetFinishPoint;
   property ShapeClass: ImsShapeClass
    read pm_GetShapeClass;
   function Name: String;

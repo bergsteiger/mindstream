@@ -23,7 +23,7 @@ type
   function GetFinishPointForDraw: TPointF; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; override;
   class function SamePoint(const A: TPointF; const B: TPointF): Boolean;
-  function pm_GetFinishPoint: TPointF; virtual;
+  function pm_GetFinishPoint: TPointF; override;
   property FinishPoint : TPointF
    read pm_GetFinishPoint
    write f_FinishPoint;

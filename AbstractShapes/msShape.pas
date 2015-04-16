@@ -29,6 +29,7 @@ type
   function DrawOptionsContext(const aCtx: TmsDrawContext): TmsDrawOptionsContext;
  strict protected
   function pm_GetStartPoint: TPointF; virtual;
+  function pm_GetFinishPoint: TPointF; virtual;
   function pm_GetShapeClass: ImsShapeClass; virtual;
   property ShapeClass: ImsShapeClass
    read pm_GetShapeClass;
@@ -228,6 +229,12 @@ begin
 end;
 
 function TmsShape.pm_GetStartPoint: TPointF;
+begin
+ Result := TPointF.Create(0, 0);
+ Assert(false, 'Abstract method');
+end;
+
+function TmsShape.pm_GetFinishPoint: TPointF;
 begin
  Result := TPointF.Create(0, 0);
  Assert(false, 'Abstract method');
