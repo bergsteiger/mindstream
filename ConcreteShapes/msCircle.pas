@@ -22,11 +22,11 @@ type
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
   function ContainsPt(const aPoint: TPointF): Boolean; override;
- end;
+ end;//TmsCircle
 
 implementation
 
-{ TmsCircle }
+// TmsCircle
 
 function TmsCircle.InitialRadiusX: Integer;
 begin
