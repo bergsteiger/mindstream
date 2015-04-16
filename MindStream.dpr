@@ -153,7 +153,8 @@ uses
   msShapeView in 'Views\msShapeView.pas',
   msTextShapeView in 'Views\msTextShapeView.pas',
   msRectangleView in 'Views\msRectangleView.pas',
-  msRectangle in 'ConcreteShapes\msRectangle.pas';
+  msRectangle in 'ConcreteShapes\msRectangle.pas',
+  msCircleView in 'Views\msCircleView.pas';
 
 {$R *.res}
 

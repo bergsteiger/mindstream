@@ -42,7 +42,8 @@ uses
   msScrollShape,
   msScrollShapePrim,
   msActor,
-  msRectangle
+  msRectangle,
+  msCircleView
   ;
 
 // Важно !!!
@@ -64,6 +65,7 @@ begin
    .SetFillColor(TAlphaColorRec.Red)
    .SetInitialHeight(100)
    .SetInitialWidth(100)
+   .SetShapeView(TmsCircleView.Create)
    ;
   TmsRectangle.MC.Specify('RoundedRectangle')
    .SetFillColor(TAlphaColorRec.Blue)
