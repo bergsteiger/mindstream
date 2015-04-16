@@ -44,7 +44,8 @@ uses
   msActor,
   msRectangle,
   msCircleView,
-  msLineView
+  msLineView,
+  msLineWithArrowView
   ;
 
 // Важно !!!
@@ -94,7 +95,9 @@ begin
   TmsLine.Specify('DotLine')
    .SetStrokeDash(TStrokeDash.Dot)
    ;
-  TmsLineWithArrow.TMC;
+  TmsLineWithArrow.TMC
+   .SetShapeView(TmsLineWithArrowView.Create)
+   ;
   TmsTriangleDirectionRight.TMC
    .SetFillColor(TAlphaColorRec.Coral)
    ;
