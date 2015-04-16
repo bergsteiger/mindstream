@@ -16,7 +16,8 @@ type
 implementation
 
 uses
- System.Math.Vectors
+ System.Math.Vectors,
+ msShape
  ;
 
 // TmsLineWithArrowView
@@ -29,8 +30,11 @@ var
  l_Angle : Single;
  l_CenterPoint,
  l_LineFinishPoint : TPointF;
+ l_PMC : ImsShapeView;
 begin
- aShape.ShapeClass.ShapeView.DrawShape(aCtx, aShape);
+ l_PMC := TmsShape.NamedMC('Line').ShapeView;
+ if (ImsShapeView(Self) <> l_PMC) then
+  l_PMC.DrawShape(aCtx, aShape);
  if (aShape.StartPoint <> aShape.FinishPoint) then
  begin
   l_OriginalMatrix := aCtx.rCanvas.Matrix;

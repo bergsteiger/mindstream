@@ -16,7 +16,6 @@ type
  private
   f_FinishPoint: TPointF;
  protected
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); override;
   class function IsLineLike: Boolean; override;
   function GetDrawBounds: TRectF; override;
@@ -137,27 +136,6 @@ class function TmsLine.CreateCompleted(const aStartPoint: TPointF;
 begin
  Result := Self.Create(Self.MC, TmsMakeShapeContext.Create(aStartPoint, aShapesController, aDiagrammsHolder));
  Result.EndTo(TmsEndShapeContext.Create(aFinishPoint, aShapesController, aDiagrammsHolder));
-end;
-
-procedure TmsLine.DoDrawTo(const aCtx: TmsDrawContext);
-var
- l_Proxy : ImsShape;
- l_FinishPoint: TPointF;
-begin
- if (StartPoint = FinishPoint) then
- begin
-  l_Proxy := TmsShape.NamedMC('PointCircle').CreateShape(StartPoint);
-  try
-   l_Proxy.DrawTo(aCtx);
-  finally
-   l_Proxy := nil;
-  end;//try..finally
- end//StartPoint = FinishPoint
- else
- begin
-  l_FinishPoint := GetFinishPointForDraw;
-  aCtx.rCanvas.DrawLine(StartPoint, l_FinishPoint, 1);
- end;//StartPoint = FinishPoint
 end;
 
 function TmsLine.IsNeedsSecondClick: Boolean;
