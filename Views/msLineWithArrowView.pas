@@ -33,6 +33,7 @@ var
  l_PMC : ImsShapeView;
 begin
  l_PMC := TmsShape.NamedMC('Line').ShapeView;
+ !!! тут на самом деле надо пробегать цепочку родителей и брать того у кого ShapeView <> Self
  if (ImsShapeView(Self) <> l_PMC) then
   l_PMC.DrawShape(aCtx, aShape);
  if (aShape.StartPoint <> aShape.FinishPoint) then
