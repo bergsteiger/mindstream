@@ -32,6 +32,7 @@ type
   function pm_GetFinishPoint: TPointF; virtual;
   function RotationAngle: Single;
   function ArrowHeadShapeMC: ImsShapeClass; virtual;
+  function GetFinishPointForDraw: TPointF; virtual;
   function pm_GetShapeClass: ImsShapeClass; virtual;
   property ShapeClass: ImsShapeClass
    read pm_GetShapeClass;
@@ -291,6 +292,12 @@ end;
 function TmsShape.ArrowHeadShapeMC: ImsShapeClass;
 begin
  Result := nil;
+ Assert(false, 'Abstract method');
+end;
+
+function TmsShape.GetFinishPointForDraw: TPointF;
+begin
+ Result := Self.FinishPoint;
  Assert(false, 'Abstract method');
 end;
 

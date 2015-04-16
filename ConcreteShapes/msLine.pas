@@ -20,7 +20,7 @@ type
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); override;
   class function IsLineLike: Boolean; override;
   function GetDrawBounds: TRectF; override;
-  function GetFinishPointForDraw: TPointF; virtual;
+  function GetFinishPointForDraw: TPointF; override;
   function ContainsPt(const aPoint: TPointF): Boolean; override;
   class function SamePoint(const A: TPointF; const B: TPointF): Boolean;
   function pm_GetFinishPoint: TPointF; override;

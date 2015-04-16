@@ -199,7 +199,11 @@ type
   // - действите нажатии
   function UID: TmsShapeUID;
   function RotationAngle: Single;
+
   function ArrowHeadShapeMC: ImsShapeClass;
+  function GetFinishPointForDraw: TPointF;
+  // - костыли пока
+
   function pm_GetStartPoint: TPointF;
   function pm_GetFinishPoint: TPointF;
   function pm_GetShapeClass: ImsShapeClass;
