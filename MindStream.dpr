@@ -155,7 +155,6 @@ uses
   msRectangleView in 'Views\msRectangleView.pas',
   msRectangle in 'ConcreteShapes\msRectangle.pas',
   msCircleView in 'Views\msCircleView.pas',
-  msLineWithArrowView in 'Views\msLineWithArrowView.pas',
   msLineView in 'Views\msLineView.pas';
 
 {$R *.res}
