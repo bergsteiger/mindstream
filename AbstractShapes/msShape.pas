@@ -297,8 +297,7 @@ end;
 
 function TmsShape.pm_GetFinishPoint: TPointF;
 begin
- Result := TPointF.Create(0, 0);
- Assert(false, 'Abstract method');
+ Result := Self.StartPoint;
 end;
 
 class function TmsShape.AngleBetween(const aStart: TPointF; const aFinish: TPointF): Single;
