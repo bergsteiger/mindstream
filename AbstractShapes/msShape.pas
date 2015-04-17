@@ -362,6 +362,19 @@ var
  l_Tmp : Single;
 begin
  Result := GetDrawBounds;
+ if (Self.ShapeClass.ArrowHeadShapeMC <> nil) then
+ begin
+  if SameValue(Result.Left, Result.Right) then
+  begin
+   Result.Right := Result.Left + Self.ShapeClass.ArrowHeadShapeMC.InitialHeight;
+   Result.Left := Result.Left - Self.ShapeClass.ArrowHeadShapeMC.InitialHeight;
+  end;//SameValue(Result.Left, Result.Right)
+  if SameValue(Result.Top, Result.Bottom) then
+  begin
+   Result.Bottom := Result.Top + Self.ShapeClass.ArrowHeadShapeMC.InitialHeight;
+   Result.Top := Result.Top - Self.ShapeClass.ArrowHeadShapeMC.InitialHeight;
+  end;//SameValue(Result.Top, Result.Bottom)
+ end;//Self.ShapeClass.ArrowHeadShapeMC <> nil
  if (Result.Top > Result.Bottom) then
  begin
   l_Tmp := Result.Bottom;
