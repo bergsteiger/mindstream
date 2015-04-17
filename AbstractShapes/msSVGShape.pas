@@ -39,14 +39,14 @@ begin
  try
   Assert(Self.ShapeClass.SVGCode <> '');
   l_PD.Data := Self.ShapeClass.SVGCode;
-  l_PD.FlattenToPolygon(l_PolygonSVG);
+  l_PD.FlattenToPolygon(l_PolygonSVG, 0.05);
   l_R := PolygonBounds(l_PolygonSVG);
 
   l_StartPoint := StartPoint;
+  l_Mid := (l_R.BottomRight + l_R.TopLeft) / 2;
   Result := nil;
   for l_P in l_PolygonSVG do
   begin
-   l_Mid := (l_R.BottomRight + l_R.TopLeft) / 2;
    Result := Result + [(l_P - l_Mid) + l_StartPoint];
   end;//for l_P in l_PolygonSVG
  finally

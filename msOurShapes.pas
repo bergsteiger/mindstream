@@ -141,11 +141,12 @@ begin
 
   TmsSVGShape.Specify('Folder')
    .SetSVGCode(
-    'M 0,20, L 100,20, L 100,90, L 0,90, L 0,20' +
+    'M 0, 20, L 100, 20, L 100, 90, L 0, 90, L 0, 20' +
     // begin UHO
     'L 0, 0' +
     'L 40, 0' +
-    'L 40, 20'
+    'L 40, 19' +
+    'L 1, 19'
    )
    ;
 
