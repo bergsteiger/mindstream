@@ -32,6 +32,7 @@ var
  l_PD: TPathData;
  l_R : TRectF;
  l_P : TPointF;
+ l_P1 : TPointF;
  l_Mid : TPointF;
  l_StartPoint : TPointF;
 begin
@@ -47,7 +48,8 @@ begin
   Result := nil;
   for l_P in l_PolygonSVG do
   begin
-   Result := Result + [(l_P - l_Mid) + l_StartPoint];
+   l_P1 := (l_P - l_Mid) + l_StartPoint;
+   Result := Result + [l_P1];
   end;//for l_P in l_PolygonSVG
  finally
   FreeAndNil(l_PD);
