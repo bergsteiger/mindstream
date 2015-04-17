@@ -294,6 +294,7 @@ type
   function SetAdditionalLinesH(const aValue: TmsAdditionalLineCoeff): ImsShapeClassTuner;
   function SetShapeView(const aValue: ImsShapeView): ImsShapeClassTuner;
   function SetText(const aValue: String): ImsShapeClassTuner;
+  function SetArrowHeadShapeMC(const aValue: ImsShapeClass): ImsShapeClassTuner;
  end;//ImsShapeClassTuner
 
  TmsShapeClassName = record
@@ -333,6 +334,7 @@ type
   function CreateShape(const aContext: TmsMakeShapeContext): ImsShape; overload;
   function ShapeView: ImsShapeView;
   function Text: String;
+  function ArrowHeadShapeMC: ImsShapeClass;
  end;//ImsShapeClass
 
  ImsDiagramm = interface(ImsShapesProvider)

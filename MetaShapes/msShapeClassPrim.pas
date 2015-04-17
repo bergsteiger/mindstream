@@ -23,6 +23,7 @@ type
   f_AdditionalLinesH : TmsAdditionalLineCoeff;
   f_ShapeView : ImsShapeView;
   f_Text : String;
+  f_ArrowHeadShapeMC: ImsShapeClass;
  protected
   function ParentMC: ImsShapeClass; virtual;
   function AsMC: ImsShapeClass; virtual;
@@ -40,6 +41,8 @@ type
   function ShapeView: ImsShapeView;
   function SetText(const aValue: String): ImsShapeClassTuner;
   function Text: String;
+  function SetArrowHeadShapeMC(const aValue: ImsShapeClass): ImsShapeClassTuner;
+  function ArrowHeadShapeMC: ImsShapeClass;
   function InitialHeight: Pixel;
   function InitialWidth: Pixel;
   function CornerRadius: Pixel;
@@ -92,6 +95,7 @@ begin
   f_AdditionalLinesH := l_PMC.AdditionalLinesH;
   f_ShapeView := l_PMC.ShapeView;
   f_Text := l_PMC.Text;
+  f_ArrowHeadShapeMC := l_PMC.ArrowHeadShapeMC;
  end;//l_PMC <> nil
 end;
 
@@ -224,6 +228,17 @@ end;
 function TmsShapeClassPrim.Text: String;
 begin
  Result := f_Text;
+end;
+
+function TmsShapeClassPrim.SetArrowHeadShapeMC(const aValue: ImsShapeClass): ImsShapeClassTuner;
+begin
+ Result := Self;
+ f_ArrowHeadShapeMC := aValue;
+end;
+
+function TmsShapeClassPrim.ArrowHeadShapeMC: ImsShapeClass;
+begin
+ Result := f_ArrowHeadShapeMC;
 end;
 
 function TmsShapeClassPrim.StereotypePlace: TmsStereotypePlace;
