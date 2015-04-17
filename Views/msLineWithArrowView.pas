@@ -36,7 +36,7 @@ begin
  //!!! тут на самом деле надо пробегать цепочку родителей и брать того у кого ShapeView <> Self
  if (ImsShapeView(Self) <> l_PMC) then
   l_PMC.DrawShape(aCtx, aShape);
- if (aShape.StartPoint <> aShape.FinishPoint) then
+(* if (aShape.StartPoint <> aShape.FinishPoint) then
  begin
   l_OriginalMatrix := aCtx.rCanvas.Matrix;
   try
@@ -79,7 +79,7 @@ begin
     aCtx.rCanvas.SetMatrix(l_OriginalMatrix);
   // - восстанавливаем ќ–»√»ЌјЋ№Ќ”ё матрицу
   end;//try..finally
- end;//(StartPoint <> FinishPoint)
+ end;//(StartPoint <> FinishPoint)*)
 end;
 
 end.
