@@ -49,6 +49,8 @@ begin
   for l_P in l_PolygonSVG do
   begin
    l_P1 := (l_P - l_Mid) + l_StartPoint;
+//   l_P1.X := Round(l_P1.X);
+//   l_P1.Y := Round(l_P1.Y);
    Result := Result + [l_P1];
   end;//for l_P in l_PolygonSVG
  finally
