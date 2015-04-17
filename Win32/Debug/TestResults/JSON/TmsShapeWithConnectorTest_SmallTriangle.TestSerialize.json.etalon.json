@@ -2,15 +2,15 @@
 	"type": "msDiagramm.TmsDiagramm",
 	"id": 1,
 	"fields": {
-		"fName": "Диаграмма №7",
+		"fName": "Диаграмма №4",
 		"f_Items": [{
 			"type": "msTriangleDirectionRight.TmsTriangleDirectionRight",
 			"id": 2,
 			"fields": {
-				"FStartPoint": [[320,
-				1302],
-				320,
-				1302],
+				"FStartPoint": [[684,
+				205],
+				684,
+				205],
 				"f_ShapeClassName": "SmallTriangle",
 				"f_Name": "SmallTriangle1",
 				"f_UID": [[1,
@@ -29,10 +29,10 @@
 			"type": "msTriangleDirectionRight.TmsTriangleDirectionRight",
 			"id": 4,
 			"fields": {
-				"FStartPoint": [[247,
-				527],
-				247,
-				527],
+				"FStartPoint": [[830,
+				942],
+				830,
+				942],
 				"f_ShapeClassName": "SmallTriangle",
 				"f_Name": "SmallTriangle2",
 				"f_UID": [[2,
@@ -51,10 +51,10 @@
 			"type": "msTriangleDirectionRight.TmsTriangleDirectionRight",
 			"id": 6,
 			"fields": {
-				"FStartPoint": [[462,
-				1877],
-				462,
-				1877],
+				"FStartPoint": [[5,
+				471],
+				5,
+				471],
 				"f_ShapeClassName": "SmallTriangle",
 				"f_Name": "SmallTriangle3",
 				"f_UID": [[3,
@@ -73,10 +73,10 @@
 			"type": "msTriangleDirectionRight.TmsTriangleDirectionRight",
 			"id": 8,
 			"fields": {
-				"FStartPoint": [[495,
-				573],
-				495,
-				573],
+				"FStartPoint": [[878,
+				708],
+				878,
+				708],
 				"f_ShapeClassName": "SmallTriangle",
 				"f_Name": "SmallTriangle4",
 				"f_UID": [[4,
@@ -92,114 +92,47 @@
 			}
 		},
 		{
-			"type": "msTriangleDirectionRight.TmsTriangleDirectionRight",
-			"id": 10,
-			"fields": {
-				"FStartPoint": [[84,
-				1255],
-				84,
-				1255],
-				"f_ShapeClassName": "SmallTriangle",
-				"f_Name": "SmallTriangle5",
-				"f_UID": [[5,
-				0]],
-				"f_Items": [{
-					"type": "msDiagramm.TmsDiagramm",
-					"id": 11,
-					"fields": {
-						"fName": "main",
-						"f_Items": []
-					}
-				}]
-			}
-		},
-		{
-			"type": "msTriangleDirectionRight.TmsTriangleDirectionRight",
-			"id": 12,
-			"fields": {
-				"FStartPoint": [[61,
-				1528],
-				61,
-				1528],
-				"f_ShapeClassName": "SmallTriangle",
-				"f_Name": "SmallTriangle6",
-				"f_UID": [[6,
-				0]],
-				"f_Items": [{
-					"type": "msDiagramm.TmsDiagramm",
-					"id": 13,
-					"fields": {
-						"fName": "main",
-						"f_Items": []
-					}
-				}]
-			}
-		},
-		{
 			"type": "msConnector.TmsConnector",
-			"id": 14,
+			"id": 10,
 			"fields": {
 				"f_UIDLeft": [[0,
 				0]],
 				"f_UIDRight": [[2,
 				0]],
-				"f_FinishPoint": [[237.5,
-				536.5],
-				237.5,
-				536.5],
-				"FStartPoint": [[329.5,
-				1292.5],
-				329.5,
-				1292.5],
+				"f_FinishPoint": [[820.5,
+				951.5],
+				820.5,
+				951.5],
+				"FStartPoint": [[693.5,
+				195.5],
+				693.5,
+				195.5],
 				"f_ShapeClassName": "Connector",
-				"f_Name": "Connector7",
-				"f_UID": [[7,
+				"f_Name": "Connector5",
+				"f_UID": [[5,
 				0]],
 				"f_Items": []
 			}
 		},
 		{
 			"type": "msConnector.TmsConnector",
-			"id": 15,
+			"id": 11,
 			"fields": {
 				"f_UIDLeft": [[0,
 				0]],
 				"f_UIDRight": [[4,
 				0]],
-				"f_FinishPoint": [[485.5,
-				582.5],
-				485.5,
-				582.5],
-				"FStartPoint": [[471.5,
-				1867.5],
-				471.5,
-				1867.5],
+				"f_FinishPoint": [[868.5,
+				717.5],
+				868.5,
+				717.5],
+				"FStartPoint": [[14.5,
+				461.5],
+				14.5,
+				461.5],
 				"f_ShapeClassName": "Connector",
-				"f_Name": "Connector7",
-				"f_UID": [[8,
-				0]],
-				"f_Items": []
-			}
-		},
-		{
-			"type": "msConnector.TmsConnector",
-			"id": 16,
-			"fields": {
-				"f_UIDLeft": [[0,
-				0]],
-				"f_UIDRight": [[6,
-				0]],
-				"f_FinishPoint": [[51.5,
-				1537.5],
-				51.5,
-				1537.5],
-				"FStartPoint": [[93.5,
-				1245.5],
-				93.5,
-				1245.5],
-				"f_ShapeClassName": "Connector",
-				"f_Name": "Connector7",
-				"f_UID": [[9,
+				"f_Name": "Connector5",
+				"f_UID": [[6,
 				0]],
 				"f_Items": []
 			}

@@ -61,16 +61,23 @@ DotLine
  IsForToolbar = False
  StereotypePlace = None
  SVGCode = 
-LineWithArrow
+TriangleDirectionRight
  InitialWidth = 0
- InitialHeight = 0
+ InitialHeight = 100
  CornerRadius = 0
  IsForToolbar = False
  StereotypePlace = None
  SVGCode = 
-TriangleDirectionRight
+SmallTriangle
  InitialWidth = 0
- InitialHeight = 100
+ InitialHeight = 20
+ CornerRadius = 0
+ IsForToolbar = False
+ StereotypePlace = None
+ SVGCode = 
+LineWithArrow
+ InitialWidth = 0
+ InitialHeight = 0
  CornerRadius = 0
  IsForToolbar = False
  StereotypePlace = None
@@ -91,13 +98,6 @@ GreenRectangle
  SVGCode = 
 PointCircle
  InitialWidth = 20
- InitialHeight = 20
- CornerRadius = 0
- IsForToolbar = False
- StereotypePlace = None
- SVGCode = 
-SmallTriangle
- InitialWidth = 0
  InitialHeight = 20
  CornerRadius = 0
  IsForToolbar = False
@@ -171,6 +171,13 @@ Realization
  InitialHeight = 0
  CornerRadius = 0
  IsForToolbar = True
+ StereotypePlace = None
+ SVGCode = 
+ArrowHead
+ InitialWidth = 0
+ InitialHeight = 20
+ CornerRadius = 0
+ IsForToolbar = False
  StereotypePlace = None
  SVGCode = 
 Association
@@ -326,13 +333,6 @@ writeonly
  CornerRadius = 0
  IsForToolbar = True
  StereotypePlace = Center
- SVGCode = 
-ArrowHead
- InitialWidth = 0
- InitialHeight = 20
- CornerRadius = 0
- IsForToolbar = False
- StereotypePlace = None
  SVGCode = 
 UsecaseRealizationFake
  InitialWidth = 100

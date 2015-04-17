@@ -95,11 +95,19 @@ begin
   TmsLine.Specify('DotLine')
    .SetStrokeDash(TStrokeDash.Dot)
    ;
-  TmsLineWithArrow.TMC
-   .SetShapeView(TmsLineWithArrowView.Create)
-   ;
   TmsTriangleDirectionRight.TMC
    .SetFillColor(TAlphaColorRec.Coral)
+   ;
+
+  TmsTriangleDirectionRight.Specify('SmallTriangle')
+   .SetFillColor(TAlphaColorRec.Aquamarine)
+   .SetInitialHeight(20)
+   .SetIsForToolbar(false)
+   ;
+
+  TmsLineWithArrow.TMC
+   .SetShapeView(TmsLineWithArrowView.Create)
+   .SetArrowHeadShapeMC(TmsShape.NamedMC('SmallTriangle'))
    ;
 
   TmsRectangle.MC.Specify('RedRectangle')
@@ -118,12 +126,6 @@ begin
    .SetInitialWidth(20)
    .SetInitialHeight(20)
    ;
-  TmsTriangleDirectionRight.Specify('SmallTriangle')
-   .SetFillColor(TAlphaColorRec.Aquamarine)
-   .SetInitialHeight(20)
-   .SetIsForToolbar(false)
-   ;
-
   // utility shapes
   TmsMover.TMC;
   TmsPicker.TMC;
@@ -212,10 +214,18 @@ begin
    .SetStrokeThickness(2)
    .SetStrokeDash(TStrokeDash.Dash)
    ;
+
+  TmsArrowHead.TMC
+   .SetStrokeThickness(1.5)
+   .SetInitialHeight(20)
+   .SetIsForToolbar(false)
+   ;
+
   TmsAssociation.TMC
    .SetStrokeThickness(1.5)
    .SetStrokeDash(TStrokeDash.Solid)
    .SetStereotypePlace(TmsStereotypePlace.Center)
+   .SetArrowHeadShapeMC(TmsArrowHead.MC)
    ;
   TmsAssociation.Specify('Dependency')
    .SetStrokeThickness(1.5)
@@ -280,12 +290,6 @@ begin
   TmsAssociation.Specify('property');
   TmsAssociation.Specify('readonly');
   TmsAssociation.Specify('writeonly');
-
-  TmsArrowHead.TMC
-   .SetStrokeThickness(1.5)
-   .SetInitialHeight(20)
-   .SetIsForToolbar(false)
-   ;
 
   TmsConnector.TMC
    .SetIsForToolbar(false)

@@ -10,7 +10,6 @@ uses
 type
  TmsAssociation = class(TmsConnector)
  protected
-  function ArrowHeadShapeMC: ImsShapeClass; override;
   function GetFinishPointForDraw: TPointF; override;
  end;//TmsAssociation
 
@@ -20,11 +19,6 @@ uses
  FMX.Graphics,
  msArrowHead
  ;
-
-function TmsAssociation.ArrowHeadShapeMC: ImsShapeClass;
-begin
- Result := TmsArrowHead.MC;
-end;
 
 function TmsAssociation.GetFinishPointForDraw: TPointF;
 begin

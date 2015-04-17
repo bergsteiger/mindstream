@@ -40,9 +40,9 @@ begin
  begin
   l_OriginalMatrix := aCtx.rCanvas.Matrix;
   try
-   l_LineFinishPoint := TPointF.Create(aShape.FinishPoint.X - aShape.ArrowHeadShapeMC.InitialHeight / 2,
+   l_LineFinishPoint := TPointF.Create(aShape.FinishPoint.X - aShape.ShapeClass.ArrowHeadShapeMC.InitialHeight / 2,
                                        aShape.FinishPoint.Y);
-   l_Proxy := aShape.ArrowHeadShapeMC.CreateShape(l_LineFinishPoint);
+   l_Proxy := aShape.ShapeClass.ArrowHeadShapeMC.CreateShape(l_LineFinishPoint);
    try
     // in Radian
     l_Angle := TmsShape.AngleBetween(aShape.StartPoint, aShape.FinishPoint);

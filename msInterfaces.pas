@@ -199,7 +199,6 @@ type
   // - действите нажатии
   function UID: TmsShapeUID;
 
-  function ArrowHeadShapeMC: ImsShapeClass;
   function GetFinishPointForDraw: TPointF;
   // - костыли пока
 
