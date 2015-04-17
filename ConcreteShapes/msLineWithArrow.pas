@@ -28,7 +28,7 @@ uses
  FMX.Types
  ;
 
- // TmsLineWithArrow
+// TmsLineWithArrow
 
 function TmsLineWithArrow.ArrowHeadShapeMC: ImsShapeClass;
 begin
@@ -54,7 +54,7 @@ function TmsLineWithArrow.GetFinishPointForDraw: TPointF;
 var
  l_Angle : Single;
 begin
- l_Angle := RotationAngle;
+ l_Angle := TmsShape.AngleBetween(StartPoint, FinishPoint);
  Result := TPointF.Create(FinishPoint.X - ArrowHeadShapeMC.InitialHeight * Cos(l_Angle),
                           FinishPoint.Y - ArrowHeadShapeMC.InitialHeight * Sin(l_Angle));
 end;

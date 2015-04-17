@@ -45,7 +45,7 @@ begin
    l_Proxy := aShape.ArrowHeadShapeMC.CreateShape(l_LineFinishPoint);
    try
     // in Radian
-    l_Angle := aShape.RotationAngle;
+    l_Angle := TmsShape.AngleBetween(aShape.StartPoint, aShape.FinishPoint);
 
     l_CenterPoint := aShape.FinishPoint;
 
