@@ -106,7 +106,6 @@ begin
    ;
 
   TmsLineWithArrow.TMC
-   .SetShapeView(TmsLineWithArrowView.Create)
    .SetArrowHeadShapeMC(TmsShape.NamedMC('SmallTriangle'))
    ;
 
