@@ -34,6 +34,7 @@ type
   function HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean; override;
   procedure MoveBy(const aCtx: TmsMoveContext); override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
+  class function BoundByContext(const aCtx: TmsMakeShapeContext): ImsShape;
  public
   class function IsConnectorLike: Boolean; override;
  end;//TmsConnector
@@ -46,6 +47,15 @@ uses
   ;
 
 // TmsConnector
+
+class function TmsConnector.BoundByContext(const aCtx: TmsMakeShapeContext): ImsShape;
+begin
+ Result := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
+ if (Result <> nil) then
+  if Result.ShapeClass.IsLineLike then
+  // - линии не будем привязывать к линиям
+   Result := nil;
+end;
 
 constructor TmsConnector.CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext);
 begin
