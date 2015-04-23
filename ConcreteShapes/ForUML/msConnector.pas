@@ -107,6 +107,11 @@ var
  l_B : TPointF;
  l_R : TmsPointF;
 begin
+(* if (inherited pm_GetStartPoint = inherited pm_GetFinishPoint) then
+ begin
+  Result := inherited pm_GetStartPoint;
+  Exit;
+ end;//inherited pm_GetStartPoint = inherited pm_GetFinishPoint*)
  if (RightShape <> nil) then
  begin
   l_B := RightShape.StartPoint;
@@ -120,7 +125,10 @@ begin
    Result := l_B;
  end//RightShape <> nil
  else
-  Result := inherited;
+ if (LeftShape = nil) then
+  Result := inherited
+ else
+  Result := pm_GetStartPoint;
 end;
 
 function TmsConnector.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
