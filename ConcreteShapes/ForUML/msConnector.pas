@@ -188,7 +188,7 @@ function TmsConnector.EndTo(const aCtx: TmsEndShapeContext): Boolean;
 begin
  if (aCtx.rShapesController <> nil) then
  begin
-  f_RightShape := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
+  f_RightShape := BoundByContext(aCtx);
   if (f_RightShape <> nil) then
    f_UIDRight := f_RightShape.UID;
  end;//aCtx.rShapesController <> nil
