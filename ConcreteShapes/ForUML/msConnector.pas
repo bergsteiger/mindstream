@@ -62,7 +62,7 @@ begin
  inherited;
  if (aCtx.rShapesController <> nil) then
  begin
-  f_LeftShape := aCtx.rShapesController.ShapeByPt(aCtx.rStartPoint);
+  f_LeftShape := BoundByContext(aCtx);
   if (f_LeftShape <> nil) then
    f_UIDLeft := f_LeftShape.UID;
  end;//aCtx.rShapesController <> nil
