@@ -126,9 +126,11 @@ begin
  end//RightShape <> nil
  else
  if (LeftShape = nil) then
+  // - если нет ќЅќ»’ границ, то мы - "лини€"
   Result := inherited
  else
   Result := pm_GetStartPoint;
+  // - если есть только лева€ граница, то мы - "точка"
 end;
 
 function TmsConnector.HitTest(const aPoint: TPointF; out theShape: ImsShape): Boolean;
