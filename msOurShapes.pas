@@ -56,13 +56,15 @@ begin
    .SetIsForToolbar(false)
    .SetShapeView(TmsLineView.Create)
    ;
-  TmsRectangularShape.Specify('Rectangle')
-   .SetFillColor(TAlphaColorRec.White)
-   .SetInitialHeight(90)
-   .SetInitialWidth(100)
-   .SetCornerRadius(0.0)
-   .SetShapeView(TmsRectangleView.Create)
-   ;
+  MCmsRectangle :=
+   TmsRectangularShape.Specify('Rectangle')
+    .SetFillColor(TAlphaColorRec.White)
+    .SetInitialHeight(90)
+    .SetInitialWidth(100)
+    .SetCornerRadius(0.0)
+    .SetShapeView(TmsRectangleView.Create)
+    .AsMC
+    ;
   TmsCircle.TMC
    .SetFillColor(TAlphaColorRec.Red)
    .SetInitialHeight(100)

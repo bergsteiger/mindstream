@@ -11,6 +11,7 @@ var
  MCmsFolder : TmsWeakShapeClassRef;
  MCmsRemoveIcon : TmsWeakShapeClassRef;
  MCmsGreenCircle : TmsWeakShapeClassRef;
+ MCmsRectangle : TmsWeakShapeClassRef;
 
 implementation
 
