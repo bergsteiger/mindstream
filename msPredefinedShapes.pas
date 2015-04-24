@@ -8,6 +8,7 @@ uses
 
 var
  MCmsPointCircle : TmsWeakShapeClassRef;
+ MCmsFolder : TmsWeakShapeClassRef;
 
 implementation
 

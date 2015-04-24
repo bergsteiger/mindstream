@@ -139,16 +139,18 @@ begin
   TmsSVGShape.NRTMC
    .SetFillColor(TAlphaColorRec.Azure);
 
-  TmsSVGShape.Specify('Folder')
-   .SetSVGCode(
-    'M 0, 20, L 100, 20, L 100, 90, L 0, 90, L 0, 20' +
-    // begin UHO
-    'L 0, 0' +
-    'L 40, 0' +
-    'L 40, 19.9' +
-    'L 1.9, 19.9'
-   )
-   ;
+  MCmsFolder :=
+   TmsSVGShape.Specify('Folder')
+    .SetSVGCode(
+     'M 0, 20, L 100, 20, L 100, 90, L 0, 90, L 0, 20' +
+     // begin UHO
+     'L 0, 0' +
+     'L 40, 0' +
+     'L 40, 19.9' +
+     'L 1.9, 19.9'
+    )
+    .AsMC
+    ;
 
   TmsCircle.Specify('GreenCircle')
    .SetFillColor(TAlphaColorRec.Green)
@@ -245,7 +247,7 @@ begin
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
-  TmsShape.NamedMC('Folder').Specify('Library')
+  MCmsFolder.AsRef.Specify('Library')
    .SetStereotypePlace(TmsStereotypePlace.Center)
    ;
 
@@ -304,7 +306,7 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsShape.N('Folder')
+  MCmsFolder.AsRef.AsTuner
    .SetIsForToolbar(false)
    ;
 
