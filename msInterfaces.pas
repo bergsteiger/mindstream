@@ -199,7 +199,7 @@ type
   // - действите нажатии
   function UID: TmsShapeUID;
 
-  function GetFinishPointForDraw: TPointF;
+  function TransformFinishPoint(const aPoint: TPointF): TPointF;
   // - костыли пока
 
   function pm_GetStartPoint: TPointF;
