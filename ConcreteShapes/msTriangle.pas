@@ -40,8 +40,8 @@ end;
 
 function TmsTriangle.TransformFinishPoint(anAngle: Single; const aPoint: TPointF): TPointF;
 begin
- Result := TPointF.Create(FinishPoint.X - Self.ShapeClass.InitialHeight * Cos(anAngle),
-                          FinishPoint.Y - Self.ShapeClass.InitialHeight * Sin(anAngle));
+ Result := TPointF.Create(StartPoint.X - Self.ShapeClass.InitialHeight * Cos(anAngle),
+                          StartPoint.Y - Self.ShapeClass.InitialHeight * Sin(anAngle));
 end;
 
 end.
