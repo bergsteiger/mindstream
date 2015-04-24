@@ -109,7 +109,6 @@ uses
   FMX.DUnit.Utils in 'fmx.dunit\FMX.DUnit.Utils.pas',
   msConnector in 'ConcreteShapes\ForUML\msConnector.pas',
   msLineF in 'Core\msLineF.pas',
-  msAssociation in 'ConcreteShapes\ForUML\msAssociation.pas',
   msArrowHead in 'ConcreteShapes\msArrowHead.pas',
   msPolylineShape in 'AbstractShapes\msPolylineShape.pas',
   msShapeClassPrim in 'MetaShapes\msShapeClassPrim.pas',

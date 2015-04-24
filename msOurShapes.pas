@@ -36,7 +36,6 @@ uses
   msScrollShapeResetOrigin,
   msScrollingTool,
   msConnector,
-  msAssociation,
   msArrowHead,
   msSVGShape,
   msScrollShape,
@@ -220,13 +219,13 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsAssociation.TMC
+  TmsConnector.Specify('Association')
    .SetStrokeThickness(1.5)
    .SetStrokeDash(TStrokeDash.Solid)
    .SetStereotypePlace(TmsStereotypePlace.Center)
    .SetArrowHeadShapeMC(TmsArrowHead.MC)
    ;
-  TmsAssociation.Specify('Dependency')
+  TmsShape.NamedMC('Association').Specify('Dependency')
    .SetStrokeThickness(1.5)
    .SetStrokeDash(TStrokeDash.Dash)
    ;
@@ -286,9 +285,9 @@ begin
   TmsShape.NamedMC('Dependency').Specify('uses');
   TmsShape.NamedMC('Dependency').Specify('friend');
   TmsShape.NamedMC('Dependency').Specify('injects');
-  TmsAssociation.Specify('property');
-  TmsAssociation.Specify('readonly');
-  TmsAssociation.Specify('writeonly');
+  TmsShape.NamedMC('Association').Specify('property');
+  TmsShape.NamedMC('Association').Specify('readonly');
+  TmsShape.NamedMC('Association').Specify('writeonly');
 
   TmsConnector.TMC
    .SetIsForToolbar(false)
