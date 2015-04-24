@@ -37,7 +37,7 @@ begin
  end//StartPoint = FinishPoint
  else
  begin
-  l_FinishPoint := aShape.TransformFinishPoint(aShape.FinishPoint);
+  l_FinishPoint := aShape.ShapeClass.ArrowHeadShapeMC.TransformFinishPoint(aShape.FinishPoint);
   aCtx.rCanvas.DrawLine(aShape.StartPoint, l_FinishPoint, 1);
  end;//StartPoint = FinishPoint
 end;
