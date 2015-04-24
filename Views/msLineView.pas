@@ -16,7 +16,8 @@ type
 implementation
 
 uses
- msShape
+ msShape,
+ msPredefinedShapes
  ;
 
 // TmsLineView
@@ -28,7 +29,7 @@ var
 begin
  if (aShape.StartPoint = aShape.FinishPoint) then
  begin
-  l_Proxy := TmsShape.NamedMC('PointCircle').CreateShape(aShape.StartPoint);
+  l_Proxy := MCmsPointCircle.AsRef.CreateShape(aShape.StartPoint);
   try
    l_Proxy.DrawTo(aCtx);
   finally

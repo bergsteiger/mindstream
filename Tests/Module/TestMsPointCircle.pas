@@ -35,12 +35,13 @@ type
 implementation
 
 uses
- msShapeCreator
+ msShapeCreator,
+ msPredefinedShapes
  ;
 
 procedure TestTmsPointCircle.SetUp;
 begin
-  FmsPointCircle := TmsShape.NamedMC('PointCircle').CreateShape(TPointF.Create(0, 0));
+  FmsPointCircle := MCmsPointCircle.AsRef.CreateShape(TPointF.Create(0, 0));
 end;
 
 procedure TestTmsPointCircle.TearDown;

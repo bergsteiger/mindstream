@@ -118,12 +118,14 @@ begin
    ;
 
   // special shapes
-  TmsCircle.Specify('PointCircle')
-   .SetFillColor(TAlphaColorRec.Null)
-   .SetIsForToolbar(false)
-   .SetInitialWidth(20)
-   .SetInitialHeight(20)
-   ;
+  MCmsPointCircle :=
+   TmsCircle.Specify('PointCircle')
+    .SetFillColor(TAlphaColorRec.Null)
+    .SetIsForToolbar(false)
+    .SetInitialWidth(20)
+    .SetInitialHeight(20)
+    .AsMC
+    ;
   // utility shapes
   TmsMover.TMC;
   TmsPicker.TMC;
