@@ -39,7 +39,7 @@ begin
  begin
   l_Proxy := aShape.ShapeClass.ArrowHeadShapeMC.CreateShape(aShape.FinishPoint);
   try
-   l_Proxy.TransformFinishPoint(TmsShape.AngleBetween(aShape.StartPoint, aShape.FinishPoint), aShape.FinishPoint);
+   l_FinishPoint := l_Proxy.TransformFinishPoint(TmsShape.AngleBetween(aShape.StartPoint, aShape.FinishPoint), aShape.FinishPoint);
    aCtx.rCanvas.DrawLine(aShape.StartPoint, l_FinishPoint, 1);
   finally
    l_Proxy := nil;

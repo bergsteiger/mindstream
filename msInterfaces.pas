@@ -200,6 +200,7 @@ type
   function UID: TmsShapeUID;
 
   function TransformFinishPoint(anAngle: Single; const aPoint: TPointF): TPointF;
+  // - это уже не совсем костыль
   // - костыли пока
 
   function pm_GetStartPoint: TPointF;
