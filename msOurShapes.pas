@@ -151,11 +151,14 @@ begin
     )
     .AsMC
     ;
+ 
+  MCmsGreenCircle :=
+   TmsCircle.Specify('GreenCircle')
+    .SetFillColor(TAlphaColorRec.Green)
+    .SetIsForToolbar(false)
+    .AsMC
+    ;
 
-  TmsCircle.Specify('GreenCircle')
-   .SetFillColor(TAlphaColorRec.Green)
-   .SetIsForToolbar(false)
-   ;
   TmsTriangle.Specify('BlackTriangle')
    .SetFillColor(TAlphaColorRec.Black)
    ;
