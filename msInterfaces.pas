@@ -199,7 +199,7 @@ type
   // - действите нажатии
   function UID: TmsShapeUID;
 
-  function TransformFinishPoint(anAngle: Single; const aPoint: TPointF): TPointF;
+  function TransformFinishPoint(anAngle: Single): TPointF;
   // - это уже не совсем костыль
   // - костыли пока
 

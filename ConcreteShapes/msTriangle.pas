@@ -16,7 +16,7 @@ type
  TmsTriangle = class(TmsPolygonShape)
  protected
   function GetPolygon: TPolygon; override;
-  function TransformFinishPoint(anAngle: Single; const aPoint: TPointF): TPointF; override;
+  function TransformFinishPoint(anAngle: Single): TPointF; override;
  end;//TmsTriangle
 
 implementation
@@ -38,7 +38,7 @@ begin
  Result[3] := Result[0];
 end;
 
-function TmsTriangle.TransformFinishPoint(anAngle: Single; const aPoint: TPointF): TPointF;
+function TmsTriangle.TransformFinishPoint(anAngle: Single): TPointF;
 begin
  Result := TPointF.Create(StartPoint.X - Self.ShapeClass.InitialHeight * Cos(anAngle),
                           StartPoint.Y - Self.ShapeClass.InitialHeight * Sin(anAngle));

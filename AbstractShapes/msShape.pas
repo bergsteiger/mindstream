@@ -33,7 +33,7 @@ type
  public
   class function AngleBetween(const aStart: TPointF; const aFinish: TPointF): Single;
  strict protected
-  function TransformFinishPoint(anAngle: Single; const aPoint: TPointF): TPointF; virtual;
+  function TransformFinishPoint(anAngle: Single): TPointF; virtual;
   function pm_GetShapeClass: ImsShapeClass; virtual;
   property ShapeClass: ImsShapeClass
    read pm_GetShapeClass;
@@ -343,9 +343,9 @@ begin
  Result := l_Invert * (l_AlphaAngle + l_RotationAngle);
 end;
 
-function TmsShape.TransformFinishPoint(anAngle: Single; const aPoint: TPointF): TPointF;
+function TmsShape.TransformFinishPoint(anAngle: Single): TPointF;
 begin
- Result := aPoint;
+ Result := Self.StartPoint;
 end;
 
 function TmsShape.pm_GetShapeClass: ImsShapeClass;
