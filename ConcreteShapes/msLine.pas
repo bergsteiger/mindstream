@@ -19,7 +19,6 @@ type
   constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); override;
   class function IsLineLike: Boolean; override;
   function GetDrawBounds: TRectF; override;
-  function GetFinishPointForDraw: TPointF; override;
   function ContainsPt(const aPoint: TPointF): Boolean; override;
   class function SamePoint(const A: TPointF; const B: TPointF): Boolean;
   function pm_GetFinishPoint: TPointF; override;
@@ -59,11 +58,6 @@ end;
 function TmsLine.GetDrawBounds: TRectF;
 begin
  Result := TRectF.Create(StartPoint, FinishPoint);
-end;
-
-function TmsLine.GetFinishPointForDraw: TPointF;
-begin
- Result := FinishPoint;
 end;
 
 class function TmsLine.SamePoint(const A: TPointF; const B: TPointF): Boolean;
