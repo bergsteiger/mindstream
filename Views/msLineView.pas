@@ -37,13 +37,17 @@ begin
  end//StartPoint = FinishPoint
  else
  begin
-  l_Proxy := aShape.ShapeClass.ArrowHeadShapeMC.CreateShape(aShape.FinishPoint);
-  try
-   l_FinishPoint := l_Proxy.TransformFinishPoint(TmsShape.AngleBetween(aShape.StartPoint, aShape.FinishPoint), aShape.FinishPoint);
-   aCtx.rCanvas.DrawLine(aShape.StartPoint, l_FinishPoint, 1);
-  finally
-   l_Proxy := nil;
-  end;//try..finally
+  l_FinishPoint := aShape.FinishPoint;
+  if (aShape.ShapeClass.ArrowHeadShapeMC <> nil) then
+  begin
+   l_Proxy := aShape.ShapeClass.ArrowHeadShapeMC.CreateShape(l_FinishPoint);
+   try
+    l_FinishPoint := l_Proxy.TransformFinishPoint(TmsShape.AngleBetween(aShape.StartPoint, l_FinishPoint), l_FinishPoint);
+   finally
+    l_Proxy := nil;
+   end;//try..finally
+  end;//aShape.ShapeClass.ArrowHeadShapeMC <> nil
+  aCtx.rCanvas.DrawLine(aShape.StartPoint, l_FinishPoint, 1);
  end;//StartPoint = FinishPoint
 end;
 
