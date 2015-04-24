@@ -17,14 +17,14 @@ type
 implementation
 
 uses
- msShape
+ msPredefinedShapes
  ;
 
 // TmsRemoveIcon
 
 class function TmsRemoveIcon.Create(const aPoint: TPointF): ImsShape;
 begin
- Result := TmsShape.NamedMC('RemoveIcon').CreateShape(aPoint);
+ Result := MCmsRemoveIcon.AsRef.CreateShape(aPoint);
 end;
 
 class function TmsRemoveIcon.Create: ImsShape;

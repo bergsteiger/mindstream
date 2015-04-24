@@ -165,14 +165,16 @@ begin
    .SetInitialWidth(15)
    .SetIsForToolbar(false)
    ;
-  TmsSVGShape.Specify('RemoveIcon')
-   .SetFillColor(TAlphaColorRec.Mediumvioletred)
-   .SetIsForToolbar(false)
-   .SetSVGCode(
-    'M 10,30 L 30,10 L 50,30 L 70,10 L 90,30 L 70,50 L 90,70' +
-    'L 70,90 L 50,70 L 30,90 L 10,70 L 30,50 L 30,50 L 10,30'
-   )
-   ;
+  MCmsRemoveIcon :=
+   TmsSVGShape.Specify('RemoveIcon')
+    .SetFillColor(TAlphaColorRec.Mediumvioletred)
+    .SetIsForToolbar(false)
+    .SetSVGCode(
+     'M 10,30 L 30,10 L 50,30 L 70,10 L 90,30 L 70,50 L 90,70' +
+     'L 70,90 L 50,70 L 30,90 L 10,70 L 30,50 L 30,50 L 10,30'
+    )
+    .AsMC
+    ;
   TmsMoveIcon.TMC
    .SetFillColor(TAlphaColorRec.Black)
    .SetIsForToolbar(false)
