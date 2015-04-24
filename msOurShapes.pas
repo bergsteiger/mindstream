@@ -43,7 +43,8 @@ uses
   msActor,
   msRectangle,
   msCircleView,
-  msLineView
+  msLineView,
+  msPredefinedShapes
   ;
 
 // Важно !!!
