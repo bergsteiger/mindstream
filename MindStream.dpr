@@ -155,7 +155,8 @@ uses
   msRectangle in 'ConcreteShapes\msRectangle.pas',
   msCircleView in 'Views\msCircleView.pas',
   msLineView in 'Views\msLineView.pas',
-  msPredefinedShapes in 'msPredefinedShapes.pas';
+  msPredefinedShapes in 'msPredefinedShapes.pas',
+  msActorView in 'Views\msActorView.pas';
 
 {$R *.res}
 
