@@ -43,7 +43,8 @@ uses
   msActor,
   msRectangle,
   msCircleView,
-  msLineView
+  msLineView,
+  msPredefinedShapes
   ;
 
 // Важно !!!
@@ -55,13 +56,15 @@ begin
    .SetIsForToolbar(false)
    .SetShapeView(TmsLineView.Create)
    ;
-  TmsRectangularShape.Specify('Rectangle')
-   .SetFillColor(TAlphaColorRec.White)
-   .SetInitialHeight(90)
-   .SetInitialWidth(100)
-   .SetCornerRadius(0.0)
-   .SetShapeView(TmsRectangleView.Create)
-   ;
+  MCmsRectangle :=
+   TmsRectangularShape.Specify('Rectangle')
+    .SetFillColor(TAlphaColorRec.White)
+    .SetInitialHeight(90)
+    .SetInitialWidth(100)
+    .SetCornerRadius(0.0)
+    .SetShapeView(TmsRectangleView.Create)
+    .AsMC
+    ;
   TmsCircle.TMC
    .SetFillColor(TAlphaColorRec.Red)
    .SetInitialHeight(100)
@@ -75,10 +78,14 @@ begin
    .SetCornerRadius(10)
    .SetIsForToolbar(false)
    ;
-  TmsCircle.Specify('UseCaseLikeEllipse')
-   .SetFillColor(TAlphaColorRec.Yellow)
-   .SetInitialHeight(70)
-   ;
+
+  MCmsUseCaseLikeEllipse :=
+   TmsCircle.Specify('UseCaseLikeEllipse')
+    .SetFillColor(TAlphaColorRec.Yellow)
+    .SetInitialHeight(70)
+    .AsMC
+    ;
+
   TmsTriangle.TMC
    .SetFillColor(TAlphaColorRec.Green)
    .SetInitialHeight(100)
@@ -97,14 +104,16 @@ begin
    .SetFillColor(TAlphaColorRec.Coral)
    ;
 
-  TmsTriangleDirectionRight.Specify('SmallTriangle')
-   .SetFillColor(TAlphaColorRec.Aquamarine)
-   .SetInitialHeight(20)
-   .SetIsForToolbar(false)
-   ;
+  MCmsSmallTriangle :=
+   TmsTriangleDirectionRight.Specify('SmallTriangle')
+    .SetFillColor(TAlphaColorRec.Aquamarine)
+    .SetInitialHeight(20)
+    .SetIsForToolbar(false)
+    .AsMC
+    ;
 
   TmsLineWithArrow.TMC
-   .SetArrowHeadShapeMC(TmsShape.NamedMC('SmallTriangle'))
+   .SetArrowHeadShapeMC(MCmsSmallTriangle)
    ;
 
   TmsRectangle.MC.Specify('RedRectangle')
@@ -117,12 +126,14 @@ begin
    ;
 
   // special shapes
-  TmsCircle.Specify('PointCircle')
-   .SetFillColor(TAlphaColorRec.Null)
-   .SetIsForToolbar(false)
-   .SetInitialWidth(20)
-   .SetInitialHeight(20)
-   ;
+  MCmsPointCircle :=
+   TmsCircle.Specify('PointCircle')
+    .SetFillColor(TAlphaColorRec.Null)
+    .SetIsForToolbar(false)
+    .SetInitialWidth(20)
+    .SetInitialHeight(20)
+    .AsMC
+    ;
   // utility shapes
   TmsMover.TMC;
   TmsPicker.TMC;
@@ -136,21 +147,26 @@ begin
   TmsSVGShape.NRTMC
    .SetFillColor(TAlphaColorRec.Azure);
 
-  TmsSVGShape.Specify('Folder')
-   .SetSVGCode(
-    'M 0, 20, L 100, 20, L 100, 90, L 0, 90, L 0, 20' +
-    // begin UHO
-    'L 0, 0' +
-    'L 40, 0' +
-    'L 40, 19.9' +
-    'L 1.9, 19.9'
-   )
-   ;
+  MCmsFolder :=
+   TmsSVGShape.Specify('Folder')
+    .SetSVGCode(
+     'M 0, 20, L 100, 20, L 100, 90, L 0, 90, L 0, 20' +
+     // begin UHO
+     'L 0, 0' +
+     'L 40, 0' +
+     'L 40, 19.9' +
+     'L 1.9, 19.9'
+    )
+    .AsMC
+    ;
+ 
+  MCmsGreenCircle :=
+   TmsCircle.Specify('GreenCircle')
+    .SetFillColor(TAlphaColorRec.Green)
+    .SetIsForToolbar(false)
+    .AsMC
+    ;
 
-  TmsCircle.Specify('GreenCircle')
-   .SetFillColor(TAlphaColorRec.Green)
-   .SetIsForToolbar(false)
-   ;
   TmsTriangle.Specify('BlackTriangle')
    .SetFillColor(TAlphaColorRec.Black)
    ;
@@ -160,14 +176,16 @@ begin
    .SetInitialWidth(15)
    .SetIsForToolbar(false)
    ;
-  TmsSVGShape.Specify('RemoveIcon')
-   .SetFillColor(TAlphaColorRec.Mediumvioletred)
-   .SetIsForToolbar(false)
-   .SetSVGCode(
-    'M 10,30 L 30,10 L 50,30 L 70,10 L 90,30 L 70,50 L 90,70' +
-    'L 70,90 L 50,70 L 30,90 L 10,70 L 30,50 L 30,50 L 10,30'
-   )
-   ;
+  MCmsRemoveIcon :=
+   TmsSVGShape.Specify('RemoveIcon')
+    .SetFillColor(TAlphaColorRec.Mediumvioletred)
+    .SetIsForToolbar(false)
+    .SetSVGCode(
+     'M 10,30 L 30,10 L 50,30 L 70,10 L 90,30 L 70,50 L 90,70' +
+     'L 70,90 L 50,70 L 30,90 L 10,70 L 30,50 L 30,50 L 10,30'
+    )
+    .AsMC
+    ;
   TmsMoveIcon.TMC
    .SetFillColor(TAlphaColorRec.Black)
    .SetIsForToolbar(false)
@@ -219,93 +237,114 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsConnector.Specify('Association')
-   .SetStrokeThickness(1.5)
-   .SetStrokeDash(TStrokeDash.Solid)
-   .SetStereotypePlace(TmsStereotypePlace.Center)
-   .SetArrowHeadShapeMC(TmsArrowHead.MC)
-   ;
-  TmsShape.NamedMC('Association').Specify('Dependency')
-   .SetStrokeThickness(1.5)
-   .SetStrokeDash(TStrokeDash.Dash)
-   ;
+  MCmsAssociation :=
+   TmsConnector.Specify('Association')
+    .SetStrokeThickness(1.5)
+    .SetStrokeDash(TStrokeDash.Solid)
+    .SetStereotypePlace(TmsStereotypePlace.Center)
+    .SetArrowHeadShapeMC(TmsArrowHead.MC)
+    .AsMC
+    ;
 
-  TmsRectangle.MC.Specify('Class')
-   .SetStereotypePlace(TmsStereotypePlace.OneThirty)
-   .SetAdditionalLinesH([1 /3, 2 / 3])
-   ;
+  MCmsDependency :=
+   MCmsAssociation.AsRef.Specify('Dependency')
+    .SetStrokeThickness(1.5)
+    .SetStrokeDash(TStrokeDash.Dash)
+    .AsMC
+    ;
 
-  TmsShape.NamedMC('Class').Specify('Interface')
-   .SetFillColor(TAlphaColorRec.Lightblue)
-   ;
-  TmsShape.NamedMC('Class').Specify('MixIn')
-   .SetFillColor(TAlphaColorRec.Lightgreen)
-   ;
+  MCmsClass :=
+   TmsRectangle.MC.Specify('Class')
+    .SetStereotypePlace(TmsStereotypePlace.OneThirty)
+    .SetAdditionalLinesH([1 /3, 2 / 3])
+    .AsMC
+    ;
 
-  TmsShape.NamedMC('Folder').Specify('Library')
-   .SetStereotypePlace(TmsStereotypePlace.Center)
-   ;
-
-  TmsShape.NamedMC('Library').Specify('Project')
-   .SetFillColor(TAlphaColorRec.Lightgreen)
-   ;
-  TmsShape.NamedMC('Library').Specify('Subsystem')
+  MCmsClass.AsRef.Specify('Interface')
    .SetFillColor(TAlphaColorRec.Lightblue)
    ;
 
-  TmsShape.NamedMC('UseCaseLikeEllipse').Specify('Usecase')
-   .SetFillColor(TAlphaColorRec.Lightyellow)
-   .SetStereotypePlace(TmsStereotypePlace.Bottom)
-   ;
-
-  TmsShape.NamedMC('Usecase').Specify('UsecaseRealization')
+  MCmsClass.AsRef.Specify('MixIn')
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
-  TmsRectangle.MC.Specify('Trivial')
-   .SetInitialHeightScale( 1 / 3 * 2 )
-   .SetStereotypePlace(TmsStereotypePlace.Center)
+  MCmsLibrary :=
+   MCmsFolder.AsRef.Specify('Library')
+    .SetStereotypePlace(TmsStereotypePlace.Center)
+    .AsMC
+    ;
+
+  MCmsLibrary.AsRef.Specify('Project')
+   .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
-  TmsShape.NamedMC('Library').Specify('Layer')
+  MCmsLibrary.AsRef.Specify('Subsystem')
+   .SetFillColor(TAlphaColorRec.Lightblue)
+   ;
+
+  MCmsUsecase :=
+   MCmsUseCaseLikeEllipse.AsRef.Specify('Usecase')
+    .SetFillColor(TAlphaColorRec.Lightyellow)
+    .SetStereotypePlace(TmsStereotypePlace.Bottom)
+    .AsMC
+    ;
+
+  MCmsUsecaseRealization :=
+   MCmsUsecase.AsRef.Specify('UsecaseRealization')
+    .SetFillColor(TAlphaColorRec.Lightgreen)
+    .AsMC
+    ;
+
+  MCmsTrivial :=
+   TmsRectangle.MC.Specify('Trivial')
+    .SetInitialHeightScale( 1 / 3 * 2 )
+    .SetStereotypePlace(TmsStereotypePlace.Center)
+    .AsMC
+    ;
+
+  MCmsLibrary.AsRef.Specify('Layer')
    .SetFillColor(TAlphaColorRec.Lightgray)
    ;
-  TmsShape.NamedMC('Trivial').Specify('Typedef')
+  MCmsTrivial.AsRef.Specify('Typedef')
    .SetFillColor(TAlphaColorRec.Gray)
    ;
-  TmsShape.NamedMC('Trivial').Specify('Exception')
+  MCmsTrivial.AsRef.Specify('Exception')
    .SetFillColor(TAlphaColorRec.Red)
    ;
-  TmsShape.NamedMC('Class').Specify('Method')
+
+  MCmsClass.AsRef.Specify('Method')
    .SetFillColor(TAlphaColorRec.Purple)
    ;
-  TmsShape.NamedMC('Class').Specify('Program')
+
+  MCmsClass.AsRef.Specify('Program')
    .SetFillColor(TAlphaColorRec.Lime)
    ;
-  TmsShape.NamedMC('Dependency').Specify('uses');
-  TmsShape.NamedMC('Dependency').Specify('friend');
-  TmsShape.NamedMC('Dependency').Specify('injects');
-  TmsShape.NamedMC('Association').Specify('property');
-  TmsShape.NamedMC('Association').Specify('readonly');
-  TmsShape.NamedMC('Association').Specify('writeonly');
+
+  MCmsDependency.AsRef.Specify('uses');
+  MCmsDependency.AsRef.Specify('friend');
+  MCmsDependency.AsRef.Specify('injects');
+
+  MCmsAssociation.AsRef.Specify('property');
+  MCmsAssociation.AsRef.Specify('readonly');
+  MCmsAssociation.AsRef.Specify('writeonly');
 
   TmsConnector.TMC
    .SetIsForToolbar(false)
    ;
 
-  TmsShape.N('UseCaseLikeEllipse')
+  MCmsUseCaseLikeEllipse.AsRef.AsTuner
    .SetIsForToolbar(false)
    ;
 
-  TmsShape.N('Trivial')
+  MCmsTrivial.AsRef.AsTuner
    .SetIsForToolbar(false)
    ;
 
-  TmsShape.N('Folder')
+  MCmsFolder.AsRef.AsTuner
    .SetIsForToolbar(false)
    ;
 
-  TmsShape.N('Dependency')
+  MCmsDependency.AsRef.AsTuner
    .SetIsForToolbar(false)
    ;
 
@@ -317,7 +356,7 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsShape.NamedMC('UsecaseRealization').Specify('UsecaseRealizationFake')
+  MCmsUsecaseRealization.AsRef.Specify('UsecaseRealizationFake')
    .SetAdditionalLinesH([1 /3, 2 / 3])
    .SetIsForToolbar(false)
    ;
