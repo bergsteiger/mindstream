@@ -365,6 +365,7 @@ begin
   TmsActor.TMC
    .SetInitialHeight(60)
    .SetInitialWidth(60 / 2)
+   .SetShapeView(TmsActorView.Create)
    ;
 
   TmsActor.Specify('User')
