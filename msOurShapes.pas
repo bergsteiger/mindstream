@@ -100,14 +100,16 @@ begin
    .SetFillColor(TAlphaColorRec.Coral)
    ;
 
-  TmsTriangleDirectionRight.Specify('SmallTriangle')
-   .SetFillColor(TAlphaColorRec.Aquamarine)
-   .SetInitialHeight(20)
-   .SetIsForToolbar(false)
-   ;
+  MCmsSmallTriangle :=
+   TmsTriangleDirectionRight.Specify('SmallTriangle')
+    .SetFillColor(TAlphaColorRec.Aquamarine)
+    .SetInitialHeight(20)
+    .SetIsForToolbar(false)
+    .AsMC
+    ;
 
   TmsLineWithArrow.TMC
-   .SetArrowHeadShapeMC(TmsShape.NamedMC('SmallTriangle'))
+   .SetArrowHeadShapeMC(MCmsSmallTriangle)
    ;
 
   TmsRectangle.MC.Specify('RedRectangle')
