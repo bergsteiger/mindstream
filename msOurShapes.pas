@@ -289,9 +289,11 @@ begin
     .AsMC
     ;
 
-  MCmsUsecase.AsRef.Specify('UsecaseRealization')
-   .SetFillColor(TAlphaColorRec.Lightgreen)
-   ;
+  MCmsUsecaseRealization :=
+   MCmsUsecase.AsRef.Specify('UsecaseRealization')
+    .SetFillColor(TAlphaColorRec.Lightgreen)
+    .AsMC
+    ;
 
   MCmsTrivial :=
    TmsRectangle.MC.Specify('Trivial')
@@ -342,7 +344,7 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsShape.N('Dependency')
+  MCmsDependency.AsRef.AsTuner
    .SetIsForToolbar(false)
    ;
 
@@ -354,7 +356,7 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsShape.NamedMC('UsecaseRealization').Specify('UsecaseRealizationFake')
+  MCmsUsecaseRealization.AsRef.Specify('UsecaseRealizationFake')
    .SetAdditionalLinesH([1 /3, 2 / 3])
    .SetIsForToolbar(false)
    ;

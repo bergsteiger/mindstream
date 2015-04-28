@@ -20,6 +20,7 @@ var
  MCmsUsecase : TmsWeakShapeClassRef;
  MCmsTrivial : TmsWeakShapeClassRef;
  MCmsDependency : TmsWeakShapeClassRef;
+ MCmsUsecaseRealization : TmsWeakShapeClassRef;
 
 implementation
 
