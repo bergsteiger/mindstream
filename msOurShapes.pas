@@ -247,15 +247,18 @@ begin
    .SetStrokeDash(TStrokeDash.Dash)
    ;
 
-  TmsRectangle.MC.Specify('Class')
-   .SetStereotypePlace(TmsStereotypePlace.OneThirty)
-   .SetAdditionalLinesH([1 /3, 2 / 3])
-   ;
+  MCmsClass :=
+   TmsRectangle.MC.Specify('Class')
+    .SetStereotypePlace(TmsStereotypePlace.OneThirty)
+    .SetAdditionalLinesH([1 /3, 2 / 3])
+    .AsMC
+    ;
 
-  TmsShape.NamedMC('Class').Specify('Interface')
+  MCmsClass.AsRef.Specify('Interface')
    .SetFillColor(TAlphaColorRec.Lightblue)
    ;
-  TmsShape.NamedMC('Class').Specify('MixIn')
+
+  MCmsClass.AsRef.Specify('MixIn')
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
@@ -293,10 +296,12 @@ begin
   TmsShape.NamedMC('Trivial').Specify('Exception')
    .SetFillColor(TAlphaColorRec.Red)
    ;
-  TmsShape.NamedMC('Class').Specify('Method')
+
+  MCmsClass.AsRef.Specify('Method')
    .SetFillColor(TAlphaColorRec.Purple)
    ;
-  TmsShape.NamedMC('Class').Specify('Program')
+
+  MCmsClass.AsRef.Specify('Program')
    .SetFillColor(TAlphaColorRec.Lime)
    ;
   TmsShape.NamedMC('Dependency').Specify('uses');
