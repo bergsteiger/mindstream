@@ -78,10 +78,14 @@ begin
    .SetCornerRadius(10)
    .SetIsForToolbar(false)
    ;
-  TmsCircle.Specify('UseCaseLikeEllipse')
-   .SetFillColor(TAlphaColorRec.Yellow)
-   .SetInitialHeight(70)
-   ;
+
+  MCmsUseCaseLikeEllipse :=
+   TmsCircle.Specify('UseCaseLikeEllipse')
+    .SetFillColor(TAlphaColorRec.Yellow)
+    .SetInitialHeight(70)
+    .AsMC
+    ;
+
   TmsTriangle.TMC
    .SetFillColor(TAlphaColorRec.Green)
    .SetInitialHeight(100)
@@ -276,7 +280,7 @@ begin
    .SetFillColor(TAlphaColorRec.Lightblue)
    ;
 
-  TmsShape.NamedMC('UseCaseLikeEllipse').Specify('Usecase')
+  MCmsUseCaseLikeEllipse.AsRef.Specify('Usecase')
    .SetFillColor(TAlphaColorRec.Lightyellow)
    .SetStereotypePlace(TmsStereotypePlace.Bottom)
    ;
@@ -318,7 +322,7 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsShape.N('UseCaseLikeEllipse')
+  MCmsUseCaseLikeEllipse.AsRef.AsTuner
    .SetIsForToolbar(false)
    ;
 
