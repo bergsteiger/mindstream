@@ -40,7 +40,6 @@ uses
   msSVGShape,
   msScrollShape,
   msScrollShapePrim,
-  msActor,
   msRectangle,
   msCircleView,
   msLineView,
@@ -362,16 +361,18 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsActor.TMC
-   .SetInitialHeight(60)
-   .SetInitialWidth(60 / 2)
-   .SetShapeView(TmsActorView.Create)
+  MCmsActor :=
+   TmsRectangularShape.Specify('msActor')
+    .SetInitialHeight(60)
+    .SetInitialWidth(60 / 2)
+    .SetShapeView(TmsActorView.Create)
+    .AsMC
+    ;
+
+  MCmsActor.AsRef.Specify('User')
    ;
 
-  TmsActor.Specify('User')
-   ;
-
-  TmsActor.Specify('RedActor')
+  MCmsActor.AsRef.Specify('RedActor')
    .SetStrokeColor(TAlphaColorRec.Red)
    ;
 end;

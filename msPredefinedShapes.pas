@@ -21,6 +21,7 @@ var
  MCmsTrivial : TmsWeakShapeClassRef;
  MCmsDependency : TmsWeakShapeClassRef;
  MCmsUsecaseRealization : TmsWeakShapeClassRef;
+ MCmsActor : TmsWeakShapeClassRef;
 
 implementation
 
