@@ -14,12 +14,12 @@ type
 implementation
 
 uses
- msShape
+ msPredefinedShapes
  ;
 
 class function TmsFolderIcon.Create: ImsShape;
 begin
- Result := TmsShape.NamedMC('Folder').CreateShape(TPointF.Create(0, 0));
+ Result := MCmsFolder.AsRef.CreateShape(TPointF.Create(0, 0));
 end;
 
 end.

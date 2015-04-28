@@ -16,11 +16,15 @@ type
 
 implementation
 
+uses
+ msPredefinedShapes
+ ;
+
 // TmsRectangle
 
 class function TmsRectangle.MC: ImsShapeClass;
 begin
- Result := TmsShape.NamedMC('Rectangle');
+ Result := MCmsRectangle;
 end;
 
 class function TmsRectangle.Create: ImsShape;
