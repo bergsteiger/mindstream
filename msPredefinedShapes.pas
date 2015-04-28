@@ -18,6 +18,7 @@ var
  MCmsLibrary : TmsWeakShapeClassRef;
  MCmsUseCaseLikeEllipse : TmsWeakShapeClassRef;
  MCmsUsecase : TmsWeakShapeClassRef;
+ MCmsTrivial : TmsWeakShapeClassRef;
 
 implementation
 

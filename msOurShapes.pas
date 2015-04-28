@@ -291,18 +291,20 @@ begin
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
-  TmsRectangle.MC.Specify('Trivial')
-   .SetInitialHeightScale( 1 / 3 * 2 )
-   .SetStereotypePlace(TmsStereotypePlace.Center)
-   ;
+  MCmsTrivial :=
+   TmsRectangle.MC.Specify('Trivial')
+    .SetInitialHeightScale( 1 / 3 * 2 )
+    .SetStereotypePlace(TmsStereotypePlace.Center)
+    .AsMC
+    ;
 
   MCmsLibrary.AsRef.Specify('Layer')
    .SetFillColor(TAlphaColorRec.Lightgray)
    ;
-  TmsShape.NamedMC('Trivial').Specify('Typedef')
+  MCmsTrivial.AsRef.Specify('Typedef')
    .SetFillColor(TAlphaColorRec.Gray)
    ;
-  TmsShape.NamedMC('Trivial').Specify('Exception')
+  MCmsTrivial.AsRef.Specify('Exception')
    .SetFillColor(TAlphaColorRec.Red)
    ;
 
@@ -328,7 +330,7 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsShape.N('Trivial')
+  MCmsTrivial.AsRef.AsTuner
    .SetIsForToolbar(false)
    ;
 
