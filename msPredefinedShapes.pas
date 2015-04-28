@@ -15,6 +15,7 @@ var
  MCmsSmallTriangle : TmsWeakShapeClassRef;
  MCmsAssociation : TmsWeakShapeClassRef;
  MCmsClass : TmsWeakShapeClassRef;
+ MCmsLibrary : TmsWeakShapeClassRef;
 
 implementation
 

@@ -262,14 +262,17 @@ begin
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
-  MCmsFolder.AsRef.Specify('Library')
-   .SetStereotypePlace(TmsStereotypePlace.Center)
-   ;
+  MCmsLibrary :=
+   MCmsFolder.AsRef.Specify('Library')
+    .SetStereotypePlace(TmsStereotypePlace.Center)
+    .AsMC
+    ;
 
-  TmsShape.NamedMC('Library').Specify('Project')
+  MCmsLibrary.AsRef.Specify('Project')
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
-  TmsShape.NamedMC('Library').Specify('Subsystem')
+
+  MCmsLibrary.AsRef.Specify('Subsystem')
    .SetFillColor(TAlphaColorRec.Lightblue)
    ;
 
@@ -287,7 +290,7 @@ begin
    .SetStereotypePlace(TmsStereotypePlace.Center)
    ;
 
-  TmsShape.NamedMC('Library').Specify('Layer')
+  MCmsLibrary.AsRef.Specify('Layer')
    .SetFillColor(TAlphaColorRec.Lightgray)
    ;
   TmsShape.NamedMC('Trivial').Specify('Typedef')
