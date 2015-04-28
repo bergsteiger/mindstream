@@ -44,7 +44,8 @@ uses
   msRectangle,
   msCircleView,
   msLineView,
-  msPredefinedShapes
+  msPredefinedShapes,
+  msActorView
   ;
 
 // Важно !!!
