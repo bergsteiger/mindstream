@@ -280,12 +280,14 @@ begin
    .SetFillColor(TAlphaColorRec.Lightblue)
    ;
 
-  MCmsUseCaseLikeEllipse.AsRef.Specify('Usecase')
-   .SetFillColor(TAlphaColorRec.Lightyellow)
-   .SetStereotypePlace(TmsStereotypePlace.Bottom)
-   ;
+  MCmsUsecase :=
+   MCmsUseCaseLikeEllipse.AsRef.Specify('Usecase')
+    .SetFillColor(TAlphaColorRec.Lightyellow)
+    .SetStereotypePlace(TmsStereotypePlace.Bottom)
+    .AsMC
+    ;
 
-  TmsShape.NamedMC('Usecase').Specify('UsecaseRealization')
+  MCmsUsecase.AsRef.Specify('UsecaseRealization')
    .SetFillColor(TAlphaColorRec.Lightgreen)
    ;
 
