@@ -233,13 +233,16 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsConnector.Specify('Association')
-   .SetStrokeThickness(1.5)
-   .SetStrokeDash(TStrokeDash.Solid)
-   .SetStereotypePlace(TmsStereotypePlace.Center)
-   .SetArrowHeadShapeMC(TmsArrowHead.MC)
-   ;
-  TmsShape.NamedMC('Association').Specify('Dependency')
+  MCmsAssociation :=
+   TmsConnector.Specify('Association')
+    .SetStrokeThickness(1.5)
+    .SetStrokeDash(TStrokeDash.Solid)
+    .SetStereotypePlace(TmsStereotypePlace.Center)
+    .SetArrowHeadShapeMC(TmsArrowHead.MC)
+    .AsMC
+    ;
+
+  MCmsAssociation.AsRef.Specify('Dependency')
    .SetStrokeThickness(1.5)
    .SetStrokeDash(TStrokeDash.Dash)
    ;
@@ -299,9 +302,9 @@ begin
   TmsShape.NamedMC('Dependency').Specify('uses');
   TmsShape.NamedMC('Dependency').Specify('friend');
   TmsShape.NamedMC('Dependency').Specify('injects');
-  TmsShape.NamedMC('Association').Specify('property');
-  TmsShape.NamedMC('Association').Specify('readonly');
-  TmsShape.NamedMC('Association').Specify('writeonly');
+  MCmsAssociation.AsRef.Specify('property');
+  MCmsAssociation.AsRef.Specify('readonly');
+  MCmsAssociation.AsRef.Specify('writeonly');
 
   TmsConnector.TMC
    .SetIsForToolbar(false)

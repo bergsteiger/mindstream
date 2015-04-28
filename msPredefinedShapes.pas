@@ -13,6 +13,7 @@ var
  MCmsGreenCircle : TmsWeakShapeClassRef;
  MCmsRectangle : TmsWeakShapeClassRef;
  MCmsSmallTriangle : TmsWeakShapeClassRef;
+ MCmsAssociation : TmsWeakShapeClassRef;
 
 implementation
 
