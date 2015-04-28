@@ -162,7 +162,7 @@ end;
 
 function TmsShape.ContainsPt(const aPoint: TPointF): Boolean;
 begin
- Result := False;
+ Result := DrawBounds.Contains(aPoint);
 end;
 
 constructor TmsShape.CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext);
