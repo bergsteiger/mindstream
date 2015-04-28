@@ -101,8 +101,6 @@ type
   class function NRTMC: ImsShapeClassTuner;
   class function MC: ImsShapeClass;
   class function TMC: ImsShapeClassTuner;
-  class function NamedMC(const aName: String): ImsShapeClass;
-  class function N(const aName: String): ImsShapeClassTuner;
   class function Specify(const aName: String): ImsShapeClassTuner;
  end;//TmsShape
 
@@ -589,21 +587,6 @@ begin
   Result := TmsShapeClass.Create(Self);
   TmsRegisteredShapes.Instance.RegisterMC(Result.AsMC);
  end;//l_MC <> nil
-end;
-
-class function TmsShape.NamedMC(const aName: String): ImsShapeClass;
-begin
- Result := TmsRegisteredShapes.Instance.ByName(aName);
- Assert(Result <> nil, 'Стереотип ' + aName + ' не зарегистрирован');
-end;
-
-class function TmsShape.N(const aName: String): ImsShapeClassTuner;
-var
- l_MC : ImsShapeClass;
-begin
- l_MC := NamedMC(aName);
- Assert(l_MC <> nil);
- Result := l_MC.AsTuner;
 end;
 
 class function TmsShape.Specify(const aName: String): ImsShapeClassTuner;
