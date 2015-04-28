@@ -246,10 +246,12 @@ begin
     .AsMC
     ;
 
-  MCmsAssociation.AsRef.Specify('Dependency')
-   .SetStrokeThickness(1.5)
-   .SetStrokeDash(TStrokeDash.Dash)
-   ;
+  MCmsDependency :=
+   MCmsAssociation.AsRef.Specify('Dependency')
+    .SetStrokeThickness(1.5)
+    .SetStrokeDash(TStrokeDash.Dash)
+    .AsMC
+    ;
 
   MCmsClass :=
    TmsRectangle.MC.Specify('Class')
@@ -315,9 +317,11 @@ begin
   MCmsClass.AsRef.Specify('Program')
    .SetFillColor(TAlphaColorRec.Lime)
    ;
-  TmsShape.NamedMC('Dependency').Specify('uses');
-  TmsShape.NamedMC('Dependency').Specify('friend');
-  TmsShape.NamedMC('Dependency').Specify('injects');
+
+  MCmsDependency.AsRef.Specify('uses');
+  MCmsDependency.AsRef.Specify('friend');
+  MCmsDependency.AsRef.Specify('injects');
+
   MCmsAssociation.AsRef.Specify('property');
   MCmsAssociation.AsRef.Specify('readonly');
   MCmsAssociation.AsRef.Specify('writeonly');
