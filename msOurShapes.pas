@@ -23,7 +23,6 @@ uses
   msMoverIcon,
   msRemoverIcon,
   msMoveIcon,
-  msRectangularShape,
   msTextShapeView,
   msScrollShapeUp,
   msScrollShapeDown,
@@ -44,7 +43,8 @@ uses
   msCircleView,
   msLineView,
   msPredefinedShapes,
-  msActorView
+  msActorView,
+  msPointedShape
   ;
 
 // Важно !!!
@@ -57,7 +57,7 @@ begin
    .SetShapeView(TmsLineView.Create)
    ;
   MCmsRectangle :=
-   TmsRectangularShape.Specify('Rectangle')
+   TmsPointedShape.Specify('Rectangle')
     .SetFillColor(TAlphaColorRec.White)
     .SetInitialHeight(90)
     .SetInitialWidth(100)
@@ -190,7 +190,7 @@ begin
    .SetFillColor(TAlphaColorRec.Black)
    .SetIsForToolbar(false)
    ;
-  TmsRectangularShape.Specify('TextShape')
+  TmsPointedShape.Specify('TextShape')
    .SetFillColor(TAlphaColorRec.Black)
    .SetInitialHeight(14)
    .SetInitialWidth(21)
@@ -362,7 +362,7 @@ begin
    ;
 
   MCmsActor :=
-   TmsRectangularShape.Specify('msActor')
+   TmsPointedShape.Specify('msActor')
     .SetInitialHeight(60)
     .SetInitialWidth(60 / 2)
     .SetShapeView(TmsActorView.Create)

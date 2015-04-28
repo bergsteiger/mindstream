@@ -89,7 +89,6 @@ uses
   msFloatingButtonCircle in 'SpecialShapes\ForButtons\msFloatingButtonCircle.pas',
   msCoreUtils in 'Core\msCoreUtils.pas',
   msScalingShape in 'ContainerShapes\msScalingShape.pas',
-  msRectangularShape in 'AbstractShapes\msRectangularShape.pas',
   FMX.DUnit.Interfaces in 'FMX.DUnit\FMX.DUnit.Interfaces.pas',
   msScrollShapeUp in 'ShapeTools\ScrollButtons\msScrollShapeUp.pas',
   msScrollShape in 'ShapeTools\ScrollButtons\msScrollShape.pas',
