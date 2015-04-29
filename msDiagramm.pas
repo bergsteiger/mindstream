@@ -83,7 +83,6 @@ uses
   ,
 {$Include msShapesProvider.mixin.pas}
  msMover,
- msCircle,
  msDiagrammMarshal,
  msInvalidators,
  msShapesForToolbar,

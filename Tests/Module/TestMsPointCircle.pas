@@ -15,7 +15,6 @@ uses
   TestFramework,
   System.UITypes,
   msShape,
-  msCircle,
   FMX.Graphics,
   System.Types,
   msInterfaces

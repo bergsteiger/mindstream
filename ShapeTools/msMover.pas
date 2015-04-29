@@ -72,7 +72,6 @@ uses
  msLeftArrow,
  msRightArrow,
  msShapesGroup,
- msCircle,
  msCircleWithRadius,
  Math,
  msProxyShape,

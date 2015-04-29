@@ -5,11 +5,11 @@ interface
 uses
  System.Types,
  msInterfaces,
- msCircle
+ msPointedShape
  ;
 
 type
- TmsCircleWithRadius = class(TmsCircle)
+ TmsCircleWithRadius = class(TmsPointedShape)
  private
   f_Rad : Single;
  protected
@@ -24,7 +24,8 @@ implementation
 
 uses
  msShape,
- msShapeClass
+ msShapeClass,
+ msPredefinedShapes
  ;
 
 // TmsCircleWithRadius
@@ -43,7 +44,7 @@ end;
 
 function TmsCircleWithRadius.pm_GetShapeClass: ImsShapeClass;
 begin
- Result := TmsCircle.MC;
+ Result := MCmsCircle;
 end;
 
 class function TmsCircleWithRadius.Create(const aStartPoint: TPointF; aRad: Single): ImsShape;

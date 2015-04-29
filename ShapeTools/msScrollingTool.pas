@@ -30,7 +30,6 @@ type
 implementation
 
 uses
- msCircle,
  msTriangle,
  msMoveIcon,
  msScalingShape,
