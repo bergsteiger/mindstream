@@ -55,7 +55,7 @@ type
   function Name: String;
   function Stereotype: String;
   function Polygon: TPolygon;
-  function GetPolygon: TPolygon; virtual; abstract;
+  function GetPolygon: TPolygon; virtual;
  protected
   class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
  public
@@ -220,6 +220,19 @@ function TmsShape.Polygon: TPolygon;
 begin
  Result := GetPolygon;
  Assert(Length(Result) >= 3);
+end;
+
+function TmsShape.GetPolygon: TPolygon;
+var
+ l_R : TRectF;
+begin
+ l_R := Self.DrawBounds;
+ SetLength(Result, 5);
+ Result[0] := l_R.TopLeft;
+ Result[1] := TPointF.Create(l_R.Left + l_R.Width, l_R.Top);
+ Result[2] := l_R.BottomRight;
+ Result[3] := TPointF.Create(l_R.Left, l_R.Bottom);
+ Result[4] := Result[0];
 end;
 
 procedure TmsShape.MoveBy(const aCtx: TmsMoveContext);
