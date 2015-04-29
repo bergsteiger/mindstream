@@ -44,7 +44,8 @@ uses
   msLineView,
   msPredefinedShapes,
   msActorView,
-  msPointedShape
+  msPointedShape,
+  msScrollingToolView
   ;
 
 // Важно !!!
@@ -217,6 +218,7 @@ begin
 
   TmsScrollingTool.TMC
 //   .SetIsForToolbar(false)
+   .SetShapeView(TmsScrollingToolView.Create)
    ;
 
   TmsConnector.TMC
