@@ -154,7 +154,8 @@ uses
   msCircleView in 'Views\msCircleView.pas',
   msLineView in 'Views\msLineView.pas',
   msPredefinedShapes in 'msPredefinedShapes.pas',
-  msActorView in 'Views\msActorView.pas';
+  msActorView in 'Views\msActorView.pas',
+  msScrollingToolView in 'Views\msScrollingToolView.pas';
 
 {$R *.res}
 
