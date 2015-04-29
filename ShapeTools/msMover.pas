@@ -355,8 +355,6 @@ procedure TmsMover.DoDrawTo(const aCtx: TmsDrawContext);
 var
  l_Ctx : TmsDrawContext;
  l_Moving : Boolean;
-var
- l_Proxy : ImsShape;
 begin
  if (f_Moving <> nil) then
  begin
@@ -369,17 +367,8 @@ begin
    l_Ctx.rMoving := l_Moving;
   end;//try..finally
   if (f_FloatingButtons = nil) OR (f_Moving.IsNeedsSecondClick) then
-  begin
    inherited;
    // - используем ShapeView
-(*   l_Proxy := TmsMovingPointer.Create(Self.StartPoint);
-   // - люблю я Self.XXX. Мне лично так понятнее. Да и with - меньше лажает.
-   try
-    l_Proxy.DrawTo(aCtx);
-   finally
-    l_Proxy := nil;
-   end;///try..fianlly*)
-  end;//f_FloatingButtons = nil
  end;//f_Moving <> nil
 end;
 
