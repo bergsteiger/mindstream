@@ -204,6 +204,8 @@ type
   // - это уже не совсем костыль
   // - костыли пока
 
+  function Polygon: TPolygon;
+
   function pm_GetStartPoint: TPointF;
   function pm_GetFinishPoint: TPointF;
   function pm_GetShapeClass: ImsShapeClass;

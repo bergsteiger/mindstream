@@ -54,6 +54,8 @@ type
   function UID: TmsShapeUID;
   function Name: String;
   function Stereotype: String;
+  function Polygon: TPolygon;
+  function GetPolygon: TPolygon; virtual; abstract;
  protected
   class function Create(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext): ImsShape; overload; virtual;
  public
@@ -212,6 +214,12 @@ function TmsShape.Stereotype: String;
 begin
  Result := Self.ShapeClass.Stereotype;
  Result := '<< ' + Result + ' >>';
+end;
+
+function TmsShape.Polygon: TPolygon;
+begin
+ Result := GetPolygon;
+ Assert(Length(Result) >= 3);
 end;
 
 procedure TmsShape.MoveBy(const aCtx: TmsMoveContext);
