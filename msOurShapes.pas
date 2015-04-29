@@ -45,7 +45,10 @@ uses
   msActorView,
   msPointedShape,
   msScrollingToolView,
-  msMoverView
+  msMoverView,
+  msPolylineShape,
+  msPolygonShapeView,
+  msPolylineShapeView
   ;
 
 // Важно !!!
@@ -92,6 +95,11 @@ begin
     ;
 
   TmsPolygonShape.NRTMC
+   .SetShapeView(TmsPolygonShapeView.Create)
+   ;
+
+  TmsPolylineShape.NRTMC
+   .SetShapeView(TmsPolylineShapeView.Create)
    ;
 
   TmsTriangle.TMC
