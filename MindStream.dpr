@@ -155,6 +155,7 @@ uses
   msLineView in 'Views\msLineView.pas',
   msPredefinedShapes in 'msPredefinedShapes.pas',
   msActorView in 'Views\msActorView.pas',
+  msMovingPointerView in 'Views\msMovingPointerView.pas',
   msScrollingToolView in 'Views\msScrollingToolView.pas';
 
 {$R *.res}
