@@ -161,8 +161,14 @@ begin
 end;
 
 function TmsShape.ContainsPt(const aPoint: TPointF): Boolean;
+var
+ l_V : ImsShapeView;
 begin
- Result := DrawBounds.Contains(aPoint);
+ l_V := ShapeClass.ShapeView;
+ if (l_V <> nil) then
+  Result := l_V.ShapeContainsPt(Self, aPoint)
+ else
+  Result := DrawBounds.Contains(aPoint);
 end;
 
 constructor TmsShape.CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext);

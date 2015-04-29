@@ -181,6 +181,7 @@ type
 
  ImsShapeView = interface
   procedure DrawShape(const aCtx: TmsDrawContext; const aShape: ImsShape);
+  function ShapeContainsPt(const aShape: ImsShape; const aPoint: TPointF): Boolean;
  end;//ImsShapeView
 
  ImsShape = interface(ImsDiagrammsList)
