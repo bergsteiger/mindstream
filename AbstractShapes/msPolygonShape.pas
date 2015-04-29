@@ -46,7 +46,6 @@ begin
   if (l_P.Y > Result.Bottom) then
    Result.Bottom := l_P.Y;
  end;//l_P in l_PL
- //Result := PolygonBounds(Polygon);
 end;
 
 function TmsPolygonShape.GetDrawBounds: TRectF;

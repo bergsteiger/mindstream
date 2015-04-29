@@ -41,7 +41,7 @@ begin
   aCtx.rCanvas.DrawPath(l_Path, 1);
  finally
   FreeAndNil(l_Path);
- end;
+ end;//try..finally
 end;
 
 end.

@@ -9,7 +9,6 @@ uses
   msShape,
   msLine,
   msRectangleView,
-  msCircle,
   msTriangle,
   msLineWithArrow,
   msTriangleDirectionRight,
@@ -67,12 +66,16 @@ begin
     .SetShapeView(TmsRectangleView.Create)
     .AsMC
     ;
-  TmsCircle.TMC
-   .SetFillColor(TAlphaColorRec.Red)
-   .SetInitialHeight(100)
-   .SetInitialWidth(100)
-   .SetShapeView(TmsCircleView.Create)
-   ;
+
+  MCmsCircle :=
+   TmsPointedShape.Specify('Circle')
+    .SetFillColor(TAlphaColorRec.Red)
+    .SetInitialHeight(100)
+    .SetInitialWidth(100)
+    .SetShapeView(TmsCircleView.Create)
+    .AsMC
+    ;
+
   TmsRectangle.MC.Specify('RoundedRectangle')
    .SetFillColor(TAlphaColorRec.Blue)
    .SetInitialHeight(90)
@@ -82,7 +85,7 @@ begin
    ;
 
   MCmsUseCaseLikeEllipse :=
-   TmsCircle.Specify('UseCaseLikeEllipse')
+   MCmsCircle.AsRef.Specify('UseCaseLikeEllipse')
     .SetFillColor(TAlphaColorRec.Yellow)
     .SetInitialHeight(70)
     .AsMC
@@ -129,7 +132,7 @@ begin
 
   // special shapes
   MCmsPointCircle :=
-   TmsCircle.Specify('PointCircle')
+   MCmsCircle.AsRef.Specify('PointCircle')
     .SetFillColor(TAlphaColorRec.Null)
     .SetIsForToolbar(false)
     .SetInitialWidth(20)
@@ -167,7 +170,7 @@ begin
     ;
  
   MCmsGreenCircle :=
-   TmsCircle.Specify('GreenCircle')
+   MCmsCircle.AsRef.Specify('GreenCircle')
     .SetFillColor(TAlphaColorRec.Green)
     .SetIsForToolbar(false)
     .AsMC
@@ -355,7 +358,7 @@ begin
    .SetIsForToolbar(false)
    ;
 
-  TmsCircle.TMC
+  MCmsCircle.AsRef.AsTuner
    .SetIsForToolbar(false)
    ;
 
