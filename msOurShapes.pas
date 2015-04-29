@@ -91,6 +91,9 @@ begin
     .AsMC
     ;
 
+  TmsPolygonShape.NRTMC
+   ;
+
   TmsTriangle.TMC
    .SetFillColor(TAlphaColorRec.Green)
    .SetInitialHeight(100)
