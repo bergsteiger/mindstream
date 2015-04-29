@@ -370,13 +370,15 @@ begin
   end;//try..finally
   if (f_FloatingButtons = nil) OR (f_Moving.IsNeedsSecondClick) then
   begin
-   l_Proxy := TmsMovingPointer.Create(Self.StartPoint);
+   inherited;
+   // - используем ShapeView
+(*   l_Proxy := TmsMovingPointer.Create(Self.StartPoint);
    // - люблю я Self.XXX. Мне лично так понятнее. Да и with - меньше лажает.
    try
     l_Proxy.DrawTo(aCtx);
    finally
     l_Proxy := nil;
-   end;///try..fianlly
+   end;///try..fianlly*)
   end;//f_FloatingButtons = nil
  end;//f_Moving <> nil
 end;

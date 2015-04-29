@@ -45,7 +45,8 @@ uses
   msPredefinedShapes,
   msActorView,
   msPointedShape,
-  msScrollingToolView
+  msScrollingToolView,
+  msMoverView
   ;
 
 // Важно !!!
@@ -136,7 +137,11 @@ begin
     .AsMC
     ;
   // utility shapes
-  TmsMover.TMC;
+
+  TmsMover.TMC
+   .SetShapeView(TmsMoverView.Create)
+   ;
+
   TmsPicker.TMC;
   TmsUpToParent.TMC;
   TmsSwapParents.TMC
