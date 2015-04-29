@@ -35,9 +35,6 @@ type
                                  const aDiagrammsHolder: ImsDiagrammsHolder): ImsShape;
  end;//TmsLine
 
- EmsLineCannotBeMoved = class(Exception)
- end;//EmsLineCannotBeMoved
-
 implementation
 
 uses
@@ -119,8 +116,6 @@ begin
  else
  if SamePoint(Self.FinishPoint, aCtx.rStartPoint) then
   Self.FinishPoint := Self.FinishPoint + aCtx.rDelta
-(* else
-  raise EmsLineCannotBeMoved.Create('Примитив ' + ClassName + ' не может быть перемещён')*);
 end;
 
 class function TmsLine.CreateCompleted(const aStartPoint: TPointF;
