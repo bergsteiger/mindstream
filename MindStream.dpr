@@ -156,7 +156,9 @@ uses
   msActorView in 'Views\msActorView.pas',
   msMovingPointerView in 'Views\msMovingPointerView.pas',
   msScrollingToolView in 'Views\msScrollingToolView.pas',
-  msMoverView in 'Views\msMoverView.pas';
+  msMoverView in 'Views\msMoverView.pas',
+  msPolygonShapeView in 'Views\msPolygonShapeView.pas',
+  msPolylineShapeView in 'Views\msPolylineShapeView.pas';
 
 {$R *.res}
 

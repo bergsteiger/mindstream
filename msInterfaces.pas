@@ -21,6 +21,8 @@ type
 
  TTextAlign = FMX.Types.TTextAlign;
 
+ TPathData = FMX.Graphics.TPathData;
+
  TPolygon = System.Math.Vectors.TPolygon;
 
  ImsShape = interface;

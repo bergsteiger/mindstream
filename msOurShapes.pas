@@ -256,6 +256,7 @@ begin
    .SetStrokeThickness(1.5)
    .SetInitialHeight(20)
    .SetIsForToolbar(false)
+   .SetShapeView(TmsPolylineShapeView.Create)
    ;
 
   MCmsAssociation :=

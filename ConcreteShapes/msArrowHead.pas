@@ -13,7 +13,6 @@ type
   function GetPolygon: TPolygon; override;
  end;//TmsTriangle
 
-
 implementation
 
 uses
