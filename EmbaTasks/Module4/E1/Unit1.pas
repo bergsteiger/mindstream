@@ -36,6 +36,7 @@ begin
  lbInt.Caption := FloatToStr(l_I);
  lbFrac.Caption := FloatToStr(l_V - l_I);
  // - тут правда есть проблемы с точностью
+ //   достаточно ввести 10,55 и получим 10 и 0,550000001
 end;
 
 end.
