@@ -32,7 +32,7 @@ uses
 
 procedure TForm1.DoItClick(Sender: TObject);
 begin
- lbHeight.Caption := FloatToStr(StrToFloat(L.Text) * Tan(StrToFloat(alpha.Text)));
+ lbHeight.Caption := FloatToStr(Abs(StrToFloat(L.Text) * Tan(StrToFloat(alpha.Text))));
 end;
 
 end.
