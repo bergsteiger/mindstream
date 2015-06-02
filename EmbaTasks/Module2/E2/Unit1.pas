@@ -10,9 +10,8 @@ type
   TForm1 = class(TForm)
     Label1: TLabel;
     Button1: TButton;
-    Button2: TButton;
+    Edit1: TEdit;
     procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,12 +27,8 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
- Label1.Enabled := true;
-end;
-
-procedure TForm1.Button2Click(Sender: TObject);
-begin
- Label1.Enabled := false;
+ Label1.Caption := Edit1.Text;
+ Edit1.Text := '';
 end;
 
 end.

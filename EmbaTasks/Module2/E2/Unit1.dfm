@@ -16,8 +16,8 @@ object Form1: TForm1
   object Label1: TLabel
     Left = 16
     Top = 16
-    Width = 41
-    Height = 17
+    Width = 31
+    Height = 13
     Caption = 'Label1'
   end
   object Button1: TButton
@@ -29,13 +29,12 @@ object Form1: TForm1
     TabOrder = 0
     OnClick = Button1Click
   end
-  object Button2: TButton
-    Left = 80
-    Top = 39
-    Width = 75
-    Height = 25
-    Caption = 'Button2'
+  object Edit1: TEdit
+    Left = 16
+    Top = 48
+    Width = 121
+    Height = 21
     TabOrder = 1
-    OnClick = Button2Click
+    Text = 'Edit1'
   end
 end
