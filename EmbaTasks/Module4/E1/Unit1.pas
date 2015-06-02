@@ -13,9 +13,6 @@ type
     Edit1: TEdit;
     lbFrac: TLabel;
     procedure DoItClick(Sender: TObject);
-    procedure MinusClick(Sender: TObject);
-    procedure MulClick(Sender: TObject);
-    procedure DivideClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,24 +26,16 @@ implementation
 
 {$R *.dfm}
 
-procedure TForm1.MulClick(Sender: TObject);
-begin
- lbResult.Caption := FloatToStr(StrToFloat(Edit1.Text) * StrToFloat(Edit2.Text));
-end;
-
 procedure TForm1.DoItClick(Sender: TObject);
+var
+ l_V : Double;
+ l_I : Double;
 begin
- lbResult.Caption := FloatToStr(StrToFloat(Edit1.Text) + StrToFloat(Edit2.Text));
-end;
-
-procedure TForm1.DivideClick(Sender: TObject);
-begin
- lbResult.Caption := FloatToStr(StrToFloat(Edit1.Text) / StrToFloat(Edit2.Text));
-end;
-
-procedure TForm1.MinusClick(Sender: TObject);
-begin
- lbResult.Caption := FloatToStr(StrToFloat(Edit1.Text) - StrToFloat(Edit2.Text));
+ l_V := StrToFloat(Edit1.Text);
+ l_I := Int(l_V);
+ lbInt.Caption := FloatToStr(l_I);
+ lbFrac.Caption := FloatToStr(l_V - l_I);
+ // - тут правда есть проблемы с точностью
 end;
 
 end.
