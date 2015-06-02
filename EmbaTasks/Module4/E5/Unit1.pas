@@ -24,12 +24,15 @@ var
 
 implementation
 
+uses
+ Math
+ ;
+
 {$R *.dfm}
 
 procedure TForm1.DoItClick(Sender: TObject);
 begin
- lbSum.Caption := FloatToStr(StrToFloat(Edit1.Text) + StrToFloat(Edit2.Text) + StrToFloat(Edit3.Text));
- lbProd.Caption := FloatToStr(StrToFloat(Edit1.Text) * StrToFloat(Edit2.Text) * StrToFloat(Edit3.Text));
+ lbHeight.Caption := FloatToStr(StrToFloat(L.Text) * Tan(StrToFloat(alpha.Text)));
 end;
 
 end.
