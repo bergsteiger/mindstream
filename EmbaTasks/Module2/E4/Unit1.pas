@@ -15,6 +15,12 @@ type
     ForeColor3: TButton;
     ForeColor2: TButton;
     ForeColor1: TButton;
+    Size1: TButton;
+    Size2: TButton;
+    Size3: TButton;
+    Name1: TButton;
+    Name2: TButton;
+    Name3: TButton;
     procedure BackColor1Click(Sender: TObject);
     procedure BackColor2Click(Sender: TObject);
     procedure BackColor3Click(Sender: TObject);
@@ -33,23 +39,17 @@ implementation
 
 procedure TForm1.BackColor1Click(Sender: TObject);
 begin
- Label1.Enabled := true;
- Label2.Enabled := false;
- Label3.Enabled := false;
+ Label1.Color := clRed;
 end;
 
 procedure TForm1.BackColor2Click(Sender: TObject);
 begin
- Label1.Enabled := false;
- Label2.Enabled := true;
- Label3.Enabled := false;
+ Label1.Color := clBtnFace;
 end;
 
 procedure TForm1.BackColor3Click(Sender: TObject);
 begin
- Label1.Enabled := false;
- Label2.Enabled := false;
- Label3.Enabled := true;
+ Label1.Color := clWhite;
 end;
 
 end.

@@ -19,6 +19,9 @@ object Form1: TForm1
     Width = 31
     Height = 13
     Caption = 'Label1'
+    Color = clBtnFace
+    ParentColor = False
+    Transparent = False
   end
   object BackColor1: TButton
     Left = 144
@@ -73,5 +76,53 @@ object Form1: TForm1
     Caption = 'ForeColor1'
     TabOrder = 5
     OnClick = BackColor1Click
+  end
+  object Size1: TButton
+    Left = 320
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'Size1'
+    TabOrder = 6
+  end
+  object Size2: TButton
+    Left = 320
+    Top = 43
+    Width = 75
+    Height = 25
+    Caption = 'Size2'
+    TabOrder = 7
+  end
+  object Size3: TButton
+    Left = 320
+    Top = 80
+    Width = 75
+    Height = 25
+    Caption = 'Size3'
+    TabOrder = 8
+  end
+  object Name1: TButton
+    Left = 408
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'Name1'
+    TabOrder = 9
+  end
+  object Name2: TButton
+    Left = 408
+    Top = 43
+    Width = 75
+    Height = 25
+    Caption = 'Name2'
+    TabOrder = 10
+  end
+  object Name3: TButton
+    Left = 408
+    Top = 80
+    Width = 75
+    Height = 25
+    Caption = 'Name3'
+    TabOrder = 11
   end
 end
