@@ -24,6 +24,7 @@ type
     procedure BackColor1Click(Sender: TObject);
     procedure BackColor2Click(Sender: TObject);
     procedure BackColor3Click(Sender: TObject);
+    procedure ForeColor1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,6 +51,11 @@ end;
 procedure TForm1.BackColor3Click(Sender: TObject);
 begin
  Label1.Color := clWhite;
+end;
+
+procedure TForm1.ForeColor1Click(Sender: TObject);
+begin
+ Label1.Font.Color := clBlue;
 end;
 
 end.
