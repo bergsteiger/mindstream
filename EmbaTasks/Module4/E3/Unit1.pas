@@ -8,11 +8,12 @@ uses
 
 type
   TForm1 = class(TForm)
-    lbInt: TLabel;
     DoIt: TButton;
     Edit1: TEdit;
-    lbFrac: TLabel;
-    procedure DoItClick(Sender: TObject);
+    lbSum: TLabel;
+    lbProd: TLabel;
+    Edit2: TEdit;
+    Edit3: TEdit;
   private
     { Private declarations }
   public
@@ -25,18 +26,5 @@ var
 implementation
 
 {$R *.dfm}
-
-procedure TForm1.DoItClick(Sender: TObject);
-var
- l_V : Double;
- l_I : Double;
-begin
- l_V := StrToFloat(Edit1.Text);
- l_I := Int(l_V);
- lbInt.Caption := FloatToStr(l_I);
- lbFrac.Caption := FloatToStr(l_V - l_I);
- // - тут правда есть проблемы с точностью
- //   достаточно ввести 10,55 и получим 10 и 0,550000001
-end;
 
 end.
