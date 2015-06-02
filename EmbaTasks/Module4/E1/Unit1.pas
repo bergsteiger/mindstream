@@ -34,9 +34,7 @@ begin
  l_V := StrToFloat(Edit1.Text);
  l_I := Int(l_V);
  lbInt.Caption := FloatToStr(l_I);
- lbFrac.Caption := FloatToStr(l_V - l_I);
- // - тут правда есть проблемы с точностью
- //   достаточно ввести 10,55 и получим 10 и 0,550000001
+ lbFrac.Caption := FloatToStr(Frac(l_V));
 end;
 
 end.
