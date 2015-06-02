@@ -25,6 +25,11 @@ type
     procedure BackColor2Click(Sender: TObject);
     procedure BackColor3Click(Sender: TObject);
     procedure ForeColor1Click(Sender: TObject);
+    procedure Size1Click(Sender: TObject);
+    procedure ForeColor2Click(Sender: TObject);
+    procedure ForeColor3Click(Sender: TObject);
+    procedure Size2Click(Sender: TObject);
+    procedure Size3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -56,6 +61,31 @@ end;
 procedure TForm1.ForeColor1Click(Sender: TObject);
 begin
  Label1.Font.Color := clBlue;
+end;
+
+procedure TForm1.ForeColor2Click(Sender: TObject);
+begin
+ Label1.Font.Color := clBlack;
+end;
+
+procedure TForm1.ForeColor3Click(Sender: TObject);
+begin
+ Label1.Font.Color := clGreen;
+end;
+
+procedure TForm1.Size1Click(Sender: TObject);
+begin
+ Label1.Font.Size := 10;
+end;
+
+procedure TForm1.Size2Click(Sender: TObject);
+begin
+ Label1.Font.Size := 14;
+end;
+
+procedure TForm1.Size3Click(Sender: TObject);
+begin
+ Label1.Font.Size := 16;
 end;
 
 end.

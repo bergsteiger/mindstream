@@ -57,6 +57,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'ForeColor3'
     TabOrder = 3
+    OnClick = ForeColor3Click
   end
   object ForeColor2: TButton
     Left = 232
@@ -65,6 +66,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'ForeColor2'
     TabOrder = 4
+    OnClick = ForeColor2Click
   end
   object ForeColor1: TButton
     Left = 232
@@ -82,6 +84,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Size1'
     TabOrder = 6
+    OnClick = Size1Click
   end
   object Size2: TButton
     Left = 320
@@ -90,6 +93,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Size2'
     TabOrder = 7
+    OnClick = Size2Click
   end
   object Size3: TButton
     Left = 320
@@ -98,6 +102,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Size3'
     TabOrder = 8
+    OnClick = Size3Click
   end
   object Name1: TButton
     Left = 408
