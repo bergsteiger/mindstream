@@ -28,7 +28,7 @@ implementation
 
 procedure TForm1.DoItClick(Sender: TObject);
 var
- l_V : Extended;
+ l_V : Extended; // http://www.delphisources.ru/pages/faq/faq_delphi_basics/1Type.php.html
 begin
  l_V := StrToFloat(Edit1.Text);
  lbInt.Caption := FloatToStr(Int(l_V));
