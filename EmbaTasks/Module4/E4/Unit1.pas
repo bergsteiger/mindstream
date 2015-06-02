@@ -40,6 +40,7 @@ type
 procedure TForm1.DoItClick(Sender: TObject);
 var
  v1, v2, v3 : TP;
+ a, b, c : Extended;
 begin
  v1.X := StrToFloat(v1x.Text);
  v1.Y := StrToFloat(v1y.Text);
