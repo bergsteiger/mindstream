@@ -50,6 +50,10 @@ begin
 
  v3.X := StrToFloat(v3x.Text);
  v3.Y := StrToFloat(v3y.Text);
+
+ a := Sqrt(Sqr(v2.X - v3.X) + Sqr(v2.Y - v3.Y));
+ b := Sqrt(Sqr(v2.X - v1.X) + Sqr(v2.Y - v1.Y));
+ c := Sqrt(Sqr(v1.X - v3.X) + Sqr(v1.Y - v3.Y));
 end;
 
 end.
