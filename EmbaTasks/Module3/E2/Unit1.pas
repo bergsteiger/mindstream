@@ -13,6 +13,7 @@ type
     Edit1: TEdit;
     C: TButton;
     procedure FClick(Sender: TObject);
+    procedure CClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,10 +27,14 @@ implementation
 
 {$R *.dfm}
 
+procedure TForm1.CClick(Sender: TObject);
+begin
+ Label1.Caption := FloatToStr((StrToFloat(Edit1.Text) - 32) * 5/9);
+end;
+
 procedure TForm1.FClick(Sender: TObject);
 begin
- Label1.Caption := Edit1.Text;
- Edit1.Text := '';
+ Label1.Caption := FloatToStr(StrToFloat(Edit1.Text) * 9/5 + 32);
 end;
 
 end.
