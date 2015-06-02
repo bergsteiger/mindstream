@@ -15,6 +15,8 @@ type
     Button2: TButton;
     Button3: TButton;
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,8 +32,23 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
- Label1.Caption := Edit1.Text;
- Edit1.Text := '';
+ Label1.Enabled := true;
+ Label2.Enabled := false;
+ Label3.Enabled := false;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+ Label1.Enabled := false;
+ Label2.Enabled := true;
+ Label3.Enabled := false;
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+ Label1.Enabled := false;
+ Label2.Enabled := false;
+ Label3.Enabled := true;
 end;
 
 end.
