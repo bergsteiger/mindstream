@@ -34,6 +34,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'DoIt'
     TabOrder = 0
+    OnClick = DoItClick
   end
   object Edit1: TEdit
     Left = 8

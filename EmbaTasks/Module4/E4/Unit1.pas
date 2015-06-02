@@ -17,6 +17,7 @@ type
     Edit4: TEdit;
     Edit5: TEdit;
     Edit6: TEdit;
+    procedure DoItClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,5 +30,18 @@ var
 implementation
 
 {$R *.dfm}
+
+type
+ TP = record
+  X : Extended;
+  Y : Extended;
+ end;//TP
+
+procedure TForm1.DoItClick(Sender: TObject);
+var
+ v1, v2, v3 : TP;
+begin
+
+end;
 
 end.
