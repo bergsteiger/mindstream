@@ -9,14 +9,14 @@ uses
 type
   TForm1 = class(TForm)
     DoIt: TButton;
-    Edit1: TEdit;
+    v1x: TEdit;
     lbS: TLabel;
     lbP: TLabel;
-    Edit2: TEdit;
-    Edit3: TEdit;
-    Edit4: TEdit;
-    Edit5: TEdit;
-    Edit6: TEdit;
+    v2x: TEdit;
+    v3x: TEdit;
+    v1y: TEdit;
+    v3y: TEdit;
+    v2y: TEdit;
     procedure DoItClick(Sender: TObject);
   private
     { Private declarations }
@@ -41,7 +41,14 @@ procedure TForm1.DoItClick(Sender: TObject);
 var
  v1, v2, v3 : TP;
 begin
+ v1.X := StrToFloat(v1x.Text);
+ v1.Y := StrToFloat(v1y.Text);
 
+ v2.X := StrToFloat(v2x.Text);
+ v2.Y := StrToFloat(v2y.Text);
+
+ v3.X := StrToFloat(v3x.Text);
+ v3.Y := StrToFloat(v3y.Text);
 end;
 
 end.

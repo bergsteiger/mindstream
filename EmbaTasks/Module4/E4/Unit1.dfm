@@ -36,7 +36,7 @@ object Form1: TForm1
     TabOrder = 0
     OnClick = DoItClick
   end
-  object Edit1: TEdit
+  object v1x: TEdit
     Left = 8
     Top = 8
     Width = 121
@@ -44,7 +44,7 @@ object Form1: TForm1
     TabOrder = 1
     Text = 'v1x'
   end
-  object Edit2: TEdit
+  object v2x: TEdit
     Left = 8
     Top = 37
     Width = 121
@@ -52,7 +52,7 @@ object Form1: TForm1
     TabOrder = 2
     Text = 'v2x'
   end
-  object Edit3: TEdit
+  object v3x: TEdit
     Left = 8
     Top = 72
     Width = 121
@@ -60,7 +60,7 @@ object Form1: TForm1
     TabOrder = 3
     Text = 'v1x'
   end
-  object Edit4: TEdit
+  object v1y: TEdit
     Left = 144
     Top = 8
     Width = 121
@@ -68,7 +68,7 @@ object Form1: TForm1
     TabOrder = 4
     Text = 'v1y'
   end
-  object Edit5: TEdit
+  object v3y: TEdit
     Left = 144
     Top = 72
     Width = 121
@@ -76,7 +76,7 @@ object Form1: TForm1
     TabOrder = 5
     Text = 'v1y'
   end
-  object Edit6: TEdit
+  object v2y: TEdit
     Left = 144
     Top = 37
     Width = 121
