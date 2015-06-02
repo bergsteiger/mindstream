@@ -28,7 +28,7 @@ implementation
 
 procedure TForm1.DoItClick(Sender: TObject);
 var
- l_V : Double;
+ l_V : Extended;
 begin
  l_V := StrToFloat(Edit1.Text);
  lbInt.Caption := FloatToStr(Int(l_V));
