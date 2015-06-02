@@ -20,45 +20,58 @@ object Form1: TForm1
     Height = 13
     Caption = 'Label1'
   end
-  object Label2: TLabel
-    Left = 16
-    Top = 48
-    Width = 31
-    Height = 13
-    Caption = 'Label2'
-  end
-  object Label3: TLabel
-    Left = 16
-    Top = 80
-    Width = 31
-    Height = 13
-    Caption = 'Label3'
-  end
-  object Button1: TButton
+  object BackColor1: TButton
     Left = 144
     Top = 8
     Width = 75
     Height = 25
-    Caption = 'Button1'
+    Caption = 'BackColor1'
     TabOrder = 0
-    OnClick = Button1Click
+    OnClick = BackColor1Click
   end
-  object Button2: TButton
+  object BackColor2: TButton
     Left = 144
     Top = 43
     Width = 75
     Height = 25
-    Caption = 'Button2'
+    Caption = 'BackColor2'
     TabOrder = 1
-    OnClick = Button2Click
+    OnClick = BackColor2Click
   end
-  object Button3: TButton
+  object BackColor3: TButton
     Left = 144
     Top = 80
     Width = 75
     Height = 25
-    Caption = 'Button3'
+    Caption = 'BackColor3'
     TabOrder = 2
-    OnClick = Button3Click
+    OnClick = BackColor3Click
+  end
+  object ForeColor3: TButton
+    Left = 232
+    Top = 80
+    Width = 75
+    Height = 25
+    Caption = 'ForeColor3'
+    TabOrder = 3
+    OnClick = BackColor3Click
+  end
+  object ForeColor2: TButton
+    Left = 232
+    Top = 43
+    Width = 75
+    Height = 25
+    Caption = 'ForeColor2'
+    TabOrder = 4
+    OnClick = BackColor2Click
+  end
+  object ForeColor1: TButton
+    Left = 232
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'ForeColor1'
+    TabOrder = 5
+    OnClick = BackColor1Click
   end
 end
