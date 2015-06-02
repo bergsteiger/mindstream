@@ -111,6 +111,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Name1'
     TabOrder = 9
+    OnClick = Name1Click
   end
   object Name2: TButton
     Left = 408
@@ -119,6 +120,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Name2'
     TabOrder = 10
+    OnClick = Name2Click
   end
   object Name3: TButton
     Left = 408
@@ -127,5 +129,6 @@ object Form1: TForm1
     Height = 25
     Caption = 'Name3'
     TabOrder = 11
+    OnClick = Name3Click
   end
 end
