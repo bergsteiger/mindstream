@@ -8,9 +8,12 @@ uses
 
 type
   TForm1 = class(TForm)
-    DoIt: TButton;
-    lbResult: TLabel;
-    procedure DoItClick(Sender: TObject);
+    btRed: TButton;
+    lbRed: TLabel;
+    lbYellow: TLabel;
+    lbGreen: TLabel;
+    btYellow: TButton;
+    btGreen: TButton;
   private
     { Private declarations }
   public
@@ -23,10 +26,5 @@ var
 implementation
 
 {$R *.dfm}
-
-procedure TForm1.DoItClick(Sender: TObject);
-begin
- lbResult.Visible := not lbResult.Visible;
-end;
 
 end.
