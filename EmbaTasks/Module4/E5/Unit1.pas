@@ -31,8 +31,16 @@ uses
 {$R *.dfm}
 
 procedure TForm1.DoItClick(Sender: TObject);
+var
+ l_H : Extended;
+ l_M : Extended;
+ l_CM : Extended;
 begin
- lbHeight.Caption := FloatToStr(Abs(StrToFloat(L.Text) * Tan(StrToFloat(alpha.Text))));
+ l_H := Abs(StrToFloat(L.Text) * 100 * Tan(StrToFloat(alpha.Text)));
+ l_M := l_H / 100;
+ l_CM := Frac(l_M);
+ l_M := Int(l_M);
+ lbHeight.Caption := Format('Tree height equals to %f m %f cm', [l_M, l_CM]);
 end;
 
 end.
