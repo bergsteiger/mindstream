@@ -11,6 +11,7 @@ type
     Edit1: TEdit;
     Label1: TLabel;
     Button1: TButton;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -23,5 +24,12 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+ l_V : Integer;
+begin
+ l_V := StrToInt(Edit1.Text);
+end;
 
 end.
