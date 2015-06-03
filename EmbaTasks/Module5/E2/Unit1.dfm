@@ -59,6 +59,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'btRed'
     TabOrder = 0
+    OnClick = btRedClick
   end
   object btYellow: TButton
     Left = 160
@@ -67,6 +68,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'btYellow'
     TabOrder = 1
+    OnClick = btYellowClick
   end
   object btGreen: TButton
     Left = 160
@@ -75,5 +77,6 @@ object Form1: TForm1
     Height = 25
     Caption = 'btGreen'
     TabOrder = 2
+    OnClick = btGreenClick
   end
 end
