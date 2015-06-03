@@ -9,7 +9,6 @@ uses
 type
   TForm1 = class(TForm)
     DoIt: TButton;
-    Edit1: TEdit;
     lbResult: TLabel;
     procedure DoItClick(Sender: TObject);
   private
@@ -26,10 +25,8 @@ implementation
 {$R *.dfm}
 
 procedure TForm1.DoItClick(Sender: TObject);
-const
- R = 6350;
 begin
- lbResult.Caption := FloatToStr(Sqrt(Sqr(R + StrToFloat(Edit1.Text)) - Sqr(R)));
+ lbResult.Visible := not lbResult.Visible;
 end;
 
 end.

@@ -14,8 +14,8 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object lbResult: TLabel
-    Left = 8
-    Top = 48
+    Left = 24
+    Top = 13
     Width = 38
     Height = 13
     Caption = 'lbResult'
@@ -28,13 +28,5 @@ object Form1: TForm1
     Caption = 'DoIt'
     TabOrder = 0
     OnClick = DoItClick
-  end
-  object Edit1: TEdit
-    Left = 8
-    Top = 8
-    Width = 121
-    Height = 21
-    TabOrder = 1
-    Text = 'Edit1'
   end
 end
