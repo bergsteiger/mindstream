@@ -10,10 +10,7 @@ type
   TForm1 = class(TForm)
     DoIt: TButton;
     Edit1: TEdit;
-    lbSum: TLabel;
-    lbProd: TLabel;
-    Edit2: TEdit;
-    Edit3: TEdit;
+    lbResult: TLabel;
     procedure DoItClick(Sender: TObject);
   private
     { Private declarations }
@@ -29,9 +26,10 @@ implementation
 {$R *.dfm}
 
 procedure TForm1.DoItClick(Sender: TObject);
+const
+ R = 6350;
 begin
- lbSum.Caption := FloatToStr(StrToFloat(Edit1.Text) + StrToFloat(Edit2.Text) + StrToFloat(Edit3.Text));
- lbProd.Caption := FloatToStr(StrToFloat(Edit1.Text) * StrToFloat(Edit2.Text) * StrToFloat(Edit3.Text));
+ lbResult.Caption := FloatToStr(Sqrt(Sqr(R + StrToFloat(Edit1.Text)) - Sqr(R)));
 end;
 
 end.

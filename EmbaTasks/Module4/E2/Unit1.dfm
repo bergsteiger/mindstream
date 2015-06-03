@@ -13,19 +13,12 @@ object Form1: TForm1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object lbSum: TLabel
+  object lbResult: TLabel
     Left = 8
-    Top = 109
-    Width = 28
+    Top = 48
+    Width = 38
     Height = 13
-    Caption = 'lbSum'
-  end
-  object lbProd: TLabel
-    Left = 8
-    Top = 136
-    Width = 30
-    Height = 13
-    Caption = 'lbProd'
+    Caption = 'lbResult'
   end
   object DoIt: TButton
     Left = 160
@@ -43,21 +36,5 @@ object Form1: TForm1
     Height = 21
     TabOrder = 1
     Text = 'Edit1'
-  end
-  object Edit2: TEdit
-    Left = 8
-    Top = 37
-    Width = 121
-    Height = 21
-    TabOrder = 2
-    Text = 'Edit2'
-  end
-  object Edit3: TEdit
-    Left = 8
-    Top = 72
-    Width = 121
-    Height = 21
-    TabOrder = 3
-    Text = 'Edit3'
   end
 end
