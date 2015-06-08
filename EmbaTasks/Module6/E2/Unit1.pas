@@ -11,6 +11,7 @@ type
     Edit1: TEdit;
     Button1: TButton;
     Label1: TLabel;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -23,5 +24,25 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+ l_V : Integer;
+ l_I1 : Integer;
+ l_I2 : Integer;
+ l_I3 : Integer;
+begin
+ l_V := StrToInt(Edit1.Text);
+ l_I1 := l_V mod 10;
+ l_V := l_V div 10;
+ l_I2 := l_V mod 10;
+ l_V := l_V div 10;
+ l_I3 := l_V mod 10;
+ l_V := l_V div 10;
+ if (l_I1 = l_I3) then
+  Label1.Caption := 'true'
+ else
+  Label1.Caption := 'false';
+end;
 
 end.
