@@ -8,6 +8,11 @@ uses
 
 type
   TForm1 = class(TForm)
+    A: TEdit;
+    B: TEdit;
+    C: TEdit;
+    Button1: TButton;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -20,5 +25,16 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+ l_A : Extended;
+ l_B : Extended;
+ l_C : Extended;
+begin
+ l_A := StrToFloat(A.Text);
+ l_B := StrToFloat(B.Text);
+ l_C := StrToFloat(C.Text);
+end;
 
 end.
