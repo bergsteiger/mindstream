@@ -8,6 +8,10 @@ uses
 
 type
   TForm1 = class(TForm)
+    Edit1: TEdit;
+    Button1: TButton;
+    Label1: TLabel;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -20,5 +24,18 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+ l_S : String;
+ l_I : Integer;
+ l_k : Integer;
+begin
+ l_S := '';
+ for l_I := 10 to 99 do
+  l_S := l_S + IntToStr(l_I);
+ l_k := StrToInt(Edit1.Text);
+ Label1.Caption := l_S[l_k];
+end;
 
 end.
