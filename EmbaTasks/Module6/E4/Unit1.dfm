@@ -13,4 +13,20 @@ object Form1: TForm1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object a: TEdit
+    Left = 8
+    Top = 16
+    Width = 121
+    Height = 21
+    TabOrder = 0
+    Text = 'a'
+  end
+  object n: TEdit
+    Left = 8
+    Top = 56
+    Width = 121
+    Height = 21
+    TabOrder = 1
+    Text = 'n'
+  end
 end
