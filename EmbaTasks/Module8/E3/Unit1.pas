@@ -11,7 +11,8 @@ type
     R1: TEdit;
     R2: TEdit;
     Button1: TButton;
-    S: TLabel;
+    lbS: TLabel;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -24,5 +25,27 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+
+ procedure S(R: Extended; var theS: Extended);
+ begin
+  theS := pi * Sqr(R);
+ end;
+
+var
+ l_R1 : Extended;
+ l_R2 : Extended;
+ l_S1 : Extended;
+ l_S2 : Extended;
+begin
+ l_R1 := StrToFloat(R1.Text);
+ l_R2 := StrToFloat(R2.Text);
+
+ S(l_R1, l_S1);
+ S(l_R2, l_S2);
+
+ lbS.Caption := FloatToStr(l_S2 - l_S1);
+end;
 
 end.

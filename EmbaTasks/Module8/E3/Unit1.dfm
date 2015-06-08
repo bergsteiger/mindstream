@@ -13,12 +13,12 @@ object Form1: TForm1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object S: TLabel
+  object lbS: TLabel
     Left = 8
     Top = 96
-    Width = 6
+    Width = 14
     Height = 13
-    Caption = 'S'
+    Caption = 'lbS'
   end
   object R1: TEdit
     Left = 8
@@ -43,5 +43,6 @@ object Form1: TForm1
     Height = 25
     Caption = 'Button1'
     TabOrder = 2
+    OnClick = Button1Click
   end
 end
