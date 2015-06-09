@@ -8,6 +8,10 @@ uses
 
 type
   TForm1 = class(TForm)
+    x: TEdit;
+    y: TEdit;
+    z: TLabel;
+    Button1: TButton;
   private
     { Private declarations }
   public
