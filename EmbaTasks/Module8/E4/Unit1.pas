@@ -17,6 +17,7 @@ type
     v2y: TEdit;
     v3y: TEdit;
     v4y: TEdit;
+    lbS: TLabel;
     procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
@@ -69,10 +70,12 @@ begin
  v3.Y := StrToFloat(v3y.Text);
 
  v4.X := StrToFloat(v4x.Text);
-
  v4.Y := StrToFloat(v4y.Text);
+
  S(v4, v1, v2, S1);
  S(v4, v3, v2, S2);
+
+ lbS.Caption := FloatToStr(S1 + S2);
 end;
 
 end.
