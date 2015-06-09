@@ -28,6 +28,23 @@ implementation
 {$R *.dfm}
 
 procedure TForm1.Button1Click(Sender: TObject);
+
+ function max2(a, b: Extended): Extended;
+ begin
+  if (a > b) then
+   Result := a
+  else
+   Result := b;
+ end;
+
+ function min2(a, b: Extended): Extended;
+ begin
+  if (a < b) then
+   Result := a
+  else
+   Result := b;
+ end;
+
 var
  l_a : Extended;
  l_b : Extended;
