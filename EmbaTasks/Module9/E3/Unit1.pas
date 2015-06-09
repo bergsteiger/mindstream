@@ -37,10 +37,19 @@ type
  end;//TP
 
 procedure TForm1.DoItClick(Sender: TObject);
+
+ function P(const v1, v2, v3: TP): Extended;
+ var
+  a, b, c : Extended;
+ begin
+  a := Sqrt(Sqr(v2.X - v3.X) + Sqr(v2.Y - v3.Y));
+  b := Sqrt(Sqr(v2.X - v1.X) + Sqr(v2.Y - v1.Y));
+  c := Sqrt(Sqr(v1.X - v3.X) + Sqr(v1.Y - v3.Y));
+  P := a + b + c;
+ end;
+
 var
  v1, v2, v3 : TP;
- a, b, c : Extended;
- P : Extended;
 begin
  v1.X := StrToFloat(v1x.Text);
  v1.Y := StrToFloat(v1y.Text);
@@ -51,12 +60,7 @@ begin
  v3.X := StrToFloat(v3x.Text);
  v3.Y := StrToFloat(v3y.Text);
 
- a := Sqrt(Sqr(v2.X - v3.X) + Sqr(v2.Y - v3.Y));
- b := Sqrt(Sqr(v2.X - v1.X) + Sqr(v2.Y - v1.Y));
- c := Sqrt(Sqr(v1.X - v3.X) + Sqr(v1.Y - v3.Y));
- P := a + b + c;
-
- lbP.Caption := FloatToStr(P);
+ lbP.Caption := FloatToStr(P(v1, v2, v3));
 end;
 
 end.
