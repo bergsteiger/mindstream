@@ -10,6 +10,7 @@ type
   TForm1 = class(TForm)
     Label1: TLabel;
     Button1: TButton;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -22,5 +23,19 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+
+ function y(x: Extended): Extended;
+ begin
+  y := Sqrt(x) + x;
+ end;
+
+var
+ x : Extended;
+begin
+ x := y(6) / 2 + y(13) / 2 + y(21) / 2;
+ Label1.Caption := FloatToStr(x);
+end;
 
 end.
