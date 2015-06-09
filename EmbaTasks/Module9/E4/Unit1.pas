@@ -65,6 +65,8 @@ begin
  l_b := StrToFloat(b.Text);
  l_c := StrToFloat(c.Text);
 
+ l_t := (max(l_a, l_b, l_c) - min(l_a, l_b, l_c)) / (2 + max(l_a, l_b, l_c) * min(l_a, l_b, l_c));
+
  Label1.Caption := FloatToStr(l_t);
 end;
 
