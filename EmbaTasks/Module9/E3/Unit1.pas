@@ -8,6 +8,15 @@ uses
 
 type
   TForm1 = class(TForm)
+    DoIt: TButton;
+    v1x: TEdit;
+    lbP: TLabel;
+    v2x: TEdit;
+    v3x: TEdit;
+    v1y: TEdit;
+    v3y: TEdit;
+    v2y: TEdit;
+    procedure DoItClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -20,5 +29,34 @@ var
 implementation
 
 {$R *.dfm}
+
+type
+ TP = record
+  X : Extended;
+  Y : Extended;
+ end;//TP
+
+procedure TForm1.DoItClick(Sender: TObject);
+var
+ v1, v2, v3 : TP;
+ a, b, c : Extended;
+ P : Extended;
+begin
+ v1.X := StrToFloat(v1x.Text);
+ v1.Y := StrToFloat(v1y.Text);
+
+ v2.X := StrToFloat(v2x.Text);
+ v2.Y := StrToFloat(v2y.Text);
+
+ v3.X := StrToFloat(v3x.Text);
+ v3.Y := StrToFloat(v3y.Text);
+
+ a := Sqrt(Sqr(v2.X - v3.X) + Sqr(v2.Y - v3.Y));
+ b := Sqrt(Sqr(v2.X - v1.X) + Sqr(v2.Y - v1.Y));
+ c := Sqrt(Sqr(v1.X - v3.X) + Sqr(v1.Y - v3.Y));
+ P := a + b + c;
+
+ lbP.Caption := FloatToStr(P);
+end;
 
 end.
