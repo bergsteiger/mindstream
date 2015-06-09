@@ -31,10 +31,15 @@ procedure TForm1.Button1Click(Sender: TObject);
   y := a + Sqrt(b);
  end;
 
+ function y1(a, b: Extended): Extended;
+ begin
+  y1 := y(a, b) / y(b, a);
+ end;
+
 var
  x : Extended;
 begin
- x := y(15, 8) / y(8, 15) + y(6, 12) / y(12, 6) + y(7, 21) / y (21, 7);
+ x := y1(15, 8) + y1(6, 12) + y1(7, 21);
  Label1.Caption := FloatToStr(x);
 end;
 
