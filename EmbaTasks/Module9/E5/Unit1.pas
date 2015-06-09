@@ -47,6 +47,8 @@ begin
  l_x := StrToFloat(x.Text);
  l_y := StrToFloat(y.Text);
 
+ l_z := (Sign(l_x) + Sign(l_y)) * Sign(l_x * l_y);
+
  z.Caption := FloatToStr(l_z);
 end;
 
