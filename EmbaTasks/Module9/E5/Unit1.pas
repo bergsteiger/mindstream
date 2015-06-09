@@ -12,6 +12,7 @@ type
     y: TEdit;
     z: TLabel;
     Button1: TButton;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -24,5 +25,17 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+ l_x : Extended;
+ l_y : Extended;
+ l_z : Extended;
+begin
+ l_x := StrToFloat(x.Text);
+ l_y := StrToFloat(y.Text);
+
+ z.Caption := FloatToStr(l_z);
+end;
 
 end.
