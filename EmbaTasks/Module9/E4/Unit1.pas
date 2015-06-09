@@ -45,6 +45,16 @@ procedure TForm1.Button1Click(Sender: TObject);
    Result := b;
  end;
 
+ function max(a, b, c: Extended): Extended;
+ begin
+  Result := max2(a, max2(b, c));
+ end;
+
+ function min(a, b, c: Extended): Extended;
+ begin
+  Result := min2(a, min2(b, c));
+ end;
+
 var
  l_a : Extended;
  l_b : Extended;
