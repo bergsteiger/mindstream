@@ -18,7 +18,7 @@ WordAlias %|| ИЛИ
 
 WordAlias %! NOT
 WordAlias %== =
-WordAlias %!= <>
+WordAlias %!= &lt;&gt;
 
 CONST "" ''
 // - алиас пустой строки
@@ -46,7 +46,7 @@ USES
 
 /*{OBJECT FUNCTION %T IN %S
  VAR l_T
- l_T := ( %S ->^ '%T' )
+ l_T := ( %S -&gt;^ '%T' )
  if ( l_T NotValid ) then
  (
   Result := nil
@@ -75,7 +75,7 @@ STRING FUNCTION %TS IN %S
 
 STRING FUNCTION |U IN %S
  VAR l_U
- l_U := ( %S ->^ '%U' )
+ l_U := ( %S -&gt;^ '%U' )
  if ( l_U NotValid ) then
  (
   Result := ''
@@ -87,27 +87,27 @@ STRING FUNCTION |U IN %S
 ;}*/
 
 STRING CallerWorker %SU
- Result := ( Caller ->0 |U )
+ Result := ( Caller -&gt;0 |U )
 ;
 
 OBJECT CallerWorker %S%P
- Result := ( Caller ->0 %P )
+ Result := ( Caller -&gt;0 %P )
 ;
 
 OBJECT CallerWorker %S%P%P
- Result := ( Caller ->0 %P %P )
+ Result := ( Caller -&gt;0 %P %P )
 ;
 
 OBJECT CallerWorker %S%P%P%P
- Result := ( Caller ->0 %P %P %P )
+ Result := ( Caller -&gt;0 %P %P %P )
 ;
 
 OBJECT CallerWorker %S%P%P%P%P
- Result := ( Caller ->0 %P %P %P %P )
+ Result := ( Caller -&gt;0 %P %P %P %P )
 ;
 
 OBJECT CallerWorker %S%P%P%P%P%P
- Result := ( Caller ->0 %P %P %P %P %P )
+ Result := ( Caller -&gt;0 %P %P %P %P %P )
 ;
 
 OBJECT FUNCTION DoMember OBJECT IN anUIDVar
@@ -158,7 +158,7 @@ ARRAY FUNCTION %C IN %S
 ;
 
 ARRAY CallerWorker %S%C
- Result := ( Caller ->0 %C )
+ Result := ( Caller -&gt;0 %C )
 ;
 
 ARRAY FUNCTION %Ops IN %S
@@ -166,7 +166,7 @@ ARRAY FUNCTION %Ops IN %S
 ;
 
 ARRAY CallerWorker %S%Ops
- Result := ( Caller ->0 %Ops )
+ Result := ( Caller -&gt;0 %Ops )
 ;
 
 ARRAY FUNCTION %Attrs IN %S
@@ -174,7 +174,7 @@ ARRAY FUNCTION %Attrs IN %S
 ;
 
 ARRAY CallerWorker %S%Attrs
- Result := ( Caller ->0 %Attrs )
+ Result := ( Caller -&gt;0 %Attrs )
 ;
 
 ARRAY FUNCTION %Lnks IN %S
@@ -182,19 +182,19 @@ ARRAY FUNCTION %Lnks IN %S
 ;
 
 ARRAY CallerWorker %S%Lnks
- Result := ( Caller ->0 %Lnks )
+ Result := ( Caller -&gt;0 %Lnks )
 ;
 
 ARRAY CallerWorker %S%G
- Result := ( Caller ->0 %G )
+ Result := ( Caller -&gt;0 %G )
 ;
 
 ARRAY CallerWorker %S%R
- Result := ( Caller ->0 %R )
+ Result := ( Caller -&gt;0 %R )
 ;
 
 OBJECT CallerWorker %S%T
- Result := ( Caller ->0 %T )
+ Result := ( Caller -&gt;0 %T )
 ;
 
 ARRAY FUNCTION %A
