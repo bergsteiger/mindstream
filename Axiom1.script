@@ -1,0 +1,202 @@
+NamedWordProducer %IMPLEMENTS %R
+// - список реализуемых элементов
+//NamedWordProducer %INHERITS %G
+// - список унаследованных элементов
+
+NamedWordProducer %FORWARDS %F
+// - список элементов которые должны быть определены ДО текущего
+
+NamedWordProducer %TOBEINCLUDED %w
+// - список элементов, которые должны буть включены для корректного определения данного
+
+NamedWordProducer %RAISES %E
+
+NamedWordProducer %RAISESINSET %Es
+
+WordAlias %&& И
+WordAlias %|| ИЛИ
+
+WordAlias %! NOT
+WordAlias %== =
+WordAlias %!= <>
+
+CONST "" ''
+// - алиас пустой строки
+
+USES
+ 'W:\shared\models\NewSchool\MDProcess.root.script'
+;
+
+/*{OBJECT FUNCTION %P IN %S
+ VAR l_P
+ l_P := ( %S pop:Word:Parent )
+ if ( l_P pop:Word:Name '%C' SameText ) then
+ ( 
+  l_P := ( l_P pop:Word:Parent )
+ ) 
+ if ( l_P NotValid ) then
+ (
+  Result := nil
+ ) 
+ else
+ (
+  Result := l_P
+ ) 
+;}*/
+
+/*{OBJECT FUNCTION %T IN %S
+ VAR l_T
+ l_T := ( %S ->^ '%T' )
+ if ( l_T NotValid ) then
+ (
+  Result := nil
+ ) 
+ else
+ (
+  l_T := ( l_T DO )
+  if ( l_T NotValid ) then
+  (
+   Result := nil
+  ) 
+  else
+  (
+   Result := l_T
+  )
+ )
+;
+
+STRING FUNCTION %TN IN %S
+ Result := ( %S %T |N )
+;
+
+STRING FUNCTION %TS IN %S
+ Result := ( %S %T |S )
+;
+
+STRING FUNCTION |U IN %S
+ VAR l_U
+ l_U := ( %S ->^ '%U' )
+ if ( l_U NotValid ) then
+ (
+  Result := ''
+ ) 
+ else
+ (
+  Result := ( l_U DO |N )
+ )
+;}*/
+
+STRING CallerWorker %SU
+ Result := ( Caller ->0 |U )
+;
+
+OBJECT CallerWorker %S%P
+ Result := ( Caller ->0 %P )
+;
+
+OBJECT CallerWorker %S%P%P
+ Result := ( Caller ->0 %P %P )
+;
+
+OBJECT CallerWorker %S%P%P%P
+ Result := ( Caller ->0 %P %P %P )
+;
+
+OBJECT CallerWorker %S%P%P%P%P
+ Result := ( Caller ->0 %P %P %P %P )
+;
+
+OBJECT CallerWorker %S%P%P%P%P%P
+ Result := ( Caller ->0 %P %P %P %P %P )
+;
+
+OBJECT FUNCTION DoMember OBJECT IN anUIDVar
+ VAR l_Element
+ anUIDVar DO =: l_Element
+ // - берём ссылку на элемент модели
+ if ( l_Element IsVoid ) then
+ // - пропускаем невалидные ссылки
+ (
+  Result := nil
+ )
+ else
+ (
+  Result := l_Element
+ ) 
+; // DoMember
+
+BOOLEAN FUNCTION FilterMember OBJECT IN aMember
+ Result := ( aMember NotValid ! )
+; // FilterMember
+ 
+ARRAY FUNCTION ELEMLIST STRING IN aListName IN %S
+ if ( %S NotValid ) then
+  ( Result := [ ] )
+ else
+  (
+   VAR l_List
+   l_List := ( %S %% aListName )
+   
+   if ( l_List NotValid ) then
+    ( Result := [ ] )
+   else 
+//    ( Result := ( [ l_List DO ] ) )
+    ( Result := ( @ FilterMember ( @ DoMember ( l_List CodeIterator ) MAP ) FILTER ) ) 
+  )
+; // ELEMLIST
+
+ARRAY FUNCTION %R IN %S
+ Result := ( '%R' %S ELEMLIST )
+;
+
+ARRAY FUNCTION %G IN %S
+ Result := ( '%G' %S ELEMLIST )
+;
+
+ARRAY FUNCTION %C IN %S
+ Result := ( %S %% '%C' MembersIterator )
+;
+
+ARRAY CallerWorker %S%C
+ Result := ( Caller ->0 %C )
+;
+
+ARRAY FUNCTION %Ops IN %S
+ Result := ( %S %% '%Ops' MembersIterator )
+;
+
+ARRAY CallerWorker %S%Ops
+ Result := ( Caller ->0 %Ops )
+;
+
+ARRAY FUNCTION %Attrs IN %S
+ Result := ( %S %% '%Attrs' MembersIterator )
+;
+
+ARRAY CallerWorker %S%Attrs
+ Result := ( Caller ->0 %Attrs )
+;
+
+ARRAY FUNCTION %Lnks IN %S
+ Result := ( %S %% '%Lnks' MembersIterator )
+;
+
+ARRAY CallerWorker %S%Lnks
+ Result := ( Caller ->0 %Lnks )
+;
+
+ARRAY CallerWorker %S%G
+ Result := ( Caller ->0 %G )
+;
+
+ARRAY CallerWorker %S%R
+ Result := ( Caller ->0 %R )
+;
+
+OBJECT CallerWorker %S%T
+ Result := ( Caller ->0 %T )
+;
+
+ARRAY FUNCTION %A
+ Result := ( @ FilterMember ( @ DoMember ( @ UIDS_LIST MembersIterator ) MAP ) FILTER )
+; // %A
