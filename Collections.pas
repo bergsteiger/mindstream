@@ -1,4 +1,6 @@
-class procedure TArray.Copy<T>(const Source: array of T; var Destination: array of T; SourceIndex, DestIndex, Count: NativeInt);
+...
+
+class procedure TArray.Copy&lt;T&gt;(const Source: array of T; var Destination: array of T; SourceIndex, DestIndex, Count: NativeInt);
 begin
   CheckArrays(Pointer(@Source[0]), Pointer(@Destination[0]), SourceIndex, Length(Source), DestIndex, Length(Destination), Count);
   if IsManagedType(T) then
@@ -83,7 +85,7 @@ var
 begin
   b := 0;
   e := FCount - 1;
-  while b < e do
+  while b &lt; e do
   begin
     case Kind of
       TTypeKind.tkUString: DoExchangeStringInline(b, e);
@@ -105,23 +107,23 @@ end;
 
 ...
 
-function TList<T>.InternalCompare(const Left, Right): Integer;
+function TList&lt;T&gt;.InternalCompare(const Left, Right): Integer;
 begin
   Result := FComparer.Compare(T(Left), T(Right));
 end;
 
-procedure TList<T>.InternalNotify(const Item; Action: TCollectionNotification);
+procedure TList&lt;T&gt;.InternalNotify(const Item; Action: TCollectionNotification);
 begin
   Notify(T(Item), Action);
 end;
 
-function TList<T>.ItemValue(const Item: T): NativeInt;
+function TList&lt;T&gt;.ItemValue(const Item: T): NativeInt;
 begin
   case SizeOf(T) of
     1: Result := PByte(@Item)[0] shl 0;
     2: Result := PByte(@Item)[0] shl 0 + PByte(@Item)[1] shl 8;
     3: Result := PByte(@Item)[0] shl 0 + PByte(@Item)[1] shl 8 + PByte(@Item)[2] shl 16;
-{$IF SizeOf(Pointer) <= 4}
+{$IF SizeOf(Pointer) &lt;= 4}
     4: Result := PByte(@Item)[0] shl 0 + PByte(@Item)[1] shl 8 + PByte(@Item)[2] shl 16 + PByte(@Item)[3] shl 24;
 {$ELSE}
     4: Result := PByte(@Item)[0] shl 0 + PByte(@Item)[1] shl 8 + PByte(@Item)[2] shl 16 + PByte(@Item)[3] shl 24;
