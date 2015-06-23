@@ -1,18 +1,15 @@
-// Разработчик: Селянкин Владимир
+Тест K378550793
 
-: K378550793
-
- : Действия
-  OBJECT VAR "Тулбар"
- 'tbcfAttributeSelectBottom' "Найти окно атрибутов" pop:control:FindControlByName =: "Тулбар"
- "Тулбар" pop:object:IsNil ! 'Не удалось найти тулбар' ASSERTS 
- "Тулбар" pop:control:GetHeight РАВНО 0 .
- ;
-
- ППР
- "Убедиться, что фокус в редакторе"
- 'AT_TYPE' focused:control:push pop:QueryCard:Attribute:SetFocus
- "Обработать Enter модально" ( Действия )
+ Выполнить (
+  ППР
+  "Перевести фокус в поле 'Тип' в ППР"
+  "Обработать Enter модально" ( 
+   OBJECT VAR "Тулбар"
+   'tbcfAttributeSelectBottom' "Найти окно атрибутов" pop:Control:FindControlByName =: "Тулбар"
+   "Тулбар" pop:object:IsNil ! 'Не удалось найти тулбар' ASSERTS 
+   "Тулбар" pop:Control:GetHeight РАВНО 0 .
+  )
+ )
 ;
 
 K378550793

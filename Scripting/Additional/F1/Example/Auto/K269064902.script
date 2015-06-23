@@ -1,18 +1,20 @@
-: K269064902
+Тест K269064902
 
- : Померить_ширину "Померить ширину" ;
+ Выполнить (
+  : Померить_ширину "Померить ширину" ;
 
- INTEGER VAR width_Text
- INTEGER VAR width_SubPanel
- INTEGER VAR width_HScroll
- "Открываем {(2005)}"
- контрол::Text:push Померить_ширину >>> width_Text
- контрол::SubPanel:push Померить_ширину >>>  width_SubPanel
- контрол::HScroll:push Померить_ширину >>> width_HScroll
- Если ( width_HScroll РАВНО ( width_Text width_SubPanel + ) ) то
-  ( 'Размер гороизонтального скроллера равен ширине редактора  плюс саб-панели.' . )
- иначе
-  ( 'Размер гороизонтального скроллера НЕ равен ширине редактора  плюс саб-панели!' . )
+  INTEGER VAR width_Text
+  INTEGER VAR width_SubPanel
+  INTEGER VAR width_HScroll
+  "Открываем {(2005)}"
+  контрол::Text:push Померить_ширину >>> width_Text
+  контрол::SubPanel:push Померить_ширину >>>  width_SubPanel
+  контрол::HScroll:push Померить_ширину >>> width_HScroll
+  Если ( width_HScroll РАВНО ( width_Text width_SubPanel + ) ) то
+   ( 'Размер гороизонтального скроллера равен ширине редактора  плюс саб-панели.' . )
+  иначе
+   ( 'Размер гороизонтального скроллера НЕ равен ширине редактора  плюс саб-панели!' . )
+ )
 ;
 
 K269064902

@@ -1,13 +1,11 @@
-: AliasTest
+Тест AliasTest
 
- : N
+ PROCEDURE N
   'Hello' .
  ;
- 
- WordAlias theAlias N
- 
- theAlias
 
+ WordAlias theAlias N
+ theAlias
 ;
 
 AliasTest

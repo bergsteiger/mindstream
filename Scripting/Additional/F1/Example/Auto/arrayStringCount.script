@@ -1,4 +1,5 @@
-: arrayStringCount
+Тест arrayStringCount
+
  [ 'мама' 'папа' ] 'мама' array:StringCount .
  [ 'мама' 'папа' ] 'папа' array:StringCount .
  [ 'мама' 'папа' 'папа' ] 'папа' array:StringCount .

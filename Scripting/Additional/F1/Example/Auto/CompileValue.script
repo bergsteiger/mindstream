@@ -2,7 +2,7 @@ Test TestCompileValue
 
  STRING VAR S
  [EXECUTE] ( S := 'Hello' )
- 
+
  S := 'World'
  
  INTEGER VAR I
@@ -12,12 +12,12 @@ Test TestCompileValue
  
  [EXECUTE] ( I CompileValue ) .
  [EXECUTE] ( S CompileValue ) .
- 
+
  OBJECT VAR O
  [EXECUTE] ( O := @ . )
  
  [EXECUTE] ( S CompileValue O CompileValue )
- 
+
  [EXECUTE] ( 'ãû ãû ãû' CompileValue @ . CompileValue )
  
  'ãû ãû ãû 2' [EXECUTE] ( @ . CompileValue )

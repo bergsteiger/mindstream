@@ -1,4 +1,4 @@
-: TestWordWorker
+Тест TestWordWorker
 
  operator CountIt INTEGER IN aCount
    ^ IN WordToWork
@@ -26,7 +26,6 @@
  0 =: A
  2 =- A
  A .
- 
 ;
 
 TestWordWorker

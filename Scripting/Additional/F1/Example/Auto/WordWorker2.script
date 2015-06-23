@@ -1,4 +1,4 @@
-: TestWordWorker2
+Тест TestWordWorker2
 
  operator X 
    ^ IN aString
@@ -6,10 +6,9 @@
   aString DO .
   WordToWork DO .
  ; // X
- 
+  
  X 'A' 1
- 2 .
- 
+ 2 . 
 ;
 
 TestWordWorker2

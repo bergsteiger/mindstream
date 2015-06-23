@@ -1,4 +1,4 @@
-: ArrayTest
+Тест ArrayTest
 
  INTEGER VAR I
  I := 0
@@ -6,7 +6,7 @@
  L := ( [
   10 LOOP ( ++! I I ) 
  ] )
- 
+
  @ . L ITERATE
  // - печатает числа от 1 до 10
  '' .

@@ -1,4 +1,4 @@
-: TestImmediateWordWorker2
+Тест TestImmediateWordWorker2
 
  IMMEDIATE operator X 
    ^ IN aString
@@ -6,11 +6,10 @@
   aString DO .
   aWordToWork DO .
  ; // X
- 
+
  2 .
- 
+
  X 'A' 1
- 
 ;
 
 TestImmediateWordWorker2

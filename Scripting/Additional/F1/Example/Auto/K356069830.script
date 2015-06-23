@@ -1,13 +1,10 @@
-USES
- Reminders.script
- HLTCLike.script
-; 
+Тест K356069830
 
-: K356069830
- // {RequestLink:265410447}
- ОсновноеМеню
- "Нажать на медаль {(контрол::OldBaseWarning)} и проверить наличие баллона"
- контрол::OldBaseWarning byname:control:push "Напечатать иерархию вложенности контролов"
+ Выполнить (
+  // {RequestLink:265410447}
+  "Нажать на медаль {(контрол::OldBaseWarning)} и проверить наличие баллона"
+  контрол::OldBaseWarning byname:control:push "Напечатать иерархию вложенности контролов"
+ )
 ;
 
 K356069830

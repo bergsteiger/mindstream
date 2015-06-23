@@ -1,4 +1,4 @@
-: TestFunction
+Тест TestFunction
 
  STRING FUNCTION S
   'Hello' =: Result
@@ -16,11 +16,10 @@
  INTEGER FUNCTION I
   1024 =: Result
  ;
- 
+
  S .
  I .
  S1 .
- 
 ;
 
 TestFunction

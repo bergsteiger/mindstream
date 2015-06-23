@@ -1,11 +1,13 @@
 Тест K286622448
  
- "Открываем НК"
- OBJECT VAR "Кнопка СКР"
- OBJECT VAR l_Menu
- "Найти контрол {(контрол::bt_enDocumentBlock_opGetTypedCorrespondentList)} по имени на форме {("Главное окно")}" =: "Кнопка СКР"
- 'DropdownMenu' "Кнопка СКР" "Свойства объекта" >>> l_Menu
- 'Items' l_Menu "Свойства объекта" "Узнать высоту меню" .
+ Выполнить (
+  "Открываем НК"
+  OBJECT VAR "Кнопка СКР"
+  OBJECT VAR l_Menu
+  "Найти контрол {(контрол::bt_enDocumentBlock_opGetTypedCorrespondentList)} по имени на форме {("Главное окно")}" =: "Кнопка СКР"
+  'DropdownMenu' "Кнопка СКР" "Свойства объекта" >>> l_Menu
+  'Items' l_Menu "Свойства объекта" "Узнать высоту меню" .
+ )
 ;
 
 K286622448

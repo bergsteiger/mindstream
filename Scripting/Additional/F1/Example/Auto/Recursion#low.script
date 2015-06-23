@@ -1,4 +1,4 @@
-: Recursion
+Тест Recursion
 
  : Действия
  
@@ -10,18 +10,18 @@
   5 раз Действия1
  ;
  
-// VAR l_WasException
-// false =: l_WasException
+ // VAR l_WasException
+ // false =: l_WasException
  
-// TRY
-  10 раз Действия
-// EXCEPT
-//  "Сравнить текущее исключение с эталоном"
-//  true =: l_WasException
-//  DROP
-  // - чистим мусорок (цифру 5) на стеке
-// END 
-// l_WasException 'Почему-то стали поддерживаться рекурсивные вызовы слов' ASSERTS
+ // TRY
+ 10 раз Действия
+ // EXCEPT
+ //  "Сравнить текущее исключение с эталоном"
+ //  true =: l_WasException
+ //  DROP
+ // - чистим мусорок (цифру 5) на стеке
+ // END 
+ // l_WasException 'Почему-то стали поддерживаться рекурсивные вызовы слов' ASSERTS
 ;
 
 Recursion

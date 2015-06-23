@@ -1,4 +1,4 @@
-: TestImmediateWordWorker
+Тест TestImmediateWordWorker
 
  operator CountIt INTEGER IN aCount
    ^ IN WordToWork
@@ -13,7 +13,6 @@
  
  10 CountIt ( 'A' . )
  20 ImmediateCountIt ( 'BC' . )
- 
 ;
 
 TestImmediateWordWorker
