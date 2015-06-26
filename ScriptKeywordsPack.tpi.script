@@ -2,16 +2,16 @@
 //
 // Модуль: "w:/MDProcess/DelphiSpecific/DelphiLang/Scripting/ScriptKeywordsPack.tpi"
 // Генерация мета-шаблонов
-// Generated from UML model, root element: <<MDAClass::Class>> MDProcess$ForDelphi::DelphiSpecific::DelphiLang::Scripting::ScriptKeywordsPack
+// Generated from UML model, root element: &lt;&lt;MDAClass::Class&gt;&gt; MDProcess$ForDelphi::DelphiSpecific::DelphiLang::Scripting::ScriptKeywordsPack
 //
 // Набор слов скрипта
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //: ScriptKeywordsPack::Class
-implementation @ <<ScriptKeywordsPack>>
+implementation @ &lt;&lt;ScriptKeywordsPack&gt;&gt;
 //? Набор слов скрипта
-//> ScriptKeyword::Class
+//&gt; ScriptKeyword::Class
 
 //= UtilityPack::Class
 
@@ -61,7 +61,7 @@ implementation @ <<ScriptKeywordsPack>>
 //	%f_clear_list(PROPS)\
  [%f] clear_list %( 'PROPS' )% 
 
-//	<{}{%CS=property|%CS=readonly}\
+//	&lt;{}{%CS=property|%CS=readonly}\
  INTEGER VAR l_Counter l_Counter := 0
  for %S%C
  begin
@@ -71,13 +71,13 @@ implementation @ <<ScriptKeywordsPack>>
   begin
 //	%f_add_to_list(PROPS,C)\
    [%f] add_to_list %( 'PROPS' %, 'C' )% 
-//	>\
+//	&gt;\
 
    ++! l_Counter
   end // if
  end // for C
 
-//	%{PROPS}<{}{}{%C}\
+//	%{PROPS}&lt;{}{}{%C}\
  ( get_global_var ( 'PROPS' ) ) 
  bind ( 
   OBJECT VAR %S
@@ -96,7 +96,7 @@ implementation @ <<ScriptKeywordsPack>>
      'Get' 
     end // if
     %C |N ' (): '
-    %C ->T |U  %, 'Op_Instance' )% 
+    %C -&gt;T |U  %, 'Op_Instance' )% 
 
 //	%f_TuneGS(%{Op_Instance},%C)\
     [%f] TuneGS %( ( get_global_var ( 'Op_Instance' ) ) %, %C )% 
@@ -110,7 +110,7 @@ implementation @ <<ScriptKeywordsPack>>
      %1 %f add_operation %( %1 |U '_'
      %C |U '_set' %, 'keyword' %, 'Set'
      %C |N ' (aValue : '
-     %C ->T |U  ')' %, 'Op_Instance' )% 
+     %C -&gt;T |U  ')' %, 'Op_Instance' )% 
 //	%f_TuneGS(%{Op_Instance},%C)\
      [%f] TuneGS %( ( get_global_var ( 'Op_Instance' ) ) %, %C )% 
 //	%{Op_Instance}%f_set_up(is_setter,true)\
@@ -119,7 +119,7 @@ implementation @ <<ScriptKeywordsPack>>
     end // if
 
 
-//	>\
+//	&gt;\
 
     ++! l_Counter
    end // if
@@ -133,7 +133,7 @@ implementation @ <<ScriptKeywordsPack>>
 //	%f_SpellFriends(%S)\
  [%f] SpellFriends %( %S )% 
 
-//	<{}{%t_isAcceptableForScripts(%G)=true}\
+//	&lt;{}{%t_isAcceptableForScripts(%G)=true}\
  INTEGER VAR l_Counter l_Counter := 0
  for %S%G
  begin
@@ -142,13 +142,13 @@ implementation @ <<ScriptKeywordsPack>>
   begin
 //	%f_SpellWordsForParent(%S,%G,"true")\
    [%f] SpellWordsForParent %( %S %, %G %, true )% 
-//	>\
+//	&gt;\
 
    ++! l_Counter
   end // if
  end // for G
 
-//	<{}{%t_isAcceptableForScripts(%R)=true}\
+//	&lt;{}{%t_isAcceptableForScripts(%R)=true}\
  INTEGER VAR l_Counter l_Counter := 0
  for %S%R
  begin
@@ -157,7 +157,7 @@ implementation @ <<ScriptKeywordsPack>>
   begin
 //	%f_SpellWordsForParent(%S,%R,"false")\
    [%f] SpellWordsForParent %( %S %, %R %, false )% 
-//	>\
+//	&gt;\
 
    ++! l_Counter
   end // if
@@ -166,7 +166,7 @@ implementation @ <<ScriptKeywordsPack>>
 //	%f_clear_list(KEYS)\
  [%f] clear_list %( 'KEYS' )% 
 
-//	%S<{}{%C#f_IsGlobalKeyword()=true}\
+//	%S&lt;{}{%C#f_IsGlobalKeyword()=true}\
  %S
  bind ( 
   OBJECT VAR %S
@@ -178,7 +178,7 @@ implementation @ <<ScriptKeywordsPack>>
    begin
 //	%f_add_to_list(KEYS,C)\
     [%f] add_to_list %( 'KEYS' %, 'C' )% 
-//	>\
+//	&gt;\
 
     ++! l_Counter
    end // if
@@ -188,7 +188,7 @@ implementation @ <<ScriptKeywordsPack>>
  
 //	%f_set_var(GEN,"")\
  [%f] set_var %( 'GEN' %, '' )% 
-//	%{KEYS}<{}{}{%C}\
+//	%{KEYS}&lt;{}{}{%C}\
  ( get_global_var ( 'KEYS' ) ) 
  bind ( 
   OBJECT VAR %S
@@ -200,7 +200,7 @@ implementation @ <<ScriptKeywordsPack>>
    begin
 //	%f_SpellWordByOp(%1,%C)\
     [%f] SpellWordByOp %( %1 %, %C )% 
-//	>\
+//	&gt;\
 
     ++! l_Counter
    end // if
@@ -217,7 +217,7 @@ implementation @ <<ScriptKeywordsPack>>
 //f _TuneGS
 ; // DoSpell
 
-end. // <<ScriptKeywordsPack>>
+end. // &lt;&lt;ScriptKeywordsPack&gt;&gt;
 
 : TuneGS OBJECT IN %S
 //	%S%f_set_documentation(%1D)\
@@ -271,7 +271,7 @@ end. // <<ScriptKeywordsPack>>
 //	%f_clear_list(KEYS)\
  [%f] clear_list %( 'KEYS' )% 
 
-//	%S<{}{%C#f_IsKeyword()=true}\
+//	%S&lt;{}{%C#f_IsKeyword()=true}\
  %S
  bind ( 
   OBJECT VAR %S
@@ -283,7 +283,7 @@ end. // <<ScriptKeywordsPack>>
    begin
 //	%f_add_to_list(KEYS,C)\
     [%f] add_to_list %( 'KEYS' %, 'C' )% 
-//	>\
+//	&gt;\
 
     ++! l_Counter
    end // if
@@ -293,7 +293,7 @@ end. // <<ScriptKeywordsPack>>
  
 //	%f_set_var(GEN,1)\
  [%f] set_var %( 'GEN' %, 1 )% 
-//	%{KEYS}<{}{}{%C}\
+//	%{KEYS}&lt;{}{}{%C}\
  ( get_global_var ( 'KEYS' ) ) 
  bind ( 
   OBJECT VAR %S
@@ -305,7 +305,7 @@ end. // <<ScriptKeywordsPack>>
    begin
 //	%f_SpellWordByOp(%1,%C)\
     [%f] SpellWordByOp %( %1 %, %C )% 
-//	>\
+//	&gt;\
 
     ++! l_Counter
    end // if
@@ -396,10 +396,10 @@ end. // <<ScriptKeywordsPack>>
  end // if
  NOP
 //	[{%1%TN!=void}*Тип результата:* %1%TN\n]\
- if ( ( %1 ->T |N  ) %!= 'void' ) then
+ if ( ( %1 -&gt;T |N  ) %!= 'void' ) then
  begin
   '*Тип результата:* '
-  %1 ->T |N  #13#10 
+  %1 -&gt;T |N  #13#10 
  end // if
 //	[{%1#f_IsCreator()=true&"%{GEN}N"!=""}*Тип результата:* %{GEN}N\n]\
  if ( ( %1 %?f IsCreator %( )% ) %==  true AND 
@@ -412,7 +412,7 @@ end. // <<ScriptKeywordsPack>>
  '*Пример:*'
 //	\{code\}
  '{code}'
-//	 %1<{}{}{%Cr}%CN >[{"%{GEN}N"!=""}a%t_SelfName(%{GEN}) ]%f_loc_GetNameForScript(%{Class_Inst})\
+//	 %1&lt;{}{}{%Cr}%CN &gt;[{"%{GEN}N"!=""}a%t_SelfName(%{GEN}) ]%f_loc_GetNameForScript(%{Class_Inst})\
  ' '
  %1
  bind ( 
@@ -543,7 +543,7 @@ end. // <<ScriptKeywordsPack>>
  begin
 //	 Result := %t_TypeInfo(%1%T);\
   ' Result := '
-  [%t] TypeInfo %( %1 ->T  )% ';'
+  [%t] TypeInfo %( %1 -&gt;T  )% ';'
 //	}\
  end // else
 //	)\
@@ -578,7 +578,7 @@ end. // <<ScriptKeywordsPack>>
 //	]\
  end // if
 
-//	[{%1<{}{}{%CC}>!=0}\
+//	[{%1&lt;{}{}{%CC}&gt;!=0}\
  if ( ( %1
   bind ( 
    OBJECT VAR %S
@@ -603,7 +603,7 @@ end. // <<ScriptKeywordsPack>>
  end // if
 
 //	[{%1%TN!=void}\
- if ( ( %1 ->T |N  ) %!= 'void' ) then
+ if ( ( %1 -&gt;T |N  ) %!= 'void' ) then
  begin
 //	%f_set_var(NeedOp,"true")\
   [%f] set_var %( 'NeedOp' %, true )% 
@@ -654,7 +654,7 @@ end. // <<ScriptKeywordsPack>>
    ( get_global_var ( 'GEN' ) |U ) ' '
 //	]\
   end // if
-//	%1<{}{}{%C}, %CN:%C%TU>)\
+//	%1&lt;{}{}{%C}, %CN:%C%TU&gt;)\
   %1
   bind ( 
    OBJECT VAR %S
@@ -666,7 +666,7 @@ end. // <<ScriptKeywordsPack>>
     begin
      ', '
      %C |N ':'
-     %C ->T |U  
+     %C -&gt;T |U  
      ++! l_Counter
     end // if
    end // for C
@@ -685,10 +685,10 @@ end. // <<ScriptKeywordsPack>>
   else
   begin
 //	[{%1%TN!=void} : %1%TU]\
-   if ( ( %1 ->T |N  ) %!= 'void' ) then
+   if ( ( %1 -&gt;T |N  ) %!= 'void' ) then
    begin
     ' : '
-    %1 ->T |U  
+    %1 -&gt;T |U  
    end // if
 //	}\
   end // else
@@ -751,7 +751,7 @@ end. // <<ScriptKeywordsPack>>
   [%f] pas_MethodOwnerID %( ( get_global_var ( 'MyDo' ) ) %, ( get_global_var ( 'Class_Inst' ) ) )% '_var' %, 
 //	 {-}\
   ' {-}'
-//	[{%{Op_Instance}<{}{}{+%CC}>!=0}\
+//	[{%{Op_Instance}&lt;{}{}{+%CC}&gt;!=0}\
   if ( ( ( get_global_var ( 'Op_Instance' ) ) 
    bind ( 
     OBJECT VAR %S
@@ -761,7 +761,7 @@ end. // <<ScriptKeywordsPack>>
      OBJECT IN %C
      if true then
      begin
-      if ( l_Counter >0 ) then
+      if ( l_Counter &gt;0 ) then
       begin
 
       end
@@ -777,7 +777,7 @@ end. // <<ScriptKeywordsPack>>
    #13#10
 //	var\
    'var'
-//	%{Op_Instance}<{}{}{+%C}\n l_%CN : %f_pas_TypeName(%C%T);>\
+//	%{Op_Instance}&lt;{}{}{+%C}\n l_%CN : %f_pas_TypeName(%C%T);&gt;\
    ( get_global_var ( 'Op_Instance' ) ) 
    bind ( 
     OBJECT VAR %S
@@ -787,11 +787,11 @@ end. // <<ScriptKeywordsPack>>
      OBJECT IN %C
      if true then
      begin
-      if ( l_Counter >0 ) then
+      if ( l_Counter &gt;0 ) then
       begin
        #13#10' l_'
        %C |N ' : '
-       [%f] pas_TypeName %( %C ->T  )% ';' 
+       [%f] pas_TypeName %( %C -&gt;T  )% ';' 
       end
       ++! l_Counter
      end // if
@@ -806,7 +806,7 @@ end. // <<ScriptKeywordsPack>>
 //	%{MyDo}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{MyDo},%{Class_Inst})_impl,\
   ( get_global_var ( 'MyDo' ) %f set_uc_content %( 'intf.pas' %, '_'
   [%f] pas_MethodOwnerID %( ( get_global_var ( 'MyDo' ) ) %, ( get_global_var ( 'Class_Inst' ) ) )% '_impl' %, 
-//	[{%{Op_Instance}<{}{}{+%CC}>!=0}\
+//	[{%{Op_Instance}&lt;{}{}{+%CC}&gt;!=0}\
   if ( ( ( get_global_var ( 'Op_Instance' ) ) 
    bind ( 
     OBJECT VAR %S
@@ -816,7 +816,7 @@ end. // <<ScriptKeywordsPack>>
      OBJECT IN %C
      if true then
      begin
-      if ( l_Counter >0 ) then
+      if ( l_Counter &gt;0 ) then
       begin
 
       end
@@ -828,7 +828,7 @@ end. // <<ScriptKeywordsPack>>
    ) // bind
 )    %!= 0 ) then
   begin
-//	%{Op_Instance}<{}{}{+%C}\
+//	%{Op_Instance}&lt;{}{}{+%C}\
    ( get_global_var ( 'Op_Instance' ) ) 
    bind ( 
     OBJECT VAR %S
@@ -838,7 +838,7 @@ end. // <<ScriptKeywordsPack>>
      OBJECT IN %C
      if true then
      begin
-      if ( l_Counter >0 ) then
+      if ( l_Counter &gt;0 ) then
       begin
 //	 try
        ' try'
@@ -846,10 +846,10 @@ end. // <<ScriptKeywordsPack>>
        '  l_'
        %C |N ' := '
 //	%t_CastSig(%C%T)\
-       [%t] CastSig %( %C ->T  )% 
+       [%t] CastSig %( %C -&gt;T  )% 
 //	(aCtx.rEngine.%t_PopSig(%C%T,%C));
        '(aCtx.rEngine.'
-       [%t] PopSig %( %C ->T  %, %C )% ');'
+       [%t] PopSig %( %C -&gt;T  %, %C )% ');'
 //	 except
        ' except'
 //	  on E: Exception do
@@ -859,14 +859,14 @@ end. // <<ScriptKeywordsPack>>
 //	   RunnerError('Ошибка при получении параметра %CN: %f_pas_TypeName(%C%T) : ' + E.Message, aCtx);
        '   RunnerError(''Ошибка при получении параметра '
        %C |N ': '
-       [%f] pas_TypeName %( %C ->T  )% ' : '' + E.Message, aCtx);'
+       [%f] pas_TypeName %( %C -&gt;T  )% ' : '' + E.Message, aCtx);'
 //	   Exit;
        '   Exit;'
 //	  end;//on E: Exception
        '  end;//on E: Exception'
 //	 end;//try..except
        ' end;//try..except'
-//	>\
+//	&gt;\
 
       end
       ++! l_Counter
@@ -879,17 +879,17 @@ end. // <<ScriptKeywordsPack>>
 //	 \
   ' '
 //	[{%{Op_Instance}%TN!=void}\
-  if ( ( ( get_global_var ( 'Op_Instance' )  ->T |N ) ) %!= 'void' ) then
+  if ( ( ( get_global_var ( 'Op_Instance' )  -&gt;T |N ) ) %!= 'void' ) then
   begin
 //	aCtx.rEngine.%t_PushSig(%{Op_Instance}%T,%{Op_Instance})\
    'aCtx.rEngine.'
-   [%t] PushSig %( ( get_global_var ( 'Op_Instance' )  ->T ) %, ( get_global_var ( 'Op_Instance' ) ) )% 
+   [%t] PushSig %( ( get_global_var ( 'Op_Instance' )  -&gt;T ) %, ( get_global_var ( 'Op_Instance' ) ) )% 
 //	(%t_UnCastSig(%{Op_Instance}%T)(\
    '('
-   [%t] UnCastSig %( ( get_global_var ( 'Op_Instance' )  ->T ) )% '('
+   [%t] UnCastSig %( ( get_global_var ( 'Op_Instance' )  -&gt;T ) )% '('
 //	]\
   end // if
-//	%f_to_borland(%{Op_Instance}N)(aCtx%{Op_Instance}<{}{}{+%C}, l_%CN>)\
+//	%f_to_borland(%{Op_Instance}N)(aCtx%{Op_Instance}&lt;{}{}{+%C}, l_%CN&gt;)\
   [%f] to_borland %( ( get_global_var ( 'Op_Instance' ) |N ) )% '(aCtx'
   ( get_global_var ( 'Op_Instance' ) ) 
   bind ( 
@@ -900,7 +900,7 @@ end. // <<ScriptKeywordsPack>>
     OBJECT IN %C
     if true then
     begin
-     if ( l_Counter >0 ) then
+     if ( l_Counter &gt;0 ) then
      begin
       ', l_'
       %C |N 
@@ -912,7 +912,7 @@ end. // <<ScriptKeywordsPack>>
   ) // bind
   ')'
 //	[{%{Op_Instance}%TN!=void}\
-  if ( ( ( get_global_var ( 'Op_Instance' )  ->T |N ) ) %!= 'void' ) then
+  if ( ( ( get_global_var ( 'Op_Instance' )  -&gt;T |N ) ) %!= 'void' ) then
   begin
 //	))\
    '))'
@@ -941,7 +941,7 @@ end. // <<ScriptKeywordsPack>>
    [%f] pas_MethodOwnerID %( ( get_global_var ( 'Op_Instance' ) ) %, ( get_global_var ( 'Class_Inst' ) ) )% '_impl' %, 
 //	 [{%{Op_Instance}%TN!=void}Result := ]\
    ' '
-   if ( ( ( get_global_var ( 'Op_Instance' )  ->T |N ) ) %!= 'void' ) then
+   if ( ( ( get_global_var ( 'Op_Instance' )  -&gt;T |N ) ) %!= 'void' ) then
    begin
     'Result := ' 
    end // if
@@ -967,7 +967,7 @@ end. // <<ScriptKeywordsPack>>
    end // if
    else
    begin
-//	[{%1<{}{}{C%C}>!=0}\
+//	[{%1&lt;{}{}{C%C}&gt;!=0}\
     if ( ( %1
      bind ( 
       OBJECT VAR %S
@@ -986,7 +986,7 @@ end. // <<ScriptKeywordsPack>>
      ) // bind
  )      %!= 0 ) then
     begin
-//	(%1<{, }{}%CN>)\
+//	(%1&lt;{, }{}%CN&gt;)\
      '('
      %1
      bind ( 
@@ -997,7 +997,7 @@ end. // <<ScriptKeywordsPack>>
        OBJECT IN %C
        if true then
        begin
-        if ( l_Counter >0 ) then ( ', ' )
+        if ( l_Counter &gt;0 ) then ( ', ' )
         %C |N 
         ++! l_Counter
        end // if
@@ -1028,7 +1028,7 @@ end. // <<ScriptKeywordsPack>>
 //t _TypeInfo
 ; // SpellWordByOp
 
-<<transformator>> TypeInfo OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; TypeInfo OBJECT IN %S
 //@ %SU
 //c {}
 //r {%SN=void}: {@tfw_tiVoid}
@@ -1040,7 +1040,7 @@ end. // <<ScriptKeywordsPack>>
 //t _SelfNamePrim
 ; // TypeInfo
 
-<<transformator>> SelfNamePrim OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; SelfNamePrim OBJECT IN %S
 //@ %SU
 //c {}
 //r {%t_interface(%S)=true}: {%f_cut_prefix(%f_pas_TypeName(%S),I)}
@@ -1051,7 +1051,7 @@ end. // <<ScriptKeywordsPack>>
 //t _SelfNameEx
 ; // SelfNamePrim
 
-<<transformator>> SelfNameEx OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; SelfNameEx OBJECT IN %S
 //@ %SU
 //c {}
 //r {%f_substr_from_begin(%t_SelfNamePrim(%S),9)=nevCustom}: {%f_cut_prefix(%t_SelfNamePrim(%S),nevCustom)}
@@ -1070,7 +1070,7 @@ end. // <<ScriptKeywordsPack>>
 //t _SelfName
 ; // SelfNameEx
 
-<<transformator>> SelfName OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; SelfName OBJECT IN %S
 //@ %SU
 //c {}
 //r {%t_SelfNameEx(%S)=StackValue}: {SV}
@@ -1085,7 +1085,7 @@ end. // <<ScriptKeywordsPack>>
 //t _isEnum
 ; // SelfName
 
-<<transformator>> isEnum OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; isEnum OBJECT IN %S
 //@ %SU
 //c {}
 //r {%SS=Enum}: {true}
@@ -1095,7 +1095,7 @@ end. // <<ScriptKeywordsPack>>
 //t _isClassRef
 ; // isEnum
 
-<<transformator>> isClassRef OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; isClassRef OBJECT IN %S
 //@ %SU
 //c {}
 //r {%f_pas_TypeName(%S)=TClass}: {true}
@@ -1106,7 +1106,7 @@ end. // <<ScriptKeywordsPack>>
 //t _isStruct
 ; // isClassRef
 
-<<transformator>> isStruct OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; isStruct OBJECT IN %S
 //@ %SU
 //c {}
 //r {%S#f_IsStruct()=true}: {true}
@@ -1116,7 +1116,7 @@ end. // <<ScriptKeywordsPack>>
 //t _isString
 ; // isStruct
 
-<<transformator>> isString OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; isString OBJECT IN %S
 //@ %SU
 //c {}
 //r {%f_pas_TypeName(%S)=Tl3WString|%f_pas_TypeName(%S)=Tl3PCharLenPrim|%f_pas_TypeName(%S)=Tl3PCharLen}: {true}
@@ -1127,7 +1127,7 @@ end. // <<ScriptKeywordsPack>>
 //t _isAcceptableForScripts
 ; // isString
 
-<<transformator>> isAcceptableForScripts OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; isAcceptableForScripts OBJECT IN %S
 //@ %SU
 //c {}
 //r {%f_pas_TypeName(%S)=TClass}: {true}
@@ -1155,7 +1155,7 @@ end. // <<ScriptKeywordsPack>>
 //t _CastSig
 ; // isAcceptableForScripts
 
-<<transformator>> CastSig OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; CastSig OBJECT IN %S
 //@ %SU
 //c {}
 //r {%f_pas_TypeName(%S)=TClass}: {}
@@ -1183,7 +1183,7 @@ end. // <<ScriptKeywordsPack>>
 //t _UnCastSig
 ; // CastSig
 
-<<transformator>> UnCastSig OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; UnCastSig OBJECT IN %S
 //@ %SU
 //c {}
 //r {%SN=void}: {}
@@ -1212,7 +1212,7 @@ end. // <<ScriptKeywordsPack>>
 //t _PopSig
 ; // UnCastSig
 
-<<transformator>> PopSig OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; PopSig OBJECT IN %S
 //@ %SU_%1N
 //c {}
 //r {%f_pas_TypeName(%S)=TClass}: {PopClass}
@@ -1240,7 +1240,7 @@ end. // <<ScriptKeywordsPack>>
 //t _PushSig
 ; // PopSig
 
-<<transformator>> PushSig OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; PushSig OBJECT IN %S
 //@ %SU_%1N
 //c {}
 //r {%f_pas_TypeName(%S)=TClass}: {PushClass}
@@ -1271,8 +1271,8 @@ end. // <<ScriptKeywordsPack>>
 // реализация абстрактного стереотипа Delphi интерфейсы и реализация::MDAGenerator
 // Генератор файлов форм (.dfm)
 //+ dfm
-implementation @ <<ScriptKeywordsPack>>
-<<generator>> dfm OBJECT IN %S
+implementation @ &lt;&lt;ScriptKeywordsPack&gt;&gt;
+&lt;&lt;generator&gt;&gt; dfm OBJECT IN %S
 //R  
 //#UC START# *49F5795900ECfor4F2C15C90252*
 //#UC END# *49F5795900ECfor4F2C15C90252*
@@ -1282,7 +1282,7 @@ implementation @ <<ScriptKeywordsPack>>
 // реализация абстрактного стереотипа Delphi интерфейсы и реализация::MDAGenerator
 // Вторая интерфейсная секция стереотипа. Например реализация свойств класса.
 //+ intf2.pas
-<<generator>> intf2.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf2.pas OBJECT IN %S
 //R  
 //#UC START# *477398E501C0for4F2C15C90252*
 //#UC END# *477398E501C0for4F2C15C90252*
@@ -1292,7 +1292,7 @@ implementation @ <<ScriptKeywordsPack>>
 // реализация абстрактного стереотипа Delphi интерфейсы и реализация::MDAGenerator
 // 3-я секция интерфейса. Например поле для свойства.
 //+ intf3.pas
-<<generator>> intf3.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf3.pas OBJECT IN %S
 //R  
 //#UC START# *4774D2A20372for4F2C15C90252*
 //#UC END# *4774D2A20372for4F2C15C90252*
@@ -1302,7 +1302,7 @@ implementation @ <<ScriptKeywordsPack>>
 // реализация абстрактного стереотипа Delphi интерфейсы и реализация::MDAGenerator
 // Скрипты TC (.sd)
 //+ sd
-<<generator>> sd OBJECT IN %S
+&lt;&lt;generator&gt;&gt; sd OBJECT IN %S
 //R  
 //#UC START# *4DE79AFC0030for4F2C15C90252*
 //#UC END# *4DE79AFC0030for4F2C15C90252*
@@ -1312,7 +1312,7 @@ implementation @ <<ScriptKeywordsPack>>
 // реализация абстрактного стереотипа Java::MDAGenerator
 // генератор реализации фабрик интерфейсов на java (.java)
 //+ fctr.java
-<<generator>> fctr.java OBJECT IN %S
+&lt;&lt;generator&gt;&gt; fctr.java OBJECT IN %S
 //#UC START# *470321C1038Afor4F2C15C90252*
 //#UC END# *470321C1038Afor4F2C15C90252*
 ; // fctr.java
@@ -1321,7 +1321,7 @@ implementation @ <<ScriptKeywordsPack>>
 // реализация абстрактного стереотипа Документация::MDAGenerator
 // Хак для [$281531116]
 //+ link_to_requests_hack
-<<generator>> link_to_requests_hack OBJECT IN %S
+&lt;&lt;generator&gt;&gt; link_to_requests_hack OBJECT IN %S
 //#UC START# *4E65F581015Afor4F2C15C90252*
 //#UC END# *4E65F581015Afor4F2C15C90252*
 ; // link_to_requests_hack
@@ -1331,16 +1331,16 @@ implementation @ <<ScriptKeywordsPack>>
 // Вложенные стереотипы
 
 //: ScriptKeywordsPack::Class::injects::ClassDependency
-end. // <<ScriptKeywordsPack>>
+end. // &lt;&lt;ScriptKeywordsPack&gt;&gt;
 
-implementation @ :: <<ScriptKeywordsPack>> <<injects>> ;
+implementation @ :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;injects&gt;&gt; ;
 //? Внедрение зависимости
 //= Delphi интерфейсы и реализация::MDAGenerator
 
 // Генераторы
 // генератор реализации фабрик интерфейсов на java (.java)
 //+ fctr.java
-<<generator>> fctr.java OBJECT IN %S
+&lt;&lt;generator&gt;&gt; fctr.java OBJECT IN %S
 //#UC START# *470321C1038Afor54D4A61F00BA*
 //#UC END# *470321C1038Afor54D4A61F00BA*
 ; // fctr.java
@@ -1348,7 +1348,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<injects>> ;
 
 // Вторая интерфейсная секция стереотипа. Например реализация свойств класса.
 //+ intf2.pas
-<<generator>> intf2.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf2.pas OBJECT IN %S
 //R  
 //#UC START# *477398E501C0for54D4A61F00BA*
 //#UC END# *477398E501C0for54D4A61F00BA*
@@ -1357,7 +1357,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<injects>> ;
 
 // 3-я секция интерфейса. Например поле для свойства.
 //+ intf3.pas
-<<generator>> intf3.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf3.pas OBJECT IN %S
 //R  
 //#UC START# *4774D2A20372for54D4A61F00BA*
 //#UC END# *4774D2A20372for54D4A61F00BA*
@@ -1366,7 +1366,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<injects>> ;
 
 // Генератор файлов форм (.dfm)
 //+ dfm
-<<generator>> dfm OBJECT IN %S
+&lt;&lt;generator&gt;&gt; dfm OBJECT IN %S
 //R  
 //#UC START# *49F5795900ECfor54D4A61F00BA*
 //#UC END# *49F5795900ECfor54D4A61F00BA*
@@ -1375,7 +1375,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<injects>> ;
 
 // Скрипты TC (.sd)
 //+ sd
-<<generator>> sd OBJECT IN %S
+&lt;&lt;generator&gt;&gt; sd OBJECT IN %S
 //R  
 //#UC START# *4DE79AFC0030for54D4A61F00BA*
 //#UC END# *4DE79AFC0030for54D4A61F00BA*
@@ -1384,7 +1384,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<injects>> ;
 
 // Хак для [$281531116]
 //+ link_to_requests_hack
-<<generator>> link_to_requests_hack OBJECT IN %S
+&lt;&lt;generator&gt;&gt; link_to_requests_hack OBJECT IN %S
 //#UC START# *4E65F581015Afor54D4A61F00BA*
 //#UC END# *4E65F581015Afor54D4A61F00BA*
 ; // link_to_requests_hack
@@ -1392,7 +1392,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<injects>> ;
 
 // Генерация модели в MDKnow
 //+ wiki
-<<generator>> wiki OBJECT IN %S
+&lt;&lt;generator&gt;&gt; wiki OBJECT IN %S
 //#UC START# *46E6D4BB0339for54D4A61F00BA*
 //#UC END# *46E6D4BB0339for54D4A61F00BA*
 ; // wiki
@@ -1400,7 +1400,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<injects>> ;
 
 // Родные Delphi интерфейсы (.pas)
 //+ intf.pas
-<<generator>> intf.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf.pas OBJECT IN %S
 //R  
 //#UC START# *470F1571031Cfor54D4A61F00BA*
 //#UC END# *470F1571031Cfor54D4A61F00BA*
@@ -1409,7 +1409,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<injects>> ;
 
 // Реализация на Delphi(.pas)
 //+ impl.pas
-<<generator>> impl.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; impl.pas OBJECT IN %S
 //R  
 //#UC START# *470F15B800CBfor54D4A61F00BA*
 //#UC END# *470F15B800CBfor54D4A61F00BA*
@@ -1431,7 +1431,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<injects>> ;
 //%t _constraint
 ; // st_space_key
 
-<<transformator>> constraint OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; constraint OBJECT IN %S
 //#UC START# *4704C0E30186for54D4A61F00BA*
 //c          {}
 //r {""=""}: {}
@@ -1458,9 +1458,9 @@ implementation @ :: <<ScriptKeywordsPack>> <<injects>> ;
 
 
 //: ScriptKeywordsPack::Class::keyword::Operation
-end. // :: <<ScriptKeywordsPack>> <<injects>> ;
+end. // :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;injects&gt;&gt; ;
 
-implementation @ :: <<ScriptKeywordsPack>> <<keyword>> ;
+implementation @ :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;keyword&gt;&gt; ;
 //? Слово скрипта
 //= UtilityPack::Class::Operation
 
@@ -1479,7 +1479,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<keyword>> ;
 // Генераторы
 // Генерация модели в MDKnow
 //+ wiki
-<<generator>> wiki OBJECT IN %S
+&lt;&lt;generator&gt;&gt; wiki OBJECT IN %S
 //#UC START# *46E6D4BB0339for54F734BC0087*
 //#UC END# *46E6D4BB0339for54F734BC0087*
 ; // wiki
@@ -1487,7 +1487,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<keyword>> ;
 
 // генератор реализации фабрик интерфейсов на java (.java)
 //+ fctr.java
-<<generator>> fctr.java OBJECT IN %S
+&lt;&lt;generator&gt;&gt; fctr.java OBJECT IN %S
 //#UC START# *470321C1038Afor54F734BC0087*
 //#UC END# *470321C1038Afor54F734BC0087*
 ; // fctr.java
@@ -1495,7 +1495,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<keyword>> ;
 
 // Вторая интерфейсная секция стереотипа. Например реализация свойств класса.
 //+ intf2.pas
-<<generator>> intf2.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf2.pas OBJECT IN %S
 //R  
 //#UC START# *477398E501C0for54F734BC0087*
 //#UC END# *477398E501C0for54F734BC0087*
@@ -1504,7 +1504,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<keyword>> ;
 
 // 3-я секция интерфейса. Например поле для свойства.
 //+ intf3.pas
-<<generator>> intf3.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf3.pas OBJECT IN %S
 //R  
 //#UC START# *4774D2A20372for54F734BC0087*
 //#UC END# *4774D2A20372for54F734BC0087*
@@ -1513,7 +1513,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<keyword>> ;
 
 // Генератор файлов форм (.dfm)
 //+ dfm
-<<generator>> dfm OBJECT IN %S
+&lt;&lt;generator&gt;&gt; dfm OBJECT IN %S
 //R  
 //#UC START# *49F5795900ECfor54F734BC0087*
 //#UC END# *49F5795900ECfor54F734BC0087*
@@ -1522,7 +1522,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<keyword>> ;
 
 // Скрипты TC (.sd)
 //+ sd
-<<generator>> sd OBJECT IN %S
+&lt;&lt;generator&gt;&gt; sd OBJECT IN %S
 //R  
 //#UC START# *4DE79AFC0030for54F734BC0087*
 //#UC END# *4DE79AFC0030for54F734BC0087*
@@ -1531,7 +1531,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<keyword>> ;
 
 // Хак для [$281531116]
 //+ link_to_requests_hack
-<<generator>> link_to_requests_hack OBJECT IN %S
+&lt;&lt;generator&gt;&gt; link_to_requests_hack OBJECT IN %S
 //#UC START# *4E65F581015Afor54F734BC0087*
 //#UC END# *4E65F581015Afor54F734BC0087*
 ; // link_to_requests_hack
@@ -1539,7 +1539,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<keyword>> ;
 
 // Родные Delphi интерфейсы (.pas)
 //+ intf.pas
-<<generator>> intf.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf.pas OBJECT IN %S
 //R  
 //#UC START# *470F1571031Cfor54F734BC0087*
 //#UC END# *470F1571031Cfor54F734BC0087*
@@ -1548,7 +1548,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<keyword>> ;
 
 // Реализация на Delphi(.pas)
 //+ impl.pas
-<<generator>> impl.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; impl.pas OBJECT IN %S
 //R  
 //#UC START# *470F15B800CBfor54F734BC0087*
 //#UC END# *470F15B800CBfor54F734BC0087*
@@ -1615,9 +1615,9 @@ implementation @ :: <<ScriptKeywordsPack>> <<keyword>> ;
 
 
 //: ScriptKeywordsPack::Class::property::Attribute
-end. // :: <<ScriptKeywordsPack>> <<keyword>> ;
+end. // :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;keyword&gt;&gt; ;
 
-implementation @ :: <<ScriptKeywordsPack>> <<property>> ;
+implementation @ :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;property&gt;&gt; ;
 //= UtilityPack::Class::Attribute
 
 // Параметры стереотипа
@@ -1632,7 +1632,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<property>> ;
 // Генераторы
 // Генерация модели в MDKnow
 //+ wiki
-<<generator>> wiki OBJECT IN %S
+&lt;&lt;generator&gt;&gt; wiki OBJECT IN %S
 //#UC START# *46E6D4BB0339for54F861670034*
 //#UC END# *46E6D4BB0339for54F861670034*
 ; // wiki
@@ -1640,7 +1640,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<property>> ;
 
 // генератор inline файлов реализации C++ (.i.h)
 //+ i.h
-<<generator>> i.h OBJECT IN %S
+&lt;&lt;generator&gt;&gt; i.h OBJECT IN %S
 //#UC START# *47022CCF00EAfor54F861670034*
 //#UC END# *47022CCF00EAfor54F861670034*
 ; // i.h
@@ -1648,7 +1648,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<property>> ;
 
 // генератор реализации фабрик интерфейсов на java (.java)
 //+ fctr.java
-<<generator>> fctr.java OBJECT IN %S
+&lt;&lt;generator&gt;&gt; fctr.java OBJECT IN %S
 //#UC START# *470321C1038Afor54F861670034*
 //#UC END# *470321C1038Afor54F861670034*
 ; // fctr.java
@@ -1656,7 +1656,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<property>> ;
 
 // Вторая интерфейсная секция стереотипа. Например реализация свойств класса.
 //+ intf2.pas
-<<generator>> intf2.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf2.pas OBJECT IN %S
 //R  
 //#UC START# *477398E501C0for54F861670034*
 //#UC END# *477398E501C0for54F861670034*
@@ -1665,7 +1665,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<property>> ;
 
 // 3-я секция интерфейса. Например поле для свойства.
 //+ intf3.pas
-<<generator>> intf3.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf3.pas OBJECT IN %S
 //R  
 //#UC START# *4774D2A20372for54F861670034*
 //#UC END# *4774D2A20372for54F861670034*
@@ -1674,7 +1674,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<property>> ;
 
 // Генератор файлов форм (.dfm)
 //+ dfm
-<<generator>> dfm OBJECT IN %S
+&lt;&lt;generator&gt;&gt; dfm OBJECT IN %S
 //R  
 //#UC START# *49F5795900ECfor54F861670034*
 //#UC END# *49F5795900ECfor54F861670034*
@@ -1683,7 +1683,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<property>> ;
 
 // Скрипты TC (.sd)
 //+ sd
-<<generator>> sd OBJECT IN %S
+&lt;&lt;generator&gt;&gt; sd OBJECT IN %S
 //R  
 //#UC START# *4DE79AFC0030for54F861670034*
 //#UC END# *4DE79AFC0030for54F861670034*
@@ -1692,7 +1692,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<property>> ;
 
 // Хак для [$281531116]
 //+ link_to_requests_hack
-<<generator>> link_to_requests_hack OBJECT IN %S
+&lt;&lt;generator&gt;&gt; link_to_requests_hack OBJECT IN %S
 //#UC START# *4E65F581015Afor54F861670034*
 //#UC END# *4E65F581015Afor54F861670034*
 ; // link_to_requests_hack
@@ -1700,7 +1700,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<property>> ;
 
 // Родные Delphi интерфейсы (.pas)
 //+ intf.pas
-<<generator>> intf.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf.pas OBJECT IN %S
 //R  
 //#UC START# *470F1571031Cfor54F861670034*
 //#UC END# *470F1571031Cfor54F861670034*
@@ -1709,7 +1709,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<property>> ;
 
 // Реализация на Delphi(.pas)
 //+ impl.pas
-<<generator>> impl.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; impl.pas OBJECT IN %S
 //R  
 //#UC START# *470F15B800CBfor54F861670034*
 //#UC END# *470F15B800CBfor54F861670034*
@@ -1744,7 +1744,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<property>> ;
 //%t _constraint
 ; // wiki_up_print
 
-<<transformator>> constraint OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; constraint OBJECT IN %S
 //#UC START# *4704C0E30186for54F861670034*
 //c          {}
 //r {""=""}: {}
@@ -1762,9 +1762,9 @@ implementation @ :: <<ScriptKeywordsPack>> <<property>> ;
 
 
 //: ScriptKeywordsPack::Class::readonly::Attribute
-end. // :: <<ScriptKeywordsPack>> <<property>> ;
+end. // :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;property&gt;&gt; ;
 
-implementation @ :: <<ScriptKeywordsPack>> <<readonly>> ;
+implementation @ :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;readonly&gt;&gt; ;
 //= ScriptKeywordsPack::Class::property::Attribute
 
 // Функции стереотипа
@@ -1777,15 +1777,15 @@ implementation @ :: <<ScriptKeywordsPack>> <<readonly>> ;
 //: ScriptKeywordsPack::Class::friend::ClassDependency
 ; // st_space_key
 
-end. // :: <<ScriptKeywordsPack>> <<readonly>> ;
+end. // :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;readonly&gt;&gt; ;
 
-implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
+implementation @ :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;friend&gt;&gt; ;
 //= ClassBase::Class::friend::ClassDependency
 
 // Генераторы
 // Генерация модели в MDKnow
 //+ wiki
-<<generator>> wiki OBJECT IN %S
+&lt;&lt;generator&gt;&gt; wiki OBJECT IN %S
 //#UC START# *46E6D4BB0339for54FECA940175*
 //#UC END# *46E6D4BB0339for54FECA940175*
 ; // wiki
@@ -1793,7 +1793,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
 
 // генератор заголовочных файлов C++ (.h)
 //+ h
-<<generator>> h OBJECT IN %S
+&lt;&lt;generator&gt;&gt; h OBJECT IN %S
 //#UC START# *47022C88029Ffor54FECA940175*
 //#UC END# *47022C88029Ffor54FECA940175*
 ; // h
@@ -1801,7 +1801,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
 
 // генератор файлов реализации C++ (.cpp)
 //+ cpp
-<<generator>> cpp OBJECT IN %S
+&lt;&lt;generator&gt;&gt; cpp OBJECT IN %S
 //#UC START# *47022CB8034Bfor54FECA940175*
 //#UC END# *47022CB8034Bfor54FECA940175*
 ; // cpp
@@ -1809,7 +1809,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
 
 // генератор inline файлов реализации C++ (.i.h)
 //+ i.h
-<<generator>> i.h OBJECT IN %S
+&lt;&lt;generator&gt;&gt; i.h OBJECT IN %S
 //#UC START# *47022CCF00EAfor54FECA940175*
 //#UC END# *47022CCF00EAfor54FECA940175*
 ; // i.h
@@ -1817,7 +1817,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
 
 // генератор классов, интерфейсов на java (.java)
 //+ java
-<<generator>> java OBJECT IN %S
+&lt;&lt;generator&gt;&gt; java OBJECT IN %S
 //#UC START# *470321950119for54FECA940175*
 //#UC END# *470321950119for54FECA940175*
 ; // java
@@ -1825,7 +1825,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
 
 // генератор реализации фабрик интерфейсов на java (.java)
 //+ fctr.java
-<<generator>> fctr.java OBJECT IN %S
+&lt;&lt;generator&gt;&gt; fctr.java OBJECT IN %S
 //#UC START# *470321C1038Afor54FECA940175*
 //#UC END# *470321C1038Afor54FECA940175*
 ; // fctr.java
@@ -1833,7 +1833,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
 
 // Родные Delphi интерфейсы (.pas)
 //+ intf.pas
-<<generator>> intf.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf.pas OBJECT IN %S
 //R  
 //#UC START# *470F1571031Cfor54FECA940175*
 //#UC END# *470F1571031Cfor54FECA940175*
@@ -1842,7 +1842,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
 
 // Реализация на Delphi(.pas)
 //+ impl.pas
-<<generator>> impl.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; impl.pas OBJECT IN %S
 //R  
 //#UC START# *470F15B800CBfor54FECA940175*
 //#UC END# *470F15B800CBfor54FECA940175*
@@ -1851,7 +1851,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
 
 // Вторая интерфейсная секция стереотипа. Например реализация свойств класса.
 //+ intf2.pas
-<<generator>> intf2.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf2.pas OBJECT IN %S
 //R  
 //#UC START# *477398E501C0for54FECA940175*
 //#UC END# *477398E501C0for54FECA940175*
@@ -1860,7 +1860,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
 
 // 3-я секция интерфейса. Например поле для свойства.
 //+ intf3.pas
-<<generator>> intf3.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf3.pas OBJECT IN %S
 //R  
 //#UC START# *4774D2A20372for54FECA940175*
 //#UC END# *4774D2A20372for54FECA940175*
@@ -1869,7 +1869,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
 
 // Генератор файлов форм (.dfm)
 //+ dfm
-<<generator>> dfm OBJECT IN %S
+&lt;&lt;generator&gt;&gt; dfm OBJECT IN %S
 //R  
 //#UC START# *49F5795900ECfor54FECA940175*
 //#UC END# *49F5795900ECfor54FECA940175*
@@ -1878,7 +1878,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
 
 // Скрипты TC (.sd)
 //+ sd
-<<generator>> sd OBJECT IN %S
+&lt;&lt;generator&gt;&gt; sd OBJECT IN %S
 //R  
 //#UC START# *4DE79AFC0030for54FECA940175*
 //#UC END# *4DE79AFC0030for54FECA940175*
@@ -1887,7 +1887,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
 
 // Хак для [$281531116]
 //+ link_to_requests_hack
-<<generator>> link_to_requests_hack OBJECT IN %S
+&lt;&lt;generator&gt;&gt; link_to_requests_hack OBJECT IN %S
 //#UC START# *4E65F581015Afor54FECA940175*
 //#UC END# *4E65F581015Afor54FECA940175*
 ; // link_to_requests_hack
@@ -1908,7 +1908,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
 //%t _constraint
 ; // st_space_key
 
-<<transformator>> constraint OBJECT IN %S
+&lt;&lt;transformator&gt;&gt; constraint OBJECT IN %S
 //#UC START# *4704C0E30186for54FECA940175*
 //c          {}
 //r {""=""}: {}
@@ -1926,9 +1926,9 @@ implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
 
 
 //: ScriptKeywordsPack::Class::creator::Operation
-end. // :: <<ScriptKeywordsPack>> <<friend>> ;
+end. // :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;friend&gt;&gt; ;
 
-implementation @ :: <<ScriptKeywordsPack>> <<creator>> ;
+implementation @ :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;creator&gt;&gt; ;
 //= ScriptKeywordsPack::Class::keyword::Operation
 
 // Функции стереотипа
@@ -1950,9 +1950,9 @@ implementation @ :: <<ScriptKeywordsPack>> <<creator>> ;
 
 
 //: ScriptKeywordsPack::Class::globalkeyword::Operation
-end. // :: <<ScriptKeywordsPack>> <<creator>> ;
+end. // :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;creator&gt;&gt; ;
 
-implementation @ :: <<ScriptKeywordsPack>> <<globalkeyword>> ;
+implementation @ :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;globalkeyword&gt;&gt; ;
 //? Глобальное слово скрипта
 //= UtilityPack::Class::Operation
 
@@ -1962,7 +1962,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<globalkeyword>> ;
 // Генераторы
 // Генерация модели в MDKnow
 //+ wiki
-<<generator>> wiki OBJECT IN %S
+&lt;&lt;generator&gt;&gt; wiki OBJECT IN %S
 //#UC START# *46E6D4BB0339for55115A7D0330*
 //#UC END# *46E6D4BB0339for55115A7D0330*
 ; // wiki
@@ -1970,7 +1970,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<globalkeyword>> ;
 
 // генератор реализации фабрик интерфейсов на java (.java)
 //+ fctr.java
-<<generator>> fctr.java OBJECT IN %S
+&lt;&lt;generator&gt;&gt; fctr.java OBJECT IN %S
 //#UC START# *470321C1038Afor55115A7D0330*
 //#UC END# *470321C1038Afor55115A7D0330*
 ; // fctr.java
@@ -1978,7 +1978,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<globalkeyword>> ;
 
 // Вторая интерфейсная секция стереотипа. Например реализация свойств класса.
 //+ intf2.pas
-<<generator>> intf2.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf2.pas OBJECT IN %S
 //R  
 //#UC START# *477398E501C0for55115A7D0330*
 //#UC END# *477398E501C0for55115A7D0330*
@@ -1987,7 +1987,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<globalkeyword>> ;
 
 // 3-я секция интерфейса. Например поле для свойства.
 //+ intf3.pas
-<<generator>> intf3.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf3.pas OBJECT IN %S
 //R  
 //#UC START# *4774D2A20372for55115A7D0330*
 //#UC END# *4774D2A20372for55115A7D0330*
@@ -1996,7 +1996,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<globalkeyword>> ;
 
 // Генератор файлов форм (.dfm)
 //+ dfm
-<<generator>> dfm OBJECT IN %S
+&lt;&lt;generator&gt;&gt; dfm OBJECT IN %S
 //R  
 //#UC START# *49F5795900ECfor55115A7D0330*
 //#UC END# *49F5795900ECfor55115A7D0330*
@@ -2005,7 +2005,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<globalkeyword>> ;
 
 // Скрипты TC (.sd)
 //+ sd
-<<generator>> sd OBJECT IN %S
+&lt;&lt;generator&gt;&gt; sd OBJECT IN %S
 //R  
 //#UC START# *4DE79AFC0030for55115A7D0330*
 //#UC END# *4DE79AFC0030for55115A7D0330*
@@ -2014,7 +2014,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<globalkeyword>> ;
 
 // Хак для [$281531116]
 //+ link_to_requests_hack
-<<generator>> link_to_requests_hack OBJECT IN %S
+&lt;&lt;generator&gt;&gt; link_to_requests_hack OBJECT IN %S
 //#UC START# *4E65F581015Afor55115A7D0330*
 //#UC END# *4E65F581015Afor55115A7D0330*
 ; // link_to_requests_hack
@@ -2022,7 +2022,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<globalkeyword>> ;
 
 // Родные Delphi интерфейсы (.pas)
 //+ intf.pas
-<<generator>> intf.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; intf.pas OBJECT IN %S
 //R  
 //#UC START# *470F1571031Cfor55115A7D0330*
 //#UC END# *470F1571031Cfor55115A7D0330*
@@ -2031,7 +2031,7 @@ implementation @ :: <<ScriptKeywordsPack>> <<globalkeyword>> ;
 
 // Реализация на Delphi(.pas)
 //+ impl.pas
-<<generator>> impl.pas OBJECT IN %S
+&lt;&lt;generator&gt;&gt; impl.pas OBJECT IN %S
 //R  
 //#UC START# *470F15B800CBfor55115A7D0330*
 //#UC END# *470F15B800CBfor55115A7D0330*
@@ -2092,9 +2092,9 @@ implementation @ :: <<ScriptKeywordsPack>> <<globalkeyword>> ;
 
 
 //: ScriptKeywordsPack::Class::varworker::Operation
-end. // :: <<ScriptKeywordsPack>> <<globalkeyword>> ;
+end. // :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;globalkeyword&gt;&gt; ;
 
-implementation @ :: <<ScriptKeywordsPack>> <<varworker>> ;
+implementation @ :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;varworker&gt;&gt; ;
 //= ScriptKeywordsPack::Class::keyword::Operation
 
 // Функции стереотипа
@@ -2116,9 +2116,9 @@ implementation @ :: <<ScriptKeywordsPack>> <<varworker>> ;
 
 
 //: ScriptKeywordsPack::Class::globalvarworker::Operation
-end. // :: <<ScriptKeywordsPack>> <<varworker>> ;
+end. // :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;varworker&gt;&gt; ;
 
-implementation @ :: <<ScriptKeywordsPack>> <<globalvarworker>> ;
+implementation @ :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;globalvarworker&gt;&gt; ;
 //= ScriptKeywordsPack::Class::globalkeyword::Operation
 
 // Функции стереотипа
@@ -2140,9 +2140,9 @@ implementation @ :: <<ScriptKeywordsPack>> <<globalvarworker>> ;
 
 
 //: ScriptKeywordsPack::Class::wordworker::Operation
-end. // :: <<ScriptKeywordsPack>> <<globalvarworker>> ;
+end. // :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;globalvarworker&gt;&gt; ;
 
-implementation @ :: <<ScriptKeywordsPack>> <<wordworker>> ;
+implementation @ :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;wordworker&gt;&gt; ;
 //= ScriptKeywordsPack::Class::varworker::Operation
 //= SupressNextImmediateHolder::Class
 
@@ -2178,9 +2178,9 @@ implementation @ :: <<ScriptKeywordsPack>> <<wordworker>> ;
 
 
 //: ScriptKeywordsPack::Class::globalwordworker::Operation
-end. // :: <<ScriptKeywordsPack>> <<wordworker>> ;
+end. // :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;wordworker&gt;&gt; ;
 
-implementation @ :: <<ScriptKeywordsPack>> <<globalwordworker>> ;
+implementation @ :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;globalwordworker&gt;&gt; ;
 //= ScriptKeywordsPack::Class::globalvarworker::Operation
 //= SupressNextImmediateHolder::Class
 
@@ -2218,5 +2218,5 @@ implementation @ :: <<ScriptKeywordsPack>> <<globalwordworker>> ;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-end. // :: <<ScriptKeywordsPack>> <<globalwordworker>> ;
+end. // :: &lt;&lt;ScriptKeywordsPack&gt;&gt; &lt;&lt;globalwordworker&gt;&gt; ;
 
