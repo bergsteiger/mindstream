@@ -1,0 +1,2222 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Модуль: "w:/MDProcess/DelphiSpecific/DelphiLang/Scripting/ScriptKeywordsPack.tpi"
+// Генерация мета-шаблонов
+// Generated from UML model, root element: <<MDAClass::Class>> MDProcess$ForDelphi::DelphiSpecific::DelphiLang::Scripting::ScriptKeywordsPack
+//
+// Набор слов скрипта
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//: ScriptKeywordsPack::Class
+implementation @ <<ScriptKeywordsPack>>
+//? Набор слов скрипта
+//> ScriptKeyword::Class
+
+//= UtilityPack::Class
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Параметры стереотипа
+// Параметры визуализации
+//$ C 147,168,174
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Пользовательские свойства
+
+//p no_pop:tribool=undefined ? 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Функции стереотипа
+
+//%f _st_space_key
+: st_space_key OBJECT IN %S
+//	SHD
+ 'SHD'
+
+//%f _wiki_up_print
+; // st_space_key
+
+: wiki_up_print OBJECT IN %S
+//	%S#[inherited][{"%S{no_pop}"!="%S{!no_pop}"}%f_up_prefix(%S) *no_pop* = *%S{no_pop}*
+ ?inherited
+ if ( ( %S get_up ( 'no_pop' ) ) %!= ( %S get_up_def ( 'no_pop' ) ) ) then
+ begin
+  [%f] up_prefix %( %S )% ' *no_pop* = *'
+  %S get_up ( 'no_pop' ) '*'
+//	]
+ end // if
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Унаследованная реализация
+
+// перекрытие базового стереотипа Delphi интерфейсы и реализация::MDAGenerator
+//%f _DoSpell
+; // wiki_up_print
+
+: DoSpell OBJECT IN %S
+//#UC START# *4B2A19E3038Bfor4F2C15C90252*
+//	%S%f_set_implement_select_type(include)\
+
+//	%f_clear_list(PROPS)\
+ [%f] clear_list %( 'PROPS' )% 
+
+//	<{}{%CS=property|%CS=readonly}\
+ INTEGER VAR l_Counter l_Counter := 0
+ for %S%C
+ begin
+  OBJECT IN %C
+  if ( ( %C |S ) %== 'property' OR 
+   ( ( %C |S ) %== 'readonly'  ) ) then
+  begin
+//	%f_add_to_list(PROPS,C)\
+   [%f] add_to_list %( 'PROPS' %, 'C' )% 
+//	>\
+
+   ++! l_Counter
+  end // if
+ end // for C
+
+//	%{PROPS}<{}{}{%C}\
+ ( get_global_var ( 'PROPS' ) ) 
+ bind ( 
+  OBJECT VAR %S
+  INTEGER VAR l_Counter l_Counter := 0
+  for %S%C
+  begin
+   OBJECT IN %C
+   if true then
+   begin
+
+
+//	%1%f_add_operation(%1U_%CU_get,keyword,[{%CS!=readonly}Get]%CN (): %C%TU,Op_Instance)\
+    %1 %f add_operation %( %1 |U '_'
+    %C |U '_get' %, 'keyword' %, if ( ( %C |S ) %!= 'readonly' ) then
+    begin
+     'Get' 
+    end // if
+    %C |N ' (): '
+    %C ->T |U  %, 'Op_Instance' )% 
+
+//	%f_TuneGS(%{Op_Instance},%C)\
+    [%f] TuneGS %( ( get_global_var ( 'Op_Instance' ) ) %, %C )% 
+//	%{Op_Instance}%f_set_up(is_setter,false)\
+    ( get_global_var ( 'Op_Instance' ) %f set_up %( 'is_setter' %, false )% ) 
+
+//	[{%CS!=readonly}\
+    if ( ( %C |S ) %!= 'readonly' ) then
+    begin
+//	%1%f_add_operation(%1U_%CU_set,keyword,Set%CN (aValue : %C%TU),Op_Instance)\
+     %1 %f add_operation %( %1 |U '_'
+     %C |U '_set' %, 'keyword' %, 'Set'
+     %C |N ' (aValue : '
+     %C ->T |U  ')' %, 'Op_Instance' )% 
+//	%f_TuneGS(%{Op_Instance},%C)\
+     [%f] TuneGS %( ( get_global_var ( 'Op_Instance' ) ) %, %C )% 
+//	%{Op_Instance}%f_set_up(is_setter,true)\
+     ( get_global_var ( 'Op_Instance' ) %f set_up %( 'is_setter' %, true )% ) 
+//	]\
+    end // if
+
+
+//	>\
+
+    ++! l_Counter
+   end // if
+  end // for C
+
+ ) // bind
+
+//	%f_clear_list(PROPS)\
+ [%f] clear_list %( 'PROPS' )% 
+
+//	%f_SpellFriends(%S)\
+ [%f] SpellFriends %( %S )% 
+
+//	<{}{%t_isAcceptableForScripts(%G)=true}\
+ INTEGER VAR l_Counter l_Counter := 0
+ for %S%G
+ begin
+  OBJECT IN %G
+  if ( ( [%t] isAcceptableForScripts %( %G )% ) %==  true ) then
+  begin
+//	%f_SpellWordsForParent(%S,%G,"true")\
+   [%f] SpellWordsForParent %( %S %, %G %, true )% 
+//	>\
+
+   ++! l_Counter
+  end // if
+ end // for G
+
+//	<{}{%t_isAcceptableForScripts(%R)=true}\
+ INTEGER VAR l_Counter l_Counter := 0
+ for %S%R
+ begin
+  OBJECT IN %R
+  if ( ( [%t] isAcceptableForScripts %( %R )% ) %==  true ) then
+  begin
+//	%f_SpellWordsForParent(%S,%R,"false")\
+   [%f] SpellWordsForParent %( %S %, %R %, false )% 
+//	>\
+
+   ++! l_Counter
+  end // if
+ end // for R
+
+//	%f_clear_list(KEYS)\
+ [%f] clear_list %( 'KEYS' )% 
+
+//	%S<{}{%C#f_IsGlobalKeyword()=true}\
+ %S
+ bind ( 
+  OBJECT VAR %S
+  INTEGER VAR l_Counter l_Counter := 0
+  for %S%C
+  begin
+   OBJECT IN %C
+   if ( ( %C %?f IsGlobalKeyword %( )% ) %==  true ) then
+   begin
+//	%f_add_to_list(KEYS,C)\
+    [%f] add_to_list %( 'KEYS' %, 'C' )% 
+//	>\
+
+    ++! l_Counter
+   end // if
+  end // for C
+
+ ) // bind
+ 
+//	%f_set_var(GEN,"")\
+ [%f] set_var %( 'GEN' %, '' )% 
+//	%{KEYS}<{}{}{%C}\
+ ( get_global_var ( 'KEYS' ) ) 
+ bind ( 
+  OBJECT VAR %S
+  INTEGER VAR l_Counter l_Counter := 0
+  for %S%C
+  begin
+   OBJECT IN %C
+   if true then
+   begin
+//	%f_SpellWordByOp(%1,%C)\
+    [%f] SpellWordByOp %( %1 %, %C )% 
+//	>\
+
+    ++! l_Counter
+   end // if
+  end // for C
+
+ ) // bind
+
+//	%f_clear_list(KEYS)\
+ [%f] clear_list %( 'KEYS' )% 
+
+//	%S%[inherited]
+ inherited
+
+//f _TuneGS
+; // DoSpell
+
+end. // <<ScriptKeywordsPack>>
+
+: TuneGS OBJECT IN %S
+//	%S%f_set_documentation(%1D)\
+ %S %f set_documentation %( %1 |D )% 
+//	%S%f_set_up(prop_stereo,%1S)\
+ %S %f set_up %( 'prop_stereo' %, %1 |S )% 
+//	%S%f_set_up(prop_name,%1N)\
+ %S %f set_up %( 'prop_name' %, %1 |N )% 
+//	%S%f_set_up(mapped,%1{mapped})
+ %S %f set_up %( 'mapped' %, %1 get_up ( 'mapped' ) )% 
+
+//f _SpellWordsForParent
+; // TuneGS
+
+: SpellWordsForParent OBJECT IN %S
+//	[{%2N=true}\
+ if ( ( %2 |N ) %==  true ) then
+ begin
+//	%f_addCDep(%S,%1,"injects")\
+  [%f] addCDep %( %S %, %1 %, 'injects' )% 
+// - иньекция
+//	[{%t_simple_class(%1)=true}\
+  if ( ( [%t] simple_class %( %1 )% ) %==  true ) then
+  begin
+//	%S%f_add_class(%SU_%1U_Reg,SimpleClass,%f_pas_TypeName(%1)RegistratorFor%f_N(%S),Reg_Inst)\
+   %S %f add_class %( %S |U '_'
+   %1 |U '_Reg' %, 'SimpleClass' %, [%f] pas_TypeName %( %1 )% 'RegistratorFor'
+   [%f] N %( %S )% %, 'Reg_Inst' )% 
+//	%f_addG(%{Reg_Inst},%1)\
+   [%f] addG %( ( get_global_var ( 'Reg_Inst' ) ) %, %1 )% 
+//	%{Reg_Inst}%f_set_documentation(Регистратор для %f_pas_TypeName(%1))\
+   ( get_global_var ( 'Reg_Inst' ) %f set_documentation %( 'Регистратор для '
+   [%f] pas_TypeName %( %1 )% )% ) 
+//	%{Reg_Inst}%f_set_abstraction_type(abstract)\
+   ( get_global_var ( 'Reg_Inst' ) %f set_abstraction_type %( 'abstract' )% ) 
+//	%{Reg_Inst}%f_set_visibility_type(PrivateAccess)\
+   ( get_global_var ( 'Reg_Inst' ) %f set_visibility_type %( 'PrivateAccess' )% ) 
+//	%{Reg_Inst}%f_set_up(register in scripts,true)\
+   ( get_global_var ( 'Reg_Inst' ) %f set_up %( 'register in scripts' %, true )% ) 
+//	%{Reg_Inst}%f_set_up(is_friend,true)\
+   ( get_global_var ( 'Reg_Inst' ) %f set_up %( 'is_friend' %, true )% ) 
+//	%{Reg_Inst}%f_set_implement_select_type(include)\
+   ( get_global_var ( 'Reg_Inst' ) %f set_implement_select_type %( 'include' )% ) 
+//	]\
+  end // if
+
+// - регистратор
+//	]\
+ end // if
+
+//	%f_clear_list(KEYS)\
+ [%f] clear_list %( 'KEYS' )% 
+
+//	%S<{}{%C#f_IsKeyword()=true}\
+ %S
+ bind ( 
+  OBJECT VAR %S
+  INTEGER VAR l_Counter l_Counter := 0
+  for %S%C
+  begin
+   OBJECT IN %C
+   if ( ( %C %?f IsKeyword %( )% ) %==  true ) then
+   begin
+//	%f_add_to_list(KEYS,C)\
+    [%f] add_to_list %( 'KEYS' %, 'C' )% 
+//	>\
+
+    ++! l_Counter
+   end // if
+  end // for C
+
+ ) // bind
+ 
+//	%f_set_var(GEN,1)\
+ [%f] set_var %( 'GEN' %, 1 )% 
+//	%{KEYS}<{}{}{%C}\
+ ( get_global_var ( 'KEYS' ) ) 
+ bind ( 
+  OBJECT VAR %S
+  INTEGER VAR l_Counter l_Counter := 0
+  for %S%C
+  begin
+   OBJECT IN %C
+   if true then
+   begin
+//	%f_SpellWordByOp(%1,%C)\
+    [%f] SpellWordByOp %( %1 %, %C )% 
+//	>\
+
+    ++! l_Counter
+   end // if
+  end // for C
+
+ ) // bind
+
+//	%f_clear_list(KEYS)
+ [%f] clear_list %( 'KEYS' )% 
+
+//f _SpellWordByOp
+; // SpellWordsForParent
+
+: SpellWordByOp OBJECT IN %S
+//	%S%f_add_class(%SU_%{GEN}U_%1U_Word,ScriptKeyword,\
+ %S %f add_class %( %S |U '_'
+ ( get_global_var ( 'GEN' ) |U ) '_'
+ %1 |U '_Word' %, 'ScriptKeyword' %, 
+//	[{"%{GEN}N"!=""}\
+ if ( ( ( get_global_var ( 'GEN' ) |N ) ) %!= '' ) then
+ begin
+//	[{%S{no_pop}!=true&%1#f_IsCreator()!=true}pop_][{%t_SelfName(%{GEN})!=SV}%t_SelfName(%{GEN})_]\
+  if ( ( %S get_up ( 'no_pop' ) ) %!=  true AND 
+    ( ( %1 %?f IsCreator %( )% ) %!=  true  ) ) then
+  begin
+   'pop_' 
+  end // if
+  if ( ( [%t] SelfName %( ( get_global_var ( 'GEN' ) ) )% ) %!= 'SV' ) then
+  begin
+   [%t] SelfName %( ( get_global_var ( 'GEN' ) ) )% '_' 
+  end // if
+//	]\
+ end // if
+//	%1N,\
+ %1 |N %, 
+//	Class_Inst)\
+ 'Class_Inst' )% 
+
+//	[{%1#f_IsVarWorker()=true}\
+ if ( ( %1 %?f IsVarWorker %( )% ) %==  true ) then
+ begin
+//	[{%1#f_IsWordWorker()=true}{\
+  if ( ( %1 %?f IsWordWorker %( )% ) %==  true ) then
+  begin
+//	[{"%{TtfwWordWorkerEx}N"=""}%f_find_element(TtfwWordWorkerEx,TtfwWordWorkerEx)]\
+   if ( ( ( get_global_var ( 'TtfwWordWorkerEx' ) |N ) ) %== '' ) then
+   begin
+    [%f] find_element %( 'TtfwWordWorkerEx' %, 'TtfwWordWorkerEx' )% 
+   end // if
+//	%f_addG(%{Class_Inst},%{TtfwWordWorkerEx})\
+   [%f] addG %( ( get_global_var ( 'Class_Inst' ) ) %, ( get_global_var ( 'TtfwWordWorkerEx' ) ) )% 
+//	]\
+  end // if
+  else
+  begin
+//	[{"%{TtfwVarWorker}N"=""}%f_find_element(TtfwVarWorker,TtfwVarWorker)]\
+   if ( ( ( get_global_var ( 'TtfwVarWorker' ) |N ) ) %== '' ) then
+   begin
+    [%f] find_element %( 'TtfwVarWorker' %, 'TtfwVarWorker' )% 
+   end // if
+//	%f_addG(%{Class_Inst},%{TtfwVarWorker})\
+   [%f] addG %( ( get_global_var ( 'Class_Inst' ) ) %, ( get_global_var ( 'TtfwVarWorker' ) ) )% 
+//	}\
+  end // else
+//	]\
+ end // if
+
+//	[{"%1{NameForScript}"=""}{\
+ if ( ( %1 get_up ( 'NameForScript' ) ) %== '' ) then
+ begin
+//	%{Class_Inst}%f_set_up(NameForScript,%f_str_replace(%{Class_Inst}N,_,:))\
+  ( get_global_var ( 'Class_Inst' ) %f set_up %( 'NameForScript' %, [%f] str_replace %( ( get_global_var ( 'Class_Inst' ) |N ) %, '_' %, ':' )% )% ) 
+//	]\
+ end // if
+ else
+ begin
+//	%{Class_Inst}%f_set_up(NameForScript,%1{NameForScript})\
+  ( get_global_var ( 'Class_Inst' ) %f set_up %( 'NameForScript' %, %1 get_up ( 'NameForScript' ) )% ) 
+//	}\
+ end // else
+
+//	%{Class_Inst}%f_set_documentation(Слово скрипта %f_loc_GetNameForScript(%{Class_Inst})[\n\{panel\}%1D\{panel\}]
+ ( get_global_var ( 'Class_Inst' ) %f set_documentation %( 'Слово скрипта '
+ [%f] loc_GetNameForScript %( ( get_global_var ( 'Class_Inst' ) ) )% if NOT-EMPTY
+ begin
+  #13#10'{panel}'
+  %1 |D '{panel}' 
+ end // if
+ NOP
+//	[{%1%TN!=void}*Тип результата:* %1%TN\n]\
+ if ( ( %1 ->T |N  ) %!= 'void' ) then
+ begin
+  '*Тип результата:* '
+  %1 ->T |N  #13#10 
+ end // if
+//	[{%1#f_IsCreator()=true&"%{GEN}N"!=""}*Тип результата:* %{GEN}N\n]\
+ if ( ( %1 %?f IsCreator %( )% ) %==  true AND 
+   ( ( ( get_global_var ( 'GEN' ) |N ) ) %!= ''  ) ) then
+ begin
+  '*Тип результата:* '
+  ( get_global_var ( 'GEN' ) |N ) #13#10 
+ end // if
+//	*Пример:*
+ '*Пример:*'
+//	\{code\}
+ '{code}'
+//	 %1<{}{}{%Cr}%CN >[{"%{GEN}N"!=""}a%t_SelfName(%{GEN}) ]%f_loc_GetNameForScript(%{Class_Inst})\
+ ' '
+ %1
+ bind ( 
+  OBJECT VAR %S
+  INTEGER VAR l_Counter l_Counter := 0
+  for downto %S%C
+  begin
+   OBJECT IN %C
+   if true then
+   begin
+    %C |N ' ' 
+    ++! l_Counter
+   end // if
+  end // for C
+
+ ) // bind
+  if ( ( ( get_global_var ( 'GEN' ) |N ) ) %!= '' ) then
+ begin
+  'a'
+  [%t] SelfName %( ( get_global_var ( 'GEN' ) ) )% ' ' 
+ end // if
+ [%f] loc_GetNameForScript %( ( get_global_var ( 'Class_Inst' ) ) )% 
+
+//	[{%1#f_IsVarWorker()=true}\
+ if ( ( %1 %?f IsVarWorker %( )% ) %==  true ) then
+ begin
+//	 [{%1#f_IsWordWorker()=true}{aVar}aWord]\
+  ' '
+  if ( ( %1 %?f IsWordWorker %( )% ) %==  true ) then
+  begin
+   'aWord' 
+  end // if
+  else
+  begin
+   'aVar' 
+  end // else
+//	]
+ end // if
+
+
+//	\{code\} \
+ '{code} '
+//	)\
+)% ) //	%{Class_Inst}%f_set_abstraction_type(final)\
+ ( get_global_var ( 'Class_Inst' ) %f set_abstraction_type %( 'final' )% ) 
+//	%{Class_Inst}%f_set_visibility_type(PrivateAccess)\
+ ( get_global_var ( 'Class_Inst' ) %f set_visibility_type %( 'PrivateAccess' )% ) 
+
+//	[{"%{TtfwContext}N"=""}%f_find_element(TtfwContext,TtfwContext)]\
+ if ( ( ( get_global_var ( 'TtfwContext' ) |N ) ) %== '' ) then
+ begin
+  [%f] find_element %( 'TtfwContext' %, 'TtfwContext' )% 
+ end // if
+
+//	%{Class_Inst}%f_make_accessable(%{TtfwContext}U)\
+ ( get_global_var ( 'Class_Inst' ) %f make_accessable %( ( get_global_var ( 'TtfwContext' ) |U ) )% ) 
+//	%f_addCDep(%{Class_Inst},%{TtfwContext})\
+ [%f] addCDep %( ( get_global_var ( 'Class_Inst' ) ) %, ( get_global_var ( 'TtfwContext' ) ) )% 
+
+//	[{%1{SupressNextImmediate}!=None&"%1{SupressNextImmediate}"!=""}\
+ if ( ( %1 get_up ( 'SupressNextImmediate' ) ) %!= 'None' AND 
+   ( ( %1 get_up ( 'SupressNextImmediate' ) ) %!= ''  ) ) then
+ begin
+//	[{"%{TtfwCompilingWord.SupressNextImmediate}N"=""}%f_find_element(4F3AB3B101FC,TtfwCompilingWord.SupressNextImmediate)]\
+  if ( ( ( get_global_var ( 'TtfwCompilingWord.SupressNextImmediate' ) |N ) ) %== '' ) then
+  begin
+   [%f] find_element %( '4F3AB3B101FC' %, 'TtfwCompilingWord.SupressNextImmediate' )% 
+  end // if
+//	%{Class_Inst}%f_add_override(%{TtfwCompilingWord.SupressNextImmediate}U)\
+  ( get_global_var ( 'Class_Inst' ) %f add_override %( ( get_global_var ( 'TtfwCompilingWord.SupressNextImmediate' ) |U ) )% ) 
+
+//	%{TtfwCompilingWord.SupressNextImmediate}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{TtfwCompilingWord.SupressNextImmediate},%{Class_Inst})_var,\
+  ( get_global_var ( 'TtfwCompilingWord.SupressNextImmediate' ) %f set_uc_content %( 'intf.pas' %, '_'
+  [%f] pas_MethodOwnerID %( ( get_global_var ( 'TtfwCompilingWord.SupressNextImmediate' ) ) %, ( get_global_var ( 'Class_Inst' ) ) )% '_var' %, 
+//	 {-}\
+  ' {-}'
+//	)\
+)% ) 
+
+//	%{TtfwCompilingWord.SupressNextImmediate}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{TtfwCompilingWord.SupressNextImmediate},%{Class_Inst})_impl,\
+  ( get_global_var ( 'TtfwCompilingWord.SupressNextImmediate' ) %f set_uc_content %( 'intf.pas' %, '_'
+  [%f] pas_MethodOwnerID %( ( get_global_var ( 'TtfwCompilingWord.SupressNextImmediate' ) ) %, ( get_global_var ( 'Class_Inst' ) ) )% '_impl' %, 
+//	 Result := tfw_sni%1{SupressNextImmediate};\
+  ' Result := tfw_sni'
+  %1 get_up ( 'SupressNextImmediate' ) ';'
+//	)\
+)% ) 
+
+//	]\
+ end // if
+
+//	[{"%{TTypeInfo}N"=""}%f_find_element(4767748503B5,TTypeInfo)]\
+ if ( ( ( get_global_var ( 'TTypeInfo' ) |N ) ) %== '' ) then
+ begin
+  [%f] find_element %( '4767748503B5' %, 'TTypeInfo' )% 
+ end // if
+//	%f_addCDep(%{Class_Inst},%{TTypeInfo})\
+ [%f] addCDep %( ( get_global_var ( 'Class_Inst' ) ) %, ( get_global_var ( 'TTypeInfo' ) ) )% 
+
+//	[{"%{TtfwWord.GetResultTypeInfo}N"=""}%f_find_element(551544E2001A,TtfwWord.GetResultTypeInfo)]\
+ if ( ( ( get_global_var ( 'TtfwWord.GetResultTypeInfo' ) |N ) ) %== '' ) then
+ begin
+  [%f] find_element %( '551544E2001A' %, 'TtfwWord.GetResultTypeInfo' )% 
+ end // if
+//	%{Class_Inst}%f_add_override(%{TtfwWord.GetResultTypeInfo}U)\
+ ( get_global_var ( 'Class_Inst' ) %f add_override %( ( get_global_var ( 'TtfwWord.GetResultTypeInfo' ) |U ) )% ) 
+
+//	%{TtfwWord.GetResultTypeInfo}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{TtfwWord.GetResultTypeInfo},%{Class_Inst})_var,\
+ ( get_global_var ( 'TtfwWord.GetResultTypeInfo' ) %f set_uc_content %( 'intf.pas' %, '_'
+ [%f] pas_MethodOwnerID %( ( get_global_var ( 'TtfwWord.GetResultTypeInfo' ) ) %, ( get_global_var ( 'Class_Inst' ) ) )% '_var' %, 
+//	 {-}\
+ ' {-}'
+//	)\
+)% ) 
+//	%{TtfwWord.GetResultTypeInfo}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{TtfwWord.GetResultTypeInfo},%{Class_Inst})_impl,\
+ ( get_global_var ( 'TtfwWord.GetResultTypeInfo' ) %f set_uc_content %( 'intf.pas' %, '_'
+ [%f] pas_MethodOwnerID %( ( get_global_var ( 'TtfwWord.GetResultTypeInfo' ) ) %, ( get_global_var ( 'Class_Inst' ) ) )% '_impl' %, 
+//	[{%1#f_IsCreator()=true&"%{GEN}N"!=""}{\
+ if ( ( %1 %?f IsCreator %( )% ) %==  true AND 
+   ( ( ( get_global_var ( 'GEN' ) |N ) ) %!= ''  ) ) then
+ begin
+//	 Result := %t_TypeInfo(%{GEN});\
+  ' Result := '
+  [%t] TypeInfo %( ( get_global_var ( 'GEN' ) ) )% ';'
+//	]\
+ end // if
+ else
+ begin
+//	 Result := %t_TypeInfo(%1%T);\
+  ' Result := '
+  [%t] TypeInfo %( %1 ->T  )% ';'
+//	}\
+ end // else
+//	)\
+)% ) 
+//	%f_set_var(Op_Instance,"")\
+ [%f] set_var %( 'Op_Instance' %, '' )% 
+
+//	%f_set_var(NeedOp,"false")\
+ [%f] set_var %( 'NeedOp' %, false )% 
+
+//	[{%1{mapped}=true}\
+ if ( ( %1 get_up ( 'mapped' ) ) %==  true ) then
+ begin
+//	%f_set_var(NeedOp,"true")\
+  [%f] set_var %( 'NeedOp' %, true )% 
+//	]\
+ end // if
+
+//	[{"%{GEN}N"!=""}\
+ if ( ( ( get_global_var ( 'GEN' ) |N ) ) %!= '' ) then
+ begin
+//	%f_set_var(NeedOp,"true")\
+  [%f] set_var %( 'NeedOp' %, true )% 
+//	]\
+ end // if
+
+//	[{%1#f_IsVarWorker()=true}\
+ if ( ( %1 %?f IsVarWorker %( )% ) %==  true ) then
+ begin
+//	%f_set_var(NeedOp,"true")\
+  [%f] set_var %( 'NeedOp' %, true )% 
+//	]\
+ end // if
+
+//	[{%1<{}{}{%CC}>!=0}\
+ if ( ( %1
+  bind ( 
+   OBJECT VAR %S
+   INTEGER VAR l_Counter l_Counter := 0
+   for %S%C
+   begin
+    OBJECT IN %C
+    if true then
+    begin
+
+     ++! l_Counter
+    end // if
+   end // for C
+   l_Counter
+
+  ) // bind
+ )   %!= 0 ) then
+ begin
+//	%f_set_var(NeedOp,"true")\
+  [%f] set_var %( 'NeedOp' %, true )% 
+//	]\
+ end // if
+
+//	[{%1%TN!=void}\
+ if ( ( %1 ->T |N  ) %!= 'void' ) then
+ begin
+//	%f_set_var(NeedOp,"true")\
+  [%f] set_var %( 'NeedOp' %, true )% 
+//	]\
+ end // if
+
+//	[{%{NeedOp}N=true}\
+ if ( ( ( get_global_var ( 'NeedOp' ) |N ) ) %==  true ) then
+ begin
+//	%{Class_Inst}%f_add_operation(%{Class_Inst}U_%1U_op,,\
+  ( get_global_var ( 'Class_Inst' ) %f add_operation %( ( get_global_var ( 'Class_Inst' ) |U ) '_'
+  %1 |U '_op' %, '' %, 
+//	%f_N(%1) (\
+  [%f] N %( %1 )% ' ('
+//	aCtx: %{TtfwContext}U\
+  'aCtx: '
+  ( get_global_var ( 'TtfwContext' ) |U ) 
+//	[{%1#f_IsVarWorker()=true}\
+  if ( ( %1 %?f IsVarWorker %( )% ) %==  true ) then
+  begin
+//	[{"%{TtfwWord}N"=""}%f_find_element(TtfwWord,TtfwWord)]\
+   if ( ( ( get_global_var ( 'TtfwWord' ) |N ) ) %== '' ) then
+   begin
+    [%f] find_element %( 'TtfwWord' %, 'TtfwWord' )% 
+   end // if
+//	, [{%1#f_IsWordWorker()=true}{aVar}aWord]: %{TtfwWord}U \
+   ', '
+   if ( ( %1 %?f IsWordWorker %( )% ) %==  true ) then
+   begin
+    'aWord' 
+   end // if
+   else
+   begin
+    'aVar' 
+   end // else
+   ': '
+   ( get_global_var ( 'TtfwWord' ) |U ) ' '
+//	]\
+  end // if
+//	[{%1#f_IsCreator()!=true&"%{GEN}N"!=""}, \
+  if ( ( %1 %?f IsCreator %( )% ) %!=  true AND 
+    ( ( ( get_global_var ( 'GEN' ) |N ) ) %!= ''  ) ) then
+  begin
+   ', '
+//	a%t_SelfName(%{GEN}): %{GEN}U \
+   'a'
+   [%t] SelfName %( ( get_global_var ( 'GEN' ) ) )% ': '
+   ( get_global_var ( 'GEN' ) |U ) ' '
+//	]\
+  end // if
+//	%1<{}{}{%C}, %CN:%C%TU>)\
+  %1
+  bind ( 
+   OBJECT VAR %S
+   INTEGER VAR l_Counter l_Counter := 0
+   for %S%C
+   begin
+    OBJECT IN %C
+    if true then
+    begin
+     ', '
+     %C |N ':'
+     %C ->T |U  
+     ++! l_Counter
+    end // if
+   end // for C
+
+  ) // bind
+   ')'
+//	[{%1#f_IsCreator()=true&"%{GEN}N"!=""}{\
+  if ( ( %1 %?f IsCreator %( )% ) %==  true AND 
+    ( ( ( get_global_var ( 'GEN' ) |N ) ) %!= ''  ) ) then
+  begin
+//	 : %{GEN}U\
+   ' : '
+   ( get_global_var ( 'GEN' ) |U ) 
+//	]\
+  end // if
+  else
+  begin
+//	[{%1%TN!=void} : %1%TU]\
+   if ( ( %1 ->T |N  ) %!= 'void' ) then
+   begin
+    ' : '
+    %1 ->T |U  
+   end // if
+//	}\
+  end // else
+//	,Op_Instance)\
+%,   'Op_Instance' )% ) 
+
+//	%{Op_Instance}%f_set_documentation(Реализация слова скрипта %f_loc_GetNameForScript(%{Class_Inst}))\
+  ( get_global_var ( 'Op_Instance' ) %f set_documentation %( 'Реализация слова скрипта '
+  [%f] loc_GetNameForScript %( ( get_global_var ( 'Class_Inst' ) ) )% )% ) 
+//	%{Op_Instance}%f_set_abstraction_type(final)\
+  ( get_global_var ( 'Op_Instance' ) %f set_abstraction_type %( 'final' )% ) 
+//	%{Op_Instance}%f_set_visibility_type(PrivateAccess)\
+  ( get_global_var ( 'Op_Instance' ) %f set_visibility_type %( 'PrivateAccess' )% ) 
+//	]\
+ end // if
+
+//	[{%1#f_IsVarWorker()=true}{\
+ if ( ( %1 %?f IsVarWorker %( )% ) %==  true ) then
+ begin
+//	[{"%{TtfwVarWorker.DoRun}N"=""}%f_find_element(5512949D0048,TtfwVarWorker.DoRun)]\
+  if ( ( ( get_global_var ( 'TtfwVarWorker.DoRun' ) |N ) ) %== '' ) then
+  begin
+   [%f] find_element %( '5512949D0048' %, 'TtfwVarWorker.DoRun' )% 
+  end // if
+//	%f_set_var(MyDo,{TtfwVarWorker.DoRun})\
+  [%f] set_var %( 'MyDo' %, '{TtfwVarWorker.DoRun}' )% 
+//	]\
+ end // if
+ else
+ begin
+//	[{"%{TtfwWord.DoDoIt}N"=""}%f_find_element(4DAEEDE10285,TtfwWord.DoDoIt)]\
+  if ( ( ( get_global_var ( 'TtfwWord.DoDoIt' ) |N ) ) %== '' ) then
+  begin
+   [%f] find_element %( '4DAEEDE10285' %, 'TtfwWord.DoDoIt' )% 
+  end // if
+//	%f_set_var(MyDo,{TtfwWord.DoDoIt})\
+  [%f] set_var %( 'MyDo' %, '{TtfwWord.DoDoIt}' )% 
+//	}\
+ end // else
+
+//	[{"%{SysUtils}N"=""}%f_find_element(47877EB202FB,SysUtils)]\
+ if ( ( ( get_global_var ( 'SysUtils' ) |N ) ) %== '' ) then
+ begin
+  [%f] find_element %( '47877EB202FB' %, 'SysUtils' )% 
+ end // if
+
+//	%{Class_Inst}%f_make_accessable(%{SysUtils}U)\
+ ( get_global_var ( 'Class_Inst' ) %f make_accessable %( ( get_global_var ( 'SysUtils' ) |U ) )% ) 
+//	%f_addCDep(%{Class_Inst},%{SysUtils})\
+ [%f] addCDep %( ( get_global_var ( 'Class_Inst' ) ) %, ( get_global_var ( 'SysUtils' ) ) )% 
+
+//	%{Class_Inst}%f_add_override(%{MyDo}U)\
+ ( get_global_var ( 'Class_Inst' ) %f add_override %( ( get_global_var ( 'MyDo' ) |U ) )% ) 
+
+//	[{%{NeedOp}N=true}{\
+ if ( ( ( get_global_var ( 'NeedOp' ) |N ) ) %==  true ) then
+ begin
+//	%{MyDo}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{MyDo},%{Class_Inst})_var,\
+  ( get_global_var ( 'MyDo' ) %f set_uc_content %( 'intf.pas' %, '_'
+  [%f] pas_MethodOwnerID %( ( get_global_var ( 'MyDo' ) ) %, ( get_global_var ( 'Class_Inst' ) ) )% '_var' %, 
+//	 {-}\
+  ' {-}'
+//	[{%{Op_Instance}<{}{}{+%CC}>!=0}\
+  if ( ( ( get_global_var ( 'Op_Instance' ) ) 
+   bind ( 
+    OBJECT VAR %S
+    INTEGER VAR l_Counter l_Counter := 0
+    for %S%C
+    begin
+     OBJECT IN %C
+     if true then
+     begin
+      if ( l_Counter >0 ) then
+      begin
+
+      end
+      ++! l_Counter
+     end // if
+    end // for C
+    l_Counter
+
+   ) // bind
+)    %!= 0 ) then
+  begin
+//	\n\
+   #13#10
+//	var\
+   'var'
+//	%{Op_Instance}<{}{}{+%C}\n l_%CN : %f_pas_TypeName(%C%T);>\
+   ( get_global_var ( 'Op_Instance' ) ) 
+   bind ( 
+    OBJECT VAR %S
+    INTEGER VAR l_Counter l_Counter := 0
+    for %S%C
+    begin
+     OBJECT IN %C
+     if true then
+     begin
+      if ( l_Counter >0 ) then
+      begin
+       #13#10' l_'
+       %C |N ' : '
+       [%f] pas_TypeName %( %C ->T  )% ';' 
+      end
+      ++! l_Counter
+     end // if
+    end // for C
+
+   ) // bind
+//	]\
+  end // if
+//	)\
+)% ) 
+
+//	%{MyDo}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{MyDo},%{Class_Inst})_impl,\
+  ( get_global_var ( 'MyDo' ) %f set_uc_content %( 'intf.pas' %, '_'
+  [%f] pas_MethodOwnerID %( ( get_global_var ( 'MyDo' ) ) %, ( get_global_var ( 'Class_Inst' ) ) )% '_impl' %, 
+//	[{%{Op_Instance}<{}{}{+%CC}>!=0}\
+  if ( ( ( get_global_var ( 'Op_Instance' ) ) 
+   bind ( 
+    OBJECT VAR %S
+    INTEGER VAR l_Counter l_Counter := 0
+    for %S%C
+    begin
+     OBJECT IN %C
+     if true then
+     begin
+      if ( l_Counter >0 ) then
+      begin
+
+      end
+      ++! l_Counter
+     end // if
+    end // for C
+    l_Counter
+
+   ) // bind
+)    %!= 0 ) then
+  begin
+//	%{Op_Instance}<{}{}{+%C}\
+   ( get_global_var ( 'Op_Instance' ) ) 
+   bind ( 
+    OBJECT VAR %S
+    INTEGER VAR l_Counter l_Counter := 0
+    for %S%C
+    begin
+     OBJECT IN %C
+     if true then
+     begin
+      if ( l_Counter >0 ) then
+      begin
+//	 try
+       ' try'
+//	  l_%CN := \
+       '  l_'
+       %C |N ' := '
+//	%t_CastSig(%C%T)\
+       [%t] CastSig %( %C ->T  )% 
+//	(aCtx.rEngine.%t_PopSig(%C%T,%C));
+       '(aCtx.rEngine.'
+       [%t] PopSig %( %C ->T  %, %C )% ');'
+//	 except
+       ' except'
+//	  on E: Exception do
+       '  on E: Exception do'
+//	  begin
+       '  begin'
+//	   RunnerError('Ошибка при получении параметра %CN: %f_pas_TypeName(%C%T) : ' + E.Message, aCtx);
+       '   RunnerError(''Ошибка при получении параметра '
+       %C |N ': '
+       [%f] pas_TypeName %( %C ->T  )% ' : '' + E.Message, aCtx);'
+//	   Exit;
+       '   Exit;'
+//	  end;//on E: Exception
+       '  end;//on E: Exception'
+//	 end;//try..except
+       ' end;//try..except'
+//	>\
+
+      end
+      ++! l_Counter
+     end // if
+    end // for C
+
+   ) // bind
+//	]\
+  end // if
+//	 \
+  ' '
+//	[{%{Op_Instance}%TN!=void}\
+  if ( ( ( get_global_var ( 'Op_Instance' )  ->T |N ) ) %!= 'void' ) then
+  begin
+//	aCtx.rEngine.%t_PushSig(%{Op_Instance}%T,%{Op_Instance})\
+   'aCtx.rEngine.'
+   [%t] PushSig %( ( get_global_var ( 'Op_Instance' )  ->T ) %, ( get_global_var ( 'Op_Instance' ) ) )% 
+//	(%t_UnCastSig(%{Op_Instance}%T)(\
+   '('
+   [%t] UnCastSig %( ( get_global_var ( 'Op_Instance' )  ->T ) )% '('
+//	]\
+  end // if
+//	%f_to_borland(%{Op_Instance}N)(aCtx%{Op_Instance}<{}{}{+%C}, l_%CN>)\
+  [%f] to_borland %( ( get_global_var ( 'Op_Instance' ) |N ) )% '(aCtx'
+  ( get_global_var ( 'Op_Instance' ) ) 
+  bind ( 
+   OBJECT VAR %S
+   INTEGER VAR l_Counter l_Counter := 0
+   for %S%C
+   begin
+    OBJECT IN %C
+    if true then
+    begin
+     if ( l_Counter >0 ) then
+     begin
+      ', l_'
+      %C |N 
+     end
+     ++! l_Counter
+    end // if
+   end // for C
+
+  ) // bind
+  ')'
+//	[{%{Op_Instance}%TN!=void}\
+  if ( ( ( get_global_var ( 'Op_Instance' )  ->T |N ) ) %!= 'void' ) then
+  begin
+//	))\
+   '))'
+//	]\
+  end // if
+//	;\
+  ';'
+//	)\
+)% ) 
+
+//	[{%1{mapped}=true}\
+  if ( ( %1 get_up ( 'mapped' ) ) %==  true ) then
+  begin
+
+
+//	%{Op_Instance}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{Op_Instance},%{Class_Inst})_var,\
+   ( get_global_var ( 'Op_Instance' ) %f set_uc_content %( 'intf.pas' %, '_'
+   [%f] pas_MethodOwnerID %( ( get_global_var ( 'Op_Instance' ) ) %, ( get_global_var ( 'Class_Inst' ) ) )% '_var' %, 
+//	 {-}\
+   ' {-}'
+//	)\
+)% ) 
+
+//	%{Op_Instance}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{Op_Instance},%{Class_Inst})_impl,\
+   ( get_global_var ( 'Op_Instance' ) %f set_uc_content %( 'intf.pas' %, '_'
+   [%f] pas_MethodOwnerID %( ( get_global_var ( 'Op_Instance' ) ) %, ( get_global_var ( 'Class_Inst' ) ) )% '_impl' %, 
+//	 [{%{Op_Instance}%TN!=void}Result := ]\
+   ' '
+   if ( ( ( get_global_var ( 'Op_Instance' )  ->T |N ) ) %!= 'void' ) then
+   begin
+    'Result := ' 
+   end // if
+//	a%t_SelfName(%{GEN}).\
+   'a'
+   [%t] SelfName %( ( get_global_var ( 'GEN' ) ) )% '.'
+//	[{}{%{Op_Instance}N}%1{prop_name}]\
+   if NOT-EMPTY
+   begin
+    %1 get_up ( 'prop_name' ) 
+   end // if
+   NOP
+   else
+   begin
+    ( get_global_var ( 'Op_Instance' ) |N ) 
+   end // else
+//	[{%1{is_setter}=true}{\
+   if ( ( %1 get_up ( 'is_setter' ) ) %==  true ) then
+   begin
+//	 := aValue\
+    ' := aValue'
+//	]\
+   end // if
+   else
+   begin
+//	[{%1<{}{}{C%C}>!=0}\
+    if ( ( %1
+     bind ( 
+      OBJECT VAR %S
+      INTEGER VAR l_Counter l_Counter := 0
+      for %S%C
+      begin
+       OBJECT IN %C
+       if true then
+       begin
+
+        ++! l_Counter
+       end // if
+      end // for C
+      l_Counter
+
+     ) // bind
+ )      %!= 0 ) then
+    begin
+//	(%1<{, }{}%CN>)\
+     '('
+     %1
+     bind ( 
+      OBJECT VAR %S
+      INTEGER VAR l_Counter l_Counter := 0
+      for %S%C
+      begin
+       OBJECT IN %C
+       if true then
+       begin
+        if ( l_Counter >0 ) then ( ', ' )
+        %C |N 
+        ++! l_Counter
+       end // if
+      end // for C
+
+     ) // bind
+      ')'
+//	]\
+    end // if
+//	}\
+   end // else
+//	;\
+   ';'
+//	)\
+)% ) //	]\
+  end // if
+//	]
+ end // if
+ else
+ begin
+
+//	%{MyDo}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{MyDo},%{Class_Inst})_var,)\
+
+//	%{MyDo}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{MyDo},%{Class_Inst})_impl,)\
+//	}\
+ end // else
+
+//t _TypeInfo
+; // SpellWordByOp
+
+<<transformator>> TypeInfo OBJECT IN %S
+//@ %SU
+//c {}
+//r {%SN=void}: {@tfw_tiVoid}
+//r {%t_isString(%S)=true}: {@tfw_tiString}
+//r {%t_isStruct(%S)=true}: {@tfw_tiStruct}
+//r {%t_isClassRef(%S)=true}: {@tfw_tiClassRef}
+//r {""=""}: {TypeInfo(%f_pas_TypeName(%S))}
+
+//t _SelfNamePrim
+; // TypeInfo
+
+<<transformator>> SelfNamePrim OBJECT IN %S
+//@ %SU
+//c {}
+//r {%t_interface(%S)=true}: {%f_cut_prefix(%f_pas_TypeName(%S),I)}
+//r {%S#f_IsStaticObject()=true}: {%f_cut_prefix(%f_pas_TypeName(%S),T)}
+//r {%t_simple_class(%S)=true}: {%f_cut_prefix(%f_pas_TypeName(%S),T)}
+//r {""=""}: {%f_pas_TypeName(%S)}
+
+//t _SelfNameEx
+; // SelfNamePrim
+
+<<transformator>> SelfNameEx OBJECT IN %S
+//@ %SU
+//c {}
+//r {%f_substr_from_begin(%t_SelfNamePrim(%S),9)=nevCustom}: {%f_cut_prefix(%t_SelfNamePrim(%S),nevCustom)}
+//r {%f_substr_from_begin(%t_SelfNamePrim(%S),8)=evCustom}: {%f_cut_prefix(%t_SelfNamePrim(%S),evCustom)}
+//r {%f_substr_from_begin(%t_SelfNamePrim(%S),3)=nsc}: {%f_cut_prefix(%t_SelfNamePrim(%S),nsc)}
+//r {%f_substr_from_begin(%t_SelfNamePrim(%S),3)=tfw}: {%f_cut_prefix(%t_SelfNamePrim(%S),tfw)}
+//r {%f_substr_from_begin(%t_SelfNamePrim(%S),2)=kw}: {%f_cut_prefix(%t_SelfNamePrim(%S),kw)}
+//r {%f_substr_from_begin(%t_SelfNamePrim(%S),3)=nev}: {%f_cut_prefix(%t_SelfNamePrim(%S),nev)}
+//r {%f_substr_from_begin(%t_SelfNamePrim(%S),2)=vg}: {%f_cut_prefix(%t_SelfNamePrim(%S),vg)}
+//r {%f_substr_from_begin(%t_SelfNamePrim(%S),2)=vt}: {%f_cut_prefix(%t_SelfNamePrim(%S),vt)}
+//r {%f_substr_from_begin(%t_SelfNamePrim(%S),2)=k2}: {%f_cut_prefix(%t_SelfNamePrim(%S),k2)}
+//r {%f_substr_from_begin(%t_SelfNamePrim(%S),2)=ns}: {%f_cut_prefix(%t_SelfNamePrim(%S),ns)}
+//r {%f_substr_from_begin(%t_SelfNamePrim(%S),2)=l3}: {%f_cut_prefix(%t_SelfNamePrim(%S),l3)}
+//r {""=""}: {%t_SelfNamePrim(%S)}
+
+//t _SelfName
+; // SelfNameEx
+
+<<transformator>> SelfName OBJECT IN %S
+//@ %SU
+//c {}
+//r {%t_SelfNameEx(%S)=StackValue}: {SV}
+//r {%t_SelfNameEx(%S)=ValueList}: {Array}
+//r {%t_SelfNameEx(%S)=FileName}: {File}
+//r {%t_SelfNameEx(%S)=SimpleTree}: {Tree}
+//r {%t_SelfNameEx(%S)=SimpleNode}: {Node}
+//r {%t_SelfNameEx(%S)=vcmEntityForm}: {Form}
+//r {%t_SelfNameEx(%S)=WinControl}: {Control}
+//r {""=""}: {%f_cut_prefix(%t_SelfNameEx(%S),Custom)}
+
+//t _isEnum
+; // SelfName
+
+<<transformator>> isEnum OBJECT IN %S
+//@ %SU
+//c {}
+//r {%SS=Enum}: {true}
+//r {%SS=Typedef}: {%t_isEnum(%G)}
+//r {""=""}: {false}
+
+//t _isClassRef
+; // isEnum
+
+<<transformator>> isClassRef OBJECT IN %S
+//@ %SU
+//c {}
+//r {%f_pas_TypeName(%S)=TClass}: {true}
+//r {%SS=Typedef&%S{isClassRef}=true}: {true}
+//r {%SS=Typedef}: {%t_isClassRef(%G)}
+//r {""=""}: {false}
+
+//t _isStruct
+; // isClassRef
+
+<<transformator>> isStruct OBJECT IN %S
+//@ %SU
+//c {}
+//r {%S#f_IsStruct()=true}: {true}
+//r {%SS=Typedef}: {%t_isStruct(%G)}
+//r {""=""}: {false}
+
+//t _isString
+; // isStruct
+
+<<transformator>> isString OBJECT IN %S
+//@ %SU
+//c {}
+//r {%f_pas_TypeName(%S)=Tl3WString|%f_pas_TypeName(%S)=Tl3PCharLenPrim|%f_pas_TypeName(%S)=Tl3PCharLen}: {true}
+//r {%f_pas_TypeName(%S)=Il3CString}: {true}
+//r {%SS=Typedef}: {%t_isString(%G)}
+//r {""=""}: {false}
+
+//t _isAcceptableForScripts
+; // isString
+
+<<transformator>> isAcceptableForScripts OBJECT IN %S
+//@ %SU
+//c {}
+//r {%f_pas_TypeName(%S)=TClass}: {true}
+//r {%f_pas_TypeName(%S)=TtfwStackValue}: {true}
+//r {%f_pas_TypeName(%S)=ItfwValueList}: {true}
+//r {%SS=Typedef&%S{isClassRef}=true}: {true}
+//r {%f_pas_TypeName(%S)=Tl3WString|%f_pas_TypeName(%S)=Tl3PCharLenPrim|%f_pas_TypeName(%S)=Tl3PCharLen}: {true}
+//r {%f_pas_TypeName(%S)=Il3CString}: {true}
+//r {%t_simple_class(%S)=true}: {true}
+//r {%t_interface(%S)=true}: {true}
+//r {%f_pas_TypeName(%S)=String}: {true}
+//r {%f_pas_TypeName(%S)=Char|%f_pas_TypeName(%S)=AnsiChar}: {true}
+//r {%f_pas_TypeName(%S)=TPoint}: {true}
+//r {%f_pas_TypeName(%S)=WideString}: {true}
+//r {%f_pas_TypeName(%S)=AnsiString}: {true}
+//r {%f_pas_TypeName(%S)=Integer}: {true}
+//r {%f_pas_TypeName(%S)=TColor}: {true}
+//r {%f_pas_TypeName(%S)=Cardinal}: {true}
+//r {%t_isEnum(%S)=true}: {true}
+//r {%f_pas_TypeName(%S)=THandle}: {true}
+//r {%f_pas_TypeName(%S)=Boolean}: {true}
+//r {%SS=Typedef}: {%t_isAcceptableForScripts(%G)}
+//r {""=""}: {false}
+
+//t _CastSig
+; // isAcceptableForScripts
+
+<<transformator>> CastSig OBJECT IN %S
+//@ %SU
+//c {}
+//r {%f_pas_TypeName(%S)=TClass}: {}
+//r {%f_pas_TypeName(%S)=TtfwStackValue}: {}
+//r {%f_pas_TypeName(%S)=ItfwValueList}: {}
+//r {%SS=Typedef&%S{isClassRef}=true}: {%f_pas_TypeName(%S)}
+//r {%f_pas_TypeName(%S)=Tl3WString|%f_pas_TypeName(%S)=Tl3PCharLenPrim|%f_pas_TypeName(%S)=Tl3PCharLen}: {}
+//r {%f_pas_TypeName(%S)=Il3CString}: {}
+//r {%t_simple_class(%S)=true}: {%f_pas_TypeName(%S)}
+//r {%t_interface(%S)=true}: {%f_pas_TypeName(%S)}
+//r {%f_pas_TypeName(%S)=String}: {}
+//r {%f_pas_TypeName(%S)=Char|%f_pas_TypeName(%S)=AnsiChar}: {}
+//r {%f_pas_TypeName(%S)=TPoint}: {}
+//r {%f_pas_TypeName(%S)=WideString}: {}
+//r {%f_pas_TypeName(%S)=AnsiString}: {}
+//r {%f_pas_TypeName(%S)=Integer}: {}
+//r {%f_pas_TypeName(%S)=TColor}: {%f_pas_TypeName(%S)}
+//r {%f_pas_TypeName(%S)=Cardinal}: {%f_pas_TypeName(%S)}
+//r {%t_isEnum(%S)=true}: {%f_pas_TypeName(%S)}
+//r {%f_pas_TypeName(%S)=THandle}: {%f_pas_TypeName(%S)}
+//r {%f_pas_TypeName(%S)=Boolean}: {}
+//r {%SS=Typedef}: {%f_pas_TypeName(%S)}
+//r {""=""}: {"Не знаем как приводить значение типа %f_pas_TypeName(%S)"}
+
+//t _UnCastSig
+; // CastSig
+
+<<transformator>> UnCastSig OBJECT IN %S
+//@ %SU
+//c {}
+//r {%SN=void}: {}
+//r {%f_pas_TypeName(%S)=TClass}: {}
+//r {%f_pas_TypeName(%S)=TtfwStackValue}: {}
+//r {%f_pas_TypeName(%S)=ItfwValueList}: {}
+//r {%SS=Typedef&%S{isClassRef}=true}: {}
+//r {%f_pas_TypeName(%S)=Tl3WString|%f_pas_TypeName(%S)=Tl3PCharLenPrim|%f_pas_TypeName(%S)=Tl3PCharLen}: {}
+//r {%f_pas_TypeName(%S)=Il3CString}: {}
+//r {%t_simple_class(%S)=true}: {}
+//r {%t_interface(%S)=true}: {}
+//r {%f_pas_TypeName(%S)=String}: {}
+//r {%f_pas_TypeName(%S)=Char|%f_pas_TypeName(%S)=AnsiChar}: {}
+//r {%f_pas_TypeName(%S)=TPoint}: {}
+//r {%f_pas_TypeName(%S)=WideString}: {}
+//r {%f_pas_TypeName(%S)=AnsiString}: {}
+//r {%f_pas_TypeName(%S)=Integer}: {}
+//r {%f_pas_TypeName(%S)=TColor}: {Integer}
+//r {%f_pas_TypeName(%S)=Cardinal}: {Integer}
+//r {%t_isEnum(%S)=true}: {Ord}
+//r {%f_pas_TypeName(%S)=THandle}: {Integer}
+//r {%f_pas_TypeName(%S)=Boolean}: {}
+//r {%SS=Typedef}: {%t_UnCastSig(%G)}
+//r {""=""}: {"Не знаем как приводить значение типа %f_pas_TypeName(%S)"}
+
+//t _PopSig
+; // UnCastSig
+
+<<transformator>> PopSig OBJECT IN %S
+//@ %SU_%1N
+//c {}
+//r {%f_pas_TypeName(%S)=TClass}: {PopClass}
+//r {%f_pas_TypeName(%S)=TtfwStackValue}: {Pop}
+//r {%f_pas_TypeName(%S)=ItfwValueList}: {PopList}
+//r {%SS=Typedef&%S{isClassRef}=true}: {PopClassAs(%f_pas_TypeName(%S))}
+//r {%f_pas_TypeName(%S)=Tl3WString|%f_pas_TypeName(%S)=Tl3PCharLenPrim|%f_pas_TypeName(%S)=Tl3PCharLen}: {PopWStr}
+//r {%f_pas_TypeName(%S)=Il3CString}: {PopString}
+//r {%t_simple_class(%S)=true}: {PopObjAs(%f_pas_TypeName(%S))}
+//r {%t_interface(%S)=true}: {PopIntf(%f_pas_TypeName(%S))}
+//r {%f_pas_TypeName(%S)=String}: {PopDelphiString}
+//r {%f_pas_TypeName(%S)=Char|%f_pas_TypeName(%S)=AnsiChar}: {PopChar}
+//r {%f_pas_TypeName(%S)=TPoint}: {PopPoint}
+//r {%f_pas_TypeName(%S)=WideString}: {PopWideString}
+//r {%f_pas_TypeName(%S)=AnsiString}: {PopDelphiString}
+//r {%f_pas_TypeName(%S)=Integer}: {PopInt}
+//r {%f_pas_TypeName(%S)=TColor}: {PopInt}
+//r {%f_pas_TypeName(%S)=Cardinal}: {PopInt}
+//r {%t_isEnum(%S)=true}: {PopInt}
+//r {%f_pas_TypeName(%S)=THandle}: {PopInt}
+//r {%f_pas_TypeName(%S)=Boolean}: {PopBool}
+//r {%SS=Typedef}: {%t_PopSig(%G,%1)}
+//r {""=""}: {"Не знаем как снять со стека %1N : %f_pas_TypeName(%S)"}
+
+//t _PushSig
+; // PopSig
+
+<<transformator>> PushSig OBJECT IN %S
+//@ %SU_%1N
+//c {}
+//r {%f_pas_TypeName(%S)=TClass}: {PushClass}
+//r {%f_pas_TypeName(%S)=TtfwStackValue}: {Push}
+//r {%f_pas_TypeName(%S)=ItfwValueList}: {PushList}
+//r {%SS=Typedef&%S{isClassRef}=true}: {PushClass}
+//r {%f_pas_TypeName(%S)=Tl3WString|%f_pas_TypeName(%S)=Tl3PCharLenPrim|%f_pas_TypeName(%S)=Tl3PCharLen}: {PushString}
+//r {%f_pas_TypeName(%S)=Il3CString}: {PushString}
+//r {%t_simple_class(%S)=true}: {PushObj}
+//r {%t_interface(%S)=true}: {PushIntf}
+//r {%f_pas_TypeName(%S)=String}: {PushString}
+//r {%f_pas_TypeName(%S)=Char|%f_pas_TypeName(%S)=AnsiChar}: {PushChar}
+//r {%f_pas_TypeName(%S)=TPoint}: {PushPoint}
+//r {%f_pas_TypeName(%S)=WideString}: {PushWideString}
+//r {%f_pas_TypeName(%S)=AnsiString}: {PushString}
+//r {%f_pas_TypeName(%S)=Integer}: {PushInt}
+//r {%f_pas_TypeName(%S)=TColor}: {PushInt}
+//r {%f_pas_TypeName(%S)=Cardinal}: {PushInt}
+//r {%t_isEnum(%S)=true}: {PushInt}
+//r {%f_pas_TypeName(%S)=THandle}: {PushInt}
+//r {%f_pas_TypeName(%S)=Boolean}: {PushBool}
+//r {%SS=Typedef}: {%t_PushSig(%G,%1)}
+//r {""=""}: {"Не знаем как положить на стек %1N : %f_pas_TypeName(%S)"}
+//#UC END# *4B2A19E3038Bfor4F2C15C90252*
+; // PushSig
+
+
+// реализация абстрактного стереотипа Delphi интерфейсы и реализация::MDAGenerator
+// Генератор файлов форм (.dfm)
+//+ dfm
+implementation @ <<ScriptKeywordsPack>>
+<<generator>> dfm OBJECT IN %S
+//R  
+//#UC START# *49F5795900ECfor4F2C15C90252*
+//#UC END# *49F5795900ECfor4F2C15C90252*
+; // dfm
+
+
+// реализация абстрактного стереотипа Delphi интерфейсы и реализация::MDAGenerator
+// Вторая интерфейсная секция стереотипа. Например реализация свойств класса.
+//+ intf2.pas
+<<generator>> intf2.pas OBJECT IN %S
+//R  
+//#UC START# *477398E501C0for4F2C15C90252*
+//#UC END# *477398E501C0for4F2C15C90252*
+; // intf2.pas
+
+
+// реализация абстрактного стереотипа Delphi интерфейсы и реализация::MDAGenerator
+// 3-я секция интерфейса. Например поле для свойства.
+//+ intf3.pas
+<<generator>> intf3.pas OBJECT IN %S
+//R  
+//#UC START# *4774D2A20372for4F2C15C90252*
+//#UC END# *4774D2A20372for4F2C15C90252*
+; // intf3.pas
+
+
+// реализация абстрактного стереотипа Delphi интерфейсы и реализация::MDAGenerator
+// Скрипты TC (.sd)
+//+ sd
+<<generator>> sd OBJECT IN %S
+//R  
+//#UC START# *4DE79AFC0030for4F2C15C90252*
+//#UC END# *4DE79AFC0030for4F2C15C90252*
+; // sd
+
+
+// реализация абстрактного стереотипа Java::MDAGenerator
+// генератор реализации фабрик интерфейсов на java (.java)
+//+ fctr.java
+<<generator>> fctr.java OBJECT IN %S
+//#UC START# *470321C1038Afor4F2C15C90252*
+//#UC END# *470321C1038Afor4F2C15C90252*
+; // fctr.java
+
+
+// реализация абстрактного стереотипа Документация::MDAGenerator
+// Хак для [$281531116]
+//+ link_to_requests_hack
+<<generator>> link_to_requests_hack OBJECT IN %S
+//#UC START# *4E65F581015Afor4F2C15C90252*
+//#UC END# *4E65F581015Afor4F2C15C90252*
+; // link_to_requests_hack
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Вложенные стереотипы
+
+//: ScriptKeywordsPack::Class::injects::ClassDependency
+end. // <<ScriptKeywordsPack>>
+
+implementation @ :: <<ScriptKeywordsPack>> <<injects>> ;
+//? Внедрение зависимости
+//= Delphi интерфейсы и реализация::MDAGenerator
+
+// Генераторы
+// генератор реализации фабрик интерфейсов на java (.java)
+//+ fctr.java
+<<generator>> fctr.java OBJECT IN %S
+//#UC START# *470321C1038Afor54D4A61F00BA*
+//#UC END# *470321C1038Afor54D4A61F00BA*
+; // fctr.java
+
+
+// Вторая интерфейсная секция стереотипа. Например реализация свойств класса.
+//+ intf2.pas
+<<generator>> intf2.pas OBJECT IN %S
+//R  
+//#UC START# *477398E501C0for54D4A61F00BA*
+//#UC END# *477398E501C0for54D4A61F00BA*
+; // intf2.pas
+
+
+// 3-я секция интерфейса. Например поле для свойства.
+//+ intf3.pas
+<<generator>> intf3.pas OBJECT IN %S
+//R  
+//#UC START# *4774D2A20372for54D4A61F00BA*
+//#UC END# *4774D2A20372for54D4A61F00BA*
+; // intf3.pas
+
+
+// Генератор файлов форм (.dfm)
+//+ dfm
+<<generator>> dfm OBJECT IN %S
+//R  
+//#UC START# *49F5795900ECfor54D4A61F00BA*
+//#UC END# *49F5795900ECfor54D4A61F00BA*
+; // dfm
+
+
+// Скрипты TC (.sd)
+//+ sd
+<<generator>> sd OBJECT IN %S
+//R  
+//#UC START# *4DE79AFC0030for54D4A61F00BA*
+//#UC END# *4DE79AFC0030for54D4A61F00BA*
+; // sd
+
+
+// Хак для [$281531116]
+//+ link_to_requests_hack
+<<generator>> link_to_requests_hack OBJECT IN %S
+//#UC START# *4E65F581015Afor54D4A61F00BA*
+//#UC END# *4E65F581015Afor54D4A61F00BA*
+; // link_to_requests_hack
+
+
+// Генерация модели в MDKnow
+//+ wiki
+<<generator>> wiki OBJECT IN %S
+//#UC START# *46E6D4BB0339for54D4A61F00BA*
+//#UC END# *46E6D4BB0339for54D4A61F00BA*
+; // wiki
+
+
+// Родные Delphi интерфейсы (.pas)
+//+ intf.pas
+<<generator>> intf.pas OBJECT IN %S
+//R  
+//#UC START# *470F1571031Cfor54D4A61F00BA*
+//#UC END# *470F1571031Cfor54D4A61F00BA*
+; // intf.pas
+
+
+// Реализация на Delphi(.pas)
+//+ impl.pas
+<<generator>> impl.pas OBJECT IN %S
+//R  
+//#UC START# *470F15B800CBfor54D4A61F00BA*
+//#UC END# *470F15B800CBfor54D4A61F00BA*
+; // impl.pas
+
+
+// Функции стереотипа
+//%f _st_space_key
+: st_space_key OBJECT IN %S
+//	SHD
+ 'SHD'
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Унаследованная реализация
+
+// реализация абстрактного стереотипа Документация::MDAGenerator
+// проверка ограничений накладываемых на элемент
+//%t _constraint
+; // st_space_key
+
+<<transformator>> constraint OBJECT IN %S
+//#UC START# *4704C0E30186for54D4A61F00BA*
+//c          {}
+//r {""=""}: {}
+//#UC END# *4704C0E30186for54D4A61F00BA*
+; // constraint
+
+
+// реализация абстрактного стереотипа Документация::MDAGenerator
+// выводит описание элемента (операция, атрибут) в wiki
+//%f _wiki_child_kind
+: wiki_child_kind OBJECT IN %S
+//#UC START# *4705CBD6003Efor54D4A61F00BA*
+//#UC END# *4705CBD6003Efor54D4A61F00BA*
+; // wiki_child_kind
+
+
+// реализация абстрактного стереотипа Документация::MDAGenerator
+// вывод описание авто-генерируемых методов в wiki
+//%f _wiki_up_add_gen
+: wiki_up_add_gen OBJECT IN %S
+//#UC START# *470484D50138for54D4A61F00BA*
+//#UC END# *470484D50138for54D4A61F00BA*
+; // wiki_up_add_gen
+
+
+//: ScriptKeywordsPack::Class::keyword::Operation
+end. // :: <<ScriptKeywordsPack>> <<injects>> ;
+
+implementation @ :: <<ScriptKeywordsPack>> <<keyword>> ;
+//? Слово скрипта
+//= UtilityPack::Class::Operation
+
+// Параметры стереотипа
+//v -
+// - типы видимости
+//a f
+// - тип абстракции
+//T 
+// - может не иметь "цели" (типа/результата)
+
+// Пользовательские свойства
+//p NameForScript:s ? 
+//p mapped:tribool=undefined ? 
+
+// Генераторы
+// Генерация модели в MDKnow
+//+ wiki
+<<generator>> wiki OBJECT IN %S
+//#UC START# *46E6D4BB0339for54F734BC0087*
+//#UC END# *46E6D4BB0339for54F734BC0087*
+; // wiki
+
+
+// генератор реализации фабрик интерфейсов на java (.java)
+//+ fctr.java
+<<generator>> fctr.java OBJECT IN %S
+//#UC START# *470321C1038Afor54F734BC0087*
+//#UC END# *470321C1038Afor54F734BC0087*
+; // fctr.java
+
+
+// Вторая интерфейсная секция стереотипа. Например реализация свойств класса.
+//+ intf2.pas
+<<generator>> intf2.pas OBJECT IN %S
+//R  
+//#UC START# *477398E501C0for54F734BC0087*
+//#UC END# *477398E501C0for54F734BC0087*
+; // intf2.pas
+
+
+// 3-я секция интерфейса. Например поле для свойства.
+//+ intf3.pas
+<<generator>> intf3.pas OBJECT IN %S
+//R  
+//#UC START# *4774D2A20372for54F734BC0087*
+//#UC END# *4774D2A20372for54F734BC0087*
+; // intf3.pas
+
+
+// Генератор файлов форм (.dfm)
+//+ dfm
+<<generator>> dfm OBJECT IN %S
+//R  
+//#UC START# *49F5795900ECfor54F734BC0087*
+//#UC END# *49F5795900ECfor54F734BC0087*
+; // dfm
+
+
+// Скрипты TC (.sd)
+//+ sd
+<<generator>> sd OBJECT IN %S
+//R  
+//#UC START# *4DE79AFC0030for54F734BC0087*
+//#UC END# *4DE79AFC0030for54F734BC0087*
+; // sd
+
+
+// Хак для [$281531116]
+//+ link_to_requests_hack
+<<generator>> link_to_requests_hack OBJECT IN %S
+//#UC START# *4E65F581015Afor54F734BC0087*
+//#UC END# *4E65F581015Afor54F734BC0087*
+; // link_to_requests_hack
+
+
+// Родные Delphi интерфейсы (.pas)
+//+ intf.pas
+<<generator>> intf.pas OBJECT IN %S
+//R  
+//#UC START# *470F1571031Cfor54F734BC0087*
+//#UC END# *470F1571031Cfor54F734BC0087*
+; // intf.pas
+
+
+// Реализация на Delphi(.pas)
+//+ impl.pas
+<<generator>> impl.pas OBJECT IN %S
+//R  
+//#UC START# *470F15B800CBfor54F734BC0087*
+//#UC END# *470F15B800CBfor54F734BC0087*
+; // impl.pas
+
+
+// Функции стереотипа
+//%f _st_space_key
+: st_space_key OBJECT IN %S
+//	SHD
+ 'SHD'
+
+//%f _wiki_up_print
+; // st_space_key
+
+: wiki_up_print OBJECT IN %S
+//	%S#[inherited][{"%S{mapped}"!="%S{!mapped}"}%f_up_prefix(%S) *mapped* = *%S{mapped}*
+ ?inherited
+ if ( ( %S get_up ( 'mapped' ) ) %!= ( %S get_up_def ( 'mapped' ) ) ) then
+ begin
+  [%f] up_prefix %( %S )% ' *mapped* = *'
+  %S get_up ( 'mapped' ) '*'
+//	][{"%S{NameForScript}"!="%S{!NameForScript}"}%f_up_prefix(%S) *NameForScript* = *%S{NameForScript}*
+ end // if
+ if ( ( %S get_up ( 'NameForScript' ) ) %!= ( %S get_up_def ( 'NameForScript' ) ) ) then
+ begin
+  [%f] up_prefix %( %S )% ' *NameForScript* = *'
+  %S get_up ( 'NameForScript' ) '*'
+//	]
+ end // if
+
+//%f _IsKeyword
+; // wiki_up_print
+
+: IsKeyword OBJECT IN %S
+// возвращаемый результат: boolean
+//#UC START# *5510356E00AEfor54F734BC0087*
+//	true
+ true
+//#UC END# *5510356E00AEfor54F734BC0087*
+; // IsKeyword
+
+
+//%f _NoForward
+: NoForward OBJECT IN %S
+// возвращаемый результат: boolean
+//#UC START# *55115A470301for54F734BC0087*
+//	true
+ true
+//#UC END# *55115A470301for54F734BC0087*
+; // NoForward
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Унаследованная реализация
+
+// реализация абстрактного стереотипа Документация::MDAGenerator
+// вывод описание авто-генерируемых методов в wiki
+//%f _wiki_up_add_gen
+: wiki_up_add_gen OBJECT IN %S
+//#UC START# *470484D50138for54F734BC0087*
+//#UC END# *470484D50138for54F734BC0087*
+; // wiki_up_add_gen
+
+
+//: ScriptKeywordsPack::Class::property::Attribute
+end. // :: <<ScriptKeywordsPack>> <<keyword>> ;
+
+implementation @ :: <<ScriptKeywordsPack>> <<property>> ;
+//= UtilityPack::Class::Attribute
+
+// Параметры стереотипа
+//v -
+// - типы видимости
+//a f
+// - тип абстракции
+
+// Пользовательские свойства
+//p mapped:tribool=undefined ? 
+
+// Генераторы
+// Генерация модели в MDKnow
+//+ wiki
+<<generator>> wiki OBJECT IN %S
+//#UC START# *46E6D4BB0339for54F861670034*
+//#UC END# *46E6D4BB0339for54F861670034*
+; // wiki
+
+
+// генератор inline файлов реализации C++ (.i.h)
+//+ i.h
+<<generator>> i.h OBJECT IN %S
+//#UC START# *47022CCF00EAfor54F861670034*
+//#UC END# *47022CCF00EAfor54F861670034*
+; // i.h
+
+
+// генератор реализации фабрик интерфейсов на java (.java)
+//+ fctr.java
+<<generator>> fctr.java OBJECT IN %S
+//#UC START# *470321C1038Afor54F861670034*
+//#UC END# *470321C1038Afor54F861670034*
+; // fctr.java
+
+
+// Вторая интерфейсная секция стереотипа. Например реализация свойств класса.
+//+ intf2.pas
+<<generator>> intf2.pas OBJECT IN %S
+//R  
+//#UC START# *477398E501C0for54F861670034*
+//#UC END# *477398E501C0for54F861670034*
+; // intf2.pas
+
+
+// 3-я секция интерфейса. Например поле для свойства.
+//+ intf3.pas
+<<generator>> intf3.pas OBJECT IN %S
+//R  
+//#UC START# *4774D2A20372for54F861670034*
+//#UC END# *4774D2A20372for54F861670034*
+; // intf3.pas
+
+
+// Генератор файлов форм (.dfm)
+//+ dfm
+<<generator>> dfm OBJECT IN %S
+//R  
+//#UC START# *49F5795900ECfor54F861670034*
+//#UC END# *49F5795900ECfor54F861670034*
+; // dfm
+
+
+// Скрипты TC (.sd)
+//+ sd
+<<generator>> sd OBJECT IN %S
+//R  
+//#UC START# *4DE79AFC0030for54F861670034*
+//#UC END# *4DE79AFC0030for54F861670034*
+; // sd
+
+
+// Хак для [$281531116]
+//+ link_to_requests_hack
+<<generator>> link_to_requests_hack OBJECT IN %S
+//#UC START# *4E65F581015Afor54F861670034*
+//#UC END# *4E65F581015Afor54F861670034*
+; // link_to_requests_hack
+
+
+// Родные Delphi интерфейсы (.pas)
+//+ intf.pas
+<<generator>> intf.pas OBJECT IN %S
+//R  
+//#UC START# *470F1571031Cfor54F861670034*
+//#UC END# *470F1571031Cfor54F861670034*
+; // intf.pas
+
+
+// Реализация на Delphi(.pas)
+//+ impl.pas
+<<generator>> impl.pas OBJECT IN %S
+//R  
+//#UC START# *470F15B800CBfor54F861670034*
+//#UC END# *470F15B800CBfor54F861670034*
+; // impl.pas
+
+
+// Функции стереотипа
+//%f _st_space_key
+: st_space_key OBJECT IN %S
+//	SHD
+ 'SHD'
+
+//%f _wiki_up_print
+; // st_space_key
+
+: wiki_up_print OBJECT IN %S
+//	%S#[inherited][{"%S{mapped}"!="%S{!mapped}"}%f_up_prefix(%S) *mapped* = *%S{mapped}*
+ ?inherited
+ if ( ( %S get_up ( 'mapped' ) ) %!= ( %S get_up_def ( 'mapped' ) ) ) then
+ begin
+  [%f] up_prefix %( %S )% ' *mapped* = *'
+  %S get_up ( 'mapped' ) '*'
+//	]
+ end // if
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Унаследованная реализация
+
+// реализация абстрактного стереотипа Документация::MDAGenerator
+// проверка ограничений накладываемых на элемент
+//%t _constraint
+; // wiki_up_print
+
+<<transformator>> constraint OBJECT IN %S
+//#UC START# *4704C0E30186for54F861670034*
+//c          {}
+//r {""=""}: {}
+//#UC END# *4704C0E30186for54F861670034*
+; // constraint
+
+
+// реализация абстрактного стереотипа Документация::MDAGenerator
+// вывод описание авто-генерируемых методов в wiki
+//%f _wiki_up_add_gen
+: wiki_up_add_gen OBJECT IN %S
+//#UC START# *470484D50138for54F861670034*
+//#UC END# *470484D50138for54F861670034*
+; // wiki_up_add_gen
+
+
+//: ScriptKeywordsPack::Class::readonly::Attribute
+end. // :: <<ScriptKeywordsPack>> <<property>> ;
+
+implementation @ :: <<ScriptKeywordsPack>> <<readonly>> ;
+//= ScriptKeywordsPack::Class::property::Attribute
+
+// Функции стереотипа
+//%f _st_space_key
+: st_space_key OBJECT IN %S
+//	SHD
+ 'SHD'
+
+
+//: ScriptKeywordsPack::Class::friend::ClassDependency
+; // st_space_key
+
+end. // :: <<ScriptKeywordsPack>> <<readonly>> ;
+
+implementation @ :: <<ScriptKeywordsPack>> <<friend>> ;
+//= ClassBase::Class::friend::ClassDependency
+
+// Генераторы
+// Генерация модели в MDKnow
+//+ wiki
+<<generator>> wiki OBJECT IN %S
+//#UC START# *46E6D4BB0339for54FECA940175*
+//#UC END# *46E6D4BB0339for54FECA940175*
+; // wiki
+
+
+// генератор заголовочных файлов C++ (.h)
+//+ h
+<<generator>> h OBJECT IN %S
+//#UC START# *47022C88029Ffor54FECA940175*
+//#UC END# *47022C88029Ffor54FECA940175*
+; // h
+
+
+// генератор файлов реализации C++ (.cpp)
+//+ cpp
+<<generator>> cpp OBJECT IN %S
+//#UC START# *47022CB8034Bfor54FECA940175*
+//#UC END# *47022CB8034Bfor54FECA940175*
+; // cpp
+
+
+// генератор inline файлов реализации C++ (.i.h)
+//+ i.h
+<<generator>> i.h OBJECT IN %S
+//#UC START# *47022CCF00EAfor54FECA940175*
+//#UC END# *47022CCF00EAfor54FECA940175*
+; // i.h
+
+
+// генератор классов, интерфейсов на java (.java)
+//+ java
+<<generator>> java OBJECT IN %S
+//#UC START# *470321950119for54FECA940175*
+//#UC END# *470321950119for54FECA940175*
+; // java
+
+
+// генератор реализации фабрик интерфейсов на java (.java)
+//+ fctr.java
+<<generator>> fctr.java OBJECT IN %S
+//#UC START# *470321C1038Afor54FECA940175*
+//#UC END# *470321C1038Afor54FECA940175*
+; // fctr.java
+
+
+// Родные Delphi интерфейсы (.pas)
+//+ intf.pas
+<<generator>> intf.pas OBJECT IN %S
+//R  
+//#UC START# *470F1571031Cfor54FECA940175*
+//#UC END# *470F1571031Cfor54FECA940175*
+; // intf.pas
+
+
+// Реализация на Delphi(.pas)
+//+ impl.pas
+<<generator>> impl.pas OBJECT IN %S
+//R  
+//#UC START# *470F15B800CBfor54FECA940175*
+//#UC END# *470F15B800CBfor54FECA940175*
+; // impl.pas
+
+
+// Вторая интерфейсная секция стереотипа. Например реализация свойств класса.
+//+ intf2.pas
+<<generator>> intf2.pas OBJECT IN %S
+//R  
+//#UC START# *477398E501C0for54FECA940175*
+//#UC END# *477398E501C0for54FECA940175*
+; // intf2.pas
+
+
+// 3-я секция интерфейса. Например поле для свойства.
+//+ intf3.pas
+<<generator>> intf3.pas OBJECT IN %S
+//R  
+//#UC START# *4774D2A20372for54FECA940175*
+//#UC END# *4774D2A20372for54FECA940175*
+; // intf3.pas
+
+
+// Генератор файлов форм (.dfm)
+//+ dfm
+<<generator>> dfm OBJECT IN %S
+//R  
+//#UC START# *49F5795900ECfor54FECA940175*
+//#UC END# *49F5795900ECfor54FECA940175*
+; // dfm
+
+
+// Скрипты TC (.sd)
+//+ sd
+<<generator>> sd OBJECT IN %S
+//R  
+//#UC START# *4DE79AFC0030for54FECA940175*
+//#UC END# *4DE79AFC0030for54FECA940175*
+; // sd
+
+
+// Хак для [$281531116]
+//+ link_to_requests_hack
+<<generator>> link_to_requests_hack OBJECT IN %S
+//#UC START# *4E65F581015Afor54FECA940175*
+//#UC END# *4E65F581015Afor54FECA940175*
+; // link_to_requests_hack
+
+
+// Функции стереотипа
+//%f _st_space_key
+: st_space_key OBJECT IN %S
+//	SHD
+ 'SHD'
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Унаследованная реализация
+
+// реализация абстрактного стереотипа Документация::MDAGenerator
+// проверка ограничений накладываемых на элемент
+//%t _constraint
+; // st_space_key
+
+<<transformator>> constraint OBJECT IN %S
+//#UC START# *4704C0E30186for54FECA940175*
+//c          {}
+//r {""=""}: {}
+//#UC END# *4704C0E30186for54FECA940175*
+; // constraint
+
+
+// реализация абстрактного стереотипа Документация::MDAGenerator
+// вывод описание авто-генерируемых методов в wiki
+//%f _wiki_up_add_gen
+: wiki_up_add_gen OBJECT IN %S
+//#UC START# *470484D50138for54FECA940175*
+//#UC END# *470484D50138for54FECA940175*
+; // wiki_up_add_gen
+
+
+//: ScriptKeywordsPack::Class::creator::Operation
+end. // :: <<ScriptKeywordsPack>> <<friend>> ;
+
+implementation @ :: <<ScriptKeywordsPack>> <<creator>> ;
+//= ScriptKeywordsPack::Class::keyword::Operation
+
+// Функции стереотипа
+//%f _st_space_key
+: st_space_key OBJECT IN %S
+//	SHD
+ 'SHD'
+
+//%f _IsCreator
+; // st_space_key
+
+: IsCreator OBJECT IN %S
+// возвращаемый результат: boolean
+//#UC START# *5510359500FCfor5510358803BD*
+//	true
+ true
+//#UC END# *5510359500FCfor5510358803BD*
+; // IsCreator
+
+
+//: ScriptKeywordsPack::Class::globalkeyword::Operation
+end. // :: <<ScriptKeywordsPack>> <<creator>> ;
+
+implementation @ :: <<ScriptKeywordsPack>> <<globalkeyword>> ;
+//? Глобальное слово скрипта
+//= UtilityPack::Class::Operation
+
+// Пользовательские свойства
+//p NameForScript:s ? 
+
+// Генераторы
+// Генерация модели в MDKnow
+//+ wiki
+<<generator>> wiki OBJECT IN %S
+//#UC START# *46E6D4BB0339for55115A7D0330*
+//#UC END# *46E6D4BB0339for55115A7D0330*
+; // wiki
+
+
+// генератор реализации фабрик интерфейсов на java (.java)
+//+ fctr.java
+<<generator>> fctr.java OBJECT IN %S
+//#UC START# *470321C1038Afor55115A7D0330*
+//#UC END# *470321C1038Afor55115A7D0330*
+; // fctr.java
+
+
+// Вторая интерфейсная секция стереотипа. Например реализация свойств класса.
+//+ intf2.pas
+<<generator>> intf2.pas OBJECT IN %S
+//R  
+//#UC START# *477398E501C0for55115A7D0330*
+//#UC END# *477398E501C0for55115A7D0330*
+; // intf2.pas
+
+
+// 3-я секция интерфейса. Например поле для свойства.
+//+ intf3.pas
+<<generator>> intf3.pas OBJECT IN %S
+//R  
+//#UC START# *4774D2A20372for55115A7D0330*
+//#UC END# *4774D2A20372for55115A7D0330*
+; // intf3.pas
+
+
+// Генератор файлов форм (.dfm)
+//+ dfm
+<<generator>> dfm OBJECT IN %S
+//R  
+//#UC START# *49F5795900ECfor55115A7D0330*
+//#UC END# *49F5795900ECfor55115A7D0330*
+; // dfm
+
+
+// Скрипты TC (.sd)
+//+ sd
+<<generator>> sd OBJECT IN %S
+//R  
+//#UC START# *4DE79AFC0030for55115A7D0330*
+//#UC END# *4DE79AFC0030for55115A7D0330*
+; // sd
+
+
+// Хак для [$281531116]
+//+ link_to_requests_hack
+<<generator>> link_to_requests_hack OBJECT IN %S
+//#UC START# *4E65F581015Afor55115A7D0330*
+//#UC END# *4E65F581015Afor55115A7D0330*
+; // link_to_requests_hack
+
+
+// Родные Delphi интерфейсы (.pas)
+//+ intf.pas
+<<generator>> intf.pas OBJECT IN %S
+//R  
+//#UC START# *470F1571031Cfor55115A7D0330*
+//#UC END# *470F1571031Cfor55115A7D0330*
+; // intf.pas
+
+
+// Реализация на Delphi(.pas)
+//+ impl.pas
+<<generator>> impl.pas OBJECT IN %S
+//R  
+//#UC START# *470F15B800CBfor55115A7D0330*
+//#UC END# *470F15B800CBfor55115A7D0330*
+; // impl.pas
+
+
+// Функции стереотипа
+//%f _st_space_key
+: st_space_key OBJECT IN %S
+//	SHD
+ 'SHD'
+
+//%f _wiki_up_print
+; // st_space_key
+
+: wiki_up_print OBJECT IN %S
+//	%S#[inherited][{"%S{NameForScript}"!="%S{!NameForScript}"}%f_up_prefix(%S) *NameForScript* = *%S{NameForScript}*
+ ?inherited
+ if ( ( %S get_up ( 'NameForScript' ) ) %!= ( %S get_up_def ( 'NameForScript' ) ) ) then
+ begin
+  [%f] up_prefix %( %S )% ' *NameForScript* = *'
+  %S get_up ( 'NameForScript' ) '*'
+//	]
+ end // if
+
+//%f _IsGlobalKeyword
+; // wiki_up_print
+
+: IsGlobalKeyword OBJECT IN %S
+// возвращаемый результат: boolean
+//#UC START# *55115AD200D8for55115A7D0330*
+//	true
+ true
+//#UC END# *55115AD200D8for55115A7D0330*
+; // IsGlobalKeyword
+
+
+//%f _NoForward
+: NoForward OBJECT IN %S
+// возвращаемый результат: boolean
+//#UC START# *55115FF8009Efor55115A7D0330*
+//	true
+ true
+//#UC END# *55115FF8009Efor55115A7D0330*
+; // NoForward
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Унаследованная реализация
+
+// реализация абстрактного стереотипа Документация::MDAGenerator
+// вывод описание авто-генерируемых методов в wiki
+//%f _wiki_up_add_gen
+: wiki_up_add_gen OBJECT IN %S
+//#UC START# *470484D50138for55115A7D0330*
+//#UC END# *470484D50138for55115A7D0330*
+; // wiki_up_add_gen
+
+
+//: ScriptKeywordsPack::Class::varworker::Operation
+end. // :: <<ScriptKeywordsPack>> <<globalkeyword>> ;
+
+implementation @ :: <<ScriptKeywordsPack>> <<varworker>> ;
+//= ScriptKeywordsPack::Class::keyword::Operation
+
+// Функции стереотипа
+//%f _st_space_key
+: st_space_key OBJECT IN %S
+//	SHD
+ 'SHD'
+
+//%f _IsVarWorker
+; // st_space_key
+
+: IsVarWorker OBJECT IN %S
+// возвращаемый результат: boolean
+//#UC START# *55128EF4009Cfor55128EAF022E*
+//	true
+ true
+//#UC END# *55128EF4009Cfor55128EAF022E*
+; // IsVarWorker
+
+
+//: ScriptKeywordsPack::Class::globalvarworker::Operation
+end. // :: <<ScriptKeywordsPack>> <<varworker>> ;
+
+implementation @ :: <<ScriptKeywordsPack>> <<globalvarworker>> ;
+//= ScriptKeywordsPack::Class::globalkeyword::Operation
+
+// Функции стереотипа
+//%f _st_space_key
+: st_space_key OBJECT IN %S
+//	SHD
+ 'SHD'
+
+//%f _IsVarWorker
+; // st_space_key
+
+: IsVarWorker OBJECT IN %S
+// возвращаемый результат: boolean
+//#UC START# *55128F060331for55128EDC028D*
+//	true
+ true
+//#UC END# *55128F060331for55128EDC028D*
+; // IsVarWorker
+
+
+//: ScriptKeywordsPack::Class::wordworker::Operation
+end. // :: <<ScriptKeywordsPack>> <<globalvarworker>> ;
+
+implementation @ :: <<ScriptKeywordsPack>> <<wordworker>> ;
+//= ScriptKeywordsPack::Class::varworker::Operation
+//= SupressNextImmediateHolder::Class
+
+// Функции стереотипа
+//%f _st_space_key
+: st_space_key OBJECT IN %S
+//	SHD
+ 'SHD'
+
+//%f _wiki_up_print
+; // st_space_key
+
+: wiki_up_print OBJECT IN %S
+//	%S%[ScriptKeywordsPack::Class::varworker::Operation]f_wiki_up_print()[{"%S{SupressNextImmediate}"!="%S{!SupressNextImmediate}"}%f_up_prefix(%S) *SupressNextImmediate* = *%S{SupressNextImmediate}*
+ call-inherited:: 'ScriptKeywordsPack::varworker::Operation' wiki_up_print %( )%
+ if ( ( %S get_up ( 'SupressNextImmediate' ) ) %!= ( %S get_up_def ( 'SupressNextImmediate' ) ) ) then
+ begin
+  [%f] up_prefix %( %S )% ' *SupressNextImmediate* = *'
+  %S get_up ( 'SupressNextImmediate' ) '*'
+//	]
+ end // if
+
+//%f _IsWordWorker
+; // wiki_up_print
+
+: IsWordWorker OBJECT IN %S
+// возвращаемый результат: boolean
+//#UC START# *5513DB4402E0for5513DB34012F*
+//	true
+ true
+//#UC END# *5513DB4402E0for5513DB34012F*
+; // IsWordWorker
+
+
+//: ScriptKeywordsPack::Class::globalwordworker::Operation
+end. // :: <<ScriptKeywordsPack>> <<wordworker>> ;
+
+implementation @ :: <<ScriptKeywordsPack>> <<globalwordworker>> ;
+//= ScriptKeywordsPack::Class::globalvarworker::Operation
+//= SupressNextImmediateHolder::Class
+
+// Функции стереотипа
+//%f _st_space_key
+: st_space_key OBJECT IN %S
+//	SHD
+ 'SHD'
+
+//%f _wiki_up_print
+; // st_space_key
+
+: wiki_up_print OBJECT IN %S
+//	%S%[ScriptKeywordsPack::Class::globalvarworker::Operation]f_wiki_up_print()[{"%S{SupressNextImmediate}"!="%S{!SupressNextImmediate}"}%f_up_prefix(%S) *SupressNextImmediate* = *%S{SupressNextImmediate}*
+ call-inherited:: 'ScriptKeywordsPack::globalvarworker::Operation' wiki_up_print %( )%
+ if ( ( %S get_up ( 'SupressNextImmediate' ) ) %!= ( %S get_up_def ( 'SupressNextImmediate' ) ) ) then
+ begin
+  [%f] up_prefix %( %S )% ' *SupressNextImmediate* = *'
+  %S get_up ( 'SupressNextImmediate' ) '*'
+//	]
+ end // if
+
+//%f _IsWordWorker
+; // wiki_up_print
+
+: IsWordWorker OBJECT IN %S
+// возвращаемый результат: boolean
+//#UC START# *5513DB6C026Ffor5513DB5502C7*
+//	true
+ true
+//#UC END# *5513DB6C026Ffor5513DB5502C7*
+; // IsWordWorker
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+end. // :: <<ScriptKeywordsPack>> <<globalwordworker>> ;
+
