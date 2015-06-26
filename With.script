@@ -17,7 +17,7 @@
   if NOT EVAL aCondition then
   begin
    VAR l_Msg
-   aMessage DO >>> l_Msg
+   aMessage DO &gt;&gt;&gt; l_Msg
    if ( l_Msg IsArray ) then
     ( false l_Msg strings:Cat ASSERTS )
    else
@@ -38,16 +38,16 @@
   ^L IN aName
 
   OBJECT VAR l_Self
-  aSelf |^ >>> l_Self
+  aSelf |^ &gt;&gt;&gt; l_Self
   
   STRING VAR l_Name
-  aName |N >>> l_Name
+  aName |N &gt;&gt;&gt; l_Name
   
   OBJECT VAR l_Res
-  l_Self %% l_Name >>> l_Res
+  l_Self %% l_Name &gt;&gt;&gt; l_Res
   
   ASSURE NOT ( l_Res pop:object:IsNil ) [ 'Не найдено поле: ' l_Self |N '.' l_Name ]
-  l_Res >>> Result
+  l_Res &gt;&gt;&gt; Result
  ; // :::
  
  : A
