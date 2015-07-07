@@ -4,7 +4,7 @@ USES
 
 // Тут описываем слова, необходимые для построения дерева разбора модели MDA вылитой в формат скрипта
 
-StereotypeStereotypeProducer @MDAClass ;
+StereotypeStereotypeProducer MDAClass ;
 // - базовый стереотип, через который всё выводится
 
 &lt;&lt;@MDAClass&gt;&gt; MDAClass ;
@@ -17,11 +17,11 @@ StereotypeStereotypeProducer @MDAClass ;
 &lt;&lt;@MDAClass&gt;&gt; MDAAbstractClass ;
 &lt;&lt;@MDAClass&gt;&gt; MDADependency ;
 &lt;&lt;@MDAClass&gt;&gt; MDAAttribute ;
-//StereotypeProducer MDAStateMachine
-//StereotypeProducer MDAState
-//StereotypeProducer MDATransition
-//StereotypeProducer MDATransitionAttribute
-//StereotypeProducer MDAStateAction
+//StereotypeProducer MDAStateMachine ;
+//StereotypeProducer MDAState ;
+//StereotypeProducer MDATransition ;
+//StereotypeProducer MDATransitionAttribute ;
+//StereotypeProducer MDAStateAction ;
 // - а эти парни вообще выводятся на модели из первых двух
 &lt;&lt;@MDAClass&gt;&gt; MDAOperation ;
 // - стереотип для создания типов операций
@@ -35,7 +35,7 @@ StereotypeStereotypeProducer @MDAClass ;
 
 &lt;&lt;MDAClass&gt;&gt; MDAGenerator ;
 
-StereotypeProducer mdalink
+StereotypeProducer mdalink ;
 
 &lt;&lt;mdalink&gt;&gt; group
 ;
@@ -60,12 +60,12 @@ StereotypeProducer mdalink
 
 //WordAlias &lt;&lt;param&gt;&gt; &lt;&lt;MDAParameter&gt;&gt;
 //&lt;&lt;MDAParameter&gt;&gt; param ;
-StereotypeProducer param
+StereotypeProducer param ;
 &lt;&lt;param&gt;&gt; in
 ;
 // - входной параметра (изменяться не может)
 
-StereotypeProducer up
+StereotypeProducer up ;
 // - стереотип для типов пользовательских свойств
 
 &lt;&lt;up&gt;&gt; bool 
@@ -93,27 +93,28 @@ StereotypeProducer up
 ;
 // - список загруженных элементов
 
-IMMEDIATE VOID CallerWorker %UID ^ IN anUID
+IMMEDIATE VOID CALLER operator %UID 
+  ^L IN anUID
  VAR l_S
- anUID DO =: l_S
+ anUID |^@ |N =: l_S
  // - получаем имя (значение) UID
  
  VAR l_VAR
  
- @ UIDS_LIST -&gt;^ l_S &gt;&gt;&gt; l_VAR
+ UIDS_LIST -&gt;^ l_S &gt;&gt;&gt; l_VAR
  // - добавляем переменную и снимем её со стека
  
  Caller -&gt; %U := l_VAR
  // - добавляем элементу переменную, указывающую на его UID
  l_VAR ^:= Caller
  // - присваиваем в переменную с UID ссылку на сам элемент
-;
+; // %UID
 // - идентификатор элемента
 
-NamedInitedVarProducer %DOCUMENTATION %Doc
+//NamedInitedVarProducer %DOCUMENTATION %Doc
 // - документация к элементу
 
-NamedAutolinkProducer %UIDLINK %U
+//NamedAutolinkProducer %UIDLINK %U
 // - ссылка на элемент по UID
 NamedAutolinkProducer %VALUE %V
 // - значение элемента
@@ -123,11 +124,17 @@ NamedWordProducer %VALUES %Vs
 NamedAutolinkProducer %TARGET %T
 // - цель (тип) элемента
 
-WORDWORKER U$
+/*{WORDWORKER U$
  VAR l_S
  WordToWork DO =: l_S
- @ UIDS_LIST -&gt;^ l_S DO
-;
+ UIDS_LIST -&gt;^ l_S DO
+; // U$}*/
+VOID IMMEDIATE operator U$
+  ^L IN anUID
+ VAR l_S
+ anUID |^@ |N =: l_S
+ UIDS_LIST -&gt;^ l_S CompileValue
+; // U$
 // - преобразование идентификатора элемента собственно к элементу
 
 WORDWORKER N$
@@ -137,7 +144,9 @@ WORDWORKER N$
 
 NamedWordProducer %DEPENDS %D
 // - список зависимостей
-//WordAlias %INCLUDES INCLUDES
+//IMMEDIATE OPERATOR %INCLUDES 
+// @ INCLUDES DO
+//; // %INCLUDES
 
 NamedWordProducer %REALIZES %OR
 // - список реализованных методов
@@ -162,7 +171,7 @@ WordAlias ATTRIBUTES %ATTRIBUTES
 NamedWordProducer %OPERATIONS %Ops
 // - список операций элемента
 
-NamedWordProducer %CHILDREN %C
+//NamedWordProducer %CHILDREN %C
 // - список дочерних элементов элемента
 
 NamedWordProducer %META %UPs
@@ -172,7 +181,7 @@ NamedWordProducer %META %UPs
 InitedVarProducer %upv
 // - значение пользовательского свойства
 
-BOOLEAN FUNCTION NotValid IN %S
+/*{BOOLEAN FUNCTION NotValid IN %S
  if ( %S IsVoid ) then
   ( Result := true )
  else
@@ -180,16 +189,16 @@ BOOLEAN FUNCTION NotValid IN %S
   ( Result := true )
  else 
   ( Result := false )
-;
+;}*/
 
-STRING FUNCTION |N IN %S
+/*{STRING FUNCTION |N IN %S
  if ( %S NotValid ) then
   ( Result := '' )
  else
   ( Result := ( %S pop:Word:Name ) )
-;
+;}*/
 
-OBJECT FUNCTION %ST IN %S
+/*{OBJECT FUNCTION %ST IN %S
  if ( %S NotValid ) then
  (
   Result := nil
@@ -198,30 +207,30 @@ OBJECT FUNCTION %ST IN %S
  (
   Result := ( %S pop:Word:Producer )
  ) 
-;
+;}*/
 
-STRING FUNCTION |S IN %S
- %S %ST pop:Word:Name =: Result
-;
+/*{STRING FUNCTION |S IN %S
+ %S %ST |N =: Result
+;}*/
 
-FUNCTION -&gt;0 OBJECT IN %S
+/*{FUNCTION -&gt;0 OBJECT IN %S
  Result := ( ( 0 %S pop:Word:GetParam ) DO )
-; // -&gt;0
+; // -&gt;0}*/
 
-STRING CallerWorker %SN
+STRING CALLER operator %SN
  Result := ( Caller -&gt;0 |N )
 ;
 
-STRING CallerWorker %SS
+STRING CALLER operator %SS
  Result := ( Caller -&gt;0 |S )
 ;
 
-//IMMEDIATE CallerWorker [EXPORTED]
+//IMMEDIATE CALLER operator [EXPORTED]
 //;
 // - похоже - пока не понадобилось, ввёл вместо него [EXPORT]
 
 IMMEDIATE operator [EXPORT]
-  ^ IN WordToWork
+  ^ REFERENCE IN WordToWork
  if ( WordToWork |S '&lt;&lt;MDAUtilityPack&gt;&gt;' SameText ! ) then
  (
  // - пока не экспортируем &lt;&lt;MDAUtilityPack'&gt;&gt; - не очень пока понятно - как, куда и зачем это делать
