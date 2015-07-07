@@ -1,0 +1,260 @@
+USES
+ 'W:\shared\models\NewSchool\Templates\Core.tpl.script'
+;
+
+// Тут описываем слова, необходимые для построения дерева разбора модели MDA вылитой в формат скрипта
+
+StereotypeStereotypeProducer @MDAClass ;
+// - базовый стереотип, через который всё выводится
+
+<<@MDAClass>> MDAClass ;
+<<@MDAClass>> MDACategory ;
+// - заглушки для начальной раскрутки
+
+<<MDACategory>> Project ;
+// - проект
+
+<<@MDAClass>> MDAAbstractClass ;
+<<@MDAClass>> MDADependency ;
+<<@MDAClass>> MDAAttribute ;
+//StereotypeProducer MDAStateMachine
+//StereotypeProducer MDAState
+//StereotypeProducer MDATransition
+//StereotypeProducer MDATransitionAttribute
+//StereotypeProducer MDAStateAction
+// - а эти парни вообще выводятся на модели из первых двух
+<<@MDAClass>> MDAOperation ;
+// - стереотип для создания типов операций
+
+<<MDACategory>> MDATemplates ;
+<<MDACategory>> MDALibrary ;
+// - MDA-библиотека
+<<MDACategory>> MDALayer ;
+<<MDAClass>> MDAUtilityPack ;
+// - набор утилитных функций MDA
+
+<<MDAClass>> MDAGenerator ;
+
+StereotypeProducer mdalink
+
+<<mdalink>> group
+;
+<<mdalink>> include
+;
+<<mdalink>> main_hierarchy
+;
+
+<<MDAOperation>> generator
+;
+// - генератор элементов модели
+<<MDAOperation>> transformator
+;
+// - трансформатор (аналог CASE в mda-генераторе)
+<<MDAOperation>> Operation
+;
+// - операция (любая, что MDA, что нет - любая операция без стереотипа)
+
+<<@MDAClass>> MDAParameter
+;
+// - стереотип параметра
+
+//WordAlias <<param>> <<MDAParameter>>
+//<<MDAParameter>> param ;
+StereotypeProducer param
+<<param>> in
+;
+// - входной параметра (изменяться не может)
+
+StereotypeProducer up
+// - стереотип для типов пользовательских свойств
+
+<<up>> bool 
+;
+// - булево значение UP
+<<up>> string 
+;
+// - строковое значение UP
+<<up>> list 
+;
+// - значение UP из заранее заданного списка значений
+<<up>> color 
+;
+<<up>> tribool 
+;
+// - трёхпозиционное значение UP undefined/false/true
+<<up>> text 
+;
+
+<<MDAClass>> MDAReport ;
+<<MDAOperation>> report
+;
+
+: UIDS_LIST
+;
+// - список загруженных элементов
+
+IMMEDIATE VOID CallerWorker %UID ^ IN anUID
+ VAR l_S
+ anUID DO =: l_S
+ // - получаем имя (значение) UID
+ 
+ VAR l_VAR
+ 
+ @ UIDS_LIST ->^ l_S >>> l_VAR
+ // - добавляем переменную и снимем её со стека
+ 
+ Caller -> %U := l_VAR
+ // - добавляем элементу переменную, указывающую на его UID
+ l_VAR ^:= Caller
+ // - присваиваем в переменную с UID ссылку на сам элемент
+;
+// - идентификатор элемента
+
+NamedInitedVarProducer %DOCUMENTATION %Doc
+// - документация к элементу
+
+NamedAutolinkProducer %UIDLINK %U
+// - ссылка на элемент по UID
+NamedAutolinkProducer %VALUE %V
+// - значение элемента
+NamedWordProducer %VALUES %Vs
+// - список возможных значений
+
+NamedAutolinkProducer %TARGET %T
+// - цель (тип) элемента
+
+WORDWORKER U$
+ VAR l_S
+ WordToWork DO =: l_S
+ @ UIDS_LIST ->^ l_S DO
+;
+// - преобразование идентификатора элемента собственно к элементу
+
+WORDWORKER N$
+ WordToWork DO
+;
+// - преобразование "значения" элемента собственно к элементу (если это возможно), иначе так и возвращается значение
+
+NamedWordProducer %DEPENDS %D
+// - список зависимостей
+//WordAlias %INCLUDES INCLUDES
+
+NamedWordProducer %REALIZES %OR
+// - список реализованных методов
+NamedWordProducer %OVERRIDES %OO
+// - список перекрытых методов
+
+NamedWordProducer %PARAMETERS %Pars
+// - список параметров
+
+NamedWordProducer %INDEXES %Idxs
+// - список индексов
+WordProducer %INDEX
+// - отдельный индекс
+
+NamedWordProducer %LINKS %Lnks
+// - список связей элемента
+
+NamedWordProducer %ATTRIBUTES %Attrs
+// - список атрибутов элемента
+WordAlias ATTRIBUTES %ATTRIBUTES
+
+NamedWordProducer %OPERATIONS %Ops
+// - список операций элемента
+
+NamedWordProducer %CHILDREN %C
+// - список дочерних элементов элемента
+
+NamedWordProducer %META %UPs
+// - список пользовательских свойств
+
+//VarProducer upv
+InitedVarProducer %upv
+// - значение пользовательского свойства
+
+BOOLEAN FUNCTION NotValid IN %S
+ if ( %S IsVoid ) then
+  ( Result := true )
+ else
+ if ( %S pop:object:IsNil ) then
+  ( Result := true )
+ else 
+  ( Result := false )
+;
+
+STRING FUNCTION |N IN %S
+ if ( %S NotValid ) then
+  ( Result := '' )
+ else
+  ( Result := ( %S pop:Word:Name ) )
+;
+
+OBJECT FUNCTION %ST IN %S
+ if ( %S NotValid ) then
+ (
+  Result := nil
+ ) 
+ else
+ (
+  Result := ( %S pop:Word:Producer )
+ ) 
+;
+
+STRING FUNCTION |S IN %S
+ %S %ST pop:Word:Name =: Result
+;
+
+FUNCTION ->0 OBJECT IN %S
+ Result := ( ( 0 %S pop:Word:GetParam ) DO )
+; // ->0
+
+STRING CallerWorker %SN
+ Result := ( Caller ->0 |N )
+;
+
+STRING CallerWorker %SS
+ Result := ( Caller ->0 |S )
+;
+
+//IMMEDIATE CallerWorker [EXPORTED]
+//;
+// - похоже - пока не понадобилось, ввёл вместо него [EXPORT]
+
+IMMEDIATE operator [EXPORT]
+  ^ IN WordToWork
+ if ( WordToWork |S '<<MDAUtilityPack>>' SameText ! ) then
+ (
+ // - пока не экспортируем <<MDAUtilityPack'>> - не очень пока понятно - как, куда и зачем это делать
+  WordToWork pop:Word:PublicateInMainDictionary
+ )
+;
+// - экспортирует указанное слово в основной словарь
+
+IMMEDIATE operator implementation
+ ^ IN WordToWork
+// - открывает секцию реализации стереотипа, все методы внутри секции относятся к указанному после вызвавшего слова стереотипу
+
+//
+// Пример:
+// implementation @ <<Unit>>
+// 
+//  : NewMethod
+//   'Hello' . x1
+//  ;
+//  
+// end.
+//
+
+ Ctx:PushCompiler
+ Ctx:PushFinder
+ VAR l_NewCompiler
+ WordToWork DO =: l_NewCompiler
+ l_NewCompiler pop:Compiler:SetToCtx
+ l_NewCompiler pop:Finder:SetToCtx
+;
+
+IMMEDIATE operator end.
+// - закрывает секцию реализации стереотипа
+ pop:Finder:SetToCtx
+ pop:Compiler:SetToCtx
+;
