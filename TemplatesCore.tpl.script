@@ -7,86 +7,86 @@ USES
 StereotypeStereotypeProducer @MDAClass ;
 // - базовый стереотип, через который всё выводится
 
-<<@MDAClass>> MDAClass ;
-<<@MDAClass>> MDACategory ;
+&lt;&lt;@MDAClass&gt;&gt; MDAClass ;
+&lt;&lt;@MDAClass&gt;&gt; MDACategory ;
 // - заглушки для начальной раскрутки
 
-<<MDACategory>> Project ;
+&lt;&lt;MDACategory&gt;&gt; Project ;
 // - проект
 
-<<@MDAClass>> MDAAbstractClass ;
-<<@MDAClass>> MDADependency ;
-<<@MDAClass>> MDAAttribute ;
+&lt;&lt;@MDAClass&gt;&gt; MDAAbstractClass ;
+&lt;&lt;@MDAClass&gt;&gt; MDADependency ;
+&lt;&lt;@MDAClass&gt;&gt; MDAAttribute ;
 //StereotypeProducer MDAStateMachine
 //StereotypeProducer MDAState
 //StereotypeProducer MDATransition
 //StereotypeProducer MDATransitionAttribute
 //StereotypeProducer MDAStateAction
 // - а эти парни вообще выводятся на модели из первых двух
-<<@MDAClass>> MDAOperation ;
+&lt;&lt;@MDAClass&gt;&gt; MDAOperation ;
 // - стереотип для создания типов операций
 
-<<MDACategory>> MDATemplates ;
-<<MDACategory>> MDALibrary ;
+&lt;&lt;MDACategory&gt;&gt; MDATemplates ;
+&lt;&lt;MDACategory&gt;&gt; MDALibrary ;
 // - MDA-библиотека
-<<MDACategory>> MDALayer ;
-<<MDAClass>> MDAUtilityPack ;
+&lt;&lt;MDACategory&gt;&gt; MDALayer ;
+&lt;&lt;MDAClass&gt;&gt; MDAUtilityPack ;
 // - набор утилитных функций MDA
 
-<<MDAClass>> MDAGenerator ;
+&lt;&lt;MDAClass&gt;&gt; MDAGenerator ;
 
 StereotypeProducer mdalink
 
-<<mdalink>> group
+&lt;&lt;mdalink&gt;&gt; group
 ;
-<<mdalink>> include
+&lt;&lt;mdalink&gt;&gt; include
 ;
-<<mdalink>> main_hierarchy
+&lt;&lt;mdalink&gt;&gt; main_hierarchy
 ;
 
-<<MDAOperation>> generator
+&lt;&lt;MDAOperation&gt;&gt; generator
 ;
 // - генератор элементов модели
-<<MDAOperation>> transformator
+&lt;&lt;MDAOperation&gt;&gt; transformator
 ;
 // - трансформатор (аналог CASE в mda-генераторе)
-<<MDAOperation>> Operation
+&lt;&lt;MDAOperation&gt;&gt; Operation
 ;
 // - операция (любая, что MDA, что нет - любая операция без стереотипа)
 
-<<@MDAClass>> MDAParameter
+&lt;&lt;@MDAClass&gt;&gt; MDAParameter
 ;
 // - стереотип параметра
 
-//WordAlias <<param>> <<MDAParameter>>
-//<<MDAParameter>> param ;
+//WordAlias &lt;&lt;param&gt;&gt; &lt;&lt;MDAParameter&gt;&gt;
+//&lt;&lt;MDAParameter&gt;&gt; param ;
 StereotypeProducer param
-<<param>> in
+&lt;&lt;param&gt;&gt; in
 ;
 // - входной параметра (изменяться не может)
 
 StereotypeProducer up
 // - стереотип для типов пользовательских свойств
 
-<<up>> bool 
+&lt;&lt;up&gt;&gt; bool 
 ;
 // - булево значение UP
-<<up>> string 
+&lt;&lt;up&gt;&gt; string 
 ;
 // - строковое значение UP
-<<up>> list 
+&lt;&lt;up&gt;&gt; list 
 ;
 // - значение UP из заранее заданного списка значений
-<<up>> color 
+&lt;&lt;up&gt;&gt; color 
 ;
-<<up>> tribool 
+&lt;&lt;up&gt;&gt; tribool 
 ;
 // - трёхпозиционное значение UP undefined/false/true
-<<up>> text 
+&lt;&lt;up&gt;&gt; text 
 ;
 
-<<MDAClass>> MDAReport ;
-<<MDAOperation>> report
+&lt;&lt;MDAClass&gt;&gt; MDAReport ;
+&lt;&lt;MDAOperation&gt;&gt; report
 ;
 
 : UIDS_LIST
@@ -100,10 +100,10 @@ IMMEDIATE VOID CallerWorker %UID ^ IN anUID
  
  VAR l_VAR
  
- @ UIDS_LIST ->^ l_S >>> l_VAR
+ @ UIDS_LIST -&gt;^ l_S &gt;&gt;&gt; l_VAR
  // - добавляем переменную и снимем её со стека
  
- Caller -> %U := l_VAR
+ Caller -&gt; %U := l_VAR
  // - добавляем элементу переменную, указывающую на его UID
  l_VAR ^:= Caller
  // - присваиваем в переменную с UID ссылку на сам элемент
@@ -126,7 +126,7 @@ NamedAutolinkProducer %TARGET %T
 WORDWORKER U$
  VAR l_S
  WordToWork DO =: l_S
- @ UIDS_LIST ->^ l_S DO
+ @ UIDS_LIST -&gt;^ l_S DO
 ;
 // - преобразование идентификатора элемента собственно к элементу
 
@@ -204,16 +204,16 @@ STRING FUNCTION |S IN %S
  %S %ST pop:Word:Name =: Result
 ;
 
-FUNCTION ->0 OBJECT IN %S
+FUNCTION -&gt;0 OBJECT IN %S
  Result := ( ( 0 %S pop:Word:GetParam ) DO )
-; // ->0
+; // -&gt;0
 
 STRING CallerWorker %SN
- Result := ( Caller ->0 |N )
+ Result := ( Caller -&gt;0 |N )
 ;
 
 STRING CallerWorker %SS
- Result := ( Caller ->0 |S )
+ Result := ( Caller -&gt;0 |S )
 ;
 
 //IMMEDIATE CallerWorker [EXPORTED]
@@ -222,9 +222,9 @@ STRING CallerWorker %SS
 
 IMMEDIATE operator [EXPORT]
   ^ IN WordToWork
- if ( WordToWork |S '<<MDAUtilityPack>>' SameText ! ) then
+ if ( WordToWork |S '&lt;&lt;MDAUtilityPack&gt;&gt;' SameText ! ) then
  (
- // - пока не экспортируем <<MDAUtilityPack'>> - не очень пока понятно - как, куда и зачем это делать
+ // - пока не экспортируем &lt;&lt;MDAUtilityPack'&gt;&gt; - не очень пока понятно - как, куда и зачем это делать
   WordToWork pop:Word:PublicateInMainDictionary
  )
 ;
@@ -236,7 +236,7 @@ IMMEDIATE operator implementation
 
 //
 // Пример:
-// implementation @ <<Unit>>
+// implementation @ &lt;&lt;Unit&gt;&gt;
 // 
 //  : NewMethod
 //   'Hello' . x1
