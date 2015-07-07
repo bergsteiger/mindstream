@@ -1,0 +1,14 @@
+Тест K379243728
+ 
+ Выполнить (
+  "Открыть диалог 'О программе' и выполнить" (
+   OBJECT VAR "О программе"
+   focused:control:push pop:Control:GetAnotherParentForm =: "О программе"
+   контрол::LoginLabel "О программе" pop:Control:FindControlByName pop:Control:Caption CutNumbers .
+   контрол::UserNameLabel "О программе" pop:Control:FindControlByName pop:Control:Caption CutNumbers .
+   контрол::EMailLabel "О программе" pop:Control:FindControlByName pop:Control:Caption .
+  )
+ )
+;
+
+K379243728

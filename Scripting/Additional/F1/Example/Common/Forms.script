@@ -1,0 +1,23 @@
+USES
+ WordsTranslation.script
+ @\SysUtils.script
+ @\Forms.script
+;
+
+OBJECT FUNCTION "Найти окно по имени для контрола" STRING IN "Имя окна" OBJECT IN "Контрол"
+ "Контрол" =: Result
+ VAR "Имя класса главного окна"
+ 'T' "Имя окна" Cat =: "Имя класса главного окна"
+
+ ПОКА ( Result pop:object:ClassName "НЕ РАВНО" "Имя класса главного окна" )
+ BEGIN
+  Result pop:control:GetAnotherParentForm =: Result
+  Result pop:object:IsNil ! 
+   [ 'Главное окно не найдено: ' "Имя окна" ' для ' "Контрол" pop:component:Name ':' "Контрол" pop:object:ClassName ] strings:Cat 
+    ASSERTS
+ END
+; // "Найти окно по имени для контрола"
+
+OBJECT FUNCTION "Найти окно по имени" STRING IN "Имя окна"
+ "Найти окно по имени {("Имя окна")} для контрола {( focused:control:push )}" =: Result
+; // "Найти окно по имени"

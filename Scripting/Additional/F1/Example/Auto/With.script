@@ -1,0 +1,26 @@
+Тест WithTest
+
+ : A
+  : B
+   : C
+    'Hello' .
+   ;
+   20 .
+  ;
+  10 .
+ ;
+  
+ :: A B ;
+ :: A B C ;
+  
+ @ :: A B ; DO
+ @ :: A B C ; DO
+  
+ WordAliasByRef theB @ :: A B ;
+ WordAliasByRef theC @ :: A B C ;
+  
+ theB
+ theC
+;
+
+WithTest

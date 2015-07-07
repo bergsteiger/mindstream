@@ -1,0 +1,208 @@
+{
+	"type": "msDiagramm.TmsDiagramm",
+	"id": 1,
+	"fields": {
+		"fName": "Диаграмма №3",
+		"f_Items": [{
+			"type": "msTriangleDirectionRight.TmsTriangleDirectionRight",
+			"id": 2,
+			"fields": {
+				"FStartPoint": [[148,
+				1678],
+				148,
+				1678],
+				"f_ShapeClassName": "TriangleDirectionRight",
+				"f_Name": "TriangleDirectionRight1",
+				"f_UID": [[1,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 3,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msTriangleDirectionRight.TmsTriangleDirectionRight",
+			"id": 4,
+			"fields": {
+				"FStartPoint": [[666,
+				1462],
+				666,
+				1462],
+				"f_ShapeClassName": "TriangleDirectionRight",
+				"f_Name": "TriangleDirectionRight2",
+				"f_UID": [[2,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 5,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msTriangleDirectionRight.TmsTriangleDirectionRight",
+			"id": 6,
+			"fields": {
+				"FStartPoint": [[239,
+				1519],
+				239,
+				1519],
+				"f_ShapeClassName": "TriangleDirectionRight",
+				"f_Name": "TriangleDirectionRight3",
+				"f_UID": [[3,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 7,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msTriangleDirectionRight.TmsTriangleDirectionRight",
+			"id": 8,
+			"fields": {
+				"FStartPoint": [[721,
+				1878],
+				721,
+				1878],
+				"f_ShapeClassName": "TriangleDirectionRight",
+				"f_Name": "TriangleDirectionRight4",
+				"f_UID": [[4,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 9,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msTriangleDirectionRight.TmsTriangleDirectionRight",
+			"id": 10,
+			"fields": {
+				"FStartPoint": [[355,
+				1394],
+				355,
+				1394],
+				"f_ShapeClassName": "TriangleDirectionRight",
+				"f_Name": "TriangleDirectionRight5",
+				"f_UID": [[5,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 11,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msTriangleDirectionRight.TmsTriangleDirectionRight",
+			"id": 12,
+			"fields": {
+				"FStartPoint": [[26,
+				1511],
+				26,
+				1511],
+				"f_ShapeClassName": "TriangleDirectionRight",
+				"f_Name": "TriangleDirectionRight6",
+				"f_UID": [[6,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 13,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 14,
+			"fields": {
+				"f_UIDLeft": [[1,
+				0]],
+				"f_UIDRight": [[2,
+				0]],
+				"f_FinishPoint": [[656,
+				1472],
+				656,
+				1472],
+				"FStartPoint": [[158,
+				1668],
+				158,
+				1668],
+				"f_ShapeClassName": "Connector",
+				"f_Name": "Connector7",
+				"f_UID": [[7,
+				0]],
+				"f_Items": []
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 15,
+			"fields": {
+				"f_UIDLeft": [[3,
+				0]],
+				"f_UIDRight": [[4,
+				0]],
+				"f_FinishPoint": [[711,
+				1888],
+				711,
+				1888],
+				"FStartPoint": [[249,
+				1509],
+				249,
+				1509],
+				"f_ShapeClassName": "Connector",
+				"f_Name": "Connector7",
+				"f_UID": [[8,
+				0]],
+				"f_Items": []
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 16,
+			"fields": {
+				"f_UIDLeft": [[5,
+				0]],
+				"f_UIDRight": [[6,
+				0]],
+				"f_FinishPoint": [[16,
+				1521],
+				16,
+				1521],
+				"FStartPoint": [[365,
+				1384],
+				365,
+				1384],
+				"f_ShapeClassName": "Connector",
+				"f_Name": "Connector7",
+				"f_UID": [[9,
+				0]],
+				"f_Items": []
+			}
+		}]
+	}
+}

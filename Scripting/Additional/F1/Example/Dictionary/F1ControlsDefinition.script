@@ -1,0 +1,89 @@
+// - описание контролов присутствующих на разных формах F1
+// В основном это просто маппинг на слова словаря получающиеся из модели и VCM
+
+// - текст документа в прецеденте "Работа с документом"
+WordAlias DocumentText контрол::Text
+WordAlias DocumentText:push контрол::Text:push
+
+CONST DocumentFlash 'Flash'
+// - флеш-документ
+
+// - контрол списка в прецеденте "Работа со списком"
+WordAlias tvList контрол::tvList
+WordAlias tvList:push контрол::tvList:push
+
+CONST remListModified 'remListModified'
+// - медаль сигнализирующая об изменённости списка
+
+: FiltersList
+// - список фильтров во вкладке "Фильтры" прецедента "Работа со списком"
+ контрол::FiltersList
+;
+
+: ChangesBetweenEditonsForm
+// - Форма "Просмотр изменённых фрагментов"
+ форма::ChangesBetweenEditons
+;
+
+: "Жёлтая медаль, предупреждающая об изменённости списка" контрол::remListModified ;
+
+: "Исключение машины времени" контрол::WarnTimeMachineException ;
+
+: "Красная медаль МВ" контрол::WarnTimeMachineException ;
+
+: "Машина времени включена" контрол::WarnTimeMachineOn ;
+
+: "Зелёная медаль МВ" контрол::WarnTimeMachineOn ;
+
+: "Зелёная медаль МВ в списке" контрол::remTimeMachineWarning ;
+
+: "Жёлтая медаль с восклицательным знаком" контрол::WarnJuror ;
+
+: "Жёлтая медаль с часами" контрол::WarnRedaction ;
+
+: "Синяя медаль о наличии консультаций" контрол::remUnreadConsultations ;
+
+: "Синяя медаль с конвертом" "Синяя медаль о наличии консультаций" ;
+
+: "Красная медаль с крестом" контрол::WarnIsAbolished ;
+
+: "Красная медаль с вопросительным знаком" контрол::WarnPreActive ;
+
+: "Синяя медаль МГО" контрол::WarnInactualDocument ;
+
+: "Медаль отфильтрованного списка" контрол::remListFiltered ;
+
+: "Синяя медаль документов на контроле" контрол::ControlledChangingWarning ;
+
+: "Синяя медаль, сообщающая, что документ изменился" контрол::WarnOnControl ;
+
+: "Красная медаль, сообщающая, что онлайн-проверка документов отключена" контрол::remOnlineDead ;
+
+: "Жёлтая медаль МВ" контрол::WarnTimeMachineWarning ;
+
+: dftRelatedDoc тип_формы::dftRelatedDoc ;
+: dftDocSynchroView тип_формы::dftDocSynchroView ;
+: dftAnnotation тип_формы::dftAnnotation ;
+: dftTranslation тип_формы::dftTranslation ;
+
+: "Красная медаль с восклицательным знаком" контрол::OldBaseWarning ;
+
+CONST Простое_предупреждение 0
+
+CONST "Форма документа" 'TextForm'
+
+: Форма_документа "Форма документа" ;
+
+CONST "Форма списка" 'efList'
+
+CONST "Информация о пустом списке" 'EmptyListEditor'
+
+CONST FM_OPEN 2
+// - узел дерева открыт
+
+CONST nfExpanded $0008
+
+: "Узел дерева открыт" 
+ nfExpanded
+ //FM_OPEN 
+;

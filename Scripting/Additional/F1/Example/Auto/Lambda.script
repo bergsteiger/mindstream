@@ -1,0 +1,23 @@
+Тест LambdaTest
+
+ : Worker
+  DO
+ ;
+ 
+ : Worker1
+  DO .
+ ;
+ 
+ : Worker3 IN aFunc
+  aFunc DO
+ ;
+ 
+ @ ( 2 5 . . ) Worker
+  
+ @ 10 Worker1
+ @ 'Hello' Worker1
+  
+ @ ( 2 5 . . ) Worker3
+;
+
+LambdaTest

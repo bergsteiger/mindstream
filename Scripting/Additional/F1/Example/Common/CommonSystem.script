@@ -1,0 +1,278 @@
+USES
+ WordsTranslation.script
+ @\Controls.script
+ @\ExCtrls.script
+ @\Windows.script
+ @\SysUtils.script
+ ProjectSpecific.script
+;
+
+INTEGER FUNCTION "Количество элементов статусбара окна" OBJECT IN aWindow
+ OBJECT VAR "Статусбар"
+ контрол::StatusBar aWindow pop:control:FindControlByName =: "Статусбар"
+ "Статусбар" pop:object:IsNil ! 'Не удалось найти на статусбаре этот элемент ' ASSERTS
+ "Статусбар" pop:control:ControlCount =: Result
+; // "Количество элементов статусбара"
+
+OBJECT FUNCTION "Элемент статусбара окна" INTEGER IN aItem OBJECT IN aWindow
+ OBJECT VAR "Статусбар"
+ контрол::StatusBar aWindow pop:control:FindControlByName =: "Статусбар"
+ aItem "Статусбар" StatusBar:OrderedControl =: Result
+  Result pop:object:IsNil ! 'Не удалось найти на статусбаре этот элемент ' ASSERTS
+;
+
+PROCEDURE "Выполнить с новым окном Гаранта и переключиться на предыдущее окно" IN aProc
+
+ VAR l_Main
+ l_Main := 0
+ 
+ l_Main := "Сохранить активное окно"
+ ( l_Main НЕРАВНО 0 ) 'Не удалось сохранить активное окно' ASSERTS
+ TRY
+  "Открыть новое окно гаранта"
+  "Дождаться переключения вкладок"
+  "Дать системе перерисоваться"
+  aProc DO
+ FINALLY
+  l_Main "Восстановить активное окно"
+ END
+; // "Выполнить с новым окном Гаранта и переключиться на предыдущее окно"
+
+PROCEDURE "Открыть новое окно Гаранта. Переключиться на старое. Выполнить и закрыть новое окно" IN aProc
+
+ VAR l_Main 
+ l_Main := 0
+ 
+ : Действия
+  l_Main := "Сохранить активное окно"
+ ; // Действия
+ 
+ "Выполнить {(@ Действия)} с новым окном Гаранта и переключиться на предыдущее окно"
+ TRY
+  OnTest
+  aProc DO
+ FINALLY
+  l_Main !=0 'Не удалось запомнить активное окно' ASSERTS
+  l_Main "Закрыть сохраненное окно"
+ END
+; // "Открыть новое окно Гаранта. Переключиться на старое. Выполнить и закрыть новое окно"
+
+PROCEDURE "Сравнить статусбар окна с эталоном" OBJECT IN aWindow
+ OBJECT VAR "Панель статусбара"
+ CONST cSeparator 'Загрузка документа'
+ STRING VAR str1
+ STRING VAR str2
+ INTEGER VAR item
+ 0 >>> item
+ "Дождаться переключения вкладок"
+ "Количество элементов статусбара окна {(aWindow)}" 1 - LOOP (
+ "Элемент {(item)} статусбара окна {(aWindow)}" =: "Панель статусбара"
+ Если ( "Панель статусбара" "Узнать, виден ли контрол" ) то 
+  ( "Панель статусбара" pop:control:Caption =: str1
+   Если ( str1 "НЕ РАВНО" '' ) то
+    ( str1 cSeparator string:Split =: str2 =: str1
+    Если ( str2 "НЕ РАВНО" '' ) то
+     ( 
+    str2 '[' '' string:Replace ']' '' string:Replace >>> str2 
+    str2 sysutils:ExtractFileName >>> str2
+    [ str1 cSeparator ' ' str2 ] strings:Cat >>> str1
+     )
+      Если ( "Панель статусбара" pop:control:Enabled ) то
+       ( str1 . )
+      иначе
+       ( str1 ' [Запрещён]' Cat . )
+   )
+  ) 
+  ++! item )
+; // "Сравнить статусбар окна с эталоном"
+
+PROCEDURE "Сравнить статусбар с эталоном"
+ "Сравнить статусбар окна {( "Главное окно" )} с эталоном"
+; // "Сравнить статусбар с эталоном"
+
+PROCEDURE "Сравнить настройки шрифтов с эталоном для контрола" OBJECT IN aControl
+  'Шрифт: ' aControl "Получить шрифт контрола" "Узнать название" ToPrintable Cat .
+  "Отделить текст в эталоне"
+  'Размер шрифта: ' aControl "Получить шрифт контрола" "Узнать размер" ToPrintable Cat .
+  "Отделить текст в эталоне"
+  'Цвет шрифта: ' aControl "Получить шрифт контрола" "Узнать цвет" ToPrintable Cat .
+  "Отделить текст в эталоне"
+  'Шрифт наклонный: ' aControl "Получить шрифт контрола" "Узнать наклонный ли шрифт?" ToPrintable Cat .
+  "Отделить текст в эталоне"
+  'Шрифт жирный: ' aControl "Получить шрифт контрола" "Узнать жирный ли шрифт?" ToPrintable Cat .
+  "Отделить текст в эталоне" 
+  'Подчеркнутый шрифт: ' aControl "Получить шрифт контрола" "Узнать подчеркнутый ли шрифт?" ToPrintable Cat .
+  "Отделить текст в эталоне" 
+  'Перечеркнутый шрифт: ' aControl "Получить шрифт контрола" "Узнать перечеркнутый ли шрифт?" ToPrintable Cat .
+; // "Сравнить настройки шрифтов с эталоном для контрола"
+
+PROCEDURE "Выставить форме размеры и " INTEGER IN formW INTEGER IN formH OBJECT IN aProc
+ "Уменьшить окно {("Главное окно")}"
+ formW "Главное окно" "Установить ширину"
+ formH "Главное окно" "Установить высоту"
+ TRY
+  aProc DO
+ FINALLY
+  "Развернуть окно {("Главное окно")}"
+ END
+;
+
+PROCEDURE "Ставим форме размеры и " STRING IN aForm INTEGER IN formW INTEGER IN formH OBJECT IN aProc
+ OBJECT VAR Parent
+ "Найти окно по имени {(aForm)}" >>> Parent
+ INTEGER VAR W
+ INTEGER VAR H
+ Parent "Померить ширину" >>> W
+ Parent "Померить высоту" >>> H
+ formW Parent "Установить ширину"
+ formH Parent "Установить высоту"
+ "Дождаться переключения вкладок"
+ TRY
+  aProc DO
+ FINALLY
+  W Parent "Установить ширину"
+  H Parent "Установить высоту"
+ END
+;
+
+PROCEDURE "Сравнить содержимое тулбаров с эталоном расширенно" BOOLEAN IN aCheckEnabled
+
+ PROCEDURE Действия OBJECT IN aObj
+  ( aObj ЯВЛЯЕТСЯ class::TvcmToolbar ) ? (
+   ( aObj "Узнать, виден ли контрол" И ( aObj pop:control:ControlCount БОЛЬШЕ 1 ) ) ? (
+    aObj .
+    'Order = ' 'DockRow' aObj pop:object:GetOrdProp IntToStr Cat .
+    '---------------' .
+    aObj EnumerateControls ( OBJECT IN aControl
+    ( aControl "НЕ ЯВЛЯЕТСЯ" class::Ttb97MoreButton ) ? (
+      aControl .
+      ( aControl "НЕ ЯВЛЯЕТСЯ" class::TvcmComboBox ) ? (
+       aControl pop:control:Caption .
+       aCheckEnabled ? ( 'Активность:' aControl "Убедиться, что контрол активен"  ToPrintable Cat . ) 
+      )
+     )
+    )
+    '' .
+   )
+  )
+ ;
+
+ PROCEDURE "Получить содержимое тулбаров"
+  "Главное окно" "выполнить для всех контролов" Действия
+ ;
+ OnTest
+ "Выставить форме размеры {(1400 900)} и {(@ "Получить содержимое тулбаров")}"
+; // "Сравнить содержимое тулбаров с эталоном расширенно"
+
+: "Сравнить содержимое тулбаров с эталоном"
+ "Сравнить содержимое тулбаров с эталоном расширенно {(false)}"
+;
+
+: "Сравнить содержимое тулбаров с эталоном полностью"
+ "Сравнить содержимое тулбаров с эталоном расширенно {(true)}"
+;
+
+: "Перебрать иерархию вложенности контролов" OBJECT IN aControl IN aProc
+ ПОКА ( aControl pop:object:IsNil ! )
+ BEGIN
+  aControl aProc DO
+  aControl "Родительский объект" >>> aControl
+ END
+; // "Перебрать иерархию вложенности контролов"
+
+PROCEDURE "Напечатать иерархию вложенности контролов" OBJECT IN aControl
+
+ : "Печатаем контрол" IN aControl
+  [ 
+   Если ( aControl ЯВЛЯЕТСЯ class::TvcmForm ) то
+    // - т.к. у формы к Name могут приклеиваться циферки, которые всю малину портят
+    ( aControl pop:vcm:form:FormID )
+   иначе
+    ( aControl pop:component:Name ) 
+    //class::TvcmForm aControl pop:object:Inherits
+   ' : ' 
+   aControl pop:object:ClassName 
+  ] strings:Cat .
+ ;
+ 
+ aControl @ "Печатаем контрол" "Перебрать иерархию вложенности контролов"
+;
+
+PROCEDURE "Проверить иерархию вложенности текущего контрола"
+ "Напечатать иерархию вложенности контролов {(focused:control:push)}"
+;
+
+PROCEDURE "Проверить, что высоты контролов больше 0" OBJECT IN aControl
+
+ : "Печатаем контрол" IN aControl
+  aControl pop:control:GetHeight >0 
+   [ 
+    'Высота контрола ' 
+    aControl pop:component:Name  ' : '
+    aControl pop:object:ClassName 
+    ' почему-то меньше или равна 0' 
+   ] strings:Cat ASSERTS
+ ;
+ 
+ aControl @ "Печатаем контрол" "Перебрать иерархию вложенности контролов"
+; // "Проверить, что высоты контролов больше 0"
+
+PROCEDURE "Дождаться появления хинта"
+// "Установить окно оболочки на передний план"
+ BOOLEAN VAR Хинт_появился
+ 15 раз (
+  100 SLEEP
+  "Дать системе перерисоваться"
+  Хинт_появился := "Узнать, виден ли хинт"
+  Если Хинт_появился то 
+   выходим
+ )
+ Хинт_появился 'Хинт так и не появился' ASSERTS
+; // "Дождаться появления хинта"
+
+PROCEDURE "Сравнить содержимое тулбара объекта с эталоном" STRING IN aForm STRING IN aMainObject
+
+ PROCEDURE Действия OBJECT IN aObj
+  ( ( aObj ЯВЛЯЕТСЯ class::TvcmToolbar ) И
+  ( aObj "Имя компонента" РАВНО aMainObject ) ) ? (
+   ( aObj "Узнать, виден ли контрол" И ( aObj pop:control:ControlCount БОЛЬШЕ 1 ) ) ? (
+    aObj .
+    'Order = ' 'DockRow' aObj pop:object:GetOrdProp IntToStr Cat .
+    '---------------' .
+    aObj EnumerateControls ( OBJECT IN aControl
+    ( aControl "НЕ ЯВЛЯЕТСЯ" class::Ttb97MoreButton ) ? (
+      aControl .
+      ( aControl "НЕ ЯВЛЯЕТСЯ" class::TvcmComboBox ) ? (
+       Если ( aControl ЯВЛЯЕТСЯ class::TvcmSeparatorDef ) то
+        ( 'Разделитель' . )
+       иначе (
+        aControl pop:control:Caption .
+        'Активность:' aControl "Убедиться, что контрол активен" ToPrintable Cat .
+        'Кнопка нажата: ' "Узнать численную {('Down')} переменную объекта {(aControl)}" 0 ?!= ToPrintable Cat . 
+       )      
+      )
+     "Отделить текст в эталоне"    
+     )
+    )
+   )
+  )
+ ;
+
+ "Дождаться переключения вкладок"
+ OBJECT VAR "Форма с тулбаром"
+ "Найти окно по имени {(aForm)}" =: "Форма с тулбаром"  
+ "Форма с тулбаром" "выполнить для всех контролов" Действия
+;
+
+PROCEDURE "Подготовить окно Гаранта (запомнить состояние и размеры) к сравнению формы с эталоном и выполнить для ее открытия и сравнения " OBJECT IN aProc
+
+ PROCEDURE Установить_размеры_окну
+  "Выставить форме размеры {( 1150 800 )} и {(aProc)}"
+ ; 
+
+ "Сделать {(@ Установить_размеры_окну )} с изменением состояния и размеров окна {("Главное окно")}"
+;
+
+VOID WORDWORKER "##Установить оболочке единые размеры и выполнить"
+ "Подготовить окно Гаранта (запомнить состояние и размеры) к сравнению формы с эталоном и выполнить для ее открытия и сравнения {(@ ( WordToWork DO ) )}"
+;

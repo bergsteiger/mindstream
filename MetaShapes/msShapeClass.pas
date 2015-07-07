@@ -3,55 +3,59 @@ unit msShapeClass;
 interface
 
 uses
+ System.UITypes,
+
  msInterfaces,
  msShape,
- msInterfacedRefcounted
+ msInterfacedRefcounted,
+ msShapeClassPrim
  ;
 
 type
- TmsShapeClass = class(TmsInterfacedRefcounted, ImsShapeClass)
+ TmsShapeClass = class(TmsShapeClassPrim, ImsShapeClass)
  private
   f_ShapeClass : RmsShape;
+  f_ParentMC : ImsShapeClass;
  private
   constructor CreateInner(aShapeClass: RmsShape);
  protected
-  function IsForToolbar: Boolean;
   function IsTool: Boolean;
-  function Creator: ImsShapeCreator;
-  function Name: String;
+  function IsLineLike: Boolean;
+  function IsConnectorLike: Boolean;
+  function Creator: ImsShapeCreator; override;
+  function GetName: String; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
   function ButtonShape: ImsShape;
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
+  function Stereotype: TmsShapeStereotype; override;
+  function ParentMC: ImsShapeClass; override;
+  function AsMC: ImsShapeClass; override;
  public
-  class function Create(aShapeClass: RmsShape): ImsShapeClass;
+  class function Create(aShapeClass: RmsShape): ImsShapeClassTuner;
  end;//TmsShapeClass
 
 implementation
 
 uses
- msShapeCreator
+ msShapeCreator,
+ msRegisteredShapes
  ;
 
 // TmsShapeClass
 
 constructor TmsShapeClass.CreateInner(aShapeClass: RmsShape);
 begin
- inherited Create;
  f_ShapeClass := aShapeClass;
+ inherited Create;
 end;
 
-class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClass;
+class function TmsShapeClass.Create(aShapeClass: RmsShape): ImsShapeClassTuner;
 begin
  Result := CreateInner(aShapeClass);
-end;
-
-function TmsShapeClass.IsForToolbar: Boolean;
-begin
- Assert(f_ShapeClass <> nil);
- Result := f_ShapeClass.IsForToolbar;
+ Assert(Result <> nil);
 end;
 
 function TmsShapeClass.IsTool: Boolean;
@@ -60,16 +64,52 @@ begin
  Result := f_ShapeClass.IsTool;
 end;
 
+function TmsShapeClass.IsLineLike: Boolean;
+begin
+ Assert(f_ShapeClass <> nil);
+ Result := f_ShapeClass.IsLineLike;
+end;
+
+function TmsShapeClass.IsConnectorLike: Boolean;
+begin
+ Assert(f_ShapeClass <> nil);
+ Result := f_ShapeClass.IsConnectorLike;
+end;
+
 function TmsShapeClass.Creator: ImsShapeCreator;
 begin
  Assert(f_ShapeClass <> nil);
- Result := TmsShapeCreator.Create(f_ShapeClass);
+ Result := TmsShapeCreator.Create(Self, f_ShapeClass);
 end;
 
-function TmsShapeClass.Name: String;
+function TmsShapeClass.GetName: String;
 begin
  Assert(f_ShapeClass <> nil);
  Result := f_ShapeClass.ClassName;
+end;
+
+function TmsShapeClass.Stereotype: TmsShapeStereotype;
+begin
+ Assert(f_ShapeClass <> nil);
+ Result := f_ShapeClass.ClassName;
+end;
+
+function TmsShapeClass.ParentMC: ImsShapeClass;
+begin
+ if (f_ParentMC = nil) then
+ begin
+  Assert(f_ShapeClass <> nil);
+  if (f_ShapeClass.ClassParent.InheritsFrom(TmsShape)) then
+   f_ParentMC := RmsShape(f_ShapeClass.ClassParent).MC
+  else
+   f_ParentMC := nil;
+ end;//f_ParentMC = nil
+ Result := f_ParentMC;
+end;
+
+function TmsShapeClass.AsMC: ImsShapeClass;
+begin
+ Result := Self;
 end;
 
 procedure TmsShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);

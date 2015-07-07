@@ -1,0 +1,15 @@
+Тест K378550793
+
+ Выполнить (
+  ППР
+  "Перевести фокус в поле 'Тип' в ППР"
+  "Обработать Enter модально" ( 
+   OBJECT VAR "Тулбар"
+   'tbcfAttributeSelectBottom' "Найти окно атрибутов" pop:Control:FindControlByName =: "Тулбар"
+   "Тулбар" pop:object:IsNil ! 'Не удалось найти тулбар' ASSERTS 
+   "Тулбар" pop:Control:GetHeight РАВНО 0 .
+  )
+ )
+;
+
+K378550793

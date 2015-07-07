@@ -19,14 +19,14 @@ type
 implementation
 
 uses
- msGreenCircle
+ msPredefinedShapes
  ;
 
 // TmsTool
 
 class function TmsTool.ButtonShape: ImsShape;
 begin
- Result := TmsGreenCircle.Create(TPointF.Create(0, 0));
+ Result := MCmsGreenCircle.AsRef.CreateShape(TPointF.Create(0, 0));
 end;
 
 class function TmsTool.IsTool: Boolean;

@@ -1,0 +1,14 @@
+PROCEDURE Choice INTEGER IN aChoice
+
+ BEGIN
+ aChoice CASE
+  1 ( 1 . )
+  2 ( 2 . )
+  DEFAULT ( 'else' . )
+ END
+END
+;
+
+1 Choice
+2 Choice
+3 Choice

@@ -44,7 +44,7 @@ uses
 
 procedure TestTmsLine.SetUp;
 begin
-  FmsLine := TmsShapeCreator.Create(TmsLine).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+  FmsLine := TmsLine.MC.CreateShape(TPointF.Create(0, 0));
 end;
 
 procedure TestTmsLine.TearDown;
@@ -70,7 +70,6 @@ procedure TestTmsLine.TestMoveTo;
 var
   aFinishPoint: TPointF;
 begin
-  //ExpectedException := EmsLineCannotBeMoved;
   // TODO: Setup method call parameters
   FmsLine.MoveBy(TmsMoveContext.Create(TPointF.Create(0, 0), TPointF.Create(100, 100), nil));
   // TODO: Validate method results

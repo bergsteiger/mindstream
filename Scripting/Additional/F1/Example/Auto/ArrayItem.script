@@ -1,0 +1,22 @@
+Тест ArrayItem
+
+ INTEGER VAR I
+ I := 0
+ ARRAY VAR L 
+ L := [
+  10 LOOP ( ++! I I ) 
+ ]
+ 
+ 0 L [i] .
+ 1 L [i] .
+ 2 L [i] .
+ 3 L [i] .
+ 4 L [i] .
+ 5 L [i] .
+ 6 L [i] .
+ 7 L [i] .
+ 8 L [i] .
+ 9 L [i] .
+;
+
+ArrayItem

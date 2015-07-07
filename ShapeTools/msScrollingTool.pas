@@ -20,11 +20,9 @@ type
  public
   class function ButtonShape: ImsShape; override;
   class function IsTool: Boolean; override;
-  class function IsForToolbar: Boolean; override;
  protected
   function IsNeedsSecondClick: Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function MouseUp(const aClickContext: TmsEndShapeContext): Boolean; override;
   procedure MouseMove(const aClickContext: TmsEndShapeContext); override;
  end;//TmsScrollingTool
@@ -32,9 +30,7 @@ type
 implementation
 
 uses
- msCircle,
  msTriangle,
- msPointCircle,
  msMoveIcon,
  msScalingShape,
  msRectangle,
@@ -48,21 +44,6 @@ begin
  Result := TmsShapesGroup.Create([TmsRectangle.Create, TmsMoveIcon.Create]);
 end;
 
-procedure TmsScrollingTool.DoDrawTo(const aCtx: TmsDrawContext);
-var
- l_Proxy : ImsShape;
-begin
- l_Proxy := TmsMovingPointer.Create(Self.StartPoint);
- // - люблю я Self.XXX. Мне лично так понятнее. Да и with - меньше лажает.
- try
-  l_Proxy.DrawTo(aCtx);
- finally
-  l_Proxy := nil;
- end;///try..fianlly
- //inherited;
- // - а вот тут нам точно ОТ ПРЕДКА ничего рисовать не надо
-end;
-
 function TmsScrollingTool.MouseUp(const aClickContext: TmsEndShapeContext): Boolean;
 begin
  aClickContext.rShapesController.RemoveShape(Self);
@@ -72,11 +53,6 @@ end;
 function TmsScrollingTool.EndTo(const aCtx: TmsEndShapeContext): Boolean;
 begin
  aCtx.rShapesController.RemoveShape(Self);
- Result := True;
-end;
-
-class function TmsScrollingTool.IsForToolbar: Boolean;
-begin
  Result := True;
 end;
 

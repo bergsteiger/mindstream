@@ -5,7 +5,6 @@ interface
 uses
  msScrollShapePrim,
  msInterfaces,
- msTextShape,
  System.Types
  ;
 
@@ -23,6 +22,7 @@ uses
  msRemoveIcon,
  msRectangle
  ;
+
 // TmsScrollShapeResetOrigin
 
 class function TmsScrollShapeResetOrigin.ButtonShape: ImsShape;

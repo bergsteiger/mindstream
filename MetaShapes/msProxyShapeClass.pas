@@ -3,22 +3,29 @@ unit msProxyShapeClass;
 interface
 
 uses
+ System.UITypes,
  msInterfaces,
  msShape,
- msInterfacedRefcounted
+ msInterfacedRefcounted,
+ msShapeClassPrim
  ;
 
 type
- TmsProxyShapeClass = class(TmsInterfacedRefcounted, ImsShapeClass)
+ TmsProxyShapeClass = class(TmsShapeClassPrim, ImsShapeClass)
  private
   f_ShapeClass : MCmsShape;
+  f_Name : TmsShapeClassName;
  private
-  constructor CreateInner(const aShapeClass: MCmsShape);
+  constructor CreateInner(const aName : String; const aShapeClass: MCmsShape);
  protected
-  function IsForToolbar: Boolean;
   function IsTool: Boolean;
-  function Creator: ImsShapeCreator;
-  function Name: String;
+  function IsLineLike: Boolean;
+  function IsConnectorLike: Boolean;
+  function Creator: ImsShapeCreator; override;
+  function GetName: String; override;
+  function Stereotype: TmsShapeStereotype; override;
+  function ParentMC: ImsShapeClass; override;
+  function AsMC: ImsShapeClass; override;
   procedure RegisterInMarshal(aMarshal: TmsJSONMarshal);
   procedure RegisterInUnMarshal(aMarshal: TmsJSONUnMarshal);
   function IsNullClick: Boolean;
@@ -26,8 +33,7 @@ type
   function IsOurInstance(const aShape: ImsShape): Boolean;
   function NullClick(const aHolder: ImsDiagrammsHolder): Boolean;
  public
-  class function Create(const aShapeClass: MCmsShape): ImsShapeClass; overload;
-  class function Create(const aShapeClass: RmsShape): ImsShapeClass; overload;
+  class function Create(const aName : String; const aShapeClass: MCmsShape): ImsShapeClassTuner;
  end;//TmsProxyShapeClass
 
 implementation
@@ -39,26 +45,16 @@ uses
 
 // TmsProxyShapeClass
 
-constructor TmsProxyShapeClass.CreateInner(const aShapeClass: MCmsShape);
+constructor TmsProxyShapeClass.CreateInner(const aName : String; const aShapeClass: MCmsShape);
 begin
- inherited Create;
  f_ShapeClass := aShapeClass;
+ f_Name := aName;
+ inherited Create;
 end;
 
-class function TmsProxyShapeClass.Create(const aShapeClass: MCmsShape): ImsShapeClass;
+class function TmsProxyShapeClass.Create(const aName : String; const aShapeClass: MCmsShape): ImsShapeClassTuner;
 begin
- Result := CreateInner(aShapeClass);
-end;
-
-class function TmsProxyShapeClass.Create(const aShapeClass: RmsShape): ImsShapeClass;
-begin
- Result := Create(TmsRegisteredShapes.Instance.ByName(aShapeClass.ClassName));
-end;
-
-function TmsProxyShapeClass.IsForToolbar: Boolean;
-begin
- Assert(f_ShapeClass <> nil);
- Result := f_ShapeClass.IsForToolbar;
+ Result := CreateInner(aName, aShapeClass);
 end;
 
 function TmsProxyShapeClass.IsTool: Boolean;
@@ -67,18 +63,47 @@ begin
  Result := f_ShapeClass.IsTool;
 end;
 
-function TmsProxyShapeClass.Creator: ImsShapeCreator;
+function TmsProxyShapeClass.IsLineLike: Boolean;
 begin
  Assert(f_ShapeClass <> nil);
- Assert(false, 'Не реализовано');
- Result := f_ShapeClass.Creator;
+ Result := f_ShapeClass.IsLineLike;
 end;
 
-function TmsProxyShapeClass.Name: String;
+function TmsProxyShapeClass.IsConnectorLike: Boolean;
 begin
  Assert(f_ShapeClass <> nil);
- Assert(false, 'Не реализовано');
- Result := f_ShapeClass.Name;
+ Result := f_ShapeClass.IsConnectorLike;
+end;
+
+function TmsProxyShapeClass.Creator: ImsShapeCreator;
+var
+ l_SC : TClass;
+begin
+ Assert(f_ShapeClass <> nil);
+ l_SC := (f_ShapeClass.Creator As ImsShapeCreatorFriend).ShapeClassForCreate;
+ Assert(l_SC.InheritsFrom(TmsShape));
+ Result := TmsShapeCreator.Create(Self, RmsShape(l_SC));
+ //Result := f_ShapeClass.Creator;
+end;
+
+function TmsProxyShapeClass.GetName: String;
+begin
+ Result := f_Name;
+end;
+
+function TmsProxyShapeClass.Stereotype: TmsShapeStereotype;
+begin
+ Result := f_Name;
+end;
+
+function TmsProxyShapeClass.ParentMC: ImsShapeClass;
+begin
+ Result := f_ShapeClass;
+end;
+
+function TmsProxyShapeClass.AsMC: ImsShapeClass;
+begin
+ Result := Self;
 end;
 
 procedure TmsProxyShapeClass.RegisterInMarshal(aMarshal: TmsJSONMarshal);
@@ -109,7 +134,7 @@ function TmsProxyShapeClass.IsOurInstance(const aShape: ImsShape): Boolean;
 begin
  Assert(f_ShapeClass <> nil);
  Assert(aShape.ShapeClass <> nil);
- Result := aShape.ShapeClass.Name = f_ShapeClass.Name;
+ Result := Self.f_Name = aShape.ShapeClass.Name;
 end;
 
 function TmsProxyShapeClass.NullClick(const aHolder: ImsDiagrammsHolder): Boolean;

@@ -13,7 +13,6 @@ type
  TmsMoveIcon = class(TmsPolygonShape)
  protected
   function GetPolygon: TPolygon; override;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
  end;//TmsMoveIcon
 
 implementation
@@ -144,12 +143,6 @@ begin
 
 // l_Polygon := l_Polygon + [l_Polygon[0]];
  Result := l_Polygon;
-end;
-
-procedure TmsMoveIcon.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- inherited;
- theCtx.rFillColor := TAlphaColorRec.Black;
 end;
 
 end.

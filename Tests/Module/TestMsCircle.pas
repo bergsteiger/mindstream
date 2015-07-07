@@ -12,7 +12,7 @@ unit TestMsCircle;
 interface
 
 uses
-  TestFramework, FMX.Types, msShape, msCircle, System.UITypes, FMX.Graphics,
+  TestFramework, FMX.Types, msShape, System.UITypes, FMX.Graphics,
   System.Types,
   msInterfaces
   ;
@@ -33,12 +33,12 @@ type
 implementation
 
 uses
- msShapeCreator
+ msPredefinedShapes
  ;
 
 procedure TestTmsCircle.SetUp;
 begin
-  FmsCircle := TmsShapeCreator.Create(TmsCircle).CreateShape(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+  FmsCircle := MCmsCircle.AsRef.CreateShape(TPointF.Create(0, 0));
 end;
 
 procedure TestTmsCircle.TearDown;

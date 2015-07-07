@@ -1,0 +1,32 @@
+Тест K296091974
+ 
+ Выполнить (
+  : "Установить фокус в ОИД после переключения баз"
+   "Дождаться переключения вкладок"
+   OBJECT VAR l_Form
+   ANYUSERTYPE форма::ChangesBetweenEditons vcm:FindForm 'Не найдена форма ChangesBetweenEditons' ASSERTS
+   >>> l_Form
+   l_Form .TChangesBetweenEditonsForm.Text "Установить фокус"
+  ; // "Установить фокус в ОИД после переключения баз"
+
+   : Действия
+    "Установить фокус в ОИД после переключения баз"
+    "Сравнить текст с эталоном"
+   ;
+ 
+  ТБ24
+  "Открываем {(8901001)}"
+  // http://mdp.garant.ru/pages/viewpage.action?pageId=296091974&focusedCommentId=330696742#comment-330696742
+  // - тут видимо надо взять ДРУГОЙ документ:
+  //   50091
+  // http://mdp.garant.ru/pages/viewpage.action?pageId=296091974&focusedCommentId=333551082#comment-333551082
+  // http://mdp.garant.ru/pages/viewpage.action?pageId=296091974&focusedCommentId=330696742#comment-330696742
+  "Обзор изменений документа"
+  "Сравнить текст с эталоном"
+  "Выполнить {(@ Действия)} с переключённой базой"
+  "Установить фокус в ОИД после переключения баз"
+  "Сравнить текст с эталоном"
+ )
+;
+
+K296091974

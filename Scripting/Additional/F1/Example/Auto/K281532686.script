@@ -1,0 +1,40 @@
+Тест K281532686
+
+ Выполнить (
+  : "Дёрнуть редактор"
+   "Убедиться, что фокус в редакторе"
+   151 60 focused:control:push pop:editor:UpdateCursorFromHotSpotEx
+  ;
+ 
+  "Открываем {(НК)}"
+  ППР
+  "Увеличить шрифт {(10)} раз и выполнить" (
+   StyleTable:Changing
+   TRY
+    OnTest
+    StyleTable:Changing
+    TRY
+     OnTest
+     StyleTable:Changing
+     TRY
+      OnTest
+     FINALLY
+      StyleTable:Changed
+     END
+    FINALLY
+     StyleTable:Changed
+    END
+    "Дёрнуть редактор"
+    OnTest
+   FINALLY
+    StyleTable:Changed
+   END
+   OnTest
+   "Дёрнуть редактор"
+   OnTest
+   "Дёрнуть редактор"
+  )
+ )
+;
+
+K281532686

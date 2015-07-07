@@ -1,0 +1,62 @@
+: ОМ
+ ОсновноеМеню
+ OnTest
+;
+
+: "Закрыть F1."
+ ОМ
+ documentscache:Clear
+;
+
+: CheckCommentAndDeleteIfExists IN aProc
+ aProc DO
+ 
+ ProcessMessages
+ "Убедиться, что фокус в редакторе"
+ focused:control:push pop:editor:DeleteComment
+
+ ? (
+ // - если комментарий был удалён, то надо сбросить кеш и перечитать документ по-новой
+  "Закрыть F1."
+  aProc DO
+ )
+;
+
+USES
+ DocumentNumbers.script
+ HLTCLike.script
+ F1ControlsDefinition.script
+;
+
+
+: "Открыть и войти в Конституцию"
+ "Открываем {(Конституция IntToStr '.0' Cat)}"
+ ProcessMessages
+ "Установить фокус в документ"
+;
+
+: "Поставить пользовательский комментарий из одной строки, например 12345."
+ ProcessMessages
+ 
+ cc:NewLine
+ "Ввести строку {('12345')}"
+;
+
+: "Проверяем наличие комментария в текущем редакторе и удаляем его"
+ "Проверяем наличие комментария в текущем редакторе"
+ "Удалить текущий комментарий и проверить что он удалился"
+ // - чистим за собой
+;
+
+: "Параграф содержит" STRING IN aStr
+ VAR l_Text
+ "Убедиться, что фокус в редакторе"
+ focused:control:push pop:editor:CurrentText >>> l_Text
+ aStr l_Text SameStr 
+  [ 'Параграф "' l_Text '" не содержит "' aStr '"' ] strings:Cat 
+   ASSERTS
+;
+
+: "Открыть Конституцию"
+ "Открыть и войти в Конституцию"
+;

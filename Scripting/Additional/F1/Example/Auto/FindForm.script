@@ -1,0 +1,21 @@
+Тест TestFindForm
+
+ "Открываем Конституцию"
+ "Установить фокус в документ"
+
+ VAR l_Form
+ 0 >>> l_Form
+ 
+ тип_формы::dftDocument Форма_документа vcm:FindForm ASSERT
+ >>> l_Form
+ class::TvcmForm l_Form pop:object:Inherits ASSERT
+ class::TExTextForm l_Form pop:object:Inherits ASSERT
+ l_Form "Напечатать иерархию вложенности контролов"
+ 
+ тип_формы::lftUserCR1 "Форма списка" vcm:FindForm ASSERT
+ >>> l_Form
+ class::TvcmForm l_Form pop:object:Inherits ASSERT
+ l_Form "Напечатать иерархию вложенности контролов"
+; 
+
+TestFindForm

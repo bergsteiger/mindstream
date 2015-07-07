@@ -7,8 +7,7 @@ uses
  Generics.Collections,
  msInterfaces,
  msShape,
- msPointlessShape,
- msShapesList
+ msPointlessShape
  ;
 
 type
@@ -28,7 +27,7 @@ type
   f_Shape : ImsShape;
  protected
   function ShapeToShow: ImsShape; override;
-  constructor CreateInner(const aShape: ImsShape); reintroduce;
+  constructor CreateInner(const aShapeClass : ImsShapeClass; const aShape: ImsShape); reintroduce;
  public
   class function Create(const aShape: ImsShape): ImsShape;
   procedure Cleanup; override;
@@ -36,10 +35,10 @@ type
 
  TmsWeakProxyShape = class(TmsProxyShapePrim)
  private
-  f_Shape : Pointer;
+  f_Shape : TmsWeakShapeRef;
  protected
   function ShapeToShow: ImsShape; override;
-  constructor CreateInner(const aShape: ImsShape); reintroduce;
+  constructor CreateInner(const aShapeClass : ImsShapeClass; const aShape: ImsShape); reintroduce;
  public
   class function Create(const aShape: ImsShape): ImsShape;
   procedure Cleanup; override;
@@ -49,20 +48,22 @@ implementation
 
 uses
  System.SysUtils,
- System.Math
+ System.Math,
+
+ msShapeClass
  ;
 
 // TmsProxyShape
 
 class function TmsProxyShape.Create(const aShape: ImsShape): ImsShape;
 begin
- Result := CreateInner(aShape);
+ Result := CreateInner(Self.MC, aShape);
 end;
 
-constructor TmsProxyShape.CreateInner(const aShape: ImsShape);
+constructor TmsProxyShape.CreateInner(const aShapeClass : ImsShapeClass; const aShape: ImsShape);
 begin
  Assert(aShape <> nil, 'Пустую группу примитивов глупо создавать');
- inherited CreateInner(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+ inherited CreateInner(aShapeClass, TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
  f_Shape := aShape;
 end;
 
@@ -81,19 +82,19 @@ end;
 
 class function TmsWeakProxyShape.Create(const aShape: ImsShape): ImsShape;
 begin
- Result := CreateInner(aShape);
+ Result := CreateInner(Self.MC, aShape);
 end;
 
-constructor TmsWeakProxyShape.CreateInner(const aShape: ImsShape);
+constructor TmsWeakProxyShape.CreateInner(const aShapeClass : ImsShapeClass; const aShape: ImsShape);
 begin
  Assert(aShape <> nil, 'Пустую группу примитивов глупо создавать');
- inherited CreateInner(TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
- f_Shape := Pointer(aShape);
+ inherited CreateInner(aShapeClass, TmsMakeShapeContext.Create(TPointF.Create(0, 0), nil, nil));
+ f_Shape := aShape;
 end;
 
 function TmsWeakProxyShape.ShapeToShow: ImsShape;
 begin
- Result := ImsShape(f_Shape);
+ Result := f_Shape;
 end;
 
 procedure TmsWeakProxyShape.Cleanup;
@@ -117,8 +118,8 @@ begin
 end;
 
 function TmsProxyShapePrim.pm_GetStartPoint: TPointF;
-var
- l_R : TRectF;
+(*var
+ l_R : TRectF;*)
 begin
  Result := ShapeToShow.StartPoint;
 (* l_R := Self.DrawBounds;

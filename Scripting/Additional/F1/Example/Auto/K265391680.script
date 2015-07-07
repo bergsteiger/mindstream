@@ -1,0 +1,34 @@
+Тест K265391680
+
+ Выполнить (
+ PROCEDURE EntryPoint
+  "Открываем {(Конституция IntToStr '.1111' Cat)}"
+  ProcessMessages
+  "Установить фокус в документ"
+ ; 
+ 
+  @ EntryPoint "Проверить наличие комментария и удалить его"
+ 
+  ProcessMessages
+ 
+  cc:NewLine
+  "Ввести строку {('ыавыавыавыа')}"
+  
+  "Установить фокус в документ"
+  // - т.к. фокус в результате добавления комментария мог уйти в оглавление, которое OnTop
+ 
+  ProcessMessages
+  Ctrl-Z
+ 
+  ProcessMessages
+  cc:Redo
+ 
+  ProcessMessages
+  Ctrl-Z
+ 
+  ProcessMessages
+  cc:Down
+ )
+;
+
+K265391680

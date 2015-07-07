@@ -24,13 +24,13 @@ type
  {$Include msShapesProvider.mixin.pas}
  TmsDiagrammsList = class abstract(TmsShapesProvider, ImsDiagrammsList)
  protected
-  procedure AddDiagramm(const aDiagramm: ImsDiagramm);
   function AddNewDiagramm: ImsDiagramm;
-  procedure DiagrammAdded(const aDiagramm: ImsDiagramm); virtual;
+  procedure ItemAdded(const aDiagramm: ImsDiagramm); override;
   function  SelectDiagramm(const aDiagrammName: String): ImsDiagramm;
   procedure DiagrammsForToolbarToList(aList: TStrings);
   function FirstDiagramm: ImsDiagramm;
   function pm_GetCount: Integer;
+  procedure Cleanup; override;
  end;//TmsDiagrammsList
 
 implementation
@@ -53,20 +53,28 @@ uses
 
 {$Include msShapesProvider.mixin.pas}
 
-procedure TmsDiagrammsList.AddDiagramm(const aDiagramm: ImsDiagramm);
+// TmsDiagrammsList
+
+procedure TmsDiagrammsList.Cleanup;
 begin
- Items.Add(aDiagramm);
+ // - перекрыто чисто для отладки
+ inherited;
 end;
 
 function TmsDiagrammsList.AddNewDiagramm: ImsDiagramm;
+const
+ cN : array [0..6] of String = ('main', 'methods', 'uses', 'call', 'state', 'inject', 'sequence');
 begin
- Result := TmsDiagramm.Create('№' + IntToStr(Items.Count + 1));
- AddDiagramm(Result);
- DiagrammAdded(Result);
+ if (Self.ItemsCount >= Low(cN)) AND (Self.ItemsCount <= High(cN)) then
+  Result := TmsDiagramm.Create(cN[Self.ItemsCount])
+ else
+  Result := TmsDiagramm.Create('№' + IntToStr(Self.ItemsCount + 1));
+ Self.Add(Result);
 end;
 
-procedure TmsDiagrammsList.DiagrammAdded(const aDiagramm: ImsDiagramm);
+procedure TmsDiagrammsList.ItemAdded(const aDiagramm: ImsDiagramm);
 begin
+ inherited;
  TmsInvalidators.DiagrammAdded(Self, aDiagramm);
 end;
 
@@ -75,7 +83,7 @@ var
  l_D : ImsDiagramm;
 begin
  Result := nil;
- for l_D in Items do
+ for l_D in Self do
   if (l_D.Name = aDiagrammName) then
   begin
    Result := l_D;
@@ -88,21 +96,21 @@ var
  l_D : ImsDiagramm;
 begin
  aList.Clear;
- for l_D in Items do
+ for l_D in Self do
   aList.Add(l_D.Name);
 end;
 
 function TmsDiagrammsList.FirstDiagramm: ImsDiagramm;
 begin
- if (Items.Count <= 0) then
+ if (Self.ItemsCount <= 0) then
   Result := nil
  else
-  Result := Items.First;
+  Result := Self.FirstItem;
 end;
 
 function TmsDiagrammsList.pm_GetCount: Integer;
 begin
- Result := Items.Count;
+ Result := Self.ItemsCount;
 end;
 
 end.

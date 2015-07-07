@@ -12,7 +12,7 @@ type
  private
   f_ShapeToDeal : ImsShape;
  protected
-  constructor CreateInner(const aShapeToDeal: ImsShape; const aShape: ImsShape);
+  constructor CreateInner(const aShapeClass : ImsShapeClass; const aShapeToDeal: ImsShape; const aShape: ImsShape);
   property ShapeToDeal : ImsShape
    read f_ShapeToDeal;
   function ClickInDiagramm: Boolean; override;
@@ -27,17 +27,21 @@ type
 
 implementation
 
+uses
+ msShapeClass
+ ;
+
 // TmsShapeTool
 
 class function TmsShapeTool.Create(const aShapeToDeal: ImsShape; const aShape: ImsShape): ImsShape;
 begin
- Result := CreateInner(aShapeToDeal, aShape);
+ Result := CreateInner(Self.MC, aShapeToDeal, aShape);
 end;
 
-constructor TmsShapeTool.CreateInner(const aShapeToDeal: ImsShape; const aShape: ImsShape);
+constructor TmsShapeTool.CreateInner(const aShapeClass : ImsShapeClass; const aShapeToDeal: ImsShape; const aShape: ImsShape);
 begin
  Assert(aShapeToDeal <> nil);
- inherited CreateInner(aShape);
+ inherited CreateInner(aShapeClass, aShape);
  f_ShapeToDeal := aShapeToDeal;
 end;
 

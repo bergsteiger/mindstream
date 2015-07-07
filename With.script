@@ -1,0 +1,114 @@
+: WithTest
+
+/*{ IMMEDIATE operator WordAliasByRef
+  ^L IN aName
+  ^ IN aCode
+  aCode DO aName |N Define
+ ; // WordAliasByRef}*/
+
+ operator EVAL
+  ^ IN aWhat
+  aWhat |^ DO
+ ; // EVAL 
+
+ VOID operator ASSURE
+  ^ IN aCondition
+  ^ IN aMessage
+  if NOT EVAL aCondition then
+  begin
+   VAR l_Msg
+   aMessage DO &gt;&gt;&gt; l_Msg
+   if ( l_Msg IsArray ) then
+    ( false l_Msg strings:Cat ASSERTS )
+   else
+    ( false l_Msg ASSERTS )
+  end 
+ ; // ASSURE
+ 
+ VOID operator ASSURENOT
+  ^ IN aCondition
+  ^ IN aMessage
+  ASSURE 
+   NOT EVAL aCondition 
+   EVAL aMessage
+ ; // ASSURENOT
+ 
+ ^@ operator :::
+  ^@ IN aSelf
+  ^L IN aName
+
+  OBJECT VAR l_Self
+  aSelf |^ &gt;&gt;&gt; l_Self
+  
+  STRING VAR l_Name
+  aName |N &gt;&gt;&gt; l_Name
+  
+  OBJECT VAR l_Res
+  l_Self %% l_Name &gt;&gt;&gt; l_Res
+  
+  ASSURE NOT ( l_Res pop:object:IsNil ) [ 'Не найдено поле: ' l_Self |N '.' l_Name ]
+  l_Res &gt;&gt;&gt; Result
+ ; // :::
+ 
+ : A
+  : B
+   : C
+    'Hello' .
+    VAR Y
+   ; // C
+   20 .
+   VAR Z
+  ; // B
+  10 .
+  VAR X
+ ; // A
+ 
+ A ::: X := 10
+ A ::: X .
+ A ::: B
+ //A ::: B := 10
+ A ::: B ::: C
+ A ::: B ::: C ::: Y := 1024
+ A ::: B ::: C ::: Y .
+ 
+ A ::: B ::: Z := 2048
+ A ::: B ::: Z .
+ A ::: B ::: Z .
+ 
+ //A ::: B ::: Z ::: abs
+ TRY
+  A ::: B ::: Z ::: abs
+ EXCEPT
+  for script:ExceptionStack .
+ END 
+ 
+ :: A B ;
+ :: A B C ;
+ 
+ @ :: A B ; DO
+ @ :: A B C ; DO
+ 
+ ( A ::: B ::: Z . )
+ @ ( A ::: B ::: Z ) DO .
+ 
+ WordAliasByRef theB @ :: A B ;
+ WordAliasByRef theC @ :: A B C ;
+ WordAliasByRef theZ @ ( A ::: B ::: Z )
+ 
+ theB
+ theC
+ theZ .
+ 
+ A ::: B ::: Z := 2048
+ A ::: B ::: Z .
+ 
+ theZ .
+ 
+ theB
+ 
+ theZ .
+ 
+ @SELF __DumpMembers
+;
+
+WithTest

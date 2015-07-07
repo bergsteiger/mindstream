@@ -1,0 +1,269 @@
+USES
+ 'W:\shared\models\NewSchool\Templates\Core.tpl.script'
+;
+
+// Тут описываем слова, необходимые для построения дерева разбора модели MDA вылитой в формат скрипта
+
+StereotypeStereotypeProducer MDAClass ;
+// - базовый стереотип, через который всё выводится
+
+&lt;&lt;@MDAClass&gt;&gt; MDAClass ;
+&lt;&lt;@MDAClass&gt;&gt; MDACategory ;
+// - заглушки для начальной раскрутки
+
+&lt;&lt;MDACategory&gt;&gt; Project ;
+// - проект
+
+&lt;&lt;@MDAClass&gt;&gt; MDAAbstractClass ;
+&lt;&lt;@MDAClass&gt;&gt; MDADependency ;
+&lt;&lt;@MDAClass&gt;&gt; MDAAttribute ;
+//StereotypeProducer MDAStateMachine ;
+//StereotypeProducer MDAState ;
+//StereotypeProducer MDATransition ;
+//StereotypeProducer MDATransitionAttribute ;
+//StereotypeProducer MDAStateAction ;
+// - а эти парни вообще выводятся на модели из первых двух
+&lt;&lt;@MDAClass&gt;&gt; MDAOperation ;
+// - стереотип для создания типов операций
+
+&lt;&lt;MDACategory&gt;&gt; MDATemplates ;
+&lt;&lt;MDACategory&gt;&gt; MDALibrary ;
+// - MDA-библиотека
+&lt;&lt;MDACategory&gt;&gt; MDALayer ;
+&lt;&lt;MDAClass&gt;&gt; MDAUtilityPack ;
+// - набор утилитных функций MDA
+
+&lt;&lt;MDAClass&gt;&gt; MDAGenerator ;
+
+StereotypeProducer mdalink ;
+
+&lt;&lt;mdalink&gt;&gt; group
+;
+&lt;&lt;mdalink&gt;&gt; include
+;
+&lt;&lt;mdalink&gt;&gt; main_hierarchy
+;
+
+&lt;&lt;MDAOperation&gt;&gt; generator
+;
+// - генератор элементов модели
+&lt;&lt;MDAOperation&gt;&gt; transformator
+;
+// - трансформатор (аналог CASE в mda-генераторе)
+&lt;&lt;MDAOperation&gt;&gt; Operation
+;
+// - операция (любая, что MDA, что нет - любая операция без стереотипа)
+
+&lt;&lt;@MDAClass&gt;&gt; MDAParameter
+;
+// - стереотип параметра
+
+//WordAlias &lt;&lt;param&gt;&gt; &lt;&lt;MDAParameter&gt;&gt;
+//&lt;&lt;MDAParameter&gt;&gt; param ;
+StereotypeProducer param ;
+&lt;&lt;param&gt;&gt; in
+;
+// - входной параметра (изменяться не может)
+
+StereotypeProducer up ;
+// - стереотип для типов пользовательских свойств
+
+&lt;&lt;up&gt;&gt; bool 
+;
+// - булево значение UP
+&lt;&lt;up&gt;&gt; string 
+;
+// - строковое значение UP
+&lt;&lt;up&gt;&gt; list 
+;
+// - значение UP из заранее заданного списка значений
+&lt;&lt;up&gt;&gt; color 
+;
+&lt;&lt;up&gt;&gt; tribool 
+;
+// - трёхпозиционное значение UP undefined/false/true
+&lt;&lt;up&gt;&gt; text 
+;
+
+&lt;&lt;MDAClass&gt;&gt; MDAReport ;
+&lt;&lt;MDAOperation&gt;&gt; report
+;
+
+: UIDS_LIST
+;
+// - список загруженных элементов
+
+IMMEDIATE VOID CALLER operator %UID 
+  ^L IN anUID
+ VAR l_S
+ anUID |^@ |N =: l_S
+ // - получаем имя (значение) UID
+ 
+ VAR l_VAR
+ 
+ UIDS_LIST -&gt;^ l_S &gt;&gt;&gt; l_VAR
+ // - добавляем переменную и снимем её со стека
+ 
+ Caller -&gt; %U := l_VAR
+ // - добавляем элементу переменную, указывающую на его UID
+ l_VAR ^:= Caller
+ // - присваиваем в переменную с UID ссылку на сам элемент
+; // %UID
+// - идентификатор элемента
+
+//NamedInitedVarProducer %DOCUMENTATION %Doc
+// - документация к элементу
+
+//NamedAutolinkProducer %UIDLINK %U
+// - ссылка на элемент по UID
+NamedAutolinkProducer %VALUE %V
+// - значение элемента
+NamedWordProducer %VALUES %Vs
+// - список возможных значений
+
+NamedAutolinkProducer %TARGET %T
+// - цель (тип) элемента
+
+/*{WORDWORKER U$
+ VAR l_S
+ WordToWork DO =: l_S
+ UIDS_LIST -&gt;^ l_S DO
+; // U$}*/
+VOID IMMEDIATE operator U$
+  ^L IN anUID
+ VAR l_S
+ anUID |^@ |N =: l_S
+ UIDS_LIST -&gt;^ l_S CompileValue
+; // U$
+// - преобразование идентификатора элемента собственно к элементу
+
+WORDWORKER N$
+ WordToWork DO
+;
+// - преобразование "значения" элемента собственно к элементу (если это возможно), иначе так и возвращается значение
+
+NamedWordProducer %DEPENDS %D
+// - список зависимостей
+//IMMEDIATE OPERATOR %INCLUDES 
+// @ INCLUDES DO
+//; // %INCLUDES
+
+NamedWordProducer %REALIZES %OR
+// - список реализованных методов
+NamedWordProducer %OVERRIDES %OO
+// - список перекрытых методов
+
+NamedWordProducer %PARAMETERS %Pars
+// - список параметров
+
+NamedWordProducer %INDEXES %Idxs
+// - список индексов
+WordProducer %INDEX
+// - отдельный индекс
+
+NamedWordProducer %LINKS %Lnks
+// - список связей элемента
+
+NamedWordProducer %ATTRIBUTES %Attrs
+// - список атрибутов элемента
+WordAlias ATTRIBUTES %ATTRIBUTES
+
+NamedWordProducer %OPERATIONS %Ops
+// - список операций элемента
+
+//NamedWordProducer %CHILDREN %C
+// - список дочерних элементов элемента
+
+NamedWordProducer %META %UPs
+// - список пользовательских свойств
+
+//VarProducer upv
+InitedVarProducer %upv
+// - значение пользовательского свойства
+
+/*{BOOLEAN FUNCTION NotValid IN %S
+ if ( %S IsVoid ) then
+  ( Result := true )
+ else
+ if ( %S pop:object:IsNil ) then
+  ( Result := true )
+ else 
+  ( Result := false )
+;}*/
+
+/*{STRING FUNCTION |N IN %S
+ if ( %S NotValid ) then
+  ( Result := '' )
+ else
+  ( Result := ( %S pop:Word:Name ) )
+;}*/
+
+/*{OBJECT FUNCTION %ST IN %S
+ if ( %S NotValid ) then
+ (
+  Result := nil
+ ) 
+ else
+ (
+  Result := ( %S pop:Word:Producer )
+ ) 
+;}*/
+
+/*{STRING FUNCTION |S IN %S
+ %S %ST |N =: Result
+;}*/
+
+/*{FUNCTION -&gt;0 OBJECT IN %S
+ Result := ( ( 0 %S pop:Word:GetParam ) DO )
+; // -&gt;0}*/
+
+STRING CALLER operator %SN
+ Result := ( Caller -&gt;0 |N )
+;
+
+STRING CALLER operator %SS
+ Result := ( Caller -&gt;0 |S )
+;
+
+//IMMEDIATE CALLER operator [EXPORTED]
+//;
+// - похоже - пока не понадобилось, ввёл вместо него [EXPORT]
+
+IMMEDIATE operator [EXPORT]
+  ^ REFERENCE IN WordToWork
+ if ( WordToWork |S '&lt;&lt;MDAUtilityPack&gt;&gt;' SameText ! ) then
+ (
+ // - пока не экспортируем &lt;&lt;MDAUtilityPack'&gt;&gt; - не очень пока понятно - как, куда и зачем это делать
+  WordToWork pop:Word:PublicateInMainDictionary
+ )
+;
+// - экспортирует указанное слово в основной словарь
+
+IMMEDIATE operator implementation
+ ^ IN WordToWork
+// - открывает секцию реализации стереотипа, все методы внутри секции относятся к указанному после вызвавшего слова стереотипу
+
+//
+// Пример:
+// implementation @ &lt;&lt;Unit&gt;&gt;
+// 
+//  : NewMethod
+//   'Hello' . x1
+//  ;
+//  
+// end.
+//
+
+ Ctx:PushCompiler
+ Ctx:PushFinder
+ VAR l_NewCompiler
+ WordToWork DO =: l_NewCompiler
+ l_NewCompiler pop:Compiler:SetToCtx
+ l_NewCompiler pop:Finder:SetToCtx
+;
+
+IMMEDIATE operator end.
+// - закрывает секцию реализации стереотипа
+ pop:Finder:SetToCtx
+ pop:Compiler:SetToCtx
+;

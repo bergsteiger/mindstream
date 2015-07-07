@@ -1,0 +1,276 @@
+USES
+ WordsTranslation.script
+ @\SysUtils.script
+ @\EditorCommon.script
+ //Editor.script
+;
+
+WordAlias "Узнать индекс курсора мыши" mouse:GetCursorIndex
+
+WordAlias "Узнать имя индекса курсора мыши" mouse:GetCursorNameByIndex
+
+PROCEDURE "Прокрутить колесо мыши вниз для контрола" OBJECT IN aControl
+ aControl pop:control:MouseWheelDown
+ ProcessMessages
+;
+
+PROCEDURE "Прокрутить колесо мыши вверх для контрола" OBJECT IN aControl
+ aControl pop:control:MouseWheelUp
+ ProcessMessages
+;
+
+: "Зажать левую кнопку мыши"
+  Mouse:LeftDown
+  ProcessMessages
+;
+
+: "Отпустить левую кнопку мыши"
+  Mouse:LeftUp
+  ProcessMessages
+;
+
+: "Зажать правую кнопку мыши"
+  Mouse:RightDown
+  ProcessMessages
+;
+
+: "Отпустить правую кнопку мыши"
+  Mouse:RightUp
+  ProcessMessages
+;
+
+: "Зажать среднюю кнопку мыши"
+  Mouse:MiddleDown
+  ProcessMessages
+;
+
+: "Отпустить среднюю кнопку мыши"
+  Mouse:MiddleUp
+  ProcessMessages
+;
+
+: "Клик левой кнопкой мыши"
+  Mouse:LeftDown
+  Mouse:LeftUp
+  ProcessMessages
+;
+
+: "Клик правой кнопкой мыши"
+  Mouse:RightDown
+  Mouse:RightUp
+  ProcessMessages
+;
+
+: "Клик средней кнопкой мыши"
+  Mouse:MiddleDown
+  Mouse:MiddleUp
+  ProcessMessages
+;
+
+: "Двойной клик"
+ "Клик левой кнопкой мыши"
+ OnTest
+ "Клик левой кнопкой мыши"
+ OnTest
+;
+
+: "Установить курсор мыши по координатам" INTEGER IN X INTEGER IN Y
+ X Y mouse:SetCursorPosition
+;
+
+: "Установить курсор мыши посередине редактора" OBJECT IN anEditor
+  VAR x
+  VAR y
+  anEditor pop:editor:ParaMiddleCoordsToScreen >>> y >>> x
+  y 6 + >>> y
+  x y mouse:SetCursorPosition
+  100 SLEEP
+  ProcessMessages
+;
+
+: "Установить курсор мыши посередине текущего редактора"
+ "Убедиться, что фокус в редакторе"
+ "Установить курсор мыши посередине редактора {(focused:control:push)}"
+;
+
+PROCEDURE "Установить курсор мыши посередине редактора и чуть выше текущего параграфа"
+  INTEGER VAR x
+  INTEGER VAR y
+  "Контрол в фокусе" pop:editor:ParaMiddleCoordsToScreen >>> y >>> x
+  y 6 - >>> y
+  "Установить курсор мыши по координатам {( x y )}"
+;
+
+: "Установить курсор мыши на левый край редактора" OBJECT IN anEditor
+  VAR x
+  VAR y
+  anEditor pop:editor:ParaCoordsToScreen >>> y >>> x
+  y 6 + >>> y
+  x y mouse:SetCursorPosition
+  100 SLEEP
+  ProcessMessages
+;
+
+: "Установить курсор мыши на левый край текущего редактора"
+ "Убедиться, что фокус в редакторе"
+ "Установить курсор мыши на левый край редактора {(focused:control:push)}"
+;
+
+: "Установить курсор мыши на правый край редактора" OBJECT IN anEditor
+  VAR x
+  VAR y
+  anEditor pop:editor:ParaEndCoordsToScreen >>> y >>> x
+  y 6 - >>> y
+  x y mouse:SetCursorPosition
+  100 SLEEP
+  ProcessMessages
+;
+
+: "Установить курсор мыши на правый край текущего редактора"
+ "Убедиться, что фокус в редакторе"
+ "Установить курсор мыши на правый край редактора {(focused:control:push)}"
+;
+
+: "Установить курсор мыши чуть правее левого края редактора" OBJECT IN anEditor
+  VAR x
+  VAR y
+  anEditor pop:editor:ParaCoordsToScreen >>> y >>> x
+  x 6 + >>> x
+  y 6 + >>> y
+  x y mouse:SetCursorPosition
+  100 SLEEP
+  ProcessMessages
+;
+
+: "Установить курсор мыши чуть правее левого края текущего редактора"
+ "Убедиться, что фокус в редакторе"
+ "Установить курсор мыши чуть правее левого края редактора {(focused:control:push)}"
+;
+
+: "Установить курсор мыши чуть левее левого края редактора" OBJECT IN anEditor
+  VAR x
+  VAR y
+  anEditor pop:editor:ParaCoordsToScreen >>> y >>> x
+  x 6 - >>> x
+  y 6 + >>> y
+  x y mouse:SetCursorPosition
+  100 SLEEP
+  ProcessMessages
+;
+
+: "Установить курсор мыши чуть левее левого края текущего редактора"
+ "Убедиться, что фокус в редакторе"
+ "Установить курсор мыши чуть левее левого края редактора {(focused:control:push)}"
+;
+
+: "Установить курсор мыши чуть левее правого края редактора" OBJECT IN anEditor
+  VAR x
+  VAR y
+  anEditor pop:editor:ParaEndCoordsToScreen >>> y >>> x
+  x 6 - >>> x
+  y 6 - >>> y
+  x y mouse:SetCursorPosition
+  100 SLEEP
+  ProcessMessages
+;
+
+: "Установить курсор мыши чуть левее правого края текущего редактора"
+ "Убедиться, что фокус в редакторе"
+ "Установить курсор мыши чуть левее правого края редактора {(focused:control:push)}"
+;
+
+: "Установить курсор мыши чуть правее правого края редактора" OBJECT IN anEditor
+  VAR x
+  VAR y
+  anEditor pop:editor:ParaEndCoordsToScreen >>> y >>> x
+  x 6 + >>> x
+  y 6 - >>> y
+  x y mouse:SetCursorPosition
+  100 SLEEP
+  ProcessMessages
+;
+
+: "Установить курсор мыши чуть правее правого края текущего редактора"
+ "Убедиться, что фокус в редакторе"
+ "Установить курсор мыши чуть правее правого края редактора {(focused:control:push)}"
+;
+
+: "Ставим указатель мыши на конец текущего параграфа редактора со смещением" OBJECT IN aEditor INTEGER IN aX INTEGER IN aY
+  VAR x
+  VAR y
+  aEditor pop:editor:ParaEndCoordsToScreen >>> y >>> x
+  aX =+ x
+  aY =+ y
+  x y mouse:SetCursorPosition
+  OnTest
+;
+
+: "Проверить, что курсор над ссылкой"
+  'курсор над ссылкой:' . "Узнать индекс курсора мыши" "Узнать имя индекса курсора мыши" .
+;
+
+: "Проверить, что курсор вне ссылки"
+  'курсор вне ссылки:' . "Узнать индекс курсора мыши" "Узнать имя индекса курсора мыши" .
+;
+
+: "Поставить курсор мыши на ссылку на графическую копию в текущем редакторе"
+ VAR Editor
+ VAR x
+ VAR y
+ "Стрелка вверх"
+ focused:control:push >>> Editor
+ Editor pop:editor:ParaCoordsToScreen >>> y >>> x
+ x 15 + >>> x
+ y 15 - >>> y
+ x y mouse:SetCursorPosition
+ ProcessMessages
+; // "Поставить курсор мыши на ссылку на графическую копию в текущем редакторе"
+
+PROCEDURE "Прокрутить колесо мыши вниз раз для контрола" INTEGER IN aCount OBJECT IN aControl
+ aCount раз ( "Прокрутить колесо мыши вниз для контрола {(aControl)}" )
+;
+WordAlias "Прокрутить колесо мыши вниз раза для контрола" "Прокрутить колесо мыши вниз раз для контрола"
+
+PROCEDURE "Прокрутить колесо мыши вверх раз для контрола" INTEGER IN aCount OBJECT IN aControl
+ aCount раз ( "Прокрутить колесо мыши вверх для контрола {(aControl)}" )
+;
+WordAlias "Прокрутить колесо мыши вверх раза для контрола" "Прокрутить колесо мыши вверх раз для контрола"
+
+: "Запомнить позицию мыши и выполнить" IN aProc
+ VAR x_coord
+ VAR y_coord
+ "Запомнить позицию мыши" >>> y_coord >>> x_coord
+ TRY
+  aProc DO
+ FINALLY
+  x_coord y_coord mouse:SetCursorPosition 
+ END
+;
+
+: "Установить курсор мыши по координатам относительно контрола" INTEGER IN X INTEGER IN Y OBJECT IN aControl
+ X Y aControl pop:control:ClientToScreen mouse:SetCursorPosition
+;
+
+: "Провести мышью вниз на пикселей" INTEGER IN aCount
+ VAR x
+ VAR y
+ "Запомнить позицию мыши" >>> y >>> x
+  aCount  2 / раз (
+  1 SLEEP
+  2 LOOP OnTest
+  y 2 + >>> y
+  x y mouse:SetCursorPosition 
+ )
+; // "Провести мышью вниз на пикселей"
+
+PROCEDURE "Текущий индекс курсора мыши ?" STRING IN aIndex_Mouse
+ Если ( "Узнать индекс курсора мыши" "Узнать имя индекса курсора мыши" РАВНО aIndex_Mouse ) то
+   ( [ 'Курсор мыши: ' aIndex_Mouse '.' ] strings:Cat . )
+  иначе
+   ( 'Курсор мыши отличается от заданного: ' "Узнать индекс курсора мыши" "Узнать имя индекса курсора мыши"  Cat . )
+; // "Текущий индекс курсора мыши ?"
+
+: "Убедиться, что текущий индекс курсора мыши и выполнить"  STRING IN aIndex_Mouse IN aProc
+ "Узнать индекс курсора мыши" "Узнать имя индекса курсора мыши" РАВНО aIndex_Mouse 'Курсор мыши отличается от указанного! Видимо не попали на ссылку!' ASSERTS
+ aProc DO
+; // "Убедиться, что текущий индекс курсора мыши и выполнить"

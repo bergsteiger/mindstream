@@ -1,0 +1,187 @@
+{
+	"type": "msDiagramm.TmsDiagramm",
+	"id": 1,
+	"fields": {
+		"fName": "Диаграмма №1",
+		"f_Items": [{
+			"type": "msAssociation.TmsAssociation",
+			"id": 2,
+			"fields": {
+				"f_UIDLeft": [[0,
+				0]],
+				"f_UIDRight": [[0,
+				0]],
+				"f_FinishPoint": [[639,
+				1975],
+				639,
+				1975],
+				"FStartPoint": [[539,
+				1875],
+				539,
+				1875],
+				"f_ShapeClassName": "Dependency",
+				"f_Name": "Dependency1",
+				"f_UID": [[1,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 3,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 4,
+			"fields": {
+				"f_UIDLeft": [[0,
+				0]],
+				"f_UIDRight": [[0,
+				0]],
+				"f_FinishPoint": [[1032,
+				678],
+				1032,
+				678],
+				"FStartPoint": [[932,
+				578],
+				932,
+				578],
+				"f_ShapeClassName": "Dependency",
+				"f_Name": "Dependency2",
+				"f_UID": [[2,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 5,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 6,
+			"fields": {
+				"f_UIDLeft": [[0,
+				0]],
+				"f_UIDRight": [[0,
+				0]],
+				"f_FinishPoint": [[107,
+				1376],
+				107,
+				1376],
+				"FStartPoint": [[7,
+				1276],
+				7,
+				1276],
+				"f_ShapeClassName": "Dependency",
+				"f_Name": "Dependency3",
+				"f_UID": [[3,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 7,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 8,
+			"fields": {
+				"f_UIDLeft": [[0,
+				0]],
+				"f_UIDRight": [[0,
+				0]],
+				"f_FinishPoint": [[196,
+				1332],
+				196,
+				1332],
+				"FStartPoint": [[96,
+				1232],
+				96,
+				1232],
+				"f_ShapeClassName": "Dependency",
+				"f_Name": "Dependency4",
+				"f_UID": [[4,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 9,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 10,
+			"fields": {
+				"f_UIDLeft": [[0,
+				0]],
+				"f_UIDRight": [[0,
+				0]],
+				"f_FinishPoint": [[248,
+				1584],
+				248,
+				1584],
+				"FStartPoint": [[148,
+				1484],
+				148,
+				1484],
+				"f_ShapeClassName": "Dependency",
+				"f_Name": "Dependency5",
+				"f_UID": [[5,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 11,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msAssociation.TmsAssociation",
+			"id": 12,
+			"fields": {
+				"f_UIDLeft": [[0,
+				0]],
+				"f_UIDRight": [[0,
+				0]],
+				"f_FinishPoint": [[992,
+				980],
+				992,
+				980],
+				"FStartPoint": [[892,
+				880],
+				892,
+				880],
+				"f_ShapeClassName": "Dependency",
+				"f_Name": "Dependency6",
+				"f_UID": [[6,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 13,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		}]
+	}
+}

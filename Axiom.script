@@ -1,0 +1,1268 @@
+// Аксиоматика
+
+IMMEDIATE OPERATOR VOID
+ TtfwWordModifier::tfw_wmVoid Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR ^@
+ TtfwWordModifier::tfw_wmLeftWordRef Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR ^
+ TtfwWordModifier::tfw_wmRightWordRef Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR AGGREGATION
+ TtfwWordModifier::tfw_wmAggregation Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR LINK
+ TtfwWordModifier::tfw_wmLink Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR REFERENCE
+ TtfwWordModifier::tfw_wmReference Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR INLINE
+ TtfwWordModifier::tfw_wmInline Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR SUMMONED
+ TtfwWordModifier::tfw_wmSummoned Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR ABSTRACT
+ TtfwWordModifier::tfw_wmAbstract Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR VIRTUAL
+ TtfwWordModifier::tfw_wmAbstract Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR FINAL
+ TtfwWordModifier::tfw_wmFinal Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR SEALED
+ TtfwWordModifier::tfw_wmSealed Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR OVERRIDE
+ TtfwWordModifier::tfw_wmOverride Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR REDEFINITION
+ TtfwWordModifier::tfw_wmRedefinition Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR REDEFINEABLE
+ TtfwWordModifier::tfw_wmRedefineable Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR REALIZE
+ TtfwWordModifier::tfw_wmRealize Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR PRIVATE
+ TtfwWordModifier::tfw_wmPrivate Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR PROTECTED
+ TtfwWordModifier::tfw_wmProtected Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR PUBLIC
+ TtfwWordModifier::tfw_wmPublic Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR W-STRING
+ TtfwWordModifier::tfw_wmWStr Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR FILE
+ TtfwWordModifier::tfw_wmFile Ctx:IncludeModifier
+; 
+
+VOID IMMEDIATE OPERATOR OBJECT
+ TtfwWordModifier::tfw_wmObj Ctx:IncludeModifier
+; // OBJECT
+
+FUNCTION -&gt;0 
+ // - возвращает первый параметр указанного слова
+  OBJECT IN %S
+ 0 %S pop:Word:GetParam DO &gt;&gt;&gt; Result
+; // -&gt;0
+
+VOID IMMEDIATE OPERATOR ^L
+ // - определяет ПРАВЫЙ параметр, который может быть как словом, так и неизвестным идентификатором
+ //   L - сокращение типа от слова Literal
+ //   При этом передаётся ссылка на ИСХОДНОЕ слово, а не на КОМПИЛИРОВАННУЮ последовательность.
+ //   Это важно для ОПЕРАТОРОВ и WordWorker'ов.
+ TtfwWordModifier::tfw_wmRightWordRef Ctx:IncludeModifier
+ TtfwWordModifier::tfw_wmTreatUnknownAsString Ctx:IncludeModifier
+; // ^L
+
+VOID IMMEDIATE OPERATOR BOOLEAN
+ TtfwWordModifier::tfw_wmBool Ctx:IncludeModifier
+; // BOOLEAN
+
+VOID IMMEDIATE OPERATOR CALLER
+ TtfwWordModifier::tfw_wmCaller Ctx:IncludeModifier
+; // BOOLEAN
+
+VOID IMMEDIATE OPERATOR CARDINAL
+ TtfwWordModifier::tfw_wmInt Ctx:IncludeModifier
+; // CARDINAL
+
+VOID IMMEDIATE OPERATOR INTEGER
+ TtfwWordModifier::tfw_wmInt Ctx:IncludeModifier
+; // INTEGER
+
+VOID IMMEDIATE OPERATOR STRING
+ TtfwWordModifier::tfw_wmStr Ctx:IncludeModifier
+; // STRING
+
+VOID IMMEDIATE OPERATOR ARRAY
+ TtfwWordModifier::tfw_wmList Ctx:IncludeModifier
+; // ARRAY
+
+VOID IMMEDIATE OPERATOR INTERFACE
+ TtfwWordModifier::tfw_wmIntf Ctx:IncludeModifier
+; // INTERFACE
+
+VOID IMMEDIATE OPERATOR CHAR
+ TtfwWordModifier::tfw_wmChar Ctx:IncludeModifier
+; // CHAR
+
+VOID IMMEDIATE OPERATOR CLASS
+ TtfwWordModifier::tfw_wmClass Ctx:IncludeModifier
+; // CLASS
+
+INLINE OPERATOR then
+  ^ IN aWhatToThen
+ aWhatToThen DO
+; // then
+
+BOOLEAN FUNCTION NotValid IN %S
+ if ( %S IsVoid ) then
+  ( true &gt;&gt;&gt; Result )
+ else
+ if ( %S pop:object:IsNil ) then
+  ( true &gt;&gt;&gt; Result )
+ else 
+  ( false &gt;&gt;&gt; Result )
+; // NotValid
+
+BOOLEAN OPERATOR IS
+  CLASS OBJECT IN anObj
+  ^ IN aClass
+ if ( anObj IsClass ) then
+  ( ( aClass DO anObj pop:class:Inherits ) &gt;&gt;&gt; Result )
+ else
+  ( ( aClass DO anObj pop:object:Inherits ) &gt;&gt;&gt; Result )
+; // IS
+
+STRING FUNCTION |N
+
+  /*OBJECT*/ IN %S
+
+ if ( %S IsVoid ) then
+  ( '' &gt;&gt;&gt; Result )
+ else
+ if ( %S pop:object:IsNil ) then
+  ( '' &gt;&gt;&gt; Result )
+ else
+ if ( class::TkwString %S pop:object:Inherits ) then
+  ( %S DO &gt;&gt;&gt; Result )
+ else
+ if ( class::TkwInteger %S pop:object:Inherits ) then
+  ( %S DO IntToStr &gt;&gt;&gt; Result )
+ else
+ if ( class::TkwMain %S pop:object:Inherits ) then
+  ( %S pop:object:ClassName &gt;&gt;&gt; Result )
+ else
+ if ( class::TkwCompiledMain %S pop:object:Inherits ) then
+  ( %S pop:object:ClassName &gt;&gt;&gt; Result )
+ else
+  ( %S pop:Word:Name &gt;&gt;&gt; Result )
+; // |N
+
+STRING OPERATOR (+)
+ STRING IN aLeft
+ ^ IN aRight
+ aLeft aRight DO Cat &gt;&gt;&gt; Result
+; // (+)
+
+IMMEDIATE OPERATOR WordAlias
+ ^L IN aName
+ ^ LINK IN aCode
+ aCode aName |N Define
+; // WordAlias
+
+WordAlias begin BEGIN
+WordAlias end END
+
+STRING OPERATOR __SourceInfo
+ if ( Ctx:Parser IsNil ) then
+ begin
+  '' &gt;&gt;&gt; Result
+ end
+ else
+ begin
+  Ctx:Parser pop:Parser:FileName (+) ' line: ' (+) ( Ctx:Parser pop:Parser:SourceLine IntToStr ) &gt;&gt;&gt; Result
+ end
+; // __SourceInfo
+
+VOID OPERATOR __ERROR
+ STRING IN aMsg
+ OBJECT IN aCaller
+ if ( Ctx:Parser IsNil ) then
+ begin
+  aCaller pop:Word:SourcePointString (+) ' ' (+) aMsg class::EtfwRunner CreateAndRaise
+ end
+ else 
+ begin
+  __SourceInfo (+) ' ' (+) aMsg class::EtfwCompiler CreateAndRaise
+ end
+; // __ERROR
+
+VOID CALLER OPERATOR ERROR
+ STRING IN aMsg
+ aMsg Caller __ERROR
+; // ERROR
+
+: __DefineVarEx
+  STRING IN aName
+  OBJECT IN aStereo
+ 
+ aName Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckWord pop:KeyWord:Word pop:object:IsNil ! ?
+ (
+  'Слово ' (+) aName (+) ' уже существует. Нельзя определить переменную с таким же именем' ERROR
+ ) 
+ aName true Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckVar
+ DUP aStereo SWAP pop:Word:SetProducer
+ Ctx:ClearTypeInfo
+; // __DefineVarEx
+
+: __DefineVar
+ __DefineVarEx DROP
+; // __DefineVar
+
+IMMEDIATE VOID OPERATOR VAR
+ ^L IN aName
+ aName |N @SELF __DefineVar
+; // VAR
+ 
+WordAlias var VAR
+
+WordAlias ITERATE Iterate
+WordAlias WordWorker WORDWORKER
+
+WordAlias operator OPERATOR
+WordAlias __operator OPERATOR
+
+IMMEDIATE VOID operator PROCEDURE
+ @SELF Ctx:SetWordProducerForCompiledClass
+ 'VOID' Ctx:Parser:PushSymbol
+ '__operator' Ctx:Parser:PushSymbol
+; // PROCEDURE
+
+WordAlias procedure PROCEDURE
+WordAlias function FUNCTION
+
+^@ OPERATOR @^
+ // - возвращает ссылку на слово, любое, даже непосредственного исполнения
+ //   Не адрес, а именно ССЫЛКУ.
+ // Разница в примере:
+/*
+ @ A DO
+ @^ A
+ 
+ @ A ^:= 1
+ @^ A := 1
+ // - записи делают одно и то же
+*/ 
+ ^ LINK IN aSelf
+ aSelf &gt;&gt;&gt; Result
+; // @^
+
+VOID operator :=
+//operator :=
+// - пока так, иначе конструкция @ XXX -&gt; A := 1024 - не работает, т.к. XXX снимается со стека уже в контексте := И срабатывает КОНТРОЛЬ СТЕКА   
+  ^@ IN aLeft
+  ^ IN aRight
+ aRight DO &gt;&gt;&gt;^ aLeft
+;
+
+VOID operator ^:=
+  IN aLeft
+  ^ IN aRight
+ aRight DO &gt;&gt;&gt;^ aLeft
+;
+
+VOID operator &gt;&gt;&gt;[]
+  IN aLeft
+  ^ IN aRight
+ aLeft aRight DO Array:Add
+;
+
+operator IT 
+  ARRAY IN A
+  ^ IN aWhatToDo
+ aWhatToDo A ITERATE
+; // IT
+
+WordAlias ==&gt; IT
+
+operator for
+  ^ IN aList
+  ^ IN aWhatToDo
+ aList DO ==&gt; ( aWhatToDo DO )
+; // for
+
+WordAlias CONSTANT CONST
+
+IMMEDIATE VOID operator Test
+ @SELF Ctx:SetWordProducerForCompiledClass
+ 'VOID' Ctx:Parser:PushSymbol
+ '__operator' Ctx:Parser:PushSymbol
+; // Test
+
+WordAlias Тест Test
+
+WordAlias Если if
+WordAlias если if
+WordAlias то then
+WordAlias иначе else
+
+WordAlias выходим EXIT
+WordAlias Выходим EXIT
+
+WordAlias =:^ &gt;&gt;&gt;^
+WordAlias =: &gt;&gt;&gt;
+
+VOID operator +!
+  INTEGER IN anIncrement
+  ^ IN aWhatToIncrement
+// Пример:
+// {code}
+// VAR l_WinID
+// 5 &gt;&gt;&gt; l_WinID
+// 1 +! l_WinID
+// l_WinID .
+// {code}
+
+ aWhatToIncrement DO anIncrement + =:^ aWhatToIncrement
+; // +!
+
+WordAlias =+ +!
+
+VOID operator =- 
+  INTEGER IN anInc
+  ^ IN aWhatToDecrement
+ aWhatToDecrement DO anInc - =:^ aWhatToDecrement
+; // =-
+
+VOID operator +=
+  ^@ IN aLeft
+  ^ IN aRight
+ aLeft DO
+ aRight DO
+ +
+ &gt;&gt;&gt;^ aLeft
+;
+
+VOID operator -=
+  ^@ IN aLeft
+  ^ IN aRight
+ aLeft DO
+ aRight DO
+ -
+ &gt;&gt;&gt;^ aLeft
+;
+
+STRING FUNCTION strings:Cat ARRAY IN anArray
+ // - складывает строки массива на стеке
+
+ PROCEDURE DoCat STRING IN aStr1
+  Result := ( Result aStr1 Cat )
+ ; // DoCat
+
+ Result := ''
+ @ DoCat anArray ITERATE
+; // strings:Cat
+
+VOID operator INC
+  ^ IN aWhatToIncrement
+ aWhatToIncrement DO 1 + =:^ aWhatToIncrement
+; // INC
+
+WordAlias ++! INC
+WordAlias Inc INC
+
+VOID operator DEC
+  ^ IN aWhatToDecrement
+ aWhatToDecrement DO 1 - =:^ aWhatToDecrement
+; // DEC
+
+WordAlias --! DEC
+WordAlias Dec DEC
+
+BOOLEAN FUNCTION array:HasString ARRAY IN anArray STRING IN aString
+ Result := false
+
+  PROCEDURE Поиск STRING IN anItem
+   if ( anItem aString SameStr )
+    ( Result := true )
+  ; // Поиск
+
+  @ Поиск anArray ITERATE
+; // array:HasString
+
+BOOLEAN FUNCTION array:HasText ARRAY IN anArray STRING IN aString
+ Result := false
+
+  PROCEDURE Поиск STRING IN anItem
+   if ( anItem aString SameText )
+    ( Result := true )
+  ; // Поиск
+
+  @ Поиск anArray ITERATE
+; // array:HasText
+
+INTEGER FUNCTION array:StringCount ARRAY IN anArray STRING IN aString
+ Result := 0
+
+  PROCEDURE Поиск STRING IN anItem
+   if ( anItem aString SameStr )
+    ( ++! Result )
+  ; // Поиск
+
+  @ Поиск anArray ITERATE
+; // array:StringCount
+
+PROCEDURE "Сравнить текущее исключение с эталоном"
+ STRING VAR l_ClassName
+ current:exception:ClassName &gt;&gt;&gt; l_ClassName
+ l_ClassName .
+ STRING VAR l_Message
+ STRING VAR l_Message_out
+ current:exception:Message &gt;&gt;&gt; l_Message
+
+ if ( l_ClassName 'EAssertionFailed' SameText )
+  ( l_Message '(' string:Split DROP &gt;&gt;&gt; l_Message )
+ else
+  ( l_ClassName 'EAccessViolation' SameText ? (
+     l_Message ' at ' string:Split DROP &gt;&gt;&gt; l_Message
+    )
+  )
+ l_Message 'Главный файл:' string:Split =: l_Message_out =: l_Message
+ l_Message_out '. ' string:Split =: l_Message_out DROP
+ l_Message l_Message_out Cat .
+; // "Сравнить текущее исключение с эталоном"
+
+PROCEDURE "Выполнить и если было исключение, то выполнить" IN aProc1 IN aProc2
+ INTEGER VAR l_StackLevel
+ l_StackLevel := StackLevel
+ TRY
+  TRY
+   aProc1 DO
+  EXCEPT
+   "Сравнить текущее исключение с эталоном"
+   aProc2 DO
+  END
+ FINALLY
+  l_StackLevel ReduceStackLevel
+ END
+; // "Выполнить и если было исключение, то выполнить"
+
+VOID operator анти-тест
+  ^ IN aWhatToDo
+ VAR l_WasException
+ false =: l_WasException
+ "Выполнить {(@ ( aWhatToDo DO ) )} и если было исключение, то выполнить {(@ ( true =: l_WasException ) )}"
+ l_WasException
+  [ 'Тест ' script:FileName ' почему-то стал проходить' ] strings:Cat
+   ASSERTS
+; // анти-тест
+
+WordAlias "тест с падением" анти-тест
+
+VOID operator "Выполнить подавив исключение"
+  ^ IN aWhatToDo
+ VAR l_WasException
+ false =: l_WasException
+ "Выполнить {(@ ( aWhatToDo DO ) )} и если было исключение, то выполнить {(@ ( true =: l_WasException ) )}"
+ l_WasException
+  [ 'Запланированного исключения в тесте: ' script:FileName ' почему-то не случилось' ] strings:Cat
+   ASSERTS
+; // "Выполнить подавив исключение"
+
+PROCEDURE "Выполнить обработав исключение" OBJECT IN aProc STRING IN anException
+ TRY
+  aProc DO
+ EXCEPT
+  current:exception:Message anException ?!= ? RAISE
+ END
+; // "Выполнить обработав исключение"
+
+PROCEDURE ToDo STRING IN aString
+ 'To Do: ' aString Cat .
+; // ToDo
+
+PROCEDURE "! Тест в разработке"
+ script:FileName sysutils:ExtractFileName ' в состоянии разработки' Cat ToDo
+; // "! Тест в разработке"
+
+PROCEDURE OnTest
+// - ждёт обновления контролов по OnTest
+  3 LOOP (
+   ProcessMessages
+   application:ActionIdle
+  )
+  // - позволяем пройти всем OnTest
+; // OnTest
+
+WordAlias "Дать системе перерисоваться" OnTest
+
+PROCEDURE "Нажать" STRING IN aString
+ aString key
+ OnTest
+; // "Нажать"
+
+VOID operator "Обработать Enter модально"
+  ^ IN aWhatToDo
+ @ ( "Нажать {('Enter')}" ) MODAL ( aWhatToDo DO )
+; // "Обработать Enter модально"
+
+PROCEDURE ASSUME STRING IN aStr
+ // Включает "условную директиву" aStr в тестируемом приложении
+ // http://mdp.garant.ru/pages/viewpage.action?pageId=236719181 №44
+; // ASSUME
+
+PROCEDURE UNASSUME STRING IN aStr
+ // Выключает "условную директиву" aStr в тестируемом приложении
+ // http://mdp.garant.ru/pages/viewpage.action?pageId=236719181 №44
+; // UNASSUME
+
+BOOLEAN FUNCTION ArraysAreEqual ARRAY IN A ARRAY IN B
+ A IsArray 'Где массив?' ASSERTS
+ B IsArray 'Где массив?' ASSERTS
+ CONST l_Exception 'Выходим из итератора'
+ INTEGER VAR l_Index
+ l_Index := 0
+ INTEGER VAR l_Count
+ l_Count := ( A Array:Count )
+
+   PROCEDURE DoWithItem IN B[i]
+    if ( l_Index A [i] B[i] ?== ) then
+     ++! l_Index
+    else
+    (
+     Result := false
+     l_Exception RAISE
+    )
+   ;
+
+ if ( l_Count B Array:Count ?!= ) then
+ (
+  Result := false
+  EXIT
+ )
+ TRY
+  @ DoWithItem B ITERATE
+  Result := true
+ EXCEPT
+  if ( current:exception:Message l_Exception ?!= ) then
+   RAISE
+ END
+; // ArraysAreEqual
+
+BOOLEAN operator AND BOOLEAN
+  IN aFirst
+  ^ IN aSecond
+ // Двусторонний, а не обратный польский &&
+ if aFirst then
+  (
+   if ( aSecond DO ) then
+    ( Result := true )
+   else
+    ( Result := false )
+   )
+ else
+  ( Result := false )
+; // AND
+
+WordAlias И AND
+
+BOOLEAN operator OR BOOLEAN
+  IN aFirst
+  ^ IN aSecond
+ // Двусторонний, а не обратный польский ||
+ if aFirst then
+  ( Result := true )
+ else
+  if ( aSecond DO ) then
+   ( Result := true )
+  else
+   ( Result := false )
+; // OR
+
+WordAlias ИЛИ OR
+
+BOOLEAN operator NOT
+  ^ IN aWhatToNot
+ // Правосторонний, а не обратный польский !
+ Result := ( aWhatToNot DO ! )
+; // NOT
+
+WordAlias НЕ NOT
+
+BOOLEAN operator =
+  IN aLeft
+  ^ IN aRight
+ // Правосторонний, а не обратный польский ==
+ // ТЕПЕРЬ С БЛЭКДЖЕКОМ И МАССИВАМИ!
+
+//1 РАВНО 1  . - True
+//[ 10 20 ] РАВНО ( 10 20 ) . - True
+//[ 10 20 ] РАВНО ( [ 10 20 ] ) . - True
+//[ 10 ] РАВНО ( [ 10 ] ) . - True
+//[ 10 ] РАВНО ( 10 ) . - True
+//[ 10 ] РАВНО ( 20 ) . - False
+
+ ARRAY VAR l_Right
+ l_Right := [ aRight DO ]
+ TRY
+  if ( aLeft IsArray ) then
+  (
+   if
+    (
+     ( l_Right IsArray ) И
+     ( l_Right Array:Count 1 == ) И
+     ( 0 l_Right [i] IsArray )
+    )
+   then
+   (
+    Result := ( aLeft 0 l_Right [i] ArraysAreEqual )
+   )
+   else
+   (
+    Result := ( aLeft l_Right ArraysAreEqual )
+   )
+  )
+  else
+  (
+   if ( l_Right Array:Count 1 == ) then
+   (
+    Result := ( aLeft 0 l_Right [i] ?== )
+   )
+   else
+   (
+    Result := false
+   )
+  )
+ FINALLY
+  l_Right := [ ]
+  aLeft := nil
+ END
+; // =
+
+WordAlias РАВНО =
+
+BOOLEAN operator &lt;&gt;
+  IN aLeft
+  ^ IN aRight
+ // Правосторонний, а не обратный польский !=
+ Result := ( aLeft aRight DO ?!= )
+; //&lt;&gt;
+
+WordAlias НЕРАВНО &lt;&gt;
+WordAlias "НЕ РАВНО" НЕРАВНО
+
+BOOLEAN operator &gt;
+  STRING INTEGER BOOLEAN IN aLeft
+  ^ IN aRight
+ Result := ( aLeft aRight DO GREATER )
+;
+
+WordAlias БОЛЬШЕ &gt;
+
+BOOLEAN operator &lt;
+  STRING INTEGER BOOLEAN IN aLeft
+  ^ IN aRight
+  Result := ( aLeft aRight DO LESS )
+;
+
+WordAlias МЕНЬШЕ &lt;
+
+BOOLEAN operator &gt;=
+  STRING INTEGER BOOLEAN IN aLeft
+  ^ IN aRight
+ Result := ( aLeft &lt; ( aRight DO ) ! )
+;
+
+WordAlias "БОЛЬШЕ ИЛИ РАВНО" &gt;=
+
+BOOLEAN operator &lt;=
+  STRING INTEGER BOOLEAN IN aLeft
+  ^ IN aRight
+ Result := ( aLeft &gt; ( aRight DO ) ! )
+;
+
+WordAlias "МЕНЬШЕ ИЛИ РАВНО" &lt;=
+
+WordAlias ЯВЛЯЕТСЯ IS
+WordAlias Is IS
+
+BOOLEAN operator NOTIS
+  CLASS OBJECT IN anObj
+  ^ IN aClass
+ Result := NOT ( anObj Is ( aClass DO ) )
+; // NOTIS
+
+WordAlias NotIs NOTIS
+WordAlias НЕЯВЛЯЕТСЯ NOTIS
+WordAlias "НЕ ЯВЛЯЕТСЯ" НЕЯВЛЯЕТСЯ
+
+IMMEDIATE operator WordAliasByRef
+ ^L IN aName
+ ^ IN aCode
+ aCode DO aName |N Define
+; // WordAliasByRef
+
+IMMEDIATE operator [EXECUTE]
+ ^ IN aCode
+ aCode DO
+; // [EXECUTE] 
+ 
+STRING operator |NS
+ IN aName
+ Result := ( [ '`' aName |N '`' ] strings:Cat )
+; // |NS
+
+OBJECT FUNCTION %ST IN %S
+ if ( %S NotValid ) then
+ (
+  Result := nil
+ ) 
+ else
+ (
+  Result := ( %S pop:Word:Producer )
+ ) 
+; // %ST
+
+STRING FUNCTION |S IN %S
+ %S %ST |N =: Result
+; // |S
+
+operator WHILE
+  ^ IN aCondition
+  ^ IN aWhatToDo
+ @ ( aCondition DO ) WHILEDO ( aWhatToDo DO )
+; // WHILE
+
+WordAlias ПОКА WHILE
+WordAlias while WHILE
+
+OBJECT operator |^@
+ ^@ IN aSelf
+ aSelf pop:Word:GetRef &gt;&gt;&gt; Result
+; // |^@
+
+operator EVAL
+ ^ IN aWhat
+ aWhat |^@ DO
+; // EVAL 
+
+VOID CALLER operator ASSURE
+ ^ IN aCondition
+ ^ IN aMessage
+ if NOT EVAL aCondition then
+ begin
+  VAR l_Msg
+  aMessage DO &gt;&gt;&gt; l_Msg
+  if ( l_Msg IsArray ) then
+   ( l_Msg strings:Cat Caller __ERROR )
+  else
+   ( l_Msg Caller __ERROR )
+ end 
+; // ASSURE
+
+OBJECT operator %%
+ OBJECT IN aWord
+ ^ IN aName
+ 
+ OBJECT VAR l_Member
+ aName DO aWord pop:Word:FindMember &gt;&gt;&gt; l_Member
+ 
+ if ( l_Member pop:object:IsNil ) then
+  ( Result := nil )
+ else
+  ( Result := ( l_Member pop:KeyWord:Word ) ) 
+; // %%
+ 
+OBJECT FUNCTION %P IN %S
+ VAR l_P
+ l_P := ( %S pop:Word:Parent )
+ if ( l_P pop:Word:Name '%C' SameText ) then
+ ( 
+  l_P := ( l_P pop:Word:Parent )
+ ) 
+ if ( l_P NotValid ) then
+ (
+  Result := nil
+ ) 
+ else
+ (
+  Result := l_P
+ ) 
+; // %P
+
+ARRAY FUNCTION LIST
+ OBJECT IN anObject
+ ^ IN aFunctor
+ 
+ OBJECT VAR l_Element
+ l_Element := anObject
+ Result := [
+  while true
+  begin
+   l_Element := ( l_Element aFunctor DO )
+   if ( l_Element pop:object:IsNil ) then
+    BREAK
+   l_Element 
+  end
+ ]
+; // LIST
+ 
+^@ operator ::
+ ^@ IN aSelf
+ ^L IN aName
+
+ OBJECT VAR l_Self
+ aSelf |^@ &gt;&gt;&gt; l_Self
+ 
+ STRING VAR l_Name
+ aName |N &gt;&gt;&gt; l_Name
+ 
+ OBJECT VAR l_Res
+ l_Self %% l_Name &gt;&gt;&gt; l_Res
+ 
+ ASSURE 
+  NOT ( l_Res pop:object:IsNil ) 
+  [ 'Не найдено поле: ' l_Self LIST %P Reverted ==&gt; ( |N '::' ) l_Self |N '::' l_Name ]
+ l_Res &gt;&gt;&gt; Result
+; // ::
+ 
+OBJECT operator -&gt;^
+ ^@ IN aSelf
+ ^ IN aName
+ 
+ STRING VAR l_Name
+ aName DO &gt;&gt;&gt; l_Name
+ 
+ OBJECT VAR l_Self
+ aSelf |^@ &gt;&gt;&gt; l_Self
+ 
+ if ( l_Self pop:object:IsNil ) then
+ begin
+  nil &gt;&gt;&gt; Result
+ end 
+ else 
+ begin
+  VAR l_NewVar
+  
+  l_Name l_Self pop:NewWordDefinitor:CheckWord pop:KeyWord:Word &gt;&gt;&gt; l_NewVar
+  
+  if ( l_NewVar pop:object:IsNil ) then
+   (
+    l_Name false l_Self pop:NewWordDefinitor:CheckVar
+    
+     &gt;&gt;&gt; l_NewVar
+    Ctx:ClearTypeInfo
+    
+    @ VAR l_NewVar pop:Word:SetProducer
+   )
+  
+  l_NewVar &gt;&gt;&gt; Result
+ end // l_Self pop:object:IsNil
+; // -&gt;^
+
+^@ operator -&gt;
+ ^@ IN aSelf
+ ^L IN aName
+
+ aSelf -&gt;^ ( aName |N ) &gt;&gt;&gt; Result
+; // -&gt;
+
+OBJECT FUNCTION %T IN %S
+ VAR l_T
+ l_T := ( %S -&gt;^ '%T' )
+ if ( l_T NotValid ) then
+ (
+  Result := nil
+ ) 
+ else
+ (
+  l_T := ( l_T DO )
+  if ( l_T NotValid ) then
+  (
+   Result := nil
+  ) 
+  else
+  (
+   Result := l_T
+  )
+ )
+; // %T
+
+STRING FUNCTION %TN IN %S
+ Result := ( %S %T |N )
+; // %TN
+
+STRING FUNCTION %TS IN %S
+ Result := ( %S %T |S )
+; // %TS
+
+STRING FUNCTION |U IN %S
+ VAR l_U
+ l_U := ( %S -&gt;^ '%U' )
+ if ( l_U NotValid ) then
+ (
+  Result := ''
+ ) 
+ else
+ (
+  Result := ( l_U DO |N )
+ )
+; // |U
+
+WordAlias ДА true
+
+WordAlias НЕТ false
+
+BOOLEAN operator "в интервале"
+  INTEGER IN aValue
+  ^ IN anInterval
+ INTEGER VAR "нижнее значение"
+ INTEGER VAR "верхнее значение"
+ ( anInterval DO )
+ &gt;&gt;&gt; "верхнее значение"
+ &gt;&gt;&gt; "нижнее значение"
+ Result := ( ( aValue "БОЛЬШЕ ИЛИ РАВНО" "нижнее значение" )
+ И ( aValue "МЕНЬШЕ ИЛИ РАВНО" "верхнее значение" ) )
+; // "в интервале"
+   
+ARRAY FUNCTION SplitToArray
+ STRING IN aValue
+ STRING IN aDelim
+ STRING VAR l_Tail
+ aValue &gt;&gt;&gt; l_Tail
+ if ( l_Tail = '' ) then
+ begin
+  Result := [ '' ]
+ end 
+ else
+ begin 
+  Result := [ 
+   while ( l_Tail &lt;&gt; '' )
+   begin
+    l_Tail aDelim string:Split &gt;&gt;&gt; l_Tail
+   end
+  ]
+ end
+; // SplitToArray
+
+IMMEDIATE operator __INIT_VAR
+ IN aValue
+ ^ IN aVar
+ aValue &gt;&gt;&gt;^ aVar
+; // __INIT_VAR
+
+PROCEDURE Ctx:Parser:PushSymbols
+ STRING IN aString
+ aString ' ' SplitToArray ==&gt; ( 
+  STRING IN aStr
+  aStr '%#32' ' ' string:Replace &gt;&gt;&gt; aStr
+  if ( '`' aStr StartsStr ) then
+  begin
+   aStr '`' '' string:Replace Ctx:Parser:PushString
+  end
+  else
+  begin
+   aStr Ctx:Parser:PushSymbol 
+  end
+ )
+; // Ctx:ParserPushSymbols
+
+PROCEDURE Ctx:Parser:PushArray
+ ARRAY IN anArray
+ anArray ==&gt; Ctx:Parser:PushSymbols
+; // Ctx:Parser:PushArray
+
+IMMEDIATE VOID operator WordProducer
+  ^L IN aName
+ 
+ @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE __operator'
+  aName |N
+  '@SELF Ctx:SetWordProducerForCompiledClass'
+  '@ operator DO'
+  ';'
+ ] Ctx:Parser:PushArray
+; // WordProducer
+ 
+IMMEDIATE VOID operator NamedWordProducer
+  ^L IN aName
+  ^L IN aNewName
+ 
+ @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE __operator'
+  aName |N
+  '@SELF Ctx:SetWordProducerForCompiledClass'
+  aNewName |NS
+  'Ctx:SetNewWordName'
+  '@ operator DO'
+  ';'
+ ] Ctx:Parser:PushArray
+; // NamedWordProducer
+
+WordAlias ClassProducer WordProducer
+
+NamedWordProducer %INHERITS %G
+ // - список унаследованных элементов
+
+NamedWordProducer %CHILDREN %C
+// - список дочерних элементов элемента
+
+IMMEDIATE VOID operator VarProducer
+  ^L IN aName
+ STRING VAR l_Name
+ aName |N &gt;&gt;&gt; l_Name
+
+ [
+  'IMMEDIATE __operator'
+  l_Name
+  '^L IN aName'
+  'aName |N @SELF __DefineVar'
+  ';'
+ ] Ctx:Parser:PushArray
+; // VarProducer
+
+IMMEDIATE VOID operator InitedVarProducer
+  ^L IN aName
+ 
+ [
+  'IMMEDIATE __operator'
+  aName |N
+  '^L IN aName'
+  '^ IN aValue'
+  'VAR l_NewVar'
+  'aName |N @SELF __DefineVarEx &gt;&gt;&gt; l_NewVar'
+  'aValue DO &gt;&gt;&gt;^ l_NewVar'
+  ';'
+ ] Ctx:Parser:PushArray
+; // InitedVarProducer
+
+operator AllMembers==&gt;
+// Итерирует все вложенные элементы рекурсивно
+ OBJECT IN anObject
+ ^ IN aLambda
+ 
+ FORWARD DoMembers
+ 
+ PROCEDURE DoMembers
+  OBJECT IN anObject
+  anObject MembersIterator ==&gt; (
+   IN aWord 
+   aWord aLambda DO
+   aWord DoMembers
+  )
+ ; // DoMembers
+ 
+ anObject DoMembers
+; // AllMembers==&gt;
+
+STRING FUNCTION strings:CatSep 
+ // - складывает строки массива
+  ARRAY IN anArray
+  STRING IN aSep
+
+ PROCEDURE DoCat 
+  STRING IN aStr
+  
+  if ( aStr &lt;&gt; '' ) then
+  begin
+   if ( Result = '') then
+    ( Result := aStr )
+   else
+    (
+     if ( aSep Result EndsStr ) then
+      (
+       Result := ( Result aStr Cat )
+      )
+     else
+      (
+       Result := ( Result aSep Cat aStr Cat )
+      ) 
+    )
+  end // aStr &lt;&gt; ''
+ ; // DoCat
+
+ Result := ''
+ @ DoCat anArray ITERATE
+; // strings:Cat
+
+PROCEDURE __DumpMembers
+ OBJECT IN anObject
+ 
+ PROCEDURE Dump
+  OBJECT IN anObject
+   [
+    anObject pop:Word:Directives
+    anObject LIST %ST Reverted ==&gt; |N
+    anObject |N
+   ] ' ' strings:CatSep .
+ ; // Dump
+ 
+ anObject Dump
+ anObject AllMembers==&gt; Dump
+ anObject %P Dump
+; // __DumpMembers
+
+operator Ctx:Parser:PushSymbolAtRight
+ ^L IN aName 
+ aName |N Ctx:Parser:PushSymbol
+; // Ctx:Parser:PushSymbolAtRight
+
+IMMEDIATE VOID operator NamedInitedVarProducer
+  ^L IN aName
+  ^L IN aNewName
+ 
+ @SELF Ctx:SetWordProducerForCompiledClass 
+ [
+  'IMMEDIATE __operator'
+  aName |N
+  '^ IN aValue'
+  
+  'VAR l_NewVar'
+  
+  aNewName |NS
+  
+  '@SELF __DefineVarEx &gt;&gt;&gt; l_NewVar'
+  'aValue DO &gt;&gt;&gt;^ l_NewVar'
+  ';'
+ ] Ctx:Parser:PushArray
+; // NamedInitedVarProducer
+
+NamedInitedVarProducer %DOCUMENTATION %Doc
+// - документация к элементу
+
+IMMEDIATE VOID operator NamedAutolinkProducer
+ ^L IN aOpName
+ ^L IN aName
+ 
+ @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE __operator'
+  aOpName |N
+  '^ IN aCode'
+  'aCode '
+  aName |NS
+  'Define'
+  ';' 
+ ] Ctx:Parser:PushArray
+; // NamedAutolinkProducer
+
+STRING FUNCTION __CheckSpaces
+ STRING IN aName
+ aName ' ' '%#32' string:Replace &gt;&gt;&gt; Result
+; // __CheckSpaces
+
+STRING FUNCTION Add&lt;&lt;&gt;&gt;
+ STRING IN aName
+ [ '&lt;&lt;' aName '&gt;&gt;' ] strings:Cat &gt;&gt;&gt; Result
+ Result __CheckSpaces &gt;&gt;&gt; Result
+; // Add&lt;&lt;&gt;&gt;
+
+STRING FUNCTION Add&lt;&lt;@&gt;&gt;
+ STRING IN aName
+ [ '@' aName ] strings:Cat Add&lt;&lt;&gt;&gt; &gt;&gt;&gt; Result
+; // Add&lt;&lt;&gt;&gt;
+
+VOID operator DefineStereo
+ IN aName
+ IN aSelf
+ 
+ aSelf
+ Ctx:SetWordProducerForCompiledClass
+ 
+ [
+  'IMMEDIATE __operator' aName Add&lt;&lt;&gt;&gt;
+  '^L IN aName'
+ 
+  'aName |N @SELF DefineStereoInstance'
+ 
+  'EXIT'
+ ] Ctx:Parser:PushArray
+; // DefineStereo
+ 
+VOID operator DefineStereoInstance
+ IN aName
+ IN aSelf
+ 
+ aSelf
+ Ctx:SetWordProducerForCompiledClass
+ 
+ [
+  '__operator' aName __CheckSpaces
+ ] Ctx:Parser:PushArray
+; // DefineStereoInstance
+
+/*{IMMEDIATE operator StereotypeProducer
+  ^L IN aName
+  
+ @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE __operator' aName |N Add&lt;&lt;&gt;&gt;
+  '^L IN aName'
+  'aName |N @SELF DefineStereo'
+  
+  'EXIT'
+ ] Ctx:Parser:PushArray
+; // StereotypeProducer}*/
+
+VOID operator DefineStereotypeProducer
+ IN aName
+ IN aSelf
+ 
+ aSelf
+ Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE __operator' aName Add&lt;&lt;&gt;&gt;
+  '^L IN aName'
+  'aName |N @SELF DefineStereo'
+  
+  'EXIT'
+ ] Ctx:Parser:PushArray
+; // DefineStereotypeProducer
+
+IMMEDIATE VOID operator StereotypeStereotypeProducer
+  ^L IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass 
+ [
+  'IMMEDIATE __operator' aName |N Add&lt;&lt;@&gt;&gt;
+  '^L IN aName'
+  
+  'aName |N @SELF DefineStereotypeProducer'
+  
+  'EXIT'
+ ] Ctx:Parser:PushArray
+; // StereotypeStereotypeProducer
+
+StereotypeStereotypeProducer StereotypeProducer ;
+WordAlias StereotypeProducer &lt;&lt;@StereotypeProducer&gt;&gt;

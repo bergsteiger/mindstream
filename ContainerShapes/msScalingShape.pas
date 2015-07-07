@@ -13,7 +13,7 @@ type
   f_Scale : Extended;
  protected
   function ExtentCoeff: Extended; override;
-  constructor CreateInner(const aShape: ImsShape; aScale : Extended);
+  constructor CreateInner(const aShapeClass : ImsShapeClass; const aShape: ImsShape; aScale : Extended);
   procedure DoDrawTo(const aCtx: TmsDrawContext); override;
  public
   class function Create(const aShape: ImsShape; aScale : Extended): ImsShape;
@@ -23,20 +23,21 @@ implementation
 
 uses
  System.Types,
- System.Math.Vectors
+ System.Math.Vectors,
+ msShapeClass
  ;
 
 // TmsScalingShape
 
-constructor TmsScalingShape.CreateInner(const aShape: ImsShape; aScale : Extended);
+constructor TmsScalingShape.CreateInner(const aShapeClass : ImsShapeClass; const aShape: ImsShape; aScale : Extended);
 begin
- inherited CreateInner(aShape);
+ inherited CreateInner(aShapeClass, aShape);
  f_Scale := aScale;
 end;
 
 class function TmsScalingShape.Create(const aShape: ImsShape; aScale : Extended): ImsShape;
 begin
- Result := CreateInner(aShape, aScale);
+ Result := CreateInner(Self.MC, aShape, aScale);
 end;
 
 function TmsScalingShape.ExtentCoeff: Extended;

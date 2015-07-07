@@ -1,0 +1,15 @@
+CONST cFake 2
+
+: TestWord
+ CONST cHello 'Hello'
+ cHello .
+ cFake .
+;
+
+// $Id: Included.script,v 1.2 2011/05/06 11:58:01 lulin Exp $
+
+// $Log: Included.script,v $
+// Revision 1.2  2011/05/06 11:58:01  lulin
+// {RequestLink:265410566}.
+// - делаем тест.
+//

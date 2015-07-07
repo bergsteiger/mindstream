@@ -1,0 +1,61 @@
+PROCEDURE "##Подготовить главное окно к тесту"
+ 0 "Главное окно" pop:control:SetTop
+ 0 "Главное окно" pop:control:SetLeft
+;
+
+PROCEDURE "Уменьшить окно" OBJECT IN "Окно"
+ CONST wsNormal 0
+ wsNormal "Окно" pop:form:SetWindowState
+; // "Уменьшить окно"
+
+PROCEDURE "Развернуть окно" OBJECT IN "Окно"
+ CONST wsMaximized 2
+ wsMaximized "Окно" pop:form:SetWindowState
+; // "Развернуть окно"
+
+PROCEDURE "Свернуть окно" OBJECT IN "Окно"
+ CONST wsMinimized 1
+ wsMinimized "Окно" pop:form:SetWindowState
+; // "Свернуть окно"
+
+PROCEDURE "Сделать с изменением состояния и размеров окна" OBJECT IN aProc OBJECT IN aForm
+ VAR aState
+ VAR L
+ VAR T
+ VAR W
+ VAR H
+ aForm pop:form:GetWindowState >>> aState
+ aForm "Померить отступ слева" >>> L
+ aForm "Померить отступ сверху" >>> T
+ aForm "Померить ширину" >>> W
+ aForm "Померить высоту" >>> H
+ TRY
+  aProc DO
+ FINALLY
+  aState aForm pop:form:SetWindowState
+  L aForm pop:control:SetLeft
+  T aForm pop:control:SetTop
+  W aForm "Установить ширину"
+  H aForm "Установить высоту"
+ END
+; // "Сделать с изменением состояния и размеров окна"
+
+INTEGER FUNCTION "Сохранить активное окно"
+  //form:GetHandle
+  focused:control:push pop:control:GetTopParentForm pop:control:GetHandle >>> Result 
+;
+
+WORDWORKER "Открыть новое окно Гаранта и выполнить"
+ VAR l_Main
+ "Сохранить активное окно" >>> l_Main
+ TRY
+  "Открыть новое окно гаранта"
+  "Дождаться переключения вкладок"
+  ( WordToWork DO )
+ FINALLY
+  l_Main "Восстановить активное окно"
+  "Закрыть все окна кроме текущего"
+ END
+;
+
+

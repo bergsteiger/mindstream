@@ -1,0 +1,18 @@
+Тест TestImmediateWordWorker
+
+ operator CountIt INTEGER IN aCount
+   ^ IN WordToWork
+  aCount LOOP ( WordToWork DO )
+ ;
+ 
+ IMMEDIATE operator ImmediateCountIt 
+   ^@ IN aCount
+   ^ IN aWordToWork
+  aCount DO LOOP ( aWordToWork DO )
+ ;
+ 
+ 10 CountIt ( 'A' . )
+ 20 ImmediateCountIt ( 'BC' . )
+;
+
+TestImmediateWordWorker

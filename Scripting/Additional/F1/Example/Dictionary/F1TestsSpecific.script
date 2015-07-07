@@ -1,0 +1,243 @@
+USES
+ HLTCLike.script
+ WordsTranslation.script
+ @\SysUtils.script
+ @\Mouse.script
+ Editor.script
+ Controls.script
+ Forms.script
+ F1ControlsDefinition.script
+ EVDSchema.script
+ DocumentNumbers.script
+ Reminders.script
+ DocumentProcessing.script
+ DocumentList.script
+;
+
+PROCEDURE "Проверить работу настроек печати и экспорта для K414849897"
+ "Открываем {(1055620)}"
+ "Выделить всё"
+ "Отделить текст в эталоне"
+ 'Проверка экспорта в Word:' .
+ INTEGER VAR aFontSizeInt
+ STRING VAR aFontSize
+ aSetFontSizeForExportUserValue StrToInt =: aFontSizeInt
+ aFontSizeInt 2 * >>> aFontSizeInt
+ [ '\fs' aFontSizeInt IntToStr ] strings:Cat >>> aFontSize
+ "Ищем строку {(aFontSize)} в эталоне документа"
+ "Дождаться переключения вкладок"
+ "Предварительный просмотр с эталонами"
+;
+
+PROCEDURE "Сравнить с эталоном имя поля КЗ и его контекстное меню"
+ CONST cSeparator '_'
+ STRING VAR str1
+ STRING VAR str2
+ "Контрол в фокусе" "Узнать имя поля КЗ" =: str1
+ Если ( str1 "НЕ РАВНО" '' ) то
+  ( str1 cSeparator string:Split =: str2 =: str1
+  Если ( str1 РАВНО 'AT' ) то
+   ( Если ( str2 РАВНО 'TEXT_NAME' ! ) то
+    ( Если ( str2 РАВНО 'EDITION' ! ) то
+     ( Если ( str2 РАВНО 'TEXT_BODY' ! ) то
+      ( Если ( ( str2 РАВНО 'PUBLISHING_DATE' ) 
+          ИЛИ ( str2 РАВНО 'LC_IN_DATE' ) 
+          ИЛИ ( str2 РАВНО 'LC_ABOLISHED_DATE' ) 
+          ИЛИ ( str2 РАВНО 'LC_CHANGED_DATE' ) 
+          ИЛИ ( str2 РАВНО 'REG_DATE' ) ) то
+          ( @ ( "Нажать {('Enter')}" ) MODAL ( 'Поле КЗ: ' "Контрол в фокусе" "Получить родительскую форму" "Заголовок контрола" ToPrintable Cat . ) )
+         иначе
+          ( @ ( "Нажать {('Enter')}" ) MODAL ( 'Поле КЗ: ' "Контрол в фокусе" "Нижняя форма" "Заголовок контрола" ToPrintable Cat . ) )
+      )
+      иначе
+      ( 'Поле КЗ: Слова в тексте' . )
+     )
+    иначе
+     ( 'Поле КЗ: Искать в недействующих редакциях' . )
+    )
+   иначе
+    ( 'Поле КЗ: Слова в названии' . )
+   )
+  )
+  "Сравнить контекстное меню с эталоном"
+  "Отделить текст в эталоне"
+; // "Сравнить с эталоном имя поля КЗ и его контекстное меню"
+
+: "В первом поле 'Слова в названии' выполнить" IN aProc
+ "Контрол в фокусе" pop:QueryCard:GetCurrentReqName РАВНО 'AT_TEXT_NAME' ? (
+  aProc DO 
+ )
+;
+
+: "Пробежаться по всем полям КЗ ППР и выполнить" IN aProc
+
+ OBJECT VAR КЗ "Контрол в фокусе" >>> КЗ 
+ BOOLEAN FUNCTION "Дошли до первого поля"
+  false =: Result
+  ( КЗ РАВНО "Контрол в фокусе" ) И 
+  ( КЗ pop:QueryCard:GetCurrentReqName 'AT_TEXT_NAME' SameStr ) ?
+  (
+   'Попали в первое поле' .
+   true =: Result 
+  )
+ ; //   BOOLEAN FUNСTION
+
+ : Действия
+  OBJECT VAR КЗ 
+  "Контрол в фокусе" >>> КЗ 
+  1000 раз ( 
+   VAR "Предыдущий параграф"
+   КЗ pop:editor:PushParaFromCursor >>> "Предыдущий параграф"
+   "Совершить переход по Таб"
+   evd::id_ControlsBlock КЗ pop:editor:PushParaFromCursor Para:Type:Inherits ? CONTINUE
+   evd::id_ControlPara КЗ pop:editor:PushParaFromCursor Para:Type:Inherits [ 'Текущий параграф не является контролом, а: ' КЗ pop:editor:PushParaFromCursor Para:GetType pop:object:ClassName ] strings:Cat ASSERTS
+
+   evd::ti_Type КЗ pop:editor:PushParaFromCursor Para:IntA РАВНО 0 ? "Совершить переход по Таб"
+   Если ( КЗ "НЕ РАВНО" "Контрол в фокусе" ) то 
+    (
+     'Вышли за пределы КЗ' .
+     Выходим
+    )
+    
+   Если "Дошли до первого поля" то 
+    выходим
+    
+   VAR "Текущий параграф"
+   КЗ pop:editor:PushParaFromCursor >>> "Текущий параграф"
+   Если ( "Предыдущий параграф" "Текущий параграф" Para:IsSame ) то 
+    ( 
+     'Предыдущее поле совпало с текущим (залипли)' .
+     Выходим
+    ) 
+
+   aProc DO
+
+  ) // 1000 раз
+ ; // Действия
+
+ ППР
+ "В первом поле 'Слова в названии' выполнить {(aProc)}"
+ "Выполнить {(@ Действия )} с развёрнутым полем Регистрация в МЮ"
+; // "Пробежаться по всем полям КЗ ППР и выполнить"
+
+PROCEDURE "Получить заголовок поля для ОИЗ"
+ Если ( "Контрол в фокусе" "Узнать, в каком поле КЗ стоит фокус" РАВНО 'AT_PUBLISHING_DATE' ) то
+  ( @ ( "Нажать Enter" ) MODAL ( 'Поле КЗ: ' "Контрол в фокусе" "Получить родительскую форму" "Заголовок контрола" ToPrintable Cat . ) )
+ иначе
+  ( @ ( "Нажать Enter" ) MODAL ( 'Поле КЗ: ' "Контрол в фокусе" "Нижняя форма" "Заголовок контрола" ToPrintable Cat . ) )
+; // "Получить заголовок поля для ОИЗ"
+
+PROCEDURE "Пробежаться по полям ОИЗ и выполнить" IN aProc
+
+ "Обзор изменений законодательства"
+ OBJECT VAR КЗ "Контрол в фокусе" >>> КЗ 
+ 50 раз ( 
+  VAR "Предыдущий параграф"
+  КЗ pop:editor:PushParaFromCursor >>> "Предыдущий параграф"
+  aProc DO  
+  "Совершить переход по Таб"
+  evd::id_ControlsBlock КЗ pop:editor:PushParaFromCursor Para:Type:Inherits ? CONTINUE
+  evd::id_ControlPara КЗ pop:editor:PushParaFromCursor Para:Type:Inherits [ 'Текущий параграф не является контролом, а: ' КЗ pop:editor:PushParaFromCursor Para:GetType pop:object:ClassName ] strings:Cat ASSERTS
+  evd::ti_Type КЗ pop:editor:PushParaFromCursor Para:IntA РАВНО 0 ? "Совершить переход по Таб"
+  Если ( КЗ "НЕ РАВНО" "Контрол в фокусе" ) то 
+   (
+    'Вышли за пределы КЗ' .
+    Выходим
+   ) // Вышли из КЗ
+  VAR "Текущий параграф"
+  КЗ pop:editor:PushParaFromCursor >>> "Текущий параграф"
+  Если ( "Предыдущий параграф" "Текущий параграф" Para:IsSame ) то 
+   выходим 
+ ) // 50 раз
+
+; // "Пробежаться по полям ОИЗ и выполнить"
+
+WORDWORKER "Пробежаться по всем полям КЗ ППР (по Tab) и выполнить"
+ "Пробежаться по всем полям КЗ ППР и выполнить {(@  ( WordToWork DO )  )}"
+;
+
+WORDWORKER "Пробежаться по полям ОИЗ (по Tab) и выполнить"
+ "Пробежаться по полям ОИЗ и выполнить {(@  ( WordToWork DO )  )}"
+;
+
+PROCEDURE "Ввести контекст в контекстный фильтр модального окна 'Номер' и, если он корректен и кол-во номеров меньше 100 000, сравнить их с эталоном" STRING IN aContext
+ ППР
+ "Перевести фокус в поле 'Номер' в ППР"
+ "Обработать Enter модально" ( 
+  OBJECT VAR Parent
+  INTEGER VAR Max_Num_Node
+  "Контрол в фокусе" "Получить родительскую форму" =: Parent
+  "Найти контрол {('InternalEditor')} на форме {( Parent )}"  "Установить фокус"
+  "Ввести строку {(aContext)}"
+  Если ( "Узнать, корректен ли контекст (был ли звуковой сигнал)" ! ) то
+   ( "Дождаться переключения вкладок"
+     контрол::AttributeTree:push "Установить фокус"
+     "Контрол в фокусе" "Узнать количество элементов дерева" >>> Max_Num_Node 
+     'Контекст: '  aContext ToPrintable Cat . 
+     [ 'Количество элементов дерева: ' Max_Num_Node  IntToStr ] strings:Cat .
+     Если ( Max_Num_Node МЕНЬШЕ 100000 ) то  
+      ( 
+       Max_Num_Node раз (
+        "Контрол в фокусе" "Заголовок контрола" .
+       "Стрелка вниз" 
+      )
+     )
+   ) 
+  иначе
+   ( 'Контекст: '  aContext ToPrintable Cat . 
+     'Номеров с таким контекстом - нет!' . )
+  "Нажать {('Esc')}"
+ )
+ "Отделить текст в эталоне"
+;
+
+PROCEDURE "Установить значение 'Поведение интерфейса\Начало работы' в , открыть новое окно и сравнить его иерархию контролов с эталоном" STRING IN aName
+ "Восстановить все настройки текущей конфигурации"
+ TRY
+  @ "Настройка конфигурации" MODAL ( 
+   "Путь до контрола: {(2)} раз вниз, {(1)} раз Tab"
+   "Дождаться переключения вкладок"
+   "Выбрать в комбобоксе {("Контрол в фокусе")} значение {(aName)}"
+   "Дождаться переключения вкладок"
+   "Кликаем Ок в Настройке конфигурации"
+  )
+  "Открыть новое окно Гаранта и выполнить" (
+  "Проверить иерархию вложенности текущего контрола" )
+ FINALLY
+  "Восстановить все настройки текущей конфигурации"
+  "Отделить текст в эталоне"
+ END
+;
+
+PROCEDURE "Установить отмеченность чекбокса в" BOOLEAN IN aChecked
+ PROCEDURE Действия_с_контролом OBJECT IN aCtrl 
+  ( aCtrl ЯВЛЯЕТСЯ class::TvtCheckBox ) ? (
+   если aChecked
+    "Поставить галочку в чекбоксе" 
+   иначе
+    "Снять галочку в чекбоксе" 
+  )
+  ( aCtrl ЯВЛЯЕТСЯ class::TvtCheckBox ) ? (
+   [ aCtrl "Заголовок контрола" ' (галочка): ' "Получить состояние чекбокса {(aCtrl)}"  ToPrintable ] strings:Cat .
+  )
+  ( ( aCtrl ЯВЛЯЕТСЯ class::TvtSpinEdit ) ИЛИ ( aCtrl ЯВЛЯЕТСЯ class::TCustomUpDown ) ) ? ( 
+   "Отделить текст в эталоне"  
+   aCtrl .
+   'Активность: ' "Убедиться, что контрол  {(aCtrl)} активен" ToPrintable Cat .
+  )
+ ;
+ OBJECT VAR "GroupBox"
+ "Контрол в фокусе" "Перейти к родительской форме" >>> "GroupBox"
+ "Выполнить для всех контролов {("GroupBox")}" Действия_с_контролом
+;
+
+PROCEDURE "Проверить корректность смены активности TvtUpDown для чекбокса 'Настройка конфигурации - Поиск - Подтверждения'" INTEGER IN aNum
+ @ "Настройка конфигурации" MODAL (  
+  "Путь до контрола (в подтверждениях или метках на полях): {(3)} раз вниз, {(1)} раз вниз, {(aNum)} раз Tab"
+  "Установить отмеченность чекбокса в {(false)}"
+  '~~~~~~~~~~~~~~~~~~~~~~' .
+  "Установить отмеченность чекбокса в {(true)}"
+  '~~~~~~~~~~~~~~~~~~~~~~' .
+  "Нажать кнопку Отмена в Настройке конфигурации"
+ )
+;

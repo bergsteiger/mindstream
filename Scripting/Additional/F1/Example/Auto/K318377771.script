@@ -1,0 +1,23 @@
+Тест K318377771
+
+ Выполнить (
+  : Действия
+   OBJECT VAR l_QC
+   ППР
+   focused:control:push >>> l_QC
+   "Нажать на медаль {("Синяя медаль о наличии консультаций")} и проверить наличие баллона"
+   OBJECT VAR "Баллон"
+   "Синяя медаль о наличии консультаций" byname:control:push pop:Reminder:FindEditor pop:Control:GetAnotherParentForm pop:Control:GetAnotherParentForm =: "Баллон"
+   "Установить фокус в {(l_QC)}"
+   "Убедиться, что фокус в редакторе"
+   'AT_TYPE' l_QC pop:QueryCard:Attribute:SetFocus
+   "Нажать {('Ctrl+Down')}"
+   "Баллон" "Узнать, виден ли контрол" ! 'Баллон открыт, хотя не должен.' ASSERTS
+   "Нажать {('Esc')}"
+  ;
+
+  "Добавить синюю медаль консультаций и сделать {(@ Действия)}"
+ )
+;
+
+K318377771

@@ -6,15 +6,19 @@
 			"type": "msDiagramm.TmsDiagramm",
 			"id": 2,
 			"fields": {
-				"fName": "¹1",
+				"fName": "main",
 				"f_Items": [{
-					"type": "msRoundedRectangle.TmsRoundedRectangle",
+					"type": "msCircle.TmsCircle",
 					"id": 3,
 					"fields": {
-						"FStartPoint": [[72,
-						90],
-						72,
-						90],
+						"FStartPoint": [[228,
+						261],
+						228,
+						261],
+						"f_ShapeClassName": "Usecase",
+						"f_Name": "Usecase1",
+						"f_UID": [[5666879128394652758,
+						-4664517145513145670]],
 						"f_Items": []
 					}
 				},
@@ -22,98 +26,37 @@
 					"type": "msCircle.TmsCircle",
 					"id": 4,
 					"fields": {
-						"FStartPoint": [[516,
-						74],
-						516,
-						74],
+						"FStartPoint": [[434,
+						171],
+						434,
+						171],
+						"f_ShapeClassName": "UsecaseRealization",
+						"f_Name": "UsecaseRealization2",
+						"f_UID": [[5336207554631615863,
+						5579974806756757411]],
 						"f_Items": []
 					}
 				},
 				{
-					"type": "msRedRectangle.TmsRedRectangle",
+					"type": "msConnector.TmsConnector",
 					"id": 5,
 					"fields": {
-						"FStartPoint": [[285,
-						442],
-						285,
-						442],
-						"f_Items": []
-					}
-				},
-				{
-					"type": "msRemoveIcon.TmsRemoveIcon",
-					"id": 6,
-					"fields": {
-						"FStartPoint": [[88,
-						268],
-						88,
-						268],
-						"f_Items": []
-					}
-				},
-				{
-					"type": "msGreenCircle.TmsGreenCircle",
-					"id": 7,
-					"fields": {
-						"FStartPoint": [[519,
-						269],
-						519,
-						269],
-						"f_Items": []
-					}
-				},
-				{
-					"type": "msTriangleDirectionRight.TmsTriangleDirectionRight",
-					"id": 8,
-					"fields": {
-						"FStartPoint": [[293,
-						92],
-						293,
-						92],
-						"f_Items": []
-					}
-				},
-				{
-					"type": "msTriangle.TmsTriangle",
-					"id": 9,
-					"fields": {
-						"FStartPoint": [[69,
-						458],
-						69,
-						458],
-						"f_Items": []
-					}
-				},
-				{
-					"type": "msUseCaseLikeEllipse.TmsUseCaseLikeEllipse",
-					"id": 10,
-					"fields": {
-						"FStartPoint": [[520,
-						461],
-						520,
-						461],
-						"f_Items": []
-					}
-				},
-				{
-					"type": "msFolder.TmsFolder",
-					"id": 11,
-					"fields": {
-						"FStartPoint": [[293,
-						251],
-						293,
-						251],
-						"f_Items": []
-					}
-				},
-				{
-					"type": "msTextShape.TmsTextShape",
-					"id": 12,
-					"fields": {
-						"FStartPoint": [[291,
-						261],
-						291,
-						261],
+						"f_UIDLeft": [[5336207554631615863,
+						5579974806756757411]],
+						"f_UIDRight": [[5666879128394652758,
+						-4664517145513145670]],
+						"f_FinishPoint": [[233,
+						258],
+						233,
+						258],
+						"FStartPoint": [[438,
+						182],
+						438,
+						182],
+						"f_ShapeClassName": "Realization",
+						"f_Name": "Realization3",
+						"f_UID": [[4753578817117486830,
+						-4737649553527251799]],
 						"f_Items": []
 					}
 				}]

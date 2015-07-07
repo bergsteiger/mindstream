@@ -33,7 +33,8 @@ uses
  SysUtils,
  msStreamUtils,
  Windows,
- ShellAPI
+ ShellAPI,
+ FMX.DUnit.Settings
  ;
 
 // TmsLoggedTest
@@ -133,10 +134,11 @@ begin
  l_EtalonFileName:= l_TestFileName + cEtalon + ExtractFileExt(l_TestFileName);
  Result := not IsEtalonValid(l_TestFileName, l_EtalonFileName);
  if Result then
-  RunDiffPrim(l_TestFileName, l_EtalonFileName);
+  RunDiffPrim(l_TestFileName, l_EtalonFileName)
 end;
 
-procedure TmsLoggedTest.RunDiffPrim(const aFileName: String; const anEtalonName: String);
+procedure TmsLoggedTest.RunDiffPrim(const aFileName: String;
+                                    const anEtalonName: String);
 const
  c_cmdFileName = 'diff.cmd';
 var
@@ -144,6 +146,9 @@ var
  l_ExecInfo: TShellExecuteInfo;
  l_Param : String;
 begin
+ if not TmsDUnitSettings.Instance.IsUseDiffer then
+  Exit;
+
 { TODO 1 -oIngword -cProposal : Добавить вывод ошибок в лог }
  l_cmdFileName := ExtractFilePath(ParamStr(0)) +
                   String(Self.ComputerName) + '_' +

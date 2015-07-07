@@ -1,0 +1,29 @@
+INTEGER FUNCTION SIGN INTEGER IN aNum
+ Если ( aNum <0 ) то
+  ( -1 =: Result )
+ иначе
+ Если ( aNum >0 ) то
+  ( 1 =: Result )
+ иначе
+  ( 0 =: Result )
+;
+
+INTEGER FUNCTION SIGN1 INTEGER IN aNum
+ Если ( aNum <0 ) то
+  ( -1 =: Result )
+ иначе
+ (
+  Если ( aNum >0 ) то
+   ( 1 =: Result )
+  иначе
+   ( 0 =: Result )
+ ) 
+;
+
+ -1 SIGN .
+ 0 SIGN .
+ 1 SIGN .
+
+ -1 SIGN1 .
+ 0 SIGN1 .
+ 1 SIGN1 .

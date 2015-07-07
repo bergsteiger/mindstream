@@ -21,7 +21,7 @@
  // - шаблонизируем, ибо мы скоро будем сериализовать и другие классы.
  public
   class procedure DeSerialize(const aFileName: string;
-                              const aDiagramm: TClassToSerialize);
+                              const anObjToAssign: TClassToSerialize);
  end;//TmsMarshal
 
 {$Else TmsMarshal}
@@ -33,7 +33,8 @@
 // uses
  SysUtils,
  msCoreObjects,
- msStringList
+ msStringList,
+ msGarbageCollector
 
 {$Define TmsMarshal_uses_impl}
 
@@ -42,19 +43,31 @@
 // TmsMarshal
 
 class procedure TmsMarshal.DeSerialize(const aFileName: string;
-                                       const aDiagramm: TClassToSerialize);
+                                       const anObjToAssign: TClassToSerialize);
 var
  l_StringList: TmsStringList;
- l_D : TClassToSerialize;
+ l_Ressurected : TClassToSerialize;
+// l_I : IUnknown;
 begin
  l_StringList := TmsStringList.Create;
  try
   l_StringList.LoadFromFile(aFileName);
-  l_D := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text)) As TClassToSerialize;
+  l_Ressurected := UnMarshal.Unmarshal(TJSONObject.ParseJSONValue(l_StringList.Text)) As TClassToSerialize;
   try
-   aDiagramm.Assign(l_D);
+   anObjToAssign.Assign(l_Ressurected);
   finally
-   FreeAndNil(l_D);
+//   FreeAndNil(l_Ressurected);
+   if not (l_Ressurected Is TInterfacedObject) then
+    FreeAndNil(l_Ressurected)
+   else
+   begin
+    while true do
+    // - раз мы выше звали FreeAndNil для TInterfacedObject, то надо "убить его до конца"
+     if (IUnknown(TInterfacedObject(l_Ressurected))._Release <= 0) then
+      break;
+    //FreeAndNil(l_Ressurected);
+   end;//else
+   TmsGarbageCollector.Instance.Clear;
   end;//try..finally
  finally
   FreeAndNil(l_StringList);

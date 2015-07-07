@@ -3,37 +3,33 @@
 interface
 
 uses
- msSVGShape,
  msInterfaces
  ;
 
 type
- TmsRemoveIcon = class(TmsSVGShape)
+ TmsRemoveIcon = class
  // - "Иконка для удаления фигур"
- protected
-  function GetPolygonSVG: String; override;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
+ public
+  class function Create(const aPoint: TPointF): ImsShape; overload;
+  class function Create: ImsShape; overload;
  end;//TmsRemoveIcon
 
 implementation
 
 uses
- System.UITypes
+ msPredefinedShapes
  ;
 
 // TmsRemoveIcon
 
-function TmsRemoveIcon.GetPolygonSVG: String;
+class function TmsRemoveIcon.Create(const aPoint: TPointF): ImsShape;
 begin
- Result := 'M 10,30 L 30,10 L 50,30 L 70,10 L 90,30 L 70,50 L 90,70' +
-           'L 70,90 L 50,70 L 30,90 L 10,70 L 30,50 L 30,50 L 10,30';
+ Result := MCmsRemoveIcon.AsRef.CreateShape(aPoint);
 end;
 
-procedure TmsRemoveIcon.TransformDrawOptionsContext(
-  var theCtx: TmsDrawOptionsContext);
+class function TmsRemoveIcon.Create: ImsShape;
 begin
- inherited;
- theCtx.rFillColor := TAlphaColorRec.Mediumvioletred;
+ Result := Create(TPointF.Create(0, 0));
 end;
 
 end.

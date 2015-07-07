@@ -1,72 +1,35 @@
-﻿unit msRectangle;
+unit msRectangle;
 
 interface
 
 uses
- msShape,
- System.Types,
- FMX.Graphics,
- FMX.Types,
- System.UITypes,
  msInterfaces,
- msRectangularShape
+ msShape
  ;
 
 type
- TmsRectangle = class(TmsRectangularShape)
- protected
-  class function CornerRadius: Single; override;
-  class function InitialWidth: Single; override;
-  class function InitialHeight: Single; override;
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  procedure TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext); override;
+ TmsRectangle = class
+  public
+   class function Create: ImsShape;
+   class function MC: ImsShapeClass;
  end;//TmsRectangle
 
 implementation
 
+uses
+ msPredefinedShapes
+ ;
+
 // TmsRectangle
 
-class function TmsRectangle.InitialHeight: Single;
+class function TmsRectangle.MC: ImsShapeClass;
 begin
- Result := 90;
+ Result := MCmsRectangle;
 end;
 
-class function TmsRectangle.InitialWidth: Single;
+class function TmsRectangle.Create: ImsShape;
 begin
- Result := 100;
-end;
-
-class function TmsRectangle.CornerRadius: Single;
-begin
- Result := 0;
-end;
-
-
-procedure TmsRectangle.DoDrawTo(const aCtx: TmsDrawContext);
-var
- l_msPointContext: TRectF;
-begin
- l_msPointContext := DrawBounds;
- aCtx.rCanvas.DrawRect(l_msPointContext,
-                  CornerRadius,
-                  CornerRadius,
-                  AllCorners,
-                  1,
-                  TCornerType.Round);
- aCtx.rCanvas.FillRect(l_msPointContext,
-                  CornerRadius,
-                  CornerRadius,
-                  AllCorners,
-                  0.5,
-                  TCornerType.Round);
-end;
-
-procedure TmsRectangle.TransformDrawOptionsContext(var theCtx: TmsDrawOptionsContext);
-begin
- inherited;
- theCtx.rFillColor := TAlphaColorRec.White;
+ Result := MC.Creator.CreateShape(TPointF.Create(0, 0));
 end;
 
 end.
-
-

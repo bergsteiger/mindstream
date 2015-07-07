@@ -1,0 +1,3 @@
+{$Define FMX}
+
+{$Define CanBeComponentIsNil}

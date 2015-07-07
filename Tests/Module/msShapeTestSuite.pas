@@ -76,4 +76,6 @@ initialization
  RegisterTest(TmsParametrizedShapeTestSuite.Create(TTestSaveToPNG));
  RegisterTest(TmsParametrizedShapeTestSuite.Create(TTestSaveMoverToPNG));
  RegisterTest(TmsParametrizedShapeTestSuite.Create(TmsMoverFloatingButtonsTest));
+ RegisterTest(TmsParametrizedShapeTestSuite.Create(TmsConnectorDrawTest));
+ RegisterTest(TmsParametrizedShapeTestSuite.Create(TmsShapeWithConnectorTest));
 end.

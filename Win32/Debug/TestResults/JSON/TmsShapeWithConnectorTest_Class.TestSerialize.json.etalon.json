@@ -1,0 +1,208 @@
+{
+	"type": "msDiagramm.TmsDiagramm",
+	"id": 1,
+	"fields": {
+		"fName": "Диаграмма №7",
+		"f_Items": [{
+			"type": "msPointedShape.TmsPointedShape",
+			"id": 2,
+			"fields": {
+				"FStartPoint": [[343,
+				482],
+				343,
+				482],
+				"f_ShapeClassName": "Class",
+				"f_Name": "Class1",
+				"f_UID": [[1,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 3,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msPointedShape.TmsPointedShape",
+			"id": 4,
+			"fields": {
+				"FStartPoint": [[748,
+				846],
+				748,
+				846],
+				"f_ShapeClassName": "Class",
+				"f_Name": "Class2",
+				"f_UID": [[2,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 5,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msPointedShape.TmsPointedShape",
+			"id": 6,
+			"fields": {
+				"FStartPoint": [[985,
+				1026],
+				985,
+				1026],
+				"f_ShapeClassName": "Class",
+				"f_Name": "Class3",
+				"f_UID": [[3,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 7,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msPointedShape.TmsPointedShape",
+			"id": 8,
+			"fields": {
+				"FStartPoint": [[871,
+				312],
+				871,
+				312],
+				"f_ShapeClassName": "Class",
+				"f_Name": "Class4",
+				"f_UID": [[4,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 9,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msPointedShape.TmsPointedShape",
+			"id": 10,
+			"fields": {
+				"FStartPoint": [[744,
+				559],
+				744,
+				559],
+				"f_ShapeClassName": "Class",
+				"f_Name": "Class5",
+				"f_UID": [[5,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 11,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msPointedShape.TmsPointedShape",
+			"id": 12,
+			"fields": {
+				"FStartPoint": [[28,
+				1871],
+				28,
+				1871],
+				"f_ShapeClassName": "Class",
+				"f_Name": "Class6",
+				"f_UID": [[6,
+				0]],
+				"f_Items": [{
+					"type": "msDiagramm.TmsDiagramm",
+					"id": 13,
+					"fields": {
+						"fName": "main",
+						"f_Items": []
+					}
+				}]
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 14,
+			"fields": {
+				"f_UIDLeft": [[1,
+				0]],
+				"f_UIDRight": [[2,
+				0]],
+				"f_FinishPoint": [[738,
+				856],
+				738,
+				856],
+				"FStartPoint": [[353,
+				472],
+				353,
+				472],
+				"f_ShapeClassName": "Connector",
+				"f_Name": "Connector7",
+				"f_UID": [[7,
+				0]],
+				"f_Items": []
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 15,
+			"fields": {
+				"f_UIDLeft": [[3,
+				0]],
+				"f_UIDRight": [[4,
+				0]],
+				"f_FinishPoint": [[861,
+				322],
+				861,
+				322],
+				"FStartPoint": [[995,
+				1016],
+				995,
+				1016],
+				"f_ShapeClassName": "Connector",
+				"f_Name": "Connector7",
+				"f_UID": [[8,
+				0]],
+				"f_Items": []
+			}
+		},
+		{
+			"type": "msConnector.TmsConnector",
+			"id": 16,
+			"fields": {
+				"f_UIDLeft": [[5,
+				0]],
+				"f_UIDRight": [[6,
+				0]],
+				"f_FinishPoint": [[18,
+				1881],
+				18,
+				1881],
+				"FStartPoint": [[754,
+				549],
+				754,
+				549],
+				"f_ShapeClassName": "Connector",
+				"f_Name": "Connector7",
+				"f_UID": [[9,
+				0]],
+				"f_Items": []
+			}
+		}]
+	}
+}

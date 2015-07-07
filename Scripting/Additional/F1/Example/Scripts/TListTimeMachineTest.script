@@ -1,0 +1,26 @@
+: Case265400651
+ '12025268.100010' Открыть
+;
+
+: ListTimeMachineTest
+// {RequestLink:259892768}
+// [$265399679]
+// [$265400651]
+
+TRY
+ 2001 Открыть
+ '15.04.2003' timemachine:SetDate
+EXCEPT
+ Case265400651
+END
+;
+
+ListTimeMachineTest
+
+// $Id: TListTimeMachineTest.script,v 1.2 2011/05/06 11:58:03 lulin Exp $
+
+// $Log: TListTimeMachineTest.script,v $
+// Revision 1.2  2011/05/06 11:58:03  lulin
+// {RequestLink:265410566}.
+// - делаем тест.
+//

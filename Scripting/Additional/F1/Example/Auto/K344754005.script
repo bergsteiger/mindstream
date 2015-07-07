@@ -1,0 +1,18 @@
+Тест K344754005
+
+ Выполнить (
+  OBJECT VAR l_QC
+  ОМ
+  "Перейти по ссылке на {('Правовой календарь')} в области {(контрол::tvLawNews)}"
+  "Убедиться, что фокус в редакторе"
+  focused:control:push >>> l_QC
+  'AT_TEXT_NAME' l_QC pop:QueryCard:Attribute:GetCollapsed .
+  'AT_TYPE' l_QC pop:QueryCard:Attribute:GetCollapsed .
+  'AT_REG_IN_MU' l_QC pop:QueryCard:Attribute:GetCollapsed .
+  'AT_NORM' l_QC pop:QueryCard:Attribute:GetCollapsed .
+  'AT_LC_IN_DATE' l_QC pop:QueryCard:Attribute:GetCollapsed .
+  l_QC pop:QueryCard:Attribute:GetFocus .
+ )
+;
+
+K344754005

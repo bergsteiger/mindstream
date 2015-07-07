@@ -14,9 +14,6 @@ type
  TmsPolygonShape = class abstract(TmsPointedShape)
   // - класс для реализации полигональных объектов
  protected
-  function Polygon: TPolygon;
-  function GetPolygon: TPolygon; virtual; abstract;
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
   function GetDrawBounds: TRectF; override;
   class function PolygonBounds(const aPolygon: TPolygon): TRectF;
   function ContainsPt(const aPoint: TPointF): Boolean; override;
@@ -46,27 +43,11 @@ begin
   if (l_P.Y > Result.Bottom) then
    Result.Bottom := l_P.Y;
  end;//l_P in l_PL
- //Result := PolygonBounds(Polygon);
 end;
 
 function TmsPolygonShape.GetDrawBounds: TRectF;
 begin
  Result := PolygonBounds(Polygon);
-end;
-
-function TmsPolygonShape.Polygon: TPolygon;
-begin
- Result := GetPolygon;
- Assert(Length(Result) > 3);
-end;
-
-procedure TmsPolygonShape.DoDrawTo(const aCtx: TmsDrawContext);
-var
- l_P : TPolygon;
-begin
- l_P := Polygon;
- aCtx.rCanvas.DrawPolygon(l_P, 1);
- aCtx.rCanvas.FillPolygon(l_P, 0.5);
 end;
 
 function TmsPolygonShape.ContainsPt(const aPoint: TPointF): Boolean;

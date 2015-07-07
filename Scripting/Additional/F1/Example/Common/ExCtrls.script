@@ -1,0 +1,33 @@
+/// работа с конкретными контролами.
+/// Например: контрол::StatusBar, контрол::LeftNavigator:push
+
+USES
+ ProjectSpecific.script
+;
+
+PROCEDURE "Установить ширину левого навигатора в и выполнить" IN aWidth IN aProc
+ INTEGER VAR aWidth_old
+ "Найти контрол {(контрол::LeftNavigator)} на форме {("Главное окно")}" "Померить ширину" >>> aWidth_old
+ aWidth контрол::LeftNavigator:push "Установить ширину"
+ "Дождаться переключения вкладок"
+ TRY
+  aProc DO
+ FINALLY
+  aWidth_old контрол::LeftNavigator:push "Установить ширину"
+  "Дождаться переключения вкладок"
+ END
+; // "Установить ширину левого навигатора в и выполнить"
+
+STRING FUNCTION "Узнать, в каком поле КЗ стоит фокус" OBJECT IN aQueryCard
+ "Убедиться, что контрол {(aQueryCard)} - КЗ"
+ aQueryCard pop:QueryCard:GetCurrentReqName >>> Result
+; // "Узнать, в каком поле КЗ стоит фокус"
+
+PROCEDURE "Сравнить с эталоном активное поле текущей КЗ"
+ focused:control:push "Узнать, в каком поле КЗ стоит фокус" .
+; // "Сравнить с эталоном активное поле текущей КЗ"
+
+VOID WORDWORKER "Установить ширину левого навигатора в и выполнить:" INTEGER IN aWidthLeftNavigator
+ "Установить ширину левого навигатора в {(aWidthLeftNavigator)} и выполнить {( @ ( WordToWork DO ) )}"
+;
+

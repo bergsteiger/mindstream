@@ -1,0 +1,23 @@
+Тест EmitString 
+
+ PROCEDURE Wait
+  3 раза ( ProcessMessages )
+ ;
+
+ Параметры: (  "Открывать документы из списка в текущем окне" )
+ Выполнить ( 
+  ОМ
+  ППР
+  "Ввести строку {('конституция')}"
+  'Down' key 
+  "Ввести строку {('РФ')}"
+  Ok 
+  Wait
+  "Перевести фокус в список"
+  ProcessMessages
+  'Enter' key
+  ProcessMessages
+ )
+;
+
+EmitString

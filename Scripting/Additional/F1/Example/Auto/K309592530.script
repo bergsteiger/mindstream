@@ -1,0 +1,17 @@
+Тест K309592530
+
+ Выполнить (
+  "Открываем {(50085)}"
+  VAR l_WasException
+  false >>> l_WasException
+  TRY
+   ОИД
+  EXCEPT
+   true >>> l_WasException
+   "Сравнить текущее исключение с эталоном"
+  END 
+  l_WasException 'Почему-то стал строится ОИД' ASSERTS
+ )
+;
+
+K309592530

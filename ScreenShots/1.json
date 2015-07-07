@@ -1,0 +1,37 @@
+{
+	"type": "msDiagramms.TmsDiagramms",
+	"id": 1,
+	"fields": {
+		"f_Items": [{
+			"type": "msDiagramm.TmsDiagramm",
+			"id": 2,
+			"fields": {
+				"fName": "¹1",
+				"f_Items": [{
+					"type": "msClass.TmsClass",
+					"id": 3,
+					"fields": {
+						"FStartPoint": [[260,
+						348],
+						260,
+						348],
+						"f_ShapeClassName": "TmsInterface",
+						"f_Items": []
+					}
+				},
+				{
+					"type": "msClass.TmsClass",
+					"id": 4,
+					"fields": {
+						"FStartPoint": [[295,
+						183],
+						295,
+						183],
+						"f_ShapeClassName": "TmsMixIn",
+						"f_Items": []
+					}
+				}]
+			}
+		}]
+	}
+}

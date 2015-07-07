@@ -1,0 +1,205 @@
+USES
+ WordsTranslation.script
+;
+
+PROCEDURE "Отделить текст в эталоне"
+'----------' .
+; // "Отделить текст в эталоне"
+
+: "Выполнить и восстановить фокус" OBJECT IN aProc
+ INTEGER VAR l_Control
+ OBJECT VAR l_Ctrl
+ focused:control:push pop:control:GetHandle >>> l_Control
+ // - запоминаем текущий контрол
+ TRY 
+  aProc DO
+ FINALLY
+  "Найти контрол по дескриптору {(l_Control)}" >>> l_Ctrl
+  l_Ctrl pop:control:SetFocus 'Не смогли восстановить фокус' ASSERTS
+  "Установить фокус в {(l_Ctrl)}"
+  // - восстанавливаем фокус
+ END
+;
+
+WORDWORKER "раз повторить" INTEGER IN aCount
+ aCount LOOP ( WordToWork DO ) 
+;
+
+WORDWORKER "раза повторить" INTEGER IN aCount
+ aCount LOOP ( WordToWork DO ) 
+;
+
+WORDWORKER раз INTEGER IN aCount
+ aCount LOOP ( WordToWork DO ) 
+;
+
+WORDWORKER раза INTEGER IN aCount
+ aCount LOOP ( WordToWork DO ) 
+;
+
+: "раз" INTEGER IN aCount IN aProc
+ aCount LOOP ( aProc DO ) 
+;
+
+: "раза" INTEGER IN aCount IN aProc
+ "{(aCount)} раз {(aProc)}"
+;
+
+: "Ответить два раза Да для" IN aProc
+ wait:Yes
+ TRY
+  wait:Yes
+  TRY
+   aProc DO
+  FINALLY 
+   waited:? ASSERT
+  END
+ FINALLY 
+  waited:? ASSERT
+ END
+;
+
+: "Ответить один раз Да для" IN aProc
+ wait:Yes
+ TRY
+  aProc DO
+ FINALLY 
+  waited:? ASSERT
+ END
+;
+
+WordAlias "Стрелка вверх" cc:Up
+
+PROCEDURE "Вывести в эталон размеры и координаты контрола с округлением до " OBJECT IN aControl IN aNum
+  VAR L
+  VAR T
+  VAR W
+  VAR H
+ ( ( aControl  "Померить отступ слева" aNum / ) aNum * ) >>> L
+ [ 'Left = ' L IntToStr ] strings:Cat .
+ ( ( aControl  "Померить отступ сверху" aNum / ) aNum * ) >>> T
+ [ 'Top = ' T IntToStr ] strings:Cat .
+ ( ( aControl "Померить ширину" aNum / ) aNum * ) >>> W
+ [ 'Width = ' W IntToStr ] strings:Cat .
+ ( ( aControl "Померить высоту" aNum / ) aNum * )  >>> H
+ [ 'Height = ' H IntToStr ] strings:Cat .
+; // "Получить размеры и координаты контрола"
+
+PROCEDURE "Вывести в эталон размеры контрола с округлением до " OBJECT IN aControl IN aNum
+ VAR W
+ VAR H
+ ( ( aControl  "Померить ширину" aNum / ) aNum * ) >>> W
+ [ 'Width = ' W IntToStr ] strings:Cat .
+ ( ( aControl  "Померить высоту" aNum / ) aNum * )  >>> H
+ [ 'Height = ' H IntToStr ] strings:Cat .
+; // "Сравнить с эталоном размеры контрола"
+
+PROCEDURE "Аккуратно сравнить с эталоном целочисленное свойство объекта" STRING IN aProp OBJECT IN anObj
+ aProp anObj pop:object:HasProp ? ( 
+  STRING VAR l_Value
+  aProp anObj pop:object:GetOrdProp IntToStr >>> l_Value
+  [ aProp ': ' l_Value ] strings:Cat . 
+ )
+;
+
+PROCEDURE "Аккуратно сравнить с эталоном объектное свойство объекта" STRING IN aProp OBJECT IN anObj
+ aProp anObj pop:object:HasProp ? ( 
+  STRING VAR l_Value
+  Если ( aProp anObj pop:object:GetObjProp pop:object:IsNil ) то 
+   ( 'nil' >>> l_Value ) 
+  иначе
+   ( 'assigned' >>> l_Value ) 
+  [ aProp ': ' l_Value ] strings:Cat . 
+ )
+;
+
+PROCEDURE "Аккуратно сравнить с эталоном логическое свойство объекта" STRING IN aProp OBJECT IN anObj
+ aProp anObj pop:object:HasProp ? ( 
+  BOOLEAN VAR l_Value
+  l_Value := ( aProp anObj pop:object:GetOrdProp !=0 )
+  [ aProp ': ' l_Value ToPrintable ] strings:Cat . 
+ )
+;
+
+PROCEDURE "Аккуратно сравнить с эталоном целочисленные свойства объекта" ARRAY IN anOrdProps OBJECT IN anObj
+ @ (
+  STRING IN aProp
+  "Аккуратно сравнить с эталоном целочисленное свойство {( aProp )} объекта {(anObj)}"
+ ) anOrdProps ITERATE
+;
+
+PROCEDURE "Аккуратно сравнить с эталоном значение объектного свойства объекта" STRING IN aProp OBJECT IN anObj
+ aProp anObj pop:object:HasProp ? ( 
+  OBJECT VAR l_ValueObject
+  l_ValueObject  := ( aProp anObj pop:object:GetObjProp )
+    [ aProp ': ' l_ValueObject  ToPrintable ] strings:Cat .
+ )
+;
+
+STRING FUNCTION "Заменить непечатаемые символы" STRING IN aStr
+ Result := aStr
+ Result := ( Result #13#10 '[перевод строки]' string:Replace )
+ Result := ( Result #10 '[разрыв строки]' string:Replace )
+ Result := ( Result #13 '[перевод каретки]' string:Replace )
+ Result := ( Result '[перевод строки]' #13#10 string:Replace )
+;
+
+: "Сравнить текст хинта с эталоном"
+ application:GetLastHint "Заменить непечатаемые символы" .
+;
+
+WordAlias "Узнать, виден ли хинт"  application:IsHintVisible
+
+: "Проверить, виден ли хинт"
+ application:IsHintVisible .
+;
+
+: "Узнать текущий хинт" 
+ application:GetLastHint
+ "Заменить непечатаемые символы"
+;
+
+: "Заголовок контрола" 
+ pop:control:Caption
+ "Заменить непечатаемые символы"
+;
+
+: "Сравнить с эталоном заголовок контрола"
+ "Заголовок контрола" .
+; // "Сравнить с эталоном заголовок контрола"
+
+PROCEDURE "Аккуратно сравнить с эталоном целочисленное свойство объекта отличное от нуля" STRING IN aProp OBJECT IN anObj
+ aProp anObj pop:object:HasProp ? ( 
+  STRING VAR l_Value
+  aProp anObj pop:object:GetOrdProp IntToStr >>> l_Value
+  l_Value НЕРАВНО 0 ? (
+   [ anObj ToPrintable ': ' aProp ': ' l_Value ] strings:Cat .
+  ) 
+ )
+;
+
+PROCEDURE "Аккуратно сравнить с эталоном целочисленные свойства объекта отличные от нуля" ARRAY IN anOrdProps OBJECT IN anObj
+ @ (
+  STRING IN aProp
+  "Аккуратно сравнить с эталоном целочисленное свойство {( aProp )} объекта {(anObj)} отличное от нуля"
+ ) anOrdProps ITERATE
+;
+
+PROCEDURE "Сравнить с эталоном MinHeight, MaxHeight, MinWidth и MaxWidth для свойства constraints контрола , если они отличны от нуля" OBJECT IN anObj
+ 'constraints' anObj pop:object:HasProp ? ( 
+  OBJECT VAR constraints
+  constraints := ( 'constraints' anObj pop:object:GetObjProp )
+  "Аккуратно сравнить с эталоном целочисленные свойства {( [ 'MinHeight' 'MaxHeight' 'MinWidth' 'MaxWidth' ] )} объекта {(constraints)} отличные от нуля"
+ )
+;
+
+PROCEDURE "Аккуратно сравнить с эталоном строковое значение свойства объекта" STRING IN aProp OBJECT IN anObj
+ aProp anObj pop:object:HasProp ? ( 
+  STRING VAR l_ValueObject
+  l_ValueObject := ( aProp anObj pop:object:GetStrProp )
+  Если ( l_ValueObject РАВНО '' ) то
+  ( [ 'Не задано свойство ' aProp '!' ] strings:Cat . )   
+  иначе   
+  ( [ aProp ': ' l_ValueObject ToPrintable ] strings:Cat . )
+ )
+;

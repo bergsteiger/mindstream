@@ -1,0 +1,25 @@
+Тест TestFunction
+
+ STRING FUNCTION S
+  'Hello' =: Result
+ ;
+ 
+ STRING FUNCTION S1
+ 
+  STRING FUNCTION S2
+   'Hello world' =: Result
+  ;
+  
+  S2 =: Result 
+ ;
+ 
+ INTEGER FUNCTION I
+  1024 =: Result
+ ;
+
+ S .
+ I .
+ S1 .
+;
+
+TestFunction

@@ -1,0 +1,68 @@
+USES
+ WordsTranslation.script
+ @\SysUtils.script
+ @\Forms.script
+;
+
+OBJECT FUNCTION "Главное окно"
+ "Найти окно по имени {(форма::MainWindow)}" =: Result
+; // "Главное окно"
+
+OBJECT FUNCTION "Найти главное окно для контрола" OBJECT IN "Контрол"
+ "Найти окно по имени {(форма::MainWindow)} для контрола {("Контрол")}" =: Result
+;
+
+OBJECT FUNCTION "Форма БП"
+ ANYUSERTYPE форма::NewBaseSearch vcm:FindForm ASSERT
+ >>> Result
+; // "Форма БП"
+
+OBJECT FUNCTION "Диалог сохранения в Мои документы"
+ 'Мои документы (Сохранить как...)' "Найти окно по имени Caption" "Найти контрол по дескриптору в стеке" >>> Result
+;
+
+OBJECT FUNCTION "Диалог редактора стилей"
+ 'Редактор стилей' "Найти окно по имени Caption" "Найти контрол по дескриптору в стеке" >>> Result
+;
+
+OBJECT FUNCTION "Измененный диалог редактора стилей"
+ 'Редактор стилей *' "Найти окно по имени Caption" "Найти контрол по дескриптору в стеке" >>> Result
+;
+
+OBJECT FUNCTION "Текстовое окно редактора стилей"
+ 'Editor' "Диалог редактора стилей" "Найти контрол по имени на форме" >>> Result
+;
+
+OBJECT FUNCTION "Диалог Условия использования"
+ 'Условия использования' "Найти окно по имени Caption" "Найти контрол по дескриптору в стеке" >>> Result
+;
+
+OBJECT FUNCTION "Диалог Совет дня"
+ 'Совет дня' "Найти окно по имени Caption" "Найти контрол по дескриптору в стеке" >>> Result
+;
+
+OBJECT FUNCTION "Диалог выключения МВ"
+ 'Выключить Машину времени / Изменить дату' "Найти окно по имени Caption" "Найти контрол по дескриптору в стеке" >>> Result
+;
+
+OBJECT FUNCTION "Форма ППС"
+ ANYUSERTYPE форма::OldSituationSearch vcm:FindForm ASSERT
+ >>> Result
+; // "Форма ППС"
+
+BOOLEAN FUNCTION "Существует ли в главном окне форма ?" STRING IN aForm 
+ OBJECT VAR "Форма"
+ aForm "Главное окно" pop:control:FindControlByName =: "Форма"
+ "Форма" pop:object:IsNil ! >>> Result
+;
+
+OBJECT FUNCTION "Диалог Регистрационные данные"
+ 'Регистрационные данные' "Найти окно по имени Caption" "Найти контрол по дескриптору в стеке" >>> Result
+;
+
+OBJECT FUNCTION "Форма с флешем"
+ "Контрол в фокусе" "Имя компонента" РАВНО 'Flash' 
+  [ 'Фокус не во флеше, а в ' "Контрол в фокусе" "Имя компонента" ' : ' "Контрол в фокусе" pop:object:ClassName ' !' ] strings:Cat 
+   ASSERTS
+ "Контрол в фокусе" "Получить родительскую форму" =: Result
+;

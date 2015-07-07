@@ -16,34 +16,32 @@ type
  private
   f_FinishPoint: TPointF;
  protected
-  procedure DoDrawTo(const aCtx: TmsDrawContext); override;
-  constructor CreateInner(const aCtx: TmsMakeShapeContext); override;
+  constructor CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext); override;
   class function IsLineLike: Boolean; override;
   function GetDrawBounds: TRectF; override;
-  function GetFinishPointForDraw: TPointF; virtual;
   function ContainsPt(const aPoint: TPointF): Boolean; override;
   class function SamePoint(const A: TPointF; const B: TPointF): Boolean;
-  function pm_GetFinishPoint: TPointF; virtual;
+  function pm_GetFinishPoint: TPointF; override;
   property FinishPoint : TPointF
    read pm_GetFinishPoint
    write f_FinishPoint;
+  procedure MoveBy(const aCtx: TmsMoveContext); override;
  public
   function IsNeedsSecondClick : Boolean; override;
   function EndTo(const aCtx: TmsEndShapeContext): Boolean; override;
-  procedure MoveBy(const aCtx: TmsMoveContext); override;
-  class function CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
+  class function CreateCompleted(const aStartPoint: TPointF;
+                                 const aFinishPoint: TPointF;
+                                 const aShapesController: ImsShapesController;
+                                 const aDiagrammsHolder: ImsDiagrammsHolder): ImsShape;
  end;//TmsLine
-
- EmsLineCannotBeMoved = class(Exception)
- end;//EmsLineCannotBeMoved
 
 implementation
 
 uses
- msPointCircle
+ msShapeClass
  ;
 
-constructor TmsLine.CreateInner(const aCtx: TmsMakeShapeContext);
+constructor TmsLine.CreateInner(const aShapeClass : ImsShapeClass; const aCtx: TmsMakeShapeContext);
 begin
  inherited;
  FinishPoint := aCtx.rStartPoint;
@@ -57,11 +55,6 @@ end;
 function TmsLine.GetDrawBounds: TRectF;
 begin
  Result := TRectF.Create(StartPoint, FinishPoint);
-end;
-
-function TmsLine.GetFinishPointForDraw: TPointF;
-begin
- Result := FinishPoint;
 end;
 
 class function TmsLine.SamePoint(const A: TPointF; const B: TPointF): Boolean;
@@ -123,35 +116,15 @@ begin
  else
  if SamePoint(Self.FinishPoint, aCtx.rStartPoint) then
   Self.FinishPoint := Self.FinishPoint + aCtx.rDelta
-(* else
-  raise EmsLineCannotBeMoved.Create('Примитив ' + ClassName + ' не может быть перемещён')*);
 end;
 
-class function TmsLine.CreateCompleted(const aStartPoint: TPointF; const aFinishPoint: TPointF): ImsShape;
+class function TmsLine.CreateCompleted(const aStartPoint: TPointF;
+                                       const aFinishPoint: TPointF;
+                                       const aShapesController: ImsShapesController;
+                                       const aDiagrammsHolder: ImsDiagrammsHolder): ImsShape;
 begin
- Result := Self.Create(TmsMakeShapeContext.Create(aStartPoint, nil, nil));
- Result.EndTo(TmsEndShapeContext.Create(aFinishPoint, nil, nil));
-end;
-
-procedure TmsLine.DoDrawTo(const aCtx: TmsDrawContext);
-var
- l_Proxy : ImsShape;
- l_FinishPoint: TPointF;
-begin
- if (StartPoint = FinishPoint) then
- begin
-  l_Proxy := TmsPointCircle.Create(StartPoint);
-  try
-   l_Proxy.DrawTo(aCtx);
-  finally
-   l_Proxy := nil;
-  end;//try..finally
- end//StartPoint = FinishPoint
- else
- begin
-  l_FinishPoint := GetFinishPointForDraw;
-  aCtx.rCanvas.DrawLine(StartPoint, l_FinishPoint, 1);
- end;//StartPoint = FinishPoint
+ Result := Self.Create(Self.MC, TmsMakeShapeContext.Create(aStartPoint, aShapesController, aDiagrammsHolder));
+ Result.EndTo(TmsEndShapeContext.Create(aFinishPoint, aShapesController, aDiagrammsHolder));
 end;
 
 function TmsLine.IsNeedsSecondClick: Boolean;

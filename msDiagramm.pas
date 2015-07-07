@@ -14,7 +14,6 @@ uses
  System.Types,
  System.UITypes,
  msShape,
- msPointCircle,
  System.Classes,
  FMX.Objects,
  msRegisteredShapes,
@@ -52,12 +51,15 @@ type
   function Get_Name: String;
   constructor CreatePrim(const aName: String);
   function AddShape(const aShape: ImsShape): ImsShape;
+  function ShapeCount: Integer;
   function FirstShape: ImsShape;
   function ShapesController: ImsShapesController;
   function GetDrawBounds: TRectF;
  protected
   procedure SaveTo(const aFileName: String); override;
   procedure LoadFrom(const aFileName: String); override;
+  procedure Cleanup; override;
+  procedure ItemAdded(const anItem: ImsShape); override;
  public
   class function Create(const aName: String): ImsDiagramm;
   procedure DrawTo(const aCanvas: TCanvas);
@@ -81,19 +83,33 @@ uses
   ,
 {$Include msShapesProvider.mixin.pas}
  msMover,
- msCircle,
  msDiagrammMarshal,
  msInvalidators,
  msShapesForToolbar,
  msDiagrammsController,
  System.Math.Vectors,
  System.Math,
- FMX.Types
+ FMX.Types,
+ msTotalShapesList
  ;
 
 {$Include msItemsHolder.mixin.pas}
 {$Include msPersistent.mixin.pas}
 {$Include msShapesProvider.mixin.pas}
+
+// TmsDiagramm
+
+procedure TmsDiagramm.Cleanup;
+begin
+ // - перекрыто чисто для отладки
+ inherited;
+end;
+
+procedure TmsDiagramm.ItemAdded(const anItem: ImsShape);
+begin
+ inherited;
+ TmsTotalShapesList.ShapeAdded(anItem);
+end;
 
 const
  c_FileName = '.json';
@@ -117,7 +133,7 @@ begin
  FCurrentAddedShape := aClickContext.rShapeCreator.CreateShape(TmsMakeShapeContext.Create(aClickContext.rClickPoint, Self, aClickContext.rDiagrammsHolder));
  if (FCurrentAddedShape <> nil) then
  begin
-  Items.Add(FCurrentAddedShape);
+  Self.Add(FCurrentAddedShape);
   if (not FCurrentAddedShape.IsNeedsSecondClick) then
     // - если не надо SecondClick или MouseUp, то наш примитив - завершён
    FCurrentAddedShape := nil;
@@ -150,6 +166,8 @@ begin
 end;
 
 procedure TmsDiagramm.SaveToPng(const aFileName: string);
+const
+ cDelta = 10;
 var
  l_Bitmap: TBitmap;
  l_SourceRect: TRectF;
@@ -161,6 +179,7 @@ begin
  l_SourceRect := GetDrawBounds;
  Assert(l_SourceRect.Width > 0);
  Assert(l_SourceRect.Height > 0);
+ l_SourceRect.Inflate(cDelta, cDelta);
  // Создаем временный буфер для получения скриншота
  l_Bitmap := TBitmap.Create(Round(l_SourceRect.Width), Round(l_SourceRect.Height));
  try
@@ -170,7 +189,7 @@ begin
    l_OriginalMatrix := l_Canvas.Matrix;
    try
     l_Matrix := TMatrix.Identity;
-    l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_SourceRect.Left, -l_SourceRect.Top);
+    l_Matrix := l_Matrix * TMatrix.CreateTranslation(-l_SourceRect.Left{ - cDelta}, -l_SourceRect.Top{ - cDelta});
     l_Matrix := l_Matrix * l_OriginalMatrix;
     l_Canvas.SetMatrix(l_Matrix);
     l_Canvas.Fill.Color := TAlphaColorRec.White;
@@ -213,13 +232,18 @@ end;
 
 function TmsDiagramm.AddShape(const aShape: ImsShape): ImsShape;
 begin
- Items.Add(aShape);
+ Self.Add(aShape);
  Result := aShape;
+end;
+
+function TmsDiagramm.ShapeCount: Integer;
+begin
+ Result := Self.ItemsCount;
 end;
 
 function TmsDiagramm.FirstShape: ImsShape;
 begin
- Result := Items.First;
+ Result := Self.FirstItem;
 end;
 
 function TmsDiagramm.ShapesController: ImsShapesController;
@@ -322,9 +346,9 @@ begin
   // - ���� ���������� ���������, � ����� ����������� �� N+1 ������� -
   //   �� ��� ��� ���� ������
    Exit;
- for l_Index := f_Items.Count - 1 downto 0 do
+ for l_Index := ItemsCount - 1 downto 0 do
  begin
-  l_Shape := f_Items.Items[l_Index];
+  l_Shape := _Items.Items[l_Index];
   if l_Shape.HitTest(aPoint, l_HitShape) then
   begin
    Result := l_HitShape;
@@ -336,7 +360,7 @@ end;
 procedure TmsDiagramm.RemoveShape(const aShape: ImsShape);
 begin
  Assert(f_Items <> nil);
- f_Items.Remove(aShape);
+ _Items.Remove(aShape);
  Invalidate;
 end;
 
