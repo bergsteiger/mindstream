@@ -86,27 +86,27 @@ STRING FUNCTION |U IN %S
  )
 ;}*/
 
-STRING CallerWorker %SU
+STRING CALLER operator %SU
  Result := ( Caller -&gt;0 |U )
 ;
 
-OBJECT CallerWorker %S%P
+OBJECT CALLER operator %S%P
  Result := ( Caller -&gt;0 %P )
 ;
 
-OBJECT CallerWorker %S%P%P
+OBJECT CALLER operator %S%P%P
  Result := ( Caller -&gt;0 %P %P )
 ;
 
-OBJECT CallerWorker %S%P%P%P
+OBJECT CALLER operator %S%P%P%P
  Result := ( Caller -&gt;0 %P %P %P )
 ;
 
-OBJECT CallerWorker %S%P%P%P%P
+OBJECT CALLER operator %S%P%P%P%P
  Result := ( Caller -&gt;0 %P %P %P %P )
 ;
 
-OBJECT CallerWorker %S%P%P%P%P%P
+OBJECT CALLER operator %S%P%P%P%P%P
  Result := ( Caller -&gt;0 %P %P %P %P %P )
 ;
 
@@ -157,7 +157,7 @@ ARRAY FUNCTION %C IN %S
  Result := ( %S %% '%C' MembersIterator )
 ;
 
-ARRAY CallerWorker %S%C
+ARRAY CALLER operator %S%C
  Result := ( Caller -&gt;0 %C )
 ;
 
@@ -165,7 +165,7 @@ ARRAY FUNCTION %Ops IN %S
  Result := ( %S %% '%Ops' MembersIterator )
 ;
 
-ARRAY CallerWorker %S%Ops
+ARRAY CALLER operator %S%Ops
  Result := ( Caller -&gt;0 %Ops )
 ;
 
@@ -173,7 +173,7 @@ ARRAY FUNCTION %Attrs IN %S
  Result := ( %S %% '%Attrs' MembersIterator )
 ;
 
-ARRAY CallerWorker %S%Attrs
+ARRAY CALLER operator %S%Attrs
  Result := ( Caller -&gt;0 %Attrs )
 ;
 
@@ -181,19 +181,19 @@ ARRAY FUNCTION %Lnks IN %S
  Result := ( %S %% '%Lnks' MembersIterator )
 ;
 
-ARRAY CallerWorker %S%Lnks
+ARRAY CALLER operator %S%Lnks
  Result := ( Caller -&gt;0 %Lnks )
 ;
 
-ARRAY CallerWorker %S%G
+ARRAY CALLER operator %S%G
  Result := ( Caller -&gt;0 %G )
 ;
 
-ARRAY CallerWorker %S%R
+ARRAY CALLER operator %S%R
  Result := ( Caller -&gt;0 %R )
 ;
 
-OBJECT CallerWorker %S%T
+OBJECT CALLER operator %S%T
  Result := ( Caller -&gt;0 %T )
 ;
 
