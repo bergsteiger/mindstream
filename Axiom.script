@@ -88,12 +88,6 @@ VOID IMMEDIATE OPERATOR OBJECT
  TtfwWordModifier::tfw_wmObj Ctx:IncludeModifier
 ; // OBJECT
 
-FUNCTION -&gt;0 
- // - возвращает первый параметр указанного слова
-  OBJECT IN %S
- 0 %S pop:Word:GetParam DO &gt;&gt;&gt; Result
-; // -&gt;0
-
 VOID IMMEDIATE OPERATOR ^L
  // - определяет ПРАВЫЙ параметр, который может быть как словом, так и неизвестным идентификатором
  //   L - сокращение типа от слова Literal
@@ -102,6 +96,30 @@ VOID IMMEDIATE OPERATOR ^L
  TtfwWordModifier::tfw_wmRightWordRef Ctx:IncludeModifier
  TtfwWordModifier::tfw_wmTreatUnknownAsString Ctx:IncludeModifier
 ; // ^L
+
+OPERATOR __DefineParam
+ // - тут стереотип на стеке
+ // - тут имя на стеке
+ Ctx:NewWordDefinitor pop:NewWordDefinitor:DefineInParameter
+ // - тут параметр на стеке
+ Ctx:PushCompiler pop:Compiler:CompileInParameterPopCode
+ Ctx:ClearTypeInfo
+; // __DefineParam
+
+IMMEDIATE VOID OPERATOR __DefineNameParam
+ @SELF 'aName' __DefineParam
+; // __DefineNameParam
+ 
+IMMEDIATE VOID OPERATOR IN
+ ^L __DefineNameParam
+ @SELF aName DO __DefineParam
+; // IN
+ 
+FUNCTION -&gt;0 
+ // - возвращает первый параметр указанного слова
+  OBJECT IN %S
+ 0 %S pop:Word:GetParam DO &gt;&gt;&gt; Result
+; // -&gt;0
 
 VOID IMMEDIATE OPERATOR BOOLEAN
  TtfwWordModifier::tfw_wmBool Ctx:IncludeModifier
@@ -203,32 +221,84 @@ IMMEDIATE OPERATOR WordAlias
 WordAlias begin BEGIN
 WordAlias end END
 
-STRING OPERATOR __SourceInfo
- if ( Ctx:Parser IsNil ) then
- begin
-  '' &gt;&gt;&gt; Result
- end
- else
- begin
-  Ctx:Parser pop:Parser:FileName (+) ' line: ' (+) ( Ctx:Parser pop:Parser:SourceLine IntToStr ) &gt;&gt;&gt; Result
- end
-; // __SourceInfo
+WordAlias operator OPERATOR
+WordAlias __operator OPERATOR
 
-VOID OPERATOR __ERROR
- STRING IN aMsg
+WordAlias ITERATE Iterate
+WordAlias WordWorker WORDWORKER
+
+STRING FUNCTION strings:Cat ARRAY IN anArray
+ // - складывает строки массива на стеке
+ '' &gt;&gt;&gt; Result
+ @ ( Result SWAP Cat &gt;&gt;&gt; Result ) anArray Iterate
+; // strings:Cat
+
+STRING OPERATOR __SourceInfo
  OBJECT IN aCaller
  if ( Ctx:Parser IsNil ) then
  begin
-  aCaller pop:Word:SourcePointString (+) ' ' (+) aMsg class::EtfwRunner CreateAndRaise
+  aCaller pop:Word:SourcePointString &gt;&gt;&gt; Result
  end
- else 
+ else
  begin
-  __SourceInfo (+) ' ' (+) aMsg class::EtfwCompiler CreateAndRaise
+  [ Ctx:Parser pop:Parser:FileName ' line: ' Ctx:Parser pop:Parser:SourceLine IntToStr ] strings:Cat &gt;&gt;&gt; Result
+ end
+; // __SourceInfo
+
+FORWARD VarMsgToStr
+
+VOID OPERATOR __ERROR
+ IN aMsg
+ OBJECT IN aCaller
+ if ( Ctx:Parser IsNil ) then
+ begin
+  [ aCaller __SourceInfo ' |=&gt; ' aMsg VarMsgToStr ] strings:Cat class::EtfwRunner CreateAndRaise
+ end
+ else
+ begin
+  [ aCaller __SourceInfo ' |=&gt; ' aMsg VarMsgToStr ] strings:Cat class::EtfwCompiler CreateAndRaise
  end
 ; // __ERROR
 
+OBJECT OPERATOR |^@
+ ^@ IN aSelf
+ aSelf pop:Word:GetRef &gt;&gt;&gt; Result
+; // |^@
+
+OPERATOR EVAL
+ ^ IN aWhat
+ aWhat |^@ DO
+; // EVAL
+
+VOID CALLER OPERATOR ASSURE
+ ^ IN aCondition
+ ^ IN aMessage
+ EVAL aCondition ! ?
+ begin
+  aMessage Caller __ERROR
+ end
+; // ASSURE
+
+VOID CALLER OPERATOR ?ASSURE
+ BOOLEAN IN aCondition
+ ^ IN aMessage
+ aCondition ! ?
+ begin
+  aMessage Caller __ERROR
+ end
+; // ?ASSURE
+
+VOID CALLER OPERATOR ?FAIL
+ BOOLEAN IN aCondition
+ ^ IN aMessage
+ aCondition ?
+ begin
+  aMessage Caller __ERROR
+ end
+; // ?FAIL
+
 VOID CALLER OPERATOR ERROR
- STRING IN aMsg
+ ^ IN aMsg
  aMsg Caller __ERROR
 ; // ERROR
 
@@ -236,10 +306,9 @@ VOID CALLER OPERATOR ERROR
   STRING IN aName
   OBJECT IN aStereo
  
- aName Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckWord pop:KeyWord:Word pop:object:IsNil ! ?
- (
-  'Слово ' (+) aName (+) ' уже существует. Нельзя определить переменную с таким же именем' ERROR
- ) 
+ aName Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckWord pop:KeyWord:Word pop:object:IsNil
+  ?ASSURE [ 'Слово ' aName ' уже существует. Нельзя определить переменную с таким же именем' ]
+
  aName true Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckVar
  DUP aStereo SWAP pop:Word:SetProducer
  Ctx:ClearTypeInfo
@@ -253,14 +322,18 @@ IMMEDIATE VOID OPERATOR VAR
  ^L IN aName
  aName |N @SELF __DefineVar
 ; // VAR
- 
+
+STRING FUNCTION VarMsgToStr
+ OBJECT IN aMessage
+  VAR l_Msg
+  aMessage DO &gt;&gt;&gt; l_Msg
+  if ( l_Msg IsArray ) then
+   ( l_Msg strings:Cat &gt;&gt;&gt; Result )
+  else
+   ( l_Msg &gt;&gt;&gt; Result )
+; // VarMsgToStr
+
 WordAlias var VAR
-
-WordAlias ITERATE Iterate
-WordAlias WordWorker WORDWORKER
-
-WordAlias operator OPERATOR
-WordAlias __operator OPERATOR
 
 IMMEDIATE VOID operator PROCEDURE
  @SELF Ctx:SetWordProducerForCompiledClass
@@ -381,17 +454,6 @@ VOID operator -=
  -
  &gt;&gt;&gt;^ aLeft
 ;
-
-STRING FUNCTION strings:Cat ARRAY IN anArray
- // - складывает строки массива на стеке
-
- PROCEDURE DoCat STRING IN aStr1
-  Result := ( Result aStr1 Cat )
- ; // DoCat
-
- Result := ''
- @ DoCat anArray ITERATE
-; // strings:Cat
 
 VOID operator INC
   ^ IN aWhatToIncrement
@@ -675,7 +737,7 @@ BOOLEAN operator &lt;&gt;
   IN aLeft
   ^ IN aRight
  // Правосторонний, а не обратный польский !=
- Result := ( aLeft aRight DO ?!= )
+ Result := ( aLeft = ( aRight DO ) ! )
 ; //&lt;&gt;
 
 WordAlias НЕРАВНО &lt;&gt;
@@ -765,30 +827,6 @@ operator WHILE
 
 WordAlias ПОКА WHILE
 WordAlias while WHILE
-
-OBJECT operator |^@
- ^@ IN aSelf
- aSelf pop:Word:GetRef &gt;&gt;&gt; Result
-; // |^@
-
-operator EVAL
- ^ IN aWhat
- aWhat |^@ DO
-; // EVAL 
-
-VOID CALLER operator ASSURE
- ^ IN aCondition
- ^ IN aMessage
- if NOT EVAL aCondition then
- begin
-  VAR l_Msg
-  aMessage DO &gt;&gt;&gt; l_Msg
-  if ( l_Msg IsArray ) then
-   ( l_Msg strings:Cat Caller __ERROR )
-  else
-   ( l_Msg Caller __ERROR )
- end 
-; // ASSURE
 
 OBJECT operator %%
  OBJECT IN aWord
