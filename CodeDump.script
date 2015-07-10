@@ -1,0 +1,261 @@
+FORWARD DumpElement
+
+INTEGER VAR Indent
+
+[EXECUTE] ( Indent := 0 )
+
+VOID WORDWORKER Out 
+ STRING VAR aValue
+ aValue := ( WordToWork DO )
+ [ Indent ' ' char:Dupe aValue ] strings:Cat .
+; // Out
+
+VOID WORDWORKER OutEx 
+ STRING VAR aValue
+ aValue := ( WordToWork DO )
+ if ( aValue &lt;&gt; '' ) then
+  Out aValue
+; // OutEx
+
+VOID WORDWORKER OutA
+ ARRAY VAR l_Value
+ l_Value := ( WordToWork DO )
+ OutEx ( l_Value strings:Cat )
+; // OutA
+
+STRING FUNCTION Check STRING IN aName
+ if ( '??? Unexisting word ???' aName StartsStr ) then
+  ( Result := '' )
+ else
+  ( Result := aName ) 
+; // Check
+
+STRING FUNCTION CodeName OBJECT IN aCode
+ STRING VAR l_Name 
+ aCode pop:Word:Name Check &gt;&gt;&gt; l_Name
+ if ( l_Name &lt;&gt; '' ) then
+  ( 
+   Result := l_Name
+  )
+ else 
+  (
+   if ( aCode Is class::TkwString ) then
+    (
+     Result :=  ( [ '''' aCode DO '''' ] strings:Cat )
+    )
+   else
+   if ( aCode Is class::TkwInteger ) then
+    (
+     Result := ( aCode DO IntToStr )
+    )
+   else
+    (
+     Result := ''
+    ) 
+  )
+; // CodeName
+
+FORWARD DumpCodeCall
+
+PROCEDURE DumpMembers OBJECT IN aCode
+ aCode MembersIterator ==&gt; ( OBJECT IN aCode
+  if ( aCode Is class::TkwForwardDeclaration ) then
+   OutA [ 'FORWARD ' aCode CodeName ]
+ )
+ aCode MembersIterator ==&gt; ( OBJECT IN aCode
+  aCode DumpElement 
+ )
+; // DumpMembers
+
+PROCEDURE DumpElementPrim BOOLEAN IN aNeedStereo OBJECT IN aCode
+
+ STRING VAR l_Name
+ aCode CodeName &gt;&gt;&gt; l_Name
+ 
+ if aNeedStereo then
+  ( 
+   if ( l_Name = 'WordToWork' ) then
+    EXIT
+   if ( l_Name = 'Result' ) then
+    EXIT
+  )  
+ 
+ STRING VAR l_Stereo 
+ STRING VAR l_Directives
+ 
+ aCode pop:Word:Producer pop:Word:Name Check &gt;&gt;&gt; l_Stereo
+ aCode pop:Word:Directives &gt;&gt;&gt; l_Directives
+ 
+ if aNeedStereo then
+  (
+   if ( l_Stereo &lt;&gt; '' ) then
+    ( [ l_Stereo ' ' l_Name ] strings:Cat &gt;&gt;&gt; l_Name )
+   if ( ( l_Directives &lt;&gt; '' ) AND ( l_Directives &lt;&gt; ' ' ) ) then 
+    ( [ l_Directives l_Name ] strings:Cat &gt;&gt;&gt; l_Name )
+  )  
+
+ if ( l_Name &lt;&gt; '' ) then
+  ( 
+   OutEx l_Name
+   Inc Indent
+  )
+ 
+ TRY
+  aCode DumpMembers
+  
+  aCode CodeIterator ==&gt; ( OBJECT IN aCode
+   aCode DumpCodeCall 
+  )
+ FINALLY
+  if ( l_Name &lt;&gt; '' ) then
+   ( 
+    Dec Indent
+   )
+ END 
+ if ( l_Name &lt;&gt; '' ) then
+  if aNeedStereo then
+  (
+   STRING VAR l_Bracket
+   l_Bracket := ( aCode pop:Word:Producer pop:Word:EndBracket )
+   if ( l_Bracket &lt;&gt; '' ) then
+    ( 
+     OutA [ l_Bracket ' // ' l_Name ]
+     Out ''
+    )
+  )   
+; // DumpElementPrim
+
+PROCEDURE OutBracket OBJECT IN aCode
+ if ( aCode CodeName = 'TRY' ) then
+  (
+   EXIT
+  )
+ STRING VAR l_Bracket
+ l_Bracket := ( aCode pop:Word:Producer pop:Word:EndBracket )
+ //l_Bracket := ( aCode pop:Word:EndBracket )
+ if ( l_Bracket &lt;&gt; '' ) then
+  OutEx l_Bracket
+; // OutBracket
+
+PROCEDURE DumpCodeCall OBJECT IN aCode
+ if ( aCode Is class::TkwCompiledInitParam ) then
+  (
+   EXIT
+  )
+  
+ STRING VAR l_Name
+ BOOLEAN VAR l_NeedBracket
+ l_NeedBracket := false
+ aCode CodeName &gt;&gt;&gt; l_Name 
+ 
+ INTEGER VAR l_LeftWordRefsCount
+ l_LeftWordRefsCount := ( aCode pop:Word:LeftWordRefValuesCount )
+ while ( l_LeftWordRefsCount &gt; 0 )
+  ( 
+   Dec l_LeftWordRefsCount
+   
+   OBJECT VAR l_Param
+   
+   l_Param := ( l_LeftWordRefsCount aCode pop:Word:GetLeftWordRefValue )
+   if NOT ( l_Param pop:object:IsNil ) then
+    ( 
+     [ 
+      l_Param CodeName 
+      ' ' 
+      l_Param CodeIterator ==&gt; ( OBJECT IN aCode
+       aCode CodeName
+      )
+      l_Name 
+     ] strings:Cat &gt;&gt;&gt; l_Name 
+    )
+  ) 
+  
+ OutEx l_Name
+  
+ //Inc Indent
+ TRY 
+  RULES 
+   ( aCode Is class::TkwCompiledWordContainer )
+    ( 
+      aCode CodeIterator ==&gt; ( OBJECT IN aCode
+       false aCode DumpElementPrim
+       aCode OutBracket
+      ) 
+    )
+   
+   ( aCode Is class::TkwBeginLikeCompiledCode )
+    (
+      l_NeedBracket := true
+      Inc Indent
+      aCode DumpMembers
+      aCode CodeIterator ==&gt; ( OBJECT IN aCode
+       aCode DumpCodeCall
+      )
+      Dec Indent
+    )
+    
+   ( aCode Is class::TkwCompiledWordWorkerWordRunner )
+    (
+      aCode CodeIterator ==&gt; ( OBJECT IN aCode
+       aCode DumpCodeCall
+      )
+    )
+   
+   ( 
+    ( aCode Is class::TkwCompiledVarWorker )
+//    OR
+//    ( aCode Is class::TkwVarModifier )
+   ) 
+    (
+      Inc Indent
+      aCode CodeIterator ==&gt; ( OBJECT IN aCode
+       aCode DumpCodeCall
+      ) 
+      Dec Indent 
+    )
+   
+   ( aCode Is class::TkwCompiledWordWorker )
+    (
+     aCode CodeIterator ==&gt; DumpCodeCall
+    )
+    
+   ( aCode Is class::TkwForwardDeclarationHolder )
+    (
+     aCode CodeIterator ==&gt; DumpCodeCall
+    )
+    
+   ( aCode Is class::TkwCompiledRules 
+     OR
+     ( aCode Is class::TkwCompiledCase )
+   )
+    (
+     l_NeedBracket := true
+     BOOLEAN VAR l_Shift
+     l_Shift := false
+     Inc Indent
+     aCode CodeIterator ==&gt; ( OBJECT IN aCode
+      l_Shift ? Inc Indent
+       aCode DumpCodeCall
+      l_Shift ? Dec Indent
+      l_Shift := NOT l_Shift
+     ) 
+     Dec Indent
+    )
+  ; // RULES 
+ FINALLY
+  //Dec Indent
+ END 
+  
+  
+ if l_NeedBracket then 
+  ( aCode OutBracket )
+; // DumpCodeCall
+
+PROCEDURE DumpElement OBJECT IN aCode
+ true aCode DumpElementPrim
+; // DumpElement
+
+PROCEDURE DumpCode STRING IN aFileName
+ aFileName script:CompileAndProcess DumpElement
+ '' .
+; 
