@@ -1,0 +1,86 @@
+// Тут описываем слова, необходимые для построения дерева разбора модели MDA вылитой в формат скрипта
+
+StereotypeStereotypeProducer @MDAClass ;
+// - базовый стереотип, через который всё выводится
+
+&lt;&lt;@MDAClass&gt;&gt; MDAClass ;
+&lt;&lt;@MDAClass&gt;&gt; MDACategory ;
+// - заглушки для начальной раскрутки
+
+&lt;&lt;MDACategory&gt;&gt; Project ;
+// - проект
+
+&lt;&lt;@MDAClass&gt;&gt; MDAAbstractClass ;
+&lt;&lt;@MDAClass&gt;&gt; MDADependency ;
+&lt;&lt;@MDAClass&gt;&gt; MDAAttribute ;
+//StereotypeProducer MDAStateMachine
+//StereotypeProducer MDAState
+//StereotypeProducer MDATransition
+//StereotypeProducer MDATransitionAttribute
+//StereotypeProducer MDAStateAction
+// - а эти парни вообще выводятся на модели из первых двух
+&lt;&lt;@MDAClass&gt;&gt; MDAOperation ;
+// - стереотип для создания типов операций
+
+&lt;&lt;MDACategory&gt;&gt; MDATemplates ;
+&lt;&lt;MDACategory&gt;&gt; MDALibrary ;
+// - MDA-библиотека
+&lt;&lt;MDACategory&gt;&gt; MDALayer ;
+&lt;&lt;MDAClass&gt;&gt; MDAUtilityPack ;
+// - набор утилитных функций MDA
+
+&lt;&lt;MDAClass&gt;&gt; MDAGenerator ;
+
+StereotypeProducer mdalink
+
+&lt;&lt;mdalink&gt;&gt; group
+;
+&lt;&lt;mdalink&gt;&gt; include
+;
+&lt;&lt;mdalink&gt;&gt; main_hierarchy
+;
+
+&lt;&lt;MDAOperation&gt;&gt; generator
+;
+// - генератор элементов модели
+&lt;&lt;MDAOperation&gt;&gt; transformator
+;
+// - трансформатор (аналог CASE в mda-генераторе)
+&lt;&lt;MDAOperation&gt;&gt; Operation
+;
+// - операция (любая, что MDA, что нет - любая операция без стереотипа)
+
+&lt;&lt;@MDAClass&gt;&gt; MDAParameter
+;
+// - стереотип параметра
+
+//WordAlias &lt;&lt;param&gt;&gt; &lt;&lt;MDAParameter&gt;&gt;
+//&lt;&lt;MDAParameter&gt;&gt; param ;
+StereotypeProducer param
+&lt;&lt;param&gt;&gt; in
+;
+// - входной параметра (изменяться не может)
+
+StereotypeProducer up
+// - стереотип для типов пользовательских свойств
+
+&lt;&lt;up&gt;&gt; bool 
+;
+// - булево значение UP
+&lt;&lt;up&gt;&gt; string 
+;
+// - строковое значение UP
+&lt;&lt;up&gt;&gt; list 
+;
+// - значение UP из заранее заданного списка значений
+&lt;&lt;up&gt;&gt; color 
+;
+&lt;&lt;up&gt;&gt; tribool 
+;
+// - трёхпозиционное значение UP undefined/false/true
+&lt;&lt;up&gt;&gt; text 
+;
+
+&lt;&lt;MDAClass&gt;&gt; MDAReport ;
+&lt;&lt;MDAOperation&gt;&gt; report
+;
