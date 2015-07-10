@@ -67,6 +67,18 @@ PROCEDURE DumpMembers OBJECT IN aCode
  )
 ; // DumpMembers
 
+STRING FUNCTION EndBracket
+ OBJECT IN aCode
+ if ( aCode pop:Word:IsInParam ) then
+  ( Result := '' )
+ else 
+ if ( aCode pop:Word:IsVarLike ) then
+  ( Result := '' )
+  //( Result := ( aCode pop:Word:EndBracket ) )
+ else 
+  ( Result := ( aCode pop:Word:Producer pop:Word:EndBracket ) )
+; // EndBracket
+
 PROCEDURE DumpElementPrim BOOLEAN IN aNeedStereo OBJECT IN aCode
 
  STRING VAR l_Name
@@ -116,7 +128,7 @@ PROCEDURE DumpElementPrim BOOLEAN IN aNeedStereo OBJECT IN aCode
   if aNeedStereo then
   (
    STRING VAR l_Bracket
-   l_Bracket := ( aCode pop:Word:Producer pop:Word:EndBracket )
+   l_Bracket := ( aCode EndBracket )
    if ( l_Bracket &lt;&gt; '' ) then
     ( 
      OutA [ l_Bracket ' // ' l_Name ]
@@ -131,50 +143,76 @@ PROCEDURE OutBracket OBJECT IN aCode
    EXIT
   )
  STRING VAR l_Bracket
- l_Bracket := ( aCode pop:Word:Producer pop:Word:EndBracket )
+ l_Bracket := ( aCode EndBracket )
  //l_Bracket := ( aCode pop:Word:EndBracket )
  if ( l_Bracket &lt;&gt; '' ) then
   OutEx l_Bracket
 ; // OutBracket
 
 PROCEDURE DumpCodeCall OBJECT IN aCode
- if ( aCode Is class::TkwCompiledInitParam ) then
-  (
-   EXIT
-  )
+// if ( aCode Is class::TkwCompiledInitParam ) then
+//  (
+//   EXIT
+//  )
   
+ FORWARD CalcLeftParams 
+  
+ STRING FUNCTION CalcLeftParams OBJECT IN aCode STRING IN aName
+  Result := aName
+  
+  INTEGER VAR l_LeftWordRefsCount
+  l_LeftWordRefsCount := ( aCode pop:Word:LeftWordRefValuesCount )
+  while ( l_LeftWordRefsCount &gt; 0 )
+   ( 
+    Dec l_LeftWordRefsCount
+    
+    OBJECT VAR l_Param
+    
+    l_Param := ( l_LeftWordRefsCount aCode pop:Word:GetLeftWordRefValue )
+    if NOT ( l_Param pop:object:IsNil ) then
+     ( 
+      [ 
+       l_Param l_Param CodeName CalcLeftParams
+       
+       l_Param CodeIterator ==&gt; ( OBJECT IN aCode
+        aCode CodeName
+       )
+       Result 
+      ] ' ' strings:CatSep &gt;&gt;&gt; Result 
+     )
+   ) 
+ ; // CalcLeftParams
+ 
  STRING VAR l_Name
- BOOLEAN VAR l_NeedBracket
- l_NeedBracket := false
  aCode CodeName &gt;&gt;&gt; l_Name 
  
- INTEGER VAR l_LeftWordRefsCount
- l_LeftWordRefsCount := ( aCode pop:Word:LeftWordRefValuesCount )
- while ( l_LeftWordRefsCount &gt; 0 )
-  ( 
-   Dec l_LeftWordRefsCount
-   
-   OBJECT VAR l_Param
-   
-   l_Param := ( l_LeftWordRefsCount aCode pop:Word:GetLeftWordRefValue )
-   if NOT ( l_Param pop:object:IsNil ) then
-    ( 
-     [ 
-      l_Param CodeName 
-      ' ' 
-      l_Param CodeIterator ==&gt; ( OBJECT IN aCode
-       aCode CodeName
-      )
-      l_Name 
-     ] strings:Cat &gt;&gt;&gt; l_Name 
-    )
-  ) 
+ aCode l_Name CalcLeftParams &gt;&gt;&gt; l_Name
   
+ BOOLEAN VAR l_NeedBracket
+ l_NeedBracket := false
+ 
  OutEx l_Name
   
  //Inc Indent
  TRY 
   RULES 
+   ( aCode Is class::TkwCompiledIF )
+    ( 
+      INTEGER VAR l_BranchNum
+      l_BranchNum := 0
+      aCode CodeIterator ==&gt; ( OBJECT IN aCode 
+       if ( l_BranchNum = 1 ) then
+        Out 'then'
+       else 
+       if ( l_BranchNum = 2 ) then
+        Out 'else'
+       Inc Indent 
+        aCode DumpCodeCall
+       Dec Indent
+       INC l_BranchNum
+      ) 
+    )
+    
    ( aCode Is class::TkwCompiledWordContainer )
     ( 
       aCode CodeIterator ==&gt; ( OBJECT IN aCode
