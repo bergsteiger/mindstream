@@ -1,0 +1,64 @@
+USES
+ 'W:\shared\models\NewSchool\Templates\MDALike.tpl.script'
+;
+
+ PROCEDURE OUTPRIM IN %S
+  %S NotValid ? EXIT
+  %SN .
+  %SS .
+  %S %ST %ST |N .
+ ;
+ 
+ FORWARD OUTSAFE
+ 
+ PROCEDURE OUTSAFE IN %S
+  %S NotValid ? EXIT
+  %S OUTPRIM
+  for %S%G ( 
+   IN %S 
+   %S OUTPRIM 
+   if ( %S NotValid ! ) then 
+    ( for %S%G OUTSAFE ) 
+  )
+ ;
+ 
+ FORWARD OUT
+ 
+ PROCEDURE OUT IN %S
+  %S NotValid ? EXIT
+  %S OUTPRIM
+  for %S%G ( 
+   IN %S 
+   %S OUTPRIM 
+  )
+  for %S%Attrs OUT
+  for %S%Ops OUT
+  for %S%C OUT
+  %S%T OUTSAFE
+ ; 
+
+USES
+ 'W:\shared\models\NewSchool\SharedDelphi.root.script'
+;
+
+/*{USES
+ 'W:\shared\models\NewSchool\SharedDelphiOperations.root.script'
+;
+
+USES
+ 'W:\shared\models\NewSchool\Shared Delphi Scripting\Shared Delphi Scripting.model.script'
+; 
+
+USES
+ 'W:\shared\models\NewSchool\SharedDelphiTests.root.script'
+;}*/
+
+Test Gen
+ 
+ @ "Shared Delphi" OUT
+// @ "Shared Delphi Scripting" OUT
+// @ "Shared Delphi Operations" OUT
+// @ "Shared Delphi Tests" OUT
+;
+
+Gen

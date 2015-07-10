@@ -1,0 +1,68 @@
+USES
+ 'W:\shared\models\NewSchool\MDProcess.root.script'
+;
+
+USES
+ 'W:\shared\models\NewSchool\Templates\MDALike.tpl.script'
+;
+
+: Gen
+
+//help
+WordAliasByRef X_MDAClass :: UIDS_LIST 46E1540F00AB ;
+WordAliasByRef X_MDALibrary :: UIDS_LIST 46E155F80242 ;
+//help
+
+PROCEDURE OUT IN %S
+ //%S |N .
+ %SN .
+ //%S |S .
+ %SS .
+ %S %ST %ST |N .
+ %S %ST %ST %ST |N .
+ %S %ST %ST %ST %ST |N .
+ //%S |U .
+ %SU .
+;
+
+PROCEDURE X IN %S
+ %S OUT
+ //%S %P OUT
+ %S%P OUT
+ //%S %P %P OUT
+ %S%P%P OUT
+ //%S %P %P %P OUT
+ %S%P%P%P OUT
+ //%S %P %P %P %P OUT
+ %S%P%P%P%P OUT
+ //%S %P %P %P %P %P OUT
+ %S%P%P%P%P%P OUT
+;
+
+@ &lt;&lt;MDAClass&gt;&gt; %R IT X
+@ &lt;&lt;MDALibrary&gt;&gt; %R IT X
+@ X_MDAClass %R IT X
+@ X_MDALibrary %R IT X
+
+@ &lt;&lt;MDAClass&gt;&gt; %G IT X
+@ &lt;&lt;MDALibrary&gt;&gt; %G IT X
+
+'' .
+
+ARRAY VAR A
+@ X_MDAClass %R &gt;&gt;&gt; A
+//[ :: X_MDAClass %R ; ] &gt;&gt;&gt; A
+@ X A ITERATE
+
+'' .
+
+@ X_MDALibrary %R &gt;&gt;&gt; A
+//[ :: X_MDALibrary %R ; ] &gt;&gt;&gt; A
+@ X A ITERATE
+
+//ARRAY VAR A
+//[ &lt;&lt;MDAClass&gt;&gt; %G ] &gt;&gt;&gt; A
+
+;
+
+Gen
