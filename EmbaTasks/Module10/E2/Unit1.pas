@@ -10,8 +10,8 @@ type
   TfrmMain = class(TForm)
     pbxEx: TPaintBox;
     pnlButtons: TPanel;
-    btnSnowMan: TButton;
-    procedure btnSnowManClick(Sender: TObject);
+    btnDraw: TButton;
+    procedure btnDrawClick(Sender: TObject);
   private
     { Private declarations }
     procedure DrawHouse;
@@ -26,7 +26,7 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmMain.btnSnowManClick(Sender: TObject);
+procedure TfrmMain.btnDrawClick(Sender: TObject);
 begin
   DrawHouse;
 end;

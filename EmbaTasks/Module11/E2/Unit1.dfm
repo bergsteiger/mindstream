@@ -30,7 +30,6 @@ object frmMain: TfrmMain
     Height = 52
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 400
     object lblScuareSide: TLabel
       Left = 162
       Top = 19
@@ -45,14 +44,14 @@ object frmMain: TfrmMain
       Height = 13
       Caption = 'Square count'
     end
-    object btnSnowMan: TButton
+    object btnDraw: TButton
       Left = 416
       Top = 14
       Width = 129
       Height = 25
       Caption = 'Draw'
       TabOrder = 0
-      OnClick = btnSnowManClick
+      OnClick = btnDrawClick
     end
     object edtSqureCount: TEdit
       Left = 93

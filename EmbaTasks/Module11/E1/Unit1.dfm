@@ -30,15 +30,14 @@ object frmMain: TfrmMain
     Height = 52
     Align = alTop
     TabOrder = 0
-    ExplicitTop = 400
-    object btnSnowMan: TButton
+    object btnDraw: TButton
       Left = 256
       Top = 14
       Width = 129
       Height = 25
       Caption = 'Draw'
       TabOrder = 0
-      OnClick = btnSnowManClick
+      OnClick = btnDrawClick
     end
     object edtLinesCount: TEdit
       Left = 40
