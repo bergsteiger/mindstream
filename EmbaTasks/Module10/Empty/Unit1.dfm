@@ -15,20 +15,22 @@ object frmMain: TfrmMain
   TextHeight = 13
   object pbxEx: TPaintBox
     Left = 0
-    Top = 0
+    Top = 52
     Width = 400
     Height = 400
     Align = alClient
+    ExplicitTop = 0
     ExplicitWidth = 445
     ExplicitHeight = 273
   end
   object pnlButtons: TPanel
     Left = 0
-    Top = 400
+    Top = 0
     Width = 400
     Height = 52
-    Align = alBottom
+    Align = alTop
     TabOrder = 0
+    ExplicitTop = 400
     object btnSnowMan: TButton
       Left = 256
       Top = 16
