@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 380
-  ClientWidth = 445
+  ClientHeight = 452
+  ClientWidth = 400
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,18 +16,21 @@ object Form1: TForm1
   object pbxEx: TPaintBox
     Left = 0
     Top = 0
-    Width = 445
-    Height = 328
+    Width = 400
+    Height = 400
     Align = alClient
+    ExplicitWidth = 445
     ExplicitHeight = 273
   end
   object pnlButtons: TPanel
     Left = 0
-    Top = 328
-    Width = 445
+    Top = 400
+    Width = 400
     Height = 52
     Align = alBottom
     TabOrder = 0
+    ExplicitTop = 328
+    ExplicitWidth = 445
     object btnSnowMan: TButton
       Left = 152
       Top = 16

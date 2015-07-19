@@ -32,8 +32,19 @@ begin
 end;
 
 procedure TForm1.DrawSnowMan;
+var
+  Center : TPoint;
 begin
+  Center.X := pbxEx.Width div 2;
+  Center.Y := pbxEx.Height div 2;
 
+  pbxEx.Canvas.Pen.Color:= clBlack;
+  pbxEx.Canvas.Pen.Width:= 2;
+
+  pbxEx.Canvas.Brush.Color := clWhite;
+  pbxEx.Canvas.Pixels[Center.X, Center.Y] := clBlack;
+
+  //pbxEx.Canvas.LineTo(Center.X, Center.Y);
 end;
 
 end.
