@@ -11,6 +11,10 @@ type
     pbxEx: TPaintBox;
     pnlButtons: TPanel;
     btnSnowMan: TButton;
+    edtSqureCount: TEdit;
+    edtSquareSide: TEdit;
+    lblScuareSide: TLabel;
+    lblSquareCount: TLabel;
     procedure btnSnowManClick(Sender: TObject);
   private
     { Private declarations }
@@ -33,18 +37,41 @@ end;
 
 procedure TfrmMain.DrawSnowMan;
 var
-  Center : TPoint;
+  PaintCenter,
+  SquareTopLeft,
+  SquareRightBottom : TPoint;
+
+  SquareCount,
+  SquareSide,
+  Index : integer;
 begin
-  Center.X := pbxEx.Width div 2;
-  Center.Y := pbxEx.Height div 2;
+  PaintCenter.X := pbxEx.Width div 2;
+  PaintCenter.Y := pbxEx.Height div 2;
 
   pbxEx.Canvas.Pen.Color:= clBlack;
   pbxEx.Canvas.Pen.Width:= 2;
 
   pbxEx.Canvas.Brush.Color := clWhite;
-  pbxEx.Canvas.Pixels[Center.X, Center.Y] := clBlack;
 
-  //pbxEx.Canvas.LineTo(Center.X, Center.Y);
+  SquareCount := StrToInt(edtSqureCount.Text);
+  SquareSide := StrToInt(edtSquareSide.Text);
+
+  SquareTopLeft.X := 0;
+  SquareTopLeft.Y := PaintCenter.Y;
+
+  SquareRightBottom.X := 20;
+  SquareRightBottom.Y := PaintCenter.Y + SquareSide;
+
+  for Index := 0 to SquareCount  do
+  begin
+    SquareTopLeft.X := SquareSide * (Index - 1);
+    SquareRightBottom.X := SquareTopLeft.X + SquareSide;
+
+    pbxEx.Canvas.Rectangle(SquareTopLeft.X, SquareTopLeft.Y,
+                           SquareRightBottom.X, SquareRightBottom.Y);
+  end;
+
+
 end;
 
 end.
