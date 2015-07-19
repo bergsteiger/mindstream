@@ -77,8 +77,8 @@ begin
   pbxEx.Canvas.LineTo(200, 135);
 
   // Smile ^_^
-
-
+  pbxEx.Canvas.MoveTo(190, 155);
+  pbxEx.Canvas.LineTo(210, 155);
 end;
 
 end.
