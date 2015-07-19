@@ -11,10 +11,11 @@ type
     pbxEx: TPaintBox;
     pnlButtons: TPanel;
     btnSnowMan: TButton;
+    edtLinesCount: TEdit;
     procedure btnSnowManClick(Sender: TObject);
   private
     { Private declarations }
-    procedure DrawSnowMan;
+    procedure DrawLines;
   public
     { Public declarations }
   end;
@@ -28,23 +29,25 @@ implementation
 
 procedure TfrmMain.btnSnowManClick(Sender: TObject);
 begin
-  DrawSnowMan;
+  DrawLines;
 end;
 
-procedure TfrmMain.DrawSnowMan;
+procedure TfrmMain.DrawLines;
 var
-  Center : TPoint;
+  Step, LineStartY : integer;
 begin
-  Center.X := pbxEx.Width div 2;
-  Center.Y := pbxEx.Height div 2;
-
   pbxEx.Canvas.Pen.Color:= clBlack;
   pbxEx.Canvas.Pen.Width:= 2;
 
-  pbxEx.Canvas.Brush.Color := clWhite;
-  pbxEx.Canvas.Pixels[Center.X, Center.Y] := clBlack;
+  Step := pbxEx.Height div StrToInt(edtLinesCount.Text);
 
-  //pbxEx.Canvas.LineTo(Center.X, Center.Y);
+  LineStartY := 0;
+  while LineStartY < pbxEx.Height do
+  begin
+    LineStartY := LineStartY + Step;
+    pbxEx.Canvas.MoveTo(0, LineStartY);
+    pbxEx.Canvas.LineTo(pbxEx.Height, LineStartY);
+  end;
 end;
 
 end.

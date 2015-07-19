@@ -40,5 +40,13 @@ object frmMain: TfrmMain
       TabOrder = 0
       OnClick = btnSnowManClick
     end
+    object edtLinesCount: TEdit
+      Left = 40
+      Top = 16
+      Width = 121
+      Height = 21
+      TabOrder = 1
+      Text = '10'
+    end
   end
 end
