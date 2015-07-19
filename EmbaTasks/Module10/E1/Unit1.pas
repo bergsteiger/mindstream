@@ -33,7 +33,7 @@ end;
 
 procedure TfrmMain.DrawSnowMan;
 var
-  PictureCenter : TPoint;
+  PictureCenter, FaceCenter : TPoint;
   CircleDiameter : integer;
 begin
   pbxEx.Canvas.Pen.Color:= clBlack;
@@ -58,8 +58,27 @@ begin
   pbxEx.Canvas.Ellipse(PictureCenter.X - (CircleDiameter div 2), 140 - (CircleDiameter div 2),
                        PictureCenter.X + (CircleDiameter div 2), 140 + (CircleDiameter div 2));
 
-  pbxEx.Canvas.MoveTo();
-  //pbxEx.Canvas.LineTo(Center.X, Center.Y);
+
+  pbxEx.Canvas.Brush.Color := clBlack;
+  // Left Eye
+  CircleDiameter := 10;
+  pbxEx.Canvas.Ellipse(190 - (CircleDiameter div 2), 130 - (CircleDiameter div 2),
+                       190 + (CircleDiameter div 2), 130 + (CircleDiameter div 2));
+
+  // Rigth Eye
+  pbxEx.Canvas.Ellipse(210 - (CircleDiameter div 2), 130 - (CircleDiameter div 2),
+                       210 + (CircleDiameter div 2), 130 + (CircleDiameter div 2));
+
+
+  // Nose
+  pbxEx.Canvas.MoveTo(200, 135);
+  pbxEx.Canvas.LineTo(195, 145);
+  pbxEx.Canvas.LineTo(205, 145);
+  pbxEx.Canvas.LineTo(200, 135);
+
+  // Smile ^_^
+
+
 end;
 
 end.
