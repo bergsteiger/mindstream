@@ -30,7 +30,7 @@ object frmMain: TfrmMain
     Align = alBottom
     TabOrder = 0
     object btnSnowMan: TButton
-      Left = 152
+      Left = 256
       Top = 16
       Width = 129
       Height = 25
