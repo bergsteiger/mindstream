@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
 
 type
-  TForm1 = class(TForm)
+  TfrmMain = class(TForm)
     pbxEx: TPaintBox;
     pnlButtons: TPanel;
     btnSnowMan: TButton;
@@ -20,18 +20,18 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmMain: TfrmMain;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.btnSnowManClick(Sender: TObject);
+procedure TfrmMain.btnSnowManClick(Sender: TObject);
 begin
   DrawSnowMan;
 end;
 
-procedure TForm1.DrawSnowMan;
+procedure TfrmMain.DrawSnowMan;
 var
   Center : TPoint;
 begin
