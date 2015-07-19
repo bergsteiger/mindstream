@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
 
 type
-  TForm1 = class(TForm)
+  TfrmMain = class(TForm)
     pbxEx: TPaintBox;
     pnlButtons: TPanel;
     btnSnowMan: TButton;
@@ -20,30 +20,45 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmMain: TfrmMain;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.btnSnowManClick(Sender: TObject);
+procedure TfrmMain.btnSnowManClick(Sender: TObject);
 begin
   DrawSnowMan;
 end;
 
-procedure TForm1.DrawSnowMan;
+procedure TfrmMain.DrawSnowMan;
 var
-  Center : TPoint;
+  PictureCenter : TPoint;
+  CircleDiameter : integer;
 begin
-  Center.X := pbxEx.Width div 2;
-  Center.Y := pbxEx.Height div 2;
-
   pbxEx.Canvas.Pen.Color:= clBlack;
   pbxEx.Canvas.Pen.Width:= 2;
-
   pbxEx.Canvas.Brush.Color := clWhite;
-  pbxEx.Canvas.Pixels[Center.X, Center.Y] := clBlack;
 
+  PictureCenter.X := pbxEx.Width div 2;
+  PictureCenter.Y := pbxEx.Height div 2;
+
+  // First Circle
+  CircleDiameter := 100;
+  pbxEx.Canvas.Ellipse(PictureCenter.X - (CircleDiameter div 2), 300 - (CircleDiameter div 2),
+                       PictureCenter.X + (CircleDiameter div 2), 300 + (CircleDiameter div 2));
+
+  // Second Circle
+  CircleDiameter := 80;
+  pbxEx.Canvas.Ellipse(PictureCenter.X - (CircleDiameter div 2), 210 - (CircleDiameter div 2),
+                       PictureCenter.X + (CircleDiameter div 2), 210 + (CircleDiameter div 2));
+
+  // Third Circle
+  CircleDiameter := 60;
+  pbxEx.Canvas.Ellipse(PictureCenter.X - (CircleDiameter div 2), 140 - (CircleDiameter div 2),
+                       PictureCenter.X + (CircleDiameter div 2), 140 + (CircleDiameter div 2));
+
+  pbxEx.Canvas.MoveTo();
   //pbxEx.Canvas.LineTo(Center.X, Center.Y);
 end;
 
