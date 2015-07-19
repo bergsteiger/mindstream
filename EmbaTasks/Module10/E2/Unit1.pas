@@ -7,31 +7,31 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
 
 type
-  TForm1 = class(TForm)
+  TfrmMain = class(TForm)
     pbxEx: TPaintBox;
     pnlButtons: TPanel;
     btnSnowMan: TButton;
     procedure btnSnowManClick(Sender: TObject);
   private
     { Private declarations }
-    procedure DrawSnowMan;
+    procedure DrawHouse;
   public
     { Public declarations }
   end;
 
 var
-  Form1: TForm1;
+  frmMain: TfrmMain;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.btnSnowManClick(Sender: TObject);
+procedure TfrmMain.btnSnowManClick(Sender: TObject);
 begin
-  DrawSnowMan;
+  DrawHouse;
 end;
 
-procedure TForm1.DrawSnowMan;
+procedure TfrmMain.DrawHouse;
 var
   Center : TPoint;
 begin
@@ -41,10 +41,28 @@ begin
   pbxEx.Canvas.Pen.Color:= clBlack;
   pbxEx.Canvas.Pen.Width:= 2;
 
-  pbxEx.Canvas.Brush.Color := clWhite;
-  pbxEx.Canvas.Pixels[Center.X, Center.Y] := clBlack;
+  // Draw wall
+  pbxEx.Canvas.Brush.Color := clMoneyGreen;
+  pbxEx.Canvas.Rectangle(100, 200, 300, 400);
 
-  //pbxEx.Canvas.LineTo(Center.X, Center.Y);
+  // Draw roof
+  pbxEx.Canvas.MoveTo(100, 200);
+  pbxEx.Canvas.LineTo(200, 50);
+  pbxEx.Canvas.LineTo(300, 200);
+
+  pbxEx.Canvas.Brush.Color := clGray;
+  pbxEx.Canvas.Rectangle(170, 220, 240, 300);
+
+  pbxEx.Canvas.MoveTo(170, 250);
+  pbxEx.Canvas.LineTo(240, 250);
+  pbxEx.Canvas.MoveTo(200, 220);
+  pbxEx.Canvas.LineTo(200, 300);
+
+  //Draw stairs
+  pbxEx.Canvas.Brush.Color := clTeal;
+  pbxEx.Canvas.Rectangle(300, 360, 320, 400);
+  pbxEx.Canvas.Rectangle(320, 380, 340, 400);
+  pbxEx.Canvas.Rectangle(340, 400, 360, 400);
 end;
 
 end.

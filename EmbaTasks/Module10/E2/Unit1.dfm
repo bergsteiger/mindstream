@@ -1,7 +1,7 @@
-object Form1: TForm1
+object frmMain: TfrmMain
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Main'
   ClientHeight = 452
   ClientWidth = 400
   Color = clBtnFace
@@ -29,14 +29,12 @@ object Form1: TForm1
     Height = 52
     Align = alBottom
     TabOrder = 0
-    ExplicitTop = 328
-    ExplicitWidth = 445
     object btnSnowMan: TButton
       Left = 152
       Top = 16
-      Width = 137
+      Width = 129
       Height = 25
-      Caption = 'Draw SnowMan'
+      Caption = 'Draw'
       TabOrder = 0
       OnClick = btnSnowManClick
     end
