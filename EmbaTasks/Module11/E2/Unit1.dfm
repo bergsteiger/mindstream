@@ -67,7 +67,7 @@ object frmMain: TfrmMain
       Width = 42
       Height = 21
       TabOrder = 2
-      Text = '20'
+      Text = '80'
     end
   end
 end
