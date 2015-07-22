@@ -30,7 +30,6 @@ object frmMain: TfrmMain
     Height = 52
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 585
     object lblColumnCount: TLabel
       Left = 162
       Top = 19

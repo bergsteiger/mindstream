@@ -31,25 +31,25 @@ object frmMain: TfrmMain
     Align = alTop
     TabOrder = 0
     object lblMinRadius: TLabel
-      Left = 160
+      Left = 163
       Top = 19
-      Width = 65
+      Width = 63
       Height = 13
       Caption = 'Min radius (r)'
     end
     object lblNCircles: TLabel
-      Left = 24
+      Left = 48
       Top = 19
       Width = 39
       Height = 13
       Caption = 'N circles'
     end
     object lblMaxRadius: TLabel
-      Left = 288
+      Left = 286
       Top = 19
-      Width = 63
+      Width = 70
       Height = 13
-      Caption = 'Min radius (r)'
+      Caption = 'Max radius (R)'
     end
     object btnDraw: TButton
       Left = 416

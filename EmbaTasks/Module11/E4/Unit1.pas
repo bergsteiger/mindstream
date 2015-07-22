@@ -37,10 +37,6 @@ end;
 
 procedure TfrmMain.Draw;
 var
-  PaintCenter,
-  SquareTopLeft,
-  SquareRightBottom : TPoint;
-
   RowCount,
   ColumnCount,
   RowStep,
@@ -49,9 +45,6 @@ var
   RowIndex,
   ColumnIndex : integer;
 begin
-  PaintCenter.X := pbxEx.Width div 2;
-  PaintCenter.Y := pbxEx.Height div 2;
-
   pbxEx.Canvas.Pen.Color:= clBlack;
   pbxEx.Canvas.Pen.Width:= 2;
 
@@ -86,9 +79,6 @@ begin
           pbxEx.Canvas.FloodFill(ColumnStep * ColumnIndex - pbxEx.Canvas.Pen.Width, RowIndex  * RowStep - 3, clBlack, fsBorder);
       end;
     end;
-
-
-
 end;
 
 end.
