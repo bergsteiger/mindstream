@@ -3,7 +3,7 @@ object frmMain: TfrmMain
   Top = 0
   Caption = 'Main'
   ClientHeight = 452
-  ClientWidth = 585
+  ClientWidth = 600
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,7 +16,7 @@ object frmMain: TfrmMain
   object pbxEx: TPaintBox
     Left = 0
     Top = 52
-    Width = 585
+    Width = 600
     Height = 400
     Align = alClient
     ExplicitTop = 0
@@ -26,23 +26,24 @@ object frmMain: TfrmMain
   object pnlButtons: TPanel
     Left = 0
     Top = 0
-    Width = 585
+    Width = 600
     Height = 52
     Align = alTop
     TabOrder = 0
-    object lblScuareSide: TLabel
+    ExplicitWidth = 585
+    object lblColumnCount: TLabel
       Left = 162
       Top = 19
-      Width = 64
+      Width = 65
       Height = 13
-      Caption = 'lblSquareSide'
+      Caption = 'Column count'
     end
-    object lblSquareCount: TLabel
+    object lblRowcount: TLabel
       Left = 24
       Top = 19
-      Width = 64
+      Width = 51
       Height = 13
-      Caption = 'Square count'
+      Caption = 'Row count'
     end
     object btnDraw: TButton
       Left = 416
@@ -53,21 +54,21 @@ object frmMain: TfrmMain
       TabOrder = 0
       OnClick = btnDrawClick
     end
-    object edtSqureCount: TEdit
+    object edtRowCount: TEdit
       Left = 93
       Top = 16
       Width = 41
       Height = 21
       TabOrder = 1
-      Text = '4'
+      Text = '10'
     end
-    object edtSquareSide: TEdit
+    object edtColumnCount: TEdit
       Left = 231
       Top = 16
       Width = 42
       Height = 21
       TabOrder = 2
-      Text = '80'
+      Text = '10'
     end
   end
 end

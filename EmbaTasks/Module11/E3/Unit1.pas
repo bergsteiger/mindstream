@@ -11,10 +11,10 @@ type
     pbxEx: TPaintBox;
     pnlButtons: TPanel;
     btnDraw: TButton;
-    edtSqureCount: TEdit;
-    edtSquareSide: TEdit;
-    lblScuareSide: TLabel;
-    lblSquareCount: TLabel;
+    edtRowCount: TEdit;
+    edtColumnCount: TEdit;
+    lblColumnCount: TLabel;
+    lblRowcount: TLabel;
     procedure btnDrawClick(Sender: TObject);
   private
     { Private declarations }
@@ -41,8 +41,10 @@ var
   SquareTopLeft,
   SquareRightBottom : TPoint;
 
-  SquareCount,
-  SquareSide,
+  RowCount,
+  ColumnCount,
+  RowStep,
+  ColumnStep,
   Index : integer;
 begin
   PaintCenter.X := pbxEx.Width div 2;
@@ -51,26 +53,23 @@ begin
   pbxEx.Canvas.Pen.Color:= clBlack;
   pbxEx.Canvas.Pen.Width:= 2;
 
-  pbxEx.Canvas.Brush.Color := clWhite;
+  RowCount := StrToInt(edtRowCount.Text);
+  ColumnCount := StrToInt(edtColumnCount.Text);
 
-  SquareCount := StrToInt(edtSqureCount.Text);
-  SquareSide := StrToInt(edtSquareSide.Text);
+  RowStep := pbxEx.Height div RowCount;
+  ColumnStep := pbxEx.Width div ColumnCount;
 
-  SquareTopLeft.X := 0;
-  SquareTopLeft.Y := PaintCenter.Y;
-
-  SquareRightBottom.X := 20;
-  SquareRightBottom.Y := PaintCenter.Y + SquareSide;
-
-  for Index := 0 to SquareCount  do
+  for Index := 1 to RowCount do
   begin
-    SquareTopLeft.X := SquareSide * (Index - 1);
-    SquareRightBottom.X := SquareTopLeft.X + SquareSide;
-
-    pbxEx.Canvas.Rectangle(SquareTopLeft.X, SquareTopLeft.Y,
-                           SquareRightBottom.X, SquareRightBottom.Y);
+    pbxEx.Canvas.MoveTo(0, RowStep * Index);
+    pbxEx.Canvas.LineTo(pbxEx.Width, RowStep * Index);
   end;
 
+  for Index := 1 to ColumnCount do
+  begin
+    pbxEx.Canvas.MoveTo(ColumnStep * Index, 0);
+    pbxEx.Canvas.LineTo(ColumnStep * Index, pbxEx.Height);
+  end;
 
 end;
 
