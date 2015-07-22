@@ -11,10 +11,10 @@ type
     pbxEx: TPaintBox;
     pnlButtons: TPanel;
     btnDraw: TButton;
-    edtColumnCount: TEdit;
-    edtRowCount: TEdit;
-    lblRow: TLabel;
-    lblColumn: TLabel;
+    edtSqureCount: TEdit;
+    edtSquareSide: TEdit;
+    lblScuareSide: TLabel;
+    lblSquareCount: TLabel;
     procedure btnDrawClick(Sender: TObject);
   private
     { Private declarations }
@@ -53,8 +53,8 @@ begin
 
   pbxEx.Canvas.Brush.Color := clWhite;
 
-  SquareCount := StrToInt(edtColumnCount.Text);
-  SquareSide := StrToInt(edtRowCount.Text);
+  SquareCount := StrToInt(edtSqureCount.Text);
+  SquareSide := StrToInt(edtSquareSide.Text);
 
   SquareTopLeft.X := 0;
   SquareTopLeft.Y := PaintCenter.Y;

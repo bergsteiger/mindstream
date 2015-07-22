@@ -14,7 +14,7 @@ type
     procedure btnSnowManClick(Sender: TObject);
   private
     { Private declarations }
-    procedure DrawSnowMan;
+    procedure Draw;
   public
     { Public declarations }
   end;
@@ -28,10 +28,10 @@ implementation
 
 procedure TfrmMain.btnSnowManClick(Sender: TObject);
 begin
-  DrawSnowMan;
+  Draw;
 end;
 
-procedure TfrmMain.DrawSnowMan;
+procedure TfrmMain.Draw;
 var
   Center : TPoint;
 begin

@@ -30,7 +30,6 @@ object frmMain: TfrmMain
     Height = 52
     Align = alTop
     TabOrder = 0
-    ExplicitTop = 400
     object btnSnowMan: TButton
       Left = 256
       Top = 16
