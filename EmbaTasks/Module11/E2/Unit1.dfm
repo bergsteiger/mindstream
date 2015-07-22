@@ -33,9 +33,9 @@ object frmMain: TfrmMain
     object lblScuareSide: TLabel
       Left = 162
       Top = 19
-      Width = 64
+      Width = 56
       Height = 13
-      Caption = 'lblSquareSide'
+      Caption = 'Square side'
     end
     object lblSquareCount: TLabel
       Left = 24
