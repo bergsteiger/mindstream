@@ -30,26 +30,12 @@ object frmMain: TfrmMain
     Height = 52
     Align = alTop
     TabOrder = 0
-    object lblMinRadius: TLabel
-      Left = 163
-      Top = 19
-      Width = 63
-      Height = 13
-      Caption = 'Min radius (r)'
-    end
-    object lblNCircles: TLabel
-      Left = 48
+    object lblNPoints: TLabel
+      Left = 42
       Top = 19
       Width = 39
       Height = 13
-      Caption = 'N circles'
-    end
-    object lblMaxRadius: TLabel
-      Left = 286
-      Top = 19
-      Width = 70
-      Height = 13
-      Caption = 'Max radius (R)'
+      Caption = 'N Points'
     end
     object btnDraw: TButton
       Left = 416
@@ -60,29 +46,13 @@ object frmMain: TfrmMain
       TabOrder = 0
       OnClick = btnDrawClick
     end
-    object edtNCircles: TEdit
-      Left = 93
+    object edtNPoints: TEdit
+      Left = 87
       Top = 16
-      Width = 41
+      Width = 42
       Height = 21
       TabOrder = 1
-      Text = '5'
-    end
-    object edtMinRadius: TEdit
-      Left = 231
-      Top = 16
-      Width = 42
-      Height = 21
-      TabOrder = 2
-      Text = '50'
-    end
-    object edtMaxRadius: TEdit
-      Left = 359
-      Top = 16
-      Width = 42
-      Height = 21
-      TabOrder = 3
-      Text = '250'
+      Text = '2'
     end
   end
 end

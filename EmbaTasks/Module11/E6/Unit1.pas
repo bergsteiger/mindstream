@@ -11,12 +11,8 @@ type
     pbxEx: TPaintBox;
     pnlButtons: TPanel;
     btnDraw: TButton;
-    edtNCircles: TEdit;
-    edtMinRadius: TEdit;
-    lblMinRadius: TLabel;
-    lblNCircles: TLabel;
-    lblMaxRadius: TLabel;
-    edtMaxRadius: TEdit;
+    lblNPoints: TLabel;
+    edtNPoints: TEdit;
     procedure btnDrawClick(Sender: TObject);
   private
     { Private declarations }
@@ -38,35 +34,9 @@ begin
 end;
 
 procedure TfrmMain.Draw;
-var
-  PaintCenter : TPoint;
-
-  CircleCount,
-  MaxRadius,
-  MinRadius,
-  RadiusStep,
-  Index : integer;
 begin
-  PaintCenter.X := pbxEx.Width div 2;
-  PaintCenter.Y := pbxEx.Height div 2;
-
   pbxEx.Canvas.Pen.Color:= clBlack;
   pbxEx.Canvas.Pen.Width:= 2;
-
-  CircleCount := StrToInt(edtNCircles.Text);
-  MaxRadius := StrToInt(edtMaxRadius.Text);
-  MinRadius := StrToInt(edtMinRadius.Text);
-
-  RadiusStep := (MaxRadius - MinRadius) div CircleCount;
-
-  for Index := CircleCount downto 1 do
-  begin
-    pbxEx.Canvas.Ellipse(PaintCenter.X - RadiusStep * Index,
-                         PaintCenter.Y - RadiusStep * Index,
-                         PaintCenter.X + RadiusStep * Index,
-                         PaintCenter.Y + RadiusStep * Index);
-  end;
-
 end;
 
 
