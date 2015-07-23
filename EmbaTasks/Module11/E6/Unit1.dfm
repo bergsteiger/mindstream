@@ -30,12 +30,28 @@ object frmMain: TfrmMain
     Height = 52
     Align = alTop
     TabOrder = 0
+    ExplicitLeft = 48
+    ExplicitTop = 8
     object lblNPoints: TLabel
-      Left = 42
+      Left = 10
       Top = 19
       Width = 39
       Height = 13
       Caption = 'N Points'
+    end
+    object lblCenterX: TLabel
+      Left = 114
+      Top = 19
+      Width = 42
+      Height = 13
+      Caption = 'Center X'
+    end
+    object lblCenterY: TLabel
+      Left = 218
+      Top = 19
+      Width = 42
+      Height = 13
+      Caption = 'Center Y'
     end
     object btnDraw: TButton
       Left = 416
@@ -47,11 +63,27 @@ object frmMain: TfrmMain
       OnClick = btnDrawClick
     end
     object edtNPoints: TEdit
-      Left = 87
+      Left = 55
       Top = 16
       Width = 42
       Height = 21
       TabOrder = 1
+      Text = '2'
+    end
+    object Edit1: TEdit
+      Left = 159
+      Top = 16
+      Width = 42
+      Height = 21
+      TabOrder = 2
+      Text = '2'
+    end
+    object edtCenterY: TEdit
+      Left = 263
+      Top = 16
+      Width = 42
+      Height = 21
+      TabOrder = 3
       Text = '2'
     end
   end

@@ -13,6 +13,10 @@ type
     btnDraw: TButton;
     lblNPoints: TLabel;
     edtNPoints: TEdit;
+    lblCenterX: TLabel;
+    Edit1: TEdit;
+    lblCenterY: TLabel;
+    edtCenterY: TEdit;
     procedure btnDrawClick(Sender: TObject);
   private
     { Private declarations }
@@ -37,6 +41,8 @@ procedure TfrmMain.Draw;
 begin
   pbxEx.Canvas.Pen.Color:= clBlack;
   pbxEx.Canvas.Pen.Width:= 2;
+
+  pbxEx.Canvas.Arc(0,0, 200, 200, 200, 200, 5, 5);
 end;
 
 
