@@ -2,18 +2,15 @@
 //
 // Модуль: "w:/MDProcess/DelphiSpecific/DelphiLang/Implementation/ScriptKeywordsPack.tpi"
 // Генерация мета-шаблонов
-// Generated from UML model, root element: <<MDAClass::Class>> MDProcess$ForDelphi::DelphiSpecific::DelphiLang::Implementation::ScriptKeywordsPack
+// Generated from UML model, root element: &lt;&lt;MDAClass::Class&gt;&gt; MDProcess$ForDelphi::DelphiSpecific::DelphiLang::Implementation::ScriptKeywordsPack
 //
 // Набор слов скрипта
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 : ScriptKeywordsPack::Class
 ? Набор слов скрипта
-> ScriptKeyword::Class
+&gt; ScriptKeyword::Class
 
 = UtilityPack::Class
 
@@ -86,11 +83,11 @@ p needs script:tribool=undefined ? Нужна скриптовая обвязка
 
 	%f_clear_list(PROPS)\
 
-	<{}{%CS=property|%CS=readonly}\
+	&lt;{}{%CS=property|%CS=readonly}\
 	%f_add_to_list(PROPS,C)\
-	>\
+	&gt;\
 
-	%{PROPS}<{}{}{%C}\
+	%{PROPS}&lt;{}{}{%C}\
 
 	%1%f_add_operation(%1U_%CU_get,keyword,[{%CS!=readonly}Get]%CN (): %C%TU,Op_Instance)\
 	%{Op_Instance}%f_set_up(NameForScript,%C{NameForScript})\
@@ -104,7 +101,7 @@ p needs script:tribool=undefined ? Нужна скриптовая обвязка
 	%{Op_Instance}%f_set_up(is_setter,true)\
 	]\
 
-	>\
+	&gt;\
 
 	%f_clear_list(PROPS)\
 
@@ -112,24 +109,24 @@ p needs script:tribool=undefined ? Нужна скриптовая обвязка
 
 	%f_clear_list(PARAMS)\
 
-	<{}{%t_isAcceptableForScripts(%G)=true}\
+	&lt;{}{%t_isAcceptableForScripts(%G)=true}\
 	%f_SpellWordsForParent(%S,%G,"true")\
-	>\
+	&gt;\
 
-	<{}{%t_isAcceptableForScripts(%R)=true}\
+	&lt;{}{%t_isAcceptableForScripts(%R)=true}\
 	%f_SpellWordsForParent(%S,%R,"false")\
-	>\
+	&gt;\
 
 	%f_clear_list(KEYS)\
 
-	%S<{}{%C#f_IsGlobalKeyword()=true}\
+	%S&lt;{}{%C#f_IsGlobalKeyword()=true}\
 	%f_add_to_list(KEYS,C)\
-	>\
+	&gt;\
 
 	%f_set_var(GEN,"")\
-	%{KEYS}<{}{}{%C}\
+	%{KEYS}&lt;{}{}{%C}\
 	%f_SpellWordByOp(%1,%C)\
-	>\
+	&gt;\
 
 	%f_clear_list(KEYS)\
 
@@ -138,7 +135,7 @@ p needs script:tribool=undefined ? Нужна скриптовая обвязка
 	[{"%{TtfwTypeRegistrator}N"=""}%f_find_element(TtfwTypeRegistrator,TtfwTypeRegistrator)]\
 	%f_addCDep(%S,%{TtfwTypeRegistrator})\
 
-	%{PARAMS}<{}{}{%C}\
+	%{PARAMS}&lt;{}{}{%C}\
 
 	%1%f_add_operation(%1U_%CU_RegType,ini,Reg_%CN (),Reg_Instance)\
 	%{Reg_Instance}%f_set_documentation(Регистрация типа %CN)\
@@ -150,7 +147,7 @@ p needs script:tribool=undefined ? Нужна скриптовая обвязка
 	%{Reg_Instance}%f_set_uc_content(intf.pas,,\
 	 TtfwTypeRegistrator.RegisterType(%t_TypeInfo(%C));\
 	)\
-	>\
+	&gt;\
 	]\
 
 	%f_clear_list(PARAMS)\
@@ -185,14 +182,14 @@ f _SpellWordsForParent
 
 	%f_clear_list(KEYS)\
 
-	%S<{}{%C#f_IsKeyword()=true}\
+	%S&lt;{}{%C#f_IsKeyword()=true}\
 	%f_add_to_list(KEYS,C)\
-	>\
+	&gt;\
 
 	%f_set_var(GEN,1)\
-	%{KEYS}<{}{}{%C}\
+	%{KEYS}&lt;{}{}{%C}\
 	%f_SpellWordByOp(%1,%C)\
-	>\
+	&gt;\
 
 	%f_clear_list(KEYS)
 
@@ -242,17 +239,17 @@ f _SpellWordByOp
 	[{"%{RES}N"!=""}*Тип результата:* %{RES}N\n]\
 	*Пример:*
 	\{code\}
-	%1<{}{%CS=out}{%C}[%t_EngineType(%C%T) ]VAR l_%CN\n>\
+	%1&lt;{}{%CS=out}{%C}[%t_EngineType(%C%T) ]VAR l_%CN\n&gt;\
 	[{"%{RES}N"!=""}[%t_EngineType(%{RES}) ]VAR l_%{RES}N\n]\
 
-	 %1<{}{%CS!=out}{%Cr}%CN >[{%1#f_IsCreator()!=true&"%{GEN}N"!=""}a%t_SelfName(%{GEN}) ]%f_loc_GetNameForScript(%{Class_Inst})\
+	 %1&lt;{}{%CS!=out}{%Cr}%CN &gt;[{%1#f_IsCreator()!=true&"%{GEN}N"!=""}a%t_SelfName(%{GEN}) ]%f_loc_GetNameForScript(%{Class_Inst})\
 
 	[{%1#f_IsVarWorker()=true}\
 	 [{%1#f_IsWordWorker()=true}{aVar}aWord]\
 	]\
 
-	%1<{}{%CS=out}{%C} \>\>\> l_%CN>\
-	[{"%{RES}N"!=""} \>\>\> l_%{RES}N]\
+	%1&lt;{}{%CS=out}{%C} \&gt;\&gt;\&gt; l_%CN&gt;\
+	[{"%{RES}N"!=""} \&gt;\&gt;\&gt; l_%{RES}N]\
 	\n\
 	\{code\} \
 	)\
@@ -312,7 +309,7 @@ f _SpellWordByOp
 	%f_set_var(NeedOp,"true")\
 	]\
 
-	[{%1<{}{}{%CC}>!=0}\
+	[{%1&lt;{}{}{%CC}&gt;!=0}\
 	%f_set_var(NeedOp,"true")\
 	]\
 
@@ -331,7 +328,7 @@ f _SpellWordByOp
 	[{%1#f_IsCreator()!=true&"%{GEN}N"!=""}, \
 	a%t_SelfName(%{GEN}): %{GEN}U \
 	]\
-	%1<{}{}{%C},%CS %CN:%C%TU>)\
+	%1&lt;{}{}{%C},%CS %CN:%C%TU&gt;)\
 	[{%1#f_IsCreator()=true&"%{GEN}N"!=""}{\
 	[{%1%TN!=void} : %1%TU]\
 	}\
@@ -343,7 +340,7 @@ f _SpellWordByOp
 	%{Op_Instance}%f_set_abstraction_type(final)\
 	%{Op_Instance}%f_set_visibility_type(PrivateAccess)\
 
-	%{Op_Instance}<{}{}{%C}%f_AddParamToRegister(%C%T)>\
+	%{Op_Instance}&lt;{}{}{%C}%f_AddParamToRegister(%C%T)&gt;\
 	%f_AddParamToRegister(%{Op_Instance}%T)\
 
 	]\
@@ -367,15 +364,15 @@ f _SpellWordByOp
 	}\
 	%{MyDo}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{MyDo},%{Class_Inst})_var,\
 	 {-}\
-	[{%{Op_Instance}<{}{}{+%CC}>!=0}\
+	[{%{Op_Instance}&lt;{}{}{+%CC}&gt;!=0}\
 	\n\
 	var\
-	%{Op_Instance}<{}{}{+%C}\n l_%CN : %f_pas_TypeName(%C%T);>\
+	%{Op_Instance}&lt;{}{}{+%C}\n l_%CN : %f_pas_TypeName(%C%T);&gt;\
 	]\
 	)\
 
 	%{MyDo}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{MyDo},%{Class_Inst})_impl,\
-	%{Op_Instance}<{}{}{+%C}\
+	%{Op_Instance}&lt;{}{}{+%C}\
 	[{%CS!=out}\
 	 try
 	  l_%CN := \
@@ -389,23 +386,23 @@ f _SpellWordByOp
 	  end;//on E: Exception
 	 end;//try..except
 	]\
-	>\
+	&gt;\
 	 \
 	[{%{Op_Instance}%TN!=void}\
 	aCtx.rEngine.%t_PushSig(%{Op_Instance}%T)\
 	(%t_UnCastSig(%{Op_Instance}%T)(\
 	]\
-	%f_to_borland(%{Op_Instance}N)(aCtx%{Op_Instance}<{}{}{+%C}, l_%CN>)\
+	%f_to_borland(%{Op_Instance}N)(aCtx%{Op_Instance}&lt;{}{}{+%C}, l_%CN&gt;)\
 	[{%{Op_Instance}%TN!=void}\
 	))\
 	]\
 	;\
-	%{Op_Instance}<{}{}{%Cr}\
+	%{Op_Instance}&lt;{}{}{%Cr}\
 //	%f_warning(%CS %CN)\
 	[{%CS=out}\
 	\n aCtx.rEngine.%t_PushSig(%C%T)(l_%CN);\
 	]\
-	>\
+	&gt;\
 	)\
 
 	[{%1{mapped}=true}\
@@ -419,8 +416,8 @@ f _SpellWordByOp
 	a%t_SelfName(%{GEN}).\
 	[{}{%{Op_Instance}N}%1{prop_name}]\
 	[{%1{is_setter}=true}{\
-	[{%1<{}{}{C%C}>!=0}\
-	(%1<{, }{}%CN>)\
+	[{%1&lt;{}{}{C%C}&gt;!=0}\
+	(%1&lt;{, }{}%CN&gt;)\
 	]\
 	}\
 	 := aValue\
