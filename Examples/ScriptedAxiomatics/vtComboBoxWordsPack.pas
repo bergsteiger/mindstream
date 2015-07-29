@@ -148,7 +148,7 @@ type
 *Пример:*
 [code]
 INTEGER VAR l_Integer
- aComboBox pop:ComboBox:GetItemIndex >>> l_Integer
+ aComboBox pop:ComboBox:GetItemIndex &gt;&gt;&gt; l_Integer
 [code]  }
  private
  // private methods
@@ -214,7 +214,7 @@ type
 *Пример:*
 [code]
 INTEGER VAR l_Integer
- aString aComboBox pop:ComboBox:IndexOf >>> l_Integer
+ aString aComboBox pop:ComboBox:IndexOf &gt;&gt;&gt; l_Integer
 [code]  }
  private
  // private methods
@@ -623,7 +623,7 @@ type
 *Пример:*
 [code]
 INTEGER VAR l_Integer
- aComboTree pop:ComboTree:GetItemIndex >>> l_Integer
+ aComboTree pop:ComboTree:GetItemIndex &gt;&gt;&gt; l_Integer
 [code]  }
  private
  // private methods
@@ -692,7 +692,7 @@ type
 *Пример:*
 [code]
 INTEGER VAR l_Integer
- aString aComboTree pop:ComboTree:IndexOf >>> l_Integer
+ aString aComboTree pop:ComboTree:IndexOf &gt;&gt;&gt; l_Integer
 [code]  }
  private
  // private methods

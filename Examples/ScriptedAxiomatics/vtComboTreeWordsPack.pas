@@ -39,7 +39,7 @@ type
 *Пример:*
 [code]
 INTERFACE VAR l_Il3SimpleNode
- aComboTree pop:ComboTree:CurrentNode >>> l_Il3SimpleNode
+ aComboTree pop:ComboTree:CurrentNode &gt;&gt;&gt; l_Il3SimpleNode
 [code]  }
  private
  // private methods
