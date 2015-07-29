@@ -1,0 +1,74 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Библиотека "ScriptEngine$VT"
+// Модуль: "vtComboBoxWordsPack.rc.script"
+// Скрипты в ресурсах (.rc.script)
+// Generated from UML model, root element: ScriptKeywordsPack::Class Shared Delphi::ScriptEngine$VT::vtComboBoxWords::vtComboBoxWordsPack
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//#UC START# *54EC8C7C011Eimpl*
+
+// Декораторы для слов работающих с комбо
+
+USES
+ axiom:ComboBox
+ axiom:ComboTree
+;
+
+REDEFINITION
+ : pop:ComboBox:DropDown
+  OBJECT IN aCombo
+  if ( aCombo Is class::TvtComboTree ) then
+   ( aCombo pop:ComboTree:DropDown )
+  else 
+   ( aCombo inherited )
+ ; // pop:ComboBox:DropDown
+ 
+REDEFINITION
+ : pop:ComboBox:GetItemIndex
+  OBJECT IN aCombo
+  if ( aCombo Is class::TvtComboTree ) then
+   ( aCombo pop:ComboTree:GetItemIndex )
+  else 
+   ( aCombo inherited )
+ ; // pop:ComboBox:DropDown
+ 
+REDEFINITION
+ : pop:ComboBox:IndexOf
+  OBJECT IN aCombo
+  if ( aCombo Is class::TvtComboTree ) then
+   ( aCombo pop:ComboTree:IndexOf )
+  else 
+   ( aCombo inherited )
+ ; // pop:ComboBox:DropDown
+ 
+REDEFINITION
+ : pop:ComboBox:SaveItems
+  OBJECT IN aCombo
+  if ( aCombo Is class::TvtComboTree ) then
+   ( aCombo pop:ComboTree:SaveItems )
+  else 
+   ( aCombo inherited )
+ ; // pop:ComboBox:SelectItem
+ 
+REDEFINITION
+ : pop:ComboBox:SelectItem
+  OBJECT IN aCombo
+  if ( aCombo Is class::TvtComboTree ) then
+   ( aCombo pop:ComboTree:SelectItem )
+  else 
+   ( aCombo inherited )
+ ; // pop:ComboBox:SelectItem
+ 
+REDEFINITION
+ : pop:ComboBox:SetItemIndex
+  OBJECT IN aCombo
+  if ( aCombo Is class::TvtComboTree ) then
+   ( aCombo pop:ComboTree:SetItemIndex )
+  else 
+   ( aCombo inherited )
+ ; // pop:ComboBox:SetItemIndex
+ 
+//#UC END# *54EC8C7C011Eimpl*
+
