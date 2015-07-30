@@ -40,7 +40,7 @@ type
 *Пример:*
 [code]
 OBJECT VAR l_TContainedAction
- anActionName aActionList pop:ActionList:FindAction >>> l_TContainedAction
+ anActionName aActionList pop:ActionList:FindAction &gt;&gt;&gt; l_TContainedAction
 [code]  }
  private
  // private methods
