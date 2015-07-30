@@ -69,7 +69,7 @@ type
 *Пример:*
 [code]
 OBJECT VAR l_TForm
- aForm pop:form:ActiveMDIChild >>> l_TForm
+ aForm pop:form:ActiveMDIChild &gt;&gt;&gt; l_TForm
 [code]  }
  private
  // private methods
@@ -199,7 +199,7 @@ type
 *Пример:*
 [code]
 OBJECT VAR l_TMenuItem
- aName aForm pop:form:FindMenuItem >>> l_TMenuItem
+ aName aForm pop:form:FindMenuItem &gt;&gt;&gt; l_TMenuItem
 [code]  }
  private
  // private methods
@@ -339,7 +339,7 @@ type
 *Пример:*
 [code]
 INTEGER VAR l_TWindowState
- aForm pop:form:GetWindowState >>> l_TWindowState
+ aForm pop:form:GetWindowState &gt;&gt;&gt; l_TWindowState
 [code]  }
  private
  // private methods
@@ -405,7 +405,7 @@ type
 *Пример:*
 [code]
 BOOLEAN VAR l_Boolean
- aName aForm pop:form:HasControl >>> l_Boolean
+ aName aForm pop:form:HasControl &gt;&gt;&gt; l_Boolean
 [code]  }
  private
  // private methods
@@ -433,7 +433,7 @@ function TkwPopFormHasControl.PopFormHasControl(const aCtx: TtfwContext;
 //#UC END# *1040311EDE6F_AF277B657685_var*
 begin
 //#UC START# *1040311EDE6F_AF277B657685_impl*
- Result := (aForm.FindChildControl(aName) <> nil);
+ Result := (aForm.FindChildControl(aName) &lt;&gt; nil);
 //#UC END# *1040311EDE6F_AF277B657685_impl*
 end;//TkwPopFormHasControl.PopFormHasControl
 
@@ -483,7 +483,7 @@ type
 *Пример:*
 [code]
 INTEGER VAR l_Integer
- aForm pop:form:MDIChildCount >>> l_Integer
+ aForm pop:form:MDIChildCount &gt;&gt;&gt; l_Integer
 [code]  }
  private
  // private methods
@@ -549,7 +549,7 @@ type
 *Пример:*
 [code]
 OBJECT VAR l_TForm
- anIndex aForm pop:form:MDIChildren >>> l_TForm
+ anIndex aForm pop:form:MDIChildren &gt;&gt;&gt; l_TForm
 [code]  }
  private
  // private methods
@@ -627,7 +627,7 @@ type
 *Пример:*
 [code]
 INTEGER VAR l_Integer
- aForm pop:form:ModalResult >>> l_Integer
+ aForm pop:form:ModalResult &gt;&gt;&gt; l_Integer
 [code]  }
  private
  // private methods
@@ -834,7 +834,7 @@ type
 *Пример:*
 [code]
 OBJECT VAR l_TActionList
- aListName aForm pop:form:FindActionList >>> l_TActionList
+ aListName aForm pop:form:FindActionList &gt;&gt;&gt; l_TActionList
 [code]  }
  private
  // private methods
@@ -877,7 +877,7 @@ begin
    if (l_Control is TFrame) then
    begin
     l_Component := l_Control.FindComponent(aListName);
-    if (l_Component <> nil) then
+    if (l_Component &lt;&gt; nil) then
      Break;
    end // if l_Control is TFrame then
   end; // for i := 0 to aForm.ControlCount - 1 do

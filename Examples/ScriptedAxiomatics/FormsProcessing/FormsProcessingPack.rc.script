@@ -24,12 +24,12 @@ USES
     
    TActionList VAR l_ActList
    
-   aListName aForm pop:form:FindActionList >>> l_ActList
+   aListName aForm pop:form:FindActionList &gt;&gt;&gt; l_ActList
    l_ActList pop:object:IsNil ! ?ASSURE [ 'Не найден компонент ' aListName ' на форме ' aForm pop:Component:Name ]
    
    TContainedAction VAR l_Action
    
-   anActionName l_ActList pop:ActionList:FindAction >>> l_Action
+   anActionName l_ActList pop:ActionList:FindAction &gt;&gt;&gt; l_Action
    l_Action pop:object:IsNil ! ?ASSURE [ 'Не найден Action ' anActionName ' в списке' aListName ]
    
    l_Action pop:ContainedAction:Execute

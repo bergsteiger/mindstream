@@ -40,7 +40,7 @@ type
 *Пример:*
 [code]
 INTEGER VAR l_Tl3Color
- aFont Font:Color >>> l_Tl3Color
+ aFont Font:Color &gt;&gt;&gt; l_Tl3Color
 [code]  }
  private
  // private methods
@@ -106,7 +106,7 @@ type
 *Пример:*
 [code]
 INTEGER VAR l_Tl3Color
- aFont Font:BackColor >>> l_Tl3Color
+ aFont Font:BackColor &gt;&gt;&gt; l_Tl3Color
 [code]  }
  private
  // private methods
@@ -172,7 +172,7 @@ type
 *Пример:*
 [code]
 BOOLEAN VAR l_Boolean
- aFont Font:IsBold >>> l_Boolean
+ aFont Font:IsBold &gt;&gt;&gt; l_Boolean
 [code]  }
  private
  // private methods
@@ -238,7 +238,7 @@ type
 *Пример:*
 [code]
 BOOLEAN VAR l_Boolean
- aFont Font:IsItalic >>> l_Boolean
+ aFont Font:IsItalic &gt;&gt;&gt; l_Boolean
 [code]  }
  private
  // private methods
@@ -304,7 +304,7 @@ type
 *Пример:*
 [code]
 BOOLEAN VAR l_Boolean
- aFont Font:IsUnderline >>> l_Boolean
+ aFont Font:IsUnderline &gt;&gt;&gt; l_Boolean
 [code]  }
  private
  // private methods
@@ -370,7 +370,7 @@ type
 *Пример:*
 [code]
 BOOLEAN VAR l_Boolean
- aFont Font:IsStrikeOut >>> l_Boolean
+ aFont Font:IsStrikeOut &gt;&gt;&gt; l_Boolean
 [code]  }
  private
  // private methods
@@ -436,7 +436,7 @@ type
 *Пример:*
 [code]
 STRING VAR l_String
- aFont Font:Name >>> l_String
+ aFont Font:Name &gt;&gt;&gt; l_String
 [code]  }
  private
  // private methods
@@ -502,7 +502,7 @@ type
 *Пример:*
 [code]
 INTEGER VAR l_Integer
- aFont Font:Size >>> l_Integer
+ aFont Font:Size &gt;&gt;&gt; l_Integer
 [code]  }
  private
  // private methods
