@@ -4,17 +4,12 @@ unit kwStartsStr;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwStartsStr.pas"
+// Модуль: "kwStartsStr.pas"
 // Начат: 03.11.2011 19:11
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::TkwStartsStr
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::TkwStartsStr
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,23 +17,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwDualStrWord,
   l3Interfaces,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwDualStrWord.imp.pas}
- TkwStartsStr = class(_tfwDualStrWord_)
+ TkwStartsStr = class(TtfwDualStrWord)
  protected
  // realized methods
    procedure DoStrings(const aCtx: TtfwContext;
      const aStr1: Il3CString;
      const aStr2: Il3CString); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwStartsStr
 {$IfEnd} //not NoScripts
@@ -47,19 +41,13 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils,
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwStartsStr;
-
-{$Include ..\ScriptEngine\tfwDualStrWord.imp.pas}
 
 // start class TkwStartsStr
 
@@ -87,7 +75,8 @@ end;//TkwStartsStr.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwDualStrWord.imp.pas}
+// Регистрация TkwStartsStr
+ TkwStartsStr.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

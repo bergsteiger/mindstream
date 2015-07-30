@@ -4,20 +4,15 @@ unit kwPrivateModifier;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPrivateModifier.pas"
+// Модуль: "kwPrivateModifier.pas"
 // Начат: 11.05.2011 22:28
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Modifiers::PrivateModifier
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Modifiers::PrivateModifier
 //
 // PRIVATE
 // Модификатор для создания приватных полей и методов в объявляемом классе.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -25,22 +20,21 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  kwModifier,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwModifier.imp.pas}
- TkwPrivateModifier = class(_kwModifier_)
+ TkwPrivateModifier = {scriptword} class(TkwModifier)
   {* PRIVATE
 Модификатор для создания приватных полей и методов в объявляемом классе. }
  protected
  // realized methods
    function pm_GetModifier: TtfwWordModifier; override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPrivateModifier
 {$IfEnd} //not NoScripts
@@ -48,17 +42,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPrivateModifier;
-
-{$Include ..\ScriptEngine\kwModifier.imp.pas}
 
 // start class TkwPrivateModifier
 
@@ -81,7 +64,8 @@ end;//TkwPrivateModifier.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwModifier.imp.pas}
+// Регистрация PrivateModifier
+ TkwPrivateModifier.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

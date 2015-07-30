@@ -3,19 +3,14 @@ unit kwIncludesInChildren;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwIncludesInChildren.pas"
+// Модуль: "kwIncludesInChildren.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::IncludesAndUses::IncludesAndUsesPack::IncludesInChildren
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::IncludesAndUses::IncludesAndUsesPack::IncludesInChildren
 //
 // Как USES, но позволяет включать слова во ВНУТРЕННИЙ словарь - в коробку детей (%C) - откуда
 // слово было вызвано
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -24,26 +19,23 @@ interface
 {$If not defined(NoScripts)}
 uses
   tfwScriptingInterfaces,
+  tfwCompilingWord,
   kwIncluded,
-  l3Interfaces,
-  l3ParserInterfaces,
   kwCompiledWordPrim,
-  tfwRegisterableWord
+  l3Interfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
  {$Include ..\ScriptEngine\kwUsesLike.imp.pas}
- TkwIncludesInChildren = {final} class(_kwUsesLike_)
+ TkwIncludesInChildren = {final scriptword} class(_kwUsesLike_)
   {* Как USES, но позволяет включать слова во ВНУТРЕННИЙ словарь - в коробку детей (%C) - откуда слово было вызвано }
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    function MakeIncluded(const aFileName: AnsiString;
      const aContext: TtfwContext): TkwIncluded; override;
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwIncludesInChildren
 {$IfEnd} //not NoScripts
 
@@ -53,28 +45,15 @@ implementation
 uses
   kwInnerIncludedInChildren,
   kwCompiledProcedure,
+  kwCompiledWord,
   kwStandardProcedureCloseBracket,
   l3String,
   SysUtils,
-  l3Types,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3Types
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwIncludesInChildren;
 
 {$Include ..\ScriptEngine\kwUsesLike.imp.pas}
 
@@ -133,7 +112,8 @@ end;//TkwIncludesInChildren.MakeIncluded
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwUsesLike.imp.pas}
+// Регистрация IncludesInChildren
+ TkwIncludesInChildren.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

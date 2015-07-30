@@ -3,9 +3,9 @@ unit kwCopyFile;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCopyFile.pas"
+// Модуль: "kwCopyFile.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FileProcessing::CopyFile
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::FileProcessing::CopyFile
 //
 // CopyFile - копирует файл.
 // *Формат:*  aCopyMode aDestFile aSourceFile CopyFile
@@ -14,12 +14,7 @@ unit kwCopyFile;
 // * aCopyMode - режим копирования файла.
 // Результат слово не возвращает. Если появляется ошибка, то будет Exception
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -34,8 +29,7 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwCopyFile = {final} class(_tfwAutoregisteringWord_)
+ TkwCopyFile = {final scriptword} class(TtfwRegisterableWord)
   {* CopyFile - копирует файл.
 *Формат:*  aCopyMode aDestFile aSourceFile CopyFile
 * aSourceFile - имя исходного файла
@@ -45,8 +39,8 @@ type
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwCopyFile
 {$IfEnd} //not NoScripts
@@ -55,17 +49,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  l3FileUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3FileUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCopyFile;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwCopyFile
 
@@ -84,7 +72,7 @@ begin
  l_Dest := aCtx.rEngine.PopDelphiString;
  RunnerAssert(aCtx.rEngine.IsTopInt, 'Не задан режим копирования!', aCtx);
  l_CopyMode := Byte(aCtx.rEngine.PopInt);
- CopyFile(l_Source, l_Dest, l_CopyMode);
+ l3FileUtils.CopyFile(l_Source, l_Dest, l_CopyMode);
 //#UC END# *4DAEEDE10285_53FDAD910148_impl*
 end;//TkwCopyFile.DoDoIt
 
@@ -98,7 +86,8 @@ end;//TkwCopyFile.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация CopyFile
+ TkwCopyFile.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

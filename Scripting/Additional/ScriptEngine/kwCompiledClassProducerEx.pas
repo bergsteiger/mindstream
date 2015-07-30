@@ -3,16 +3,11 @@ unit kwCompiledClassProducerEx;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledClassProducerEx.pas"
+// Модуль: "kwCompiledClassProducerEx.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Stereotyping::TkwCompiledClassProducerEx
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Stereotyping::TkwCompiledClassProducerEx
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -82,6 +77,12 @@ begin
 //#UC END# *4F395A6902D2_4F39599400F4_impl*
 end;//TkwCompiledClassProducerEx.GetWordProducerForCompiledClass
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledClassProducerEx
+ TkwCompiledClassProducerEx.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

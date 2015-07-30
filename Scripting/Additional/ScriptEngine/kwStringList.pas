@@ -2,17 +2,12 @@ unit kwStringList;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwStringList.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "kwStringList.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::PrimitiveWords::TkwStringList
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::PrimitiveWords::TkwStringList
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 

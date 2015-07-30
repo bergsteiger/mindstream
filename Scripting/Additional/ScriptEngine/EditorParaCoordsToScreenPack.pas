@@ -2,17 +2,12 @@ unit EditorParaCoordsToScreenPack;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/EditorParaCoordsToScreenPack.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "EditorParaCoordsToScreenPack.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeywordsPack::Class>> Shared Delphi Scripting::ScriptEngine::MoveMouseByPara::EditorParaCoordsToScreenPack
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeywordsPack::Class Shared Delphi::ScriptEngine$Everest::MoveMouseByPara::EditorParaCoordsToScreenPack
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 

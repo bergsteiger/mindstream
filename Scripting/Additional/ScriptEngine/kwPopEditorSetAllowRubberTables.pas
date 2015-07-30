@@ -2,17 +2,12 @@ unit kwPopEditorSetAllowRubberTables;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorSetAllowRubberTables.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorSetAllowRubberTables.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_SetAllowRubberTables
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_SetAllowRubberTables
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,24 +15,21 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorSetAllowRubberTables = class(_kwEditorFromStackWord_)
+ TkwPopEditorSetAllowRubberTables = {scriptword} class(TkwEditorFromStackWord)
  protected
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorSetAllowRubberTables
 {$IfEnd} //not NoScripts
@@ -46,20 +38,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  nevBase,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  nevBase
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorSetAllowRubberTables;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 // start class TkwPopEditorSetAllowRubberTables
 
@@ -91,7 +74,8 @@ end;//TkwPopEditorSetAllowRubberTables.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_SetAllowRubberTables
+ TkwPopEditorSetAllowRubberTables.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

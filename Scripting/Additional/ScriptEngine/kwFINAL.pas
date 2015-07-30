@@ -4,17 +4,12 @@ unit kwFINAL;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwFINAL.pas"
+// Модуль: "kwFINAL.pas"
 // Начат: 12.02.2012 16:32
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Modifiers::FINAL
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Modifiers::FINAL
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,20 +17,19 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  kwModifier,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwModifier.imp.pas}
- TkwFINAL = {final} class(_kwModifier_)
+ TkwFINAL = {final scriptword} class(TkwModifier)
  protected
  // realized methods
    function pm_GetModifier: TtfwWordModifier; override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwFINAL
 {$IfEnd} //not NoScripts
@@ -43,17 +37,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwFINAL;
-
-{$Include ..\ScriptEngine\kwModifier.imp.pas}
 
 // start class TkwFINAL
 
@@ -76,7 +59,8 @@ end;//TkwFINAL.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwModifier.imp.pas}
+// Регистрация FINAL
+ TkwFINAL.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

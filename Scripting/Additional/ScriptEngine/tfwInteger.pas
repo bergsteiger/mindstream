@@ -2,21 +2,16 @@ unit tfwInteger;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Core"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwInteger.pas"
+// Модуль: "tfwInteger.pas"
 // Начат: 09.12.2011 13:58
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TtfwInteger
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::PrimitiveWords::TtfwInteger
 //
 // Базовый предок для добавления слов в словарь.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -25,6 +20,7 @@ interface
 {$If not defined(NoScripts)}
 uses
   tfwRegisterableWord,
+  TypInfo,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
@@ -36,6 +32,9 @@ type
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
+ public
+ // overridden public methods
+   function GetResultTypeInfo(const aCtx: TtfwContext): PTypeInfo; override;
  protected
  // protected methods
    function GetInteger: Integer; virtual;
@@ -46,7 +45,6 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptEngine,
   l3Except,
   l3Base
   ;
@@ -75,6 +73,21 @@ begin
 //#UC END# *4DAEEDE10285_4EE1DBBB013C_impl*
 end;//TtfwInteger.DoDoIt
 
+function TtfwInteger.GetResultTypeInfo(const aCtx: TtfwContext): PTypeInfo;
+//#UC START# *551544E2001A_4EE1DBBB013C_var*
+//#UC END# *551544E2001A_4EE1DBBB013C_var*
+begin
+//#UC START# *551544E2001A_4EE1DBBB013C_impl*
+ Result := TypeInfo(Integer);
+//#UC END# *551544E2001A_4EE1DBBB013C_impl*
+end;//TtfwInteger.GetResultTypeInfo
+
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TtfwInteger
+ TtfwInteger.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

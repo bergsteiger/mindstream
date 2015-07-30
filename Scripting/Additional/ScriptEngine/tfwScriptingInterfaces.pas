@@ -2,19 +2,14 @@ unit tfwScriptingInterfaces;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Core"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwScriptingInterfaces.pas"
+// Модуль: "tfwScriptingInterfaces.pas"
 // Начат: 20.04.2011 21:48
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<InternalInterfaces::Category>> Shared Delphi Scripting::ScriptEngine::tfwScriptingInterfaces
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: InternalInterfaces::Category Shared Delphi Low Level::ScriptEngine$Core::tfwScriptingInterfaces
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -24,10 +19,11 @@ interface
 uses
   l3Interfaces,
   l3Types,
-  TypInfo,
   l3PureMixIns,
   l3EtalonsWorking,
   tfwParserInterfaces,
+  Types,
+  TypInfo,
   l3StringList,
   SysUtils,
   l3ProtoObject,
@@ -174,7 +170,10 @@ type
     aHeaderBegin: AnsiChar);
  end;//ItfwScriptCaller
 
- EtfwCodeFlowException = {abstract} class(Exception)
+ EtfwException = class(Exception)
+ end;//EtfwException
+
+ EtfwCodeFlowException = {abstract} class(EtfwException)
  end;//EtfwCodeFlowException
 
  EtfwCodeFlowError = class(EtfwCodeFlowException)
@@ -205,6 +204,7 @@ type
     procedure IncludeModifier(aModifier: TtfwWordModifier);
      {* Включает модификатор в информацию о типе }
     function Modifiers: TtfwWordModifiers;
+    function TypeModifiers: TtfwWordModifiers;
  end;//TtfwTypeInfo
 
 (*
@@ -233,7 +233,7 @@ type
     function AsString: Il3CString;
     function AsObject: TObject;
     function AsList: ItfwValueList;
-    procedure IncValue(aValue: Integer);
+    function AsInt: Integer;
     function AsIntf(const aGUID: TGUID): IUnknown; overload; 
     function AsIntf: IUnknown; overload; 
     function AsFile: ItfwFile;
@@ -278,10 +278,6 @@ type
    rPrevFinder : Il3KeywordFinder;
  end;//TtfwContext
 
- EtfwScriptException = class(Exception)
-  {* Исключение кидаемое скриптом }
- end;//EtfwScriptException
-
  TtfwWordPrim = {abstract} class(Tl3ProtoObject)
  private
  // private fields
@@ -314,7 +310,7 @@ type
    procedure pm_SetRedefines(aValue: TtfwWord);
    function pm_GetWordProducer: TtfwWord; virtual;
    function pm_GetInnerDictionary: TtfwDictionaryPrim; virtual;
-   function pm_GetResultTypeInfo: TtfwTypeInfo; virtual;
+   function pm_GetResultTypeInfo(const aCtx: TtfwContext): TtfwTypeInfo; virtual;
    function pm_GetParentWord: TtfwWord; virtual;
  protected
  // overridden protected methods
@@ -337,6 +333,8 @@ type
      const aMessage: AnsiString;
      const aParams: array of const;
      const aContext: TtfwContext);
+   procedure BadValueType(aType: TtfwStackValueType;
+     const aCtx: TtfwContext);
  public
  // public methods
    function IsImmediate: Boolean; virtual;
@@ -391,6 +389,9 @@ type
    function GetLeftWordRefValue(const aCtx: TtfwContext;
      anIndex: Integer): TtfwWord; virtual;
    function LeftWordRefValuesCount(const aCtx: TtfwContext): Integer; virtual;
+   procedure RunnerError(const aMessage: AnsiString;
+     const aContext: TtfwContext); virtual;
+   function GetResultTypeInfo(const aCtx: TtfwContext): PTypeInfo; virtual;
  public
  // public properties
    property Redefines: TtfwWord
@@ -407,7 +408,7 @@ type
    property InnerDictionary: TtfwDictionaryPrim
      read pm_GetInnerDictionary;
      {* Внутренний словарь слова }
-   property ResultTypeInfo: TtfwTypeInfo
+   property ResultTypeInfo[const aCtx: TtfwContext]: TtfwTypeInfo
      read pm_GetResultTypeInfo;
    property ParentWord: TtfwWord
      read pm_GetParentWord;
@@ -471,6 +472,14 @@ type
    procedure PushClass(aClass: TClass);
    function PopClass: TClass;
    function IsTopClass: Boolean;
+   function PopObjAs(aClass: TClass): Pointer;
+   function PopClassAs(aClass: TClass): Pointer;
+   function PopWideString: WideString;
+   procedure PushWideString(const aValue: WideString);
+   function PopPoint: TPoint;
+   procedure PushPoint(const aPoint: TPoint);
+   procedure PushList(const aList: ItfwValueList);
+   function PopList: ItfwValueList;
    function Get_ValuesCount: Integer;
    procedure PushString(aString: Tl3PrimString); overload; 
    procedure PushString(const aString: Il3CString); overload; 
@@ -546,6 +555,14 @@ type
    procedure PushClass(aClass: TClass);
    function PopClass: TClass;
    function IsTopClass: Boolean;
+   function PopObjAs(aClass: TClass): Pointer;
+   function PopClassAs(aClass: TClass): Pointer;
+   function PopWideString: WideString;
+   procedure PushWideString(const aValue: WideString);
+   function PopPoint: TPoint;
+   procedure PushPoint(const aPoint: TPoint);
+   procedure PushList(const aList: ItfwValueList);
+   function PopList: ItfwValueList;
    function Get_ValuesCount: Integer;
    procedure PushString(aString: Tl3PrimString); overload; 
    procedure PushString(const aString: Il3CString); overload; 
@@ -801,9 +818,38 @@ type
      write pm_SetRealWord;
  end;//TkwForwardDeclaration
 
+ EtfwCheckPrim = class(EtfwException)
+ public
+ // public methods
+   class procedure IsTrue(aCondition: Boolean;
+     const aMessage: AnsiString);
+   class procedure Fail(const aMessage: AnsiString);
+ end;//EtfwCheckPrim
+
+ EtfwScriptException = class(EtfwException)
+  {* Исключение кидаемое скриптом }
+ end;//EtfwScriptException
+
+ EtfwCheck = class(EtfwCheckPrim)
+ end;//EtfwCheck
+
+ EtfwCompiler = class(EtfwCheck)
+ end;//EtfwCompiler
+
+ EtfwRunner = class(EtfwCheck)
+ end;//EtfwRunner
+
+const
+  { TypeInfoExt }
+ tfw_tiVoid : TTypeInfo = (Kind : tkUnknown; Name : 'VOID');
+ tfw_tiClassRef : TTypeInfo = (Kind : tkUnknown; Name : 'ClassRef');
+ tfw_tiStruct : TTypeInfo = (Kind : tkUnknown; Name : 'Struct');
+ tfw_tiString : TTypeInfo = (Kind : tkUnknown; Name : 'String');
+
 
 function TtfwTypeInfo_C(aModifiers: TtfwWordModifiers): TtfwTypeInfo;
 function TtfwTypeInfo_E: TtfwTypeInfo;
+function TtfwTypeInfo_TI(aTypeInfo: PTypeInfo): TtfwTypeInfo;
 
 function TtfwStackValue_C(aValue: Integer): TtfwStackValue; overload;
 function TtfwStackValue_C(aValue: Boolean): TtfwStackValue; overload;
@@ -828,8 +874,13 @@ implementation
 {$If not defined(NoScripts)}
 uses
   Classes,
+  TypeInfoPack,
+  VarWorkingPack,
   l3Parser,
   tfwClassRef,
+  ArrayProcessingPack,
+  BasicsPack,
+  WordsRTTIPack,
   l3Base,
   l3String
   ;
@@ -895,6 +946,80 @@ begin
  Result := rModifiers;
 //#UC END# *52C1772C01B8_52C15D690329_impl*
 end;//TtfwTypeInfo.Modifiers
+
+function TtfwTypeInfo_TI(aTypeInfo: PTypeInfo): TtfwTypeInfo;
+//#UC START# *551544B201BB_52C15D690329_var*
+//#UC END# *551544B201BB_52C15D690329_var*
+begin
+ System.FillChar(Result, SizeOf(Result), 0);
+//#UC START# *551544B201BB_52C15D690329_impl*
+ if (aTypeInfo = nil) then
+  Result.rModifiers := []
+ else
+ if (aTypeInfo = @tfw_tiVoid) then
+  Result.rModifiers := [tfw_wmVoid]
+ else
+ if (aTypeInfo = @tfw_tiString) then
+  Result.rModifiers := [tfw_wmStr]
+ else
+ if (aTypeInfo = @tfw_tiClassRef) then
+  Result.rModifiers := [tfw_wmClass]
+ else
+ if (aTypeInfo = @tfw_tiStruct) then
+  Result.rModifiers := []
+ else
+ begin
+  Case aTypeInfo.Kind of
+   tkInteger:
+    Result.rModifiers := [tfw_wmInt];
+   tkLString:
+    Result.rModifiers := [tfw_wmStr];
+   tkEnumeration:
+   begin
+    if (aTypeInfo.Name = 'Boolean') then
+     Result.rModifiers := [tfw_wmBool]
+    else
+     Result.rModifiers := [tfw_wmInt];
+   end;//tkEnumeration
+   tkClass:
+    Result.rModifiers := [tfw_wmObj];
+   tkRecord:
+   begin
+    if (aTypeInfo.Name = 'TtfwStackValue') then
+     Result.rModifiers := []
+    else
+     EtfwCheck.Fail('Непонятно, что делать с ' + GetEnumName(TypeInfo(TTypeKind), Ord(aTypeInfo.Kind)) + ' ' + aTypeInfo.Name);
+   end;//tkRecord
+   tkInterface:
+   begin
+    if (aTypeInfo.Name = 'ItfwValueList') then
+     Result.rModifiers := [tfw_wmList]
+    else
+    if (aTypeInfo.Name = 'ItfwFile') then
+     Result.rModifiers := [tfw_wmFile]
+    else
+    if (aTypeInfo.Name = 'Il3CString') then
+     Result.rModifiers := [tfw_wmStr]
+    else
+     Result.rModifiers := [tfw_wmIntf];
+   end;//tkInterface
+   else
+    EtfwCheck.Fail('Непонятно, что делать с ' + GetEnumName(TypeInfo(TTypeKind), Ord(aTypeInfo.Kind)) + ' ' + aTypeInfo.Name);
+  end;//Case aTypeInfo.Kind
+ end;//else 
+//#UC END# *551544B201BB_52C15D690329_impl*
+end;//TtfwTypeInfo.TI
+
+// start class TtfwTypeInfo
+
+function TtfwTypeInfo.TypeModifiers: TtfwWordModifiers;
+//#UC START# *5515748300F1_52C15D690329_var*
+//#UC END# *5515748300F1_52C15D690329_var*
+begin
+//#UC START# *5515748300F1_52C15D690329_impl*
+ Result := Modifiers - [tfw_wmPrivate, tfw_wmProtected, tfw_wmPublic];
+//#UC END# *5515748300F1_52C15D690329_impl*
+end;//TtfwTypeInfo.TypeModifiers
 // start class TtfwStackValue
 
 procedure TtfwStackValue.CheckTypeIs(aTypeNeeded: TtfwStackValueType);
@@ -902,7 +1027,7 @@ procedure TtfwStackValue.CheckTypeIs(aTypeNeeded: TtfwStackValueType);
 //#UC END# *4F47BE7100B4_4DB00A510300_var*
 begin
 //#UC START# *4F47BE7100B4_4DB00A510300_impl*
- Assert(rType = aTypeNeeded,
+ EtfwCheck.IsTrue(rType = aTypeNeeded,
         'Тип значения ' +
         GetEnumName(TypeInfo(TtfwStackValueType), Ord(rType)) +
         ' несовместим с ' +
@@ -1034,15 +1159,15 @@ end;//TtfwStackValue.C
 
 // start class TtfwStackValue
 
-procedure TtfwStackValue.IncValue(aValue: Integer);
+function TtfwStackValue.AsInt: Integer;
 //#UC START# *4E4CE1D0000E_4DB00A510300_var*
 //#UC END# *4E4CE1D0000E_4DB00A510300_var*
 begin
 //#UC START# *4E4CE1D0000E_4DB00A510300_impl*
  CheckTypeIs(tfw_svtInt);
- Inc(rInteger, aValue);
+ Result := rInteger;
 //#UC END# *4E4CE1D0000E_4DB00A510300_impl*
-end;//TtfwStackValue.IncValue
+end;//TtfwStackValue.AsInt
 
 function TtfwStackValue.AsIntf(const aGUID: TGUID): IUnknown;
 //#UC START# *4EB2750D010D_4DB00A510300_var*
@@ -1050,7 +1175,7 @@ function TtfwStackValue.AsIntf(const aGUID: TGUID): IUnknown;
 begin
 //#UC START# *4EB2750D010D_4DB00A510300_impl*
  if not Supports(Self.AsIntf, aGUID, Result) then
-  Assert(false);
+  EtfwCheck.Fail('Не поддерживается интерфес ' + GUIDToString(aGUID));
 //#UC END# *4EB2750D010D_4DB00A510300_impl*
 end;//TtfwStackValue.AsIntf
 
@@ -1210,7 +1335,7 @@ begin
   else
   begin
    Result := nil;
-   Assert(false, 'Неизвестный тип для приведения к печатному виду');
+   EtfwCheck.Fail('Неизвестный тип для приведения к печатному виду');
   end;//else
  end;//Case rType  
 //#UC END# *4F4FEB3C01D1_4DB00A510300_impl*
@@ -1307,7 +1432,7 @@ procedure TtfwWordPrim.DoIt(const aCtx: TtfwContext); // can raise EtfwCodeFlowE
 //#UC END# *4F22776902FC_52EA594400DD_var*
 begin
 //#UC START# *4F22776902FC_52EA594400DD_impl*
- Assert(f_NestedCallsCount >= 0);
+ EtfwCheck.IsTrue(f_NestedCallsCount >= 0, 'Сломанный счётчик рекурсивных вызовов');
  if (f_NestedCallsCount > 0) then
   if IsCompiled then
   // - отсекаем некомпилированные слова, т.к. с ними наверное всё хорошо
@@ -1405,7 +1530,7 @@ begin
  if not aCondition then
  begin
   if (aContext.rParser <> nil) then
-   Assert(aCondition,
+   EtfwCompiler.IsTrue(aCondition,
          Format('Ошибка компиляции: "%s". Тип токена: %s : %s в строке %d. Файл: %s. Класс: %s. Слово: %s%s%s',
                 [aMessage,
                  GetEnumName(TypeInfo(Tl3TokenType),
@@ -1419,7 +1544,7 @@ begin
                  locParent
                 ]))
   else
-   Assert(aCondition,
+   EtfwRunner.IsTrue(aCondition,
          Format('Ошибка выполнения: "%s". Главный файл: %s. Класс: %s. Слово: %s%s%s',
                 [aMessage,
                  aContext.rScriptFilename,
@@ -1508,7 +1633,7 @@ function TtfwWord.GetValue(const aCtx: TtfwContext): TtfwStackValue;
 //#UC END# *52D399A00173_4DAEED140007_var*
 begin
 //#UC START# *52D399A00173_4DAEED140007_impl*
- RunnerAssert(false, 'Невозможно получить значение', aCtx);
+ RunnerError('Невозможно получить значение', aCtx);
  Result := TtfwStackValue_NULL;
 //#UC END# *52D399A00173_4DAEED140007_impl*
 end;//TtfwWord.GetValue
@@ -1529,7 +1654,7 @@ procedure TtfwWord.SetValue(const aValue: TtfwStackValue;
 //#UC END# *52D00B00031A_4DAEED140007_var*
 begin
 //#UC START# *52D00B00031A_4DAEED140007_impl*
- RunnerAssert(false, 'Невозможно записать значение', aCtx);
+ RunnerError('Невозможно записать значение', aCtx);
 //#UC END# *52D00B00031A_4DAEED140007_impl*
 end;//TtfwWord.SetValue
 
@@ -1756,13 +1881,42 @@ begin
 //#UC END# *53E4A96A0085_4DAEED140007_impl*
 end;//TtfwWord.LeftWordRefValuesCount
 
+procedure TtfwWord.RunnerError(const aMessage: AnsiString;
+  const aContext: TtfwContext);
+//#UC START# *551271AF0112_4DAEED140007_var*
+//#UC END# *551271AF0112_4DAEED140007_var*
+begin
+//#UC START# *551271AF0112_4DAEED140007_impl*
+ RunnerAssert(false, aMessage, aContext);
+//#UC END# *551271AF0112_4DAEED140007_impl*
+end;//TtfwWord.RunnerError
+
+function TtfwWord.GetResultTypeInfo(const aCtx: TtfwContext): PTypeInfo;
+//#UC START# *551544E2001A_4DAEED140007_var*
+//#UC END# *551544E2001A_4DAEED140007_var*
+begin
+//#UC START# *551544E2001A_4DAEED140007_impl*
+ Result := nil;
+//#UC END# *551544E2001A_4DAEED140007_impl*
+end;//TtfwWord.GetResultTypeInfo
+
+procedure TtfwWord.BadValueType(aType: TtfwStackValueType;
+  const aCtx: TtfwContext);
+//#UC START# *551A8FD70119_4DAEED140007_var*
+//#UC END# *551A8FD70119_4DAEED140007_var*
+begin
+//#UC START# *551A8FD70119_4DAEED140007_impl*
+ RunnerError('Неверный тип значения: ' + GetEnumName(TypeInfo(TtfwStackValueType), Ord(aType)), aCtx);
+//#UC END# *551A8FD70119_4DAEED140007_impl*
+end;//TtfwWord.BadValueType
+
 procedure TtfwWord.pm_SetRedefines(aValue: TtfwWord);
 //#UC START# *4F41FF0C01A6_4DAEED140007set_var*
 //#UC END# *4F41FF0C01A6_4DAEED140007set_var*
 begin
 //#UC START# *4F41FF0C01A6_4DAEED140007set_impl*
- Assert(f_Redefines = nil, 'Слово не может переопределять БОЛЕЕ одного слова');
- Assert(aValue <> Self, 'Слово не может переопределять самого себя');
+ EtfwCheck.IsTrue(f_Redefines = nil, 'Слово не может переопределять БОЛЕЕ одного слова');
+ EtfwCheck.IsTrue(aValue <> Self, 'Слово не может переопределять самого себя');
  aValue.SetRefTo(f_Redefines);
 //#UC END# *4F41FF0C01A6_4DAEED140007set_impl*
 end;//TtfwWord.pm_SetRedefines
@@ -1785,12 +1939,12 @@ begin
 //#UC END# *52B43311021D_4DAEED140007get_impl*
 end;//TtfwWord.pm_GetInnerDictionary
 
-function TtfwWord.pm_GetResultTypeInfo: TtfwTypeInfo;
+function TtfwWord.pm_GetResultTypeInfo(const aCtx: TtfwContext): TtfwTypeInfo;
 //#UC START# *52CFC11603C8_4DAEED140007get_var*
 //#UC END# *52CFC11603C8_4DAEED140007get_var*
 begin
 //#UC START# *52CFC11603C8_4DAEED140007get_impl*
- Result := TtfwTypeInfo_E;
+ Result := TtfwTypeInfo_TI(GetResultTypeInfo(aCtx));
 //#UC END# *52CFC11603C8_4DAEED140007get_impl*
 end;//TtfwWord.pm_GetResultTypeInfo
 
@@ -1833,7 +1987,7 @@ constructor TtfwKeyWord.Create(const aKeyword: AnsiString;
 begin
 //#UC START# *4DB578450319_4DAEF23D00EE_impl*
  Create(TtfwCStringFactory.C(aKeyword));
- Assert(f_Word = nil);
+ EtfwCheck.IsTrue(f_Word = nil, 'Слово уже присвоено');
  f_Word := aWord.Use;
  if (f_Word <> nil) then
   f_Word.f_Key := Self;
@@ -1868,8 +2022,8 @@ begin
  begin
   if (aValue <> nil) AND (f_Word <> nil) AND f_Word.IsForwardDeclaration then
   begin
-   Assert(f_Word <> aValue);
-   Assert(TkwForwardDeclaration(f_Word).RealWord = nil,
+   EtfwCheck.IsTrue(f_Word <> aValue, 'Присваиваем самому себе');
+   EtfwCheck.IsTrue(TkwForwardDeclaration(f_Word).RealWord = nil,
           Format('Предварительное определение слова %s уже было завершено',
                  [Self.AsString])
           );
@@ -1915,7 +2069,7 @@ procedure TtfwKeyWord.DoSetAsPCharLen(const Value: Tl3PCharLen);
 //#UC END# *47A869D10074_4DAEF23D00EE_var*
 begin
 //#UC START# *47A869D10074_4DAEF23D00EE_impl*
- Assert(false);
+ EtfwCheck.Fail('Нельзя править значение ключевого слова');
 //#UC END# *47A869D10074_4DAEF23D00EE_impl*
 end;//TtfwKeyWord.DoSetAsPCharLen
 
@@ -2092,14 +2246,38 @@ begin
  Result := true;
 //#UC END# *4F4BB6CD0359_4F4BB70D0144_impl*
 end;//TkwForwardDeclaration.IsForwardDeclaration
+// start class EtfwCheckPrim
+
+class procedure EtfwCheckPrim.IsTrue(aCondition: Boolean;
+  const aMessage: AnsiString);
+//#UC START# *54F8741B021E_54F873F5009A_var*
+//#UC END# *54F8741B021E_54F873F5009A_var*
+begin
+//#UC START# *54F8741B021E_54F873F5009A_impl*
+ if not aCondition then
+  raise Self.Create(aMessage);
+//#UC END# *54F8741B021E_54F873F5009A_impl*
+end;//EtfwCheckPrim.IsTrue
+
+class procedure EtfwCheckPrim.Fail(const aMessage: AnsiString);
+//#UC START# *550C432A0223_54F873F5009A_var*
+//#UC END# *550C432A0223_54F873F5009A_var*
+begin
+//#UC START# *550C432A0223_54F873F5009A_impl*
+ IsTrue(false, aMessage);
+//#UC END# *550C432A0223_54F873F5009A_impl*
+end;//EtfwCheckPrim.Fail
 {$IfEnd} //not NoScripts
 
 
 initialization
 {$If not defined(NoScripts)}
-//#UC START# *53DFBB2C032C*
+// Регистрация TtfwWord
+ TtfwWord.RegisterClass;
+{$IfEnd} //not NoScripts
+{$If not defined(NoScripts)}
+// Регистрация TkwForwardDeclaration
  TkwForwardDeclaration.RegisterClass;
-//#UC END# *53DFBB2C032C*
 {$IfEnd} //not NoScripts
 
 end.

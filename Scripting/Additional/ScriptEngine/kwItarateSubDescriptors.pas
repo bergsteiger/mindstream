@@ -2,10 +2,10 @@ unit kwItarateSubDescriptors;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwItarateSubDescriptors.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwItarateSubDescriptors.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SubPanelWords::ItarateSubDescriptors
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::SubPanelWords::ItarateSubDescriptors
 //
 // Перебирает все SubDescriptot на SubPanel, которые могут быть использованы (!). Такой список
 // задается на этапе проектирвоания/изменения компонета. И не зависит от вида отображения.
@@ -24,12 +24,7 @@ unit kwItarateSubDescriptors;
 // Для извлечения нужной инфорации из aSubDescription есть набор функций: subdescriptor:GetDrawType
 // и т.п.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -37,18 +32,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwSubPanelFromStackWord,
   tfwScriptingInterfaces,
-  evSubPn,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  evSubPn
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwSubPanelFromStackWord.imp.pas}
- TkwItarateSubDescriptors = {final} class(_kwSubPanelFromStackWord_)
+ TkwItarateSubDescriptors = {final scriptword} class(TkwSubPanelFromStackWord)
   {* Перебирает все SubDescriptot на SubPanel, которые могут быть использованы (!). Такой список задается на этапе проектирвоания/изменения компонета. И не зависит от вида отображения.
 Формат:
 [code]
@@ -67,8 +59,8 @@ PROCEDURE CheckDescription OBJECT IN aSubDescription
  // realized methods
    procedure DoWithSubPanel(aControl: TevCustomSubPanel;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwItarateSubDescriptors
 {$IfEnd} //not NoScripts
@@ -76,20 +68,6 @@ PROCEDURE CheckDescription OBJECT IN aSubDescription
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwItarateSubDescriptors;
-
-{$Include ..\ScriptEngine\kwSubPanelFromStackWord.imp.pas}
 
 // start class TkwItarateSubDescriptors
 
@@ -137,7 +115,8 @@ end;//TkwItarateSubDescriptors.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwSubPanelFromStackWord.imp.pas}
+// Регистрация ItarateSubDescriptors
+ TkwItarateSubDescriptors.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

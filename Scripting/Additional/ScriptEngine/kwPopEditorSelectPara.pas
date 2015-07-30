@@ -2,21 +2,16 @@ unit kwPopEditorSelectPara;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Everest"
 // Автор: Костицын М.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorSelectPara.pas"
+// Модуль: "kwPopEditorSelectPara.pas"
 // Начат: 16.12.2011
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_SelectPara
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_SelectPara
 //
 // pop:editor:SelectPara. Выделяет текущий параграф в редакторе
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -24,25 +19,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorSelectPara = class(_kwEditorFromStackWord_)
+ TkwPopEditorSelectPara = {scriptword} class(TkwEditorFromStackWord)
   {* pop:editor:SelectPara. Выделяет текущий параграф в редакторе }
  protected
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorSelectPara
 {$IfEnd} //not NoScripts
@@ -51,20 +43,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  evTypes,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  evTypes
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorSelectPara;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 // start class TkwPopEditorSelectPara
 
@@ -88,7 +71,8 @@ end;//TkwPopEditorSelectPara.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_SelectPara
+ TkwPopEditorSelectPara.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -2,10 +2,10 @@ unit kwPopEditorSetShowDocumentParts;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorSetShowDocumentParts.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorSetShowDocumentParts.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_SetShowDocumentParts
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_SetShowDocumentParts
 //
 // *Формат:* aValue anEditorControl pop:editor:SetShowDocumentParts
 // *Описание:* Устанавливает свойство ShowDocumentParts (отображать структуру документа). Значение
@@ -16,12 +16,7 @@ unit kwPopEditorSetShowDocumentParts;
 // {code}
 // *Результат:* В редакторе будет отображаться структура документа.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,18 +24,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorSetShowDocumentParts = {final} class(_kwEditorFromStackWord_)
+ TkwPopEditorSetShowDocumentParts = {final scriptword} class(TkwEditorFromStackWord)
   {* *Формат:* aValue anEditorControl pop:editor:SetShowDocumentParts
 *Описание:* Устанавливает свойство ShowDocumentParts (отображать структуру документа). Значение aValue булевского типа.
 *Пример:*
@@ -52,8 +44,8 @@ true focused:control:push pop:editor:SetShowDocumentParts
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorSetShowDocumentParts
 {$IfEnd} //not NoScripts
@@ -61,20 +53,6 @@ true focused:control:push pop:editor:SetShowDocumentParts
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorSetShowDocumentParts;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 // start class TkwPopEditorSetShowDocumentParts
 
@@ -101,7 +79,8 @@ end;//TkwPopEditorSetShowDocumentParts.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_SetShowDocumentParts
+ TkwPopEditorSetShowDocumentParts.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

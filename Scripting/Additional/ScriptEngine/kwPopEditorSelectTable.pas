@@ -2,17 +2,12 @@ unit kwPopEditorSelectTable;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorSelectTable.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorSelectTable.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_SelectTable
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_SelectTable
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -21,20 +16,17 @@ interface
 {$If not defined(NoScripts)}
 uses
   nevTools,
+  kwEditorFromStackCursorWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackCursorWord.imp.pas}
- _SelectTablePart_Parent_ = _kwEditorFromStackCursorWord_;
+ _SelectTablePart_Parent_ = TkwEditorFromStackCursorWord;
  {$Include ..\ScriptEngine\SelectTablePart.imp.pas}
- TkwPopEditorSelectTable = class(_SelectTablePart_)
+ TkwPopEditorSelectTable = {scriptword} class(_SelectTablePart_)
  private
  // private fields
    f_Point : InevBasePoint;
@@ -51,8 +43,6 @@ type
      {* Вылять таблицу целиком }
    function GetTablePara(const aDocument: InevParaList): InevParaList; override;
      {* Возвращает параграф с таблицей }
- public
- // overridden public methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorSelectTable
 {$IfEnd} //not NoScripts
@@ -62,24 +52,14 @@ implementation
 {$If not defined(NoScripts)}
 uses
   Table_Const,
-  TextPara_Const,
-  CommentPara_Const,
-  Windows,
-  evParaTools,
   evOp,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  afwFacade,
-  Forms,
-  evCursorTools
+  evCursorTools,
+  CommentPara_Const,
+  TextPara_Const
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorSelectTable;
-
-{$Include ..\ScriptEngine\kwEditorFromStackCursorWord.imp.pas}
 
 {$Include ..\ScriptEngine\SelectTablePart.imp.pas}
 
@@ -146,7 +126,8 @@ end;//TkwPopEditorSelectTable.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackCursorWord.imp.pas}
+// Регистрация pop_editor_SelectTable
+ TkwPopEditorSelectTable.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

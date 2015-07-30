@@ -3,16 +3,11 @@ unit seModalWorkerList;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/seModalWorkerList.pas"
+// Модуль: "seModalWorkerList.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::CodeFlowWords::TseModalWorkerList
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::CodeFlowWords::TseModalWorkerList
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -28,6 +23,10 @@ uses
 type
  TseModalWorkerList = class(TseModalWorkerListPrim)
  public
+ // public methods
+   class function Exists: Boolean;
+     {* Проверяет создан экземпляр синглетона или нет }
+ public
  // singleton factory method
    class function Instance: TseModalWorkerList;
     {- возвращает экземпляр синглетона. }
@@ -42,8 +41,8 @@ uses
   ;
 {$IfEnd} //not NoScripts
 
-
 {$If not defined(NoScripts)}
+
 
 // start class TseModalWorkerList
 
@@ -64,7 +63,13 @@ begin
  Result := g_TseModalWorkerList;
 end;
 
-{$IfEnd} //not NoScripts
 
+class function TseModalWorkerList.Exists: Boolean;
+ {-}
+begin
+ Result := g_TseModalWorkerList <> nil;
+end;//TseModalWorkerList.Exists
+
+{$IfEnd} //not NoScripts
 
 end.

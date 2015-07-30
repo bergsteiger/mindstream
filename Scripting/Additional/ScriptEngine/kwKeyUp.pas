@@ -3,20 +3,15 @@ unit kwKeyUp;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwKeyUp.pas"
+// Модуль: "kwKeyUp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::KeyBoardInput::KeyUp
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::KeyBoardInput::KeyUp
 //
 // 'Alt' KeyDown // зажать клавишу
 // 1000 SLEEP
 // 'Alt' KeyUp // отпустить клавишу
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -31,16 +26,15 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwKeyUp = {final} class(_tfwAutoregisteringWord_)
+ TkwKeyUp = {final scriptword} class(TtfwRegisterableWord)
   {* 'Alt' KeyDown // зажать клавишу
 1000 SLEEP
 'Alt' KeyUp // отпустить клавишу }
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwKeyUp
 {$IfEnd} //not NoScripts
@@ -49,22 +43,16 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  afwFacade,
   Windows,
   Menus,
   Classes,
   Messages,
   SysUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3MessagesService
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwKeyUp;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwKeyUp
 
@@ -109,7 +97,7 @@ begin
  end;
  
  SendInput(1, l_Input[0], SizeOf(TInput));
- Tafw.ProcessMessages;
+ Tl3MessagesService.Instance.ProcessMessages;
 {$Else  XE}
  Assert(false);
 {$EndIf XE}
@@ -126,7 +114,8 @@ end;//TkwKeyUp.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация KeyUp
+ TkwKeyUp.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

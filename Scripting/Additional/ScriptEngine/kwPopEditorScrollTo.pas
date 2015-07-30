@@ -2,10 +2,10 @@ unit kwPopEditorScrollTo;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorScrollTo.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorScrollTo.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_ScrollTo
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_ScrollTo
 //
 // *Формат:* aValue aVeritcal anEditorControl pop:editor:ScrollTo
 // *Описание:* Прокручивает документ к позиции скроллера. aVeritcal - если true, то скроллируем
@@ -15,12 +15,7 @@ unit kwPopEditorScrollTo;
 // 150 true focused:control:push pop:editor:ScrollBottom
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -28,18 +23,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorScrollTo = {final} class(_kwEditorFromStackWord_)
+ TkwPopEditorScrollTo = {final scriptword} class(TkwEditorFromStackWord)
   {* *Формат:* aValue aVeritcal anEditorControl pop:editor:ScrollTo
 *Описание:* Прокручивает документ к позиции скроллера. aVeritcal - если true, то скроллируем повертикали.
 *Пример:*
@@ -50,8 +42,8 @@ type
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorScrollTo
 {$IfEnd} //not NoScripts
@@ -59,20 +51,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorScrollTo;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 // start class TkwPopEditorScrollTo
 
@@ -108,7 +86,8 @@ end;//TkwPopEditorScrollTo.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_ScrollTo
+ TkwPopEditorScrollTo.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

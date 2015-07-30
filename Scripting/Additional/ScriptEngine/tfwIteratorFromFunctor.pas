@@ -2,17 +2,12 @@ unit tfwIteratorFromFunctor;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwIteratorFromFunctor.pas"
+// Библиотека "ScriptEngine$Axiomatics"
+// Модуль: "tfwIteratorFromFunctor.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::ArrayProcessing::TtfwIteratorFromFunctor
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Axiomatics::ArrayProcessing::TtfwIteratorFromFunctor
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -176,6 +171,12 @@ begin
 //#UC END# *479731C50290_52EB863801C3_impl*
 end;//TtfwIteratorFromFunctor.Cleanup
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TtfwArrayCollector
+ TtfwArrayCollector.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

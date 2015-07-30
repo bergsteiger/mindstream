@@ -2,17 +2,12 @@ unit kwPopEditorCursorCoordsToScreen;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorCursorCoordsToScreen.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorCursorCoordsToScreen.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::MoveMouseByPara::pop_editor_CursorCoordsToScreen
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::MoveMouseByPara::pop_editor_CursorCoordsToScreen
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -21,20 +16,17 @@ interface
 {$If not defined(NoScripts)}
 uses
   evCustomEditorWindow,
-  nevTools,
   nevControl,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord,
-  l3Units
+  kwParaCoordsToScreen,
+  l3Units,
+  nevTools,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\ParaCoordsToScreen.imp.pas}
- TkwPopEditorCursorCoordsToScreen = {final} class(_ParaCoordsToScreen_)
+ TkwPopEditorCursorCoordsToScreen = {final scriptword} class(TkwParaCoordsToScreen)
  private
  // private fields
    f_Editor : TevCustomEditorWindow;
@@ -44,11 +36,9 @@ type
      {* Функция очистки полей объекта. }
    function GetPoint(const aMap: InevMap): Tl3Point; override;
      {* Возвращает точку, на которую нужно спозиционироваться. }
+   class function GetWordNameForRegister: AnsiString; override;
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorCursorCoordsToScreen
 {$IfEnd} //not NoScripts
 
@@ -56,20 +46,16 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  Types,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  Types
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 
-type _Instance_R_ = TkwPopEditorCursorCoordsToScreen;
-
-{$Include ..\ScriptEngine\ParaCoordsToScreen.imp.pas}
+type
+  TnevControlFriend = {abstract} class(TnevControl)
+   {* Друг для TnevControl }
+  end;//TnevControlFriend
 
 // start class TkwPopEditorCursorCoordsToScreen
 
@@ -119,7 +105,7 @@ begin
   l_EditorCorner := f_Editor.ClientToScreen(Point(0, 0));
  
   l_l3Pt := TranslatePara2Point(f_Editor);
-  with TPoint(TnevControlHack(f_Editor).LP2DP(l_l3Pt)) do
+  with TPoint(TnevControlFriend(f_Editor).LP2DP(l_l3Pt)) do
   begin
    aCtx.rEngine.PushInt(l_EditorCorner.X + X);
    aCtx.rEngine.PushInt(l_EditorCorner.Y + Y);
@@ -134,7 +120,8 @@ end;//TkwPopEditorCursorCoordsToScreen.DoWithEditor
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\ParaCoordsToScreen.imp.pas}
+// Регистрация pop_editor_CursorCoordsToScreen
+ TkwPopEditorCursorCoordsToScreen.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

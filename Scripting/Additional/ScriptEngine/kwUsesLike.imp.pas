@@ -4,13 +4,10 @@
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwUsesLike.imp.pas"
+// Модуль: "kwUsesLike.imp.pas"
 // Начат: 12.02.2012 19:02
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::IncludesAndUses::kwUsesLike
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: Impurity::Class Shared Delphi Low Level::ScriptEngine::IncludesAndUses::kwUsesLike
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -26,15 +23,16 @@
  // overridden protected methods
    procedure UnknownWord(var aContext: TtfwContext); override;
  end;//_kwUsesLike_
+{$Else}
+
+ {$Include ..\ScriptEngine\tfwIncludeLike.imp.pas}
+ _kwUsesLike_ = _tfwIncludeLike_;
+
 {$IfEnd} //not NoScripts
 
 {$Else kwUsesLike_imp}
 
-{$IfNDef kwUsesLike_imp_impl}
-{$Define kwUsesLike_imp_impl}
-
 {$If not defined(NoScripts)}
-
 
 {$Include ..\ScriptEngine\tfwIncludeLike.imp.pas}
 
@@ -61,10 +59,4 @@ end;//_kwUsesLike_.UnknownWord
 
 {$IfEnd} //not NoScripts
 
-{$Else  kwUsesLike_imp_impl}
-{$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwIncludeLike.imp.pas}
-{$IfEnd} //not NoScripts
-
-{$EndIf kwUsesLike_imp_impl}
 {$EndIf kwUsesLike_imp}

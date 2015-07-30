@@ -2,22 +2,18 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$RTLandVCL"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwControlFromStackWord.imp.pas"
+// Модуль: "kwControlFromStackWord.imp.pas"
 // Начат: 26.01.2012 14:34
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::ControlsProcessing::kwControlFromStackWord
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: Impurity::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::VCL bindings::kwControlFromStackWord
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 {$Define kwControlFromStackWord_imp}
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwComponentFromStackWord.imp.pas}
- _kwControlFromStackWord_ = {abstract mixin} class(_kwComponentFromStackWord_)
+ _kwControlFromStackWord_ = {abstract mixin} class(TkwComponentFromStackWord)
  protected
  // realized methods
    procedure DoComponent(aComponent: TComponent;
@@ -27,17 +23,15 @@
    procedure DoControl(aControl: TControl;
      const aCtx: TtfwContext); virtual; abstract;
  end;//_kwControlFromStackWord_
+{$Else}
+
+ _kwControlFromStackWord_ = TkwComponentFromStackWord;
+
 {$IfEnd} //not NoScripts
 
 {$Else kwControlFromStackWord_imp}
 
-{$IfNDef kwControlFromStackWord_imp_impl}
-{$Define kwControlFromStackWord_imp_impl}
-
 {$If not defined(NoScripts)}
-
-
-{$Include ..\ScriptEngine\kwComponentFromStackWord.imp.pas}
 
 type
   THackControl = {abstract} class(TControl)
@@ -58,10 +52,4 @@ end;//_kwControlFromStackWord_.DoComponent
 
 {$IfEnd} //not NoScripts
 
-{$Else  kwControlFromStackWord_imp_impl}
-{$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwComponentFromStackWord.imp.pas}
-{$IfEnd} //not NoScripts
-
-{$EndIf kwControlFromStackWord_imp_impl}
 {$EndIf kwControlFromStackWord_imp}

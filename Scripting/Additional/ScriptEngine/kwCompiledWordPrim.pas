@@ -2,17 +2,12 @@ unit kwCompiledWordPrim;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledWordPrim.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "kwCompiledWordPrim.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledWordPrim
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::CompiledWords::TkwCompiledWordPrim
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -195,6 +190,12 @@ begin
 //#UC END# *52D7DC84019E_52D3C5F90029_impl*
 end;//TkwCompiledWordPrim.AcceptMedianBracket
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledWordPrim
+ TkwCompiledWordPrim.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

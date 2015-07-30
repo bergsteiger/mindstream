@@ -3,18 +3,13 @@ unit kwStringConsistsOf;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwStringConsistsOf.pas"
+// Модуль: "kwStringConsistsOf.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::string_ConsistsOf
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::string_ConsistsOf
 //
 // Проверяет, что строка состоит ТОЛЬКО из символов другой строки
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,24 +17,23 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwDualStrWord,
   l3Interfaces,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwDualStrWord.imp.pas}
- TkwStringConsistsOf = {final} class(_tfwDualStrWord_)
+ TkwStringConsistsOf = {final scriptword} class(TtfwDualStrWord)
   {* Проверяет, что строка состоит ТОЛЬКО из символов другой строки }
  protected
  // realized methods
    procedure DoStrings(const aCtx: TtfwContext;
      const aStr1: Il3CString;
      const aStr2: Il3CString); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwStringConsistsOf
 {$IfEnd} //not NoScripts
@@ -49,19 +43,13 @@ implementation
 {$If not defined(NoScripts)}
 uses
   l3Chars,
-  SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils,
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwStringConsistsOf;
-
-{$Include ..\ScriptEngine\tfwDualStrWord.imp.pas}
 
 // start class TkwStringConsistsOf
 
@@ -105,7 +93,8 @@ end;//TkwStringConsistsOf.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwDualStrWord.imp.pas}
+// Регистрация string_ConsistsOf
+ TkwStringConsistsOf.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

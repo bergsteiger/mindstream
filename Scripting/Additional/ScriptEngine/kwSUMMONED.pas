@@ -4,17 +4,12 @@ unit kwSUMMONED;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwSUMMONED.pas"
+// Модуль: "kwSUMMONED.pas"
 // Начат: 12.02.2012 16:32
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Modifiers::SUMMONED
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Modifiers::SUMMONED
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,20 +17,19 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  kwModifier,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwModifier.imp.pas}
- TkwSUMMONED = {final} class(_kwModifier_)
+ TkwSUMMONED = {final scriptword} class(TkwModifier)
  protected
  // realized methods
    function pm_GetModifier: TtfwWordModifier; override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwSUMMONED
 {$IfEnd} //not NoScripts
@@ -43,17 +37,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwSUMMONED;
-
-{$Include ..\ScriptEngine\kwModifier.imp.pas}
 
 // start class TkwSUMMONED
 
@@ -76,7 +59,8 @@ end;//TkwSUMMONED.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwModifier.imp.pas}
+// Регистрация SUMMONED
+ TkwSUMMONED.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

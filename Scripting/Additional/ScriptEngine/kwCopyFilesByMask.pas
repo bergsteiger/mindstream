@@ -3,9 +3,9 @@ unit kwCopyFilesByMask;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCopyFilesByMask.pas"
+// Модуль: "kwCopyFilesByMask.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FileProcessing::CopyFilesByMask
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::FileProcessing::CopyFilesByMask
 //
 // CopyFilesByMask- копирует файлы по маске..
 // *Формат:*
@@ -17,12 +17,7 @@ unit kwCopyFilesByMask;
 // * aFileMask - маска, по которой копируем файлы.
 // Результат слово не возвращает. Если появляется ошибка, то будет Exception
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -37,8 +32,7 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwCopyFilesByMask = {final} class(_tfwAutoregisteringWord_)
+ TkwCopyFilesByMask = {final scriptword} class(TtfwRegisterableWord)
   {* CopyFilesByMask- копирует файлы по маске..
 *Формат:* 
 [code]
@@ -51,8 +45,8 @@ type
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwCopyFilesByMask
 {$IfEnd} //not NoScripts
@@ -61,17 +55,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  l3FileUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3FileUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCopyFilesByMask;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwCopyFilesByMask
 
@@ -104,7 +92,8 @@ end;//TkwCopyFilesByMask.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация CopyFilesByMask
+ TkwCopyFilesByMask.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

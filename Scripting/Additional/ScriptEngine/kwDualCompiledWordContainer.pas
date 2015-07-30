@@ -4,19 +4,14 @@ unit kwDualCompiledWordContainer;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwDualCompiledWordContainer.pas"
+// Модуль: "kwDualCompiledWordContainer.pas"
 // Начат: 29.04.2011 17:52
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwDualCompiledWordContainer
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwDualCompiledWordContainer
 //
 // Контейнер для хранения парных скомпилированных слов (begin end)
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -105,6 +100,10 @@ initialization
 //#UC START# *53DA7B70013D*
  TkwDualCompiledWordContainer.RegisterClass;
 //#UC END# *53DA7B70013D*
+{$IfEnd} //not NoScripts
+{$If not defined(NoScripts)}
+// Регистрация TkwDualCompiledWordContainer
+ TkwDualCompiledWordContainer.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

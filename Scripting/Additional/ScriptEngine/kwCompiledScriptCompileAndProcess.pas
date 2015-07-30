@@ -3,16 +3,11 @@ unit kwCompiledScriptCompileAndProcess;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledScriptCompileAndProcess.pas"
+// Модуль: "kwCompiledScriptCompileAndProcess.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::ScriptsCompilingAndProcessing::TkwCompiledScriptCompileAndProcess
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::ScriptsCompilingAndProcessing::TkwCompiledScriptCompileAndProcess
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -392,6 +387,12 @@ begin
  inherited;
 end;//TkwCompiledScriptCompileAndProcess.ClearFields
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledScriptCompileAndProcess
+ TkwCompiledScriptCompileAndProcess.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

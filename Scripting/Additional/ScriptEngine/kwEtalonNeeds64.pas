@@ -3,16 +3,11 @@ unit kwEtalonNeeds64;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwEtalonNeeds64.pas"
+// Модуль: "kwEtalonNeeds64.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::EtalonNeeds64
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::EtalonNeeds64
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -27,13 +22,12 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwEtalonNeeds64 = {final} class(_tfwAutoregisteringWord_)
+ TkwEtalonNeeds64 = {final scriptword} class(TtfwRegisterableWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwEtalonNeeds64
 {$IfEnd} //not NoScripts
@@ -46,17 +40,6 @@ var
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwEtalonNeeds64;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwEtalonNeeds64
 
@@ -79,7 +62,8 @@ end;//TkwEtalonNeeds64.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация EtalonNeeds64
+ TkwEtalonNeeds64.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

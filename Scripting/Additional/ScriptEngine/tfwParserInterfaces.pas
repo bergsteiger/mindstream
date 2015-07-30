@@ -2,17 +2,12 @@ unit tfwParserInterfaces;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwParserInterfaces.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "tfwParserInterfaces.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Interfaces::Category>> Shared Delphi Scripting::ScriptEngine::tfwParserInterfaces
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: Interfaces::Category Shared Delphi Low Level::ScriptEngine$Core::tfwParserInterfaces
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 

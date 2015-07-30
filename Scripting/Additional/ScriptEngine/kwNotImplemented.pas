@@ -3,16 +3,11 @@ unit kwNotImplemented;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwNotImplemented.pas"
+// Модуль: "kwNotImplemented.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Compilation::NotImplemented
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Compilation::NotImplemented
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -27,13 +22,12 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwNotImplemented = {final} class(_tfwAutoregisteringWord_)
+ TkwNotImplemented = {final scriptword} class(TtfwRegisterableWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwNotImplemented
 {$IfEnd} //not NoScripts
@@ -41,17 +35,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwNotImplemented;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwNotImplemented
 
@@ -60,7 +43,7 @@ procedure TkwNotImplemented.DoDoIt(const aCtx: TtfwContext);
 //#UC END# *4DAEEDE10285_4F4068660387_var*
 begin
 //#UC START# *4DAEEDE10285_4F4068660387_impl*
- RunnerAssert(false, 'Не реализовано', aCtx);
+ RunnerError('Не реализовано', aCtx);
 //#UC END# *4DAEEDE10285_4F4068660387_impl*
 end;//TkwNotImplemented.DoDoIt
 
@@ -74,7 +57,8 @@ end;//TkwNotImplemented.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация NotImplemented
+ TkwNotImplemented.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

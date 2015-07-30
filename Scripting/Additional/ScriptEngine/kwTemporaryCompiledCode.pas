@@ -2,20 +2,15 @@ unit kwTemporaryCompiledCode;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwTemporaryCompiledCode.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "kwTemporaryCompiledCode.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwTemporaryCompiledCode
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::CompiledWords::TkwTemporaryCompiledCode
 //
 // Временный контейне скомпилированного кода, который умрёт после компиляции. На который нельзя
 // держать "слабые" ссылки. Например как Caller
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -52,7 +47,7 @@ procedure TkwTemporaryCompiledCode.DoDoIt(const aCtx: TtfwContext);
 //#UC END# *4DAEEDE10285_52DFE4E403E7_var*
 begin
 //#UC START# *4DAEEDE10285_52DFE4E403E7_impl*
- RunnerAssert(false, 'Временный код не может исполняться', aCtx);
+ RunnerError('Временный код не может исполняться', aCtx);
 //#UC END# *4DAEEDE10285_52DFE4E403E7_impl*
 end;//TkwTemporaryCompiledCode.DoDoIt
 
@@ -66,6 +61,12 @@ begin
 //#UC END# *52DFE48500BB_52DFE4E403E7_impl*
 end;//TkwTemporaryCompiledCode.GetAsCaller
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwTemporaryCompiledCode
+ TkwTemporaryCompiledCode.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

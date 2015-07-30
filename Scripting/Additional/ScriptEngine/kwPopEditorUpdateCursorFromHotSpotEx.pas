@@ -2,19 +2,14 @@ unit kwPopEditorUpdateCursorFromHotSpotEx;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Everest"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorUpdateCursorFromHotSpotEx.pas"
+// Модуль: "kwPopEditorUpdateCursorFromHotSpotEx.pas"
 // Начат: 08.09.2011 19:20
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_UpdateCursorFromHotSpotEx
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_UpdateCursorFromHotSpotEx
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -23,23 +18,20 @@ interface
 {$If not defined(NoScripts)}
 uses
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  kwEditorFromStackWord,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorUpdateCursorFromHotSpotEx = class(_kwEditorFromStackWord_)
+ TkwPopEditorUpdateCursorFromHotSpotEx = {scriptword} class(TkwEditorFromStackWord)
  protected
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorUpdateCursorFromHotSpotEx
 {$IfEnd} //not NoScripts
@@ -47,20 +39,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorUpdateCursorFromHotSpotEx;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 type
   TevCustomEditorWindowHack = class(TevCustomEditorWindow)
@@ -92,7 +70,8 @@ end;//TkwPopEditorUpdateCursorFromHotSpotEx.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_UpdateCursorFromHotSpotEx
+ TkwPopEditorUpdateCursorFromHotSpotEx.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

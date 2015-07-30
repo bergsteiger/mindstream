@@ -2,10 +2,10 @@ unit kwSubPanelGetPopupMenuForSub;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwSubPanelGetPopupMenuForSub.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwSubPanelGetPopupMenuForSub.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SubPanelWords::SubPanel_GetPopupMenuForSub
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::SubPanelWords::SubPanel_GetPopupMenuForSub
 //
 // *Описание*: возвращает меню для саба на сабпанели.
 // *Формат:*
@@ -15,12 +15,7 @@ unit kwSubPanelGetPopupMenuForSub;
 // aSubPanel - контрол саб панели.
 // aSubPanelSub - объект класса TevSubPanelSub
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -28,18 +23,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwSubPanelFromStackWord,
   tfwScriptingInterfaces,
-  evSubPn,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  evSubPn
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwSubPanelFromStackWord.imp.pas}
- TkwSubPanelGetPopupMenuForSub = {final} class(_kwSubPanelFromStackWord_)
+ TkwSubPanelGetPopupMenuForSub = {final scriptword} class(TkwSubPanelFromStackWord)
   {* *Описание*: возвращает меню для саба на сабпанели.
 *Формат:*
 [code]
@@ -51,8 +43,8 @@ aSubPanelSub - объект класса TevSubPanelSub }
  // realized methods
    procedure DoWithSubPanel(aControl: TevCustomSubPanel;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwSubPanelGetPopupMenuForSub
 {$IfEnd} //not NoScripts
@@ -62,31 +54,14 @@ implementation
 {$If not defined(NoScripts)}
 uses
   evSubPanelSub,
-  nevFacade
-  {$If not defined(NoVCM)}
-  ,
-  vcmBaseMenuManager
-  {$IfEnd} //not NoVCM
-  
-  {$If not defined(NoVCM)}
-  ,
-  vcmMenuManager
-  {$IfEnd} //not NoVCM
-  ,
+  nevFacade,
   l3Interfaces,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  Types,
+  l3PopupMenuHelper
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwSubPanelGetPopupMenuForSub;
-
-{$Include ..\ScriptEngine\kwSubPanelFromStackWord.imp.pas}
 
 // start class TkwSubPanelGetPopupMenuForSub
 
@@ -94,9 +69,7 @@ procedure TkwSubPanelGetPopupMenuForSub.DoWithSubPanel(aControl: TevCustomSubPan
   const aCtx: TtfwContext);
 //#UC START# *52D6471802DC_53EE014B03AC_var*
 var
- {$IfNDef NoVCM}
  l_SPoint     : Tl3_SPoint;
- {$EndIf  NoVCM}
  l_SubPanelSub: TevSubPanelSub;
 //#UC END# *52D6471802DC_53EE014B03AC_var*
 begin
@@ -104,10 +77,8 @@ begin
  //aControl.PopupMenu;
  RunnerAssert(aCtx.rEngine.IsTopObj, 'Не задан объект класса aSubPanelSub!', aCtx);
  l_SubPanelSub := aCtx.rEngine.PopObj as TevSubPanelSub;
- {$IfNDef NoVCM}
  l_SPoint := nev.CrtIC.LP2DP(l_SubPanelSub.DrawRect.TopLeft);
- aCtx.rEngine.PushObj((g_MenuManager As TvcmCustomMenuManager).FillPopupMenu(Point(l_SPoint.X, l_SPoint.Y), aControl).Items);
- {$EndIf  NoVCM}
+ aCtx.rEngine.PushObj(Tl3PopupMenuHelper.Instance.GetPopupMenu(aControl, Point(l_SPoint.X, l_SPoint.Y)));
 //#UC END# *52D6471802DC_53EE014B03AC_impl*
 end;//TkwSubPanelGetPopupMenuForSub.DoWithSubPanel
 
@@ -121,7 +92,8 @@ end;//TkwSubPanelGetPopupMenuForSub.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwSubPanelFromStackWord.imp.pas}
+// Регистрация SubPanel_GetPopupMenuForSub
+ TkwSubPanelGetPopupMenuForSub.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

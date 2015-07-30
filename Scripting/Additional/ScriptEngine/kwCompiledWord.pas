@@ -2,21 +2,16 @@ unit kwCompiledWord;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Core"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledWord.pas"
+// Модуль: "kwCompiledWord.pas"
 // Начат: 26.04.2011 17:36
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledWord
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::CompiledWords::TkwCompiledWord
 //
 // Поддержка скомпилированных слов
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -221,7 +216,7 @@ begin
  begin
   if not (tfw_wmLeftWordRef in aModifiers) then
 // if l3Same(aParamName, 'Caller') OR l3Same(aParamName, '%S') then
-   l_Var := TkwLeftParam.Create((aCtx.rEngine.As_ItfwKeywordFinder.KeywordByName[TtfwCStringFactory.C(TkwIn.GetWordNameForRegister)] As TtfwKeyWord).Word,
+   l_Var := TkwLeftParam.Create((aCtx.rEngine.As_ItfwKeywordFinder.KeywordByName[TtfwCStringFactory.C(TkwIn.NameForRegister)] As TtfwKeyWord).Word,
                                    // - чтобы обеспечить слову нужный "стереотип"
                                    //   хак конечно, надо как-то константу хотя бы завести
                                   Self{PrevFinder},
@@ -229,7 +224,7 @@ begin
                                   aCtx,
                                   l_KW)
   else
-   l_Var := TkwLeftWordRefParam.Create((aCtx.rEngine.As_ItfwKeywordFinder.KeywordByName[TtfwCStringFactory.C(TkwIn.GetWordNameForRegister)] As TtfwKeyWord).Word,
+   l_Var := TkwLeftWordRefParam.Create((aCtx.rEngine.As_ItfwKeywordFinder.KeywordByName[TtfwCStringFactory.C(TkwIn.NameForRegister)] As TtfwKeyWord).Word,
                                    // - чтобы обеспечить слову нужный "стереотип"
                                    //   хак конечно, надо как-то константу хотя бы завести
                                   Self{PrevFinder},
@@ -238,7 +233,7 @@ begin
                                   l_KW)
  end//not (tfw_wmRightWordRef in aModifiers)
  else
-  l_Var := TkwRightParam.Create((aCtx.rEngine.As_ItfwKeywordFinder.KeywordByName[TtfwCStringFactory.C(TkwIn.GetWordNameForRegister)] As TtfwKeyWord).Word,
+  l_Var := TkwRightParam.Create((aCtx.rEngine.As_ItfwKeywordFinder.KeywordByName[TtfwCStringFactory.C(TkwIn.NameForRegister)] As TtfwKeyWord).Word,
                                   // - чтобы обеспечить слову нужный "стереотип"
                                   //   хак конечно, надо как-то константу хотя бы завести
                                  Self{PrevFinder},
@@ -370,15 +365,6 @@ var
 begin
 //#UC START# *52D56A980103_4DB6CA4F010D_impl*
  CompilerAssert(aParameterToPop <> nil, 'Параметр для заполнения не может быть nil', aContext);
- // l_Var := aParameterToPop As TkwCompiledIn;
- (* l_Pop := TkwCompiledPopToVar.Create((aContext.rEngine.As_ItfwKeywordFinder.KeywordByName[TkwPopToVar.GetWordNameForRegister] As TtfwKeyWord).Word,
-                                      // - чтобы обеспечить слову нужный "стереотип"
-                                      //   хак конечно, надо как-то константу хотя бы завести
-                                      Self{PrevFinder},
-                                      TtfwTypeInfo_E{Modifiers},
-                                      aContext);
-  try
-   l_Pop.DoAddCodePart(l_Var, false, aContext);*)
  l_Pop := TkwCompiledInitParam.Create(aParameterToPop);
  try
   Self.DoAddCodePart(l_Pop, true, aContext);
@@ -457,6 +443,12 @@ begin
 //#UC END# *53E4914101D2_4DB6CA4F010D_impl*
 end;//TkwCompiledWord.LeftWordRefParamsCount
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledWord
+ TkwCompiledWord.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

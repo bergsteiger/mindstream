@@ -3,16 +3,11 @@ unit kwStereotypeStereotypeProducer;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwStereotypeStereotypeProducer.pas"
+// Модуль: "kwStereotypeStereotypeProducer.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Stereotyping::StereotypeStereotypeProducer
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Stereotyping::StereotypeStereotypeProducer
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,29 +15,25 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  tfwWordProducer,
   tfwScriptingInterfaces,
   kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  l3Interfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwWordProducer.imp.pas}
- TkwStereotypeStereotypeProducer = {final} class(_tfwWordProducer_)
+ TkwStereotypeStereotypeProducer = {final scriptword} class(TtfwWordProducer)
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    function EndBracket(const aContext: TtfwContext;
      aSilent: Boolean): RtfwWord; override;
    function AfterWordMaxCount(const aCtx: TtfwContext): Cardinal; override;
    function AcceptsKeyWordAfter: Boolean; override;
    function CompiledWordClass(const aCtx: TtfwContext): RkwCompiledWordPrim; override;
    function GetNewWordName(const aContext: TtfwContext): Il3CString; override;
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwStereotypeStereotypeProducer
 {$IfEnd} //not NoScripts
 
@@ -53,28 +44,11 @@ uses
   kwCompiledStereotypeStereotypeProducer,
   SysUtils,
   kwStandardProcedureCloseBracket,
-  kwCompiledWord,
-  kwCompiledVar,
-  l3String,
-  l3Parser,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3String
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwStereotypeStereotypeProducer;
-
-{$Include ..\ScriptEngine\tfwWordProducer.imp.pas}
 
 // start class TkwStereotypeStereotypeProducer
 
@@ -134,7 +108,8 @@ end;//TkwStereotypeStereotypeProducer.GetNewWordName
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwWordProducer.imp.pas}
+// Регистрация StereotypeStereotypeProducer
+ TkwStereotypeStereotypeProducer.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

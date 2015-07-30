@@ -3,18 +3,13 @@ unit kwLeftWordRef;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwLeftWordRef.pas"
+// Модуль: "kwLeftWordRef.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Modifiers::ModifiersPack::LeftWordRef
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Modifiers::ModifiersPack::LeftWordRef
 //
 // Указатель на параметр слева
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,21 +17,20 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  kwModifier,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwModifier.imp.pas}
- TkwLeftWordRef = {final} class(_kwModifier_)
+ TkwLeftWordRef = {final scriptword} class(TkwModifier)
   {* Указатель на параметр слева }
  protected
  // realized methods
    function pm_GetModifier: TtfwWordModifier; override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwLeftWordRef
 {$IfEnd} //not NoScripts
@@ -44,17 +38,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwLeftWordRef;
-
-{$Include ..\ScriptEngine\kwModifier.imp.pas}
 
 // start class TkwLeftWordRef
 
@@ -77,7 +60,8 @@ end;//TkwLeftWordRef.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwModifier.imp.pas}
+// Регистрация LeftWordRef
+ TkwLeftWordRef.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

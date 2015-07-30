@@ -2,13 +2,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledVar.imp.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "kwCompiledVar.imp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::kwCompiledVar
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: Impurity::Class Shared Delphi Low Level::ScriptEngine$Core::CompiledWords::kwCompiledVar
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -24,7 +21,7 @@
    procedure DoDoIt(const aCtx: TtfwContext); override;
  protected
  // overridden property methods
-   function pm_GetResultTypeInfo: TtfwTypeInfo; override;
+   function pm_GetResultTypeInfo(const aCtx: TtfwContext): TtfwTypeInfo; override;
  protected
  // overridden protected methods
    procedure Cleanup; override;
@@ -39,6 +36,10 @@
    procedure SetResultTypeInfo(const aValue: TtfwTypeInfo;
      const aCtx: TtfwContext); override;
  end;//_kwCompiledVar_
+{$Else}
+
+ _kwCompiledVar_ = _kwCompiledVar_Parent_;
+
 {$IfEnd} //not NoScripts
 
 {$Else kwCompiledVar_imp}
@@ -68,7 +69,7 @@ begin
 //#UC END# *479731C50290_52D3E2EE0244_impl*
 end;//_kwCompiledVar_.Cleanup
 
-function _kwCompiledVar_.pm_GetResultTypeInfo: TtfwTypeInfo;
+function _kwCompiledVar_.pm_GetResultTypeInfo(const aCtx: TtfwContext): TtfwTypeInfo;
 //#UC START# *52CFC11603C8_52D3E2EE0244get_var*
 //#UC END# *52CFC11603C8_52D3E2EE0244get_var*
 begin
@@ -87,46 +88,62 @@ procedure _kwCompiledVar_.SetValue(const aValue: TtfwStackValue;
   Result := 'Неверный тип значения: ' + GetEnumName(TypeInfo(TtfwStackValueType), Ord(aValue.rType));
  end;//cBadModifier
 
+var
+ l_TM : TtfwWordModifiers; 
 //#UC END# *52D00B00031A_52D3E2EE0244_var*
 begin
 //#UC START# *52D00B00031A_52D3E2EE0244_impl*
  if aNeedCheckType then
-  if (f_TypeInfo.Modifiers - [tfw_wmPrivate, tfw_wmProtected, tfw_wmPublic] <> []) then
+ begin
+  l_TM := f_TypeInfo.TypeModifiers;
+  if (l_TM <> []) then
   begin
    Case aValue.rType of
     tfw_svtNil:
-     RunnerAssert((tfw_wmObj in f_TypeInfo.Modifiers) OR
-            (tfw_wmFile in f_TypeInfo.Modifiers) OR
-            (tfw_wmIntf in f_TypeInfo.Modifiers) OR
-            (tfw_wmClass in f_TypeInfo.Modifiers) OR
- //           (tfw_svtList in f_TypeInfo.Modifiers) OR
-            (tfw_wmStr in f_TypeInfo.Modifiers), cBadModifier, aCtx);
+     RunnerAssert((tfw_wmObj in l_TM) OR
+            (tfw_wmFile in l_TM) OR
+            (tfw_wmIntf in l_TM) OR
+            (tfw_wmClass in l_TM) OR
+ //           (tfw_svtList in l_TM) OR
+            (tfw_wmStr in l_TM), cBadModifier, aCtx);
     tfw_svtInt:
-     RunnerAssert(tfw_wmInt in f_TypeInfo.Modifiers, cBadModifier, aCtx);
+     RunnerAssert(tfw_wmInt in l_TM, cBadModifier, aCtx);
     tfw_svtStr:
-     RunnerAssert(tfw_wmStr in f_TypeInfo.Modifiers, cBadModifier, aCtx);
+     RunnerAssert(tfw_wmStr in l_TM, cBadModifier, aCtx);
     tfw_svtObj:
-     RunnerAssert((tfw_wmRightWordRef in f_TypeInfo.Modifiers) OR
-                  (tfw_wmLeftWordRef in f_TypeInfo.Modifiers) OR
-                  (tfw_wmObj in f_TypeInfo.Modifiers), cBadModifier, aCtx);
+     RunnerAssert((tfw_wmRightWordRef in l_TM) OR
+                  (tfw_wmLeftWordRef in l_TM) OR
+                  (tfw_wmObj in l_TM), cBadModifier, aCtx);
     tfw_svtIntf:
-     RunnerAssert(tfw_wmIntf in f_TypeInfo.Modifiers, cBadModifier, aCtx);
+     RunnerAssert(tfw_wmIntf in l_TM, cBadModifier, aCtx);
     tfw_svtList:
-     RunnerAssert(tfw_wmList in f_TypeInfo.Modifiers, cBadModifier, aCtx);
+     RunnerAssert(tfw_wmList in l_TM, cBadModifier, aCtx);
     tfw_svtFile:
-     RunnerAssert(tfw_wmFile in f_TypeInfo.Modifiers, cBadModifier, aCtx);
+     RunnerAssert(tfw_wmFile in l_TM, cBadModifier, aCtx);
     tfw_svtChar:
-     RunnerAssert(tfw_wmChar in f_TypeInfo.Modifiers, cBadModifier, aCtx);
+     RunnerAssert(tfw_wmChar in l_TM, cBadModifier, aCtx);
     tfw_svtWStr:
-     RunnerAssert(tfw_wmWStr in f_TypeInfo.Modifiers, cBadModifier, aCtx);
+    begin
+     if not (tfw_wmWStr in l_TM) then
+     begin
+      if (tfw_wmStr in l_TM) then
+      begin
+       f_Value := TtfwStackValue_C(TtfwCStringFactory.C(aValue.AsWString));
+       Exit;
+      end//tfw_svtStr in l_TM
+      else
+       BadValueType(aValue.rType, aCtx);
+     end;//not (tfw_wmWStr in l_TM)
+    end;//tfw_svtWStr
     tfw_svtBool:
-     RunnerAssert(tfw_wmBool in f_TypeInfo.Modifiers, cBadModifier, aCtx);
+     RunnerAssert(tfw_wmBool in l_TM, cBadModifier, aCtx);
     tfw_svtClass:
-     RunnerAssert(tfw_wmClass in f_TypeInfo.Modifiers, cBadModifier, aCtx);
+     RunnerAssert(tfw_wmClass in l_TM, cBadModifier, aCtx);
     else
-     RunnerAssert(false, cBadModifier, aCtx);
+     RunnerError(cBadModifier, aCtx);
    end;//Case aValue.rType
-  end;//f_TypeInfo.Modifiers.. <> []
+  end;//l_TM <> []
+ end;//aNeedCheckType
  f_Value := aValue;
 //#UC END# *52D00B00031A_52D3E2EE0244_impl*
 end;//_kwCompiledVar_.SetValue

@@ -2,21 +2,16 @@ unit kwString;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Core"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwString.pas"
+// Модуль: "kwString.pas"
 // Начат: 26.04.2011 17:49
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::PrimitiveWords::TkwString
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::PrimitiveWords::TkwString
 //
 // Помещает значение в стек как строковое.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -25,14 +20,15 @@ interface
 {$If not defined(NoScripts)}
 uses
   l3Interfaces,
-  tfwRegisterableWord,
+  tfwRegisterableWordPrim,
+  TypInfo,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- TkwString = class(TtfwRegisterableWord)
+ TkwString = class(TtfwRegisterableWordPrim)
   {* Помещает значение в стек как строковое. }
  private
  // private fields
@@ -47,6 +43,9 @@ type
      {* Функция очистки полей объекта. }
    procedure ClearFields; override;
      {* Сигнатура метода ClearFields }
+ public
+ // overridden public methods
+   function GetResultTypeInfo(const aCtx: TtfwContext): PTypeInfo; override;
  public
  // public methods
    constructor Create(const aValue: Il3CString); reintroduce;
@@ -101,13 +100,21 @@ begin
  inherited;
 end;//TkwString.ClearFields
 
+function TkwString.GetResultTypeInfo(const aCtx: TtfwContext): PTypeInfo;
+//#UC START# *551544E2001A_4DB6CD4203D4_var*
+//#UC END# *551544E2001A_4DB6CD4203D4_var*
+begin
+//#UC START# *551544E2001A_4DB6CD4203D4_impl*
+ Result := @tfw_tiString;
+//#UC END# *551544E2001A_4DB6CD4203D4_impl*
+end;//TkwString.GetResultTypeInfo
+
 {$IfEnd} //not NoScripts
 
 initialization
 {$If not defined(NoScripts)}
-//#UC START# *53DA5C14012B*
+// Регистрация TkwString
  TkwString.RegisterClass;
-//#UC END# *53DA5C14012B*
 {$IfEnd} //not NoScripts
 
 end.

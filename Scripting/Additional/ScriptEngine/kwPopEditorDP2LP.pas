@@ -2,10 +2,10 @@ unit kwPopEditorDP2LP;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorDP2LP.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorDP2LP.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_DP2LP
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_DP2LP
 //
 // *Формат:* X Y anEditorControl pop:editor:DP2LP
 // *Описание:* Переводи значения точки из долей дюйма в пиксели.
@@ -14,12 +14,7 @@ unit kwPopEditorDP2LP;
 // 100 100  focused:control:push pop:editor:DP2LP
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -27,18 +22,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorDP2LP = {final} class(_kwEditorFromStackWord_)
+ TkwPopEditorDP2LP = {final scriptword} class(TkwEditorFromStackWord)
   {* *Формат:* X Y anEditorControl pop:editor:DP2LP
 *Описание:* Переводи значения точки из долей дюйма в пиксели.
 *Пример:*
@@ -49,8 +41,8 @@ type
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorDP2LP
 {$IfEnd} //not NoScripts
@@ -59,20 +51,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  l3Units,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  l3Units
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorDP2LP;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 // start class TkwPopEditorDP2LP
 
@@ -111,7 +94,8 @@ end;//TkwPopEditorDP2LP.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_DP2LP
+ TkwPopEditorDP2LP.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

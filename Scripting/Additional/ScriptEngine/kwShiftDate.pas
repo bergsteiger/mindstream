@@ -3,16 +3,11 @@ unit kwShiftDate;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwShiftDate.pas"
+// Модуль: "kwShiftDate.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::ShiftDate
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::SysUtils::ShiftDate
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,20 +15,19 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
+  tfwSysUtilsWord,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
- TkwShiftDate = {final} class(_tfwSysUtilsWord_)
+ TkwShiftDate = {final scriptword} class(TtfwSysUtilsWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwShiftDate
 {$IfEnd} //not NoScripts
@@ -46,17 +40,11 @@ uses
   Windows,
   SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwShiftDate;
-
-{$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
 
 // start class TkwShiftDate
 
@@ -94,7 +82,8 @@ end;//TkwShiftDate.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
+// Регистрация ShiftDate
+ TkwShiftDate.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

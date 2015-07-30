@@ -3,16 +3,11 @@ unit kwEndsStr;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwEndsStr.pas"
+// Модуль: "kwEndsStr.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::TkwEndsStr
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::TkwEndsStr
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,23 +15,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwDualStrWord,
   l3Interfaces,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwDualStrWord.imp.pas}
- TkwEndsStr = class(_tfwDualStrWord_)
+ TkwEndsStr = class(TtfwDualStrWord)
  protected
  // realized methods
    procedure DoStrings(const aCtx: TtfwContext;
      const aStr1: Il3CString;
      const aStr2: Il3CString); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwEndsStr
 {$IfEnd} //not NoScripts
@@ -45,19 +39,13 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils,
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwEndsStr;
-
-{$Include ..\ScriptEngine\tfwDualStrWord.imp.pas}
 
 // start class TkwEndsStr
 
@@ -85,7 +73,8 @@ end;//TkwEndsStr.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwDualStrWord.imp.pas}
+// Регистрация TkwEndsStr
+ TkwEndsStr.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

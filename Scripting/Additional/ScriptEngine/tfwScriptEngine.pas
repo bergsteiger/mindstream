@@ -4,19 +4,14 @@ unit tfwScriptEngine;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwScriptEngine.pas"
+// Модуль: "tfwScriptEngine.pas"
 // Начат: 20.04.2011 18:16
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TtfwScriptEngine
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TtfwScriptEngine
 //
 // Машина для исполнения скриптов. Базовый класс.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -43,10 +38,6 @@ type
      const aCaller: ItfwScriptCaller); overload; 
    class procedure ScriptFromFile(const aFileName: AnsiString;
      const aCaller: ItfwScriptCaller);
-   class function GlobalAddWord(const aWordName: AnsiString;
-     aWordClass: RtfwWord): Boolean; overload; 
-   class function GlobalAddWord(const aWordName: AnsiString;
-     aWord: TtfwWord): Boolean; overload; 
  end;//TtfwScriptEngine
 {$IfEnd} //not NoScripts
 
@@ -60,21 +51,10 @@ uses
   l3String,
   l3Types,
   kwEmitString,
-  kwProcessMessages,
-  kwAssert,
-  kwAssertS,
   kwTryFinally,
-  kwNOP,
-  kwSleep,
-  kwPopToVar,
   kwMain,
   kwIn,
-  kwPushWord,
-  kwDoPushedWord,
-  kwWHILEDO,
-  kwLoop,
   kwAtomicIF,
-  kwNil,
   kwWordProducer,
   kwNamedWordProducer,
   kwClassProducer,
@@ -143,34 +123,6 @@ begin
  end;//try..finally
 //#UC END# *4DB02B590048_4DAEEA9E0049_impl*
 end;//TtfwScriptEngine.ScriptFromFile
-
-class function TtfwScriptEngine.GlobalAddWord(const aWordName: AnsiString;
-  aWordClass: RtfwWord): Boolean;
-//#UC START# *4DB57799032F_4DAEEA9E0049_var*
-//#UC END# *4DB57799032F_4DAEEA9E0049_var*
-begin
-//#UC START# *4DB57799032F_4DAEEA9E0049_impl*
- Assert(aWordName <> '');
- Result := TtfwAutoregisteredDiction.Instance.AddWord(aWordName, aWordClass);
- if Result then
-  aWordClass.RegisterClass;
-  //TtfwClassRef.Register(aWordClass);
-//#UC END# *4DB57799032F_4DAEEA9E0049_impl*
-end;//TtfwScriptEngine.GlobalAddWord
-
-class function TtfwScriptEngine.GlobalAddWord(const aWordName: AnsiString;
-  aWord: TtfwWord): Boolean;
-//#UC START# *4DB577DF0323_4DAEEA9E0049_var*
-//#UC END# *4DB577DF0323_4DAEEA9E0049_var*
-begin
-//#UC START# *4DB577DF0323_4DAEEA9E0049_impl*
- Assert(aWordName <> '');
- Result := TtfwAutoregisteredDiction.Instance.AddWord(aWordName, aWord);
- if Result then
-  aWord.RegisterClass;
-  //TtfwClassRef.Register(aWord.ClassType);
-//#UC END# *4DB577DF0323_4DAEEA9E0049_impl*
-end;//TtfwScriptEngine.GlobalAddWord
 
 {$IfEnd} //not NoScripts
 

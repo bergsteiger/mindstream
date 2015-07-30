@@ -3,16 +3,11 @@ unit kwOSName;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwOSName.pas"
+// Модуль: "kwOSName.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::OSName
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::SysUtils::OSName
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -27,13 +22,12 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwOSName = {final} class(_tfwAutoregisteringWord_)
+ TkwOSName = {final scriptword} class(TtfwRegisterableWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwOSName
 {$IfEnd} //not NoScripts
@@ -42,17 +36,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  JclSysInfo,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  JclSysInfo
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwOSName;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwOSName
 
@@ -75,7 +63,8 @@ end;//TkwOSName.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация OSName
+ TkwOSName.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -2,10 +2,10 @@ unit kwPopEditorInsertStream;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorInsertStream.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorInsertStream.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_InsertStream
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_InsertStream
 //
 // *Формат:* aFromat file_name anEditorControl pop:editor:InsertStream
 // *Описание:* Эмулирует вставку из буфера обмена данных из внешних приложений, например, текст в
@@ -15,12 +15,7 @@ unit kwPopEditorInsertStream;
 // Test.rtf CF_RTF  focused:control:push pop:editor:InsertStream
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -28,18 +23,14 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  kwInsertFromStreamCommon,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwInsertFromStreamCommon.imp.pas}
- TkwPopEditorInsertStream = {final} class(_kwInsertFromStreamCommon_)
+ TkwPopEditorInsertStream = {final scriptword} class(TkwInsertFromStreamCommon)
   {* *Формат:* aFromat file_name anEditorControl pop:editor:InsertStream
 *Описание:* Эмулирует вставку из буфера обмена данных из внешних приложений, например, текст в формате aFromat  из файла file_name.
 *Пример:*
@@ -49,8 +40,8 @@ Test.rtf CF_RTF  focused:control:push pop:editor:InsertStream
  protected
  // realized methods
    function GetFormat(const aCtx: TtfwContext): Integer; override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorInsertStream
 {$IfEnd} //not NoScripts
@@ -58,26 +49,6 @@ Test.rtf CF_RTF  focused:control:push pop:editor:InsertStream
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  evTypes,
-  ActiveX,
-  l3Base,
-  l3Filer,
-  nevInternalInterfaces,
-  l3Types,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorInsertStream;
-
-{$Include ..\ScriptEngine\kwInsertFromStreamCommon.imp.pas}
 
 // start class TkwPopEditorInsertStream
 
@@ -101,7 +72,8 @@ end;//TkwPopEditorInsertStream.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwInsertFromStreamCommon.imp.pas}
+// Регистрация pop_editor_InsertStream
+ TkwPopEditorInsertStream.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

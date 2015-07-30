@@ -3,16 +3,11 @@ unit kwImmedCompiledStereotypedStereotypedWordRunner;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwImmedCompiledStereotypedStereotypedWordRunner.pas"
+// Модуль: "kwImmedCompiledStereotypedStereotypedWordRunner.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Stereotyping::TkwImmedCompiledStereotypedStereotypedWordRunner
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Stereotyping::TkwImmedCompiledStereotypedStereotypedWordRunner
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -21,17 +16,14 @@ interface
 {$If not defined(NoScripts)}
 uses
   tfwScriptingInterfaces,
-  l3Interfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  tfwStandardProcedure,
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
- TkwImmedCompiledStereotypedStereotypedWordRunner = class(_tfwStandardProcedure_)
+ TkwImmedCompiledStereotypedStereotypedWordRunner = class(TtfwStandardProcedure)
  private
  // private fields
    f_WordProducerForCompiledClass : TtfwWord;
@@ -52,31 +44,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwClassCompiler,
-  kwStandardProcedureCloseBracket,
-  kwCompiledProcedure,
-  SysUtils,
-  l3String,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwClassCompiler
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwImmedCompiledStereotypedStereotypedWordRunner;
-
-{$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
 
 // start class TkwImmedCompiledStereotypedStereotypedWordRunner
 
@@ -132,7 +104,8 @@ end;//TkwImmedCompiledStereotypedStereotypedWordRunner.GetWordProducerForCompile
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
+// Регистрация TkwImmedCompiledStereotypedStereotypedWordRunner
+ TkwImmedCompiledStereotypedStereotypedWordRunner.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

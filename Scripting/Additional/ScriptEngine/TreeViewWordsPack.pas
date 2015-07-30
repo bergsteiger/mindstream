@@ -2,17 +2,12 @@ unit TreeViewWordsPack;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/TreeViewWordsPack.pas"
+// Библиотека "ScriptEngine$RTLandVCL"
+// Модуль: "TreeViewWordsPack.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeywordsPack::Class>> Shared Delphi Scripting::ScriptEngine::TreeViewWords::TreeViewWordsPack
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeywordsPack::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::TreeViewWords::TreeViewWordsPack
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -27,7 +22,9 @@ implementation
 uses
   kwPopTreeViewGetItem,
   kwPopTreeNodeGetNext,
-  kwPopTreeNodeHasChildren
+  kwPopTreeNodeHasChildren,
+  TreeViewRegistrator,
+  TreeNodeRegistrator
   ;
 
 {$IfEnd} //not NoScripts

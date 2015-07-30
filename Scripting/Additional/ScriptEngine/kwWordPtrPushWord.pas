@@ -4,17 +4,12 @@ unit kwWordPtrPushWord;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwWordPtrPushWord.pas"
+// Модуль: "kwWordPtrPushWord.pas"
 // Начат: 12.02.2012 16:21
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwWordPtrPushWord
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwWordPtrPushWord
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -51,6 +46,12 @@ begin
 //#UC END# *4DAEEDE10285_4F37AEBB0209_impl*
 end;//TkwWordPtrPushWord.DoDoIt
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwWordPtrPushWord
+ TkwWordPtrPushWord.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

@@ -3,16 +3,11 @@ unit kwCompiledRules;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledRules.pas"
+// Модуль: "kwCompiledRules.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::ExtendedPrimitives::TkwCompiledRules
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::ExtendedPrimitives::TkwCompiledRules
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -38,7 +33,6 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwDEFAULT,
   tfwClassRef
   ;
 {$IfEnd} //not NoScripts
@@ -92,6 +86,10 @@ initialization
 //#UC START# *53DF7BE20042*
  TkwCompiledRules.RegisterClass;
 //#UC END# *53DF7BE20042*
+{$IfEnd} //not NoScripts
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledRules
+ TkwCompiledRules.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

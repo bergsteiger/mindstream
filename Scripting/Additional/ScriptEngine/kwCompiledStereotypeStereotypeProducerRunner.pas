@@ -3,16 +3,11 @@ unit kwCompiledStereotypeStereotypeProducerRunner;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledStereotypeStereotypeProducerRunner.pas"
+// Модуль: "kwCompiledStereotypeStereotypeProducerRunner.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Stereotyping::TkwCompiledStereotypeStereotypeProducerRunner
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Stereotyping::TkwCompiledStereotypeStereotypeProducerRunner
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -21,17 +16,14 @@ interface
 {$If not defined(NoScripts)}
 uses
   tfwScriptingInterfaces,
-  l3Interfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwStereotypeProducerPrimPrim,
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwStereotypeProducerPrimPrim.imp.pas}
- TkwCompiledStereotypeStereotypeProducerRunner = class(_kwStereotypeProducerPrimPrim_)
+ TkwCompiledStereotypeStereotypeProducerRunner = class(TkwStereotypeProducerPrimPrim)
  private
  // private fields
    f_WordProducerForCompiledClass : TtfwWord;
@@ -57,31 +49,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   kwImmedCompiledStereotypedWord,
-  kwStandardProcedureCloseBracket,
-  kwCompiledStereotypedWord,
-  kwCompiledWord,
-  kwCompiledVar,
-  SysUtils,
-  l3String,
-  l3Parser,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwStandardProcedureCloseBracket
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCompiledStereotypeStereotypeProducerRunner;
-
-{$Include ..\ScriptEngine\kwStereotypeProducerPrimPrim.imp.pas}
 
 // start class TkwCompiledStereotypeStereotypeProducerRunner
 
@@ -164,7 +136,8 @@ end;//TkwCompiledStereotypeStereotypeProducerRunner.GetWordProducerForCompiledCl
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwStereotypeProducerPrimPrim.imp.pas}
+// Регистрация TkwCompiledStereotypeStereotypeProducerRunner
+ TkwCompiledStereotypeStereotypeProducerRunner.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

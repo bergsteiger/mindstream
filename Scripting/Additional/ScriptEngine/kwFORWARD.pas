@@ -3,18 +3,13 @@ unit kwFORWARD;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwFORWARD.pas"
+// Модуль: "kwFORWARD.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Compilation::FORWARD
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Compilation::FORWARD
 //
 // Предварительное определение слова
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,18 +17,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  tfwNewWord,
   tfwScriptingInterfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwNewWord.imp.pas}
- TkwFORWARD = {final} class(_tfwNewWord_)
+ TkwFORWARD = {final scriptword} class(TtfwNewWord)
   {* Предварительное определение слова }
  protected
  // realized methods
@@ -41,15 +33,13 @@ type
      aSilent: Boolean): RtfwWord; override;
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    function AfterWordMaxCount(const aCtx: TtfwContext): Cardinal; override;
    function AcceptsKeyWordAfter: Boolean; override;
    procedure FinishDefinitionOfNewWord(aWordToFinish: TtfwKeyWord;
      aCompiled: TkwCompiledWordPrim;
      const aContext: TtfwContext); override;
      {* Завершает определение вновь созданного слова }
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwFORWARD
 {$IfEnd} //not NoScripts
 
@@ -57,28 +47,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  SysUtils,
-  l3String,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwFORWARD;
-
-{$Include ..\ScriptEngine\tfwNewWord.imp.pas}
 
 // start class TkwFORWARD
 
@@ -142,7 +115,8 @@ end;//TkwFORWARD.FinishDefinitionOfNewWord
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwNewWord.imp.pas}
+// Регистрация FORWARD
+ TkwFORWARD.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

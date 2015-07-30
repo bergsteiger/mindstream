@@ -2,10 +2,10 @@ unit kwPopEditorGetModified;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorGetModified.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorGetModified.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_GetModified
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_GetModified
 //
 // *Формат:* anEditorControl pop:editor:GetModified
 // *Описание:* Помещает в стек флаг измененности документа.
@@ -15,12 +15,7 @@ unit kwPopEditorGetModified;
 // {code}
 // В стеке будет значение булевского типа. Если документ изменен, то будет true, если нет - false.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -28,18 +23,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorGetModified = {final} class(_kwEditorFromStackWord_)
+ TkwPopEditorGetModified = {final scriptword} class(TkwEditorFromStackWord)
   {* *Формат:* anEditorControl pop:editor:GetModified
 *Описание:* Помещает в стек флаг измененности документа.
 *Пример:*
@@ -51,8 +43,8 @@ focused:control:push editor:GetModified
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorGetModified
 {$IfEnd} //not NoScripts
@@ -60,20 +52,6 @@ focused:control:push editor:GetModified
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorGetModified;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 // start class TkwPopEditorGetModified
 
@@ -97,7 +75,8 @@ end;//TkwPopEditorGetModified.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_GetModified
+ TkwPopEditorGetModified.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

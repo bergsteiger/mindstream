@@ -2,17 +2,12 @@ unit tfwLambdedArrayView;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwLambdedArrayView.pas"
+// Библиотека "ScriptEngine$Axiomatics"
+// Модуль: "tfwLambdedArrayView.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::ArrayProcessing::TtfwLambdedArrayView
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Axiomatics::ArrayProcessing::TtfwLambdedArrayView
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -119,7 +114,7 @@ constructor TtfwTwoLambdas.Create(aLambda: TtfwWord;
 //#UC END# *52EA8B2403DD_52EA8AD102B0_var*
 begin
 //#UC START# *52EA8B2403DD_52EA8AD102B0_impl*
- inherited Create(aWord);
+ inherited Create(aWord, nil);
  aLambda.SetRefTo(f_Lambda);
 //#UC END# *52EA8B2403DD_52EA8AD102B0_impl*
 end;//TtfwTwoLambdas.Create
@@ -189,6 +184,12 @@ begin
 //#UC END# *52E666F6036E_52E666BC0270_impl*
 end;//TtfwLambdedArrayView.DoForEachBack
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TtfwTwoLambdas
+ TtfwTwoLambdas.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

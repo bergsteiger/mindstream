@@ -4,22 +4,18 @@
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwIncludeLike.imp.pas"
+// Модуль: "tfwIncludeLike.imp.pas"
 // Начат: 06.05.2011 11:22
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::IncludesAndUses::tfwIncludeLike
+// Generated from UML model, root element: Impurity::Class Shared Delphi Low Level::ScriptEngine::IncludesAndUses::tfwIncludeLike
 //
 // Поддержка Include-совместимых слов.
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 {$Define tfwIncludeLike_imp}
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwCompilingWord.imp.pas}
- _tfwIncludeLike_ = {abstract mixin} class(_tfwCompilingWord_)
+ _tfwIncludeLike_ = {abstract mixin} class(TtfwCompilingWord)
   {* Поддержка Include-совместимых слов. }
  protected
  // overridden protected methods
@@ -38,17 +34,15 @@
    function MakeIncluded(const aFileName: AnsiString;
      const aContext: TtfwContext): TkwIncluded; virtual;
  end;//_tfwIncludeLike_
+{$Else}
+
+ _tfwIncludeLike_ = TtfwCompilingWord;
+
 {$IfEnd} //not NoScripts
 
 {$Else tfwIncludeLike_imp}
 
-{$IfNDef tfwIncludeLike_imp_impl}
-{$Define tfwIncludeLike_imp_impl}
-
 {$If not defined(NoScripts)}
-
-
-{$Include ..\ScriptEngine\tfwCompilingWord.imp.pas}
 
 // start class _tfwIncludeLike_
 
@@ -134,10 +128,4 @@ end;//_tfwIncludeLike_.DoStringToken
 
 {$IfEnd} //not NoScripts
 
-{$Else  tfwIncludeLike_imp_impl}
-{$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwCompilingWord.imp.pas}
-{$IfEnd} //not NoScripts
-
-{$EndIf tfwIncludeLike_imp_impl}
 {$EndIf tfwIncludeLike_imp}

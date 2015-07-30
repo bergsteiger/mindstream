@@ -2,17 +2,12 @@ unit tfwClassRef;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwClassRef.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "tfwClassRef.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::PrimitiveWords::TtfwClassRef
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::PrimitiveWords::TtfwClassRef
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,20 +15,24 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
+  tfwRegisterableWordPrim,
+  TypInfo,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- TtfwClassRef = class(TtfwRegisterableWord)
+ TtfwClassRef = class(TtfwRegisterableWordPrim)
  private
  // private fields
    f_Class : TClass;
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
+ public
+ // overridden public methods
+   function GetResultTypeInfo(const aCtx: TtfwContext): PTypeInfo; override;
  public
  // public methods
    constructor Create(aClass: TClass); reintroduce;
@@ -49,7 +48,6 @@ uses
   SysUtils,
   l3Except,
   l3Base,
-  TypInfo,
   StrUtils,
   tfwEnumRegistrator
   ;
@@ -170,6 +168,21 @@ begin
 //#UC END# *4DAEEDE10285_508528D10384_impl*
 end;//TtfwClassRef.DoDoIt
 
+function TtfwClassRef.GetResultTypeInfo(const aCtx: TtfwContext): PTypeInfo;
+//#UC START# *551544E2001A_508528D10384_var*
+//#UC END# *551544E2001A_508528D10384_var*
+begin
+//#UC START# *551544E2001A_508528D10384_impl*
+ Result := @tfw_tiClassRef;
+//#UC END# *551544E2001A_508528D10384_impl*
+end;//TtfwClassRef.GetResultTypeInfo
+
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TtfwClassRef
+ TtfwClassRef.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

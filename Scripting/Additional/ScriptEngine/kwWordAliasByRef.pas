@@ -3,16 +3,11 @@ unit kwWordAliasByRef;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwWordAliasByRef.pas"
+// Модуль: "kwWordAliasByRef.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::WordAliasByRef
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::WordAliasByRef
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,28 +15,23 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  tfwConstLike,
   tfwScriptingInterfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwConstLike.imp.pas}
- TkwWordAliasByRef = {final} class(_tfwConstLike_)
+ TkwWordAliasByRef = {final scriptword} class(TtfwConstLike)
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    procedure FinishDefinitionOfNewWord(aWordToFinish: TtfwKeyWord;
      aCompiled: TkwCompiledWordPrim;
      const aContext: TtfwContext); override;
      {* Завершает определение вновь созданного слова }
    function SupressNextImmediate: TtfwSuppressNextImmediate; override;
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwWordAliasByRef
 {$IfEnd} //not NoScripts
 
@@ -49,29 +39,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwRuntimeWordWithCodeExecution,
-  SysUtils,
-  l3String,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwWordAliasByRef;
-
-{$Include ..\ScriptEngine\tfwConstLike.imp.pas}
 
 // start class TkwWordAliasByRef
 
@@ -138,7 +110,8 @@ end;//TkwWordAliasByRef.SupressNextImmediate
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwConstLike.imp.pas}
+// Регистрация WordAliasByRef
+ TkwWordAliasByRef.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

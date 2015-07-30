@@ -2,13 +2,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCheckWithEtalonCommon.imp.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwCheckWithEtalonCommon.imp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::kwCheckWithEtalonCommon
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: Impurity::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::kwCheckWithEtalonCommon
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -30,6 +27,12 @@
    procedure ExecuteWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow);
  end;//_kwCheckWithEtalonCommon_
+{$Else}
+
+ _DrawOutputSupport_Parent_ = _kwCheckWithEtalonCommon_Parent_;
+ {$Include ..\ScriptEngine\DrawOutputSupport.imp.pas}
+ _kwCheckWithEtalonCommon_ = _DrawOutputSupport_;
+
 {$IfEnd} //not NoScripts
 
 {$Else kwCheckWithEtalonCommon_imp}

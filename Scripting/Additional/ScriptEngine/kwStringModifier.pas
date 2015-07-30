@@ -4,19 +4,14 @@ unit kwStringModifier;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwStringModifier.pas"
+// Модуль: "kwStringModifier.pas"
 // Начат: 11.05.2011 21:51
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Modifiers::StringModifier
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Modifiers::StringModifier
 //
 // Строковый модификатор.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -24,21 +19,20 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  kwModifier,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwModifier.imp.pas}
- TkwStringModifier = class(_kwModifier_)
+ TkwStringModifier = {scriptword} class(TkwModifier)
   {* Строковый модификатор. }
  protected
  // realized methods
    function pm_GetModifier: TtfwWordModifier; override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwStringModifier
 {$IfEnd} //not NoScripts
@@ -46,17 +40,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwStringModifier;
-
-{$Include ..\ScriptEngine\kwModifier.imp.pas}
 
 // start class TkwStringModifier
 
@@ -79,7 +62,8 @@ end;//TkwStringModifier.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwModifier.imp.pas}
+// Регистрация StringModifier
+ TkwStringModifier.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

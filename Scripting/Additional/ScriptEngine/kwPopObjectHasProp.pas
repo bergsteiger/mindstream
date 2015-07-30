@@ -2,17 +2,12 @@ unit kwPopObjectHasProp;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopObjectHasProp.pas"
+// Библиотека "ScriptEngine$RTLandVCL"
+// Модуль: "kwPopObjectHasProp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::RTTI::pop_object_HasProp
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::RTTI::pop_object_HasProp
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,21 +15,21 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  kwObjectFromStackWord,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
  {$Include ..\ScriptEngine\kwRTTIWord.imp.pas}
- TkwPopObjectHasProp = {final} class(_kwRTTIWord_)
+ TkwPopObjectHasProp = {final scriptword} class(_kwRTTIWord_)
  protected
  // realized methods
    procedure DoObject(anObject: TObject;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopObjectHasProp
 {$IfEnd} //not NoScripts
@@ -43,19 +38,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  TypInfo,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  Controls,
-  afwFacade,
-  Forms
+  TypInfo
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopObjectHasProp;
 
 {$Include ..\ScriptEngine\kwRTTIWord.imp.pas}
 
@@ -82,7 +69,8 @@ end;//TkwPopObjectHasProp.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwRTTIWord.imp.pas}
+// Регистрация pop_object_HasProp
+ TkwPopObjectHasProp.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

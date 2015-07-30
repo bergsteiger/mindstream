@@ -2,10 +2,10 @@ unit kwSubdescriptorGetBitmapIndex;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwSubdescriptorGetBitmapIndex.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwSubdescriptorGetBitmapIndex.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SubPanelWords::subdescriptor_GetBitmapIndex
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::SubPanelWords::subdescriptor_GetBitmapIndex
 //
 // Помещает в стек иконки для отображения обычной метки
 // Формат:
@@ -13,12 +13,7 @@ unit kwSubdescriptorGetBitmapIndex;
 // aSubDescrObj subdescriptor:GetBitmapIndex
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -26,16 +21,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwSubDescriptorFromStackWord,
   tfwScriptingInterfaces,
-  evSubPn,
-  tfwRegisterableWord
+  evSubPn
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwSubDescriptorFromStackWord.imp.pas}
- TkwSubdescriptorGetBitmapIndex = {final} class(_kwSubDescriptorFromStackWord_)
+ TkwSubdescriptorGetBitmapIndex = {final scriptword} class(TkwSubDescriptorFromStackWord)
   {* Помещает в стек иконки для отображения обычной метки
 Формат:
 [code]
@@ -45,8 +39,8 @@ aSubDescrObj subdescriptor:GetBitmapIndex
  // realized methods
    procedure DoWithSubDescriptor(aControl: TevSubDescriptor;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwSubdescriptorGetBitmapIndex
 {$IfEnd} //not NoScripts
@@ -54,21 +48,6 @@ aSubDescrObj subdescriptor:GetBitmapIndex
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  Controls,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwSubdescriptorGetBitmapIndex;
-
-{$Include ..\ScriptEngine\kwSubDescriptorFromStackWord.imp.pas}
 
 // start class TkwSubdescriptorGetBitmapIndex
 
@@ -92,7 +71,8 @@ end;//TkwSubdescriptorGetBitmapIndex.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwSubDescriptorFromStackWord.imp.pas}
+// Регистрация subdescriptor_GetBitmapIndex
+ TkwSubdescriptorGetBitmapIndex.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

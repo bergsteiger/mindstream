@@ -3,16 +3,11 @@ unit kwMainCodeController;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwMainCodeController.pas"
+// Модуль: "kwMainCodeController.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::ScriptsCompilingAndProcessing::TkwMainCodeController
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::ScriptsCompilingAndProcessing::TkwMainCodeController
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -96,6 +91,12 @@ begin
 //#UC END# *4DB6CE2302C9_53DA257D011C_impl*
 end;//TkwMainCodeController.AfterCompile
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwMainCodeController
+ TkwMainCodeController.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

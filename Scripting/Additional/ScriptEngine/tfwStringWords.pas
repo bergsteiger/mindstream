@@ -4,17 +4,12 @@ unit tfwStringWords;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwStringWords.pas"
+// Модуль: "tfwStringWords.pas"
 // Начат: 01.12.2011 18:59
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeywordsPack::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::tfwStringWords
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeywordsPack::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::tfwStringWords
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,6 +17,7 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwStrWord,
   kwStringChar
   ;
 
@@ -31,11 +27,9 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  SysUtils,
   l3String,
+  SysUtils,
   l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
   kwStringReplace,
   kwStringReplaceFirst,
   kwTextReplace,

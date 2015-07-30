@@ -4,19 +4,14 @@ unit kwWinExec;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwWinExec.pas"
+// Модуль: "kwWinExec.pas"
 // Начат: 20.10.2011 18:55
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::WinExec
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::SysUtils::WinExec
 //
 // Выполняет команду командной строки Windows
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -24,23 +19,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwStrWord,
   l3Interfaces,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwStrWord.imp.pas}
- TkwWinExec = class(_tfwStrWord_)
+ TkwWinExec = {scriptword} class(TtfwStrWord)
   {* Выполняет команду командной строки Windows }
  protected
  // realized methods
    procedure DoString(const aCtx: TtfwContext;
      const aStr: Il3CString); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwWinExec
 {$IfEnd} //not NoScripts
@@ -50,19 +44,13 @@ implementation
 {$If not defined(NoScripts)}
 uses
   Windows,
-  SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils,
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwWinExec;
-
-{$Include ..\ScriptEngine\tfwStrWord.imp.pas}
 
 // start class TkwWinExec
 
@@ -91,7 +79,8 @@ end;//TkwWinExec.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwStrWord.imp.pas}
+// Регистрация WinExec
+ TkwWinExec.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

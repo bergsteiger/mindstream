@@ -3,16 +3,11 @@ unit kwMembersIterator;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwMembersIterator.pas"
+// Модуль: "kwMembersIterator.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::MembersWorking::MembersWorkingPack::MembersIterator
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::MembersWorking::MembersWorkingPack::MembersIterator
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -27,13 +22,12 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwMembersIterator = {final} class(_tfwAutoregisteringWord_)
+ TkwMembersIterator = {final scriptword} class(TtfwRegisterableWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwMembersIterator
 {$IfEnd} //not NoScripts
@@ -43,17 +37,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   tfwMembersIterator,
-  kwForwardDeclarationHolder,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwForwardDeclarationHolder
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwMembersIterator;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwMembersIterator
 
@@ -85,7 +73,8 @@ end;//TkwMembersIterator.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация MembersIterator
+ TkwMembersIterator.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

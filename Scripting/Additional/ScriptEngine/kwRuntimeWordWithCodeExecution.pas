@@ -2,17 +2,12 @@ unit kwRuntimeWordWithCodeExecution;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwRuntimeWordWithCodeExecution.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "kwRuntimeWordWithCodeExecution.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwRuntimeWordWithCodeExecution
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::CompiledWords::TkwRuntimeWordWithCodeExecution
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -53,6 +48,12 @@ begin
 //#UC END# *4DAEEDE10285_52D69DF30179_impl*
 end;//TkwRuntimeWordWithCodeExecution.DoDoIt
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwRuntimeWordWithCodeExecution
+ TkwRuntimeWordWithCodeExecution.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

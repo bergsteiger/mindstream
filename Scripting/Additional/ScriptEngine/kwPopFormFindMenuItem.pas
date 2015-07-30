@@ -2,17 +2,12 @@ unit kwPopFormFindMenuItem;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopFormFindMenuItem.pas"
+// Библиотека "ScriptEngine$RTLandVCL"
+// Модуль: "kwPopFormFindMenuItem.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::MenuWords::pop_form_FindMenuItem
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::FormsProcessing::pop_form_FindMenuItem
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,24 +15,21 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwFormFromStackWord,
   Forms,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
- TkwPopFormFindMenuItem = {final} class(_kwFormFromStackWord_)
+ TkwPopFormFindMenuItem = {final scriptword} class(TkwFormFromStackWord)
  protected
  // realized methods
    procedure DoForm(aForm: TForm;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopFormFindMenuItem
 {$IfEnd} //not NoScripts
@@ -47,18 +39,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   Menus,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade
+  Classes
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopFormFindMenuItem;
-
-{$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
 
 // start class TkwPopFormFindMenuItem
 
@@ -144,7 +129,8 @@ end;//TkwPopFormFindMenuItem.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
+// Регистрация pop_form_FindMenuItem
+ TkwPopFormFindMenuItem.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

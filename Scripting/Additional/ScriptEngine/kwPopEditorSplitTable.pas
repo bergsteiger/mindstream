@@ -2,19 +2,14 @@ unit kwPopEditorSplitTable;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorSplitTable.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorSplitTable.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_SplitTable
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_SplitTable
 //
 // editor:SplitTable
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,26 +17,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorWithToolsFromStackWord,
   evCustomEditor,
-  tfwScriptingInterfaces,
-  evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
- TkwPopEditorSplitTable = class(_kwEditorWithToolsFromStackWord_)
+ TkwPopEditorSplitTable = {scriptword} class(TkwEditorWithToolsFromStackWord)
   {* editor:SplitTable }
  protected
  // realized methods
    procedure DoEditorWithTools(const aCtx: TtfwContext;
      anEditor: TevCustomEditor); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorSplitTable
 {$IfEnd} //not NoScripts
@@ -50,20 +41,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  evEditorInterfaces,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  evEditorInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorSplitTable;
-
-{$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
 
 // start class TkwPopEditorSplitTable
 
@@ -93,7 +75,8 @@ end;//TkwPopEditorSplitTable.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
+// Регистрация pop_editor_SplitTable
+ TkwPopEditorSplitTable.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

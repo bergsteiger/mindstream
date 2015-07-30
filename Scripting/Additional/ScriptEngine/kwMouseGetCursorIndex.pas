@@ -4,17 +4,12 @@ unit kwMouseGetCursorIndex;
 //
 // Библиотека "ScriptEngine"
 // Автор: Костицын М.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwMouseGetCursorIndex.pas"
+// Модуль: "kwMouseGetCursorIndex.pas"
 // Начат: 16.12.2011
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::MouseInput::mouse_GetCursorIndex
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::MouseInput::mouse_GetCursorIndex
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,13 +24,12 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwMouseGetCursorIndex = class(_tfwAutoregisteringWord_)
+ TkwMouseGetCursorIndex = {scriptword} class(TtfwRegisterableWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwMouseGetCursorIndex
 {$IfEnd} //not NoScripts
@@ -47,17 +41,11 @@ uses
   Messages,
   Windows,
   Forms,
-  Controls,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  Controls
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwMouseGetCursorIndex;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwMouseGetCursorIndex
 
@@ -99,7 +87,8 @@ end;//TkwMouseGetCursorIndex.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация mouse_GetCursorIndex
+ TkwMouseGetCursorIndex.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

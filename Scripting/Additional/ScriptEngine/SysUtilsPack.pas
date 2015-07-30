@@ -3,16 +3,11 @@ unit SysUtilsPack;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/SysUtilsPack.pas"
+// Модуль: "SysUtilsPack.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeywordsPack::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::SysUtilsPack
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeywordsPack::Class Shared Delphi Low Level::ScriptEngine::SysUtils::SysUtilsPack
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -43,14 +38,11 @@ uses
   kwGetTickCount,
   kwShiftTime,
   kwShiftDate,
-  kwCFHTML,
-  kwCFXML,
   kwClipboardGetFormattedText,
   kwSysutilsFileExists,
   kwSysutilsDirectoryExists,
   kwRGB2String,
   kwClipboardSetText,
-  kwCFEVEREST,
   kwRandom,
   kwRandomize,
   kwSetRandSeed,
@@ -58,18 +50,12 @@ uses
   kwStopTimer,
   kwStopTimerEx,
   kwApplicationActionIdle,
-  kwApplicationCancelHint,
-  kwApplicationIsHintVisible,
-  kwApplicationGetLastHint,
   kwComputerName,
   kwEtalonNeedsComputerName,
   kwTimeToLog,
   kwIsUnder64,
   kwOSName,
   kwIsXE,
-  kwCFRTF,
-  kwEvdBin2EvdTxt,
-  kwCFEVERESTBIN,
   kwApplicationExeName,
   kwSetAppPath2CurrentDir
   ;

@@ -3,16 +3,11 @@ unit kwFUNCTION;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwFUNCTION.pas"
+// Модуль: "kwFUNCTION.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::WordsDefinition::FUNCTION
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::WordsDefinition::FUNCTION
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,24 +15,19 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  tfwStandardProcedure,
   tfwScriptingInterfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
- TkwFUNCTION = {final} class(_tfwStandardProcedure_)
+ TkwFUNCTION = {final scriptword} class(TtfwStandardProcedure)
  protected
  // overridden protected methods
-   function CompiledWordClass(const aCtx: TtfwContext): RkwCompiledWordPrim; override;
- public
- // overridden public methods
    class function GetWordNameForRegister: AnsiString; override;
+   function CompiledWordClass(const aCtx: TtfwContext): RkwCompiledWordPrim; override;
  end;//TkwFUNCTION
 {$IfEnd} //not NoScripts
 
@@ -45,31 +35,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledFunction,
-  kwStandardProcedureCloseBracket,
-  kwCompiledProcedure,
-  SysUtils,
-  l3String,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwCompiledFunction
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwFUNCTION;
-
-{$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
 
 // start class TkwFUNCTION
 
@@ -92,7 +62,8 @@ end;//TkwFUNCTION.CompiledWordClass
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
+// Регистрация FUNCTION
+ TkwFUNCTION.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

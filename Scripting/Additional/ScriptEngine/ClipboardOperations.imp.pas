@@ -2,15 +2,12 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/ClipboardOperations.imp.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "ClipboardOperations.imp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::MixIns::ClipboardOperations
+// Generated from UML model, root element: Impurity::Class Shared Delphi::ScriptEngine$Everest::MixIns::ClipboardOperations
 //
 // Примесь для поддержки работы с буфером обмена (с его очисткой после работы).
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -29,6 +26,10 @@
    procedure CopyAndPaste2DocumentBottom(aText: TevCustomEditorWindow);
      {* Скопировать выделенное и поместить в конец документа. }
  end;//_ClipboardOperations_
+{$Else}
+
+ _ClipboardOperations_ = _ClipboardOperations_Parent_;
+
 {$IfEnd} //not NoScripts
 
 {$Else ClipboardOperations_imp}

@@ -2,10 +2,10 @@ unit kwPopEditorSplitCell;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorSplitCell.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorSplitCell.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_SplitCell
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_SplitCell
 //
 // *Формат:* aOrientation anEditorControl pop:editor:SplitCell
 // *Описание:* Разделяет ячейку таблицы. Курсор должен уже находиться в ячейке. Параметры
@@ -16,12 +16,7 @@ unit kwPopEditorSplitCell;
 // {code}
 // *Результат:* Разбивает ячейку, в которой установлен курсор, по верикали.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,19 +24,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorWithToolsFromStackWord,
   evCustomEditor,
-  tfwScriptingInterfaces,
-  evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
- TkwPopEditorSplitCell = {final} class(_kwEditorWithToolsFromStackWord_)
+ TkwPopEditorSplitCell = {final scriptword} class(TkwEditorWithToolsFromStackWord)
   {* *Формат:* aOrientation anEditorControl pop:editor:SplitCell
 *Описание:* Разделяет ячейку таблицы. Курсор должен уже находиться в ячейке. Параметры aOrientation - Boolean (True - разбивать по вертикали, False - разбивать по горизонтали).
 *Пример:*
@@ -53,8 +44,8 @@ True focused:control:push pop:editor:SplitCell
  // realized methods
    procedure DoEditorWithTools(const aCtx: TtfwContext;
      anEditor: TevCustomEditor); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorSplitCell
 {$IfEnd} //not NoScripts
@@ -64,20 +55,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   l3Interfaces,
-  evEditorInterfaces,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  evEditorInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorSplitCell;
-
-{$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
 
 // start class TkwPopEditorSplitCell
 
@@ -118,7 +100,8 @@ end;//TkwPopEditorSplitCell.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
+// Регистрация pop_editor_SplitCell
+ TkwPopEditorSplitCell.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

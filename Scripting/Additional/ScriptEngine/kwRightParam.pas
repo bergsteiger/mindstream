@@ -2,17 +2,12 @@ unit kwRightParam;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwRightParam.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "kwRightParam.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwRightParam
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::CompiledWords::TkwRightParam
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -37,12 +32,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwClassRef
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
 
 // start class TkwRightParam
 
@@ -59,9 +48,8 @@ end;//TkwRightParam.IsRightParam
 
 initialization
 {$If not defined(NoScripts)}
-//#UC START# *53E38D8102D0*
+// Регистрация TkwRightParam
  TkwRightParam.RegisterClass;
-//#UC END# *53E38D8102D0*
 {$IfEnd} //not NoScripts
 
 end.

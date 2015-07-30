@@ -3,18 +3,13 @@ unit kwCompiledIF;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledIF.pas"
+// Модуль: "kwCompiledIF.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledIF
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwCompiledIF
 //
 // Внутренняя скомпилированная версия IF.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -63,6 +58,12 @@ begin
 //#UC END# *4DAEEDE10285_4DB6EE250251_impl*
 end;//TkwCompiledIF.DoDoIt
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledIF
+ TkwCompiledIF.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

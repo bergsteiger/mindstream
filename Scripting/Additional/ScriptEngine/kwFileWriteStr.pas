@@ -3,16 +3,11 @@ unit kwFileWriteStr;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwFileWriteStr.pas"
+// Модуль: "kwFileWriteStr.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FileProcessing::file_WriteStr
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::FileProcessing::file_WriteStr
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,21 +15,20 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwFileWord,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwFileWord.imp.pas}
- TkwFileWriteStr = {final} class(_tfwFileWord_)
+ TkwFileWriteStr = {final scriptword} class(TtfwFileWord)
  protected
  // realized methods
    procedure DoFile(const aFile: ItfwFile;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwFileWriteStr
 {$IfEnd} //not NoScripts
@@ -43,17 +37,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  l3String,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3String
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwFileWriteStr;
-
-{$Include ..\ScriptEngine\tfwFileWord.imp.pas}
 
 // start class TkwFileWriteStr
 
@@ -77,7 +65,8 @@ end;//TkwFileWriteStr.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwFileWord.imp.pas}
+// Регистрация file_WriteStr
+ TkwFileWriteStr.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

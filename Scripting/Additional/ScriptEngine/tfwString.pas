@@ -2,21 +2,16 @@ unit tfwString;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Core"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwString.pas"
+// Модуль: "tfwString.pas"
 // Начат: 27.05.2011 20:29
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TtfwString
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::PrimitiveWords::TtfwString
 //
 // Базовый предок для добавления слов в словарь.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -25,6 +20,7 @@ interface
 {$If not defined(NoScripts)}
 uses
   tfwRegisterableWord,
+  TypInfo,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
@@ -36,6 +32,9 @@ type
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
+ public
+ // overridden public methods
+   function GetResultTypeInfo(const aCtx: TtfwContext): PTypeInfo; override;
  protected
  // protected methods
    function GetString: AnsiString; virtual;
@@ -47,7 +46,6 @@ implementation
 {$If not defined(NoScripts)}
 uses
   l3Base,
-  tfwScriptEngine,
   l3Except
   ;
 {$IfEnd} //not NoScripts
@@ -75,6 +73,21 @@ begin
 //#UC END# *4DAEEDE10285_4DDFD1430390_impl*
 end;//TtfwString.DoDoIt
 
+function TtfwString.GetResultTypeInfo(const aCtx: TtfwContext): PTypeInfo;
+//#UC START# *551544E2001A_4DDFD1430390_var*
+//#UC END# *551544E2001A_4DDFD1430390_var*
+begin
+//#UC START# *551544E2001A_4DDFD1430390_impl*
+ Result := @tfw_tiString;
+//#UC END# *551544E2001A_4DDFD1430390_impl*
+end;//TtfwString.GetResultTypeInfo
+
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TtfwString
+ TtfwString.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

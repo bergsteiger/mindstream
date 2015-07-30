@@ -2,12 +2,12 @@ unit kwIn;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Core"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwIn.pas"
+// Модуль: "kwIn.pas"
 // Начат: 11.05.2011 20:14
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwIn
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$Core::CompiledWords::TkwIn
 //
 // {code}
 // : InParameter IN A IN B
@@ -23,12 +23,7 @@ unit kwIn;
 // "Напечатать два значения {(10)} {('Привет')}"
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -36,18 +31,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  tfwVar,
   tfwScriptingInterfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwVar.imp.pas}
- TkwIn = class(_tfwVar_)
+ TkwIn = {scriptword} class(TtfwVar)
   {* [code]
 : InParameter IN A IN B
  A . B .
@@ -63,13 +55,11 @@ type
 [code] }
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    procedure AfterCompile(const aPrevContext: TtfwContext;
      var theNewContext: TtfwContext;
      aCompiled: TkwCompiledWordPrim); override;
    function CompiledWordClass(const aCtx: TtfwContext): RkwCompiledWordPrim; override;
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwIn
 {$IfEnd} //not NoScripts
 
@@ -80,39 +70,18 @@ uses
   SysUtils,
   kwLeftParam,
   kwRightParam,
-  kwLeftWordRefParam,
-  kwCompiledVar,
-  l3String,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwLeftWordRefParam
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 
-type _Instance_R_ = TkwIn;
-
-{$Include ..\ScriptEngine\tfwVar.imp.pas}
-
 // start class TkwIn
 
 class function TkwIn.GetWordNameForRegister: AnsiString;
-//#UC START# *4DB0614603C8_4DCAB5CD03C9_var*
-//#UC END# *4DB0614603C8_4DCAB5CD03C9_var*
+ {-}
 begin
-//#UC START# *4DB0614603C8_4DCAB5CD03C9_impl*
  Result := 'IN';
-//#UC END# *4DB0614603C8_4DCAB5CD03C9_impl*
 end;//TkwIn.GetWordNameForRegister
 
 procedure TkwIn.AfterCompile(const aPrevContext: TtfwContext;
@@ -146,7 +115,8 @@ end;//TkwIn.CompiledWordClass
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwVar.imp.pas}
+// Регистрация TkwIn
+ TkwIn.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

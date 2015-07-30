@@ -3,9 +3,9 @@ unit kwProcessFilesWithMask;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwProcessFilesWithMask.pas"
+// Модуль: "kwProcessFilesWithMask.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FileProcessing::ProcessFilesWithMask
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::FileProcessing::ProcessFilesWithMask
 //
 // ProcessFilesWithMask - перебирает файлы по маске в заданной директории и вызывает для каждого
 // найденного функцию.
@@ -27,12 +27,7 @@ unit kwProcessFilesWithMask;
 // ни ссылки на файлы, ни имена дисков в поиск не попадают. Поиск во вложенных директориях не
 // прозводится. Имя файла передается с полным путем.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -47,8 +42,7 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwProcessFilesWithMask = {final} class(_tfwAutoregisteringWord_)
+ TkwProcessFilesWithMask = {final scriptword} class(TtfwRegisterableWord)
   {* ProcessFilesWithMask - перебирает файлы по маске в заданной директории и вызывает для каждого найденного функцию.
 *Формат:*
 aProc aFileMask aDirName ProcessFilesWithMask
@@ -68,8 +62,8 @@ aProc aFileMask aDirName ProcessFilesWithMask
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwProcessFilesWithMask
 {$IfEnd} //not NoScripts
@@ -79,17 +73,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   SysUtils,
-  l3FileUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3FileUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwProcessFilesWithMask;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwProcessFilesWithMask
 
@@ -122,7 +110,7 @@ begin
    l_V := aCtx.rEngine.Pop;
    l_Word := TtfwWord(l_V.AsObject);
    try
-    while l_FindResult = 0 do
+    while (l_FindResult = 0) do
     begin
      if (l_SearchRec.Attr and (faDirectory or faVolumeID or faSymLink)) = 0 then
      begin
@@ -132,8 +120,8 @@ begin
      l_FindResult := FindNext(l_SearchRec);
     end; // while l_FindResult = 0 do
    finally
-    FindClose(l_SearchRec);
-   end;
+    SysUtils.FindClose(l_SearchRec);
+   end;//try..finally
   end // if aCtx.rEngine.IsTopString then
   else
    Assert(False, 'Не задана маска для поиска!');
@@ -153,7 +141,8 @@ end;//TkwProcessFilesWithMask.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация ProcessFilesWithMask
+ TkwProcessFilesWithMask.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

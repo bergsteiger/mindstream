@@ -2,19 +2,14 @@ unit kwPrintDataSaver;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPrintDataSaver.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPrintDataSaver.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::MixIns::TkwPrintDataSaver
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi::ScriptEngine$Everest::MixIns::TkwPrintDataSaver
 //
 // Парень умеющий сохранять результаты печати в файл.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -87,6 +82,8 @@ type
  // public methods
    procedure StartWaitingToPrint(const aCtx: TtfwContext);
    procedure EndWatingToPrint;
+   class function Exists: Boolean;
+     {* Проверяет создан экземпляр синглетона или нет }
  public
  // singleton factory method
    class function Instance: TkwPrintDataSaver;
@@ -214,6 +211,12 @@ begin
   f_Context.rCaller.Check(False, 'Непарность вызовов начала и окончания печати!');
 //#UC END# *4F72D927016C_4F72AE860228_impl*
 end;//TkwPrintDataSaver.EndWatingToPrint
+
+class function TkwPrintDataSaver.Exists: Boolean;
+ {-}
+begin
+ Result := g_TkwPrintDataSaver <> nil;
+end;//TkwPrintDataSaver.Exists
 
 procedure TkwPrintDataSaver.SetCurrentPage(aValue: Integer);
 //#UC START# *473D86B20150_4F72AE860228_var*

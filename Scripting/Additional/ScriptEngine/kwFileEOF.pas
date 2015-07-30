@@ -3,16 +3,11 @@ unit kwFileEOF;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwFileEOF.pas"
+// Модуль: "kwFileEOF.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FileProcessing::file_EOF
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::FileProcessing::file_EOF
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,21 +15,20 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwFileWord,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwFileWord.imp.pas}
- TkwFileEOF = {final} class(_tfwFileWord_)
+ TkwFileEOF = {final scriptword} class(TtfwFileWord)
  protected
  // realized methods
    procedure DoFile(const aFile: ItfwFile;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwFileEOF
 {$IfEnd} //not NoScripts
@@ -42,17 +36,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwFileEOF;
-
-{$Include ..\ScriptEngine\tfwFileWord.imp.pas}
 
 // start class TkwFileEOF
 
@@ -76,7 +59,8 @@ end;//TkwFileEOF.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwFileWord.imp.pas}
+// Регистрация file_EOF
+ TkwFileEOF.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

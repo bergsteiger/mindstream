@@ -3,16 +3,11 @@ unit kwSetLocalDateTime;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwSetLocalDateTime.pas"
+// Модуль: "kwSetLocalDateTime.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::SetLocalDateTime
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::SysUtils::SetLocalDateTime
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,20 +15,19 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
+  tfwSysUtilsWord,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
- TkwSetLocalDateTime = {final} class(_tfwSysUtilsWord_)
+ TkwSetLocalDateTime = {final scriptword} class(TtfwSysUtilsWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwSetLocalDateTime
 {$IfEnd} //not NoScripts
@@ -46,17 +40,11 @@ uses
   DateUtils,
   SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwSetLocalDateTime;
-
-{$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
 
 // start class TkwSetLocalDateTime
 
@@ -92,7 +80,8 @@ end;//TkwSetLocalDateTime.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
+// Регистрация SetLocalDateTime
+ TkwSetLocalDateTime.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

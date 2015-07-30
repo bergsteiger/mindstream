@@ -3,19 +3,14 @@ unit kwRULES;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwRULES.pas"
+// Модуль: "kwRULES.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::ExtendedPrimitives::ExtendedPrimitivesPack::RULES
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::ExtendedPrimitives::ExtendedPrimitivesPack::RULES
 //
 // Аналог CASE и трансформаторов в MDP. Если условие выполняется, то выполняется следующий за ним
 // оператор и осуществляется выход
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -23,18 +18,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwBeginLikeWord,
   tfwScriptingInterfaces,
-  l3Interfaces,
-  l3ParserInterfaces,
-  kwCompiledWordPrim,
-  tfwRegisterableWord
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwBeginLikeWord.imp.pas}
- TkwRULES = {final} class(_tfwBeginLikeWord_)
+ TkwRULES = {final scriptword} class(TtfwBeginLikeWord)
   {* Аналог CASE и трансформаторов в MDP. Если условие выполняется, то выполняется следующий за ним оператор и осуществляется выход }
  protected
  // realized methods
@@ -42,10 +34,8 @@ type
      aSilent: Boolean): RtfwWord; override;
  protected
  // overridden protected methods
-   function CompiledWordClass(const aCtx: TtfwContext): RkwCompiledWordPrim; override;
- public
- // overridden public methods
    class function GetWordNameForRegister: AnsiString; override;
+   function CompiledWordClass(const aCtx: TtfwContext): RkwCompiledWordPrim; override;
  end;//TkwRULES
 {$IfEnd} //not NoScripts
 
@@ -54,30 +44,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   kwCompiledRules,
-  kwStandardProcedureCloseBracket,
-  kwBeginLikeCompiledCode,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  SysUtils,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwStandardProcedureCloseBracket
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwRULES;
-
-{$Include ..\ScriptEngine\tfwBeginLikeWord.imp.pas}
 
 // start class TkwRULES
 
@@ -110,7 +81,8 @@ end;//TkwRULES.CompiledWordClass
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwBeginLikeWord.imp.pas}
+// Регистрация RULES
+ TkwRULES.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

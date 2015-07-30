@@ -2,17 +2,12 @@ unit ImageEnPack;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/ImageEnPack.pas"
+// Библиотека "ScriptEngine$ImageEn"
+// Модуль: "ImageEnPack.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeywordsPack::Class>> Shared Delphi Scripting::ScriptEngine::ImageEnView::ImageEnPack
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeywordsPack::Class Shared Delphi::ScriptEngine$ImageEn::ImageEnView::ImageEnPack
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -25,7 +20,8 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwImageEnViewerSaveBitmap
+  kwImageEnViewerSaveBitmap,
+  ImageEnViewRegistrator
   ;
 
 {$IfEnd} //not NoScripts

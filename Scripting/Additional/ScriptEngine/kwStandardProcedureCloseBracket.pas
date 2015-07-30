@@ -3,16 +3,11 @@ unit kwStandardProcedureCloseBracket;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwStandardProcedureCloseBracket.pas"
+// Модуль: "kwStandardProcedureCloseBracket.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::StandardProcedureCloseBracket
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::StandardProcedureCloseBracket
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,17 +15,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
-  tfwScriptingInterfaces
+  kwCloseBracket
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwCloseBracket.imp.pas}
- TkwStandardProcedureCloseBracket = {final} class(_kwCloseBracket_)
- public
- // overridden public methods
+ TkwStandardProcedureCloseBracket = {final scriptword} class(TkwCloseBracket)
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwStandardProcedureCloseBracket
 {$IfEnd} //not NoScripts
@@ -38,18 +31,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  l3String,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwStandardProcedureCloseBracket;
-
-{$Include ..\ScriptEngine\kwCloseBracket.imp.pas}
 
 // start class TkwStandardProcedureCloseBracket
 
@@ -63,7 +44,8 @@ end;//TkwStandardProcedureCloseBracket.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwCloseBracket.imp.pas}
+// Регистрация StandardProcedureCloseBracket
+ TkwStandardProcedureCloseBracket.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -3,18 +3,13 @@ unit kwCodeIterator;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCodeIterator.pas"
+// Модуль: "kwCodeIterator.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::MembersWorking::MembersWorkingPack::CodeIterator
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::MembersWorking::MembersWorkingPack::CodeIterator
 //
 // Перебирает слова компилированного кода слова
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,14 +24,13 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwCodeIterator = {final} class(_tfwAutoregisteringWord_)
+ TkwCodeIterator = {final scriptword} class(TtfwRegisterableWord)
   {* Перебирает слова компилированного кода слова }
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwCodeIterator
 {$IfEnd} //not NoScripts
@@ -56,17 +50,11 @@ uses
   kwCompiledWordWorkerWord,
   kwCompiledWordWorkerWordRunner,
   kwCompiledWordWorker,
-  kwCompiledIfElse,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwCompiledIfElse
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCodeIterator;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwCodeIterator
 
@@ -189,7 +177,8 @@ end;//TkwCodeIterator.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация CodeIterator
+ TkwCodeIterator.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

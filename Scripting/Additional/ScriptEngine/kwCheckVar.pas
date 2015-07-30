@@ -3,16 +3,11 @@ unit kwCheckVar;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCheckVar.pas"
+// Модуль: "kwCheckVar.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::MembersWorking::MembersWorkingPack::CheckVar
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::MembersWorking::MembersWorkingPack::CheckVar
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,30 +15,25 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwCheckVarPrim,
   tfwScriptingInterfaces,
   kwCompiledWordWorker,
-  kwCompiledWordPrim,
-  l3Interfaces,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  l3ParserInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwCheckVarPrim.imp.pas}
- TkwCheckVar = {final} class(_kwCheckVarPrim_)
+ TkwCheckVar = {final scriptword} class(TkwCheckVarPrim)
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    procedure UnknownWord(var aContext: TtfwContext); override;
-   function CompiledWorkerClass: RkwCompiledWordWorker; override;
+   function CompiledWorkerClass(const aCtx: TtfwContext): RkwCompiledWordWorker; override;
    procedure DoKeyword(var aContext: TtfwContext;
      aWord: TtfwWord;
      const aFinder: Il3KeywordFinder;
      const aPrevContext: TtfwContext); override;
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwCheckVar
 {$IfEnd} //not NoScripts
 
@@ -51,31 +41,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledCheckVar,
-  kwCompiledCheckVarByRef,
-  kwTemporaryCompiledCode,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  SysUtils,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwCompiledCheckVar
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCheckVar;
-
-{$Include ..\ScriptEngine\kwCheckVarPrim.imp.pas}
 
 // start class TkwCheckVar
 
@@ -94,7 +64,7 @@ begin
 //#UC END# *4DB6F2760023_4F3F9B9A0382_impl*
 end;//TkwCheckVar.UnknownWord
 
-function TkwCheckVar.CompiledWorkerClass: RkwCompiledWordWorker;
+function TkwCheckVar.CompiledWorkerClass(const aCtx: TtfwContext): RkwCompiledWordWorker;
 //#UC START# *4DCBD67C0362_4F3F9B9A0382_var*
 //#UC END# *4DCBD67C0362_4F3F9B9A0382_var*
 begin
@@ -119,7 +89,8 @@ end;//TkwCheckVar.DoKeyword
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwCheckVarPrim.imp.pas}
+// Регистрация CheckVar
+ TkwCheckVar.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

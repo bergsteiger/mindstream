@@ -4,19 +4,14 @@ unit kwIntToStr;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwIntToStr.pas"
+// Модуль: "kwIntToStr.pas"
 // Начат: 16.05.2011 11:10
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::IntToStr
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::SysUtils::IntToStr
 //
 // Преобразование числа в строку.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -24,21 +19,20 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
+  tfwSysUtilsWord,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
- TkwIntToStr = class(_tfwSysUtilsWord_)
+ TkwIntToStr = {scriptword} class(TtfwSysUtilsWord)
   {* Преобразование числа в строку. }
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwIntToStr
 {$IfEnd} //not NoScripts
@@ -49,17 +43,11 @@ implementation
 uses
   l3Base,
   SysUtils,
-  l3String,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3String
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwIntToStr;
-
-{$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
 
 // start class TkwIntToStr
 
@@ -82,7 +70,8 @@ end;//TkwIntToStr.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
+// Регистрация IntToStr
+ TkwIntToStr.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

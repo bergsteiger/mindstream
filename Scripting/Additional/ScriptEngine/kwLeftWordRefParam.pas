@@ -2,17 +2,12 @@ unit kwLeftWordRefParam;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwLeftWordRefParam.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "kwLeftWordRefParam.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwLeftWordRefParam
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::CompiledWords::TkwLeftWordRefParam
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -37,12 +32,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwClassRef
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
 
 // start class TkwLeftWordRefParam
 
@@ -59,9 +48,8 @@ end;//TkwLeftWordRefParam.IsLeftWordRefParam
 
 initialization
 {$If not defined(NoScripts)}
-//#UC START# *53E38D920243*
+// Регистрация TkwLeftWordRefParam
  TkwLeftWordRefParam.RegisterClass;
-//#UC END# *53E38D920243*
 {$IfEnd} //not NoScripts
 
 end.

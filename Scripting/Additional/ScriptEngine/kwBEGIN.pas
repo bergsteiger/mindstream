@@ -4,19 +4,14 @@ unit kwBEGIN;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwBEGIN.pas"
+// Модуль: "kwBEGIN.pas"
 // Начат: 28.04.2011 23:10
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::CodeBranchingWords::BEGIN
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::CodeBranchingWords::BEGIN
 //
 // Поддержка скобок BEGIN END в стиле Паскаля.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -24,25 +19,21 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  l3Interfaces,
-  l3ParserInterfaces,
-  kwCompiledWordPrim,
-  tfwRegisterableWord
+  tfwBeginLikeWord,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwBeginLikeWord.imp.pas}
- TkwBEGIN = class(_tfwBeginLikeWord_)
+ TkwBEGIN = {scriptword} class(TtfwBeginLikeWord)
   {* Поддержка скобок BEGIN END в стиле Паскаля. }
  protected
  // realized methods
    function EndBracket(const aContext: TtfwContext;
      aSilent: Boolean): RtfwWord; override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwBEGIN
 {$IfEnd} //not NoScripts
@@ -51,30 +42,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwEND,
-  kwBeginLikeCompiledCode,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  SysUtils,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwEND
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwBEGIN;
-
-{$Include ..\ScriptEngine\tfwBeginLikeWord.imp.pas}
 
 // start class TkwBEGIN
 
@@ -98,7 +70,8 @@ end;//TkwBEGIN.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwBeginLikeWord.imp.pas}
+// Регистрация BEGIN
+ TkwBEGIN.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

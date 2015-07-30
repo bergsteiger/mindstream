@@ -3,16 +3,11 @@ unit kwWStringVarShift;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwWStringVarShift.pas"
+// Модуль: "kwWStringVarShift.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::WStringVar_Shift
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::WStringVar_Shift
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,25 +15,18 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledVarWorker,
-  tfwScriptingInterfaces,
-  l3Interfaces,
-  l3ParserInterfaces,
-  kwCompiledWordPrim,
-  tfwRegisterableWord
+  tfwVarWorker,
+  kwCompiledVarWorker
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwVarWorker.imp.pas}
- TkwWStringVarShift = {final} class(_tfwVarWorker_)
+ TkwWStringVarShift = {final scriptword} class(TtfwVarWorker)
  protected
- // realized methods
-   function CompiledVarWorkerClass: RkwCompiledVarWorker; override;
- public
- // overridden public methods
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
+   function CompiledVarWorkerClass: RkwCompiledVarWorker; override;
  end;//TkwWStringVarShift
 {$IfEnd} //not NoScripts
 
@@ -46,33 +34,19 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledWStringShift,
-  SysUtils,
-  kwVarWorkerCompiledCode,
-  kwBeginLikeCompiledCode,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwCompiledWStringShift
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 
-type _Instance_R_ = TkwWStringVarShift;
-
-{$Include ..\ScriptEngine\tfwVarWorker.imp.pas}
-
 // start class TkwWStringVarShift
+
+class function TkwWStringVarShift.GetWordNameForRegister: AnsiString;
+ {-}
+begin
+ Result := 'WString:+!';
+end;//TkwWStringVarShift.GetWordNameForRegister
 
 function TkwWStringVarShift.CompiledVarWorkerClass: RkwCompiledVarWorker;
 //#UC START# *4DCC193801F1_4F5098E0034E_var*
@@ -83,17 +57,12 @@ begin
 //#UC END# *4DCC193801F1_4F5098E0034E_impl*
 end;//TkwWStringVarShift.CompiledVarWorkerClass
 
-class function TkwWStringVarShift.GetWordNameForRegister: AnsiString;
- {-}
-begin
- Result := 'WString:+!';
-end;//TkwWStringVarShift.GetWordNameForRegister
-
 {$IfEnd} //not NoScripts
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwVarWorker.imp.pas}
+// Регистрация WStringVar_Shift
+ TkwWStringVarShift.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

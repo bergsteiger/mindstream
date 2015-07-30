@@ -3,16 +3,11 @@ unit kwCompiledNamedAutolinkProducer;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledNamedAutolinkProducer.pas"
+// Модуль: "kwCompiledNamedAutolinkProducer.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::VarProducing::TkwCompiledNamedAutolinkProducer
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::VarProducing::TkwCompiledNamedAutolinkProducer
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -48,6 +43,12 @@ begin
 //#UC END# *4F44BBD400AC_4F44BBB1023C_impl*
 end;//TkwCompiledNamedAutolinkProducer.CanBeVoid
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledNamedAutolinkProducer
+ TkwCompiledNamedAutolinkProducer.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

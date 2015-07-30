@@ -2,19 +2,14 @@ unit kwPopFormFormStyle;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$RTLandVCL"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopFormFormStyle.pas"
+// Модуль: "kwPopFormFormStyle.pas"
 // Начат: 02.02.2012 14:49
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FormsProcessing::pop_form_FormStyle
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::FormsProcessing::pop_form_FormStyle
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,24 +17,21 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwCustomFormFromStackWord,
   Forms,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwCustomFormFromStackWord.imp.pas}
- TkwPopFormFormStyle = class(_kwCustomFormFromStackWord_)
+ TkwPopFormFormStyle = {scriptword} class(TkwCustomFormFromStackWord)
  protected
  // realized methods
    procedure DoCustomForm(aForm: TCustomForm;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopFormFormStyle
 {$IfEnd} //not NoScripts
@@ -47,19 +39,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopFormFormStyle;
-
-{$Include ..\ScriptEngine\kwCustomFormFromStackWord.imp.pas}
 
 // start class TkwPopFormFormStyle
 
@@ -83,7 +62,8 @@ end;//TkwPopFormFormStyle.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwCustomFormFromStackWord.imp.pas}
+// Регистрация pop_form_FormStyle
+ TkwPopFormFormStyle.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

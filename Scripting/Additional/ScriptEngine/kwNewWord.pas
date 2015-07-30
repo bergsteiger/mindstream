@@ -4,10 +4,10 @@ unit kwNewWord;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwNewWord.pas"
+// Модуль: "kwNewWord.pas"
 // Начат: 26.04.2011 17:31
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::WordsDefinition::NewWord
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::WordsDefinition::NewWord
 //
 // Определение новых слов. Пример:
 // {code}
@@ -18,12 +18,7 @@ unit kwNewWord;
 // ;
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -31,18 +26,13 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
-  tfwScriptingInterfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  tfwStandardProcedure
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
- TkwNewWord = class(_tfwStandardProcedure_)
+ TkwNewWord = {scriptword} class(TtfwStandardProcedure)
   {* Определение новых слов. Пример: 
 [code]
 : Hello
@@ -51,8 +41,8 @@ type
  NEXT
 ;
 [code] }
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwNewWord
 {$IfEnd} //not NoScripts
@@ -61,30 +51,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  SysUtils,
-  kwStandardProcedureCloseBracket,
-  kwCompiledProcedure,
-  l3String,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwNewWord;
-
-{$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
 
 // start class TkwNewWord
 
@@ -98,7 +69,8 @@ end;//TkwNewWord.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
+// Регистрация NewWord
+ TkwNewWord.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

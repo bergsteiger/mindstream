@@ -4,10 +4,10 @@ unit kwKey;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwKey.pas"
+// Модуль: "kwKey.pas"
 // Начат: 22.04.2011 19:35
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::KeyBoardInput::Key
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::KeyBoardInput::Key
 //
 // Нажатие на кнопку клавиатуры.
 // Пример:
@@ -17,12 +17,7 @@ unit kwKey;
 // ;
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -37,8 +32,7 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwKey = class(_tfwAutoregisteringWord_)
+ TkwKey = {scriptword} class(TtfwRegisterableWord)
   {* Нажатие на кнопку клавиатуры.
 Пример:
 [code]
@@ -49,8 +43,8 @@ type
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwKey
 {$IfEnd} //not NoScripts
@@ -63,17 +57,11 @@ uses
   Menus,
   Classes,
   Messages,
-  afwFacade,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3MessagesService
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwKey;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwKey
 
@@ -127,7 +115,7 @@ begin
      end//cMap[l_SS] = vk_Menu
      else
       PostMessage(l_H, WM_KEYDOWN, cMap[l_SS], $1510001);
-     afw.ProcessMessages;
+     Tl3MessagesService.Instance.ProcessMessages;
     end;//cMap[l_SS] <> 0
    end;//l_SS in l_Shift
   end;//for l_SS
@@ -144,12 +132,12 @@ begin
     PostMessage(l_H, WM_SYSKEYDOWN, l_K, $20170001)
    else
     PostMessage(l_H, WM_KEYDOWN, l_K, $1510001);
-   afw.ProcessMessages;
+   Tl3MessagesService.Instance.ProcessMessages;
    if l_Alt then
     PostMessage(l_H, WM_SYSKEYUP, l_K, $E0170001)
    else
     PostMessage(l_H, WM_KEYUP, l_K, $1510001);
-   afw.ProcessMessages;
+   Tl3MessagesService.Instance.ProcessMessages;
   end;//l_AltOnly
   for l_SS := Low(l_SS) to High(l_SS) do
   begin
@@ -163,7 +151,7 @@ begin
      end//cMap[l_SS] = vk_Menu
      else
       PostMessage(l_H, WM_KEYUP, cMap[l_SS], $1510001);
-     afw.ProcessMessages;
+     Tl3MessagesService.Instance.ProcessMessages;
     end;//cMap[l_SS] <> 0
    end;//l_SS in l_Shift
   end;//for l_SS
@@ -186,7 +174,8 @@ end;//TkwKey.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация Key
+ TkwKey.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -3,16 +3,11 @@ unit kwMouseWheelUp;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwMouseWheelUp.pas"
+// Модуль: "kwMouseWheelUp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::MouseInput::Mouse_WheelUp
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::MouseInput::Mouse_WheelUp
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,21 +15,19 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  Windows,
-  tfwRegisterableWord
+  kwMouseWheelSupport,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwMouseWheelSupport.imp.pas}
- TkwMouseWheelUp = {final} class(_kwMouseWheelSupport_)
+ TkwMouseWheelUp = {final scriptword} class(TkwMouseWheelSupport)
  protected
  // realized methods
    function GetLineCount(const aCtx: TtfwContext): Integer; override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwMouseWheelUp
 {$IfEnd} //not NoScripts
@@ -43,17 +36,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  Windows
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwMouseWheelUp;
-
-{$Include ..\ScriptEngine\kwMouseWheelSupport.imp.pas}
 
 // start class TkwMouseWheelUp
 
@@ -77,7 +64,8 @@ end;//TkwMouseWheelUp.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwMouseWheelSupport.imp.pas}
+// Регистрация Mouse_WheelUp
+ TkwMouseWheelUp.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

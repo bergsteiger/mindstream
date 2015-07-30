@@ -4,17 +4,12 @@ unit kwWaitYes;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwWaitYes.pas"
+// Модуль: "kwWaitYes.pas"
 // Начат: 28.04.2011 15:06
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::ModalDialogs::wait_Yes
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::ModalDialogs::wait_Yes
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,15 +24,14 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- _afwImpurity_Parent_ = _tfwAutoregisteringWord_;
+ _afwImpurity_Parent_ = TtfwRegisterableWord;
  {$Include ..\ScriptEngine\afwImpurity.imp.pas}
- TkwWaitYes = class(_afwImpurity_)
+ TkwWaitYes = {scriptword} class(_afwImpurity_)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwWaitYes
 {$IfEnd} //not NoScripts
@@ -46,8 +40,7 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  Classes
   {$If defined(nsTest)}
   ,
   afwAnswer
@@ -59,10 +52,6 @@ uses
 
 {$If not defined(NoScripts)}
 
-type _Instance_R_ = TkwWaitYes;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
-
 {$Include ..\ScriptEngine\afwImpurity.imp.pas}
 
 // start class TkwWaitYes
@@ -73,7 +62,7 @@ procedure TkwWaitYes.DoDoIt(const aCtx: TtfwContext);
 begin
 //#UC START# *4DAEEDE10285_4DB94A330111_impl*
  {$If NOT defined(nsTest)}
- RunnerAssert(false, '', aCtx);
+ RunnerError('', aCtx);
  {$Else}
  afwSetAnswer(mrYes);
  {$IfEnd}
@@ -90,7 +79,8 @@ end;//TkwWaitYes.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация wait_Yes
+ TkwWaitYes.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

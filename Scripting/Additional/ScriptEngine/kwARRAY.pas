@@ -4,10 +4,10 @@ unit kwARRAY;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwARRAY.pas"
+// Модуль: "kwARRAY.pas"
 // Начат: 12.05.2011 21:14
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Modifiers::ARRAY
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Modifiers::ARRAY
 //
 // Определяет поддержку массивов в скриптах.
 // *Пример:*
@@ -26,12 +26,7 @@ unit kwARRAY;
 // // - суммирует числа от 1 до 10 и печатает результат
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -39,15 +34,14 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  kwModifier,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwModifier.imp.pas}
- TkwARRAY = class(_kwModifier_)
+ TkwARRAY = {scriptword} class(TkwModifier)
   {* Определяет поддержку массивов в скриптах.
  *Пример:*
 [code]
@@ -67,8 +61,8 @@ type
  protected
  // realized methods
    function pm_GetModifier: TtfwWordModifier; override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwARRAY
 {$IfEnd} //not NoScripts
@@ -76,17 +70,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwARRAY;
-
-{$Include ..\ScriptEngine\kwModifier.imp.pas}
 
 // start class TkwARRAY
 
@@ -109,7 +92,8 @@ end;//TkwARRAY.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwModifier.imp.pas}
+// Регистрация ARRAY
+ TkwARRAY.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

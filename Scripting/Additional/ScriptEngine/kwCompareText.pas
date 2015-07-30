@@ -4,19 +4,14 @@ unit kwCompareText;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompareText.pas"
+// Модуль: "kwCompareText.pas"
 // Начат: 16.05.2011 11:23
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::TkwCompareText
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::TkwCompareText
 //
 // Сравнение строк без учета регистра.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -24,24 +19,23 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwDualStrWord,
   l3Interfaces,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwDualStrWord.imp.pas}
- TkwCompareText = class(_tfwDualStrWord_)
+ TkwCompareText = class(TtfwDualStrWord)
   {* Сравнение строк без учета регистра. }
  protected
  // realized methods
    procedure DoStrings(const aCtx: TtfwContext;
      const aStr1: Il3CString;
      const aStr2: Il3CString); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwCompareText
 {$IfEnd} //not NoScripts
@@ -51,19 +45,13 @@ implementation
 {$If not defined(NoScripts)}
 uses
   l3Types,
-  SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils,
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCompareText;
-
-{$Include ..\ScriptEngine\tfwDualStrWord.imp.pas}
 
 // start class TkwCompareText
 
@@ -91,7 +79,8 @@ end;//TkwCompareText.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwDualStrWord.imp.pas}
+// Регистрация TkwCompareText
+ TkwCompareText.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

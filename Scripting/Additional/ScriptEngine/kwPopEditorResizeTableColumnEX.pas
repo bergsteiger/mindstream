@@ -2,10 +2,10 @@ unit kwPopEditorResizeTableColumnEX;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorResizeTableColumnEX.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorResizeTableColumnEX.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_ResizeTableColumnEX
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_ResizeTableColumnEX
 //
 // Изменить размер колонки таблицы. Пример:
 // {code}   aDelta aKeys aCol aRow editor:ResizeTableColumnEX{code}
@@ -16,12 +16,7 @@ unit kwPopEditorResizeTableColumnEX;
 // * aDelta - смещение колонки (положительное - вправо, отрицательное - влево).
 // {panel}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,21 +24,14 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  nevTools,
-  evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord,
-  l3Units,
-  nevGUIInterfaces
+  kwEditorFromStackTableColumnResize,
+  Classes
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackTableColumnResize.imp.pas}
- TkwPopEditorResizeTableColumnEX = class(_kwEditorFromStackTableColumnResize_)
+ TkwPopEditorResizeTableColumnEX = {scriptword} class(TkwEditorFromStackTableColumnResize)
   {* Изменить размер колонки таблицы. Пример:
 [code]   aDelta aKeys aCol aRow editor:ResizeTableColumnEX[code]
 [panel]
@@ -54,10 +42,8 @@ type
 [panel] }
  protected
  // overridden protected methods
-   function GetKeys: TShiftState; override;
- public
- // overridden public methods
    class function GetWordNameForRegister: AnsiString; override;
+   function GetKeys: TShiftState; override;
  end;//TkwPopEditorResizeTableColumnEX
 {$IfEnd} //not NoScripts
 
@@ -65,26 +51,14 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  Table_Const,
-  evConst,
-  TextPara_Const,
-  CommentPara_Const,
-  Windows,
-  evParaTools,
+  tfwScriptingInterfaces,
   evOp,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  afwFacade,
-  Forms,
-  l3Base
+  CommentPara_Const,
+  TextPara_Const
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorResizeTableColumnEX;
-
-{$Include ..\ScriptEngine\kwEditorFromStackTableColumnResize.imp.pas}
 
 // start class TkwPopEditorResizeTableColumnEX
 
@@ -117,7 +91,8 @@ end;//TkwPopEditorResizeTableColumnEX.GetKeys
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackTableColumnResize.imp.pas}
+// Регистрация pop_editor_ResizeTableColumnEX
+ TkwPopEditorResizeTableColumnEX.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

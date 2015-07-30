@@ -2,10 +2,10 @@ unit kwPopEditorPrintAcnhor;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorPrintAcnhor.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorPrintAcnhor.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_PrintAcnhor
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_PrintAcnhor
 //
 // *Формат:* aTopAnchor anEditorControl pop:editor:PrintAcnhor
 // *Описание:* Печатает текущее значение якоря, включая дочерние, позицию, PID параграф и т.п.
@@ -16,12 +16,7 @@ unit kwPopEditorPrintAcnhor;
 // {code}
 // *Результат:* В засимости от значения поля в будет напечатано значение "true" или "false"
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -32,16 +27,13 @@ uses
   nevTools,
   evCustomEditorWindow,
   tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  kwEditorFromStackWord
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorPrintAcnhor = {final} class(_kwEditorFromStackWord_)
+ TkwPopEditorPrintAcnhor = {final scriptword} class(TkwEditorFromStackWord)
   {* *Формат:* aTopAnchor anEditorControl pop:editor:PrintAcnhor
 *Описание:* Печатает текущее значение якоря, включая дочерние, позицию, PID параграф и т.п. aTopAnchor - true - верхния якорь, false - нижний якорь.
 *Пример:*
@@ -61,8 +53,8 @@ true focused:control:push pop:editor:PrintAcnhor
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorPrintAcnhor
 {$IfEnd} //not NoScripts
@@ -72,20 +64,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   SysUtils,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorPrintAcnhor;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 // start class TkwPopEditorPrintAcnhor
 
@@ -179,7 +162,8 @@ end;//TkwPopEditorPrintAcnhor.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_PrintAcnhor
+ TkwPopEditorPrintAcnhor.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

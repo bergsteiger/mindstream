@@ -2,17 +2,12 @@ unit kwEvdBin2EvdTxt;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwEvdBin2EvdTxt.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwEvdBin2EvdTxt.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::EvdBin2EvdTxt
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::SchemaWords::EvdBin2EvdTxt
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,20 +15,19 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
+  tfwSysUtilsWord,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
- TkwEvdBin2EvdTxt = {final} class(_tfwSysUtilsWord_)
+ TkwEvdBin2EvdTxt = {final scriptword} class(TtfwSysUtilsWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwEvdBin2EvdTxt
 {$IfEnd} //not NoScripts
@@ -49,17 +43,11 @@ uses
   evdNativeWriter,
   SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwEvdBin2EvdTxt;
-
-{$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
 
 // start class TkwEvdBin2EvdTxt
 
@@ -76,7 +64,7 @@ var
 begin
 //#UC START# *4DAEEDE10285_52DEAB2F00A1_impl*
  {$IFDEF EverestLite}
- RunnerAssert(False, Format('Функция %s не поддерживается в EverestLite!', [GetWordNameForRegister]), aCtx);
+ RunnerError(Format('Функция %s не поддерживается в EverestLite!', [GetWordNameForRegister]), aCtx);
  {$ELSE}
  RunnerAssert(aCtx.rEngine.IsTopString, 'Нужна строка', aCtx);
  l_InData := aCtx.rEngine.PopString.AsWStr;
@@ -132,7 +120,8 @@ end;//TkwEvdBin2EvdTxt.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
+// Регистрация EvdBin2EvdTxt
+ TkwEvdBin2EvdTxt.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

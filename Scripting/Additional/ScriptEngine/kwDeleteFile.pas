@@ -3,16 +3,11 @@ unit kwDeleteFile;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwDeleteFile.pas"
+// Модуль: "kwDeleteFile.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FileProcessing::DeleteFile
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::FileProcessing::DeleteFile
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -27,13 +22,12 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwDeleteFile = {final} class(_tfwAutoregisteringWord_)
+ TkwDeleteFile = {final scriptword} class(TtfwRegisterableWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwDeleteFile
 {$IfEnd} //not NoScripts
@@ -42,17 +36,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  SysUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwDeleteFile;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwDeleteFile
 
@@ -61,7 +49,7 @@ procedure TkwDeleteFile.DoDoIt(const aCtx: TtfwContext);
 //#UC END# *4DAEEDE10285_50914E750101_var*
 begin
 //#UC START# *4DAEEDE10285_50914E750101_impl*
- aCtx.rEngine.PushBool(DeleteFile(aCtx.rEngine.PopDelphiString));
+ aCtx.rEngine.PushBool(SysUtils.DeleteFile(aCtx.rEngine.PopDelphiString));
 //#UC END# *4DAEEDE10285_50914E750101_impl*
 end;//TkwDeleteFile.DoDoIt
 
@@ -75,7 +63,8 @@ end;//TkwDeleteFile.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация DeleteFile
+ TkwDeleteFile.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

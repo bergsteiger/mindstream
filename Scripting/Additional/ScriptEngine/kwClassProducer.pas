@@ -3,16 +3,11 @@ unit kwClassProducer;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwClassProducer.pas"
+// Модуль: "kwClassProducer.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::ClassProducer
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::ClassProducer
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,27 +15,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  tfwWordProducer,
   tfwScriptingInterfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwWordProducer.imp.pas}
- TkwClassProducer = {final} class(_tfwWordProducer_)
+ TkwClassProducer = {final scriptword} class(TtfwWordProducer)
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    procedure FinishDefinitionOfNewWord(aWordToFinish: TtfwKeyWord;
      aCompiled: TkwCompiledWordPrim;
      const aContext: TtfwContext); override;
      {* Завершает определение вновь созданного слова }
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwClassProducer
 {$IfEnd} //not NoScripts
 
@@ -49,29 +39,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   kwCompiledClassProducer,
-  kwCompiledWord,
-  kwCompiledVar,
-  SysUtils,
-  l3String,
-  l3Parser,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwClassProducer;
-
-{$Include ..\ScriptEngine\tfwWordProducer.imp.pas}
 
 // start class TkwClassProducer
 
@@ -105,7 +77,8 @@ end;//TkwClassProducer.FinishDefinitionOfNewWord
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwWordProducer.imp.pas}
+// Регистрация ClassProducer
+ TkwClassProducer.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

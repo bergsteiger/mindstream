@@ -4,17 +4,12 @@ unit kwCompiledTryFinally;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledTryFinally.pas"
+// Модуль: "kwCompiledTryFinally.pas"
 // Начат: 29.04.2011 18:05
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledTryFinally
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwCompiledTryFinally
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -68,6 +63,10 @@ initialization
 //#UC START# *53DB78C203C8*
  TkwCompiledTryFinally.RegisterClass;
 //#UC END# *53DB78C203C8*
+{$IfEnd} //not NoScripts
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledTryFinally
+ TkwCompiledTryFinally.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

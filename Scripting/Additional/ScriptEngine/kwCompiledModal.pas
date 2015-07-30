@@ -3,16 +3,11 @@ unit kwCompiledModal;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledModal.pas"
+// Модуль: "kwCompiledModal.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::CodeFlowWords::TkwCompiledModal
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::CodeFlowWords::TkwCompiledModal
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -38,12 +33,8 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  seModalSupport
-  {$If defined(nsTest)}
-  ,
-  afwAnswer
-  {$IfEnd} //nsTest
-  
+  seModalSupport,
+  l3AFWExceptions
   ;
 {$IfEnd} //not NoScripts
 
@@ -64,7 +55,7 @@ begin
    (aCtx.rEngine.PopObj As TTfwWord).DoIt(aCtx);
   except
    {$If defined(nsTest)}
-   on EvcmTryEnterModalState do
+   on El3TryEnterModalState do
     Exit;
    {$Else}
    raise; 
@@ -76,6 +67,12 @@ begin
 //#UC END# *4DAEEDE10285_4FC753D40064_impl*
 end;//TkwCompiledModal.DoDoIt
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledModal
+ TkwCompiledModal.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

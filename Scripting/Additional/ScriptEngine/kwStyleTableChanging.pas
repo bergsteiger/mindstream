@@ -2,19 +2,14 @@ unit kwStyleTableChanging;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Everest"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwStyleTableChanging.pas"
+// Модуль: "kwStyleTableChanging.pas"
 // Начат: 08.09.2011 18:07
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::CommonWords::StyleTable_Changing
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::SchemaWords::StyleTable_Changing
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,13 +24,12 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwStyleTableChanging = class(_tfwAutoregisteringWord_)
+ TkwStyleTableChanging = {scriptword} class(TtfwRegisterableWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwStyleTableChanging
 {$IfEnd} //not NoScripts
@@ -49,17 +43,11 @@ uses
   ,
   evStyleTableSpy
   {$IfEnd} //not DesignTimeLibrary
-  ,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwStyleTableChanging;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwStyleTableChanging
 
@@ -82,7 +70,8 @@ end;//TkwStyleTableChanging.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация StyleTable_Changing
+ TkwStyleTableChanging.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

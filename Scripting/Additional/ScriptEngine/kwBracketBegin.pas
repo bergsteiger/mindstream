@@ -4,10 +4,10 @@ unit kwBracketBegin;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwBracketBegin.pas"
+// Модуль: "kwBracketBegin.pas"
 // Начат: 03.05.2011 12:25
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::CodeBranchingWords::BracketBegin
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::CodeBranchingWords::BracketBegin
 //
 // Поддержка скобок.
 // Пример:
@@ -15,12 +15,7 @@ unit kwBracketBegin;
 // 10 LOOP ( 'Hello' . )
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -28,18 +23,14 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  l3Interfaces,
-  l3ParserInterfaces,
-  kwCompiledWordPrim,
-  tfwRegisterableWord
+  tfwBeginLikeWord,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwBeginLikeWord.imp.pas}
- TkwBracketBegin = class(_tfwBeginLikeWord_)
+ TkwBracketBegin = {scriptword} class(TtfwBeginLikeWord)
   {* Поддержка скобок. 
 Пример:
 [code]
@@ -49,8 +40,8 @@ type
  // realized methods
    function EndBracket(const aContext: TtfwContext;
      aSilent: Boolean): RtfwWord; override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwBracketBegin
 {$IfEnd} //not NoScripts
@@ -59,30 +50,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwBracketEnd,
-  kwBeginLikeCompiledCode,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  SysUtils,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwBracketEnd
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwBracketBegin;
-
-{$Include ..\ScriptEngine\tfwBeginLikeWord.imp.pas}
 
 // start class TkwBracketBegin
 
@@ -106,7 +78,8 @@ end;//TkwBracketBegin.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwBeginLikeWord.imp.pas}
+// Регистрация BracketBegin
+ TkwBracketBegin.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

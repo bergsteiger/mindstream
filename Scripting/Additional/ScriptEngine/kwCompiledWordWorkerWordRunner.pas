@@ -3,16 +3,11 @@ unit kwCompiledWordWorkerWordRunner;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledWordWorkerWordRunner.pas"
+// Модуль: "kwCompiledWordWorkerWordRunner.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledWordWorkerWordRunner
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwCompiledWordWorkerWordRunner
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -128,7 +123,7 @@ begin
 //#UC START# *4DAEEDE10285_4F2198430108_impl*
  PushState(aCtx);
  // - кладём лямбду на стек
- // - вообще говоря это можно унаследовать от TkwCompiledPushWord
+ // - вообще говоря это можно унаследовать от _TkwCompiledPushWord
  f_Compiled.DoIt(aCtx);
  // - выполняем собственно определённое слово
 //#UC END# *4DAEEDE10285_4F2198430108_impl*
@@ -194,9 +189,8 @@ end;//TkwCompiledWordWorkerWordRunner.LeftWordRefValuesCount
 
 initialization
 {$If not defined(NoScripts)}
-//#UC START# *53DB793A03AA*
+// Регистрация TkwCompiledWordWorkerWordRunner
  TkwCompiledWordWorkerWordRunner.RegisterClass;
-//#UC END# *53DB793A03AA*
 {$IfEnd} //not NoScripts
 
 end.

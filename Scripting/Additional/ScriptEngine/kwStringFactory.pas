@@ -2,17 +2,12 @@ unit kwStringFactory;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwStringFactory.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "kwStringFactory.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::PrimitiveWords::TkwStringFactory
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::PrimitiveWords::TkwStringFactory
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -35,6 +30,8 @@ type
  public
  // public methods
    function MakeKW(const aValue: Il3CString): TkwString;
+   class function Exists: Boolean;
+     {* Проверяет создан экземпляр синглетона или нет }
  public
  // singleton factory method
    class function Instance: TkwStringFactory;
@@ -102,6 +99,12 @@ begin
   Result := TkwString.Create(aValue);
 //#UC END# *4F3E41C603BC_4F3E416701E8_impl*
 end;//TkwStringFactory.MakeKW
+
+class function TkwStringFactory.Exists: Boolean;
+ {-}
+begin
+ Result := g_TkwStringFactory <> nil;
+end;//TkwStringFactory.Exists
 
 procedure TkwStringFactory.InitFields;
 //#UC START# *47A042E100E2_4F3E416701E8_var*

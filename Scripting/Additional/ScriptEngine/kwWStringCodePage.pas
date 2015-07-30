@@ -3,16 +3,11 @@ unit kwWStringCodePage;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwWStringCodePage.pas"
+// Модуль: "kwWStringCodePage.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::WString_CodePage
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::WString_CodePage
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,22 +15,21 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwWStrWord,
   l3Interfaces,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwWStrWord.imp.pas}
- TkwWStringCodePage = {final} class(_tfwWStrWord_)
+ TkwWStringCodePage = {final scriptword} class(TtfwWStrWord)
  protected
  // realized methods
    procedure DoString(const aCtx: TtfwContext;
      const aStr: Tl3WString); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwWStringCodePage
 {$IfEnd} //not NoScripts
@@ -44,19 +38,13 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils,
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwWStringCodePage;
-
-{$Include ..\ScriptEngine\tfwWStrWord.imp.pas}
 
 // start class TkwWStringCodePage
 
@@ -80,7 +68,8 @@ end;//TkwWStringCodePage.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwWStrWord.imp.pas}
+// Регистрация WString_CodePage
+ TkwWStringCodePage.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

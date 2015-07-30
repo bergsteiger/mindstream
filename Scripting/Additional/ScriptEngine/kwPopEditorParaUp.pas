@@ -2,21 +2,16 @@ unit kwPopEditorParaUp;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Everest"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorParaUp.pas"
+// Модуль: "kwPopEditorParaUp.pas"
 // Начат: 26.10.2011 20:55
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_ParaUp
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_ParaUp
 //
 // Переходит на параграф вверх в редакторе. pop:editor:ParaUp
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -24,27 +19,24 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackCursorWord,
   nevTools,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackCursorWord.imp.pas}
- TkwPopEditorParaUp = class(_kwEditorFromStackCursorWord_)
+ TkwPopEditorParaUp = {scriptword} class(TkwEditorFromStackCursorWord)
   {* Переходит на параграф вверх в редакторе. pop:editor:ParaUp }
  protected
  // realized methods
    procedure DoCursor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow;
      const aPoint: InevBasePoint); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorParaUp
 {$IfEnd} //not NoScripts
@@ -55,22 +47,12 @@ implementation
 uses
   evMsgCode,
   evOp,
-  TextPara_Const,
   CommentPara_Const,
-  Windows,
-  evParaTools,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  afwFacade,
-  Forms
+  TextPara_Const
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorParaUp;
-
-{$Include ..\ScriptEngine\kwEditorFromStackCursorWord.imp.pas}
 
 // start class TkwPopEditorParaUp
 
@@ -95,7 +77,8 @@ end;//TkwPopEditorParaUp.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackCursorWord.imp.pas}
+// Регистрация pop_editor_ParaUp
+ TkwPopEditorParaUp.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

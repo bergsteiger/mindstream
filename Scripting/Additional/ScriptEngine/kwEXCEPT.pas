@@ -3,16 +3,11 @@ unit kwEXCEPT;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwEXCEPT.pas"
+// Модуль: "kwEXCEPT.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::EXCEPT
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::EXCEPT
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,17 +15,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
-  tfwScriptingInterfaces
+  kwMedianBacket
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwMedianBacket.imp.pas}
- TkwEXCEPT = {final} class(_kwMedianBacket_)
- public
- // overridden public methods
+ TkwEXCEPT = {final scriptword} class(TkwMedianBacket)
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwEXCEPT
 {$IfEnd} //not NoScripts
@@ -38,17 +31,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwEXCEPT;
-
-{$Include ..\ScriptEngine\kwMedianBacket.imp.pas}
 
 // start class TkwEXCEPT
 
@@ -62,7 +44,8 @@ end;//TkwEXCEPT.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwMedianBacket.imp.pas}
+// Регистрация EXCEPT
+ TkwEXCEPT.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

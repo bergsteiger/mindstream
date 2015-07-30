@@ -2,10 +2,10 @@ unit kwPopEditorMergeTablesWithTimer;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorMergeTablesWithTimer.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorMergeTablesWithTimer.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_MergeTablesWithTimer
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_MergeTablesWithTimer
 //
 // *Формат:* anEditorControl pop:editor:MergeTablesWithTimer
 // *Описание:* Объединяет таблицы в редакторе. Поведение полностью аналогично команде "Объединить
@@ -16,12 +16,7 @@ unit kwPopEditorMergeTablesWithTimer;
 // focused:control:push pop:editor:MergeTablesWithTimer
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,19 +24,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorWithToolsFromStackWord,
   evCustomEditor,
-  tfwScriptingInterfaces,
-  evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
- TkwPopEditorMergeTablesWithTimer = {final} class(_kwEditorWithToolsFromStackWord_)
+ TkwPopEditorMergeTablesWithTimer = {final scriptword} class(TkwEditorWithToolsFromStackWord)
   {* *Формат:* anEditorControl pop:editor:MergeTablesWithTimer
 *Описание:* Объединяет таблицы в редакторе. Поведение полностью аналогично команде "Объединить таблицы" в Арчи/Эвересте. Является расширением слова [Requestlink:330696438] но с возможностью замера времени выполнения.
 *Пример:*
@@ -52,8 +43,8 @@ focused:control:push pop:editor:MergeTablesWithTimer
  // realized methods
    procedure DoEditorWithTools(const aCtx: TtfwContext;
      anEditor: TevCustomEditor); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorMergeTablesWithTimer
 {$IfEnd} //not NoScripts
@@ -62,20 +53,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  evEditorInterfaces,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  evEditorInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorMergeTablesWithTimer;
-
-{$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
 
 // start class TkwPopEditorMergeTablesWithTimer
 
@@ -110,7 +92,8 @@ end;//TkwPopEditorMergeTablesWithTimer.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
+// Регистрация pop_editor_MergeTablesWithTimer
+ TkwPopEditorMergeTablesWithTimer.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

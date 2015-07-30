@@ -4,17 +4,12 @@ unit kwCompiledMembersPath;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledMembersPath.pas"
+// Модуль: "kwCompiledMembersPath.pas"
 // Начат: 15.02.2012 19:27
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::MembersWorking::TkwCompiledMembersPath
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::MembersWorking::TkwCompiledMembersPath
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -47,10 +42,16 @@ procedure TkwCompiledMembersPath.DoDoIt(const aCtx: TtfwContext);
 //#UC END# *4DAEEDE10285_4F3BCEC00027_var*
 begin
 //#UC START# *4DAEEDE10285_4F3BCEC00027_impl*
- RunnerAssert(false, 'Нельзя выполнять. Слово служит лишь контейнером для транспортировки дркугис слов', aCtx);
+ RunnerError('Нельзя выполнять. Слово служит лишь контейнером для транспортировки дркугис слов', aCtx);
 //#UC END# *4DAEEDE10285_4F3BCEC00027_impl*
 end;//TkwCompiledMembersPath.DoDoIt
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledMembersPath
+ TkwCompiledMembersPath.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

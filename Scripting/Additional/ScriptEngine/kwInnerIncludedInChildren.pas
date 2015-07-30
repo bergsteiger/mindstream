@@ -3,16 +3,11 @@ unit kwInnerIncludedInChildren;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwInnerIncludedInChildren.pas"
+// Модуль: "kwInnerIncludedInChildren.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::IncludesAndUses::TkwInnerIncludedInChildren
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::IncludesAndUses::TkwInnerIncludedInChildren
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -90,6 +85,12 @@ begin
 //#UC END# *4F3AA59B025A_4F476A6300C3_impl*
 end;//TkwInnerIncludedInChildren.FillContext
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwInnerIncludedInChildren
+ TkwInnerIncludedInChildren.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

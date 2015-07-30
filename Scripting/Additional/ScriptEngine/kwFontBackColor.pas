@@ -2,17 +2,12 @@ unit kwFontBackColor;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwFontBackColor.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwFontBackColor.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FontKeywords::font_BackColor
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::FontKeywords::font_BackColor
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,25 +15,24 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  kwFontWord,
   Graphics,
   tfwScriptingInterfaces,
-  tfwRegisterableWord
+  l3Interfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwFontWord.imp.pas}
- TkwFontBackColor = {final} class(_kwFontWord_)
+ TkwFontBackColor = {final scriptword} class(TkwFontWord)
  protected
  // realized methods
    procedure DoFont(aFont: TFont;
      const aCtx: TtfwContext); override;
    procedure DoIFont(const aFont: Il3Font;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwFontBackColor
 {$IfEnd} //not NoScripts
@@ -46,18 +40,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  SysUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwFontBackColor;
-
-{$Include ..\ScriptEngine\kwFontWord.imp.pas}
 
 // start class TkwFontBackColor
 
@@ -67,7 +49,7 @@ procedure TkwFontBackColor.DoFont(aFont: TFont;
 //#UC END# *5190B11A0069_51A1C34E022B_var*
 begin
 //#UC START# *5190B11A0069_51A1C34E022B_impl*
- RunnerAssert(False, 'Слово font:BackColor умеет работать только с шрифтом редактора.', aCtx);
+ RunnerError('Слово font:BackColor умеет работать только с шрифтом редактора.', aCtx);
 //#UC END# *5190B11A0069_51A1C34E022B_impl*
 end;//TkwFontBackColor.DoFont
 
@@ -91,7 +73,8 @@ end;//TkwFontBackColor.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwFontWord.imp.pas}
+// Регистрация font_BackColor
+ TkwFontBackColor.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -3,18 +3,13 @@ unit kwAutolinkProducer;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwAutolinkProducer.pas"
+// Модуль: "kwAutolinkProducer.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::VarProducing::VarProducingPack::AutolinkProducer
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::VarProducing::VarProducingPack::AutolinkProducer
 //
 // Как InitedVarProducer, но не может быть VOID
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,28 +17,23 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  kwInitedVarProducerPrim,
   tfwScriptingInterfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwInitedVarProducer.imp.pas}
- TkwAutolinkProducer = {final} class(_kwInitedVarProducer_)
+ TkwAutolinkProducer = {final scriptword} class(TkwInitedVarProducerPrim)
   {* Как InitedVarProducer, но не может быть VOID }
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    procedure FinishDefinitionOfNewWord(aWordToFinish: TtfwKeyWord;
      aCompiled: TkwCompiledWordPrim;
      const aContext: TtfwContext); override;
      {* Завершает определение вновь созданного слова }
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwAutolinkProducer
 {$IfEnd} //not NoScripts
 
@@ -52,31 +42,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   kwCompiledAutolinkProducer,
-  kwCompiledInitedVarProducer,
-  kwCompiledInitableVar,
-  kwCompiledWord,
-  kwCompiledVar,
-  SysUtils,
-  l3String,
-  l3Parser,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwAutolinkProducer;
-
-{$Include ..\ScriptEngine\kwInitedVarProducer.imp.pas}
 
 // start class TkwAutolinkProducer
 
@@ -112,7 +82,8 @@ end;//TkwAutolinkProducer.FinishDefinitionOfNewWord
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwInitedVarProducer.imp.pas}
+// Регистрация AutolinkProducer
+ TkwAutolinkProducer.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

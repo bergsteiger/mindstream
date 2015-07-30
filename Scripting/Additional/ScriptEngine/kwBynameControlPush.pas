@@ -2,19 +2,14 @@ unit kwBynameControlPush;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$RTLandVCL"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwBynameControlPush.pas"
+// Модуль: "kwBynameControlPush.pas"
 // Начат: 26.01.2012 16:06
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::ControlsProcessing::byname_control_push
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::ControlsProcessing::byname_control_push
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,28 +17,29 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwControlWord,
   Classes,
-  Controls,
   tfwScriptingInterfaces,
-  tfwRegisterableWord
+  TypInfo,
+  Controls
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwControlWord.imp.pas}
- TkwBynameControlPush = class(_kwControlWord_)
+ TkwBynameControlPush = {scriptword} class(TkwControlWord)
  protected
  // realized methods
    procedure DoControl(aControl: TControl;
      const aCtx: TtfwContext); override;
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    procedure DoComponent(aControl: TComponent;
      const aCtx: TtfwContext); override;
  public
  // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
+   function GetResultTypeInfo(const aCtx: TtfwContext): PTypeInfo; override;
  end;//TkwBynameControlPush
 {$IfEnd} //not NoScripts
 
@@ -51,26 +47,13 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptEngine,
-  l3Except
-  {$If not defined(NoVCM)}
-  ,
-  vcmForm
-  {$IfEnd} //not NoVCM
-  ,
-  afwFacade,
-  SysUtils,
-  tfwAutoregisteredDiction,
+  l3Except,
   Windows,
   Forms
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwBynameControlPush;
-
-{$Include ..\ScriptEngine\kwControlWord.imp.pas}
 
 // start class TkwBynameControlPush
 
@@ -100,11 +83,21 @@ begin
 //#UC END# *5357B6FB0024_4F2141AD0203_impl*
 end;//TkwBynameControlPush.DoComponent
 
+function TkwBynameControlPush.GetResultTypeInfo(const aCtx: TtfwContext): PTypeInfo;
+//#UC START# *551544E2001A_4F2141AD0203_var*
+//#UC END# *551544E2001A_4F2141AD0203_var*
+begin
+//#UC START# *551544E2001A_4F2141AD0203_impl*
+ Result := TypeInfo(TComponent);
+//#UC END# *551544E2001A_4F2141AD0203_impl*
+end;//TkwBynameControlPush.GetResultTypeInfo
+
 {$IfEnd} //not NoScripts
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwControlWord.imp.pas}
+// Регистрация byname_control_push
+ TkwBynameControlPush.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

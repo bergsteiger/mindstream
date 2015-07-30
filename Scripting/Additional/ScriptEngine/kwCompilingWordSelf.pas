@@ -4,19 +4,14 @@ unit kwCompilingWordSelf;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompilingWordSelf.pas"
+// Модуль: "kwCompilingWordSelf.pas"
 // Начат: 12.02.2012 16:14
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Compilation::CompilingWordSelf
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Compilation::CompilingWordSelf
 //
 // Указатель на текущее компилируемое слово
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -31,15 +26,16 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwCompilingWordSelf = {final} class(_tfwAutoregisteringWord_)
+ TkwCompilingWordSelf = {final scriptword} class(TtfwRegisterableWord)
   {* Указатель на текущее компилируемое слово }
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
+ protected
+ // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
  public
  // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
    function IsImmediate: Boolean; override;
  end;//TkwCompilingWordSelf
 {$IfEnd} //not NoScripts
@@ -49,17 +45,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   kwWordPtrPushWord,
-  SysUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCompilingWordSelf;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwCompilingWordSelf
 
@@ -115,7 +105,8 @@ end;//TkwCompilingWordSelf.IsImmediate
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация CompilingWordSelf
+ TkwCompilingWordSelf.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

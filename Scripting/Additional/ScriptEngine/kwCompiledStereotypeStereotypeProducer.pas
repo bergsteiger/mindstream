@@ -3,16 +3,11 @@ unit kwCompiledStereotypeStereotypeProducer;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledStereotypeStereotypeProducer.pas"
+// Модуль: "kwCompiledStereotypeStereotypeProducer.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Stereotyping::TkwCompiledStereotypeStereotypeProducer
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Stereotyping::TkwCompiledStereotypeStereotypeProducer
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -79,6 +74,12 @@ begin
 //#UC END# *4DB6D7F70155_4F43B1C00019_impl*
 end;//TkwCompiledStereotypeStereotypeProducer.IsImmediate
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledStereotypeStereotypeProducer
+ TkwCompiledStereotypeStereotypeProducer.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

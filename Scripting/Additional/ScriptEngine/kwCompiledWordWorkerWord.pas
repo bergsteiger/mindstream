@@ -3,16 +3,11 @@ unit kwCompiledWordWorkerWord;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledWordWorkerWord.pas"
+// Модуль: "kwCompiledWordWorkerWord.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledWordWorkerWord
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwCompiledWordWorkerWord
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -21,13 +16,10 @@ interface
 {$If not defined(NoScripts)}
 uses
   tfwScriptingInterfaces,
+  tfwWordWorker,
   kwCompiledWordWorkerWordRunner,
-  kwCompiledWordWorker,
-  kwCompiledWordPrim,
-  l3Interfaces,
-  l3ParserInterfaces,
-  tfwRegisterableWord,
-  tfwDictionaryPrim
+  tfwDictionaryPrim,
+  kwCompiledWordWorker
   ;
 {$IfEnd} //not NoScripts
 
@@ -35,20 +27,19 @@ uses
 type
  RkwCompiledWordWorkerWord = class of TkwCompiledWordWorkerWord;
 
- {$Include ..\ScriptEngine\tfwWordWorker.imp.pas}
- TkwCompiledWordWorkerWord = class(_tfwWordWorker_)
+ TkwCompiledWordWorkerWord = class(TtfwWordWorker)
  private
  // private fields
    f_Compiled : TtfwWord;
     {* Поле для свойства Compiled}
  protected
  // realized methods
-   function CompiledWorkerClass: RkwCompiledWordWorker; override;
+   function CompiledWorkerClass(const aCtx: TtfwContext): RkwCompiledWordWorker; override;
  protected
  // overridden property methods
    function pm_GetWordProducer: TtfwWord; override;
    function pm_GetInnerDictionary: TtfwDictionaryPrim; override;
-   function pm_GetResultTypeInfo: TtfwTypeInfo; override;
+   function pm_GetResultTypeInfo(const aCtx: TtfwContext): TtfwTypeInfo; override;
  protected
  // overridden protected methods
    procedure Cleanup; override;
@@ -64,7 +55,7 @@ type
      const aCtx: TtfwContext); override;
  protected
  // protected methods
-   function RunnerClass: RkwCompiledWordWorkerWordRunner; virtual;
+   function RunnerClass(const aCtx: TtfwContext): RkwCompiledWordWorkerWordRunner; virtual;
  public
  // public methods
    constructor Create(aCompiled: TtfwWord); reintroduce;
@@ -79,31 +70,13 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledPushWord,
   SysUtils,
   tfwWordRefList,
-  kwTemporaryCompiledCode,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCompiledWordWorkerWord;
-
-{$Include ..\ScriptEngine\tfwWordWorker.imp.pas}
 
 // start class TkwCompiledWordWorkerWord
 
@@ -117,7 +90,7 @@ begin
 //#UC END# *4F219F0F0176_4F21976E01C2_impl*
 end;//TkwCompiledWordWorkerWord.Create
 
-function TkwCompiledWordWorkerWord.RunnerClass: RkwCompiledWordWorkerWordRunner;
+function TkwCompiledWordWorkerWord.RunnerClass(const aCtx: TtfwContext): RkwCompiledWordWorkerWordRunner;
 //#UC START# *4F3FAC0C0170_4F21976E01C2_var*
 //#UC END# *4F3FAC0C0170_4F21976E01C2_var*
 begin
@@ -126,12 +99,12 @@ begin
 //#UC END# *4F3FAC0C0170_4F21976E01C2_impl*
 end;//TkwCompiledWordWorkerWord.RunnerClass
 
-function TkwCompiledWordWorkerWord.CompiledWorkerClass: RkwCompiledWordWorker;
+function TkwCompiledWordWorkerWord.CompiledWorkerClass(const aCtx: TtfwContext): RkwCompiledWordWorker;
 //#UC START# *4DCBD67C0362_4F21976E01C2_var*
 //#UC END# *4DCBD67C0362_4F21976E01C2_var*
 begin
 //#UC START# *4DCBD67C0362_4F21976E01C2_impl*
- Result := RunnerClass;
+ Result := RunnerClass(aCtx);
 //#UC END# *4DCBD67C0362_4F21976E01C2_impl*
 end;//TkwCompiledWordWorkerWord.CompiledWorkerClass
 
@@ -228,15 +201,15 @@ begin
 //#UC END# *52B43311021D_4F21976E01C2get_impl*
 end;//TkwCompiledWordWorkerWord.pm_GetInnerDictionary
 
-function TkwCompiledWordWorkerWord.pm_GetResultTypeInfo: TtfwTypeInfo;
+function TkwCompiledWordWorkerWord.pm_GetResultTypeInfo(const aCtx: TtfwContext): TtfwTypeInfo;
 //#UC START# *52CFC11603C8_4F21976E01C2get_var*
 //#UC END# *52CFC11603C8_4F21976E01C2get_var*
 begin
 //#UC START# *52CFC11603C8_4F21976E01C2get_impl*
  if (f_Compiled <> nil) then
-  Result := f_Compiled.ResultTypeInfo
+  Result := f_Compiled.ResultTypeInfo[aCtx]
  else
-  Result := inherited pm_GetResultTypeInfo;
+  Result := inherited pm_GetResultTypeInfo(aCtx);
 //#UC END# *52CFC11603C8_4F21976E01C2get_impl*
 end;//TkwCompiledWordWorkerWord.pm_GetResultTypeInfo
 
@@ -256,7 +229,8 @@ end;//TkwCompiledWordWorkerWord.SetResultTypeInfo
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwWordWorker.imp.pas}
+// Регистрация TkwCompiledWordWorkerWord
+ TkwCompiledWordWorkerWord.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

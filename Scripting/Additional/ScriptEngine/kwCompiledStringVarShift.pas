@@ -3,16 +3,11 @@ unit kwCompiledStringVarShift;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledStringVarShift.pas"
+// Модуль: "kwCompiledStringVarShift.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::TkwCompiledStringVarShift
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::TkwCompiledStringVarShift
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,17 +15,16 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledVarWorker,
+  kwCompiledVarAsStringWorker,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwCompiledVarAsStringWorker.imp.pas}
- TkwCompiledStringVarShift = class(_kwCompiledVarAsStringWorker_)
+ TkwCompiledStringVarShift = class(TkwCompiledVarAsStringWorker)
  protected
- // realized methods
+ // overridden protected methods
    procedure DoVar(const aCtx: TtfwContext;
      aVar: TtfwWord); override;
  end;//TkwCompiledStringVarShift
@@ -48,8 +42,6 @@ uses
 
 {$If not defined(NoScripts)}
 
-{$Include ..\ScriptEngine\kwCompiledVarAsStringWorker.imp.pas}
-
 // start class TkwCompiledStringVarShift
 
 procedure TkwCompiledStringVarShift.DoVar(const aCtx: TtfwContext;
@@ -66,6 +58,12 @@ begin
 //#UC END# *4DCBCD2200D2_4F5F011E033F_impl*
 end;//TkwCompiledStringVarShift.DoVar
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledStringVarShift
+ TkwCompiledStringVarShift.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

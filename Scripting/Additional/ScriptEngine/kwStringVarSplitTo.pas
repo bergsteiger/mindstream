@@ -3,16 +3,11 @@ unit kwStringVarSplitTo;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwStringVarSplitTo.pas"
+// Модуль: "kwStringVarSplitTo.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::StringVar_SplitTo
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::StringVar_SplitTo
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,25 +15,18 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledVarWorker,
-  tfwScriptingInterfaces,
-  l3Interfaces,
-  l3ParserInterfaces,
-  kwCompiledWordPrim,
-  tfwRegisterableWord
+  tfwVarWorker,
+  kwCompiledVarWorker
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwVarWorker.imp.pas}
- TkwStringVarSplitTo = {final} class(_tfwVarWorker_)
+ TkwStringVarSplitTo = {final scriptword} class(TtfwVarWorker)
  protected
- // realized methods
-   function CompiledVarWorkerClass: RkwCompiledVarWorker; override;
- public
- // overridden public methods
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
+   function CompiledVarWorkerClass: RkwCompiledVarWorker; override;
  end;//TkwStringVarSplitTo
 {$IfEnd} //not NoScripts
 
@@ -46,33 +34,19 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledStringVarSplitTo,
-  SysUtils,
-  kwVarWorkerCompiledCode,
-  kwBeginLikeCompiledCode,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwCompiledStringVarSplitTo
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 
-type _Instance_R_ = TkwStringVarSplitTo;
-
-{$Include ..\ScriptEngine\tfwVarWorker.imp.pas}
-
 // start class TkwStringVarSplitTo
+
+class function TkwStringVarSplitTo.GetWordNameForRegister: AnsiString;
+ {-}
+begin
+ Result := 'string:SplitTo!';
+end;//TkwStringVarSplitTo.GetWordNameForRegister
 
 function TkwStringVarSplitTo.CompiledVarWorkerClass: RkwCompiledVarWorker;
 //#UC START# *4DCC193801F1_4F5F147301EF_var*
@@ -83,17 +57,12 @@ begin
 //#UC END# *4DCC193801F1_4F5F147301EF_impl*
 end;//TkwStringVarSplitTo.CompiledVarWorkerClass
 
-class function TkwStringVarSplitTo.GetWordNameForRegister: AnsiString;
- {-}
-begin
- Result := 'string:SplitTo!';
-end;//TkwStringVarSplitTo.GetWordNameForRegister
-
 {$IfEnd} //not NoScripts
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwVarWorker.imp.pas}
+// Регистрация StringVar_SplitTo
+ TkwStringVarSplitTo.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

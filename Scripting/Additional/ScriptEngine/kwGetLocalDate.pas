@@ -3,16 +3,11 @@ unit kwGetLocalDate;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwGetLocalDate.pas"
+// Модуль: "kwGetLocalDate.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::GetLocalDate
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::SysUtils::GetLocalDate
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,20 +15,19 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
+  tfwSysUtilsWord,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
- TkwGetLocalDate = {final} class(_tfwSysUtilsWord_)
+ TkwGetLocalDate = {final scriptword} class(TtfwSysUtilsWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwGetLocalDate
 {$IfEnd} //not NoScripts
@@ -45,17 +39,11 @@ uses
   Windows,
   SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwGetLocalDate;
-
-{$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
 
 // start class TkwGetLocalDate
 
@@ -83,7 +71,8 @@ end;//TkwGetLocalDate.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
+// Регистрация GetLocalDate
+ TkwGetLocalDate.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

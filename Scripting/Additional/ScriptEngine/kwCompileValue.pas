@@ -3,18 +3,13 @@ unit kwCompileValue;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompileValue.pas"
+// Модуль: "kwCompileValue.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::WordsDefinition::CompileValue
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::WordsDefinition::CompileValue
 //
 // Компилирует значение со стека в код
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,14 +24,13 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwCompileValue = {final} class(_tfwAutoregisteringWord_)
+ TkwCompileValue = {final scriptword} class(TtfwRegisterableWord)
   {* Компилирует значение со стека в код }
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwCompileValue
 {$IfEnd} //not NoScripts
@@ -48,17 +42,11 @@ uses
   kwInteger,
   kwString,
   SysUtils,
-  kwValue,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwValue
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCompileValue;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwCompileValue
 
@@ -94,7 +82,8 @@ end;//TkwCompileValue.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация CompileValue
+ TkwCompileValue.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

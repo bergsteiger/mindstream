@@ -2,12 +2,12 @@ unit kwPopEditorGetParaByID;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Everest"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorGetParaByID.pas"
+// Модуль: "kwPopEditorGetParaByID.pas"
 // Начат: 03.11.2011 15:47
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_GetParaByID
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_GetParaByID
 //
 // Получает от редактора параграф по его ID.
 // 
@@ -21,12 +21,7 @@ unit kwPopEditorGetParaByID;
 // ENDIF
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -34,18 +29,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorGetParaByID = class(_kwEditorFromStackWord_)
+ TkwPopEditorGetParaByID = {scriptword} class(TkwEditorFromStackWord)
   {* Получает от редактора параграф по его ID.
 
 Пример:
@@ -61,8 +53,8 @@ type
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorGetParaByID
 {$IfEnd} //not NoScripts
@@ -71,20 +63,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  nevTools,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  nevTools
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorGetParaByID;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 // start class TkwPopEditorGetParaByID
 
@@ -100,7 +83,7 @@ begin
  if anEditor.TextSource.DocumentContainer.FindObjByID(aCtx.rEngine.PopInt, l_O) then
  begin
   if not l_O.AsObject.QT(InevPara, l_P) then
-   RunnerAssert(false, '', aCtx);
+   RunnerError('', aCtx);
   aCtx.rEngine.PushIntf(l_P);
   aCtx.rEngine.PushBool(true);
  end//anEditor.TextSource.DocumentContainer.FindObjByID(anID, l_O)
@@ -119,7 +102,8 @@ end;//TkwPopEditorGetParaByID.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_GetParaByID
+ TkwPopEditorGetParaByID.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

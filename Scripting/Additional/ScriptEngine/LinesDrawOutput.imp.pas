@@ -2,13 +2,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/LinesDrawOutput.imp.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "LinesDrawOutput.imp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::MixIns::LinesDrawOutput
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: Impurity::Class Shared Delphi::ScriptEngine$Everest::MixIns::LinesDrawOutput
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,6 +31,10 @@
    procedure SaveDrawing(anEditor: TevCustomEditorWindow;
      aPrinting: Boolean);
  end;//_LinesDrawOutput_
+{$Else}
+
+ _LinesDrawOutput_ = _LinesDrawOutput_Parent_;
+
 {$IfEnd} //not NoScripts
 
 {$Else LinesDrawOutput_imp}

@@ -2,19 +2,14 @@ unit tfwValueStack;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwValueStack.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "tfwValueStack.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::ScriptEngineCore::TtfwValueStack
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::ScriptEngineCore::TtfwValueStack
 //
 // Стек переменных. Сюда помещаются/выводятся переменные при исполнении скрипта.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -25,7 +20,8 @@ uses
   tfwScriptingInterfaces,
   tfwValueList,
   l3Interfaces,
-  l3Variant
+  l3Variant,
+  Types
   ;
 {$IfEnd} //not NoScripts
 
@@ -91,6 +87,14 @@ type
    procedure PushClass(aClass: TClass);
    function PopClass: TClass;
    function IsTopClass: Boolean;
+   function PopObjAs(aClass: TClass): Pointer;
+   function PopClassAs(aClass: TClass): Pointer;
+   function PopWideString: WideString;
+   procedure PushWideString(const aValue: WideString);
+   function PopPoint: TPoint;
+   procedure PushPoint(const aPoint: TPoint);
+   procedure PushList(const aList: ItfwValueList);
+   function PopList: ItfwValueList;
  public
  // public methods
    function Top: TtfwStackValue;
@@ -106,7 +110,8 @@ implementation
 {$If not defined(NoScripts)}
 uses
   l3String,
-  l3Base
+  l3Base,
+  l3StringEx
   ;
 {$IfEnd} //not NoScripts
 
@@ -131,7 +136,7 @@ var
 //#UC END# *4DF069C60159_4DB009CF0103_var*
 begin
 //#UC START# *4DF069C60159_4DB009CF0103_impl*
- Assert(Count > aDelta);
+ EtfwCheck.IsTrue(Count > aDelta, 'количество элементов меноше или равно дельте');
  l_Index := Count - aDelta - 1;
  Result := Items[l_Index];
  if aNeedPop then
@@ -155,9 +160,9 @@ var
 //#UC END# *4DB0090A0000_4DB009CF0103_var*
 begin
 //#UC START# *4DB0090A0000_4DB009CF0103_impl*
- Assert(Count > 0);
+ EtfwCheck.IsTrue(Count > 0, 'Стек пустой');
  l_V := Last;
- Assert(l_V.rType = tfw_svtInt);
+ EtfwCheck.IsTrue(l_V.rType = tfw_svtInt, 'Должно быть целое');
  Result := l_V.rInteger;
  Delete(Count - 1);
 //#UC END# *4DB0090A0000_4DB009CF0103_impl*
@@ -177,7 +182,7 @@ function TtfwValueStack.PopBool: Boolean;
 //#UC END# *4DB013AF01C9_4DB009CF0103_var*
 begin
 //#UC START# *4DB013AF01C9_4DB009CF0103_impl*
- Assert(Count > 0);
+ EtfwCheck.IsTrue(Count > 0, 'Стек пустой');
  Result := Last.AsBoolean;
  Delete(Count - 1);
 //#UC END# *4DB013AF01C9_4DB009CF0103_impl*
@@ -239,7 +244,7 @@ function TtfwValueStack.PopDelphiString: AnsiString;
 //#UC END# *4DB0489C0129_4DB009CF0103_var*
 begin
 //#UC START# *4DB0489C0129_4DB009CF0103_impl*
- Assert(Count > 0);
+ EtfwCheck.IsTrue(Count > 0, 'Стек пустой');
  Result := l3Str(Last.AsString);
  Delete(Count - 1);
 //#UC END# *4DB0489C0129_4DB009CF0103_impl*
@@ -250,7 +255,7 @@ function TtfwValueStack.PopString: Il3CString;
 //#UC END# *4DB1784F0388_4DB009CF0103_var*
 begin
 //#UC START# *4DB1784F0388_4DB009CF0103_impl*
- Assert(Count > 0);
+ EtfwCheck.IsTrue(Count > 0, 'Стек пустой');
  Result := Last.AsString;
  Delete(Count - 1);
 //#UC END# *4DB1784F0388_4DB009CF0103_impl*
@@ -282,7 +287,7 @@ procedure TtfwValueStack.Drop;
 //#UC END# *4DB6F04F02D2_4DB009CF0103_var*
 begin
 //#UC START# *4DB6F04F02D2_4DB009CF0103_impl*
- Assert(Count > 0);
+ EtfwCheck.IsTrue(Count > 0, 'Стек пустой');
  Delete(Count - 1);
 //#UC END# *4DB6F04F02D2_4DB009CF0103_impl*
 end;//TtfwValueStack.Drop
@@ -292,7 +297,7 @@ procedure TtfwValueStack.Swap;
 //#UC END# *4DB704AA00BF_4DB009CF0103_var*
 begin
 //#UC START# *4DB704AA00BF_4DB009CF0103_impl*
- Assert(Count > 1);
+ EtfwCheck.IsTrue(Count > 1, 'Должно быть больше одного элемента в стеке');
  Exchange(Count - 1, Count - 2);
 //#UC END# *4DB704AA00BF_4DB009CF0103_impl*
 end;//TtfwValueStack.Swap
@@ -311,7 +316,7 @@ function TtfwValueStack.Pop: TtfwStackValue;
 //#UC END# *4DBAF8B002CA_4DB009CF0103_var*
 begin
 //#UC START# *4DBAF8B002CA_4DB009CF0103_impl*
- Assert(Count > 0);
+ EtfwCheck.IsTrue(Count > 0, 'Стек пустой');
  Result := Last;
  Delete(Count - 1);
 //#UC END# *4DBAF8B002CA_4DB009CF0103_impl*
@@ -343,7 +348,7 @@ function TtfwValueStack.PopObj: TObject;
 //#UC END# *4DBAF9210150_4DB009CF0103_var*
 begin
 //#UC START# *4DBAF9210150_4DB009CF0103_impl*
- Assert(Count > 0);
+ EtfwCheck.IsTrue(Count > 0, 'Стек пустой');
  Result := Last.AsObject;
  Delete(Count - 1);
 //#UC END# *4DBAF9210150_4DB009CF0103_impl*
@@ -369,7 +374,7 @@ var
 //#UC END# *4DEF28E400E0_4DB009CF0103_var*
 begin
 //#UC START# *4DEF28E400E0_4DB009CF0103_impl*
- Assert(Count > 2);
+ EtfwCheck.IsTrue(Count > 2, 'Должно быть больше двух элементов в стеке');
  l_BottomID := Count - 3;
  Exchange(l_BottomID, l_BottomID + 1);
  Inc(l_BottomID);
@@ -385,7 +390,7 @@ begin
  if IsTopInt then
   Add(PrevTop(PopInt, False))
  else
-  Assert(False);
+  EtfwCheck.Fail('Должно быть целое');
 //#UC END# *4DEF5D850232_4DB009CF0103_impl*
 end;//TtfwValueStack.Pick
 
@@ -396,7 +401,7 @@ var
 //#UC END# *4DEF5FBB0157_4DB009CF0103_var*
 begin
 //#UC START# *4DEF5FBB0157_4DB009CF0103_impl*
- Assert(Count > 2);
+ EtfwCheck.IsTrue(Count > 2, 'Должно быть больше двух элементов в стеке');
  l_TopID := Count - 1;
  Exchange(l_TopID, l_TopID - 1);
  Dec(l_TopID);
@@ -411,7 +416,7 @@ var
 //#UC END# *4DEF5FE202B1_4DB009CF0103_var*
 begin
 //#UC START# *4DEF5FE202B1_4DB009CF0103_impl*
- Assert(Count > 3);
+ EtfwCheck.IsTrue(Count > 3, 'Должно быть больше трёх элементов в стеке');
  l_TopID := Count - 1;
  Exchange(l_TopID - 2, l_TopID);
  Exchange(l_TopID - 1, l_TopID - 3);
@@ -423,7 +428,7 @@ procedure TtfwValueStack.Over2;
 //#UC END# *4DEF5FF802E6_4DB009CF0103_var*
 begin
 //#UC START# *4DEF5FF802E6_4DB009CF0103_impl*
- Assert(Count > 3);
+ EtfwCheck.IsTrue(Count > 3, 'Должно быть больше трёх элементов в стеке');
  Add(PrevTop(3, False));
  Add(PrevTop(3, False));
 //#UC END# *4DEF5FF802E6_4DB009CF0103_impl*
@@ -434,7 +439,7 @@ procedure TtfwValueStack.Dup2;
 //#UC END# *4DEF60050174_4DB009CF0103_var*
 begin
 //#UC START# *4DEF60050174_4DB009CF0103_impl*
- Assert(Count > 1);
+ EtfwCheck.IsTrue(Count > 1, 'Должно быть больше одного элемента в стеке');
  Add(PrevTop(1, False));
  Add(PrevTop(1, False));
 //#UC END# *4DEF60050174_4DB009CF0103_impl*
@@ -445,7 +450,7 @@ procedure TtfwValueStack.Drop2;
 //#UC END# *4DEF6013023F_4DB009CF0103_var*
 begin
 //#UC START# *4DEF6013023F_4DB009CF0103_impl*
- Assert(Count > 1);
+ EtfwCheck.IsTrue(Count > 1, 'Должно быть больше одного элемента в стеке');
  Delete(Count - 1);
  Delete(Count - 1);
 //#UC END# *4DEF6013023F_4DB009CF0103_impl*
@@ -456,7 +461,7 @@ procedure TtfwValueStack.Nip;
 //#UC END# *4DEF602000E4_4DB009CF0103_var*
 begin
 //#UC START# *4DEF602000E4_4DB009CF0103_impl*
- Assert(Count > 1);
+ EtfwCheck.IsTrue(Count > 1, 'Должно быть больше одного элемента в стеке');
  Delete(Count - 2);
 //#UC END# *4DEF602000E4_4DB009CF0103_impl*
 end;//TtfwValueStack.Nip
@@ -466,7 +471,7 @@ procedure TtfwValueStack.Tuck;
 //#UC END# *4DEF602B03A2_4DB009CF0103_var*
 begin
 //#UC START# *4DEF602B03A2_4DB009CF0103_impl*
- Assert(Count > 1);
+ EtfwCheck.IsTrue(Count > 1, 'Должно быть больше одного элемента в стеке');
  Insert(Count - 2, Top);
 //#UC END# *4DEF602B03A2_4DB009CF0103_impl*
 end;//TtfwValueStack.Tuck
@@ -476,7 +481,7 @@ procedure TtfwValueStack.Over;
 //#UC END# *4DF06491010E_4DB009CF0103_var*
 begin
 //#UC START# *4DF06491010E_4DB009CF0103_impl*
- Assert(Count > 1);
+ EtfwCheck.IsTrue(Count > 1, 'Должно быть больше одного элемента в стеке');
  Add(PrevTop(1, False));
 //#UC END# *4DF06491010E_4DB009CF0103_impl*
 end;//TtfwValueStack.Over
@@ -491,7 +496,7 @@ begin
  //if IsTopInt then
   Add(PrevTop(PopInt, True))
 // else
-//  Assert(False);
+//  EtfwCheck.Fail(False);
  //#UC END# *4DF0649B0073_4DB009CF0103_impl*
 end;//TtfwValueStack.Roll
 
@@ -509,7 +514,7 @@ function TtfwValueStack.PopIntf(const aGUID: TGUID): IUnknown;
 //#UC END# *4EB274C402BC_4DB009CF0103_var*
 begin
 //#UC START# *4EB274C402BC_4DB009CF0103_impl*
- Assert(Count > 0);
+ EtfwCheck.IsTrue(Count > 0, 'Стек пустой');
  Result := Last.AsIntf(aGUID);
  Delete(Count - 1);
 //#UC END# *4EB274C402BC_4DB009CF0103_impl*
@@ -520,7 +525,7 @@ function TtfwValueStack.PopIntf: IUnknown;
 //#UC END# *4EB274E201C2_4DB009CF0103_var*
 begin
 //#UC START# *4EB274E201C2_4DB009CF0103_impl*
- Assert(Count > 0);
+ EtfwCheck.IsTrue(Count > 0, 'Стек пустой');
  Result := Last.AsIntf;
  Delete(Count - 1);
 //#UC END# *4EB274E201C2_4DB009CF0103_impl*
@@ -694,7 +699,7 @@ function TtfwValueStack.PopClass: TClass;
 //#UC END# *5085273502AA_4DB009CF0103_var*
 begin
 //#UC START# *5085273502AA_4DB009CF0103_impl*
- Assert(Count > 0);
+ EtfwCheck.IsTrue(Count > 0, 'Стек пустой');
  Result := Last.AsClass;
  Delete(Count - 1);
 //#UC END# *5085273502AA_4DB009CF0103_impl*
@@ -711,6 +716,106 @@ begin
   Result := (Last.rType = tfw_svtClass);
 //#UC END# *5085275F0044_4DB009CF0103_impl*
 end;//TtfwValueStack.IsTopClass
+
+function TtfwValueStack.PopObjAs(aClass: TClass): Pointer;
+//#UC START# *54F7390300EC_4DB009CF0103_var*
+var
+ l_O : TObject;
+//#UC END# *54F7390300EC_4DB009CF0103_var*
+begin
+//#UC START# *54F7390300EC_4DB009CF0103_impl*
+ l_O := PopObj;
+ if (l_O = nil) then
+ begin
+  if aClass.InheritsFrom(TtfwWord) then
+  begin
+   Result := nil;
+   Exit;
+  end;//aClass.IhneritsFrom(TtfwWord)
+  EtfwCheck.Fail('Передан nil, вместо: ' + aClass.ClassName);
+ end;//l_O = nil 
+ EtfwCheck.IsTrue(l_O Is aClass, 'Класс: ' + l_O.ClassName + ' не совместим с: ' + aClass.ClassName);
+ Result := Pointer(l_O);
+//#UC END# *54F7390300EC_4DB009CF0103_impl*
+end;//TtfwValueStack.PopObjAs
+
+function TtfwValueStack.PopClassAs(aClass: TClass): Pointer;
+//#UC START# *54F8664200B0_4DB009CF0103_var*
+var
+ l_C : TClass;
+//#UC END# *54F8664200B0_4DB009CF0103_var*
+begin
+//#UC START# *54F8664200B0_4DB009CF0103_impl*
+ l_C := PopClass;
+ if (l_C = nil) then
+ begin
+(*  if aClass.InheritsFrom(TtfwWord) then
+  begin
+   Result := nil;
+   Exit;
+  end;//aClass.IhneritsFrom(TtfwWord)*)
+  EtfwCheck.Fail('Передан nil, вместо: ' + aClass.ClassName);
+ end;//l_C = nil
+ EtfwCheck.IsTrue(l_C.InheritsFrom(aClass), 'Класс: ' + l_C.ClassName + ' не совместим с: ' + aClass.ClassName);
+ Result := Pointer(l_C);
+//#UC END# *54F8664200B0_4DB009CF0103_impl*
+end;//TtfwValueStack.PopClassAs
+
+function TtfwValueStack.PopWideString: WideString;
+//#UC START# *54F9C2A502E9_4DB009CF0103_var*
+//#UC END# *54F9C2A502E9_4DB009CF0103_var*
+begin
+//#UC START# *54F9C2A502E9_4DB009CF0103_impl*
+ Result := Tl3Str(l3PCharLen(PopString)).AsWideString;
+//#UC END# *54F9C2A502E9_4DB009CF0103_impl*
+end;//TtfwValueStack.PopWideString
+
+procedure TtfwValueStack.PushWideString(const aValue: WideString);
+//#UC START# *54F9C2CF0044_4DB009CF0103_var*
+//#UC END# *54F9C2CF0044_4DB009CF0103_var*
+begin
+//#UC START# *54F9C2CF0044_4DB009CF0103_impl*
+ PushString(l3CStr(aValue));
+//#UC END# *54F9C2CF0044_4DB009CF0103_impl*
+end;//TtfwValueStack.PushWideString
+
+function TtfwValueStack.PopPoint: TPoint;
+//#UC START# *54F9C6530229_4DB009CF0103_var*
+//#UC END# *54F9C6530229_4DB009CF0103_var*
+begin
+//#UC START# *54F9C6530229_4DB009CF0103_impl*
+ Result.Y := PopInt;
+ Result.X := PopInt;
+//#UC END# *54F9C6530229_4DB009CF0103_impl*
+end;//TtfwValueStack.PopPoint
+
+procedure TtfwValueStack.PushPoint(const aPoint: TPoint);
+//#UC START# *54F9C66902E3_4DB009CF0103_var*
+//#UC END# *54F9C66902E3_4DB009CF0103_var*
+begin
+//#UC START# *54F9C66902E3_4DB009CF0103_impl*
+ PushInt(aPoint.X);
+ PushInt(aPoint.Y);
+//#UC END# *54F9C66902E3_4DB009CF0103_impl*
+end;//TtfwValueStack.PushPoint
+
+procedure TtfwValueStack.PushList(const aList: ItfwValueList);
+//#UC START# *5510153F001C_4DB009CF0103_var*
+//#UC END# *5510153F001C_4DB009CF0103_var*
+begin
+//#UC START# *5510153F001C_4DB009CF0103_impl*
+ Push(TtfwStackValue_C(aList));
+//#UC END# *5510153F001C_4DB009CF0103_impl*
+end;//TtfwValueStack.PushList
+
+function TtfwValueStack.PopList: ItfwValueList;
+//#UC START# *551015680218_4DB009CF0103_var*
+//#UC END# *551015680218_4DB009CF0103_var*
+begin
+//#UC START# *551015680218_4DB009CF0103_impl*
+ Result := Pop.AsList;
+//#UC END# *551015680218_4DB009CF0103_impl*
+end;//TtfwValueStack.PopList
 
 {$IfEnd} //not NoScripts
 

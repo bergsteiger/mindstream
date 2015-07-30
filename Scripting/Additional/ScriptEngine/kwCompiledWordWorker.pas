@@ -2,21 +2,16 @@ unit kwCompiledWordWorker;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Core"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledWordWorker.pas"
+// Модуль: "kwCompiledWordWorker.pas"
 // Начат: 12.05.2011 16:39
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledWordWorker
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::CompiledWords::TkwCompiledWordWorker
 //
 // Базовый класс для исполняемых скомпилированных слов.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -46,7 +41,8 @@ type
    f_Word : TtfwWord;
  public
  // public methods
-   constructor Create(aWordToPush: TtfwWord); reintroduce;
+   constructor Create(aWordToPush: TtfwWord;
+     aWordToRun: TtfwWord); reintroduce; virtual;
  public
  // public properties
    property WordToWork: TtfwWord
@@ -67,7 +63,8 @@ uses
 
 // start class TkwCompiledWordWorker
 
-constructor TkwCompiledWordWorker.Create(aWordToPush: TtfwWord);
+constructor TkwCompiledWordWorker.Create(aWordToPush: TtfwWord;
+  aWordToRun: TtfwWord);
 //#UC START# *4DCBB0CD028D_4DCBD50101CB_var*
 //#UC END# *4DCBB0CD028D_4DCBD50101CB_var*
 begin
@@ -96,6 +93,12 @@ begin
 //#UC END# *479731C50290_4DCBD50101CB_impl*
 end;//TkwCompiledWordWorker.Cleanup
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledWordWorker
+ TkwCompiledWordWorker.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

@@ -2,10 +2,10 @@ unit kwIterateSubDecriptorsOnSubPanelEX;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwIterateSubDecriptorsOnSubPanelEX.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwIterateSubDecriptorsOnSubPanelEX.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SubPanelWords::IterateSubDecriptorsOnSubPanelEX
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::SubPanelWords::IterateSubDecriptorsOnSubPanelEX
 //
 // Перебирает все SubDescriptot на SubPanel, которые *могут быть* отрисованы (!). Т.е. проверка на
 // Visible не производится. Если это нужно, то можно реализвать в скриптах.
@@ -25,12 +25,7 @@ unit kwIterateSubDecriptorsOnSubPanelEX;
 // и т.п.
 // aSubPanelSub - визуальное представление метки.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -47,7 +42,7 @@ uses
 
 {$If not defined(NoScripts)}
 type
- TkwIterateSubDecriptorsOnSubPanelEX = {final} class(TkwIterateSubDecriptorsOnSubPanel)
+ TkwIterateSubDecriptorsOnSubPanelEX = {final scriptword} class(TkwIterateSubDecriptorsOnSubPanel)
   {* Перебирает все SubDescriptot на SubPanel, которые *могут быть* отрисованы (!). Т.е. проверка на Visible не производится. Если это нужно, то можно реализвать в скриптах. 
 Формат:
 [code]
@@ -65,12 +60,10 @@ PROCEDURE CheckDescription OBJECT IN aSubDescription OBJECT IN aSubPanelSub
 aSubPanelSub - визуальное представление метки. }
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    procedure PushObjData(const aCtx: TtfwContext;
      aSubDescription: TevSubDescriptor;
      aSubPanelSub: TevSubPanelSub); override;
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwIterateSubDecriptorsOnSubPanelEX
 {$IfEnd} //not NoScripts
 
@@ -105,6 +98,12 @@ begin
 //#UC END# *53EDFA0401B8_53EDF0A20129_impl*
 end;//TkwIterateSubDecriptorsOnSubPanelEX.PushObjData
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация IterateSubDecriptorsOnSubPanelEX
+ TkwIterateSubDecriptorsOnSubPanelEX.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

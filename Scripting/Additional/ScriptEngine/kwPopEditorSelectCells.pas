@@ -2,10 +2,10 @@ unit kwPopEditorSelectCells;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorSelectCells.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorSelectCells.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_SelectCells
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_SelectCells
 //
 // *Формат:* aStartCell aStartRow aFinshCell aFinishRow anEditorControl pop:editor:SelectCells
 // *Описание:* Выделяет диапазон ячеек с помощью мыши начиная от начальной (aStartCell, aRowCell)
@@ -21,12 +21,7 @@ unit kwPopEditorSelectCells;
 // *Примечание 2:* Текст в начальной ячейке должен быть выровнен по левому краю. Иначе  появится
 // сообщение об ошибке.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -34,19 +29,13 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord,
-  nevTools
+  kwSelectCellsWord
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwSelectCellsWord.imp.pas}
- TkwPopEditorSelectCells = {final} class(_kwSelectCellsWord_)
+ TkwPopEditorSelectCells = {final scriptword} class(TkwSelectCellsWord)
   {* *Формат:* aStartCell aStartRow aFinshCell aFinishRow anEditorControl pop:editor:SelectCells
 *Описание:* Выделяет диапазон ячеек с помощью мыши начиная от начальной (aStartCell, aRowCell) до конечной (aFinishCell, aFinishRow). Курсор должен уже находится в таблице. Положение курсора в таблице не имеет значения. Параметры aStartCell aStartRow aFinshCell aFinishRow - Integer
 *Пример:*
@@ -60,8 +49,8 @@ type
  // realized methods
    function IsVertical: Boolean; override;
      {* При выделении мышь движется сверху вниз. }
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorSelectCells
 {$IfEnd} //not NoScripts
@@ -69,25 +58,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  l3Base,
-  l3Units,
-  evConst,
-  nevGUIInterfaces,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms,
-  Table_Const
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorSelectCells;
-
-{$Include ..\ScriptEngine\kwSelectCellsWord.imp.pas}
 
 // start class TkwPopEditorSelectCells
 
@@ -110,7 +80,8 @@ end;//TkwPopEditorSelectCells.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwSelectCellsWord.imp.pas}
+// Регистрация pop_editor_SelectCells
+ TkwPopEditorSelectCells.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

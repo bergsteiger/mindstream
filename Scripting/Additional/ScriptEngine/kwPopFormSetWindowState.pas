@@ -2,17 +2,12 @@ unit kwPopFormSetWindowState;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopFormSetWindowState.pas"
+// Библиотека "ScriptEngine$RTLandVCL"
+// Модуль: "kwPopFormSetWindowState.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FormsProcessing::pop_form_SetWindowState
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::FormsProcessing::pop_form_SetWindowState
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,24 +15,21 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwFormFromStackWord,
   Forms,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
- TkwPopFormSetWindowState = {final} class(_kwFormFromStackWord_)
+ TkwPopFormSetWindowState = {final scriptword} class(TkwFormFromStackWord)
  protected
  // realized methods
    procedure DoForm(aForm: TForm;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopFormSetWindowState
 {$IfEnd} //not NoScripts
@@ -45,19 +37,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopFormSetWindowState;
-
-{$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
 
 // start class TkwPopFormSetWindowState
 
@@ -70,7 +49,7 @@ begin
  if aCtx.rEngine.IsTopInt then
   aForm.WindowState := TWindowState(aCtx.rEngine.PopInt)
  else
-  RunnerAssert(False, 'Не задано WindowState', aCtx);
+  RunnerError('Не задано WindowState', aCtx);
 //#UC END# *4F2145550317_4F82C87C001F_impl*
 end;//TkwPopFormSetWindowState.DoForm
 
@@ -84,7 +63,8 @@ end;//TkwPopFormSetWindowState.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
+// Регистрация pop_form_SetWindowState
+ TkwPopFormSetWindowState.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -2,10 +2,10 @@ unit kwPopEditorPasteRTF;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorPasteRTF.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorPasteRTF.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_PasteRTF
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_PasteRTF
 //
 // *Формат:* rtf_file_name anEditorControl pop:editor:PasteRTF
 // *Описание:* Эмулирует вставку из буфера обмена данных из внешних приложений, например, текст в
@@ -15,12 +15,7 @@ unit kwPopEditorPasteRTF;
 // Test.rtf  focused:control:push pop:editor:PasteRTF
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -28,18 +23,14 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  kwInsertFromStreamCommon,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwInsertFromStreamCommon.imp.pas}
- TkwPopEditorPasteRTF = {final} class(_kwInsertFromStreamCommon_)
+ TkwPopEditorPasteRTF = {final scriptword} class(TkwInsertFromStreamCommon)
   {* *Формат:* rtf_file_name anEditorControl pop:editor:PasteRTF
 *Описание:* Эмулирует вставку из буфера обмена данных из внешних приложений, например, текст в формате RTF из файла rtf_file_name.
 *Пример:*
@@ -49,8 +40,8 @@ Test.rtf  focused:control:push pop:editor:PasteRTF
  protected
  // realized methods
    function GetFormat(const aCtx: TtfwContext): Integer; override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorPasteRTF
 {$IfEnd} //not NoScripts
@@ -60,24 +51,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   evTypes,
-  ActiveX,
-  l3Base,
-  l3Filer,
-  nevInternalInterfaces,
-  l3Types,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  Windows
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorPasteRTF;
-
-{$Include ..\ScriptEngine\kwInsertFromStreamCommon.imp.pas}
 
 // start class TkwPopEditorPasteRTF
 
@@ -100,7 +78,8 @@ end;//TkwPopEditorPasteRTF.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwInsertFromStreamCommon.imp.pas}
+// Регистрация pop_editor_PasteRTF
+ TkwPopEditorPasteRTF.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

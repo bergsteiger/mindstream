@@ -3,34 +3,28 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwStandardProcedureWithStackChecking.imp.pas"
+// Модуль: "tfwStandardProcedureWithStackChecking.imp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::WordsDefinition::tfwStandardProcedureWithStackChecking
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: Impurity::Class Shared Delphi Low Level::ScriptEngine::WordsDefinition::tfwStandardProcedureWithStackChecking
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 {$Define tfwStandardProcedureWithStackChecking_imp}
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
- _tfwStandardProcedureWithStackChecking_ = {mixin} class(_tfwStandardProcedure_)
+ _tfwStandardProcedureWithStackChecking_ = {mixin} class(TtfwStandardProcedure)
  protected
  // overridden protected methods
    function CompiledWordClass(const aCtx: TtfwContext): RkwCompiledWordPrim; override;
  end;//_tfwStandardProcedureWithStackChecking_
+{$Else}
+
+ _tfwStandardProcedureWithStackChecking_ = TtfwStandardProcedure;
+
 {$IfEnd} //not NoScripts
 
 {$Else tfwStandardProcedureWithStackChecking_imp}
 
-{$IfNDef tfwStandardProcedureWithStackChecking_imp_impl}
-{$Define tfwStandardProcedureWithStackChecking_imp_impl}
-
 {$If not defined(NoScripts)}
-
-
-{$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
 
 // start class _tfwStandardProcedureWithStackChecking_
 
@@ -45,10 +39,4 @@ end;//_tfwStandardProcedureWithStackChecking_.CompiledWordClass
 
 {$IfEnd} //not NoScripts
 
-{$Else  tfwStandardProcedureWithStackChecking_imp_impl}
-{$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
-{$IfEnd} //not NoScripts
-
-{$EndIf tfwStandardProcedureWithStackChecking_imp_impl}
 {$EndIf tfwStandardProcedureWithStackChecking_imp}

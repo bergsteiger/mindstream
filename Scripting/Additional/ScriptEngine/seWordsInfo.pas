@@ -2,17 +2,12 @@ unit seWordsInfo;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/seWordsInfo.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "seWordsInfo.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<UtilityPack::Class>> Shared Delphi Scripting::ScriptEngine::ScriptEngineCore::seWordsInfo
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: UtilityPack::Class Shared Delphi Low Level::ScriptEngine$Core::ScriptEngineCore::seWordsInfo
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -47,7 +42,7 @@ var
 begin
 //#UC START# *53E10704024E_53E107920007_impl*
  Result := nil;
- l_TI := aWord.ResultTypeInfo;
+ l_TI := aWord.ResultTypeInfo[aCtx];
  l_Ms := l_TI.Modifiers;
  if (l_Ms <> []) then
  begin

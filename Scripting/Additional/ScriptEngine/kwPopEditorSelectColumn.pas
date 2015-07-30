@@ -2,10 +2,10 @@ unit kwPopEditorSelectColumn;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorSelectColumn.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorSelectColumn.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_SelectColumn
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_SelectColumn
 //
 // *Формат:* aColID anEditorControl pop:editor:SelectCells
 // *Описание:* Выделяет колонку таблицы. Курсор должен уже находится в таблице. Положение курсора в
@@ -16,12 +16,7 @@ unit kwPopEditorSelectColumn;
 // {code}
 // *Результат:* Выделяет вторую колонку.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,21 +24,18 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  evCustomEditorWindow,
+  kwEditorFromStackWord,
+  nevTools,
   tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord,
-  nevTools
+  evCustomEditorWindow
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- _kwEditorGetTableFromCursor_Parent_ = _kwEditorFromStackWord_;
+ _kwEditorGetTableFromCursor_Parent_ = TkwEditorFromStackWord;
  {$Include ..\ScriptEngine\kwEditorGetTableFromCursor.imp.pas}
- TkwPopEditorSelectColumn = {final} class(_kwEditorGetTableFromCursor_)
+ TkwPopEditorSelectColumn = {final scriptword} class(_kwEditorGetTableFromCursor_)
   {* *Формат:* aColID anEditorControl pop:editor:SelectCells
 *Описание:* Выделяет колонку таблицы. Курсор должен уже находится в таблице. Положение курсора в таблице не имеет значения. Параметры aColID - Integer
 *Пример:*
@@ -55,8 +47,8 @@ type
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorSelectColumn
 {$IfEnd} //not NoScripts
@@ -66,20 +58,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   evCursorTools,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms,
   Table_Const
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorSelectColumn;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 {$Include ..\ScriptEngine\kwEditorGetTableFromCursor.imp.pas}
 
@@ -113,7 +96,8 @@ end;//TkwPopEditorSelectColumn.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_SelectColumn
+ TkwPopEditorSelectColumn.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

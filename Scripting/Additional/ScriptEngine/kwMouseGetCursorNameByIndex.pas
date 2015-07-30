@@ -3,16 +3,11 @@ unit kwMouseGetCursorNameByIndex;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwMouseGetCursorNameByIndex.pas"
+// Модуль: "kwMouseGetCursorNameByIndex.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::MouseInput::mouse_GetCursorNameByIndex
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::MouseInput::mouse_GetCursorNameByIndex
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -27,13 +22,12 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwMouseGetCursorNameByIndex = class(_tfwAutoregisteringWord_)
+ TkwMouseGetCursorNameByIndex = {scriptword} class(TtfwRegisterableWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwMouseGetCursorNameByIndex
 {$IfEnd} //not NoScripts
@@ -42,17 +36,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  Controls,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  Controls
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwMouseGetCursorNameByIndex;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwMouseGetCursorNameByIndex
 
@@ -78,7 +66,8 @@ end;//TkwMouseGetCursorNameByIndex.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация mouse_GetCursorNameByIndex
+ TkwMouseGetCursorNameByIndex.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

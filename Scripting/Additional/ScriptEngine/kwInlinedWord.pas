@@ -3,16 +3,11 @@ unit kwInlinedWord;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwInlinedWord.pas"
+// Модуль: "kwInlinedWord.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwInlinedWord
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwInlinedWord
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -30,7 +25,7 @@ type
  TkwInlinedWord = class(TkwCompiledWord)
  protected
  // overridden property methods
-   function pm_GetResultTypeInfo: TtfwTypeInfo; override;
+   function pm_GetResultTypeInfo(const aCtx: TtfwContext): TtfwTypeInfo; override;
  public
  // overridden public methods
    procedure SetResultTypeInfo(const aValue: TtfwTypeInfo;
@@ -44,7 +39,7 @@ implementation
 
 // start class TkwInlinedWord
 
-function TkwInlinedWord.pm_GetResultTypeInfo: TtfwTypeInfo;
+function TkwInlinedWord.pm_GetResultTypeInfo(const aCtx: TtfwContext): TtfwTypeInfo;
 //#UC START# *52CFC11603C8_53ED9C3B01F3get_var*
 //#UC END# *52CFC11603C8_53ED9C3B01F3get_var*
 begin
@@ -63,6 +58,12 @@ begin
 //#UC END# *52EA6A2C0111_53ED9C3B01F3_impl*
 end;//TkwInlinedWord.SetResultTypeInfo
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwInlinedWord
+ TkwInlinedWord.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

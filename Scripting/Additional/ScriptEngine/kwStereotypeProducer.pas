@@ -3,16 +3,11 @@ unit kwStereotypeProducer;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwStereotypeProducer.pas"
+// Модуль: "kwStereotypeProducer.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Stereotyping::StereotypeProducer
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Stereotyping::StereotypeProducer
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,20 +15,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
-  tfwScriptingInterfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwStereotypeProducerPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwStereotypeProducerPrim.imp.pas}
- TkwStereotypeProducer = {final} class(_kwStereotypeProducerPrim_)
- public
- // overridden public methods
+ TkwStereotypeProducer = {final scriptword} class(TkwStereotypeProducerPrim)
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwStereotypeProducer
 {$IfEnd} //not NoScripts
@@ -41,32 +31,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  kwCompiledStereotypeProducer,
-  SysUtils,
-  kwCompiledStereotypedWord,
-  kwCompiledWord,
-  kwCompiledVar,
-  l3String,
-  l3Parser,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwStereotypeProducer;
-
-{$Include ..\ScriptEngine\kwStereotypeProducerPrim.imp.pas}
 
 // start class TkwStereotypeProducer
 
@@ -80,7 +44,8 @@ end;//TkwStereotypeProducer.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwStereotypeProducerPrim.imp.pas}
+// Регистрация StereotypeProducer
+ TkwStereotypeProducer.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

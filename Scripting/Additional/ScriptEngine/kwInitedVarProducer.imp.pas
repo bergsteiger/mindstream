@@ -3,19 +3,15 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwInitedVarProducer.imp.pas"
+// Модуль: "kwInitedVarProducer.imp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::VarProducing::kwInitedVarProducer
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: Impurity::Class Shared Delphi Scripting::ScriptEngine::VarProducing::kwInitedVarProducer
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 {$Define kwInitedVarProducer_imp}
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwWordProducer.imp.pas}
- _kwInitedVarProducer_ = {mixin} class(_tfwWordProducer_)
+ _kwInitedVarProducer_ = {mixin} class(TtfwWordProducer)
  protected
  // overridden protected methods
    function CompiledWordClass(const aCtx: TtfwContext): RkwCompiledWordPrim; override;
@@ -24,13 +20,7 @@
 
 {$Else kwInitedVarProducer_imp}
 
-{$IfNDef kwInitedVarProducer_imp_impl}
-{$Define kwInitedVarProducer_imp_impl}
-
 {$If not defined(NoScripts)}
-
-
-{$Include ..\ScriptEngine\tfwWordProducer.imp.pas}
 
 // start class _kwInitedVarProducer_
 
@@ -45,10 +35,4 @@ end;//_kwInitedVarProducer_.CompiledWordClass
 
 {$IfEnd} //not NoScripts
 
-{$Else  kwInitedVarProducer_imp_impl}
-{$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwWordProducer.imp.pas}
-{$IfEnd} //not NoScripts
-
-{$EndIf kwInitedVarProducer_imp_impl}
 {$EndIf kwInitedVarProducer_imp}

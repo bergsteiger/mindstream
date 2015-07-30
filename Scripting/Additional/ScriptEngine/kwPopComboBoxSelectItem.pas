@@ -2,10 +2,10 @@ unit kwPopComboBoxSelectItem;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopComboBoxSelectItem.pas"
+// Библиотека "ScriptEngine$VT"
+// Модуль: "kwPopComboBoxSelectItem.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::ControlsProcessing::pop_ComboBox_SelectItem
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$VT::vtComboBoxWords::pop_ComboBox_SelectItem
 //
 // *Формат:*
 // {code}
@@ -14,12 +14,7 @@ unit kwPopComboBoxSelectItem;
 // *Описание:* Выбирает значение aStr в списке TComboBox, если такое присуствует. Аналогично работа
 // пользователя (вызываются обработчики, связанные с изменением содержимого).
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -28,18 +23,15 @@ interface
 {$If not defined(NoScripts)}
 uses
   StdCtrls,
-  FakeBox,
+  kwComboBoxFromStack,
   tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  FakeBox
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwComboBoxFromStack.imp.pas}
- TkwPopComboBoxSelectItem = {final} class(_kwComboBoxFromStack_)
+ TkwPopComboBoxSelectItem = {final scriptword} class(TkwComboBoxFromStack)
   {* *Формат:* 
 [code]
 aStr aControlObj pop:ComboBox:SelectItem
@@ -51,8 +43,8 @@ aStr aControlObj pop:ComboBox:SelectItem
      const aCtx: TtfwContext); override;
    procedure DoWithFakeBox(aFakeBox: TFakeBox;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopComboBoxSelectItem
 {$IfEnd} //not NoScripts
@@ -60,20 +52,6 @@ aStr aControlObj pop:ComboBox:SelectItem
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopComboBoxSelectItem;
-
-{$Include ..\ScriptEngine\kwComboBoxFromStack.imp.pas}
 
 type
   THackCustomComboBox = class(TCustomComboBox)
@@ -119,7 +97,8 @@ end;//TkwPopComboBoxSelectItem.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwComboBoxFromStack.imp.pas}
+// Регистрация pop_ComboBox_SelectItem
+ TkwPopComboBoxSelectItem.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

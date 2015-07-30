@@ -2,12 +2,12 @@ unit kwPopQueryCardAttributeSetWithLogicOperation;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Everest"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopQueryCardAttributeSetWithLogicOperation.pas"
+// Модуль: "kwPopQueryCardAttributeSetWithLogicOperation.pas"
 // Начат: 28.09.2011 12:04
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::QueryCardProcessing::pop_QueryCard_Attribute_SetWithLogicOperation
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::QueryCardProcessing::pop_QueryCard_Attribute_SetWithLogicOperation
 //
 // Добавляет атрибут с логическим значением к текущей карточке запроса.
 // 
@@ -21,12 +21,7 @@ unit kwPopQueryCardAttributeSetWithLogicOperation;
 // Ok
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -39,17 +34,13 @@ uses
   evQueryCardInt,
   evQueryCardEditor,
   tfwScriptingInterfaces,
-  evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  kwQueryCardFromStackWord
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwQueryCardFromStackWord.imp.pas}
- TkwPopQueryCardAttributeSetWithLogicOperation = class(_kwQueryCardFromStackWord_)
+ TkwPopQueryCardAttributeSetWithLogicOperation = {scriptword} class(TkwQueryCardFromStackWord)
   {* Добавляет атрибут с логическим значением к текущей карточке запроса.
 
 *Пример:*
@@ -68,8 +59,8 @@ type
  // realized methods
    procedure DoCard(const aCtx: TtfwContext;
      aCard: TevQueryCardEditor); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopQueryCardAttributeSetWithLogicOperation
 {$IfEnd} //not NoScripts
@@ -80,20 +71,11 @@ implementation
 uses
   l3String,
   l3Base,
-  evReqIterator,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  evReqIterator
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopQueryCardAttributeSetWithLogicOperation;
-
-{$Include ..\ScriptEngine\kwQueryCardFromStackWord.imp.pas}
 
 // start class TkwPopQueryCardAttributeSetWithLogicOperation
 
@@ -175,7 +157,8 @@ end;//TkwPopQueryCardAttributeSetWithLogicOperation.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwQueryCardFromStackWord.imp.pas}
+// Регистрация pop_QueryCard_Attribute_SetWithLogicOperation
+ TkwPopQueryCardAttributeSetWithLogicOperation.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -3,16 +3,11 @@ unit kwFileOpenRead;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwFileOpenRead.pas"
+// Модуль: "kwFileOpenRead.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FileProcessing::file_OpenRead
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::FileProcessing::file_OpenRead
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -27,13 +22,12 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwFileOpenRead = {final} class(_tfwAutoregisteringWord_)
+ TkwFileOpenRead = {final scriptword} class(TtfwRegisterableWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwFileOpenRead
 {$IfEnd} //not NoScripts
@@ -42,17 +36,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  tfwFile,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  tfwFile
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwFileOpenRead;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwFileOpenRead
 
@@ -75,7 +63,8 @@ end;//TkwFileOpenRead.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация file_OpenRead
+ TkwFileOpenRead.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -3,16 +3,11 @@ unit kwCheckVarByRef;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCheckVarByRef.pas"
+// Модуль: "kwCheckVarByRef.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::MembersWorking::CheckVarByRef
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::MembersWorking::CheckVarByRef
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,21 +15,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  kwCompiledWordWorker,
-  kwCompiledWordPrim,
-  l3Interfaces,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwCheckVarPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwCheckVarPrim.imp.pas}
- TkwCheckVarByRef = {final} class(_kwCheckVarPrim_)
- public
- // overridden public methods
+ TkwCheckVarByRef = {final scriptword} class(TkwCheckVarPrim)
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwCheckVarByRef
 {$IfEnd} //not NoScripts
@@ -42,31 +31,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  kwCompiledCheckVarByRef,
-  kwTemporaryCompiledCode,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  SysUtils,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCheckVarByRef;
-
-{$Include ..\ScriptEngine\kwCheckVarPrim.imp.pas}
 
 // start class TkwCheckVarByRef
 
@@ -80,7 +44,8 @@ end;//TkwCheckVarByRef.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwCheckVarPrim.imp.pas}
+// Регистрация CheckVarByRef
+ TkwCheckVarByRef.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

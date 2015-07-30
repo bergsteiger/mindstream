@@ -2,17 +2,12 @@ unit kwPopEditorCopyAndPaste2DocumentBottom;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorCopyAndPaste2DocumentBottom.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorCopyAndPaste2DocumentBottom.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_CopyAndPaste2DocumentBottom
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_CopyAndPaste2DocumentBottom
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,26 +15,23 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- _ClipboardOperations_Parent_ = _kwEditorFromStackWord_;
+ _ClipboardOperations_Parent_ = TkwEditorFromStackWord;
  {$Include ..\ScriptEngine\ClipboardOperations.imp.pas}
- TkwPopEditorCopyAndPaste2DocumentBottom = class(_ClipboardOperations_)
+ TkwPopEditorCopyAndPaste2DocumentBottom = {scriptword} class(_ClipboardOperations_)
  protected
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorCopyAndPaste2DocumentBottom
 {$IfEnd} //not NoScripts
@@ -48,11 +40,6 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms,
   l3Base,
   evOp,
   l3InternalInterfaces
@@ -60,10 +47,6 @@ uses
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorCopyAndPaste2DocumentBottom;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 {$Include ..\ScriptEngine\ClipboardOperations.imp.pas}
 
@@ -89,7 +72,8 @@ end;//TkwPopEditorCopyAndPaste2DocumentBottom.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_CopyAndPaste2DocumentBottom
+ TkwPopEditorCopyAndPaste2DocumentBottom.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

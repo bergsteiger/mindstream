@@ -2,15 +2,12 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/DrawOutputSupport.imp.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "DrawOutputSupport.imp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::MixIns::DrawOutputSupport
+// Generated from UML model, root element: Impurity::Class Shared Delphi::ScriptEngine$Everest::MixIns::DrawOutputSupport
 //
 // Поддержка сохранения информации об отрисованном в файл для последующего сравнение с эталоном.
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,6 +31,10 @@
    function DoOpenLog(const aView: InevView): AnsiString; virtual; abstract;
    procedure DoCloseLog(const aLogName: AnsiString); virtual; abstract;
  end;//_DrawOutputSupport_
+{$Else}
+
+ _DrawOutputSupport_ = _DrawOutputSupport_Parent_;
+
 {$IfEnd} //not NoScripts
 
 {$Else DrawOutputSupport_imp}

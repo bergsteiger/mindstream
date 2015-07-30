@@ -2,19 +2,14 @@ unit kwStyleTableSaveToFile;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Everest"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwStyleTableSaveToFile.pas"
+// Модуль: "kwStyleTableSaveToFile.pas"
 // Начат: 11.05.2011 17:14
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::CommonWords::StyleTable_SaveToFile
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::SchemaWords::StyleTable_SaveToFile
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,13 +24,12 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwStyleTableSaveToFile = class(_tfwAutoregisteringWord_)
+ TkwStyleTableSaveToFile = {scriptword} class(TtfwRegisterableWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwStyleTableSaveToFile
 {$IfEnd} //not NoScripts
@@ -47,17 +41,11 @@ uses
   evStyleInterfaceEx,
   l3Stream,
   l3Types,
-  SysUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwStyleTableSaveToFile;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwStyleTableSaveToFile
 
@@ -93,7 +81,8 @@ end;//TkwStyleTableSaveToFile.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация StyleTable_SaveToFile
+ TkwStyleTableSaveToFile.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

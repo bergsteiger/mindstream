@@ -2,10 +2,10 @@ unit kwPopEditorPasteEVDTroughClipboard;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorPasteEVDTroughClipboard.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorPasteEVDTroughClipboard.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_PasteEVDTroughClipboard
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_PasteEVDTroughClipboard
 //
 // Описание: загружает EVD'файл в виде текста в буфер обмена, а потом вставляет в редактор.
 // Формат:
@@ -13,12 +13,7 @@ unit kwPopEditorPasteEVDTroughClipboard;
 // anEditor aFileName pop:editor:PasteEVDTroughClipboard
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -26,18 +21,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorPasteEVDTroughClipboard = {final} class(_kwEditorFromStackWord_)
+ TkwPopEditorPasteEVDTroughClipboard = {final scriptword} class(TkwEditorFromStackWord)
   {* Описание: загружает EVD'файл в виде текста в буфер обмена, а потом вставляет в редактор.
 Формат: 
 [code]
@@ -47,8 +39,8 @@ anEditor aFileName pop:editor:PasteEVDTroughClipboard
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorPasteEVDTroughClipboard
 {$IfEnd} //not NoScripts
@@ -63,19 +55,11 @@ uses
   l3Stream,
   l3Base,
   evTypes,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  Windows
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorPasteEVDTroughClipboard;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 // start class TkwPopEditorPasteEVDTroughClipboard
 
@@ -102,14 +86,14 @@ begin
     SetClipboardData(cf_EverestTxt, l3System.ReleaseHandle(l_MemoryStream.MemoryPool.ReleaseHandle));
    finally
     Win32Check(CloseClipboard);
-   end;
+   end;//try..finally
    anEditor.Paste;
   finally
    FreeAndNil(l_MemoryStream);
-  end;
+  end;//try..finally
  finally
   FreeAndNil(l_Filer);
- end;
+ end;//try..finally
 //#UC END# *4F4CB81200CA_53957B0E024C_impl*
 end;//TkwPopEditorPasteEVDTroughClipboard.DoWithEditor
 
@@ -123,7 +107,8 @@ end;//TkwPopEditorPasteEVDTroughClipboard.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_PasteEVDTroughClipboard
+ TkwPopEditorPasteEVDTroughClipboard.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

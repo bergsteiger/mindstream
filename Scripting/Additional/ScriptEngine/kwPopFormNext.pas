@@ -2,19 +2,14 @@ unit kwPopFormNext;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopFormNext.pas"
+// Библиотека "ScriptEngine$RTLandVCL"
+// Модуль: "kwPopFormNext.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FormsProcessing::pop_form_Next
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::FormsProcessing::pop_form_Next
 //
 // form:Next
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,25 +17,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwFormFromStackWord,
   Forms,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
- TkwPopFormNext = class(_kwFormFromStackWord_)
+ TkwPopFormNext = {scriptword} class(TkwFormFromStackWord)
   {* form:Next }
  protected
  // realized methods
    procedure DoForm(aForm: TForm;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopFormNext
 {$IfEnd} //not NoScripts
@@ -48,19 +40,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopFormNext;
-
-{$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
 
 // start class TkwPopFormNext
 
@@ -84,7 +63,8 @@ end;//TkwPopFormNext.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
+// Регистрация pop_form_Next
+ TkwPopFormNext.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

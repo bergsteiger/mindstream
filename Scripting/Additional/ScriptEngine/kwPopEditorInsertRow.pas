@@ -2,19 +2,14 @@ unit kwPopEditorInsertRow;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorInsertRow.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorInsertRow.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_InsertRow
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_InsertRow
 //
 // editor:InsertRow
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,26 +17,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorWithToolsFromStackWord,
   evCustomEditor,
-  tfwScriptingInterfaces,
-  evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
- TkwPopEditorInsertRow = class(_kwEditorWithToolsFromStackWord_)
+ TkwPopEditorInsertRow = {scriptword} class(TkwEditorWithToolsFromStackWord)
   {* editor:InsertRow }
  protected
  // realized methods
    procedure DoEditorWithTools(const aCtx: TtfwContext;
      anEditor: TevCustomEditor); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorInsertRow
 {$IfEnd} //not NoScripts
@@ -49,20 +40,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorInsertRow;
-
-{$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
 
 // start class TkwPopEditorInsertRow
 
@@ -86,7 +63,8 @@ end;//TkwPopEditorInsertRow.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
+// Регистрация pop_editor_InsertRow
+ TkwPopEditorInsertRow.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

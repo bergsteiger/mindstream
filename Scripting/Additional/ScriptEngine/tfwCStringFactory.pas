@@ -2,17 +2,12 @@ unit tfwCStringFactory;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwCStringFactory.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "tfwCStringFactory.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::CString::TtfwCStringFactory
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::CString::TtfwCStringFactory
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -38,6 +33,8 @@ type
    class function C(const aString: Tl3WString): Il3CString; overload; 
    class function C(aString: Tl3PrimString): Il3CString; overload; 
    class function C(aChar: AnsiChar): Il3CString; overload; 
+   class function Exists: Boolean;
+     {* Проверяет создан экземпляр синглетона или нет }
  public
  // singleton factory method
    class function Instance: TtfwCStringFactory;
@@ -208,6 +205,12 @@ begin
  end;//Result = nil
 //#UC END# *4F50782700AA_4F473F9402D8_impl*
 end;//TtfwCStringFactory.C
+
+class function TtfwCStringFactory.Exists: Boolean;
+ {-}
+begin
+ Result := g_TtfwCStringFactory <> nil;
+end;//TtfwCStringFactory.Exists
 
 procedure TtfwCStringFactory.InitFields;
 //#UC START# *47A042E100E2_4F473F9402D8_var*

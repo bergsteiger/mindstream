@@ -2,19 +2,14 @@ unit kwPopEditorDeleteUserComment;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Everest"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorDeleteUserComment.pas"
+// Модуль: "kwPopEditorDeleteUserComment.pas"
 // Начат: 27.04.2011 14:06
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_DeleteUserComment
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_DeleteUserComment
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,26 +17,23 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackNextParaWord,
   nevTools,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackNextParaWord.imp.pas}
- TkwPopEditorDeleteUserComment = class(_kwEditorFromStackNextParaWord_)
+ TkwPopEditorDeleteUserComment = {scriptword} class(TkwEditorFromStackNextParaWord)
  protected
  // realized methods
    procedure DoNextPara(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow;
      const aPara: InevPara); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorDeleteUserComment
 {$IfEnd} //not NoScripts
@@ -51,23 +43,12 @@ implementation
 {$If not defined(NoScripts)}
 uses
   CommentPara_Const,
-  LeafPara_Const,
-  TextPara_Const,
-  Windows,
-  evParaTools,
   evOp,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  afwFacade,
-  Forms
+  TextPara_Const
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorDeleteUserComment;
-
-{$Include ..\ScriptEngine\kwEditorFromStackNextParaWord.imp.pas}
 
 // start class TkwPopEditorDeleteUserComment
 
@@ -106,7 +87,8 @@ end;//TkwPopEditorDeleteUserComment.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackNextParaWord.imp.pas}
+// Регистрация pop_editor_DeleteUserComment
+ TkwPopEditorDeleteUserComment.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

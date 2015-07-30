@@ -2,17 +2,12 @@ unit kwVarWorkerCompiledCode;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwVarWorkerCompiledCode.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "kwVarWorkerCompiledCode.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwVarWorkerCompiledCode
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::CompiledWords::TkwVarWorkerCompiledCode
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -31,5 +26,16 @@ type
 {$IfEnd} //not NoScripts
 
 implementation
+
+{$If not defined(NoScripts)}
+
+
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwVarWorkerCompiledCode
+ TkwVarWorkerCompiledCode.RegisterClass;
+{$IfEnd} //not NoScripts
 
 end.

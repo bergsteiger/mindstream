@@ -3,16 +3,11 @@ unit kwFINALLY;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwFINALLY.pas"
+// Модуль: "kwFINALLY.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::FINALLY
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::FINALLY
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,17 +15,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
-  tfwScriptingInterfaces
+  kwMedianBacket
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwMedianBacket.imp.pas}
- TkwFINALLY = {final} class(_kwMedianBacket_)
- public
- // overridden public methods
+ TkwFINALLY = {final scriptword} class(TkwMedianBacket)
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwFINALLY
 {$IfEnd} //not NoScripts
@@ -38,17 +31,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwFINALLY;
-
-{$Include ..\ScriptEngine\kwMedianBacket.imp.pas}
 
 // start class TkwFINALLY
 
@@ -62,7 +44,8 @@ end;//TkwFINALLY.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwMedianBacket.imp.pas}
+// Регистрация FINALLY
+ TkwFINALLY.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

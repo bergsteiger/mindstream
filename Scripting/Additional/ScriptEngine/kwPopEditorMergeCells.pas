@@ -2,10 +2,10 @@ unit kwPopEditorMergeCells;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorMergeCells.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorMergeCells.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_MergeCells
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_MergeCells
 //
 // *Формат:* aMergeType anEditorControl pop:editor:MergeCells
 // *Описание:* Объединяет выделенные ячейки таблицы. Параметры: aMergeType - Integer - константы
@@ -16,12 +16,7 @@ unit kwPopEditorMergeCells;
 // {code}
 // *Результат:* Объединяет выделенный диапазон ячеек.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,19 +24,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorWithToolsFromStackWord,
   evCustomEditor,
-  tfwScriptingInterfaces,
-  evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
- TkwPopEditorMergeCells = {final} class(_kwEditorWithToolsFromStackWord_)
+ TkwPopEditorMergeCells = {final scriptword} class(TkwEditorWithToolsFromStackWord)
   {* *Формат:* aMergeType anEditorControl pop:editor:MergeCells
 *Описание:* Объединяет выделенные ячейки таблицы. Параметры: aMergeType - Integer - константы см. ArchiSystem.script (ed_maAll , ed_maHorz и ed_maVert).
 *Пример:*
@@ -53,8 +44,8 @@ type
  // realized methods
    procedure DoEditorWithTools(const aCtx: TtfwContext;
      anEditor: TevCustomEditor); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorMergeCells
 {$IfEnd} //not NoScripts
@@ -63,20 +54,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  evEditorInterfaces,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  evEditorInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorMergeCells;
-
-{$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
 
 // start class TkwPopEditorMergeCells
 
@@ -123,7 +105,8 @@ end;//TkwPopEditorMergeCells.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
+// Регистрация pop_editor_MergeCells
+ TkwPopEditorMergeCells.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -3,16 +3,11 @@ unit kwWStringInc;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwWStringInc.pas"
+// Модуль: "kwWStringInc.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::WString_Inc
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::WString_Inc
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,22 +15,21 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwWStrWord,
   l3Interfaces,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwWStrWord.imp.pas}
- TkwWStringInc = {final} class(_tfwWStrWord_)
+ TkwWStringInc = {final scriptword} class(TtfwWStrWord)
  protected
  // realized methods
    procedure DoString(const aCtx: TtfwContext;
      const aStr: Tl3WString); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwWStringInc
 {$IfEnd} //not NoScripts
@@ -45,19 +39,13 @@ implementation
 {$If not defined(NoScripts)}
 uses
   l3Types,
-  SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils,
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwWStringInc;
-
-{$Include ..\ScriptEngine\tfwWStrWord.imp.pas}
 
 // start class TkwWStringInc
 
@@ -85,7 +73,8 @@ end;//TkwWStringInc.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwWStrWord.imp.pas}
+// Регистрация WString_Inc
+ TkwWStringInc.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

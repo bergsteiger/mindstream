@@ -3,16 +3,11 @@ unit kwCompiledImmediateCallerWorkerWord;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledImmediateCallerWorkerWord.pas"
+// Модуль: "kwCompiledImmediateCallerWorkerWord.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledImmediateCallerWorkerWord
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwCompiledImmediateCallerWorkerWord
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -21,6 +16,7 @@ interface
 {$If not defined(NoScripts)}
 uses
   kwCompiledCallerWorkerWord,
+  tfwScriptingInterfaces,
   kwCompiledWordWorkerWordRunner
   ;
 {$IfEnd} //not NoScripts
@@ -30,7 +26,7 @@ type
  TkwCompiledImmediateCallerWorkerWord = class(TkwCompiledCallerWorkerWord)
  protected
  // overridden protected methods
-   function RunnerClass: RkwCompiledWordWorkerWordRunner; override;
+   function RunnerClass(const aCtx: TtfwContext): RkwCompiledWordWorkerWordRunner; override;
  end;//TkwCompiledImmediateCallerWorkerWord
 {$IfEnd} //not NoScripts
 
@@ -46,7 +42,7 @@ uses
 
 // start class TkwCompiledImmediateCallerWorkerWord
 
-function TkwCompiledImmediateCallerWorkerWord.RunnerClass: RkwCompiledWordWorkerWordRunner;
+function TkwCompiledImmediateCallerWorkerWord.RunnerClass(const aCtx: TtfwContext): RkwCompiledWordWorkerWordRunner;
 //#UC START# *4F3FAC0C0170_4F4200A703AA_var*
 //#UC END# *4F3FAC0C0170_4F4200A703AA_var*
 begin
@@ -55,6 +51,12 @@ begin
 //#UC END# *4F3FAC0C0170_4F4200A703AA_impl*
 end;//TkwCompiledImmediateCallerWorkerWord.RunnerClass
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledImmediateCallerWorkerWord
+ TkwCompiledImmediateCallerWorkerWord.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

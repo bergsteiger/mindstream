@@ -3,16 +3,11 @@ unit kwStringVarDecLen;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwStringVarDecLen.pas"
+// Модуль: "kwStringVarDecLen.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::StringVar_DecLen
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::StringVar_DecLen
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,25 +15,18 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledVarWorker,
-  tfwScriptingInterfaces,
-  l3Interfaces,
-  l3ParserInterfaces,
-  kwCompiledWordPrim,
-  tfwRegisterableWord
+  tfwVarWorker,
+  kwCompiledVarWorker
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwVarWorker.imp.pas}
- TkwStringVarDecLen = {final} class(_tfwVarWorker_)
+ TkwStringVarDecLen = {final scriptword} class(TtfwVarWorker)
  protected
- // realized methods
-   function CompiledVarWorkerClass: RkwCompiledVarWorker; override;
- public
- // overridden public methods
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
+   function CompiledVarWorkerClass: RkwCompiledVarWorker; override;
  end;//TkwStringVarDecLen
 {$IfEnd} //not NoScripts
 
@@ -46,33 +34,19 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledStringVarDecLen,
-  SysUtils,
-  kwVarWorkerCompiledCode,
-  kwBeginLikeCompiledCode,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwCompiledStringVarDecLen
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 
-type _Instance_R_ = TkwStringVarDecLen;
-
-{$Include ..\ScriptEngine\tfwVarWorker.imp.pas}
-
 // start class TkwStringVarDecLen
+
+class function TkwStringVarDecLen.GetWordNameForRegister: AnsiString;
+ {-}
+begin
+ Result := 'string:--Len!';
+end;//TkwStringVarDecLen.GetWordNameForRegister
 
 function TkwStringVarDecLen.CompiledVarWorkerClass: RkwCompiledVarWorker;
 //#UC START# *4DCC193801F1_4F5F01820031_var*
@@ -83,17 +57,12 @@ begin
 //#UC END# *4DCC193801F1_4F5F01820031_impl*
 end;//TkwStringVarDecLen.CompiledVarWorkerClass
 
-class function TkwStringVarDecLen.GetWordNameForRegister: AnsiString;
- {-}
-begin
- Result := 'string:--Len!';
-end;//TkwStringVarDecLen.GetWordNameForRegister
-
 {$IfEnd} //not NoScripts
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwVarWorker.imp.pas}
+// Регистрация StringVar_DecLen
+ TkwStringVarDecLen.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

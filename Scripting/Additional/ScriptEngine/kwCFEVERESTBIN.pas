@@ -2,17 +2,12 @@ unit kwCFEVERESTBIN;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCFEVERESTBIN.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwCFEVERESTBIN.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::CF_EVERESTBIN
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::SchemaWords::CF_EVERESTBIN
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,20 +15,19 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
-  tfwScriptingInterfaces
+  tfwClipboardFormatWord,
+  evTypes
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwClipboardFormatWord.imp.pas}
- TkwCFEVERESTBIN = {final} class(_tfwClipboardFormatWord_)
+ TkwCFEVERESTBIN = {final scriptword} class(TtfwClipboardFormatWord)
  protected
  // realized methods
-   procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+   function GetFormat: TevFormat; override;
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwCFEVERESTBIN
 {$IfEnd} //not NoScripts
@@ -41,29 +35,17 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  evTypes,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCFEVERESTBIN;
-
-{$Include ..\ScriptEngine\tfwClipboardFormatWord.imp.pas}
 
 // start class TkwCFEVERESTBIN
 
-procedure TkwCFEVERESTBIN.DoDoIt(const aCtx: TtfwContext);
-//#UC START# *4DAEEDE10285_52E11B1F02E7_var*
-//#UC END# *4DAEEDE10285_52E11B1F02E7_var*
+function TkwCFEVERESTBIN.GetFormat: TevFormat;
+//#UC START# *54D231000227_52E11B1F02E7_var*
+//#UC END# *54D231000227_52E11B1F02E7_var*
 begin
-//#UC START# *4DAEEDE10285_52E11B1F02E7_impl*
- aCtx.rEngine.PushInt(cf_EverestBin);
-//#UC END# *4DAEEDE10285_52E11B1F02E7_impl*
-end;//TkwCFEVERESTBIN.DoDoIt
+//#UC START# *54D231000227_52E11B1F02E7_impl*
+ Result := CF_EverestBin;
+//#UC END# *54D231000227_52E11B1F02E7_impl*
+end;//TkwCFEVERESTBIN.GetFormat
 
 class function TkwCFEVERESTBIN.GetWordNameForRegister: AnsiString;
  {-}
@@ -75,7 +57,8 @@ end;//TkwCFEVERESTBIN.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwClipboardFormatWord.imp.pas}
+// Регистрация CF_EVERESTBIN
+ TkwCFEVERESTBIN.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

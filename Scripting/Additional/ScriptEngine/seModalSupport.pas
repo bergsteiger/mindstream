@@ -3,16 +3,11 @@ unit seModalSupport;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/seModalSupport.pas"
+// Модуль: "seModalSupport.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<UtilityPack::Class>> Shared Delphi Scripting::ScriptEngine::CodeFlowWords::seModalSupport
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: UtilityPack::Class Shared Delphi Low Level::ScriptEngine::CodeFlowWords::seModalSupport
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -23,26 +18,29 @@ uses
   tfwScriptingInterfaces
   ;
 
+type
+ TseModalExecute = (
+   se_meUsual
+ , se_meInLoop
+ , se_meAfterLoop
+ );//TseModalExecute
 function SeAddModalWorker(aWorker: TtfwWord;
   const aCtx: TtfwContext): Integer;
-function SeExecuteCurrentModalWorker: Boolean;
 function SeHasModalWorker: Boolean;
 function SeIsValidModalWorkersCount(aCount: Integer): Boolean;
+function SeExecuteCurrentModalWorker(aModalExecute: TseModalExecute = se_meUsual): Boolean;
 {$IfEnd} //not NoScripts
 
 implementation
 
 {$If not defined(NoScripts)}
 uses
-  afwFacade,
+  l3MessagesService,
   tfwWordRefList,
-  seModalWorkerList
-  {$If defined(nsTest)}
-  ,
-  afwAnswer
-  {$IfEnd} //nsTest
-  ,
-  seModalWorker
+  seModalWorkerList,
+  seModalWorker,
+  l3AFWExceptions,
+  l3BatchService
   ;
 
 // unit methods
@@ -59,31 +57,6 @@ begin
  {$IfEnd}
 //#UC END# *4FC7549A03B6_4FC7541C02BA_impl*
 end;//SeAddModalWorker
-
-function SeExecuteCurrentModalWorker: Boolean;
-//#UC START# *4FC754C20096_4FC7541C02BA_var*
-{$If defined(InsiderTest) AND defined(nsTest)}
-var
- l_W : TseModalWorker;
-{$IfEnd} 
-//#UC END# *4FC754C20096_4FC7541C02BA_var*
-begin
-//#UC START# *4FC754C20096_4FC7541C02BA_impl*
- Result := false;
- {$If defined(InsiderTest) AND defined(nsTest)}
- if not g_BatchMode then
-  Exit;
- if TseModalWorkerList.Instance.Empty then
-  Exit;
- afw.ProcessMessages; 
- l_W := TseModalWorkerList.Instance.Last;
- TseModalWorkerList.Instance.Delete(Pred(TseModalWorkerList.Instance.Count));
- l_W.rWord.DoIt(l_W.rContext^);
- afw.ProcessMessages; 
- Result := true;
- {$IfEnd}
-//#UC END# *4FC754C20096_4FC7541C02BA_impl*
-end;//SeExecuteCurrentModalWorker
 
 function SeHasModalWorker: Boolean;
 //#UC START# *4FC7749201E0_4FC7541C02BA_var*
@@ -106,6 +79,34 @@ begin
   // - снимаем этот код со стека, если он не выполнился
 //#UC END# *5193915002D8_4FC7541C02BA_impl*
 end;//SeIsValidModalWorkersCount
+
+function SeExecuteCurrentModalWorker(aModalExecute: TseModalExecute = se_meUsual): Boolean;
+//#UC START# *4FC754C20096_4FC7541C02BA_var*
+{$If defined(InsiderTest) AND defined(nsTest)}
+var
+ l_W : TseModalWorker;
+{$IfEnd} 
+//#UC END# *4FC754C20096_4FC7541C02BA_var*
+begin
+//#UC START# *4FC754C20096_4FC7541C02BA_impl*
+ Result := false;
+ {$If defined(InsiderTest) AND defined(nsTest)}
+ if not Tl3BatchService.Instance.IsBatchMode then
+  Exit;
+ if TseModalWorkerList.Instance.Empty then
+  Exit;
+ Tl3MessagesService.Instance.ProcessMessages; 
+ l_W := TseModalWorkerList.Instance.Last;
+ if aModalExecute <> se_meInLoop then
+  TseModalWorkerList.Instance.Delete(Pred(TseModalWorkerList.Instance.Count));
+ if aModalExecute > se_meUsual then
+  l_W.rContext^.rEngine.PushBool(aModalExecute = se_meAfterLoop);
+ l_W.rWord.DoIt(l_W.rContext^);
+ Tl3MessagesService.Instance.ProcessMessages; 
+ Result := true;
+ {$IfEnd}
+//#UC END# *4FC754C20096_4FC7541C02BA_impl*
+end;//SeExecuteCurrentModalWorker
 {$IfEnd} //not NoScripts
 
 end.

@@ -3,16 +3,11 @@ unit kwPopFinderSetToCtx;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopFinderSetToCtx.pas"
+// Модуль: "kwPopFinderSetToCtx.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Compilation::pop_Finder_SetToCtx
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Compilation::pop_Finder_SetToCtx
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -27,13 +22,12 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwPopFinderSetToCtx = {final} class(_tfwAutoregisteringWord_)
+ TkwPopFinderSetToCtx = {final scriptword} class(TtfwRegisterableWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopFinderSetToCtx
 {$IfEnd} //not NoScripts
@@ -43,17 +37,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   SysUtils,
-  tfwParserInterfaces,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  tfwParserInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopFinderSetToCtx;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwPopFinderSetToCtx
 
@@ -89,7 +77,8 @@ end;//TkwPopFinderSetToCtx.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация pop_Finder_SetToCtx
+ TkwPopFinderSetToCtx.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

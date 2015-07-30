@@ -4,17 +4,12 @@ unit kwStringReplaceFirst;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwStringReplaceFirst.pas"
+// Модуль: "kwStringReplaceFirst.pas"
 // Начат: 01.12.2011 19:18
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::string_ReplaceFirst
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::string_ReplaceFirst
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,24 +17,23 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwTripleStrWord,
   l3Interfaces,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwTripleStrWord.imp.pas}
- TkwStringReplaceFirst = class(_tfwTripleStrWord_)
+ TkwStringReplaceFirst = {scriptword} class(TtfwTripleStrWord)
  protected
  // realized methods
    procedure DoTriple(const aCtx: TtfwContext;
      const aStr1: Il3CString;
      const aStr2: Il3CString;
      const aStr3: Il3CString); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwStringReplaceFirst
 {$IfEnd} //not NoScripts
@@ -48,19 +42,13 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils,
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwStringReplaceFirst;
-
-{$Include ..\ScriptEngine\tfwTripleStrWord.imp.pas}
 
 // start class TkwStringReplaceFirst
 
@@ -88,7 +76,8 @@ end;//TkwStringReplaceFirst.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwTripleStrWord.imp.pas}
+// Регистрация string_ReplaceFirst
+ TkwStringReplaceFirst.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

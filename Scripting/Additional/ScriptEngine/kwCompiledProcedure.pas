@@ -3,16 +3,11 @@ unit kwCompiledProcedure;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledProcedure.pas"
+// Модуль: "kwCompiledProcedure.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledProcedure
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwCompiledProcedure
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -30,7 +25,7 @@ type
  TkwCompiledProcedure = class(TkwCompiledWord)
  protected
  // overridden property methods
-   function pm_GetResultTypeInfo: TtfwTypeInfo; override;
+   function pm_GetResultTypeInfo(const aCtx: TtfwContext): TtfwTypeInfo; override;
  protected
  // overridden protected methods
    procedure Cleanup; override;
@@ -86,7 +81,7 @@ begin
 //#UC END# *4DAEEDE10285_4F216D8D01A0_impl*
 end;//TkwCompiledProcedure.DoDoIt
 
-function TkwCompiledProcedure.pm_GetResultTypeInfo: TtfwTypeInfo;
+function TkwCompiledProcedure.pm_GetResultTypeInfo(const aCtx: TtfwContext): TtfwTypeInfo;
 //#UC START# *52CFC11603C8_4F216D8D01A0get_var*
 //#UC END# *52CFC11603C8_4F216D8D01A0get_var*
 begin
@@ -110,9 +105,8 @@ end;//TkwCompiledProcedure.SetResultTypeInfo
 
 initialization
 {$If not defined(NoScripts)}
-//#UC START# *53DA53A200F3*
+// Регистрация TkwCompiledProcedure
  TkwCompiledProcedure.RegisterClass;
-//#UC END# *53DA53A200F3*
 {$IfEnd} //not NoScripts
 
 end.

@@ -3,16 +3,11 @@ unit kwSysutilsExtractFilePath;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwSysutilsExtractFilePath.pas"
+// Модуль: "kwSysutilsExtractFilePath.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::sysutils_ExtractFilePath
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::SysUtils::sysutils_ExtractFilePath
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,22 +15,21 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwStrWord,
   l3Interfaces,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwStrWord.imp.pas}
- TkwSysutilsExtractFilePath = {final} class(_tfwStrWord_)
+ TkwSysutilsExtractFilePath = {final scriptword} class(TtfwStrWord)
  protected
  // realized methods
    procedure DoString(const aCtx: TtfwContext;
      const aStr: Il3CString); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwSysutilsExtractFilePath
 {$IfEnd} //not NoScripts
@@ -44,19 +38,13 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils,
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwSysutilsExtractFilePath;
-
-{$Include ..\ScriptEngine\tfwStrWord.imp.pas}
 
 // start class TkwSysutilsExtractFilePath
 
@@ -83,7 +71,8 @@ end;//TkwSysutilsExtractFilePath.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwStrWord.imp.pas}
+// Регистрация sysutils_ExtractFilePath
+ TkwSysutilsExtractFilePath.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

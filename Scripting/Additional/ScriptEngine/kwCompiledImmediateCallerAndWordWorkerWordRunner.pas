@@ -3,16 +3,11 @@ unit kwCompiledImmediateCallerAndWordWorkerWordRunner;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledImmediateCallerAndWordWorkerWordRunner.pas"
+// Модуль: "kwCompiledImmediateCallerAndWordWorkerWordRunner.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledImmediateCallerAndWordWorkerWordRunner
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwCompiledImmediateCallerAndWordWorkerWordRunner
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -71,6 +66,12 @@ begin
 //#UC END# *4F3FF6C20122_4F3FF64A00F3_impl*
 end;//TkwCompiledImmediateCallerAndWordWorkerWordRunner.PushState
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledImmediateCallerAndWordWorkerWordRunner
+ TkwCompiledImmediateCallerAndWordWorkerWordRunner.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

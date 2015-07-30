@@ -2,17 +2,12 @@ unit kwPopQueryCardAttributeGetFocus;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopQueryCardAttributeGetFocus.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopQueryCardAttributeGetFocus.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::QueryCardProcessing::pop_QueryCard_Attribute_GetFocus
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::QueryCardProcessing::pop_QueryCard_Attribute_GetFocus
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,25 +15,21 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwQueryCardFromStackWord,
   evQueryCardEditor,
-  tfwScriptingInterfaces,
-  evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwQueryCardFromStackWord.imp.pas}
- TkwPopQueryCardAttributeGetFocus = {final} class(_kwQueryCardFromStackWord_)
+ TkwPopQueryCardAttributeGetFocus = {final scriptword} class(TkwQueryCardFromStackWord)
  protected
  // realized methods
    procedure DoCard(const aCtx: TtfwContext;
      aCard: TevQueryCardEditor); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopQueryCardAttributeGetFocus
 {$IfEnd} //not NoScripts
@@ -48,20 +39,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   SysUtils,
-  evQueryCardInt,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  evQueryCardInt
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopQueryCardAttributeGetFocus;
-
-{$Include ..\ScriptEngine\kwQueryCardFromStackWord.imp.pas}
 
 // start class TkwPopQueryCardAttributeGetFocus
 
@@ -78,7 +60,7 @@ begin
  if Supports(l_Control, IevEditorControl, l_C) then
   aCtx.rEngine.PushString(l_C.Req.ReqName)
  else
-  RunnerAssert(False, 'Текущее поле не найдено', aCtx);
+  RunnerError('Текущее поле не найдено', aCtx);
 //#UC END# *4E808E8B01BB_4FEF234F01FB_impl*
 end;//TkwPopQueryCardAttributeGetFocus.DoCard
 
@@ -92,7 +74,8 @@ end;//TkwPopQueryCardAttributeGetFocus.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwQueryCardFromStackWord.imp.pas}
+// Регистрация pop_QueryCard_Attribute_GetFocus
+ TkwPopQueryCardAttributeGetFocus.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

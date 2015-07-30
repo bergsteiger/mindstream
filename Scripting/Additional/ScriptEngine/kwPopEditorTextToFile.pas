@@ -2,23 +2,18 @@ unit kwPopEditorTextToFile;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Everest"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorTextToFile.pas"
+// Модуль: "kwPopEditorTextToFile.pas"
 // Начат: 26.05.2011 13:53
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_TextToFile
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_TextToFile
 //
 // Сохраняет содержимое редактора в evd-файл.
 // Пример:
 // 'C:\MyFile.evd' editor:TextToFile
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -26,18 +21,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorTextToFile = class(_kwEditorFromStackWord_)
+ TkwPopEditorTextToFile = {scriptword} class(TkwEditorFromStackWord)
   {* Сохраняет содержимое редактора в evd-файл. 
 Пример:
 'C:\MyFile.evd' editor:TextToFile }
@@ -45,8 +37,8 @@ type
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorTextToFile
 {$IfEnd} //not NoScripts
@@ -69,20 +61,11 @@ uses
   evdHypelinkDocIDEliminator,
   evdEmptySubsEliminator,
   evdStartAndTimeEliminator,
-  evBitmapEliminator4Tests,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  evBitmapEliminator4Tests
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorTextToFile;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 // start class TkwPopEditorTextToFile
 
@@ -136,7 +119,8 @@ end;//TkwPopEditorTextToFile.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_TextToFile
+ TkwPopEditorTextToFile.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

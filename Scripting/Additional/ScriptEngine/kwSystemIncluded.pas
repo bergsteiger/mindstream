@@ -4,17 +4,12 @@ unit kwSystemIncluded;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwSystemIncluded.pas"
+// Модуль: "kwSystemIncluded.pas"
 // Начат: 15.07.2011 21:36
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwSystemIncluded
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwSystemIncluded
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,19 +17,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwIncludedPrim,
   tfwStreamFactory,
-  tfwScriptingInterfaces,
-  l3Interfaces,
-  l3ParserInterfaces,
-  kwCompiledWordPrim,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwIncludedPrim.imp.pas}
- TkwSystemIncluded = class(_kwIncludedPrim_)
+ TkwSystemIncluded = class(TkwIncludedPrim)
  private
  // private fields
    f_Stream : TtfwStreamFactory;
@@ -54,31 +45,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   tfwCOMStreamFactory,
-  SysUtils,
-  kwCompiledIncluded,
-  tfwParser,
-  tfwParserInterfaces,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwSystemIncluded;
-
-{$Include ..\ScriptEngine\kwIncludedPrim.imp.pas}
 
 // start class TkwSystemIncluded
 
@@ -116,7 +87,8 @@ end;//TkwSystemIncluded.DoDoIt
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwIncludedPrim.imp.pas}
+// Регистрация TkwSystemIncluded
+ TkwSystemIncluded.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

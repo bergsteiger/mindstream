@@ -3,10 +3,10 @@ unit kwGetMember;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwGetMember.pas"
+// Модуль: "kwGetMember.pas"
 // Начат: 15.02.2012 19:15
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::MembersWorking::MembersWorkingPack::GetMember
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::MembersWorking::MembersWorkingPack::GetMember
 //
 // Добирается до вложенного слова
 // Пример:
@@ -31,12 +31,7 @@ unit kwGetMember;
 // WithTest
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -45,17 +40,14 @@ interface
 {$If not defined(NoScripts)}
 uses
   tfwScriptingInterfaces,
-  l3Interfaces,
-  l3ParserInterfaces,
-  kwCompiledWordPrim,
-  tfwRegisterableWord
+  tfwAnonimousWord,
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAnonimousWord.imp.pas}
- TkwGetMember = {final} class(_tfwAnonimousWord_)
+ TkwGetMember = {final scriptword} class(TtfwAnonimousWord)
   {* Добирается до вложенного слова
 Пример:
 [code]
@@ -89,6 +81,7 @@ WithTest
  // overridden protected methods
    procedure Cleanup; override;
      {* Функция очистки полей объекта. }
+   class function GetWordNameForRegister: AnsiString; override;
    procedure BeforeCompile(const aPrevContext: TtfwContext;
      var theNewContext: TtfwContext); override;
    procedure AfterCompile(const aPrevContext: TtfwContext;
@@ -99,9 +92,6 @@ WithTest
    function SupressNextImmediate: TtfwSuppressNextImmediate; override;
    procedure AfterCodePartAdded(aWord: TtfwWord;
      var aCtx: TtfwContext); override;
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwGetMember
 {$IfEnd} //not NoScripts
 
@@ -112,28 +102,11 @@ uses
   kwCompiledMembersPath,
   tfwWordRefList,
   kwStandardProcedureCloseBracket,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  SysUtils,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwGetMember;
-
-{$Include ..\ScriptEngine\tfwAnonimousWord.imp.pas}
 
 // start class TkwGetMember
 
@@ -279,7 +252,8 @@ end;//TkwGetMember.AfterCodePartAdded
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAnonimousWord.imp.pas}
+// Регистрация GetMember
+ TkwGetMember.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

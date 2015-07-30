@@ -4,17 +4,12 @@ unit kwCompiledWordProducer;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledWordProducer.pas"
+// Модуль: "kwCompiledWordProducer.pas"
 // Начат: 11.02.2012 18:35
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledWordProducer
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwCompiledWordProducer
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -23,17 +18,13 @@ interface
 {$If not defined(NoScripts)}
 uses
   tfwScriptingInterfaces,
-  l3Interfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  tfwStandardProcedure
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
- TkwCompiledWordProducer = class(_tfwStandardProcedure_)
+ TkwCompiledWordProducer = class(TtfwStandardProcedure)
  private
  // private fields
    f_WordProducer : TtfwWord;
@@ -55,31 +46,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  kwStandardProcedureCloseBracket,
-  kwCompiledProcedure,
-  SysUtils,
-  l3String,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCompiledWordProducer;
-
-{$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
 
 // start class TkwCompiledWordProducer
 
@@ -134,7 +100,8 @@ end;//TkwCompiledWordProducer.pm_GetWordProducer
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwStandardProcedure.imp.pas}
+// Регистрация TkwCompiledWordProducer
+ TkwCompiledWordProducer.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

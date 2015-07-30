@@ -3,16 +3,11 @@ unit MembersWorkingPack;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/MembersWorkingPack.pas"
+// Модуль: "MembersWorkingPack.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeywordsPack::Class>> Shared Delphi Scripting::ScriptEngine::MembersWorking::MembersWorkingPack
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeywordsPack::Class Shared Delphi Low Level::ScriptEngine::MembersWorking::MembersWorkingPack
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -21,6 +16,10 @@ interface
 {$If not defined(NoScripts)}
 uses
   tfwScriptingInterfaces,
+  tfwAnonimousWord,
+  tfwWordWorker,
+  kwCheckVarPrim,
+  tfwRegisterableWord,
   kwCheckVar,
   kwFindMember,
   kwGetMember,
@@ -35,27 +34,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   kwCompiledCheckVar,
-  kwCompiledCheckVarByRef,
-  kwTemporaryCompiledCode,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  SysUtils,
-  TypInfo,
-  l3Base,
-  l3ParserInterfaces,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
   kwCompiledFindMember,
   kwCompiledMembersPath,
   tfwWordRefList,
   kwStandardProcedureCloseBracket,
+  SysUtils,
   tfwMembersIterator,
   kwForwardDeclarationHolder,
   tfwCodeIterator,

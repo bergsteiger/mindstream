@@ -3,16 +3,11 @@ unit kwMouseMiddleUp;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwMouseMiddleUp.pas"
+// Модуль: "kwMouseMiddleUp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::MouseInput::Mouse_MiddleUp
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::MouseInput::Mouse_MiddleUp
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,21 +15,18 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  Windows,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  kwMouseUpDownSupport
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwMouseUpDownSupport.imp.pas}
- TkwMouseMiddleUp = {final} class(_kwMouseUpDownSupport_)
+ TkwMouseMiddleUp = {final scriptword} class(TkwMouseUpDownSupport)
  protected
  // realized methods
    function GetMouseEventFlag: Integer; override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwMouseMiddleUp
 {$IfEnd} //not NoScripts
@@ -43,17 +35,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  Windows
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwMouseMiddleUp;
-
-{$Include ..\ScriptEngine\kwMouseUpDownSupport.imp.pas}
 
 // start class TkwMouseMiddleUp
 
@@ -76,7 +62,8 @@ end;//TkwMouseMiddleUp.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwMouseUpDownSupport.imp.pas}
+// Регистрация Mouse_MiddleUp
+ TkwMouseMiddleUp.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

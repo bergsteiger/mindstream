@@ -3,18 +3,13 @@ unit kwINHERITED;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwINHERITED.pas"
+// Модуль: "kwINHERITED.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Compilation::INHERITED
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Compilation::INHERITED
 //
 // Слово для вызова унаследованного метода
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,14 +24,13 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwINHERITED = {final} class(_tfwAutoregisteringWord_)
+ TkwINHERITED = {final scriptword} class(TtfwRegisterableWord)
   {* Слово для вызова унаследованного метода }
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwINHERITED
 {$IfEnd} //not NoScripts
@@ -44,17 +38,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwINHERITED;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwINHERITED
 
@@ -63,7 +46,7 @@ procedure TkwINHERITED.DoDoIt(const aCtx: TtfwContext);
 //#UC END# *4DAEEDE10285_4F420DAD0039_var*
 begin
 //#UC START# *4DAEEDE10285_4F420DAD0039_impl*
- RunnerAssert(false, 'Слово INHERITED пока не реализовано', aCtx);
+ RunnerError('Слово INHERITED пока не реализовано', aCtx);
 //#UC END# *4DAEEDE10285_4F420DAD0039_impl*
 end;//TkwINHERITED.DoDoIt
 
@@ -77,7 +60,8 @@ end;//TkwINHERITED.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация INHERITED
+ TkwINHERITED.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

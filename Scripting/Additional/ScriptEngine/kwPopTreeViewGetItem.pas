@@ -2,19 +2,14 @@ unit kwPopTreeViewGetItem;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopTreeViewGetItem.pas"
+// Библиотека "ScriptEngine$RTLandVCL"
+// Модуль: "kwPopTreeViewGetItem.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::TreeViewWords::pop_TreeView_GetItem
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::TreeViewWords::pop_TreeView_GetItem
 //
 // Возвращает узел TTreeNode по номеру.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,25 +17,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwTreeViewNodeFromStackWord,
   ComCtrls,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwTreeViewNodeFromStackWord.imp.pas}
- TkwPopTreeViewGetItem = {final} class(_kwTreeViewNodeFromStackWord_)
+ TkwPopTreeViewGetItem = {final scriptword} class(TkwTreeViewNodeFromStackWord)
   {* Возвращает узел TTreeNode по номеру. }
  protected
  // realized methods
    procedure DoWithTreeView(const aTreeView: TTreeView;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopTreeViewGetItem
 {$IfEnd} //not NoScripts
@@ -48,20 +40,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopTreeViewGetItem;
-
-{$Include ..\ScriptEngine\kwTreeViewNodeFromStackWord.imp.pas}
 
 // start class TkwPopTreeViewGetItem
 
@@ -74,7 +52,7 @@ begin
  if aCtx.rEngine.IsTopInt then
   aCtx.rEngine.PushObj(aTreeView.Items[0])
  else
-  RunnerAssert(False, 'Не задан номер узла в дереве!', aCtx);
+  RunnerError('Не задан номер узла в дереве!', aCtx);
 //#UC END# *512F47F00183_512F491C0347_impl*
 end;//TkwPopTreeViewGetItem.DoWithTreeView
 
@@ -88,7 +66,8 @@ end;//TkwPopTreeViewGetItem.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwTreeViewNodeFromStackWord.imp.pas}
+// Регистрация pop_TreeView_GetItem
+ TkwPopTreeViewGetItem.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

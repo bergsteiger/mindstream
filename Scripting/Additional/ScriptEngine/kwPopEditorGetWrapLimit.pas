@@ -2,17 +2,12 @@ unit kwPopEditorGetWrapLimit;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorGetWrapLimit.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorGetWrapLimit.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_GetWrapLimit
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_GetWrapLimit
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -21,23 +16,20 @@ interface
 {$If not defined(NoScripts)}
 uses
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  kwEditorFromStackWord,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorGetWrapLimit = {final} class(_kwEditorFromStackWord_)
+ TkwPopEditorGetWrapLimit = {final scriptword} class(TkwEditorFromStackWord)
  protected
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorGetWrapLimit
 {$IfEnd} //not NoScripts
@@ -46,20 +38,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  l3Units,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  l3Units
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorGetWrapLimit;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 type
   TevCEWHack = class(TevCustomEditorWindow)
@@ -88,7 +71,8 @@ end;//TkwPopEditorGetWrapLimit.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_GetWrapLimit
+ TkwPopEditorGetWrapLimit.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

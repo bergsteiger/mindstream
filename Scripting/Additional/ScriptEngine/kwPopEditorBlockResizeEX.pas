@@ -2,10 +2,10 @@ unit kwPopEditorBlockResizeEX;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorBlockResizeEX.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorBlockResizeEX.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_BlockResizeEX
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_BlockResizeEX
 //
 // *Формат:
 // aDelta aTop aLevel anEditor  pop:editor:BlockResizeEX
@@ -14,12 +14,7 @@ unit kwPopEditorBlockResizeEX;
 // * aLevel - уровень изменяемого блока.
 // * anEditor - редактор, в котором изменяется блок.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -27,19 +22,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwBlockResize,
   nevTools,
-  tfwScriptingInterfaces,
-  evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwBlockResize.imp.pas}
- TkwPopEditorBlockResizeEX = {final} class(_kwBlockResize_)
+ TkwPopEditorBlockResizeEX = {final scriptword} class(TkwBlockResize)
   {* *Формат:
 aDelta aTop aLevel anEditor  pop:editor:BlockResizeEX
 * aDelta - смещение блока
@@ -51,8 +42,8 @@ aDelta aTop aLevel anEditor  pop:editor:BlockResizeEX
    procedure CorrectBlockPoint(const aCtx: TtfwContext;
      var aMap: InevMap;
      var aCursor: InevBasePoint); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorBlockResizeEX
 {$IfEnd} //not NoScripts
@@ -61,27 +52,13 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  l3Units,
-  nevGUIInterfaces,
-  l3Base,
-  Block_Const,
-  TextPara_Const,
-  CommentPara_Const,
-  Windows,
-  evParaTools,
   evOp,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  afwFacade,
-  Forms
+  CommentPara_Const,
+  TextPara_Const
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorBlockResizeEX;
-
-{$Include ..\ScriptEngine\kwBlockResize.imp.pas}
 
 // start class TkwPopEditorBlockResizeEX
 
@@ -119,7 +96,8 @@ end;//TkwPopEditorBlockResizeEX.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwBlockResize.imp.pas}
+// Регистрация pop_editor_BlockResizeEX
+ TkwPopEditorBlockResizeEX.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

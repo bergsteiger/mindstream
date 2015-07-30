@@ -3,18 +3,13 @@ unit kwScriptFileName;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwScriptFileName.pas"
+// Модуль: "kwScriptFileName.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::TkwScriptFileName
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::SysUtils::TkwScriptFileName
 //
 // Возвращает имя файла, где находится скрипт. Возвращается полный путь к файлу.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,21 +17,20 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
+  tfwSysUtilsWord,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
- TkwScriptFileName = class(_tfwSysUtilsWord_)
+ TkwScriptFileName = class(TtfwSysUtilsWord)
   {* Возвращает имя файла, где находится скрипт. Возвращается полный путь к файлу. }
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwScriptFileName
 {$IfEnd} //not NoScripts
@@ -47,17 +41,11 @@ implementation
 uses
   SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwScriptFileName;
-
-{$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
 
 // start class TkwScriptFileName
 
@@ -83,7 +71,8 @@ end;//TkwScriptFileName.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
+// Регистрация TkwScriptFileName
+ TkwScriptFileName.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

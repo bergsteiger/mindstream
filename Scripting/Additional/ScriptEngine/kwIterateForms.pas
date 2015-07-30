@@ -2,17 +2,12 @@ unit kwIterateForms;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwIterateForms.pas"
+// Библиотека "ScriptEngine$RTLandVCL"
+// Модуль: "kwIterateForms.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FormsProcessing::IterateForms
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::FormsProcessing::IterateForms
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -27,13 +22,12 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwIterateForms = {final} class(_tfwAutoregisteringWord_)
+ TkwIterateForms = {final scriptword} class(TtfwRegisterableWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwIterateForms
 {$IfEnd} //not NoScripts
@@ -43,17 +37,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   Forms,
-  l3ObjectList,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3ObjectList
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwIterateForms;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwIterateForms
 
@@ -102,7 +90,8 @@ end;//TkwIterateForms.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация IterateForms
+ TkwIterateForms.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

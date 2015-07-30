@@ -4,10 +4,10 @@ unit kwVarProducer;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwVarProducer.pas"
+// Модуль: "kwVarProducer.pas"
 // Начат: 11.02.2012 18:40
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::VarProducing::VarProducingPack::VarProducer
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::VarProducing::VarProducingPack::VarProducer
 //
 // Слово для создания слов для определения переменных.
 // Пример:
@@ -30,12 +30,7 @@ unit kwVarProducer;
 // TestVarProducer
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -43,18 +38,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  tfwWordProducer,
   tfwScriptingInterfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwWordProducer.imp.pas}
- TkwVarProducer = {final} class(_tfwWordProducer_)
+ TkwVarProducer = {final scriptword} class(TtfwWordProducer)
   {* Слово для создания слов для определения переменных.
 Пример:
 [code]
@@ -77,13 +69,11 @@ TestVarProducer
 [code] }
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    procedure FinishDefinitionOfNewWord(aWordToFinish: TtfwKeyWord;
      aCompiled: TkwCompiledWordPrim;
      const aContext: TtfwContext); override;
      {* Завершает определение вновь созданного слова }
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwVarProducer
 {$IfEnd} //not NoScripts
 
@@ -92,29 +82,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   kwCompiledVarProducer,
-  kwCompiledWord,
-  kwCompiledVar,
-  SysUtils,
-  l3String,
-  l3Parser,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwVarProducer;
-
-{$Include ..\ScriptEngine\tfwWordProducer.imp.pas}
 
 // start class TkwVarProducer
 
@@ -150,7 +122,8 @@ end;//TkwVarProducer.FinishDefinitionOfNewWord
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwWordProducer.imp.pas}
+// Регистрация VarProducer
+ TkwVarProducer.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

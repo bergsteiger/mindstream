@@ -3,9 +3,9 @@ unit kwProcessSubDirs;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwProcessSubDirs.pas"
+// Модуль: "kwProcessSubDirs.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FileProcessing::ProcessSubDirs
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::FileProcessing::ProcessSubDirs
 //
 // ProcessSubDirs - перебирает директории в заданной директории и вызывает для каждого найденного
 // функцию.
@@ -25,12 +25,7 @@ unit kwProcessSubDirs;
 // В результате будет создан файл с имя_скрипта.prn с именами директорий с полными путями.
 // *Примечание:* Если ни одна директория  не найдена, то функция не будет вызвана ни разу.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -45,8 +40,7 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwProcessSubDirs = {final} class(_tfwAutoregisteringWord_)
+ TkwProcessSubDirs = {final scriptword} class(TtfwRegisterableWord)
   {* ProcessSubDirs - перебирает директории в заданной директории и вызывает для каждого найденного функцию.
 *Формат:*
 aProc aDirName ProcessSubDirs
@@ -65,8 +59,8 @@ aProc aDirName ProcessSubDirs
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwProcessSubDirs
 {$IfEnd} //not NoScripts
@@ -76,17 +70,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   SysUtils,
-  l3FileUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3FileUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwProcessSubDirs;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwProcessSubDirs
 
@@ -115,7 +103,7 @@ begin
   l_V := aCtx.rEngine.Pop;
   l_Word := TtfwWord(l_V.AsObject);
   try
-   while l_FindResult = 0 do
+   while (l_FindResult = 0) do
    begin
     if ((l_SearchRec.Attr and faDirectory) <> 0) and (l_SearchRec.Name <> '.') and (l_SearchRec.Name <> '..') then
     begin
@@ -125,8 +113,8 @@ begin
     l_FindResult := FindNext(l_SearchRec);
    end; // while l_FindResult = 0 do
   finally
-   FindClose(l_SearchRec);
-  end;
+   SysUtils.FindClose(l_SearchRec);
+  end;//try..finally
  end // if aCtx.rEngine.IsTopString then
  else
   Assert(False, 'Не задана директория для поиска!');
@@ -143,7 +131,8 @@ end;//TkwProcessSubDirs.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация ProcessSubDirs
+ TkwProcessSubDirs.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

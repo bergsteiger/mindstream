@@ -3,16 +3,11 @@ unit kwFileReadLines;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwFileReadLines.pas"
+// Модуль: "kwFileReadLines.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FileProcessing::file_ReadLines
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::FileProcessing::file_ReadLines
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,24 +15,20 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwWordWorker,
   tfwScriptingInterfaces,
-  kwCompiledWordWorker,
-  kwCompiledWordPrim,
-  l3Interfaces,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwCompiledWordWorker
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwWordWorker.imp.pas}
- TkwFileReadLines = {final} class(_tfwWordWorker_)
+ TkwFileReadLines = {final scriptword} class(TtfwWordWorker)
  protected
  // realized methods
-   function CompiledWorkerClass: RkwCompiledWordWorker; override;
- public
- // overridden public methods
+   function CompiledWorkerClass(const aCtx: TtfwContext): RkwCompiledWordWorker; override;
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwFileReadLines
 {$IfEnd} //not NoScripts
@@ -46,34 +37,15 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledFileReadLines,
-  kwTemporaryCompiledCode,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  SysUtils,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwCompiledFileReadLines
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 
-type _Instance_R_ = TkwFileReadLines;
-
-{$Include ..\ScriptEngine\tfwWordWorker.imp.pas}
-
 // start class TkwFileReadLines
 
-function TkwFileReadLines.CompiledWorkerClass: RkwCompiledWordWorker;
+function TkwFileReadLines.CompiledWorkerClass(const aCtx: TtfwContext): RkwCompiledWordWorker;
 //#UC START# *4DCBD67C0362_4F5087FD03E5_var*
 //#UC END# *4DCBD67C0362_4F5087FD03E5_var*
 begin
@@ -92,7 +64,8 @@ end;//TkwFileReadLines.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwWordWorker.imp.pas}
+// Регистрация file_ReadLines
+ TkwFileReadLines.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

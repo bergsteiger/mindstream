@@ -3,16 +3,11 @@ unit kwIfElse;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwIfElse.pas"
+// Модуль: "kwIfElse.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::CodeBranchingWords::if_else
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::CodeBranchingWords::if_else
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,31 +15,26 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwWordWorker,
   tfwScriptingInterfaces,
-  kwCompiledWordWorker,
   kwCompiledWordPrim,
-  l3Interfaces,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwCompiledWordWorker
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwWordWorker.imp.pas}
- TkwIfElse = {final} class(_tfwWordWorker_)
+ TkwIfElse = {final scriptword} class(TtfwWordWorker)
  protected
  // realized methods
-   function CompiledWorkerClass: RkwCompiledWordWorker; override;
+   function CompiledWorkerClass(const aCtx: TtfwContext): RkwCompiledWordWorker; override;
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    function AfterWordMaxCount(const aCtx: TtfwContext): Cardinal; override;
    function CompiledWordClass(const aCtx: TtfwContext): RkwCompiledWordPrim; override;
    function MakeCompiledWordWorker(const aContext: TtfwContext;
      aCompiled: TkwCompiledWordPrim): TtfwWord; override;
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwIfElse
 {$IfEnd} //not NoScripts
 
@@ -53,38 +43,20 @@ implementation
 {$If not defined(NoScripts)}
 uses
   kwCompiledIfElse,
-  kwTemporaryCompiledCode,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  SysUtils,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwTemporaryCompiledCode
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 
-type _Instance_R_ = TkwIfElse;
-
-{$Include ..\ScriptEngine\tfwWordWorker.imp.pas}
-
 // start class TkwIfElse
 
-function TkwIfElse.CompiledWorkerClass: RkwCompiledWordWorker;
+function TkwIfElse.CompiledWorkerClass(const aCtx: TtfwContext): RkwCompiledWordWorker;
 //#UC START# *4DCBD67C0362_5284E9670258_var*
 //#UC END# *4DCBD67C0362_5284E9670258_var*
 begin
 //#UC START# *4DCBD67C0362_5284E9670258_impl*
- Assert(false, 'Не должны сюда попадать');
+ RunnerError('Не должны сюда попадать', aCtx);
  Result := nil;
 //#UC END# *4DCBD67C0362_5284E9670258_impl*
 end;//TkwIfElse.CompiledWorkerClass
@@ -130,7 +102,8 @@ end;//TkwIfElse.MakeCompiledWordWorker
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwWordWorker.imp.pas}
+// Регистрация if_else
+ TkwIfElse.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

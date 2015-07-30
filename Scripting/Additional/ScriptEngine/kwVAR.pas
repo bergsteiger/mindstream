@@ -2,12 +2,12 @@ unit kwVAR;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Core"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwVAR.pas"
+// Модуль: "kwVAR.pas"
 // Начат: 29.04.2011 22:36
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::VAR
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$Core::CompiledWords::VAR
 //
 // Объявление переменной.
 // Пример:
@@ -17,12 +17,7 @@ unit kwVAR;
 // l_Text .
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -30,18 +25,13 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
-  tfwScriptingInterfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  tfwVar
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwVar.imp.pas}
- TkwVAR = class(_tfwVar_)
+ TkwVAR = {scriptword} class(TtfwVar)
   {* Объявление переменной. 
 Пример: 
 [code]
@@ -49,8 +39,8 @@ type
  'Text' >>> l_Text
  l_Text .
 [code] }
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwVAR
 {$IfEnd} //not NoScripts
@@ -59,29 +49,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledVar,
-  SysUtils,
-  l3String,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwCompiledVar
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwVAR;
-
-{$Include ..\ScriptEngine\tfwVar.imp.pas}
 
 // start class TkwVAR
 
@@ -95,7 +67,8 @@ end;//TkwVAR.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwVar.imp.pas}
+// Регистрация VAR
+ TkwVAR.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

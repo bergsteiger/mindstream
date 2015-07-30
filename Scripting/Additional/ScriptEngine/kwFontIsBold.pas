@@ -2,17 +2,12 @@ unit kwFontIsBold;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwFontIsBold.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwFontIsBold.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FontKeywords::font_IsBold
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::FontKeywords::font_IsBold
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,25 +15,24 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  kwFontWord,
   Graphics,
   tfwScriptingInterfaces,
-  tfwRegisterableWord
+  l3Interfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwFontWord.imp.pas}
- TkwFontIsBold = {final} class(_kwFontWord_)
+ TkwFontIsBold = {final scriptword} class(TkwFontWord)
  protected
  // realized methods
    procedure DoFont(aFont: TFont;
      const aCtx: TtfwContext); override;
    procedure DoIFont(const aFont: Il3Font;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwFontIsBold
 {$IfEnd} //not NoScripts
@@ -46,18 +40,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  SysUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwFontIsBold;
-
-{$Include ..\ScriptEngine\kwFontWord.imp.pas}
 
 // start class TkwFontIsBold
 
@@ -91,7 +73,8 @@ end;//TkwFontIsBold.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwFontWord.imp.pas}
+// Регистрация font_IsBold
+ TkwFontIsBold.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

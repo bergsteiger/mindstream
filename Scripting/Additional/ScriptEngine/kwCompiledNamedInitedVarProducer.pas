@@ -3,16 +3,11 @@ unit kwCompiledNamedInitedVarProducer;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledNamedInitedVarProducer.pas"
+// Модуль: "kwCompiledNamedInitedVarProducer.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::VarProducing::TkwCompiledNamedInitedVarProducer
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::VarProducing::TkwCompiledNamedInitedVarProducer
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -87,6 +82,12 @@ begin
  inherited;
 end;//TkwCompiledNamedInitedVarProducer.ClearFields
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledNamedInitedVarProducer
+ TkwCompiledNamedInitedVarProducer.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

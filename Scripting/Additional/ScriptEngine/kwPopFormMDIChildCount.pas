@@ -2,21 +2,16 @@ unit kwPopFormMDIChildCount;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopFormMDIChildCount.pas"
+// Библиотека "ScriptEngine$RTLandVCL"
+// Модуль: "kwPopFormMDIChildCount.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FormsProcessing::pop_form_MDIChildCount
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::FormsProcessing::pop_form_MDIChildCount
 //
 // Use MDIChildCount to get the number of open MDI child forms.
 // MDIChildCount is meaningful only if the form is an MDI parent (that is, if the form’s FormStyle
 // property is set to fsMDIForm).
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -24,26 +19,23 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwFormFromStackWord,
   Forms,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
- TkwPopFormMDIChildCount = class(_kwFormFromStackWord_)
+ TkwPopFormMDIChildCount = {scriptword} class(TkwFormFromStackWord)
   {* Use MDIChildCount to get the number of open MDI child forms.
 MDIChildCount is meaningful only if the form is an MDI parent (that is, if the form’s FormStyle property is set to fsMDIForm). }
  protected
  // realized methods
    procedure DoForm(aForm: TForm;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopFormMDIChildCount
 {$IfEnd} //not NoScripts
@@ -51,19 +43,6 @@ MDIChildCount is meaningful only if the form is an MDI parent (that is, if the f
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopFormMDIChildCount;
-
-{$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
 
 // start class TkwPopFormMDIChildCount
 
@@ -87,7 +66,8 @@ end;//TkwPopFormMDIChildCount.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
+// Регистрация pop_form_MDIChildCount
+ TkwPopFormMDIChildCount.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

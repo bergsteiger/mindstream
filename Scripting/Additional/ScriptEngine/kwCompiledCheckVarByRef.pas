@@ -3,16 +3,11 @@ unit kwCompiledCheckVarByRef;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledCheckVarByRef.pas"
+// Модуль: "kwCompiledCheckVarByRef.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::MembersWorking::TkwCompiledCheckVarByRef
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::MembersWorking::TkwCompiledCheckVarByRef
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -78,7 +73,7 @@ begin
   l_W := l_KW.Word;
   if (l_W = nil) then
   begin
-   l_W := TkwCompiledVar.Create((aCtx.rEngine.As_ItfwKeywordFinder.KeywordByName[TtfwCStringFactory.C(TkwVar.GetWordNameForRegister)] As TtfwKeyWord).Word,
+   l_W := TkwCompiledVar.Create((aCtx.rEngine.As_ItfwKeywordFinder.KeywordByName[TtfwCStringFactory.C(TkwVar.NameForRegister)] As TtfwKeyWord).Word,
                                    // - чтобы обеспечить слову нужный "стереотип"
                                    //   хак конечно, надо как-то константу хотя бы завести
                                   TkwCompiledWord(l_O){PrevFinder},
@@ -143,6 +138,12 @@ begin
 //#UC END# *52D399A00173_4F3F9BDF0285_impl*
 end;//TkwCompiledCheckVarByRef.GetValue
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledCheckVarByRef
+ TkwCompiledCheckVarByRef.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

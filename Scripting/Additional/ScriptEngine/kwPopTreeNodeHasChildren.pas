@@ -2,19 +2,14 @@ unit kwPopTreeNodeHasChildren;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopTreeNodeHasChildren.pas"
+// Библиотека "ScriptEngine$RTLandVCL"
+// Модуль: "kwPopTreeNodeHasChildren.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::TreeViewWords::pop_TreeNode_HasChildren
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::TreeViewWords::pop_TreeNode_HasChildren
 //
 // Проверят есть ли дочерние у узла дерева.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,23 +17,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwTreeNodeFromStackWord,
   ComCtrls,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwTreeNodeFromStackWord.imp.pas}
- TkwPopTreeNodeHasChildren = {final} class(_kwTreeNodeFromStackWord_)
+ TkwPopTreeNodeHasChildren = {final scriptword} class(TkwTreeNodeFromStackWord)
   {* Проверят есть ли дочерние у узла дерева. }
  protected
  // realized methods
    procedure DoWithTTreeNode(const aTreeView: TTreeNode;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopTreeNodeHasChildren
 {$IfEnd} //not NoScripts
@@ -46,21 +40,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  Controls,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopTreeNodeHasChildren;
-
-{$Include ..\ScriptEngine\kwTreeNodeFromStackWord.imp.pas}
 
 // start class TkwPopTreeNodeHasChildren
 
@@ -84,7 +63,8 @@ end;//TkwPopTreeNodeHasChildren.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwTreeNodeFromStackWord.imp.pas}
+// Регистрация pop_TreeNode_HasChildren
+ TkwPopTreeNodeHasChildren.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

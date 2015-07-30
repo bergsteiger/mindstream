@@ -3,16 +3,11 @@ unit kwCompiledCallerWorkerWord;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledCallerWorkerWord.pas"
+// Модуль: "kwCompiledCallerWorkerWord.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledCallerWorkerWord
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwCompiledCallerWorkerWord
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -36,7 +31,7 @@ type
      var theNewContext: TtfwContext;
      aCompiled: TkwCompiledWordPrim); override;
    function AfterWordMaxCount(const aCtx: TtfwContext): Cardinal; override;
-   function RunnerClass: RkwCompiledWordWorkerWordRunner; override;
+   function RunnerClass(const aCtx: TtfwContext): RkwCompiledWordWorkerWordRunner; override;
    procedure CompileWordWorker(const aContext: TtfwContext;
      aCompiled: TkwCompiledWordPrim); override;
  end;//TkwCompiledCallerWorkerWord
@@ -76,7 +71,7 @@ begin
 //#UC END# *4DB9B446039A_4F4148350282_impl*
 end;//TkwCompiledCallerWorkerWord.AfterWordMaxCount
 
-function TkwCompiledCallerWorkerWord.RunnerClass: RkwCompiledWordWorkerWordRunner;
+function TkwCompiledCallerWorkerWord.RunnerClass(const aCtx: TtfwContext): RkwCompiledWordWorkerWordRunner;
 //#UC START# *4F3FAC0C0170_4F4148350282_var*
 //#UC END# *4F3FAC0C0170_4F4148350282_var*
 begin
@@ -96,7 +91,7 @@ begin
 (* CompilerAssert(not aCompiled.HasCode,
                 'После слова недопустимы параметры',
                 aContext);
- l_CPW := CompiledWorkerClass.Create(nil{aCompiled.Code[0]});
+ l_CPW := _CompiledWorkerClass.Create(nil{aCompiled.Code[0]});
  try
   FillCompiledWorker(l_CPW, aContext);
   DoCompiledWord(l_CPW, aContext);
@@ -107,6 +102,12 @@ begin
 //#UC END# *4F41566A02E5_4F4148350282_impl*
 end;//TkwCompiledCallerWorkerWord.CompileWordWorker
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledCallerWorkerWord
+ TkwCompiledCallerWorkerWord.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

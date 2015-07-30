@@ -4,19 +4,14 @@ unit kwMain;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwMain.pas"
+// Модуль: "kwMain.pas"
 // Начат: 10.05.2011 13:49
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwMain
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwMain
 //
 // Поддержка основного кода скрипта.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -25,30 +20,24 @@ interface
 {$If not defined(NoScripts)}
 uses
   tfwScriptingInterfaces,
+  tfwCompilingWord,
   kwCompiledWord,
-  l3Interfaces,
-  l3ParserInterfaces,
-  kwCompiledWordPrim,
-  tfwRegisterableWord,
   tfwValueStack,
   tfwStreamFactory,
   tfwParserInterfaces {a},
-  l3Variant
+  l3Interfaces,
+  l3Variant,
+  l3ParserInterfaces,
+  Types,
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- IDlgInitListner = interface(IUnknown)
-   ['{07616FB4-3E14-45AB-BD51-86D8D3D17ACE}']
-   procedure Init(const aCode: TObject;
-    aContext: Pointer);
- end;//IDlgInitListner
-
- {$Include ..\ScriptEngine\tfwCompilingWord.imp.pas}
- _tfwScriptEngine_Parent_ = _tfwCompilingWord_;
+ _tfwScriptEngine_Parent_ = TtfwCompilingWord;
  {$Include ..\ScriptEngine\tfwScriptEngine.imp.pas}
- TkwMain = class(_tfwScriptEngine_, IDlgInitListner)
+ TkwMain = class(_tfwScriptEngine_)
   {* Поддержка основного кода скрипта. }
  private
  // private fields
@@ -56,18 +45,16 @@ type
     {* Компилированный код}
  private
  // private methods
-   procedure CompileScriptToAxiomatics(const aContext: TtfwContext;
+   class procedure CompileScriptToAxiomatics(const aContext: TtfwContext;
      const aScriptCode: array of AnsiString);
      {* Компилируем скипт в аксиоматику }
-   procedure CompileScriptToAxiomaticsIfDefined(const aContext: TtfwContext;
+   class procedure CompileScriptToAxiomaticsIfDefined(const aContext: TtfwContext;
      const aDefined: array of AnsiString;
      const aScriptCode: array of AnsiString);
  protected
  // realized methods
    function EndBracket(const aContext: TtfwContext;
      aSilent: Boolean): RtfwWord; override;
-   procedure Init(const aCode: TObject;
-     aContext: Pointer);
  protected
  // overridden protected methods
    procedure Cleanup; override;
@@ -117,20 +104,14 @@ uses
   tfwFileStreamFactory,
   tfwCOMStreamFactory,
   tfwStringStreamFactory,
-  l3Parser,
-  kwInteger,
-  kwString,
-  TypInfo,
-  kwIntegerFactory,
-  kwStringFactory,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
   l3StringList,
   tfwParser,
   l3Filer,
+  l3Parser,
   tfwStoredValuesStack,
-  seWordsInfo
+  tfwAutoregisteredDiction,
+  seWordsInfo,
+  l3ScriptService
   ;
 {$IfEnd} //not NoScripts
 
@@ -138,13 +119,11 @@ uses
 
 type _Instance_R_ = TkwMain;
 
-{$Include ..\ScriptEngine\tfwCompilingWord.imp.pas}
-
 {$Include ..\ScriptEngine\tfwScriptEngine.imp.pas}
 
 // start class TkwMain
 
-procedure TkwMain.CompileScriptToAxiomatics(const aContext: TtfwContext;
+class procedure TkwMain.CompileScriptToAxiomatics(const aContext: TtfwContext;
   const aScriptCode: array of AnsiString);
 //#UC START# *5282326A0233_4DC90A1E03C2_var*
 var
@@ -179,7 +158,7 @@ begin
 //#UC END# *5282326A0233_4DC90A1E03C2_impl*
 end;//TkwMain.CompileScriptToAxiomatics
 
-procedure TkwMain.CompileScriptToAxiomaticsIfDefined(const aContext: TtfwContext;
+class procedure TkwMain.CompileScriptToAxiomaticsIfDefined(const aContext: TtfwContext;
   const aDefined: array of AnsiString;
   const aScriptCode: array of AnsiString);
 //#UC START# *5293232E0291_4DC90A1E03C2_var*
@@ -224,26 +203,6 @@ begin
  Result := nil;
 //#UC END# *4DB6C99F026E_4DC90A1E03C2_impl*
 end;//TkwMain.EndBracket
-
-procedure TkwMain.Init(const aCode: TObject;
-  aContext: Pointer);
-//#UC START# *4E4B9AE20283_4DC90A1E03C2_var*
-var
- l_Ctx  : TtfwContext;
-//#UC END# *4E4B9AE20283_4DC90A1E03C2_var*
-begin
-//#UC START# *4E4B9AE20283_4DC90A1E03C2_impl*
- l_Ctx.rEngine := Self;
- l_Ctx.rCaller := ItfwScriptCaller(aContext);
- l_Ctx.rParser := nil;//l_P;
- l_Ctx.rCompiler := nil;                                    
- l_Ctx.rException := nil;
- l_Ctx.rUsed := nil;//l_Used;
- l_Ctx.rTypeInfo := TtfwTypeInfo_E;
- l_Ctx.rScriptFileName := f_ScriptFileName;
- (aCode as TtfwWord).DoIt(l_Ctx);
-//#UC END# *4E4B9AE20283_4DC90A1E03C2_impl*
-end;//TkwMain.Init
 
 procedure TkwMain.Cleanup;
 //#UC START# *479731C50290_4DC90A1E03C2_var*
@@ -291,6 +250,12 @@ begin
    '  IN aLeft',
    '  ^ IN aRight',
    ' aRight DO >>>^ aLeft',
+   ';',
+
+   'VOID operator >>>[]',
+   '  IN aLeft',
+   '  ^ IN aRight',
+   ' aLeft aRight DO Array:Add',
    ';',
 
    'operator IT ARRAY ',
@@ -536,7 +501,7 @@ begin
    ' INTEGER VAR l_Index',
    ' l_Index := 0',
    ' INTEGER VAR l_Count',
-   ' l_Count := ( A array:Count )',
+   ' l_Count := ( A Array:Count )',
 
    '   PROCEDURE DoWithItem IN B[i]',
    '    if ( l_Index A [i] B[i] ?== ) then',
@@ -548,7 +513,7 @@ begin
    '    )',
    '   ;',
 
-   ' if ( l_Count B array:Count ?!= ) then',
+   ' if ( l_Count B Array:Count ?!= ) then',
    ' (',
    '  Result := false',
    '  EXIT',
@@ -623,7 +588,7 @@ begin
    '   if',
    '    (',
    '     ( l_Right IsArray ) И',
-   '     ( l_Right array:Count 1 == ) И',
+   '     ( l_Right Array:Count 1 == ) И',
    '     ( 0 l_Right [i] IsArray )',
    '    )',
    '   then',
@@ -637,7 +602,7 @@ begin
    '  )',
    '  else',
    '  (',
-   '   if ( l_Right array:Count 1 == ) then',
+   '   if ( l_Right Array:Count 1 == ) then',
    '   (',
    '    Result := ( aLeft 0 l_Right [i] ?== )',
    '   )',
@@ -665,33 +630,33 @@ begin
    'WordAlias "НЕ РАВНО" НЕРАВНО',
  
    'BOOLEAN operator >',
-   '  IN aLeft',
+   '  STRING INTEGER BOOLEAN IN aLeft',
    '  ^ IN aRight',
    ' Result := ( aLeft aRight DO GREATER )',
    ';',
 
    'WordAlias БОЛЬШЕ >',
- 
+
    'BOOLEAN operator <',
-   '  IN aLeft',
+   '  STRING INTEGER BOOLEAN IN aLeft',
    '  ^ IN aRight',
-   ' Result := ( aLeft aRight DO LESS )',
+   '  Result := ( aLeft aRight DO LESS )',
    ';',
 
    'WordAlias МЕНЬШЕ <',
  
    'BOOLEAN operator >=',
-   '  IN aLeft',
+   '  STRING INTEGER BOOLEAN IN aLeft',
    '  ^ IN aRight',
-   ' Result := ( aLeft aRight DO LESS ! )',
+   ' Result := ( aLeft < ( aRight DO ) ! )',
    ';',
 
    'WordAlias "БОЛЬШЕ ИЛИ РАВНО" >=',
- 
+
    'BOOLEAN operator <=',
-   '  IN aLeft',
+   '  STRING INTEGER BOOLEAN IN aLeft',
    '  ^ IN aRight',
-   ' Result := ( aLeft aRight DO GREATER ! )',
+   ' Result := ( aLeft > ( aRight DO ) ! )',
    ';',
 
    'WordAlias "МЕНЬШЕ ИЛИ РАВНО" <=',
@@ -832,7 +797,7 @@ begin
   ]);
 
   CompileScriptToAxiomaticsIfDefined(aPrevContext,
-  ['ППР', 'Ok', 'history:DeleteBackItem'],
+  ['ППР', 'Ok', 'history:DeleteBackItem', 'class::TevQueryCardEditor'],
   [
    'PROCEDURE RunSearch OBJECT IN aProc',
    ' // - запускает поиск по КЗ ППР',
@@ -841,7 +806,7 @@ begin
    '  ППР',
    '  OBJECT VAR l_QC',
    '  focused:control:push >>> l_QC',
-   '  class::TevQueryCardEditor l_QC pop:object:Inherits',
+   '  l_QC IS class::TevQueryCardEditor',
    '   ''Фокус не в КЗ'' ASSERTS',
    '  aProc DO',
    '  Ok',
@@ -856,7 +821,7 @@ begin
 
   CompileScriptToAxiomaticsIfDefined(aPrevContext,
   ['моп::Мониторинги_Обзор_изменений_законодательства', 'моп::Инфарм_Основное_меню_ИнФарм', 'Ok',
-   'history:DeleteBackItem', 'history:DeleteForwardItem'],
+   'history:DeleteBackItem', 'history:DeleteForwardItem', 'class::TevQueryCardEditor'],
   [
    'PROCEDURE RunLegislationReviewSearch OBJECT IN aProc',
    ' // - запускает поиск по КЗ ОИЗ',
@@ -867,7 +832,7 @@ begin
    '  BOOLEAN VAR l_NotFound',
    '  l_NotFound := false',
    '  focused:control:push >>> l_QC',
-   '  class::TevQueryCardEditor l_QC pop:object:Inherits ''Фокус не в КЗ'' ASSERTS',
+   '  l_QC IS class::TevQueryCardEditor ''Фокус не в КЗ'' ASSERTS',
    '  aProc DO',
    '  2 wait:Choice',
    '  TRY',
@@ -1051,7 +1016,8 @@ end;//TkwMain.Script
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwCompilingWord.imp.pas}
+// Регистрация TkwMain
+ TkwMain.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

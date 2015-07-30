@@ -3,16 +3,11 @@ unit IncludesAndUsesPack;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/IncludesAndUsesPack.pas"
+// Модуль: "IncludesAndUsesPack.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeywordsPack::Class>> Shared Delphi Scripting::ScriptEngine::IncludesAndUses::IncludesAndUsesPack
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeywordsPack::Class Shared Delphi Low Level::ScriptEngine::IncludesAndUses::IncludesAndUsesPack
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -36,24 +31,11 @@ uses
   l3String,
   SysUtils,
   l3Types,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  tfwScriptingInterfaces,
-  l3Base,
-  l3ParserInterfaces,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
   kwStandardProcedureCloseBracket,
   kwInnerIncluded,
   kwInnerIncludedInChildren,
-  kwCompiledProcedure
+  kwCompiledProcedure,
+  kwCompiledWord
   ;
 
 {$IfEnd} //not NoScripts

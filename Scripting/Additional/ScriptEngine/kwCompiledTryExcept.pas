@@ -4,19 +4,14 @@ unit kwCompiledTryExcept;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledTryExcept.pas"
+// Модуль: "kwCompiledTryExcept.pas"
 // Начат: 29.04.2011 19:53
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledTryExcept
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwCompiledTryExcept
 //
 // Скомпилированная версия try except
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -78,6 +73,12 @@ begin
 //#UC END# *4DAEEDE10285_4DBADEE702A8_impl*
 end;//TkwCompiledTryExcept.DoDoIt
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledTryExcept
+ TkwCompiledTryExcept.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

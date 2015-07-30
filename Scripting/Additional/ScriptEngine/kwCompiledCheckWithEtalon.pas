@@ -2,17 +2,12 @@ unit kwCompiledCheckWithEtalon;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledCheckWithEtalon.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwCompiledCheckWithEtalon.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::TkwCompiledCheckWithEtalon
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::TkwCompiledCheckWithEtalon
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -85,6 +80,12 @@ begin
 //#UC END# *4EB100CE0160_50F3D22D007B_impl*
 end;//TkwCompiledCheckWithEtalon.DoRepaint
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledCheckWithEtalon
+ TkwCompiledCheckWithEtalon.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

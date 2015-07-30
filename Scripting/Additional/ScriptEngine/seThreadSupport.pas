@@ -3,16 +3,11 @@ unit seThreadSupport;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/seThreadSupport.pas"
+// Модуль: "seThreadSupport.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<UtilityPack::Class>> Shared Delphi Scripting::ScriptEngine::CodeFlowSupport::seThreadSupport
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: UtilityPack::Class Shared Delphi Low Level::ScriptEngine::CodeFlowSupport::seThreadSupport
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -55,6 +50,8 @@ type
    procedure WaitForAllThreads;
    procedure AddAndResumeThread(const aContext: TtfwContext;
      const aWord: TtfwWord);
+   class function Exists: Boolean;
+     {* Проверяет создан экземпляр синглетона или нет }
  public
  // singleton factory method
    class function Instance: TseWorkThreadList;
@@ -168,6 +165,12 @@ begin
  Add(l_Thread);
 //#UC END# *50BF1E9C001F_50BF049002DB_impl*
 end;//TseWorkThreadList.AddAndResumeThread
+
+class function TseWorkThreadList.Exists: Boolean;
+ {-}
+begin
+ Result := g_TseWorkThreadList <> nil;
+end;//TseWorkThreadList.Exists
 {$IfEnd} //not NoScripts
 
 end.

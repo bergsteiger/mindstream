@@ -2,21 +2,16 @@ unit kwPopComboTreeCurrentNode;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Everest"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopComboTreeCurrentNode.pas"
+// Модуль: "kwPopComboTreeCurrentNode.pas"
 // Начат: 03.11.2011 18:29
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_ComboTree_CurrentNode
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_ComboTree_CurrentNode
 //
 // Получает текущую ноду выбранную в дереве комбо
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -24,26 +19,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwComboTreeFromStackWord,
   FakeBox,
-  tfwScriptingInterfaces,
-  evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwComboTreeFromStackWord.imp.pas}
- TkwPopComboTreeCurrentNode = class(_kwComboTreeFromStackWord_)
+ TkwPopComboTreeCurrentNode = {scriptword} class(TkwComboTreeFromStackWord)
   {* Получает текущую ноду выбранную в дереве комбо }
  protected
  // realized methods
    procedure DoCombo(const aCtx: TtfwContext;
      aCombo: TFakeBox); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopComboTreeCurrentNode
 {$IfEnd} //not NoScripts
@@ -51,20 +42,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopComboTreeCurrentNode;
-
-{$Include ..\ScriptEngine\kwComboTreeFromStackWord.imp.pas}
 
 // start class TkwPopComboTreeCurrentNode
 
@@ -88,7 +65,8 @@ end;//TkwPopComboTreeCurrentNode.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwComboTreeFromStackWord.imp.pas}
+// Регистрация pop_ComboTree_CurrentNode
+ TkwPopComboTreeCurrentNode.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

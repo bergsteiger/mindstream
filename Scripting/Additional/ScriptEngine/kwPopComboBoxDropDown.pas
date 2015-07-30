@@ -2,10 +2,10 @@ unit kwPopComboBoxDropDown;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopComboBoxDropDown.pas"
+// Библиотека "ScriptEngine$VT"
+// Модуль: "kwPopComboBoxDropDown.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::ControlsProcessing::pop_ComboBox_DropDown
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$VT::vtComboBoxWords::pop_ComboBox_DropDown
 //
 // *Формат:*
 // {code}
@@ -14,12 +14,7 @@ unit kwPopComboBoxDropDown;
 // *Описание:* Показывает/прячет выпадающий список у ComboBox'а в зависимости от значения параметра
 // aDown.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -27,19 +22,16 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  FakeBox,
+  kwComboBoxFromStack,
   StdCtrls,
   tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  FakeBox
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwComboBoxFromStack.imp.pas}
- TkwPopComboBoxDropDown = {final} class(_kwComboBoxFromStack_)
+ TkwPopComboBoxDropDown = {final scriptword} class(TkwComboBoxFromStack)
   {* *Формат:* 
 [code]
 aDown aControlObj pop:ComboBox:DropDown
@@ -51,8 +43,8 @@ aDown aControlObj pop:ComboBox:DropDown
      const aCtx: TtfwContext); override;
    procedure DoWithFakeBox(aFakeBox: TFakeBox;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopComboBoxDropDown
 {$IfEnd} //not NoScripts
@@ -60,20 +52,6 @@ aDown aControlObj pop:ComboBox:DropDown
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopComboBoxDropDown;
-
-{$Include ..\ScriptEngine\kwComboBoxFromStack.imp.pas}
 
 // start class TkwPopComboBoxDropDown
 
@@ -109,7 +87,8 @@ end;//TkwPopComboBoxDropDown.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwComboBoxFromStack.imp.pas}
+// Регистрация pop_ComboBox_DropDown
+ TkwPopComboBoxDropDown.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -2,10 +2,10 @@ unit kwPopEditorPrintTableCellsParams;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorPrintTableCellsParams.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorPrintTableCellsParams.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_PrintTableCellsParams
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_PrintTableCellsParams
 //
 // *Формат:* anEditorControl pop:editor:PrintTableCellsParams
 // *Описание:* Печатает структуру информацию ячеек таблицы: тип объединения, если объединенная, то
@@ -16,12 +16,7 @@ unit kwPopEditorPrintTableCellsParams;
 // focused:control:push pop:editor:PrintTableCellsParams
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,21 +24,18 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  evCustomEditorWindow,
+  kwEditorFromStackWord,
+  nevTools,
   tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord,
-  nevTools
+  evCustomEditorWindow
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- _kwEditorGetTableFromCursor_Parent_ = _kwEditorFromStackWord_;
+ _kwEditorGetTableFromCursor_Parent_ = TkwEditorFromStackWord;
  {$Include ..\ScriptEngine\kwEditorGetTableFromCursor.imp.pas}
- TkwPopEditorPrintTableCellsParams = {final} class(_kwEditorGetTableFromCursor_)
+ TkwPopEditorPrintTableCellsParams = {final scriptword} class(_kwEditorGetTableFromCursor_)
   {* *Формат:* anEditorControl pop:editor:PrintTableCellsParams
 *Описание:* Печатает структуру информацию ячеек таблицы: тип объединения, если объединенная, то номер ячейки в строке сверху, номер ячейки в строке снизу и номер начальной ячейки/номер строки, где эта ячейка. Результат выводится в обычный файл вывода результатов.
 *Пример:*
@@ -54,8 +46,8 @@ focused:control:push pop:editor:PrintTableCellsParams
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorPrintTableCellsParams
 {$IfEnd} //not NoScripts
@@ -69,20 +61,11 @@ uses
   l3Base,
   SysUtils,
   nevFacade,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms,
   Table_Const
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorPrintTableCellsParams;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 {$Include ..\ScriptEngine\kwEditorGetTableFromCursor.imp.pas}
 
@@ -152,7 +135,8 @@ end;//TkwPopEditorPrintTableCellsParams.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_PrintTableCellsParams
+ TkwPopEditorPrintTableCellsParams.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -2,17 +2,12 @@ unit kwCFHTML;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCFHTML.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwCFHTML.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::CF_HTML
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::SchemaWords::CF_HTML
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,20 +15,19 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
-  tfwScriptingInterfaces
+  tfwClipboardFormatWord,
+  evTypes
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwClipboardFormatWord.imp.pas}
- TkwCFHTML = {final} class(_tfwClipboardFormatWord_)
+ TkwCFHTML = {final scriptword} class(TtfwClipboardFormatWord)
  protected
  // realized methods
-   procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+   function GetFormat: TevFormat; override;
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwCFHTML
 {$IfEnd} //not NoScripts
@@ -41,29 +35,17 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  evTypes,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCFHTML;
-
-{$Include ..\ScriptEngine\tfwClipboardFormatWord.imp.pas}
 
 // start class TkwCFHTML
 
-procedure TkwCFHTML.DoDoIt(const aCtx: TtfwContext);
-//#UC START# *4DAEEDE10285_4FF436880055_var*
-//#UC END# *4DAEEDE10285_4FF436880055_var*
+function TkwCFHTML.GetFormat: TevFormat;
+//#UC START# *54D231000227_4FF436880055_var*
+//#UC END# *54D231000227_4FF436880055_var*
 begin
-//#UC START# *4DAEEDE10285_4FF436880055_impl*
- aCtx.rEngine.PushInt(CF_HTML);
-//#UC END# *4DAEEDE10285_4FF436880055_impl*
-end;//TkwCFHTML.DoDoIt
+//#UC START# *54D231000227_4FF436880055_impl*
+ Result := CF_HTML;
+//#UC END# *54D231000227_4FF436880055_impl*
+end;//TkwCFHTML.GetFormat
 
 class function TkwCFHTML.GetWordNameForRegister: AnsiString;
  {-}
@@ -75,7 +57,8 @@ end;//TkwCFHTML.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwClipboardFormatWord.imp.pas}
+// Регистрация CF_HTML
+ TkwCFHTML.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

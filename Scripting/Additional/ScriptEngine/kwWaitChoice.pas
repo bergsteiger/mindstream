@@ -3,16 +3,11 @@ unit kwWaitChoice;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwWaitChoice.pas"
+// Модуль: "kwWaitChoice.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::ModalDialogs::wait_Choice
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::ModalDialogs::wait_Choice
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -27,15 +22,14 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- _afwImpurity_Parent_ = _tfwAutoregisteringWord_;
+ _afwImpurity_Parent_ = TtfwRegisterableWord;
  {$Include ..\ScriptEngine\afwImpurity.imp.pas}
- TkwWaitChoice = {final} class(_afwImpurity_)
+ TkwWaitChoice = {final scriptword} class(_afwImpurity_)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwWaitChoice
 {$IfEnd} //not NoScripts
@@ -44,8 +38,7 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  Classes
   {$If defined(nsTest)}
   ,
   afwAnswer
@@ -56,10 +49,6 @@ uses
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwWaitChoice;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 {$Include ..\ScriptEngine\afwImpurity.imp.pas}
 
@@ -86,7 +75,8 @@ end;//TkwWaitChoice.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация wait_Choice
+ TkwWaitChoice.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

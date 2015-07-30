@@ -2,10 +2,10 @@ unit kwPopQueryCardAttributeSetCollapsed;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopQueryCardAttributeSetCollapsed.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopQueryCardAttributeSetCollapsed.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::QueryCardProcessing::pop_QueryCard_Attribute_SetCollapsed
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::QueryCardProcessing::pop_QueryCard_Attribute_SetCollapsed
 //
 // Управляет свойством Collapsed той ГРУППЫ к которой принадлежит данный атрибут
 // 
@@ -14,12 +14,7 @@ unit kwPopQueryCardAttributeSetCollapsed;
 // 'AT_TEXT_NAME' true Search:SetAttributeCollapsed
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -32,17 +27,13 @@ uses
   evQueryCardInt,
   evQueryCardEditor,
   tfwScriptingInterfaces,
-  evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  kwQueryCardFromStackWord
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwQueryCardFromStackWord.imp.pas}
- TkwPopQueryCardAttributeSetCollapsed = {final} class(_kwQueryCardFromStackWord_)
+ TkwPopQueryCardAttributeSetCollapsed = {final scriptword} class(TkwQueryCardFromStackWord)
   {* Управляет свойством Collapsed той ГРУППЫ к которой принадлежит данный атрибут
 
 Пример:
@@ -57,8 +48,8 @@ type
  // realized methods
    procedure DoCard(const aCtx: TtfwContext;
      aCard: TevQueryCardEditor); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopQueryCardAttributeSetCollapsed
 {$IfEnd} //not NoScripts
@@ -69,20 +60,11 @@ implementation
 uses
   l3String,
   l3Base,
-  evReqIterator,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  evReqIterator
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopQueryCardAttributeSetCollapsed;
-
-{$Include ..\ScriptEngine\kwQueryCardFromStackWord.imp.pas}
 
 // start class TkwPopQueryCardAttributeSetCollapsed
 
@@ -155,7 +137,8 @@ end;//TkwPopQueryCardAttributeSetCollapsed.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwQueryCardFromStackWord.imp.pas}
+// Регистрация pop_QueryCard_Attribute_SetCollapsed
+ TkwPopQueryCardAttributeSetCollapsed.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

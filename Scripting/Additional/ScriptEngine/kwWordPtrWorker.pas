@@ -4,17 +4,12 @@ unit kwWordPtrWorker;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwWordPtrWorker.pas"
+// Модуль: "kwWordPtrWorker.pas"
 // Начат: 12.02.2012 16:18
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwWordPtrWorker
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwWordPtrWorker
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -68,6 +63,12 @@ begin
 //#UC END# *479731C50290_4F37ADFF0150_impl*
 end;//TkwWordPtrWorker.Cleanup
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwWordPtrWorker
+ TkwWordPtrWorker.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

@@ -2,19 +2,14 @@ unit kwPopEditorSetCursorByPoint;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorSetCursorByPoint.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorSetCursorByPoint.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_SetCursorByPoint
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_SetCursorByPoint
 //
 // editor:SetCursorByPoint
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -23,21 +18,18 @@ interface
 {$If not defined(NoScripts)}
 uses
   nevTools,
+  kwEditorFromStackWord,
+  l3Units,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord,
-  l3Units
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- _Para2Point_Parent_ = _kwEditorFromStackWord_;
- {$Include w:\common\components\rtl\Garant\EditorUsers\Para2Point.imp.pas}
- TkwPopEditorSetCursorByPoint = class(_Para2Point_)
+ _Para2Point_Parent_ = TkwEditorFromStackWord;
+ {$Include w:\common\components\gui\Garant\Everest\EditorUsers\Para2Point.imp.pas}
+ TkwPopEditorSetCursorByPoint = {scriptword} class(_Para2Point_)
   {* editor:SetCursorByPoint }
  private
  // private fields
@@ -55,8 +47,6 @@ type
      {* Возвращает параграф, относительно которого будет рассчитываться точка для выделения }
    function GetPoint(const aMap: InevMap): Tl3Point; override;
      {* Возвращает точку, на которую нужно спозиционироваться. }
- public
- // overridden public methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorSetCursorByPoint
 {$IfEnd} //not NoScripts
@@ -66,22 +56,13 @@ implementation
 {$If not defined(NoScripts)}
 uses
   nevGUIInterfaces,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 
-type _Instance_R_ = TkwPopEditorSetCursorByPoint;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
-
-{$Include w:\common\components\rtl\Garant\EditorUsers\Para2Point.imp.pas}
+{$Include w:\common\components\gui\Garant\Everest\EditorUsers\Para2Point.imp.pas}
 
 // start class TkwPopEditorSetCursorByPoint
 
@@ -99,11 +80,11 @@ begin
  if aCtx.rEngine.IsTopInt then
   f_DeltaY := aCtx.rEngine.PopInt
  else
-  RunnerAssert(False, 'Не задана дельта к координате Y.', aCtx);
+  RunnerError('Не задана дельта к координате Y.', aCtx);
  if aCtx.rEngine.IsTopInt then
   f_DeltaX := aCtx.rEngine.PopInt
  else
-  RunnerAssert(False, 'Не задана дельта к координате X.', aCtx);
+  RunnerError('Не задана дельта к координате X.', aCtx);
  f_Point := anEditor.Selection.Cursor;
  l_l3Pt := TranslatePara2Point(anEditor);
  l_EditorHotSpot := anEditor.HotSpotClass.Make(anEditor, nil);
@@ -152,7 +133,8 @@ end;//TkwPopEditorSetCursorByPoint.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_SetCursorByPoint
+ TkwPopEditorSetCursorByPoint.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

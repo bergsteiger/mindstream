@@ -2,10 +2,10 @@ unit kwSubdescriptorGetVisible;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwSubdescriptorGetVisible.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwSubdescriptorGetVisible.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SubPanelWords::subdescriptor_GetVisible
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::SubPanelWords::subdescriptor_GetVisible
 //
 // Помещает в стек видмость метки.
 // Формат:
@@ -13,12 +13,7 @@ unit kwSubdescriptorGetVisible;
 // aSubDescrObj subdescriptor:GetVisible
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -26,16 +21,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwSubDescriptorFromStackWord,
   tfwScriptingInterfaces,
-  evSubPn,
-  tfwRegisterableWord
+  evSubPn
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwSubDescriptorFromStackWord.imp.pas}
- TkwSubdescriptorGetVisible = {final} class(_kwSubDescriptorFromStackWord_)
+ TkwSubdescriptorGetVisible = {final scriptword} class(TkwSubDescriptorFromStackWord)
   {* Помещает в стек видмость метки.
 Формат:
 [code]
@@ -45,8 +39,8 @@ aSubDescrObj subdescriptor:GetVisible
  // realized methods
    procedure DoWithSubDescriptor(aControl: TevSubDescriptor;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwSubdescriptorGetVisible
 {$IfEnd} //not NoScripts
@@ -54,21 +48,6 @@ aSubDescrObj subdescriptor:GetVisible
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  Controls,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwSubdescriptorGetVisible;
-
-{$Include ..\ScriptEngine\kwSubDescriptorFromStackWord.imp.pas}
 
 // start class TkwSubdescriptorGetVisible
 
@@ -92,7 +71,8 @@ end;//TkwSubdescriptorGetVisible.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwSubDescriptorFromStackWord.imp.pas}
+// Регистрация subdescriptor_GetVisible
+ TkwSubdescriptorGetVisible.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -3,16 +3,11 @@ unit kwClassCompiler;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwClassCompiler.pas"
+// Модуль: "kwClassCompiler.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Stereotyping::TkwClassCompiler
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Stereotyping::TkwClassCompiler
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -86,6 +81,12 @@ begin
 //#UC END# *4F3C06550278_4F3961B4035D_impl*
 end;//TkwClassCompiler.AllowNestedCalls
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwClassCompiler
+ TkwClassCompiler.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

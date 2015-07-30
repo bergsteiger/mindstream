@@ -3,9 +3,9 @@ unit kwTestResolveInputFilePath;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwTestResolveInputFilePath.pas"
+// Модуль: "kwTestResolveInputFilePath.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EtalonsWorking::test_ResolveInputFilePath
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::EtalonsWorking::test_ResolveInputFilePath
 //
 // *Описание:* добавляет к имени файла путь к директории TestSet, где хранятся исходные файлы.
 // *Формат*
@@ -15,12 +15,7 @@ unit kwTestResolveInputFilePath;
 // где aFileName - имя файля без пути (!).
 // Результат помещается в стек.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -35,8 +30,7 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwTestResolveInputFilePath = {final} class(_tfwAutoregisteringWord_)
+ TkwTestResolveInputFilePath = {final scriptword} class(TtfwRegisterableWord)
   {* *Описание:* добавляет к имени файла путь к директории TestSet, где хранятся исходные файлы.
 *Формат*
 [code]
@@ -47,8 +41,8 @@ aFileName test:ResolveInputFilePath
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwTestResolveInputFilePath
 {$IfEnd} //not NoScripts
@@ -56,17 +50,6 @@ aFileName test:ResolveInputFilePath
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwTestResolveInputFilePath;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwTestResolveInputFilePath
 
@@ -90,7 +73,8 @@ end;//TkwTestResolveInputFilePath.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация test_ResolveInputFilePath
+ TkwTestResolveInputFilePath.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

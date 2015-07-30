@@ -3,16 +3,11 @@ unit kwWStringStartsText;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwWStringStartsText.pas"
+// Модуль: "kwWStringStartsText.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::WString_StartsText
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::WString_StartsText
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,23 +15,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwDualWStrWord,
   l3Interfaces,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwDualWStrWord.imp.pas}
- TkwWStringStartsText = {final} class(_tfwDualWStrWord_)
+ TkwWStringStartsText = {final scriptword} class(TtfwDualWStrWord)
  protected
  // realized methods
    procedure DoStrings(const aCtx: TtfwContext;
      const aStr1: Tl3WString;
      const aStr2: Tl3WString); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwWStringStartsText
 {$IfEnd} //not NoScripts
@@ -47,17 +41,11 @@ implementation
 uses
   l3String,
   SysUtils,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwWStringStartsText;
-
-{$Include ..\ScriptEngine\tfwDualWStrWord.imp.pas}
 
 // start class TkwWStringStartsText
 
@@ -82,7 +70,8 @@ end;//TkwWStringStartsText.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwDualWStrWord.imp.pas}
+// Регистрация WString_StartsText
+ TkwWStringStartsText.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

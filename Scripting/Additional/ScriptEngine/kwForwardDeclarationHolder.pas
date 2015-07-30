@@ -2,17 +2,12 @@ unit kwForwardDeclarationHolder;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwForwardDeclarationHolder.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "kwForwardDeclarationHolder.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwForwardDeclarationHolder
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::CompiledWords::TkwForwardDeclarationHolder
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -49,12 +44,6 @@ type
 {$IfEnd} //not NoScripts
 
 implementation
-
-{$If not defined(NoScripts)}
-uses
-  tfwClassRef
-  ;
-{$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 
@@ -94,9 +83,8 @@ end;//TkwForwardDeclarationHolder.Cleanup
 
 initialization
 {$If not defined(NoScripts)}
-//#UC START# *53DF7BB203C6*
+// Регистрация TkwForwardDeclarationHolder
  TkwForwardDeclarationHolder.RegisterClass;
-//#UC END# *53DF7BB203C6*
 {$IfEnd} //not NoScripts
 
 end.

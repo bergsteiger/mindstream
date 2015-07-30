@@ -2,10 +2,10 @@ unit kwImageEnViewerSaveBitmap;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwImageEnViewerSaveBitmap.pas"
+// Библиотека "ScriptEngine$ImageEn"
+// Модуль: "kwImageEnViewerSaveBitmap.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::ImageEnView::ImageEnViewer_SaveBitmap
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$ImageEn::ImageEnView::ImageEnViewer_SaveBitmap
 //
 // Формат:
 // {code}
@@ -13,12 +13,7 @@ unit kwImageEnViewerSaveBitmap;
 // {code}
 // где aFileName - имя файла, куда сохранять.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -26,18 +21,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwImageEnControl,
   imageenview,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\ImageEnControl.imp.pas}
- TkwImageEnViewerSaveBitmap = {final} class(_ImageEnControl_)
+ TkwImageEnViewerSaveBitmap = {final scriptword} class(TkwImageEnControl)
   {* Формат:
 [code]
 aFileName ImageEnViewer:SaveBitmap
@@ -47,8 +39,8 @@ aFileName ImageEnViewer:SaveBitmap
  // realized methods
    procedure DoWithImageEn(aControl: TImageEnView;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwImageEnViewerSaveBitmap
 {$IfEnd} //not NoScripts
@@ -57,20 +49,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  SysUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwImageEnViewerSaveBitmap;
-
-{$Include ..\ScriptEngine\ImageEnControl.imp.pas}
 
 // start class TkwImageEnViewerSaveBitmap
 
@@ -101,7 +84,8 @@ end;//TkwImageEnViewerSaveBitmap.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\ImageEnControl.imp.pas}
+// Регистрация ImageEnViewer_SaveBitmap
+ TkwImageEnViewerSaveBitmap.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

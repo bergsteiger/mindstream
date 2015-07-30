@@ -3,16 +3,11 @@ unit kwMouseRightUp;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwMouseRightUp.pas"
+// Модуль: "kwMouseRightUp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::MouseInput::Mouse_RightUp
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::MouseInput::Mouse_RightUp
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,21 +15,18 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  Windows,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  kwMouseUpDownSupport
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwMouseUpDownSupport.imp.pas}
- TkwMouseRightUp = {final} class(_kwMouseUpDownSupport_)
+ TkwMouseRightUp = {final scriptword} class(TkwMouseUpDownSupport)
  protected
  // realized methods
    function GetMouseEventFlag: Integer; override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwMouseRightUp
 {$IfEnd} //not NoScripts
@@ -43,17 +35,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  Windows
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwMouseRightUp;
-
-{$Include ..\ScriptEngine\kwMouseUpDownSupport.imp.pas}
 
 // start class TkwMouseRightUp
 
@@ -76,7 +62,8 @@ end;//TkwMouseRightUp.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwMouseUpDownSupport.imp.pas}
+// Регистрация Mouse_RightUp
+ TkwMouseRightUp.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

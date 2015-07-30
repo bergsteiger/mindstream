@@ -4,19 +4,14 @@ unit kwTryFinally;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwTryFinally.pas"
+// Модуль: "kwTryFinally.pas"
 // Начат: 29.04.2011 18:04
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TryFinally
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TryFinally
 //
 // Полный аналог try finally Delphi
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -24,19 +19,16 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwDualWord,
   tfwScriptingInterfaces,
   kwDualCompiledWordContainer,
-  kwCompiledWordPrim,
-  l3Interfaces,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwDualWord.imp.pas}
- TkwTryFinally = class(_tfwDualWord_)
+ TkwTryFinally = {scriptword} class(TtfwDualWord)
   {* Полный аналог try finally Delphi }
  protected
  // realized methods
@@ -47,8 +39,8 @@ type
      aCompiled: TkwCompiledWordPrim;
      aCompiled2: TkwCompiledWordPrim): TkwDualCompiledWordContainer; override;
    function MedianBracket2: RtfwWord; override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwTryFinally
 {$IfEnd} //not NoScripts
@@ -61,29 +53,11 @@ uses
   kwCompiledTryExcept,
   kwEND,
   kwFINALLY,
-  kwEXCEPT,
-  SysUtils,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwEXCEPT
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwTryFinally;
-
-{$Include ..\ScriptEngine\tfwDualWord.imp.pas}
 
 // start class TkwTryFinally
 
@@ -159,7 +133,8 @@ end;//TkwTryFinally.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwDualWord.imp.pas}
+// Регистрация TryFinally
+ TkwTryFinally.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

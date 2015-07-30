@@ -4,19 +4,14 @@ unit kwStrToInt;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwStrToInt.pas"
+// Модуль: "kwStrToInt.pas"
 // Начат: 16.05.2011 11:13
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::TkwStrToInt
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::TkwStrToInt
 //
 // Преобразование строки в число.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -24,23 +19,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwStrWord,
   l3Interfaces,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwStrWord.imp.pas}
- TkwStrToInt = class(_tfwStrWord_)
+ TkwStrToInt = class(TtfwStrWord)
   {* Преобразование строки в число. }
  protected
  // realized methods
    procedure DoString(const aCtx: TtfwContext;
      const aStr: Il3CString); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwStrToInt
 {$IfEnd} //not NoScripts
@@ -49,19 +43,13 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils,
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwStrToInt;
-
-{$Include ..\ScriptEngine\tfwStrWord.imp.pas}
 
 // start class TkwStrToInt
 
@@ -88,7 +76,8 @@ end;//TkwStrToInt.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwStrWord.imp.pas}
+// Регистрация TkwStrToInt
+ TkwStrToInt.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

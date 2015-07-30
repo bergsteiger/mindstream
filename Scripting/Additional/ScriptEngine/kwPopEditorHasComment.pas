@@ -2,19 +2,14 @@ unit kwPopEditorHasComment;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorHasComment.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorHasComment.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_HasComment
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_HasComment
 //
 // editor:HasComment. Помещает в стек true, если текущий параграф содержит комментарий.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,27 +17,24 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackNextParaWord,
   nevTools,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackNextParaWord.imp.pas}
- TkwPopEditorHasComment = class(_kwEditorFromStackNextParaWord_)
+ TkwPopEditorHasComment = {scriptword} class(TkwEditorFromStackNextParaWord)
   {* editor:HasComment. Помещает в стек true, если текущий параграф содержит комментарий. }
  protected
  // realized methods
    procedure DoNextPara(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow;
      const aPara: InevPara); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorHasComment
 {$IfEnd} //not NoScripts
@@ -51,24 +43,13 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  LeafPara_Const,
-  TextPara_Const,
-  CommentPara_Const,
-  Windows,
-  evParaTools,
   evOp,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  afwFacade,
-  Forms
+  CommentPara_Const,
+  TextPara_Const
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorHasComment;
-
-{$Include ..\ScriptEngine\kwEditorFromStackNextParaWord.imp.pas}
 
 // start class TkwPopEditorHasComment
 
@@ -93,7 +74,8 @@ end;//TkwPopEditorHasComment.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackNextParaWord.imp.pas}
+// Регистрация pop_editor_HasComment
+ TkwPopEditorHasComment.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

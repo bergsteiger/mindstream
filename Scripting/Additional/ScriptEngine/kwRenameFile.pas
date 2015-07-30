@@ -3,9 +3,9 @@ unit kwRenameFile;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwRenameFile.pas"
+// Модуль: "kwRenameFile.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FileProcessing::RenameFile
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::FileProcessing::RenameFile
 //
 // RenameFile - переименовывает файл.
 // *Формат:* aOldFileName aNewFileName RenameFile
@@ -14,12 +14,7 @@ unit kwRenameFile;
 // В стек помещается результат операции: true - если успешно, false - если переименование не
 // получилось.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -34,8 +29,7 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwRenameFile = {final} class(_tfwAutoregisteringWord_)
+ TkwRenameFile = {final scriptword} class(TtfwRegisterableWord)
   {* RenameFile - переименовывает файл.
 *Формат:* aOldFileName aNewFileName RenameFile
 * aNewFileName - новое имя файла.
@@ -44,8 +38,8 @@ type
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwRenameFile
 {$IfEnd} //not NoScripts
@@ -54,17 +48,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  SysUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwRenameFile;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwRenameFile
 
@@ -102,7 +90,8 @@ end;//TkwRenameFile.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация RenameFile
+ TkwRenameFile.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -4,17 +4,12 @@ unit kwIncluded;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwIncluded.pas"
+// Модуль: "kwIncluded.pas"
 // Начат: 05.05.2011 21:34
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::IncludesAndUses::TkwIncluded
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::IncludesAndUses::TkwIncluded
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,12 +17,8 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  tfwStreamFactory,
-  l3Interfaces,
-  l3ParserInterfaces,
-  kwCompiledWordPrim,
-  tfwRegisterableWord
+  kwIncludedPrim,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
@@ -35,8 +26,7 @@ uses
 type
  RkwIncluded = class of TkwIncluded;
 
- {$Include ..\ScriptEngine\kwIncludedPrim.imp.pas}
- TkwIncluded = class(_kwIncludedPrim_)
+ TkwIncluded = class(TkwIncludedPrim)
  private
  // private fields
    f_FileName : AnsiString;
@@ -63,27 +53,11 @@ uses
   l3Chars,
   kwCompiledIncluded,
   l3Base,
-  tfwFileStreamFactory,
-  tfwParser,
-  tfwParserInterfaces,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  tfwFileStreamFactory
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwIncluded;
-
-{$Include ..\ScriptEngine\kwIncludedPrim.imp.pas}
 
 // start class TkwIncluded
 
@@ -143,7 +117,8 @@ end;//TkwIncluded.UnknownWord
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwIncludedPrim.imp.pas}
+// Регистрация TkwIncluded
+ TkwIncluded.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

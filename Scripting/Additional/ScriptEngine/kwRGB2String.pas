@@ -3,21 +3,16 @@ unit kwRGB2String;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwRGB2String.pas"
+// Модуль: "kwRGB2String.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::RGB2String
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::SysUtils::RGB2String
 //
 // Переводит представление R G B в шестнадцатиричное представление в виде строки:
 // {code}
 // 151 40 30 RGB2String .
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -25,15 +20,14 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
+  tfwSysUtilsWord,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
- TkwRGB2String = {final} class(_tfwSysUtilsWord_)
+ TkwRGB2String = {final scriptword} class(TtfwSysUtilsWord)
   {* Переводит представление R G B в шестнадцатиричное представление в виде строки:
 [code]
 151 40 30 RGB2String .
@@ -41,8 +35,8 @@ type
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwRGB2String
 {$IfEnd} //not NoScripts
@@ -55,17 +49,11 @@ uses
   Graphics,
   SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwRGB2String;
-
-{$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
 
 // start class TkwRGB2String
 
@@ -97,7 +85,8 @@ end;//TkwRGB2String.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
+// Регистрация RGB2String
+ TkwRGB2String.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

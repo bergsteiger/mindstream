@@ -3,16 +3,11 @@ unit kwCompiledImmediateWordWorkerWord;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledImmediateWordWorkerWord.pas"
+// Модуль: "kwCompiledImmediateWordWorkerWord.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledImmediateWordWorkerWord
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwCompiledImmediateWordWorkerWord
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -32,7 +27,7 @@ type
  protected
  // overridden protected methods
    function SupressNextImmediate: TtfwSuppressNextImmediate; override;
-   function RunnerClass: RkwCompiledWordWorkerWordRunner; override;
+   function RunnerClass(const aCtx: TtfwContext): RkwCompiledWordWorkerWordRunner; override;
  end;//TkwCompiledImmediateWordWorkerWord
 {$IfEnd} //not NoScripts
 
@@ -57,7 +52,7 @@ begin
 //#UC END# *4F3AB3B101FC_4F3FAC650392_impl*
 end;//TkwCompiledImmediateWordWorkerWord.SupressNextImmediate
 
-function TkwCompiledImmediateWordWorkerWord.RunnerClass: RkwCompiledWordWorkerWordRunner;
+function TkwCompiledImmediateWordWorkerWord.RunnerClass(const aCtx: TtfwContext): RkwCompiledWordWorkerWordRunner;
 //#UC START# *4F3FAC0C0170_4F3FAC650392_var*
 //#UC END# *4F3FAC0C0170_4F3FAC650392_var*
 begin
@@ -66,6 +61,12 @@ begin
 //#UC END# *4F3FAC0C0170_4F3FAC650392_impl*
 end;//TkwCompiledImmediateWordWorkerWord.RunnerClass
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledImmediateWordWorkerWord
+ TkwCompiledImmediateWordWorkerWord.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

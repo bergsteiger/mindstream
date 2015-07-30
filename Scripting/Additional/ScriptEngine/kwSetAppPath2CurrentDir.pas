@@ -3,18 +3,13 @@ unit kwSetAppPath2CurrentDir;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwSetAppPath2CurrentDir.pas"
+// Модуль: "kwSetAppPath2CurrentDir.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::SetAppPath2CurrentDir
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::SysUtils::SetAppPath2CurrentDir
 //
 // Устанавливает CurrentDirectory значение директории запуска тестового приложения.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,21 +17,20 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
+  tfwSysUtilsWord,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
- TkwSetAppPath2CurrentDir = {final} class(_tfwSysUtilsWord_)
+ TkwSetAppPath2CurrentDir = {final scriptword} class(TtfwSysUtilsWord)
   {* Устанавливает CurrentDirectory значение директории запуска тестового приложения. }
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwSetAppPath2CurrentDir
 {$IfEnd} //not NoScripts
@@ -47,17 +41,11 @@ implementation
 uses
   SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwSetAppPath2CurrentDir;
-
-{$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
 
 // start class TkwSetAppPath2CurrentDir
 
@@ -80,7 +68,8 @@ end;//TkwSetAppPath2CurrentDir.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
+// Регистрация SetAppPath2CurrentDir
+ TkwSetAppPath2CurrentDir.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

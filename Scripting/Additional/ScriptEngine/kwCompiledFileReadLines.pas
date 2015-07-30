@@ -3,16 +3,11 @@ unit kwCompiledFileReadLines;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledFileReadLines.pas"
+// Модуль: "kwCompiledFileReadLines.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::FileProcessing::TkwCompiledFileReadLines
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::FileProcessing::TkwCompiledFileReadLines
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -63,6 +58,12 @@ begin
 //#UC END# *4DAEEDE10285_4F50881D0135_impl*
 end;//TkwCompiledFileReadLines.DoDoIt
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledFileReadLines
+ TkwCompiledFileReadLines.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

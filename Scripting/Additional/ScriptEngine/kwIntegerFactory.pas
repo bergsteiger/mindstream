@@ -2,17 +2,12 @@ unit kwIntegerFactory;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwIntegerFactory.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "kwIntegerFactory.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::PrimitiveWords::TkwIntegerFactory
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::PrimitiveWords::TkwIntegerFactory
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -31,6 +26,8 @@ type
  public
  // public methods
    function MakeKW(aValue: Integer): TkwInteger;
+   class function Exists: Boolean;
+     {* Проверяет создан экземпляр синглетона или нет }
  public
  // singleton factory method
    class function Instance: TkwIntegerFactory;
@@ -95,6 +92,12 @@ begin
   Result := TkwInteger.Create(aValue);
 //#UC END# *4F3E412801B7_4F3E401D03AF_impl*
 end;//TkwIntegerFactory.MakeKW
+
+class function TkwIntegerFactory.Exists: Boolean;
+ {-}
+begin
+ Result := g_TkwIntegerFactory <> nil;
+end;//TkwIntegerFactory.Exists
 
 {$IfEnd} //not NoScripts
 

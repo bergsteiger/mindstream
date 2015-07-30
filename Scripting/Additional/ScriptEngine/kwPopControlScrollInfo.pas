@@ -2,17 +2,12 @@ unit kwPopControlScrollInfo;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopControlScrollInfo.pas"
+// Библиотека "ScriptEngine$RTLandVCL"
+// Модуль: "kwPopControlScrollInfo.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::ControlsProcessing::pop_control_ScrollInfo
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::ScrollInfoProcessing::pop_control_ScrollInfo
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,23 +15,19 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  Windows,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  kwScrollInfoWord,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwScrollInfoWord.imp.pas}
- TkwPopControlScrollInfo = {final} class(_kwScrollInfoWord_)
+ TkwPopControlScrollInfo = {final scriptword} class(TkwScrollInfoWord)
  protected
  // realized methods
    procedure DoScrollInfo(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopControlScrollInfo
 {$IfEnd} //not NoScripts
@@ -44,19 +35,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopControlScrollInfo;
-
-{$Include ..\ScriptEngine\kwScrollInfoWord.imp.pas}
 
 // start class TkwPopControlScrollInfo
 
@@ -82,7 +60,8 @@ end;//TkwPopControlScrollInfo.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwScrollInfoWord.imp.pas}
+// Регистрация pop_control_ScrollInfo
+ TkwPopControlScrollInfo.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

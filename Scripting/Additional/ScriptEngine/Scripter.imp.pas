@@ -4,15 +4,12 @@
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/Scripter.imp.pas"
+// Модуль: "Scripter.imp.pas"
 // Начат: 20.04.2011 18:14
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::Scripter
+// Generated from UML model, root element: Impurity::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::Scripter
 //
 // Парень умеющий выполнять скрипты
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -26,6 +23,10 @@
    procedure ScriptFromFile(const aFileName: AnsiString);
    function ResolveScriptFilePath(const aFileName: AnsiString): AnsiString; virtual;
  end;//_Scripter_
+{$Else}
+
+ _Scripter_ = _Scripter_Parent_;
+
 {$IfEnd} //not NoScripts
 
 {$Else Scripter_imp}

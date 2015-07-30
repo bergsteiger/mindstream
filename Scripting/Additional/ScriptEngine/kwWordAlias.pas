@@ -4,17 +4,12 @@ unit kwWordAlias;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwWordAlias.pas"
+// Модуль: "kwWordAlias.pas"
 // Начат: 15.02.2012 18:31
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::WordAlias
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::WordAlias
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,58 +17,29 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  tfwConstLike,
   tfwScriptingInterfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwConstLike.imp.pas}
- TkwWordAlias = {final} class(_tfwConstLike_)
+ TkwWordAlias = {final scriptword} class(TtfwConstLike)
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    procedure FinishDefinitionOfNewWord(aWordToFinish: TtfwKeyWord;
      aCompiled: TkwCompiledWordPrim;
      const aContext: TtfwContext); override;
      {* Завершает определение вновь созданного слова }
    function SupressNextImmediate: TtfwSuppressNextImmediate; override;
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwWordAlias
 {$IfEnd} //not NoScripts
 
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  kwRuntimeWordWithCodeExecution,
-  SysUtils,
-  l3String,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwWordAlias;
-
-{$Include ..\ScriptEngine\tfwConstLike.imp.pas}
 
 // start class TkwWordAlias
 
@@ -122,7 +88,8 @@ end;//TkwWordAlias.SupressNextImmediate
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwConstLike.imp.pas}
+// Регистрация WordAlias
+ TkwWordAlias.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -2,19 +2,14 @@ unit kwPopObjectClassName;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$RTLandVCL"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopObjectClassName.pas"
+// Модуль: "kwPopObjectClassName.pas"
 // Начат: 26.02.2012 14:41
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::CommonObjectWords::pop_object_ClassName
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::Object Info::pop_object_ClassName
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,21 +17,20 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  kwObjectFromStackWord,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwObjectFromStackWord.imp.pas}
- TkwPopObjectClassName = class(_kwObjectFromStackWord_)
+ TkwPopObjectClassName = {scriptword} class(TkwObjectFromStackWord)
  protected
  // realized methods
    procedure DoObject(anObject: TObject;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopObjectClassName
 {$IfEnd} //not NoScripts
@@ -44,21 +38,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  Controls,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopObjectClassName;
-
-{$Include ..\ScriptEngine\kwObjectFromStackWord.imp.pas}
 
 // start class TkwPopObjectClassName
 
@@ -85,7 +64,8 @@ end;//TkwPopObjectClassName.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwObjectFromStackWord.imp.pas}
+// Регистрация pop_object_ClassName
+ TkwPopObjectClassName.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

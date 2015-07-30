@@ -3,16 +3,11 @@ unit kwClipboardGetFormattedText;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwClipboardGetFormattedText.pas"
+// Модуль: "kwClipboardGetFormattedText.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::SysUtils::clipboard_GetFormattedText
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::SysUtils::clipboard_GetFormattedText
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,20 +15,19 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwRegisterableWord,
+  tfwSysUtilsWord,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
- TkwClipboardGetFormattedText = {final} class(_tfwSysUtilsWord_)
+ TkwClipboardGetFormattedText = {final scriptword} class(TtfwSysUtilsWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwClipboardGetFormattedText
 {$IfEnd} //not NoScripts
@@ -42,38 +36,32 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  evTypes,
   Clipbrd,
   l3Utils,
   Windows,
   SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwClipboardGetFormattedText;
-
-{$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
 
 // start class TkwClipboardGetFormattedText
 
 procedure TkwClipboardGetFormattedText.DoDoIt(const aCtx: TtfwContext);
 //#UC START# *4DAEEDE10285_500D1B2102D0_var*
 var
- l_Format: TevFormat;
+ l_Format: Cardinal;
  l_ClipbrdHandle: THandle;
  l_String: PChar;
 //#UC END# *4DAEEDE10285_500D1B2102D0_var*
 begin
 //#UC START# *4DAEEDE10285_500D1B2102D0_impl*
- if aCtx.rEngine.IsTopInt
-  then l_Format := aCtx.rEngine.PopInt
-  else l_Format := l3GetClipboardByFormatName(aCtx.rEngine.PopDelphiString);
+ if aCtx.rEngine.IsTopInt then
+  l_Format := Cardinal(aCtx.rEngine.PopInt)
+ else
+  l_Format := Cardinal(l3GetClipboardByFormatName(aCtx.rEngine.PopDelphiString));
 
  if Clipboard.HasFormat(l_Format) then
  begin
@@ -101,7 +89,8 @@ end;//TkwClipboardGetFormattedText.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwSysUtilsWord.imp.pas}
+// Регистрация clipboard_GetFormattedText
+ TkwClipboardGetFormattedText.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

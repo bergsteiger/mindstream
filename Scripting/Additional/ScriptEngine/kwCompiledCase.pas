@@ -4,17 +4,12 @@ unit kwCompiledCase;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledCase.pas"
+// Модуль: "kwCompiledCase.pas"
 // Начат: 29.04.2011 21:01
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::CodeBranchingWords::TkwCompiledCase
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::CodeBranchingWords::TkwCompiledCase
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -40,7 +35,6 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwDEFAULT,
   tfwClassRef
   ;
 {$IfEnd} //not NoScripts
@@ -89,6 +83,10 @@ initialization
 //#UC START# *53DFBB0C0233*
  TkwCompiledCase.RegisterClass;
 //#UC END# *53DFBB0C0233*
+{$IfEnd} //not NoScripts
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledCase
+ TkwCompiledCase.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

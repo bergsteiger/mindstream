@@ -3,18 +3,13 @@ unit kwINCLUDES;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwINCLUDES.pas"
+// Модуль: "kwINCLUDES.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::IncludesAndUses::IncludesAndUsesPack::INCLUDES
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::IncludesAndUses::IncludesAndUsesPack::INCLUDES
 //
 // Как USES, но позволяет включать слова во ВНУТРЕННИЙ словарь - откуда слово было вызвано
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -23,25 +18,22 @@ interface
 {$If not defined(NoScripts)}
 uses
   tfwScriptingInterfaces,
+  tfwCompilingWord,
   kwIncluded,
-  l3Interfaces,
-  l3ParserInterfaces,
   kwCompiledWordPrim,
-  tfwRegisterableWord
+  l3Interfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
  {$Include ..\ScriptEngine\kwUsesLike.imp.pas}
- TkwINCLUDES = {final} class(_kwUsesLike_)
+ TkwINCLUDES = {final scriptword} class(_kwUsesLike_)
   {* Как USES, но позволяет включать слова во ВНУТРЕННИЙ словарь - откуда слово было вызвано }
  protected
  // overridden protected methods
-   function GetIncludedClass: RkwIncluded; override;
- public
- // overridden public methods
    class function GetWordNameForRegister: AnsiString; override;
+   function GetIncludedClass: RkwIncluded; override;
  end;//TkwINCLUDES
 {$IfEnd} //not NoScripts
 
@@ -53,25 +45,11 @@ uses
   kwStandardProcedureCloseBracket,
   l3String,
   SysUtils,
-  l3Types,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3Types
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwINCLUDES;
 
 {$Include ..\ScriptEngine\kwUsesLike.imp.pas}
 
@@ -96,7 +74,8 @@ end;//TkwINCLUDES.GetIncludedClass
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwUsesLike.imp.pas}
+// Регистрация INCLUDES
+ TkwINCLUDES.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

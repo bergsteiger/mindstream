@@ -3,18 +3,13 @@ unit kwCharDupe;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCharDupe.pas"
+// Модуль: "kwCharDupe.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::char_Dupe
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::char_Dupe
 //
 // Размножаем символ столько раз, сколько указано
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,23 +17,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwWStrWord,
   l3Interfaces,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwWStrWord.imp.pas}
- TkwCharDupe = {final} class(_tfwWStrWord_)
+ TkwCharDupe = {final scriptword} class(TtfwWStrWord)
   {* Размножаем символ столько раз, сколько указано }
  protected
  // realized methods
    procedure DoString(const aCtx: TtfwContext;
      const aStr: Tl3WString); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwCharDupe
 {$IfEnd} //not NoScripts
@@ -49,17 +43,11 @@ implementation
 uses
   l3String,
   SysUtils,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCharDupe;
-
-{$Include ..\ScriptEngine\tfwWStrWord.imp.pas}
 
 // start class TkwCharDupe
 
@@ -83,7 +71,8 @@ end;//TkwCharDupe.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwWStrWord.imp.pas}
+// Регистрация char_Dupe
+ TkwCharDupe.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

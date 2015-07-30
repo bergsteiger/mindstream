@@ -2,19 +2,14 @@ unit kwPopEditorSelectCellByMouse;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorSelectCellByMouse.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorSelectCellByMouse.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_SelectCellByMouse
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_SelectCellByMouse
 //
 // editorSelectCellByMouse
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -23,22 +18,19 @@ interface
 {$If not defined(NoScripts)}
 uses
   nevTools,
+  kwEditorFromStackCursorWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord,
   l3Units,
-  nevGUIInterfaces
+  nevGUIInterfaces,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackCursorWord.imp.pas}
- _CellSelectionByMouse_Parent_ = _kwEditorFromStackCursorWord_;
- {$Include w:\common\components\rtl\Garant\EditorUsers\CellSelectionByMouse.imp.pas}
- TkwPopEditorSelectCellByMouse = class(_CellSelectionByMouse_)
+ _CellSelectionByMouse_Parent_ = TkwEditorFromStackCursorWord;
+ {$Include w:\common\components\gui\Garant\Everest\EditorUsers\CellSelectionByMouse.imp.pas}
+ TkwPopEditorSelectCellByMouse = {scriptword} class(_CellSelectionByMouse_)
   {* editorSelectCellByMouse }
  private
  // private fields
@@ -57,8 +49,6 @@ type
    function GetInnerPara(const aView: InevInputView;
     const aDocument: InevPara): InevPara; override;
      {* Возвращает параграф, относительно которого будет рассчитываться точка для выделения }
- public
- // overridden public methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorSelectCellByMouse
 {$IfEnd} //not NoScripts
@@ -68,27 +58,17 @@ implementation
 {$If not defined(NoScripts)}
 uses
   Table_Const,
-  TextPara_Const,
-  CommentPara_Const,
-  Windows,
-  evParaTools,
-  evOp,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  afwFacade,
-  Forms,
   evConst,
-  l3Base
+  l3Base,
+  evOp,
+  CommentPara_Const,
+  TextPara_Const
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 
-type _Instance_R_ = TkwPopEditorSelectCellByMouse;
-
-{$Include ..\ScriptEngine\kwEditorFromStackCursorWord.imp.pas}
-
-{$Include w:\common\components\rtl\Garant\EditorUsers\CellSelectionByMouse.imp.pas}
+{$Include w:\common\components\gui\Garant\Everest\EditorUsers\CellSelectionByMouse.imp.pas}
 
 // start class TkwPopEditorSelectCellByMouse
 
@@ -111,11 +91,11 @@ begin
  if aCtx.rEngine.IsTopInt then
   f_Row := aCtx.rEngine.PopInt
  else
-  RunnerAssert(False, 'Не задан номер строки!', aCtx);
+  RunnerError('Не задан номер строки!', aCtx);
  if aCtx.rEngine.IsTopInt then
   f_Col := aCtx.rEngine.PopInt
  else
-  RunnerAssert(False, 'Не задан номер ячейки!', aCtx);
+  RunnerError('Не задан номер ячейки!', aCtx);
  SelectCell(anEditor);
  f_Table := nil;
 //#UC END# *50B8BCDF0093_4E980426001F_impl*
@@ -141,7 +121,8 @@ end;//TkwPopEditorSelectCellByMouse.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackCursorWord.imp.pas}
+// Регистрация pop_editor_SelectCellByMouse
+ TkwPopEditorSelectCellByMouse.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

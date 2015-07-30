@@ -3,16 +3,11 @@ unit kwNamedInitedVarProducer;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwNamedInitedVarProducer.pas"
+// Модуль: "kwNamedInitedVarProducer.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::VarProducing::VarProducingPack::NamedInitedVarProducer
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::VarProducing::VarProducingPack::NamedInitedVarProducer
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,27 +15,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  kwInitedVarProducerPrim,
   tfwScriptingInterfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwInitedVarProducer.imp.pas}
- TkwNamedInitedVarProducer = {final} class(_kwInitedVarProducer_)
+ TkwNamedInitedVarProducer = {final scriptword} class(TkwInitedVarProducerPrim)
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    procedure FinishDefinitionOfNewWord(aWordToFinish: TtfwKeyWord;
      aCompiled: TkwCompiledWordPrim;
      const aContext: TtfwContext); override;
      {* Завершает определение вновь созданного слова }
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwNamedInitedVarProducer
 {$IfEnd} //not NoScripts
 
@@ -49,31 +39,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   kwCompiledNamedInitedVarProducer,
-  kwCompiledInitedVarProducer,
-  kwCompiledInitableVar,
-  kwCompiledWord,
-  kwCompiledVar,
-  SysUtils,
-  l3String,
-  l3Parser,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwNamedInitedVarProducer;
-
-{$Include ..\ScriptEngine\kwInitedVarProducer.imp.pas}
 
 // start class TkwNamedInitedVarProducer
 
@@ -110,7 +80,8 @@ end;//TkwNamedInitedVarProducer.FinishDefinitionOfNewWord
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwInitedVarProducer.imp.pas}
+// Регистрация NamedInitedVarProducer
+ TkwNamedInitedVarProducer.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

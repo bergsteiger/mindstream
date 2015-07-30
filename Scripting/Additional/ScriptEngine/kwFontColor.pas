@@ -2,17 +2,12 @@ unit kwFontColor;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwFontColor.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwFontColor.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FontKeywords::font_Color
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::FontKeywords::font_Color
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,25 +15,24 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  kwFontWord,
   Graphics,
   tfwScriptingInterfaces,
-  tfwRegisterableWord
+  l3Interfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwFontWord.imp.pas}
- TkwFontColor = {final} class(_kwFontWord_)
+ TkwFontColor = {final scriptword} class(TkwFontWord)
  protected
  // realized methods
    procedure DoFont(aFont: TFont;
      const aCtx: TtfwContext); override;
    procedure DoIFont(const aFont: Il3Font;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwFontColor
 {$IfEnd} //not NoScripts
@@ -46,18 +40,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  SysUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwFontColor;
-
-{$Include ..\ScriptEngine\kwFontWord.imp.pas}
 
 // start class TkwFontColor
 
@@ -91,7 +73,8 @@ end;//TkwFontColor.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwFontWord.imp.pas}
+// Регистрация font_Color
+ TkwFontColor.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

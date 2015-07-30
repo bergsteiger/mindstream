@@ -2,21 +2,16 @@ unit kwPopEditorGetSelectionTextInFormat;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Everest"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorGetSelectionTextInFormat.pas"
+// Модуль: "kwPopEditorGetSelectionTextInFormat.pas"
 // Начат: 14.11.2011 16:34
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_GetSelectionTextInFormat
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_GetSelectionTextInFormat
 //
 // Получает текст параграфа в указанном формате
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -24,25 +19,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorGetSelectionTextInFormat = class(_kwEditorFromStackWord_)
+ TkwPopEditorGetSelectionTextInFormat = {scriptword} class(TkwEditorFromStackWord)
   {* Получает текст параграфа в указанном формате }
  protected
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorGetSelectionTextInFormat
 {$IfEnd} //not NoScripts
@@ -56,20 +48,11 @@ uses
   evParaTools,
   evdBlockNameAdder,
   evdDocumentMarksEliminator,
-  evdMarkEliminator,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  evdMarkEliminator
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorGetSelectionTextInFormat;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 // start class TkwPopEditorGetSelectionTextInFormat
 
@@ -107,7 +90,8 @@ end;//TkwPopEditorGetSelectionTextInFormat.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_GetSelectionTextInFormat
+ TkwPopEditorGetSelectionTextInFormat.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

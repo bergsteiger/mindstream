@@ -2,10 +2,10 @@ unit kwPopComboBoxSaveItems;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopComboBoxSaveItems.pas"
+// Библиотека "ScriptEngine$VT"
+// Модуль: "kwPopComboBoxSaveItems.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::ControlsProcessing::pop_ComboBox_SaveItems
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$VT::vtComboBoxWords::pop_ComboBox_SaveItems
 //
 // *Формат:* имя_файла  контрол pop:ComboBox:SaveItems
 // *Описание:* Сохраняет все пункты выпадающего списка (задается параметром контрол) в файл
@@ -17,12 +17,7 @@ unit kwPopComboBoxSaveItems;
 // *Результат:* Сохраняет содержимое комбобокса 'StyleComboBox' в  файл  'MyList.cmbx' и сравнивает
 // с эталоном.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -31,19 +26,17 @@ interface
 {$If not defined(NoScripts)}
 uses
   l3Filer,
-  FakeBox,
-  StdCtrls,
-  tfwScriptingInterfaces,
+  kwComboBoxFromStack,
   Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces,
+  StdCtrls,
+  FakeBox
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwComboBoxFromStack.imp.pas}
- TkwPopComboBoxSaveItems = {final} class(_kwComboBoxFromStack_)
+ TkwPopComboBoxSaveItems = {final scriptword} class(TkwComboBoxFromStack)
   {* *Формат:* имя_файла  контрол pop:ComboBox:SaveItems 
 *Описание:* Сохраняет все пункты выпадающего списка (задается параметром контрол) в файл (задается параметром имя_файла)  и сравнивает с эталоном.
 *Пример:*
@@ -62,11 +55,9 @@ type
      const aCtx: TtfwContext); override;
  protected
  // overridden protected methods
+   class function GetWordNameForRegister: AnsiString; override;
    procedure DoControl(aControl: TControl;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
-   class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopComboBoxSaveItems
 {$IfEnd} //not NoScripts
 
@@ -76,20 +67,11 @@ implementation
 uses
   SysUtils,
   l3Types,
-  l3Interfaces,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  l3Interfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopComboBoxSaveItems;
-
-{$Include ..\ScriptEngine\kwComboBoxFromStack.imp.pas}
 
 // start class TkwPopComboBoxSaveItems
 
@@ -152,7 +134,8 @@ end;//TkwPopComboBoxSaveItems.DoControl
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwComboBoxFromStack.imp.pas}
+// Регистрация pop_ComboBox_SaveItems
+ TkwPopComboBoxSaveItems.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

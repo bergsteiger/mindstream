@@ -4,10 +4,10 @@ unit kwCASE;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCASE.pas"
+// Модуль: "kwCASE.pas"
 // Начат: 29.04.2011 21:00
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::CodeBranchingWords::CASE
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::CodeBranchingWords::CASE
 //
 // Аналог Case из Delphi
 // {code}
@@ -18,12 +18,7 @@ unit kwCASE;
 // ENDCASE
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -31,18 +26,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwBeginLikeWord,
   tfwScriptingInterfaces,
-  l3Interfaces,
-  l3ParserInterfaces,
-  kwCompiledWordPrim,
-  tfwRegisterableWord
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwBeginLikeWord.imp.pas}
- TkwCASE = class(_tfwBeginLikeWord_)
+ TkwCASE = {scriptword} class(TtfwBeginLikeWord)
   {* Аналог Case из Delphi
 [code]
  CASE
@@ -57,10 +49,8 @@ type
      aSilent: Boolean): RtfwWord; override;
  protected
  // overridden protected methods
-   function CompiledWordClass(const aCtx: TtfwContext): RkwCompiledWordPrim; override;
- public
- // overridden public methods
    class function GetWordNameForRegister: AnsiString; override;
+   function CompiledWordClass(const aCtx: TtfwContext): RkwCompiledWordPrim; override;
  end;//TkwCASE
 {$IfEnd} //not NoScripts
 
@@ -69,30 +59,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   kwCompiledCase,
-  kwEND,
-  kwBeginLikeCompiledCode,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  SysUtils,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3String,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwEND
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwCASE;
-
-{$Include ..\ScriptEngine\tfwBeginLikeWord.imp.pas}
 
 // start class TkwCASE
 
@@ -125,7 +96,8 @@ end;//TkwCASE.CompiledWordClass
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwBeginLikeWord.imp.pas}
+// Регистрация CASE
+ TkwCASE.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

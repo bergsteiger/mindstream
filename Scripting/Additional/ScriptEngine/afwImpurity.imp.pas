@@ -3,12 +3,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/afwImpurity.imp.pas"
+// Модуль: "afwImpurity.imp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::ModalDialogs::afwImpurity
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: Impurity::Class Shared Delphi Low Level::ScriptEngine::ModalDialogs::afwImpurity
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -16,6 +13,10 @@
 {$If not defined(NoScripts)}
  _afwImpurity_ = {mixin} class(_afwImpurity_Parent_)
  end;//_afwImpurity_
+{$Else}
+
+ _afwImpurity_ = _afwImpurity_Parent_;
+
 {$IfEnd} //not NoScripts
 
 {$Else afwImpurity_imp}

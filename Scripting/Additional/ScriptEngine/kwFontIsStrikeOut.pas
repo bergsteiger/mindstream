@@ -2,17 +2,12 @@ unit kwFontIsStrikeOut;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwFontIsStrikeOut.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwFontIsStrikeOut.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FontKeywords::font_IsStrikeOut
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::FontKeywords::font_IsStrikeOut
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,25 +15,24 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  kwFontWord,
   Graphics,
   tfwScriptingInterfaces,
-  tfwRegisterableWord
+  l3Interfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwFontWord.imp.pas}
- TkwFontIsStrikeOut = {final} class(_kwFontWord_)
+ TkwFontIsStrikeOut = {final scriptword} class(TkwFontWord)
  protected
  // realized methods
    procedure DoFont(aFont: TFont;
      const aCtx: TtfwContext); override;
    procedure DoIFont(const aFont: Il3Font;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwFontIsStrikeOut
 {$IfEnd} //not NoScripts
@@ -46,18 +40,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  SysUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwFontIsStrikeOut;
-
-{$Include ..\ScriptEngine\kwFontWord.imp.pas}
 
 // start class TkwFontIsStrikeOut
 
@@ -91,7 +73,8 @@ end;//TkwFontIsStrikeOut.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwFontWord.imp.pas}
+// Регистрация font_IsStrikeOut
+ TkwFontIsStrikeOut.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

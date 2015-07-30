@@ -2,24 +2,25 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwEditorGetTableFromCursor.imp.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwEditorGetTableFromCursor.imp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::kwEditorGetTableFromCursor
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: Impurity::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::kwEditorGetTableFromCursor
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 {$Define kwEditorGetTableFromCursor_imp}
 {$If not defined(NoScripts)}
- _kwEditorGetTableFromCursor_ = {mixin} class(_kwEditorGetTableFromCursor_Parent_)
+ _kwEditorGetTableFromCursor_ = {abstract mixin} class(_kwEditorGetTableFromCursor_Parent_)
  protected
  // protected methods
    function GetTablePoint(const aCtx: TtfwContext;
      const aCursorPoint: InevBasePoint): InevBasePoint;
  end;//_kwEditorGetTableFromCursor_
+{$Else}
+
+ _kwEditorGetTableFromCursor_ = _kwEditorGetTableFromCursor_Parent_;
+
 {$IfEnd} //not NoScripts
 
 {$Else kwEditorGetTableFromCursor_imp}

@@ -2,10 +2,10 @@ unit kwPopEditorPrevHyperlink;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorPrevHyperlink.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorPrevHyperlink.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_PrevHyperlink
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_PrevHyperlink
 //
 // *Формат:* anEditorControl pop:editor:PrevHyperlink
 // *Описание:* Переходит на предыдущую гиперссылку. Если такой переход невозможен, то ничего не
@@ -15,12 +15,7 @@ unit kwPopEditorPrevHyperlink;
 // focused:control:push pop:editor:PrevHyperlink
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -28,19 +23,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorWithToolsFromStackWord,
   evCustomEditor,
-  tfwScriptingInterfaces,
-  evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
- TkwPopEditorPrevHyperlink = {final} class(_kwEditorWithToolsFromStackWord_)
+ TkwPopEditorPrevHyperlink = {final scriptword} class(TkwEditorWithToolsFromStackWord)
   {* *Формат:* anEditorControl pop:editor:PrevHyperlink
 *Описание:* Переходит на предыдущую гиперссылку. Если такой переход невозможен, то ничего не происходит.
 *Пример:*
@@ -51,8 +42,8 @@ focused:control:push pop:editor:PrevHyperlink
  // realized methods
    procedure DoEditorWithTools(const aCtx: TtfwContext;
      anEditor: TevCustomEditor); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorPrevHyperlink
 {$IfEnd} //not NoScripts
@@ -60,20 +51,6 @@ focused:control:push pop:editor:PrevHyperlink
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorPrevHyperlink;
-
-{$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
 
 // start class TkwPopEditorPrevHyperlink
 
@@ -97,7 +74,8 @@ end;//TkwPopEditorPrevHyperlink.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorWithToolsFromStackWord.imp.pas}
+// Регистрация pop_editor_PrevHyperlink
+ TkwPopEditorPrevHyperlink.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

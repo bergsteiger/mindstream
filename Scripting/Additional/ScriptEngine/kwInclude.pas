@@ -4,10 +4,10 @@ unit kwInclude;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwInclude.pas"
+// Модуль: "kwInclude.pas"
 // Начат: 04.05.2011 22:02
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::IncludesAndUses::IncludesAndUsesPack::Include
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::IncludesAndUses::IncludesAndUsesPack::Include
 //
 // Зарезервированное слово: INCLUDE
 // Пример:
@@ -15,12 +15,7 @@ unit kwInclude;
 // INCLUDE 'Included.script'
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,18 +24,17 @@ interface
 {$If not defined(NoScripts)}
 uses
   tfwScriptingInterfaces,
+  tfwCompilingWord,
   kwIncluded,
-  l3Interfaces,
-  l3ParserInterfaces,
   kwCompiledWordPrim,
-  tfwRegisterableWord
+  l3Interfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
  {$Include ..\ScriptEngine\tfwIncludeLike.imp.pas}
- TkwInclude = class(_tfwIncludeLike_)
+ TkwInclude = {scriptword} class(_tfwIncludeLike_)
   {* Зарезервированное слово: INCLUDE
 Пример:
 [code]
@@ -52,10 +46,8 @@ type
      aSilent: Boolean): RtfwWord; override;
  protected
  // overridden protected methods
-   function AfterWordMaxCount(const aCtx: TtfwContext): Cardinal; override;
- public
- // overridden public methods
    class function GetWordNameForRegister: AnsiString; override;
+   function AfterWordMaxCount(const aCtx: TtfwContext): Cardinal; override;
  end;//TkwInclude
 {$IfEnd} //not NoScripts
 
@@ -65,25 +57,11 @@ implementation
 uses
   l3String,
   SysUtils,
-  l3Types,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3Types
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwInclude;
 
 {$Include ..\ScriptEngine\tfwIncludeLike.imp.pas}
 
@@ -118,7 +96,8 @@ end;//TkwInclude.AfterWordMaxCount
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwIncludeLike.imp.pas}
+// Регистрация Include
+ TkwInclude.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

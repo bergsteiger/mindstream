@@ -3,12 +3,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwStackChecking.imp.pas"
+// Модуль: "tfwStackChecking.imp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::tfwStackChecking
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: Impurity::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::tfwStackChecking
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -22,6 +19,10 @@
  // protected methods
    function StackCheckingMessage: AnsiString; virtual;
  end;//_tfwStackChecking_
+{$Else}
+
+ _tfwStackChecking_ = _tfwStackChecking_Parent_;
+
 {$IfEnd} //not NoScripts
 
 {$Else tfwStackChecking_imp}
@@ -62,7 +63,7 @@ begin
    aCtx.rEngine.Drop;
    Dec(l_StackCount);
   end;//while (l_StackCount > 0)
-  RunnerAssert(false, StackCheckingMessage, aCtx);
+  RunnerError(StackCheckingMessage, aCtx);
  end//l_StackCount > 0
  else
  if (l_StackCount < 0) then

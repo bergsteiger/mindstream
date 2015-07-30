@@ -3,16 +3,11 @@ unit kwCompiledWStringVarSplitTo;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledWStringVarSplitTo.pas"
+// Модуль: "kwCompiledWStringVarSplitTo.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::TkwCompiledWStringVarSplitTo
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::TkwCompiledWStringVarSplitTo
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,17 +15,16 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledVarWorker,
+  kwCompiledVarAsStringWorker,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwCompiledVarAsStringWorker.imp.pas}
- TkwCompiledWStringVarSplitTo = class(_kwCompiledVarAsStringWorker_)
+ TkwCompiledWStringVarSplitTo = class(TkwCompiledVarAsStringWorker)
  protected
- // realized methods
+ // overridden protected methods
    procedure DoVar(const aCtx: TtfwContext;
      aVar: TtfwWord); override;
  end;//TkwCompiledWStringVarSplitTo
@@ -47,8 +41,6 @@ uses
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-{$Include ..\ScriptEngine\kwCompiledVarAsStringWorker.imp.pas}
 
 // start class TkwCompiledWStringVarSplitTo
 
@@ -90,6 +82,12 @@ begin
 //#UC END# *4DCBCD2200D2_4F5613C102DB_impl*
 end;//TkwCompiledWStringVarSplitTo.DoVar
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledWStringVarSplitTo
+ TkwCompiledWStringVarSplitTo.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

@@ -2,17 +2,12 @@ unit kwBeginLikeCompiledCode;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwBeginLikeCompiledCode.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "kwBeginLikeCompiledCode.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwBeginLikeCompiledCode
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::CompiledWords::TkwBeginLikeCompiledCode
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -49,6 +44,12 @@ begin
 //#UC END# *52DFE48500BB_52DFF03B0030_impl*
 end;//TkwBeginLikeCompiledCode.GetAsCaller
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwBeginLikeCompiledCode
+ TkwBeginLikeCompiledCode.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

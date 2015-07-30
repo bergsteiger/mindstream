@@ -2,10 +2,10 @@ unit kwPopEditorScrollBottom;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorScrollBottom.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorScrollBottom.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_ScrollBottom
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_ScrollBottom
 //
 // *Формат:* aVeritcal anEditorControl pop:editor:ScrollBottom
 // *Описание:* Прокручивает документ в самый низ/максимально вправо. aVeritcal - если true, то
@@ -16,12 +16,7 @@ unit kwPopEditorScrollBottom;
 // {code}
 // *Результат:* Прокрутить в самый низ документа.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -29,18 +24,15 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorScrollBottom = {final} class(_kwEditorFromStackWord_)
+ TkwPopEditorScrollBottom = {final scriptword} class(TkwEditorFromStackWord)
   {* *Формат:* aVeritcal anEditorControl pop:editor:ScrollBottom
 *Описание:* Прокручивает документ в самый низ/максимально вправо. aVeritcal - если true, то скроллируем повертикали.
 *Пример:*
@@ -52,8 +44,8 @@ true focused:control:push pop:editor:ScrollBottom
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorScrollBottom
 {$IfEnd} //not NoScripts
@@ -61,20 +53,6 @@ true focused:control:push pop:editor:ScrollBottom
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorScrollBottom;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 // start class TkwPopEditorScrollBottom
 
@@ -104,7 +82,8 @@ end;//TkwPopEditorScrollBottom.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_ScrollBottom
+ TkwPopEditorScrollBottom.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

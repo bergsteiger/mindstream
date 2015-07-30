@@ -2,17 +2,12 @@ unit kwPopObjectInherits;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopObjectInherits.pas"
+// Библиотека "ScriptEngine$RTLandVCL"
+// Модуль: "kwPopObjectInherits.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::CommonObjectWords::pop_object_Inherits
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::Object Info::pop_object_Inherits
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,21 +15,20 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  kwObjectFromStackWord,
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwObjectFromStackWord.imp.pas}
- TkwPopObjectInherits = class(_kwObjectFromStackWord_)
+ TkwPopObjectInherits = {scriptword} class(TkwObjectFromStackWord)
  protected
  // realized methods
    procedure DoObject(anObject: TObject;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopObjectInherits
 {$IfEnd} //not NoScripts
@@ -43,21 +37,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  SysUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  Controls,
-  afwFacade,
-  Forms
+  SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopObjectInherits;
-
-{$Include ..\ScriptEngine\kwObjectFromStackWord.imp.pas}
 
 // start class TkwPopObjectInherits
 
@@ -111,7 +95,8 @@ end;//TkwPopObjectInherits.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwObjectFromStackWord.imp.pas}
+// Регистрация pop_object_Inherits
+ TkwPopObjectInherits.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

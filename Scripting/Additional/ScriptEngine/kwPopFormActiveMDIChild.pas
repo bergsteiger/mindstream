@@ -2,20 +2,15 @@ unit kwPopFormActiveMDIChild;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopFormActiveMDIChild.pas"
+// Библиотека "ScriptEngine$RTLandVCL"
+// Модуль: "kwPopFormActiveMDIChild.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FormsProcessing::pop_form_ActiveMDIChild
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::FormsProcessing::pop_form_ActiveMDIChild
 //
 // *Формат:* aForm pop:form:ActiveMDIChild
 // *Описание:* Складывает в стек указатель на активную дочернюю форму, если есть.
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -23,26 +18,23 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwFormFromStackWord,
   Forms,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
- TkwPopFormActiveMDIChild = {final} class(_kwFormFromStackWord_)
+ TkwPopFormActiveMDIChild = {final scriptword} class(TkwFormFromStackWord)
   {* *Формат:* aForm pop:form:ActiveMDIChild
 *Описание:* Складывает в стек указатель на активную дочернюю форму, если есть. }
  protected
  // realized methods
    procedure DoForm(aForm: TForm;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopFormActiveMDIChild
 {$IfEnd} //not NoScripts
@@ -50,19 +42,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopFormActiveMDIChild;
-
-{$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
 
 // start class TkwPopFormActiveMDIChild
 
@@ -86,7 +65,8 @@ end;//TkwPopFormActiveMDIChild.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwFormFromStackWord.imp.pas}
+// Регистрация pop_form_ActiveMDIChild
+ TkwPopFormActiveMDIChild.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

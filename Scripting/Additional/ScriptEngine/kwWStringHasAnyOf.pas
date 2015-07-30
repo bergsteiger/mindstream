@@ -3,16 +3,11 @@ unit kwWStringHasAnyOf;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwWStringHasAnyOf.pas"
+// Модуль: "kwWStringHasAnyOf.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::WString_HasAnyOf
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::WString_HasAnyOf
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,23 +15,22 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  tfwDualWStrWord,
   l3Interfaces,
-  tfwScriptingInterfaces,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwDualWStrWord.imp.pas}
- TkwWStringHasAnyOf = {final} class(_tfwDualWStrWord_)
+ TkwWStringHasAnyOf = {final scriptword} class(TtfwDualWStrWord)
  protected
  // realized methods
    procedure DoStrings(const aCtx: TtfwContext;
      const aStr1: Tl3WString;
      const aStr2: Tl3WString); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwWStringHasAnyOf
 {$IfEnd} //not NoScripts
@@ -46,19 +40,13 @@ implementation
 {$If not defined(NoScripts)}
 uses
   l3Chars,
-  SysUtils,
   l3String,
-  l3Base,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  SysUtils,
+  l3Base
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwWStringHasAnyOf;
-
-{$Include ..\ScriptEngine\tfwDualWStrWord.imp.pas}
 
 // start class TkwWStringHasAnyOf
 
@@ -98,7 +86,8 @@ end;//TkwWStringHasAnyOf.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwDualWStrWord.imp.pas}
+// Регистрация WString_HasAnyOf
+ TkwWStringHasAnyOf.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -2,17 +2,12 @@ unit tfwEnumRegistrator;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwEnumRegistrator.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "tfwEnumRegistrator.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::ConstantsRegistration::TtfwEnumRegistrator
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::ConstantsRegistration::TtfwEnumRegistrator
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -38,7 +33,8 @@ implementation
 {$If not defined(NoScripts)}
 uses
   tfwIntegerConstantRegistrator,
-  tfwRegisteredEnums
+  tfwRegisteredEnums,
+  tfwIntegerToEnumName
   ;
 {$IfEnd} //not NoScripts
 
@@ -48,6 +44,8 @@ uses
 
 class procedure TtfwEnumRegistrator.RegisterEnum(aTypeInfo: PTypeInfo);
 //#UC START# *53C7E877024C_53C7E84E012D_var*
+const
+ cMax = 10000;
 var
  l_TD : PTypeData;
  l_Index : Integer;
@@ -62,10 +60,15 @@ begin
  begin
   l_TD := GetTypeData(aTypeInfo);
   Assert(l_TD <> nil);
+  if (l_TD.MaxValue >= cMax) then
+   Exit;
+  if (l_TD.MinValue <= -cMax) then
+   Exit;
   for l_Index := l_TD.MinValue to l_TD.MaxValue do
   begin
    TtfwIntegerConstantRegistrator.Register(aTypeInfo.Name + '::' + GetEnumName(aTypeInfo, l_Index), l_Index);
   end;//for l_Index
+  TtfwIntegerToEnumName.Register(aTypeInfo);
  end;//aTypeInfo.Name <> 'Boolean'
 //#UC END# *53C7E877024C_53C7E84E012D_impl*
 end;//TtfwEnumRegistrator.RegisterEnum

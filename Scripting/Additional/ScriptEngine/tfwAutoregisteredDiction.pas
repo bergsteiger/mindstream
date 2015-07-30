@@ -2,23 +2,18 @@ unit tfwAutoregisteredDiction;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
+// Библиотека "ScriptEngine$Core"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwAutoregisteredDiction.pas"
+// Модуль: "tfwAutoregisteredDiction.pas"
 // Начат: 21.04.2011 20:49
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::ScriptingKeywordsCore::TtfwAutoregisteredDiction
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::ScriptingKeywordsCore::TtfwAutoregisteredDiction
 //
 // Словарь автозарегистрированных слов. Служит как временный кеш при инициализации. Теоретически
 // могут быть проблемы с идентификаторами слов, при использовании более, чем одной скриптовой
 // машиной
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -45,6 +40,10 @@ type
  // overridden protected methods
    procedure ClearFields; override;
      {* Сигнатура метода ClearFields }
+ public
+ // public methods
+   class function Exists: Boolean;
+     {* Проверяет создан экземпляр синглетона или нет }
  public
  // public properties
    property AllAxiomaticsDefined: Boolean
@@ -97,6 +96,12 @@ begin
  f_AllAxiomaticsDefined := aValue;
 //#UC END# *52EF85600031_4DB05FF60115set_impl*
 end;//TtfwAutoregisteredDiction.pm_SetAllAxiomaticsDefined
+
+class function TtfwAutoregisteredDiction.Exists: Boolean;
+ {-}
+begin
+ Result := g_TtfwAutoregisteredDiction <> nil;
+end;//TtfwAutoregisteredDiction.Exists
 
 procedure TtfwAutoregisteredDiction.ClearFields;
 //#UC START# *5000565C019C_4DB05FF60115_var*

@@ -4,10 +4,10 @@ unit kwEmitString;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwEmitString.pas"
+// Модуль: "kwEmitString.pas"
 // Начат: 22.04.2011 19:32
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::EmitString
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::EmitString
 //
 // Позволяет ввести строку.
 // Пример:
@@ -17,12 +17,7 @@ unit kwEmitString;
 // ;
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -37,8 +32,7 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwEmitString = class(_tfwAutoregisteringWord_)
+ TkwEmitString = {scriptword} class(TtfwRegisterableWord)
   {* Позволяет ввести строку.
 Пример:
 [code]
@@ -49,8 +43,8 @@ type
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwEmitString
 {$IfEnd} //not NoScripts
@@ -63,17 +57,11 @@ uses
   Windows,
   Messages,
   l3Chars,
-  l3Interfaces,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3Interfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwEmitString;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwEmitString
 
@@ -93,7 +81,7 @@ begin
   with l3PCharLen(l_S) do
   begin
    if not l3IsANSI(SCodePage) then
-    RunnerAssert(false, 'Странная кодировка строки', aCtx);
+    RunnerError('Странная кодировка строки', aCtx);
    l_H := GetFocus;
    for l_Index := 0 to Pred(SLen) do
    begin
@@ -122,7 +110,8 @@ end;//TkwEmitString.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация EmitString
+ TkwEmitString.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

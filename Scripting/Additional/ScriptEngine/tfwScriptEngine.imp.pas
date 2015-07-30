@@ -2,13 +2,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwScriptEngine.imp.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "tfwScriptEngine.imp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::ScriptEngineCore::tfwScriptEngine
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: Impurity::Class Shared Delphi Low Level::ScriptEngine$Core::ScriptEngineCore::tfwScriptEngine
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -85,6 +82,14 @@
    procedure PushClass(aClass: TClass);
    function PopClass: TClass;
    function IsTopClass: Boolean;
+   function PopObjAs(aClass: TClass): Pointer;
+   function PopClassAs(aClass: TClass): Pointer;
+   function PopWideString: WideString;
+   procedure PushWideString(const aValue: WideString);
+   function PopPoint: TPoint;
+   procedure PushPoint(const aPoint: TPoint);
+   procedure PushList(const aList: ItfwValueList);
+   function PopList: ItfwValueList;
  protected
  // overridden protected methods
    procedure Cleanup; override;
@@ -102,6 +107,10 @@
    function As_ItfwNewWordDefinitor: ItfwNewWordDefinitor;
    function As_ItfwKeywordFinder: ItfwKeywordFinder;
  end;//_tfwScriptEngine_
+{$Else}
+
+ _tfwScriptEngine_ = _tfwScriptEngine_Parent_;
+
 {$IfEnd} //not NoScripts
 
 {$Else tfwScriptEngine_imp}
@@ -161,7 +170,14 @@ begin
      aStream.CloseStream;
      try
       if not aCaller.CompileOnly then
-      _Instance_R_(Self).RunCompiled(l_Ctx);
+      begin
+       Tl3ScriptService.Instance.EnterScript;
+       try
+        _Instance_R_(Self).RunCompiled(l_Ctx);
+       finally
+        Tl3ScriptService.Instance.LeaveScript;
+       end;//try..finally 
+      end;//not aCaller.CompileOnly
      except
       on EtfwExit do
        ;
@@ -912,6 +928,78 @@ begin
  end;//try..finally
 //#UC END# *519A29C802E1_4F733A0701F0_impl*
 end;//_tfwScriptEngine_.Clone
+
+function _tfwScriptEngine_.PopObjAs(aClass: TClass): Pointer;
+//#UC START# *54F7390300EC_4F733A0701F0_var*
+//#UC END# *54F7390300EC_4F733A0701F0_var*
+begin
+//#UC START# *54F7390300EC_4F733A0701F0_impl*
+ Result := f_ValueStack.PopObjAs(aClass);
+//#UC END# *54F7390300EC_4F733A0701F0_impl*
+end;//_tfwScriptEngine_.PopObjAs
+
+function _tfwScriptEngine_.PopClassAs(aClass: TClass): Pointer;
+//#UC START# *54F8664200B0_4F733A0701F0_var*
+//#UC END# *54F8664200B0_4F733A0701F0_var*
+begin
+//#UC START# *54F8664200B0_4F733A0701F0_impl*
+ Result := f_ValueStack.PopClassAs(aClass);
+//#UC END# *54F8664200B0_4F733A0701F0_impl*
+end;//_tfwScriptEngine_.PopClassAs
+
+function _tfwScriptEngine_.PopWideString: WideString;
+//#UC START# *54F9C2A502E9_4F733A0701F0_var*
+//#UC END# *54F9C2A502E9_4F733A0701F0_var*
+begin
+//#UC START# *54F9C2A502E9_4F733A0701F0_impl*
+ Result := f_ValueStack.PopWideString;
+//#UC END# *54F9C2A502E9_4F733A0701F0_impl*
+end;//_tfwScriptEngine_.PopWideString
+
+procedure _tfwScriptEngine_.PushWideString(const aValue: WideString);
+//#UC START# *54F9C2CF0044_4F733A0701F0_var*
+//#UC END# *54F9C2CF0044_4F733A0701F0_var*
+begin
+//#UC START# *54F9C2CF0044_4F733A0701F0_impl*
+ f_ValueStack.PushWideString(aValue);
+//#UC END# *54F9C2CF0044_4F733A0701F0_impl*
+end;//_tfwScriptEngine_.PushWideString
+
+function _tfwScriptEngine_.PopPoint: TPoint;
+//#UC START# *54F9C6530229_4F733A0701F0_var*
+//#UC END# *54F9C6530229_4F733A0701F0_var*
+begin
+//#UC START# *54F9C6530229_4F733A0701F0_impl*
+ Result := f_ValueStack.PopPoint;
+//#UC END# *54F9C6530229_4F733A0701F0_impl*
+end;//_tfwScriptEngine_.PopPoint
+
+procedure _tfwScriptEngine_.PushPoint(const aPoint: TPoint);
+//#UC START# *54F9C66902E3_4F733A0701F0_var*
+//#UC END# *54F9C66902E3_4F733A0701F0_var*
+begin
+//#UC START# *54F9C66902E3_4F733A0701F0_impl*
+ f_ValueStack.PushPoint(aPoint);
+//#UC END# *54F9C66902E3_4F733A0701F0_impl*
+end;//_tfwScriptEngine_.PushPoint
+
+procedure _tfwScriptEngine_.PushList(const aList: ItfwValueList);
+//#UC START# *5510153F001C_4F733A0701F0_var*
+//#UC END# *5510153F001C_4F733A0701F0_var*
+begin
+//#UC START# *5510153F001C_4F733A0701F0_impl*
+ f_ValueStack.PushList(aList);
+//#UC END# *5510153F001C_4F733A0701F0_impl*
+end;//_tfwScriptEngine_.PushList
+
+function _tfwScriptEngine_.PopList: ItfwValueList;
+//#UC START# *551015680218_4F733A0701F0_var*
+//#UC END# *551015680218_4F733A0701F0_var*
+begin
+//#UC START# *551015680218_4F733A0701F0_impl*
+ Result := f_ValueStack.PopList;
+//#UC END# *551015680218_4F733A0701F0_impl*
+end;//_tfwScriptEngine_.PopList
 
 procedure _tfwScriptEngine_.Cleanup;
 //#UC START# *479731C50290_4F733A0701F0_var*

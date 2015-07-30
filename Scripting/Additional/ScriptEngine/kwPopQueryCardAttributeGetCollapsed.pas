@@ -2,17 +2,12 @@ unit kwPopQueryCardAttributeGetCollapsed;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopQueryCardAttributeGetCollapsed.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopQueryCardAttributeGetCollapsed.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::QueryCardProcessing::pop_QueryCard_Attribute_GetCollapsed
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::QueryCardProcessing::pop_QueryCard_Attribute_GetCollapsed
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,25 +15,21 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwQueryCardFromStackWord,
   evQueryCardEditor,
-  tfwScriptingInterfaces,
-  evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwQueryCardFromStackWord.imp.pas}
- TkwPopQueryCardAttributeGetCollapsed = {final} class(_kwQueryCardFromStackWord_)
+ TkwPopQueryCardAttributeGetCollapsed = {final scriptword} class(TkwQueryCardFromStackWord)
  protected
  // realized methods
    procedure DoCard(const aCtx: TtfwContext;
      aCard: TevQueryCardEditor); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopQueryCardAttributeGetCollapsed
 {$IfEnd} //not NoScripts
@@ -51,20 +42,11 @@ uses
   evQueryCardInt,
   l3String,
   evReqIterator,
-  nevBase,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
+  nevBase
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopQueryCardAttributeGetCollapsed;
-
-{$Include ..\ScriptEngine\kwQueryCardFromStackWord.imp.pas}
 
 // start class TkwPopQueryCardAttributeGetCollapsed
 
@@ -120,7 +102,8 @@ end;//TkwPopQueryCardAttributeGetCollapsed.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwQueryCardFromStackWord.imp.pas}
+// Регистрация pop_QueryCard_Attribute_GetCollapsed
+ TkwPopQueryCardAttributeGetCollapsed.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

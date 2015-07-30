@@ -2,17 +2,12 @@ unit tfwCStringArraySing;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwCStringArraySing.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "tfwCStringArraySing.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::CString::TtfwCStringArraySing
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::CString::TtfwCStringArraySing
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -28,6 +23,10 @@ uses
 type
  TtfwCStringArraySing = class(TtfwCStringArray)
  public
+ // public methods
+   class function Exists: Boolean;
+     {* Проверяет создан экземпляр синглетона или нет }
+ public
  // singleton factory method
    class function Instance: TtfwCStringArraySing;
     {- возвращает экземпляр синглетона. }
@@ -42,8 +41,8 @@ uses
   ;
 {$IfEnd} //not NoScripts
 
-
 {$If not defined(NoScripts)}
+
 
 // start class TtfwCStringArraySing
 
@@ -64,7 +63,13 @@ begin
  Result := g_TtfwCStringArraySing;
 end;
 
-{$IfEnd} //not NoScripts
 
+class function TtfwCStringArraySing.Exists: Boolean;
+ {-}
+begin
+ Result := g_TtfwCStringArraySing <> nil;
+end;//TtfwCStringArraySing.Exists
+
+{$IfEnd} //not NoScripts
 
 end.

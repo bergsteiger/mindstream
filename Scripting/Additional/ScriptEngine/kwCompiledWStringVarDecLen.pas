@@ -3,16 +3,11 @@ unit kwCompiledWStringVarDecLen;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledWStringVarDecLen.pas"
+// Модуль: "kwCompiledWStringVarDecLen.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::StringProcessing::TkwCompiledWStringVarDecLen
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::StringProcessing::TkwCompiledWStringVarDecLen
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,17 +15,16 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledVarWorker,
+  kwCompiledVarAsStringWorker,
   tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwCompiledVarAsStringWorker.imp.pas}
- TkwCompiledWStringVarDecLen = class(_kwCompiledVarAsStringWorker_)
+ TkwCompiledWStringVarDecLen = class(TkwCompiledVarAsStringWorker)
  protected
- // realized methods
+ // overridden protected methods
    procedure DoVar(const aCtx: TtfwContext;
      aVar: TtfwWord); override;
  end;//TkwCompiledWStringVarDecLen
@@ -47,8 +41,6 @@ uses
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-{$Include ..\ScriptEngine\kwCompiledVarAsStringWorker.imp.pas}
 
 // start class TkwCompiledWStringVarDecLen
 
@@ -67,6 +59,12 @@ begin
 //#UC END# *4DCBCD2200D2_4F55EA4D028C_impl*
 end;//TkwCompiledWStringVarDecLen.DoVar
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledWStringVarDecLen
+ TkwCompiledWStringVarDecLen.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

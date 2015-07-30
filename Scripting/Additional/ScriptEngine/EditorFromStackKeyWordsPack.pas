@@ -2,17 +2,12 @@ unit EditorFromStackKeyWordsPack;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/EditorFromStackKeyWordsPack.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "EditorFromStackKeyWordsPack.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeywordsPack::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::EditorFromStackKeyWordsPack
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeywordsPack::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::EditorFromStackKeyWordsPack
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -102,8 +97,17 @@ uses
   kwPopEditorInsertStream,
   kwPopEditorSelectWord,
   kwPopEditorGetModified,
-  kwPopEditorPasteEVDTroughClipboard,
-  evEditorControlPack
+  kwPopEditorPasteEVDTroughClipboard
+  {$If defined(nsTest) AND not defined(NoScripts)}
+  ,
+  kwBeginWaitPrint
+  {$IfEnd} //nsTest AND not NoScripts
+  
+  {$If defined(nsTest) AND not defined(NoScripts)}
+  ,
+  kwEndWaitPrint
+  {$IfEnd} //nsTest AND not NoScripts
+  
   ;
 
 {$IfEnd} //not NoScripts

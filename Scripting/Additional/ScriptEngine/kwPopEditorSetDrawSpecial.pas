@@ -2,17 +2,12 @@ unit kwPopEditorSetDrawSpecial;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorSetDrawSpecial.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorSetDrawSpecial.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_SetDrawSpecial
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_SetDrawSpecial
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -20,24 +15,21 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackWord,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- TkwPopEditorSetDrawSpecial = {final} class(_kwEditorFromStackWord_)
+ TkwPopEditorSetDrawSpecial = {final scriptword} class(TkwEditorFromStackWord)
  protected
  // realized methods
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorSetDrawSpecial
 {$IfEnd} //not NoScripts
@@ -45,20 +37,6 @@ type
 implementation
 
 {$If not defined(NoScripts)}
-uses
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms
-  ;
-{$IfEnd} //not NoScripts
-
-{$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorSetDrawSpecial;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 // start class TkwPopEditorSetDrawSpecial
 
@@ -71,7 +49,7 @@ begin
  if aCtx.rEngine.IsTopBool then
   anEditor.DrawSpecial := aCtx.rEngine.PopBool
  else
-  RunnerAssert(False, 'Не задан флаг для DrawSpecial', aCtx)
+  RunnerError('Не задан флаг для DrawSpecial', aCtx)
 //#UC END# *4F4CB81200CA_50AC80B90149_impl*
 end;//TkwPopEditorSetDrawSpecial.DoWithEditor
 
@@ -85,7 +63,8 @@ end;//TkwPopEditorSetDrawSpecial.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_SetDrawSpecial
+ TkwPopEditorSetDrawSpecial.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

@@ -2,19 +2,14 @@ unit kwPopEditorParaHome;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorParaHome.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorParaHome.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_ParaHome
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_ParaHome
 //
 // В начало параграфа
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,27 +17,24 @@ interface
 
 {$If not defined(NoScripts)}
 uses
+  kwEditorFromStackCursorWord,
   nevTools,
   evCustomEditorWindow,
-  tfwScriptingInterfaces,
-  Controls,
-  Classes,
-  tfwRegisterableWord
+  tfwScriptingInterfaces
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackCursorWord.imp.pas}
- TkwPopEditorParaHome = {final} class(_kwEditorFromStackCursorWord_)
+ TkwPopEditorParaHome = {final scriptword} class(TkwEditorFromStackCursorWord)
   {* В начало параграфа }
  protected
  // realized methods
    procedure DoCursor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow;
      const aPoint: InevBasePoint); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorParaHome
 {$IfEnd} //not NoScripts
@@ -51,23 +43,13 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  TextPara_Const,
-  CommentPara_Const,
-  Windows,
-  evParaTools,
   evOp,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  afwFacade,
-  Forms
+  CommentPara_Const,
+  TextPara_Const
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorParaHome;
-
-{$Include ..\ScriptEngine\kwEditorFromStackCursorWord.imp.pas}
 
 // start class TkwPopEditorParaHome
 
@@ -92,7 +74,8 @@ end;//TkwPopEditorParaHome.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackCursorWord.imp.pas}
+// Регистрация pop_editor_ParaHome
+ TkwPopEditorParaHome.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

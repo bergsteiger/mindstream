@@ -4,19 +4,14 @@ unit kwCompiledMain;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledMain.pas"
+// Модуль: "kwCompiledMain.pas"
 // Начат: 12.02.2012 18:25
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledMain
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwCompiledMain
 //
 // Скомпилированный основной код скрипта
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -53,6 +48,10 @@ initialization
 //#UC START# *53DA54270302*
  TkwCompiledMain.RegisterClass;
 //#UC END# *53DA54270302*
+{$IfEnd} //not NoScripts
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledMain
+ TkwCompiledMain.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

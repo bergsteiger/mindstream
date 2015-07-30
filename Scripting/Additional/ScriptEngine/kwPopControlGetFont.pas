@@ -2,17 +2,12 @@ unit kwPopControlGetFont;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopControlGetFont.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopControlGetFont.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::FontKeywords::pop_control_GetFont
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::FontKeywords::pop_control_GetFont
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -22,21 +17,21 @@ interface
 uses
   Controls,
   tfwScriptingInterfaces,
-  Classes,
-  tfwRegisterableWord
+  kwComponentFromStackWord,
+  Classes
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
  {$Include ..\ScriptEngine\kwControlFromStackWord.imp.pas}
- TkwPopControlGetFont = {final} class(_kwControlFromStackWord_)
+ TkwPopControlGetFont = {final scriptword} class(_kwControlFromStackWord_)
  protected
  // realized methods
    procedure DoControl(aControl: TControl;
      const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopControlGetFont
 {$IfEnd} //not NoScripts
@@ -46,23 +41,19 @@ implementation
 {$If not defined(NoScripts)}
 uses
   evCustomEditorWindow,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
   Windows,
-  afwFacade,
   Forms
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 
-type _Instance_R_ = TkwPopControlGetFont;
-
 {$Include ..\ScriptEngine\kwControlFromStackWord.imp.pas}
 
 type
-  TControlHack = class(TControl)
-  end;//TControlHack
+  TControlFriend = {abstract} class(TControl)
+   {* Друг для TControl }
+  end;//TControlFriend
 
 // start class TkwPopControlGetFont
 
@@ -74,7 +65,7 @@ begin
 //#UC START# *4F212C3A015A_5190C44F0279_impl*
  if aControl is TevCustomEditorWindow
   then aCtx.rEngine.PushIntf((aControl as TevCustomEditorWindow).TextPara.Font)
-  else aCtx.rEngine.PushObj(TControlHack(aControl).Font);
+  else aCtx.rEngine.PushObj(TControlFriend(aControl).Font);
 //#UC END# *4F212C3A015A_5190C44F0279_impl*
 end;//TkwPopControlGetFont.DoControl
 
@@ -88,7 +79,8 @@ end;//TkwPopControlGetFont.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwControlFromStackWord.imp.pas}
+// Регистрация pop_control_GetFont
+ TkwPopControlGetFont.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

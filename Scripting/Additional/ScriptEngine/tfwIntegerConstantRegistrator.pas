@@ -2,17 +2,12 @@ unit tfwIntegerConstantRegistrator;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwIntegerConstantRegistrator.pas"
+// Библиотека "ScriptEngine$Core"
+// Модуль: "tfwIntegerConstantRegistrator.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::ConstantsRegistration::TtfwIntegerConstantRegistrator
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$Core::PrimitiveWords::TtfwIntegerConstantRegistrator
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -32,6 +27,7 @@ type
    f_Value : Integer;
  protected
  // overridden protected methods
+   class function ReallyNeedRegister: Boolean; override;
    function GetInteger: Integer; override;
  public
  // public methods
@@ -44,7 +40,6 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  tfwScriptEngine,
   SysUtils
   ;
 {$IfEnd} //not NoScripts
@@ -71,6 +66,15 @@ begin
 //#UC END# *53C7C5F402F1_53C7C4BF03D9_impl*
 end;//TtfwIntegerConstantRegistrator.Register
 
+class function TtfwIntegerConstantRegistrator.ReallyNeedRegister: Boolean;
+//#UC START# *4DC2E05B03DD_53C7C4BF03D9_var*
+//#UC END# *4DC2E05B03DD_53C7C4BF03D9_var*
+begin
+//#UC START# *4DC2E05B03DD_53C7C4BF03D9_impl*
+ Result := false;
+//#UC END# *4DC2E05B03DD_53C7C4BF03D9_impl*
+end;//TtfwIntegerConstantRegistrator.ReallyNeedRegister
+
 function TtfwIntegerConstantRegistrator.GetInteger: Integer;
 //#UC START# *4EE1DC8903BB_53C7C4BF03D9_var*
 //#UC END# *4EE1DC8903BB_53C7C4BF03D9_var*
@@ -80,6 +84,12 @@ begin
 //#UC END# *4EE1DC8903BB_53C7C4BF03D9_impl*
 end;//TtfwIntegerConstantRegistrator.GetInteger
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TtfwIntegerConstantRegistrator
+ TtfwIntegerConstantRegistrator.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

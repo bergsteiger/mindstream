@@ -3,16 +3,11 @@ unit tfwFile;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwFile.pas"
+// Модуль: "tfwFile.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::FileProcessing::TtfwFile
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::FileProcessing::TtfwFile
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -222,7 +217,7 @@ procedure TtfwFile.ForEachBack(aLambda: TtfwWordPrim;
 //#UC END# *52E23BB102FA_4F4FD77B03CC_var*
 begin
 //#UC START# *52E23BB102FA_4F4FD77B03CC_impl*
- TtfwWord(aLambda).RunnerAssert(false, 'Перебор строк от конца файла, не реализован', aCtx);
+ TtfwWord(aLambda).RunnerError('Перебор строк от конца файла, не реализован', aCtx);
 //#UC END# *52E23BB102FA_4F4FD77B03CC_impl*
 end;//TtfwFile.ForEachBack
 

@@ -2,19 +2,14 @@ unit tfwControlString;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/tfwControlString.pas"
+// Библиотека "ScriptEngine$RTLandVCL"
+// Модуль: "tfwControlString.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::ControlsProcessing::TtfwControlString
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::VCL bindings::TtfwControlString
 //
 // Слово для регистрации контрола и его класса
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -28,7 +23,7 @@ uses
 
 {$If not defined(NoScripts)}
 type
- TtfwControlString = class(TtfwString)
+ TtfwControlString = {abstract} class(TtfwString)
   {* Слово для регистрации контрола и его класса }
  public
  // public methods
@@ -43,7 +38,6 @@ implementation
 uses
   l3Base,
   l3Except,
-  tfwScriptEngine,
   tfwClassRef,
   SysUtils,
   StrUtils
@@ -65,6 +59,12 @@ begin
 //#UC END# *508528490090_508527F30183_impl*
 end;//TtfwControlString.Register
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TtfwControlString
+ TtfwControlString.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

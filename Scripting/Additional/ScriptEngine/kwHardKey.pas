@@ -3,16 +3,11 @@ unit kwHardKey;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwHardKey.pas"
+// Модуль: "kwHardKey.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::KeyBoardInput::HardKey
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::KeyBoardInput::HardKey
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -37,13 +32,12 @@ type
 
  TInputArray = array of TInput;
 
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
- TkwHardKey = {final} class(_tfwAutoregisteringWord_)
+ TkwHardKey = {final scriptword} class(TtfwRegisterableWord)
  protected
  // realized methods
    procedure DoDoIt(const aCtx: TtfwContext); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwHardKey
 {$IfEnd} //not NoScripts
@@ -55,17 +49,11 @@ uses
   Menus,
   SysUtils,
   Consts,
-  afwFacade,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  l3MessagesService
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwHardKey;
-
-{$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
 
 // start class TkwHardKey
 
@@ -197,7 +185,7 @@ procedure TkwHardKey.DoDoIt(const aCtx: TtfwContext);
   for I := 0 to Length(anInputs) - 1 do
   begin
    SendInput(1, anInputs[I], SizeOf(TInput));
-   Tafw.ProcessMessages;
+   Tl3MessagesService.Instance.ProcessMessages;
   end;
  end;
 
@@ -230,7 +218,8 @@ end;//TkwHardKey.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwAutoregisteringWord.imp.pas}
+// Регистрация HardKey
+ TkwHardKey.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

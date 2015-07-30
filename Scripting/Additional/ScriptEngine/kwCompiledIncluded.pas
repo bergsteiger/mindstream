@@ -3,16 +3,11 @@ unit kwCompiledIncluded;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwCompiledIncluded.pas"
+// Модуль: "kwCompiledIncluded.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<SimpleClass::Class>> Shared Delphi Scripting::ScriptEngine::Scripting Axiomatics::TkwCompiledIncluded
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwCompiledIncluded
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -51,10 +46,16 @@ procedure TkwCompiledIncluded.DoDoIt(const aCtx: TtfwContext);
 //#UC END# *4DAEEDE10285_4DC98AAC0395_var*
 begin
 //#UC START# *4DAEEDE10285_4DC98AAC0395_impl*
- RunnerAssert(false, 'Нельзя запускать', aCtx);
+ RunnerError('Нельзя запускать', aCtx);
 //#UC END# *4DAEEDE10285_4DC98AAC0395_impl*
 end;//TkwCompiledIncluded.DoDoIt
 
+{$IfEnd} //not NoScripts
+
+initialization
+{$If not defined(NoScripts)}
+// Регистрация TkwCompiledIncluded
+ TkwCompiledIncluded.RegisterClass;
 {$IfEnd} //not NoScripts
 
 end.

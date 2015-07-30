@@ -2,15 +2,12 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/SelectTablePart.imp.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "SelectTablePart.imp.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Scripting::ScriptEngine::MixIns::SelectTablePart
+// Generated from UML model, root element: Impurity::Class Shared Delphi::ScriptEngine$Everest::MixIns::SelectTablePart
 //
 // Выделить часть таблицы
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -39,6 +36,10 @@
    function SelectTableWholly: Boolean; virtual;
      {* Вылять таблицу целиком }
  end;//_SelectTablePart_
+{$Else}
+
+ _SelectTablePart_ = _SelectTablePart_Parent_;
+
 {$IfEnd} //not NoScripts
 
 {$Else SelectTablePart_imp}

@@ -2,17 +2,12 @@ unit kwPopEditorRepaintTableLinesAndCheckWithEtalon;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Библиотека "ScriptEngine"
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPopEditorRepaintTableLinesAndCheckWithEtalon.pas"
+// Библиотека "ScriptEngine$Everest"
+// Модуль: "kwPopEditorRepaintTableLinesAndCheckWithEtalon.pas"
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::EditorFromStackKeyWords::pop_editor_RepaintTableLinesAndCheckWithEtalon
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi::ScriptEngine$Everest::EditorFromStackKeyWords::pop_editor_RepaintTableLinesAndCheckWithEtalon
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -21,10 +16,8 @@ interface
 {$If not defined(NoScripts)}
 uses
   tfwScriptingInterfaces,
+  kwEditorFromStackWord,
   evCustomEditorWindow,
-  Controls,
-  Classes,
-  tfwRegisterableWord,
   l3FrameLinesSpy,
   l3InternalInterfaces
   ;
@@ -32,10 +25,9 @@ uses
 
 {$If not defined(NoScripts)}
 type
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
- _LinesDrawOutput_Parent_ = _kwEditorFromStackWord_;
+ _LinesDrawOutput_Parent_ = TkwEditorFromStackWord;
  {$Include ..\ScriptEngine\LinesDrawOutput.imp.pas}
- TkwPopEditorRepaintTableLinesAndCheckWithEtalon = {final} class(_LinesDrawOutput_)
+ TkwPopEditorRepaintTableLinesAndCheckWithEtalon = {final scriptword} class(_LinesDrawOutput_)
  private
  // private fields
    f_ScriptCaller : ItfwScriptCaller;
@@ -44,8 +36,8 @@ type
    procedure DoWithEditor(const aCtx: TtfwContext;
      anEditor: TevCustomEditorWindow); override;
    procedure DoCloseLog(const aLogName: AnsiString); override;
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPopEditorRepaintTableLinesAndCheckWithEtalon
 {$IfEnd} //not NoScripts
@@ -55,20 +47,11 @@ implementation
 {$If not defined(NoScripts)}
 uses
   StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine,
-  Windows,
-  afwFacade,
-  Forms,
   SysUtils
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPopEditorRepaintTableLinesAndCheckWithEtalon;
-
-{$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
 
 {$Include ..\ScriptEngine\LinesDrawOutput.imp.pas}
 
@@ -117,7 +100,8 @@ end;//TkwPopEditorRepaintTableLinesAndCheckWithEtalon.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\kwEditorFromStackWord.imp.pas}
+// Регистрация pop_editor_RepaintTableLinesAndCheckWithEtalon
+ TkwPopEditorRepaintTableLinesAndCheckWithEtalon.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.

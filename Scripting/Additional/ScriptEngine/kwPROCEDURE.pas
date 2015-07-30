@@ -4,10 +4,10 @@ unit kwPROCEDURE;
 //
 // Библиотека "ScriptEngine"
 // Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/ScriptEngine/kwPROCEDURE.pas"
+// Модуль: "kwPROCEDURE.pas"
 // Начат: 04.05.2011 12:24
 // Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<ScriptKeyword::Class>> Shared Delphi Scripting::ScriptEngine::WordsDefinition::PROCEDURE
+// Generated from UML model, root element: ScriptKeyword::Class Shared Delphi Low Level::ScriptEngine::WordsDefinition::PROCEDURE
 //
 // Поддержка определения процедуры в стиле Паскаля:
 // {code}
@@ -23,12 +23,7 @@ unit kwPROCEDURE;
 // ;
 // {code}
 //
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
 
 {$Include ..\ScriptEngine\seDefine.inc}
 
@@ -36,18 +31,16 @@ interface
 
 {$If not defined(NoScripts)}
 uses
-  l3Interfaces,
+  tfwStandardProcedure,
   tfwScriptingInterfaces,
-  kwCompiledWordPrim,
-  l3ParserInterfaces,
-  tfwRegisterableWord
+  kwCompiledWordPrim
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
 type
  {$Include ..\ScriptEngine\tfwStandardProcedureWithStackChecking.imp.pas}
- TkwPROCEDURE = class(_tfwStandardProcedureWithStackChecking_)
+ TkwPROCEDURE = {scriptword} class(_tfwStandardProcedureWithStackChecking_)
   {* Поддержка определения процедуры в стиле Паскаля:
 [code]
 PROCEDURE Choice
@@ -61,8 +54,8 @@ BEGIN
 END
 ;
 [code] }
- public
- // overridden public methods
+ protected
+ // overridden protected methods
    class function GetWordNameForRegister: AnsiString; override;
  end;//TkwPROCEDURE
 {$IfEnd} //not NoScripts
@@ -71,29 +64,11 @@ implementation
 
 {$If not defined(NoScripts)}
 uses
-  kwCompiledProcedureWithStackChecking,
-  kwStandardProcedureCloseBracket,
-  kwCompiledProcedure,
-  SysUtils,
-  l3String,
-  l3Parser,
-  kwCompiledWord,
-  kwInteger,
-  kwString,
-  TypInfo,
-  l3Base,
-  kwIntegerFactory,
-  kwStringFactory,
-  l3Chars,
-  StrUtils,
-  tfwAutoregisteredDiction,
-  tfwScriptEngine
+  kwCompiledProcedureWithStackChecking
   ;
 {$IfEnd} //not NoScripts
 
 {$If not defined(NoScripts)}
-
-type _Instance_R_ = TkwPROCEDURE;
 
 {$Include ..\ScriptEngine\tfwStandardProcedureWithStackChecking.imp.pas}
 
@@ -109,7 +84,8 @@ end;//TkwPROCEDURE.GetWordNameForRegister
 
 initialization
 {$If not defined(NoScripts)}
- {$Include ..\ScriptEngine\tfwStandardProcedureWithStackChecking.imp.pas}
+// Регистрация PROCEDURE
+ TkwPROCEDURE.RegisterInEngine;
 {$IfEnd} //not NoScripts
 
 end.
