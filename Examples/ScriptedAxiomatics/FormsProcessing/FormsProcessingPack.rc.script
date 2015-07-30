@@ -1,0 +1,46 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Библиотека "ScriptEngine$RTLandVCL"
+// Модуль: "FormsProcessingPack.rc.script"
+// Скрипты в ресурсах (.rc.script)
+// Generated from UML model, root element: ScriptKeywordsPack::Class Shared Delphi Low Level::ScriptEngine$RTLandVCL::FormsProcessing::FormsProcessingPack
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//#UC START# *50741A1F028Cimpl*
+
+USES
+ axiom:Component
+ axiom:Form
+ axiom:ActionList
+ axiom:ContainedAction
+;
+
+//REDEFINITION
+ PROCEDURE pop:form:ExecuteAction
+    STRING IN anActionName
+    STRING IN aListName
+    TForm IN aForm
+    
+   TActionList VAR l_ActList
+   
+   aListName aForm pop:form:FindActionList >>> l_ActList
+   l_ActList pop:object:IsNil ! ?ASSURE [ 'Не найден компонент ' aListName ' на форме ' aForm pop:Component:Name ]
+   
+   TContainedAction VAR l_Action
+   
+   anActionName l_ActList pop:ActionList:FindAction >>> l_Action
+   l_Action pop:object:IsNil ! ?ASSURE [ 'Не найден Action ' anActionName ' в списке' aListName ]
+   
+   l_Action pop:ContainedAction:Execute
+   //anActionName aListName aForm inherited
+ ; // pop:form:ExecuteAction
+ 
+//#UC END# *50741A1F028Cimpl*
+
+
+EXPORTS
+//#UC START# *50741A1F028Cexports*
+ *
+//#UC END# *50741A1F028Cexports*
+
