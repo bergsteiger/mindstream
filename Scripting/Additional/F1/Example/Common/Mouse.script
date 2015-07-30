@@ -10,12 +10,12 @@ WordAlias "Узнать индекс курсора мыши" mouse:GetCursorIndex
 WordAlias "Узнать имя индекса курсора мыши" mouse:GetCursorNameByIndex
 
 PROCEDURE "Прокрутить колесо мыши вниз для контрола" OBJECT IN aControl
- aControl pop:control:MouseWheelDown
+ aControl pop:Control:MouseWheelDown
  ProcessMessages
 ;
 
 PROCEDURE "Прокрутить колесо мыши вверх для контрола" OBJECT IN aControl
- aControl pop:control:MouseWheelUp
+ aControl pop:Control:MouseWheelUp
  ProcessMessages
 ;
 
@@ -236,19 +236,19 @@ PROCEDURE "Прокрутить колесо мыши вверх раз для контрола" INTEGER IN aCount OBJE
 ;
 WordAlias "Прокрутить колесо мыши вверх раза для контрола" "Прокрутить колесо мыши вверх раз для контрола"
 
-: "Запомнить позицию мыши и выполнить" IN aProc
+VOID WORDWORKER "Запомнить позицию мыши и выполнить"
  VAR x_coord
  VAR y_coord
  "Запомнить позицию мыши" >>> y_coord >>> x_coord
  TRY
-  aProc DO
+  ( WordToWork DO )
  FINALLY
   x_coord y_coord mouse:SetCursorPosition 
  END
 ;
 
 : "Установить курсор мыши по координатам относительно контрола" INTEGER IN X INTEGER IN Y OBJECT IN aControl
- X Y aControl pop:control:ClientToScreen mouse:SetCursorPosition
+ X Y aControl pop:Control:ClientToScreen mouse:SetCursorPosition
 ;
 
 : "Провести мышью вниз на пикселей" INTEGER IN aCount

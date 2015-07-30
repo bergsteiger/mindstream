@@ -34,14 +34,14 @@ USES
   // - ставим фокус в контрол списка
   
   VAR l_UserType
-  контрол::tvList:push pop:control:GetAnotherParentForm pop:vcm:form:UserType >>> l_UserType
+  контрол::tvList:push pop:Control:GetAnotherParentForm pop:Form:UserType >>> l_UserType
   VAR l_ClassName
-  контрол::tvList:push pop:control:GetAnotherParentForm pop:vcm:form:FormID >>> l_ClassName
+  контрол::tvList:push pop:Control:GetAnotherParentForm pop:Form:FormID >>> l_ClassName
 
   ProcessMessages
 
   VAR l_Control
-  focused:control:push pop:control:GetHandle >>> l_Control
+  focused:control:push pop:Control:Handle >>> l_Control
   // - запоминаем текущий контрол
   // - без этого фокус может ускакивать в редктор (текст документа)
   TRY
@@ -58,7 +58,7 @@ USES
     // - убеждаемся, что диалог таки был
    END
   FINALLY
-    Если ( l_Control byhandle:control:push pop:control:SetFocus ) то
+    Если ( l_Control Control:ByHandle pop:Control:SetFocus ) то
     ( "Перевести фокус в список" )
     // - ставим фокус в контрол списка
    иначе
@@ -77,9 +77,24 @@ USES
   "Нажать на медаль {(remListModified)} и проверить наличие баллона"
 ;
 
-// $Id: DocumentList.script,v 1.24 2013/12/18 12:56:35 lulin Exp $
+// $Id: DocumentList.script,v 1.29 2015/03/24 16:56:17 lulin Exp $
 
 // $Log: DocumentList.script,v $
+// Revision 1.29  2015/03/24 16:56:17  lulin
+// - перетряхиваем зависимости.
+//
+// Revision 1.28  2015/03/16 15:52:48  lulin
+// - делаем стереотипы Service и ServiceImplementation.
+//
+// Revision 1.27  2015/03/11 16:49:45  lulin
+// - перетряхиваем слова.
+//
+// Revision 1.26  2015/03/11 16:41:22  lulin
+// - перетряхиваем слова.
+//
+// Revision 1.25  2015/03/10 17:07:30  lulin
+// - перетряхиваем слова.
+//
 // Revision 1.24  2013/12/18 12:56:35  lulin
 // - причёсываем код тестов.
 //

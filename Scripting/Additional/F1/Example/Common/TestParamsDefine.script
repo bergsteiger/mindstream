@@ -3,9 +3,11 @@
 
 INTEGER VAR g_WasInit // Проверка была ли вызвана процедура "Первоначальные параметры"
 
+INTEGER VAR g_PrecedentHasBeenInitialized // Вызов прецедента
+
 BOOLEAN VAR g_RunInitialConditions // Выполнить ли проверку предусловий?
 
-BOOLEAN VAR g_RunCheckDeleteComments // Выполнить ли проверку на лишнии комментарии?
+INTEGER VAR g_RunCheckDeleteComments // Выполнить ли проверку на лишнии комментарии?
 
 BOOLEAN VAR g_RunFinalConditionsUserFilters // Выполнить проверку на наличие пользовательских фильтров?
 
@@ -36,6 +38,12 @@ INTEGER VAR g_RunTestOnConfigurations // На каких конфигурациях выполнить тест
 BOOLEAN VAR g_NeedImportConsultation // В тесте будет использована импортированная консультация?
 
 BOOLEAN VAR g_CheckMainWindow // Изменился ли индекс основного окна после теста?
+
+BOOLEAN VAR g_CheckCoordMouse // Сохранились ли координаты курсора мыши после теста?
+
+BOOLEAN VAR g_AntiTest // Получает ли тест в конце исключение/ошибку?
+
+BOOLEAN VAR g_TabsNeed // Обязательно ли наличие вкладок для теста
 
 // ---------------Открыть ли документ до теста?----------------
 
@@ -159,6 +167,7 @@ PROCEDURE "Не очищать строку Базового Поиска"
 
 CONST cnNotPrepare 0
 CONST cnSetSizeMainWindow 1
+CONST cnSetConstSizeMainWindow 2
 
 PROCEDURE "Без установки размеров"
  cnNotPrepare >>> g_How2Prepare
@@ -171,6 +180,10 @@ PROCEDURE "Выставить главной форме размеры" IN aW IN aH
  cnSetSizeMainWindow >>> g_How2Prepare
  aW >>> aSetWidthMainWindow
  aH >>> aSetHeightMainWindow
+;
+
+PROCEDURE "Размеры окна для проверки форм"
+ cnSetConstSizeMainWindow >>> g_How2Prepare
 ;
 
 // ------------------- Переключение баз ------------------------
@@ -221,6 +234,7 @@ CONST cnDontProblemSetFocusAfterSwitchBase 0
 CONST cnSetFocusAfterSwitchBaseInBaseSearch 1
 CONST cnSetFocusAfterSwitchBaseInEditor 2
 CONST cnSetFocusAfterSwitchBaseInQueryCard 3
+CONST cnSetFocusAfterSwitchBaseInPrintPreview 4
 
 PROCEDURE "Проблем с фокусом после переключения баз не возникло"
  cnDontProblemSetFocusAfterSwitchBase >>> g_SetFocusAfterSwitchBase
@@ -238,6 +252,10 @@ PROCEDURE "Установить фокус в Карточку запроса после переключения баз"
  cnSetFocusAfterSwitchBaseInQueryCard  >>> g_SetFocusAfterSwitchBase
 ;
 
+PROCEDURE "Установить фокус в Предварительный просмотр после переключения баз"
+ cnSetFocusAfterSwitchBaseInPrintPreview  >>> g_SetFocusAfterSwitchBase
+;
+
 // ------------------- Работа с вкладками ------------------------
 
 CONST cnDontClosePageControl 0
@@ -248,6 +266,7 @@ CONST cnCloseUnderControl 4
 CONST cnCloseWorkJournal 5
 CONST cnCloseConfigurationList 6
 CONST cnCloseContactList 7
+CONST cnCloseNavigatorAndFolders 8
 
 PROCEDURE "Не закрывать никакую вкладку"
  cnDontClosePageControl >>> g_ClosePageControl
@@ -281,19 +300,29 @@ PROCEDURE "Закрываем вкладку Совещание онлайн"
  cnCloseContactList >>> g_ClosePageControl
 ;
 
+PROCEDURE "Закрываем вкладки Меню и Мои документы"
+ cnCloseNavigatorAndFolders >>> g_ClosePageControl
+;
+
 // -------------------- Проверочные действия -----------------
 
 CONST cnNoneAction 0
-CONST cnCheckValueAreaCombo 1 
+CONST cnCheckValueAreaCombo 1
+CONST cnBuildPreviewForm 2
 
 
 PROCEDURE "Без проверок"
-	cnNoneAction >>> g_CheckAction
+ cnNoneAction >>> g_CheckAction
 ;
 
 PROCEDURE "Проверка текущего значения контрола AreaCombo"
-	cnCheckValueAreaCombo >>> g_CheckAction
+ cnCheckValueAreaCombo >>> g_CheckAction
 ;
+
+PROCEDURE "Построить Предварительный просмотр"
+ cnBuildPreviewForm >>> g_CheckAction
+;
+
 
 // ------------------- Обязательные предусловия ------------------------
 
@@ -307,15 +336,24 @@ PROCEDURE "Не проверять предусловия"
 
 // ------------------- Работа с комментариями ------------------------
 
-INTEGER VAR aNumOpenDoc
+VAR aNumOpenDoc
+
+CONST cnNoneDeleteComments 0
+CONST cnDeleteCommentsFromOneDocument 1 
+CONST cnDeleteCommentsFromSeveralDocuments 2 
+
+PROCEDURE "Не проверять отсутствие комментариев"
+ cnNoneDeleteComments >>> g_RunCheckDeleteComments
+;
 
 PROCEDURE "В документе не должно остаться комментариев" INTEGER IN aDocNum
- true >>> g_RunCheckDeleteComments
+ cnDeleteCommentsFromOneDocument >>> g_RunCheckDeleteComments
  aDocNum >>> aNumOpenDoc
 ;
 
-PROCEDURE "Не проверять отсутствие комментариев"
- false >>> g_RunCheckDeleteComments
+PROCEDURE "В документах не должно остаться комментариев" IN aDocNum
+ cnDeleteCommentsFromSeveralDocuments >>> g_RunCheckDeleteComments
+ aDocNum >>> aNumOpenDoc
 ;
 
 // ------------------- Работа с фильтрами после теста ------------------------
@@ -336,4 +374,52 @@ PROCEDURE "Не должно измениться основное окно"
 
 PROCEDURE "Не проверяем смену основного окна"
  false >>> g_CheckMainWindow
+;
+
+PROCEDURE "Проверить координаты курсора мыши"
+ true >>> g_CheckCoordMouse
+;
+
+PROCEDURE "Не проверять координаты курсора мыши"
+ false >>> g_CheckCoordMouse
+;
+
+// --------------------- Вид теста -----------------------
+
+PROCEDURE "Обычный тест"
+ false >>> g_AntiTest
+;
+
+PROCEDURE "Антитест"
+ true >>> g_AntiTest
+;
+
+// -------------------- Прецеденты --------------------------
+
+CONST cnPrecedentDontHasBeenInitialized 0
+CONST cnPrecedentUnderControl 1
+CONST cnPrecedentWorkJournal 2
+
+PROCEDURE "Не открывать прецедент"
+ cnPrecedentDontHasBeenInitialized >>> g_PrecedentHasBeenInitialized
+;
+
+PROCEDURE "UnderControl"
+ cnPrecedentUnderControl >>> g_PrecedentHasBeenInitialized
+ // {requestlink:238946430}
+;
+
+PROCEDURE "WorkJournal"
+ cnPrecedentWorkJournal >>> g_PrecedentHasBeenInitialized
+ // {requestlink:159356925}
+;
+
+// ---------------------- Вкладки --------------------------
+
+PROCEDURE "Режим с вкладками не обязателен"
+ false >>> g_TabsNeed
+;
+
+PROCEDURE "Режим с вкладками"
+ true >>> g_TabsNeed
 ;

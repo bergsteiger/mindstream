@@ -6,7 +6,7 @@ PROCEDURE "”бедитьс€, что фокус в редакторе"
  OBJECT VAR l_Control
  focused:control:push =: l_Control
  l_Control я¬Ћя≈“—я class::TevCustomEditorWindow 
-  [ '‘окус не в редакторе, а в ' l_Control pop:component:Name ':' l_Control pop:object:ClassName ] strings:Cat 
+  [ '‘окус не в редакторе, а в ' l_Control pop:Component:Name ':' l_Control pop:object:ClassName ] strings:Cat 
    ASSERTS
 ;
 

@@ -88,7 +88,7 @@ PROCEDURE "ѕроверить расширенно параметры и контекстное меню контролов, содержим
       ( "јккуратно сравнить с эталоном целочисленные свойства {( [ 'BevelWidth' 'BevelOuter' 'BevelInner' ] )} объекта {(aCtrl)}" )
      ≈сли ( ( aCtrl "ѕерейти к родительской форме" "”знать, существует ли объект" ) 
      » ( aCtrl "‘орма от которой начинаем перебор" ?== ) ) то   
-     // ( aCtrl pop:control:GetMainForm aCtrl ?== )   
+     // ( aCtrl pop:Control:GetMainForm aCtrl ?== )   
      ( 'Position:' 'Position' aCtrl  "”знать численную переменную объекта" IntToStr Cat .
      // "—равнить с эталоном размеры контрола {(aCtrl)}" 
       ≈сли ( "‘орма от которой начинаем перебор" "”знать им€ контрола" –ј¬Ќќ 'ChatWindowForm' ! ) то 
@@ -175,7 +175,7 @@ PROCEDURE "—равнить содержимое тулбара  на форме с эталоном" STRING IN aForm
 
  PROCEDURE ƒействи€ OBJECT IN aObj
   ( aObj я¬Ћя≈“—я class::TvcmToolbar ) ? (
-   ( aObj "”знать, виден ли контрол" » ( aObj pop:control:ControlCount ЅќЋ№Ў≈ 1 ) ) ? (
+   ( aObj "”знать, виден ли контрол" » ( aObj pop:Control:ControlCount ЅќЋ№Ў≈ 1 ) ) ? (
     aObj .
     'Order = ' 'DockRow' aObj pop:object:GetOrdProp IntToStr Cat .
     '---------------' .
@@ -183,7 +183,7 @@ PROCEDURE "—равнить содержимое тулбара  на форме с эталоном" STRING IN aForm
     ( aControl "Ќ≈ я¬Ћя≈“—я" class::Ttb97MoreButton ) ? (
       aControl .
       ( aControl "Ќ≈ я¬Ћя≈“—я" class::TvcmComboBox ) ? (
-       aControl pop:control:Caption .
+       aControl pop:Control:Caption .
        'јктивность:' aControl "”бедитьс€, что контрол активен" ToPrintable Cat .
        '---' . 
       )

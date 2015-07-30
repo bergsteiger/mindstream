@@ -10,8 +10,8 @@ BOOLEAN FUNCTION "Удалось перевести фокус в ?" STRING IN aControl
  false =: Result
 
  : Действия OBJECT IN aObj
-  Если ( aControl РАВНО ( aObj pop:control:Name ) ) то
-   ( aObj pop:control:SetFocus =: Result
+  Если ( aControl РАВНО ( aObj pop:Control:Name ) ) то
+   ( aObj pop:Control:SetFocus =: Result
     "Закончить перебор контролов"
    )
  ;
@@ -20,5 +20,11 @@ BOOLEAN FUNCTION "Удалось перевести фокус в ?" STRING IN aControl
 ;
 
 : "Привести координаты для контрола к экранным" OBJECT IN X OBJECT IN Y OBJECT IN aControl
- X DO Y DO aControl pop:control:ClientToScreen =:^ Y =:^ X
+ X DO Y DO aControl pop:Control:ClientToScreen =:^ Y =:^ X
+;
+
+PROCEDURE "Убедиться, что текущий контрол: " STRING IN aCtrl
+ "Контрол в фокусе" "Имя компонента" РАВНО aCtrl
+ [ 'Фокус почему-то не в ' aCtrl ', а в ' "Контрол в фокусе" "Имя компонента" ':' "Контрол в фокусе" pop:object:ClassName ] strings:Cat
+   ASSERTS
 ;

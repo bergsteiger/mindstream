@@ -71,6 +71,10 @@ CONST CF_TXT 1
  "{(aProc)} и проверить наличие диалога с кнопкой Ok"
 ;
 
+VOID WORDWORKER "Убедиться, что был диалог с кнопкой 'Да' после выполнения"
+ "{(@ ( WordToWork DO ) )} и проверить наличие диалога с кнопкой Да"
+;
+
 : " и проверить отсутствие диалога" IN aProc
  TRY
   "{(aProc)} и проверить наличие диалога"
@@ -136,7 +140,7 @@ PROCEDURE "Проверить, что во вкладка Структура документа неактивна (нельзя перев
 : "Перевести фокус в панель контекстного поиска на вкладке Структура документа" 
  "Перевести фокус в {(контрол::ContextFilter)} на форме {(форма::Contents)}"
  "Дождаться переключения вкладок"
- focused:control:push pop:component:Name 'InternalEditor' SameStr 'Не удалось поставить фокус в оглавление' ASSERTS
+ focused:control:push pop:Component:Name 'InternalEditor' SameStr 'Не удалось поставить фокус в оглавление' ASSERTS
  focused:control:push pop:object:ClassName 'TnscComboBoxWithFilter' SameStr 'Не смоли встать в контекстный фильтр оглавления' ASSERTS
  // - здесь на самом деле нужна проверка, что фокус встал во вложенный редактор
 ; 
@@ -217,7 +221,7 @@ PROCEDURE "Проверить, что во вкладка Структура документа неактивна (нельзя перев
  "Ввести строку {(aString)}"
  //[ 'Для начала поиска выбираем вид "' aType '"' ] strings:Cat ToDo 
  // - ещё бы сделать нажатие на вкладку, но для этого надо уметь искать её по имени
- aType focused:control:push pop:control:GetParentForm pop:control:FindVGControlByName =: l_VG
+ aType focused:control:push pop:Control:GetParentForm pop:Control:FindVGControlByName =: l_VG
  Если ( l_VG vg:control:GetIsChecked ) то
  // - если вкладка уже выбрана, то по SetIsChecked не произойдёт OnChange
    ( "Нажать {('Enter')}" )
@@ -301,7 +305,7 @@ WordAlias "Открываем Справку" "Открываем справку"
 ;
 
 : "Перевести фокус в список"
- focused:control:push pop:component:Name tvList ?!= ? (
+ focused:control:push pop:Component:Name tvList ?!= ? (
   "Перевести фокус в {(tvList)} на форме {(форма::List)}"
  ) 
 ;
@@ -362,9 +366,9 @@ WordAlias "Открываем Справку" "Открываем справку"
 
 : "Сравнить даты обеих редакций с эталоном"
  "Перевести фокус в список редакций левой редакции"
- контрол::EditionChoose:push pop:control:Caption .
+ контрол::EditionChoose:push pop:Control:Caption .
  "Перевести фокус в список редакций правой редакции"
- контрол::EditionChoose:push pop:control:Caption .
+ контрол::EditionChoose:push pop:Control:Caption .
 ;
 
 USES
@@ -419,7 +423,7 @@ USES
 : "Сравнить список с эталоном" OBJECT IN Список
 
  Если ( Список ЯВЛЯЕТСЯ class::TvtLister ) то 
-  ( Список pop:control:Caption . )
+  ( Список pop:Control:Caption . )
  иначе
   ( 
    INTEGER VAR "Количество элементов"
@@ -446,7 +450,7 @@ BOOLEAN FUNCTION "Расширенно найти ссылку в дереве" BOOLEAN IN aProc STRING IN a
  (
   STRING VAR l_Name
  
-  focused:control:push pop:component:Name =: l_Name
+  focused:control:push pop:Component:Name =: l_Name
   ( l_Name РАВНО aControl )
    [ 'Почему то в фокусе ' l_Name ' а не ' aControl ] strings:Cat
     ASSERTS
@@ -665,8 +669,8 @@ USES
 : "Установить фокус во флеш"
  OnTest
  OBJECT VAR Parent
- focused:control:push pop:control:GetAnotherParentForm =: Parent
- "Найти контрол {(DocumentFlash)} на форме {(Parent)}" pop:control:SetFocus 
+ focused:control:push pop:Control:GetAnotherParentForm =: Parent
+ "Найти контрол {(DocumentFlash)} на форме {(Parent)}" pop:Control:SetFocus 
   'Не удалось установить фокус во флеш' ASSERTS
 ;
 
@@ -707,8 +711,8 @@ USES
  "Сравнить абзац текущего редактора с эталоном"
 ;
 
-: "Потянуть вертикальный скроллер контрола вниз" OBJECT IN aControl
- aControl pop:control:VScrollerVisible [ 'У контрола ' aControl pop:component:Name ' нет вертикального скроллбара' ] strings:Cat ASSERTS
+PROCEDURE "Потянуть вертикальный скроллер контрола вниз" OBJECT IN aControl
+ aControl pop:Control:VScrollerVisible [ 'У контрола ' aControl pop:Component:Name ' нет вертикального скроллбара' ] strings:Cat ASSERTS
  VAR X
  VAR Y
  // Получаем верхний правый угол контрола
@@ -719,19 +723,14 @@ USES
  // поправка на размер скроллера. Надо бы GetSystemMetrics использовать...или как там его
  X 10 - >>> X
  Y 25 + >>> Y
- 
- : Тянем_потянем
+ "Установить курсор мыши по координатам {(X Y)}"
+ Y 100 + >>> Y
+ THREAD (
+  "Зажать левую кнопку мыши"
   "Установить курсор мыши по координатам {(X Y)}"
-  Y 100 + >>> Y
-  THREAD (
-   "Зажать левую кнопку мыши"
-   "Установить курсор мыши по координатам {(X Y)}"
-   "Отпустить левую кнопку мыши"
-  )
-  50 SLEEP
- ;
- 
- "Запомнить позицию мыши и выполнить {(@ Тянем_потянем)}"
+  "Отпустить левую кнопку мыши"
+ )
+ 50 SLEEP
 ; 
 
 : "Перевести фокус в дерево терминов"
@@ -825,7 +824,7 @@ PROCEDURE "В левом окне из комбобокса выбрать редакцию с текстом" STRING IN aTex
  "Нажать {('Enter')}"
  "Перевести фокус в список редакций левой редакции"
  STRING VAR l_Text
- контрол::EditionChoose:push pop:control:Caption >>> l_Text
+ контрол::EditionChoose:push pop:Control:Caption >>> l_Text
  aText l_Text StartsStr 'Выбралась неверная редакция: ' l_Text Cat ASSERTS
  "Перевести фокус в список редакций правой редакции"
 ;
@@ -850,7 +849,7 @@ PROCEDURE "В левом окне из комбобокса выбрать редакцию с текстом" STRING IN aTex
 PROCEDURE "Проверить, что форма БП одна"
  PROCEDURE Действия_с_контролом OBJECT IN aCtrl
   aCtrl ЯВЛЯЕТСЯ class::TNewBaseSearchForm ? (
-   aCtrl pop:vcm:form:FormID .
+   aCtrl pop:Form:FormID .
   )
  ; // Действия_с_контролом
 
@@ -864,10 +863,10 @@ PROCEDURE "Проверить, что форма БП одна"
 
 : "Проверить, что попали в Новости-онлайн"
  OnTest
- форма::InternetAgent byname:control:push pop:control:CanFocus 
+ форма::InternetAgent byname:control:push pop:Control:CanFocus 
   [ 
    'Не удалось перейти по интернет-ссылке. Текущая форма: ' 
-   focused:control:push pop:control:GetAnotherParentForm pop:object:ClassName 
+   focused:control:push pop:Control:GetAnotherParentForm pop:object:ClassName 
   ] strings:Cat
   ASSERTS
 ; // "Проверить, что попали в Новости-онлайн"
@@ -878,7 +877,7 @@ PROCEDURE "Проверить, что форма БП одна"
 
 : "Проверить, что находимся в ОМ"
  OnTest
- контрол::ContextEdit:push pop:control:CanFocus 'Не удалось перейти в ОМ' ASSERTS
+ контрол::ContextEdit:push pop:Control:CanFocus 'Не удалось перейти в ОМ' ASSERTS
 ;
 
 : "Нажатием F7 открываем ППР"
@@ -910,13 +909,13 @@ PROCEDURE "Проверить, что форма БП одна"
   OBJECT VAR l_ContentsForm
   >>> l_ContentsForm
   OBJECT VAR l_Form
-  l_ContentsForm pop:control:GetAnotherParentForm =: l_Form
+  l_ContentsForm pop:Control:GetAnotherParentForm =: l_Form
   l_Form pop:object:IsNil ! ? (
    l_Form pop:form:FormStyle РАВНО fsStayOnTop ? (
    // - только если оглавление в плавающем состоянии
     l_Form "Узнать, виден ли контрол" ? (
-     //l_Form pop:component:Name .
-     l_Form pop:control:Hide
+     //l_Form pop:Component:Name .
+     l_Form pop:Control:Hide
      //"Закрыть текущую вкладку"
     )
    )
@@ -1025,8 +1024,8 @@ PROCEDURE "Открываем вкладку 'Текст документа' в синхронном просмотре списка"
 : "Выбрать 'Текущая страница'"
  OBJECT VAR "Текущая страница"
  контрол::rbPrintCurrent 
-  focused:control:push pop:control:GetAnotherParentForm 
-   pop:control:FindControlByName =: "Текущая страница"
+  focused:control:push pop:Control:GetAnotherParentForm 
+   pop:Control:FindControlByName =: "Текущая страница"
  //"Текущая страница" pop:control:Click
  //"Текущая страница" pop:RadioButton:GetChecked !
  true
@@ -1075,7 +1074,7 @@ WORDWORKER "Вызвать диалог печати по CTRL-P и выполнить"
   "Дождаться переключения вкладок"
  )
  "Проверить, что открыта форма БП"
- aType focused:control:push pop:control:GetParentForm pop:control:FindVGControlByName vg:control:GetIsChecked [ 'Не выбран тип ' aType ] strings:Cat ASSERTS
+ aType focused:control:push pop:Control:GetParentForm pop:Control:FindVGControlByName vg:control:GetIsChecked [ 'Не выбран тип ' aType ] strings:Cat ASSERTS
 ;
 
 : "Проверяем, что тип активен в панели БП" STRING IN aType
@@ -1090,8 +1089,7 @@ BOOLEAN FUNCTION "Проверяем, выбран ли тип информации ?" STRING IN aType
 ;
 
 PROCEDURE "Сбрасываем вкладку БП в умолчательное состояние"
- "Установить фокус в БП после переключения баз"
- "Контрол в фокусе" "Имя компонента" РАВНО 'ContextEdit' ? (
+ "Контрол в фокусе" "Имя компонента" РАВНО контрол::ContextEdit ? (
   "Проверяем, выбран ли тип информации {('Все документы')}?" ! ? (
    БП
   )
@@ -1100,8 +1098,18 @@ PROCEDURE "Сбрасываем вкладку БП в умолчательное состояние"
  // http://mdp.garant.ru/pages/viewpage.action?pageId=300026165&focusedCommentId=319489482#comment-319489482
 ;
 
+PROCEDURE "Установить фокус в БП и сбросить ее в умолчательное состояние"
+ "Установить фокус в БП после переключения баз"
+ "Сбрасываем вкладку БП в умолчательное состояние"
+;
+
+PROCEDURE "Приготовиться к выполнению следующего теста"
+ ОсновноеМеню 
+ "Установить фокус в БП и сбросить ее в умолчательное состояние"
+;
+
 PROCEDURE "Посчитать количество кнопок для типов БП"
- 'Количество кнопок с типами БП: ' 'Все документы' focused:control:push pop:control:GetParentForm pop:control:FindVGControlByName vg:control:CountSiblingLikeMe ToPrintable Cat .
+ 'Количество кнопок с типами БП: ' 'Все документы' focused:control:push pop:Control:GetParentForm pop:Control:FindVGControlByName vg:control:CountSiblingLikeMe ToPrintable Cat .
  "Отделить текст в эталоне"
 ;
 
@@ -1339,17 +1347,17 @@ INTEGER VAR g_TimerNum
  OnTest
   
  OBJECT VAR "Форма в которую вставлено оглавление"
-  focused:control:push pop:control:GetAnotherParentForm =: "Форма в которую вставлено оглавление"
+  focused:control:push pop:Control:GetAnotherParentForm =: "Форма в которую вставлено оглавление"
   
  OBJECT VAR "Основная форма приложения" 
-  "Форма в которую вставлено оглавление" pop:control:GetAnotherParentForm =: "Основная форма приложения"
+  "Форма в которую вставлено оглавление" pop:Control:GetAnotherParentForm =: "Основная форма приложения"
    
  OBJECT VAR "Левый навигатор"
-  контрол::LeftNavigator "Основная форма приложения"  pop:control:FindControlByName =: "Левый навигатор"
+  контрол::LeftNavigator "Основная форма приложения"  pop:Control:FindControlByName =: "Левый навигатор"
  "Левый навигатор" pop:object:IsNil ! 'Не удалось найти левый навигатор' ASSERTS 
   
  OBJECT VAR "Кнопка придочивания"
- 'AUTOHIDEOFF' "Левый навигатор" pop:control:FindControlByName =: "Кнопка придочивания"
+ 'AUTOHIDEOFF' "Левый навигатор" pop:Control:FindControlByName =: "Кнопка придочивания"
  
  "Кнопка придочивания" pop:object:IsNil ! 'Не удалось найти кнопку придочивания левого навигатора' ASSERTS
  "Кнопка придочивания"
@@ -1360,7 +1368,7 @@ INTEGER VAR g_TimerNum
  
  "Кнопка автораспахивания левого навигатора" =: l_DockButton
  l_DockButton pop:TB97Button:GetIsDown ? (
-  l_DockButton pop:control:Click
+  l_DockButton pop:Control:Click
  )
  OnTest
 ; // "Сделать левый навигатор автораспахивающимся"
@@ -1370,7 +1378,7 @@ INTEGER VAR g_TimerNum
  
  "Кнопка автораспахивания левого навигатора" =: l_DockButton
  l_DockButton pop:TB97Button:GetIsDown ! ? (
-  l_DockButton pop:control:Click
+  l_DockButton pop:Control:Click
  )
  OnTest
 ; // "Сделать левый навигатор Неавтораспахивающимся"
@@ -1381,11 +1389,11 @@ PROCEDURE "Проверяем отсутствие крестика"
 
  OBJECT VAR "Форма плавающего навигатора"
  focused:control:push 
-  pop:control:GetAnotherParentForm 
-   pop:control:GetAnotherParentForm =: "Форма плавающего навигатора"
+  pop:Control:GetAnotherParentForm 
+   pop:Control:GetAnotherParentForm =: "Форма плавающего навигатора"
 
  OBJECT VAR "Кнопка закрытия"
- cBmpClose "Форма плавающего навигатора" pop:control:FindControlByName =: "Кнопка закрытия"
+ cBmpClose "Форма плавающего навигатора" pop:Control:FindControlByName =: "Кнопка закрытия"
 
  Если ( "Кнопка закрытия" pop:object:IsNil ) то
   ( false [ 'Кнопка ' cBmpClose ' не была создана' ] strings:Cat ASSERTS )
@@ -1401,7 +1409,7 @@ PROCEDURE "Проверяем отсутствие крестика непосредственно в текущей форме"
  "Текущий контрол" "Напечатать иерархию вложенности контролов"
  
  OBJECT VAR "Форма оглавления"
-  "Текущий контрол" pop:control:GetAnotherParentForm =: "Форма оглавления"
+  "Текущий контрол" pop:Control:GetAnotherParentForm =: "Форма оглавления"
   
  OBJECT VAR "Объект в котором ищем кнопку закрытия"
   "Форма оглавления" =: "Объект в котором ищем кнопку закрытия"
@@ -1410,7 +1418,7 @@ PROCEDURE "Проверяем отсутствие крестика непосредственно в текущей форме"
   
  CONST BtnClose 'BtnClose'
  OBJECT VAR "Кнопка закрытия"
- BtnClose "Объект в котором ищем кнопку закрытия" pop:control:FindControlByName =: "Кнопка закрытия"
+ BtnClose "Объект в котором ищем кнопку закрытия" pop:Control:FindControlByName =: "Кнопка закрытия"
  
  Если ( "Кнопка закрытия" pop:object:IsNil ! ) то
   //false [ 'Кнопка ' BtnClose ' не была создана' ] strings:Cat ASSERTS
@@ -1424,11 +1432,11 @@ PROCEDURE "Сделать вкладку на форме плавающей" STRING IN aControl STRING IN aFor
   focused:control:push =: "Текущий контрол"
   
  OBJECT VAR "Форма вкладки"
- "Текущий контрол" pop:control:GetAnotherParentForm =: "Форма вкладки"
+ "Текущий контрол" pop:Control:GetAnotherParentForm =: "Форма вкладки"
  "Форма вкладки" pop:object:IsNil ! 'Не нашли форму вкладки' ASSERTS
  
- "Форма вкладки" pop:vcm:form:IsFloatingState ! ? (
-  "Форма вкладки" pop:control:Undock
+ "Форма вкладки" pop:Form:IsFloatingState ! ? (
+  "Форма вкладки" pop:Control:Undock
   OnTest
   "Перевести фокус в {(aControl)} на форме {(aForm)}"
  )
@@ -1440,20 +1448,20 @@ PROCEDURE "Сделать вкладку на форме неплавающей" STRING IN aControl STRING IN aF
  focused:control:push =: "Текущий контрол"
   
  OBJECT VAR "Форма вкладки"
- "Текущий контрол" pop:control:GetAnotherParentForm =: "Форма вкладки"
+ "Текущий контрол" pop:Control:GetAnotherParentForm =: "Форма вкладки"
  "Форма вкладки" pop:object:IsNil ! 'Не нашли форму вкладки' ASSERTS
  
- "Форма вкладки" pop:vcm:form:IsFloatingState ? (
+ "Форма вкладки" pop:Form:IsFloatingState ? (
  
   OBJECT VAR "Форма плавающего навигатора"
-  "Форма вкладки" pop:control:GetAnotherParentForm =: "Форма плавающего навигатора"
+  "Форма вкладки" pop:Control:GetAnotherParentForm =: "Форма плавающего навигатора"
   "Форма плавающего навигатора" pop:object:IsNil ! 'Не нашли форму плавающего навиатора' ASSERTS
   
   OBJECT VAR "Кнопка придочивания"
-  'HIDELEFT' "Форма плавающего навигатора" pop:control:FindControlByName =: "Кнопка придочивания"
+  'HIDELEFT' "Форма плавающего навигатора" pop:Control:FindControlByName =: "Кнопка придочивания"
   "Кнопка придочивания" pop:object:IsNil ! 'Не нашли кнопку придочивания' ASSERTS 
   
-  "Кнопка придочивания" pop:control:Click
+  "Кнопка придочивания" pop:Control:Click
   
   OnTest
   "Перевести фокус в {(aControl)} на форме {(aForm)}"
@@ -1533,10 +1541,10 @@ PROCEDURE "Открыть вкладку на всё окно"
  OBJECT VAR "Кнопка открытия в текущем окне"
  
  focused:control:push =: "Текущий контрол"
- "Текущий контрол" pop:control:GetAnotherParentForm =: "Текущая форма"
- 'BtnOpen' "Текущая форма" pop:control:FindControlByName =: "Кнопка открытия в текущем окне"
+ "Текущий контрол" pop:Control:GetAnotherParentForm =: "Текущая форма"
+ 'BtnOpen' "Текущая форма" pop:Control:FindControlByName =: "Кнопка открытия в текущем окне"
  
- "Кнопка открытия в текущем окне" pop:control:Click
+ "Кнопка открытия в текущем окне" pop:Control:Click
 ; // "Открыть вкладку на всё окно"
 
 : "Установить фокус в атрибуты документа"
@@ -1613,7 +1621,7 @@ PROCEDURE "Спускаемся в дереве на уровень вниз"
 
 : "При помощи Shift выделяем элементов" IN aNum
  VAR l_Finish
- focused:control:push pop:Lister:GetCurrent aNum + >>> l_Finish // Подсчитываем конец выделения
+ focused:control:push pop:Lister:Current aNum + >>> l_Finish // Подсчитываем конец выделения
  l_Finish focused:control:push pop:Lister:SelectWithShift  // Ну и выделяем
 ;
 
@@ -1649,8 +1657,8 @@ WordAlias "При помощи Shift выделяем элемента" "При помощи Shift выделяем элемен
 
 OBJECT FUNCTION "Найти саб-панель"
  контрол::SubPanel focused:control:push 
- pop:control:GetAnotherParentForm 
- pop:control:FindControlByName =: Result
+ pop:Control:GetAnotherParentForm 
+ pop:Control:FindControlByName =: Result
  Result pop:object:IsNil ! 'Не нашли саб-панель' ASSERTS
 ;
 
@@ -1664,7 +1672,7 @@ WordAlias "Найти панель меток" "Найти саб-панель"
  x X0 + >>> x
  y Y0 + >>> y
  
- x y "Найти панель меток" pop:control:ScreenToClient
+ x y "Найти панель меток" pop:Control:ScreenToClient
 ;
 
 : "Проверить, что в контекстном меню нет операции Сравнение редакций"
@@ -1723,7 +1731,7 @@ OBJECT FUNCTION "Найти область вкладок"
 
  : Действия OBJECT IN Контрол
    ( Контрол ЯВЛЯЕТСЯ class::TnscFormsPageControl )
-   И ( Контрол pop:component:Name РАВНО контрол::ChildZone )
+   И ( Контрол pop:Component:Name РАВНО контрол::ChildZone )
    И ( Контрол "Узнать, виден ли контрол" )
    И ( Контрол "Родительский объект" "Узнать, виден ли контрол" )
    И ( Контрол "Родительский объект" "Родительский объект" "Узнать, виден ли контрол" )
@@ -1737,11 +1745,11 @@ OBJECT FUNCTION "Найти область вкладок"
 
  nil =: Result
  2 раза "Дождаться переключения вкладок"
- focused:control:push pop:control:GetTopParentForm "Выполнить для всех контролов" Действия
+ focused:control:push pop:Control:GetTopParentForm "Выполнить для всех контролов" Действия
  
  Result pop:object:IsNil ? (
   2 раза "Дождаться переключения вкладок"
-  focused:control:push pop:control:GetTopParentForm "Выполнить для всех контролов" Действия
+  focused:control:push pop:Control:GetTopParentForm "Выполнить для всех контролов" Действия
  )
  
  Result pop:object:IsNil ! cPagesNotFound ASSERTS
@@ -1757,12 +1765,12 @@ OBJECT FUNCTION "Найти область вкладок"
 //   "Форма толкового словаря" =: "Нужная форма"
   ( "Найти контрол {(контрол::ChildZone)} на форме {("Форма толкового словаря")}" =: "Нужная форма"
   "Нужная форма" pop:object:IsNil ! 'Не нашли ChildZone в DictionContainer' ASSERTS
-   0 "Нужная форма" pop:control:GetControl =: "Нужная форма"
+   0 "Нужная форма" pop:Control:GetControl =: "Нужная форма"
    "Нужная форма" pop:object:IsNil ! 'Не нашли вложенный контрол в ChildZone в DictionContainer' ASSERTS )
  иначе
   ( "Главное окно" =: "Нужная форма" )
 
- контрол::ChildZone "Нужная форма" pop:control:FindControlByName =: Result
+ контрол::ChildZone "Нужная форма" pop:Control:FindControlByName =: Result
  Result pop:object:IsNil ! 'Не нашли область вкладок' ASSERTS
 ;*/
 
@@ -1809,8 +1817,8 @@ PROCEDURE "См. ежедневные поступления новых документов в разделе Новости онлайн"
  ОМ
  OBJECT VAR "Рубрикатор"
  "Перейти по ссылке на {('Новые поступления')} в области {(контрол::tvLawNews)}"
- focused:control:push pop:control:GetAnotherParentForm =: "Рубрикатор"
- 'NewDocLabel' "Рубрикатор" pop:control:FindControlByName pop:control:SetFocus ASSERT
+ focused:control:push pop:Control:GetAnotherParentForm =: "Рубрикатор"
+ 'NewDocLabel' "Рубрикатор" pop:Control:FindControlByName pop:Control:SetFocus ASSERT
 ;
 
 PROCEDURE "Сравнить оценку документа с эталоном"
@@ -1829,7 +1837,7 @@ PROCEDURE "Сравнить с эталоном имя активной вкладки"
  "Найти область вкладок" =: "Область вкладок"
  "Область вкладок" pop:object:ClassName .
  "Напечатать иерархию вложенности контролов {("Область вкладок")}"
- ActivePageProperty "Область вкладок" pop:object:GetObjProp pop:control:Caption .
+ ActivePageProperty "Область вкладок" pop:object:GetObjProp pop:Control:Caption .
 ; // "Сравнить с эталоном имя активной вкладки"
 
 PROCEDURE "В области вкладок перейти на" STRING IN aTab
@@ -1838,17 +1846,17 @@ PROCEDURE "В области вкладок перейти на" STRING IN aTab
  INTEGER VAR i
  "Найти область вкладок" =: PageControl
 
- Если ( ActivePageProperty PageControl pop:object:GetObjProp pop:control:Caption РАВНО aTab ) то
+ Если ( ActivePageProperty PageControl pop:object:GetObjProp pop:Control:Caption РАВНО aTab ) то
   выходим
 
  0 >>> i
  ПОКА ДА (
   i PageControl pop:PageControl:PageByIndex >>> Page
-  Если ( Page pop:control:Caption aTab == ) то
+  Если ( Page pop:Control:Caption aTab == ) то
    (
     i 'TabIndex' PageControl pop:object:SetOrdProp
     "Дождаться переключения вкладок"
-    Если ( ActivePageProperty PageControl pop:object:GetObjProp pop:control:Caption "НЕ РАВНО" aTab ) то 
+    Если ( ActivePageProperty PageControl pop:object:GetObjProp pop:Control:Caption "НЕ РАВНО" aTab ) то 
      ( 
       'Не получилось переключить вкладку' ASSERTS 
      )
@@ -1881,7 +1889,7 @@ PROCEDURE "Открыть документ через диалог ввода номера" STRING IN aDoc
 
 PROCEDURE "Сравнить заголовок контрола с эталоном" OBJECT IN aControl
  "Дождаться переключения вкладок"
- aControl pop:control:Caption .
+ aControl pop:Control:Caption .
 ;
 
 : "Сравнить заголовок текущего контрола с эталоном"
@@ -1893,7 +1901,7 @@ CONST DocInfoTabCaption 'Информация о документе'
 : "Открыть информацию о документе"
  OBJECT VAR "Область вкладок"
  "Найти область вкладок" =: "Область вкладок"
- ( ActivePageProperty "Область вкладок" pop:object:GetObjProp pop:control:Caption "НЕ РАВНО" DocInfoTabCaption ) ? (
+ ( ActivePageProperty "Область вкладок" pop:object:GetObjProp pop:Control:Caption "НЕ РАВНО" DocInfoTabCaption ) ? (
   оп::Документ_Информация_о_документе
  )
 ;
@@ -1901,7 +1909,7 @@ CONST DocInfoTabCaption 'Информация о документе'
 : "Закрыть информацию о документе"
  OBJECT VAR "Область вкладок"
  "Найти область вкладок" =: "Область вкладок"
- ActivePageProperty "Область вкладок" pop:object:GetObjProp pop:control:Caption РАВНО DocInfoTabCaption ? (
+ ActivePageProperty "Область вкладок" pop:object:GetObjProp pop:Control:Caption РАВНО DocInfoTabCaption ? (
   оп::Документ_Информация_о_документе
  )
 ;
@@ -1917,7 +1925,7 @@ WordAlias "Получить оценку документа" "Сравнить оценку документа с эталоном"
  
  OBJECT VAR "Текущий контрол"
  "Найти контрол {(контрол::pnLeftEx)} на форме {("Текущая форма")}" =: "Текущий контрол"
- "Текущий контрол" pop:control:VScrollerVisible ! 'Внутренний скроллер виден, хотя не должен.' ASSERTS
+ "Текущий контрол" pop:Control:VScrollerVisible ! 'Внутренний скроллер виден, хотя не должен.' ASSERTS
 ;
 
 OBJECT FUNCTION "Найти сплиттер в ААК"
@@ -2036,27 +2044,22 @@ PROCEDURE "Сравнить с эталоном пункт главного меню" STRING IN aItem
 ;
 
 PROCEDURE "Переключиться на вкладку" STRING IN aName
- PROCEDURE Действия
-  OBJECT VAR l_PageControl
-  OBJECT VAR "Закладка"
-  INTEGER VAR Ind
-  INTEGER VAR X
-  INTEGER VAR Y
-  "Найти область вкладок" >>> l_PageControl
-  aName l_PageControl pop:PageControl:FindPageByCaption =: Ind
-  Ind l_PageControl pop:PageControl:PageByIndex =: "Закладка"
-  "Закладка" pop:object:IsNil ! 
-   [ 'Не нашли вкладку ' aName ] strings:Cat
-    ASSERTS
-
+ OBJECT VAR l_PageControl
+ OBJECT VAR "Закладка"
+ INTEGER VAR Ind
+ INTEGER VAR X
+ INTEGER VAR Y
+ "Найти область вкладок" >>> l_PageControl
+ aName l_PageControl pop:PageControl:FindPageByCaption =: Ind
+ Ind l_PageControl pop:PageControl:PageByIndex =: "Закладка"
+ "Закладка" pop:object:IsNil ! 
+  [ 'Не нашли вкладку ' aName ] strings:Cat
+   ASSERTS
   20 >>> X
-  "Померить высоту {(l_PageControl)}" >>> Y
-  Y 10 - >>> Y
-  "Установить курсор мыши по координатам {(X Y)} относительно контрола {("Закладка")}"
-  "Клик левой кнопкой мыши"
- ;
-
- "Запомнить позицию мыши и выполнить {(@ Действия)}"
+ "Померить высоту {(l_PageControl)}" >>> Y
+ Y 10 - >>> Y
+ "Установить курсор мыши по координатам {(X Y)} относительно контрола {("Закладка")}"
+ "Клик левой кнопкой мыши"
  OnTest
  // описание работы слова [$424387103]
 ; // "Переключиться на вкладку"
@@ -2075,7 +2078,7 @@ OBJECT FUNCTION "Найти форму ААК"
 ;
 
 OBJECT FUNCTION "Найти плашку в ААК"
- контрол::edWriteToUs "Найти форму ААК" pop:control:FindControlByName =: Result
+ контрол::edWriteToUs "Найти форму ААК" pop:Control:FindControlByName =: Result
  Result pop:object:IsNil ! 'Плашка не найдена' ASSERTS
 ;
 
@@ -2108,22 +2111,6 @@ OBJECT FUNCTION "Найти плашку в ААК"
 ;
 
 PROCEDURE "Проверить, что массив совпадает с массивом" IN aMass1 IN aMass2
-
-/* INTEGER VAR item
- 0 >>> item
-
- Если ( aMass1 array:Count "НЕ РАВНО" ( aMass2 array:Count ) ) то
-  ( false 'Массивы имеют разный размер' ASSERTS )
- иначе 
-  (  
-   aMass1 array:Count раз 
-   (
-    Если ( ( item aMass1 [i] ) РАВНО ( item aMass2 [i] ) ) то
-     ( ++! item )
-    иначе
-    ( false 'Массивы не совпадают' ASSERTS )
-   ) 
-  )*/
  aMass1 aMass2 ArraysAreEqual 'Массивы не совпадают' ASSERTS
 ;
 
@@ -2221,7 +2208,7 @@ PROCEDURE "Пролистать список поэлементно вниз"
 PROCEDURE "Сравнить развёрнутый список с эталоном" STRING IN aList
  "Развернуть текущее дерево"
  Если ( focused:control:push pop:object:ClassName 'TvtLister' SameText ) то
-  ( aList byname:control:push pop:control:Caption . )
+  ( aList byname:control:push pop:Control:Caption . )
  иначе
   ( INTERFACE VAR l_Node
    INTERFACE VAR l_Node_next
@@ -2246,39 +2233,36 @@ PROCEDURE "Сравнить развёрнутый список с эталоном" STRING IN aList
 ;
 
 PROCEDURE "Перенести элемент оглавления в текст" INTEGER IN aItem
- PROCEDURE Действия
-  OBJECT VAR "Элемент оглавления"
-  INTEGER VAR i_left
-  INTEGER VAR i_top
-  INTEGER VAR i_width
- 
-  "Сделать оглавление неплавающим"
-  "Открыть структуру документа"
-  "Проверить, что удалось перевести фокус в оглавление"
-  focused:control:push =: "Элемент оглавления"
-  aItem контрол::ContentsTree:push tree:GetItem:Left =: i_left
-  aItem контрол::ContentsTree:push tree:GetItem:Top =: i_top
-  aItem контрол::ContentsTree:push tree:GetItem:Width =: i_width
-  i_top 5 + =: i_top
-  i_left 25 + =: i_left
-  i_width 2 * =: i_width
+ OBJECT VAR "Элемент оглавления"
+ INTEGER VAR i_left
+ INTEGER VAR i_top
+ INTEGER VAR i_width
 
-  "Установить курсор мыши по координатам {(i_left i_top)} относительно контрола {("Элемент оглавления")}"
-  THREAD ( 1500 SLEEP 
-   //i_width i_top "Элемент оглавления" pop:control:ClientToScreen mouse:SetCursorPosition
-   "Установить курсор мыши по координатам {(i_width i_top)} относительно контрола {("Элемент оглавления")}"
-   "Дать системе перерисоваться"
-   "Отпустить левую кнопку мыши"
-   "Дать системе перерисоваться"
-  )
-  "Зажать левую кнопку мыши"
- ;
- "Запомнить позицию мыши и выполнить {(@ Действия)}"
-; // "Перенести элемент оглавления в текст"
+ "Сделать оглавление неплавающим"
+ "Открыть структуру документа"
+ "Проверить, что удалось перевести фокус в оглавление"
+ focused:control:push =: "Элемент оглавления"
+ aItem контрол::ContentsTree:push tree:GetItem:Left =: i_left
+ aItem контрол::ContentsTree:push tree:GetItem:Top =: i_top
+ aItem контрол::ContentsTree:push tree:GetItem:Width =: i_width
+ i_top 5 + =: i_top
+ i_left 25 + =: i_left
+ i_width 2 * =: i_width
+
+ "Установить курсор мыши по координатам {(i_left i_top)} относительно контрола {("Элемент оглавления")}"
+ THREAD ( 1500 SLEEP 
+  //i_width i_top "Элемент оглавления" pop:control:ClientToScreen mouse:SetCursorPosition
+  "Установить курсор мыши по координатам {(i_width i_top)} относительно контрола {("Элемент оглавления")}"
+  "Дать системе перерисоваться"
+  "Отпустить левую кнопку мыши"
+  "Дать системе перерисоваться"
+ )
+ "Зажать левую кнопку мыши"
+;
 
 : "Переключиться на вкладку в БП" STRING IN aType
  БП
- true aType focused:control:push pop:control:GetParentForm pop:control:FindVGControlByName vg:control:SetIsChecked
+ true aType focused:control:push pop:Control:GetParentForm pop:Control:FindVGControlByName vg:control:SetIsChecked
 ;
 
 : "Вызвать диалог печати по CTRL-P, в поле 'Номера страниц' ввести и нажать 'Печать'" STRING IN aSym
@@ -2303,12 +2287,12 @@ PROCEDURE "Перенести элемент оглавления в текст" INTEGER IN aItem
 
 PROCEDURE "Проверить, что в главном окне нет скроллера"
  //true 
- "Найти основное меню" pop:control:VScrollerVisible ! 'Скроллер виден, хотя не должен' ASSERTS
+ "Найти основное меню" pop:Control:VScrollerVisible ! 'Скроллер виден, хотя не должен' ASSERTS
 ;
  
 PROCEDURE "Проверить, что в главном окне есть скроллер"
  //true 
- "Найти основное меню" pop:control:VScrollerVisible 'Скроллер не виден, хотя должен' ASSERTS
+ "Найти основное меню" pop:Control:VScrollerVisible 'Скроллер не виден, хотя должен' ASSERTS
 ;
 
 INTEGER FUNCTION "Найти максимальное значение в массиве" ARRAY IN aMass
@@ -2327,15 +2311,15 @@ INTEGER FUNCTION "Найти минимальное значение в массиве" ARRAY IN aMass
  ) aMass ITERATE
 ; // "Найти минимальное значение в массиве"
 
-: "Найти среднее значение в массиве" IN aMass
+INTEGER FUNCTION "Найти среднее значение в массиве" ARRAY IN aMass
  INTEGER VAR sum
  INTEGER VAR aver
  0 @ + aMass ITERATE =: sum
- sum aMass array:Count / =: aver
- aver
-; // "Найти среднее значение в массиве"
+ sum aMass Array:Count / =: aver
+ aver =: Result 
+;
 
-: "Получить максимальное, минимальное и среднее значения для массива" IN aMass
+PROCEDURE "Получить максимальное, минимальное и среднее значения для массива" IN aMass
  INTEGER VAR max
  INTEGER VAR min
  INTEGER VAR aver
@@ -2373,7 +2357,7 @@ PROCEDURE "Закрыть форму по крестику" STRING IN aForm
  "Текущая форма" pop:object:IsNil ! [ 'Не удалось найти форму ' aForm ] strings:Cat ASSERTS
 
  OBJECT VAR "Крестик"
- 'BtnClose' "Текущая форма" pop:control:FindControlByName =: "Крестик"
+ 'BtnClose' "Текущая форма" pop:Control:FindControlByName =: "Крестик"
  "Крестик" pop:object:IsNil ! 'Не удалось найти кнопку закрытия' ASSERTS
 
  "Крестик" "Кликнуть"
@@ -2424,7 +2408,7 @@ PROCEDURE "Сравнить ПЗ с эталоном"
 
   PROCEDURE Действия1 OBJECT IN aControl
    aControl ЯВЛЯЕТСЯ class::TnscTasksPanelTreeView ? (
-    aControl pop:control:SetFocus ASSERT
+    aControl pop:Control:SetFocus ASSERT
     "Переместиться в начало дерева"
     //aControl pop:control:Name .
     aControl "Сравнить список с эталоном"
@@ -2432,7 +2416,7 @@ PROCEDURE "Сравнить ПЗ с эталоном"
   ;
 
   '' .
-  aControl pop:control:Caption .
+  aControl pop:Control:Caption .
   '---------------' .
   aControl EnumerateControls Действия1
  ;
@@ -2440,8 +2424,8 @@ PROCEDURE "Сравнить ПЗ с эталоном"
  ПЗ
  TRY
   OBJECT VAR "Панель задач"
-  форма::TasksPanel "Главное окно" pop:control:FindControlByName =: "Панель задач"
-  контрол::tpvMain "Панель задач" pop:control:FindControlByName =: "Панель задач"
+  форма::TasksPanel "Главное окно" pop:Control:FindControlByName =: "Панель задач"
+  контрол::tpvMain "Панель задач" pop:Control:FindControlByName =: "Панель задач"
   "Панель задач" EnumerateControls Действия
  FINALLY
   "Закрыть вкладку ПЗ"
@@ -2454,7 +2438,7 @@ PROCEDURE "Сравнить ПЗ с эталоном"
   OBJECT VAR "Кнопка ОК"
   focused:control:push 2 раза "Получить родительскую форму" =: "Форма сохранения в МД"
   "Форма сохранения в МД" pop:object:IsNil ! 'Не нашли форму сохранения в МД' ASSERTS
-  контрол::bt_enResult_opOk "Форма сохранения в МД" pop:control:FindControlByName =: "Кнопка ОК"
+  контрол::bt_enResult_opOk "Форма сохранения в МД" pop:Control:FindControlByName =: "Кнопка ОК"
   "Кнопка ОК" "Кликнуть"
  ;
 
@@ -2466,11 +2450,11 @@ PROCEDURE "Сравнить ПЗ с эталоном"
  ОМ
  "Синяя медаль документов на контроле" byname:control:push pop:Reminder:Visible ? (
  "Синяя медаль документов на контроле" byname:control:push pop:Reminder:Click
- "Синяя медаль документов на контроле" byname:control:push pop:Reminder:FindEditor pop:control:SetFocus 'Не удалось поставить фокус в редактор баллона' ASSERTS
+ "Синяя медаль документов на контроле" byname:control:push pop:Reminder:FindEditor pop:Control:SetFocus 'Не удалось поставить фокус в редактор баллона' ASSERTS
  OBJECT VAR "Форма баллона"
  focused:control:push 2 раза ( "Получить родительскую форму" ) =: "Форма баллона"
  OBJECT VAR "Крестик баллона"
- 'CloseButton' "Форма баллона" pop:control:FindVGControlByName =: "Крестик баллона"
+ 'CloseButton' "Форма баллона" pop:Control:FindVGControlByName =: "Крестик баллона"
  "Крестик баллона" vg:control:Click
  "Закрыть вкладку Документы на контроле" )
 ; // "Закрыть синюю медаль документов на контроле"
@@ -2611,11 +2595,24 @@ OBJECT FUNCTION "Левый навигатор"
  Result pop:object:IsNil ! 'Не удалось найти левый навигатор' ASSERTS
 ; // "Левый навигатор"
 
-OBJECT FUNCTION "Кнопка свертывания левого навигатора"
+OBJECT FUNCTION "Правый навигатор"
+ "Найти контрол {(контрол::RightNavigator)} на форме {("Главное окно")}" =: Result
+ Result pop:object:IsNil ! 'Не удалось найти правый навигатор' ASSERTS
+;
+
+OBJECT FUNCTION "Кнопка свертывания " OBJECT IN aNavigator
  "Дать системе перерисоваться"
- 'HIDELEFT' "Левый навигатор" pop:control:FindControlByName =: Result
- Result pop:object:IsNil ! 'Не удалось найти кнопку свертывания левого навигатора' ASSERTS
-; // "Кнопка свертывания левого навигатора"
+ 'HIDELEFT' aNavigator pop:Control:FindControlByName =: Result
+ Result pop:object:IsNil ! 'Не удалось найти кнопку свертывания навигатора' ASSERTS
+;
+
+OBJECT FUNCTION "Кнопка свертывания левого навигатора"
+ "Кнопка свертывания {("Левый навигатор")}" =: Result
+;
+
+OBJECT FUNCTION "Кнопка свертывания правого навигатора"
+ "Кнопка свертывания {("Правый навигатор")}" =: Result
+;
 
 PROCEDURE "Сделать левый навигатор свернутым"
  "Левый навигатор" "Померить ширину" 31 != ? (
@@ -2630,6 +2627,20 @@ PROCEDURE "Сделать левый навигатор развернутым"
  )
  "Дать системе перерисоваться"
 ; // "Сделать левый навигатор развернутым"
+
+PROCEDURE "Сделать правый навигатор свернутым"
+ "Правый навигатор" "Померить ширину" 31 != ? (
+  "Кнопка свертывания правого навигатора" "Кликнуть"
+ )
+ "Дать системе перерисоваться"
+;
+
+PROCEDURE "Сделать правый навигатор развернутым"
+ "Правый навигатор" "Померить ширину" 31 == ? (
+  "Кнопка свертывания правого навигатора" "Кликнуть"
+ )
+ "Дать системе перерисоваться"
+;
 
 : "Запомнить ширину левого навигатора и выполнить" IN aProc
 
@@ -2649,7 +2660,7 @@ PROCEDURE "Сделать левый навигатор развернутым"
  "Проверить, что открыта форма БП"
  "Найти контрол {(контрол::BaseSearchPanel)} на форме  {(aForm)}" =: "Базовый поиск"
  "Проверить, что контрол {("Базовый поиск")} видимый"
- "Базовый поиск" pop:control:GetHeight .
+ "Базовый поиск" pop:Control:GetHeight .
 ;
 
 : "Сравнить левую часть ААК-Содержания с эталоном"
@@ -2699,25 +2710,21 @@ BOOLEAN FUNCTION "Имеет ли документ на контроле статус изменён?" INTEGER IN aIte
  END 
 ; // "Удалить документ с вкладки Документы на контроле, подавив  Нарушен баланс скобок Wait"
 
-: "Сделать с комментариями в документе"   IN aProc IN aDoc 
-   "Открываем {(aDoc)}"
-   TRY
-    aProc DO
-   FINALLY 
-    "Открываем {(aDoc)}"
-    "В документе не должно быть комментариев"
-   END
-; // "Сделать с комментариями в документе"
+VOID WORDWORKER "Открыть документ для установки комментария и выполнить" INTEGER IN aDoc 
+ "Открываем {(aDoc)}"
+ TRY
+  ( WordToWork DO )
+ FINALLY 
+  "Открываем {(aDoc)}"
+  "В документе не должно быть комментариев"
+ END
+;
 
 PROCEDURE "Установить фокус в контекстный фильтр списка Инфарма"
-  OBJECT VAR "Контекстный фильтр"
-  "Найти контрол {('InternalEditor')} на форме {("Главное окно")}" =: "Контекстный фильтр"
-  "Установить фокус в {("Контекстный фильтр")}"
+ OBJECT VAR "Контекстный фильтр"
+ "Найти контрол {('InternalEditor')} на форме {("Главное окно")}" =: "Контекстный фильтр"
+ "Установить фокус в {("Контекстный фильтр")}"
  ; // "Установить фокус в контекстный фильтр списка Инфарма"
-
-: "Основное меню Инфарма"
-  моп::Инфарм_Основное_меню_ИнФарм
-; // "Основное меню Инфарма"
 
 PROCEDURE "Список всех препаратов"
  "Поиск лекарственного средства"
@@ -2726,8 +2733,8 @@ PROCEDURE "Список всех препаратов"
 
 PROCEDURE "Проверить доступность кнопки" STRING IN aControl
  OBJECT VAR l_Control
- aControl "Главное окно" pop:control:FindControlByName =: l_Control
- l_Control pop:control:Enabled .
+ aControl "Главное окно" pop:Control:FindControlByName =: l_Control
+ l_Control pop:Control:Enabled .
 ; // "Проверить доступность кнопки"
 
 : "Установить курсор мыши на ссылку в плашке ААК"
@@ -2740,25 +2747,22 @@ PROCEDURE "Проверить доступность кнопки" STRING IN aControl
 ; // "Установить курсор мыши на ссылку в плашке ААК"
 
 PROCEDURE "Клик по встроенному скроллеру редактора" OBJECT IN anEditor
- PROCEDURE Действия
+ anEditor ЯВЛЯЕТСЯ class::TnscEditor 
+  [ 'Фокус не в редакторе, а в ' anEditor pop:Component:Name ':' anEditor pop:object:ClassName ] strings:Cat 
+   ASSERTS
+ anEditor pop:Control:VScrollerVisible ? (
   VAR X
   VAR Y
   VAR W
   VAR H
-  anEditor pop:control:GetWidth >>> W
-  anEditor pop:control:GetHeight >>> H
+  anEditor pop:Control:GetWidth >>> W
+  anEditor pop:Control:GetHeight >>> H
   W 5 - >>> X
   H 2 / >>> Y
   //X Y anEditor pop:control:ClientToScreen >>> Y >>> X
   //X Y mouse:SetCursorPosition
   "Установить курсор мыши по координатам {(X Y)} относительно контрола {(anEditor)}"
   "Клик левой кнопкой мыши"
-;
- anEditor ЯВЛЯЕТСЯ class::TnscEditor 
-  [ 'Фокус не в редакторе, а в ' anEditor pop:component:Name ':' anEditor pop:object:ClassName ] strings:Cat 
-   ASSERTS
- anEditor pop:control:VScrollerVisible ? (
-  "Запомнить позицию мыши и выполнить {(@ Действия)}"
  )
 ; // "Клик по встроенному скроллеру редактора"
 
@@ -2818,7 +2822,7 @@ BOOLEAN FUNCTION "Имеет ли расширенная конфигурация признак измененности?"
    OBJECT VAR "Кнопка ОК"
    focused:control:push 2 раза "Получить родительскую форму" =: "Форма сохранения в МД"
    "Форма сохранения в МД" pop:object:IsNil ! 'Не нашли форму сохранения в МД' ASSERTS
-   контрол::bt_enResult_opOk "Форма сохранения в МД" pop:control:FindControlByName =: "Кнопка ОК"
+   контрол::bt_enResult_opOk "Форма сохранения в МД" pop:Control:FindControlByName =: "Кнопка ОК"
    "Кнопка ОК" "Кликнуть"
   ; // Действия
 
@@ -2848,7 +2852,7 @@ BOOLEAN FUNCTION "Имеет ли расширенная конфигурация признак измененности?"
 PROCEDURE "Проверить, что введено в контекстый фильтр"
  OBJECT VAR "Контекстный фильтр"
  "Найти контрол {('InternalEditor')} на форме {("Главное окно")}" =: "Контекстный фильтр"
- "Контекстный фильтр" pop:control:Caption .
+ "Контекстный фильтр" pop:Control:Caption .
 ; // "Проверить, что введено в контекстый фильтр"
 
 : "Сравнить название текущего термина с эталоном"
@@ -2864,10 +2868,10 @@ PROCEDURE "Проверить, что введено в контекстый фильтр"
 
 : "Проверить доступность кнопки в модальном окне" STRING IN aControl
  OBJECT VAR "Модальная форма"
- focused:control:push pop:control:GetAnotherParentForm =: "Модальная форма"
+ focused:control:push pop:Control:GetAnotherParentForm =: "Модальная форма"
  OBJECT VAR l_Control
- aControl "Модальная форма" pop:control:FindControlByName =: l_Control
- l_Control pop:control:Enabled .
+ aControl "Модальная форма" pop:Control:FindControlByName =: l_Control
+ l_Control pop:Control:Enabled .
 ; // "Проверить доступность кнопки в модальном окне"
  
 OBJECT FUNCTION "Видимый элемент статусбара" INTEGER IN aItem OBJECT IN aStatusBar
@@ -3000,40 +3004,33 @@ INTEGER FUNCTION "Померить ширину левой части ААК-Содержания"
   aStr l_Status ! l_QC pop:QueryCard:Attribute:SetCollapsed
  ; // "Выполнить над свернутой группой КЗ"
 
-: "Сделать с документом , открытым из Журнала работы" IN aProc IN aDoc
-   "Очистить журнал работы"
-   "Открываем {(aDoc)}"
-   ОМ
-    TRY
-      "Открыть журнал работы"
-      2 раза "Спускаемся в дереве на уровень вниз"
-      "Нажать {('Enter')}"
-      aProc DO
-   FINALLY 
-     "Закрыть журнал работы"
-   END
- ; // "Сделать с документом , открытым из Журнала работы"
+VOID WORDWORKER "Открыть документ из Журнала работы и выполнить" IN aDoc
+ "Очистить журнал работы"
+ "Открываем {(aDoc)}"
+ ОМ
+ "Открыть журнал работы"
+ 2 раза ( "Спускаемся в дереве на уровень вниз" )
+ "Нажать {('Enter')}"
+ ( WordToWork DO )
+;
 
 : "Нажать кнопку Отмена в Настройке конфигурации"
  OBJECT VAR "Отмена"
  OBJECT VAR "Модальная форма"
- focused:control:push pop:control:GetAnotherParentForm =: "Модальная форма"
+ focused:control:push pop:Control:GetAnotherParentForm =: "Модальная форма"
  "Найти контрол {(контрол::bt_enResult_opCancel)} на форме {("Модальная форма")}" =: "Отмена"
  "Отмена" pop:object:IsNil ! 'Не нашли кнопку Отмена' ASSERTS
  "Отмена" "Кликнуть"
 ; // "Нажать кнопку Отмена в Настройке конфигурации"
 
-: "Кликаем кнопку Ок мышкой"
- : Действия
-  OBJECT VAR "Модальная форма"
-  OBJECT VAR "Кнопка Ок"
-  "Контрол в фокусе" "Нижняя форма" =: "Модальная форма"
-  "Найти контрол {(контрол::bt_enResult_opOk)} на форме {("Модальная форма")}" =: "Кнопка Ок"
-  "Установить курсор мыши по координатам {( 5 5 )} относительно контрола {("Кнопка Ок")}"
-  "Клик левой кнопкой мыши"
- ; // Действия
- "Запомнить позицию мыши и выполнить {(@ Действия )}"
-; // "Кликаем кнопку Ок мышкой"
+PROCEDURE "Кликаем кнопку Ок мышкой"
+ OBJECT VAR "Модальная форма"
+ OBJECT VAR "Кнопка Ок"
+ "Контрол в фокусе" "Нижняя форма" =: "Модальная форма"
+ "Найти контрол {(контрол::bt_enResult_opOk)} на форме {("Модальная форма")}" =: "Кнопка Ок"
+ "Установить курсор мыши по координатам {( 5 5 )} относительно контрола {("Кнопка Ок")}"
+ "Клик левой кнопкой мыши"
+;
 
 : "Закрыть форму БП"
  "Открыта ли форма БП?" ? (
@@ -3045,12 +3042,12 @@ INTEGER FUNCTION "Померить ширину левой части ААК-Содержания"
 OBJECT FUNCTION "Вкладка синхронного просмотра документа"
  "Открыть вкладку синхронного просмотра текста без сравнения с эталоном"
  "Дождаться переключения вкладок"
- контрол::ChildZonePanel "Главное окно"  pop:control:FindControlByName =: Result
+ контрол::ChildZonePanel "Главное окно"  pop:Control:FindControlByName =: Result
  Result pop:object:IsNil ! 'Вкладка синхронного просмотра не найдена' ASSERTS
 ; // "Вкладка синхронного просмотра документа"
 
 PROCEDURE "Вывести окно оболочки на первый план"
- "Главное окно" pop:control:GetHandle wnd:SetForeground
+ "Главное окно" pop:Control:Handle wnd:SetForeground
 ; // "Вывести окно оболочки на первый план"
 
 BOOLEAN FUNCTION "Получить состояние чекбокса" OBJECT IN aCheckBox
@@ -3069,8 +3066,8 @@ BOOLEAN FUNCTION "Получить состояние чекбокса" OBJECT IN aCheckBox
 
 OBJECT FUNCTION "Панель задач"
  OBJECT VAR "Панель задач"
- форма::TasksPanel "Главное окно" pop:control:FindControlByName =: "Панель задач"
- контрол::tpvMain "Панель задач" pop:control:FindControlByName =: Result
+ форма::TasksPanel "Главное окно" pop:Control:FindControlByName =: "Панель задач"
+ контрол::tpvMain "Панель задач" pop:Control:FindControlByName =: Result
 ; // "Панель задач"
 
 
@@ -3132,7 +3129,7 @@ VOID WORDWORKER "Cравнить с эталоном количество вновь открытых вкладок Хрома пос
  "Выполнить {(@ ( WordToWork DO 'Количество новых вкладок Хрома:' . ) )} и сравнить с эталоном количество вновь открытых вкладок Хрома"
 ;
 
-: "Сравнить с эталоном имя текущего контрола"
+PROCEDURE "Сравнить с эталоном имя текущего контрола"
  focused:control:push  "Узнать имя контрола" .
 ; // "Сравнить с эталоном имя текущего контрола"
 
@@ -3144,7 +3141,7 @@ VOID WORDWORKER "Cравнить с эталоном количество вновь открытых вкладок Хрома пос
 PROCEDURE "Установить фокус в редактор отправленных сообщений"
  OBJECT VAR "Текущая форма"
  "Найти окно {(форма::ChatWindow)} по имени" =: "Текущая форма"
- "Найти контрол {( контрол::HistoryEditor)} на форме {( "Текущая форма" )}" pop:control:SetFocus
+ "Найти контрол {( контрол::HistoryEditor)} на форме {( "Текущая форма" )}" pop:Control:SetFocus
   'Не удалось постваить фокус в редактор отправленных сообщений' ASSERTS
 ; // "Установить фокус в редактор отправленных сообщений"
 
@@ -3266,7 +3263,7 @@ OBJECT FUNCTION "Найти пункт контекстного меню с именем" OBJECT IN aMenu STRING 
 // при необходимости допилим
  OBJECT VAR l_Menu
  OBJECT VAR l_Item
- 10 10 aControl pop:control:GetPopupMenu >>> l_Menu
+ 10 10 aControl pop:Control:GetPopupMenu >>> l_Menu
  
  "Найти пункт контекстного меню {(l_Menu)} с именем {(aStr)}" >>> l_Item
  
@@ -3329,7 +3326,7 @@ PROCEDURE "Выбрать следующее значение в комбобоксе" OBJECT IN aCombo
 : "Нажать кнопку Восстановить все в Настройке конфигурации"
  OBJECT VAR "Восстановить все"
  OBJECT VAR "Модальная форма"
- "Контрол в фокусе" pop:control:GetAnotherParentForm =: "Модальная форма"
+ "Контрол в фокусе" pop:Control:GetAnotherParentForm =: "Модальная форма"
  "Найти контрол {(контрол::bt_enResult_opRestoreAllSettings)} по имени на форме {("Модальная форма")}" >>> "Восстановить все"
  "Восстановить все" "Кликнуть"
 ; // "Нажать кнопку Восстановить все в Настройке конфигурации"
@@ -3395,25 +3392,18 @@ PROCEDURE "Выбрать следующее значение в комбобоксе" OBJECT IN aCombo
 ; // "Ищем строку в эталоне списка"
 
 PROCEDURE "Установить курсор по координатам  относительно контрола  и сравнить с эталоном хинт и контекстное меню" INTEGER IN X INTEGER IN Y OBJECT IN aControl
- PROCEDURE Действия
-  "Установить курсор мыши по координатам {( X Y )} относительно контрола {(aControl)}"
-  "Дождаться появления хинта"
-  "Сравнить текст хинта с эталоном"
-  "Сравнить контекстное меню для контрола {(aControl)} для точки  {( X Y )} с эталоном"
- ;
- "Запомнить позицию мыши и выполнить {(@ Действия)}" 
+ "Установить курсор мыши по координатам {( X Y )} относительно контрола {(aControl)}"
+ "Дождаться появления хинта"
+ "Сравнить текст хинта с эталоном"
+ "Сравнить контекстное меню для контрола {(aControl)} для точки  {( X Y )} с эталоном"
 ;
 
-: "Установить курсор по координатам  относительно контрола  и сравнить с эталоном его хинт" INTEGER IN X INTEGER IN Y OBJECT IN aControl
- : Действия
-  "Установить курсор мыши по координатам {( X Y )} относительно контрола {(aControl)}"
-  "Дождаться переключения вкладок"
-  "Дождаться появления хинта"
-  "Сравнить текст хинта с эталоном"
- ; // Действия
-
- "Запомнить позицию мыши и выполнить {(@ Действия)}" 
-; // "Установить курсор по координатам  относительно контрола  и сравнить с эталоном его хинт"
+PROCEDURE "Установить курсор по координатам  относительно контрола  и сравнить с эталоном его хинт" INTEGER IN X INTEGER IN Y OBJECT IN aControl
+ "Установить курсор мыши по координатам {( X Y )} относительно контрола {(aControl)}"
+ "Дождаться переключения вкладок"
+ "Дождаться появления хинта"
+ "Сравнить текст хинта с эталоном"
+;
 
 WORDWORKER "Выполнить с пунктом меню 'показ моих комментариев'"
  VAR Item
@@ -3509,16 +3499,6 @@ PROCEDURE "Установить фокус в рубрикатор"
  контрол::RubricatorList:push "Установить фокус"
 ;
 
-: "Сравнить с эталоном имя последнего фильтра на вкладке Фильтры"
- // Проверяем, что пользовательский фильтр удалился
- ОМ
- "Очистить историю"
- ППР
- "Открыть фильтры"
- "Перейти к концу"
- "Получить имя текущего элемента дерева {(контрол::FiltersList)}"
-; // "Сравнить с эталоном имя последнего фильтра на вкладке Фильтры"
-
 : "Установить фокус в контекстный фильтр"
  "Установить фокус в контекстный фильтр списка Инфарма"
 ; // "Установить фокус в контекстный фильтр"
@@ -3593,22 +3573,22 @@ INTEGER FUNCTION "Позиция горизонтального скроллбара у текущего редактора"
 ; // "Перевести фокус в поле 'Информационный блок' в ППР"
 
 PROCEDURE "Установить фокус на кнопку Типа наследования группы Цвет"
- 'FontForeColorInheritanceButton' "Диалог редактора стилей" "Найти контрол по имени на форме" "Установить фокус"
+ 'FontForeColorInheritanceButton' "Диалог Редактор стилей" "Найти контрол по имени на форме" "Установить фокус"
  OnTest 
 ; // "Установить фокус на кнопку Типа наследования группы Цвет"
 
 PROCEDURE "Установить фокус в комбобокс выбора цвета"
- 'FontForeColorBox' "Измененный диалог редактора стилей" "Найти контрол по имени на форме" "Установить фокус"
+ 'FontForeColorBox' "Диалог Редактор стилей" "Найти контрол по имени на форме" "Установить фокус"
  OnTest 
 ; // "Установить фокус в комбобокс выбора цвета"
 
 PROCEDURE "Установить фокус в комбобокс выбора цвета фона"
- 'FontBackColorBox' "Измененный диалог редактора стилей" "Найти контрол по имени на форме" "Установить фокус"
+ 'FontBackColorBox' "Диалог Редактор стилей" "Найти контрол по имени на форме" "Установить фокус"
  OnTest 
 ; 
 
 PROCEDURE "Установить фокус в комбобокс выбора названия шрифта"
- 'FontNameComboBox' "Диалог редактора стилей" "Найти контрол по имени на форме" "Установить фокус"
+ 'FontNameComboBox' "Диалог Редактор стилей" "Найти контрол по имени на форме" "Установить фокус"
  OnTest 
 ; // "Установить фокус в комбобокс выбора названия шрифта"
 
@@ -3620,7 +3600,7 @@ PROCEDURE "Установить фокус в комбобокс выбора названия шрифта"
 WordAlias "Перевести фокус в поле 'E-mail рассылки' в Прайме" "Установить фокус в поле 'E-mail' в ППО" 
 
 : "Потянуть вертикальный скроллер контрола вверх" OBJECT IN aControl
- aControl pop:control:VScrollerVisible [ 'У контрола ' aControl pop:component:Name ' нет вертикального скроллбара' ] strings:Cat ASSERTS
+ aControl pop:Control:VScrollerVisible [ 'У контрола ' aControl pop:Component:Name ' нет вертикального скроллбара' ] strings:Cat ASSERTS
  VAR X
  VAR Y
  VAR Yy
@@ -3633,27 +3613,34 @@ WordAlias "Перевести фокус в поле 'E-mail рассылки' в Прайме" "Установить фокус 
  // поправка на размер скроллера. Надо бы GetSystemMetrics использовать...или как там его
  X 10 - >>> X
  Y 50 - >>> Y
- : Тянем_потянем
+ "Установить курсор мыши по координатам {(X Y)}"
+ Y ( Yy 80 - ) - >>> Y
+ THREAD ( "Зажать левую кнопку мыши"
   "Установить курсор мыши по координатам {(X Y)}"
-  Y ( Yy 80 - ) - >>> Y
-  THREAD ( "Зажать левую кнопку мыши"
-   "Установить курсор мыши по координатам {(X Y)}"
-   "Отпустить левую кнопку мыши" )
-  50 SLEEP
- ;
- 
- "Запомнить позицию мыши и выполнить {(@ Тянем_потянем)}"
+  "Отпустить левую кнопку мыши" )
+ 50 SLEEP
 ; // "Потянуть вертикальный скроллер контрола вверх"
 
-PROCEDURE "Свернуть и сразу развернуть главное окно"
+PROCEDURE "Свернуть и сразу развернуть главное окно (с вкладками )" BOOLEAN IN aMainWindowWithTabs
  OBJECT VAR Главное_окно
- "Главное окно" >>> Главное_окно
+Если ( aMainWindowWithTabs ) то
+  ( "Главное окно  с вкладками" =: Главное_окно )
+ иначе 
+  ( "Главное окно" =: Главное_окно )
  TRY
   "Свернуть окно {(Главное_окно)}"
  FINALLY 
   "Развернуть окно {(Главное_окно)}"
  END
-; // "Свернуть и сразу развернуть главное окно"
+;
+
+PROCEDURE "Свернуть и сразу развернуть главное окно"
+ "Свернуть и сразу развернуть главное окно (с вкладками {(false)} )"
+;
+
+PROCEDURE "Свернуть и сразу развернуть главное окно с вкладками"
+ "Свернуть и сразу развернуть главное окно (с вкладками {(true)} )"
+;
 
 BOOLEAN FUNCTION "Узнать, активна ли кнопка Найти в панели БП?"
  'Enabled' "Форма БП" .TNewBaseSearchForm.FindBtn pop:object:GetOrdProp РАВНО 1 >>> Result
@@ -3939,12 +3926,12 @@ WORDWORKER "Запомнить значение комбобокса и выполнить" OBJECT IN aCtrl
 ; // "Запомнить значение комбобокса и выполнить"
 
 PROCEDURE "Установить фокус в комбобокс выбора размера шрифта в Редакторе стилей"
-  'FontSizeComboBox' "Диалог редактора стилей" "Найти контрол по имени на форме" "Установить фокус"
+  'FontSizeComboBox' "Диалог Редактор стилей" "Найти контрол по имени на форме" "Установить фокус"
   OnTest 
 ; // "Установить фокус в комбобокс выбора размера шрифта в Редакторе стилей"
 
 PROCEDURE "Установить фокус в комбобокс выбора размера шрифта в измененном Редакторе стилей"
-  'FontSizeComboBox' "Измененный диалог редактора стилей" "Найти контрол по имени на форме" "Установить фокус"
+  'FontSizeComboBox' "Диалог Редактор стилей" "Найти контрол по имени на форме" "Установить фокус"
   OnTest 
 ; // "Установить фокус в комбобокс выбора размера шрифта в Редакторе стилей"
 
@@ -3974,23 +3961,6 @@ INTEGER FUNCTION "Текущий размер текста (в измененном Редакторе стилей)"
 : "Сравнить с эталоном выделенные элементы списка в Txt формате"
  "Получить выделенные элементы списка в формате {(ns_ffTxt)}" .
 ; // "Сравнить с эталоном выделенные элементы списка в Txt формате"
-
-: "Создать фильтр для ААК-списка, выполнить и удалить его" STRING IN aName IN aProc
-
- : Параметры
-  "в поле 'Тип' ввести {('Комментарии\Решение')}"
-  "в поле 'Орган/Источник' ввести {('Компания "Гарант"')}"
- ; // 
-
- "Создать фильтр с именем {(aName)} и с параметром {(@ Параметры )} для {(@ ППР)}"
- TRY
-  aProc DO
- FINALLY
- ОМ
- "Очистить историю"
- "Удалить фильтр с именем {(aName)} для {(@ ППР)}"
- END
-; // "Создать фильтр для ААК-списка, выполнить и удалить его"
 
 : "Перевести фокус в поле 'Дата принятия: С' в ППР"
  "Перевести фокус в поле 'Дата принятия' в ППР"
@@ -4043,7 +4013,7 @@ INTEGER FUNCTION "Текущий размер текста (в измененном Редакторе стилей)"
  [ 'Тип ' aType ': '] strings:Cat l_VG "Узнать, выбран ли VG-контрол" ToPrintable Cat .
 ;
 
-: "Проверить выбранность всех типов информации для БП расширенно" BOOLEAN IN anNameTestBase
+PROCEDURE "Проверить выбранность всех типов информации для БП расширенно" BOOLEAN IN anNameTestBase
  "Выбран ли тип информации {('Все документы')}?"
  "Выбран ли тип информации {('Акты органов власти')}?"
  "Выбран ли тип информации {('Судебная практика')}?"
@@ -4054,18 +4024,20 @@ INTEGER FUNCTION "Текущий размер текста (в измененном Редакторе стилей)"
  "Выбран ли тип информации {('Бухгалтерские проводки')}?"
  "Выбран ли тип информации {('Региональные акты')}?"
  "Выбран ли тип информации {('Международные договоры')}?"
- anNameTestBase ? ( "Выбран ли тип информации {('Проекты законов')}?" )
- // вариант false для ТБ27 
+ Если ( anNameTestBase ) то
+  ( "Выбран ли тип информации {('Проекты законов')}?" )
+ иначе
+  ( "Выбран ли тип информации {('Проекты правовых актов')}?" )
  "Выбран ли тип информации {('Нормативно-техническая документация')}?"
-; // "Проверить выбранность всех типов информации для БП"
+;
 
-: "Проверить выбранность всех типов информации для БП на ТБ24"
+PROCEDURE "Проверить выбранность всех типов информации для БП на ТБ24"
  "Проверить выбранность всех типов информации для БП расширенно {(true)}"
-; // "Проверить выбранность всех типов информации для БП на ТБ24"
+;
 
-: "Проверить выбранность всех типов информации для БП на ТБ27"
+PROCEDURE "Проверить выбранность всех типов информации для БП на ТБ27"
  "Проверить выбранность всех типов информации для БП расширенно {(false)}"
-; // "Проверить выбранность всех типов информации для БП на ТБ27"
+;
 
 PROCEDURE "Померить ширину контрола и сравнить ее с эталоном" STRING IN aCtrl
  OBJECT VAR "Контрол"
@@ -4075,7 +4047,7 @@ PROCEDURE "Померить ширину контрола и сравнить ее с эталоном" STRING IN aCtrl
 
 : "Померить ширину комбобокса tbenNewsLineTop и сравнить ее с эталоном"
  "Померить ширину контрола {('tbenNewsLineTop')} и сравнить ее с эталоном"
-; // "Померить ширину комбобокса tbenNewsLineTop и сравнить ее с эталоном"
+;
 
 : "Померить ширину комбобокса bt_enQuery_opSearchType и сравнить ее с эталоном"
  "Померить ширину контрола {(контрол::bt_enQuery_opSearchType)} и сравнить ее с эталоном"
@@ -4156,25 +4128,21 @@ PROCEDURE "Сравнить с эталоном координаты и размеры форм редактора стилей"
 
 : "Развернуть диалог Редактора стилей во весь экран"
  "Выполнить с редактором стилей" ( 
-  "Развернуть окно {("Диалог редактора стилей")}"
+  "Развернуть окно {("Диалог Редактор стилей")}"
   )
 ; 
 
 PROCEDURE "Установить ширину навигатора с деревом стилей в , размеры диалога редактора стилей в" INTEGER IN WidthNavigatorZone INTEGER IN WidthWindow INTEGER IN HeightWindow
  "Выполнить с редактором стилей" ( 
-  "Уменьшить окно {("Диалог редактора стилей")}"
+  "Уменьшить окно {("Диалог Редактор стилей")}"
   OBJECT VAR "Текущая форма"
   OBJECT VAR "Навигатор с деревом стилей"
   "Контрол в фокусе" "Нижняя форма" >>> "Текущая форма"
   "Найти контрол {('NavigatorZone')} по имени на форме {("Текущая форма")}" >>> "Навигатор с деревом стилей"
   "Установить ширину контрола {("Навигатор с деревом стилей")} в {(WidthNavigatorZone)} пикселей"
-  "Установить размеры контрола {("Диалог редактора стилей")} в {(WidthWindow HeightWindow)}"
+  "Установить размеры контрола {("Диалог Редактор стилей")} в {(WidthWindow HeightWindow)}"
  )
 ; // "Установить ширину навигатора с деревом стилей в , размеры диалога редактора стилей в"
-
-PROCEDURE "Подготовить настройки системы к выполнению следующего теста"
- "Восстановить все настройки текущей конфигурации"
-; // "Подготовить настройки системы к выполнению теста"
 
 : "Выполнить с отдоченной вкладкой Оглавление" IN aProc
  "Сделать оглавление плавающим"
@@ -4222,23 +4190,19 @@ PROCEDURE "Проверить, чтобы во всех комбобоксах редактора стилей было больше одн
 ; // "Проверить, чтобы во всех комбобоксах редактора стилей было больше одного значения"
 
 PROCEDURE "Установить курсор по координатам относительно контрола  и сравнить с эталоном контекстное меню" INTEGER IN X INTEGER IN Y OBJECT IN aControl
- PROCEDURE Действия
-  "Установить курсор мыши по координатам {( X Y )} относительно контрола {(aControl)}"
-  "Дождаться появления хинта"
-  "Сравнить контекстное меню для контрола {(aControl)} для точки  {( X Y )} с эталоном"
- ; // Действия
+ "Установить курсор мыши по координатам {( X Y )} относительно контрола {(aControl)}"
+ "Дождаться появления хинта"
+ "Сравнить контекстное меню для контрола {(aControl)} для точки  {( X Y )} с эталоном"
+;
 
- "Запомнить позицию мыши и выполнить {(@ Действия)}" 
-; // "Установить курсор по координатам  относительно контрола  и сравнить с эталоном контекстное меню"
-
-: "Сравнить контекстное меню для иконок сабпанели документа 2206727 с эталоном"
+PROCEDURE "Сравнить контекстное меню для иконок сабпанели документа 2206727 с эталоном"
  "Отделить текст в эталоне"
  'Эталон меню операций со всем документом:' .
  "Установить курсор по координатам {( 5 5 )} относительно контрола {(контрол::SubPanel:push)} и сравнить с эталоном контекстное меню"
  "Отделить текст в эталоне"
  'Эталон меню операций для фрагмента текста:' .
- "Установить курсор по координатам {( 5 185 )} относительно контрола {(контрол::SubPanel:push)} и сравнить с эталоном контекстное меню"
-; // "Сравнить контекстное меню для иконок сабпанели документа 2206727 с эталоном"
+ "Установить курсор по координатам {( 5 215 )} относительно контрола {(контрол::SubPanel:push)} и сравнить с эталоном контекстное меню"
+;
 
 WORDWORKER "Увеличить шрифт раз и выполнить" INTEGER IN aCount
  aCount раз ( "Увеличить шрифт" )
@@ -4282,42 +4246,35 @@ ARRAY FUNCTION "Разрешение основного монитора"
 ; // "Разрешение основного монитора" 
 
 PROCEDURE "Кликаем кнопку на координатах , и кликаем выпадающий список по координатам" IN aControl  INTEGER IN X INTEGER IN Y  INTEGER IN Xx INTEGER IN Yy
-
- PROCEDURE Действия
-  OBJECT VAR "Нужная кнопка"
-  "Найти контрол {(aControl)} на форме {("Главное окно")}" =: "Нужная кнопка" 
-  "Узнать, существует ли объект {("Нужная кнопка")}" ! 'Не нашли кнопку' ASSERTS
-     THREAD ( 1000 SLEEP 
-       "Установить курсор мыши по координатам {( Xx Yy )} относительно контрола {("Нужная кнопка" )}"
-       "Клик левой кнопкой мыши" )
-     THREAD (  500 SLEEP 
-        "Установить курсор мыши по координатам {( X Y )} относительно контрола {("Нужная кнопка" )}"
-        "Клик левой кнопкой мыши" )
-   4000 SLEEP
-   "Дождаться переключения вкладок"
-   "Узнать численную переменную {('Down')} объекта {("Нужная кнопка")}" 0 ?!= .
-   "Проверить иерархию вложенности текущего контрола"
-  ; // Действия
- "Запомнить позицию мыши и выполнить {(@ Действия)}"
+ OBJECT VAR "Нужная кнопка"
+ "Найти контрол {(aControl)} на форме {("Главное окно")}" =: "Нужная кнопка" 
+ "Узнать, существует ли объект {("Нужная кнопка")}" ! 'Не нашли кнопку' ASSERTS
+  THREAD ( 1000 SLEEP 
+   "Установить курсор мыши по координатам {( Xx Yy )} относительно контрола {("Нужная кнопка" )}"
+   "Клик левой кнопкой мыши" )
+    THREAD (  500 SLEEP 
+      "Установить курсор мыши по координатам {( X Y )} относительно контрола {("Нужная кнопка" )}"
+      "Клик левой кнопкой мыши" )
+ 2500 SLEEP
+ "Дождаться переключения вкладок"
+ "Узнать численную переменную {('Down')} объекта {("Нужная кнопка")}" 0 ?!= .
+ "Проверить иерархию вложенности текущего контрола"
  OnTest
-; // "Кликаем кнопку на координатах, и кликаем выпадающий список по координатам" 
+;
 
 PROCEDURE "Перетащить отдоченную вкладку Документов на контроле в список терминов ТС"
- PROCEDURE Сохраняем_позицию_мыши
-  "Открыть вкладку Документы на контроле"
-  "Сделать вкладку {(контрол::UnderControlList)} на форме {(форма::UnderControl)} плавающей"
-  "Дать системе перерисоваться"
-  "Установить курсор мыши по координатам {(50 -70)} относительно контрола {("Контрол в фокусе")}" // на заголовок отдоченной
-  "Перевести фокус в дерево терминов"
-  THREAD ( 1500 SLEEP 
-   "Установить курсор мыши по координатам {(5 220)} относительно контрола {("Главное окно")}"  // в ЛЕВУЮ часть списка
-   "Отпустить левую кнопку мыши" )
-  "Зажать левую кнопку мыши"
-  "Дать системе перерисоваться"
-  3000 SLEEP
- ; // Сохраняем_позицию_мыши
- "Запомнить позицию мыши и выполнить {(@ Сохраняем_позицию_мыши )}"
-;  // "Перетащить отдоченную вкладку Документов на контроле в список терминов ТС"
+ "Открыть вкладку Документы на контроле"
+ "Сделать вкладку {(контрол::UnderControlList)} на форме {(форма::UnderControl)} плавающей"
+ "Дать системе перерисоваться"
+ "Установить курсор мыши по координатам {(50 -70)} относительно контрола {("Контрол в фокусе")}" // на заголовок отдоченной
+ "Перевести фокус в дерево терминов"
+ THREAD ( 1500 SLEEP 
+  "Установить курсор мыши по координатам {(5 220)} относительно контрола {("Главное окно")}"  // в ЛЕВУЮ часть списка
+  "Отпустить левую кнопку мыши" )
+ "Зажать левую кнопку мыши"
+ "Дать системе перерисоваться"
+ 3000 SLEEP
+; // "Перетащить отдоченную вкладку Документов на контроле в список терминов ТС"
 
 PROCEDURE "Установить свернутость группы контрола КЗ в" STRING IN aName OBJECT IN aCtrl BOOLEAN IN aParam
  aName aParam aCtrl "Установить свернутость группы КЗ"
@@ -4391,7 +4348,7 @@ PROCEDURE "Убедиться, что выпадающий список 'Ещё' не появился"
 ;
 
 PROCEDURE "Установить фокус на кнопку Типа наследования группы Размер"
- 'FontSizeInheritanceButton' "Диалог редактора стилей" "Найти контрол по имени на форме" "Установить фокус"
+ 'FontSizeInheritanceButton' "Диалог Редактор стилей" "Найти контрол по имени на форме" "Установить фокус"
  OnTest 
 ; 
 
@@ -4473,14 +4430,14 @@ OBJECT FUNCTION "Открытое окно"
 
 PROCEDURE "Проверить активность кнопки на форме " STRING IN aControl OBJECT IN aForm
  OBJECT VAR l_Control
- aControl aForm pop:control:FindControlByName =: l_Control
- [ 'Активность контрола ' aControl  ': ' l_Control pop:control:Enabled ToPrintable ] strings:Cat .
+ aControl aForm pop:Control:FindControlByName =: l_Control
+ [ 'Активность контрола ' aControl  ': ' l_Control pop:Control:Enabled ToPrintable ] strings:Cat .
 ;
 
 PROCEDURE "Проверить, что контрол полностью виден" STRING IN aCtrl
 
  PROCEDURE "Получить окно по координатам и проверить, что оно совпадает с контролом" INTEGER IN CoordX INTEGER IN CoordY
-  CoordX CoordY "Найти контрол по дескриптору в стеке {(WindowFromPoint)}" pop:component:Name РАВНО aCtrl 'По указанным координатам располагается другой контрол!' ASSERTS
+  CoordX CoordY "Найти контрол по дескриптору в стеке {(WindowFromPoint)}" pop:Component:Name РАВНО aCtrl 'По указанным координатам располагается другой контрол!' ASSERTS
  ;
 
  "Вывести окно оболочки на первый план"
@@ -4556,8 +4513,8 @@ PROCEDURE "Найти все линии медалей на форме" OBJECT IN aForm
  VAR comp
  I := 0
  mw := aForm
- mw pop:component:ComponentCount раз (
-  comp := ( I mw pop:component:GetComponent )
+ mw pop:Component:ComponentCount раз (
+  comp := ( I mw pop:Component:GetComponent )
   если ( comp ЯВЛЯЕТСЯ class::TvgRemindersLine ) (
    'Линия медалей на форме: ' mw "Узнать имя контрола" ToPrintable Cat .
    comp .
@@ -4614,7 +4571,7 @@ CONST cPagesLeftNavigatorNotFound 'Не нашли область вкладок левого навигатора'
 OBJECT FUNCTION "Найти область вкладок левого навигатора"
  PROCEDURE Действия OBJECT IN Контрол
    ( Контрол ЯВЛЯЕТСЯ class::TnscNavigatorPageControl )
-   И ( Контрол pop:component:Name РАВНО контрол::LeftNavigator )
+   И ( Контрол pop:Component:Name РАВНО контрол::LeftNavigator )
    И ( "Узнать, виден ли контрол {(Контрол)} вместе со всеми его предками" )
    ? (
      Контрол =: Result
@@ -4643,7 +4600,7 @@ PROCEDURE "Установить курсор мыши на VG-контрол" STRING IN aName
  OBJECT VAR l_VG
  INTEGER VAR X
  INTEGER VAR Y
- aName focused:control:push pop:control:GetParentForm pop:control:FindVGControlByName =: l_VG
+ aName focused:control:push pop:Control:GetParentForm pop:Control:FindVGControlByName =: l_VG
  l_VG vg:control:LeftInScene =: X
  l_VG vg:control:TopInScene =: Y
  Если ( aName РАВНО контрол::AreaCombo ) то
@@ -4668,14 +4625,6 @@ PROCEDURE "Установить фокус во вкладку 'Прайм. Моя новостная лента'"
 PROCEDURE "Перевести фокус в поле 'ФИО пользователя' в ППО"
  "Убедиться, что фокус в редакторе"
  'AT_USER_NAME' focused:control:push pop:QueryCard:Attribute:SetFocus
-;
-
-USES
- F1TestsSpecific.script
- ;
-
-USES
- Progression.script
 ;
 
 INTEGER FUNCTION "Высота дерева" STRING IN aTree
@@ -4703,6 +4652,19 @@ PROCEDURE "Убедиться, что высота дерева оглавления больше или равна двум строкам
  "Высота дерева {(контрол::ContentsTree)}" "БОЛЬШЕ ИЛИ РАВНО" 32 'Высота дерева оглавления меньше двух строк! Это не правильно!' ASSERTS
 ;
 
+PROCEDURE "Удалить сохраненный объект из вкладки 'Мои документы'"
+ PROCEDURE Действия
+   3 раза "Дождаться переключения вкладок"
+   "Дать системе перерисоваться"
+  "Переместиться в начало дерева"
+  "Развернуть текущее дерево"
+  "Стрелка вниз"
+  "Ответить один раз Да для {(@ "Нажать Del")}"
+ ;
+
+ "Открыть мои документы и выполнить {(@ Действия)}"
+;
+
 WORDWORKER "Создать папку, переместить верхнюю границу 'Свойства объекта' вплотную к FoldersTree (без появления скролла) и выполнить"
  TRY
   "Создать папку"
@@ -4726,39 +4688,16 @@ WORDWORKER "Создать папку, переместить верхнюю границу 'Свойства объекта' вплотн
  END  
 ;
 
-WordAlias "Установить фокус во вкладку Мои документы" "Перевести фокус в консультации"  
-
-PROCEDURE "Проверить, что у контрола FoldersTree есть вертикальный скроллер"
- "##Дать тесту время для отрисовки контролов"
- "Установить фокус во вкладку Мои документы" 
- "Проверить, что у контрола {("Контрол в фокусе")} есть вертикальный скроллер"
+PROCEDURE "Сравнить с эталоном высоту и количество элементов дерева фильтров"
+ "Установить фокус во вкладку Фильтры"
+ 'Общая высота дерева фильтров (в пикселях): ' "Высота дерева {(контрол::FiltersList)}" ToPrintable Cat .
+ 'Количество фильтров: ' "Контрол в фокусе" "Узнать количество элементов дерева" ToPrintable Cat .
 ;
 
-
-PROCEDURE "Потянуть вертикальный скроллер контрола вниз на пикселей с перерисовкой " OBJECT IN aControl INTEGER IN aDistanceMoveScroller BOOLEAN IN aNeedPause
- aControl pop:control:VScrollerVisible [ 'У контрола ' aControl pop:component:Name ' нет вертикального скроллбара' ] strings:Cat ASSERTS
- INTEGER VAR X
- INTEGER VAR Y
- "Померить ширину {(aControl)}" =: X
- X 10 - =: X
- Y := 18
- "##Запомнить позицию мыши и выполнить" (
-  "Установить курсор мыши по координатам {( X Y )} относительно контрола {("Контрол в фокусе")}"
-  Y aDistanceMoveScroller + >>> Y
-  THREAD (
-   "Зажать левую кнопку мыши"
-   "Установить курсор мыши по координатам {( X Y)} относительно контрола {("Контрол в фокусе")}"
-   aNeedPause ? (
-    "Дождаться переключения вкладок"
-   )
-   "Отпустить левую кнопку мыши"
-  )
-  50 SLEEP
- )
-; 
-
-PROCEDURE "Потянуть вертикальный скроллер контрола вниз на пикселей" OBJECT IN aControl INTEGER IN aDistanceMoveScroller 
- "Потянуть вертикальный скроллер контрола {(aControl )} вниз на {(aDistanceMoveScroller )} пикселей с перерисовкой {(false)}"
+PROCEDURE "Проверить, что у контрола FoldersTree есть вертикальный скроллер"
+ "Дождаться переключения вкладок"
+ "Установить фокус во вкладку Мои документы" 
+ "Проверить, что у контрола {("Контрол в фокусе")} есть вертикальный скроллер"
 ;
 
 PROCEDURE "Сравнить с эталоном отступ первой ноды от верха для дерева FoldersTree"
@@ -4766,10 +4705,28 @@ PROCEDURE "Сравнить с эталоном отступ первой ноды от верха для дерева FoldersTre
  1 контрол::FoldersTree:push tree:GetItem:Top .
 ;
 
-PROCEDURE "Сравнить с эталоном высоту и количество элементов дерева фильтров"
- "Установить фокус во вкладку Фильтры"
- 'Общая высота дерева фильтров (в пикселях): ' "Высота дерева {(контрол::FiltersList)}" ToPrintable Cat .
- 'Количество фильтров: ' "Контрол в фокусе" "Узнать количество элементов дерева" ToPrintable Cat .
+PROCEDURE "Потянуть вертикальный скроллер контрола вниз на пикселей с перерисовкой " OBJECT IN aControl INTEGER IN aDistanceMoveScroller BOOLEAN IN aNeedPause
+ aControl pop:Control:VScrollerVisible [ 'У контрола ' aControl pop:Component:Name ' нет вертикального скроллбара' ] strings:Cat ASSERTS
+ INTEGER VAR X
+ INTEGER VAR Y
+ "Померить ширину {(aControl)}" =: X
+ X 10 - =: X
+ Y := 18
+ "Установить курсор мыши по координатам {( X Y )} относительно контрола {("Контрол в фокусе")}"
+ Y aDistanceMoveScroller + >>> Y
+ THREAD (
+  "Зажать левую кнопку мыши"
+  "Установить курсор мыши по координатам {( X Y)} относительно контрола {("Контрол в фокусе")}"
+  aNeedPause ? (
+   "Дождаться переключения вкладок"
+  )
+  "Отпустить левую кнопку мыши"
+ )
+ 50 SLEEP
+; 
+
+PROCEDURE "Потянуть вертикальный скроллер контрола вниз на пикселей" OBJECT IN aControl INTEGER IN aDistanceMoveScroller 
+ "Потянуть вертикальный скроллер контрола {(aControl )} вниз на {(aDistanceMoveScroller )} пикселей с перерисовкой {(false)}"
 ;
 
 PROCEDURE "Потянуть вертикальный скроллер текущего контрола вниз до конца"
@@ -4778,4 +4735,30 @@ PROCEDURE "Потянуть вертикальный скроллер текущего контрола вниз до конца"
  "Контрол в фокусе" "Померить высоту" =: aHeightEditor 
  aHeightEditor 15 - =: aHeightEditor
  "Потянуть вертикальный скроллер контрола {("Контрол в фокусе")} вниз на {(aHeightEditor)}  пикселей с перерисовкой {(true)}"
+;
+
+PROCEDURE "Убедиться, что контрол виден и активен" OBJECT IN aCtrl
+ aCtrl pop:object:IsNil ! 'Контрол не найден' ASSERTS
+ "Проверить, что контрол {(aCtrl)} видимый"
+ aCtrl "Убедиться, что контрол активен" 'Контрол не активен!' ASSERTS
+;
+
+PROCEDURE "Сравнить с эталоном ширину контрола" OBJECT IN aCtrl
+ [ 'Ширина ' aCtrl "Имя компонента" ' = '  aCtrl "Померить ширину" IntToStr  ] strings:Cat .
+;
+
+VOID WORDWORKER "Убедиться, что плавающий навигатор будет виден после выполнения"
+ OBJECT VAR aFloatingNavigator
+ "Отдоченная форма" =: aFloatingNavigator
+ ( WordToWork DO ) 
+ "Дождаться переключения вкладок"
+ "Проверить, что контрол {(aFloatingNavigator)} видимый"
+;
+
+USES
+ F1TestsSpecific.script
+ ;
+
+USES
+ Progression.script
 ;

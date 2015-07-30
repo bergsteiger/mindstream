@@ -11,7 +11,8 @@ INTEGER VAR g_XMouseCoord
 INTEGER VAR g_YMouseCoord
 
 PROCEDURE "Запомнить позицию мыши, если нужно"
- Если g_SaveMouseCoordinate то (
+ Если ( ( g_SaveMouseCoordinate )
+ ИЛИ ( g_CheckCoordMouse ) ) то (
   mouse:GetCursorPosition >>> g_YMouseCoord >>> g_XMouseCoord	
  )
 ;
@@ -50,7 +51,7 @@ PROCEDURE "Восстановить настройки конфигурации после теста, если нужно"
 
 PROCEDURE "Очистить строку БП, если нужно"
  Если g_ClearContextEdit то (
- "Очистить строку БП"
+  "Очистить строку БП"
  )
 ;
 
@@ -60,7 +61,10 @@ PROCEDURE "Импортировать консультацию, если нужно"
  )
 ;
 
+BOOLEAN VAR g_WasException
+
 PROCEDURE "Выполнить до теста"
+ false >>> g_WasException
  "Восстановить настройки конфигурации до теста, если нужно"
  "Очистить строку БП, если нужно"
  "Изменить настройки"
@@ -90,8 +94,8 @@ PROCEDURE "Восстановить размеры главному окну, если нужно"
   OBJECT VAR MainWindow
   "Главное окно" >>> MainWindow
   aStateMainWindow MainWindow pop:form:SetWindowState
-  LeftIndentMainWindow MainWindow pop:control:SetLeft
-  TopIndentMainWindow MainWindow pop:control:SetTop
+  LeftIndentMainWindow MainWindow pop:Control:SetLeft
+  TopIndentMainWindow MainWindow pop:Control:SetTop
   WidthMainWindow MainWindow "Установить ширину"
   HeightMainWindow MainWindow "Установить высоту"
  )
@@ -109,12 +113,14 @@ PROCEDURE "Изменить размеры"
  g_How2Prepare CASE
   cnNotPrepare ( )
   cnSetSizeMainWindow ( "Установить главному окну размеры {(aSetWidthMainWindow aSetHeightMainWindow)}" )
+  cnSetConstSizeMainWindow ( "Установить главному окну размеры {(1150 800)}" )
    /* тут еще будут: 
      - Главное окно + левый навигатор
      - Главное окно + правый навигатор
      - Размеры ААК - Оглавления (перемещение сплиттера)
      - Размеры ААК - Содержания (перемещение сплиттера)
       ... 
+    хотя откуда там возмется навигатор, пока не продумано
     */
  END
 ;
@@ -138,14 +144,15 @@ PROCEDURE "Изменить базу"
 ;
 
 PROCEDURE "Вернуть фокус в оболочку после переключения баз в конце теста"
- Если ( g_SwitchBase БОЛЬШЕ 0 ) то (
+ // Если ( g_SwitchBase БОЛЬШЕ 0 ) то (
+ // идея с g_SwitchBase не прошла, т.к. не все тесты переключают базы параметром, а фокус уезжает у всех
   g_SetFocusAfterSwitchBase CASE
    cnDontProblemSetFocusAfterSwitchBase ( "Ничего не делаем" )
    cnSetFocusAfterSwitchBaseInBaseSearch ( "Установить фокус в БП после переключения баз" )
    cnSetFocusAfterSwitchBaseInEditor ( "##Установить фокус в документ после переключения баз" )
    cnSetFocusAfterSwitchBaseInQueryCard ( "Установить фокус в КЗ после переключения баз" ) 
+   cnSetFocusAfterSwitchBaseInPrintPreview ( "##Установить фокус в Предварительный просмотр после переключения баз" ) 
   END
- )
 ;
 
 PROCEDURE "Закрыть лишние вкладки"
@@ -158,6 +165,7 @@ PROCEDURE "Закрыть лишние вкладки"
   cnCloseWorkJournal ( "Закрыть журнал работы" )
   cnCloseConfigurationList ( "Закрыть список конфигураций" )
   cnCloseContactList ( "Закрыть вкладку Совещание онлайн" )
+  cnCloseNavigatorAndFolders ( "Закрыть вкладку Мои документы" "Закрыть меню во вкладке" )
  END
 ;
 
@@ -165,16 +173,18 @@ PROCEDURE "Выполнить завершающее действие"
  TRY
   "Восстановить старую базу, если нужно"
   "Вернуть фокус в оболочку после переключения баз в конце теста"
-  "Очистить буфер обмена"
-  "Восстановить настройки конфигурации после теста, если нужно"
-  "Закрыть лишние вкладки"
   "Восстановление позиции мыши, если нужно"
   "Восстановить размеры главному окну, если нужно"
+  "Восстановить настройки конфигурации после теста, если нужно"
+  "Закрыть лишние вкладки"
  FINALLY
-  g_RunCheckDeleteComments ? (
+  g_RunCheckDeleteComments РАВНО 1 ? (
    "Открываем документ {(aNumOpenDoc)}"
    "В документе не должно быть комментариев"
    "Проверить, что нельзя перевести фокус в комментарии"
+  )
+  g_RunCheckDeleteComments РАВНО 2 ? (
+  "Удалить комментарии из документов {( aNumOpenDoc )}"
   )
  g_RunFinalConditionsUserFilters ? (
   ППР
@@ -204,11 +214,14 @@ PROCEDURE "Выполняем проверку предусловий"
   )
  ;
 
+ g_TabsNeed ? (
+  Если ( NOT ( "Главное окно с вкладками" "Имя компонента" РАВНО 'vcmTabbedContainerForm' ) ) то ( 'Требуется режим с вкладками!' RAISE )
+ )
  g_RunInitialConditions ? (
   IsMyDocumentsEmpty ! ? (
    "Открыть мои документы и выполнить {(@ Действия)}"
   )
-  IsMyDocumentsEmpty 'Не смогли почистить вкладку Мои документы (предусловие)!' ASSERTS 
+  Если ( NOT ( IsMyDocumentsEmpty ) ) то ( 'Не смогли почистить вкладку Мои документы (предусловие)!' RAISE )
   "Убедиться, что в системе нет автоприменяемых фильтров"
  )
  g_CheckMainWindow ? (
@@ -223,24 +236,58 @@ PROCEDURE "Проверочное действие"
  g_CheckAction CASE
   cnNoneAction (  )
   cnCheckValueAreaCombo ( "Сравнить с эталоном текущие значения контрола AreaCombo" ) 
+  cnBuildPreviewForm ( "Построить Предварительный просмотр с последующим уничтожением формы" )
+
+ END
+ Если ( g_AntiTest ) то ( g_WasException 'Не появилось ожидаемое исключение!' ASSERTS )
+;
+
+PROCEDURE "Выполняем проверку постусловий"
+ Если ( NOT ( "Количество открытых окон Гаранта" РАВНО 1 ) ) то (
+  "Закрыть все окна кроме текущего" 
+  'В ходе теста открылось новое окно (постусловие)!' RAISE
+ )
+ g_CheckMainWindow ? (
+  Если ( NOT ( "Сохранить активное окно" РАВНО g_MainWindow ) ) то ( 'В ходе теста перешли на новое окно (постусловие)!' RAISE )
+ )
+ g_CheckCoordMouse ? (
+  INTEGER VAR X
+  INTEGER VAR Y
+  mouse:GetCursorPosition >>> Y >>> X	
+  Если ( NOT ( Y РАВНО g_YMouseCoord ) ) то ( 'В ходе теста не сохранилась координата Y курсора мыши (постусловие)!' RAISE )
+  Если ( NOT ( X РАВНО g_XMouseCoord ) ) то ( 'В ходе теста не сохранилась координата X курсора мыши (постусловие)!' RAISE )   
+ )
+;
+
+PROCEDURE "Открыть прецедент"
+ g_PrecedentHasBeenInitialized CASE
+  cnPrecedentDontHasBeenInitialized (  )
+  cnPrecedentUnderControl ( "Открыть вкладку Документы на контроле с проверкой" "Закрываем вкладку Документы на контроле" )
+  cnPrecedentWorkJournal ( "Открыть журнал работы" "Закрыть журнал работы" )
 
  END
 ;
 
-PROCEDURE "Выполняем проверку постусловий"
- g_CheckMainWindow ? (
-  "Сохранить активное окно" РАВНО g_MainWindow 'В ходе теста перешли на новое окно (постусловие)!' ASSERTS   
- )
-;
-
 VOID WORDWORKER Выполнить_тест
+ Если ( ( g_PrecedentHasBeenInitialized IsVoid ) ИЛИ ( g_PrecedentHasBeenInitialized =0 ) ) то ( "Ничего не делаем" )
+  иначе ( "Открыть прецедент" )
  TRY
   "Открываем документ до теста, если нужно"
   "Выполнить до теста"
+  "Изменить размеры"
   "Изменить базу"
-  "Изменить размеры"	
   "Запомнить позицию мыши, если нужно"
-  WordToWork DO
+  TRY
+   WordToWork DO
+  EXCEPT
+   Если ( g_AntiTest ) то 
+    ( 
+     "Сравнить текущее исключение с эталоном" 
+     true >>> g_WasException
+    )		  
+   иначе 
+    ( current:exception:Message RAISE )
+  END
   "Проверочное действие"
  FINALLY
   "Выполнить завершающее действие"	
@@ -248,7 +295,7 @@ VOID WORDWORKER Выполнить_тест
 ;
 
 VOID WORDWORKER Выполнить			
- Если ( ( g_WasInit IsVoid ) ИЛИ ( g_WasInit =0 ) ) то ( "Первоначальные параметры" )	
+ Если ( ( g_WasInit IsVoid ) ИЛИ ( g_WasInit =0 ) ) то ( "Первоначальные параметры" )
  TRY
   "Выполняем проверку предусловий"
    g_RunTestOnConfigurations CASE
@@ -271,6 +318,7 @@ VOID WORDWORKER Выполнить
    END
   "Выполняем проверку постусловий"
  FINALLY
+  0 >>> g_PrecedentHasBeenInitialized
   0 >>> g_WasInit // Мало ли сколько раз вызвали...
  END
 ;

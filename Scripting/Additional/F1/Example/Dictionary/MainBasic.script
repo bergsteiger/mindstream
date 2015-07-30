@@ -38,7 +38,7 @@ PROCEDURE "Кликаем Ок в Настройке конфигурации"
 ;
 
 STRING FUNCTION "Заголовок текущего контрола"
- "Контрол в фокусе"pop:control:Caption =: Result
+ "Контрол в фокусе"pop:Control:Caption =: Result
 ;
 
 PROCEDURE "Путь до контрола: раз вниз, раз Tab" IN aNumDown  IN aNumTab
@@ -56,7 +56,10 @@ PROCEDURE "Путь до контрола (в подтверждениях или метках на полях): раз вниз, ра
 PROCEDURE "Подготовить настройки: открывать документы из списка в текущем окне"
  @ "Настройка конфигурации" MODAL (  
   "Путь до контрола: {(1)} раз вниз, {(6)} раз Tab"
-  'TGroupButton' "Контрол в фокусе" pop:object:Inherits 'Не попали на правильный контрол в Настройке конфигурации' ASSERTS
+  OBJECT VAR aGroupBox
+  "Контрол в фокусе" 2 раза "Перейти к родительской форме" =: aGroupBox
+  ( ( aGroupBox ЯВЛЯЕТСЯ class::TvtGroupBox ) 
+   И ( aGroupBox "Заголовок контрола" РАВНО ' Вкладки Основного окна ' ) ) 'Не попали на правильный контрол в Настройке конфигурации' ASSERTS
   "Заголовок текущего контрола" РАВНО 'В новой вкладке' ? ( 
    "Нажать {('Up')}" )
   "Заголовок текущего контрола" РАВНО 'В текущей вкладке' 'Не выбрали правильный контрол в Настройке конфигурации' ASSERTS
@@ -324,7 +327,7 @@ PROCEDURE "Выполнить с меню во вкладке и закрыть её" IN aProc
 
 PROCEDURE ПЗ
  OBJECT VAR "Панель задач"
- форма::TasksPanel "Главное окно" pop:control:FindControlByName =: "Панель задач"
+ форма::TasksPanel "Главное окно" pop:Control:FindControlByName =: "Панель задач"
  "Панель задач" pop:object:IsNil ? (
   моп::Окна_Панель_задач
   OnTest 
@@ -500,16 +503,16 @@ PROCEDURE "Закрыть вкладку Совещание онлайн"
  )
 ; // "Закрыть вкладку Совещание онлайн"
 
-PROCEDURE "Выполнить с вкладкой Совещание онлайн" IN aProc
+VOID WORDWORKER  "Открыть вкладку 'Совещание онлайн' и выполнить"
  "Открыть вкладку Совещание онлайн"
  "Установить фокус в комбокс фильтра пользователей вкладки Совещание онлайн"
  "Дать системе перерисоваться"
-TRY
- aProc DO
-FINALLY
- "Закрыть вкладку Совещание онлайн"
-END 
-; // "Выполнить с вкладкой Совещание онлайн" 
+ TRY
+  ( WordToWork DO )
+ FINALLY
+  "Закрыть вкладку Совещание онлайн"
+ END
+;
 
 PROCEDURE "Удалить объект и подтвердить удаление"
  wait:Yes
@@ -536,8 +539,8 @@ PROCEDURE "Отменить все автоприменяемые фильтры"
  "Открыть вкладку Фильтры" 
  @ ( 
   IN n
-  n filternode:GetAutoApplied ? (
-   false n filternode:SetAutoApplied 
+  n FilterNode:GetAutoApplied ? (
+   false n FilterNode:SetAutoApplied 
   )
  ) focused:control:push tree:IterateNodes
  ОсновноеМеню
@@ -564,10 +567,10 @@ PROCEDURE "Установить фокус в документ"
  nil =: l_FocusedControl
  
  : FindLocally
-  DocumentText byname:control:push pop:control:SetFocus 
+  DocumentText byname:control:push pop:Control:SetFocus 
    [ 
     'Не удалось поставить фокус в документ.' 
-    ' Текущий контрол: ' l_FocusedControl pop:component:Name
+    ' Текущий контрол: ' l_FocusedControl pop:Component:Name
    ] strings:Cat
     ASSERTS
  ;
@@ -576,7 +579,7 @@ PROCEDURE "Установить фокус в документ"
   true ANYUSERTYPE DocumentText Форма_документа TryFocusOnForm 
    [ 
     'Не удалось поставить фокус в документ на форме: ' Форма_документа 
-    ' Текущий контрол: ' l_FocusedControl pop:component:Name
+    ' Текущий контрол: ' l_FocusedControl pop:Component:Name
    ] strings:Cat
     ASSERTS
  ;
@@ -591,33 +594,33 @@ PROCEDURE "Установить фокус в документ"
   'Контрол в фокусе почему-то равен nil' RAISE
  ) 
  
- l_FocusedControl pop:component:Name контрол::ContentsTree SameText ? (
+ l_FocusedControl pop:Component:Name контрол::ContentsTree SameText ? (
   FindGlobally
   EXIT
  ) 
  
- l_FocusedControl pop:component:Name контрол::lstExternalObjects SameText ? (
+ l_FocusedControl pop:Component:Name контрол::lstExternalObjects SameText ? (
   FindGlobally
   EXIT
  ) 
  
- l_FocusedControl pop:component:Name контрол::lstComments SameText ? (
+ l_FocusedControl pop:Component:Name контрол::lstComments SameText ? (
   FindGlobally
   EXIT
  ) 
  
- l_FocusedControl pop:component:Name контрол::lstBookmarks SameText ? (
+ l_FocusedControl pop:Component:Name контрол::lstBookmarks SameText ? (
   FindGlobally
   EXIT
  ) 
  
- l_FocusedControl pop:component:Name контрол::pnRight SameText ? (
+ l_FocusedControl pop:Component:Name контрол::pnRight SameText ? (
   FindGlobally
   EXIT
  
  ) // - это для сборки ААК
  
- l_FocusedControl pop:component:Name DocumentFlash SameText ? (
+ l_FocusedControl pop:Component:Name DocumentFlash SameText ? (
   EXIT
  ) 
  
@@ -652,12 +655,12 @@ PROCEDURE "В документе не должно быть комментариев"
   Если ( true ANYUSERTYPE контрол::lstComments форма::Contents TryFocusOnForm ) то
    ( OBJECT VAR "Текущий контрол"
     focused:control:push =: "Текущий контрол"
-   "Текущий контрол" pop:component:Name РАВНО контрол::lstComments ? (
+   "Текущий контрол" pop:Component:Name РАВНО контрол::lstComments ? (
     "Текущий контрол" "Узнать, виден ли контрол" ? (
      "Нажать {('Del')}"
      true =: "Было удаление комментария"
     ) // "Текущий контрол" "Узнать, виден ли контрол"
-   ) // "Текущий контрол" pop:component:Name РАВНО контрол::lstComments
+   ) // "Текущий контрол" pop:Component:Name РАВНО контрол::lstComments
   )
   иначе
    ( false =: "Есть комментарии" )
@@ -702,7 +705,7 @@ INTEGER FUNCTION "Узнать номер ноды фильтра во вкладке Фильтры" STRING IN aFilte
  ПОКА ( НЕ Сделано )
  BEGIN
   "Текущая нода дерева {(l_Tree)}" >>> l_Node
-  l_Node Node:IsLast >>> Сделано
+  l_Node "Нода является последней?" >>> Сделано
   
   Если ( l_Node Node:Text "НЕ РАВНО" aFilter ) то 
    ( "Стрелка вниз" )
@@ -719,8 +722,8 @@ STRING FUNCTION "Получить имя пользовательского фильтра"
  VAR n
  @ ( 
   >>> n
-  n filternode:IsChangeable ? (
-   n node:Caption >>> Result
+  n FilterNode:IsChangeable ? (
+   n Node:Caption >>> Result
    выходим
   ) 
  ) focused:control:push tree:IterateNodes
@@ -814,6 +817,8 @@ PROCEDURE "Перевести фокус в консультации"
  "Перевести фокус в {(контрол::FoldersTree)} на форме {(форма::FoldersTree)}"
 ; 
 
+WordAlias "Установить фокус во вкладку Мои документы" "Перевести фокус в консультации"  
+
 PROCEDURE "Закрыть вкладку консультаций"
  "Перевести фокус в консультации"
  "Закрыть текущую вкладку"
@@ -824,18 +829,18 @@ PROCEDURE "Закрыть вкладку консультаций"
 PROCEDURE "Встать на последнюю консультацию"
  OnTest
  cc:End
- контрол::FoldersTree:push pop:control:Caption 'Неподтвержденные' SameStr 'Не попали на папку неподтверждённых консультаций' ASSERTS
+ контрол::FoldersTree:push pop:Control:Caption 'Неподтвержденные' SameStr 'Не попали на папку неподтверждённых консультаций' ASSERTS
  cc:Up
- Если ( контрол::FoldersTree:push pop:control:Caption 'Ответы' SameStr ) то
+ Если ( контрол::FoldersTree:push pop:Control:Caption 'Ответы' SameStr ) то
   ( cc:TreeExpand )
   // - обрабатываем ситуацию, когда папка Отвеченные оказывается закрытой
   //   всё остальное шаманство с OnTest похоже не нужно, но пусть пока будет
  иначе
-  ( Если ( контрол::FoldersTree:push pop:control:Caption 'Неподтвержденные' SameStr ) то 
+  ( Если ( контрол::FoldersTree:push pop:Control:Caption 'Неподтвержденные' SameStr ) то 
    ( cc:Up 
-   контрол::FoldersTree:push pop:control:Caption 'Ответы' SameStr 'Не встали на папку Ответы' ASSERTS
+   контрол::FoldersTree:push pop:Control:Caption 'Ответы' SameStr 'Не встали на папку Ответы' ASSERTS
    cc:TreeExpand )
-   // иначе ( false контрол::FoldersTree:push pop:control:Caption ASSERTS )
+   // иначе ( false контрол::FoldersTree:push pop:Control:Caption ASSERTS )
    )
  cc:End
  cc:Up
@@ -895,12 +900,12 @@ PROCEDURE "Переместить медали по координатам и выполнить" INTEGER IN left_medal 
  PROCEDURE Работа_с_медалями
   CONST "Синяя медаль с конвертом" 'remUnreadConsultations'
   TRY
-   left_medal top_medal true "Синяя медаль с конвертом" byname:control:push pop:Reminder:Move
+   left_medal top_medal "Синяя медаль с конвертом" byname:control:push pop:Reminder:Move
    aProc DO
   FINALLY
     left_medal -1 * =: left_medal
     top_medal -1 * =: top_medal
-    left_medal top_medal true "Синяя медаль с конвертом" byname:control:push pop:Reminder:Move
+    left_medal top_medal "Синяя медаль с конвертом" byname:control:push pop:Reminder:Move
   END
  ; // Работа_с_медалями
  "Добавить синюю медаль консультаций и сделать {(@ Работа_с_медалями )}"
@@ -964,7 +969,7 @@ BOOLEAN FUNCTION  "Активность кнопки 'Удалить выделенные элементы'"
  "Дождаться переключения вкладок"
  OBJECT VAR "Кнопка 'Удалить выделенные элементы'"
  "Найти контрол {(контрол::bt_enEdit_opDelete)} на форме {("Главное окно")}" =: "Кнопка 'Удалить выделенные элементы'"
- "Кнопка 'Удалить выделенные элементы'" pop:control:Enabled =: Result
+ "Кнопка 'Удалить выделенные элементы'" pop:Control:Enabled =: Result
 ;
 
 PROCEDURE "Убедиться, что в Немезисе нет лишних фильтров" BOOLEAN IN aPlace
@@ -1002,7 +1007,7 @@ PROCEDURE "Установить фокус в БП после переключения баз"
  OBJECT VAR l_Form
  ANYUSERTYPE форма::NewBaseSearch vcm:FindForm 'Не найдена форма NewBaseSearch' ASSERTS
  >>> l_Form
- l_Form .TNewBaseSearchForm.ContextEdit pop:control:SetFocus
+ l_Form .TNewBaseSearchForm.ContextEdit pop:Control:SetFocus
   'Не удалось поставить фокус в БП после переключения баз' ASSERTS
 ; // "Установить фокус в БП после переключения баз"
 
@@ -1010,7 +1015,7 @@ PROCEDURE "##Установить фокус в документ после переключения баз"
  OBJECT VAR l_Form
  ANYUSERTYPE форма::Text vcm:FindForm 'Не найдена форма Text' ASSERTS
  >>> l_Form
- l_Form .TTextForm.Text pop:control:SetFocus
+ l_Form .TTextForm.Text pop:Control:SetFocus
   'Не удалось поставить фокус в документ после переключения баз' ASSERTS
 ; // "##Установить фокус в документ после переключения баз"
 
@@ -1018,12 +1023,62 @@ PROCEDURE "Установить фокус в КЗ после переключения баз"
  OBJECT VAR l_Form
  ANYUSERTYPE форма::QueryCard vcm:FindForm 'Не найдена форма QueryCard' ASSERTS
  >>> l_Form
- l_Form .TenQueryCard.Editor pop:control:SetFocus
+ l_Form .TenQueryCard.Editor pop:Control:SetFocus
   'Не удалось поставить фокус в КЗ' ASSERTS
  "Дать системе перерисоваться"
 ;
+
+PROCEDURE "##Установить фокус в Предварительный просмотр после переключения баз"
+ OBJECT VAR l_Form
+ ANYUSERTYPE форма::Preview vcm:FindForm 'Не найдена форма PreviewPanel' ASSERTS
+ >>> l_Form
+ l_Form .TefPreviewForm.PreviewPanel pop:Control:SetFocus
+  'Не удалось поставить фокус в Предварительный просмотр после переключения баз' ASSERTS
+;
+
 
 PROCEDURE "Ничего не делаем"
  // отдыхаем
 ;
 
+PROCEDURE "Удалить комментарии из документов" IN anIDDocs
+ for anIDDocs (
+  INTEGER IN aDocNum
+  "Открываем документ {( aDocNum )}"
+  "В документе не должно быть комментариев"
+  "Проверить, что нельзя перевести фокус в комментарии"
+ ) 
+;
+
+WORDWORKER "##Запомнить положение фокуса"
+ "Выполнить {(@ ( WordToWork DO ) )} и восстановить фокус"
+;
+
+INTEGER FUNCTION "Количество открытых окон Гаранта"
+ 0 >>> Result
+ PROCEDURE "Перебор главных окон" INTEGER IN hWnd
+  STRING VAR lClass
+  hWnd wnd:GetClassName >>> lClass
+  ( lClass РАВНО 'TnsMainWindow' ) 
+  ИЛИ ( lClass РАВНО 'TvcmTabbedContainerForm' ) ? 
+   ( ++! Result )  
+ ; 
+
+ @ "Перебор главных окон" IterateWindows
+ Result РАВНО 0 ! 'Открытых окон Гаранта нет!' ASSERTS
+;
+
+PROCEDURE "Построить Предварительный просмотр с последующим уничтожением формы"
+ TRY 
+  "Предварительный просмотр"
+ FINALLY
+ ANYUSERTYPE форма::PreviewForm vcm:FindForm ? (
+  OBJECT VAR l_PreviewForm
+  >>> l_PreviewForm
+  //l_PreviewForm .
+  ОсновноеМеню
+  history:DeleteBackItem
+  documentscache:Clear
+ )
+ END
+;

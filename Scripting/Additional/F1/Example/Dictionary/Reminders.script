@@ -29,7 +29,7 @@ ARRAY VAR g_RemindersWasOuted
   aReminder byname:control:push pop:Reminder:IsBaloonVisible 
    [ 'Баллон медали ' aReminder ' не появился' ] strings:Cat 
     ASSERTS
- aReminder byname:control:push pop:Reminder:FindEditor pop:control:SetFocus 'Не удалось поставить фокус в редактор баллона' ASSERTS
+ aReminder byname:control:push pop:Reminder:FindEditor pop:Control:SetFocus 'Не удалось поставить фокус в редактор баллона' ASSERTS
    VAR l_File
    [ script:FileName sysutils:ExtractFileName '' sysutils:ChangeFileExt
    '_' aReminder ] strings:Cat >>> l_File
@@ -138,27 +138,27 @@ PROCEDURE "Нажать на жёлтую медаль МВ и проверить наличие баллона"
 ;
 
 : "Установить фокус в баллон красной медали, сообщающую, что онлайн-проверка документов отключена"
- "Красная медаль, сообщающая, что онлайн-проверка документов отключена" byname:control:push pop:Reminder:FindEditor pop:control:SetFocus ASSERT
+ "Красная медаль, сообщающая, что онлайн-проверка документов отключена" byname:control:push pop:Reminder:FindEditor pop:Control:SetFocus ASSERT
 ;
 
 : "Установить фокус в баллон зелёной медали МВ"
- "Зелёная медаль МВ" byname:control:push pop:Reminder:FindEditor pop:control:SetFocus ASSERT
+ "Зелёная медаль МВ" byname:control:push pop:Reminder:FindEditor pop:Control:SetFocus ASSERT
 ;
 
 : "Установить фокус в баллон зелёной медали МВ в списке"
- "Зелёная медаль МВ в списке" byname:control:push pop:Reminder:FindEditor pop:control:SetFocus ASSERT
+ "Зелёная медаль МВ в списке" byname:control:push pop:Reminder:FindEditor pop:Control:SetFocus ASSERT
 ;
 
 : "Установить фокус в баллон синей медаль о наличии консультаций"
- "Синяя медаль о наличии консультаций" byname:control:push pop:Reminder:FindEditor pop:control:SetFocus ASSERT
+ "Синяя медаль о наличии консультаций" byname:control:push pop:Reminder:FindEditor pop:Control:SetFocus ASSERT
 ;
 
 : "Установить фокус в баллон синей медали документов на контроле в документе"
- контрол::WarnOnControl byname:control:push pop:Reminder:FindEditor pop:control:SetFocus ASSERT
+ контрол::WarnOnControl byname:control:push pop:Reminder:FindEditor pop:Control:SetFocus ASSERT
 ;
 
 : "Установить фокус в баллон жёлтой медали с восклицательным знаком"
- "Жёлтая медаль с восклицательным знаком" byname:control:push pop:Reminder:FindEditor pop:control:SetFocus ASSERT
+ "Жёлтая медаль с восклицательным знаком" byname:control:push pop:Reminder:FindEditor pop:Control:SetFocus ASSERT
 ; // "Установить фокус в баллон жёлтой медали с восклицательным знаком"
 
 : "Ставим указатель мыши на ссылку в баллоне синей медали документов на контроле в документе"
@@ -168,15 +168,15 @@ PROCEDURE "Нажать на жёлтую медаль МВ и проверить наличие баллона"
 ;
 
 : "Установить фокус в баллон красной медали с восклицательным знаком"
- "Красная медаль с восклицательным знаком" byname:control:push pop:Reminder:FindEditor pop:control:SetFocus ASSERT
+ "Красная медаль с восклицательным знаком" byname:control:push pop:Reminder:FindEditor pop:Control:SetFocus ASSERT
 ; // "Установить фокус в баллон красной медали с восклицательным знаком"
 
 PROCEDURE "Установить фокус в баллон красной медали с крестом"
- "Красная медаль с крестом" "Найти контрол по имени в стеке" "Найти редактор баллона" pop:control:SetFocus ASSERT
+ "Красная медаль с крестом" "Найти контрол по имени в стеке" "Найти редактор баллона" pop:Control:SetFocus ASSERT
 ;
 
 PROCEDURE "Установить фокус в баллон жёлтой медали, сообщающей, что к списку применены фильтры"
- "Медаль отфильтрованного списка" byname:control:push pop:Reminder:FindEditor pop:control:SetFocus ASSERT
+ "Медаль отфильтрованного списка" byname:control:push pop:Reminder:FindEditor pop:Control:SetFocus ASSERT
 ;
 
 PROCEDURE "Ставим указатель мыши на ссылку в баллоне красной медали с крестом"
@@ -193,12 +193,12 @@ PROCEDURE "Ставим указатель мыши на ссылку в баллоне жёлтой медали, сообщающей, 
 
 : "Переместить медаль по координатам и выполнить" STRING IN aReminder INTEGER IN left_medal INTEGER IN top_medal  IN aProc
   TRY
-   left_medal top_medal true aReminder "Найти контрол по имени в стеке" "Переместить медаль"
+   left_medal top_medal aReminder "Найти контрол по имени в стеке" "Переместить медаль"
    aProc DO
   FINALLY
     left_medal -1 * =: left_medal
     top_medal -1 * =: top_medal
-    left_medal top_medal true aReminder  "Найти контрол по имени в стеке" "Переместить медаль"
+    left_medal top_medal aReminder  "Найти контрол по имени в стеке" "Переместить медаль"
   END
 ; // "Переместить медаль по координатам и выполнить" 
 
@@ -219,8 +219,8 @@ WORDWORKER "Выполнить для всех линий медалей в оболочке"
   VAR comp
   I := 0
 
-  aForm pop:component:ComponentCount раз (
-   comp := ( I aForm pop:component:GetComponent )
+  aForm pop:Component:ComponentCount раз (
+   comp := ( I aForm pop:Component:GetComponent )
    если ( comp ЯВЛЯЕТСЯ class::TvgRemindersLine ) (
     comp WordToWork DO
    )
@@ -252,7 +252,7 @@ PROCEDURE "Сравнить с эталоном порядок медалей"
    aReminder pop:Reminder:Name . 
   ; // "Записать в эталон имя медали"
 
-  'Форма: ' aRemindersLine pop:component:Owner pop:component:Name Cat .
+  'Форма: ' aRemindersLine pop:Component:Owner pop:Component:Name Cat .
   "Выполнить для всех медалей линии {(aRemindersLine)}" "Записать в эталон имя медали"
   "Отделить текст в эталоне"
  ; // "Сравнить с эталоном линию"
@@ -269,7 +269,7 @@ WORDWORKER "Выполнить для всех линий с медалями"
 
 OBJECT FUNCTION "Найти линию медалей на форме" STRING IN aForm
  PROCEDURE "Линия медалей на форме" OBJECT IN aRemindersLine
-  aRemindersLine pop:component:Owner pop:component:Name РАВНО aForm ? (
+  aRemindersLine pop:Component:Owner pop:Component:Name РАВНО aForm ? (
    Если ( aRemindersLine pop:RemindersLine:Visible ) то ( 
     aRemindersLine =: Result
     "Закончить перебор контролов"
@@ -321,9 +321,39 @@ PROCEDURE "Сравнить с эталоном цвет фона надписи медали" STRING IN aNameRem
  [ 'TextBackColor медали ' aNameRem ' : 'aNameRem byname:control:push pop:Reminder:TextBackColor ] strings:Cat .
 ;
 
-// $Id: Reminders.script,v 1.66 2014/11/27 08:53:16 a.trofimov Exp $
+PROCEDURE "Установить курсор мыши на линию медалей формы со смещением " STRING IN aNameFormRL INTEGER IN aX INTEGER IN aY
+ : "Привести координаты для линии медали к экранным" OBJECT IN X OBJECT IN Y OBJECT IN aControl
+  X DO Y DO aControl pop:RemindersLine:ClientToScreen =:^ Y =:^ X
+ ;
+
+ OBJECT VAR CurrentReminderLine 
+ "Найти линию медалей на форме {(aNameFormRL)}" =: CurrentReminderLine 
+ INTEGER VAR m_left 0 >>> m_left
+ INTEGER VAR m_top 0 >>> m_top
+ "Привести координаты {( @ m_left @ m_top )} для линии медали {( CurrentReminderLine )} к экранным"
+ m_left aX + =: m_left 
+ m_top aY + =: m_top
+ "Установить курсор мыши по координатам {( m_left m_top )}"
+;
+
+// $Id: Reminders.script,v 1.71 2015/03/12 11:18:12 lulin Exp $
 
 // $Log: Reminders.script,v $
+// Revision 1.71  2015/03/12 11:18:12  lulin
+// - перетряхиваем слова.
+//
+// Revision 1.70  2015/03/10 17:07:30  lulin
+// - перетряхиваем слова.
+//
+// Revision 1.69  2015/03/06 18:00:28  lulin
+// - перетряхиваем слова.
+//
+// Revision 1.68  2015/03/06 17:52:01  lulin
+// - перетряхиваем слова.
+//
+// Revision 1.67  2015/01/20 11:32:58  a.trofimov
+// Обновил словари
+//
 // Revision 1.66  2014/11/27 08:53:16  a.trofimov
 // Новый параметр: "Импортировать консультацию"
 //

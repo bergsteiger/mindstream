@@ -11,9 +11,9 @@ OBJECT FUNCTION "Найти окно по имени для контрола" STRING IN "Имя окна" OBJECT I
 
  ПОКА ( Result pop:object:ClassName "НЕ РАВНО" "Имя класса главного окна" )
  BEGIN
-  Result pop:control:GetAnotherParentForm =: Result
+  Result pop:Control:GetAnotherParentForm =: Result
   Result pop:object:IsNil ! 
-   [ 'Главное окно не найдено: ' "Имя окна" ' для ' "Контрол" pop:component:Name ':' "Контрол" pop:object:ClassName ] strings:Cat 
+   [ 'Главное окно не найдено: ' "Имя окна" ' для ' "Контрол" pop:Component:Name ':' "Контрол" pop:object:ClassName ] strings:Cat 
     ASSERTS
  END
 ; // "Найти окно по имени для контрола"

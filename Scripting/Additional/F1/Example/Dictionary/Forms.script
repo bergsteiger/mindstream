@@ -8,6 +8,12 @@ OBJECT FUNCTION "Главное окно"
  "Найти окно по имени {(форма::MainWindow)}" =: Result
 ; // "Главное окно"
 
+OBJECT FUNCTION "Главное окно с вкладками"
+ focused:control:push pop:Control:GetTopParentForm pop:Control:GetAnotherParentForm =: Result
+ // убрать потом pop:Control:GetAnotherParentForm
+ Result pop:object:IsNil ! 'Главное окно с вкладками не найдено!' ASSERTS 
+;
+
 OBJECT FUNCTION "Найти главное окно для контрола" OBJECT IN "Контрол"
  "Найти окно по имени {(форма::MainWindow)} для контрола {("Контрол")}" =: Result
 ;
@@ -21,28 +27,24 @@ OBJECT FUNCTION "Диалог сохранения в Мои документы"
  'Мои документы (Сохранить как...)' "Найти окно по имени Caption" "Найти контрол по дескриптору в стеке" >>> Result
 ;
 
-OBJECT FUNCTION "Диалог редактора стилей"
- 'Редактор стилей' "Найти окно по имени Caption" "Найти контрол по дескриптору в стеке" >>> Result
-;
-
-OBJECT FUNCTION "Измененный диалог редактора стилей"
- 'Редактор стилей *' "Найти окно по имени Caption" "Найти контрол по дескриптору в стеке" >>> Result
+OBJECT FUNCTION "Диалог Редактор стилей"
+ "Найти окно по имени {(форма::StyleEditorContainer)}" >>> Result
 ;
 
 OBJECT FUNCTION "Текстовое окно редактора стилей"
- 'Editor' "Диалог редактора стилей" "Найти контрол по имени на форме" >>> Result
+ 'Editor' "Диалог Редактор стилей" "Найти контрол по имени на форме" >>> Result
 ;
 
 OBJECT FUNCTION "Диалог Условия использования"
- 'Условия использования' "Найти окно по имени Caption" "Найти контрол по дескриптору в стеке" >>> Result
+ "Найти окно по имени {(форма::EULA)}" >>> Result
 ;
 
 OBJECT FUNCTION "Диалог Совет дня"
- 'Совет дня' "Найти окно по имени Caption" "Найти контрол по дескриптору в стеке" >>> Result
+ "Найти окно по имени {(форма::StartupTips)}" >>> Result
 ;
 
 OBJECT FUNCTION "Диалог выключения МВ"
- 'Выключить Машину времени / Изменить дату' "Найти окно по имени Caption" "Найти контрол по дескриптору в стеке" >>> Result
+ "Найти окно по имени {(форма::TurnOffTimeMachine)}" >>> Result
 ;
 
 OBJECT FUNCTION "Форма ППС"
@@ -52,12 +54,12 @@ OBJECT FUNCTION "Форма ППС"
 
 BOOLEAN FUNCTION "Существует ли в главном окне форма ?" STRING IN aForm 
  OBJECT VAR "Форма"
- aForm "Главное окно" pop:control:FindControlByName =: "Форма"
+ aForm "Главное окно" pop:Control:FindControlByName =: "Форма"
  "Форма" pop:object:IsNil ! >>> Result
 ;
 
 OBJECT FUNCTION "Диалог Регистрационные данные"
- 'Регистрационные данные' "Найти окно по имени Caption" "Найти контрол по дескриптору в стеке" >>> Result
+ "Найти окно по имени {(форма::SelfInfo)}" >>> Result
 ;
 
 OBJECT FUNCTION "Форма с флешем"
@@ -65,4 +67,12 @@ OBJECT FUNCTION "Форма с флешем"
   [ 'Фокус не во флеше, а в ' "Контрол в фокусе" "Имя компонента" ' : ' "Контрол в фокусе" pop:object:ClassName ' !' ] strings:Cat 
    ASSERTS
  "Контрол в фокусе" "Получить родительскую форму" =: Result
+;
+
+OBJECT FUNCTION "Отдоченная форма"
+ OBJECT VAR aNavigatorForm
+ "Контрол в фокусе" "Получить родительскую форму" =: aNavigatorForm
+ aNavigatorForm ЯВЛЯЕТСЯ class::TnscFloatingWindow 'Работаем не с плавающим окном!' ASSERTS
+ "Проверить, что контрол {(aNavigatorForm)} видимый"
+ aNavigatorForm =: Result
 ;

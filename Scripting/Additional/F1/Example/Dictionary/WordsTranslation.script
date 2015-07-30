@@ -86,9 +86,9 @@ WordAlias "Убрать хинт" application:CancelHint
 
 //byhandle:control:push
 OBJECT FUNCTION "Найти контрол по дескриптору" INTEGER IN aHandle
- aHandle byhandle:control:push >>> Result
+ aHandle Control:ByHandle >>> Result
 ;
-WordAlias "Найти контрол по дескриптору в стеке" byhandle:control:push
+WordAlias "Найти контрол по дескриптору в стеке" Control:ByHandle
 
 //byname:control:push
 OBJECT FUNCTION "Найти контрол по имени" STRING IN aName
@@ -194,6 +194,7 @@ WordAlias "Переместиться в начало строки" cc:Home
 
 //cc:LastPage
 WordAlias "В конец документа" cc:LastPage
+WordAlias "В конец КЗ" cc:LastPage
 
 //cc:Left
 WordAlias "Влево" cc:Left
@@ -1079,7 +1080,7 @@ WordAlias "Симулировать прокрутку колесом мыши вверх раза" "Симулировать прокрут
 //Node:IsFirst
 
 //Node:IsLast
-WordAlias "Предыдущая нода" Node:IsLast
+WordAlias "Нода является последней?" Node:IsLast
 
 //Node:Text
 WordAlias "Текст ноды" Node:Text
@@ -1127,16 +1128,16 @@ WordAlias "Установить значение в комбобоксе" pop:ComboBox:SetItemIndex
 
 //pop:ComboTree:CurrentNode
 //pop:Compiler:SetToCtx
-//pop:component:ComponentCount
+//pop:Component:ComponentCount
 //pop:component:FindComponent
-//pop:component:GetComponent
+//pop:Component:GetComponent
 
-//pop:component:Name
-WordAlias "Имя компонента" pop:component:Name
+//pop:Component:Name
+WordAlias "Имя компонента" pop:Component:Name
 
 //pop:control:CanFocus
 BOOLEAN FUNCTION "Может ли контрол получить фокус" OBJECT IN aControl
- aControl pop:control:CanFocus >>> Result
+ aControl pop:Control:CanFocus >>> Result
 ;
 
 : "Убедиться, что контрол может получить фокус" OBJECT IN aControl
@@ -1153,7 +1154,7 @@ PROCEDURE "Кликнуть" OBJECT IN aControl
   )
  иначе
   ( 
-   aControl pop:control:Click
+   aControl pop:Control:Click
   ) 
 ;
 
@@ -1162,24 +1163,24 @@ PROCEDURE "Кликнуть" OBJECT IN aControl
 
 //pop:control:Enabled
 PROCEDURE "Проверить, активен ли контрол ?" OBJECT IN aControl
- aControl pop:control:Enabled .
+ aControl pop:Control:Enabled .
 ; // "Проверить, активен ли контрол?" 
 
 BOOLEAN FUNCTION "Убедиться, что контрол неактивен" OBJECT IN aControl
- aControl pop:control:Enabled ! >>> Result
+ aControl pop:Control:Enabled ! >>> Result
 ; // "Убедиться, что контрол неактивен"
 
-WordAlias "Убедиться, что контрол активен" pop:control:Enabled
+WordAlias "Убедиться, что контрол активен" pop:Control:Enabled
 
 //pop:control:FindControlByName
-WordAlias "Найти контрол по имени на форме" pop:control:FindControlByName
+WordAlias "Найти контрол по имени на форме" pop:Control:FindControlByName
 
 //pop:control:FindVGControlByName
-WordAlias "Найти VG-контрол по имени" pop:control:FindVGControlByName
+WordAlias "Найти VG-контрол по имени" pop:Control:FindVGControlByName
 
 //pop:control:Focused
 BOOLEAN FUNCTION "Фокус находится в контроле" OBJECT IN aControl
- aControl pop:control:Focused >>> Result
+ aControl pop:Control:Focused >>> Result
 ;
 
 : "Убедиться, что фокус находится в контроле" OBJECT IN aControl
@@ -1187,11 +1188,11 @@ BOOLEAN FUNCTION "Фокус находится в контроле" OBJECT IN aControl
 ;
 
 //pop:control:GetAnotherParentForm
-WordAlias "Получить родительскую форму" pop:control:GetAnotherParentForm
+WordAlias "Получить родительскую форму" pop:Control:GetAnotherParentForm
 
 //pop:control:GetColor
 : "Сравнить цвет контрола с эталоном"
- pop:control:GetColor .
+ pop:Control:GetColor .
 ; // "Сравнить цвет контрола с эталоном"
 
 //pop:control:GetControl
@@ -1201,31 +1202,31 @@ WordAlias "Получить шрифт контрола" pop:control:GetFont
 
 //pop:control:GetHandle
 //pop:control:GetHeight
-WordAlias "Померить высоту" pop:control:GetHeight
+WordAlias "Померить высоту" pop:Control:GetHeight
 
 //pop:control:GetHint
 //pop:control:GetLeft
-WordAlias "Померить отступ слева" pop:control:GetLeft
+WordAlias "Померить отступ слева" pop:Control:GetLeft
 
 //pop:control:GetMainForm
-WordAlias "Узнать главную форму" pop:control:GetMainForm
+WordAlias "Узнать главную форму" pop:Control:GetMainForm
 
 //pop:control:GetParent
 OBJECT FUNCTION "Родительский объект" OBJECT IN aControl 
  Если ( aControl ЯВЛЯЕТСЯ class::TvgReminder ) то
   (
-   aControl pop:component:Owner pop:component:Owner =: Result
+   aControl pop:Component:Owner pop:Component:Owner =: Result
   )
  иначе
   ( 
-   aControl pop:control:GetParent =: Result
+   aControl pop:Control:Parent =: Result
   ) 
 ;
  
 WordAlias "Перейти к родительской форме" "Родительский объект"
 
 //pop:control:GetParentForm
-WordAlias "Родительская форма контрола" pop:control:GetParentForm
+WordAlias "Родительская форма контрола" pop:Control:GetParentForm
 
 //pop:control:GetPopupMenu
 //pop:control:GetTop
@@ -1238,26 +1239,26 @@ INTEGER FUNCTION "Померить отступ сверху"  OBJECT IN aControl
   )
  иначе
   (
-   aControl pop:control:GetTop =: Result
+   aControl pop:Control:GetTop =: Result
   )
 ;  
 
 //pop:control:GetTopParentForm
-WordAlias "Нижняя форма" pop:control:GetTopParentForm
+WordAlias "Нижняя форма" pop:Control:GetTopParentForm
 
 //pop:control:GetWidth
-WordAlias "Померить ширину" pop:control:GetWidth
+WordAlias "Померить ширину" pop:Control:GetWidth
 
 //pop:control:Hide
 
 //pop:control:HScrollerVisible
-WordAlias "Узнать, есть ли у контрола горизонтальный скроллер" pop:control:HScrollerVisible
+WordAlias "Узнать, есть ли у контрола горизонтальный скроллер" pop:Control:HScrollerVisible
 
 //pop:control:MouseWheelDown
 //pop:control:MouseWheelUp
 
 //pop:control:Name
-WordAlias "Узнать имя контрола" pop:control:Name
+WordAlias "Узнать имя контрола" pop:Control:Name
 
 //pop:control:ScreenToClient
 
@@ -1280,14 +1281,14 @@ WordAlias "Узнать положение скроллера" pop:control:ScrollInfo:Position
 
 //pop:control:SetFocus
 : "Установить фокус" OBJECT IN aControl
- aControl pop:control:SetFocus 'Не удалось установить фокус' ASSERTS
+ aControl pop:Control:SetFocus 'Не удалось установить фокус' ASSERTS
 ; // "Установить фокус"
 
 WordAlias "Установить фокус в" "Установить фокус"
 
 //pop:control:SetHeight
 PROCEDURE "Установить высоту" INTEGER IN aHeight OBJECT IN aControl
- aHeight aControl pop:control:SetHeight
+ aHeight aControl pop:Control:SetHeight
  OnTest
 ; // "Установить высоту"
 
@@ -1296,7 +1297,7 @@ PROCEDURE "Установить высоту" INTEGER IN aHeight OBJECT IN aControl
 
 //pop:control:SetWidth
 PROCEDURE "Установить ширину" INTEGER IN aWith OBJECT IN aControl
- aWith aControl pop:control:SetWidth
+ aWith aControl pop:Control:SetWidth
  OnTest
 ; // "Установить ширину"
 
@@ -1310,7 +1311,7 @@ BOOLEAN FUNCTION "Узнать, виден ли контрол" OBJECT IN aControl
   )
  иначе
   ( 
-   aControl pop:control:Visible =: Result
+   aControl pop:Control:Visible =: Result
   ) 
 ; 
 
@@ -1322,14 +1323,14 @@ BOOLEAN FUNCTION "Узнать, виден ли контрол" OBJECT IN aControl
  aControl "Узнать, виден ли контрол" 'Данный контрол невидимый' ASSERTS
 ;
 
-//pop:control:VScrollerVisible
+//pop:WinControl:VScrollerVisible
 : "Проверить, что у контрола есть вертикальный скроллер" OBJECT IN aControl
- aControl  pop:control:VScrollerVisible 'У данного контрола нет скроллера' ASSERTS
+ aControl  pop:Control:VScrollerVisible 'У данного контрола нет скроллера' ASSERTS
 ;
 : "Проверить, что у контрола нет вертикального скроллера" OBJECT IN aControl
- aControl  pop:control:VScrollerVisible ! 'У данного контрола есть скроллер!' ASSERTS
+ aControl  pop:Control:VScrollerVisible ! 'У данного контрола есть скроллер!' ASSERTS
 ;
-WordAlias "Узнать, есть ли у контрола вертикальный скроллер" pop:control:VScrollerVisible
+WordAlias "Узнать, есть ли у контрола вертикальный скроллер" pop:Control:VScrollerVisible
 
 //pop:editor:AtTop
 //pop:editor:BlockResize
@@ -1472,7 +1473,7 @@ WordAlias "Узнать заголовок контрола во вкладке" pop:HideField:GetCaption
 //pop:Lister:FooterCaption
 
 //pop:Lister:GetCurrent
-WordAlias "Узнать номер позиции фокуса в списке" pop:Lister:GetCurrent
+WordAlias "Узнать номер позиции фокуса в списке" pop:Lister:Current
 
 //pop:Lister:GetSelected
 WordAlias "Узнать, выделен ли элемент в списке" pop:Lister:GetSelected
@@ -1627,7 +1628,10 @@ WordAlias "Сравнить выделенные элементы списка в нужном формате" pop:TreeView:Ex
 //REDEFINITION
 //REFERENCE
 //RenameFile
+
 //RestoreSettings
+WordAlias "Восстановить настройки" RestoreSettings
+
 //RGB2String
 //ROLL
 //ROT
@@ -1790,8 +1794,10 @@ WordAlias "Узнать, выбран ли VG-контрол" vg:control:GetIsChecked
 //vg:control:Width
 //vg:control:Height
 //vg:control:LeftInScene
+//vg:control:Text
 //vg:control:TopInScene
 //vg:control:Scene
+//vg:control:Visible
 //vg:ComboBox:ItemHeight
 //VIRTUAL
 //wait:Cancel
@@ -2529,7 +2535,10 @@ WordAlias "Вернуться в список" оп::Документ_Вернуться_в_список
 WordAlias "Открыть графическую копию официальной публикации" оп::Документ_Графическая_копия_официальной_публикации
 
 //оп::Документ_Изменения_в_документе
+
 //оп::Документ_Информация_о_документе
+WordAlias "Открыть информацию о документе в списке" оп::Документ_Информация_о_документе
+
 //оп::Документ_Комментарии
 
 //оп::Документ_Не_нравится
@@ -2557,7 +2566,10 @@ WordAlias "Вызываем ОИД" "Обзор изменений документа"
 WordAlias "Открыть документ в текущем окне" оп::Документ_Открыть_документ_в_текущем_окне
 
 //оп::Документ_Перейти_на_закладку
+
 //оп::Документ_Печатать_документ/справку
+WordAlias "Печатать документ/справку" оп::Документ_Печатать_документ/справку
+
 //оп::Документ_Печать
 //оп::Документ_Печать...
 //оп::Документ_Показать/скрыть_комментарии_ГАРАНТа
@@ -3058,7 +3070,10 @@ WordAlias "Вставить строку в таблицу" оп::Таблица_Вставить_строку
 WordAlias "Вставить таблицу" оп::Таблица_Вставить_таблицу
 
 //оп::Таблица_Удалить_колонку
+
 //оп::Таблица_Удалить_строку
+WordAlias "Удалить строку" оп::Таблица_Удалить_строку
+
 //оп::Текст_Выделить_текущее_слово
 //оп::Текст_Выделить_текущий_абзац
 

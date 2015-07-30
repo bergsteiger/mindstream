@@ -87,3 +87,9 @@ CONST nfExpanded $0008
  nfExpanded
  //FM_OPEN 
 ;
+
+STRING FUNCTION Ещё
+ контрол::MoreTab =: Result
+;
+
+CONST "Дерево редакций" 'RedactionTree'

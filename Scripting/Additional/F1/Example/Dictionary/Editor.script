@@ -103,7 +103,7 @@ INTEGER VAR g_EtalonCount
  Editor pop:editor:CursorCoordsToScreen >>> y >>> x
  x X0 + >>> x
  y Y0 + >>> y
- x y Editor pop:control:ScreenToClient
+ x y Editor pop:Control:ScreenToClient
 ;
 
 : "Скроллируем вниз раз" INTEGER IN aCount
@@ -246,3 +246,7 @@ PROCEDURE "Выделить первые 2 ячейки в текущей таблице"
  0 0 1 0 focused:control:push "Выделить ячейки"
 ;
 
+PROCEDURE "Убедиться, что фокус находится в комментарии"
+ "Убедиться, что фокус в редакторе"
+ "Контрол в фокусе" "Получить шрифт контрола"  "Узнать цвет фона" РАВНО 14737407 'Фокус не в комментарии!' ASSERTS
+;

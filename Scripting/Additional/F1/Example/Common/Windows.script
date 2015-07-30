@@ -1,6 +1,6 @@
 PROCEDURE "##Подготовить главное окно к тесту"
- 0 "Главное окно" pop:control:SetTop
- 0 "Главное окно" pop:control:SetLeft
+ 0 "Главное окно" pop:Control:SetTop
+ 0 "Главное окно" pop:Control:SetLeft
 ;
 
 PROCEDURE "Уменьшить окно" OBJECT IN "Окно"
@@ -33,8 +33,8 @@ PROCEDURE "Сделать с изменением состояния и размеров окна" OBJECT IN aProc OBJEC
   aProc DO
  FINALLY
   aState aForm pop:form:SetWindowState
-  L aForm pop:control:SetLeft
-  T aForm pop:control:SetTop
+  L aForm pop:Control:SetLeft
+  T aForm pop:Control:SetTop
   W aForm "Установить ширину"
   H aForm "Установить высоту"
  END
@@ -42,7 +42,7 @@ PROCEDURE "Сделать с изменением состояния и размеров окна" OBJECT IN aProc OBJEC
 
 INTEGER FUNCTION "Сохранить активное окно"
   //form:GetHandle
-  focused:control:push pop:control:GetTopParentForm pop:control:GetHandle >>> Result 
+  focused:control:push pop:Control:GetTopParentForm pop:Control:Handle >>> Result 
 ;
 
 WORDWORKER "Открыть новое окно Гаранта и выполнить"

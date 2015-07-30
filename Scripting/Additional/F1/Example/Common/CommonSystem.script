@@ -9,14 +9,14 @@ USES
 
 INTEGER FUNCTION "Количество элементов статусбара окна" OBJECT IN aWindow
  OBJECT VAR "Статусбар"
- контрол::StatusBar aWindow pop:control:FindControlByName =: "Статусбар"
+ контрол::StatusBar aWindow pop:Control:FindControlByName =: "Статусбар"
  "Статусбар" pop:object:IsNil ! 'Не удалось найти на статусбаре этот элемент ' ASSERTS
- "Статусбар" pop:control:ControlCount =: Result
+ "Статусбар" pop:Control:ControlCount =: Result
 ; // "Количество элементов статусбара"
 
 OBJECT FUNCTION "Элемент статусбара окна" INTEGER IN aItem OBJECT IN aWindow
  OBJECT VAR "Статусбар"
- контрол::StatusBar aWindow pop:control:FindControlByName =: "Статусбар"
+ контрол::StatusBar aWindow pop:Control:FindControlByName =: "Статусбар"
  aItem "Статусбар" StatusBar:OrderedControl =: Result
   Result pop:object:IsNil ! 'Не удалось найти на статусбаре этот элемент ' ASSERTS
 ;
@@ -68,7 +68,7 @@ PROCEDURE "Сравнить статусбар окна с эталоном" OBJECT IN aWindow
  "Количество элементов статусбара окна {(aWindow)}" 1 - LOOP (
  "Элемент {(item)} статусбара окна {(aWindow)}" =: "Панель статусбара"
  Если ( "Панель статусбара" "Узнать, виден ли контрол" ) то 
-  ( "Панель статусбара" pop:control:Caption =: str1
+  ( "Панель статусбара" pop:Control:Caption =: str1
    Если ( str1 "НЕ РАВНО" '' ) то
     ( str1 cSeparator string:Split =: str2 =: str1
     Если ( str2 "НЕ РАВНО" '' ) то
@@ -77,7 +77,7 @@ PROCEDURE "Сравнить статусбар окна с эталоном" OBJECT IN aWindow
     str2 sysutils:ExtractFileName >>> str2
     [ str1 cSeparator ' ' str2 ] strings:Cat >>> str1
      )
-      Если ( "Панель статусбара" pop:control:Enabled ) то
+      Если ( "Панель статусбара" pop:Control:Enabled ) то
        ( str1 . )
       иначе
        ( str1 ' [Запрещён]' Cat . )
@@ -139,7 +139,7 @@ PROCEDURE "Сравнить содержимое тулбаров с эталоном расширенно" BOOLEAN IN aCheck
 
  PROCEDURE Действия OBJECT IN aObj
   ( aObj ЯВЛЯЕТСЯ class::TvcmToolbar ) ? (
-   ( aObj "Узнать, виден ли контрол" И ( aObj pop:control:ControlCount БОЛЬШЕ 1 ) ) ? (
+   ( aObj "Узнать, виден ли контрол" И ( aObj pop:Control:ControlCount БОЛЬШЕ 1 ) ) ? (
     aObj .
     'Order = ' 'DockRow' aObj pop:object:GetOrdProp IntToStr Cat .
     '---------------' .
@@ -147,7 +147,7 @@ PROCEDURE "Сравнить содержимое тулбаров с эталоном расширенно" BOOLEAN IN aCheck
     ( aControl "НЕ ЯВЛЯЕТСЯ" class::Ttb97MoreButton ) ? (
       aControl .
       ( aControl "НЕ ЯВЛЯЕТСЯ" class::TvcmComboBox ) ? (
-       aControl pop:control:Caption .
+       aControl pop:Control:Caption .
        aCheckEnabled ? ( 'Активность:' aControl "Убедиться, что контрол активен"  ToPrintable Cat . ) 
       )
      )
@@ -157,20 +157,11 @@ PROCEDURE "Сравнить содержимое тулбаров с эталоном расширенно" BOOLEAN IN aCheck
   )
  ;
 
- PROCEDURE "Получить содержимое тулбаров"
-  "Главное окно" "выполнить для всех контролов" Действия
- ;
  OnTest
- "Выставить форме размеры {(1400 900)} и {(@ "Получить содержимое тулбаров")}"
+ "Главное окно" "выполнить для всех контролов" Действия
 ; // "Сравнить содержимое тулбаров с эталоном расширенно"
 
-: "Сравнить содержимое тулбаров с эталоном"
- "Сравнить содержимое тулбаров с эталоном расширенно {(false)}"
-;
 
-: "Сравнить содержимое тулбаров с эталоном полностью"
- "Сравнить содержимое тулбаров с эталоном расширенно {(true)}"
-;
 
 : "Перебрать иерархию вложенности контролов" OBJECT IN aControl IN aProc
  ПОКА ( aControl pop:object:IsNil ! )
@@ -186,9 +177,9 @@ PROCEDURE "Напечатать иерархию вложенности контролов" OBJECT IN aControl
   [ 
    Если ( aControl ЯВЛЯЕТСЯ class::TvcmForm ) то
     // - т.к. у формы к Name могут приклеиваться циферки, которые всю малину портят
-    ( aControl pop:vcm:form:FormID )
+    ( aControl pop:Form:FormID )
    иначе
-    ( aControl pop:component:Name ) 
+    ( aControl pop:Component:Name ) 
     //class::TvcmForm aControl pop:object:Inherits
    ' : ' 
    aControl pop:object:ClassName 
@@ -205,10 +196,10 @@ PROCEDURE "Проверить иерархию вложенности текущего контрола"
 PROCEDURE "Проверить, что высоты контролов больше 0" OBJECT IN aControl
 
  : "Печатаем контрол" IN aControl
-  aControl pop:control:GetHeight >0 
+  aControl pop:Control:GetHeight >0 
    [ 
     'Высота контрола ' 
-    aControl pop:component:Name  ' : '
+    aControl pop:Component:Name  ' : '
     aControl pop:object:ClassName 
     ' почему-то меньше или равна 0' 
    ] strings:Cat ASSERTS
@@ -235,7 +226,7 @@ PROCEDURE "Сравнить содержимое тулбара объекта с эталоном" STRING IN aForm STRIN
  PROCEDURE Действия OBJECT IN aObj
   ( ( aObj ЯВЛЯЕТСЯ class::TvcmToolbar ) И
   ( aObj "Имя компонента" РАВНО aMainObject ) ) ? (
-   ( aObj "Узнать, виден ли контрол" И ( aObj pop:control:ControlCount БОЛЬШЕ 1 ) ) ? (
+   ( aObj "Узнать, виден ли контрол" И ( aObj pop:Control:ControlCount БОЛЬШЕ 1 ) ) ? (
     aObj .
     'Order = ' 'DockRow' aObj pop:object:GetOrdProp IntToStr Cat .
     '---------------' .
@@ -246,7 +237,7 @@ PROCEDURE "Сравнить содержимое тулбара объекта с эталоном" STRING IN aForm STRIN
        Если ( aControl ЯВЛЯЕТСЯ class::TvcmSeparatorDef ) то
         ( 'Разделитель' . )
        иначе (
-        aControl pop:control:Caption .
+        aControl pop:Control:Caption .
         'Активность:' aControl "Убедиться, что контрол активен" ToPrintable Cat .
         'Кнопка нажата: ' "Узнать численную {('Down')} переменную объекта {(aControl)}" 0 ?!= ToPrintable Cat . 
        )      
@@ -264,15 +255,26 @@ PROCEDURE "Сравнить содержимое тулбара объекта с эталоном" STRING IN aForm STRIN
  "Форма с тулбаром" "выполнить для всех контролов" Действия
 ;
 
-PROCEDURE "Подготовить окно Гаранта (запомнить состояние и размеры) к сравнению формы с эталоном и выполнить для ее открытия и сравнения " OBJECT IN aProc
-
- PROCEDURE Установить_размеры_окну
-  "Выставить форме размеры {( 1150 800 )} и {(aProc)}"
+VOID WORDWORKER "Подготовить главное окно к тесту (установить ему размеры ) и выполнить" INTEGER IN formW INTEGER IN formH
+ PROCEDURE Действия
+  "Выставить форме размеры {( formW formH )} и {(@ ( WordToWork DO ) )}"
  ; 
 
- "Сделать {(@ Установить_размеры_окну )} с изменением состояния и размеров окна {("Главное окно")}"
+ "Сделать {(@ Действия )} с изменением состояния и размеров окна {("Главное окно")}"
 ;
 
 VOID WORDWORKER "##Установить оболочке единые размеры и выполнить"
- "Подготовить окно Гаранта (запомнить состояние и размеры) к сравнению формы с эталоном и выполнить для ее открытия и сравнения {(@ ( WordToWork DO ) )}"
+ "Подготовить главное окно к тесту (установить ему размеры {( 1150 800 )} ) и выполнить" (
+  WordToWork DO
+ )
+;
+
+PROCEDURE "Сравнить содержимое тулбаров с эталоном"
+// "Подготовить главное окно к тесту (установить ему размеры {( 1400 900 )} ) и выполнить" (
+  "Сравнить содержимое тулбаров с эталоном расширенно {(false)}"
+// )
+;
+
+PROCEDURE "Сравнить содержимое тулбаров с эталоном полностью"
+ "Сравнить содержимое тулбаров с эталоном расширенно {(true)}"
 ;

@@ -9,13 +9,13 @@ PROCEDURE "Отделить текст в эталоне"
 : "Выполнить и восстановить фокус" OBJECT IN aProc
  INTEGER VAR l_Control
  OBJECT VAR l_Ctrl
- focused:control:push pop:control:GetHandle >>> l_Control
+ focused:control:push pop:Control:Handle >>> l_Control
  // - запоминаем текущий контрол
  TRY 
   aProc DO
  FINALLY
   "Найти контрол по дескриптору {(l_Control)}" >>> l_Ctrl
-  l_Ctrl pop:control:SetFocus 'Не смогли восстановить фокус' ASSERTS
+  l_Ctrl pop:Control:SetFocus 'Не смогли восстановить фокус' ASSERTS
   "Установить фокус в {(l_Ctrl)}"
   // - восстанавливаем фокус
  END
@@ -160,7 +160,7 @@ WordAlias "Узнать, виден ли хинт"  application:IsHintVisible
 ;
 
 : "Заголовок контрола" 
- pop:control:Caption
+ pop:Control:Caption
  "Заменить непечатаемые символы"
 ;
 
