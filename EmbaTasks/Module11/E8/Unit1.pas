@@ -34,23 +34,41 @@ begin
 end;
 
 procedure TfrmMain.Draw;
-procedure DrawSquare(aStartX, aStartY : integer; aSide : integer);
-begin
-  pbxEx.Canvas.MoveTo(aStartX, aStartY);
-  pbxEx.Canvas.LineTo(aStartX + aSide, aStartY);
-  pbxEx.Canvas.LineTo(aStartX + aSide, aStartY + aSide);
-  pbxEx.Canvas.LineTo(aStartX, aStartY + aSide);
-  pbxEx.Canvas.LineTo(aStartX, aStartY);
-end;
+const
+  c_MinSide = 50;
+  c_MaxSide = 300;
+  procedure DrawSquare(aStartX, aStartY : integer; aSide : integer);
+  begin
+    pbxEx.Canvas.MoveTo(aStartX, aStartY);
+    pbxEx.Canvas.LineTo(aStartX + aSide, aStartY);
+    pbxEx.Canvas.LineTo(aStartX + aSide, aStartY + aSide);
+    pbxEx.Canvas.LineTo(aStartX, aStartY + aSide);
+    pbxEx.Canvas.LineTo(aStartX, aStartY);
+  end;
 var
-  NSquare: integer;
-
+  NSquare,
+  Side,
+  Step,
+  I, X, Y: integer;
 begin
   pbxEx.Canvas.Pen.Color:= clBlack;
   pbxEx.Canvas.Pen.Width:= 2;
 
+  NSquare := StrToInt(edtNSquare.Text);
 
-  DrawSquare(100, 100, 50);
+  Side := c_MaxSide;
+  X := 50;
+  Y := 50;
+
+  Step := (c_MaxSide - c_MinSide) div NSquare;
+
+  for I := 1 to NSquare do
+  begin
+    DrawSquare(X, Y, Side);
+    X := X + Step div 2;
+    Y := Y + Step div 2;
+    Side := Side - Step;
+  end;
 end;
 
 
