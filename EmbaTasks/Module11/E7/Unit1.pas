@@ -11,8 +11,12 @@ type
     pbxEx: TPaintBox;
     pnlButtons: TPanel;
     btnDraw: TButton;
-    lblNPoints: TLabel;
-    edtNPoints: TEdit;
+    lblA: TLabel;
+    edtA: TEdit;
+    lblB: TLabel;
+    edtB: TEdit;
+    lblC: TLabel;
+    edtC: TEdit;
     procedure btnDrawClick(Sender: TObject);
   private
     { Private declarations }
@@ -35,23 +39,37 @@ end;
 
 procedure TfrmMain.Draw;
 var
-  Radius,
-  NPoints : integer;
+  A, B, C : Integer;
 
-  LeftTop,
-  RightBottom,
-  CenterPoint,
-  StartPoint,
-  EndPoint : TPoint;
-
-  Angle : Double;
+  pntA,
+  pntB,
+  pntC,
+  pntCenter : TPoint;
 begin
   pbxEx.Canvas.Pen.Color:= clBlack;
   pbxEx.Canvas.Pen.Width:= 2;
-  pbxEx.Canvas.MoveTo(pbxEx.Width div 2, pbxEx.Height div 2);
 
-  pbxEx.Canvas.LineTo(pbxEx.Width div 2 - 20, pbxEx.Height div 2 - 20);
+  pntCenter.X := pbxEx.Width div 2;
+  pntCenter.Y := pbxEx.Height div 2;
 
+  A := StrToInt(edtA.Text);
+  B := StrToInt(edtB.Text);
+  C := StrToInt(edtC.Text);
+
+  if (A + B <= C) or
+     (A + C <= B) or
+     (B + C <= A) then
+    ShowMessage('Из этих отрезков нельзя построить треугольник')
+  else
+  begin
+    pntA.X := pntCenter.X;
+    pntA.Y := pntCenter.Y;
+    pntC.X := pntCenter.X + C;
+    pntC.Y := pntCenter.Y;
+
+    pbxEx.Canvas.MoveTo(pntA.X, pntA.Y);
+    pbxEx.Canvas.LineTo(pntC.X, pntC.Y);
+  end;
 end;
 
 
