@@ -44,7 +44,7 @@ var
   EndPoint : TPoint;
 
   Hour, Minute : Integer;
-  Angle : Double;
+  Angle, Coeff : Double;
 begin
   pbxEx.Canvas.Pen.Color:= clBlack;
   pbxEx.Canvas.Pen.Width:= 2;
@@ -52,6 +52,7 @@ begin
   CenterPoint.X := pbxEx.Width div 2;
   CenterPoint.Y := pbxEx.Height div 2;
 
+  // Drawing clock
   pbxEx.Canvas.Ellipse(CenterPoint.X - c_Radius, CenterPoint.Y - c_Radius,
                        CenterPoint.X + c_Radius, CenterPoint.Y + c_Radius);
 
@@ -69,15 +70,28 @@ begin
     Angle := Angle + Pi / 6;
   end;
 
+  // Drawing hour hand
   Hour := HourOf(dtpMain.Time);
-  Minute := MinuteOf(dtpMain.Time);
-
   Hour := Hour mod 12;
 
-  Angle := (Abs(Hour - 12) + 3) * (Pi / 6);
+  Coeff := (Abs(Hour - 12) + 3);
+  Angle := Coeff * (Pi / 6);
 
   StartPoint.X := CenterPoint.X;
   StartPoint.Y := CenterPoint.Y;
+
+  EndPoint.X := CenterPoint.X + Round((c_Radius - 55) * cos(Angle));
+  EndPoint.Y := CenterPoint.Y - Round((c_Radius - 55) * sin(Angle));
+
+  pbxEx.Canvas.Pen.Width:= 8;
+  pbxEx.Canvas.MoveTo(StartPoint.X, StartPoint.Y);
+  pbxEx.Canvas.LineTo(EndPoint.X, EndPoint.Y);
+
+  // Drawing minute hand
+  Minute := MinuteOf(dtpMain.Time);
+
+  Coeff := (Abs(Minute / 5 - 12) + 3);
+  Angle := Coeff * (Pi / 6);
 
   EndPoint.X := CenterPoint.X + Round((c_Radius - 55) * cos(Angle));
   EndPoint.Y := CenterPoint.Y - Round((c_Radius - 55) * sin(Angle));
