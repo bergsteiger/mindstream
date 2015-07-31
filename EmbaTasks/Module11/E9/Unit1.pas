@@ -27,6 +27,9 @@ implementation
 
 {$R *.dfm}
 
+uses
+  DateUtils;
+
 procedure TfrmMain.btnDrawClick(Sender: TObject);
 begin
   Draw;
@@ -40,6 +43,7 @@ var
   StartPoint,
   EndPoint : TPoint;
 
+  Hour, Minute : Integer;
   Angle : Double;
 begin
   pbxEx.Canvas.Pen.Color:= clBlack;
@@ -50,7 +54,6 @@ begin
 
   pbxEx.Canvas.Ellipse(CenterPoint.X - c_Radius, CenterPoint.Y - c_Radius,
                        CenterPoint.X + c_Radius, CenterPoint.Y + c_Radius);
-
 
   Angle := 0;
   while Angle < 2 * Pi do
@@ -65,6 +68,23 @@ begin
     pbxEx.Canvas.LineTo(EndPoint.X, EndPoint.Y);
     Angle := Angle + Pi / 6;
   end;
+
+  Hour := HourOf(dtpMain.Time);
+  Minute := MinuteOf(dtpMain.Time);
+
+  Hour := Hour mod 12;
+
+  Angle := (Abs(Hour - 12) + 3) * (Pi / 6);
+
+  StartPoint.X := CenterPoint.X;
+  StartPoint.Y := CenterPoint.Y;
+
+  EndPoint.X := CenterPoint.X + Round((c_Radius - 55) * cos(Angle));
+  EndPoint.Y := CenterPoint.Y - Round((c_Radius - 55) * sin(Angle));
+
+  pbxEx.Canvas.Pen.Width:= 4;
+  pbxEx.Canvas.MoveTo(StartPoint.X, StartPoint.Y);
+  pbxEx.Canvas.LineTo(EndPoint.X, EndPoint.Y);
 end;
 
 
