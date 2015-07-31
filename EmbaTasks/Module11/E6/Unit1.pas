@@ -47,7 +47,6 @@ var
   LeftTop,
   RightBottom,
   CenterPoint,
-  CirclePoint,
   StartPoint,
   EndPoint : TPoint;
 
@@ -66,34 +65,27 @@ begin
   RightBottom.X := StrToInt(edtCenterX.Text) + Radius;
   RightBottom.Y := StrToInt(edtCenterY.Text) + Radius;
 
-  StartPoint.X := CenterPoint.X - Radius;
+  StartPoint.X := CenterPoint.X + Radius;
   StartPoint.Y := CenterPoint.Y;
 
   Angle := 0;
   while Angle < (2 * PI) do
   begin
+    Angle := Angle + ((2 * PI) / NPoints);
+
     EndPoint.X := CenterPoint.X + Round(Radius * cos(Angle));
     EndPoint.Y := CenterPoint.Y - Round(Radius * sin(Angle));
 
-    pbxEx.Canvas.Pen.Color:= clBlack;
+    pbxEx.Canvas.MoveTo(StartPoint.X, StartPoint.Y);
     pbxEx.Canvas.ArcTo(LeftTop.X, LeftTop.Y,
                        RightBottom.X, RightBottom.Y,
                        StartPoint.X, StartPoint.Y,
                        EndPoint.X, EndPoint.Y);
 
-
-    pbxEx.Canvas.Pen.Color:= clRed;
-    pbxEx.Canvas.MoveTo(EndPoint.X, EndPoint.Y);
-    pbxEx.Canvas.LineTo(EndPoint.X + 1, EndPoint.Y + 1);
-
     StartPoint.X := EndPoint.X;
     StartPoint.Y := EndPoint.Y;
-    Angle := Angle + ((2 * PI) / NPoints);
+    Sleep(400);
   end;
-
-  pbxEx.Canvas.Pen.Color:= clBlack;
-  pbxEx.Canvas.MoveTo(StrToInt(edtCenterX.Text), StrToInt(edtCenterY.Text));
-  pbxEx.Canvas.LineTo(StrToInt(edtCenterX.Text)+1, StrToInt(edtCenterY.Text)+1);
 end;
 
 

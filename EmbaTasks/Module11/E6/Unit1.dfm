@@ -75,7 +75,7 @@ object frmMain: TfrmMain
       Width = 42
       Height = 21
       TabOrder = 1
-      Text = '2'
+      Text = '4'
     end
     object edtCenterX: TEdit
       Left = 151
