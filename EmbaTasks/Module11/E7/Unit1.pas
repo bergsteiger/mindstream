@@ -32,6 +32,9 @@ implementation
 
 {$R *.dfm}
 
+uses
+  Math;
+
 procedure TfrmMain.btnDrawClick(Sender: TObject);
 begin
   Draw;
@@ -40,6 +43,8 @@ end;
 procedure TfrmMain.Draw;
 var
   A, B, C : Integer;
+
+  Angle : Double;
 
   pntA,
   pntB,
@@ -67,8 +72,15 @@ begin
     pntC.X := pntCenter.X + C;
     pntC.Y := pntCenter.Y;
 
+    Angle := ArcCos((B * B + C * C - A * A) / 2 * B * C);
+
+    pntB.X := pntA.X + Round(B * cos(Angle));
+    pntB.Y := pntB.Y - Round(B * sin(Angle));
+
     pbxEx.Canvas.MoveTo(pntA.X, pntA.Y);
     pbxEx.Canvas.LineTo(pntC.X, pntC.Y);
+    pbxEx.Canvas.LineTo(pntB.X, pntB.Y);
+    pbxEx.Canvas.LineTo(pntA.X, pntA.Y);
   end;
 end;
 
