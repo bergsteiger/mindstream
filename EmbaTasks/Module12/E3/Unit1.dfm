@@ -13,6 +13,19 @@ object Form1: TForm1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object lblResult: TLabel
+    Left = 116
+    Top = 51
+    Width = 9
+    Height = 19
+    Caption = '0'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
   object edtMain: TEdit
     Left = 16
     Top = 16
@@ -22,11 +35,11 @@ object Form1: TForm1
     Text = 'Enter words here'
   end
   object btnMain: TButton
-    Left = 56
+    Left = 83
     Top = 88
     Width = 75
     Height = 25
-    Caption = 'Change words'
+    Caption = 'Count '#39'abc'#39
     TabOrder = 1
     OnClick = btnMainClick
   end

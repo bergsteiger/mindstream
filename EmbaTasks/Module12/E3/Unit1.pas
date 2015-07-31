@@ -10,6 +10,7 @@ type
   TForm1 = class(TForm)
     edtMain: TEdit;
     btnMain: TButton;
+    lblResult: TLabel;
     procedure btnMainClick(Sender: TObject);
   private
     { Private declarations }
@@ -25,19 +26,27 @@ implementation
 {$R *.dfm}
 
 procedure TForm1.btnMainClick(Sender: TObject);
+const
+  c_SubString = 'abc';
 var
   TmpStr : string;
-  i: Integer;
+  SubStrCount: Integer;
 begin
   TmpStr := edtMain.Text;
 
-  for i := 1 to Length(TmpStr) do
+  SubStrCount := 0;
+  while Length(TmpStr) > 0 do
   begin
-    if TmpStr[i] = ' ' then
-      TmpStr[i] := '!';
+    if Pos(c_SubString, TmpStr) <> 0 then
+    begin
+      Delete(TmpStr, 1, Pos(c_SubString, TmpStr) + Length(c_SubString));
+      Inc(SubStrCount);
+    end
+    else
+      Break;
   end;
 
-  edtMain.Text := TmpStr;
+  lblResult.Caption := IntToStr(SubStrCount);
 end;
 
 end.
