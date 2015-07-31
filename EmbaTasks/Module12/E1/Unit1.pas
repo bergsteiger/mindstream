@@ -8,6 +8,9 @@ uses
 
 type
   TForm1 = class(TForm)
+    edtMain: TEdit;
+    btnMain: TButton;
+    procedure btnMainClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -20,5 +23,25 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.btnMainClick(Sender: TObject);
+var
+  TmpStr, ResultString,
+  SecondWord, ThirdWord : string;
+begin
+  TmpStr := edtMain.Text;
+  ResultString := Copy(TmpStr, 1, Pos(' ', TmpStr) - 1);
+  Delete(TmpStr, 1, pos(' ',TmpStr));
+
+  SecondWord := Copy(TmpStr, 1, Pos(' ', TmpStr) - 1);
+  Delete(TmpStr, 1, pos(' ',TmpStr));
+
+  ThirdWord := TmpStr;
+  Delete(TmpStr, 1, pos(' ',TmpStr));
+
+  ResultString := ResultString + ' ' + ThirdWord + ' ' + SecondWord;
+
+  edtMain.Text := ResultString;
+end;
 
 end.
