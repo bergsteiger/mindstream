@@ -39,7 +39,7 @@ object Form1: TForm1
     Top = 88
     Width = 75
     Height = 25
-    Caption = 'Count '#39'abc'#39
+    Caption = 'Count point'
     TabOrder = 1
     OnClick = btnMainClick
   end

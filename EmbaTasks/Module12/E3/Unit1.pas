@@ -26,24 +26,18 @@ implementation
 {$R *.dfm}
 
 procedure TForm1.btnMainClick(Sender: TObject);
-const
-  c_SubString = 'abc';
 var
   TmpStr : string;
-  SubStrCount: Integer;
+  i, SubStrCount: Integer;
 begin
   TmpStr := edtMain.Text;
 
   SubStrCount := 0;
-  while Length(TmpStr) > 0 do
+
+  for i := 1 to Length(TmpStr) do
   begin
-    if Pos(c_SubString, TmpStr) <> 0 then
-    begin
-      Delete(TmpStr, 1, Pos(c_SubString, TmpStr) + Length(c_SubString));
+    if TmpStr[i] = '.' then
       Inc(SubStrCount);
-    end
-    else
-      Break;
   end;
 
   lblResult.Caption := IntToStr(SubStrCount);
