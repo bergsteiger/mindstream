@@ -72,10 +72,10 @@ begin
     pntC.X := pntCenter.X + C;
     pntC.Y := pntCenter.Y;
 
-    Angle := ArcCos((B * B + C * C - A * A) / 2 * B * C);
+    Angle := ArcCos((B * B + C * C - A * A) / (2 * B * C));
 
-    pntB.X := pntA.X + Round(B * cos(Angle));
-    pntB.Y := pntB.Y - Round(B * sin(Angle));
+    pntB.X := pntA.X + Round(B * cos(RadToDeg(Angle)));
+    pntB.Y := pntB.Y - Round(B * sin(RadToDeg(Angle)));
 
     pbxEx.Canvas.MoveTo(pntA.X, pntA.Y);
     pbxEx.Canvas.LineTo(pntC.X, pntC.Y);
