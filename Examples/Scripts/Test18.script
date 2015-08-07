@@ -1,0 +1,16 @@
+USES
+ to.dict
+;
+
+BOOLEAN FUNCTION IsEven
+ INTEGER IN aValue
+ aValue 2 MOD 0 == >>> Result
+; // IsEven
+
+BOOLEAN FUNCTION IsOdd
+ INTEGER IN aValue
+ aValue IsEven ! >>> Result
+; // IsOdd
+
+for ( @ ( IN anItem anItem IsOdd ) ( 1 to 20 ) FILTER ) .
+// - печатаем нечётные числа
