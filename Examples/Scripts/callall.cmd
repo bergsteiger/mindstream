@@ -1,0 +1,1 @@
+for %%i in ( *.script ) do echo %%i
