@@ -1,0 +1,14 @@
+USES
+ to.dict
+ math.dict
+ filter.dict
+ io.dict
+;
+
+WordAlias map MAP
+
+for ( @ ( 1 + ) ( 1 to 20 ) >filter> IsOdd map ) Print
+// - печатаем нечётные числа + 1
+'-------------------' Print
+for ( @ ( 1 + ) ( 1 to 20 ) >filter> IsEven map ) Print
+// - печатаем чётные числа + 1
