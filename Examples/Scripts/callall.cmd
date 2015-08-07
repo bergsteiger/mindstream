@@ -1,1 +1,1 @@
-for %%i in ( *.script ) do echo %%i
+for %%i in ( *.script ) do callMSS.exe %%i
