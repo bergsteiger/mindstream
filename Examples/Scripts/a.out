@@ -4003,6 +4003,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
  ;
 ARRAY "в обратном порядке"
 : : "вывести разделитель"
+INTEGER FUNCTION : "увеличить на 1"
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: Inc1 : Result
+; // "увеличить на 1"
 ARRAY FUNCTION : каждое
  ^ OPERATOR :: IN : aFunctor
  ^@ OPERATOR :: IN : anArray
@@ -4025,7 +4029,15 @@ OPERATOR : перебрать
  ^ OPERATOR :: IN : aList
  ^ OPERATOR :: IN : aWhatToDo
 ; // перебрать
+ARRAY OPERATOR : по
+ ^@ OPERATOR :: IN : aFrom
+ ^ OPERATOR :: IN : aTo
+ ARRAY OPERATOR :: to : Result
+; // по
 : : разделитель
+: : с
+ ^ OPERATOR :: IN : aValue
+; // с
 BOOLEAN FUNCTION : чётные
  INTEGER OPERATOR :: IN : aValue
  BOOLEAN FUNCTION :: IsEven : Result
@@ -4035,7 +4047,27 @@ ARRAY FUNCTION : числа
  ARRAY FUNCTION :: числа : Result
 ; // числа
 TkwMain : Main
-Ошибка компиляции: "Неизвестный тип токена". Тип токена: l3_ttSymbol : +1 в строке 1. Файл: Test40.script. Класс: TkwCompiledWordWorkerWord. Слово: >map> Producer: FUNCTION Parent: 
+20
+18
+16
+14
+12
+10
+8
+6
+4
+2
+-------------------
+21
+19
+17
+15
+13
+11
+9
+7
+5
+3
 20
 18
 16
@@ -4613,6 +4645,138 @@ TkwMain : Main
 3
 1
 -------------------
+20
+18
+16
+14
+12
+10
+8
+6
+4
+2
+-------------------
+21
+19
+17
+15
+13
+11
+9
+7
+5
+3
+-------------------
+18
+16
+14
+12
+10
+8
+6
+4
+2
+0
+-------------------
+19
+17
+15
+13
+11
+9
+7
+5
+3
+1
+-------------------
+20
+18
+16
+14
+12
+10
+8
+6
+4
+2
+-------------------
+21
+19
+17
+15
+13
+11
+9
+7
+5
+3
+-------------------
+18
+16
+14
+12
+10
+8
+6
+4
+2
+0
+-------------------
+19
+17
+15
+13
+11
+9
+7
+5
+3
+1
+-------------------
+20
+18
+16
+14
+12
+10
+8
+6
+4
+2
+-------------------
+21
+19
+17
+15
+13
+11
+9
+7
+5
+3
+-------------------
+18
+16
+14
+12
+10
+8
+6
+4
+2
+0
+-------------------
+19
+17
+15
+13
+11
+9
+7
+5
+3
+1
+-------------------
 1
 2
 3
@@ -4670,6 +4834,9 @@ Hello world
 .\Test52.script
 .\Test53.script
 .\Test54.script
+.\Test55.script
+.\Test56.script
+.\Test57.script
 .\Test6.script
 .\Test7.script
 .\Test8.script
@@ -4725,6 +4892,9 @@ Hello world
 .\Test52.script.co
 .\Test53.script.co
 .\Test54.script.co
+.\Test55.script.co
+.\Test56.script.co
+.\Test57.script.co
 .\Test6.script.co
 .\Test7.script.co
 .\Test8.script.co

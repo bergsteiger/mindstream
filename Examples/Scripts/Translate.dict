@@ -48,3 +48,9 @@ WordAlias по to
  ^ IN aValue
  aValue DO
 ; // с
+
+USES
+ ..\Scripts\Dictionary\math.dict
+;
+
+WordAlias "увеличить на 1" Inc1
