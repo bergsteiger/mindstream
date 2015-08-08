@@ -4017,10 +4017,20 @@ INTEGER FUNCTION : "увеличить на 1"
  INTEGER OPERATOR :: IN : aValue
  INTEGER FUNCTION :: Inc1 : Result
 ; // "увеличить на 1"
+INTEGER FUNCTION : "увеличить на"
+ ^ OPERATOR :: IN : anInc
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: IncWith : Result
+; // "увеличить на"
 INTEGER FUNCTION : "уменьшить на 1"
  INTEGER OPERATOR :: IN : aValue
  INTEGER FUNCTION :: Dec1 : Result
 ; // "уменьшить на 1"
+INTEGER FUNCTION : "уменьшить на"
+ ^ OPERATOR :: IN : aDec
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: DecWith : Result
+; // "уменьшить на"
 ARRAY FUNCTION : каждое
  ^ OPERATOR :: IN : aFunctor
  ^@ OPERATOR :: IN : anArray
@@ -4892,6 +4902,50 @@ TkwMain : Main
 3
 1
 -------------------
+20
+18
+16
+14
+12
+10
+8
+6
+4
+2
+-------------------
+21
+19
+17
+15
+13
+11
+9
+7
+5
+3
+-------------------
+18
+16
+14
+12
+10
+8
+6
+4
+2
+0
+-------------------
+19
+17
+15
+13
+11
+9
+7
+5
+3
+1
+-------------------
 Hello world
 .\exports.script
 .\Test1.script
@@ -4951,6 +5005,7 @@ Hello world
 .\Test59.script
 .\Test6.script
 .\Test60.script
+.\Test61.script
 .\Test7.script
 .\Test8.script
 .\Test9.script
@@ -5012,6 +5067,7 @@ Hello world
 .\Test59.script.co
 .\Test6.script.co
 .\Test60.script.co
+.\Test61.script.co
 .\Test7.script.co
 .\Test8.script.co
 .\Test9.script.co
