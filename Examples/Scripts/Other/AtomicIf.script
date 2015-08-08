@@ -1,0 +1,6 @@
+: AtomicIf
+ 1 2 LESS ? ( 'got' . )
+ 1 2 LESS ! ? ( 'got' . )
+;
+
+AtomicIf

@@ -1,0 +1,9 @@
+: K276546684
+ VAR l_File
+ script:FileName '.evs' sysutils:ChangeFileExt
+ sysutils:ExtractFileName >>> l_File
+ l_File StyleTable:SaveToFile
+ l_File '%' tests:CheckEtalon
+;
+
+K276546684

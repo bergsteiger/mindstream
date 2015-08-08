@@ -1,0 +1,33 @@
+Тест Immediate
+
+ VAR A
+ 
+ : TryVarPrint
+  A .
+  10 >>> A
+  A .
+ ;
+ 
+ : TryVar1
+  [EXECUTE] ( 1024 >>> A 
+   'Попали в инициализацию A' .
+  )
+  // - этот кусок должен выполняться ОДИН раз при компиляции скрипта
+  TryVarPrint
+ ;
+
+ : TryVar2
+  1024 >>> A
+  // - этот кусок должен выполняться КАЖДЫЙ раз при выполнении слова
+  TryVarPrint
+ ;
+ 
+ TryVar1
+ TryVar1
+ TryVar2
+ TryVar2
+ TryVar1
+ TryVar1
+;
+
+Immediate
