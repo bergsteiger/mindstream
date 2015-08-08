@@ -18,3 +18,9 @@ USES
 
 WordAlias нечётные IsOdd
 WordAlias чётные IsEven
+
+USES
+ ..\Scripts\Dictionary\reverted.dict
+;
+
+WordAlias "в обратном порядке" >reverted>
