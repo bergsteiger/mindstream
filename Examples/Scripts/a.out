@@ -3744,6 +3744,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\math.dict
   axiom:ActionList
   axiom:ContainedAction
  ;
+INTEGER FUNCTION : Dec1
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: Dec1 : Result
+; // Dec1
 INTEGER FUNCTION : Inc1
  INTEGER OPERATOR :: IN : aValue
  INTEGER FUNCTION :: Inc1 : Result
@@ -3959,6 +3963,7 @@ Dictionary: ..\Scripts\Dictionary\reverted.dict
   axiom:ActionList
   axiom:ContainedAction
  ;
+ARRAY >reverted>
 ARRAY reverted
 ARRAY REVERTED
 TkwMain : Main
@@ -4005,6 +4010,69 @@ TkwMain : Main
 7
 5
 3
+18
+16
+14
+12
+10
+8
+6
+4
+2
+0
+-------------------
+19
+17
+15
+13
+11
+9
+7
+5
+3
+1
+20
+18
+16
+14
+12
+10
+8
+6
+4
+2
+-------------------
+21
+19
+17
+15
+13
+11
+9
+7
+5
+3
+18
+16
+14
+12
+10
+8
+6
+4
+2
+0
+-------------------
+19
+17
+15
+13
+11
+9
+7
+5
+3
+1
 [ 1 2 3 4 5  ]
 1
 2
@@ -4050,6 +4118,7 @@ Hello world
 .\Test40.script
 .\Test41.script
 .\Test42.script
+.\Test43.script
 .\Test5.script
 .\Test6.script
 .\Test7.script
@@ -4093,6 +4162,7 @@ Hello world
 .\Test40.script.co
 .\Test41.script.co
 .\Test42.script.co
+.\Test43.script.co
 .\Test5.script.co
 .\Test6.script.co
 .\Test7.script.co
