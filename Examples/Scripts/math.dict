@@ -8,7 +8,7 @@ BOOLEAN FUNCTION IsOdd
  aValue IsEven ! >>> Result
 ; // IsOdd
 
-INTEGER FUNCTION +1
+INTEGER FUNCTION Inc1
  INTEGER IN aValue
  aValue 1 + >>> Result
-; // +1
+; // Inc1
