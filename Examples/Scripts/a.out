@@ -981,9 +981,9 @@ Dictionary: Test4.script
   axiom:ActionList
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\Exports.script
-  H:\Dropbox\mindstream\Examples\Scripts\math.dict
-  H:\Dropbox\mindstream\Examples\Scripts\io.dict
-  H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
+  ..\Scripts\Dictionary\math.dict
+  ..\Scripts\Dictionary\io.dict
+  ..\Scripts\Dictionary\arrays.dict
   ..\Scripts\Dictionary\to.dict
   ..\Scripts\Dictionary\filter.dict
   ..\Scripts\Dictionary\map.dict
@@ -3679,9 +3679,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\math.dict
-  H:\Dropbox\mindstream\Examples\Scripts\io.dict
-  H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
+  ..\Scripts\Dictionary\math.dict
+  ..\Scripts\Dictionary\io.dict
+  ..\Scripts\Dictionary\arrays.dict
   ..\Scripts\Dictionary\to.dict
   ..\Scripts\Dictionary\filter.dict
   ..\Scripts\Dictionary\map.dict
@@ -3710,16 +3710,16 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\math.dict
-  H:\Dropbox\mindstream\Examples\Scripts\io.dict
-  H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
+  ..\Scripts\Dictionary\math.dict
+  ..\Scripts\Dictionary\io.dict
+  ..\Scripts\Dictionary\arrays.dict
   ..\Scripts\Dictionary\to.dict
   ..\Scripts\Dictionary\filter.dict
   ..\Scripts\Dictionary\map.dict
   ..\Scripts\Dictionary\reverted.dict
  ;
 uses
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\math.dict
+Dictionary: ..\Scripts\Dictionary\math.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3760,7 +3760,7 @@ BOOLEAN FUNCTION : IsOdd
  INTEGER OPERATOR :: IN : aValue
  BOOLEAN FUNCTION :: IsOdd : Result
 ; // IsOdd
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\io.dict
+Dictionary: ..\Scripts\Dictionary\io.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3789,7 +3789,7 @@ REDIFINITION : : Print
 ==> Redefines
  VOID .
 <== Redefines
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
+Dictionary: ..\Scripts\Dictionary\arrays.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -4073,6 +4073,48 @@ TkwMain : Main
 5
 3
 1
+20
+18
+16
+14
+12
+10
+8
+6
+4
+2
+-------------------
+21
+19
+17
+15
+13
+11
+9
+7
+5
+3
+18
+16
+14
+12
+10
+8
+6
+4
+2
+0
+-------------------
+19
+17
+15
+13
+11
+9
+7
+5
+3
+1
 [ 1 2 3 4 5  ]
 1
 2
@@ -4119,6 +4161,7 @@ Hello world
 .\Test41.script
 .\Test42.script
 .\Test43.script
+.\Test44.script
 .\Test5.script
 .\Test6.script
 .\Test7.script
@@ -4163,6 +4206,7 @@ Hello world
 .\Test41.script.co
 .\Test42.script.co
 .\Test43.script.co
+.\Test44.script.co
 .\Test5.script.co
 .\Test6.script.co
 .\Test7.script.co
