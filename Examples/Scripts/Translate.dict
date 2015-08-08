@@ -30,3 +30,8 @@ WordAlias "в обратном порядке" >reverted>
 ; // разделитель
 
 WordAlias "вывести разделитель" разделитель
+
+ARRAY FUNCTION числа
+ ^ IN anArray
+ anArray DO >>> Result
+; // числа
