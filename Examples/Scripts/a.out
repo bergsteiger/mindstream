@@ -5000,6 +5000,21 @@ Size: 1024 bytes. And it's True
 Line too long
 got here
 always here
+A
+VAR
+BOOLEAN INTEGER
+-------------------
+B
+VAR
+BOOLEAN INTEGER STRING
+-------------------
+C
+VAR
+STRING
+-------------------
+D
+VAR
+INTEGER
 .\exports.script
 .\Test1.script
 .\Test10.script
@@ -5072,6 +5087,7 @@ always here
 .\Test71.script
 .\Test72.script
 .\Test73.script
+.\Test74.script
 .\Test8.script
 .\Test9.script
 .\Exports.script.co
@@ -5146,5 +5162,6 @@ always here
 .\Test71.script.co
 .\Test72.script.co
 .\Test73.script.co
+.\Test74.script.co
 .\Test8.script.co
 .\Test9.script.co
