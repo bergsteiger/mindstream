@@ -4007,6 +4007,10 @@ INTEGER FUNCTION : "увеличить на 1"
  INTEGER OPERATOR :: IN : aValue
  INTEGER FUNCTION :: Inc1 : Result
 ; // "увеличить на 1"
+INTEGER FUNCTION : "уменьшить на 1"
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: Dec1 : Result
+; // "уменьшить на 1"
 ARRAY FUNCTION : каждое
  ^ OPERATOR :: IN : aFunctor
  ^@ OPERATOR :: IN : anArray
@@ -4777,6 +4781,58 @@ TkwMain : Main
 3
 1
 -------------------
+20
+18
+16
+14
+12
+10
+8
+6
+4
+2
+-------------------
+21
+19
+17
+15
+13
+11
+9
+7
+5
+3
+-------------------
+18
+16
+14
+12
+10
+8
+6
+4
+2
+0
+-------------------
+19
+17
+15
+13
+11
+9
+7
+5
+3
+1
+-------------------
+[ 20 18 16 14 12 10 8 6 4 2  ]
+-------------------
+[ 21 19 17 15 13 11 9 7 5 3  ]
+-------------------
+[ 18 16 14 12 10 8 6 4 2 0  ]
+-------------------
+[ 19 17 15 13 11 9 7 5 3 1  ]
+-------------------
 1
 2
 3
@@ -4837,6 +4893,8 @@ Hello world
 .\Test55.script
 .\Test56.script
 .\Test57.script
+.\Test58.script
+.\Test59.script
 .\Test6.script
 .\Test7.script
 .\Test8.script
@@ -4895,6 +4953,8 @@ Hello world
 .\Test55.script.co
 .\Test56.script.co
 .\Test57.script.co
+.\Test58.script.co
+.\Test59.script.co
 .\Test6.script.co
 .\Test7.script.co
 .\Test8.script.co
