@@ -1,0 +1,16 @@
+USES
+ ..\Scripts\Dictionary\to.dict
+ ..\Scripts\Dictionary\filter.dict
+ ..\Scripts\Dictionary\map.dict
+ ..\Scripts\Dictionary\reverted.dict
+;
+
+EXPORTS
+ to.dict
+EXPORTS
+ filter.dict
+EXPORTS
+ map.dict
+EXPORTS
+ reverted.dict
+ 
