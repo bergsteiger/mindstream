@@ -1,0 +1,19 @@
+BOOLEAN FUNCTION IsEven
+ INTEGER IN aValue
+ aValue 2 MOD 0 == >>> Result
+; // IsEven
+
+BOOLEAN FUNCTION IsOdd
+ INTEGER IN aValue
+ aValue IsEven ! >>> Result
+; // IsOdd
+
+INTEGER FUNCTION Inc1
+ INTEGER IN aValue
+ aValue 1 + >>> Result
+; // Inc1
+
+INTEGER FUNCTION Dec1
+ INTEGER IN aValue
+ aValue 1 - >>> Result
+; // Dec1
