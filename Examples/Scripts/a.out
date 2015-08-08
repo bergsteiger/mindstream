@@ -554,6 +554,27 @@
 7
 5
 3
+20
+18
+16
+14
+12
+10
+8
+6
+4
+2
+-------------------
+21
+19
+17
+15
+13
+11
+9
+7
+5
+3
 Dictionary: axiom:Array
 Dictionary: axiom:char
 Dictionary: axiom:class
@@ -959,6 +980,14 @@ Dictionary: Test4.script
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\Exports.script
+  H:\Dropbox\mindstream\Examples\Scripts\math.dict
+  H:\Dropbox\mindstream\Examples\Scripts\io.dict
+  H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
+  ..\Scripts\Dictionary\to.dict
+  ..\Scripts\Dictionary\filter.dict
+  ..\Scripts\Dictionary\map.dict
+  ..\Scripts\Dictionary\reverted.dict
  ;
 Dictionary: axiom:axiom
  Uses: 
@@ -3626,6 +3655,308 @@ Dictionary: axiom:ActionList
 TContainedAction pop:ActionList:FindAction
 Dictionary: axiom:ContainedAction
 VOID pop:ContainedAction:Execute
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\math.dict
+  H:\Dropbox\mindstream\Examples\Scripts\io.dict
+  H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
+  ..\Scripts\Dictionary\to.dict
+  ..\Scripts\Dictionary\filter.dict
+  ..\Scripts\Dictionary\map.dict
+  ..\Scripts\Dictionary\reverted.dict
+ ;
+ Exports: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\math.dict
+  H:\Dropbox\mindstream\Examples\Scripts\io.dict
+  H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
+  ..\Scripts\Dictionary\to.dict
+  ..\Scripts\Dictionary\filter.dict
+  ..\Scripts\Dictionary\map.dict
+  ..\Scripts\Dictionary\reverted.dict
+ ;
+uses
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\math.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+BOOLEAN FUNCTION : IsEven
+ INTEGER OPERATOR :: IN : aValue
+ BOOLEAN FUNCTION :: IsEven : Result
+; // IsEven
+BOOLEAN FUNCTION : IsOdd
+ INTEGER OPERATOR :: IN : aValue
+ BOOLEAN FUNCTION :: IsOdd : Result
+; // IsOdd
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\io.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+REDIFINITION : : Print
+==> Redefines
+ VOID .
+<== Redefines
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  ..\Scripts\Dictionary\to.dict
+  ..\Scripts\Dictionary\filter.dict
+  ..\Scripts\Dictionary\map.dict
+  ..\Scripts\Dictionary\reverted.dict
+ ;
+ Exports: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  ..\Scripts\Dictionary\to.dict
+  ..\Scripts\Dictionary\filter.dict
+  ..\Scripts\Dictionary\map.dict
+  ..\Scripts\Dictionary\reverted.dict
+ ;
+Dictionary: ..\Scripts\Dictionary\to.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+ARRAY OPERATOR : to
+ ^@ OPERATOR :: IN : aFrom
+ ^ OPERATOR :: IN : aTo
+ ARRAY OPERATOR :: to : Result
+; // to
+Dictionary: ..\Scripts\Dictionary\filter.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+ARRAY FUNCTION : >filter>
+ ^ OPERATOR :: IN : aFunctor
+ ^@ OPERATOR :: IN : anArray
+ ARRAY FUNCTION :: >filter> : Result
+; // >filter>
+ARRAY filter
+Dictionary: ..\Scripts\Dictionary\map.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+ARRAY FUNCTION : >map>
+ ^ OPERATOR :: IN : aFunctor
+ ^@ OPERATOR :: IN : anArray
+ ARRAY FUNCTION :: >map> : Result
+; // >map>
+ARRAY map
+Dictionary: ..\Scripts\Dictionary\reverted.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+ARRAY reverted
+ARRAY REVERTED
 TkwMain : Main
 [ 1 2 3 4 5  ]
 1
@@ -3634,6 +3965,7 @@ TkwMain : Main
 4
 5
 Hello world
+.\exports.script
 .\Test1.script
 .\Test10.script
 .\Test11.script
@@ -3666,12 +3998,14 @@ Hello world
 .\Test36.script
 .\Test37.script
 .\Test38.script
+.\Test39.script
 .\Test4.script
 .\Test5.script
 .\Test6.script
 .\Test7.script
 .\Test8.script
 .\Test9.script
+.\Exports.script.co
 .\Test1.script.co
 .\Test10.script.co
 .\Test11.script.co
@@ -3704,6 +4038,7 @@ Hello world
 .\Test36.script.co
 .\Test37.script.co
 .\Test38.script.co
+.\Test39.script.co
 .\Test4.script.co
 .\Test5.script.co
 .\Test6.script.co
