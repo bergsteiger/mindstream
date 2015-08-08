@@ -4010,6 +4010,15 @@ Dictionary: ..\Scripts\Dictionary\string.dict
 : : (string)
  ^ OPERATOR :: IN : aValue
 ; // (string)
+STRING FUNCTION : any:Cat
+ ARRAY OPERATOR :: IN : anArray
+ STRING FUNCTION :: any:Cat : Result
+; // any:Cat
+STRING FUNCTION : string:CatWihAny
+ STRING OPERATOR :: IN : aString
+ OPERATOR :: IN : aValue
+ STRING FUNCTION :: string:CatWihAny : Result
+; // string:CatWihAny
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
  Uses: 
   axiom:axiom
@@ -4986,6 +4995,8 @@ Size: 1024 bytes
 Size: 1024 bytes
 Size: 1024 bytes
 Hello world
+Size: 1024 bytes
+Size: 1024 bytes. And it's True
 .\exports.script
 .\Test1.script
 .\Test10.script
@@ -5054,6 +5065,8 @@ Hello world
 .\Test68.script
 .\Test69.script
 .\Test7.script
+.\Test70.script
+.\Test71.script
 .\Test8.script
 .\Test9.script
 .\Exports.script.co
@@ -5124,5 +5137,7 @@ Hello world
 .\Test68.script.co
 .\Test69.script.co
 .\Test7.script.co
+.\Test70.script.co
+.\Test71.script.co
 .\Test8.script.co
 .\Test9.script.co
