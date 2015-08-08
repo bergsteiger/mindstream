@@ -12,3 +12,8 @@ INTEGER FUNCTION Inc1
  INTEGER IN aValue
  aValue 1 + >>> Result
 ; // Inc1
+
+INTEGER FUNCTION Dec1
+ INTEGER IN aValue
+ aValue 1 - >>> Result
+; // Dec1

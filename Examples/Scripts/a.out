@@ -3744,10 +3744,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\math.dict
   axiom:ActionList
   axiom:ContainedAction
  ;
-INTEGER FUNCTION : +1
+INTEGER FUNCTION : Inc1
  INTEGER OPERATOR :: IN : aValue
- INTEGER FUNCTION :: +1 : Result
-; // +1
+ INTEGER FUNCTION :: Inc1 : Result
+; // Inc1
 BOOLEAN FUNCTION : IsEven
  INTEGER OPERATOR :: IN : aValue
  BOOLEAN FUNCTION :: IsEven : Result
@@ -3962,6 +3962,28 @@ Dictionary: ..\Scripts\Dictionary\reverted.dict
 ARRAY reverted
 ARRAY REVERTED
 TkwMain : Main
+Ошибка компиляции: "Неизвестный тип токена". Тип токена: l3_ttSymbol : +1 в строке 1. Файл: Test40.script. Класс: TkwCompiledWordWorkerWord. Слово: >map> Producer: FUNCTION Parent: 
+20
+18
+16
+14
+12
+10
+8
+6
+4
+2
+-------------------
+21
+19
+17
+15
+13
+11
+9
+7
+5
+3
 20
 18
 16
@@ -4026,6 +4048,8 @@ Hello world
 .\Test39.script
 .\Test4.script
 .\Test40.script
+.\Test41.script
+.\Test42.script
 .\Test5.script
 .\Test6.script
 .\Test7.script
@@ -4067,6 +4091,8 @@ Hello world
 .\Test39.script.co
 .\Test4.script.co
 .\Test40.script.co
+.\Test41.script.co
+.\Test42.script.co
 .\Test5.script.co
 .\Test6.script.co
 .\Test7.script.co
