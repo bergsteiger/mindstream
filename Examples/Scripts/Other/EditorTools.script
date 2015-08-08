@@ -1,0 +1,27 @@
+// EditorTools.script
+// Утилитные фукнции для работы с редактором
+
+CONST cnDefaultFontSize 12
+CONST cnUndefFontSize 0
+
+: "Сравнить текст с эталоном"
+ OBJECT VAR l_Editor
+ focused:control:push >>> l_Editor
+ VAR l_File
+ script:FileName '.evd' sysutils:ChangeFileExt
+ sysutils:ExtractFileName >>> l_File
+ l_File l_Editor pop:editor:TextToFile
+ l_File '%' tests:CheckEtalon
+;
+
+// TnevRubberTablesMode
+CONST nev_rtmNone 0
+CONST nev_rtmZoom 1
+CONST nev_rtmFitToWindow 2
+
+: "Загрузить документ в" OBJECT IN aForm
+  VAR l_File
+  script:FileName '.evd' sysutils:ChangeFileExt
+  sysutils:ExtractFileName >>> l_File  
+  l_File aForm LoadFromFile   
+;
