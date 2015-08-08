@@ -3751,10 +3751,20 @@ INTEGER FUNCTION : Dec1
  INTEGER OPERATOR :: IN : aValue
  INTEGER FUNCTION :: Dec1 : Result
 ; // Dec1
+INTEGER FUNCTION : DecWith
+ ^ OPERATOR :: IN : aDec
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: DecWith : Result
+; // DecWith
 INTEGER FUNCTION : Inc1
  INTEGER OPERATOR :: IN : aValue
  INTEGER FUNCTION :: Inc1 : Result
 ; // Inc1
+INTEGER FUNCTION : IncWith
+ ^ OPERATOR :: IN : anInc
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: IncWith : Result
+; // IncWith
 BOOLEAN FUNCTION : IsEven
  INTEGER OPERATOR :: IN : aValue
  BOOLEAN FUNCTION :: IsEven : Result
@@ -4838,6 +4848,50 @@ TkwMain : Main
 3
 4
 5
+20
+18
+16
+14
+12
+10
+8
+6
+4
+2
+-------------------
+21
+19
+17
+15
+13
+11
+9
+7
+5
+3
+-------------------
+18
+16
+14
+12
+10
+8
+6
+4
+2
+0
+-------------------
+19
+17
+15
+13
+11
+9
+7
+5
+3
+1
+-------------------
 Hello world
 .\exports.script
 .\Test1.script
@@ -4896,6 +4950,7 @@ Hello world
 .\Test58.script
 .\Test59.script
 .\Test6.script
+.\Test60.script
 .\Test7.script
 .\Test8.script
 .\Test9.script
@@ -4956,6 +5011,7 @@ Hello world
 .\Test58.script.co
 .\Test59.script.co
 .\Test6.script.co
+.\Test60.script.co
 .\Test7.script.co
 .\Test8.script.co
 .\Test9.script.co
