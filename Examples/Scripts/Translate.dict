@@ -43,3 +43,8 @@ USES
 ;
 
 WordAlias по to
+
+: с
+ ^ IN aValue
+ aValue DO
+; // с
