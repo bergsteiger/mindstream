@@ -1,0 +1,43 @@
+: TestNotIs
+ @ 1 Is class::TkwInteger .
+ @ 1 Is class::TkwString .
+ 
+ @ 'A' Is class::TkwInteger .
+ @ 'A' Is class::TkwString .
+
+ @ 1 Is 'TkwInteger' .
+ @ 1 Is 'TkwString' .
+ 
+ @ 'A' Is 'TkwInteger' .
+ @ 'A' Is 'TkwString' .
+ 
+ '-----' .
+ 
+ @ 1 NotIs class::TkwInteger .
+ @ 1 NotIs class::TkwString .
+ 
+ @ 'A' NotIs class::TkwInteger .
+ @ 'A' NotIs class::TkwString .
+
+ @ 1 NotIs 'TkwInteger' .
+ @ 1 NotIs 'TkwString' .
+ 
+ @ 'A' NotIs 'TkwInteger' .
+ @ 'A' NotIs 'TkwString' .
+ 
+ '-----' .
+ 
+ class::Tl3SimpleObject Is class::Tl3ProtoObject .
+ class::Tl3ProtoObject Is class::Tl3SimpleObject .
+ 
+ class::Tl3SimpleObject Is 'Tl3ProtoObject' .
+ class::Tl3ProtoObject Is 'Tl3SimpleObject' .
+ 
+ class::Tl3SimpleObject NotIs class::Tl3ProtoObject .
+ class::Tl3ProtoObject NotIs class::Tl3SimpleObject .
+ 
+ class::Tl3SimpleObject NotIs 'Tl3ProtoObject' .
+ class::Tl3ProtoObject NotIs 'Tl3SimpleObject' .
+; 
+
+TestNotIs
