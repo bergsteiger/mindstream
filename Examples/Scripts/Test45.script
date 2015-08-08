@@ -5,11 +5,11 @@ USES
 перебрать ( ( 1 to 20 ) отобрать IsOdd >map> Inc1 >reverted> ) Print
 // - печатаем нечётные числа + 1
 '-------------------' Print
-перебрать ( ( 1 to 20 ) >filter> IsEven >map> Inc1 >reverted> ) Print
+перебрать ( ( 1 to 20 ) отобрать IsEven >map> Inc1 >reverted> ) Print
 // - печатаем чётные числа + 1
 
-перебрать ( ( 1 to 20 ) >filter> IsOdd >map> Dec1 >reverted> ) Print
+перебрать ( ( 1 to 20 ) отобрать IsOdd >map> Dec1 >reverted> ) Print
 // - печатаем нечётные числа - 1
 '-------------------' Print
-перебрать ( ( 1 to 20 ) >filter> IsEven >map> Dec1 >reverted> ) Print
+перебрать ( ( 1 to 20 ) отобрать IsEven >map> Dec1 >reverted> ) Print
 // - печатаем чётные числа - 1
