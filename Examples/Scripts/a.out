@@ -3744,6 +3744,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\math.dict
   axiom:ActionList
   axiom:ContainedAction
  ;
+INTEGER FUNCTION : +1
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: +1 : Result
+; // +1
 BOOLEAN FUNCTION : IsEven
  INTEGER OPERATOR :: IN : aValue
  BOOLEAN FUNCTION :: IsEven : Result
@@ -3958,6 +3962,27 @@ Dictionary: ..\Scripts\Dictionary\reverted.dict
 ARRAY reverted
 ARRAY REVERTED
 TkwMain : Main
+20
+18
+16
+14
+12
+10
+8
+6
+4
+2
+-------------------
+21
+19
+17
+15
+13
+11
+9
+7
+5
+3
 [ 1 2 3 4 5  ]
 1
 2
@@ -4000,6 +4025,7 @@ Hello world
 .\Test38.script
 .\Test39.script
 .\Test4.script
+.\Test40.script
 .\Test5.script
 .\Test6.script
 .\Test7.script
@@ -4040,6 +4066,7 @@ Hello world
 .\Test38.script.co
 .\Test39.script.co
 .\Test4.script.co
+.\Test40.script.co
 .\Test5.script.co
 .\Test6.script.co
 .\Test7.script.co
