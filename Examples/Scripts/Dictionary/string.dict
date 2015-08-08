@@ -1,0 +1,4 @@
+: (string)
+ ^ IN aValue
+ aValue DO ToPrintable
+; // (string)
