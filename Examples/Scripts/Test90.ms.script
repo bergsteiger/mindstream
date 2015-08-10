@@ -1,0 +1,7 @@
+: Process
+ TtfwWord IN aLambda
+ STRING IN aDir
+ aLambda aDir ProcessSubDirs
+; // Process
+
+@ . '..' Process
