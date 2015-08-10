@@ -2472,3 +2472,26 @@ FORWARD Process
 '..\..\'
 Process
 
+FORWARD Process
+: Process
+ FORWARD ProcessItem
+ STRING IN aDir
+ : ProcessItem
+  STRING IN anItem
+  anItem
+  .
+  @
+  ProcessItem
+  anItem
+  ProcessSubDirs
+ ; // : ProcessItem
+ 
+ @
+ ProcessItem
+ aDir
+ ProcessSubDirs
+; // : Process
+
+'..\..\'
+Process
+
