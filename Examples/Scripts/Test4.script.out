@@ -625,6 +625,7 @@ Dictionary: Test4.script
   ..\Scripts\Dictionary\reverted.dict
   ..\Scripts\Dictionary\string.dict
   H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
  ;
 Dictionary: axiom:axiom
  Uses: 
@@ -3330,6 +3331,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   ..\Scripts\Dictionary\reverted.dict
   ..\Scripts\Dictionary\string.dict
   H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
  ;
  Exports: 
   axiom:axiom
@@ -3363,6 +3365,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   ..\Scripts\Dictionary\reverted.dict
   ..\Scripts\Dictionary\string.dict
   H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
  ;
 uses
 Dictionary: ..\Scripts\Dictionary\math.dict
@@ -3750,4 +3753,86 @@ ARRAY FUNCTION : числа
  ^ OPERATOR :: IN : anArray
  ARRAY FUNCTION :: числа : Result
 ; // числа
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+STRING FUNCTION : Check
+ STRING OPERATOR :: IN : aName
+ STRING FUNCTION :: Check : Result
+; // Check
+STRING FUNCTION : CodeName
+ OBJECT OPERATOR :: IN : aCode
+ STRING OPERATOR :: VAR : l_Name
+ STRING FUNCTION :: CodeName : Result
+; // CodeName
+VOID OPERATOR :: PROCEDURE : DumpCode
+ STRING OPERATOR :: IN : aFileName
+; // DumpCode
+VOID OPERATOR :: PROCEDURE : DumpCodeCall
+ OBJECT OPERATOR :: IN : aCode
+ STRING FUNCTION : CalcLeftParams
+  OBJECT OPERATOR :: IN : aCode
+  STRING OPERATOR :: IN : aName
+  INTEGER OPERATOR :: VAR : l_LeftWordRefsCount
+  STRING FUNCTION :: FUNCTION : Result
+ ; // CalcLeftParams
+ STRING OPERATOR :: VAR : l_Name
+ BOOLEAN OPERATOR :: VAR : l_NeedBracket
+; // DumpCodeCall
+VOID OPERATOR :: PROCEDURE : DumpElement
+ OBJECT OPERATOR :: IN : aCode
+; // DumpElement
+VOID OPERATOR :: PROCEDURE : DumpElementPrim
+ OBJECT OPERATOR :: IN : aCode
+ BOOLEAN OPERATOR :: IN : aNeedStereo
+ STRING OPERATOR :: VAR : l_Directives
+ STRING OPERATOR :: VAR : l_Name
+ STRING OPERATOR :: VAR : l_Stereo
+; // DumpElementPrim
+VOID OPERATOR :: PROCEDURE : DumpMembers
+ OBJECT OPERATOR :: IN : aCode
+; // DumpMembers
+STRING FUNCTION : EndBracket
+ OBJECT OPERATOR :: IN : aCode
+ STRING FUNCTION :: EndBracket : Result
+; // EndBracket
+INTEGER OPERATOR :: VAR : Indent
+VOID WORDWORKER : Out
+ STRING OPERATOR :: VAR : aValue
+ ^ OPERATOR :: IN : WordToWork
+; // Out
+VOID WORDWORKER : OutA
+ ARRAY OPERATOR :: VAR : l_Value
+ ^ OPERATOR :: IN : WordToWork
+; // OutA
+VOID OPERATOR :: PROCEDURE : OutBracket
+ OBJECT OPERATOR :: IN : aCode
+ STRING OPERATOR :: VAR : l_Bracket
+; // OutBracket
+VOID WORDWORKER : OutEx
+ STRING OPERATOR :: VAR : aValue
+ ^ OPERATOR :: IN : WordToWork
+; // OutEx
 TkwMain : Main
