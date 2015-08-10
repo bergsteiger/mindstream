@@ -1,3 +1,3 @@
 call clear.cmd
 del *.out
-for %%i in ( *.mss ) do callMSS.exe %%i >> %%i.out
+for %%i in ( *.ms.script ) do callMSS.exe %%i >> %%i.out

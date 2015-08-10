@@ -1,2 +1,2 @@
 call clear.cmd
-for %%i in ( *.mss ) do callMSS.exe %%i
+for %%i in ( *.ms.script ) do callMSS.exe %%i
