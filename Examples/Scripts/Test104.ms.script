@@ -11,12 +11,13 @@ FORWARD Process
   : DoFile
    STRING IN anItem
    anItem .
-   FILE VAR l_File
+/*{   FILE VAR l_File
    l_File := ( anItem File:OpenRead )
    TRY
    FINALLY
     l_File := nil
    END
+}*/
   ; // DoFile
 
   @ DoFile '*.ms.script' anItem ProcessFilesWithMask
