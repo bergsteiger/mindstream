@@ -8,6 +8,7 @@ FORWARD Process
  : ProcessItem
   STRING IN anItem
   anItem .
+  @ . '*.ms.script' anItem ProcessFilesWithMask
   @ ProcessItem anItem ProcessSubDirs
  ; // ProcessItem
 

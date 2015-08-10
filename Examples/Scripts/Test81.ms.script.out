@@ -2481,6 +2481,11 @@ FORWARD Process
   anItem
   .
   @
+  .
+  '*.ms.script'
+  anItem
+  ProcessFilesWithMask
+  @
   ProcessItem
   anItem
   ProcessSubDirs
