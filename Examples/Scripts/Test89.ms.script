@@ -1,0 +1,6 @@
+: Process
+ STRING IN aDir
+ aDir ProcessSubDirs
+; // Process
+
+@ . '..' Process
