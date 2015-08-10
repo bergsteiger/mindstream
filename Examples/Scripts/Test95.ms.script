@@ -1,16 +1,17 @@
 FORWARD Process
 
 : Process
- TtfwWord IN aLambda
  STRING IN aDir
+
+ FORWARD ProcessItem
 
  : ProcessItem
   STRING IN anItem
-  anItem aLambda DO
-  aLambda anItem Process
+  anItem .
+  @ ProcessItem anItem ProcessSubDirs
  ; // ProcessItem
 
  @ ProcessItem aDir ProcessSubDirs
 ; // Process
 
-@ . '..\..\' Process
+'..\..\' Process

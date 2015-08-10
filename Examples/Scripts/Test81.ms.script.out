@@ -2451,16 +2451,16 @@ Process
 
 FORWARD Process
 : Process
+ FORWARD ProcessItem
  STRING IN aDir
- TtfwWord IN aLambda
  : ProcessItem
   STRING IN anItem
   anItem
-  aLambda
-  DO
-  aLambda
+  .
+  @
+  ProcessItem
   anItem
-  Process
+  ProcessSubDirs
  ; // : ProcessItem
  
  @
@@ -2469,8 +2469,6 @@ FORWARD Process
  ProcessSubDirs
 ; // : Process
 
-@
-.
 '..\..\'
 Process
 
