@@ -1,0 +1,1941 @@
+1
+2
++
+.
+
+for
+[
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 9
+ 10
+]
+.
+
+VOID Test ForToTest
+ ARRAY OPERATOR to
+  ^@ IN aFrom
+  ^ IN aTo
+  @
+  (
+   OBJECT IN aLambda
+   INTEGER VAR I
+   I :=
+   (
+    aFrom
+    DO
+   )
+   DEC
+   I
+   (
+    aTo
+    DO
+    I
+   )
+   -
+   LOOP
+   (
+    INC
+    I
+    I
+    aLambda
+    DO
+   )
+  )
+  FunctorToIterator
+  >>>
+  Result
+ ; // ARRAY OPERATOR to
+ 
+ for
+ (
+  1 to
+  10
+ )
+ .
+ ''
+ .
+ for
+ (
+  1 to
+  20
+ )
+ .
+ ''
+ .
+ for
+ (
+  0 to
+  20
+ )
+ .
+ ''
+ .
+ for
+ (
+  -1 to
+  20
+ )
+ .
+ ''
+ .
+ for
+ (
+  -1 to
+  21
+ )
+ .
+ ''
+ .
+ 0
+ for
+ (
+  1 to
+  10
+ )
+ +
+ .
+ ''
+ .
+ for
+ (
+  1 to
+  10
+  Reverted
+ )
+ .
+; // VOID Test ForToTest
+
+ForToTest
+
+for
+(
+ 1 to
+ 20
+)
+.
+
+for
+(
+ @
+ (
+  IN anItem
+  true
+ )
+ (
+  1 to
+  20
+ )
+ FILTER
+)
+.
+
+0
+for
+(
+ @
+ (
+  IN anItem
+  true
+ )
+ (
+  1 to
+  20
+ )
+ FILTER
+)
++
+.
+
+for
+(
+ @
+ (
+  IN anItem
+  anItem
+  2
+  MOD
+  0
+  ==
+ )
+ (
+  1 to
+  20
+ )
+ FILTER
+)
+.
+
+for
+(
+ @
+ (
+  IN anItem
+  anItem
+  2
+  MOD
+  0
+  !=
+ )
+ (
+  1 to
+  20
+ )
+ FILTER
+)
+.
+
+BOOLEAN FUNCTION IsEven
+ INTEGER IN aValue
+ aValue
+ 2
+ MOD
+ 0
+ ==
+ >>>
+ Result
+; // BOOLEAN FUNCTION IsEven
+
+for
+(
+ @
+ (
+  IN anItem
+  anItem
+  IsEven
+ )
+ (
+  1 to
+  20
+ )
+ FILTER
+)
+.
+
+BOOLEAN FUNCTION IsEven
+ INTEGER IN aValue
+ aValue
+ 2
+ MOD
+ 0
+ ==
+ >>>
+ Result
+; // BOOLEAN FUNCTION IsEven
+
+BOOLEAN FUNCTION IsOdd
+ INTEGER IN aValue
+ aValue
+ IsEven
+ !
+ >>>
+ Result
+; // BOOLEAN FUNCTION IsOdd
+
+for
+(
+ @
+ (
+  IN anItem
+  anItem
+  IsOdd
+ )
+ (
+  1 to
+  20
+ )
+ FILTER
+)
+.
+
+for
+(
+ @
+ (
+  IN anItem
+  anItem
+  IsOdd
+ )
+ (
+  1 to
+  20
+ )
+ FILTER
+)
+.
+
+1
+2
++
+Msg
+
+for
+(
+ @
+ IsOdd
+ (
+  1 to
+  20
+ )
+ FILTER
+)
+.
+
+ARRAY FILTER
+for
+(
+ @
+ IsOdd
+ (
+  1 to
+  20
+ )
+ FILTER
+)
+.
+
+ARRAY FUNCTION >filter>
+ ^ IN aFunctor
+ ARRAY IN anArray
+ aFunctor
+ anArray
+ FILTER
+ >>>
+ Result
+; // ARRAY FUNCTION >filter>
+
+ARRAY FILTER
+for
+(
+ (
+  1 to
+  20
+ )
+ >filter>
+ IsOdd
+)
+.
+'-------------------'
+.
+for
+(
+ (
+  1 to
+  20
+ )
+ >filter>
+ IsEven
+)
+.
+
+ARRAY FUNCTION >filter>
+ ^ IN aFunctor
+ ^@ IN anArray
+ aFunctor
+ anArray
+ DO
+ FILTER
+ >>>
+ Result
+; // ARRAY FUNCTION >filter>
+
+ARRAY FILTER
+for
+(
+ ( to >filter>
+ IsOdd
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter>
+ IsEven
+)
+.
+
+for
+(
+ ( to >filter>
+ IsOdd
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter>
+ IsEven
+)
+.
+
+REDIFINITION : .
+ >>std::out
+; // REDIFINITION : .
+
+for
+(
+ ( to >filter>
+ IsOdd
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter>
+ IsEven
+)
+.
+
+for
+(
+ ( to >filter>
+ IsOdd
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter>
+ IsEven
+)
+.
+
+for
+(
+ @
+ (
+  IN anItem
+  anItem
+  1
+  +
+ )
+ ( to >filter>
+ IsOdd
+ MAP
+)
+.
+'-------------------'
+.
+for
+(
+ @
+ (
+  IN anItem
+  anItem
+  1
+  +
+ )
+ ( to >filter>
+ IsEven
+ MAP
+)
+.
+
+for
+(
+ @
+ (
+  1
+  +
+ )
+ ( to >filter>
+ IsOdd
+ MAP
+)
+.
+'-------------------'
+.
+for
+(
+ @
+ (
+  1
+  +
+ )
+ ( to >filter>
+ IsEven
+ MAP
+)
+.
+
+@
+(
+ 1
+ +
+)
+( to >filter>
+IsOdd
+MAP
+.
+'-------------------'
+.
+@
+(
+ 1
+ +
+)
+( to >filter>
+IsEven
+MAP
+.
+
+[
+ 1
+ 2
+ 3
+ 4
+ 5
+]
+.
+
+ARRAY MAP
+for
+(
+ @
+ (
+  1
+  +
+ )
+ ( to >filter>
+ IsOdd
+ MAP
+)
+.
+'-------------------'
+.
+for
+(
+ @
+ (
+  1
+  +
+ )
+ ( to >filter>
+ IsEven
+ MAP
+)
+.
+
+ARRAY FUNCTION >map>
+ ^ IN aFunctor
+ ^@ IN anArray
+ aFunctor
+ anArray
+ DO
+ MAP
+ >>>
+ Result
+; // ARRAY FUNCTION >map>
+
+ARRAY MAP
+for
+(
+ ( to >filter> IsOdd >map>
+ (
+  1
+  +
+ )
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ (
+  1
+  +
+ )
+)
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ (
+  1
+  +
+ )
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ (
+  1
+  +
+ )
+)
+.
+
+( to >filter> IsOdd >map>
+(
+ 1
+ +
+)
+.
+'-------------------'
+.
+( to >filter> IsEven >map>
+(
+ 1
+ +
+)
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ (
+  1
+  +
+ )
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ (
+  1
+  +
+ )
+ Reverted
+)
+.
+
+ARRAY Reverted
+ARRAY Reverted
+for
+(
+ ( to >filter> IsOdd >map>
+ (
+  1
+  +
+ )
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ (
+  1
+  +
+ )
+ Reverted
+)
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ (
+  1
+  +
+ )
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ (
+  1
+  +
+ )
+ Reverted
+)
+.
+
+USES
+for
+(
+ ( to >filter> IsOdd >map>
+ (
+  1
+  +
+ )
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ (
+  1
+  +
+ )
+ Reverted
+)
+.
+
+USES
+for
+(
+ ( to >filter> IsOdd >map>
+ (
+  1
+  +
+ )
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ (
+  1
+  +
+ )
+ Reverted
+)
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ (
+  1
+  +
+ )
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ (
+  1
+  +
+ )
+ Reverted
+)
+.
+
+help
+
+for
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+for
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+for
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+for
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+for
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+for
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+for
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+for
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+for
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+
+@
+(
+ IN anItem
+ true
+)
+[
+ 1
+ 2
+ 3
+ 4
+ 5
+]
+FILTER
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+for
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+
+for
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+for
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+
+числа
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+числа
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Reverted
+)
+.
+разделитель
+числа
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+числа
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+
+@
+(
+ IN anItem
+ true
+)
+[
+ 1
+ 2
+ 3
+ 4
+ 5
+]
+FILTER
+IT
+.
+
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ IncWith
+ 1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ IncWith
+ 1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Reverted
+)
+.
+разделитель
+
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ IncWith
+ 1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ IncWith
+ 1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ DecWith
+ 1
+ Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ DecWith
+ 1
+ Reverted
+)
+.
+разделитель
+
+'Size: '
+1024
+IntToStr
+Cat
+.
+
+[
+ 'Size: '
+ 1024
+ IntToStr
+ ' bytes'
+]
+strings:Cat
+.
+
+STRING FUNCTION any:Cat
+ ARRAY IN anArray
+ ''
+ anArray
+ IT
+ (
+  ToPrintable
+  Cat
+ )
+ >>>
+ Result
+; // STRING FUNCTION any:Cat
+
+[
+ 'Size: '
+ 1024
+ ' bytes'
+]
+any:Cat
+.
+
+STRING FUNCTION any:Cat
+ ARRAY IN anArray
+ ''
+ anArray
+ IT
+ string:CatWihAny
+ >>>
+ Result
+; // STRING FUNCTION any:Cat
+
+STRING FUNCTION string:CatWihAny
+ STRING IN aString
+ IN aValue
+ aString
+ aValue
+ ToPrintable
+ Cat
+ >>>
+ Result
+; // STRING FUNCTION string:CatWihAny
+
+[
+ 'Size: '
+ 1024
+ ' bytes'
+]
+any:Cat
+.
+
+STRING FUNCTION any:Cat
+ ARRAY IN anArray
+ ''
+ for
+ anArray
+ string:CatWihAny
+ >>>
+ Result
+; // STRING FUNCTION any:Cat
+
+STRING FUNCTION string:CatWihAny
+ STRING IN aString
+ IN aValue
+ aString
+ aValue
+ ToPrintable
+ Cat
+ >>>
+ Result
+; // STRING FUNCTION string:CatWihAny
+
+[
+ 'Size: '
+ 1024
+ ' bytes'
+]
+any:Cat
+.
+
+'Size: '
+(+)
+(
+ 1024
+ ToPrintable
+)
+(+)
+' bytes'
+.
+
+: (string)
+ ^ IN aValue
+ aValue
+ DO
+ ToPrintable
+; // : (string)
+
+'Size: '
+(+)
+(string)
+1024
+(+)
+' bytes'
+.
+
+'Size: '
+(+)
+(string)
+1024
+(+)
+' bytes'
+.
+
+A
+.
+
+[
+ 'Size: '
+ 1024
+ ' bytes'
+]
+any:Cat
+.
+
+[
+ 'Size: '
+ 1024
+ ' bytes.'
+ ' And it's '
+ true
+]
+any:Cat
+.
+
+TRY
+ 'Line too long'
+ RAISE
+EXCEPT
+ current:exception:Message
+ .
+END
+
+TRY
+ 'got here'
+ .
+ EXIT
+ 'not here'
+ .
+FINALLY
+ 'always here'
+ .
+END
+
+BOOLEAN INTEGER VAR A
+BOOLEAN INTEGER STRING VAR B
+STRING VAR C
+INTEGER VAR D
+@
+A
+|N
+.
+@
+A
+%ST
+|N
+.
+@
+A
+pop:Word:Directives
+.
+разделитель
+@
+B
+|N
+.
+@
+B
+%ST
+|N
+.
+@
+B
+pop:Word:Directives
+.
+разделитель
+@
+C
+|N
+.
+@
+C
+%ST
+|N
+.
+@
+C
+pop:Word:Directives
+.
+разделитель
+@
+D
+|N
+.
+@
+D
+%ST
+|N
+.
+@
+D
+pop:Word:Directives
+.
+
+[
+ 1
+ 2
+ 3
+ [
+  4
+  5
+  [
+   6
+   7
+   8
+  ]
+  9
+ ]
+ 10
+]
+.
+
+VOID Test CodeDumpTest
+ [
+  1
+  2
+  3
+  [
+   4
+   5
+   [
+    6
+    7
+    8
+   ]
+   9
+  ]
+  10
+ ]
+ .
+ @SELF
+ DumpElement
+; // VOID Test CodeDumpTest
+
+CodeDumpTest
+
+@
+[
+ 1
+ 2
+ 3
+ [
+  4
+  5
+  [
+   6
+   7
+   8
+  ]
+  9
+ ]
+ 10
+]
+DumpElement
+
+@
+[
+ 1
+ 2
+ 3
+ [
+  4
+  5
+  [
+   6
+   7
+   8
+  ]
+  9
+ ]
+ 10
+]
+DumpElement
+@
+(
+ 1
+ 2
+ 3
+ [
+  4
+  5
+  [
+   6
+   7
+   8
+  ]
+  9
+ ]
+ 10
+)
+DumpElement
+
+@
+[
+ 1
+ 2
+ 3
+ [
+  4
+  5
+  [
+   6
+   7
+   8
+  ]
+  9
+ ]
+ 10
+]
+DumpElement
+@
+(
+ 1
+ 2
+ 3
+ (
+  4
+  5
+  [
+   6
+   7
+   8
+  ]
+  9
+ )
+ 10
+)
+DumpElement
+
+@
+.
+'*.ms.script'
+'.'
+ProcessFilesWithMask
+
+@
+[
+ 1
+ 2
+ 3
+ [
+  4
+  5
+  [
+   6
+   7
+   8
+  ]
+  9
+ ]
+ 10
+]
+DumpElement
+@
+(
+ 1
+ 2
+ 3
+ (
+  4
+  5
+  [
+   6
+   7
+   8
+  ]
+  9
+ )
+ 10
+)
+DumpElement
+@
+(
+ 1
+ 2
+ 3
+ (
+  4
+  5
+  (
+   6
+   7
+   8
+  )
+  9
+ )
+ 10
+)
+DumpElement
+
+@
+DumpCode
+'*.ms.script'
+'.'
+ProcessFilesWithMask
+
+@
+.
+'*.ms.script.co'
+'.'
+ProcessFilesWithMask
+
