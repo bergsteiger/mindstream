@@ -2500,3 +2500,31 @@ FORWARD Process
 '..\..\'
 Process
 
+FORWARD Process
+: Process
+ FORWARD ProcessItem
+ STRING IN aDir
+ : ProcessItem
+  STRING IN anItem
+  anItem
+  .
+  @
+  .
+  '*.ms.script'
+  anItem
+  ProcessFilesWithMask
+  @
+  ProcessItem
+  anItem
+  ProcessSubDirs
+ ; // : ProcessItem
+ 
+ @
+ ProcessItem
+ aDir
+ ProcessSubDirs
+; // : Process
+
+'..\..\'
+Process
+
