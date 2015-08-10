@@ -1,1 +1,1 @@
-callMSS.exe %1
+call.ms.script.exe %1
