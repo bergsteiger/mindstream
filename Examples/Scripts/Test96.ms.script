@@ -1,0 +1,17 @@
+FORWARD Process
+
+: Process
+ STRING IN aDir
+
+ FORWARD ProcessItem
+
+ : ProcessItem
+  STRING IN anItem
+  anItem .
+  @ ProcessItem anItem ProcessSubDirs
+ ; // ProcessItem
+
+ @ ProcessItem aDir ProcessSubDirs
+; // Process
+
+'..\..\' Process
