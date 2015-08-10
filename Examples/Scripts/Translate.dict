@@ -1,26 +1,26 @@
 WordAlias перебрать for
 
 USES
- ..\Scripts\Dictionary\arrays.dict
+ arrays.dict
 ;
 
 WordAlias отобрать >filter>
 
 USES
- ..\Scripts\Dictionary\io.dict
+ io.dict
 ;
 
 WordAlias напечатать Print
 
 USES
- ..\Scripts\Dictionary\math.dict
+ math.dict
 ;
 
 WordAlias нечётные IsOdd
 WordAlias чётные IsEven
 
 USES
- ..\Scripts\Dictionary\reverted.dict
+ reverted.dict
 ;
 
 WordAlias "в обратном порядке" >reverted>
@@ -39,7 +39,7 @@ ARRAY FUNCTION числа
 WordAlias каждое >map>
 
 USES
- ..\Scripts\Dictionary\to.dict
+ to.dict
 ;
 
 WordAlias по to
@@ -50,7 +50,7 @@ WordAlias по to
 ; // с
 
 USES
- ..\Scripts\Dictionary\math.dict
+ math.dict
 ;
 
 WordAlias "увеличить на 1" Inc1

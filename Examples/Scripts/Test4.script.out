@@ -619,10 +619,10 @@ Dictionary: Test4.script
   H:\Dropbox\mindstream\Examples\Scripts\math.dict
   H:\Dropbox\mindstream\Examples\Scripts\io.dict
   H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
-  ..\Scripts\Dictionary\to.dict
-  ..\Scripts\Dictionary\filter.dict
-  ..\Scripts\Dictionary\map.dict
-  ..\Scripts\Dictionary\reverted.dict
+  H:\Dropbox\mindstream\Examples\Scripts\to.dict
+  H:\Dropbox\mindstream\Examples\Scripts\filter.dict
+  H:\Dropbox\mindstream\Examples\Scripts\map.dict
+  H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
   H:\Dropbox\mindstream\Examples\Scripts\string.dict
   H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
@@ -3325,10 +3325,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\math.dict
   H:\Dropbox\mindstream\Examples\Scripts\io.dict
   H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
-  ..\Scripts\Dictionary\to.dict
-  ..\Scripts\Dictionary\filter.dict
-  ..\Scripts\Dictionary\map.dict
-  ..\Scripts\Dictionary\reverted.dict
+  H:\Dropbox\mindstream\Examples\Scripts\to.dict
+  H:\Dropbox\mindstream\Examples\Scripts\filter.dict
+  H:\Dropbox\mindstream\Examples\Scripts\map.dict
+  H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
   H:\Dropbox\mindstream\Examples\Scripts\string.dict
   H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
@@ -3359,10 +3359,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\math.dict
   H:\Dropbox\mindstream\Examples\Scripts\io.dict
   H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
-  ..\Scripts\Dictionary\to.dict
-  ..\Scripts\Dictionary\filter.dict
-  ..\Scripts\Dictionary\map.dict
-  ..\Scripts\Dictionary\reverted.dict
+  H:\Dropbox\mindstream\Examples\Scripts\to.dict
+  H:\Dropbox\mindstream\Examples\Scripts\filter.dict
+  H:\Dropbox\mindstream\Examples\Scripts\map.dict
+  H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
   H:\Dropbox\mindstream\Examples\Scripts\string.dict
   H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
@@ -3472,10 +3472,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
-  ..\Scripts\Dictionary\to.dict
-  ..\Scripts\Dictionary\filter.dict
-  ..\Scripts\Dictionary\map.dict
-  ..\Scripts\Dictionary\reverted.dict
+  H:\Dropbox\mindstream\Examples\Scripts\to.dict
+  H:\Dropbox\mindstream\Examples\Scripts\filter.dict
+  H:\Dropbox\mindstream\Examples\Scripts\map.dict
+  H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
  ;
  Exports: 
   axiom:axiom
@@ -3500,12 +3500,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
-  ..\Scripts\Dictionary\to.dict
-  ..\Scripts\Dictionary\filter.dict
-  ..\Scripts\Dictionary\map.dict
-  ..\Scripts\Dictionary\reverted.dict
+  H:\Dropbox\mindstream\Examples\Scripts\to.dict
+  H:\Dropbox\mindstream\Examples\Scripts\filter.dict
+  H:\Dropbox\mindstream\Examples\Scripts\map.dict
+  H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
  ;
-Dictionary: ..\Scripts\Dictionary\to.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\to.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3535,7 +3535,7 @@ ARRAY OPERATOR : to
  ^ OPERATOR :: IN : aTo
  ARRAY OPERATOR :: to : Result
 ; // to
-Dictionary: ..\Scripts\Dictionary\filter.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\filter.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3566,7 +3566,7 @@ ARRAY FUNCTION : >filter>
  ARRAY FUNCTION :: >filter> : Result
 ; // >filter>
 ARRAY filter
-Dictionary: ..\Scripts\Dictionary\map.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\map.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3597,7 +3597,7 @@ ARRAY FUNCTION : >map>
  ARRAY FUNCTION :: >map> : Result
 ; // >map>
 ARRAY map
-Dictionary: ..\Scripts\Dictionary\reverted.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3686,13 +3686,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
-  ..\Scripts\Dictionary\arrays.dict
-  ..\Scripts\Dictionary\to.dict
-  ..\Scripts\Dictionary\filter.dict
-  ..\Scripts\Dictionary\map.dict
-  ..\Scripts\Dictionary\reverted.dict
-  ..\Scripts\Dictionary\io.dict
-  ..\Scripts\Dictionary\math.dict
+  H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
+  H:\Dropbox\mindstream\Examples\Scripts\to.dict
+  H:\Dropbox\mindstream\Examples\Scripts\filter.dict
+  H:\Dropbox\mindstream\Examples\Scripts\map.dict
+  H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
+  H:\Dropbox\mindstream\Examples\Scripts\io.dict
+  H:\Dropbox\mindstream\Examples\Scripts\math.dict
  ;
 ARRAY "в обратном порядке"
 : : "вывести разделитель"
@@ -3753,143 +3753,6 @@ ARRAY FUNCTION : числа
  ^ OPERATOR :: IN : anArray
  ARRAY FUNCTION :: числа : Result
 ; // числа
-Dictionary: ..\Scripts\Dictionary\arrays.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:std
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
-  ..\Scripts\Dictionary\to.dict
-  ..\Scripts\Dictionary\filter.dict
-  ..\Scripts\Dictionary\map.dict
-  ..\Scripts\Dictionary\reverted.dict
- ;
- Exports: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:std
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
-  ..\Scripts\Dictionary\to.dict
-  ..\Scripts\Dictionary\filter.dict
-  ..\Scripts\Dictionary\map.dict
-  ..\Scripts\Dictionary\reverted.dict
- ;
-Dictionary: ..\Scripts\Dictionary\io.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:std
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
- ;
-REDIFINITION : : Print
-==> Redefines
- VOID .
-<== Redefines
-Dictionary: ..\Scripts\Dictionary\math.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:std
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
- ;
-INTEGER FUNCTION : Dec1
- INTEGER OPERATOR :: IN : aValue
- INTEGER FUNCTION :: Dec1 : Result
-; // Dec1
-INTEGER FUNCTION : DecWith
- ^ OPERATOR :: IN : aDec
- INTEGER OPERATOR :: IN : aValue
- INTEGER FUNCTION :: DecWith : Result
-; // DecWith
-INTEGER FUNCTION : Inc1
- INTEGER OPERATOR :: IN : aValue
- INTEGER FUNCTION :: Inc1 : Result
-; // Inc1
-INTEGER FUNCTION : IncWith
- ^ OPERATOR :: IN : anInc
- INTEGER OPERATOR :: IN : aValue
- INTEGER FUNCTION :: IncWith : Result
-; // IncWith
-BOOLEAN FUNCTION : IsEven
- INTEGER OPERATOR :: IN : aValue
- BOOLEAN FUNCTION :: IsEven : Result
-; // IsEven
-BOOLEAN FUNCTION : IsOdd
- INTEGER OPERATOR :: IN : aValue
- BOOLEAN FUNCTION :: IsOdd : Result
-; // IsOdd
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
  Uses: 
   axiom:axiom
