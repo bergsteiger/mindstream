@@ -2377,3 +2377,25 @@ FORWARD Process
 '..'
 Process
 
+FORWARD Process
+: Process
+ STRING IN aDir
+ TtfwWord IN aLambda
+ : ProcessItem
+  STRING IN anItem
+  anItem
+  aLambda
+  DO
+ ; // : ProcessItem
+ 
+ @
+ ProcessItem
+ aDir
+ ProcessSubDirs
+; // : Process
+
+@
+.
+'..'
+Process
+
