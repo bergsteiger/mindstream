@@ -16,6 +16,7 @@ FORWARD Process
   @ DoFile '*.ms.script' anItem ProcessFilesWithMask
   @ DoFile '*.pas' anItem ProcessFilesWithMask
   @ DoFile '*.txt' anItem ProcessFilesWithMask
+  @ DoFile '*.inc' anItem ProcessFilesWithMask
  ; // DoDir
 
  : ProcessItem
