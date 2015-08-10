@@ -2530,10 +2530,16 @@ FORWARD Process
 : Process
  FORWARD ProcessItem
  STRING IN aDir
+ : DoFile
+  STRING IN anItem
+  anItem
+  .
+ ; // : DoFile
+ 
  : ProcessItem
   STRING IN anItem
   @
-  .
+  DoFile
   '*.ms.script'
   anItem
   ProcessFilesWithMask

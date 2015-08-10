@@ -5,10 +5,15 @@ FORWARD Process
 
  FORWARD ProcessItem
 
+ : DoFile
+  STRING IN anItem
+  anItem .
+ ; // DoFile
+
  : ProcessItem
   STRING IN anItem
   //anItem .
-  @ . '*.ms.script' anItem ProcessFilesWithMask
+  @ DoFile '*.ms.script' anItem ProcessFilesWithMask
   @ ProcessItem anItem ProcessSubDirs
  ; // ProcessItem
 
