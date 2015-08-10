@@ -17,3 +17,15 @@ INTEGER FUNCTION Dec1
  INTEGER IN aValue
  aValue 1 - >>> Result
 ; // Dec1
+
+INTEGER FUNCTION IncWith
+ INTEGER IN aValue
+ ^ IN anInc
+ aValue anInc DO + >>> Result
+; // Inc1
+
+INTEGER FUNCTION DecWith
+ INTEGER IN aValue
+ ^ IN aDec
+ aValue aDec DO - >>> Result
+; // Dec1
