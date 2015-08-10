@@ -72,6 +72,11 @@ FORWARD Process
   '*.ms.script'
   anItem
   ProcessFilesWithMask
+  @
+  DoFile
+  '*.pas'
+  anItem
+  ProcessFilesWithMask
  ; // : DoDir
  
  : ProcessItem
