@@ -616,14 +616,14 @@ Dictionary: Test4.script
   axiom:ActionList
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\Exports.script
-  ..\Scripts\Dictionary\math.dict
-  ..\Scripts\Dictionary\io.dict
-  ..\Scripts\Dictionary\arrays.dict
+  H:\Dropbox\mindstream\Examples\Scripts\math.dict
+  H:\Dropbox\mindstream\Examples\Scripts\io.dict
+  H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
   ..\Scripts\Dictionary\to.dict
   ..\Scripts\Dictionary\filter.dict
   ..\Scripts\Dictionary\map.dict
   ..\Scripts\Dictionary\reverted.dict
-  ..\Scripts\Dictionary\string.dict
+  H:\Dropbox\mindstream\Examples\Scripts\string.dict
   H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
  ;
@@ -3322,14 +3322,14 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
-  ..\Scripts\Dictionary\math.dict
-  ..\Scripts\Dictionary\io.dict
-  ..\Scripts\Dictionary\arrays.dict
+  H:\Dropbox\mindstream\Examples\Scripts\math.dict
+  H:\Dropbox\mindstream\Examples\Scripts\io.dict
+  H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
   ..\Scripts\Dictionary\to.dict
   ..\Scripts\Dictionary\filter.dict
   ..\Scripts\Dictionary\map.dict
   ..\Scripts\Dictionary\reverted.dict
-  ..\Scripts\Dictionary\string.dict
+  H:\Dropbox\mindstream\Examples\Scripts\string.dict
   H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
  ;
@@ -3356,19 +3356,19 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
-  ..\Scripts\Dictionary\math.dict
-  ..\Scripts\Dictionary\io.dict
-  ..\Scripts\Dictionary\arrays.dict
+  H:\Dropbox\mindstream\Examples\Scripts\math.dict
+  H:\Dropbox\mindstream\Examples\Scripts\io.dict
+  H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
   ..\Scripts\Dictionary\to.dict
   ..\Scripts\Dictionary\filter.dict
   ..\Scripts\Dictionary\map.dict
   ..\Scripts\Dictionary\reverted.dict
-  ..\Scripts\Dictionary\string.dict
+  H:\Dropbox\mindstream\Examples\Scripts\string.dict
   H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
  ;
 uses
-Dictionary: ..\Scripts\Dictionary\math.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\math.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3419,7 +3419,7 @@ BOOLEAN FUNCTION : IsOdd
  INTEGER OPERATOR :: IN : aValue
  BOOLEAN FUNCTION :: IsOdd : Result
 ; // IsOdd
-Dictionary: ..\Scripts\Dictionary\io.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\io.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3448,7 +3448,7 @@ REDIFINITION : : Print
 ==> Redefines
  VOID .
 <== Redefines
-Dictionary: ..\Scripts\Dictionary\arrays.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3625,7 +3625,7 @@ Dictionary: ..\Scripts\Dictionary\reverted.dict
 ARRAY >reverted>
 ARRAY reverted
 ARRAY REVERTED
-Dictionary: ..\Scripts\Dictionary\string.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\string.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3753,6 +3753,143 @@ ARRAY FUNCTION : числа
  ^ OPERATOR :: IN : anArray
  ARRAY FUNCTION :: числа : Result
 ; // числа
+Dictionary: ..\Scripts\Dictionary\arrays.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  ..\Scripts\Dictionary\to.dict
+  ..\Scripts\Dictionary\filter.dict
+  ..\Scripts\Dictionary\map.dict
+  ..\Scripts\Dictionary\reverted.dict
+ ;
+ Exports: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  ..\Scripts\Dictionary\to.dict
+  ..\Scripts\Dictionary\filter.dict
+  ..\Scripts\Dictionary\map.dict
+  ..\Scripts\Dictionary\reverted.dict
+ ;
+Dictionary: ..\Scripts\Dictionary\io.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+REDIFINITION : : Print
+==> Redefines
+ VOID .
+<== Redefines
+Dictionary: ..\Scripts\Dictionary\math.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+INTEGER FUNCTION : Dec1
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: Dec1 : Result
+; // Dec1
+INTEGER FUNCTION : DecWith
+ ^ OPERATOR :: IN : aDec
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: DecWith : Result
+; // DecWith
+INTEGER FUNCTION : Inc1
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: Inc1 : Result
+; // Inc1
+INTEGER FUNCTION : IncWith
+ ^ OPERATOR :: IN : anInc
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: IncWith : Result
+; // IncWith
+BOOLEAN FUNCTION : IsEven
+ INTEGER OPERATOR :: IN : aValue
+ BOOLEAN FUNCTION :: IsEven : Result
+; // IsEven
+BOOLEAN FUNCTION : IsOdd
+ INTEGER OPERATOR :: IN : aValue
+ BOOLEAN FUNCTION :: IsOdd : Result
+; // IsOdd
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
  Uses: 
   axiom:axiom
