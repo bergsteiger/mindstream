@@ -2363,3 +2363,17 @@ ProcessFilesWithMask
 '..'
 Process
 
+FORWARD Process
+: Process
+ STRING IN aDir
+ TtfwWord IN aLambda
+ aLambda
+ aDir
+ ProcessSubDirs
+; // : Process
+
+@
+.
+'..'
+Process
+
