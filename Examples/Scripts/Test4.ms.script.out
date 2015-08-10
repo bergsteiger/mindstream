@@ -616,16 +616,16 @@ Dictionary: Test4.ms.script
   axiom:ActionList
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\Exports.script
-  H:\Dropbox\mindstream\Examples\Scripts\math.dict
-  H:\Dropbox\mindstream\Examples\Scripts\io.dict
-  H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
-  H:\Dropbox\mindstream\Examples\Scripts\to.dict
-  H:\Dropbox\mindstream\Examples\Scripts\filter.dict
-  H:\Dropbox\mindstream\Examples\Scripts\map.dict
-  H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
-  H:\Dropbox\mindstream\Examples\Scripts\string.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
+  H:\Dropbox\mindstream\Examples\Scripts\math.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\io.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\string.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\Translate.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeDump.ms.dict
  ;
 Dictionary: axiom:axiom
  Uses: 
@@ -3322,16 +3322,16 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\math.dict
-  H:\Dropbox\mindstream\Examples\Scripts\io.dict
-  H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
-  H:\Dropbox\mindstream\Examples\Scripts\to.dict
-  H:\Dropbox\mindstream\Examples\Scripts\filter.dict
-  H:\Dropbox\mindstream\Examples\Scripts\map.dict
-  H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
-  H:\Dropbox\mindstream\Examples\Scripts\string.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
+  H:\Dropbox\mindstream\Examples\Scripts\math.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\io.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\string.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\Translate.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeDump.ms.dict
  ;
  Exports: 
   axiom:axiom
@@ -3356,19 +3356,19 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\math.dict
-  H:\Dropbox\mindstream\Examples\Scripts\io.dict
-  H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
-  H:\Dropbox\mindstream\Examples\Scripts\to.dict
-  H:\Dropbox\mindstream\Examples\Scripts\filter.dict
-  H:\Dropbox\mindstream\Examples\Scripts\map.dict
-  H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
-  H:\Dropbox\mindstream\Examples\Scripts\string.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
+  H:\Dropbox\mindstream\Examples\Scripts\math.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\io.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\string.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\Translate.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeDump.ms.dict
  ;
 uses
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\math.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\math.ms.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3419,7 +3419,7 @@ BOOLEAN FUNCTION : IsOdd
  INTEGER OPERATOR :: IN : aValue
  BOOLEAN FUNCTION :: IsOdd : Result
 ; // IsOdd
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\io.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\io.ms.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3448,7 +3448,7 @@ REDIFINITION : : Print
 ==> Redefines
  VOID .
 <== Redefines
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\arrays.ms.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3472,10 +3472,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\to.dict
-  H:\Dropbox\mindstream\Examples\Scripts\filter.dict
-  H:\Dropbox\mindstream\Examples\Scripts\map.dict
-  H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
+  H:\Dropbox\mindstream\Examples\Scripts\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\reverted.ms.dict
  ;
  Exports: 
   axiom:axiom
@@ -3500,12 +3500,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\to.dict
-  H:\Dropbox\mindstream\Examples\Scripts\filter.dict
-  H:\Dropbox\mindstream\Examples\Scripts\map.dict
-  H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
+  H:\Dropbox\mindstream\Examples\Scripts\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\reverted.ms.dict
  ;
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\to.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\to.ms.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3535,7 +3535,7 @@ ARRAY OPERATOR : to
  ^ OPERATOR :: IN : aTo
  ARRAY OPERATOR :: to : Result
 ; // to
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\filter.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\filter.ms.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3566,7 +3566,7 @@ ARRAY FUNCTION : >filter>
  ARRAY FUNCTION :: >filter> : Result
 ; // >filter>
 ARRAY filter
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\map.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\map.ms.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3597,7 +3597,7 @@ ARRAY FUNCTION : >map>
  ARRAY FUNCTION :: >map> : Result
 ; // >map>
 ARRAY map
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\reverted.ms.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3625,7 +3625,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
 ARRAY >reverted>
 ARRAY reverted
 ARRAY REVERTED
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\string.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\string.ms.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3662,7 +3662,7 @@ STRING FUNCTION : string:CatWihAny
  OPERATOR :: IN : aValue
  STRING FUNCTION :: string:CatWihAny : Result
 ; // string:CatWihAny
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Translate.ms.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3686,13 +3686,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Translate.dict
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\arrays.dict
-  H:\Dropbox\mindstream\Examples\Scripts\to.dict
-  H:\Dropbox\mindstream\Examples\Scripts\filter.dict
-  H:\Dropbox\mindstream\Examples\Scripts\map.dict
-  H:\Dropbox\mindstream\Examples\Scripts\reverted.dict
-  H:\Dropbox\mindstream\Examples\Scripts\io.dict
-  H:\Dropbox\mindstream\Examples\Scripts\math.dict
+  H:\Dropbox\mindstream\Examples\Scripts\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\io.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\math.ms.dict
  ;
 ARRAY "в обратном порядке"
 : : "вывести разделитель"
@@ -3753,7 +3753,7 @@ ARRAY FUNCTION : числа
  ^ OPERATOR :: IN : anArray
  ARRAY FUNCTION :: числа : Result
 ; // числа
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeDump.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeDump.ms.dict
  Uses: 
   axiom:axiom
   axiom:Ctx

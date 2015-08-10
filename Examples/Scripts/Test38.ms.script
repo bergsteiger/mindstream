@@ -1,9 +1,9 @@
 WordAlias uses USES
 
 uses
- math.dict
- io.dict
- arrays.dict
+ math.ms.dict
+ io.ms.dict
+ arrays.ms.dict
 ;
 
 for ( ( 1 to 20 ) >filter> IsOdd >map> ( 1 + ) reverted ) Print

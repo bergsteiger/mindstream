@@ -1,26 +1,26 @@
 WordAlias перебрать for
 
 USES
- arrays.dict
+ arrays.ms.dict
 ;
 
 WordAlias отобрать >filter>
 
 USES
- io.dict
+ io.ms.dict
 ;
 
 WordAlias напечатать Print
 
 USES
- math.dict
+ math.ms.dict
 ;
 
 WordAlias нечётные IsOdd
 WordAlias чётные IsEven
 
 USES
- reverted.dict
+ reverted.ms.dict
 ;
 
 WordAlias "в обратном порядке" >reverted>
@@ -39,7 +39,7 @@ ARRAY FUNCTION числа
 WordAlias каждое >map>
 
 USES
- to.dict
+ to.ms.dict
 ;
 
 WordAlias по to
@@ -50,7 +50,7 @@ WordAlias по to
 ; // с
 
 USES
- math.dict
+ math.ms.dict
 ;
 
 WordAlias "увеличить на 1" Inc1

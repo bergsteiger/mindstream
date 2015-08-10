@@ -1,9 +1,9 @@
 USES
- to.dict
- math.dict
- filter.dict
- io.dict
- map.dict
+ to.ms.dict
+ math.ms.dict
+ filter.ms.dict
+ io.ms.dict
+ map.ms.dict
 ;
 
 for ( ( 1 to 20 ) >filter> IsOdd >map> ( 1 + ) Reverted ) Print
