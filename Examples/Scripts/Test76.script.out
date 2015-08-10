@@ -1,0 +1,23 @@
+[ 1 2 3 [ 4 5 [ 6 7 8 ] 9 ] 10 ]
+VOID Test CodeDumpTest
+ [
+  1
+  2
+  3
+  [
+   4
+   5
+   [
+    6
+    7
+    8
+   ]
+   9
+  ]
+  10
+ ]
+ .
+ @SELF
+ DumpElement
+; // VOID Test CodeDumpTest
+
