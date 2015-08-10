@@ -1,0 +1,1 @@
+@ . '*.mss.co' '.' ProcessFilesWithMask
