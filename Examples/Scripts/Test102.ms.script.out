@@ -29,6 +29,13 @@
 ..\..\Core\msObject.pas
 ..\..\Core\msStreamUtils.pas
 ..\..\Core\msStringList.pas
+..\..\Core\Description.txt
+..\..\Drafts\DI2.txt
+..\..\Drafts\LineCross.txt
+..\..\Drafts\service1.txt
+..\..\Drafts\service2.txt
+..\..\Drafts\service3.txt
+..\..\EmbaTasks\ToDo.txt
 ..\..\EmbaTasks\Empty\Unit1.pas
 ..\..\EmbaTasks\Module10\E1\Unit1.pas
 ..\..\EmbaTasks\Module10\E2\Unit1.pas
@@ -60,32 +67,52 @@
 ..\..\EmbaTasks\Module3\E2\Unit1.pas
 ..\..\EmbaTasks\Module3\E3\Unit1.pas
 ..\..\EmbaTasks\Module4\E1\Unit1.pas
+..\..\EmbaTasks\Module4\E1\ToDo.txt
 ..\..\EmbaTasks\Module4\E2\Unit1.pas
+..\..\EmbaTasks\Module4\E2\ToDo.txt
 ..\..\EmbaTasks\Module4\E3\Unit1.pas
+..\..\EmbaTasks\Module4\E3\ToDo.txt
 ..\..\EmbaTasks\Module4\E4\Unit1.pas
+..\..\EmbaTasks\Module4\E4\ToDo.txt
 ..\..\EmbaTasks\Module4\E5\Unit1.pas
+..\..\EmbaTasks\Module4\E5\ToDo.txt
 ..\..\EmbaTasks\Module5\E1\Unit1.pas
 ..\..\EmbaTasks\Module5\E2\Unit1.pas
+..\..\EmbaTasks\Module5\E2\ToDo.txt
 ..\..\EmbaTasks\Module5\E3\Unit1.pas
+..\..\EmbaTasks\Module5\E3\ToDo.txt
 ..\..\EmbaTasks\Module5\E4\Unit1.pas
+..\..\EmbaTasks\Module5\E4\ToDo.txt
 ..\..\EmbaTasks\Module6\E1\Unit1.pas
+..\..\EmbaTasks\Module6\E1\ToDo.txt
 ..\..\EmbaTasks\Module6\E2\Unit1.pas
+..\..\EmbaTasks\Module6\E2\ToDo.txt
 ..\..\EmbaTasks\Module6\E3\Unit1.pas
+..\..\EmbaTasks\Module6\E3\ToDo.txt
 ..\..\EmbaTasks\Module6\E4\Unit1.pas
+..\..\EmbaTasks\Module6\E4\ToDo.txt
 ..\..\EmbaTasks\Module7\E1\Unit1.pas
+..\..\EmbaTasks\Module7\E1\ToDo.txt
 ..\..\EmbaTasks\Module7\E2\Unit1.pas
+..\..\EmbaTasks\Module7\E2\ToDo.txt
 ..\..\EmbaTasks\Module7\E3\Unit1.pas
 ..\..\EmbaTasks\Module7\E4\Unit1.pas
 ..\..\EmbaTasks\Module8\E1\Unit1.pas
 ..\..\EmbaTasks\Module8\E2\Unit1.pas
 ..\..\EmbaTasks\Module8\E3\Unit1.pas
 ..\..\EmbaTasks\Module8\E4\Unit1.pas
+..\..\EmbaTasks\Module8\E4\ToDo.txt
+..\..\EmbaTasks\Module9\ToDo.txt
 ..\..\EmbaTasks\Module9\E1\Unit1.pas
 ..\..\EmbaTasks\Module9\E2\Unit1.pas
 ..\..\EmbaTasks\Module9\E3\Unit1.pas
+..\..\EmbaTasks\Module9\E3\ToDo.txt
 ..\..\EmbaTasks\Module9\E4\Unit1.pas
+..\..\EmbaTasks\Module9\E4\ToDo.txt
 ..\..\EmbaTasks\Module9\E5\Unit1.pas
+..\..\EmbaTasks\Module9\E5\ToDo.txt
 ..\..\EmbaTasks\Module9\E6\Unit1.pas
+..\..\EmbaTasks\Module9\E6\ToDo.txt
 ..\..\Examples\ScriptedAxiomatics\ComboBoxProcessingPack.pas
 ..\..\Examples\ScriptedAxiomatics\kwCodeIterator.pas
 ..\..\Examples\ScriptedAxiomatics\vtComboBoxWordsPack.pas
@@ -196,6 +223,7 @@
 ..\..\Examples\Scripts\Test97.ms.script
 ..\..\Examples\Scripts\Test98.ms.script
 ..\..\Examples\Scripts\Test99.ms.script
+..\..\Examples\Scripts\help.txt
 ..\..\Examples\Scripts\Other\2DROP.ms.script
 ..\..\Examples\Scripts\Other\2DUP.ms.script
 ..\..\Examples\Scripts\Other\2OVER.ms.script
@@ -252,6 +280,7 @@
 ..\..\fmx.dunit\u_fmGUITestRunner.pas
 ..\..\fmx.dunit\u_SecondTest.pas
 ..\..\fmx.dunit\u_TCounter.pas
+..\..\fmx.dunit\Win32\Debug\TestSettings.txt
 ..\..\fmx.dunit_before_enumerator\FMX.DUnit.Interfaces.pas
 ..\..\fmx.dunit_before_enumerator\FMX.DUnit.msAppLog.pas
 ..\..\fmx.dunit_before_enumerator\FMX.DUnit.msLog.pas
@@ -261,6 +290,7 @@
 ..\..\fmx.dunit_before_enumerator\u_fmGUITestRunner.pas
 ..\..\fmx.dunit_before_enumerator\u_SecondTest.pas
 ..\..\fmx.dunit_before_enumerator\u_TCounter.pas
+..\..\fmx.dunit_before_enumerator\Win32\Debug\TestSettings.txt
 ..\..\Marshal\msDiagrammMarshal.pas
 ..\..\Marshal\msDiagrammsMarshal.pas
 ..\..\Marshal\msMarshalPrim.pas
@@ -269,6 +299,7 @@
 ..\..\MetaShapes\msShapeClass.pas
 ..\..\MetaShapes\msShapeClassPrim.pas
 ..\..\Patches\msGarbageCollector.pas
+..\..\PublishedDirectory\B84\article 6.txt
 ..\..\Scripting\Script.Axiomatics.pas
 ..\..\Scripting\Script.Code.pas
 ..\..\Scripting\Script.Dictionary.pas
@@ -280,6 +311,467 @@
 ..\..\Scripting\Script.Word.Examples.pas
 ..\..\Scripting\Script.Word.pas
 ..\..\Scripting\Script.WordsInterfaces.pas
+..\..\Scripting\Additional\F1\Example\Presets\BaseSearch.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\BaseUC.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Create_new_etalon_when_changing_the_database.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Etalon_new.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Etalon_upd.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Smoke_tests.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\VG-контролы.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\ААК-Оглавление.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\ААК.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Баллоны.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\В документе не должны содержаться комментарии.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Вкладка предупреждения.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Выделить N параграфов.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Запись в RTF.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Изменились эталоны при переходе с new7 на new8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\ИнФарм.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\История навигации.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Комментарии.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Контекстная фильтрация всех деревьев.txt
+..\..\Scripting\Additional\F1\Example\Presets\Меню во вкладке.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Нажать на кнопку мышки.txt
+..\..\Scripting\Additional\F1\Example\Presets\Нажать на ссылку в баллоне МГО.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Найти далее и убедиться, что ничего не нашлось.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Область вкладок.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Обработка нажатия кнопок.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Оглавление в придоченном состоянии.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\ОИД.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Открытие нового окна.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Оценка документа.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Переместить курсор мыши.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\ПЗ.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\ППР.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Предварительный просмотр с эталонами.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Предварительный просмотр.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Проверка печати и экспорта, изменяемых в Настройке конфигурации.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Проверка правильности фильтрации поля номер в ППР.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Проверка скриптов в коде.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Работа с картинками.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Работа с консультациями.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Ресурсы приложения.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Сделать в расширенной конфигурации.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Совещание онлайн.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\СР.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Статусбар.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Странные тесты которые падают только вместе.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Тесты проверки форм.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Тесты сломавшиеся при переходе с полуторного интервала на одинарный.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Толковый словарь.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Тулбары.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Установить фокус в документ.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Фильтры.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Флеш-документы.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Эталон главного меню.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Эталон контекстного меню.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Эталоны-картинки контролов.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC100.1.6.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC100.2.6.2.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC100.2.6.30.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC100.2.6.37.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC100.2.6.39.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC100.2.6.41.5.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC100.2.6.41.5.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC100.2.6.55.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC100.2.6.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC100.2.6.8.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC100.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC101.9.1.47.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC101.9.2.47.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC129.1.6.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC129.1.9.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC130.1.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC130.3.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC130.4.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC130.6.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC130.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC147.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC147.1.4.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC147.1.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC147.1.9.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC147.11.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC147.14.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC147.2.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC147.6.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC147.6.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC147.6.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC147.9.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC147.9.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC147.9.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC189.1.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC189.1.4.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC189.1.4.1.4.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC189.1.4.1.7.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC189.1.4.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC189.2.1.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC189.2.2.10.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC190.1.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC190.13.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC190.15.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC190.15.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC190.3.1.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC190.3.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC190.3.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC190.9.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC191.2.4.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.1.12.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.1.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.1.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.1.6.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.2.10.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.2.12.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.2.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.2.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.2.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.2.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.2.9.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.3.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.3.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.4.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.6.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.7.10.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.7.10.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.7.11.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.7.13.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.7.14.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.7.2.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.7.2.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.7.3.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.7.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.7.6.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.8.3.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.8.3.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.8.3.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.8.3.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.8.3.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.8.3.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.10.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.10.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.11.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.11.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.11.4.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.11.5.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.12.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.7.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.7.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.9.11.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.9.11.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.9.11.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.9.20.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.9.9.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.9.9.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC192.9.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC199.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC199.2.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC199.3.11.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC199.3.11.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC199.3.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC199.3.9.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC202.17.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC202.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC202.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.1.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.1.4.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.1.6.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.1.6.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.1.6.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.10.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.10.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.10.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.15.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.15.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.2.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.3.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.5.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.5.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.8.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.8.2.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC250.12.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC252.1.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC252.1.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC252.2.1.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC252.2.1.2.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC332.16.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC337.5.16.6.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC337.5.16.7.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC337.5.2.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC337.5.5.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC376.1.3.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC376.1.3.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC392.1.4.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC392.4.21.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.2.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.3.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.3.5.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.3.5.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.4.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.5.2.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.5.2.1.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.5.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.5.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.6.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.7.2.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.8.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC393.9.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC408.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC408.3.2.1.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC408.3.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC410.5.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC410.5.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC411.3.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC411.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC411.5.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC411.6.1.4.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC70.11.1.16.6.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC70.11.1.17.5.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC70.7.2.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC70.7.2.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC71.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC71.4.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC71.7.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC71.7.6.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC71.8.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.1.4.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.10.9.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.10.9.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.12.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.2.6.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.24.2.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.25.11.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.25.12.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.25.12.3.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.25.8.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.25.8.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.25.8.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.3.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.36.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.38.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.39.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.4.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.5.2.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.5.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC72.6.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.1.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.10.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.10.3.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.10.3.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.10.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.10.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.1.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.2.11.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.2.14.3.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.2.16.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.2.4.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.2.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.2.6.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.2.6.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.2.6.9.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.2.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.2.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.3.3.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.3.3.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.4.6.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.4.9.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.5.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.6.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.7.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.11.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.13.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.14.25.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.15.1.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.15.1.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.15.2.9.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.15.4.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.15.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.15.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.15.9.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.15.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.16.1.11.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.16.1.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.16.1.6.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.18.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.18.1.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.18.1.9.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.19.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.19.8.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.19.8.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.19.8.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.20.15.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.21.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.22.13.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.22.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.22.9.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.24.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.25.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.26.2.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.27.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.27.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.28.2.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.30.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.30.11.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.30.12.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.30.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.30.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.1.3.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.1.3.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.1.3.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.1.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.1.6.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.1.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.2.10.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.2.11.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.2.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.2.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.2.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.2.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.2.6.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.2.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.2.8.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.2.8.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.2.9.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.2.9.2.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.2.9.2.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.3.10.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.3.10.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.3.11.11.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.3.11.13.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.3.11.14.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.3.11.17.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.3.11.2.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.3.11.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.3.12.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.3.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.3.4.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.3.6.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.31.3.9.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.4.3.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.4.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.4.8.1.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.4.8.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.4.8.4.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.4.9.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.6.2.2.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC73.8.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC74.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC74.2.2.5.12.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC74.2.2.5.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC74.3.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC74.4.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC74.7.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC74.8.6.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC74.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC74.9.3.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC74.9.5.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC74.9.5.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.1.2.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.1.2.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.2.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.2.6.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.3.10.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.3.10.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.3.16.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.3.17.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.3.7.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.3.9.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.5.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC76.5.2.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.1.1.18.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.1.1.24.18.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.1.1.24.22.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.1.1.24.25.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.1.1.24.30.15.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.1.1.24.30.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.1.1.24.35.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.1.1.24.44.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.1.1.24.7.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.1.10.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.1.11.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.1.17.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.1.18.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.1.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.1.21.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.1.21.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.1.26.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.1.27.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.1.31.1.1.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.1.31.1.2.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.1.9.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.15.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.15.21.15.6.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.15.21.15.6.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.15.22.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.15.24.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.15.24.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.15.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.15.5.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.15.6.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.2.4.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.2.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.4.7.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.6.1.7.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.7.1.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.7.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.7.6.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.8.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.8.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC77.2.8.5.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC78.11.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC99.2.2.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC99.2.6.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC99.4.7.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC99.4.7.2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC99.5.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC99.5.3.3.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC99.5.8.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\HLTC\HLTC99.7.1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Очень частные случаи\514860032.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Очень частные случаи\Assert с баллонами.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Очень частные случаи\Баллоны без Assert.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Очень частные случаи\Проблемы с баллонами.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Очень частные случаи\Сломавшиеся медали.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Очень частные случаи\Старые тесты, которые не нужно переписывать.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Очень частные случаи\Тулбары для операций модулей.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Разборки с падениями тестов\13.05.2013.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Разборки с падениями тестов\BadModal.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\04.04.2012.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\04.07.2012.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\05.09.2012.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\10.04.2012.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\10.04.2012_1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\11.09.2010.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\13.08.2012.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\17.04.2012.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\18.07.2012.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\20to21.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\23.04.2012.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\23.04.2012_1.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\23.04.2012_2.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\24.08.2012.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\27.09.2012.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\28.04.2012 Подозрения на непереключение конфигурации.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\28.04.2012.preset.txt
+..\..\Scripting\Additional\F1\Example\Presets\Смена баз\new19to20.preset.txt
+..\..\Scripting\Additional\F1\Example\Scripts\stub.txt
 ..\..\Scripting\Additional\ScriptEngine\afwImpurity.imp.pas
 ..\..\Scripting\Additional\ScriptEngine\ArrayProcessingPack.pas
 ..\..\Scripting\Additional\ScriptEngine\AutolinkFilterWordsPack.pas
@@ -1497,6 +1989,8 @@
 ..\..\SpecialShapes\ForButtons\Arrows\msUpLeftArrow.pas
 ..\..\SpecialShapes\ForButtons\Arrows\msUpRightArrow.pas
 ..\..\TestApp\TabbedTemplate.pas
+..\..\TestApp\driver.txt
+..\..\TestApp\error.txt
 ..\..\Tests\Abstract\msRegisteredShapesTestPrim.pas
 ..\..\Tests\Core\msLoggedTest.pas
 ..\..\Tests\DUnitScripting\DUnit.Scripting.AutoTest.pas
@@ -1527,3 +2021,4 @@
 ..\..\Views\msScrollingToolView.pas
 ..\..\Views\msShapeView.pas
 ..\..\Views\msTextShapeView.pas
+..\..\Win32\Debug\TestSettings.txt
