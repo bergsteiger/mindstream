@@ -558,6 +558,91 @@ FORWARD Process
 '..\..\'
 Process
 
+FORWARD Process
+: Process
+ FORWARD ProcessItem
+ STRING IN aDir
+ : DoDir
+  STRING IN anItem
+  : DoFile
+   STRING IN anItem
+   FILE VAR l_File
+   anItem
+   .
+   anItem
+   File:OpenRead
+   >>>
+   l_File
+   TRY
+    l_File
+    File:ReadLines
+    (
+     W-STRING IN aString
+     aString
+     .
+    )
+   FINALLY
+    l_File :=
+    nil
+   END
+  ; // : DoFile
+  
+  @
+  DoFile
+  '*.ms.script'
+  anItem
+  ProcessFilesWithMask
+  @
+  DoFile
+  '*.pas'
+  anItem
+  ProcessFilesWithMask
+  @
+  DoFile
+  '*.txt'
+  anItem
+  ProcessFilesWithMask
+  @
+  DoFile
+  '*.inc'
+  anItem
+  ProcessFilesWithMask
+  @
+  DoFile
+  '*.fmx'
+  anItem
+  ProcessFilesWithMask
+  @
+  DoFile
+  '*.xml'
+  anItem
+  ProcessFilesWithMask
+  @
+  DoFile
+  '*.dpr'
+  anItem
+  ProcessFilesWithMask
+ ; // : DoDir
+ 
+ : ProcessItem
+  STRING IN anItem
+  anItem
+  DoDir
+  @
+  ProcessItem
+  anItem
+  ProcessSubDirs
+ ; // : ProcessItem
+ 
+ @
+ ProcessItem
+ aDir
+ ProcessSubDirs
+; // : Process
+
+'..\..\'
+Process
+
 VOID Test ForToTest
  ARRAY OPERATOR to
   ^@ IN aFrom
