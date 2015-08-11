@@ -1,0 +1,40 @@
+USES
+ CodeDump.ms.dict
+ ;
+
+Test ListTest
+
+ : A
+  : B
+   : C
+    : D
+    ; // D
+   ; // C
+  ; //B
+ ; // A
+ 
+ ARRAY FUNCTION LIST
+  OBJECT IN anObject
+  ^ IN aFunctor
+  
+  OBJECT VAR l_Element
+  l_Element := anObject
+  Result := [
+   while true
+   begin
+    l_Element := ( l_Element aFunctor DO )
+    if ( l_Element pop:object:IsNil ) then
+     BREAK
+    l_Element 
+   end
+  ]
+ ; // LIST
+ 
+ A :: B :: C :: D |^@ LIST %P ==> ( |N . )
+ A :: B :: C :: D |^@ LIST %P Reverted ==> ( |N . )
+ 
+ @SELF DumpElement
+ 
+; // ListTest
+
+ListTest

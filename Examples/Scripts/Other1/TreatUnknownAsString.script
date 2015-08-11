@@ -1,0 +1,24 @@
+: TreatUnknownAsStringTest
+
+/*{ IMMEDIATE operator ^L
+  TtfwWordModifier::tfw_wmRightWordRef Ctx:IncludeModifier
+  TtfwWordModifier::tfw_wmTreatUnknownAsString Ctx:IncludeModifier
+ ;}*/
+ 
+ operator X 
+  ^L IN aRight
+  aRight |N .
+ ;
+ 
+ @ X __DumpMembers
+ 
+ VAR Y
+ 
+ X '123'
+ X Y 
+ X 123
+ X A
+
+;
+
+TreatUnknownAsStringTest

@@ -1,0 +1,13 @@
+'ab' 'abab' string:HasAnyOf .
+'ab' 'abac' string:HasAnyOf .
+
+'ab' '' string:HasAnyOf .
+'ab' 'd' string:HasAnyOf .
+
+'' '' string:HasAnyOf .
+'' 'a' string:HasAnyOf .
+
+'a' '' string:HasAnyOf .
+
+'abd' 'abab' string:HasAnyOf .
+'abd' 'abac' string:HasAnyOf .

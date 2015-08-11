@@ -1,0 +1,40 @@
+Тест TestBreak
+
+ VAR l_Index 
+
+ 0 >>> l_Index
+ 10 LOOP 
+ BEGIN 
+  l_Index .
+  Если ( l_Index 6 == ) то
+   BREAK
+  ++! l_Index
+ END
+
+  0 >>> l_Index
+ WHILE ( l_Index 10 LESS )
+ BEGIN
+  l_Index .
+  Если ( l_Index 7 == ) то
+   BREAK
+  ++! l_Index
+ END
+
+  0 >>> l_Index
+ 10 LOOP 
+ BEGIN 
+  l_Index .
+  l_Index 6 == ? BREAK
+  ++! l_Index
+ END
+
+ 0 >>> l_Index
+ WHILE ( l_Index 10 LESS )
+ BEGIN
+  l_Index .
+  l_Index 7 == ? BREAK
+  ++! l_Index
+ END
+;
+
+TestBreak

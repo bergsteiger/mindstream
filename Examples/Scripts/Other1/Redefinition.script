@@ -1,0 +1,32 @@
+USES
+ CodeDump.ms.dict
+;
+
+Test RedefinitionTest
+
+/*{IMMEDIATE VOID operator INHERITED
+ OBJECT VAR l_Redef
+ Ctx:WordDefiningNow pop:Word:Redefines >>> l_Redef
+ l_Redef pop:object:IsNil ! ?ASSURE 'Не найдено переопределяемое слово'
+ l_Redef CompileValue
+; // INHERITED}*/
+
+ : A
+  1 .
+ ; // A
+ 
+ REDEFINITION
+ : A
+  INHERITED
+  ( INHERITED )
+  2 .
+ ; // A 
+ 
+ A
+
+ @SELF DumpElement
+ @SELF __DumpMembers
+ 
+; // RedefinitionTest
+
+RedefinitionTest

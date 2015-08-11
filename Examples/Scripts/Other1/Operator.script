@@ -1,0 +1,32 @@
+: OperatorTest
+
+ IMMEDIATE operator P
+  @ VOID DO
+  @ operator DO
+ ;
+ 
+ IMMEDIATE operator V
+  @ VAR DO
+ ;
+ 
+ P A 
+  ^ IN aRight
+  1 .
+  aRight DO .
+ ;
+ 
+ INTEGER V X
+ X := 0
+ 
+ @ A %ST |N .
+ @ A pop:Word:Directives .
+ @ A .
+ A 2
+ 
+ @ X %ST |N .
+ @ X pop:Word:Directives .
+ @ X .
+ X .
+;
+
+OperatorTest

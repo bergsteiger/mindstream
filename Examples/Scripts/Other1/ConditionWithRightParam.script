@@ -1,0 +1,34 @@
+StereotypeProducer Before ;
+
+<<Before>> Group1
+;
+
+VOID <<Group1>> BeforeCond4 ^ IN aParam
+ 'with right param: ' . aParam DO .
+;
+
+'hello' .
+
+@ BeforeCond4 .
+
+@^ BeforeCond4 |^@ .
+
+@ BeforeCond4 pop:Word:Name .
+
+@ BeforeCond4 pop:Word:Producer pop:Word:Name .
+
+@ BeforeCond4 pop:Word:Producer pop:Word:Producer pop:Word:Name .
+
+@ BeforeCond4 pop:Word:Producer pop:Word:Producer pop:Word:Producer pop:Word:Name .
+
+'before' .
+
+BeforeCond4 '456'
+
+BeforeCond4 '456' |^@ .
+
+BeforeCond4 '456' |^@ |N .
+
+BeforeCond4 '456' |^@ %P |N .
+
+'after' .

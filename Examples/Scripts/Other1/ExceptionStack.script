@@ -1,0 +1,25 @@
+Тест ExceptionStack
+
+ PROCEDURE P1
+  STRING VAR S
+  S := 1
+ ;
+ 
+ PROCEDURE P2
+  P1
+ ;
+ 
+ PROCEDURE P3
+  P2
+ ;
+ 
+ TRY
+  P3
+ EXCEPT
+  for script:ExceptionStack .
+ END 
+ 
+;
+
+//анти-тест ExceptionStack
+ExceptionStack

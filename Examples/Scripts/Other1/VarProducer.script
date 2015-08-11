@@ -1,0 +1,49 @@
+USES
+ CodeDump.ms.dict
+ ;
+
+Тест TestVarProducer
+
+/*{IMMEDIATE operator VarProducer
+  ^L IN aName
+ STRING VAR l_Name
+ aName |N >>> l_Name
+
+ [
+  'IMMEDIATE OPERATOR'
+  l_Name
+  '^L IN aName'
+  'aName |N true Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckVar'
+  '@SELF SWAP pop:Word:SetProducer'
+  'Ctx:ClearTypeInfo'
+  ';'
+ ] Ctx:Parser:PushArray
+; // VarProducer}*/
+
+/*{ IMMEDIATE OPERATOR VarType
+  ^L IN aName
+  aName |N true Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckVar
+  @SELF SWAP pop:Word:SetProducer
+  Ctx:ClearTypeInfo
+ ; // VarType}*/
+ 
+ VarProducer VarType
+  
+ STRING VarType A
+ 'Hello' =: A
+ 
+ INTEGER VarType B
+ 23 =: B
+ 
+ A .
+ B .
+ 
+ @ A __DumpMembers
+ 
+ @ B __DumpMembers
+
+ @SELF DumpElement
+ @SELF __DumpMembers
+;
+
+TestVarProducer

@@ -1,0 +1,38 @@
+Test WordRedefineTest
+
+  : A
+   100 .
+  ; // A
+  
+  : B
+   A
+   
+   : A
+    200 .
+    A
+   ; // A
+   
+   A
+  ; // B
+  
+  : C
+   A
+   
+   operator A
+    ^ IN aRight
+    aRight DO .
+    A
+   ; // A
+   
+   A 300
+   A 400
+  ; // C
+  
+  A
+  B
+  A
+  C
+
+; // WordRedefineTest
+
+WordRedefineTest

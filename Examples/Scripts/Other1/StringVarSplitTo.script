@@ -1,0 +1,13 @@
+STRING VAR S
+S := '123|abc|def'
+
+'|' string:SplitTo! S
+S .
+.
+
+S := '123||abc||def'
+
+'||' string:SplitTo! S
+S .
+.
+

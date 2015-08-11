@@ -1,0 +1,40 @@
+Test MemberAccessTest
+
+  : XXX
+    VAR B
+    VAR C
+    : E
+     6000
+    ; // E
+  ; // XXX
+  
+  XXX -> D := 0
+  XXX -> D .
+  XXX -> D := 1024
+  XXX -> D .
+  
+  XXX -> E .
+  
+  XXX -> A := 1024
+  XXX -> A .
+  
+  XXX -> B := 2048
+  XXX -> B .
+  
+  XXX :: C |^@ ^:= 5000
+  XXX :: C .
+  XXX -> C .
+  
+  VAR A
+  A := 5
+  @SELF -> A := 6
+  @SELF -> A .
+  
+  @SELF -> A .
+  A .
+  
+  @SELF __DumpMembers
+  
+; // MemberAccessTest
+
+MemberAccessTest

@@ -1,0 +1,26 @@
+: TestCallerWorker
+
+ VOID CALLER operator DoIt
+  Caller -> X .
+ ;
+ 
+ : A
+  VAR X
+  X := 1025
+  
+  DoIt
+ ;
+ 
+ : B
+  VAR X
+  X := 'Hello'
+  
+  DoIt
+ ;
+ 
+ A
+ B
+
+;
+
+TestCallerWorker

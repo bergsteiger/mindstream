@@ -1,0 +1,40 @@
+USES
+ CodeDump.ms.dict
+;
+
+: ParserTokensTest
+
+ IMMEDIATE 
+  operator X
+   ^L IN aName
+   ^ IN aValue
+  STRING VAR l_Name
+  aName |N >>> l_Name
+  
+  'VAR' Ctx:Parser:PushSymbol
+  l_Name Ctx:Parser:PushSymbol
+  
+  aValue
+  '[EXECUTE]' Ctx:Parser:PushSymbol
+  'CompileValue' Ctx:Parser:PushSymbol
+  
+  //0 Ctx:Parser:PushInt
+  '>>>' Ctx:Parser:PushSymbol
+  l_Name Ctx:Parser:PushSymbol
+ ;
+ 
+ STRING X A 'A'
+ INTEGER X B 1
+ X C 'B'
+ INTEGER X D 2
+ 
+ A .
+ B .
+ C .
+ D .
+ 
+ @SELF __DumpMembers
+ @SELF DumpElement
+;
+
+ParserTokensTest

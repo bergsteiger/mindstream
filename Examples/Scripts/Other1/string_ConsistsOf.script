@@ -1,0 +1,13 @@
+'ab' 'abab' string:ConsistsOf .
+'ab' 'abac' string:ConsistsOf .
+
+'ab' '' string:ConsistsOf .
+'ab' 'd' string:ConsistsOf .
+
+'' '' string:ConsistsOf .
+'' 'a' string:ConsistsOf .
+
+'a' '' string:ConsistsOf .
+
+'abd' 'abab' string:ConsistsOf .
+'abd' 'abac' string:ConsistsOf .

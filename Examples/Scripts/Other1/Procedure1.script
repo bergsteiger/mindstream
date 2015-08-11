@@ -1,0 +1,16 @@
+USES
+ CodeDump.ms.dict
+ ;
+
+Тест ProcedureTest
+
+ PROCEDURE "Поиск текста"
+  1 .
+ ; // "Поиск текста"
+ 
+ "Поиск текста"
+ 
+ @SELF DumpElement
+; // ProcedureTest
+
+ProcedureTest

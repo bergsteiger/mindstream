@@ -1,0 +1,18 @@
+: TestImmedWordWorker
+
+ IMMEDIATE VOID CALLER operator Print 
+   ^ IN aLambda
+  aLambda DO = 123 ?ASSURE 'Не прошла проверка'
+  Caller -> %U := ( aLambda DO )
+ ;
+ 
+ 'Hello' .
+ Print 123
+
+ %U := 1024
+ %U .
+ %U := 100
+ %U .
+;
+
+TestImmedWordWorker

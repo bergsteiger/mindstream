@@ -1,0 +1,150 @@
+Тест TestWordProducer
+
+/*{IMMEDIATE operator WordProducer
+  ^L IN aName
+ 
+ @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE OPERATOR'
+  aName |N
+  '@SELF Ctx:SetWordProducerForCompiledClass'
+  '@ operator DO'
+  ';'
+ ] Ctx:Parser:PushArray
+; // WordProducer
+ 
+IMMEDIATE operator NamedWordProducer
+  ^L IN aName
+  ^L IN aNewName
+ 
+ @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE OPERATOR'
+  aName |N
+  '@SELF Ctx:SetWordProducerForCompiledClass'
+  aNewName |NS
+  'Ctx:SetNewWordName'
+  '@ operator DO'
+  ';'
+ ] Ctx:Parser:PushArray
+; // NamedWordProducer}*/
+
+ WordProducer <<Facet>>
+ WordProducer <<Interface>>
+
+ : N
+  @SELF %ST pop:object:ClassName .
+ ;
+ 
+ <<Facet>> A
+  'A' .
+  @SELF pop:object:ClassName .
+  @SELF |N .
+  @SELF %P pop:object:ClassName .
+  @SELF %P |N .
+  @SELF %P %P pop:object:ClassName .
+  //@SELF %P %P %P pop:object:ClassName .
+  @SELF %ST pop:object:ClassName .
+  @SELF %ST |N .
+  //@SELF %ST %ST pop:object:ClassName .
+  VAR XXX
+  
+  @ XXX pop:object:ClassName .
+  @ XXX |N .
+  @ XXX %ST pop:object:ClassName .
+  @ XXX %ST |N .
+ ;
+ 
+ //NamedWordProducer INHERITS %G
+ 
+ <<Facet>> B
+ 
+  %INHERITS
+   A
+  ;
+  
+  'B' .
+ ;
+ 
+ <<Interface>> C
+  'C' .
+  @SELF pop:object:ClassName .
+  @SELF %P pop:object:ClassName .
+  @SELF %P %P pop:object:ClassName .
+  @SELF %ST pop:object:ClassName .
+  //@SELF %ST %ST pop:object:ClassName .
+ ;
+ 
+ N A B C
+ 
+ StereotypeProducer MDAClass ;
+ <<MDAClass>> SimpleClass
+  'Hello' .
+ ;
+ 
+ <<SimpleClass>> TObject
+ ; // TObject
+ 
+ <<SimpleClass>> Tl3Base
+ 
+  %INHERITS
+   TObject
+  ;
+  
+  'World' .
+ ; // Tl3Base
+ 
+ Tl3Base
+ @ Tl3Base |N .
+ @ Tl3Base pop:object:ClassName .
+ @ Tl3Base %P pop:object:ClassName .
+ @ Tl3Base %P %P pop:object:ClassName .
+ @ Tl3Base %ST |N .
+ // - тут ожидаем <<SimpleClass>>, но скорее всего - это не так
+ @ Tl3Base %ST %ST |N .
+ // - тут ожидаем <<MDAClass>>
+ @ Tl3Base %ST %ST %ST |N .
+ // - тут ожидаем StereotypeProducer
+ // Но ПАДАЕТ, т.к. он не является TkwCompiledWord, надо будет видимо спустить WordProducer на TkwWord
+ @ Tl3Base %ST %ST %ST %ST |N .
+ // - тут ожидаем ''
+ 
+ ClassProducer DefineClass
+ 
+ DefineClass TSomeClass
+ 
+  %INHERITS
+   Tl3Base
+  ;
+
+  : "Это метод нашего класса"
+  ;
+  
+  'Bang!' .
+ ;
+ 
+ TSomeClass
+ @ TSomeClass |N .
+ @ TSomeClass pop:object:ClassName .
+ @ TSomeClass %P pop:object:ClassName .
+ @ TSomeClass %P %P pop:object:ClassName .
+ @ TSomeClass %ST |N .
+ // - тут ожидаем DefineClass
+ @ TSomeClass %ST %ST |N .
+ // - тут ожидаем ClassProducer
+ // Но ПАДАЕТ, т.к. он не является TkwCompiledWord, надо будет видимо спустить WordProducer на TkwWord
+ // Уже - НЕ ПАДАЕМ, а получаем ТО ЧТО НУЖНО :-)
+ 
+ : A1
+ ;
+ 
+ @ A1 |N .
+ @ A1 pop:object:ClassName .
+ @ A1 %P pop:object:ClassName .
+ @ A1 %P %P pop:object:ClassName .
+ @ A1 %ST |N .
+ 
+ @SELF __DumpMembers
+;
+
+TestWordProducer

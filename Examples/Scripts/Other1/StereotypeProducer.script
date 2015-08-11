@@ -1,0 +1,94 @@
+USES
+ CodeDump.ms.dict
+ ;
+
+Тест StereotypeProducerTest
+
+/*{STRING FUNCTION __CheckSpaces
+ STRING IN aName
+ aName ' ' '%#32' string:Replace >>> Result
+; // __CheckSpaces
+
+STRING FUNCTION Add<<>>
+ STRING IN aName
+ [ '<<' aName '>>' ] strings:Cat >>> Result
+ Result __CheckSpaces >>> Result
+; // Add<<>>
+
+VOID operator DefineStereo
+ IN aName
+ IN aSelf
+ 
+ aSelf
+ Ctx:SetWordProducerForCompiledClass
+ 
+ [
+  'IMMEDIATE OPERATOR' aName Add<<>>
+  '^L IN aName'
+ 
+  'aName |N @SELF DefineStereoInstance'
+ 
+  'EXIT'
+ ] Ctx:Parser:PushArray
+; // DefineStereo
+ 
+VOID operator DefineStereoInstance
+ IN aName
+ IN aSelf
+ 
+ aSelf
+ Ctx:SetWordProducerForCompiledClass
+ 
+ [
+  'OPERATOR' aName __CheckSpaces
+ ] Ctx:Parser:PushArray
+; // DefineStereoInstance
+
+IMMEDIATE operator StereotypeProducer
+  ^L IN aName
+  
+ @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE OPERATOR' aName |N Add<<>>
+  '^L IN aName'
+  'aName |N @SELF DefineStereo'
+  
+  'EXIT'
+ ] Ctx:Parser:PushArray
+; // StereotypeProducer}*/
+
+/*{ StereotypeStereotypeProducer StereotypeProducer ;
+ WordAlias StereotypeProducer <<StereotypeProducer>>}*/
+
+ StereotypeProducer MDAClass ;
+ StereotypeProducer MDACategory ;
+ 
+ <<MDAClass>> "X X"
+ ;
+ 
+ <<MDAClass>> SimpleClass
+  'Hello' .
+ ;
+ 
+ <<MDAClass>> Facet
+ ;
+ 
+ <<SimpleClass>> A
+  : X
+  ;
+ ;
+ 
+ <<SimpleClass>> B
+ ;
+ 
+ <<SimpleClass>> "Y Y"
+ ;
+ 
+ <<Facet>> C
+ ;
+ 
+ @SELF DumpElement
+ @SELF __DumpMembers
+; // StereotypeProducerTest
+
+StereotypeProducerTest

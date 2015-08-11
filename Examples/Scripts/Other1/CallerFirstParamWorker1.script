@@ -1,0 +1,45 @@
+USES
+ 'TemplatesCore.tpl.script'
+;
+
+: TestCallerFirstParamWorker
+
+ VOID CALLER operator DoIt
+  Caller ->0 .
+ ;
+ 
+ PROCEDURE A IN aParam
+  DoIt
+  'Test1' ( 
+   IN aParam 
+   
+   if true 
+    DoIt 
+
+   if true then
+    DoIt 
+     
+   if false then
+    NOP
+   else
+    DoIt 
+    
+   if true then
+   (
+    DoIt 
+   ) 
+   
+   if false then
+    NOP
+   else 
+   (
+    DoIt 
+   ) 
+  )
+ ;
+ 
+ 'Test' A
+
+;
+
+TestCallerFirstParamWorker

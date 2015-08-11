@@ -1,0 +1,17 @@
+Test OperatorByRefTest
+
+  operator X
+   ^ IN aRight
+   aRight DO
+  ; // X
+
+ TRY
+  @SELF -> X 2 . 
+ EXCEPT
+  //'got' Msg
+  for script:ExceptionStack .
+ END 
+   
+; // OperatorByRefTest
+
+OperatorByRefTest

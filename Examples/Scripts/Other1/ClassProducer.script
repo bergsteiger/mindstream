@@ -1,0 +1,47 @@
+: ClassProducerTest
+
+/*{ IMMEDIATE operator ClassProducer
+  @ operator DO
+ ;
+ 
+ IMMEDIATE ClassProducer DefineClass
+  @ operator DO
+ ;}*/
+ 
+ //WordAlias ClassProducer WordProducer
+ 
+ ClassProducer DefineClass
+ 
+ DefineClass TSomeClass
+ 
+  //INHERITS
+  // Tl3Base
+  //;
+
+  : "Метод класса"
+  ;
+  
+  INTEGER FUNCTION "Функция класса"
+   Result := 0
+  ;
+  
+  operator "Оператор класса"
+  ;
+  
+  'Bang!' .
+ ;
+ 
+ TSomeClass
+ @ TSomeClass |N .
+ @ TSomeClass pop:object:ClassName .
+ @ TSomeClass %P pop:object:ClassName .
+ @ TSomeClass %P %P pop:object:ClassName .
+ @ TSomeClass %ST |N .
+ // - тут ожидаем DefineClass
+ @ TSomeClass %ST %ST |N .
+ // - тут ожидаем ClassProducer
+ 
+ @ TSomeClass __DumpMembers
+;
+
+ClassProducerTest

@@ -1,0 +1,50 @@
+USES
+ CodeDump.ms.dict
+;
+
+Тест Immediate
+
+/*{ IMMEDIATE operator [EXECUTE]
+  ^ IN aCode
+  aCode DO
+ ; // [EXECUTE] }*/
+ 
+ VOID IMMEDIATE operator initialization
+  ^ IN aCode
+  aCode Ctx:Engine pop:ScriptEngine:AddInitialization
+ ; // initialization
+ 
+ VAR A
+ 
+ : TryVarPrint
+  A .
+  10 >>> A
+  A .
+ ;
+ 
+ : TryVar1
+  initialization ( 1024 >>> A 
+   'Попали в инициализацию A' .
+  )
+  // - этот кусок должен выполняться ОДИН раз при компиляции скрипта
+  TryVarPrint
+ ;
+
+ : TryVar2
+  1024 >>> A
+  // - этот кусок должен выполняться КАЖДЫЙ раз при выполнении слова
+  TryVarPrint
+ ;
+ 
+ TryVar1
+ TryVar1
+ TryVar2
+ TryVar2
+ TryVar1
+ TryVar1
+ 
+ @SELF DumpElement
+ 
+;
+
+Immediate

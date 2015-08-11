@@ -1,0 +1,22 @@
+USES
+ axiom:Control
+ EditorTools.script 
+;
+
+: K271754328
+ TTextLoadForm VAR l_TextForm
+ class::TTextLoadForm .Create >>> l_TextForm
+ TRY
+  l_TextForm pop:Control:Show
+  OBJECT VAR l_Editor
+  focused:control:push >>> l_Editor
+  "Загрузить документ в {(l_TextForm)}"  
+  l_Editor pop:editor:SelectTable
+  l_Editor pop:editor:CopyAndPaste2DocumentBottom
+  "Сравнить текст с эталоном"
+ FINALLY  
+  l_TextForm AskWindowToCloseItself
+ END
+;
+
+K271754328

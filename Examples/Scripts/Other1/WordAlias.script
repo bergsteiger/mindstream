@@ -1,0 +1,42 @@
+Test WordAliasTest
+
+/*{ IMMEDIATE operator WordAlias
+  ^L IN aName
+  ^ LINK IN aCode
+  aCode aName |N Define
+ ; // WordAlias}*/
+ 
+  : X
+   100 .
+  ; // X
+  
+  operator Y
+   300 .
+  ; // Y
+  
+  operator Z
+   ^ IN aRight
+   aRight DO .
+  ; // Z
+  
+  WordAlias A .
+  WordAlias B (
+  WordAlias C @
+  WordAlias D X
+  WordAlias E Y
+  WordAlias F Z
+
+  '1' A
+  2 A
+  
+  B 123 . )
+  
+  @ '1234' DO .
+  C '5678' DO .
+  D
+  E
+  F 400
+  
+; // WordAliasTest
+
+WordAliasTest

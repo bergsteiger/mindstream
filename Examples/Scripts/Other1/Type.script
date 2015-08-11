@@ -1,0 +1,35 @@
+USES
+ CodeDump.ms.dict
+ ;
+
+Тест TypeTest
+
+/*{ VOID IMMEDIATE OPERATOR __CompileType
+  TtfwValueTypes IN aValues
+  aValues CompileValue @ Ctx:SetValueTypes CompileValue
+ ; // __CompileType
+ 
+ IMMEDIATE OPERATOR TYPE
+  ^L IN aName
+  Ctx:ValueTypes
+  Ctx:ClearTypeInfo
+  @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE VOID __operator'
+  aName |N
+  '__CompileType'
+  ';'
+ ] Ctx:Parser:PushArray
+ ; // TYPE}*/
+ 
+ INTEGER TYPE X
+ STRING INTEGER TYPE Y
+ 
+ X VAR A
+ Y VAR B
+ 
+ @SELF DumpElement
+ @SELF __DumpMembers
+; // TypeTest
+
+TypeTest

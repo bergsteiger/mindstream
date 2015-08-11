@@ -1,0 +1,38 @@
+USES
+ CodeDump.ms.dict
+ ;
+
+Тест ProcedureTest
+
+/*{ IMMEDIATE operator PROCEDURE
+  @SELF Ctx:SetWordProducerForCompiledClass
+  [
+   'VOID __operator' 
+  ] Ctx:Parser:PushArray
+ ; // PROCEDURE}*/
+ 
+ PROCEDURE A
+  1 .
+ ; // A
+ 
+ PROCEDURE B
+  '2' .
+ ; // B
+
+ PROCEDURE C
+  '3'
+ ; // C
+ 
+ A
+ B
+ TRY
+  C
+ EXCEPT
+  for script:ExceptionStack .
+ END 
+ 
+ @SELF DumpElement
+ @SELF __DumpMembers
+; // ProcedureTest
+
+ProcedureTest

@@ -1,0 +1,18 @@
+USES
+ CodeDump.ms.dict
+ ;
+
+Тест TestSourcePoint
+
+ : A
+  @SELF pop:Word:SourcePointString .
+ ;
+ 
+ A
+ 
+ @SELF pop:Word:SourcePointString .
+ @SELF DumpElement
+ 
+; // TestSourcePoint
+
+TestSourcePoint

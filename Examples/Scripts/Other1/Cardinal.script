@@ -1,0 +1,15 @@
+: CardinalTest
+
+ CARDINAL VAR X
+ X := 1
+ X .
+ 
+ "Выполнить подавив исключение" ( X := '2' )
+ X .
+ 
+ @ X pop:Word:Directives .
+ @ CARDINAL pop:Word:Directives .
+ @ CARDINAL pop:object:ClassName .
+;
+
+CardinalTest 

@@ -1,0 +1,116 @@
+USES
+ axiom:CompiledWordWorkerWord
+ axiom:Finder
+ CodeDump.ms.dict
+ ;
+ 
+Test MethodImplementing
+ 
+ StereotypeStereotypeProducer P
+ 
+  : X1
+  ;
+  
+  : m2
+  ;
+  
+ ;
+ 
+ <<@P>> MDAClass
+ 
+  : m1
+  ;
+  
+  : m2
+  ;
+  
+ ;
+ 
+ <<@P>> MDACategory
+ 
+  : m1
+  ;
+  
+  : m2
+  ;
+  
+ ;
+ 
+ <<MDAClass>> SimpleClass
+ 
+  : m1
+  ;
+  
+  : m2
+  ;
+  
+ ;
+ 
+ <<SimpleClass>> Tl3Base
+ 
+  : m1
+  ;
+  
+ ;
+ 
+ <<MDACategory>> Unit
+  : x1
+   ' World' .
+  ;
+  
+  : x2
+  ;
+ ;
+ 
+ IMMEDIATE operator implementation
+   ^ LINK IN aWordToWork
+  Ctx:PushCompiler
+  Ctx:PushFinder
+  OBJECT VAR l_NewCompiler
+  aWordToWork |^@ =: l_NewCompiler
+  
+  if ( l_NewCompiler Is class::TkwCompiledWordWorkerWord ) then
+  begin
+   l_NewCompiler pop:CompiledWordWorkerWord:Compiled >>> l_NewCompiler
+/*{   l_NewCompiler CodeIterator ==> ( IN anItem 
+    if ( NOT ( anItem %P pop:object:IsNil ) ) then
+    begin
+     anItem %P >>> l_NewCompiler
+     BREAK-ITERATOR
+    end 
+   )}*/
+  end
+  
+  l_NewCompiler pop:Compiler:SetToCtx
+  l_NewCompiler pop:Finder:SetToCtx
+ ;
+ 
+ IMMEDIATE operator end.
+  pop:Finder:SetToCtx
+  pop:Compiler:SetToCtx
+ ;
+ 
+ //implementation @^ <<Unit>>
+ implementation <<Unit>>
+ 
+  : NewMethod
+   'Hello' . x1
+  ;
+  
+ end.
+ 
+ : XXX
+  'Bang!' .
+ ;
+ 
+ @^ <<Unit>> |^@ .
+ @^ <<Unit>> |^@ |N .
+ @^ <<Unit>> :: NewMethod
+ XXX
+ 
+ @SELF DumpElement
+ @SELF __DumpMembers
+ 
+; // MethodImplementing
+
+MethodImplementing

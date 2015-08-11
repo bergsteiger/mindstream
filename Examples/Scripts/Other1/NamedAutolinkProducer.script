@@ -1,0 +1,97 @@
+: UIDS_LIST
+;
+// - список загруженных элементов
+
+Тест NamedAutolinkProducerTest
+
+/*{ STRING operator |NS
+  IN aName
+  Result := ( [ '`' aName |N '`' ] strings:Cat )
+ ; // |NS
+ 
+ IMMEDIATE operator NamedAutolinkProducer
+  ^L IN aOpName
+  ^L IN aName
+  [
+   'IMMEDIATE operator'
+   aOpName |N
+   '^ IN aCode'
+   'aCode '
+   aName |NS
+   'Define'
+   ';' 
+  ] Ctx:Parser:PushArray
+ ; // NamedAutolinkProducer}*/
+ 
+ NamedAutolinkProducer %TARGET %T
+ 
+/*{ IMMEDIATE operator %TARGET
+  ^ IN aCode
+  aCode '%T' Define
+ ; // %TARGET}*/
+ 
+IMMEDIATE VOID CALLER operator %UID 
+  ^L IN anUID
+ VAR l_S
+ anUID |^@ |N =: l_S
+ // - получаем имя (значение) UID
+ 
+ VAR l_VAR
+ 
+ UIDS_LIST ->^ l_S >>> l_VAR
+ // - добавляем переменную и снимем её со стека
+ 
+ Caller -> %U := l_VAR
+ // - добавляем элементу переменную, указывающую на его UID
+ l_VAR ^:= Caller
+ // - присваиваем в переменную с UID ссылку на сам элемент
+; // %UID 
+// - идентификатор элемента
+
+VOID IMMEDIATE operator U$
+  ^L IN anUID
+ VAR l_S
+ anUID |^@ |N =: l_S
+ UIDS_LIST ->^ l_S CompileValue
+; // U$
+// - преобразование идентификатора элемента собственно к элементу
+ 
+ : A
+  %UID 2
+  %TARGET U$ 2
+ 
+  %T |^@ .
+  %T |^@ |N .
+  %T .
+  @SELF ->^ '%T' DO .
+  @SELF ->^ '%T' DO .
+  @SELF -> %T .
+ ; // A 
+ 
+ : B
+  %UID 3
+  %TARGET U$ 2
+ 
+  %T .
+  %T .
+  @SELF ->^ '%T' DO .
+  @SELF ->^ '%T' DO .
+  @SELF -> %T .
+ ; // B
+ 
+ UIDS_LIST -> 2 |N .
+ UIDS_LIST -> 3 |N .
+ A
+ UIDS_LIST -> 2 |N .
+ UIDS_LIST -> 3 |N .
+ @SELF -> A
+ B
+ UIDS_LIST -> 2 |N .
+ UIDS_LIST -> 3 |N .
+ @SELF -> B
+ 
+ @SELF __DumpMembers
+ 
+; // NamedAutolinkProducerTest
+
+NamedAutolinkProducerTest

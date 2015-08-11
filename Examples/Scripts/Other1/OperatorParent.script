@@ -1,0 +1,14 @@
+: OperatorParentTest
+
+ operator A1
+ ;
+ 
+ @ A1 |N .
+ @ A1 pop:object:ClassName .
+ @ A1 %P pop:object:ClassName .
+ @ A1 %P %P pop:object:ClassName .
+ @ A1 %ST |N .
+ 
+;
+
+OperatorParentTest

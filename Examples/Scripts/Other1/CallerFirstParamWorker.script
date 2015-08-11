@@ -1,0 +1,33 @@
+USES
+ 'TemplatesCore.tpl.script'
+;
+
+: TestCallerFirstParamWorker
+
+ VOID CALLER operator DoIt
+  Caller ->0 .
+ ;
+ 
+ PROCEDURE A IN aParam
+  VAR X
+  1025 =: X
+  X .
+  
+  DoIt
+  
+ ;
+ 
+ PROCEDURE B IN anIn
+  VAR X
+  'Hello' =: X
+  X .
+  
+  DoIt
+ ;
+ 
+ 'Test' A
+ 'oops' B
+
+;
+
+TestCallerFirstParamWorker

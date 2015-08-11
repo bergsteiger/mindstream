@@ -1,0 +1,29 @@
+Test WordAddrTest
+
+  : X
+   100 .
+  ; // X
+  
+  operator Y
+   300 .
+  ; // Y
+  
+  operator Z
+   ^ IN aRight
+   aRight DO .
+  ; // Z
+  
+  @^ 1 |^@
+  @^ '2' |^@
+  @^ . |^@
+  @^ ( |^@
+  @^ @ |^@
+  @^ X |^@
+  @^ Y |^@
+  @^ Z |^@
+  
+  WHILE ( StackLevel > 0 ) ( IN anItem [ anItem |S anItem |N anItem ToPrintable ] ' ' strings:CatSep . )
+
+; // WordAddrTest
+
+WordAddrTest

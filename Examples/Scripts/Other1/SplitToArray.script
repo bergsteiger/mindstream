@@ -1,0 +1,8 @@
+: SplitToArrayTest  
+ 'A BC' ' ' SplitToArray ==> . 
+ 'A B C D' ' ' SplitToArray ==> .
+ 'ABC' ' ' SplitToArray ==> .
+ '' ' ' SplitToArray ==> .
+;
+
+SplitToArrayTest

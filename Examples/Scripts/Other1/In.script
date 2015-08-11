@@ -1,0 +1,37 @@
+USES
+ CodeDump.ms.dict
+ ;
+
+Тест TestIn
+
+ OPERATOR __DefineParam
+  // - тут стереотип на стеке
+  // - тут имя на стеке
+  Ctx:NewWordDefinitor pop:NewWordDefinitor:DefineInParameter
+  // - тут параметр на стеке
+  Ctx:PushCompiler pop:Compiler:CompileInParameterPopCode
+  Ctx:ClearTypeInfo
+ ; // __DefineParam
+ 
+ IMMEDIATE VOID OPERATOR __DefineNameParam
+  @SELF 'aName' __DefineParam
+ ; // __DefineNameParam
+  
+ IMMEDIATE VOID OPERATOR IN
+  ^L __DefineNameParam
+  @SELF aName DO __DefineParam
+ ; // IN
+
+ : A
+  IN X
+  X .
+ ; // A
+ 
+ '1' A
+ 2 A
+
+ @SELF DumpElement
+ 
+; // TestIn
+
+TestIn

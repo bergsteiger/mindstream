@@ -1,0 +1,26 @@
+Тест TestFindMember
+
+/*{ OBJECT operator %%
+  OBJECT IN aWord
+  ^ IN aName
+  
+  OBJECT VAR l_Member
+  aName DO aWord pop:Word:FindMember >>> l_Member
+  
+  if ( l_Member pop:object:IsNil ) then
+   ( Result := nil )
+  else
+   ( Result := ( l_Member pop:KeyWord:Word ) ) 
+ ; // %%}*/
+ 
+ : A
+  : B
+   100 .
+  ; // B
+  1024 .
+ ; // A
+
+ @ A %% 'B' DO
+; // TestFindMember
+
+TestFindMember

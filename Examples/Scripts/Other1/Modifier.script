@@ -1,0 +1,24 @@
+: ModifierTest
+ INTEGER VAR X
+ 
+ X := 1
+ 
+ //INTEGER 
+ X .
+ 
+ VAR Y
+ 
+ // - тут Y паразитно становился INTEGER, если раскомментировать INTEGER выше
+ //   а теперь это контроллируется при компиляции
+ 
+ INTEGER STRING VAR Z
+ 
+ INTEGER STRING BOOLEAN VAR Q
+ 
+ @ X pop:Word:Directives .
+ @ Y pop:Word:Directives .
+ @ Z pop:Word:Directives .
+ @ Q pop:Word:Directives .
+;
+
+ModifierTest

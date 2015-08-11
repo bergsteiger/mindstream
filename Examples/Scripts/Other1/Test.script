@@ -1,0 +1,20 @@
+USES
+ CodeDump.ms.dict
+ ;
+
+Тест TestTest
+
+/*{IMMEDIATE operator Test
+ @SELF Ctx:SetWordProducerForCompiledClass
+ 'VOID' Ctx:Parser:PushSymbol
+ '__operator' Ctx:Parser:PushSymbol
+; // Test}*/
+
+ Test A
+ ; // A
+
+ @SELF DumpElement
+ @SELF __DumpMembers
+; // TestTest
+
+TestTest

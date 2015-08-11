@@ -1,0 +1,32 @@
+USES
+ axiom:Control
+ EditorTools.script 
+;
+
+: K290951357
+ TF1LikeTextLoadForm VAR l_TextForm
+ class::TF1LikeTextLoadForm .Create >>> l_TextForm
+ TRY 
+  INTEGER VAR l_FontSize
+  GetFontSize >>> l_FontSize 
+  TRY 
+	cnDefaultFontSize SetFontSize
+        1024 l_TextForm pop:Control:SetWidth
+        500 l_TextForm pop:Control:SetHeight
+        l_TextForm pop:Control:Show
+    OBJECT VAR l_Editor
+	focused:control:push >>> l_Editor
+	"Загрузить документ в {(l_TextForm)}"   
+    12 LOOP ( l_Editor pop:editor:ScrollLineDown )
+	 ProcessMessages
+	 2 2 l_Editor pop:editor:SelectCellByMouse
+	 ProcessMessages
+   FINALLY
+    l_FontSize SetFontSize
+   END
+  FINALLY  
+   l_TextForm AskWindowToCloseItself
+  END  
+;
+
+K290951357

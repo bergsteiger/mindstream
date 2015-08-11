@@ -1,0 +1,10 @@
+USES
+ CodeDump.ms.dict
+; 
+
+Test TestDictionary
+ help
+ @SELF DumpElement
+; // TestDictionary
+
+TestDictionary

@@ -1,0 +1,73 @@
+USES
+ CodeDump.ms.dict
+ ;
+
+“ест InitedVarProducer
+
+/*{VOID : __DefineVarWithInit
+  STRING IN aName
+  OBJECT IN aStereo
+  IN aValue
+  
+  operator ___INIT_VAR
+   IN aValue
+   IN aVar
+   aValue DO >>>^ aVar
+  ; // ___INIT_VAR
+
+  VAR l_NewVar
+  aName aStereo __DefineVarEx >>> l_NewVar
+  aValue CompileRef l_NewVar CompileRef @ ___INIT_VAR CompileValue
+  aValue l_NewVar ___INIT_VAR
+  // - это может и лишнее, но это чтобы не сломать %DOCUMENTATION и %upv,
+  //   который могут „»“ј“№—я в обход выполнени€ кода родительского слова
+  //   ћожет быть ѕќ“ќћ это вообще на initialization надо будет переделать
+  
+; // __DefineVarWithInit
+
+IMMEDIATE VOID operator InitedVarProducer
+  ^L IN aName
+ 
+ [
+  'IMMEDIATE VOID __operator'
+  aName |N
+  '^L IN aName'
+  '^ IN aValue'
+  'aName |N @SELF aValue |^@ __DefineVarWithInit'
+  ';'
+ ] Ctx:Parser:PushArray
+; // InitedVarProducer}*/
+ 
+ InitedVarProducer VarTypeI
+  
+ STRING VarTypeI A 'Hello'
+ 
+ INTEGER VarTypeI B 23
+ 
+ A .
+ B .
+ 
+ @ A __DumpMembers
+ 
+ @ B __DumpMembers
+ 
+ (
+  STRING VarTypeI A 'Hello'
+  
+  INTEGER VarTypeI B 23
+  
+  A .
+  B .
+  
+  @ A __DumpMembers
+  
+  @ B __DumpMembers
+ )
+ 
+ @SELF DumpElement
+ 
+ @SELF __DumpMembers
+ 
+; // InitedVarProducer
+
+InitedVarProducer

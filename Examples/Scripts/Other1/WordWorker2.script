@@ -1,0 +1,40 @@
+Тест TestWordWorker2
+
+/*{ IMMEDIATE operator WORDWORKER
+   ^L IN aName
+  STRING VAR l_Name
+  aName |N >>> l_Name
+  
+  [
+  'operator'
+  l_Name
+  '^ IN WordToWork'
+  ] Ctx:Parser:PushArray
+ ; // WORDWORKER}*/
+ 
+ WORDWORKER Y
+   ^ IN aString
+  aString DO .
+  WordToWork DO .
+ ; // Y
+ 
+ WORDWORKER Z
+   IN aString
+  aString .
+  WordToWork DO .
+ ; // Z
+ 
+ operator X 
+   ^ IN aString
+   ^ IN WordToWork
+  aString DO .
+  WordToWork DO .
+ ; // X
+  
+ X 'A' 1
+ Y 'B' 1
+ 'C' Z 1
+ 2 . 
+;
+
+TestWordWorker2

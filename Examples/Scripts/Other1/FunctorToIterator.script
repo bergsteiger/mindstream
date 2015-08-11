@@ -1,0 +1,21 @@
+Test FunctorToIteratorTest
+
+ ARRAY VAR L
+ @ ( 
+  OBJECT IN aLambda
+  INTEGER VAR I
+  I := 0
+  10 LOOP ( ++! I I aLambda DO ) 
+ ) FunctorToIterator >>> L
+ 
+ @ . L ITERATE
+ // - печатает числа от 1 до 10
+ '' .
+ 0 @ + L ITERATE .
+ // - суммирует числа от 1 до 10 и печатает результат
+ '' .
+ @ . L Reverted ITERATE
+ // - печатает числа от 10 до 1
+; // FunctorToIteratorTest
+
+FunctorToIteratorTest

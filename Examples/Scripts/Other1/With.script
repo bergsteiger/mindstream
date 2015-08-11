@@ -1,0 +1,70 @@
+: WithTest
+
+/*{ IMMEDIATE operator WordAliasByRef
+  ^L IN aName
+  ^ IN aCode
+  aCode DO aName |N Define
+ ; // WordAliasByRef}*/
+
+ : A
+  : B
+   : C
+    'Hello' .
+    VAR Y
+   ; // C
+   20 .
+   VAR Z
+  ; // B
+  10 .
+  VAR X
+ ; // A
+
+ A :: X := 10
+ A :: X .
+ A :: B
+ //A :: B := 10
+ A :: B :: C
+ A :: B :: C :: Y := 1024
+ A :: B :: C :: Y .
+ 
+ A :: B :: Z := 2048
+ A :: B :: Z .
+ A :: B :: Z .
+ 
+ "Выполнить подавив исключение" ( A :: B :: Z :: abs )
+ TRY
+  A :: B :: Z :: abs
+ EXCEPT
+  for script:ExceptionStack .
+ END 
+ 
+ A :: B
+ A :: B :: C
+ 
+ A :: B |^@ DO
+ A :: B :: C |^@ DO
+ 
+ A :: B :: Z .
+ A :: B :: Z |^@ DO .
+ 
+ WordAliasByRef theB ( A :: B |^@ )
+ WordAliasByRef theC ( A :: B :: C |^@ )
+ WordAliasByRef theZ ( A :: B :: Z |^@ )
+ 
+ theB
+ theC
+ theZ .
+ 
+ A :: B :: Z := 2048
+ A :: B :: Z .
+ 
+ theZ .
+ 
+ theB
+ 
+ theZ .
+ 
+ @SELF __DumpMembers
+;
+
+WithTest

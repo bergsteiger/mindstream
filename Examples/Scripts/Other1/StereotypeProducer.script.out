@@ -1,0 +1,86 @@
+VOID Test StereotypeProducerTest
+ <<SimpleClass>> "Y Y"
+ ; // <<SimpleClass>> "Y Y"
+ 
+ IMMEDIATE VOID <<MDAClass>> <<"X X">>
+  ^L IN aName
+  aName
+  |N
+  @SELF
+  DefineStereoInstance
+  EXIT
+ ; // IMMEDIATE VOID <<MDAClass>> <<"X X">>
+ 
+ IMMEDIATE VOID <<MDAClass>> <<Facet>>
+  ^L IN aName
+  aName
+  |N
+  @SELF
+  DefineStereoInstance
+  EXIT
+ ; // IMMEDIATE VOID <<MDAClass>> <<Facet>>
+ 
+ IMMEDIATE VOID <<@StereotypeProducer>> <<MDACategory>>
+  ^L IN aName
+  aName
+  |N
+  @SELF
+  DefineStereo
+  EXIT
+ ; // IMMEDIATE VOID <<@StereotypeProducer>> <<MDACategory>>
+ 
+ IMMEDIATE VOID <<@StereotypeProducer>> <<MDAClass>>
+  ^L IN aName
+  aName
+  |N
+  @SELF
+  DefineStereo
+  EXIT
+ ; // IMMEDIATE VOID <<@StereotypeProducer>> <<MDAClass>>
+ 
+ IMMEDIATE VOID <<MDAClass>> <<SimpleClass>>
+  ^L IN aName
+  aName
+  |N
+  @SELF
+  DefineStereoInstance
+  EXIT
+  'Hello'
+  .
+ ; // IMMEDIATE VOID <<MDAClass>> <<SimpleClass>>
+ 
+ <<SimpleClass>> A
+  : X
+  ; // : X
+  
+ ; // <<SimpleClass>> A
+ 
+ <<SimpleClass>> B
+ ; // <<SimpleClass>> B
+ 
+ <<Facet>> C
+ ; // <<Facet>> C
+ 
+ @SELF
+ DumpElement
+ @SELF
+ axiom:DumpMembers
+; // VOID Test StereotypeProducerTest
+
+VOID OPERATOR Test StereotypeProducerTest
+OPERATOR StereotypeStereotypeProducer <<@StereotypeProducer>> <<MDAClass>> <<SimpleClass>> "Y Y"
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@StereotypeProducer>> <<MDAClass>> <<"X X">>
+^L OPERATOR IN aName
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@StereotypeProducer>> <<MDAClass>> <<Facet>>
+^L OPERATOR IN aName
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@StereotypeProducer>> <<MDACategory>>
+^L OPERATOR IN aName
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@StereotypeProducer>> <<MDAClass>>
+^L OPERATOR IN aName
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@StereotypeProducer>> <<MDAClass>> <<SimpleClass>>
+^L OPERATOR IN aName
+OPERATOR StereotypeStereotypeProducer <<@StereotypeProducer>> <<MDAClass>> <<SimpleClass>> A
+: X
+OPERATOR StereotypeStereotypeProducer <<@StereotypeProducer>> <<MDAClass>> <<SimpleClass>> B
+OPERATOR StereotypeStereotypeProducer <<@StereotypeProducer>> <<MDAClass>> <<Facet>> C
+TkwMain TkwCompiledMain

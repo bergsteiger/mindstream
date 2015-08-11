@@ -1,0 +1,11 @@
+'ABC:DEF' ':' string:Split
+
+WHILE ( StackLevel > 0 ) .
+
+'ABC:DEF' 'D' string:Split
+
+WHILE ( StackLevel > 0 ) .
+
+'ABABABA' 'B' string:Split
+
+WHILE ( StackLevel > 0 ) .

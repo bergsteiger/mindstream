@@ -1,0 +1,34 @@
+: TestCallerAndWordWorker
+
+ VOID CALLER operator DoIt ^ IN aLambda
+  Caller -> X aLambda DO
+ ;
+ 
+ VOID CALLER operator DoIt1 
+   IN aLeft
+   ^ IN aLambda
+  aLeft . 
+  Caller -> X aLambda DO
+ ;
+ 
+ : A
+  VAR X
+  X := 1025
+  
+  DoIt .
+  1024 DoIt1 .
+ ;
+ 
+ : B
+  VAR X
+  X := 'Hello'
+  
+  DoIt .
+ ;
+ 
+ A
+ B
+
+;
+
+TestCallerAndWordWorker

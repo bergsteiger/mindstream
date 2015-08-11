@@ -1,0 +1,6 @@
+STRING VAR S
+S := 'abcd'
+S .
+
+string:++! S
+S .

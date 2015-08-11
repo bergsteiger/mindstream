@@ -1,0 +1,109 @@
+USES
+ CodeDump.ms.dict
+ ;
+
+“ест StereotypeProducerTest
+
+/*{VOID operator DefineStereo
+ IN aName
+ IN aSelf
+ 
+ aSelf
+ Ctx:SetWordProducerForCompiledClass
+ 
+ [
+  'IMMEDIATE OPERATOR' aName Add<<>>
+  '^L IN aName'
+ 
+  'aName |N @SELF DefineStereoInstance'
+ 
+  'EXIT'
+ ] Ctx:Parser:PushArray
+; // DefineStereo
+ 
+VOID operator DefineStereoInstance
+ IN aName
+ IN aSelf
+ 
+ aSelf
+ Ctx:SetWordProducerForCompiledClass
+ 
+ [
+  'OPERATOR' aName __CheckSpaces
+ ] Ctx:Parser:PushArray
+; // DefineStereoInstance
+
+IMMEDIATE operator StereotypeProducer
+  ^L IN aName
+  
+ @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE OPERATOR' aName |N Add<<>>
+  '^L IN aName'
+  'aName |N @SELF DefineStereo'
+  
+  'EXIT'
+ ] Ctx:Parser:PushArray
+; // StereotypeProducer
+
+VOID operator DefineStereotypeProducer
+ IN aName
+ IN aSelf
+ 
+ aSelf
+ Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE OPERATOR' aName Add<<>>
+  '^L IN aName'
+  'aName |N @SELF DefineStereo'
+  
+  'EXIT'
+ ] Ctx:Parser:PushArray
+; // DefineStereotypeProducer
+
+IMMEDIATE operator StereotypeStereotypeProducer
+  ^L IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass 
+ [
+  'IMMEDIATE operator' aName |N Add<<>>
+  '^L IN aName'
+  
+  'aName |N @SELF DefineStereotypeProducer'
+  
+  'EXIT'
+ ] Ctx:Parser:PushArray
+; // StereotypeStereotypeProducer}*/
+
+StereotypeStereotypeProducer MDAClass ;
+// - базовый стереотип, через который всЄ выводитс€
+
+<<@MDAClass>> MDAClass ;
+<<@MDAClass>> MDACategory ;
+
+//StereotypeProducer MDAClass ;
+//StereotypeProducer MDACategory ;
+// - заглушки дл€ начальной раскрутки
+
+ <<MDAClass>> SimpleClass
+  'Hello' .
+ ;
+ 
+ <<MDAClass>> Facet
+ ;
+ 
+ <<SimpleClass>> A
+  : X
+  ;
+ ;
+ 
+ <<SimpleClass>> B
+ ;
+ 
+ <<Facet>> C
+ ;
+ 
+ @SELF DumpElement
+ @SELF __DumpMembers
+; // StereotypeProducerTest
+
+StereotypeProducerTest

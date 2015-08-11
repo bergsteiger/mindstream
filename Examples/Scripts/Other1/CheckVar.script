@@ -1,0 +1,25 @@
+Test CheckVarTest
+
+ IMMEDIATE operator MakeVar
+  ^L IN aName
+  aName |N true Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckVar
+  @SELF SWAP pop:Word:SetProducer
+  //DROP // - снимаем переменную со стека
+  Ctx:ClearTypeInfo
+ ; // MakeVar
+ 
+ : A
+  INTEGER MakeVar X
+ ; // A
+ 
+ : B
+  STRING MakeVar X
+  MakeVar Y
+  INTEGER MakeVar Z
+ ; // B
+ 
+ @SELF __DumpMembers
+ 
+; // CheckVarTest
+
+CheckVarTest

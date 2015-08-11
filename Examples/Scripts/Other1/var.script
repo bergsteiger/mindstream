@@ -1,0 +1,30 @@
+/*{: __SourceInfo
+ Ctx:Parser pop:Parser:FileName ' ' Cat Ctx:Parser pop:Parser:SourceLine IntToStr Cat ' ' Cat
+; // __SourceInfo
+
+: __DefineVarEx
+  STRING IN aName
+  OBJECT IN aStereo
+ 
+ aName Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckWord pop:KeyWord:Word pop:object:IsNil ! ?
+ (
+  __SourceInfo 'Слово ' Cat aName Cat ' уже существует. Нельзя определить переменную с таким же именем' Cat RAISE
+ ) 
+ aName true Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckVar
+ DUP aStereo SWAP pop:Word:SetProducer
+ Ctx:ClearTypeInfo
+; // __DefineVarEx
+
+: __DefineVar
+ __DefineVarEx DROP
+; // __DefineVar
+
+IMMEDIATE VOID OPERATOR VAR
+ ^L IN aName
+ aName |N @SELF __DefineVar
+; // VAR}*/
+
+VAR A
+//VAR A
+2 >>> A
+A .
