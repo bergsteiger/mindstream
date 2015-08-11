@@ -28,7 +28,7 @@ FORWARD Process
   @ ProcessItem anItem ProcessSubDirs
  ; // ProcessItem
 
- @ ProcessItem aDir ProcessSubDirs
+ aDir ProcessItem
 ; // Process
 
 '..\..\' Process
