@@ -207,8 +207,14 @@ FORWARD Process
   STRING IN anItem
   : DoFile
    STRING IN anItem
+   FILE VAR l_File
    anItem
    .
+   TRY
+   FINALLY
+    l_File :=
+    nil
+   END
   ; // : DoFile
   
   @
