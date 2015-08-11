@@ -739,6 +739,72 @@ VOID Test ForToTest
 
 ForToTest
 
+FORWARD Process
+: Process
+ FORWARD ProcessItem
+ STRING IN aDir
+ : DoDir
+  STRING IN anItem
+  : DoFile
+   STRING IN anItem
+   anItem
+   .
+  ; // : DoFile
+  
+  @
+  DoFile
+  '*.ms.script'
+  anItem
+  ProcessFilesWithMask
+  @
+  DoFile
+  '*.pas'
+  anItem
+  ProcessFilesWithMask
+  @
+  DoFile
+  '*.txt'
+  anItem
+  ProcessFilesWithMask
+  @
+  DoFile
+  '*.inc'
+  anItem
+  ProcessFilesWithMask
+  @
+  DoFile
+  '*.fmx'
+  anItem
+  ProcessFilesWithMask
+  @
+  DoFile
+  '*.xml'
+  anItem
+  ProcessFilesWithMask
+  @
+  DoFile
+  '*.dpr'
+  anItem
+  ProcessFilesWithMask
+ ; // : DoDir
+ 
+ : ProcessItem
+  STRING IN anItem
+  anItem
+  DoDir
+  @
+  ProcessItem
+  anItem
+  ProcessSubDirs
+ ; // : ProcessItem
+ 
+ aDir
+ ProcessItem
+; // : Process
+
+'..\..\'
+Process
+
 for
 (
  1 to
