@@ -25,6 +25,7 @@ FORWARD Process
   @ DoFile '*.inc' anItem ProcessFilesWithMask
   @ DoFile '*.fmx' anItem ProcessFilesWithMask
   @ DoFile '*.xml' anItem ProcessFilesWithMask
+  @ DoFile '*.dpr' anItem ProcessFilesWithMask
  ; // DoDir
 
  : ProcessItem
