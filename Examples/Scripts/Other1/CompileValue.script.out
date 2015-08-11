@@ -1,0 +1,33 @@
+20
+Hello
+Hello
+ãû ãû ãû
+ãû ãû ãû 2
+30
+World
+VOID Test TestCompileValue
+ INTEGER VAR I
+ OBJECT VAR O
+ STRING VAR S
+ S :=
+ 'World'
+ I :=
+ 30
+ 20
+ .
+ Hello
+ .
+ Hello
+ .
+ ãû ãû ãû
+ .
+ 'ãû ãû ãû 2'
+ .
+ I
+ .
+ S
+ .
+ @SELF
+ DumpElement
+; // VOID Test TestCompileValue
+

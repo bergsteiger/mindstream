@@ -1,0 +1,25 @@
+VOID Test TypeTest
+ INTEGER VAR A
+ INTEGER STRING VAR B
+ IMMEDIATE VOID TYPE X
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE X
+ 
+ IMMEDIATE VOID TYPE Y
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE Y
+ 
+ @SELF
+ DumpElement
+ @SELF
+ axiom:DumpMembers
+; // VOID Test TypeTest
+
+VOID OPERATOR Test TypeTest
+INTEGER OPERATOR VAR A
+INTEGER STRING OPERATOR VAR B
+IMMEDIATE VOID OPERATOR TYPE X
+IMMEDIATE VOID OPERATOR TYPE Y
+TkwMain TkwCompiledMain

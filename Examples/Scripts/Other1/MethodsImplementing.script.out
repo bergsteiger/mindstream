@@ -1,0 +1,176 @@
+TkwCompiledWordWorkerWord
+<<Unit>>
+Hello
+ World
+Bang!
+VOID Test MethodImplementing
+ IMMEDIATE VOID StereotypeStereotypeProducer <<@P>>
+  ^L IN aName
+  : m2
+  ; // : m2
+  
+  : X1
+  ; // : X1
+  
+  aName
+  |N
+  @SELF
+  DefineStereotypeProducer
+  EXIT
+ ; // IMMEDIATE VOID StereotypeStereotypeProducer <<@P>>
+ 
+ IMMEDIATE VOID <<@P>> <<MDACategory>>
+  ^L IN aName
+  : m1
+  ; // : m1
+  
+  : m2
+  ; // : m2
+  
+  aName
+  |N
+  @SELF
+  DefineStereo
+  EXIT
+ ; // IMMEDIATE VOID <<@P>> <<MDACategory>>
+ 
+ IMMEDIATE VOID <<@P>> <<MDAClass>>
+  ^L IN aName
+  : m1
+  ; // : m1
+  
+  : m2
+  ; // : m2
+  
+  aName
+  |N
+  @SELF
+  DefineStereo
+  EXIT
+ ; // IMMEDIATE VOID <<@P>> <<MDAClass>>
+ 
+ IMMEDIATE VOID <<MDAClass>> <<SimpleClass>>
+  ^L IN aName
+  : m1
+  ; // : m1
+  
+  : m2
+  ; // : m2
+  
+  aName
+  |N
+  @SELF
+  DefineStereoInstance
+  EXIT
+ ; // IMMEDIATE VOID <<MDAClass>> <<SimpleClass>>
+ 
+ IMMEDIATE VOID <<MDACategory>> <<Unit>>
+  ^L IN aName
+  : NewMethod
+   'Hello'
+   .
+   x1
+  ; // : NewMethod
+  
+  : x1
+   ' World'
+   .
+  ; // : x1
+  
+  : x2
+  ; // : x2
+  
+  aName
+  |N
+  @SELF
+  DefineStereoInstance
+  EXIT
+ ; // IMMEDIATE VOID <<MDACategory>> <<Unit>>
+ 
+ IMMEDIATE OPERATOR end.
+  pop:Finder:SetToCtx
+  pop:Compiler:SetToCtx
+ ; // IMMEDIATE OPERATOR end.
+ 
+ IMMEDIATE OPERATOR implementation
+  LINK ^ IN aWordToWork
+  OBJECT VAR l_NewCompiler
+  Ctx:PushCompiler
+  Ctx:PushFinder
+  aWordToWork |^@
+  >>>
+  l_NewCompiler
+  if
+   (
+    l_NewCompiler
+    IS
+    class::TkwCompiledWordWorkerWord
+   )
+  then
+   BEGIN
+    l_NewCompiler
+    pop:CompiledWordWorkerWord:Compiled
+    >>>
+    l_NewCompiler
+   END
+  l_NewCompiler
+  pop:Compiler:SetToCtx
+  l_NewCompiler
+  pop:Finder:SetToCtx
+ ; // IMMEDIATE OPERATOR implementation
+ 
+ <<SimpleClass>> Tl3Base
+  : m1
+  ; // : m1
+  
+ ; // <<SimpleClass>> Tl3Base
+ 
+ : XXX
+  'Bang!'
+  .
+ ; // : XXX
+ 
+ @^ <<Unit>> |^@
+ .
+ @^ <<Unit>> |^@
+ |N
+ .
+ @^ <<Unit>> ::
+ 'NewMethod'
+ XXX
+ @SELF
+ DumpElement
+ @SELF
+ axiom:DumpMembers
+; // VOID Test MethodImplementing
+
+VOID OPERATOR Test MethodImplementing
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@P>>
+^L OPERATOR IN aName
+: m2
+: X1
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@P>> <<MDACategory>>
+^L OPERATOR IN aName
+: m1
+: m2
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@P>> <<MDAClass>>
+^L OPERATOR IN aName
+: m1
+: m2
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@P>> <<MDAClass>> <<SimpleClass>>
+^L OPERATOR IN aName
+: m1
+: m2
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@P>> <<MDACategory>> <<Unit>>
+^L OPERATOR IN aName
+: NewMethod
+: x1
+: x2
+IMMEDIATE OPERATOR end.
+IMMEDIATE OPERATOR implementation
+LINK ^ OPERATOR IN aWordToWork
+OBJECT OPERATOR VAR l_NewCompiler
+OPERATOR StereotypeStereotypeProducer <<@P>> <<MDAClass>> <<SimpleClass>> Tl3Base
+: m1
+: XXX
+TkwMain TkwCompiledMain

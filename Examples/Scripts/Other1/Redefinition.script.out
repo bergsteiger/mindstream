@@ -1,0 +1,23 @@
+1
+1
+2
+VOID Test RedefinitionTest
+ REDIFINITION : A
+  A
+  (
+   A
+  )
+  2
+  .
+ ; // REDIFINITION : A
+ 
+ A
+ @SELF
+ DumpElement
+ @SELF
+ axiom:DumpMembers
+; // VOID Test RedefinitionTest
+
+VOID OPERATOR Test RedefinitionTest
+REDIFINITION : A
+TkwMain TkwCompiledMain

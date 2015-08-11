@@ -1,0 +1,13 @@
+VOID Test TestTest
+ VOID Test A
+ ; // VOID Test A
+ 
+ @SELF
+ DumpElement
+ @SELF
+ axiom:DumpMembers
+; // VOID Test TestTest
+
+VOID OPERATOR Test TestTest
+VOID OPERATOR Test A
+TkwMain TkwCompiledMain

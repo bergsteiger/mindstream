@@ -1,0 +1,62 @@
+TkwNewWord
+A
+TkwCompiledProcedure
+A
+TkwCompiledProcedureWithStackChecking
+TestWordProducer
+TkwCompiledMain
+TkwCompiledProcedureWithStackChecking
+<<Facet>>
+TkwCompiledVar
+XXX
+TkwCompiledProcedureWithStackChecking
+VAR
+B
+C
+TkwCompiledProcedure
+TkwCompiledProcedureWithStackChecking
+TkwCompiledMain
+TkwCompiledProcedureWithStackChecking
+World
+Tl3Base
+TkwCompiledProcedure
+TkwCompiledProcedureWithStackChecking
+TkwCompiledMain
+<<SimpleClass>>
+<<MDAClass>>
+<<@StereotypeProducer>>
+StereotypeStereotypeProducer
+Bang!
+TSomeClass
+TkwCompiledProcedure
+TkwCompiledProcedureWithStackChecking
+TkwCompiledMain
+DefineClass
+WordProducer
+A1
+TkwCompiledProcedure
+TkwCompiledProcedureWithStackChecking
+TkwCompiledMain
+:
+VOID OPERATOR Test TestWordProducer
+IMMEDIATE VOID OPERATOR WordProducer <<Facet>>
+IMMEDIATE VOID OPERATOR WordProducer <<Interface>>
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@StereotypeProducer>> <<MDAClass>>
+^L OPERATOR IN aName
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@StereotypeProducer>> <<MDAClass>> <<SimpleClass>>
+^L OPERATOR IN aName
+OPERATOR WordProducer <<Facet>> A
+OPERATOR VAR XXX
+: A1
+OPERATOR WordProducer <<Facet>> B
+OPERATOR NamedWordProducer %INHERITS %G
+OPERATOR WordProducer <<Interface>> C
+IMMEDIATE VOID OPERATOR WordProducer DefineClass
+: N
+OPERATOR StereotypeStereotypeProducer <<@StereotypeProducer>> <<MDAClass>> <<SimpleClass>> Tl3Base
+OPERATOR NamedWordProducer %INHERITS %G
+OPERATOR StereotypeStereotypeProducer <<@StereotypeProducer>> <<MDAClass>> <<SimpleClass>> TObject
+OPERATOR WordProducer DefineClass TSomeClass
+: "Это метод нашего класса"
+OPERATOR NamedWordProducer %INHERITS %G
+TkwMain TkwCompiledMain

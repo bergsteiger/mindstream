@@ -1,0 +1,48 @@
+VOID Test StereotypeProducerTest
+ IMMEDIATE VOID StereotypeStereotypeProducer <<@MDAClass>>
+  ^L IN aName
+  aName
+  |N
+  @SELF
+  DefineStereotypeProducer
+  EXIT
+ ; // IMMEDIATE VOID StereotypeStereotypeProducer <<@MDAClass>>
+ 
+ IMMEDIATE VOID <<@MDAClass>> <<MDAClass>>
+  ^L IN aName
+  aName
+  |N
+  @SELF
+  DefineStereo
+  EXIT
+ ; // IMMEDIATE VOID <<@MDAClass>> <<MDAClass>>
+ 
+ IMMEDIATE VOID <<MDAClass>> <<SimpleClass>>
+  ^L IN aName
+  aName
+  |N
+  @SELF
+  DefineStereoInstance
+  EXIT
+  'Hello'
+  .
+ ; // IMMEDIATE VOID <<MDAClass>> <<SimpleClass>>
+ 
+ <<SimpleClass>> A
+ ; // <<SimpleClass>> A
+ 
+ @SELF
+ DumpElement
+ @SELF
+ axiom:DumpMembers
+; // VOID Test StereotypeProducerTest
+
+VOID OPERATOR Test StereotypeProducerTest
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@MDAClass>>
+^L OPERATOR IN aName
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@MDAClass>> <<MDAClass>>
+^L OPERATOR IN aName
+IMMEDIATE VOID OPERATOR StereotypeStereotypeProducer <<@MDAClass>> <<MDAClass>> <<SimpleClass>>
+^L OPERATOR IN aName
+OPERATOR StereotypeStereotypeProducer <<@MDAClass>> <<MDAClass>> <<SimpleClass>> A
+TkwMain TkwCompiledMain

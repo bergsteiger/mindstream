@@ -1,0 +1,133 @@
+-1
+0
+1
+-1
+0
+1
+-1
+0
+1
+VOID Test IfElseTest
+ INTEGER FUNCTION SIGN
+  INTEGER IN aNum
+  if
+   (
+    aNum
+    <0
+   )
+  then
+   (
+    Result :=
+    -1
+   )
+  else
+   if
+    (
+     aNum
+     >0
+    )
+   then
+    (
+     Result :=
+     1
+    )
+   else
+    (
+     Result :=
+     0
+    )
+ ; // INTEGER FUNCTION SIGN
+ 
+ INTEGER FUNCTION SIGN1
+  INTEGER IN aNum
+  if
+   (
+    aNum
+    <0
+   )
+  then
+   (
+    Result :=
+    -1
+   )
+  else
+   (
+    if
+     (
+      aNum
+      >0
+     )
+    then
+     (
+      Result :=
+      1
+     )
+    else
+     (
+      Result :=
+      0
+     )
+   )
+ ; // INTEGER FUNCTION SIGN1
+ 
+ INTEGER FUNCTION SIGN2
+  INTEGER IN aNum
+  if
+   (
+    aNum
+    <0
+   )
+  then
+   (
+    Result :=
+    -1
+   )
+  else
+   if
+    (
+     aNum
+     >0
+    )
+   then
+    (
+     Result :=
+     1
+    )
+   else
+    (
+     Result :=
+     0
+    )
+ ; // INTEGER FUNCTION SIGN2
+ 
+ -1
+ SIGN
+ .
+ 0
+ SIGN
+ .
+ 1
+ SIGN
+ .
+ -1
+ SIGN1
+ .
+ 0
+ SIGN1
+ .
+ 1
+ SIGN1
+ .
+ -1
+ SIGN2
+ .
+ 0
+ SIGN2
+ .
+ 1
+ SIGN2
+ .
+ @SELF
+ DumpElement
+; // VOID Test IfElseTest
+

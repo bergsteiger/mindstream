@@ -1,0 +1,48 @@
+Hello
+OPERATOR NamedInitedVarProducer %DOCUMENTATION %Doc
+VOID OPERATOR Test NamedInitedVarProducerTest
+Hello world
+OPERATOR NamedInitedVarProducer %DOCUMENTATION %Doc
+( (
+VOID Test NamedInitedVarProducerTest
+ %DOCUMENTATION %Doc
+ IMMEDIATE VOID NamedInitedVarProducer %DOCUMENTATION
+  ^ IN aValue
+  '%Doc'
+  @SELF
+  aValue |^@
+  axiom:DefineVarWithInit
+ ; // IMMEDIATE VOID NamedInitedVarProducer %DOCUMENTATION
+ 
+ 'Hello'
+ DO
+ %Doc
+ pop:Word:SetValue
+ %Doc
+ .
+ @
+ %Doc
+ axiom:DumpMembers
+ (
+  %DOCUMENTATION %Doc
+  'Hello world'
+  DO
+  %Doc
+  pop:Word:SetValue
+  %Doc
+  .
+  @
+  %Doc
+  axiom:DumpMembers
+ )
+ @SELF
+ DumpElement
+ @SELF
+ axiom:DumpMembers
+; // VOID Test NamedInitedVarProducerTest
+
+VOID OPERATOR Test NamedInitedVarProducerTest
+OPERATOR NamedInitedVarProducer %DOCUMENTATION %Doc
+IMMEDIATE VOID OPERATOR NamedInitedVarProducer %DOCUMENTATION
+^ OPERATOR IN aValue
+TkwMain TkwCompiledMain

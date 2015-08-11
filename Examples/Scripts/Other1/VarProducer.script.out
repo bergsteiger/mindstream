@@ -1,0 +1,45 @@
+Hello
+23
+STRING OPERATOR VarType A
+VOID OPERATOR Test TestVarProducer
+INTEGER OPERATOR VarType B
+VOID OPERATOR Test TestVarProducer
+VOID Test TestVarProducer
+ STRING VarType A
+ INTEGER VarType B
+ IMMEDIATE VOID OPERATOR VarType
+  ^L IN aName
+  aName
+  |N
+  @SELF
+  axiom:DefineVar
+ ; // IMMEDIATE VOID OPERATOR VarType
+ 
+ 'Hello'
+ >>>
+ A
+ 23
+ >>>
+ B
+ A
+ .
+ B
+ .
+ @
+ A
+ axiom:DumpMembers
+ @
+ B
+ axiom:DumpMembers
+ @SELF
+ DumpElement
+ @SELF
+ axiom:DumpMembers
+; // VOID Test TestVarProducer
+
+VOID OPERATOR Test TestVarProducer
+STRING OPERATOR VarType A
+INTEGER OPERATOR VarType B
+IMMEDIATE VOID OPERATOR VarType
+^L OPERATOR IN aName
+TkwMain TkwCompiledMain

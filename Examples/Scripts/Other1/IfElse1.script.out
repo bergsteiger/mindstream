@@ -1,0 +1,33 @@
+3
+4
+VOID Test IfElseTest
+ : A
+  1
+  .
+  2
+  .
+ ; // : A
+ 
+ INTEGER VAR aNum
+ : B
+  3
+  .
+  4
+  .
+ ; // : B
+ 
+ aNum :=
+ 0
+ if
+  (
+   aNum
+   <0
+  )
+ then
+  A
+ else
+  B
+ @SELF
+ DumpElement
+; // VOID Test IfElseTest
+

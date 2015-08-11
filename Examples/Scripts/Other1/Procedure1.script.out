@@ -1,0 +1,12 @@
+1
+VOID Test ProcedureTest
+ VOID PROCEDURE "Поиск текста"
+  1
+  .
+ ; // VOID PROCEDURE "Поиск текста"
+ 
+ "Поиск текста"
+ @SELF
+ DumpElement
+; // VOID Test ProcedureTest
+

@@ -1,0 +1,17 @@
+: A (Line 7, SourcePoint.script)
+Test TestSourcePoint (Line 5, SourcePoint.script)
+VOID Test TestSourcePoint
+ : A
+  @SELF
+  pop:Word:SourcePointString
+  .
+ ; // : A
+ 
+ A
+ @SELF
+ pop:Word:SourcePointString
+ .
+ @SELF
+ DumpElement
+; // VOID Test TestSourcePoint
+

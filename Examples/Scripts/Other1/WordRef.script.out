@@ -1,0 +1,8 @@
+OPERATOR Z TkwCompiledWordWorkerWord
+OPERATOR Y TkwCompiledProcedure
+: X TkwCompiledProcedure
+@ TkwPushWord
+( TkwBracketBegin
+: . TkwCompiledProcedure
+2 TkwString
+1 TkwInteger

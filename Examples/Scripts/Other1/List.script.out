@@ -1,0 +1,73 @@
+C
+B
+A
+ListTest
+TkwCompiledMain
+TkwCompiledMain
+ListTest
+A
+B
+C
+VOID Test ListTest
+ : A
+  : B
+   : C
+    : D
+    ; // : D
+    
+   ; // : C
+   
+  ; // : B
+  
+ ; // : A
+ 
+ ARRAY FUNCTION LIST
+  ^ IN aFunctor
+  OBJECT IN anObject
+  OBJECT VAR l_Element
+  l_Element :=
+  anObject
+  Result :=
+  [
+   WHILE
+   true
+   BEGIN
+    l_Element :=
+    (
+     l_Element
+     aFunctor
+     DO
+    )
+    if
+     (
+      l_Element
+      pop:object:IsNil
+     )
+    then
+     BREAK
+    l_Element
+   END
+  ]
+ ; // ARRAY FUNCTION LIST
+ 
+ A :: 'B' :: 'C' :: 'D' |^@
+ LIST
+ %P
+ IT
+ (
+  |N
+  .
+ )
+ A :: 'B' :: 'C' :: 'D' |^@
+ LIST
+ %P
+ Reverted
+ IT
+ (
+  |N
+  .
+ )
+ @SELF
+ DumpElement
+; // VOID Test ListTest
+

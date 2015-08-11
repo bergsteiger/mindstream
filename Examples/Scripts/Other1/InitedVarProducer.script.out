@@ -1,0 +1,78 @@
+Hello
+23
+STRING OPERATOR VarTypeI A
+VOID OPERATOR Test InitedVarProducer
+INTEGER OPERATOR VarTypeI B
+VOID OPERATOR Test InitedVarProducer
+Hello
+23
+STRING OPERATOR VarTypeI A
+( (
+INTEGER OPERATOR VarTypeI B
+( (
+VOID Test InitedVarProducer
+ STRING VarTypeI A
+ INTEGER VarTypeI B
+ IMMEDIATE VOID OPERATOR VarTypeI
+  ^L IN aName
+  ^ IN aValue
+  aName
+  |N
+  @SELF
+  aValue |^@
+  axiom:DefineVarWithInit
+ ; // IMMEDIATE VOID OPERATOR VarTypeI
+ 
+ 'Hello'
+ DO
+ A
+ pop:Word:SetValue
+ 23
+ DO
+ B
+ pop:Word:SetValue
+ A
+ .
+ B
+ .
+ @
+ A
+ axiom:DumpMembers
+ @
+ B
+ axiom:DumpMembers
+ (
+  STRING VarTypeI A
+  INTEGER VarTypeI B
+  'Hello'
+  DO
+  A
+  pop:Word:SetValue
+  23
+  DO
+  B
+  pop:Word:SetValue
+  A
+  .
+  B
+  .
+  @
+  A
+  axiom:DumpMembers
+  @
+  B
+  axiom:DumpMembers
+ )
+ @SELF
+ DumpElement
+ @SELF
+ axiom:DumpMembers
+; // VOID Test InitedVarProducer
+
+VOID OPERATOR Test InitedVarProducer
+STRING OPERATOR VarTypeI A
+INTEGER OPERATOR VarTypeI B
+IMMEDIATE VOID OPERATOR VarTypeI
+^L OPERATOR IN aName
+^ OPERATOR IN aValue
+TkwMain TkwCompiledMain

@@ -1,0 +1,53 @@
+Попали в инициализацию A
+1024
+10
+10
+10
+1024
+10
+1024
+10
+10
+10
+10
+10
+VOID Test Immediate
+ VAR A
+ IMMEDIATE VOID OPERATOR initialization
+  ^ IN aCode
+  aCode
+  Ctx:Engine
+  pop:ScriptEngine:AddInitialization
+ ; // IMMEDIATE VOID OPERATOR initialization
+ 
+ : TryVar1
+  TryVarPrint
+ ; // : TryVar1
+ 
+ : TryVar2
+  1024
+  >>>
+  A
+  TryVarPrint
+ ; // : TryVar2
+ 
+ : TryVarPrint
+  A
+  .
+  10
+  >>>
+  A
+  A
+  .
+ ; // : TryVarPrint
+ 
+ TryVar1
+ TryVar1
+ TryVar2
+ TryVar2
+ TryVar1
+ TryVar1
+ @SELF
+ DumpElement
+; // VOID Test Immediate
+

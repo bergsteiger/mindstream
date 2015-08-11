@@ -1,0 +1,39 @@
+1
+2
+PROCEDURE C (Line 22, Procedure.script)
+TRY (Line 28, Procedure.script)
+VOID Test ProcedureTest
+ VOID PROCEDURE A
+  1
+  .
+ ; // VOID PROCEDURE A
+ 
+ VOID PROCEDURE B
+  '2'
+  .
+ ; // VOID PROCEDURE B
+ 
+ VOID PROCEDURE C
+  '3'
+ ; // VOID PROCEDURE C
+ 
+ A
+ B
+ TRY
+  C
+ EXCEPT
+  for
+  script:ExceptionStack
+  .
+ END
+ @SELF
+ DumpElement
+ @SELF
+ axiom:DumpMembers
+; // VOID Test ProcedureTest
+
+VOID OPERATOR Test ProcedureTest
+VOID OPERATOR PROCEDURE A
+VOID OPERATOR PROCEDURE B
+VOID OPERATOR PROCEDURE C
+TkwMain TkwCompiledMain

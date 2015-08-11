@@ -1,0 +1,39 @@
+1
+2
+VOID Test TestIn
+ IMMEDIATE VOID OPERATOR __DefineNameParam
+  @SELF
+  'aName'
+  __DefineParam
+ ; // IMMEDIATE VOID OPERATOR __DefineNameParam
+ 
+ OPERATOR __DefineParam
+  Ctx:NewWordDefinitor
+  pop:NewWordDefinitor:DefineInParameter
+  Ctx:PushCompiler
+  pop:Compiler:CompileInParameterPopCode
+  Ctx:ClearTypeInfo
+ ; // OPERATOR __DefineParam
+ 
+ : A
+  IN X
+  X
+  .
+ ; // : A
+ 
+ IMMEDIATE VOID OPERATOR IN
+  ^L __DefineNameParam aName
+  @SELF
+  aName
+  DO
+  __DefineParam
+ ; // IMMEDIATE VOID OPERATOR IN
+ 
+ '1'
+ A
+ 2
+ A
+ @SELF
+ DumpElement
+; // VOID Test TestIn
+
