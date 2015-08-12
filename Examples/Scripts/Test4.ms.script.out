@@ -616,6 +616,7 @@ Dictionary: Test4.ms.script
   axiom:ActionList
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\Exports.script
+  H:\Dropbox\mindstream\Examples\Scripts\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\math.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\arrays.ms.dict
@@ -3323,6 +3324,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\math.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\arrays.ms.dict
@@ -3358,6 +3360,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\math.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\arrays.ms.dict
@@ -3371,6 +3374,33 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\files.ms.dict
  ;
 uses
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\params.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+IMMEDIATE VOID OPERATOR : RIGHT
+IMMEDIATE VOID OPERATOR : RightParam
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\math.ms.dict
  Uses: 
   axiom:axiom
