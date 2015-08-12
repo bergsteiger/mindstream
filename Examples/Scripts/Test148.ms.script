@@ -1,0 +1,29 @@
+PROCEDURE ProcessDirs
+ FUNCTOR IN aLambda
+ RightParam aDir
+ RightParam aMaskArray
+
+ PROCEDURE DoDir
+  RightParam aDir
+
+  PROCEDURE DoFile
+   STRING IN anFilePath
+   anFilePath aLambda DO
+  ; // DoFile
+
+  for ( aMaskArray |^ ) (
+   STRING IN aMask
+   IterateFilesWithMask aDir aMask DoFile
+  )
+ ; // DoDir
+
+ PROCEDURE ProcessItem
+  STRING IN aDir
+  DoDir aDir
+  IterateDirs aDir ( this.do )
+ ; // ProcessItem
+
+ aDir DO ProcessItem
+; // ProcessDirs
+
+@ Print ProcessDirs '..\..\' [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ]
