@@ -1,8 +1,10 @@
 PROCEDURE ProcessAnySubDirsWithMasks
 
+ ARRAY IN aDirMasks
+
  ProcessSubDirsWithMasks '..\..\' [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' '*.co' ] Print
  ProcessSubDirsWithMasks '..\' [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' '*.co' ] Print
 
 ; // ProcessAnySubDirsWithMasks
 
-ProcessAnySubDirsWithMasks
+[ '..\..\' '..\' ] ProcessAnySubDirsWithMasks
