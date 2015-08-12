@@ -2436,6 +2436,14 @@ VOID PROCEDURE ProcessDirs
   ProcessItem
  ; // VOID PROCEDURE ProcessItem
  
+ IMMEDIATE VOID OPERATOR this.do
+  Ctx:KeyWordDefiningNow
+  CompileValue
+  @
+  DO
+  CompileValue
+ ; // IMMEDIATE VOID OPERATOR this.do
+ 
  aDir
  DO
  ProcessItem

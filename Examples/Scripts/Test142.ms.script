@@ -1,5 +1,10 @@
 PROCEDURE ProcessDirs
+
  RightParam aDir
+
+VOID IMMEDIATE OPERATOR this.do
+ Ctx:KeyWordDefiningNow CompileValue @ DO CompileValue
+; // this.do
 
  PROCEDURE DoDir
   RightParam aDir
