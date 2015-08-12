@@ -4,3 +4,9 @@ PROCEDURE IterateFilesWithMask
   ^ IN aLambda
   aLambda aMask DO aDir DO ProcessFilesWithMask
 ; // IterateFilesWithMask
+
+PROCEDURE IterateDirs
+ ^ IN aRoot
+ ^ IN aLabda
+ aLabda aRoot DO ProcessSubDirs
+; // IterateDirs
