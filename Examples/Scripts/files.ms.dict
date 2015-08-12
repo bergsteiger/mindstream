@@ -1,12 +1,16 @@
+USES
+ core.ms.dict
+;
+
 PROCEDURE IterateFilesWithMask
   ^ IN aDir
   ^ IN aMask
   ^ IN aLambda
-  aLambda aMask pop:Word:GetRef DO aDir pop:Word:GetRef DO ProcessFilesWithMask
+  aLambda aMask |^ aDir |^ ProcessFilesWithMask
 ; // IterateFilesWithMask
 
 PROCEDURE IterateDirs
  ^ IN aRoot
  ^ IN aLabda
- aLabda aRoot pop:Word:GetRef DO ProcessSubDirs
+ aLabda aRoot |^ ProcessSubDirs
 ; // IterateDirs

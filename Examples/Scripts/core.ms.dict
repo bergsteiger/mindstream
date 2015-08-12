@@ -9,6 +9,7 @@ VOID IMMEDIATE operator RecurseProc
 ; // RecurseProc
 
 : |^
+// - разыменовывает параметр слева
  ^@ IN aRef
  aRef pop:Word:GetRef DO
 ; // |^
