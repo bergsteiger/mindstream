@@ -1,4 +1,4 @@
-PROCEDURE Process
+PROCEDURE ProcessDirs
  STRING IN aDir
 
  FORWARD ProcessItem
@@ -24,6 +24,6 @@ PROCEDURE Process
  ; // ProcessItem
 
  aDir ProcessItem
-; // Process
+; // ProcessDirs
 
-'..\..\' Process
+'..\..\' ProcessDirs
