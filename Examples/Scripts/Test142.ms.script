@@ -2,13 +2,6 @@ PROCEDURE ProcessDirs
 
  RightParam aDir
 
-VOID IMMEDIATE OPERATOR this.do
- '(' Ctx:Parser:PushSymbol
- '@SELF' Ctx:Parser:PushSymbol
- 'DO' Ctx:Parser:PushSymbol
- ')' Ctx:Parser:PushSymbol
-; // this.do
-
  PROCEDURE DoDir
   RightParam aDir
 

@@ -17,3 +17,11 @@ ANY : |^
  ^@ IN aRef
  aRef pop:Word:GetRef DO >>> Result
 ; // |^
+
+VOID IMMEDIATE OPERATOR this.do
+ '(' Ctx:Parser:PushSymbol
+ '@SELF' Ctx:Parser:PushSymbol
+ 'DO' Ctx:Parser:PushSymbol
+ ')' Ctx:Parser:PushSymbol
+; // this.do
+

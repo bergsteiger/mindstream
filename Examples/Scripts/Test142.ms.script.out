@@ -2441,17 +2441,6 @@ VOID PROCEDURE ProcessDirs
   )
  ; // VOID PROCEDURE ProcessItem
  
- IMMEDIATE VOID OPERATOR this.do
-  '('
-  Ctx:Parser:PushSymbol
-  '@SELF'
-  Ctx:Parser:PushSymbol
-  'DO'
-  Ctx:Parser:PushSymbol
-  ')'
-  Ctx:Parser:PushSymbol
- ; // IMMEDIATE VOID OPERATOR this.do
- 
  aDir
  DO
  ProcessItem
