@@ -1,7 +1,7 @@
 PROCEDURE ProcessDirs
- FUNCTOR IN aLambda
  RightParam aDir
  RightParam aMaskArray
+ RightParam aLambda
 
  PROCEDURE DoDir
   RightParam aDir
@@ -26,4 +26,4 @@ PROCEDURE ProcessDirs
  aDir DO ProcessItem
 ; // ProcessDirs
 
-@ Print ProcessDirs '..\..\' [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ]
+ProcessDirs '..\..\' [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ] Print
