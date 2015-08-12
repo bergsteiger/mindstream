@@ -4,7 +4,7 @@ PROCEDURE ProcessDirs
  FORWARD ProcessItem
 
  PROCEDURE DoDir
-  STRING IN aDir
+  ^ IN aDir
 
   PROCEDURE DoFile
    STRING IN anFilePath
@@ -13,13 +13,13 @@ PROCEDURE ProcessDirs
 
   for [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ] (
    STRING IN aMask
-   IterateFilesWithMask aDir aMask DoFile
+   IterateFilesWithMask ( aDir DO ) aMask DoFile
   )
  ; // DoDir
 
  PROCEDURE ProcessItem
   STRING IN aDir
-  aDir DoDir
+  DoDir aDir
   IterateDirs aDir ProcessItem
  ; // ProcessItem
 
