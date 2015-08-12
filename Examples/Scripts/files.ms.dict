@@ -43,3 +43,13 @@ PROCEDURE ProcessSubDirsWithMasks
 
  aRoot DO ProcessItem
 ; // ProcessSubDirsWithMasks
+
+PROCEDURE ProcessAnySubDirsWithMasks
+
+ RightParam aDirMasks
+ RightParam aFileMasks
+ RightParam aLambda
+
+ for ( aDirMasks |^ ) ( STRING IN aDirMask ProcessSubDirsWithMasks aDirMask ( aFileMasks |^ ) ( aLambda |@ DO ) )
+
+; // ProcessAnySubDirsWithMasks
