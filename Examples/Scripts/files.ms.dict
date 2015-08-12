@@ -2,11 +2,11 @@ PROCEDURE IterateFilesWithMask
   ^ IN aDir
   ^ IN aMask
   ^ IN aLambda
-  aLambda aMask DO aDir DO ProcessFilesWithMask
+  aLambda aMask pop:Word:GetRef DO aDir pop:Word:GetRef DO ProcessFilesWithMask
 ; // IterateFilesWithMask
 
 PROCEDURE IterateDirs
  ^ IN aRoot
  ^ IN aLabda
- aLabda aRoot DO ProcessSubDirs
+ aLabda aRoot pop:Word:GetRef DO ProcessSubDirs
 ; // IterateDirs
