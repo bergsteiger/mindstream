@@ -15,27 +15,25 @@ BOOLEAN pop:Control:CanFocus
 STRING pop:Control:Caption
 VOID pop:Control:Click
 Struct pop:Control:ClientToScreen
+TColor pop:Control:Color
 INTEGER pop:Control:ControlCount
 BOOLEAN pop:Control:Enabled
 TComponent pop:Control:FindControlByName
 BOOLEAN pop:Control:Focused
 Il3FontInfo pop:Control:Font
 TCustomForm pop:Control:GetAnotherParentForm
-TColor pop:Control:GetColor
 TControl pop:Control:GetControl
-INTEGER pop:Control:GetHeight
-INTEGER pop:Control:GetLeft
 TCustomForm pop:Control:GetMainForm
 TCustomForm pop:Control:GetParentForm
 TMenuItem pop:Control:GetPopupMenu
-INTEGER pop:Control:GetTop
 TCustomForm pop:Control:GetTopParentForm
-INTEGER pop:Control:GetWidth
 Cardinal pop:Control:Handle
+INTEGER pop:Control:Height
 VOID pop:Control:Hide
 STRING pop:Control:Hint
 BOOLEAN pop:Control:HScrollerVisible
 VOID pop:Control:Invalidate
+INTEGER pop:Control:Left
 VOID pop:Control:MouseLeftClick
 VOID pop:Control:MouseLeftDragAndDrop
 VOID pop:Control:MouseMiddleClick
@@ -59,9 +57,11 @@ VOID pop:Control:SetTop
 VOID pop:Control:SetWidth
 VOID pop:Control:Show
 BOOLEAN pop:Control:ShowHint
+INTEGER pop:Control:Top
 VOID pop:Control:Undock
 BOOLEAN pop:Control:Visible
 BOOLEAN pop:Control:VScrollerVisible
+INTEGER pop:Control:Width
 Dictionary: axiom:desktop
 INTEGER desktop:Height
 INTEGER desktop:Width
@@ -789,7 +789,7 @@ INTEGER /
  OBJECT OPERATOR :: VAR : l_Self
  ^@ OPERATOR :: :: : Result
 ; // ::
-VOID OPERATOR : :=
+OPERATOR : :=
  ^@ OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
 ; // :=
@@ -907,7 +907,7 @@ VOID : : =:
  OPERATOR :: IN : aValue
  ^ OPERATOR :: IN : aVar
 ; // =:
-VOID : : =:^
+: : =:^
  OPERATOR :: IN : aValue
  ^ OPERATOR :: IN : aVar
 ; // =:^
@@ -951,7 +951,7 @@ VOID OPERATOR : >>>[]
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
 ; // >>>[]
-VOID : : >>>^
+: : >>>^
  OPERATOR :: IN : aValue
  ^ OPERATOR :: IN : aVar
 ; // >>>^
@@ -1446,27 +1446,25 @@ CLASS class::TkwPopControlCanFocus
 CLASS class::TkwPopControlCaption
 CLASS class::TkwPopControlClick
 CLASS class::TkwPopControlClientToScreen
+CLASS class::TkwPopControlColor
 CLASS class::TkwPopControlControlCount
 CLASS class::TkwPopControlEnabled
 CLASS class::TkwPopControlFindControlByName
 CLASS class::TkwPopControlFocused
 CLASS class::TkwPopControlFont
 CLASS class::TkwPopControlGetAnotherParentForm
-CLASS class::TkwPopControlGetColor
 CLASS class::TkwPopControlGetControl
-CLASS class::TkwPopControlGetHeight
-CLASS class::TkwPopControlGetLeft
 CLASS class::TkwPopControlGetMainForm
 CLASS class::TkwPopControlGetParentForm
 CLASS class::TkwPopControlGetPopupMenu
-CLASS class::TkwPopControlGetTop
 CLASS class::TkwPopControlGetTopParentForm
-CLASS class::TkwPopControlGetWidth
 CLASS class::TkwPopControlHandle
+CLASS class::TkwPopControlHeight
 CLASS class::TkwPopControlHide
 CLASS class::TkwPopControlHint
 CLASS class::TkwPopControlHScrollerVisible
 CLASS class::TkwPopControlInvalidate
+CLASS class::TkwPopControlLeft
 CLASS class::TkwPopControlMouseLeftClick
 CLASS class::TkwPopControlMouseLeftDragAndDrop
 CLASS class::TkwPopControlMouseMiddleClick
@@ -1490,9 +1488,11 @@ CLASS class::TkwPopControlSetTop
 CLASS class::TkwPopControlSetWidth
 CLASS class::TkwPopControlShow
 CLASS class::TkwPopControlShowHint
+CLASS class::TkwPopControlTop
 CLASS class::TkwPopControlUndock
 CLASS class::TkwPopControlVisible
 CLASS class::TkwPopControlVScrollerVisible
+CLASS class::TkwPopControlWidth
 CLASS class::TkwPopDictionaryExExportDictionary
 CLASS class::TkwPopDictionaryExExportedDictionaries
 CLASS class::TkwPopDictionaryExFileDateTime
@@ -1545,9 +1545,9 @@ CLASS class::TkwPopParserTokenLongString
 CLASS class::TkwPopParserTokenType
 CLASS class::TkwPopScriptEngineAddInitialization
 CLASS class::TkwPopScriptEngineAsKeywordFinder
+CLASS class::TkwPopScriptEngineCascadeDict
 CLASS class::TkwPopScriptEngineCurrentCompilingDictionary
 CLASS class::TkwPopScriptEngineDisableForHelp
-CLASS class::TkwPopScriptEngineGetCascadeDict
 CLASS class::TkwPopScriptEngineSetCascadeDict
 CLASS class::TkwPopScrollingWinControlHScrollerVisible
 CLASS class::TkwPopScrollingWinControlVScrollerVisible
@@ -1665,12 +1665,18 @@ CLASS class::TkwSWAP
 CLASS class::TkwSWAP2
 CLASS class::TkwSystemIncluded
 CLASS class::TkwSysutilsChangeFileExt
+CLASS class::TkwSysutilsCreateDir
 CLASS class::TkwSysutilsDirectoryExists
 CLASS class::TkwSysutilsExtractFileDrive
 CLASS class::TkwSysutilsExtractFileName
 CLASS class::TkwSysutilsExtractFilePath
 CLASS class::TkwSysutilsFileExists
 CLASS class::TkwSysutilsForceDirectories
+CLASS class::TkwSysutilsGetCurrentDir
+CLASS class::TkwSysutilsParamCount
+CLASS class::TkwSysutilsParamStr
+CLASS class::TkwSysutilsRemoveDir
+CLASS class::TkwSysutilsSetCurrentDir
 CLASS class::TkwTemporaryCompiledCode
 CLASS class::TkwTestResolveInputFilePath
 CLASS class::TkwTextReplace
@@ -2143,7 +2149,11 @@ pop:object:SetOrdProp
 pop:object:SetStrProp
 IMMEDIATE VOID OPERATOR : PRIVATE
 IMMEDIATE VOID OPERATOR : procedure
+ ^L OPERATOR :: IN : aName
+; // procedure
 IMMEDIATE VOID OPERATOR : PROCEDURE
+ ^L OPERATOR :: IN : aName
+; // PROCEDURE
 VOID ProcessFilesWithMask
 VOID ProcessMessages
 VOID ProcessSubDirs
@@ -2569,27 +2579,25 @@ TkwPopControlCanFocus
 TkwPopControlCaption
 TkwPopControlClick
 TkwPopControlClientToScreen
+TkwPopControlColor
 TkwPopControlControlCount
 TkwPopControlEnabled
 TkwPopControlFindControlByName
 TkwPopControlFocused
 TkwPopControlFont
 TkwPopControlGetAnotherParentForm
-TkwPopControlGetColor
 TkwPopControlGetControl
-TkwPopControlGetHeight
-TkwPopControlGetLeft
 TkwPopControlGetMainForm
 TkwPopControlGetParentForm
 TkwPopControlGetPopupMenu
-TkwPopControlGetTop
 TkwPopControlGetTopParentForm
-TkwPopControlGetWidth
 TkwPopControlHandle
+TkwPopControlHeight
 TkwPopControlHide
 TkwPopControlHint
 TkwPopControlHScrollerVisible
 TkwPopControlInvalidate
+TkwPopControlLeft
 TkwPopControlMouseLeftClick
 TkwPopControlMouseLeftDragAndDrop
 TkwPopControlMouseMiddleClick
@@ -2613,9 +2621,11 @@ TkwPopControlSetTop
 TkwPopControlSetWidth
 TkwPopControlShow
 TkwPopControlShowHint
+TkwPopControlTop
 TkwPopControlUndock
 TkwPopControlVisible
 TkwPopControlVScrollerVisible
+TkwPopControlWidth
 TkwPopDictionaryExExportDictionary
 TkwPopDictionaryExExportedDictionaries
 TkwPopDictionaryExFileDateTime
@@ -2668,9 +2678,9 @@ TkwPopParserTokenLongString
 TkwPopParserTokenType
 TkwPopScriptEngineAddInitialization
 TkwPopScriptEngineAsKeywordFinder
+TkwPopScriptEngineCascadeDict
 TkwPopScriptEngineCurrentCompilingDictionary
 TkwPopScriptEngineDisableForHelp
-TkwPopScriptEngineGetCascadeDict
 TkwPopScriptEngineSetCascadeDict
 TkwPopScrollingWinControlHScrollerVisible
 TkwPopScrollingWinControlVScrollerVisible
@@ -2788,12 +2798,18 @@ TkwSWAP
 TkwSWAP2
 TkwSystemIncluded
 TkwSysutilsChangeFileExt
+TkwSysutilsCreateDir
 TkwSysutilsDirectoryExists
 TkwSysutilsExtractFileDrive
 TkwSysutilsExtractFileName
 TkwSysutilsExtractFilePath
 TkwSysutilsFileExists
 TkwSysutilsForceDirectories
+TkwSysutilsGetCurrentDir
+TkwSysutilsParamCount
+TkwSysutilsParamStr
+TkwSysutilsRemoveDir
+TkwSysutilsSetCurrentDir
 TkwTemporaryCompiledCode
 TkwTestResolveInputFilePath
 TkwTextReplace
@@ -3165,21 +3181,27 @@ ARRAY script:ExceptionStack
 STRING script:FileName
 Dictionary: axiom:sysutils
 STRING sysutils:ChangeFileExt
+BOOLEAN sysutils:CreateDir
 BOOLEAN sysutils:DirectoryExists
 STRING sysutils:ExtractFileDrive
 STRING sysutils:ExtractFileName
 STRING sysutils:ExtractFilePath
 BOOLEAN sysutils:FileExists
 BOOLEAN sysutils:ForceDirectories
+STRING sysutils:GetCurrentDir
+INTEGER sysutils:ParamCount
+STRING sysutils:ParamStr
+BOOLEAN sysutils:RemoveDir
+BOOLEAN sysutils:SetCurrentDir
 Dictionary: axiom:application
 VOID application:ActionIdle
 STRING application:ExeName
 Dictionary: axiom:ScriptEngine
 VOID pop:ScriptEngine:AddInitialization
 TtfwWord pop:ScriptEngine:AsKeywordFinder
+BOOLEAN pop:ScriptEngine:CascadeDict
 TtfwDictionaryEx pop:ScriptEngine:CurrentCompilingDictionary
 VOID pop:ScriptEngine:DisableForHelp
-BOOLEAN pop:ScriptEngine:GetCascadeDict
 VOID pop:ScriptEngine:SetCascadeDict
 Dictionary: axiom:DictionaryEx
 VOID pop:DictionaryEx:ExportDictionary
