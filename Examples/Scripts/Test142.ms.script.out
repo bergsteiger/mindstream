@@ -2433,7 +2433,10 @@ VOID PROCEDURE ProcessDirs
   aDir
   IterateDirs
   aDir
-  ProcessItem
+  (
+   @SELF
+   DO
+  )
  ; // VOID PROCEDURE ProcessItem
  
  IMMEDIATE VOID OPERATOR this.do

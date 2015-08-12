@@ -24,7 +24,7 @@ VOID IMMEDIATE OPERATOR this.do
  RecurseProc ProcessItem
   STRING IN aDir
   DoDir aDir
-  IterateDirs aDir ProcessItem
+  IterateDirs aDir ( @SELF DO )
  ; // RecurseProc
 
  aDir DO ProcessItem
