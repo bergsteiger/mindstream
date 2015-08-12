@@ -13,14 +13,10 @@ FORWARD Process
    anItem .
   ; // DoFile
 
-  @ DoFile '*.ms.script' anItem ProcessFilesWithMask
-  @ DoFile '*.ms.dict' anItem ProcessFilesWithMask
-  @ DoFile '*.pas' anItem ProcessFilesWithMask
-  @ DoFile '*.txt' anItem ProcessFilesWithMask
-  @ DoFile '*.inc' anItem ProcessFilesWithMask
-  @ DoFile '*.fmx' anItem ProcessFilesWithMask
-  @ DoFile '*.xml' anItem ProcessFilesWithMask
-  @ DoFile '*.dpr' anItem ProcessFilesWithMask
+  for [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ] (
+   STRING IN aMask
+   @ DoFile aMask anItem ProcessFilesWithMask
+  )
  ; // DoDir
 
  : ProcessItem
