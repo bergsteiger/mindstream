@@ -2433,11 +2433,11 @@ VOID PROCEDURE ProcessDirs
   aDir
   IterateDirs
   aDir
-  ProcessItem
+  OPERATOR
  ; // VOID PROCEDURE ProcessItem
  
  IMMEDIATE VOID OPERATOR this.do
-  Ctx:KeyWordDefiningNow
+  Ctx:WordDefiningNow
   CompileValue
   @
   DO

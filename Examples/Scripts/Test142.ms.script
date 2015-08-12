@@ -3,7 +3,7 @@ PROCEDURE ProcessDirs
  RightParam aDir
 
 VOID IMMEDIATE OPERATOR this.do
- Ctx:KeyWordDefiningNow CompileValue @ DO CompileValue
+ Ctx:WordDefiningNow CompileValue @ DO CompileValue
 ; // this.do
 
  PROCEDURE DoDir
@@ -23,7 +23,7 @@ VOID IMMEDIATE OPERATOR this.do
  RecurseProc ProcessItem
   STRING IN aDir
   DoDir aDir
-  IterateDirs aDir ProcessItem
+  IterateDirs aDir this.do
  ; // RecurseProc
 
  aDir DO ProcessItem
