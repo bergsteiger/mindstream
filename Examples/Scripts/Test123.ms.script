@@ -1,12 +1,12 @@
-: Process
+PROCEDURE Process
  STRING IN aDir
 
  FORWARD ProcessItem
 
- : DoDir
+ PROCEDURE DoDir
   STRING IN aDir
 
-  : DoFile
+  PROCEDURE DoFile
    STRING IN anFilePath
    PrintThis anFilePath
   ; // DoFile
@@ -17,7 +17,7 @@
   )
  ; // DoDir
 
- : ProcessItem
+ PROCEDURE ProcessItem
   STRING IN aDir
   aDir DoDir
   IterateDirs aDir ProcessItem
