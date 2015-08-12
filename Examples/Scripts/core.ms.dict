@@ -18,6 +18,12 @@ ANY : |^
  aRef pop:Word:GetRef DO >>> Result
 ; // |^
 
+FUNCTOR : |@
+// - разыменовывает параметр слева
+ ^@ IN aRef
+ aRef pop:Word:GetRef >>> Result
+; // |@
+
 VOID IMMEDIATE OPERATOR this.do
 // - запускаем "себя же" рекурсивно
  '(' Ctx:Parser:PushSymbol
