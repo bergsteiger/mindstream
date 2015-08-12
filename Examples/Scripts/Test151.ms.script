@@ -3,10 +3,10 @@ PROCEDURE ProcessSubDirsWithMasks
  RightParam aMaskArray
  RightParam aLambda
 
- PROCEDURE DoDir
+ PRIVATE PROCEDURE DoDir
   RightParam aDir
 
-  PROCEDURE DoFile
+  PRIVATE PROCEDURE DoFile
    STRING IN anFilePath
    anFilePath aLambda |@ DO
   ; // DoFile
@@ -17,7 +17,7 @@ PROCEDURE ProcessSubDirsWithMasks
   )
  ; // DoDir
 
- PROCEDURE ProcessItem
+ PRIVATE PROCEDURE ProcessItem
   STRING IN aDir
   DoDir aDir
   IterateDirs aDir ( this.do )
