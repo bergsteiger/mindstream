@@ -3047,6 +3047,116 @@ ProcessAnySubDirsWithMasks
  '..\'
 ]
 
+VOID PROCEDURE ProcessAnySubDirsWithMasks
+ ^ IN aDirMasks
+ ARRAY IN aFileMasks
+ for
+ (
+  aDirMasks |^
+ )
+ (
+  STRING IN aDirMask
+  ProcessSubDirsWithMasks
+  aDirMask
+  aFileMasks
+  .
+ )
+; // VOID PROCEDURE ProcessAnySubDirsWithMasks
+
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+ '*.co'
+]
+ProcessAnySubDirsWithMasks
+[
+ '..\..\'
+ '..\'
+]
+
+VOID PROCEDURE ProcessAnySubDirsWithMasks
+ ^ IN aDirMasks
+ ^ IN aFileMasks
+ for
+ (
+  aDirMasks |^
+ )
+ (
+  STRING IN aDirMask
+  ProcessSubDirsWithMasks
+  aDirMask
+  (
+   aFileMasks |^
+  )
+  .
+ )
+; // VOID PROCEDURE ProcessAnySubDirsWithMasks
+
+ProcessAnySubDirsWithMasks
+[
+ '..\..\'
+ '..\'
+]
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+ '*.co'
+]
+
+VOID PROCEDURE ProcessAnySubDirsWithMasks
+ ^ IN aDirMasks
+ ^ IN aFileMasks
+ ^ IN aLambda
+ for
+ (
+  aDirMasks |^
+ )
+ (
+  STRING IN aDirMask
+  ProcessSubDirsWithMasks
+  aDirMask
+  (
+   aFileMasks |^
+  )
+  (
+   STRING IN aFile
+   aFile
+   aLambda |@
+   DO
+  )
+ )
+; // VOID PROCEDURE ProcessAnySubDirsWithMasks
+
+ProcessAnySubDirsWithMasks
+[
+ '..\..\'
+ '..\'
+]
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+ '*.co'
+]
+.
+
 for
 (
  @
@@ -3064,6 +3174,46 @@ for
  )
  FILTER
 )
+.
+
+VOID PROCEDURE ProcessAnySubDirsWithMasks
+ ^ IN aDirMasks
+ ^ IN aFileMasks
+ ^ IN aLambda
+ for
+ (
+  aDirMasks |^
+ )
+ (
+  STRING IN aDirMask
+  ProcessSubDirsWithMasks
+  aDirMask
+  (
+   aFileMasks |^
+  )
+  (
+   aLambda |@
+   DO
+  )
+ )
+; // VOID PROCEDURE ProcessAnySubDirsWithMasks
+
+ProcessAnySubDirsWithMasks
+[
+ '..\..\'
+ '..\'
+]
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+ '*.co'
+]
 .
 
 BOOLEAN FUNCTION IsEven
