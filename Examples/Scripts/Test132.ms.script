@@ -1,0 +1,29 @@
+PROCEDURE ProcessDirs
+ RIGHT IN aDir
+
+ FORWARD ProcessItem
+
+ PROCEDURE DoDir
+  RIGHT IN aDir
+
+  PROCEDURE DoFile
+   STRING IN anFilePath
+   PrintThis anFilePath
+  ; // DoFile
+
+  for [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ] (
+   STRING IN aMask
+   IterateFilesWithMask aDir aMask DoFile
+  )
+ ; // DoDir
+
+ PROCEDURE ProcessItem
+  STRING IN aDir
+  DoDir aDir
+  IterateDirs aDir ProcessItem
+ ; // ProcessItem
+
+ aDir DO ProcessItem
+; // ProcessDirs
+
+ProcessDirs '..\..\'
