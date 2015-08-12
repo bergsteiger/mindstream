@@ -1,13 +1,3 @@
-VOID IMMEDIATE operator RecurseProc
-// - процедура, которая умеет вызываться рекурсивно
- ^L IN aName
- 'FORWARD' Ctx:Parser:PushSymbol
- aName |N Ctx:Parser:PushSymbol
-
- ':' Ctx:Parser:PushSymbol
- aName |N Ctx:Parser:PushSymbol
-; // RecurseProc
-
 PROCEDURE ProcessDirs
  RightParam aDir
 
