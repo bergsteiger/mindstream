@@ -1,5 +1,5 @@
 PROCEDURE ProcessDirs
- STRING IN aDir
+ ^ IN aDir
 
  FORWARD ProcessItem
 
@@ -23,7 +23,7 @@ PROCEDURE ProcessDirs
   IterateDirs aDir ProcessItem
  ; // ProcessItem
 
- aDir ProcessItem
+ aDir DO ProcessItem
 ; // ProcessDirs
 
-'..\..\' ProcessDirs
+ProcessDirs '..\..\'
