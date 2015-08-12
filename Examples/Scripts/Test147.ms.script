@@ -1,4 +1,5 @@
 PROCEDURE ProcessDirs
+ FUNCTOR IN aLambda
  RightParam aDir
  RightParam aMaskArray
 
@@ -7,7 +8,7 @@ PROCEDURE ProcessDirs
 
   PROCEDURE DoFile
    STRING IN anFilePath
-   PrintThis anFilePath
+   anFilePath aLambda DO
   ; // DoFile
 
   for ( aMaskArray |^ ) (
@@ -25,4 +26,4 @@ PROCEDURE ProcessDirs
  aDir DO ProcessItem
 ; // ProcessDirs
 
-ProcessDirs '..\..\' [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ]
+@ Print ProcessDirs '..\..\' [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ]
