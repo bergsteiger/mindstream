@@ -1,10 +1,12 @@
+WordAlias RIGHT ^
+
 PROCEDURE ProcessDirs
- ^ IN aDir
+ RIGHT IN aDir
 
  FORWARD ProcessItem
 
  PROCEDURE DoDir
-  ^ IN aDir
+  RIGHT IN aDir
 
   PROCEDURE DoFile
    STRING IN anFilePath
