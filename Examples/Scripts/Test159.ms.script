@@ -4,7 +4,7 @@ PROCEDURE ProcessAnySubDirsWithMasks
  RightParam aDirMasks
  RightParam aFileMasks
 
- for ( aDirMasks |^ ) ( STRING IN aDirMask ProcessSubDirsWithMasks aDirMask ( aFileMasks |^ ) ( aLambda ) )
+ for ( aDirMasks |^ ) ( STRING IN aDirMask ProcessSubDirsWithMasks aDirMask ( aFileMasks |^ ) ( aLambda DO ) )
 
 ; // ProcessAnySubDirsWithMasks
 
