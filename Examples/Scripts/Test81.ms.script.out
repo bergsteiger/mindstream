@@ -876,6 +876,56 @@ FORWARD Process
 '..\..\'
 Process
 
+FORWARD Process
+: Process
+ FORWARD ProcessItem
+ STRING IN aDir
+ : DoDir
+  STRING IN anItem
+  : DoFile
+   STRING IN anItem
+   anItem
+   .
+  ; // : DoFile
+  
+  for
+  [
+   '*.ms.script'
+   '*.ms.dict'
+   '*.pas'
+   '*.txt'
+   '*.inc'
+   '*.fmx'
+   '*.xml'
+   '*.dpr'
+  ]
+  (
+   STRING IN aMask
+   @
+   DoFile
+   aMask
+   anItem
+   ProcessFilesWithMask
+  )
+ ; // : DoDir
+ 
+ : ProcessItem
+  STRING IN anItem
+  anItem
+  DoDir
+  @
+  ProcessItem
+  anItem
+  ProcessSubDirs
+ ; // : ProcessItem
+ 
+ aDir
+ ProcessItem
+; // : Process
+
+'..\..\'
+Process
+
 for
 (
  1 to
