@@ -16,7 +16,7 @@ PROCEDURE ProcessDirs
   )
  ; // DoDir
 
- RecurseProc ProcessItem
+ PROCEDURE ProcessItem
   STRING IN aDir
   DoDir aDir
   IterateDirs aDir ( this.do )

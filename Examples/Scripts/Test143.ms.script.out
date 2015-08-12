@@ -2398,7 +2398,6 @@
 ..\..\Views\msTextShapeView.pas
 ..\..\Win32\Debug\TestSettings.txt
 VOID PROCEDURE ProcessDirs
- FORWARD ProcessItem
  ^ IN aDir
  VOID PROCEDURE DoDir
   ^ IN aDir
