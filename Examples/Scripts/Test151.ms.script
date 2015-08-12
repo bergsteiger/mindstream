@@ -1,5 +1,5 @@
-PROCEDURE ProcessDirs
- RightParam aDir
+PROCEDURE ProcessSubDirsWithMasks
+ RightParam aRoot
  RightParam aMaskArray
  RightParam aLambda
 
@@ -23,7 +23,7 @@ PROCEDURE ProcessDirs
   IterateDirs aDir ( this.do )
  ; // ProcessItem
 
- aDir DO ProcessItem
-; // ProcessDirs
+ aRoot DO ProcessItem
+; // ProcessSubDirsWithMasks
 
-ProcessDirs '..\..\' [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ] Print
+ProcessSubDirsWithMasks '..\..\' [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ] Print
