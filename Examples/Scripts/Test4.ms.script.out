@@ -626,6 +626,7 @@ Dictionary: Test4.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Translate.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeDump.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\files.ms.dict
  ;
 Dictionary: axiom:axiom
  Uses: 
@@ -3332,6 +3333,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Translate.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeDump.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\files.ms.dict
  ;
  Exports: 
   axiom:axiom
@@ -3366,6 +3368,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Translate.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeDump.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\files.ms.dict
  ;
 uses
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\math.ms.dict
@@ -3835,4 +3838,34 @@ VOID WORDWORKER : OutEx
  STRING OPERATOR :: VAR : aValue
  ^ OPERATOR :: IN : WordToWork
 ; // OutEx
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\files.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+VOID OPERATOR :: PROCEDURE : IterateFilesWithMask
+ ^ OPERATOR :: IN : aDir
+ ^ OPERATOR :: IN : aLambda
+ ^ OPERATOR :: IN : aMask
+; // IterateFilesWithMask
 TkwMain : Main
