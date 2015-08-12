@@ -8,7 +8,7 @@ PROCEDURE ProcessDirs
 
   PROCEDURE DoFile
    STRING IN anFilePath
-   anFilePath aLambda DO
+   anFilePath aLambda pop:Word:GetRef DO
   ; // DoFile
 
   for ( aMaskArray |^ ) (
