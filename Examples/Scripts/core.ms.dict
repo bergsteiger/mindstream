@@ -1,3 +1,7 @@
+USES
+ types.ms.dict
+;
+
 VOID IMMEDIATE operator RecurseProc
 // - процедура, которая умеет вызываться рекурсивно
  ^L IN aName
