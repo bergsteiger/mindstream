@@ -7,3 +7,7 @@ VOID IMMEDIATE operator RecurseProc
  'PROCEDURE' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
 ; // RecurseProc
+
+: |^
+ pop:Word:GetRef DO
+; // |^
