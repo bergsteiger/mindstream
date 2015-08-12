@@ -11,7 +11,7 @@ FORWARD Process
 
   : DoFile
    STRING IN anItem
-   anItem .
+   anItem Print
   ; // DoFile
 
   for [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ] (
