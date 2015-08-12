@@ -4,6 +4,6 @@ VOID IMMEDIATE operator RecurseProc
  'FORWARD' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
 
- ':' Ctx:Parser:PushSymbol
+ 'PROCEDURE' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
 ; // RecurseProc

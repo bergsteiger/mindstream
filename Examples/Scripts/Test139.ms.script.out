@@ -2423,14 +2423,14 @@ VOID PROCEDURE ProcessDirs
   )
  ; // VOID PROCEDURE DoDir
  
- : ProcessItem
+ VOID PROCEDURE ProcessItem
   STRING IN aDir
   DoDir
   aDir
   IterateDirs
   aDir
   ProcessItem
- ; // : ProcessItem
+ ; // VOID PROCEDURE ProcessItem
  
  aDir
  DO
