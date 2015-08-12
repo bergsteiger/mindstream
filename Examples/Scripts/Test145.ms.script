@@ -1,5 +1,5 @@
 PROCEDURE ProcessDirs
-
+ ARRAY IN aMaskArray
  RightParam aDir
 
  PROCEDURE DoDir
@@ -10,7 +10,7 @@ PROCEDURE ProcessDirs
    PrintThis anFilePath
   ; // DoFile
 
-  for [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ] (
+  for aMaskArray (
    STRING IN aMask
    IterateFilesWithMask aDir aMask DoFile
   )
@@ -25,4 +25,4 @@ PROCEDURE ProcessDirs
  aDir DO ProcessItem
 ; // ProcessDirs
 
-ProcessDirs '..\..\'
+[ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ] ProcessDirs '..\..\'
