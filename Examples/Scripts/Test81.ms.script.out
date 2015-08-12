@@ -2925,6 +2925,128 @@ ProcessSubDirsWithMasks
 ]
 .
 
+ProcessSubDirsWithMasks
+'..\..\'
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+]
+.
+
+ProcessSubDirsWithMasks
+'..\..\'
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+ '*.co'
+]
+.
+
+VOID PROCEDURE ProcessAnySubDirsWithMasks
+ ProcessSubDirsWithMasks
+ '..\..\'
+ [
+  '*.ms.script'
+  '*.ms.dict'
+  '*.pas'
+  '*.txt'
+  '*.inc'
+  '*.fmx'
+  '*.xml'
+  '*.dpr'
+  '*.co'
+ ]
+ .
+ ProcessSubDirsWithMasks
+ '..\'
+ [
+  '*.ms.script'
+  '*.ms.dict'
+  '*.pas'
+  '*.txt'
+  '*.inc'
+  '*.fmx'
+  '*.xml'
+  '*.dpr'
+  '*.co'
+ ]
+ .
+; // VOID PROCEDURE ProcessAnySubDirsWithMasks
+
+ProcessAnySubDirsWithMasks
+
+VOID PROCEDURE ProcessAnySubDirsWithMasks
+ ARRAY IN aDirMasks
+ for
+ aDirMasks
+ (
+  STRING IN aDirMask
+  ProcessSubDirsWithMasks
+  aDirMask
+  [
+   '*.ms.script'
+   '*.ms.dict'
+   '*.pas'
+   '*.txt'
+   '*.inc'
+   '*.fmx'
+   '*.xml'
+   '*.dpr'
+   '*.co'
+  ]
+  .
+ )
+; // VOID PROCEDURE ProcessAnySubDirsWithMasks
+
+[
+ '..\..\'
+ '..\'
+]
+ProcessAnySubDirsWithMasks
+
+VOID PROCEDURE ProcessAnySubDirsWithMasks
+ ^ IN aDirMasks
+ for
+ (
+  aDirMasks |^
+ )
+ (
+  STRING IN aDirMask
+  ProcessSubDirsWithMasks
+  aDirMask
+  [
+   '*.ms.script'
+   '*.ms.dict'
+   '*.pas'
+   '*.txt'
+   '*.inc'
+   '*.fmx'
+   '*.xml'
+   '*.dpr'
+   '*.co'
+  ]
+  .
+ )
+; // VOID PROCEDURE ProcessAnySubDirsWithMasks
+
+ProcessAnySubDirsWithMasks
+[
+ '..\..\'
+ '..\'
+]
+
 for
 (
  @

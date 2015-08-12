@@ -3990,6 +3990,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\files.ms.dict
   axiom:ActionList
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\params.ms.dict
  ;
 VOID OPERATOR :: PROCEDURE : IterateDirs
  ^ OPERATOR :: IN : aLabda
@@ -4000,4 +4001,18 @@ VOID OPERATOR :: PROCEDURE : IterateFilesWithMask
  ^ OPERATOR :: IN : aLambda
  ^ OPERATOR :: IN : aMask
 ; // IterateFilesWithMask
+VOID OPERATOR :: PROCEDURE : ProcessSubDirsWithMasks
+ ^ OPERATOR :: IN : aLambda
+ ^ OPERATOR :: IN : aMaskArray
+ ^ OPERATOR :: IN : aRoot
+ PRIVATE VOID OPERATOR :: PROCEDURE : DoDir
+  ^ OPERATOR :: IN : aDir
+  PRIVATE VOID OPERATOR :: PROCEDURE : DoFile
+   STRING OPERATOR :: IN : anFilePath
+  ; // DoFile
+ ; // DoDir
+ PRIVATE VOID OPERATOR :: PROCEDURE : ProcessItem
+  STRING OPERATOR :: IN : aDir
+ ; // ProcessItem
+; // ProcessSubDirsWithMasks
 TkwMain : Main
