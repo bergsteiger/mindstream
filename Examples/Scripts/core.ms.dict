@@ -19,6 +19,7 @@ ANY : |^
 ; // |^
 
 VOID IMMEDIATE OPERATOR this.do
+// - запускаем "себя же" рекурсивно
  '(' Ctx:Parser:PushSymbol
  '@SELF' Ctx:Parser:PushSymbol
  'DO' Ctx:Parser:PushSymbol
