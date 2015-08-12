@@ -1,10 +1,10 @@
 PROCEDURE ProcessAnySubDirsWithMasks
 
- ARRAY IN aFileMasks
  RightParam aDirMasks
+ RightParam aFileMasks
 
- for ( aDirMasks |^ ) ( STRING IN aDirMask ProcessSubDirsWithMasks aDirMask aFileMasks Print )
+ for ( aDirMasks |^ ) ( STRING IN aDirMask ProcessSubDirsWithMasks aDirMask ( aFileMasks |^ ) Print )
 
 ; // ProcessAnySubDirsWithMasks
 
-[ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' '*.co' ] ProcessAnySubDirsWithMasks [ '..\..\' '..\' ]
+ProcessAnySubDirsWithMasks [ '..\..\' '..\' ] [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' '*.co' ]
