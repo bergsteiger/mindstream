@@ -1,8 +1,6 @@
 PROCEDURE ProcessDirs
  RightParam aDir
 
- FORWARD ProcessItem
-
  PROCEDURE DoDir
   RightParam aDir
 
@@ -16,6 +14,8 @@ PROCEDURE ProcessDirs
    IterateFilesWithMask aDir aMask DoFile
   )
  ; // DoDir
+
+ FORWARD ProcessItem
 
  PROCEDURE ProcessItem
   STRING IN aDir
