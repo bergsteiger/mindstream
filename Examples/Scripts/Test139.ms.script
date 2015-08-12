@@ -22,6 +22,7 @@ PROCEDURE ProcessDirs
  ; // RecurseProc
 
  aDir DO ProcessItem
+ @SELF DumpElement
 ; // ProcessDirs
 
 ProcessDirs '..\..\'

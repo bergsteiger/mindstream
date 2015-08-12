@@ -2392,3 +2392,50 @@
 ..\..\Views\msShapeView.pas
 ..\..\Views\msTextShapeView.pas
 ..\..\Win32\Debug\TestSettings.txt
+VOID PROCEDURE ProcessDirs
+ FORWARD ProcessItem
+ ^ IN aDir
+ VOID PROCEDURE DoDir
+  ^ IN aDir
+  VOID PROCEDURE DoFile
+   STRING IN anFilePath
+   PrintThis
+   anFilePath
+  ; // VOID PROCEDURE DoFile
+  
+  for
+  [
+   '*.ms.script'
+   '*.ms.dict'
+   '*.pas'
+   '*.txt'
+   '*.inc'
+   '*.fmx'
+   '*.xml'
+   '*.dpr'
+  ]
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   aDir
+   aMask
+   DoFile
+  )
+ ; // VOID PROCEDURE DoDir
+ 
+ : ProcessItem
+  STRING IN aDir
+  DoDir
+  aDir
+  IterateDirs
+  aDir
+  ProcessItem
+ ; // : ProcessItem
+ 
+ aDir
+ DO
+ ProcessItem
+ @SELF
+ DumpElement
+; // VOID PROCEDURE ProcessDirs
+
