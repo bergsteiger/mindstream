@@ -1,0 +1,29 @@
+PROCEDURE ProcessDirs
+
+ RightParam aDir
+
+ PROCEDURE DoDir
+  RightParam aDir
+
+  PROCEDURE DoFile
+   STRING IN anFilePath
+   PrintThis anFilePath
+  ; // DoFile
+
+  for [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ] (
+   STRING IN aMask
+   IterateFilesWithMask aDir aMask DoFile
+  )
+ ; // DoDir
+
+ RecurseProc ProcessItem
+  STRING IN aDir
+  DoDir aDir
+  IterateDirs aDir ( this.do )
+ ; // RecurseProc
+
+ aDir DO ProcessItem
+ @SELF DumpElement
+; // ProcessDirs
+
+ProcessDirs '..\..\'
