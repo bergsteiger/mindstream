@@ -3863,6 +3863,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\files.ms.dict
   axiom:ActionList
   axiom:ContainedAction
  ;
+VOID OPERATOR :: PROCEDURE : IterateDirs
+ ^ OPERATOR :: IN : aLabda
+ ^ OPERATOR :: IN : aRoot
+; // IterateDirs
 VOID OPERATOR :: PROCEDURE : IterateFilesWithMask
  ^ OPERATOR :: IN : aDir
  ^ OPERATOR :: IN : aLambda

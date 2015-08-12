@@ -1085,12 +1085,260 @@ FORWARD Process
 '..\..\'
 Process
 
+FORWARD Process
+VOID PROCEDURE IterateDirs
+ ^ IN aLabda
+ ^ IN aRoot
+ aLabda
+ aRoot
+ DO
+ ProcessSubDirs
+; // VOID PROCEDURE IterateDirs
+
+: Process
+ FORWARD ProcessItem
+ STRING IN aDir
+ : DoDir
+  STRING IN anItem
+  : DoFile
+   STRING IN anItem
+   anItem
+   .
+  ; // : DoFile
+  
+  for
+  [
+   '*.ms.script'
+   '*.ms.dict'
+   '*.pas'
+   '*.txt'
+   '*.inc'
+   '*.fmx'
+   '*.xml'
+   '*.dpr'
+  ]
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   anItem
+   aMask
+   DoFile
+  )
+ ; // : DoDir
+ 
+ : ProcessItem
+  STRING IN anItem
+  anItem
+  DoDir
+  IterateDirs
+  anItem
+  ProcessItem
+ ; // : ProcessItem
+ 
+ aDir
+ ProcessItem
+; // : Process
+
+'..\..\'
+Process
+
+FORWARD Process
+: Process
+ FORWARD ProcessItem
+ STRING IN aDir
+ : DoDir
+  STRING IN anItem
+  : DoFile
+   STRING IN anItem
+   anItem
+   .
+  ; // : DoFile
+  
+  for
+  [
+   '*.ms.script'
+   '*.ms.dict'
+   '*.pas'
+   '*.txt'
+   '*.inc'
+   '*.fmx'
+   '*.xml'
+   '*.dpr'
+  ]
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   anItem
+   aMask
+   DoFile
+  )
+ ; // : DoDir
+ 
+ : ProcessItem
+  STRING IN anItem
+  anItem
+  DoDir
+  IterateDirs
+  anItem
+  ProcessItem
+ ; // : ProcessItem
+ 
+ aDir
+ ProcessItem
+; // : Process
+
+'..\..\'
+Process
+
+FORWARD Process
+: Process
+ FORWARD ProcessItem
+ STRING IN aDir
+ : DoDir
+  STRING IN anItem
+  : DoFile
+   STRING IN anItem
+   anItem
+   .
+  ; // : DoFile
+  
+  for
+  [
+   '*.ms.script'
+   '*.ms.dict'
+   '*.pas'
+   '*.txt'
+   '*.inc'
+   '*.fmx'
+   '*.xml'
+   '*.dpr'
+  ]
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   anItem
+   aMask
+   DoFile
+  )
+ ; // : DoDir
+ 
+ : ProcessItem
+  STRING IN anItem
+  anItem
+  DoDir
+  IterateDirs
+  anItem
+  ProcessItem
+ ; // : ProcessItem
+ 
+ aDir
+ ProcessItem
+; // : Process
+
+'..\..\'
+Process
+
+FORWARD Process
+: Process
+ FORWARD ProcessItem
+ STRING IN aDir
+ : DoDir
+  STRING IN aDir
+  : DoFile
+   STRING IN anFilePath
+   anFilePath
+   .
+  ; // : DoFile
+  
+  for
+  [
+   '*.ms.script'
+   '*.ms.dict'
+   '*.pas'
+   '*.txt'
+   '*.inc'
+   '*.fmx'
+   '*.xml'
+   '*.dpr'
+  ]
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   aDir
+   aMask
+   DoFile
+  )
+ ; // : DoDir
+ 
+ : ProcessItem
+  STRING IN aDir
+  aDir
+  DoDir
+  IterateDirs
+  aDir
+  ProcessItem
+ ; // : ProcessItem
+ 
+ aDir
+ ProcessItem
+; // : Process
+
+'..\..\'
+Process
+
 for
 (
  1 to
  20
 )
 .
+
+: Process
+ FORWARD ProcessItem
+ STRING IN aDir
+ : DoDir
+  STRING IN aDir
+  : DoFile
+   STRING IN anFilePath
+   anFilePath
+   .
+  ; // : DoFile
+  
+  for
+  [
+   '*.ms.script'
+   '*.ms.dict'
+   '*.pas'
+   '*.txt'
+   '*.inc'
+   '*.fmx'
+   '*.xml'
+   '*.dpr'
+  ]
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   aDir
+   aMask
+   DoFile
+  )
+ ; // : DoDir
+ 
+ : ProcessItem
+  STRING IN aDir
+  aDir
+  DoDir
+  IterateDirs
+  aDir
+  ProcessItem
+ ; // : ProcessItem
+ 
+ aDir
+ ProcessItem
+; // : Process
+
+'..\..\'
+Process
 
 for
 (
