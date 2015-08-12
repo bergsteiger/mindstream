@@ -3,7 +3,8 @@ PROCEDURE ProcessDirs
  RightParam aDir
 
 VOID IMMEDIATE OPERATOR this.do
- Ctx:WordDefiningNow CompileValue @ DO CompileValue
+ '@SELF' Ctx:Parser:PushSymbol
+ 'DO' Ctx:Parser:PushSymbol
 ; // this.do
 
  PROCEDURE DoDir
