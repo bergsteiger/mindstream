@@ -1,10 +1,11 @@
 PROCEDURE ProcessAnySubDirsWithMasks
 
+ FUNCTOR IN aLambda
  RightParam aDirMasks
  RightParam aFileMasks
 
- for ( aDirMasks |^ ) ( STRING IN aDirMask ProcessSubDirsWithMasks aDirMask ( aFileMasks |^ ) Print )
+ for ( aDirMasks |^ ) ( STRING IN aDirMask ProcessSubDirsWithMasks aDirMask ( aFileMasks |^ ) aLambda )
 
 ; // ProcessAnySubDirsWithMasks
 
-ProcessAnySubDirsWithMasks [ '..\..\' '..\' ] [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' '*.co' ]
+Print ProcessAnySubDirsWithMasks [ '..\..\' '..\' ] [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' '*.co' ]
