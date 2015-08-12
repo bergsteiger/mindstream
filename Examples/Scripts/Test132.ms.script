@@ -1,10 +1,15 @@
+VOID IMMEDIATE operator RightParam
+ 'RIGHT' Ctx:Parser:PushSymbol
+ 'IN' Ctx:Parser:PushSymbol
+; // RightParam
+
 PROCEDURE ProcessDirs
- RIGHT IN aDir
+ RightParam aDir
 
  FORWARD ProcessItem
 
  PROCEDURE DoDir
-  RIGHT IN aDir
+  RightParam aDir
 
   PROCEDURE DoFile
    STRING IN anFilePath
