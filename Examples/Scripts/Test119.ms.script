@@ -7,23 +7,23 @@ FORWARD Process
  FORWARD ProcessItem
 
  : DoDir
-  STRING IN anItem
+  STRING IN aDir
 
   : DoFile
-   STRING IN anItem
-   anItem Print
+   STRING IN anFilePath
+   anFilePath Print
   ; // DoFile
 
   for [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ] (
    STRING IN aMask
-   IterateFilesWithMask anItem aMask DoFile
+   IterateFilesWithMask aDir aMask DoFile
   )
  ; // DoDir
 
  : ProcessItem
-  STRING IN anItem
-  anItem DoDir
-  IterateDirs anItem ProcessItem
+  STRING IN aDir
+  aDir DoDir
+  IterateDirs aDir ProcessItem
  ; // ProcessItem
 
  aDir ProcessItem
