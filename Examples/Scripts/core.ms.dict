@@ -9,5 +9,6 @@ VOID IMMEDIATE operator RecurseProc
 ; // RecurseProc
 
 : |^
- pop:Word:GetRef DO
+ ^@ IN aRef
+ aRef pop:Word:GetRef DO
 ; // |^
