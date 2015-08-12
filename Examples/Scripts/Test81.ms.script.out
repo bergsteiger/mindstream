@@ -2866,6 +2866,65 @@ ProcessDirs
 ]
 .
 
+VOID PROCEDURE ProcessSubDirsWithMasks
+ ^ IN aLambda
+ ^ IN aMaskArray
+ ^ IN aRoot
+ PRIVATE VOID PROCEDURE DoDir
+  ^ IN aDir
+  PRIVATE VOID PROCEDURE DoFile
+   STRING IN anFilePath
+   anFilePath
+   aLambda |@
+   DO
+  ; // PRIVATE VOID PROCEDURE DoFile
+  
+  for
+  (
+   aMaskArray |^
+  )
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   aDir
+   aMask
+   DoFile
+  )
+ ; // PRIVATE VOID PROCEDURE DoDir
+ 
+ PRIVATE VOID PROCEDURE ProcessItem
+  STRING IN aDir
+  DoDir
+  aDir
+  IterateDirs
+  aDir
+  (
+   (
+    @SELF
+    DO
+   )
+  )
+ ; // PRIVATE VOID PROCEDURE ProcessItem
+ 
+ aRoot
+ DO
+ ProcessItem
+; // VOID PROCEDURE ProcessSubDirsWithMasks
+
+ProcessSubDirsWithMasks
+'..\..\'
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+]
+.
+
 for
 (
  @
