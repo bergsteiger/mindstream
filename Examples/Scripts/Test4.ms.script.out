@@ -3428,6 +3428,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\types.ms.dict
   axiom:ContainedAction
  ;
 IMMEDIATE VOID OPERATOR :: TYPE : ANY
+IMMEDIATE VOID OPERATOR :: TYPE : ITERATABLE
 IMMEDIATE VOID OPERATOR :: TYPE : VARIANT
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\core.ms.dict
  Uses: 
@@ -3455,9 +3456,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\core.ms.dict
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\types.ms.dict
  ;
-BOOLEAN INTEGER STRING OBJECT INTERFACE CLASS : : |^
+TtfwWord : : |@
  ^@ OPERATOR :: IN : aRef
- BOOLEAN INTEGER STRING OBJECT INTERFACE CLASS : :: |^ : Result
+ TtfwWord : :: |@ : Result
+; // |@
+BOOLEAN INTEGER STRING OBJECT INTERFACE ARRAY FILE CLASS : : |^
+ ^@ OPERATOR :: IN : aRef
+ BOOLEAN INTEGER STRING OBJECT INTERFACE ARRAY FILE CLASS : :: |^ : Result
 ; // |^
 IMMEDIATE VOID OPERATOR : RecurseProc
  ^L OPERATOR :: IN : aName

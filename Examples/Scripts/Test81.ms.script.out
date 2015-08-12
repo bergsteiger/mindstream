@@ -2498,6 +2498,296 @@ VOID PROCEDURE ProcessDirs
 ProcessDirs
 '..\..\'
 
+VOID PROCEDURE ProcessDirs
+ ^ IN aDir
+ ARRAY IN aMaskArray
+ VOID PROCEDURE DoDir
+  ^ IN aDir
+  VOID PROCEDURE DoFile
+   STRING IN anFilePath
+   PrintThis
+   anFilePath
+  ; // VOID PROCEDURE DoFile
+  
+  for
+  aMaskArray
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   aDir
+   aMask
+   DoFile
+  )
+ ; // VOID PROCEDURE DoDir
+ 
+ VOID PROCEDURE ProcessItem
+  STRING IN aDir
+  DoDir
+  aDir
+  IterateDirs
+  aDir
+  (
+   (
+    @SELF
+    DO
+   )
+  )
+ ; // VOID PROCEDURE ProcessItem
+ 
+ aDir
+ DO
+ ProcessItem
+; // VOID PROCEDURE ProcessDirs
+
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+]
+ProcessDirs
+'..\..\'
+
+VOID PROCEDURE ProcessDirs
+ ^ IN aDir
+ ^ IN aMaskArray
+ VOID PROCEDURE DoDir
+  ^ IN aDir
+  VOID PROCEDURE DoFile
+   STRING IN anFilePath
+   PrintThis
+   anFilePath
+  ; // VOID PROCEDURE DoFile
+  
+  for
+  (
+   aMaskArray |^
+  )
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   aDir
+   aMask
+   DoFile
+  )
+ ; // VOID PROCEDURE DoDir
+ 
+ VOID PROCEDURE ProcessItem
+  STRING IN aDir
+  DoDir
+  aDir
+  IterateDirs
+  aDir
+  (
+   (
+    @SELF
+    DO
+   )
+  )
+ ; // VOID PROCEDURE ProcessItem
+ 
+ aDir
+ DO
+ ProcessItem
+; // VOID PROCEDURE ProcessDirs
+
+ProcessDirs
+'..\..\'
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+]
+
+VOID PROCEDURE ProcessDirs
+ ^ IN aDir
+ TtfwWord IN aLambda
+ ^ IN aMaskArray
+ VOID PROCEDURE DoDir
+  ^ IN aDir
+  VOID PROCEDURE DoFile
+   STRING IN anFilePath
+   anFilePath
+   aLambda
+   DO
+  ; // VOID PROCEDURE DoFile
+  
+  for
+  (
+   aMaskArray |^
+  )
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   aDir
+   aMask
+   DoFile
+  )
+ ; // VOID PROCEDURE DoDir
+ 
+ VOID PROCEDURE ProcessItem
+  STRING IN aDir
+  DoDir
+  aDir
+  IterateDirs
+  aDir
+  (
+   (
+    @SELF
+    DO
+   )
+  )
+ ; // VOID PROCEDURE ProcessItem
+ 
+ aDir
+ DO
+ ProcessItem
+; // VOID PROCEDURE ProcessDirs
+
+@
+.
+ProcessDirs
+'..\..\'
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+]
+
+VOID PROCEDURE ProcessDirs
+ ^ IN aDir
+ ^ IN aLambda
+ ^ IN aMaskArray
+ VOID PROCEDURE DoDir
+  ^ IN aDir
+  VOID PROCEDURE DoFile
+   STRING IN anFilePath
+   anFilePath
+   aLambda
+   pop:Word:GetRef
+   DO
+  ; // VOID PROCEDURE DoFile
+  
+  for
+  (
+   aMaskArray |^
+  )
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   aDir
+   aMask
+   DoFile
+  )
+ ; // VOID PROCEDURE DoDir
+ 
+ VOID PROCEDURE ProcessItem
+  STRING IN aDir
+  DoDir
+  aDir
+  IterateDirs
+  aDir
+  (
+   (
+    @SELF
+    DO
+   )
+  )
+ ; // VOID PROCEDURE ProcessItem
+ 
+ aDir
+ DO
+ ProcessItem
+; // VOID PROCEDURE ProcessDirs
+
+ProcessDirs
+'..\..\'
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+]
+.
+
+VOID PROCEDURE ProcessDirs
+ ^ IN aDir
+ ^ IN aLambda
+ ^ IN aMaskArray
+ VOID PROCEDURE DoDir
+  ^ IN aDir
+  VOID PROCEDURE DoFile
+   STRING IN anFilePath
+   anFilePath
+   aLambda
+   pop:Word:GetRef
+   DO
+  ; // VOID PROCEDURE DoFile
+  
+  for
+  (
+   aMaskArray |^
+  )
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   aDir
+   aMask
+   DoFile
+  )
+ ; // VOID PROCEDURE DoDir
+ 
+ VOID PROCEDURE ProcessItem
+  STRING IN aDir
+  DoDir
+  aDir
+  IterateDirs
+  aDir
+  (
+   (
+    @SELF
+    DO
+   )
+  )
+ ; // VOID PROCEDURE ProcessItem
+ 
+ aDir
+ DO
+ ProcessItem
+; // VOID PROCEDURE ProcessDirs
+
+ProcessDirs
+'..\..\'
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+]
+.
+
 for
 (
  @
@@ -2515,6 +2805,65 @@ for
  )
  FILTER
 )
+.
+
+VOID PROCEDURE ProcessDirs
+ ^ IN aDir
+ ^ IN aLambda
+ ^ IN aMaskArray
+ VOID PROCEDURE DoDir
+  ^ IN aDir
+  VOID PROCEDURE DoFile
+   STRING IN anFilePath
+   anFilePath
+   aLambda |@
+   DO
+  ; // VOID PROCEDURE DoFile
+  
+  for
+  (
+   aMaskArray |^
+  )
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   aDir
+   aMask
+   DoFile
+  )
+ ; // VOID PROCEDURE DoDir
+ 
+ VOID PROCEDURE ProcessItem
+  STRING IN aDir
+  DoDir
+  aDir
+  IterateDirs
+  aDir
+  (
+   (
+    @SELF
+    DO
+   )
+  )
+ ; // VOID PROCEDURE ProcessItem
+ 
+ aDir
+ DO
+ ProcessItem
+; // VOID PROCEDURE ProcessDirs
+
+ProcessDirs
+'..\..\'
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+]
 .
 
 for
