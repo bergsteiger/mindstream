@@ -13,7 +13,7 @@ PROCEDURE ProcessDirs
 
   for [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ] (
    STRING IN aMask
-   IterateFilesWithMask ( aDir DO ) aMask DoFile
+   IterateFilesWithMask aDir aMask DoFile
   )
  ; // DoDir
 
