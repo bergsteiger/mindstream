@@ -1,5 +1,12 @@
 FORWARD Process
 
+PROCEDURE IterateFilesWithMask
+  ^ IN aDir
+  ^ IN aMask
+  ^ IN aLambda
+  aLambda aMask DO aDir DO ProcessFilesWithMask
+; // IterateFilesWithMask
+
 : Process
  STRING IN aDir
 
@@ -15,7 +22,7 @@ FORWARD Process
 
   for [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ] (
    STRING IN aMask
-   @ DoFile aMask anItem ProcessFilesWithMask
+   IterateFilesWithMask anItem aMask DoFile
   )
  ; // DoDir
 
