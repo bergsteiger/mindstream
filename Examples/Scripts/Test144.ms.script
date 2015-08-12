@@ -20,7 +20,7 @@ PROCEDURE ProcessDirs
   STRING IN aDir
   DoDir aDir
   IterateDirs aDir ( this.do )
- ; // RecurseProc
+ ; // ProcessItem
 
  aDir DO ProcessItem
 ; // ProcessDirs
