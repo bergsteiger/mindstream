@@ -1,3 +1,7 @@
+PROCEDURE PrintThis
+ ^ IN aValue
+ aValue DO Print
+; // PrintThis
 
 : Process
  STRING IN aDir
@@ -9,7 +13,7 @@
 
   : DoFile
    STRING IN anFilePath
-   anFilePath Print
+   PrintThis anFilePath
   ; // DoFile
 
   for [ '*.ms.script' '*.ms.dict' '*.pas' '*.txt' '*.inc' '*.fmx' '*.xml' '*.dpr' ] (
