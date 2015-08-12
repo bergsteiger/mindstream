@@ -1,3 +1,8 @@
+PROCEDURE IterateDirs
+ ^ IN aRoot
+ ^ IN aLabda
+ aLabda aRoot DO ProcessSubDirs
+; // IterateDirs
 
 FORWARD Process
 
@@ -23,7 +28,7 @@ FORWARD Process
  : ProcessItem
   STRING IN anItem
   anItem DoDir
-  @ ProcessItem anItem ProcessSubDirs
+  IterateDirs anItem ProcessItem
  ; // ProcessItem
 
  aDir ProcessItem
