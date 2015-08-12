@@ -1340,6 +1340,107 @@ for
 '..\..\'
 Process
 
+VOID PROCEDURE PrintThis
+ ^ IN aValue
+ aValue
+ DO
+ .
+; // VOID PROCEDURE PrintThis
+
+: Process
+ FORWARD ProcessItem
+ STRING IN aDir
+ : DoDir
+  STRING IN aDir
+  : DoFile
+   STRING IN anFilePath
+   PrintThis
+   anFilePath
+  ; // : DoFile
+  
+  for
+  [
+   '*.ms.script'
+   '*.ms.dict'
+   '*.pas'
+   '*.txt'
+   '*.inc'
+   '*.fmx'
+   '*.xml'
+   '*.dpr'
+  ]
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   aDir
+   aMask
+   DoFile
+  )
+ ; // : DoDir
+ 
+ : ProcessItem
+  STRING IN aDir
+  aDir
+  DoDir
+  IterateDirs
+  aDir
+  ProcessItem
+ ; // : ProcessItem
+ 
+ aDir
+ ProcessItem
+; // : Process
+
+'..\..\'
+Process
+
+: Process
+ FORWARD ProcessItem
+ STRING IN aDir
+ : DoDir
+  STRING IN aDir
+  : DoFile
+   STRING IN anFilePath
+   PrintThis
+   anFilePath
+  ; // : DoFile
+  
+  for
+  [
+   '*.ms.script'
+   '*.ms.dict'
+   '*.pas'
+   '*.txt'
+   '*.inc'
+   '*.fmx'
+   '*.xml'
+   '*.dpr'
+  ]
+  (
+   STRING IN aMask
+   IterateFilesWithMask
+   aDir
+   aMask
+   DoFile
+  )
+ ; // : DoDir
+ 
+ : ProcessItem
+  STRING IN aDir
+  aDir
+  DoDir
+  IterateDirs
+  aDir
+  ProcessItem
+ ; // : ProcessItem
+ 
+ aDir
+ ProcessItem
+; // : Process
+
+'..\..\'
+Process
+
 for
 (
  @
