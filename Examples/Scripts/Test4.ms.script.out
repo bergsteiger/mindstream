@@ -616,6 +616,7 @@ Dictionary: Test4.ms.script
   axiom:ActionList
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\Exports.script
+  H:\Dropbox\mindstream\Examples\Scripts\types.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\math.ms.dict
@@ -3347,6 +3348,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\types.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\math.ms.dict
@@ -3384,6 +3386,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\types.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\math.ms.dict
@@ -3399,7 +3402,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\files.ms.dict
  ;
 uses
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\core.ms.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\types.ms.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3424,6 +3427,38 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\core.ms.dict
   axiom:ActionList
   axiom:ContainedAction
  ;
+IMMEDIATE VOID OPERATOR :: TYPE : ANY
+IMMEDIATE VOID OPERATOR :: TYPE : VARIANT
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\core.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:std
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\types.ms.dict
+ ;
+BOOLEAN INTEGER STRING OBJECT INTERFACE CLASS : : |^
+ ^@ OPERATOR :: IN : aRef
+ BOOLEAN INTEGER STRING OBJECT INTERFACE CLASS : :: |^ : Result
+; // |^
 IMMEDIATE VOID OPERATOR : RecurseProc
  ^L OPERATOR :: IN : aName
 ; // RecurseProc
@@ -3948,6 +3983,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\files.ms.dict
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\core.ms.dict
  ;
 VOID OPERATOR :: PROCEDURE : IterateDirs
  ^ OPERATOR :: IN : aLabda
