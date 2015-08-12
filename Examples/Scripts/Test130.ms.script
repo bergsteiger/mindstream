@@ -1,4 +1,6 @@
-WordAlias RIGHT ^
+USES
+ params.ms.dict
+;
 
 PROCEDURE ProcessDirs
  RIGHT IN aDir
