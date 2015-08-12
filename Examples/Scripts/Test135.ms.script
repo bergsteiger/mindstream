@@ -1,3 +1,13 @@
+VOID IMMEDIATE operator RecurseProc
+// - процедура, которая умеет вызываться рекурсивно
+ ^L IN aName
+ 'FORWARD' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+
+ ':' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // RecurseProc
+
 PROCEDURE ProcessDirs
  RightParam aDir
 
@@ -15,13 +25,11 @@ PROCEDURE ProcessDirs
   )
  ; // DoDir
 
- FORWARD ProcessItem
-
- PROCEDURE ProcessItem
+ RecurseProc ProcessItem
   STRING IN aDir
   DoDir aDir
   IterateDirs aDir ProcessItem
- ; // ProcessItem
+ ; // RecurseProc
 
  aDir DO ProcessItem
 ; // ProcessDirs
