@@ -1,0 +1,6 @@
+PROCEDURE IterateFilesWithMask
+  ^ IN aDir
+  ^ IN aMask
+  ^ IN aLambda
+  aLambda aMask DO aDir DO ProcessFilesWithMask
+; // IterateFilesWithMask

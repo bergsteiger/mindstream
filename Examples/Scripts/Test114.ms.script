@@ -1,11 +1,8 @@
-FORWARD Process
+USES
+ files.ms.dict
+;
 
-PROCEDURE IterateFilesWithMask
-  ^ IN aDir
-  ^ IN aMask
-  ^ IN aLambda
-  aLambda aMask DO aDir DO ProcessFilesWithMask
-; // IterateFilesWithMask
+FORWARD Process
 
 : Process
  STRING IN aDir
