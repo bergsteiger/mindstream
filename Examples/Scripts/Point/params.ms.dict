@@ -4,3 +4,5 @@ VOID IMMEDIATE operator RightParam
  'RIGHT' Ctx:Parser:PushSymbol
  'IN' Ctx:Parser:PushSymbol
 ; // RightParam
+
+WordAlias right RightParam
