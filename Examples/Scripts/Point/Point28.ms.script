@@ -8,7 +8,7 @@ Test PointTest
 array type Object
 
 VOID IMMEDIATE OPERATOR class
- ^L IN aName
+ Literal IN aName
  'Object' Ctx:Parser:PushSymbol
  'type' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
