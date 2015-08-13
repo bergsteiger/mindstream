@@ -14,10 +14,11 @@ VOID IMMEDIATE OPERATOR class
  aName |N Ctx:Parser:PushSymbol
 ; // class
 
-INTEGER type Pixel
-// - пиксель
 INTEGER type FieldOffset
 // - смещение поля
+
+INTEGER type Pixel
+// - пиксель
 List type PixelList
 // - список пикселей
 
