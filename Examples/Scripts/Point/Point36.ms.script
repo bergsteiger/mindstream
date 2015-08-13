@@ -170,7 +170,10 @@ REDEFINITION
  : (+)
   IN aLeft
   right aRight
-  aLeft (+) ( aRight DO )
+  if ( aLeft IsInt ) then
+   ( 10 )
+  else  
+   ( aLeft (+) ( aRight DO ) )
   //inherited
  ; // (+)
 
