@@ -43,8 +43,8 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR class
  
- VOID OPERATOR class_impl
- ; // VOID OPERATOR class_impl
+ IMMEDIATE VOID OPERATOR class_impl
+ ; // IMMEDIATE VOID OPERATOR class_impl
  
  IMMEDIATE VOID OPERATOR constructor
   ^L IN aName

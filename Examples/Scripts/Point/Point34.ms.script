@@ -5,7 +5,7 @@ USES
 
 Test PointTest
 
-VOID OPERATOR class_impl
+VOID IMMEDIATE OPERATOR class_impl
 ; // class_impl
 
 //VOID IMMEDIATE OPERATOR class_impl
@@ -26,6 +26,7 @@ VOID IMMEDIATE OPERATOR class
  //'class_impl' Ctx:Parser:PushSymbol
  // - вообще должно быть так, почему не работает - надо разбираться
  ':' Ctx:Parser:PushSymbol
+ @ class_impl Ctx:SetWordProducerForCompiledClass
  [ '_' aName |N '_' ] strings:Cat Ctx:Parser:PushSymbol
  ';' Ctx:Parser:PushSymbol
 ; // class
