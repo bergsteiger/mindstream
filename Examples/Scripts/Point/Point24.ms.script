@@ -1,0 +1,119 @@
+USES
+ params.ms.dict
+;
+
+Test PointTest
+
+ARRAY TYPE Object
+WordAlias private PRIVATE
+WordAlias Private PRIVATE
+WordAlias type TYPE
+WordAlias Type TYPE
+WordAlias var VAR
+WordAlias in IN
+WordAlias ?Assure ?ASSURE
+WordAlias Const CONST
+WordAlias const Const
+
+INTEGER type Pixel
+INTEGER type FieldOffset
+
+Object type Point
+
+private Const c:Point:CoordCount 2
+
+Point : Point:0
+ [ 0 0 ] >>> Result
+; // Point:0
+
+Point : Point:
+ right aX
+ right aY
+ [ aX |^ aY |^ ] >>> Result
+; // Point:
+
+Point : Point:XY
+ right aPoint
+ [ aPoint |@ DO ] >>> Result
+ ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
+; // Point:XY
+
+Point : Point:OF
+ right aPoint
+ [ for ( aPoint |@ DO ) ( Pixel in aPx aPx ) ] >>> Result
+ ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
+; // Point:OF
+
+Point : Point:+
+ Point in Self
+ right aPoint
+
+ FieldOffset var i
+ i := 0
+
+ [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i Self [i] + Inc i ) ] >>> Result
+; // Point:+
+
+Point : Point:-
+ Point in Self
+ right aPoint
+
+ FieldOffset var i
+ i := 0
+
+ [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i Self [i] SWAP - Inc i ) ] >>> Result
+; // Point:-
+
+Point : Point:Neg
+ Point in Self
+
+ [ for Self ( Pixel in aPx aPx 0 SWAP - ) ] >>> Result
+; // Point:Neg
+
+VOID : Point:Print
+ Point in aPoint
+ aPoint Print
+; // Point:Print
+
+Point var P1
+Point var P2
+Point var P3
+Point var P4
+Point var P5
+Point var P6
+Point var P7
+Point var P8
+Point var P9
+Point var P10
+
+P1 := Point:0
+P2 := Point:0
+P3 := Point: 1 1
+P4 := Point:XY ( 2 2 )
+P5 := Point:OF P4
+P6 := ( P3 Point:+ P4 )
+P7 := ( P3 Point:- P4 )
+P8 := ( P4 Point:- P3 )
+P9 := ( P4 Point:Neg )
+P10 := ( P3 Point:Neg )
+
+P1 Point:Print
+P2 Point:Print
+P3 Point:Print
+P4 Point:Print
+P5 Point:Print
+P6 Point:Print
+P7 Point:Print
+P8 Point:Print
+P9 Point:Print
+P10 Point:Print
+
+USES
+ CodeDump.ms.dict
+;
+
+@SELF DumpElement
+
+; // PointTest
+
+PointTest
