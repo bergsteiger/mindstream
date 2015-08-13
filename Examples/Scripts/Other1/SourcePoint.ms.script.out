@@ -2,16 +2,16 @@
 Test TestSourcePoint (Line 5, SourcePoint.ms.script)
 VOID Test TestSourcePoint
  : A
-  @SELF
+  A
   pop:Word:SourcePointString
   .
  ; // : A
  
  A
- @SELF
+ TestSourcePoint
  pop:Word:SourcePointString
  .
- @SELF
+ TestSourcePoint
  DumpElement
 ; // VOID Test TestSourcePoint
 

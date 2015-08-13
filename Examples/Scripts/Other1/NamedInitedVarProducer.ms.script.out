@@ -9,7 +9,7 @@ VOID Test NamedInitedVarProducerTest
  IMMEDIATE VOID NamedInitedVarProducer %DOCUMENTATION
   ^ IN aValue
   '%Doc'
-  @SELF
+  %DOCUMENTATION
   aValue |^@
   axiom:DefineVarWithInit
  ; // IMMEDIATE VOID NamedInitedVarProducer %DOCUMENTATION
@@ -35,9 +35,9 @@ VOID Test NamedInitedVarProducerTest
   %Doc
   axiom:DumpMembers
  )
- @SELF
+ NamedInitedVarProducerTest
  DumpElement
- @SELF
+ NamedInitedVarProducerTest
  axiom:DumpMembers
 ; // VOID Test NamedInitedVarProducerTest
 

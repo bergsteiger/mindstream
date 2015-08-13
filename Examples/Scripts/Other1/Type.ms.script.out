@@ -11,9 +11,9 @@ VOID Test TypeTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Y
  
- @SELF
+ TypeTest
  DumpElement
- @SELF
+ TypeTest
  axiom:DumpMembers
 ; // VOID Test TypeTest
 

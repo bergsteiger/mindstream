@@ -49,12 +49,7 @@ pop:control:ScrollInfo:Max
 pop:control:ScrollInfo:Min
 pop:control:ScrollInfo:PageSize
 pop:control:ScrollInfo:Position
-VOID pop:Control:SetColor
 BOOLEAN pop:Control:SetFocus
-VOID pop:Control:SetHeight
-VOID pop:Control:SetLeft
-VOID pop:Control:SetTop
-VOID pop:Control:SetWidth
 VOID pop:Control:Show
 BOOLEAN pop:Control:ShowHint
 INTEGER pop:Control:Top
@@ -82,9 +77,6 @@ Dictionary: axiom:generators
 VOID generators:Execute
 Ik2TagGenerator generators:Link
 Dictionary: axiom:guid
-Dictionary: axiom:KeywordFinder
-TtfwKeyWord pop:KeywordFinder:KeywordByName
-TtfwWord pop:KeywordFinder:ParentFinder
 Dictionary: axiom:MainScreen
 INTEGER MainScreen:Height
 INTEGER MainScreen:Width
@@ -611,6 +603,7 @@ Dictionary: Dictionary.ms.script
   axiom:TtfwLinkType
   axiom:private
   axiom:std
+  axiom:KeywordFinder
   axiom:Component
   axiom:form
   axiom:ActionList
@@ -636,6 +629,7 @@ Dictionary: axiom:axiom
   axiom:TtfwLinkType
   axiom:private
   axiom:std
+  axiom:KeywordFinder
   axiom:Component
   axiom:form
   axiom:ActionList
@@ -659,6 +653,7 @@ Dictionary: axiom:axiom
   axiom:TtfwLinkType
   axiom:private
   axiom:std
+  axiom:KeywordFinder
   axiom:Component
   axiom:form
   axiom:ActionList
@@ -751,6 +746,7 @@ OBJECT FUNCTION : %ST
  OPERATOR :: IN : %S
  OBJECT FUNCTION :: %ST : Result
 ; // %ST
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %SUMMARY
 OBJECT FUNCTION : %T
  OPERATOR :: IN : %S
  OPERATOR :: VAR : l_T
@@ -813,7 +809,7 @@ TtfwWord @
  LINK ^ OPERATOR :: IN : aSelf
  ^@ OPERATOR :: @^ : Result
 ; // @^
-@SELF
+IMMEDIATE VOID OPERATOR : @SELF
 [
 IMMEDIATE OPERATOR : [EXECUTE]
  ^ OPERATOR :: IN : aCode
@@ -1039,6 +1035,7 @@ VOID CALLER OPERATOR : ASSURE
  TtfwWord OPERATOR :: IN : Caller
 ; // ASSURE
 IMMEDIATE VOID OPERATOR :: TYPE : ATOMIC
+IMMEDIATE VOID OPERATOR : axiom:CLASS
 IMMEDIATE VOID OPERATOR : axiom:CompileSetValueTypes
  TtfwValueTypes OPERATOR :: IN : aValues
 ; // axiom:CompileSetValueTypes
@@ -1070,12 +1067,12 @@ IMMEDIATE VOID OPERATOR : CALLER
 Cardinal
 IMMEDIATE VOID OPERATOR : CARDINAL
 CASE
+IMMEDIATE VOID OPERATOR :: TYPE : CASTABLE
 STRING Cat
 Char
 IMMEDIATE VOID OPERATOR : CHAR
 STRING char:Dupe
 STRING char:ToString
-IMMEDIATE VOID OPERATOR : CLASS
 CLASS class::EAccessViolation
 CLASS class::EAssertionFailed
 CLASS class::EBitsError
@@ -1224,7 +1221,7 @@ CLASS class::TkwCompiledWStringVarRSplitTo
 CLASS class::TkwCompiledWStringVarSplitTo
 CLASS class::TkwCompileRef
 CLASS class::TkwCompileValue
-CLASS class::TkwCompilingWordSelf
+CLASS class::TkwCompileWeakRef
 CLASS class::TkwComponentFromStackWord
 CLASS class::TkwComputerName
 CLASS class::TkwCONST
@@ -1265,7 +1262,6 @@ CLASS class::TkwCurrentExceptionClass
 CLASS class::TkwCurrentExceptionClassName
 CLASS class::TkwCurrentExceptionMessage
 CLASS class::TkwDec
-CLASS class::TkwDeclared
 CLASS class::TkwDEFAULT
 CLASS class::TkwDefine
 CLASS class::TkwDeleteFile
@@ -1480,12 +1476,7 @@ CLASS class::TkwPopControlScrollInfoMax
 CLASS class::TkwPopControlScrollInfoMin
 CLASS class::TkwPopControlScrollInfoPageSize
 CLASS class::TkwPopControlScrollInfoPosition
-CLASS class::TkwPopControlSetColor
 CLASS class::TkwPopControlSetFocus
-CLASS class::TkwPopControlSetHeight
-CLASS class::TkwPopControlSetLeft
-CLASS class::TkwPopControlSetTop
-CLASS class::TkwPopControlSetWidth
 CLASS class::TkwPopControlShow
 CLASS class::TkwPopControlShowHint
 CLASS class::TkwPopControlTop
@@ -1548,7 +1539,6 @@ CLASS class::TkwPopScriptEngineAsKeywordFinder
 CLASS class::TkwPopScriptEngineCascadeDict
 CLASS class::TkwPopScriptEngineCurrentCompilingDictionary
 CLASS class::TkwPopScriptEngineDisableForHelp
-CLASS class::TkwPopScriptEngineSetCascadeDict
 CLASS class::TkwPopScrollingWinControlHScrollerVisible
 CLASS class::TkwPopScrollingWinControlVScrollerVisible
 CLASS class::TkwPopValueTypesAcceptsValue
@@ -1753,6 +1743,7 @@ CLASS class::TSizeConstraints
 CLASS class::TtfwAnonimousWord
 CLASS class::TtfwArrayCollector
 CLASS class::TtfwBeginLikeWord
+CLASS class::TtfwClassLike
 CLASS class::TtfwClassModifier
 CLASS class::TtfwCompilingWord
 CLASS class::TtfwConst
@@ -1807,6 +1798,7 @@ INTEGER CompareStr
 INTEGER CompareText
 VOID CompileRef
 VOID CompileValue
+VOID CompileWeakRef
 STRING ComputerName
 CONST
 CONSTANT
@@ -1824,7 +1816,10 @@ VOID OPERATOR : Dec
 VOID OPERATOR : DEC
  ^ OPERATOR :: IN : aWhatToDecrement
 ; // DEC
-DECLARED
+IMMEDIATE VOID OPERATOR : DECLARED
+ ^L OPERATOR :: IN : aName
+ BOOLEAN OPERATOR :: VAR : l_Found
+; // DECLARED
 DEFAULT
 Define
 VOID OPERATOR : DefineStereo
@@ -2248,6 +2243,7 @@ TBasicAction
 TBiDiMode
 TBitmap
 TBorderWidth
+IMMEDIATE VOID OPERATOR : TClass
 TColor
 TComponent
 TConstraintSize
@@ -2357,7 +2353,7 @@ TkwCompiledWStringVarRSplitTo
 TkwCompiledWStringVarSplitTo
 TkwCompileRef
 TkwCompileValue
-TkwCompilingWordSelf
+TkwCompileWeakRef
 TkwComponentFromStackWord
 TkwComputerName
 TkwCONST
@@ -2398,7 +2394,6 @@ TkwCurrentExceptionClass
 TkwCurrentExceptionClassName
 TkwCurrentExceptionMessage
 TkwDec
-TkwDeclared
 TkwDEFAULT
 TkwDefine
 TkwDeleteFile
@@ -2613,12 +2608,7 @@ TkwPopControlScrollInfoMax
 TkwPopControlScrollInfoMin
 TkwPopControlScrollInfoPageSize
 TkwPopControlScrollInfoPosition
-TkwPopControlSetColor
 TkwPopControlSetFocus
-TkwPopControlSetHeight
-TkwPopControlSetLeft
-TkwPopControlSetTop
-TkwPopControlSetWidth
 TkwPopControlShow
 TkwPopControlShowHint
 TkwPopControlTop
@@ -2681,7 +2671,6 @@ TkwPopScriptEngineAsKeywordFinder
 TkwPopScriptEngineCascadeDict
 TkwPopScriptEngineCurrentCompilingDictionary
 TkwPopScriptEngineDisableForHelp
-TkwPopScriptEngineSetCascadeDict
 TkwPopScrollingWinControlHScrollerVisible
 TkwPopScrollingWinControlVScrollerVisible
 TkwPopValueTypesAcceptsValue
@@ -2909,6 +2898,7 @@ TtfwAccessType
 TtfwAnonimousWord
 TtfwArrayCollector
 TtfwBeginLikeWord
+TtfwClassLike
 TtfwClassModifier
 TtfwCompilingWord
 TtfwConst
@@ -3202,7 +3192,6 @@ TtfwWord pop:ScriptEngine:AsKeywordFinder
 BOOLEAN pop:ScriptEngine:CascadeDict
 TtfwDictionaryEx pop:ScriptEngine:CurrentCompilingDictionary
 VOID pop:ScriptEngine:DisableForHelp
-VOID pop:ScriptEngine:SetCascadeDict
 Dictionary: axiom:DictionaryEx
 VOID pop:DictionaryEx:ExportDictionary
 ARRAY pop:DictionaryEx:ExportedDictionaries
@@ -3280,6 +3269,9 @@ Dictionary: axiom:std
 VOID OPERATOR :: PROCEDURE : std::out<<
  ^ OPERATOR :: IN : aValue
 ; // std::out<<
+Dictionary: axiom:KeywordFinder
+TtfwKeyWord pop:KeywordFinder:KeywordByName
+TtfwWord pop:KeywordFinder:ParentFinder
 Dictionary: axiom:Component
 INTEGER pop:Component:ComponentCount
 TComponent pop:Component:FindComponent
@@ -3330,6 +3322,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Other1\CodeDump.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:std
+  axiom:KeywordFinder
   axiom:Component
   axiom:form
   axiom:ActionList
@@ -3397,7 +3390,7 @@ TkwMain : Main
 ; // Main
 VOID Test TestDictionary
  help
- @SELF
+ TestDictionary
  DumpElement
 ; // VOID Test TestDictionary
 

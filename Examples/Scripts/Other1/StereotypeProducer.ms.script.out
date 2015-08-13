@@ -6,7 +6,7 @@ VOID Test StereotypeProducerTest
   ^L IN aName
   aName
   |N
-  @SELF
+  <<"X X">>
   DefineStereoInstance
   EXIT
  ; // IMMEDIATE VOID <<MDAClass>> <<"X X">>
@@ -15,7 +15,7 @@ VOID Test StereotypeProducerTest
   ^L IN aName
   aName
   |N
-  @SELF
+  <<Facet>>
   DefineStereoInstance
   EXIT
  ; // IMMEDIATE VOID <<MDAClass>> <<Facet>>
@@ -24,7 +24,7 @@ VOID Test StereotypeProducerTest
   ^L IN aName
   aName
   |N
-  @SELF
+  <<MDACategory>>
   DefineStereo
   EXIT
  ; // IMMEDIATE VOID <<@StereotypeProducer>> <<MDACategory>>
@@ -33,7 +33,7 @@ VOID Test StereotypeProducerTest
   ^L IN aName
   aName
   |N
-  @SELF
+  <<MDAClass>>
   DefineStereo
   EXIT
  ; // IMMEDIATE VOID <<@StereotypeProducer>> <<MDAClass>>
@@ -42,7 +42,7 @@ VOID Test StereotypeProducerTest
   ^L IN aName
   aName
   |N
-  @SELF
+  <<SimpleClass>>
   DefineStereoInstance
   EXIT
   'Hello'
@@ -61,9 +61,9 @@ VOID Test StereotypeProducerTest
  <<Facet>> C
  ; // <<Facet>> C
  
- @SELF
+ StereotypeProducerTest
  DumpElement
- @SELF
+ StereotypeProducerTest
  axiom:DumpMembers
 ; // VOID Test StereotypeProducerTest
 

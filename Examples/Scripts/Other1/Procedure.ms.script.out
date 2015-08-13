@@ -26,9 +26,9 @@ VOID Test ProcedureTest
   script:ExceptionStack
   .
  END
- @SELF
+ ProcedureTest
  DumpElement
- @SELF
+ ProcedureTest
  axiom:DumpMembers
 ; // VOID Test ProcedureTest
 

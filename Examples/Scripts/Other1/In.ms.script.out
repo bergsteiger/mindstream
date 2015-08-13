@@ -2,7 +2,7 @@
 2
 VOID Test TestIn
  IMMEDIATE VOID OPERATOR __DefineNameParam
-  @SELF
+  __DefineNameParam
   'aName'
   __DefineParam
  ; // IMMEDIATE VOID OPERATOR __DefineNameParam
@@ -23,7 +23,7 @@ VOID Test TestIn
  
  IMMEDIATE VOID OPERATOR IN
   ^L __DefineNameParam aName
-  @SELF
+  IN
   aName
   DO
   __DefineParam
@@ -33,7 +33,7 @@ VOID Test TestIn
  A
  2
  A
- @SELF
+ TestIn
  DumpElement
 ; // VOID Test TestIn
 

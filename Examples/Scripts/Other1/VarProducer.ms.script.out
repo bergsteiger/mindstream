@@ -11,7 +11,7 @@ VOID Test TestVarProducer
   ^L IN aName
   aName
   |N
-  @SELF
+  VarType
   axiom:DefineVar
  ; // IMMEDIATE VOID OPERATOR VarType
  
@@ -31,9 +31,9 @@ VOID Test TestVarProducer
  @
  B
  axiom:DumpMembers
- @SELF
+ TestVarProducer
  DumpElement
- @SELF
+ TestVarProducer
  axiom:DumpMembers
 ; // VOID Test TestVarProducer
 

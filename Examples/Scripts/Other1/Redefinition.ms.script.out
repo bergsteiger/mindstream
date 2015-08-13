@@ -12,9 +12,9 @@ VOID Test RedefinitionTest
  ; // REDIFINITION : A
  
  A
- @SELF
+ RedefinitionTest
  DumpElement
- @SELF
+ RedefinitionTest
  axiom:DumpMembers
 ; // VOID Test RedefinitionTest
 

@@ -14,7 +14,7 @@ VOID Test MethodImplementing
   
   aName
   |N
-  @SELF
+  <<@P>>
   DefineStereotypeProducer
   EXIT
  ; // IMMEDIATE VOID StereotypeStereotypeProducer <<@P>>
@@ -29,7 +29,7 @@ VOID Test MethodImplementing
   
   aName
   |N
-  @SELF
+  <<MDACategory>>
   DefineStereo
   EXIT
  ; // IMMEDIATE VOID <<@P>> <<MDACategory>>
@@ -44,7 +44,7 @@ VOID Test MethodImplementing
   
   aName
   |N
-  @SELF
+  <<MDAClass>>
   DefineStereo
   EXIT
  ; // IMMEDIATE VOID <<@P>> <<MDAClass>>
@@ -59,7 +59,7 @@ VOID Test MethodImplementing
   
   aName
   |N
-  @SELF
+  <<SimpleClass>>
   DefineStereoInstance
   EXIT
  ; // IMMEDIATE VOID <<MDAClass>> <<SimpleClass>>
@@ -82,7 +82,7 @@ VOID Test MethodImplementing
   
   aName
   |N
-  @SELF
+  <<Unit>>
   DefineStereoInstance
   EXIT
  ; // IMMEDIATE VOID <<MDACategory>> <<Unit>>
@@ -138,9 +138,9 @@ VOID Test MethodImplementing
  @^ <<Unit>> ::
  'NewMethod'
  XXX
- @SELF
+ MethodImplementing
  DumpElement
- @SELF
+ MethodImplementing
  axiom:DumpMembers
 ; // VOID Test MethodImplementing
 
