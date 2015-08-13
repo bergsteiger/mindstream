@@ -1,5 +1,6 @@
 INTEGER TYPE PIXEL
 ARRAY TYPE POINT
+CONST c:POINT:CoordCount 2
 
 POINT : POINT:0
  [ 0 0 ] >>> Result
@@ -14,7 +15,7 @@ POINT : POINT:
 POINT : POINT:XY
  ^ IN aPoint
  [ aPoint |@ DO ] >>> Result
- ( Result Array:Count = 2 ) ?ASSURE '“очка должна содержать две координаты'
+ ( Result Array:Count = c:POINT:CoordCount ) ?ASSURE '“очка должна содержать две координаты'
 ; // POINT:XY
 
 VOID : POINT:Print
