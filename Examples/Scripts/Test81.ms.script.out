@@ -1,3 +1,21 @@
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+
+IMMEDIATE VOID TYPE PIXEL
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE PIXEL
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+
 1
 2
 +
@@ -3220,6 +3238,25 @@ ProcessAnySubDirsWithMasks
 [
  '..\..\'
  '..\'
+]
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+ '*.co'
+]
+.
+
+ProcessAnySubDirsWithMasks
+[
+ '..\..\'
+ '..\'
+ '.'
 ]
 [
  '*.ms.script'
