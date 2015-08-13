@@ -102,7 +102,7 @@ Point method Point:-
  FieldOffset var i
  i := 0
 
- [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i Self [i] SWAP - Inc i ) ] >>> Result
+ [ for ( aPoint |@ DO ) ( Pixel in aPx i Self [i] aPx - Inc i ) ] >>> Result
 ; // Point:-
 
 Point method Point:Neg
