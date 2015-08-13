@@ -11,6 +11,8 @@ type
     edtIn: TEdit;
     edtOut: TEdit;
     btnDoIt: TButton;
+    procedure btnDoItClick(Sender: TObject);
+    procedure DoIt;
   private
     { Private declarations }
   public
@@ -23,5 +25,25 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.btnDoItClick(Sender: TObject);
+begin
+  DoIt;
+end;
+
+procedure TForm1.DoIt;
+var
+  Index : integer;
+  InStr,
+  ResultStr : String;
+begin
+  InStr := edtIn.Text;
+
+  for Index := 0 to Pred(Length(InStr)) do
+    if not (InStr[Index] in ['0' .. '9']) then
+      ResultStr := ResultStr + InStr[Index];
+
+  edtOut.Text := ResultStr;
+end;
 
 end.
