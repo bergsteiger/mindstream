@@ -5,14 +5,14 @@ USES
 
 Test PointTest
 
-VOID IMMEDIATE OPERATOR class_impl
-// - имплементация класса, пока "фиктивная"
- Literal IN aName
- @SELF Ctx:SetWordProducerForCompiledClass
- ':' Ctx:Parser:PushSymbol
- aName |N Ctx:Parser:PushSymbol
- //';' Ctx:Parser:PushSymbol
-; // class_impl
+//VOID IMMEDIATE OPERATOR class_impl
+//// - имплементация класса, пока "фиктивная"
+// Literal IN aName
+// @SELF Ctx:SetWordProducerForCompiledClass
+// ':' Ctx:Parser:PushSymbol
+// aName |N Ctx:Parser:PushSymbol
+// //';' Ctx:Parser:PushSymbol
+//; // class_imp
 
 VOID IMMEDIATE OPERATOR class
  Literal IN aName
