@@ -19,7 +19,7 @@ INTEGER type FieldOffset
 
 IMMEDIATE VOID operator constructor
 // - конструктор объектов, пока "фиктивный"
- ^L IN aName
+ Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
  ':' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
