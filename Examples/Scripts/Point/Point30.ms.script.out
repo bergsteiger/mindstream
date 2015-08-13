@@ -38,6 +38,17 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE FieldOffset
  
+ IMMEDIATE VOID OPERATOR method
+  ^L IN aName
+  method
+  Ctx:SetWordProducerForCompiledClass
+  ':'
+  Ctx:Parser:PushSymbol
+  aName
+  |N
+  Ctx:Parser:PushSymbol
+ ; // IMMEDIATE VOID OPERATOR method
+ 
  IMMEDIATE VOID TYPE Object
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -107,7 +118,7 @@ VOID Test PointTest
   Result
  ; // ARRAY : Point:-
  
- ARRAY : Point:+
+ ARRAY method Point:+
   ^ IN aPoint
   INTEGER VAR i
   ARRAY IN Self
@@ -132,7 +143,7 @@ VOID Test PointTest
   ]
   >>>
   Result
- ; // ARRAY : Point:+
+ ; // ARRAY method Point:+
  
  ARRAY constructor Point:0
   [

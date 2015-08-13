@@ -25,6 +25,14 @@ IMMEDIATE VOID operator constructor
  aName |N Ctx:Parser:PushSymbol
 ; // constructor
 
+IMMEDIATE VOID operator method
+// - метод объекта, пока "фиктивный"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ ':' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // method
+
 INTEGER type Pixel
 // - пиксель
 List type PixelList
@@ -56,7 +64,7 @@ Point constructor Point:OF
  ( Result Array:Count = c:Point:CoordCount ) ?Assure 'Точка должна содержать две координаты'
 ; // Point:OF
 
-Point : Point:+
+Point method Point:+
  Point in Self
  Point right aPoint
 
