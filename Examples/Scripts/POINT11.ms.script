@@ -1,0 +1,39 @@
+INTEGER TYPE PIXEL
+ARRAY TYPE POINT
+CONST c:POINT:CoordCount 2
+
+POINT : POINT:0
+ [ 0 0 ] >>> Result
+; // POINT:0
+
+POINT : POINT:
+ ^ IN aX
+ ^ IN aY
+ [ aX |^ aY |^ ] >>> Result
+; // POINT:
+
+POINT : POINT:XY
+ ^ IN aPoint
+ [ aPoint |@ DO ] >>> Result
+ ( Result Array:Count = c:POINT:CoordCount ) ?ASSURE '“очка должна содержать две координаты'
+; // POINT:XY
+
+VOID : POINT:Print
+ POINT IN aPoint
+ aPoint Print
+; // POINT:Print
+
+POINT VAR P1
+POINT VAR P2
+POINT VAR P3
+POINT VAR P4
+
+P1 := POINT:0
+P2 := POINT:0
+P3 := POINT: 1 1
+P4 := POINT:XY ( 2 2 )
+
+P1 POINT:Print
+P2 POINT:Print
+P3 POINT:Print
+P4 POINT:Print
