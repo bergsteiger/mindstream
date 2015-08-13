@@ -4,76 +4,80 @@ WordAlias Private PRIVATE
 WordAlias type TYPE
 WordAlias Type TYPE
 WordAlias var VAR
+WordAlias in IN
+WordAlias ?Assure ?ASSURE
+WordAlias Const CONST
+WordAlias const CONST
 
 INTEGER type Pixel
 
 Object type Point
 
-private CONST c:Point:CoordCount 2
+private Const c:Point:CoordCount 2
 
 Point : Point:0
  [ 0 0 ] >>> Result
 ; // Point:0
 
 Point : Point:
- ^ IN aX
- ^ IN aY
+ ^ in aX
+ ^ in aY
  [ aX |^ aY |^ ] >>> Result
 ; // Point:
 
 Point : Point:XY
- ^ IN aPoint
+ ^ in aPoint
  [ aPoint |@ DO ] >>> Result
- ( Result Array:Count = c:Point:CoordCount ) ?ASSURE '“очка должна содержать две координаты'
+ ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
 ; // Point:XY
 
 Point : Point:OF
- ^ IN aPoint
- [ for ( aPoint |@ DO ) ( Pixel IN aPx aPx ) ] >>> Result
- ( Result Array:Count = c:Point:CoordCount ) ?ASSURE '“очка должна содержать две координаты'
+ ^ in aPoint
+ [ for ( aPoint |@ DO ) ( Pixel in aPx aPx ) ] >>> Result
+ ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
 ; // Point:OF
 
 Point : Point:+
- Point IN aLeft
- ^ IN aPoint
+ Point in aLeft
+ ^ in aPoint
 
- INTEGER VAR i
+ INTEGER var i
  i := 0
 
- [ for ( aPoint |@ DO ) ( Pixel IN aPx aPx i aLeft [i] + Inc i ) ] >>> Result
+ [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i aLeft [i] + Inc i ) ] >>> Result
 ; // Point:+
 
 Point : Point:-
- Point IN aLeft
- ^ IN aPoint
+ Point in aLeft
+ ^ in aPoint
 
- INTEGER VAR i
+ INTEGER var i
  i := 0
 
- [ for ( aPoint |@ DO ) ( Pixel IN aPx aPx i aLeft [i] SWAP - Inc i ) ] >>> Result
+ [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i aLeft [i] SWAP - Inc i ) ] >>> Result
 ; // Point:-
 
 Point : Point:Neg
- Point IN aLeft
+ Point in aLeft
 
- [ for aLeft ( Pixel IN aPx aPx 0 SWAP - ) ] >>> Result
+ [ for aLeft ( Pixel in aPx aPx 0 SWAP - ) ] >>> Result
 ; // Point:Neg
 
 VOID : Point:Print
- Point IN aPoint
+ Point in aPoint
  aPoint Print
 ; // Point:Print
 
-Point VAR P1
-Point VAR P2
-Point VAR P3
-Point VAR P4
-Point VAR P5
-Point VAR P6
-Point VAR P7
-Point VAR P8
-Point VAR P9
-Point VAR P10
+Point var P1
+Point var P2
+Point var P3
+Point var P4
+Point var P5
+Point var P6
+Point var P7
+Point var P8
+Point var P9
+Point var P10
 
 P1 := Point:0
 P2 := Point:0
