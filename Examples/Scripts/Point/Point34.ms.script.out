@@ -28,6 +28,9 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
   ':'
   Ctx:Parser:PushSymbol
+  @
+  class_impl
+  Ctx:SetWordProducerForCompiledClass
   [
    '_'
    aName
