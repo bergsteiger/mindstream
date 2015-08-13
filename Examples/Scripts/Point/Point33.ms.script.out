@@ -9,6 +9,17 @@
 [ -2 -2 ]
 [ -1 -1 ]
 VOID Test PointTest
+ IMMEDIATE VOID OPERATOR _class_
+  ^L IN aName
+  _class_
+  Ctx:SetWordProducerForCompiledClass
+  ':'
+  Ctx:Parser:PushSymbol
+  aName
+  |N
+  Ctx:Parser:PushSymbol
+ ; // IMMEDIATE VOID OPERATOR _class_
+ 
  INTEGER CONST c:Point:CoordCount
   2
  IMMEDIATE VOID OPERATOR class
