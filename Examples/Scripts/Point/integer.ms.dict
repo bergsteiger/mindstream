@@ -27,3 +27,25 @@ REDEFINITION
    ( aLeft (+) ( aRight DO ) )
   //inherited
  ; // (+)
+
+//REDEFINITION
+ : (-)
+  IN aLeft
+  right aRight
+  //aLeft (-) ( aRight DO )
+  // - так не работает, непонятно почему
+  //inherited
+  // - так не работает, непонятно почему
+  ( aLeft aRight |^ - )
+ ; // (-)
+
+REDEFINITION
+ : (-)
+  IN aLeft
+  right aRight
+  if ( aLeft IsInt ) then
+   ( aLeft aRight |^ - )
+  else  
+   ( aLeft (-) ( aRight DO ) )
+  //inherited
+ ; // (-)
