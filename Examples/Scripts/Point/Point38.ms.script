@@ -108,7 +108,7 @@ Point method Point:-
 Point method Point:Neg
  Point in Self
 
- [ for Self ( Pixel in aPx aPx 0 SWAP - ) ] >>> Result
+ [ for Self ( Pixel in aPx 0 aPx - ) ] >>> Result
 ; // Point:Neg
 
 void method Point:Print
