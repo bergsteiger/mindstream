@@ -5,14 +5,14 @@ USES
 
 Test PointTest
 
-array type Object
-
 VOID IMMEDIATE OPERATOR class
  Literal IN aName
- 'Object' Ctx:Parser:PushSymbol
+ 'array' Ctx:Parser:PushSymbol
  'type' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
 ; // class
+
+class Object
 
 INTEGER type FieldOffset
 // - смещение поля
