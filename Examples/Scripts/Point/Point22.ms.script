@@ -14,6 +14,7 @@ WordAlias Const CONST
 WordAlias const Const
 
 INTEGER type Pixel
+INTEGER type FieldOffset
 
 Object type Point
 
@@ -45,7 +46,7 @@ Point : Point:+
  Point in Self
  right aPoint
 
- INTEGER var i
+ FieldOffset var i
  i := 0
 
  [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i Self [i] + Inc i ) ] >>> Result
@@ -55,7 +56,7 @@ Point : Point:-
  Point in Self
  right aPoint
 
- INTEGER var i
+ FieldOffset var i
  i := 0
 
  [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i Self [i] SWAP - Inc i ) ] >>> Result
