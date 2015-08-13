@@ -6,10 +6,15 @@ POINT : POINT:0
 ; // POINT:0
 
 POINT : POINT:
- ^ IN X
- ^ IN Y
- [ X |^ Y |^ ] >>> Result
-; // POINT:0
+ ^ IN aX
+ ^ IN aY
+ [ aX |^ aY |^ ] >>> Result
+; // POINT:
+
+POINT : POINT:OF
+ ^ IN aPoint
+ [ aPoint |^ ] >>> Result
+; // POINT:OF
 
 VOID : POINT:Print
  POINT IN aPoint
