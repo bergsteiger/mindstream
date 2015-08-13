@@ -38,19 +38,19 @@ Point constructor Point:0
  [ 0 0 ] >>> Result
 ; // Point:0
 
-Point : Point:
+Point constructor Point:
  Pixel right aX
  Pixel right aY
  [ aX |^ aY |^ ] >>> Result
 ; // Point:
 
-Point : Point:XY
+Point constructor Point:XY
  PixelList right aPoint
  [ aPoint |@ DO ] >>> Result
  ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
 ; // Point:XY
 
-Point : Point:OF
+Point constructor Point:OF
  Point right aPoint
  [ for ( aPoint |@ DO ) ( Pixel in aPx aPx ) ] >>> Result
  ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'

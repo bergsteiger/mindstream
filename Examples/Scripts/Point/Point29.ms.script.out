@@ -68,7 +68,7 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Point
  
- ARRAY : Point:
+ ARRAY constructor Point:
   ^ IN aX
   ^ IN aY
   [
@@ -77,7 +77,7 @@ VOID Test PointTest
   ]
   >>>
   Result
- ; // ARRAY : Point:
+ ; // ARRAY constructor Point:
  
  ARRAY : Point:-
   ^ IN aPoint
@@ -160,7 +160,7 @@ VOID Test PointTest
   Result
  ; // ARRAY : Point:Neg
  
- ARRAY : Point:OF
+ ARRAY constructor Point:OF
   ^ IN aPoint
   [
    for
@@ -183,7 +183,7 @@ VOID Test PointTest
   )
   ?ASSURE
   '“очка должна содержать две координаты'
- ; // ARRAY : Point:OF
+ ; // ARRAY constructor Point:OF
  
  VOID : Point:Print
   ARRAY IN aPoint
@@ -191,7 +191,7 @@ VOID Test PointTest
   .
  ; // VOID : Point:Print
  
- ARRAY : Point:XY
+ ARRAY constructor Point:XY
   ^ IN aPoint
   [
    aPoint |@
@@ -207,7 +207,7 @@ VOID Test PointTest
   )
   ?ASSURE
   '“очка должна содержать две координаты'
- ; // ARRAY : Point:XY
+ ; // ARRAY constructor Point:XY
  
  P1 :=
  Point:0
