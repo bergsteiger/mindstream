@@ -18,6 +18,12 @@ POINT : POINT:XY
  ( Result Array:Count = c:POINT:CoordCount ) ?ASSURE '“очка должна содержать две координаты'
 ; // POINT:XY
 
+POINT : POINT:OF
+ ^ IN aPoint
+ [ for ( aPoint |@ DO ) ( PIXEL IN aPx aPx ) ] >>> Result
+ ( Result Array:Count = c:POINT:CoordCount ) ?ASSURE '“очка должна содержать две координаты'
+; // POINT:OF
+
 VOID : POINT:Print
  POINT IN aPoint
  aPoint Print
