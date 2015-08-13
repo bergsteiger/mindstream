@@ -34,6 +34,16 @@ POINT : POINT:+
  [ for ( aPoint |@ DO ) ( PIXEL IN aPx aPx i aLeft [i] + Inc i ) ] >>> Result
 ; // POINT:+
 
+POINT : POINT:-
+ POINT IN aLeft
+ ^ IN aPoint
+
+ INTEGER VAR i
+ i := 0
+
+ [ for ( aPoint |@ DO ) ( PIXEL IN aPx aPx i aLeft [i] - Inc i ) ] >>> Result
+; // POINT:-
+
 VOID : POINT:Print
  POINT IN aPoint
  aPoint Print
