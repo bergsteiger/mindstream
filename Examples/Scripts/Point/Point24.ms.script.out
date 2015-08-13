@@ -32,14 +32,6 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE FieldOffset
  
- IMMEDIATE VOID OPERATOR IN
-  ^L private:DefineNameParam aName
-  IN
-  aName
-  DO
-  private:DefineParam
- ; // IMMEDIATE VOID OPERATOR IN
- 
  IMMEDIATE VOID TYPE Object
   TtfwValueTypes
   Ctx:IncludeValueTypes
