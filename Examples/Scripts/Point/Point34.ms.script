@@ -5,13 +5,13 @@ USES
 
 Test PointTest
 
-VOID IMMEDIATE operator _class_
+VOID IMMEDIATE OPERATOR class_impl
 // - имплементация класса, пока "фиктивная"
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
  ':' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
-; // _class_
+; // class_impl
 
 VOID IMMEDIATE OPERATOR class
  Literal IN aName
@@ -19,9 +19,9 @@ VOID IMMEDIATE OPERATOR class
  'type' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
 
- //'_class_' Ctx:Parser:PushSymbol
+ 'class_impl' Ctx:Parser:PushSymbol
  // - вообще должно быть так, почему не работает - надо разбираться
- ':' Ctx:Parser:PushSymbol
+ //':' Ctx:Parser:PushSymbol
  [ '_' aName |N '_' ] strings:Cat Ctx:Parser:PushSymbol
  ';' Ctx:Parser:PushSymbol
 ; // class
