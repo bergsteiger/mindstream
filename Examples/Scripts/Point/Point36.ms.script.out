@@ -24,11 +24,8 @@ VOID Test PointTest
   then
    (
     INTEGER VAR l_Right
-    aRight |^
-    >>>
-    l_Right
     aLeft
-    l_Right
+    aRight |^
     +
    )
   else

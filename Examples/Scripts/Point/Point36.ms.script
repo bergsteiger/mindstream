@@ -169,8 +169,7 @@ REDEFINITION
   if ( aLeft IsInt ) then
    (
     INTEGER var l_Right 
-    aRight |^ >>> l_Right
-    aLeft l_Right + 
+    aLeft aRight |^ + 
    )
   else  
    ( aLeft (+) ( aRight DO ) )
