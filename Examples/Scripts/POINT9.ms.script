@@ -11,10 +11,10 @@ POINT : POINT:
  [ aX |^ aY |^ ] >>> Result
 ; // POINT:
 
-POINT : POINT:OF
+POINT : POINT:XY
  ^ IN aPoint
- [ aPoint |^ ] >>> Result
-; // POINT:OF
+ [ aPoint |@ DO ] >>> Result
+; // POINT:XY
 
 VOID : POINT:Print
  POINT IN aPoint
@@ -24,11 +24,14 @@ VOID : POINT:Print
 POINT VAR P1
 POINT VAR P2
 POINT VAR P3
+POINT VAR P4
 
 P1 := POINT:0
 P2 := POINT:0
 P3 := POINT: 1 1
+P4 := POINT:XY ( 2 2 )
 
 P1 POINT:Print
 P2 POINT:Print
 P3 POINT:Print
+P4 POINT:Print
