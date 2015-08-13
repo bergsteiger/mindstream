@@ -16,7 +16,10 @@ POINT : POINT:XY
  ^ IN aPoint
  VAR l_Point
  l_Point := ( aPoint |@ )
- [ l_Point DO ] >>> Result
+ if ( l_Point IsArray ) then
+  ( )
+ else
+  ( [ l_Point DO ] >>> Result )
  ( Result Array:Count = c:POINT:CoordCount ) ?ASSURE '“очка должна содержать две координаты'
 ; // POINT:XY
 
