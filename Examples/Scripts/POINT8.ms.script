@@ -1,0 +1,28 @@
+INTEGER TYPE PIXEL
+ARRAY TYPE POINT
+
+POINT : POINT:0
+ [ 0 0 ] >>> Result
+; // POINT:0
+
+POINT : POINT:
+ ^ IN X
+ ^ IN Y
+ [ X |^ Y |^ ] >>> Result
+; // POINT:0
+
+VOID : POINT:Print
+ POINT IN aPoint
+ aPoint Print
+; // POINT:Print
+
+POINT VAR P1
+POINT VAR P2
+POINT VAR P3
+
+P1 := POINT:0
+P2 := POINT:0
+P3 := POINT: 1 1
+
+P1 POINT:Print
+P2 POINT:Print
