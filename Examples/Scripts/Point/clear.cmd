@@ -1,1 +1,1 @@
-del call.ms.script.log
+del ..\call.ms.script.log
