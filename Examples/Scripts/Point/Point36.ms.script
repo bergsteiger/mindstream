@@ -167,10 +167,7 @@ REDEFINITION
   IN aLeft
   right aRight
   if ( aLeft IsInt ) then
-   (
-    INTEGER var l_Right 
-    aLeft aRight |^ + 
-   )
+   ( aLeft aRight |^ + )
   else  
    ( aLeft (+) ( aRight DO ) )
   //inherited
