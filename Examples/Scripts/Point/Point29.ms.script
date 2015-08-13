@@ -17,6 +17,9 @@ VOID IMMEDIATE OPERATOR class
 INTEGER type FieldOffset
 // - смещение поля
 
+WordAlias constructor :
+// - конструктор объектов, пока "фиктивный"
+
 INTEGER type Pixel
 // - пиксель
 List type PixelList
@@ -26,7 +29,7 @@ class Point
 
 private Const c:Point:CoordCount 2
 
-Point : Point:0
+Point constructor Point:0
  [ 0 0 ] >>> Result
 ; // Point:0
 
