@@ -13,31 +13,6 @@ Hello world
 Hello world
 3
 VOID Test PointTest
- REDIFINITION : (+)
-  IN aLeft
-  ^ IN aRight
-  if
-   (
-    aLeft
-    IsInt
-   )
-  then
-   (
-    aLeft
-    aRight |^
-    +
-   )
-  else
-   (
-    aLeft
-    (+)
-    (
-     aRight
-     DO
-    )
-   )
- ; // REDIFINITION : (+)
- 
  class_impl _Object_
  ; // class_impl _Object_
  

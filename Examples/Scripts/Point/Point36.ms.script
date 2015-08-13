@@ -3,6 +3,25 @@ USES
  params.ms.dict
 ;
 
+//REDEFINITION
+ : (+)
+  IN aLeft
+  right aRight
+  aLeft (+) ( aRight DO )
+  //inherited
+ ; // (+)
+
+REDEFINITION
+ : (+)
+  IN aLeft
+  right aRight
+  if ( aLeft IsInt ) then
+   ( aLeft aRight |^ + )
+  else  
+   ( aLeft (+) ( aRight DO ) )
+  //inherited
+ ; // (+)
+
 Test PointTest
 
 VOID IMMEDIATE OPERATOR class_impl
@@ -153,25 +172,6 @@ P10 Point:Print
 'Hello ' (+) 'world' Print
 
 'Hello ' (+) 'world' Print
-
-//REDEFINITION
- : (+)
-  IN aLeft
-  right aRight
-  aLeft (+) ( aRight DO )
-  //inherited
- ; // (+)
-
-REDEFINITION
- : (+)
-  IN aLeft
-  right aRight
-  if ( aLeft IsInt ) then
-   ( aLeft aRight |^ + )
-  else  
-   ( aLeft (+) ( aRight DO ) )
-  //inherited
- ; // (+)
 
 'Hello ' (+) 'world' Print
 1 (+) 2 Print
