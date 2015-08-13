@@ -41,7 +41,7 @@ POINT : POINT:-
  INTEGER VAR i
  i := 0
 
- [ for ( aPoint |@ DO ) ( PIXEL IN aPx aPx i aLeft [i] - Inc i ) ] >>> Result
+ [ for ( aPoint |@ DO ) ( PIXEL IN aPx aPx i aLeft [i] SWAP - Inc i ) ] >>> Result
 ; // POINT:-
 
 VOID : POINT:Print
@@ -55,6 +55,7 @@ POINT VAR P3
 POINT VAR P4
 POINT VAR P5
 POINT VAR P6
+POINT VAR P7
 
 P1 := POINT:0
 P2 := POINT:0
@@ -62,6 +63,7 @@ P3 := POINT: 1 1
 P4 := POINT:XY ( 2 2 )
 P5 := POINT:OF P4
 P6 := ( P3 POINT:+ P4 )
+P7 := ( P3 POINT:- P4 )
 
 P1 POINT:Print
 P2 POINT:Print
@@ -69,3 +71,4 @@ P3 POINT:Print
 P4 POINT:Print
 P5 POINT:Print
 P6 POINT:Print
+P7 POINT:Print
