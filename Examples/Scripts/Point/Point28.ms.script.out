@@ -11,6 +11,17 @@
 VOID Test PointTest
  INTEGER CONST c:Point:CoordCount
   2
+ IMMEDIATE VOID OPERATOR class
+  ^L IN aName
+  'Object'
+  Ctx:Parser:PushSymbol
+  'type'
+  Ctx:Parser:PushSymbol
+  aName
+  |N
+  Ctx:Parser:PushSymbol
+ ; // IMMEDIATE VOID OPERATOR class
+ 
  IMMEDIATE VOID TYPE FieldOffset
   TtfwValueTypes
   Ctx:IncludeValueTypes
