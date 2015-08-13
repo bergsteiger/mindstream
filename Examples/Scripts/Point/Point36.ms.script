@@ -171,7 +171,7 @@ REDEFINITION
   IN aLeft
   right aRight
   if ( aLeft IsInt ) then
-   ( 10 )
+   ( aLeft aRight DO + )
   else  
    ( aLeft (+) ( aRight DO ) )
   //inherited

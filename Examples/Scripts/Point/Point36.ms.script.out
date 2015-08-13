@@ -11,7 +11,7 @@
 Hello world
 Hello world
 Hello world
-10
+3
 VOID Test PointTest
  REDIFINITION : (+)
   IN aLeft
@@ -23,7 +23,10 @@ VOID Test PointTest
    )
   then
    (
-    10
+    aLeft
+    aRight
+    DO
+    +
    )
   else
    (
