@@ -47,7 +47,7 @@ POINT : POINT:-
 POINT : POINT:Neg
  POINT IN aLeft
 
- [ for aLeft ( PIXEL IN aPx aPx SWAP - ) ] >>> Result
+ [ for aLeft ( PIXEL IN aPx aPx 0 SWAP - ) ] >>> Result
 ; // POINT:Neg
 
 VOID : POINT:Print
@@ -63,6 +63,7 @@ POINT VAR P5
 POINT VAR P6
 POINT VAR P7
 POINT VAR P8
+POINT VAR P9
 
 P1 := POINT:0
 P2 := POINT:0
@@ -72,6 +73,7 @@ P5 := POINT:OF P4
 P6 := ( P3 POINT:+ P4 )
 P7 := ( P3 POINT:- P4 )
 P8 := ( P4 POINT:- P3 )
+P9 := ( P4 POINT:Neg )
 
 P1 POINT:Print
 P2 POINT:Print
@@ -81,3 +83,4 @@ P5 POINT:Print
 P6 POINT:Print
 P7 POINT:Print
 P8 POINT:Print
+P9 POINT:Print
