@@ -23,9 +23,13 @@ VOID Test PointTest
    )
   then
    (
-    aLeft
+    INTEGER VAR l_Right
     aRight
     DO
+    >>>
+    l_Right
+    aLeft
+    l_Right
     +
    )
   else
