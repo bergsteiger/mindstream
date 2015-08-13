@@ -18,6 +18,10 @@ VOID IMMEDIATE OPERATOR class
  'array' Ctx:Parser:PushSymbol
  'type' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
+
+ 'operator' Ctx:Parser:PushSymbol
+ [ '_' aName |N '_' ] strings:Cat Ctx:Parser:PushSymbol
+ ';' Ctx:Parser:PushSymbol
 ; // class
 
 class Object

@@ -20,6 +20,12 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR _class_
  
+ TYPE _Object_
+ ; // TYPE _Object_
+ 
+ TYPE _Point_
+ ; // TYPE _Point_
+ 
  INTEGER CONST c:Point:CoordCount
   2
  IMMEDIATE VOID OPERATOR class
@@ -30,6 +36,18 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
   aName
   |N
+  Ctx:Parser:PushSymbol
+  'operator'
+  Ctx:Parser:PushSymbol
+  [
+   '_'
+   aName
+   |N
+   '_'
+  ]
+  strings:Cat
+  Ctx:Parser:PushSymbol
+  ';'
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR class
  
@@ -60,10 +78,10 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR method
  
- IMMEDIATE VOID TYPE Object
+ IMMEDIATE VOID OPERATOR Object
   TtfwValueTypes
   Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID TYPE Object
+ ; // IMMEDIATE VOID OPERATOR Object
  
  ARRAY VAR P1
  ARRAY VAR P10
@@ -85,10 +103,10 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE PixelList
  
- IMMEDIATE VOID TYPE Point
+ IMMEDIATE VOID OPERATOR Point
   TtfwValueTypes
   Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID TYPE Point
+ ; // IMMEDIATE VOID OPERATOR Point
  
  ARRAY constructor Point:
   ^ IN aX
