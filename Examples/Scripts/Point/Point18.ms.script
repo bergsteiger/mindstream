@@ -1,0 +1,98 @@
+ARRAY TYPE Object
+WordAlias private PRIVATE
+WordAlias Private PRIVATE
+WordAlias type TYPE
+WordAlias Type TYPE
+WordAlias var VAR
+
+INTEGER type Pixel
+
+Object type Point
+
+private CONST c:Point:CoordCount 2
+
+Point : Point:0
+ [ 0 0 ] >>> Result
+; // Point:0
+
+Point : Point:
+ ^ IN aX
+ ^ IN aY
+ [ aX |^ aY |^ ] >>> Result
+; // Point:
+
+Point : Point:XY
+ ^ IN aPoint
+ [ aPoint |@ DO ] >>> Result
+ ( Result Array:Count = c:Point:CoordCount ) ?ASSURE '“очка должна содержать две координаты'
+; // Point:XY
+
+Point : Point:OF
+ ^ IN aPoint
+ [ for ( aPoint |@ DO ) ( Pixel IN aPx aPx ) ] >>> Result
+ ( Result Array:Count = c:Point:CoordCount ) ?ASSURE '“очка должна содержать две координаты'
+; // Point:OF
+
+Point : Point:+
+ Point IN aLeft
+ ^ IN aPoint
+
+ INTEGER VAR i
+ i := 0
+
+ [ for ( aPoint |@ DO ) ( Pixel IN aPx aPx i aLeft [i] + Inc i ) ] >>> Result
+; // Point:+
+
+Point : Point:-
+ Point IN aLeft
+ ^ IN aPoint
+
+ INTEGER VAR i
+ i := 0
+
+ [ for ( aPoint |@ DO ) ( Pixel IN aPx aPx i aLeft [i] SWAP - Inc i ) ] >>> Result
+; // Point:-
+
+Point : Point:Neg
+ Point IN aLeft
+
+ [ for aLeft ( Pixel IN aPx aPx 0 SWAP - ) ] >>> Result
+; // Point:Neg
+
+VOID : Point:Print
+ Point IN aPoint
+ aPoint Print
+; // Point:Print
+
+Point VAR P1
+Point VAR P2
+Point VAR P3
+Point VAR P4
+Point VAR P5
+Point VAR P6
+Point VAR P7
+Point VAR P8
+Point VAR P9
+Point VAR P10
+
+P1 := Point:0
+P2 := Point:0
+P3 := Point: 1 1
+P4 := Point:XY ( 2 2 )
+P5 := Point:OF P4
+P6 := ( P3 Point:+ P4 )
+P7 := ( P3 Point:- P4 )
+P8 := ( P4 Point:- P3 )
+P9 := ( P4 Point:Neg )
+P10 := ( P3 Point:Neg )
+
+P1 Point:Print
+P2 Point:Print
+P3 Point:Print
+P4 Point:Print
+P5 Point:Print
+P6 Point:Print
+P7 Point:Print
+P8 Point:Print
+P9 Point:Print
+P10 Point:Print
