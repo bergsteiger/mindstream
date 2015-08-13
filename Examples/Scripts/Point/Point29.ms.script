@@ -17,8 +17,13 @@ VOID IMMEDIATE OPERATOR class
 INTEGER type FieldOffset
 // - смещение поля
 
-WordAlias constructor :
+IMMEDIATE VOID operator constructor
 // - конструктор объектов, пока "фиктивный"
+ ^L IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ ':' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // constructor
 
 INTEGER type Pixel
 // - пиксель
