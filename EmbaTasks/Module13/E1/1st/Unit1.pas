@@ -39,7 +39,7 @@ var
 begin
   InStr := edtIn.Text;
 
-  for Index := 0 to Pred(Length(InStr)) do
+  for Index := 0 to Length(InStr) do
     if not (InStr[Index] in ['0' .. '9']) then
       ResultStr := PChar(ResultStr) + InStr[Index];
 
