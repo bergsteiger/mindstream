@@ -44,6 +44,12 @@ POINT : POINT:-
  [ for ( aPoint |@ DO ) ( PIXEL IN aPx aPx i aLeft [i] SWAP - Inc i ) ] >>> Result
 ; // POINT:-
 
+POINT : POINT:Neg
+ POINT IN aLeft
+
+ [ for aLeft ( PIXEL IN aPx aPx SWAP - ) ] >>> Result
+; // POINT:Neg
+
 VOID : POINT:Print
  POINT IN aPoint
  aPoint Print
