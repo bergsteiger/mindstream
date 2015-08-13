@@ -9,4 +9,9 @@ WordAlias right RightParam
 
 WordAlias in IN
 
-WordAlias Literal ^L
+IMMEDIATE VOID operator Literal
+ ^L IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ '^L' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // Literal
