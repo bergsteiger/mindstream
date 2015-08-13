@@ -11,6 +11,7 @@ VOID IMMEDIATE OPERATOR class_impl
  @SELF Ctx:SetWordProducerForCompiledClass
  ':' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
+ ';' Ctx:Parser:PushSymbol
 ; // class_impl
 
 VOID IMMEDIATE OPERATOR class
@@ -19,11 +20,11 @@ VOID IMMEDIATE OPERATOR class
  'type' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
 
- //'class_impl' Ctx:Parser:PushSymbol
+ 'class_impl' Ctx:Parser:PushSymbol
  // - вообще должно быть так, почему не работает - надо разбираться
  ':' Ctx:Parser:PushSymbol
  [ '_' aName |N '_' ] strings:Cat Ctx:Parser:PushSymbol
- ';' Ctx:Parser:PushSymbol
+ //';' Ctx:Parser:PushSymbol
 ; // class
 
 class Object
