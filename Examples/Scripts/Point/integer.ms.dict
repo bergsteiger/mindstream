@@ -1,5 +1,6 @@
 USES
  axiom:axiom
+ core.ms.dict
  params.ms.dict
 ;
 
@@ -7,8 +8,11 @@ USES
  : (+)
   IN aLeft
   right aRight
-  aLeft (+) ( aRight DO )
+  //aLeft (+) ( aRight DO )
+  // - так не работает, непонятно почему
   //inherited
+  // - так не работает, непонятно почему
+  ( aLeft aRight |^ + )
  ; // (+)
 
 REDEFINITION
