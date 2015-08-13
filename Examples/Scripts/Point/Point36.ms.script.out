@@ -8,6 +8,7 @@
 [ 1 1 ]
 [ -2 -2 ]
 [ -1 -1 ]
+Hello world
 VOID Test PointTest
  : (+)
  ; // : (+)
@@ -312,6 +313,10 @@ VOID Test PointTest
  Point:Print
  P10
  Point:Print
+ 'Hello '
+ (+)
+ 'world'
+ .
  PointTest
  DumpElement
 ; // VOID Test PointTest
