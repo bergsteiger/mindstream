@@ -133,11 +133,13 @@ VOID Test PointTest
    )
    (
     INTEGER IN aPx
-    i
-    Self
-    [i]
+    (
+     i
+     Self
+     [i]
+    )
+    (-)
     aPx
-    -
     INC
     i
    )
