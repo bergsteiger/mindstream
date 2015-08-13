@@ -19,7 +19,7 @@ VOID IMMEDIATE OPERATOR class
  'type' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
 
- 'operator' Ctx:Parser:PushSymbol
+ ':' Ctx:Parser:PushSymbol
  [ '_' aName |N '_' ] strings:Cat Ctx:Parser:PushSymbol
  ';' Ctx:Parser:PushSymbol
 ; // class
