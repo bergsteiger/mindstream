@@ -7,7 +7,7 @@ WordAlias var VAR
 WordAlias in IN
 WordAlias ?Assure ?ASSURE
 WordAlias Const CONST
-WordAlias const CONST
+WordAlias const Const
 
 INTEGER type Pixel
 
@@ -38,29 +38,29 @@ Point : Point:OF
 ; // Point:OF
 
 Point : Point:+
- Point in aLeft
+ Point in Self
  ^ in aPoint
 
  INTEGER var i
  i := 0
 
- [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i aLeft [i] + Inc i ) ] >>> Result
+ [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i Self [i] + Inc i ) ] >>> Result
 ; // Point:+
 
 Point : Point:-
- Point in aLeft
+ Point in Self
  ^ in aPoint
 
  INTEGER var i
  i := 0
 
- [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i aLeft [i] SWAP - Inc i ) ] >>> Result
+ [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i Self [i] SWAP - Inc i ) ] >>> Result
 ; // Point:-
 
 Point : Point:Neg
- Point in aLeft
+ Point in Self
 
- [ for aLeft ( Pixel in aPx aPx 0 SWAP - ) ] >>> Result
+ [ for Self ( Pixel in aPx aPx 0 SWAP - ) ] >>> Result
 ; // Point:Neg
 
 VOID : Point:Print
