@@ -1,92 +1,97 @@
-INTEGER TYPE PIXEL
-
 ARRAY TYPE Object
-Object TYPE POINT
+WordAlias private PRIVATE
+WordAlias Private PRIVATE
+WordAlias type TYPE
+WordAlias Type TYPE
 
-PRIVATE CONST c:POINT:CoordCount 2
+INTEGER type Pixel
 
-POINT : POINT:0
+Object type Point
+
+private CONST c:Point:CoordCount 2
+
+Point : Point:0
  [ 0 0 ] >>> Result
-; // POINT:0
+; // Point:0
 
-POINT : POINT:
+Point : Point:
  ^ IN aX
  ^ IN aY
  [ aX |^ aY |^ ] >>> Result
-; // POINT:
+; // Point:
 
-POINT : POINT:XY
+Point : Point:XY
  ^ IN aPoint
  [ aPoint |@ DO ] >>> Result
- ( Result Array:Count = c:POINT:CoordCount ) ?ASSURE '“очка должна содержать две координаты'
-; // POINT:XY
+ ( Result Array:Count = c:Point:CoordCount ) ?ASSURE '“очка должна содержать две координаты'
+; // Point:XY
 
-POINT : POINT:OF
+Point : Point:OF
  ^ IN aPoint
- [ for ( aPoint |@ DO ) ( PIXEL IN aPx aPx ) ] >>> Result
- ( Result Array:Count = c:POINT:CoordCount ) ?ASSURE '“очка должна содержать две координаты'
-; // POINT:OF
+ [ for ( aPoint |@ DO ) ( Pixel IN aPx aPx ) ] >>> Result
+ ( Result Array:Count = c:Point:CoordCount ) ?ASSURE '“очка должна содержать две координаты'
+; // Point:OF
 
-POINT : POINT:+
- POINT IN aLeft
- ^ IN aPoint
-
- INTEGER VAR i
- i := 0
-
- [ for ( aPoint |@ DO ) ( PIXEL IN aPx aPx i aLeft [i] + Inc i ) ] >>> Result
-; // POINT:+
-
-POINT : POINT:-
- POINT IN aLeft
+Point : Point:+
+ Point IN aLeft
  ^ IN aPoint
 
  INTEGER VAR i
  i := 0
 
- [ for ( aPoint |@ DO ) ( PIXEL IN aPx aPx i aLeft [i] SWAP - Inc i ) ] >>> Result
-; // POINT:-
+ [ for ( aPoint |@ DO ) ( Pixel IN aPx aPx i aLeft [i] + Inc i ) ] >>> Result
+; // Point:+
 
-POINT : POINT:Neg
- POINT IN aLeft
+Point : Point:-
+ Point IN aLeft
+ ^ IN aPoint
 
- [ for aLeft ( PIXEL IN aPx aPx 0 SWAP - ) ] >>> Result
-; // POINT:Neg
+ INTEGER VAR i
+ i := 0
 
-VOID : POINT:Print
- POINT IN aPoint
+ [ for ( aPoint |@ DO ) ( Pixel IN aPx aPx i aLeft [i] SWAP - Inc i ) ] >>> Result
+; // Point:-
+
+Point : Point:Neg
+ Point IN aLeft
+
+ [ for aLeft ( Pixel IN aPx aPx 0 SWAP - ) ] >>> Result
+; // Point:Neg
+
+VOID : Point:Print
+ Point IN aPoint
  aPoint Print
-; // POINT:Print
+; // Point:Print
 
-POINT VAR P1
-POINT VAR P2
-POINT VAR P3
-POINT VAR P4
-POINT VAR P5
-POINT VAR P6
-POINT VAR P7
-POINT VAR P8
-POINT VAR P9
-POINT VAR P10
+Point VAR P1
+Point VAR P2
+Point VAR P3
+Point VAR P4
+Point VAR P5
+Point VAR P6
+Point VAR P7
+Point VAR P8
+Point VAR P9
+Point VAR P10
 
-P1 := POINT:0
-P2 := POINT:0
-P3 := POINT: 1 1
-P4 := POINT:XY ( 2 2 )
-P5 := POINT:OF P4
-P6 := ( P3 POINT:+ P4 )
-P7 := ( P3 POINT:- P4 )
-P8 := ( P4 POINT:- P3 )
-P9 := ( P4 POINT:Neg )
-P10 := ( P3 POINT:Neg )
+P1 := Point:0
+P2 := Point:0
+P3 := Point: 1 1
+P4 := Point:XY ( 2 2 )
+P5 := Point:OF P4
+P6 := ( P3 Point:+ P4 )
+P7 := ( P3 Point:- P4 )
+P8 := ( P4 Point:- P3 )
+P9 := ( P4 Point:Neg )
+P10 := ( P3 Point:Neg )
 
-P1 POINT:Print
-P2 POINT:Print
-P3 POINT:Print
-P4 POINT:Print
-P5 POINT:Print
-P6 POINT:Print
-P7 POINT:Print
-P8 POINT:Print
-P9 POINT:Print
-P10 POINT:Print
+P1 Point:Print
+P2 Point:Print
+P3 Point:Print
+P4 Point:Print
+P5 Point:Print
+P6 Point:Print
+P7 Point:Print
+P8 Point:Print
+P9 Point:Print
+P10 Point:Print
