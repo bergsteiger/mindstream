@@ -158,7 +158,13 @@ USES
 
 //REDEFINITION
  : (+)
+  IN aLeft
+  right aRight
+  aLeft (+) ( aRight DO )
+  //inherited
  ; // (+)
+
+'Hello ' (+) 'world' Print
 
 USES
  CodeDump.ms.dict
