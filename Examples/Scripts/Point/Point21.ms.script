@@ -24,26 +24,26 @@ Point : Point:0
 ; // Point:0
 
 Point : Point:
- ^ in aX
- ^ in aY
+ RightParam aX
+ RightParam aY
  [ aX |^ aY |^ ] >>> Result
 ; // Point:
 
 Point : Point:XY
- ^ in aPoint
+ RightParam aPoint
  [ aPoint |@ DO ] >>> Result
  ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
 ; // Point:XY
 
 Point : Point:OF
- ^ in aPoint
+ RightParam aPoint
  [ for ( aPoint |@ DO ) ( Pixel in aPx aPx ) ] >>> Result
  ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
 ; // Point:OF
 
 Point : Point:+
  Point in Self
- ^ in aPoint
+ RightParam aPoint
 
  INTEGER var i
  i := 0
@@ -53,7 +53,7 @@ Point : Point:+
 
 Point : Point:-
  Point in Self
- ^ in aPoint
+ RightParam aPoint
 
  INTEGER var i
  i := 0
