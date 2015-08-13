@@ -5,6 +5,12 @@ IMMEDIATE VOID TYPE POINT
 ; // IMMEDIATE VOID TYPE POINT
 
 
+INTEGER CONST c:POINT:CoordCount
+ 2
+ARRAY VAR P1
+ARRAY VAR P2
+ARRAY VAR P3
+ARRAY VAR P4
 IMMEDIATE VOID TYPE PIXEL
  TtfwValueTypes
  Ctx:IncludeValueTypes
@@ -15,6 +21,1344 @@ IMMEDIATE VOID TYPE POINT
  Ctx:IncludeValueTypes
 ; // IMMEDIATE VOID TYPE POINT
 
+ARRAY : POINT:
+ ^ IN aX
+ ^ IN aY
+ [
+  aX |^
+  aY |^
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:
+
+ARRAY : POINT:0
+ [
+  0
+  0
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:0
+
+VOID : POINT:Print
+ ARRAY IN aPoint
+ aPoint
+ .
+; // VOID : POINT:Print
+
+ARRAY : POINT:XY
+ ^ IN aPoint
+ [
+  aPoint |@
+  DO
+ ]
+ >>>
+ Result
+ (
+  Result
+  Array:Count
+  =
+  c:POINT:CoordCount
+ )
+ ?ASSURE
+ '“очка должна содержать две координаты'
+; // ARRAY : POINT:XY
+
+P1 :=
+POINT:0
+P2 :=
+POINT:0
+P3 :=
+POINT:
+1
+1
+P4 :=
+POINT:XY
+(
+ 2
+ 2
+)
+P1
+POINT:Print
+P2
+POINT:Print
+P3
+POINT:Print
+P4
+POINT:Print
+
+INTEGER CONST c:POINT:CoordCount
+ 2
+ARRAY VAR P1
+ARRAY VAR P2
+ARRAY VAR P3
+ARRAY VAR P4
+ARRAY VAR P5
+IMMEDIATE VOID TYPE PIXEL
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE PIXEL
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+ARRAY : POINT:
+ ^ IN aX
+ ^ IN aY
+ [
+  aX |^
+  aY |^
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:
+
+ARRAY : POINT:0
+ [
+  0
+  0
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:0
+
+ARRAY : POINT:OF
+ ^ IN aPoint
+ [
+  for
+  (
+   aPoint |@
+   DO
+  )
+  (
+   INTEGER IN aPx
+   aPx
+  )
+ ]
+ >>>
+ Result
+ (
+  Result
+  Array:Count
+  =
+  c:POINT:CoordCount
+ )
+ ?ASSURE
+ '“очка должна содержать две координаты'
+; // ARRAY : POINT:OF
+
+VOID : POINT:Print
+ ARRAY IN aPoint
+ aPoint
+ .
+; // VOID : POINT:Print
+
+ARRAY : POINT:XY
+ ^ IN aPoint
+ [
+  aPoint |@
+  DO
+ ]
+ >>>
+ Result
+ (
+  Result
+  Array:Count
+  =
+  c:POINT:CoordCount
+ )
+ ?ASSURE
+ '“очка должна содержать две координаты'
+; // ARRAY : POINT:XY
+
+P1 :=
+POINT:0
+P2 :=
+POINT:0
+P3 :=
+POINT:
+1
+1
+P4 :=
+POINT:XY
+(
+ 2
+ 2
+)
+P5 :=
+POINT:OF
+P4
+P1
+POINT:Print
+P2
+POINT:Print
+P3
+POINT:Print
+P4
+POINT:Print
+P5
+POINT:Print
+
+INTEGER CONST c:POINT:CoordCount
+ 2
+ARRAY VAR P1
+ARRAY VAR P2
+ARRAY VAR P3
+ARRAY VAR P4
+ARRAY VAR P5
+ARRAY VAR P6
+IMMEDIATE VOID TYPE PIXEL
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE PIXEL
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+ARRAY : POINT:
+ ^ IN aX
+ ^ IN aY
+ [
+  aX |^
+  aY |^
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:
+
+ARRAY : POINT:-
+ ARRAY IN aLeft
+ ^ IN aPoint
+ INTEGER VAR i
+ i :=
+ 0
+ [
+  for
+  (
+   aPoint |@
+   DO
+  )
+  (
+   INTEGER IN aPx
+   aPx
+   i
+   aLeft
+   [i]
+   -
+   INC
+   i
+  )
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:-
+
+ARRAY : POINT:+
+ ARRAY IN aLeft
+ ^ IN aPoint
+ INTEGER VAR i
+ i :=
+ 0
+ [
+  for
+  (
+   aPoint |@
+   DO
+  )
+  (
+   INTEGER IN aPx
+   aPx
+   i
+   aLeft
+   [i]
+   +
+   INC
+   i
+  )
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:+
+
+ARRAY : POINT:0
+ [
+  0
+  0
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:0
+
+ARRAY : POINT:OF
+ ^ IN aPoint
+ [
+  for
+  (
+   aPoint |@
+   DO
+  )
+  (
+   INTEGER IN aPx
+   aPx
+  )
+ ]
+ >>>
+ Result
+ (
+  Result
+  Array:Count
+  =
+  c:POINT:CoordCount
+ )
+ ?ASSURE
+ '“очка должна содержать две координаты'
+; // ARRAY : POINT:OF
+
+VOID : POINT:Print
+ ARRAY IN aPoint
+ aPoint
+ .
+; // VOID : POINT:Print
+
+ARRAY : POINT:XY
+ ^ IN aPoint
+ [
+  aPoint |@
+  DO
+ ]
+ >>>
+ Result
+ (
+  Result
+  Array:Count
+  =
+  c:POINT:CoordCount
+ )
+ ?ASSURE
+ '“очка должна содержать две координаты'
+; // ARRAY : POINT:XY
+
+P1 :=
+POINT:0
+P2 :=
+POINT:0
+P3 :=
+POINT:
+1
+1
+P4 :=
+POINT:XY
+(
+ 2
+ 2
+)
+P5 :=
+POINT:OF
+P4
+P6 :=
+(
+ P3
+ POINT:+
+ P4
+)
+P1
+POINT:Print
+P2
+POINT:Print
+P3
+POINT:Print
+P4
+POINT:Print
+P5
+POINT:Print
+P6
+POINT:Print
+
+INTEGER CONST c:POINT:CoordCount
+ 2
+ARRAY VAR P1
+ARRAY VAR P2
+ARRAY VAR P3
+ARRAY VAR P4
+ARRAY VAR P5
+ARRAY VAR P6
+ARRAY VAR P7
+ARRAY VAR P8
+IMMEDIATE VOID TYPE PIXEL
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE PIXEL
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+ARRAY : POINT:
+ ^ IN aX
+ ^ IN aY
+ [
+  aX |^
+  aY |^
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:
+
+ARRAY : POINT:-
+ ARRAY IN aLeft
+ ^ IN aPoint
+ INTEGER VAR i
+ i :=
+ 0
+ [
+  for
+  (
+   aPoint |@
+   DO
+  )
+  (
+   INTEGER IN aPx
+   aPx
+   i
+   aLeft
+   [i]
+   SWAP
+   -
+   INC
+   i
+  )
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:-
+
+ARRAY : POINT:+
+ ARRAY IN aLeft
+ ^ IN aPoint
+ INTEGER VAR i
+ i :=
+ 0
+ [
+  for
+  (
+   aPoint |@
+   DO
+  )
+  (
+   INTEGER IN aPx
+   aPx
+   i
+   aLeft
+   [i]
+   +
+   INC
+   i
+  )
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:+
+
+ARRAY : POINT:0
+ [
+  0
+  0
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:0
+
+ARRAY : POINT:OF
+ ^ IN aPoint
+ [
+  for
+  (
+   aPoint |@
+   DO
+  )
+  (
+   INTEGER IN aPx
+   aPx
+  )
+ ]
+ >>>
+ Result
+ (
+  Result
+  Array:Count
+  =
+  c:POINT:CoordCount
+ )
+ ?ASSURE
+ '“очка должна содержать две координаты'
+; // ARRAY : POINT:OF
+
+VOID : POINT:Print
+ ARRAY IN aPoint
+ aPoint
+ .
+; // VOID : POINT:Print
+
+ARRAY : POINT:XY
+ ^ IN aPoint
+ [
+  aPoint |@
+  DO
+ ]
+ >>>
+ Result
+ (
+  Result
+  Array:Count
+  =
+  c:POINT:CoordCount
+ )
+ ?ASSURE
+ '“очка должна содержать две координаты'
+; // ARRAY : POINT:XY
+
+P1 :=
+POINT:0
+P2 :=
+POINT:0
+P3 :=
+POINT:
+1
+1
+P4 :=
+POINT:XY
+(
+ 2
+ 2
+)
+P5 :=
+POINT:OF
+P4
+P6 :=
+(
+ P3
+ POINT:+
+ P4
+)
+P7 :=
+(
+ P3
+ POINT:-
+ P4
+)
+P8 :=
+(
+ P4
+ POINT:-
+ P3
+)
+P1
+POINT:Print
+P2
+POINT:Print
+P3
+POINT:Print
+P4
+POINT:Print
+P5
+POINT:Print
+P6
+POINT:Print
+P7
+POINT:Print
+P8
+POINT:Print
+
+INTEGER CONST c:POINT:CoordCount
+ 2
+ARRAY VAR P1
+ARRAY VAR P10
+ARRAY VAR P2
+ARRAY VAR P3
+ARRAY VAR P4
+ARRAY VAR P5
+ARRAY VAR P6
+ARRAY VAR P7
+ARRAY VAR P8
+ARRAY VAR P9
+IMMEDIATE VOID TYPE PIXEL
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE PIXEL
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+ARRAY : POINT:
+ ^ IN aX
+ ^ IN aY
+ [
+  aX |^
+  aY |^
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:
+
+ARRAY : POINT:-
+ ARRAY IN aLeft
+ ^ IN aPoint
+ INTEGER VAR i
+ i :=
+ 0
+ [
+  for
+  (
+   aPoint |@
+   DO
+  )
+  (
+   INTEGER IN aPx
+   aPx
+   i
+   aLeft
+   [i]
+   SWAP
+   -
+   INC
+   i
+  )
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:-
+
+ARRAY : POINT:+
+ ARRAY IN aLeft
+ ^ IN aPoint
+ INTEGER VAR i
+ i :=
+ 0
+ [
+  for
+  (
+   aPoint |@
+   DO
+  )
+  (
+   INTEGER IN aPx
+   aPx
+   i
+   aLeft
+   [i]
+   +
+   INC
+   i
+  )
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:+
+
+ARRAY : POINT:0
+ [
+  0
+  0
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:0
+
+ARRAY : POINT:Neg
+ ARRAY IN aLeft
+ [
+  for
+  aLeft
+  (
+   INTEGER IN aPx
+   aPx
+   0
+   SWAP
+   -
+  )
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:Neg
+
+ARRAY : POINT:OF
+ ^ IN aPoint
+ [
+  for
+  (
+   aPoint |@
+   DO
+  )
+  (
+   INTEGER IN aPx
+   aPx
+  )
+ ]
+ >>>
+ Result
+ (
+  Result
+  Array:Count
+  =
+  c:POINT:CoordCount
+ )
+ ?ASSURE
+ '“очка должна содержать две координаты'
+; // ARRAY : POINT:OF
+
+VOID : POINT:Print
+ ARRAY IN aPoint
+ aPoint
+ .
+; // VOID : POINT:Print
+
+ARRAY : POINT:XY
+ ^ IN aPoint
+ [
+  aPoint |@
+  DO
+ ]
+ >>>
+ Result
+ (
+  Result
+  Array:Count
+  =
+  c:POINT:CoordCount
+ )
+ ?ASSURE
+ '“очка должна содержать две координаты'
+; // ARRAY : POINT:XY
+
+P1 :=
+POINT:0
+P2 :=
+POINT:0
+P3 :=
+POINT:
+1
+1
+P4 :=
+POINT:XY
+(
+ 2
+ 2
+)
+P5 :=
+POINT:OF
+P4
+P6 :=
+(
+ P3
+ POINT:+
+ P4
+)
+P7 :=
+(
+ P3
+ POINT:-
+ P4
+)
+P8 :=
+(
+ P4
+ POINT:-
+ P3
+)
+P9 :=
+(
+ P4
+ POINT:Neg
+)
+P10 :=
+(
+ P3
+ POINT:Neg
+)
+P1
+POINT:Print
+P2
+POINT:Print
+P3
+POINT:Print
+P4
+POINT:Print
+P5
+POINT:Print
+P6
+POINT:Print
+P7
+POINT:Print
+P8
+POINT:Print
+P9
+POINT:Print
+P10
+POINT:Print
+
+INTEGER CONST c:POINT:CoordCount
+ 2
+ARRAY VAR P1
+ARRAY VAR P10
+ARRAY VAR P2
+ARRAY VAR P3
+ARRAY VAR P4
+ARRAY VAR P5
+ARRAY VAR P6
+ARRAY VAR P7
+ARRAY VAR P8
+ARRAY VAR P9
+IMMEDIATE VOID TYPE PIXEL
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE PIXEL
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+ARRAY : POINT:
+ ^ IN aX
+ ^ IN aY
+ [
+  aX |^
+  aY |^
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:
+
+ARRAY : POINT:-
+ ARRAY IN aLeft
+ ^ IN aPoint
+ INTEGER VAR i
+ i :=
+ 0
+ [
+  for
+  (
+   aPoint |@
+   DO
+  )
+  (
+   INTEGER IN aPx
+   aPx
+   i
+   aLeft
+   [i]
+   SWAP
+   -
+   INC
+   i
+  )
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:-
+
+ARRAY : POINT:+
+ ARRAY IN aLeft
+ ^ IN aPoint
+ INTEGER VAR i
+ i :=
+ 0
+ [
+  for
+  (
+   aPoint |@
+   DO
+  )
+  (
+   INTEGER IN aPx
+   aPx
+   i
+   aLeft
+   [i]
+   +
+   INC
+   i
+  )
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:+
+
+ARRAY : POINT:0
+ [
+  0
+  0
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:0
+
+ARRAY : POINT:Neg
+ ARRAY IN aLeft
+ [
+  for
+  aLeft
+  (
+   INTEGER IN aPx
+   aPx
+   0
+   SWAP
+   -
+  )
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:Neg
+
+ARRAY : POINT:OF
+ ^ IN aPoint
+ [
+  for
+  (
+   aPoint |@
+   DO
+  )
+  (
+   INTEGER IN aPx
+   aPx
+  )
+ ]
+ >>>
+ Result
+ (
+  Result
+  Array:Count
+  =
+  c:POINT:CoordCount
+ )
+ ?ASSURE
+ '“очка должна содержать две координаты'
+; // ARRAY : POINT:OF
+
+VOID : POINT:Print
+ ARRAY IN aPoint
+ aPoint
+ .
+; // VOID : POINT:Print
+
+ARRAY : POINT:XY
+ ^ IN aPoint
+ VAR l_Point
+ l_Point :=
+ (
+  aPoint |@
+ )
+ if
+  (
+   l_Point
+   IsArray
+  )
+ then
+  (
+   [
+    for
+    (
+     aPoint |@
+     DO
+    )
+    (
+     INTEGER IN aPx
+     aPx
+    )
+   ]
+   >>>
+   Result
+  )
+ else
+  (
+   [
+    l_Point
+    DO
+   ]
+   >>>
+   Result
+  )
+ (
+  Result
+  Array:Count
+  =
+  c:POINT:CoordCount
+ )
+ ?ASSURE
+ '“очка должна содержать две координаты'
+; // ARRAY : POINT:XY
+
+P1 :=
+POINT:0
+P2 :=
+POINT:0
+P3 :=
+POINT:
+1
+1
+P4 :=
+POINT:XY
+(
+ 2
+ 2
+)
+P5 :=
+POINT:OF
+P4
+P6 :=
+(
+ P3
+ POINT:+
+ P4
+)
+P7 :=
+(
+ P3
+ POINT:-
+ P4
+)
+P8 :=
+(
+ P4
+ POINT:-
+ P3
+)
+P9 :=
+(
+ P4
+ POINT:Neg
+)
+P10 :=
+(
+ P3
+ POINT:Neg
+)
+P1
+POINT:Print
+P2
+POINT:Print
+P3
+POINT:Print
+P4
+POINT:Print
+P5
+POINT:Print
+P6
+POINT:Print
+P7
+POINT:Print
+P8
+POINT:Print
+P9
+POINT:Print
+P10
+POINT:Print
+
+IMMEDIATE VOID TYPE PIXEL
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE PIXEL
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+
+ARRAY VAR P
+IMMEDIATE VOID TYPE PIXEL
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE PIXEL
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+
+ARRAY VAR P
+IMMEDIATE VOID TYPE PIXEL
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE PIXEL
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+ARRAY : POINT:0
+ [
+  0
+  0
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:0
+
+VOID : POINT:Print
+ ARRAY IN aPoint
+; // VOID : POINT:Print
+
+P :=
+POINT:0
+P
+POINT:Print
+
+ARRAY VAR P
+IMMEDIATE VOID TYPE PIXEL
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE PIXEL
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+ARRAY : POINT:0
+ [
+  0
+  0
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:0
+
+VOID : POINT:Print
+ ARRAY IN aPoint
+ aPoint
+ .
+; // VOID : POINT:Print
+
+P :=
+POINT:0
+P
+POINT:Print
+
+ARRAY VAR P1
+ARRAY VAR P2
+IMMEDIATE VOID TYPE PIXEL
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE PIXEL
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+ARRAY : POINT:0
+ [
+  0
+  0
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:0
+
+VOID : POINT:Print
+ ARRAY IN aPoint
+ aPoint
+ .
+; // VOID : POINT:Print
+
+P1 :=
+POINT:0
+P2 :=
+POINT:0
+P1
+POINT:Print
+P2
+POINT:Print
+
+ARRAY VAR P1
+ARRAY VAR P2
+ARRAY VAR P3
+IMMEDIATE VOID TYPE PIXEL
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE PIXEL
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+ARRAY : POINT:
+ ^ IN X
+ ^ IN Y
+ [
+  X |^
+  Y |^
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:
+
+ARRAY : POINT:0
+ [
+  0
+  0
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:0
+
+VOID : POINT:Print
+ ARRAY IN aPoint
+ aPoint
+ .
+; // VOID : POINT:Print
+
+P1 :=
+POINT:0
+P2 :=
+POINT:0
+P3 :=
+POINT:
+1
+1
+P1
+POINT:Print
+P2
+POINT:Print
+
+ARRAY VAR P1
+ARRAY VAR P2
+ARRAY VAR P3
+IMMEDIATE VOID TYPE PIXEL
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE PIXEL
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+ARRAY : POINT:
+ ^ IN X
+ ^ IN Y
+ [
+  X |^
+  Y |^
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:
+
+ARRAY : POINT:0
+ [
+  0
+  0
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:0
+
+VOID : POINT:Print
+ ARRAY IN aPoint
+ aPoint
+ .
+; // VOID : POINT:Print
+
+P1 :=
+POINT:0
+P2 :=
+POINT:0
+P3 :=
+POINT:
+1
+1
+P1
+POINT:Print
+P2
+POINT:Print
+P3
+POINT:Print
+
+ARRAY VAR P1
+ARRAY VAR P2
+ARRAY VAR P3
+ARRAY VAR P4
+IMMEDIATE VOID TYPE PIXEL
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE PIXEL
+
+IMMEDIATE VOID TYPE POINT
+ TtfwValueTypes
+ Ctx:IncludeValueTypes
+; // IMMEDIATE VOID TYPE POINT
+
+ARRAY : POINT:
+ ^ IN aX
+ ^ IN aY
+ [
+  aX |^
+  aY |^
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:
+
+ARRAY : POINT:0
+ [
+  0
+  0
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:0
+
+VOID : POINT:Print
+ ARRAY IN aPoint
+ aPoint
+ .
+; // VOID : POINT:Print
+
+ARRAY : POINT:XY
+ ^ IN aPoint
+ [
+  aPoint |@
+  DO
+ ]
+ >>>
+ Result
+; // ARRAY : POINT:XY
+
+P1 :=
+POINT:0
+P2 :=
+POINT:0
+P3 :=
+POINT:
+1
+1
+P4 :=
+POINT:XY
+(
+ 2
+ 2
+)
+P1
+POINT:Print
+P2
+POINT:Print
+P3
+POINT:Print
+P4
+POINT:Print
 
 1
 2
