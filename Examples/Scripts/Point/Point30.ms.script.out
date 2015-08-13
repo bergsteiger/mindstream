@@ -90,7 +90,7 @@ VOID Test PointTest
   Result
  ; // ARRAY constructor Point:
  
- ARRAY : Point:-
+ ARRAY method Point:-
   ^ IN aPoint
   INTEGER VAR i
   ARRAY IN Self
@@ -116,7 +116,7 @@ VOID Test PointTest
   ]
   >>>
   Result
- ; // ARRAY : Point:-
+ ; // ARRAY method Point:-
  
  ARRAY method Point:+
   ^ IN aPoint
@@ -154,7 +154,7 @@ VOID Test PointTest
   Result
  ; // ARRAY constructor Point:0
  
- ARRAY : Point:Neg
+ ARRAY method Point:Neg
   ARRAY IN Self
   [
    for
@@ -169,7 +169,7 @@ VOID Test PointTest
   ]
   >>>
   Result
- ; // ARRAY : Point:Neg
+ ; // ARRAY method Point:Neg
  
  ARRAY constructor Point:OF
   ^ IN aPoint
@@ -196,11 +196,11 @@ VOID Test PointTest
   '“очка должна содержать две координаты'
  ; // ARRAY constructor Point:OF
  
- VOID : Point:Print
+ VOID method Point:Print
   ARRAY IN aPoint
   aPoint
   .
- ; // VOID : Point:Print
+ ; // VOID method Point:Print
  
  ARRAY constructor Point:XY
   ^ IN aPoint

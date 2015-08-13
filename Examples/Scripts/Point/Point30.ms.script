@@ -74,7 +74,7 @@ Point method Point:+
  [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i Self [i] + Inc i ) ] >>> Result
 ; // Point:+
 
-Point : Point:-
+Point method Point:-
  Point in Self
  Point right aPoint
 
@@ -84,13 +84,13 @@ Point : Point:-
  [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i Self [i] SWAP - Inc i ) ] >>> Result
 ; // Point:-
 
-Point : Point:Neg
+Point method Point:Neg
  Point in Self
 
  [ for Self ( Pixel in aPx aPx 0 SWAP - ) ] >>> Result
 ; // Point:Neg
 
-void : Point:Print
+void method Point:Print
  Point in aPoint
  aPoint Print
 ; // Point:Print
