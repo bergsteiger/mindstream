@@ -15,19 +15,6 @@ Hello world
 30
 -10
 VOID Test PointTest
- : (-)
-  IN aLeft
-  ^ IN aRight
-  (
-   aLeft
-   (-)
-   (
-    aRight
-    DO
-   )
-  )
- ; // : (-)
- 
  class_impl _Object_
  ; // class_impl _Object_
  
