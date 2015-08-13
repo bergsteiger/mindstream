@@ -152,6 +152,8 @@ P10 Point:Print
 
 'Hello ' (+) 'world' Print
 
+'Hello ' (+) 'world' Print
+
 //REDEFINITION
  : (+)
   IN aLeft
@@ -159,8 +161,6 @@ P10 Point:Print
   aLeft (+) ( aRight DO )
   //inherited
  ; // (+)
-
-'Hello ' (+) 'world' Print
 
 REDEFINITION
  : (+)
