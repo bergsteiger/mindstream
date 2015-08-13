@@ -2471,7 +2471,7 @@ VOID PROCEDURE ProcessDirs
   aDir
   (
    (
-    @SELF
+    OPERATOR
     DO
    )
   )
@@ -2480,7 +2480,7 @@ VOID PROCEDURE ProcessDirs
  aDir
  DO
  ProcessItem
- @SELF
+ ProcessDirs
  DumpElement
 ; // VOID PROCEDURE ProcessDirs
 

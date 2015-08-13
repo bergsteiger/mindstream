@@ -951,41 +951,12 @@ VOID : POINT:Print
 
 ARRAY : POINT:XY
  ^ IN aPoint
- VAR l_Point
- l_Point :=
- (
+ [
   aPoint |@
- )
- if
-  (
-   l_Point
-   IsArray
-  )
- then
-  (
-   [
-    for
-    (
-     aPoint |@
-     DO
-    )
-    (
-     INTEGER IN aPx
-     aPx
-    )
-   ]
-   >>>
-   Result
-  )
- else
-  (
-   [
-    l_Point
-    DO
-   ]
-   >>>
-   Result
-  )
+  DO
+ ]
+ >>>
+ Result
  (
   Result
   Array:Count
@@ -3577,7 +3548,7 @@ VOID PROCEDURE ProcessDirs
  aDir
  DO
  ProcessItem
- @SELF
+ ProcessDirs
  DumpElement
 ; // VOID PROCEDURE ProcessDirs
 
@@ -3644,7 +3615,7 @@ VOID PROCEDURE ProcessDirs
  aDir
  DO
  ProcessItem
- @SELF
+ ProcessDirs
  DumpElement
 ; // VOID PROCEDURE ProcessDirs
 
@@ -3694,7 +3665,7 @@ VOID PROCEDURE ProcessDirs
  aDir
  DO
  ProcessItem
- @SELF
+ ProcessDirs
  DumpElement
 ; // VOID PROCEDURE ProcessDirs
 
@@ -3740,7 +3711,7 @@ VOID PROCEDURE ProcessDirs
   aDir
   (
    (
-    @SELF
+    OPERATOR
     DO
    )
   )
@@ -3749,7 +3720,7 @@ VOID PROCEDURE ProcessDirs
  aDir
  DO
  ProcessItem
- @SELF
+ ProcessDirs
  DumpElement
 ; // VOID PROCEDURE ProcessDirs
 
@@ -3794,7 +3765,7 @@ VOID PROCEDURE ProcessDirs
   aDir
   (
    (
-    @SELF
+    ProcessItem
     DO
    )
   )
@@ -3846,7 +3817,7 @@ VOID PROCEDURE ProcessDirs
   aDir
   (
    (
-    @SELF
+    ProcessItem
     DO
    )
   )
@@ -3890,7 +3861,7 @@ VOID PROCEDURE ProcessDirs
   aDir
   (
    (
-    @SELF
+    ProcessItem
     DO
    )
   )
@@ -3946,7 +3917,7 @@ VOID PROCEDURE ProcessDirs
   aDir
   (
    (
-    @SELF
+    ProcessItem
     DO
    )
   )
@@ -4004,7 +3975,7 @@ VOID PROCEDURE ProcessDirs
   aDir
   (
    (
-    @SELF
+    ProcessItem
     DO
    )
   )
@@ -4065,7 +4036,7 @@ VOID PROCEDURE ProcessDirs
   aDir
   (
    (
-    @SELF
+    ProcessItem
     DO
    )
   )
@@ -4125,7 +4096,7 @@ VOID PROCEDURE ProcessDirs
   aDir
   (
    (
-    @SELF
+    ProcessItem
     DO
    )
   )
@@ -4203,7 +4174,7 @@ VOID PROCEDURE ProcessDirs
   aDir
   (
    (
-    @SELF
+    ProcessItem
     DO
    )
   )
@@ -4262,7 +4233,7 @@ VOID PROCEDURE ProcessSubDirsWithMasks
   aDir
   (
    (
-    @SELF
+    ProcessItem
     DO
    )
   )
@@ -6192,7 +6163,7 @@ VOID Test CodeDumpTest
   10
  ]
  .
- @SELF
+ CodeDumpTest
  DumpElement
 ; // VOID Test CodeDumpTest
 

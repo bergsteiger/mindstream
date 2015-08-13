@@ -1,0 +1,1 @@
+for /R W:\common\components\callMSS\Scripts\ %%i in (*.script) do call W:\common\components\callMSS\c.cmd %%i %%~di%%~pi

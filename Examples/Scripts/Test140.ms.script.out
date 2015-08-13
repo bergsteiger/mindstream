@@ -2475,7 +2475,7 @@ VOID PROCEDURE ProcessDirs
  aDir
  DO
  ProcessItem
- @SELF
+ ProcessDirs
  DumpElement
 ; // VOID PROCEDURE ProcessDirs
 
