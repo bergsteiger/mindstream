@@ -10,8 +10,11 @@ VOID : POINT:Print
  aPoint Print
 ; // POINT:Print
 
-POINT VAR P
+POINT VAR P1
+POINT VAR P2
 
-P := POINT:0
+P1 := POINT:0
+P2 := POINT:0
 
-P POINT:Print
+P1 POINT:Print
+P2 POINT:Print
