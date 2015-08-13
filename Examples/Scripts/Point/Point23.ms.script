@@ -2,6 +2,8 @@ USES
  params.ms.dict
 ;
 
+Test PointTest
+
 ARRAY TYPE Object
 WordAlias private PRIVATE
 WordAlias Private PRIVATE
@@ -105,3 +107,13 @@ P7 Point:Print
 P8 Point:Print
 P9 Point:Print
 P10 Point:Print
+
+USES
+ CodeDump.ms.dict
+;
+
+@SELF DumpElement
+
+; // PointTest
+
+PointTest
