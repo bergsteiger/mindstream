@@ -149,6 +149,13 @@ P8 Point:Print
 P9 Point:Print
 P10 Point:Print
 
+//REDEFINITION
+ : (-)
+  IN aLeft
+  right aRight
+  ( aLeft (-) ( aRight DO ) )
+ ; // 
+
 'Hello ' (+) 'world' Print
 
 'Hello ' (+) 'world' Print
