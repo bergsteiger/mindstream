@@ -8,7 +8,11 @@ Test PointTest
 array type Object
 
 INTEGER type Pixel
+// - пиксель
 INTEGER type FieldOffset
+// - смещение поля
+List type PixelList
+// - список пикселей
 
 Object type Point
 
@@ -25,7 +29,7 @@ Point : Point:
 ; // Point:
 
 Point : Point:XY
- List right aPoint
+ PixelList right aPoint
  [ aPoint |@ DO ] >>> Result
  ( Result Array:Count = c:Point:CoordCount ) ?Assure 'Точка должна содержать две координаты'
 ; // Point:XY

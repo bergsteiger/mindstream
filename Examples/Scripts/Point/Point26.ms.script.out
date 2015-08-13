@@ -36,6 +36,11 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Pixel
  
+ IMMEDIATE VOID TYPE PixelList
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE PixelList
+ 
  IMMEDIATE VOID TYPE Point
   TtfwValueTypes
   Ctx:IncludeValueTypes
