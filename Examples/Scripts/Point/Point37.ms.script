@@ -1,26 +1,8 @@
 USES
  NoCapsLock.ms.dict
  params.ms.dict
+ integer.ms.dict
 ;
-
-//REDEFINITION
- : (+)
-  IN aLeft
-  right aRight
-  aLeft (+) ( aRight DO )
-  //inherited
- ; // (+)
-
-REDEFINITION
- : (+)
-  IN aLeft
-  right aRight
-  if ( aLeft IsInt ) then
-   ( aLeft aRight |^ + )
-  else  
-   ( aLeft (+) ( aRight DO ) )
-  //inherited
- ; // (+)
 
 Test PointTest
 
