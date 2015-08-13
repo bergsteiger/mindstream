@@ -31,14 +31,14 @@ Point : Point:XY
 ; // Point:XY
 
 Point : Point:OF
- right aPoint
+ Point right aPoint
  [ for ( aPoint |@ DO ) ( Pixel in aPx aPx ) ] >>> Result
  ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
 ; // Point:OF
 
 Point : Point:+
  Point in Self
- right aPoint
+ Point right aPoint
 
  FieldOffset var i
  i := 0
@@ -48,7 +48,7 @@ Point : Point:+
 
 Point : Point:-
  Point in Self
- right aPoint
+ Point right aPoint
 
  FieldOffset var i
  i := 0
