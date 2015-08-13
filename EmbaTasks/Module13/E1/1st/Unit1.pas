@@ -41,7 +41,7 @@ begin
 
   for Index := 0 to Pred(Length(InStr)) do
     if not (InStr[Index] in ['0' .. '9']) then
-      ResultStr := ResultStr + InStr[Index];
+      ResultStr := PChar(ResultStr) + InStr[Index];
 
   edtOut.Text := ResultStr;
 end;
