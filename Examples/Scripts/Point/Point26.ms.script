@@ -19,13 +19,13 @@ Point : Point:0
 ; // Point:0
 
 Point : Point:
- right aX
- right aY
+ Pixel right aX
+ Pixel right aY
  [ aX |^ aY |^ ] >>> Result
 ; // Point:
 
 Point : Point:XY
- right aPoint
+ List right aPoint
  [ aPoint |@ DO ] >>> Result
  ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
 ; // Point:XY
