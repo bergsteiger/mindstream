@@ -14,12 +14,7 @@ POINT : POINT:
 
 POINT : POINT:XY
  ^ IN aPoint
- VAR l_Point
- l_Point := ( aPoint |@ )
- if ( l_Point IsArray ) then
-  ( [ for ( aPoint |@ DO ) ( PIXEL IN aPx aPx ) ] >>> Result )
- else
-  ( [ l_Point DO ] >>> Result )
+ [ aPoint |@ DO ] >>> Result
  ( Result Array:Count = c:POINT:CoordCount ) ?ASSURE '“очка должна содержать две координаты'
 ; // POINT:XY
 
