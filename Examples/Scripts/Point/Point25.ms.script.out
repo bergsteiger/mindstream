@@ -9,24 +9,8 @@
 [ -2 -2 ]
 [ -1 -1 ]
 VOID Test PointTest
- VOID CALLER OPERATOR ?ASSURE
-  BOOLEAN IN aCondition
-  ^ IN aMessage
-  TtfwWord IN Caller
-  aCondition
-  !
-  ?
-  BEGIN
-   aMessage
-   Caller
-   private:ERROR
-  END
- ; // VOID CALLER OPERATOR ?ASSURE
- 
  INTEGER CONST c:Point:CoordCount
   2
- CONST
- CONST
  IMMEDIATE VOID TYPE FieldOffset
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -197,66 +181,6 @@ VOID Test PointTest
   ?ASSURE
   '“очка должна содержать две координаты'
  ; // ARRAY : Point:XY
- 
- IMMEDIATE VOID OPERATOR PRIVATE
-  TtfwAccessType::tfw_atPrivate
-  Ctx:IncludeAccessType
- ; // IMMEDIATE VOID OPERATOR PRIVATE
- 
- IMMEDIATE VOID OPERATOR PRIVATE
-  TtfwAccessType::tfw_atPrivate
-  Ctx:IncludeAccessType
- ; // IMMEDIATE VOID OPERATOR PRIVATE
- 
- IMMEDIATE OPERATOR TYPE
-  ^L IN aName
-  Ctx:ValueTypes
-  Ctx:ClearTypeInfo
-  TYPE
-  Ctx:SetWordProducerForCompiledClass
-  'IMMEDIATE'
-  Ctx:Parser:PushSymbol
-  'VOID'
-  Ctx:Parser:PushSymbol
-  'axiom:operator'
-  Ctx:Parser:PushSymbol
-  aName
-  |N
-  Ctx:Parser:PushSymbol
-  'axiom:CompileSetValueTypes'
-  Ctx:Parser:PushSymbol
-  ';'
-  Ctx:Parser:PushSymbol
- ; // IMMEDIATE OPERATOR TYPE
- 
- IMMEDIATE OPERATOR TYPE
-  ^L IN aName
-  Ctx:ValueTypes
-  Ctx:ClearTypeInfo
-  TYPE
-  Ctx:SetWordProducerForCompiledClass
-  'IMMEDIATE'
-  Ctx:Parser:PushSymbol
-  'VOID'
-  Ctx:Parser:PushSymbol
-  'axiom:operator'
-  Ctx:Parser:PushSymbol
-  aName
-  |N
-  Ctx:Parser:PushSymbol
-  'axiom:CompileSetValueTypes'
-  Ctx:Parser:PushSymbol
-  ';'
-  Ctx:Parser:PushSymbol
- ; // IMMEDIATE OPERATOR TYPE
- 
- IMMEDIATE VOID OPERATOR VAR
-  ^L IN aName
-  aName
-  |N
-  VAR
-  axiom:DefineVar
- ; // IMMEDIATE VOID OPERATOR VAR
  
  P1 :=
  Point:0

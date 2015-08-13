@@ -1,18 +1,11 @@
 USES
+ NoCapsLock.ms.dict
  params.ms.dict
 ;
 
 Test PointTest
 
-ARRAY TYPE Object
-WordAlias private PRIVATE
-WordAlias Private PRIVATE
-WordAlias type TYPE
-WordAlias Type TYPE
-WordAlias var VAR
-WordAlias ?Assure ?ASSURE
-WordAlias Const CONST
-WordAlias const Const
+array type Object
 
 INTEGER type Pixel
 INTEGER type FieldOffset
