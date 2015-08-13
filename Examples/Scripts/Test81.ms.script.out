@@ -3216,6 +3216,24 @@ ProcessAnySubDirsWithMasks
 ]
 .
 
+ProcessAnySubDirsWithMasks
+[
+ '..\..\'
+ '..\'
+]
+[
+ '*.ms.script'
+ '*.ms.dict'
+ '*.pas'
+ '*.txt'
+ '*.inc'
+ '*.fmx'
+ '*.xml'
+ '*.dpr'
+ '*.co'
+]
+.
+
 BOOLEAN FUNCTION IsEven
  INTEGER IN aValue
  aValue

@@ -4001,6 +4001,11 @@ VOID OPERATOR :: PROCEDURE : IterateFilesWithMask
  ^ OPERATOR :: IN : aLambda
  ^ OPERATOR :: IN : aMask
 ; // IterateFilesWithMask
+VOID OPERATOR :: PROCEDURE : ProcessAnySubDirsWithMasks
+ ^ OPERATOR :: IN : aDirMasks
+ ^ OPERATOR :: IN : aFileMasks
+ ^ OPERATOR :: IN : aLambda
+; // ProcessAnySubDirsWithMasks
 VOID OPERATOR :: PROCEDURE : ProcessSubDirsWithMasks
  ^ OPERATOR :: IN : aLambda
  ^ OPERATOR :: IN : aMaskArray
