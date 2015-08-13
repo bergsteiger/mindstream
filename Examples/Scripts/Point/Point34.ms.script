@@ -5,7 +5,7 @@ USES
 
 Test PointTest
 
-IMMEDIATE VOID operator _class_
+VOID IMMEDIATE operator _class_
 // - имплементация класса, пока "фиктивная"
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
