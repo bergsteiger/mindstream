@@ -1,0 +1,147 @@
+USES
+ NoCapsLock.ms.dict
+ params.ms.dict
+;
+
+Test PointTest
+
+IMMEDIATE VOID operator _class_
+// - имплементация класса, пока "фиктивная"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ ':' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // _class_
+
+VOID IMMEDIATE OPERATOR class
+ Literal IN aName
+ 'array' Ctx:Parser:PushSymbol
+ 'type' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // class
+
+class Object
+
+INTEGER type FieldOffset
+// - смещение поля
+
+IMMEDIATE VOID operator constructor
+// - конструктор объектов, пока "фиктивный"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ ':' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // constructor
+
+IMMEDIATE VOID operator method
+// - метод объекта, пока "фиктивный"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ ':' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // method
+
+INTEGER type Pixel
+// - пиксель
+List type PixelList
+// - список пикселей
+
+class Point
+
+private Const c:Point:CoordCount 2
+
+Point constructor Point:0
+ [ 0 0 ] >>> Result
+; // Point:0
+
+Point constructor Point:
+ Pixel right aX
+ Pixel right aY
+ [ aX |^ aY |^ ] >>> Result
+; // Point:
+
+Point constructor Point:XY
+ PixelList right aPoint
+ [ aPoint |@ DO ] >>> Result
+ ( Result Array:Count = c:Point:CoordCount ) ?Assure 'Точка должна содержать две координаты'
+; // Point:XY
+
+Point constructor Point:OF
+ Point right aPoint
+ [ for ( aPoint |@ DO ) ( Pixel in aPx aPx ) ] >>> Result
+ ( Result Array:Count = c:Point:CoordCount ) ?Assure 'Точка должна содержать две координаты'
+; // Point:OF
+
+Point method Point:+
+ Point in Self
+ Point right aPoint
+
+ FieldOffset var i
+ i := 0
+
+ [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i Self [i] + Inc i ) ] >>> Result
+; // Point:+
+
+Point method Point:-
+ Point in Self
+ Point right aPoint
+
+ FieldOffset var i
+ i := 0
+
+ [ for ( aPoint |@ DO ) ( Pixel in aPx aPx i Self [i] SWAP - Inc i ) ] >>> Result
+; // Point:-
+
+Point method Point:Neg
+ Point in Self
+
+ [ for Self ( Pixel in aPx aPx 0 SWAP - ) ] >>> Result
+; // Point:Neg
+
+void method Point:Print
+ Point in aPoint
+ aPoint Print
+; // Point:Print
+
+Point var P1
+Point var P2
+Point var P3
+Point var P4
+Point var P5
+Point var P6
+Point var P7
+Point var P8
+Point var P9
+Point var P10
+
+P1 := Point:0
+P2 := Point:0
+P3 := Point: 1 1
+P4 := Point:XY ( 2 2 )
+P5 := Point:OF P4
+P6 := ( P3 Point:+ P4 )
+P7 := ( P3 Point:- P4 )
+P8 := ( P4 Point:- P3 )
+P9 := ( P4 Point:Neg )
+P10 := ( P3 Point:Neg )
+
+P1 Point:Print
+P2 Point:Print
+P3 Point:Print
+P4 Point:Print
+P5 Point:Print
+P6 Point:Print
+P7 Point:Print
+P8 Point:Print
+P9 Point:Print
+P10 Point:Print
+
+USES
+ CodeDump.ms.dict
+;
+
+@SELF DumpElement
+
+; // PointTest
+
+PointTest
