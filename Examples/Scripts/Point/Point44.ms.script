@@ -69,6 +69,12 @@ IMMEDIATE VOID operator readonly
 
 class Object
 
+: FieldByOffset
+ Object in Self
+ FieldOffset right anOffset
+ anOffset |^ Self [i]
+; // FieldByOffset
+
 INTEGER type Pixel
 // - пиксель
 List type PixelList
@@ -104,7 +110,7 @@ Point constructor Point:OF
 
 Pixel readonly Point:X
  Point in Self
- c:Point:Offset:X Self [i] >>> Result
+ Self FieldByOffset c:Point:Offset:X >>> Result
 ; // Point:X
 
 Pixel readonly Point:Y

@@ -87,6 +87,14 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR constructor
  
+ : FieldByOffset
+  ^ IN anOffset
+  ARRAY IN Self
+  anOffset |^
+  Self
+  [i]
+ ; // : FieldByOffset
+ 
  IMMEDIATE VOID TYPE FieldOffset
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -260,9 +268,9 @@ VOID Test PointTest
  
  INTEGER readonly Point:X
   ARRAY IN Self
-  c:Point:Offset:X
   Self
-  [i]
+  FieldByOffset
+  c:Point:Offset:X
   >>>
   Result
  ; // INTEGER readonly Point:X
