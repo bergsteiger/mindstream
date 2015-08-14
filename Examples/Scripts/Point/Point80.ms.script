@@ -137,9 +137,10 @@ VOID IMMEDIATE operator get-member
 
 VOID IMMEDIATE operator read
  Literal IN aName
+ 'Self' Ctx:Parser:PushSymbol 
  aName |N do-get-member
- //'>>>' Ctx:Parser:PushSymbol 
- //'Result' Ctx:Parser:PushSymbol
+ '>>>' Ctx:Parser:PushSymbol 
+ 'Result' Ctx:Parser:PushSymbol
  //';' Ctx:Parser:PushSymbol
 ; // read
 

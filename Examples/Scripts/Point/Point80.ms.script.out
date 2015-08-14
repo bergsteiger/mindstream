@@ -266,8 +266,11 @@ VOID Test PointTest
  
  TtfwWord readonly Object:classX
   Object IN Self
+  Self
   FieldByOffset
   c:Object:Offset:VMT
+  >>>
+  Result
  ; // TtfwWord readonly Object:classX
  
  Point VAR P1
@@ -451,9 +454,15 @@ VOID Test PointTest
  
  IMMEDIATE VOID OPERATOR read
   ^L IN aName
+  'Self'
+  Ctx:Parser:PushSymbol
   aName
   |N
   do-get-member
+  '>>>'
+  Ctx:Parser:PushSymbol
+  'Result'
+  Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR read
  
  IMMEDIATE VOID OPERATOR readonly
