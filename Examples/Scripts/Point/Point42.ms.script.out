@@ -275,6 +275,17 @@ VOID Test PointTest
   '“очка должна содержать две координаты'
  ; // ARRAY constructor Point:XY
  
+ IMMEDIATE VOID OPERATOR readonly
+  ^L IN aName
+  readonly
+  Ctx:SetWordProducerForCompiledClass
+  ':'
+  Ctx:Parser:PushSymbol
+  aName
+  |N
+  Ctx:Parser:PushSymbol
+ ; // IMMEDIATE VOID OPERATOR readonly
+ 
  P1 :=
  Point:0
  P2 :=

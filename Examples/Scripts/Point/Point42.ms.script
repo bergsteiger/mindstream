@@ -61,6 +61,14 @@ IMMEDIATE VOID operator method
  aName |N Ctx:Parser:PushSymbol
 ; // method
 
+IMMEDIATE VOID operator readonly
+// - read-only свойство объекта, пока "фиктивное"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ ':' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // readonly
+
 INTEGER type Pixel
 // - пиксель
 List type PixelList
