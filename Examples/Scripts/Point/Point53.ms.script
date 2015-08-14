@@ -67,6 +67,8 @@ IMMEDIATE VOID operator readonly
  @SELF Ctx:SetWordProducerForCompiledClass
  ':' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
+ 'in' Ctx:Parser:PushSymbol
+ 'Self' Ctx:Parser:PushSymbol
 ; // readonly
 
 class Object
@@ -106,12 +108,10 @@ Point constructor Point:XY
 ; // Point:XY
 
 Pixel readonly Point:X
- Point in Self
  Self FieldByOffset c:Point:Offset:X >>> Result
 ; // Point:X
 
 Pixel readonly Point:Y
- Point in Self
  Self FieldByOffset c:Point:Offset:Y >>> Result
 ; // Point:Y
 

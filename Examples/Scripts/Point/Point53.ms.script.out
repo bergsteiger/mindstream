@@ -265,7 +265,7 @@ VOID Test PointTest
  ; // VOID method Point:Print
  
  INTEGER readonly Point:X
-  ARRAY IN Self
+  IN Self
   Self
   FieldByOffset
   c:Point:Offset:X
@@ -298,7 +298,7 @@ VOID Test PointTest
  ; // ARRAY constructor Point:XY
  
  INTEGER readonly Point:Y
-  ARRAY IN Self
+  IN Self
   Self
   FieldByOffset
   c:Point:Offset:Y
@@ -314,6 +314,10 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
   aName
   |N
+  Ctx:Parser:PushSymbol
+  'in'
+  Ctx:Parser:PushSymbol
+  'Self'
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR readonly
  
