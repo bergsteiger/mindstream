@@ -221,16 +221,23 @@ VOID Test PointTest
  
  ARRAY method Point:Neg
   ARRAY IN Self
-  [
-   for
-   Self
+  Point:
+  (
+   0
+   (-)
    (
-    INTEGER IN aPx
-    0
-    (-)
-    aPx
+    Self
+    Point:X
    )
-  ]
+  )
+  (
+   0
+   (-)
+   (
+    Self
+    Point:Y
+   )
+  )
   >>>
   Result
  ; // ARRAY method Point:Neg
