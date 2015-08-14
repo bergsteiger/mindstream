@@ -137,21 +137,21 @@ ClassFieldOffset X 1
 ClassFieldOffset Y 2
 ClassInstanceSize
 
-constructor Point:
+constructor Point::
  Pixel right aX
  Pixel right aY
  new[ aX |^ aY |^ ] >>> Result
-; // Point:
+; // Point::
 
 constructor Point:0
- Point: 0 0 >>> Result
+ Point:: 0 0 >>> Result
 ; // Point:0
 
 constructor Point:XY
  PixelList right aPoint
  array var Points
  [ aPoint |@ DO ] >>> Points
- Point: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) >>> Result
+ Point:: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) >>> Result
 ; // Point:XY
 
 Pixel readonly X
@@ -164,17 +164,17 @@ Pixel readonly Y
 
 constructor Point:OF
  Point right aPoint
- Point: ( aPoint |^ Point:X ) ( aPoint |^ Point:Y ) >>> Result
+ Point:: ( aPoint |^ Point:X ) ( aPoint |^ Point:Y ) >>> Result
 ; // Point:OF
 
 Point method +
  Point right aPoint
 
- Point: ( ( Self Point:X ) (+) ( aPoint |^ Point:X ) ) ( ( Self Point:Y ) (+) ( aPoint |^ Point:Y ) ) >>> Result
+ Point:: ( ( Self Point:X ) (+) ( aPoint |^ Point:X ) ) ( ( Self Point:Y ) (+) ( aPoint |^ Point:Y ) ) >>> Result
 ; // +
 
 Point method Neg
- Point: Neg ( Self Point:X ) Neg ( Self Point:Y ) >>> Result
+ Point:: Neg ( Self Point:X ) Neg ( Self Point:Y ) >>> Result
 ; // Neg
 
 Point method -
@@ -200,7 +200,7 @@ Point var P10
 
 P1 := Point:0
 P2 := Point:0
-P3 := Point: 1 1
+P3 := Point:: 1 1
 P4 := Point:XY ( 2 2 )
 P5 := Point:OF P4
 P6 := ( P3 Point:+ P4 )

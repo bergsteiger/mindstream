@@ -256,19 +256,6 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Point
  
- ARRAY constructor Point:
-  ^ IN aX
-  ^ IN aY
-  [
-   @
-   _Point_
-   aX |^
-   aY |^
-  ]
-  >>>
-  Result
- ; // ARRAY constructor Point:
- 
  ARRAY method Point:-
   ^ IN aPoint
   ARRAY IN Self
@@ -285,10 +272,23 @@ VOID Test PointTest
   Result
  ; // ARRAY method Point:-
  
+ ARRAY constructor Point::
+  ^ IN aX
+  ^ IN aY
+  [
+   @
+   _Point_
+   aX |^
+   aY |^
+  ]
+  >>>
+  Result
+ ; // ARRAY constructor Point::
+ 
  ARRAY method Point:+
   ^ IN aPoint
   ARRAY IN Self
-  Point:
+  Point::
   (
    (
     Self
@@ -316,7 +316,7 @@ VOID Test PointTest
  ; // ARRAY method Point:+
  
  ARRAY constructor Point:0
-  Point:
+  Point::
   0
   0
   >>>
@@ -325,7 +325,7 @@ VOID Test PointTest
  
  ARRAY method Point:Neg
   ARRAY IN Self
-  Point:
+  Point::
   Neg
   (
    Self
@@ -342,7 +342,7 @@ VOID Test PointTest
  
  ARRAY constructor Point:OF
   ^ IN aPoint
-  Point:
+  Point::
   (
    aPoint |^
    Point:X
@@ -379,7 +379,7 @@ VOID Test PointTest
   ]
   >>>
   Points
-  Point:
+  Point::
   (
    Points
    FieldByOffset
@@ -436,7 +436,7 @@ VOID Test PointTest
  P2 :=
  Point:0
  P3 :=
- Point:
+ Point::
  1
  1
  P4 :=
