@@ -25,6 +25,9 @@ VOID IMMEDIATE OPERATOR class_impl
 // //';' Ctx:Parser:PushSymbol
 //; // class_imp
 
+STRING var g_CurrentClass
+g_CurrentClass := ''
+
 VOID IMMEDIATE OPERATOR class
  Literal IN aName
  //'class_impl' Ctx:Parser:PushSymbol

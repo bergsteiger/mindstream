@@ -102,6 +102,7 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE FieldOffset
  
+ STRING VAR g_CurrentClass
  IMMEDIATE VOID OPERATOR method
   ^L IN aName
   method
@@ -321,6 +322,8 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR readonly
  
+ g_CurrentClass :=
+ ''
  P1 :=
  Point:0
  P2 :=
