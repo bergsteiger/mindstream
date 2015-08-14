@@ -61,6 +61,12 @@ IMMEDIATE VOID operator constructor
  [ g_CurrentClass ':' aName |N ] strings:Cat Ctx:Parser:PushSymbol
 ; // constructor
 
+PRIVATE VOID operator MakeMethodSignature
+ STRING IN aName
+ ':' Ctx:Parser:PushSymbol
+ [ g_CurrentClass ':' aName ] strings:Cat Ctx:Parser:PushSymbol
+; // MakeMethodSignature
+
 PRIVATE VOID operator MakeSelfParam
  g_CurrentClass Ctx:Parser:PushSymbol
  'in' Ctx:Parser:PushSymbol
@@ -71,8 +77,7 @@ IMMEDIATE VOID operator method
 // - метод объекта, пока "фиктивный"
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
- ':' Ctx:Parser:PushSymbol
- [ g_CurrentClass ':' aName |N ] strings:Cat Ctx:Parser:PushSymbol
+ aName |N MakeMethodSignature
  MakeSelfParam
 ; // method
 
@@ -80,8 +85,7 @@ IMMEDIATE VOID operator readonly
 // - read-only свойство объекта, пока "фиктивное"
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
- ':' Ctx:Parser:PushSymbol
- [ g_CurrentClass ':' aName |N ] strings:Cat Ctx:Parser:PushSymbol
+ aName |N MakeMethodSignature
  MakeSelfParam
 ; // readonly
 

@@ -142,6 +142,19 @@ VOID Test PointTest
  STRING VAR g_CurrentClass
  STRING VAR g_CurrentClassImpl
  ARRAY VAR l_Points
+ PRIVATE VOID OPERATOR MakeMethodSignature
+  STRING IN aName
+  ':'
+  Ctx:Parser:PushSymbol
+  [
+   g_CurrentClass
+   ':'
+   aName
+  ]
+  strings:Cat
+  Ctx:Parser:PushSymbol
+ ; // PRIVATE VOID OPERATOR MakeMethodSignature
+ 
  PRIVATE VOID OPERATOR MakeSelfParam
   g_CurrentClass
   Ctx:Parser:PushSymbol
@@ -192,16 +205,9 @@ VOID Test PointTest
   ^L IN aName
   method
   Ctx:SetWordProducerForCompiledClass
-  ':'
-  Ctx:Parser:PushSymbol
-  [
-   g_CurrentClass
-   ':'
-   aName
-   |N
-  ]
-  strings:Cat
-  Ctx:Parser:PushSymbol
+  aName
+  |N
+  MakeMethodSignature
   MakeSelfParam
  ; // IMMEDIATE VOID OPERATOR method
  
@@ -424,16 +430,9 @@ VOID Test PointTest
   ^L IN aName
   readonly
   Ctx:SetWordProducerForCompiledClass
-  ':'
-  Ctx:Parser:PushSymbol
-  [
-   g_CurrentClass
-   ':'
-   aName
-   |N
-  ]
-  strings:Cat
-  Ctx:Parser:PushSymbol
+  aName
+  |N
+  MakeMethodSignature
   MakeSelfParam
  ; // IMMEDIATE VOID OPERATOR readonly
  
