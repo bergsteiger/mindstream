@@ -104,7 +104,7 @@ private Const c:Point:CoordCount 2
 constructor Point:
  Pixel right aX
  Pixel right aY
- [ aX |^ aY |^ ] >>> Result
+ new[ aX |^ aY |^ ] >>> Result
 ; // Point:
 
 constructor Point:0
