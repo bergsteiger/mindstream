@@ -1,18 +1,9 @@
-WordAlias RIGHT ^
+USES
+// params.ms.dict
+ CodeDump.ms.dict
+; // USES
 
-VOID IMMEDIATE operator RightParam
- 'RIGHT' Ctx:Parser:PushSymbol
- 'IN' Ctx:Parser:PushSymbol
-; // RightParam
-
-WordAlias in IN
-
-IMMEDIATE VOID operator Literal
- ^L IN aName
- @SELF Ctx:SetWordProducerForCompiledClass
- '^L' Ctx:Parser:PushSymbol
- aName |N Ctx:Parser:PushSymbol
-; // Literal
+Test RighTest
 
 VOID IMMEDIATE operator right
  Literal IN aName
@@ -39,3 +30,9 @@ VOID IMMEDIATE operator right
  //l_Name Ctx:Parser:PushSymbol
  //l_MangledName Ctx:Parser:PushSymbol
 ; // right
+
+ @SELF DumpElement
+
+; //RighTest
+
+RighTest
