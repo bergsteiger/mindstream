@@ -84,6 +84,8 @@ VOID Test PointTest
   ^L IN aName
   constructor
   Ctx:SetWordProducerForCompiledClass
+  g_CurrentClass
+  Ctx:Parser:PushSymbol
   ':'
   Ctx:Parser:PushSymbol
   aName

@@ -51,6 +51,7 @@ IMMEDIATE VOID operator constructor
 // - конструктор объектов, пока "фиктивный"
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
+ g_CurrentClass Ctx:Parser:PushSymbol
  ':' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
 ; // constructor
