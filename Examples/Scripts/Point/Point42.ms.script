@@ -102,7 +102,7 @@ Point constructor Point:OF
  ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
 ; // Point:OF
 
-Pixel method Point:X
+Pixel readonly Point:X
  Point in Self
  c:Point:Offset:X Self [i] >>> Result
 ; // Point:X

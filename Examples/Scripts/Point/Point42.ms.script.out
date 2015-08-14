@@ -248,14 +248,14 @@ VOID Test PointTest
   .
  ; // VOID method Point:Print
  
- INTEGER method Point:X
+ INTEGER readonly Point:X
   ARRAY IN Self
   c:Point:Offset:X
   Self
   [i]
   >>>
   Result
- ; // INTEGER method Point:X
+ ; // INTEGER readonly Point:X
  
  ARRAY constructor Point:XY
   ^ IN aPoint
