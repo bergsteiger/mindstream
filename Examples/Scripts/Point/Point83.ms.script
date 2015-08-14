@@ -207,6 +207,12 @@ void method Print
  [ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat Print
 ; // Print
 
+USES
+ CodeDump.ms.dict
+;
+
+@SELF DumpElement
+
 Point var P1
 Point var P2
 Point var P3
@@ -254,12 +260,6 @@ for l_Points ( Object:ClassName Print )
 0 (-) 10 Print
 Neg 10 Print
 Neg -10 Print
-
-USES
- CodeDump.ms.dict
-;
-
-@SELF DumpElement
 
 ; // PointTest
 
