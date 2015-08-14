@@ -211,17 +211,7 @@ array var l_Points
 
 for l_Points Point:Print
 for l_Points ( Point:X Print )
-
-P1 Point:Y Print
-P2 Point:Y Print
-P3 Point:Y Print
-P4 Point:Y Print
-P5 Point:Y Print
-P6 Point:Y Print
-P7 Point:Y Print
-P8 Point:Y Print
-P9 Point:Y Print
-P10 Point:Y Print
+for l_Points ( Point:Y Print )
 
 'Hello ' (+) 'world' Print
 

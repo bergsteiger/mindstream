@@ -460,36 +460,12 @@ VOID Test PointTest
   Point:X
   .
  )
- P1
- Point:Y
- .
- P2
- Point:Y
- .
- P3
- Point:Y
- .
- P4
- Point:Y
- .
- P5
- Point:Y
- .
- P6
- Point:Y
- .
- P7
- Point:Y
- .
- P8
- Point:Y
- .
- P9
- Point:Y
- .
- P10
- Point:Y
- .
+ for
+ l_Points
+ (
+  Point:Y
+  .
+ )
  'Hello '
  (+)
  'world'
