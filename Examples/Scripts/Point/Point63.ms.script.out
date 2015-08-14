@@ -1,5 +1,6 @@
 [ TkwCompiledProcedure 0 0 ]
 [ TkwCompiledProcedure 0 0 ]
+[ TkwCompiledProcedure 0 0 ]
 [ TkwCompiledProcedure 1 1 ]
 [ TkwCompiledProcedure 2 2 ]
 [ TkwCompiledProcedure 2 2 ]
@@ -186,6 +187,15 @@ VOID Test PointTest
   TtfwValueTypes
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Object
+ 
+ TtfwWord readonly Offset:class
+  ARRAY IN Self
+  Self
+  FieldByOffset
+  c:Object:Offset:VMT
+  >>>
+  Result
+ ; // TtfwWord readonly Offset:class
  
  ARRAY VAR P1
  ARRAY VAR P10
@@ -427,6 +437,11 @@ VOID Test PointTest
   P3
   Point:Neg
  )
+ for
+ [
+  P1
+ ]
+ Point:Print
  P1
  Point:Print
  P2

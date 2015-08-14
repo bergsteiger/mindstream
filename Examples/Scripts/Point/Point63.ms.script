@@ -109,14 +109,18 @@ IMMEDIATE VOID operator ClassInstanceSize
 
 class Object
 
-ClassFieldOffset VMT 0
-ClassInstanceSize
-
 : FieldByOffset
  Object in Self
  FieldOffset right anOffset
  anOffset |^ Self [i]
 ; // FieldByOffset
+
+ClassFieldOffset VMT 0
+ClassInstanceSize
+
+TtfwWord readonly Offset:class
+ Self FieldByOffset c:Object:Offset:VMT >>> Result
+; // Offset:class
 
 INTEGER type Pixel
 // - пиксель
@@ -201,6 +205,7 @@ P8 := ( P4 Point:- P3 )
 P9 := ( P4 Point:Neg )
 P10 := ( P3 Point:Neg )
 
+for [ P1 ] Point:Print
 P1 Point:Print
 P2 Point:Print
 P3 Point:Print
