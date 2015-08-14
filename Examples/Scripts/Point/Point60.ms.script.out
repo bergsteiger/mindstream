@@ -1,13 +1,13 @@
-[ 0 0 ]
-[ 0 0 ]
-[ 1 1 ]
-[ 2 2 ]
-[ 2 2 ]
-[ 3 3 ]
-[ -1 -1 ]
-[ 1 1 ]
-[ -2 -2 ]
-[ -1 -1 ]
+[ TkwCompiledProcedure 0 0 ]
+[ TkwCompiledProcedure 0 0 ]
+[ TkwCompiledProcedure 1 1 ]
+[ TkwCompiledProcedure 2 2 ]
+[ TkwCompiledProcedure 2 2 ]
+[ TkwCompiledProcedure 3 3 ]
+[ TkwCompiledProcedure -1 -1 ]
+[ TkwCompiledProcedure 1 1 ]
+[ TkwCompiledProcedure -2 -2 ]
+[ TkwCompiledProcedure -1 -1 ]
 0
 0
 1
@@ -44,11 +44,11 @@ VOID Test PointTest
  ; // class_impl _Point_
  
  INTEGER CONST c:Point:CoordCount
-  2
+  3
  INTEGER CONST c:Point:Offset:X
-  0
- INTEGER CONST c:Point:Offset:Y
   1
+ INTEGER CONST c:Point:Offset:Y
+  2
  IMMEDIATE VOID OPERATOR class
   ^L IN aName
   aName
@@ -131,6 +131,10 @@ VOID Test PointTest
  IMMEDIATE VOID OPERATOR new[
   '['
   Ctx:Parser:PushSymbol
+  '@'
+  Ctx:Parser:PushSymbol
+  g_CurrentClassImpl
+  Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR new[
  
  IMMEDIATE VOID TYPE Object
@@ -167,6 +171,8 @@ VOID Test PointTest
   ^ IN aX
   ^ IN aY
   [
+   @
+   _Point_
    aX |^
    aY |^
   ]

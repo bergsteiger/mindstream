@@ -83,7 +83,8 @@ IMMEDIATE VOID operator readonly
 
 IMMEDIATE VOID operator new[
  '[' Ctx:Parser:PushSymbol
- //'@' Ctx:Parser:PushSymbol
+ '@' Ctx:Parser:PushSymbol
+ g_CurrentClassImpl Ctx:Parser:PushSymbol
 ; // new[
 
 class Object
@@ -101,9 +102,9 @@ List type PixelList
 
 class Point
 
-private Const c:Point:Offset:X 0
-private Const c:Point:Offset:Y 1
-private Const c:Point:CoordCount 2
+private Const c:Point:Offset:X 1
+private Const c:Point:Offset:Y 2
+private Const c:Point:CoordCount 3
 
 constructor Point:
  Pixel right aX
