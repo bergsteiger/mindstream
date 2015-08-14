@@ -38,16 +38,16 @@ TkwCompiledProcedure
 TkwCompiledProcedure
 TkwCompiledProcedure
 TkwCompiledProcedure
-_:Point
-_:Point
-_:Point
-_:Point
-_:Point
-_:Point
-_:Point
-_:Point
-_:Point
-_:Point
+Point
+Point
+Point
+Point
+Point
+Point
+Point
+Point
+Point
+Point
 Hello world
 Hello world
 Hello world
@@ -259,8 +259,11 @@ VOID Test PointTest
   Self
   Object:class
   |N
+  ':'
+  string:Split
   >>>
   Result
+  DROP
  ; // STRING readonly Object:ClassName
  
  Point VAR P1

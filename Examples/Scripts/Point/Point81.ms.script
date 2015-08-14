@@ -150,7 +150,7 @@ members-end
 TtfwWord readonly class read VMT
 
 STRING readonly ClassName
- Self Object:class |N >>> Result
+ Self Object:class |N ':' string:Split >>> Result DROP
 ; // Object:ClassName
 
 INTEGER type Pixel
