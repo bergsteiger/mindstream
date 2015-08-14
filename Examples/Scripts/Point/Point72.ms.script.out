@@ -155,8 +155,13 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
   ':'
   Ctx:Parser:PushSymbol
-  aName
-  |N
+  [
+   g_CurrentClass
+   ':'
+   aName
+   |N
+  ]
+  strings:Cat
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR constructor
  

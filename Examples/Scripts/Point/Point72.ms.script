@@ -56,7 +56,7 @@ IMMEDIATE VOID operator constructor
  @SELF Ctx:SetWordProducerForCompiledClass
  g_CurrentClass Ctx:Parser:PushSymbol
  ':' Ctx:Parser:PushSymbol
- aName |N Ctx:Parser:PushSymbol
+ [ g_CurrentClass ':' aName |N ] strings:Cat Ctx:Parser:PushSymbol
 ; // constructor
 
 IMMEDIATE VOID operator method
@@ -137,22 +137,22 @@ ClassFieldOffset X 1
 ClassFieldOffset Y 2
 ClassInstanceSize
 
-constructor Point::
+constructor :
  Pixel right aX
  Pixel right aY
  new[ aX |^ aY |^ ] >>> Result
-; // Point::
+; // :
 
-constructor Point:0
+constructor 0
  Point:: 0 0 >>> Result
-; // Point:0
+; // 0
 
-constructor Point:XY
+constructor XY
  PixelList right aPoint
  array var Points
  [ aPoint |@ DO ] >>> Points
  Point:: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) >>> Result
-; // Point:XY
+; // XY
 
 Pixel readonly X
  Self FieldByOffset c:Point:Offset:X >>> Result
@@ -162,10 +162,10 @@ Pixel readonly Y
  Self FieldByOffset c:Point:Offset:Y >>> Result
 ; // Y
 
-constructor Point:OF
+constructor OF
  Point right aPoint
  Point:: ( aPoint |^ Point:X ) ( aPoint |^ Point:Y ) >>> Result
-; // Point:OF
+; // OF
 
 Point method +
  Point right aPoint
