@@ -1,0 +1,224 @@
+USES
+ NoCapsLock.ms.dict
+ params.ms.dict
+ integer.ms.dict
+;
+
+//REDEFINITION
+ : (-)
+  IN aLeft
+  right aRight
+  ( aLeft (-) ( aRight DO ) )
+ ; // 
+
+Test PointTest
+
+VOID IMMEDIATE OPERATOR class_impl
+; // class_impl
+
+//VOID IMMEDIATE OPERATOR class_impl
+//// - имплементаци€ класса, пока "фиктивна€"
+// Literal IN aName
+// @SELF Ctx:SetWordProducerForCompiledClass
+// ':' Ctx:Parser:PushSymbol
+// aName |N Ctx:Parser:PushSymbol
+// //';' Ctx:Parser:PushSymbol
+//; // class_imp
+
+VOID IMMEDIATE OPERATOR class
+ Literal IN aName
+ //'class_impl' Ctx:Parser:PushSymbol
+ // - вообще должно быть так, почему не работает - надо разбиратьс€
+ ':' Ctx:Parser:PushSymbol
+ @ class_impl Ctx:SetWordProducerForCompiledClass
+ [ '_' aName |N '_' ] strings:Cat Ctx:Parser:PushSymbol
+ ';' Ctx:Parser:PushSymbol
+
+ 'array' Ctx:Parser:PushSymbol
+ 'type' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+
+; // class
+
+INTEGER type FieldOffset
+// - смещение пол€
+
+IMMEDIATE VOID operator constructor
+// - конструктор объектов, пока "фиктивный"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ ':' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // constructor
+
+IMMEDIATE VOID operator method
+// - метод объекта, пока "фиктивный"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ ':' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // method
+
+IMMEDIATE VOID operator readonly
+// - read-only свойство объекта, пока "фиктивное"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ ':' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // readonly
+
+class Object
+
+: FieldByOffset
+ Object in Self
+ FieldOffset right anOffset
+ anOffset |^ Self [i]
+; // FieldByOffset
+
+INTEGER type Pixel
+// - пиксель
+List type PixelList
+// - список пикселей
+
+class Point
+
+private Const c:Point:Offset:X 0
+private Const c:Point:Offset:Y 1
+private Const c:Point:CoordCount 2
+
+Point constructor Point:0
+ [ 0 0 ] >>> Result
+; // Point:0
+
+Point constructor Point:
+ Pixel right aX
+ Pixel right aY
+ [ aX |^ aY |^ ] >>> Result
+; // Point:
+
+Point constructor Point:XY
+ PixelList right aPoint
+ [ aPoint |@ DO ] >>> Result
+ ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
+; // Point:XY
+
+Point constructor Point:OF
+ Point right aPoint
+ [ for ( aPoint |@ DO ) ( Pixel in aPx aPx ) ] >>> Result
+ ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
+; // Point:OF
+
+Pixel readonly Point:X
+ Point in Self
+ Self FieldByOffset c:Point:Offset:X >>> Result
+; // Point:X
+
+Pixel readonly Point:Y
+ Point in Self
+ Self FieldByOffset c:Point:Offset:Y >>> Result
+; // Point:Y
+
+Point method Point:+
+ Point in Self
+ Point right aPoint
+
+ FieldOffset var i
+ i := 0
+
+ [ for ( aPoint |@ DO ) ( Pixel in aPx ( Self FieldByOffset i ) (+) aPx Inc i ) ] >>> Result
+; // Point:+
+
+Point method Point:-
+ Point in Self
+ Point right aPoint
+
+ Point: ( ( Self Point:X ) (-) ( aPoint |^ Point:X ) ) ( ( Self Point:Y ) (-) ( aPoint |^ Point:Y ) ) >>> Result
+; // Point:-
+
+Point method Point:Neg
+ Point in Self
+
+ Point: Neg ( Self Point:X ) Neg ( Self Point:Y ) >>> Result
+; // Point:Neg
+
+void method Point:Print
+ Point in aPoint
+ aPoint Print
+; // Point:Print
+
+Point var P1
+Point var P2
+Point var P3
+Point var P4
+Point var P5
+Point var P6
+Point var P7
+Point var P8
+Point var P9
+Point var P10
+
+P1 := Point:0
+P2 := Point:0
+P3 := Point: 1 1
+P4 := Point:XY ( 2 2 )
+P5 := Point:OF P4
+P6 := ( P3 Point:+ P4 )
+P7 := ( P3 Point:- P4 )
+P8 := ( P4 Point:- P3 )
+P9 := ( P4 Point:Neg )
+P10 := ( P3 Point:Neg )
+
+P1 Point:Print
+P2 Point:Print
+P3 Point:Print
+P4 Point:Print
+P5 Point:Print
+P6 Point:Print
+P7 Point:Print
+P8 Point:Print
+P9 Point:Print
+P10 Point:Print
+
+P1 Point:X Print
+P2 Point:X Print
+P3 Point:X Print
+P4 Point:X Print
+P5 Point:X Print
+P6 Point:X Print
+P7 Point:X Print
+P8 Point:X Print
+P9 Point:X Print
+P10 Point:X Print
+
+P1 Point:Y Print
+P2 Point:Y Print
+P3 Point:Y Print
+P4 Point:Y Print
+P5 Point:Y Print
+P6 Point:Y Print
+P7 Point:Y Print
+P8 Point:Y Print
+P9 Point:Y Print
+P10 Point:Y Print
+
+'Hello ' (+) 'world' Print
+
+'Hello ' (+) 'world' Print
+
+'Hello ' (+) 'world' Print
+
+1 (+) 2 Print
+10 (+) 20 Print
+0 (-) 10 Print
+Neg 10 Print
+Neg -10 Print
+
+USES
+ CodeDump.ms.dict
+;
+
+@SELF DumpElement
+
+; // PointTest
+
+PointTest
