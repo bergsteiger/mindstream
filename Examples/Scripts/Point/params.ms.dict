@@ -25,5 +25,9 @@ VOID IMMEDIATE operator right
  STRING VAR l_MangledName
  [ '_' l_Name ] strings:Cat >>> l_MangledName
 
+ l_MangledName Ctx:Parser:PushSymbol
+ 
+ 'WordAlias' Ctx:Parser:PushSymbol
  l_Name Ctx:Parser:PushSymbol
+ l_MangledName Ctx:Parser:PushSymbol
 ; // right
