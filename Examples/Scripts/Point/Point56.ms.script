@@ -133,15 +133,15 @@ Point method Point:+
  Point: ( ( Self Point:X ) (+) ( aPoint |^ Point:X ) ) ( ( Self Point:Y ) (+) ( aPoint |^ Point:Y ) ) >>> Result
 ; // Point:+
 
+Point method Point:Neg
+ Point: Neg ( Self Point:X ) Neg ( Self Point:Y ) >>> Result
+; // Point:Neg
+
 Point method Point:-
  Point right aPoint
 
  Point: ( ( Self Point:X ) (-) ( aPoint |^ Point:X ) ) ( ( Self Point:Y ) (-) ( aPoint |^ Point:Y ) ) >>> Result
 ; // Point:-
-
-Point method Point:Neg
- Point: Neg ( Self Point:X ) Neg ( Self Point:Y ) >>> Result
-; // Point:Neg
 
 void method Point:Print
  Self Print
