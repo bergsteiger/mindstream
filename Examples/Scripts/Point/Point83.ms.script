@@ -174,7 +174,7 @@ constructor 0
 constructor XY
  PixelList right aPoint
  array var Points
- [ aPoint |^ ] >>> Points
+ [ aPoint ] >>> Points
  Point:: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) >>> Result
 ; // XY
 
