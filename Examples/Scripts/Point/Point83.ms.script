@@ -200,7 +200,7 @@ Point method Neg
 Point method -
  Point right aPoint
 
- Point:OF ( Self Point:+ ( aPoint |^ Point:Neg ) ) >>> Result
+ Point:OF ( Self Point:+ ( aPoint Point:Neg ) ) >>> Result
 ; // -
 
 void method Print
