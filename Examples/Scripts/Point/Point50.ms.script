@@ -115,8 +115,6 @@ Pixel readonly Point:Y
 Point constructor Point:OF
  Point right aPoint
  Point: ( aPoint |^ Point:X ) ( aPoint |^ Point:Y ) >>> Result
-// [ for ( aPoint |@ DO ) ( Pixel in aPx aPx ) ] >>> Result
-// ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
 ; // Point:OF
 
 Point method Point:+
