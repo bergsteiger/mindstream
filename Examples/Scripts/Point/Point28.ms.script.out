@@ -32,16 +32,16 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Object
  
- ARRAY VAR P1
- ARRAY VAR P10
- ARRAY VAR P2
- ARRAY VAR P3
- ARRAY VAR P4
- ARRAY VAR P5
- ARRAY VAR P6
- ARRAY VAR P7
- ARRAY VAR P8
- ARRAY VAR P9
+ Point VAR P1
+ Point VAR P10
+ Point VAR P2
+ Point VAR P3
+ Point VAR P4
+ Point VAR P5
+ Point VAR P6
+ Point VAR P7
+ Point VAR P8
+ Point VAR P9
  IMMEDIATE VOID TYPE Pixel
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -57,7 +57,7 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Point
  
- ARRAY : Point:
+ Point : Point:
   ^ IN aX
   ^ IN aY
   [
@@ -66,12 +66,12 @@ VOID Test PointTest
   ]
   >>>
   Result
- ; // ARRAY : Point:
+ ; // Point : Point:
  
- ARRAY : Point:-
+ Point : Point:-
   ^ IN aPoint
-  INTEGER VAR i
-  ARRAY IN Self
+  FieldOffset VAR i
+  Point IN Self
   i :=
   0
   [
@@ -81,11 +81,11 @@ VOID Test PointTest
     DO
    )
    (
-    INTEGER IN aPx
+    Pixel IN aPx
     aPx
     i
     Self
-    [i]
+    Array:GetItem
     SWAP
     -
     INC
@@ -94,12 +94,12 @@ VOID Test PointTest
   ]
   >>>
   Result
- ; // ARRAY : Point:-
+ ; // Point : Point:-
  
- ARRAY : Point:+
+ Point : Point:+
   ^ IN aPoint
-  INTEGER VAR i
-  ARRAY IN Self
+  FieldOffset VAR i
+  Point IN Self
   i :=
   0
   [
@@ -109,11 +109,11 @@ VOID Test PointTest
     DO
    )
    (
-    INTEGER IN aPx
+    Pixel IN aPx
     aPx
     i
     Self
-    [i]
+    Array:GetItem
     +
     INC
     i
@@ -121,24 +121,24 @@ VOID Test PointTest
   ]
   >>>
   Result
- ; // ARRAY : Point:+
+ ; // Point : Point:+
  
- ARRAY : Point:0
+ Point : Point:0
   [
    0
    0
   ]
   >>>
   Result
- ; // ARRAY : Point:0
+ ; // Point : Point:0
  
- ARRAY : Point:Neg
-  ARRAY IN Self
+ Point : Point:Neg
+  Point IN Self
   [
    for
    Self
    (
-    INTEGER IN aPx
+    Pixel IN aPx
     aPx
     0
     SWAP
@@ -147,9 +147,9 @@ VOID Test PointTest
   ]
   >>>
   Result
- ; // ARRAY : Point:Neg
+ ; // Point : Point:Neg
  
- ARRAY : Point:OF
+ Point : Point:OF
   ^ IN aPoint
   [
    for
@@ -158,7 +158,7 @@ VOID Test PointTest
     DO
    )
    (
-    INTEGER IN aPx
+    Pixel IN aPx
     aPx
    )
   ]
@@ -172,15 +172,15 @@ VOID Test PointTest
   )
   ?ASSURE
   '“очка должна содержать две координаты'
- ; // ARRAY : Point:OF
+ ; // Point : Point:OF
  
  VOID : Point:Print
-  ARRAY IN aPoint
+  Point IN aPoint
   aPoint
   .
  ; // VOID : Point:Print
  
- ARRAY : Point:XY
+ Point : Point:XY
   ^ IN aPoint
   [
    aPoint |@
@@ -196,7 +196,7 @@ VOID Test PointTest
   )
   ?ASSURE
   '“очка должна содержать две координаты'
- ; // ARRAY : Point:XY
+ ; // Point : Point:XY
  
  P1 :=
  Point:0

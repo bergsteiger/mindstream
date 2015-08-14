@@ -91,10 +91,10 @@ VOID Test PointTest
  
  : FieldByOffset
   ^ IN anOffset
-  ARRAY IN Self
+  Object IN Self
   anOffset |^
   Self
-  [i]
+  Array:GetItem
  ; // : FieldByOffset
  
  IMMEDIATE VOID TYPE FieldOffset
@@ -122,16 +122,16 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Object
  
- ARRAY VAR P1
- ARRAY VAR P10
- ARRAY VAR P2
- ARRAY VAR P3
- ARRAY VAR P4
- ARRAY VAR P5
- ARRAY VAR P6
- ARRAY VAR P7
- ARRAY VAR P8
- ARRAY VAR P9
+ Point VAR P1
+ Point VAR P10
+ Point VAR P2
+ Point VAR P3
+ Point VAR P4
+ Point VAR P5
+ Point VAR P6
+ Point VAR P7
+ Point VAR P8
+ Point VAR P9
  IMMEDIATE VOID TYPE Pixel
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -147,7 +147,7 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Point
  
- ARRAY constructor Point:
+ Point constructor Point:
   ^ IN aX
   ^ IN aY
   [
@@ -156,9 +156,9 @@ VOID Test PointTest
   ]
   >>>
   Result
- ; // ARRAY constructor Point:
+ ; // Point constructor Point:
  
- ARRAY method Point:-
+ Point method Point:-
   ^ IN aPoint
   IN Self
   Point:
@@ -186,9 +186,9 @@ VOID Test PointTest
   )
   >>>
   Result
- ; // ARRAY method Point:-
+ ; // Point method Point:-
  
- ARRAY method Point:+
+ Point method Point:+
   ^ IN aPoint
   IN Self
   Point:
@@ -216,17 +216,17 @@ VOID Test PointTest
   )
   >>>
   Result
- ; // ARRAY method Point:+
+ ; // Point method Point:+
  
- ARRAY constructor Point:0
+ Point constructor Point:0
   Point:
   0
   0
   >>>
   Result
- ; // ARRAY constructor Point:0
+ ; // Point constructor Point:0
  
- ARRAY method Point:Neg
+ Point method Point:Neg
   IN Self
   Point:
   Neg
@@ -241,9 +241,9 @@ VOID Test PointTest
   )
   >>>
   Result
- ; // ARRAY method Point:Neg
+ ; // Point method Point:Neg
  
- ARRAY constructor Point:OF
+ Point constructor Point:OF
   ^ IN aPoint
   Point:
   (
@@ -256,7 +256,7 @@ VOID Test PointTest
   )
   >>>
   Result
- ; // ARRAY constructor Point:OF
+ ; // Point constructor Point:OF
  
  VOID method Point:Print
   IN Self
@@ -264,16 +264,16 @@ VOID Test PointTest
   .
  ; // VOID method Point:Print
  
- INTEGER readonly Point:X
+ Pixel readonly Point:X
   IN Self
   Self
   FieldByOffset
   c:Point:Offset:X
   >>>
   Result
- ; // INTEGER readonly Point:X
+ ; // Pixel readonly Point:X
  
- ARRAY constructor Point:XY
+ Point constructor Point:XY
   ^ IN aPoint
   ARRAY VAR Points
   [
@@ -295,16 +295,16 @@ VOID Test PointTest
   )
   >>>
   Result
- ; // ARRAY constructor Point:XY
+ ; // Point constructor Point:XY
  
- INTEGER readonly Point:Y
+ Pixel readonly Point:Y
   IN Self
   Self
   FieldByOffset
   c:Point:Offset:Y
   >>>
   Result
- ; // INTEGER readonly Point:Y
+ ; // Pixel readonly Point:Y
  
  IMMEDIATE VOID OPERATOR readonly
   ^L IN aName

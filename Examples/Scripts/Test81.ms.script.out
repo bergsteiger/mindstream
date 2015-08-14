@@ -1,1336 +1,3 @@
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-
-INTEGER CONST c:POINT:CoordCount
- 2
-ARRAY VAR P1
-ARRAY VAR P2
-ARRAY VAR P3
-ARRAY VAR P4
-IMMEDIATE VOID TYPE PIXEL
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE PIXEL
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-ARRAY : POINT:
- ^ IN aX
- ^ IN aY
- [
-  aX |^
-  aY |^
- ]
- >>>
- Result
-; // ARRAY : POINT:
-
-ARRAY : POINT:0
- [
-  0
-  0
- ]
- >>>
- Result
-; // ARRAY : POINT:0
-
-VOID : POINT:Print
- ARRAY IN aPoint
- aPoint
- .
-; // VOID : POINT:Print
-
-ARRAY : POINT:XY
- ^ IN aPoint
- [
-  aPoint |@
-  DO
- ]
- >>>
- Result
- (
-  Result
-  Array:Count
-  =
-  c:POINT:CoordCount
- )
- ?ASSURE
- 'Точка должна содержать две координаты'
-; // ARRAY : POINT:XY
-
-P1 :=
-POINT:0
-P2 :=
-POINT:0
-P3 :=
-POINT:
-1
-1
-P4 :=
-POINT:XY
-(
- 2
- 2
-)
-P1
-POINT:Print
-P2
-POINT:Print
-P3
-POINT:Print
-P4
-POINT:Print
-
-INTEGER CONST c:POINT:CoordCount
- 2
-ARRAY VAR P1
-ARRAY VAR P2
-ARRAY VAR P3
-ARRAY VAR P4
-ARRAY VAR P5
-IMMEDIATE VOID TYPE PIXEL
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE PIXEL
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-ARRAY : POINT:
- ^ IN aX
- ^ IN aY
- [
-  aX |^
-  aY |^
- ]
- >>>
- Result
-; // ARRAY : POINT:
-
-ARRAY : POINT:0
- [
-  0
-  0
- ]
- >>>
- Result
-; // ARRAY : POINT:0
-
-ARRAY : POINT:OF
- ^ IN aPoint
- [
-  for
-  (
-   aPoint |@
-   DO
-  )
-  (
-   INTEGER IN aPx
-   aPx
-  )
- ]
- >>>
- Result
- (
-  Result
-  Array:Count
-  =
-  c:POINT:CoordCount
- )
- ?ASSURE
- 'Точка должна содержать две координаты'
-; // ARRAY : POINT:OF
-
-VOID : POINT:Print
- ARRAY IN aPoint
- aPoint
- .
-; // VOID : POINT:Print
-
-ARRAY : POINT:XY
- ^ IN aPoint
- [
-  aPoint |@
-  DO
- ]
- >>>
- Result
- (
-  Result
-  Array:Count
-  =
-  c:POINT:CoordCount
- )
- ?ASSURE
- 'Точка должна содержать две координаты'
-; // ARRAY : POINT:XY
-
-P1 :=
-POINT:0
-P2 :=
-POINT:0
-P3 :=
-POINT:
-1
-1
-P4 :=
-POINT:XY
-(
- 2
- 2
-)
-P5 :=
-POINT:OF
-P4
-P1
-POINT:Print
-P2
-POINT:Print
-P3
-POINT:Print
-P4
-POINT:Print
-P5
-POINT:Print
-
-INTEGER CONST c:POINT:CoordCount
- 2
-ARRAY VAR P1
-ARRAY VAR P2
-ARRAY VAR P3
-ARRAY VAR P4
-ARRAY VAR P5
-ARRAY VAR P6
-IMMEDIATE VOID TYPE PIXEL
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE PIXEL
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-ARRAY : POINT:
- ^ IN aX
- ^ IN aY
- [
-  aX |^
-  aY |^
- ]
- >>>
- Result
-; // ARRAY : POINT:
-
-ARRAY : POINT:-
- ARRAY IN aLeft
- ^ IN aPoint
- INTEGER VAR i
- i :=
- 0
- [
-  for
-  (
-   aPoint |@
-   DO
-  )
-  (
-   INTEGER IN aPx
-   aPx
-   i
-   aLeft
-   [i]
-   -
-   INC
-   i
-  )
- ]
- >>>
- Result
-; // ARRAY : POINT:-
-
-ARRAY : POINT:+
- ARRAY IN aLeft
- ^ IN aPoint
- INTEGER VAR i
- i :=
- 0
- [
-  for
-  (
-   aPoint |@
-   DO
-  )
-  (
-   INTEGER IN aPx
-   aPx
-   i
-   aLeft
-   [i]
-   +
-   INC
-   i
-  )
- ]
- >>>
- Result
-; // ARRAY : POINT:+
-
-ARRAY : POINT:0
- [
-  0
-  0
- ]
- >>>
- Result
-; // ARRAY : POINT:0
-
-ARRAY : POINT:OF
- ^ IN aPoint
- [
-  for
-  (
-   aPoint |@
-   DO
-  )
-  (
-   INTEGER IN aPx
-   aPx
-  )
- ]
- >>>
- Result
- (
-  Result
-  Array:Count
-  =
-  c:POINT:CoordCount
- )
- ?ASSURE
- 'Точка должна содержать две координаты'
-; // ARRAY : POINT:OF
-
-VOID : POINT:Print
- ARRAY IN aPoint
- aPoint
- .
-; // VOID : POINT:Print
-
-ARRAY : POINT:XY
- ^ IN aPoint
- [
-  aPoint |@
-  DO
- ]
- >>>
- Result
- (
-  Result
-  Array:Count
-  =
-  c:POINT:CoordCount
- )
- ?ASSURE
- 'Точка должна содержать две координаты'
-; // ARRAY : POINT:XY
-
-P1 :=
-POINT:0
-P2 :=
-POINT:0
-P3 :=
-POINT:
-1
-1
-P4 :=
-POINT:XY
-(
- 2
- 2
-)
-P5 :=
-POINT:OF
-P4
-P6 :=
-(
- P3
- POINT:+
- P4
-)
-P1
-POINT:Print
-P2
-POINT:Print
-P3
-POINT:Print
-P4
-POINT:Print
-P5
-POINT:Print
-P6
-POINT:Print
-
-INTEGER CONST c:POINT:CoordCount
- 2
-ARRAY VAR P1
-ARRAY VAR P2
-ARRAY VAR P3
-ARRAY VAR P4
-ARRAY VAR P5
-ARRAY VAR P6
-ARRAY VAR P7
-ARRAY VAR P8
-IMMEDIATE VOID TYPE PIXEL
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE PIXEL
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-ARRAY : POINT:
- ^ IN aX
- ^ IN aY
- [
-  aX |^
-  aY |^
- ]
- >>>
- Result
-; // ARRAY : POINT:
-
-ARRAY : POINT:-
- ARRAY IN aLeft
- ^ IN aPoint
- INTEGER VAR i
- i :=
- 0
- [
-  for
-  (
-   aPoint |@
-   DO
-  )
-  (
-   INTEGER IN aPx
-   aPx
-   i
-   aLeft
-   [i]
-   SWAP
-   -
-   INC
-   i
-  )
- ]
- >>>
- Result
-; // ARRAY : POINT:-
-
-ARRAY : POINT:+
- ARRAY IN aLeft
- ^ IN aPoint
- INTEGER VAR i
- i :=
- 0
- [
-  for
-  (
-   aPoint |@
-   DO
-  )
-  (
-   INTEGER IN aPx
-   aPx
-   i
-   aLeft
-   [i]
-   +
-   INC
-   i
-  )
- ]
- >>>
- Result
-; // ARRAY : POINT:+
-
-ARRAY : POINT:0
- [
-  0
-  0
- ]
- >>>
- Result
-; // ARRAY : POINT:0
-
-ARRAY : POINT:OF
- ^ IN aPoint
- [
-  for
-  (
-   aPoint |@
-   DO
-  )
-  (
-   INTEGER IN aPx
-   aPx
-  )
- ]
- >>>
- Result
- (
-  Result
-  Array:Count
-  =
-  c:POINT:CoordCount
- )
- ?ASSURE
- 'Точка должна содержать две координаты'
-; // ARRAY : POINT:OF
-
-VOID : POINT:Print
- ARRAY IN aPoint
- aPoint
- .
-; // VOID : POINT:Print
-
-ARRAY : POINT:XY
- ^ IN aPoint
- [
-  aPoint |@
-  DO
- ]
- >>>
- Result
- (
-  Result
-  Array:Count
-  =
-  c:POINT:CoordCount
- )
- ?ASSURE
- 'Точка должна содержать две координаты'
-; // ARRAY : POINT:XY
-
-P1 :=
-POINT:0
-P2 :=
-POINT:0
-P3 :=
-POINT:
-1
-1
-P4 :=
-POINT:XY
-(
- 2
- 2
-)
-P5 :=
-POINT:OF
-P4
-P6 :=
-(
- P3
- POINT:+
- P4
-)
-P7 :=
-(
- P3
- POINT:-
- P4
-)
-P8 :=
-(
- P4
- POINT:-
- P3
-)
-P1
-POINT:Print
-P2
-POINT:Print
-P3
-POINT:Print
-P4
-POINT:Print
-P5
-POINT:Print
-P6
-POINT:Print
-P7
-POINT:Print
-P8
-POINT:Print
-
-INTEGER CONST c:POINT:CoordCount
- 2
-ARRAY VAR P1
-ARRAY VAR P10
-ARRAY VAR P2
-ARRAY VAR P3
-ARRAY VAR P4
-ARRAY VAR P5
-ARRAY VAR P6
-ARRAY VAR P7
-ARRAY VAR P8
-ARRAY VAR P9
-IMMEDIATE VOID TYPE PIXEL
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE PIXEL
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-ARRAY : POINT:
- ^ IN aX
- ^ IN aY
- [
-  aX |^
-  aY |^
- ]
- >>>
- Result
-; // ARRAY : POINT:
-
-ARRAY : POINT:-
- ARRAY IN aLeft
- ^ IN aPoint
- INTEGER VAR i
- i :=
- 0
- [
-  for
-  (
-   aPoint |@
-   DO
-  )
-  (
-   INTEGER IN aPx
-   aPx
-   i
-   aLeft
-   [i]
-   SWAP
-   -
-   INC
-   i
-  )
- ]
- >>>
- Result
-; // ARRAY : POINT:-
-
-ARRAY : POINT:+
- ARRAY IN aLeft
- ^ IN aPoint
- INTEGER VAR i
- i :=
- 0
- [
-  for
-  (
-   aPoint |@
-   DO
-  )
-  (
-   INTEGER IN aPx
-   aPx
-   i
-   aLeft
-   [i]
-   +
-   INC
-   i
-  )
- ]
- >>>
- Result
-; // ARRAY : POINT:+
-
-ARRAY : POINT:0
- [
-  0
-  0
- ]
- >>>
- Result
-; // ARRAY : POINT:0
-
-ARRAY : POINT:Neg
- ARRAY IN aLeft
- [
-  for
-  aLeft
-  (
-   INTEGER IN aPx
-   aPx
-   0
-   SWAP
-   -
-  )
- ]
- >>>
- Result
-; // ARRAY : POINT:Neg
-
-ARRAY : POINT:OF
- ^ IN aPoint
- [
-  for
-  (
-   aPoint |@
-   DO
-  )
-  (
-   INTEGER IN aPx
-   aPx
-  )
- ]
- >>>
- Result
- (
-  Result
-  Array:Count
-  =
-  c:POINT:CoordCount
- )
- ?ASSURE
- 'Точка должна содержать две координаты'
-; // ARRAY : POINT:OF
-
-VOID : POINT:Print
- ARRAY IN aPoint
- aPoint
- .
-; // VOID : POINT:Print
-
-ARRAY : POINT:XY
- ^ IN aPoint
- [
-  aPoint |@
-  DO
- ]
- >>>
- Result
- (
-  Result
-  Array:Count
-  =
-  c:POINT:CoordCount
- )
- ?ASSURE
- 'Точка должна содержать две координаты'
-; // ARRAY : POINT:XY
-
-P1 :=
-POINT:0
-P2 :=
-POINT:0
-P3 :=
-POINT:
-1
-1
-P4 :=
-POINT:XY
-(
- 2
- 2
-)
-P5 :=
-POINT:OF
-P4
-P6 :=
-(
- P3
- POINT:+
- P4
-)
-P7 :=
-(
- P3
- POINT:-
- P4
-)
-P8 :=
-(
- P4
- POINT:-
- P3
-)
-P9 :=
-(
- P4
- POINT:Neg
-)
-P10 :=
-(
- P3
- POINT:Neg
-)
-P1
-POINT:Print
-P2
-POINT:Print
-P3
-POINT:Print
-P4
-POINT:Print
-P5
-POINT:Print
-P6
-POINT:Print
-P7
-POINT:Print
-P8
-POINT:Print
-P9
-POINT:Print
-P10
-POINT:Print
-
-INTEGER CONST c:POINT:CoordCount
- 2
-ARRAY VAR P1
-ARRAY VAR P10
-ARRAY VAR P2
-ARRAY VAR P3
-ARRAY VAR P4
-ARRAY VAR P5
-ARRAY VAR P6
-ARRAY VAR P7
-ARRAY VAR P8
-ARRAY VAR P9
-IMMEDIATE VOID TYPE PIXEL
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE PIXEL
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-ARRAY : POINT:
- ^ IN aX
- ^ IN aY
- [
-  aX |^
-  aY |^
- ]
- >>>
- Result
-; // ARRAY : POINT:
-
-ARRAY : POINT:-
- ARRAY IN aLeft
- ^ IN aPoint
- INTEGER VAR i
- i :=
- 0
- [
-  for
-  (
-   aPoint |@
-   DO
-  )
-  (
-   INTEGER IN aPx
-   aPx
-   i
-   aLeft
-   [i]
-   SWAP
-   -
-   INC
-   i
-  )
- ]
- >>>
- Result
-; // ARRAY : POINT:-
-
-ARRAY : POINT:+
- ARRAY IN aLeft
- ^ IN aPoint
- INTEGER VAR i
- i :=
- 0
- [
-  for
-  (
-   aPoint |@
-   DO
-  )
-  (
-   INTEGER IN aPx
-   aPx
-   i
-   aLeft
-   [i]
-   +
-   INC
-   i
-  )
- ]
- >>>
- Result
-; // ARRAY : POINT:+
-
-ARRAY : POINT:0
- [
-  0
-  0
- ]
- >>>
- Result
-; // ARRAY : POINT:0
-
-ARRAY : POINT:Neg
- ARRAY IN aLeft
- [
-  for
-  aLeft
-  (
-   INTEGER IN aPx
-   aPx
-   0
-   SWAP
-   -
-  )
- ]
- >>>
- Result
-; // ARRAY : POINT:Neg
-
-ARRAY : POINT:OF
- ^ IN aPoint
- [
-  for
-  (
-   aPoint |@
-   DO
-  )
-  (
-   INTEGER IN aPx
-   aPx
-  )
- ]
- >>>
- Result
- (
-  Result
-  Array:Count
-  =
-  c:POINT:CoordCount
- )
- ?ASSURE
- 'Точка должна содержать две координаты'
-; // ARRAY : POINT:OF
-
-VOID : POINT:Print
- ARRAY IN aPoint
- aPoint
- .
-; // VOID : POINT:Print
-
-ARRAY : POINT:XY
- ^ IN aPoint
- [
-  aPoint |@
-  DO
- ]
- >>>
- Result
- (
-  Result
-  Array:Count
-  =
-  c:POINT:CoordCount
- )
- ?ASSURE
- 'Точка должна содержать две координаты'
-; // ARRAY : POINT:XY
-
-P1 :=
-POINT:0
-P2 :=
-POINT:0
-P3 :=
-POINT:
-1
-1
-P4 :=
-POINT:XY
-(
- 2
- 2
-)
-P5 :=
-POINT:OF
-P4
-P6 :=
-(
- P3
- POINT:+
- P4
-)
-P7 :=
-(
- P3
- POINT:-
- P4
-)
-P8 :=
-(
- P4
- POINT:-
- P3
-)
-P9 :=
-(
- P4
- POINT:Neg
-)
-P10 :=
-(
- P3
- POINT:Neg
-)
-P1
-POINT:Print
-P2
-POINT:Print
-P3
-POINT:Print
-P4
-POINT:Print
-P5
-POINT:Print
-P6
-POINT:Print
-P7
-POINT:Print
-P8
-POINT:Print
-P9
-POINT:Print
-P10
-POINT:Print
-
-IMMEDIATE VOID TYPE PIXEL
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE PIXEL
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-
-ARRAY VAR P
-IMMEDIATE VOID TYPE PIXEL
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE PIXEL
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-
-ARRAY VAR P
-IMMEDIATE VOID TYPE PIXEL
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE PIXEL
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-ARRAY : POINT:0
- [
-  0
-  0
- ]
- >>>
- Result
-; // ARRAY : POINT:0
-
-VOID : POINT:Print
- ARRAY IN aPoint
-; // VOID : POINT:Print
-
-P :=
-POINT:0
-P
-POINT:Print
-
-ARRAY VAR P
-IMMEDIATE VOID TYPE PIXEL
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE PIXEL
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-ARRAY : POINT:0
- [
-  0
-  0
- ]
- >>>
- Result
-; // ARRAY : POINT:0
-
-VOID : POINT:Print
- ARRAY IN aPoint
- aPoint
- .
-; // VOID : POINT:Print
-
-P :=
-POINT:0
-P
-POINT:Print
-
-ARRAY VAR P1
-ARRAY VAR P2
-IMMEDIATE VOID TYPE PIXEL
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE PIXEL
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-ARRAY : POINT:0
- [
-  0
-  0
- ]
- >>>
- Result
-; // ARRAY : POINT:0
-
-VOID : POINT:Print
- ARRAY IN aPoint
- aPoint
- .
-; // VOID : POINT:Print
-
-P1 :=
-POINT:0
-P2 :=
-POINT:0
-P1
-POINT:Print
-P2
-POINT:Print
-
-ARRAY VAR P1
-ARRAY VAR P2
-ARRAY VAR P3
-IMMEDIATE VOID TYPE PIXEL
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE PIXEL
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-ARRAY : POINT:
- ^ IN X
- ^ IN Y
- [
-  X |^
-  Y |^
- ]
- >>>
- Result
-; // ARRAY : POINT:
-
-ARRAY : POINT:0
- [
-  0
-  0
- ]
- >>>
- Result
-; // ARRAY : POINT:0
-
-VOID : POINT:Print
- ARRAY IN aPoint
- aPoint
- .
-; // VOID : POINT:Print
-
-P1 :=
-POINT:0
-P2 :=
-POINT:0
-P3 :=
-POINT:
-1
-1
-P1
-POINT:Print
-P2
-POINT:Print
-
-ARRAY VAR P1
-ARRAY VAR P2
-ARRAY VAR P3
-IMMEDIATE VOID TYPE PIXEL
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE PIXEL
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-ARRAY : POINT:
- ^ IN X
- ^ IN Y
- [
-  X |^
-  Y |^
- ]
- >>>
- Result
-; // ARRAY : POINT:
-
-ARRAY : POINT:0
- [
-  0
-  0
- ]
- >>>
- Result
-; // ARRAY : POINT:0
-
-VOID : POINT:Print
- ARRAY IN aPoint
- aPoint
- .
-; // VOID : POINT:Print
-
-P1 :=
-POINT:0
-P2 :=
-POINT:0
-P3 :=
-POINT:
-1
-1
-P1
-POINT:Print
-P2
-POINT:Print
-P3
-POINT:Print
-
-ARRAY VAR P1
-ARRAY VAR P2
-ARRAY VAR P3
-ARRAY VAR P4
-IMMEDIATE VOID TYPE PIXEL
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE PIXEL
-
-IMMEDIATE VOID TYPE POINT
- TtfwValueTypes
- Ctx:IncludeValueTypes
-; // IMMEDIATE VOID TYPE POINT
-
-ARRAY : POINT:
- ^ IN aX
- ^ IN aY
- [
-  aX |^
-  aY |^
- ]
- >>>
- Result
-; // ARRAY : POINT:
-
-ARRAY : POINT:0
- [
-  0
-  0
- ]
- >>>
- Result
-; // ARRAY : POINT:0
-
-VOID : POINT:Print
- ARRAY IN aPoint
- aPoint
- .
-; // VOID : POINT:Print
-
-ARRAY : POINT:XY
- ^ IN aPoint
- [
-  aPoint |@
-  DO
- ]
- >>>
- Result
-; // ARRAY : POINT:XY
-
-P1 :=
-POINT:0
-P2 :=
-POINT:0
-P3 :=
-POINT:
-1
-1
-P4 :=
-POINT:XY
-(
- 2
- 2
-)
-P1
-POINT:Print
-P2
-POINT:Print
-P3
-POINT:Print
-P4
-POINT:Print
-
 1
 2
 +
@@ -2006,7 +673,7 @@ VOID Test ForToTest
     DO
    )
   )
-  FunctorToIterator
+  Array:FunctorToIterator
   >>>
   Result
  ; // ARRAY OPERATOR to
@@ -2065,7 +732,7 @@ VOID Test ForToTest
  (
   1 to
   10
-  Reverted
+  Array:Reverted
  )
  .
 ; // VOID Test ForToTest
@@ -3127,7 +1794,7 @@ for
   1 to
   20
  )
- FILTER
+ Array:Filter
 )
 .
 
@@ -3567,7 +2234,7 @@ for
   1 to
   20
  )
- FILTER
+ Array:Filter
 )
 +
 .
@@ -3943,7 +2610,7 @@ ProcessDirs
 
 VOID PROCEDURE ProcessDirs
  ^ IN aDir
- TtfwWord IN aLambda
+ FUNCTOR IN aLambda
  ^ IN aMaskArray
  VOID PROCEDURE DoDir
   ^ IN aDir
@@ -4136,7 +2803,7 @@ for
   1 to
   20
  )
- FILTER
+ Array:Filter
 )
 .
 
@@ -4505,7 +3172,7 @@ for
   1 to
   20
  )
- FILTER
+ Array:Filter
 )
 .
 
@@ -4609,7 +3276,7 @@ for
   1 to
   20
  )
- FILTER
+ Array:Filter
 )
 .
 
@@ -4645,7 +3312,7 @@ for
   1 to
   20
  )
- FILTER
+ Array:Filter
 )
 .
 
@@ -4661,7 +3328,7 @@ for
   1 to
   20
  )
- FILTER
+ Array:Filter
 )
 .
 
@@ -4678,11 +3345,11 @@ for
   1 to
   20
  )
- FILTER
+ Array:Filter
 )
 .
 
-ARRAY FILTER
+ARRAY Array:Filter
 for
 (
  @
@@ -4691,7 +3358,7 @@ for
   1 to
   20
  )
- FILTER
+ Array:Filter
 )
 .
 
@@ -4700,12 +3367,12 @@ ARRAY FUNCTION >filter>
  ARRAY IN anArray
  aFunctor
  anArray
- FILTER
+ Array:Filter
  >>>
  Result
 ; // ARRAY FUNCTION >filter>
 
-ARRAY FILTER
+ARRAY Array:Filter
 for
 (
  (
@@ -4735,12 +3402,12 @@ ARRAY FUNCTION >filter>
  aFunctor
  anArray
  DO
- FILTER
+ Array:Filter
  >>>
  Result
 ; // ARRAY FUNCTION >filter>
 
-ARRAY FILTER
+ARRAY Array:Filter
 for
 (
  ( to >filter>
@@ -4816,7 +3483,7 @@ for
  )
  ( to >filter>
  IsOdd
- MAP
+ Array:Map
 )
 .
 '-------------------'
@@ -4832,7 +3499,7 @@ for
  )
  ( to >filter>
  IsEven
- MAP
+ Array:Map
 )
 .
 
@@ -4845,7 +3512,7 @@ for
  )
  ( to >filter>
  IsOdd
- MAP
+ Array:Map
 )
 .
 '-------------------'
@@ -4859,7 +3526,7 @@ for
  )
  ( to >filter>
  IsEven
- MAP
+ Array:Map
 )
 .
 
@@ -4870,7 +3537,7 @@ for
 )
 ( to >filter>
 IsOdd
-MAP
+Array:Map
 .
 '-------------------'
 .
@@ -4881,7 +3548,7 @@ MAP
 )
 ( to >filter>
 IsEven
-MAP
+Array:Map
 .
 
 [
@@ -4893,7 +3560,7 @@ MAP
 ]
 .
 
-ARRAY MAP
+ARRAY Array:Map
 for
 (
  @
@@ -4903,7 +3570,7 @@ for
  )
  ( to >filter>
  IsOdd
- MAP
+ Array:Map
 )
 .
 '-------------------'
@@ -4917,7 +3584,7 @@ for
  )
  ( to >filter>
  IsEven
- MAP
+ Array:Map
 )
 .
 
@@ -4927,12 +3594,12 @@ ARRAY FUNCTION >map>
  aFunctor
  anArray
  DO
- MAP
+ Array:Map
  >>>
  Result
 ; // ARRAY FUNCTION >map>
 
-ARRAY MAP
+ARRAY Array:Map
 for
 (
  ( to >filter> IsOdd >map>
@@ -4997,7 +3664,7 @@ for
   1
   +
  )
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5009,12 +3676,12 @@ for
   1
   +
  )
- Reverted
+ Array:Reverted
 )
 .
 
-ARRAY Reverted
-ARRAY Reverted
+ARRAY Array:Reverted
+ARRAY Array:Reverted
 for
 (
  ( to >filter> IsOdd >map>
@@ -5022,7 +3689,7 @@ for
   1
   +
  )
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5034,7 +3701,7 @@ for
   1
   +
  )
- Reverted
+ Array:Reverted
 )
 .
 
@@ -5045,7 +3712,7 @@ for
   1
   +
  )
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5057,31 +3724,7 @@ for
   1
   +
  )
- Reverted
-)
-.
-
-USES
-for
-(
- ( to >filter> IsOdd >map>
- (
-  1
-  +
- )
- Reverted
-)
-.
-'-------------------'
-.
-for
-(
- ( to >filter> IsEven >map>
- (
-  1
-  +
- )
- Reverted
+ Array:Reverted
 )
 .
 
@@ -5093,7 +3736,7 @@ for
   1
   +
  )
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5105,7 +3748,31 @@ for
   1
   +
  )
- Reverted
+ Array:Reverted
+)
+.
+
+USES
+for
+(
+ ( to >filter> IsOdd >map>
+ (
+  1
+  +
+ )
+ Array:Reverted
+)
+.
+'-------------------'
+.
+for
+(
+ ( to >filter> IsEven >map>
+ (
+  1
+  +
+ )
+ Array:Reverted
 )
 .
 
@@ -5116,7 +3783,7 @@ for
   1
   +
  )
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5128,7 +3795,7 @@ for
   1
   +
  )
- Reverted
+ Array:Reverted
 )
 .
 
@@ -5138,7 +3805,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5147,7 +3814,7 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 
@@ -5155,7 +3822,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5164,7 +3831,7 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 
@@ -5172,7 +3839,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5181,14 +3848,14 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5197,7 +3864,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 
@@ -5205,7 +3872,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5214,14 +3881,14 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5230,7 +3897,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 
@@ -5238,7 +3905,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5247,14 +3914,14 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5263,7 +3930,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 
@@ -5271,7 +3938,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5280,14 +3947,14 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5296,7 +3963,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 
@@ -5304,7 +3971,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5313,14 +3980,14 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5329,7 +3996,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 
@@ -5337,7 +4004,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5346,14 +4013,14 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5362,7 +4029,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 
@@ -5370,7 +4037,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5379,14 +4046,14 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5395,7 +4062,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 
@@ -5403,7 +4070,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5412,14 +4079,14 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 '-------------------'
@@ -5428,7 +4095,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 
@@ -5444,14 +4111,14 @@ for
  4
  5
 ]
-FILTER
+Array:Filter
 .
 
 for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5459,7 +4126,7 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5467,7 +4134,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5475,7 +4142,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 
@@ -5483,7 +4150,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5491,7 +4158,7 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5499,7 +4166,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5507,44 +4174,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
-)
-.
-разделитель
-
-for
-числа
-(
- ( to >filter> IsOdd >map>
- Inc1
- Reverted
-)
-.
-разделитель
-for
-числа
-(
- ( to >filter> IsEven >map>
- Inc1
- Reverted
-)
-.
-разделитель
-for
-числа
-(
- ( to >filter> IsOdd >map>
- Dec1
- Reverted
-)
-.
-разделитель
-for
-числа
-(
- ( to >filter> IsEven >map>
- Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5554,7 +4184,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5563,7 +4193,7 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5572,7 +4202,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5581,7 +4211,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5591,7 +4221,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5600,7 +4230,7 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5609,7 +4239,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5618,7 +4248,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5628,7 +4258,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5637,7 +4267,7 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5646,7 +4276,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5655,7 +4285,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5665,7 +4295,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5674,7 +4304,7 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5683,7 +4313,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5692,7 +4322,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5702,7 +4332,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5711,7 +4341,7 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5720,7 +4350,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5729,7 +4359,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5739,7 +4369,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5748,7 +4378,7 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5757,7 +4387,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5766,7 +4396,44 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
+)
+.
+разделитель
+
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Array:Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Array:Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Array:Reverted
+)
+.
+разделитель
+for
+числа
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Array:Reverted
 )
 .
 разделитель
@@ -5775,7 +4442,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5783,7 +4450,7 @@ for
 (
  ( to >filter> IsEven >map>
  Inc1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5791,7 +4458,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5799,7 +4466,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5816,7 +4483,7 @@ for
  4
  5
 ]
-FILTER
+Array:Filter
 IT
 .
 
@@ -5826,7 +4493,7 @@ for
  ( to >filter> IsOdd >map>
  IncWith
  1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5836,7 +4503,7 @@ for
  ( to >filter> IsEven >map>
  IncWith
  1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5845,7 +4512,7 @@ for
 (
  ( to >filter> IsOdd >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5854,7 +4521,7 @@ for
 (
  ( to >filter> IsEven >map>
  Dec1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5865,7 +4532,7 @@ for
  ( to >filter> IsOdd >map>
  IncWith
  1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5875,7 +4542,7 @@ for
  ( to >filter> IsEven >map>
  IncWith
  1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5885,7 +4552,7 @@ for
  ( to >filter> IsOdd >map>
  DecWith
  1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -5895,7 +4562,7 @@ for
  ( to >filter> IsEven >map>
  DecWith
  1
- Reverted
+ Array:Reverted
 )
 .
 разделитель
@@ -6067,8 +4734,8 @@ FINALLY
  .
 END
 
-BOOLEAN INTEGER VAR A
-BOOLEAN INTEGER STRING VAR B
+ORDINAL VAR A
+COMPARABLE VAR B
 STRING VAR C
 INTEGER VAR D
 @
@@ -6605,17 +5272,17 @@ DumpElement
 DumpElement
 @
 (
- BOOLEAN INTEGER STRING VAR X
+ ATOMIC VAR X
 )
 DumpElement
 @
 (
- BOOLEAN INTEGER VAR X
+ ORDINAL VAR X
 )
 DumpElement
 @
 (
- BOOLEAN INTEGER STRING VAR X
+ COMPARABLE VAR X
 )
 DumpElement
 
@@ -6695,17 +5362,17 @@ DumpElement
 DumpElement
 @
 (
- BOOLEAN INTEGER STRING VAR X
+ ATOMIC VAR X
 )
 DumpElement
 @
 (
- BOOLEAN INTEGER VAR X
+ ORDINAL VAR X
 )
 DumpElement
 @
 (
- BOOLEAN INTEGER STRING VAR X
+ COMPARABLE VAR X
 )
 DumpElement
 @

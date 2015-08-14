@@ -542,14 +542,6 @@ TWindowState TWindowState::wsMinimized
 TWindowState TWindowState::wsNormal
 TWindowState TWindowState:NameToValue
 STRING TWindowState:ValueToName
-Dictionary: axiom:ValueTypes
-BOOLEAN pop:ValueTypes:AcceptsValue
-TtfwValueTypes pop:ValueTypes:Add
-INTEGER pop:ValueTypes:Compare
-Struct pop:ValueTypes:DefaultValue
-BOOLEAN pop:ValueTypes:EQ
-BOOLEAN pop:ValueTypes:Has
-STRING pop:ValueTypes:Name
 Dictionary: axiom:wait
 wait:Cancel
 wait:Choice
@@ -602,6 +594,7 @@ Dictionary: Test4.ms.script
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -642,6 +635,7 @@ Dictionary: axiom:axiom
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -666,6 +660,7 @@ Dictionary: axiom:axiom
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -683,7 +678,7 @@ BOOLEAN !=
 BOOLEAN !=0
 VOID OPERATOR :: PROCEDURE : "! Тест в разработке"
 BOOLEAN OPERATOR : "БОЛЬШЕ ИЛИ РАВНО"
- BOOLEAN INTEGER STRING OPERATOR :: IN : aLeft
+ COMPARABLE OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: >= : Result
 ; // "БОЛЬШЕ ИЛИ РАВНО"
@@ -709,7 +704,7 @@ VOID OPERATOR : "Выполнить подавив исключение"
 ; // "Выполнить подавив исключение"
 VOID OPERATOR :: PROCEDURE : "Дать системе перерисоваться"
 BOOLEAN OPERATOR : "МЕНЬШЕ ИЛИ РАВНО"
- BOOLEAN INTEGER STRING OPERATOR :: IN : aLeft
+ COMPARABLE OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: <= : Result
 ; // "МЕНЬШЕ ИЛИ РАВНО"
@@ -723,7 +718,7 @@ BOOLEAN OPERATOR : "НЕ РАВНО"
 ; // "НЕ РАВНО"
 BOOLEAN OPERATOR : "НЕ ЯВЛЯЕТСЯ"
  ^ OPERATOR :: IN : aClass
- OBJECT CLASS OPERATOR :: IN : anObj
+ CASTABLE OPERATOR :: IN : anObj
  BOOLEAN OPERATOR :: NOTIS : Result
 ; // "НЕ ЯВЛЯЕТСЯ"
 VOID OPERATOR : "Обработать Enter модально"
@@ -881,7 +876,7 @@ VOID OPERATOR : +=
  ^ OPERATOR :: IN : aRight
 ; // +=
 BOOLEAN OPERATOR : <
- BOOLEAN INTEGER STRING OPERATOR :: IN : aLeft
+ COMPARABLE OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: < : Result
 ; // <
@@ -889,7 +884,7 @@ IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@StereotypeProducer>
  ^L OPERATOR :: IN : aName
 ; // <<@StereotypeProducer>>
 BOOLEAN OPERATOR : <=
- BOOLEAN INTEGER STRING OPERATOR :: IN : aLeft
+ COMPARABLE OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: <= : Result
 ; // <=
@@ -932,7 +927,7 @@ OPERATOR : ==>
 ; // ==>
 BOOLEAN =0
 BOOLEAN OPERATOR : >
- BOOLEAN INTEGER STRING OPERATOR :: IN : aLeft
+ COMPARABLE OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: > : Result
 ; // >
@@ -949,7 +944,7 @@ OBJECT OPERATOR : ->^
  OBJECT OPERATOR :: ->^ : Result
 ; // ->^
 BOOLEAN OPERATOR : >=
- BOOLEAN INTEGER STRING OPERATOR :: IN : aLeft
+ COMPARABLE OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: >= : Result
 ; // >=
@@ -1002,6 +997,9 @@ IMMEDIATE VOID OPERATOR : ARRAY
 VOID Array:Add
 VOID Array:Clear
 INTEGER Array:Count
+ARRAY Array:Filter
+ARRAY Array:FunctorToIterator
+Struct Array:GetItem
 BOOLEAN FUNCTION : array:HasString
  ARRAY OPERATOR :: IN : anArray
  STRING OPERATOR :: IN : aString
@@ -1018,6 +1016,10 @@ BOOLEAN FUNCTION : array:HasText
   STRING OPERATOR :: IN : anItem
  ; // Поиск
 ; // array:HasText
+VOID Array:Iterate
+ARRAY Array:Map
+ARRAY Array:Reverted
+VOID Array:SetItem
 INTEGER FUNCTION : array:StringCount
  ARRAY OPERATOR :: IN : anArray
  STRING OPERATOR :: IN : aString
@@ -1087,722 +1089,725 @@ Char
 IMMEDIATE VOID OPERATOR : CHAR
 STRING char:Dupe
 STRING char:ToString
-CLASS class::EAccessViolation
-CLASS class::EAssertionFailed
-CLASS class::EBitsError
-CLASS class::EClassNotFound
-CLASS class::EComponentError
-CLASS class::EControlC
-CLASS class::EConvertError
-CLASS class::EDivByZero
-CLASS class::EExternal
-CLASS class::EExternalException
-CLASS class::EFCreateError
-CLASS class::EFilerError
-CLASS class::EFileStreamError
-CLASS class::EFOpenError
-CLASS class::EHeapException
-CLASS class::EIntError
-CLASS class::EIntfCastError
-CLASS class::EIntOverflow
-CLASS class::EInvalidCast
-CLASS class::EInvalidImage
-CLASS class::EInvalidOp
-CLASS class::EInvalidOperation
-CLASS class::EInvalidPointer
-CLASS class::EListError
-CLASS class::EMathError
-CLASS class::EMethodNotFound
-CLASS class::EOSError
-CLASS class::EOutOfMemory
-CLASS class::EOutOfResources
-CLASS class::EOverflow
-CLASS class::EParserError
-CLASS class::EPrivilege
-CLASS class::ERangeError
-CLASS class::EReadError
-CLASS class::EResNotFound
-CLASS class::EStackOverflow
-CLASS class::EStreamError
-CLASS class::EStringListError
-CLASS class::EtfwBreak
-CLASS class::EtfwBreakIterator
-CLASS class::EtfwCheck
-CLASS class::EtfwCheckPrim
-CLASS class::EtfwCodeFlowException
-CLASS class::EtfwCompiler
-CLASS class::EtfwContinue
-CLASS class::EtfwException
-CLASS class::EtfwExit
-CLASS class::EtfwExitOrBreak
-CLASS class::EtfwFail
-CLASS class::EtfwHalt
-CLASS class::EtfwManualBreak
-CLASS class::EtfwRunner
-CLASS class::EtfwScriptException
-CLASS class::EUnderflow
-CLASS class::EWriteError
-CLASS class::Exception
-CLASS class::EZeroDivide
-CLASS class::TActionList
-CLASS class::TBasicAction
-CLASS class::TBitmap
-CLASS class::TComponent
-CLASS class::TContainedAction
-CLASS class::TControl
-CLASS class::TControlScrollBar
-CLASS class::TCustomActionList
-CLASS class::TCustomForm
-CLASS class::TCustomImageList
-CLASS class::TFont
-CLASS class::TForm
-CLASS class::TGraphic
-CLASS class::TGraphicsObject
-CLASS class::TIcon
-CLASS class::TInterfacedPersistent
-CLASS class::TkwAdd
-CLASS class::TkwApplicationActionIdle
-CLASS class::TkwApplicationExeName
-CLASS class::TkwArrayAdd
-CLASS class::TkwArrayClear
-CLASS class::TkwArrayCount
-CLASS class::TkwArrayFilter
-CLASS class::TkwArrayFunctorToIterator
-CLASS class::TkwArrayGetItem
-CLASS class::TkwArrayIterate
-CLASS class::TkwArrayMap
-CLASS class::TkwArrayReverted
-CLASS class::TkwAskWindowToCloseItself
-CLASS class::TkwASSERTS
-CLASS class::TkwAtomicIf
-CLASS class::TkwBEGIN
-CLASS class::TkwBeginLikeCompiledCode
-CLASS class::TkwBitAnd
-CLASS class::TkwBitNot
-CLASS class::TkwBitOR
-CLASS class::TkwBoolAnd
-CLASS class::TkwBoolNot
-CLASS class::TkwBoolOr
-CLASS class::TkwBracketBegin
-CLASS class::TkwBracketEnd
-CLASS class::TkwBREAK
-CLASS class::TkwBREAKITERATOR
-CLASS class::TkwBynameControlPush
-CLASS class::TkwCASE
-CLASS class::TkwCat
-CLASS class::TkwCharDupe
-CLASS class::TkwCharToString
-CLASS class::TkwCheckAssert
-CLASS class::TkwCheckEtalon
-CLASS class::TkwCheckOutputWithInput
-CLASS class::TkwClipboardClear
-CLASS class::TkwClipboardGetFormattedText
-CLASS class::TkwClipboardSetText
-CLASS class::TkwCloseArray
-CLASS class::TkwCloseBracket
-CLASS class::TkwCodeIterator
-CLASS class::TkwCompareStr
-CLASS class::TkwCompareText
-CLASS class::TkwCompiledArray
-CLASS class::TkwCompiledCase
-CLASS class::TkwCompiledFunction
-CLASS class::TkwCompiledIF
-CLASS class::TkwCompiledIfElse
-CLASS class::TkwCompiledIncluded
-CLASS class::TkwCompiledMain
-CLASS class::TkwCompiledProcedure
-CLASS class::TkwCompiledProcedureWithStackChecking
-CLASS class::TkwCompiledPushWord
-CLASS class::TkwCompiledRules
-CLASS class::TkwCompiledScriptCompileAndProcess
-CLASS class::TkwCompiledTryExcept
-CLASS class::TkwCompiledTryFinally
-CLASS class::TkwCompiledVar
-CLASS class::TkwCompiledVarAsStringWorker
-CLASS class::TkwCompiledVarWorker
-CLASS class::TkwCompiledWord
-CLASS class::TkwCompiledWordContainer
-CLASS class::TkwCompiledWordPrim
-CLASS class::TkwCompiledWordWorker
-CLASS class::TkwCompiledWordWorkerEx
-CLASS class::TkwCompiledWordWorkerWord
-CLASS class::TkwCompiledWordWorkerWordRunner
-CLASS class::TkwCompiledWStringShift
-CLASS class::TkwCompiledWStringVarDecLen
-CLASS class::TkwCompiledWStringVarInc
-CLASS class::TkwCompiledWStringVarPushCharAndInc
-CLASS class::TkwCompiledWStringVarRSplitTo
-CLASS class::TkwCompiledWStringVarSplitTo
-CLASS class::TkwCompileRef
-CLASS class::TkwCompileValue
-CLASS class::TkwCompileWeakRef
-CLASS class::TkwComponentFromStackWord
-CLASS class::TkwComputerName
-CLASS class::TkwCONST
-CLASS class::TkwConstLikeCompiled
-CLASS class::TkwCONTINUE
-CLASS class::TkwControlByHandle
-CLASS class::TkwControlFocusedControlPush
-CLASS class::TkwControlWord
-CLASS class::TkwCopyFile
-CLASS class::TkwCopyFilesByMask
-CLASS class::TkwCreateAndRaise
-CLASS class::TkwCtxClearTypeInfo
-CLASS class::TkwCtxEngine
-CLASS class::TkwCtxIncludeAccessType
-CLASS class::TkwCtxIncludeLinkType
-CLASS class::TkwCtxIncludeModifier
-CLASS class::TkwCtxIncludeTypeModifier
-CLASS class::TkwCtxIncludeValueTypes
-CLASS class::TkwCtxKeyWordDefiningNow
-CLASS class::TkwCtxNewWordDefinitor
-CLASS class::TkwCtxParser
-CLASS class::TkwCtxParserPushInt
-CLASS class::TkwCtxParserPushString
-CLASS class::TkwCtxParserPushSymbol
-CLASS class::TkwCtxPushCompiler
-CLASS class::TkwCtxPushFinder
-CLASS class::TkwCtxResolveIncludedFilePath
-CLASS class::TkwCtxScriptCaller
-CLASS class::TkwCtxSetNewWordName
-CLASS class::TkwCtxSetValueTypes
-CLASS class::TkwCtxSetWordProducerForCompiledClass
-CLASS class::TkwCtxStoredValuesStack
-CLASS class::TkwCtxValueTypes
-CLASS class::TkwCtxWordDefiningNow
-CLASS class::TkwCtxWordInfo
-CLASS class::TkwCurrentException
-CLASS class::TkwCurrentExceptionClass
-CLASS class::TkwCurrentExceptionClassName
-CLASS class::TkwCurrentExceptionMessage
-CLASS class::TkwDec
-CLASS class::TkwDEFAULT
-CLASS class::TkwDefine
-CLASS class::TkwDeleteFile
-CLASS class::TkwDeleteFilesByMask
-CLASS class::TkwDesktopHeight
-CLASS class::TkwDesktopWidth
-CLASS class::TkwDiv2
-CLASS class::TkwDivide
-CLASS class::TkwDivision
-CLASS class::TkwDoWord
-CLASS class::TkwDROP
-CLASS class::TkwDROP2
-CLASS class::TkwDualCompiledWordContainer
-CLASS class::TkwDUP
-CLASS class::TkwDUP2
-CLASS class::TkwDUPIfNotZero
-CLASS class::TkwElse
-CLASS class::TkwEmitString
-CLASS class::TkwEnabledSaveRTFPictures
-CLASS class::TkwEND
-CLASS class::TkwEndsStr
-CLASS class::TkwEndsText
-CLASS class::TkwEquals
-CLASS class::TkwEqualZero
-CLASS class::TkwEtalonNeeds64
-CLASS class::TkwEtalonNeedsComputerName
-CLASS class::TkwEtalonNeedsOSName
-CLASS class::TkwEtalonNeedsXE
-CLASS class::TkwEXCEPT
-CLASS class::TkwEXIT
-CLASS class::TkwFalse
-CLASS class::TkwFileEOF
-CLASS class::TkwFileOpenRead
-CLASS class::TkwFileOpenWrite
-CLASS class::TkwFileReadLines
-CLASS class::TkwFileReadLn
-CLASS class::TkwFileReadWStrLn
-CLASS class::TkwFileWriteChar
-CLASS class::TkwFileWriteLn
-CLASS class::TkwFileWriteStr
-CLASS class::TkwFileWriteWStr
-CLASS class::TkwFileWriteWStrLn
-CLASS class::TkwFINALLY
-CLASS class::TkwFindWindowByCaption
-CLASS class::TkwFontBackColor
-CLASS class::TkwFontColor
-CLASS class::TkwFontIsBold
-CLASS class::TkwFontIsItalic
-CLASS class::TkwFontIsStrikeOut
-CLASS class::TkwFontIsUnderline
-CLASS class::TkwFontName
-CLASS class::TkwFontSize
-CLASS class::TkwFORWARD
-CLASS class::TkwForwardDeclaration
-CLASS class::TkwForwardDeclarationHolder
-CLASS class::TkwFUNCTION
-CLASS class::TkwGeneratePDFForEtalon
-CLASS class::TkwGeneratorsExecute
-CLASS class::TkwGeneratorsLink
-CLASS class::TkwGetForegroundWindow
-CLASS class::TkwGetLocalDate
-CLASS class::TkwGetLocalDateTime
-CLASS class::TkwGetLocalTime
-CLASS class::TkwGetTickCount
-CLASS class::TkwGlobalVar
-CLASS class::TkwGREATER
-CLASS class::TkwGreaterThanZero
-CLASS class::TkwHALT
-CLASS class::TkwHardKey
-CLASS class::TkwHasTabs
-CLASS class::TkwHelp
-CLASS class::TkwIfElse
-CLASS class::TkwIMMEDIATE
-CLASS class::TkwImmediateTemporaryCompiledCode
-CLASS class::TkwInc
-CLASS class::TkwInclude
-CLASS class::TkwIncluded
-CLASS class::TkwIncludedPrim
-CLASS class::TkwINCLUDES
-CLASS class::TkwIncludesInChildren
-CLASS class::TkwInlinedWord
-CLASS class::TkwInnerIncluded
-CLASS class::TkwInnerIncludedInChildren
-CLASS class::TkwInteger
-CLASS class::TkwIntToStr
-CLASS class::TkwInvertROT
-CLASS class::TkwIsArray
-CLASS class::TkwIsBool
-CLASS class::TkwIsBracket
-CLASS class::TkwIsChar
-CLASS class::TkwIsClass
-CLASS class::TkwIsInt
-CLASS class::TkwIsIntf
-CLASS class::TkwIsNil
-CLASS class::TkwIsObj
-CLASS class::TkwIsString
-CLASS class::TkwIsTypeOf
-CLASS class::TkwIsUnder64
-CLASS class::TkwIsVoid
-CLASS class::TkwIsWString
-CLASS class::TkwIsXE
-CLASS class::TkwIterateChildWindows
-CLASS class::TkwIterateForms
-CLASS class::TkwIterateWindows
-CLASS class::TkwKey
-CLASS class::TkwKeyDown
-CLASS class::TkwKeyUp
-CLASS class::TkwLeftParam
-CLASS class::TkwLeftWordRefParam
-CLASS class::TkwLESS
-CLASS class::TkwLessThanZero
-CLASS class::TkwLOOP
-CLASS class::TkwMain
-CLASS class::TkwMainCodeController
-CLASS class::TkwMainScreenHeight
-CLASS class::TkwMainScreenWidth
-CLASS class::TkwMedianBacket
-CLASS class::TkwMembersIterator
-CLASS class::TkwMenuItemCaption
-CLASS class::TkwMenuItemClick
-CLASS class::TkwMenuItemCount
-CLASS class::TkwMenuItemEnabled
-CLASS class::TkwMenuItemGetItem
-CLASS class::TkwMenuItemGetMenuHeight
-CLASS class::TkwMenuItemVisible
-CLASS class::TkwMODAL
-CLASS class::TkwModFromDiv
-CLASS class::TkwModifier
-CLASS class::TkwMouseGetCursorIndex
-CLASS class::TkwMouseGetCursorNameByIndex
-CLASS class::TkwMouseGetCursorPosition
-CLASS class::TkwMouseLeftDown
-CLASS class::TkwMouseLeftUp
-CLASS class::TkwMouseMiddleDown
-CLASS class::TkwMouseMiddleUp
-CLASS class::TkwMouseRightDown
-CLASS class::TkwMouseRightUp
-CLASS class::TkwMouseSetCursorPosition
-CLASS class::TkwMouseUpDownSupport
-CLASS class::TkwMouseWheelDown
-CLASS class::TkwMouseWheelSupport
-CLASS class::TkwMouseWheelUp
-CLASS class::TkwMsg
-CLASS class::TkwMul
-CLASS class::TkwMul2
-CLASS class::TkwMulDiv
-CLASS class::TkwNewWord
-CLASS class::TkwNil
-CLASS class::TkwNIP
-CLASS class::TkwNOP
-CLASS class::TkwNotEquals
-CLASS class::TkwNotImplemented
-CLASS class::TkwNotZero
-CLASS class::TkwObjectFromStackWord
-CLASS class::TkwObjRefParam
-CLASS class::TkwOpenArray
-CLASS class::TkwOPERATOR
-CLASS class::TkwOSName
-CLASS class::TkwOVER
-CLASS class::TkwOVER2
-CLASS class::TkwPICK
-CLASS class::TkwPopActionListFindAction
-CLASS class::TkwPopClassInherits
-CLASS class::TkwPopCompiledWordWorkerWordCompiled
-CLASS class::TkwPopCompilerAddCodePart
-CLASS class::TkwPopCompilerCompileInParameterPopCode
-CLASS class::TkwPopCompilerGetWordCompilingNow
-CLASS class::TkwPopCompilerKeywordFinder
-CLASS class::TkwPopCompilerNewWordDefinitor
-CLASS class::TkwPopCompilerSetToCtx
-CLASS class::TkwPopComponentComponentCount
-CLASS class::TkwPopComponentFindComponent
-CLASS class::TkwPopComponentGetComponent
-CLASS class::TkwPopComponentName
-CLASS class::TkwPopComponentOwner
-CLASS class::TkwPopContainedActionExecute
-CLASS class::TkwPopControlCanFocus
-CLASS class::TkwPopControlCaption
-CLASS class::TkwPopControlClick
-CLASS class::TkwPopControlClientToScreen
-CLASS class::TkwPopControlColor
-CLASS class::TkwPopControlControlCount
-CLASS class::TkwPopControlEnabled
-CLASS class::TkwPopControlFindControlByName
-CLASS class::TkwPopControlFocused
-CLASS class::TkwPopControlFont
-CLASS class::TkwPopControlGetAnotherParentForm
-CLASS class::TkwPopControlGetControl
-CLASS class::TkwPopControlGetMainForm
-CLASS class::TkwPopControlGetParentForm
-CLASS class::TkwPopControlGetPopupMenu
-CLASS class::TkwPopControlGetTopParentForm
-CLASS class::TkwPopControlHandle
-CLASS class::TkwPopControlHeight
-CLASS class::TkwPopControlHide
-CLASS class::TkwPopControlHint
-CLASS class::TkwPopControlHScrollerVisible
-CLASS class::TkwPopControlInvalidate
-CLASS class::TkwPopControlLeft
-CLASS class::TkwPopControlMouseLeftClick
-CLASS class::TkwPopControlMouseLeftDragAndDrop
-CLASS class::TkwPopControlMouseMiddleClick
-CLASS class::TkwPopControlMouseRightClick
-CLASS class::TkwPopControlMouseWheelDown
-CLASS class::TkwPopControlMouseWheelUp
-CLASS class::TkwPopControlName
-CLASS class::TkwPopControlParent
-CLASS class::TkwPopControlRepaint
-CLASS class::TkwPopControlScreenToClient
-CLASS class::TkwPopControlScrollInfo
-CLASS class::TkwPopControlScrollInfoMax
-CLASS class::TkwPopControlScrollInfoMin
-CLASS class::TkwPopControlScrollInfoPageSize
-CLASS class::TkwPopControlScrollInfoPosition
-CLASS class::TkwPopControlSetFocus
-CLASS class::TkwPopControlShow
-CLASS class::TkwPopControlShowHint
-CLASS class::TkwPopControlTop
-CLASS class::TkwPopControlUndock
-CLASS class::TkwPopControlVisible
-CLASS class::TkwPopControlVScrollerVisible
-CLASS class::TkwPopControlWidth
-CLASS class::TkwPopDictionaryExExportDictionary
-CLASS class::TkwPopDictionaryExExportedDictionaries
-CLASS class::TkwPopDictionaryExFileDateTime
-CLASS class::TkwPopDictionaryExFileName
-CLASS class::TkwPopDictionaryExRemoveFromCache
-CLASS class::TkwPopDictionaryExUsedDictionaries
-CLASS class::TkwPopDictionaryExUseDictionary
-CLASS class::TkwPopFinderSetToCtx
-CLASS class::TkwPopFormActiveMDIChild
-CLASS class::TkwPopFormClose
-CLASS class::TkwPopFormFindActionList
-CLASS class::TkwPopFormFindMenuItem
-CLASS class::TkwPopFormFormStyle
-CLASS class::TkwPopFormGetWindowState
-CLASS class::TkwPopFormHasControl
-CLASS class::TkwPopFormMDIChildCount
-CLASS class::TkwPopFormMDIChildren
-CLASS class::TkwPopFormModalResult
-CLASS class::TkwPopFormNext
-CLASS class::TkwPopFormSetWindowState
-CLASS class::TkwPopKeywordFinderKeywordByName
-CLASS class::TkwPopKeywordFinderParentFinder
-CLASS class::TkwPopKeyWordName
-CLASS class::TkwPopKeyWordWord
-CLASS class::TkwPopNewWordDefinitorCheckVar
-CLASS class::TkwPopNewWordDefinitorCheckWord
-CLASS class::TkwPopNewWordDefinitorDefineInParameter
-CLASS class::TkwPopNewWordDefinitorKeywordFinder
-CLASS class::TkwPopObjectClassName
-CLASS class::TkwPopObjectGetFloatProp
-CLASS class::TkwPopObjectGetInterfaceProp
-CLASS class::TkwPopObjectGetObjProp
-CLASS class::TkwPopObjectGetOrdProp
-CLASS class::TkwPopObjectGetStrProp
-CLASS class::TkwPopObjectHasProp
-CLASS class::TkwPopObjectInherits
-CLASS class::TkwPopObjectIsNil
-CLASS class::TkwPopObjectRTTIInfo
-CLASS class::TkwPopObjectSetFloatProp
-CLASS class::TkwPopObjectSetOrdProp
-CLASS class::TkwPopObjectSetStrProp
-CLASS class::TkwPopParserExPushInt
-CLASS class::TkwPopParserExPushString
-CLASS class::TkwPopParserExPushSymbol
-CLASS class::TkwPopParserFileName
-CLASS class::TkwPopParserNextToken
-CLASS class::TkwPopParserSourceLine
-CLASS class::TkwPopParserTokenInt
-CLASS class::TkwPopParserTokenLongString
-CLASS class::TkwPopParserTokenType
-CLASS class::TkwPopScriptEngineAddInitialization
-CLASS class::TkwPopScriptEngineAsKeywordFinder
-CLASS class::TkwPopScriptEngineCascadeDict
-CLASS class::TkwPopScriptEngineCurrentCompilingDictionary
-CLASS class::TkwPopScriptEngineDisableForHelp
-CLASS class::TkwPopScrollingWinControlHScrollerVisible
-CLASS class::TkwPopScrollingWinControlVScrollerVisible
-CLASS class::TkwPopValueTypesAcceptsValue
-CLASS class::TkwPopValueTypesAdd
-CLASS class::TkwPopValueTypesCompare
-CLASS class::TkwPopValueTypesDefaultValue
-CLASS class::TkwPopValueTypesEQ
-CLASS class::TkwPopValueTypesHas
-CLASS class::TkwPopValueTypesName
-CLASS class::TkwPopWordDirectives
-CLASS class::TkwPopWordEndBracket
-CLASS class::TkwPopWordFindMember
-CLASS class::TkwPopWordGetLeftWordRefValue
-CLASS class::TkwPopWordGetParam
-CLASS class::TkwPopWordGetRef
-CLASS class::TkwPopWordInfo
-CLASS class::TkwPopWordInfoAcceptsValue
-CLASS class::TkwPopWordInfoAccessType
-CLASS class::TkwPopWordInfoCompare
-CLASS class::TkwPopWordInfoEmpty
-CLASS class::TkwPopWordInfoHasAccessType
-CLASS class::TkwPopWordInfoHasLinkType
-CLASS class::TkwPopWordInfoHasValueType
-CLASS class::TkwPopWordInfoHasWordModifier
-CLASS class::TkwPopWordInfoIncludeAccesType
-CLASS class::TkwPopWordInfoIncludeLinkType
-CLASS class::TkwPopWordInfoIncludeModifier
-CLASS class::TkwPopWordInfoIncludeTypeModifier
-CLASS class::TkwPopWordInfoLinkType
-CLASS class::TkwPopWordInfoToString
-CLASS class::TkwPopWordInfoTypeName
-CLASS class::TkwPopWordInfoValueTypes
-CLASS class::TkwPopWordIsForHelp
-CLASS class::TkwPopWordIsInParam
-CLASS class::TkwPopWordIsVarLike
-CLASS class::TkwPopWordLeftWordRefValuesCount
-CLASS class::TkwPopWordName
-CLASS class::TkwPopWordParent
-CLASS class::TkwPopWordProducer
-CLASS class::TkwPopWordPublicateInMainDictionary
-CLASS class::TkwPopWordRedefines
-CLASS class::TkwPopWordSetProducer
-CLASS class::TkwPopWordSetValue
-CLASS class::TkwPopWordSourcePointString
-CLASS class::TkwPrint
-CLASS class::TkwProcessFilesWithMask
-CLASS class::TkwProcessMessages
-CLASS class::TkwProcessSubDirs
-CLASS class::TkwPureDir
-CLASS class::TkwPushWord
-CLASS class::TkwRAISE
-CLASS class::TkwRandom
-CLASS class::TkwRandomize
-CLASS class::TkwReduceStackLevel
-CLASS class::TkwRefParam
-CLASS class::TkwRenameFile
-CLASS class::TkwRGB2String
-CLASS class::TkwRightLiteralParam
-CLASS class::TkwRightParam
-CLASS class::TkwRightParamEx
-CLASS class::TkwROLL
-CLASS class::TkwROT
-CLASS class::TkwRSplitTo
-CLASS class::TkwRULES
-CLASS class::TkwRuntimeWordWithCode
-CLASS class::TkwRuntimeWordWithCodeExecution
-CLASS class::TkwSameStr
-CLASS class::TkwSameText
-CLASS class::TkwScreenCount
-CLASS class::TkwScreenHeight
-CLASS class::TkwScreenShot2File
-CLASS class::TkwScreenShot2FileWithCheck
-CLASS class::TkwScreenWidth
-CLASS class::TkwScriptCompileAndProcess
-CLASS class::TkwScriptExceptionStack
-CLASS class::TkwScriptFileName
-CLASS class::TkwScrollInfoWord
-CLASS class::TkwSendInputSupport
-CLASS class::TkwSetAppPath2CurrentDir
-CLASS class::TkwSetFuzzInPercent
-CLASS class::TkwSetLocalDate
-CLASS class::TkwSetLocalDateTime
-CLASS class::TkwSetLocalTime
-CLASS class::TkwSetRandSeed
-CLASS class::TkwShiftDate
-CLASS class::TkwShiftTime
-CLASS class::TkwSLEEP
-CLASS class::TkwSmartEquals
-CLASS class::TkwSmartNotEquals
-CLASS class::TkwSourcePointWord
-CLASS class::TkwSplitTo
-CLASS class::TkwStackLevel
-CLASS class::TkwStandardProcedureCloseBracket
-CLASS class::TkwStartsStr
-CLASS class::TkwStartsText
-CLASS class::TkwStartTimer
-CLASS class::TkwStopTimer
-CLASS class::TkwStopTimerEx
-CLASS class::TkwString
-CLASS class::TkwStringChar
-CLASS class::TkwStringCodePage
-CLASS class::TkwStringConsistsOf
-CLASS class::TkwStringHasAnyOf
-CLASS class::TkwStringLen
-CLASS class::TkwStringPos
-CLASS class::TkwStringPosEx
-CLASS class::TkwStringReplace
-CLASS class::TkwStringReplaceFirst
-CLASS class::TkwStringSplit
-CLASS class::TkwStringToChar
-CLASS class::TkwStrToInt
-CLASS class::TkwSub
-CLASS class::TkwSWAP
-CLASS class::TkwSWAP2
-CLASS class::TkwSystemIncluded
-CLASS class::TkwSysutilsChangeFileExt
-CLASS class::TkwSysutilsCreateDir
-CLASS class::TkwSysutilsDirectoryExists
-CLASS class::TkwSysutilsExtractFileDrive
-CLASS class::TkwSysutilsExtractFileName
-CLASS class::TkwSysutilsExtractFilePath
-CLASS class::TkwSysutilsFileExists
-CLASS class::TkwSysutilsForceDirectories
-CLASS class::TkwSysutilsGetCurrentDir
-CLASS class::TkwSysutilsParamCount
-CLASS class::TkwSysutilsParamStr
-CLASS class::TkwSysutilsRemoveDir
-CLASS class::TkwSysutilsSetCurrentDir
-CLASS class::TkwTemporaryCompiledCode
-CLASS class::TkwTestResolveInputFilePath
-CLASS class::TkwTextReplace
-CLASS class::TkwTextReplaceFirst
-CLASS class::TkwTHREAD
-CLASS class::TkwTimeToLog
-CLASS class::TkwToPrintable
-CLASS class::TkwTrue
-CLASS class::TkwTryFinally
-CLASS class::TkwTUCK
-CLASS class::TkwUses
-CLASS class::TkwUsesLike
-CLASS class::TkwValue
-CLASS class::TkwVarDecLen
-CLASS class::TkwVarInc
-CLASS class::TkwVarShift
-CLASS class::TkwVarWorkerCompiledCode
-CLASS class::TkwWaitCancel
-CLASS class::TkwWaitChoice
-CLASS class::TkwWaitNo
-CLASS class::TkwWaitOk
-CLASS class::TkwWaitYes
-CLASS class::TkwWasWait
-CLASS class::TkwWHILEDO
-CLASS class::TkwWinControlFromStackWord
-CLASS class::TkwWindowFromPoint
-CLASS class::TkwWinExec
-CLASS class::TkwWinTreeGetCurrentText
-CLASS class::TkwWndCloseWindow
-CLASS class::TkwWndGetClassName
-CLASS class::TkwWndGetWindowText
-CLASS class::TkwWndIsVisible
-CLASS class::TkwWndSetForeground
-CLASS class::TkwWndWindowIsMine
-CLASS class::TkwWordPtrPushWord
-CLASS class::TkwWordPtrWorker
-CLASS class::TkwWordWorker
-CLASS class::TkwWStringChar
-CLASS class::TkwWStringCodePage
-CLASS class::TkwWStringConsistsOf
-CLASS class::TkwWStringEnds
-CLASS class::TkwWStringEndsText
-CLASS class::TkwWStringFirstChar
-CLASS class::TkwWStringHasAnyOf
-CLASS class::TkwWStringInc
-CLASS class::TkwWStringIsNil
-CLASS class::TkwWStringLen
-CLASS class::TkwWStringShift
-CLASS class::TkwWStringStarts
-CLASS class::TkwWStringStartsText
-CLASS class::TkwWStringToString
-CLASS class::TkwWStringVarDecLen
-CLASS class::TkwWStringVarInc
-CLASS class::TkwWStringVarPushCharAndInc
-CLASS class::TkwWStringVarRSplitTo
-CLASS class::TkwWStringVarShift
-CLASS class::TkwWStringVarSplitTo
-CLASS class::Tl3CastableObject
-CLASS class::Tl3CastablePersistent
-CLASS class::Tl3DataContainerWithoutIUnknownPrim
-CLASS class::Tl3PrimString
-CLASS class::Tl3ProtoDataContainer
-CLASS class::Tl3ProtoObject
-CLASS class::Tl3Variant
-CLASS class::Tl3VariantPrim
-CLASS class::TMainMenu
-CLASS class::TMenu
-CLASS class::TMenuItem
-CLASS class::TObject
-CLASS class::TPersistent
-CLASS class::TPopupMenu
-CLASS class::TScrollingWinControl
-CLASS class::TSizeConstraints
-CLASS class::TtfwAnonimousWord
-CLASS class::TtfwArrayCollector
-CLASS class::TtfwBeginLikeWord
-CLASS class::TtfwClassLike
-CLASS class::TtfwClassModifier
-CLASS class::TtfwCompilingWord
-CLASS class::TtfwConst
-CLASS class::TtfwConstLike
-CLASS class::TtfwDictionary
-CLASS class::TtfwDictionaryEx
-CLASS class::TtfwDictionaryExPrim
-CLASS class::TtfwDictionaryPrim
-CLASS class::TtfwDictionaryPrimPrim
-CLASS class::TtfwDictionaryPrimPrimPrim
-CLASS class::TtfwDualWord
-CLASS class::TtfwDualWStrWord
-CLASS class::TtfwEnumConstantRegistrator
-CLASS class::TtfwFilterLambda
-CLASS class::TtfwIncludeLike
-CLASS class::TtfwInitCodeWord
-CLASS class::TtfwInteger
-CLASS class::TtfwIntegerConstantRegistrator
-CLASS class::TtfwIntegerToEnumName
-CLASS class::TtfwKeyWord
-CLASS class::TtfwKeyWordPrim
-CLASS class::TtfwMapLambda
-CLASS class::TtfwNewWord
-CLASS class::TtfwProcedure
-CLASS class::TtfwRegisterableWord
-CLASS class::TtfwRegisterableWordPrim
-CLASS class::TtfwRTTIProperty
-CLASS class::TtfwScriptEnginePrim
-CLASS class::TtfwString
-CLASS class::TtfwStringConstantRegistrator
-CLASS class::TtfwStringToEnumValue
-CLASS class::TtfwSysUtilsWord
-CLASS class::TtfwTwoLambdas
-CLASS class::TtfwTypeInfoList
-CLASS class::TtfwTypeInfoListPrim
-CLASS class::TtfwTypeModifier
-CLASS class::TtfwValueTypes
-CLASS class::TtfwVarWorker
-CLASS class::TtfwWord
-CLASS class::TtfwWordInfo
-CLASS class::TtfwWordPrim
-CLASS class::TtfwWordWorker
-CLASS class::TtfwWordWorkerEx
-CLASS class::TtfwWStrWord
-CLASS class::TWinControl
+TClass class::EAccessViolation
+TClass class::EAssertionFailed
+TClass class::EBitsError
+TClass class::EClassNotFound
+TClass class::EComponentError
+TClass class::EControlC
+TClass class::EConvertError
+TClass class::EDivByZero
+TClass class::EExternal
+TClass class::EExternalException
+TClass class::EFCreateError
+TClass class::EFilerError
+TClass class::EFileStreamError
+TClass class::EFOpenError
+TClass class::EHeapException
+TClass class::EIntError
+TClass class::EIntfCastError
+TClass class::EIntOverflow
+TClass class::EInvalidCast
+TClass class::EInvalidImage
+TClass class::EInvalidOp
+TClass class::EInvalidOperation
+TClass class::EInvalidPointer
+TClass class::EListError
+TClass class::EMathError
+TClass class::EMethodNotFound
+TClass class::EOSError
+TClass class::EOutOfMemory
+TClass class::EOutOfResources
+TClass class::EOverflow
+TClass class::EParserError
+TClass class::EPrivilege
+TClass class::ERangeError
+TClass class::EReadError
+TClass class::EResNotFound
+TClass class::EStackOverflow
+TClass class::EStreamError
+TClass class::EStringListError
+TClass class::EtfwBreak
+TClass class::EtfwBreakIterator
+TClass class::EtfwCheck
+TClass class::EtfwCheckPrim
+TClass class::EtfwCodeFlowException
+TClass class::EtfwCompiler
+TClass class::EtfwContinue
+TClass class::EtfwException
+TClass class::EtfwExit
+TClass class::EtfwExitOrBreak
+TClass class::EtfwFail
+TClass class::EtfwHalt
+TClass class::EtfwManualBreak
+TClass class::EtfwRunner
+TClass class::EtfwScriptException
+TClass class::EUnderflow
+TClass class::EWriteError
+TClass class::Exception
+TClass class::EZeroDivide
+TClass class::TActionList
+TClass class::TBasicAction
+TClass class::TBitmap
+TClass class::TComponent
+TClass class::TContainedAction
+TClass class::TControl
+TClass class::TControlScrollBar
+TClass class::TCustomActionList
+TClass class::TCustomForm
+TClass class::TCustomImageList
+TClass class::TFont
+TClass class::TForm
+TClass class::TGraphic
+TClass class::TGraphicsObject
+TClass class::TIcon
+TClass class::TInterfacedPersistent
+TClass class::TkwAdd
+TClass class::TkwApplicationActionIdle
+TClass class::TkwApplicationExeName
+TClass class::TkwArrayAdd
+TClass class::TkwArrayClear
+TClass class::TkwArrayCount
+TClass class::TkwArrayFilter
+TClass class::TkwArrayFunctorToIterator
+TClass class::TkwArrayGetItem
+TClass class::TkwArrayIterate
+TClass class::TkwArrayMap
+TClass class::TkwArrayReverted
+TClass class::TkwArraySetItem
+TClass class::TkwAskWindowToCloseItself
+TClass class::TkwASSERTS
+TClass class::TkwAtomicIf
+TClass class::TkwBEGIN
+TClass class::TkwBeginLikeCompiledCode
+TClass class::TkwBitAnd
+TClass class::TkwBitNot
+TClass class::TkwBitOR
+TClass class::TkwBoolAnd
+TClass class::TkwBoolNot
+TClass class::TkwBoolOr
+TClass class::TkwBracketBegin
+TClass class::TkwBracketEnd
+TClass class::TkwBREAK
+TClass class::TkwBREAKITERATOR
+TClass class::TkwBynameControlPush
+TClass class::TkwCASE
+TClass class::TkwCat
+TClass class::TkwCharDupe
+TClass class::TkwCharToString
+TClass class::TkwCheckAssert
+TClass class::TkwCheckEtalon
+TClass class::TkwCheckOutputWithInput
+TClass class::TkwClipboardClear
+TClass class::TkwClipboardGetFormattedText
+TClass class::TkwClipboardSetText
+TClass class::TkwCloseArray
+TClass class::TkwCloseBracket
+TClass class::TkwCodeIterator
+TClass class::TkwCompareStr
+TClass class::TkwCompareText
+TClass class::TkwCompiledArray
+TClass class::TkwCompiledCase
+TClass class::TkwCompiledFunction
+TClass class::TkwCompiledIF
+TClass class::TkwCompiledIfElse
+TClass class::TkwCompiledIncluded
+TClass class::TkwCompiledMain
+TClass class::TkwCompiledProcedure
+TClass class::TkwCompiledProcedureWithStackChecking
+TClass class::TkwCompiledPushWord
+TClass class::TkwCompiledRules
+TClass class::TkwCompiledScriptCompileAndProcess
+TClass class::TkwCompiledTryExcept
+TClass class::TkwCompiledTryFinally
+TClass class::TkwCompiledVar
+TClass class::TkwCompiledVarAsStringWorker
+TClass class::TkwCompiledVarWorker
+TClass class::TkwCompiledWord
+TClass class::TkwCompiledWordContainer
+TClass class::TkwCompiledWordPrim
+TClass class::TkwCompiledWordWorker
+TClass class::TkwCompiledWordWorkerEx
+TClass class::TkwCompiledWordWorkerWord
+TClass class::TkwCompiledWordWorkerWordRunner
+TClass class::TkwCompiledWStringShift
+TClass class::TkwCompiledWStringVarDecLen
+TClass class::TkwCompiledWStringVarInc
+TClass class::TkwCompiledWStringVarPushCharAndInc
+TClass class::TkwCompiledWStringVarRSplitTo
+TClass class::TkwCompiledWStringVarSplitTo
+TClass class::TkwCompileRef
+TClass class::TkwCompileValue
+TClass class::TkwCompileWeakRef
+TClass class::TkwComponentFromStackWord
+TClass class::TkwComputerName
+TClass class::TkwCONST
+TClass class::TkwConstLikeCompiled
+TClass class::TkwCONTINUE
+TClass class::TkwControlByHandle
+TClass class::TkwControlFocusedControlPush
+TClass class::TkwControlWord
+TClass class::TkwCopyFile
+TClass class::TkwCopyFilesByMask
+TClass class::TkwCreateAndRaise
+TClass class::TkwCtxClearTypeInfo
+TClass class::TkwCtxEngine
+TClass class::TkwCtxIncludeAccessType
+TClass class::TkwCtxIncludeLinkType
+TClass class::TkwCtxIncludeModifier
+TClass class::TkwCtxIncludeTypeModifier
+TClass class::TkwCtxIncludeValueTypes
+TClass class::TkwCtxKeyWordDefiningNow
+TClass class::TkwCtxNewWordDefinitor
+TClass class::TkwCtxParser
+TClass class::TkwCtxParserPushInt
+TClass class::TkwCtxParserPushString
+TClass class::TkwCtxParserPushSymbol
+TClass class::TkwCtxPushCompiler
+TClass class::TkwCtxPushFinder
+TClass class::TkwCtxResolveIncludedFilePath
+TClass class::TkwCtxScriptCaller
+TClass class::TkwCtxSetNewWordName
+TClass class::TkwCtxSetValueTypes
+TClass class::TkwCtxSetWordProducerForCompiledClass
+TClass class::TkwCtxStoredValuesStack
+TClass class::TkwCtxValueTypes
+TClass class::TkwCtxWordDefiningNow
+TClass class::TkwCtxWordInfo
+TClass class::TkwCurrentException
+TClass class::TkwCurrentExceptionClass
+TClass class::TkwCurrentExceptionClassName
+TClass class::TkwCurrentExceptionMessage
+TClass class::TkwDec
+TClass class::TkwDEFAULT
+TClass class::TkwDefine
+TClass class::TkwDeleteFile
+TClass class::TkwDeleteFilesByMask
+TClass class::TkwDesktopHeight
+TClass class::TkwDesktopWidth
+TClass class::TkwDiv2
+TClass class::TkwDivide
+TClass class::TkwDivision
+TClass class::TkwDoWord
+TClass class::TkwDROP
+TClass class::TkwDROP2
+TClass class::TkwDualCompiledWordContainer
+TClass class::TkwDUP
+TClass class::TkwDUP2
+TClass class::TkwDUPIfNotZero
+TClass class::TkwElse
+TClass class::TkwEmitString
+TClass class::TkwEnabledSaveRTFPictures
+TClass class::TkwEND
+TClass class::TkwEndsStr
+TClass class::TkwEndsText
+TClass class::TkwEquals
+TClass class::TkwEqualZero
+TClass class::TkwEtalonNeeds64
+TClass class::TkwEtalonNeedsComputerName
+TClass class::TkwEtalonNeedsOSName
+TClass class::TkwEtalonNeedsXE
+TClass class::TkwEXCEPT
+TClass class::TkwEXIT
+TClass class::TkwFalse
+TClass class::TkwFileEOF
+TClass class::TkwFileOpenRead
+TClass class::TkwFileOpenWrite
+TClass class::TkwFileReadLines
+TClass class::TkwFileReadLn
+TClass class::TkwFileReadWStrLn
+TClass class::TkwFileWriteChar
+TClass class::TkwFileWriteLn
+TClass class::TkwFileWriteStr
+TClass class::TkwFileWriteWStr
+TClass class::TkwFileWriteWStrLn
+TClass class::TkwFINALLY
+TClass class::TkwFindWindowByCaption
+TClass class::TkwFontBackColor
+TClass class::TkwFontColor
+TClass class::TkwFontIsBold
+TClass class::TkwFontIsItalic
+TClass class::TkwFontIsStrikeOut
+TClass class::TkwFontIsUnderline
+TClass class::TkwFontName
+TClass class::TkwFontSize
+TClass class::TkwFORWARD
+TClass class::TkwForwardDeclaration
+TClass class::TkwForwardDeclarationHolder
+TClass class::TkwFUNCTION
+TClass class::TkwGeneratePDFForEtalon
+TClass class::TkwGeneratorsExecute
+TClass class::TkwGeneratorsLink
+TClass class::TkwGetForegroundWindow
+TClass class::TkwGetLocalDate
+TClass class::TkwGetLocalDateTime
+TClass class::TkwGetLocalTime
+TClass class::TkwGetTickCount
+TClass class::TkwGlobalVar
+TClass class::TkwGREATER
+TClass class::TkwGreaterThanZero
+TClass class::TkwHALT
+TClass class::TkwHardKey
+TClass class::TkwHasTabs
+TClass class::TkwHelp
+TClass class::TkwIfElse
+TClass class::TkwIMMEDIATE
+TClass class::TkwImmediateTemporaryCompiledCode
+TClass class::TkwInc
+TClass class::TkwInclude
+TClass class::TkwIncluded
+TClass class::TkwIncludedPrim
+TClass class::TkwINCLUDES
+TClass class::TkwIncludesInChildren
+TClass class::TkwInlinedWord
+TClass class::TkwInnerIncluded
+TClass class::TkwInnerIncludedInChildren
+TClass class::TkwInteger
+TClass class::TkwIntToStr
+TClass class::TkwInvertROT
+TClass class::TkwIsArray
+TClass class::TkwIsBool
+TClass class::TkwIsBracket
+TClass class::TkwIsChar
+TClass class::TkwIsClass
+TClass class::TkwIsInt
+TClass class::TkwIsIntf
+TClass class::TkwIsNil
+TClass class::TkwIsObj
+TClass class::TkwIsString
+TClass class::TkwIsTypeOf
+TClass class::TkwIsUnder64
+TClass class::TkwIsVoid
+TClass class::TkwIsWString
+TClass class::TkwIsXE
+TClass class::TkwIterateChildWindows
+TClass class::TkwIterateForms
+TClass class::TkwIterateWindows
+TClass class::TkwKey
+TClass class::TkwKeyDown
+TClass class::TkwKeyUp
+TClass class::TkwLeftParam
+TClass class::TkwLeftWordRefParam
+TClass class::TkwLESS
+TClass class::TkwLessThanZero
+TClass class::TkwLOOP
+TClass class::TkwMain
+TClass class::TkwMainCodeController
+TClass class::TkwMainScreenHeight
+TClass class::TkwMainScreenWidth
+TClass class::TkwMedianBacket
+TClass class::TkwMembersIterator
+TClass class::TkwMenuItemCaption
+TClass class::TkwMenuItemClick
+TClass class::TkwMenuItemCount
+TClass class::TkwMenuItemEnabled
+TClass class::TkwMenuItemGetItem
+TClass class::TkwMenuItemGetMenuHeight
+TClass class::TkwMenuItemVisible
+TClass class::TkwMODAL
+TClass class::TkwModFromDiv
+TClass class::TkwModifier
+TClass class::TkwMouseGetCursorIndex
+TClass class::TkwMouseGetCursorNameByIndex
+TClass class::TkwMouseGetCursorPosition
+TClass class::TkwMouseLeftDown
+TClass class::TkwMouseLeftUp
+TClass class::TkwMouseMiddleDown
+TClass class::TkwMouseMiddleUp
+TClass class::TkwMouseRightDown
+TClass class::TkwMouseRightUp
+TClass class::TkwMouseSetCursorPosition
+TClass class::TkwMouseUpDownSupport
+TClass class::TkwMouseWheelDown
+TClass class::TkwMouseWheelSupport
+TClass class::TkwMouseWheelUp
+TClass class::TkwMsg
+TClass class::TkwMul
+TClass class::TkwMul2
+TClass class::TkwMulDiv
+TClass class::TkwNewWord
+TClass class::TkwNil
+TClass class::TkwNIP
+TClass class::TkwNOP
+TClass class::TkwNotEquals
+TClass class::TkwNotImplemented
+TClass class::TkwNotZero
+TClass class::TkwObjectFromStackWord
+TClass class::TkwObjRefParam
+TClass class::TkwOpenArray
+TClass class::TkwOPERATOR
+TClass class::TkwOSName
+TClass class::TkwOVER
+TClass class::TkwOVER2
+TClass class::TkwPICK
+TClass class::TkwPopActionListFindAction
+TClass class::TkwPopClassInherits
+TClass class::TkwPopCompiledWordWorkerWordCompiled
+TClass class::TkwPopCompilerAddCodePart
+TClass class::TkwPopCompilerCompileInParameterPopCode
+TClass class::TkwPopCompilerGetWordCompilingNow
+TClass class::TkwPopCompilerKeywordFinder
+TClass class::TkwPopCompilerNewWordDefinitor
+TClass class::TkwPopCompilerSetToCtx
+TClass class::TkwPopComponentComponentCount
+TClass class::TkwPopComponentFindComponent
+TClass class::TkwPopComponentGetComponent
+TClass class::TkwPopComponentName
+TClass class::TkwPopComponentOwner
+TClass class::TkwPopContainedActionExecute
+TClass class::TkwPopControlCanFocus
+TClass class::TkwPopControlCaption
+TClass class::TkwPopControlClick
+TClass class::TkwPopControlClientToScreen
+TClass class::TkwPopControlColor
+TClass class::TkwPopControlControlCount
+TClass class::TkwPopControlEnabled
+TClass class::TkwPopControlFindControlByName
+TClass class::TkwPopControlFocused
+TClass class::TkwPopControlFont
+TClass class::TkwPopControlGetAnotherParentForm
+TClass class::TkwPopControlGetControl
+TClass class::TkwPopControlGetMainForm
+TClass class::TkwPopControlGetParentForm
+TClass class::TkwPopControlGetPopupMenu
+TClass class::TkwPopControlGetTopParentForm
+TClass class::TkwPopControlHandle
+TClass class::TkwPopControlHeight
+TClass class::TkwPopControlHide
+TClass class::TkwPopControlHint
+TClass class::TkwPopControlHScrollerVisible
+TClass class::TkwPopControlInvalidate
+TClass class::TkwPopControlLeft
+TClass class::TkwPopControlMouseLeftClick
+TClass class::TkwPopControlMouseLeftDragAndDrop
+TClass class::TkwPopControlMouseMiddleClick
+TClass class::TkwPopControlMouseRightClick
+TClass class::TkwPopControlMouseWheelDown
+TClass class::TkwPopControlMouseWheelUp
+TClass class::TkwPopControlName
+TClass class::TkwPopControlParent
+TClass class::TkwPopControlRepaint
+TClass class::TkwPopControlScreenToClient
+TClass class::TkwPopControlScrollInfo
+TClass class::TkwPopControlScrollInfoMax
+TClass class::TkwPopControlScrollInfoMin
+TClass class::TkwPopControlScrollInfoPageSize
+TClass class::TkwPopControlScrollInfoPosition
+TClass class::TkwPopControlSetFocus
+TClass class::TkwPopControlShow
+TClass class::TkwPopControlShowHint
+TClass class::TkwPopControlTop
+TClass class::TkwPopControlUndock
+TClass class::TkwPopControlVisible
+TClass class::TkwPopControlVScrollerVisible
+TClass class::TkwPopControlWidth
+TClass class::TkwPopDictionaryExExportDictionary
+TClass class::TkwPopDictionaryExExportedDictionaries
+TClass class::TkwPopDictionaryExFileDateTime
+TClass class::TkwPopDictionaryExFileName
+TClass class::TkwPopDictionaryExRemoveFromCache
+TClass class::TkwPopDictionaryExUsedDictionaries
+TClass class::TkwPopDictionaryExUseDictionary
+TClass class::TkwPopFinderSetToCtx
+TClass class::TkwPopFormActiveMDIChild
+TClass class::TkwPopFormClose
+TClass class::TkwPopFormFindActionList
+TClass class::TkwPopFormFindMenuItem
+TClass class::TkwPopFormFormStyle
+TClass class::TkwPopFormGetWindowState
+TClass class::TkwPopFormHasControl
+TClass class::TkwPopFormMDIChildCount
+TClass class::TkwPopFormMDIChildren
+TClass class::TkwPopFormModalResult
+TClass class::TkwPopFormNext
+TClass class::TkwPopFormSetWindowState
+TClass class::TkwPopKeywordFinderKeywordByName
+TClass class::TkwPopKeywordFinderParentFinder
+TClass class::TkwPopKeyWordName
+TClass class::TkwPopKeyWordWord
+TClass class::TkwPopNewWordDefinitorCheckVar
+TClass class::TkwPopNewWordDefinitorCheckWord
+TClass class::TkwPopNewWordDefinitorDefineInParameter
+TClass class::TkwPopNewWordDefinitorKeywordFinder
+TClass class::TkwPopObjectClassName
+TClass class::TkwPopObjectGetFloatProp
+TClass class::TkwPopObjectGetInterfaceProp
+TClass class::TkwPopObjectGetObjProp
+TClass class::TkwPopObjectGetOrdProp
+TClass class::TkwPopObjectGetStrProp
+TClass class::TkwPopObjectHasProp
+TClass class::TkwPopObjectInherits
+TClass class::TkwPopObjectIsNil
+TClass class::TkwPopObjectRTTIInfo
+TClass class::TkwPopObjectSetFloatProp
+TClass class::TkwPopObjectSetOrdProp
+TClass class::TkwPopObjectSetStrProp
+TClass class::TkwPopParserExPushInt
+TClass class::TkwPopParserExPushString
+TClass class::TkwPopParserExPushSymbol
+TClass class::TkwPopParserFileName
+TClass class::TkwPopParserNextToken
+TClass class::TkwPopParserSourceLine
+TClass class::TkwPopParserTokenInt
+TClass class::TkwPopParserTokenLongString
+TClass class::TkwPopParserTokenType
+TClass class::TkwPopScriptEngineAddInitialization
+TClass class::TkwPopScriptEngineAsKeywordFinder
+TClass class::TkwPopScriptEngineCascadeDict
+TClass class::TkwPopScriptEngineCurrentCompilingDictionary
+TClass class::TkwPopScriptEngineDisableForHelp
+TClass class::TkwPopScrollingWinControlHScrollerVisible
+TClass class::TkwPopScrollingWinControlVScrollerVisible
+TClass class::TkwPopValueTypesAcceptsValue
+TClass class::TkwPopValueTypesAdd
+TClass class::TkwPopValueTypesCompare
+TClass class::TkwPopValueTypesDefaultValue
+TClass class::TkwPopValueTypesEQ
+TClass class::TkwPopValueTypesHas
+TClass class::TkwPopValueTypesMakeCustomName
+TClass class::TkwPopValueTypesName
+TClass class::TkwPopWordDirectives
+TClass class::TkwPopWordEndBracket
+TClass class::TkwPopWordFindMember
+TClass class::TkwPopWordGetLeftWordRefValue
+TClass class::TkwPopWordGetParam
+TClass class::TkwPopWordGetRef
+TClass class::TkwPopWordInfo
+TClass class::TkwPopWordInfoAcceptsValue
+TClass class::TkwPopWordInfoAccessType
+TClass class::TkwPopWordInfoCompare
+TClass class::TkwPopWordInfoEmpty
+TClass class::TkwPopWordInfoHasAccessType
+TClass class::TkwPopWordInfoHasLinkType
+TClass class::TkwPopWordInfoHasValueType
+TClass class::TkwPopWordInfoHasWordModifier
+TClass class::TkwPopWordInfoIncludeAccesType
+TClass class::TkwPopWordInfoIncludeLinkType
+TClass class::TkwPopWordInfoIncludeModifier
+TClass class::TkwPopWordInfoIncludeTypeModifier
+TClass class::TkwPopWordInfoLinkType
+TClass class::TkwPopWordInfoToString
+TClass class::TkwPopWordInfoTypeName
+TClass class::TkwPopWordInfoValueTypes
+TClass class::TkwPopWordIsForHelp
+TClass class::TkwPopWordIsImmediate
+TClass class::TkwPopWordIsInParam
+TClass class::TkwPopWordIsVarLike
+TClass class::TkwPopWordLeftWordRefValuesCount
+TClass class::TkwPopWordName
+TClass class::TkwPopWordParent
+TClass class::TkwPopWordProducer
+TClass class::TkwPopWordPublicateInMainDictionary
+TClass class::TkwPopWordRedefines
+TClass class::TkwPopWordSetProducer
+TClass class::TkwPopWordSetValue
+TClass class::TkwPopWordSourcePointString
+TClass class::TkwPrint
+TClass class::TkwProcessFilesWithMask
+TClass class::TkwProcessMessages
+TClass class::TkwProcessSubDirs
+TClass class::TkwPureDir
+TClass class::TkwPushWord
+TClass class::TkwRAISE
+TClass class::TkwRandom
+TClass class::TkwRandomize
+TClass class::TkwReduceStackLevel
+TClass class::TkwRefParam
+TClass class::TkwRenameFile
+TClass class::TkwRGB2String
+TClass class::TkwRightLiteralParam
+TClass class::TkwRightParam
+TClass class::TkwRightParamEx
+TClass class::TkwROLL
+TClass class::TkwROT
+TClass class::TkwRSplitTo
+TClass class::TkwRULES
+TClass class::TkwRuntimeWordWithCode
+TClass class::TkwRuntimeWordWithCodeExecution
+TClass class::TkwSameStr
+TClass class::TkwSameText
+TClass class::TkwScreenCount
+TClass class::TkwScreenHeight
+TClass class::TkwScreenShot2File
+TClass class::TkwScreenShot2FileWithCheck
+TClass class::TkwScreenWidth
+TClass class::TkwScriptCompileAndProcess
+TClass class::TkwScriptExceptionStack
+TClass class::TkwScriptFileName
+TClass class::TkwScrollInfoWord
+TClass class::TkwSendInputSupport
+TClass class::TkwSetAppPath2CurrentDir
+TClass class::TkwSetFuzzInPercent
+TClass class::TkwSetLocalDate
+TClass class::TkwSetLocalDateTime
+TClass class::TkwSetLocalTime
+TClass class::TkwSetRandSeed
+TClass class::TkwShiftDate
+TClass class::TkwShiftTime
+TClass class::TkwSLEEP
+TClass class::TkwSmartEquals
+TClass class::TkwSmartNotEquals
+TClass class::TkwSourcePointWord
+TClass class::TkwSplitTo
+TClass class::TkwStackLevel
+TClass class::TkwStandardProcedureCloseBracket
+TClass class::TkwStartsStr
+TClass class::TkwStartsText
+TClass class::TkwStartTimer
+TClass class::TkwStopTimer
+TClass class::TkwStopTimerEx
+TClass class::TkwString
+TClass class::TkwStringChar
+TClass class::TkwStringCodePage
+TClass class::TkwStringConsistsOf
+TClass class::TkwStringHasAnyOf
+TClass class::TkwStringLen
+TClass class::TkwStringPos
+TClass class::TkwStringPosEx
+TClass class::TkwStringReplace
+TClass class::TkwStringReplaceFirst
+TClass class::TkwStringSplit
+TClass class::TkwStringToChar
+TClass class::TkwStrToInt
+TClass class::TkwSub
+TClass class::TkwSWAP
+TClass class::TkwSWAP2
+TClass class::TkwSystemIncluded
+TClass class::TkwSysutilsChangeFileExt
+TClass class::TkwSysutilsCreateDir
+TClass class::TkwSysutilsDirectoryExists
+TClass class::TkwSysutilsExtractFileDrive
+TClass class::TkwSysutilsExtractFileName
+TClass class::TkwSysutilsExtractFilePath
+TClass class::TkwSysutilsFileExists
+TClass class::TkwSysutilsForceDirectories
+TClass class::TkwSysutilsGetCurrentDir
+TClass class::TkwSysutilsParamCount
+TClass class::TkwSysutilsParamStr
+TClass class::TkwSysutilsRemoveDir
+TClass class::TkwSysutilsSetCurrentDir
+TClass class::TkwTemporaryCompiledCode
+TClass class::TkwTestResolveInputFilePath
+TClass class::TkwTextReplace
+TClass class::TkwTextReplaceFirst
+TClass class::TkwTHREAD
+TClass class::TkwTimeToLog
+TClass class::TkwToPrintable
+TClass class::TkwTrue
+TClass class::TkwTryFinally
+TClass class::TkwTUCK
+TClass class::TkwUses
+TClass class::TkwUsesLike
+TClass class::TkwValue
+TClass class::TkwVarDecLen
+TClass class::TkwVarInc
+TClass class::TkwVarShift
+TClass class::TkwVarWorkerCompiledCode
+TClass class::TkwWaitCancel
+TClass class::TkwWaitChoice
+TClass class::TkwWaitNo
+TClass class::TkwWaitOk
+TClass class::TkwWaitYes
+TClass class::TkwWasWait
+TClass class::TkwWHILEDO
+TClass class::TkwWinControlFromStackWord
+TClass class::TkwWindowFromPoint
+TClass class::TkwWinExec
+TClass class::TkwWinTreeGetCurrentText
+TClass class::TkwWndCloseWindow
+TClass class::TkwWndGetClassName
+TClass class::TkwWndGetWindowText
+TClass class::TkwWndIsVisible
+TClass class::TkwWndSetForeground
+TClass class::TkwWndWindowIsMine
+TClass class::TkwWordPtrPushWord
+TClass class::TkwWordPtrWorker
+TClass class::TkwWordWorker
+TClass class::TkwWStringChar
+TClass class::TkwWStringCodePage
+TClass class::TkwWStringConsistsOf
+TClass class::TkwWStringEnds
+TClass class::TkwWStringEndsText
+TClass class::TkwWStringFirstChar
+TClass class::TkwWStringHasAnyOf
+TClass class::TkwWStringInc
+TClass class::TkwWStringIsNil
+TClass class::TkwWStringLen
+TClass class::TkwWStringShift
+TClass class::TkwWStringStarts
+TClass class::TkwWStringStartsText
+TClass class::TkwWStringToString
+TClass class::TkwWStringVarDecLen
+TClass class::TkwWStringVarInc
+TClass class::TkwWStringVarPushCharAndInc
+TClass class::TkwWStringVarRSplitTo
+TClass class::TkwWStringVarShift
+TClass class::TkwWStringVarSplitTo
+TClass class::Tl3CastableObject
+TClass class::Tl3CastablePersistent
+TClass class::Tl3DataContainerWithoutIUnknownPrim
+TClass class::Tl3PrimString
+TClass class::Tl3ProtoDataContainer
+TClass class::Tl3ProtoObject
+TClass class::Tl3Variant
+TClass class::Tl3VariantPrim
+TClass class::TMainMenu
+TClass class::TMenu
+TClass class::TMenuItem
+TClass class::TObject
+TClass class::TPersistent
+TClass class::TPopupMenu
+TClass class::TScrollingWinControl
+TClass class::TSizeConstraints
+TClass class::TtfwAnonimousWord
+TClass class::TtfwArrayCollector
+TClass class::TtfwBeginLikeWord
+TClass class::TtfwClassLike
+TClass class::TtfwClassModifier
+TClass class::TtfwCompilingWord
+TClass class::TtfwConst
+TClass class::TtfwConstLike
+TClass class::TtfwDictionary
+TClass class::TtfwDictionaryEx
+TClass class::TtfwDictionaryExPrim
+TClass class::TtfwDictionaryPrim
+TClass class::TtfwDictionaryPrimPrim
+TClass class::TtfwDictionaryPrimPrimPrim
+TClass class::TtfwDualWord
+TClass class::TtfwDualWStrWord
+TClass class::TtfwEnumConstantRegistrator
+TClass class::TtfwFilterLambda
+TClass class::TtfwIncludeLike
+TClass class::TtfwInitCodeWord
+TClass class::TtfwInteger
+TClass class::TtfwIntegerConstantRegistrator
+TClass class::TtfwIntegerToEnumName
+TClass class::TtfwKeyWord
+TClass class::TtfwKeyWordPrim
+TClass class::TtfwMapLambda
+TClass class::TtfwNewWord
+TClass class::TtfwProcedure
+TClass class::TtfwRegisterableWord
+TClass class::TtfwRegisterableWordPrim
+TClass class::TtfwRTTIProperty
+TClass class::TtfwScriptEnginePrim
+TClass class::TtfwString
+TClass class::TtfwStringConstantRegistrator
+TClass class::TtfwStringToEnumValue
+TClass class::TtfwSysUtilsWord
+TClass class::TtfwTwoLambdas
+TClass class::TtfwTypeInfoList
+TClass class::TtfwTypeInfoListPrim
+TClass class::TtfwTypeModifier
+TClass class::TtfwValueTypes
+TClass class::TtfwVarWorker
+TClass class::TtfwWord
+TClass class::TtfwWordInfo
+TClass class::TtfwWordPrim
+TClass class::TtfwWordWorker
+TClass class::TtfwWordWorkerEx
+TClass class::TtfwWStrWord
+TClass class::TWinControl
 IMMEDIATE VOID OPERATOR : ClassProducer
  ^L OPERATOR :: IN : aName
 ; // ClassProducer
@@ -1821,7 +1826,7 @@ VOID CopyFile
 VOID CopyFilesByMask
 VOID CreateAndRaise
 OBJECT current:exception
-CLASS current:exception:class
+TClass current:exception:class
 STRING current:exception:ClassName
 STRING current:exception:Message
 VOID OPERATOR : Dec
@@ -2029,12 +2034,12 @@ IMMEDIATE VOID OPERATOR : INTERFACE
 STRING IntToStr
 BOOLEAN OPERATOR : Is
  ^ OPERATOR :: IN : aClass
- OBJECT CLASS OPERATOR :: IN : anObj
+ CASTABLE OPERATOR :: IN : anObj
  BOOLEAN OPERATOR :: IS : Result
 ; // Is
 BOOLEAN OPERATOR : IS
  ^ OPERATOR :: IN : aClass
- OBJECT CLASS OPERATOR :: IN : anObj
+ CASTABLE OPERATOR :: IN : anObj
  BOOLEAN OPERATOR :: IS : Result
 ; // IS
 BOOLEAN IsArray
@@ -2116,12 +2121,12 @@ BOOLEAN OPERATOR : NOT
 VOID NotImplemented
 BOOLEAN OPERATOR : NotIs
  ^ OPERATOR :: IN : aClass
- OBJECT CLASS OPERATOR :: IN : anObj
+ CASTABLE OPERATOR :: IN : anObj
  BOOLEAN OPERATOR :: NOTIS : Result
 ; // NotIs
 BOOLEAN OPERATOR : NOTIS
  ^ OPERATOR :: IN : aClass
- OBJECT CLASS OPERATOR :: IN : anObj
+ CASTABLE OPERATOR :: IN : anObj
  BOOLEAN OPERATOR :: NOTIS : Result
 ; // NOTIS
 BOOLEAN FUNCTION : NotValid
@@ -2304,6 +2309,7 @@ TkwArrayGetItem
 TkwArrayIterate
 TkwArrayMap
 TkwArrayReverted
+TkwArraySetItem
 TkwAskWindowToCloseItself
 TkwASSERTS
 TkwAtomicIf
@@ -2693,6 +2699,7 @@ TkwPopValueTypesCompare
 TkwPopValueTypesDefaultValue
 TkwPopValueTypesEQ
 TkwPopValueTypesHas
+TkwPopValueTypesMakeCustomName
 TkwPopValueTypesName
 TkwPopWordDirectives
 TkwPopWordEndBracket
@@ -2718,6 +2725,7 @@ TkwPopWordInfoToString
 TkwPopWordInfoTypeName
 TkwPopWordInfoValueTypes
 TkwPopWordIsForHelp
+TkwPopWordIsImmediate
 TkwPopWordIsInParam
 TkwPopWordIsVarLike
 TkwPopWordLeftWordRefValuesCount
@@ -3040,7 +3048,7 @@ VOID OPERATOR : анти-тест
  OPERATOR :: VAR : l_WasException
 ; // анти-тест
 BOOLEAN OPERATOR : БОЛЬШЕ
- BOOLEAN INTEGER STRING OPERATOR :: IN : aLeft
+ COMPARABLE OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: > : Result
 ; // БОЛЬШЕ
@@ -3061,7 +3069,7 @@ BOOLEAN OPERATOR : ИЛИ
 ; // ИЛИ
 иначе
 BOOLEAN OPERATOR : МЕНЬШЕ
- BOOLEAN INTEGER STRING OPERATOR :: IN : aLeft
+ COMPARABLE OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: < : Result
 ; // МЕНЬШЕ
@@ -3077,7 +3085,7 @@ BOOLEAN OPERATOR : НЕРАВНО
 BOOLEAN НЕТ
 BOOLEAN OPERATOR : НЕЯВЛЯЕТСЯ
  ^ OPERATOR :: IN : aClass
- OBJECT CLASS OPERATOR :: IN : anObj
+ CASTABLE OPERATOR :: IN : anObj
  BOOLEAN OPERATOR :: NOTIS : Result
 ; // НЕЯВЛЯЕТСЯ
 OPERATOR : ПОКА
@@ -3096,7 +3104,7 @@ IMMEDIATE VOID OPERATOR : то
 ; // то
 BOOLEAN OPERATOR : ЯВЛЯЕТСЯ
  ^ OPERATOR :: IN : aClass
- OBJECT CLASS OPERATOR :: IN : anObj
+ CASTABLE OPERATOR :: IN : anObj
  BOOLEAN OPERATOR :: IS : Result
 ; // ЯВЛЯЕТСЯ
 Dictionary: axiom:Ctx
@@ -3158,6 +3166,7 @@ TtfwWord OPERATOR : pop:Word:GetRefDeep
 ; // pop:Word:GetRefDeep
 TtfwWordInfo pop:Word:Info
 BOOLEAN pop:Word:IsForHelp
+BOOLEAN pop:Word:IsImmediate
 BOOLEAN pop:Word:IsInParam
 BOOLEAN pop:Word:IsVarLike
 INTEGER pop:Word:LeftWordRefValuesCount
@@ -3278,6 +3287,15 @@ PRIVATE VOID OPERATOR : private:ERROR
  OBJECT OPERATOR :: IN : aCaller
  OPERATOR :: IN : aMsg
 ; // private:ERROR
+Dictionary: axiom:ValueTypes
+BOOLEAN pop:ValueTypes:AcceptsValue
+TtfwValueTypes pop:ValueTypes:Add
+INTEGER pop:ValueTypes:Compare
+Struct pop:ValueTypes:DefaultValue
+BOOLEAN pop:ValueTypes:EQ
+BOOLEAN pop:ValueTypes:Has
+TtfwValueTypes pop:ValueTypes:MakeCustomName
+STRING pop:ValueTypes:Name
 Dictionary: axiom:std
 : : >>std::out
 VOID OPERATOR :: PROCEDURE : std::out<<
@@ -3335,6 +3353,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3374,6 +3393,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Exports.script
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3415,6 +3435,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\types.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3444,6 +3465,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\core.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3452,13 +3474,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\core.ms.dict
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\types.ms.dict
  ;
-TtfwWord : : |@
+FUNCTOR : : |@
  ^@ OPERATOR :: IN : aRef
- TtfwWord : :: |@ : Result
+ FUNCTOR : :: |@ : Result
 ; // |@
-BOOLEAN INTEGER STRING OBJECT INTERFACE ARRAY FILE CLASS : : |^
+ANY : : |^
  ^@ OPERATOR :: IN : aRef
- BOOLEAN INTEGER STRING OBJECT INTERFACE ARRAY FILE CLASS : :: |^ : Result
+ ANY : :: |^ : Result
 ; // |^
 IMMEDIATE VOID OPERATOR : RecurseProc
  ^L OPERATOR :: IN : aName
@@ -3483,6 +3505,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\params.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3511,6 +3534,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\math.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3563,6 +3587,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\io.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3596,6 +3621,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\arrays.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3625,6 +3651,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\arrays.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3655,6 +3682,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\to.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3686,6 +3714,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\filter.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3718,6 +3747,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\map.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3750,6 +3780,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\reverted.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3779,6 +3810,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\string.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3817,6 +3849,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Translate.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3909,6 +3942,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeDump.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
@@ -3992,6 +4026,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\files.ms.dict
   axiom:TtfwAccessType
   axiom:TtfwLinkType
   axiom:private
+  axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
   axiom:Component
