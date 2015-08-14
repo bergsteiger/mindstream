@@ -205,17 +205,7 @@ P8 := ( P4 Point:- P3 )
 P9 := ( P4 Point:Neg )
 P10 := ( P3 Point:Neg )
 
-for [ P1 ] Point:Print
-P1 Point:Print
-P2 Point:Print
-P3 Point:Print
-P4 Point:Print
-P5 Point:Print
-P6 Point:Print
-P7 Point:Print
-P8 Point:Print
-P9 Point:Print
-P10 Point:Print
+for [ P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 ] Point:Print
 
 P1 Point:X Print
 P2 Point:X Print
