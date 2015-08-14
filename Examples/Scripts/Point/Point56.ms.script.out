@@ -168,27 +168,13 @@ VOID Test PointTest
  ARRAY method Point:-
   ^ IN aPoint
   ARRAY IN Self
-  Point:
+  Point:OF
   (
-   (
-    Self
-    Point:X
-   )
-   (-)
+   Self
+   Point:+
    (
     aPoint |^
-    Point:X
-   )
-  )
-  (
-   (
-    Self
-    Point:Y
-   )
-   (-)
-   (
-    aPoint |^
-    Point:Y
+    Point:Neg
    )
   )
   >>>
