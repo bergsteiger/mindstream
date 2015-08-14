@@ -242,27 +242,17 @@ VOID Test PointTest
  
  ARRAY constructor Point:OF
   ^ IN aPoint
-  [
-   for
-   (
-    aPoint |@
-    DO
-   )
-   (
-    INTEGER IN aPx
-    aPx
-   )
-  ]
+  Point:
+  (
+   aPoint |^
+   Point:X
+  )
+  (
+   aPoint |^
+   Point:Y
+  )
   >>>
   Result
-  (
-   Result
-   Array:Count
-   =
-   c:Point:CoordCount
-  )
-  ?ASSURE
-  '“очка должна содержать две координаты'
  ; // ARRAY constructor Point:OF
  
  VOID method Point:Print
