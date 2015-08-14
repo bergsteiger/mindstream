@@ -28,9 +28,11 @@ VOID IMMEDIATE operator right
  l_MangledName Ctx:Parser:PushSymbol
  
   [
-   'VOID axiom:operator' 
-   l_Name
-   l_MangledName
+   'VOID IMMEDIATE axiom:operator' 
+   l_Name 
+   [ '`' l_MangledName '`' ] strings:Cat
+   'Ctx:Parser:PushSymbol'
+   '`|^`'
    'Ctx:Parser:PushSymbol'
    ';'
   ] Ctx:Parser:PushArray
