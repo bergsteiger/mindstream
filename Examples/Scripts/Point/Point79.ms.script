@@ -124,11 +124,17 @@ class Object
  anOffset |^ Self [i]
 ; // FieldByOffset
 
+VOID IMMEDIATE operator get-member
+ Literal IN aName
+ 'FieldByOffset' Ctx:Parser:PushSymbol
+ [ 'c:' g_CurrentClass ':Offset:' aName |N ] strings:Cat Ctx:Parser:PushSymbol 
+; // get-member
+
 member VMT
 members-end
 
 TtfwWord readonly class
- Self FieldByOffset c:Object:Offset:VMT >>> Result
+ Self get-member VMT >>> Result
 ; // Object:class
 
 STRING readonly ClassName

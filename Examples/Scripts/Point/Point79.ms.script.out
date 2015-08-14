@@ -141,6 +141,21 @@ VOID Test PointTest
  INTEGER VAR g_ClassFieldOffset
  STRING VAR g_CurrentClass
  STRING VAR g_CurrentClassImpl
+ IMMEDIATE VOID OPERATOR get-member
+  ^L IN aName
+  'FieldByOffset'
+  Ctx:Parser:PushSymbol
+  [
+   'c:'
+   g_CurrentClass
+   ':Offset:'
+   aName
+   |N
+  ]
+  strings:Cat
+  Ctx:Parser:PushSymbol
+ ; // IMMEDIATE VOID OPERATOR get-member
+ 
  ARRAY VAR l_Points
  PRIVATE VOID OPERATOR MakeMethodSignature
   STRING IN aName
