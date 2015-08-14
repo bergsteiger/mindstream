@@ -167,9 +167,9 @@ VOID Test PointTest
    (
     INTEGER IN aPx
     (
-     i
      Self
-     [i]
+     FieldByOffset
+     i
     )
     (-)
     aPx
@@ -196,9 +196,9 @@ VOID Test PointTest
    (
     INTEGER IN aPx
     (
-     i
      Self
-     [i]
+     FieldByOffset
+     i
     )
     (+)
     aPx
@@ -295,9 +295,9 @@ VOID Test PointTest
  
  INTEGER readonly Point:Y
   ARRAY IN Self
-  c:Point:Offset:Y
   Self
-  [i]
+  FieldByOffset
+  c:Point:Offset:Y
   >>>
   Result
  ; // INTEGER readonly Point:Y

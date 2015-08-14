@@ -115,7 +115,7 @@ Pixel readonly Point:X
 
 Pixel readonly Point:Y
  Point in Self
- c:Point:Offset:Y Self [i] >>> Result
+ Self FieldByOffset c:Point:Offset:Y >>> Result
 ; // Point:Y
 
 Point method Point:+
@@ -125,7 +125,7 @@ Point method Point:+
  FieldOffset var i
  i := 0
 
- [ for ( aPoint |@ DO ) ( Pixel in aPx ( i Self [i] ) (+) aPx Inc i ) ] >>> Result
+ [ for ( aPoint |@ DO ) ( Pixel in aPx ( Self FieldByOffset i ) (+) aPx Inc i ) ] >>> Result
 ; // Point:+
 
 Point method Point:-
@@ -135,7 +135,7 @@ Point method Point:-
  FieldOffset var i
  i := 0
 
- [ for ( aPoint |@ DO ) ( Pixel in aPx ( i Self [i] ) (-) aPx Inc i ) ] >>> Result
+ [ for ( aPoint |@ DO ) ( Pixel in aPx ( Self FieldByOffset i ) (-) aPx Inc i ) ] >>> Result
 ; // Point:-
 
 Point method Point:Neg
