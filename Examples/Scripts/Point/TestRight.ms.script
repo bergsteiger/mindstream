@@ -31,6 +31,10 @@ VOID IMMEDIATE operator right
  //l_MangledName Ctx:Parser:PushSymbol
 ; // right
 
+ : X
+  right aA
+ ; // X
+
  @SELF DumpElement
 
 ; //RighTest

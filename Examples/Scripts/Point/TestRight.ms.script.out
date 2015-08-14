@@ -30,6 +30,15 @@ VOID Test RighTest
   Ctx:Parser:PushArray
  ; // IMMEDIATE VOID OPERATOR right
  
+ : X
+  ^ IN _aA
+  VOID OPERATOR aA
+   _aA
+   Ctx:Parser:PushSymbol
+  ; // VOID OPERATOR aA
+  
+ ; // : X
+ 
  RighTest
  DumpElement
 ; // VOID Test RighTest
