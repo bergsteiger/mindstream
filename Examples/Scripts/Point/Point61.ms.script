@@ -104,7 +104,7 @@ class Point
 
 private Const c:Point:Offset:X 1
 private Const c:Point:Offset:Y 2
-private Const c:Point:CoordCount 3
+private Const c:Point:VMT:Size 3
 
 constructor Point:
  Pixel right aX

@@ -43,12 +43,12 @@ VOID Test PointTest
  class_impl _Point_
  ; // class_impl _Point_
  
- INTEGER CONST c:Point:CoordCount
-  3
  INTEGER CONST c:Point:Offset:X
   1
  INTEGER CONST c:Point:Offset:Y
   2
+ INTEGER CONST c:Point:VMT:Size
+  3
  IMMEDIATE VOID OPERATOR class
   ^L IN aName
   aName
