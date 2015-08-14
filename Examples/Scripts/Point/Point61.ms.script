@@ -87,6 +87,13 @@ IMMEDIATE VOID operator new[
  g_CurrentClassImpl Ctx:Parser:PushSymbol
 ; // new[
 
+IMMEDIATE VOID operator ClassFieldOffset
+ Literal IN aName
+ 'private' Ctx:Parser:PushSymbol
+ 'Const' Ctx:Parser:PushSymbol
+ [ 'c:' g_CurrentClass ':Offset:' aName |N ] strings:Cat Ctx:Parser:PushSymbol
+; // ClassFieldOffset
+
 class Object
 
 : FieldByOffset

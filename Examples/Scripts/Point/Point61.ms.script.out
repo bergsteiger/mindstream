@@ -83,6 +83,23 @@ VOID Test PointTest
  IMMEDIATE VOID OPERATOR class_impl
  ; // IMMEDIATE VOID OPERATOR class_impl
  
+ IMMEDIATE VOID OPERATOR ClassFieldOffset
+  ^L IN aName
+  'private'
+  Ctx:Parser:PushSymbol
+  'Const'
+  Ctx:Parser:PushSymbol
+  [
+   'c:'
+   g_CurrentClass
+   ':Offset:'
+   aName
+   |N
+  ]
+  strings:Cat
+  Ctx:Parser:PushSymbol
+ ; // IMMEDIATE VOID OPERATOR ClassFieldOffset
+ 
  IMMEDIATE VOID OPERATOR constructor
   ^L IN aName
   constructor
