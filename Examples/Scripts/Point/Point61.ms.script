@@ -109,8 +109,8 @@ List type PixelList
 
 class Point
 
-private Const c:Point:Offset:X 1
-private Const c:Point:Offset:Y 2
+ClassFieldOffset X 1
+ClassFieldOffset Y 2
 private Const c:Point:VMT:Size 3
 
 constructor Point:
