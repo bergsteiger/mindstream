@@ -141,7 +141,7 @@ Point method Point:-
 Point method Point:Neg
  Point in Self
 
- Point: Neg ( Self Point:X ) ( 0 (-) ( Self Point:Y ) ) >>> Result
+ Point: Neg ( Self Point:X ) Neg ( Self Point:Y ) >>> Result
  //[ for Self ( Pixel in aPx 0 (-) aPx ) ] >>> Result
 ; // Point:Neg
 

@@ -229,13 +229,10 @@ VOID Test PointTest
    Self
    Point:X
   )
+  Neg
   (
-   0
-   (-)
-   (
-    Self
-    Point:Y
-   )
+   Self
+   Point:Y
   )
   >>>
   Result
