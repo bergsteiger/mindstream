@@ -22,9 +22,9 @@ REDEFINITION
   IN aLeft
   right aRight
   if ( aLeft IsInt ) then
-   ( aLeft aRight |^ + )
+   ( aLeft aRight + )
   else  
-   ( aLeft (+) ( aRight DO ) )
+   ( aLeft (+) ( aRight ) )
   //inherited
  ; // (+)
 
