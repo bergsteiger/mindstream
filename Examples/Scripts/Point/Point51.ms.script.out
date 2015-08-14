@@ -271,20 +271,26 @@ VOID Test PointTest
  
  ARRAY constructor Point:XY
   ^ IN aPoint
+  ARRAY VAR Points
   [
    aPoint |@
    DO
   ]
   >>>
-  Result
+  Points
+  Point:
   (
-   Result
-   Array:Count
-   =
-   c:Point:CoordCount
+   Points
+   FieldByOffset
+   0
   )
-  ?ASSURE
-  '“очка должна содержать две координаты'
+  (
+   Points
+   FieldByOffset
+   1
+  )
+  >>>
+  Result
  ; // ARRAY constructor Point:XY
  
  INTEGER readonly Point:Y

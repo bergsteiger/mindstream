@@ -98,8 +98,10 @@ Point constructor Point:0
 
 Point constructor Point:XY
  PixelList right aPoint
- [ aPoint |@ DO ] >>> Result
- ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
+ array var Points
+ [ aPoint |@ DO ] >>> Points
+ Point: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) >>> Result
+// ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
 ; // Point:XY
 
 Pixel readonly Point:X
