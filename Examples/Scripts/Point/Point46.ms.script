@@ -142,7 +142,6 @@ Point method Point:Neg
  Point in Self
 
  Point: Neg ( Self Point:X ) Neg ( Self Point:Y ) >>> Result
- //[ for Self ( Pixel in aPx 0 (-) aPx ) ] >>> Result
 ; // Point:Neg
 
 void method Point:Print
