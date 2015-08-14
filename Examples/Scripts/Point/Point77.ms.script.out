@@ -107,22 +107,6 @@ VOID Test PointTest
  IMMEDIATE VOID OPERATOR class_impl
  ; // IMMEDIATE VOID OPERATOR class_impl
  
- IMMEDIATE VOID OPERATOR ClassInstanceSize
-  'private'
-  Ctx:Parser:PushSymbol
-  'Const'
-  Ctx:Parser:PushSymbol
-  [
-   'c:'
-   g_CurrentClass
-   ':Instance:Size'
-  ]
-  strings:Cat
-  Ctx:Parser:PushSymbol
-  g_ClassFieldOffset
-  Ctx:Parser:PushInt
- ; // IMMEDIATE VOID OPERATOR ClassInstanceSize
- 
  IMMEDIATE VOID OPERATOR constructor
   ^L IN aName
   constructor
@@ -178,6 +162,22 @@ VOID Test PointTest
   INC
   g_ClassFieldOffset
  ; // IMMEDIATE VOID OPERATOR member
+ 
+ IMMEDIATE VOID OPERATOR members-end
+  'private'
+  Ctx:Parser:PushSymbol
+  'Const'
+  Ctx:Parser:PushSymbol
+  [
+   'c:'
+   g_CurrentClass
+   ':Instance:Size'
+  ]
+  strings:Cat
+  Ctx:Parser:PushSymbol
+  g_ClassFieldOffset
+  Ctx:Parser:PushInt
+ ; // IMMEDIATE VOID OPERATOR members-end
  
  IMMEDIATE VOID OPERATOR method
   ^L IN aName
