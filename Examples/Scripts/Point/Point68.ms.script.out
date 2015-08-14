@@ -207,6 +207,15 @@ VOID Test PointTest
   Result
  ; // TtfwWord readonly Object:class
  
+ STRING readonly Object:ClassName
+  ARRAY IN Self
+  Self
+  Object:class
+  |N
+  >>>
+  Result
+ ; // STRING readonly Object:ClassName
+ 
  ARRAY VAR P1
  ARRAY VAR P10
  ARRAY VAR P2

@@ -122,6 +122,10 @@ TtfwWord readonly Object:class
  Self FieldByOffset c:Object:Offset:VMT >>> Result
 ; // Object:class
 
+STRING readonly Object:ClassName
+ Self Object:class |N >>> Result
+; // Object:ClassName
+
 INTEGER type Pixel
 // - пиксель
 List type PixelList
