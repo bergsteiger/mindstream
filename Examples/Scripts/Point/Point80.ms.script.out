@@ -125,6 +125,20 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR constructor
  
+ PRIVATE OPERATOR do-get-member
+  STRING IN aName
+  'FieldByOffset'
+  Ctx:Parser:PushSymbol
+  [
+   'c:'
+   g_CurrentClass
+   ':Offset:'
+   aName
+  ]
+  strings:Cat
+  Ctx:Parser:PushSymbol
+ ; // PRIVATE OPERATOR do-get-member
+ 
  : FieldByOffset
   ^ IN anOffset
   Object IN Self
@@ -143,17 +157,9 @@ VOID Test PointTest
  STRING VAR g_CurrentClassImpl
  IMMEDIATE VOID OPERATOR get-member
   ^L IN aName
-  'FieldByOffset'
-  Ctx:Parser:PushSymbol
-  [
-   'c:'
-   g_CurrentClass
-   ':Offset:'
-   aName
-   |N
-  ]
-  strings:Cat
-  Ctx:Parser:PushSymbol
+  aName
+  |N
+  do-get-member
  ; // IMMEDIATE VOID OPERATOR get-member
  
  ARRAY VAR l_Points
@@ -436,6 +442,21 @@ VOID Test PointTest
   >>>
   Result
  ; // Pixel readonly Point:Y
+ 
+ IMMEDIATE VOID OPERATOR read
+  ^L IN aName
+  'get-member'
+  Ctx:Parser:PushSymbol
+  aName
+  |N
+  Ctx:Parser:PushSymbol
+  '>>>'
+  Ctx:Parser:PushSymbol
+  'Result'
+  Ctx:Parser:PushSymbol
+  ';'
+  Ctx:Parser:PushSymbol
+ ; // IMMEDIATE VOID OPERATOR read
  
  IMMEDIATE VOID OPERATOR readonly
   ^L IN aName
