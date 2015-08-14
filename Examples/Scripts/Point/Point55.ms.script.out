@@ -51,6 +51,10 @@ VOID Test PointTest
   1
  IMMEDIATE VOID OPERATOR class
   ^L IN aName
+  aName
+  |N
+  >>>
+  g_CurrentClass
   ':'
   Ctx:Parser:PushSymbol
   @
@@ -58,8 +62,7 @@ VOID Test PointTest
   Ctx:SetWordProducerForCompiledClass
   [
    '_'
-   aName
-   |N
+   g_CurrentClass
    '_'
   ]
   strings:Cat
@@ -70,8 +73,7 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
   'type'
   Ctx:Parser:PushSymbol
-  aName
-  |N
+  g_CurrentClass
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR class
  
