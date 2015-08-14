@@ -302,10 +302,8 @@ VOID Test PointTest
   Point IN Self
   Point::
   (
-   (
-    Self
-    Point:X
-   )
+   Self
+   Point:X
    (+)
    (
     aPoint |^
@@ -313,10 +311,8 @@ VOID Test PointTest
    )
   )
   (
-   (
-    Self
-    Point:Y
-   )
+   Self
+   Point:Y
    (+)
    (
     aPoint |^
