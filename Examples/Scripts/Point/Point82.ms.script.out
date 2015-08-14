@@ -122,13 +122,8 @@ VOID Test PointTest
   STRING IN aName
   'FieldByOffset'
   Ctx:Parser:PushSymbol
-  [
-   'c:'
-   g_CurrentClass
-   ':Offset:'
-   aName
-  ]
-  strings:Cat
+  aName
+  MakeFieldOffsetName
   Ctx:Parser:PushSymbol
  ; // PRIVATE OPERATOR do-get-member
  
@@ -156,6 +151,19 @@ VOID Test PointTest
  ; // IMMEDIATE VOID OPERATOR get-member
  
  ARRAY VAR l_Points
+ PRIVATE STRING OPERATOR MakeFieldOffsetName
+  STRING IN aName
+  [
+   'c:'
+   g_CurrentClass
+   ':Offset:'
+   aName
+  ]
+  strings:Cat
+  >>>
+  Result
+ ; // PRIVATE STRING OPERATOR MakeFieldOffsetName
+ 
  PRIVATE VOID OPERATOR MakeMethodSignature
   STRING IN aName
   ':'

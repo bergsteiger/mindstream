@@ -92,6 +92,11 @@ INTEGER VAR g_ClassFieldOffset
 ( g_ClassFieldOffset := 0 )
 g_ClassFieldOffset := 0
 
+PRIVATE STRING operator MakeFieldOffsetName
+ STRING IN aName
+ [ 'c:' g_CurrentClass ':Offset:' aName ] strings:Cat >>> Result
+; // MakeFieldOffsetName
+
 IMMEDIATE VOID operator member
  Literal IN aName
  'private' Ctx:Parser:PushSymbol
@@ -119,7 +124,7 @@ class Object
 PRIVATE operator do-get-member
  STRING IN aName
  'FieldByOffset' Ctx:Parser:PushSymbol
- [ 'c:' g_CurrentClass ':Offset:' aName ] strings:Cat Ctx:Parser:PushSymbol 
+ aName MakeFieldOffsetName Ctx:Parser:PushSymbol 
 ; // do-get-member
 
 VOID IMMEDIATE operator get-member
