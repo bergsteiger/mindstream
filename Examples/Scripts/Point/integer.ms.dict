@@ -36,7 +36,7 @@ REDEFINITION
   // - так не работает, непонятно почему
   //inherited
   // - так не работает, непонятно почему
-  ( aLeft aRight |^ - )
+  ( aLeft aRight - )
  ; // (-)
 
 REDEFINITION
@@ -44,9 +44,9 @@ REDEFINITION
   IN aLeft
   right aRight
   if ( aLeft IsInt ) then
-   ( aLeft aRight |^ - )
+   ( aLeft aRight - )
   else  
-   ( aLeft (-) ( aRight DO ) )
+   ( aLeft (-) ( aRight ) )
   //inherited
  ; // (-)
 
