@@ -64,7 +64,7 @@ IMMEDIATE VOID operator method
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
  ':' Ctx:Parser:PushSymbol
- aName |N Ctx:Parser:PushSymbol
+ [ g_CurrentClass ':' aName |N ] strings:Cat Ctx:Parser:PushSymbol
  g_CurrentClass Ctx:Parser:PushSymbol
  'in' Ctx:Parser:PushSymbol
  'Self' Ctx:Parser:PushSymbol
@@ -156,36 +156,36 @@ constructor Point:XY
 
 Pixel readonly X
  Self FieldByOffset c:Point:Offset:X >>> Result
-; // Point:X
+; // X
 
 Pixel readonly Y
  Self FieldByOffset c:Point:Offset:Y >>> Result
-; // Point:Y
+; // Y
 
 constructor Point:OF
  Point right aPoint
  Point: ( aPoint |^ Point:X ) ( aPoint |^ Point:Y ) >>> Result
 ; // Point:OF
 
-Point method Point:+
+Point method +
  Point right aPoint
 
  Point: ( ( Self Point:X ) (+) ( aPoint |^ Point:X ) ) ( ( Self Point:Y ) (+) ( aPoint |^ Point:Y ) ) >>> Result
-; // Point:+
+; // +
 
-Point method Point:Neg
+Point method Neg
  Point: Neg ( Self Point:X ) Neg ( Self Point:Y ) >>> Result
-; // Point:Neg
+; // Neg
 
-Point method Point:-
+Point method -
  Point right aPoint
 
  Point:OF ( Self Point:+ ( aPoint |^ Point:Neg ) ) >>> Result
-; // Point:-
+; // -
 
-void method Point:Print
+void method Print
  Self Print
-; // Point:Print
+; // Print
 
 Point var P1
 Point var P2

@@ -183,8 +183,13 @@ VOID Test PointTest
   Ctx:SetWordProducerForCompiledClass
   ':'
   Ctx:Parser:PushSymbol
-  aName
-  |N
+  [
+   g_CurrentClass
+   ':'
+   aName
+   |N
+  ]
+  strings:Cat
   Ctx:Parser:PushSymbol
   g_CurrentClass
   Ctx:Parser:PushSymbol
