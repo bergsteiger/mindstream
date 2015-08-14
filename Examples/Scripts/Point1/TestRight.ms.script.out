@@ -1,6 +1,18 @@
 10
 20
 VOID Test RighTest
+ VOID OPERATOR Pusher
+  STRING IN aName
+  '('
+  Ctx:Parser:PushSymbol
+  aName
+  Ctx:Parser:PushSymbol
+  '|^'
+  Ctx:Parser:PushSymbol
+  ')'
+  Ctx:Parser:PushSymbol
+ ; // VOID OPERATOR Pusher
+ 
  IMMEDIATE VOID OPERATOR right
   ^L IN aName
   STRING VAR l_MangledName
@@ -31,9 +43,7 @@ VOID Test RighTest
     '`'
    ]
    strings:Cat
-   'Ctx:Parser:PushSymbol'
-   '`|^`'
-   'Ctx:Parser:PushSymbol'
+   'Pusher'
    ';'
   ]
   Ctx:Parser:PushArray
@@ -43,12 +53,12 @@ VOID Test RighTest
   ^ IN _aA
   IMMEDIATE VOID OPERATOR aA
    '_aA'
-   Ctx:Parser:PushSymbol
-   '|^'
-   Ctx:Parser:PushSymbol
+   Pusher
   ; // IMMEDIATE VOID OPERATOR aA
   
-  _aA |^
+  (
+   _aA |^
+  )
   .
  ; // : X
  

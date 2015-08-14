@@ -5,6 +5,14 @@ USES
 
 Test RighTest
 
+VOID operator Pusher
+ STRING IN aName
+ '(' Ctx:Parser:PushSymbol
+ aName Ctx:Parser:PushSymbol
+ '|^' Ctx:Parser:PushSymbol
+ ')' Ctx:Parser:PushSymbol
+; // Pusher
+
 VOID IMMEDIATE operator right
  Literal IN aName
  'RIGHT' Ctx:Parser:PushSymbol
@@ -22,9 +30,7 @@ VOID IMMEDIATE operator right
    'VOID IMMEDIATE axiom:operator' 
    l_Name 
    [ '`' l_MangledName '`' ] strings:Cat
-   'Ctx:Parser:PushSymbol'
-   '`|^`'
-   'Ctx:Parser:PushSymbol'
+   'Pusher'
    ';'
   ] Ctx:Parser:PushArray
 
