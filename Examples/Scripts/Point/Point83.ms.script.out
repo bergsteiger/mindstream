@@ -78,7 +78,7 @@ VOID Test PointTest
   ; // IMMEDIATE VOID OPERATOR anOffset
   
   Object IN Self
-  _anOffset |^ |^
+  _anOffset |^
   Self
   Array:GetItem
  ; // : FieldByOffset

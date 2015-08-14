@@ -118,7 +118,7 @@ class Object
 : FieldByOffset
  Object in Self
  FieldOffset right anOffset
- anOffset |^ Self [i]
+ anOffset Self [i]
 ; // FieldByOffset
 
 PRIVATE operator do-get-member
