@@ -12,10 +12,10 @@ VOID IMMEDIATE operator RecurseProc
  aName |N Ctx:Parser:PushSymbol
 ; // RecurseProc
 
-ANY : |^
+: |^
 // - разыменовывает параметр слева
  ^@ IN aRef
- aRef pop:Word:GetRef DO >>> Result
+ aRef pop:Word:GetRef DO
 ; // |^
 
 FUNCTOR : |@

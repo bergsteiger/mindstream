@@ -391,8 +391,7 @@ VOID Test PointTest
   ^ IN aPoint
   ARRAY VAR Points
   [
-   aPoint |@
-   DO
+   aPoint |^
   ]
   >>>
   Points
