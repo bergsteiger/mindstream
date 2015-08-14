@@ -156,6 +156,7 @@ VOID Test PointTest
  INTEGER VAR g_ClassFieldOffset
  STRING VAR g_CurrentClass
  STRING VAR g_CurrentClassImpl
+ ARRAY VAR l_Points
  IMMEDIATE VOID OPERATOR method
   ^L IN aName
   method
@@ -436,7 +437,6 @@ VOID Test PointTest
   P3
   Point:Neg
  )
- for
  [
   P1
   P2
@@ -449,20 +449,13 @@ VOID Test PointTest
   P9
   P10
  ]
+ >>>
+ l_Points
+ for
+ l_Points
  Point:Print
  for
- [
-  P1
-  P2
-  P3
-  P4
-  P5
-  P6
-  P7
-  P8
-  P9
-  P10
- ]
+ l_Points
  (
   Point:X
   .
