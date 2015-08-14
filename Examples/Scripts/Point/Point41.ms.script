@@ -68,6 +68,8 @@ List type PixelList
 
 class Point
 
+private Const c:Point:Offset:X 0
+private Const c:Point:Offset:Y 1
 private Const c:Point:CoordCount 2
 
 Point constructor Point:0

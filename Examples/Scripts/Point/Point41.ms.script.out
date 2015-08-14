@@ -23,6 +23,10 @@ VOID Test PointTest
  
  INTEGER CONST c:Point:CoordCount
   2
+ INTEGER CONST c:Point:Offset:X
+  0
+ INTEGER CONST c:Point:Offset:Y
+  1
  IMMEDIATE VOID OPERATOR class
   ^L IN aName
   ':'
