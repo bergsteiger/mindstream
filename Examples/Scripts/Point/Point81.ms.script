@@ -232,6 +232,10 @@ P8 := ( P4 Point:- P3 )
 P9 := ( P4 Point:Neg )
 P10 := ( P3 Point:Neg )
 
+Object var O1
+O1 := P1
+O1 Point:Print
+
 array var l_Points
 
 [ P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 ] >>> l_Points

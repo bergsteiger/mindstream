@@ -1,5 +1,6 @@
 ( X: 0, Y: 0 )
 ( X: 0, Y: 0 )
+( X: 0, Y: 0 )
 ( X: 1, Y: 1 )
 ( X: 2, Y: 2 )
 ( X: 2, Y: 2 )
@@ -240,6 +241,7 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR new[
  
+ Object VAR O1
  IMMEDIATE VOID TYPE Object
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -521,6 +523,10 @@ VOID Test PointTest
   P3
   Point:Neg
  )
+ O1 :=
+ P1
+ O1
+ Point:Print
  [
   P1
   P2
