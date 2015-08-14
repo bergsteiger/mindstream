@@ -1,0 +1,242 @@
+USES
+ NoCapsLock.ms.dict
+ params.ms.dict
+ integer.ms.dict
+;
+
+//REDEFINITION
+ : (-)
+  IN aLeft
+  right aRight
+  ( aLeft (-) ( aRight DO ) )
+ ; // 
+
+Test PointTest
+
+VOID IMMEDIATE OPERATOR class_impl
+; // class_impl
+
+//VOID IMMEDIATE OPERATOR class_impl
+//// - имплементация класса, пока "фиктивная"
+// Literal IN aName
+// @SELF Ctx:SetWordProducerForCompiledClass
+// ':' Ctx:Parser:PushSymbol
+// aName |N Ctx:Parser:PushSymbol
+// //';' Ctx:Parser:PushSymbol
+//; // class_imp
+
+STRING var g_CurrentClass
+g_CurrentClass := ''
+STRING var g_CurrentClassImpl
+g_CurrentClassImpl := ''
+
+VOID IMMEDIATE OPERATOR class
+ Literal IN aName
+ aName |N >>> g_CurrentClass
+ //'class_impl' Ctx:Parser:PushSymbol
+ // - вообще должно быть так, почему не работает - надо разбираться
+ ':' Ctx:Parser:PushSymbol
+ @ class_impl Ctx:SetWordProducerForCompiledClass
+ [ '_' g_CurrentClass '_' ] strings:Cat >>> g_CurrentClassImpl
+ g_CurrentClassImpl Ctx:Parser:PushSymbol
+ ';' Ctx:Parser:PushSymbol
+
+ 'array' Ctx:Parser:PushSymbol
+ 'type' Ctx:Parser:PushSymbol
+ g_CurrentClass Ctx:Parser:PushSymbol
+
+; // class
+
+INTEGER type FieldOffset
+// - смещение поля
+
+IMMEDIATE VOID operator constructor
+// - конструктор объектов, пока "фиктивный"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ g_CurrentClass Ctx:Parser:PushSymbol
+ ':' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // constructor
+
+IMMEDIATE VOID operator method
+// - метод объекта, пока "фиктивный"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ ':' Ctx:Parser:PushSymbol
+ [ g_CurrentClass ':' aName |N ] strings:Cat Ctx:Parser:PushSymbol
+ g_CurrentClass Ctx:Parser:PushSymbol
+ 'in' Ctx:Parser:PushSymbol
+ 'Self' Ctx:Parser:PushSymbol
+; // method
+
+IMMEDIATE VOID operator readonly
+// - read-only свойство объекта, пока "фиктивное"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ ':' Ctx:Parser:PushSymbol
+ [ g_CurrentClass ':' aName |N ] strings:Cat Ctx:Parser:PushSymbol
+ g_CurrentClass Ctx:Parser:PushSymbol
+ 'in' Ctx:Parser:PushSymbol
+ 'Self' Ctx:Parser:PushSymbol
+; // readonly
+
+IMMEDIATE VOID operator new[
+ '[' Ctx:Parser:PushSymbol
+ '@' Ctx:Parser:PushSymbol
+ g_CurrentClassImpl Ctx:Parser:PushSymbol
+; // new[
+
+INTEGER VAR g_ClassFieldOffset
+g_ClassFieldOffset := 0
+
+IMMEDIATE VOID operator ClassFieldOffset
+ Literal IN aName
+ INTEGER right anOffset
+ anOffset |^ >>> g_ClassFieldOffset
+ 'private' Ctx:Parser:PushSymbol
+ 'Const' Ctx:Parser:PushSymbol
+ [ 'c:' g_CurrentClass ':Offset:' aName |N ] strings:Cat Ctx:Parser:PushSymbol
+ g_ClassFieldOffset Ctx:Parser:PushInt
+; // ClassFieldOffset
+
+IMMEDIATE VOID operator ClassInstanceSize
+ 'private' Ctx:Parser:PushSymbol
+ 'Const' Ctx:Parser:PushSymbol
+ [ 'c:' g_CurrentClass ':Instance:Size' ] strings:Cat Ctx:Parser:PushSymbol
+ g_ClassFieldOffset ++ Ctx:Parser:PushInt
+; // ClassInstanceSize
+
+class Object
+
+: FieldByOffset
+ Object in Self
+ FieldOffset right anOffset
+ anOffset |^ Self [i]
+; // FieldByOffset
+
+ClassFieldOffset VMT 0
+ClassInstanceSize
+
+TtfwWord readonly class
+ Self FieldByOffset c:Object:Offset:VMT >>> Result
+; // Object:class
+
+STRING readonly ClassName
+ Self Object:class |N >>> Result
+; // Object:ClassName
+
+INTEGER type Pixel
+// - пиксель
+List type PixelList
+// - список пикселей
+
+class Point
+
+ClassFieldOffset X 1
+ClassFieldOffset Y 2
+ClassInstanceSize
+
+constructor Point::
+ Pixel right aX
+ Pixel right aY
+ new[ aX |^ aY |^ ] >>> Result
+; // Point::
+
+constructor Point:0
+ Point:: 0 0 >>> Result
+; // Point:0
+
+constructor Point:XY
+ PixelList right aPoint
+ array var Points
+ [ aPoint |@ DO ] >>> Points
+ Point:: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) >>> Result
+; // Point:XY
+
+Pixel readonly X
+ Self FieldByOffset c:Point:Offset:X >>> Result
+; // X
+
+Pixel readonly Y
+ Self FieldByOffset c:Point:Offset:Y >>> Result
+; // Y
+
+constructor Point:OF
+ Point right aPoint
+ Point:: ( aPoint |^ Point:X ) ( aPoint |^ Point:Y ) >>> Result
+; // Point:OF
+
+Point method +
+ Point right aPoint
+
+ Point:: ( ( Self Point:X ) (+) ( aPoint |^ Point:X ) ) ( ( Self Point:Y ) (+) ( aPoint |^ Point:Y ) ) >>> Result
+; // +
+
+Point method Neg
+ Point:: Neg ( Self Point:X ) Neg ( Self Point:Y ) >>> Result
+; // Neg
+
+Point method -
+ Point right aPoint
+
+ Point:OF ( Self Point:+ ( aPoint |^ Point:Neg ) ) >>> Result
+; // -
+
+void method Print
+ Self Print
+; // Print
+
+Point var P1
+Point var P2
+Point var P3
+Point var P4
+Point var P5
+Point var P6
+Point var P7
+Point var P8
+Point var P9
+Point var P10
+
+P1 := Point:0
+P2 := Point:0
+P3 := Point:: 1 1
+P4 := Point:XY ( 2 2 )
+P5 := Point:OF P4
+P6 := ( P3 Point:+ P4 )
+P7 := ( P3 Point:- P4 )
+P8 := ( P4 Point:- P3 )
+P9 := ( P4 Point:Neg )
+P10 := ( P3 Point:Neg )
+
+array var l_Points
+
+[ P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 ] >>> l_Points
+
+for l_Points Point:Print
+for l_Points ( Point:X Print )
+for l_Points ( Point:Y Print )
+for l_Points ( Object:class Print )
+for l_Points ( Object:ClassName Print )
+
+'Hello ' (+) 'world' Print
+
+'Hello ' (+) 'world' Print
+
+'Hello ' (+) 'world' Print
+
+1 (+) 2 Print
+10 (+) 20 Print
+0 (-) 10 Print
+Neg 10 Print
+Neg -10 Print
+
+USES
+ CodeDump.ms.dict
+;
+
+@SELF DumpElement
+
+; // PointTest
+
+PointTest
