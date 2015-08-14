@@ -78,6 +78,10 @@ IMMEDIATE VOID operator readonly
  'Self' Ctx:Parser:PushSymbol
 ; // readonly
 
+IMMEDIATE VOID operator new[
+ '[' Ctx:Parser:PushSymbol
+; // new[
+
 class Object
 
 : FieldByOffset
