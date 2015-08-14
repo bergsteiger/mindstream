@@ -72,6 +72,7 @@ IMMEDIATE VOID operator readonly
  @SELF Ctx:SetWordProducerForCompiledClass
  ':' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
+ g_CurrentClass Ctx:Parser:PushSymbol
  'in' Ctx:Parser:PushSymbol
  'Self' Ctx:Parser:PushSymbol
 ; // readonly
