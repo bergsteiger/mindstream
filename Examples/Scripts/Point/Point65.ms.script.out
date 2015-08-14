@@ -450,36 +450,23 @@ VOID Test PointTest
   P10
  ]
  Point:Print
- P1
- Point:X
- .
- P2
- Point:X
- .
- P3
- Point:X
- .
- P4
- Point:X
- .
- P5
- Point:X
- .
- P6
- Point:X
- .
- P7
- Point:X
- .
- P8
- Point:X
- .
- P9
- Point:X
- .
- P10
- Point:X
- .
+ for
+ [
+  P1
+  P2
+  P3
+  P4
+  P5
+  P6
+  P7
+  P8
+  P9
+  P10
+ ]
+ (
+  Point:X
+  .
+ )
  P1
  Point:Y
  .
