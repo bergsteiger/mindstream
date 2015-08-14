@@ -215,10 +215,9 @@ VOID Test PointTest
  ; // ARRAY method Point:+
  
  ARRAY constructor Point:0
-  [
-   0
-   0
-  ]
+  Point:
+  0
+  0
   >>>
   Result
  ; // ARRAY constructor Point:0
