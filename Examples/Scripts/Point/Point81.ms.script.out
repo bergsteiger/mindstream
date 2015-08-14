@@ -140,9 +140,10 @@ VOID Test PointTest
  ; // PRIVATE OPERATOR do-get-member
  
  : FieldByOffset
-  ^ IN anOffset
+  ^ IN _anOffset
+  ^ IN _anOffset
   Object IN Self
-  anOffset |^
+  _anOffset |^
   Self
   Array:GetItem
  ; // : FieldByOffset
@@ -294,14 +295,15 @@ VOID Test PointTest
  ; // IMMEDIATE VOID TYPE Point
  
  Point method Point:-
-  ^ IN aPoint
+  ^ IN _aPoint
+  ^ IN _aPoint
   Point IN Self
   Point:OF
   (
    Self
    Point:+
    (
-    aPoint |^
+    _aPoint |^
     Point:Neg
    )
   )
@@ -310,20 +312,23 @@ VOID Test PointTest
  ; // Point method Point:-
  
  Point constructor Point::
-  ^ IN aX
-  ^ IN aY
+  ^ IN _aX
+  ^ IN _aY
+  ^ IN _aX
+  ^ IN _aY
   [
    @
    _:Point
-   aX |^
-   aY |^
+   _aX |^
+   _aY |^
   ]
   >>>
   Result
  ; // Point constructor Point::
  
  Point method Point:+
-  ^ IN aPoint
+  ^ IN _aPoint
+  ^ IN _aPoint
   Point IN Self
   Point::
   (
@@ -331,7 +336,7 @@ VOID Test PointTest
    Point:X
    (+)
    (
-    aPoint |^
+    _aPoint |^
     Point:X
    )
   )
@@ -340,7 +345,7 @@ VOID Test PointTest
    Point:Y
    (+)
    (
-    aPoint |^
+    _aPoint |^
     Point:Y
    )
   )
@@ -374,14 +379,15 @@ VOID Test PointTest
  ; // Point method Point:Neg
  
  Point constructor Point:OF
-  ^ IN aPoint
+  ^ IN _aPoint
+  ^ IN _aPoint
   Point::
   (
-   aPoint |^
+   _aPoint |^
    Point:X
   )
   (
-   aPoint |^
+   _aPoint |^
    Point:Y
   )
   >>>
@@ -416,10 +422,11 @@ VOID Test PointTest
  ; // Pixel readonly Point:X
  
  Point constructor Point:XY
-  ^ IN aPoint
+  ^ IN _aPoint
+  ^ IN _aPoint
   ARRAY VAR Points
   [
-   aPoint |^
+   _aPoint |^
   ]
   >>>
   Points

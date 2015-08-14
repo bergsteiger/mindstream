@@ -308,15 +308,13 @@ VOID Test PointTest
  ; // Point method Point:-
  
  Point constructor Point::
-  ^ IN _aX
-  ^ IN _aY
-  ^ IN _aX
-  ^ IN _aY
+  ^ IN aX
+  ^ IN aY
   [
    @
    _:Point
-   _aX |^
-   _aY |^
+   aX |^
+   aY |^
   ]
   >>>
   Result

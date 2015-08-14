@@ -88,9 +88,10 @@ VOID Test PointTest
  ; // IMMEDIATE VOID OPERATOR constructor
  
  : FieldByOffset
-  ^ IN anOffset
+  ^ IN _anOffset
+  ^ IN _anOffset
   Object IN Self
-  anOffset |^
+  _anOffset |^
   Self
   Array:GetItem
  ; // : FieldByOffset
@@ -142,18 +143,21 @@ VOID Test PointTest
  ; // IMMEDIATE VOID TYPE Point
  
  Point constructor Point:
-  ^ IN aX
-  ^ IN aY
+  ^ IN _aX
+  ^ IN _aY
+  ^ IN _aX
+  ^ IN _aY
   [
-   aX |^
-   aY |^
+   _aX |^
+   _aY |^
   ]
   >>>
   Result
  ; // Point constructor Point:
  
  Point method Point:-
-  ^ IN aPoint
+  ^ IN _aPoint
+  ^ IN _aPoint
   FieldOffset VAR i
   Point IN Self
   i :=
@@ -161,7 +165,7 @@ VOID Test PointTest
   [
    for
    (
-    aPoint |@
+    _aPoint |@
     DO
    )
    (
@@ -182,7 +186,8 @@ VOID Test PointTest
  ; // Point method Point:-
  
  Point method Point:+
-  ^ IN aPoint
+  ^ IN _aPoint
+  ^ IN _aPoint
   FieldOffset VAR i
   Point IN Self
   i :=
@@ -190,7 +195,7 @@ VOID Test PointTest
   [
    for
    (
-    aPoint |@
+    _aPoint |@
     DO
    )
    (
@@ -243,11 +248,12 @@ VOID Test PointTest
  ; // Point method Point:Neg
  
  Point constructor Point:OF
-  ^ IN aPoint
+  ^ IN _aPoint
+  ^ IN _aPoint
   [
    for
    (
-    aPoint |@
+    _aPoint |@
     DO
    )
    (
@@ -283,9 +289,10 @@ VOID Test PointTest
  ; // Pixel readonly Point:X
  
  Point constructor Point:XY
-  ^ IN aPoint
+  ^ IN _aPoint
+  ^ IN _aPoint
   [
-   aPoint |@
+   _aPoint |@
    DO
   ]
   >>>
