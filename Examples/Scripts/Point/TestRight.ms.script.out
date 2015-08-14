@@ -23,7 +23,12 @@ VOID Test RighTest
   [
    'VOID axiom:operator'
    l_Name
-   l_MangledName
+   [
+    '`'
+    l_MangledName
+    '`'
+   ]
+   strings:Cat
    'Ctx:Parser:PushSymbol'
    ';'
   ]
@@ -33,7 +38,7 @@ VOID Test RighTest
  : X
   ^ IN _aA
   VOID OPERATOR aA
-   _aA
+   '_aA'
    Ctx:Parser:PushSymbol
   ; // VOID OPERATOR aA
   
