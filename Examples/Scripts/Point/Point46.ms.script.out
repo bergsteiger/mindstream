@@ -224,13 +224,10 @@ VOID Test PointTest
  ARRAY method Point:Neg
   ARRAY IN Self
   Point:
+  Neg
   (
-   0
-   (-)
-   (
-    Self
-    Point:X
-   )
+   Self
+   Point:X
   )
   (
    0
