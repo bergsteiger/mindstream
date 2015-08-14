@@ -86,15 +86,15 @@ private Const c:Point:Offset:X 0
 private Const c:Point:Offset:Y 1
 private Const c:Point:CoordCount 2
 
-Point constructor Point:0
- [ 0 0 ] >>> Result
-; // Point:0
-
 Point constructor Point:
  Pixel right aX
  Pixel right aY
  [ aX |^ aY |^ ] >>> Result
 ; // Point:
+
+Point constructor Point:0
+ [ 0 0 ] >>> Result
+; // Point:0
 
 Point constructor Point:XY
  PixelList right aPoint
