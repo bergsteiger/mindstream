@@ -190,7 +190,7 @@ constructor OF
 Point method +
  Point right aPoint
 
- Point:: ( Self Point:X (+) ( aPoint |^ Point:X ) ) ( Self Point:Y (+) ( aPoint |^ Point:Y ) ) >>> Result
+ Point:: ( Self Point:X (+) ( aPoint Point:X ) ) ( Self Point:Y (+) ( aPoint Point:Y ) ) >>> Result
 ; // +
 
 Point method Neg
