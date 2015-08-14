@@ -92,7 +92,7 @@ IMMEDIATE VOID operator new[
 INTEGER VAR g_ClassFieldOffset
 g_ClassFieldOffset := 0
 
-IMMEDIATE VOID operator ClassFieldOffset
+IMMEDIATE VOID operator member
  Literal IN aName
  INTEGER right anOffset
  anOffset |^ >>> g_ClassFieldOffset
@@ -100,7 +100,7 @@ IMMEDIATE VOID operator ClassFieldOffset
  'Const' Ctx:Parser:PushSymbol
  [ 'c:' g_CurrentClass ':Offset:' aName |N ] strings:Cat Ctx:Parser:PushSymbol
  g_ClassFieldOffset Ctx:Parser:PushInt
-; // ClassFieldOffset
+; // member
 
 IMMEDIATE VOID operator ClassInstanceSize
  'private' Ctx:Parser:PushSymbol
@@ -117,7 +117,7 @@ class Object
  anOffset |^ Self [i]
 ; // FieldByOffset
 
-ClassFieldOffset VMT 0
+member VMT 0
 ClassInstanceSize
 
 TtfwWord readonly class
@@ -135,8 +135,8 @@ List type PixelList
 
 class Point
 
-ClassFieldOffset X 1
-ClassFieldOffset Y 2
+member X 1
+member Y 2
 ClassInstanceSize
 
 constructor :

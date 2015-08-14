@@ -107,29 +107,6 @@ VOID Test PointTest
  IMMEDIATE VOID OPERATOR class_impl
  ; // IMMEDIATE VOID OPERATOR class_impl
  
- IMMEDIATE VOID OPERATOR ClassFieldOffset
-  ^L IN aName
-  ^ IN anOffset
-  anOffset |^
-  >>>
-  g_ClassFieldOffset
-  'private'
-  Ctx:Parser:PushSymbol
-  'Const'
-  Ctx:Parser:PushSymbol
-  [
-   'c:'
-   g_CurrentClass
-   ':Offset:'
-   aName
-   |N
-  ]
-  strings:Cat
-  Ctx:Parser:PushSymbol
-  g_ClassFieldOffset
-  Ctx:Parser:PushInt
- ; // IMMEDIATE VOID OPERATOR ClassFieldOffset
- 
  IMMEDIATE VOID OPERATOR ClassInstanceSize
   'private'
   Ctx:Parser:PushSymbol
@@ -182,6 +159,29 @@ VOID Test PointTest
  STRING VAR g_CurrentClass
  STRING VAR g_CurrentClassImpl
  ARRAY VAR l_Points
+ IMMEDIATE VOID OPERATOR member
+  ^L IN aName
+  ^ IN anOffset
+  anOffset |^
+  >>>
+  g_ClassFieldOffset
+  'private'
+  Ctx:Parser:PushSymbol
+  'Const'
+  Ctx:Parser:PushSymbol
+  [
+   'c:'
+   g_CurrentClass
+   ':Offset:'
+   aName
+   |N
+  ]
+  strings:Cat
+  Ctx:Parser:PushSymbol
+  g_ClassFieldOffset
+  Ctx:Parser:PushInt
+ ; // IMMEDIATE VOID OPERATOR member
+ 
  IMMEDIATE VOID OPERATOR method
   ^L IN aName
   method
