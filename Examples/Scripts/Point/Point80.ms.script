@@ -147,11 +147,7 @@ VOID IMMEDIATE operator read
 member VMT
 members-end
 
-TtfwWord readonly classX read VMT
-
-TtfwWord readonly class
- Self get-member VMT >>> Result
-; // Object:class
+TtfwWord readonly class read VMT
 
 STRING readonly ClassName
  Self Object:class |N >>> Result

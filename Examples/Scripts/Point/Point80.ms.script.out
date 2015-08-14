@@ -264,15 +264,6 @@ VOID Test PointTest
   Result
  ; // STRING readonly Object:ClassName
  
- TtfwWord readonly Object:classX
-  Object IN Self
-  Self
-  FieldByOffset
-  c:Object:Offset:VMT
-  >>>
-  Result
- ; // TtfwWord readonly Object:classX
- 
  Point VAR P1
  Point VAR P10
  Point VAR P2
