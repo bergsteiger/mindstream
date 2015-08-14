@@ -21,7 +21,7 @@ VOID Test RighTest
   l_MangledName
   Ctx:Parser:PushSymbol
   [
-   'VOID axiom:operator'
+   'VOID IMMEDIATE axiom:operator'
    l_Name
    [
     '`'
@@ -37,11 +37,13 @@ VOID Test RighTest
  
  : X
   ^ IN _aA
-  VOID OPERATOR aA
+  IMMEDIATE VOID OPERATOR aA
    '_aA'
    Ctx:Parser:PushSymbol
-  ; // VOID OPERATOR aA
+  ; // IMMEDIATE VOID OPERATOR aA
   
+  _aA
+  .
  ; // : X
  
  RighTest
