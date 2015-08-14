@@ -1,0 +1,533 @@
+[ TkwCompiledProcedure 0 0 ]
+[ TkwCompiledProcedure 0 0 ]
+[ TkwCompiledProcedure 1 1 ]
+[ TkwCompiledProcedure 2 2 ]
+[ TkwCompiledProcedure 2 2 ]
+[ TkwCompiledProcedure 3 3 ]
+[ TkwCompiledProcedure -1 -1 ]
+[ TkwCompiledProcedure 1 1 ]
+[ TkwCompiledProcedure -2 -2 ]
+[ TkwCompiledProcedure -1 -1 ]
+0
+0
+1
+2
+2
+3
+-1
+1
+-2
+-1
+0
+0
+1
+2
+2
+3
+-1
+1
+-2
+-1
+Hello world
+Hello world
+Hello world
+3
+30
+-10
+-10
+10
+VOID Test PointTest
+ class_impl _Object_
+ ; // class_impl _Object_
+ 
+ class_impl _Point_
+ ; // class_impl _Point_
+ 
+ INTEGER CONST c:Object:Instance:Size
+  1
+ INTEGER CONST c:Object:Offset:VMT
+  0
+ INTEGER CONST c:Point:Instance:Size
+  3
+ INTEGER CONST c:Point:Offset:X
+  1
+ INTEGER CONST c:Point:Offset:Y
+  2
+ IMMEDIATE VOID OPERATOR class
+  ^L IN aName
+  aName
+  |N
+  >>>
+  g_CurrentClass
+  ':'
+  Ctx:Parser:PushSymbol
+  @
+  class_impl
+  Ctx:SetWordProducerForCompiledClass
+  [
+   '_'
+   g_CurrentClass
+   '_'
+  ]
+  strings:Cat
+  >>>
+  g_CurrentClassImpl
+  g_CurrentClassImpl
+  Ctx:Parser:PushSymbol
+  ';'
+  Ctx:Parser:PushSymbol
+  'array'
+  Ctx:Parser:PushSymbol
+  'type'
+  Ctx:Parser:PushSymbol
+  g_CurrentClass
+  Ctx:Parser:PushSymbol
+ ; // IMMEDIATE VOID OPERATOR class
+ 
+ IMMEDIATE VOID OPERATOR class_impl
+ ; // IMMEDIATE VOID OPERATOR class_impl
+ 
+ IMMEDIATE VOID OPERATOR ClassFieldOffset
+  ^L IN aName
+  ^ IN anOffset
+  anOffset |^
+  >>>
+  g_ClassFieldOffset
+  'private'
+  Ctx:Parser:PushSymbol
+  'Const'
+  Ctx:Parser:PushSymbol
+  [
+   'c:'
+   g_CurrentClass
+   ':Offset:'
+   aName
+   |N
+  ]
+  strings:Cat
+  Ctx:Parser:PushSymbol
+  g_ClassFieldOffset
+  Ctx:Parser:PushInt
+ ; // IMMEDIATE VOID OPERATOR ClassFieldOffset
+ 
+ IMMEDIATE VOID OPERATOR ClassInstanceSize
+  'private'
+  Ctx:Parser:PushSymbol
+  'Const'
+  Ctx:Parser:PushSymbol
+  [
+   'c:'
+   g_CurrentClass
+   ':Instance:Size'
+  ]
+  strings:Cat
+  Ctx:Parser:PushSymbol
+  g_ClassFieldOffset
+  ++
+  Ctx:Parser:PushInt
+ ; // IMMEDIATE VOID OPERATOR ClassInstanceSize
+ 
+ IMMEDIATE VOID OPERATOR constructor
+  ^L IN aName
+  constructor
+  Ctx:SetWordProducerForCompiledClass
+  g_CurrentClass
+  Ctx:Parser:PushSymbol
+  ':'
+  Ctx:Parser:PushSymbol
+  aName
+  |N
+  Ctx:Parser:PushSymbol
+ ; // IMMEDIATE VOID OPERATOR constructor
+ 
+ : FieldByOffset
+  ^ IN anOffset
+  ARRAY IN Self
+  anOffset |^
+  Self
+  [i]
+ ; // : FieldByOffset
+ 
+ IMMEDIATE VOID TYPE FieldOffset
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE FieldOffset
+ 
+ INTEGER VAR g_ClassFieldOffset
+ STRING VAR g_CurrentClass
+ STRING VAR g_CurrentClassImpl
+ IMMEDIATE VOID OPERATOR method
+  ^L IN aName
+  method
+  Ctx:SetWordProducerForCompiledClass
+  ':'
+  Ctx:Parser:PushSymbol
+  aName
+  |N
+  Ctx:Parser:PushSymbol
+  g_CurrentClass
+  Ctx:Parser:PushSymbol
+  'in'
+  Ctx:Parser:PushSymbol
+  'Self'
+  Ctx:Parser:PushSymbol
+ ; // IMMEDIATE VOID OPERATOR method
+ 
+ IMMEDIATE VOID OPERATOR new[
+  '['
+  Ctx:Parser:PushSymbol
+  '@'
+  Ctx:Parser:PushSymbol
+  g_CurrentClassImpl
+  Ctx:Parser:PushSymbol
+ ; // IMMEDIATE VOID OPERATOR new[
+ 
+ IMMEDIATE VOID TYPE Object
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE Object
+ 
+ TtfwWord readonly Offset:class
+  ARRAY IN Self
+  Self
+  FieldByOffset
+  c:Object:Offset:VMT
+  >>>
+  Result
+ ; // TtfwWord readonly Offset:class
+ 
+ ARRAY VAR P1
+ ARRAY VAR P10
+ ARRAY VAR P2
+ ARRAY VAR P3
+ ARRAY VAR P4
+ ARRAY VAR P5
+ ARRAY VAR P6
+ ARRAY VAR P7
+ ARRAY VAR P8
+ ARRAY VAR P9
+ IMMEDIATE VOID TYPE Pixel
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE Pixel
+ 
+ IMMEDIATE VOID TYPE PixelList
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE PixelList
+ 
+ IMMEDIATE VOID TYPE Point
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE Point
+ 
+ ARRAY constructor Point:
+  ^ IN aX
+  ^ IN aY
+  [
+   @
+   _Point_
+   aX |^
+   aY |^
+  ]
+  >>>
+  Result
+ ; // ARRAY constructor Point:
+ 
+ ARRAY method Point:-
+  ^ IN aPoint
+  ARRAY IN Self
+  Point:OF
+  (
+   Self
+   Point:+
+   (
+    aPoint |^
+    Point:Neg
+   )
+  )
+  >>>
+  Result
+ ; // ARRAY method Point:-
+ 
+ ARRAY method Point:+
+  ^ IN aPoint
+  ARRAY IN Self
+  Point:
+  (
+   (
+    Self
+    Point:X
+   )
+   (+)
+   (
+    aPoint |^
+    Point:X
+   )
+  )
+  (
+   (
+    Self
+    Point:Y
+   )
+   (+)
+   (
+    aPoint |^
+    Point:Y
+   )
+  )
+  >>>
+  Result
+ ; // ARRAY method Point:+
+ 
+ ARRAY constructor Point:0
+  Point:
+  0
+  0
+  >>>
+  Result
+ ; // ARRAY constructor Point:0
+ 
+ ARRAY method Point:Neg
+  ARRAY IN Self
+  Point:
+  Neg
+  (
+   Self
+   Point:X
+  )
+  Neg
+  (
+   Self
+   Point:Y
+  )
+  >>>
+  Result
+ ; // ARRAY method Point:Neg
+ 
+ ARRAY constructor Point:OF
+  ^ IN aPoint
+  Point:
+  (
+   aPoint |^
+   Point:X
+  )
+  (
+   aPoint |^
+   Point:Y
+  )
+  >>>
+  Result
+ ; // ARRAY constructor Point:OF
+ 
+ VOID method Point:Print
+  ARRAY IN Self
+  Self
+  .
+ ; // VOID method Point:Print
+ 
+ INTEGER readonly Point:X
+  ARRAY IN Self
+  Self
+  FieldByOffset
+  c:Point:Offset:X
+  >>>
+  Result
+ ; // INTEGER readonly Point:X
+ 
+ ARRAY constructor Point:XY
+  ^ IN aPoint
+  ARRAY VAR Points
+  [
+   aPoint |@
+   DO
+  ]
+  >>>
+  Points
+  Point:
+  (
+   Points
+   FieldByOffset
+   0
+  )
+  (
+   Points
+   FieldByOffset
+   1
+  )
+  >>>
+  Result
+ ; // ARRAY constructor Point:XY
+ 
+ INTEGER readonly Point:Y
+  ARRAY IN Self
+  Self
+  FieldByOffset
+  c:Point:Offset:Y
+  >>>
+  Result
+ ; // INTEGER readonly Point:Y
+ 
+ IMMEDIATE VOID OPERATOR readonly
+  ^L IN aName
+  readonly
+  Ctx:SetWordProducerForCompiledClass
+  ':'
+  Ctx:Parser:PushSymbol
+  aName
+  |N
+  Ctx:Parser:PushSymbol
+  g_CurrentClass
+  Ctx:Parser:PushSymbol
+  'in'
+  Ctx:Parser:PushSymbol
+  'Self'
+  Ctx:Parser:PushSymbol
+ ; // IMMEDIATE VOID OPERATOR readonly
+ 
+ g_CurrentClass :=
+ ''
+ g_CurrentClassImpl :=
+ ''
+ g_ClassFieldOffset :=
+ 0
+ P1 :=
+ Point:0
+ P2 :=
+ Point:0
+ P3 :=
+ Point:
+ 1
+ 1
+ P4 :=
+ Point:XY
+ (
+  2
+  2
+ )
+ P5 :=
+ Point:OF
+ P4
+ P6 :=
+ (
+  P3
+  Point:+
+  P4
+ )
+ P7 :=
+ (
+  P3
+  Point:-
+  P4
+ )
+ P8 :=
+ (
+  P4
+  Point:-
+  P3
+ )
+ P9 :=
+ (
+  P4
+  Point:Neg
+ )
+ P10 :=
+ (
+  P3
+  Point:Neg
+ )
+ for
+ [
+  P1
+  P2
+  P3
+  P4
+  P5
+  P6
+  P7
+  P8
+  P9
+  P10
+ ]
+ Point:Print
+ for
+ [
+  P1
+  P2
+  P3
+  P4
+  P5
+  P6
+  P7
+  P8
+  P9
+  P10
+ ]
+ (
+  Point:X
+  .
+ )
+ P1
+ Point:Y
+ .
+ P2
+ Point:Y
+ .
+ P3
+ Point:Y
+ .
+ P4
+ Point:Y
+ .
+ P5
+ Point:Y
+ .
+ P6
+ Point:Y
+ .
+ P7
+ Point:Y
+ .
+ P8
+ Point:Y
+ .
+ P9
+ Point:Y
+ .
+ P10
+ Point:Y
+ .
+ 'Hello '
+ (+)
+ 'world'
+ .
+ 'Hello '
+ (+)
+ 'world'
+ .
+ 'Hello '
+ (+)
+ 'world'
+ .
+ 1
+ (+)
+ 2
+ .
+ 10
+ (+)
+ 20
+ .
+ 0
+ (-)
+ 10
+ .
+ Neg
+ 10
+ .
+ Neg
+ -10
+ .
+ PointTest
+ DumpElement
+; // VOID Test PointTest
+
