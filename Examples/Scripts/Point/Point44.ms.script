@@ -40,8 +40,6 @@ VOID IMMEDIATE OPERATOR class
 
 ; // class
 
-class Object
-
 INTEGER type FieldOffset
 // - смещение поля
 
@@ -68,6 +66,8 @@ IMMEDIATE VOID operator readonly
  ':' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
 ; // readonly
+
+class Object
 
 INTEGER type Pixel
 // - пиксель
