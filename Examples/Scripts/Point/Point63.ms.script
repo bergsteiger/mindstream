@@ -109,6 +109,9 @@ IMMEDIATE VOID operator ClassInstanceSize
 
 class Object
 
+ClassFieldOffset VMT 0
+ClassInstanceSize
+
 : FieldByOffset
  Object in Self
  FieldOffset right anOffset

@@ -43,6 +43,10 @@ VOID Test PointTest
  class_impl _Point_
  ; // class_impl _Point_
  
+ INTEGER CONST c:Object:Instance:Size
+  1
+ INTEGER CONST c:Object:Offset:VMT
+  0
  INTEGER CONST c:Point:Instance:Size
   3
  INTEGER CONST c:Point:Offset:X
