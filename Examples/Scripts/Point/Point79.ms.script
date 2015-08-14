@@ -170,11 +170,11 @@ constructor XY
 ; // XY
 
 Pixel readonly X
- Self FieldByOffset c:Point:Offset:X >>> Result
+ Self get-member X >>> Result
 ; // X
 
 Pixel readonly Y
- Self FieldByOffset c:Point:Offset:Y >>> Result
+ Self get-member Y >>> Result
 ; // Y
 
 constructor OF
