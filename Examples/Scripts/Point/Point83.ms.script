@@ -184,7 +184,7 @@ Pixel readonly Y read Y
 
 constructor OF
  Point right aPoint
- Point:: ( aPoint |^ Point:X ) ( aPoint |^ Point:Y ) >>> Result
+ Point:: ( aPoint Point:X ) ( aPoint Point:Y ) >>> Result
 ; // OF
 
 Point method +
