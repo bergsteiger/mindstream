@@ -75,7 +75,7 @@ IMMEDIATE VOID operator readonly
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
  ':' Ctx:Parser:PushSymbol
- aName |N Ctx:Parser:PushSymbol
+ [ g_CurrentClass ':' aName |N ] strings:Cat Ctx:Parser:PushSymbol
  g_CurrentClass Ctx:Parser:PushSymbol
  'in' Ctx:Parser:PushSymbol
  'Self' Ctx:Parser:PushSymbol
@@ -118,11 +118,11 @@ class Object
 ClassFieldOffset VMT 0
 ClassInstanceSize
 
-TtfwWord readonly Object:class
+TtfwWord readonly class
  Self FieldByOffset c:Object:Offset:VMT >>> Result
 ; // Object:class
 
-STRING readonly Object:ClassName
+STRING readonly ClassName
  Self Object:class |N >>> Result
 ; // Object:ClassName
 
@@ -154,11 +154,11 @@ constructor Point:XY
  Point: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) >>> Result
 ; // Point:XY
 
-Pixel readonly Point:X
+Pixel readonly X
  Self FieldByOffset c:Point:Offset:X >>> Result
 ; // Point:X
 
-Pixel readonly Point:Y
+Pixel readonly Y
  Self FieldByOffset c:Point:Offset:Y >>> Result
 ; // Point:Y
 
