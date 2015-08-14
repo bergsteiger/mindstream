@@ -137,17 +137,19 @@ VOID IMMEDIATE operator get-member
 
 VOID IMMEDIATE operator read
  Literal IN aName
- 'get-member' Ctx:Parser:PushSymbol
-  aName |N Ctx:Parser:PushSymbol 
- '>>>' Ctx:Parser:PushSymbol 
- 'Result' Ctx:Parser:PushSymbol
- ';' Ctx:Parser:PushSymbol
+ aName |N do-get-member
+ //'>>>' Ctx:Parser:PushSymbol 
+ //'Result' Ctx:Parser:PushSymbol
+ //';' Ctx:Parser:PushSymbol
 ; // read
 
 member VMT
 members-end
 
-TtfwWord readonly class //read VMT
+TtfwWord readonly classX read VMT
+; // classX
+
+TtfwWord readonly class
  Self get-member VMT >>> Result
 ; // Object:class
 
