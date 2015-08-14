@@ -111,6 +111,10 @@ VOID Test PointTest
   aName
   |N
   Ctx:Parser:PushSymbol
+  'in'
+  Ctx:Parser:PushSymbol
+  'Self'
+  Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR method
  
  IMMEDIATE VOID TYPE Object
@@ -156,7 +160,7 @@ VOID Test PointTest
  
  ARRAY method Point:-
   ^ IN aPoint
-  ARRAY IN Self
+  IN Self
   Point:
   (
    (
@@ -186,7 +190,7 @@ VOID Test PointTest
  
  ARRAY method Point:+
   ^ IN aPoint
-  ARRAY IN Self
+  IN Self
   Point:
   (
    (
@@ -223,7 +227,7 @@ VOID Test PointTest
  ; // ARRAY constructor Point:0
  
  ARRAY method Point:Neg
-  ARRAY IN Self
+  IN Self
   Point:
   Neg
   (
@@ -255,8 +259,8 @@ VOID Test PointTest
  ; // ARRAY constructor Point:OF
  
  VOID method Point:Print
-  ARRAY IN aPoint
-  aPoint
+  IN Self
+  Self
   .
  ; // VOID method Point:Print
  

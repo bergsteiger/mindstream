@@ -57,6 +57,8 @@ IMMEDIATE VOID operator method
  @SELF Ctx:SetWordProducerForCompiledClass
  ':' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
+ 'in' Ctx:Parser:PushSymbol
+ 'Self' Ctx:Parser:PushSymbol
 ; // method
 
 IMMEDIATE VOID operator readonly
@@ -119,28 +121,23 @@ Point constructor Point:OF
 ; // Point:OF
 
 Point method Point:+
- Point in Self
  Point right aPoint
 
  Point: ( ( Self Point:X ) (+) ( aPoint |^ Point:X ) ) ( ( Self Point:Y ) (+) ( aPoint |^ Point:Y ) ) >>> Result
 ; // Point:+
 
 Point method Point:-
- Point in Self
  Point right aPoint
 
  Point: ( ( Self Point:X ) (-) ( aPoint |^ Point:X ) ) ( ( Self Point:Y ) (-) ( aPoint |^ Point:Y ) ) >>> Result
 ; // Point:-
 
 Point method Point:Neg
- Point in Self
-
  Point: Neg ( Self Point:X ) Neg ( Self Point:Y ) >>> Result
 ; // Point:Neg
 
 void method Point:Print
- Point in aPoint
- aPoint Print
+ Self Print
 ; // Point:Print
 
 Point var P1
