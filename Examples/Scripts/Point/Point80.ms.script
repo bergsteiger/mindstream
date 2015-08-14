@@ -181,13 +181,9 @@ constructor XY
  Point:: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) >>> Result
 ; // XY
 
-Pixel readonly X
- Self get-member X >>> Result
-; // X
+Pixel readonly X read X
 
-Pixel readonly Y
- Self get-member Y >>> Result
-; // Y
+Pixel readonly Y read Y
 
 constructor OF
  Point right aPoint
