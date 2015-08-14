@@ -100,6 +100,13 @@ IMMEDIATE VOID operator ClassFieldOffset
  g_ClassFieldOffset Ctx:Parser:PushInt
 ; // ClassFieldOffset
 
+IMMEDIATE VOID operator ClassVMTSize
+ 'private' Ctx:Parser:PushSymbol
+ 'Const' Ctx:Parser:PushSymbol
+ [ 'c:' g_CurrentClass ':VMT:Size' ] strings:Cat Ctx:Parser:PushSymbol
+ g_ClassFieldOffset ++ Ctx:Parser:PushInt
+; // ClassVMTSize
+
 class Object
 
 : FieldByOffset
@@ -117,7 +124,7 @@ class Point
 
 ClassFieldOffset X 1
 ClassFieldOffset Y 2
-private Const c:Point:VMT:Size 3
+ClassVMTSize
 
 constructor Point:
  Pixel right aX
