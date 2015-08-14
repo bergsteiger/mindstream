@@ -1,5 +1,5 @@
-TkwString
-TkwInteger
+10
+20
 VOID Test RighTest
  IMMEDIATE VOID OPERATOR right
   ^L IN aName
@@ -32,6 +32,8 @@ VOID Test RighTest
    ]
    strings:Cat
    'Ctx:Parser:PushSymbol'
+   '`|^`'
+   'Ctx:Parser:PushSymbol'
    ';'
   ]
   Ctx:Parser:PushArray
@@ -42,9 +44,11 @@ VOID Test RighTest
   IMMEDIATE VOID OPERATOR aA
    '_aA'
    Ctx:Parser:PushSymbol
+   '|^'
+   Ctx:Parser:PushSymbol
   ; // IMMEDIATE VOID OPERATOR aA
   
-  _aA
+  _aA |^
   .
  ; // : X
  
