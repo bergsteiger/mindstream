@@ -101,7 +101,7 @@ IMMEDIATE VOID operator member
  Literal IN aName
  'private' Ctx:Parser:PushSymbol
  'Const' Ctx:Parser:PushSymbol
- [ 'c:' g_CurrentClass ':Offset:' aName |N ] strings:Cat Ctx:Parser:PushSymbol
+ aName |N MakeFieldOffsetName Ctx:Parser:PushSymbol
  g_ClassFieldOffset Ctx:Parser:PushInt
  Inc g_ClassFieldOffset
 ; // member
