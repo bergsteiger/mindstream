@@ -34,6 +34,8 @@ Hello world
 3
 30
 -10
+-10
+10
 VOID Test PointTest
  class_impl _Object_
  ; // class_impl _Object_
@@ -468,6 +470,12 @@ VOID Test PointTest
  0
  (-)
  10
+ .
+ Neg
+ 10
+ .
+ Neg
+ -10
  .
  PointTest
  DumpElement

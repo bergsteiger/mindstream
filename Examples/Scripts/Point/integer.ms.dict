@@ -49,3 +49,8 @@ REDEFINITION
    ( aLeft (-) ( aRight DO ) )
   //inherited
  ; // (-)
+
+INTEGER : Neg
+ INTEGER right aValue
+ 0 (-) aValue >>> Result
+; // Neg
