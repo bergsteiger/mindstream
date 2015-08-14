@@ -238,6 +238,15 @@ VOID Test PointTest
   .
  ; // VOID method Point:Print
  
+ INTEGER method Point:X
+  ARRAY IN Self
+  c:Point:Offset:X
+  Self
+  [i]
+  >>>
+  Result
+ ; // INTEGER method Point:X
+ 
  ARRAY constructor Point:XY
   ^ IN aPoint
   [

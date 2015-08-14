@@ -94,6 +94,11 @@ Point constructor Point:OF
  ( Result Array:Count = c:Point:CoordCount ) ?Assure '“очка должна содержать две координаты'
 ; // Point:OF
 
+Pixel method Point:X
+ Point in Self
+ c:Point:Offset:X Self [i] >>> Result
+; // Point:X
+
 Point method Point:+
  Point in Self
  Point right aPoint
