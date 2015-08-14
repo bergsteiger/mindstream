@@ -142,6 +142,15 @@ VOID Test PointTest
  STRING VAR g_CurrentClass
  STRING VAR g_CurrentClassImpl
  ARRAY VAR l_Points
+ PRIVATE VOID OPERATOR MakeSelfParam
+  g_CurrentClass
+  Ctx:Parser:PushSymbol
+  'in'
+  Ctx:Parser:PushSymbol
+  'Self'
+  Ctx:Parser:PushSymbol
+ ; // PRIVATE VOID OPERATOR MakeSelfParam
+ 
  IMMEDIATE VOID OPERATOR member
   ^L IN aName
   'private'
@@ -193,12 +202,7 @@ VOID Test PointTest
   ]
   strings:Cat
   Ctx:Parser:PushSymbol
-  g_CurrentClass
-  Ctx:Parser:PushSymbol
-  'in'
-  Ctx:Parser:PushSymbol
-  'Self'
-  Ctx:Parser:PushSymbol
+  MakeSelfParam
  ; // IMMEDIATE VOID OPERATOR method
  
  IMMEDIATE VOID OPERATOR new[
@@ -430,12 +434,7 @@ VOID Test PointTest
   ]
   strings:Cat
   Ctx:Parser:PushSymbol
-  g_CurrentClass
-  Ctx:Parser:PushSymbol
-  'in'
-  Ctx:Parser:PushSymbol
-  'Self'
-  Ctx:Parser:PushSymbol
+  MakeSelfParam
  ; // IMMEDIATE VOID OPERATOR readonly
  
  g_CurrentClass :=
