@@ -14,7 +14,7 @@ USES
   // - так не работает, непонятно почему
   //inherited
   // - так не работает, непонятно почему
-  ( aLeft aRight |^ + )
+  ( aLeft aRight + )
  ; // (+)
 
 REDEFINITION
