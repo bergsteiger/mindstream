@@ -36,6 +36,9 @@ VOID IMMEDIATE operator right
   aA .
  ; // X
 
+ X '10'
+ X 20
+
  @SELF DumpElement
 
 ; //RighTest

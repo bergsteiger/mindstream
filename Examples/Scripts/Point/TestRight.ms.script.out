@@ -1,3 +1,5 @@
+TkwString
+TkwInteger
 VOID Test RighTest
  IMMEDIATE VOID OPERATOR right
   ^L IN aName
@@ -46,6 +48,10 @@ VOID Test RighTest
   .
  ; // : X
  
+ X
+ '10'
+ X
+ 20
  RighTest
  DumpElement
 ; // VOID Test RighTest
