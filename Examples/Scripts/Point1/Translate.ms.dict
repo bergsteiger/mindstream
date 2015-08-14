@@ -1,0 +1,60 @@
+WordAlias перебрать for
+
+USES
+ arrays.ms.dict
+;
+
+WordAlias отобрать >filter>
+
+USES
+ io.ms.dict
+;
+
+WordAlias напечатать Print
+
+USES
+ math.ms.dict
+;
+
+WordAlias нечётные IsOdd
+WordAlias чётные IsEven
+
+USES
+ reverted.ms.dict
+;
+
+WordAlias "в обратном порядке" >reverted>
+
+: разделитель
+ '-------------------' напечатать
+; // разделитель
+
+WordAlias "вывести разделитель" разделитель
+
+ARRAY FUNCTION числа
+ ^ IN anArray
+ anArray DO >>> Result
+; // числа
+
+WordAlias каждое >map>
+
+USES
+ to.ms.dict
+;
+
+WordAlias по to
+
+: с
+ ^ IN aValue
+ aValue DO
+; // с
+
+USES
+ math.ms.dict
+;
+
+WordAlias "увеличить на 1" Inc1
+WordAlias "уменьшить на 1" Dec1
+
+WordAlias "увеличить на" IncWith
+WordAlias "уменьшить на" DecWith

@@ -1,0 +1,62 @@
+10
+20
+VOID Test RighTest
+ IMMEDIATE VOID OPERATOR right
+  ^L IN aName
+  STRING VAR l_MangledName
+  STRING VAR l_Name
+  'RIGHT'
+  Ctx:Parser:PushSymbol
+  'IN'
+  Ctx:Parser:PushSymbol
+  aName
+  |N
+  >>>
+  l_Name
+  [
+   '_'
+   l_Name
+  ]
+  strings:Cat
+  >>>
+  l_MangledName
+  l_MangledName
+  Ctx:Parser:PushSymbol
+  [
+   'VOID IMMEDIATE axiom:operator'
+   l_Name
+   [
+    '`'
+    l_MangledName
+    '`'
+   ]
+   strings:Cat
+   'Ctx:Parser:PushSymbol'
+   '`|^`'
+   'Ctx:Parser:PushSymbol'
+   ';'
+  ]
+  Ctx:Parser:PushArray
+ ; // IMMEDIATE VOID OPERATOR right
+ 
+ : X
+  ^ IN _aA
+  IMMEDIATE VOID OPERATOR aA
+   '_aA'
+   Ctx:Parser:PushSymbol
+   '|^'
+   Ctx:Parser:PushSymbol
+  ; // IMMEDIATE VOID OPERATOR aA
+  
+  _aA |^
+  .
+ ; // : X
+ 
+ X
+ '10'
+ X
+ 20
+ RighTest
+ DumpElement
+; // VOID Test RighTest
+

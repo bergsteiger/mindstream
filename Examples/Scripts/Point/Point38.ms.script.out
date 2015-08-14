@@ -109,21 +109,18 @@ VOID Test PointTest
  ; // IMMEDIATE VOID TYPE Point
  
  Point constructor Point:
-  ^ IN _aX
-  ^ IN _aY
-  ^ IN _aX
-  ^ IN _aY
+  ^ IN aX
+  ^ IN aY
   [
-   _aX |^
-   _aY |^
+   aX |^
+   aY |^
   ]
   >>>
   Result
  ; // Point constructor Point:
  
  Point method Point:-
-  ^ IN _aPoint
-  ^ IN _aPoint
+  ^ IN aPoint
   FieldOffset VAR i
   Point IN Self
   i :=
@@ -131,7 +128,7 @@ VOID Test PointTest
   [
    for
    (
-    _aPoint |@
+    aPoint |@
     DO
    )
    (
@@ -150,8 +147,7 @@ VOID Test PointTest
  ; // Point method Point:-
  
  Point method Point:+
-  ^ IN _aPoint
-  ^ IN _aPoint
+  ^ IN aPoint
   FieldOffset VAR i
   Point IN Self
   i :=
@@ -159,7 +155,7 @@ VOID Test PointTest
   [
    for
    (
-    _aPoint |@
+    aPoint |@
     DO
    )
    (
@@ -205,12 +201,11 @@ VOID Test PointTest
  ; // Point method Point:Neg
  
  Point constructor Point:OF
-  ^ IN _aPoint
-  ^ IN _aPoint
+  ^ IN aPoint
   [
    for
    (
-    _aPoint |@
+    aPoint |@
     DO
    )
    (
@@ -237,10 +232,9 @@ VOID Test PointTest
  ; // VOID method Point:Print
  
  Point constructor Point:XY
-  ^ IN _aPoint
-  ^ IN _aPoint
+  ^ IN aPoint
   [
-   _aPoint |@
+   aPoint |@
    DO
   ]
   >>>

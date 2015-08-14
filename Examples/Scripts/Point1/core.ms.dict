@@ -1,0 +1,34 @@
+USES
+ types.ms.dict
+;
+
+VOID IMMEDIATE operator RecurseProc
+// - процедура, которая умеет вызываться рекурсивно
+ ^L IN aName
+ 'FORWARD' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+
+ 'PROCEDURE' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // RecurseProc
+
+: |^
+// - разыменовывает параметр слева
+ ^@ IN aRef
+ aRef pop:Word:GetRef DO
+; // |^
+
+FUNCTOR : |@
+// - получаем ссылку из параметра слева
+ ^@ IN aRef
+ aRef pop:Word:GetRef >>> Result
+; // |@
+
+VOID IMMEDIATE OPERATOR this.do
+// - запускаем "себя же" рекурсивно
+ '(' Ctx:Parser:PushSymbol
+ '@SELF' Ctx:Parser:PushSymbol
+ 'DO' Ctx:Parser:PushSymbol
+ ')' Ctx:Parser:PushSymbol
+; // this.do
+

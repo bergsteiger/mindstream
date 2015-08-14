@@ -1,0 +1,1 @@
+del ..\call.ms.script.log
