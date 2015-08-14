@@ -29,10 +29,14 @@ VOID IMMEDIATE operator right
  
   [
    'VOID IMMEDIATE axiom:operator' 
-   l_Name 
+   l_Name
+   '`(`'
+   'Ctx:Parser:PushSymbol'
    [ '`' l_MangledName '`' ] strings:Cat
    'Ctx:Parser:PushSymbol'
    '`|^`'
+   'Ctx:Parser:PushSymbol'
+   '`)`'
    'Ctx:Parser:PushSymbol'
    ';'
   ] Ctx:Parser:PushArray
