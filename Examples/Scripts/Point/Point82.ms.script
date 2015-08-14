@@ -4,13 +4,6 @@ USES
  integer.ms.dict
 ;
 
-//REDEFINITION
-// : (-)
-//  IN aLeft
-//  right aRight
-//  ( aLeft (-) ( aRight DO ) )
-// ; // 
-
 Test PointTest
 
 // Понятное дело, что всю обвязку потом упрячем в отдельный словарь object.ms.dict
