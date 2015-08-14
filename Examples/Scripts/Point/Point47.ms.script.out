@@ -156,10 +156,7 @@ VOID Test PointTest
  
  ARRAY method Point:-
   ^ IN aPoint
-  INTEGER VAR i
   ARRAY IN Self
-  i :=
-  0
   Point:
   (
    (
