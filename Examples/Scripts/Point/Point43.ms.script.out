@@ -18,6 +18,16 @@
 1
 -2
 -1
+0
+0
+1
+2
+2
+3
+-1
+1
+-2
+-1
 Hello world
 Hello world
 Hello world
@@ -275,6 +285,15 @@ VOID Test PointTest
   '“очка должна содержать две координаты'
  ; // ARRAY constructor Point:XY
  
+ INTEGER readonly Point:Y
+  ARRAY IN Self
+  c:Point:Offset:Y
+  Self
+  [i]
+  >>>
+  Result
+ ; // INTEGER readonly Point:Y
+ 
  IMMEDIATE VOID OPERATOR readonly
   ^L IN aName
   readonly
@@ -380,6 +399,36 @@ VOID Test PointTest
  .
  P10
  Point:X
+ .
+ P1
+ Point:Y
+ .
+ P2
+ Point:Y
+ .
+ P3
+ Point:Y
+ .
+ P4
+ Point:Y
+ .
+ P5
+ Point:Y
+ .
+ P6
+ Point:Y
+ .
+ P7
+ Point:Y
+ .
+ P8
+ Point:Y
+ .
+ P9
+ Point:Y
+ .
+ P10
+ Point:Y
  .
  'Hello '
  (+)

@@ -107,6 +107,11 @@ Pixel readonly Point:X
  c:Point:Offset:X Self [i] >>> Result
 ; // Point:X
 
+Pixel readonly Point:Y
+ Point in Self
+ c:Point:Offset:Y Self [i] >>> Result
+; // Point:Y
+
 Point method Point:+
  Point in Self
  Point right aPoint
@@ -181,6 +186,17 @@ P7 Point:X Print
 P8 Point:X Print
 P9 Point:X Print
 P10 Point:X Print
+
+P1 Point:Y Print
+P2 Point:Y Print
+P3 Point:Y Print
+P4 Point:Y Print
+P5 Point:Y Print
+P6 Point:Y Print
+P7 Point:Y Print
+P8 Point:Y Print
+P9 Point:Y Print
+P10 Point:Y Print
 
 'Hello ' (+) 'world' Print
 
