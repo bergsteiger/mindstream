@@ -188,14 +188,14 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Object
  
- TtfwWord readonly Offset:class
+ TtfwWord readonly Object:class
   ARRAY IN Self
   Self
   FieldByOffset
   c:Object:Offset:VMT
   >>>
   Result
- ; // TtfwWord readonly Offset:class
+ ; // TtfwWord readonly Object:class
  
  ARRAY VAR P1
  ARRAY VAR P10

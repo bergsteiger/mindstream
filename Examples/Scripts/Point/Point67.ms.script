@@ -118,9 +118,9 @@ class Object
 ClassFieldOffset VMT 0
 ClassInstanceSize
 
-TtfwWord readonly Offset:class
+TtfwWord readonly Object:class
  Self FieldByOffset c:Object:Offset:VMT >>> Result
-; // Offset:class
+; // Object:class
 
 INTEGER type Pixel
 // - пиксель
