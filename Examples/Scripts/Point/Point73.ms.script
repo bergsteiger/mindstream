@@ -184,7 +184,7 @@ Point method -
 ; // -
 
 void method Print
- Self Print
+ [ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat Print
 ; // Print
 
 Point var P1
