@@ -141,7 +141,6 @@ Point method Point:-
  Point right aPoint
 
  Point:OF ( Self Point:+ ( aPoint |^ Point:Neg ) ) >>> Result
-// Point: ( ( Self Point:X ) (-) ( aPoint |^ Point:X ) ) ( ( Self Point:Y ) (-) ( aPoint |^ Point:Y ) ) >>> Result
 ; // Point:-
 
 void method Point:Print
