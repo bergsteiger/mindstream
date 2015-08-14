@@ -120,7 +120,6 @@ VOID Test PointTest
   strings:Cat
   Ctx:Parser:PushSymbol
   g_ClassFieldOffset
-  ++
   Ctx:Parser:PushInt
  ; // IMMEDIATE VOID OPERATOR ClassInstanceSize
  
@@ -161,10 +160,6 @@ VOID Test PointTest
  ARRAY VAR l_Points
  IMMEDIATE VOID OPERATOR member
   ^L IN aName
-  ^ IN anOffset
-  anOffset |^
-  >>>
-  g_ClassFieldOffset
   'private'
   Ctx:Parser:PushSymbol
   'Const'
@@ -180,6 +175,8 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
   g_ClassFieldOffset
   Ctx:Parser:PushInt
+  INC
+  g_ClassFieldOffset
  ; // IMMEDIATE VOID OPERATOR member
  
  IMMEDIATE VOID OPERATOR method
