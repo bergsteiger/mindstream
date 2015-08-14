@@ -114,6 +114,8 @@ VOID Test PointTest
   aName
   |N
   Ctx:Parser:PushSymbol
+  g_CurrentClass
+  Ctx:Parser:PushSymbol
   'in'
   Ctx:Parser:PushSymbol
   'Self'
@@ -163,7 +165,7 @@ VOID Test PointTest
  
  ARRAY method Point:-
   ^ IN aPoint
-  IN Self
+  ARRAY IN Self
   Point:
   (
    (
@@ -193,7 +195,7 @@ VOID Test PointTest
  
  ARRAY method Point:+
   ^ IN aPoint
-  IN Self
+  ARRAY IN Self
   Point:
   (
    (
@@ -230,7 +232,7 @@ VOID Test PointTest
  ; // ARRAY constructor Point:0
  
  ARRAY method Point:Neg
-  IN Self
+  ARRAY IN Self
   Point:
   Neg
   (
@@ -262,7 +264,7 @@ VOID Test PointTest
  ; // ARRAY constructor Point:OF
  
  VOID method Point:Print
-  IN Self
+  ARRAY IN Self
   Self
   .
  ; // VOID method Point:Print

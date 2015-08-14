@@ -61,6 +61,7 @@ IMMEDIATE VOID operator method
  @SELF Ctx:SetWordProducerForCompiledClass
  ':' Ctx:Parser:PushSymbol
  aName |N Ctx:Parser:PushSymbol
+ g_CurrentClass Ctx:Parser:PushSymbol
  'in' Ctx:Parser:PushSymbol
  'Self' Ctx:Parser:PushSymbol
 ; // method
