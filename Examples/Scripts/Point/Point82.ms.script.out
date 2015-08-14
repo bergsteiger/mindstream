@@ -113,16 +113,9 @@ VOID Test PointTest
   Ctx:SetWordProducerForCompiledClass
   g_CurrentClass
   Ctx:Parser:PushSymbol
-  ':'
-  Ctx:Parser:PushSymbol
-  [
-   g_CurrentClass
-   ':'
-   aName
-   |N
-  ]
-  strings:Cat
-  Ctx:Parser:PushSymbol
+  aName
+  |N
+  MakeMethodSignature
  ; // IMMEDIATE VOID OPERATOR constructor
  
  PRIVATE OPERATOR do-get-member

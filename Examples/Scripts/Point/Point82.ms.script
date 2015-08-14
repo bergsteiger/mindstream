@@ -45,20 +45,19 @@ VOID IMMEDIATE OPERATOR class
 INTEGER type FieldOffset
 // - смещение поля
 
-IMMEDIATE VOID operator constructor
-// - конструктор объектов, пока "фиктивный"
- Literal IN aName
- @SELF Ctx:SetWordProducerForCompiledClass
- g_CurrentClass Ctx:Parser:PushSymbol
- ':' Ctx:Parser:PushSymbol
- [ g_CurrentClass ':' aName |N ] strings:Cat Ctx:Parser:PushSymbol
-; // constructor
-
 PRIVATE VOID operator MakeMethodSignature
  STRING IN aName
  ':' Ctx:Parser:PushSymbol
  [ g_CurrentClass ':' aName ] strings:Cat Ctx:Parser:PushSymbol
 ; // MakeMethodSignature
+
+IMMEDIATE VOID operator constructor
+// - конструктор объектов, пока "фиктивный"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ g_CurrentClass Ctx:Parser:PushSymbol
+ aName |N MakeMethodSignature
+; // constructor
 
 PRIVATE VOID operator MakeSelfParam
  g_CurrentClass Ctx:Parser:PushSymbol
