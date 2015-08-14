@@ -160,25 +160,29 @@ VOID Test PointTest
   ARRAY IN Self
   i :=
   0
-  [
-   for
+  Point:
+  (
    (
-    aPoint |@
-    DO
+    Self
+    Point:X
    )
+   (-)
    (
-    INTEGER IN aPx
-    (
-     Self
-     FieldByOffset
-     i
-    )
-    (-)
-    aPx
-    INC
-    i
+    aPoint |^
+    Point:X
    )
-  ]
+  )
+  (
+   (
+    Self
+    Point:Y
+   )
+   (-)
+   (
+    aPoint |^
+    Point:Y
+   )
+  )
   >>>
   Result
  ; // ARRAY method Point:-

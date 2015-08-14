@@ -135,7 +135,7 @@ Point method Point:-
  FieldOffset var i
  i := 0
 
- [ for ( aPoint |@ DO ) ( Pixel in aPx ( Self FieldByOffset i ) (-) aPx Inc i ) ] >>> Result
+ Point: ( ( Self Point:X ) (-) ( aPoint |^ Point:X ) ) ( ( Self Point:Y ) (-) ( aPoint |^ Point:Y ) ) >>> Result
 ; // Point:-
 
 Point method Point:Neg
