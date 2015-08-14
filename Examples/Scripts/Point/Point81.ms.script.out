@@ -38,16 +38,16 @@ TkwCompiledProcedure
 TkwCompiledProcedure
 TkwCompiledProcedure
 TkwCompiledProcedure
-_Point_
-_Point_
-_Point_
-_Point_
-_Point_
-_Point_
-_Point_
-_Point_
-_Point_
-_Point_
+_:Point
+_:Point
+_:Point
+_:Point
+_:Point
+_:Point
+_:Point
+_:Point
+_:Point
+_:Point
 Hello world
 Hello world
 Hello world
@@ -57,11 +57,11 @@ Hello world
 -10
 10
 VOID Test PointTest
- class_impl _Object_
- ; // class_impl _Object_
+ class_impl _:Object
+ ; // class_impl _:Object
  
- class_impl _Point_
- ; // class_impl _Point_
+ class_impl _:Point
+ ; // class_impl _:Point
  
  INTEGER CONST c:Object:Instance:Size
   1
@@ -85,9 +85,8 @@ VOID Test PointTest
   class_impl
   Ctx:SetWordProducerForCompiledClass
   [
-   '_'
+   '_:'
    g_CurrentClass
-   '_'
   ]
   strings:Cat
   >>>
@@ -310,7 +309,7 @@ VOID Test PointTest
   ^ IN aY
   [
    @
-   _Point_
+   _:Point
    aX |^
    aY |^
   ]

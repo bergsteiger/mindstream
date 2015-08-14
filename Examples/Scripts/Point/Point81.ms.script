@@ -39,7 +39,7 @@ VOID IMMEDIATE OPERATOR class
  // - вообще должно быть так, почему не работает - надо разбираться
  ':' Ctx:Parser:PushSymbol
  @ class_impl Ctx:SetWordProducerForCompiledClass
- [ '_' g_CurrentClass '_' ] strings:Cat >>> g_CurrentClassImpl
+ [ '_:' g_CurrentClass ] strings:Cat >>> g_CurrentClassImpl
  g_CurrentClassImpl Ctx:Parser:PushSymbol
  ';' Ctx:Parser:PushSymbol
 
