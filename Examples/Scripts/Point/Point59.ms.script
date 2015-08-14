@@ -27,6 +27,8 @@ VOID IMMEDIATE OPERATOR class_impl
 
 STRING var g_CurrentClass
 g_CurrentClass := ''
+STRING var g_CurrentClassImpl
+g_CurrentClassImpl := ''
 
 VOID IMMEDIATE OPERATOR class
  Literal IN aName
@@ -35,7 +37,8 @@ VOID IMMEDIATE OPERATOR class
  // - вообще должно быть так, почему не работает - надо разбираться
  ':' Ctx:Parser:PushSymbol
  @ class_impl Ctx:SetWordProducerForCompiledClass
- [ '_' g_CurrentClass '_' ] strings:Cat Ctx:Parser:PushSymbol
+ [ '_' g_CurrentClass '_' ] strings:Cat >>> g_CurrentClassImpl
+ g_CurrentClassImpl Ctx:Parser:PushSymbol
  ';' Ctx:Parser:PushSymbol
 
  'array' Ctx:Parser:PushSymbol
@@ -80,6 +83,7 @@ IMMEDIATE VOID operator readonly
 
 IMMEDIATE VOID operator new[
  '[' Ctx:Parser:PushSymbol
+ //'@' Ctx:Parser:PushSymbol
 ; // new[
 
 class Object

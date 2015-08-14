@@ -66,6 +66,9 @@ VOID Test PointTest
    '_'
   ]
   strings:Cat
+  >>>
+  g_CurrentClassImpl
+  g_CurrentClassImpl
   Ctx:Parser:PushSymbol
   ';'
   Ctx:Parser:PushSymbol
@@ -107,6 +110,7 @@ VOID Test PointTest
  ; // IMMEDIATE VOID TYPE FieldOffset
  
  STRING VAR g_CurrentClass
+ STRING VAR g_CurrentClassImpl
  IMMEDIATE VOID OPERATOR method
   ^L IN aName
   method
@@ -322,6 +326,8 @@ VOID Test PointTest
  ; // IMMEDIATE VOID OPERATOR readonly
  
  g_CurrentClass :=
+ ''
+ g_CurrentClassImpl :=
  ''
  P1 :=
  Point:0
