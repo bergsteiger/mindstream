@@ -141,14 +141,14 @@ VOID IMMEDIATE operator read
  aName |N do-get-member
  '>>>' Ctx:Parser:PushSymbol 
  'Result' Ctx:Parser:PushSymbol
- //';' Ctx:Parser:PushSymbol
+ ';' Ctx:Parser:PushSymbol
 ; // read
 
 member VMT
 members-end
 
 TtfwWord readonly classX read VMT
-; // classX
+//; // classX
 
 TtfwWord readonly class
  Self get-member VMT >>> Result
