@@ -1,4 +1,7 @@
 USES
+ axiom:CompiledWordWorkerWord
+ axiom:Finder
+ axiom:Compiler
  NoCapsLock.ms.dict
  params.ms.dict
  integer.ms.dict
@@ -7,6 +10,34 @@ USES
 Test PointTest
 
 // Понятное дело, что всю обвязку потом упрячем в отдельный словарь object.ms.dict
+
+ IMMEDIATE operator implementation
+   ^ LINK IN aWordToWork
+  Ctx:PushCompiler
+  Ctx:PushFinder
+  OBJECT VAR l_NewCompiler
+  aWordToWork |^@ =: l_NewCompiler
+  
+  if ( l_NewCompiler Is class::TkwCompiledWordWorkerWord ) then
+  begin
+   l_NewCompiler pop:CompiledWordWorkerWord:Compiled >>> l_NewCompiler
+/*{   l_NewCompiler CodeIterator ==> ( IN anItem 
+    if ( NOT ( anItem %P pop:object:IsNil ) ) then
+    begin
+     anItem %P >>> l_NewCompiler
+     BREAK-ITERATOR
+    end 
+   )}*/
+  end
+  
+  l_NewCompiler pop:Compiler:SetToCtx
+  l_NewCompiler pop:Finder:SetToCtx
+ ; // implementation
+ 
+ IMMEDIATE operator end.
+  pop:Finder:SetToCtx
+  pop:Compiler:SetToCtx
+ ; // end.
 
 NamedWordProducer %FIELDS %Fld
 

@@ -196,6 +196,11 @@ VOID Test PointTest
    )
  ; // ARRAY FUNCTION ELEMLIST
  
+ IMMEDIATE OPERATOR end.
+  pop:Finder:SetToCtx
+  pop:Compiler:SetToCtx
+ ; // IMMEDIATE OPERATOR end.
+ 
  : FieldByOffset
   ^ IN _anOffset
   IMMEDIATE VOID OPERATOR anOffset
@@ -247,6 +252,33 @@ VOID Test PointTest
   |N
   do-get-member
  ; // IMMEDIATE VOID OPERATOR get-member
+ 
+ IMMEDIATE OPERATOR implementation
+  LINK ^ IN aWordToWork
+  OBJECT VAR l_NewCompiler
+  Ctx:PushCompiler
+  Ctx:PushFinder
+  aWordToWork |^@
+  >>>
+  l_NewCompiler
+  if
+   (
+    l_NewCompiler
+    IS
+    class::TkwCompiledWordWorkerWord
+   )
+  then
+   BEGIN
+    l_NewCompiler
+    pop:CompiledWordWorkerWord:Compiled
+    >>>
+    l_NewCompiler
+   END
+  l_NewCompiler
+  pop:Compiler:SetToCtx
+  l_NewCompiler
+  pop:Finder:SetToCtx
+ ; // IMMEDIATE OPERATOR implementation
  
  ARRAY VAR l_Points
  PRIVATE STRING OPERATOR MakeFieldOffsetName
