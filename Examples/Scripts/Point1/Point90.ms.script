@@ -240,9 +240,13 @@ VOID IMMEDIATE operator read
 member VMT
 members-end
 
+VOID IMMEDIATE operator CompileFields
+ for g_CurrentClassMembers Ctx:Parser:PushString
+; // CompileFields
+
 implementation _:Object
  %FIELDS
- 'VMT'
+ CompileFields
  ;
 end.
 
