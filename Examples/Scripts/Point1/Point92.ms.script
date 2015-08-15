@@ -361,6 +361,7 @@ Point var P7
 Point var P8
 Point var P9
 Point var P10
+Point var P11
 
 P1 := Point:0
 P2 := Point:0
@@ -372,6 +373,7 @@ P7 := ( P3 Point:- P4 )
 P8 := ( P4 Point:- P3 )
 P9 := ( P4 Point:Neg )
 P10 := ( P3 Point:Neg )
+P11 := Point:XY ( -2 2 )
 
 Object var O1
 O1 := P1
@@ -379,7 +381,7 @@ O1 Point:Print
 
 array var l_Points
 
-[ P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 ] >>> l_Points
+[ P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 ] >>> l_Points
 
 for l_Points Point:Print
 for l_Points ( Point:X Print )

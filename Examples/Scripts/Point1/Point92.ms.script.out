@@ -463,6 +463,7 @@ VOID Test PointTest
  
  Point VAR P1
  Point VAR P10
+ Point VAR P11
  Point VAR P2
  Point VAR P3
  Point VAR P4
@@ -777,6 +778,12 @@ VOID Test PointTest
   P3
   Point:Neg
  )
+ P11 :=
+ Point:XY
+ (
+  -2
+  2
+ )
  O1 :=
  P1
  O1
@@ -792,6 +799,7 @@ VOID Test PointTest
   P8
   P9
   P10
+  P11
  ]
  >>>
  l_Points
@@ -878,6 +886,7 @@ VOID Test PointTest
 ( X: 1, Y: 1 )
 ( X: -2, Y: -2 )
 ( X: -1, Y: -1 )
+( X: -2, Y: 2 )
 0
 0
 1
@@ -888,6 +897,7 @@ VOID Test PointTest
 1
 -2
 -1
+-2
 0
 0
 1
@@ -898,6 +908,8 @@ VOID Test PointTest
 1
 -2
 -1
+2
+TkwCompiledProcedure
 TkwCompiledProcedure
 TkwCompiledProcedure
 TkwCompiledProcedure
@@ -918,6 +930,8 @@ Point
 Point
 Point
 Point
+Point
+Object
 Object
 Object
 Object
