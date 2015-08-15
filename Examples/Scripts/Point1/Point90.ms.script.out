@@ -109,14 +109,6 @@ VOID Test PointTest
  IMMEDIATE VOID OPERATOR classExpander
  ; // IMMEDIATE VOID OPERATOR classExpander
  
- IMMEDIATE VOID OPERATOR CompileFields
-  'CompileFields'
-  Msg
-  for
-  g_CurrentClassMembers
-  Ctx:Parser:PushString
- ; // IMMEDIATE VOID OPERATOR CompileFields
- 
  IMMEDIATE VOID OPERATOR constructor
   ^L IN aName
   constructor

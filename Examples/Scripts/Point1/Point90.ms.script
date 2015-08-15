@@ -242,18 +242,12 @@ VOID IMMEDIATE operator read
 member VMT
 members-end
 
-VOID IMMEDIATE operator CompileFields
- 'CompileFields' Msg
- for g_CurrentClassMembers Ctx:Parser:PushString
-; // CompileFields
-
 VOID IMMEDIATE operator RunCompileFields
  [
   'implementation'
   g_CurrentClassImpl
    '%FIELDS'
    for g_CurrentClassMembers ( STRING IN aName [ '`' aName '`' ] strings:Cat )
-   //'CompileFields'
    ';'
   'end.'
  ] Ctx:Parser:PushArray
