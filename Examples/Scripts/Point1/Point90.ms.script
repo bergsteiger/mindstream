@@ -117,8 +117,8 @@ VOID IMMEDIATE OPERATOR class
     [ '_:' 'Object' ] strings:Cat
     ';'
    end
-   '%FIELDS'
-   ';'
+   //'%FIELDS'
+   //';'
   ';'
  ] Ctx:Parser:PushArray
 
@@ -241,6 +241,8 @@ member VMT
 members-end
 
 implementation _:Object
+ %FIELDS
+ ;
 end.
 
 TtfwWord readonly class read VMT

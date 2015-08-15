@@ -36,9 +36,6 @@ VOID Test PointTest
  ; // class_impl _:Object
  
  class_impl _:Point
-  %FIELDS %Fld
-  ; // %FIELDS %Fld
-  
   %INHERITS %G
    @
    _:Object
@@ -92,8 +89,6 @@ VOID Test PointTest
      strings:Cat
      ';'
     END
-   '%FIELDS'
-   ';'
    ';'
   ]
   Ctx:Parser:PushArray
