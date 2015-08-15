@@ -382,6 +382,7 @@ VOID Test PointTest
  
  IMMEDIATE VOID OPERATOR member
   ^L IN aName
+  Ctx:ClearTypeInfo
   'private'
   Ctx:Parser:PushSymbol
   'Const'

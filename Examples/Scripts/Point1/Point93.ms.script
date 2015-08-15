@@ -219,6 +219,7 @@ PRIVATE STRING operator MakeFieldOffsetName
 
 IMMEDIATE VOID operator member
  Literal IN aName
+ Ctx:ClearTypeInfo
  'private' Ctx:Parser:PushSymbol
  'Const' Ctx:Parser:PushSymbol
  aName |N MakeFieldOffsetName Ctx:Parser:PushSymbol
@@ -274,7 +275,7 @@ VOID IMMEDIATE operator read
  ';' Ctx:Parser:PushSymbol
 ; // read
 
-member VMT
+INTEGER member VMT
 members-end
 
 TtfwWord readonly class read VMT
