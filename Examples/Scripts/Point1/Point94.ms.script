@@ -167,6 +167,9 @@ VOID IMMEDIATE OPERATOR class
 
 ; // class
 
+VOID IMMEDIATE OPERATOR class-end
+; // class-end
+
 INTEGER type FieldOffset
 // - смещение поля
 
@@ -289,6 +292,8 @@ STRING readonly ClassName
  Self Object:class getClassName >>> Result
 ; // Object:ClassName
 
+class-end // Object
+
 INTEGER type Pixel
 // - пиксель
 List type PixelList
@@ -345,6 +350,8 @@ Point method -
 void method Print
  [ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat Print
 ; // Print
+
+class-end // Point
 
 USES
  CodeDump.ms.dict
