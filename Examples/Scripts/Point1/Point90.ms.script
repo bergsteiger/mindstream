@@ -244,11 +244,16 @@ VOID IMMEDIATE operator CompileFields
  for g_CurrentClassMembers Ctx:Parser:PushString
 ; // CompileFields
 
-implementation _:Object
- %FIELDS
- CompileFields
- ;
-end.
+VOID IMMEDIATE operator RunCompileFields
+ implementation 
+ _:Object
+  %FIELDS
+  CompileFields
+  ;
+ end.
+; // RunCompileFields
+
+RunCompileFields
 
 TtfwWord readonly class read VMT
 

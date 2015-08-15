@@ -633,6 +633,9 @@ VOID Test PointTest
   MakeSelfParam
  ; // IMMEDIATE VOID OPERATOR readonly
  
+ IMMEDIATE VOID OPERATOR RunCompileFields
+ ; // IMMEDIATE VOID OPERATOR RunCompileFields
+ 
  g_CurrentClass :=
  ''
  g_CurrentClassImpl :=
