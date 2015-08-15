@@ -1,0 +1,449 @@
+USES
+ axiom:CompiledWordWorkerWord
+ axiom:Finder
+ axiom:Compiler
+ NoCapsLock.ms.dict
+ params.ms.dict
+ integer.ms.dict
+;
+
+Test PointTest
+
+// Понятное дело, что всю обвязку потом упрячем в отдельный словарь object.ms.dict
+
+ IMMEDIATE operator implementation
+   ^ LINK IN aWordToWork
+  Ctx:PushCompiler
+  Ctx:PushFinder
+  OBJECT VAR l_NewCompiler
+  aWordToWork |^@ =: l_NewCompiler
+  
+  if ( l_NewCompiler Is class::TkwCompiledWordWorkerWord ) then
+  begin
+   l_NewCompiler pop:CompiledWordWorkerWord:Compiled >>> l_NewCompiler
+/*{   l_NewCompiler CodeIterator ==> ( IN anItem 
+    if ( NOT ( anItem %P pop:object:IsNil ) ) then
+    begin
+     anItem %P >>> l_NewCompiler
+     BREAK-ITERATOR
+    end 
+   )}*/
+  end
+  
+  l_NewCompiler pop:Compiler:SetToCtx
+  l_NewCompiler pop:Finder:SetToCtx
+ ; // implementation
+ 
+ IMMEDIATE operator end.
+  pop:Finder:SetToCtx
+  pop:Compiler:SetToCtx
+ ; // end.
+
+NamedWordProducer %FIELDS %Fld
+
+OBJECT FUNCTION DoMember 
+ OBJECT IN aMember
+ aMember DO >>> Result
+; // DoMember
+
+BOOLEAN FUNCTION FilterMember 
+ OBJECT IN aMember
+ Result := ( aMember NotValid ! )
+; // FilterMember
+ 
+ARRAY FUNCTION ELEMLIST STRING IN aListName IN %S
+ if ( %S NotValid ) then
+  ( Result := [ ] )
+ else
+  (
+   VAR l_List
+   l_List := ( %S %% aListName )
+   
+   if ( l_List NotValid ) then
+    ( Result := [ ] )
+   else 
+//    ( Result := ( [ l_List DO ] ) )
+    ( Result := ( @ FilterMember ( @ DoMember ( l_List CodeIterator ) MAP ) FILTER ) ) 
+  )
+; // ELEMLIST
+
+ARRAY FUNCTION %R 
+ IN %S
+ Result := ( '%R' %S ELEMLIST )
+;
+
+ARRAY FUNCTION %G 
+ IN %S
+ Result := ( '%G' %S ELEMLIST )
+;
+
+ARRAY FUNCTION %Fld 
+ IN %S
+ //Result := ( '%Fld' %S ELEMLIST )
+ VAR l_List
+ %S %% '%Fld' >>> l_List
+ if ( l_List NotValid ) then
+  ( Result := [ ] )
+ else 
+  ( Result := ( l_List CodeIterator ) )
+;
+
+VOID OPERATOR class_impl
+// - имплементация класса, пока "фиктивная"
+// Тут мы будем хранить всю информацию о классе - предки, поля, методы
+; // class_impl
+
+//VOID IMMEDIATE OPERATOR class_impl
+//// - имплементация класса, пока "фиктивная"
+// Literal IN aName
+// @SELF Ctx:SetWordProducerForCompiledClass
+// ':' Ctx:Parser:PushSymbol
+// aName |N Ctx:Parser:PushSymbol
+// //';' Ctx:Parser:PushSymbol
+//; // class_imp
+
+STRING var g_CurrentClass
+g_CurrentClass := ''
+STRING var g_CurrentClassImpl
+g_CurrentClassImpl := ''
+
+VOID IMMEDIATE OPERATOR classExpander
+ ^ IN anImpl
+ // Тут можно копировать поля и методы
+ for ( ( anImpl |@ ) %G ) ( 
+  IN anItem 
+  for ( anItem %Fld ) ( 
+   IN anItem 
+   'member' Ctx:Parser:PushSymbol
+   anItem |N Ctx:Parser:PushSymbol
+  ) 
+ )
+; // classExpander
+
+ARRAY VAR g_CurrentClassMembers
+[EXECUTE]
+( g_CurrentClassMembers := [ ] )
+( g_CurrentClassMembers := [ ] )
+
+INTEGER VAR g_ClassFieldOffset
+[EXECUTE]
+( g_ClassFieldOffset := 0 )
+g_ClassFieldOffset := 0
+
+VOID IMMEDIATE OPERATOR class
+ Literal IN aName
+ g_CurrentClassMembers := [ ]
+ g_ClassFieldOffset := 0
+ aName |N >>> g_CurrentClass
+ //'class_impl' Ctx:Parser:PushSymbol
+ // - вообще должно быть так, почему не работает - надо разбираться
+ [
+  ':' 
+
+  @ class_impl Ctx:SetWordProducerForCompiledClass
+  [ '_:' g_CurrentClass ] strings:Cat >>> g_CurrentClassImpl
+
+  g_CurrentClassImpl
+   if ( g_CurrentClass <> 'Object' ) then
+   begin
+    '%INHERITS'
+    '@' 
+    [ '_:' 'Object' ] strings:Cat
+    ';'
+   end
+   //'%FIELDS'
+   //';'
+  ';'
+ ] Ctx:Parser:PushArray
+
+ [
+  'array' 
+  'type' 
+  g_CurrentClass
+ ] Ctx:Parser:PushArray
+
+ 'classExpander' Ctx:Parser:PushSymbol
+ g_CurrentClassImpl Ctx:Parser:PushSymbol
+
+; // class
+
+VOID IMMEDIATE OPERATOR class-end
+; // class-end
+
+INTEGER type FieldOffset
+// - смещение поля
+
+PRIVATE VOID operator MakeMethodSignature
+ STRING IN aName
+ ':' Ctx:Parser:PushSymbol
+ [ g_CurrentClass ':' aName ] strings:Cat Ctx:Parser:PushSymbol
+; // MakeMethodSignature
+
+IMMEDIATE VOID operator constructor
+// - конструктор объектов, пока "фиктивный"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ g_CurrentClass Ctx:Parser:PushSymbol
+ aName |N MakeMethodSignature
+; // constructor
+
+PRIVATE VOID operator MakeSelfParam
+ g_CurrentClass Ctx:Parser:PushSymbol
+ 'in' Ctx:Parser:PushSymbol
+ 'Self' Ctx:Parser:PushSymbol
+; // MakeSelfParam
+
+IMMEDIATE VOID operator method
+// - метод объекта, пока "фиктивный"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ aName |N MakeMethodSignature
+ MakeSelfParam
+; // method
+
+IMMEDIATE VOID operator readonly
+// - read-only свойство объекта, пока "фиктивное"
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ aName |N MakeMethodSignature
+ MakeSelfParam
+; // readonly
+
+IMMEDIATE VOID operator new[
+ '[' Ctx:Parser:PushSymbol
+ '@' Ctx:Parser:PushSymbol
+ g_CurrentClassImpl Ctx:Parser:PushSymbol
+; // new[
+
+PRIVATE STRING operator MakeFieldOffsetName
+ STRING IN aName
+ [ 'c:' g_CurrentClass ':Offset:' aName ] strings:Cat >>> Result
+; // MakeFieldOffsetName
+
+IMMEDIATE VOID operator member
+ Literal IN aName
+ Ctx:ClearTypeInfo
+ 'private' Ctx:Parser:PushSymbol
+ 'Const' Ctx:Parser:PushSymbol
+ aName |N MakeFieldOffsetName Ctx:Parser:PushSymbol
+ g_ClassFieldOffset Ctx:Parser:PushInt
+ Inc g_ClassFieldOffset
+ aName |N >>>[] g_CurrentClassMembers
+; // member
+
+VOID IMMEDIATE operator RunCompileFields
+ [
+  'implementation'
+  g_CurrentClassImpl
+   '%FIELDS'
+   for g_CurrentClassMembers ( STRING IN aName [ '`' aName '`' ] strings:Cat )
+   ';'
+  'end.'
+ ] Ctx:Parser:PushArray
+; // RunCompileFields
+
+IMMEDIATE VOID operator members-end
+ 'private' Ctx:Parser:PushSymbol
+ 'Const' Ctx:Parser:PushSymbol
+ [ 'c:' g_CurrentClass ':Instance:Size' ] strings:Cat Ctx:Parser:PushSymbol
+ g_ClassFieldOffset Ctx:Parser:PushInt
+ 'RunCompileFields' Ctx:Parser:PushSymbol
+; // members-end
+
+class Object
+
+: FieldByOffset
+ Object in Self
+ FieldOffset right anOffset
+ anOffset Self [i]
+; // FieldByOffset
+
+PRIVATE operator do-get-member
+ STRING IN aName
+ 'FieldByOffset' Ctx:Parser:PushSymbol
+ aName MakeFieldOffsetName Ctx:Parser:PushSymbol 
+; // do-get-member
+
+VOID IMMEDIATE operator get-member
+ Literal IN aName
+ aName |N do-get-member
+; // get-member
+
+VOID IMMEDIATE operator read
+ Literal IN aName
+ 'Self' Ctx:Parser:PushSymbol 
+ aName |N do-get-member
+ '>>>' Ctx:Parser:PushSymbol 
+ 'Result' Ctx:Parser:PushSymbol
+ ';' Ctx:Parser:PushSymbol
+; // read
+
+INTEGER member VMT
+members-end
+
+TtfwWord readonly class read VMT
+
+STRING : getClassName
+ IN Self
+ Self |N ':' string:Split >>> Result DROP
+; // getClassName
+
+STRING readonly ClassName
+ Self Object:class getClassName >>> Result
+; // Object:ClassName
+
+class-end // Object
+
+INTEGER type Pixel
+// - пиксель
+List type PixelList
+// - список пикселей
+
+class Point
+
+Pixel member X
+Pixel member Y
+members-end
+
+constructor :
+ Pixel RightParam aX
+ Pixel RightParam aY
+ new[ aX |^ aY |^ ] >>> Result
+; // :
+
+constructor 0
+ Point:: 0 0 >>> Result
+; // 0
+
+constructor XY
+ PixelList right aPoint
+ array var Points
+ [ aPoint ] >>> Points
+ Point:: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) >>> Result
+; // XY
+
+Pixel readonly X read X
+
+Pixel readonly Y read Y
+
+constructor OF
+ Point right aPoint
+ Point:: ( aPoint Point:X ) ( aPoint Point:Y ) >>> Result
+; // OF
+
+Point method +
+ Point right aPoint
+
+ Point:: ( Self Point:X (+) ( aPoint Point:X ) ) ( Self Point:Y (+) ( aPoint Point:Y ) ) >>> Result
+; // +
+
+Point method Neg
+ Point:: Neg ( Self Point:X ) Neg ( Self Point:Y ) >>> Result
+; // Neg
+
+Point method -
+ Point right aPoint
+
+ Point:OF ( Self Point:+ ( aPoint Point:Neg ) ) >>> Result
+; // -
+
+STRING method ToPrintable
+ [ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat >>> Result
+; // ToPrintable
+
+void method Print
+ Self Point:ToPrintable Print
+; // Print
+
+class-end // Point
+
+class Rectangle
+
+Point member TopLeft
+Point member BottomRight
+members-end
+
+Point readonly TopLeft read TopLeft
+
+Point readonly BottomRight read BottomRight
+
+constructor :
+ Point RightParam aTopLeft
+ Point RightParam aBottomRight
+ new[ aTopLeft |^ aBottomRight |^ ] >>> Result
+; // :
+
+STRING method ToPrintable
+ [ '( ' 'TopLeft: ' Self Rectangle:TopLeft Point:ToPrintable ', BottomRight: ' Self Rectangle:BottomRight Point:ToPrintable ' )' ] strings:Cat >>> Result
+; // ToPrintable
+
+void method Print
+ Self Rectangle:ToPrintable Print
+; // Print
+
+class-end // Rectangle
+
+USES
+ CodeDump.ms.dict
+;
+
+@SELF DumpElement
+
+Point var P1
+Point var P2
+Point var P3
+Point var P4
+Point var P5
+Point var P6
+Point var P7
+Point var P8
+Point var P9
+Point var P10
+Point var P11
+
+P1 := Point:0
+P2 := Point:0
+P3 := Point:: 1 1
+P4 := Point:XY ( 2 2 )
+P5 := Point:OF P4
+P6 := ( P3 Point:+ P4 )
+P7 := ( P3 Point:- P4 )
+P8 := ( P4 Point:- P3 )
+P9 := ( P4 Point:Neg )
+P10 := ( P3 Point:Neg )
+P11 := Point:XY ( -2 2 )
+
+Object var O1
+O1 := P1
+O1 Point:Print
+
+array var l_Points
+
+[ P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 ] >>> l_Points
+
+for l_Points Point:Print
+for l_Points ( Point:X Print )
+for l_Points ( Point:Y Print )
+for l_Points ( Object:class Print )
+for l_Points ( Object:ClassName Print )
+for l_Points ( for ( Object:class %G ) ( getClassName Print ) )
+
+Rectangle var R1
+R1 := Rectangle:: P1 P4
+R1 Rectangle:Print
+
+'Hello ' (+) 'world' Print
+
+'Hello ' (+) 'world' Print
+
+'Hello ' (+) 'world' Print
+
+1 (+) 2 Print
+10 (+) 20 Print
+0 (-) 10 Print
+Neg 10 Print
+Neg -10 Print
+
+; // PointTest
+
+PointTest
