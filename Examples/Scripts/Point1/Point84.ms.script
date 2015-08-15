@@ -37,6 +37,8 @@ VOID IMMEDIATE OPERATOR class
   [ '_:' g_CurrentClass ] strings:Cat >>> g_CurrentClassImpl
 
   g_CurrentClassImpl
+   '%INHERITS'
+   ';'
   ';'
  ] Ctx:Parser:PushArray
 

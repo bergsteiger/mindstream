@@ -1,8 +1,14 @@
 VOID Test PointTest
  class_impl _:Object
+  %INHERITS %G
+  ; // %INHERITS %G
+  
  ; // class_impl _:Object
  
  class_impl _:Point
+  %INHERITS %G
+  ; // %INHERITS %G
+  
  ; // class_impl _:Point
  
  INTEGER CONST c:Object:Instance:Size
@@ -34,6 +40,8 @@ VOID Test PointTest
    >>>
    g_CurrentClassImpl
    g_CurrentClassImpl
+   '%INHERITS'
+   ';'
    ';'
   ]
   Ctx:Parser:PushArray
