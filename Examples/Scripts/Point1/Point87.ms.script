@@ -205,8 +205,13 @@ members-end
 
 TtfwWord readonly class read VMT
 
+STRING : getClassName
+ IN Self
+ Self |N ':' string:Split >>> Result DROP
+; // getClassName
+
 STRING readonly ClassName
- Self Object:class |N ':' string:Split >>> Result DROP
+ Self Object:class getClassName >>> Result
 ; // Object:ClassName
 
 INTEGER type Pixel

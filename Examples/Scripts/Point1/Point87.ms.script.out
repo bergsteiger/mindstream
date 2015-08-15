@@ -229,6 +229,17 @@ VOID Test PointTest
  INTEGER VAR g_ClassFieldOffset
  STRING VAR g_CurrentClass
  STRING VAR g_CurrentClassImpl
+ STRING : getClassName
+  IN Self
+  Self
+  |N
+  ':'
+  string:Split
+  >>>
+  Result
+  DROP
+ ; // STRING : getClassName
+ 
  IMMEDIATE VOID OPERATOR get-member
   ^L IN aName
   aName
@@ -342,12 +353,9 @@ VOID Test PointTest
   Object IN Self
   Self
   Object:class
-  |N
-  ':'
-  string:Split
+  getClassName
   >>>
   Result
-  DROP
  ; // STRING readonly Object:ClassName
  
  Point VAR P1
