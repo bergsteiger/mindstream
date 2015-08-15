@@ -40,9 +40,11 @@ VOID IMMEDIATE OPERATOR class
   ';'
  ] Ctx:Parser:PushArray
 
- 'array' Ctx:Parser:PushSymbol
- 'type' Ctx:Parser:PushSymbol
- g_CurrentClass Ctx:Parser:PushSymbol
+ [
+  'array' 
+  'type' 
+  g_CurrentClass
+ ] Ctx:Parser:PushArray
 
 ; // class
 

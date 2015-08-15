@@ -37,12 +37,12 @@ VOID Test PointTest
    ';'
   ]
   Ctx:Parser:PushArray
-  'array'
-  Ctx:Parser:PushSymbol
-  'type'
-  Ctx:Parser:PushSymbol
-  g_CurrentClass
-  Ctx:Parser:PushSymbol
+  [
+   'array'
+   'type'
+   g_CurrentClass
+  ]
+  Ctx:Parser:PushArray
  ; // IMMEDIATE VOID OPERATOR class
  
  IMMEDIATE VOID OPERATOR class_impl
