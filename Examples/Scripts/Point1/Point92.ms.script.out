@@ -11,13 +11,31 @@ VOID Test PointTest
  
  ARRAY FUNCTION %Fld
   IN %S
-  Result :=
-  (
-   %S
-   %%
-   '%Fld'
-   CodeIterator
-  )
+  VAR l_List
+  %S
+  %%
+  '%Fld'
+  >>>
+  l_List
+  if
+   (
+    l_List
+    NotValid
+   )
+  then
+   (
+    Result :=
+    [
+    ]
+   )
+  else
+   (
+    Result :=
+    (
+     l_List
+     CodeIterator
+    )
+   )
  ; // ARRAY FUNCTION %Fld
  
  ARRAY FUNCTION %G

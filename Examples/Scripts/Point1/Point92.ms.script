@@ -67,17 +67,25 @@ ARRAY FUNCTION ELEMLIST STRING IN aListName IN %S
   )
 ; // ELEMLIST
 
-ARRAY FUNCTION %R IN %S
+ARRAY FUNCTION %R 
+ IN %S
  Result := ( '%R' %S ELEMLIST )
 ;
 
-ARRAY FUNCTION %G IN %S
+ARRAY FUNCTION %G 
+ IN %S
  Result := ( '%G' %S ELEMLIST )
 ;
 
-ARRAY FUNCTION %Fld IN %S
+ARRAY FUNCTION %Fld 
+ IN %S
  //Result := ( '%Fld' %S ELEMLIST )
- Result := ( %S %% '%Fld' CodeIterator )
+ VAR l_List
+ %S %% '%Fld' >>> l_List
+ if ( l_List NotValid ) then
+  ( Result := [ ] )
+ else 
+  ( Result := ( l_List CodeIterator ) )
 ;
 
 VOID OPERATOR class_impl
