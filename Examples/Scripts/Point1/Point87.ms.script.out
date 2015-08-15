@@ -1,4 +1,14 @@
 VOID Test PointTest
+ IMMEDIATE VOID NamedWordProducer %FIELDS
+  %FIELDS
+  Ctx:SetWordProducerForCompiledClass
+  '%Fld'
+  Ctx:SetNewWordName
+  @
+  OPERATOR
+  DO
+ ; // IMMEDIATE VOID NamedWordProducer %FIELDS
+ 
  ARRAY FUNCTION %G
   IN %S
   Result :=
@@ -20,9 +30,15 @@ VOID Test PointTest
  ; // ARRAY FUNCTION %R
  
  class_impl _:Object
+  %FIELDS %Fld
+  ; // %FIELDS %Fld
+  
  ; // class_impl _:Object
  
  class_impl _:Point
+  %FIELDS %Fld
+  ; // %FIELDS %Fld
+  
   %INHERITS %G
    @
    _:Object
@@ -76,6 +92,8 @@ VOID Test PointTest
      strings:Cat
      ';'
     END
+   '%FIELDS'
+   ';'
    ';'
   ]
   Ctx:Parser:PushArray

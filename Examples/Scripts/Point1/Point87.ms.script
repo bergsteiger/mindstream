@@ -8,6 +8,8 @@ Test PointTest
 
 // Понятное дело, что всю обвязку потом упрячем в отдельный словарь object.ms.dict
 
+NamedWordProducer %FIELDS %Fld
+
 OBJECT FUNCTION DoMember 
  OBJECT IN aMember
  aMember DO >>> Result
@@ -82,6 +84,8 @@ VOID IMMEDIATE OPERATOR class
     [ '_:' 'Object' ] strings:Cat
     ';'
    end
+   '%FIELDS'
+   ';'
   ';'
  ] Ctx:Parser:PushArray
 
