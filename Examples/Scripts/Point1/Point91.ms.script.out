@@ -49,6 +49,7 @@ VOID Test PointTest
  
  class_impl _:Point
   %FIELDS %Fld
+   'VMT'
    'X'
    'Y'
   ; // %FIELDS %Fld
@@ -65,11 +66,13 @@ VOID Test PointTest
  INTEGER CONST c:Object:Offset:VMT
   0
  INTEGER CONST c:Point:Instance:Size
-  3
- INTEGER CONST c:Point:Offset:X
+  4
+ INTEGER CONST c:Point:Offset:VMT
   1
- INTEGER CONST c:Point:Offset:Y
+ INTEGER CONST c:Point:Offset:X
   2
+ INTEGER CONST c:Point:Offset:Y
+  3
  IMMEDIATE VOID OPERATOR class
   ^L IN aName
   g_CurrentClassMembers :=
@@ -148,6 +151,11 @@ VOID Test PointTest
     anItem
     |N
     Msg
+    'member'
+    Ctx:Parser:PushSymbol
+    anItem
+    |N
+    Ctx:Parser:PushSymbol
    )
   )
  ; // IMMEDIATE VOID OPERATOR classExpander
@@ -842,72 +850,4 @@ VOID Test PointTest
  .
 ; // VOID Test PointTest
 
-( X: 0, Y: 0 )
-( X: 0, Y: 0 )
-( X: 0, Y: 0 )
-( X: 1, Y: 1 )
-( X: 2, Y: 2 )
-( X: 2, Y: 2 )
-( X: 3, Y: 3 )
-( X: -1, Y: -1 )
-( X: 1, Y: 1 )
-( X: -2, Y: -2 )
-( X: -1, Y: -1 )
-0
-0
-1
-2
-2
-3
--1
-1
--2
--1
-0
-0
-1
-2
-2
-3
--1
-1
--2
--1
-TkwCompiledProcedure
-TkwCompiledProcedure
-TkwCompiledProcedure
-TkwCompiledProcedure
-TkwCompiledProcedure
-TkwCompiledProcedure
-TkwCompiledProcedure
-TkwCompiledProcedure
-TkwCompiledProcedure
-TkwCompiledProcedure
-Point
-Point
-Point
-Point
-Point
-Point
-Point
-Point
-Point
-Point
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Hello world
-Hello world
-Hello world
-3
-30
--10
--10
-10
+Ошибка выполнения: "В массиве нет столько элементов.". Главный файл: Point91.ms.script. Класс: TkwArrayGetItem. Слово: Array:GetItem

@@ -107,6 +107,8 @@ VOID IMMEDIATE OPERATOR classExpander
   for ( anItem %Fld ) ( 
    IN anItem 
    anItem |N Msg 
+   'member' Ctx:Parser:PushSymbol
+   anItem |N Ctx:Parser:PushSymbol
   ) 
  )
 ; // classExpander
