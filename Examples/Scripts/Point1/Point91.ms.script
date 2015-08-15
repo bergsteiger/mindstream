@@ -75,6 +75,11 @@ ARRAY FUNCTION %G IN %S
  Result := ( '%G' %S ELEMLIST )
 ;
 
+ARRAY FUNCTION %Fld IN %S
+ //Result := ( '%Fld' %S ELEMLIST )
+ Result := ( %S %% '%Fld' CodeIterator )
+;
+
 VOID OPERATOR class_impl
 // - имплементация класса, пока "фиктивная"
 // Тут мы будем хранить всю информацию о классе - предки, поля, методы
@@ -97,7 +102,7 @@ g_CurrentClassImpl := ''
 VOID IMMEDIATE OPERATOR classExpander
  ^ IN anImpl
  // Тут можно копировать поля и методы
- for ( ( anImpl |@ ) %G ) ( |N Msg )
+ for ( ( anImpl |@ ) %G ) ( IN anItem for ( anItem %Fld ) ( |N Msg ) )
 ; // classExpander
 
 ARRAY VAR g_CurrentClassMembers

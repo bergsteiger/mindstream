@@ -9,6 +9,17 @@ VOID Test PointTest
   DO
  ; // IMMEDIATE VOID NamedWordProducer %FIELDS
  
+ ARRAY FUNCTION %Fld
+  IN %S
+  Result :=
+  (
+   %S
+   %%
+   '%Fld'
+   CodeIterator
+  )
+ ; // ARRAY FUNCTION %Fld
+ 
  ARRAY FUNCTION %G
   IN %S
   Result :=
@@ -126,8 +137,16 @@ VOID Test PointTest
    %G
   )
   (
-   |N
-   Msg
+   IN anItem
+   for
+   (
+    anItem
+    %Fld
+   )
+   (
+    |N
+    Msg
+   )
   )
  ; // IMMEDIATE VOID OPERATOR classExpander
  
