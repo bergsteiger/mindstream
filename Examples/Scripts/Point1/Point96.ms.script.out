@@ -708,6 +708,7 @@ VOID Test PointTest
  ; // Pixel readonly Point:Y
  
  Rectangle VAR R1
+ Rectangle VAR R2
  IMMEDIATE VOID OPERATOR read
   ^L IN aName
   'Self'
@@ -944,7 +945,13 @@ VOID Test PointTest
  Rectangle::
  P1
  P4
+ R2 :=
+ Rectangle::
+ P6
+ P7
  R1
+ Rectangle:Print
+ R2
  Rectangle:Print
  'Hello '
  (+)
@@ -1046,6 +1053,7 @@ Object
 Object
 Object
 ( TopLeft: ( X: 0, Y: 0 ), BottomRight: ( X: 2, Y: 2 ) )
+( TopLeft: ( X: 3, Y: 3 ), BottomRight: ( X: -1, Y: -1 ) )
 Hello world
 Hello world
 Hello world

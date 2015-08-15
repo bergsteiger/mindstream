@@ -429,8 +429,12 @@ for l_Points ( Object:ClassName Print )
 for l_Points ( for ( Object:class %G ) ( getClassName Print ) )
 
 Rectangle var R1
+Rectangle var R2
 R1 := Rectangle:: P1 P4
+R2 := Rectangle:: P6 P7
+
 R1 Rectangle:Print
+R2 Rectangle:Print
 
 'Hello ' (+) 'world' Print
 
