@@ -743,6 +743,12 @@ VOID Test PointTest
   Result
  ; // Rectangle constructor Rectangle::
  
+ VOID method Rectangle:Print
+  Rectangle IN Self
+  Self
+  .
+ ; // VOID method Rectangle:Print
+ 
  IMMEDIATE VOID OPERATOR RunCompileFields
   [
    'implementation'
@@ -888,10 +894,12 @@ VOID Test PointTest
    .
   )
  )
- P3 :=
+ R1 :=
  Rectangle::
  P1
  P4
+ R1
+ Rectangle:Print
  'Hello '
  (+)
  'world'
@@ -991,6 +999,7 @@ Object
 Object
 Object
 Object
+[ TkwCompiledProcedure [ TkwCompiledProcedure 0 0 ] [ TkwCompiledProcedure 2 2 ] ]
 Hello world
 Hello world
 Hello world
