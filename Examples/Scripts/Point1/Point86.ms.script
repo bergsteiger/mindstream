@@ -8,6 +8,40 @@ Test PointTest
 
 // Понятное дело, что всю обвязку потом упрячем в отдельный словарь object.ms.dict
 
+OBJECT FUNCTION DoMember 
+ OBJECT IN aMember
+ aMember >>> Result
+; // DoMember
+
+BOOLEAN FUNCTION FilterMember 
+ OBJECT IN aMember
+ Result := ( aMember NotValid ! )
+; // FilterMember
+ 
+ARRAY FUNCTION ELEMLIST STRING IN aListName IN %S
+ if ( %S NotValid ) then
+  ( Result := [ ] )
+ else
+  (
+   VAR l_List
+   l_List := ( %S %% aListName )
+   
+   if ( l_List NotValid ) then
+    ( Result := [ ] )
+   else 
+//    ( Result := ( [ l_List DO ] ) )
+    ( Result := ( @ FilterMember ( @ DoMember ( l_List CodeIterator ) MAP ) FILTER ) ) 
+  )
+; // ELEMLIST
+
+ARRAY FUNCTION %R IN %S
+ Result := ( '%R' %S ELEMLIST )
+;
+
+ARRAY FUNCTION %G IN %S
+ Result := ( '%G' %S ELEMLIST )
+;
+
 VOID IMMEDIATE OPERATOR class_impl
 ; // class_impl
 

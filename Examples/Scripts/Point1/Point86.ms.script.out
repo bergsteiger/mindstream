@@ -1,4 +1,24 @@
 VOID Test PointTest
+ ARRAY FUNCTION %G
+  IN %S
+  Result :=
+  (
+   '%G'
+   %S
+   ELEMLIST
+  )
+ ; // ARRAY FUNCTION %G
+ 
+ ARRAY FUNCTION %R
+  IN %S
+  Result :=
+  (
+   '%R'
+   %S
+   ELEMLIST
+  )
+ ; // ARRAY FUNCTION %R
+ 
  class_impl _:Object
  ; // class_impl _:Object
  
@@ -85,6 +105,68 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
  ; // PRIVATE OPERATOR do-get-member
  
+ OBJECT FUNCTION DoMember
+  OBJECT IN aMember
+  aMember
+  >>>
+  Result
+ ; // OBJECT FUNCTION DoMember
+ 
+ ARRAY FUNCTION ELEMLIST
+  IN %S
+  STRING IN aListName
+  if
+   (
+    %S
+    NotValid
+   )
+  then
+   (
+    Result :=
+    [
+    ]
+   )
+  else
+   (
+    VAR l_List
+    l_List :=
+    (
+     %S
+     %%
+     aListName
+    )
+    if
+     (
+      l_List
+      NotValid
+     )
+    then
+     (
+      Result :=
+      [
+      ]
+     )
+    else
+     (
+      Result :=
+      (
+       @
+       FilterMember
+       (
+        @
+        DoMember
+        (
+         l_List
+         CodeIterator
+        )
+        Array:Map
+       )
+       Array:Filter
+      )
+     )
+   )
+ ; // ARRAY FUNCTION ELEMLIST
+ 
  : FieldByOffset
   ^ IN _anOffset
   IMMEDIATE VOID OPERATOR anOffset
@@ -104,6 +186,16 @@ VOID Test PointTest
   TtfwValueTypes
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE FieldOffset
+ 
+ BOOLEAN FUNCTION FilterMember
+  OBJECT IN aMember
+  Result :=
+  (
+   aMember
+   NotValid
+   !
+  )
+ ; // BOOLEAN FUNCTION FilterMember
  
  INTEGER VAR g_ClassFieldOffset
  STRING VAR g_CurrentClass
