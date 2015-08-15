@@ -220,6 +220,7 @@ IMMEDIATE VOID operator members-end
  'Const' Ctx:Parser:PushSymbol
  [ 'c:' g_CurrentClass ':Instance:Size' ] strings:Cat Ctx:Parser:PushSymbol
  g_ClassFieldOffset Ctx:Parser:PushInt
+ 'RunCompileFields' Ctx:Parser:PushSymbol
 ; // members-end
 
 class Object
@@ -253,7 +254,7 @@ VOID IMMEDIATE operator read
 member VMT
 members-end
 
-RunCompileFields
+//RunCompileFields
 
 TtfwWord readonly class read VMT
 

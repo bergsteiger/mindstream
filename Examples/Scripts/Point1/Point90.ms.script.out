@@ -37,6 +37,12 @@ VOID Test PointTest
  ; // class_impl _:Object
  
  class_impl _:Point
+  %FIELDS %Fld
+   'VMT'
+   'X'
+   'Y'
+  ; // %FIELDS %Fld
+  
   %INHERITS %G
    @
    _:Object
@@ -351,6 +357,8 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
   g_ClassFieldOffset
   Ctx:Parser:PushInt
+  'RunCompileFields'
+  Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR members-end
  
  IMMEDIATE VOID OPERATOR method
