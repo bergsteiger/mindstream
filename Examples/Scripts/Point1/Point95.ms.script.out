@@ -79,6 +79,20 @@ VOID Test PointTest
   
  ; // class_impl _:Point
  
+ class_impl _:Rectangle
+  %FIELDS %Fld
+   'VMT'
+   'TopLeft'
+   'BottomRight'
+  ; // %FIELDS %Fld
+  
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+ ; // class_impl _:Rectangle
+ 
  INTEGER CONST c:Object:Instance:Size
   1
  INTEGER CONST c:Object:Offset:VMT
@@ -91,6 +105,14 @@ VOID Test PointTest
   1
  INTEGER CONST c:Point:Offset:Y
   2
+ INTEGER CONST c:Rectangle:Instance:Size
+  3
+ INTEGER CONST c:Rectangle:Offset:BottomRight
+  2
+ INTEGER CONST c:Rectangle:Offset:TopLeft
+  1
+ INTEGER CONST c:Rectangle:Offset:VMT
+  0
  IMMEDIATE VOID OPERATOR class
   ^L IN aName
   g_CurrentClassMembers :=
@@ -701,6 +723,11 @@ VOID Test PointTest
   MakeMethodSignature
   MakeSelfParam
  ; // IMMEDIATE VOID OPERATOR readonly
+ 
+ IMMEDIATE VOID OPERATOR Rectangle
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID OPERATOR Rectangle
  
  IMMEDIATE VOID OPERATOR RunCompileFields
   [

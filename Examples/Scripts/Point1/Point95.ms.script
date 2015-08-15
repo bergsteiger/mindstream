@@ -353,6 +353,14 @@ void method Print
 
 class-end // Point
 
+class Rectangle
+
+Point member TopLeft
+Point member BottomRight
+members-end
+
+class-end // Rectangle
+
 USES
  CodeDump.ms.dict
 ;
