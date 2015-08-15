@@ -743,11 +743,29 @@ VOID Test PointTest
   Result
  ; // Rectangle constructor Rectangle::
  
+ Point readonly Rectangle:BottomRight
+  Rectangle IN Self
+  Self
+  FieldByOffset
+  c:Rectangle:Offset:BottomRight
+  >>>
+  Result
+ ; // Point readonly Rectangle:BottomRight
+ 
  VOID method Rectangle:Print
   Rectangle IN Self
   Self
   .
  ; // VOID method Rectangle:Print
+ 
+ Point readonly Rectangle:TopLeft
+  Rectangle IN Self
+  Self
+  FieldByOffset
+  c:Rectangle:Offset:TopLeft
+  >>>
+  Result
+ ; // Point readonly Rectangle:TopLeft
  
  IMMEDIATE VOID OPERATOR RunCompileFields
   [

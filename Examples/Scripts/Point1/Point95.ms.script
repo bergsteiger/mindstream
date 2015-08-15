@@ -359,6 +359,10 @@ Point member TopLeft
 Point member BottomRight
 members-end
 
+Point readonly TopLeft read TopLeft
+
+Point readonly BottomRight read BottomRight
+
 constructor :
  Point RightParam aTopLeft
  Point RightParam aBottomRight
