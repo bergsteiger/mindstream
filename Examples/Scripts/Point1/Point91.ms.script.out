@@ -118,9 +118,17 @@ VOID Test PointTest
  
  IMMEDIATE VOID OPERATOR classExpander
   ^ IN anImpl
-  anImpl
-  |N
-  Msg
+  for
+  (
+   (
+    anImpl |@
+   )
+   %G
+  )
+  (
+   |N
+   Msg
+  )
  ; // IMMEDIATE VOID OPERATOR classExpander
  
  IMMEDIATE VOID OPERATOR constructor
