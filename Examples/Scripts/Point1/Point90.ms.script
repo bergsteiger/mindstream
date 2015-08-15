@@ -13,6 +13,7 @@ Test PointTest
 
  IMMEDIATE operator implementation
    ^ LINK IN aWordToWork
+  aWordToWork |N Msg
   Ctx:PushCompiler
   Ctx:PushFinder
   OBJECT VAR l_NewCompiler
@@ -35,6 +36,7 @@ Test PointTest
  ; // implementation
  
  IMMEDIATE operator end.
+  'end.' Msg
   pop:Finder:SetToCtx
   pop:Compiler:SetToCtx
  ; // end.
@@ -241,17 +243,19 @@ member VMT
 members-end
 
 VOID IMMEDIATE operator CompileFields
+ 'CompileFields' Msg
  for g_CurrentClassMembers Ctx:Parser:PushString
 ; // CompileFields
 
 VOID IMMEDIATE operator RunCompileFields
  [
- implementation 
- _:Object
-  %FIELDS
-  CompileFields
-  ;
- end.
+  'implementation'
+  g_CurrentClassImpl
+   '%FIELDS'
+   for g_CurrentClassMembers ( STRING IN aName [ '`' aName '`' ] strings:Cat )
+   //'CompileFields'
+   ';'
+  'end.'
  ] Ctx:Parser:PushArray
 ; // RunCompileFields
 
