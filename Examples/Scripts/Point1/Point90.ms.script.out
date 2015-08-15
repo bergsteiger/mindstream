@@ -38,7 +38,6 @@ VOID Test PointTest
  
  class_impl _:Point
   %FIELDS %Fld
-   'VMT'
    'X'
    'Y'
   ; // %FIELDS %Fld
@@ -62,6 +61,9 @@ VOID Test PointTest
   2
  IMMEDIATE VOID OPERATOR class
   ^L IN aName
+  g_CurrentClassMembers :=
+  [
+  ]
   aName
   |N
   >>>
@@ -666,13 +668,13 @@ VOID Test PointTest
  ''
  g_CurrentClassImpl :=
  ''
- g_ClassFieldOffset :=
- 0
  (
   g_CurrentClassMembers :=
   [
   ]
  )
+ g_ClassFieldOffset :=
+ 0
  PointTest
  DumpElement
  P1 :=

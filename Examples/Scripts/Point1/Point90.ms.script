@@ -100,8 +100,14 @@ VOID IMMEDIATE OPERATOR classExpander
  // Тут можно копировать поля и методы
 ; // classExpander
 
+ARRAY VAR g_CurrentClassMembers
+[EXECUTE]
+( g_CurrentClassMembers := [ ] )
+( g_CurrentClassMembers := [ ] )
+
 VOID IMMEDIATE OPERATOR class
  Literal IN aName
+ g_CurrentClassMembers := [ ]
  aName |N >>> g_CurrentClass
  //'class_impl' Ctx:Parser:PushSymbol
  // - вообще должно быть так, почему не работает - надо разбираться
@@ -188,11 +194,6 @@ PRIVATE STRING operator MakeFieldOffsetName
  STRING IN aName
  [ 'c:' g_CurrentClass ':Offset:' aName ] strings:Cat >>> Result
 ; // MakeFieldOffsetName
-
-ARRAY VAR g_CurrentClassMembers
-[EXECUTE]
-( g_CurrentClassMembers := [ ] )
-( g_CurrentClassMembers := [ ] )
 
 IMMEDIATE VOID operator member
  Literal IN aName
