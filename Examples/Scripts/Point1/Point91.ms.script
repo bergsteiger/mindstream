@@ -118,9 +118,15 @@ ARRAY VAR g_CurrentClassMembers
 ( g_CurrentClassMembers := [ ] )
 ( g_CurrentClassMembers := [ ] )
 
+INTEGER VAR g_ClassFieldOffset
+[EXECUTE]
+( g_ClassFieldOffset := 0 )
+g_ClassFieldOffset := 0
+
 VOID IMMEDIATE OPERATOR class
  Literal IN aName
  g_CurrentClassMembers := [ ]
+ g_ClassFieldOffset := 0
  aName |N >>> g_CurrentClass
  //'class_impl' Ctx:Parser:PushSymbol
  // - вообще должно быть так, почему не работает - надо разбираться
@@ -198,11 +204,6 @@ IMMEDIATE VOID operator new[
  '@' Ctx:Parser:PushSymbol
  g_CurrentClassImpl Ctx:Parser:PushSymbol
 ; // new[
-
-INTEGER VAR g_ClassFieldOffset
-[EXECUTE]
-( g_ClassFieldOffset := 0 )
-g_ClassFieldOffset := 0
 
 PRIVATE STRING operator MakeFieldOffsetName
  STRING IN aName
