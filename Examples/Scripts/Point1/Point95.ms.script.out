@@ -754,7 +754,19 @@ VOID Test PointTest
  
  VOID method Rectangle:Print
   Rectangle IN Self
-  Self
+  [
+   '( '
+   'TopLeft: '
+   Self
+   Rectangle:TopLeft
+   ToPrintable
+   ', BottomRight: '
+   Self
+   Rectangle:BottomRight
+   ToPrintable
+   ' )'
+  ]
+  strings:Cat
   .
  ; // VOID method Rectangle:Print
  
@@ -1017,7 +1029,7 @@ Object
 Object
 Object
 Object
-[ TkwCompiledProcedure [ TkwCompiledProcedure 0 0 ] [ TkwCompiledProcedure 2 2 ] ]
+( TopLeft: [ TkwCompiledProcedure 0 0 ], BottomRight: [ TkwCompiledProcedure 2 2 ] )
 Hello world
 Hello world
 Hello world

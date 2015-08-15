@@ -370,8 +370,8 @@ constructor :
 ; // :
 
 void method Print
- //[ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat Print
- Self Print
+ [ '( ' 'TopLeft: ' Self Rectangle:TopLeft ToPrintable ', BottomRight: ' Self Rectangle:BottomRight ToPrintable ' )' ] strings:Cat Print
+ //Self Print
 ; // Print
 
 class-end // Rectangle
