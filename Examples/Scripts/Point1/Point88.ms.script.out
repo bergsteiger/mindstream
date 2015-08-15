@@ -229,6 +229,7 @@ VOID Test PointTest
  INTEGER VAR g_ClassFieldOffset
  STRING VAR g_CurrentClass
  STRING VAR g_CurrentClassImpl
+ ARRAY VAR g_CurrentClassMembers
  STRING : getClassName
   IN Self
   Self
@@ -297,6 +298,10 @@ VOID Test PointTest
   Ctx:Parser:PushInt
   INC
   g_ClassFieldOffset
+  aName
+  |N
+  >>>[]
+  g_CurrentClassMembers
  ; // IMMEDIATE VOID OPERATOR member
  
  IMMEDIATE VOID OPERATOR members-end
@@ -600,6 +605,11 @@ VOID Test PointTest
  ''
  g_ClassFieldOffset :=
  0
+ (
+  g_CurrentClassMembers :=
+  [
+  ]
+ )
  PointTest
  DumpElement
  P1 :=

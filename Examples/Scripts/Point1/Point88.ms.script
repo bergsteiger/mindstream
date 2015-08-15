@@ -156,6 +156,11 @@ PRIVATE STRING operator MakeFieldOffsetName
  [ 'c:' g_CurrentClass ':Offset:' aName ] strings:Cat >>> Result
 ; // MakeFieldOffsetName
 
+ARRAY VAR g_CurrentClassMembers
+[EXECUTE]
+( g_CurrentClassMembers := [ ] )
+( g_CurrentClassMembers := [ ] )
+
 IMMEDIATE VOID operator member
  Literal IN aName
  'private' Ctx:Parser:PushSymbol
@@ -163,6 +168,7 @@ IMMEDIATE VOID operator member
  aName |N MakeFieldOffsetName Ctx:Parser:PushSymbol
  g_ClassFieldOffset Ctx:Parser:PushInt
  Inc g_ClassFieldOffset
+ aName |N >>>[] g_CurrentClassMembers
 ; // member
 
 IMMEDIATE VOID operator members-end
