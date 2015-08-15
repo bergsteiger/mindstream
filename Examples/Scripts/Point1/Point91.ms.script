@@ -95,7 +95,9 @@ STRING var g_CurrentClassImpl
 g_CurrentClassImpl := ''
 
 VOID IMMEDIATE OPERATOR classExpander
+ ^ IN anImpl
  // Тут можно копировать поля и методы
+ anImpl |N Msg
 ; // classExpander
 
 ARRAY VAR g_CurrentClassMembers
@@ -135,6 +137,7 @@ VOID IMMEDIATE OPERATOR class
  ] Ctx:Parser:PushArray
 
  'classExpander' Ctx:Parser:PushSymbol
+ g_CurrentClassImpl Ctx:Parser:PushSymbol
 
 ; // class
 

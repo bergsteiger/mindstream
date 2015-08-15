@@ -109,12 +109,18 @@ VOID Test PointTest
   Ctx:Parser:PushArray
   'classExpander'
   Ctx:Parser:PushSymbol
+  g_CurrentClassImpl
+  Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR class
  
  VOID OPERATOR class_impl
  ; // VOID OPERATOR class_impl
  
  IMMEDIATE VOID OPERATOR classExpander
+  ^ IN anImpl
+  anImpl
+  |N
+  Msg
  ; // IMMEDIATE VOID OPERATOR classExpander
  
  IMMEDIATE VOID OPERATOR constructor
@@ -378,10 +384,10 @@ VOID Test PointTest
  ; // IMMEDIATE VOID OPERATOR new[
  
  Object VAR O1
- IMMEDIATE VOID TYPE Object
+ IMMEDIATE VOID OPERATOR Object
   TtfwValueTypes
   Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID TYPE Object
+ ; // IMMEDIATE VOID OPERATOR Object
  
  TtfwWord readonly Object:class
   Object IN Self
@@ -421,10 +427,10 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE PixelList
  
- IMMEDIATE VOID TYPE Point
+ IMMEDIATE VOID OPERATOR Point
   TtfwValueTypes
   Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID TYPE Point
+ ; // IMMEDIATE VOID OPERATOR Point
  
  Point method Point:-
   ^ IN _aPoint
