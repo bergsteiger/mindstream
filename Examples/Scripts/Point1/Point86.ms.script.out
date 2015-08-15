@@ -25,7 +25,7 @@ VOID Test PointTest
  class_impl _:Point
   %INHERITS %G
    @
-   Object
+   _:Object
   ; // %INHERITS %G
   
  ; // class_impl _:Point
@@ -68,7 +68,12 @@ VOID Test PointTest
    then
     BEGIN
      '%INHERITS'
-     '@ Object'
+     '@'
+     [
+      '_:'
+      'Object'
+     ]
+     strings:Cat
      ';'
     END
    ';'
@@ -752,16 +757,16 @@ Point
 Point
 Point
 Point
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Object
+_:Object
+_:Object
+_:Object
+_:Object
+_:Object
+_:Object
+_:Object
+_:Object
+_:Object
+_:Object
 Hello world
 Hello world
 Hello world
