@@ -347,8 +347,12 @@ Point method -
  Point:OF ( Self Point:+ ( aPoint Point:Neg ) ) >>> Result
 ; // -
 
+STRING method ToPrintable
+ [ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat >>> Result
+; // ToPrintable
+
 void method Print
- [ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat Print
+ Self Point:ToPrintable Print
 ; // Print
 
 class-end // Point

@@ -635,6 +635,13 @@ VOID Test PointTest
  
  VOID method Point:Print
   Point IN Self
+  Self
+  Point:ToPrintable
+  .
+ ; // VOID method Point:Print
+ 
+ STRING method Point:ToPrintable
+  Point IN Self
   [
    '( '
    'X: '
@@ -648,8 +655,9 @@ VOID Test PointTest
    ' )'
   ]
   strings:Cat
-  .
- ; // VOID method Point:Print
+  >>>
+  Result
+ ; // STRING method Point:ToPrintable
  
  Pixel readonly Point:X
   Point IN Self
