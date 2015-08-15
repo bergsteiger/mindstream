@@ -108,6 +108,7 @@ VOID Test PointTest
  OBJECT FUNCTION DoMember
   OBJECT IN aMember
   aMember
+  DO
   >>>
   Result
  ; // OBJECT FUNCTION DoMember
@@ -751,16 +752,16 @@ Point
 Point
 Point
 Point
-@
-@
-@
-@
-@
-@
-@
-@
-@
-@
+Object
+Object
+Object
+Object
+Object
+Object
+Object
+Object
+Object
+Object
 Hello world
 Hello world
 Hello world

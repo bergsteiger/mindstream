@@ -10,7 +10,7 @@ Test PointTest
 
 OBJECT FUNCTION DoMember 
  OBJECT IN aMember
- aMember >>> Result
+ aMember DO >>> Result
 ; // DoMember
 
 BOOLEAN FUNCTION FilterMember 
