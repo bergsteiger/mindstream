@@ -729,6 +729,19 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID OPERATOR Rectangle
  
+ Rectangle constructor Rectangle::
+  ^ IN aBottomRight
+  ^ IN aTopLeft
+  [
+   @
+   _:Rectangle
+   aTopLeft |^
+   aBottomRight |^
+  ]
+  >>>
+  Result
+ ; // Rectangle constructor Rectangle::
+ 
  IMMEDIATE VOID OPERATOR RunCompileFields
   [
    'implementation'

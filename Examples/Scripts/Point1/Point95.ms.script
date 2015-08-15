@@ -359,6 +359,12 @@ Point member TopLeft
 Point member BottomRight
 members-end
 
+constructor :
+ Point RightParam aTopLeft
+ Point RightParam aBottomRight
+ new[ aTopLeft |^ aBottomRight |^ ] >>> Result
+; // :
+
 class-end // Rectangle
 
 USES
