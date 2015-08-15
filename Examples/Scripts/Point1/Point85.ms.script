@@ -40,6 +40,7 @@ VOID IMMEDIATE OPERATOR class
    if ( g_CurrentClass <> 'Object' ) then
    begin
     '%INHERITS'
+    '@ Object'
     ';'
    end
   ';'

@@ -4,6 +4,8 @@ VOID Test PointTest
  
  class_impl _:Point
   %INHERITS %G
+   @
+   Object
   ; // %INHERITS %G
   
  ; // class_impl _:Point
@@ -46,6 +48,8 @@ VOID Test PointTest
    then
     BEGIN
      '%INHERITS'
+     '@'
+     'Object'
      ';'
     END
    ';'
