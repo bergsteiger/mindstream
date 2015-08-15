@@ -245,12 +245,14 @@ VOID IMMEDIATE operator CompileFields
 ; // CompileFields
 
 VOID IMMEDIATE operator RunCompileFields
+ [
  implementation 
  _:Object
   %FIELDS
   CompileFields
   ;
  end.
+ ] Ctx:Parser:PushArray
 ; // RunCompileFields
 
 RunCompileFields
