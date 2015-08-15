@@ -312,7 +312,7 @@ for l_Points ( Point:X Print )
 for l_Points ( Point:Y Print )
 for l_Points ( Object:class Print )
 for l_Points ( Object:ClassName Print )
-for l_Points ( for ( Object:class %G ) ( |N Print ) )
+for l_Points ( for ( Object:class %G ) ( getClassName Print ) )
 
 'Hello ' (+) 'world' Print
 
