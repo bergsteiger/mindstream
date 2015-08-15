@@ -21,22 +21,22 @@ VOID Test PointTest
   |N
   >>>
   g_CurrentClass
-  ':'
-  Ctx:Parser:PushSymbol
-  @
-  class_impl
-  Ctx:SetWordProducerForCompiledClass
   [
-   '_:'
-   g_CurrentClass
+   ':'
+   @
+   class_impl
+   Ctx:SetWordProducerForCompiledClass
+   [
+    '_:'
+    g_CurrentClass
+   ]
+   strings:Cat
+   >>>
+   g_CurrentClassImpl
+   g_CurrentClassImpl
+   ';'
   ]
-  strings:Cat
-  >>>
-  g_CurrentClassImpl
-  g_CurrentClassImpl
-  Ctx:Parser:PushSymbol
-  ';'
-  Ctx:Parser:PushSymbol
+  Ctx:Parser:PushArray
   'array'
   Ctx:Parser:PushSymbol
   'type'

@@ -30,11 +30,15 @@ VOID IMMEDIATE OPERATOR class
  aName |N >>> g_CurrentClass
  //'class_impl' Ctx:Parser:PushSymbol
  // - вообще должно быть так, почему не работает - надо разбираться
- ':' Ctx:Parser:PushSymbol
- @ class_impl Ctx:SetWordProducerForCompiledClass
- [ '_:' g_CurrentClass ] strings:Cat >>> g_CurrentClassImpl
- g_CurrentClassImpl Ctx:Parser:PushSymbol
- ';' Ctx:Parser:PushSymbol
+ [
+  ':' 
+
+  @ class_impl Ctx:SetWordProducerForCompiledClass
+  [ '_:' g_CurrentClass ] strings:Cat >>> g_CurrentClassImpl
+
+  g_CurrentClassImpl
+  ';'
+ ] Ctx:Parser:PushArray
 
  'array' Ctx:Parser:PushSymbol
  'type' Ctx:Parser:PushSymbol
