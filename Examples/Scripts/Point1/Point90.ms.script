@@ -75,7 +75,7 @@ ARRAY FUNCTION %G IN %S
  Result := ( '%G' %S ELEMLIST )
 ;
 
-VOID IMMEDIATE OPERATOR class_impl
+VOID OPERATOR class_impl
 // - имплементация класса, пока "фиктивная"
 // Тут мы будем хранить всю информацию о классе - предки, поля, методы
 ; // class_impl
@@ -239,6 +239,9 @@ VOID IMMEDIATE operator read
 
 member VMT
 members-end
+
+implementation _:Object
+end.
 
 TtfwWord readonly class read VMT
 
