@@ -762,6 +762,22 @@ VOID Test PointTest
  
  VOID method Rectangle:Print
   Rectangle IN Self
+  Self
+  Rectangle:ToPrintable
+  .
+ ; // VOID method Rectangle:Print
+ 
+ Point readonly Rectangle:TopLeft
+  Rectangle IN Self
+  Self
+  FieldByOffset
+  c:Rectangle:Offset:TopLeft
+  >>>
+  Result
+ ; // Point readonly Rectangle:TopLeft
+ 
+ STRING method Rectangle:ToPrintable
+  Rectangle IN Self
   [
    '( '
    'TopLeft: '
@@ -775,17 +791,9 @@ VOID Test PointTest
    ' )'
   ]
   strings:Cat
-  .
- ; // VOID method Rectangle:Print
- 
- Point readonly Rectangle:TopLeft
-  Rectangle IN Self
-  Self
-  FieldByOffset
-  c:Rectangle:Offset:TopLeft
   >>>
   Result
- ; // Point readonly Rectangle:TopLeft
+ ; // STRING method Rectangle:ToPrintable
  
  IMMEDIATE VOID OPERATOR RunCompileFields
   [
