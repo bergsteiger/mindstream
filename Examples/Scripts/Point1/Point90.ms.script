@@ -204,6 +204,17 @@ IMMEDIATE VOID operator member
  aName |N >>>[] g_CurrentClassMembers
 ; // member
 
+VOID IMMEDIATE operator RunCompileFields
+ [
+  'implementation'
+  g_CurrentClassImpl
+   '%FIELDS'
+   for g_CurrentClassMembers ( STRING IN aName [ '`' aName '`' ] strings:Cat )
+   ';'
+  'end.'
+ ] Ctx:Parser:PushArray
+; // RunCompileFields
+
 IMMEDIATE VOID operator members-end
  'private' Ctx:Parser:PushSymbol
  'Const' Ctx:Parser:PushSymbol
@@ -241,17 +252,6 @@ VOID IMMEDIATE operator read
 
 member VMT
 members-end
-
-VOID IMMEDIATE operator RunCompileFields
- [
-  'implementation'
-  g_CurrentClassImpl
-   '%FIELDS'
-   for g_CurrentClassMembers ( STRING IN aName [ '`' aName '`' ] strings:Cat )
-   ';'
-  'end.'
- ] Ctx:Parser:PushArray
-; // RunCompileFields
 
 RunCompileFields
 
