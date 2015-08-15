@@ -13,7 +13,6 @@ Test PointTest
 
  IMMEDIATE operator implementation
    ^ LINK IN aWordToWork
-  aWordToWork |N Msg
   Ctx:PushCompiler
   Ctx:PushFinder
   OBJECT VAR l_NewCompiler
@@ -36,7 +35,6 @@ Test PointTest
  ; // implementation
  
  IMMEDIATE operator end.
-  'end.' Msg
   pop:Finder:SetToCtx
   pop:Compiler:SetToCtx
  ; // end.

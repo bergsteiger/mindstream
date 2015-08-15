@@ -201,8 +201,6 @@ VOID Test PointTest
  ; // ARRAY FUNCTION ELEMLIST
  
  IMMEDIATE OPERATOR end.
-  'end.'
-  Msg
   pop:Finder:SetToCtx
   pop:Compiler:SetToCtx
  ; // IMMEDIATE OPERATOR end.
@@ -262,9 +260,6 @@ VOID Test PointTest
  IMMEDIATE OPERATOR implementation
   LINK ^ IN aWordToWork
   OBJECT VAR l_NewCompiler
-  aWordToWork
-  |N
-  Msg
   Ctx:PushCompiler
   Ctx:PushFinder
   aWordToWork |^@
