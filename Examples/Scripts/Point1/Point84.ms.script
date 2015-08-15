@@ -37,8 +37,11 @@ VOID IMMEDIATE OPERATOR class
   [ '_:' g_CurrentClass ] strings:Cat >>> g_CurrentClassImpl
 
   g_CurrentClassImpl
-   '%INHERITS'
-   ';'
+   if ( g_CurrentClass <> 'Object' ) then
+   begin
+    '%INHERITS'
+    ';'
+   end
   ';'
  ] Ctx:Parser:PushArray
 

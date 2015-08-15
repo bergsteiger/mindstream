@@ -1,8 +1,5 @@
 VOID Test PointTest
  class_impl _:Object
-  %INHERITS %G
-  ; // %INHERITS %G
-  
  ; // class_impl _:Object
  
  class_impl _:Point
@@ -40,8 +37,17 @@ VOID Test PointTest
    >>>
    g_CurrentClassImpl
    g_CurrentClassImpl
-   '%INHERITS'
-   ';'
+   if
+    (
+     g_CurrentClass
+     <>
+     'Object'
+    )
+   then
+    BEGIN
+     '%INHERITS'
+     ';'
+    END
    ';'
   ]
   Ctx:Parser:PushArray
