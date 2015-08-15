@@ -59,6 +59,10 @@ g_CurrentClass := ''
 STRING var g_CurrentClassImpl
 g_CurrentClassImpl := ''
 
+VOID IMMEDIATE OPERATOR classExpander
+ // Тут можно копировать поля и методы
+; // classExpander
+
 VOID IMMEDIATE OPERATOR class
  Literal IN aName
  aName |N >>> g_CurrentClass
@@ -86,6 +90,8 @@ VOID IMMEDIATE OPERATOR class
   'type' 
   g_CurrentClass
  ] Ctx:Parser:PushArray
+
+ 'classExpander' Ctx:Parser:PushSymbol
 
 ; // class
 
