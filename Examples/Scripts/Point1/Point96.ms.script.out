@@ -370,6 +370,7 @@ VOID Test PointTest
  ; // IMMEDIATE OPERATOR implementation
  
  ARRAY VAR l_Points
+ ARRAY VAR l_Rectangles
  PRIVATE STRING OPERATOR MakeFieldOffsetName
   STRING IN aName
   [
@@ -949,9 +950,14 @@ VOID Test PointTest
  Rectangle::
  P6
  P7
- R1
- Rectangle:Print
- R2
+ [
+  R1
+  R2
+ ]
+ >>>
+ l_Rectangles
+ for
+ l_Rectangles
  Rectangle:Print
  'Hello '
  (+)

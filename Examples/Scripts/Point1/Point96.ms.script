@@ -433,8 +433,10 @@ Rectangle var R2
 R1 := Rectangle:: P1 P4
 R2 := Rectangle:: P6 P7
 
-R1 Rectangle:Print
-R2 Rectangle:Print
+array var l_Rectangles
+[ R1 R2 ] >>> l_Rectangles
+
+for l_Rectangles Rectangle:Print
 
 'Hello ' (+) 'world' Print
 
