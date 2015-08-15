@@ -655,6 +655,16 @@ VOID Test PointTest
   Object:ClassName
   .
  )
+ for
+ l_Points
+ (
+  for
+  (
+   Object:class
+   %G
+  )
+  .
+ )
  'Hello '
  (+)
  'world'
@@ -738,6 +748,16 @@ Point
 Point
 Point
 Point
+TkwCompiledWordWorkerEx
+TkwCompiledWordWorkerEx
+TkwCompiledWordWorkerEx
+TkwCompiledWordWorkerEx
+TkwCompiledWordWorkerEx
+TkwCompiledWordWorkerEx
+TkwCompiledWordWorkerEx
+TkwCompiledWordWorkerEx
+TkwCompiledWordWorkerEx
+TkwCompiledWordWorkerEx
 Hello world
 Hello world
 Hello world
