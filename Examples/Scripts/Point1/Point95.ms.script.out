@@ -767,11 +767,11 @@ VOID Test PointTest
    'TopLeft: '
    Self
    Rectangle:TopLeft
-   ToPrintable
+   Point:ToPrintable
    ', BottomRight: '
    Self
    Rectangle:BottomRight
-   ToPrintable
+   Point:ToPrintable
    ' )'
   ]
   strings:Cat
@@ -1037,7 +1037,7 @@ Object
 Object
 Object
 Object
-( TopLeft: [ TkwCompiledProcedure 0 0 ], BottomRight: [ TkwCompiledProcedure 2 2 ] )
+( TopLeft: ( X: 0, Y: 0 ), BottomRight: ( X: 2, Y: 2 ) )
 Hello world
 Hello world
 Hello world
