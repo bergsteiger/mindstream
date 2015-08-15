@@ -102,7 +102,13 @@ g_CurrentClassImpl := ''
 VOID IMMEDIATE OPERATOR classExpander
  ^ IN anImpl
  // Тут можно копировать поля и методы
- for ( ( anImpl |@ ) %G ) ( IN anItem for ( anItem %Fld ) ( |N Msg ) )
+ for ( ( anImpl |@ ) %G ) ( 
+  IN anItem 
+  for ( anItem %Fld ) ( 
+   IN anItem 
+   anItem |N Msg 
+  ) 
+ )
 ; // classExpander
 
 ARRAY VAR g_CurrentClassMembers
