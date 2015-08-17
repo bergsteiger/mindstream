@@ -7,5 +7,5 @@ ARRAY operator to
   I := ( aFrom DO )
   Dec I
   ( aTo DO I ) - LOOP ( Inc I I aLambda DO ) 
- ) FunctorToIterator >>> Result
+ ) FunctorToIterator =: Result
 ; // to
