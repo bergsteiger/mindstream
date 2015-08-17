@@ -425,16 +425,10 @@ VOID Test PointTest
  IMMEDIATE VOID OPERATOR member
   ^L IN aName
   Ctx:ClearTypeInfo
-  'private'
-  Ctx:Parser:PushSymbol
-  'Const'
-  Ctx:Parser:PushSymbol
   aName
   |N
-  MakeFieldOffsetName
-  Ctx:Parser:PushSymbol
   g_ClassFieldOffset
-  Ctx:Parser:PushInt
+  define_member
   INC
   g_ClassFieldOffset
   aName

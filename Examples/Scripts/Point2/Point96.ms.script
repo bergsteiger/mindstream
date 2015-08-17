@@ -235,10 +235,7 @@ VOID operator define_member
 MACRO member
  Literal IN aName
  Ctx:ClearTypeInfo
- 'private' Ctx:Parser:PushSymbol
- 'Const' Ctx:Parser:PushSymbol
- aName |N MakeFieldOffsetName Ctx:Parser:PushSymbol
- g_ClassFieldOffset Ctx:Parser:PushInt
+ aName |N g_ClassFieldOffset define_member
  Inc g_ClassFieldOffset
  aName |N array:AddTo g_CurrentClassMembers
 ; // member
