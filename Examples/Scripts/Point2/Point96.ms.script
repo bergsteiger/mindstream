@@ -98,7 +98,7 @@ VOID OPERATOR class_impl
 //// - имплементация класса, пока "фиктивная"
 // Literal IN aName
 // @SELF Ctx:SetWordProducerForCompiledClass
-// ':' Ctx:Parser:PushSymbol
+// @ : pop:Word:Name Ctx:Parser:PushSymbol
 // aName |N Ctx:Parser:PushSymbol
 // //';' Ctx:Parser:PushSymbol
 //; // class_imp
