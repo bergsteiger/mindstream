@@ -440,8 +440,8 @@ VOID Test PointTest
  ; // IMMEDIATE VOID OPERATOR member
  
  IMMEDIATE VOID OPERATOR members-end
-  'private'
-  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  PRIVATE
   'Const'
   Ctx:Parser:PushSymbol
   [
@@ -468,10 +468,10 @@ VOID Test PointTest
  ; // IMMEDIATE VOID OPERATOR method
  
  IMMEDIATE VOID OPERATOR new[
-  '['
-  Ctx:Parser:PushSymbol
-  '@'
-  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  [
+  axiom:PushSymbol
+  @
   g_CurrentClassImpl
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR new[

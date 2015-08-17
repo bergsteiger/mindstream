@@ -235,8 +235,8 @@ MACRO readonly
 ; // readonly
 
 MACRO new[
- '[' Ctx:Parser:PushSymbol
- '@' Ctx:Parser:PushSymbol
+ axiom:PushSymbol [
+ axiom:PushSymbol @
  g_CurrentClassImpl Ctx:Parser:PushSymbol
 ; // new[
 
@@ -252,7 +252,7 @@ MACRO RunCompileFields
 ; // RunCompileFields
 
 MACRO members-end
- 'private' Ctx:Parser:PushSymbol
+ axiom:PushSymbol private
  'Const' Ctx:Parser:PushSymbol
  [ 'c:' g_CurrentClass ':Instance:Size' ] strings:Cat Ctx:Parser:PushSymbol
  g_ClassFieldOffset Ctx:Parser:PushInt
