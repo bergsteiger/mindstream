@@ -20,11 +20,11 @@ Test PointTest
   
   if ( l_NewCompiler Is class::TkwCompiledWordWorkerWord ) then
   begin
-   l_NewCompiler pop:CompiledWordWorkerWord:Compiled >>> l_NewCompiler
+   l_NewCompiler pop:CompiledWordWorkerWord:Compiled =: l_NewCompiler
 /*{   l_NewCompiler CodeIterator ==> ( IN anItem 
     if ( NOT ( anItem %P pop:object:IsNil ) ) then
     begin
-     anItem %P >>> l_NewCompiler
+     anItem %P =: l_NewCompiler
      BREAK-ITERATOR
     end 
    )}*/
@@ -43,7 +43,7 @@ NamedWordProducer %FIELDS %Fld
 
 OBJECT FUNCTION DoMember 
  OBJECT IN aMember
- aMember DO >>> Result
+ aMember DO =: Result
 ; // DoMember
 
 BOOLEAN FUNCTION FilterMember 
@@ -81,7 +81,7 @@ ARRAY FUNCTION %Fld
  IN %S
  //Result := ( '%Fld' %S ELEMLIST )
  VAR l_List
- %S %% '%Fld' >>> l_List
+ %S %% '%Fld' =: l_List
  if ( l_List NotValid ) then
   ( Result := [ ] )
  else 
@@ -134,14 +134,14 @@ VOID IMMEDIATE OPERATOR class
  Literal IN aName
  g_CurrentClassMembers := [ ]
  g_ClassFieldOffset := 0
- aName |N >>> g_CurrentClass
+ aName |N =: g_CurrentClass
  //'class_impl' Ctx:Parser:PushSymbol
  // - вообще должно быть так, почему не работает - надо разбираться
  [
   ':' 
 
   @ class_impl Ctx:SetWordProducerForCompiledClass
-  [ '_:' g_CurrentClass ] strings:Cat >>> g_CurrentClassImpl
+  [ '_:' g_CurrentClass ] strings:Cat =: g_CurrentClassImpl
 
   g_CurrentClassImpl
    if ( g_CurrentClass <> 'Object' ) then
@@ -217,7 +217,7 @@ IMMEDIATE VOID operator new[
 
 PRIVATE STRING operator MakeFieldOffsetName
  STRING IN aName
- [ 'c:' g_CurrentClass ':Offset:' aName ] strings:Cat >>> Result
+ [ 'c:' g_CurrentClass ':Offset:' aName ] strings:Cat =: Result
 ; // MakeFieldOffsetName
 
 IMMEDIATE VOID operator member
@@ -273,7 +273,7 @@ VOID IMMEDIATE operator read
  Literal IN aName
  'Self' Ctx:Parser:PushSymbol 
  aName |N do-get-member
- '>>>' Ctx:Parser:PushSymbol 
+ '=:' Ctx:Parser:PushSymbol 
  'Result' Ctx:Parser:PushSymbol
  ';' Ctx:Parser:PushSymbol
 ; // read
@@ -285,11 +285,11 @@ TtfwWord readonly class read VMT
 
 STRING : getClassName
  IN Self
- Self |N ':' string:Split >>> Result DROP
+ Self |N ':' string:Split =: Result DROP
 ; // getClassName
 
 STRING readonly ClassName
- Self Object:class getClassName >>> Result
+ Self Object:class getClassName =: Result
 ; // Object:ClassName
 
 class-end // Object
@@ -308,18 +308,18 @@ members-end
 constructor :
  Pixel right aX
  Pixel right aY
- new[ aX aY ] >>> Result
+ new[ aX aY ] =: Result
 ; // :
 
 constructor 0
- Point:: 0 0 >>> Result
+ Point:: 0 0 =: Result
 ; // 0
 
 constructor XY
  PixelList right aPoint
  array var Points
- [ aPoint ] >>> Points
- Point:: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) >>> Result
+ [ aPoint ] =: Points
+ Point:: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) =: Result
 ; // XY
 
 Pixel readonly X read X
@@ -328,27 +328,27 @@ Pixel readonly Y read Y
 
 constructor OF
  Point right aPoint
- Point:: ( aPoint Point:X ) ( aPoint Point:Y ) >>> Result
+ Point:: ( aPoint Point:X ) ( aPoint Point:Y ) =: Result
 ; // OF
 
 Point method +
  Point right aPoint
 
- Point:: ( Self Point:X (+) ( aPoint Point:X ) ) ( Self Point:Y (+) ( aPoint Point:Y ) ) >>> Result
+ Point:: ( Self Point:X (+) ( aPoint Point:X ) ) ( Self Point:Y (+) ( aPoint Point:Y ) ) =: Result
 ; // +
 
 Point method Neg
- Point:: Neg ( Self Point:X ) Neg ( Self Point:Y ) >>> Result
+ Point:: Neg ( Self Point:X ) Neg ( Self Point:Y ) =: Result
 ; // Neg
 
 Point method -
  Point right aPoint
 
- Point:OF ( Self Point:+ ( aPoint Point:Neg ) ) >>> Result
+ Point:OF ( Self Point:+ ( aPoint Point:Neg ) ) =: Result
 ; // -
 
 STRING method ToPrintable
- [ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat >>> Result
+ [ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat =: Result
 ; // ToPrintable
 
 void method Print
@@ -370,11 +370,11 @@ Point readonly BottomRight read BottomRight
 constructor :
  Point right aTopLeft
  Point right aBottomRight
- new[ aTopLeft aBottomRight ] >>> Result
+ new[ aTopLeft aBottomRight ] =: Result
 ; // :
 
 STRING method ToPrintable
- [ '( ' 'TopLeft: ' Self Rectangle:TopLeft Point:ToPrintable ', BottomRight: ' Self Rectangle:BottomRight Point:ToPrintable ' )' ] strings:Cat >>> Result
+ [ '( ' 'TopLeft: ' Self Rectangle:TopLeft Point:ToPrintable ', BottomRight: ' Self Rectangle:BottomRight Point:ToPrintable ' )' ] strings:Cat =: Result
 ; // ToPrintable
 
 void method Print
@@ -419,7 +419,7 @@ O1 Point:Print
 
 array var l_Points
 
-[ P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 ] >>> l_Points
+[ P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 ] =: l_Points
 
 for l_Points Point:Print
 for l_Points ( Point:X Print )
@@ -434,7 +434,7 @@ R1 := Rectangle:: P1 P4
 R2 := Rectangle:: P6 P7
 
 array var l_Rectangles
-[ R1 R2 ] >>> l_Rectangles
+[ R1 R2 ] =: l_Rectangles
 
 for l_Rectangles Rectangle:Print
 
