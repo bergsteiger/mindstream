@@ -861,13 +861,13 @@ VOID Test PointTest
  ''
  g_CurrentClassImpl :=
  ''
+ g_ClassFieldOffset :=
+ 0
  (
   g_CurrentClassMembers :=
   [
   ]
  )
- g_ClassFieldOffset :=
- 0
  PointTest
  DumpElement
  P1 :=
