@@ -306,9 +306,9 @@ Pixel member Y
 members-end
 
 constructor :
- Pixel RightParam aX
+ Pixel right aX
  Pixel RightParam aY
- new[ aX |^ aY |^ ] >>> Result
+ new[ aX aY |^ ] >>> Result
 ; // :
 
 constructor 0

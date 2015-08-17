@@ -538,12 +538,19 @@ VOID Test PointTest
  ; // Point method Point:-
  
  Point constructor Point::
-  ^ IN aX
+  ^ IN _aX
+  IMMEDIATE VOID OPERATOR aX
+   '_aX'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aX
+  
   ^ IN aY
   [
    @
    _:Point
-   aX |^
+   (
+    _aX |^
+   )
    aY |^
   ]
   >>>
