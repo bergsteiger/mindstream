@@ -28,12 +28,12 @@ PRIVATE VOID operator MangledNamePusher
  axiom:PushSymbol (
  aName Ctx:Parser:PushSymbol
  axiom:PushSymbol |^
- ')' Ctx:Parser:PushSymbol
+ axiom:PushSymbol )
 ; // MangledNamePusher
 
 MACRO right
  Literal IN aName
- 'RIGHT' Ctx:Parser:PushSymbol
+ axiom:PushSymbol RIGHT
  'IN' Ctx:Parser:PushSymbol
 
  STRING VAR l_Name
