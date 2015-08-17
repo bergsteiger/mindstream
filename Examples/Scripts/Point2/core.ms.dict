@@ -25,7 +25,7 @@ FUNCTOR : |@
  aRef pop:Word:GetRef =: Result
 ; // |@
 
-VOID IMMEDIATE OPERATOR this.do
+_MACRO OPERATOR this.do
 // - запускаем "себя же" рекурсивно
  '(' Ctx:Parser:PushSymbol
  '@SELF' Ctx:Parser:PushSymbol
