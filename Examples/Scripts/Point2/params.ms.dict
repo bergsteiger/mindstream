@@ -11,7 +11,7 @@ WordAlias RIGHT ^
 
 WordAlias in IN
 
-IMMEDIATE VOID operator Literal
+_MACRO operator Literal
  ^L IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
  '^L' Ctx:Parser:PushSymbol
