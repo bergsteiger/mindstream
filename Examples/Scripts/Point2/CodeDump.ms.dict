@@ -1,3 +1,7 @@
+USES
+ core.ms.dict
+;
+
 FORWARD DumpElement
 
 INTEGER VAR Indent
@@ -13,7 +17,7 @@ VOID WORDWORKER Out
 VOID WORDWORKER OutEx 
  STRING VAR aValue
  aValue := ( WordToWork DO )
- if ( aValue <> '' ) then
+ if ( aValue !== '' ) then
   Out aValue
 ; // OutEx
 
@@ -113,13 +117,13 @@ PROCEDURE DumpElementPrim BOOLEAN IN aNeedStereo OBJECT IN aCode
  
  if aNeedStereo then
   (
-   if ( l_Stereo <> '' ) then
+   if ( l_Stereo !== '' ) then
     ( [ l_Stereo l_Name ] ' ' strings:CatSep =: l_Name )
-   if ( ( l_Directives <> '' ) AND ( l_Directives <> ' ' ) ) then 
+   if ( ( l_Directives !== '' ) AND ( l_Directives !== ' ' ) ) then 
     ( [ l_Directives l_Name ] ' ' strings:CatSep =: l_Name )
   )  
 
- if ( l_Name <> '' ) then
+ if ( l_Name !== '' ) then
   ( 
    OutEx l_Name
    Inc Indent
@@ -132,17 +136,17 @@ PROCEDURE DumpElementPrim BOOLEAN IN aNeedStereo OBJECT IN aCode
    aCode DumpCodeCall 
   )
  FINALLY
-  if ( l_Name <> '' ) then
+  if ( l_Name !== '' ) then
    ( 
     Dec Indent
    )
  END 
- if ( l_Name <> '' ) then
+ if ( l_Name !== '' ) then
   if aNeedStereo then
   (
    STRING VAR l_Bracket
    l_Bracket := ( aCode EndBracket )
-   if ( l_Bracket <> '' ) then
+   if ( l_Bracket !== '' ) then
     ( 
      OutA [ l_Bracket ' // ' l_Name ]
      Out ''
@@ -158,7 +162,7 @@ PROCEDURE OutBracket OBJECT IN aCode
  STRING VAR l_Bracket
  l_Bracket := ( aCode EndBracket )
  //l_Bracket := ( aCode pop:Word:EndBracket )
- if ( l_Bracket <> '' ) then
+ if ( l_Bracket !== '' ) then
   OutEx l_Bracket
 ; // OutBracket
 
