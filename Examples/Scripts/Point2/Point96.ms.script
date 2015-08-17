@@ -223,6 +223,15 @@ PRIVATE STRING operator MakeFieldOffsetName
  [ 'c:' g_CurrentClass ':Offset:' aName ] strings:Cat =: Result
 ; // MakeFieldOffsetName
 
+VOID operator define_member
+ STRING IN aName
+ INTEGER IN aOffset
+ 'private' Ctx:Parser:PushSymbol
+ 'Const' Ctx:Parser:PushSymbol
+ aName MakeFieldOffsetName Ctx:Parser:PushSymbol
+ aOffset Ctx:Parser:PushInt
+; // define_member
+
 MACRO member
  Literal IN aName
  Ctx:ClearTypeInfo

@@ -215,6 +215,20 @@ VOID Test PointTest
   MakeMethodSignature
  ; // IMMEDIATE VOID OPERATOR constructor
  
+ VOID OPERATOR define_member
+  STRING IN aName
+  INTEGER IN aOffset
+  'private'
+  Ctx:Parser:PushSymbol
+  'Const'
+  Ctx:Parser:PushSymbol
+  aName
+  MakeFieldOffsetName
+  Ctx:Parser:PushSymbol
+  aOffset
+  Ctx:Parser:PushInt
+ ; // VOID OPERATOR define_member
+ 
  PRIVATE OPERATOR do-get-member
   STRING IN aName
   'FieldByOffset'
