@@ -108,6 +108,20 @@ g_CurrentClass := ''
 STRING var g_CurrentClassImpl
 g_CurrentClassImpl := ''
 
+PRIVATE STRING operator MakeFieldOffsetName
+ STRING IN aName
+ [ 'c:' g_CurrentClass ':Offset:' aName ] strings:Cat =: Result
+; // MakeFieldOffsetName
+
+VOID operator define_member
+ STRING IN aName
+ INTEGER IN aOffset
+ 'private' Ctx:Parser:PushSymbol
+ 'Const' Ctx:Parser:PushSymbol
+ aName MakeFieldOffsetName Ctx:Parser:PushSymbol
+ aOffset Ctx:Parser:PushInt
+; // define_member
+
 MACRO classExpander
  ^ IN anImpl
  // Тут можно копировать поля и методы
@@ -217,20 +231,6 @@ MACRO new[
  '@' Ctx:Parser:PushSymbol
  g_CurrentClassImpl Ctx:Parser:PushSymbol
 ; // new[
-
-PRIVATE STRING operator MakeFieldOffsetName
- STRING IN aName
- [ 'c:' g_CurrentClass ':Offset:' aName ] strings:Cat =: Result
-; // MakeFieldOffsetName
-
-VOID operator define_member
- STRING IN aName
- INTEGER IN aOffset
- 'private' Ctx:Parser:PushSymbol
- 'Const' Ctx:Parser:PushSymbol
- aName MakeFieldOffsetName Ctx:Parser:PushSymbol
- aOffset Ctx:Parser:PushInt
-; // define_member
 
 MACRO member
  Literal IN aName
