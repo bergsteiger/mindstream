@@ -214,7 +214,7 @@ MACRO constructor
 
 PRIVATE VOID operator MakeSelfParam
  g_CurrentClass Ctx:Parser:PushSymbol
- 'in' Ctx:Parser:PushSymbol
+ axiom:PushSymbol in
  'Self' Ctx:Parser:PushSymbol
 ; // MakeSelfParam
 

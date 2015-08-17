@@ -418,8 +418,8 @@ VOID Test PointTest
  PRIVATE VOID OPERATOR MakeSelfParam
   g_CurrentClass
   Ctx:Parser:PushSymbol
-  'in'
-  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  IN
   'Self'
   Ctx:Parser:PushSymbol
  ; // PRIVATE VOID OPERATOR MakeSelfParam
