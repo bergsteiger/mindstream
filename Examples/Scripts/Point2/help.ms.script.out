@@ -602,6 +602,7 @@ Dictionary: help.ms.script
   axiom:ActionList
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\Point2\Exports.script
+  H:\Dropbox\mindstream\Examples\Scripts\Point2\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\types.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\core.ms.dict
@@ -3359,6 +3360,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\Exports.script
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\Point2\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\types.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\core.ms.dict
@@ -3398,6 +3400,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\Exports.script
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\Point2\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\types.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\core.ms.dict
@@ -3413,36 +3416,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\Point2\CodeDump.ms.dict
  ;
 uses
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\macro.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\axiom_push.ms.dict
- ;
-IMMEDIATE VOID OPERATOR : _MACRO
-IMMEDIATE VOID OPERATOR : MACRO
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\axiom_push.ms.dict
  Uses: 
   axiom:axiom
@@ -3473,6 +3446,36 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\axiom_push.ms.dict
 VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
  LINK ^ OPERATOR :: IN : aSymbol
 ; // axiom:PushSymbol
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\macro.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\Point2\axiom_push.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR : _MACRO
+IMMEDIATE VOID OPERATOR : MACRO
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\types.ms.dict
  Uses: 
   axiom:axiom

@@ -34,7 +34,7 @@ PRIVATE VOID operator MangledNamePusher
 MACRO right
  Literal IN aName
  axiom:PushSymbol RIGHT
- 'IN' Ctx:Parser:PushSymbol
+ axiom:PushSymbol IN
 
  STRING VAR l_Name
  aName |N =: l_Name 

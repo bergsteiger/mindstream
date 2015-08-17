@@ -100,7 +100,7 @@ VOID OPERATOR class_impl
 // @SELF Ctx:SetWordProducerForCompiledClass
 // @ : pop:Word:Name Ctx:Parser:PushSymbol
 // aName |N Ctx:Parser:PushSymbol
-// //';' Ctx:Parser:PushSymbol
+// // axiom:PushSymbol ;
 //; // class_imp
 
 STRING var g_CurrentClass
@@ -116,7 +116,7 @@ PRIVATE STRING operator MakeFieldOffsetName
 VOID operator define_member
  STRING IN aName
  INTEGER IN aOffset
- 'private' Ctx:Parser:PushSymbol
+ axiom:PushSymbol private
  'Const' Ctx:Parser:PushSymbol
  aName MakeFieldOffsetName Ctx:Parser:PushSymbol
  aOffset Ctx:Parser:PushInt

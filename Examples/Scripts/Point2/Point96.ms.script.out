@@ -220,8 +220,8 @@ VOID Test PointTest
  VOID OPERATOR define_member
   STRING IN aName
   INTEGER IN aOffset
-  'private'
-  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  PRIVATE
   'Const'
   Ctx:Parser:PushSymbol
   aName
