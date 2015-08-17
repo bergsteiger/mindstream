@@ -7,7 +7,7 @@ USES
 MACRO RecurseProc
 // - процедура, которая умеет вызываться рекурсивно
  ^L IN aName
- 'FORWARD' Ctx:Parser:PushSymbol
+ axiom:PushSymbol FORWARD
  aName |N Ctx:Parser:PushSymbol
 
  'PROCEDURE' Ctx:Parser:PushSymbol
