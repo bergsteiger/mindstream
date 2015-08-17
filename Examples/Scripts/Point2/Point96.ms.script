@@ -182,7 +182,7 @@ PRIVATE VOID operator MakeMethodSignature
  [ g_CurrentClass ':' aName ] strings:Cat Ctx:Parser:PushSymbol
 ; // MakeMethodSignature
 
-IMMEDIATE VOID operator constructor
+_MACRO operator constructor
 // - конструктор объектов, пока "фиктивный"
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
@@ -196,7 +196,7 @@ PRIVATE VOID operator MakeSelfParam
  'Self' Ctx:Parser:PushSymbol
 ; // MakeSelfParam
 
-IMMEDIATE VOID operator method
+_MACRO operator method
 // - метод объекта, пока "фиктивный"
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
@@ -204,7 +204,7 @@ IMMEDIATE VOID operator method
  MakeSelfParam
 ; // method
 
-IMMEDIATE VOID operator readonly
+_MACRO operator readonly
 // - read-only свойство объекта, пока "фиктивное"
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
@@ -212,7 +212,7 @@ IMMEDIATE VOID operator readonly
  MakeSelfParam
 ; // readonly
 
-IMMEDIATE VOID operator new[
+_MACRO operator new[
  '[' Ctx:Parser:PushSymbol
  '@' Ctx:Parser:PushSymbol
  g_CurrentClassImpl Ctx:Parser:PushSymbol
@@ -223,7 +223,7 @@ PRIVATE STRING operator MakeFieldOffsetName
  [ 'c:' g_CurrentClass ':Offset:' aName ] strings:Cat =: Result
 ; // MakeFieldOffsetName
 
-IMMEDIATE VOID operator member
+_MACRO operator member
  Literal IN aName
  Ctx:ClearTypeInfo
  'private' Ctx:Parser:PushSymbol
@@ -245,7 +245,7 @@ _MACRO operator RunCompileFields
  ] Ctx:Parser:PushArray
 ; // RunCompileFields
 
-IMMEDIATE VOID operator members-end
+_MACRO operator members-end
  'private' Ctx:Parser:PushSymbol
  'Const' Ctx:Parser:PushSymbol
  [ 'c:' g_CurrentClass ':Instance:Size' ] strings:Cat Ctx:Parser:PushSymbol
