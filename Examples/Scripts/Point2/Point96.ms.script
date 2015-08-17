@@ -379,7 +379,7 @@ constructor :
  new[ aTopLeft aBottomRight ] =: Result
 ; // :
 
-STRING method ToPrintable
+OVERRIDE STRING method ToPrintable
  [ '( ' 'TopLeft: ' Self Rectangle:TopLeft Point:ToPrintable ', BottomRight: ' Self Rectangle:BottomRight Point:ToPrintable ' )' ] strings:Cat =: Result
 ; // ToPrintable
 

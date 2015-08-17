@@ -824,7 +824,7 @@ VOID Test PointTest
   Result
  ; // Point readonly Rectangle:TopLeft
  
- STRING method Rectangle:ToPrintable
+ OVERRIDE STRING method Rectangle:ToPrintable
   Rectangle IN Self
   [
    '( '
@@ -841,7 +841,7 @@ VOID Test PointTest
   strings:Cat
   >>>
   Result
- ; // STRING method Rectangle:ToPrintable
+ ; // OVERRIDE STRING method Rectangle:ToPrintable
  
  IMMEDIATE VOID OPERATOR RunCompileFields
   [
