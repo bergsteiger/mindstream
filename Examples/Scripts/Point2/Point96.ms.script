@@ -160,7 +160,7 @@ MACRO class
  g_CurrentClassMembers := [ ]
  g_ClassFieldOffset := 0
  aName |N =: g_CurrentClass
- //'class_impl' Ctx:Parser:PushSymbol
+ // axiom:PushSymbol class_impl
  // - вообще должно быть так, почему не работает - надо разбираться
  [
   ':' 
@@ -187,7 +187,7 @@ MACRO class
   g_CurrentClass
  ] Ctx:Parser:PushArray
 
- 'classExpander' Ctx:Parser:PushSymbol
+ axiom:PushSymbol classExpander
  g_CurrentClassImpl Ctx:Parser:PushSymbol
 
 ; // class

@@ -163,8 +163,8 @@ VOID Test PointTest
    g_CurrentClass
   ]
   Ctx:Parser:PushArray
-  'classExpander'
-  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  classExpander
   g_CurrentClassImpl
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR class
