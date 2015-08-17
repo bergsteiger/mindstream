@@ -10,7 +10,7 @@ MACRO RecurseProc
  axiom:PushSymbol FORWARD
  aName |N Ctx:Parser:PushSymbol
 
- 'PROCEDURE' Ctx:Parser:PushSymbol
+ axiom:PushSymbol PROCEDURE
  aName |N Ctx:Parser:PushSymbol
 ; // RecurseProc
 
@@ -28,7 +28,7 @@ FUNCTOR : |@
 
 MACRO this.do
 // - запускаем "себя же" рекурсивно
- '(' Ctx:Parser:PushSymbol
+ axiom:PushSymbol (
  '@SELF' Ctx:Parser:PushSymbol
  'DO' Ctx:Parser:PushSymbol
  ')' Ctx:Parser:PushSymbol
