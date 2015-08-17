@@ -613,7 +613,6 @@ Dictionary: help.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\Point2\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\string.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\Translate.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\CodeDump.ms.dict
  ;
 Dictionary: axiom:axiom
@@ -3370,7 +3369,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\Point2\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\string.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\Translate.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\CodeDump.ms.dict
  ;
  Exports: 
@@ -3409,7 +3407,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\Point2\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\string.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\Translate.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\CodeDump.ms.dict
  ;
 uses
@@ -3843,99 +3840,6 @@ STRING FUNCTION : string:CatWihAny
  OPERATOR :: IN : aValue
  STRING FUNCTION :: string:CatWihAny : Result
 ; // string:CatWihAny
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\Translate.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\arrays.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\to.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\filter.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\map.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\reverted.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\io.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\math.ms.dict
- ;
-ARRAY "в обратном порядке"
-: : "вывести разделитель"
-INTEGER FUNCTION : "увеличить на 1"
- INTEGER OPERATOR :: IN : aValue
- INTEGER FUNCTION :: Inc1 : Result
-; // "увеличить на 1"
-INTEGER FUNCTION : "увеличить на"
- ^ OPERATOR :: IN : anInc
- INTEGER OPERATOR :: IN : aValue
- INTEGER FUNCTION :: IncWith : Result
-; // "увеличить на"
-INTEGER FUNCTION : "уменьшить на 1"
- INTEGER OPERATOR :: IN : aValue
- INTEGER FUNCTION :: Dec1 : Result
-; // "уменьшить на 1"
-INTEGER FUNCTION : "уменьшить на"
- ^ OPERATOR :: IN : aDec
- INTEGER OPERATOR :: IN : aValue
- INTEGER FUNCTION :: DecWith : Result
-; // "уменьшить на"
-ARRAY FUNCTION : каждое
- ^ OPERATOR :: IN : aFunctor
- ^@ OPERATOR :: IN : anArray
- ARRAY FUNCTION :: >map> : Result
-; // каждое
-REDIFINITION : : напечатать
-==> Redefines
- VOID .
-<== Redefines
-BOOLEAN FUNCTION : нечётные
- INTEGER OPERATOR :: IN : aValue
- BOOLEAN FUNCTION :: IsOdd : Result
-; // нечётные
-ARRAY FUNCTION : отобрать
- ^ OPERATOR :: IN : aFunctor
- ^@ OPERATOR :: IN : anArray
- ARRAY FUNCTION :: >filter> : Result
-; // отобрать
-OPERATOR : перебрать
- ^ OPERATOR :: IN : aList
- ^ OPERATOR :: IN : aWhatToDo
-; // перебрать
-ARRAY OPERATOR : по
- ^@ OPERATOR :: IN : aFrom
- ^ OPERATOR :: IN : aTo
- ARRAY OPERATOR :: to : Result
-; // по
-: : разделитель
-: : с
- ^ OPERATOR :: IN : aValue
-; // с
-BOOLEAN FUNCTION : чётные
- INTEGER OPERATOR :: IN : aValue
- BOOLEAN FUNCTION :: IsEven : Result
-; // чётные
-ARRAY FUNCTION : числа
- ^ OPERATOR :: IN : anArray
- ARRAY FUNCTION :: числа : Result
-; // числа
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\CodeDump.ms.dict
  Uses: 
   axiom:axiom
