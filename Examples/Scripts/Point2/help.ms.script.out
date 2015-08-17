@@ -3545,7 +3545,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\axiom_push.ms.dict
   axiom:ContainedAction
  ;
 VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
- LINK ^ OPERATOR :: IN : aSymbol
+ REFERENCE ^ OPERATOR :: IN : aSymbol
 ; // axiom:PushSymbol
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\params.ms.dict
  Uses: 
