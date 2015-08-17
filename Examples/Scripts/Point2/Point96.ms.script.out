@@ -404,8 +404,8 @@ VOID Test PointTest
  
  PRIVATE VOID OPERATOR MakeMethodSignature
   STRING IN aName
-  ':'
-  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  :
   [
    g_CurrentClass
    ':'

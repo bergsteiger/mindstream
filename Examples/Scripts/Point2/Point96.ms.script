@@ -200,7 +200,7 @@ INTEGER type FieldOffset
 
 PRIVATE VOID operator MakeMethodSignature
  STRING IN aName
- ':' Ctx:Parser:PushSymbol
+ axiom:PushSymbol :
  [ g_CurrentClass ':' aName ] strings:Cat Ctx:Parser:PushSymbol
 ; // MakeMethodSignature
 
