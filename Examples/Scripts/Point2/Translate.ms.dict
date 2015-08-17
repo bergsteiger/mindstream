@@ -33,7 +33,7 @@ WordAlias "вывести разделитель" разделитель
 
 ARRAY FUNCTION числа
  ^ IN anArray
- anArray DO >>> Result
+ anArray DO =: Result
 ; // числа
 
 WordAlias каждое >map>
