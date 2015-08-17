@@ -6,10 +6,10 @@
 STRING FUNCTION string:CatWihAny
  STRING IN aString
  IN aValue
- aString aValue ToPrintable Cat >>> Result
+ aString aValue ToPrintable Cat =: Result
 ; // string:CatWihAny
 
 STRING FUNCTION any:Cat
   ARRAY IN anArray
- '' for anArray string:CatWihAny >>> Result
+ '' for anArray string:CatWihAny =: Result
 ; // any:Cat
