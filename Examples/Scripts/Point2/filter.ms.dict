@@ -3,5 +3,5 @@ WordAlias filter FILTER
 ARRAY FUNCTION >filter>
  ^@ FUNCTOR IN anArray
  ^ FUNCTOR IN aFunctor
- aFunctor anArray DO filter >>> Result
+ aFunctor anArray DO filter =: Result
 ; // >filter>
