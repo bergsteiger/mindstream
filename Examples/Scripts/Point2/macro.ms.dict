@@ -2,3 +2,9 @@ VOID IMMEDIATE operator _MACRO
  'VOID' Ctx:Parser:PushSymbol
  'IMMEDIATE' Ctx:Parser:PushSymbol
 ; // _MACRO
+
+VOID IMMEDIATE operator MACRO
+ 'VOID' Ctx:Parser:PushSymbol
+ 'IMMEDIATE' Ctx:Parser:PushSymbol
+ 'axiom:operator' Ctx:Parser:PushSymbol
+; // MACRO
