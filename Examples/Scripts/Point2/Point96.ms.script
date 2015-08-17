@@ -94,7 +94,7 @@ VOID OPERATOR class_impl
 // Тут мы будем хранить всю информацию о классе - предки, поля, методы
 ; // class_impl
 
-//_MACRO OPERATOR class_impl
+//MACRO class_impl
 //// - имплементация класса, пока "фиктивная"
 // Literal IN aName
 // @SELF Ctx:SetWordProducerForCompiledClass
@@ -108,7 +108,7 @@ g_CurrentClass := ''
 STRING var g_CurrentClassImpl
 g_CurrentClassImpl := ''
 
-_MACRO OPERATOR classExpander
+MACRO classExpander
  ^ IN anImpl
  // Тут можно копировать поля и методы
  for ( ( anImpl |@ ) %G ) ( 
@@ -133,7 +133,7 @@ g_ClassFieldOffset := 0
 
 CONST cObjectName 'Object'
 
-_MACRO OPERATOR class
+MACRO class
  Literal IN aName
  g_CurrentClassMembers := [ ]
  g_ClassFieldOffset := 0
@@ -170,7 +170,7 @@ _MACRO OPERATOR class
 
 ; // class
 
-_MACRO OPERATOR class-end
+MACRO class-end
 ; // class-end
 
 INTEGER type FieldOffset
@@ -182,7 +182,7 @@ PRIVATE VOID operator MakeMethodSignature
  [ g_CurrentClass ':' aName ] strings:Cat Ctx:Parser:PushSymbol
 ; // MakeMethodSignature
 
-_MACRO operator constructor
+MACRO constructor
 // - конструктор объектов, пока "фиктивный"
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
@@ -196,7 +196,7 @@ PRIVATE VOID operator MakeSelfParam
  'Self' Ctx:Parser:PushSymbol
 ; // MakeSelfParam
 
-_MACRO operator method
+MACRO method
 // - метод объекта, пока "фиктивный"
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
@@ -204,7 +204,7 @@ _MACRO operator method
  MakeSelfParam
 ; // method
 
-_MACRO operator readonly
+MACRO readonly
 // - read-only свойство объекта, пока "фиктивное"
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
@@ -212,7 +212,7 @@ _MACRO operator readonly
  MakeSelfParam
 ; // readonly
 
-_MACRO operator new[
+MACRO new[
  '[' Ctx:Parser:PushSymbol
  '@' Ctx:Parser:PushSymbol
  g_CurrentClassImpl Ctx:Parser:PushSymbol
@@ -223,7 +223,7 @@ PRIVATE STRING operator MakeFieldOffsetName
  [ 'c:' g_CurrentClass ':Offset:' aName ] strings:Cat =: Result
 ; // MakeFieldOffsetName
 
-_MACRO operator member
+MACRO member
  Literal IN aName
  Ctx:ClearTypeInfo
  'private' Ctx:Parser:PushSymbol
@@ -234,7 +234,7 @@ _MACRO operator member
  aName |N array:AddTo g_CurrentClassMembers
 ; // member
 
-_MACRO operator RunCompileFields
+MACRO RunCompileFields
  [
   'implementation'
   g_CurrentClassImpl
@@ -245,7 +245,7 @@ _MACRO operator RunCompileFields
  ] Ctx:Parser:PushArray
 ; // RunCompileFields
 
-_MACRO operator members-end
+MACRO members-end
  'private' Ctx:Parser:PushSymbol
  'Const' Ctx:Parser:PushSymbol
  [ 'c:' g_CurrentClass ':Instance:Size' ] strings:Cat Ctx:Parser:PushSymbol
@@ -267,12 +267,12 @@ PRIVATE operator do-get-member
  aName MakeFieldOffsetName Ctx:Parser:PushSymbol 
 ; // do-get-member
 
-_MACRO operator get-member
+MACRO get-member
  Literal IN aName
  aName |N do-get-member
 ; // get-member
 
-_MACRO operator read
+MACRO read
  Literal IN aName
  'Self' Ctx:Parser:PushSymbol 
  aName |N do-get-member
