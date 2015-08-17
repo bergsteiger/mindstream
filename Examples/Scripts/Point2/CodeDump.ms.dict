@@ -32,7 +32,7 @@ STRING FUNCTION Check STRING IN aName
 
 STRING FUNCTION CodeName OBJECT IN aCode
  STRING VAR l_Name 
- aCode pop:Word:Name >>> l_Name
+ aCode pop:Word:Name =: l_Name
  if ( aCode Is class::TkwString ) then
   (
    Result :=  ( [ '''' l_Name '''' ] strings:Cat )
@@ -95,7 +95,7 @@ STRING FUNCTION EndBracket
 PROCEDURE DumpElementPrim BOOLEAN IN aNeedStereo OBJECT IN aCode
 
  STRING VAR l_Name
- aCode CodeName >>> l_Name
+ aCode CodeName =: l_Name
  
  if aNeedStereo then
   ( 
@@ -108,15 +108,15 @@ PROCEDURE DumpElementPrim BOOLEAN IN aNeedStereo OBJECT IN aCode
  STRING VAR l_Stereo 
  STRING VAR l_Directives
  
- aCode pop:Word:Producer CodeName >>> l_Stereo
- aCode pop:Word:Directives >>> l_Directives
+ aCode pop:Word:Producer CodeName =: l_Stereo
+ aCode pop:Word:Directives =: l_Directives
  
  if aNeedStereo then
   (
    if ( l_Stereo <> '' ) then
-    ( [ l_Stereo l_Name ] ' ' strings:CatSep >>> l_Name )
+    ( [ l_Stereo l_Name ] ' ' strings:CatSep =: l_Name )
    if ( ( l_Directives <> '' ) AND ( l_Directives <> ' ' ) ) then 
-    ( [ l_Directives l_Name ] ' ' strings:CatSep >>> l_Name )
+    ( [ l_Directives l_Name ] ' ' strings:CatSep =: l_Name )
   )  
 
  if ( l_Name <> '' ) then
@@ -191,15 +191,15 @@ PROCEDURE DumpCodeCall OBJECT IN aCode
         aCode CodeName
        )
        Result 
-      ] ' ' strings:CatSep >>> Result 
+      ] ' ' strings:CatSep =: Result 
      )
    ) 
  ; // CalcLeftParams
  
  STRING VAR l_Name
- aCode CodeName >>> l_Name 
+ aCode CodeName =: l_Name 
  
- aCode l_Name CalcLeftParams >>> l_Name
+ aCode l_Name CalcLeftParams =: l_Name
   
  BOOLEAN VAR l_NeedBracket
  l_NeedBracket := false
