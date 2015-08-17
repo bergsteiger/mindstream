@@ -193,7 +193,9 @@ VOID Test PointTest
    )
    (
     IN anItem
-    'member'
+    @
+    member
+    pop:Word:Name
     Ctx:Parser:PushSymbol
     anItem
     |N
