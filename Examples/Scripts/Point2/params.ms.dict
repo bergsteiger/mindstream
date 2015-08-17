@@ -19,11 +19,15 @@ MACRO Literal
  aName |N Ctx:Parser:PushSymbol
 ; // Literal
 
+USES
+ core.ms.dict
+;
+
 PRIVATE VOID operator MangledNamePusher
  STRING IN aName
  axiom:PushSymbol (
  aName Ctx:Parser:PushSymbol
- '|^' Ctx:Parser:PushSymbol
+ axiom:PushSymbol |^
  ')' Ctx:Parser:PushSymbol
 ; // MangledNamePusher
 
