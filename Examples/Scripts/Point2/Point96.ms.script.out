@@ -539,19 +539,26 @@ VOID Test PointTest
  
  Point constructor Point::
   ^ IN _aX
+  ^ IN _aY
   IMMEDIATE VOID OPERATOR aX
    '_aX'
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aX
   
-  ^ IN aY
+  IMMEDIATE VOID OPERATOR aY
+   '_aY'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aY
+  
   [
    @
    _:Point
    (
     _aX |^
    )
-   aY |^
+   (
+    _aY |^
+   )
   ]
   >>>
   Result
@@ -748,13 +755,27 @@ VOID Test PointTest
  ; // IMMEDIATE VOID OPERATOR Rectangle
  
  Rectangle constructor Rectangle::
-  ^ IN aBottomRight
-  ^ IN aTopLeft
+  ^ IN _aBottomRight
+  ^ IN _aTopLeft
+  IMMEDIATE VOID OPERATOR aBottomRight
+   '_aBottomRight'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aBottomRight
+  
+  IMMEDIATE VOID OPERATOR aTopLeft
+   '_aTopLeft'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aTopLeft
+  
   [
    @
    _:Rectangle
-   aTopLeft |^
-   aBottomRight |^
+   (
+    _aTopLeft |^
+   )
+   (
+    _aBottomRight |^
+   )
   ]
   >>>
   Result

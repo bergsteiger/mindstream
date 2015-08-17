@@ -307,8 +307,8 @@ members-end
 
 constructor :
  Pixel right aX
- Pixel RightParam aY
- new[ aX aY |^ ] >>> Result
+ Pixel right aY
+ new[ aX aY ] >>> Result
 ; // :
 
 constructor 0
@@ -368,9 +368,9 @@ Point readonly TopLeft read TopLeft
 Point readonly BottomRight read BottomRight
 
 constructor :
- Point RightParam aTopLeft
- Point RightParam aBottomRight
- new[ aTopLeft |^ aBottomRight |^ ] >>> Result
+ Point right aTopLeft
+ Point right aBottomRight
+ new[ aTopLeft aBottomRight ] >>> Result
 ; // :
 
 STRING method ToPrintable
