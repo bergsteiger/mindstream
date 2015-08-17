@@ -1,3 +1,7 @@
+USES
+ axiom_push.ms.dict
+;
+
 VOID IMMEDIATE operator _MACRO
  'VOID' Ctx:Parser:PushSymbol
  'IMMEDIATE' Ctx:Parser:PushSymbol
