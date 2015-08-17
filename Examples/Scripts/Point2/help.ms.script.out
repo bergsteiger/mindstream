@@ -3498,6 +3498,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\core.ms.dict
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\Point2\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\types.ms.dict
  ;
@@ -3516,6 +3517,36 @@ IMMEDIATE VOID OPERATOR : RecurseProc
  ^L OPERATOR :: IN : aName
 ; // RecurseProc
 IMMEDIATE VOID OPERATOR : this.do
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\axiom_push.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
+ ^ OPERATOR :: IN : aSymbol
+; // axiom:PushSymbol
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\params.ms.dict
  Uses: 
   axiom:axiom
