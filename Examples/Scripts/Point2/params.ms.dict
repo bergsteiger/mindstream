@@ -21,7 +21,7 @@ MACRO Literal
 
 PRIVATE VOID operator MangledNamePusher
  STRING IN aName
- '(' Ctx:Parser:PushSymbol
+ axiom:PushSymbol (
  aName Ctx:Parser:PushSymbol
  '|^' Ctx:Parser:PushSymbol
  ')' Ctx:Parser:PushSymbol
