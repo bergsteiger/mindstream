@@ -3478,6 +3478,10 @@ FUNCTOR : : |@
 : : |^
  ^@ OPERATOR :: IN : aRef
 ; // |^
+VOID OPERATOR : array:AddTo
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+; // array:AddTo
 IMMEDIATE VOID OPERATOR : RecurseProc
  ^L OPERATOR :: IN : aName
 ; // RecurseProc

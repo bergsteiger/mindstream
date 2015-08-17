@@ -228,7 +228,7 @@ IMMEDIATE VOID operator member
  aName |N MakeFieldOffsetName Ctx:Parser:PushSymbol
  g_ClassFieldOffset Ctx:Parser:PushInt
  Inc g_ClassFieldOffset
- aName |N >>>[] g_CurrentClassMembers
+ aName |N array:AddTo g_CurrentClassMembers
 ; // member
 
 VOID IMMEDIATE operator RunCompileFields
