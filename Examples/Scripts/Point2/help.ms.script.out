@@ -611,9 +611,6 @@ Dictionary: help.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\Point2\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\arrays.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\to.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\filter.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\map.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\CodeDump.ms.dict
  ;
@@ -3369,9 +3366,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\Point2\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\arrays.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\to.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\filter.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\map.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\CodeDump.ms.dict
  ;
@@ -3409,9 +3403,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\Point2\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\arrays.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\to.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\filter.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\map.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\CodeDump.ms.dict
  ;
@@ -3715,9 +3706,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\arrays.ms.dict
   axiom:ActionList
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\Point2\to.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\filter.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\map.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\reverted.ms.dict
  ;
  Exports: 
   axiom:axiom
@@ -3745,9 +3733,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\arrays.ms.dict
   axiom:ActionList
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\Point2\to.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\filter.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\map.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\reverted.ms.dict
  ;
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\to.ms.dict
  Uses: 
@@ -3781,102 +3766,6 @@ ARRAY OPERATOR : to
  ^ OPERATOR :: IN : aTo
  ARRAY OPERATOR :: to : Result
 ; // to
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\filter.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
- ;
-ARRAY FUNCTION : >filter>
- ^ OPERATOR :: IN : aFunctor
- ^@ OPERATOR :: IN : anArray
- ARRAY FUNCTION :: >filter> : Result
-; // >filter>
-ARRAY filter
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\map.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
- ;
-ARRAY FUNCTION : >map>
- ^ OPERATOR :: IN : aFunctor
- ^@ OPERATOR :: IN : anArray
- ARRAY FUNCTION :: >map> : Result
-; // >map>
-ARRAY map
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\reverted.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
- ;
-ARRAY >reverted>
-ARRAY reverted
-ARRAY REVERTED
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\string.ms.dict
  Uses: 
   axiom:axiom
