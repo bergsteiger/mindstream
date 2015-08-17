@@ -615,7 +615,6 @@ Dictionary: help.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\Point2\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\Translate.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\CodeDump.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\files.ms.dict
  ;
 Dictionary: axiom:axiom
  Uses: 
@@ -3373,7 +3372,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\Point2\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\Translate.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\CodeDump.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\files.ms.dict
  ;
  Exports: 
   axiom:axiom
@@ -3413,7 +3411,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\Point2\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\Translate.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\CodeDump.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\files.ms.dict
  ;
 uses
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\types.ms.dict
@@ -4020,61 +4017,4 @@ VOID WORDWORKER : OutEx
  STRING OPERATOR :: VAR : aValue
  ^ OPERATOR :: IN : WordToWork
 ; // OutEx
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\files.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\core.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\Point2\params.ms.dict
- ;
-VOID OPERATOR :: PROCEDURE : IterateDirs
- ^ OPERATOR :: IN : aLabda
- ^ OPERATOR :: IN : aRoot
-; // IterateDirs
-VOID OPERATOR :: PROCEDURE : IterateFilesWithMask
- ^ OPERATOR :: IN : aDir
- ^ OPERATOR :: IN : aLambda
- ^ OPERATOR :: IN : aMask
-; // IterateFilesWithMask
-VOID OPERATOR :: PROCEDURE : ProcessAnySubDirsWithMasks
- ^ OPERATOR :: IN : aDirMasks
- ^ OPERATOR :: IN : aFileMasks
- ^ OPERATOR :: IN : aLambda
-; // ProcessAnySubDirsWithMasks
-VOID OPERATOR :: PROCEDURE : ProcessSubDirsWithMasks
- ^ OPERATOR :: IN : aLambda
- ^ OPERATOR :: IN : aMaskArray
- ^ OPERATOR :: IN : aRoot
- PRIVATE VOID OPERATOR :: PROCEDURE : DoDir
-  ^ OPERATOR :: IN : aDir
-  PRIVATE VOID OPERATOR :: PROCEDURE : DoFile
-   STRING OPERATOR :: IN : anFilePath
-  ; // DoFile
- ; // DoDir
- PRIVATE VOID OPERATOR :: PROCEDURE : ProcessItem
-  STRING OPERATOR :: IN : aDir
- ; // ProcessItem
-; // ProcessSubDirsWithMasks
 TkwMain : Main
