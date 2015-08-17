@@ -1,9 +1,9 @@
 WordAlias RIGHT ^
 
-VOID IMMEDIATE operator RightParam
+/*{VOID IMMEDIATE operator RightParam
  'RIGHT' Ctx:Parser:PushSymbol
  'IN' Ctx:Parser:PushSymbol
-; // RightParam
+; // RightParam}*/
 
 WordAlias in IN
 
