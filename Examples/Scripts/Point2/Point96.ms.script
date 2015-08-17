@@ -94,7 +94,7 @@ VOID OPERATOR class_impl
 // Тут мы будем хранить всю информацию о классе - предки, поля, методы
 ; // class_impl
 
-//VOID IMMEDIATE OPERATOR class_impl
+//_MACRO OPERATOR class_impl
 //// - имплементация класса, пока "фиктивная"
 // Literal IN aName
 // @SELF Ctx:SetWordProducerForCompiledClass
@@ -108,7 +108,7 @@ g_CurrentClass := ''
 STRING var g_CurrentClassImpl
 g_CurrentClassImpl := ''
 
-VOID IMMEDIATE OPERATOR classExpander
+_MACRO OPERATOR classExpander
  ^ IN anImpl
  // Тут можно копировать поля и методы
  for ( ( anImpl |@ ) %G ) ( 
@@ -133,7 +133,7 @@ g_ClassFieldOffset := 0
 
 CONST cObjectName 'Object'
 
-VOID IMMEDIATE OPERATOR class
+_MACRO OPERATOR class
  Literal IN aName
  g_CurrentClassMembers := [ ]
  g_ClassFieldOffset := 0
@@ -170,7 +170,7 @@ VOID IMMEDIATE OPERATOR class
 
 ; // class
 
-VOID IMMEDIATE OPERATOR class-end
+_MACRO OPERATOR class-end
 ; // class-end
 
 INTEGER type FieldOffset
@@ -234,7 +234,7 @@ IMMEDIATE VOID operator member
  aName |N array:AddTo g_CurrentClassMembers
 ; // member
 
-VOID IMMEDIATE operator RunCompileFields
+_MACRO operator RunCompileFields
  [
   'implementation'
   g_CurrentClassImpl
@@ -267,12 +267,12 @@ PRIVATE operator do-get-member
  aName MakeFieldOffsetName Ctx:Parser:PushSymbol 
 ; // do-get-member
 
-VOID IMMEDIATE operator get-member
+_MACRO operator get-member
  Literal IN aName
  aName |N do-get-member
 ; // get-member
 
-VOID IMMEDIATE operator read
+_MACRO operator read
  Literal IN aName
  'Self' Ctx:Parser:PushSymbol 
  aName |N do-get-member
