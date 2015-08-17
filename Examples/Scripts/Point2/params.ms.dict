@@ -1,0 +1,46 @@
+WordAlias RIGHT ^
+
+VOID IMMEDIATE operator RightParam
+ 'RIGHT' Ctx:Parser:PushSymbol
+ 'IN' Ctx:Parser:PushSymbol
+; // RightParam
+
+WordAlias in IN
+
+IMMEDIATE VOID operator Literal
+ ^L IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ '^L' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // Literal
+
+PRIVATE VOID operator MangledNamePusher
+ STRING IN aName
+ '(' Ctx:Parser:PushSymbol
+ aName Ctx:Parser:PushSymbol
+ '|^' Ctx:Parser:PushSymbol
+ ')' Ctx:Parser:PushSymbol
+; // MangledNamePusher
+
+VOID IMMEDIATE operator right
+ Literal IN aName
+ 'RIGHT' Ctx:Parser:PushSymbol
+ 'IN' Ctx:Parser:PushSymbol
+
+ STRING VAR l_Name
+ aName |N >>> l_Name 
+
+ STRING VAR l_MangledName
+ [ '_' l_Name ] strings:Cat >>> l_MangledName
+
+ l_MangledName Ctx:Parser:PushSymbol
+ 
+  [
+   'VOID IMMEDIATE axiom:operator' 
+   l_Name 
+   [ '`' l_MangledName '`' ] strings:Cat
+   'MangledNamePusher'
+   ';'
+  ] Ctx:Parser:PushArray
+
+; // right

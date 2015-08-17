@@ -1,0 +1,55 @@
+USES
+ core.ms.dict
+ params.ms.dict
+;
+
+PROCEDURE IterateFilesWithMask
+  ^ IN aDir
+  ^ IN aMask
+  ^ IN aLambda
+  aLambda aMask |^ aDir |^ ProcessFilesWithMask
+; // IterateFilesWithMask
+
+PROCEDURE IterateDirs
+ ^ IN aRoot
+ ^ IN aLabda
+ aLabda aRoot |^ ProcessSubDirs
+; // IterateDirs
+
+PROCEDURE ProcessSubDirsWithMasks
+ RightParam aRoot
+ RightParam aMaskArray
+ RightParam aLambda
+
+ PRIVATE PROCEDURE DoDir
+  RightParam aDir
+
+  PRIVATE PROCEDURE DoFile
+   STRING IN anFilePath
+   anFilePath aLambda |@ DO
+  ; // DoFile
+
+  for ( aMaskArray |^ ) (
+   STRING IN aMask
+   IterateFilesWithMask aDir aMask DoFile
+  )
+ ; // DoDir
+
+ PRIVATE PROCEDURE ProcessItem
+  STRING IN aDir
+  DoDir aDir
+  IterateDirs aDir ( this.do )
+ ; // ProcessItem
+
+ aRoot DO ProcessItem
+; // ProcessSubDirsWithMasks
+
+PROCEDURE ProcessAnySubDirsWithMasks
+
+ RightParam aDirMasks
+ RightParam aFileMasks
+ RightParam aLambda
+
+ for ( aDirMasks |^ ) ( STRING IN aDirMask ProcessSubDirsWithMasks aDirMask ( aFileMasks |^ ) ( aLambda |@ DO ) )
+
+; // ProcessAnySubDirsWithMasks
