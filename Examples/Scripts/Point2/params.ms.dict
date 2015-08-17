@@ -28,10 +28,10 @@ VOID IMMEDIATE operator right
  'IN' Ctx:Parser:PushSymbol
 
  STRING VAR l_Name
- aName |N >>> l_Name 
+ aName |N =: l_Name 
 
  STRING VAR l_MangledName
- [ '_' l_Name ] strings:Cat >>> l_MangledName
+ [ '_' l_Name ] strings:Cat =: l_MangledName
 
  l_MangledName Ctx:Parser:PushSymbol
  
