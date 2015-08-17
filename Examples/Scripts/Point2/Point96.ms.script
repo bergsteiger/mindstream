@@ -98,7 +98,7 @@ VOID OPERATOR class_impl
 //// - имплементация класса, пока "фиктивная"
 // Literal IN aName
 // @SELF Ctx:SetWordProducerForCompiledClass
-// @ : pop:Word:Name Ctx:Parser:PushSymbol
+// axiom:PushSymbol : 
 // aName |N Ctx:Parser:PushSymbol
 // // axiom:PushSymbol ;
 //; // class_imp
@@ -147,7 +147,7 @@ MACRO classExpander
   IN anItem 
   for ( anItem %Fld ) ( 
    IN anItem 
-   @ member pop:Word:Name Ctx:Parser:PushSymbol
+   axiom:PushSymbol member
    anItem |N Ctx:Parser:PushSymbol
   ) 
  )

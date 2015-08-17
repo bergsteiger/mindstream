@@ -193,10 +193,8 @@ VOID Test PointTest
    )
    (
     IN anItem
-    @
+    axiom:PushSymbol
     member
-    pop:Word:Name
-    Ctx:Parser:PushSymbol
     anItem
     |N
     Ctx:Parser:PushSymbol
