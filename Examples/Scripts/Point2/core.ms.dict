@@ -21,7 +21,7 @@ VOID IMMEDIATE operator RecurseProc
 FUNCTOR : |@
 // - получаем ссылку из параметра слева
  ^@ IN aRef
- aRef pop:Word:GetRef >>> Result
+ aRef pop:Word:GetRef =: Result
 ; // |@
 
 VOID IMMEDIATE OPERATOR this.do
