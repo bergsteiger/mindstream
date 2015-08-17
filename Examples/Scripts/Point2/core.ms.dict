@@ -29,9 +29,9 @@ FUNCTOR : |@
 MACRO this.do
 // - запускаем "себя же" рекурсивно
  axiom:PushSymbol (
- '@SELF' Ctx:Parser:PushSymbol
- 'DO' Ctx:Parser:PushSymbol
- ')' Ctx:Parser:PushSymbol
+ axiom:PushSymbol @SELF
+ axiom:PushSymbol DO
+ axiom:PushSymbol )
 ; // this.do
 
 WordAlias array:AddTo >>>[]
