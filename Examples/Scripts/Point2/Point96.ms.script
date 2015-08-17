@@ -162,7 +162,7 @@ MACRO class
   [ '_:' g_CurrentClass ] strings:Cat =: g_CurrentClassImpl
 
   g_CurrentClassImpl
-   if ( g_CurrentClass <> cObjectName ) then
+   if ( g_CurrentClass !== cObjectName ) then
    begin
     '%INHERITS'
     '@' 
