@@ -5,8 +5,8 @@ USES
 WordAlias RIGHT ^
 
 /*{MACRO RightParam
- 'RIGHT' Ctx:Parser:PushSymbol
- 'IN' Ctx:Parser:PushSymbol
+ axiom:PushSymbol RIGHT
+ axiom:PushSymbol IN
 ; // RightParam}*/
 
 WordAlias in IN
