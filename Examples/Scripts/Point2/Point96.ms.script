@@ -22,13 +22,6 @@ Test PointTest
   if ( l_NewCompiler Is class::TkwCompiledWordWorkerWord ) then
   begin
    l_NewCompiler pop:CompiledWordWorkerWord:Compiled =: l_NewCompiler
-/*{   l_NewCompiler CodeIterator ==> ( IN anItem 
-    if ( NOT ( anItem %P pop:object:IsNil ) ) then
-    begin
-     anItem %P =: l_NewCompiler
-     BREAK-ITERATOR
-    end 
-   )}*/
   end
   
   l_NewCompiler pop:Compiler:SetToCtx
