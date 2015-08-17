@@ -498,6 +498,14 @@ VOID Test PointTest
   Result
  ; // STRING readonly Object:ClassName
  
+ STRING method Object:ToPrintable
+  Object IN Self
+  Self
+  ToPrintable
+  >>>
+  Result
+ ; // STRING method Object:ToPrintable
+ 
  Point VAR P1
  Point VAR P10
  Point VAR P11

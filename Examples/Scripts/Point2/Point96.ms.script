@@ -260,6 +260,10 @@ class Object
  anOffset Self [i]
 ; // FieldByOffset
 
+STRING method ToPrintable
+ Self ToPrintable =: Result
+; // ToPrintable
+
 PRIVATE operator do-get-member
  STRING IN aName
  axiom:PushSymbol FieldByOffset
