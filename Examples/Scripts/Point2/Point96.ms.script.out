@@ -233,8 +233,8 @@ VOID Test PointTest
  
  PRIVATE OPERATOR do-get-member
   STRING IN aName
-  'FieldByOffset'
-  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  FieldByOffset
   aName
   MakeFieldOffsetName
   Ctx:Parser:PushSymbol
@@ -743,12 +743,12 @@ VOID Test PointTest
   aName
   |N
   do-get-member
-  '=:'
-  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  >>>
   'Result'
   Ctx:Parser:PushSymbol
-  ';'
-  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  ;
  ; // IMMEDIATE VOID OPERATOR read
  
  IMMEDIATE VOID OPERATOR readonly

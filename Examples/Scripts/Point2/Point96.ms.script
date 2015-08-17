@@ -269,7 +269,7 @@ class Object
 
 PRIVATE operator do-get-member
  STRING IN aName
- 'FieldByOffset' Ctx:Parser:PushSymbol
+ axiom:PushSymbol FieldByOffset
  aName MakeFieldOffsetName Ctx:Parser:PushSymbol 
 ; // do-get-member
 
@@ -282,9 +282,9 @@ MACRO read
  Literal IN aName
  'Self' Ctx:Parser:PushSymbol 
  aName |N do-get-member
- '=:' Ctx:Parser:PushSymbol 
+ axiom:PushSymbol =:
  'Result' Ctx:Parser:PushSymbol
- ';' Ctx:Parser:PushSymbol
+ axiom:PushSymbol ;
 ; // read
 
 INTEGER member VMT
