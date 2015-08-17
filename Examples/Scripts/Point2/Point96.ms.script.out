@@ -141,7 +141,7 @@ VOID Test PointTest
     (
      g_CurrentClass
      <>
-     'Object'
+     cObjectName
     )
    then
     BEGIN
@@ -202,6 +202,8 @@ VOID Test PointTest
   )
  ; // IMMEDIATE VOID OPERATOR classExpander
  
+ STRING CONST cObjectName
+  'Object'
  IMMEDIATE VOID OPERATOR constructor
   ^L IN aName
   constructor

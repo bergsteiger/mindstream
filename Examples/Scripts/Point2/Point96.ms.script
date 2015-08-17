@@ -130,6 +130,8 @@ INTEGER VAR g_ClassFieldOffset
 ( g_ClassFieldOffset := 0 )
 g_ClassFieldOffset := 0
 
+CONST cObjectName 'Object'
+
 VOID IMMEDIATE OPERATOR class
  Literal IN aName
  g_CurrentClassMembers := [ ]
@@ -144,7 +146,7 @@ VOID IMMEDIATE OPERATOR class
   [ '_:' g_CurrentClass ] strings:Cat =: g_CurrentClassImpl
 
   g_CurrentClassImpl
-   if ( g_CurrentClass <> 'Object' ) then
+   if ( g_CurrentClass <> cObjectName ) then
    begin
     '%INHERITS'
     '@' 
