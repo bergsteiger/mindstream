@@ -673,7 +673,7 @@ VOID Test PointTest
   .
  ; // VOID method Point:Print
  
- STRING method Point:ToPrintable
+ OVERRIDE STRING method Point:ToPrintable
   Point IN Self
   [
    '( '
@@ -690,7 +690,7 @@ VOID Test PointTest
   strings:Cat
   >>>
   Result
- ; // STRING method Point:ToPrintable
+ ; // OVERRIDE STRING method Point:ToPrintable
  
  Pixel readonly Point:X
   Point IN Self

@@ -260,7 +260,7 @@ class Object
  anOffset Self [i]
 ; // FieldByOffset
 
-STRING method ToPrintable
+VIRTUAL STRING method ToPrintable
  Self ToPrintable =: Result
 ; // ToPrintable
 
@@ -353,7 +353,7 @@ Point method -
  Point:OF ( Self Point:+ ( aPoint Point:Neg ) ) =: Result
 ; // -
 
-STRING method ToPrintable
+OVERRIDE STRING method ToPrintable
  [ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat =: Result
 ; // ToPrintable
 
