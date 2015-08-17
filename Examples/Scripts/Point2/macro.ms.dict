@@ -3,8 +3,8 @@ USES
 ;
 
 VOID IMMEDIATE operator _MACRO
- 'VOID' Ctx:Parser:PushSymbol
- 'IMMEDIATE' Ctx:Parser:PushSymbol
+ axiom:PushSymbol VOID
+ axiom:PushSymbol IMMEDIATE
 ; // _MACRO
 
 VOID IMMEDIATE operator MACRO
