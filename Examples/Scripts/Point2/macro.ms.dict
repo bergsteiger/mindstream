@@ -4,6 +4,7 @@ VOID IMMEDIATE operator _MACRO
 ; // _MACRO
 
 VOID IMMEDIATE operator MACRO
+// - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
  'VOID' Ctx:Parser:PushSymbol
  'IMMEDIATE' Ctx:Parser:PushSymbol
  'axiom:operator' Ctx:Parser:PushSymbol
