@@ -11,5 +11,5 @@ VOID IMMEDIATE operator MACRO
 // - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
  axiom:PushSymbol VOID
  axiom:PushSymbol IMMEDIATE
- 'axiom:operator' Ctx:Parser:PushSymbol
+ axiom:PushSymbol axiom:operator
 ; // MACRO
