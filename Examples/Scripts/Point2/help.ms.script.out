@@ -3536,6 +3536,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\Point2\types.ms.dict
  ;
+BOOLEAN OPERATOR : !==
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: <> : Result
+; // !==
 FUNCTOR : : |@
  ^@ OPERATOR :: IN : aRef
  FUNCTOR : :: |@ : Result
