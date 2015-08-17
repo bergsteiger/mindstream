@@ -151,7 +151,7 @@ MACRO class
    begin
     '%INHERITS'
     '@' 
-    [ '_:' 'Object' ] strings:Cat
+    [ '_:' cObjectName ] strings:Cat
     ';'
    end
    //'%FIELDS'
