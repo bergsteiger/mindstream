@@ -222,8 +222,8 @@ VOID Test PointTest
   INTEGER IN aOffset
   axiom:PushSymbol
   PRIVATE
-  'Const'
-  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  CONST
   aName
   MakeFieldOffsetName
   Ctx:Parser:PushSymbol

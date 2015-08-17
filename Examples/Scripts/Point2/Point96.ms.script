@@ -117,7 +117,7 @@ VOID operator define_member
  STRING IN aName
  INTEGER IN aOffset
  axiom:PushSymbol private
- 'Const' Ctx:Parser:PushSymbol
+ axiom:PushSymbol Const
  aName MakeFieldOffsetName Ctx:Parser:PushSymbol
  aOffset Ctx:Parser:PushInt
 ; // define_member
