@@ -442,8 +442,8 @@ VOID Test PointTest
  IMMEDIATE VOID OPERATOR members-end
   axiom:PushSymbol
   PRIVATE
-  'Const'
-  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  CONST
   [
    'c:'
    g_CurrentClass
@@ -453,8 +453,8 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
   g_ClassFieldOffset
   Ctx:Parser:PushInt
-  'RunCompileFields'
-  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  RunCompileFields
  ; // IMMEDIATE VOID OPERATOR members-end
  
  IMMEDIATE VOID OPERATOR method
