@@ -169,8 +169,6 @@ MACRO class
     [ '_:' cObjectName ] strings:Cat
     ';'
    end
-   //'%FIELDS'
-   //';'
   ';'
  ] Ctx:Parser:PushArray
 
