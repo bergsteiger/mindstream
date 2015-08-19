@@ -29,6 +29,19 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID <<@meta>> <<UMLCategory>>
  
+ IMMEDIATE VOID <<@meta>> <<UMLClass>>
+  %SUMMARY %SUM
+   ' Класс в терминах UML '
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  aName
+  |N
+  <<UMLClass>>
+  DefineStereo
+  EXIT
+ ; // IMMEDIATE VOID <<@meta>> <<UMLClass>>
+ 
  CodeGen
  DumpElement
 ; // VOID Test CodeGen
