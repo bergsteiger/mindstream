@@ -16,6 +16,19 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
  
+ IMMEDIATE VOID <<UMLCategory>> <<Project>>
+  %SUMMARY %SUM
+   ' Ќаверное у нас при разработке встречаютс€ проекты. “ак вот Project это стереотип, который описывает наши проекты. '
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  aName
+  |N
+  <<Project>>
+  DefineStereoInstance
+  EXIT
+ ; // IMMEDIATE VOID <<UMLCategory>> <<Project>>
+ 
  IMMEDIATE VOID <<@meta>> <<UMLCategory>>
   %SUMMARY %SUM
    '  атегори€ в терминах UML '
@@ -3994,6 +4007,10 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // <<@meta>>
+  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> : <<Project>>
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^L OPERATOR :: IN : aName
+  ; // <<Project>>
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> : <<UMLCategory>>
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
