@@ -16,6 +16,19 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
  
+ IMMEDIATE VOID <<UMLClass>> <<Class>>
+  %SUMMARY %SUM
+   ' Наверное у нас при разработке встречаются проектные классы. Так вот Class это стереотип, который описывает наши проектные классы. '
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  aName
+  |N
+  <<Class>>
+  DefineStereoInstance
+  EXIT
+ ; // IMMEDIATE VOID <<UMLClass>> <<Class>>
+ 
  IMMEDIATE VOID <<UMLCategory>> <<Library>>
   %SUMMARY %SUM
    ' Наверное у нас при разработке встречаются проектные библиотеки. Так вот Library это стереотип, который описывает наши библиотеки. '
@@ -4033,6 +4046,10 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // <<@meta>>
+  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> : <<Class>>
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^L OPERATOR :: IN : aName
+  ; // <<Class>>
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> : <<Library>>
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
