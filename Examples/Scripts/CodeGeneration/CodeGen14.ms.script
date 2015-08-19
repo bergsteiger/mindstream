@@ -126,6 +126,15 @@ concrete-model-begin 'ћодель конкретного проекта'
  Ёто наш первый проект - Project1
  '
  ; // %SUMMARY
+
+ <<Library>> Library1
+  %SUMMARY '
+  Ќаверное наш проект содержит какие-то проектные библиотеки.
+  “ак вот Library1 - это наша перва€ проектна€ библиотека
+  '
+  ; // %SUMMARY
+ ; // Library1
+
 ; // Project1
 
 model-end
