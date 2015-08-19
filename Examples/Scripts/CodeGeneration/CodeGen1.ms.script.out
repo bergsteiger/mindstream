@@ -1,4 +1,13 @@
 VOID Test CodeGen
+ IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
+  ^L IN aName
+  aName
+  |N
+  <<@meta>>
+  DefineStereotypeProducer
+  EXIT
+ ; // IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
+ 
  CodeGen
  DumpElement
 ; // VOID Test CodeGen
