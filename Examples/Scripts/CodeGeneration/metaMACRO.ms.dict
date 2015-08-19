@@ -1,10 +1,12 @@
 USES
+ params.ms.dict
  macro.ms.dict
 ;
 
 // Словарь для определения "макросов" для определения мета-мета-модели и мета-модели
 
 MACRO meta-meta-model-begin
+ STRING right aDoc
 ; // meta-meta-model-begin
 
 MACRO meta-meta-model-end
