@@ -17,6 +17,10 @@ VOID Test CodeGen
  ; // IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
  
  IMMEDIATE VOID <<@meta>> <<UMLCategory>>
+  %SUMMARY %SUM
+   ' Категория в терминах UML '
+  ; // %SUMMARY %SUM
+  
   ^L IN aName
   aName
   |N
