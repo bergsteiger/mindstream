@@ -3980,6 +3980,13 @@ IMMEDIATE VOID OPERATOR : meta-model-begin
 IMMEDIATE VOID OPERATOR : meta-model-end
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
 ; // meta-model-end
+IMMEDIATE VOID OPERATOR : model-begin
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // model-begin
+IMMEDIATE VOID OPERATOR : model-end
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // model-end
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
