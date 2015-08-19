@@ -1,0 +1,48 @@
+VOID Test CodeGen
+ %SUMMARY %SUM
+  ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
+ ; // %SUMMARY %SUM
+ 
+ IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
+  %SUMMARY %SUM
+   ' Определяем базовый элемент мета-модели Тот самый который позволяет тащить всё остальное "за волосы из болота" Через этот примитив выводятся все остальные '
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  aName
+  |N
+  <<@meta>>
+  DefineStereotypeProducer
+  EXIT
+ ; // IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
+ 
+ IMMEDIATE VOID <<@meta>> <<UMLCategory>>
+  %SUMMARY %SUM
+   ' Категория в терминах UML '
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  aName
+  |N
+  <<UMLCategory>>
+  DefineStereo
+  EXIT
+ ; // IMMEDIATE VOID <<@meta>> <<UMLCategory>>
+ 
+ IMMEDIATE VOID <<@meta>> <<UMLClass>>
+  %SUMMARY %SUM
+   ' Класс в терминах UML '
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  aName
+  |N
+  <<UMLClass>>
+  DefineStereo
+  EXIT
+ ; // IMMEDIATE VOID <<@meta>> <<UMLClass>>
+ 
+ CodeGen
+ DumpElement
+; // VOID Test CodeGen
+
