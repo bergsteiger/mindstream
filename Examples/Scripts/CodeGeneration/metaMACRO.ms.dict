@@ -16,7 +16,9 @@ MACRO meta-meta-model-end
 
 MACRO meta-model-begin
  STRING right aDoc
+ %SUMMARY 'Начало определения мета-модели' ;
 ; // meta-meta-model-begin
 
 MACRO meta-model-end
+ %SUMMARY 'Конец определения мета-мета-модели' ;
 ; // meta-meta-model-end
