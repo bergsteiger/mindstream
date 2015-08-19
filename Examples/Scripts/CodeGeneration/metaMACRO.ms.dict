@@ -6,7 +6,7 @@ USES
 // —ловарь дл€ определени€ "макросов" дл€ определени€ мета-мета-модели и мета-модели
 
 MACRO meta-meta-model-begin
- STRING right aDoc
+ Literal IN aDoc
  %SUMMARY 'Ќачало определени€ мета-мета-модели' ;
 ; // meta-meta-model-begin
 
@@ -15,7 +15,7 @@ MACRO meta-meta-model-end
 ; // meta-meta-model-end
 
 MACRO meta-model-begin
- STRING right aDoc
+ Literal IN aDoc
  %SUMMARY 'Ќачало определени€ мета-модели' ;
 ; // meta-meta-model-begin
 
