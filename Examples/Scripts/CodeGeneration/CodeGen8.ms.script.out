@@ -3979,6 +3979,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.d
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
  ;
+IMMEDIATE VOID OPERATOR : concrete-model-begin
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+ ^L OPERATOR :: IN : aModelName
+; // concrete-model-begin
 IMMEDIATE VOID OPERATOR : meta-meta-model-begin
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aDoc

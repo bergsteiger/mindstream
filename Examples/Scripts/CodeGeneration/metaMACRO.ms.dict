@@ -28,6 +28,12 @@ MACRO model-begin
  %SUMMARY 'Начало определения модели' ;
 ; // model-begin
 
+MACRO concrete-model-begin
+ Literal IN aModelName
+ Literal IN aDoc
+ %SUMMARY 'Начало определения модели' ;
+; // concrete-model-begin
+
 MACRO model-end
  %SUMMARY 'Конец определения модели' ;
 ; // model-end
