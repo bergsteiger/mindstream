@@ -94,6 +94,13 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID <<@meta>> <<UMLClass>>
  
+ <<Project>> Project1
+  %SUMMARY %SUM
+   ' Это наш первый проект - Project1 '
+  ; // %SUMMARY %SUM
+  
+ ; // <<Project>> Project1
+ 
  CodeGen
  DumpElement
  help
@@ -4075,5 +4082,8 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // <<UMLClass>>
+  OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  ; // Project1
  ; // CodeGen
 ; // Main
