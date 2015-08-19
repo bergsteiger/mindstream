@@ -16,6 +16,15 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
  
+ IMMEDIATE VOID <<@meta>> <<UMLCategory>>
+  ^L IN aName
+  aName
+  |N
+  <<UMLCategory>>
+  DefineStereo
+  EXIT
+ ; // IMMEDIATE VOID <<@meta>> <<UMLCategory>>
+ 
  CodeGen
  DumpElement
 ; // VOID Test CodeGen
