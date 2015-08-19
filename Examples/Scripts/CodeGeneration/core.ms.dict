@@ -1,0 +1,39 @@
+USES
+ axiom_push.ms.dict
+ macro.ms.dict
+ types.ms.dict
+;
+
+MACRO RecurseProc
+// - процедура, которая умеет вызываться рекурсивно
+ ^L IN aName
+ axiom:PushSymbol FORWARD
+ aName |N Ctx:Parser:PushSymbol
+
+ axiom:PushSymbol PROCEDURE
+ aName |N Ctx:Parser:PushSymbol
+; // RecurseProc
+
+: |^
+// - разыменовывает параметр слева
+ ^@ IN aRef
+ aRef pop:Word:GetRef DO
+; // |^
+
+FUNCTOR : |@
+// - получаем ссылку из параметра слева
+ ^@ IN aRef
+ aRef pop:Word:GetRef =: Result
+; // |@
+
+MACRO this.do
+// - запускаем "себя же" рекурсивно
+ axiom:PushSymbol (
+ axiom:PushSymbol @SELF
+ axiom:PushSymbol DO
+ axiom:PushSymbol )
+; // this.do
+
+WordAlias array:AddTo >>>[]
+
+WordAlias !== <>

@@ -1,0 +1,55 @@
+USES
+ axiom_push.ms.dict
+ macro.ms.dict
+;
+
+WordAlias RIGHT ^
+
+/*{MACRO RightParam
+ axiom:PushSymbol RIGHT
+ axiom:PushSymbol IN
+; // RightParam}*/
+
+WordAlias in IN
+
+MACRO Literal
+ ^L IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol ^L
+ aName |N Ctx:Parser:PushSymbol
+; // Literal
+
+USES
+ core.ms.dict
+;
+
+PRIVATE VOID operator MangledNamePusher
+ STRING IN aName
+ axiom:PushSymbol (
+ aName Ctx:Parser:PushSymbol
+ axiom:PushSymbol |^
+ axiom:PushSymbol )
+; // MangledNamePusher
+
+MACRO right
+ Literal IN aName
+ axiom:PushSymbol RIGHT
+ axiom:PushSymbol IN
+
+ STRING VAR l_Name
+ aName |N =: l_Name 
+
+ STRING VAR l_MangledName
+ [ '_' l_Name ] strings:Cat =: l_MangledName
+
+ l_MangledName Ctx:Parser:PushSymbol
+ 
+  [
+   'VOID IMMEDIATE axiom:operator' 
+   l_Name 
+   [ '`' l_MangledName '`' ] strings:Cat
+   'MangledNamePusher'
+   ';'
+  ] Ctx:Parser:PushArray
+
+; // right

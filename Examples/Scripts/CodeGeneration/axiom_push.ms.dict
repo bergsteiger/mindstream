@@ -1,0 +1,4 @@
+PROCEDURE axiom:PushSymbol
+ LINK ^ IN aSymbol
+ aSymbol pop:Word:Name Ctx:Parser:PushSymbol
+; // axiom:PushSymbol
