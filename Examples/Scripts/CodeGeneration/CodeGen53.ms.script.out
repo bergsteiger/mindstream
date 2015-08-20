@@ -3914,8 +3914,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.
   axiom:ContainedAction
  ;
 VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  LINK ^ OPERATOR :: IN : aSymbol
 ; // axiom:PushSymbol
+VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushLeftDottedSymbol
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ STRING OPERATOR :: IN : aValue
+; // Ctx:Parser:PushLeftDottedSymbol
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
  Uses: 
   axiom:axiom
