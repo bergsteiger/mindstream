@@ -322,8 +322,11 @@ MACRO elem_proc
  aName |N @SELF do_elem_proc
 ; // elem_proc
 
-WordAlias elem_generator elem_proc
-%REMARK 'Генератор содержимого элемента'
+MACRO elem_generator
+ Literal IN aName
+ %SUMMARY 'Генератор содержимого элемента' ;
+ aName |N @SELF do_elem_proc
+; // elem_generator
 
 MACRO elem_ref_proc
  Literal IN aName

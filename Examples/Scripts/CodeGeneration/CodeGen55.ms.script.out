@@ -68,7 +68,7 @@ VOID Test CodeGen
   Result
  ; // ARRAY elem_func .Children
  
- VOID elem_proc .DumpModelElement
+ VOID elem_generator .DumpModelElement
   %SUMMARY %SUM
    ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
   ; // %SUMMARY %SUM
@@ -102,7 +102,7 @@ VOID Test CodeGen
    ]
    OutToFile
   END
- ; // VOID elem_proc .DumpModelElement
+ ; // VOID elem_generator .DumpModelElement
  
  VOID elem_proc .EnterElement
   %SUMMARY %SUM
@@ -321,17 +321,17 @@ VOID Test CodeGen
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR elem_func
  
- IMMEDIATE VOID OPERATOR elem_proc
+ IMMEDIATE VOID OPERATOR elem_generator
   %SUMMARY %SUM
-   'Процедура на элементе модели'
+   'Генератор содержимого элемента'
   ; // %SUMMARY %SUM
   
   ^L IN aName
   aName
   |N
-  elem_proc
+  elem_generator
   do_elem_proc
- ; // IMMEDIATE VOID OPERATOR elem_proc
+ ; // IMMEDIATE VOID OPERATOR elem_generator
  
  IMMEDIATE VOID OPERATOR elem_proc
   %SUMMARY %SUM
@@ -4673,7 +4673,7 @@ TkwMain : Main
    ARRAY OPERATOR :: elem_func :: .Children : Result
    ModelElement OPERATOR :: IN : Self
   ; // .Children
-  VOID OPERATOR :: elem_proc : .DumpModelElement
+  VOID OPERATOR :: elem_generator : .DumpModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : Self
   ; // .DumpModelElement
