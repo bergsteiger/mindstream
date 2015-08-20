@@ -60,7 +60,10 @@ VOID Test CodeGen
     ModelElement IN aWord
     aWord
     .CallGen
-    .DumpModelElement
+    (
+     :
+     DO
+    )
    )
   FINALLY
    [
