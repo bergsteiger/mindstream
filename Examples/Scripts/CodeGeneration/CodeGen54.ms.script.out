@@ -4507,6 +4507,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.d
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
  ;
+IMMEDIATE VOID OPERATOR : %REMARK
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // %REMARK
 IMMEDIATE VOID OPERATOR : concrete-model-begin
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aDoc
