@@ -128,7 +128,14 @@ VOID Test CodeGen
    (
     ModelElement IN aWord
     aWord
-    DumpModelElement
+    EnterElement
+    TRY
+     aWord
+     DumpModelElement
+    FINALLY
+     aWord
+     LeaveElement
+    END
    )
   FINALLY
    '; // '
@@ -140,6 +147,14 @@ VOID Test CodeGen
    OutToFile
   END
  ; // VOID PROCEDURE DumpModelElement
+ 
+ VOID PROCEDURE EnterElement
+  %SUMMARY %SUM
+   'Начинает вывод элемента'
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN anElement
+ ; // VOID PROCEDURE EnterElement
  
  BOOLEAN FUNCTION IsModelElement
   %SUMMARY %SUM
@@ -169,6 +184,14 @@ VOID Test CodeGen
   >>>
   Result
  ; // BOOLEAN FUNCTION IsSummary
+ 
+ VOID PROCEDURE LeaveElement
+  %SUMMARY %SUM
+   'Заканчивает вывод элемента'
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN anElement
+ ; // VOID PROCEDURE LeaveElement
  
  IMMEDIATE VOID TYPE ModelElement
   TtfwValueTypes
@@ -4342,6 +4365,10 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : aWord
   ; // DumpModelElement
+  VOID OPERATOR :: PROCEDURE : EnterElement
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : anElement
+  ; // EnterElement
   BOOLEAN FUNCTION : IsModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : aWord
@@ -4352,6 +4379,10 @@ TkwMain : Main
    ModelElement OPERATOR :: IN : aWord
    BOOLEAN FUNCTION :: IsSummary : Result
   ; // IsSummary
+  VOID OPERATOR :: PROCEDURE : LeaveElement
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : anElement
+  ; // LeaveElement
   IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
   VOID OPERATOR :: PROCEDURE : OutToFile
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
