@@ -220,6 +220,19 @@ VOID Test CodeGen
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE ModelElement
  
+ STRING FUNCTION OutFileName
+  %SUMMARY %SUM
+   'Имя файла для вывода'
+  ; // %SUMMARY %SUM
+  
+  script:FileName
+  sysutils:ExtractFileName
+  (+)
+  '.dump'
+  >>>
+  Result
+ ; // STRING FUNCTION OutFileName
+ 
  VOID PROCEDURE OutToFile
   %SUMMARY %SUM
    ' Выводит строку в текущий файл вывода. С переводом каретки. '
@@ -293,10 +306,7 @@ VOID Test CodeGen
  @
  Project1
  DumpModelElement
- script:FileName
- sysutils:ExtractFileName
- (+)
- '.dump'
+ OutFileName
  .
 ; // VOID Test CodeGen
 
@@ -4425,6 +4435,10 @@ TkwMain : Main
    ModelElement OPERATOR :: IN : anElement
   ; // LeaveElement
   IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
+  STRING FUNCTION : OutFileName
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   STRING FUNCTION :: OutFileName : Result
+  ; // OutFileName
   VOID OPERATOR :: PROCEDURE : OutToFile
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    STRING OPERATOR :: IN : aString

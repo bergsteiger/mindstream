@@ -326,10 +326,15 @@ PROCEDURE DumpModelElement
  END
 ; // DumpModelElement
 
+STRING FUNCTION OutFileName
+ %SUMMARY 'Имя файла для вывода' ;
+ script:FileName sysutils:ExtractFileName (+) '.dump' >>> Result
+; // OutFileName
+
 @ Project1 DumpModelElement
 REMARK 'Выводим содержимое элемента'
 
-script:FileName sysutils:ExtractFileName (+) '.dump' Print
+OutFileName Print
 REMARK 'Выводим имя файла скрипта в тестовых целях'
 
 ; // CodeGen
