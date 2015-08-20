@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 242
-  ClientWidth = 527
+  ClientHeight = 135
+  ClientWidth = 257
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -27,12 +27,12 @@ object Form1: TForm1
     ParentFont = False
   end
   object edtMain: TEdit
-    Left = 16
+    Left = 17
     Top = 16
     Width = 209
     Height = 21
     TabOrder = 0
-    Text = 'Enter words here'
+    Text = 'Enter words here . . . .'
   end
   object btnMain: TButton
     Left = 83

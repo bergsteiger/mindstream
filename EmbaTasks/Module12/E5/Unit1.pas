@@ -27,21 +27,21 @@ implementation
 
 procedure TForm1.btnMainClick(Sender: TObject);
 var
-  TmpStr, ResultWord : string;
+  InStr, OutStr : string;
   BeginPos, EndPos : integer;
 begin
-  TmpStr := edtMain.Text;
+  InStr := edtMain.Text;
 
-  ResultWord := 'No word in parentheses';
-  if (Pos('(', TmpStr) <> 0) and
-     (Pos(')', TmpStr) <> 0) then
+  OutStr := 'No word in parentheses';
+  if (Pos('(', InStr) <> 0) and
+     (Pos(')', InStr) <> 0) then
   begin
-    BeginPos := Pos('(', TmpStr);
-    EndPos := Pos(')', TmpStr);
-    ResultWord := Copy(TmpStr, BeginPos + 1, EndPos - BeginPos - 1);
+    BeginPos := Pos('(', InStr);
+    EndPos := Pos(')', InStr);
+    OutStr := Copy(InStr, BeginPos + 1, EndPos - BeginPos - 1);
   end;
 
-  lblResult.Caption := ResultWord;
+  lblResult.Caption := OutStr;
 end;
 
 end.

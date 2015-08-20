@@ -27,21 +27,21 @@ implementation
 
 procedure TForm1.btnMainClick(Sender: TObject);
 var
-  TmpStr : string;
+  InStr : string;
   BeginPos, WordCount : integer;
 begin
-  TmpStr := edtMain.Text;
+  InStr := edtMain.Text;
 
   WordCount := 0;
-  while Length(TmpStr) > 0 do
+  while Length(InStr) > 0 do
   begin
-    BeginPos := Pos(' ', TmpStr);
+    BeginPos := Pos(' ', InStr);
 
     if (BeginPos = 0) and
-       (Length(TmpStr) > 0) then
-      Delete(TmpStr, 1, Length(TmpStr))
+       (Length(InStr) > 0) then
+      Delete(InStr, 1, Length(InStr))
     else
-      Delete(TmpStr, 1, BeginPos);
+      Delete(InStr, 1, BeginPos);
 
     if BeginPos <> 1 then
       Inc(WordCount);

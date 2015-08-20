@@ -10,7 +10,6 @@ type
   TForm1 = class(TForm)
     edtMain: TEdit;
     btnMain: TButton;
-    lblResult: TLabel;
     procedure btnMainClick(Sender: TObject);
   private
     { Private declarations }
@@ -27,15 +26,16 @@ implementation
 
 procedure TForm1.btnMainClick(Sender: TObject);
 var
-  TmpStr, ResultWord : string;
-  i : integer;
+  InStr, OutStr : string;
+  Index : integer;
 begin
-  TmpStr := edtMain.Text;
+  InStr := edtMain.Text;
 
-  for i := length(TmpStr) downto 1 do
-    ResultWord := ResultWord + TmpStr[i];
+  OutStr := '';
+  for Index := length(InStr) downto 1 do
+    OutStr := OutStr + InStr[Index];
 
-  edtMain.Text := ResultWord;
+  edtMain.Text := OutStr;
 end;
 
 end.

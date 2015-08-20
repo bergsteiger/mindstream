@@ -26,18 +26,18 @@ implementation
 
 procedure TForm1.btnMainClick(Sender: TObject);
 var
-  TmpStr : string;
+  InStr : string;
   i: Integer;
 begin
-  TmpStr := edtMain.Text;
+  InStr := edtMain.Text;
 
-  for i := 1 to Length(TmpStr) do
+  for i := 1 to Length(InStr) do
   begin
-    if TmpStr[i] = ' ' then
-      TmpStr[i] := '!';
+    if InStr[i] = ' ' then
+      InStr[i] := '!';
   end;
 
-  edtMain.Text := TmpStr;
+  edtMain.Text := InStr;
 end;
 
 end.

@@ -26,22 +26,24 @@ implementation
 
 procedure TForm1.btnMainClick(Sender: TObject);
 var
-  TmpStr, ResultWord : string;
+  InStr, OutStr : string;
   BeginPos, WordCount : integer;
 begin
-  TmpStr := edtMain.Text;
+  InStr := edtMain.Text;
 
-  while Length(TmpStr) > 0 do
+  while Length(InStr) > 0 do
   begin
-    BeginPos := Pos('dog', TmpStr);
-    if BeginPos <> 0 then
+    BeginPos := Pos('dog', InStr);
+    if BeginPos > 0 then
     begin
-      ResultWord := ResultWord + Copy(TmpStr, 0, BeginPos - 1) + 'cat';
-      Delete(TmpStr, 1, BeginPos + 2);
-    end;
+      OutStr := OutStr + Copy(InStr, 0, BeginPos - 1) + 'cat';
+      Delete(InStr, 1, BeginPos + 2);
+    end
+    else
+      Exit;
   end;
 
-  edtMain.Text := ResultWord;
+  edtMain.Text := OutStr;
 end;
 
 end.

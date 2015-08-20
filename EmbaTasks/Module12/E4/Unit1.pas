@@ -29,17 +29,17 @@ procedure TForm1.btnMainClick(Sender: TObject);
 const
   c_SubString = 'abc';
 var
-  TmpStr : string;
+  InStr : string;
   SubStrCount: Integer;
 begin
-  TmpStr := edtMain.Text;
+  InStr := edtMain.Text;
 
   SubStrCount := 0;
-  while Length(TmpStr) > 0 do
+  while Length(InStr) > 0 do
   begin
-    if Pos(c_SubString, TmpStr) <> 0 then
+    if Pos(c_SubString, InStr) <> 0 then
     begin
-      Delete(TmpStr, 1, Pos(c_SubString, TmpStr) + Length(c_SubString));
+      Delete(InStr, 1, Pos(c_SubString, InStr) + Length(c_SubString));
       Inc(SubStrCount);
     end
     else

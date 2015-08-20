@@ -27,16 +27,16 @@ implementation
 
 procedure TForm1.btnMainClick(Sender: TObject);
 var
-  TmpStr : string;
-  i, SubStrCount: Integer;
+  InStr : string;
+  Index, SubStrCount: Integer;
 begin
-  TmpStr := edtMain.Text;
+  InStr := edtMain.Text;
 
   SubStrCount := 0;
 
-  for i := 1 to Length(TmpStr) do
+  for Index := 1 to Length(InStr) do
   begin
-    if TmpStr[i] = '.' then
+    if InStr[Index] = '.' then
       Inc(SubStrCount);
   end;
 

@@ -26,22 +26,22 @@ implementation
 
 procedure TForm1.btnMainClick(Sender: TObject);
 var
-  TmpStr, ResultString,
+  InStr, OutStr,
   SecondWord, ThirdWord : string;
 begin
-  TmpStr := edtMain.Text;
-  ResultString := Copy(TmpStr, 1, Pos(' ', TmpStr) - 1);
-  Delete(TmpStr, 1, pos(' ',TmpStr));
+  InStr := edtMain.Text;
+  OutStr := Copy(InStr, 1, Pos(' ', InStr) - 1);
+  Delete(InStr, 1, pos(' ',InStr));
 
-  SecondWord := Copy(TmpStr, 1, Pos(' ', TmpStr) - 1);
-  Delete(TmpStr, 1, pos(' ',TmpStr));
+  SecondWord := Copy(InStr, 1, Pos(' ', InStr) - 1);
+  Delete(InStr, 1, pos(' ',InStr));
 
-  ThirdWord := TmpStr;
-  Delete(TmpStr, 1, pos(' ',TmpStr));
+  ThirdWord := InStr;
+  Delete(InStr, 1, pos(' ',InStr));
 
-  ResultString := ResultString + ' ' + ThirdWord + ' ' + SecondWord;
+  OutStr := OutStr + ' ' + ThirdWord + ' ' + SecondWord;
 
-  edtMain.Text := ResultString;
+  edtMain.Text := OutStr;
 end;
 
 end.
