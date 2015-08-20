@@ -385,6 +385,9 @@ PROCEDURE OutToFile
  %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; //OutToFile
 
+FUNCTOR TYPE GENERATOR
+%REMARK 'Генератор содержимого элемента'
+
 elem_proc Child.CallGen
  FUNCTOR RIGHT IN aGen
  %SUMMARY 'Вызывает на ДОЧЕРНЕМ элементе генератор aGen с учётом отступов' ;

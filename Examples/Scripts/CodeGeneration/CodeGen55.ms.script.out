@@ -313,6 +313,11 @@ VOID Test CodeGen
  
  INTEGER VAR g_Indent
  FILE VAR g_OutFile
+ IMMEDIATE VOID TYPE GENERATOR
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE GENERATOR
+ 
  IMMEDIATE VOID TYPE ModelElement
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -4677,6 +4682,7 @@ TkwMain : Main
   ; // elem_proc
   INTEGER OPERATOR :: VAR : g_Indent
   FILE OPERATOR :: VAR : g_OutFile
+  IMMEDIATE VOID OPERATOR :: TYPE : GENERATOR
   IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
   STRING FUNCTION : OutFileName
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
