@@ -441,7 +441,7 @@ STRING FUNCTION OutFileName
  script:FileName sysutils:ExtractFileName (+) '.' (+) 'dump' >>> Result
 ; // OutFileName
 
-elem_proc CallGen
+elem_ref_proc CallGen
  GENERATOR right aGen
 
  %SUMMARY 
@@ -460,7 +460,7 @@ elem_proc CallGen
  END // TRY..FINALLY
 ; // CallGen
 
-@ Project1 .CallGen .DumpModelElement
+Project1 .CallGen .DumpModelElement
 %REMARK 'Выводим содержимое элемента'
 
 OutFileName Print

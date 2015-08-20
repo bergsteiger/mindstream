@@ -3,7 +3,7 @@ VOID Test CodeGen
   ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
  ; // %SUMMARY %SUM
  
- VOID elem_proc .CallGen
+ VOID elem_ref_proc .CallGen
   %SUMMARY %SUM
    ' Вызывает на элементе генератор aGen. С открытием "правильных файлов". '
   ; // %SUMMARY %SUM
@@ -14,7 +14,7 @@ VOID Test CodeGen
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aGen
   
-  ModelElement IN Self
+  ^@ IN Self
   g_OutFile :=
   (
    OutFileName
@@ -29,7 +29,7 @@ VOID Test CodeGen
    g_OutFile :=
    nil
   END
- ; // VOID elem_proc .CallGen
+ ; // VOID elem_ref_proc .CallGen
  
  VOID elem_proc .Child.CallGen
   %SUMMARY %SUM
@@ -519,9 +519,7 @@ VOID Test CodeGen
  0
  g_OutFile :=
  nil
- @
- Project1
- .CallGen
+ Project1 .CallGen
  .DumpModelElement
  OutFileName
  .
@@ -4634,11 +4632,11 @@ IMMEDIATE VOID OPERATOR :: NamedWordProducer : %IMPLEMENTS
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-  VOID OPERATOR :: elem_proc : .CallGen
+  VOID OPERATOR :: elem_ref_proc : .CallGen
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^ OPERATOR :: IN : _aGen
    IMMEDIATE VOID OPERATOR : aGen
-   ModelElement OPERATOR :: IN : Self
+   ^@ OPERATOR :: IN : Self
   ; // .CallGen
   VOID OPERATOR :: elem_proc : .Child.CallGen
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
