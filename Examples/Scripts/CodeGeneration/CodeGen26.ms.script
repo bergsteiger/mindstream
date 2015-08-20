@@ -234,7 +234,7 @@ BOOLEAN FUNCTION IsSummary
   Определяет тот факт, что aWord является документацией к элементу
  '
  ; // %SUMMARY
- aWord |N == '%SUM' >>> Result
+ ( aWord |N ) = '%SUM' >>> Result
 ; // IsSummary
 
 BOOLEAN FUNCTION IsModelElement
@@ -258,7 +258,7 @@ PROCEDURE DumpModelElement
  '
  ; // %SUMMARY
  aWord |N Print
- for ( aWord MembersIterator ) (
+ for ( ( aWord MembersIterator ) >filter> IsModelElement ) (
   TtfwWord IN aWord 
   aWord DumpModelElement
  )
