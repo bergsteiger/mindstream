@@ -63,14 +63,8 @@ VOID Test CodeGen
     
     ModelElement IN aWord
     aWord
-    .EnterElement
-    TRY
-     aWord
-     .DumpModelElement
-    FINALLY
-     aWord
-     .LeaveElement
-    END
+    .CallGen
+    .DumpModelElement
    )
   FINALLY
    [
