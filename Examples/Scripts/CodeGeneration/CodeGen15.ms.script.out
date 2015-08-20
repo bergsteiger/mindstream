@@ -106,6 +106,13 @@ VOID Test CodeGen
    
   ; // <<Library>> Library1
   
+  <<Library>> Library2
+   %SUMMARY %SUM
+    '  Наверное наш проект достаточно серьёзен и содержит НЕ ОДНУ библиотеку.  Так вот Library2 - это наша вторая проектная библиотека  '
+   ; // %SUMMARY %SUM
+   
+  ; // <<Library>> Library2
+  
  ; // <<Project>> Project1
  
  CodeGen
@@ -4094,6 +4101,9 @@ TkwMain : Main
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library1
     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ; // Library1
+   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library2
+    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ; // Library2
   ; // Project1
  ; // CodeGen
 ; // Main

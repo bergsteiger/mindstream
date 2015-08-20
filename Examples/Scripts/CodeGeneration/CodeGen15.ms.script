@@ -135,6 +135,14 @@ concrete-model-begin 'Модель конкретного проекта'
   ; // %SUMMARY
  ; // Library1
 
+ <<Library>> Library2
+  %SUMMARY '
+  Наверное наш проект достаточно серьёзен и содержит НЕ ОДНУ библиотеку.
+  Так вот Library2 - это наша вторая проектная библиотека
+  '
+  ; // %SUMMARY
+ ; // Library2
+
 ; // Project1
 
 model-end
