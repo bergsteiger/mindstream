@@ -237,6 +237,16 @@ BOOLEAN FUNCTION IsSummary
  aWord |N == '%SUM' >>> Result
 ; // IsSummary
 
+BOOLEAN FUNCTION IsModelElement
+ TtfwWord IN aWord
+ %SUMMARY 
+ '
+  Определяет тот факт, что aWord является "элементом модели"
+ '
+ ; // %SUMMARY
+ aWord IsSummary ! >>> Result
+; // IsModelElement
+
 FORWARD DumpModelElement
  
 PROCEDURE DumpModelElement

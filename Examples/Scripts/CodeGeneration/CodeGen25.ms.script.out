@@ -116,6 +116,19 @@ VOID Test CodeGen
   )
  ; // VOID PROCEDURE DumpModelElement
  
+ BOOLEAN FUNCTION IsModelElement
+  %SUMMARY %SUM
+   '  Определяет тот факт, что aWord является "элементом модели" '
+  ; // %SUMMARY %SUM
+  
+  TtfwWord IN aWord
+  aWord
+  IsSummary
+  !
+  >>>
+  Result
+ ; // BOOLEAN FUNCTION IsModelElement
+ 
  BOOLEAN FUNCTION IsSummary
   %SUMMARY %SUM
    '  Определяет тот факт, что aWord является документацией к элементу '
@@ -4282,6 +4295,11 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    TtfwWord OPERATOR :: IN : aWord
   ; // DumpModelElement
+  BOOLEAN FUNCTION : IsModelElement
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   TtfwWord OPERATOR :: IN : aWord
+   BOOLEAN FUNCTION :: IsModelElement : Result
+  ; // IsModelElement
   BOOLEAN FUNCTION : IsSummary
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    TtfwWord OPERATOR :: IN : aWord
