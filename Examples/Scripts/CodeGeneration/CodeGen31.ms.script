@@ -260,7 +260,10 @@ ARRAY FUNCTION Children
  ( aWord MembersIterator ) >filter> IsModelElement >>> Result
 ; // Children
 
-WordAlias OutToFile Print
+PROCEDURE OutToFile
+ STRING IN aString 
+ aString Print
+; //OutToFile
 
 FORWARD DumpModelElement
 REMARK 'FORWARD DumpModelElement используем для того, чтобы можно было вызывать DumpModelElement рекурсивно'

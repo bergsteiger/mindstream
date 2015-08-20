@@ -115,7 +115,7 @@ VOID Test CodeGen
   ModelElement IN aWord
   aWord
   |N
-  .
+  OutToFile
   TRY
    for
    (
@@ -134,7 +134,7 @@ VOID Test CodeGen
     aWord
     |N
    )
-   .
+   OutToFile
   END
  ; // VOID PROCEDURE DumpModelElement
  
@@ -172,9 +172,11 @@ VOID Test CodeGen
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE ModelElement
  
- REDIFINITION : .
-  >>std::out
- ; // REDIFINITION : .
+ VOID PROCEDURE OutToFile
+  STRING IN aString
+  aString
+  .
+ ; // VOID PROCEDURE OutToFile
  
  <<Project>> Project1
   %SUMMARY %SUM
@@ -4344,10 +4346,9 @@ TkwMain : Main
    BOOLEAN FUNCTION :: IsSummary : Result
   ; // IsSummary
   IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
-  REDIFINITION : : OutToFile
-  ==> Redefines
-   VOID .
-  <== Redefines
+  VOID OPERATOR :: PROCEDURE : OutToFile
+   STRING OPERATOR :: IN : aString
+  ; // OutToFile
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library1
