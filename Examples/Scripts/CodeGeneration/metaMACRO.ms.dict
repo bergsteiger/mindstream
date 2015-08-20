@@ -37,3 +37,8 @@ MACRO concrete-model-begin
 MACRO model-end
  %SUMMARY 'Конец определения модели' ;
 ; // model-end
+
+MACRO REMARK
+ Literal IN aDoc
+ %SUMMARY 'Ремарка' ;
+; // REMARK
