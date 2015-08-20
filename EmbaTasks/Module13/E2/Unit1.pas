@@ -11,6 +11,7 @@ type
     edtIn: TEdit;
     edtOut: TEdit;
     btnDoIt: TButton;
+    procedure btnDoItClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -23,5 +24,21 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.btnDoItClick(Sender: TObject);
+var
+  Index, NumberCount  : integer;
+  Str : string;
+begin
+  Str := edtIn.Text;
+  NumberCount := 0;
+  for Index := 0 to Length(Str) do
+  begin
+    if Str[Index] in ['0'..'9'] then
+      Inc(NumberCount);
+  end;
+
+  edtOut.Text := IntToStr(NumberCount);
+end;
 
 end.
