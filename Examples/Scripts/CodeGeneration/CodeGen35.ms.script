@@ -290,7 +290,7 @@ PROCEDURE OutToFile
  С переводом каретки.
  '
  ; // %SUMMARY 
- aString Print
+ [ g_Indent ' ' char:Dupe aString ] strings:Cat Print
 ; //OutToFile
 
 FORWARD DumpModelElement

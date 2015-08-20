@@ -226,7 +226,13 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   STRING IN aString
-  aString
+  [
+   g_Indent
+   ' '
+   char:Dupe
+   aString
+  ]
+  strings:Cat
   .
  ; // VOID PROCEDURE OutToFile
  
@@ -4443,22 +4449,22 @@ TkwMain : Main
 ; // Main
 <<Project>>
 Project1
-<<Library>>
-Library1
-; // Library1
-<<Library>>
-Library2
-; // Library2
-<<Library>>
-Library3
-; // Library3
-<<Programm>>
-Programm1
-<<Class>>
-Class1
-; // Class1
-<<Class>>
-Class2
-; // Class2
-; // Programm1
+ <<Library>>
+ Library1
+ ; // Library1
+ <<Library>>
+ Library2
+ ; // Library2
+ <<Library>>
+ Library3
+ ; // Library3
+ <<Programm>>
+ Programm1
+  <<Class>>
+  Class1
+  ; // Class1
+  <<Class>>
+  Class2
+  ; // Class2
+ ; // Programm1
 ; // Project1
