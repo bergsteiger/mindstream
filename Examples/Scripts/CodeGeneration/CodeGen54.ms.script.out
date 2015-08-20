@@ -57,10 +57,6 @@ VOID Test CodeGen
     .Children
    )
    (
-    %SUMMARY %SUM
-     'Выводим детей элемента'
-    ; // %SUMMARY %SUM
-    
     ModelElement IN aWord
     aWord
     .CallGen

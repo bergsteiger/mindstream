@@ -416,9 +416,9 @@ elem_proc DumpModelElement
  TRY
   for ( Self .Children ) (
    ModelElement IN aWord
-   %SUMMARY 'Выводим детей элемента' ;
    aWord .CallGen .DumpModelElement
   )
+  REMARK 'Выводим детей элемента'
  FINALLY
   [ '; // ' Self |N ] OutToFile
   REMARK 'Выводим закрывающую скобку элемента'
