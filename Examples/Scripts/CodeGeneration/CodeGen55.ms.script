@@ -306,12 +306,7 @@ PROCEDURE do_elem_func
 MACRO elem_func
  Literal IN aName
  %SUMMARY 'Функция на элементе модели' ;
- @SELF Ctx:SetWordProducerForCompiledClass
- axiom:PushSymbol :
- aName |N Ctx:Parser:PushLeftDottedSymbol
- axiom:PushSymbol ModelElement
- axiom:PushSymbol in
- 'Self' Ctx:Parser:PushSymbol
+ aName |N @SELF do_elem_func
 ; // elem_func
 
 PROCEDURE do_elem_proc
