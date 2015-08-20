@@ -302,6 +302,19 @@ MACRO elem_func
  'Self' Ctx:Parser:PushSymbol
 ; // elem_func
 
+MACRO elem_proc
+ Literal IN aName
+ %SUMMARY 'Процедура на элементе модели' ;
+ Ctx:ClearTypeInfo
+ @SELF Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol VOID
+ axiom:PushSymbol :
+ aName |N Ctx:Parser:PushSymbol
+ axiom:PushSymbol ModelElement
+ axiom:PushSymbol in
+ 'Self' Ctx:Parser:PushSymbol
+; // elem_proc
+
 BOOLEAN elem_func IsSummary
  %SUMMARY 
  '
