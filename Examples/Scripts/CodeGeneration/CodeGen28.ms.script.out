@@ -142,7 +142,7 @@ VOID Test CodeGen
    '  Определяет тот факт, что aWord является документацией к элементу '
   ; // %SUMMARY %SUM
   
-  TtfwWord IN aWord
+  ModelElement IN aWord
   (
    aWord
    |N
@@ -152,6 +152,11 @@ VOID Test CodeGen
   >>>
   Result
  ; // BOOLEAN FUNCTION IsSummary
+ 
+ IMMEDIATE VOID TYPE ModelElement
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE ModelElement
  
  <<Project>> Project1
   %SUMMARY %SUM
@@ -4316,9 +4321,10 @@ TkwMain : Main
   ; // IsModelElement
   BOOLEAN FUNCTION : IsSummary
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   TtfwWord OPERATOR :: IN : aWord
+   ModelElement OPERATOR :: IN : aWord
    BOOLEAN FUNCTION :: IsSummary : Result
   ; // IsSummary
+  IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library1
