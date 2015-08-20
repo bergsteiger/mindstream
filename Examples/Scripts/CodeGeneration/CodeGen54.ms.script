@@ -418,13 +418,6 @@ elem_proc DumpModelElement
    ModelElement IN aWord
    %SUMMARY 'Выводим детей элемента' ;
    aWord .CallGen .DumpModelElement
-/*   aWord .EnterElement 
-   TRY
-    aWord .DumpModelElement
-    REMARK 'Вызываем рекурсивно сами себя'
-   FINALLY
-    aWord .LeaveElement 
-   END*/
   )
  FINALLY
   [ '; // ' Self |N ] OutToFile
