@@ -315,6 +315,8 @@ MACRO elem_proc
  'Self' Ctx:Parser:PushSymbol
 ; // elem_proc
 
+WordAlias elem_generator elem_proc
+
 MACRO elem_ref_proc
  Literal IN aName
  %SUMMARY 'Процедура на элементе модели, который передаётся по ссылке' ;
@@ -414,7 +416,7 @@ elem_proc Child.CallGen
  END // TRY..FINALLY
 ; // Child.CallGen
 
-elem_proc DumpModelElement
+elem_generator DumpModelElement
  %SUMMARY 
  '
  Процедура печатающая содержимое элемента модели.
