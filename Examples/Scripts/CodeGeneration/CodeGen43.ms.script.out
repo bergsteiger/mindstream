@@ -314,6 +314,13 @@ VOID Test CodeGen
     
    ; // <<Class>> Class2
    
+   <<Interface>> Interface1
+    %SUMMARY %SUM
+     '   Наверное наша программа настолько серьёзна, что реализует каки-то интерфейсы.   Так вот Interface1 - это наш ПЕРВЫЙ интерфейс.   '
+    ; // %SUMMARY %SUM
+    
+   ; // <<Interface>> Interface1
+   
   ; // <<Programm>> Programm1
   
  ; // <<Project>> Project1
@@ -4530,6 +4537,9 @@ TkwMain : Main
      OPERATOR :: NamedWordProducer :: %INHERITS : %G
      OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
     ; // Class2
+    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Interface>> : Interface1
+     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+    ; // Interface1
    ; // Programm1
   ; // Project1
  ; // CodeGen
