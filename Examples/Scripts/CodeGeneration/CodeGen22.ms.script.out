@@ -94,6 +94,17 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID <<@meta>> <<UMLClass>>
  
+ VOID PROCEDURE DumpModelElement
+  %SUMMARY %SUM
+   ' Процедура печатающая содержимое элеиента модели '
+  ; // %SUMMARY %SUM
+  
+  TtfwWord IN aWord
+  aWord
+  |N
+  .
+ ; // VOID PROCEDURE DumpModelElement
+ 
  <<Project>> Project1
   %SUMMARY %SUM
    ' Это наш первый проект - Project1 '
@@ -148,18 +159,14 @@ VOID Test CodeGen
  help
  @
  Project1
- |N
- .
+ DumpModelElement
  for
  (
   @
   Project1
   MembersIterator
  )
- (
-  |N
-  .
- )
+ DumpModelElement
 ; // VOID Test CodeGen
 
 Dictionary: axiom:Array
@@ -4142,6 +4149,10 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // <<UMLClass>>
+  VOID OPERATOR :: PROCEDURE : DumpModelElement
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   TtfwWord OPERATOR :: IN : aWord
+  ; // DumpModelElement
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library1

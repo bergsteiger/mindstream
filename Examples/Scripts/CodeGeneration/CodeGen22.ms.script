@@ -222,14 +222,24 @@ REMARK
  Ну для начала выведем его имя на стандартное устройство вывода.
  '
 
-@ Project1 |N Print
+PROCEDURE DumpModelElement
+ TtfwWord IN aWord
+ %SUMMARY 
+ '
+ Процедура печатающая содержимое элеиента модели
+ '
+ ; // %SUMMARY
+ aWord |N Print
+; // DumpModelElement
+
+@ Project1 DumpModelElement
 
 REMARK
  '
  Теперь выведем на стандартное устройство вывода имена всех его непосредственных детей.
  '
 
-for ( @ Project1 MembersIterator ) ( |N Print )
+for ( @ Project1 MembersIterator ) DumpModelElement
 
 ; // CodeGen
 
