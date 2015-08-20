@@ -106,8 +106,8 @@ VOID Test CodeGen
   .
   for
   (
-   aWord
-   MembersIterator
+   ( aWord MembersIterator >filter>
+   IsModelElement
   )
   (
    TtfwWord IN aWord
@@ -135,9 +135,11 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   TtfwWord IN aWord
-  aWord
-  |N
-  ==
+  (
+   aWord
+   |N
+  )
+  =
   '%SUM'
   >>>
   Result
@@ -4329,16 +4331,9 @@ TkwMain : Main
  ; // CodeGen
 ; // Main
 Project1
-%SUM
 Library1
-%SUM
 Library2
-%SUM
 Library3
-%SUM
 Programm1
-%SUM
 Class1
-%SUM
 Class2
-%SUM
