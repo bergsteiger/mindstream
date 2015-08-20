@@ -385,6 +385,18 @@ PROCEDURE OutToFile
  REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; //OutToFile
 
+elem_proc CallGen
+ FUNCTOR ^ IN aGen
+ %SUMMARY 'Вызывает на элементе генератор aGen с учётом отступов' ;
+ Self .EnterElement 
+ TRY
+  Self aGen DO
+  REMARK 'Вызываем генератор aGen'
+ FINALLY
+  Self .LeaveElement 
+ END // TRY..FINALLY
+; // CallGen
+
 FORWARD .DumpModelElement
 REMARK 'FORWARD DumpModelElement используем для того, чтобы можно было вызывать DumpModelElement рекурсивно'
  

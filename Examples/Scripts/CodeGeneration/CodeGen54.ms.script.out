@@ -4,6 +4,25 @@ VOID Test CodeGen
   ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
  ; // %SUMMARY %SUM
  
+ VOID elem_proc .CallGen
+  %SUMMARY %SUM
+   'Вызывает на элементе генератор aGen с учётом отступов'
+  ; // %SUMMARY %SUM
+  
+  ^ IN aGen
+  ModelElement IN Self
+  Self
+  .EnterElement
+  TRY
+   Self
+   aGen
+   DO
+  FINALLY
+   Self
+   .LeaveElement
+  END
+ ; // VOID elem_proc .CallGen
+ 
  ARRAY elem_func .Children
   %SUMMARY %SUM
    ' Возвращает итератор детей aWord в "терминах определённой модели" '
@@ -4560,6 +4579,11 @@ IMMEDIATE VOID OPERATOR :: NamedWordProducer : %IMPLEMENTS
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  VOID OPERATOR :: elem_proc : .CallGen
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^ OPERATOR :: IN : aGen
+   ModelElement OPERATOR :: IN : Self
+  ; // .CallGen
   ARRAY OPERATOR :: elem_func : .Children
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ARRAY OPERATOR :: elem_func :: .Children : Result
