@@ -440,7 +440,7 @@ elem_proc CallGen
   %REMARK 'Вызываем на элементе генератор aGen'
  FINALLY
   g_OutFile := nil
- END
+ END // TRY..FINALLY
 ; // CallGen
 
 @ Project1 .CallGen .DumpModelElement
