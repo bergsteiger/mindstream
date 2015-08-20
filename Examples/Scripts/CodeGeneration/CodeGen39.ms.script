@@ -294,6 +294,7 @@ PROCEDURE OutToFile
  '
  ; // %SUMMARY 
  [ g_Indent ' ' char:Dupe aString ] strings:Cat g_OutFile File:WriteLn
+ REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; //OutToFile
 
 FORWARD DumpModelElement
