@@ -301,12 +301,17 @@ VOID Test CodeGen
    ' Выводит значение в текущий файл вывода. С переводом каретки. '
   ; // %SUMMARY %SUM
   
-  PRINTABLE IN aString
+  PRINTABLE IN aValue
+  STRING VAR l_String
+  aValue
+  ToPrintable
+  >>>
+  l_String
   [
    g_Indent
    ' '
    char:Dupe
-   aString
+   l_String
   ]
   strings:Cat
   g_OutFile
@@ -4612,7 +4617,8 @@ TkwMain : Main
   ; // OutFileName
   VOID OPERATOR :: PROCEDURE : OutToFile
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   PRINTABLE OPERATOR :: IN : aString
+   PRINTABLE OPERATOR :: IN : aValue
+   STRING OPERATOR :: VAR : l_String
   ; // OutToFile
   IMMEDIATE VOID OPERATOR :: TYPE : PRINTABLE
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
