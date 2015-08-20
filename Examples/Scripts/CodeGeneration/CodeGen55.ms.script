@@ -302,6 +302,20 @@ MACRO elem_func
  'Self' Ctx:Parser:PushSymbol
 ; // elem_func
 
+PROCEDURE do_elem_proc
+ STRING IN aName
+ TtfwWord IN aSelf
+ %SUMMARY 'Реализация elem_proc и elem_generator' ;
+ Ctx:ClearTypeInfo
+ aSelf Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol VOID
+ axiom:PushSymbol :
+ aName Ctx:Parser:PushLeftDottedSymbol
+ axiom:PushSymbol ModelElement
+ axiom:PushSymbol in
+ 'Self' Ctx:Parser:PushSymbol
+; // do_elem_proc
+
 MACRO elem_proc
  Literal IN aName
  %SUMMARY 'Процедура на элементе модели' ;
