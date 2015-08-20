@@ -96,6 +96,10 @@ VOID Test CodeGen
  ; // IMMEDIATE VOID <<@meta>> <<UMLClass>>
  
  ARRAY FUNCTION Children
+  %SUMMARY %SUM
+   ' Возвращает итератор детей aWord в "терминах определённой модели" '
+  ; // %SUMMARY %SUM
+  
   ModelElement IN aWord
   ( aWord MembersIterator >filter>
   IsModelElement
@@ -4307,6 +4311,7 @@ TkwMain : Main
    ^L OPERATOR :: IN : aName
   ; // <<UMLClass>>
   ARRAY FUNCTION : Children
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : aWord
    ARRAY FUNCTION :: Children : Result
   ; // Children

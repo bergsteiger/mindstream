@@ -251,6 +251,11 @@ BOOLEAN FUNCTION IsModelElement
 
 ARRAY FUNCTION Children
  ModelElement IN aWord
+ %SUMMARY 
+ '
+ Возвращает итератор детей aWord в "терминах определённой модели"
+ '
+ ;
  ( aWord MembersIterator ) >filter> IsModelElement >>> Result
 ; // Children
 
