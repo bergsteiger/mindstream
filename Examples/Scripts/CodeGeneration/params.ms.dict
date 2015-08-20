@@ -5,11 +5,6 @@ USES
 
 WordAlias RIGHT ^
 
-/*{MACRO RightParam
- axiom:PushSymbol RIGHT
- axiom:PushSymbol IN
-; // RightParam}*/
-
 WordAlias in IN
 
 MACRO Literal
