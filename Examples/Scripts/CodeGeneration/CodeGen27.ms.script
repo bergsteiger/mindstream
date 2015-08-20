@@ -247,6 +247,11 @@ BOOLEAN FUNCTION IsModelElement
  aWord IsSummary ! >>> Result
 ; // IsModelElement
 
+ARRAY FUNCTION Children
+ TtfwWord IN aWord
+ ( aWord MembersIterator ) >filter> IsModelElement >>> Result
+; // Children
+
 FORWARD DumpModelElement
  
 PROCEDURE DumpModelElement
@@ -258,7 +263,7 @@ PROCEDURE DumpModelElement
  '
  ; // %SUMMARY
  aWord |N Print
- for ( ( aWord MembersIterator ) >filter> IsModelElement ) (
+ for ( aWord Children ) (
   TtfwWord IN aWord 
   aWord DumpModelElement
  )

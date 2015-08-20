@@ -95,6 +95,14 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID <<@meta>> <<UMLClass>>
  
+ ARRAY FUNCTION Children
+  TtfwWord IN aWord
+  ( aWord MembersIterator >filter>
+  IsModelElement
+  >>>
+  Result
+ ; // ARRAY FUNCTION Children
+ 
  VOID PROCEDURE DumpModelElement
   %SUMMARY %SUM
    ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
@@ -106,8 +114,8 @@ VOID Test CodeGen
   .
   for
   (
-   ( aWord MembersIterator >filter>
-   IsModelElement
+   aWord
+   Children
   )
   (
    TtfwWord IN aWord
@@ -4293,6 +4301,10 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // <<UMLClass>>
+  ARRAY FUNCTION : Children
+   TtfwWord OPERATOR :: IN : aWord
+   ARRAY FUNCTION :: Children : Result
+  ; // Children
   VOID OPERATOR :: PROCEDURE : DumpModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    TtfwWord OPERATOR :: IN : aWord
