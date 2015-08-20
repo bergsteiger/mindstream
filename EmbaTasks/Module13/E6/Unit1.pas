@@ -27,33 +27,34 @@ implementation
 
 procedure TForm1.btnDoItClick(Sender: TObject);
 var
-  InStr, NumberStr, AvgNumberStr, NewSubStr : string;
-  Index, BeginPos, EndPos, SumNumber : Integer;
-  Average : double;
+  InStr, OutStr, FirstSurname, SecondSurname : string;
+  FirstHeight, SecondHeight, SpacePos : Integer;
 begin
-  InStr := edtIn.Text;
+  InStr := Trim(edtIn.Text);
 
-  BeginPos := Pos('(', InStr);
-  EndPos := Pos(')', InStr);
+  SpacePos := Pos(' ',InStr);
+  FirstSurname := Copy(InStr, 0, SpacePos - 1);
+  Delete(InStr, 1, SpacePos);
 
-  NumberStr := Copy(InStr, BeginPos + 1, EndPos - BeginPos - 1);
+  SpacePos := Pos(' ',InStr);
+  FirstHeight := StrToInt(Copy(InStr, 0, SpacePos - 1));
+  Delete(InStr, 1, SpacePos);
 
-  edtOut.Text := NumberStr;
+  SpacePos := Pos(' ',InStr);
+  SecondSurname := Copy(InStr, 0, SpacePos - 1);
+  Delete(InStr, 1, SpacePos);
 
-  SumNumber := 0;
-  for Index := 1 to Length(NumberStr) do
-    SumNumber := SumNumber + StrToInt(NumberStr[Index]);
+  SecondHeight := StrToInt(Copy(InStr, 0, Length(InStr)));
+  Delete(InStr, 1, SpacePos);
 
-  Average := SumNumber / Length(NumberStr);
-  Str(Average :6 :2, AvgNumberStr);
+  if FirstHeight > SecondHeight then
+    OutStr := FirstSurname
+  else if SecondHeight > FirstHeight then
+    OutStr := SecondSurname
+  else if FirstHeight = SecondHeight then
+    OutStr := FirstSurname + ' ' + SecondSurname;
 
-  NewSubStr := Copy(InStr, 0, BeginPos);
-  for Index := 1 to Length(NumberStr) do
-    NewSubStr := NewSubStr + AvgNumberStr;
-
-  NewSubStr := NewSubStr + Copy(InStr, EndPos, Length(InStr) - EndPos + 1);
-
-  edtOut.Text := NewSubStr;
+  edtOut.Text := OutStr;
 end;
 
 end.

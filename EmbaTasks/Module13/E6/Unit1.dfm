@@ -19,7 +19,7 @@ object Form1: TForm1
     Width = 425
     Height = 21
     TabOrder = 0
-    Text = 'qwe (34567) ewq'
+    Text = 'Smith 178 Sandler 183'
   end
   object edtOut: TEdit
     Left = 16
