@@ -364,11 +364,13 @@ elem_proc LeaveElement
 FILE VAR g_OutFile
 g_OutFile := nil
 
+STRING INTEGER ARRAY TYPE PRINTABLE
+
 PROCEDURE OutToFile
- STRING IN aString 
+ PRINTABLE IN aString 
  %SUMMARY 
  '
- Выводит строку в текущий файл вывода.
+ Выводит значение в текущий файл вывода.
  С переводом каретки.
  '
  ; // %SUMMARY 

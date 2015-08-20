@@ -298,10 +298,10 @@ VOID Test CodeGen
  
  VOID PROCEDURE OutToFile
   %SUMMARY %SUM
-   ' Выводит строку в текущий файл вывода. С переводом каретки. '
+   ' Выводит значение в текущий файл вывода. С переводом каретки. '
   ; // %SUMMARY %SUM
   
-  STRING IN aString
+  PRINTABLE IN aString
   [
    g_Indent
    ' '
@@ -312,6 +312,11 @@ VOID Test CodeGen
   g_OutFile
   File:WriteLn
  ; // VOID PROCEDURE OutToFile
+ 
+ IMMEDIATE VOID TYPE PRINTABLE
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE PRINTABLE
  
  <<Project>> Project1
   %SUMMARY %SUM
@@ -4607,8 +4612,9 @@ TkwMain : Main
   ; // OutFileName
   VOID OPERATOR :: PROCEDURE : OutToFile
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   STRING OPERATOR :: IN : aString
+   PRINTABLE OPERATOR :: IN : aString
   ; // OutToFile
+  IMMEDIATE VOID OPERATOR :: TYPE : PRINTABLE
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library1
