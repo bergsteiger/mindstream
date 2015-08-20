@@ -27,12 +27,14 @@ FUNCTOR : |@
 ; // |@
 
 MACRO this.do
-// - запускаем "себя же" рекурсивно
+ %SUMMARY '- запускаем "себя же" рекурсивно' ;
  axiom:PushSymbol (
  axiom:PushSymbol @SELF
  axiom:PushSymbol DO
  axiom:PushSymbol )
 ; // this.do
+
+WordAlias call.me this.do
 
 WordAlias array:AddTo >>>[]
 

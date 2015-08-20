@@ -413,7 +413,7 @@ elem_proc DumpModelElement
  TRY
   for ( Self .Children ) (
    ModelElement IN aWord
-   aWord .CallGen this.do
+   aWord .CallGen call.me
   )
   %REMARK 'Выводим детей элемента'
  FINALLY

@@ -4034,10 +4034,15 @@ VOID OPERATOR : array:AddTo
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
 ; // array:AddTo
+IMMEDIATE VOID OPERATOR : call.me
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // call.me
 IMMEDIATE VOID OPERATOR : RecurseProc
  ^L OPERATOR :: IN : aName
 ; // RecurseProc
 IMMEDIATE VOID OPERATOR : this.do
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // this.do
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
  Uses: 
   axiom:axiom
