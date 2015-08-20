@@ -321,6 +321,32 @@ VOID Test CodeGen
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR elem_proc
  
+ IMMEDIATE VOID OPERATOR elem_ref_proc
+  %SUMMARY %SUM
+   'Процедура на элементе модели, который передаётся по ссылке'
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  Ctx:ClearTypeInfo
+  elem_ref_proc
+  Ctx:SetWordProducerForCompiledClass
+  axiom:PushSymbol
+  VOID
+  axiom:PushSymbol
+  :
+  aName
+  |N
+  Ctx:Parser:PushLeftDottedSymbol
+  axiom:PushSymbol
+  ^@
+  axiom:PushSymbol
+  ModelElement
+  axiom:PushSymbol
+  IN
+  'Self'
+  Ctx:Parser:PushSymbol
+ ; // IMMEDIATE VOID OPERATOR elem_ref_proc
+ 
  INTEGER VAR g_Indent
  FILE VAR g_OutFile
  IMMEDIATE VOID TYPE GENERATOR
@@ -4692,6 +4718,10 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // elem_proc
+  IMMEDIATE VOID OPERATOR : elem_ref_proc
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^L OPERATOR :: IN : aName
+  ; // elem_ref_proc
   INTEGER OPERATOR :: VAR : g_Indent
   FILE OPERATOR :: VAR : g_OutFile
   IMMEDIATE VOID OPERATOR :: TYPE : GENERATOR

@@ -315,6 +315,20 @@ MACRO elem_proc
  'Self' Ctx:Parser:PushSymbol
 ; // elem_proc
 
+MACRO elem_ref_proc
+ Literal IN aName
+ %SUMMARY 'Процедура на элементе модели, который передаётся по ссылке' ;
+ Ctx:ClearTypeInfo
+ @SELF Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol VOID
+ axiom:PushSymbol :
+ aName |N Ctx:Parser:PushLeftDottedSymbol
+ axiom:PushSymbol ^@
+ axiom:PushSymbol ModelElement
+ axiom:PushSymbol in
+ 'Self' Ctx:Parser:PushSymbol
+; // elem_ref_proc
+
 BOOLEAN elem_func IsSummary
  %SUMMARY 
  '
