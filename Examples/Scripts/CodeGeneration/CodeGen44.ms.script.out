@@ -316,10 +316,17 @@ VOID Test CodeGen
    
    <<Interface>> Interface1
     %SUMMARY %SUM
-     '   Наверное наша программа настолько серьёзна, что реализует каки-то интерфейсы.   Так вот Interface1 - это наш ПЕРВЫЙ интерфейс.   '
+     '   Наверное наша программа настолько серьёзна, что реализует какие-то интерфейсы.   Так вот Interface1 - это наш ПЕРВЫЙ интерфейс.   '
     ; // %SUMMARY %SUM
     
    ; // <<Interface>> Interface1
+   
+   <<Interface>> Interface2
+    %SUMMARY %SUM
+     '   Наверное наша программа настолько серьёзна, что реализует НЕ ОДИН интерфейс, а несколько.   Так вот Interface2 - это наш ВТОРОЙ интерфейс.   '
+    ; // %SUMMARY %SUM
+    
+   ; // <<Interface>> Interface2
    
   ; // <<Programm>> Programm1
   
@@ -4540,6 +4547,9 @@ TkwMain : Main
     OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Interface>> : Interface1
      OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
     ; // Interface1
+    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Interface>> : Interface2
+     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+    ; // Interface2
    ; // Programm1
   ; // Project1
  ; // CodeGen
