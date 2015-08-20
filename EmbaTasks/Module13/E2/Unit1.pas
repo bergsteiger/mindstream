@@ -28,13 +28,13 @@ implementation
 procedure TForm1.btnDoItClick(Sender: TObject);
 var
   Index, NumberCount  : integer;
-  Str : string;
+  InStr : string;
 begin
-  Str := edtIn.Text;
+  InStr := edtIn.Text;
   NumberCount := 0;
-  for Index := 0 to Length(Str) do
+  for Index := 0 to Length(InStr) do
   begin
-    if Str[Index] in ['0'..'9'] then
+    if InStr[Index] in ['0'..'9'] then
       Inc(NumberCount);
   end;
 

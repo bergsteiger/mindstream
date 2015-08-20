@@ -28,18 +28,18 @@ implementation
 procedure TForm1.btnDoItClick(Sender: TObject);
 var
   Index, ResultSum, SpacePos, Number, Code  : integer;
-  Str, SubStr : string;
+  InStr, SubStr : string;
 begin
-  Str := edtIn.Text;
+  InStr := edtIn.Text;
 
   ResultSum := 0;
   SpacePos := 1;
   while SpacePos > 0 do
   begin
-    Str := Trim(Str);
-    SpacePos := Pos(' ', Str);
-    SubStr := Copy(Str, 0, SpacePos - 1);
-    Delete(Str, 1, SpacePos);
+    InStr := Trim(InStr);
+    SpacePos := Pos(' ', InStr);
+    SubStr := Copy(InStr, 0, SpacePos - 1);
+    Delete(InStr, 1, SpacePos);
     Val(SubStr, Number, Code);
 
     if Code = 0 then

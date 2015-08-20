@@ -27,7 +27,7 @@ implementation
 
 procedure TForm1.btnDoItClick(Sender: TObject);
 var
-  InStr, NumberStr, AvgNumberStr, NewSubStr : string;
+  InStr, NumberStr, AvgNumberStr, OutStr : string;
   Index, BeginPos, EndPos, SumNumber : Integer;
   Average : double;
 begin
@@ -47,11 +47,11 @@ begin
   Average := SumNumber / Length(NumberStr);
   Str(Average :6 :2, AvgNumberStr);
 
-  NewSubStr := '';
+  OutStr := '';
   for Index := 1 to Length(NumberStr) do
-    NewSubStr := NewSubStr + AvgNumberStr;
+    OutStr := OutStr + AvgNumberStr;
 
-  edtOut.Text := StringReplace(InStr, NumberStr, NewSubStr, []);;
+  edtOut.Text := StringReplace(InStr, NumberStr, OutStr, []);;
 end;
 
 end.

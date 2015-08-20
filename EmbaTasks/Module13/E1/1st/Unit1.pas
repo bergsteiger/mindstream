@@ -35,15 +35,15 @@ procedure TForm1.DoIt;
 var
   Index : integer;
   InStr,
-  ResultStr : String;
+  OutStr : String;
 begin
   InStr := edtIn.Text;
 
   for Index := 0 to Length(InStr) do
     if not (InStr[Index] in ['0' .. '9']) then
-      ResultStr := PChar(ResultStr) + InStr[Index];
+      OutStr := PChar(OutStr) + InStr[Index];
 
-  edtOut.Text := ResultStr;
+  edtOut.Text := OutStr;
 end;
 
 end.

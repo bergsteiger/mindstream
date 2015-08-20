@@ -27,20 +27,20 @@ implementation
 
 procedure TForm1.btnDoItClick(Sender: TObject);
 var
-  Str, SubStr, ErrorStr : string;
+  InStr, SubStr, ErrorStr : string;
   OperandPos, Code : integer;
   FirstNum, SecondNum, ResultSum : Double;
 begin
-  Str := trim(edtIn.Text);
+  InStr := trim(edtIn.Text);
 
-  OperandPos := Pos('+', Str);
-  SubStr := Copy(Str, 0, OperandPos - 1);
-  Delete(Str, 1, OperandPos);
+  OperandPos := Pos('+', InStr);
+  SubStr := Copy(InStr, 0, OperandPos - 1);
+  Delete(InStr, 1, OperandPos);
   Val(SubStr, FirstNum, Code);
 
-  OperandPos := Pos('=', Str);
-  SubStr := Copy(Str, 0, OperandPos - 1);
-  Delete(Str, 1, OperandPos);
+  OperandPos := Pos('=', InStr);
+  SubStr := Copy(InStr, 0, OperandPos - 1);
+  Delete(InStr, 1, OperandPos);
   Val(SubStr, SecondNum, Code);
 
   ResultSum := FirstNum + SecondNum;

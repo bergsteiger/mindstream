@@ -19,7 +19,7 @@ object Form1: TForm1
     Width = 121
     Height = 21
     TabOrder = 0
-    Text = 'edtIn'
+    Text = '22edtIn123'
   end
   object edtOut: TEdit
     Left = 16
@@ -27,7 +27,6 @@ object Form1: TForm1
     Width = 121
     Height = 21
     TabOrder = 1
-    Text = 'edtIn'
   end
   object btnDoIt: TButton
     Left = 39
