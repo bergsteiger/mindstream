@@ -761,6 +761,9 @@ Dictionary: CodeGen18.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
@@ -3517,6 +3520,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.dict
  ;
@@ -3554,6 +3560,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.dict
  ;
@@ -3854,6 +3863,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:ActionList
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
  ;
  Exports: 
   axiom:axiom
@@ -3881,6 +3893,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:ActionList
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
  ;
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
  Uses: 
@@ -3914,6 +3929,102 @@ ARRAY OPERATOR : to
  ^ OPERATOR :: IN : aTo
  ARRAY OPERATOR :: to : Result
 ; // to
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+ARRAY FUNCTION : >filter>
+ ^ OPERATOR :: IN : aFunctor
+ ^@ OPERATOR :: IN : anArray
+ ARRAY FUNCTION :: >filter> : Result
+; // >filter>
+ARRAY filter
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+ARRAY FUNCTION : >map>
+ ^ OPERATOR :: IN : aFunctor
+ ^@ OPERATOR :: IN : anArray
+ ARRAY FUNCTION :: >map> : Result
+; // >map>
+ARRAY map
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+ARRAY >reverted>
+ARRAY reverted
+ARRAY REVERTED
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
  Uses: 
   axiom:axiom
