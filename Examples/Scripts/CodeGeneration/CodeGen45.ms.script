@@ -214,6 +214,10 @@ concrete-model-begin 'Модель конкретного проекта'
     @ Class1
     REMARK 'Возможно наш проектный класс Class2 наследуется от класса Class1'
    ; // %INHERITS
+   %IMPLEMENTS
+    @ Interface1
+    REMARK 'Возможно наш проектный класс Class2 реализует интерфейс Interface1'
+   ; // %IMPLEMENTS
   ; // Class2
 
  ; // Programm1

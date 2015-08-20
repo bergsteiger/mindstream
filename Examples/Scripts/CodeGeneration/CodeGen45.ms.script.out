@@ -308,6 +308,11 @@ VOID Test CodeGen
      Class1
     ; // %INHERITS %G
     
+    %IMPLEMENTS %R
+     @
+     Interface1
+    ; // %IMPLEMENTS %R
+    
     %SUMMARY %SUM
      '   Наверное наша программа достаточно серьёзна и содержит НЕ ОДИН классы реализации.   Так вот Class2 - это наш ВТОРОЙ класс реализации внутри нашей программы Programm1.   '
     ; // %SUMMARY %SUM
@@ -4542,6 +4547,7 @@ TkwMain : Main
     ; // Class1
     OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class2
      OPERATOR :: NamedWordProducer :: %INHERITS : %G
+     OPERATOR :: NamedWordProducer :: %IMPLEMENTS : %R
      OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
     ; // Class2
     OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Interface>> : Interface1
