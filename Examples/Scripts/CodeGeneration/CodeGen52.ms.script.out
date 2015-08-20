@@ -303,10 +303,25 @@ VOID Test CodeGen
   
   PRINTABLE IN aValue
   STRING VAR l_String
-  aValue
-  ToPrintable
-  >>>
-  l_String
+  if
+   (
+    aValue
+    IsArray
+   )
+  then
+   (
+    aValue
+    strings:Cat
+    >>>
+    l_String
+   )
+  else
+   (
+    aValue
+    ToPrintable
+    >>>
+    l_String
+   )
   [
    g_Indent
    ' '
