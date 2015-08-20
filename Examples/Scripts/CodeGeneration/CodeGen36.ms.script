@@ -329,6 +329,9 @@ PROCEDURE DumpModelElement
 @ Project1 DumpModelElement
 REMARK 'Выводим содержимое элемента'
 
+script:FileName Print
+REMARK 'Выводим имя файла скрипта в тестовых целях'
+
 ; // CodeGen
 
 CodeGen
