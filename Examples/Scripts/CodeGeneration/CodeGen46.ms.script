@@ -217,6 +217,8 @@ concrete-model-begin 'Модель конкретного проекта'
    %IMPLEMENTS
     @ Interface1
     REMARK 'Возможно наш проектный класс Class2 реализует интерфейс Interface1'
+    @ Interface2
+    REMARK 'Возможно наш проектный класс Class2 реализует ещё и интерфейс Interface2'
    ; // %IMPLEMENTS
   ; // Class2
 
