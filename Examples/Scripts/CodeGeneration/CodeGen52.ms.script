@@ -411,7 +411,7 @@ elem_proc DumpModelElement
    END
   )
  FINALLY
-  '; // ' (+) ( Self |N ) OutToFile
+  [ '; // ' Self |N ] OutToFile
   REMARK 'Выводим закрывающую скобку элемента'
  END
 ; // DumpModelElement

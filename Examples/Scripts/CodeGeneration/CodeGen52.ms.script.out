@@ -155,12 +155,11 @@ VOID Test CodeGen
     END
    )
   FINALLY
-   '; // '
-   (+)
-   (
+   [
+    '; // '
     Self
     |N
-   )
+   ]
    OutToFile
   END
  ; // VOID elem_proc DumpModelElement
