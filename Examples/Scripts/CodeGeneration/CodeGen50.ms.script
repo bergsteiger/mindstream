@@ -291,6 +291,21 @@ REMARK
 TtfwWord TYPE ModelElement
 REMARK 'Элемент модели'
 
+/*PRIVATE VOID operator MakeSelfParam
+ g_CurrentClass Ctx:Parser:PushSymbol
+ axiom:PushSymbol in
+ 'Self' Ctx:Parser:PushSymbol
+; // MakeSelfParam*/
+
+MACRO elem_func
+ Literal IN aName
+ %SUMMARY 'Функция на элементе модели' ;
+ @SELF Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol :
+ aName |N Ctx:Parser:PushSymbol
+ //MakeSelfParam
+; // method
+
 BOOLEAN FUNCTION IsSummary
  ModelElement IN aWord
  %SUMMARY 
