@@ -386,7 +386,7 @@ PROCEDURE OutToFile
 ; //OutToFile
 
 elem_proc Child.CallGen
- FUNCTOR ^ IN aGen
+ FUNCTOR RIGHT IN aGen
  %SUMMARY 'Вызывает на ДОЧЕРНЕМ элементе генератор aGen с учётом отступов' ;
  Self .EnterElement 
  TRY
@@ -423,6 +423,25 @@ STRING FUNCTION OutFileName
  %SUMMARY 'Имя файла для вывода' ;
  script:FileName sysutils:ExtractFileName (+) '.' (+) 'dump' >>> Result
 ; // OutFileName
+
+elem_proc CallGen
+ FUNCTOR RIGHT IN aGen
+
+ %SUMMARY 
+ '
+ Вызывает на элементе генератор aGen.
+ С открытием "правильных файлов".
+ ' 
+ ; // %SUMMARY 
+
+ g_OutFile := ( OutFileName File:OpenWrite )
+ TRY
+  Self ( aGen DO )
+  %REMARK 'Вызываем на элементе генератор aGen'
+ FINALLY
+  g_OutFile := nil
+ END
+; // CallGen
 
 g_OutFile := ( OutFileName File:OpenWrite )
 TRY
