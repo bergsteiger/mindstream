@@ -55,14 +55,10 @@ VOID Test CodeGen
     Self
     .Children
    )
+   .CallGen
    (
-    ModelElement IN aWord
-    aWord
-    .CallGen
-    (
-     .DumpModelElement
-     DO
-    )
+    .DumpModelElement
+    DO
    )
   FINALLY
    [
