@@ -265,11 +265,12 @@ PROCEDURE DumpModelElement
  '
  ; // %SUMMARY
  aWord |N Print
- REMARK
-  'Выводим имя элемента'
+ REMARK 'Выводим имя элемента'
  for ( aWord Children ) (
+  REMARK 'Выводим детей элемента'
   ModelElement IN aWord 
   aWord DumpModelElement
+  REMARK 'Вызываем рекурсивно сами себя'
  )
 ; // DumpModelElement
 
