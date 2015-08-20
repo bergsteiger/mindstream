@@ -295,6 +295,8 @@ VOID Test CodeGen
  DumpModelElement
  script:FileName
  sysutils:ExtractFileName
+ (+)
+ '.dump'
  .
 ; // VOID Test CodeGen
 
@@ -4471,4 +4473,4 @@ Project1
   ; // Class2
  ; // Programm1
 ; // Project1
-CodeGen36.ms.script
+CodeGen36.ms.script.dump
