@@ -293,7 +293,7 @@ PROCEDURE OutToFile
  С переводом каретки.
  '
  ; // %SUMMARY 
- [ g_Indent ' ' char:Dupe aString ] strings:Cat Print
+ [ g_Indent ' ' char:Dupe aString ] strings:Cat g_OutFile File:WriteLn
 ; //OutToFile
 
 FORWARD DumpModelElement

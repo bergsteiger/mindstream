@@ -247,7 +247,8 @@ VOID Test CodeGen
    aString
   ]
   strings:Cat
-  .
+  g_OutFile
+  File:WriteLn
  ; // VOID PROCEDURE OutToFile
  
  <<Project>> Project1
@@ -4480,25 +4481,4 @@ TkwMain : Main
   ; // Project1
  ; // CodeGen
 ; // Main
-<<Project>>
-Project1
- <<Library>>
- Library1
- ; // Library1
- <<Library>>
- Library2
- ; // Library2
- <<Library>>
- Library3
- ; // Library3
- <<Programm>>
- Programm1
-  <<Class>>
-  Class1
-  ; // Class1
-  <<Class>>
-  Class2
-  ; // Class2
- ; // Programm1
-; // Project1
 CodeGen39.ms.script.dump
