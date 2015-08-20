@@ -282,6 +282,8 @@ PROCEDURE DumpModelElement
  Рекурсивно.
  '
  ; // %SUMMARY
+ aWord |S OutToFile
+ REMARK 'Выводим стереотип элемента'
  aWord |N OutToFile
  REMARK 'Выводим имя элемента'
  TRY
