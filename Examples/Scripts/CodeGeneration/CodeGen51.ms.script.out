@@ -120,25 +120,29 @@ VOID Test CodeGen
   Result
  ; // ARRAY elem_func Children
  
- VOID PROCEDURE DumpModelElement
+ VOID elem_proc DumpModelElement
   %SUMMARY %SUM
    ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
   ; // %SUMMARY %SUM
   
-  ModelElement IN aWord
-  aWord
+  ModelElement IN Self
+  Self
   |S
   OutToFile
-  aWord
+  Self
   |N
   OutToFile
   TRY
    for
    (
-    aWord
+    Self
     Children
    )
    (
+    %SUMMARY %SUM
+     'Выводим детей элемента'
+    ; // %SUMMARY %SUM
+    
     ModelElement IN aWord
     aWord
     EnterElement
@@ -154,12 +158,12 @@ VOID Test CodeGen
    '; // '
    (+)
    (
-    aWord
+    Self
     |N
    )
    OutToFile
   END
- ; // VOID PROCEDURE DumpModelElement
+ ; // VOID elem_proc DumpModelElement
  
  IMMEDIATE VOID OPERATOR elem_func
   %SUMMARY %SUM
@@ -206,18 +210,18 @@ VOID Test CodeGen
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR elem_proc
  
- VOID PROCEDURE EnterElement
+ VOID elem_proc EnterElement
   %SUMMARY %SUM
    'Начинает вывод элемента'
   ; // %SUMMARY %SUM
   
-  ModelElement IN anElement
-  anElement
+  ModelElement IN Self
+  Self
   IsElementNeedIndent
   ?
   INC
   g_Indent
- ; // VOID PROCEDURE EnterElement
+ ; // VOID elem_proc EnterElement
  
  INTEGER VAR g_Indent
  FILE VAR g_OutFile
@@ -261,18 +265,18 @@ VOID Test CodeGen
   Result
  ; // BOOLEAN elem_func IsSummary
  
- VOID PROCEDURE LeaveElement
+ VOID elem_proc LeaveElement
   %SUMMARY %SUM
    'Заканчивает вывод элемента'
   ; // %SUMMARY %SUM
   
-  ModelElement IN anElement
-  anElement
+  ModelElement IN Self
+  Self
   IsElementNeedIndent
   ?
   DEC
   g_Indent
- ; // VOID PROCEDURE LeaveElement
+ ; // VOID elem_proc LeaveElement
  
  IMMEDIATE VOID TYPE ModelElement
   TtfwValueTypes
@@ -4559,9 +4563,9 @@ TkwMain : Main
    ARRAY OPERATOR :: elem_func :: Children : Result
    ModelElement OPERATOR :: IN : Self
   ; // Children
-  VOID OPERATOR :: PROCEDURE : DumpModelElement
+  VOID OPERATOR :: elem_proc : DumpModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ModelElement OPERATOR :: IN : aWord
+   ModelElement OPERATOR :: IN : Self
   ; // DumpModelElement
   IMMEDIATE VOID OPERATOR : elem_func
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
@@ -4571,9 +4575,9 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // elem_proc
-  VOID OPERATOR :: PROCEDURE : EnterElement
+  VOID OPERATOR :: elem_proc : EnterElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ModelElement OPERATOR :: IN : anElement
+   ModelElement OPERATOR :: IN : Self
   ; // EnterElement
   INTEGER OPERATOR :: VAR : g_Indent
   FILE OPERATOR :: VAR : g_OutFile
@@ -4592,9 +4596,9 @@ TkwMain : Main
    BOOLEAN OPERATOR :: elem_func :: IsSummary : Result
    ModelElement OPERATOR :: IN : Self
   ; // IsSummary
-  VOID OPERATOR :: PROCEDURE : LeaveElement
+  VOID OPERATOR :: elem_proc : LeaveElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ModelElement OPERATOR :: IN : anElement
+   ModelElement OPERATOR :: IN : Self
   ; // LeaveElement
   IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
   STRING FUNCTION : OutFileName

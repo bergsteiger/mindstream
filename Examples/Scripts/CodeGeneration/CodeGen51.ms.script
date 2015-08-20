@@ -351,16 +351,14 @@ BOOLEAN elem_func IsElementNeedIndent
  true >>> Result
 ; // IsElementNeedIndent
 
-PROCEDURE EnterElement
- ModelElement IN anElement
+elem_proc EnterElement
  %SUMMARY 'Начинает вывод элемента' ;
- anElement IsElementNeedIndent ? INC g_Indent
+ Self IsElementNeedIndent ? INC g_Indent
 ; // EnterElement
 
-PROCEDURE LeaveElement
- ModelElement IN anElement
+elem_proc LeaveElement
  %SUMMARY 'Заканчивает вывод элемента' ;
- anElement IsElementNeedIndent ? DEC g_Indent
+ Self IsElementNeedIndent ? DEC g_Indent
 ; // LeaveElement
 
 FILE VAR g_OutFile
@@ -381,22 +379,21 @@ PROCEDURE OutToFile
 FORWARD DumpModelElement
 REMARK 'FORWARD DumpModelElement используем для того, чтобы можно было вызывать DumpModelElement рекурсивно'
  
-PROCEDURE DumpModelElement
- ModelElement IN aWord
+elem_proc DumpModelElement
  %SUMMARY 
  '
  Процедура печатающая содержимое элемента модели.
  Рекурсивно.
  '
  ; // %SUMMARY
- aWord |S OutToFile
+ Self |S OutToFile
  REMARK 'Выводим стереотип элемента'
- aWord |N OutToFile
+ Self |N OutToFile
  REMARK 'Выводим имя элемента'
  TRY
-  for ( aWord Children ) (
-   REMARK 'Выводим детей элемента'
+  for ( Self Children ) (
    ModelElement IN aWord
+   %SUMMARY 'Выводим детей элемента' ;
    aWord EnterElement 
    TRY
     aWord DumpModelElement
@@ -406,7 +403,7 @@ PROCEDURE DumpModelElement
    END
   )
  FINALLY
-  '; // ' (+) ( aWord |N ) OutToFile
+  '; // ' (+) ( Self |N ) OutToFile
   REMARK 'Выводим закрывающую скобку элемента'
  END
 ; // DumpModelElement
