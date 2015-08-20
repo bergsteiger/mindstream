@@ -47,13 +47,11 @@ begin
   Average := SumNumber / Length(NumberStr);
   Str(Average :6 :2, AvgNumberStr);
 
-  NewSubStr := Copy(InStr, 0, BeginPos);
+  NewSubStr := '';
   for Index := 1 to Length(NumberStr) do
     NewSubStr := NewSubStr + AvgNumberStr;
 
-  NewSubStr := NewSubStr + Copy(InStr, EndPos, Length(InStr) - EndPos + 1);
-
-  edtOut.Text := NewSubStr;
+  edtOut.Text := StringReplace(InStr, NumberStr, NewSubStr, []);;
 end;
 
 end.
