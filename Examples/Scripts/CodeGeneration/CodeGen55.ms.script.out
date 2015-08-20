@@ -32,14 +32,20 @@ VOID Test CodeGen
    'Вызывает на ДОЧЕРНЕМ элементе генератор aGen с учётом отступов'
   ; // %SUMMARY %SUM
   
-  ^ IN aGen
+  ^ IN _aGen
+  IMMEDIATE VOID OPERATOR aGen
+   '_aGen'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aGen
+  
   ModelElement IN Self
   Self
   .EnterElement
   TRY
    Self
-   aGen
-   DO
+   (
+    _aGen |^
+   )
   FINALLY
    Self
    .LeaveElement
@@ -4605,7 +4611,8 @@ TkwMain : Main
   ; // .CallGen
   VOID OPERATOR :: elem_proc : .Child.CallGen
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^ OPERATOR :: IN : aGen
+   ^ OPERATOR :: IN : _aGen
+   IMMEDIATE VOID OPERATOR : aGen
    ModelElement OPERATOR :: IN : Self
   ; // .Child.CallGen
   ARRAY OPERATOR :: elem_func : .Children

@@ -389,11 +389,11 @@ FUNCTOR TYPE GENERATOR
 %REMARK 'Генератор содержимого элемента'
 
 elem_proc Child.CallGen
- GENERATOR RIGHT IN aGen
+ GENERATOR right aGen
  %SUMMARY 'Вызывает на ДОЧЕРНЕМ элементе генератор aGen с учётом отступов' ;
  Self .EnterElement 
  TRY
-  Self aGen DO
+  Self aGen
   %REMARK 'Вызываем генератор aGen'
  FINALLY
   Self .LeaveElement 
