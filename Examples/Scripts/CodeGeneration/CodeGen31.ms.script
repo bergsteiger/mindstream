@@ -260,6 +260,8 @@ ARRAY FUNCTION Children
  ( aWord MembersIterator ) >filter> IsModelElement >>> Result
 ; // Children
 
+WordAlias OutToFile Print
+
 FORWARD DumpModelElement
 REMARK 'FORWARD DumpModelElement используем для того, чтобы можно было вызывать DumpModelElement рекурсивно'
  
@@ -271,7 +273,7 @@ PROCEDURE DumpModelElement
  Рекурсивно.
  '
  ; // %SUMMARY
- aWord |N Print
+ aWord |N OutToFile
  TRY
   REMARK 'Выводим имя элемента'
   for ( aWord Children ) (
@@ -281,7 +283,7 @@ PROCEDURE DumpModelElement
    REMARK 'Вызываем рекурсивно сами себя'
   )
  FINALLY
-  '; // ' (+) ( aWord |N ) Print
+  '; // ' (+) ( aWord |N ) OutToFile
   REMARK 'Выводим закрывающую скобку элемента'
  END
 ; // DumpModelElement

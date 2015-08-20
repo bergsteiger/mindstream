@@ -172,6 +172,10 @@ VOID Test CodeGen
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE ModelElement
  
+ REDIFINITION : .
+  >>std::out
+ ; // REDIFINITION : .
+ 
  <<Project>> Project1
   %SUMMARY %SUM
    ' Это наш первый проект - Project1 '
@@ -4340,6 +4344,10 @@ TkwMain : Main
    BOOLEAN FUNCTION :: IsSummary : Result
   ; // IsSummary
   IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
+  REDIFINITION : : OutToFile
+  ==> Redefines
+   VOID .
+  <== Redefines
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library1
