@@ -260,6 +260,16 @@ ARRAY FUNCTION Children
  ( aWord MembersIterator ) >filter> IsModelElement >>> Result
 ; // Children
 
+PROCEDURE EnterElement
+ ModelElement IN anElement
+ %SUMMARY 'Начинает вывод элемента'
+; // EnterElement
+
+PROCEDURE LeaveElement
+ ModelElement IN anElement
+ %SUMMARY 'Заканчивает вывод элемента'
+; // LeaveElement
+
 PROCEDURE OutToFile
  STRING IN aString 
  %SUMMARY 
