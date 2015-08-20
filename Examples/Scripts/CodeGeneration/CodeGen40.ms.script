@@ -186,6 +186,8 @@ concrete-model-begin 'ћодель конкретного проекта'
    '
    ; // %SUMMARY
    %INHERITS
+    @ Class1
+    REMARK '¬озможно наш проектный класс Class2 наследуетс€ от класса Class1'
    ; // %INHERITS
   ; // Class2
 
