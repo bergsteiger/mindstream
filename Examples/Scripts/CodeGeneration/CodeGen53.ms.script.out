@@ -4,6 +4,60 @@ VOID Test CodeGen
   ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
  ; // %SUMMARY %SUM
  
+ ARRAY elem_func .Children
+  %SUMMARY %SUM
+   ' Возвращает итератор детей aWord в "терминах определённой модели" '
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN Self
+  ( Self MembersIterator >filter>
+  .IsModelElement
+  >>>
+  Result
+ ; // ARRAY elem_func .Children
+ 
+ BOOLEAN elem_func .IsElementNeedIndent
+  %SUMMARY %SUM
+   'Определяет тот факт, что элементу нужен отступ'
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN Self
+  true
+  >>>
+  Result
+ ; // BOOLEAN elem_func .IsElementNeedIndent
+ 
+ BOOLEAN elem_func .IsModelElement
+  %SUMMARY %SUM
+   '  Определяет тот факт, что aWord является "элементом модели" '
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN Self
+  NOT
+  (
+   Self
+   .IsSummary
+  )
+  >>>
+  Result
+ ; // BOOLEAN elem_func .IsModelElement
+ 
+ BOOLEAN elem_func .IsSummary
+  %SUMMARY %SUM
+   '  Определяет тот факт, что aWord является документацией к элементу '
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN Self
+  (
+   Self
+   |N
+  )
+  =
+  '%SUM'
+  >>>
+  Result
+ ; // BOOLEAN elem_func .IsSummary
+ 
  IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
   %SUMMARY %SUM
    ' Определяем базовый элемент мета-модели Тот самый который позволяет тащить всё остальное "за волосы из болота" Через этот примитив выводятся все остальные '
@@ -108,18 +162,6 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID <<@meta>> <<UMLClass>>
  
- ARRAY elem_func Children
-  %SUMMARY %SUM
-   ' Возвращает итератор детей aWord в "терминах определённой модели" '
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  ( Self MembersIterator >filter>
-  IsModelElement
-  >>>
-  Result
- ; // ARRAY elem_func Children
- 
  VOID elem_proc DumpModelElement
   %SUMMARY %SUM
    ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
@@ -139,7 +181,7 @@ VOID Test CodeGen
    for
    (
     Self
-    Children
+    .Children
    )
    (
     %SUMMARY %SUM
@@ -177,8 +219,12 @@ VOID Test CodeGen
   Ctx:SetWordProducerForCompiledClass
   axiom:PushSymbol
   :
-  aName
-  |N
+  '.'
+  (+)
+  (
+   aName
+   |N
+  )
   Ctx:Parser:PushSymbol
   axiom:PushSymbol
   ModelElement
@@ -219,7 +265,7 @@ VOID Test CodeGen
   
   ModelElement IN Self
   Self
-  IsElementNeedIndent
+  .IsElementNeedIndent
   ?
   INC
   g_Indent
@@ -227,48 +273,6 @@ VOID Test CodeGen
  
  INTEGER VAR g_Indent
  FILE VAR g_OutFile
- BOOLEAN elem_func IsElementNeedIndent
-  %SUMMARY %SUM
-   'Определяет тот факт, что элементу нужен отступ'
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  true
-  >>>
-  Result
- ; // BOOLEAN elem_func IsElementNeedIndent
- 
- BOOLEAN elem_func IsModelElement
-  %SUMMARY %SUM
-   '  Определяет тот факт, что aWord является "элементом модели" '
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  NOT
-  (
-   Self
-   IsSummary
-  )
-  >>>
-  Result
- ; // BOOLEAN elem_func IsModelElement
- 
- BOOLEAN elem_func IsSummary
-  %SUMMARY %SUM
-   '  Определяет тот факт, что aWord является документацией к элементу '
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  (
-   Self
-   |N
-  )
-  =
-  '%SUM'
-  >>>
-  Result
- ; // BOOLEAN elem_func IsSummary
- 
  VOID elem_proc LeaveElement
   %SUMMARY %SUM
    'Заканчивает вывод элемента'
@@ -276,7 +280,7 @@ VOID Test CodeGen
   
   ModelElement IN Self
   Self
-  IsElementNeedIndent
+  .IsElementNeedIndent
   ?
   DEC
   g_Indent
@@ -4555,6 +4559,26 @@ IMMEDIATE VOID OPERATOR :: NamedWordProducer : %IMPLEMENTS
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  ARRAY OPERATOR :: elem_func : .Children
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ARRAY OPERATOR :: elem_func :: .Children : Result
+   ModelElement OPERATOR :: IN : Self
+  ; // .Children
+  BOOLEAN OPERATOR :: elem_func : .IsElementNeedIndent
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   BOOLEAN OPERATOR :: elem_func :: .IsElementNeedIndent : Result
+   ModelElement OPERATOR :: IN : Self
+  ; // .IsElementNeedIndent
+  BOOLEAN OPERATOR :: elem_func : .IsModelElement
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   BOOLEAN OPERATOR :: elem_func :: .IsModelElement : Result
+   ModelElement OPERATOR :: IN : Self
+  ; // .IsModelElement
+  BOOLEAN OPERATOR :: elem_func : .IsSummary
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   BOOLEAN OPERATOR :: elem_func :: .IsSummary : Result
+   ModelElement OPERATOR :: IN : Self
+  ; // .IsSummary
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
@@ -4587,11 +4611,6 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // <<UMLClass>>
-  ARRAY OPERATOR :: elem_func : Children
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ARRAY OPERATOR :: elem_func :: Children : Result
-   ModelElement OPERATOR :: IN : Self
-  ; // Children
   VOID OPERATOR :: elem_proc : DumpModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : Self
@@ -4610,21 +4629,6 @@ TkwMain : Main
   ; // EnterElement
   INTEGER OPERATOR :: VAR : g_Indent
   FILE OPERATOR :: VAR : g_OutFile
-  BOOLEAN OPERATOR :: elem_func : IsElementNeedIndent
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   BOOLEAN OPERATOR :: elem_func :: IsElementNeedIndent : Result
-   ModelElement OPERATOR :: IN : Self
-  ; // IsElementNeedIndent
-  BOOLEAN OPERATOR :: elem_func : IsModelElement
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   BOOLEAN OPERATOR :: elem_func :: IsModelElement : Result
-   ModelElement OPERATOR :: IN : Self
-  ; // IsModelElement
-  BOOLEAN OPERATOR :: elem_func : IsSummary
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   BOOLEAN OPERATOR :: elem_func :: IsSummary : Result
-   ModelElement OPERATOR :: IN : Self
-  ; // IsSummary
   VOID OPERATOR :: elem_proc : LeaveElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : Self

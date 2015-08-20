@@ -296,7 +296,7 @@ MACRO elem_func
  %SUMMARY 'Функция на элементе модели' ;
  @SELF Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol :
- aName |N Ctx:Parser:PushSymbol
+ '.' (+) ( aName |N ) Ctx:Parser:PushSymbol
  axiom:PushSymbol ModelElement
  axiom:PushSymbol in
  'Self' Ctx:Parser:PushSymbol
@@ -330,7 +330,7 @@ BOOLEAN elem_func IsModelElement
   Определяет тот факт, что aWord является "элементом модели"
  '
  ; // %SUMMARY
- NOT ( Self IsSummary )
+ NOT ( Self .IsSummary )
   >>> Result
 ; // IsModelElement
 
@@ -340,7 +340,7 @@ ARRAY elem_func Children
  Возвращает итератор детей aWord в "терминах определённой модели"
  '
  ;
- ( Self MembersIterator ) >filter> IsModelElement >>> Result
+ ( Self MembersIterator ) >filter> .IsModelElement >>> Result
 ; // Children
 
 INTEGER VAR g_Indent
@@ -354,12 +354,12 @@ BOOLEAN elem_func IsElementNeedIndent
 
 elem_proc EnterElement
  %SUMMARY 'Начинает вывод элемента' ;
- Self IsElementNeedIndent ? INC g_Indent
+ Self .IsElementNeedIndent ? INC g_Indent
 ; // EnterElement
 
 elem_proc LeaveElement
  %SUMMARY 'Заканчивает вывод элемента' ;
- Self IsElementNeedIndent ? DEC g_Indent
+ Self .IsElementNeedIndent ? DEC g_Indent
 ; // LeaveElement
 
 FILE VAR g_OutFile
@@ -402,7 +402,7 @@ elem_proc DumpModelElement
    REMARK 'Выводим имя элемента'
  ] ' ' strings:CatSep OutToFile
  TRY
-  for ( Self Children ) (
+  for ( Self .Children ) (
    ModelElement IN aWord
    %SUMMARY 'Выводим детей элемента' ;
    aWord EnterElement 
