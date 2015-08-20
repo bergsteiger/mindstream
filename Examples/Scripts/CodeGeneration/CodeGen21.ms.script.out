@@ -150,6 +150,16 @@ VOID Test CodeGen
  Project1
  |N
  .
+ for
+ (
+  @
+  Project1
+  MembersIterator
+ )
+ (
+  |N
+  .
+ )
 ; // VOID Test CodeGen
 
 Dictionary: axiom:Array
@@ -4156,3 +4166,8 @@ TkwMain : Main
  ; // CodeGen
 ; // Main
 Project1
+%SUM
+Library1
+Library2
+Library3
+Programm1
