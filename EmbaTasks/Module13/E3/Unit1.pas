@@ -11,6 +11,7 @@ type
     edtIn: TEdit;
     edtOut: TEdit;
     btnDoIt: TButton;
+    procedure btnDoItClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -23,5 +24,29 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.btnDoItClick(Sender: TObject);
+var
+  Index, ResultSum, SpacePos, Number, Code  : integer;
+  Str, SubStr : string;
+begin
+  Str := edtIn.Text;
+
+  ResultSum := 0;
+  SpacePos := 1;
+  while SpacePos > 0 do
+  begin
+    Str := Trim(Str);
+    SpacePos := Pos(' ', Str);
+    SubStr := Copy(Str, 0, SpacePos - 1);
+    Delete(Str, 1, SpacePos);
+    Val(SubStr, Number, Code);
+
+    if Code = 0 then
+      ResultSum := ResultSum + Number;
+  end;
+
+  edtOut.Text := IntToStr(ResultSum);
+end;
 
 end.
