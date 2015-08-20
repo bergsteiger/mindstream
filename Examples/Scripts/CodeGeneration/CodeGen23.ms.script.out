@@ -97,13 +97,23 @@ VOID Test CodeGen
  
  VOID PROCEDURE DumpModelElement
   %SUMMARY %SUM
-   ' Процедура печатающая содержимое элемента модели. '
+   ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
   ; // %SUMMARY %SUM
   
   TtfwWord IN aWord
   aWord
   |N
   .
+  for
+  (
+   aWord
+   MembersIterator
+  )
+  (
+   TtfwWord IN aWord
+   aWord
+   DumpModelElement
+  )
  ; // VOID PROCEDURE DumpModelElement
  
  <<Project>> Project1
@@ -160,13 +170,6 @@ VOID Test CodeGen
  help
  @
  Project1
- DumpModelElement
- for
- (
-  @
-  Project1
-  MembersIterator
- )
  DumpModelElement
 ; // VOID Test CodeGen
 
@@ -4180,6 +4183,14 @@ TkwMain : Main
 Project1
 %SUM
 Library1
+%SUM
 Library2
+%SUM
 Library3
+%SUM
 Programm1
+%SUM
+Class1
+%SUM
+Class2
+%SUM

@@ -229,19 +229,17 @@ PROCEDURE DumpModelElement
  %SUMMARY 
  '
  Процедура печатающая содержимое элемента модели.
+ Рекурсивно.
  '
  ; // %SUMMARY
  aWord |N Print
+ for ( aWord MembersIterator ) (
+  TtfwWord IN aWord 
+  aWord DumpModelElement
+ )
 ; // DumpModelElement
 
 @ Project1 DumpModelElement
-
-REMARK
- '
- Теперь выведем на стандартное устройство вывода имена всех его непосредственных детей.
- '
-
-for ( @ Project1 MembersIterator ) DumpModelElement
 
 ; // CodeGen
 
