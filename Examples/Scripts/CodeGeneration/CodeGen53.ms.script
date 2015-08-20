@@ -309,7 +309,7 @@ MACRO elem_proc
  @SELF Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol VOID
  axiom:PushSymbol :
- aName |N Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushLeftDottedSymbol
  axiom:PushSymbol ModelElement
  axiom:PushSymbol in
  'Self' Ctx:Parser:PushSymbol
@@ -385,7 +385,7 @@ PROCEDURE OutToFile
  REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; //OutToFile
 
-FORWARD DumpModelElement
+FORWARD .DumpModelElement
 REMARK 'FORWARD DumpModelElement используем для того, чтобы можно было вызывать DumpModelElement рекурсивно'
  
 elem_proc DumpModelElement
@@ -405,12 +405,12 @@ elem_proc DumpModelElement
   for ( Self .Children ) (
    ModelElement IN aWord
    %SUMMARY 'Выводим детей элемента' ;
-   aWord EnterElement 
+   aWord .EnterElement 
    TRY
-    aWord DumpModelElement
+    aWord .DumpModelElement
     REMARK 'Вызываем рекурсивно сами себя'
    FINALLY
-    aWord LeaveElement 
+    aWord .LeaveElement 
    END
   )
  FINALLY
@@ -426,7 +426,7 @@ STRING FUNCTION OutFileName
 
 g_OutFile := ( OutFileName File:OpenWrite )
 TRY
- @ Project1 DumpModelElement
+ @ Project1 .DumpModelElement
  REMARK 'Выводим содержимое элемента'
 FINALLY
  g_OutFile := nil

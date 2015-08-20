@@ -1,5 +1,5 @@
 VOID Test CodeGen
- FORWARD DumpModelElement
+ FORWARD .DumpModelElement
  %SUMMARY %SUM
   ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
  ; // %SUMMARY %SUM
@@ -15,6 +15,66 @@ VOID Test CodeGen
   >>>
   Result
  ; // ARRAY elem_func .Children
+ 
+ VOID elem_proc .DumpModelElement
+  %SUMMARY %SUM
+   ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN Self
+  [
+   Self
+   |S
+   Self
+   |N
+  ]
+  ' '
+  strings:CatSep
+  OutToFile
+  TRY
+   for
+   (
+    Self
+    .Children
+   )
+   (
+    %SUMMARY %SUM
+     'Выводим детей элемента'
+    ; // %SUMMARY %SUM
+    
+    ModelElement IN aWord
+    aWord
+    .EnterElement
+    TRY
+     aWord
+     .DumpModelElement
+    FINALLY
+     aWord
+     .LeaveElement
+    END
+   )
+  FINALLY
+   [
+    '; // '
+    Self
+    |N
+   ]
+   OutToFile
+  END
+ ; // VOID elem_proc .DumpModelElement
+ 
+ VOID elem_proc .EnterElement
+  %SUMMARY %SUM
+   'Начинает вывод элемента'
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN Self
+  Self
+  .IsElementNeedIndent
+  ?
+  INC
+  g_Indent
+ ; // VOID elem_proc .EnterElement
  
  BOOLEAN elem_func .IsElementNeedIndent
   %SUMMARY %SUM
@@ -57,6 +117,19 @@ VOID Test CodeGen
   >>>
   Result
  ; // BOOLEAN elem_func .IsSummary
+ 
+ VOID elem_proc .LeaveElement
+  %SUMMARY %SUM
+   'Заканчивает вывод элемента'
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN Self
+  Self
+  .IsElementNeedIndent
+  ?
+  DEC
+  g_Indent
+ ; // VOID elem_proc .LeaveElement
  
  IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
   %SUMMARY %SUM
@@ -162,53 +235,6 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID <<@meta>> <<UMLClass>>
  
- VOID elem_proc DumpModelElement
-  %SUMMARY %SUM
-   ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  [
-   Self
-   |S
-   Self
-   |N
-  ]
-  ' '
-  strings:CatSep
-  OutToFile
-  TRY
-   for
-   (
-    Self
-    .Children
-   )
-   (
-    %SUMMARY %SUM
-     'Выводим детей элемента'
-    ; // %SUMMARY %SUM
-    
-    ModelElement IN aWord
-    aWord
-    EnterElement
-    TRY
-     aWord
-     DumpModelElement
-    FINALLY
-     aWord
-     LeaveElement
-    END
-   )
-  FINALLY
-   [
-    '; // '
-    Self
-    |N
-   ]
-   OutToFile
-  END
- ; // VOID elem_proc DumpModelElement
- 
  IMMEDIATE VOID OPERATOR elem_func
   %SUMMARY %SUM
    'Функция на элементе модели'
@@ -245,7 +271,7 @@ VOID Test CodeGen
   :
   aName
   |N
-  Ctx:Parser:PushSymbol
+  Ctx:Parser:PushLeftDottedSymbol
   axiom:PushSymbol
   ModelElement
   axiom:PushSymbol
@@ -254,34 +280,8 @@ VOID Test CodeGen
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR elem_proc
  
- VOID elem_proc EnterElement
-  %SUMMARY %SUM
-   'Начинает вывод элемента'
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  Self
-  .IsElementNeedIndent
-  ?
-  INC
-  g_Indent
- ; // VOID elem_proc EnterElement
- 
  INTEGER VAR g_Indent
  FILE VAR g_OutFile
- VOID elem_proc LeaveElement
-  %SUMMARY %SUM
-   'Заканчивает вывод элемента'
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  Self
-  .IsElementNeedIndent
-  ?
-  DEC
-  g_Indent
- ; // VOID elem_proc LeaveElement
- 
  IMMEDIATE VOID TYPE ModelElement
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -453,7 +453,7 @@ VOID Test CodeGen
  TRY
   @
   Project1
-  DumpModelElement
+  .DumpModelElement
  FINALLY
   g_OutFile :=
   nil
@@ -4565,6 +4565,14 @@ TkwMain : Main
    ARRAY OPERATOR :: elem_func :: .Children : Result
    ModelElement OPERATOR :: IN : Self
   ; // .Children
+  VOID OPERATOR :: elem_proc : .DumpModelElement
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : Self
+  ; // .DumpModelElement
+  VOID OPERATOR :: elem_proc : .EnterElement
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : Self
+  ; // .EnterElement
   BOOLEAN OPERATOR :: elem_func : .IsElementNeedIndent
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    BOOLEAN OPERATOR :: elem_func :: .IsElementNeedIndent : Result
@@ -4580,6 +4588,10 @@ TkwMain : Main
    BOOLEAN OPERATOR :: elem_func :: .IsSummary : Result
    ModelElement OPERATOR :: IN : Self
   ; // .IsSummary
+  VOID OPERATOR :: elem_proc : .LeaveElement
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : Self
+  ; // .LeaveElement
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
@@ -4612,10 +4624,6 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // <<UMLClass>>
-  VOID OPERATOR :: elem_proc : DumpModelElement
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ModelElement OPERATOR :: IN : Self
-  ; // DumpModelElement
   IMMEDIATE VOID OPERATOR : elem_func
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
@@ -4624,16 +4632,8 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // elem_proc
-  VOID OPERATOR :: elem_proc : EnterElement
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ModelElement OPERATOR :: IN : Self
-  ; // EnterElement
   INTEGER OPERATOR :: VAR : g_Indent
   FILE OPERATOR :: VAR : g_OutFile
-  VOID OPERATOR :: elem_proc : LeaveElement
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ModelElement OPERATOR :: IN : Self
-  ; // LeaveElement
   IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
   STRING FUNCTION : OutFileName
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
