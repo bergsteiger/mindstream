@@ -389,7 +389,7 @@ FUNCTOR TYPE GENERATOR
 %REMARK 'Генератор содержимого элемента'
 
 elem_proc Child.CallGen
- FUNCTOR RIGHT IN aGen
+ GENERATOR RIGHT IN aGen
  %SUMMARY 'Вызывает на ДОЧЕРНЕМ элементе генератор aGen с учётом отступов' ;
  Self .EnterElement 
  TRY
@@ -428,7 +428,7 @@ STRING FUNCTION OutFileName
 ; // OutFileName
 
 elem_proc CallGen
- FUNCTOR RIGHT IN aGen
+ GENERATOR RIGHT IN aGen
 
  %SUMMARY 
  '
