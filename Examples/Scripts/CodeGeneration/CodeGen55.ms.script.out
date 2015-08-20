@@ -327,22 +327,10 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ^L IN aName
-  Ctx:ClearTypeInfo
-  elem_proc
-  Ctx:SetWordProducerForCompiledClass
-  axiom:PushSymbol
-  VOID
-  axiom:PushSymbol
-  :
   aName
   |N
-  Ctx:Parser:PushLeftDottedSymbol
-  axiom:PushSymbol
-  ModelElement
-  axiom:PushSymbol
-  IN
-  'Self'
-  Ctx:Parser:PushSymbol
+  elem_proc
+  do_elem_proc
  ; // IMMEDIATE VOID OPERATOR elem_proc
  
  IMMEDIATE VOID OPERATOR elem_proc
@@ -351,22 +339,10 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ^L IN aName
-  Ctx:ClearTypeInfo
-  elem_proc
-  Ctx:SetWordProducerForCompiledClass
-  axiom:PushSymbol
-  VOID
-  axiom:PushSymbol
-  :
   aName
   |N
-  Ctx:Parser:PushLeftDottedSymbol
-  axiom:PushSymbol
-  ModelElement
-  axiom:PushSymbol
-  IN
-  'Self'
-  Ctx:Parser:PushSymbol
+  elem_proc
+  do_elem_proc
  ; // IMMEDIATE VOID OPERATOR elem_proc
  
  IMMEDIATE VOID OPERATOR elem_ref_proc

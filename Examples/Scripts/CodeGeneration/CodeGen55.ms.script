@@ -319,14 +319,7 @@ PROCEDURE do_elem_proc
 MACRO elem_proc
  Literal IN aName
  %SUMMARY 'Процедура на элементе модели' ;
- Ctx:ClearTypeInfo
- @SELF Ctx:SetWordProducerForCompiledClass
- axiom:PushSymbol VOID
- axiom:PushSymbol :
- aName |N Ctx:Parser:PushLeftDottedSymbol
- axiom:PushSymbol ModelElement
- axiom:PushSymbol in
- 'Self' Ctx:Parser:PushSymbol
+ aName |N @SELF do_elem_proc
 ; // elem_proc
 
 WordAlias elem_generator elem_proc
