@@ -306,9 +306,19 @@ VOID Test CodeGen
  0
  g_OutFile :=
  nil
- @
- Project1
- DumpModelElement
+ g_OutFile :=
+ (
+  OutFileName
+  File:OpenWrite
+ )
+ TRY
+  @
+  Project1
+  DumpModelElement
+ FINALLY
+  g_OutFile :=
+  nil
+ END
  OutFileName
  .
 ; // VOID Test CodeGen

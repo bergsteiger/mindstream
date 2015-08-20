@@ -334,8 +334,13 @@ STRING FUNCTION OutFileName
  script:FileName sysutils:ExtractFileName (+) '.dump' >>> Result
 ; // OutFileName
 
-@ Project1 DumpModelElement
-REMARK 'Выводим содержимое элемента'
+g_OutFile := ( OutFileName File:OpenWrite )
+TRY
+ @ Project1 DumpModelElement
+ REMARK 'Выводим содержимое элемента'
+FINALLY
+ g_OutFile := nil
+END
 
 OutFileName Print
 REMARK 'Выводим имя файла скрипта в тестовых целях'
