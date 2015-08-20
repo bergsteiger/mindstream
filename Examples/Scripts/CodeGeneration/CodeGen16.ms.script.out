@@ -113,6 +113,13 @@ VOID Test CodeGen
    
   ; // <<Library>> Library2
   
+  <<Library>> Library3
+   %SUMMARY %SUM
+    '  Наверное наш проект НАСТОЛЬКО серьёзен, что содержит даже НЕ ДВЕ библиотеки.  Так вот Library3 - это наша третья проектная библиотека  '
+   ; // %SUMMARY %SUM
+   
+  ; // <<Library>> Library3
+  
  ; // <<Project>> Project1
  
  CodeGen
@@ -4104,6 +4111,9 @@ TkwMain : Main
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library2
     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ; // Library2
+   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library3
+    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ; // Library3
   ; // Project1
  ; // CodeGen
 ; // Main
