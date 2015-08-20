@@ -306,7 +306,7 @@ MACRO elem_func
  //MakeSelfParam
 ; // method
 
-BOOLEAN FUNCTION IsSummary
+BOOLEAN elem_func IsSummary
  ModelElement IN aWord
  %SUMMARY 
  '

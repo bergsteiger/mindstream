@@ -215,7 +215,7 @@ VOID Test CodeGen
   Result
  ; // BOOLEAN FUNCTION IsModelElement
  
- BOOLEAN FUNCTION IsSummary
+ BOOLEAN elem_func IsSummary
   %SUMMARY %SUM
    '  Определяет тот факт, что aWord является документацией к элементу '
   ; // %SUMMARY %SUM
@@ -229,7 +229,7 @@ VOID Test CodeGen
   '%SUM'
   >>>
   Result
- ; // BOOLEAN FUNCTION IsSummary
+ ; // BOOLEAN elem_func IsSummary
  
  VOID PROCEDURE LeaveElement
   %SUMMARY %SUM
@@ -4553,10 +4553,10 @@ TkwMain : Main
    ModelElement OPERATOR :: IN : aWord
    BOOLEAN FUNCTION :: IsModelElement : Result
   ; // IsModelElement
-  BOOLEAN FUNCTION : IsSummary
+  BOOLEAN OPERATOR :: elem_func : IsSummary
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : aWord
-   BOOLEAN FUNCTION :: IsSummary : Result
+   BOOLEAN OPERATOR :: elem_func :: IsSummary : Result
   ; // IsSummary
   VOID OPERATOR :: PROCEDURE : LeaveElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
