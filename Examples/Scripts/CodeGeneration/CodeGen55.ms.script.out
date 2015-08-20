@@ -8,7 +8,12 @@ VOID Test CodeGen
    ' Вызывает на элементе генератор aGen. С открытием "правильных файлов". '
   ; // %SUMMARY %SUM
   
-  ^ IN aGen
+  ^ IN _aGen
+  IMMEDIATE VOID OPERATOR aGen
+   '_aGen'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aGen
+  
   ModelElement IN Self
   g_OutFile :=
   (
@@ -18,8 +23,7 @@ VOID Test CodeGen
   TRY
    Self
    (
-    aGen
-    DO
+    _aGen |^
    )
   FINALLY
    g_OutFile :=
@@ -4606,7 +4610,8 @@ TkwMain : Main
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   VOID OPERATOR :: elem_proc : .CallGen
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^ OPERATOR :: IN : aGen
+   ^ OPERATOR :: IN : _aGen
+   IMMEDIATE VOID OPERATOR : aGen
    ModelElement OPERATOR :: IN : Self
   ; // .CallGen
   VOID OPERATOR :: elem_proc : .Child.CallGen
