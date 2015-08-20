@@ -4093,6 +4093,10 @@ IMMEDIATE VOID OPERATOR : model-begin
 IMMEDIATE VOID OPERATOR : model-end
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
 ; // model-end
+IMMEDIATE VOID OPERATOR : REMARK
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // REMARK
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
