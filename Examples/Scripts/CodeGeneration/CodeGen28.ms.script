@@ -255,6 +255,7 @@ ARRAY FUNCTION Children
 ; // Children
 
 FORWARD DumpModelElement
+REMARK 'FORWARD DumpModelElement используем для того, чтобы можно было вызывать DumpModelElement рекурсивно'
  
 PROCEDURE DumpModelElement
  ModelElement IN aWord
