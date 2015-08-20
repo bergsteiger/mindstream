@@ -240,7 +240,7 @@ BOOLEAN FUNCTION IsSummary
 ; // IsSummary
 
 BOOLEAN FUNCTION IsModelElement
- TtfwWord IN aWord
+ ModelElement IN aWord
  %SUMMARY 
  '
   Определяет тот факт, что aWord является "элементом модели"
@@ -250,14 +250,14 @@ BOOLEAN FUNCTION IsModelElement
 ; // IsModelElement
 
 ARRAY FUNCTION Children
- TtfwWord IN aWord
+ ModelElement IN aWord
  ( aWord MembersIterator ) >filter> IsModelElement >>> Result
 ; // Children
 
 FORWARD DumpModelElement
  
 PROCEDURE DumpModelElement
- TtfwWord IN aWord
+ ModelElement IN aWord
  %SUMMARY 
  '
  Процедура печатающая содержимое элемента модели.
@@ -266,7 +266,7 @@ PROCEDURE DumpModelElement
  ; // %SUMMARY
  aWord |N Print
  for ( aWord Children ) (
-  TtfwWord IN aWord 
+  ModelElement IN aWord 
   aWord DumpModelElement
  )
 ; // DumpModelElement

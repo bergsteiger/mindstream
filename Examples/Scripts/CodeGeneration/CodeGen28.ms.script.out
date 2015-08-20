@@ -96,7 +96,7 @@ VOID Test CodeGen
  ; // IMMEDIATE VOID <<@meta>> <<UMLClass>>
  
  ARRAY FUNCTION Children
-  TtfwWord IN aWord
+  ModelElement IN aWord
   ( aWord MembersIterator >filter>
   IsModelElement
   >>>
@@ -108,7 +108,7 @@ VOID Test CodeGen
    ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
   ; // %SUMMARY %SUM
   
-  TtfwWord IN aWord
+  ModelElement IN aWord
   aWord
   |N
   .
@@ -118,7 +118,7 @@ VOID Test CodeGen
    Children
   )
   (
-   TtfwWord IN aWord
+   ModelElement IN aWord
    aWord
    DumpModelElement
   )
@@ -129,7 +129,7 @@ VOID Test CodeGen
    '  Определяет тот факт, что aWord является "элементом модели" '
   ; // %SUMMARY %SUM
   
-  TtfwWord IN aWord
+  ModelElement IN aWord
   aWord
   IsSummary
   !
@@ -4307,16 +4307,16 @@ TkwMain : Main
    ^L OPERATOR :: IN : aName
   ; // <<UMLClass>>
   ARRAY FUNCTION : Children
-   TtfwWord OPERATOR :: IN : aWord
+   ModelElement OPERATOR :: IN : aWord
    ARRAY FUNCTION :: Children : Result
   ; // Children
   VOID OPERATOR :: PROCEDURE : DumpModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   TtfwWord OPERATOR :: IN : aWord
+   ModelElement OPERATOR :: IN : aWord
   ; // DumpModelElement
   BOOLEAN FUNCTION : IsModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   TtfwWord OPERATOR :: IN : aWord
+   ModelElement OPERATOR :: IN : aWord
    BOOLEAN FUNCTION :: IsModelElement : Result
   ; // IsModelElement
   BOOLEAN FUNCTION : IsSummary
