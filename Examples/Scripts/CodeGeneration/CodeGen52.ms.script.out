@@ -126,11 +126,14 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ModelElement IN Self
-  Self
-  |S
-  OutToFile
-  Self
-  |N
+  [
+   Self
+   |S
+   Self
+   |N
+  ]
+  ' '
+  strings:CatSep
   OutToFile
   TRY
    for

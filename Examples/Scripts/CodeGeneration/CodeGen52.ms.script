@@ -394,10 +394,12 @@ elem_proc DumpModelElement
  Рекурсивно.
  '
  ; // %SUMMARY
- Self |S OutToFile
- REMARK 'Выводим стереотип элемента'
- Self |N OutToFile
- REMARK 'Выводим имя элемента'
+ [ 
+  Self |S 
+   REMARK 'Выводим стереотип элемента'
+  Self |N 
+   REMARK 'Выводим имя элемента'
+ ] ' ' strings:CatSep OutToFile
  TRY
   for ( Self Children ) (
    ModelElement IN aWord
