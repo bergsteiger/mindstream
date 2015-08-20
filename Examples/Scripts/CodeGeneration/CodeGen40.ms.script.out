@@ -1,0 +1,4484 @@
+VOID Test CodeGen
+ FORWARD DumpModelElement
+ %SUMMARY %SUM
+  ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
+ ; // %SUMMARY %SUM
+ 
+ IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
+  %SUMMARY %SUM
+   ' Определяем базовый элемент мета-модели Тот самый который позволяет тащить всё остальное "за волосы из болота" Через этот примитив выводятся все остальные '
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  aName
+  |N
+  <<@meta>>
+  DefineStereotypeProducer
+  EXIT
+ ; // IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
+ 
+ IMMEDIATE VOID <<UMLClass>> <<Class>>
+  %SUMMARY %SUM
+   ' Наверное у нас при разработке встречаются проектные классы. Так вот Class это стереотип, который описывает наши проектные классы. '
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  aName
+  |N
+  <<Class>>
+  DefineStereoInstance
+  EXIT
+ ; // IMMEDIATE VOID <<UMLClass>> <<Class>>
+ 
+ IMMEDIATE VOID <<UMLCategory>> <<Library>>
+  %SUMMARY %SUM
+   ' Наверное у нас при разработке встречаются проектные библиотеки. Так вот Library это стереотип, который описывает наши библиотеки. '
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  aName
+  |N
+  <<Library>>
+  DefineStereoInstance
+  EXIT
+ ; // IMMEDIATE VOID <<UMLCategory>> <<Library>>
+ 
+ IMMEDIATE VOID <<UMLCategory>> <<Programm>>
+  %SUMMARY %SUM
+   ' Наверное у нас при разработке встречаются программы. Так вот Programm это стереотип, который описывает наши программы. '
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  aName
+  |N
+  <<Programm>>
+  DefineStereoInstance
+  EXIT
+ ; // IMMEDIATE VOID <<UMLCategory>> <<Programm>>
+ 
+ IMMEDIATE VOID <<UMLCategory>> <<Project>>
+  %SUMMARY %SUM
+   ' Наверное у нас при разработке встречаются проекты. Так вот Project это стереотип, который описывает наши проекты. '
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  aName
+  |N
+  <<Project>>
+  DefineStereoInstance
+  EXIT
+ ; // IMMEDIATE VOID <<UMLCategory>> <<Project>>
+ 
+ IMMEDIATE VOID <<@meta>> <<UMLCategory>>
+  %SUMMARY %SUM
+   ' Категория в терминах UML '
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  aName
+  |N
+  <<UMLCategory>>
+  DefineStereo
+  EXIT
+ ; // IMMEDIATE VOID <<@meta>> <<UMLCategory>>
+ 
+ IMMEDIATE VOID <<@meta>> <<UMLClass>>
+  %SUMMARY %SUM
+   ' Класс в терминах UML '
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  aName
+  |N
+  <<UMLClass>>
+  DefineStereo
+  EXIT
+ ; // IMMEDIATE VOID <<@meta>> <<UMLClass>>
+ 
+ ARRAY FUNCTION Children
+  %SUMMARY %SUM
+   ' Возвращает итератор детей aWord в "терминах определённой модели" '
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN aWord
+  ( aWord MembersIterator >filter>
+  IsModelElement
+  >>>
+  Result
+ ; // ARRAY FUNCTION Children
+ 
+ VOID PROCEDURE DumpModelElement
+  %SUMMARY %SUM
+   ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN aWord
+  aWord
+  |S
+  OutToFile
+  aWord
+  |N
+  OutToFile
+  TRY
+   for
+   (
+    aWord
+    Children
+   )
+   (
+    ModelElement IN aWord
+    aWord
+    EnterElement
+    TRY
+     aWord
+     DumpModelElement
+    FINALLY
+     aWord
+     LeaveElement
+    END
+   )
+  FINALLY
+   '; // '
+   (+)
+   (
+    aWord
+    |N
+   )
+   OutToFile
+  END
+ ; // VOID PROCEDURE DumpModelElement
+ 
+ VOID PROCEDURE EnterElement
+  %SUMMARY %SUM
+   'Начинает вывод элемента'
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN anElement
+  anElement
+  IsElementNeedIndent
+  ?
+  INC
+  g_Indent
+ ; // VOID PROCEDURE EnterElement
+ 
+ INTEGER VAR g_Indent
+ FILE VAR g_OutFile
+ BOOLEAN FUNCTION IsElementNeedIndent
+  %SUMMARY %SUM
+   'Определяет тот факт, что элементу нужен отступ'
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN anElement
+  true
+  >>>
+  Result
+ ; // BOOLEAN FUNCTION IsElementNeedIndent
+ 
+ BOOLEAN FUNCTION IsModelElement
+  %SUMMARY %SUM
+   '  Определяет тот факт, что aWord является "элементом модели" '
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN aWord
+  aWord
+  IsSummary
+  !
+  >>>
+  Result
+ ; // BOOLEAN FUNCTION IsModelElement
+ 
+ BOOLEAN FUNCTION IsSummary
+  %SUMMARY %SUM
+   '  Определяет тот факт, что aWord является документацией к элементу '
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN aWord
+  (
+   aWord
+   |N
+  )
+  =
+  '%SUM'
+  >>>
+  Result
+ ; // BOOLEAN FUNCTION IsSummary
+ 
+ VOID PROCEDURE LeaveElement
+  %SUMMARY %SUM
+   'Заканчивает вывод элемента'
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN anElement
+  anElement
+  IsElementNeedIndent
+  ?
+  DEC
+  g_Indent
+ ; // VOID PROCEDURE LeaveElement
+ 
+ IMMEDIATE VOID TYPE ModelElement
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE ModelElement
+ 
+ STRING FUNCTION OutFileName
+  %SUMMARY %SUM
+   'Имя файла для вывода'
+  ; // %SUMMARY %SUM
+  
+  script:FileName
+  sysutils:ExtractFileName
+  (+)
+  '.dump'
+  >>>
+  Result
+ ; // STRING FUNCTION OutFileName
+ 
+ VOID PROCEDURE OutToFile
+  %SUMMARY %SUM
+   ' Выводит строку в текущий файл вывода. С переводом каретки. '
+  ; // %SUMMARY %SUM
+  
+  STRING IN aString
+  [
+   g_Indent
+   ' '
+   char:Dupe
+   aString
+  ]
+  strings:Cat
+  g_OutFile
+  File:WriteLn
+ ; // VOID PROCEDURE OutToFile
+ 
+ <<Project>> Project1
+  %SUMMARY %SUM
+   ' Это наш первый проект - Project1 '
+  ; // %SUMMARY %SUM
+  
+  <<Library>> Library1
+   %SUMMARY %SUM
+    '  Наверное наш проект содержит какие-то проектные библиотеки.  Так вот Library1 - это наша первая проектная библиотека  '
+   ; // %SUMMARY %SUM
+   
+  ; // <<Library>> Library1
+  
+  <<Library>> Library2
+   %SUMMARY %SUM
+    '  Наверное наш проект достаточно серьёзен и содержит НЕ ОДНУ библиотеку.  Так вот Library2 - это наша вторая проектная библиотека.  '
+   ; // %SUMMARY %SUM
+   
+  ; // <<Library>> Library2
+  
+  <<Library>> Library3
+   %SUMMARY %SUM
+    '  Наверное наш проект НАСТОЛЬКО серьёзен, что содержит даже НЕ ДВЕ библиотеки.  Так вот Library3 - это наша третья проектная библиотека.  '
+   ; // %SUMMARY %SUM
+   
+  ; // <<Library>> Library3
+  
+  <<Programm>> Programm1
+   %SUMMARY %SUM
+    '  Наверное наш проект реализует какую-то программу.  Иначе - зачем бы он нам был бы нужен?  Так вот Programm1 - это программа внутри нашего проекта Project1.  '
+   ; // %SUMMARY %SUM
+   
+   <<Class>> Class1
+    %SUMMARY %SUM
+     '   Наверное наша программа содержит какие-то классы реализации.   Иначе - кто будет реализовывать наш функционал?   Так вот Class1 - это наш ПЕРВЫЙ класс реализации внутри нашей программы Programm1.   '
+    ; // %SUMMARY %SUM
+    
+   ; // <<Class>> Class1
+   
+   <<Class>> Class2
+    %SUMMARY %SUM
+     '   Наверное наша программа достаточно серьёзна и содержит НЕ ОДИН классы реализации.   Так вот Class2 - это наш ВТОРОЙ класс реализации внутри нашей программы Programm1.   '
+    ; // %SUMMARY %SUM
+    
+   ; // <<Class>> Class2
+   
+  ; // <<Programm>> Programm1
+  
+ ; // <<Project>> Project1
+ 
+ CodeGen
+ DumpElement
+ help
+ g_Indent :=
+ 0
+ g_OutFile :=
+ nil
+ g_OutFile :=
+ (
+  OutFileName
+  File:OpenWrite
+ )
+ TRY
+  @
+  Project1
+  DumpModelElement
+ FINALLY
+  g_OutFile :=
+  nil
+ END
+ OutFileName
+ .
+; // VOID Test CodeGen
+
+Dictionary: axiom:Array
+Dictionary: axiom:char
+Dictionary: axiom:class
+Dictionary: axiom:clipboard
+VOID clipboard:clear
+STRING clipboard:GetFormattedText
+VOID clipboard:SetText
+Dictionary: axiom:CompiledWordWorkerWord
+TtfwWord pop:CompiledWordWorkerWord:Compiled
+Dictionary: axiom:Control
+TComponent byname:control:push
+TControl Control:ByHandle
+TControl focused:control:push
+BOOLEAN pop:Control:CanFocus
+STRING pop:Control:Caption
+VOID pop:Control:Click
+Struct pop:Control:ClientToScreen
+TColor pop:Control:Color
+INTEGER pop:Control:ControlCount
+BOOLEAN pop:Control:Enabled
+TComponent pop:Control:FindControlByName
+BOOLEAN pop:Control:Focused
+Il3FontInfo pop:Control:Font
+TCustomForm pop:Control:GetAnotherParentForm
+TControl pop:Control:GetControl
+TCustomForm pop:Control:GetMainForm
+TCustomForm pop:Control:GetParentForm
+TMenuItem pop:Control:GetPopupMenu
+TCustomForm pop:Control:GetTopParentForm
+Cardinal pop:Control:Handle
+INTEGER pop:Control:Height
+VOID pop:Control:Hide
+STRING pop:Control:Hint
+BOOLEAN pop:Control:HScrollerVisible
+VOID pop:Control:Invalidate
+INTEGER pop:Control:Left
+VOID pop:Control:MouseLeftClick
+VOID pop:Control:MouseLeftDragAndDrop
+VOID pop:Control:MouseMiddleClick
+VOID pop:Control:MouseRightClick
+VOID pop:Control:MouseWheelDown
+VOID pop:Control:MouseWheelUp
+STRING pop:Control:Name
+TControl pop:Control:Parent
+VOID pop:Control:Repaint
+Struct pop:Control:ScreenToClient
+pop:control:ScrollInfo
+pop:control:ScrollInfo:Max
+pop:control:ScrollInfo:Min
+pop:control:ScrollInfo:PageSize
+pop:control:ScrollInfo:Position
+BOOLEAN pop:Control:SetFocus
+VOID pop:Control:Show
+BOOLEAN pop:Control:ShowHint
+INTEGER pop:Control:Top
+VOID pop:Control:Undock
+BOOLEAN pop:Control:Visible
+BOOLEAN pop:Control:VScrollerVisible
+INTEGER pop:Control:Width
+Dictionary: axiom:desktop
+INTEGER desktop:Height
+INTEGER desktop:Width
+Dictionary: axiom:exception
+Dictionary: axiom:File
+Dictionary: axiom:Finder
+VOID pop:Finder:SetToCtx
+Dictionary: axiom:Font
+TColor Font:BackColor
+TColor Font:Color
+BOOLEAN Font:IsBold
+BOOLEAN Font:IsItalic
+BOOLEAN Font:IsStrikeOut
+BOOLEAN Font:IsUnderline
+STRING Font:Name
+INTEGER Font:Size
+Dictionary: axiom:generators
+VOID generators:Execute
+Ik2TagGenerator generators:Link
+Dictionary: axiom:guid
+Dictionary: axiom:MainScreen
+INTEGER MainScreen:Height
+INTEGER MainScreen:Width
+Dictionary: axiom:menuitem
+VOID menuitem:Click
+STRING menuitem:GetCaption
+INTEGER menuitem:GetCount
+TMenuItem menuitem:GetItem
+INTEGER menuitem:GetMenuHeight
+BOOLEAN menuitem:IsEnabled
+BOOLEAN menuitem:IsVisible
+Dictionary: axiom:Mouse
+mouse:GetCursorIndex
+mouse:GetCursorNameByIndex
+mouse:GetCursorPosition
+Mouse:LeftDown
+Mouse:LeftUp
+Mouse:MiddleDown
+Mouse:MiddleUp
+Mouse:RightDown
+Mouse:RightUp
+mouse:SetCursorPosition
+Mouse:WheelDown
+Mouse:WheelUp
+Dictionary: axiom:object
+Dictionary: axiom:ParserEx
+VOID pop:ParserEx:PushInt
+VOID pop:ParserEx:PushString
+VOID pop:ParserEx:PushSymbol
+Dictionary: axiom:screen
+INTEGER screen:Height
+INTEGER screen:Width
+Dictionary: axiom:ScrollingWinControl
+BOOLEAN pop:ScrollingWinControl:HScrollerVisible
+BOOLEAN pop:ScrollingWinControl:VScrollerVisible
+Dictionary: axiom:string
+Dictionary: axiom:strings
+Dictionary: axiom:TActionList
+TCustomImageList .TActionList.Images
+TComponentName .TActionList.Name
+TActionListState .TActionList.State
+INTEGER .TActionList.Tag
+Dictionary: axiom:TActionListState
+TActionListState TActionListState::asNormal
+TActionListState TActionListState::asSuspended
+TActionListState TActionListState::asSuspendedEnabled
+TActionListState TActionListState:NameToValue
+STRING TActionListState:ValueToName
+Dictionary: axiom:TAlign
+TAlign TAlign::alBottom
+TAlign TAlign::alClient
+TAlign TAlign::alCustom
+TAlign TAlign::alLeft
+TAlign TAlign::alNone
+TAlign TAlign::alRight
+TAlign TAlign::alTop
+TAlign TAlign:NameToValue
+STRING TAlign:ValueToName
+Dictionary: axiom:TBasicAction
+TComponentName .TBasicAction.Name
+INTEGER .TBasicAction.Tag
+Dictionary: axiom:TBiDiMode
+TBiDiMode TBiDiMode::bdLeftToRight
+TBiDiMode TBiDiMode::bdRightToLeft
+TBiDiMode TBiDiMode::bdRightToLeftNoAlign
+TBiDiMode TBiDiMode::bdRightToLeftReadingOnly
+TBiDiMode TBiDiMode:NameToValue
+STRING TBiDiMode:ValueToName
+Dictionary: axiom:TColor
+TColor TColor::cl3DDkShadow
+TColor TColor::cl3DLight
+TColor TColor::clActiveBorder
+TColor TColor::clActiveCaption
+TColor TColor::clAppWorkSpace
+TColor TColor::clAqua
+TColor TColor::clBackground
+TColor TColor::clBlack
+TColor TColor::clBlue
+TColor TColor::clBtnFace
+TColor TColor::clBtnHighlight
+TColor TColor::clBtnShadow
+TColor TColor::clBtnText
+TColor TColor::clCaptionText
+TColor TColor::clCream
+TColor TColor::clDefault
+TColor TColor::clFuchsia
+TColor TColor::clGradientActiveCaption
+TColor TColor::clGradientInactiveCaption
+TColor TColor::clGray
+TColor TColor::clGrayText
+TColor TColor::clGreen
+TColor TColor::clHighlight
+TColor TColor::clHighlightText
+TColor TColor::clHotLight
+TColor TColor::clInactiveBorder
+TColor TColor::clInactiveCaption
+TColor TColor::clInactiveCaptionText
+TColor TColor::clInfoBk
+TColor TColor::clInfoText
+TColor TColor::clLime
+TColor TColor::clMaroon
+TColor TColor::clMedGray
+TColor TColor::clMenu
+TColor TColor::clMenuBar
+TColor TColor::clMenuHighlight
+TColor TColor::clMenuText
+TColor TColor::clMoneyGreen
+TColor TColor::clNavy
+TColor TColor::clNone
+TColor TColor::clOlive
+TColor TColor::clPurple
+TColor TColor::clRed
+TColor TColor::clScrollBar
+TColor TColor::clSilver
+TColor TColor::clSkyBlue
+TColor TColor::clTeal
+TColor TColor::clWhite
+TColor TColor::clWindow
+TColor TColor::clWindowFrame
+TColor TColor::clWindowText
+TColor TColor::clYellow
+Dictionary: axiom:TComponent
+TComponentName .TComponent.Name
+INTEGER .TComponent.Tag
+Dictionary: axiom:TContainedAction
+STRING .TContainedAction.Category
+TComponentName .TContainedAction.Name
+INTEGER .TContainedAction.Tag
+Dictionary: axiom:TControl
+TCursor .TControl.Cursor
+INTEGER .TControl.Height
+THelpContext .TControl.HelpContext
+STRING .TControl.HelpKeyword
+THelpType .TControl.HelpType
+STRING .TControl.Hint
+INTEGER .TControl.Left
+TComponentName .TControl.Name
+INTEGER .TControl.Tag
+INTEGER .TControl.Top
+INTEGER .TControl.Width
+Dictionary: axiom:TControlScrollBar
+INTEGER .TControlScrollBar.ButtonSize
+TColor .TControlScrollBar.Color
+TScrollBarInc .TControlScrollBar.Increment
+Word .TControlScrollBar.Margin
+BOOLEAN .TControlScrollBar.ParentColor
+INTEGER .TControlScrollBar.Position
+INTEGER .TControlScrollBar.Range
+INTEGER .TControlScrollBar.Size
+BOOLEAN .TControlScrollBar.Smooth
+TScrollBarStyle .TControlScrollBar.Style
+INTEGER .TControlScrollBar.ThumbSize
+BOOLEAN .TControlScrollBar.Tracking
+BOOLEAN .TControlScrollBar.Visible
+Dictionary: axiom:TCustomActionList
+TComponentName .TCustomActionList.Name
+INTEGER .TCustomActionList.Tag
+Dictionary: axiom:TCustomForm
+TCursor .TCustomForm.Cursor
+INTEGER .TCustomForm.Height
+THelpContext .TCustomForm.HelpContext
+STRING .TCustomForm.HelpKeyword
+THelpType .TCustomForm.HelpType
+STRING .TCustomForm.Hint
+TControlScrollBar .TCustomForm.HorzScrollBar
+INTEGER .TCustomForm.Left
+TComponentName .TCustomForm.Name
+INTEGER .TCustomForm.Tag
+INTEGER .TCustomForm.Top
+TControlScrollBar .TCustomForm.VertScrollBar
+INTEGER .TCustomForm.Width
+Dictionary: axiom:TCustomImageList
+TComponentName .TCustomImageList.Name
+INTEGER .TCustomImageList.Tag
+Dictionary: axiom:TDefaultMonitor
+TDefaultMonitor TDefaultMonitor::dmActiveForm
+TDefaultMonitor TDefaultMonitor::dmDesktop
+TDefaultMonitor TDefaultMonitor::dmMainForm
+TDefaultMonitor TDefaultMonitor::dmPrimary
+TDefaultMonitor TDefaultMonitor:NameToValue
+STRING TDefaultMonitor:ValueToName
+Dictionary: axiom:TDragKind
+TDragKind TDragKind::dkDock
+TDragKind TDragKind::dkDrag
+TDragKind TDragKind:NameToValue
+STRING TDragKind:ValueToName
+Dictionary: axiom:TDragMode
+TDragMode TDragMode::dmAutomatic
+TDragMode TDragMode::dmManual
+TDragMode TDragMode:NameToValue
+STRING TDragMode:ValueToName
+Dictionary: axiom:test
+test:ResolveInputFilePath
+Dictionary: axiom:tests
+tests:CheckEtalon
+tests:CheckOutputWithInput
+Dictionary: axiom:text
+Dictionary: axiom:TFont
+TFontCharset .TFont.Charset
+TColor .TFont.Color
+INTEGER .TFont.Height
+TFontName .TFont.Name
+TFontPitch .TFont.Pitch
+INTEGER .TFont.Size
+TFontStyles .TFont.Style
+Dictionary: axiom:TFontCharset
+TFontCharset TFontCharset::ANSI_CHARSET
+TFontCharset TFontCharset::ARABIC_CHARSET
+TFontCharset TFontCharset::BALTIC_CHARSET
+TFontCharset TFontCharset::CHINESEBIG5_CHARSET
+TFontCharset TFontCharset::DEFAULT_CHARSET
+TFontCharset TFontCharset::EASTEUROPE_CHARSET
+TFontCharset TFontCharset::GB2312_CHARSET
+TFontCharset TFontCharset::GREEK_CHARSET
+TFontCharset TFontCharset::HANGEUL_CHARSET
+TFontCharset TFontCharset::HEBREW_CHARSET
+TFontCharset TFontCharset::JOHAB_CHARSET
+TFontCharset TFontCharset::MAC_CHARSET
+TFontCharset TFontCharset::OEM_CHARSET
+TFontCharset TFontCharset::RUSSIAN_CHARSET
+TFontCharset TFontCharset::SHIFTJIS_CHARSET
+TFontCharset TFontCharset::SYMBOL_CHARSET
+TFontCharset TFontCharset::THAI_CHARSET
+TFontCharset TFontCharset::TURKISH_CHARSET
+Dictionary: axiom:TFontPitch
+TFontPitch TFontPitch::fpDefault
+TFontPitch TFontPitch::fpFixed
+TFontPitch TFontPitch::fpVariable
+TFontPitch TFontPitch:NameToValue
+STRING TFontPitch:ValueToName
+Dictionary: axiom:TForm
+TBasicAction .TForm.Action
+TWinControl .TForm.ActiveControl
+TAlign .TForm.Align
+BOOLEAN .TForm.AlphaBlend
+Byte .TForm.AlphaBlendValue
+TAnchors .TForm.Anchors
+BOOLEAN .TForm.AutoScroll
+BOOLEAN .TForm.AutoSize
+TBiDiMode .TForm.BiDiMode
+TBorderIcons .TForm.BorderIcons
+TFormBorderStyle .TForm.BorderStyle
+TBorderWidth .TForm.BorderWidth
+TCaption .TForm.Caption
+INTEGER .TForm.ClientHeight
+INTEGER .TForm.ClientWidth
+TColor .TForm.Color
+TSizeConstraints .TForm.Constraints
+BOOLEAN .TForm.Ctl3D
+TCursor .TForm.Cursor
+TDefaultMonitor .TForm.DefaultMonitor
+BOOLEAN .TForm.DockSite
+TDragKind .TForm.DragKind
+TDragMode .TForm.DragMode
+BOOLEAN .TForm.Enabled
+TFont .TForm.Font
+TFormStyle .TForm.FormStyle
+INTEGER .TForm.Height
+THelpContext .TForm.HelpContext
+STRING .TForm.HelpFile
+STRING .TForm.HelpKeyword
+THelpType .TForm.HelpType
+STRING .TForm.Hint
+TControlScrollBar .TForm.HorzScrollBar
+TIcon .TForm.Icon
+BOOLEAN .TForm.KeyPreview
+INTEGER .TForm.Left
+TMainMenu .TForm.Menu
+TComponentName .TForm.Name
+TMenuItem .TForm.ObjectMenuItem
+BOOLEAN .TForm.OldCreateOrder
+BOOLEAN .TForm.ParentBiDiMode
+BOOLEAN .TForm.ParentFont
+INTEGER .TForm.PixelsPerInch
+TPopupMenu .TForm.PopupMenu
+TPosition .TForm.Position
+TPrintScale .TForm.PrintScale
+BOOLEAN .TForm.Scaled
+BOOLEAN .TForm.ScreenSnap
+BOOLEAN .TForm.ShowHint
+INTEGER .TForm.SnapBuffer
+INTEGER .TForm.Tag
+INTEGER .TForm.Top
+BOOLEAN .TForm.TransparentColor
+TColor .TForm.TransparentColorValue
+BOOLEAN .TForm.UseDockManager
+TControlScrollBar .TForm.VertScrollBar
+BOOLEAN .TForm.Visible
+INTEGER .TForm.Width
+TMenuItem .TForm.WindowMenu
+TWindowState .TForm.WindowState
+Dictionary: axiom:TFormBorderStyle
+TFormBorderStyle TFormBorderStyle::bsDialog
+TFormBorderStyle TFormBorderStyle::bsNone
+TFormBorderStyle TFormBorderStyle::bsSingle
+TFormBorderStyle TFormBorderStyle::bsSizeable
+TFormBorderStyle TFormBorderStyle::bsSizeToolWin
+TFormBorderStyle TFormBorderStyle::bsToolWindow
+TFormBorderStyle TFormBorderStyle:NameToValue
+STRING TFormBorderStyle:ValueToName
+Dictionary: axiom:TFormStyle
+TFormStyle TFormStyle::fsMDIChild
+TFormStyle TFormStyle::fsMDIForm
+TFormStyle TFormStyle::fsNormal
+TFormStyle TFormStyle::fsStayOnTop
+TFormStyle TFormStyle:NameToValue
+STRING TFormStyle:ValueToName
+Dictionary: axiom:THelpType
+THelpType THelpType::htContext
+THelpType THelpType::htKeyword
+THelpType THelpType:NameToValue
+STRING THelpType:ValueToName
+Dictionary: axiom:Tl3TokenType
+Tl3TokenType Tl3TokenType::l3_ttBOF
+Tl3TokenType Tl3TokenType::l3_ttComment
+Tl3TokenType Tl3TokenType::l3_ttDoubleQuotedString
+Tl3TokenType Tl3TokenType::l3_ttEOF
+Tl3TokenType Tl3TokenType::l3_ttEOL
+Tl3TokenType Tl3TokenType::l3_ttFloat
+Tl3TokenType Tl3TokenType::l3_ttInteger
+Tl3TokenType Tl3TokenType::l3_ttKeyWord
+Tl3TokenType Tl3TokenType::l3_ttSingleChar
+Tl3TokenType Tl3TokenType::l3_ttString
+Tl3TokenType Tl3TokenType::l3_ttSymbol
+Tl3TokenType Tl3TokenType:NameToValue
+STRING Tl3TokenType:ValueToName
+Dictionary: axiom:TMainMenu
+TMenuAutoFlag .TMainMenu.AutoHotkeys
+TMenuAutoFlag .TMainMenu.AutoLineReduction
+BOOLEAN .TMainMenu.AutoMerge
+TBiDiMode .TMainMenu.BiDiMode
+TCustomImageList .TMainMenu.Images
+TMenuItem .TMainMenu.Items
+TComponentName .TMainMenu.Name
+BOOLEAN .TMainMenu.OwnerDraw
+BOOLEAN .TMainMenu.ParentBiDiMode
+INTEGER .TMainMenu.Tag
+Dictionary: axiom:TMenu
+TMenuItem .TMenu.Items
+TComponentName .TMenu.Name
+INTEGER .TMenu.Tag
+Dictionary: axiom:TMenuAutoFlag
+TMenuAutoFlag TMenuAutoFlag::maAutomatic
+TMenuAutoFlag TMenuAutoFlag::maManual
+TMenuAutoFlag TMenuAutoFlag:NameToValue
+STRING TMenuAutoFlag:ValueToName
+Dictionary: axiom:TMenuBreak
+TMenuBreak TMenuBreak::mbBarBreak
+TMenuBreak TMenuBreak::mbBreak
+TMenuBreak TMenuBreak::mbNone
+TMenuBreak TMenuBreak:NameToValue
+STRING TMenuBreak:ValueToName
+Dictionary: axiom:TMenuItem
+TBasicAction .TMenuItem.Action
+BOOLEAN .TMenuItem.AutoCheck
+TMenuItemAutoFlag .TMenuItem.AutoHotkeys
+TMenuItemAutoFlag .TMenuItem.AutoLineReduction
+TBitmap .TMenuItem.Bitmap
+TMenuBreak .TMenuItem.Break
+STRING .TMenuItem.Caption
+BOOLEAN .TMenuItem.Checked
+BOOLEAN .TMenuItem.Default
+BOOLEAN .TMenuItem.Enabled
+Byte .TMenuItem.GroupIndex
+THelpContext .TMenuItem.HelpContext
+STRING .TMenuItem.Hint
+TImageIndex .TMenuItem.ImageIndex
+TComponentName .TMenuItem.Name
+BOOLEAN .TMenuItem.RadioItem
+TShortCut .TMenuItem.ShortCut
+TCustomImageList .TMenuItem.SubMenuImages
+INTEGER .TMenuItem.Tag
+BOOLEAN .TMenuItem.Visible
+Dictionary: axiom:TMenuItemAutoFlag
+TMenuItemAutoFlag TMenuItemAutoFlag::maAutomatic
+TMenuItemAutoFlag TMenuItemAutoFlag::maManual
+TMenuItemAutoFlag TMenuItemAutoFlag::maParent
+TMenuItemAutoFlag TMenuItemAutoFlag:NameToValue
+STRING TMenuItemAutoFlag:ValueToName
+Dictionary: axiom:TPopupAlignment
+TPopupAlignment TPopupAlignment::paCenter
+TPopupAlignment TPopupAlignment::paLeft
+TPopupAlignment TPopupAlignment::paRight
+TPopupAlignment TPopupAlignment:NameToValue
+STRING TPopupAlignment:ValueToName
+Dictionary: axiom:TPopupMenu
+TPopupAlignment .TPopupMenu.Alignment
+TMenuAutoFlag .TPopupMenu.AutoHotkeys
+TMenuAutoFlag .TPopupMenu.AutoLineReduction
+BOOLEAN .TPopupMenu.AutoPopup
+TBiDiMode .TPopupMenu.BiDiMode
+THelpContext .TPopupMenu.HelpContext
+TCustomImageList .TPopupMenu.Images
+TMenuItem .TPopupMenu.Items
+TMenuAnimation .TPopupMenu.MenuAnimation
+TComponentName .TPopupMenu.Name
+BOOLEAN .TPopupMenu.OwnerDraw
+BOOLEAN .TPopupMenu.ParentBiDiMode
+INTEGER .TPopupMenu.Tag
+TTrackButton .TPopupMenu.TrackButton
+Dictionary: axiom:TPosition
+TPosition TPosition::poDefault
+TPosition TPosition::poDefaultPosOnly
+TPosition TPosition::poDefaultSizeOnly
+TPosition TPosition::poDesigned
+TPosition TPosition::poDesktopCenter
+TPosition TPosition::poMainFormCenter
+TPosition TPosition::poOwnerFormCenter
+TPosition TPosition::poScreenCenter
+TPosition TPosition:NameToValue
+STRING TPosition:ValueToName
+Dictionary: axiom:TPrintScale
+TPrintScale TPrintScale::poNone
+TPrintScale TPrintScale::poPrintToFit
+TPrintScale TPrintScale::poProportional
+TPrintScale TPrintScale:NameToValue
+STRING TPrintScale:ValueToName
+Dictionary: axiom:TScrollBarStyle
+TScrollBarStyle TScrollBarStyle::ssFlat
+TScrollBarStyle TScrollBarStyle::ssHotTrack
+TScrollBarStyle TScrollBarStyle::ssRegular
+TScrollBarStyle TScrollBarStyle:NameToValue
+STRING TScrollBarStyle:ValueToName
+Dictionary: axiom:TScrollingWinControl
+TCursor .TScrollingWinControl.Cursor
+INTEGER .TScrollingWinControl.Height
+THelpContext .TScrollingWinControl.HelpContext
+STRING .TScrollingWinControl.HelpKeyword
+THelpType .TScrollingWinControl.HelpType
+STRING .TScrollingWinControl.Hint
+TControlScrollBar .TScrollingWinControl.HorzScrollBar
+INTEGER .TScrollingWinControl.Left
+TComponentName .TScrollingWinControl.Name
+INTEGER .TScrollingWinControl.Tag
+INTEGER .TScrollingWinControl.Top
+TControlScrollBar .TScrollingWinControl.VertScrollBar
+INTEGER .TScrollingWinControl.Width
+Dictionary: axiom:TSizeConstraints
+TConstraintSize .TSizeConstraints.MaxHeight
+TConstraintSize .TSizeConstraints.MaxWidth
+TConstraintSize .TSizeConstraints.MinHeight
+TConstraintSize .TSizeConstraints.MinWidth
+Dictionary: axiom:TTrackButton
+TTrackButton TTrackButton::tbLeftButton
+TTrackButton TTrackButton::tbRightButton
+TTrackButton TTrackButton:NameToValue
+STRING TTrackButton:ValueToName
+Dictionary: axiom:TWinControl
+TCursor .TWinControl.Cursor
+INTEGER .TWinControl.Height
+THelpContext .TWinControl.HelpContext
+STRING .TWinControl.HelpKeyword
+THelpType .TWinControl.HelpType
+STRING .TWinControl.Hint
+INTEGER .TWinControl.Left
+TComponentName .TWinControl.Name
+INTEGER .TWinControl.Tag
+INTEGER .TWinControl.Top
+INTEGER .TWinControl.Width
+Dictionary: axiom:TWindowState
+TWindowState TWindowState::wsMaximized
+TWindowState TWindowState::wsMinimized
+TWindowState TWindowState::wsNormal
+TWindowState TWindowState:NameToValue
+STRING TWindowState:ValueToName
+Dictionary: axiom:wait
+wait:Cancel
+wait:Choice
+wait:No
+wait:Ok
+wait:Yes
+Dictionary: axiom:waited
+waited:?
+Dictionary: axiom:wnd
+VOID wnd:CloseWindow
+STRING wnd:GetClassName
+STRING wnd:GetWindowText
+BOOLEAN wnd:IsVisible
+VOID wnd:SetForeground
+BOOLEAN wnd:WindowIsMine
+Dictionary: axiom:WordInfo
+BOOLEAN pop:WordInfo:AcceptsValue
+TtfwAccessType pop:WordInfo:AccessType
+INTEGER pop:WordInfo:Compare
+BOOLEAN pop:WordInfo:Empty
+BOOLEAN pop:WordInfo:HasAccessType
+BOOLEAN pop:WordInfo:HasLinkType
+BOOLEAN pop:WordInfo:HasValueType
+BOOLEAN pop:WordInfo:HasWordModifier
+TtfwWordInfo pop:WordInfo:IncludeAccesType
+TtfwWordInfo pop:WordInfo:IncludeLinkType
+TtfwWordInfo pop:WordInfo:IncludeModifier
+TtfwWordInfo pop:WordInfo:IncludeTypeModifier
+TtfwLinkType pop:WordInfo:LinkType
+STRING pop:WordInfo:ToString
+STRING pop:WordInfo:TypeName
+TtfwValueTypes pop:WordInfo:ValueTypes
+Dictionary: axiom:WString
+Dictionary: CodeGen40.ms.script
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.script
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
+ ;
+Dictionary: axiom:axiom
+ Uses: 
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+ Exports: 
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+INTEGER -
+INTEGER --
+BOOLEAN !
+VOID OPERATOR : --!
+ ^ OPERATOR :: IN : aWhatToDecrement
+; // --!
+BOOLEAN !=
+BOOLEAN !=0
+VOID OPERATOR :: PROCEDURE : "! Тест в разработке"
+BOOLEAN OPERATOR : "БОЛЬШЕ ИЛИ РАВНО"
+ COMPARABLE OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: >= : Result
+; // "БОЛЬШЕ ИЛИ РАВНО"
+BOOLEAN OPERATOR : "в интервале"
+ INTEGER OPERATOR :: VAR : "верхнее значение"
+ INTEGER OPERATOR :: VAR : "нижнее значение"
+ ^ OPERATOR :: IN : anInterval
+ INTEGER OPERATOR :: IN : aValue
+ BOOLEAN OPERATOR :: "в интервале" : Result
+; // "в интервале"
+VOID OPERATOR :: PROCEDURE : "Выполнить и если было исключение, то выполнить"
+ OPERATOR :: IN : aProc1
+ OPERATOR :: IN : aProc2
+ INTEGER OPERATOR :: VAR : l_StackLevel
+; // "Выполнить и если было исключение, то выполнить"
+VOID OPERATOR :: PROCEDURE : "Выполнить обработав исключение"
+ STRING OPERATOR :: IN : anException
+ OBJECT OPERATOR :: IN : aProc
+; // "Выполнить обработав исключение"
+VOID OPERATOR : "Выполнить подавив исключение"
+ ^ OPERATOR :: IN : aWhatToDo
+ OPERATOR :: VAR : l_WasException
+; // "Выполнить подавив исключение"
+VOID OPERATOR :: PROCEDURE : "Дать системе перерисоваться"
+BOOLEAN OPERATOR : "МЕНЬШЕ ИЛИ РАВНО"
+ COMPARABLE OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: <= : Result
+; // "МЕНЬШЕ ИЛИ РАВНО"
+VOID OPERATOR :: PROCEDURE : "Нажать"
+ STRING OPERATOR :: IN : aString
+; // "Нажать"
+BOOLEAN OPERATOR : "НЕ РАВНО"
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: <> : Result
+; // "НЕ РАВНО"
+BOOLEAN OPERATOR : "НЕ ЯВЛЯЕТСЯ"
+ ^ OPERATOR :: IN : aClass
+ CASTABLE OPERATOR :: IN : anObj
+ BOOLEAN OPERATOR :: NOTIS : Result
+; // "НЕ ЯВЛЯЕТСЯ"
+VOID OPERATOR : "Обработать Enter модально"
+ ^ OPERATOR :: IN : aWhatToDo
+; // "Обработать Enter модально"
+VOID OPERATOR :: PROCEDURE : "Сравнить текущее исключение с эталоном"
+ STRING OPERATOR :: VAR : l_ClassName
+ STRING OPERATOR :: VAR : l_Message
+ STRING OPERATOR :: VAR : l_Message_out
+; // "Сравнить текущее исключение с эталоном"
+VOID OPERATOR : "тест с падением"
+ ^ OPERATOR :: IN : aWhatToDo
+ OPERATOR :: VAR : l_WasException
+; // "тест с падением"
+OBJECT OPERATOR : %%
+ ^ OPERATOR :: IN : aName
+ OBJECT OPERATOR :: IN : aWord
+ OBJECT OPERATOR :: VAR : l_Member
+ OBJECT OPERATOR :: %% : Result
+; // %%
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CHILDREN
+IMMEDIATE VOID OPERATOR : %DISABLE_CASCADE_DICT
+IMMEDIATE VOID OPERATOR :: NamedInitedVarProducer : %DOCUMENTATION
+ ^ OPERATOR :: IN : aValue
+; // %DOCUMENTATION
+%INCLUDES
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %INHERITS
+OBJECT FUNCTION : %P
+ OPERATOR :: IN : %S
+ OPERATOR :: VAR : l_P
+ OBJECT FUNCTION :: %P : Result
+; // %P
+OBJECT FUNCTION : %ST
+ OPERATOR :: IN : %S
+ OBJECT FUNCTION :: %ST : Result
+; // %ST
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %SUMMARY
+OBJECT FUNCTION : %T
+ OPERATOR :: IN : %S
+ OPERATOR :: VAR : l_T
+ OBJECT FUNCTION :: %T : Result
+; // %T
+STRING FUNCTION : %TN
+ OPERATOR :: IN : %S
+ STRING FUNCTION :: %TN : Result
+; // %TN
+STRING FUNCTION : %TS
+ OPERATOR :: IN : %S
+ STRING FUNCTION :: %TS : Result
+; // %TS
+INTEGER &
+BOOLEAN &&
+(
+STRING OPERATOR : (+)
+ STRING OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ STRING OPERATOR :: (+) : Result
+; // (+)
+)
+INTEGER *
+INTEGER */
+REDIFINITION : : .
+==> Redefines
+ VOID .
+<== Redefines
+INTEGER /
+:
+^@ OPERATOR : ::
+ ^L OPERATOR :: IN : aName
+ ^@ OPERATOR :: IN : aSelf
+ STRING OPERATOR :: VAR : l_Name
+ OBJECT OPERATOR :: VAR : l_Res
+ OBJECT OPERATOR :: VAR : l_Self
+ ^@ OPERATOR :: :: : Result
+; // ::
+OPERATOR : :=
+ ^@ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+; // :=
+;
+VOID ?
+BOOLEAN ?!=
+BOOLEAN ?==
+VOID CALLER OPERATOR : ?ASSURE
+ BOOLEAN OPERATOR :: IN : aCondition
+ ^ OPERATOR :: IN : aMessage
+ TtfwWord OPERATOR :: IN : Caller
+; // ?ASSURE
+VOID ?DUP
+VOID CALLER OPERATOR : ?FAIL
+ BOOLEAN OPERATOR :: IN : aCondition
+ ^ OPERATOR :: IN : aMessage
+ TtfwWord OPERATOR :: IN : Caller
+; // ?FAIL
+TtfwWord @
+^@ OPERATOR : @^
+ LINK ^ OPERATOR :: IN : aSelf
+ ^@ OPERATOR :: @^ : Result
+; // @^
+IMMEDIATE VOID OPERATOR : @SELF
+[
+IMMEDIATE OPERATOR : [EXECUTE]
+ ^ OPERATOR :: IN : aCode
+; // [EXECUTE]
+Struct [i]
+]
+IMMEDIATE VOID OPERATOR : ^
+VOID OPERATOR : ^:=
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+; // ^:=
+IMMEDIATE VOID OPERATOR : ^@
+IMMEDIATE VOID OPERATOR : ^L
+VOID OPERATOR :: PROCEDURE : __DumpMembers
+ OBJECT OPERATOR :: IN : anObject
+ VOID OPERATOR :: PROCEDURE : Dump
+  OBJECT OPERATOR :: IN : anObject
+ ; // Dump
+; // __DumpMembers
+INTEGER |
+TtfwWord OPERATOR : |^@
+ ^@ OPERATOR :: IN : aSelf
+ TtfwWord OPERATOR :: |^@ : Result
+; // |^@
+BOOLEAN ||
+STRING FUNCTION : |N
+ OPERATOR :: IN : %S
+ STRING FUNCTION :: |N : Result
+; // |N
+STRING OPERATOR : |NS
+ OPERATOR :: IN : aName
+ STRING OPERATOR :: |NS : Result
+; // |NS
+STRING FUNCTION : |S
+ OPERATOR :: IN : %S
+ STRING FUNCTION :: |S : Result
+; // |S
+STRING FUNCTION : |U
+ OPERATOR :: IN : %S
+ OPERATOR :: VAR : l_U
+ STRING FUNCTION :: |U : Result
+; // |U
+INTEGER ~
+Struct +
+VOID OPERATOR : +!
+ INTEGER OPERATOR :: IN : anIncrement
+ ^ OPERATOR :: IN : aWhatToIncrement
+; // +!
+INTEGER ++
+VOID OPERATOR : ++!
+ ^ OPERATOR :: IN : aWhatToIncrement
+; // ++!
+VOID OPERATOR : +=
+ ^@ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+; // +=
+BOOLEAN OPERATOR : <
+ COMPARABLE OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: < : Result
+; // <
+IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@StereotypeProducer>>
+ ^L OPERATOR :: IN : aName
+; // <<@StereotypeProducer>>
+BOOLEAN OPERATOR : <=
+ COMPARABLE OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: <= : Result
+; // <=
+BOOLEAN OPERATOR : <>
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: <> : Result
+; // <>
+BOOLEAN <0
+BOOLEAN OPERATOR : =
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ ARRAY OPERATOR :: VAR : l_Right
+ BOOLEAN OPERATOR :: = : Result
+; // =
+VOID OPERATOR : =-
+ INTEGER OPERATOR :: IN : anInc
+ ^ OPERATOR :: IN : aWhatToDecrement
+; // =-
+VOID OPERATOR : -=
+ ^@ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+; // -=
+VOID : : =:
+ OPERATOR :: IN : aValue
+ ^ OPERATOR :: IN : aVar
+; // =:
+: : =:^
+ OPERATOR :: IN : aValue
+ ^ OPERATOR :: IN : aVar
+; // =:^
+VOID OPERATOR : =+
+ INTEGER OPERATOR :: IN : anIncrement
+ ^ OPERATOR :: IN : aWhatToIncrement
+; // =+
+BOOLEAN ==
+OPERATOR : ==>
+ ARRAY OPERATOR :: IN : A
+ ^ OPERATOR :: IN : aWhatToDo
+; // ==>
+BOOLEAN =0
+BOOLEAN OPERATOR : >
+ COMPARABLE OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: > : Result
+; // >
+^@ OPERATOR : ->
+ ^L OPERATOR :: IN : aName
+ ^@ OPERATOR :: IN : aSelf
+ ^@ OPERATOR :: -> : Result
+; // ->
+OBJECT OPERATOR : ->^
+ ^ OPERATOR :: IN : aName
+ ^@ OPERATOR :: IN : aSelf
+ STRING OPERATOR :: VAR : l_Name
+ OBJECT OPERATOR :: VAR : l_Self
+ OBJECT OPERATOR :: ->^ : Result
+; // ->^
+BOOLEAN OPERATOR : >=
+ COMPARABLE OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: >= : Result
+; // >=
+VOID : : >>>
+ OPERATOR :: IN : aValue
+ ^ OPERATOR :: IN : aVar
+; // >>>
+VOID OPERATOR : >>>[]
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+; // >>>[]
+: : >>>^
+ OPERATOR :: IN : aValue
+ ^ OPERATOR :: IN : aVar
+; // >>>^
+BOOLEAN >0
+FUNCTION : ->0
+ OBJECT OPERATOR :: IN : %S
+ FUNCTION :: ->0 : Result
+; // ->0
+INTEGER 2*
+INTEGER 2/
+VOID 2DROP
+VOID 2DUP
+VOID 2OVER
+VOID 2SWAP
+IMMEDIATE VOID OPERATOR : ABSTRACT
+STRING FUNCTION : Add<<@>>
+ STRING OPERATOR :: IN : aName
+ STRING FUNCTION :: Add<<@>> : Result
+; // Add<<@>>
+STRING FUNCTION : Add<<>>
+ STRING OPERATOR :: IN : aName
+ STRING FUNCTION :: Add<<>> : Result
+; // Add<<>>
+IMMEDIATE VOID OPERATOR : AGGREGATION
+OPERATOR : AllMembers==>
+ ^ OPERATOR :: IN : aLambda
+ OBJECT OPERATOR :: IN : anObject
+ VOID OPERATOR :: PROCEDURE : DoMembers
+  OBJECT OPERATOR :: IN : anObject
+ ; // DoMembers
+; // AllMembers==>
+BOOLEAN OPERATOR : AND
+ BOOLEAN OPERATOR :: IN : aFirst
+ ^ OPERATOR :: IN : aSecond
+ BOOLEAN OPERATOR :: AND : Result
+; // AND
+IMMEDIATE VOID OPERATOR : ARRAY
+VOID Array:Add
+VOID Array:Clear
+INTEGER Array:Count
+ARRAY Array:Filter
+ARRAY Array:FunctorToIterator
+Struct Array:GetItem
+BOOLEAN FUNCTION : array:HasString
+ ARRAY OPERATOR :: IN : anArray
+ STRING OPERATOR :: IN : aString
+ BOOLEAN FUNCTION :: array:HasString : Result
+ VOID OPERATOR :: PROCEDURE : Поиск
+  STRING OPERATOR :: IN : anItem
+ ; // Поиск
+; // array:HasString
+BOOLEAN FUNCTION : array:HasText
+ ARRAY OPERATOR :: IN : anArray
+ STRING OPERATOR :: IN : aString
+ BOOLEAN FUNCTION :: array:HasText : Result
+ VOID OPERATOR :: PROCEDURE : Поиск
+  STRING OPERATOR :: IN : anItem
+ ; // Поиск
+; // array:HasText
+VOID Array:Iterate
+ARRAY Array:Map
+ARRAY Array:Reverted
+VOID Array:SetItem
+INTEGER FUNCTION : array:StringCount
+ ARRAY OPERATOR :: IN : anArray
+ STRING OPERATOR :: IN : aString
+ INTEGER FUNCTION :: array:StringCount : Result
+ VOID OPERATOR :: PROCEDURE : Поиск
+  STRING OPERATOR :: IN : anItem
+ ; // Поиск
+; // array:StringCount
+BOOLEAN FUNCTION : ArraysAreEqual
+ ARRAY OPERATOR :: IN : A
+ ARRAY OPERATOR :: IN : B
+ VOID OPERATOR :: PROCEDURE : DoWithItem
+  OPERATOR :: IN : B[i]
+ ; // DoWithItem
+ INTEGER OPERATOR :: VAR : l_Count
+ STRING CONST : l_Exception
+ INTEGER OPERATOR :: VAR : l_Index
+ BOOLEAN FUNCTION :: ArraysAreEqual : Result
+; // ArraysAreEqual
+VOID AskWindowToCloseItself
+VOID ASSERT
+VOID ASSERTS
+VOID OPERATOR :: PROCEDURE : ASSUME
+ STRING OPERATOR :: IN : aStr
+; // ASSUME
+VOID CALLER OPERATOR : ASSURE
+ ^ OPERATOR :: IN : aCondition
+ ^ OPERATOR :: IN : aMessage
+ TtfwWord OPERATOR :: IN : Caller
+; // ASSURE
+IMMEDIATE VOID OPERATOR :: TYPE : ATOMIC
+IMMEDIATE VOID OPERATOR : axiom:CLASS
+IMMEDIATE VOID OPERATOR : axiom:CompileSetValueTypes
+ TtfwValueTypes OPERATOR :: IN : aValues
+; // axiom:CompileSetValueTypes
+PROTECTED : : axiom:DefineVar
+PROTECTED VOID : : axiom:DefineVarWithInit
+ STRING OPERATOR :: IN : aName
+ OBJECT OPERATOR :: IN : aStereo
+ OBJECT OPERATOR :: IN : aValue
+ OPERATOR :: VAR : l_NewVar
+; // axiom:DefineVarWithInit
+VOID OPERATOR :: PROCEDURE : axiom:DumpMembers
+ OBJECT OPERATOR :: IN : anObject
+ VOID OPERATOR :: PROCEDURE : Dump
+  OBJECT OPERATOR :: IN : anObject
+ ; // Dump
+; // axiom:DumpMembers
+axiom:operator
+STRING OPERATOR : axiom:SourceInfo
+ OBJECT OPERATOR :: IN : aCaller
+ STRING OPERATOR :: axiom:SourceInfo : Result
+; // axiom:SourceInfo
+begin
+BEGIN
+IMMEDIATE VOID OPERATOR : BOOLEAN
+VOID BREAK
+VOID BREAK-ITERATOR
+Byte
+IMMEDIATE VOID OPERATOR : CALLER
+Cardinal
+IMMEDIATE VOID OPERATOR : CARDINAL
+CASE
+IMMEDIATE VOID OPERATOR :: TYPE : CASTABLE
+STRING Cat
+Char
+IMMEDIATE VOID OPERATOR : CHAR
+STRING char:Dupe
+STRING char:ToString
+TClass class::EAccessViolation
+TClass class::EAssertionFailed
+TClass class::EBitsError
+TClass class::EClassNotFound
+TClass class::EComponentError
+TClass class::EControlC
+TClass class::EConvertError
+TClass class::EDivByZero
+TClass class::EExternal
+TClass class::EExternalException
+TClass class::EFCreateError
+TClass class::EFilerError
+TClass class::EFileStreamError
+TClass class::EFOpenError
+TClass class::EHeapException
+TClass class::EIntError
+TClass class::EIntfCastError
+TClass class::EIntOverflow
+TClass class::EInvalidCast
+TClass class::EInvalidImage
+TClass class::EInvalidOp
+TClass class::EInvalidOperation
+TClass class::EInvalidPointer
+TClass class::EListError
+TClass class::EMathError
+TClass class::EMethodNotFound
+TClass class::EOSError
+TClass class::EOutOfMemory
+TClass class::EOutOfResources
+TClass class::EOverflow
+TClass class::EParserError
+TClass class::EPrivilege
+TClass class::ERangeError
+TClass class::EReadError
+TClass class::EResNotFound
+TClass class::EStackOverflow
+TClass class::EStreamError
+TClass class::EStringListError
+TClass class::EtfwBreak
+TClass class::EtfwBreakIterator
+TClass class::EtfwCheck
+TClass class::EtfwCheckPrim
+TClass class::EtfwCodeFlowException
+TClass class::EtfwCompiler
+TClass class::EtfwContinue
+TClass class::EtfwException
+TClass class::EtfwExit
+TClass class::EtfwExitOrBreak
+TClass class::EtfwFail
+TClass class::EtfwHalt
+TClass class::EtfwManualBreak
+TClass class::EtfwRunner
+TClass class::EtfwScriptException
+TClass class::EUnderflow
+TClass class::EWriteError
+TClass class::Exception
+TClass class::EZeroDivide
+TClass class::TActionList
+TClass class::TBasicAction
+TClass class::TBitmap
+TClass class::TComponent
+TClass class::TContainedAction
+TClass class::TControl
+TClass class::TControlScrollBar
+TClass class::TCustomActionList
+TClass class::TCustomForm
+TClass class::TCustomImageList
+TClass class::TFont
+TClass class::TForm
+TClass class::TGraphic
+TClass class::TGraphicsObject
+TClass class::TIcon
+TClass class::TInterfacedPersistent
+TClass class::TkwAdd
+TClass class::TkwApplicationActionIdle
+TClass class::TkwApplicationExeName
+TClass class::TkwArrayAdd
+TClass class::TkwArrayClear
+TClass class::TkwArrayCount
+TClass class::TkwArrayFilter
+TClass class::TkwArrayFunctorToIterator
+TClass class::TkwArrayGetItem
+TClass class::TkwArrayIterate
+TClass class::TkwArrayMap
+TClass class::TkwArrayReverted
+TClass class::TkwArraySetItem
+TClass class::TkwAskWindowToCloseItself
+TClass class::TkwASSERTS
+TClass class::TkwAtomicIf
+TClass class::TkwBEGIN
+TClass class::TkwBeginLikeCompiledCode
+TClass class::TkwBitAnd
+TClass class::TkwBitNot
+TClass class::TkwBitOR
+TClass class::TkwBoolAnd
+TClass class::TkwBoolNot
+TClass class::TkwBoolOr
+TClass class::TkwBracketBegin
+TClass class::TkwBracketEnd
+TClass class::TkwBREAK
+TClass class::TkwBREAKITERATOR
+TClass class::TkwBynameControlPush
+TClass class::TkwCASE
+TClass class::TkwCat
+TClass class::TkwCharDupe
+TClass class::TkwCharToString
+TClass class::TkwCheckAssert
+TClass class::TkwCheckEtalon
+TClass class::TkwCheckOutputWithInput
+TClass class::TkwClipboardClear
+TClass class::TkwClipboardGetFormattedText
+TClass class::TkwClipboardSetText
+TClass class::TkwCloseArray
+TClass class::TkwCloseBracket
+TClass class::TkwCodeIterator
+TClass class::TkwCompareStr
+TClass class::TkwCompareText
+TClass class::TkwCompiledArray
+TClass class::TkwCompiledCase
+TClass class::TkwCompiledFunction
+TClass class::TkwCompiledIF
+TClass class::TkwCompiledIfElse
+TClass class::TkwCompiledIncluded
+TClass class::TkwCompiledMain
+TClass class::TkwCompiledProcedure
+TClass class::TkwCompiledProcedureWithStackChecking
+TClass class::TkwCompiledPushWord
+TClass class::TkwCompiledRules
+TClass class::TkwCompiledScriptCompileAndProcess
+TClass class::TkwCompiledTryExcept
+TClass class::TkwCompiledTryFinally
+TClass class::TkwCompiledVar
+TClass class::TkwCompiledVarAsStringWorker
+TClass class::TkwCompiledVarWorker
+TClass class::TkwCompiledWord
+TClass class::TkwCompiledWordContainer
+TClass class::TkwCompiledWordPrim
+TClass class::TkwCompiledWordWorker
+TClass class::TkwCompiledWordWorkerEx
+TClass class::TkwCompiledWordWorkerWord
+TClass class::TkwCompiledWordWorkerWordRunner
+TClass class::TkwCompiledWStringShift
+TClass class::TkwCompiledWStringVarDecLen
+TClass class::TkwCompiledWStringVarInc
+TClass class::TkwCompiledWStringVarPushCharAndInc
+TClass class::TkwCompiledWStringVarRSplitTo
+TClass class::TkwCompiledWStringVarSplitTo
+TClass class::TkwCompileRef
+TClass class::TkwCompileValue
+TClass class::TkwCompileWeakRef
+TClass class::TkwComponentFromStackWord
+TClass class::TkwComputerName
+TClass class::TkwCONST
+TClass class::TkwConstLikeCompiled
+TClass class::TkwCONTINUE
+TClass class::TkwControlByHandle
+TClass class::TkwControlFocusedControlPush
+TClass class::TkwControlWord
+TClass class::TkwCopyFile
+TClass class::TkwCopyFilesByMask
+TClass class::TkwCreateAndRaise
+TClass class::TkwCtxClearTypeInfo
+TClass class::TkwCtxEngine
+TClass class::TkwCtxIncludeAccessType
+TClass class::TkwCtxIncludeLinkType
+TClass class::TkwCtxIncludeModifier
+TClass class::TkwCtxIncludeTypeModifier
+TClass class::TkwCtxIncludeValueTypes
+TClass class::TkwCtxKeyWordDefiningNow
+TClass class::TkwCtxNewWordDefinitor
+TClass class::TkwCtxParser
+TClass class::TkwCtxParserPushInt
+TClass class::TkwCtxParserPushString
+TClass class::TkwCtxParserPushSymbol
+TClass class::TkwCtxPushCompiler
+TClass class::TkwCtxPushFinder
+TClass class::TkwCtxResolveIncludedFilePath
+TClass class::TkwCtxScriptCaller
+TClass class::TkwCtxSetNewWordName
+TClass class::TkwCtxSetValueTypes
+TClass class::TkwCtxSetWordProducerForCompiledClass
+TClass class::TkwCtxStoredValuesStack
+TClass class::TkwCtxValueTypes
+TClass class::TkwCtxWordDefiningNow
+TClass class::TkwCtxWordInfo
+TClass class::TkwCurrentException
+TClass class::TkwCurrentExceptionClass
+TClass class::TkwCurrentExceptionClassName
+TClass class::TkwCurrentExceptionMessage
+TClass class::TkwDec
+TClass class::TkwDEFAULT
+TClass class::TkwDefine
+TClass class::TkwDeleteFile
+TClass class::TkwDeleteFilesByMask
+TClass class::TkwDesktopHeight
+TClass class::TkwDesktopWidth
+TClass class::TkwDiv2
+TClass class::TkwDivide
+TClass class::TkwDivision
+TClass class::TkwDoWord
+TClass class::TkwDROP
+TClass class::TkwDROP2
+TClass class::TkwDualCompiledWordContainer
+TClass class::TkwDUP
+TClass class::TkwDUP2
+TClass class::TkwDUPIfNotZero
+TClass class::TkwElse
+TClass class::TkwEmitString
+TClass class::TkwEnabledSaveRTFPictures
+TClass class::TkwEND
+TClass class::TkwEndsStr
+TClass class::TkwEndsText
+TClass class::TkwEquals
+TClass class::TkwEqualZero
+TClass class::TkwEtalonNeeds64
+TClass class::TkwEtalonNeedsComputerName
+TClass class::TkwEtalonNeedsOSName
+TClass class::TkwEtalonNeedsXE
+TClass class::TkwEXCEPT
+TClass class::TkwEXIT
+TClass class::TkwFalse
+TClass class::TkwFileEOF
+TClass class::TkwFileOpenRead
+TClass class::TkwFileOpenWrite
+TClass class::TkwFileReadLines
+TClass class::TkwFileReadLn
+TClass class::TkwFileReadWStrLn
+TClass class::TkwFileWriteChar
+TClass class::TkwFileWriteLn
+TClass class::TkwFileWriteStr
+TClass class::TkwFileWriteWStr
+TClass class::TkwFileWriteWStrLn
+TClass class::TkwFINALLY
+TClass class::TkwFindWindowByCaption
+TClass class::TkwFontBackColor
+TClass class::TkwFontColor
+TClass class::TkwFontIsBold
+TClass class::TkwFontIsItalic
+TClass class::TkwFontIsStrikeOut
+TClass class::TkwFontIsUnderline
+TClass class::TkwFontName
+TClass class::TkwFontSize
+TClass class::TkwFORWARD
+TClass class::TkwForwardDeclaration
+TClass class::TkwForwardDeclarationHolder
+TClass class::TkwFUNCTION
+TClass class::TkwGeneratePDFForEtalon
+TClass class::TkwGeneratorsExecute
+TClass class::TkwGeneratorsLink
+TClass class::TkwGetForegroundWindow
+TClass class::TkwGetLocalDate
+TClass class::TkwGetLocalDateTime
+TClass class::TkwGetLocalTime
+TClass class::TkwGetTickCount
+TClass class::TkwGlobalVar
+TClass class::TkwGREATER
+TClass class::TkwGreaterThanZero
+TClass class::TkwHALT
+TClass class::TkwHardKey
+TClass class::TkwHasTabs
+TClass class::TkwHelp
+TClass class::TkwIfElse
+TClass class::TkwIMMEDIATE
+TClass class::TkwImmediateTemporaryCompiledCode
+TClass class::TkwInc
+TClass class::TkwInclude
+TClass class::TkwIncluded
+TClass class::TkwIncludedPrim
+TClass class::TkwINCLUDES
+TClass class::TkwIncludesInChildren
+TClass class::TkwInlinedWord
+TClass class::TkwInnerIncluded
+TClass class::TkwInnerIncludedInChildren
+TClass class::TkwInteger
+TClass class::TkwIntToStr
+TClass class::TkwInvertROT
+TClass class::TkwIsArray
+TClass class::TkwIsBool
+TClass class::TkwIsBracket
+TClass class::TkwIsChar
+TClass class::TkwIsClass
+TClass class::TkwIsInt
+TClass class::TkwIsIntf
+TClass class::TkwIsNil
+TClass class::TkwIsObj
+TClass class::TkwIsString
+TClass class::TkwIsTypeOf
+TClass class::TkwIsUnder64
+TClass class::TkwIsVoid
+TClass class::TkwIsWString
+TClass class::TkwIsXE
+TClass class::TkwIterateChildWindows
+TClass class::TkwIterateForms
+TClass class::TkwIterateWindows
+TClass class::TkwKey
+TClass class::TkwKeyDown
+TClass class::TkwKeyUp
+TClass class::TkwLeftParam
+TClass class::TkwLeftWordRefParam
+TClass class::TkwLESS
+TClass class::TkwLessThanZero
+TClass class::TkwLOOP
+TClass class::TkwMain
+TClass class::TkwMainCodeController
+TClass class::TkwMainScreenHeight
+TClass class::TkwMainScreenWidth
+TClass class::TkwMedianBacket
+TClass class::TkwMembersIterator
+TClass class::TkwMenuItemCaption
+TClass class::TkwMenuItemClick
+TClass class::TkwMenuItemCount
+TClass class::TkwMenuItemEnabled
+TClass class::TkwMenuItemGetItem
+TClass class::TkwMenuItemGetMenuHeight
+TClass class::TkwMenuItemVisible
+TClass class::TkwMODAL
+TClass class::TkwModFromDiv
+TClass class::TkwModifier
+TClass class::TkwMouseGetCursorIndex
+TClass class::TkwMouseGetCursorNameByIndex
+TClass class::TkwMouseGetCursorPosition
+TClass class::TkwMouseLeftDown
+TClass class::TkwMouseLeftUp
+TClass class::TkwMouseMiddleDown
+TClass class::TkwMouseMiddleUp
+TClass class::TkwMouseRightDown
+TClass class::TkwMouseRightUp
+TClass class::TkwMouseSetCursorPosition
+TClass class::TkwMouseUpDownSupport
+TClass class::TkwMouseWheelDown
+TClass class::TkwMouseWheelSupport
+TClass class::TkwMouseWheelUp
+TClass class::TkwMsg
+TClass class::TkwMul
+TClass class::TkwMul2
+TClass class::TkwMulDiv
+TClass class::TkwNewWord
+TClass class::TkwNil
+TClass class::TkwNIP
+TClass class::TkwNOP
+TClass class::TkwNotEquals
+TClass class::TkwNotImplemented
+TClass class::TkwNotZero
+TClass class::TkwObjectFromStackWord
+TClass class::TkwObjRefParam
+TClass class::TkwOpenArray
+TClass class::TkwOPERATOR
+TClass class::TkwOSName
+TClass class::TkwOVER
+TClass class::TkwOVER2
+TClass class::TkwPICK
+TClass class::TkwPopActionListFindAction
+TClass class::TkwPopClassInherits
+TClass class::TkwPopCompiledWordWorkerWordCompiled
+TClass class::TkwPopCompilerAddCodePart
+TClass class::TkwPopCompilerCompileInParameterPopCode
+TClass class::TkwPopCompilerGetWordCompilingNow
+TClass class::TkwPopCompilerKeywordFinder
+TClass class::TkwPopCompilerNewWordDefinitor
+TClass class::TkwPopCompilerSetToCtx
+TClass class::TkwPopComponentComponentCount
+TClass class::TkwPopComponentFindComponent
+TClass class::TkwPopComponentGetComponent
+TClass class::TkwPopComponentName
+TClass class::TkwPopComponentOwner
+TClass class::TkwPopContainedActionExecute
+TClass class::TkwPopControlCanFocus
+TClass class::TkwPopControlCaption
+TClass class::TkwPopControlClick
+TClass class::TkwPopControlClientToScreen
+TClass class::TkwPopControlColor
+TClass class::TkwPopControlControlCount
+TClass class::TkwPopControlEnabled
+TClass class::TkwPopControlFindControlByName
+TClass class::TkwPopControlFocused
+TClass class::TkwPopControlFont
+TClass class::TkwPopControlGetAnotherParentForm
+TClass class::TkwPopControlGetControl
+TClass class::TkwPopControlGetMainForm
+TClass class::TkwPopControlGetParentForm
+TClass class::TkwPopControlGetPopupMenu
+TClass class::TkwPopControlGetTopParentForm
+TClass class::TkwPopControlHandle
+TClass class::TkwPopControlHeight
+TClass class::TkwPopControlHide
+TClass class::TkwPopControlHint
+TClass class::TkwPopControlHScrollerVisible
+TClass class::TkwPopControlInvalidate
+TClass class::TkwPopControlLeft
+TClass class::TkwPopControlMouseLeftClick
+TClass class::TkwPopControlMouseLeftDragAndDrop
+TClass class::TkwPopControlMouseMiddleClick
+TClass class::TkwPopControlMouseRightClick
+TClass class::TkwPopControlMouseWheelDown
+TClass class::TkwPopControlMouseWheelUp
+TClass class::TkwPopControlName
+TClass class::TkwPopControlParent
+TClass class::TkwPopControlRepaint
+TClass class::TkwPopControlScreenToClient
+TClass class::TkwPopControlScrollInfo
+TClass class::TkwPopControlScrollInfoMax
+TClass class::TkwPopControlScrollInfoMin
+TClass class::TkwPopControlScrollInfoPageSize
+TClass class::TkwPopControlScrollInfoPosition
+TClass class::TkwPopControlSetFocus
+TClass class::TkwPopControlShow
+TClass class::TkwPopControlShowHint
+TClass class::TkwPopControlTop
+TClass class::TkwPopControlUndock
+TClass class::TkwPopControlVisible
+TClass class::TkwPopControlVScrollerVisible
+TClass class::TkwPopControlWidth
+TClass class::TkwPopDictionaryExExportDictionary
+TClass class::TkwPopDictionaryExExportedDictionaries
+TClass class::TkwPopDictionaryExFileDateTime
+TClass class::TkwPopDictionaryExFileName
+TClass class::TkwPopDictionaryExRemoveFromCache
+TClass class::TkwPopDictionaryExUsedDictionaries
+TClass class::TkwPopDictionaryExUseDictionary
+TClass class::TkwPopFinderSetToCtx
+TClass class::TkwPopFormActiveMDIChild
+TClass class::TkwPopFormClose
+TClass class::TkwPopFormFindActionList
+TClass class::TkwPopFormFindMenuItem
+TClass class::TkwPopFormFormStyle
+TClass class::TkwPopFormGetWindowState
+TClass class::TkwPopFormHasControl
+TClass class::TkwPopFormMDIChildCount
+TClass class::TkwPopFormMDIChildren
+TClass class::TkwPopFormModalResult
+TClass class::TkwPopFormNext
+TClass class::TkwPopFormSetWindowState
+TClass class::TkwPopKeywordFinderKeywordByName
+TClass class::TkwPopKeywordFinderParentFinder
+TClass class::TkwPopKeyWordName
+TClass class::TkwPopKeyWordWord
+TClass class::TkwPopNewWordDefinitorCheckVar
+TClass class::TkwPopNewWordDefinitorCheckWord
+TClass class::TkwPopNewWordDefinitorDefineInParameter
+TClass class::TkwPopNewWordDefinitorKeywordFinder
+TClass class::TkwPopObjectClassName
+TClass class::TkwPopObjectGetFloatProp
+TClass class::TkwPopObjectGetInterfaceProp
+TClass class::TkwPopObjectGetObjProp
+TClass class::TkwPopObjectGetOrdProp
+TClass class::TkwPopObjectGetStrProp
+TClass class::TkwPopObjectHasProp
+TClass class::TkwPopObjectInherits
+TClass class::TkwPopObjectIsNil
+TClass class::TkwPopObjectRTTIInfo
+TClass class::TkwPopObjectSetFloatProp
+TClass class::TkwPopObjectSetOrdProp
+TClass class::TkwPopObjectSetStrProp
+TClass class::TkwPopParserExPushInt
+TClass class::TkwPopParserExPushString
+TClass class::TkwPopParserExPushSymbol
+TClass class::TkwPopParserFileName
+TClass class::TkwPopParserNextToken
+TClass class::TkwPopParserSourceLine
+TClass class::TkwPopParserTokenInt
+TClass class::TkwPopParserTokenLongString
+TClass class::TkwPopParserTokenType
+TClass class::TkwPopScriptEngineAddInitialization
+TClass class::TkwPopScriptEngineAsKeywordFinder
+TClass class::TkwPopScriptEngineCascadeDict
+TClass class::TkwPopScriptEngineCurrentCompilingDictionary
+TClass class::TkwPopScriptEngineDisableForHelp
+TClass class::TkwPopScrollingWinControlHScrollerVisible
+TClass class::TkwPopScrollingWinControlVScrollerVisible
+TClass class::TkwPopValueTypesAcceptsValue
+TClass class::TkwPopValueTypesAdd
+TClass class::TkwPopValueTypesCompare
+TClass class::TkwPopValueTypesDefaultValue
+TClass class::TkwPopValueTypesEQ
+TClass class::TkwPopValueTypesHas
+TClass class::TkwPopValueTypesMakeCustomName
+TClass class::TkwPopValueTypesName
+TClass class::TkwPopWordDirectives
+TClass class::TkwPopWordEndBracket
+TClass class::TkwPopWordFindMember
+TClass class::TkwPopWordGetLeftWordRefValue
+TClass class::TkwPopWordGetParam
+TClass class::TkwPopWordGetRef
+TClass class::TkwPopWordInfo
+TClass class::TkwPopWordInfoAcceptsValue
+TClass class::TkwPopWordInfoAccessType
+TClass class::TkwPopWordInfoCompare
+TClass class::TkwPopWordInfoEmpty
+TClass class::TkwPopWordInfoHasAccessType
+TClass class::TkwPopWordInfoHasLinkType
+TClass class::TkwPopWordInfoHasValueType
+TClass class::TkwPopWordInfoHasWordModifier
+TClass class::TkwPopWordInfoIncludeAccesType
+TClass class::TkwPopWordInfoIncludeLinkType
+TClass class::TkwPopWordInfoIncludeModifier
+TClass class::TkwPopWordInfoIncludeTypeModifier
+TClass class::TkwPopWordInfoLinkType
+TClass class::TkwPopWordInfoToString
+TClass class::TkwPopWordInfoTypeName
+TClass class::TkwPopWordInfoValueTypes
+TClass class::TkwPopWordIsForHelp
+TClass class::TkwPopWordIsImmediate
+TClass class::TkwPopWordIsInParam
+TClass class::TkwPopWordIsVarLike
+TClass class::TkwPopWordLeftWordRefValuesCount
+TClass class::TkwPopWordName
+TClass class::TkwPopWordParent
+TClass class::TkwPopWordProducer
+TClass class::TkwPopWordPublicateInMainDictionary
+TClass class::TkwPopWordRedefines
+TClass class::TkwPopWordSetProducer
+TClass class::TkwPopWordSetValue
+TClass class::TkwPopWordSourcePointString
+TClass class::TkwPrint
+TClass class::TkwProcessFilesWithMask
+TClass class::TkwProcessMessages
+TClass class::TkwProcessSubDirs
+TClass class::TkwPureDir
+TClass class::TkwPushWord
+TClass class::TkwRAISE
+TClass class::TkwRandom
+TClass class::TkwRandomize
+TClass class::TkwReduceStackLevel
+TClass class::TkwRefParam
+TClass class::TkwRenameFile
+TClass class::TkwRGB2String
+TClass class::TkwRightLiteralParam
+TClass class::TkwRightParam
+TClass class::TkwRightParamEx
+TClass class::TkwROLL
+TClass class::TkwROT
+TClass class::TkwRSplitTo
+TClass class::TkwRULES
+TClass class::TkwRuntimeWordWithCode
+TClass class::TkwRuntimeWordWithCodeExecution
+TClass class::TkwSameStr
+TClass class::TkwSameText
+TClass class::TkwScreenCount
+TClass class::TkwScreenHeight
+TClass class::TkwScreenShot2File
+TClass class::TkwScreenShot2FileWithCheck
+TClass class::TkwScreenWidth
+TClass class::TkwScriptCompileAndProcess
+TClass class::TkwScriptExceptionStack
+TClass class::TkwScriptFileName
+TClass class::TkwScrollInfoWord
+TClass class::TkwSendInputSupport
+TClass class::TkwSetAppPath2CurrentDir
+TClass class::TkwSetFuzzInPercent
+TClass class::TkwSetLocalDate
+TClass class::TkwSetLocalDateTime
+TClass class::TkwSetLocalTime
+TClass class::TkwSetRandSeed
+TClass class::TkwShiftDate
+TClass class::TkwShiftTime
+TClass class::TkwSLEEP
+TClass class::TkwSmartEquals
+TClass class::TkwSmartNotEquals
+TClass class::TkwSourcePointWord
+TClass class::TkwSplitTo
+TClass class::TkwStackLevel
+TClass class::TkwStandardProcedureCloseBracket
+TClass class::TkwStartsStr
+TClass class::TkwStartsText
+TClass class::TkwStartTimer
+TClass class::TkwStopTimer
+TClass class::TkwStopTimerEx
+TClass class::TkwString
+TClass class::TkwStringChar
+TClass class::TkwStringCodePage
+TClass class::TkwStringConsistsOf
+TClass class::TkwStringHasAnyOf
+TClass class::TkwStringLen
+TClass class::TkwStringPos
+TClass class::TkwStringPosEx
+TClass class::TkwStringReplace
+TClass class::TkwStringReplaceFirst
+TClass class::TkwStringSplit
+TClass class::TkwStringToChar
+TClass class::TkwStrToInt
+TClass class::TkwSub
+TClass class::TkwSWAP
+TClass class::TkwSWAP2
+TClass class::TkwSystemIncluded
+TClass class::TkwSysutilsChangeFileExt
+TClass class::TkwSysutilsCreateDir
+TClass class::TkwSysutilsDirectoryExists
+TClass class::TkwSysutilsExtractFileDrive
+TClass class::TkwSysutilsExtractFileName
+TClass class::TkwSysutilsExtractFilePath
+TClass class::TkwSysutilsFileExists
+TClass class::TkwSysutilsForceDirectories
+TClass class::TkwSysutilsGetCurrentDir
+TClass class::TkwSysutilsParamCount
+TClass class::TkwSysutilsParamStr
+TClass class::TkwSysutilsRemoveDir
+TClass class::TkwSysutilsSetCurrentDir
+TClass class::TkwTemporaryCompiledCode
+TClass class::TkwTestResolveInputFilePath
+TClass class::TkwTextReplace
+TClass class::TkwTextReplaceFirst
+TClass class::TkwTHREAD
+TClass class::TkwTimeToLog
+TClass class::TkwToPrintable
+TClass class::TkwTrue
+TClass class::TkwTryFinally
+TClass class::TkwTUCK
+TClass class::TkwUses
+TClass class::TkwUsesLike
+TClass class::TkwValue
+TClass class::TkwVarDecLen
+TClass class::TkwVarInc
+TClass class::TkwVarShift
+TClass class::TkwVarWorkerCompiledCode
+TClass class::TkwWaitCancel
+TClass class::TkwWaitChoice
+TClass class::TkwWaitNo
+TClass class::TkwWaitOk
+TClass class::TkwWaitYes
+TClass class::TkwWasWait
+TClass class::TkwWHILEDO
+TClass class::TkwWinControlFromStackWord
+TClass class::TkwWindowFromPoint
+TClass class::TkwWinExec
+TClass class::TkwWinTreeGetCurrentText
+TClass class::TkwWndCloseWindow
+TClass class::TkwWndGetClassName
+TClass class::TkwWndGetWindowText
+TClass class::TkwWndIsVisible
+TClass class::TkwWndSetForeground
+TClass class::TkwWndWindowIsMine
+TClass class::TkwWordPtrPushWord
+TClass class::TkwWordPtrWorker
+TClass class::TkwWordWorker
+TClass class::TkwWStringChar
+TClass class::TkwWStringCodePage
+TClass class::TkwWStringConsistsOf
+TClass class::TkwWStringEnds
+TClass class::TkwWStringEndsText
+TClass class::TkwWStringFirstChar
+TClass class::TkwWStringHasAnyOf
+TClass class::TkwWStringInc
+TClass class::TkwWStringIsNil
+TClass class::TkwWStringLen
+TClass class::TkwWStringShift
+TClass class::TkwWStringStarts
+TClass class::TkwWStringStartsText
+TClass class::TkwWStringToString
+TClass class::TkwWStringVarDecLen
+TClass class::TkwWStringVarInc
+TClass class::TkwWStringVarPushCharAndInc
+TClass class::TkwWStringVarRSplitTo
+TClass class::TkwWStringVarShift
+TClass class::TkwWStringVarSplitTo
+TClass class::Tl3CastableObject
+TClass class::Tl3CastablePersistent
+TClass class::Tl3DataContainerWithoutIUnknownPrim
+TClass class::Tl3PrimString
+TClass class::Tl3ProtoDataContainer
+TClass class::Tl3ProtoObject
+TClass class::Tl3Variant
+TClass class::Tl3VariantPrim
+TClass class::TMainMenu
+TClass class::TMenu
+TClass class::TMenuItem
+TClass class::TObject
+TClass class::TPersistent
+TClass class::TPopupMenu
+TClass class::TScrollingWinControl
+TClass class::TSizeConstraints
+TClass class::TtfwAnonimousWord
+TClass class::TtfwArrayCollector
+TClass class::TtfwBeginLikeWord
+TClass class::TtfwClassLike
+TClass class::TtfwClassModifier
+TClass class::TtfwCompilingWord
+TClass class::TtfwConst
+TClass class::TtfwConstLike
+TClass class::TtfwDictionary
+TClass class::TtfwDictionaryEx
+TClass class::TtfwDictionaryExPrim
+TClass class::TtfwDictionaryPrim
+TClass class::TtfwDictionaryPrimPrim
+TClass class::TtfwDictionaryPrimPrimPrim
+TClass class::TtfwDualWord
+TClass class::TtfwDualWStrWord
+TClass class::TtfwEnumConstantRegistrator
+TClass class::TtfwFilterLambda
+TClass class::TtfwIncludeLike
+TClass class::TtfwInitCodeWord
+TClass class::TtfwInteger
+TClass class::TtfwIntegerConstantRegistrator
+TClass class::TtfwIntegerToEnumName
+TClass class::TtfwKeyWord
+TClass class::TtfwKeyWordPrim
+TClass class::TtfwMapLambda
+TClass class::TtfwNewWord
+TClass class::TtfwProcedure
+TClass class::TtfwRegisterableWord
+TClass class::TtfwRegisterableWordPrim
+TClass class::TtfwRTTIProperty
+TClass class::TtfwScriptEnginePrim
+TClass class::TtfwString
+TClass class::TtfwStringConstantRegistrator
+TClass class::TtfwStringToEnumValue
+TClass class::TtfwSysUtilsWord
+TClass class::TtfwTwoLambdas
+TClass class::TtfwTypeInfoList
+TClass class::TtfwTypeInfoListPrim
+TClass class::TtfwTypeModifier
+TClass class::TtfwValueTypes
+TClass class::TtfwVarWorker
+TClass class::TtfwWord
+TClass class::TtfwWordInfo
+TClass class::TtfwWordPrim
+TClass class::TtfwWordWorker
+TClass class::TtfwWordWorkerEx
+TClass class::TtfwWStrWord
+TClass class::TWinControl
+IMMEDIATE VOID OPERATOR : ClassProducer
+ ^L OPERATOR :: IN : aName
+; // ClassProducer
+CodeIterator
+IMMEDIATE VOID OPERATOR :: TYPE : COMPARABLE
+INTEGER CompareStr
+INTEGER CompareText
+VOID CompileRef
+VOID CompileValue
+VOID CompileWeakRef
+STRING ComputerName
+CONST
+CONSTANT
+VOID CONTINUE
+VOID CopyFile
+VOID CopyFilesByMask
+VOID CreateAndRaise
+OBJECT current:exception
+TClass current:exception:class
+STRING current:exception:ClassName
+STRING current:exception:Message
+VOID OPERATOR : Dec
+ ^ OPERATOR :: IN : aWhatToDecrement
+; // Dec
+VOID OPERATOR : DEC
+ ^ OPERATOR :: IN : aWhatToDecrement
+; // DEC
+IMMEDIATE VOID OPERATOR : DECLARED
+ ^L OPERATOR :: IN : aName
+ BOOLEAN OPERATOR :: VAR : l_Found
+; // DECLARED
+DEFAULT
+Define
+VOID OPERATOR : DefineStereo
+ OPERATOR :: IN : aName
+ OPERATOR :: IN : aSelf
+; // DefineStereo
+VOID OPERATOR : DefineStereoInstance
+ OPERATOR :: IN : aName
+ OPERATOR :: IN : aSelf
+; // DefineStereoInstance
+VOID OPERATOR : DefineStereotypeProducer
+ OPERATOR :: IN : aName
+ OPERATOR :: IN : aSelf
+; // DefineStereotypeProducer
+BOOLEAN DeleteFile
+VOID DeleteFilesByMask
+VOID OPERATOR : DisableForHelp
+ OBJECT OPERATOR :: IN : aWord
+; // DisableForHelp
+INTEGER DIV
+VOID DO
+VOID DROP
+VOID DUP
+EAccessViolation
+EAssertionFailed
+EBitsError
+EClassNotFound
+EComponentError
+EControlC
+EConvertError
+EDivByZero
+EExternal
+EExternalException
+EFCreateError
+EFilerError
+EFileStreamError
+EFOpenError
+EHeapException
+EIntError
+EIntfCastError
+EIntOverflow
+EInvalidCast
+EInvalidImage
+EInvalidOp
+EInvalidOperation
+EInvalidPointer
+EListError
+else
+EMathError
+EMethodNotFound
+emitstring
+VOID EnabledSaveRTFPictures
+end
+END
+BOOLEAN EndsStr
+BOOLEAN EndsText
+EOSError
+EOutOfMemory
+EOutOfResources
+EOverflow
+EParserError
+EPrivilege
+ERangeError
+EReadError
+EResNotFound
+VOID CALLER OPERATOR : ERROR
+ ^ OPERATOR :: IN : aMsg
+ TtfwWord OPERATOR :: IN : Caller
+; // ERROR
+EStackOverflow
+EStreamError
+EStringListError
+VOID EtalonNeeds64
+VOID EtalonNeedsComputerName
+VOID EtalonNeedsOSName
+VOID EtalonNeedsXE
+EtfwBreak
+EtfwBreakIterator
+EtfwCheck
+EtfwCheckPrim
+EtfwCodeFlowException
+EtfwCompiler
+EtfwContinue
+EtfwException
+EtfwExit
+EtfwExitOrBreak
+EtfwFail
+EtfwHalt
+EtfwManualBreak
+EtfwRunner
+EtfwScriptException
+EUnderflow
+OPERATOR : EVAL
+ ^ OPERATOR :: IN : aWhat
+; // EVAL
+EWriteError
+EXCEPT
+Exception
+VOID EXIT
+IMMEDIATE VOID OPERATOR : EXPORTS
+ ^L OPERATOR :: IN : aName
+ STRING OPERATOR :: VAR : l_Name
+ TtfwDictionaryEx OPERATOR :: VAR : l_OurDict
+ BOOLEAN OPERATOR :: VAR : l_WasExported
+; // EXPORTS
+EZeroDivide
+BOOLEAN false
+IMMEDIATE VOID OPERATOR : FILE
+BOOLEAN File:EOF
+FILE File:OpenRead
+FILE File:OpenWrite
+VOID File:ReadLines
+STRING File:ReadLn
+W-STRING File:ReadWStrLn
+VOID File:WriteChar
+VOID File:WriteLn
+VOID File:WriteStr
+VOID File:WriteWStr
+VOID File:WriteWStrLn
+ARRAY FILTER
+IMMEDIATE VOID OPERATOR : FINAL
+FINALLY
+Cardinal FindWindowByCaption
+OPERATOR : for
+ ^ OPERATOR :: IN : aList
+ ^ OPERATOR :: IN : aWhatToDo
+; // for
+OPERATOR : FOR
+ ^ OPERATOR :: IN : aList
+ ^ OPERATOR :: IN : aWhatToDo
+; // FOR
+FORWARD
+function
+FUNCTION
+IMMEDIATE VOID OPERATOR :: TYPE : FUNCTOR
+ARRAY FunctorToIterator
+VOID GeneratePDFForEtalon
+Cardinal GetForegroundWindow
+VOID GetLocalDate
+VOID GetLocalDateTime
+VOID GetLocalTime
+INTEGER GetTickCount
+BOOLEAN GREATER
+STRING guid::IInterface
+STRING guid::Ik2TagGenerator
+STRING guid::Il3Base
+STRING guid::Il3FontInfo
+STRING guid::ItfwFile
+STRING guid::ItfwIterator
+STRING guid::ItfwParser
+STRING guid::ItfwParserEx
+STRING guid::ItfwScriptCaller
+STRING guid::ItfwScriptEngine
+STRING guid::ItfwStoredValuesStack
+STRING guid::ItfwValueList
+VOID HALT
+HardKey
+BOOLEAN HasTabs
+VOID help
+if
+IInterface
+Ik2TagGenerator
+Il3Base
+Il3FontInfo
+VOID IMMEDIATE
+IMMEDIATE VOID OPERATOR : IN
+ ^L OPERATOR :: private:DefineNameParam : aName
+; // IN
+VOID OPERATOR : Inc
+ ^ OPERATOR :: IN : aWhatToIncrement
+; // Inc
+VOID OPERATOR : INC
+ ^ OPERATOR :: IN : aWhatToIncrement
+; // INC
+INCLUDE
+INCLUDES
+IMMEDIATE VOID OPERATOR : inherited
+ OBJECT OPERATOR :: VAR : l_Redef
+; // inherited
+IMMEDIATE VOID OPERATOR : INHERITED
+ OBJECT OPERATOR :: VAR : l_Redef
+; // INHERITED
+IMMEDIATE VOID OPERATOR : InitedVarProducer
+ ^L OPERATOR :: IN : aName
+; // InitedVarProducer
+IMMEDIATE VOID OPERATOR : initialization
+ ^ OPERATOR :: IN : aCode
+; // initialization
+IMMEDIATE VOID OPERATOR : INLINE
+Integer
+IMMEDIATE VOID OPERATOR : INTEGER
+IMMEDIATE VOID OPERATOR : INTERFACE
+STRING IntToStr
+BOOLEAN OPERATOR : Is
+ ^ OPERATOR :: IN : aClass
+ CASTABLE OPERATOR :: IN : anObj
+ BOOLEAN OPERATOR :: IS : Result
+; // Is
+BOOLEAN OPERATOR : IS
+ ^ OPERATOR :: IN : aClass
+ CASTABLE OPERATOR :: IN : anObj
+ BOOLEAN OPERATOR :: IS : Result
+; // IS
+BOOLEAN IsArray
+BOOLEAN IsBool
+BOOLEAN IsBracket
+BOOLEAN IsChar
+BOOLEAN IsClass
+BOOLEAN IsInt
+BOOLEAN IsIntf
+BOOLEAN IsNil
+BOOLEAN IsObj
+BOOLEAN IsString
+BOOLEAN IsTypeOf
+BOOLEAN IsUnder64
+BOOLEAN IsVoid
+BOOLEAN IsWString
+BOOLEAN IsXE
+OPERATOR : IT
+ ARRAY OPERATOR :: IN : A
+ ^ OPERATOR :: IN : aWhatToDo
+; // IT
+VOID Iterate
+VOID ITERATE
+VOID IterateChildWindows
+VOID IterateForms
+VOID IterateWindows
+ItfwFile
+ItfwIterator
+ItfwParser
+ItfwParserEx
+ItfwScriptCaller
+ItfwScriptEngine
+ItfwStoredValuesStack
+ItfwValueList
+key
+KeyDown
+KeyUp
+BOOLEAN LESS
+IMMEDIATE VOID OPERATOR : LINK
+ARRAY FUNCTION : LIST
+ ^ OPERATOR :: IN : aFunctor
+ OBJECT OPERATOR :: IN : anObject
+ OBJECT OPERATOR :: VAR : l_Element
+ ARRAY FUNCTION :: LIST : Result
+; // LIST
+VOID LOOP
+ARRAY MAP
+MembersIterator
+INTEGER MOD
+VOID MODAL
+VOID Msg
+IMMEDIATE VOID OPERATOR : NamedAutolinkProducer
+ ^L OPERATOR :: IN : aName
+ ^L OPERATOR :: IN : aOpName
+; // NamedAutolinkProducer
+IMMEDIATE VOID OPERATOR : NamedInitedVarProducer
+ ^L OPERATOR :: IN : aName
+ ^L OPERATOR :: IN : aNewName
+; // NamedInitedVarProducer
+IMMEDIATE VOID OPERATOR : NamedWordProducer
+ ^L OPERATOR :: IN : aName
+ ^L OPERATOR :: IN : aNewName
+; // NamedWordProducer
+ARRAY FUNCTION : NativeMembersIterator
+ TtfwWord OPERATOR :: IN : aWord
+ BOOLEAN FUNCTION : FilterMember
+  OBJECT OPERATOR :: IN : aMember
+  BOOLEAN FUNCTION :: FilterMember : Result
+ ; // FilterMember
+ ARRAY FUNCTION :: NativeMembersIterator : Result
+; // NativeMembersIterator
+VOID nil
+VOID NIP
+VOID NOP
+BOOLEAN OPERATOR : NOT
+ ^ OPERATOR :: IN : aWhatToNot
+ BOOLEAN OPERATOR :: NOT : Result
+; // NOT
+VOID NotImplemented
+BOOLEAN OPERATOR : NotIs
+ ^ OPERATOR :: IN : aClass
+ CASTABLE OPERATOR :: IN : anObj
+ BOOLEAN OPERATOR :: NOTIS : Result
+; // NotIs
+BOOLEAN OPERATOR : NOTIS
+ ^ OPERATOR :: IN : aClass
+ CASTABLE OPERATOR :: IN : anObj
+ BOOLEAN OPERATOR :: NOTIS : Result
+; // NOTIS
+BOOLEAN FUNCTION : NotValid
+ OPERATOR :: IN : %S
+ BOOLEAN FUNCTION :: NotValid : Result
+; // NotValid
+IMMEDIATE VOID OPERATOR : OBJECT
+VOID OPERATOR :: PROCEDURE : OnTest
+operator
+OPERATOR
+BOOLEAN OPERATOR : OR
+ BOOLEAN OPERATOR :: IN : aFirst
+ ^ OPERATOR :: IN : aSecond
+ BOOLEAN OPERATOR :: OR : Result
+; // OR
+IMMEDIATE VOID OPERATOR :: TYPE : ORDINAL
+STRING OSName
+VOID OVER
+IMMEDIATE VOID OPERATOR : OVERRIDE
+VOID PICK
+pop:class:Inherits
+pop:object:ClassName
+pop:object:GetFloatProp
+pop:object:GetInterfaceProp
+pop:object:GetObjProp
+pop:object:GetOrdProp
+pop:object:GetStrProp
+pop:object:HasProp
+pop:object:Inherits
+pop:object:IsNil
+pop:object:RTTIInfo
+pop:object:SetFloatProp
+pop:object:SetOrdProp
+pop:object:SetStrProp
+IMMEDIATE VOID OPERATOR : PRIVATE
+IMMEDIATE VOID OPERATOR : procedure
+ ^L OPERATOR :: IN : aName
+; // procedure
+IMMEDIATE VOID OPERATOR : PROCEDURE
+ ^L OPERATOR :: IN : aName
+; // PROCEDURE
+VOID ProcessFilesWithMask
+VOID ProcessMessages
+VOID ProcessSubDirs
+IMMEDIATE VOID OPERATOR : PROTECTED
+IMMEDIATE VOID OPERATOR : PUBLIC
+VOID PureDir
+RAISE
+INTEGER Random
+VOID Randomize
+IMMEDIATE VOID OPERATOR : REALIZE
+IMMEDIATE VOID OPERATOR : REDEFINEABLE
+IMMEDIATE VOID OPERATOR : REDEFINITION
+VOID ReduceStackLevel
+IMMEDIATE VOID OPERATOR : REFERENCE
+BOOLEAN RenameFile
+ARRAY Reverted
+STRING RGB2String
+VOID ROLL
+VOID ROT
+VOID -ROT
+RULES
+BOOLEAN SameStr
+BOOLEAN SameText
+INTEGER ScreenCount
+VOID ScreenShot2File
+VOID ScreenShot2FileWithCheck
+IMMEDIATE VOID OPERATOR : SEALED
+VOID SetAppPath2CurrentDir
+VOID SetFuzzInPercent
+VOID SetLocalDate
+VOID SetLocalDateTime
+VOID SetLocalTime
+VOID SetRandSeed
+VOID ShiftDate
+VOID ShiftTime
+VOID SLEEP
+ARRAY FUNCTION : SplitToArray
+ STRING OPERATOR :: IN : aDelim
+ STRING OPERATOR :: IN : aValue
+ STRING OPERATOR :: VAR : l_Tail
+ ARRAY FUNCTION :: SplitToArray : Result
+; // SplitToArray
+INTEGER StackLevel
+BOOLEAN StartsStr
+BOOLEAN StartsText
+VOID StartTimer
+IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : StereotypeProducer
+ ^L OPERATOR :: IN : aName
+; // StereotypeProducer
+IMMEDIATE VOID OPERATOR : StereotypeStereotypeProducer
+ ^L OPERATOR :: IN : aName
+; // StereotypeStereotypeProducer
+INTEGER StopTimer
+INTEGER StopTimerEx
+String
+IMMEDIATE VOID OPERATOR : STRING
+CHAR string:[i]
+VOID string:+!
+VOID string:++!
+INTEGER string:CodePage
+BOOLEAN string:ConsistsOf
+BOOLEAN string:HasAnyOf
+INTEGER string:Len
+VOID string:--Len!
+INTEGER string:Pos
+INTEGER string:PosEx
+STRING string:Replace
+STRING string:ReplaceFirst
+STRING string:RSplitTo!
+STRING string:Split
+STRING string:SplitTo!
+CHAR string:ToChar
+STRING FUNCTION : strings:Cat
+ ARRAY OPERATOR :: IN : anArray
+ STRING FUNCTION :: strings:Cat : Result
+; // strings:Cat
+STRING FUNCTION : strings:CatSep
+ ARRAY OPERATOR :: IN : anArray
+ STRING OPERATOR :: IN : aSep
+ VOID OPERATOR :: PROCEDURE : DoCat
+  STRING OPERATOR :: IN : aStr
+ ; // DoCat
+ STRING FUNCTION :: strings:CatSep : Result
+; // strings:CatSep
+INTEGER StrToInt
+IMMEDIATE VOID OPERATOR : SUMMONED
+VOID SWAP
+TActionList
+TActionListState
+TAlign
+TBasicAction
+TBiDiMode
+TBitmap
+TBorderWidth
+IMMEDIATE VOID OPERATOR : TClass
+TColor
+TComponent
+TConstraintSize
+TContainedAction
+TControl
+TControlScrollBar
+TCursor
+TCustomActionList
+TCustomForm
+TCustomImageList
+TDefaultMonitor
+TDragKind
+TDragMode
+IMMEDIATE VOID OPERATOR : Test
+STRING text:Replace
+STRING text:ReplaceFirst
+TFont
+TFontCharset
+TFontPitch
+TForm
+TFormBorderStyle
+TFormStyle
+TGraphic
+TGraphicsObject
+THelpContext
+THelpType
+IMMEDIATE VOID OPERATOR : then
+ ^ OPERATOR :: IN : aWhatToThen
+; // then
+VOID THREAD
+TIcon
+TImageIndex
+VOID TimeToLog
+TInterfacedPersistent
+TkwAdd
+TkwApplicationActionIdle
+TkwApplicationExeName
+TkwArrayAdd
+TkwArrayClear
+TkwArrayCount
+TkwArrayFilter
+TkwArrayFunctorToIterator
+TkwArrayGetItem
+TkwArrayIterate
+TkwArrayMap
+TkwArrayReverted
+TkwArraySetItem
+TkwAskWindowToCloseItself
+TkwASSERTS
+TkwAtomicIf
+TkwBEGIN
+TkwBeginLikeCompiledCode
+TkwBitAnd
+TkwBitNot
+TkwBitOR
+TkwBoolAnd
+TkwBoolNot
+TkwBoolOr
+TkwBracketBegin
+TkwBracketEnd
+TkwBREAK
+TkwBREAKITERATOR
+TkwBynameControlPush
+TkwCASE
+TkwCat
+TkwCharDupe
+TkwCharToString
+TkwCheckAssert
+TkwCheckEtalon
+TkwCheckOutputWithInput
+TkwClipboardClear
+TkwClipboardGetFormattedText
+TkwClipboardSetText
+TkwCloseArray
+TkwCloseBracket
+TkwCodeIterator
+TkwCompareStr
+TkwCompareText
+TkwCompiledArray
+TkwCompiledCase
+TkwCompiledFunction
+TkwCompiledIF
+TkwCompiledIfElse
+TkwCompiledIncluded
+TkwCompiledMain
+TkwCompiledProcedure
+TkwCompiledProcedureWithStackChecking
+TkwCompiledPushWord
+TkwCompiledRules
+TkwCompiledScriptCompileAndProcess
+TkwCompiledTryExcept
+TkwCompiledTryFinally
+TkwCompiledVar
+TkwCompiledVarAsStringWorker
+TkwCompiledVarWorker
+TkwCompiledWord
+TkwCompiledWordContainer
+TkwCompiledWordPrim
+TkwCompiledWordWorker
+TkwCompiledWordWorkerEx
+TkwCompiledWordWorkerWord
+TkwCompiledWordWorkerWordRunner
+TkwCompiledWStringShift
+TkwCompiledWStringVarDecLen
+TkwCompiledWStringVarInc
+TkwCompiledWStringVarPushCharAndInc
+TkwCompiledWStringVarRSplitTo
+TkwCompiledWStringVarSplitTo
+TkwCompileRef
+TkwCompileValue
+TkwCompileWeakRef
+TkwComponentFromStackWord
+TkwComputerName
+TkwCONST
+TkwConstLikeCompiled
+TkwCONTINUE
+TkwControlByHandle
+TkwControlFocusedControlPush
+TkwControlWord
+TkwCopyFile
+TkwCopyFilesByMask
+TkwCreateAndRaise
+TkwCtxClearTypeInfo
+TkwCtxEngine
+TkwCtxIncludeAccessType
+TkwCtxIncludeLinkType
+TkwCtxIncludeModifier
+TkwCtxIncludeTypeModifier
+TkwCtxIncludeValueTypes
+TkwCtxKeyWordDefiningNow
+TkwCtxNewWordDefinitor
+TkwCtxParser
+TkwCtxParserPushInt
+TkwCtxParserPushString
+TkwCtxParserPushSymbol
+TkwCtxPushCompiler
+TkwCtxPushFinder
+TkwCtxResolveIncludedFilePath
+TkwCtxScriptCaller
+TkwCtxSetNewWordName
+TkwCtxSetValueTypes
+TkwCtxSetWordProducerForCompiledClass
+TkwCtxStoredValuesStack
+TkwCtxValueTypes
+TkwCtxWordDefiningNow
+TkwCtxWordInfo
+TkwCurrentException
+TkwCurrentExceptionClass
+TkwCurrentExceptionClassName
+TkwCurrentExceptionMessage
+TkwDec
+TkwDEFAULT
+TkwDefine
+TkwDeleteFile
+TkwDeleteFilesByMask
+TkwDesktopHeight
+TkwDesktopWidth
+TkwDiv2
+TkwDivide
+TkwDivision
+TkwDoWord
+TkwDROP
+TkwDROP2
+TkwDualCompiledWordContainer
+TkwDUP
+TkwDUP2
+TkwDUPIfNotZero
+TkwElse
+TkwEmitString
+TkwEnabledSaveRTFPictures
+TkwEND
+TkwEndsStr
+TkwEndsText
+TkwEquals
+TkwEqualZero
+TkwEtalonNeeds64
+TkwEtalonNeedsComputerName
+TkwEtalonNeedsOSName
+TkwEtalonNeedsXE
+TkwEXCEPT
+TkwEXIT
+TkwFalse
+TkwFileEOF
+TkwFileOpenRead
+TkwFileOpenWrite
+TkwFileReadLines
+TkwFileReadLn
+TkwFileReadWStrLn
+TkwFileWriteChar
+TkwFileWriteLn
+TkwFileWriteStr
+TkwFileWriteWStr
+TkwFileWriteWStrLn
+TkwFINALLY
+TkwFindWindowByCaption
+TkwFontBackColor
+TkwFontColor
+TkwFontIsBold
+TkwFontIsItalic
+TkwFontIsStrikeOut
+TkwFontIsUnderline
+TkwFontName
+TkwFontSize
+TkwFORWARD
+TkwForwardDeclaration
+TkwForwardDeclarationHolder
+TkwFUNCTION
+TkwGeneratePDFForEtalon
+TkwGeneratorsExecute
+TkwGeneratorsLink
+TkwGetForegroundWindow
+TkwGetLocalDate
+TkwGetLocalDateTime
+TkwGetLocalTime
+TkwGetTickCount
+TkwGlobalVar
+TkwGREATER
+TkwGreaterThanZero
+TkwHALT
+TkwHardKey
+TkwHasTabs
+TkwHelp
+TkwIfElse
+TkwIMMEDIATE
+TkwImmediateTemporaryCompiledCode
+TkwInc
+TkwInclude
+TkwIncluded
+TkwIncludedPrim
+TkwINCLUDES
+TkwIncludesInChildren
+TkwInlinedWord
+TkwInnerIncluded
+TkwInnerIncludedInChildren
+TkwInteger
+TkwIntToStr
+TkwInvertROT
+TkwIsArray
+TkwIsBool
+TkwIsBracket
+TkwIsChar
+TkwIsClass
+TkwIsInt
+TkwIsIntf
+TkwIsNil
+TkwIsObj
+TkwIsString
+TkwIsTypeOf
+TkwIsUnder64
+TkwIsVoid
+TkwIsWString
+TkwIsXE
+TkwIterateChildWindows
+TkwIterateForms
+TkwIterateWindows
+TkwKey
+TkwKeyDown
+TkwKeyUp
+TkwLeftParam
+TkwLeftWordRefParam
+TkwLESS
+TkwLessThanZero
+TkwLOOP
+TkwMain
+TkwMainCodeController
+TkwMainScreenHeight
+TkwMainScreenWidth
+TkwMedianBacket
+TkwMembersIterator
+TkwMenuItemCaption
+TkwMenuItemClick
+TkwMenuItemCount
+TkwMenuItemEnabled
+TkwMenuItemGetItem
+TkwMenuItemGetMenuHeight
+TkwMenuItemVisible
+TkwMODAL
+TkwModFromDiv
+TkwModifier
+TkwMouseGetCursorIndex
+TkwMouseGetCursorNameByIndex
+TkwMouseGetCursorPosition
+TkwMouseLeftDown
+TkwMouseLeftUp
+TkwMouseMiddleDown
+TkwMouseMiddleUp
+TkwMouseRightDown
+TkwMouseRightUp
+TkwMouseSetCursorPosition
+TkwMouseUpDownSupport
+TkwMouseWheelDown
+TkwMouseWheelSupport
+TkwMouseWheelUp
+TkwMsg
+TkwMul
+TkwMul2
+TkwMulDiv
+TkwNewWord
+TkwNil
+TkwNIP
+TkwNOP
+TkwNotEquals
+TkwNotImplemented
+TkwNotZero
+TkwObjectFromStackWord
+TkwObjRefParam
+TkwOpenArray
+TkwOPERATOR
+TkwOSName
+TkwOVER
+TkwOVER2
+TkwPICK
+TkwPopActionListFindAction
+TkwPopClassInherits
+TkwPopCompiledWordWorkerWordCompiled
+TkwPopCompilerAddCodePart
+TkwPopCompilerCompileInParameterPopCode
+TkwPopCompilerGetWordCompilingNow
+TkwPopCompilerKeywordFinder
+TkwPopCompilerNewWordDefinitor
+TkwPopCompilerSetToCtx
+TkwPopComponentComponentCount
+TkwPopComponentFindComponent
+TkwPopComponentGetComponent
+TkwPopComponentName
+TkwPopComponentOwner
+TkwPopContainedActionExecute
+TkwPopControlCanFocus
+TkwPopControlCaption
+TkwPopControlClick
+TkwPopControlClientToScreen
+TkwPopControlColor
+TkwPopControlControlCount
+TkwPopControlEnabled
+TkwPopControlFindControlByName
+TkwPopControlFocused
+TkwPopControlFont
+TkwPopControlGetAnotherParentForm
+TkwPopControlGetControl
+TkwPopControlGetMainForm
+TkwPopControlGetParentForm
+TkwPopControlGetPopupMenu
+TkwPopControlGetTopParentForm
+TkwPopControlHandle
+TkwPopControlHeight
+TkwPopControlHide
+TkwPopControlHint
+TkwPopControlHScrollerVisible
+TkwPopControlInvalidate
+TkwPopControlLeft
+TkwPopControlMouseLeftClick
+TkwPopControlMouseLeftDragAndDrop
+TkwPopControlMouseMiddleClick
+TkwPopControlMouseRightClick
+TkwPopControlMouseWheelDown
+TkwPopControlMouseWheelUp
+TkwPopControlName
+TkwPopControlParent
+TkwPopControlRepaint
+TkwPopControlScreenToClient
+TkwPopControlScrollInfo
+TkwPopControlScrollInfoMax
+TkwPopControlScrollInfoMin
+TkwPopControlScrollInfoPageSize
+TkwPopControlScrollInfoPosition
+TkwPopControlSetFocus
+TkwPopControlShow
+TkwPopControlShowHint
+TkwPopControlTop
+TkwPopControlUndock
+TkwPopControlVisible
+TkwPopControlVScrollerVisible
+TkwPopControlWidth
+TkwPopDictionaryExExportDictionary
+TkwPopDictionaryExExportedDictionaries
+TkwPopDictionaryExFileDateTime
+TkwPopDictionaryExFileName
+TkwPopDictionaryExRemoveFromCache
+TkwPopDictionaryExUsedDictionaries
+TkwPopDictionaryExUseDictionary
+TkwPopFinderSetToCtx
+TkwPopFormActiveMDIChild
+TkwPopFormClose
+TkwPopFormFindActionList
+TkwPopFormFindMenuItem
+TkwPopFormFormStyle
+TkwPopFormGetWindowState
+TkwPopFormHasControl
+TkwPopFormMDIChildCount
+TkwPopFormMDIChildren
+TkwPopFormModalResult
+TkwPopFormNext
+TkwPopFormSetWindowState
+TkwPopKeywordFinderKeywordByName
+TkwPopKeywordFinderParentFinder
+TkwPopKeyWordName
+TkwPopKeyWordWord
+TkwPopNewWordDefinitorCheckVar
+TkwPopNewWordDefinitorCheckWord
+TkwPopNewWordDefinitorDefineInParameter
+TkwPopNewWordDefinitorKeywordFinder
+TkwPopObjectClassName
+TkwPopObjectGetFloatProp
+TkwPopObjectGetInterfaceProp
+TkwPopObjectGetObjProp
+TkwPopObjectGetOrdProp
+TkwPopObjectGetStrProp
+TkwPopObjectHasProp
+TkwPopObjectInherits
+TkwPopObjectIsNil
+TkwPopObjectRTTIInfo
+TkwPopObjectSetFloatProp
+TkwPopObjectSetOrdProp
+TkwPopObjectSetStrProp
+TkwPopParserExPushInt
+TkwPopParserExPushString
+TkwPopParserExPushSymbol
+TkwPopParserFileName
+TkwPopParserNextToken
+TkwPopParserSourceLine
+TkwPopParserTokenInt
+TkwPopParserTokenLongString
+TkwPopParserTokenType
+TkwPopScriptEngineAddInitialization
+TkwPopScriptEngineAsKeywordFinder
+TkwPopScriptEngineCascadeDict
+TkwPopScriptEngineCurrentCompilingDictionary
+TkwPopScriptEngineDisableForHelp
+TkwPopScrollingWinControlHScrollerVisible
+TkwPopScrollingWinControlVScrollerVisible
+TkwPopValueTypesAcceptsValue
+TkwPopValueTypesAdd
+TkwPopValueTypesCompare
+TkwPopValueTypesDefaultValue
+TkwPopValueTypesEQ
+TkwPopValueTypesHas
+TkwPopValueTypesMakeCustomName
+TkwPopValueTypesName
+TkwPopWordDirectives
+TkwPopWordEndBracket
+TkwPopWordFindMember
+TkwPopWordGetLeftWordRefValue
+TkwPopWordGetParam
+TkwPopWordGetRef
+TkwPopWordInfo
+TkwPopWordInfoAcceptsValue
+TkwPopWordInfoAccessType
+TkwPopWordInfoCompare
+TkwPopWordInfoEmpty
+TkwPopWordInfoHasAccessType
+TkwPopWordInfoHasLinkType
+TkwPopWordInfoHasValueType
+TkwPopWordInfoHasWordModifier
+TkwPopWordInfoIncludeAccesType
+TkwPopWordInfoIncludeLinkType
+TkwPopWordInfoIncludeModifier
+TkwPopWordInfoIncludeTypeModifier
+TkwPopWordInfoLinkType
+TkwPopWordInfoToString
+TkwPopWordInfoTypeName
+TkwPopWordInfoValueTypes
+TkwPopWordIsForHelp
+TkwPopWordIsImmediate
+TkwPopWordIsInParam
+TkwPopWordIsVarLike
+TkwPopWordLeftWordRefValuesCount
+TkwPopWordName
+TkwPopWordParent
+TkwPopWordProducer
+TkwPopWordPublicateInMainDictionary
+TkwPopWordRedefines
+TkwPopWordSetProducer
+TkwPopWordSetValue
+TkwPopWordSourcePointString
+TkwPrint
+TkwProcessFilesWithMask
+TkwProcessMessages
+TkwProcessSubDirs
+TkwPureDir
+TkwPushWord
+TkwRAISE
+TkwRandom
+TkwRandomize
+TkwReduceStackLevel
+TkwRefParam
+TkwRenameFile
+TkwRGB2String
+TkwRightLiteralParam
+TkwRightParam
+TkwRightParamEx
+TkwROLL
+TkwROT
+TkwRSplitTo
+TkwRULES
+TkwRuntimeWordWithCode
+TkwRuntimeWordWithCodeExecution
+TkwSameStr
+TkwSameText
+TkwScreenCount
+TkwScreenHeight
+TkwScreenShot2File
+TkwScreenShot2FileWithCheck
+TkwScreenWidth
+TkwScriptCompileAndProcess
+TkwScriptExceptionStack
+TkwScriptFileName
+TkwScrollInfoWord
+TkwSendInputSupport
+TkwSetAppPath2CurrentDir
+TkwSetFuzzInPercent
+TkwSetLocalDate
+TkwSetLocalDateTime
+TkwSetLocalTime
+TkwSetRandSeed
+TkwShiftDate
+TkwShiftTime
+TkwSLEEP
+TkwSmartEquals
+TkwSmartNotEquals
+TkwSourcePointWord
+TkwSplitTo
+TkwStackLevel
+TkwStandardProcedureCloseBracket
+TkwStartsStr
+TkwStartsText
+TkwStartTimer
+TkwStopTimer
+TkwStopTimerEx
+TkwString
+TkwStringChar
+TkwStringCodePage
+TkwStringConsistsOf
+TkwStringHasAnyOf
+TkwStringLen
+TkwStringPos
+TkwStringPosEx
+TkwStringReplace
+TkwStringReplaceFirst
+TkwStringSplit
+TkwStringToChar
+TkwStrToInt
+TkwSub
+TkwSWAP
+TkwSWAP2
+TkwSystemIncluded
+TkwSysutilsChangeFileExt
+TkwSysutilsCreateDir
+TkwSysutilsDirectoryExists
+TkwSysutilsExtractFileDrive
+TkwSysutilsExtractFileName
+TkwSysutilsExtractFilePath
+TkwSysutilsFileExists
+TkwSysutilsForceDirectories
+TkwSysutilsGetCurrentDir
+TkwSysutilsParamCount
+TkwSysutilsParamStr
+TkwSysutilsRemoveDir
+TkwSysutilsSetCurrentDir
+TkwTemporaryCompiledCode
+TkwTestResolveInputFilePath
+TkwTextReplace
+TkwTextReplaceFirst
+TkwTHREAD
+TkwTimeToLog
+TkwToPrintable
+TkwTrue
+TkwTryFinally
+TkwTUCK
+TkwUses
+TkwUsesLike
+TkwValue
+TkwVarDecLen
+TkwVarInc
+TkwVarShift
+TkwVarWorkerCompiledCode
+TkwWaitCancel
+TkwWaitChoice
+TkwWaitNo
+TkwWaitOk
+TkwWaitYes
+TkwWasWait
+TkwWHILEDO
+TkwWinControlFromStackWord
+TkwWindowFromPoint
+TkwWinExec
+TkwWinTreeGetCurrentText
+TkwWndCloseWindow
+TkwWndGetClassName
+TkwWndGetWindowText
+TkwWndIsVisible
+TkwWndSetForeground
+TkwWndWindowIsMine
+TkwWordPtrPushWord
+TkwWordPtrWorker
+TkwWordWorker
+TkwWStringChar
+TkwWStringCodePage
+TkwWStringConsistsOf
+TkwWStringEnds
+TkwWStringEndsText
+TkwWStringFirstChar
+TkwWStringHasAnyOf
+TkwWStringInc
+TkwWStringIsNil
+TkwWStringLen
+TkwWStringShift
+TkwWStringStarts
+TkwWStringStartsText
+TkwWStringToString
+TkwWStringVarDecLen
+TkwWStringVarInc
+TkwWStringVarPushCharAndInc
+TkwWStringVarRSplitTo
+TkwWStringVarShift
+TkwWStringVarSplitTo
+Tl3CastableObject
+Tl3CastablePersistent
+Tl3DataContainerWithoutIUnknownPrim
+Tl3PrimString
+Tl3ProtoDataContainer
+Tl3ProtoObject
+Tl3TokenType
+Tl3Variant
+Tl3VariantPrim
+TMainMenu
+TMenu
+TMenuAutoFlag
+TMenuBreak
+TMenuItem
+TMenuItemAutoFlag
+TObject
+VOID OPERATOR :: PROCEDURE : ToDo
+ STRING OPERATOR :: IN : aString
+; // ToDo
+REDIFINITION STRING FUNCTION : ToPrintable
+==> Redefines
+ STRING ToPrintable
+<== Redefines
+ OPERATOR :: IN : aValue
+ REDIFINITION STRING FUNCTION :: ToPrintable : Result
+; // ToPrintable
+TPersistent
+TPopupAlignment
+TPopupMenu
+TPosition
+TPrintScale
+BOOLEAN true
+TRY
+TScrollBarInc
+TScrollBarStyle
+TScrollingWinControl
+TShortCut
+TSizeConstraints
+TtfwAccessType
+TtfwAnonimousWord
+TtfwArrayCollector
+TtfwBeginLikeWord
+TtfwClassLike
+TtfwClassModifier
+TtfwCompilingWord
+TtfwConst
+TtfwConstLike
+TtfwDictionary
+TtfwDictionaryEx
+TtfwDictionaryExPrim
+TtfwDictionaryPrim
+TtfwDictionaryPrimPrim
+TtfwDictionaryPrimPrimPrim
+TtfwDualWord
+TtfwDualWStrWord
+TtfwEnumConstantRegistrator
+TtfwFilterLambda
+TtfwIncludeLike
+TtfwInitCodeWord
+TtfwInteger
+TtfwIntegerConstantRegistrator
+TtfwIntegerToEnumName
+TtfwKeyWord
+TtfwKeyWordPrim
+TtfwLinkType
+TtfwMapLambda
+TtfwNewWord
+TtfwProcedure
+TtfwRegisterableWord
+TtfwRegisterableWordPrim
+TtfwRTTIProperty
+TtfwScriptEnginePrim
+TtfwString
+TtfwStringConstantRegistrator
+TtfwStringToEnumValue
+TtfwSysUtilsWord
+TtfwTwoLambdas
+TtfwTypeInfoList
+TtfwTypeInfoListPrim
+TtfwTypeModifier
+TtfwValueType
+TtfwValueTypes
+TtfwVarWorker
+TtfwWord
+TtfwWordInfo
+TtfwWordModifier
+TtfwWordPrim
+TtfwWordWorker
+TtfwWordWorkerEx
+TtfwWStrWord
+TTrackButton
+VOID TUCK
+TWinControl
+TWindowState
+IMMEDIATE OPERATOR : TYPE
+ ^L OPERATOR :: IN : aName
+; // TYPE
+VOID OPERATOR :: PROCEDURE : UNASSUME
+ STRING OPERATOR :: IN : aStr
+; // UNASSUME
+USES
+IMMEDIATE VOID OPERATOR : var
+ ^L OPERATOR :: IN : aName
+; // var
+IMMEDIATE VOID OPERATOR : VAR
+ ^L OPERATOR :: IN : aName
+; // VAR
+STRING FUNCTION : VarMsgToStr
+ OBJECT OPERATOR :: IN : aMessage
+ OPERATOR :: VAR : l_Msg
+ STRING FUNCTION :: FUNCTION : Result
+; // VarMsgToStr
+IMMEDIATE VOID OPERATOR : VarProducer
+ ^L OPERATOR :: IN : aName
+ STRING OPERATOR :: VAR : l_Name
+; // VarProducer
+IMMEDIATE VOID OPERATOR : VIRTUAL
+IMMEDIATE OPERATOR : VOID
+OPERATOR : while
+ ^ OPERATOR :: IN : aCondition
+ ^ OPERATOR :: IN : aWhatToDo
+; // while
+OPERATOR : WHILE
+ ^ OPERATOR :: IN : aCondition
+ ^ OPERATOR :: IN : aWhatToDo
+; // WHILE
+VOID WHILEDO
+Cardinal WindowFromPoint
+VOID WinExec
+STRING WinTreeGetCurrentText
+Word
+IMMEDIATE OPERATOR : WordAlias
+ LINK ^ OPERATOR :: IN : aCode
+ ^L OPERATOR :: IN : aName
+; // WordAlias
+IMMEDIATE OPERATOR : WordAliasByRef
+ ^ OPERATOR :: IN : aCode
+ ^L OPERATOR :: IN : aName
+; // WordAliasByRef
+IMMEDIATE VOID OPERATOR : WordProducer
+ ^L OPERATOR :: IN : aName
+; // WordProducer
+WordWorker
+WORDWORKER
+IMMEDIATE VOID OPERATOR : W-STRING
+WString:[]
+WString:[]++!
+WString:[i]
+WString:+
+WString:+!
+WString:++
+WString:++!
+WString:CodePage
+WString:ConsistsOf
+WString:Ends
+WString:EndsText
+WString:HasAnyOf
+WString:IsNil
+WString:Len
+WString:--Len!
+WString:RSplitTo!
+WString:SplitTo!
+WString:Starts
+WString:StartsText
+WString:ToString
+VOID OPERATOR : анти-тест
+ ^ OPERATOR :: IN : aWhatToDo
+ OPERATOR :: VAR : l_WasException
+; // анти-тест
+BOOLEAN OPERATOR : БОЛЬШЕ
+ COMPARABLE OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: > : Result
+; // БОЛЬШЕ
+VOID выходим
+VOID Выходим
+BOOLEAN ДА
+если
+Если
+BOOLEAN OPERATOR : И
+ BOOLEAN OPERATOR :: IN : aFirst
+ ^ OPERATOR :: IN : aSecond
+ BOOLEAN OPERATOR :: AND : Result
+; // И
+BOOLEAN OPERATOR : ИЛИ
+ BOOLEAN OPERATOR :: IN : aFirst
+ ^ OPERATOR :: IN : aSecond
+ BOOLEAN OPERATOR :: OR : Result
+; // ИЛИ
+иначе
+BOOLEAN OPERATOR : МЕНЬШЕ
+ COMPARABLE OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: < : Result
+; // МЕНЬШЕ
+BOOLEAN OPERATOR : НЕ
+ ^ OPERATOR :: IN : aWhatToNot
+ BOOLEAN OPERATOR :: NOT : Result
+; // НЕ
+BOOLEAN OPERATOR : НЕРАВНО
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: <> : Result
+; // НЕРАВНО
+BOOLEAN НЕТ
+BOOLEAN OPERATOR : НЕЯВЛЯЕТСЯ
+ ^ OPERATOR :: IN : aClass
+ CASTABLE OPERATOR :: IN : anObj
+ BOOLEAN OPERATOR :: NOTIS : Result
+; // НЕЯВЛЯЕТСЯ
+OPERATOR : ПОКА
+ ^ OPERATOR :: IN : aCondition
+ ^ OPERATOR :: IN : aWhatToDo
+; // ПОКА
+BOOLEAN OPERATOR : РАВНО
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ ARRAY OPERATOR :: VAR : l_Right
+ BOOLEAN OPERATOR :: = : Result
+; // РАВНО
+IMMEDIATE VOID OPERATOR : Тест
+IMMEDIATE VOID OPERATOR : то
+ ^ OPERATOR :: IN : aWhatToThen
+; // то
+BOOLEAN OPERATOR : ЯВЛЯЕТСЯ
+ ^ OPERATOR :: IN : aClass
+ CASTABLE OPERATOR :: IN : anObj
+ BOOLEAN OPERATOR :: IS : Result
+; // ЯВЛЯЕТСЯ
+Dictionary: axiom:Ctx
+VOID Ctx:ClearTypeInfo
+ItfwScriptEngine Ctx:Engine
+VOID Ctx:IncludeAccessType
+VOID Ctx:IncludeLinkType
+VOID Ctx:IncludeModifier
+VOID Ctx:IncludeTypeModifier
+VOID Ctx:IncludeValueTypes
+TtfwKeyWord Ctx:KeyWordDefiningNow
+TtfwWord Ctx:NewWordDefinitor
+ItfwParserEx Ctx:Parser
+VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushArray
+ ARRAY OPERATOR :: IN : anArray
+; // Ctx:Parser:PushArray
+VOID Ctx:Parser:PushInt
+VOID Ctx:Parser:PushString
+VOID Ctx:Parser:PushSymbol
+OPERATOR : Ctx:Parser:PushSymbolAtRight
+ ^L OPERATOR :: IN : aName
+; // Ctx:Parser:PushSymbolAtRight
+VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushSymbols
+ STRING OPERATOR :: IN : aString
+; // Ctx:Parser:PushSymbols
+TtfwWord Ctx:PushCompiler
+TtfwWord Ctx:PushFinder
+STRING Ctx:ResolveIncludedFilePath
+ItfwScriptCaller Ctx:ScriptCaller
+VOID Ctx:SetNewWordName
+VOID Ctx:SetValueTypes
+VOID Ctx:SetWordProducerForCompiledClass
+ItfwStoredValuesStack Ctx:StoredValuesStack
+TtfwValueTypes Ctx:ValueTypes
+TtfwWord Ctx:WordDefiningNow
+TtfwWordInfo Ctx:WordInfo
+Dictionary: axiom:NewWordDefinitor
+TtfwWord pop:NewWordDefinitor:CheckVar
+TtfwKeyWord pop:NewWordDefinitor:CheckWord
+TtfwWord pop:NewWordDefinitor:DefineInParameter
+TtfwWord pop:NewWordDefinitor:KeywordFinder
+Dictionary: axiom:Compiler
+VOID pop:Compiler:AddCodePart
+VOID pop:Compiler:CompileInParameterPopCode
+TtfwWord pop:Compiler:GetWordCompilingNow
+TtfwWord pop:Compiler:KeywordFinder
+TtfwWord pop:Compiler:NewWordDefinitor
+VOID pop:Compiler:SetToCtx
+Dictionary: axiom:Word
+STRING pop:Word:Directives
+STRING pop:Word:EndBracket
+TtfwKeyWord pop:Word:FindMember
+TtfwWord pop:Word:GetLeftWordRefValue
+TtfwWord pop:Word:GetParam
+TtfwWord pop:Word:GetRef
+TtfwWord OPERATOR : pop:Word:GetRefDeep
+ TtfwWord OPERATOR :: IN : aSelf
+ TtfwWord OPERATOR :: pop:Word:GetRefDeep : Result
+; // pop:Word:GetRefDeep
+TtfwWordInfo pop:Word:Info
+BOOLEAN pop:Word:IsForHelp
+BOOLEAN pop:Word:IsImmediate
+BOOLEAN pop:Word:IsInParam
+BOOLEAN pop:Word:IsVarLike
+INTEGER pop:Word:LeftWordRefValuesCount
+STRING pop:Word:Name
+TtfwWord pop:Word:Parent
+TtfwWord pop:Word:Producer
+VOID pop:Word:PublicateInMainDictionary
+TtfwWord pop:Word:Redefines
+VOID pop:Word:SetProducer
+VOID pop:Word:SetValue
+STRING pop:Word:SourcePointString
+Dictionary: axiom:KeyWord
+STRING pop:KeyWord:Name
+TtfwWord pop:KeyWord:Word
+Dictionary: axiom:Parser
+STRING pop:Parser:FileName
+VOID pop:Parser:NextToken
+INTEGER pop:Parser:SourceLine
+INTEGER pop:Parser:TokenInt
+STRING pop:Parser:TokenLongString
+Tl3TokenType pop:Parser:TokenType
+Dictionary: axiom:script
+script:CompileAndProcess
+ARRAY script:ExceptionStack
+STRING script:FileName
+Dictionary: axiom:sysutils
+STRING sysutils:ChangeFileExt
+BOOLEAN sysutils:CreateDir
+BOOLEAN sysutils:DirectoryExists
+STRING sysutils:ExtractFileDrive
+STRING sysutils:ExtractFileName
+STRING sysutils:ExtractFilePath
+BOOLEAN sysutils:FileExists
+BOOLEAN sysutils:ForceDirectories
+STRING sysutils:GetCurrentDir
+INTEGER sysutils:ParamCount
+STRING sysutils:ParamStr
+BOOLEAN sysutils:RemoveDir
+BOOLEAN sysutils:SetCurrentDir
+Dictionary: axiom:application
+VOID application:ActionIdle
+STRING application:ExeName
+Dictionary: axiom:ScriptEngine
+VOID pop:ScriptEngine:AddInitialization
+TtfwWord pop:ScriptEngine:AsKeywordFinder
+BOOLEAN pop:ScriptEngine:CascadeDict
+TtfwDictionaryEx pop:ScriptEngine:CurrentCompilingDictionary
+VOID pop:ScriptEngine:DisableForHelp
+Dictionary: axiom:DictionaryEx
+VOID pop:DictionaryEx:ExportDictionary
+ARRAY pop:DictionaryEx:ExportedDictionaries
+STRING pop:DictionaryEx:FileDateTime
+STRING pop:DictionaryEx:FileName
+VOID pop:DictionaryEx:RemoveFromCache
+ARRAY pop:DictionaryEx:UsedDictionaries
+VOID pop:DictionaryEx:UseDictionary
+Dictionary: axiom:TtfwValueType
+TtfwValueType TtfwValueType::tfw_vtBool
+TtfwValueType TtfwValueType::tfw_vtBracket
+TtfwValueType TtfwValueType::tfw_vtChar
+TtfwValueType TtfwValueType::tfw_vtClass
+TtfwValueType TtfwValueType::tfw_vtFile
+TtfwValueType TtfwValueType::tfw_vtInt
+TtfwValueType TtfwValueType::tfw_vtIntf
+TtfwValueType TtfwValueType::tfw_vtList
+TtfwValueType TtfwValueType::tfw_vtNil
+TtfwValueType TtfwValueType::tfw_vtObj
+TtfwValueType TtfwValueType::tfw_vtStr
+TtfwValueType TtfwValueType::tfw_vtVoid
+TtfwValueType TtfwValueType::tfw_vtWStr
+TtfwValueType TtfwValueType:NameToValue
+STRING TtfwValueType:ValueToName
+Dictionary: axiom:TtfwWordModifier
+TtfwWordModifier TtfwWordModifier::tfw_wmAbstract
+TtfwWordModifier TtfwWordModifier::tfw_wmCaller
+TtfwWordModifier TtfwWordModifier::tfw_wmCanBeMerged
+TtfwWordModifier TtfwWordModifier::tfw_wmFinal
+TtfwWordModifier TtfwWordModifier::tfw_wmImmediate
+TtfwWordModifier TtfwWordModifier::tfw_wmInline
+TtfwWordModifier TtfwWordModifier::tfw_wmLeftWordRef
+TtfwWordModifier TtfwWordModifier::tfw_wmOverride
+TtfwWordModifier TtfwWordModifier::tfw_wmRealize
+TtfwWordModifier TtfwWordModifier::tfw_wmRedefineable
+TtfwWordModifier TtfwWordModifier::tfw_wmRedefinition
+TtfwWordModifier TtfwWordModifier::tfw_wmRightWordRef
+TtfwWordModifier TtfwWordModifier::tfw_wmSealed
+TtfwWordModifier TtfwWordModifier::tfw_wmSummoned
+TtfwWordModifier TtfwWordModifier::tfw_wmTreatUnknownAsString
+TtfwWordModifier TtfwWordModifier::tfw_wmVirtual
+TtfwWordModifier TtfwWordModifier:NameToValue
+STRING TtfwWordModifier:ValueToName
+Dictionary: axiom:TtfwAccessType
+TtfwAccessType TtfwAccessType::tfw_atNone
+TtfwAccessType TtfwAccessType::tfw_atPrivate
+TtfwAccessType TtfwAccessType::tfw_atProtected
+TtfwAccessType TtfwAccessType::tfw_atPublic
+TtfwAccessType TtfwAccessType:NameToValue
+STRING TtfwAccessType:ValueToName
+Dictionary: axiom:TtfwLinkType
+TtfwLinkType TtfwLinkType::tfw_ltAggregation
+TtfwLinkType TtfwLinkType::tfw_ltLink
+TtfwLinkType TtfwLinkType::tfw_ltNone
+TtfwLinkType TtfwLinkType::tfw_ltReference
+TtfwLinkType TtfwLinkType:NameToValue
+STRING TtfwLinkType:ValueToName
+Dictionary: axiom:private
+PRIVATE STRING FUNCTION : private:CheckSpaces
+ STRING OPERATOR :: IN : aName
+ PRIVATE STRING FUNCTION :: private:CheckSpaces : Result
+; // private:CheckSpaces
+IMMEDIATE PRIVATE VOID OPERATOR : private:DefineNameParam
+PRIVATE OPERATOR : private:DefineParam
+PRIVATE : : private:DefineVarEx
+ STRING OPERATOR :: IN : aName
+ OBJECT OPERATOR :: IN : aStereo
+; // private:DefineVarEx
+PRIVATE VOID OPERATOR : private:ERROR
+ OBJECT OPERATOR :: IN : aCaller
+ OPERATOR :: IN : aMsg
+; // private:ERROR
+Dictionary: axiom:ValueTypes
+BOOLEAN pop:ValueTypes:AcceptsValue
+TtfwValueTypes pop:ValueTypes:Add
+INTEGER pop:ValueTypes:Compare
+Struct pop:ValueTypes:DefaultValue
+BOOLEAN pop:ValueTypes:EQ
+BOOLEAN pop:ValueTypes:Has
+TtfwValueTypes pop:ValueTypes:MakeCustomName
+STRING pop:ValueTypes:Name
+Dictionary: axiom:std
+: : >>std::out
+VOID OPERATOR :: PROCEDURE : std::out<<
+ ^ OPERATOR :: IN : aValue
+; // std::out<<
+Dictionary: axiom:KeywordFinder
+TtfwKeyWord pop:KeywordFinder:KeywordByName
+TtfwWord pop:KeywordFinder:ParentFinder
+Dictionary: axiom:Component
+INTEGER pop:Component:ComponentCount
+TComponent pop:Component:FindComponent
+TComponent pop:Component:GetComponent
+STRING pop:Component:Name
+TComponent pop:Component:Owner
+Dictionary: axiom:form
+TForm pop:form:ActiveMDIChild
+VOID pop:form:Close
+VOID OPERATOR :: PROCEDURE : pop:form:ExecuteAction
+ TForm OPERATOR :: IN : aForm
+ STRING OPERATOR :: IN : aListName
+ STRING OPERATOR :: IN : anActionName
+ TContainedAction OPERATOR :: VAR : l_Action
+ TActionList OPERATOR :: VAR : l_ActList
+; // pop:form:ExecuteAction
+TActionList pop:form:FindActionList
+TMenuItem pop:form:FindMenuItem
+TFormStyle pop:form:FormStyle
+TWindowState pop:form:GetWindowState
+BOOLEAN pop:form:HasControl
+INTEGER pop:form:MDIChildCount
+TForm pop:form:MDIChildren
+INTEGER pop:form:ModalResult
+VOID pop:form:Next
+VOID pop:form:SetWindowState
+Dictionary: axiom:ActionList
+TContainedAction pop:ActionList:FindAction
+Dictionary: axiom:ContainedAction
+VOID pop:ContainedAction:Execute
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.script
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.dict
+ ;
+ Exports: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.dict
+ ;
+uses
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
+ LINK ^ OPERATOR :: IN : aSymbol
+; // axiom:PushSymbol
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR : _MACRO
+IMMEDIATE VOID OPERATOR : MACRO
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+IMMEDIATE VOID OPERATOR :: TYPE : ANY
+IMMEDIATE VOID OPERATOR :: TYPE : ITERATABLE
+IMMEDIATE VOID OPERATOR :: TYPE : VARIANT
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
+ ;
+BOOLEAN OPERATOR : !==
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: <> : Result
+; // !==
+FUNCTOR : : |@
+ ^@ OPERATOR :: IN : aRef
+ FUNCTOR : :: |@ : Result
+; // |@
+: : |^
+ ^@ OPERATOR :: IN : aRef
+; // |^
+VOID OPERATOR : array:AddTo
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+; // array:AddTo
+IMMEDIATE VOID OPERATOR : RecurseProc
+ ^L OPERATOR :: IN : aName
+; // RecurseProc
+IMMEDIATE VOID OPERATOR : this.do
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR : in
+ ^L OPERATOR :: private:DefineNameParam : aName
+; // in
+IMMEDIATE VOID OPERATOR : Literal
+ ^L OPERATOR :: IN : aName
+; // Literal
+PRIVATE VOID OPERATOR : MangledNamePusher
+ STRING OPERATOR :: IN : aName
+; // MangledNamePusher
+IMMEDIATE VOID OPERATOR : right
+ ^L OPERATOR :: IN : aName
+ STRING OPERATOR :: VAR : l_MangledName
+ STRING OPERATOR :: VAR : l_Name
+; // right
+IMMEDIATE VOID OPERATOR : RIGHT
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+INTEGER FUNCTION : Dec1
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: Dec1 : Result
+; // Dec1
+INTEGER FUNCTION : DecWith
+ ^ OPERATOR :: IN : aDec
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: DecWith : Result
+; // DecWith
+INTEGER FUNCTION : Inc1
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: Inc1 : Result
+; // Inc1
+INTEGER FUNCTION : IncWith
+ ^ OPERATOR :: IN : anInc
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: IncWith : Result
+; // IncWith
+BOOLEAN FUNCTION : IsEven
+ INTEGER OPERATOR :: IN : aValue
+ BOOLEAN FUNCTION :: IsEven : Result
+; // IsEven
+BOOLEAN FUNCTION : IsOdd
+ INTEGER OPERATOR :: IN : aValue
+ BOOLEAN FUNCTION :: IsOdd : Result
+; // IsOdd
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+REDIFINITION : : Print
+==> Redefines
+ VOID .
+<== Redefines
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
+ ;
+ Exports: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
+ ;
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+ARRAY OPERATOR : to
+ ^@ OPERATOR :: IN : aFrom
+ ^ OPERATOR :: IN : aTo
+ ARRAY OPERATOR :: to : Result
+; // to
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+ARRAY FUNCTION : >filter>
+ ^ OPERATOR :: IN : aFunctor
+ ^@ OPERATOR :: IN : anArray
+ ARRAY FUNCTION :: >filter> : Result
+; // >filter>
+ARRAY filter
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+ARRAY FUNCTION : >map>
+ ^ OPERATOR :: IN : aFunctor
+ ^@ OPERATOR :: IN : anArray
+ ARRAY FUNCTION :: >map> : Result
+; // >map>
+ARRAY map
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+ARRAY >reverted>
+ARRAY reverted
+ARRAY REVERTED
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+ ;
+: : (string)
+ ^ OPERATOR :: IN : aValue
+; // (string)
+STRING FUNCTION : any:Cat
+ ARRAY OPERATOR :: IN : anArray
+ STRING FUNCTION :: any:Cat : Result
+; // any:Cat
+STRING FUNCTION : string:CatWihAny
+ STRING OPERATOR :: IN : aString
+ OPERATOR :: IN : aValue
+ STRING FUNCTION :: string:CatWihAny : Result
+; // string:CatWihAny
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
+ ;
+STRING FUNCTION : Check
+ STRING OPERATOR :: IN : aName
+ STRING FUNCTION :: Check : Result
+; // Check
+STRING FUNCTION : CodeName
+ OBJECT OPERATOR :: IN : aCode
+ STRING OPERATOR :: VAR : l_Name
+ STRING FUNCTION :: CodeName : Result
+; // CodeName
+VOID OPERATOR :: PROCEDURE : DumpCode
+ STRING OPERATOR :: IN : aFileName
+; // DumpCode
+VOID OPERATOR :: PROCEDURE : DumpCodeCall
+ OBJECT OPERATOR :: IN : aCode
+ STRING FUNCTION : CalcLeftParams
+  OBJECT OPERATOR :: IN : aCode
+  STRING OPERATOR :: IN : aName
+  INTEGER OPERATOR :: VAR : l_LeftWordRefsCount
+  STRING FUNCTION :: FUNCTION : Result
+ ; // CalcLeftParams
+ STRING OPERATOR :: VAR : l_Name
+ BOOLEAN OPERATOR :: VAR : l_NeedBracket
+; // DumpCodeCall
+VOID OPERATOR :: PROCEDURE : DumpElement
+ OBJECT OPERATOR :: IN : aCode
+; // DumpElement
+VOID OPERATOR :: PROCEDURE : DumpElementPrim
+ OBJECT OPERATOR :: IN : aCode
+ BOOLEAN OPERATOR :: IN : aNeedStereo
+ STRING OPERATOR :: VAR : l_Directives
+ STRING OPERATOR :: VAR : l_Name
+ STRING OPERATOR :: VAR : l_Stereo
+; // DumpElementPrim
+VOID OPERATOR :: PROCEDURE : DumpMembers
+ OBJECT OPERATOR :: IN : aCode
+; // DumpMembers
+STRING FUNCTION : EndBracket
+ OBJECT OPERATOR :: IN : aCode
+ STRING FUNCTION :: EndBracket : Result
+; // EndBracket
+INTEGER OPERATOR :: VAR : Indent
+VOID WORDWORKER : Out
+ STRING OPERATOR :: VAR : aValue
+ ^ OPERATOR :: IN : WordToWork
+; // Out
+VOID WORDWORKER : OutA
+ ARRAY OPERATOR :: VAR : l_Value
+ ^ OPERATOR :: IN : WordToWork
+; // OutA
+VOID OPERATOR :: PROCEDURE : OutBracket
+ OBJECT OPERATOR :: IN : aCode
+ STRING OPERATOR :: VAR : l_Bracket
+; // OutBracket
+VOID WORDWORKER : OutEx
+ STRING OPERATOR :: VAR : aValue
+ ^ OPERATOR :: IN : WordToWork
+; // OutEx
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR : concrete-model-begin
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+ ^L OPERATOR :: IN : aModelName
+; // concrete-model-begin
+IMMEDIATE VOID OPERATOR : meta-meta-model-begin
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // meta-meta-model-begin
+IMMEDIATE VOID OPERATOR : meta-meta-model-end
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // meta-meta-model-end
+IMMEDIATE VOID OPERATOR : meta-model-begin
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // meta-model-begin
+IMMEDIATE VOID OPERATOR : meta-model-end
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // meta-model-end
+IMMEDIATE VOID OPERATOR : model-begin
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // model-begin
+IMMEDIATE VOID OPERATOR : model-end
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // model-end
+IMMEDIATE VOID OPERATOR : REMARK
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // REMARK
+TkwMain : Main
+ VOID OPERATOR :: Test : CodeGen
+  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^L OPERATOR :: IN : aName
+  ; // <<@meta>>
+  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> : <<Class>>
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^L OPERATOR :: IN : aName
+  ; // <<Class>>
+  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> : <<Library>>
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^L OPERATOR :: IN : aName
+  ; // <<Library>>
+  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> : <<Programm>>
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^L OPERATOR :: IN : aName
+  ; // <<Programm>>
+  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> : <<Project>>
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^L OPERATOR :: IN : aName
+  ; // <<Project>>
+  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> : <<UMLCategory>>
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^L OPERATOR :: IN : aName
+  ; // <<UMLCategory>>
+  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> : <<UMLClass>>
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^L OPERATOR :: IN : aName
+  ; // <<UMLClass>>
+  ARRAY FUNCTION : Children
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : aWord
+   ARRAY FUNCTION :: Children : Result
+  ; // Children
+  VOID OPERATOR :: PROCEDURE : DumpModelElement
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : aWord
+  ; // DumpModelElement
+  VOID OPERATOR :: PROCEDURE : EnterElement
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : anElement
+  ; // EnterElement
+  INTEGER OPERATOR :: VAR : g_Indent
+  FILE OPERATOR :: VAR : g_OutFile
+  BOOLEAN FUNCTION : IsElementNeedIndent
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : anElement
+   BOOLEAN FUNCTION :: IsElementNeedIndent : Result
+  ; // IsElementNeedIndent
+  BOOLEAN FUNCTION : IsModelElement
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : aWord
+   BOOLEAN FUNCTION :: IsModelElement : Result
+  ; // IsModelElement
+  BOOLEAN FUNCTION : IsSummary
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : aWord
+   BOOLEAN FUNCTION :: IsSummary : Result
+  ; // IsSummary
+  VOID OPERATOR :: PROCEDURE : LeaveElement
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : anElement
+  ; // LeaveElement
+  IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
+  STRING FUNCTION : OutFileName
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   STRING FUNCTION :: OutFileName : Result
+  ; // OutFileName
+  VOID OPERATOR :: PROCEDURE : OutToFile
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   STRING OPERATOR :: IN : aString
+  ; // OutToFile
+  OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library1
+    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ; // Library1
+   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library2
+    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ; // Library2
+   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library3
+    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ; // Library3
+   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Programm>> : Programm1
+    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class1
+     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+    ; // Class1
+    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class2
+     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+    ; // Class2
+   ; // Programm1
+  ; // Project1
+ ; // CodeGen
+; // Main
+CodeGen40.ms.script.dump
