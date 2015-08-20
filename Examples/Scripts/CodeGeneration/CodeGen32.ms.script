@@ -262,6 +262,12 @@ ARRAY FUNCTION Children
 
 PROCEDURE OutToFile
  STRING IN aString 
+ %SUMMARY 
+ '
+ Выводит строку в текущий файл вывода.
+ С переводом каретки.
+ '
+ ; // %SUMMARY 
  aString Print
 ; //OutToFile
 

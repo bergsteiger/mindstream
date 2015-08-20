@@ -173,6 +173,10 @@ VOID Test CodeGen
  ; // IMMEDIATE VOID TYPE ModelElement
  
  VOID PROCEDURE OutToFile
+  %SUMMARY %SUM
+   ' Выводит строку в текущий файл вывода. С переводом каретки. '
+  ; // %SUMMARY %SUM
+  
   STRING IN aString
   aString
   .
@@ -4347,6 +4351,7 @@ TkwMain : Main
   ; // IsSummary
   IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
   VOID OPERATOR :: PROCEDURE : OutToFile
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    STRING OPERATOR :: IN : aString
   ; // OutToFile
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
