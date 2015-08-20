@@ -4,12 +4,12 @@ USES
 ;
 
 Test CodeGen
- REMARK
+ %REMARK
   '
   CodeGen - это функция в которой мы будем тестировать наш функционал
   '
 
- REMARK
+ %REMARK
   '
   %SUMMARY это мета-информация, которая позволяет привязывать документацию
   к элементам кода. Эта документация доступна потом из скриптовой машины.
@@ -122,7 +122,7 @@ concrete-model-begin 'Модель шаблонов'
  ; // %SUMMARY
 ; // Interface
 
-REMARK
+%REMARK
  '
  Могут ли Library вкладываться в Project, а Project в Library
  Или могут ли Programm вкладываться в Class, а Class в Programm
@@ -212,13 +212,13 @@ concrete-model-begin 'Модель конкретного проекта'
    ; // %SUMMARY
    %INHERITS
     @ Class1
-    REMARK 'Возможно наш проектный класс Class2 наследуется от класса Class1'
+    %REMARK 'Возможно наш проектный класс Class2 наследуется от класса Class1'
    ; // %INHERITS
    %IMPLEMENTS
     @ Interface1
-    REMARK 'Возможно наш проектный класс Class2 реализует интерфейс Interface1'
+    %REMARK 'Возможно наш проектный класс Class2 реализует интерфейс Interface1'
     @ Interface2
-    REMARK 'Возможно наш проектный класс Class2 реализует ещё и интерфейс Interface2'
+    %REMARK 'Возможно наш проектный класс Class2 реализует ещё и интерфейс Interface2'
    ; // %IMPLEMENTS
   ; // Class2
 
@@ -239,7 +239,7 @@ concrete-model-begin 'Модель конкретного проекта'
    %INHERITS
     @ Class2
     @ Class3
-    REMARK 
+    %REMARK 
      '
      Возможно, что мы нстолько ОФИГЕННЫЕ перцы, что используем МНОЖЕСТВЕННОЕ наследование.
      И даже ПОНИМАЕМ - ЗАЧЕМ это нужно.
@@ -252,7 +252,7 @@ concrete-model-begin 'Модель конкретного проекта'
 
 ; // Project1
 
-REMARK
+%REMARK
  '
   РЕМАРКА.
   Все эти слова "наверное" вообще говоря должны проистекать из требований, ТЗ и UseCase
@@ -268,7 +268,7 @@ USES
 ;
 
 @SELF DumpElement
-REMARK
+%REMARK
  '
  - тут дампим элемент CodeGen и его содержимое
    в стандартное устройство вывода.
@@ -276,20 +276,20 @@ REMARK
  '
 
 help
-REMARK
+%REMARK
  '
  Выводим всю доступную аксиоматику в стандартное устройство вывода.
  Чисто для отладки того, что мы сейчас написали.
  '
 
-REMARK
+%REMARK
  '
  Теперь, что мы можем сделать с нашим проектом?
  Ну для начала выведем его содержимое на стандартное устройство вывода.
  '
 
 TtfwWord TYPE ModelElement
-REMARK 'Элемент модели'
+%REMARK 'Элемент модели'
 
 MACRO elem_func
  Literal IN aName
@@ -344,7 +344,7 @@ ARRAY elem_func Children
 ; // Children
 
 INTEGER VAR g_Indent
-REMARK 'Текущий отступ'
+%REMARK 'Текущий отступ'
 g_Indent := 0
 
 BOOLEAN elem_func IsElementNeedIndent
@@ -382,7 +382,7 @@ PROCEDURE OutToFile
  else
   ( aValue ToPrintable >>> l_String )
  [ g_Indent ' ' char:Dupe l_String ] strings:Cat g_OutFile File:WriteLn
- REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
+ %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; //OutToFile
 
 elem_proc CallGen
@@ -391,14 +391,14 @@ elem_proc CallGen
  Self .EnterElement 
  TRY
   Self aGen DO
-  REMARK 'Вызываем генератор aGen'
+  %REMARK 'Вызываем генератор aGen'
  FINALLY
   Self .LeaveElement 
  END // TRY..FINALLY
 ; // CallGen
 
 FORWARD .DumpModelElement
-REMARK 'FORWARD DumpModelElement используем для того, чтобы можно было вызывать DumpModelElement рекурсивно'
+%REMARK 'FORWARD DumpModelElement используем для того, чтобы можно было вызывать DumpModelElement рекурсивно'
  
 elem_proc DumpModelElement
  %SUMMARY 
@@ -409,19 +409,19 @@ elem_proc DumpModelElement
  ; // %SUMMARY
  [ 
   Self |S 
-   REMARK 'Выводим стереотип элемента'
+   %REMARK 'Выводим стереотип элемента'
   Self |N 
-   REMARK 'Выводим имя элемента'
+   %REMARK 'Выводим имя элемента'
  ] ' ' strings:CatSep OutToFile
  TRY
   for ( Self .Children ) (
    ModelElement IN aWord
    aWord .CallGen .DumpModelElement
   )
-  REMARK 'Выводим детей элемента'
+  %REMARK 'Выводим детей элемента'
  FINALLY
   [ '; // ' Self |N ] OutToFile
-  REMARK 'Выводим закрывающую скобку элемента'
+  %REMARK 'Выводим закрывающую скобку элемента'
  END
 ; // DumpModelElement
 
@@ -433,13 +433,13 @@ STRING FUNCTION OutFileName
 g_OutFile := ( OutFileName File:OpenWrite )
 TRY
  @ Project1 .DumpModelElement
- REMARK 'Выводим содержимое элемента'
+ %REMARK 'Выводим содержимое элемента'
 FINALLY
  g_OutFile := nil
 END
 
 OutFileName Print
-REMARK 'Выводим имя файла скрипта в тестовых целях'
+%REMARK 'Выводим имя файла скрипта в тестовых целях'
 
 ; // CodeGen
 
