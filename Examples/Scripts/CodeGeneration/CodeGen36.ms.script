@@ -329,7 +329,7 @@ PROCEDURE DumpModelElement
 @ Project1 DumpModelElement
 REMARK 'Выводим содержимое элемента'
 
-script:FileName Print
+script:FileName sysutils:ExtractFileName Print
 REMARK 'Выводим имя файла скрипта в тестовых целях'
 
 ; // CodeGen
