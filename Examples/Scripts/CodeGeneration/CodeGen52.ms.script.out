@@ -244,9 +244,11 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ModelElement IN Self
-  Self
-  IsSummary
-  !
+  NOT
+  (
+   Self
+   IsSummary
+  )
   >>>
   Result
  ; // BOOLEAN elem_func IsModelElement

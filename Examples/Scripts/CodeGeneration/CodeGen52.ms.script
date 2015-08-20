@@ -330,7 +330,8 @@ BOOLEAN elem_func IsModelElement
   Определяет тот факт, что aWord является "элементом модели"
  '
  ; // %SUMMARY
- Self IsSummary ! >>> Result
+ NOT ( Self IsSummary )
+  >>> Result
 ; // IsModelElement
 
 ARRAY elem_func Children
