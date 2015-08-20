@@ -222,6 +222,8 @@ REMARK
  Ну для начала выведем его имя на стандартное устройство вывода.
  '
 
+FORWARD DumpModelElement
+ 
 PROCEDURE DumpModelElement
  TtfwWord IN aWord
  %SUMMARY 
