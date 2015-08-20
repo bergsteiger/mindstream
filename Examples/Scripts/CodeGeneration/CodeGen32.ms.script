@@ -283,8 +283,8 @@ PROCEDURE DumpModelElement
  '
  ; // %SUMMARY
  aWord |N OutToFile
+ REMARK 'Выводим имя элемента'
  TRY
-  REMARK 'Выводим имя элемента'
   for ( aWord Children ) (
    REMARK 'Выводим детей элемента'
    ModelElement IN aWord 
