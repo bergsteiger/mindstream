@@ -321,6 +321,13 @@ VOID Test CodeGen
     
    ; // <<Class>> Class2
    
+   <<Class>> Class3
+    %SUMMARY %SUM
+     '   Возможно, что у нас такая непростая программа, что в ней даже больше, чем ДВА класса реализации.   Так вот Class3 - это наш ТРЕТИЙ класс реализации внутри нашей программы Programm1.   '
+    ; // %SUMMARY %SUM
+    
+   ; // <<Class>> Class3
+   
    <<Interface>> Interface1
     %SUMMARY %SUM
      '   Наверное наша программа настолько серьёзна, что реализует какие-то интерфейсы.   Так вот Interface1 - это наш ПЕРВЫЙ интерфейс.   '
@@ -4552,6 +4559,9 @@ TkwMain : Main
      OPERATOR :: NamedWordProducer :: %IMPLEMENTS : %R
      OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
     ; // Class2
+    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class3
+     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+    ; // Class3
     OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Interface>> : Interface1
      OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
     ; // Interface1
