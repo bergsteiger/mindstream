@@ -948,6 +948,7 @@ Dictionary: CodeGen41.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations.ms.dict
  ;
 Dictionary: axiom:axiom
  Uses: 
@@ -4389,6 +4390,35 @@ IMMEDIATE VOID OPERATOR : REMARK
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aDoc
 ; // REMARK
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %IMPLEMENTS
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
