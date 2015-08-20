@@ -411,7 +411,8 @@ elem_proc DumpModelElement
    %REMARK 'Выводим имя элемента'
  ] ' ' strings:CatSep OutToFile
  TRY
-  for ( Self .Children ) (
+  for ( Self .Children ) 
+  (
    ModelElement IN aWord
    aWord .CallGen call.me
   )
