@@ -303,17 +303,18 @@ MACRO elem_func
  @SELF Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol :
  aName |N Ctx:Parser:PushSymbol
- //MakeSelfParam
+ axiom:PushSymbol ModelElement
+ axiom:PushSymbol in
+ 'Self' Ctx:Parser:PushSymbol
 ; // method
 
 BOOLEAN elem_func IsSummary
- ModelElement IN aWord
  %SUMMARY 
  '
   Определяет тот факт, что aWord является документацией к элементу
  '
  ; // %SUMMARY
- ( aWord |N ) = '%SUM' >>> Result
+ ( Self |N ) = '%SUM' >>> Result
 ; // IsSummary
 
 BOOLEAN FUNCTION IsModelElement
