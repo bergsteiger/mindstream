@@ -276,18 +276,15 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID <<@meta>> <<UMLClass>>
  
- VOID PROCEDURE do_elem_proc
+ VOID PROCEDURE do_elem_func
   %SUMMARY %SUM
-   'Реализация elem_proc и elem_generator'
+   'Реализация do_elem_func, elem_proc и elem_generator'
   ; // %SUMMARY %SUM
   
   STRING IN aName
   TtfwWord IN aSelf
-  Ctx:ClearTypeInfo
   aSelf
   Ctx:SetWordProducerForCompiledClass
-  axiom:PushSymbol
-  VOID
   axiom:PushSymbol
   :
   aName
@@ -298,6 +295,21 @@ VOID Test CodeGen
   IN
   'Self'
   Ctx:Parser:PushSymbol
+ ; // VOID PROCEDURE do_elem_func
+ 
+ VOID PROCEDURE do_elem_proc
+  %SUMMARY %SUM
+   'Реализация elem_proc и elem_generator'
+  ; // %SUMMARY %SUM
+  
+  STRING IN aName
+  TtfwWord IN aSelf
+  Ctx:ClearTypeInfo
+  axiom:PushSymbol
+  VOID
+  aName
+  aSelf
+  do_elem_func
  ; // VOID PROCEDURE do_elem_proc
  
  IMMEDIATE VOID OPERATOR elem_func
@@ -4732,6 +4744,11 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // <<UMLClass>>
+  VOID OPERATOR :: PROCEDURE : do_elem_func
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   STRING OPERATOR :: IN : aName
+   TtfwWord OPERATOR :: IN : aSelf
+  ; // do_elem_func
   VOID OPERATOR :: PROCEDURE : do_elem_proc
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    STRING OPERATOR :: IN : aName

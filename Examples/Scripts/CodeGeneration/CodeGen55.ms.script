@@ -291,6 +291,18 @@ help
 TtfwWord TYPE ModelElement
 %REMARK 'Элемент модели'
 
+PROCEDURE do_elem_func
+ STRING IN aName
+ TtfwWord IN aSelf
+ %SUMMARY 'Реализация do_elem_func, elem_proc и elem_generator' ;
+ aSelf Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol :
+ aName Ctx:Parser:PushLeftDottedSymbol
+ axiom:PushSymbol ModelElement
+ axiom:PushSymbol in
+ 'Self' Ctx:Parser:PushSymbol
+; // do_elem_func
+
 MACRO elem_func
  Literal IN aName
  %SUMMARY 'Функция на элементе модели' ;
@@ -307,13 +319,8 @@ PROCEDURE do_elem_proc
  TtfwWord IN aSelf
  %SUMMARY 'Реализация elem_proc и elem_generator' ;
  Ctx:ClearTypeInfo
- aSelf Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol VOID
- axiom:PushSymbol :
- aName Ctx:Parser:PushLeftDottedSymbol
- axiom:PushSymbol ModelElement
- axiom:PushSymbol in
- 'Self' Ctx:Parser:PushSymbol
+ aName aSelf do_elem_func
 ; // do_elem_proc
 
 MACRO elem_proc
