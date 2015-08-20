@@ -412,10 +412,6 @@ elem_proc DumpModelElement
  ] ' ' strings:CatSep OutToFile
  TRY
   for ( Self .Children ) .CallGen call.me 
-/*  (
-   ModelElement IN aWord
-   aWord .CallGen call.me
-  )*/
   %REMARK 'Выводим детей элемента'
  FINALLY
   [ '; // ' Self |N ] OutToFile
