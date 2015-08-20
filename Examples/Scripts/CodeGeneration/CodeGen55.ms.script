@@ -385,9 +385,9 @@ PROCEDURE OutToFile
  %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; //OutToFile
 
-elem_proc CallGen
+elem_proc Child.CallGen
  FUNCTOR ^ IN aGen
- %SUMMARY 'Вызывает на элементе генератор aGen с учётом отступов' ;
+ %SUMMARY 'Вызывает на ДОЧЕРНЕМ элементе генератор aGen с учётом отступов' ;
  Self .EnterElement 
  TRY
   Self aGen DO
@@ -395,7 +395,7 @@ elem_proc CallGen
  FINALLY
   Self .LeaveElement 
  END // TRY..FINALLY
-; // CallGen
+; // Child.CallGen
 
 elem_proc DumpModelElement
  %SUMMARY 
@@ -411,7 +411,7 @@ elem_proc DumpModelElement
    %REMARK 'Выводим имя элемента'
  ] ' ' strings:CatSep OutToFile
  TRY
-  for ( Self .Children ) .CallGen call.me 
+  for ( Self .Children ) .Child.CallGen call.me 
   %REMARK 'Выводим детей элемента'
  FINALLY
   [ '; // ' Self |N ] OutToFile
