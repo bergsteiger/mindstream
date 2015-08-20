@@ -302,7 +302,9 @@ VOID Test CodeGen
   script:FileName
   sysutils:ExtractFileName
   (+)
-  '.dump'
+  '.'
+  (+)
+  'dump'
   >>>
   Result
  ; // STRING FUNCTION OutFileName

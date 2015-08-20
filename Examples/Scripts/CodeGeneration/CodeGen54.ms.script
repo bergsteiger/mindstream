@@ -421,7 +421,7 @@ elem_proc DumpModelElement
 
 STRING FUNCTION OutFileName
  %SUMMARY 'ָלÿ פאיכא הכÿ גûגמהא' ;
- script:FileName sysutils:ExtractFileName (+) '.dump' >>> Result
+ script:FileName sysutils:ExtractFileName (+) '.' (+) 'dump' >>> Result
 ; // OutFileName
 
 g_OutFile := ( OutFileName File:OpenWrite )
