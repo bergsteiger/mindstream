@@ -397,9 +397,6 @@ elem_proc CallGen
  END // TRY..FINALLY
 ; // CallGen
 
-FORWARD .DumpModelElement
-%REMARK 'FORWARD DumpModelElement используем для того, чтобы можно было вызывать DumpModelElement рекурсивно'
- 
 elem_proc DumpModelElement
  %SUMMARY 
  '

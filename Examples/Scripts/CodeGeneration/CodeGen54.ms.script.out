@@ -1,5 +1,4 @@
 VOID Test CodeGen
- FORWARD .DumpModelElement
  %SUMMARY %SUM
   ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
  ; // %SUMMARY %SUM
@@ -61,7 +60,7 @@ VOID Test CodeGen
     aWord
     .CallGen
     (
-     :
+     .DumpModelElement
      DO
     )
    )
