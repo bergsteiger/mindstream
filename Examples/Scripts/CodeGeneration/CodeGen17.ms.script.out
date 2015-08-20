@@ -108,17 +108,24 @@ VOID Test CodeGen
   
   <<Library>> Library2
    %SUMMARY %SUM
-    '  Наверное наш проект достаточно серьёзен и содержит НЕ ОДНУ библиотеку.  Так вот Library2 - это наша вторая проектная библиотека  '
+    '  Наверное наш проект достаточно серьёзен и содержит НЕ ОДНУ библиотеку.  Так вот Library2 - это наша вторая проектная библиотека.  '
    ; // %SUMMARY %SUM
    
   ; // <<Library>> Library2
   
   <<Library>> Library3
    %SUMMARY %SUM
-    '  Наверное наш проект НАСТОЛЬКО серьёзен, что содержит даже НЕ ДВЕ библиотеки.  Так вот Library3 - это наша третья проектная библиотека  '
+    '  Наверное наш проект НАСТОЛЬКО серьёзен, что содержит даже НЕ ДВЕ библиотеки.  Так вот Library3 - это наша третья проектная библиотека.  '
    ; // %SUMMARY %SUM
    
   ; // <<Library>> Library3
+  
+  <<Programm>> Programm1
+   %SUMMARY %SUM
+    '  Наверное наш проект реализует какую-то программу.  Иначе - зачем бы он нам был бы нужен?  Так вот Programm1 - это программа внутри нашего проекта Project1.  '
+   ; // %SUMMARY %SUM
+   
+  ; // <<Programm>> Programm1
   
  ; // <<Project>> Project1
  
@@ -4114,6 +4121,9 @@ TkwMain : Main
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library3
     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ; // Library3
+   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Programm>> : Programm1
+    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ; // Programm1
   ; // Project1
  ; // CodeGen
 ; // Main
