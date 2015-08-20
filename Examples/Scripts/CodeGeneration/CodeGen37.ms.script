@@ -282,6 +282,9 @@ PROCEDURE LeaveElement
  anElement IsElementNeedIndent ? DEC g_Indent
 ; // LeaveElement
 
+FILE VAR g_OutFile
+g_OutFile := nil
+
 PROCEDURE OutToFile
  STRING IN aString 
  %SUMMARY 

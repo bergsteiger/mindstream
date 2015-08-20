@@ -162,6 +162,7 @@ VOID Test CodeGen
  ; // VOID PROCEDURE EnterElement
  
  INTEGER VAR g_Indent
+ FILE VAR g_OutFile
  BOOLEAN FUNCTION IsElementNeedIndent
   %SUMMARY %SUM
    'Определяет тот факт, что элементу нужен отступ'
@@ -303,6 +304,8 @@ VOID Test CodeGen
  help
  g_Indent :=
  0
+ g_OutFile :=
+ nil
  @
  Project1
  DumpModelElement
@@ -4415,6 +4418,7 @@ TkwMain : Main
    ModelElement OPERATOR :: IN : anElement
   ; // EnterElement
   INTEGER OPERATOR :: VAR : g_Indent
+  FILE OPERATOR :: VAR : g_OutFile
   BOOLEAN FUNCTION : IsElementNeedIndent
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : anElement
