@@ -227,6 +227,16 @@ REMARK
  Ќу дл€ начала выведем его содержимое на стандартное устройство вывода.
  '
 
+BOOLEAN FUNCTION IsSummary
+ TtfwWord IN aWord
+ %SUMMARY 
+ '
+  ќпредел€ет тот факт, что aWord €вл€етс€ документацией к элементу
+ '
+ ; // %SUMMARY
+ aWord |N == '%SUM' >>> Result
+; // IsSummary
+
 FORWARD DumpModelElement
  
 PROCEDURE DumpModelElement
