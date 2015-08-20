@@ -291,12 +291,6 @@ REMARK
 TtfwWord TYPE ModelElement
 REMARK 'Элемент модели'
 
-/*PRIVATE VOID operator MakeSelfParam
- g_CurrentClass Ctx:Parser:PushSymbol
- axiom:PushSymbol in
- 'Self' Ctx:Parser:PushSymbol
-; // MakeSelfParam*/
-
 MACRO elem_func
  Literal IN aName
  %SUMMARY 'Функция на элементе модели' ;
@@ -306,7 +300,7 @@ MACRO elem_func
  axiom:PushSymbol ModelElement
  axiom:PushSymbol in
  'Self' Ctx:Parser:PushSymbol
-; // method
+; // elem_func
 
 BOOLEAN elem_func IsSummary
  %SUMMARY 
@@ -317,32 +311,29 @@ BOOLEAN elem_func IsSummary
  ( Self |N ) = '%SUM' >>> Result
 ; // IsSummary
 
-BOOLEAN FUNCTION IsModelElement
- ModelElement IN aWord
+BOOLEAN elem_func IsModelElement
  %SUMMARY 
  '
   Определяет тот факт, что aWord является "элементом модели"
  '
  ; // %SUMMARY
- aWord IsSummary ! >>> Result
+ Self IsSummary ! >>> Result
 ; // IsModelElement
 
-ARRAY FUNCTION Children
- ModelElement IN aWord
+ARRAY elem_func Children
  %SUMMARY 
  '
  Возвращает итератор детей aWord в "терминах определённой модели"
  '
  ;
- ( aWord MembersIterator ) >filter> IsModelElement >>> Result
+ ( Self MembersIterator ) >filter> IsModelElement >>> Result
 ; // Children
 
 INTEGER VAR g_Indent
 REMARK 'Текущий отступ'
 g_Indent := 0
 
-BOOLEAN FUNCTION IsElementNeedIndent
- ModelElement IN anElement
+BOOLEAN elem_func IsElementNeedIndent
  %SUMMARY 'Определяет тот факт, что элементу нужен отступ' ;
  true >>> Result
 ; // IsElementNeedIndent

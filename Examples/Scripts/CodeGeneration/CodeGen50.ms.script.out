@@ -108,17 +108,17 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID <<@meta>> <<UMLClass>>
  
- ARRAY FUNCTION Children
+ ARRAY elem_func Children
   %SUMMARY %SUM
    ' Возвращает итератор детей aWord в "терминах определённой модели" '
   ; // %SUMMARY %SUM
   
-  ModelElement IN aWord
-  ( aWord MembersIterator >filter>
+  ModelElement IN Self
+  ( Self MembersIterator >filter>
   IsModelElement
   >>>
   Result
- ; // ARRAY FUNCTION Children
+ ; // ARRAY elem_func Children
  
  VOID PROCEDURE DumpModelElement
   %SUMMARY %SUM
@@ -197,29 +197,29 @@ VOID Test CodeGen
  
  INTEGER VAR g_Indent
  FILE VAR g_OutFile
- BOOLEAN FUNCTION IsElementNeedIndent
+ BOOLEAN elem_func IsElementNeedIndent
   %SUMMARY %SUM
    'Определяет тот факт, что элементу нужен отступ'
   ; // %SUMMARY %SUM
   
-  ModelElement IN anElement
+  ModelElement IN Self
   true
   >>>
   Result
- ; // BOOLEAN FUNCTION IsElementNeedIndent
+ ; // BOOLEAN elem_func IsElementNeedIndent
  
- BOOLEAN FUNCTION IsModelElement
+ BOOLEAN elem_func IsModelElement
   %SUMMARY %SUM
    '  Определяет тот факт, что aWord является "элементом модели" '
   ; // %SUMMARY %SUM
   
-  ModelElement IN aWord
-  aWord
+  ModelElement IN Self
+  Self
   IsSummary
   !
   >>>
   Result
- ; // BOOLEAN FUNCTION IsModelElement
+ ; // BOOLEAN elem_func IsModelElement
  
  BOOLEAN elem_func IsSummary
   %SUMMARY %SUM
@@ -4530,10 +4530,10 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // <<UMLClass>>
-  ARRAY FUNCTION : Children
+  ARRAY OPERATOR :: elem_func : Children
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ModelElement OPERATOR :: IN : aWord
-   ARRAY FUNCTION :: Children : Result
+   ARRAY OPERATOR :: elem_func :: Children : Result
+   ModelElement OPERATOR :: IN : Self
   ; // Children
   VOID OPERATOR :: PROCEDURE : DumpModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
@@ -4549,15 +4549,15 @@ TkwMain : Main
   ; // EnterElement
   INTEGER OPERATOR :: VAR : g_Indent
   FILE OPERATOR :: VAR : g_OutFile
-  BOOLEAN FUNCTION : IsElementNeedIndent
+  BOOLEAN OPERATOR :: elem_func : IsElementNeedIndent
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ModelElement OPERATOR :: IN : anElement
-   BOOLEAN FUNCTION :: IsElementNeedIndent : Result
+   BOOLEAN OPERATOR :: elem_func :: IsElementNeedIndent : Result
+   ModelElement OPERATOR :: IN : Self
   ; // IsElementNeedIndent
-  BOOLEAN FUNCTION : IsModelElement
+  BOOLEAN OPERATOR :: elem_func : IsModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ModelElement OPERATOR :: IN : aWord
-   BOOLEAN FUNCTION :: IsModelElement : Result
+   BOOLEAN OPERATOR :: elem_func :: IsModelElement : Result
+   ModelElement OPERATOR :: IN : Self
   ; // IsModelElement
   BOOLEAN OPERATOR :: elem_func : IsSummary
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
