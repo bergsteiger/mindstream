@@ -272,13 +272,18 @@ PROCEDURE DumpModelElement
  '
  ; // %SUMMARY
  aWord |N Print
- REMARK 'Выводим имя элемента'
- for ( aWord Children ) (
-  REMARK 'Выводим детей элемента'
-  ModelElement IN aWord 
-  aWord DumpModelElement
-  REMARK 'Вызываем рекурсивно сами себя'
- )
+ TRY
+  REMARK 'Выводим имя элемента'
+  for ( aWord Children ) (
+   REMARK 'Выводим детей элемента'
+   ModelElement IN aWord 
+   aWord DumpModelElement
+   REMARK 'Вызываем рекурсивно сами себя'
+  )
+ FINALLY
+  '; // ' (+) ( aWord |N ) Print
+  REMARK 'Выводим закрывающую скобку элемента'
+ END
 ; // DumpModelElement
 
 @ Project1 DumpModelElement

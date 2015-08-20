@@ -116,16 +116,26 @@ VOID Test CodeGen
   aWord
   |N
   .
-  for
-  (
-   aWord
-   Children
-  )
-  (
-   ModelElement IN aWord
-   aWord
-   DumpModelElement
-  )
+  TRY
+   for
+   (
+    aWord
+    Children
+   )
+   (
+    ModelElement IN aWord
+    aWord
+    DumpModelElement
+   )
+  FINALLY
+   '; // '
+   (+)
+   (
+    aWord
+    |N
+   )
+   .
+  END
  ; // VOID PROCEDURE DumpModelElement
  
  BOOLEAN FUNCTION IsModelElement
@@ -4355,8 +4365,15 @@ TkwMain : Main
 ; // Main
 Project1
 Library1
+; // Library1
 Library2
+; // Library2
 Library3
+; // Library3
 Programm1
 Class1
+; // Class1
 Class2
+; // Class2
+; // Programm1
+; // Project1
