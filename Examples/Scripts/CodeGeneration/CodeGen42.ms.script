@@ -114,6 +114,14 @@ concrete-model-begin 'Модель шаблонов'
  ; // %SUMMARY
 ; // Class
 
+<<UMLClass>> Interface
+ %SUMMARY '
+ Наверное у нас при разработке встречаются интерфейсы.
+ Так вот Interface это стереотип, который описывает наши интерфейсы.
+ '
+ ; // %SUMMARY
+; // Interface
+
 REMARK
  '
  Могут ли Library вкладываться в Project, а Project в Library

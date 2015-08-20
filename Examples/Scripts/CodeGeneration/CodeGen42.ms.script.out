@@ -30,6 +30,19 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID <<UMLClass>> <<Class>>
  
+ IMMEDIATE VOID <<UMLClass>> <<Interface>>
+  %SUMMARY %SUM
+   ' Ќаверное у нас при разработке встречаютс€ интерфейсы. “ак вот Interface это стереотип, который описывает наши интерфейсы. '
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  aName
+  |N
+  <<Interface>>
+  DefineStereoInstance
+  EXIT
+ ; // IMMEDIATE VOID <<UMLClass>> <<Interface>>
+ 
  IMMEDIATE VOID <<UMLCategory>> <<Library>>
   %SUMMARY %SUM
    ' Ќаверное у нас при разработке встречаютс€ проектные библиотеки. “ак вот Library это стереотип, который описывает наши библиотеки. '
@@ -4430,6 +4443,10 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // <<Class>>
+  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> : <<Interface>>
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^L OPERATOR :: IN : aName
+  ; // <<Interface>>
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> : <<Library>>
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
