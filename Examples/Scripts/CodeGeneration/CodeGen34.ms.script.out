@@ -154,6 +154,8 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ModelElement IN anElement
+  INC
+  g_Indent
  ; // VOID PROCEDURE EnterElement
  
  INTEGER VAR g_Indent
@@ -192,6 +194,8 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ModelElement IN anElement
+  DEC
+  g_Indent
  ; // VOID PROCEDURE LeaveElement
  
  IMMEDIATE VOID TYPE ModelElement

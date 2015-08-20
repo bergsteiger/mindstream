@@ -267,11 +267,13 @@ g_Indent := 0
 PROCEDURE EnterElement
  ModelElement IN anElement
  %SUMMARY 'Начинает вывод элемента' ;
+ INC g_Indent
 ; // EnterElement
 
 PROCEDURE LeaveElement
  ModelElement IN anElement
  %SUMMARY 'Заканчивает вывод элемента' ;
+ DEC g_Indent
 ; // LeaveElement
 
 PROCEDURE OutToFile
