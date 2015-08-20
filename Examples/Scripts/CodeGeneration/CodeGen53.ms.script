@@ -296,7 +296,7 @@ MACRO elem_func
  %SUMMARY 'Функция на элементе модели' ;
  @SELF Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol :
- '.' (+) ( aName |N ) Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushLeftDottedSymbol
  axiom:PushSymbol ModelElement
  axiom:PushSymbol in
  'Self' Ctx:Parser:PushSymbol
