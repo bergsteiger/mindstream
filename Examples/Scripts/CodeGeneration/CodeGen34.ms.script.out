@@ -154,11 +154,25 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ModelElement IN anElement
+  anElement
+  IsElementNeedIndent
+  ?
   INC
   g_Indent
  ; // VOID PROCEDURE EnterElement
  
  INTEGER VAR g_Indent
+ BOOLEAN FUNCTION IsElementNeedIndent
+  %SUMMARY %SUM
+   'Определяет тот факт, что элементу нужен отступ'
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN anElement
+  true
+  >>>
+  Result
+ ; // BOOLEAN FUNCTION IsElementNeedIndent
+ 
  BOOLEAN FUNCTION IsModelElement
   %SUMMARY %SUM
    '  Определяет тот факт, что aWord является "элементом модели" '
@@ -194,6 +208,9 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ModelElement IN anElement
+  anElement
+  IsElementNeedIndent
+  ?
   DEC
   g_Indent
  ; // VOID PROCEDURE LeaveElement
@@ -4377,6 +4394,11 @@ TkwMain : Main
    ModelElement OPERATOR :: IN : anElement
   ; // EnterElement
   INTEGER OPERATOR :: VAR : g_Indent
+  BOOLEAN FUNCTION : IsElementNeedIndent
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : anElement
+   BOOLEAN FUNCTION :: IsElementNeedIndent : Result
+  ; // IsElementNeedIndent
   BOOLEAN FUNCTION : IsModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : aWord

@@ -264,16 +264,22 @@ INTEGER VAR g_Indent
 REMARK 'Текущий отступ'
 g_Indent := 0
 
+BOOLEAN FUNCTION IsElementNeedIndent
+ ModelElement IN anElement
+ %SUMMARY 'Определяет тот факт, что элементу нужен отступ' ;
+ true >>> Result
+; // IsElementNeedIndent
+
 PROCEDURE EnterElement
  ModelElement IN anElement
  %SUMMARY 'Начинает вывод элемента' ;
- INC g_Indent
+ anElement IsElementNeedIndent ? INC g_Indent
 ; // EnterElement
 
 PROCEDURE LeaveElement
  ModelElement IN anElement
  %SUMMARY 'Заканчивает вывод элемента' ;
- DEC g_Indent
+ anElement IsElementNeedIndent ? DEC g_Indent
 ; // LeaveElement
 
 PROCEDURE OutToFile
