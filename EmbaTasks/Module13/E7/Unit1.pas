@@ -11,6 +11,7 @@ type
     edtIn: TEdit;
     edtOut: TEdit;
     btnDoIt: TButton;
+    procedure btnDoItClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -23,5 +24,28 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.btnDoItClick(Sender: TObject);
+var
+  InNum : Integer;
+  OutStr : string;
+begin
+  InNum := StrToInt(Trim(edtIn.Text));
+
+  OutStr := '';
+  repeat
+    if (InNum mod 2) = 0 then
+      OutStr := '0' + OutStr
+    else
+      OutStr := '1' + OutStr;
+
+    InNum := InNum div 2;
+  until (InNum = 1);
+
+  if InNum = 1 then
+    OutStr := '1' + OutStr;
+
+  edtOut.Text := OutStr;
+end;
 
 end.
