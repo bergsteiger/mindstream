@@ -260,6 +260,10 @@ ARRAY FUNCTION Children
  ( aWord MembersIterator ) >filter> IsModelElement >>> Result
 ; // Children
 
+INTEGER VAR g_Indent
+REMARK 'Текущий отступ'
+g_Indent := 0
+
 PROCEDURE EnterElement
  ModelElement IN anElement
  %SUMMARY 'Начинает вывод элемента' ;

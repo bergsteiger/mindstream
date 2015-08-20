@@ -156,6 +156,7 @@ VOID Test CodeGen
   ModelElement IN anElement
  ; // VOID PROCEDURE EnterElement
  
+ INTEGER VAR g_Indent
  BOOLEAN FUNCTION IsModelElement
   %SUMMARY %SUM
    '  Определяет тот факт, что aWord является "элементом модели" '
@@ -260,6 +261,8 @@ VOID Test CodeGen
  CodeGen
  DumpElement
  help
+ g_Indent :=
+ 0
  @
  Project1
  DumpModelElement
@@ -4369,6 +4372,7 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : anElement
   ; // EnterElement
+  INTEGER OPERATOR :: VAR : g_Indent
   BOOLEAN FUNCTION : IsModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : aWord
