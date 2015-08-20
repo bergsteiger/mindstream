@@ -1,0 +1,7 @@
+WordAlias map MAP
+
+ARRAY FUNCTION >map>
+ ^@ FUNCTOR IN anArray
+ ^ FUNCTOR IN aFunctor
+ aFunctor anArray DO map >>> Result
+; // >map>
