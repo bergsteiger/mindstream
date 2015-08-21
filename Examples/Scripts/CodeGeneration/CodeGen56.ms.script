@@ -515,8 +515,6 @@ elem_ref_proc CallGen
  END // TRY..FINALLY
 ; // CallGen
 
-.DumpModelElement :: gpName Print
-
 Project1 .CallGen .DumpModelElement
 %REMARK 'Выводим содержимое элемента Project1'
 

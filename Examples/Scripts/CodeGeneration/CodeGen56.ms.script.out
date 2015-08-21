@@ -626,9 +626,6 @@ VOID Test CodeGen
  0
  g_OutFile :=
  nil
- .DumpModelElement Self .DumpAsIs ::
- 'gpName'
- .
  Project1 .CallGen
  .DumpModelElement
  Project2 .CallGen
@@ -4916,4 +4913,3 @@ TkwMain : Main
   ; // Project2
  ; // CodeGen
 ; // Main
-dump
