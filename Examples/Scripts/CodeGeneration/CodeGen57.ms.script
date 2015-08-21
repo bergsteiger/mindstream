@@ -532,6 +532,9 @@ elem_generator pas
 ARRAY VAR Generators
 Generators := [ @ .dump @ .pas ]
 
+ARRAY VAR Projects
+Projects := [ @ Project1 @ Project2 ]
+
 Project1 .CallGen .dump
 %REMARK 'Выводим содержимое элемента Project1'
 

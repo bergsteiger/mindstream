@@ -638,6 +638,7 @@ VOID Test CodeGen
   
  ; // <<Project>> Project2
  
+ ARRAY VAR Projects
  CodeGen
  DumpElement
  help
@@ -653,6 +654,13 @@ VOID Test CodeGen
   .dump
   @
   .pas
+ ]
+ Projects :=
+ [
+  @
+  Project1
+  @
+  Project2
  ]
  Project1 .CallGen
  .dump
@@ -4950,5 +4958,6 @@ TkwMain : Main
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project2
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   ; // Project2
+  ARRAY OPERATOR :: VAR : Projects
  ; // CodeGen
 ; // Main
