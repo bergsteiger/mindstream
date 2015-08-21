@@ -1,5 +1,13 @@
 VOID Test CodeGen
- CONST
+ IMMEDIATE VOID OPERATOR %GEN_PROPERTY
+  %SUMMARY %SUM
+   'Свойство генератора'
+  ; // %SUMMARY %SUM
+  
+  axiom:PushSymbol
+  CONST
+ ; // IMMEDIATE VOID OPERATOR %GEN_PROPERTY
+ 
  %SUMMARY %SUM
   ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
  ; // %SUMMARY %SUM
@@ -4692,7 +4700,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %IMPLEMENTS
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
-  %GEN_PROPERTY
+  IMMEDIATE VOID OPERATOR : %GEN_PROPERTY
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  ; // %GEN_PROPERTY
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   VOID OPERATOR :: elem_ref_proc : .CallGen
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
