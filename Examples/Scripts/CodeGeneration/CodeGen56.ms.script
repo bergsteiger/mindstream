@@ -450,7 +450,7 @@ MACRO %GEN_PROPERTY
  %SUMMARY 'Свойство генератора' ;
  @SELF Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol CONST
- aName |N Ctx:Parser:PushSymbol
+ GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
 ; // %GEN_PROPERTY
 
 elem_generator DumpModelElement
@@ -461,7 +461,7 @@ elem_generator DumpModelElement
  '
  ; // %SUMMARY
 
- %GEN_PROPERTY gpName 'dump'
+ %GEN_PROPERTY Name 'dump'
 
  [ 
   Self |S 

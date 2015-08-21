@@ -9,8 +9,12 @@ VOID Test CodeGen
   Ctx:SetWordProducerForCompiledClass
   axiom:PushSymbol
   CONST
-  aName
-  |N
+  GEN_PROPERTY_PREFIX
+  (+)
+  (
+   aName
+   |N
+  )
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR %GEN_PROPERTY
  
