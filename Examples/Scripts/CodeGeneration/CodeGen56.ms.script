@@ -453,8 +453,10 @@ MACRO %GEN_PROPERTY
  GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
 ; // %GEN_PROPERTY
 
-WordAlias %GP ::
-%REMARK 'Метод получения свойства генератора'
+MACRO %GP
+ %SUMMARY 'Метод получения свойства генератора' ;
+ axiom:PushSymbol ::
+; // %GP
 
 elem_generator DumpModelElement
  %SUMMARY 
