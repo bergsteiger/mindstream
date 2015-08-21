@@ -466,6 +466,10 @@ STRING FUNCTION OutFileName
  script:FileName sysutils:ExtractFileName (+) '.' (+) aGeneratorName >>> Result
 ; // OutFileName
 
+STRING VAR g_CurrentGeneratorName
+%REMARK 'Имя текущего генератора'
+g_CurrentGeneratorName := ''
+
 elem_ref_proc CallGen
  GENERATOR RIGHT IN aGen
 
@@ -476,7 +480,8 @@ elem_ref_proc CallGen
  ' 
  ; // %SUMMARY 
 
- g_OutFile := ( OutFileName ( Self |N (+) '.' (+) ( aGen %GP Name ) ) File:OpenWrite )
+ aGen %GP Name >>> g_CurrentGeneratorName
+ g_OutFile := ( OutFileName ( Self |N (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
  TRY
   Self ( aGen DO )
   %REMARK 'Вызываем на элементе генератор aGen'

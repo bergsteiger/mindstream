@@ -46,6 +46,10 @@ VOID Test CodeGen
   
   ^ IN aGen
   ^@ IN Self
+  aGen ::
+  'gpName'
+  >>>
+  g_CurrentGeneratorName
   g_OutFile :=
   (
    OutFileName
@@ -55,10 +59,7 @@ VOID Test CodeGen
     (+)
     '.'
     (+)
-    (
-     aGen ::
-     'gpName'
-    )
+    g_CurrentGeneratorName
    )
    File:OpenWrite
   )
@@ -437,6 +438,7 @@ VOID Test CodeGen
   do_elem_proc
  ; // IMMEDIATE VOID OPERATOR elem_ref_proc
  
+ STRING VAR g_CurrentGeneratorName
  INTEGER VAR g_Indent
  FILE VAR g_OutFile
  STRING CONST GEN_PROPERTY_PREFIX
@@ -626,6 +628,8 @@ VOID Test CodeGen
  0
  g_OutFile :=
  nil
+ g_CurrentGeneratorName :=
+ ''
  Project1 .CallGen
  .dump
  Project2 .CallGen
@@ -4855,6 +4859,7 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // elem_ref_proc
+  STRING OPERATOR :: VAR : g_CurrentGeneratorName
   INTEGER OPERATOR :: VAR : g_Indent
   FILE OPERATOR :: VAR : g_OutFile
   STRING CONST : GEN_PROPERTY_PREFIX
