@@ -448,8 +448,9 @@ elem_generator DumpModelElement
 ; // DumpModelElement
 
 STRING FUNCTION OutFileName
+ STRING right aGeneratorName
  %SUMMARY 'Имя файла для вывода' ;
- script:FileName sysutils:ExtractFileName (+) '.' (+) 'dump' >>> Result
+ script:FileName sysutils:ExtractFileName (+) '.' (+) aGeneratorName >>> Result
 ; // OutFileName
 
 elem_ref_proc CallGen
@@ -462,7 +463,7 @@ elem_ref_proc CallGen
  ' 
  ; // %SUMMARY 
 
- g_OutFile := ( OutFileName File:OpenWrite )
+ g_OutFile := ( OutFileName 'dump' File:OpenWrite )
  TRY
   Self aGen
   %REMARK 'Вызываем на элементе генератор aGen'
@@ -474,7 +475,7 @@ elem_ref_proc CallGen
 Project1 .CallGen .DumpModelElement
 %REMARK 'Выводим содержимое элемента'
 
-OutFileName Print
+OutFileName 'dump' Print
 %REMARK 'Выводим имя файла скрипта в тестовых целях'
 
 ; // CodeGen

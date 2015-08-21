@@ -18,6 +18,7 @@ VOID Test CodeGen
   g_OutFile :=
   (
    OutFileName
+   'dump'
    File:OpenWrite
   )
   TRY
@@ -397,12 +398,20 @@ VOID Test CodeGen
    'ָלÿ פאיכא הכÿ גûגמהא'
   ; // %SUMMARY %SUM
   
+  ^ IN _aGeneratorName
+  IMMEDIATE VOID OPERATOR aGeneratorName
+   '_aGeneratorName'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aGeneratorName
+  
   script:FileName
   sysutils:ExtractFileName
   (+)
   '.'
   (+)
-  'dump'
+  (
+   _aGeneratorName |^
+  )
   >>>
   Result
  ; // STRING FUNCTION OutFileName
@@ -555,6 +564,7 @@ VOID Test CodeGen
  Project1 .CallGen
  .DumpModelElement
  OutFileName
+ 'dump'
  .
 ; // VOID Test CodeGen
 
@@ -4775,6 +4785,8 @@ TkwMain : Main
   IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
   STRING FUNCTION : OutFileName
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^ OPERATOR :: IN : _aGeneratorName
+   IMMEDIATE VOID OPERATOR : aGeneratorName
    STRING FUNCTION :: OutFileName : Result
   ; // OutFileName
   VOID OPERATOR :: PROCEDURE : OutToFile
