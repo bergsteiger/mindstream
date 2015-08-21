@@ -444,6 +444,7 @@ elem_proc Child.CallGen
 
 MACRO %GEN_PROPERTY
  %SUMMARY 'Свойство генератора' ;
+ @SELF Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol CONST
 ; // %GEN_PROPERTY
 

@@ -4,6 +4,8 @@ VOID Test CodeGen
    'Свойство генератора'
   ; // %SUMMARY %SUM
   
+  %GEN_PROPERTY
+  Ctx:SetWordProducerForCompiledClass
   axiom:PushSymbol
   CONST
  ; // IMMEDIATE VOID OPERATOR %GEN_PROPERTY
@@ -89,8 +91,10 @@ VOID Test CodeGen
    ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
   ; // %SUMMARY %SUM
   
-  STRING CONST gpName
+  STRING %GEN_PROPERTY gpName
    'dump'
+  ; // STRING %GEN_PROPERTY gpName
+  
   ModelElement IN Self
   [
    Self
@@ -4722,7 +4726,7 @@ TkwMain : Main
   ; // .Children
   VOID OPERATOR :: elem_generator : .DumpModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   STRING CONST : gpName
+   STRING OPERATOR :: %GEN_PROPERTY : gpName
    ModelElement OPERATOR :: IN : Self
   ; // .DumpModelElement
   VOID OPERATOR :: elem_proc : .EnterElement
