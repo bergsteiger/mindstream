@@ -460,15 +460,13 @@ MACRO %GP
  GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
 ; // %GP
 
-elem_generator DumpModelElement
+elem_proc DumpAsIs
  %SUMMARY 
  '
  Процедура печатающая содержимое элемента модели.
  Рекурсивно.
  '
  ; // %SUMMARY
-
- %GEN_PROPERTY Name 'dump'
 
  [ 
   Self |S 
@@ -483,6 +481,19 @@ elem_generator DumpModelElement
   [ '; // ' Self |N ] OutToFile
   %REMARK 'Выводим закрывающую скобку элемента'
  END
+; // DumpAsIs
+
+elem_generator DumpModelElement
+ %SUMMARY 
+ '
+ Процедура печатающая содержимое элемента модели.
+ Рекурсивно.
+ '
+ ; // %SUMMARY
+
+ %GEN_PROPERTY Name 'dump'
+
+ Self .DumpAsIs
 ; // DumpModelElement
 
 STRING FUNCTION OutFileName

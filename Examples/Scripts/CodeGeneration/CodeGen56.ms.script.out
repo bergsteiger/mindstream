@@ -111,14 +111,10 @@ VOID Test CodeGen
   Result
  ; // ARRAY elem_func .Children
  
- VOID elem_generator .DumpModelElement
+ VOID elem_proc .DumpAsIs
   %SUMMARY %SUM
    ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
   ; // %SUMMARY %SUM
-  
-  STRING %GEN_PROPERTY gpName
-   'dump'
-  ; // STRING %GEN_PROPERTY gpName
   
   ModelElement IN Self
   [
@@ -138,7 +134,7 @@ VOID Test CodeGen
    )
    .Child.CallGen
    (
-    .DumpModelElement
+    .DumpAsIs
     DO
    )
   FINALLY
@@ -149,6 +145,20 @@ VOID Test CodeGen
    ]
    OutToFile
   END
+ ; // VOID elem_proc .DumpAsIs
+ 
+ VOID elem_generator .DumpModelElement
+  %SUMMARY %SUM
+   ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
+  ; // %SUMMARY %SUM
+  
+  STRING %GEN_PROPERTY gpName
+   'dump'
+  ; // STRING %GEN_PROPERTY gpName
+  
+  ModelElement IN Self
+  Self
+  .DumpAsIs
  ; // VOID elem_generator .DumpModelElement
  
  VOID elem_proc .EnterElement
@@ -616,7 +626,7 @@ VOID Test CodeGen
  0
  g_OutFile :=
  nil
- .DumpModelElement [ ' ' strings:CatSep OutToFile ::
+ .DumpModelElement Self .DumpAsIs ::
  'gpName'
  .
  Project1 .CallGen
@@ -4756,6 +4766,10 @@ TkwMain : Main
    ARRAY OPERATOR :: elem_func :: .Children : Result
    ModelElement OPERATOR :: IN : Self
   ; // .Children
+  VOID OPERATOR :: elem_proc : .DumpAsIs
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : Self
+  ; // .DumpAsIs
   VOID OPERATOR :: elem_generator : .DumpModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    STRING OPERATOR :: %GEN_PROPERTY : gpName
