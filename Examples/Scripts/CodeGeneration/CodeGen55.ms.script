@@ -473,10 +473,7 @@ elem_ref_proc CallGen
 ; // CallGen
 
 Project1 .CallGen .DumpModelElement
-%REMARK 'Выводим содержимое элемента'
-
-OutFileName 'dump' Print
-%REMARK 'Выводим имя файла скрипта в тестовых целях'
+%REMARK 'Выводим содержимое элемента Project1'
 
 ; // CodeGen
 
