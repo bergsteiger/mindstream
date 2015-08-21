@@ -452,6 +452,9 @@ elem_generator DumpModelElement
  Рекурсивно.
  '
  ; // %SUMMARY
+
+ %GEN_PROPERTY gpName 'dump'
+
  [ 
   Self |S 
    %REMARK 'Выводим стереотип элемента'
@@ -491,6 +494,8 @@ elem_ref_proc CallGen
   g_OutFile := nil
  END // TRY..FINALLY
 ; // CallGen
+
+.DumpModelElement :: gpName Print
 
 Project1 .CallGen .DumpModelElement
 %REMARK 'Выводим содержимое элемента Project1'

@@ -82,6 +82,8 @@ VOID Test CodeGen
    ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
   ; // %SUMMARY %SUM
   
+  STRING CONST gpName
+   'dump'
   ModelElement IN Self
   [
    Self
@@ -576,6 +578,9 @@ VOID Test CodeGen
  0
  g_OutFile :=
  nil
+ .DumpModelElement [ ' ' strings:CatSep OutToFile ::
+ 'gpName'
+ .
  Project1 .CallGen
  .DumpModelElement
  Project2 .CallGen
@@ -4709,6 +4714,7 @@ TkwMain : Main
   ; // .Children
   VOID OPERATOR :: elem_generator : .DumpModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   STRING CONST : gpName
    ModelElement OPERATOR :: IN : Self
   ; // .DumpModelElement
   VOID OPERATOR :: elem_proc : .EnterElement
@@ -4851,3 +4857,4 @@ TkwMain : Main
   ; // Project2
  ; // CodeGen
 ; // Main
+dump
