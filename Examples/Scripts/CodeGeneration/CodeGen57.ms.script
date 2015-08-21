@@ -535,11 +535,11 @@ Generators := [ @ .dump @ .pas ]
 Project1 .CallGen .dump
 %REMARK 'Выводим содержимое элемента Project1'
 
-Project2 .CallGen .dump
-%REMARK 'Выводим содержимое элемента Project2'
-
 Project1 .CallGen .pas
 %REMARK 'Выводим содержимое элемента Project1'
+
+Project2 .CallGen .dump
+%REMARK 'Выводим содержимое элемента Project2'
 
 Project2 .CallGen .pas
 %REMARK 'Выводим содержимое элемента Project2'
