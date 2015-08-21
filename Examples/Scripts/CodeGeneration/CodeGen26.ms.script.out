@@ -3649,8 +3649,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.
   axiom:ContainedAction
  ;
 VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  LINK ^ OPERATOR :: IN : aSymbol
 ; // axiom:PushSymbol
+VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushLeftDottedSymbol
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ STRING OPERATOR :: IN : aValue
+; // Ctx:Parser:PushLeftDottedSymbol
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
  Uses: 
   axiom:axiom
@@ -3757,10 +3762,15 @@ VOID OPERATOR : array:AddTo
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
 ; // array:AddTo
+IMMEDIATE VOID OPERATOR : call.me
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // call.me
 IMMEDIATE VOID OPERATOR : RecurseProc
  ^L OPERATOR :: IN : aName
 ; // RecurseProc
 IMMEDIATE VOID OPERATOR : this.do
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // this.do
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
  Uses: 
   axiom:axiom
@@ -4232,6 +4242,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.d
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
  ;
+IMMEDIATE VOID OPERATOR : %REMARK
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // %REMARK
 IMMEDIATE VOID OPERATOR : concrete-model-begin
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aDoc
