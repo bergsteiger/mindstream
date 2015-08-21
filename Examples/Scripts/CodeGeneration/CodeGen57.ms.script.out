@@ -464,6 +464,7 @@ VOID Test CodeGen
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE GENERATOR
  
+ ARRAY VAR Generators
  IMMEDIATE VOID TYPE ModelElement
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -646,6 +647,13 @@ VOID Test CodeGen
  nil
  g_CurrentGeneratorName :=
  ''
+ Generators :=
+ [
+  @
+  .dump
+  @
+  .pas
+ ]
  Project1 .CallGen
  .dump
  Project2 .CallGen
@@ -4889,6 +4897,7 @@ TkwMain : Main
   FILE OPERATOR :: VAR : g_OutFile
   STRING CONST : GEN_PROPERTY_PREFIX
   IMMEDIATE VOID OPERATOR :: TYPE : GENERATOR
+  ARRAY OPERATOR :: VAR : Generators
   IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
   STRING FUNCTION : OutFileName
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM

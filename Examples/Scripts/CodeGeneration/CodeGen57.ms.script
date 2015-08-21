@@ -529,6 +529,9 @@ elem_generator pas
  Self .DumpAsIs
 ; // pas
 
+ARRAY VAR Generators
+Generators := [ @ .dump @ .pas ]
+
 Project1 .CallGen .dump
 %REMARK 'Выводим содержимое элемента Project1'
 
