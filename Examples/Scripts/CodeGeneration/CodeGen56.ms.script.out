@@ -18,6 +18,51 @@ VOID Test CodeGen
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR %GEN_PROPERTY
  
+ ^@ OPERATOR ::
+  ^L IN aName
+  ^@ IN aSelf
+  STRING VAR l_Name
+  OBJECT VAR l_Res
+  OBJECT VAR l_Self
+  aSelf |^@
+  >>>
+  l_Self
+  aName
+  |N
+  >>>
+  l_Name
+  l_Self
+  %%
+  l_Name
+  >>>
+  l_Res
+  ASSURE
+  NOT
+  (
+   l_Res
+   pop:object:IsNil
+  )
+  [
+   'Не найдено поле: '
+   l_Self
+   LIST
+   %P
+   Array:Reverted
+   IT
+   (
+    |N
+    '::'
+   )
+   l_Self
+   |N
+   '::'
+   l_Name
+  ]
+  l_Res
+  >>>
+  Result
+ ; // ^@ OPERATOR ::
+ 
  %SUMMARY %SUM
   ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
  ; // %SUMMARY %SUM
@@ -4718,6 +4763,14 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // %GEN_PROPERTY
+  ^@ OPERATOR : %GP
+   ^L OPERATOR :: IN : aName
+   ^@ OPERATOR :: IN : aSelf
+   STRING OPERATOR :: VAR : l_Name
+   OBJECT OPERATOR :: VAR : l_Res
+   OBJECT OPERATOR :: VAR : l_Self
+   ^@ OPERATOR :: :: : Result
+  ; // %GP
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   VOID OPERATOR :: elem_ref_proc : .CallGen
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
