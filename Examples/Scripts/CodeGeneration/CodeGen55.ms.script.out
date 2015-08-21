@@ -554,6 +554,13 @@ VOID Test CodeGen
   
  ; // <<Project>> Project1
  
+ <<Project>> Project2
+  %SUMMARY %SUM
+   ' Это наш ВТОРОЙ проект - Project2 '
+  ; // %SUMMARY %SUM
+  
+ ; // <<Project>> Project2
+ 
  CodeGen
  DumpElement
  help
@@ -4828,5 +4835,8 @@ TkwMain : Main
     ; // Interface2
    ; // Programm1
   ; // Project1
+  OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project2
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  ; // Project2
  ; // CodeGen
 ; // Main
