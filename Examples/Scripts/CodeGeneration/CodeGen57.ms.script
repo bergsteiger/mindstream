@@ -522,6 +522,13 @@ elem_generator dump
  Self .DumpAsIs
 ; // dump
 
+elem_generator pas
+ %SUMMARY 'Генератор выводящий элементы модели в Паскаль.' ;
+ %GEN_PROPERTY Name 'pas'
+
+ Self .DumpAsIs
+; // pas
+
 Project1 .CallGen .dump
 %REMARK 'Выводим содержимое элемента Project1'
 

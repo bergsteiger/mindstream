@@ -232,6 +232,20 @@ VOID Test CodeGen
   g_Indent
  ; // VOID elem_proc .LeaveElement
  
+ VOID elem_generator .pas
+  %SUMMARY %SUM
+   'Генератор выводящий элементы модели в Паскаль.'
+  ; // %SUMMARY %SUM
+  
+  STRING %GEN_PROPERTY gpName
+   'pas'
+  ; // STRING %GEN_PROPERTY gpName
+  
+  ModelElement IN Self
+  Self
+  .DumpAsIs
+ ; // VOID elem_generator .pas
+ 
  IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
   %SUMMARY %SUM
    ' Определяем базовый элемент мета-модели Тот самый который позволяет тащить всё остальное "за волосы из болота" Через этот примитив выводятся все остальные '
@@ -4801,6 +4815,11 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : Self
   ; // .LeaveElement
+  VOID OPERATOR :: elem_generator : .pas
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   STRING OPERATOR :: %GEN_PROPERTY : gpName
+   ModelElement OPERATOR :: IN : Self
+  ; // .pas
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
