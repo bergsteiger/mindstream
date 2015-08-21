@@ -454,8 +454,10 @@ MACRO %GEN_PROPERTY
 ; // %GEN_PROPERTY
 
 MACRO %GP
+ Literal IN aName
  %SUMMARY 'Метод получения свойства генератора' ;
  axiom:PushSymbol ::
+ GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
 ; // %GP
 
 elem_generator DumpModelElement
@@ -499,7 +501,7 @@ elem_ref_proc CallGen
  ' 
  ; // %SUMMARY 
 
- g_OutFile := ( OutFileName ( Self |N (+) '.' (+) ( aGen %GP gpName ) ) File:OpenWrite )
+ g_OutFile := ( OutFileName ( Self |N (+) '.' (+) ( aGen %GP Name ) ) File:OpenWrite )
  TRY
   Self ( aGen DO )
   %REMARK 'Вызываем на элементе генератор aGen'

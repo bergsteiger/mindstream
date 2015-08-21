@@ -23,8 +23,16 @@ VOID Test CodeGen
    'Метод получения свойства генератора'
   ; // %SUMMARY %SUM
   
+  ^L IN aName
   axiom:PushSymbol
   ::
+  GEN_PROPERTY_PREFIX
+  (+)
+  (
+   aName
+   |N
+  )
+  Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR %GP
  
  %SUMMARY %SUM
@@ -4729,6 +4737,7 @@ TkwMain : Main
   ; // %GEN_PROPERTY
   IMMEDIATE VOID OPERATOR : %GP
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^L OPERATOR :: IN : aName
   ; // %GP
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   VOID OPERATOR :: elem_ref_proc : .CallGen
