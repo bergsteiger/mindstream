@@ -298,18 +298,18 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID <<UMLCategory>> <<Library>>
  
- IMMEDIATE VOID <<UMLCategory>> <<Programm>>
+ IMMEDIATE VOID <<UMLCategory>> <<Program>>
   %SUMMARY %SUM
-   ' Наверное у нас при разработке встречаются программы. Так вот Programm это стереотип, который описывает наши программы. '
+   ' Наверное у нас при разработке встречаются программы. Так вот Program это стереотип, который описывает наши программы. '
   ; // %SUMMARY %SUM
   
   ^L IN aName
   aName
   |N
-  <<Programm>>
+  <<Program>>
   DefineStereoInstance
   EXIT
- ; // IMMEDIATE VOID <<UMLCategory>> <<Programm>>
+ ; // IMMEDIATE VOID <<UMLCategory>> <<Program>>
  
  IMMEDIATE VOID <<UMLCategory>> <<Project>>
   %SUMMARY %SUM
@@ -561,14 +561,14 @@ VOID Test CodeGen
    
   ; // <<Library>> Library3
   
-  <<Programm>> Programm1
+  <<Program>> Program1
    %SUMMARY %SUM
-    '  Наверное наш проект реализует какую-то программу.  Иначе - зачем бы он нам был бы нужен?  Так вот Programm1 - это программа внутри нашего проекта Project1.  '
+    '  Наверное наш проект реализует какую-то программу.  Иначе - зачем бы он нам был бы нужен?  Так вот Program1 - это программа внутри нашего проекта Project1.  '
    ; // %SUMMARY %SUM
    
    <<Class>> Class1
     %SUMMARY %SUM
-     '   Наверное наша программа содержит какие-то классы реализации.   Иначе - кто будет реализовывать наш функционал?   Так вот Class1 - это наш ПЕРВЫЙ класс реализации внутри нашей программы Programm1.   '
+     '   Наверное наша программа содержит какие-то классы реализации.   Иначе - кто будет реализовывать наш функционал?   Так вот Class1 - это наш ПЕРВЫЙ класс реализации внутри нашей программы Program1.   '
     ; // %SUMMARY %SUM
     
    ; // <<Class>> Class1
@@ -587,14 +587,14 @@ VOID Test CodeGen
     ; // %IMPLEMENTS %R
     
     %SUMMARY %SUM
-     '   Наверное наша программа достаточно серьёзна и содержит НЕ ОДИН классы реализации.   Так вот Class2 - это наш ВТОРОЙ класс реализации внутри нашей программы Programm1.   '
+     '   Наверное наша программа достаточно серьёзна и содержит НЕ ОДИН классы реализации.   Так вот Class2 - это наш ВТОРОЙ класс реализации внутри нашей программы Program1.   '
     ; // %SUMMARY %SUM
     
    ; // <<Class>> Class2
    
    <<Class>> Class3
     %SUMMARY %SUM
-     '   Возможно, что у нас такая непростая программа, что в ней даже больше, чем ДВА класса реализации.   Так вот Class3 - это наш ТРЕТИЙ класс реализации внутри нашей программы Programm1.   '
+     '   Возможно, что у нас такая непростая программа, что в ней даже больше, чем ДВА класса реализации.   Так вот Class3 - это наш ТРЕТИЙ класс реализации внутри нашей программы Program1.   '
     ; // %SUMMARY %SUM
     
    ; // <<Class>> Class3
@@ -608,7 +608,7 @@ VOID Test CodeGen
     ; // %INHERITS %G
     
     %SUMMARY %SUM
-     '   Возможно, что мы настолько офигенно круты, что у на даже НЕ ТРИ класса реализации.   Так вот Class4 - это наш ЧЕТВЁРТЫЙ класс реализации внутри нашей программы Programm1.   '
+     '   Возможно, что мы настолько офигенно круты, что у на даже НЕ ТРИ класса реализации.   Так вот Class4 - это наш ЧЕТВЁРТЫЙ класс реализации внутри нашей программы Program1.   '
     ; // %SUMMARY %SUM
     
    ; // <<Class>> Class4
@@ -627,7 +627,7 @@ VOID Test CodeGen
     
    ; // <<Interface>> Interface2
    
-  ; // <<Programm>> Programm1
+  ; // <<Program>> Program1
   
  ; // <<Project>> Project1
  
@@ -4856,10 +4856,10 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // <<Library>>
-  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> : <<Programm>>
+  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> : <<Program>>
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
-  ; // <<Programm>>
+  ; // <<Program>>
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> : <<Project>>
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
@@ -4930,7 +4930,7 @@ TkwMain : Main
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library3
     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ; // Library3
-   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Programm>> : Programm1
+   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Program>> : Program1
     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
     OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class1
      OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
@@ -4953,7 +4953,7 @@ TkwMain : Main
     OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Interface>> : Interface2
      OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
     ; // Interface2
-   ; // Programm1
+   ; // Program1
   ; // Project1
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project2
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM

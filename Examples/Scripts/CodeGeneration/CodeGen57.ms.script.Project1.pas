@@ -5,7 +5,7 @@ pas : <<Project>> Project1
  ; // Library2
  pas : <<Library>> Library3
  ; // Library3
- pas : <<Programm>> Programm1
+ pas : <<Program>> Program1
   pas : <<Class>> Class1
   ; // Class1
   pas : <<Class>> Class2
@@ -24,5 +24,5 @@ pas : <<Project>> Project1
   ; // Interface1
   pas : <<Interface>> Interface2
   ; // Interface2
- ; // Programm1
+ ; // Program1
 ; // Project1
