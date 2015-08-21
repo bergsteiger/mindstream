@@ -4,10 +4,14 @@ VOID Test CodeGen
    'Свойство генератора'
   ; // %SUMMARY %SUM
   
+  ^L IN aName
   %GEN_PROPERTY
   Ctx:SetWordProducerForCompiledClass
   axiom:PushSymbol
   CONST
+  aName
+  |N
+  Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR %GEN_PROPERTY
  
  %SUMMARY %SUM
@@ -4706,6 +4710,7 @@ TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
   IMMEDIATE VOID OPERATOR : %GEN_PROPERTY
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^L OPERATOR :: IN : aName
   ; // %GEN_PROPERTY
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   VOID OPERATOR :: elem_ref_proc : .CallGen
