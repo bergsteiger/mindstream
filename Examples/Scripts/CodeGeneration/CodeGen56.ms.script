@@ -442,6 +442,9 @@ elem_proc Child.CallGen
  END // TRY..FINALLY
 ; // Child.CallGen
 
+WordAlias %GEN_PROPERTY CONST
+%REMARK 'Свойство генератора'
+
 elem_generator DumpModelElement
  %SUMMARY 
  '
