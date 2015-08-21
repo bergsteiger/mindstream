@@ -371,24 +371,11 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ^L IN aName
-  Ctx:ClearTypeInfo
-  elem_ref_proc
-  Ctx:SetWordProducerForCompiledClass
-  axiom:PushSymbol
-  VOID
-  axiom:PushSymbol
-  :
   aName
   |N
-  Ctx:Parser:PushLeftDottedSymbol
-  axiom:PushSymbol
-  ^@
-  axiom:PushSymbol
-  ModelElement
-  axiom:PushSymbol
-  IN
-  'Self'
-  Ctx:Parser:PushSymbol
+  elem_ref_proc
+  '^@'
+  do_elem_proc
  ; // IMMEDIATE VOID OPERATOR elem_ref_proc
  
  INTEGER VAR g_Indent
