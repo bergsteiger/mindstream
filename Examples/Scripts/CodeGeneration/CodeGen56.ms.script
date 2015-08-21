@@ -484,13 +484,7 @@ elem_proc DumpAsIs
 ; // DumpAsIs
 
 elem_generator DumpModelElement
- %SUMMARY 
- '
- Процедура печатающая содержимое элемента модели.
- Рекурсивно.
- '
- ; // %SUMMARY
-
+ %SUMMARY 'Генератор выводящий дамп элемента модели.' ;
  %GEN_PROPERTY Name 'dump'
 
  Self .DumpAsIs

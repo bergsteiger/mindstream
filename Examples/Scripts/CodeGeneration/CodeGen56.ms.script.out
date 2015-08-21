@@ -149,7 +149,7 @@ VOID Test CodeGen
  
  VOID elem_generator .DumpModelElement
   %SUMMARY %SUM
-   ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
+   'Генератор выводящий дамп элемента модели.'
   ; // %SUMMARY %SUM
   
   STRING %GEN_PROPERTY gpName
