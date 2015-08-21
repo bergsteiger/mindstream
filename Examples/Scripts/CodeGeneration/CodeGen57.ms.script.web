@@ -1,0 +1,552 @@
+USES
+ metaMACRO.ms.dict
+ classRelations.ms.dict
+;
+
+Test CodeGen
+ %REMARK
+  '
+  CodeGen - это функция в которой мы будем тестировать наш функционал
+  '
+
+ %REMARK
+  '
+  %SUMMARY это мета-информация, которая позволяет привязывать документацию
+  к элементам кода. Эта документация доступна потом из скриптовой машины.
+  '
+ %SUMMARY '
+ Тут будем тестировать построение сначала мета-модели, потом модели, а потом и
+ кодогенерации
+ '
+ ; // %SUMMARY
+
+// ---------------------------------------------------------------------------
+
+meta-meta-model-begin
+ 'Тут будем определять аксиоматику мета-мета-модели, а потом вынесем её 
+  в отдельный словарь.
+ '
+
+StereotypeStereotypeProducer meta
+ %SUMMARY '
+ Определяем базовый элемент мета-модели
+ Тот самый который позволяет тащить всё остальное "за волосы из болота"
+ Через этот примитив выводятся все остальные
+ '
+ ; // %SUMMARY 
+; // meta
+
+meta-meta-model-end
+
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+
+meta-model-begin
+ 'Тут будем определять аксиоматику мета-модели, а потом вынесем её 
+  в отдельный словарь.
+
+  Дальше будем определять понятия из UML - https://ru.wikipedia.org/wiki/UML
+
+  Там бывают КАТЕГОРИИ и КЛАССЫ (Category и Class)
+
+  На самом деле разница между ними - "призрачна", но раз умные дяди так решили, 
+  то так тому и быть
+
+  Вот с них и начнём:
+  '
+&lt;&lt;@meta&gt;&gt; UMLCategory
+ %SUMMARY '
+ Категория в терминах UML
+ ' 
+ ; // %SUMMARY 
+; // UMLCategory
+
+&lt;&lt;@meta&gt;&gt; UMLClass
+ %SUMMARY '
+ Класс в терминах UML
+ ' 
+ ; // %SUMMARY 
+; // UMLClass
+
+meta-model-end
+
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+
+concrete-model-begin 'Модель шаблонов'
+ 'Тут будем определять аксиоматику конкретной модели.
+  Пока - "модели шаблонов". 
+  А потом вынесем её 
+  в отдельный словарь.
+ '
+
+&lt;&lt;UMLCategory&gt;&gt; Project
+ %SUMMARY '
+ Наверное у нас при разработке встречаются проекты.
+ Так вот Project это стереотип, который описывает наши проекты.
+ '
+ ; // %SUMMARY
+; // Project
+
+&lt;&lt;UMLCategory&gt;&gt; Library
+ %SUMMARY '
+ Наверное у нас при разработке встречаются проектные библиотеки.
+ Так вот Library это стереотип, который описывает наши библиотеки.
+ '
+ ; // %SUMMARY
+; // Library
+
+&lt;&lt;UMLCategory&gt;&gt; Programm
+ %SUMMARY '
+ Наверное у нас при разработке встречаются программы.
+ Так вот Programm это стереотип, который описывает наши программы.
+ '
+ ; // %SUMMARY
+; // Programm
+
+&lt;&lt;UMLClass&gt;&gt; Class
+ %SUMMARY '
+ Наверное у нас при разработке встречаются проектные классы.
+ Так вот Class это стереотип, который описывает наши проектные классы.
+ '
+ ; // %SUMMARY
+; // Class
+
+&lt;&lt;UMLClass&gt;&gt; Interface
+ %SUMMARY '
+ Наверное у нас при разработке встречаются интерфейсы.
+ Так вот Interface это стереотип, который описывает наши интерфейсы.
+ '
+ ; // %SUMMARY
+; // Interface
+
+%REMARK
+ '
+ Могут ли Library вкладываться в Project, а Project в Library
+ Или могут ли Programm вкладываться в Class, а Class в Programm
+ И прочие отношения между стереотипами - мы определим несколько позже.
+ Когда начнём использовать их.
+ '
+
+model-end
+
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+
+concrete-model-begin 'Модель конкретного проекта Project1'
+ 'Тут будем определять аксиоматику конкретной модели конкретного проекта.
+  А потом вынесем её 
+  в отдельный словарь.
+ '
+&lt;&lt;Project&gt;&gt; Project1
+ %SUMMARY '
+ Это наш первый проект - Project1
+ '
+ ; // %SUMMARY
+
+ &lt;&lt;Library&gt;&gt; Library1
+  %SUMMARY '
+  Наверное наш проект содержит какие-то проектные библиотеки.
+  Так вот Library1 - это наша первая проектная библиотека
+  '
+  ; // %SUMMARY
+ ; // Library1
+
+ &lt;&lt;Library&gt;&gt; Library2
+  %SUMMARY '
+  Наверное наш проект достаточно серьёзен и содержит НЕ ОДНУ библиотеку.
+  Так вот Library2 - это наша вторая проектная библиотека.
+  '
+  ; // %SUMMARY
+ ; // Library2
+
+ &lt;&lt;Library&gt;&gt; Library3
+  %SUMMARY '
+  Наверное наш проект НАСТОЛЬКО серьёзен, что содержит даже НЕ ДВЕ библиотеки.
+  Так вот Library3 - это наша третья проектная библиотека.
+  '
+  ; // %SUMMARY
+ ; // Library3
+
+ &lt;&lt;Programm&gt;&gt; Programm1
+  %SUMMARY '
+  Наверное наш проект реализует какую-то программу.
+  Иначе - зачем бы он нам был бы нужен?
+  Так вот Programm1 - это программа внутри нашего проекта Project1.
+  '
+  ; // %SUMMARY
+
+  &lt;&lt;Class&gt;&gt; Class1
+   %SUMMARY '
+   Наверное наша программа содержит какие-то классы реализации.
+   Иначе - кто будет реализовывать наш функционал?
+   Так вот Class1 - это наш ПЕРВЫЙ класс реализации внутри нашей программы Programm1.
+   '
+   ; // %SUMMARY
+  ; // Class1
+
+  &lt;&lt;Interface&gt;&gt; Interface1
+   %SUMMARY '
+   Наверное наша программа настолько серьёзна, что реализует какие-то интерфейсы.
+   Так вот Interface1 - это наш ПЕРВЫЙ интерфейс.
+   '
+   ; // %SUMMARY
+  ; // Interface1
+
+  &lt;&lt;Interface&gt;&gt; Interface2
+   %SUMMARY '
+   Наверное наша программа настолько серьёзна, что реализует НЕ ОДИН интерфейс, а несколько.
+   Так вот Interface2 - это наш ВТОРОЙ интерфейс.
+   '
+   ; // %SUMMARY
+  ; // Interface2
+
+  &lt;&lt;Class&gt;&gt; Class2
+   %SUMMARY '
+   Наверное наша программа достаточно серьёзна и содержит НЕ ОДИН классы реализации.
+   Так вот Class2 - это наш ВТОРОЙ класс реализации внутри нашей программы Programm1.
+   '
+   ; // %SUMMARY
+   %INHERITS
+    @ Class1
+    %REMARK 'Возможно наш проектный класс Class2 наследуется от класса Class1'
+   ; // %INHERITS
+   %IMPLEMENTS
+    @ Interface1
+    %REMARK 'Возможно наш проектный класс Class2 реализует интерфейс Interface1'
+    @ Interface2
+    %REMARK 'Возможно наш проектный класс Class2 реализует ещё и интерфейс Interface2'
+   ; // %IMPLEMENTS
+  ; // Class2
+
+  &lt;&lt;Class&gt;&gt; Class3
+   %SUMMARY '
+   Возможно, что у нас такая непростая программа, что в ней даже больше, чем ДВА класса реализации.
+   Так вот Class3 - это наш ТРЕТИЙ класс реализации внутри нашей программы Programm1.
+   '
+   ; // %SUMMARY
+  ; // Class3
+
+  &lt;&lt;Class&gt;&gt; Class4
+   %SUMMARY '
+   Возможно, что мы настолько офигенно круты, что у на даже НЕ ТРИ класса реализации.
+   Так вот Class4 - это наш ЧЕТВЁРТЫЙ класс реализации внутри нашей программы Programm1.
+   '
+   ; // %SUMMARY
+   %INHERITS
+    @ Class2
+    @ Class3
+    %REMARK 
+     '
+     Возможно, что мы нстолько ОФИГЕННЫЕ перцы, что используем МНОЖЕСТВЕННОЕ наследование.
+     И даже ПОНИМАЕМ - ЗАЧЕМ это нужно.
+     Так вот Class4 - наследуется от Class2 и Class3.  
+     '
+   ; // %INHERITS
+  ; // Class4
+
+ ; // Programm1
+
+; // Project1
+
+%REMARK
+ '
+  РЕМАРКА.
+  Все эти слова "наверное" вообще говоря должны проистекать из требований, ТЗ и UseCase
+  Но мы про это позже поговорим.
+ '  
+model-end
+
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+
+concrete-model-begin 'Модель конкретного проекта Project2'
+ 'Тут будем определять аксиоматику конкретной модели конкретного проекта.
+  А потом вынесем её 
+  в отдельный словарь.
+ '
+&lt;&lt;Project&gt;&gt; Project2
+ %SUMMARY '
+ Это наш ВТОРОЙ проект - Project2
+ '
+ ; // %SUMMARY
+; // Project2
+model-end
+
+// ---------------------------------------------------------------------------
+
+USES
+ CodeDump.ms.dict
+ // - тут подключаем словарь CodeDump.ms.dict, чтобы "увидеть" слово DumpElement
+;
+
+@SELF DumpElement
+%REMARK
+ '
+ - тут дампим элемент CodeGen и его содержимое
+   в стандартное устройство вывода.
+   Чисто для отладки того, что мы сейчас написали.
+ '
+
+help
+%REMARK
+ '
+ Выводим всю доступную аксиоматику в стандартное устройство вывода.
+ Чисто для отладки того, что мы сейчас написали.
+ '
+
+%REMARK
+ '
+ Теперь, что мы можем сделать с нашим проектом?
+ Ну для начала выведем его содержимое на стандартное устройство вывода.
+ '
+
+TtfwWord TYPE ModelElement
+%REMARK 'Элемент модели'
+
+PROCEDURE do_elem_func
+ STRING IN aName
+ TtfwWord IN aSelf
+ TtfwWord IN aModifier
+ %SUMMARY 'Реализация do_elem_func, elem_proc и elem_generator' ;
+ aSelf Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol :
+ aName Ctx:Parser:PushLeftDottedSymbol
+ axiom:PushSymbol ModelElement
+ if ( aModifier &lt;&gt; nil ) then
+  ( aModifier |N Ctx:Parser:PushSymbol )
+ axiom:PushSymbol in
+ 'Self' Ctx:Parser:PushSymbol
+; // do_elem_func
+
+MACRO elem_func
+ Literal IN aName
+ %SUMMARY 'Функция на элементе модели' ;
+ aName |N @SELF nil do_elem_func
+; // elem_func
+
+PROCEDURE do_elem_proc
+ STRING IN aName
+ TtfwWord IN aSelf
+ TtfwWord IN aModifier
+ %SUMMARY 'Реализация elem_proc и elem_generator' ;
+ Ctx:ClearTypeInfo
+ axiom:PushSymbol VOID
+ aName aSelf aModifier do_elem_func
+; // do_elem_proc
+
+MACRO elem_proc
+ Literal IN aName
+ %SUMMARY 'Процедура на элементе модели' ;
+ aName |N @SELF nil do_elem_proc
+; // elem_proc
+
+MACRO elem_generator
+ Literal IN aName
+ %SUMMARY 'Генератор содержимого элемента' ;
+ aName |N @SELF nil do_elem_proc
+; // elem_generator
+
+MACRO elem_ref_proc
+ Literal IN aName
+ %SUMMARY 'Процедура на элементе модели, который передаётся по ссылке' ;
+ aName |N @SELF @ ^@ do_elem_proc
+; // elem_ref_proc
+
+BOOLEAN elem_func IsSummary
+ %SUMMARY 
+ '
+  Определяет тот факт, что aWord является документацией к элементу
+ '
+ ; // %SUMMARY
+ ( Self |N ) = '%SUM' &gt;&gt;&gt; Result
+; // IsSummary
+
+BOOLEAN elem_func IsModelElement
+ %SUMMARY 
+ '
+  Определяет тот факт, что aWord является "элементом модели"
+ '
+ ; // %SUMMARY
+ NOT ( Self .IsSummary )
+  &gt;&gt;&gt; Result
+; // IsModelElement
+
+ARRAY elem_func Children
+ %SUMMARY 
+ '
+ Возвращает итератор детей aWord в "терминах определённой модели"
+ '
+ ;
+ ( Self MembersIterator ) &gt;filter&gt; .IsModelElement &gt;&gt;&gt; Result
+; // Children
+
+INTEGER VAR g_Indent
+%REMARK 'Текущий отступ'
+g_Indent := 0
+
+BOOLEAN elem_func IsElementNeedIndent
+ %SUMMARY 'Определяет тот факт, что элементу нужен отступ' ;
+ true &gt;&gt;&gt; Result
+; // IsElementNeedIndent
+
+elem_proc EnterElement
+ %SUMMARY 'Начинает вывод элемента' ;
+ Self .IsElementNeedIndent ? INC g_Indent
+; // EnterElement
+
+elem_proc LeaveElement
+ %SUMMARY 'Заканчивает вывод элемента' ;
+ Self .IsElementNeedIndent ? DEC g_Indent
+; // LeaveElement
+
+FILE VAR g_OutFile
+g_OutFile := nil
+
+STRING INTEGER ARRAY TYPE PRINTABLE
+
+PROCEDURE OutToFile
+ PRINTABLE IN aValue 
+ %SUMMARY 
+ '
+ Выводит значение в текущий файл вывода.
+ С переводом каретки.
+ '
+ ; // %SUMMARY 
+
+ STRING VAR l_String
+ if ( aValue IsArray ) then
+  ( aValue strings:Cat &gt;&gt;&gt; l_String )
+ else
+  ( aValue ToPrintable &gt;&gt;&gt; l_String )
+ [ g_Indent ' ' char:Dupe l_String ] strings:Cat g_OutFile File:WriteLn
+ %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
+; //OutToFile
+
+FUNCTOR TYPE GENERATOR
+%REMARK 'Генератор содержимого элемента'
+
+elem_proc Child.CallGen
+ GENERATOR right aGen
+ %SUMMARY 'Вызывает на ДОЧЕРНЕМ элементе генератор aGen с учётом отступов' ;
+ Self .EnterElement 
+ TRY
+  Self aGen
+  %REMARK 'Вызываем генератор aGen'
+ FINALLY
+  Self .LeaveElement 
+ END // TRY..FINALLY
+; // Child.CallGen
+
+CONST GEN_PROPERTY_PREFIX 'gp'
+%REMARK 'Префикс имени свойства генератора'
+
+MACRO %GEN_PROPERTY
+ Literal IN aName
+ %SUMMARY 'Свойство генератора' ;
+ @SELF Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol CONST
+ GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
+; // %GEN_PROPERTY
+
+MACRO %GP
+ Literal IN aName
+ %SUMMARY 'Метод получения свойства генератора' ;
+ axiom:PushSymbol ::
+ GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
+; // %GP
+
+STRING FUNCTION OutFileName
+ STRING right aGeneratorName
+ %SUMMARY 'Имя файла для вывода' ;
+ script:FileName sysutils:ExtractFileName (+) '.' (+) aGeneratorName &gt;&gt;&gt; Result
+; // OutFileName
+
+STRING VAR g_CurrentGeneratorName
+%REMARK 'Имя текущего генератора'
+g_CurrentGeneratorName := ''
+
+elem_ref_proc CallGen
+ GENERATOR RIGHT IN aGen
+
+ %SUMMARY 
+ '
+ Вызывает на элементе генератор aGen.
+ С открытием "правильных файлов".
+ ' 
+ ; // %SUMMARY 
+
+ aGen %GP Name &gt;&gt;&gt; g_CurrentGeneratorName
+ g_OutFile := ( OutFileName ( Self |N (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
+ TRY
+  Self ( aGen DO )
+  %REMARK 'Вызываем на элементе генератор aGen'
+ FINALLY
+  g_OutFile := nil
+ END // TRY..FINALLY
+; // CallGen
+
+elem_proc DumpAsIs
+ %SUMMARY 
+ '
+ Процедура печатающая содержимое элемента модели.
+ Рекурсивно.
+ '
+ ; // %SUMMARY
+
+ [
+  g_CurrentGeneratorName ':'
+   %REMARK 'Выводим имя текущего генератора. Для отладки' 
+  Self |S 
+   %REMARK 'Выводим стереотип элемента'
+  Self |N 
+   %REMARK 'Выводим имя элемента'
+ ] ' ' strings:CatSep OutToFile
+ TRY
+  for ( Self .Children ) .Child.CallGen call.me 
+  %REMARK 'Выводим детей элемента'
+ FINALLY
+  [ '; // ' Self |N ] OutToFile
+  %REMARK 'Выводим закрывающую скобку элемента'
+ END
+; // DumpAsIs
+
+elem_generator dump
+ %SUMMARY 'Генератор выводящий дамп элемента модели.' ;
+ %GEN_PROPERTY Name 'dump'
+
+ Self .DumpAsIs
+; // dump
+
+elem_generator pas
+ %SUMMARY 'Генератор выводящий элементы модели в Паскаль.' ;
+ %GEN_PROPERTY Name 'pas'
+
+ Self .DumpAsIs
+; // pas
+
+ARRAY VAR Generators
+Generators := [ @ .dump @ .pas ]
+
+ARRAY VAR Projects
+Projects := [ @ Project1 @ Project2 ]
+
+Project1 .CallGen .dump
+%REMARK 'Выводим содержимое элемента Project1'
+
+Project1 .CallGen .pas
+%REMARK 'Выводим содержимое элемента Project1'
+
+Project2 .CallGen .dump
+%REMARK 'Выводим содержимое элемента Project2'
+
+Project2 .CallGen .pas
+%REMARK 'Выводим содержимое элемента Project2'
+
+; // CodeGen
+
+CodeGen
