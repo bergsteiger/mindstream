@@ -477,7 +477,7 @@ STRING FUNCTION OutFileName
 ; // OutFileName
 
 elem_ref_proc CallGen
- GENERATOR ^ IN aGen
+ GENERATOR RIGHT IN aGen
 
  %SUMMARY 
  '
