@@ -408,6 +408,8 @@ VOID Test CodeGen
  
  INTEGER VAR g_Indent
  FILE VAR g_OutFile
+ STRING CONST GEN_PROPERTY_PREFIX
+  'gp'
  IMMEDIATE VOID TYPE GENERATOR
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -4819,6 +4821,7 @@ TkwMain : Main
   ; // elem_ref_proc
   INTEGER OPERATOR :: VAR : g_Indent
   FILE OPERATOR :: VAR : g_OutFile
+  STRING CONST : GEN_PROPERTY_PREFIX
   IMMEDIATE VOID OPERATOR :: TYPE : GENERATOR
   IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
   STRING FUNCTION : OutFileName

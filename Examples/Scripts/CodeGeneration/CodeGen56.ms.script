@@ -442,10 +442,15 @@ elem_proc Child.CallGen
  END // TRY..FINALLY
 ; // Child.CallGen
 
+CONST GEN_PROPERTY_PREFIX 'gp'
+%REMARK 'Префикс имени свойства генератора'
+
 MACRO %GEN_PROPERTY
+ Literal IN aName
  %SUMMARY 'Свойство генератора' ;
  @SELF Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol CONST
+ aName |N Ctx:Parser:PushSymbol
 ; // %GEN_PROPERTY
 
 elem_generator DumpModelElement
