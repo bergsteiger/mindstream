@@ -18,7 +18,14 @@ VOID Test CodeGen
   g_OutFile :=
   (
    OutFileName
-   'dump'
+   (
+    Self
+    |N
+    (+)
+    '.'
+    (+)
+    'dump'
+   )
    File:OpenWrite
   )
   TRY
@@ -569,6 +576,8 @@ VOID Test CodeGen
  g_OutFile :=
  nil
  Project1 .CallGen
+ .DumpModelElement
+ Project2 .CallGen
  .DumpModelElement
 ; // VOID Test CodeGen
 

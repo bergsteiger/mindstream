@@ -480,7 +480,7 @@ elem_ref_proc CallGen
  ' 
  ; // %SUMMARY 
 
- g_OutFile := ( OutFileName 'dump' File:OpenWrite )
+ g_OutFile := ( OutFileName ( Self |N (+) '.' (+) 'dump' ) File:OpenWrite )
  TRY
   Self aGen
   %REMARK 'Вызываем на элементе генератор aGen'
@@ -491,6 +491,9 @@ elem_ref_proc CallGen
 
 Project1 .CallGen .DumpModelElement
 %REMARK 'Выводим содержимое элемента Project1'
+
+Project2 .CallGen .DumpModelElement
+%REMARK 'Выводим содержимое элемента Project2'
 
 ; // CodeGen
 
