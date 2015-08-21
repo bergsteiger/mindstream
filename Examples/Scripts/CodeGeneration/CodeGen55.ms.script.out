@@ -281,6 +281,7 @@ VOID Test CodeGen
    'Реализация do_elem_func, elem_proc и elem_generator'
   ; // %SUMMARY %SUM
   
+  STRING IN aModifier
   STRING IN aName
   TtfwWord IN aSelf
   aSelf
@@ -291,6 +292,17 @@ VOID Test CodeGen
   Ctx:Parser:PushLeftDottedSymbol
   axiom:PushSymbol
   ModelElement
+  if
+   (
+    aModifier
+    <>
+    ''
+   )
+  then
+   (
+    aModifier
+    Ctx:Parser:PushSymbol
+   )
   axiom:PushSymbol
   IN
   'Self'
@@ -302,6 +314,7 @@ VOID Test CodeGen
    'Реализация elem_proc и elem_generator'
   ; // %SUMMARY %SUM
   
+  STRING IN aModifier
   STRING IN aName
   TtfwWord IN aSelf
   Ctx:ClearTypeInfo
@@ -309,6 +322,7 @@ VOID Test CodeGen
   VOID
   aName
   aSelf
+  aModifier
   do_elem_func
  ; // VOID PROCEDURE do_elem_proc
  
@@ -321,6 +335,7 @@ VOID Test CodeGen
   aName
   |N
   elem_func
+  ''
   do_elem_func
  ; // IMMEDIATE VOID OPERATOR elem_func
  
@@ -333,6 +348,7 @@ VOID Test CodeGen
   aName
   |N
   elem_generator
+  ''
   do_elem_proc
  ; // IMMEDIATE VOID OPERATOR elem_generator
  
@@ -345,6 +361,7 @@ VOID Test CodeGen
   aName
   |N
   elem_proc
+  ''
   do_elem_proc
  ; // IMMEDIATE VOID OPERATOR elem_proc
  
@@ -4737,11 +4754,13 @@ TkwMain : Main
   ; // <<UMLClass>>
   VOID OPERATOR :: PROCEDURE : do_elem_func
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   STRING OPERATOR :: IN : aModifier
    STRING OPERATOR :: IN : aName
    TtfwWord OPERATOR :: IN : aSelf
   ; // do_elem_func
   VOID OPERATOR :: PROCEDURE : do_elem_proc
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   STRING OPERATOR :: IN : aModifier
    STRING OPERATOR :: IN : aName
    TtfwWord OPERATOR :: IN : aSelf
   ; // do_elem_proc

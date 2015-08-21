@@ -294,11 +294,14 @@ TtfwWord TYPE ModelElement
 PROCEDURE do_elem_func
  STRING IN aName
  TtfwWord IN aSelf
+ STRING IN aModifier
  %SUMMARY 'Реализация do_elem_func, elem_proc и elem_generator' ;
  aSelf Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol :
  aName Ctx:Parser:PushLeftDottedSymbol
  axiom:PushSymbol ModelElement
+ if ( aModifier <> '' ) then
+  ( aModifier Ctx:Parser:PushSymbol )
  axiom:PushSymbol in
  'Self' Ctx:Parser:PushSymbol
 ; // do_elem_func
@@ -306,28 +309,29 @@ PROCEDURE do_elem_func
 MACRO elem_func
  Literal IN aName
  %SUMMARY 'Функция на элементе модели' ;
- aName |N @SELF do_elem_func
+ aName |N @SELF '' do_elem_func
 ; // elem_func
 
 PROCEDURE do_elem_proc
  STRING IN aName
  TtfwWord IN aSelf
+ STRING IN aModifier
  %SUMMARY 'Реализация elem_proc и elem_generator' ;
  Ctx:ClearTypeInfo
  axiom:PushSymbol VOID
- aName aSelf do_elem_func
+ aName aSelf aModifier do_elem_func
 ; // do_elem_proc
 
 MACRO elem_proc
  Literal IN aName
  %SUMMARY 'Процедура на элементе модели' ;
- aName |N @SELF do_elem_proc
+ aName |N @SELF '' do_elem_proc
 ; // elem_proc
 
 MACRO elem_generator
  Literal IN aName
  %SUMMARY 'Генератор содержимого элемента' ;
- aName |N @SELF do_elem_proc
+ aName |N @SELF '' do_elem_proc
 ; // elem_generator
 
 MACRO elem_ref_proc
