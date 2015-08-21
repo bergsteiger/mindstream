@@ -9,12 +9,7 @@ VOID Test CodeGen
    ' Вызывает на элементе генератор aGen. С открытием "правильных файлов". '
   ; // %SUMMARY %SUM
   
-  ^ IN _aGen
-  IMMEDIATE VOID OPERATOR aGen
-   '_aGen'
-   MangledNamePusher
-  ; // IMMEDIATE VOID OPERATOR aGen
-  
+  ^ IN aGen
   ^@ IN Self
   g_OutFile :=
   (
@@ -25,14 +20,18 @@ VOID Test CodeGen
     (+)
     '.'
     (+)
-    'dump'
+    (
+     aGen ::
+     'gpName'
+    )
    )
    File:OpenWrite
   )
   TRY
    Self
    (
-    _aGen |^
+    aGen
+    DO
    )
   FINALLY
    g_OutFile :=
@@ -4697,8 +4696,7 @@ TkwMain : Main
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   VOID OPERATOR :: elem_ref_proc : .CallGen
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^ OPERATOR :: IN : _aGen
-   IMMEDIATE VOID OPERATOR : aGen
+   ^ OPERATOR :: IN : aGen
    ^@ OPERATOR :: IN : Self
   ; // .CallGen
   VOID OPERATOR :: elem_proc : .Child.CallGen

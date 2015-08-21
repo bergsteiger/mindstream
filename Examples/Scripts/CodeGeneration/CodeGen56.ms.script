@@ -477,7 +477,7 @@ STRING FUNCTION OutFileName
 ; // OutFileName
 
 elem_ref_proc CallGen
- GENERATOR right aGen
+ GENERATOR ^ IN aGen
 
  %SUMMARY 
  '
@@ -486,9 +486,9 @@ elem_ref_proc CallGen
  ' 
  ; // %SUMMARY 
 
- g_OutFile := ( OutFileName ( Self |N (+) '.' (+) 'dump' ) File:OpenWrite )
+ g_OutFile := ( OutFileName ( Self |N (+) '.' (+) ( aGen :: gpName ) ) File:OpenWrite )
  TRY
-  Self aGen
+  Self ( aGen DO )
   %REMARK 'Вызываем на элементе генератор aGen'
  FINALLY
   g_OutFile := nil
