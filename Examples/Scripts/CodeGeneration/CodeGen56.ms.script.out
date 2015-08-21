@@ -133,6 +133,8 @@ VOID Test CodeGen
   
   ModelElement IN Self
   [
+   g_CurrentGeneratorName
+   ':'
    Self
    |S
    Self

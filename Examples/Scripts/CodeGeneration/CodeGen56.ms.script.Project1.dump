@@ -1,28 +1,28 @@
-<<Project>> Project1
- <<Library>> Library1
+dump : <<Project>> Project1
+ dump : <<Library>> Library1
  ; // Library1
- <<Library>> Library2
+ dump : <<Library>> Library2
  ; // Library2
- <<Library>> Library3
+ dump : <<Library>> Library3
  ; // Library3
- <<Programm>> Programm1
-  <<Class>> Class1
+ dump : <<Programm>> Programm1
+  dump : <<Class>> Class1
   ; // Class1
-  <<Class>> Class2
-   %INHERITS %G
+  dump : <<Class>> Class2
+   dump : %INHERITS %G
    ; // %G
-   %IMPLEMENTS %R
+   dump : %IMPLEMENTS %R
    ; // %R
   ; // Class2
-  <<Class>> Class3
+  dump : <<Class>> Class3
   ; // Class3
-  <<Class>> Class4
-   %INHERITS %G
+  dump : <<Class>> Class4
+   dump : %INHERITS %G
    ; // %G
   ; // Class4
-  <<Interface>> Interface1
+  dump : <<Interface>> Interface1
   ; // Interface1
-  <<Interface>> Interface2
+  dump : <<Interface>> Interface2
   ; // Interface2
  ; // Programm1
 ; // Project1
