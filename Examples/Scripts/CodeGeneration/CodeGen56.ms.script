@@ -483,12 +483,12 @@ elem_proc DumpAsIs
  END
 ; // DumpAsIs
 
-elem_generator DumpModelElement
+elem_generator dump
  %SUMMARY 'Генератор выводящий дамп элемента модели.' ;
  %GEN_PROPERTY Name 'dump'
 
  Self .DumpAsIs
-; // DumpModelElement
+; // dump
 
 STRING FUNCTION OutFileName
  STRING right aGeneratorName
@@ -515,10 +515,10 @@ elem_ref_proc CallGen
  END // TRY..FINALLY
 ; // CallGen
 
-Project1 .CallGen .DumpModelElement
+Project1 .CallGen .dump
 %REMARK 'Выводим содержимое элемента Project1'
 
-Project2 .CallGen .DumpModelElement
+Project2 .CallGen .dump
 %REMARK 'Выводим содержимое элемента Project2'
 
 ; // CodeGen
