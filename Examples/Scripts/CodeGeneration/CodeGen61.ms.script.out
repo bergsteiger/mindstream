@@ -261,6 +261,18 @@ VOID Test CodeGen
   g_Indent
  ; // VOID elem_proc .LeaveElement
  
+ ARRAY elem_func .Parents
+  %SUMMARY %SUM
+   ' Возвращает итератор родителей aWord в "терминах определённой модели" '
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN Self
+  ( Self LIST >filter>
+  .IsModelElement
+  >>>
+  Result
+ ; // ARRAY elem_func .Parents
+ 
  VOID elem_generator .pas
   %SUMMARY %SUM
    'Генератор выводящий элементы модели в Паскаль.'
@@ -5012,6 +5024,11 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : Self
   ; // .LeaveElement
+  ARRAY OPERATOR :: elem_func : .Parents
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ARRAY OPERATOR :: elem_func :: .Parents : Result
+   ModelElement OPERATOR :: IN : Self
+  ; // .Parents
   VOID OPERATOR :: elem_generator : .pas
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    STRING OPERATOR :: %GEN_PROPERTY : gpName

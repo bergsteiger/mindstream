@@ -407,6 +407,15 @@ ARRAY elem_func Children
  ( Self MembersIterator ) >filter> .IsModelElement >>> Result
 ; // Children
 
+ARRAY elem_func Parents
+ %SUMMARY 
+ '
+ Возвращает итератор родителей aWord в "терминах определённой модели"
+ '
+ ;
+ ( Self LIST %P ) >filter> .IsModelElement >>> Result
+; // Parents
+
 INTEGER VAR g_Indent
 %REMARK 'Текущий отступ'
 g_Indent := 0
