@@ -590,6 +590,31 @@ VOID Test CodeGen
   File:WriteLn
  ; // VOID PROCEDURE OutToFile
  
+ TtfwWord OPERATOR pop:Word:GetRefDeepest
+  TtfwWord IN aSelf
+  aSelf
+  pop:Word:GetRefDeep
+  @
+  Result
+  pop:Word:SetValue
+  if
+   (
+    class::TkwLeftParam
+    Result
+    pop:object:Inherits
+   )
+  then
+   (
+    Result
+    DO
+    pop:Word:GetRefDeepest
+    DO
+    @
+    Result
+    pop:Word:SetValue
+   )
+ ; // TtfwWord OPERATOR pop:Word:GetRefDeepest
+ 
  IMMEDIATE VOID TYPE PRINTABLE
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -4987,6 +5012,10 @@ TkwMain : Main
    PRINTABLE OPERATOR :: IN : aValue
    STRING OPERATOR :: VAR : l_String
   ; // OutToFile
+  TtfwWord OPERATOR : pop:Word:GetRefDeepest
+   TtfwWord OPERATOR :: IN : aSelf
+   TtfwWord OPERATOR :: pop:Word:GetRefDeepest : Result
+  ; // pop:Word:GetRefDeepest
   IMMEDIATE VOID OPERATOR :: TYPE : PRINTABLE
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM

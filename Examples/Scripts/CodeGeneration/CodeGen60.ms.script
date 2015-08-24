@@ -512,6 +512,13 @@ g_CurrentGeneratorName := ''
   ( Result DO @SELF DO @ Result pop:Word:SetValue )
 ; // pop:Word:GetRefDeep}*/
 
+TtfwWord OPERATOR pop:Word:GetRefDeepest
+ TtfwWord IN aSelf
+ aSelf pop:Word:GetRefDeep @ Result pop:Word:SetValue
+ if ( class::TkwLeftParam Result pop:object:Inherits )
+  ( Result DO @SELF DO @ Result pop:Word:SetValue )
+; // pop:Word:GetRefDeepest
+
 elem_proc CallGen
  GENERATOR RIGHT IN aGen
  GENERATOR RIGHT IN aGen1
