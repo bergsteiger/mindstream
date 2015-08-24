@@ -39,6 +39,20 @@ VOID Test CodeGen
   ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
  ; // %SUMMARY %SUM
  
+ VOID elem_generator .c++
+  %SUMMARY %SUM
+   ' Генератор выводящий элементы модели в c++.  Про файлы *.h мы потом поговорим отдельно. '
+  ; // %SUMMARY %SUM
+  
+  STRING %GEN_PROPERTY gpName
+   'cpp'
+  ; // STRING %GEN_PROPERTY gpName
+  
+  ModelElement IN Self
+  Self
+  .DumpAsIs
+ ; // VOID elem_generator .c++
+ 
  VOID elem_proc .CallGen
   %SUMMARY %SUM
    ' Вызывает на элементе генератор aGen. С открытием "правильных файлов". '
@@ -4931,6 +4945,11 @@ TkwMain : Main
    ^L OPERATOR :: IN : aName
   ; // %GP
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  VOID OPERATOR :: elem_generator : .c++
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   STRING OPERATOR :: %GEN_PROPERTY : gpName
+   ModelElement OPERATOR :: IN : Self
+  ; // .c++
   VOID OPERATOR :: elem_proc : .CallGen
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^ OPERATOR :: IN : aGen
