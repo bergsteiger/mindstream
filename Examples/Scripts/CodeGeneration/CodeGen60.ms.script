@@ -473,7 +473,7 @@ MACRO %GEN_PROPERTY
  GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
 ; // %GEN_PROPERTY
 
-^@ operator ::
+^@ operator :::
  ^@ IN aSelf
  ^L IN aName
 
@@ -490,12 +490,12 @@ MACRO %GEN_PROPERTY
   NOT ( l_Res pop:object:IsNil ) 
   [ 'Не найдено поле: ' l_Self LIST %P Reverted ==> ( |N '::' ) l_Self |N '::' l_Name ]
  l_Res >>> Result
-; // ::
+; // :::
 
 MACRO %GP
  Literal IN aName
  %SUMMARY 'Метод получения свойства генератора' ;
- axiom:PushSymbol ::
+ axiom:PushSymbol :::
  GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
 ; // %GP
 

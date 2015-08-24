@@ -25,7 +25,7 @@ VOID Test CodeGen
   
   ^L IN aName
   axiom:PushSymbol
-  ::
+  :::
   GEN_PROPERTY_PREFIX
   (+)
   (
@@ -51,7 +51,7 @@ VOID Test CodeGen
   pop:Word:GetRefDeepest
   |N
   .
-  aGen ::
+  aGen :::
   'gpName'
   >>>
   g_CurrentGeneratorName
@@ -251,7 +251,7 @@ VOID Test CodeGen
   .DumpAsIs
  ; // VOID elem_generator .pas
  
- ^@ OPERATOR ::
+ ^@ OPERATOR :::
   ^L IN aName
   ^@ IN aSelf
   STRING VAR l_Name
@@ -294,7 +294,7 @@ VOID Test CodeGen
   l_Res
   >>>
   Result
- ; // ^@ OPERATOR ::
+ ; // ^@ OPERATOR :::
  
  IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
   %SUMMARY %SUM
@@ -4975,14 +4975,14 @@ TkwMain : Main
    STRING OPERATOR :: %GEN_PROPERTY : gpName
    ModelElement OPERATOR :: IN : Self
   ; // .pas
-  ^@ OPERATOR : ::
+  ^@ OPERATOR : :::
    ^L OPERATOR :: IN : aName
    ^@ OPERATOR :: IN : aSelf
    STRING OPERATOR :: VAR : l_Name
    OBJECT OPERATOR :: VAR : l_Res
    OBJECT OPERATOR :: VAR : l_Self
-   ^@ OPERATOR :: :: : Result
-  ; // ::
+   ^@ OPERATOR :: ::: : Result
+  ; // :::
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
