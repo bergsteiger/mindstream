@@ -487,6 +487,11 @@ TtfwWord OPERATOR pop:Word:GetRefDeepest
   ( Result DO @SELF DO @ Result pop:Word:SetValue )
 ; // pop:Word:GetRefDeepest
 
+TtfwWord OPERATOR |^@
+ ^@ IN aSelf
+ aSelf pop:Word:GetRefDeep @ Result pop:Word:SetValue
+; // |^@
+
 ^@ operator :::
  ^@ IN aSelf
  ^L IN aName

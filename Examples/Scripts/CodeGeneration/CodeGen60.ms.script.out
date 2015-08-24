@@ -300,6 +300,15 @@ VOID Test CodeGen
   Result
  ; // ^@ OPERATOR :::
  
+ TtfwWord OPERATOR |^@
+  ^@ IN aSelf
+  aSelf
+  pop:Word:GetRefDeep
+  @
+  Result
+  pop:Word:SetValue
+ ; // TtfwWord OPERATOR |^@
+ 
  IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
   %SUMMARY %SUM
    ' Определяем базовый элемент мета-модели Тот самый который позволяет тащить всё остальное "за волосы из болота" Через этот примитив выводятся все остальные '
@@ -4988,6 +4997,10 @@ TkwMain : Main
    TtfwWord OPERATOR :: VAR : l_Self
    ^@ OPERATOR :: ::: : Result
   ; // :::
+  TtfwWord OPERATOR : |^@
+   ^@ OPERATOR :: IN : aSelf
+   TtfwWord OPERATOR :: |^@ : Result
+  ; // |^@
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
