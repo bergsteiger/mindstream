@@ -500,7 +500,11 @@ VOID Test CodeGen
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aGeneratorName
   
+  STRING VAR l_OutPath
   sysutils:GetCurrentDir
+  >>>
+  l_OutPath
+  l_OutPath
   .
   script:FileName
   sysutils:ExtractFileName
@@ -4930,6 +4934,7 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^ OPERATOR :: IN : _aGeneratorName
    IMMEDIATE VOID OPERATOR : aGeneratorName
+   STRING OPERATOR :: VAR : l_OutPath
    STRING FUNCTION :: OutFileName : Result
   ; // OutFileName
   VOID OPERATOR :: PROCEDURE : OutToFile

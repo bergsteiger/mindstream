@@ -466,7 +466,10 @@ MACRO %GP
 STRING FUNCTION OutFileName
  STRING right aGeneratorName
  %SUMMARY 'Имя файла для вывода' ;
- sysutils:GetCurrentDir Print
+ STRING VAR l_OutPath
+ %REMARK 'Путь для вывода'
+ sysutils:GetCurrentDir >>> l_OutPath
+ l_OutPath Print
  %REMARK 'Выводим имя текущей директории чисто для отладки'
  script:FileName sysutils:ExtractFileName (+) '.' (+) aGeneratorName >>> Result
 ; // OutFileName
