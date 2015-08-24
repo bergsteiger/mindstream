@@ -475,6 +475,7 @@ MACRO %GEN_PROPERTY
 
 TtfwWord OPERATOR pop:Word:GetRefDeepest
  TtfwWord IN aSelf
+ %SUMMARY 'Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные.' ;
  aSelf pop:Word:GetRefDeep @ Result pop:Word:SetValue
  if ( class::TkwCompiledVar Result pop:object:Inherits )
  %REMARK 'Если это переменная, то ...'
@@ -486,6 +487,7 @@ TtfwWord OPERATOR pop:Word:GetRefDeepest
 
 TtfwWord OPERATOR |RefDeepest
  ^@ IN aSelf
+ %SUMMARY 'Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные.' ;
  aSelf pop:Word:GetRefDeepest @ Result pop:Word:SetValue
 ; // |RefDeepest
 

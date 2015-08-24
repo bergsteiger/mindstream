@@ -250,6 +250,10 @@ VOID Test CodeGen
  ; // VOID elem_generator .pas
  
  TtfwWord OPERATOR |RefDeepest
+  %SUMMARY %SUM
+   'Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные.'
+  ; // %SUMMARY %SUM
+  
   ^@ IN aSelf
   aSelf
   pop:Word:GetRefDeepest
@@ -646,6 +650,10 @@ VOID Test CodeGen
  ; // VOID PROCEDURE OutToFile
  
  TtfwWord OPERATOR pop:Word:GetRefDeepest
+  %SUMMARY %SUM
+   'Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные.'
+  ; // %SUMMARY %SUM
+  
   TtfwWord IN aSelf
   aSelf
   pop:Word:GetRefDeep
@@ -4984,6 +4992,7 @@ TkwMain : Main
    ModelElement OPERATOR :: IN : Self
   ; // .pas
   TtfwWord OPERATOR : |RefDeepest
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^@ OPERATOR :: IN : aSelf
    TtfwWord OPERATOR :: |RefDeepest : Result
   ; // |RefDeepest
@@ -5080,6 +5089,7 @@ TkwMain : Main
    STRING OPERATOR :: VAR : l_String
   ; // OutToFile
   TtfwWord OPERATOR : pop:Word:GetRefDeepest
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    TtfwWord OPERATOR :: IN : aSelf
    TtfwWord OPERATOR :: pop:Word:GetRefDeepest : Result
   ; // pop:Word:GetRefDeepest
