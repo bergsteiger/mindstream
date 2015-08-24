@@ -508,6 +508,10 @@ VOID Test CodeGen
    l_OutPath
    script:FileName
    sysutils:ExtractFileName
+   ''
+   sysutils:ChangeFileExt
+   ''
+   sysutils:ChangeFileExt
   ]
   '\'
   strings:CatSep
@@ -515,6 +519,13 @@ VOID Test CodeGen
   l_OutPath
   l_OutPath
   .
+  l_OutPath
+  sysutils:ForceDirectories
+  ?ASSURE
+  [
+   'Не удалось создать директорию '
+   l_OutPath
+  ]
   script:FileName
   sysutils:ExtractFileName
   (+)
@@ -4994,7 +5005,7 @@ TkwMain : Main
   ARRAY OPERATOR :: VAR : Projects
  ; // CodeGen
 ; // Main
-H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59.ms.script
-H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59.ms.script
-H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59.ms.script
-H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59.ms.script
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59
