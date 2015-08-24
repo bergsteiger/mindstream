@@ -261,7 +261,7 @@ VOID Test CodeGen
   STRING VAR l_Name
   OBJECT VAR l_Res
   TtfwWord VAR l_Self
-  aSelf |^@
+  aSelf |RefDeepest
   >>>
   l_Self
   aName
@@ -300,14 +300,14 @@ VOID Test CodeGen
   Result
  ; // ^@ OPERATOR :::
  
- TtfwWord OPERATOR |^@
+ TtfwWord OPERATOR |RefDeepest
   ^@ IN aSelf
   aSelf
   pop:Word:GetRefDeep
   @
   Result
   pop:Word:SetValue
- ; // TtfwWord OPERATOR |^@
+ ; // TtfwWord OPERATOR |RefDeepest
  
  IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
   %SUMMARY %SUM
@@ -4997,10 +4997,10 @@ TkwMain : Main
    TtfwWord OPERATOR :: VAR : l_Self
    ^@ OPERATOR :: ::: : Result
   ; // :::
-  TtfwWord OPERATOR : |^@
+  TtfwWord OPERATOR : |RefDeepest
    ^@ OPERATOR :: IN : aSelf
-   TtfwWord OPERATOR :: |^@ : Result
-  ; // |^@
+   TtfwWord OPERATOR :: |RefDeepest : Result
+  ; // |RefDeepest
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName

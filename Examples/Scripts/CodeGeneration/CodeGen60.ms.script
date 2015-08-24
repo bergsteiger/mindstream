@@ -487,10 +487,10 @@ TtfwWord OPERATOR pop:Word:GetRefDeepest
   ( Result DO @SELF DO @ Result pop:Word:SetValue )
 ; // pop:Word:GetRefDeepest
 
-TtfwWord OPERATOR |^@
+TtfwWord OPERATOR |RefDeepest
  ^@ IN aSelf
  aSelf pop:Word:GetRefDeep @ Result pop:Word:SetValue
-; // |^@
+; // |RefDeepest
 
 ^@ operator :::
  ^@ IN aSelf
@@ -498,7 +498,7 @@ TtfwWord OPERATOR |^@
  %SUMMARY 'Метод получения свойства генератора' ;
 
  TtfwWord VAR l_Self
- aSelf |^@ >>> l_Self
+ aSelf |RefDeepest >>> l_Self
  
  STRING VAR l_Name
  aName |N >>> l_Name
