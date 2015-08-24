@@ -600,7 +600,7 @@ VOID Test CodeGen
   pop:Word:SetValue
   if
    (
-    class::TkwLeftParam
+    class::TkwCompiledVar
     Result
     pop:object:Inherits
    )
@@ -5063,9 +5063,9 @@ TkwMain : Main
   ARRAY OPERATOR :: VAR : Projects
  ; // CodeGen
 ; // Main
-l_Gen
-l_Gen
-l_Gen
-l_Gen
-l_Gen
-l_Gen
+.dump
+.dump
+.dump
+.dump
+.dump
+.dump

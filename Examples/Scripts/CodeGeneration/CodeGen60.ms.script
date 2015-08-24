@@ -515,7 +515,7 @@ g_CurrentGeneratorName := ''
 TtfwWord OPERATOR pop:Word:GetRefDeepest
  TtfwWord IN aSelf
  aSelf pop:Word:GetRefDeep @ Result pop:Word:SetValue
- if ( class::TkwLeftParam Result pop:object:Inherits )
+ if ( class::TkwCompiledVar Result pop:object:Inherits )
   ( Result DO @SELF DO @ Result pop:Word:SetValue )
 ; // pop:Word:GetRefDeepest
 
