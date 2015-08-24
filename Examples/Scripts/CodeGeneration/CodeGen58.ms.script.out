@@ -350,6 +350,25 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID <<@meta>> <<UMLClass>>
  
+ VOID PROCEDURE CallGens
+  %SUMMARY %SUM
+   'Вызывает все определённые генераторы на элементах массива anElements'
+  ; // %SUMMARY %SUM
+  
+  ARRAY IN anElements
+  for
+  anElements
+  (
+   ModelElement IN anElement
+   anElement
+   .CallGen
+   .dump
+   anElement
+   .CallGen
+   .pas
+  )
+ ; // VOID PROCEDURE CallGens
+ 
  VOID PROCEDURE do_elem_func
   %SUMMARY %SUM
    'Реализация do_elem_func, elem_proc и elem_generator'
@@ -4880,6 +4899,10 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // <<UMLClass>>
+  VOID OPERATOR :: PROCEDURE : CallGens
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ARRAY OPERATOR :: IN : anElements
+  ; // CallGens
   VOID OPERATOR :: PROCEDURE : do_elem_func
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    TtfwWord OPERATOR :: IN : aModifier

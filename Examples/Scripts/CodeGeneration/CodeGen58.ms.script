@@ -529,6 +529,18 @@ elem_generator pas
  Self .DumpAsIs
 ; // pas
 
+PROCEDURE CallGens
+ ARRAY IN anElements
+ %SUMMARY 'Вызывает все определённые генераторы на элементах массива anElements' ;
+ for anElements (
+  ModelElement IN anElement
+  anElement .CallGen .dump
+  %REMARK 'Вызываем на элементе генератор .dump'
+  anElement .CallGen .pas
+  %REMARK 'Вызываем на элементе генератор .pas'
+ ) 
+; // CallGens
+
 ARRAY VAR Generators
 Generators := [ @ .dump @ .pas ]
 
