@@ -622,10 +622,8 @@ PROCEDURE CallGens
    GENERATOR IN aGen 
    anElement .CallGen aGen
    %REMARK 'Вызываем на элементе anElement генератор aGen' 
-  )
-/*{  anElement .CallGen .pas
-  %REMARK 'Вызываем на элементе генератор .pas'}*/
- ) 
+  ) // for [ @ .dump @ .pas ]
+ ) // for anElements
 ; // CallGens
 
 ARRAY VAR Generators
