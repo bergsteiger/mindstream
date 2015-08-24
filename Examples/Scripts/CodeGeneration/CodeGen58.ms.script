@@ -547,13 +547,13 @@ Generators := [ @ .dump @ .pas ]
 ARRAY VAR Projects
 Projects := [ @ Project1 @ Project2 ]
 
-[ @ Project1 ] CallGens
+[ @ Project1 @ Project2 ] CallGens
 
-@ Project2 .CallGen .dump
+/*{@ Project2 .CallGen .dump
 %REMARK 'Выводим содержимое элемента Project2'
 
 @ Project2 .CallGen .pas
-%REMARK 'Выводим содержимое элемента Project2'
+%REMARK 'Выводим содержимое элемента Project2'}*/
 
 ; // CodeGen
 
