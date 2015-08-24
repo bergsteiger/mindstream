@@ -507,6 +507,7 @@ g_CurrentGeneratorName := ''
 
 elem_proc CallGen
  GENERATOR RIGHT IN aGen
+ GENERATOR RIGHT IN aGen1
 
  %SUMMARY 
  '
@@ -571,9 +572,12 @@ PROCEDURE CallGens
  %SUMMARY 'Вызывает все определённые генераторы на элементах массива anElements' ;
  for anElements (
   ModelElement IN anElement
-  anElement .CallGen .dump
+  GENERATOR VAR l_Gen
+  l_Gen := ( @ .dump )
+  anElement .CallGen .dump l_Gen
   %REMARK 'Вызываем на элементе генератор .dump'
-  anElement .CallGen .pas
+  l_Gen := ( @ .dump )
+  anElement .CallGen .pas l_Gen
   %REMARK 'Вызываем на элементе генератор .pas'
  ) 
 ; // CallGens

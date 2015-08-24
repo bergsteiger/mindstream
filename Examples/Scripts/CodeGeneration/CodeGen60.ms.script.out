@@ -45,6 +45,7 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ^ IN aGen
+  ^ IN aGen1
   ModelElement IN Self
   aGen ::
   'gpName'
@@ -360,12 +361,25 @@ VOID Test CodeGen
   anElements
   (
    ModelElement IN anElement
+   GENERATOR VAR l_Gen
+   l_Gen :=
+   (
+    @
+    .dump
+   )
    anElement
    .CallGen
    .dump
+   l_Gen
+   l_Gen :=
+   (
+    @
+    .dump
+   )
    anElement
    .CallGen
    .pas
+   l_Gen
   )
  ; // VOID PROCEDURE CallGens
  
@@ -4836,6 +4850,7 @@ TkwMain : Main
   VOID OPERATOR :: elem_proc : .CallGen
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^ OPERATOR :: IN : aGen
+   ^ OPERATOR :: IN : aGen1
    ModelElement OPERATOR :: IN : Self
   ; // .CallGen
   VOID OPERATOR :: elem_proc : .Child.CallGen
