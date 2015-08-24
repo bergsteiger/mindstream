@@ -489,7 +489,7 @@ TtfwWord OPERATOR pop:Word:GetRefDeepest
 
 TtfwWord OPERATOR |RefDeepest
  ^@ IN aSelf
- aSelf pop:Word:GetRefDeep @ Result pop:Word:SetValue
+ aSelf pop:Word:GetRefDeepest @ Result pop:Word:SetValue
 ; // |RefDeepest
 
 ^@ operator :::
@@ -555,7 +555,7 @@ elem_proc CallGen
  ' 
  ; // %SUMMARY 
 
- aGen1 pop:Word:GetRefDeepest |N Print
+ aGen1 %GP Name Print
  aGen %GP Name >>> g_CurrentGeneratorName
  g_OutFile := ( OutFileName ( Self |N (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
  TRY

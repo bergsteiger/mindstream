@@ -47,9 +47,8 @@ VOID Test CodeGen
   ^ IN aGen
   ^ IN aGen1
   ModelElement IN Self
-  aGen1
-  pop:Word:GetRefDeepest
-  |N
+  aGen1 :::
+  'gpName'
   .
   aGen :::
   'gpName'
@@ -303,7 +302,7 @@ VOID Test CodeGen
  TtfwWord OPERATOR |RefDeepest
   ^@ IN aSelf
   aSelf
-  pop:Word:GetRefDeep
+  pop:Word:GetRefDeepest
   @
   Result
   pop:Word:SetValue
@@ -5134,9 +5133,9 @@ TkwMain : Main
   ARRAY OPERATOR :: VAR : Projects
  ; // CodeGen
 ; // Main
-.dump
-.pas
-.dump
-.pas
-.dump
-.pas
+dump
+pas
+dump
+pas
+dump
+pas
