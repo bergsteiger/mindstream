@@ -376,9 +376,17 @@ VOID Test CodeGen
   anElements
   (
    ModelElement IN anElement
-   anElement
-   .CallGen
-   .dump
+   for
+   [
+    @
+    .dump
+   ]
+   (
+    GENERATOR IN aGen
+    anElement
+    .CallGen
+    aGen
+   )
    anElement
    .CallGen
    .pas
