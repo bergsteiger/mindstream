@@ -479,13 +479,9 @@ STRING FUNCTION OutFileName
   '' sysutils:ChangeFileExt 
   %REMARK 'Убираем .ms' 
  ] '\' strings:CatSep >>> l_OutPath
- l_OutPath Print
- %REMARK 'Выводим имя текущей директории чисто для отладки'
  l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
  %REMARK 'Создаём директорию рекурсивно, если её ещё не было'
  [ l_OutPath aGeneratorName ] '\' strings:CatSep >>> Result
- Result Print
- %REMARK 'Печатаем Result для отладки'
 ; // OutFileName
 
 STRING VAR g_CurrentGeneratorName
