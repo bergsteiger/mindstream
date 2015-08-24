@@ -251,7 +251,7 @@ VOID Test CodeGen
  
  TtfwWord OPERATOR |RefDeepest
   %SUMMARY %SUM
-   'Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные.'
+   ' Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные. Аналог |^@. '
   ; // %SUMMARY %SUM
   
   ^@ IN aSelf
@@ -651,7 +651,7 @@ VOID Test CodeGen
  
  TtfwWord OPERATOR pop:Word:GetRefDeepest
   %SUMMARY %SUM
-   'Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные.'
+   ' Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные. Аналог pop:Word:GetRefDeep. '
   ; // %SUMMARY %SUM
   
   TtfwWord IN aSelf
