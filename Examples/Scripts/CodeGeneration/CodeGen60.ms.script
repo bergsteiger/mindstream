@@ -477,8 +477,11 @@ TtfwWord OPERATOR pop:Word:GetRefDeepest
  TtfwWord IN aSelf
  aSelf pop:Word:GetRefDeep @ Result pop:Word:SetValue
  if ( class::TkwCompiledVar Result pop:object:Inherits )
- %REMARK 'Если это переменная, то разыменовываем её рекурсивно'
-  ( Result DO @SELF DO @ Result pop:Word:SetValue )
+ %REMARK 'Если это переменная, то ...'
+  ( 
+    Result DO @SELF DO @ Result pop:Word:SetValue 
+    %REMARK '... разыменовываем её рекурсивно'
+  )
 ; // pop:Word:GetRefDeepest
 
 TtfwWord OPERATOR |RefDeepest
