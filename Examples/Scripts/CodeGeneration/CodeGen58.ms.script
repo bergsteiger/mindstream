@@ -555,12 +555,6 @@ Projects := [ @ Project1 @ Project2 ]
 [ @ Project1 @ Project2 ] CallGens
 %REMARK '- запускаем всё наше хозяйство на списке элементов модели.'
 
-/*{@ Project2 .CallGen .dump
-%REMARK 'Выводим содержимое элемента Project2'
-
-@ Project2 .CallGen .pas
-%REMARK 'Выводим содержимое элемента Project2'}*/
-
 ; // CodeGen
 
 CodeGen
