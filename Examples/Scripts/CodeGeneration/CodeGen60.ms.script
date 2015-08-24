@@ -616,8 +616,11 @@ PROCEDURE CallGens
  %SUMMARY 'Вызывает все определённые генераторы на элементах массива anElements' ;
  for anElements (
   ModelElement IN anElement
-  for [ @ .dump ] ( GENERATOR IN aGen anElement .CallGen aGen )
-  %REMARK 'Вызываем на элементе генератор .dump'
+  for [ @ .dump ] ( 
+   GENERATOR IN aGen 
+   anElement .CallGen aGen
+   %REMARK 'Вызываем на элементе anElement генератор aGen' 
+  )
   anElement .CallGen .pas
   %REMARK 'Вызываем на элементе генератор .pas'
  ) 
