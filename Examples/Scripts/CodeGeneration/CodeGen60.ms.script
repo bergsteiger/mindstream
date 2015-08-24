@@ -488,7 +488,7 @@ TtfwWord OPERATOR |RefDeepest
 ^@ operator FieldByNameDeepest
  ^@ IN aSelf
  ^L IN aName
- %SUMMARY 'Метод получения свойства генератора' ;
+ %SUMMARY 'Метод получения вложенного члена слова по имени. С учётом того, что может быть передана ссылка на переменную' ;
 
  TtfwWord VAR l_Self
  aSelf |RefDeepest >>> l_Self

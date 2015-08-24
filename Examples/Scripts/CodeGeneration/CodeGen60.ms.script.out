@@ -498,7 +498,7 @@ VOID Test CodeGen
  
  ^@ OPERATOR FieldByNameDeepest
   %SUMMARY %SUM
-   'Метод получения свойства генератора'
+   'Метод получения вложенного члена слова по имени. С учётом того, что может быть передана ссылка на переменную'
   ; // %SUMMARY %SUM
   
   ^L IN aName
