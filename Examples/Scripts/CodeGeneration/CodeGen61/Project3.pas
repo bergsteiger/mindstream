@@ -1,2 +1,2 @@
-pas : <<UMLCategory>> <<Project>> Project3
+pas : <<@meta>> <<UMLCategory>> <<Project>> Project3
 ; // Project3
