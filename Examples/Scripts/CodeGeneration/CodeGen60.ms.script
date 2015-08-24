@@ -485,7 +485,7 @@ TtfwWord OPERATOR |RefDeepest
  aSelf pop:Word:GetRefDeepest @ Result pop:Word:SetValue
 ; // |RefDeepest
 
-^@ operator :::
+^@ operator FieldByNameDeepest
  ^@ IN aSelf
  ^L IN aName
  %SUMMARY 'Метод получения свойства генератора' ;
@@ -503,12 +503,12 @@ TtfwWord OPERATOR |RefDeepest
   NOT ( l_Res pop:object:IsNil ) 
   [ 'Не найдено поле: ' l_Self LIST %P Reverted ==> ( |N '::' ) l_Self |N '::' l_Name ]
  l_Res >>> Result
-; // :::
+; // FieldByNameDeepest
 
 MACRO %GP
  Literal IN aName
  %SUMMARY 'Метод получения свойства генератора' ;
- axiom:PushSymbol :::
+ axiom:PushSymbol FieldByNameDeepest
  GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
 ; // %GP
 

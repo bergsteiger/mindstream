@@ -25,7 +25,7 @@ VOID Test CodeGen
   
   ^L IN aName
   axiom:PushSymbol
-  :::
+  FieldByNameDeepest
   GEN_PROPERTY_PREFIX
   (+)
   (
@@ -46,10 +46,10 @@ VOID Test CodeGen
   
   ^ IN aGen
   ModelElement IN Self
-  aGen :::
+  aGen FieldByNameDeepest
   'gpName'
   .
-  aGen :::
+  aGen FieldByNameDeepest
   'gpName'
   >>>
   g_CurrentGeneratorName
@@ -248,55 +248,6 @@ VOID Test CodeGen
   Self
   .DumpAsIs
  ; // VOID elem_generator .pas
- 
- ^@ OPERATOR :::
-  %SUMMARY %SUM
-   'Метод получения свойства генератора'
-  ; // %SUMMARY %SUM
-  
-  ^L IN aName
-  ^@ IN aSelf
-  STRING VAR l_Name
-  OBJECT VAR l_Res
-  TtfwWord VAR l_Self
-  aSelf |RefDeepest
-  >>>
-  l_Self
-  aName
-  |N
-  >>>
-  l_Name
-  l_Self
-  %%
-  l_Name
-  >>>
-  l_Res
-  ASSURE
-  NOT
-  (
-   l_Res
-   pop:object:IsNil
-  )
-  [
-   'Не найдено поле: '
-   l_Self
-   LIST
-   %P
-   Array:Reverted
-   IT
-   (
-    |N
-    '::'
-   )
-   l_Self
-   |N
-   '::'
-   l_Name
-  ]
-  l_Res
-  >>>
-  Result
- ; // ^@ OPERATOR :::
  
  TtfwWord OPERATOR |RefDeepest
   ^@ IN aSelf
@@ -544,6 +495,55 @@ VOID Test CodeGen
   ^@
   do_elem_proc
  ; // IMMEDIATE VOID OPERATOR elem_ref_proc
+ 
+ ^@ OPERATOR FieldByNameDeepest
+  %SUMMARY %SUM
+   'Метод получения свойства генератора'
+  ; // %SUMMARY %SUM
+  
+  ^L IN aName
+  ^@ IN aSelf
+  STRING VAR l_Name
+  OBJECT VAR l_Res
+  TtfwWord VAR l_Self
+  aSelf |RefDeepest
+  >>>
+  l_Self
+  aName
+  |N
+  >>>
+  l_Name
+  l_Self
+  %%
+  l_Name
+  >>>
+  l_Res
+  ASSURE
+  NOT
+  (
+   l_Res
+   pop:object:IsNil
+  )
+  [
+   'Не найдено поле: '
+   l_Self
+   LIST
+   %P
+   Array:Reverted
+   IT
+   (
+    |N
+    '::'
+   )
+   l_Self
+   |N
+   '::'
+   l_Name
+  ]
+  l_Res
+  >>>
+  Result
+ ; // ^@ OPERATOR FieldByNameDeepest
  
  STRING VAR g_CurrentGeneratorName
  INTEGER VAR g_Indent
@@ -4983,15 +4983,6 @@ TkwMain : Main
    STRING OPERATOR :: %GEN_PROPERTY : gpName
    ModelElement OPERATOR :: IN : Self
   ; // .pas
-  ^@ OPERATOR : :::
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^L OPERATOR :: IN : aName
-   ^@ OPERATOR :: IN : aSelf
-   STRING OPERATOR :: VAR : l_Name
-   OBJECT OPERATOR :: VAR : l_Res
-   TtfwWord OPERATOR :: VAR : l_Self
-   ^@ OPERATOR :: ::: : Result
-  ; // :::
   TtfwWord OPERATOR : |RefDeepest
    ^@ OPERATOR :: IN : aSelf
    TtfwWord OPERATOR :: |RefDeepest : Result
@@ -5060,6 +5051,15 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // elem_ref_proc
+  ^@ OPERATOR : FieldByNameDeepest
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ^L OPERATOR :: IN : aName
+   ^@ OPERATOR :: IN : aSelf
+   STRING OPERATOR :: VAR : l_Name
+   OBJECT OPERATOR :: VAR : l_Res
+   TtfwWord OPERATOR :: VAR : l_Self
+   ^@ OPERATOR :: FieldByNameDeepest : Result
+  ; // FieldByNameDeepest
   STRING OPERATOR :: VAR : g_CurrentGeneratorName
   INTEGER OPERATOR :: VAR : g_Indent
   FILE OPERATOR :: VAR : g_OutFile
