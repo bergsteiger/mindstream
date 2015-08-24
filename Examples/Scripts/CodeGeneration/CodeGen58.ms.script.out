@@ -681,14 +681,11 @@ VOID Test CodeGen
   @
   Project2
  ]
- @
- Project1
- .CallGen
- .dump
- @
- Project1
- .CallGen
- .pas
+ [
+  @
+  Project1
+ ]
+ CallGens
  @
  Project2
  .CallGen
