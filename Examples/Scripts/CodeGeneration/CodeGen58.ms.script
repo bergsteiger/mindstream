@@ -470,7 +470,7 @@ STRING VAR g_CurrentGeneratorName
 %REMARK 'Имя текущего генератора'
 g_CurrentGeneratorName := ''
 
-elem_ref_proc CallGen
+elem_proc CallGen
  GENERATOR RIGHT IN aGen
 
  %SUMMARY 
@@ -535,16 +535,16 @@ Generators := [ @ .dump @ .pas ]
 ARRAY VAR Projects
 Projects := [ @ Project1 @ Project2 ]
 
-Project1 .CallGen .dump
+@ Project1 .CallGen .dump
 %REMARK 'Выводим содержимое элемента Project1'
 
-Project1 .CallGen .pas
+@ Project1 .CallGen .pas
 %REMARK 'Выводим содержимое элемента Project1'
 
-Project2 .CallGen .dump
+@ Project2 .CallGen .dump
 %REMARK 'Выводим содержимое элемента Project2'
 
-Project2 .CallGen .pas
+@ Project2 .CallGen .pas
 %REMARK 'Выводим содержимое элемента Project2'
 
 ; // CodeGen
