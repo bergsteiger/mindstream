@@ -48,7 +48,7 @@ VOID Test CodeGen
   ^ IN aGen1
   ModelElement IN Self
   aGen1
-  pop:Word:GetRefDeep
+  pop:Word:GetRefDeepest
   |N
   .
   aGen ::
