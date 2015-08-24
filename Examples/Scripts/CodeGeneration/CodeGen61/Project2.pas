@@ -1,2 +1,2 @@
-pas : <<@meta>> <<UMLCategory>> <<Project>> Project2
+pas : StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Project>> Project2
 ; // Project2

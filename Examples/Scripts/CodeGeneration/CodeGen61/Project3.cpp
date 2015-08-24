@@ -1,2 +1,2 @@
-cpp : <<@meta>> <<UMLCategory>> <<Project>> Project3
+cpp : StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Project>> Project3
 ; // Project3
