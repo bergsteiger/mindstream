@@ -161,6 +161,18 @@ VOID Test CodeGen
   ' '
   strings:CatSep
   OutToFile
+  [
+   'Родители элемента '
+   Self
+   LIST
+   %P
+   Array:Reverted
+   IT
+   |N
+  ]
+  '::'
+  strings:CatSep
+  OutToFile
   TRY
    for
    (

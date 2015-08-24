@@ -601,6 +601,11 @@ elem_proc DumpAsIs
   Self |N 
    %REMARK 'Выводим имя элемента'
  ] ' ' strings:CatSep OutToFile
+ [
+  'Родители элемента '
+  Self LIST %P Reverted ==> |N
+  %REMARK 'Выводим родителей элемента, рекурсивно'
+ ] '::' strings:CatSep OutToFile
  TRY
   for ( Self .Children ) .Child.CallGen call.me 
   %REMARK 'Выводим детей элемента, тем же самым генератором'
