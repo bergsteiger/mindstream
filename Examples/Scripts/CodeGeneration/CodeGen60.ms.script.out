@@ -371,18 +371,14 @@ VOID Test CodeGen
    'Вызывает все определённые генераторы на элементах массива anElements'
   ; // %SUMMARY %SUM
   
+  ARRAY IN aGenerators
   ARRAY IN anElements
   for
   anElements
   (
    ModelElement IN anElement
    for
-   [
-    @
-    .dump
-    @
-    .pas
-   ]
+   aGenerators
    (
     GENERATOR IN aGen
     anElement
@@ -816,6 +812,7 @@ VOID Test CodeGen
   Project3
  ]
  Projects
+ Generators
  CallGens
 ; // VOID Test CodeGen
 
@@ -5026,6 +5023,7 @@ TkwMain : Main
   ; // <<UMLClass>>
   VOID OPERATOR :: PROCEDURE : CallGens
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ARRAY OPERATOR :: IN : aGenerators
    ARRAY OPERATOR :: IN : anElements
   ; // CallGens
   VOID OPERATOR :: PROCEDURE : do_elem_func

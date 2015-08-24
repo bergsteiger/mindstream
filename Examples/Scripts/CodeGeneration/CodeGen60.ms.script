@@ -615,14 +615,15 @@ elem_generator pas
 
 PROCEDURE CallGens
  ARRAY IN anElements
+ ARRAY IN aGenerators
  %SUMMARY 'Вызывает все определённые генераторы на элементах массива anElements' ;
  for anElements (
   ModelElement IN anElement
-  for [ @ .dump @ .pas ] ( 
+  for aGenerators ( 
    GENERATOR IN aGen 
    anElement .CallGen aGen
    %REMARK 'Вызываем на элементе anElement генератор aGen' 
-  ) // for [ @ .dump @ .pas ]
+  ) // for aGenerators
  ) // for anElements
 ; // CallGens
 
@@ -634,7 +635,9 @@ ARRAY VAR Projects
 Projects := [ @ Project1 @ Project2 @ Project3 ]
 %REMARK 'Список всех наших корневых элементов (проектов)'
 
-Projects CallGens
+Projects
+ Generators 
+  CallGens
 %REMARK '- запускаем всё наше хозяйство на списке элементов модели.'
 
 ; // CodeGen
