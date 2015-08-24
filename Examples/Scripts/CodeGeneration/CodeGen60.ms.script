@@ -616,11 +616,8 @@ PROCEDURE CallGens
  %SUMMARY 'Вызывает все определённые генераторы на элементах массива anElements' ;
  for anElements (
   ModelElement IN anElement
-  GENERATOR VAR l_Gen
-  l_Gen := ( @ .dump )
   anElement .CallGen .dump
   %REMARK 'Вызываем на элементе генератор .dump'
-  l_Gen := ( @ .pas )
   anElement .CallGen .pas
   %REMARK 'Вызываем на элементе генератор .pas'
  ) 
