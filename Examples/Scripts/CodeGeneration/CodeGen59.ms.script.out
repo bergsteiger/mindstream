@@ -681,6 +681,13 @@ VOID Test CodeGen
   
  ; // <<Project>> Project2
  
+ <<Project>> Project3
+  %SUMMARY %SUM
+   ' Это наш ТРЕТИЙ проект - Project3 '
+  ; // %SUMMARY %SUM
+  
+ ; // <<Project>> Project3
+ 
  ARRAY VAR Projects
  CodeGen
  DumpElement
@@ -704,6 +711,8 @@ VOID Test CodeGen
   Project1
   @
   Project2
+  @
+  Project3
  ]
  Projects
  CallGens
@@ -5000,6 +5009,9 @@ TkwMain : Main
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project2
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   ; // Project2
+  OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project3
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  ; // Project3
   ARRAY OPERATOR :: VAR : Projects
  ; // CodeGen
 ; // Main

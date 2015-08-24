@@ -279,6 +279,23 @@ model-end
 
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+
+concrete-model-begin 'Модель конкретного проекта Project3'
+ 'Тут будем определять аксиоматику конкретной модели конкретного проекта.
+  А потом вынесем её 
+  в отдельный словарь.
+ '
+<<Project>> Project3
+ %SUMMARY '
+ Это наш ТРЕТИЙ проект - Project3
+ '
+ ; // %SUMMARY
+; // Project3
+model-end
+
+// ---------------------------------------------------------------------------
+
 USES
  CodeDump.ms.dict
  // - тут подключаем словарь CodeDump.ms.dict, чтобы "увидеть" слово DumpElement
@@ -565,7 +582,7 @@ ARRAY VAR Generators
 Generators := [ @ .dump @ .pas ]
 
 ARRAY VAR Projects
-Projects := [ @ Project1 @ Project2 ]
+Projects := [ @ Project1 @ Project2 @ Project3 ]
 
 Projects CallGens
 %REMARK '- запускаем всё наше хозяйство на списке элементов модели.'
