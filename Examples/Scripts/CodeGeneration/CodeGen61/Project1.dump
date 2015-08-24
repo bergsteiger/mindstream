@@ -1,28 +1,28 @@
-dump : <<Project>> Project1
- dump : <<Library>> Library1
+dump : <<UMLCategory>> <<Project>> Project1
+ dump : <<UMLCategory>> <<Library>> Library1
  ; // Library1
- dump : <<Library>> Library2
+ dump : <<UMLCategory>> <<Library>> Library2
  ; // Library2
- dump : <<Library>> Library3
+ dump : <<UMLCategory>> <<Library>> Library3
  ; // Library3
- dump : <<Program>> Program1
-  dump : <<Class>> Class1
+ dump : <<UMLCategory>> <<Program>> Program1
+  dump : <<UMLClass>> <<Class>> Class1
   ; // Class1
-  dump : <<Class>> Class2
-   dump : %INHERITS %G
+  dump : <<UMLClass>> <<Class>> Class2
+   dump : NamedWordProducer %INHERITS %G
    ; // %G
-   dump : %IMPLEMENTS %R
+   dump : NamedWordProducer %IMPLEMENTS %R
    ; // %R
   ; // Class2
-  dump : <<Class>> Class3
+  dump : <<UMLClass>> <<Class>> Class3
   ; // Class3
-  dump : <<Class>> Class4
-   dump : %INHERITS %G
+  dump : <<UMLClass>> <<Class>> Class4
+   dump : NamedWordProducer %INHERITS %G
    ; // %G
   ; // Class4
-  dump : <<Interface>> Interface1
+  dump : <<UMLClass>> <<Interface>> Interface1
   ; // Interface1
-  dump : <<Interface>> Interface2
+  dump : <<UMLClass>> <<Interface>> Interface2
   ; // Interface2
  ; // Program1
 ; // Project1

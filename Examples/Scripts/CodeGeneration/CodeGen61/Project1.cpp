@@ -1,28 +1,28 @@
-cpp : <<Project>> Project1
- cpp : <<Library>> Library1
+cpp : <<UMLCategory>> <<Project>> Project1
+ cpp : <<UMLCategory>> <<Library>> Library1
  ; // Library1
- cpp : <<Library>> Library2
+ cpp : <<UMLCategory>> <<Library>> Library2
  ; // Library2
- cpp : <<Library>> Library3
+ cpp : <<UMLCategory>> <<Library>> Library3
  ; // Library3
- cpp : <<Program>> Program1
-  cpp : <<Class>> Class1
+ cpp : <<UMLCategory>> <<Program>> Program1
+  cpp : <<UMLClass>> <<Class>> Class1
   ; // Class1
-  cpp : <<Class>> Class2
-   cpp : %INHERITS %G
+  cpp : <<UMLClass>> <<Class>> Class2
+   cpp : NamedWordProducer %INHERITS %G
    ; // %G
-   cpp : %IMPLEMENTS %R
+   cpp : NamedWordProducer %IMPLEMENTS %R
    ; // %R
   ; // Class2
-  cpp : <<Class>> Class3
+  cpp : <<UMLClass>> <<Class>> Class3
   ; // Class3
-  cpp : <<Class>> Class4
-   cpp : %INHERITS %G
+  cpp : <<UMLClass>> <<Class>> Class4
+   cpp : NamedWordProducer %INHERITS %G
    ; // %G
   ; // Class4
-  cpp : <<Interface>> Interface1
+  cpp : <<UMLClass>> <<Interface>> Interface1
   ; // Interface1
-  cpp : <<Interface>> Interface2
+  cpp : <<UMLClass>> <<Interface>> Interface2
   ; // Interface2
  ; // Program1
 ; // Project1

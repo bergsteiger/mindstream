@@ -1,2 +1,2 @@
-cpp : <<Project>> Project3
+cpp : <<UMLCategory>> <<Project>> Project3
 ; // Project3
