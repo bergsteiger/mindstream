@@ -570,6 +570,20 @@ elem_proc CallGen
  END // TRY..FINALLY
 ; // CallGen
 
+PROCEDURE CallGens
+ ARRAY IN anElements
+ ARRAY IN aGenerators
+ %SUMMARY 'Вызывает все определённые генераторы на элементах массива anElements' ;
+ for anElements (
+  ModelElement IN anElement
+  for aGenerators ( 
+   GENERATOR IN aGen 
+   anElement .CallGen aGen
+   %REMARK 'Вызываем на элементе anElement генератор aGen' 
+  ) // for aGenerators
+ ) // for anElements
+; // CallGens
+
 // ---------------------------------------------------------------------------
 
 elem_proc DumpAsIs
@@ -612,20 +626,6 @@ elem_generator pas
  Self .DumpAsIs
  %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
 ; // pas
-
-PROCEDURE CallGens
- ARRAY IN anElements
- ARRAY IN aGenerators
- %SUMMARY 'Вызывает все определённые генераторы на элементах массива anElements' ;
- for anElements (
-  ModelElement IN anElement
-  for aGenerators ( 
-   GENERATOR IN aGen 
-   anElement .CallGen aGen
-   %REMARK 'Вызываем на элементе anElement генератор aGen' 
-  ) // for aGenerators
- ) // for anElements
-; // CallGens
 
 ARRAY VAR Generators
 Generators := [ @ .dump @ .pas ]
