@@ -260,7 +260,7 @@ VOID Test CodeGen
   ^@ IN aSelf
   STRING VAR l_Name
   OBJECT VAR l_Res
-  OBJECT VAR l_Self
+  TtfwWord VAR l_Self
   aSelf |^@
   >>>
   l_Self
@@ -4985,7 +4985,7 @@ TkwMain : Main
    ^@ OPERATOR :: IN : aSelf
    STRING OPERATOR :: VAR : l_Name
    OBJECT OPERATOR :: VAR : l_Res
-   OBJECT OPERATOR :: VAR : l_Self
+   TtfwWord OPERATOR :: VAR : l_Self
    ^@ OPERATOR :: ::: : Result
   ; // :::
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>

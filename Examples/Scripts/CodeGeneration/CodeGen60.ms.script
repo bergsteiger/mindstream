@@ -492,7 +492,7 @@ TtfwWord OPERATOR pop:Word:GetRefDeepest
  ^L IN aName
  %SUMMARY 'Метод получения свойства генератора' ;
 
- OBJECT VAR l_Self
+ TtfwWord VAR l_Self
  aSelf |^@ >>> l_Self
  
  STRING VAR l_Name
