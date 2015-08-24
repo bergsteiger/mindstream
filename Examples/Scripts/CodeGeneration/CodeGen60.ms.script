@@ -516,7 +516,7 @@ elem_proc CallGen
  ' 
  ; // %SUMMARY 
 
- aGen1 |^@ Print
+ aGen1 pop:Word:GetRefDeep Print
  aGen %GP Name >>> g_CurrentGeneratorName
  g_OutFile := ( OutFileName ( Self |N (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
  TRY

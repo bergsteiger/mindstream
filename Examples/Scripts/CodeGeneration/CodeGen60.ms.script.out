@@ -47,7 +47,8 @@ VOID Test CodeGen
   ^ IN aGen
   ^ IN aGen1
   ModelElement IN Self
-  aGen1 |^@
+  aGen1
+  pop:Word:GetRefDeep
   .
   aGen ::
   'gpName'
