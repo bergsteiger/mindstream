@@ -473,6 +473,25 @@ MACRO %GEN_PROPERTY
  GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
 ; // %GEN_PROPERTY
 
+^@ operator ::
+ ^@ IN aSelf
+ ^L IN aName
+
+ OBJECT VAR l_Self
+ aSelf |^@ >>> l_Self
+ 
+ STRING VAR l_Name
+ aName |N >>> l_Name
+ 
+ OBJECT VAR l_Res
+ l_Self %% l_Name >>> l_Res
+ 
+ ASSURE 
+  NOT ( l_Res pop:object:IsNil ) 
+  [ 'Не найдено поле: ' l_Self LIST %P Reverted ==> ( |N '::' ) l_Self |N '::' l_Name ]
+ l_Res >>> Result
+; // ::
+
 MACRO %GP
  Literal IN aName
  %SUMMARY 'Метод получения свойства генератора' ;
