@@ -591,7 +591,7 @@ PROCEDURE CallGens
   l_Gen := ( @ .dump )
   anElement .CallGen .dump l_Gen
   %REMARK 'Вызываем на элементе генератор .dump'
-  l_Gen := ( @ .dump )
+  l_Gen := ( @ .pas )
   anElement .CallGen .pas l_Gen
   %REMARK 'Вызываем на элементе генератор .pas'
  ) 

@@ -378,7 +378,7 @@ VOID Test CodeGen
    l_Gen :=
    (
     @
-    .dump
+    .pas
    )
    anElement
    .CallGen
@@ -5064,8 +5064,8 @@ TkwMain : Main
  ; // CodeGen
 ; // Main
 .dump
+.pas
 .dump
+.pas
 .dump
-.dump
-.dump
-.dump
+.pas
