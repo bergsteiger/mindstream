@@ -504,6 +504,15 @@ VOID Test CodeGen
   sysutils:GetCurrentDir
   >>>
   l_OutPath
+  [
+   l_OutPath
+   script:FileName
+   sysutils:ExtractFileName
+  ]
+  '\'
+  strings:CatSep
+  >>>
+  l_OutPath
   l_OutPath
   .
   script:FileName
@@ -4985,7 +4994,7 @@ TkwMain : Main
   ARRAY OPERATOR :: VAR : Projects
  ; // CodeGen
 ; // Main
-H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration
-H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration
-H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration
-H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59.ms.script
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59.ms.script
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59.ms.script
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59.ms.script
