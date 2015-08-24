@@ -49,6 +49,7 @@ VOID Test CodeGen
   ModelElement IN Self
   aGen1
   pop:Word:GetRefDeep
+  |N
   .
   aGen ::
   'gpName'
@@ -5062,9 +5063,9 @@ TkwMain : Main
   ARRAY OPERATOR :: VAR : Projects
  ; // CodeGen
 ; // Main
-TkwCompiledVar
-TkwCompiledVar
-TkwCompiledVar
-TkwCompiledVar
-TkwCompiledVar
-TkwCompiledVar
+l_Gen
+l_Gen
+l_Gen
+l_Gen
+l_Gen
+l_Gen
