@@ -1,28 +1,28 @@
-dump : StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Project>> Project1
- dump : StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Library>> Library1
+dump : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Project>> Project1
+ dump : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Library>> Library1
  ; // Library1
- dump : StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Library>> Library2
+ dump : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Library>> Library2
  ; // Library2
- dump : StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Library>> Library3
+ dump : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Library>> Library3
  ; // Library3
- dump : StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Program>> Program1
-  dump : StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Class>> Class1
+ dump : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Program>> Program1
+  dump : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Class>> Class1
   ; // Class1
-  dump : StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Class>> Class2
+  dump : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Class>> Class2
    dump : OPERATOR NamedWordProducer %INHERITS %G
    ; // %G
    dump : OPERATOR NamedWordProducer %IMPLEMENTS %R
    ; // %R
   ; // Class2
-  dump : StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Class>> Class3
+  dump : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Class>> Class3
   ; // Class3
-  dump : StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Class>> Class4
+  dump : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Class>> Class4
    dump : OPERATOR NamedWordProducer %INHERITS %G
    ; // %G
   ; // Class4
-  dump : StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Interface>> Interface1
+  dump : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Interface>> Interface1
   ; // Interface1
-  dump : StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Interface>> Interface2
+  dump : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Interface>> Interface2
   ; // Interface2
  ; // Program1
 ; // Project1
