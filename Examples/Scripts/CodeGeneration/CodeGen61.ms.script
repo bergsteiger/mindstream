@@ -596,7 +596,7 @@ elem_proc DumpAsIs
  [
   g_CurrentGeneratorName ':'
    %REMARK 'Выводим имя текущего генератора. Для отладки' 
-  Self |S 
+  Self %ST |N
    %REMARK 'Выводим стереотип элемента'
   Self |N 
    %REMARK 'Выводим имя элемента'
