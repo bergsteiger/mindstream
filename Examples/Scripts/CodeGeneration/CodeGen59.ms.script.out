@@ -500,6 +500,8 @@ VOID Test CodeGen
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aGeneratorName
   
+  sysutils:GetCurrentDir
+  .
   script:FileName
   sysutils:ExtractFileName
   (+)
@@ -4978,3 +4980,7 @@ TkwMain : Main
   ARRAY OPERATOR :: VAR : Projects
  ; // CodeGen
 ; // Main
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration
