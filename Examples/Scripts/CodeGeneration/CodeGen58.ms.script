@@ -552,7 +552,7 @@ Generators := [ @ .dump @ .pas ]
 ARRAY VAR Projects
 Projects := [ @ Project1 @ Project2 ]
 
-[ @ Project1 @ Project2 ] CallGens
+Projects CallGens
 %REMARK '- запускаем всЄ наше хоз€йство на списке элементов модели.'
 
 ; // CodeGen
