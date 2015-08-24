@@ -476,6 +476,7 @@ MACRO %GEN_PROPERTY
 ^@ operator :::
  ^@ IN aSelf
  ^L IN aName
+ %SUMMARY 'Метод получения свойства генератора' ;
 
  OBJECT VAR l_Self
  aSelf |^@ >>> l_Self
