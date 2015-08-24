@@ -62,9 +62,6 @@ VOID Test CodeGen
   ModelElement IN Self
   aGen FieldByNameDeepest
   'gpName'
-  .
-  aGen FieldByNameDeepest
-  'gpName'
   >>>
   g_CurrentGeneratorName
   g_OutFile :=
@@ -5154,12 +5151,3 @@ TkwMain : Main
   ARRAY OPERATOR :: VAR : Projects
  ; // CodeGen
 ; // Main
-dump
-pas
-cpp
-dump
-pas
-cpp
-dump
-pas
-cpp

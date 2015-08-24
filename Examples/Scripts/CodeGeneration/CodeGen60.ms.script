@@ -559,7 +559,6 @@ elem_proc CallGen
  ' 
  ; // %SUMMARY 
 
- aGen %GP Name Print
  aGen %GP Name >>> g_CurrentGeneratorName
  g_OutFile := ( OutFileName ( Self |N (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
  TRY
