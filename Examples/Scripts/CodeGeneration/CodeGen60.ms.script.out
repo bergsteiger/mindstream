@@ -380,7 +380,7 @@ VOID Test CodeGen
    )
    anElement
    .CallGen
-   l_Gen
+   .dump
    l_Gen :=
    (
     @
