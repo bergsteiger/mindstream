@@ -590,7 +590,7 @@ elem_proc DumpAsIs
  ] ' ' strings:CatSep OutToFile
  TRY
   for ( Self .Children ) .Child.CallGen call.me 
-  %REMARK 'Выводим детей элемента'
+  %REMARK 'Выводим детей элемента, тем же самым генератором'
  FINALLY
   [ '; // ' Self |N ] OutToFile
   %REMARK 'Выводим закрывающую скобку элемента'
@@ -602,6 +602,7 @@ elem_generator dump
  %GEN_PROPERTY Name 'dump'
 
  Self .DumpAsIs
+ %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
 ; // dump
 
 elem_generator pas
@@ -609,6 +610,7 @@ elem_generator pas
  %GEN_PROPERTY Name 'pas'
 
  Self .DumpAsIs
+ %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
 ; // pas
 
 PROCEDURE CallGens
