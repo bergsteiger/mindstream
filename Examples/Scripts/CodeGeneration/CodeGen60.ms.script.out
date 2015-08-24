@@ -47,6 +47,8 @@ VOID Test CodeGen
   ^ IN aGen
   ^ IN aGen1
   ModelElement IN Self
+  aGen1 |^@
+  .
   aGen ::
   'gpName'
   >>>
@@ -5030,3 +5032,9 @@ TkwMain : Main
   ARRAY OPERATOR :: VAR : Projects
  ; // CodeGen
 ; // Main
+TkwCompiledVar
+TkwCompiledVar
+TkwCompiledVar
+TkwCompiledVar
+TkwCompiledVar
+TkwCompiledVar
