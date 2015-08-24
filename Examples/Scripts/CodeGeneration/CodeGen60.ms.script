@@ -628,9 +628,11 @@ PROCEDURE CallGens
 
 ARRAY VAR Generators
 Generators := [ @ .dump @ .pas ]
+%REMARK 'Список всех наших генераторов'
 
 ARRAY VAR Projects
 Projects := [ @ Project1 @ Project2 @ Project3 ]
+%REMARK 'Список всех наших корневых элементов (проектов)'
 
 Projects CallGens
 %REMARK '- запускаем всё наше хозяйство на списке элементов модели.'
