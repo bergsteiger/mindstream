@@ -163,9 +163,12 @@ VOID Test CodeGen
   OutToFile
   [
    'Родители элемента '
-   Self
-   LIST
-   %P
+   ( Self LIST >filter> ( >filter> ( >filter>
+   (
+    |N
+    <>
+    'CodeGen'
+   )
    Array:Reverted
    IT
    |N

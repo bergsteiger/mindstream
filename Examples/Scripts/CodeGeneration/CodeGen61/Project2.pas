@@ -1,3 +1,3 @@
 pas : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Project>> Project2
-Родители элемента ::TkwCompiledMain::CodeGen
+Родители элемента 
 ; // Project2
