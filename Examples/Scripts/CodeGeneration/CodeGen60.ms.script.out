@@ -380,6 +380,8 @@ VOID Test CodeGen
    [
     @
     .dump
+    @
+    .pas
    ]
    (
     GENERATOR IN aGen
@@ -387,9 +389,6 @@ VOID Test CodeGen
     .CallGen
     aGen
    )
-   anElement
-   .CallGen
-   .pas
   )
  ; // VOID PROCEDURE CallGens
  
