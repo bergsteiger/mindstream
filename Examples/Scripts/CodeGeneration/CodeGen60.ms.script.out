@@ -815,6 +815,8 @@ VOID Test CodeGen
   .dump
   @
   .pas
+  @
+  .c++
  ]
  Projects :=
  [
@@ -5154,7 +5156,10 @@ TkwMain : Main
 ; // Main
 dump
 pas
+cpp
 dump
 pas
+cpp
 dump
 pas
+cpp

@@ -642,7 +642,7 @@ elem_generator c++
 ; // c++
 
 ARRAY VAR Generators
-Generators := [ @ .dump @ .pas ]
+Generators := [ @ .dump @ .pas @ .c++ ]
 %REMARK 'Список всех наших генераторов'
 
 ARRAY VAR Projects
