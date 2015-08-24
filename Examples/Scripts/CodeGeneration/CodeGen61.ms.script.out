@@ -227,11 +227,11 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ModelElement IN Self
-  NOT
-  (
-   Self
-   .IsSummary
-  )
+  '<<'
+  Self
+  %ST
+  |N
+  StartsStr
   >>>
   Result
  ; // BOOLEAN elem_func .IsModelElement
