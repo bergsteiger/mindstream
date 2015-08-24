@@ -546,7 +546,6 @@ g_CurrentGeneratorName := ''
 
 elem_proc CallGen
  GENERATOR RIGHT IN aGen
- GENERATOR RIGHT IN aGen1
 
  %SUMMARY 
  '
@@ -555,11 +554,11 @@ elem_proc CallGen
  ' 
  ; // %SUMMARY 
 
- aGen1 %GP Name Print
- aGen1 %GP Name >>> g_CurrentGeneratorName
+ aGen %GP Name Print
+ aGen %GP Name >>> g_CurrentGeneratorName
  g_OutFile := ( OutFileName ( Self |N (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
  TRY
-  Self ( aGen1 |RefDeepest DO )
+  Self ( aGen |RefDeepest DO )
   %REMARK 'Вызываем на элементе генератор aGen'
  FINALLY
   g_OutFile := nil
@@ -614,10 +613,10 @@ PROCEDURE CallGens
   ModelElement IN anElement
   GENERATOR VAR l_Gen
   l_Gen := ( @ .dump )
-  anElement .CallGen .dump l_Gen
+  anElement .CallGen l_Gen
   %REMARK 'Вызываем на элементе генератор .dump'
   l_Gen := ( @ .pas )
-  anElement .CallGen .pas l_Gen
+  anElement .CallGen l_Gen
   %REMARK 'Вызываем на элементе генератор .pas'
  ) 
 ; // CallGens

@@ -45,12 +45,11 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ^ IN aGen
-  ^ IN aGen1
   ModelElement IN Self
-  aGen1 :::
+  aGen :::
   'gpName'
   .
-  aGen1 :::
+  aGen :::
   'gpName'
   >>>
   g_CurrentGeneratorName
@@ -70,7 +69,7 @@ VOID Test CodeGen
   TRY
    Self
    (
-    aGen1 |RefDeepest
+    aGen |RefDeepest
     DO
    )
   FINALLY
@@ -430,7 +429,6 @@ VOID Test CodeGen
    )
    anElement
    .CallGen
-   .dump
    l_Gen
    l_Gen :=
    (
@@ -439,7 +437,6 @@ VOID Test CodeGen
    )
    anElement
    .CallGen
-   .pas
    l_Gen
   )
  ; // VOID PROCEDURE CallGens
@@ -4936,7 +4933,6 @@ TkwMain : Main
   VOID OPERATOR :: elem_proc : .CallGen
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^ OPERATOR :: IN : aGen
-   ^ OPERATOR :: IN : aGen1
    ModelElement OPERATOR :: IN : Self
   ; // .CallGen
   VOID OPERATOR :: elem_proc : .Child.CallGen
