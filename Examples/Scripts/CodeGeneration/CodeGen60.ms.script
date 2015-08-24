@@ -473,6 +473,20 @@ MACRO %GEN_PROPERTY
  GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
 ; // %GEN_PROPERTY
 
+/*{TtfwWord OPERATOR pop:Word:GetRefDeep
+ TtfwWord IN aSelf
+ aSelf pop:Word:GetRef @ Result pop:Word:SetValue
+ if ( class::TkwLeftParam Result pop:object:Inherits )
+  ( Result DO @SELF DO @ Result pop:Word:SetValue )
+; // pop:Word:GetRefDeep}*/
+
+TtfwWord OPERATOR pop:Word:GetRefDeepest
+ TtfwWord IN aSelf
+ aSelf pop:Word:GetRefDeep @ Result pop:Word:SetValue
+ if ( class::TkwCompiledVar Result pop:object:Inherits )
+  ( Result DO @SELF DO @ Result pop:Word:SetValue )
+; // pop:Word:GetRefDeepest
+
 ^@ operator :::
  ^@ IN aSelf
  ^L IN aName
@@ -524,20 +538,6 @@ STRING FUNCTION OutFileName
 STRING VAR g_CurrentGeneratorName
 %REMARK 'Имя текущего генератора'
 g_CurrentGeneratorName := ''
-
-/*{TtfwWord OPERATOR pop:Word:GetRefDeep
- TtfwWord IN aSelf
- aSelf pop:Word:GetRef @ Result pop:Word:SetValue
- if ( class::TkwLeftParam Result pop:object:Inherits )
-  ( Result DO @SELF DO @ Result pop:Word:SetValue )
-; // pop:Word:GetRefDeep}*/
-
-TtfwWord OPERATOR pop:Word:GetRefDeepest
- TtfwWord IN aSelf
- aSelf pop:Word:GetRefDeep @ Result pop:Word:SetValue
- if ( class::TkwCompiledVar Result pop:object:Inherits )
-  ( Result DO @SELF DO @ Result pop:Word:SetValue )
-; // pop:Word:GetRefDeepest
 
 elem_proc CallGen
  GENERATOR RIGHT IN aGen
