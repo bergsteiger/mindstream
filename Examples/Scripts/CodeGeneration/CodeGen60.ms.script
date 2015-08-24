@@ -505,6 +505,13 @@ STRING VAR g_CurrentGeneratorName
 %REMARK 'Имя текущего генератора'
 g_CurrentGeneratorName := ''
 
+/*{TtfwWord OPERATOR pop:Word:GetRefDeep
+ TtfwWord IN aSelf
+ aSelf pop:Word:GetRef @ Result pop:Word:SetValue
+ if ( class::TkwLeftParam Result pop:object:Inherits )
+  ( Result DO @SELF DO @ Result pop:Word:SetValue )
+; // pop:Word:GetRefDeep}*/
+
 elem_proc CallGen
  GENERATOR RIGHT IN aGen
  GENERATOR RIGHT IN aGen1
