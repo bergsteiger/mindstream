@@ -526,16 +526,18 @@ VOID Test CodeGen
    'Не удалось создать директорию '
    l_OutPath
   ]
-  script:FileName
-  sysutils:ExtractFileName
-  (+)
-  '.'
-  (+)
-  (
-   _aGeneratorName |^
-  )
+  [
+   l_OutPath
+   (
+    _aGeneratorName |^
+   )
+  ]
+  '\'
+  strings:CatSep
   >>>
   Result
+  Result
+  .
  ; // STRING FUNCTION OutFileName
  
  VOID PROCEDURE OutToFile
@@ -5006,6 +5008,10 @@ TkwMain : Main
  ; // CodeGen
 ; // Main
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59\Project1.dump
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59\Project1.pas
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59\Project2.dump
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen59\Project2.pas
