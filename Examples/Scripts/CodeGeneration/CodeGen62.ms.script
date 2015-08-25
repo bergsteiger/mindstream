@@ -508,7 +508,7 @@ TtfwWord OPERATOR |RefDeepest
  aSelf pop:Word:GetRefDeepest @ Result pop:Word:SetValue
 ; // |RefDeepest
 
-^@ operator FieldByNameDeepest
+REF operator FieldByNameDeepest
  ^@ IN aSelf
  ^L IN aName
  %SUMMARY 'Метод получения вложенного члена слова по имени. С учётом того, что может быть передана ссылка на переменную' ;
