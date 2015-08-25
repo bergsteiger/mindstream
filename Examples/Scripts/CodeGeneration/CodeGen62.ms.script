@@ -510,7 +510,7 @@ TtfwWord OPERATOR |RefDeepest
 
 REF operator FieldByNameDeepest
  ^@ IN aSelf
- ^L IN aName
+ Literal IN aName
  %SUMMARY 'Метод получения вложенного члена слова по имени. С учётом того, что может быть передана ссылка на переменную' ;
 
  TtfwWord VAR l_Self
