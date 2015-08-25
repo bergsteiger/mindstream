@@ -20,6 +20,7 @@ object fmMain: TfmMain
     Height = 37
     Caption = 'DoIt'
     TabOrder = 0
+    OnClick = btnDoItClick
   end
   object pnlTop: TPanel
     Left = 0
@@ -31,6 +32,21 @@ object fmMain: TfmMain
     ExplicitLeft = 232
     ExplicitTop = 128
     ExplicitWidth = 185
+    object lblResult: TLabel
+      Left = 161
+      Top = 13
+      Width = 30
+      Height = 13
+      Caption = 'Result'
+    end
+    object edtIn: TEdit
+      Left = 24
+      Top = 10
+      Width = 121
+      Height = 21
+      TabOrder = 0
+      Text = 'edtIn'
+    end
   end
   object pnlMain: TPanel
     Left = 0
@@ -46,6 +62,12 @@ object fmMain: TfmMain
       Width = 436
       Height = 377
       Align = alTop
+      Lines.Strings = (
+        'edtIn'
+        'qwe'
+        'edtIn'
+        'qwe'
+        'edtIn')
       TabOrder = 0
       ExplicitTop = -41
     end
