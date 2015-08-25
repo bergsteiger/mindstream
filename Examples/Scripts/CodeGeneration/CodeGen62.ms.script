@@ -500,7 +500,7 @@ TtfwWord OPERATOR pop:Word:GetRefDeepest
 ; // pop:Word:GetRefDeepest
 
 TtfwWord OPERATOR |RefDeepest
- ^@ IN aSelf
+ LVALUE aSelf
  %SUMMARY '
  Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные.
  Аналог |^@.
@@ -509,7 +509,7 @@ TtfwWord OPERATOR |RefDeepest
 ; // |RefDeepest
 
 REF operator FieldByNameDeepest
- ^@ IN aSelf
+ LVALUE aSelf
  Literal IN aName
  %SUMMARY 'Метод получения вложенного члена слова по имени. С учётом того, что может быть передана ссылка на переменную' ;
 
