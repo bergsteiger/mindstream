@@ -3,16 +3,30 @@ USES
 ;
 
 WordAlias array ARRAY
+ %REMARK 'Массив'
 WordAlias private PRIVATE
+ %REMARK 'Приватный член'
 WordAlias Private PRIVATE
+ %REMARK 'Приватный член'
 WordAlias type TYPE
+ %REMARK 'Определение типа'
 WordAlias Type TYPE
+ %REMARK 'Определение типа'
 WordAlias var VAR
+ %REMARK 'Определение переменной'
 WordAlias ?Assure ?ASSURE
+ %REMARK 'Проверка инварианта'
 WordAlias Const CONST
+ %REMARK 'Определение константы'
 WordAlias const Const
+ %REMARK 'Определение константы'
 WordAlias Functor FUNCTOR
-WordAlias List Functor
+ %REMARK 'Функтор/слово/лямбда'
+Functor TYPE Lambda
+ %REMARK 'Лямбда'
+Functor TYPE CallBack
+ %REMARK 'Функция обратного вызова'
+Functor Type List
  %REMARK ' - список слов'
 WordAlias void VOID
  %REMARK ' - метод не возвращающий результата'
