@@ -165,10 +165,12 @@ VOID Test CodeGen
   OutToFile
   [
    'Родители элемента '
-   Self
-   .Parents
-   Array:Reverted
-   IT
+   for
+   (
+    Self
+    .Parents
+    Array:Reverted
+   )
    |N
   ]
   '::'

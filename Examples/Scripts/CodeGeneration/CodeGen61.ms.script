@@ -614,7 +614,7 @@ elem_proc DumpAsIs
  ] ' ' strings:CatSep OutToFile
  [
   'Родители элемента '
-  Self .Parents >reverted> ==> |N
+  for ( Self .Parents >reverted> ) |N
   %REMARK 'Выводим родителей элемента, рекурсивно'
  ] '::' strings:CatSep OutToFile
  TRY
