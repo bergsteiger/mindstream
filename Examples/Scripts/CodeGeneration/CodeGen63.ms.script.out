@@ -602,7 +602,6 @@ VOID Test CodeGen
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE GENERATOR
  
- ARRAY VAR Generators
  IMMEDIATE VOID TYPE ModelElement
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -807,7 +806,6 @@ VOID Test CodeGen
   
  ; // <<Project>> Project3
  
- ARRAY VAR Projects
  CodeGen
  DumpElement
  help
@@ -817,26 +815,6 @@ VOID Test CodeGen
  nil
  g_CurrentGeneratorName :=
  ''
- Generators :=
- [
-  @
-  .dump
-  @
-  .pas
-  @
-  .c++
-  @
-  .h
- ]
- Projects :=
- [
-  @
-  Project1
-  @
-  Project2
-  @
-  Project3
- ]
  [
   @
   Project1
@@ -5382,7 +5360,6 @@ TkwMain : Main
   FILE OPERATOR :: VAR : g_OutFile
   STRING CONST : GEN_PROPERTY_PREFIX
   IMMEDIATE VOID OPERATOR :: TYPE : GENERATOR
-  ARRAY OPERATOR :: VAR : Generators
   IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
   STRING FUNCTION : OutFileName
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
@@ -5439,6 +5416,5 @@ TkwMain : Main
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project3
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   ; // Project3
-  ARRAY OPERATOR :: VAR : Projects
  ; // CodeGen
 ; // Main
