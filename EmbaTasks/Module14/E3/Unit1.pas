@@ -32,7 +32,7 @@ procedure TfmMain.btnDoItClick(Sender: TObject);
     Index : integer;
   begin
     Result := -1;
-    for Index := 0 to memMain.Lines.Count do
+    for Index := 0 to memMain.Lines.Count - 1 do
       if pos(aWord, memMain.Lines[Index]) > 0 then
       begin
         Result := Index;

@@ -34,7 +34,7 @@ var
 begin
   MaxLineLenght := 0;
   LongestLineIndex := -1;
-  for Index := 0 to memMain.Lines.Count do
+  for Index := 0 to memMain.Lines.Count - 1 do
     if Length(memMain.Lines[Index]) > MaxLineLenght then
     begin
       MaxLineLenght := Length(memMain.Lines[Index]);
