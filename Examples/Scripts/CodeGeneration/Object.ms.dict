@@ -5,34 +5,17 @@ USES
  core.ms.dict
  macro.ms.dict
  NoCapsLock.ms.dict
+ implementation.ms.dict
  params.ms.dict
  integer.ms.dict
  axiom_push.ms.dict
  Documentation.ms.dict
 ;
 
-// Понятное дело, что всю обвязку потом упрячем в отдельный словарь object.ms.dict
+EXPORTS
+ implementation.ms.dict
 
- IMMEDIATE operator implementation
-   ^ LINK IN aWordToWork
-  Ctx:PushCompiler
-  Ctx:PushFinder
-  OBJECT VAR l_NewCompiler
-  aWordToWork |^@ =: l_NewCompiler
-  
-  if ( l_NewCompiler Is class::TkwCompiledWordWorkerWord ) then
-  begin
-   l_NewCompiler pop:CompiledWordWorkerWord:Compiled =: l_NewCompiler
-  end
-  
-  l_NewCompiler pop:Compiler:SetToCtx
-  l_NewCompiler pop:Finder:SetToCtx
- ; // implementation
- 
- IMMEDIATE operator end.
-  pop:Finder:SetToCtx
-  pop:Compiler:SetToCtx
- ; // end.
+// Понятное дело, что всю обвязку потом упрячем в отдельный словарь object.ms.dict
 
 NamedWordProducer %FIELDS %Fld
 

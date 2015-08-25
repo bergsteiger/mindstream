@@ -1,0 +1,27 @@
+USES
+ axiom:CompiledWordWorkerWord
+ axiom:Finder
+ axiom:Compiler
+ Documentation.ms.dict
+;
+
+ IMMEDIATE operator implementation
+   ^ LINK IN aWordToWork
+  Ctx:PushCompiler
+  Ctx:PushFinder
+  OBJECT VAR l_NewCompiler
+  aWordToWork |^@ =: l_NewCompiler
+  
+  if ( l_NewCompiler Is class::TkwCompiledWordWorkerWord ) then
+  begin
+   l_NewCompiler pop:CompiledWordWorkerWord:Compiled =: l_NewCompiler
+  end
+  
+  l_NewCompiler pop:Compiler:SetToCtx
+  l_NewCompiler pop:Finder:SetToCtx
+ ; // implementation
+ 
+ IMMEDIATE operator end.
+  pop:Finder:SetToCtx
+  pop:Compiler:SetToCtx
+ ; // end.
