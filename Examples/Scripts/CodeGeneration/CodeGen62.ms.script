@@ -484,29 +484,9 @@ MACRO %GEN_PROPERTY
  GEN_PROPERTY_PREFIX (+) ( aName .Name ) Ctx:Parser:PushSymbol
 ; // %GEN_PROPERTY
 
-TtfwWord OPERATOR pop:Word:GetRefDeepest
- TtfwWord IN aSelf
- %SUMMARY '
- Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные.
- Аналог pop:Word:GetRefDeep.
- ' ;
- aSelf pop:Word:GetRefDeep Addr Result pop:Word:SetValue
- if ( class::TkwCompiledVar Result pop:object:Inherits )
- %REMARK 'Если это переменная, то ...'
-  ( 
-    Result DO this.method.addr DO Addr Result pop:Word:SetValue 
-    %REMARK '... разыменовываем её рекурсивно'
-  )
-; // pop:Word:GetRefDeepest
-
-TtfwWord OPERATOR |RefDeepest
- LVALUE aSelf
- %SUMMARY '
- Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные.
- Аналог GetRefFromLeft.
- ' ;
- aSelf pop:Word:GetRefDeepest Addr Result pop:Word:SetValue
-; // |RefDeepest
+USES
+ RefDeepest.ms.dict
+;
 
 REF operator FieldByNameDeepest
  LVALUE aSelf

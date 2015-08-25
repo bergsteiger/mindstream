@@ -305,19 +305,6 @@ VOID Test CodeGen
   .DumpAsIs
  ; // VOID elem_generator .pas
  
- TtfwWord OPERATOR |RefDeepest
-  %SUMMARY %SUM
-   ' Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные. Аналог GetRefFromLeft. '
-  ; // %SUMMARY %SUM
-  
-  ^@ IN aSelf
-  aSelf
-  pop:Word:GetRefDeepest
-  @
-  Result
-  pop:Word:SetValue
- ; // TtfwWord OPERATOR |RefDeepest
- 
  IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
   %SUMMARY %SUM
    ' Определяем базовый элемент мета-модели Тот самый который позволяет тащить всё остальное "за волосы из болота" Через этот примитив выводятся все остальные '
@@ -696,35 +683,6 @@ VOID Test CodeGen
   g_OutFile
   File:WriteLn
  ; // VOID PROCEDURE OutToFile
- 
- TtfwWord OPERATOR pop:Word:GetRefDeepest
-  %SUMMARY %SUM
-   ' Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные. Аналог pop:Word:GetRefDeep. '
-  ; // %SUMMARY %SUM
-  
-  TtfwWord IN aSelf
-  aSelf
-  pop:Word:GetRefDeep
-  @
-  Result
-  pop:Word:SetValue
-  if
-   (
-    class::TkwCompiledVar
-    Result
-    pop:object:Inherits
-   )
-  then
-   (
-    Result
-    DO
-    pop:Word:GetRefDeepest
-    DO
-    @
-    Result
-    pop:Word:SetValue
-   )
- ; // TtfwWord OPERATOR pop:Word:GetRefDeepest
  
  IMMEDIATE VOID TYPE PRINTABLE
   TtfwValueTypes
@@ -1500,6 +1458,7 @@ Dictionary: CodeGen62.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\RefDeepest.ms.dict
  ;
 Dictionary: axiom:axiom
  Uses: 
@@ -5158,6 +5117,48 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %IMPLEMENTS
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\RefDeepest.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbols.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
+ ;
+WORD_REF OPERATOR : |RefDeepest
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^@ OPERATOR :: IN : aSelf
+ WORD_REF OPERATOR :: |RefDeepest : Result
+; // |RefDeepest
+WORD_REF OPERATOR : pop:Word:GetRefDeepest
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ WORD_REF OPERATOR :: IN : aSelf
+ WORD_REF OPERATOR :: pop:Word:GetRefDeepest : Result
+; // pop:Word:GetRefDeepest
+IMMEDIATE VOID OPERATOR :: TYPE : WORD_REF
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
   IMMEDIATE VOID OPERATOR : %GEN_PROPERTY
@@ -5237,11 +5238,6 @@ TkwMain : Main
    STRING OPERATOR :: %GEN_PROPERTY : gpName
    ModelElement OPERATOR :: IN : Self
   ; // .pas
-  TtfwWord OPERATOR : |RefDeepest
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^@ OPERATOR :: IN : aSelf
-   TtfwWord OPERATOR :: |RefDeepest : Result
-  ; // |RefDeepest
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
@@ -5335,11 +5331,6 @@ TkwMain : Main
    PRINTABLE OPERATOR :: IN : aValue
    STRING OPERATOR :: VAR : l_String
   ; // OutToFile
-  TtfwWord OPERATOR : pop:Word:GetRefDeepest
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   TtfwWord OPERATOR :: IN : aSelf
-   TtfwWord OPERATOR :: pop:Word:GetRefDeepest : Result
-  ; // pop:Word:GetRefDeepest
   IMMEDIATE VOID OPERATOR :: TYPE : PRINTABLE
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
