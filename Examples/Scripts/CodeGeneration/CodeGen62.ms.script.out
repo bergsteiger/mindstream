@@ -4489,9 +4489,11 @@ IMMEDIATE VOID OPERATOR : in
  ^L OPERATOR :: private:DefineNameParam : aName
 ; // in
 PRIVATE VOID OPERATOR : MangledNamePusher
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: IN : aName
 ; // MangledNamePusher
 IMMEDIATE VOID OPERATOR : right
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_MangledName
  STRING OPERATOR :: VAR : l_Name

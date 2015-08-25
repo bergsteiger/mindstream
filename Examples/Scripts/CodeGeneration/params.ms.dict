@@ -5,8 +5,10 @@ USES
 ;
 
 WordAlias RIGHT ^
+ %REMARK 'Модификатор параметра справа'
 
 WordAlias in IN
+ %REMARK 'Описатель входного параметра (справа или слева)'
 
 USES
  Literal.ms.dict
@@ -21,6 +23,7 @@ USES
 
 PRIVATE VOID operator MangledNamePusher
  STRING IN aName
+ %SUMMARY 'Реализация параметра справа' ;
  axiom:PushSymbol (
  aName Ctx:Parser:PushSymbol
  axiom:PushSymbol |^
@@ -29,6 +32,7 @@ PRIVATE VOID operator MangledNamePusher
 
 MACRO right
  Literal IN aName
+ %SUMMARY 'Параметр справа, который автоматически разыменовывается' ;
  axiom:PushSymbol RIGHT
  axiom:PushSymbol IN
 
