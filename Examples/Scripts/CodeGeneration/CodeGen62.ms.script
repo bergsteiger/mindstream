@@ -383,7 +383,7 @@ BOOLEAN elem_func IsSummary
   Определяет тот факт, что aWord является документацией к элементу
  '
  ; // %SUMMARY
- ( Self .Name ) = '%SUM' >>> Result
+ ( Self .Name ) = '%SUM' =: Result
 ; // IsSummary
 
 BOOLEAN elem_func IsModelElement
@@ -393,9 +393,9 @@ BOOLEAN elem_func IsModelElement
  '
  ; // %SUMMARY
  '<<' Self %ST .Name StartsStr 
-  >>> Result
+  =: Result
  //NOT ( Self .IsSummary )
-  //>>> Result
+  //=: Result
 ; // IsModelElement
 
 ARRAY elem_func Children
@@ -404,7 +404,7 @@ ARRAY elem_func Children
  Возвращает итератор детей aWord в "терминах определённой модели"
  '
  ;
- ( Self MembersIterator ) >filter> .IsModelElement >>> Result
+ ( Self MembersIterator ) >filter> .IsModelElement =: Result
 ; // Children
 
 ARRAY elem_func Parents
@@ -413,7 +413,7 @@ ARRAY elem_func Parents
  Возвращает итератор родителей aWord в "терминах определённой модели"
  '
  ;
- ( Self LIST %P ) >filter> .IsModelElement >>> Result
+ ( Self LIST %P ) >filter> .IsModelElement =: Result
 ; // Parents
 
 INTEGER VAR g_Indent
@@ -422,7 +422,7 @@ g_Indent := 0
 
 BOOLEAN elem_func IsElementNeedIndent
  %SUMMARY 'Определяет тот факт, что элементу нужен отступ' ;
- true >>> Result
+ true =: Result
 ; // IsElementNeedIndent
 
 elem_proc EnterElement
@@ -451,9 +451,9 @@ PROCEDURE OutToFile
 
  STRING VAR l_String
  if ( aValue IsArray ) then
-  ( aValue strings:Cat >>> l_String )
+  ( aValue strings:Cat =: l_String )
  else
-  ( aValue ToPrintable >>> l_String )
+  ( aValue ToPrintable =: l_String )
  [ g_Indent ' ' char:Dupe l_String ] strings:Cat g_OutFile File:WriteLn
  %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; //OutToFile
@@ -494,18 +494,18 @@ REF operator FieldByNameDeepest
  %SUMMARY 'Метод получения вложенного члена слова по имени. С учётом того, что может быть передана ссылка на переменную' ;
 
  TtfwWord VAR l_Self
- aSelf GetRefDeepestFromLeft >>> l_Self
+ aSelf GetRefDeepestFromLeft =: l_Self
  
  STRING VAR l_Name
- aName .Name >>> l_Name
+ aName .Name =: l_Name
  
  OBJECT VAR l_Res
- l_Self %% l_Name >>> l_Res
+ l_Self %% l_Name =: l_Res
  
  ASSURE 
   NOT ( l_Res pop:object:IsNil ) 
   [ 'Не найдено поле: ' l_Self LIST %P Reverted ==> ( .Name '::' ) l_Self .Name '::' l_Name ]
- l_Res >>> Result
+ l_Res =: Result
 ; // FieldByNameDeepest
 
 MACRO %GP
@@ -520,7 +520,7 @@ STRING FUNCTION OutFileName
  %SUMMARY 'Имя файла для вывода' ;
  STRING VAR l_OutPath
  %REMARK 'Путь для вывода'
- sysutils:GetCurrentDir >>> l_OutPath
+ sysutils:GetCurrentDir =: l_OutPath
  [ l_OutPath 
   script:FileName 
   %REMARK 'Путь к текущему скрипту'
@@ -530,10 +530,10 @@ STRING FUNCTION OutFileName
   %REMARK 'Убираем .script' 
   '' sysutils:ChangeFileExt 
   %REMARK 'Убираем .ms' 
- ] '\' strings:CatSep >>> l_OutPath
+ ] '\' strings:CatSep =: l_OutPath
  l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
  %REMARK 'Создаём директорию рекурсивно, если её ещё не было'
- [ l_OutPath aGeneratorName ] '\' strings:CatSep >>> Result
+ [ l_OutPath aGeneratorName ] '\' strings:CatSep =: Result
 ; // OutFileName
 
 STRING VAR g_CurrentGeneratorName
@@ -550,7 +550,7 @@ elem_proc CallGen
  ' 
  ; // %SUMMARY 
 
- aGen %GP Name >>> g_CurrentGeneratorName
+ aGen %GP Name =: g_CurrentGeneratorName
  g_OutFile := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
  TRY
   Self ( aGen GetRefDeepestFromLeft DO )
