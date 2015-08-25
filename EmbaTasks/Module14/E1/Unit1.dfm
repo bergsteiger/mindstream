@@ -19,6 +19,14 @@ object fmMain: TfmMain
     Width = 438
     Height = 377
     Align = alTop
+    Lines.Strings = (
+      'Line 1'
+      'Line 2'
+      'Line 3'
+      'Line 4'
+      'Line 5'
+      'Line 6'
+      'Line 7')
     TabOrder = 0
     ExplicitLeft = -11
   end
@@ -29,5 +37,6 @@ object fmMain: TfmMain
     Height = 37
     Caption = 'DoIt'
     TabOrder = 1
+    OnClick = btnDoItClick
   end
 end

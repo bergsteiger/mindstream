@@ -10,6 +10,7 @@ type
   TfmMain = class(TForm)
     memMain: TMemo;
     btnDoIt: TButton;
+    procedure btnDoItClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -22,5 +23,23 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfmMain.btnDoItClick(Sender: TObject);
+const
+  c_MaxLines = 4;
+
+  procedure DelLines(aLastCount, aFirstCount : integer);
+  var
+    Index : integer;
+  begin
+    for Index := aLastCount downto aFirstCount do
+      memMain.Lines.Delete(Index);
+  end;
+begin
+  if memMain.Lines.Count > c_MaxLines then
+    DelLines(memMain.Lines.Count, c_MaxLines)
+  else
+    DelLines(c_MaxLines, 1);
+end;
 
 end.
