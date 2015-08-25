@@ -1,0 +1,11 @@
+USES
+ params.ms.dict
+ macro.ms.dict
+;
+
+MACRO REMARK
+ Literal IN aDoc
+ %SUMMARY 'Ремарка' ;
+; // REMARK
+
+WordAlias %REMARK REMARK
