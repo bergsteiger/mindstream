@@ -338,7 +338,7 @@ PROCEDURE do_elem_func
  aName Ctx:Parser:PushLeftDottedSymbol
  axiom:PushSymbol ModelElement
  if ( aModifier <> nil ) then
-  ( aModifier |N Ctx:Parser:PushSymbol )
+  ( aModifier .Name Ctx:Parser:PushSymbol )
  axiom:PushSymbol in
  'Self' Ctx:Parser:PushSymbol
 ; // do_elem_func
@@ -346,7 +346,7 @@ PROCEDURE do_elem_func
 MACRO elem_func
  Literal IN aName
  %SUMMARY 'Функция на элементе модели' ;
- aName |N this.method.addr nil do_elem_func
+ aName .Name this.method.addr nil do_elem_func
 ; // elem_func
 
 PROCEDURE do_elem_proc
@@ -362,19 +362,19 @@ PROCEDURE do_elem_proc
 MACRO elem_proc
  Literal IN aName
  %SUMMARY 'Процедура на элементе модели' ;
- aName |N this.method.addr nil do_elem_proc
+ aName .Name this.method.addr nil do_elem_proc
 ; // elem_proc
 
 MACRO elem_generator
  Literal IN aName
  %SUMMARY 'Генератор содержимого элемента' ;
- aName |N this.method.addr nil do_elem_proc
+ aName .Name this.method.addr nil do_elem_proc
 ; // elem_generator
 
 MACRO elem_ref_proc
  Literal IN aName
  %SUMMARY 'Процедура на элементе модели, который передаётся по ссылке' ;
- aName |N this.method.addr Addr LVALUE_MOD do_elem_proc
+ aName .Name this.method.addr Addr LVALUE_MOD do_elem_proc
 ; // elem_ref_proc
 
 BOOLEAN elem_func IsSummary
@@ -383,7 +383,7 @@ BOOLEAN elem_func IsSummary
   Определяет тот факт, что aWord является документацией к элементу
  '
  ; // %SUMMARY
- ( Self |N ) = '%SUM' >>> Result
+ ( Self .Name ) = '%SUM' >>> Result
 ; // IsSummary
 
 BOOLEAN elem_func IsModelElement
@@ -392,7 +392,7 @@ BOOLEAN elem_func IsModelElement
   Определяет тот факт, что aWord является "элементом модели"
  '
  ; // %SUMMARY
- '<<' Self %ST |N StartsStr 
+ '<<' Self %ST .Name StartsStr 
   >>> Result
  //NOT ( Self .IsSummary )
   //>>> Result
@@ -481,7 +481,7 @@ MACRO %GEN_PROPERTY
  %SUMMARY 'Свойство генератора' ;
  this.method.addr Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol CONST
- GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
+ GEN_PROPERTY_PREFIX (+) ( aName .Name ) Ctx:Parser:PushSymbol
 ; // %GEN_PROPERTY
 
 TtfwWord OPERATOR pop:Word:GetRefDeepest
@@ -517,14 +517,14 @@ REF operator FieldByNameDeepest
  aSelf |RefDeepest >>> l_Self
  
  STRING VAR l_Name
- aName |N >>> l_Name
+ aName .Name >>> l_Name
  
  OBJECT VAR l_Res
  l_Self %% l_Name >>> l_Res
  
  ASSURE 
   NOT ( l_Res pop:object:IsNil ) 
-  [ 'Не найдено поле: ' l_Self LIST %P Reverted ==> ( |N '::' ) l_Self |N '::' l_Name ]
+  [ 'Не найдено поле: ' l_Self LIST %P Reverted ==> ( .Name '::' ) l_Self .Name '::' l_Name ]
  l_Res >>> Result
 ; // FieldByNameDeepest
 
@@ -532,7 +532,7 @@ MACRO %GP
  Literal IN aName
  %SUMMARY 'Метод получения свойства генератора' ;
  axiom:PushSymbol FieldByNameDeepest
- GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
+ GEN_PROPERTY_PREFIX (+) ( aName .Name ) Ctx:Parser:PushSymbol
 ; // %GP
 
 STRING FUNCTION OutFileName
@@ -571,7 +571,7 @@ elem_proc CallGen
  ; // %SUMMARY 
 
  aGen %GP Name >>> g_CurrentGeneratorName
- g_OutFile := ( OutFileName ( Self |N (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
+ g_OutFile := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
  TRY
   Self ( aGen |RefDeepest DO )
   %REMARK 'Вызываем на элементе генератор aGen'
@@ -607,21 +607,21 @@ elem_proc DumpAsIs
  [
   g_CurrentGeneratorName ':'
    %REMARK 'Выводим имя текущего генератора. Для отладки' 
-  for ( Self LIST %ST Reverted ) |N
+  for ( Self LIST %ST Reverted ) .Name
    %REMARK 'Выводим стереотип элемента, рекурсивно'
-  Self |N 
+  Self .Name 
    %REMARK 'Выводим имя элемента'
  ] ' ' strings:CatSep OutToFile
  [
   'Родители элемента '
-  for ( Self .Parents >reverted> ) |N
+  for ( Self .Parents >reverted> ) .Name
   %REMARK 'Выводим родителей элемента, рекурсивно'
  ] '::' strings:CatSep OutToFile
  TRY
   for ( Self .Children ) .Child.CallGen call.me 
   %REMARK 'Выводим детей элемента, тем же самым генератором'
  FINALLY
-  [ '; // ' Self |N ] OutToFile
+  [ '; // ' Self .Name ] OutToFile
   %REMARK 'Выводим закрывающую скобку элемента'
  END
 ; // DumpAsIs
