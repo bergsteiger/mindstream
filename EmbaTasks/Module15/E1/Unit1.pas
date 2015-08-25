@@ -11,11 +11,11 @@ type
     btnDoIt: TButton;
     pnlTop: TPanel;
     lblNumbers: TLabel;
-    lblEvenNumbers: TLabel;
-    lblOddNumbers: TLabel;
+    lblPositiveNumbers: TLabel;
+    lblNegativeNumbers: TLabel;
     memNumbers: TMemo;
-    memEvenNumbers: TMemo;
-    memOddNumbers: TMemo;
+    memPositiveNumbers: TMemo;
+    memNegativeNumbers: TMemo;
     procedure btnDoItClick(Sender: TObject);
   private
     { Private declarations }
@@ -32,21 +32,13 @@ implementation
 
 procedure TfmMain.btnDoItClick(Sender: TObject);
 var
-  Index,
-  EvenNumber : integer;
-  OddNumber : double;
+  Index : integer;
 begin
   for Index := 0 to memNumbers.Lines.Count - 1 do
-    if (StrToInt(memNumbers.Lines[Index]) mod 2) = 0 then
-    begin
-      EvenNumber := StrToInt(memNumbers.Lines[Index]) * 2;
-      memEvenNumbers.Lines[0] := memEvenNumbers.Lines[0] + ' ' + IntToStr(EvenNumber);
-    end
+    if StrToInt(memNumbers.Lines[Index]) < 0 then
+      memNegativeNumbers.Lines.Add(memNumbers.Lines[Index])
     else
-    begin
-      OddNumber := StrToInt(memNumbers.Lines[Index]) / 2;
-      memOddNumbers.Lines[0] := memOddNumbers.Lines[0] + ' ' + FloatToStr(OddNumber);
-    end;
+      memPositiveNumbers.Lines.Add(memNumbers.Lines[Index]);
 end;
 
 end.

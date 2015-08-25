@@ -29,27 +29,26 @@ object fmMain: TfmMain
     Height = 217
     Align = alTop
     TabOrder = 1
-    ExplicitWidth = 438
     object lblNumbers: TLabel
-      Left = 32
+      Left = 47
       Top = 24
       Width = 42
       Height = 13
       Caption = 'Numbers'
     end
-    object lblEvenNumbers: TLabel
-      Left = 160
+    object lblPositiveNumbers: TLabel
+      Left = 163
       Top = 24
-      Width = 69
+      Width = 82
       Height = 13
-      Caption = 'Even Numbers'
+      Caption = 'Positive Numbers'
     end
-    object lblOddNumbers: TLabel
-      Left = 304
+    object lblNegativeNumbers: TLabel
+      Left = 296
       Top = 24
-      Width = 65
+      Width = 88
       Height = 13
-      Caption = 'Odd Numbers'
+      Caption = 'Negative Numbers'
     end
     object memNumbers: TMemo
       Left = 0
@@ -57,26 +56,27 @@ object fmMain: TfmMain
       Width = 137
       Height = 161
       Lines.Strings = (
+        '-5'
+        '-4'
+        '-3'
+        '-2'
+        '-1'
         '0'
         '1'
         '2'
         '3'
         '4'
-        '5'
-        '6'
-        '7'
-        '8'
-        '9')
+        '5')
       TabOrder = 0
     end
-    object memEvenNumbers: TMemo
+    object memPositiveNumbers: TMemo
       Left = 136
       Top = 56
       Width = 137
       Height = 161
       TabOrder = 1
     end
-    object memOddNumbers: TMemo
+    object memNegativeNumbers: TMemo
       Left = 272
       Top = 56
       Width = 137
