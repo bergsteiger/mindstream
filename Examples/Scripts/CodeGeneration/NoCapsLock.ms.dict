@@ -22,11 +22,13 @@ WordAlias const Const
  %REMARK 'Определение константы'
 WordAlias Functor FUNCTOR
  %REMARK 'Функтор/слово/лямбда'
-Functor TYPE Lambda
+Functor Type Lambda
  %REMARK 'Лямбда'
-Functor TYPE CallBack
+Functor Type CallBack
  %REMARK 'Функция обратного вызова'
 Functor Type List
  %REMARK ' - список слов'
+Functor Type Sequence
+ %REMARK 'Последовательность слов'
 WordAlias void VOID
  %REMARK ' - метод не возвращающий результата'
