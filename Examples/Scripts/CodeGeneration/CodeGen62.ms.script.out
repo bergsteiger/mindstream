@@ -246,6 +246,14 @@ VOID Test CodeGen
   %ST
   |N
   StartsStr
+  AND
+  (
+   '>>'
+   Self
+   %ST
+   |N
+   EndsStr
+  )
   >>>
   Result
  ; // BOOLEAN elem_func .IsModelElement

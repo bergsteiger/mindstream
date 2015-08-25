@@ -394,6 +394,8 @@ BOOLEAN elem_func IsModelElement
  '
  ; // %SUMMARY
  '<<' Self %ST .Name StartsStr 
+ AND
+ ( '>>' Self %ST .Name EndsStr )
   =: Result
  //NOT ( Self .IsSummary )
   //=: Result
