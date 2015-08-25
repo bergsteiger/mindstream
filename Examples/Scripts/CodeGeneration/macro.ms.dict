@@ -5,6 +5,7 @@ USES
 VOID IMMEDIATE operator __MACRO
  axiom:PushSymbol IMMEDIATE
  axiom:PushSymbol axiom:operator
+ @SELF Ctx:SetWordProducerForCompiledClass
 ; // __MACRO
 
 VOID IMMEDIATE operator _MACRO
@@ -17,4 +18,5 @@ VOID IMMEDIATE operator MACRO
  axiom:PushSymbol VOID
  axiom:PushSymbol IMMEDIATE
  axiom:PushSymbol axiom:operator
+ @SELF Ctx:SetWordProducerForCompiledClass
 ; // MACRO
