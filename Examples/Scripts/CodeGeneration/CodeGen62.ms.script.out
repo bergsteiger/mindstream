@@ -307,7 +307,7 @@ VOID Test CodeGen
  
  TtfwWord OPERATOR |RefDeepest
   %SUMMARY %SUM
-   ' Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные. Аналог |^@. '
+   ' Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные. Аналог GetRefFromLeft. '
   ; // %SUMMARY %SUM
   
   ^@ IN aSelf
@@ -4484,6 +4484,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbo
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
+TtfwWord OPERATOR : GetRefFromLeft
+ ^@ OPERATOR :: IN : aSelf
+ TtfwWord OPERATOR :: |^@ : Result
+; // GetRefFromLeft
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  Uses: 
   axiom:axiom
