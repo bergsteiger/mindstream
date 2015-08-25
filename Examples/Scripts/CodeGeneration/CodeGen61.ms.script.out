@@ -149,11 +149,13 @@ VOID Test CodeGen
   [
    g_CurrentGeneratorName
    ':'
-   Self
-   LIST
-   %ST
-   Array:Reverted
-   IT
+   for
+   (
+    Self
+    LIST
+    %ST
+    Array:Reverted
+   )
    |N
    Self
    |N
