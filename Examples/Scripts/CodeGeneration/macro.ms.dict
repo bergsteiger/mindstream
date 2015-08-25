@@ -2,6 +2,10 @@ USES
  axiom_push.ms.dict
 ;
 
+VOID IMMEDIATE operator __MACRO
+ axiom:PushSymbol IMMEDIATE
+; // __MACRO
+
 VOID IMMEDIATE operator _MACRO
  axiom:PushSymbol VOID
  axiom:PushSymbol IMMEDIATE
