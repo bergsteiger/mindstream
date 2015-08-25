@@ -4613,6 +4613,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
 IMMEDIATE VOID OPERATOR : in
  ^L OPERATOR :: private:DefineNameParam : aName
 ; // in
+IMMEDIATE VOID OPERATOR : LVALUE
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // LVALUE
 IMMEDIATE VOID OPERATOR : LVALUE_MOD
 PRIVATE VOID OPERATOR : MangledNamePusher
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
