@@ -1,6 +1,7 @@
 USES
  metaMACRO.ms.dict
  classRelations.ms.dict
+ EngineTypes.ms.dict
 ;
 
 Test CodeGen
@@ -325,13 +326,13 @@ help
 // ---------------------------------------------------------------------------
 %REMARK 'Ёто всЄ хоз€йство надо будет потом выделить в отдельный словарь'
 
-TtfwWord TYPE ModelElement
+ENGINE_WORD TYPE ModelElement
 %REMARK 'Ёлемент модели'
 
 PROCEDURE do_elem_func
  STRING IN aName
- TtfwWord IN aSelf
- TtfwWord IN aModifier
+ ENGINE_WORD IN aSelf
+ ENGINE_WORD IN aModifier
  %SUMMARY '–еализаци€ do_elem_func, elem_proc и elem_generator' ;
  aSelf Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol :
@@ -351,8 +352,8 @@ MACRO elem_func
 
 PROCEDURE do_elem_proc
  STRING IN aName
- TtfwWord IN aSelf
- TtfwWord IN aModifier
+ ENGINE_WORD IN aSelf
+ ENGINE_WORD IN aModifier
  %SUMMARY '–еализаци€ elem_proc и elem_generator' ;
  Ctx:ClearTypeInfo
  axiom:PushSymbol VOID
@@ -493,7 +494,7 @@ REF operator FieldByNameDeepest
  Literal IN aName
  %SUMMARY 'ћетод получени€ вложенного члена слова по имени. — учЄтом того, что может быть передана ссылка на переменную' ;
 
- TtfwWord VAR l_Self
+ ENGINE_WORD VAR l_Self
  aSelf GetRefDeepestFromLeft =: l_Self
  
  STRING VAR l_Name
