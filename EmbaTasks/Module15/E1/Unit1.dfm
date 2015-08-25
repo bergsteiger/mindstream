@@ -2,8 +2,8 @@ object fmMain: TfmMain
   Left = 0
   Top = 0
   Caption = 'Main'
-  ClientHeight = 441
-  ClientWidth = 438
+  ClientHeight = 293
+  ClientWidth = 409
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,39 +15,73 @@ object fmMain: TfmMain
   TextHeight = 13
   object btnDoIt: TButton
     Left = 88
-    Top = 392
+    Top = 240
     Width = 241
     Height = 37
     Caption = 'DoIt'
     TabOrder = 0
+    OnClick = btnDoItClick
   end
   object pnlTop: TPanel
     Left = 0
     Top = 0
-    Width = 438
-    Height = 41
+    Width = 409
+    Height = 217
     Align = alTop
     TabOrder = 1
-    ExplicitLeft = 232
-    ExplicitTop = 128
-    ExplicitWidth = 185
-  end
-  object pnlMain: TPanel
-    Left = 0
-    Top = 41
-    Width = 438
-    Height = 336
-    Align = alTop
-    Caption = 'pnlMain'
-    TabOrder = 2
-    object memMain: TMemo
-      Left = 1
-      Top = 1
-      Width = 436
-      Height = 377
-      Align = alTop
+    ExplicitWidth = 438
+    object lblNumbers: TLabel
+      Left = 32
+      Top = 24
+      Width = 42
+      Height = 13
+      Caption = 'Numbers'
+    end
+    object lblEvenNumbers: TLabel
+      Left = 160
+      Top = 24
+      Width = 69
+      Height = 13
+      Caption = 'Even Numbers'
+    end
+    object lblOddNumbers: TLabel
+      Left = 304
+      Top = 24
+      Width = 65
+      Height = 13
+      Caption = 'Odd Numbers'
+    end
+    object memNumbers: TMemo
+      Left = 0
+      Top = 56
+      Width = 137
+      Height = 161
+      Lines.Strings = (
+        '0'
+        '1'
+        '2'
+        '3'
+        '4'
+        '5'
+        '6'
+        '7'
+        '8'
+        '9')
       TabOrder = 0
-      ExplicitTop = -41
+    end
+    object memEvenNumbers: TMemo
+      Left = 136
+      Top = 56
+      Width = 137
+      Height = 161
+      TabOrder = 1
+    end
+    object memOddNumbers: TMemo
+      Left = 272
+      Top = 56
+      Width = 137
+      Height = 161
+      TabOrder = 2
     end
   end
 end
