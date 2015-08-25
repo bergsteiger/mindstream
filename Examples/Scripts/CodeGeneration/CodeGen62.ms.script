@@ -211,13 +211,13 @@ concrete-model-begin 'Модель конкретного проекта Project1'
    '
    ; // %SUMMARY
    %INHERITS
-    @ Class1
+    Addr Class1
     %REMARK 'Возможно наш проектный класс Class2 наследуется от класса Class1'
    ; // %INHERITS
    %IMPLEMENTS
-    @ Interface1
+    Addr Interface1
     %REMARK 'Возможно наш проектный класс Class2 реализует интерфейс Interface1'
-    @ Interface2
+    Addr Interface2
     %REMARK 'Возможно наш проектный класс Class2 реализует ещё и интерфейс Interface2'
    ; // %IMPLEMENTS
   ; // Class2
@@ -237,8 +237,8 @@ concrete-model-begin 'Модель конкретного проекта Project1'
    '
    ; // %SUMMARY
    %INHERITS
-    @ Class2
-    @ Class3
+    Addr Class2
+    Addr Class3
     %REMARK 
      '
      Возможно, что мы нстолько ОФИГЕННЫЕ перцы, что используем МНОЖЕСТВЕННОЕ наследование.
@@ -374,7 +374,7 @@ MACRO elem_generator
 MACRO elem_ref_proc
  Literal IN aName
  %SUMMARY 'Процедура на элементе модели, который передаётся по ссылке' ;
- aName |N @SELF @ LVALUE_MOD do_elem_proc
+ aName |N @SELF Addr LVALUE_MOD do_elem_proc
 ; // elem_ref_proc
 
 BOOLEAN elem_func IsSummary
@@ -490,11 +490,11 @@ TtfwWord OPERATOR pop:Word:GetRefDeepest
  Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные.
  Аналог pop:Word:GetRefDeep.
  ' ;
- aSelf pop:Word:GetRefDeep @ Result pop:Word:SetValue
+ aSelf pop:Word:GetRefDeep Addr Result pop:Word:SetValue
  if ( class::TkwCompiledVar Result pop:object:Inherits )
  %REMARK 'Если это переменная, то ...'
   ( 
-    Result DO @SELF DO @ Result pop:Word:SetValue 
+    Result DO @SELF DO Addr Result pop:Word:SetValue 
     %REMARK '... разыменовываем её рекурсивно'
   )
 ; // pop:Word:GetRefDeepest
@@ -505,7 +505,7 @@ TtfwWord OPERATOR |RefDeepest
  Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные.
  Аналог GetRefFromLeft.
  ' ;
- aSelf pop:Word:GetRefDeepest @ Result pop:Word:SetValue
+ aSelf pop:Word:GetRefDeepest Addr Result pop:Word:SetValue
 ; // |RefDeepest
 
 REF operator FieldByNameDeepest
@@ -669,11 +669,11 @@ elem_generator h
 ; // h
 
 ARRAY VAR Generators
-Generators := [ @ .dump @ .pas @ .c++ @ .h ]
+Generators := [ Addr .dump Addr .pas Addr .c++ Addr .h ]
 %REMARK 'Список всех наших генераторов'
 
 ARRAY VAR Projects
-Projects := [ @ Project1 @ Project2 @ Project3 ]
+Projects := [ Addr Project1 Addr Project2 Addr Project3 ]
 %REMARK 'Список всех наших корневых элементов (проектов)'
 
 Projects
