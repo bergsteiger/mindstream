@@ -1,3 +1,10 @@
 Атомарных тестов тут явно НЕ ХВАТАЕТ.
 
 http://programmingmindstream.blogspot.ru/2013/11/tdd_28.html
+
+В главе 15 в примере сортировки необходимо изменить строчки 
+for i:=0 to memEx1.Lines.Count do //For every line of TMemo 
+на 
+for i:=0 to memEx1.Lines.Count - 1 do //For every line of TMemo 
+
+и второй цикл тоже сделать до Count - 1
