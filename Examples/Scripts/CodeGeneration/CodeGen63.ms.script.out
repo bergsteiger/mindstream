@@ -440,10 +440,16 @@ VOID Test CodeGen
  ; // VOID PROCEDURE CallGens
  
  VOID PROCEDURE CallGensList
-  ARRAY IN aGenerators
-  ARRAY IN anElements
-  anElements
-  aGenerators
+  ^@ IN aGenerators
+  ^@ IN anElements
+  (
+   anElements
+   CodeIterator
+  )
+  (
+   aGenerators
+   CodeIterator
+  )
   CallGens
  ; // VOID PROCEDURE CallGensList
  
@@ -823,25 +829,7 @@ VOID Test CodeGen
  nil
  g_CurrentGeneratorName :=
  ''
- [
-  @
-  Project1
-  @
-  Project2
-  @
-  Project3
- ]
- [
-  @
-  .dump
-  @
-  .pas
-  @
-  .c++
-  @
-  .h
- ]
- CallGensList
+ ( Project1 Project2 Project3 ( .dump .pas .c++ .h CallGensList
 ; // VOID Test CodeGen
 
 Dictionary: axiom:Array
@@ -5327,8 +5315,8 @@ TkwMain : Main
    ARRAY OPERATOR :: IN : anElements
   ; // CallGens
   VOID OPERATOR :: PROCEDURE : CallGensList
-   ARRAY OPERATOR :: IN : aGenerators
-   ARRAY OPERATOR :: IN : anElements
+   ^@ OPERATOR :: IN : aGenerators
+   ^@ OPERATOR :: IN : anElements
   ; // CallGensList
   VOID OPERATOR :: PROCEDURE : do_elem_func
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM

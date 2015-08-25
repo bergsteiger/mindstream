@@ -578,10 +578,10 @@ PROCEDURE CallGens
 ; // CallGens
 
 PROCEDURE CallGensList
- ARRAY IN anElements
- ARRAY IN aGenerators
- anElements
-  aGenerators
+ Sequence LVALUE anElements
+ Sequence LVALUE aGenerators
+ ( anElements CodeIterator )
+  ( aGenerators CodeIterator )
    CallGens
 ; // CallGensList
 
@@ -659,9 +659,9 @@ elem_generator h
  %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
 ; // h
 
-[ Addr Project1 Addr Project2 Addr Project3 ]
+( Project1 Project2 Project3 )
 %REMARK 'Список всех наших корневых элементов (проектов)'
- [ Addr .dump Addr .pas Addr .c++ Addr .h ]
+ ( .dump .pas .c++ .h )
  %REMARK 'Список всех наших генераторов' 
   CallGensList
   %REMARK '- запускаем список генераторов на списке "рутовых элементов" модели.'
