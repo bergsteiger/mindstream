@@ -20,6 +20,7 @@ object fmMain: TfmMain
     Height = 37
     Caption = 'DoIt'
     TabOrder = 0
+    OnClick = btnDoItClick
   end
   object pnlTop: TPanel
     Left = 0
