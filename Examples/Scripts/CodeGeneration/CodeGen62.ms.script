@@ -494,7 +494,7 @@ REF operator FieldByNameDeepest
  %SUMMARY 'Метод получения вложенного члена слова по имени. С учётом того, что может быть передана ссылка на переменную' ;
 
  TtfwWord VAR l_Self
- aSelf |RefDeepest >>> l_Self
+ aSelf GetRefDeepestFromLeft >>> l_Self
  
  STRING VAR l_Name
  aName .Name >>> l_Name
@@ -553,7 +553,7 @@ elem_proc CallGen
  aGen %GP Name >>> g_CurrentGeneratorName
  g_OutFile := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
  TRY
-  Self ( aGen |RefDeepest DO )
+  Self ( aGen GetRefDeepestFromLeft DO )
   %REMARK 'Вызываем на элементе генератор aGen'
  FINALLY
   g_OutFile := nil

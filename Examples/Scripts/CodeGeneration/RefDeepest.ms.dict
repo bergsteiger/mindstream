@@ -30,3 +30,5 @@ WORD_REF OPERATOR |RefDeepest
  ' ;
  aSelf pop:Word:GetRefDeepest Addr Result pop:Word:SetValue
 ; // |RefDeepest
+
+WordAlias GetRefDeepestFromLeft |RefDeepest
