@@ -3903,6 +3903,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
 BOOLEAN OPERATOR : !==
  OPERATOR :: IN : aLeft
@@ -3916,6 +3917,11 @@ FUNCTOR : : |@
 : : |^
  ^@ OPERATOR :: IN : aRef
 ; // |^
+BOOLEAN OPERATOR : =/=
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: <> : Result
+; // =/=
 VOID OPERATOR : array:AddTo
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
@@ -3929,44 +3935,6 @@ IMMEDIATE VOID OPERATOR : RecurseProc
 IMMEDIATE VOID OPERATOR : this.do
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
 ; // this.do
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbols.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
- ;
-STRING FUNCTION : .Name
- OPERATOR :: IN : %S
- STRING FUNCTION :: |N : Result
-; // .Name
-TtfwWord Addr
-TtfwWord OPERATOR : GetRefFromLeft
- ^@ OPERATOR :: IN : aSelf
- TtfwWord OPERATOR :: |^@ : Result
-; // GetRefFromLeft
-IMMEDIATE VOID OPERATOR : this.method.addr
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  Uses: 
   axiom:axiom
@@ -4036,6 +4004,44 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dic
 IMMEDIATE VOID OPERATOR : Literal
  ^L OPERATOR :: IN : aName
 ; // Literal
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbols.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+ ;
+STRING FUNCTION : .Name
+ OPERATOR :: IN : %S
+ STRING FUNCTION :: |N : Result
+; // .Name
+TtfwWord Addr
+TtfwWord OPERATOR : GetRefFromLeft
+ ^@ OPERATOR :: IN : aSelf
+ TtfwWord OPERATOR :: |^@ : Result
+; // GetRefFromLeft
+IMMEDIATE VOID OPERATOR : this.method.addr
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.dict
  Uses: 
   axiom:axiom
