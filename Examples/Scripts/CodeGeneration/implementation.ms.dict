@@ -6,7 +6,7 @@ USES
  macro.ms.dict
 ;
 
-__MACRO implementation
+STACK_CHANGING_MACRO implementation
   ^ LINK IN aWordToWork
  Ctx:PushCompiler
  Ctx:PushFinder
@@ -22,7 +22,7 @@ __MACRO implementation
  l_NewCompiler pop:Finder:SetToCtx
 ; // implementation
  
-__MACRO end.
+STACK_CHANGING_MACRO end.
  pop:Finder:SetToCtx
  pop:Compiler:SetToCtx
 ; // end.

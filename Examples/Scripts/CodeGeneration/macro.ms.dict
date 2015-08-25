@@ -2,11 +2,13 @@ USES
  axiom_push.ms.dict
 ;
 
-VOID IMMEDIATE operator __MACRO
+VOID IMMEDIATE operator STACK_CHANGING_MACRO
  axiom:PushSymbol IMMEDIATE
  axiom:PushSymbol axiom:operator
  @SELF Ctx:SetWordProducerForCompiledClass
-; // __MACRO
+; // STACK_CHANGING_MACRO
+
+WordAlias __MACRO STACK_CHANGING_MACRO
 
 VOID IMMEDIATE operator _MACRO
  axiom:PushSymbol VOID
