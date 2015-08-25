@@ -15,3 +15,6 @@ WordAlias GetRefFromLeft |^@
 
 WordAlias Addr @
  %REMARK 'Получает адрес слова справа'
+
+WordAlias this.method.addr @SELF
+ %REMARK 'Адрес текущего метода'

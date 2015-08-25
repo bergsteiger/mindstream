@@ -4489,6 +4489,7 @@ TtfwWord OPERATOR : GetRefFromLeft
  ^@ OPERATOR :: IN : aSelf
  TtfwWord OPERATOR :: |^@ : Result
 ; // GetRefFromLeft
+IMMEDIATE VOID OPERATOR : this.method.addr
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  Uses: 
   axiom:axiom

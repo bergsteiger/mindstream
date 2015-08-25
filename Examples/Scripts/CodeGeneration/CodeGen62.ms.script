@@ -301,7 +301,7 @@ USES
  // - тут подключаем словарь CodeDump.ms.dict, чтобы "увидеть" слово DumpElement
 ;
 
-@SELF DumpElement
+this.method.addr DumpElement
 %REMARK
  '
  - тут дампим элемент CodeGen и его содержимое
@@ -346,7 +346,7 @@ PROCEDURE do_elem_func
 MACRO elem_func
  Literal IN aName
  %SUMMARY 'Функция на элементе модели' ;
- aName |N @SELF nil do_elem_func
+ aName |N this.method.addr nil do_elem_func
 ; // elem_func
 
 PROCEDURE do_elem_proc
@@ -362,19 +362,19 @@ PROCEDURE do_elem_proc
 MACRO elem_proc
  Literal IN aName
  %SUMMARY 'Процедура на элементе модели' ;
- aName |N @SELF nil do_elem_proc
+ aName |N this.method.addr nil do_elem_proc
 ; // elem_proc
 
 MACRO elem_generator
  Literal IN aName
  %SUMMARY 'Генератор содержимого элемента' ;
- aName |N @SELF nil do_elem_proc
+ aName |N this.method.addr nil do_elem_proc
 ; // elem_generator
 
 MACRO elem_ref_proc
  Literal IN aName
  %SUMMARY 'Процедура на элементе модели, который передаётся по ссылке' ;
- aName |N @SELF Addr LVALUE_MOD do_elem_proc
+ aName |N this.method.addr Addr LVALUE_MOD do_elem_proc
 ; // elem_ref_proc
 
 BOOLEAN elem_func IsSummary
@@ -479,7 +479,7 @@ CONST GEN_PROPERTY_PREFIX 'gp'
 MACRO %GEN_PROPERTY
  Literal IN aName
  %SUMMARY 'Свойство генератора' ;
- @SELF Ctx:SetWordProducerForCompiledClass
+ this.method.addr Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol CONST
  GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
 ; // %GEN_PROPERTY
@@ -494,7 +494,7 @@ TtfwWord OPERATOR pop:Word:GetRefDeepest
  if ( class::TkwCompiledVar Result pop:object:Inherits )
  %REMARK 'Если это переменная, то ...'
   ( 
-    Result DO @SELF DO Addr Result pop:Word:SetValue 
+    Result DO this.method.addr DO Addr Result pop:Word:SetValue 
     %REMARK '... разыменовываем её рекурсивно'
   )
 ; // pop:Word:GetRefDeepest
