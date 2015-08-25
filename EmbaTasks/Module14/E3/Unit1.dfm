@@ -28,9 +28,6 @@ object fmMain: TfmMain
     Height = 41
     Align = alTop
     TabOrder = 1
-    ExplicitLeft = 232
-    ExplicitTop = 128
-    ExplicitWidth = 185
   end
   object pnlMain: TPanel
     Left = 0
@@ -46,8 +43,12 @@ object fmMain: TfmMain
       Width = 436
       Height = 377
       Align = alTop
+      Lines.Strings = (
+        'cat line 1'
+        'lol line 2'
+        'lol line 3'
+        'dog line 4')
       TabOrder = 0
-      ExplicitTop = -41
     end
   end
 end
