@@ -163,8 +163,8 @@ VOID Test CodeGen
   OutToFile
   [
    'Родители элемента '
-   ( Self LIST >filter>
-   .IsModelElement
+   Self
+   .Parents
    Array:Reverted
    IT
    |N
