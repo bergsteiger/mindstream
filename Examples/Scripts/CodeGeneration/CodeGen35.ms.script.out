@@ -903,7 +903,10 @@ Dictionary: CodeGen35.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbols.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
@@ -914,6 +917,7 @@ Dictionary: CodeGen35.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
 Dictionary: axiom:axiom
  Uses: 
@@ -3662,7 +3666,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbols.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
@@ -3702,7 +3709,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbols.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
@@ -3742,8 +3752,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.
   axiom:ContainedAction
  ;
 VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  LINK ^ OPERATOR :: IN : aSymbol
 ; // axiom:PushSymbol
+VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushLeftDottedSymbol
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ STRING OPERATOR :: IN : aValue
+; // Ctx:Parser:PushLeftDottedSymbol
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
  Uses: 
   axiom:axiom
@@ -3833,6 +3848,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
 BOOLEAN OPERATOR : !==
  OPERATOR :: IN : aLeft
@@ -3846,14 +3862,184 @@ FUNCTOR : : |@
 : : |^
  ^@ OPERATOR :: IN : aRef
 ; // |^
+BOOLEAN OPERATOR : =/=
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: <> : Result
+; // =/=
 VOID OPERATOR : array:AddTo
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
 ; // array:AddTo
+IMMEDIATE VOID OPERATOR : call.me
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // call.me
 IMMEDIATE VOID OPERATOR : RecurseProc
  ^L OPERATOR :: IN : aName
 ; // RecurseProc
 IMMEDIATE VOID OPERATOR : this.do
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // this.do
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR : %REMARK
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // %REMARK
+IMMEDIATE VOID OPERATOR : REMARK
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // REMARK
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR : Literal
+ ^L OPERATOR :: IN : aName
+; // Literal
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbols.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+ ;
+STRING FUNCTION : .Name
+ OPERATOR :: IN : %S
+ STRING FUNCTION :: |N : Result
+; // .Name
+TtfwWord Addr
+TtfwWord OPERATOR : GetRefFromLeft
+ ^@ OPERATOR :: IN : aSelf
+ TtfwWord OPERATOR :: |^@ : Result
+; // GetRefFromLeft
+IMMEDIATE VOID OPERATOR : this.method.addr
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+ ;
+VOID CALLER OPERATOR : ?Assure
+ BOOLEAN OPERATOR :: IN : aCondition
+ ^ OPERATOR :: IN : aMessage
+ TtfwWord OPERATOR :: IN : Caller
+; // ?Assure
+IMMEDIATE VOID OPERATOR : array
+IMMEDIATE VOID OPERATOR :: TYPE : CallBack
+const
+Const
+IMMEDIATE VOID OPERATOR :: TYPE : Functor
+IMMEDIATE VOID OPERATOR :: TYPE : Lambda
+IMMEDIATE VOID OPERATOR :: TYPE : List
+IMMEDIATE VOID OPERATOR : private
+IMMEDIATE VOID OPERATOR : Private
+IMMEDIATE VOID OPERATOR :: TYPE : Sequence
+IMMEDIATE OPERATOR : type
+ ^L OPERATOR :: IN : aName
+; // type
+IMMEDIATE OPERATOR : Type
+ ^L OPERATOR :: IN : aName
+; // Type
+IMMEDIATE VOID OPERATOR : var
+ ^L OPERATOR :: IN : aName
+; // var
+IMMEDIATE OPERATOR : void
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
  Uses: 
   axiom:axiom
@@ -3882,18 +4068,28 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
+ ;
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
  ;
 IMMEDIATE VOID OPERATOR : in
  ^L OPERATOR :: private:DefineNameParam : aName
 ; // in
-IMMEDIATE VOID OPERATOR : Literal
+IMMEDIATE VOID OPERATOR : LVALUE
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName
-; // Literal
+; // LVALUE
+IMMEDIATE VOID OPERATOR : LVALUE_MOD
 PRIVATE VOID OPERATOR : MangledNamePusher
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: IN : aName
 ; // MangledNamePusher
+IMMEDIATE VOID OPERATOR : REF
 IMMEDIATE VOID OPERATOR : right
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_MangledName
  STRING OPERATOR :: VAR : l_Name
@@ -4323,7 +4519,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.d
   axiom:ActionList
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+ ;
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
 IMMEDIATE VOID OPERATOR : concrete-model-begin
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
@@ -4351,10 +4552,6 @@ IMMEDIATE VOID OPERATOR : model-begin
 IMMEDIATE VOID OPERATOR : model-end
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
 ; // model-end
-IMMEDIATE VOID OPERATOR : REMARK
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aDoc
-; // REMARK
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM

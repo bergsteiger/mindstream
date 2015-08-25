@@ -38,7 +38,9 @@ MACRO model-end
  %SUMMARY 'Конец определения модели' ;
 ; // model-end
 
-MACRO REMARK
- Literal IN aDoc
- %SUMMARY 'Ремарка' ;
-; // REMARK
+USES
+ Documentation.ms.dict
+;
+
+EXPORTS
+ Documentation.ms.dict

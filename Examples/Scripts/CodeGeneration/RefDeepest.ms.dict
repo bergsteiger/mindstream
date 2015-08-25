@@ -1,0 +1,34 @@
+USES
+ Documentation.ms.dict
+ NoStrangeSymbols.ms.dict
+ params.ms.dict
+;
+
+TtfwWord TYPE WORD_REF
+ %REMARK 'Ссылка на слово'
+
+WORD_REF OPERATOR pop:Word:GetRefDeepest
+ WORD_REF IN aSelf
+ %SUMMARY '
+ Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные.
+ Аналог pop:Word:GetRefDeep.
+ ' ;
+ aSelf pop:Word:GetRefDeep Addr Result pop:Word:SetValue
+ if ( class::TkwCompiledVar Result pop:object:Inherits )
+ %REMARK 'Если это переменная, то ...'
+  ( 
+    Result DO this.method.addr DO Addr Result pop:Word:SetValue 
+    %REMARK '... разыменовываем её рекурсивно'
+  )
+; // pop:Word:GetRefDeepest
+
+WORD_REF OPERATOR |RefDeepest
+ LVALUE aSelf
+ %SUMMARY '
+ Метод получения ссылки из aSelf, с учётом того, что могут передавать переменные.
+ Аналог GetRefFromLeft.
+ ' ;
+ aSelf pop:Word:GetRefDeepest Addr Result pop:Word:SetValue
+; // |RefDeepest
+
+WordAlias GetRefDeepestFromLeft |RefDeepest

@@ -6,4 +6,42 @@ Hello
 2048
 EtfwRunner
 OPERATOR :: (Line 1083, kwMain.script) |=> Не найдено поле: TkwCompiledMain::WithTest::A::B::Z::abs
-Assertion failure (w:\common\components\rtl\Garant\ScriptEngine\tfwDefaultScriptCaller.pas, line 160)
+CreateAndRaise
+BEGIN (Line 379, kwMain.script)
+if (Line 381, kwMain.script)
+OPERATOR private:ERROR (Line 375, kwMain.script)
+BEGIN (Line 397, kwMain.script)
+? (Line 399, kwMain.script)
+OPERATOR ASSURE (Line 393, kwMain.script)
+ASSURE (Line 1098, kwMain.script)
+OPERATOR :: (Line 1083, kwMain.script)
+:: (Line 36, With.ms.script)
+TRY (Line 35, With.ms.script)
+20
+Hello
+20
+Hello
+<void>
+<void>
+20
+Hello
+<void>
+2048
+2048
+20
+<void>
+: WithTest
+: A
+: B
+: C
+OPERATOR VAR Y
+OPERATOR VAR Z
+OPERATOR VAR X
+: B
+: C
+OPERATOR VAR Y
+OPERATOR VAR Z
+: C
+OPERATOR VAR Y
+OPERATOR VAR Z
+TkwMain TkwCompiledMain
