@@ -659,9 +659,9 @@ ARRAY VAR Projects
 Projects := [ Addr Project1 Addr Project2 Addr Project3 ]
 %REMARK 'Список всех наших корневых элементов (проектов)'
 
-Projects
+[ Addr Project1 Addr Project2 Addr Project3 ]
 %REMARK 'Список всех наших корневых элементов (проектов)'
- Generators
+ [ Addr .dump Addr .pas Addr .c++ Addr .h ]
  %REMARK 'Список всех наших генераторов' 
   CallGens
   %REMARK '- запускаем список генераторов на списке "рутовых элементов" модели.'

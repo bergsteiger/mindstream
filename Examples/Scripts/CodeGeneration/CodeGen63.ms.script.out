@@ -837,8 +837,24 @@ VOID Test CodeGen
   @
   Project3
  ]
- Projects
- Generators
+ [
+  @
+  Project1
+  @
+  Project2
+  @
+  Project3
+ ]
+ [
+  @
+  .dump
+  @
+  .pas
+  @
+  .c++
+  @
+  .h
+ ]
  CallGens
 ; // VOID Test CodeGen
 
