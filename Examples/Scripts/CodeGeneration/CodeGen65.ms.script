@@ -544,6 +544,10 @@ STRING VAR g_CurrentGeneratorName
 %REMARK 'Имя текущего генератора'
 g_CurrentGeneratorName := ''
 
+GENERATOR VAR g_CurrentGenerator
+%REMARK 'Текущий генератор'
+g_CurrentGenerator := nil
+
 elem_proc CallGen
  GENERATOR RIGHT IN aGen
 

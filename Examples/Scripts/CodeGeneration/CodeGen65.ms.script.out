@@ -606,6 +606,7 @@ VOID Test CodeGen
   Result
  ; // ^@ OPERATOR FieldByNameDeepest
  
+ GENERATOR VAR g_CurrentGenerator
  STRING VAR g_CurrentGeneratorName
  INTEGER VAR g_Indent
  FILE VAR g_OutFile
@@ -829,6 +830,8 @@ VOID Test CodeGen
  nil
  g_CurrentGeneratorName :=
  ''
+ g_CurrentGenerator :=
+ nil
  ( Project1 Project2 Project3 ( .dump .pas .c++ .h CallGensList
 ; // VOID Test CodeGen
 
@@ -5537,6 +5540,7 @@ TkwMain : Main
    ENGINE_WORD OPERATOR :: VAR : l_Self
    ^@ OPERATOR :: FieldByNameDeepest : Result
   ; // FieldByNameDeepest
+  GENERATOR OPERATOR :: VAR : g_CurrentGenerator
   STRING OPERATOR :: VAR : g_CurrentGeneratorName
   INTEGER OPERATOR :: VAR : g_Indent
   FILE OPERATOR :: VAR : g_OutFile
