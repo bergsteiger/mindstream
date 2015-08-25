@@ -4479,6 +4479,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
 VOID CALLER OPERATOR : ?Assure
  BOOLEAN OPERATOR :: IN : aCondition
@@ -4502,55 +4503,6 @@ IMMEDIATE VOID OPERATOR : var
  ^L OPERATOR :: IN : aName
 ; // var
 IMMEDIATE OPERATOR : void
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
- ;
- Exports: 
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
- ;
-IMMEDIATE VOID OPERATOR : in
- ^L OPERATOR :: private:DefineNameParam : aName
-; // in
-PRIVATE VOID OPERATOR : MangledNamePusher
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- STRING OPERATOR :: IN : aName
-; // MangledNamePusher
-IMMEDIATE VOID OPERATOR : right
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aName
- STRING OPERATOR :: VAR : l_MangledName
- STRING OPERATOR :: VAR : l_Name
-; // right
-IMMEDIATE VOID OPERATOR : RIGHT
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  Uses: 
   axiom:axiom
@@ -4620,6 +4572,55 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dic
 IMMEDIATE VOID OPERATOR : Literal
  ^L OPERATOR :: IN : aName
 ; // Literal
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
+ ;
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR : in
+ ^L OPERATOR :: private:DefineNameParam : aName
+; // in
+PRIVATE VOID OPERATOR : MangledNamePusher
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ STRING OPERATOR :: IN : aName
+; // MangledNamePusher
+IMMEDIATE VOID OPERATOR : right
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+ STRING OPERATOR :: VAR : l_MangledName
+ STRING OPERATOR :: VAR : l_Name
+; // right
+IMMEDIATE VOID OPERATOR : RIGHT
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
  Uses: 
   axiom:axiom
