@@ -20,6 +20,7 @@ object fmMain: TfmMain
     Height = 37
     Caption = 'DoIt'
     TabOrder = 0
+    OnClick = btnDoItClick
   end
   object pnlTop: TPanel
     Left = 0
@@ -28,9 +29,6 @@ object fmMain: TfmMain
     Height = 41
     Align = alTop
     TabOrder = 1
-    ExplicitLeft = 232
-    ExplicitTop = 128
-    ExplicitWidth = 185
   end
   object pnlMain: TPanel
     Left = 0
@@ -46,8 +44,17 @@ object fmMain: TfmMain
       Width = 436
       Height = 377
       Align = alTop
+      Lines.Strings = (
+        'qweqweqweqweqweqwqwe'
+        'qweqweqweqwe'
+        'qweqweqweqweqw'
+        'qweqweqweqweqweqweqwe'
+        'qweqweqweqweqweqweqweqweqweqwe'
+        'qweqweqweqweqweqweqwe'
+        'qweqweqweqweqw'
+        'qweqweqweqwe'
+        'qweqweqweqweqweqweqwe')
       TabOrder = 0
-      ExplicitTop = -41
     end
   end
 end
