@@ -4478,6 +4478,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
  ;
@@ -4496,6 +4497,43 @@ IMMEDIATE VOID OPERATOR : right
  STRING OPERATOR :: VAR : l_Name
 ; // right
 IMMEDIATE VOID OPERATOR : RIGHT
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR : %REMARK
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // %REMARK
+IMMEDIATE VOID OPERATOR : REMARK
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // REMARK
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
  Uses: 
   axiom:axiom
@@ -4985,43 +5023,6 @@ IMMEDIATE VOID OPERATOR : model-begin
 IMMEDIATE VOID OPERATOR : model-end
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
 ; // model-end
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
- ;
-IMMEDIATE VOID OPERATOR : %REMARK
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aDoc
-; // %REMARK
-IMMEDIATE VOID OPERATOR : REMARK
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aDoc
-; // REMARK
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations.ms.dict
  Uses: 
   axiom:axiom
