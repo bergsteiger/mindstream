@@ -374,7 +374,7 @@ MACRO elem_generator
 MACRO elem_ref_proc
  Literal IN aName
  %SUMMARY 'Процедура на элементе модели, который передаётся по ссылке' ;
- aName |N @SELF @ ^@ do_elem_proc
+ aName |N @SELF @ LVALUE_MOD do_elem_proc
 ; // elem_ref_proc
 
 BOOLEAN elem_func IsSummary
