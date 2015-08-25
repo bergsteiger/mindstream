@@ -210,6 +210,20 @@ VOID Test CodeGen
   g_Indent
  ; // VOID elem_proc .EnterElement
  
+ VOID elem_generator .h
+  %SUMMARY %SUM
+   ' Генератор выводящий элементы модели в *.h.  Про файлы *.h мы потом поговорим отдельно. '
+  ; // %SUMMARY %SUM
+  
+  STRING %GEN_PROPERTY gpName
+   'h'
+  ; // STRING %GEN_PROPERTY gpName
+  
+  ModelElement IN Self
+  Self
+  .DumpAsIs
+ ; // VOID elem_generator .h
+ 
  BOOLEAN elem_func .IsElementNeedIndent
   %SUMMARY %SUM
    'Определяет тот факт, что элементу нужен отступ'
@@ -845,6 +859,8 @@ VOID Test CodeGen
   .pas
   @
   .c++
+  @
+  .h
  ]
  Projects :=
  [
@@ -5009,6 +5025,11 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : Self
   ; // .EnterElement
+  VOID OPERATOR :: elem_generator : .h
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   STRING OPERATOR :: %GEN_PROPERTY : gpName
+   ModelElement OPERATOR :: IN : Self
+  ; // .h
   BOOLEAN OPERATOR :: elem_func : .IsElementNeedIndent
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    BOOLEAN OPERATOR :: elem_func :: .IsElementNeedIndent : Result

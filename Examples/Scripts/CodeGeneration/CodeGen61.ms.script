@@ -656,8 +656,20 @@ elem_generator c++
  %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
 ; // c++
 
+elem_generator h
+ %SUMMARY '
+ Генератор выводящий элементы модели в *.h. 
+ Про файлы *.h мы потом поговорим отдельно.
+ ' ;
+ %GEN_PROPERTY Name 'h'
+ %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
+
+ Self .DumpAsIs
+ %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
+; // h
+
 ARRAY VAR Generators
-Generators := [ @ .dump @ .pas @ .c++ ]
+Generators := [ @ .dump @ .pas @ .c++ @ .h ]
 %REMARK 'Список всех наших генераторов'
 
 ARRAY VAR Projects
