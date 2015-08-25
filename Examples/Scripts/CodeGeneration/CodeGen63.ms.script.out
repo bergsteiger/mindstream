@@ -439,6 +439,14 @@ VOID Test CodeGen
   )
  ; // VOID PROCEDURE CallGens
  
+ VOID PROCEDURE CallGensList
+  ARRAY IN aGenerators
+  ARRAY IN anElements
+  anElements
+  aGenerators
+  CallGens
+ ; // VOID PROCEDURE CallGensList
+ 
  VOID PROCEDURE do_elem_func
   %SUMMARY %SUM
    'Реализация do_elem_func, elem_proc и elem_generator'
@@ -833,7 +841,7 @@ VOID Test CodeGen
   @
   .h
  ]
- CallGens
+ CallGensList
 ; // VOID Test CodeGen
 
 Dictionary: axiom:Array
@@ -5318,6 +5326,10 @@ TkwMain : Main
    ARRAY OPERATOR :: IN : aGenerators
    ARRAY OPERATOR :: IN : anElements
   ; // CallGens
+  VOID OPERATOR :: PROCEDURE : CallGensList
+   ARRAY OPERATOR :: IN : aGenerators
+   ARRAY OPERATOR :: IN : anElements
+  ; // CallGensList
   VOID OPERATOR :: PROCEDURE : do_elem_func
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ENGINE_WORD OPERATOR :: IN : aModifier

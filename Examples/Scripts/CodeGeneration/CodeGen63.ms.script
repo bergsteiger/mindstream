@@ -577,6 +577,14 @@ PROCEDURE CallGens
  ) // for anElements
 ; // CallGens
 
+PROCEDURE CallGensList
+ ARRAY IN anElements
+ ARRAY IN aGenerators
+ anElements
+  aGenerators
+   CallGens
+; // CallGensList
+
 // ---------------------------------------------------------------------------
 
 elem_proc DumpAsIs
@@ -655,7 +663,7 @@ elem_generator h
 %REMARK 'Список всех наших корневых элементов (проектов)'
  [ Addr .dump Addr .pas Addr .c++ Addr .h ]
  %REMARK 'Список всех наших генераторов' 
-  CallGens
+  CallGensList
   %REMARK '- запускаем список генераторов на списке "рутовых элементов" модели.'
 
 ; // CodeGen
