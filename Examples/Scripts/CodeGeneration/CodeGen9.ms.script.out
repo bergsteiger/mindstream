@@ -692,6 +692,7 @@ Dictionary: CodeGen9.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
 Dictionary: axiom:axiom
  Uses: 
@@ -4112,11 +4113,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.d
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
-IMMEDIATE VOID OPERATOR : %REMARK
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aDoc
-; // %REMARK
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+ ;
 IMMEDIATE VOID OPERATOR : concrete-model-begin
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aDoc
@@ -4143,6 +4144,39 @@ IMMEDIATE VOID OPERATOR : model-begin
 IMMEDIATE VOID OPERATOR : model-end
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
 ; // model-end
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR : %REMARK
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // %REMARK
 IMMEDIATE VOID OPERATOR : REMARK
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aDoc
