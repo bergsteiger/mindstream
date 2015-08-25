@@ -6,7 +6,7 @@ USES
  macro.ms.dict
 ;
 
-IMMEDIATE operator implementation
+__MACRO implementation
   ^ LINK IN aWordToWork
  Ctx:PushCompiler
  Ctx:PushFinder
@@ -22,7 +22,7 @@ IMMEDIATE operator implementation
  l_NewCompiler pop:Finder:SetToCtx
 ; // implementation
  
-IMMEDIATE operator end.
+__MACRO end.
  pop:Finder:SetToCtx
  pop:Compiler:SetToCtx
 ; // end.
