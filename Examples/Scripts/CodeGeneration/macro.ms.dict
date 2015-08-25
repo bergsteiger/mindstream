@@ -4,6 +4,7 @@ USES
 
 VOID IMMEDIATE operator __MACRO
  axiom:PushSymbol IMMEDIATE
+ axiom:PushSymbol axiom:operator
 ; // __MACRO
 
 VOID IMMEDIATE operator _MACRO
