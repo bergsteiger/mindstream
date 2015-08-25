@@ -4617,6 +4617,7 @@ PRIVATE VOID OPERATOR : MangledNamePusher
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: IN : aName
 ; // MangledNamePusher
+IMMEDIATE VOID OPERATOR : REF
 IMMEDIATE VOID OPERATOR : right
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName
