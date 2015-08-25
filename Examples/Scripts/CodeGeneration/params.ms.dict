@@ -7,12 +7,12 @@ WordAlias RIGHT ^
 
 WordAlias in IN
 
-MACRO Literal
- ^L IN aName
- @SELF Ctx:SetWordProducerForCompiledClass
- axiom:PushSymbol ^L
- aName |N Ctx:Parser:PushSymbol
-; // Literal
+USES
+ Literal.ms.dict
+;
+
+EXPORTS
+ Literal.ms.dict
 
 USES
  core.ms.dict
