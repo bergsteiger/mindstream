@@ -3780,11 +3780,16 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbo
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
+STRING FUNCTION : .Name
+ OPERATOR :: IN : %S
+ STRING FUNCTION :: |N : Result
+; // .Name
 TtfwWord Addr
 TtfwWord OPERATOR : GetRefFromLeft
  ^@ OPERATOR :: IN : aSelf
  TtfwWord OPERATOR :: |^@ : Result
 ; // GetRefFromLeft
+IMMEDIATE VOID OPERATOR : this.method.addr
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  Uses: 
   axiom:axiom
