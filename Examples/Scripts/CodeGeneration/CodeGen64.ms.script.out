@@ -839,8 +839,6 @@ Dictionary: axiom:clipboard
 VOID clipboard:clear
 STRING clipboard:GetFormattedText
 VOID clipboard:SetText
-Dictionary: axiom:CompiledWordWorkerWord
-TtfwWord pop:CompiledWordWorkerWord:Compiled
 Dictionary: axiom:Control
 TComponent byname:control:push
 TControl Control:ByHandle
@@ -896,8 +894,6 @@ INTEGER desktop:Height
 INTEGER desktop:Width
 Dictionary: axiom:exception
 Dictionary: axiom:File
-Dictionary: axiom:Finder
-VOID pop:Finder:SetToCtx
 Dictionary: axiom:Font
 TColor Font:BackColor
 TColor Font:Color
@@ -1457,6 +1453,8 @@ Dictionary: CodeGen64.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\EngineTypes.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Object.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\implementation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\RefDeepest.ms.dict
  ;
 Dictionary: axiom:axiom
@@ -5153,6 +5151,188 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\EngineTypes.ms
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: TYPE : ENGINE_WORD
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Object.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\implementation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+ ;
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\implementation.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %FIELDS
+ARRAY FUNCTION : %Fld
+ OPERATOR :: IN : %S
+ OPERATOR :: VAR : l_List
+ ARRAY FUNCTION :: %Fld : Result
+; // %Fld
+ARRAY FUNCTION : %G
+ OPERATOR :: IN : %S
+ ARRAY FUNCTION :: %G : Result
+; // %G
+ARRAY FUNCTION : %R
+ OPERATOR :: IN : %S
+ ARRAY FUNCTION :: %R : Result
+; // %R
+OPERATOR :: class_impl : _:Object
+ OPERATOR :: NamedWordProducer :: %FIELDS : %Fld
+; // _:Object
+INTEGER CONST : c:Object:Instance:Size
+INTEGER CONST : c:Object:Offset:VMT
+IMMEDIATE VOID OPERATOR :: MACRO : class
+ ^L OPERATOR :: IN : aName
+; // class
+VOID OPERATOR : class_impl
+IMMEDIATE VOID OPERATOR :: MACRO : class-end
+IMMEDIATE VOID OPERATOR :: MACRO : classExpander
+ ^ OPERATOR :: IN : anImpl
+; // classExpander
+STRING CONST : cObjectName
+IMMEDIATE VOID OPERATOR :: MACRO : constructor
+ ^L OPERATOR :: IN : aName
+; // constructor
+VOID OPERATOR : define_member
+ STRING OPERATOR :: IN : aName
+ INTEGER OPERATOR :: IN : aOffset
+; // define_member
+PRIVATE OPERATOR : do-get-member
+ STRING OPERATOR :: IN : aName
+; // do-get-member
+OBJECT FUNCTION : DoMember
+ OBJECT OPERATOR :: IN : aMember
+ OBJECT FUNCTION :: DoMember : Result
+; // DoMember
+ARRAY FUNCTION : ELEMLIST
+ OPERATOR :: IN : %S
+ STRING OPERATOR :: IN : aListName
+ ARRAY FUNCTION :: ELEMLIST : Result
+; // ELEMLIST
+: : FieldByOffset
+ ^ OPERATOR :: IN : _anOffset
+ IMMEDIATE VOID OPERATOR : anOffset
+ Object OPERATOR :: IN : Self
+; // FieldByOffset
+IMMEDIATE VOID OPERATOR :: TYPE : FieldOffset
+BOOLEAN FUNCTION : FilterMember
+ OBJECT OPERATOR :: IN : aMember
+ BOOLEAN FUNCTION :: FilterMember : Result
+; // FilterMember
+INTEGER OPERATOR :: VAR : g_ClassFieldOffset
+STRING OPERATOR :: VAR : g_CurrentClass
+STRING OPERATOR :: VAR : g_CurrentClassImpl
+ARRAY OPERATOR :: VAR : g_CurrentClassMembers
+STRING : : getClassName
+ STRING : :: getClassName : Result
+ OPERATOR :: IN : Self
+; // getClassName
+IMMEDIATE VOID OPERATOR :: MACRO : get-member
+ ^L OPERATOR :: IN : aName
+; // get-member
+PRIVATE STRING OPERATOR : MakeFieldOffsetName
+ STRING OPERATOR :: IN : aName
+ PRIVATE STRING OPERATOR :: MakeFieldOffsetName : Result
+; // MakeFieldOffsetName
+PRIVATE VOID OPERATOR : MakeMethodSignature
+ STRING OPERATOR :: IN : aName
+; // MakeMethodSignature
+PRIVATE VOID OPERATOR : MakeSelfParam
+IMMEDIATE VOID OPERATOR :: MACRO : member
+ ^L OPERATOR :: IN : aName
+; // member
+IMMEDIATE VOID OPERATOR :: MACRO : members-end
+IMMEDIATE VOID OPERATOR :: MACRO : method
+ ^L OPERATOR :: IN : aName
+; // method
+IMMEDIATE VOID OPERATOR :: MACRO : new[
+IMMEDIATE VOID OPERATOR : Object
+TtfwWord OPERATOR :: MACRO :: readonly : Object:class
+ TtfwWord OPERATOR :: MACRO :: readonly :: Object:class : Result
+ Object OPERATOR :: IN : Self
+; // Object:class
+STRING OPERATOR :: MACRO :: readonly : Object:ClassName
+ STRING OPERATOR :: MACRO :: readonly :: Object:ClassName : Result
+ Object OPERATOR :: IN : Self
+; // Object:ClassName
+ABSTRACT STRING OPERATOR :: MACRO :: method : Object:ToPrintable
+ ABSTRACT STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
+ Object OPERATOR :: IN : Self
+; // Object:ToPrintable
+IMMEDIATE VOID OPERATOR :: MACRO : read
+ ^L OPERATOR :: IN : aName
+; // read
+IMMEDIATE VOID OPERATOR :: MACRO : readonly
+ ^L OPERATOR :: IN : aName
+; // readonly
+IMMEDIATE VOID OPERATOR :: MACRO : RunCompileFields
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\implementation.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  axiom:CompiledWordWorkerWord
+  axiom:Finder
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+ ;
+IMMEDIATE OPERATOR :: STACK_CHANGING_MACRO : end.
+IMMEDIATE OPERATOR :: STACK_CHANGING_MACRO : implementation
+ LINK ^ OPERATOR :: IN : aWordToWork
+ OBJECT OPERATOR :: VAR : l_NewCompiler
+; // implementation
+Dictionary: axiom:CompiledWordWorkerWord
+TtfwWord pop:CompiledWordWorkerWord:Compiled
+Dictionary: axiom:Finder
+VOID pop:Finder:SetToCtx
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\RefDeepest.ms.dict
  Uses: 
   axiom:axiom
