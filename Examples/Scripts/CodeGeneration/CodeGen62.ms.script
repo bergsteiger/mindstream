@@ -337,7 +337,7 @@ PROCEDURE do_elem_func
  axiom:PushSymbol :
  aName Ctx:Parser:PushLeftDottedSymbol
  axiom:PushSymbol ModelElement
- if ( aModifier !== nil ) then
+ if ( aModifier =/= nil ) then
   ( aModifier .Name Ctx:Parser:PushSymbol )
  axiom:PushSymbol in
  'Self' Ctx:Parser:PushSymbol

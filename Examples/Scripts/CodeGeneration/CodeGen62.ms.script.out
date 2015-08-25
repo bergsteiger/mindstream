@@ -4403,6 +4403,11 @@ FUNCTOR : : |@
 : : |^
  ^@ OPERATOR :: IN : aRef
 ; // |^
+BOOLEAN OPERATOR : =/=
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: <> : Result
+; // =/=
 VOID OPERATOR : array:AddTo
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight

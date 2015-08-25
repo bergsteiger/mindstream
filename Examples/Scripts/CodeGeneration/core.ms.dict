@@ -36,7 +36,9 @@ MACRO this.do
 ; // this.do
 
 WordAlias call.me this.do
-
 WordAlias array:AddTo >>>[]
 
 WordAlias !== <>
+ %REMARK 'Оператор НЕ РАВНО. Двусторонний, а не ОПЗ. Может сравнивать значения РАЗНЫХ типов.'
+WordAlias =/= !==
+ %REMARK 'Оператор НЕ РАВНО. Двусторонний, а не ОПЗ. Может сравнивать значения РАЗНЫХ типов.'
