@@ -465,6 +465,10 @@ PROCEDURE OutToFile
 FUNCTOR TYPE GENERATOR
 %REMARK 'Генератор содержимого элемента'
 
+GENERATOR VAR g_CurrentGenerator
+%REMARK 'Текущий генератор'
+g_CurrentGenerator := nil
+
 elem_proc Child.CallGen
  GENERATOR right aGen
  %SUMMARY 'Вызывает на ДОЧЕРНЕМ элементе генератор aGen с учётом отступов' ;
@@ -543,10 +547,6 @@ STRING FUNCTION OutFileName
 STRING VAR g_CurrentGeneratorName
 %REMARK 'Имя текущего генератора'
 g_CurrentGeneratorName := ''
-
-GENERATOR VAR g_CurrentGenerator
-%REMARK 'Текущий генератор'
-g_CurrentGenerator := nil
 
 elem_proc CallGen
  GENERATOR RIGHT IN aGen

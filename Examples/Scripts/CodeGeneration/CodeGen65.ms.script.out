@@ -828,10 +828,10 @@ VOID Test CodeGen
  0
  g_OutFile :=
  nil
- g_CurrentGeneratorName :=
- ''
  g_CurrentGenerator :=
  nil
+ g_CurrentGeneratorName :=
+ ''
  ( Project1 Project2 Project3 ( .dump .pas .c++ .h CallGensList
 ; // VOID Test CodeGen
 
