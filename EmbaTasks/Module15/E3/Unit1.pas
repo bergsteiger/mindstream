@@ -10,12 +10,9 @@ type
   TfmMain = class(TForm)
     btnDoIt: TButton;
     pnlTop: TPanel;
-    lblNumbers: TLabel;
-    lblEvenNumbers: TLabel;
-    lblOddNumbers: TLabel;
-    memNumbers: TMemo;
-    memEvenNumbers: TMemo;
-    memOddNumbers: TMemo;
+    memFirst: TMemo;
+    memSecond: TMemo;
+    memResult: TMemo;
     procedure btnDoItClick(Sender: TObject);
   private
     { Private declarations }
@@ -32,21 +29,24 @@ implementation
 
 procedure TfmMain.btnDoItClick(Sender: TObject);
 var
-  Index,
-  EvenNumber : integer;
-  OddNumber : double;
+  FirstMemIndex,
+  SecondMemIndex : integer;
+  IsIdenticalLine : boolean;
 begin
-  for Index := 0 to memNumbers.Lines.Count - 1 do
-    if (StrToInt(memNumbers.Lines[Index]) mod 2) = 0 then
-    begin
-      EvenNumber := StrToInt(memNumbers.Lines[Index]) * 2;
-      memEvenNumbers.Lines[0] := memEvenNumbers.Lines[0] + ' ' + IntToStr(EvenNumber);
-    end
-    else
-    begin
-      OddNumber := StrToInt(memNumbers.Lines[Index]) / 2;
-      memOddNumbers.Lines[0] := memOddNumbers.Lines[0] + ' ' + FloatToStr(OddNumber);
-    end;
+  IsIdenticalLine := False;
+
+  memResult.Lines.Clear;
+
+  for FirstMemIndex := 0 to memFirst.Lines.Count - 1 do
+    for SecondMemIndex := 0 to memSecond.Lines.Count - 1 do
+      if Pos(memFirst.Lines[FirstMemIndex], memSecond.Lines[SecondMemIndex]) > 0 then
+      begin
+        memResult.Lines.Add(memFirst.Lines[FirstMemIndex]);
+        IsIdenticalLine := True;
+      end;
+
+  if not IsIdenticalLine then
+    memResult.Lines.Add('there are no identical lines')
 end;
 
 end.

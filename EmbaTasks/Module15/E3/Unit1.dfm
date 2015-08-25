@@ -29,58 +29,41 @@ object fmMain: TfmMain
     Height = 217
     Align = alTop
     TabOrder = 1
-    ExplicitWidth = 438
-    object lblNumbers: TLabel
-      Left = 32
-      Top = 24
-      Width = 42
-      Height = 13
-      Caption = 'Numbers'
-    end
-    object lblEvenNumbers: TLabel
-      Left = 160
-      Top = 24
-      Width = 69
-      Height = 13
-      Caption = 'Even Numbers'
-    end
-    object lblOddNumbers: TLabel
-      Left = 304
-      Top = 24
-      Width = 65
-      Height = 13
-      Caption = 'Odd Numbers'
-    end
-    object memNumbers: TMemo
+    object memFirst: TMemo
       Left = 0
-      Top = 56
+      Top = 0
       Width = 137
-      Height = 161
+      Height = 217
       Lines.Strings = (
-        '0'
-        '1'
-        '2'
-        '3'
-        '4'
-        '5'
-        '6'
-        '7'
-        '8'
-        '9')
+        'Book'
+        'Table'
+        'Desk'
+        'Home'
+        'Mouse'
+        'Cat'
+        'Dog')
       TabOrder = 0
     end
-    object memEvenNumbers: TMemo
+    object memSecond: TMemo
       Left = 136
-      Top = 56
+      Top = 0
       Width = 137
-      Height = 161
+      Height = 217
+      Lines.Strings = (
+        'Book'
+        'Home'
+        'Project'
+        'Cat'
+        'Group'
+        'Dog'
+        'Phone')
       TabOrder = 1
     end
-    object memOddNumbers: TMemo
+    object memResult: TMemo
       Left = 272
-      Top = 56
+      Top = 0
       Width = 137
-      Height = 161
+      Height = 217
       TabOrder = 2
     end
   end
