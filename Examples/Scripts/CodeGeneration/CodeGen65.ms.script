@@ -562,7 +562,7 @@ elem_proc CallGen
  g_OutFile := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
  TRY
   g_CurrentGenerator := ( aGen GetRefDeepestFromLeft )
-  g_CurrentGenerator Print
+  g_CurrentGenerator .Name Print
   Self ( aGen GetRefDeepestFromLeft DO )
   %REMARK 'Вызываем на элементе генератор aGen'
  FINALLY

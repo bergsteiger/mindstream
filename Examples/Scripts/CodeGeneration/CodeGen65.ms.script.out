@@ -83,6 +83,7 @@ VOID Test CodeGen
     aGen |RefDeepest
    )
    g_CurrentGenerator
+   |N
    .
    Self
    (
@@ -5610,15 +5611,15 @@ TkwMain : Main
   ; // Project3
  ; // CodeGen
 ; // Main
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedureWithStackChecking
+.dump
+.pas
+.c++
+.h
+.dump
+.pas
+.c++
+.h
+.dump
+.pas
+.c++
+.h
