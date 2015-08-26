@@ -78,6 +78,12 @@ VOID Test CodeGen
    File:OpenWrite
   )
   TRY
+   g_CurrentGenerator :=
+   (
+    aGen |RefDeepest
+   )
+   g_CurrentGenerator
+   .
    Self
    (
     aGen |RefDeepest
@@ -5604,3 +5610,15 @@ TkwMain : Main
   ; // Project3
  ; // CodeGen
 ; // Main
+TkwCompiledProcedureWithStackChecking
+TkwCompiledProcedureWithStackChecking
+TkwCompiledProcedureWithStackChecking
+TkwCompiledProcedureWithStackChecking
+TkwCompiledProcedureWithStackChecking
+TkwCompiledProcedureWithStackChecking
+TkwCompiledProcedureWithStackChecking
+TkwCompiledProcedureWithStackChecking
+TkwCompiledProcedureWithStackChecking
+TkwCompiledProcedureWithStackChecking
+TkwCompiledProcedureWithStackChecking
+TkwCompiledProcedureWithStackChecking
