@@ -1,4 +1,14 @@
 VOID Test CodeGen
+ ARRAY FUNCTION %G
+  IN %S
+  Result :=
+  (
+   '%G'
+   %S
+   ELEMLIST
+  )
+ ; // ARRAY FUNCTION %G
+ 
  IMMEDIATE VOID MACRO %GEN_PROPERTY
   %SUMMARY %SUM
    'Свойство генератора'
@@ -34,6 +44,16 @@ VOID Test CodeGen
   )
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID MACRO %GP
+ 
+ ARRAY FUNCTION %R
+  IN %S
+  Result :=
+  (
+   '%R'
+   %S
+   ELEMLIST
+  )
+ ; // ARRAY FUNCTION %R
  
  %SUMMARY %SUM
   ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
@@ -515,6 +535,30 @@ VOID Test CodeGen
   do_elem_func
  ; // VOID PROCEDURE do_elem_proc
  
+ OBJECT FUNCTION DoMember
+  OBJECT IN anUIDVar
+  VAR l_Element
+  anUIDVar
+  DO
+  >>>
+  l_Element
+  if
+   (
+    l_Element
+    IsVoid
+   )
+  then
+   (
+    Result :=
+    nil
+   )
+  else
+   (
+    Result :=
+    l_Element
+   )
+ ; // OBJECT FUNCTION DoMember
+ 
  IMMEDIATE VOID MACRO elem_func
   %SUMMARY %SUM
    'Функция на элементе модели'
@@ -568,6 +612,61 @@ VOID Test CodeGen
   do_elem_proc
  ; // IMMEDIATE VOID MACRO elem_ref_proc
  
+ ARRAY FUNCTION ELEMLIST
+  IN %S
+  STRING IN aListName
+  if
+   (
+    %S
+    NotValid
+   )
+  then
+   (
+    Result :=
+    [
+    ]
+   )
+  else
+   (
+    VAR l_List
+    l_List :=
+    (
+     %S
+     %%
+     aListName
+    )
+    if
+     (
+      l_List
+      NotValid
+     )
+    then
+     (
+      Result :=
+      [
+      ]
+     )
+    else
+     (
+      Result :=
+      (
+       @
+       FilterMember
+       (
+        @
+        DoMember
+        (
+         l_List
+         CodeIterator
+        )
+        Array:Map
+       )
+       Array:Filter
+      )
+     )
+   )
+ ; // ARRAY FUNCTION ELEMLIST
+ 
  ^@ OPERATOR FieldByNameDeepest
   %SUMMARY %SUM
    'Метод получения вложенного члена слова по имени. С учётом того, что может быть передана ссылка на переменную'
@@ -616,6 +715,16 @@ VOID Test CodeGen
   >>>
   Result
  ; // ^@ OPERATOR FieldByNameDeepest
+ 
+ BOOLEAN FUNCTION FilterMember
+  OBJECT IN aMember
+  Result :=
+  (
+   aMember
+   NotValid
+   !
+  )
+ ; // BOOLEAN FUNCTION FilterMember
  
  GENERATOR VAR g_CurrentGenerator
  STRING VAR g_CurrentGeneratorName
@@ -5396,6 +5505,10 @@ WORD_REF OPERATOR : pop:Word:GetRefDeepest
 IMMEDIATE VOID OPERATOR :: TYPE : WORD_REF
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
+  ARRAY FUNCTION : %G
+   OPERATOR :: IN : %S
+   ARRAY FUNCTION :: %G : Result
+  ; // %G
   IMMEDIATE VOID OPERATOR :: MACRO : %GEN_PROPERTY
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
@@ -5404,6 +5517,10 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // %GP
+  ARRAY FUNCTION : %R
+   OPERATOR :: IN : %S
+   ARRAY FUNCTION :: %R : Result
+  ; // %R
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   VOID OPERATOR :: MACRO :: elem_generator : .c++
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
@@ -5528,6 +5645,11 @@ TkwMain : Main
    STRING OPERATOR :: IN : aName
    ENGINE_WORD OPERATOR :: IN : aSelf
   ; // do_elem_proc
+  OBJECT FUNCTION : DoMember
+   OBJECT OPERATOR :: IN : anUIDVar
+   OPERATOR :: VAR : l_Element
+   OBJECT FUNCTION :: DoMember : Result
+  ; // DoMember
   IMMEDIATE VOID OPERATOR :: MACRO : elem_func
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
@@ -5544,6 +5666,11 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // elem_ref_proc
+  ARRAY FUNCTION : ELEMLIST
+   OPERATOR :: IN : %S
+   STRING OPERATOR :: IN : aListName
+   ARRAY FUNCTION :: ELEMLIST : Result
+  ; // ELEMLIST
   ^@ OPERATOR : FieldByNameDeepest
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
@@ -5553,6 +5680,10 @@ TkwMain : Main
    ENGINE_WORD OPERATOR :: VAR : l_Self
    ^@ OPERATOR :: FieldByNameDeepest : Result
   ; // FieldByNameDeepest
+  BOOLEAN FUNCTION : FilterMember
+   OBJECT OPERATOR :: IN : aMember
+   BOOLEAN FUNCTION :: FilterMember : Result
+  ; // FilterMember
   GENERATOR OPERATOR :: VAR : g_CurrentGenerator
   STRING OPERATOR :: VAR : g_CurrentGeneratorName
   INTEGER OPERATOR :: VAR : g_Indent
