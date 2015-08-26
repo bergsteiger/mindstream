@@ -261,9 +261,9 @@ VOID Test CodeGen
   ModelElement IN Self
   Result :=
   (
-   '%R'
    Self
    ELEMLIST
+   '%R'
   )
  ; // ARRAY elem_func .Implements
  
@@ -275,9 +275,9 @@ VOID Test CodeGen
   ModelElement IN Self
   Result :=
   (
-   '%G'
    Self
    ELEMLIST
+   '%G'
   )
  ; // ARRAY elem_func .Inherited
  
@@ -616,7 +616,7 @@ VOID Test CodeGen
  
  ARRAY FUNCTION ELEMLIST
   IN %S
-  STRING IN aListName
+  ^L IN aListName
   PRIVATE BOOLEAN FUNCTION FilterElement
    OBJECT IN aMember
    Result :=
@@ -669,7 +669,10 @@ VOID Test CodeGen
     (
      %S
      %%
-     aListName
+     (
+      aListName
+      |N
+     )
     )
     if
      (
@@ -5681,7 +5684,7 @@ TkwMain : Main
   ; // elem_ref_proc
   ARRAY FUNCTION : ELEMLIST
    OPERATOR :: IN : %S
-   STRING OPERATOR :: IN : aListName
+   ^L OPERATOR :: IN : aListName
    PRIVATE BOOLEAN FUNCTION : FilterElement
     OBJECT OPERATOR :: IN : aMember
     PRIVATE BOOLEAN FUNCTION :: FilterElement : Result
