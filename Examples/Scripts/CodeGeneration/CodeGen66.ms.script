@@ -512,6 +512,45 @@ GENERATOR VAR g_CurrentGenerator
 %REMARK 'Текущий генератор'
 g_CurrentGenerator := nil
 
+STRING VAR g_CurrentGeneratorName
+%REMARK 'Имя текущего генератора'
+g_CurrentGeneratorName := ''
+
+STRING FUNCTION OutFileName
+ STRING right aGeneratorName
+ %SUMMARY 'Имя файла для вывода' ;
+ STRING VAR l_OutPath
+ %REMARK 'Путь для вывода'
+ sysutils:GetCurrentDir =: l_OutPath
+ [ l_OutPath 
+  script:FileName 
+  %REMARK 'Путь к текущему скрипту'
+  sysutils:ExtractFileName
+  %REMARK 'Вырезаем из пути только имя файла' 
+  '' sysutils:ChangeFileExt
+  %REMARK 'Убираем .script' 
+  '' sysutils:ChangeFileExt 
+  %REMARK 'Убираем .ms' 
+ ] '\' strings:CatSep =: l_OutPath
+ l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
+ %REMARK 'Создаём директорию рекурсивно, если её ещё не было'
+ [ l_OutPath aGeneratorName ] '\' strings:CatSep =: Result
+; // OutFileName
+
+elem_proc CallCurrentGen
+ g_OutFile := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
+ TRY
+  TRY
+   Self ( g_CurrentGenerator DO )
+   %REMARK 'Вызываем на элементе генератор aGen'
+  FINALLY
+   g_CurrentGenerator := nil
+  END // TRY..FINALLY
+ FINALLY
+  g_OutFile := nil
+ END // TRY..FINALLY
+; // CallCurrentGen
+
 elem_proc Child.CallCurrentGen
  %SUMMARY 'Вызывает на ДОЧЕРНЕМ элементе генератор g_CurrentGenerator с учётом отступов' ;
  Self .EnterElement 
@@ -569,45 +608,6 @@ MACRO %GP
  axiom:PushSymbol FieldByNameDeepest
  GEN_PROPERTY_PREFIX (+) ( aName .Name ) Ctx:Parser:PushSymbol
 ; // %GP
-
-STRING FUNCTION OutFileName
- STRING right aGeneratorName
- %SUMMARY 'Имя файла для вывода' ;
- STRING VAR l_OutPath
- %REMARK 'Путь для вывода'
- sysutils:GetCurrentDir =: l_OutPath
- [ l_OutPath 
-  script:FileName 
-  %REMARK 'Путь к текущему скрипту'
-  sysutils:ExtractFileName
-  %REMARK 'Вырезаем из пути только имя файла' 
-  '' sysutils:ChangeFileExt
-  %REMARK 'Убираем .script' 
-  '' sysutils:ChangeFileExt 
-  %REMARK 'Убираем .ms' 
- ] '\' strings:CatSep =: l_OutPath
- l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
- %REMARK 'Создаём директорию рекурсивно, если её ещё не было'
- [ l_OutPath aGeneratorName ] '\' strings:CatSep =: Result
-; // OutFileName
-
-STRING VAR g_CurrentGeneratorName
-%REMARK 'Имя текущего генератора'
-g_CurrentGeneratorName := ''
-
-elem_proc CallCurrentGen
- g_OutFile := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
- TRY
-  TRY
-   Self ( g_CurrentGenerator DO )
-   %REMARK 'Вызываем на элементе генератор aGen'
-  FINALLY
-   g_CurrentGenerator := nil
-  END // TRY..FINALLY
- FINALLY
-  g_OutFile := nil
- END // TRY..FINALLY
-; // CallCurrentGen
 
 elem_proc CallGen
  GENERATOR RIGHT IN aGen
