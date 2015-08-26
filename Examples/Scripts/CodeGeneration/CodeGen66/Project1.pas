@@ -16,12 +16,15 @@ pas : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Project>
   ; // Class1
   pas : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Class>> Class2
   Родители элемента ::Project1::Program1
+  Class1
   ; // Class2
   pas : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Class>> Class3
   Родители элемента ::Project1::Program1
   ; // Class3
   pas : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Class>> Class4
   Родители элемента ::Project1::Program1
+  Class2
+  Class3
   ; // Class4
   pas : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Interface>> Interface1
   Родители элемента ::Project1::Program1

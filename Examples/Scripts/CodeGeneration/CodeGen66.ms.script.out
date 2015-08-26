@@ -215,6 +215,15 @@ VOID Test CodeGen
   '::'
   strings:CatSep
   OutToFile
+  for
+  (
+   Self
+   %G
+  )
+  (
+   |N
+   OutToFile
+  )
   TRY
    Self
    .CallChildrenCurrentGen

@@ -666,6 +666,7 @@ elem_proc DumpAsIs
   for ( Self .Parents >reverted> ) .Name
   %REMARK 'Выводим родителей элемента, рекурсивно'
  ] '::' strings:CatSep OutToFile
+ for ( Self %G ) ( .Name OutToFile )
  TRY
   Self .CallChildrenCurrentGen
   %REMARK 'Выводим детей элемента, тем же самым генератором'
