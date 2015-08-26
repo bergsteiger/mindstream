@@ -396,7 +396,7 @@ VOID Test CodeGen
  
  BOOLEAN elem_func .IsModelElement
   %SUMMARY %SUM
-   '  Определяет тот факт, что aWord является "элементом модели" '
+   '  Определяет тот факт, что Self является "элементом модели" '
   ; // %SUMMARY %SUM
   
   ModelElement IN Self
@@ -419,7 +419,7 @@ VOID Test CodeGen
  
  BOOLEAN elem_func .IsSummary
   %SUMMARY %SUM
-   '  Определяет тот факт, что aWord является документацией к элементу '
+   '  Определяет тот факт, что Self является документацией к элементу '
   ; // %SUMMARY %SUM
   
   ModelElement IN Self
@@ -448,7 +448,7 @@ VOID Test CodeGen
  
  ARRAY elem_func .Parents
   %SUMMARY %SUM
-   'Возвращает итератор родителей aWord в "терминах определённой модели"'
+   'Возвращает итератор родителей Self в "терминах определённой модели"'
   ; // %SUMMARY %SUM
   
   ModelElement IN Self

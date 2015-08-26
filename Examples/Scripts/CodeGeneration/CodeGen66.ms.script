@@ -382,7 +382,7 @@ MACRO elem_ref_proc
 BOOLEAN elem_func IsSummary
  %SUMMARY 
  '
-  Определяет тот факт, что aWord является документацией к элементу
+  Определяет тот факт, что Self является документацией к элементу
  '
  ; // %SUMMARY
  ( Self .Name ) = '%SUM' =: Result
@@ -391,7 +391,7 @@ BOOLEAN elem_func IsSummary
 BOOLEAN elem_func IsModelElement
  %SUMMARY 
  '
-  Определяет тот факт, что aWord является "элементом модели"
+  Определяет тот факт, что Self является "элементом модели"
  '
  ; // %SUMMARY
  '<<' Self %ST .Name StartsStr 
@@ -459,7 +459,7 @@ ARRAY elem_func Children
 ; // Children
 
 ARRAY elem_func Parents
- %SUMMARY 'Возвращает итератор родителей aWord в "терминах определённой модели"' ;
+ %SUMMARY 'Возвращает итератор родителей Self в "терминах определённой модели"' ;
  ( Self LIST %P ) >filter> .IsModelElement =: Result
 ; // Parents
 
