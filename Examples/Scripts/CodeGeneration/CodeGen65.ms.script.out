@@ -82,14 +82,19 @@ VOID Test CodeGen
    (
     aGen |RefDeepest
    )
-   g_CurrentGenerator
-   |N
-   .
-   Self
-   (
-    aGen |RefDeepest
-    DO
-   )
+   TRY
+    g_CurrentGenerator
+    |N
+    .
+    Self
+    (
+     aGen |RefDeepest
+     DO
+    )
+   FINALLY
+    g_CurrentGenerator :=
+    nil
+   END
   FINALLY
    g_OutFile :=
    nil
