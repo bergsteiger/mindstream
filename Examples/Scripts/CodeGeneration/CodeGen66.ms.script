@@ -459,11 +459,7 @@ ARRAY elem_func Children
 ; // Children
 
 ARRAY elem_func Parents
- %SUMMARY 
- '
- Возвращает итератор родителей aWord в "терминах определённой модели"
- '
- ;
+ %SUMMARY 'Возвращает итератор родителей aWord в "терминах определённой модели"' ;
  ( Self LIST %P ) >filter> .IsModelElement =: Result
 ; // Parents
 
