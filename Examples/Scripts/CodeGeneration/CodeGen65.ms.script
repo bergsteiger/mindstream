@@ -471,11 +471,11 @@ g_CurrentGenerator := nil
 
 elem_proc Child.CallGen
  GENERATOR right aGen
- %SUMMARY 'Вызывает на ДОЧЕРНЕМ элементе генератор aGen с учётом отступов' ;
+ %SUMMARY 'Вызывает на ДОЧЕРНЕМ элементе генератор g_CurrentGenerator с учётом отступов' ;
  Self .EnterElement 
  TRY
   Self g_CurrentGenerator DO
-  %REMARK 'Вызываем генератор aGen'
+  %REMARK 'Вызываем генератор g_CurrentGenerator'
  FINALLY
   Self .LeaveElement 
  END // TRY..FINALLY

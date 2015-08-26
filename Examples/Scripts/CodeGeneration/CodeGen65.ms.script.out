@@ -103,7 +103,7 @@ VOID Test CodeGen
  
  VOID elem_proc .Child.CallGen
   %SUMMARY %SUM
-   'Вызывает на ДОЧЕРНЕМ элементе генератор aGen с учётом отступов'
+   'Вызывает на ДОЧЕРНЕМ элементе генератор g_CurrentGenerator с учётом отступов'
   ; // %SUMMARY %SUM
   
   ^ IN _aGen
