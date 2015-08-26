@@ -474,7 +474,7 @@ elem_proc Child.CallGen
  %SUMMARY 'Вызывает на ДОЧЕРНЕМ элементе генератор aGen с учётом отступов' ;
  Self .EnterElement 
  TRY
-  Self aGen
+  Self g_CurrentGenerator DO
   %REMARK 'Вызываем генератор aGen'
  FINALLY
   Self .LeaveElement 

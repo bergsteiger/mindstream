@@ -117,9 +117,8 @@ VOID Test CodeGen
   .EnterElement
   TRY
    Self
-   (
-    _aGen |^
-   )
+   g_CurrentGenerator
+   DO
   FINALLY
    Self
    .LeaveElement
