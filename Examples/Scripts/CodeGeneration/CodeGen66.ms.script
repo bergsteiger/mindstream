@@ -402,18 +402,17 @@ BOOLEAN elem_func IsModelElement
   //=: Result
 ; // IsModelElement
 
-ARRAY FUNCTION ELEMLIST 
-  IN %S
-  Literal IN aListName 
+ARRAY elem_func ELEMLIST 
+ Literal IN aListName 
 
  private BOOLEAN FUNCTION FilterElement 
-   OBJECT IN aMember
+  OBJECT IN aMember
 
   Result := ( aMember NotValid ! )
  ; // FilterElement
  
  private OBJECT FUNCTION MapElement 
-   OBJECT IN aMember
+  OBJECT IN aMember
 
   VAR l_Element
   aMember DO =: l_Element
@@ -429,12 +428,12 @@ ARRAY FUNCTION ELEMLIST
   ) 
  ; // MapElement
 
- if ( %S NotValid ) then
+ if ( Self NotValid ) then
   ( Result := [ ] )
  else
   (
    VAR l_List
-   l_List := ( %S %% ( aListName .Name ) )
+   l_List := ( Self %% ( aListName .Name ) )
    
    if ( l_List NotValid ) then
     ( Result := [ ] )
@@ -449,7 +448,7 @@ ARRAY elem_func Implements
  Возвращает итератор элементов которые реализуют наш элемент
  '
  ;
- Result := ( Self ELEMLIST %R )
+ Result := ( Self .ELEMLIST %R )
 ;
 
 ARRAY elem_func Inherited
@@ -458,7 +457,7 @@ ARRAY elem_func Inherited
  Возвращает итератор элементов от которого наследуется наш элемент
  '
  ;
- Result := ( Self ELEMLIST %G )
+ Result := ( Self .ELEMLIST %G )
 ;
 
 ARRAY elem_func Children
