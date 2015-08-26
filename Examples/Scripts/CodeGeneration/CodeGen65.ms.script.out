@@ -196,12 +196,8 @@ VOID Test CodeGen
   strings:CatSep
   OutToFile
   TRY
-   for
-   (
-    Self
-    .Children
-   )
-   .Child.CallCurrentGen
+   Self
+   .CallChildrenCurrentGen
   FINALLY
    [
     '; // '
