@@ -423,7 +423,7 @@ ARRAY FUNCTION ELEMLIST
   STRING IN aListName 
   IN %S
 
- BOOLEAN FUNCTION FilterMember 
+ private BOOLEAN FUNCTION FilterMember 
    OBJECT IN aMember
 
   Result := ( aMember NotValid ! )

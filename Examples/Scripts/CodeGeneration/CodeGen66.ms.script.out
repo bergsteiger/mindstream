@@ -641,7 +641,7 @@ VOID Test CodeGen
  ARRAY FUNCTION ELEMLIST
   IN %S
   STRING IN aListName
-  BOOLEAN FUNCTION FilterMember
+  PRIVATE BOOLEAN FUNCTION FilterMember
    OBJECT IN aMember
    Result :=
    (
@@ -649,7 +649,7 @@ VOID Test CodeGen
     NotValid
     !
    )
-  ; // BOOLEAN FUNCTION FilterMember
+  ; // PRIVATE BOOLEAN FUNCTION FilterMember
   
   if
    (
@@ -5687,9 +5687,9 @@ TkwMain : Main
   ARRAY FUNCTION : ELEMLIST
    OPERATOR :: IN : %S
    STRING OPERATOR :: IN : aListName
-   BOOLEAN FUNCTION : FilterMember
+   PRIVATE BOOLEAN FUNCTION : FilterMember
     OBJECT OPERATOR :: IN : aMember
-    BOOLEAN FUNCTION :: FilterMember : Result
+    PRIVATE BOOLEAN FUNCTION :: FilterMember : Result
    ; // FilterMember
    ARRAY FUNCTION :: ELEMLIST : Result
   ; // ELEMLIST
