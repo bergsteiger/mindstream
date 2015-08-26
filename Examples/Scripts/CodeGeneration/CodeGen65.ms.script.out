@@ -101,7 +101,7 @@ VOID Test CodeGen
   END
  ; // VOID elem_proc .CallGen
  
- VOID elem_proc .Child.CallGen
+ VOID elem_proc .Child.CallCurrentGen
   %SUMMARY %SUM
    'Вызывает на ДОЧЕРНЕМ элементе генератор g_CurrentGenerator с учётом отступов'
   ; // %SUMMARY %SUM
@@ -117,7 +117,7 @@ VOID Test CodeGen
    Self
    .LeaveElement
   END
- ; // VOID elem_proc .Child.CallGen
+ ; // VOID elem_proc .Child.CallCurrentGen
  
  ARRAY elem_func .Children
   %SUMMARY %SUM
@@ -187,7 +187,7 @@ VOID Test CodeGen
     Self
     .Children
    )
-   .Child.CallGen
+   .Child.CallCurrentGen
   FINALLY
    [
     '; // '
@@ -5405,10 +5405,10 @@ TkwMain : Main
    ^ OPERATOR :: IN : aGen
    ModelElement OPERATOR :: IN : Self
   ; // .CallGen
-  VOID OPERATOR :: MACRO :: elem_proc : .Child.CallGen
+  VOID OPERATOR :: MACRO :: elem_proc : .Child.CallCurrentGen
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : Self
-  ; // .Child.CallGen
+  ; // .Child.CallCurrentGen
   ARRAY OPERATOR :: MACRO :: elem_func : .Children
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ARRAY OPERATOR :: MACRO :: elem_func :: .Children : Result

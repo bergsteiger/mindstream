@@ -469,7 +469,7 @@ GENERATOR VAR g_CurrentGenerator
 %REMARK 'Текущий генератор'
 g_CurrentGenerator := nil
 
-elem_proc Child.CallGen
+elem_proc Child.CallCurrentGen
  %SUMMARY 'Вызывает на ДОЧЕРНЕМ элементе генератор g_CurrentGenerator с учётом отступов' ;
  Self .EnterElement 
  TRY
@@ -478,7 +478,7 @@ elem_proc Child.CallGen
  FINALLY
   Self .LeaveElement 
  END // TRY..FINALLY
-; // Child.CallGen
+; // Child.CallCurrentGen
 
 CONST GEN_PROPERTY_PREFIX 'gp'
 %REMARK 'Префикс имени свойства генератора'
@@ -619,7 +619,7 @@ elem_proc DumpAsIs
   %REMARK 'Выводим родителей элемента, рекурсивно'
  ] '::' strings:CatSep OutToFile
  TRY
-  for ( Self .Children ) .Child.CallGen
+  for ( Self .Children ) .Child.CallCurrentGen
   %REMARK 'Выводим детей элемента, тем же самым генератором'
  FINALLY
   [ '; // ' Self .Name ] OutToFile
