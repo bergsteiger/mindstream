@@ -441,14 +441,19 @@ ARRAY FUNCTION %R IN %S
  Result := ( '%R' %S ELEMLIST )
 ;
 
-ARRAY FUNCTION %G IN %S
- Result := ( '%G' %S ELEMLIST )
+ARRAY elem_func Inherited
+ %SUMMARY 
+ '
+ Возвращает итератор элементов от которого наследуемся наш элемент
+ '
+ ;
+ Result := ( '%G' Self ELEMLIST )
 ;
 
 ARRAY elem_func Children
  %SUMMARY 
  '
- Возвращает итератор детей aWord в "терминах определённой модели"
+ Возвращает итератор детей Self в "терминах определённой модели"
  '
  ;
  ( Self MembersIterator ) >filter> .IsModelElement =: Result
@@ -666,7 +671,8 @@ elem_proc DumpAsIs
   for ( Self .Parents >reverted> ) .Name
   %REMARK 'Выводим родителей элемента, рекурсивно'
  ] '::' strings:CatSep OutToFile
- for ( Self %G ) ( .Name OutToFile )
+ for ( Self .Inherited ) ( .Name OutToFile )
+ for ( Self %R ) ( .Name OutToFile )
  TRY
   Self .CallChildrenCurrentGen
   %REMARK 'Выводим детей элемента, тем же самым генератором'

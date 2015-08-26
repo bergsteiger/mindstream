@@ -17,6 +17,8 @@ h : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Project>> 
   h : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Class>> Class2
   Родители элемента ::Project1::Program1
   Class1
+  Interface1
+  Interface2
   ; // Class2
   h : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Class>> Class3
   Родители элемента ::Project1::Program1

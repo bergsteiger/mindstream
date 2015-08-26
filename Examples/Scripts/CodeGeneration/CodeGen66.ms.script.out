@@ -1,14 +1,4 @@
 VOID Test CodeGen
- ARRAY FUNCTION %G
-  IN %S
-  Result :=
-  (
-   '%G'
-   %S
-   ELEMLIST
-  )
- ; // ARRAY FUNCTION %G
- 
  IMMEDIATE VOID MACRO %GEN_PROPERTY
   %SUMMARY %SUM
    'Свойство генератора'
@@ -155,7 +145,7 @@ VOID Test CodeGen
  
  ARRAY elem_func .Children
   %SUMMARY %SUM
-   ' Возвращает итератор детей aWord в "терминах определённой модели" '
+   ' Возвращает итератор детей Self в "терминах определённой модели" '
   ; // %SUMMARY %SUM
   
   ModelElement IN Self
@@ -218,7 +208,16 @@ VOID Test CodeGen
   for
   (
    Self
-   %G
+   .Inherited
+  )
+  (
+   |N
+   OutToFile
+  )
+  for
+  (
+   Self
+   %R
   )
   (
    |N
@@ -263,6 +262,20 @@ VOID Test CodeGen
   Self
   .DumpAsIs
  ; // VOID elem_generator .h
+ 
+ ARRAY elem_func .Inherited
+  %SUMMARY %SUM
+   ' Возвращает итератор элементов от которого наследуемся наш элемент '
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN Self
+  Result :=
+  (
+   '%G'
+   Self
+   ELEMLIST
+  )
+ ; // ARRAY elem_func .Inherited
  
  BOOLEAN elem_func .IsElementNeedIndent
   %SUMMARY %SUM
@@ -5514,10 +5527,6 @@ WORD_REF OPERATOR : pop:Word:GetRefDeepest
 IMMEDIATE VOID OPERATOR :: TYPE : WORD_REF
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
-  ARRAY FUNCTION : %G
-   OPERATOR :: IN : %S
-   ARRAY FUNCTION :: %G : Result
-  ; // %G
   IMMEDIATE VOID OPERATOR :: MACRO : %GEN_PROPERTY
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
@@ -5572,6 +5581,11 @@ TkwMain : Main
    STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
    ModelElement OPERATOR :: IN : Self
   ; // .h
+  ARRAY OPERATOR :: MACRO :: elem_func : .Inherited
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ARRAY OPERATOR :: MACRO :: elem_func :: .Inherited : Result
+   ModelElement OPERATOR :: IN : Self
+  ; // .Inherited
   BOOLEAN OPERATOR :: MACRO :: elem_func : .IsElementNeedIndent
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsElementNeedIndent : Result
