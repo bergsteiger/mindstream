@@ -610,7 +610,7 @@ elem_proc CallGen
  g_OutFile := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
  TRY
   TRY
-   Self ( aGen Dereference DO )
+   Self ( g_CurrentGenerator DO )
    %REMARK 'Вызываем на элементе генератор aGen'
   FINALLY
    g_CurrentGenerator := nil

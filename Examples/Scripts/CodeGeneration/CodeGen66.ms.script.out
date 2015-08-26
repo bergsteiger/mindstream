@@ -99,7 +99,7 @@ VOID Test CodeGen
    TRY
     Self
     (
-     aGen |RefDeepest
+     g_CurrentGenerator
      DO
     )
    FINALLY
