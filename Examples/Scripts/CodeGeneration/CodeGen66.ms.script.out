@@ -74,6 +74,10 @@ VOID Test CodeGen
   
   ^ IN aGen
   ModelElement IN Self
+  g_CurrentGenerator :=
+  (
+   aGen |RefDeepest
+  )
   aGen FieldByNameDeepest
   'gpName'
   >>>
@@ -92,10 +96,6 @@ VOID Test CodeGen
    File:OpenWrite
   )
   TRY
-   g_CurrentGenerator :=
-   (
-    aGen |RefDeepest
-   )
    TRY
     Self
     (

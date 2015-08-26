@@ -605,10 +605,10 @@ elem_proc CallGen
  ' 
  ; // %SUMMARY 
 
+ g_CurrentGenerator := ( aGen Dereference )
  aGen %GP Name =: g_CurrentGeneratorName
  g_OutFile := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
  TRY
-  g_CurrentGenerator := ( aGen Dereference )
   TRY
    Self ( aGen Dereference DO )
    %REMARK 'Вызываем на элементе генератор aGen'
