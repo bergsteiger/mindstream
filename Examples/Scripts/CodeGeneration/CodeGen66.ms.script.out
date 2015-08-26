@@ -74,10 +74,9 @@ VOID Test CodeGen
   
   ^ IN aGen
   ModelElement IN Self
-  g_CurrentGenerator :=
-  (
-   aGen |RefDeepest
-  )
+  aGen |RefDeepest
+  >>>
+  g_CurrentGenerator
   aGen FieldByNameDeepest
   'gpName'
   >>>
