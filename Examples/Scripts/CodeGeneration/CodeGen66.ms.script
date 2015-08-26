@@ -439,7 +439,7 @@ ARRAY FUNCTION ELEMLIST
    if ( l_List NotValid ) then
     ( Result := [ ] )
    else 
-    ( Result := ( @ FilterMember ( ( l_List CodeIterator ) >map> DoMember ) FILTER ) ) 
+    ( Result := ( ( l_List CodeIterator ) >map> DoMember >filter> FilterMember ) )
   )
 ; // ELEMLIST
 
