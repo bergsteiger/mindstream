@@ -97,9 +97,6 @@ VOID Test CodeGen
     aGen |RefDeepest
    )
    TRY
-    g_CurrentGenerator
-    |N
-    .
     Self
     (
      aGen |RefDeepest
@@ -5774,15 +5771,3 @@ TkwMain : Main
   ; // Project3
  ; // CodeGen
 ; // Main
-.dump
-.pas
-.c++
-.h
-.dump
-.pas
-.c++
-.h
-.dump
-.pas
-.c++
-.h

@@ -610,7 +610,6 @@ elem_proc CallGen
  TRY
   g_CurrentGenerator := ( aGen GetRefDeepestFromLeft )
   TRY
-   g_CurrentGenerator .Name Print
    Self ( aGen GetRefDeepestFromLeft DO )
    %REMARK 'Вызываем на элементе генератор aGen'
   FINALLY
