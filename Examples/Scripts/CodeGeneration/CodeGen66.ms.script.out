@@ -35,16 +35,6 @@ VOID Test CodeGen
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID MACRO %GP
  
- ARRAY FUNCTION %R
-  IN %S
-  Result :=
-  (
-   '%R'
-   %S
-   ELEMLIST
-  )
- ; // ARRAY FUNCTION %R
- 
  %SUMMARY %SUM
   ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
  ; // %SUMMARY %SUM
@@ -217,7 +207,7 @@ VOID Test CodeGen
   for
   (
    Self
-   %R
+   .Implements
   )
   (
    |N
@@ -263,9 +253,23 @@ VOID Test CodeGen
   .DumpAsIs
  ; // VOID elem_generator .h
  
+ ARRAY elem_func .Implements
+  %SUMMARY %SUM
+   ' Возвращает итератор элементов которые реализуют наш элемент '
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN Self
+  Result :=
+  (
+   '%R'
+   Self
+   ELEMLIST
+  )
+ ; // ARRAY elem_func .Implements
+ 
  ARRAY elem_func .Inherited
   %SUMMARY %SUM
-   ' Возвращает итератор элементов от которого наследуемся наш элемент '
+   ' Возвращает итератор элементов от которого наследуется наш элемент '
   ; // %SUMMARY %SUM
   
   ModelElement IN Self
@@ -558,9 +562,9 @@ VOID Test CodeGen
  ; // VOID PROCEDURE do_elem_proc
  
  OBJECT FUNCTION DoMember
-  OBJECT IN anUIDVar
+  OBJECT IN aMember
   VAR l_Element
-  anUIDVar
+  aMember
   DO
   >>>
   l_Element
@@ -5535,10 +5539,6 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // %GP
-  ARRAY FUNCTION : %R
-   OPERATOR :: IN : %S
-   ARRAY FUNCTION :: %R : Result
-  ; // %R
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   VOID OPERATOR :: MACRO :: elem_generator : .c++
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
@@ -5581,6 +5581,11 @@ TkwMain : Main
    STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
    ModelElement OPERATOR :: IN : Self
   ; // .h
+  ARRAY OPERATOR :: MACRO :: elem_func : .Implements
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ARRAY OPERATOR :: MACRO :: elem_func :: .Implements : Result
+   ModelElement OPERATOR :: IN : Self
+  ; // .Implements
   ARRAY OPERATOR :: MACRO :: elem_func : .Inherited
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ARRAY OPERATOR :: MACRO :: elem_func :: .Inherited : Result
@@ -5669,7 +5674,7 @@ TkwMain : Main
    ENGINE_WORD OPERATOR :: IN : aSelf
   ; // do_elem_proc
   OBJECT FUNCTION : DoMember
-   OBJECT OPERATOR :: IN : anUIDVar
+   OBJECT OPERATOR :: IN : aMember
    OPERATOR :: VAR : l_Element
    OBJECT FUNCTION :: DoMember : Result
   ; // DoMember
