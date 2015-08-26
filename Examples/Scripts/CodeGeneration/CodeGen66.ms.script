@@ -402,8 +402,9 @@ BOOLEAN elem_func IsModelElement
   //=: Result
 ; // IsModelElement
 
-ARRAY elem_func ELEMLIST 
- Literal IN aListName 
+ARRAY elem_func ElementList 
+ Literal IN aListName
+ %SUMMARY 'Возвращает итератор именованного списка на элементе' ;
 
  private BOOLEAN FUNCTION FilterElement 
   OBJECT IN aMember
@@ -440,32 +441,20 @@ ARRAY elem_func ELEMLIST
    else 
     ( Result := ( ( l_List CodeIterator ) >map> MapElement >filter> FilterElement ) )
   )
-; // ELEMLIST
+; // ElementList
 
 ARRAY elem_func Implements
- %SUMMARY 
- '
- Возвращает итератор элементов которые реализуют наш элемент
- '
- ;
- Result := ( Self .ELEMLIST %R )
+ %SUMMARY 'Возвращает итератор элементов которые реализуют наш элемент' ;
+ Result := ( Self .ElementList %R )
 ;
 
 ARRAY elem_func Inherited
- %SUMMARY 
- '
- Возвращает итератор элементов от которого наследуется наш элемент
- '
- ;
- Result := ( Self .ELEMLIST %G )
+ %SUMMARY 'Возвращает итератор элементов от которого наследуется наш элемент' ;
+ Result := ( Self .ElementList %G )
 ;
 
 ARRAY elem_func Children
- %SUMMARY 
- '
- Возвращает итератор детей Self в "терминах определённой модели"
- '
- ;
+ %SUMMARY 'Возвращает итератор детей Self в "терминах определённой модели"' ;
  ( Self MembersIterator ) >filter> .IsModelElement =: Result
 ; // Children
 

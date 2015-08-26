@@ -135,7 +135,7 @@ VOID Test CodeGen
  
  ARRAY elem_func .Children
   %SUMMARY %SUM
-   ' Возвращает итератор детей Self в "терминах определённой модели" '
+   'Возвращает итератор детей Self в "терминах определённой модели"'
   ; // %SUMMARY %SUM
   
   ModelElement IN Self
@@ -226,7 +226,11 @@ VOID Test CodeGen
   END
  ; // VOID elem_proc .DumpAsIs
  
- ARRAY elem_func .ELEMLIST
+ ARRAY elem_func .ElementList
+  %SUMMARY %SUM
+   'Возвращает итератор именованного списка на элементе'
+  ; // %SUMMARY %SUM
+  
   ^L IN aListName
   PRIVATE BOOLEAN FUNCTION FilterElement
    OBJECT IN aMember
@@ -306,7 +310,7 @@ VOID Test CodeGen
       )
      )
    )
- ; // ARRAY elem_func .ELEMLIST
+ ; // ARRAY elem_func .ElementList
  
  VOID elem_proc .EnterElement
   %SUMMARY %SUM
@@ -337,28 +341,28 @@ VOID Test CodeGen
  
  ARRAY elem_func .Implements
   %SUMMARY %SUM
-   ' Возвращает итератор элементов которые реализуют наш элемент '
+   'Возвращает итератор элементов которые реализуют наш элемент'
   ; // %SUMMARY %SUM
   
   ModelElement IN Self
   Result :=
   (
    Self
-   .ELEMLIST
+   .ElementList
    '%R'
   )
  ; // ARRAY elem_func .Implements
  
  ARRAY elem_func .Inherited
   %SUMMARY %SUM
-   ' Возвращает итератор элементов от которого наследуется наш элемент '
+   'Возвращает итератор элементов от которого наследуется наш элемент'
   ; // %SUMMARY %SUM
   
   ModelElement IN Self
   Result :=
   (
    Self
-   .ELEMLIST
+   .ElementList
    '%G'
   )
  ; // ARRAY elem_func .Inherited
@@ -5565,7 +5569,8 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : Self
   ; // .DumpAsIs
-  ARRAY OPERATOR :: MACRO :: elem_func : .ELEMLIST
+  ARRAY OPERATOR :: MACRO :: elem_func : .ElementList
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aListName
    PRIVATE BOOLEAN FUNCTION : FilterElement
     OBJECT OPERATOR :: IN : aMember
@@ -5576,9 +5581,9 @@ TkwMain : Main
     OPERATOR :: VAR : l_Element
     PRIVATE OBJECT FUNCTION :: MapElement : Result
    ; // MapElement
-   ARRAY OPERATOR :: MACRO :: elem_func :: .ELEMLIST : Result
+   ARRAY OPERATOR :: MACRO :: elem_func :: .ElementList : Result
    ModelElement OPERATOR :: IN : Self
-  ; // .ELEMLIST
+  ; // .ElementList
   VOID OPERATOR :: MACRO :: elem_proc : .EnterElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : Self
