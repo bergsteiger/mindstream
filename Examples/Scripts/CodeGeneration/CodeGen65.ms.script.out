@@ -53,6 +53,20 @@ VOID Test CodeGen
   .DumpAsIs
  ; // VOID elem_generator .c++
  
+ VOID elem_proc .CallChildrenCurrentGen
+  %SUMMARY %SUM
+   'Вызывает текущий генератор для всех детей элемента модели'
+  ; // %SUMMARY %SUM
+  
+  ModelElement IN Self
+  for
+  (
+   Self
+   .Children
+  )
+  .Child.CallCurrentGen
+ ; // VOID elem_proc .CallChildrenCurrentGen
+ 
  VOID elem_proc .CallGen
   %SUMMARY %SUM
    ' Вызывает на элементе генератор aGen. С открытием "правильных файлов". '
@@ -5400,6 +5414,10 @@ TkwMain : Main
    STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
    ModelElement OPERATOR :: IN : Self
   ; // .c++
+  VOID OPERATOR :: MACRO :: elem_proc : .CallChildrenCurrentGen
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   ModelElement OPERATOR :: IN : Self
+  ; // .CallChildrenCurrentGen
   VOID OPERATOR :: MACRO :: elem_proc : .CallGen
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^ OPERATOR :: IN : aGen

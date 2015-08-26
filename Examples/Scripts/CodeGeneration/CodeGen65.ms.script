@@ -480,6 +480,11 @@ elem_proc Child.CallCurrentGen
  END // TRY..FINALLY
 ; // Child.CallCurrentGen
 
+elem_proc CallChildrenCurrentGen
+ %SUMMARY 'Вызывает текущий генератор для всех детей элемента модели' ;
+ for ( Self .Children ) .Child.CallCurrentGen
+; // CallChildrenCurrentGen
+
 CONST GEN_PROPERTY_PREFIX 'gp'
 %REMARK 'Префикс имени свойства генератора'
 
