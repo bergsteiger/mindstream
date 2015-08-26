@@ -679,13 +679,8 @@ VOID Test CodeGen
        @
        FilterMember
        (
-        @
+        ( l_List CodeIterator >map>
         DoMember
-        (
-         l_List
-         CodeIterator
-        )
-        Array:Map
        )
        Array:Filter
       )
