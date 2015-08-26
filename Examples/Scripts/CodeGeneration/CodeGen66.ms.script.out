@@ -67,20 +67,8 @@ VOID Test CodeGen
   .Child.CallCurrentGen
  ; // VOID elem_proc .CallChildrenCurrentGen
  
- VOID elem_proc .CallGen
-  %SUMMARY %SUM
-   ' Вызывает на элементе генератор aGen. С открытием "правильных файлов". '
-  ; // %SUMMARY %SUM
-  
-  ^ IN aGen
+ VOID elem_proc .CallCurrentGen
   ModelElement IN Self
-  aGen |RefDeepest
-  >>>
-  g_CurrentGenerator
-  aGen FieldByNameDeepest
-  'gpName'
-  >>>
-  g_CurrentGeneratorName
   g_OutFile :=
   (
    OutFileName
@@ -109,6 +97,24 @@ VOID Test CodeGen
    g_OutFile :=
    nil
   END
+ ; // VOID elem_proc .CallCurrentGen
+ 
+ VOID elem_proc .CallGen
+  %SUMMARY %SUM
+   ' Вызывает на элементе генератор aGen. С открытием "правильных файлов". '
+  ; // %SUMMARY %SUM
+  
+  ^ IN aGen
+  ModelElement IN Self
+  aGen |RefDeepest
+  >>>
+  g_CurrentGenerator
+  aGen FieldByNameDeepest
+  'gpName'
+  >>>
+  g_CurrentGeneratorName
+  Self
+  .CallCurrentGen
  ; // VOID elem_proc .CallGen
  
  VOID elem_proc .Child.CallCurrentGen
@@ -5547,6 +5553,9 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : Self
   ; // .CallChildrenCurrentGen
+  VOID OPERATOR :: MACRO :: elem_proc : .CallCurrentGen
+   ModelElement OPERATOR :: IN : Self
+  ; // .CallCurrentGen
   VOID OPERATOR :: MACRO :: elem_proc : .CallGen
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^ OPERATOR :: IN : aGen

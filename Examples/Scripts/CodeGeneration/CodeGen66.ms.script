@@ -595,6 +595,20 @@ STRING VAR g_CurrentGeneratorName
 %REMARK 'Имя текущего генератора'
 g_CurrentGeneratorName := ''
 
+elem_proc CallCurrentGen
+ g_OutFile := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
+ TRY
+  TRY
+   Self ( g_CurrentGenerator DO )
+   %REMARK 'Вызываем на элементе генератор aGen'
+  FINALLY
+   g_CurrentGenerator := nil
+  END // TRY..FINALLY
+ FINALLY
+  g_OutFile := nil
+ END // TRY..FINALLY
+; // CallCurrentGen
+
 elem_proc CallGen
  GENERATOR RIGHT IN aGen
 
@@ -607,17 +621,7 @@ elem_proc CallGen
 
  aGen Dereference =: g_CurrentGenerator
  aGen %GP Name =: g_CurrentGeneratorName
- g_OutFile := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
- TRY
-  TRY
-   Self ( g_CurrentGenerator DO )
-   %REMARK 'Вызываем на элементе генератор aGen'
-  FINALLY
-   g_CurrentGenerator := nil
-  END // TRY..FINALLY
- FINALLY
-  g_OutFile := nil
- END // TRY..FINALLY
+ Self .CallCurrentGen
 ; // CallGen
 
 PROCEDURE CallGens
