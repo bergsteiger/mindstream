@@ -641,6 +641,16 @@ VOID Test CodeGen
  ARRAY FUNCTION ELEMLIST
   IN %S
   STRING IN aListName
+  BOOLEAN FUNCTION FilterMember
+   OBJECT IN aMember
+   Result :=
+   (
+    aMember
+    NotValid
+    !
+   )
+  ; // BOOLEAN FUNCTION FilterMember
+  
   if
    (
     %S
@@ -731,16 +741,6 @@ VOID Test CodeGen
   >>>
   Result
  ; // ^@ OPERATOR FieldByNameDeepest
- 
- BOOLEAN FUNCTION FilterMember
-  OBJECT IN aMember
-  Result :=
-  (
-   aMember
-   NotValid
-   !
-  )
- ; // BOOLEAN FUNCTION FilterMember
  
  GENERATOR VAR g_CurrentGenerator
  STRING VAR g_CurrentGeneratorName
@@ -5687,6 +5687,10 @@ TkwMain : Main
   ARRAY FUNCTION : ELEMLIST
    OPERATOR :: IN : %S
    STRING OPERATOR :: IN : aListName
+   BOOLEAN FUNCTION : FilterMember
+    OBJECT OPERATOR :: IN : aMember
+    BOOLEAN FUNCTION :: FilterMember : Result
+   ; // FilterMember
    ARRAY FUNCTION :: ELEMLIST : Result
   ; // ELEMLIST
   ^@ OPERATOR : FieldByNameDeepest
@@ -5698,10 +5702,6 @@ TkwMain : Main
    ENGINE_WORD OPERATOR :: VAR : l_Self
    ^@ OPERATOR :: FieldByNameDeepest : Result
   ; // FieldByNameDeepest
-  BOOLEAN FUNCTION : FilterMember
-   OBJECT OPERATOR :: IN : aMember
-   BOOLEAN FUNCTION :: FilterMember : Result
-  ; // FilterMember
   GENERATOR OPERATOR :: VAR : g_CurrentGenerator
   STRING OPERATOR :: VAR : g_CurrentGeneratorName
   INTEGER OPERATOR :: VAR : g_Indent

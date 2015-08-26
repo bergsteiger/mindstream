@@ -419,16 +419,16 @@ OBJECT FUNCTION DoMember
  ) 
 ; // DoMember
 
-BOOLEAN FUNCTION FilterMember 
-  OBJECT IN aMember
-
- Result := ( aMember NotValid ! )
-; // FilterMember
- 
 ARRAY FUNCTION ELEMLIST 
   STRING IN aListName 
   IN %S
 
+ BOOLEAN FUNCTION FilterMember 
+   OBJECT IN aMember
+
+  Result := ( aMember NotValid ! )
+ ; // FilterMember
+ 
  if ( %S NotValid ) then
   ( Result := [ ] )
  else
