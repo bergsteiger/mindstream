@@ -167,7 +167,7 @@ VOID Test CodeGen
   END
  ; // VOID elem_proc DumpModelElement
  
- IMMEDIATE VOID OPERATOR elem_func
+ IMMEDIATE VOID MACRO elem_func
   %SUMMARY %SUM
    'Функция на элементе модели'
   ; // %SUMMARY %SUM
@@ -186,9 +186,9 @@ VOID Test CodeGen
   IN
   'Self'
   Ctx:Parser:PushSymbol
- ; // IMMEDIATE VOID OPERATOR elem_func
+ ; // IMMEDIATE VOID MACRO elem_func
  
- IMMEDIATE VOID OPERATOR elem_proc
+ IMMEDIATE VOID MACRO elem_proc
   %SUMMARY %SUM
    'Процедура на элементе модели'
   ; // %SUMMARY %SUM
@@ -210,7 +210,7 @@ VOID Test CodeGen
   IN
   'Self'
   Ctx:Parser:PushSymbol
- ; // IMMEDIATE VOID OPERATOR elem_proc
+ ; // IMMEDIATE VOID MACRO elem_proc
  
  VOID elem_proc EnterElement
   %SUMMARY %SUM
@@ -3955,8 +3955,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
  ;
+IMMEDIATE VOID OPERATOR : __MACRO
 IMMEDIATE VOID OPERATOR : _MACRO
 IMMEDIATE VOID OPERATOR : MACRO
+IMMEDIATE VOID OPERATOR : STACK_CHANGING_MACRO
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
  Uses: 
   axiom:axiom
@@ -4039,13 +4041,13 @@ VOID OPERATOR : array:AddTo
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
 ; // array:AddTo
-IMMEDIATE VOID OPERATOR : call.me
+IMMEDIATE VOID OPERATOR :: MACRO : call.me
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
 ; // call.me
-IMMEDIATE VOID OPERATOR : RecurseProc
+IMMEDIATE VOID OPERATOR :: MACRO : RecurseProc
  ^L OPERATOR :: IN : aName
 ; // RecurseProc
-IMMEDIATE VOID OPERATOR : this.do
+IMMEDIATE VOID OPERATOR :: MACRO : this.do
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
 ; // this.do
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
@@ -4077,11 +4079,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
  ;
-IMMEDIATE VOID OPERATOR : %REMARK
+IMMEDIATE VOID OPERATOR :: MACRO : %REMARK
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aDoc
 ; // %REMARK
-IMMEDIATE VOID OPERATOR : REMARK
+IMMEDIATE VOID OPERATOR :: MACRO : REMARK
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aDoc
 ; // REMARK
@@ -4114,7 +4116,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
  ;
-IMMEDIATE VOID OPERATOR : Literal
+IMMEDIATE VOID OPERATOR :: MACRO : Literal
  ^L OPERATOR :: IN : aName
 ; // Literal
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbols.ms.dict
@@ -4246,7 +4248,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
 IMMEDIATE VOID OPERATOR : in
  ^L OPERATOR :: private:DefineNameParam : aName
 ; // in
-IMMEDIATE VOID OPERATOR : LVALUE
+IMMEDIATE VOID OPERATOR :: MACRO : LVALUE
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName
 ; // LVALUE
@@ -4256,7 +4258,7 @@ PRIVATE VOID OPERATOR : MangledNamePusher
  STRING OPERATOR :: IN : aName
 ; // MangledNamePusher
 IMMEDIATE VOID OPERATOR : REF
-IMMEDIATE VOID OPERATOR : right
+IMMEDIATE VOID OPERATOR :: MACRO : right
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_MangledName
@@ -4694,30 +4696,30 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.d
  Exports: 
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
-IMMEDIATE VOID OPERATOR : concrete-model-begin
+IMMEDIATE VOID OPERATOR :: MACRO : concrete-model-begin
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aDoc
  ^L OPERATOR :: IN : aModelName
 ; // concrete-model-begin
-IMMEDIATE VOID OPERATOR : meta-meta-model-begin
+IMMEDIATE VOID OPERATOR :: MACRO : meta-meta-model-begin
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aDoc
 ; // meta-meta-model-begin
-IMMEDIATE VOID OPERATOR : meta-meta-model-end
+IMMEDIATE VOID OPERATOR :: MACRO : meta-meta-model-end
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
 ; // meta-meta-model-end
-IMMEDIATE VOID OPERATOR : meta-model-begin
+IMMEDIATE VOID OPERATOR :: MACRO : meta-model-begin
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aDoc
 ; // meta-model-begin
-IMMEDIATE VOID OPERATOR : meta-model-end
+IMMEDIATE VOID OPERATOR :: MACRO : meta-model-end
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
 ; // meta-model-end
-IMMEDIATE VOID OPERATOR : model-begin
+IMMEDIATE VOID OPERATOR :: MACRO : model-begin
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aDoc
 ; // model-begin
-IMMEDIATE VOID OPERATOR : model-end
+IMMEDIATE VOID OPERATOR :: MACRO : model-end
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
 ; // model-end
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations.ms.dict
@@ -4785,45 +4787,45 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // <<UMLClass>>
-  ARRAY OPERATOR :: elem_func : Children
+  ARRAY OPERATOR :: MACRO :: elem_func : Children
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ARRAY OPERATOR :: elem_func :: Children : Result
+   ARRAY OPERATOR :: MACRO :: elem_func :: Children : Result
    ModelElement OPERATOR :: IN : Self
   ; // Children
-  VOID OPERATOR :: elem_proc : DumpModelElement
+  VOID OPERATOR :: MACRO :: elem_proc : DumpModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : Self
   ; // DumpModelElement
-  IMMEDIATE VOID OPERATOR : elem_func
+  IMMEDIATE VOID OPERATOR :: MACRO : elem_func
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // elem_func
-  IMMEDIATE VOID OPERATOR : elem_proc
+  IMMEDIATE VOID OPERATOR :: MACRO : elem_proc
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // elem_proc
-  VOID OPERATOR :: elem_proc : EnterElement
+  VOID OPERATOR :: MACRO :: elem_proc : EnterElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : Self
   ; // EnterElement
   INTEGER OPERATOR :: VAR : g_Indent
   FILE OPERATOR :: VAR : g_OutFile
-  BOOLEAN OPERATOR :: elem_func : IsElementNeedIndent
+  BOOLEAN OPERATOR :: MACRO :: elem_func : IsElementNeedIndent
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   BOOLEAN OPERATOR :: elem_func :: IsElementNeedIndent : Result
+   BOOLEAN OPERATOR :: MACRO :: elem_func :: IsElementNeedIndent : Result
    ModelElement OPERATOR :: IN : Self
   ; // IsElementNeedIndent
-  BOOLEAN OPERATOR :: elem_func : IsModelElement
+  BOOLEAN OPERATOR :: MACRO :: elem_func : IsModelElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   BOOLEAN OPERATOR :: elem_func :: IsModelElement : Result
+   BOOLEAN OPERATOR :: MACRO :: elem_func :: IsModelElement : Result
    ModelElement OPERATOR :: IN : Self
   ; // IsModelElement
-  BOOLEAN OPERATOR :: elem_func : IsSummary
+  BOOLEAN OPERATOR :: MACRO :: elem_func : IsSummary
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   BOOLEAN OPERATOR :: elem_func :: IsSummary : Result
+   BOOLEAN OPERATOR :: MACRO :: elem_func :: IsSummary : Result
    ModelElement OPERATOR :: IN : Self
   ; // IsSummary
-  VOID OPERATOR :: elem_proc : LeaveElement
+  VOID OPERATOR :: MACRO :: elem_proc : LeaveElement
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : Self
   ; // LeaveElement

@@ -577,6 +577,14 @@ PROCEDURE CallGens
  ) // for anElements
 ; // CallGens
 
+PROCEDURE CallGensList
+ Sequence LVALUE anElements
+ Sequence LVALUE aGenerators
+ ( anElements CodeIterator )
+  ( aGenerators CodeIterator )
+   CallGens
+; // CallGensList
+
 // ---------------------------------------------------------------------------
 
 elem_proc DumpAsIs
@@ -651,19 +659,11 @@ elem_generator h
  %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
 ; // h
 
-ARRAY VAR Generators
-Generators := [ Addr .dump Addr .pas Addr .c++ Addr .h ]
-%REMARK 'Список всех наших генераторов'
-
-ARRAY VAR Projects
-Projects := [ Addr Project1 Addr Project2 Addr Project3 ]
+( Project1 Project2 Project3 )
 %REMARK 'Список всех наших корневых элементов (проектов)'
-
-Projects
-%REMARK 'Список всех наших корневых элементов (проектов)'
- Generators
+ ( .dump .pas .c++ .h )
  %REMARK 'Список всех наших генераторов' 
-  CallGens
+  CallGensList
   %REMARK '- запускаем список генераторов на списке "рутовых элементов" модели.'
 
 ; // CodeGen
