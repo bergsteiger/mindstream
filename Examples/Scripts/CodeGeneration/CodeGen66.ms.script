@@ -402,33 +402,33 @@ BOOLEAN elem_func IsModelElement
   //=: Result
 ; // IsModelElement
 
-OBJECT FUNCTION DoMember 
-  OBJECT IN aMember
-
- VAR l_Element
- aMember DO =: l_Element
- // - берём ссылку на элемент модели
- if ( l_Element IsVoid ) then
- // - пропускаем невалидные ссылки
- (
-  Result := nil
- )
- else
- (
-  Result := l_Element
- ) 
-; // DoMember
-
 ARRAY FUNCTION ELEMLIST 
   STRING IN aListName 
   IN %S
 
- private BOOLEAN FUNCTION FilterMember 
+ private BOOLEAN FUNCTION FilterElement 
    OBJECT IN aMember
 
   Result := ( aMember NotValid ! )
- ; // FilterMember
+ ; // FilterElement
  
+ private OBJECT FUNCTION MapElement 
+   OBJECT IN aMember
+
+  VAR l_Element
+  aMember DO =: l_Element
+  // - берём ссылку на элемент модели
+  if ( l_Element IsVoid ) then
+  // - пропускаем невалидные ссылки
+  (
+   Result := nil
+  )
+  else
+  (
+   Result := l_Element
+  ) 
+ ; // MapElement
+
  if ( %S NotValid ) then
   ( Result := [ ] )
  else
@@ -439,7 +439,7 @@ ARRAY FUNCTION ELEMLIST
    if ( l_List NotValid ) then
     ( Result := [ ] )
    else 
-    ( Result := ( ( l_List CodeIterator ) >map> DoMember >filter> FilterMember ) )
+    ( Result := ( ( l_List CodeIterator ) >map> MapElement >filter> FilterElement ) )
   )
 ; // ELEMLIST
 

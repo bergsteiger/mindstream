@@ -561,30 +561,6 @@ VOID Test CodeGen
   do_elem_func
  ; // VOID PROCEDURE do_elem_proc
  
- OBJECT FUNCTION DoMember
-  OBJECT IN aMember
-  VAR l_Element
-  aMember
-  DO
-  >>>
-  l_Element
-  if
-   (
-    l_Element
-    IsVoid
-   )
-  then
-   (
-    Result :=
-    nil
-   )
-  else
-   (
-    Result :=
-    l_Element
-   )
- ; // OBJECT FUNCTION DoMember
- 
  IMMEDIATE VOID MACRO elem_func
   %SUMMARY %SUM
    'Функция на элементе модели'
@@ -641,7 +617,7 @@ VOID Test CodeGen
  ARRAY FUNCTION ELEMLIST
   IN %S
   STRING IN aListName
-  PRIVATE BOOLEAN FUNCTION FilterMember
+  PRIVATE BOOLEAN FUNCTION FilterElement
    OBJECT IN aMember
    Result :=
    (
@@ -649,7 +625,31 @@ VOID Test CodeGen
     NotValid
     !
    )
-  ; // PRIVATE BOOLEAN FUNCTION FilterMember
+  ; // PRIVATE BOOLEAN FUNCTION FilterElement
+  
+  PRIVATE OBJECT FUNCTION MapElement
+   OBJECT IN aMember
+   VAR l_Element
+   aMember
+   DO
+   >>>
+   l_Element
+   if
+    (
+     l_Element
+     IsVoid
+    )
+   then
+    (
+     Result :=
+     nil
+    )
+   else
+    (
+     Result :=
+     l_Element
+    )
+  ; // PRIVATE OBJECT FUNCTION MapElement
   
   if
    (
@@ -686,8 +686,8 @@ VOID Test CodeGen
      (
       Result :=
       (
-       ( l_List CodeIterator >map> DoMember >filter>
-       FilterMember
+       ( l_List CodeIterator >map> MapElement >filter>
+       FilterElement
       )
      )
    )
@@ -5663,11 +5663,6 @@ TkwMain : Main
    STRING OPERATOR :: IN : aName
    ENGINE_WORD OPERATOR :: IN : aSelf
   ; // do_elem_proc
-  OBJECT FUNCTION : DoMember
-   OBJECT OPERATOR :: IN : aMember
-   OPERATOR :: VAR : l_Element
-   OBJECT FUNCTION :: DoMember : Result
-  ; // DoMember
   IMMEDIATE VOID OPERATOR :: MACRO : elem_func
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
@@ -5687,10 +5682,15 @@ TkwMain : Main
   ARRAY FUNCTION : ELEMLIST
    OPERATOR :: IN : %S
    STRING OPERATOR :: IN : aListName
-   PRIVATE BOOLEAN FUNCTION : FilterMember
+   PRIVATE BOOLEAN FUNCTION : FilterElement
     OBJECT OPERATOR :: IN : aMember
-    PRIVATE BOOLEAN FUNCTION :: FilterMember : Result
-   ; // FilterMember
+    PRIVATE BOOLEAN FUNCTION :: FilterElement : Result
+   ; // FilterElement
+   PRIVATE OBJECT FUNCTION : MapElement
+    OBJECT OPERATOR :: IN : aMember
+    OPERATOR :: VAR : l_Element
+    PRIVATE OBJECT FUNCTION :: MapElement : Result
+   ; // MapElement
    ARRAY FUNCTION :: ELEMLIST : Result
   ; // ELEMLIST
   ^@ OPERATOR : FieldByNameDeepest
