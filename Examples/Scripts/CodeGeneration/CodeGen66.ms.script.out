@@ -68,33 +68,43 @@ VOID Test CodeGen
  ; // VOID elem_proc .CallChildrenCurrentGen
  
  VOID elem_proc .CallCurrentGen
+  FILE VAR l_PrevOutFile
   ModelElement IN Self
-  g_OutFile :=
-  (
-   OutFileName
-   (
-    Self
-    |N
-    (+)
-    '.'
-    (+)
-    g_CurrentGeneratorName
-   )
-   File:OpenWrite
-  )
+  l_PrevOutFile :=
+  g_OutFile
   TRY
-   TRY
-    Self
+   g_OutFile :=
+   (
+    OutFileName
     (
-     g_CurrentGenerator
-     DO
+     Self
+     |N
+     (+)
+     '.'
+     (+)
+     g_CurrentGeneratorName
     )
+    File:OpenWrite
+   )
+   TRY
+    TRY
+     Self
+     (
+      g_CurrentGenerator
+      DO
+     )
+    FINALLY
+     g_CurrentGenerator :=
+     nil
+    END
    FINALLY
-    g_CurrentGenerator :=
+    g_OutFile :=
     nil
    END
   FINALLY
    g_OutFile :=
+   l_PrevOutFile
+   l_PrevOutFile :=
    nil
   END
  ; // VOID elem_proc .CallCurrentGen
@@ -5554,6 +5564,7 @@ TkwMain : Main
    ModelElement OPERATOR :: IN : Self
   ; // .CallChildrenCurrentGen
   VOID OPERATOR :: MACRO :: elem_proc : .CallCurrentGen
+   FILE OPERATOR :: VAR : l_PrevOutFile
    ModelElement OPERATOR :: IN : Self
   ; // .CallCurrentGen
   VOID OPERATOR :: MACRO :: elem_proc : .CallGen
