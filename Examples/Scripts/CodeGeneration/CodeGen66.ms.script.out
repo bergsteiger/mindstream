@@ -87,16 +87,16 @@ VOID Test CodeGen
     File:OpenWrite
    )
    TRY
-    TRY
-     Self
-     (
-      g_CurrentGenerator
-      DO
-     )
-    FINALLY
-     g_CurrentGenerator :=
-     nil
-    END
+    g_CurrentGenerator
+    IsNil
+    !
+    ?ASSURE
+    'Текущй генератор пустой'
+    Self
+    (
+     g_CurrentGenerator
+     DO
+    )
    FINALLY
     g_OutFile :=
     nil
@@ -119,12 +119,17 @@ VOID Test CodeGen
   aGen |RefDeepest
   >>>
   g_CurrentGenerator
-  aGen FieldByNameDeepest
-  'gpName'
-  >>>
-  g_CurrentGeneratorName
-  Self
-  .CallCurrentGen
+  TRY
+   aGen FieldByNameDeepest
+   'gpName'
+   >>>
+   g_CurrentGeneratorName
+   Self
+   .CallCurrentGen
+  FINALLY
+   g_CurrentGenerator :=
+   nil
+  END
  ; // VOID elem_proc .CallGen
  
  VOID elem_proc .Child.CallCurrentGen
@@ -137,8 +142,7 @@ VOID Test CodeGen
   .EnterElement
   TRY
    Self
-   g_CurrentGenerator
-   DO
+   .CallCurrentGen
   FINALLY
    Self
    .LeaveElement

@@ -544,12 +544,9 @@ elem_proc CallCurrentGen
  TRY
   g_OutFile := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
   TRY
-   TRY
-    Self ( g_CurrentGenerator DO )
-    %REMARK 'Вызываем на элементе генератор g_CurrentGenerator'
-   FINALLY
-    g_CurrentGenerator := nil
-   END // TRY..FINALLY
+   g_CurrentGenerator IsNil ! ?ASSURE 'Текущй генератор пустой'
+   Self ( g_CurrentGenerator DO )
+   %REMARK 'Вызываем на элементе генератор g_CurrentGenerator'
   FINALLY
    g_OutFile := nil
   END // TRY..FINALLY
@@ -563,7 +560,8 @@ elem_proc Child.CallCurrentGen
  %SUMMARY 'Вызывает на ДОЧЕРНЕМ элементе генератор g_CurrentGenerator с учётом отступов' ;
  Self .EnterElement 
  TRY
-  Self g_CurrentGenerator DO
+  Self .CallCurrentGen
+  //Self g_CurrentGenerator DO
   %REMARK 'Вызываем генератор g_CurrentGenerator'
  FINALLY
   Self .LeaveElement 
@@ -628,8 +626,12 @@ elem_proc CallGen
  ; // %SUMMARY 
 
  aGen Dereference =: g_CurrentGenerator
- aGen %GP Name =: g_CurrentGeneratorName
- Self .CallCurrentGen
+ TRY
+  aGen %GP Name =: g_CurrentGeneratorName
+  Self .CallCurrentGen
+ FINALLY
+  g_CurrentGenerator := nil
+ END
 ; // CallGen
 
 PROCEDURE CallGens
