@@ -97,12 +97,12 @@ VOID operator define_member
 
 INTEGER VAR g_ClassFieldOffset
 [EXECUTE]
-( g_ClassFieldOffset := 0 )
+ ( g_ClassFieldOffset := 0 )
 ( g_ClassFieldOffset := 0 )
 
 ARRAY VAR g_CurrentClassMembers
 [EXECUTE]
-( g_CurrentClassMembers := [ ] )
+ ( g_CurrentClassMembers := [ ] )
 ( g_CurrentClassMembers := [ ] )
 
 MACRO member
