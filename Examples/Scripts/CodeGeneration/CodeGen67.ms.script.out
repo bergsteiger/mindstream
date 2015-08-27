@@ -33,7 +33,7 @@ VOID Test CodeGen
  
  VOID elem_proc .DumpAsIs
   %SUMMARY %SUM
-   ' Процедура печатающая содержимое элемента модели. Рекурсивно. '
+   'Процедура печатающая содержимое элемента модели. Рекурсивно.'
   ; // %SUMMARY %SUM
   
   ModelElement IN Self
