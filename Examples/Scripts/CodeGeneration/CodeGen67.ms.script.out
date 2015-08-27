@@ -5434,7 +5434,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Templates.ms.m
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\MetaModel.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\UML.ms.model
  ;
 IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> : <<Class>>
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
@@ -5456,7 +5456,7 @@ IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCat
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName
 ; // <<Project>>
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\MetaModel.ms.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\UML.ms.model
  Uses: 
   axiom:axiom
   axiom:Ctx
