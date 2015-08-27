@@ -1,3 +1,3 @@
 h : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Project>> Project1
-Родители элемента 
+
 ; // Project1

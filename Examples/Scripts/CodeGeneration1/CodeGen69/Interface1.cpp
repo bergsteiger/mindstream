@@ -1,3 +1,3 @@
   cpp : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Interface>> Interface1
-  Родители элемента ::Project1::Program1
+  Родители элемента Project1::Program1
   ; // Interface1

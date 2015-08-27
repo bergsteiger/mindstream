@@ -6,6 +6,7 @@ USES
  NoStrangeSymbols.ms.dict
  arrays.ms.dict
  Generation.ms.dict
+ string.ms.dict
 ;
 
 elem_proc DumpAsIs
@@ -19,11 +20,12 @@ elem_proc DumpAsIs
   Self .Name 
    %REMARK 'Выводим имя элемента'
  ] ' ' strings:CatSep OutToFile
+
+ 'Родители элемента ' (+)? (
  [
-  'Родители элемента '
   for ( Self .Parents >reverted> ) .Name
   %REMARK 'Выводим родителей элемента, рекурсивно'
- ] '::' strings:CatSep OutToFile
+ ] '::' strings:CatSep ) OutToFile
  for ( Self .Inherited ) ( .Name OutToFile )
  for ( Self .Implements ) ( .Name OutToFile )
  TRY
