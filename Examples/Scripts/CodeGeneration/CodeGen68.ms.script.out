@@ -1,8 +1,4 @@
 VOID Test CodeGen
- %SUMMARY %SUM
-  ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
- ; // %SUMMARY %SUM
- 
  <<Project>> Project1
   %SUMMARY %SUM
    ' Это наш первый проект - Project1 '
@@ -5052,7 +5048,6 @@ VOID OPERATOR :: MACRO :: elem_generator : .script
 ; // .script
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
-  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library1
