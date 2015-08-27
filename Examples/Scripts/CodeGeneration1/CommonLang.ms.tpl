@@ -19,16 +19,16 @@ elem_proc DumpAsIs
    %REMARK 'Выводим стереотип элемента, рекурсивно'
   Self .Name 
    %REMARK 'Выводим имя элемента'
- ] ' ' strings:CatSep OutToFile
+ ] cIndentChar strings:CatSep OutToFile
 
  'Родители ' (+)? 
-  CatSep> ' ' [ for ( Self .Parents >reverted> ) .Name ] ?OutToFile
+  CatSep> cIndentChar [ for ( Self .Parents >reverted> ) .Name ] ?OutToFile
 
  'Наследуемые ' (+)? 
-  CatSep> ' ' [ for ( Self .Inherited ) .Name ] ?OutToFile
+  CatSep> cIndentChar [ for ( Self .Inherited ) .Name ] ?OutToFile
 
  'Реализуемые ' (+)? 
-  CatSep> ' ' [ for ( Self .Implements ) .Name ] ?OutToFile
+  CatSep> cIndentChar [ for ( Self .Implements ) .Name ] ?OutToFile
 
  TRY
   Self .generate.children

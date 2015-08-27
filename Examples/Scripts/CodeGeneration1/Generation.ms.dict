@@ -173,6 +173,8 @@ FILE VAR g_OutFile
 
 STRING INTEGER ARRAY TYPE PRINTABLE
 
+CONST cIndentChar ' '
+
 PROCEDURE OutToFile
  PRINTABLE IN aValue 
  %SUMMARY 
@@ -187,7 +189,7 @@ PROCEDURE OutToFile
   ( aValue strings:Cat =: l_String )
  else
   ( aValue ToPrintable =: l_String )
- [ g_Indent ' ' char:Dupe l_String ] strings:Cat g_OutFile File:WriteLn
+ [ g_Indent cIndentChar char:Dupe l_String ] strings:Cat g_OutFile File:WriteLn
  %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; //OutToFile
 
