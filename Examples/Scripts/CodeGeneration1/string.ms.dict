@@ -45,3 +45,5 @@ STRING FUNCTION strings:CatSep>
  ARRAY right aValues
  aValues |^ aSep |^ strings:CatSep =: Result
 ; // strings:CatSep>
+
+WordAlias CatSep> strings:CatSep>

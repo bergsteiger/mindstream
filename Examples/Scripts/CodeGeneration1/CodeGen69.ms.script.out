@@ -4133,6 +4133,13 @@ STRING FUNCTION : any:Cat
  ARRAY OPERATOR :: IN : anArray
  STRING FUNCTION :: any:Cat : Result
 ; // any:Cat
+STRING FUNCTION : CatSep>
+ ^ OPERATOR :: IN : _aSep
+ ^ OPERATOR :: IN : _aValues
+ IMMEDIATE VOID OPERATOR : aSep
+ IMMEDIATE VOID OPERATOR : aValues
+ STRING FUNCTION :: strings:CatSep> : Result
+; // CatSep>
 STRING FUNCTION : string:CatWihAny
  STRING OPERATOR :: IN : aString
  OPERATOR :: IN : aValue

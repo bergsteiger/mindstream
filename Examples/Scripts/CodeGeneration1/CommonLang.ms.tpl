@@ -22,13 +22,13 @@ elem_proc DumpAsIs
  ] ' ' strings:CatSep OutToFile
 
  'Родители ' (+)? 
-  strings:CatSep> ' ' [ for ( Self .Parents >reverted> ) .Name ] ?OutToFile
+  CatSep> ' ' [ for ( Self .Parents >reverted> ) .Name ] ?OutToFile
 
  'Наследуемые ' (+)? 
-  strings:CatSep> ' ' [ for ( Self .Inherited ) .Name ] ?OutToFile
+  CatSep> ' ' [ for ( Self .Inherited ) .Name ] ?OutToFile
 
  'Реализуемые ' (+)? 
-  strings:CatSep> ' ' [ for ( Self .Implements ) .Name ] ?OutToFile
+  CatSep> ' ' [ for ( Self .Implements ) .Name ] ?OutToFile
 
  TRY
   Self .generate.children
