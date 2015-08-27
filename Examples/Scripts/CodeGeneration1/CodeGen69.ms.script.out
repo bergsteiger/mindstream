@@ -4012,6 +4012,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dic
   axiom:ActionList
   axiom:ContainedAction
  ;
+ARRAY FUNCTION : .filter>
+ ^ OPERATOR :: IN : aFunctor
+ ARRAY OPERATOR :: IN : anArray
+ ARRAY FUNCTION :: .filter> : Result
+; // .filter>
 ARRAY FUNCTION : >filter>
  ^ OPERATOR :: IN : aFunctor
  ^@ OPERATOR :: IN : anArray
