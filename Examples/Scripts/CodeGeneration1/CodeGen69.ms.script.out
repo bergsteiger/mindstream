@@ -4122,6 +4122,13 @@ STRING FUNCTION : (+)?
 : : (string)
  ^ OPERATOR :: IN : aValue
 ; // (string)
+STRING FUNCTION : ?(+)
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : _aSuffix
+ STRING OPERATOR :: IN : aPrefix
+ IMMEDIATE VOID OPERATOR : aSuffix
+ STRING FUNCTION :: ?(+) : Result
+; // ?(+)
 STRING FUNCTION : any:Cat
  ARRAY OPERATOR :: IN : anArray
  STRING FUNCTION :: any:Cat : Result

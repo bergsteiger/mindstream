@@ -30,3 +30,12 @@ STRING FUNCTION (+)?
  if ( l_Suffix =/= '' ) then
   ( aPrefix l_Suffix Cat =: Result )
 ; // (+)?
+
+STRING FUNCTION ?(+)
+ STRING in aPrefix
+ STRING right aSuffix
+ %SUMMARY 'Если aPrefix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку' ;
+ Result := ''
+ if ( aPrefix =/= '' ) then
+  ( aPrefix aSuffix |^ Cat =: Result )
+; // ?(+)
