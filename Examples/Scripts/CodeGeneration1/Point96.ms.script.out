@@ -1,0 +1,598 @@
+VOID Test PointTest
+ class_impl _:Point
+  %FIELDS %Fld
+   'VMT'
+   'X'
+   'Y'
+  ; // %FIELDS %Fld
+  
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+ ; // class_impl _:Point
+ 
+ class_impl _:Rectangle
+  %FIELDS %Fld
+   'VMT'
+   'TopLeft'
+   'BottomRight'
+  ; // %FIELDS %Fld
+  
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+ ; // class_impl _:Rectangle
+ 
+ INTEGER CONST c:Point:Instance:Size
+  3
+ INTEGER CONST c:Point:Offset:VMT
+  0
+ INTEGER CONST c:Point:Offset:X
+  1
+ INTEGER CONST c:Point:Offset:Y
+  2
+ INTEGER CONST c:Rectangle:Instance:Size
+  3
+ INTEGER CONST c:Rectangle:Offset:BottomRight
+  2
+ INTEGER CONST c:Rectangle:Offset:TopLeft
+  1
+ INTEGER CONST c:Rectangle:Offset:VMT
+  0
+ ARRAY VAR l_Points
+ ARRAY VAR l_Rectangles
+ Object VAR O1
+ Point VAR P1
+ Point VAR P10
+ Point VAR P11
+ Point VAR P2
+ Point VAR P3
+ Point VAR P4
+ Point VAR P5
+ Point VAR P6
+ Point VAR P7
+ Point VAR P8
+ Point VAR P9
+ IMMEDIATE VOID TYPE Pixel
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE Pixel
+ 
+ IMMEDIATE VOID TYPE PixelList
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE PixelList
+ 
+ IMMEDIATE VOID OPERATOR Point
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID OPERATOR Point
+ 
+ Point method Point:-
+  ^ IN _aPoint
+  IMMEDIATE VOID OPERATOR aPoint
+   '_aPoint'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aPoint
+  
+  Point IN Self
+  Point:OF
+  (
+   Self
+   Point:+
+   (
+    (
+     _aPoint |^
+    )
+    Point:Neg
+   )
+  )
+  >>>
+  Result
+ ; // Point method Point:-
+ 
+ Point constructor Point::
+  ^ IN _aX
+  ^ IN _aY
+  IMMEDIATE VOID OPERATOR aX
+   '_aX'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aX
+  
+  IMMEDIATE VOID OPERATOR aY
+   '_aY'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aY
+  
+  [
+   @
+   _:Point
+   (
+    _aX |^
+   )
+   (
+    _aY |^
+   )
+  ]
+  >>>
+  Result
+ ; // Point constructor Point::
+ 
+ Point method Point:+
+  ^ IN _aPoint
+  IMMEDIATE VOID OPERATOR aPoint
+   '_aPoint'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aPoint
+  
+  Point IN Self
+  Point::
+  (
+   Self
+   Point:X
+   (+)
+   (
+    (
+     _aPoint |^
+    )
+    Point:X
+   )
+  )
+  (
+   Self
+   Point:Y
+   (+)
+   (
+    (
+     _aPoint |^
+    )
+    Point:Y
+   )
+  )
+  >>>
+  Result
+ ; // Point method Point:+
+ 
+ Point constructor Point:0
+  Point::
+  0
+  0
+  >>>
+  Result
+ ; // Point constructor Point:0
+ 
+ Point method Point:Neg
+  Point IN Self
+  Point::
+  Neg
+  (
+   Self
+   Point:X
+  )
+  Neg
+  (
+   Self
+   Point:Y
+  )
+  >>>
+  Result
+ ; // Point method Point:Neg
+ 
+ Point constructor Point:OF
+  ^ IN _aPoint
+  IMMEDIATE VOID OPERATOR aPoint
+   '_aPoint'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aPoint
+  
+  Point::
+  (
+   (
+    _aPoint |^
+   )
+   Point:X
+  )
+  (
+   (
+    _aPoint |^
+   )
+   Point:Y
+  )
+  >>>
+  Result
+ ; // Point constructor Point:OF
+ 
+ VOID method Point:Print
+  Point IN Self
+  Self
+  Point:ToPrintable
+  .
+ ; // VOID method Point:Print
+ 
+ OVERRIDE STRING method Point:ToPrintable
+  Point IN Self
+  [
+   '( '
+   'X: '
+   Self
+   Point:X
+   ToPrintable
+   ', Y: '
+   Self
+   Point:Y
+   ToPrintable
+   ' )'
+  ]
+  strings:Cat
+  >>>
+  Result
+ ; // OVERRIDE STRING method Point:ToPrintable
+ 
+ Pixel readonly Point:X
+  Point IN Self
+  Self
+  FieldByOffset
+  c:Point:Offset:X
+  >>>
+  Result
+ ; // Pixel readonly Point:X
+ 
+ Point constructor Point:XY
+  ^ IN _aPoint
+  IMMEDIATE VOID OPERATOR aPoint
+   '_aPoint'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aPoint
+  
+  ARRAY VAR Points
+  [
+   (
+    _aPoint |^
+   )
+  ]
+  >>>
+  Points
+  Point::
+  (
+   Points
+   FieldByOffset
+   0
+  )
+  (
+   Points
+   FieldByOffset
+   1
+  )
+  >>>
+  Result
+ ; // Point constructor Point:XY
+ 
+ Pixel readonly Point:Y
+  Point IN Self
+  Self
+  FieldByOffset
+  c:Point:Offset:Y
+  >>>
+  Result
+ ; // Pixel readonly Point:Y
+ 
+ Rectangle VAR R1
+ Rectangle VAR R2
+ IMMEDIATE VOID OPERATOR Rectangle
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID OPERATOR Rectangle
+ 
+ Rectangle constructor Rectangle::
+  ^ IN _aBottomRight
+  ^ IN _aTopLeft
+  IMMEDIATE VOID OPERATOR aBottomRight
+   '_aBottomRight'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aBottomRight
+  
+  IMMEDIATE VOID OPERATOR aTopLeft
+   '_aTopLeft'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aTopLeft
+  
+  [
+   @
+   _:Rectangle
+   (
+    _aTopLeft |^
+   )
+   (
+    _aBottomRight |^
+   )
+  ]
+  >>>
+  Result
+ ; // Rectangle constructor Rectangle::
+ 
+ Point readonly Rectangle:BottomRight
+  Rectangle IN Self
+  Self
+  FieldByOffset
+  c:Rectangle:Offset:BottomRight
+  >>>
+  Result
+ ; // Point readonly Rectangle:BottomRight
+ 
+ VOID method Rectangle:Print
+  Rectangle IN Self
+  Self
+  Rectangle:ToPrintable
+  .
+ ; // VOID method Rectangle:Print
+ 
+ Point readonly Rectangle:TopLeft
+  Rectangle IN Self
+  Self
+  FieldByOffset
+  c:Rectangle:Offset:TopLeft
+  >>>
+  Result
+ ; // Point readonly Rectangle:TopLeft
+ 
+ OVERRIDE STRING method Rectangle:ToPrintable
+  Rectangle IN Self
+  [
+   '( '
+   'TopLeft: '
+   Self
+   Rectangle:TopLeft
+   Point:ToPrintable
+   ', BottomRight: '
+   Self
+   Rectangle:BottomRight
+   Point:ToPrintable
+   ' )'
+  ]
+  strings:Cat
+  >>>
+  Result
+ ; // OVERRIDE STRING method Rectangle:ToPrintable
+ 
+ PointTest
+ DumpElement
+ P1 :=
+ Point:0
+ P2 :=
+ Point:0
+ P3 :=
+ Point::
+ 1
+ 1
+ P4 :=
+ Point:XY
+ (
+  2
+  2
+ )
+ P5 :=
+ Point:OF
+ P4
+ P6 :=
+ (
+  P3
+  Point:+
+  P4
+ )
+ P7 :=
+ (
+  P3
+  Point:-
+  P4
+ )
+ P8 :=
+ (
+  P4
+  Point:-
+  P3
+ )
+ P9 :=
+ (
+  P4
+  Point:Neg
+ )
+ P10 :=
+ (
+  P3
+  Point:Neg
+ )
+ P11 :=
+ Point:XY
+ (
+  -2
+  2
+ )
+ O1 :=
+ P1
+ O1
+ Point:Print
+ [
+  P1
+  P2
+  P3
+  P4
+  P5
+  P6
+  P7
+  P8
+  P9
+  P10
+  P11
+ ]
+ >>>
+ l_Points
+ for
+ l_Points
+ Point:Print
+ for
+ l_Points
+ (
+  Point:X
+  .
+ )
+ for
+ l_Points
+ (
+  Point:Y
+  .
+ )
+ for
+ l_Points
+ (
+  Object:class
+  .
+ )
+ for
+ l_Points
+ (
+  Object:ClassName
+  .
+ )
+ for
+ l_Points
+ (
+  for
+  (
+   Object:class
+   %G
+  )
+  (
+   getClassName
+   .
+  )
+ )
+ R1 :=
+ Rectangle::
+ P1
+ P4
+ R2 :=
+ Rectangle::
+ P6
+ P7
+ [
+  R1
+  R2
+ ]
+ >>>
+ l_Rectangles
+ for
+ l_Rectangles
+ Rectangle:Print
+ 'Hello '
+ (+)
+ 'world'
+ .
+ 'Hello '
+ (+)
+ 'world'
+ .
+ 'Hello '
+ (+)
+ 'world'
+ .
+ 1
+ (+)
+ 2
+ .
+ 10
+ (+)
+ 20
+ .
+ 0
+ (-)
+ 10
+ .
+ Neg
+ 10
+ .
+ Neg
+ -10
+ .
+; // VOID Test PointTest
+
+( X: 0, Y: 0 )
+( X: 0, Y: 0 )
+( X: 0, Y: 0 )
+( X: 1, Y: 1 )
+( X: 2, Y: 2 )
+( X: 2, Y: 2 )
+( X: 3, Y: 3 )
+( X: -1, Y: -1 )
+( X: 1, Y: 1 )
+( X: -2, Y: -2 )
+( X: -1, Y: -1 )
+( X: -2, Y: 2 )
+0
+0
+1
+2
+2
+3
+-1
+1
+-2
+-1
+-2
+0
+0
+1
+2
+2
+3
+-1
+1
+-2
+-1
+2
+TkwCompiledProcedure
+TkwCompiledProcedure
+TkwCompiledProcedure
+TkwCompiledProcedure
+TkwCompiledProcedure
+TkwCompiledProcedure
+TkwCompiledProcedure
+TkwCompiledProcedure
+TkwCompiledProcedure
+TkwCompiledProcedure
+TkwCompiledProcedure
+Point
+Point
+Point
+Point
+Point
+Point
+Point
+Point
+Point
+Point
+Point
+Object
+Object
+Object
+Object
+Object
+Object
+Object
+Object
+Object
+Object
+Object
+( TopLeft: ( X: 0, Y: 0 ), BottomRight: ( X: 2, Y: 2 ) )
+( TopLeft: ( X: 3, Y: 3 ), BottomRight: ( X: -1, Y: -1 ) )
+Hello world
+Hello world
+Hello world
+3
+30
+-10
+-10
+10
