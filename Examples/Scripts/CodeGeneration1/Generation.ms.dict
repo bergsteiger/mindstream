@@ -271,6 +271,8 @@ elem_proc CallChildrenCurrentGen
  for ( Self .Children ) .Child.CallCurrentGen
 ; // CallChildrenCurrentGen
 
+WordAlias .generate.children .CallChildrenCurrentGen
+
 CONST GEN_PROPERTY_PREFIX 'gp'
 %REMARK 'Префикс имени свойства генератора'
 

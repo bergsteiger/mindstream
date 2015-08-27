@@ -4788,6 +4788,10 @@ VOID OPERATOR :: MACRO :: elem_proc : .EnterElement
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ModelElement OPERATOR :: IN : Self
 ; // .EnterElement
+VOID OPERATOR :: MACRO :: elem_proc : .generate.children
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ModelElement OPERATOR :: IN : Self
+; // .generate.children
 ARRAY OPERATOR :: MACRO :: elem_func : .Implements
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ARRAY OPERATOR :: MACRO :: elem_func :: .Implements : Result

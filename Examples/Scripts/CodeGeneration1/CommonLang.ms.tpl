@@ -31,7 +31,7 @@ elem_proc DumpAsIs
   strings:CatSep> ' ' [ for ( Self .Implements ) .Name ] ?OutToFile
 
  TRY
-  Self .CallChildrenCurrentGen
+  Self .generate.children
   %REMARK 'Выводим детей элемента, тем же самым генератором'
  FINALLY
   [ '; // ' Self .Name ] OutToFile
