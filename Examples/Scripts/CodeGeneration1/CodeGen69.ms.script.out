@@ -4766,6 +4766,7 @@ VOID OPERATOR :: MACRO :: elem_proc : .CallChildrenCurrentGen
  ModelElement OPERATOR :: IN : Self
 ; // .CallChildrenCurrentGen
 VOID OPERATOR :: MACRO :: elem_proc : .CallCurrentGen
+ INTEGER OPERATOR :: VAR : l_PrevIndent
  FILE OPERATOR :: VAR : l_PrevOutFile
  ModelElement OPERATOR :: IN : Self
 ; // .CallCurrentGen
