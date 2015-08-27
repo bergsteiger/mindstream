@@ -116,7 +116,7 @@ MACRO member
 MACRO classExpander
  ^ IN anImpl
  // Тут можно копировать поля и методы
- for ( ( anImpl |@ ) %G ) ( 
+ anImpl |@ %G ==> ( 
   IN anItem 
   for ( anItem %Fld ) ( 
    IN anItem 
