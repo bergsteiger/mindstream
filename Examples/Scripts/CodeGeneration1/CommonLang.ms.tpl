@@ -29,7 +29,7 @@ elem_proc DumpAsIs
  ] OutToFile
 
  'Родители ' (+)? 
-  CatSepIndent> [ for ( Self .Parents >reverted> ) .Name ] ?OutToFile
+  CatSepIndent> ( ( Self .Parents >reverted> ) >map> .Name ) ?OutToFile
 
  'Наследуемые ' (+)? 
   CatSepIndent> [ for ( Self .Inherited ) .Name ] ?OutToFile
