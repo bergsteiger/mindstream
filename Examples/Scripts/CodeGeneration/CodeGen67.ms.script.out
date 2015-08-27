@@ -486,19 +486,6 @@ VOID Test CodeGen
   .DumpAsIs
  ; // VOID elem_generator .script
  
- IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
-  %SUMMARY %SUM
-   ' ќпредел€ем базовый элемент мета-модели “от самый который позвол€ет тащить всЄ остальное "за волосы из болота" „ерез этот примитив вывод€тс€ все остальные '
-  ; // %SUMMARY %SUM
-  
-  ^L IN aName
-  aName
-  |N
-  <<@meta>>
-  DefineStereotypeProducer
-  EXIT
- ; // IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
- 
  IMMEDIATE VOID <<UMLClass>> <<Class>>
   %SUMMARY %SUM
    ' Ќаверное у нас при разработке встречаютс€ проектные классы. “ак вот Class это стереотип, который описывает наши проектные классы. '
@@ -1631,6 +1618,7 @@ Dictionary: CodeGen67.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Object.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\implementation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\MetaMetaModel.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\RefDeepest.ms.dict
  ;
 Dictionary: axiom:axiom
@@ -5509,6 +5497,39 @@ Dictionary: axiom:CompiledWordWorkerWord
 TtfwWord pop:CompiledWordWorkerWord:Compiled
 Dictionary: axiom:Finder
 VOID pop:Finder:SetToCtx
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\MetaMetaModel.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // <<@meta>>
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\RefDeepest.ms.dict
  Uses: 
   axiom:axiom
@@ -5676,10 +5697,6 @@ TkwMain : Main
    STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
    ModelElement OPERATOR :: IN : Self
   ; // .script
-  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^L OPERATOR :: IN : aName
-  ; // <<@meta>>
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> : <<Class>>
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
