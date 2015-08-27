@@ -26,7 +26,7 @@ STRING FUNCTION (+)?
  %SUMMARY 'Если aSuffix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку' ;
  Result := ''
  STRING VAR l_Suffix
- aSuffix |^ =: l_Suffix
+ aSuffix =: l_Suffix
  if ( l_Suffix =/= '' ) then
   ( aPrefix l_Suffix Cat =: Result )
 ; // (+)?
@@ -37,13 +37,13 @@ STRING FUNCTION ?(+)
  %SUMMARY 'Если aPrefix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку' ;
  Result := ''
  if ( aPrefix =/= '' ) then
-  ( aPrefix aSuffix |^ Cat =: Result )
+  ( aPrefix aSuffix Cat =: Result )
 ; // ?(+)
 
 STRING FUNCTION strings:CatSep>
  STRING right aSep
  ARRAY right aValues
- aValues |^ aSep |^ strings:CatSep =: Result
+ aValues aSep strings:CatSep =: Result
 ; // strings:CatSep>
 
 WordAlias CatSep> strings:CatSep>
