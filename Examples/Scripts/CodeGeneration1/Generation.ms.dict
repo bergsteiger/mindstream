@@ -214,6 +214,8 @@ STRING VAR g_CurrentGeneratorName
 %REMARK 'Имя текущего генератора'
 ( g_CurrentGeneratorName := '' )
 
+CONST cPathSep '\'
+
 STRING FUNCTION OutFileName
  STRING right aGeneratorName
  %SUMMARY 'Имя файла для вывода' ;
@@ -229,10 +231,10 @@ STRING FUNCTION OutFileName
   %REMARK 'Убираем .script' 
   '' sysutils:ChangeFileExt 
   %REMARK 'Убираем .ms' 
- ] '\' strings:CatSep =: l_OutPath
+ ] cPathSep strings:CatSep =: l_OutPath
  l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
  %REMARK 'Создаём директорию рекурсивно, если её ещё не было'
- [ l_OutPath aGeneratorName ] '\' strings:CatSep =: Result
+ [ l_OutPath aGeneratorName ] cPathSep strings:CatSep =: Result
 ; // OutFileName
 
 elem_proc CallCurrentGen

@@ -4846,6 +4846,7 @@ VOID OPERATOR :: PROCEDURE : CallGensList
  ^@ OPERATOR :: IN : aGenerators
  ^@ OPERATOR :: IN : anElements
 ; // CallGensList
+STRING CONST : cPathSep
 VOID OPERATOR :: PROCEDURE : do_elem_func
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ENGINE_WORD OPERATOR :: IN : aModifier
