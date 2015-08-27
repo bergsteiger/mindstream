@@ -21,14 +21,14 @@ elem_proc DumpAsIs
 
  CatSepIndent>
  [
-   Self .Stereotypes >reverted> ==> .Name
+   Self .Stereotypes .reverted> ==> .Name
    %REMARK 'Выводим стереотип элемента, рекурсивно'
   Self .Name 
    %REMARK 'Выводим имя элемента'
  ] OutToFile
 
  'Родители ' (+)? 
-  CatSepIndent> ( Self .Parents >reverted> .map> .Name ) ?OutToFile
+  CatSepIndent> ( Self .Parents .reverted> .map> .Name ) ?OutToFile
 
  'Наследуемые ' (+)? 
   CatSepIndent> ( Self .Inherited .map> .Name ) ?OutToFile
