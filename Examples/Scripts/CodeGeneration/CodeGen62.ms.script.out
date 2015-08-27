@@ -5199,6 +5199,11 @@ WORD_REF OPERATOR : |RefDeepest
  ^@ OPERATOR :: IN : aSelf
  WORD_REF OPERATOR :: |RefDeepest : Result
 ; // |RefDeepest
+WORD_REF OPERATOR : Dereference
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^@ OPERATOR :: IN : aSelf
+ WORD_REF OPERATOR :: |RefDeepest : Result
+; // Dereference
 WORD_REF OPERATOR : GetRefDeepestFromLeft
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^@ OPERATOR :: IN : aSelf
