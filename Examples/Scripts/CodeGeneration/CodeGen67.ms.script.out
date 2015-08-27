@@ -472,6 +472,20 @@ VOID Test CodeGen
   .DumpAsIs
  ; // VOID elem_generator .pas
  
+ VOID elem_generator .script
+  %SUMMARY %SUM
+   'Генератор выводящий элементы модели в ms.script.'
+  ; // %SUMMARY %SUM
+  
+  STRING %GEN_PROPERTY gpName
+   'ms.script'
+  ; // STRING %GEN_PROPERTY gpName
+  
+  ModelElement IN Self
+  Self
+  .DumpAsIs
+ ; // VOID elem_generator .script
+ 
  IMMEDIATE VOID StereotypeStereotypeProducer <<@meta>>
   %SUMMARY %SUM
    ' Определяем базовый элемент мета-модели Тот самый который позволяет тащить всё остальное "за волосы из болота" Через этот примитив выводятся все остальные '
@@ -991,7 +1005,7 @@ VOID Test CodeGen
  nil
  g_CurrentGeneratorName :=
  ''
- ( Project1 Project2 Project3 ( .dump .pas .c++ .h CallGensList
+ ( Project1 Project2 Project3 ( .dump .pas .c++ .h .script CallGensList
 ; // VOID Test CodeGen
 
 Dictionary: axiom:Array
@@ -5657,6 +5671,11 @@ TkwMain : Main
    STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
    ModelElement OPERATOR :: IN : Self
   ; // .pas
+  VOID OPERATOR :: MACRO :: elem_generator : .script
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
+   ModelElement OPERATOR :: IN : Self
+  ; // .script
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
