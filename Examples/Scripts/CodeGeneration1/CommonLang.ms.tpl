@@ -18,7 +18,7 @@ STRING FUNCTION CatSepIndent>
 elem_proc DumpAsIs
  %SUMMARY 'Процедура печатающая содержимое элемента модели. Рекурсивно.' ;
 
- CatSep> cIndentChar
+ CatSepIndent>
  [
   g_CurrentGeneratorName ':'
    %REMARK 'Выводим имя текущего генератора. Для отладки' 
@@ -29,13 +29,13 @@ elem_proc DumpAsIs
  ] OutToFile
 
  'Родители ' (+)? 
-  CatSep> cIndentChar [ for ( Self .Parents >reverted> ) .Name ] ?OutToFile
+  CatSepIndent> [ for ( Self .Parents >reverted> ) .Name ] ?OutToFile
 
  'Наследуемые ' (+)? 
-  CatSep> cIndentChar [ for ( Self .Inherited ) .Name ] ?OutToFile
+  CatSepIndent> [ for ( Self .Inherited ) .Name ] ?OutToFile
 
  'Реализуемые ' (+)? 
-  CatSep> cIndentChar [ for ( Self .Implements ) .Name ] ?OutToFile
+  CatSepIndent> [ for ( Self .Implements ) .Name ] ?OutToFile
 
   Self .generate.children
   %REMARK 'Выводим детей элемента, тем же самым генератором'
