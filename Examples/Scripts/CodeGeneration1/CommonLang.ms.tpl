@@ -22,7 +22,7 @@ elem_proc DumpAsIs
  ] ' ' strings:CatSep OutToFile
 
  'Родители ' (+)? 
-  strings:CatSep> '::' [ for ( Self .Parents >reverted> ) .Name ] ?OutToFile
+  strings:CatSep> ' ' [ for ( Self .Parents >reverted> ) .Name ] ?OutToFile
 
  strings:CatSep> ' ' [ for ( Self .Inherited ) .Name ] ?OutToFile
  strings:CatSep> ' ' [ for ( Self .Implements ) .Name ] ?OutToFile
