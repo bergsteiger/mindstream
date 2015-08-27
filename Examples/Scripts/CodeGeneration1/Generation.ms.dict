@@ -193,6 +193,12 @@ PROCEDURE OutToFile
 
 PROCEDURE ?OutToFile
  STRING IN aValue
+ %SUMMARY 
+ '
+ Выводит значение в текущий файл, если оно не пустое.
+ С переводом каретки.
+ '
+ ; // %SUMMARY 
  if ( aValue =/= '' ) then
   ( aValue OutToFile )
 ; // ?OutToFile
