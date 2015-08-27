@@ -3786,6 +3786,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dic
  ;
  Exports: 
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
  ;
 IMMEDIATE VOID OPERATOR : in
  ^L OPERATOR :: private:DefineNameParam : aName
@@ -4521,6 +4522,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
@@ -4968,6 +4970,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\RefDeepest.ms
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymbols.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
  ;
 WORD_REF OPERATOR : |RefDeepest
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
@@ -5017,6 +5020,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms
   axiom:ActionList
   axiom:ContainedAction
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymbols.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
@@ -5055,6 +5061,11 @@ VOID OPERATOR :: MACRO :: elem_generator : .script
  STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
  ModelElement OPERATOR :: IN : Self
 ; // .script
+STRING FUNCTION : CatSepIndent>
+ ^ OPERATOR :: IN : _aValues
+ IMMEDIATE VOID OPERATOR : aValues
+ STRING FUNCTION :: CatSepIndent> : Result
+; // CatSepIndent>
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
 ; // Main

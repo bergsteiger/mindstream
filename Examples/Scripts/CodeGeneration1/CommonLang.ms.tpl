@@ -3,11 +3,17 @@
 
 USES
  Documentation.ms.dict
+ params.ms.dict
  NoStrangeSymbols.ms.dict
  arrays.ms.dict
  Generation.ms.dict
  string.ms.dict
 ;
+
+STRING FUNCTION CatSepIndent>
+ ARRAY right aValues
+ CatSep> cIndentChar aValues =: Result
+; // CatSepIndent>
 
 elem_proc DumpAsIs
  %SUMMARY 'Процедура печатающая содержимое элемента модели. Рекурсивно.' ;
