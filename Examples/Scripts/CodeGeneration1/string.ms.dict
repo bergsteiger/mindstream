@@ -1,3 +1,9 @@
+USES
+ Documentation.ms.dict
+ params.ms.dict
+ core.ms.dict
+;
+
 : (string)
  ^ IN aValue
  aValue DO ToPrintable
@@ -13,3 +19,11 @@ STRING FUNCTION any:Cat
   ARRAY IN anArray
  '' for anArray string:CatWihAny =: Result
 ; // any:Cat
+
+STRING FUNCTION (+)?
+ STRING in aPrefix
+ STRING right aSuffix
+ %SUMMARY 'Если aSuffix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку' ;
+ Result := ''
+ 
+; // (+)?

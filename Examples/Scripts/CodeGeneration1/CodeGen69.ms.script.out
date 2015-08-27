@@ -4106,7 +4106,18 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dic
   axiom:form
   axiom:ActionList
   axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
  ;
+STRING FUNCTION : (+)?
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : _aSuffix
+ STRING OPERATOR :: IN : aPrefix
+ IMMEDIATE VOID OPERATOR : aSuffix
+ STRING FUNCTION :: (+)? : Result
+; // (+)?
 : : (string)
  ^ OPERATOR :: IN : aValue
 ; // (string)
