@@ -21,8 +21,6 @@ elem_proc DumpAsIs
 
  CatSepIndent>
  [
-  g_CurrentGeneratorName ':'
-   %REMARK 'Выводим имя текущего генератора. Для отладки' 
   for ( Self .Stereotypes >reverted> ) .Name
    %REMARK 'Выводим стереотип элемента, рекурсивно'
   Self .Name 

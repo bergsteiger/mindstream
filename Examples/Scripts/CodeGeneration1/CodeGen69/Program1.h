@@ -1,3 +1,3 @@
-h : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Program>> Program1
+OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Program>> Program1
 Родители Project1
 ; // Program1

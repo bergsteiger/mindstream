@@ -1,3 +1,3 @@
-pas : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Library>> Library1
+OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Library>> Library1
 Родители Project1
 ; // Library1
