@@ -24,7 +24,7 @@ elem_proc DumpAsIs
  'Родители элемента ' (+)? 
   strings:CatSep> '::' [ for ( Self .Parents >reverted> ) .Name ] ?OutToFile
 
- strings:CatSep> ' ' [ for ( Self .Inherited ) .Name ] OutToFile
+ strings:CatSep> ' ' [ for ( Self .Inherited ) .Name ] ?OutToFile
  for ( Self .Implements ) ( .Name OutToFile )
  TRY
   Self .CallChildrenCurrentGen
