@@ -118,7 +118,7 @@ MACRO classExpander
  // Тут можно копировать поля и методы
  anImpl |@ %G ==> ( 
   IN anItem 
-  for ( anItem %Fld ) ( 
+  anItem %Fld ==> ( 
    IN anItem 
    axiom:PushSymbol member
    anItem |N Ctx:Parser:PushSymbol
@@ -216,7 +216,7 @@ MACRO RunCompileFields
   'implementation'
   g_CurrentClassImpl
    '%FIELDS'
-   for g_CurrentClassMembers ( STRING IN aName [ '`' aName '`' ] strings:Cat )
+   g_CurrentClassMembers ==> ( STRING IN aName [ '`' aName '`' ] strings:Cat )
    ';'
   'end.'
  ] Ctx:Parser:PushArray
