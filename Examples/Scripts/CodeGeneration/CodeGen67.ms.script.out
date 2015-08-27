@@ -1,40 +1,4 @@
 VOID Test CodeGen
- IMMEDIATE VOID MACRO %GEN_PROPERTY
-  %SUMMARY %SUM
-   'Свойство генератора'
-  ; // %SUMMARY %SUM
-  
-  ^L IN aName
-  %GEN_PROPERTY
-  Ctx:SetWordProducerForCompiledClass
-  axiom:PushSymbol
-  CONST
-  GEN_PROPERTY_PREFIX
-  (+)
-  (
-   aName
-   |N
-  )
-  Ctx:Parser:PushSymbol
- ; // IMMEDIATE VOID MACRO %GEN_PROPERTY
- 
- IMMEDIATE VOID MACRO %GP
-  %SUMMARY %SUM
-   'Метод получения свойства генератора'
-  ; // %SUMMARY %SUM
-  
-  ^L IN aName
-  axiom:PushSymbol
-  FieldByNameDeepest
-  GEN_PROPERTY_PREFIX
-  (+)
-  (
-   aName
-   |N
-  )
-  Ctx:Parser:PushSymbol
- ; // IMMEDIATE VOID MACRO %GP
- 
  %SUMMARY %SUM
   ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
  ; // %SUMMARY %SUM
@@ -52,114 +16,6 @@ VOID Test CodeGen
   Self
   .DumpAsIs
  ; // VOID elem_generator .c++
- 
- VOID elem_proc .CallChildrenCurrentGen
-  %SUMMARY %SUM
-   'Вызывает текущий генератор для всех детей элемента модели'
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  for
-  (
-   Self
-   .Children
-  )
-  .Child.CallCurrentGen
- ; // VOID elem_proc .CallChildrenCurrentGen
- 
- VOID elem_proc .CallCurrentGen
-  FILE VAR l_PrevOutFile
-  ModelElement IN Self
-  l_PrevOutFile :=
-  g_OutFile
-  TRY
-   g_OutFile :=
-   (
-    OutFileName
-    (
-     Self
-     |N
-     (+)
-     '.'
-     (+)
-     g_CurrentGeneratorName
-    )
-    File:OpenWrite
-   )
-   TRY
-    g_CurrentGenerator
-    IsNil
-    !
-    ?ASSURE
-    'Текущй генератор пустой'
-    Self
-    (
-     g_CurrentGenerator
-     DO
-    )
-   FINALLY
-    g_OutFile :=
-    nil
-   END
-  FINALLY
-   g_OutFile :=
-   l_PrevOutFile
-   l_PrevOutFile :=
-   nil
-  END
- ; // VOID elem_proc .CallCurrentGen
- 
- VOID elem_proc .CallGen
-  %SUMMARY %SUM
-   ' Вызывает на элементе генератор aGen. С открытием "правильных файлов". '
-  ; // %SUMMARY %SUM
-  
-  ^ IN aGen
-  ModelElement IN Self
-  aGen |RefDeepest
-  >>>
-  g_CurrentGenerator
-  TRY
-   aGen FieldByNameDeepest
-   'gpName'
-   >>>
-   g_CurrentGeneratorName
-   Self
-   .CallCurrentGen
-  FINALLY
-   g_CurrentGenerator :=
-   nil
-  END
- ; // VOID elem_proc .CallGen
- 
- VOID elem_proc .Child.CallCurrentGen
-  %SUMMARY %SUM
-   'Вызывает на ДОЧЕРНЕМ элементе генератор g_CurrentGenerator с учётом отступов'
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  Self
-  .EnterElement
-  TRY
-   Self
-   .CallCurrentGen
-  FINALLY
-   Self
-   .LeaveElement
-  END
- ; // VOID elem_proc .Child.CallCurrentGen
- 
- ARRAY elem_func .Children
-  %SUMMARY %SUM
-   'Возвращает итератор детей Self в "терминах определённой модели"'
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  ( Self MembersIterator >filter>
-  .IsModelElement
-  >>>
-  Result
- ; // ARRAY elem_func .Children
  
  VOID elem_generator .dump
   %SUMMARY %SUM
@@ -242,105 +98,6 @@ VOID Test CodeGen
   END
  ; // VOID elem_proc .DumpAsIs
  
- ARRAY elem_func .ElementList
-  %SUMMARY %SUM
-   'Возвращает итератор именованного списка на элементе'
-  ; // %SUMMARY %SUM
-  
-  ^L IN aListName
-  PRIVATE BOOLEAN FUNCTION FilterElement
-   OBJECT IN aMember
-   Result :=
-   (
-    aMember
-    NotValid
-    !
-   )
-  ; // PRIVATE BOOLEAN FUNCTION FilterElement
-  
-  PRIVATE OBJECT FUNCTION MapElement
-   OBJECT IN aMember
-   VAR l_Element
-   aMember
-   DO
-   >>>
-   l_Element
-   if
-    (
-     l_Element
-     IsVoid
-    )
-   then
-    (
-     Result :=
-     nil
-    )
-   else
-    (
-     Result :=
-     l_Element
-    )
-  ; // PRIVATE OBJECT FUNCTION MapElement
-  
-  ModelElement IN Self
-  if
-   (
-    Self
-    NotValid
-   )
-  then
-   (
-    Result :=
-    [
-    ]
-   )
-  else
-   (
-    VAR l_List
-    l_List :=
-    (
-     Self
-     %%
-     (
-      aListName
-      |N
-     )
-    )
-    if
-     (
-      l_List
-      NotValid
-     )
-    then
-     (
-      Result :=
-      [
-      ]
-     )
-    else
-     (
-      Result :=
-      (
-       ( l_List CodeIterator >map> MapElement >filter>
-       FilterElement
-      )
-     )
-   )
- ; // ARRAY elem_func .ElementList
- 
- VOID elem_proc .EnterElement
-  %SUMMARY %SUM
-   'Начинает вывод элемента'
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  Self
-  .IsElementNeedIndent
-  ?
-  INC
-  g_Indent
- ; // VOID elem_proc .EnterElement
- 
  VOID elem_generator .h
   %SUMMARY %SUM
    ' Генератор выводящий элементы модели в *.h.  Про файлы *.h мы потом поговорим отдельно. '
@@ -354,109 +111,6 @@ VOID Test CodeGen
   Self
   .DumpAsIs
  ; // VOID elem_generator .h
- 
- ARRAY elem_func .Implements
-  %SUMMARY %SUM
-   'Возвращает итератор элементов которые реализуют наш элемент'
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  Result :=
-  (
-   Self
-   .ElementList
-   '%R'
-  )
- ; // ARRAY elem_func .Implements
- 
- ARRAY elem_func .Inherited
-  %SUMMARY %SUM
-   'Возвращает итератор элементов от которого наследуется наш элемент'
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  Result :=
-  (
-   Self
-   .ElementList
-   '%G'
-  )
- ; // ARRAY elem_func .Inherited
- 
- BOOLEAN elem_func .IsElementNeedIndent
-  %SUMMARY %SUM
-   'Определяет тот факт, что элементу нужен отступ'
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  true
-  >>>
-  Result
- ; // BOOLEAN elem_func .IsElementNeedIndent
- 
- BOOLEAN elem_func .IsModelElement
-  %SUMMARY %SUM
-   '  Определяет тот факт, что Self является "элементом модели" '
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  '<<'
-  Self
-  %ST
-  |N
-  StartsStr
-  AND
-  (
-   '>>'
-   Self
-   %ST
-   |N
-   EndsStr
-  )
-  >>>
-  Result
- ; // BOOLEAN elem_func .IsModelElement
- 
- BOOLEAN elem_func .IsSummary
-  %SUMMARY %SUM
-   '  Определяет тот факт, что Self является документацией к элементу '
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  (
-   Self
-   |N
-  )
-  =
-  '%SUM'
-  >>>
-  Result
- ; // BOOLEAN elem_func .IsSummary
- 
- VOID elem_proc .LeaveElement
-  %SUMMARY %SUM
-   'Заканчивает вывод элемента'
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  Self
-  .IsElementNeedIndent
-  ?
-  DEC
-  g_Indent
- ; // VOID elem_proc .LeaveElement
- 
- ARRAY elem_func .Parents
-  %SUMMARY %SUM
-   'Возвращает итератор родителей Self в "терминах определённой модели"'
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  ( Self LIST >filter>
-  .IsModelElement
-  >>>
-  Result
- ; // ARRAY elem_func .Parents
  
  VOID elem_generator .pas
   %SUMMARY %SUM
@@ -485,300 +139,6 @@ VOID Test CodeGen
   Self
   .DumpAsIs
  ; // VOID elem_generator .script
- 
- VOID PROCEDURE CallGens
-  %SUMMARY %SUM
-   'Вызывает все определённые генераторы на элементах массива anElements'
-  ; // %SUMMARY %SUM
-  
-  ARRAY IN aGenerators
-  ARRAY IN anElements
-  for
-  anElements
-  (
-   ModelElement IN anElement
-   for
-   aGenerators
-   (
-    GENERATOR IN aGen
-    anElement
-    .CallGen
-    aGen
-   )
-  )
- ; // VOID PROCEDURE CallGens
- 
- VOID PROCEDURE CallGensList
-  ^@ IN aGenerators
-  ^@ IN anElements
-  (
-   anElements
-   CodeIterator
-  )
-  (
-   aGenerators
-   CodeIterator
-  )
-  CallGens
- ; // VOID PROCEDURE CallGensList
- 
- VOID PROCEDURE do_elem_func
-  %SUMMARY %SUM
-   'Реализация do_elem_func, elem_proc и elem_generator'
-  ; // %SUMMARY %SUM
-  
-  ENGINE_WORD IN aModifier
-  STRING IN aName
-  ENGINE_WORD IN aSelf
-  aSelf
-  Ctx:SetWordProducerForCompiledClass
-  axiom:PushSymbol
-  :
-  aName
-  Ctx:Parser:PushLeftDottedSymbol
-  axiom:PushSymbol
-  ModelElement
-  if
-   (
-    aModifier
-    <>
-    nil
-   )
-  then
-   (
-    aModifier
-    |N
-    Ctx:Parser:PushSymbol
-   )
-  axiom:PushSymbol
-  IN
-  'Self'
-  Ctx:Parser:PushSymbol
- ; // VOID PROCEDURE do_elem_func
- 
- VOID PROCEDURE do_elem_proc
-  %SUMMARY %SUM
-   'Реализация elem_proc и elem_generator'
-  ; // %SUMMARY %SUM
-  
-  ENGINE_WORD IN aModifier
-  STRING IN aName
-  ENGINE_WORD IN aSelf
-  Ctx:ClearTypeInfo
-  axiom:PushSymbol
-  VOID
-  aName
-  aSelf
-  aModifier
-  do_elem_func
- ; // VOID PROCEDURE do_elem_proc
- 
- IMMEDIATE VOID MACRO elem_func
-  %SUMMARY %SUM
-   'Функция на элементе модели'
-  ; // %SUMMARY %SUM
-  
-  ^L IN aName
-  aName
-  |N
-  elem_func
-  nil
-  do_elem_func
- ; // IMMEDIATE VOID MACRO elem_func
- 
- IMMEDIATE VOID MACRO elem_generator
-  %SUMMARY %SUM
-   'Генератор содержимого элемента'
-  ; // %SUMMARY %SUM
-  
-  ^L IN aName
-  aName
-  |N
-  elem_generator
-  nil
-  do_elem_proc
- ; // IMMEDIATE VOID MACRO elem_generator
- 
- IMMEDIATE VOID MACRO elem_proc
-  %SUMMARY %SUM
-   'Процедура на элементе модели'
-  ; // %SUMMARY %SUM
-  
-  ^L IN aName
-  aName
-  |N
-  elem_proc
-  nil
-  do_elem_proc
- ; // IMMEDIATE VOID MACRO elem_proc
- 
- IMMEDIATE VOID MACRO elem_ref_proc
-  %SUMMARY %SUM
-   'Процедура на элементе модели, который передаётся по ссылке'
-  ; // %SUMMARY %SUM
-  
-  ^L IN aName
-  aName
-  |N
-  elem_ref_proc
-  @
-  ^@
-  do_elem_proc
- ; // IMMEDIATE VOID MACRO elem_ref_proc
- 
- ^@ OPERATOR FieldByNameDeepest
-  %SUMMARY %SUM
-   'Метод получения вложенного члена слова по имени. С учётом того, что может быть передана ссылка на переменную'
-  ; // %SUMMARY %SUM
-  
-  ^L IN aName
-  ^@ IN aSelf
-  STRING VAR l_Name
-  OBJECT VAR l_Res
-  ENGINE_WORD VAR l_Self
-  aSelf |RefDeepest
-  >>>
-  l_Self
-  aName
-  |N
-  >>>
-  l_Name
-  l_Self
-  %%
-  l_Name
-  >>>
-  l_Res
-  ASSURE
-  NOT
-  (
-   l_Res
-   pop:object:IsNil
-  )
-  [
-   'Не найдено поле: '
-   l_Self
-   LIST
-   %P
-   Array:Reverted
-   IT
-   (
-    |N
-    '::'
-   )
-   l_Self
-   |N
-   '::'
-   l_Name
-  ]
-  l_Res
-  >>>
-  Result
- ; // ^@ OPERATOR FieldByNameDeepest
- 
- GENERATOR VAR g_CurrentGenerator
- STRING VAR g_CurrentGeneratorName
- INTEGER VAR g_Indent
- FILE VAR g_OutFile
- STRING CONST GEN_PROPERTY_PREFIX
-  'gp'
- IMMEDIATE VOID TYPE GENERATOR
-  TtfwValueTypes
-  Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID TYPE GENERATOR
- 
- IMMEDIATE VOID TYPE ModelElement
-  TtfwValueTypes
-  Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID TYPE ModelElement
- 
- STRING FUNCTION OutFileName
-  %SUMMARY %SUM
-   'Имя файла для вывода'
-  ; // %SUMMARY %SUM
-  
-  ^ IN _aGeneratorName
-  IMMEDIATE VOID OPERATOR aGeneratorName
-   '_aGeneratorName'
-   MangledNamePusher
-  ; // IMMEDIATE VOID OPERATOR aGeneratorName
-  
-  STRING VAR l_OutPath
-  sysutils:GetCurrentDir
-  >>>
-  l_OutPath
-  [
-   l_OutPath
-   script:FileName
-   sysutils:ExtractFileName
-   ''
-   sysutils:ChangeFileExt
-   ''
-   sysutils:ChangeFileExt
-  ]
-  '\'
-  strings:CatSep
-  >>>
-  l_OutPath
-  l_OutPath
-  sysutils:ForceDirectories
-  ?ASSURE
-  [
-   'Не удалось создать директорию '
-   l_OutPath
-  ]
-  [
-   l_OutPath
-   (
-    _aGeneratorName |^
-   )
-  ]
-  '\'
-  strings:CatSep
-  >>>
-  Result
- ; // STRING FUNCTION OutFileName
- 
- VOID PROCEDURE OutToFile
-  %SUMMARY %SUM
-   ' Выводит значение в текущий файл вывода. С переводом каретки. '
-  ; // %SUMMARY %SUM
-  
-  PRINTABLE IN aValue
-  STRING VAR l_String
-  if
-   (
-    aValue
-    IsArray
-   )
-  then
-   (
-    aValue
-    strings:Cat
-    >>>
-    l_String
-   )
-  else
-   (
-    aValue
-    ToPrintable
-    >>>
-    l_String
-   )
-  [
-   g_Indent
-   ' '
-   char:Dupe
-   l_String
-  ]
-  strings:Cat
-  g_OutFile
-  File:WriteLn
- ; // VOID PROCEDURE OutToFile
- 
- IMMEDIATE VOID TYPE PRINTABLE
-  TtfwValueTypes
-  Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID TYPE PRINTABLE
  
  <<Project>> Project1
   %SUMMARY %SUM
@@ -893,14 +253,6 @@ VOID Test CodeGen
  CodeGen
  DumpElement
  help
- g_Indent :=
- 0
- g_OutFile :=
- nil
- g_CurrentGenerator :=
- nil
- g_CurrentGeneratorName :=
- ''
  ( Project1 Project2 Project3 ( .dump .pas .c++ .h .script CallGensList
 ; // VOID Test CodeGen
 
@@ -1528,7 +880,7 @@ Dictionary: CodeGen67.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Object.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\implementation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Templates.ms.model
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\RefDeepest.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Generation.ms.dict
  ;
 Dictionary: axiom:axiom
  Uses: 
@@ -5527,6 +4879,197 @@ IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName
 ; // <<@meta>>
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Generation.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\EngineTypes.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbols.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\RefDeepest.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: MACRO : %GEN_PROPERTY
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // %GEN_PROPERTY
+IMMEDIATE VOID OPERATOR :: MACRO : %GP
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // %GP
+VOID OPERATOR :: MACRO :: elem_proc : .CallChildrenCurrentGen
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ModelElement OPERATOR :: IN : Self
+; // .CallChildrenCurrentGen
+VOID OPERATOR :: MACRO :: elem_proc : .CallCurrentGen
+ FILE OPERATOR :: VAR : l_PrevOutFile
+ ModelElement OPERATOR :: IN : Self
+; // .CallCurrentGen
+VOID OPERATOR :: MACRO :: elem_proc : .CallGen
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aGen
+ ModelElement OPERATOR :: IN : Self
+; // .CallGen
+VOID OPERATOR :: MACRO :: elem_proc : .Child.CallCurrentGen
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ModelElement OPERATOR :: IN : Self
+; // .Child.CallCurrentGen
+ARRAY OPERATOR :: MACRO :: elem_func : .Children
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: elem_func :: .Children : Result
+ ModelElement OPERATOR :: IN : Self
+; // .Children
+ARRAY OPERATOR :: MACRO :: elem_func : .ElementList
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aListName
+ PRIVATE BOOLEAN FUNCTION : FilterElement
+  OBJECT OPERATOR :: IN : aMember
+  PRIVATE BOOLEAN FUNCTION :: FilterElement : Result
+ ; // FilterElement
+ PRIVATE OBJECT FUNCTION : MapElement
+  OBJECT OPERATOR :: IN : aMember
+  OPERATOR :: VAR : l_Element
+  PRIVATE OBJECT FUNCTION :: MapElement : Result
+ ; // MapElement
+ ARRAY OPERATOR :: MACRO :: elem_func :: .ElementList : Result
+ ModelElement OPERATOR :: IN : Self
+; // .ElementList
+VOID OPERATOR :: MACRO :: elem_proc : .EnterElement
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ModelElement OPERATOR :: IN : Self
+; // .EnterElement
+ARRAY OPERATOR :: MACRO :: elem_func : .Implements
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: elem_func :: .Implements : Result
+ ModelElement OPERATOR :: IN : Self
+; // .Implements
+ARRAY OPERATOR :: MACRO :: elem_func : .Inherited
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: elem_func :: .Inherited : Result
+ ModelElement OPERATOR :: IN : Self
+; // .Inherited
+BOOLEAN OPERATOR :: MACRO :: elem_func : .IsElementNeedIndent
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsElementNeedIndent : Result
+ ModelElement OPERATOR :: IN : Self
+; // .IsElementNeedIndent
+BOOLEAN OPERATOR :: MACRO :: elem_func : .IsModelElement
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsModelElement : Result
+ ModelElement OPERATOR :: IN : Self
+; // .IsModelElement
+BOOLEAN OPERATOR :: MACRO :: elem_func : .IsSummary
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsSummary : Result
+ ModelElement OPERATOR :: IN : Self
+; // .IsSummary
+VOID OPERATOR :: MACRO :: elem_proc : .LeaveElement
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ModelElement OPERATOR :: IN : Self
+; // .LeaveElement
+ARRAY OPERATOR :: MACRO :: elem_func : .Parents
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: elem_func :: .Parents : Result
+ ModelElement OPERATOR :: IN : Self
+; // .Parents
+VOID OPERATOR :: PROCEDURE : CallGens
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: IN : aGenerators
+ ARRAY OPERATOR :: IN : anElements
+; // CallGens
+VOID OPERATOR :: PROCEDURE : CallGensList
+ ^@ OPERATOR :: IN : aGenerators
+ ^@ OPERATOR :: IN : anElements
+; // CallGensList
+VOID OPERATOR :: PROCEDURE : do_elem_func
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ENGINE_WORD OPERATOR :: IN : aModifier
+ STRING OPERATOR :: IN : aName
+ ENGINE_WORD OPERATOR :: IN : aSelf
+; // do_elem_func
+VOID OPERATOR :: PROCEDURE : do_elem_proc
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ENGINE_WORD OPERATOR :: IN : aModifier
+ STRING OPERATOR :: IN : aName
+ ENGINE_WORD OPERATOR :: IN : aSelf
+; // do_elem_proc
+IMMEDIATE VOID OPERATOR :: MACRO : elem_func
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // elem_func
+IMMEDIATE VOID OPERATOR :: MACRO : elem_generator
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // elem_generator
+IMMEDIATE VOID OPERATOR :: MACRO : elem_proc
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // elem_proc
+IMMEDIATE VOID OPERATOR :: MACRO : elem_ref_proc
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // elem_ref_proc
+^@ OPERATOR : FieldByNameDeepest
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+ ^@ OPERATOR :: IN : aSelf
+ STRING OPERATOR :: VAR : l_Name
+ OBJECT OPERATOR :: VAR : l_Res
+ ENGINE_WORD OPERATOR :: VAR : l_Self
+ ^@ OPERATOR :: FieldByNameDeepest : Result
+; // FieldByNameDeepest
+GENERATOR OPERATOR :: VAR : g_CurrentGenerator
+STRING OPERATOR :: VAR : g_CurrentGeneratorName
+INTEGER OPERATOR :: VAR : g_Indent
+FILE OPERATOR :: VAR : g_OutFile
+STRING CONST : GEN_PROPERTY_PREFIX
+IMMEDIATE VOID OPERATOR :: TYPE : GENERATOR
+IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
+STRING FUNCTION : OutFileName
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : _aGeneratorName
+ IMMEDIATE VOID OPERATOR : aGeneratorName
+ STRING OPERATOR :: VAR : l_OutPath
+ STRING FUNCTION :: OutFileName : Result
+; // OutFileName
+VOID OPERATOR :: PROCEDURE : OutToFile
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ PRINTABLE OPERATOR :: IN : aValue
+ STRING OPERATOR :: VAR : l_String
+; // OutToFile
+IMMEDIATE VOID OPERATOR :: TYPE : PRINTABLE
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\RefDeepest.ms.dict
  Uses: 
   axiom:axiom
@@ -5581,42 +5124,12 @@ WORD_REF OPERATOR : pop:Word:GetRefDeepest
 IMMEDIATE VOID OPERATOR :: TYPE : WORD_REF
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
-  IMMEDIATE VOID OPERATOR :: MACRO : %GEN_PROPERTY
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^L OPERATOR :: IN : aName
-  ; // %GEN_PROPERTY
-  IMMEDIATE VOID OPERATOR :: MACRO : %GP
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^L OPERATOR :: IN : aName
-  ; // %GP
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   VOID OPERATOR :: MACRO :: elem_generator : .c++
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
    ModelElement OPERATOR :: IN : Self
   ; // .c++
-  VOID OPERATOR :: MACRO :: elem_proc : .CallChildrenCurrentGen
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ModelElement OPERATOR :: IN : Self
-  ; // .CallChildrenCurrentGen
-  VOID OPERATOR :: MACRO :: elem_proc : .CallCurrentGen
-   FILE OPERATOR :: VAR : l_PrevOutFile
-   ModelElement OPERATOR :: IN : Self
-  ; // .CallCurrentGen
-  VOID OPERATOR :: MACRO :: elem_proc : .CallGen
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^ OPERATOR :: IN : aGen
-   ModelElement OPERATOR :: IN : Self
-  ; // .CallGen
-  VOID OPERATOR :: MACRO :: elem_proc : .Child.CallCurrentGen
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ModelElement OPERATOR :: IN : Self
-  ; // .Child.CallCurrentGen
-  ARRAY OPERATOR :: MACRO :: elem_func : .Children
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ARRAY OPERATOR :: MACRO :: elem_func :: .Children : Result
-   ModelElement OPERATOR :: IN : Self
-  ; // .Children
   VOID OPERATOR :: MACRO :: elem_generator : .dump
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
@@ -5626,64 +5139,11 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ModelElement OPERATOR :: IN : Self
   ; // .DumpAsIs
-  ARRAY OPERATOR :: MACRO :: elem_func : .ElementList
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^L OPERATOR :: IN : aListName
-   PRIVATE BOOLEAN FUNCTION : FilterElement
-    OBJECT OPERATOR :: IN : aMember
-    PRIVATE BOOLEAN FUNCTION :: FilterElement : Result
-   ; // FilterElement
-   PRIVATE OBJECT FUNCTION : MapElement
-    OBJECT OPERATOR :: IN : aMember
-    OPERATOR :: VAR : l_Element
-    PRIVATE OBJECT FUNCTION :: MapElement : Result
-   ; // MapElement
-   ARRAY OPERATOR :: MACRO :: elem_func :: .ElementList : Result
-   ModelElement OPERATOR :: IN : Self
-  ; // .ElementList
-  VOID OPERATOR :: MACRO :: elem_proc : .EnterElement
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ModelElement OPERATOR :: IN : Self
-  ; // .EnterElement
   VOID OPERATOR :: MACRO :: elem_generator : .h
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
    ModelElement OPERATOR :: IN : Self
   ; // .h
-  ARRAY OPERATOR :: MACRO :: elem_func : .Implements
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ARRAY OPERATOR :: MACRO :: elem_func :: .Implements : Result
-   ModelElement OPERATOR :: IN : Self
-  ; // .Implements
-  ARRAY OPERATOR :: MACRO :: elem_func : .Inherited
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ARRAY OPERATOR :: MACRO :: elem_func :: .Inherited : Result
-   ModelElement OPERATOR :: IN : Self
-  ; // .Inherited
-  BOOLEAN OPERATOR :: MACRO :: elem_func : .IsElementNeedIndent
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsElementNeedIndent : Result
-   ModelElement OPERATOR :: IN : Self
-  ; // .IsElementNeedIndent
-  BOOLEAN OPERATOR :: MACRO :: elem_func : .IsModelElement
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsModelElement : Result
-   ModelElement OPERATOR :: IN : Self
-  ; // .IsModelElement
-  BOOLEAN OPERATOR :: MACRO :: elem_func : .IsSummary
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsSummary : Result
-   ModelElement OPERATOR :: IN : Self
-  ; // .IsSummary
-  VOID OPERATOR :: MACRO :: elem_proc : .LeaveElement
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ModelElement OPERATOR :: IN : Self
-  ; // .LeaveElement
-  ARRAY OPERATOR :: MACRO :: elem_func : .Parents
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ARRAY OPERATOR :: MACRO :: elem_func :: .Parents : Result
-   ModelElement OPERATOR :: IN : Self
-  ; // .Parents
   VOID OPERATOR :: MACRO :: elem_generator : .pas
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
@@ -5694,72 +5154,6 @@ TkwMain : Main
    STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
    ModelElement OPERATOR :: IN : Self
   ; // .script
-  VOID OPERATOR :: PROCEDURE : CallGens
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ARRAY OPERATOR :: IN : aGenerators
-   ARRAY OPERATOR :: IN : anElements
-  ; // CallGens
-  VOID OPERATOR :: PROCEDURE : CallGensList
-   ^@ OPERATOR :: IN : aGenerators
-   ^@ OPERATOR :: IN : anElements
-  ; // CallGensList
-  VOID OPERATOR :: PROCEDURE : do_elem_func
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ENGINE_WORD OPERATOR :: IN : aModifier
-   STRING OPERATOR :: IN : aName
-   ENGINE_WORD OPERATOR :: IN : aSelf
-  ; // do_elem_func
-  VOID OPERATOR :: PROCEDURE : do_elem_proc
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ENGINE_WORD OPERATOR :: IN : aModifier
-   STRING OPERATOR :: IN : aName
-   ENGINE_WORD OPERATOR :: IN : aSelf
-  ; // do_elem_proc
-  IMMEDIATE VOID OPERATOR :: MACRO : elem_func
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^L OPERATOR :: IN : aName
-  ; // elem_func
-  IMMEDIATE VOID OPERATOR :: MACRO : elem_generator
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^L OPERATOR :: IN : aName
-  ; // elem_generator
-  IMMEDIATE VOID OPERATOR :: MACRO : elem_proc
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^L OPERATOR :: IN : aName
-  ; // elem_proc
-  IMMEDIATE VOID OPERATOR :: MACRO : elem_ref_proc
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^L OPERATOR :: IN : aName
-  ; // elem_ref_proc
-  ^@ OPERATOR : FieldByNameDeepest
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^L OPERATOR :: IN : aName
-   ^@ OPERATOR :: IN : aSelf
-   STRING OPERATOR :: VAR : l_Name
-   OBJECT OPERATOR :: VAR : l_Res
-   ENGINE_WORD OPERATOR :: VAR : l_Self
-   ^@ OPERATOR :: FieldByNameDeepest : Result
-  ; // FieldByNameDeepest
-  GENERATOR OPERATOR :: VAR : g_CurrentGenerator
-  STRING OPERATOR :: VAR : g_CurrentGeneratorName
-  INTEGER OPERATOR :: VAR : g_Indent
-  FILE OPERATOR :: VAR : g_OutFile
-  STRING CONST : GEN_PROPERTY_PREFIX
-  IMMEDIATE VOID OPERATOR :: TYPE : GENERATOR
-  IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
-  STRING FUNCTION : OutFileName
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^ OPERATOR :: IN : _aGeneratorName
-   IMMEDIATE VOID OPERATOR : aGeneratorName
-   STRING OPERATOR :: VAR : l_OutPath
-   STRING FUNCTION :: OutFileName : Result
-  ; // OutFileName
-  VOID OPERATOR :: PROCEDURE : OutToFile
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   PRINTABLE OPERATOR :: IN : aValue
-   STRING OPERATOR :: VAR : l_String
-  ; // OutToFile
-  IMMEDIATE VOID OPERATOR :: TYPE : PRINTABLE
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library1
