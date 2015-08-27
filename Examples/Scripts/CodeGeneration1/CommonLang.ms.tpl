@@ -12,6 +12,7 @@ USES
 elem_proc DumpAsIs
  %SUMMARY 'Процедура печатающая содержимое элемента модели. Рекурсивно.' ;
 
+ CatSep> cIndentChar
  [
   g_CurrentGeneratorName ':'
    %REMARK 'Выводим имя текущего генератора. Для отладки' 
@@ -19,7 +20,7 @@ elem_proc DumpAsIs
    %REMARK 'Выводим стереотип элемента, рекурсивно'
   Self .Name 
    %REMARK 'Выводим имя элемента'
- ] cIndentChar strings:CatSep OutToFile
+ ] OutToFile
 
  'Родители ' (+)? 
   CatSep> cIndentChar [ for ( Self .Parents >reverted> ) .Name ] ?OutToFile
