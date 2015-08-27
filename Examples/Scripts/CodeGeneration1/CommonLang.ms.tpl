@@ -25,7 +25,8 @@ elem_proc DumpAsIs
   strings:CatSep> '::' [ for ( Self .Parents >reverted> ) .Name ] ?OutToFile
 
  strings:CatSep> ' ' [ for ( Self .Inherited ) .Name ] ?OutToFile
- for ( Self .Implements ) ( .Name OutToFile )
+ strings:CatSep> ' ' [ for ( Self .Implements ) .Name ] ?OutToFile
+
  TRY
   Self .CallChildrenCurrentGen
   %REMARK 'Выводим детей элемента, тем же самым генератором'
