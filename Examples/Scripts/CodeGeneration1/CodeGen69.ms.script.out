@@ -4481,6 +4481,10 @@ OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Pr
    OPERATOR :: NamedWordProducer :: %INHERITS : %G
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   ; // Class4
+  OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class5
+   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : InnerClass1
+   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : InnerClass2
+  ; // Class5
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Interface>> : Interface1
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   ; // Interface1

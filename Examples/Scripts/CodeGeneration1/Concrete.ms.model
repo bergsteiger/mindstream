@@ -123,6 +123,14 @@ concrete-model-begin 'Модель конкретного проекта Project1'
      '
    ; // %INHERITS
   ; // Class4
+  
+  <<Class>> Class5
+   <<Class>> InnerClass1
+   ; // InnerClass1
+   <<Class>> InnerClass2
+   ; // InnerClass2
+   %REMARK 'Тут используем вложенные классы'
+  ; // Class5
 
  ; // Program1
 
