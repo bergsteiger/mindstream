@@ -26,7 +26,7 @@ elem_proc DumpAsIs
   for ( Self .Parents >reverted> ) .Name
   %REMARK 'Выводим родителей элемента, рекурсивно'
  ] OutToFile
- for ( Self .Inherited ) ( .Name OutToFile )
+ strings:CatSep> ' ' [ for ( Self .Inherited ) .Name ] OutToFile
  for ( Self .Implements ) ( .Name OutToFile )
  TRY
   Self .CallChildrenCurrentGen

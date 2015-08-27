@@ -1,3 +1,4 @@
   pas : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Interface>> Interface2
   Родители элемента Project1::Program1
+  
   ; // Interface2

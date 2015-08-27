@@ -1,3 +1,4 @@
  pas : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLCategory>> <<Library>> Library2
  Родители элемента Project1
+ 
  ; // Library2
