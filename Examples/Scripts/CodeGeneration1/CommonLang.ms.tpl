@@ -6,6 +6,7 @@ USES
  params.ms.dict
  NoStrangeSymbols.ms.dict
  arrays.ms.dict
+ ElementsRTTI.ms.dict
  Generation.ms.dict
  string.ms.dict
 ;

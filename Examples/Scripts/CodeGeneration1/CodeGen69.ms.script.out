@@ -4751,6 +4751,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Generation.ms
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\ElementsRTTI.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\RefDeepest.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : %GEN_PROPERTY
@@ -4779,26 +4780,6 @@ VOID OPERATOR :: MACRO :: elem_proc : .Child.CallCurrentGen
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ModelElement OPERATOR :: IN : Self
 ; // .Child.CallCurrentGen
-ARRAY OPERATOR :: MACRO :: elem_func : .Children
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ARRAY OPERATOR :: MACRO :: elem_func :: .Children : Result
- ModelElement OPERATOR :: IN : Self
-; // .Children
-ARRAY OPERATOR :: MACRO :: elem_func : .ElementList
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aListName
- PRIVATE BOOLEAN FUNCTION : FilterElement
-  OBJECT OPERATOR :: IN : aMember
-  PRIVATE BOOLEAN FUNCTION :: FilterElement : Result
- ; // FilterElement
- PRIVATE OBJECT FUNCTION : MapElement
-  OBJECT OPERATOR :: IN : aMember
-  OPERATOR :: VAR : l_Element
-  PRIVATE OBJECT FUNCTION :: MapElement : Result
- ; // MapElement
- ARRAY OPERATOR :: MACRO :: elem_func :: .ElementList : Result
- ModelElement OPERATOR :: IN : Self
-; // .ElementList
 VOID OPERATOR :: MACRO :: elem_proc : .EnterElement
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ModelElement OPERATOR :: IN : Self
@@ -4807,40 +4788,15 @@ VOID OPERATOR :: MACRO :: elem_proc : .generate.children
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ModelElement OPERATOR :: IN : Self
 ; // .generate.children
-ARRAY OPERATOR :: MACRO :: elem_func : .Implements
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ARRAY OPERATOR :: MACRO :: elem_func :: .Implements : Result
- ModelElement OPERATOR :: IN : Self
-; // .Implements
-ARRAY OPERATOR :: MACRO :: elem_func : .Inherited
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ARRAY OPERATOR :: MACRO :: elem_func :: .Inherited : Result
- ModelElement OPERATOR :: IN : Self
-; // .Inherited
 BOOLEAN OPERATOR :: MACRO :: elem_func : .IsElementNeedIndent
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsElementNeedIndent : Result
  ModelElement OPERATOR :: IN : Self
 ; // .IsElementNeedIndent
-BOOLEAN OPERATOR :: MACRO :: elem_func : .IsModelElement
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsModelElement : Result
- ModelElement OPERATOR :: IN : Self
-; // .IsModelElement
-BOOLEAN OPERATOR :: MACRO :: elem_func : .IsSummary
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsSummary : Result
- ModelElement OPERATOR :: IN : Self
-; // .IsSummary
 VOID OPERATOR :: MACRO :: elem_proc : .LeaveElement
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ModelElement OPERATOR :: IN : Self
 ; // .LeaveElement
-ARRAY OPERATOR :: MACRO :: elem_func : .Parents
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ARRAY OPERATOR :: MACRO :: elem_func :: .Parents : Result
- ModelElement OPERATOR :: IN : Self
-; // .Parents
 VOID OPERATOR :: PROCEDURE : ?OutToFile
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: IN : aValue
@@ -4856,34 +4812,6 @@ VOID OPERATOR :: PROCEDURE : CallGensList
 ; // CallGensList
 STRING CONST : cIndentChar
 STRING CONST : cPathSep
-VOID OPERATOR :: PROCEDURE : do_elem_func
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ENGINE_WORD OPERATOR :: IN : aModifier
- STRING OPERATOR :: IN : aName
- ENGINE_WORD OPERATOR :: IN : aSelf
-; // do_elem_func
-VOID OPERATOR :: PROCEDURE : do_elem_proc
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ENGINE_WORD OPERATOR :: IN : aModifier
- STRING OPERATOR :: IN : aName
- ENGINE_WORD OPERATOR :: IN : aSelf
-; // do_elem_proc
-IMMEDIATE VOID OPERATOR :: MACRO : elem_func
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aName
-; // elem_func
-IMMEDIATE VOID OPERATOR :: MACRO : elem_generator
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aName
-; // elem_generator
-IMMEDIATE VOID OPERATOR :: MACRO : elem_proc
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aName
-; // elem_proc
-IMMEDIATE VOID OPERATOR :: MACRO : elem_ref_proc
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aName
-; // elem_ref_proc
 ^@ OPERATOR : FieldByNameDeepest
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName
@@ -4903,7 +4831,6 @@ VOID OPERATOR :: PROCEDURE : generate
  ^@ OPERATOR :: IN : anElements
 ; // generate
 IMMEDIATE VOID OPERATOR :: TYPE : GENERATOR
-IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
 STRING FUNCTION : OutFileName
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^ OPERATOR :: IN : _aGeneratorName
@@ -4946,6 +4873,121 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.m
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: TYPE : ENGINE_WORD
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\ElementsRTTI.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymbols.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
+ ;
+ARRAY OPERATOR :: MACRO :: elem_func : .Children
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: elem_func :: .Children : Result
+ ModelElement OPERATOR :: IN : Self
+; // .Children
+ARRAY OPERATOR :: MACRO :: elem_func : .ElementList
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aListName
+ PRIVATE BOOLEAN FUNCTION : FilterElement
+  OBJECT OPERATOR :: IN : aMember
+  PRIVATE BOOLEAN FUNCTION :: FilterElement : Result
+ ; // FilterElement
+ PRIVATE OBJECT FUNCTION : MapElement
+  OBJECT OPERATOR :: IN : aMember
+  OPERATOR :: VAR : l_Element
+  PRIVATE OBJECT FUNCTION :: MapElement : Result
+ ; // MapElement
+ ARRAY OPERATOR :: MACRO :: elem_func :: .ElementList : Result
+ ModelElement OPERATOR :: IN : Self
+; // .ElementList
+ARRAY OPERATOR :: MACRO :: elem_func : .Implements
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: elem_func :: .Implements : Result
+ ModelElement OPERATOR :: IN : Self
+; // .Implements
+ARRAY OPERATOR :: MACRO :: elem_func : .Inherited
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: elem_func :: .Inherited : Result
+ ModelElement OPERATOR :: IN : Self
+; // .Inherited
+BOOLEAN OPERATOR :: MACRO :: elem_func : .IsModelElement
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsModelElement : Result
+ ModelElement OPERATOR :: IN : Self
+; // .IsModelElement
+BOOLEAN OPERATOR :: MACRO :: elem_func : .IsSummary
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsSummary : Result
+ ModelElement OPERATOR :: IN : Self
+; // .IsSummary
+ARRAY OPERATOR :: MACRO :: elem_func : .Parents
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: elem_func :: .Parents : Result
+ ModelElement OPERATOR :: IN : Self
+; // .Parents
+VOID OPERATOR :: PROCEDURE : do_elem_func
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ENGINE_WORD OPERATOR :: IN : aModifier
+ STRING OPERATOR :: IN : aName
+ ENGINE_WORD OPERATOR :: IN : aSelf
+; // do_elem_func
+VOID OPERATOR :: PROCEDURE : do_elem_proc
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ENGINE_WORD OPERATOR :: IN : aModifier
+ STRING OPERATOR :: IN : aName
+ ENGINE_WORD OPERATOR :: IN : aSelf
+; // do_elem_proc
+IMMEDIATE VOID OPERATOR :: MACRO : elem_func
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // elem_func
+IMMEDIATE VOID OPERATOR :: MACRO : elem_generator
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // elem_generator
+IMMEDIATE VOID OPERATOR :: MACRO : elem_proc
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // elem_proc
+IMMEDIATE VOID OPERATOR :: MACRO : elem_ref_proc
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // elem_ref_proc
+IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\RefDeepest.ms.dict
  Uses: 
   axiom:axiom
@@ -5035,6 +5077,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\ElementsRTTI.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Generation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
  ;
