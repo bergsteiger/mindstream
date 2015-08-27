@@ -1,0 +1,46 @@
+USES
+ params.ms.dict
+ macro.ms.dict
+;
+
+// —ловарь дл€ определени€ "макросов" дл€ определени€ мета-мета-модели и мета-модели и модели
+
+MACRO meta-meta-model-begin
+ Literal IN aDoc
+ %SUMMARY 'Ќачало определени€ мета-мета-модели' ;
+; // meta-meta-model-begin
+
+MACRO meta-meta-model-end
+ %SUMMARY ' онец определени€ мета-мета-модели' ;
+; // meta-meta-model-end
+
+MACRO meta-model-begin
+ Literal IN aDoc
+ %SUMMARY 'Ќачало определени€ мета-модели' ;
+; // meta-meta-model-begin
+
+MACRO meta-model-end
+ %SUMMARY ' онец определени€ мета-модели' ;
+; // meta-model-end
+
+MACRO model-begin
+ Literal IN aDoc
+ %SUMMARY 'Ќачало определени€ модели' ;
+; // model-begin
+
+MACRO concrete-model-begin
+ Literal IN aModelName
+ Literal IN aDoc
+ %SUMMARY 'Ќачало определени€ модели' ;
+; // concrete-model-begin
+
+MACRO model-end
+ %SUMMARY ' онец определени€ модели' ;
+; // model-end
+
+USES
+ Documentation.ms.dict
+;
+
+EXPORTS
+ Documentation.ms.dict

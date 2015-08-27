@@ -1,0 +1,11 @@
+PROCEDURE axiom:PushSymbol
+ LINK ^ IN aSymbol
+ %SUMMARY 'Запихивает во входной поток парсера имя слова aSymbol' ;
+ aSymbol pop:Word:Name Ctx:Parser:PushSymbol
+; // axiom:PushSymbol
+
+PROCEDURE Ctx:Parser:PushLeftDottedSymbol
+ STRING IN aValue
+ %SUMMARY 'Запихивает во входной поток парсера aValue предварённое точкой' ;
+ '.' (+) aValue Ctx:Parser:PushSymbol
+; // Ctx:Parser:PushLeftDottedSymbol

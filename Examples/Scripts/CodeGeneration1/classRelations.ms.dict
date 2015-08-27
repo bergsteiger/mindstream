@@ -1,0 +1,8 @@
+USES
+ metaMACRO.ms.dict
+;
+
+REMARK 'Тут описываем взаимоотношения между классами'
+
+NamedWordProducer %IMPLEMENTS %R
+REMARK '- список реализуемых элементов'

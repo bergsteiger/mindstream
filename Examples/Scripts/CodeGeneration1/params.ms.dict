@@ -1,0 +1,69 @@
+USES
+ axiom_push.ms.dict
+ macro.ms.dict
+ Documentation.ms.dict
+;
+
+WordAlias RIGHT ^
+ %REMARK 'Модификатор параметра справа'
+
+WordAlias LVALUE_MOD ^@
+ %REMARK 'Модификатор параметра слева, который передаётся по ссылке. И из которого можно не только читать, но и в который потенциально можно писать. Если он не Read-Only.'
+
+WordAlias REF ^@
+ %REMARK 'Ссылка на значение, из которого можно не только читать, но и писать'
+
+WordAlias in IN
+ %REMARK 'Описатель входного параметра (справа или слева)'
+
+USES
+ Literal.ms.dict
+;
+
+EXPORTS
+ Literal.ms.dict
+
+USES
+ core.ms.dict
+;
+
+MACRO LVALUE
+ Literal IN aName
+ %SUMMARY 'Параметр слева, который передаётся по ссылке. И из которого можно не только читать, но и в который потенциально можно писать. Если он не Read-Only.' ;
+ axiom:PushSymbol LVALUE_MOD
+ axiom:PushSymbol IN
+ aName |N Ctx:Parser:PushSymbol
+; // LVALUE
+
+PRIVATE VOID operator MangledNamePusher
+ STRING IN aName
+ %SUMMARY 'Реализация параметра справа' ;
+ axiom:PushSymbol (
+ aName Ctx:Parser:PushSymbol
+ axiom:PushSymbol |^
+ axiom:PushSymbol )
+; // MangledNamePusher
+
+MACRO right
+ Literal IN aName
+ %SUMMARY 'Параметр справа, который автоматически разыменовывается' ;
+ axiom:PushSymbol RIGHT
+ axiom:PushSymbol IN
+
+ STRING VAR l_Name
+ aName |N =: l_Name 
+
+ STRING VAR l_MangledName
+ [ '_' l_Name ] strings:Cat =: l_MangledName
+
+ l_MangledName Ctx:Parser:PushSymbol
+ 
+  [
+   'VOID IMMEDIATE axiom:operator' 
+   l_Name 
+   [ '`' l_MangledName '`' ] strings:Cat
+   'MangledNamePusher'
+   ';'
+  ] Ctx:Parser:PushArray
+
+; // right
