@@ -622,10 +622,7 @@ Dictionary: CodeGen69.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Object.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\implementation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Concrete.ms.model
@@ -4207,125 +4204,6 @@ VOID WORDWORKER : OutEx
  STRING OPERATOR :: VAR : aValue
  ^ OPERATOR :: IN : WordToWork
 ; // OutEx
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
- ;
- Exports: 
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
- ;
-IMMEDIATE VOID OPERATOR :: MACRO : concrete-model-begin
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aDoc
- ^L OPERATOR :: IN : aModelName
-; // concrete-model-begin
-IMMEDIATE VOID OPERATOR :: MACRO : meta-meta-model-begin
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aDoc
-; // meta-meta-model-begin
-IMMEDIATE VOID OPERATOR :: MACRO : meta-meta-model-end
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-; // meta-meta-model-end
-IMMEDIATE VOID OPERATOR :: MACRO : meta-model-begin
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aDoc
-; // meta-model-begin
-IMMEDIATE VOID OPERATOR :: MACRO : meta-model-end
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-; // meta-model-end
-IMMEDIATE VOID OPERATOR :: MACRO : model-begin
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aDoc
-; // model-begin
-IMMEDIATE VOID OPERATOR :: MACRO : model-end
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-; // model-end
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
- ;
-IMMEDIATE VOID OPERATOR :: NamedWordProducer : %IMPLEMENTS
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\EngineTypes.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
- ;
-IMMEDIATE VOID OPERATOR :: TYPE : ENGINE_WORD
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Object.ms.dict
  Uses: 
   axiom:axiom
@@ -4582,6 +4460,96 @@ OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Pr
 OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project3
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
 ; // Project3
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+ ;
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: MACRO : concrete-model-begin
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+ ^L OPERATOR :: IN : aModelName
+; // concrete-model-begin
+IMMEDIATE VOID OPERATOR :: MACRO : meta-meta-model-begin
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // meta-meta-model-begin
+IMMEDIATE VOID OPERATOR :: MACRO : meta-meta-model-end
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // meta-meta-model-end
+IMMEDIATE VOID OPERATOR :: MACRO : meta-model-begin
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // meta-model-begin
+IMMEDIATE VOID OPERATOR :: MACRO : meta-model-end
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // meta-model-end
+IMMEDIATE VOID OPERATOR :: MACRO : model-begin
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // model-begin
+IMMEDIATE VOID OPERATOR :: MACRO : model-end
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // model-end
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %IMPLEMENTS
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Templates.ms.model
  Uses: 
   axiom:axiom
@@ -4894,6 +4862,35 @@ VOID OPERATOR :: PROCEDURE : OutToFile
  STRING OPERATOR :: VAR : l_String
 ; // OutToFile
 IMMEDIATE VOID OPERATOR :: TYPE : PRINTABLE
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\EngineTypes.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: TYPE : ENGINE_WORD
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\RefDeepest.ms.dict
  Uses: 
   axiom:axiom
