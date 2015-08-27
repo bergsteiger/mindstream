@@ -4959,6 +4959,10 @@ ARRAY OPERATOR :: MACRO :: elem_func : .Parents
  ARRAY OPERATOR :: MACRO :: elem_func :: .Parents : Result
  ModelElement OPERATOR :: IN : Self
 ; // .Parents
+ARRAY OPERATOR :: MACRO :: elem_func : .Stereotypes
+ ARRAY OPERATOR :: MACRO :: elem_func :: .Stereotypes : Result
+ ModelElement OPERATOR :: IN : Self
+; // .Stereotypes
 VOID OPERATOR :: PROCEDURE : do_elem_func
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ENGINE_WORD OPERATOR :: IN : aModifier

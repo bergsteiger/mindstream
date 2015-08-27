@@ -147,3 +147,7 @@ ARRAY elem_func Parents
  %SUMMARY 'Возвращает итератор родителей Self в "терминах определённой модели"' ;
  ( Self LIST %P ) >filter> .IsModelElement =: Result
 ; // Parents
+
+ARRAY elem_func Stereotypes
+ Self LIST %ST =: Result
+; // Stereotypes
