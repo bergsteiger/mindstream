@@ -21,11 +21,11 @@ elem_proc DumpAsIs
    %REMARK 'Выводим имя элемента'
  ] ' ' strings:CatSep OutToFile
 
- 'Родители элемента ' (+)? (
+ 'Родители элемента ' (+)? strings:CatSep> '::'
  [
   for ( Self .Parents >reverted> ) .Name
   %REMARK 'Выводим родителей элемента, рекурсивно'
- ] '::' strings:CatSep ) OutToFile
+ ] OutToFile
  for ( Self .Inherited ) ( .Name OutToFile )
  for ( Self .Implements ) ( .Name OutToFile )
  TRY
