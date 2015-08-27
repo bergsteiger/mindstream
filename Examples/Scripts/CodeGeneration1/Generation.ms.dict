@@ -246,6 +246,7 @@ elem_proc CallCurrentGen
  l_PrevIndent := g_Indent
  TRY
   TRY
+   g_Indent := 0 // - тут вообще ещё надо проверять - переоткрываем мы файл или нет
    g_OutFile := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) File:OpenWrite )
    TRY
     g_CurrentGenerator IsNil ! ?ASSURE 'Текущй генератор пустой'

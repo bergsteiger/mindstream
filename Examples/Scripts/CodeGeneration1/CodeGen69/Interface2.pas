@@ -1,3 +1,3 @@
-  pas : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Interface>> Interface2
-  Родители Project1 Program1
-  ; // Interface2
+pas : OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Interface>> Interface2
+Родители Project1 Program1
+; // Interface2
