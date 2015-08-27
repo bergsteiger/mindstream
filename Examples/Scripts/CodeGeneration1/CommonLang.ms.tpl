@@ -28,13 +28,13 @@ elem_proc DumpAsIs
  ] OutToFile
 
  'Родители ' (+)? 
-  CatSepIndent> ( ( Self .Parents >reverted> ) >map> .Name ) ?OutToFile
+  CatSepIndent> ( Self .Parents >reverted> .map> .Name ) ?OutToFile
 
  'Наследуемые ' (+)? 
-  CatSepIndent> ( ( Self .Inherited ) >map> .Name ) ?OutToFile
+  CatSepIndent> ( Self .Inherited .map> .Name ) ?OutToFile
 
  'Реализуемые ' (+)? 
-  CatSepIndent> ( ( Self .Implements ) >map> .Name ) ?OutToFile
+  CatSepIndent> ( Self .Implements .map> .Name ) ?OutToFile
 
   Self .generate.children
   %REMARK 'Выводим детей элемента, тем же самым генератором'
