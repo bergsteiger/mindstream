@@ -6,3 +6,7 @@ USES
 'A' (+)? 'B' Print
 'A' (+)? '' Print
 
+'' ?(+) 'B' Print
+'A' ?(+) 'B' Print
+'A' ?(+) '' Print
+
