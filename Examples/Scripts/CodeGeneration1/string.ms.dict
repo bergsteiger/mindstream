@@ -2,6 +2,7 @@ USES
  Documentation.ms.dict
  params.ms.dict
  core.ms.dict
+ map.ms.dict
 ;
 
 : (string)
@@ -16,8 +17,8 @@ STRING FUNCTION string:CatWihAny
 ; // string:CatWihAny
 
 STRING FUNCTION any:Cat
-  ARRAY IN anArray
- '' for anArray string:CatWihAny =: Result
+ ARRAY IN anArray
+ anArray >map> ToPrintable strings:Cat =: Result
 ; // any:Cat
 
 STRING FUNCTION (+)?
