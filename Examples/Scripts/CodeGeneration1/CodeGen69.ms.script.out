@@ -4045,6 +4045,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   axiom:ActionList
   axiom:ContainedAction
  ;
+ARRAY FUNCTION : .map>
+ ^ OPERATOR :: IN : aFunctor
+ ARRAY OPERATOR :: IN : anArray
+ ARRAY FUNCTION :: .map> : Result
+; // .map>
 ARRAY FUNCTION : >map>
  ^ OPERATOR :: IN : aFunctor
  ^@ OPERATOR :: IN : anArray

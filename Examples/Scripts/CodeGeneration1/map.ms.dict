@@ -5,3 +5,9 @@ ARRAY FUNCTION >map>
  ^ FUNCTOR IN aFunctor
  aFunctor anArray DO map >>> Result
 ; // >map>
+
+ARRAY FUNCTION .map>
+ ARRAY IN anArray
+ ^ FUNCTOR IN aFunctor
+ aFunctor anArray map >>> Result
+; // .map>
