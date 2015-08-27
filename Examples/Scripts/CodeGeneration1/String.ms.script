@@ -16,5 +16,7 @@ strings:CatSep> ' ' [ 'A' 'B' ] Print
 strings:CatSep> ' ' [ 'A ' 'B' ] Print
 strings:CatSep> ' ' [ 'A ' ' B' ] Print
 strings:CatSep> ' ' [ 'A' ' B' ] Print
+strings:CatSep> ' ' [ '' 'B' ] Print
+strings:CatSep> ' ' [ 'A' '' ] Print
 '------------------' Print
 
