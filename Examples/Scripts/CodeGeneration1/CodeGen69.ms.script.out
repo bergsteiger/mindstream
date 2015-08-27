@@ -4959,6 +4959,10 @@ ARRAY OPERATOR :: MACRO :: elem_func : .Parents
  ARRAY OPERATOR :: MACRO :: elem_func :: .Parents : Result
  ModelElement OPERATOR :: IN : Self
 ; // .Parents
+OBJECT FUNCTION : .Stereotype
+ OPERATOR :: IN : %S
+ OBJECT FUNCTION :: %ST : Result
+; // .Stereotype
 ARRAY OPERATOR :: MACRO :: elem_func : .Stereotypes
  ARRAY OPERATOR :: MACRO :: elem_func :: .Stereotypes : Result
  ModelElement OPERATOR :: IN : Self

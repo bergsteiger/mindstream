@@ -73,15 +73,17 @@ BOOLEAN elem_func IsSummary
  ( Self .Name ) = '%SUM' =: Result
 ; // IsSummary
 
+WordAlias .Stereotype %ST
+
 BOOLEAN elem_func IsModelElement
  %SUMMARY 
  '
   Определяет тот факт, что Self является "элементом модели"
  '
  ; // %SUMMARY
- '<<' Self %ST .Name StartsStr 
+ '<<' Self .Stereotype .Name StartsStr 
  AND
- ( '>>' Self %ST .Name EndsStr )
+ ( '>>' Self .Stereotype .Name EndsStr )
   =: Result
  //NOT ( Self .IsSummary )
   //=: Result
@@ -149,5 +151,5 @@ ARRAY elem_func Parents
 ; // Parents
 
 ARRAY elem_func Stereotypes
- Self LIST %ST =: Result
+ Self LIST .Stereotype =: Result
 ; // Stereotypes
