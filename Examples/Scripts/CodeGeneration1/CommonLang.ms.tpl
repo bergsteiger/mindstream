@@ -21,7 +21,7 @@ elem_proc DumpAsIs
    %REMARK 'Выводим имя элемента'
  ] ' ' strings:CatSep OutToFile
 
- 'Родители элемента ' (+)? 
+ 'Родители ' (+)? 
   strings:CatSep> '::' [ for ( Self .Parents >reverted> ) .Name ] ?OutToFile
 
  strings:CatSep> ' ' [ for ( Self .Inherited ) .Name ] ?OutToFile
