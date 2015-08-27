@@ -3,143 +3,6 @@ VOID Test CodeGen
   ' Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации '
  ; // %SUMMARY %SUM
  
- VOID elem_generator .c++
-  %SUMMARY %SUM
-   ' Генератор выводящий элементы модели в c++.  Про файлы *.h мы потом поговорим отдельно. '
-  ; // %SUMMARY %SUM
-  
-  STRING %GEN_PROPERTY gpName
-   'cpp'
-  ; // STRING %GEN_PROPERTY gpName
-  
-  ModelElement IN Self
-  Self
-  .DumpAsIs
- ; // VOID elem_generator .c++
- 
- VOID elem_generator .dump
-  %SUMMARY %SUM
-   'Генератор выводящий дамп элемента модели.'
-  ; // %SUMMARY %SUM
-  
-  STRING %GEN_PROPERTY gpName
-   'dump'
-  ; // STRING %GEN_PROPERTY gpName
-  
-  ModelElement IN Self
-  Self
-  .DumpAsIs
- ; // VOID elem_generator .dump
- 
- VOID elem_proc .DumpAsIs
-  %SUMMARY %SUM
-   'Процедура печатающая содержимое элемента модели. Рекурсивно.'
-  ; // %SUMMARY %SUM
-  
-  ModelElement IN Self
-  [
-   g_CurrentGeneratorName
-   ':'
-   for
-   (
-    Self
-    LIST
-    %ST
-    Array:Reverted
-   )
-   |N
-   Self
-   |N
-  ]
-  ' '
-  strings:CatSep
-  OutToFile
-  [
-   'Родители элемента '
-   for
-   (
-    Self
-    .Parents
-    Array:Reverted
-   )
-   |N
-  ]
-  '::'
-  strings:CatSep
-  OutToFile
-  for
-  (
-   Self
-   .Inherited
-  )
-  (
-   |N
-   OutToFile
-  )
-  for
-  (
-   Self
-   .Implements
-  )
-  (
-   |N
-   OutToFile
-  )
-  TRY
-   Self
-   .CallChildrenCurrentGen
-  FINALLY
-   [
-    '; // '
-    Self
-    |N
-   ]
-   OutToFile
-  END
- ; // VOID elem_proc .DumpAsIs
- 
- VOID elem_generator .h
-  %SUMMARY %SUM
-   ' Генератор выводящий элементы модели в *.h.  Про файлы *.h мы потом поговорим отдельно. '
-  ; // %SUMMARY %SUM
-  
-  STRING %GEN_PROPERTY gpName
-   'h'
-  ; // STRING %GEN_PROPERTY gpName
-  
-  ModelElement IN Self
-  Self
-  .DumpAsIs
- ; // VOID elem_generator .h
- 
- VOID elem_generator .pas
-  %SUMMARY %SUM
-   'Генератор выводящий элементы модели в Паскаль.'
-  ; // %SUMMARY %SUM
-  
-  STRING %GEN_PROPERTY gpName
-   'pas'
-  ; // STRING %GEN_PROPERTY gpName
-  
-  ModelElement IN Self
-  Self
-  .DumpAsIs
- ; // VOID elem_generator .pas
- 
- VOID elem_generator .script
-  %SUMMARY %SUM
-   'Генератор выводящий элементы модели в ms.script.'
-  ; // %SUMMARY %SUM
-  
-  STRING %GEN_PROPERTY gpName
-   'ms.script'
-  ; // STRING %GEN_PROPERTY gpName
-  
-  ModelElement IN Self
-  Self
-  .DumpAsIs
- ; // VOID elem_generator .script
- 
  <<Project>> Project1
   %SUMMARY %SUM
    ' Это наш первый проект - Project1 '
@@ -881,6 +744,7 @@ Dictionary: CodeGen68.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\implementation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Templates.ms.model
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Generation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CommonLang.ms.tpl
  ;
 Dictionary: axiom:axiom
  Uses: 
@@ -5122,38 +4986,73 @@ WORD_REF OPERATOR : pop:Word:GetRefDeepest
  WORD_REF OPERATOR :: pop:Word:GetRefDeepest : Result
 ; // pop:Word:GetRefDeepest
 IMMEDIATE VOID OPERATOR :: TYPE : WORD_REF
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CommonLang.ms.tpl
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbols.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Generation.ms.dict
+ ;
+VOID OPERATOR :: MACRO :: elem_generator : .c++
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
+ ModelElement OPERATOR :: IN : Self
+; // .c++
+VOID OPERATOR :: MACRO :: elem_generator : .dump
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
+ ModelElement OPERATOR :: IN : Self
+; // .dump
+VOID OPERATOR :: MACRO :: elem_proc : .DumpAsIs
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ModelElement OPERATOR :: IN : Self
+; // .DumpAsIs
+VOID OPERATOR :: MACRO :: elem_generator : .h
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
+ ModelElement OPERATOR :: IN : Self
+; // .h
+VOID OPERATOR :: MACRO :: elem_generator : .pas
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
+ ModelElement OPERATOR :: IN : Self
+; // .pas
+VOID OPERATOR :: MACRO :: elem_generator : .script
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
+ ModelElement OPERATOR :: IN : Self
+; // .script
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-  VOID OPERATOR :: MACRO :: elem_generator : .c++
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
-   ModelElement OPERATOR :: IN : Self
-  ; // .c++
-  VOID OPERATOR :: MACRO :: elem_generator : .dump
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
-   ModelElement OPERATOR :: IN : Self
-  ; // .dump
-  VOID OPERATOR :: MACRO :: elem_proc : .DumpAsIs
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ModelElement OPERATOR :: IN : Self
-  ; // .DumpAsIs
-  VOID OPERATOR :: MACRO :: elem_generator : .h
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
-   ModelElement OPERATOR :: IN : Self
-  ; // .h
-  VOID OPERATOR :: MACRO :: elem_generator : .pas
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
-   ModelElement OPERATOR :: IN : Self
-  ; // .pas
-  VOID OPERATOR :: MACRO :: elem_generator : .script
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
-   ModelElement OPERATOR :: IN : Self
-  ; // .script
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library1

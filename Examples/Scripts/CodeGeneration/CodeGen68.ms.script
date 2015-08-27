@@ -201,94 +201,17 @@ this.method.addr DumpElement
    Чисто для отладки того, что мы сейчас написали.
  '
 
+USES
+ Generation.ms.dict
+ CommonLang.ms.tpl
+;
+
 help
 %REMARK
  '
  Выводим всю доступную аксиоматику в стандартное устройство вывода.
  Чисто для отладки того, что мы сейчас написали.
  '
-
-USES
- Generation.ms.dict
-;
-
-elem_proc DumpAsIs
- %SUMMARY 'Процедура печатающая содержимое элемента модели. Рекурсивно.' ;
-
- [
-  g_CurrentGeneratorName ':'
-   %REMARK 'Выводим имя текущего генератора. Для отладки' 
-  for ( Self LIST %ST Reverted ) .Name
-   %REMARK 'Выводим стереотип элемента, рекурсивно'
-  Self .Name 
-   %REMARK 'Выводим имя элемента'
- ] ' ' strings:CatSep OutToFile
- [
-  'Родители элемента '
-  for ( Self .Parents >reverted> ) .Name
-  %REMARK 'Выводим родителей элемента, рекурсивно'
- ] '::' strings:CatSep OutToFile
- for ( Self .Inherited ) ( .Name OutToFile )
- for ( Self .Implements ) ( .Name OutToFile )
- TRY
-  Self .CallChildrenCurrentGen
-  %REMARK 'Выводим детей элемента, тем же самым генератором'
- FINALLY
-  [ '; // ' Self .Name ] OutToFile
-  %REMARK 'Выводим закрывающую скобку элемента'
- END
-; // DumpAsIs
-
-elem_generator dump
- %SUMMARY 'Генератор выводящий дамп элемента модели.' ;
- %GEN_PROPERTY Name 'dump'
- %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
-
- Self .DumpAsIs
- %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
-; // dump
-
-elem_generator pas
- %SUMMARY 'Генератор выводящий элементы модели в Паскаль.' ;
- %GEN_PROPERTY Name 'pas'
- %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
-
- Self .DumpAsIs
- %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
-; // pas
-
-elem_generator script
- %SUMMARY 'Генератор выводящий элементы модели в ms.script.' ;
- %GEN_PROPERTY Name 'ms.script'
- %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
-
- Self .DumpAsIs
- %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
-; // script
-
-elem_generator c++
- %SUMMARY '
- Генератор выводящий элементы модели в c++. 
- Про файлы *.h мы потом поговорим отдельно.
- ' ;
- %GEN_PROPERTY Name 'cpp'
- %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
-
- Self .DumpAsIs
- %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
-; // c++
-
-elem_generator h
- %SUMMARY '
- Генератор выводящий элементы модели в *.h. 
- Про файлы *.h мы потом поговорим отдельно.
- ' ;
- %GEN_PROPERTY Name 'h'
- %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
-
- Self .DumpAsIs
- %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
-; // h
 
 ( Project1 Project2 Project3 )
 %REMARK 'Список всех наших корневых элементов (проектов)'
