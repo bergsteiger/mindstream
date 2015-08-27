@@ -21,7 +21,7 @@ elem_proc DumpAsIs
 
  CatSepIndent>
  [
-  for ( Self .Stereotypes >reverted> ) .Name
+   Self .Stereotypes >reverted> ==> .Name
    %REMARK 'Выводим стереотип элемента, рекурсивно'
   Self .Name 
    %REMARK 'Выводим имя элемента'
