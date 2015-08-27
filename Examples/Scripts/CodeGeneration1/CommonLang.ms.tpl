@@ -31,13 +31,10 @@ elem_proc DumpAsIs
  'Реализуемые ' (+)? 
   CatSep> cIndentChar [ for ( Self .Implements ) .Name ] ?OutToFile
 
- TRY
   Self .generate.children
   %REMARK 'Выводим детей элемента, тем же самым генератором'
- FINALLY
   [ '; // ' Self .Name ] OutToFile
   %REMARK 'Выводим закрывающую скобку элемента'
- END
 ; // DumpAsIs
 
 elem_generator dump
