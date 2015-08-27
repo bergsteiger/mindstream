@@ -4138,6 +4138,13 @@ STRING FUNCTION : string:CatWihAny
  OPERATOR :: IN : aValue
  STRING FUNCTION :: string:CatWihAny : Result
 ; // string:CatWihAny
+STRING FUNCTION : strings:CatSep>
+ ^ OPERATOR :: IN : _aSep
+ ^ OPERATOR :: IN : _aValues
+ IMMEDIATE VOID OPERATOR : aSep
+ IMMEDIATE VOID OPERATOR : aValues
+ STRING FUNCTION :: strings:CatSep> : Result
+; // strings:CatSep>
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
  Uses: 
   axiom:axiom

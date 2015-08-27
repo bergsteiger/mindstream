@@ -39,3 +39,9 @@ STRING FUNCTION ?(+)
  if ( aPrefix =/= '' ) then
   ( aPrefix aSuffix |^ Cat =: Result )
 ; // ?(+)
+
+STRING FUNCTION strings:CatSep>
+ STRING right aSep
+ ARRAY right aValues
+ aValues |^ aSep |^ strings:CatSep =: Result
+; // strings:CatSep>
