@@ -551,32 +551,6 @@ VOID Test CodeGen
   EXIT
  ; // IMMEDIATE VOID <<UMLCategory>> <<Project>>
  
- IMMEDIATE VOID <<@meta>> <<UMLCategory>>
-  %SUMMARY %SUM
-   ' Категория в терминах UML '
-  ; // %SUMMARY %SUM
-  
-  ^L IN aName
-  aName
-  |N
-  <<UMLCategory>>
-  DefineStereo
-  EXIT
- ; // IMMEDIATE VOID <<@meta>> <<UMLCategory>>
- 
- IMMEDIATE VOID <<@meta>> <<UMLClass>>
-  %SUMMARY %SUM
-   ' Класс в терминах UML '
-  ; // %SUMMARY %SUM
-  
-  ^L IN aName
-  aName
-  |N
-  <<UMLClass>>
-  DefineStereo
-  EXIT
- ; // IMMEDIATE VOID <<@meta>> <<UMLClass>>
- 
  VOID PROCEDURE CallGens
   %SUMMARY %SUM
    'Вызывает все определённые генераторы на элементах массива anElements'
@@ -1618,7 +1592,7 @@ Dictionary: CodeGen67.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Object.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\implementation.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\MetaMetaModel.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\MetaModel.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\RefDeepest.ms.dict
  ;
 Dictionary: axiom:axiom
@@ -5497,6 +5471,44 @@ Dictionary: axiom:CompiledWordWorkerWord
 TtfwWord pop:CompiledWordWorkerWord:Compiled
 Dictionary: axiom:Finder
 VOID pop:Finder:SetToCtx
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\MetaModel.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\MetaMetaModel.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> : <<UMLCategory>>
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // <<UMLCategory>>
+IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> : <<UMLClass>>
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // <<UMLClass>>
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\MetaMetaModel.ms.dict
  Uses: 
   axiom:axiom
@@ -5717,14 +5729,6 @@ TkwMain : Main
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ^L OPERATOR :: IN : aName
   ; // <<Project>>
-  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> : <<UMLCategory>>
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^L OPERATOR :: IN : aName
-  ; // <<UMLCategory>>
-  IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> : <<UMLClass>>
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ^L OPERATOR :: IN : aName
-  ; // <<UMLClass>>
   VOID OPERATOR :: PROCEDURE : CallGens
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
    ARRAY OPERATOR :: IN : aGenerators
