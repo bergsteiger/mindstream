@@ -32,7 +32,7 @@ elem_proc DumpAsIs
   CatSepIndent> ( ( Self .Parents >reverted> ) >map> .Name ) ?OutToFile
 
  'Наследуемые ' (+)? 
-  CatSepIndent> [ for ( Self .Inherited ) .Name ] ?OutToFile
+  CatSepIndent> ( ( Self .Inherited ) >map> .Name ) ?OutToFile
 
  'Реализуемые ' (+)? 
   CatSepIndent> [ for ( Self .Implements ) .Name ] ?OutToFile
