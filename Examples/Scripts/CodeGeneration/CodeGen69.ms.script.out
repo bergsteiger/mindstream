@@ -1,114 +1,4 @@
 VOID Test CodeGen
- <<Project>> Project1
-  %SUMMARY %SUM
-   ' Это наш первый проект - Project1 '
-  ; // %SUMMARY %SUM
-  
-  <<Library>> Library1
-   %SUMMARY %SUM
-    '  Наверное наш проект содержит какие-то проектные библиотеки.  Так вот Library1 - это наша первая проектная библиотека  '
-   ; // %SUMMARY %SUM
-   
-  ; // <<Library>> Library1
-  
-  <<Library>> Library2
-   %SUMMARY %SUM
-    '  Наверное наш проект достаточно серьёзен и содержит НЕ ОДНУ библиотеку.  Так вот Library2 - это наша вторая проектная библиотека.  '
-   ; // %SUMMARY %SUM
-   
-  ; // <<Library>> Library2
-  
-  <<Library>> Library3
-   %SUMMARY %SUM
-    '  Наверное наш проект НАСТОЛЬКО серьёзен, что содержит даже НЕ ДВЕ библиотеки.  Так вот Library3 - это наша третья проектная библиотека.  '
-   ; // %SUMMARY %SUM
-   
-  ; // <<Library>> Library3
-  
-  <<Program>> Program1
-   %SUMMARY %SUM
-    '  Наверное наш проект реализует какую-то программу.  Иначе - зачем бы он нам был бы нужен?  Так вот Program1 - это программа внутри нашего проекта Project1.  '
-   ; // %SUMMARY %SUM
-   
-   <<Class>> Class1
-    %SUMMARY %SUM
-     '   Наверное наша программа содержит какие-то классы реализации.   Иначе - кто будет реализовывать наш функционал?   Так вот Class1 - это наш ПЕРВЫЙ класс реализации внутри нашей программы Program1.   '
-    ; // %SUMMARY %SUM
-    
-   ; // <<Class>> Class1
-   
-   <<Class>> Class2
-    %INHERITS %G
-     @
-     Class1
-    ; // %INHERITS %G
-    
-    %IMPLEMENTS %R
-     @
-     Interface1
-     @
-     Interface2
-    ; // %IMPLEMENTS %R
-    
-    %SUMMARY %SUM
-     '   Наверное наша программа достаточно серьёзна и содержит НЕ ОДИН классы реализации.   Так вот Class2 - это наш ВТОРОЙ класс реализации внутри нашей программы Program1.   '
-    ; // %SUMMARY %SUM
-    
-   ; // <<Class>> Class2
-   
-   <<Class>> Class3
-    %SUMMARY %SUM
-     '   Возможно, что у нас такая непростая программа, что в ней даже больше, чем ДВА класса реализации.   Так вот Class3 - это наш ТРЕТИЙ класс реализации внутри нашей программы Program1.   '
-    ; // %SUMMARY %SUM
-    
-   ; // <<Class>> Class3
-   
-   <<Class>> Class4
-    %INHERITS %G
-     @
-     Class2
-     @
-     Class3
-    ; // %INHERITS %G
-    
-    %SUMMARY %SUM
-     '   Возможно, что мы настолько офигенно круты, что у на даже НЕ ТРИ класса реализации.   Так вот Class4 - это наш ЧЕТВЁРТЫЙ класс реализации внутри нашей программы Program1.   '
-    ; // %SUMMARY %SUM
-    
-   ; // <<Class>> Class4
-   
-   <<Interface>> Interface1
-    %SUMMARY %SUM
-     '   Наверное наша программа настолько серьёзна, что реализует какие-то интерфейсы.   Так вот Interface1 - это наш ПЕРВЫЙ интерфейс.   '
-    ; // %SUMMARY %SUM
-    
-   ; // <<Interface>> Interface1
-   
-   <<Interface>> Interface2
-    %SUMMARY %SUM
-     '   Наверное наша программа настолько серьёзна, что реализует НЕ ОДИН интерфейс, а несколько.   Так вот Interface2 - это наш ВТОРОЙ интерфейс.   '
-    ; // %SUMMARY %SUM
-    
-   ; // <<Interface>> Interface2
-   
-  ; // <<Program>> Program1
-  
- ; // <<Project>> Project1
- 
- <<Project>> Project2
-  %SUMMARY %SUM
-   ' Это наш ВТОРОЙ проект - Project2 '
-  ; // %SUMMARY %SUM
-  
- ; // <<Project>> Project2
- 
- <<Project>> Project3
-  %SUMMARY %SUM
-   ' Это наш ТРЕТИЙ проект - Project3 '
-  ; // %SUMMARY %SUM
-  
- ; // <<Project>> Project3
- 
  CodeGen
  DumpElement
  help
@@ -738,7 +628,7 @@ Dictionary: CodeGen69.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Object.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\implementation.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Templates.ms.model
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Concrete.ms.model
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Generation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CommonLang.ms.tpl
  ;
@@ -4618,6 +4508,80 @@ Dictionary: axiom:CompiledWordWorkerWord
 TtfwWord pop:CompiledWordWorkerWord:Compiled
 Dictionary: axiom:Finder
 VOID pop:Finder:SetToCtx
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Concrete.ms.model
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Component
+  axiom:form
+  axiom:ActionList
+  axiom:ContainedAction
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbols.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Templates.ms.model
+ ;
+OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library1
+  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ; // Library1
+ OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library2
+  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ; // Library2
+ OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library3
+  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ; // Library3
+ OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Program>> : Program1
+  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class1
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  ; // Class1
+  OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class2
+   OPERATOR :: NamedWordProducer :: %INHERITS : %G
+   OPERATOR :: NamedWordProducer :: %IMPLEMENTS : %R
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  ; // Class2
+  OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class3
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  ; // Class3
+  OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class4
+   OPERATOR :: NamedWordProducer :: %INHERITS : %G
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  ; // Class4
+  OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Interface>> : Interface1
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  ; // Interface1
+  OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Interface>> : Interface2
+   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  ; // Interface2
+ ; // Program1
+; // Project1
+OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project2
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // Project2
+OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project3
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // Project3
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Templates.ms.model
  Uses: 
   axiom:axiom
@@ -5048,47 +5012,4 @@ VOID OPERATOR :: MACRO :: elem_generator : .script
 ; // .script
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
-  OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library1
-    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ; // Library1
-   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library2
-    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ; // Library2
-   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library3
-    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-   ; // Library3
-   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Program>> : Program1
-    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class1
-     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-    ; // Class1
-    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class2
-     OPERATOR :: NamedWordProducer :: %INHERITS : %G
-     OPERATOR :: NamedWordProducer :: %IMPLEMENTS : %R
-     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-    ; // Class2
-    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class3
-     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-    ; // Class3
-    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class4
-     OPERATOR :: NamedWordProducer :: %INHERITS : %G
-     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-    ; // Class4
-    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Interface>> : Interface1
-     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-    ; // Interface1
-    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Interface>> : Interface2
-     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-    ; // Interface2
-   ; // Program1
-  ; // Project1
-  OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project2
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-  ; // Project2
-  OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project3
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
-  ; // Project3
- ; // CodeGen
 ; // Main
