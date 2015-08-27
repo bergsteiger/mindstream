@@ -4822,6 +4822,9 @@ ARRAY OPERATOR :: MACRO :: elem_func : .Parents
  ARRAY OPERATOR :: MACRO :: elem_func :: .Parents : Result
  ModelElement OPERATOR :: IN : Self
 ; // .Parents
+VOID OPERATOR :: PROCEDURE : ?OutToFile
+ STRING OPERATOR :: IN : aValue
+; // ?OutToFile
 VOID OPERATOR :: PROCEDURE : CallGens
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ARRAY OPERATOR :: IN : aGenerators

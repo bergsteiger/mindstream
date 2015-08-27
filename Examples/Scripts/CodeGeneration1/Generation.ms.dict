@@ -191,6 +191,12 @@ PROCEDURE OutToFile
  %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; //OutToFile
 
+PROCEDURE ?OutToFile
+ STRING IN aValue
+ if ( aValue =/= '' ) then
+  ( aValue OutToFile )
+; // ?OutToFile
+
 FUNCTOR TYPE GENERATOR
 %REMARK 'Генератор содержимого элемента'
 
