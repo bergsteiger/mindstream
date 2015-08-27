@@ -23,7 +23,7 @@ elem_proc DumpAsIs
  [
   g_CurrentGeneratorName ':'
    %REMARK 'Выводим имя текущего генератора. Для отладки' 
-  for ( Self LIST %ST Reverted ) .Name
+  for ( Self LIST %ST >reverted> ) .Name
    %REMARK 'Выводим стереотип элемента, рекурсивно'
   Self .Name 
    %REMARK 'Выводим имя элемента'
