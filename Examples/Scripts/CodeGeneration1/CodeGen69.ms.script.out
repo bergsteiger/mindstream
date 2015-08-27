@@ -4116,6 +4116,7 @@ STRING FUNCTION : (+)?
  ^ OPERATOR :: IN : _aSuffix
  STRING OPERATOR :: IN : aPrefix
  IMMEDIATE VOID OPERATOR : aSuffix
+ STRING OPERATOR :: VAR : l_Suffix
  STRING FUNCTION :: (+)? : Result
 ; // (+)?
 : : (string)
