@@ -4423,6 +4423,7 @@ VOID OPERATOR :: PROCEDURE : do_elem_func
  ENGINE_WORD OPERATOR :: IN : aModifier
  STRING OPERATOR :: IN : aName
  ENGINE_WORD OPERATOR :: IN : aSelf
+ STRING OPERATOR :: IN : aType
 ; // do_elem_func
 VOID OPERATOR :: PROCEDURE : do_elem_proc
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
