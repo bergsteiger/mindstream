@@ -13,7 +13,7 @@ IMMEDIATE operator __CompileCodeAndFree
  aCode pop:Word:DecRef 
 ; // __CompileCodeAndFree
 
-IMMEDIATE VOID operator NamedCodeProducer
+MACRO NamedCodeProducer
   ^L IN aName
   ^L IN aNewName
  

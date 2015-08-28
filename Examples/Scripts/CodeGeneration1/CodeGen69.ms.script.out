@@ -3809,13 +3809,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndIm
 IMMEDIATE OPERATOR : __CompileCodeAndFree
  TtfwWord OPERATOR :: IN : aCode
 ; // __CompileCodeAndFree
-IMMEDIATE OPERATOR :: NamedCodeProducer : Implements
+IMMEDIATE OPERATOR :: MACRO :: NamedCodeProducer : Implements
  ^ OPERATOR :: IN : aCode
 ; // Implements
-IMMEDIATE OPERATOR :: NamedCodeProducer : Inherits
+IMMEDIATE OPERATOR :: MACRO :: NamedCodeProducer : Inherits
  ^ OPERATOR :: IN : aCode
 ; // Inherits
-IMMEDIATE VOID OPERATOR : NamedCodeProducer
+IMMEDIATE VOID OPERATOR :: MACRO : NamedCodeProducer
  ^L OPERATOR :: IN : aName
  ^L OPERATOR :: IN : aNewName
 ; // NamedCodeProducer
@@ -3869,7 +3869,7 @@ OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Pr
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   ; // Class1
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class2
-   OPERATOR :: NamedCodeProducer :: Inherits : %G
+   OPERATOR :: MACRO :: NamedCodeProducer :: Inherits : %G
    OPERATOR :: NamedWordProducer :: %IMPLEMENTS : %R
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   ; // Class2
@@ -3877,7 +3877,7 @@ OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Pr
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   ; // Class3
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class4
-   OPERATOR :: NamedCodeProducer :: Inherits : %G
+   OPERATOR :: MACRO :: NamedCodeProducer :: Inherits : %G
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   ; // Class4
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class5
@@ -4495,13 +4495,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  ;
 VOID OPERATOR :: MACRO :: elem_generator : .c++
- OPERATOR :: NamedCodeProducer :: Inherits : %G
+ OPERATOR :: MACRO :: NamedCodeProducer :: Inherits : %G
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
  ModelElement OPERATOR :: IN : Self
 ; // .c++
 VOID OPERATOR :: MACRO :: elem_generator : .dump
- OPERATOR :: NamedCodeProducer :: Inherits : %G
+ OPERATOR :: MACRO :: NamedCodeProducer :: Inherits : %G
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
  ModelElement OPERATOR :: IN : Self
@@ -4511,19 +4511,19 @@ VOID OPERATOR :: MACRO :: elem_generator : .DumpAsIs
  ModelElement OPERATOR :: IN : Self
 ; // .DumpAsIs
 VOID OPERATOR :: MACRO :: elem_generator : .h
- OPERATOR :: NamedCodeProducer :: Inherits : %G
+ OPERATOR :: MACRO :: NamedCodeProducer :: Inherits : %G
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
  ModelElement OPERATOR :: IN : Self
 ; // .h
 VOID OPERATOR :: MACRO :: elem_generator : .pas
- OPERATOR :: NamedCodeProducer :: Inherits : %G
+ OPERATOR :: MACRO :: NamedCodeProducer :: Inherits : %G
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
  ModelElement OPERATOR :: IN : Self
 ; // .pas
 VOID OPERATOR :: MACRO :: elem_generator : .script
- OPERATOR :: NamedCodeProducer :: Inherits : %G
+ OPERATOR :: MACRO :: NamedCodeProducer :: Inherits : %G
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
  ModelElement OPERATOR :: IN : Self
