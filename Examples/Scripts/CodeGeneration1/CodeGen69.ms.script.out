@@ -3627,6 +3627,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
  ;
@@ -3778,6 +3780,115 @@ Dictionary: axiom:CompiledWordWorkerWord
 TtfwWord pop:CompiledWordWorkerWord:Compiled
 Dictionary: axiom:Finder
 VOID pop:Finder:SetToCtx
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymbols.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
+ ;
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
+ ;
+ARRAY OPERATOR :: MACRO :: word_func : .ElementList
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aListName
+ PRIVATE BOOLEAN FUNCTION : FilterElement
+  OBJECT OPERATOR :: IN : aMember
+  PRIVATE BOOLEAN FUNCTION :: FilterElement : Result
+ ; // FilterElement
+ PRIVATE OBJECT FUNCTION : MapElement
+  OBJECT OPERATOR :: IN : aMember
+  OPERATOR :: VAR : l_Element
+  PRIVATE OBJECT FUNCTION :: MapElement : Result
+ ; // MapElement
+ ARRAY OPERATOR :: MACRO :: word_func :: .ElementList : Result
+ ENGINE_WORD OPERATOR :: IN : Self
+; // .ElementList
+ARRAY OPERATOR :: MACRO :: word_func : .Implemented.Words
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: word_func :: .Implemented.Words : Result
+ ENGINE_WORD OPERATOR :: IN : Self
+; // .Implemented.Words
+ARRAY OPERATOR :: MACRO :: word_func : .Inherited.Words
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: word_func :: .Inherited.Words : Result
+ ENGINE_WORD OPERATOR :: IN : Self
+; // .Inherited.Words
+VOID OPERATOR :: PROCEDURE : do_elem_func
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ENGINE_WORD OPERATOR :: IN : aModifier
+ STRING OPERATOR :: IN : aName
+ ENGINE_WORD OPERATOR :: IN : aSelf
+ STRING OPERATOR :: IN : aType
+; // do_elem_func
+IMMEDIATE VOID OPERATOR :: MACRO : word_func
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // word_func
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: TYPE : ENGINE_WORD
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  Uses: 
   axiom:axiom
@@ -3818,35 +3929,6 @@ IMMEDIATE OPERATOR :: MACRO :: NamedCodeProducer : Implements
 IMMEDIATE OPERATOR :: MACRO :: NamedCodeProducer : Inherits
  ^ OPERATOR :: IN : aCode
 ; // Inherits
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Array
-  axiom:File
-  axiom:Font
-  axiom:generators
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
- ;
-IMMEDIATE VOID OPERATOR :: TYPE : ENGINE_WORD
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
  Uses: 
   axiom:axiom
@@ -4417,86 +4499,6 @@ IMMEDIATE VOID OPERATOR :: MACRO : elem_ref_proc
  ^L OPERATOR :: IN : aName
 ; // elem_ref_proc
 IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Array
-  axiom:File
-  axiom:Font
-  axiom:generators
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymbols.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
- ;
- Exports: 
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
- ;
-ARRAY OPERATOR :: MACRO :: word_func : .ElementList
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aListName
- PRIVATE BOOLEAN FUNCTION : FilterElement
-  OBJECT OPERATOR :: IN : aMember
-  PRIVATE BOOLEAN FUNCTION :: FilterElement : Result
- ; // FilterElement
- PRIVATE OBJECT FUNCTION : MapElement
-  OBJECT OPERATOR :: IN : aMember
-  OPERATOR :: VAR : l_Element
-  PRIVATE OBJECT FUNCTION :: MapElement : Result
- ; // MapElement
- ARRAY OPERATOR :: MACRO :: word_func :: .ElementList : Result
- ENGINE_WORD OPERATOR :: IN : Self
-; // .ElementList
-ARRAY OPERATOR :: MACRO :: word_func : .Implemented.Words
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ARRAY OPERATOR :: MACRO :: word_func :: .Implemented.Words : Result
- ENGINE_WORD OPERATOR :: IN : Self
-; // .Implemented.Words
-ARRAY OPERATOR :: MACRO :: word_func : .Inherited.Words
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ARRAY OPERATOR :: MACRO :: word_func :: .Inherited.Words : Result
- ENGINE_WORD OPERATOR :: IN : Self
-; // .Inherited.Words
-VOID OPERATOR :: PROCEDURE : do_elem_func
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ENGINE_WORD OPERATOR :: IN : aModifier
- STRING OPERATOR :: IN : aName
- ENGINE_WORD OPERATOR :: IN : aSelf
- STRING OPERATOR :: IN : aType
-; // do_elem_func
-IMMEDIATE VOID OPERATOR :: MACRO : word_func
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aName
-; // word_func
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\RefDeepest.ms.dict
  Uses: 
   axiom:axiom
