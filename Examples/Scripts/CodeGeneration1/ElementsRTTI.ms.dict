@@ -115,12 +115,12 @@ ARRAY word_func ElementList
 ARRAY word_func Implemented.Words
  %SUMMARY 'Возвращает итератор элементов которые реализует наш элемент' ;
  Result := ( Self .ElementList %R )
-; // Implemented
+; // Implemented.Words
 
 ARRAY word_func Inherited.Words
  %SUMMARY 'Возвращает итератор элементов от которого наследуется наш элемент' ;
  Result := ( Self .ElementList %G )
-; // Inherited
+; // Inherited.Words
 
 BOOLEAN elem_func IsSummary
  %SUMMARY 
