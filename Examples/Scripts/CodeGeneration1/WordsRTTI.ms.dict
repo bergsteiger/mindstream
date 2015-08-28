@@ -1,0 +1,89 @@
+// WordsRTTI.ms.dict
+
+USES
+ Documentation.ms.dict
+ EngineTypes.ms.dict
+ axiom_push.ms.dict
+ macro.ms.dict
+ core.ms.dict
+ NoStrangeSymbols.ms.dict
+ params.ms.dict
+ NoCapsLock.ms.dict
+ arrays.ms.dict
+;
+
+EXPORTS
+ EngineTypes.ms.dict
+
+PROCEDURE do_elem_func
+ STRING IN aName
+ ENGINE_WORD IN aSelf
+ ENGINE_WORD IN aModifier
+ STRING IN aType
+ %SUMMARY 'Реализация elem_func, elem_proc и elem_generator' ;
+ aSelf Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol :
+ aName Ctx:Parser:PushLeftDottedSymbol
+ aType Ctx:Parser:PushSymbol
+ if ( aModifier =/= nil ) then
+  ( aModifier .Name Ctx:Parser:PushSymbol )
+ axiom:PushSymbol in
+ 'Self' Ctx:Parser:PushSymbol
+; // do_elem_func
+
+MACRO word_func
+ Literal IN aName
+ %SUMMARY 'Функция на элементе модели' ;
+ aName .Name this.method.addr nil 'ENGINE_WORD' do_elem_func
+; // word_func
+
+ARRAY word_func ElementList 
+ Literal IN aListName
+ %SUMMARY 'Возвращает итератор именованного списка на элементе' ;
+
+ private BOOLEAN FUNCTION FilterElement 
+  OBJECT IN aMember
+
+  Result := ( aMember NotValid ! )
+ ; // FilterElement
+ 
+ private OBJECT FUNCTION MapElement 
+  OBJECT IN aMember
+
+  VAR l_Element
+  l_Element := ( aMember DO )
+  // - берём ссылку на элемент модели
+  if ( l_Element IsVoid ) then
+  // - пропускаем невалидные ссылки
+  (
+   Result := nil
+  )
+  else
+  (
+   Result := l_Element
+  ) 
+ ; // MapElement
+
+ if ( Self NotValid ) then
+  ( Result := [ ] )
+ else
+  (
+   VAR l_List
+   l_List := ( Self %% ( aListName .Name ) )
+   
+   if ( l_List NotValid ) then
+    ( Result := [ ] )
+   else 
+    ( Result := ( l_List CodeIterator .map> MapElement .filter> FilterElement ) )
+  )
+; // ElementList
+
+ARRAY word_func Implemented.Words
+ %SUMMARY 'Возвращает итератор элементов которые реализует наш элемент' ;
+ Result := ( Self .ElementList %R )
+; // Implemented.Words
+
+ARRAY word_func Inherited.Words
+ %SUMMARY 'Возвращает итератор элементов от которого наследуется наш элемент' ;
+ Result := ( Self .ElementList %G )
+; // Inherited.Words

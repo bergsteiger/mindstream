@@ -7,6 +7,7 @@ USES
  NoStrangeSymbols.ms.dict
  arrays.ms.dict
  macro.ms.dict
+ WordsRTTI.ms.dict
  ElementsRTTI.ms.dict
  Generation.ms.dict
  string.ms.dict
