@@ -3877,7 +3877,7 @@ OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Pr
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   ; // Class3
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class4
-   OPERATOR :: NamedWordProducer :: %INHERITS : %G
+   OPERATOR :: NamedCodeProducer :: Inherits : %G
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   ; // Class4
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class5

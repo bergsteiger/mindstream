@@ -112,16 +112,13 @@ concrete-model-begin 'Модель конкретного проекта Project1'
    Так вот Class4 - это наш ЧЕТВЁРТЫЙ класс реализации внутри нашей программы Program1.
    '
    ; // %SUMMARY
-   %INHERITS
-    Addr Class2
-    Addr Class3
+   Inherits ( Class2 Class3 )
     %REMARK 
      '
      Возможно, что мы нстолько ОФИГЕННЫЕ перцы, что используем МНОЖЕСТВЕННОЕ наследование.
      И даже ПОНИМАЕМ - ЗАЧЕМ это нужно.
      Так вот Class4 - наследуется от Class2 и Class3.  
      '
-   ; // %INHERITS
   ; // Class4
   
   <<Class>> Class5
