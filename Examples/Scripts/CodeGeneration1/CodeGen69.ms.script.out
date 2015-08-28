@@ -204,6 +204,7 @@ Dictionary: CodeGen69.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Concrete.ms.model
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Generation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms.tpl
@@ -3627,9 +3628,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  ;
  Exports: 
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %FIELDS
 ARRAY FUNCTION : %Fld
@@ -3775,6 +3778,47 @@ Dictionary: axiom:CompiledWordWorkerWord
 TtfwWord pop:CompiledWordWorkerWord:Compiled
 Dictionary: axiom:Finder
 VOID pop:Finder:SetToCtx
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
+ ;
+IMMEDIATE OPERATOR : __CompileCodeAndFree
+ TtfwWord OPERATOR :: IN : aCode
+; // __CompileCodeAndFree
+IMMEDIATE OPERATOR :: NamedCodeProducer : Implements
+ ^ OPERATOR :: IN : aCode
+; // Implements
+IMMEDIATE OPERATOR :: NamedCodeProducer : Inherits
+ ^ OPERATOR :: IN : aCode
+; // Inherits
+IMMEDIATE VOID OPERATOR : NamedCodeProducer
+ ^L OPERATOR :: IN : aName
+ ^L OPERATOR :: IN : aNewName
+; // NamedCodeProducer
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Concrete.ms.model
  Uses: 
   axiom:axiom
@@ -3949,47 +3993,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\classRelation
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %IMPLEMENTS
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Array
-  axiom:File
-  axiom:Font
-  axiom:generators
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
- ;
-IMMEDIATE OPERATOR : __CompileCodeAndFree
- TtfwWord OPERATOR :: IN : aCode
-; // __CompileCodeAndFree
-IMMEDIATE OPERATOR :: NamedCodeProducer : Implements
- ^ OPERATOR :: IN : aCode
-; // Implements
-IMMEDIATE OPERATOR :: NamedCodeProducer : Inherits
- ^ OPERATOR :: IN : aCode
-; // Inherits
-IMMEDIATE VOID OPERATOR : NamedCodeProducer
- ^L OPERATOR :: IN : aName
- ^L OPERATOR :: IN : aNewName
-; // NamedCodeProducer
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms.model
  Uses: 
   axiom:axiom

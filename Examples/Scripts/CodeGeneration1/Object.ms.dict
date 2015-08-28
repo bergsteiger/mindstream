@@ -11,6 +11,13 @@ USES
 EXPORTS
  implementation.ms.dict
 
+USES
+ InheritsAndImplementsNew.ms.dict
+;
+
+EXPORTS
+ InheritsAndImplementsNew.ms.dict
+
 // Понятное дело, что всю обвязку потом упрячем в отдельный словарь object.ms.dict
 
 NamedWordProducer %FIELDS %Fld
