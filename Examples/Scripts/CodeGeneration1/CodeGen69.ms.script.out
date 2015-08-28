@@ -3846,6 +3846,24 @@ ARRAY OPERATOR :: MACRO :: word_func : .Inherited.Words
  ARRAY OPERATOR :: MACRO :: word_func :: .Inherited.Words : Result
  ENGINE_WORD OPERATOR :: IN : Self
 ; // .Inherited.Words
+OBJECT FUNCTION : .Parent
+ OPERATOR :: IN : %S
+ OPERATOR :: VAR : l_P
+ OBJECT FUNCTION :: %P : Result
+; // .Parent
+ARRAY OPERATOR :: MACRO :: word_func : .Parent.Words
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: word_func :: .Parent.Words : Result
+ ENGINE_WORD OPERATOR :: IN : Self
+; // .Parent.Words
+OBJECT FUNCTION : .Stereotype
+ OPERATOR :: IN : %S
+ OBJECT FUNCTION :: %ST : Result
+; // .Stereotype
+ARRAY OPERATOR :: MACRO :: word_func : .Stereotype.Words
+ ARRAY OPERATOR :: MACRO :: word_func :: .Stereotype.Words : Result
+ ENGINE_WORD OPERATOR :: IN : Self
+; // .Stereotype.Words
 VOID OPERATOR :: PROCEDURE : do_word_func
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ENGINE_WORD OPERATOR :: IN : aModifier
@@ -4455,20 +4473,11 @@ BOOLEAN OPERATOR :: MACRO :: elem_func : .IsSummary
  BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsSummary : Result
  ModelElement OPERATOR :: IN : Self
 ; // .IsSummary
-OBJECT FUNCTION : .Parent
- OPERATOR :: IN : %S
- OPERATOR :: VAR : l_P
- OBJECT FUNCTION :: %P : Result
-; // .Parent
 ARRAY OPERATOR :: MACRO :: elem_func : .Parents
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ARRAY OPERATOR :: MACRO :: elem_func :: .Parents : Result
  ModelElement OPERATOR :: IN : Self
 ; // .Parents
-OBJECT FUNCTION : .Stereotype
- OPERATOR :: IN : %S
- OBJECT FUNCTION :: %ST : Result
-; // .Stereotype
 ARRAY OPERATOR :: MACRO :: elem_func : .Stereotypes
  ARRAY OPERATOR :: MACRO :: elem_func :: .Stereotypes : Result
  ModelElement OPERATOR :: IN : Self

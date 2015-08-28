@@ -87,3 +87,16 @@ ARRAY word_func Inherited.Words
  %SUMMARY 'Возвращает итератор элементов от которого наследуется наш элемент' ;
  Result := ( Self .ElementList %G )
 ; // Inherited.Words
+
+WordAlias .Parent %P
+
+ARRAY word_func Parent.Words
+ %SUMMARY 'Возвращает итератор родителей Self в "терминах определённой модели"' ;
+ Result := ( Self LIST .Parent )
+; // Parents
+
+WordAlias .Stereotype %ST
+
+ARRAY word_func Stereotype.Words
+ Result := ( Self LIST .Stereotype )
+; // Stereotypes

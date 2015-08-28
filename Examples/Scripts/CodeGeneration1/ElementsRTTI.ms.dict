@@ -56,8 +56,6 @@ BOOLEAN elem_func IsSummary
  Result := ( ( Self .Name ) = '%SUM' )
 ; // IsSummary
 
-WordAlias .Stereotype %ST
-
 BOOLEAN elem_func IsModelElement
  %SUMMARY 'Определяет тот факт, что Self является "элементом модели"' ;
 
@@ -82,8 +80,6 @@ ARRAY elem_func Children
  %SUMMARY 'Возвращает итератор детей Self в "терминах определённой модели"' ;
  Result := ( Self MembersIterator .filter> .IsModelElement )
 ; // Children
-
-WordAlias .Parent %P
 
 ARRAY elem_func Parents
  %SUMMARY 'Возвращает итератор родителей Self в "терминах определённой модели"' ;
