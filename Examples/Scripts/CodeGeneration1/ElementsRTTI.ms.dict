@@ -87,5 +87,5 @@ ARRAY elem_func Parents
 ; // Parents
 
 ARRAY elem_func Stereotypes
- Result := ( ( Self LIST .Stereotype ) .filter> .IsModelElement )
+ Result := ( Self .Stereotype.Words .filter> .IsModelElement )
 ; // Stereotypes
