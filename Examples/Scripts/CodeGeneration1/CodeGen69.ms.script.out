@@ -2841,10 +2841,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
  ;
-IMMEDIATE VOID OPERATOR : __MACRO
+IMMEDIATE VOID OPERATOR :: MACRO : __MACRO
 IMMEDIATE VOID OPERATOR : _MACRO
 IMMEDIATE VOID OPERATOR : MACRO
-IMMEDIATE VOID OPERATOR : STACK_CHANGING_MACRO
+IMMEDIATE VOID OPERATOR :: MACRO : STACK_CHANGING_MACRO
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
  Uses: 
   axiom:axiom
@@ -3769,8 +3769,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementatio
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
  ;
-IMMEDIATE OPERATOR :: STACK_CHANGING_MACRO : end.
-IMMEDIATE OPERATOR :: STACK_CHANGING_MACRO : implementation
+IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : end.
+IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : implementation
  LINK ^ OPERATOR :: IN : aWordToWork
  OBJECT OPERATOR :: VAR : l_NewCompiler
 ; // implementation

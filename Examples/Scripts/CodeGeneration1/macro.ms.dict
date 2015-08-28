@@ -10,7 +10,7 @@ VOID IMMEDIATE operator MACRO
  @SELF Ctx:SetWordProducerForCompiledClass
 ; // MACRO
 
-VOID IMMEDIATE operator STACK_CHANGING_MACRO
+MACRO STACK_CHANGING_MACRO
  axiom:PushSymbol IMMEDIATE
  axiom:PushSymbol axiom:operator
  @SELF Ctx:SetWordProducerForCompiledClass
