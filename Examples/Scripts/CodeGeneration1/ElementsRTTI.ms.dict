@@ -147,7 +147,7 @@ ARRAY elem_func Implemented
 
 ARRAY elem_func Inherited
  %SUMMARY 'Возвращает итератор элементов от которого наследуется наш элемент' ;
- Result := ( Self .Inherited.Words )
+ Result := ( Self .Inherited.Words .filter> .IsModelElement )
 ; // Inherited
 
 ARRAY elem_func Children
