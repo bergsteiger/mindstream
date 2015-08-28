@@ -2,6 +2,14 @@ USES
  axiom_push.ms.dict
 ;
 
+VOID IMMEDIATE operator MACRO
+// - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
+ axiom:PushSymbol VOID
+ axiom:PushSymbol IMMEDIATE
+ axiom:PushSymbol axiom:operator
+ @SELF Ctx:SetWordProducerForCompiledClass
+; // MACRO
+
 VOID IMMEDIATE operator STACK_CHANGING_MACRO
  axiom:PushSymbol IMMEDIATE
  axiom:PushSymbol axiom:operator
@@ -14,11 +22,3 @@ VOID IMMEDIATE operator _MACRO
  axiom:PushSymbol VOID
  axiom:PushSymbol IMMEDIATE
 ; // _MACRO
-
-VOID IMMEDIATE operator MACRO
-// - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
- axiom:PushSymbol VOID
- axiom:PushSymbol IMMEDIATE
- axiom:PushSymbol axiom:operator
- @SELF Ctx:SetWordProducerForCompiledClass
-; // MACRO
