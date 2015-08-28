@@ -28,11 +28,7 @@ MACRO call.inherited
 elem_generator DumpAsIs
  %SUMMARY 'Процедура печатающая содержимое элемента модели. Рекурсивно.' ;
 
- CatSepIndent>
-  ( Self .Stereotypes .reverted>
-    .join>
-    [ Self ]
-    .map> .Name ) ?OutToFile
+  CatSepIndent> ( Self .Stereotypes .reverted> .join> [ Self ] .map> .Name ) ?OutToFile
 
  'Родители ' (+)? 
   CatSepIndent> ( Self .Parents .reverted> .map> .Name ) ?OutToFile
