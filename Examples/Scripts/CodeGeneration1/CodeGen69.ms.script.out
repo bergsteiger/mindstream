@@ -5102,6 +5102,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
  ;
 VOID OPERATOR :: MACRO :: elem_generator : .c++
+ OPERATOR :: NamedWordProducer :: %INHERITS : %G
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
  ModelElement OPERATOR :: IN : Self
@@ -5117,16 +5118,19 @@ VOID OPERATOR :: MACRO :: elem_generator : .DumpAsIs
  ModelElement OPERATOR :: IN : Self
 ; // .DumpAsIs
 VOID OPERATOR :: MACRO :: elem_generator : .h
+ OPERATOR :: NamedWordProducer :: %INHERITS : %G
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
  ModelElement OPERATOR :: IN : Self
 ; // .h
 VOID OPERATOR :: MACRO :: elem_generator : .pas
+ OPERATOR :: NamedWordProducer :: %INHERITS : %G
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
  ModelElement OPERATOR :: IN : Self
 ; // .pas
 VOID OPERATOR :: MACRO :: elem_generator : .script
+ OPERATOR :: NamedWordProducer :: %INHERITS : %G
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
  ModelElement OPERATOR :: IN : Self

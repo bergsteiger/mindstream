@@ -63,18 +63,18 @@ elem_generator pas
  %SUMMARY 'Генератор выводящий элементы модели в Паскаль.' ;
  %GEN_PROPERTY Name 'pas'
  %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
+ %INHERITS  @ .DumpAsIs ;
 
- Self .DumpAsIs
- %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
+ call.inherited
 ; // pas
 
 elem_generator script
  %SUMMARY 'Генератор выводящий элементы модели в ms.script.' ;
  %GEN_PROPERTY Name 'ms.script'
  %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
+ %INHERITS  @ .DumpAsIs ;
 
- Self .DumpAsIs
- %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
+ call.inherited
 ; // script
 
 elem_generator c++
@@ -84,9 +84,9 @@ elem_generator c++
  ' ;
  %GEN_PROPERTY Name 'cpp'
  %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
+ %INHERITS  @ .DumpAsIs ;
 
- Self .DumpAsIs
- %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
+ call.inherited
 ; // c++
 
 elem_generator h
@@ -96,7 +96,7 @@ elem_generator h
  ' ;
  %GEN_PROPERTY Name 'h'
  %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
+ %INHERITS  @ .DumpAsIs ;
 
- Self .DumpAsIs
- %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
+ call.inherited
 ; // h
