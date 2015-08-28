@@ -132,10 +132,11 @@ BOOLEAN elem_func IsModelElement
   Определяет тот факт, что Self является "элементом модели"
  '
  ; // %SUMMARY
- '<<' Self .Stereotype .Name StartsStr 
- AND
- ( '>>' Self .Stereotype .Name EndsStr )
-  =: Result
+ Result := (
+  '<<' Self .Stereotype .Name StartsStr 
+  AND
+  ( '>>' Self .Stereotype .Name EndsStr )
+ )
 ; // IsModelElement
 
 ARRAY elem_func Implemented
