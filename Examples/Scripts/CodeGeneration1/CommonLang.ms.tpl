@@ -30,7 +30,7 @@ elem_generator DumpAsIs
 
  CatSepIndent>
  [
-   Self .Stereotypes .reverted> ==> .Name
+  Self .Stereotypes .reverted> ==> .Name
    %REMARK 'Выводим стереотип элемента, рекурсивно'
   Self .Name 
    %REMARK 'Выводим имя элемента'
