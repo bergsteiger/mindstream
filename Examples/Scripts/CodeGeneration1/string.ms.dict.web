@@ -1,0 +1,50 @@
+USES
+ Documentation.ms.dict
+ params.ms.dict
+ core.ms.dict
+ map.ms.dict
+;
+
+: (string)
+ ^ IN aValue
+ aValue DO ToPrintable
+; // (string)
+
+STRING FUNCTION string:CatWihAny
+ STRING IN aString
+ IN aValue
+ aString aValue ToPrintable Cat =: Result
+; // string:CatWihAny
+
+STRING FUNCTION any:Cat
+ ARRAY IN anArray
+ anArray .map&gt; ToPrintable strings:Cat =: Result
+; // any:Cat
+
+STRING FUNCTION (+)?
+ STRING in aPrefix
+ STRING right aSuffix
+ %SUMMARY 'Если aSuffix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку' ;
+ Result := ''
+ STRING VAR l_Suffix
+ aSuffix =: l_Suffix
+ if ( l_Suffix =/= '' ) then
+  ( aPrefix l_Suffix Cat =: Result )
+; // (+)?
+
+STRING FUNCTION ?(+)
+ STRING in aPrefix
+ STRING right aSuffix
+ %SUMMARY 'Если aPrefix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку' ;
+ Result := ''
+ if ( aPrefix =/= '' ) then
+  ( aPrefix aSuffix Cat =: Result )
+; // ?(+)
+
+STRING FUNCTION strings:CatSep&gt;
+ STRING right aSep
+ ARRAY right aValues
+ aValues aSep strings:CatSep =: Result
+; // strings:CatSep&gt;
+
+WordAlias CatSep&gt; strings:CatSep&gt;
