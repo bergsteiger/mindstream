@@ -70,26 +70,26 @@ MACRO elem_iterator
  [ 'ARRAY elem_func' ] Ctx:Parser:PushArray
 ; // elem_iterator
 
-ARRAY elem_func Implemented
+elem_iterator Implemented
  %SUMMARY 'Возвращает итератор элементов которые реализует наш элемент' ;
  Result := ( Self .Implemented.Words .filter> .IsModelElement )
 ; // Implemented
 
-ARRAY elem_func Inherited
+elem_iterator Inherited
  %SUMMARY 'Возвращает итератор элементов от которого наследуется наш элемент' ;
  Result := ( Self .Inherited.Words .filter> .IsModelElement )
 ; // Inherited
 
-ARRAY elem_func Children
+elem_iterator Children
  %SUMMARY 'Возвращает итератор детей Self в "терминах определённой модели"' ;
  Result := ( Self MembersIterator .filter> .IsModelElement )
 ; // Children
 
-ARRAY elem_func Parents
+elem_iterator Parents
  %SUMMARY 'Возвращает итератор родителей Self в "терминах определённой модели"' ;
  Result := ( Self .Parent.Words .filter> .IsModelElement )
 ; // Parents
 
-ARRAY elem_func Stereotypes
+elem_iterator Stereotypes
  Result := ( Self .Stereotype.Words .filter> .IsModelElement )
 ; // Stereotypes
