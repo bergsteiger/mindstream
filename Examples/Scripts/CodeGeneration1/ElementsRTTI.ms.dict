@@ -66,6 +66,10 @@ BOOLEAN elem_func IsModelElement
  )
 ; // IsModelElement
 
+MACRO elem_iterator
+ [ 'ARRAY elem_func' ] Ctx:Parser:PushArray
+; // elem_iterator
+
 ARRAY elem_func Implemented
  %SUMMARY 'Возвращает итератор элементов которые реализует наш элемент' ;
  Result := ( Self .Implemented.Words .filter> .IsModelElement )
