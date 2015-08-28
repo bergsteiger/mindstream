@@ -4355,7 +4355,7 @@ ARRAY OPERATOR :: MACRO :: elem_func : .Children
  ARRAY OPERATOR :: MACRO :: elem_func :: .Children : Result
  ModelElement OPERATOR :: IN : Self
 ; // .Children
-ARRAY OPERATOR :: MACRO :: elem_func : .ElementList
+ARRAY OPERATOR :: MACRO :: word_func : .ElementList
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aListName
  PRIVATE BOOLEAN FUNCTION : FilterElement
@@ -4367,8 +4367,8 @@ ARRAY OPERATOR :: MACRO :: elem_func : .ElementList
   OPERATOR :: VAR : l_Element
   PRIVATE OBJECT FUNCTION :: MapElement : Result
  ; // MapElement
- ARRAY OPERATOR :: MACRO :: elem_func :: .ElementList : Result
- ModelElement OPERATOR :: IN : Self
+ ARRAY OPERATOR :: MACRO :: word_func :: .ElementList : Result
+ ENGINE_WORD OPERATOR :: IN : Self
 ; // .ElementList
 ARRAY OPERATOR :: MACRO :: elem_func : .Implemented
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM

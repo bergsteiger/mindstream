@@ -71,7 +71,7 @@ MACRO elem_ref_proc
  aName .Name this.method.addr Addr LVALUE_MOD do_elem_proc
 ; // elem_ref_proc
 
-ARRAY elem_func ElementList 
+ARRAY word_func ElementList 
  Literal IN aListName
  %SUMMARY 'Возвращает итератор именованного списка на элементе' ;
 
