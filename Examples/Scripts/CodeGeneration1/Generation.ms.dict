@@ -192,7 +192,12 @@ elem_proc CallGen
 ; // CallGen
 
 ARRAY VAR g_AllRoots
+ %REMARK 'Все корневые элементы'
 ( g_AllRoots := nil )
+
+ARRAY VAR g_AllGenerators
+ %REMARK 'Все генераторы'
+( g_AllGenerators := nil )
 
 PROCEDURE CallGens
  ARRAY IN anElements
