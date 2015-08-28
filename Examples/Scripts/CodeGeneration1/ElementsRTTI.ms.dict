@@ -132,7 +132,7 @@ BOOLEAN elem_func IsModelElement
 
 ARRAY elem_func Implemented
  %SUMMARY 'Возвращает итератор элементов которые реализует наш элемент' ;
- Result := ( Self .ElementList %R )
+ Result := ( Self .ElementList %R .filter> .IsModelElement )
 ; // Implemented
 
 ARRAY elem_func Inherited
