@@ -1,0 +1,73 @@
+USES
+ CodeDump.script
+;
+
+Test InheritsTest
+
+IMMEDIATE operator __CompileCodeAndFree
+ TtfwWord IN aCode
+ if ( aCode IS class::TkwBeginLikeCompiledCode ) then  
+  ( aCode CodeIterator ==> CompileRef )
+ else
+  ( aCode CompileRef ) 
+ aCode pop:Word:DecRef 
+; // __CompileCodeAndFree
+
+IMMEDIATE VOID operator NamedCodeProducer
+  ^L IN aName
+  ^L IN aNewName
+ 
+ @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE axiom:operator'
+  aName |N
+  
+  '^ IN aCode'
+  
+  '@SELF Ctx:SetWordProducerForCompiledClass'
+  aNewName |NS
+  'Ctx:SetNewWordName'
+  
+  '`axiom:operator` Ctx:Parser:PushSymbol'
+  
+  'aCode pop:Word:IncRef'
+  'aCode'
+  '`__CompileCodeAndFree` Ctx:Parser:PushSymbol'
+  '`;` Ctx:Parser:PushSymbol'
+  ';'
+ ] Ctx:Parser:PushArray
+; // NamedCodeProducer
+
+NamedCodeProducer Inherits %G
+NamedCodeProducer Implements %R
+
+ : A
+ ; // A
+
+ : B
+ ; // B
+
+ : C
+  Inherits ( A B )
+ ; // C
+ 
+ : I1
+ ; // I1
+ 
+ : I2
+ ; // I2
+ 
+ : D
+  Inherits A
+  Implements ( I1 I2 )
+ ; // D
+ 
+ : E
+  Inherits A
+  Implements I1
+ ; // D
+ 
+ @SELF DumpElement
+; // InheritsTest
+
+InheritsTest
