@@ -54,10 +54,11 @@ ARRAY FUNCTION %R
  Result := ( '%R' %S ELEMLIST )
 ;
 
-ARRAY FUNCTION %G 
+WordAlias %G .Inherited.Words
+/*{ARRAY FUNCTION %G 
  IN %S
  Result := ( '%G' %S ELEMLIST )
-;
+;}*/
 
 ARRAY FUNCTION %Fld 
  IN %S

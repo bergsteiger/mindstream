@@ -3642,9 +3642,10 @@ ARRAY FUNCTION : %Fld
  OPERATOR :: VAR : l_List
  ARRAY FUNCTION :: %Fld : Result
 ; // %Fld
-ARRAY FUNCTION : %G
- OPERATOR :: IN : %S
- ARRAY FUNCTION :: %G : Result
+ARRAY OPERATOR :: MACRO :: word_func : %G
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: word_func :: .Inherited.Words : Result
+ ENGINE_WORD OPERATOR :: IN : Self
 ; // %G
 ARRAY FUNCTION : %R
  OPERATOR :: IN : %S
