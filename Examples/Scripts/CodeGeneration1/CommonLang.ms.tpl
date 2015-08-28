@@ -18,6 +18,7 @@ STRING FUNCTION CatSepIndent>
 ; // CatSepIndent>
 
 MACRO call.inherited
+ // - понятно, что это надо делать через честную компиляцию ссылки на Inherited
  [ 
    '@SELF .Inherited ==> ( Self SWAP DO )'
  ] Ctx:Parser:PushArray
@@ -55,7 +56,7 @@ elem_generator dump
  %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
  %INHERITS  @ .DumpAsIs ;
 
- @SELF .Inherited ==> ( Self SWAP DO )
+ call.inherited
 ; // dump
 
 elem_generator pas
