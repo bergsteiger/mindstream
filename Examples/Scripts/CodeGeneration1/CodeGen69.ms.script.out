@@ -5,92 +5,20 @@ VOID Test CodeGen
  ( Project1 Project2 Project3 ( .dump .pas .c++ .h .script CallGensList
 ; // VOID Test CodeGen
 
-Dictionary: axiom:Array
 Dictionary: axiom:char
 Dictionary: axiom:class
 Dictionary: axiom:clipboard
 VOID clipboard:clear
 STRING clipboard:GetFormattedText
 VOID clipboard:SetText
-Dictionary: axiom:Control
-TComponent byname:control:push
-TControl Control:ByHandle
-TControl focused:control:push
-BOOLEAN pop:Control:CanFocus
-STRING pop:Control:Caption
-VOID pop:Control:Click
-Struct pop:Control:ClientToScreen
-TColor pop:Control:Color
-INTEGER pop:Control:ControlCount
-BOOLEAN pop:Control:Enabled
-TComponent pop:Control:FindControlByName
-BOOLEAN pop:Control:Focused
-Il3FontInfo pop:Control:Font
-TCustomForm pop:Control:GetAnotherParentForm
-TControl pop:Control:GetControl
-TCustomForm pop:Control:GetMainForm
-TCustomForm pop:Control:GetParentForm
-TMenuItem pop:Control:GetPopupMenu
-TCustomForm pop:Control:GetTopParentForm
-Cardinal pop:Control:Handle
-INTEGER pop:Control:Height
-VOID pop:Control:Hide
-STRING pop:Control:Hint
-BOOLEAN pop:Control:HScrollerVisible
-VOID pop:Control:Invalidate
-INTEGER pop:Control:Left
-VOID pop:Control:MouseLeftClick
-VOID pop:Control:MouseLeftDragAndDrop
-VOID pop:Control:MouseMiddleClick
-VOID pop:Control:MouseRightClick
-VOID pop:Control:MouseWheelDown
-VOID pop:Control:MouseWheelUp
-STRING pop:Control:Name
-TControl pop:Control:Parent
-VOID pop:Control:Repaint
-Struct pop:Control:ScreenToClient
-pop:control:ScrollInfo
-pop:control:ScrollInfo:Max
-pop:control:ScrollInfo:Min
-pop:control:ScrollInfo:PageSize
-pop:control:ScrollInfo:Position
-BOOLEAN pop:Control:SetFocus
-VOID pop:Control:Show
-BOOLEAN pop:Control:ShowHint
-INTEGER pop:Control:Top
-VOID pop:Control:Undock
-BOOLEAN pop:Control:Visible
-BOOLEAN pop:Control:VScrollerVisible
-INTEGER pop:Control:Width
-Dictionary: axiom:desktop
-INTEGER desktop:Height
-INTEGER desktop:Width
+Dictionary: axiom:Component
+INTEGER pop:Component:ComponentCount
+TComponent pop:Component:FindComponent
+TComponent pop:Component:GetComponent
+STRING pop:Component:Name
+TComponent pop:Component:Owner
 Dictionary: axiom:exception
-Dictionary: axiom:File
-Dictionary: axiom:Font
-TColor Font:BackColor
-TColor Font:Color
-BOOLEAN Font:IsBold
-BOOLEAN Font:IsItalic
-BOOLEAN Font:IsStrikeOut
-BOOLEAN Font:IsUnderline
-STRING Font:Name
-INTEGER Font:Size
-Dictionary: axiom:generators
-VOID generators:Execute
-Ik2TagGenerator generators:Link
 Dictionary: axiom:guid
-Dictionary: axiom:MainScreen
-INTEGER MainScreen:Height
-INTEGER MainScreen:Width
-Dictionary: axiom:menuitem
-VOID menuitem:Click
-STRING menuitem:GetCaption
-INTEGER menuitem:GetCount
-TMenuItem menuitem:GetItem
-INTEGER menuitem:GetMenuHeight
-BOOLEAN menuitem:IsEnabled
-BOOLEAN menuitem:IsVisible
 Dictionary: axiom:Mouse
 mouse:GetCursorIndex
 mouse:GetCursorNameByIndex
@@ -109,45 +37,32 @@ Dictionary: axiom:ParserEx
 VOID pop:ParserEx:PushInt
 VOID pop:ParserEx:PushString
 VOID pop:ParserEx:PushSymbol
-Dictionary: axiom:screen
-INTEGER screen:Height
-INTEGER screen:Width
-Dictionary: axiom:ScrollingWinControl
-BOOLEAN pop:ScrollingWinControl:HScrollerVisible
-BOOLEAN pop:ScrollingWinControl:VScrollerVisible
 Dictionary: axiom:string
 Dictionary: axiom:strings
-Dictionary: axiom:TActionList
-TCustomImageList .TActionList.Images
-TComponentName .TActionList.Name
-TActionListState .TActionList.State
-INTEGER .TActionList.Tag
-Dictionary: axiom:TActionListState
-TActionListState TActionListState::asNormal
-TActionListState TActionListState::asSuspended
-TActionListState TActionListState::asSuspendedEnabled
-TActionListState TActionListState:NameToValue
-STRING TActionListState:ValueToName
-Dictionary: axiom:TAlign
-TAlign TAlign::alBottom
-TAlign TAlign::alClient
-TAlign TAlign::alCustom
-TAlign TAlign::alLeft
-TAlign TAlign::alNone
-TAlign TAlign::alRight
-TAlign TAlign::alTop
-TAlign TAlign:NameToValue
-STRING TAlign:ValueToName
-Dictionary: axiom:TBasicAction
-TComponentName .TBasicAction.Name
-INTEGER .TBasicAction.Tag
-Dictionary: axiom:TBiDiMode
-TBiDiMode TBiDiMode::bdLeftToRight
-TBiDiMode TBiDiMode::bdRightToLeft
-TBiDiMode TBiDiMode::bdRightToLeftNoAlign
-TBiDiMode TBiDiMode::bdRightToLeftReadingOnly
-TBiDiMode TBiDiMode:NameToValue
-STRING TBiDiMode:ValueToName
+Dictionary: axiom:SV
+BOOLEAN pop:SV:IsArray
+BOOLEAN pop:SV:IsBool
+BOOLEAN pop:SV:IsBracket
+BOOLEAN pop:SV:IsChar
+BOOLEAN pop:SV:IsClass
+BOOLEAN pop:SV:IsInt
+BOOLEAN pop:SV:IsIntf
+BOOLEAN pop:SV:IsNil
+BOOLEAN pop:SV:IsObj
+BOOLEAN pop:SV:IsString
+BOOLEAN pop:SV:IsTypeOf
+BOOLEAN pop:SV:IsVoid
+BOOLEAN pop:SV:IsWString
+REDIFINITION STRING FUNCTION : pop:SV:ToPrintable
+==> Redefines
+ STRING ToPrintable
+<== Redefines
+ OPERATOR :: IN : aValue
+ REDIFINITION STRING FUNCTION :: ToPrintable : Result
+; // pop:SV:ToPrintable
+Dictionary: axiom:TagGenerator
+VOID pop:TagGenerator:generators_Execute
+Ik2TagGenerator pop:TagGenerator:generators_Link
 Dictionary: axiom:TColor
 TColor TColor::cl3DDkShadow
 TColor TColor::cl3DLight
@@ -204,194 +119,12 @@ TColor TColor::clYellow
 Dictionary: axiom:TComponent
 TComponentName .TComponent.Name
 INTEGER .TComponent.Tag
-Dictionary: axiom:TContainedAction
-STRING .TContainedAction.Category
-TComponentName .TContainedAction.Name
-INTEGER .TContainedAction.Tag
-Dictionary: axiom:TControl
-TCursor .TControl.Cursor
-INTEGER .TControl.Height
-THelpContext .TControl.HelpContext
-STRING .TControl.HelpKeyword
-THelpType .TControl.HelpType
-STRING .TControl.Hint
-INTEGER .TControl.Left
-TComponentName .TControl.Name
-INTEGER .TControl.Tag
-INTEGER .TControl.Top
-INTEGER .TControl.Width
-Dictionary: axiom:TControlScrollBar
-INTEGER .TControlScrollBar.ButtonSize
-TColor .TControlScrollBar.Color
-TScrollBarInc .TControlScrollBar.Increment
-Word .TControlScrollBar.Margin
-BOOLEAN .TControlScrollBar.ParentColor
-INTEGER .TControlScrollBar.Position
-INTEGER .TControlScrollBar.Range
-INTEGER .TControlScrollBar.Size
-BOOLEAN .TControlScrollBar.Smooth
-TScrollBarStyle .TControlScrollBar.Style
-INTEGER .TControlScrollBar.ThumbSize
-BOOLEAN .TControlScrollBar.Tracking
-BOOLEAN .TControlScrollBar.Visible
-Dictionary: axiom:TCustomActionList
-TComponentName .TCustomActionList.Name
-INTEGER .TCustomActionList.Tag
-Dictionary: axiom:TCustomForm
-TCursor .TCustomForm.Cursor
-INTEGER .TCustomForm.Height
-THelpContext .TCustomForm.HelpContext
-STRING .TCustomForm.HelpKeyword
-THelpType .TCustomForm.HelpType
-STRING .TCustomForm.Hint
-TControlScrollBar .TCustomForm.HorzScrollBar
-INTEGER .TCustomForm.Left
-TComponentName .TCustomForm.Name
-INTEGER .TCustomForm.Tag
-INTEGER .TCustomForm.Top
-TControlScrollBar .TCustomForm.VertScrollBar
-INTEGER .TCustomForm.Width
-Dictionary: axiom:TCustomImageList
-TComponentName .TCustomImageList.Name
-INTEGER .TCustomImageList.Tag
-Dictionary: axiom:TDefaultMonitor
-TDefaultMonitor TDefaultMonitor::dmActiveForm
-TDefaultMonitor TDefaultMonitor::dmDesktop
-TDefaultMonitor TDefaultMonitor::dmMainForm
-TDefaultMonitor TDefaultMonitor::dmPrimary
-TDefaultMonitor TDefaultMonitor:NameToValue
-STRING TDefaultMonitor:ValueToName
-Dictionary: axiom:TDragKind
-TDragKind TDragKind::dkDock
-TDragKind TDragKind::dkDrag
-TDragKind TDragKind:NameToValue
-STRING TDragKind:ValueToName
-Dictionary: axiom:TDragMode
-TDragMode TDragMode::dmAutomatic
-TDragMode TDragMode::dmManual
-TDragMode TDragMode:NameToValue
-STRING TDragMode:ValueToName
 Dictionary: axiom:test
 test:ResolveInputFilePath
 Dictionary: axiom:tests
 tests:CheckEtalon
 tests:CheckOutputWithInput
 Dictionary: axiom:text
-Dictionary: axiom:TFont
-TFontCharset .TFont.Charset
-TColor .TFont.Color
-INTEGER .TFont.Height
-TFontName .TFont.Name
-TFontPitch .TFont.Pitch
-INTEGER .TFont.Size
-TFontStyles .TFont.Style
-Dictionary: axiom:TFontCharset
-TFontCharset TFontCharset::ANSI_CHARSET
-TFontCharset TFontCharset::ARABIC_CHARSET
-TFontCharset TFontCharset::BALTIC_CHARSET
-TFontCharset TFontCharset::CHINESEBIG5_CHARSET
-TFontCharset TFontCharset::DEFAULT_CHARSET
-TFontCharset TFontCharset::EASTEUROPE_CHARSET
-TFontCharset TFontCharset::GB2312_CHARSET
-TFontCharset TFontCharset::GREEK_CHARSET
-TFontCharset TFontCharset::HANGEUL_CHARSET
-TFontCharset TFontCharset::HEBREW_CHARSET
-TFontCharset TFontCharset::JOHAB_CHARSET
-TFontCharset TFontCharset::MAC_CHARSET
-TFontCharset TFontCharset::OEM_CHARSET
-TFontCharset TFontCharset::RUSSIAN_CHARSET
-TFontCharset TFontCharset::SHIFTJIS_CHARSET
-TFontCharset TFontCharset::SYMBOL_CHARSET
-TFontCharset TFontCharset::THAI_CHARSET
-TFontCharset TFontCharset::TURKISH_CHARSET
-Dictionary: axiom:TFontPitch
-TFontPitch TFontPitch::fpDefault
-TFontPitch TFontPitch::fpFixed
-TFontPitch TFontPitch::fpVariable
-TFontPitch TFontPitch:NameToValue
-STRING TFontPitch:ValueToName
-Dictionary: axiom:TForm
-TBasicAction .TForm.Action
-TWinControl .TForm.ActiveControl
-TAlign .TForm.Align
-BOOLEAN .TForm.AlphaBlend
-Byte .TForm.AlphaBlendValue
-TAnchors .TForm.Anchors
-BOOLEAN .TForm.AutoScroll
-BOOLEAN .TForm.AutoSize
-TBiDiMode .TForm.BiDiMode
-TBorderIcons .TForm.BorderIcons
-TFormBorderStyle .TForm.BorderStyle
-TBorderWidth .TForm.BorderWidth
-TCaption .TForm.Caption
-INTEGER .TForm.ClientHeight
-INTEGER .TForm.ClientWidth
-TColor .TForm.Color
-TSizeConstraints .TForm.Constraints
-BOOLEAN .TForm.Ctl3D
-TCursor .TForm.Cursor
-TDefaultMonitor .TForm.DefaultMonitor
-BOOLEAN .TForm.DockSite
-TDragKind .TForm.DragKind
-TDragMode .TForm.DragMode
-BOOLEAN .TForm.Enabled
-TFont .TForm.Font
-TFormStyle .TForm.FormStyle
-INTEGER .TForm.Height
-THelpContext .TForm.HelpContext
-STRING .TForm.HelpFile
-STRING .TForm.HelpKeyword
-THelpType .TForm.HelpType
-STRING .TForm.Hint
-TControlScrollBar .TForm.HorzScrollBar
-TIcon .TForm.Icon
-BOOLEAN .TForm.KeyPreview
-INTEGER .TForm.Left
-TMainMenu .TForm.Menu
-TComponentName .TForm.Name
-TMenuItem .TForm.ObjectMenuItem
-BOOLEAN .TForm.OldCreateOrder
-BOOLEAN .TForm.ParentBiDiMode
-BOOLEAN .TForm.ParentFont
-INTEGER .TForm.PixelsPerInch
-TPopupMenu .TForm.PopupMenu
-TPosition .TForm.Position
-TPrintScale .TForm.PrintScale
-BOOLEAN .TForm.Scaled
-BOOLEAN .TForm.ScreenSnap
-BOOLEAN .TForm.ShowHint
-INTEGER .TForm.SnapBuffer
-INTEGER .TForm.Tag
-INTEGER .TForm.Top
-BOOLEAN .TForm.TransparentColor
-TColor .TForm.TransparentColorValue
-BOOLEAN .TForm.UseDockManager
-TControlScrollBar .TForm.VertScrollBar
-BOOLEAN .TForm.Visible
-INTEGER .TForm.Width
-TMenuItem .TForm.WindowMenu
-TWindowState .TForm.WindowState
-Dictionary: axiom:TFormBorderStyle
-TFormBorderStyle TFormBorderStyle::bsDialog
-TFormBorderStyle TFormBorderStyle::bsNone
-TFormBorderStyle TFormBorderStyle::bsSingle
-TFormBorderStyle TFormBorderStyle::bsSizeable
-TFormBorderStyle TFormBorderStyle::bsSizeToolWin
-TFormBorderStyle TFormBorderStyle::bsToolWindow
-TFormBorderStyle TFormBorderStyle:NameToValue
-STRING TFormBorderStyle:ValueToName
-Dictionary: axiom:TFormStyle
-TFormStyle TFormStyle::fsMDIChild
-TFormStyle TFormStyle::fsMDIForm
-TFormStyle TFormStyle::fsNormal
-TFormStyle TFormStyle::fsStayOnTop
-TFormStyle TFormStyle:NameToValue
-STRING TFormStyle:ValueToName
-Dictionary: axiom:THelpType
-THelpType THelpType::htContext
-THelpType THelpType::htKeyword
-THelpType THelpType:NameToValue
-STRING THelpType:ValueToName
 Dictionary: axiom:Tl3TokenType
 Tl3TokenType Tl3TokenType::l3_ttBOF
 Tl3TokenType Tl3TokenType::l3_ttComment
@@ -406,160 +139,6 @@ Tl3TokenType Tl3TokenType::l3_ttString
 Tl3TokenType Tl3TokenType::l3_ttSymbol
 Tl3TokenType Tl3TokenType:NameToValue
 STRING Tl3TokenType:ValueToName
-Dictionary: axiom:TMainMenu
-TMenuAutoFlag .TMainMenu.AutoHotkeys
-TMenuAutoFlag .TMainMenu.AutoLineReduction
-BOOLEAN .TMainMenu.AutoMerge
-TBiDiMode .TMainMenu.BiDiMode
-TCustomImageList .TMainMenu.Images
-TMenuItem .TMainMenu.Items
-TComponentName .TMainMenu.Name
-BOOLEAN .TMainMenu.OwnerDraw
-BOOLEAN .TMainMenu.ParentBiDiMode
-INTEGER .TMainMenu.Tag
-Dictionary: axiom:TMenu
-TMenuItem .TMenu.Items
-TComponentName .TMenu.Name
-INTEGER .TMenu.Tag
-Dictionary: axiom:TMenuAutoFlag
-TMenuAutoFlag TMenuAutoFlag::maAutomatic
-TMenuAutoFlag TMenuAutoFlag::maManual
-TMenuAutoFlag TMenuAutoFlag:NameToValue
-STRING TMenuAutoFlag:ValueToName
-Dictionary: axiom:TMenuBreak
-TMenuBreak TMenuBreak::mbBarBreak
-TMenuBreak TMenuBreak::mbBreak
-TMenuBreak TMenuBreak::mbNone
-TMenuBreak TMenuBreak:NameToValue
-STRING TMenuBreak:ValueToName
-Dictionary: axiom:TMenuItem
-TBasicAction .TMenuItem.Action
-BOOLEAN .TMenuItem.AutoCheck
-TMenuItemAutoFlag .TMenuItem.AutoHotkeys
-TMenuItemAutoFlag .TMenuItem.AutoLineReduction
-TBitmap .TMenuItem.Bitmap
-TMenuBreak .TMenuItem.Break
-STRING .TMenuItem.Caption
-BOOLEAN .TMenuItem.Checked
-BOOLEAN .TMenuItem.Default
-BOOLEAN .TMenuItem.Enabled
-Byte .TMenuItem.GroupIndex
-THelpContext .TMenuItem.HelpContext
-STRING .TMenuItem.Hint
-TImageIndex .TMenuItem.ImageIndex
-TComponentName .TMenuItem.Name
-BOOLEAN .TMenuItem.RadioItem
-TShortCut .TMenuItem.ShortCut
-TCustomImageList .TMenuItem.SubMenuImages
-INTEGER .TMenuItem.Tag
-BOOLEAN .TMenuItem.Visible
-Dictionary: axiom:TMenuItemAutoFlag
-TMenuItemAutoFlag TMenuItemAutoFlag::maAutomatic
-TMenuItemAutoFlag TMenuItemAutoFlag::maManual
-TMenuItemAutoFlag TMenuItemAutoFlag::maParent
-TMenuItemAutoFlag TMenuItemAutoFlag:NameToValue
-STRING TMenuItemAutoFlag:ValueToName
-Dictionary: axiom:TPopupAlignment
-TPopupAlignment TPopupAlignment::paCenter
-TPopupAlignment TPopupAlignment::paLeft
-TPopupAlignment TPopupAlignment::paRight
-TPopupAlignment TPopupAlignment:NameToValue
-STRING TPopupAlignment:ValueToName
-Dictionary: axiom:TPopupMenu
-TPopupAlignment .TPopupMenu.Alignment
-TMenuAutoFlag .TPopupMenu.AutoHotkeys
-TMenuAutoFlag .TPopupMenu.AutoLineReduction
-BOOLEAN .TPopupMenu.AutoPopup
-TBiDiMode .TPopupMenu.BiDiMode
-THelpContext .TPopupMenu.HelpContext
-TCustomImageList .TPopupMenu.Images
-TMenuItem .TPopupMenu.Items
-TMenuAnimation .TPopupMenu.MenuAnimation
-TComponentName .TPopupMenu.Name
-BOOLEAN .TPopupMenu.OwnerDraw
-BOOLEAN .TPopupMenu.ParentBiDiMode
-INTEGER .TPopupMenu.Tag
-TTrackButton .TPopupMenu.TrackButton
-Dictionary: axiom:TPosition
-TPosition TPosition::poDefault
-TPosition TPosition::poDefaultPosOnly
-TPosition TPosition::poDefaultSizeOnly
-TPosition TPosition::poDesigned
-TPosition TPosition::poDesktopCenter
-TPosition TPosition::poMainFormCenter
-TPosition TPosition::poOwnerFormCenter
-TPosition TPosition::poScreenCenter
-TPosition TPosition:NameToValue
-STRING TPosition:ValueToName
-Dictionary: axiom:TPrintScale
-TPrintScale TPrintScale::poNone
-TPrintScale TPrintScale::poPrintToFit
-TPrintScale TPrintScale::poProportional
-TPrintScale TPrintScale:NameToValue
-STRING TPrintScale:ValueToName
-Dictionary: axiom:TScrollBarStyle
-TScrollBarStyle TScrollBarStyle::ssFlat
-TScrollBarStyle TScrollBarStyle::ssHotTrack
-TScrollBarStyle TScrollBarStyle::ssRegular
-TScrollBarStyle TScrollBarStyle:NameToValue
-STRING TScrollBarStyle:ValueToName
-Dictionary: axiom:TScrollingWinControl
-TCursor .TScrollingWinControl.Cursor
-INTEGER .TScrollingWinControl.Height
-THelpContext .TScrollingWinControl.HelpContext
-STRING .TScrollingWinControl.HelpKeyword
-THelpType .TScrollingWinControl.HelpType
-STRING .TScrollingWinControl.Hint
-TControlScrollBar .TScrollingWinControl.HorzScrollBar
-INTEGER .TScrollingWinControl.Left
-TComponentName .TScrollingWinControl.Name
-INTEGER .TScrollingWinControl.Tag
-INTEGER .TScrollingWinControl.Top
-TControlScrollBar .TScrollingWinControl.VertScrollBar
-INTEGER .TScrollingWinControl.Width
-Dictionary: axiom:TSizeConstraints
-TConstraintSize .TSizeConstraints.MaxHeight
-TConstraintSize .TSizeConstraints.MaxWidth
-TConstraintSize .TSizeConstraints.MinHeight
-TConstraintSize .TSizeConstraints.MinWidth
-Dictionary: axiom:TTrackButton
-TTrackButton TTrackButton::tbLeftButton
-TTrackButton TTrackButton::tbRightButton
-TTrackButton TTrackButton:NameToValue
-STRING TTrackButton:ValueToName
-Dictionary: axiom:TWinControl
-TCursor .TWinControl.Cursor
-INTEGER .TWinControl.Height
-THelpContext .TWinControl.HelpContext
-STRING .TWinControl.HelpKeyword
-THelpType .TWinControl.HelpType
-STRING .TWinControl.Hint
-INTEGER .TWinControl.Left
-TComponentName .TWinControl.Name
-INTEGER .TWinControl.Tag
-INTEGER .TWinControl.Top
-INTEGER .TWinControl.Width
-Dictionary: axiom:TWindowState
-TWindowState TWindowState::wsMaximized
-TWindowState TWindowState::wsMinimized
-TWindowState TWindowState::wsNormal
-TWindowState TWindowState:NameToValue
-STRING TWindowState:ValueToName
-Dictionary: axiom:wait
-wait:Cancel
-wait:Choice
-wait:No
-wait:Ok
-wait:Yes
-Dictionary: axiom:waited
-waited:?
-Dictionary: axiom:wnd
-VOID wnd:CloseWindow
-STRING wnd:GetClassName
-STRING wnd:GetWindowText
-BOOLEAN wnd:IsVisible
-VOID wnd:SetForeground
-BOOLEAN wnd:WindowIsMine
 Dictionary: axiom:WordInfo
 BOOLEAN pop:WordInfo:AcceptsValue
 TtfwAccessType pop:WordInfo:AccessType
@@ -600,10 +179,10 @@ Dictionary: CodeGen69.ms.script
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Exports.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
@@ -650,10 +229,10 @@ Dictionary: axiom:axiom
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
  ;
  Exports: 
   axiom:Ctx
@@ -675,10 +254,10 @@ Dictionary: axiom:axiom
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
  ;
 INTEGER -
 INTEGER --
@@ -720,9 +299,6 @@ BOOLEAN OPERATOR : "ÌÅÍÜØÅ ÈËÈ ÐÀÂÍÎ"
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: <= : Result
 ; // "ÌÅÍÜØÅ ÈËÈ ÐÀÂÍÎ"
-VOID OPERATOR :: PROCEDURE : "Íàæàòü"
- STRING OPERATOR :: IN : aString
-; // "Íàæàòü"
 BOOLEAN OPERATOR : "ÍÅ ÐÀÂÍÎ"
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
@@ -733,9 +309,6 @@ BOOLEAN OPERATOR : "ÍÅ ßÂËßÅÒÑß"
  CASTABLE OPERATOR :: IN : anObj
  BOOLEAN OPERATOR :: NOTIS : Result
 ; // "ÍÅ ßÂËßÅÒÑß"
-VOID OPERATOR : "Îáðàáîòàòü Enter ìîäàëüíî"
- ^ OPERATOR :: IN : aWhatToDo
-; // "Îáðàáîòàòü Enter ìîäàëüíî"
 VOID OPERATOR :: PROCEDURE : "Ñðàâíèòü òåêóùåå èñêëþ÷åíèå ñ ýòàëîíîì"
  STRING OPERATOR :: VAR : l_ClassName
  STRING OPERATOR :: VAR : l_Message
@@ -796,6 +369,16 @@ REDIFINITION : : .
 ==> Redefines
  VOID .
 <== Redefines
+ARRAY FUNCTION : .join>
+ ARRAY OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ ARRAY FUNCTION :: .join> : Result
+; // .join>
+ARRAY FUNCTION : .trunc>
+ ARRAY OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ ARRAY FUNCTION :: .trunc> : Result
+; // .trunc>
 INTEGER /
 :
 ^@ OPERATOR : ::
@@ -977,6 +560,16 @@ FUNCTION : ->0
  OBJECT OPERATOR :: IN : %S
  FUNCTION :: ->0 : Result
 ; // ->0
+ARRAY FUNCTION : >join>
+ ^@ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ ARRAY FUNCTION :: >join> : Result
+; // >join>
+ARRAY FUNCTION : >trunc>
+ ^@ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ ARRAY FUNCTION :: >trunc> : Result
+; // >trunc>
 INTEGER 2*
 INTEGER 2/
 VOID 2DROP
@@ -1029,6 +622,7 @@ BOOLEAN FUNCTION : array:HasText
  ; // Ïîèñê
 ; // array:HasText
 VOID Array:Iterate
+ARRAY Array:Join
 ARRAY Array:Map
 ARRAY Array:Reverted
 VOID Array:SetItem
@@ -1040,6 +634,7 @@ INTEGER FUNCTION : array:StringCount
   STRING OPERATOR :: IN : anItem
  ; // Ïîèñê
 ; // array:StringCount
+ARRAY Array:Trunc
 BOOLEAN FUNCTION : ArraysAreEqual
  ARRAY OPERATOR :: IN : A
  ARRAY OPERATOR :: IN : B
@@ -1051,7 +646,6 @@ BOOLEAN FUNCTION : ArraysAreEqual
  INTEGER OPERATOR :: VAR : l_Index
  BOOLEAN FUNCTION :: ArraysAreEqual : Result
 ; // ArraysAreEqual
-VOID AskWindowToCloseItself
 VOID ASSERT
 VOID ASSERTS
 VOID OPERATOR :: PROCEDURE : ASSUME
@@ -1090,9 +684,7 @@ BEGIN
 IMMEDIATE VOID OPERATOR : BOOLEAN
 VOID BREAK
 VOID BREAK-ITERATOR
-Byte
 IMMEDIATE VOID OPERATOR : CALLER
-Cardinal
 IMMEDIATE VOID OPERATOR : CARDINAL
 CASE
 IMMEDIATE VOID OPERATOR :: TYPE : CASTABLE
@@ -1158,22 +750,7 @@ TClass class::EUnderflow
 TClass class::EWriteError
 TClass class::Exception
 TClass class::EZeroDivide
-TClass class::TActionList
-TClass class::TBasicAction
-TClass class::TBitmap
 TClass class::TComponent
-TClass class::TContainedAction
-TClass class::TControl
-TClass class::TControlScrollBar
-TClass class::TCustomActionList
-TClass class::TCustomForm
-TClass class::TCustomImageList
-TClass class::TFont
-TClass class::TForm
-TClass class::TGraphic
-TClass class::TGraphicsObject
-TClass class::TIcon
-TClass class::TInterfacedPersistent
 TClass class::TkwAdd
 TClass class::TkwApplicationActionIdle
 TClass class::TkwApplicationExeName
@@ -1184,10 +761,11 @@ TClass class::TkwArrayFilter
 TClass class::TkwArrayFunctorToIterator
 TClass class::TkwArrayGetItem
 TClass class::TkwArrayIterate
+TClass class::TkwArrayJoin
 TClass class::TkwArrayMap
 TClass class::TkwArrayReverted
 TClass class::TkwArraySetItem
-TClass class::TkwAskWindowToCloseItself
+TClass class::TkwArrayTrunc
 TClass class::TkwASSERTS
 TClass class::TkwAtomicIf
 TClass class::TkwBEGIN
@@ -1202,7 +780,6 @@ TClass class::TkwBracketBegin
 TClass class::TkwBracketEnd
 TClass class::TkwBREAK
 TClass class::TkwBREAKITERATOR
-TClass class::TkwBynameControlPush
 TClass class::TkwCASE
 TClass class::TkwCat
 TClass class::TkwCharDupe
@@ -1256,9 +833,6 @@ TClass class::TkwComputerName
 TClass class::TkwCONST
 TClass class::TkwConstLikeCompiled
 TClass class::TkwCONTINUE
-TClass class::TkwControlByHandle
-TClass class::TkwControlFocusedControlPush
-TClass class::TkwControlWord
 TClass class::TkwCopyFile
 TClass class::TkwCopyFilesByMask
 TClass class::TkwCreateAndRaise
@@ -1295,8 +869,6 @@ TClass class::TkwDEFAULT
 TClass class::TkwDefine
 TClass class::TkwDeleteFile
 TClass class::TkwDeleteFilesByMask
-TClass class::TkwDesktopHeight
-TClass class::TkwDesktopWidth
 TClass class::TkwDiv2
 TClass class::TkwDivide
 TClass class::TkwDivision
@@ -1334,7 +906,6 @@ TClass class::TkwFileWriteStr
 TClass class::TkwFileWriteWStr
 TClass class::TkwFileWriteWStrLn
 TClass class::TkwFINALLY
-TClass class::TkwFindWindowByCaption
 TClass class::TkwFontBackColor
 TClass class::TkwFontColor
 TClass class::TkwFontIsBold
@@ -1350,7 +921,6 @@ TClass class::TkwFUNCTION
 TClass class::TkwGeneratePDFForEtalon
 TClass class::TkwGeneratorsExecute
 TClass class::TkwGeneratorsLink
-TClass class::TkwGetForegroundWindow
 TClass class::TkwGetLocalDate
 TClass class::TkwGetLocalDateTime
 TClass class::TkwGetLocalTime
@@ -1359,7 +929,6 @@ TClass class::TkwGlobalVar
 TClass class::TkwGREATER
 TClass class::TkwGreaterThanZero
 TClass class::TkwHALT
-TClass class::TkwHardKey
 TClass class::TkwHasTabs
 TClass class::TkwHelp
 TClass class::TkwIfElse
@@ -1392,12 +961,6 @@ TClass class::TkwIsUnder64
 TClass class::TkwIsVoid
 TClass class::TkwIsWString
 TClass class::TkwIsXE
-TClass class::TkwIterateChildWindows
-TClass class::TkwIterateForms
-TClass class::TkwIterateWindows
-TClass class::TkwKey
-TClass class::TkwKeyDown
-TClass class::TkwKeyUp
 TClass class::TkwLeftParam
 TClass class::TkwLeftWordRefParam
 TClass class::TkwLESS
@@ -1405,17 +968,8 @@ TClass class::TkwLessThanZero
 TClass class::TkwLOOP
 TClass class::TkwMain
 TClass class::TkwMainCodeController
-TClass class::TkwMainScreenHeight
-TClass class::TkwMainScreenWidth
 TClass class::TkwMedianBacket
 TClass class::TkwMembersIterator
-TClass class::TkwMenuItemCaption
-TClass class::TkwMenuItemClick
-TClass class::TkwMenuItemCount
-TClass class::TkwMenuItemEnabled
-TClass class::TkwMenuItemGetItem
-TClass class::TkwMenuItemGetMenuHeight
-TClass class::TkwMenuItemVisible
 TClass class::TkwMODAL
 TClass class::TkwModFromDiv
 TClass class::TkwModifier
@@ -1452,7 +1006,6 @@ TClass class::TkwOSName
 TClass class::TkwOVER
 TClass class::TkwOVER2
 TClass class::TkwPICK
-TClass class::TkwPopActionListFindAction
 TClass class::TkwPopClassInherits
 TClass class::TkwPopCompiledWordWorkerWordCompiled
 TClass class::TkwPopCompilerAddCodePart
@@ -1466,53 +1019,6 @@ TClass class::TkwPopComponentFindComponent
 TClass class::TkwPopComponentGetComponent
 TClass class::TkwPopComponentName
 TClass class::TkwPopComponentOwner
-TClass class::TkwPopContainedActionExecute
-TClass class::TkwPopControlCanFocus
-TClass class::TkwPopControlCaption
-TClass class::TkwPopControlClick
-TClass class::TkwPopControlClientToScreen
-TClass class::TkwPopControlColor
-TClass class::TkwPopControlControlCount
-TClass class::TkwPopControlEnabled
-TClass class::TkwPopControlFindControlByName
-TClass class::TkwPopControlFocused
-TClass class::TkwPopControlFont
-TClass class::TkwPopControlGetAnotherParentForm
-TClass class::TkwPopControlGetControl
-TClass class::TkwPopControlGetMainForm
-TClass class::TkwPopControlGetParentForm
-TClass class::TkwPopControlGetPopupMenu
-TClass class::TkwPopControlGetTopParentForm
-TClass class::TkwPopControlHandle
-TClass class::TkwPopControlHeight
-TClass class::TkwPopControlHide
-TClass class::TkwPopControlHint
-TClass class::TkwPopControlHScrollerVisible
-TClass class::TkwPopControlInvalidate
-TClass class::TkwPopControlLeft
-TClass class::TkwPopControlMouseLeftClick
-TClass class::TkwPopControlMouseLeftDragAndDrop
-TClass class::TkwPopControlMouseMiddleClick
-TClass class::TkwPopControlMouseRightClick
-TClass class::TkwPopControlMouseWheelDown
-TClass class::TkwPopControlMouseWheelUp
-TClass class::TkwPopControlName
-TClass class::TkwPopControlParent
-TClass class::TkwPopControlRepaint
-TClass class::TkwPopControlScreenToClient
-TClass class::TkwPopControlScrollInfo
-TClass class::TkwPopControlScrollInfoMax
-TClass class::TkwPopControlScrollInfoMin
-TClass class::TkwPopControlScrollInfoPageSize
-TClass class::TkwPopControlScrollInfoPosition
-TClass class::TkwPopControlSetFocus
-TClass class::TkwPopControlShow
-TClass class::TkwPopControlShowHint
-TClass class::TkwPopControlTop
-TClass class::TkwPopControlUndock
-TClass class::TkwPopControlVisible
-TClass class::TkwPopControlVScrollerVisible
-TClass class::TkwPopControlWidth
 TClass class::TkwPopDictionaryExExportDictionary
 TClass class::TkwPopDictionaryExExportedDictionaries
 TClass class::TkwPopDictionaryExFileDateTime
@@ -1521,18 +1027,6 @@ TClass class::TkwPopDictionaryExRemoveFromCache
 TClass class::TkwPopDictionaryExUsedDictionaries
 TClass class::TkwPopDictionaryExUseDictionary
 TClass class::TkwPopFinderSetToCtx
-TClass class::TkwPopFormActiveMDIChild
-TClass class::TkwPopFormClose
-TClass class::TkwPopFormFindActionList
-TClass class::TkwPopFormFindMenuItem
-TClass class::TkwPopFormFormStyle
-TClass class::TkwPopFormGetWindowState
-TClass class::TkwPopFormHasControl
-TClass class::TkwPopFormMDIChildCount
-TClass class::TkwPopFormMDIChildren
-TClass class::TkwPopFormModalResult
-TClass class::TkwPopFormNext
-TClass class::TkwPopFormSetWindowState
 TClass class::TkwPopKeywordFinderKeywordByName
 TClass class::TkwPopKeywordFinderParentFinder
 TClass class::TkwPopKeyWordName
@@ -1568,8 +1062,6 @@ TClass class::TkwPopScriptEngineAsKeywordFinder
 TClass class::TkwPopScriptEngineCascadeDict
 TClass class::TkwPopScriptEngineCurrentCompilingDictionary
 TClass class::TkwPopScriptEngineDisableForHelp
-TClass class::TkwPopScrollingWinControlHScrollerVisible
-TClass class::TkwPopScrollingWinControlVScrollerVisible
 TClass class::TkwPopValueTypesAcceptsValue
 TClass class::TkwPopValueTypesAdd
 TClass class::TkwPopValueTypesCompare
@@ -1578,12 +1070,14 @@ TClass class::TkwPopValueTypesEQ
 TClass class::TkwPopValueTypesHas
 TClass class::TkwPopValueTypesMakeCustomName
 TClass class::TkwPopValueTypesName
+TClass class::TkwPopWordDecRef
 TClass class::TkwPopWordDirectives
 TClass class::TkwPopWordEndBracket
 TClass class::TkwPopWordFindMember
 TClass class::TkwPopWordGetLeftWordRefValue
 TClass class::TkwPopWordGetParam
 TClass class::TkwPopWordGetRef
+TClass class::TkwPopWordIncRef
 TClass class::TkwPopWordInfo
 TClass class::TkwPopWordInfoAcceptsValue
 TClass class::TkwPopWordInfoAccessType
@@ -1638,18 +1132,11 @@ TClass class::TkwRuntimeWordWithCode
 TClass class::TkwRuntimeWordWithCodeExecution
 TClass class::TkwSameStr
 TClass class::TkwSameText
-TClass class::TkwScreenCount
-TClass class::TkwScreenHeight
-TClass class::TkwScreenShot2File
-TClass class::TkwScreenShot2FileWithCheck
-TClass class::TkwScreenWidth
 TClass class::TkwScriptCompileAndProcess
 TClass class::TkwScriptExceptionStack
 TClass class::TkwScriptFileName
-TClass class::TkwScrollInfoWord
 TClass class::TkwSendInputSupport
 TClass class::TkwSetAppPath2CurrentDir
-TClass class::TkwSetFuzzInPercent
 TClass class::TkwSetLocalDate
 TClass class::TkwSetLocalDateTime
 TClass class::TkwSetLocalTime
@@ -1715,23 +1202,8 @@ TClass class::TkwVarDecLen
 TClass class::TkwVarInc
 TClass class::TkwVarShift
 TClass class::TkwVarWorkerCompiledCode
-TClass class::TkwWaitCancel
-TClass class::TkwWaitChoice
-TClass class::TkwWaitNo
-TClass class::TkwWaitOk
-TClass class::TkwWaitYes
-TClass class::TkwWasWait
 TClass class::TkwWHILEDO
-TClass class::TkwWinControlFromStackWord
-TClass class::TkwWindowFromPoint
 TClass class::TkwWinExec
-TClass class::TkwWinTreeGetCurrentText
-TClass class::TkwWndCloseWindow
-TClass class::TkwWndGetClassName
-TClass class::TkwWndGetWindowText
-TClass class::TkwWndIsVisible
-TClass class::TkwWndSetForeground
-TClass class::TkwWndWindowIsMine
 TClass class::TkwWordPtrPushWord
 TClass class::TkwWordPtrWorker
 TClass class::TkwWordWorker
@@ -1763,14 +1235,8 @@ TClass class::Tl3ProtoDataContainer
 TClass class::Tl3ProtoObject
 TClass class::Tl3Variant
 TClass class::Tl3VariantPrim
-TClass class::TMainMenu
-TClass class::TMenu
-TClass class::TMenuItem
 TClass class::TObject
 TClass class::TPersistent
-TClass class::TPopupMenu
-TClass class::TScrollingWinControl
-TClass class::TSizeConstraints
 TClass class::TtfwAnonimousWord
 TClass class::TtfwArrayCollector
 TClass class::TtfwBeginLikeWord
@@ -1807,6 +1273,7 @@ TClass class::TtfwString
 TClass class::TtfwStringConstantRegistrator
 TClass class::TtfwStringToEnumValue
 TClass class::TtfwSysUtilsWord
+TClass class::TtfwTruncLambda
 TClass class::TtfwTwoLambdas
 TClass class::TtfwTypeInfoList
 TClass class::TtfwTypeInfoListPrim
@@ -1819,7 +1286,6 @@ TClass class::TtfwWordPrim
 TClass class::TtfwWordWorker
 TClass class::TtfwWordWorkerEx
 TClass class::TtfwWStrWord
-TClass class::TWinControl
 IMMEDIATE VOID OPERATOR : ClassProducer
  ^L OPERATOR :: IN : aName
 ; // ClassProducer
@@ -1973,7 +1439,6 @@ VOID File:WriteWStrLn
 ARRAY FILTER
 IMMEDIATE VOID OPERATOR : FINAL
 FINALLY
-Cardinal FindWindowByCaption
 OPERATOR : for
  ^ OPERATOR :: IN : aList
  ^ OPERATOR :: IN : aWhatToDo
@@ -1988,7 +1453,6 @@ FUNCTION
 IMMEDIATE VOID OPERATOR :: TYPE : FUNCTOR
 ARRAY FunctorToIterator
 VOID GeneratePDFForEtalon
-Cardinal GetForegroundWindow
 VOID GetLocalDate
 VOID GetLocalDateTime
 VOID GetLocalTime
@@ -2007,7 +1471,6 @@ STRING guid::ItfwScriptEngine
 STRING guid::ItfwStoredValuesStack
 STRING guid::ItfwValueList
 VOID HALT
-HardKey
 BOOLEAN HasTabs
 VOID help
 if
@@ -2075,9 +1538,6 @@ OPERATOR : IT
 ; // IT
 VOID Iterate
 VOID ITERATE
-VOID IterateChildWindows
-VOID IterateForms
-VOID IterateWindows
 ItfwFile
 ItfwIterator
 ItfwParser
@@ -2086,9 +1546,8 @@ ItfwScriptCaller
 ItfwScriptEngine
 ItfwStoredValuesStack
 ItfwValueList
-key
-KeyDown
-KeyUp
+ARRAY Join
+ARRAY JOIN
 BOOLEAN LESS
 IMMEDIATE VOID OPERATOR : LINK
 ARRAY FUNCTION : LIST
@@ -2159,7 +1618,30 @@ STRING OSName
 VOID OVER
 IMMEDIATE VOID OPERATOR : OVERRIDE
 VOID PICK
+VOID pop:Array:Add
+VOID pop:Array:Clear
+INTEGER pop:Array:Count
+ARRAY pop:Array:Filter
+ARRAY pop:Array:FunctorToIterator
+Struct pop:Array:GetItem
+VOID pop:Array:Iterate
+ARRAY pop:Array:Join
+ARRAY pop:Array:Map
+ARRAY pop:Array:Reverted
+VOID pop:Array:SetItem
+ARRAY pop:Array:Trunc
 pop:class:Inherits
+BOOLEAN pop:File:EOF
+FILE pop:File:OpenRead
+FILE pop:File:OpenWrite
+VOID pop:File:ReadLines
+STRING pop:File:ReadLn
+W-STRING pop:File:ReadWStrLn
+VOID pop:File:WriteChar
+VOID pop:File:WriteLn
+VOID pop:File:WriteStr
+VOID pop:File:WriteWStr
+VOID pop:File:WriteWStrLn
 pop:object:ClassName
 pop:object:GetFloatProp
 pop:object:GetInterfaceProp
@@ -2173,6 +1655,31 @@ pop:object:RTTIInfo
 pop:object:SetFloatProp
 pop:object:SetOrdProp
 pop:object:SetStrProp
+STRING pop:String:Cat
+CHAR pop:String:Char
+STRING pop:String:char_Dupe
+STRING pop:String:char_ToString
+INTEGER pop:String:CodePage
+INTEGER pop:String:CompareStr
+INTEGER pop:String:CompareText
+BOOLEAN pop:String:ConsistsOf
+BOOLEAN pop:String:EndsStr
+BOOLEAN pop:String:EndsText
+BOOLEAN pop:String:HasAnyOf
+INTEGER pop:String:Len
+INTEGER pop:String:Pos
+INTEGER pop:String:PosEx
+STRING pop:String:Replace
+STRING pop:String:ReplaceFirst
+BOOLEAN pop:String:SameStr
+BOOLEAN pop:String:SameText
+STRING pop:String:Split
+BOOLEAN pop:String:StartsStr
+BOOLEAN pop:String:StartsText
+INTEGER pop:String:StrToInt
+STRING pop:String:text_Replace
+STRING pop:String:text_ReplaceFirst
+CHAR pop:String:ToChar
 IMMEDIATE VOID OPERATOR : PRIVATE
 IMMEDIATE VOID OPERATOR : procedure
  ^L OPERATOR :: IN : aName
@@ -2203,12 +1710,8 @@ VOID -ROT
 RULES
 BOOLEAN SameStr
 BOOLEAN SameText
-INTEGER ScreenCount
-VOID ScreenShot2File
-VOID ScreenShot2FileWithCheck
 IMMEDIATE VOID OPERATOR : SEALED
 VOID SetAppPath2CurrentDir
-VOID SetFuzzInPercent
 VOID SetLocalDate
 VOID SetLocalDateTime
 VOID SetLocalTime
@@ -2267,48 +1770,17 @@ STRING FUNCTION : strings:CatSep
 INTEGER StrToInt
 IMMEDIATE VOID OPERATOR : SUMMONED
 VOID SWAP
-TActionList
-TActionListState
-TAlign
-TBasicAction
-TBiDiMode
-TBitmap
-TBorderWidth
 IMMEDIATE VOID OPERATOR : TClass
 TColor
 TComponent
-TConstraintSize
-TContainedAction
-TControl
-TControlScrollBar
-TCursor
-TCustomActionList
-TCustomForm
-TCustomImageList
-TDefaultMonitor
-TDragKind
-TDragMode
 IMMEDIATE VOID OPERATOR : Test
 STRING text:Replace
 STRING text:ReplaceFirst
-TFont
-TFontCharset
-TFontPitch
-TForm
-TFormBorderStyle
-TFormStyle
-TGraphic
-TGraphicsObject
-THelpContext
-THelpType
 IMMEDIATE VOID OPERATOR : then
  ^ OPERATOR :: IN : aWhatToThen
 ; // then
 VOID THREAD
-TIcon
-TImageIndex
 VOID TimeToLog
-TInterfacedPersistent
 TkwAdd
 TkwApplicationActionIdle
 TkwApplicationExeName
@@ -2319,10 +1791,11 @@ TkwArrayFilter
 TkwArrayFunctorToIterator
 TkwArrayGetItem
 TkwArrayIterate
+TkwArrayJoin
 TkwArrayMap
 TkwArrayReverted
 TkwArraySetItem
-TkwAskWindowToCloseItself
+TkwArrayTrunc
 TkwASSERTS
 TkwAtomicIf
 TkwBEGIN
@@ -2337,7 +1810,6 @@ TkwBracketBegin
 TkwBracketEnd
 TkwBREAK
 TkwBREAKITERATOR
-TkwBynameControlPush
 TkwCASE
 TkwCat
 TkwCharDupe
@@ -2391,9 +1863,6 @@ TkwComputerName
 TkwCONST
 TkwConstLikeCompiled
 TkwCONTINUE
-TkwControlByHandle
-TkwControlFocusedControlPush
-TkwControlWord
 TkwCopyFile
 TkwCopyFilesByMask
 TkwCreateAndRaise
@@ -2430,8 +1899,6 @@ TkwDEFAULT
 TkwDefine
 TkwDeleteFile
 TkwDeleteFilesByMask
-TkwDesktopHeight
-TkwDesktopWidth
 TkwDiv2
 TkwDivide
 TkwDivision
@@ -2469,7 +1936,6 @@ TkwFileWriteStr
 TkwFileWriteWStr
 TkwFileWriteWStrLn
 TkwFINALLY
-TkwFindWindowByCaption
 TkwFontBackColor
 TkwFontColor
 TkwFontIsBold
@@ -2485,7 +1951,6 @@ TkwFUNCTION
 TkwGeneratePDFForEtalon
 TkwGeneratorsExecute
 TkwGeneratorsLink
-TkwGetForegroundWindow
 TkwGetLocalDate
 TkwGetLocalDateTime
 TkwGetLocalTime
@@ -2494,7 +1959,6 @@ TkwGlobalVar
 TkwGREATER
 TkwGreaterThanZero
 TkwHALT
-TkwHardKey
 TkwHasTabs
 TkwHelp
 TkwIfElse
@@ -2527,12 +1991,6 @@ TkwIsUnder64
 TkwIsVoid
 TkwIsWString
 TkwIsXE
-TkwIterateChildWindows
-TkwIterateForms
-TkwIterateWindows
-TkwKey
-TkwKeyDown
-TkwKeyUp
 TkwLeftParam
 TkwLeftWordRefParam
 TkwLESS
@@ -2540,17 +1998,8 @@ TkwLessThanZero
 TkwLOOP
 TkwMain
 TkwMainCodeController
-TkwMainScreenHeight
-TkwMainScreenWidth
 TkwMedianBacket
 TkwMembersIterator
-TkwMenuItemCaption
-TkwMenuItemClick
-TkwMenuItemCount
-TkwMenuItemEnabled
-TkwMenuItemGetItem
-TkwMenuItemGetMenuHeight
-TkwMenuItemVisible
 TkwMODAL
 TkwModFromDiv
 TkwModifier
@@ -2587,7 +2036,6 @@ TkwOSName
 TkwOVER
 TkwOVER2
 TkwPICK
-TkwPopActionListFindAction
 TkwPopClassInherits
 TkwPopCompiledWordWorkerWordCompiled
 TkwPopCompilerAddCodePart
@@ -2601,53 +2049,6 @@ TkwPopComponentFindComponent
 TkwPopComponentGetComponent
 TkwPopComponentName
 TkwPopComponentOwner
-TkwPopContainedActionExecute
-TkwPopControlCanFocus
-TkwPopControlCaption
-TkwPopControlClick
-TkwPopControlClientToScreen
-TkwPopControlColor
-TkwPopControlControlCount
-TkwPopControlEnabled
-TkwPopControlFindControlByName
-TkwPopControlFocused
-TkwPopControlFont
-TkwPopControlGetAnotherParentForm
-TkwPopControlGetControl
-TkwPopControlGetMainForm
-TkwPopControlGetParentForm
-TkwPopControlGetPopupMenu
-TkwPopControlGetTopParentForm
-TkwPopControlHandle
-TkwPopControlHeight
-TkwPopControlHide
-TkwPopControlHint
-TkwPopControlHScrollerVisible
-TkwPopControlInvalidate
-TkwPopControlLeft
-TkwPopControlMouseLeftClick
-TkwPopControlMouseLeftDragAndDrop
-TkwPopControlMouseMiddleClick
-TkwPopControlMouseRightClick
-TkwPopControlMouseWheelDown
-TkwPopControlMouseWheelUp
-TkwPopControlName
-TkwPopControlParent
-TkwPopControlRepaint
-TkwPopControlScreenToClient
-TkwPopControlScrollInfo
-TkwPopControlScrollInfoMax
-TkwPopControlScrollInfoMin
-TkwPopControlScrollInfoPageSize
-TkwPopControlScrollInfoPosition
-TkwPopControlSetFocus
-TkwPopControlShow
-TkwPopControlShowHint
-TkwPopControlTop
-TkwPopControlUndock
-TkwPopControlVisible
-TkwPopControlVScrollerVisible
-TkwPopControlWidth
 TkwPopDictionaryExExportDictionary
 TkwPopDictionaryExExportedDictionaries
 TkwPopDictionaryExFileDateTime
@@ -2656,18 +2057,6 @@ TkwPopDictionaryExRemoveFromCache
 TkwPopDictionaryExUsedDictionaries
 TkwPopDictionaryExUseDictionary
 TkwPopFinderSetToCtx
-TkwPopFormActiveMDIChild
-TkwPopFormClose
-TkwPopFormFindActionList
-TkwPopFormFindMenuItem
-TkwPopFormFormStyle
-TkwPopFormGetWindowState
-TkwPopFormHasControl
-TkwPopFormMDIChildCount
-TkwPopFormMDIChildren
-TkwPopFormModalResult
-TkwPopFormNext
-TkwPopFormSetWindowState
 TkwPopKeywordFinderKeywordByName
 TkwPopKeywordFinderParentFinder
 TkwPopKeyWordName
@@ -2703,8 +2092,6 @@ TkwPopScriptEngineAsKeywordFinder
 TkwPopScriptEngineCascadeDict
 TkwPopScriptEngineCurrentCompilingDictionary
 TkwPopScriptEngineDisableForHelp
-TkwPopScrollingWinControlHScrollerVisible
-TkwPopScrollingWinControlVScrollerVisible
 TkwPopValueTypesAcceptsValue
 TkwPopValueTypesAdd
 TkwPopValueTypesCompare
@@ -2713,12 +2100,14 @@ TkwPopValueTypesEQ
 TkwPopValueTypesHas
 TkwPopValueTypesMakeCustomName
 TkwPopValueTypesName
+TkwPopWordDecRef
 TkwPopWordDirectives
 TkwPopWordEndBracket
 TkwPopWordFindMember
 TkwPopWordGetLeftWordRefValue
 TkwPopWordGetParam
 TkwPopWordGetRef
+TkwPopWordIncRef
 TkwPopWordInfo
 TkwPopWordInfoAcceptsValue
 TkwPopWordInfoAccessType
@@ -2773,18 +2162,11 @@ TkwRuntimeWordWithCode
 TkwRuntimeWordWithCodeExecution
 TkwSameStr
 TkwSameText
-TkwScreenCount
-TkwScreenHeight
-TkwScreenShot2File
-TkwScreenShot2FileWithCheck
-TkwScreenWidth
 TkwScriptCompileAndProcess
 TkwScriptExceptionStack
 TkwScriptFileName
-TkwScrollInfoWord
 TkwSendInputSupport
 TkwSetAppPath2CurrentDir
-TkwSetFuzzInPercent
 TkwSetLocalDate
 TkwSetLocalDateTime
 TkwSetLocalTime
@@ -2850,23 +2232,8 @@ TkwVarDecLen
 TkwVarInc
 TkwVarShift
 TkwVarWorkerCompiledCode
-TkwWaitCancel
-TkwWaitChoice
-TkwWaitNo
-TkwWaitOk
-TkwWaitYes
-TkwWasWait
 TkwWHILEDO
-TkwWinControlFromStackWord
-TkwWindowFromPoint
 TkwWinExec
-TkwWinTreeGetCurrentText
-TkwWndCloseWindow
-TkwWndGetClassName
-TkwWndGetWindowText
-TkwWndIsVisible
-TkwWndSetForeground
-TkwWndWindowIsMine
 TkwWordPtrPushWord
 TkwWordPtrWorker
 TkwWordWorker
@@ -2899,12 +2266,6 @@ Tl3ProtoObject
 Tl3TokenType
 Tl3Variant
 Tl3VariantPrim
-TMainMenu
-TMenu
-TMenuAutoFlag
-TMenuBreak
-TMenuItem
-TMenuItemAutoFlag
 TObject
 VOID OPERATOR :: PROCEDURE : ToDo
  STRING OPERATOR :: IN : aString
@@ -2917,17 +2278,10 @@ REDIFINITION STRING FUNCTION : ToPrintable
  REDIFINITION STRING FUNCTION :: ToPrintable : Result
 ; // ToPrintable
 TPersistent
-TPopupAlignment
-TPopupMenu
-TPosition
-TPrintScale
 BOOLEAN true
+ARRAY Trunc
+ARRAY TRUNC
 TRY
-TScrollBarInc
-TScrollBarStyle
-TScrollingWinControl
-TShortCut
-TSizeConstraints
 TtfwAccessType
 TtfwAnonimousWord
 TtfwArrayCollector
@@ -2966,6 +2320,7 @@ TtfwString
 TtfwStringConstantRegistrator
 TtfwStringToEnumValue
 TtfwSysUtilsWord
+TtfwTruncLambda
 TtfwTwoLambdas
 TtfwTypeInfoList
 TtfwTypeInfoListPrim
@@ -2980,10 +2335,7 @@ TtfwWordPrim
 TtfwWordWorker
 TtfwWordWorkerEx
 TtfwWStrWord
-TTrackButton
 VOID TUCK
-TWinControl
-TWindowState
 IMMEDIATE OPERATOR : TYPE
  ^L OPERATOR :: IN : aName
 ; // TYPE
@@ -3017,10 +2369,7 @@ OPERATOR : WHILE
  ^ OPERATOR :: IN : aWhatToDo
 ; // WHILE
 VOID WHILEDO
-Cardinal WindowFromPoint
 VOID WinExec
-STRING WinTreeGetCurrentText
-Word
 IMMEDIATE OPERATOR : WordAlias
  LINK ^ OPERATOR :: IN : aCode
  ^L OPERATOR :: IN : aName
@@ -3166,6 +2515,7 @@ TtfwWord pop:Compiler:KeywordFinder
 TtfwWord pop:Compiler:NewWordDefinitor
 VOID pop:Compiler:SetToCtx
 Dictionary: axiom:Word
+VOID pop:Word:DecRef
 STRING pop:Word:Directives
 STRING pop:Word:EndBracket
 TtfwKeyWord pop:Word:FindMember
@@ -3176,6 +2526,7 @@ TtfwWord OPERATOR : pop:Word:GetRefDeep
  TtfwWord OPERATOR :: IN : aSelf
  TtfwWord OPERATOR :: pop:Word:GetRefDeep : Result
 ; // pop:Word:GetRefDeep
+VOID pop:Word:IncRef
 TtfwWordInfo pop:Word:Info
 BOOLEAN pop:Word:IsForHelp
 BOOLEAN pop:Word:IsImmediate
@@ -3316,36 +2667,28 @@ VOID OPERATOR :: PROCEDURE : std::out<<
 Dictionary: axiom:KeywordFinder
 TtfwKeyWord pop:KeywordFinder:KeywordByName
 TtfwWord pop:KeywordFinder:ParentFinder
-Dictionary: axiom:Component
-INTEGER pop:Component:ComponentCount
-TComponent pop:Component:FindComponent
-TComponent pop:Component:GetComponent
-STRING pop:Component:Name
-TComponent pop:Component:Owner
-Dictionary: axiom:form
-TForm pop:form:ActiveMDIChild
-VOID pop:form:Close
-VOID OPERATOR :: PROCEDURE : pop:form:ExecuteAction
- TForm OPERATOR :: IN : aForm
- STRING OPERATOR :: IN : aListName
- STRING OPERATOR :: IN : anActionName
- TContainedAction OPERATOR :: VAR : l_Action
- TActionList OPERATOR :: VAR : l_ActList
-; // pop:form:ExecuteAction
-TActionList pop:form:FindActionList
-TMenuItem pop:form:FindMenuItem
-TFormStyle pop:form:FormStyle
-TWindowState pop:form:GetWindowState
-BOOLEAN pop:form:HasControl
-INTEGER pop:form:MDIChildCount
-TForm pop:form:MDIChildren
-INTEGER pop:form:ModalResult
-VOID pop:form:Next
-VOID pop:form:SetWindowState
-Dictionary: axiom:ActionList
-TContainedAction pop:ActionList:FindAction
-Dictionary: axiom:ContainedAction
-VOID pop:ContainedAction:Execute
+Dictionary: axiom:Array
+Dictionary: axiom:File
+Dictionary: axiom:Font
+TColor Font:BackColor
+TColor Font:Color
+BOOLEAN Font:IsBold
+BOOLEAN Font:IsItalic
+BOOLEAN Font:IsStrikeOut
+BOOLEAN Font:IsUnderline
+STRING Font:Name
+INTEGER Font:Size
+TColor pop:Font:BackColor
+TColor pop:Font:Color
+BOOLEAN pop:Font:IsBold
+BOOLEAN pop:Font:IsItalic
+BOOLEAN pop:Font:IsStrikeOut
+BOOLEAN pop:Font:IsUnderline
+STRING pop:Font:Name
+INTEGER pop:Font:Size
+Dictionary: axiom:generators
+VOID generators:Execute
+Ik2TagGenerator generators:Link
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Exports.script
  Uses: 
   axiom:axiom
@@ -3368,10 +2711,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Exports.scrip
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
@@ -3411,10 +2754,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Exports.scrip
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
@@ -3456,10 +2799,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
  ;
 VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
@@ -3491,10 +2834,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
  ;
 IMMEDIATE VOID OPERATOR : __MACRO
@@ -3523,10 +2866,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
  ;
 IMMEDIATE VOID OPERATOR :: TYPE : ANY
 IMMEDIATE VOID OPERATOR :: TYPE : ITERATABLE
@@ -3553,10 +2896,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
@@ -3614,10 +2957,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
  ;
@@ -3651,10 +2994,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.di
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
  ;
@@ -3683,10 +3026,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymb
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
 STRING FUNCTION : .Name
@@ -3721,10 +3064,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
 VOID CALLER OPERATOR : ?Assure
@@ -3774,10 +3117,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dic
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
@@ -3830,10 +3173,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\math.ms.dict
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
  ;
 INTEGER FUNCTION : Dec1
  INTEGER OPERATOR :: IN : aValue
@@ -3883,10 +3226,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
  ;
 REDIFINITION : : Print
 ==> Redefines
@@ -3914,10 +3257,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dic
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
@@ -3944,10 +3287,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dic
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
@@ -3975,10 +3318,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
  ;
 ARRAY OPERATOR : to
  ^@ OPERATOR :: IN : aFrom
@@ -4007,10 +3350,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dic
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
  ;
 ARRAY FUNCTION : .filter>
  ^ OPERATOR :: IN : aFunctor
@@ -4045,10 +3388,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
  ;
 ARRAY FUNCTION : .map>
  ^ OPERATOR :: IN : aFunctor
@@ -4083,10 +3426,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.d
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
  ;
 ARRAY .reverted>
 ARRAY >reverted>
@@ -4114,10 +3457,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dic
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
@@ -4187,10 +3530,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.d
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
  ;
 STRING FUNCTION : Check
@@ -4272,10 +3615,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
@@ -4414,10 +3757,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementatio
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   axiom:CompiledWordWorkerWord
   axiom:Finder
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
@@ -4454,10 +3797,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Concrete.ms.m
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\classRelations.ms.dict
@@ -4532,10 +3875,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
@@ -4593,10 +3936,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\classRelation
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
@@ -4623,10 +3966,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\UML.ms.model
@@ -4673,10 +4016,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\UML.ms.model
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\MetaMetaModel.ms.dict
@@ -4711,10 +4054,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\MetaMetaModel
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
@@ -4744,10 +4087,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Generation.ms
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
@@ -4877,10 +4220,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.m
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: TYPE : ENGINE_WORD
@@ -4906,10 +4249,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\ElementsRTTI.
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
@@ -5029,10 +4372,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\RefDeepest.ms
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymbols.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
@@ -5082,10 +4425,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms
   axiom:ValueTypes
   axiom:std
   axiom:KeywordFinder
-  axiom:Component
-  axiom:form
-  axiom:ActionList
-  axiom:ContainedAction
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
