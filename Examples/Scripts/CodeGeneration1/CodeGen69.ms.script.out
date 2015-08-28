@@ -4396,6 +4396,11 @@ BOOLEAN OPERATOR :: MACRO :: elem_func : .IsSummary
  BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsSummary : Result
  ModelElement OPERATOR :: IN : Self
 ; // .IsSummary
+OBJECT FUNCTION : .Parent
+ OPERATOR :: IN : %S
+ OPERATOR :: VAR : l_P
+ OBJECT FUNCTION :: %P : Result
+; // .Parent
 ARRAY OPERATOR :: MACRO :: elem_func : .Parents
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ARRAY OPERATOR :: MACRO :: elem_func :: .Parents : Result
