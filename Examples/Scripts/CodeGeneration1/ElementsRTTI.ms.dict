@@ -31,6 +31,12 @@ PROCEDURE do_elem_func
  'Self' Ctx:Parser:PushSymbol
 ; // do_elem_func
 
+MACRO word_func
+ Literal IN aName
+ %SUMMARY 'Функция на элементе модели' ;
+ aName .Name this.method.addr nil 'ENGINE_WORD' do_elem_func
+; // word_func
+
 MACRO elem_func
  Literal IN aName
  %SUMMARY 'Функция на элементе модели' ;
