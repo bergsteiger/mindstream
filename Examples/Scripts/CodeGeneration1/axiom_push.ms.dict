@@ -1,3 +1,9 @@
+// axiom_push.ms.dict
+
+//USES
+// RefDeepest.ms.dict
+//;
+
 PROCEDURE axiom:PushSymbol
  LINK ^ IN aSymbol
  %SUMMARY 'Запихивает во входной поток парсера имя слова aSymbol' ;
