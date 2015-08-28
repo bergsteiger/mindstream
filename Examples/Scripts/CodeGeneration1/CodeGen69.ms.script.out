@@ -3628,6 +3628,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
  ;
  Exports: 
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
@@ -3806,20 +3807,17 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndIm
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
  ;
-IMMEDIATE VOID OPERATOR :: MACRO : __CompileCodeAndFree
- ENGINE_WORD OPERATOR :: IN : aCode
-; // __CompileCodeAndFree
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
+ ;
 IMMEDIATE OPERATOR :: MACRO :: NamedCodeProducer : Implements
  ^ OPERATOR :: IN : aCode
 ; // Implements
 IMMEDIATE OPERATOR :: MACRO :: NamedCodeProducer : Inherits
  ^ OPERATOR :: IN : aCode
 ; // Inherits
-IMMEDIATE VOID OPERATOR :: MACRO : NamedCodeProducer
- ^L OPERATOR :: IN : aName
- ^L OPERATOR :: IN : aNewName
-; // NamedCodeProducer
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
  Uses: 
   axiom:axiom
@@ -3849,6 +3847,43 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.m
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: TYPE : ENGINE_WORD
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: MACRO : __CompileCodeAndFree
+ ENGINE_WORD OPERATOR :: IN : aCode
+; // __CompileCodeAndFree
+IMMEDIATE VOID OPERATOR :: MACRO : NamedCodeProducer
+ ^L OPERATOR :: IN : aName
+ ^L OPERATOR :: IN : aNewName
+; // NamedCodeProducer
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Concrete.ms.model
  Uses: 
   axiom:axiom
@@ -3878,6 +3913,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Concrete.ms.m
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\classRelations.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymbols.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms.model
@@ -4018,8 +4054,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\classRelation
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
  ;
  Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %IMPLEMENTS
@@ -4495,6 +4533,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Generation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
  ;
 VOID OPERATOR :: MACRO :: elem_generator : .c++
  OPERATOR :: MACRO :: NamedCodeProducer :: Inherits : %G

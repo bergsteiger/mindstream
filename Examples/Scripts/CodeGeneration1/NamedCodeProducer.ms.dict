@@ -1,0 +1,41 @@
+// NamedCodeProducer.ms.dict
+
+USES
+ macro.ms.dict
+ EngineTypes.ms.dict
+ Documentation.ms.dict
+;
+
+MACRO __CompileCodeAndFree
+ ENGINE_WORD IN aCode
+ if ( aCode IS class::TkwBeginLikeCompiledCode ) then  
+  ( aCode CodeIterator ==> CompileRef )
+ else
+  ( aCode CompileRef ) 
+ aCode pop:Word:DecRef 
+; // __CompileCodeAndFree
+
+MACRO NamedCodeProducer
+  ^L IN aName
+  ^L IN aNewName
+ 
+ @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE axiom:operator'
+  aName |N
+  
+  '^ IN aCode'
+  
+  '@SELF Ctx:SetWordProducerForCompiledClass'
+  aNewName |NS
+  'Ctx:SetNewWordName'
+  
+  '`axiom:operator` Ctx:Parser:PushSymbol'
+  
+  'aCode pop:Word:IncRef'
+  'aCode'
+  '`__CompileCodeAndFree` Ctx:Parser:PushSymbol'
+  '`;` Ctx:Parser:PushSymbol'
+  ';'
+ ] Ctx:Parser:PushArray
+; // NamedCodeProducer
