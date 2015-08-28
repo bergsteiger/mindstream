@@ -162,27 +162,8 @@ MACRO %GEN_PROPERTY
 
 USES
  RefDeepest.ms.dict
+ FieldByNameDeepest.ms.dict
 ;
-
-REF operator FieldByNameDeepest
- LVALUE aSelf
- Literal IN aName
- %SUMMARY 'Метод получения вложенного члена слова по имени. С учётом того, что может быть передана ссылка на переменную' ;
-
- ENGINE_WORD VAR l_Self
- aSelf Dereference =: l_Self
- 
- STRING VAR l_Name
- aName .Name =: l_Name
- 
- OBJECT VAR l_Res
- l_Self %% l_Name =: l_Res
- 
- ASSURE 
-  NOT ( l_Res pop:object:IsNil ) 
-  [ 'Не найдено поле: ' l_Self LIST %P Reverted ==> ( .Name '::' ) l_Self .Name '::' l_Name ]
- l_Res =: Result
-; // FieldByNameDeepest
 
 MACRO %GP
  Literal IN aName
