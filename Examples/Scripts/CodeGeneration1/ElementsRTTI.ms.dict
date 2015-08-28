@@ -37,40 +37,6 @@ MACRO word_func
  aName .Name this.method.addr nil 'ENGINE_WORD' do_elem_func
 ; // word_func
 
-MACRO elem_func
- Literal IN aName
- %SUMMARY 'Функция на элементе модели' ;
- aName .Name this.method.addr nil 'ModelElement' do_elem_func
-; // elem_func
-
-PROCEDURE do_elem_proc
- STRING IN aName
- ENGINE_WORD IN aSelf
- ENGINE_WORD IN aModifier
- %SUMMARY 'Реализация elem_proc и elem_generator' ;
- Ctx:ClearTypeInfo
- axiom:PushSymbol VOID
- aName aSelf aModifier 'ModelElement' do_elem_func
-; // do_elem_proc
-
-MACRO elem_proc
- Literal IN aName
- %SUMMARY 'Процедура на элементе модели' ;
- aName .Name this.method.addr nil do_elem_proc
-; // elem_proc
-
-MACRO elem_generator
- Literal IN aName
- %SUMMARY 'Генератор содержимого элемента' ;
- aName .Name this.method.addr nil do_elem_proc
-; // elem_generator
-
-MACRO elem_ref_proc
- Literal IN aName
- %SUMMARY 'Процедура на элементе модели, который передаётся по ссылке' ;
- aName .Name this.method.addr Addr LVALUE_MOD do_elem_proc
-; // elem_ref_proc
-
 ARRAY word_func ElementList 
  Literal IN aListName
  %SUMMARY 'Возвращает итератор именованного списка на элементе' ;
@@ -121,6 +87,40 @@ ARRAY word_func Inherited.Words
  %SUMMARY 'Возвращает итератор элементов от которого наследуется наш элемент' ;
  Result := ( Self .ElementList %G )
 ; // Inherited.Words
+
+MACRO elem_func
+ Literal IN aName
+ %SUMMARY 'Функция на элементе модели' ;
+ aName .Name this.method.addr nil 'ModelElement' do_elem_func
+; // elem_func
+
+PROCEDURE do_elem_proc
+ STRING IN aName
+ ENGINE_WORD IN aSelf
+ ENGINE_WORD IN aModifier
+ %SUMMARY 'Реализация elem_proc и elem_generator' ;
+ Ctx:ClearTypeInfo
+ axiom:PushSymbol VOID
+ aName aSelf aModifier 'ModelElement' do_elem_func
+; // do_elem_proc
+
+MACRO elem_proc
+ Literal IN aName
+ %SUMMARY 'Процедура на элементе модели' ;
+ aName .Name this.method.addr nil do_elem_proc
+; // elem_proc
+
+MACRO elem_generator
+ Literal IN aName
+ %SUMMARY 'Генератор содержимого элемента' ;
+ aName .Name this.method.addr nil do_elem_proc
+; // elem_generator
+
+MACRO elem_ref_proc
+ Literal IN aName
+ %SUMMARY 'Процедура на элементе модели, который передаётся по ссылке' ;
+ aName .Name this.method.addr Addr LVALUE_MOD do_elem_proc
+; // elem_ref_proc
 
 BOOLEAN elem_func IsSummary
  %SUMMARY 
