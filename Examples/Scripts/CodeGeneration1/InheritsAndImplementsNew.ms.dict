@@ -7,7 +7,7 @@ USES
 ;
 
 MACRO __CompileCodeAndFree
- TtfwWord IN aCode
+ ENGINE_WORD IN aCode
  if ( aCode IS class::TkwBeginLikeCompiledCode ) then  
   ( aCode CodeIterator ==> CompileRef )
  else

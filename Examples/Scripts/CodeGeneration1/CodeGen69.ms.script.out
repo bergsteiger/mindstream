@@ -3808,7 +3808,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndIm
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : __CompileCodeAndFree
- TtfwWord OPERATOR :: IN : aCode
+ ENGINE_WORD OPERATOR :: IN : aCode
 ; // __CompileCodeAndFree
 IMMEDIATE OPERATOR :: MACRO :: NamedCodeProducer : Implements
  ^ OPERATOR :: IN : aCode
