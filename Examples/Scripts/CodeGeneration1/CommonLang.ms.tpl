@@ -29,12 +29,12 @@ elem_generator DumpAsIs
  %SUMMARY 'Процедура печатающая содержимое элемента модели. Рекурсивно.' ;
 
  CatSepIndent>
- [
-  Self .Stereotypes .reverted> ==> .Name
-   %REMARK 'Выводим стереотип элемента, рекурсивно'
-  Self .Name 
-   %REMARK 'Выводим имя элемента'
- ] OutToFile
+  ( Self .Stereotypes .reverted>
+    %REMARK 'Выводим стереотип элемента, рекурсивно'
+    .join>
+    [ Self ]
+    %REMARK 'Выводим имя элемента'
+    .map> .Name ) ?OutToFile
 
  'Родители ' (+)? 
   CatSepIndent> ( Self .Parents .reverted> .map> .Name ) ?OutToFile
