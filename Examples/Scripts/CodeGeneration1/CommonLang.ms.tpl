@@ -30,10 +30,8 @@ elem_generator DumpAsIs
 
  CatSepIndent>
   ( Self .Stereotypes .reverted>
-    %REMARK 'Выводим стереотип элемента, рекурсивно'
     .join>
     [ Self ]
-    %REMARK 'Выводим имя элемента'
     .map> .Name ) ?OutToFile
 
  'Родители ' (+)? 
