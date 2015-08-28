@@ -37,6 +37,11 @@ MACRO word_func
  aName .Name this.method.addr nil 'ENGINE_WORD' do_word_func
 ; // word_func
 
+MACRO word_iterator
+ [ 'ARRAY word_func' ] Ctx:Parser:PushArray
+ @SELF Ctx:SetWordProducerForCompiledClass
+; // word_iterator
+
 ARRAY word_func ElementList 
  Literal IN aListName
  %SUMMARY 'Возвращает итератор именованного списка на элементе' ;
