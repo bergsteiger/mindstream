@@ -64,31 +64,6 @@ MACRO elem_ref_proc
  aName .Name this.method.addr Addr LVALUE_MOD do_elem_proc
 ; // elem_ref_proc
 
-BOOLEAN elem_func IsSummary
- %SUMMARY 
- '
-  Определяет тот факт, что Self является документацией к элементу
- '
- ; // %SUMMARY
- ( Self .Name ) = '%SUM' =: Result
-; // IsSummary
-
-WordAlias .Stereotype %ST
-
-BOOLEAN elem_func IsModelElement
- %SUMMARY 
- '
-  Определяет тот факт, что Self является "элементом модели"
- '
- ; // %SUMMARY
- '<<' Self .Stereotype .Name StartsStr 
- AND
- ( '>>' Self .Stereotype .Name EndsStr )
-  =: Result
- //NOT ( Self .IsSummary )
-  //=: Result
-; // IsModelElement
-
 ARRAY elem_func ElementList 
  Literal IN aListName
  %SUMMARY 'Возвращает итератор именованного списка на элементе' ;
@@ -129,6 +104,31 @@ ARRAY elem_func ElementList
     ( l_List CodeIterator .map> MapElement .filter> FilterElement =: Result )
   )
 ; // ElementList
+
+BOOLEAN elem_func IsSummary
+ %SUMMARY 
+ '
+  Определяет тот факт, что Self является документацией к элементу
+ '
+ ; // %SUMMARY
+ ( Self .Name ) = '%SUM' =: Result
+; // IsSummary
+
+WordAlias .Stereotype %ST
+
+BOOLEAN elem_func IsModelElement
+ %SUMMARY 
+ '
+  Определяет тот факт, что Self является "элементом модели"
+ '
+ ; // %SUMMARY
+ '<<' Self .Stereotype .Name StartsStr 
+ AND
+ ( '>>' Self .Stereotype .Name EndsStr )
+  =: Result
+ //NOT ( Self .IsSummary )
+  //=: Result
+; // IsModelElement
 
 ARRAY elem_func Implemented
  %SUMMARY 'Возвращает итератор элементов которые реализует наш элемент' ;
