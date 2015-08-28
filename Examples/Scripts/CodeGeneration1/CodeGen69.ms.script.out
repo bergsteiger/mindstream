@@ -4284,6 +4284,7 @@ VOID OPERATOR :: PROCEDURE : CallGensList
 ; // CallGensList
 STRING CONST : cIndentChar
 STRING CONST : cPathSep
+ARRAY OPERATOR :: VAR : g_AllRoots
 GENERATOR OPERATOR :: VAR : g_CurrentGenerator
 STRING OPERATOR :: VAR : g_CurrentGeneratorName
 INTEGER OPERATOR :: VAR : g_Indent

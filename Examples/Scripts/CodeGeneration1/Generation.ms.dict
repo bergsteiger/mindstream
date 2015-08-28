@@ -191,6 +191,9 @@ elem_proc CallGen
  END
 ; // CallGen
 
+ARRAY VAR g_AllRoots
+( g_AllRoots := nil )
+
 PROCEDURE CallGens
  ARRAY IN anElements
  ARRAY IN aGenerators
