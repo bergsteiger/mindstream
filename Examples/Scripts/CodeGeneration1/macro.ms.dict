@@ -16,8 +16,6 @@ MACRO STACK_CHANGING_MACRO
  @SELF Ctx:SetWordProducerForCompiledClass
 ; // STACK_CHANGING_MACRO
 
-WordAlias __MACRO STACK_CHANGING_MACRO
-
 VOID IMMEDIATE operator _MACRO
  axiom:PushSymbol VOID
  axiom:PushSymbol IMMEDIATE
