@@ -152,7 +152,7 @@ ARRAY elem_func Inherited
 
 ARRAY elem_func Children
  %SUMMARY 'Возвращает итератор детей Self в "терминах определённой модели"' ;
- ( Self MembersIterator ) >filter> .IsModelElement =: Result
+ Result := ( Self MembersIterator .filter> .IsModelElement )
 ; // Children
 
 WordAlias .Parent %P
