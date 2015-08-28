@@ -6,3 +6,7 @@ REMARK 'Тут описываем взаимоотношения между классами'
 
 NamedWordProducer %IMPLEMENTS %R
 REMARK '- список реализуемых элементов'
+
+USES
+ InheritsAndImplementsNew.ms.dict
+;
