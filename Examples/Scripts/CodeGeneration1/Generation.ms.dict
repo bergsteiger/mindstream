@@ -103,6 +103,10 @@ STRING FUNCTION OutFileName
  [ l_OutPath aGeneratorName ] cPathSep strings:CatSep =: Result
 ; // OutFileName
 
+ModelElement VAR g_CurrentElementModel
+ %REMARK 'Текущий генерируемый элемент'
+( g_CurrentElementModel := nil )
+
 elem_proc CallCurrentGen
  FILE VAR l_PrevOutFile
  l_PrevOutFile := g_OutFile

@@ -4286,6 +4286,7 @@ STRING CONST : cIndentChar
 STRING CONST : cPathSep
 ARRAY OPERATOR :: VAR : g_AllGenerators
 ARRAY OPERATOR :: VAR : g_AllRoots
+ModelElement OPERATOR :: VAR : g_CurrentElementModel
 GENERATOR OPERATOR :: VAR : g_CurrentGenerator
 STRING OPERATOR :: VAR : g_CurrentGeneratorName
 INTEGER OPERATOR :: VAR : g_Indent
