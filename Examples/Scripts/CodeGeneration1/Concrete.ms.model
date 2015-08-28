@@ -86,10 +86,10 @@ concrete-model-begin 'Модель конкретного проекта Project1'
    Так вот Class2 - это наш ВТОРОЙ класс реализации внутри нашей программы Program1.
    '
    ; // %SUMMARY
-   %INHERITS
-    Addr Class1
+
+   Inherits Class1
     %REMARK 'Возможно наш проектный класс Class2 наследуется от класса Class1'
-   ; // %INHERITS
+
    %IMPLEMENTS
     Addr Interface1
     %REMARK 'Возможно наш проектный класс Class2 реализует интерфейс Interface1'
