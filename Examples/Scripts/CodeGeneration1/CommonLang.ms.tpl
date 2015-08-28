@@ -65,6 +65,8 @@ elem_generator pas
  %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
  %INHERITS  @ .DumpAsIs ;
 
+ '// На самом деле это Delphi' OutToFile
+ '' OutToFile
  call.inherited
 ; // pas
 

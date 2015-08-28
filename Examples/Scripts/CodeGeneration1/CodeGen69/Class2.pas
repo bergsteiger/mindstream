@@ -1,3 +1,5 @@
+// На самом деле это Delphi
+
 OPERATOR StereotypeStereotypeProducer <<@meta>> <<UMLClass>> <<Class>> Class2
 Родители Project1 Program1
 Наследуемые Class1
