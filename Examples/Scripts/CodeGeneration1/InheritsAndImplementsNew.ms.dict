@@ -1,8 +1,8 @@
-USES
- CodeDump.script
-;
+// InheritsAndImplementsNew.ms.dict
 
-Test InheritsTest
+USES
+ macro.ms.dict
+;
 
 IMMEDIATE operator __CompileCodeAndFree
  TtfwWord IN aCode
@@ -40,34 +40,3 @@ IMMEDIATE VOID operator NamedCodeProducer
 
 NamedCodeProducer Inherits %G
 NamedCodeProducer Implements %R
-
- : A
- ; // A
-
- : B
- ; // B
-
- : C
-  Inherits ( A B )
- ; // C
- 
- : I1
- ; // I1
- 
- : I2
- ; // I2
- 
- : D
-  Inherits A
-  Implements ( I1 I2 )
- ; // D
- 
- : E
-  Inherits A
-  Implements I1
- ; // D
- 
- @SELF DumpElement
-; // InheritsTest
-
-InheritsTest
