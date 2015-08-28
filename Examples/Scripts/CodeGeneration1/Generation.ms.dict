@@ -205,14 +205,19 @@ PROCEDURE CallGens
  %SUMMARY 'Вызывает все определённые генераторы на элементах массива anElements' ;
  g_AllRoots := anElements
  TRY 
-  for anElements (
-   ModelElement IN anElement
-   for aGenerators ( 
-    GENERATOR IN aGen 
-    anElement .CallGen aGen
-    %REMARK 'Вызываем на элементе anElement генератор aGen' 
-   ) // for aGenerators
-  ) // for anElements
+  g_AllGenerators := aGenerators
+  TRY
+   for anElements (
+    ModelElement IN anElement
+    for aGenerators ( 
+     GENERATOR IN aGen 
+     anElement .CallGen aGen
+     %REMARK 'Вызываем на элементе anElement генератор aGen' 
+    ) // for aGenerators
+   ) // for anElements
+  FINALLY
+   g_AllGenerators := nil
+  END
  FINALLY
   g_AllRoots := nil
  END
