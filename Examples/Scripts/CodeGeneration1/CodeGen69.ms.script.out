@@ -3846,13 +3846,13 @@ ARRAY OPERATOR :: MACRO :: word_func : .Inherited.Words
  ARRAY OPERATOR :: MACRO :: word_func :: .Inherited.Words : Result
  ENGINE_WORD OPERATOR :: IN : Self
 ; // .Inherited.Words
-VOID OPERATOR :: PROCEDURE : do_elem_func
+VOID OPERATOR :: PROCEDURE : do_word_func
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ENGINE_WORD OPERATOR :: IN : aModifier
  STRING OPERATOR :: IN : aName
  ENGINE_WORD OPERATOR :: IN : aSelf
  STRING OPERATOR :: IN : aType
-; // do_elem_func
+; // do_word_func
 IMMEDIATE VOID OPERATOR :: MACRO : word_func
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName

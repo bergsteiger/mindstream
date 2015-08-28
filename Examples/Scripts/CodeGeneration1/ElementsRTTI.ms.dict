@@ -19,7 +19,7 @@ ENGINE_WORD TYPE ModelElement
 MACRO elem_func
  Literal IN aName
  %SUMMARY 'Функция на элементе модели' ;
- aName .Name this.method.addr nil 'ModelElement' do_elem_func
+ aName .Name this.method.addr nil 'ModelElement' do_word_func
 ; // elem_func
 
 PROCEDURE do_elem_proc
@@ -29,7 +29,7 @@ PROCEDURE do_elem_proc
  %SUMMARY 'Реализация elem_proc и elem_generator' ;
  Ctx:ClearTypeInfo
  axiom:PushSymbol VOID
- aName aSelf aModifier 'ModelElement' do_elem_func
+ aName aSelf aModifier 'ModelElement' do_word_func
 ; // do_elem_proc
 
 MACRO elem_proc

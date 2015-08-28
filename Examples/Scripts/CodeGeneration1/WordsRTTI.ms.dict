@@ -15,7 +15,7 @@ USES
 EXPORTS
  EngineTypes.ms.dict
 
-PROCEDURE do_elem_func
+PROCEDURE do_word_func
  STRING IN aName
  ENGINE_WORD IN aSelf
  ENGINE_WORD IN aModifier
@@ -29,12 +29,12 @@ PROCEDURE do_elem_func
   ( aModifier .Name Ctx:Parser:PushSymbol )
  axiom:PushSymbol in
  'Self' Ctx:Parser:PushSymbol
-; // do_elem_func
+; // do_word_func
 
 MACRO word_func
  Literal IN aName
  %SUMMARY 'Функция на элементе модели' ;
- aName .Name this.method.addr nil 'ENGINE_WORD' do_elem_func
+ aName .Name this.method.addr nil 'ENGINE_WORD' do_word_func
 ; // word_func
 
 ARRAY word_func ElementList 
