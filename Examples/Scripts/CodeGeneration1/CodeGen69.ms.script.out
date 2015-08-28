@@ -4060,7 +4060,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\classRelation
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  ;
-IMMEDIATE VOID OPERATOR :: NamedWordProducer : %IMPLEMENTS
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms.model
  Uses: 
   axiom:axiom
@@ -4371,11 +4370,11 @@ ARRAY OPERATOR :: MACRO :: elem_func : .ElementList
  ARRAY OPERATOR :: MACRO :: elem_func :: .ElementList : Result
  ModelElement OPERATOR :: IN : Self
 ; // .ElementList
-ARRAY OPERATOR :: MACRO :: elem_func : .Implements
+ARRAY OPERATOR :: MACRO :: elem_func : .Implemented
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ARRAY OPERATOR :: MACRO :: elem_func :: .Implements : Result
+ ARRAY OPERATOR :: MACRO :: elem_func :: .Implemented : Result
  ModelElement OPERATOR :: IN : Self
-; // .Implements
+; // .Implemented
 ARRAY OPERATOR :: MACRO :: elem_func : .Inherited
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ARRAY OPERATOR :: MACRO :: elem_func :: .Inherited : Result

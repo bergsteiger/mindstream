@@ -130,10 +130,10 @@ ARRAY elem_func ElementList
   )
 ; // ElementList
 
-ARRAY elem_func Implements
+ARRAY elem_func Implemented
  %SUMMARY 'Возвращает итератор элементов которые реализуют наш элемент' ;
  Result := ( Self .ElementList %R )
-; // Implements
+; // Implemented
 
 ARRAY elem_func Inherited
  %SUMMARY 'Возвращает итератор элементов от которого наследуется наш элемент' ;

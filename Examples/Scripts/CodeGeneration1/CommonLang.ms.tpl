@@ -37,7 +37,7 @@ elem_generator DumpAsIs
   CatSepIndent> ( Self .Inherited .map> .Name ) ?OutToFile
 
  'Реализуемые ' (+)? 
-  CatSepIndent> ( Self .Implements .map> .Name ) ?OutToFile
+  CatSepIndent> ( Self .Implemented .map> .Name ) ?OutToFile
 
   Self .generate.children
   %REMARK 'Выводим детей элемента, тем же самым генератором'
