@@ -5,7 +5,7 @@ USES
  EngineTypes.ms.dict
 ;
 
-TtfwWord TYPE WORD_REF
+ENGINE_WORD TYPE WORD_REF
  %REMARK '—сылка на слово'
 
 WORD_REF OPERATOR pop:Word:GetRefDeepest
