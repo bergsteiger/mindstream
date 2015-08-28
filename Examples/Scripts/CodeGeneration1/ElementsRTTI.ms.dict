@@ -101,7 +101,7 @@ ARRAY elem_func ElementList
    if ( l_List NotValid ) then
     ( Result := [ ] )
    else 
-    ( l_List CodeIterator .map> MapElement .filter> FilterElement =: Result )
+    ( Result := ( l_List CodeIterator .map> MapElement .filter> FilterElement ) )
   )
 ; // ElementList
 
