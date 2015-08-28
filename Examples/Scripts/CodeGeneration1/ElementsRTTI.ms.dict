@@ -68,6 +68,7 @@ BOOLEAN elem_func IsModelElement
 
 MACRO elem_iterator
  [ 'ARRAY elem_func' ] Ctx:Parser:PushArray
+ @SELF Ctx:SetWordProducerForCompiledClass
 ; // elem_iterator
 
 elem_iterator Implemented
