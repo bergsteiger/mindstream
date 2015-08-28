@@ -105,6 +105,16 @@ ARRAY elem_func ElementList
   )
 ; // ElementList
 
+ARRAY elem_func Implemented.Words
+ %SUMMARY 'Возвращает итератор элементов которые реализует наш элемент' ;
+ Result := ( Self .ElementList %R )
+; // Implemented
+
+ARRAY elem_func Inherited.Words
+ %SUMMARY 'Возвращает итератор элементов от которого наследуется наш элемент' ;
+ Result := ( Self .ElementList %G )
+; // Inherited
+
 BOOLEAN elem_func IsSummary
  %SUMMARY 
  '
@@ -132,12 +142,12 @@ BOOLEAN elem_func IsModelElement
 
 ARRAY elem_func Implemented
  %SUMMARY 'Возвращает итератор элементов которые реализует наш элемент' ;
- Result := ( Self .ElementList %R .filter> .IsModelElement )
+ Result := ( Self .Implemented.Words .filter> .IsModelElement )
 ; // Implemented
 
 ARRAY elem_func Inherited
  %SUMMARY 'Возвращает итератор элементов от которого наследуется наш элемент' ;
- Result := ( Self .ElementList %G )
+ Result := ( Self .Inherited.Words )
 ; // Inherited
 
 ARRAY elem_func Children

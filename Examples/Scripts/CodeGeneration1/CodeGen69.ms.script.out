@@ -4375,11 +4375,21 @@ ARRAY OPERATOR :: MACRO :: elem_func : .Implemented
  ARRAY OPERATOR :: MACRO :: elem_func :: .Implemented : Result
  ModelElement OPERATOR :: IN : Self
 ; // .Implemented
+ARRAY OPERATOR :: MACRO :: elem_func : .Implemented.Words
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: elem_func :: .Implemented.Words : Result
+ ModelElement OPERATOR :: IN : Self
+; // .Implemented.Words
 ARRAY OPERATOR :: MACRO :: elem_func : .Inherited
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ARRAY OPERATOR :: MACRO :: elem_func :: .Inherited : Result
  ModelElement OPERATOR :: IN : Self
 ; // .Inherited
+ARRAY OPERATOR :: MACRO :: elem_func : .Inherited.Words
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: elem_func :: .Inherited.Words : Result
+ ModelElement OPERATOR :: IN : Self
+; // .Inherited.Words
 BOOLEAN OPERATOR :: MACRO :: elem_func : .IsModelElement
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsModelElement : Result
