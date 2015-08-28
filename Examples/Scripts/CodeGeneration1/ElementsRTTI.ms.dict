@@ -136,8 +136,6 @@ BOOLEAN elem_func IsModelElement
  AND
  ( '>>' Self .Stereotype .Name EndsStr )
   =: Result
- //NOT ( Self .IsSummary )
-  //=: Result
 ; // IsModelElement
 
 ARRAY elem_func Implemented
@@ -163,5 +161,5 @@ ARRAY elem_func Parents
 ; // Parents
 
 ARRAY elem_func Stereotypes
- Self LIST .Stereotype =: Result
+ Result := ( Self LIST .Stereotype )
 ; // Stereotypes
