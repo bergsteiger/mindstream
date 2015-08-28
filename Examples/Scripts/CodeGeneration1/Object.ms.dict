@@ -49,16 +49,8 @@ ARRAY FUNCTION ELEMLIST STRING IN aListName IN %S
   )
 ; // ELEMLIST
 
-ARRAY FUNCTION %R 
- IN %S
- Result := ( '%R' %S ELEMLIST )
-;
-
+WordAlias %R .Implemented.Words
 WordAlias %G .Inherited.Words
-/*{ARRAY FUNCTION %G 
- IN %S
- Result := ( '%G' %S ELEMLIST )
-;}*/
 
 ARRAY FUNCTION %Fld 
  IN %S

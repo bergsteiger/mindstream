@@ -3647,9 +3647,10 @@ ARRAY OPERATOR :: MACRO :: word_func : %G
  ARRAY OPERATOR :: MACRO :: word_func :: .Inherited.Words : Result
  ENGINE_WORD OPERATOR :: IN : Self
 ; // %G
-ARRAY FUNCTION : %R
- OPERATOR :: IN : %S
- ARRAY FUNCTION :: %R : Result
+ARRAY OPERATOR :: MACRO :: word_func : %R
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: MACRO :: word_func :: .Implemented.Words : Result
+ ENGINE_WORD OPERATOR :: IN : Self
 ; // %R
 OPERATOR :: class_impl : _:Object
  OPERATOR :: NamedWordProducer :: %FIELDS : %Fld
