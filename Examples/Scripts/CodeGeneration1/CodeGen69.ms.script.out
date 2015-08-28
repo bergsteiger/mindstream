@@ -3806,7 +3806,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndIm
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
  ;
-IMMEDIATE OPERATOR : __CompileCodeAndFree
+IMMEDIATE OPERATOR :: STACK_CHANGING_MACRO : __CompileCodeAndFree
  TtfwWord OPERATOR :: IN : aCode
 ; // __CompileCodeAndFree
 IMMEDIATE OPERATOR :: MACRO :: NamedCodeProducer : Implements
