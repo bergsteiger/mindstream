@@ -10,6 +10,7 @@ USES
  ElementsRTTI.ms.dict
  Generation.ms.dict
  string.ms.dict
+ InheritsAndImplementsNew.ms.dict
 ;
 
 STRING FUNCTION CatSepIndent>
