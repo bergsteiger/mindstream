@@ -16,7 +16,7 @@ STRING FUNCTION CatSepIndent>
  CatSep> cIndentChar aValues =: Result
 ; // CatSepIndent>
 
-elem_proc DumpAsIs
+elem_generator DumpAsIs
  %SUMMARY 'Процедура печатающая содержимое элемента модели. Рекурсивно.' ;
 
  CatSepIndent>
@@ -46,6 +46,7 @@ elem_generator dump
  %SUMMARY 'Генератор выводящий дамп элемента модели.' ;
  %GEN_PROPERTY Name 'dump'
  %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
+ %INHERITS  @ .DumpAsIs ;
 
  Self .DumpAsIs
  %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
