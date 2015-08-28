@@ -6,6 +6,7 @@ USES
  params.ms.dict
  NoStrangeSymbols.ms.dict
  arrays.ms.dict
+ macro.ms.dict
  ElementsRTTI.ms.dict
  Generation.ms.dict
  string.ms.dict
@@ -15,6 +16,12 @@ STRING FUNCTION CatSepIndent>
  ARRAY right aValues
  CatSep> cIndentChar aValues =: Result
 ; // CatSepIndent>
+
+MACRO call.inherited
+ [ 
+   '@SELF .Inherited ==> ( Self SWAP DO )'
+ ] Ctx:Parser:PushArray
+; // call.inherited
 
 elem_generator DumpAsIs
  %SUMMARY 'Процедура печатающая содержимое элемента модели. Рекурсивно.' ;

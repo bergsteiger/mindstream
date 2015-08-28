@@ -5096,6 +5096,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\ElementsRTTI.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Generation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
@@ -5130,6 +5131,7 @@ VOID OPERATOR :: MACRO :: elem_generator : .script
  STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
  ModelElement OPERATOR :: IN : Self
 ; // .script
+IMMEDIATE VOID OPERATOR :: MACRO : call.inherited
 STRING FUNCTION : CatSepIndent>
  ^ OPERATOR :: IN : _aValues
  IMMEDIATE VOID OPERATOR : aValues
