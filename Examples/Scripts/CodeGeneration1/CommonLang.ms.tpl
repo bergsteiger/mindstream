@@ -48,8 +48,7 @@ elem_generator dump
  %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
  %INHERITS  @ .DumpAsIs ;
 
- Self .DumpAsIs
- %REMARK 'Пока выводим всё "как есть", без трансформации в целевой язык'
+ @SELF .Inherited ==> ( Self SWAP DO )
 ; // dump
 
 elem_generator pas

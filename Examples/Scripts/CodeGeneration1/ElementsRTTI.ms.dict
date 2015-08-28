@@ -133,12 +133,12 @@ ARRAY elem_func ElementList
 ARRAY elem_func Implements
  %SUMMARY 'Возвращает итератор элементов которые реализуют наш элемент' ;
  Result := ( Self .ElementList %R )
-;
+; // Implements
 
 ARRAY elem_func Inherited
  %SUMMARY 'Возвращает итератор элементов от которого наследуется наш элемент' ;
  Result := ( Self .ElementList %G )
-;
+; // Inherited
 
 ARRAY elem_func Children
  %SUMMARY 'Возвращает итератор детей Self в "терминах определённой модели"' ;
