@@ -12,9 +12,6 @@ USES
  arrays.ms.dict
 ;
 
-ENGINE_WORD TYPE ModelElement
-%REMARK 'Элемент модели'
-
 PROCEDURE do_elem_func
  STRING IN aName
  ENGINE_WORD IN aSelf
@@ -87,6 +84,9 @@ ARRAY word_func Inherited.Words
  %SUMMARY 'Возвращает итератор элементов от которого наследуется наш элемент' ;
  Result := ( Self .ElementList %G )
 ; // Inherited.Words
+
+ENGINE_WORD TYPE ModelElement
+%REMARK 'Элемент модели'
 
 MACRO elem_func
  Literal IN aName
