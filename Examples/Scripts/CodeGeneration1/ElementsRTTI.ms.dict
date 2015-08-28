@@ -78,7 +78,7 @@ ARRAY elem_func ElementList
   OBJECT IN aMember
 
   VAR l_Element
-  aMember DO =: l_Element
+  l_Element := ( aMember DO )
   // - берём ссылку на элемент модели
   if ( l_Element IsVoid ) then
   // - пропускаем невалидные ссылки
