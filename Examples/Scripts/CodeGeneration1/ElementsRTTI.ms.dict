@@ -131,7 +131,7 @@ ARRAY elem_func ElementList
 ; // ElementList
 
 ARRAY elem_func Implemented
- %SUMMARY 'Возвращает итератор элементов которые реализуют наш элемент' ;
+ %SUMMARY 'Возвращает итератор элементов которые реализует наш элемент' ;
  Result := ( Self .ElementList %R )
 ; // Implemented
 
