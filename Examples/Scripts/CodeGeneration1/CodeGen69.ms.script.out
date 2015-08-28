@@ -3680,11 +3680,6 @@ OBJECT FUNCTION : DoMember
  OBJECT OPERATOR :: IN : aMember
  OBJECT FUNCTION :: DoMember : Result
 ; // DoMember
-ARRAY FUNCTION : ELEMLIST
- OPERATOR :: IN : %S
- STRING OPERATOR :: IN : aListName
- ARRAY FUNCTION :: ELEMLIST : Result
-; // ELEMLIST
 : : FieldByOffset
  ^ OPERATOR :: IN : _anOffset
  IMMEDIATE VOID OPERATOR : anOffset

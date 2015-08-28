@@ -33,28 +33,11 @@ BOOLEAN FUNCTION FilterMember
  Result := ( aMember NotValid ! )
 ; // FilterMember
  
-ARRAY FUNCTION ELEMLIST STRING IN aListName IN %S
- if ( %S NotValid ) then
-  ( Result := [ ] )
- else
-  (
-   VAR l_List
-   l_List := ( %S %% aListName )
-   
-   if ( l_List NotValid ) then
-    ( Result := [ ] )
-   else 
-//    ( Result := ( [ l_List DO ] ) )
-    ( Result := ( @ FilterMember ( @ DoMember ( l_List CodeIterator ) MAP ) FILTER ) ) 
-  )
-; // ELEMLIST
-
 WordAlias %R .Implemented.Words
 WordAlias %G .Inherited.Words
 
 ARRAY FUNCTION %Fld 
  IN %S
- //Result := ( '%Fld' %S ELEMLIST )
  VAR l_List
  %S %% '%Fld' =: l_List
  if ( l_List NotValid ) then
