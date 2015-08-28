@@ -4,7 +4,7 @@ USES
  macro.ms.dict
 ;
 
-STACK_CHANGING_MACRO __CompileCodeAndFree
+MACRO __CompileCodeAndFree
  TtfwWord IN aCode
  if ( aCode IS class::TkwBeginLikeCompiledCode ) then  
   ( aCode CodeIterator ==> CompileRef )
