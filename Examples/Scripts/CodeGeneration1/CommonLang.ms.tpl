@@ -21,7 +21,7 @@ STRING FUNCTION CatSepIndent>
 MACRO call.inherited
  // - пон€тно, что это надо делать через честную компил€цию ссылки на Inherited
  [ 
-   '@SELF .Inherited ==> ( Self SWAP DO )'
+   '@SELF .Inherited.Words ==> ( Self SWAP DO )'
  ] Ctx:Parser:PushArray
 ; // call.inherited
 
