@@ -121,7 +121,7 @@ BOOLEAN elem_func IsSummary
   Определяет тот факт, что Self является документацией к элементу
  '
  ; // %SUMMARY
- ( Self .Name ) = '%SUM' =: Result
+ Result := ( ( Self .Name ) = '%SUM' )
 ; // IsSummary
 
 WordAlias .Stereotype %ST
