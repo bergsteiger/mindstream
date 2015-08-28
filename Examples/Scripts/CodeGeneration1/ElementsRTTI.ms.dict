@@ -112,12 +112,12 @@ ARRAY word_func ElementList
   )
 ; // ElementList
 
-ARRAY elem_func Implemented.Words
+ARRAY word_func Implemented.Words
  %SUMMARY 'Возвращает итератор элементов которые реализует наш элемент' ;
  Result := ( Self .ElementList %R )
 ; // Implemented
 
-ARRAY elem_func Inherited.Words
+ARRAY word_func Inherited.Words
  %SUMMARY 'Возвращает итератор элементов от которого наследуется наш элемент' ;
  Result := ( Self .ElementList %G )
 ; // Inherited
