@@ -159,7 +159,7 @@ WordAlias .Parent %P
 
 ARRAY elem_func Parents
  %SUMMARY 'Возвращает итератор родителей Self в "терминах определённой модели"' ;
- ( Self LIST .Parent ) >filter> .IsModelElement =: Result
+ Result := ( ( Self LIST .Parent ) .filter> .IsModelElement )
 ; // Parents
 
 ARRAY elem_func Stereotypes
