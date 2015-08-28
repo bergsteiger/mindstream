@@ -55,7 +55,7 @@ elem_generator dump
  %SUMMARY 'Генератор выводящий дамп элемента модели.' ;
  %GEN_PROPERTY Name 'dump'
  %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
- %INHERITS  @ .DumpAsIs ;
+ Inherits .DumpAsIs
 
  call.inherited
 ; // dump

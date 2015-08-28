@@ -4501,7 +4501,7 @@ VOID OPERATOR :: MACRO :: elem_generator : .c++
  ModelElement OPERATOR :: IN : Self
 ; // .c++
 VOID OPERATOR :: MACRO :: elem_generator : .dump
- OPERATOR :: NamedWordProducer :: %INHERITS : %G
+ OPERATOR :: NamedCodeProducer :: Inherits : %G
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
  ModelElement OPERATOR :: IN : Self
