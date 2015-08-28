@@ -42,7 +42,7 @@ MACRO word_iterator
  @SELF Ctx:SetWordProducerForCompiledClass
 ; // word_iterator
 
-ARRAY word_func ElementList 
+word_iterator ElementList 
  Literal IN aListName
  %SUMMARY 'Возвращает итератор именованного списка на элементе' ;
 
@@ -83,25 +83,25 @@ ARRAY word_func ElementList
   )
 ; // ElementList
 
-ARRAY word_func Implemented.Words
+word_iterator Implemented.Words
  %SUMMARY 'Возвращает итератор элементов которые реализует наш элемент' ;
  Result := ( Self .ElementList %R )
 ; // Implemented.Words
 
-ARRAY word_func Inherited.Words
+word_iterator Inherited.Words
  %SUMMARY 'Возвращает итератор элементов от которого наследуется наш элемент' ;
  Result := ( Self .ElementList %G )
 ; // Inherited.Words
 
 WordAlias .Parent %P
 
-ARRAY word_func Parent.Words
+word_iterator Parent.Words
  %SUMMARY 'Возвращает итератор родителей Self в "терминах определённой модели"' ;
  Result := ( Self LIST .Parent )
 ; // Parents
 
 WordAlias .Stereotype %ST
 
-ARRAY word_func Stereotype.Words
+word_iterator Stereotype.Words
  Result := ( Self LIST .Stereotype )
 ; // Stereotypes
