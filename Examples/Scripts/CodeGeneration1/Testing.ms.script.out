@@ -4,6 +4,30 @@ VOID Test TestingTest
    'Если aSuffix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку'
   ; // %SUMMARY %SUM
   
+  %%Tests %Tests
+   VOID Test T1
+    ''
+    (+)?
+    'B'
+    .
+   ; // VOID Test T1
+   
+   VOID Test T2
+    'A'
+    (+)?
+    'B'
+    .
+   ; // VOID Test T2
+   
+   VOID Test T3
+    'A'
+    (+)?
+    ''
+    .
+   ; // VOID Test T3
+   
+  ; // %%Tests %Tests
+  
   ^ IN _aSuffix
   STRING IN aPrefix
   IMMEDIATE VOID OPERATOR aSuffix

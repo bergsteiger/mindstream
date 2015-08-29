@@ -2,6 +2,7 @@
 
 USES
  implementation.ms.dict
+ Testing.ms.dict
 ;
 
 Test TestingTest
@@ -18,11 +19,11 @@ STRING FUNCTION (+)?
 ; // (+)?
 
 implementation (+)?
-/*{ %%Tests
+ %%Tests
   Test T1 '' (+)? 'B' Print ;
   Test T2 'A' (+)? 'B' Print ;
   Test T3 'A' (+)? '' Print ;
- ; // %%Tests}*/
+ ; // %%Tests
 end.
 
 USES
