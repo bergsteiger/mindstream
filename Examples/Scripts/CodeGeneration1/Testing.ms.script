@@ -37,7 +37,9 @@ Tests (+)?
 
 VOID operator RunTests
  Literal IN aName
- cTests aName |N Cat Print
+ STRING VAR l_Name
+ cTests aName |N Cat >>> l_Name
+ l_Name Print
 ; // RunTests
 
 RunTests (+)?

@@ -40,10 +40,14 @@ VOID Test TestingTest
   'Tests:'
  VOID OPERATOR RunTests
   ^L IN aName
+  STRING VAR l_Name
   cTests
   aName
   |N
   Cat
+  >>>
+  l_Name
+  l_Name
   .
  ; // VOID OPERATOR RunTests
  
