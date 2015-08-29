@@ -42,7 +42,8 @@ MACRO RunTests
  [
   '@'
   l_Name
-  'CodeIterator'
+  'MembersIterator'
+  '==>'
   '@ Print DO' 
  ] Ctx:Parser:PushArray 
  //l_Name CompileValue
