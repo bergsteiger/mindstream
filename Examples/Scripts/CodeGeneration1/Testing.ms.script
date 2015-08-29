@@ -19,6 +19,8 @@ STRING FUNCTION (+)?
 ; // (+)?
 
 MACRO Tests
+ [
+ ] Ctx:Parser:PushArray
 ; // Tests
 
 implementation (+)?

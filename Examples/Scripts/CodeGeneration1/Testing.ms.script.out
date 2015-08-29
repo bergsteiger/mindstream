@@ -60,6 +60,9 @@ VOID Test TestingTest
  ; // STRING FUNCTION (+)?
  
  IMMEDIATE VOID MACRO Tests
+  [
+  ]
+  Ctx:Parser:PushArray
  ; // IMMEDIATE VOID MACRO Tests
  
  TestingTest
