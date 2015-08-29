@@ -33,6 +33,9 @@ Tests (+)?
   Test T3 'A' (+)? '' Print ;
 ; // Tests (+)?
 
+VOID operator RunTests
+; // RunTests
+
 USES
  CodeDump.ms.dict
 ;

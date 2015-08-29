@@ -35,6 +35,9 @@ VOID Test TestingTest
    )
  ; // STRING FUNCTION (+)?
  
+ VOID OPERATOR RunTests
+ ; // VOID OPERATOR RunTests
+ 
  IMMEDIATE VOID MACRO Tests
   ^L IN aName
   [
