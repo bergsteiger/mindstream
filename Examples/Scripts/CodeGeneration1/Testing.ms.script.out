@@ -56,7 +56,10 @@ VOID Test TestingTest
    l_Name
    'MembersIterator'
    '==>'
-   'DO'
+   '('
+   'IN anItem'
+   'anItem DO'
+   ')'
   ]
   Ctx:Parser:PushArray
  ; // IMMEDIATE VOID MACRO RunTests
@@ -115,7 +118,11 @@ VOID Test TestingTest
  Tests:(+)?
  MembersIterator
  IT
- DO
+ (
+  IN anItem
+  anItem
+  DO
+ )
  WHILE
  (
   StackLevel

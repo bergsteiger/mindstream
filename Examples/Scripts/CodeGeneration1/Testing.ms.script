@@ -45,10 +45,11 @@ MACRO RunTests
   l_Name
   'MembersIterator'
   '==>'
-  'DO' 
+  '('
+  'IN anItem'
+  'anItem DO'
+  ')' 
  ] Ctx:Parser:PushArray 
- //l_Name CompileValue
- //@ Print CompileValue
 ; // RunTests
 
 RunTests (+)?
