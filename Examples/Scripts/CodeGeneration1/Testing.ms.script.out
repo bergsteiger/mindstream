@@ -1,4 +1,4 @@
-Tests:(+)?
+TkwCompiledProcedure
 VOID Test TestingTest
  STRING FUNCTION (+)?
   %SUMMARY %SUM
@@ -47,11 +47,11 @@ VOID Test TestingTest
   Cat
   >>>
   l_Name
-  l_Name
-  CompileValue
-  @
-  .
-  CompileValue
+  [
+   l_Name
+   '@ Print'
+  ]
+  Ctx:Parser:PushArray
  ; // IMMEDIATE VOID MACRO RunTests
  
  IMMEDIATE VOID MACRO Tests
@@ -91,6 +91,14 @@ VOID Test TestingTest
  ; // VOID OPERATOR Tests:(+)?
  
  Tests:(+)?
+ @
+ .
+ WHILE
+ (
+  StackLevel
+  >
+  0
+ )
  .
  TestingTest
  DumpElement

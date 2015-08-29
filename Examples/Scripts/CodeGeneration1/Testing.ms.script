@@ -39,11 +39,17 @@ MACRO RunTests
  Literal IN aName
  STRING VAR l_Name
  cTests aName |N Cat >>> l_Name
- l_Name CompileValue
- @ Print CompileValue
+ [
+  l_Name
+  '@ Print' 
+ ] Ctx:Parser:PushArray 
+ //l_Name CompileValue
+ //@ Print CompileValue
 ; // RunTests
 
 RunTests (+)?
+
+WHILE ( StackLevel > 0 ) .
 
 USES
  CodeDump.ms.dict
