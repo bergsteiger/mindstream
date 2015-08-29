@@ -68,4 +68,13 @@ STRING FUNCTION strings:CatSep>
  aValues aSep strings:CatSep =: Result
 ; // strings:CatSep>
 
+Tests strings:CatSep>
+ Test T1 strings:CatSep> ' ' [ 'A' 'B' ] Print ;
+ Test T2 strings:CatSep> ' ' [ 'A ' 'B' ] Print ;
+ Test T3 strings:CatSep> ' ' [ 'A ' ' B' ] Print ;
+ Test T4 strings:CatSep> ' ' [ 'A' ' B' ] Print ;
+ Test T5 strings:CatSep> ' ' [ '' 'B' ] Print ;
+ Test T6 strings:CatSep> ' ' [ 'A' '' ] Print ;
+; // Tests strings:CatSep>
+ 
 WordAlias CatSep> strings:CatSep>

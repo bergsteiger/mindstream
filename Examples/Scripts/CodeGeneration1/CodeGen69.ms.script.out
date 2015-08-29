@@ -3523,6 +3523,17 @@ VOID OPERATOR : Tests:?(+)
  VOID OPERATOR :: Test : T3
 ; // Tests:?(+)
 VOID OPERATOR : Tests:any:Cat
+ VOID OPERATOR :: Test : T1
+ VOID OPERATOR :: Test : T2
+; // Tests:any:Cat
+VOID OPERATOR : Tests:strings:CatSep>
+ VOID OPERATOR :: Test : T1
+ VOID OPERATOR :: Test : T2
+ VOID OPERATOR :: Test : T3
+ VOID OPERATOR :: Test : T4
+ VOID OPERATOR :: Test : T5
+ VOID OPERATOR :: Test : T6
+; // Tests:strings:CatSep>
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
  Uses: 
   axiom:axiom
