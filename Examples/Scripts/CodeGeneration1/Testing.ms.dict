@@ -1,1 +1,36 @@
 // Testing.ms.dict
+
+USES
+ macro.ms.dict
+ params.ms.dict
+;
+
+EXPORTS
+ params.ms.dict
+
+CONST cTests 'Tests:'
+
+MACRO Tests
+ Literal IN aName
+ [
+   'VOID axiom:operator'
+   cTests aName |N Cat
+ ] Ctx:Parser:PushArray
+; // Tests
+
+MACRO RunTests
+ Literal IN aName
+ STRING VAR l_Name
+ cTests aName |N Cat >>> l_Name
+ [
+  '@'
+  l_Name
+  'MembersIterator'
+  '==>'
+  '('
+  'IN anItem'
+  'anItem |N Print'
+  'anItem DO'
+  ')' 
+ ] Ctx:Parser:PushArray 
+; // RunTests

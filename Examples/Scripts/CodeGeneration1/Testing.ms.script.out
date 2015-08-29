@@ -9,43 +9,6 @@ AD
 T5
 A123
 VOID Test TestingTest
- STRING CONST cTests
-  'Tests:'
- IMMEDIATE VOID MACRO RunTests
-  ^L IN aName
-  STRING VAR l_Name
-  cTests
-  aName
-  |N
-  Cat
-  >>>
-  l_Name
-  [
-   '@'
-   l_Name
-   'MembersIterator'
-   '==>'
-   '('
-   'IN anItem'
-   'anItem |N Print'
-   'anItem DO'
-   ')'
-  ]
-  Ctx:Parser:PushArray
- ; // IMMEDIATE VOID MACRO RunTests
- 
- IMMEDIATE VOID MACRO Tests
-  ^L IN aName
-  [
-   'VOID axiom:operator'
-   cTests
-   aName
-   |N
-   Cat
-  ]
-  Ctx:Parser:PushArray
- ; // IMMEDIATE VOID MACRO Tests
- 
  VOID OPERATOR Tests:(+)?
   VOID Test T1
    ''
