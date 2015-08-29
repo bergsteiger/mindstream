@@ -47,6 +47,7 @@ MACRO RunTests
   '==>'
   '('
   'IN anItem'
+  'anItem |N Print'
   'anItem DO'
   ')' 
  ] Ctx:Parser:PushArray 

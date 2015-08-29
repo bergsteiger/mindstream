@@ -1,7 +1,12 @@
+T1
 B
+T2
 AB
+T3
 
+T4
 AD
+T5
 A123
 VOID Test TestingTest
  STRING FUNCTION (+)?
@@ -58,6 +63,7 @@ VOID Test TestingTest
    '==>'
    '('
    'IN anItem'
+   'anItem |N Print'
    'anItem DO'
    ')'
   ]
@@ -120,6 +126,9 @@ VOID Test TestingTest
  IT
  (
   IN anItem
+  anItem
+  |N
+  .
   anItem
   DO
  )
