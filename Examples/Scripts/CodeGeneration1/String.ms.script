@@ -3,9 +3,7 @@ USES
  Testing.ms.dict
 ;
 
-'' (+)? 'B' Print
-'A' (+)? 'B' Print
-'A' (+)? '' Print
+RunTests (+)?
 '------------------' Print
 
 '' ?(+) 'B' Print
