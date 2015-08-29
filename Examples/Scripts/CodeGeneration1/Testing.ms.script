@@ -18,6 +18,9 @@ STRING FUNCTION (+)?
   ( aPrefix l_Suffix Cat =: Result )
 ; // (+)?
 
+MACRO Tests
+; // Tests
+
 implementation (+)?
  %%Tests
   Test T1 '' (+)? 'B' Print ;
