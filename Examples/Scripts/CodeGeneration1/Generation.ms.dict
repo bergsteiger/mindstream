@@ -119,10 +119,13 @@ elem_proc CallCurrentGen
  l_PrevIndent := g_Indent
  TRY
   TRY
-   g_Indent := 0 // - тут вообще ещё надо проверять - переоткрываем мы файл или нет
-   STRING VAR l_FileName
-   l_FileName := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) )
-   g_OutFile := ( l_FileName File:OpenWrite )
+   if ( Self .IsElementNeed.OwnFile ) then
+   begin
+    g_Indent := 0 // - тут вообще ещё надо проверять - переоткрываем мы файл или нет
+    STRING VAR l_FileName
+    l_FileName := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) )
+    g_OutFile := ( l_FileName File:OpenWrite )
+   end
    TRY
     g_CurrentGenerator IsNil ! ?ASSURE 'Текущй генератор пустой'
     ModelElement VAR l_CurrentElementModel
