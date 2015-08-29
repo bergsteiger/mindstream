@@ -34,6 +34,7 @@ Tests (+)?
  Test T2 'A' (+)? 'B' Print ;
  Test T3 'A' (+)? '' Print ;
  Test T4 'A' (+)? 'D' Print ;
+ Test T5 'A' (+)? '123' Print ;
 ; // Tests (+)?
 
 MACRO RunTests
@@ -44,7 +45,6 @@ MACRO RunTests
   '@'
   l_Name
   'MembersIterator'
-  'Reverted'
   '==>'
   'DO' 
  ] Ctx:Parser:PushArray 
