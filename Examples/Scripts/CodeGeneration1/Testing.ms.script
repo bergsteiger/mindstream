@@ -27,11 +27,11 @@ MACRO Tests
 ; // Tests
 
 Tests (+)?
-/*{ %%Tests
+ %%Tests
   Test T1 '' (+)? 'B' Print ;
   Test T2 'A' (+)? 'B' Print ;
   Test T3 'A' (+)? '' Print ;
- ; // %%Tests}*/
+ ; // %%Tests
 ; // Tests (+)?
 
 USES
