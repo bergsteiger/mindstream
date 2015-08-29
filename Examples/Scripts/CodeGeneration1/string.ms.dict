@@ -51,6 +51,12 @@ STRING FUNCTION ?(+)
   ( aPrefix aSuffix Cat =: Result )
 ; // ?(+)
 
+Tests ?(+)
+ Test T1 '' ?(+) 'B' Print ;
+ Test T2 'A' ?(+) 'B' Print ;
+ Test T3 'A' ?(+) '' Print ;
+; // Tests ?(+)
+
 STRING FUNCTION strings:CatSep>
  STRING right aSep
  ARRAY right aValues

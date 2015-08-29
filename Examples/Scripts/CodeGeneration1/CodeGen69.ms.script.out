@@ -3517,6 +3517,11 @@ VOID OPERATOR : Tests:(+)?
  VOID OPERATOR :: Test : T4
  VOID OPERATOR :: Test : T5
 ; // Tests:(+)?
+VOID OPERATOR : Tests:?(+)
+ VOID OPERATOR :: Test : T1
+ VOID OPERATOR :: Test : T2
+ VOID OPERATOR :: Test : T3
+; // Tests:?(+)
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
  Uses: 
   axiom:axiom
