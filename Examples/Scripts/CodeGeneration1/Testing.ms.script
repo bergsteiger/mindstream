@@ -34,9 +34,10 @@ Tests (+)?
 ; // Tests (+)?
 
 VOID operator RunTests
+ Literal IN aName
 ; // RunTests
 
-RunTests
+RunTests (+)?
 
 USES
  CodeDump.ms.dict

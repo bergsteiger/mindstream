@@ -36,6 +36,7 @@ VOID Test TestingTest
  ; // STRING FUNCTION (+)?
  
  VOID OPERATOR RunTests
+  ^L IN aName
  ; // VOID OPERATOR RunTests
  
  IMMEDIATE VOID MACRO Tests
@@ -75,6 +76,7 @@ VOID Test TestingTest
  ; // VOID OPERATOR Tests:(+)?
  
  RunTests
+ '(+)?'
  TestingTest
  DumpElement
 ; // VOID Test TestingTest
