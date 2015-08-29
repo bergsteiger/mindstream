@@ -3470,7 +3470,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dic
  ;
 STRING FUNCTION : (+)?
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- OPERATOR :: NamedWordProducer :: %%Tests : %Tests
  ^ OPERATOR :: IN : _aSuffix
  STRING OPERATOR :: IN : aPrefix
  IMMEDIATE VOID OPERATOR : aSuffix
