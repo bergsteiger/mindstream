@@ -19,11 +19,13 @@ STRING FUNCTION (+)?
   ( aPrefix l_Suffix Cat =: Result )
 ; // (+)?
 
+CONST cTests 'Tests:'
+
 MACRO Tests
  Literal IN aName
  [
    'VOID axiom:operator'
-   'Tests:' aName |N Cat
+   cTests aName |N Cat
  ] Ctx:Parser:PushArray
 ; // Tests
 

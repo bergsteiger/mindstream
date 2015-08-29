@@ -35,6 +35,8 @@ VOID Test TestingTest
    )
  ; // STRING FUNCTION (+)?
  
+ STRING CONST cTests
+  'Tests:'
  VOID OPERATOR RunTests
   ^L IN aName
  ; // VOID OPERATOR RunTests
@@ -43,7 +45,7 @@ VOID Test TestingTest
   ^L IN aName
   [
    'VOID axiom:operator'
-   'Tests:'
+   cTests
    aName
    |N
    Cat
