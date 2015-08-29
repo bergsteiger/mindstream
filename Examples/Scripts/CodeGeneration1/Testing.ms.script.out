@@ -38,7 +38,7 @@ VOID Test TestingTest
  
  STRING CONST cTests
   'Tests:'
- VOID OPERATOR RunTests
+ IMMEDIATE VOID MACRO RunTests
   ^L IN aName
   STRING VAR l_Name
   cTests
@@ -48,8 +48,11 @@ VOID Test TestingTest
   >>>
   l_Name
   l_Name
+  CompileValue
+  @
   .
- ; // VOID OPERATOR RunTests
+  CompileValue
+ ; // IMMEDIATE VOID MACRO RunTests
  
  IMMEDIATE VOID MACRO Tests
   ^L IN aName
@@ -87,8 +90,8 @@ VOID Test TestingTest
   
  ; // VOID OPERATOR Tests:(+)?
  
- RunTests
- '(+)?'
+ Tests:(+)?
+ .
  TestingTest
  DumpElement
 ; // VOID Test TestingTest

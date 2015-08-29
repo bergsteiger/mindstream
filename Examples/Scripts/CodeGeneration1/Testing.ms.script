@@ -35,11 +35,12 @@ Tests (+)?
   Test T3 'A' (+)? '' Print ;
 ; // Tests (+)?
 
-VOID operator RunTests
+MACRO RunTests
  Literal IN aName
  STRING VAR l_Name
  cTests aName |N Cat >>> l_Name
- l_Name Print
+ l_Name CompileValue
+ @ Print CompileValue
 ; // RunTests
 
 RunTests (+)?
