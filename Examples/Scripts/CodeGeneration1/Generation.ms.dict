@@ -103,6 +103,11 @@ STRING FUNCTION OutFileName
  [ l_OutPath aGeneratorName ] cPathSep strings:CatSep =: Result
 ; // OutFileName
 
+BOOLEAN elem_func IsElementNeedOwnFile
+ %SUMMARY 'Определяет тот факт, что элементу нужен собственный файл вывода' ;
+ true =: Result
+; // IsElementNeedOwnFile
+
 ModelElement VAR g_CurrentElementModel
  %REMARK 'Текущий генерируемый элемент'
 ( g_CurrentElementModel := nil )
