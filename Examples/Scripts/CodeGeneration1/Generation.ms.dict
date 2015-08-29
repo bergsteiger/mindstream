@@ -19,7 +19,7 @@ INTEGER VAR g_Indent
 
 BOOLEAN elem_func IsElementNeed.Indent
  %SUMMARY 'Определяет тот факт, что элементу нужен отступ' ;
- true =: Result
+ Result := true
 ; // IsElementNeed.Indent
 
 elem_proc EnterElement
@@ -105,7 +105,7 @@ STRING FUNCTION OutFileName
 
 BOOLEAN elem_func IsElementNeed.OwnFile
  %SUMMARY 'Определяет тот факт, что элементу нужен собственный файл вывода' ;
- true =: Result
+ Result := true
 ; // IsElementNeed.OwnFile
 
 ModelElement VAR g_CurrentElementModel
