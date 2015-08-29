@@ -38,7 +38,8 @@ VOID Test TestingTest
  IMMEDIATE VOID MACRO Tests
   ^L IN aName
   [
-   'VOID axiom:operator XXX'
+   'VOID axiom:operator'
+   'XXX'
   ]
   Ctx:Parser:PushArray
  ; // IMMEDIATE VOID MACRO Tests

@@ -22,7 +22,8 @@ STRING FUNCTION (+)?
 MACRO Tests
  Literal IN aName
  [
-   'VOID axiom:operator XXX'
+   'VOID axiom:operator'
+   'XXX'
  ] Ctx:Parser:PushArray
 ; // Tests
 
