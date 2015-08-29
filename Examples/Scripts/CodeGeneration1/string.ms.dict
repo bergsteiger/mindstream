@@ -4,6 +4,7 @@ USES
  core.ms.dict
  map.ms.dict
  Testing.ms.dict
+ io.ms.dict
 ;
 
 : (string)
@@ -31,13 +32,15 @@ STRING FUNCTION (+)?
  aSuffix =: l_Suffix
  if ( l_Suffix =/= '' ) then
   ( aPrefix l_Suffix Cat =: Result )
- 
-/*{ %%Tests
-  Test T1 '' (+)? 'B' Print ;
-  Test T2 'A' (+)? 'B' Print ;
-  Test T3 'A' (+)? '' Print ;
- ; // %%Tests}*/
 ; // (+)?
+
+Tests (+)?
+ Test T1 '' (+)? 'B' Print ;
+ Test T2 'A' (+)? 'B' Print ;
+ Test T3 'A' (+)? '' Print ;
+ Test T4 'A' (+)? 'D' Print ;
+ Test T5 'A' (+)? '123' Print ;
+; // Tests (+)?
 
 STRING FUNCTION ?(+)
  STRING in aPrefix

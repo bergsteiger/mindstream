@@ -3467,6 +3467,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
  ;
 STRING FUNCTION : (+)?
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
@@ -3509,6 +3510,13 @@ STRING FUNCTION : strings:CatSep>
  IMMEDIATE VOID OPERATOR : aValues
  STRING FUNCTION :: strings:CatSep> : Result
 ; // strings:CatSep>
+VOID OPERATOR : Tests:(+)?
+ VOID OPERATOR :: Test : T1
+ VOID OPERATOR :: Test : T2
+ VOID OPERATOR :: Test : T3
+ VOID OPERATOR :: Test : T4
+ VOID OPERATOR :: Test : T5
+; // Tests:(+)?
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
  Uses: 
   axiom:axiom
@@ -3535,8 +3543,22 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.di
   axiom:File
   axiom:Font
   axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
  ;
-IMMEDIATE VOID OPERATOR :: NamedWordProducer : %%Tests
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
+ ;
+STRING CONST : cTests
+IMMEDIATE VOID OPERATOR :: MACRO : RunTests
+ ^L OPERATOR :: IN : aName
+ STRING OPERATOR :: VAR : l_Name
+; // RunTests
+IMMEDIATE VOID OPERATOR :: MACRO : Tests
+ ^L OPERATOR :: IN : aName
+; // Tests
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
  Uses: 
   axiom:axiom
