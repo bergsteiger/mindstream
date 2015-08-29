@@ -1,8 +1,6 @@
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedure
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedure
-TkwCompiledProcedureWithStackChecking
+T3
+T2
+T1
 VOID Test TestingTest
  STRING FUNCTION (+)?
   %SUMMARY %SUM
@@ -56,6 +54,7 @@ VOID Test TestingTest
    l_Name
    'MembersIterator'
    '==>'
+   '|N'
    '@ Print DO'
   ]
   Ctx:Parser:PushArray
@@ -101,6 +100,7 @@ VOID Test TestingTest
  Tests:(+)?
  MembersIterator
  IT
+ |N
  @
  .
  DO
