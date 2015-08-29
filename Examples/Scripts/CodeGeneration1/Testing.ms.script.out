@@ -48,29 +48,26 @@ VOID Test TestingTest
  ; // IMMEDIATE VOID MACRO Tests
  
  VOID OPERATOR Tests:(+)?
-  %%Tests %Tests
-   VOID Test T1
-    ''
-    (+)?
-    'B'
-    .
-   ; // VOID Test T1
-   
-   VOID Test T2
-    'A'
-    (+)?
-    'B'
-    .
-   ; // VOID Test T2
-   
-   VOID Test T3
-    'A'
-    (+)?
-    ''
-    .
-   ; // VOID Test T3
-   
-  ; // %%Tests %Tests
+  VOID Test T1
+   ''
+   (+)?
+   'B'
+   .
+  ; // VOID Test T1
+  
+  VOID Test T2
+   'A'
+   (+)?
+   'B'
+   .
+  ; // VOID Test T2
+  
+  VOID Test T3
+   'A'
+   (+)?
+   ''
+   .
+  ; // VOID Test T3
   
  ; // VOID OPERATOR Tests:(+)?
  
