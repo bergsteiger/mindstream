@@ -6,9 +6,7 @@ USES
 RunTests (+)?
 '------------------' Print
 
-'' ?(+) 'B' Print
-'A' ?(+) 'B' Print
-'A' ?(+) '' Print
+RunTests ?(+)
 '------------------' Print
 
 strings:CatSep> ' ' [ 'A' 'B' ] Print
