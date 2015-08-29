@@ -33,6 +33,7 @@ Tests (+)?
  Test T1 '' (+)? 'B' Print ;
  Test T2 'A' (+)? 'B' Print ;
  Test T3 'A' (+)? '' Print ;
+ Test T4 'A' (+)? 'D' Print ;
 ; // Tests (+)?
 
 MACRO RunTests
