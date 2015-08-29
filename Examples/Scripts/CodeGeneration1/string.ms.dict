@@ -31,6 +31,9 @@ STRING FUNCTION (+)?
  aSuffix =: l_Suffix
  if ( l_Suffix =/= '' ) then
   ( aPrefix l_Suffix Cat =: Result )
+ 
+ %%Tests
+ ; // %%Tests
 ; // (+)?
 
 STRING FUNCTION ?(+)
