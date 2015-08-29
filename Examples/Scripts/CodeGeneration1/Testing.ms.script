@@ -3,6 +3,7 @@
 USES
  implementation.ms.dict
  Testing.ms.dict
+ params.ms.dict
 ;
 
 Test TestingTest
@@ -19,17 +20,19 @@ STRING FUNCTION (+)?
 ; // (+)?
 
 MACRO Tests
+ Literal IN aName
  [
+   'VOID axiom:operator XXX'
  ] Ctx:Parser:PushArray
 ; // Tests
 
-implementation (+)?
- %%Tests
+Tests (+)?
+/*{ %%Tests
   Test T1 '' (+)? 'B' Print ;
   Test T2 'A' (+)? 'B' Print ;
   Test T3 'A' (+)? '' Print ;
- ; // %%Tests
-end.
+ ; // %%Tests}*/
+; // Tests (+)?
 
 USES
  CodeDump.ms.dict
