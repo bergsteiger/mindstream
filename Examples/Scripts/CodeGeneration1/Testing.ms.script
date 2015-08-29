@@ -15,15 +15,14 @@ STRING FUNCTION (+)?
  aSuffix =: l_Suffix
  if ( l_Suffix =/= '' ) then
   ( aPrefix l_Suffix Cat =: Result )
- 
+; // (+)?
+
+implementation (+)?
 /*{ %%Tests
   Test T1 '' (+)? 'B' Print ;
   Test T2 'A' (+)? 'B' Print ;
   Test T3 'A' (+)? '' Print ;
  ; // %%Tests}*/
-; // (+)?
-
-implementation (+)?
 end.
 
 USES
