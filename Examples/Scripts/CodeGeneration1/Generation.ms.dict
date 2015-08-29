@@ -125,7 +125,7 @@ elem_proc CallCurrentGen
     STRING VAR l_FileName
     l_FileName := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) )
     g_OutFile := ( l_FileName File:OpenWrite )
-   end
+   end // Self .IsElementNeed.OwnFile
    TRY
     g_CurrentGenerator IsNil ! ?ASSURE 'Текущй генератор пустой'
     ModelElement VAR l_CurrentElementModel
