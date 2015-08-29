@@ -18,14 +18,6 @@ MACRO Tests
  ] Ctx:Parser:PushArray
 ; // Tests
 
-Tests (+)?
- Test T1 '' (+)? 'B' Print ;
- Test T2 'A' (+)? 'B' Print ;
- Test T3 'A' (+)? '' Print ;
- Test T4 'A' (+)? 'D' Print ;
- Test T5 'A' (+)? '123' Print ;
-; // Tests (+)?
-
 MACRO RunTests
  Literal IN aName
  STRING VAR l_Name
@@ -42,6 +34,14 @@ MACRO RunTests
   ')' 
  ] Ctx:Parser:PushArray 
 ; // RunTests
+
+Tests (+)?
+ Test T1 '' (+)? 'B' Print ;
+ Test T2 'A' (+)? 'B' Print ;
+ Test T3 'A' (+)? '' Print ;
+ Test T4 'A' (+)? 'D' Print ;
+ Test T5 'A' (+)? '123' Print ;
+; // Tests (+)?
 
 RunTests (+)?
 
