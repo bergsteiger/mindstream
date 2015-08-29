@@ -1,4 +1,4 @@
-TkwCompiledProcedure
+TkwCompiledProcedureWithStackChecking
 VOID Test TestingTest
  STRING FUNCTION (+)?
   %SUMMARY %SUM
@@ -48,8 +48,9 @@ VOID Test TestingTest
   >>>
   l_Name
   [
+   '@'
    l_Name
-   '@ Print'
+   '@ Print DO'
   ]
   Ctx:Parser:PushArray
  ; // IMMEDIATE VOID MACRO RunTests
@@ -90,9 +91,11 @@ VOID Test TestingTest
   
  ; // VOID OPERATOR Tests:(+)?
  
+ @
  Tests:(+)?
  @
  .
+ DO
  WHILE
  (
   StackLevel
