@@ -1,0 +1,41 @@
+VOID Test TestingTest
+ STRING FUNCTION (+)?
+  %SUMMARY %SUM
+   'Если aSuffix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку'
+  ; // %SUMMARY %SUM
+  
+  ^ IN _aSuffix
+  STRING IN aPrefix
+  IMMEDIATE VOID OPERATOR aSuffix
+   '_aSuffix'
+   MangledNamePusher
+  ; // IMMEDIATE VOID OPERATOR aSuffix
+  
+  STRING VAR l_Suffix
+  Result :=
+  ''
+  (
+   _aSuffix |^
+  )
+  >>>
+  l_Suffix
+  if
+   (
+    l_Suffix
+    <>
+    ''
+   )
+  then
+   (
+    aPrefix
+    l_Suffix
+    Cat
+    >>>
+    Result
+   )
+ ; // STRING FUNCTION (+)?
+ 
+ TestingTest
+ DumpElement
+; // VOID Test TestingTest
+

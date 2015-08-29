@@ -19,6 +19,12 @@ STRING FUNCTION (+)?
  ; // %%Tests}*/
 ; // (+)?
 
+USES
+ CodeDump.ms.dict
+;
+
+@SELF DumpElement
+
 ; // TestingTest
 
 TestingTest
