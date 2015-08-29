@@ -3,6 +3,8 @@ USES
  params.ms.dict
  core.ms.dict
  map.ms.dict
+ Testing.ms.dict
+ io.ms.dict
 ;
 
 : (string)
@@ -21,6 +23,11 @@ STRING FUNCTION any:Cat
  anArray .map&gt; ToPrintable strings:Cat =: Result
 ; // any:Cat
 
+Tests any:Cat
+ Test T1 [ 'A' 123 'B' ] any:Cat Print ;
+ Test T2 [ 'A' 124 'B' ] any:Cat Print ;
+; // Tests any:Cat
+
 STRING FUNCTION (+)?
  STRING in aPrefix
  STRING right aSuffix
@@ -32,6 +39,14 @@ STRING FUNCTION (+)?
   ( aPrefix l_Suffix Cat =: Result )
 ; // (+)?
 
+Tests (+)?
+ Test T1 '' (+)? 'B' Print ;
+ Test T2 'A' (+)? 'B' Print ;
+ Test T3 'A' (+)? '' Print ;
+ Test T4 'A' (+)? 'D' Print ;
+ Test T5 'A' (+)? '123' Print ;
+; // Tests (+)?
+
 STRING FUNCTION ?(+)
  STRING in aPrefix
  STRING right aSuffix
@@ -41,10 +56,25 @@ STRING FUNCTION ?(+)
   ( aPrefix aSuffix Cat =: Result )
 ; // ?(+)
 
+Tests ?(+)
+ Test T1 '' ?(+) 'B' Print ;
+ Test T2 'A' ?(+) 'B' Print ;
+ Test T3 'A' ?(+) '' Print ;
+; // Tests ?(+)
+
 STRING FUNCTION strings:CatSep&gt;
  STRING right aSep
  ARRAY right aValues
  aValues aSep strings:CatSep =: Result
 ; // strings:CatSep&gt;
 
+Tests strings:CatSep&gt;
+ Test T1 strings:CatSep&gt; ' ' [ 'A' 'B' ] Print ;
+ Test T2 strings:CatSep&gt; ' ' [ 'A ' 'B' ] Print ;
+ Test T3 strings:CatSep&gt; ' ' [ 'A ' ' B' ] Print ;
+ Test T4 strings:CatSep&gt; ' ' [ 'A' ' B' ] Print ;
+ Test T5 strings:CatSep&gt; ' ' [ '' 'B' ] Print ;
+ Test T6 strings:CatSep&gt; ' ' [ 'A' '' ] Print ;
+; // Tests strings:CatSep&gt;
+ 
 WordAlias CatSep&gt; strings:CatSep&gt;

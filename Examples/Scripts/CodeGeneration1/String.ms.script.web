@@ -1,0 +1,16 @@
+USES
+ string.ms.dict
+ Testing.ms.dict
+;
+
+RunTests (+)?
+'------------------' Print
+
+RunTests ?(+)
+'------------------' Print
+
+RunTests strings:CatSep>
+'------------------' Print
+
+RunTests any:Cat
+'------------------' Print
