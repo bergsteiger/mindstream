@@ -41,7 +41,7 @@ MACRO RunTests
  cTests aName |N Cat >>> l_Name
  [
   l_Name
-  '@ Print' 
+  '@ Print DO' 
  ] Ctx:Parser:PushArray 
  //l_Name CompileValue
  //@ Print CompileValue
