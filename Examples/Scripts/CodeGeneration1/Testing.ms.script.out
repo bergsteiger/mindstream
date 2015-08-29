@@ -1,4 +1,4 @@
-TkwCompiledProcedureWithStackChecking
+[ ]
 VOID Test TestingTest
  STRING FUNCTION (+)?
   %SUMMARY %SUM
@@ -50,6 +50,7 @@ VOID Test TestingTest
   [
    '@'
    l_Name
+   'CodeIterator'
    '@ Print DO'
   ]
   Ctx:Parser:PushArray
@@ -93,6 +94,7 @@ VOID Test TestingTest
  
  @
  Tests:(+)?
+ CodeIterator
  @
  .
  DO
