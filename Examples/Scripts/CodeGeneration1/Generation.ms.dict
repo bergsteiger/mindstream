@@ -17,19 +17,19 @@ INTEGER VAR g_Indent
 %REMARK 'Текущий отступ'
 ( g_Indent := 0 )
 
-BOOLEAN elem_func IsElementNeedIndent
+BOOLEAN elem_func IsElementNeed.Indent
  %SUMMARY 'Определяет тот факт, что элементу нужен отступ' ;
  true =: Result
-; // IsElementNeedIndent
+; // IsElementNeed.Indent
 
 elem_proc EnterElement
  %SUMMARY 'Начинает вывод элемента' ;
- Self .IsElementNeedIndent ? INC g_Indent
+ Self .IsElementNeed.Indent ? INC g_Indent
 ; // EnterElement
 
 elem_proc LeaveElement
  %SUMMARY 'Заканчивает вывод элемента' ;
- Self .IsElementNeedIndent ? DEC g_Indent
+ Self .IsElementNeed.Indent ? DEC g_Indent
 ; // LeaveElement
 
 FILE VAR g_OutFile
@@ -103,10 +103,10 @@ STRING FUNCTION OutFileName
  [ l_OutPath aGeneratorName ] cPathSep strings:CatSep =: Result
 ; // OutFileName
 
-BOOLEAN elem_func IsElementNeedOwnFile
+BOOLEAN elem_func IsElementNeed.OwnFile
  %SUMMARY 'Определяет тот факт, что элементу нужен собственный файл вывода' ;
  true =: Result
-; // IsElementNeedOwnFile
+; // IsElementNeed.OwnFile
 
 ModelElement VAR g_CurrentElementModel
  %REMARK 'Текущий генерируемый элемент'

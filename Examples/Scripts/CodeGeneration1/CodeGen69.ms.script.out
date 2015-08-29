@@ -4357,16 +4357,16 @@ VOID OPERATOR :: MACRO :: elem_proc : .generate.children
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ModelElement OPERATOR :: IN : Self
 ; // .generate.children
-BOOLEAN OPERATOR :: MACRO :: elem_func : .IsElementNeedIndent
+BOOLEAN OPERATOR :: MACRO :: elem_func : .IsElementNeed.Indent
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsElementNeedIndent : Result
+ BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsElementNeed.Indent : Result
  ModelElement OPERATOR :: IN : Self
-; // .IsElementNeedIndent
-BOOLEAN OPERATOR :: MACRO :: elem_func : .IsElementNeedOwnFile
+; // .IsElementNeed.Indent
+BOOLEAN OPERATOR :: MACRO :: elem_func : .IsElementNeed.OwnFile
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsElementNeedOwnFile : Result
+ BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsElementNeed.OwnFile : Result
  ModelElement OPERATOR :: IN : Self
-; // .IsElementNeedOwnFile
+; // .IsElementNeed.OwnFile
 VOID OPERATOR :: MACRO :: elem_proc : .LeaveElement
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ModelElement OPERATOR :: IN : Self
