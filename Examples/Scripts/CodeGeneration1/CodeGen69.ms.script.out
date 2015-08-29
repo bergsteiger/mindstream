@@ -3466,6 +3466,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
  ;
 STRING FUNCTION : (+)?
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
@@ -3508,6 +3509,34 @@ STRING FUNCTION : strings:CatSep>
  IMMEDIATE VOID OPERATOR : aValues
  STRING FUNCTION :: strings:CatSep> : Result
 ; // strings:CatSep>
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
+ ;
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %%Tests
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
  Uses: 
   axiom:axiom
