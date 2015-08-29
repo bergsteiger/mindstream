@@ -45,7 +45,7 @@ MACRO RunTests
   'MembersIterator'
   'Reverted'
   '==>'
-  '@ Print DO' 
+  'DO' 
  ] Ctx:Parser:PushArray 
  //l_Name CompileValue
  //@ Print CompileValue

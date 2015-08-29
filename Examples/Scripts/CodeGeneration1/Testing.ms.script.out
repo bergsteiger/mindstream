@@ -1,8 +1,6 @@
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedure
-TkwCompiledProcedureWithStackChecking
-TkwCompiledProcedure
-TkwCompiledProcedureWithStackChecking
+
+AB
+B
 VOID Test TestingTest
  STRING FUNCTION (+)?
   %SUMMARY %SUM
@@ -57,7 +55,7 @@ VOID Test TestingTest
    'MembersIterator'
    'Reverted'
    '==>'
-   '@ Print DO'
+   'DO'
   ]
   Ctx:Parser:PushArray
  ; // IMMEDIATE VOID MACRO RunTests
@@ -103,8 +101,6 @@ VOID Test TestingTest
  MembersIterator
  Array:Reverted
  IT
- @
- .
  DO
  WHILE
  (
