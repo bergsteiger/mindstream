@@ -24,7 +24,8 @@ STRING FUNCTION any:Cat
 ; // any:Cat
 
 Tests any:Cat
- [ 'A' 123 'B' ] any:Cat Print
+ Test T1 [ 'A' 123 'B' ] any:Cat Print ;
+ Test T2 [ 'A' 124 'B' ] any:Cat Print ;
 ; // Tests any:Cat
 
 STRING FUNCTION (+)?

@@ -17,5 +17,5 @@ strings:CatSep> ' ' [ '' 'B' ] Print
 strings:CatSep> ' ' [ 'A' '' ] Print
 '------------------' Print
 
-[ 'A' 123 'B' ] any:Cat Print
+RunTests any:Cat
 '------------------' Print
