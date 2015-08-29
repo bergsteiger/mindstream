@@ -23,6 +23,10 @@ STRING FUNCTION any:Cat
  anArray .map> ToPrintable strings:Cat =: Result
 ; // any:Cat
 
+Tests any:Cat
+ [ 'A' 123 'B' ] any:Cat Print
+; // Tests any:Cat
+
 STRING FUNCTION (+)?
  STRING in aPrefix
  STRING right aSuffix
