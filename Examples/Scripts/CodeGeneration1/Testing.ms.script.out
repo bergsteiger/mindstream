@@ -96,13 +96,6 @@ VOID Test TestingTest
   anItem
   DO
  )
- WHILE
- (
-  StackLevel
-  >
-  0
- )
- .
  TestingTest
  DumpElement
 ; // VOID Test TestingTest

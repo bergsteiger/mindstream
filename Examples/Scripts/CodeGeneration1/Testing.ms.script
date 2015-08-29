@@ -45,8 +45,6 @@ MACRO RunTests
 
 RunTests (+)?
 
-WHILE ( StackLevel > 0 ) .
-
 USES
  CodeDump.ms.dict
 ;
