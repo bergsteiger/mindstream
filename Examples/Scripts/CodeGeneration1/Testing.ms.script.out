@@ -39,12 +39,15 @@ VOID Test TestingTest
   ^L IN aName
   [
    'VOID axiom:operator'
-   'XXX'
+   'Tests:'
+   aName
+   |N
+   Cat
   ]
   Ctx:Parser:PushArray
  ; // IMMEDIATE VOID MACRO Tests
  
- VOID OPERATOR XXX
+ VOID OPERATOR Tests:(+)?
   %%Tests %Tests
    VOID Test T1
     ''
@@ -69,7 +72,7 @@ VOID Test TestingTest
    
   ; // %%Tests %Tests
   
- ; // VOID OPERATOR XXX
+ ; // VOID OPERATOR Tests:(+)?
  
  TestingTest
  DumpElement

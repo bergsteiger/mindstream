@@ -23,7 +23,7 @@ MACRO Tests
  Literal IN aName
  [
    'VOID axiom:operator'
-   'XXX'
+   'Tests:' aName |N Cat
  ] Ctx:Parser:PushArray
 ; // Tests
 
