@@ -1,11 +1,21 @@
 // NamedCodeProducer.ms.dict
 
 USES
+ params.ms.dict
  macro.ms.dict
  EngineTypes.ms.dict
  Documentation.ms.dict
  NoCapsLock.ms.dict
 ;
+
+PROCEDURE DoSequence
+ Sequence IN aCode
+ Lambda RIGHT IN aLambda
+ if ( aCode IS class::TkwBeginLikeCompiledCode ) then  
+  ( aCode CodeIterator ==> ( aLambda DO ) )
+ else
+  ( aCode ( aLambda DO ) ) 
+; // DoSequence
 
 MACRO __CompileCodeAndFree
  Sequence IN aCode

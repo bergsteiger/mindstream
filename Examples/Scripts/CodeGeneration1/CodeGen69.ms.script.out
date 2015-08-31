@@ -4057,6 +4057,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProd
   axiom:File
   axiom:Font
   axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
@@ -4065,6 +4068,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProd
 IMMEDIATE VOID OPERATOR :: MACRO : __CompileCodeAndFree
  Sequence OPERATOR :: IN : aCode
 ; // __CompileCodeAndFree
+VOID OPERATOR :: PROCEDURE : DoSequence
+ Sequence OPERATOR :: IN : aCode
+ ^ OPERATOR :: IN : aLambda
+; // DoSequence
 IMMEDIATE VOID OPERATOR :: MACRO : NamedCodeProducer
  ^L OPERATOR :: IN : aName
  ^L OPERATOR :: IN : aNewName
