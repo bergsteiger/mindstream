@@ -62,13 +62,8 @@ MACRO RunTestsFor
 
  STRING VAR l_Name
  aName |N >>> l_Name
- STRING VAR l_TestsHolderName
- cTests l_Name Cat >>> l_TestsHolderName
 
- l_Name Ctx:Parser:PushString
- axiom:PushSymbol @
- l_TestsHolderName Ctx:Parser:PushSymbol
- axiom:PushSymbol DoRunTestsFor
+ l_Name ExpandRunTestsFor
 ; // RunTestsFor
 
 //MACRO RunTests
