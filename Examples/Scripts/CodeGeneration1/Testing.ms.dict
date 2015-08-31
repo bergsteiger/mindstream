@@ -7,6 +7,7 @@ USES
  io.ms.dict
  EngineTypes.ms.dict
  Documentation.ms.dict
+ RefDeepest.ms.dict
 ;
 
 CONST cTests 'Tests:'
@@ -43,6 +44,17 @@ PRIVATE PROCEDURE DoRunTestsFor
  '------------------' Print
 ; // DoRunTestsFor
 
+PRIVATE PROCEDURE ExpandRunTestsFor
+ STRING IN aTestsHolder
+ STRING VAR l_TestsHolderName
+ cTests aTestsHolder Cat >>> l_TestsHolderName
+
+ aTestsHolder Ctx:Parser:PushString
+ axiom:PushSymbol @
+ l_TestsHolderName Ctx:Parser:PushSymbol
+ axiom:PushSymbol DoRunTestsFor
+; // ExpandRunTestsFor
+
 MACRO RunTestsFor
  ENGINE_WORD RIGHT LINK IN aName
   %REMARK 'aName ссылка на слово справа от RunTestsFor'
@@ -58,3 +70,8 @@ MACRO RunTestsFor
  l_TestsHolderName Ctx:Parser:PushSymbol
  axiom:PushSymbol DoRunTestsFor
 ; // RunTestsFor
+
+//MACRO RunTests
+// ENGINE_WORD RIGHT LINK IN aName
+// RunTestsFor aName
+//; //RunTests
