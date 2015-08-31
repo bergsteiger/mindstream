@@ -12,7 +12,7 @@ USES
 CONST cTests 'Tests:'
 
 MACRO Tests
- ^ LINK IN aName
+ RIGHT LINK IN aName
  %SUMMARY 'Определяет набор тестов для слова aName' ;
 
  axiom:PushSymbol VOID
