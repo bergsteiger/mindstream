@@ -44,7 +44,8 @@ PROCEDURE DoRunTestsFor
 ; // DoRunTestsFor
 
 MACRO RunTests
- Literal IN aName
+ RIGHT LINK IN aName
+  %REMARK 'aName ссылка на слово справа от RunTests'
  %SUMMARY '¬ыполн€ет тесты дл€ aName' ;
 
  STRING VAR l_Name

@@ -3577,7 +3577,7 @@ VOID OPERATOR :: PROCEDURE : DoRunTestsFor
 ; // DoRunTestsFor
 IMMEDIATE VOID OPERATOR :: MACRO : RunTests
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aName
+ LINK ^ OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
  STRING OPERATOR :: VAR : l_TestsHolderName
 ; // RunTests
