@@ -12,7 +12,7 @@ USES
 CONST cTests 'Tests:'
 
 MACRO TestsFor
- RIGHT LINK IN aName
+ ENGINE_WORD RIGHT LINK IN aName
   %REMARK 'aName ссылка на слово справа от TestsFor'
  %SUMMARY 'ќпредел€ет набор тестов дл€ слова aName' ;
 
@@ -44,7 +44,7 @@ PROCEDURE DoRunTestsFor
 ; // DoRunTestsFor
 
 MACRO RunTests
- RIGHT LINK IN aName
+ ENGINE_WORD RIGHT LINK IN aName
   %REMARK 'aName ссылка на слово справа от RunTests'
  %SUMMARY '¬ыполн€ет тесты дл€ aName' ;
 
