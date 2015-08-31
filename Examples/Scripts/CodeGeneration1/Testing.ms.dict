@@ -13,6 +13,7 @@ CONST cTests 'Tests:'
 
 MACRO TestsFor
  RIGHT LINK IN aName
+  %REMARK 'aName ссылка на слово справа от TestsFor'
  %SUMMARY 'Определяет набор тестов для слова aName' ;
 
  axiom:PushSymbol VOID
