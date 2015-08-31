@@ -1,16 +1,14 @@
 USES
+ Documentation.ms.dict
  string.ms.dict
  Testing.ms.dict
 ;
 
 RunTests (+)?
-'------------------' Print
-
+ %REMARK '«апускаем "стандартные тесты" дл€ слова (+)?'
 RunTests ?(+)
-'------------------' Print
-
-RunTests strings:CatSep>
-'------------------' Print
-
+ %REMARK '«апускаем "стандартные тесты" дл€ слова ?(+)'
+RunTests strings:CatSep&gt;
+ %REMARK '«апускаем "стандартные тесты" дл€ слова strings:CatSep&gt;'
 RunTests any:Cat
-'------------------' Print
+ %REMARK '«апускаем "стандартные тесты" дл€ слова any:Cat'
