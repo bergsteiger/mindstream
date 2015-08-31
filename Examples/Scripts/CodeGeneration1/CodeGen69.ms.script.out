@@ -3583,7 +3583,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : RunTests
 ; // RunTests
 IMMEDIATE VOID OPERATOR :: MACRO : Tests
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^L OPERATOR :: IN : aName
+ LINK ^ OPERATOR :: IN : aName
 ; // Tests
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
  Uses: 
