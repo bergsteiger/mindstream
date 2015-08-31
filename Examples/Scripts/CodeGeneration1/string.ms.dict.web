@@ -23,10 +23,10 @@ STRING FUNCTION any:Cat
  anArray .map&gt; ToPrintable strings:Cat =: Result
 ; // any:Cat
 
-Tests any:Cat
+TestsFor any:Cat
  Test T1 [ 'A' 123 'B' ] any:Cat Print ;
  Test T2 [ 'A' 124 'B' ] any:Cat Print ;
-; // Tests any:Cat
+; // TestsFor any:Cat
 
 STRING FUNCTION (+)?
  STRING in aPrefix
@@ -39,13 +39,13 @@ STRING FUNCTION (+)?
   ( aPrefix l_Suffix Cat =: Result )
 ; // (+)?
 
-Tests (+)?
+TestsFor (+)?
  Test T1 '' (+)? 'B' Print ;
  Test T2 'A' (+)? 'B' Print ;
  Test T3 'A' (+)? '' Print ;
  Test T4 'A' (+)? 'D' Print ;
  Test T5 'A' (+)? '123' Print ;
-; // Tests (+)?
+; // TestsFor (+)?
 
 STRING FUNCTION ?(+)
  STRING in aPrefix
@@ -56,11 +56,11 @@ STRING FUNCTION ?(+)
   ( aPrefix aSuffix Cat =: Result )
 ; // ?(+)
 
-Tests ?(+)
+TestsFor ?(+)
  Test T1 '' ?(+) 'B' Print ;
  Test T2 'A' ?(+) 'B' Print ;
  Test T3 'A' ?(+) '' Print ;
-; // Tests ?(+)
+; // TestsFor ?(+)
 
 STRING FUNCTION strings:CatSep&gt;
  STRING right aSep
@@ -68,13 +68,13 @@ STRING FUNCTION strings:CatSep&gt;
  aValues aSep strings:CatSep =: Result
 ; // strings:CatSep&gt;
 
-Tests strings:CatSep&gt;
+TestsFor strings:CatSep&gt;
  Test T1 strings:CatSep&gt; ' ' [ 'A' 'B' ] Print ;
  Test T2 strings:CatSep&gt; ' ' [ 'A ' 'B' ] Print ;
  Test T3 strings:CatSep&gt; ' ' [ 'A ' ' B' ] Print ;
  Test T4 strings:CatSep&gt; ' ' [ 'A' ' B' ] Print ;
  Test T5 strings:CatSep&gt; ' ' [ '' 'B' ] Print ;
  Test T6 strings:CatSep&gt; ' ' [ 'A' '' ] Print ;
-; // Tests strings:CatSep&gt;
+; // TestsFor strings:CatSep&gt;
  
 WordAlias CatSep&gt; strings:CatSep&gt;
