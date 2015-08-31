@@ -31,6 +31,7 @@ PROCEDURE DoRunTests
   anItem |N Print
   anItem DO
  )
+ [ 'Testing end: ' aTestedWordName ] strings:Cat Print
  '------------------' Print
 ; // DoRunTests
 
