@@ -13,7 +13,7 @@ CONST cTests 'Tests:'
 
 MACRO Tests
  Literal IN aName
- %SUMMARY 'Определяет тесты для aName' ;
+ %SUMMARY 'Определяет набор тестов для слова aName' ;
 
  axiom:PushSymbol VOID
  axiom:PushSymbol axiom:operator
