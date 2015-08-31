@@ -11,14 +11,14 @@ USES
 
 CONST cTests 'Tests:'
 
-MACRO Tests
+MACRO TestsFor
  RIGHT LINK IN aName
  %SUMMARY 'Определяет набор тестов для слова aName' ;
 
  axiom:PushSymbol VOID
  axiom:PushSymbol axiom:operator
  cTests aName |N Cat Ctx:Parser:PushSymbol
-; // Tests
+; // TestsFor
 
 PROCEDURE DoRunTests
  STRING IN aTestedWordName

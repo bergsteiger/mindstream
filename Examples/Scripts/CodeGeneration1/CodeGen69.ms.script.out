@@ -3581,10 +3581,10 @@ IMMEDIATE VOID OPERATOR :: MACRO : RunTests
  STRING OPERATOR :: VAR : l_Name
  STRING OPERATOR :: VAR : l_TestsHolderName
 ; // RunTests
-IMMEDIATE VOID OPERATOR :: MACRO : Tests
+IMMEDIATE VOID OPERATOR :: MACRO : TestsFor
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  LINK ^ OPERATOR :: IN : aName
-; // Tests
+; // TestsFor
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
  Uses: 
   axiom:axiom
