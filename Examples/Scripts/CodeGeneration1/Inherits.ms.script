@@ -1,11 +1,12 @@
 USES
+ NoCapsLock.ms.dict
  CodeDump.ms.dict
 ;
 
 Test InheritsTest
 
 IMMEDIATE operator __CompileCodeAndFree
- TtfwWord IN aCode
+ Sequence IN aCode
  if ( aCode IS class::TkwBeginLikeCompiledCode ) then  
   ( aCode CodeIterator ==> CompileRef )
  else

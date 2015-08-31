@@ -4,10 +4,11 @@ USES
  macro.ms.dict
  EngineTypes.ms.dict
  Documentation.ms.dict
+ NoCapsLock.ms.dict
 ;
 
 MACRO __CompileCodeAndFree
- ENGINE_WORD IN aCode
+ Sequence IN aCode
  if ( aCode IS class::TkwBeginLikeCompiledCode ) then  
   ( aCode CodeIterator ==> CompileRef )
  else

@@ -4060,9 +4060,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProd
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : __CompileCodeAndFree
- ENGINE_WORD OPERATOR :: IN : aCode
+ Sequence OPERATOR :: IN : aCode
 ; // __CompileCodeAndFree
 IMMEDIATE VOID OPERATOR :: MACRO : NamedCodeProducer
  ^L OPERATOR :: IN : aName
