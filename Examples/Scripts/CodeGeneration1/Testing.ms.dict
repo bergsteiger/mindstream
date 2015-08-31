@@ -30,7 +30,7 @@ PRIVATE PROCEDURE DoRunTestsFor
  aTestsHolder MembersIterator ==> (
   IN aTest
    %REMARK 'aTest - вложенный элемент aTestsHolder'
-  if ( ( aTest %ST |N ) = 'Test' ) then
+  if ( ( aTest %ST |N ) = ( @ Test |N ) ) then
    %REMARK '- фильтруем только тесты.'
   begin
    aTest |N Print
