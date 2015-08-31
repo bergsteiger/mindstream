@@ -14,16 +14,17 @@ CONST cTests 'Tests:'
 MACRO Tests
  Literal IN aName
  %SUMMARY 'Определяет тесты для aName' ;
- [
-   'VOID axiom:operator'
-   cTests aName |N Cat
- ] Ctx:Parser:PushArray
+
+ axiom:PushSymbol VOID
+ axiom:PushSymbol axiom:operator
+ cTests aName |N Cat Ctx:Parser:PushSymbol
 ; // Tests
 
 PROCEDURE DoRunTests
  STRING IN aTestedWordName
  ENGINE_WORD IN aTestsHolder
  %SUMMARY 'Выполняет тесты для aTestsHolder' ;
+
  [ 'Testing: ' aTestedWordName ] strings:Cat Print
  aTestsHolder MembersIterator ==> (
   IN anItem
@@ -36,6 +37,7 @@ PROCEDURE DoRunTests
 MACRO RunTests
  Literal IN aName
  %SUMMARY 'Выполняет тесты для aName' ;
+
  STRING VAR l_Name
  aName |N >>> l_Name
  STRING VAR l_TestsHolderName
