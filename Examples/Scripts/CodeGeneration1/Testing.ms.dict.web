@@ -1,0 +1,60 @@
+// Testing.ms.dict
+
+USES
+ axiom_push.ms.dict
+ macro.ms.dict
+ params.ms.dict
+ io.ms.dict
+ EngineTypes.ms.dict
+ Documentation.ms.dict
+;
+
+CONST cTests 'Tests:'
+
+MACRO TestsFor
+ ENGINE_WORD RIGHT LINK IN aName
+  %REMARK 'aName ссылка на слово справа от TestsFor'
+ %SUMMARY 'Определяет набор тестов для слова aName' ;
+
+ axiom:PushSymbol VOID
+ axiom:PushSymbol axiom:operator
+ cTests aName |N Cat Ctx:Parser:PushSymbol
+; // TestsFor
+
+PRIVATE PROCEDURE DoRunTestsFor
+ STRING IN aTestedWordName
+ ENGINE_WORD IN aTestsHolder
+ %SUMMARY 'Выполняет тесты для aTestsHolder' ;
+
+ [ 'Testing: ' aTestedWordName ] strings:Cat Print
+ aTestsHolder MembersIterator ==&gt; (
+  IN aTest
+   %REMARK 'aTest - вложенный элемент aTestsHolder'
+  if ( ( aTest %ST |N ) = ( NameOf Test ) ) then
+   %REMARK '- фильтруем только тесты.'
+  begin
+   aTest |N Print
+    %REMARK 'Печатаем имя теста'
+   aTest DO
+    %REMARK 'Запускаем тест'
+  end // ( ( aTest %ST |N ) = 'Test' )
+ )
+ [ 'Testing end: ' aTestedWordName ] strings:Cat Print
+ '------------------' Print
+; // DoRunTestsFor
+
+MACRO RunTests
+ ENGINE_WORD RIGHT LINK IN aName
+  %REMARK 'aName ссылка на слово справа от RunTests'
+ %SUMMARY 'Выполняет тесты для aName' ;
+
+ STRING VAR l_Name
+ aName |N &gt;&gt;&gt; l_Name
+ STRING VAR l_TestsHolderName
+ cTests l_Name Cat &gt;&gt;&gt; l_TestsHolderName
+
+ l_Name Ctx:Parser:PushString
+ axiom:PushSymbol @
+ l_TestsHolderName Ctx:Parser:PushSymbol
+ axiom:PushSymbol DoRunTestsFor
+; // RunTests
