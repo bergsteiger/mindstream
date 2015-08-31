@@ -1,6 +1,7 @@
 // Testing.ms.script
 
 USES
+ Documentation.ms.dict
  Testing.ms.dict
  string.ms.dict
 ;
@@ -8,6 +9,7 @@ USES
 Test TestingTest
 
 Tests (+)?
+ %SUMMARY '"Стандартные тесты" для слова (+)?' ;
  Test T1 '' (+)? 'B' Print ;
  Test T2 'A' (+)? 'B' Print ;
  Test T3 'A' (+)? '' Print ;
@@ -16,6 +18,7 @@ Tests (+)?
 ; // Tests (+)?
 
 RunTests (+)?
+ %REMARK 'Запускаем "стандартные тесты" для слова (+)?'
 
 USES
  CodeDump.ms.dict

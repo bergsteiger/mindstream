@@ -27,9 +27,15 @@ PROCEDURE DoRunTests
 
  [ 'Testing: ' aTestedWordName ] strings:Cat Print
  aTestsHolder MembersIterator ==> (
-  IN anItem
-  anItem |N Print
-  anItem DO
+  IN aTest
+   %REMARK 'aTest - вложенный элемент aTestsHolder'
+  if ( ( aTest %ST |N ) = 'Test' ) then
+  begin
+   aTest |N Print
+    %REMARK 'Печатаем имя теста'
+   aTest DO
+    %REMARK 'Запускаем тест'
+  end //
  )
  [ 'Testing end: ' aTestedWordName ] strings:Cat Print
  '------------------' Print

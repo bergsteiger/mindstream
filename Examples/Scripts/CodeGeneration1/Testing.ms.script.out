@@ -13,6 +13,10 @@ Testing end: (+)?
 ------------------
 VOID Test TestingTest
  VOID OPERATOR Tests:(+)?
+  %SUMMARY %SUM
+   '"Стандартные тесты" для слова (+)?'
+  ; // %SUMMARY %SUM
+  
   VOID Test T1
    ''
    (+)?
