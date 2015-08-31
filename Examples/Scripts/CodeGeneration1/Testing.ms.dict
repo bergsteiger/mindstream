@@ -23,9 +23,10 @@ MACRO Tests
 ; // Tests
 
 PROCEDURE DoRunTests
+ STRING IN aTestedWordName
  ENGINE_WORD IN aTestsHolder
  %SUMMARY 'Выполняет тесты для aTestsHolder' ;
- [ 'Testing: ' aTestsHolder |N ] strings:Cat Print
+ [ 'Testing: ' aTestedWordName ] strings:Cat Print
  aTestsHolder MembersIterator ==> (
   IN anItem
   anItem |N Print
@@ -40,6 +41,7 @@ MACRO RunTests
  STRING VAR l_TestsHolderName
  cTests l_Name Cat >>> l_TestsHolderName
 
+ l_Name Ctx:Parser:PushString
  axiom:PushSymbol @
  l_TestsHolderName Ctx:Parser:PushSymbol
  axiom:PushSymbol DoRunTests

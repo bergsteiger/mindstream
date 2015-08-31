@@ -3575,6 +3575,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.di
 STRING CONST : cTests
 VOID OPERATOR :: PROCEDURE : DoRunTests
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ STRING OPERATOR :: IN : aTestedWordName
  ENGINE_WORD OPERATOR :: IN : aTestsHolder
 ; // DoRunTests
 IMMEDIATE VOID OPERATOR :: MACRO : RunTests
