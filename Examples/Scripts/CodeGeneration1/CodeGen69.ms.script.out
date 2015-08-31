@@ -3570,11 +3570,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.di
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
 STRING CONST : cTests
-VOID OPERATOR :: PROCEDURE : DoRunTests
+VOID OPERATOR :: PROCEDURE : DoRunTestsFor
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: IN : aTestedWordName
  ENGINE_WORD OPERATOR :: IN : aTestsHolder
-; // DoRunTests
+; // DoRunTestsFor
 IMMEDIATE VOID OPERATOR :: MACRO : RunTests
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName

@@ -20,7 +20,7 @@ MACRO TestsFor
  cTests aName |N Cat Ctx:Parser:PushSymbol
 ; // TestsFor
 
-PROCEDURE DoRunTests
+PROCEDURE DoRunTestsFor
  STRING IN aTestedWordName
  ENGINE_WORD IN aTestsHolder
  %SUMMARY 'Выполняет тесты для aTestsHolder' ;
@@ -40,7 +40,7 @@ PROCEDURE DoRunTests
  )
  [ 'Testing end: ' aTestedWordName ] strings:Cat Print
  '------------------' Print
-; // DoRunTests
+; // DoRunTestsFor
 
 MACRO RunTests
  Literal IN aName
@@ -54,5 +54,5 @@ MACRO RunTests
  l_Name Ctx:Parser:PushString
  axiom:PushSymbol @
  l_TestsHolderName Ctx:Parser:PushSymbol
- axiom:PushSymbol DoRunTests
+ axiom:PushSymbol DoRunTestsFor
 ; // RunTests
