@@ -4,11 +4,11 @@ USES
  Testing.ms.dict
 ;
 
-RunTests (+)?
+RunTestsFor (+)?
  %REMARK '«апускаем "стандартные тесты" дл€ слова (+)?'
-RunTests ?(+)
+RunTestsFor ?(+)
  %REMARK '«апускаем "стандартные тесты" дл€ слова ?(+)'
-RunTests strings:CatSep>
+RunTestsFor strings:CatSep>
  %REMARK '«апускаем "стандартные тесты" дл€ слова strings:CatSep>'
-RunTests any:Cat
+RunTestsFor any:Cat
  %REMARK '«апускаем "стандартные тесты" дл€ слова any:Cat'

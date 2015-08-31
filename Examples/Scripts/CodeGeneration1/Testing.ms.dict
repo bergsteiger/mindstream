@@ -43,9 +43,9 @@ PRIVATE PROCEDURE DoRunTestsFor
  '------------------' Print
 ; // DoRunTestsFor
 
-MACRO RunTests
+MACRO RunTestsFor
  ENGINE_WORD RIGHT LINK IN aName
-  %REMARK 'aName ссылка на слово справа от RunTests'
+  %REMARK 'aName ссылка на слово справа от RunTestsFor'
  %SUMMARY 'Выполняет тесты для aName' ;
 
  STRING VAR l_Name
@@ -57,4 +57,4 @@ MACRO RunTests
  axiom:PushSymbol @
  l_TestsHolderName Ctx:Parser:PushSymbol
  axiom:PushSymbol DoRunTestsFor
-; // RunTests
+; // RunTestsFor
