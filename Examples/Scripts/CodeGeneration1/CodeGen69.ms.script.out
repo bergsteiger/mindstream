@@ -3569,9 +3569,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.di
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
- Exports: 
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
- ;
 STRING CONST : cTests
 VOID OPERATOR :: PROCEDURE : DoRunTests
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
