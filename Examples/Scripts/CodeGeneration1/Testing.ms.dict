@@ -39,9 +39,8 @@ MACRO RunTests
  aName |N >>> l_Name
  STRING VAR l_TestsHolderName
  cTests l_Name Cat >>> l_TestsHolderName
- [
-  '@'
-  l_TestsHolderName
- ] Ctx:Parser:PushArray
+
+ axiom:PushSymbol @
+ l_TestsHolderName Ctx:Parser:PushSymbol
  axiom:PushSymbol DoRunTests
 ; // RunTests
