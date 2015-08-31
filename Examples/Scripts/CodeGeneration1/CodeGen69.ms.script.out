@@ -3583,6 +3583,9 @@ PRIVATE VOID OPERATOR :: PROCEDURE : ExpandRunTestsFor
  STRING OPERATOR :: IN : aTestsHolder
  STRING OPERATOR :: VAR : l_TestsHolderName
 ; // ExpandRunTestsFor
+IMMEDIATE VOID OPERATOR :: MACRO : RunTests
+ LINK ^ OPERATOR :: IN : aName
+; // RunTests
 IMMEDIATE VOID OPERATOR :: MACRO : RunTestsFor
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  LINK ^ OPERATOR :: IN : aName

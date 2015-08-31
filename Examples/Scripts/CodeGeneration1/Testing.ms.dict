@@ -61,7 +61,7 @@ MACRO RunTestsFor
  aName |N ExpandRunTestsFor
 ; // RunTestsFor
 
-//MACRO RunTests
-// ENGINE_WORD RIGHT LINK IN aName
-// RunTestsFor aName
-//; //RunTests
+MACRO RunTests
+ ENGINE_WORD RIGHT LINK IN aName
+ aName |N ExpandRunTestsFor
+; //RunTests
