@@ -49,16 +49,7 @@ VOID Test TestingTest
  
  @
  Tests:(+)?
- MembersIterator
- IT
- (
-  IN anItem
-  anItem
-  |N
-  .
-  anItem
-  DO
- )
+ DoRunTests
  TestingTest
  DumpElement
 ; // VOID Test TestingTest

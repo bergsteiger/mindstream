@@ -39,12 +39,6 @@ MACRO RunTests
  [
   '@'
   l_Name
-  'MembersIterator'
-  '==>'
-  '('
-  'IN anItem'
-  'anItem |N Print'
-  'anItem DO'
-  ')' 
- ] Ctx:Parser:PushArray 
+ ] Ctx:Parser:PushArray
+ axiom:PushSymbol DoRunTests
 ; // RunTests
