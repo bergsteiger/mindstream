@@ -30,12 +30,13 @@ PROCEDURE DoRunTests
   IN aTest
    %REMARK 'aTest - вложенный элемент aTestsHolder'
   if ( ( aTest %ST |N ) = 'Test' ) then
+   %REMARK '- фильтруем только тесты.'
   begin
    aTest |N Print
     %REMARK 'Печатаем имя теста'
    aTest DO
     %REMARK 'Запускаем тест'
-  end //
+  end // ( ( aTest %ST |N ) = 'Test' )
  )
  [ 'Testing end: ' aTestedWordName ] strings:Cat Print
  '------------------' Print
