@@ -3564,13 +3564,18 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.di
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
  Exports: 
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
  ;
 STRING CONST : cTests
 VOID OPERATOR :: PROCEDURE : DoRunTests
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ENGINE_WORD OPERATOR :: IN : aTestsHolder
+; // DoRunTests
 IMMEDIATE VOID OPERATOR :: MACRO : RunTests
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
