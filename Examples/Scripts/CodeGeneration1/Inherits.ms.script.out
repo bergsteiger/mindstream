@@ -1,28 +1,4 @@
 VOID Test InheritsTest
- IMMEDIATE OPERATOR __CompileCodeAndFree
-  Sequence IN aCode
-  if
-   (
-    aCode
-    IS
-    class::TkwBeginLikeCompiledCode
-   )
-  then
-   (
-    aCode
-    CodeIterator
-    IT
-    CompileRef
-   )
-  else
-   (
-    aCode
-    CompileRef
-   )
-  aCode
-  pop:Word:DecRef
- ; // IMMEDIATE OPERATOR __CompileCodeAndFree
- 
  : A
  ; // : A
  
@@ -65,64 +41,6 @@ VOID Test InheritsTest
  
  : I2
  ; // : I2
- 
- IMMEDIATE NamedCodeProducer Implements
-  ^ IN aCode
-  Implements
-  Ctx:SetWordProducerForCompiledClass
-  '%R'
-  Ctx:SetNewWordName
-  'axiom:operator'
-  Ctx:Parser:PushSymbol
-  aCode
-  pop:Word:IncRef
-  aCode
-  '__CompileCodeAndFree'
-  Ctx:Parser:PushSymbol
-  ';'
-  Ctx:Parser:PushSymbol
- ; // IMMEDIATE NamedCodeProducer Implements
- 
- IMMEDIATE NamedCodeProducer Inherits
-  ^ IN aCode
-  Inherits
-  Ctx:SetWordProducerForCompiledClass
-  '%G'
-  Ctx:SetNewWordName
-  'axiom:operator'
-  Ctx:Parser:PushSymbol
-  aCode
-  pop:Word:IncRef
-  aCode
-  '__CompileCodeAndFree'
-  Ctx:Parser:PushSymbol
-  ';'
-  Ctx:Parser:PushSymbol
- ; // IMMEDIATE NamedCodeProducer Inherits
- 
- IMMEDIATE VOID OPERATOR NamedCodeProducer
-  ^L IN aName
-  ^L IN aNewName
-  NamedCodeProducer
-  Ctx:SetWordProducerForCompiledClass
-  [
-   'IMMEDIATE axiom:operator'
-   aName
-   |N
-   '^ IN aCode'
-   '@SELF Ctx:SetWordProducerForCompiledClass'
-   aNewName
-   |NS
-   'Ctx:SetNewWordName'
-   '`axiom:operator` Ctx:Parser:PushSymbol'
-   'aCode pop:Word:IncRef'
-   'aCode'
-   '`__CompileCodeAndFree` Ctx:Parser:PushSymbol'
-   '`;` Ctx:Parser:PushSymbol'
-   ';'
-  ]
-  Ctx:Parser:PushArray
- ; // IMMEDIATE VOID OPERATOR NamedCodeProducer
  
  InheritsTest
  DumpElement
