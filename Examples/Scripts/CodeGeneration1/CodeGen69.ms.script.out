@@ -3572,7 +3572,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.di
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\RefDeepest.ms.dict
  ;
 STRING CONST : cTests
 PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTestsFor
@@ -3621,60 +3620,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.m
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: TYPE : ENGINE_WORD
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\RefDeepest.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Array
-  axiom:File
-  axiom:Font
-  axiom:generators
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymbols.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
- ;
-WORD_REF OPERATOR : |RefDeepest
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^@ OPERATOR :: IN : aSelf
- WORD_REF OPERATOR :: |RefDeepest : Result
-; // |RefDeepest
-WORD_REF OPERATOR : Dereference
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^@ OPERATOR :: IN : aSelf
- WORD_REF OPERATOR :: |RefDeepest : Result
-; // Dereference
-WORD_REF OPERATOR : GetRefDeepestFromLeft
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- ^@ OPERATOR :: IN : aSelf
- WORD_REF OPERATOR :: |RefDeepest : Result
-; // GetRefDeepestFromLeft
-WORD_REF OPERATOR : pop:Word:GetRefDeepest
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- WORD_REF OPERATOR :: IN : aSelf
- WORD_REF OPERATOR :: pop:Word:GetRefDeepest : Result
-; // pop:Word:GetRefDeepest
-IMMEDIATE VOID OPERATOR :: TYPE : WORD_REF
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
  Uses: 
   axiom:axiom
@@ -4650,6 +4595,60 @@ IMMEDIATE VOID OPERATOR :: MACRO : elem_ref_proc
  ^L OPERATOR :: IN : aName
 ; // elem_ref_proc
 IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\RefDeepest.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymbols.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
+ ;
+WORD_REF OPERATOR : |RefDeepest
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^@ OPERATOR :: IN : aSelf
+ WORD_REF OPERATOR :: |RefDeepest : Result
+; // |RefDeepest
+WORD_REF OPERATOR : Dereference
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^@ OPERATOR :: IN : aSelf
+ WORD_REF OPERATOR :: |RefDeepest : Result
+; // Dereference
+WORD_REF OPERATOR : GetRefDeepestFromLeft
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^@ OPERATOR :: IN : aSelf
+ WORD_REF OPERATOR :: |RefDeepest : Result
+; // GetRefDeepestFromLeft
+WORD_REF OPERATOR : pop:Word:GetRefDeepest
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ WORD_REF OPERATOR :: IN : aSelf
+ WORD_REF OPERATOR :: pop:Word:GetRefDeepest : Result
+; // pop:Word:GetRefDeepest
+IMMEDIATE VOID OPERATOR :: TYPE : WORD_REF
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\FieldByNameDeepest.ms.dict
  Uses: 
   axiom:axiom
