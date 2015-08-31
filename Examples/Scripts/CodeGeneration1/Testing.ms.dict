@@ -19,6 +19,9 @@ MACRO Tests
  ] Ctx:Parser:PushArray
 ; // Tests
 
+PROCEDURE DoRunTests
+; // DoRunTests
+
 MACRO RunTests
  Literal IN aName
  STRING VAR l_Name
