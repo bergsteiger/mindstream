@@ -25,6 +25,7 @@ MACRO Tests
 PROCEDURE DoRunTests
  ENGINE_WORD IN aTestsHolder
  %SUMMARY 'Выполняет тесты для aTestsHolder' ;
+ [ 'Testing: ' aTestsHolder |N ] strings:Cat Print
  aTestsHolder MembersIterator ==> (
   IN anItem
   anItem |N Print
