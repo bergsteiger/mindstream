@@ -16,6 +16,7 @@ CONST cTests 'Tests:'
 
 MACRO Tests
  Literal IN aName
+ %SUMMARY 'Определяет тесты для aName' ;
  [
    'VOID axiom:operator'
    cTests aName |N Cat
@@ -37,6 +38,7 @@ PROCEDURE DoRunTests
 
 MACRO RunTests
  Literal IN aName
+ %SUMMARY 'Выполняет тесты для aName' ;
  STRING VAR l_Name
  aName |N >>> l_Name
  STRING VAR l_TestsHolderName
