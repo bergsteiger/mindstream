@@ -4,13 +4,9 @@ USES
 ;
 
 RunTests (+)?
-'------------------' Print
 
 RunTests ?(+)
-'------------------' Print
 
 RunTests strings:CatSep>
-'------------------' Print
 
 RunTests any:Cat
-'------------------' Print
