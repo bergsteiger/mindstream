@@ -2929,6 +2929,10 @@ VOID OPERATOR : array:AddTo
 IMMEDIATE VOID OPERATOR :: MACRO : call.me
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
 ; // call.me
+STRING FUNCTION : NameOf
+ LINK ^ OPERATOR :: IN : aWord
+ STRING FUNCTION :: NameOf : Result
+; // NameOf
 IMMEDIATE VOID OPERATOR :: MACRO : RecurseProc
  ^L OPERATOR :: IN : aName
 ; // RecurseProc

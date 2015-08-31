@@ -7,6 +7,11 @@ USES
  Documentation.ms.dict
 ;
 
+STRING FUNCTION NameOf
+ ^ LINK IN aWord
+ aWord |N >>> Result
+; // NameOf
+
 MACRO RecurseProc
 // - процедура, которая умеет вызываться рекурсивно
  ^L IN aName
