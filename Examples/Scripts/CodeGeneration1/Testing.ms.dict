@@ -36,10 +36,12 @@ PROCEDURE DoRunTests
 MACRO RunTests
  Literal IN aName
  STRING VAR l_Name
- cTests aName |N Cat >>> l_Name
+ aName |N >>> l_Name
+ STRING VAR l_TestsHolderName
+ cTests l_Name Cat >>> l_TestsHolderName
  [
   '@'
-  l_Name
+  l_TestsHolderName
  ] Ctx:Parser:PushArray
  axiom:PushSymbol DoRunTests
 ; // RunTests
