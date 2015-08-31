@@ -21,7 +21,7 @@ MACRO TestsFor
  cTests aName |N Cat Ctx:Parser:PushSymbol
 ; // TestsFor
 
-PROCEDURE DoRunTestsFor
+PRIVATE PROCEDURE DoRunTestsFor
  STRING IN aTestedWordName
  ENGINE_WORD IN aTestsHolder
  %SUMMARY 'Выполняет тесты для aTestsHolder' ;
