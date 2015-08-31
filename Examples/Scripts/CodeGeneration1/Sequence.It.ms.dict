@@ -8,6 +8,9 @@ USES
  NoCapsLock.ms.dict
 ;
 
+EXPORTS
+ NoCapsLock.ms.dict
+
 ARRAY FUNCTION Sequence.It
  Sequence IN aCode
  if ( aCode IS class::TkwBeginLikeCompiledCode ) then  
