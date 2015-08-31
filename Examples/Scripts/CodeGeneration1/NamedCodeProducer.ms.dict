@@ -19,10 +19,7 @@ PROCEDURE DoSequence
 
 MACRO __CompileCodeAndFree
  Sequence IN aCode
- if ( aCode IS class::TkwBeginLikeCompiledCode ) then  
-  ( aCode DoSequence CompileRef )
- else
-  ( aCode CompileRef ) 
+ aCode DoSequence CompileRef
  aCode pop:Word:DecRef 
 ; // __CompileCodeAndFree
 
