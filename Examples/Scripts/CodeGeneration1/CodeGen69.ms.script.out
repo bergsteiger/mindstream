@@ -4076,6 +4076,10 @@ IMMEDIATE VOID OPERATOR :: MACRO : NamedCodeProducer
  ^L OPERATOR :: IN : aName
  ^L OPERATOR :: IN : aNewName
 ; // NamedCodeProducer
+VOID OPERATOR :: PROCEDURE : Sequence==>
+ Sequence OPERATOR :: IN : aCode
+ ^ OPERATOR :: IN : aLambda
+; // Sequence==>
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Concrete.ms.model
  Uses: 
   axiom:axiom

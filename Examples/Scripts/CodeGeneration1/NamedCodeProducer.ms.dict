@@ -17,9 +17,11 @@ PROCEDURE DoSequence
   ( aCode ( aLambda DO ) ) 
 ; // DoSequence
 
+WordAlias Sequence==> DoSequence
+
 MACRO __CompileCodeAndFree
  Sequence IN aCode
- aCode DoSequence CompileRef
+ aCode Sequence==> CompileRef
  aCode pop:Word:DecRef 
 ; // __CompileCodeAndFree
 
