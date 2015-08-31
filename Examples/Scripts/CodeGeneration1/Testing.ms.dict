@@ -59,11 +59,7 @@ MACRO RunTestsFor
  ENGINE_WORD RIGHT LINK IN aName
   %REMARK 'aName ссылка на слово справа от RunTestsFor'
  %SUMMARY '¬ыполн€ет тесты дл€ aName' ;
-
- STRING VAR l_Name
- aName |N >>> l_Name
-
- l_Name ExpandRunTestsFor
+ aName |N ExpandRunTestsFor
 ; // RunTestsFor
 
 //MACRO RunTests
