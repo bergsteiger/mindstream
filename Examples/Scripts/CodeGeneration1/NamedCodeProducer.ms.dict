@@ -8,20 +8,17 @@ USES
  NoCapsLock.ms.dict
 ;
 
-PROCEDURE DoSequence
+ARRAY FUNCTION Sequence.It
  Sequence IN aCode
- Lambda RIGHT IN aLambda
  if ( aCode IS class::TkwBeginLikeCompiledCode ) then  
-  ( aCode CodeIterator ==> ( aLambda DO ) )
+  ( aCode CodeIterator >>> Result )
  else
-  ( aCode ( aLambda DO ) ) 
-; // DoSequence
-
-WordAlias Sequence==> DoSequence
+  ( [ aCode ] >>> Result ) 
+; // Sequence.It
 
 MACRO __CompileCodeAndFree
  Sequence IN aCode
- aCode Sequence==> CompileRef
+ aCode Sequence.It ==> CompileRef
  aCode pop:Word:DecRef 
 ; // __CompileCodeAndFree
 

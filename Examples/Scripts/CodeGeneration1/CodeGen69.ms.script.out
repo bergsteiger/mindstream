@@ -4068,18 +4068,14 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProd
 IMMEDIATE VOID OPERATOR :: MACRO : __CompileCodeAndFree
  Sequence OPERATOR :: IN : aCode
 ; // __CompileCodeAndFree
-VOID OPERATOR :: PROCEDURE : DoSequence
- Sequence OPERATOR :: IN : aCode
- ^ OPERATOR :: IN : aLambda
-; // DoSequence
 IMMEDIATE VOID OPERATOR :: MACRO : NamedCodeProducer
  ^L OPERATOR :: IN : aName
  ^L OPERATOR :: IN : aNewName
 ; // NamedCodeProducer
-VOID OPERATOR :: PROCEDURE : Sequence==>
+ARRAY FUNCTION : Sequence.It
  Sequence OPERATOR :: IN : aCode
- ^ OPERATOR :: IN : aLambda
-; // Sequence==>
+ ARRAY FUNCTION :: Sequence.It : Result
+; // Sequence.It
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Concrete.ms.model
  Uses: 
   axiom:axiom
