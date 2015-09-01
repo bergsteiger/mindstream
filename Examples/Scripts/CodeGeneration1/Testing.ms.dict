@@ -61,6 +61,7 @@ PRIVATE PROCEDURE ExpandRunTestsFor
  l_Name Ctx:Parser:PushString
  axiom:PushSymbol @
  l_TestsHolderName Print
+ l_TestsHolderName IsWordDeclared Print
  l_TestsHolderName Ctx:Parser:PushSymbol
  axiom:PushSymbol DoRunTestsFor
 ; // ExpandRunTestsFor
