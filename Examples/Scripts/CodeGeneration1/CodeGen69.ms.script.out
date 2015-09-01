@@ -3586,7 +3586,7 @@ PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTestsFor
  ENGINE_WORD OPERATOR :: IN : aTestsHolder
 ; // DoRunTestsFor
 PRIVATE VOID OPERATOR :: PROCEDURE : ExpandRunTestsFor
- STRING OPERATOR :: IN : aTestsHolder
+ ENGINE_WORD OPERATOR :: IN : aTestsHolder
  STRING OPERATOR :: VAR : l_TestsHolderName
 ; // ExpandRunTestsFor
 IMMEDIATE VOID OPERATOR :: MACRO : RunTests

@@ -45,11 +45,11 @@ PRIVATE PROCEDURE DoRunTestsFor
 ; // DoRunTestsFor
 
 PRIVATE PROCEDURE ExpandRunTestsFor
- STRING IN aTestsHolder
+ ENGINE_WORD IN aTestsHolder
  STRING VAR l_TestsHolderName
- cTests aTestsHolder Cat >>> l_TestsHolderName
+ cTests aTestsHolder |N Cat >>> l_TestsHolderName
 
- aTestsHolder Ctx:Parser:PushString
+ aTestsHolder |N Ctx:Parser:PushString
  axiom:PushSymbol @
  l_TestsHolderName Ctx:Parser:PushSymbol
  axiom:PushSymbol DoRunTestsFor
@@ -59,7 +59,7 @@ MACRO RunTestsFor
  ENGINE_WORD RIGHT LINK IN aWord
   %REMARK 'aWord ссылка на слово справа от RunTestsFor'
  %SUMMARY 'Выполняет тесты для aWord' ;
- aWord |N ExpandRunTestsFor
+ aWord ExpandRunTestsFor
 ; // RunTestsFor
 
 MACRO DoRunTests
@@ -73,5 +73,5 @@ MACRO RunTests
  Sequence RIGHT LINK IN aWords
   %REMARK 'aWords ссылка на список слов справа от RunTests'
  %SUMMARY 'Выполняет тесты для списка слов aWords' ;
- aWords |N ExpandRunTestsFor
+ aWords ExpandRunTestsFor
 ; //RunTests
