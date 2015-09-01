@@ -29,7 +29,7 @@ MACRO @(
     axiom:PushSymbol (
     l_A ==> Ctx:Parser:PushSymbol
     l_Token Ctx:Parser:PushSymbol 
-    BREAK
+    break
    end
   end
   l_Token >>>[] l_A
