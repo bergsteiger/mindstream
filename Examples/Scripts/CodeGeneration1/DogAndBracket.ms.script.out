@@ -24,7 +24,7 @@ VOID Test DogAndBracketTest
  ; // IMMEDIATE VOID MACRO @(
  
  VOID PROCEDURE DogAndBracket
-  STRING IN aBracket
+  STRING IN aBracketClose
   ARRAY VAR l_A
   INTERFACE VAR l_Parser
   Ctx:Parser
@@ -76,7 +76,7 @@ VOID Test DogAndBracketTest
       (
        l_Token
        =
-       aBracket
+       aBracketClose
       )
      then
       BEGIN
