@@ -16,7 +16,7 @@ l3_ttString
 3
 2
 1
-VOID Test DogAndBracket
+VOID Test DogAndBracketTest
  IMMEDIATE VOID MACRO @(
   ARRAY VAR l_A
   INTERFACE VAR l_Parser
@@ -114,7 +114,7 @@ VOID Test DogAndBracket
   0
  )
  .
- DogAndBracket
+ DogAndBracketTest
  DumpElement
-; // VOID Test DogAndBracket
+; // VOID Test DogAndBracketTest
 
