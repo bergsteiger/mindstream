@@ -24,12 +24,12 @@ MACRO @(
   if ( l_TokenType = Tl3TokenType::l3_ttSymbol ) then
   begin
    if ( l_Token = NameOf ) ) then
-    (
-     axiom:PushSymbol (
-     l_A ==> Ctx:Parser:PushSymbol
-     l_Token Ctx:Parser:PushSymbol 
-     BREAK
-    )
+   begin
+    axiom:PushSymbol (
+    l_A ==> Ctx:Parser:PushSymbol
+    l_Token Ctx:Parser:PushSymbol 
+    BREAK
+   end
   end
   l_Token >>>[] l_A
   l_TokenType Tl3TokenType:ValueToName Print
