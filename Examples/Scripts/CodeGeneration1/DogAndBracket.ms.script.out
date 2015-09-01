@@ -8,16 +8,14 @@ l3_ttInteger
 l3_ttInteger
 l3_ttSymbol
 l3_ttString
-1
-2
-3
-4
-5
-6
-1
-2
-+
 123
+12
+6
+5
+4
+3
+2
+1
 VOID Test DogAndBracketTest
  IMMEDIATE VOID MACRO @(
   NameOf
@@ -103,7 +101,7 @@ VOID Test DogAndBracketTest
         IN aSymbol
         IN aTokenType
         aSymbol
-        .
+        Ctx:Parser:PushSymbol
        END
        l_Token
        Ctx:Parser:PushSymbol
@@ -125,6 +123,16 @@ VOID Test DogAndBracketTest
  ; // VOID PROCEDURE DogAndBracket
  
  (
+  '1'
+  '2'
+  '3'
+  '4'
+  '5'
+  '6'
+  '1'
+  '2'
+  +
+  '123'
  )
  WHILE
  (

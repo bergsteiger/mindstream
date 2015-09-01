@@ -39,7 +39,7 @@ PROCEDURE DogAndBracket
     begin
      IN aSymbol
      IN aTokenType 
-     aSymbol Print // Ctx:Parser:PushSymbol
+     aSymbol Ctx:Parser:PushSymbol
     end
     l_Token Ctx:Parser:PushSymbol 
     break
