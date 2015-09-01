@@ -8,6 +8,8 @@ USES
 MACRO @(
  INTERFACE VAR l_Parser 
  Ctx:Parser >>> l_Parser
+ ARRAY VAR l_A
+ l_A := [ ]
 
  WHILE true
  BEGIN
