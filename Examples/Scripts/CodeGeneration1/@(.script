@@ -1,6 +1,7 @@
 // @(.script
 
 USES
+ axiom:Tl3TokenType
  io.ms.dict
  macro.ms.dict
 ;
@@ -24,7 +25,7 @@ MACRO @(
     BREAK
    )
   l_Token >>>[] l_A
-  l_Parser pop:Parser:TokenType Print
+  l_Parser pop:Parser:TokenType Tl3TokenType:ValueToName Print
   l_Parser pop:Parser:NextToken
  END
 ; // @(
