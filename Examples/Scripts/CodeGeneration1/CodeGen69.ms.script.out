@@ -3580,6 +3580,10 @@ PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTests
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  Sequence OPERATOR :: IN : aWords
 ; // DoRunTests
+PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTestsA
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ARRAY OPERATOR :: IN : aWords
+; // DoRunTestsA
 PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTestsFor
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: IN : aTestedWordName

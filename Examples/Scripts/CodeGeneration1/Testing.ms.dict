@@ -57,16 +57,23 @@ PRIVATE PROCEDURE ExpandRunTestsFor
  axiom:PushSymbol DoRunTestsFor
 ; // ExpandRunTestsFor
 
+PRIVATE PROCEDURE DoRunTestsA
+ ARRAY IN aWords
+  %REMARK 'aWords ссылка на список слов слева от DoRunTests'
+ %SUMMARY 'Выполняет тесты для списка слов aWords' ;
+ aWords ==> ExpandRunTestsFor
+; // DoRunTestsA
+
 PRIVATE PROCEDURE DoRunTests
  Sequence IN aWords
   %REMARK 'aWords ссылка на список слов слева от DoRunTests'
  %SUMMARY 'Выполняет тесты для списка слов aWords' ;
  aWords Sequence.It ==> ExpandRunTestsFor
-; //DoRunTests
+; // DoRunTests
 
 MACRO RunTests
  Sequence RIGHT LINK IN aWords
   %REMARK 'aWords ссылка на список слов справа от RunTests'
  %SUMMARY 'Выполняет тесты для списка слов aWords' ;
  aWords |^@ DoRunTests
-; //RunTests
+; // RunTests
