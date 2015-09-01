@@ -19,12 +19,15 @@ l3_ttString
 VOID Test DogAndBracketTest
  IMMEDIATE VOID MACRO @(
   NameOf
+  (
+  NameOf
   )
   DogAndBracket
  ; // IMMEDIATE VOID MACRO @(
  
  VOID PROCEDURE DogAndBracket
   STRING IN aBracketClose
+  STRING IN aBracketOpen
   ARRAY VAR l_A
   INTERFACE VAR l_Parser
   Ctx:Parser
