@@ -77,3 +77,10 @@ MACRO RunTests
  %SUMMARY '¬ыполн€ет тесты дл€ списка слов aWords' ;
  aWords |^@ DoRunTests
 ; // RunTests
+
+MACRO RunTestsA
+ Sequence RIGHT LINK IN aWords
+  %REMARK 'aWords ссылка на список слов справа от RunTests'
+ %SUMMARY '¬ыполн€ет тесты дл€ списка слов aWords' ;
+ aWords |^@ DoRunTests
+; // RunTestsA
