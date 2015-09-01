@@ -34,7 +34,7 @@ PROCEDURE DogAndBracket
 
    if ( l_Token = aBracketClose ) then
    begin
-    axiom:PushSymbol (
+    aBracketOpen Ctx:Parser:PushSymbol
     l_A ==> Ctx:Parser:PushSymbol
     l_Token Ctx:Parser:PushSymbol 
     break

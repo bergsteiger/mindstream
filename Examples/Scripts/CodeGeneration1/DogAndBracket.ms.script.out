@@ -83,8 +83,8 @@ VOID Test DogAndBracketTest
       )
      then
       BEGIN
-       axiom:PushSymbol
-       (
+       aBracketOpen
+       Ctx:Parser:PushSymbol
        l_A
        IT
        Ctx:Parser:PushSymbol
