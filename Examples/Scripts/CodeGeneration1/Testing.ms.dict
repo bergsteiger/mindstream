@@ -23,12 +23,6 @@ MACRO TestsFor
  cTests aWord |N Cat Ctx:Parser:PushSymbol
 ; // TestsFor
 
-BOOLEAN FUNCTION IsWordDeclared
- STRING IN aName
- %SUMMARY 'ќпредел€ет, что слово aName определено в данном месте' ;
- aName Ctx:PushFinder pop:KeywordFinder:KeywordByName <> nil >>> Result
-; // IsWordDeclared
-
 PRIVATE PROCEDURE DoRunTestsFor
  STRING IN aTestedWordName
  ENGINE_WORD IN aTestsHolder
