@@ -95,7 +95,9 @@ VOID Test DogAndBracketTest
        Ctx:Parser:PushSymbol
        l_A
        IT
-       Ctx:Parser:PushSymbol
+       (
+        Ctx:Parser:PushSymbol
+       )
        l_Token
        Ctx:Parser:PushSymbol
        BREAK
