@@ -23,7 +23,6 @@ MACRO @(
     l_Token Ctx:Parser:PushSymbol 
     BREAK
    )
-  l_Token Print
   l_Token >>>[] l_A
   l_Parser pop:Parser:NextToken
  END
