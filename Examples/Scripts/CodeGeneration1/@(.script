@@ -15,11 +15,11 @@ MACRO @(
   l_Parser pop:Parser:TokenLongString >>> l_Token
   if ( l_Token = ')' ) then
    ( 
-    EXIT
+    BREAK
    )
   l_Token Print
   l_Parser pop:Parser:NextToken
  END
 ; // @(
 
-@( 1 2 3 4 5 6 ) DO Print
+@( 1 2 3 4 5 6 )
