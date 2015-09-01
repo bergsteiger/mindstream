@@ -1,0 +1,27 @@
+[ 4 5 ] [ 1 2 3 ] JOIN ==> .
+[ 4 5 ] [ 1 2 3 ] JOIN .
+[ 4 5 ] [ 1 2 3 ] JOIN Reverted ==> .
+[ 4 5 ] [ 1 2 3 ] JOIN Reverted .
+
+'------' .
+
+[ 1 2 3 ] .join> [ 4 5 ] ==> .
+[ 1 2 3 ] .join> [ 4 5 ]  .
+[ 1 2 3 ] .join> [ 4 5 ]  Reverted ==> .
+[ 1 2 3 ] .join> [ 4 5 ]  Reverted .
+
+'------' .
+
+[ 1 2 3 ] >join> [ 4 5 ] ==> .
+[ 1 2 3 ] >join> [ 4 5 ]  .
+[ 1 2 3 ] >join> [ 4 5 ]  Reverted ==> .
+[ 1 2 3 ] >join> [ 4 5 ]  Reverted .
+
+'------' .
+
+[ 1 2 3 ] .join> [ 4 5 ] .join> [ 6 7 8 9 10 ] ==> .
+[ 1 2 3 ] .join> [ 4 5 ] .join> [ 6 7 8 9 10 ] .
+[ 1 2 3 ] .join> [ 4 5 ] .join> [ 6 7 8 9 10 ] Reverted ==> .
+[ 1 2 3 ] .join> [ 4 5 ] .join> [ 6 7 8 9 10 ] Reverted .
+
+'------' .

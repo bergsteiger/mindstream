@@ -1,3 +1,14 @@
+/*{USES
+ axiom:KeywordFinder
+;
+
+VOID IMMEDIATE OPERATOR DECLARED
+  ^L IN aName
+ BOOLEAN VAR l_Found
+ aName |N Ctx:PushFinder pop:KeywordFinder:KeywordByName <> nil >>> l_Found
+ l_Found CompileValue
+; // DECLARED}*/
+
  DECLARED + .
  DECLARED XXX .
 

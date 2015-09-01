@@ -1,0 +1,36 @@
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+VOID Test RecurseTest
+ FORWARD X
+ VOID PROCEDURE X
+  INTEGER IN aValue
+  if
+   (
+    aValue
+    <>
+    0
+   )
+  then
+   (
+    aValue
+    .
+    aValue
+    --
+    X
+   )
+ ; // VOID PROCEDURE X
+ 
+ 10
+ X
+ RecurseTest
+ DumpElement
+; // VOID Test RecurseTest
+

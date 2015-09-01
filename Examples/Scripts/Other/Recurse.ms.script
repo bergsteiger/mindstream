@@ -1,0 +1,30 @@
+USES
+ CodeDump.ms.dict
+;
+
+IMMEDIATE VOID operator Rec
+ ^L IN aName
+ 'FORWARD' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+ 
+ 'PROCEDURE' Ctx:Parser:PushSymbol
+ //'VOID' Ctx:Parser:PushSymbol
+ //'operator' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+ //Ctx:ClearTypeInfo
+; // Rec
+
+Test RecurseTest
+
+ Rec X
+  INTEGER IN aValue
+  if ( aValue <> 0 ) then
+   ( aValue . aValue -- X )
+ ; // X
+ 
+ 10 X
+ 
+ @SELF DumpElement
+; // RecurseTest
+
+RecurseTest
