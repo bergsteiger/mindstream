@@ -24,6 +24,7 @@ MACRO @(
   l_Parser pop:Parser:TokenType >>> l_TokenType
   if ( l_TokenType = Tl3TokenType::l3_ttSymbol ) then
   begin
+   ( l_Token = NameOf ( ) ?Fail 'Вложенные скобки пока не поддерживаются'
    if ( l_Token = NameOf ) ) then
    begin
     axiom:PushSymbol (
