@@ -3586,15 +3586,16 @@ PRIVATE VOID OPERATOR :: PROCEDURE : ExpandRunTestsFor
  STRING OPERATOR :: VAR : l_TestsHolderName
 ; // ExpandRunTestsFor
 IMMEDIATE VOID OPERATOR :: MACRO : RunTests
- LINK ^ OPERATOR :: IN : aName
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ LINK ^ OPERATOR :: IN : aWords
 ; // RunTests
 IMMEDIATE VOID OPERATOR :: MACRO : RunTestsFor
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- LINK ^ OPERATOR :: IN : aName
+ LINK ^ OPERATOR :: IN : aWord
 ; // RunTestsFor
 IMMEDIATE VOID OPERATOR :: MACRO : TestsFor
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- LINK ^ OPERATOR :: IN : aName
+ LINK ^ OPERATOR :: IN : aWord
 ; // TestsFor
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
  Uses: 

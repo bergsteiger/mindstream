@@ -13,13 +13,13 @@ USES
 CONST cTests 'Tests:'
 
 MACRO TestsFor
- ENGINE_WORD RIGHT LINK IN aName
-  %REMARK 'aName ссылка на слово справа от TestsFor'
- %SUMMARY 'Определяет набор тестов для слова aName' ;
+ ENGINE_WORD RIGHT LINK IN aWord
+  %REMARK 'aWord ссылка на слово справа от TestsFor'
+ %SUMMARY 'Определяет набор тестов для слова aWord' ;
 
  axiom:PushSymbol VOID
  axiom:PushSymbol axiom:operator
- cTests aName |N Cat Ctx:Parser:PushSymbol
+ cTests aWord |N Cat Ctx:Parser:PushSymbol
 ; // TestsFor
 
 PRIVATE PROCEDURE DoRunTestsFor
@@ -56,13 +56,15 @@ PRIVATE PROCEDURE ExpandRunTestsFor
 ; // ExpandRunTestsFor
 
 MACRO RunTestsFor
- ENGINE_WORD RIGHT LINK IN aName
-  %REMARK 'aName ссылка на слово справа от RunTestsFor'
- %SUMMARY 'Выполняет тесты для aName' ;
- aName |N ExpandRunTestsFor
+ ENGINE_WORD RIGHT LINK IN aWord
+  %REMARK 'aWord ссылка на слово справа от RunTestsFor'
+ %SUMMARY 'Выполняет тесты для aWord' ;
+ aWord |N ExpandRunTestsFor
 ; // RunTestsFor
 
 MACRO RunTests
- Sequence RIGHT LINK IN aName
- aName |N ExpandRunTestsFor
+ Sequence RIGHT LINK IN aWords
+  %REMARK 'aWords ссылка на список слов справа от RunTests'
+ %SUMMARY 'Выполняет тесты для списка слов aWords' ;
+ aWords |N ExpandRunTestsFor
 ; //RunTests
