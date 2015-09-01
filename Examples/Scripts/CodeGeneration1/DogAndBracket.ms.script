@@ -2,6 +2,7 @@
 
 USES
  axiom:Tl3TokenType
+ core.ms.dict
  io.ms.dict
  macro.ms.dict
 ;
@@ -17,7 +18,7 @@ MACRO @(
  BEGIN
   STRING VAR l_Token
   l_Parser pop:Parser:TokenLongString >>> l_Token
-  if ( l_Token = ')' ) then
+  if ( l_Token = NameOf ) ) then
    (
     '(' Ctx:Parser:PushSymbol 
     l_A ==> Ctx:Parser:PushSymbol
