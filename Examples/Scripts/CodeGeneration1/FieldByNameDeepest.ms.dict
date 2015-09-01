@@ -5,6 +5,7 @@ USES
  params.ms.dict
  RefDeepest.ms.dict
  EngineTypes.ms.dict
+ arrays.ms.dict
 ;
 
 REF operator FieldByNameDeepest
@@ -23,6 +24,6 @@ REF operator FieldByNameDeepest
  
  ASSURE 
   NOT ( l_Res pop:object:IsNil ) 
-  [ 'Не найдено поле: ' l_Self LIST %P Reverted ==> ( |N '::' ) l_Self |N '::' l_Name ]
+  [ 'Не найдено поле: ' l_Self LIST %P .reverted> .for> ( |N '::' ) l_Self |N '::' l_Name ]
  l_Res =: Result
 ; // FieldByNameDeepest

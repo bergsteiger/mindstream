@@ -29,7 +29,7 @@ PRIVATE PROCEDURE DoRunTestsFor
  %SUMMARY 'Выполняет тесты для aTestsHolder' ;
 
  [ 'Testing: ' aTestedWordName ] strings:Cat Print
- aTestsHolder MembersIterator ==> (
+ aTestsHolder MembersIterator .for> (
   IN aTest
    %REMARK 'aTest - вложенный элемент aTestsHolder'
   if ( ( aTest %ST |N ) = ( NameOf Test ) ) then
@@ -65,7 +65,7 @@ PRIVATE PROCEDURE DoRunTestsA
  ARRAY IN aWords
   %REMARK 'aWords ссылка на список слов слева от DoRunTests'
  %SUMMARY 'Выполняет тесты для списка слов aWords' ;
- aWords ==> ExpandRunTestsFor
+ aWords .for> ExpandRunTestsFor
 ; // DoRunTestsA
 
 PRIVATE PROCEDURE DoRunTests

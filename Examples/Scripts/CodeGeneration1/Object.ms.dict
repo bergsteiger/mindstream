@@ -7,6 +7,7 @@ USES
  axiom_push.ms.dict
  Documentation.ms.dict
  WordsRTTI.ms.dict
+ arrays.ms.dict
 ;
 
 EXPORTS
@@ -100,9 +101,9 @@ MACRO member
 MACRO classExpander
  ^ IN anImpl
  // Тут можно копировать поля и методы
- anImpl |@ %G ==> ( 
+ anImpl |@ %G .for> ( 
   IN anItem 
-  anItem %Fld ==> ( 
+  anItem %Fld .for> ( 
    IN anItem 
    axiom:PushSymbol member
    anItem |N Ctx:Parser:PushSymbol
@@ -200,7 +201,7 @@ MACRO RunCompileFields
   'implementation'
   g_CurrentClassImpl
    '%FIELDS'
-   g_CurrentClassMembers ==> ( STRING IN aName [ '`' aName '`' ] strings:Cat )
+   g_CurrentClassMembers .for> ( STRING IN aName [ '`' aName '`' ] strings:Cat )
    ';'
   'end.'
  ] Ctx:Parser:PushArray

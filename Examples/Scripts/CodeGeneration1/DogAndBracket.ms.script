@@ -35,7 +35,7 @@ PROCEDURE DogAndBracket
    if ( l_Token = aBracketClose ) then
    begin
     aBracketOpen Ctx:Parser:PushSymbol
-    l_A ==> (
+    l_A .for> (
      IN aSymbol 
      aSymbol Ctx:Parser:PushSymbol
     )

@@ -163,7 +163,7 @@ elem_proc Child.CallCurrentGen
 
 elem_proc CallChildrenCurrentGen
  %SUMMARY 'Вызывает текущий генератор для всех детей элемента модели' ;
- Self .Children ==> .Child.CallCurrentGen
+ Self .Children .for> .Child.CallCurrentGen
 ; // CallChildrenCurrentGen
 
 WordAlias .generate.children .CallChildrenCurrentGen

@@ -3747,6 +3747,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.d
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
  ;
 STRING FUNCTION : Check
  STRING OPERATOR :: IN : aName
@@ -3841,6 +3846,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
  ;
@@ -4162,6 +4172,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProd
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Sequence.It.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : __CompileCodeAndFree
  Sequence OPERATOR :: IN : aCode
@@ -4786,6 +4801,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\FieldByNameDe
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\RefDeepest.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
  ;
 ^@ OPERATOR : FieldByNameDeepest
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM

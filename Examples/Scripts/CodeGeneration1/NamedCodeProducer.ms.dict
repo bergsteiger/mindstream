@@ -7,11 +7,12 @@ USES
  Documentation.ms.dict
  NoCapsLock.ms.dict
  Sequence.It.ms.dict
+ arrays.ms.dict
 ;
 
 MACRO __CompileCodeAndFree
  Sequence IN aCode
- aCode Sequence.It ==> CompileRef
+ aCode Sequence.It .for> CompileRef
  aCode pop:Word:DecRef 
 ; // __CompileCodeAndFree
 

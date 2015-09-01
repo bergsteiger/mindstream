@@ -1,5 +1,6 @@
 USES
  core.ms.dict
+ arrays.ms.dict
 ;
 
 FORWARD DumpElement
@@ -75,11 +76,11 @@ STRING FUNCTION CodeName OBJECT IN aCode
 FORWARD DumpCodeCall
 
 PROCEDURE DumpMembers OBJECT IN aCode
- aCode MembersIterator ==> ( OBJECT IN aCode
+ aCode MembersIterator .for> ( OBJECT IN aCode
   if ( aCode Is class::TkwForwardDeclaration ) then
    OutA [ 'FORWARD ' aCode CodeName ]
  )
- aCode MembersIterator ==> ( OBJECT IN aCode
+ aCode MembersIterator .for> ( OBJECT IN aCode
   aCode DumpElement 
  )
 ; // DumpMembers
@@ -132,7 +133,7 @@ PROCEDURE DumpElementPrim BOOLEAN IN aNeedStereo OBJECT IN aCode
  TRY
   aCode DumpMembers
   
-  aCode CodeIterator ==> ( OBJECT IN aCode
+  aCode CodeIterator .for> ( OBJECT IN aCode
    aCode DumpCodeCall 
   )
  FINALLY
@@ -191,7 +192,7 @@ PROCEDURE DumpCodeCall OBJECT IN aCode
       [ 
        l_Param l_Param CodeName CalcLeftParams
        
-       l_Param CodeIterator ==> ( OBJECT IN aCode
+       l_Param CodeIterator .for> ( OBJECT IN aCode
         aCode CodeName
        )
        Result 
@@ -217,7 +218,7 @@ PROCEDURE DumpCodeCall OBJECT IN aCode
     ( 
       INTEGER VAR l_BranchNum
       l_BranchNum := 0
-      aCode CodeIterator ==> ( OBJECT IN aCode 
+      aCode CodeIterator .for> ( OBJECT IN aCode 
        if ( l_BranchNum = 1 ) then
         Out 'then'
        else 
@@ -232,7 +233,7 @@ PROCEDURE DumpCodeCall OBJECT IN aCode
     
    ( aCode Is class::TkwCompiledWordContainer )
     ( 
-      aCode CodeIterator ==> ( OBJECT IN aCode
+      aCode CodeIterator .for> ( OBJECT IN aCode
        false aCode DumpElementPrim
        aCode OutBracket
       ) 
@@ -243,7 +244,7 @@ PROCEDURE DumpCodeCall OBJECT IN aCode
       l_NeedBracket := true
       Inc Indent
       aCode DumpMembers
-      aCode CodeIterator ==> ( OBJECT IN aCode
+      aCode CodeIterator .for> ( OBJECT IN aCode
        aCode DumpCodeCall
       )
       Dec Indent
@@ -251,7 +252,7 @@ PROCEDURE DumpCodeCall OBJECT IN aCode
     
    ( aCode Is class::TkwCompiledWordWorkerWordRunner )
     (
-      aCode CodeIterator ==> ( OBJECT IN aCode
+      aCode CodeIterator .for> ( OBJECT IN aCode
        aCode DumpCodeCall
       )
     )
@@ -263,7 +264,7 @@ PROCEDURE DumpCodeCall OBJECT IN aCode
    ) 
     (
       Inc Indent
-      aCode CodeIterator ==> ( OBJECT IN aCode
+      aCode CodeIterator .for> ( OBJECT IN aCode
        aCode DumpCodeCall
       ) 
       Dec Indent 
@@ -271,12 +272,12 @@ PROCEDURE DumpCodeCall OBJECT IN aCode
    
    ( aCode Is class::TkwCompiledWordWorker )
     (
-     aCode CodeIterator ==> DumpCodeCall
+     aCode CodeIterator .for> DumpCodeCall
     )
     
 //   ( aCode Is class::TkwForwardDeclarationHolder )
 //    (
-//     aCode CodeIterator ==> DumpCodeCall
+//     aCode CodeIterator .for> DumpCodeCall
 //    )
     
    ( aCode Is class::TkwCompiledRules 
@@ -288,7 +289,7 @@ PROCEDURE DumpCodeCall OBJECT IN aCode
      BOOLEAN VAR l_Shift
      l_Shift := false
      Inc Indent
-     aCode CodeIterator ==> ( OBJECT IN aCode
+     aCode CodeIterator .for> ( OBJECT IN aCode
       l_Shift ? Inc Indent
        aCode DumpCodeCall
       l_Shift ? Dec Indent
