@@ -1,0 +1,37 @@
+// DogAndBracket.ms.script
+
+USES
+ axiom:Tl3TokenType
+ axiom_push.ms.dict
+ core.ms.dict
+ io.ms.dict
+ macro.ms.dict
+;
+
+MACRO @(
+ INTERFACE VAR l_Parser 
+ Ctx:Parser >>> l_Parser
+ ARRAY VAR l_A
+ l_A := [ ]
+
+ l_Parser pop:Parser:NextToken
+ WHILE true
+ BEGIN
+  STRING VAR l_Token
+  l_Parser pop:Parser:TokenLongString >>> l_Token
+  if ( l_Token = NameOf ) ) then
+   (
+    axiom:PushSymbol (
+    l_A ==> Ctx:Parser:PushSymbol
+    l_Token Ctx:Parser:PushSymbol 
+    BREAK
+   )
+  l_Token >>>[] l_A
+  l_Parser pop:Parser:TokenType Tl3TokenType:ValueToName Print
+  l_Parser pop:Parser:NextToken
+ END
+; // @(
+
+@( 1 2 3 4 5 6 1 2 + '123' ) 
+
+WHILE ( StackLevel > 0 ) Print

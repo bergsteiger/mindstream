@@ -1,0 +1,6 @@
+USES
+ string.ms.dict
+ Testing.ms.dict
+;
+
+RunTestsA [ @ (+)? @ ?(+) @ strings:CatSep> @ any:Cat ]

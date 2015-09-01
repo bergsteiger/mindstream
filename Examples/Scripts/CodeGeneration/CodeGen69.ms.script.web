@@ -1,0 +1,53 @@
+USES
+ Documentation.ms.dict
+ Object.ms.dict
+;
+
+Test CodeGen
+ %REMARK
+  '
+  CodeGen - это функция в которой мы будем тестировать наш функционал
+  '
+
+USES
+ Concrete.ms.model
+ // - подключаем "конкретную модель"
+;
+
+USES
+ CodeDump.ms.dict
+ // - тут подключаем словарь CodeDump.ms.dict, чтобы "увидеть" слово DumpElement
+;
+
+this.method.addr DumpElement
+%REMARK
+ '
+ - тут дампим элемент CodeGen и его содержимое
+   в стандартное устройство вывода.
+   Чисто для отладки того, что мы сейчас написали.
+ '
+
+USES
+ Generation.ms.dict
+ // - это для того, чтобы подключить CallGensList
+ CommonLang.ms.tpl
+ // - подключаем конкретные шаблоны кодогенерации
+;
+
+help
+%REMARK
+ '
+ Выводим всю доступную аксиоматику в стандартное устройство вывода.
+ Чисто для отладки того, что мы сейчас написали.
+ '
+
+( Project1 Project2 Project3 )
+%REMARK 'Список всех наших корневых элементов (проектов)'
+ ( .dump .pas .c++ .h .script )
+ %REMARK 'Список всех наших генераторов' 
+  CallGensList
+  %REMARK '- запускаем список генераторов на списке "рутовых элементов" модели.'
+
+; // CodeGen
+
+CodeGen

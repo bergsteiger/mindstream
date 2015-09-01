@@ -1,0 +1,15 @@
+USES
+ metaMACRO.ms.dict
+;
+
+REMARK '“ут описываем взаимоотношени€ между классами'
+
+USES
+ InheritsAndImplementsNew.ms.dict
+;
+
+EXPORTS
+ NamedCodeProducer.ms.dict
+
+EXPORTS
+ InheritsAndImplementsNew.ms.dict

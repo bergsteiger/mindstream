@@ -1,0 +1,100 @@
+// CommonLang.ms.tpl
+// Шаблоны генерации для "общепринятых языков"
+
+USES
+ Documentation.ms.dict
+ params.ms.dict
+ NoStrangeSymbols.ms.dict
+ arrays.ms.dict
+ macro.ms.dict
+ WordsRTTI.ms.dict
+ ElementsRTTI.ms.dict
+ Generation.ms.dict
+ string.ms.dict
+ InheritsAndImplementsNew.ms.dict
+;
+
+STRING FUNCTION CatSepIndent>
+ ARRAY right aValues
+ CatSep> cIndentChar aValues =: Result
+; // CatSepIndent>
+
+MACRO call.inherited
+ // - понятно, что это надо делать через честную компиляцию ссылки на Inherited
+ [ 
+   '@SELF .Inherited.Words ==> ( Self SWAP DO )'
+ ] Ctx:Parser:PushArray
+; // call.inherited
+
+elem_generator DumpAsIs
+ %SUMMARY 'Процедура печатающая содержимое элемента модели. Рекурсивно.' ;
+
+  CatSepIndent> ( Self .Stereotypes .reverted> .join> [ Self ] .map> .Name ) ?OutToFile
+
+ 'Родители ' (+)? 
+  CatSepIndent> ( Self .Parents .reverted> .map> .Name ) ?OutToFile
+
+ 'Наследуемые ' (+)? 
+  CatSepIndent> ( Self .Inherited .map> .Name ) ?OutToFile
+
+ 'Реализуемые ' (+)? 
+  CatSepIndent> ( Self .Implemented .map> .Name ) ?OutToFile
+
+  Self .generate.children
+  %REMARK 'Выводим детей элемента, тем же самым генератором'
+  [ '; // ' Self .Name ] OutToFile
+  %REMARK 'Выводим закрывающую скобку элемента'
+; // DumpAsIs
+
+elem_generator dump
+ %SUMMARY 'Генератор выводящий дамп элемента модели.' ;
+ %GEN_PROPERTY Name 'dump'
+ %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
+ Inherits .DumpAsIs
+
+ call.inherited
+; // dump
+
+elem_generator pas
+ %SUMMARY 'Генератор выводящий элементы модели в Паскаль.' ;
+ %GEN_PROPERTY Name 'pas'
+ %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
+ Inherits .DumpAsIs
+
+ '// На самом деле это Delphi' OutToFile
+ '' OutToFile
+ call.inherited
+; // pas
+
+elem_generator script
+ %SUMMARY 'Генератор выводящий элементы модели в ms.script.' ;
+ %GEN_PROPERTY Name 'ms.script'
+ %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
+ Inherits .DumpAsIs
+
+ call.inherited
+; // script
+
+elem_generator c++
+ %SUMMARY '
+ Генератор выводящий элементы модели в c++. 
+ Про файлы *.h мы потом поговорим отдельно.
+ ' ;
+ %GEN_PROPERTY Name 'cpp'
+ %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
+ Inherits .DumpAsIs
+
+ call.inherited
+; // c++
+
+elem_generator h
+ %SUMMARY '
+ Генератор выводящий элементы модели в *.h. 
+ Про файлы *.h мы потом поговорим отдельно.
+ ' ;
+ %GEN_PROPERTY Name 'h'
+ %REMARK 'Имя генератора и расширение файла целевого языка. Потом мы сделаем так, чтобы они могли не совпадать'
+ Inherits .DumpAsIs
+
+ call.inherited
+; // h

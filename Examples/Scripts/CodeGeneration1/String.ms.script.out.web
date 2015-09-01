@@ -1,0 +1,44 @@
+Testing: (+)?
+T1
+B
+T2
+AB
+T3
+
+T4
+AD
+T5
+A123
+Testing end: (+)?
+------------------
+Testing: ?(+)
+T1
+
+T2
+AB
+T3
+A
+Testing end: ?(+)
+------------------
+Testing: strings:CatSep&gt;
+T1
+A B
+T2
+A B
+T3
+A  B
+T4
+A  B
+T5
+B
+T6
+A
+Testing end: strings:CatSep&gt;
+------------------
+Testing: any:Cat
+T1
+A123B
+T2
+A124B
+Testing end: any:Cat
+------------------

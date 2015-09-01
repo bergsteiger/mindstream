@@ -1,0 +1,169 @@
+USES
+ macro.ms.dict
+ NoCapsLock.ms.dict
+ params.ms.dict
+ integer.ms.dict
+ Object.ms.dict
+;
+
+Test PointTest
+
+INTEGER type Pixel
+// - пиксель
+List type PixelList
+// - список пикселей
+
+class Point
+
+Pixel member X
+Pixel member Y
+members-end
+
+constructor :
+ Pixel right aX
+ Pixel right aY
+ new[ aX aY ] =: Result
+; // :
+
+constructor 0
+ Point:: 0 0 =: Result
+; // 0
+
+constructor XY
+ PixelList right aPoint
+ array var Points
+ [ aPoint ] =: Points
+ Point:: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) =: Result
+; // XY
+
+Pixel readonly X read X
+
+Pixel readonly Y read Y
+
+constructor OF
+ Point right aPoint
+ Point:: ( aPoint Point:X ) ( aPoint Point:Y ) =: Result
+; // OF
+
+Point method +
+ Point right aPoint
+
+ Point:: ( Self Point:X (+) ( aPoint Point:X ) ) ( Self Point:Y (+) ( aPoint Point:Y ) ) =: Result
+; // +
+
+Point method Neg
+ Point:: Neg ( Self Point:X ) Neg ( Self Point:Y ) =: Result
+; // Neg
+
+Point method -
+ Point right aPoint
+
+ Point:OF ( Self Point:+ ( aPoint Point:Neg ) ) =: Result
+; // -
+
+OVERRIDE STRING method ToPrintable
+ [ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat =: Result
+; // ToPrintable
+
+void method Print
+ Self Point:ToPrintable Print
+; // Print
+
+class-end // Point
+
+class Rectangle
+
+Point member TopLeft
+Point member BottomRight
+members-end
+
+Point readonly TopLeft read TopLeft
+
+Point readonly BottomRight read BottomRight
+
+constructor :
+ Point right aTopLeft
+ Point right aBottomRight
+ new[ aTopLeft aBottomRight ] =: Result
+; // :
+
+OVERRIDE STRING method ToPrintable
+ [ '( ' 'TopLeft: ' Self Rectangle:TopLeft Point:ToPrintable ', BottomRight: ' Self Rectangle:BottomRight Point:ToPrintable ' )' ] strings:Cat =: Result
+; // ToPrintable
+
+void method Print
+ Self Rectangle:ToPrintable Print
+; // Print
+
+class-end // Rectangle
+
+USES
+ CodeDump.ms.dict
+;
+
+@SELF DumpElement
+
+Point var P1
+Point var P2
+Point var P3
+Point var P4
+Point var P5
+Point var P6
+Point var P7
+Point var P8
+Point var P9
+Point var P10
+Point var P11
+
+P1 := Point:0
+P2 := Point:0
+P3 := Point:: 1 1
+P4 := Point:XY ( 2 2 )
+P5 := Point:OF P4
+P6 := ( P3 Point:+ P4 )
+P7 := ( P3 Point:- P4 )
+P8 := ( P4 Point:- P3 )
+P9 := ( P4 Point:Neg )
+P10 := ( P3 Point:Neg )
+P11 := Point:XY ( -2 2 )
+
+Object var O1
+O1 := P1
+O1 Point:Print
+
+array var l_Points
+
+[ P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 ] =: l_Points
+
+for l_Points Point:Print
+for l_Points ( Point:X Print )
+for l_Points ( Point:Y Print )
+for l_Points ( Object:class Print )
+for l_Points ( Object:ClassName Print )
+for l_Points ( for ( Object:class %G ) ( getClassName Print ) )
+
+Rectangle var R1
+Rectangle var R2
+R1 := Rectangle:: P1 P4
+R2 := Rectangle:: P6 P7
+
+array var l_Rectangles
+[ R1 R2 ] =: l_Rectangles
+
+for l_Rectangles Rectangle:Print
+
+'Hello ' (+) 'world' Print
+
+'Hello ' (+) 'world' Print
+
+'Hello ' (+) 'world' Print
+
+1 (+) 2 Print
+10 (+) 20 Print
+0 (-) 10 Print
+Neg 10 Print
+Neg -10 Print
+
+; // PointTest
+
+PointTest

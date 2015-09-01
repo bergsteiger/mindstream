@@ -1,0 +1,1 @@
+call c.cmd CodeGen69.ms.script

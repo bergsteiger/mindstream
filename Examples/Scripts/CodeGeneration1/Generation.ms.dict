@@ -1,0 +1,253 @@
+// Generation.ms.dict
+
+USES
+ Documentation.ms.dict
+ EngineTypes.ms.dict
+ axiom_push.ms.dict
+ macro.ms.dict
+ core.ms.dict
+ NoStrangeSymbols.ms.dict
+ params.ms.dict
+ NoCapsLock.ms.dict
+ arrays.ms.dict
+ ElementsRTTI.ms.dict
+;
+
+INTEGER VAR g_Indent
+%REMARK 'Текущий отступ'
+( g_Indent := 0 )
+
+BOOLEAN elem_func IsElementNeed.Indent
+ %SUMMARY 'Определяет тот факт, что элементу нужен отступ' ;
+ Result := true
+; // IsElementNeed.Indent
+
+elem_proc EnterElement
+ %SUMMARY 'Начинает вывод элемента' ;
+ Self .IsElementNeed.Indent ? INC g_Indent
+; // EnterElement
+
+elem_proc LeaveElement
+ %SUMMARY 'Заканчивает вывод элемента' ;
+ Self .IsElementNeed.Indent ? DEC g_Indent
+; // LeaveElement
+
+FILE VAR g_OutFile
+( g_OutFile := nil )
+
+STRING INTEGER ARRAY TYPE PRINTABLE
+
+CONST cIndentChar ' '
+
+PROCEDURE OutToFile
+ PRINTABLE IN aValue 
+ %SUMMARY 
+ '
+ Выводит значение в текущий файл вывода.
+ С переводом каретки.
+ '
+ ; // %SUMMARY 
+
+ STRING VAR l_String
+ if ( aValue IsArray ) then
+  ( aValue strings:Cat =: l_String )
+ else
+  ( aValue ToPrintable =: l_String )
+ [ g_Indent cIndentChar char:Dupe l_String ] strings:Cat g_OutFile File:WriteLn
+ %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
+; //OutToFile
+
+PROCEDURE ?OutToFile
+ STRING IN aValue
+ %SUMMARY 
+ '
+ Выводит значение в текущий файл, если оно не пустое.
+ С переводом каретки.
+ '
+ ; // %SUMMARY 
+ if ( aValue =/= '' ) then
+  ( aValue OutToFile )
+; // ?OutToFile
+
+FUNCTOR TYPE GENERATOR
+%REMARK 'Генератор содержимого элемента'
+
+GENERATOR VAR g_CurrentGenerator
+%REMARK 'Текущий генератор'
+( g_CurrentGenerator := nil )
+
+STRING VAR g_CurrentGeneratorName
+%REMARK 'Имя текущего генератора'
+( g_CurrentGeneratorName := '' )
+
+CONST cPathSep '\'
+
+STRING FUNCTION OutFileName
+ STRING right aGeneratorName
+ %SUMMARY 'Имя файла для вывода' ;
+ STRING VAR l_OutPath
+ %REMARK 'Путь для вывода'
+ sysutils:GetCurrentDir =: l_OutPath
+ [ l_OutPath 
+  script:FileName 
+  %REMARK 'Путь к текущему скрипту'
+  sysutils:ExtractFileName
+  %REMARK 'Вырезаем из пути только имя файла' 
+  '' sysutils:ChangeFileExt
+  %REMARK 'Убираем .script' 
+  '' sysutils:ChangeFileExt 
+  %REMARK 'Убираем .ms' 
+ ] cPathSep strings:CatSep =: l_OutPath
+ l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
+ %REMARK 'Создаём директорию рекурсивно, если её ещё не было'
+ [ l_OutPath aGeneratorName ] cPathSep strings:CatSep =: Result
+; // OutFileName
+
+BOOLEAN elem_func IsElementNeed.OwnFile
+ %SUMMARY 'Определяет тот факт, что элементу нужен собственный файл вывода' ;
+ Result := true
+; // IsElementNeed.OwnFile
+
+ModelElement VAR g_CurrentElementModel
+ %REMARK 'Текущий генерируемый элемент'
+( g_CurrentElementModel := nil )
+
+elem_proc CallCurrentGen
+ FILE VAR l_PrevOutFile
+ l_PrevOutFile := g_OutFile
+ INTEGER VAR l_PrevIndent
+ l_PrevIndent := g_Indent
+ TRY
+  TRY
+   if ( Self .IsElementNeed.OwnFile ) then
+   begin
+    g_Indent := 0 // - тут вообще ещё надо проверять - переоткрываем мы файл или нет
+    STRING VAR l_FileName
+    l_FileName := ( OutFileName ( Self .Name (+) '.' (+) g_CurrentGeneratorName ) )
+    g_OutFile := ( l_FileName File:OpenWrite )
+   end // Self .IsElementNeed.OwnFile
+   TRY
+    g_CurrentGenerator IsNil ! ?ASSURE 'Текущй генератор пустой'
+    ModelElement VAR l_CurrentElementModel
+    l_CurrentElementModel := g_CurrentElementModel
+    TRY
+     g_CurrentElementModel := Self
+     Self ( g_CurrentGenerator DO )
+     %REMARK 'Вызываем на элементе генератор g_CurrentGenerator'
+    FINALLY
+     g_CurrentElementModel := l_CurrentElementModel
+    END
+   FINALLY
+    g_OutFile := nil
+   END // TRY..FINALLY
+  FINALLY
+   g_OutFile := l_PrevOutFile
+   l_PrevOutFile := nil
+  END
+ FINALLY
+  g_Indent := l_PrevIndent
+ END
+; // CallCurrentGen
+
+elem_proc Child.CallCurrentGen
+ %SUMMARY 'Вызывает на ДОЧЕРНЕМ элементе генератор g_CurrentGenerator с учётом отступов' ;
+ Self .EnterElement 
+ TRY
+  Self .CallCurrentGen
+  //Self g_CurrentGenerator DO
+  %REMARK 'Вызываем генератор g_CurrentGenerator'
+ FINALLY
+  Self .LeaveElement 
+ END // TRY..FINALLY
+; // Child.CallCurrentGen
+
+elem_proc CallChildrenCurrentGen
+ %SUMMARY 'Вызывает текущий генератор для всех детей элемента модели' ;
+ Self .Children ==> .Child.CallCurrentGen
+; // CallChildrenCurrentGen
+
+WordAlias .generate.children .CallChildrenCurrentGen
+
+CONST GEN_PROPERTY_PREFIX 'gp'
+%REMARK 'Префикс имени свойства генератора'
+
+MACRO %GEN_PROPERTY
+ Literal IN aName
+ %SUMMARY 'Свойство генератора' ;
+ this.method.addr Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol CONST
+ GEN_PROPERTY_PREFIX (+) ( aName .Name ) Ctx:Parser:PushSymbol
+; // %GEN_PROPERTY
+
+USES
+ RefDeepest.ms.dict
+ FieldByNameDeepest.ms.dict
+;
+
+MACRO %GP
+ Literal IN aName
+ %SUMMARY 'Метод получения свойства генератора' ;
+ axiom:PushSymbol FieldByNameDeepest
+ GEN_PROPERTY_PREFIX (+) ( aName .Name ) Ctx:Parser:PushSymbol
+; // %GP
+
+elem_proc CallGen
+ GENERATOR RIGHT IN aGen
+
+ %SUMMARY 
+ '
+ Вызывает на элементе генератор aGen.
+ С открытием "правильных файлов".
+ ' 
+ ; // %SUMMARY 
+
+ aGen Dereference =: g_CurrentGenerator
+ TRY
+  aGen %GP Name =: g_CurrentGeneratorName
+  Self .CallCurrentGen
+ FINALLY
+  g_CurrentGenerator := nil
+ END
+; // CallGen
+
+ARRAY VAR g_AllRoots
+ %REMARK 'Все корневые элементы'
+( g_AllRoots := nil )
+
+ARRAY VAR g_AllGenerators
+ %REMARK 'Все генераторы'
+( g_AllGenerators := nil )
+
+PROCEDURE CallGens
+ ARRAY IN anElements
+ ARRAY IN aGenerators
+ %SUMMARY 'Вызывает все определённые генераторы на элементах массива anElements' ;
+ g_AllRoots := anElements
+ TRY 
+  g_AllGenerators := aGenerators
+  TRY
+   for anElements (
+    ModelElement IN anElement
+    for aGenerators ( 
+     GENERATOR IN aGen 
+     anElement .CallGen aGen
+     %REMARK 'Вызываем на элементе anElement генератор aGen' 
+    ) // for aGenerators
+   ) // for anElements
+  FINALLY
+   g_AllGenerators := nil
+  END
+ FINALLY
+  g_AllRoots := nil
+ END
+; // CallGens
+
+PROCEDURE CallGensList
+ Sequence LVALUE anElements
+ Sequence LVALUE aGenerators
+ ( anElements CodeIterator )
+  ( aGenerators CodeIterator )
+   CallGens
+; // CallGensList
+
+WordAlias generate CallGensList

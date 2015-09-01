@@ -1,0 +1,64 @@
+Testing: (+)?
+T1
+B
+T2
+AB
+T3
+
+T4
+AD
+T5
+A123
+Testing end: (+)?
+------------------
+VOID Test TestingTest
+ VOID OPERATOR Tests:(+)?
+  %SUMMARY %SUM
+   '"Стандартные тесты" для слова (+)?'
+  ; // %SUMMARY %SUM
+  
+  VOID Test T1
+   ''
+   (+)?
+   'B'
+   .
+  ; // VOID Test T1
+  
+  VOID Test T2
+   'A'
+   (+)?
+   'B'
+   .
+  ; // VOID Test T2
+  
+  VOID Test T3
+   'A'
+   (+)?
+   ''
+   .
+  ; // VOID Test T3
+  
+  VOID Test T4
+   'A'
+   (+)?
+   'D'
+   .
+  ; // VOID Test T4
+  
+  VOID Test T5
+   'A'
+   (+)?
+   '123'
+   .
+  ; // VOID Test T5
+  
+ ; // VOID OPERATOR Tests:(+)?
+ 
+ '(+)?'
+ @
+ Tests:(+)?
+ DoRunTestsFor
+ TestingTest
+ DumpElement
+; // VOID Test TestingTest
+
