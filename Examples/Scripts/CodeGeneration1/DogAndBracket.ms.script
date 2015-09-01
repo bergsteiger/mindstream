@@ -11,7 +11,8 @@ USES
 
 Test DogAndBracketTest
 
-MACRO @(
+PROCEDURE DogAndBracket
+ STRING IN aBracket
  INTERFACE VAR l_Parser 
  Ctx:Parser >>> l_Parser
  ARRAY VAR l_A
@@ -42,6 +43,10 @@ MACRO @(
   l_TokenType Tl3TokenType:ValueToName Print
   l_Parser pop:Parser:NextToken
  end
+; // DogAndBracket
+
+MACRO @(
+ NameOf ) DogAndBracket
 ; // @(
 
 @( 1 2 3 4 5 6 1 2 + '123' ) 
