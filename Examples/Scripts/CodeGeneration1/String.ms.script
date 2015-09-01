@@ -4,7 +4,7 @@ USES
  Testing.ms.dict
 ;
 
-RunTests (+)? 
+RunTestsA [ @ (+)? ]
  %REMARK '«апускаем "стандартные тесты" дл€ слова (+)?'
 RunTests ?(+)
  %REMARK '«апускаем "стандартные тесты" дл€ слова ?(+)'
