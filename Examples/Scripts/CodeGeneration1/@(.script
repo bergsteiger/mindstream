@@ -1,5 +1,25 @@
 // @(.script
 
 USES
+ io.ms.dict
  macro.ms.dict
 ;
+
+MACRO @(
+ INTERFACE VAR l_Parser 
+ Ctx:Parser >>> l_Parser
+
+ WHILE true
+ BEGIN
+  STRING VAR l_Token
+  l_Parser pop:Parser:TokenLongString >>> l_Token
+  if ( l_Token = ')' ) then
+   ( 
+    EXIT
+   )
+  l_Token Print
+  pop:Parser:NextToken
+ END
+; // @(
+
+//@( 1 2 3 4 5 ) DO Print
