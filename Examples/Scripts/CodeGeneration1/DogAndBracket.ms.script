@@ -2,6 +2,7 @@
 
 USES
  axiom:Tl3TokenType
+ axiom_push.ms.dict
  core.ms.dict
  io.ms.dict
  macro.ms.dict
@@ -20,7 +21,7 @@ MACRO @(
   l_Parser pop:Parser:TokenLongString >>> l_Token
   if ( l_Token = NameOf ) ) then
    (
-    '(' Ctx:Parser:PushSymbol 
+    axiom:PushSymbol (
     l_A ==> Ctx:Parser:PushSymbol
     l_Token Ctx:Parser:PushSymbol 
     BREAK
