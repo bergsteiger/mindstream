@@ -8,16 +8,16 @@ l3_ttInteger
 l3_ttInteger
 l3_ttSymbol
 l3_ttString
-7
-7
-7
-7
-7
-7
-7
-7
+1
+2
+3
 4
+5
 6
+1
+2
++
+123
 VOID Test DogAndBracketTest
  IMMEDIATE VOID MACRO @(
   NameOf
@@ -110,10 +110,10 @@ VOID Test DogAndBracketTest
        BREAK
       END
     END
-   l_Token
+   l_TokenType
    >>>[]
    l_A
-   l_TokenType
+   l_Token
    >>>[]
    l_A
    l_TokenType
