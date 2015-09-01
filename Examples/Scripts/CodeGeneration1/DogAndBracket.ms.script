@@ -19,6 +19,8 @@ MACRO @(
  BEGIN
   STRING VAR l_Token
   l_Parser pop:Parser:TokenLongString >>> l_Token
+  INTEGER VAR l_TokenType
+  l_Parser pop:Parser:TokenType >>> l_TokenType
   if ( l_Token = NameOf ) ) then
    (
     axiom:PushSymbol (
@@ -27,7 +29,7 @@ MACRO @(
     BREAK
    )
   l_Token >>>[] l_A
-  l_Parser pop:Parser:TokenType Tl3TokenType:ValueToName Print
+  l_TokenType Tl3TokenType:ValueToName Print
   l_Parser pop:Parser:NextToken
  END
 ; // @(
