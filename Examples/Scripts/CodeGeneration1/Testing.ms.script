@@ -17,7 +17,7 @@ TestsFor (+)?
  Test T5 'A' (+)? '123' Print ;
 ; // TestsFor (+)?
 
-RunTests (+)?
+RunTestsA [ @ (+)? ]
  %REMARK '«апускаем "стандартные тесты" дл€ слова (+)?'
 
 USES

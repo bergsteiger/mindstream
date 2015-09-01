@@ -80,8 +80,8 @@ MACRO RunTests
 ; // RunTests
 
 MACRO RunTestsA
- Sequence RIGHT LINK IN aWords
+ ARRAY RIGHT IN aWords
   %REMARK 'aWords ссылка на список слов справа от RunTests'
  %SUMMARY 'Выполняет тесты для списка слов aWords' ;
- aWords |^@ DO .map> DO DoRunTestsA
+ ( aWords |^@ DO ) DoRunTestsA
 ; // RunTestsA

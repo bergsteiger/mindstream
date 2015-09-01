@@ -3605,7 +3605,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : RunTests
 ; // RunTests
 IMMEDIATE VOID OPERATOR :: MACRO : RunTestsA
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- LINK ^ OPERATOR :: IN : aWords
+ ^ OPERATOR :: IN : aWords
 ; // RunTestsA
 IMMEDIATE VOID OPERATOR :: MACRO : TestsFor
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
