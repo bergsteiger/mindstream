@@ -96,6 +96,8 @@ VOID Test DogAndBracketTest
        l_A
        IT
        (
+        IN aSymbol
+        aSymbol
         Ctx:Parser:PushSymbol
        )
        l_Token
