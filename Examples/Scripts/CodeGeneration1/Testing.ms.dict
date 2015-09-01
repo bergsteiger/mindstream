@@ -64,7 +64,7 @@ MACRO RunTestsFor
  aWord ExpandRunTestsFor
 ; // RunTestsFor
 
-MACRO DoRunTests
+PRIVATE PROCEDURE DoRunTests
  Sequence IN aWords
   %REMARK 'aWords ссылка на список слов слева от DoRunTests'
  %SUMMARY 'Выполняет тесты для списка слов aWords' ;

@@ -3576,7 +3576,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.di
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
  ;
 STRING CONST : cTests
-IMMEDIATE VOID OPERATOR :: MACRO : DoRunTests
+PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTests
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  Sequence OPERATOR :: IN : aWords
 ; // DoRunTests
