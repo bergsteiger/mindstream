@@ -58,6 +58,9 @@ PRIVATE PROCEDURE ExpandRunTestsFor
  STRING VAR l_TestsHolderName
  cTests l_Name Cat >>> l_TestsHolderName
 
+ if ( l_TestsHolderName IsWordDeclared ! ) then
+  EXIT
+
  l_Name Ctx:Parser:PushString
  axiom:PushSymbol @
  l_TestsHolderName Print
