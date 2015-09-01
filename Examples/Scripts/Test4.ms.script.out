@@ -362,6 +362,11 @@ ARRAY FUNCTION : .join>
  ^ OPERATOR :: IN : aRight
  ARRAY FUNCTION :: .join> : Result
 ; // .join>
+ARRAY FUNCTION : .slice>
+ ARRAY OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ ARRAY FUNCTION :: .slice> : Result
+; // .slice>
 ARRAY FUNCTION : .trunc>
  ARRAY OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
@@ -553,6 +558,11 @@ ARRAY FUNCTION : >join>
  ^ OPERATOR :: IN : aRight
  ARRAY FUNCTION :: >join> : Result
 ; // >join>
+ARRAY FUNCTION : >slice>
+ ^@ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ ARRAY FUNCTION :: >slice> : Result
+; // >slice>
 ARRAY FUNCTION : >trunc>
  ^@ OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
@@ -614,6 +624,7 @@ ARRAY Array:Join
 ARRAY Array:Map
 ARRAY Array:Reverted
 VOID Array:SetItem
+ARRAY Array:Slice
 INTEGER FUNCTION : array:StringCount
  ARRAY OPERATOR :: IN : anArray
  STRING OPERATOR :: IN : aString
@@ -753,6 +764,7 @@ TClass class::TkwArrayJoin
 TClass class::TkwArrayMap
 TClass class::TkwArrayReverted
 TClass class::TkwArraySetItem
+TClass class::TkwArraySlice
 TClass class::TkwArrayTrunc
 TClass class::TkwASSERTS
 TClass class::TkwAtomicIf
@@ -1257,6 +1269,7 @@ TClass class::TtfwRegisterableWord
 TClass class::TtfwRegisterableWordPrim
 TClass class::TtfwRTTIProperty
 TClass class::TtfwScriptEnginePrim
+TClass class::TtfwSliceLambda
 TClass class::TtfwString
 TClass class::TtfwStringConstantRegistrator
 TClass class::TtfwStringToEnumValue
@@ -1617,6 +1630,7 @@ ARRAY pop:Array:Join
 ARRAY pop:Array:Map
 ARRAY pop:Array:Reverted
 VOID pop:Array:SetItem
+ARRAY pop:Array:Slice
 ARRAY pop:Array:Trunc
 pop:class:Inherits
 BOOLEAN pop:File:EOF
@@ -1707,6 +1721,8 @@ VOID SetRandSeed
 VOID ShiftDate
 VOID ShiftTime
 VOID SLEEP
+ARRAY Slice
+ARRAY SLICE
 ARRAY FUNCTION : SplitToArray
  STRING OPERATOR :: IN : aDelim
  STRING OPERATOR :: IN : aValue
@@ -1783,6 +1799,7 @@ TkwArrayJoin
 TkwArrayMap
 TkwArrayReverted
 TkwArraySetItem
+TkwArraySlice
 TkwArrayTrunc
 TkwASSERTS
 TkwAtomicIf
@@ -2304,6 +2321,7 @@ TtfwRegisterableWord
 TtfwRegisterableWordPrim
 TtfwRTTIProperty
 TtfwScriptEnginePrim
+TtfwSliceLambda
 TtfwString
 TtfwStringConstantRegistrator
 TtfwStringToEnumValue
