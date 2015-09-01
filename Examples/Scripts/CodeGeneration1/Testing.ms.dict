@@ -57,13 +57,6 @@ PRIVATE PROCEDURE ExpandRunTestsFor
  axiom:PushSymbol DoRunTestsFor
 ; // ExpandRunTestsFor
 
-MACRO RunTestsFor
- ENGINE_WORD RIGHT LINK IN aWord
-  %REMARK 'aWord ссылка на слово справа от RunTestsFor'
- %SUMMARY 'Выполняет тесты для aWord' ;
- aWord ExpandRunTestsFor
-; // RunTestsFor
-
 PRIVATE PROCEDURE DoRunTests
  Sequence IN aWords
   %REMARK 'aWords ссылка на список слов слева от DoRunTests'
