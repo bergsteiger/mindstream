@@ -1,3 +1,7 @@
+USES
+ CodeDump.ms.dict
+;
+
 Test TestCompileValue
 
  STRING VAR S
@@ -24,6 +28,9 @@ Test TestCompileValue
  
  I .
  S .
+ 
+ @SELF DumpElement
+ 
 ; // TestCompileValue
 
 TestCompileValue

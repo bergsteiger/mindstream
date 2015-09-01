@@ -1,9 +1,10 @@
 USES
- EditorTools.ms.dict
+ axiom:Control
+ EditorTools.script 
 ;
 
 : K290951357
- OBJECT VAR l_TextForm
+ TF1LikeTextLoadForm VAR l_TextForm
  class::TF1LikeTextLoadForm .Create >>> l_TextForm
  TRY 
   INTEGER VAR l_FontSize
@@ -24,7 +25,7 @@ USES
     l_FontSize SetFontSize
    END
   FINALLY  
-   l_TextForm pop:Control:Handle AskWindowToCloseItself
+   l_TextForm AskWindowToCloseItself
   END  
 ;
 

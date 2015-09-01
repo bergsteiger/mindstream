@@ -1,3 +1,8 @@
+USES
+ axiom:StyleTable
+ axiom:Tests
+;
+
 : K276546684
  VAR l_File
  script:FileName '.evs' sysutils:ChangeFileExt

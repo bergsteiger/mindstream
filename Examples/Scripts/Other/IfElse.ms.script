@@ -1,3 +1,19 @@
+USES
+ CodeDump.ms.dict
+;
+
+Test IfElseTest
+
+/*{INLINE OPERATOR then
+  ^ IN aWhatToThen
+ aWhatToThen DO
+; // then}*/
+
+/*{VOID IMMEDIATE OPERATOR then
+  ^ IN aWhatToThen
+ aWhatToThen CompileValue
+; // then}*/
+
 INTEGER FUNCTION SIGN INTEGER IN aNum
  if ( aNum <0 ) then
   ( Result := -1 )
@@ -41,3 +57,9 @@ INTEGER FUNCTION SIGN2 INTEGER IN aNum
 -1 SIGN2 .
 0 SIGN2 .
 1 SIGN2 .
+
+@SELF DumpElement
+
+; // IfElseTest
+
+IfElseTest

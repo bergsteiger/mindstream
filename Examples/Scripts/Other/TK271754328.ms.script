@@ -1,9 +1,10 @@
 USES
- EditorTools.ms.dict
+ axiom:Control
+ EditorTools.script 
 ;
 
 : K271754328
- OBJECT VAR l_TextForm
+ TTextLoadForm VAR l_TextForm
  class::TTextLoadForm .Create >>> l_TextForm
  TRY
   l_TextForm pop:Control:Show
@@ -14,7 +15,7 @@ USES
   l_Editor pop:editor:CopyAndPaste2DocumentBottom
   "Сравнить текст с эталоном"
  FINALLY  
-  l_TextForm pop:Control:Handle AskWindowToCloseItself
+  l_TextForm AskWindowToCloseItself
  END
 ;
 
