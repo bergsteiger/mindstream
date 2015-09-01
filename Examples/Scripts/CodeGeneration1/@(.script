@@ -24,6 +24,7 @@ MACRO @(
     BREAK
    )
   l_Token >>>[] l_A
+  l_Parser pop:Parser:TokenType Print
   l_Parser pop:Parser:NextToken
  END
 ; // @(
