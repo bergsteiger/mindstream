@@ -3331,6 +3331,14 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
  ;
+OPERATOR : .for>
+ ARRAY OPERATOR :: IN : A
+ ^ OPERATOR :: IN : aWhatToDo
+; // .for>
+OPERATOR : >for>
+ ARRAY OPERATOR :: IN : A
+ ^ OPERATOR :: IN : aWhatToDo
+; // >for>
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
  Uses: 
   axiom:axiom
