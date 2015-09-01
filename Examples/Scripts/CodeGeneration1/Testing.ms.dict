@@ -62,6 +62,13 @@ MACRO RunTestsFor
  aWord |N ExpandRunTestsFor
 ; // RunTestsFor
 
+MACRO DoRunTests
+ Sequence IN aWords
+  %REMARK 'aWords ссылка на список слов слева от DoRunTests'
+ %SUMMARY 'Выполняет тесты для списка слов aWords' ;
+ aWords ExpandRunTestsFor
+; //DoRunTests
+
 MACRO RunTests
  Sequence RIGHT LINK IN aWords
   %REMARK 'aWords ссылка на список слов справа от RunTests'
