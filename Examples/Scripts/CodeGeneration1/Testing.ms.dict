@@ -7,6 +7,7 @@ USES
  io.ms.dict
  EngineTypes.ms.dict
  Documentation.ms.dict
+ arrays.ms.dict
  Sequence.It.ms.dict
 ;
 
@@ -82,5 +83,5 @@ MACRO RunTestsA
  Sequence RIGHT LINK IN aWords
   %REMARK 'aWords ссылка на список слов справа от RunTests'
  %SUMMARY 'Выполняет тесты для списка слов aWords' ;
- aWords |^@ DoRunTests
+ aWords |^@ DO .map> DO DoRunTestsA
 ; // RunTestsA
