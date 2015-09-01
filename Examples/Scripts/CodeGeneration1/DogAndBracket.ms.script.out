@@ -25,6 +25,14 @@ VOID Test DogAndBracketTest
   DogAndBracket
  ; // IMMEDIATE VOID MACRO @(
  
+ IMMEDIATE VOID MACRO @[
+  NameOf
+  [
+  NameOf
+  ]
+  DogAndBracket
+ ; // IMMEDIATE VOID MACRO @[
+ 
  VOID PROCEDURE DogAndBracket
   STRING IN aBracketClose
   STRING IN aBracketOpen
