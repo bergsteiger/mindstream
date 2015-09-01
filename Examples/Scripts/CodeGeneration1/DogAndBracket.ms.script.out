@@ -57,6 +57,14 @@ VOID Test DogAndBracket
      )
      ?FAIL
      'Вложенные скобки пока не поддерживаются'
+     (
+      l_Token
+      =
+      NameOf
+      [
+     )
+     ?FAIL
+     'Вложенные скобки пока не поддерживаются'
      if
       (
        l_Token
