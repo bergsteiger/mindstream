@@ -45,6 +45,10 @@ MACRO @(
 
 WHILE ( StackLevel > 0 ) Print
 
+USES
+ CodeDump.ms.dict
+;
+
 ; // DogAndBracket
 
 DogAndBracket
