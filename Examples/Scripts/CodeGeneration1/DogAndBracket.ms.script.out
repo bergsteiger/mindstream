@@ -16,3 +16,97 @@ l3_ttString
 3
 2
 1
+VOID Test DogAndBracket
+ IMMEDIATE VOID MACRO @(
+  ARRAY VAR l_A
+  INTERFACE VAR l_Parser
+  Ctx:Parser
+  >>>
+  l_Parser
+  l_A :=
+  [
+  ]
+  l_Parser
+  pop:Parser:NextToken
+  WHILE
+  true
+  BEGIN
+   STRING VAR l_Token
+   INTEGER VAR l_TokenType
+   l_Parser
+   pop:Parser:TokenLongString
+   >>>
+   l_Token
+   l_Parser
+   pop:Parser:TokenType
+   >>>
+   l_TokenType
+   if
+    (
+     l_TokenType
+     =
+     Tl3TokenType::l3_ttSymbol
+    )
+   then
+    BEGIN
+     (
+      l_Token
+      =
+      NameOf
+      (
+     )
+     ?FAIL
+     'Вложенные скобки пока не поддерживаются'
+     if
+      (
+       l_Token
+       =
+       NameOf
+       )
+      )
+     then
+      BEGIN
+       axiom:PushSymbol
+       (
+       l_A
+       IT
+       Ctx:Parser:PushSymbol
+       l_Token
+       Ctx:Parser:PushSymbol
+       BREAK
+      END
+    END
+   l_Token
+   >>>[]
+   l_A
+   l_TokenType
+   Tl3TokenType:ValueToName
+   .
+   l_Parser
+   pop:Parser:NextToken
+  END
+ ; // IMMEDIATE VOID MACRO @(
+ 
+ (
+  '1'
+  '2'
+  '3'
+  '4'
+  '5'
+  '6'
+  '1'
+  '2'
+  +
+  '123'
+ )
+ WHILE
+ (
+  StackLevel
+  >
+  0
+ )
+ .
+ DogAndBracket
+ DumpElement
+; // VOID Test DogAndBracket
+
