@@ -3102,10 +3102,18 @@ VOID CALLER OPERATOR : ?Assure
  ^ OPERATOR :: IN : aMessage
  TtfwWord OPERATOR :: IN : Caller
 ; // ?Assure
+VOID CALLER OPERATOR : ?Fail
+ BOOLEAN OPERATOR :: IN : aCondition
+ ^ OPERATOR :: IN : aMessage
+ TtfwWord OPERATOR :: IN : Caller
+; // ?Fail
 IMMEDIATE VOID OPERATOR : array
+VOID break
 IMMEDIATE VOID OPERATOR :: TYPE : CallBack
 const
 Const
+VOID continue
+VOID exit
 IMMEDIATE VOID OPERATOR :: TYPE : Functor
 IMMEDIATE VOID OPERATOR :: TYPE : Lambda
 IMMEDIATE VOID OPERATOR :: TYPE : List
