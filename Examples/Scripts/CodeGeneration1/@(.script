@@ -18,8 +18,8 @@ MACRO @(
     EXIT
    )
   l_Token Print
-  pop:Parser:NextToken
+  l_Parser pop:Parser:NextToken
  END
 ; // @(
 
-//@( 1 2 3 4 5 ) DO Print
+@( 1 2 3 4 5 6 ) DO Print
