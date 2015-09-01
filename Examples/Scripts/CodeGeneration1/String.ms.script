@@ -4,9 +4,4 @@ USES
  Testing.ms.dict
 ;
 
-RunTestsA [ @ (+)? @ ?(+) ]
- %REMARK '«апускаем "стандартные тесты" дл€ слова (+)?'
-RunTests strings:CatSep>
- %REMARK '«апускаем "стандартные тесты" дл€ слова strings:CatSep>'
-RunTests any:Cat
- %REMARK '«апускаем "стандартные тесты" дл€ слова any:Cat'
+RunTestsA [ @ (+)? @ ?(+) @ strings:CatSep> @ any:Cat ]
