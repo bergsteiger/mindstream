@@ -75,5 +75,5 @@ MACRO RunTests
  Sequence RIGHT LINK IN aWords
   %REMARK 'aWords ссылка на список слов справа от RunTests'
  %SUMMARY 'Выполняет тесты для списка слов aWords' ;
- aWords ExpandRunTestsFor
+ aWords |^@ ExpandRunTestsFor
 ; //RunTests
