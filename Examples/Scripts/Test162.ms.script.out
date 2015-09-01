@@ -1178,6 +1178,7 @@
 ..\..\Examples\Scripts\Other1\Array.ms.script
 ..\..\Examples\Scripts\Other1\ArrayPrint.ms.script
 ..\..\Examples\Scripts\Other1\AtomicIf.ms.script
+..\..\Examples\Scripts\Other1\BadInt.ms.script
 ..\..\Examples\Scripts\Other1\Break.ms.script
 ..\..\Examples\Scripts\Other1\CallerAndWordWorker.ms.script
 ..\..\Examples\Scripts\Other1\CallerFirstParamWorker.ms.script
@@ -1239,6 +1240,7 @@
 ..\..\Examples\Scripts\Other1\NamedInitedVarProducer.ms.script
 ..\..\Examples\Scripts\Other1\NIP.ms.script
 ..\..\Examples\Scripts\Other1\NotEquals.ms.script
+..\..\Examples\Scripts\Other1\NotIs.ms.script
 ..\..\Examples\Scripts\Other1\Operator.ms.script
 ..\..\Examples\Scripts\Other1\OperatorByRef.ms.script
 ..\..\Examples\Scripts\Other1\OperatorParent.ms.script
@@ -1292,6 +1294,7 @@
 ..\..\Examples\Scripts\Other1\TUCK.ms.script
 ..\..\Examples\Scripts\Other1\Type.ms.script
 ..\..\Examples\Scripts\Other1\var.ms.script
+..\..\Examples\Scripts\Other1\VarName.ms.script
 ..\..\Examples\Scripts\Other1\VarProducer.ms.script
 ..\..\Examples\Scripts\Other1\With.ms.script
 ..\..\Examples\Scripts\Other1\WordAddr.ms.script
@@ -1303,6 +1306,7 @@
 ..\..\Examples\Scripts\Other1\WordWorker.ms.script
 ..\..\Examples\Scripts\Other1\WordWorker2.ms.script
 ..\..\Examples\Scripts\Other1\CodeDump.ms.dict
+..\..\Examples\Scripts\Other1\EditorTools.ms.dict
 ..\..\Examples\Scripts\Other1\2DROP.ms.script.co
 ..\..\Examples\Scripts\Other1\2DUP.ms.script.co
 ..\..\Examples\Scripts\Other1\2OVER.ms.script.co
@@ -1310,6 +1314,7 @@
 ..\..\Examples\Scripts\Other1\Array.ms.script.co
 ..\..\Examples\Scripts\Other1\ArrayPrint.ms.script.co
 ..\..\Examples\Scripts\Other1\AtomicIf.ms.script.co
+..\..\Examples\Scripts\Other1\BadInt.ms.script.co
 ..\..\Examples\Scripts\Other1\Break.ms.script.co
 ..\..\Examples\Scripts\Other1\CallerAndWordWorker.ms.script.co
 ..\..\Examples\Scripts\Other1\CallerWorker.ms.script.co
@@ -1417,6 +1422,7 @@
 ..\..\Examples\Scripts\Other1\TUCK.ms.script.co
 ..\..\Examples\Scripts\Other1\Type.ms.script.co
 ..\..\Examples\Scripts\Other1\var.ms.script.co
+..\..\Examples\Scripts\Other1\VarName.ms.script.co
 ..\..\Examples\Scripts\Other1\VarProducer.ms.script.co
 ..\..\Examples\Scripts\Other1\With.ms.script.co
 ..\..\Examples\Scripts\Other1\WordAddr.ms.script.co
@@ -6042,6 +6048,7 @@
 ..\Scripts\Other1\Array.ms.script
 ..\Scripts\Other1\ArrayPrint.ms.script
 ..\Scripts\Other1\AtomicIf.ms.script
+..\Scripts\Other1\BadInt.ms.script
 ..\Scripts\Other1\Break.ms.script
 ..\Scripts\Other1\CallerAndWordWorker.ms.script
 ..\Scripts\Other1\CallerFirstParamWorker.ms.script
@@ -6103,6 +6110,7 @@
 ..\Scripts\Other1\NamedInitedVarProducer.ms.script
 ..\Scripts\Other1\NIP.ms.script
 ..\Scripts\Other1\NotEquals.ms.script
+..\Scripts\Other1\NotIs.ms.script
 ..\Scripts\Other1\Operator.ms.script
 ..\Scripts\Other1\OperatorByRef.ms.script
 ..\Scripts\Other1\OperatorParent.ms.script
@@ -6156,6 +6164,7 @@
 ..\Scripts\Other1\TUCK.ms.script
 ..\Scripts\Other1\Type.ms.script
 ..\Scripts\Other1\var.ms.script
+..\Scripts\Other1\VarName.ms.script
 ..\Scripts\Other1\VarProducer.ms.script
 ..\Scripts\Other1\With.ms.script
 ..\Scripts\Other1\WordAddr.ms.script
@@ -6167,6 +6176,7 @@
 ..\Scripts\Other1\WordWorker.ms.script
 ..\Scripts\Other1\WordWorker2.ms.script
 ..\Scripts\Other1\CodeDump.ms.dict
+..\Scripts\Other1\EditorTools.ms.dict
 ..\Scripts\Other1\2DROP.ms.script.co
 ..\Scripts\Other1\2DUP.ms.script.co
 ..\Scripts\Other1\2OVER.ms.script.co
@@ -6174,6 +6184,7 @@
 ..\Scripts\Other1\Array.ms.script.co
 ..\Scripts\Other1\ArrayPrint.ms.script.co
 ..\Scripts\Other1\AtomicIf.ms.script.co
+..\Scripts\Other1\BadInt.ms.script.co
 ..\Scripts\Other1\Break.ms.script.co
 ..\Scripts\Other1\CallerAndWordWorker.ms.script.co
 ..\Scripts\Other1\CallerWorker.ms.script.co
@@ -6281,6 +6292,7 @@
 ..\Scripts\Other1\TUCK.ms.script.co
 ..\Scripts\Other1\Type.ms.script.co
 ..\Scripts\Other1\var.ms.script.co
+..\Scripts\Other1\VarName.ms.script.co
 ..\Scripts\Other1\VarProducer.ms.script.co
 ..\Scripts\Other1\With.ms.script.co
 ..\Scripts\Other1\WordAddr.ms.script.co
@@ -7482,6 +7494,7 @@
 .\Other1\Array.ms.script
 .\Other1\ArrayPrint.ms.script
 .\Other1\AtomicIf.ms.script
+.\Other1\BadInt.ms.script
 .\Other1\Break.ms.script
 .\Other1\CallerAndWordWorker.ms.script
 .\Other1\CallerFirstParamWorker.ms.script
@@ -7543,6 +7556,7 @@
 .\Other1\NamedInitedVarProducer.ms.script
 .\Other1\NIP.ms.script
 .\Other1\NotEquals.ms.script
+.\Other1\NotIs.ms.script
 .\Other1\Operator.ms.script
 .\Other1\OperatorByRef.ms.script
 .\Other1\OperatorParent.ms.script
@@ -7596,6 +7610,7 @@
 .\Other1\TUCK.ms.script
 .\Other1\Type.ms.script
 .\Other1\var.ms.script
+.\Other1\VarName.ms.script
 .\Other1\VarProducer.ms.script
 .\Other1\With.ms.script
 .\Other1\WordAddr.ms.script
@@ -7607,6 +7622,7 @@
 .\Other1\WordWorker.ms.script
 .\Other1\WordWorker2.ms.script
 .\Other1\CodeDump.ms.dict
+.\Other1\EditorTools.ms.dict
 .\Other1\2DROP.ms.script.co
 .\Other1\2DUP.ms.script.co
 .\Other1\2OVER.ms.script.co
@@ -7614,6 +7630,7 @@
 .\Other1\Array.ms.script.co
 .\Other1\ArrayPrint.ms.script.co
 .\Other1\AtomicIf.ms.script.co
+.\Other1\BadInt.ms.script.co
 .\Other1\Break.ms.script.co
 .\Other1\CallerAndWordWorker.ms.script.co
 .\Other1\CallerWorker.ms.script.co
@@ -7721,6 +7738,7 @@
 .\Other1\TUCK.ms.script.co
 .\Other1\Type.ms.script.co
 .\Other1\var.ms.script.co
+.\Other1\VarName.ms.script.co
 .\Other1\VarProducer.ms.script.co
 .\Other1\With.ms.script.co
 .\Other1\WordAddr.ms.script.co
