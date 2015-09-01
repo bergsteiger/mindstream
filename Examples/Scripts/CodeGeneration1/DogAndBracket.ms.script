@@ -35,18 +35,21 @@ PROCEDURE DogAndBracket
    if ( l_Token = aBracketClose ) then
    begin
     aBracketOpen Ctx:Parser:PushSymbol
-    l_A .for> (
-     IN aSymbol 
+    l_A .slice> 2 .for> 
+    begin
+     IN aSymbol
+     IN aTokenType 
      aSymbol Ctx:Parser:PushSymbol
-    )
+    end
     l_Token Ctx:Parser:PushSymbol 
     break
-   end
-  end
+   end //l_Token = aBracketClose
+  end // l_TokenType = Tl3TokenType::l3_ttSymbol
   l_Token >>>[] l_A
+  l_TokenType >>>[] l_A
   l_TokenType Tl3TokenType:ValueToName Print
   l_Parser pop:Parser:NextToken
- end
+ end // while true
 ; // DogAndBracket
 
 MACRO @(
