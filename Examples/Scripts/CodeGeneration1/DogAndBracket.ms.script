@@ -9,6 +9,8 @@ USES
  NoCapsLock.ms.dict
 ;
 
+Test DogAndBracket
+
 MACRO @(
  INTERFACE VAR l_Parser 
  Ctx:Parser >>> l_Parser
@@ -42,3 +44,7 @@ MACRO @(
 @( 1 2 3 4 5 6 1 2 + '123' ) 
 
 WHILE ( StackLevel > 0 ) Print
+
+; // DogAndBracket
+
+DogAndBracket
