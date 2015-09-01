@@ -8,4 +8,132 @@ l3_ttInteger
 l3_ttInteger
 l3_ttSymbol
 l3_ttString
-Ошибка компиляции: "Ошибка при получении параметра aValue: Il3CString : Тип значения tfw_vtInt несовместим с tfw_vtStr". Тип токена: l3_ttSymbol : ) в строке 67. Файл: DogAndBracket.ms.script. Класс: TkwCtxParserPushSymbol. Слово: Ctx:Parser:PushSymbol
+7
+7
+7
+7
+7
+7
+7
+7
+4
+6
+VOID Test DogAndBracketTest
+ IMMEDIATE VOID MACRO @(
+  NameOf
+  (
+  NameOf
+  )
+  DogAndBracket
+ ; // IMMEDIATE VOID MACRO @(
+ 
+ IMMEDIATE VOID MACRO @[
+  NameOf
+  [
+  NameOf
+  ]
+  DogAndBracket
+ ; // IMMEDIATE VOID MACRO @[
+ 
+ VOID PROCEDURE DogAndBracket
+  STRING IN aBracketClose
+  STRING IN aBracketOpen
+  ARRAY VAR l_A
+  INTERFACE VAR l_Parser
+  Ctx:Parser
+  >>>
+  l_Parser
+  l_A :=
+  [
+  ]
+  l_Parser
+  pop:Parser:NextToken
+  WHILE
+  true
+  BEGIN
+   STRING VAR l_Token
+   INTEGER VAR l_TokenType
+   l_Parser
+   pop:Parser:TokenLongString
+   >>>
+   l_Token
+   l_Parser
+   pop:Parser:TokenType
+   >>>
+   l_TokenType
+   if
+    (
+     l_TokenType
+     =
+     Tl3TokenType::l3_ttSymbol
+    )
+   then
+    BEGIN
+     (
+      l_Token
+      =
+      NameOf
+      (
+     )
+     ?FAIL
+     'Вложенные скобки пока не поддерживаются'
+     (
+      l_Token
+      =
+      NameOf
+      [
+     )
+     ?FAIL
+     'Вложенные скобки пока не поддерживаются'
+     if
+      (
+       l_Token
+       =
+       aBracketClose
+      )
+     then
+      BEGIN
+       aBracketOpen
+       Ctx:Parser:PushSymbol
+       l_A
+       .slice>
+       2
+       IT
+       BEGIN
+        IN aSymbol
+        IN aTokenType
+        aSymbol
+        .
+       END
+       l_Token
+       Ctx:Parser:PushSymbol
+       BREAK
+      END
+    END
+   l_Token
+   >>>[]
+   l_A
+   l_TokenType
+   >>>[]
+   l_A
+   l_TokenType
+   Tl3TokenType:ValueToName
+   .
+   l_Parser
+   pop:Parser:NextToken
+  END
+ ; // VOID PROCEDURE DogAndBracket
+ 
+ (
+ )
+ WHILE
+ (
+  StackLevel
+  >
+  0
+ )
+ .
+ DogAndBracketTest
+ DumpElement
+; // VOID Test DogAndBracketTest
+
