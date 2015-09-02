@@ -13,6 +13,7 @@ Test DogAndBracketTest
 
 INTEGER String TYPE TOKEN
 INTEGER TYPE TOKEN_TYPE
+ // - вообще говоря это дложен быть Tl3TokenType, но там проблема с проверкой типов
 
 Procedure axiom:Push
  TOKEN in aSymbol
