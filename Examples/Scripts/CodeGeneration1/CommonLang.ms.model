@@ -56,6 +56,15 @@ concrete-model-begin 'Модель шаблонов'
  ; // %SUMMARY
 ; // Interface
 
+<<UMLClass>> Const
+ %SUMMARY '
+ Пусть у нас ещё бывают константы.
+ Детально мы их ПОТОМ опишем.
+ '
+  %TODO 'Детально мы их ПОТОМ опишем.'
+ ; // %SUMMARY
+; // Const
+
 %REMARK
  '
  Могут ли Library вкладываться в Project, а Project в Library

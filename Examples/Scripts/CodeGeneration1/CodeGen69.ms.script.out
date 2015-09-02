@@ -3046,10 +3046,18 @@ IMMEDIATE VOID OPERATOR :: MACRO : %REMARK
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aDoc
 ; // %REMARK
+IMMEDIATE VOID OPERATOR :: MACRO : %TODO
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // %TODO
 IMMEDIATE VOID OPERATOR :: MACRO : REMARK
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aDoc
 ; // REMARK
+IMMEDIATE VOID OPERATOR :: MACRO : TODO
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aDoc
+; // TODO
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
  Uses: 
   axiom:axiom
@@ -4564,6 +4572,10 @@ IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCla
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName
 ; // <<Class>>
+IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> : <<Const>>
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // <<Const>>
 IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> : <<Interface>>
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName

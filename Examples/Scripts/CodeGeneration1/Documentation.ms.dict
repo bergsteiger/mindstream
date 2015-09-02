@@ -8,4 +8,11 @@ MACRO REMARK
  %SUMMARY '–емарка' ;
 ; // REMARK
 
+MACRO TODO
+ Literal IN aDoc
+ %SUMMARY '„то-то, что надо сделать потом, но не забыть, и не «јЅ»“№' ;
+; // TODO
+
 WordAlias %REMARK REMARK
+
+WordAlias %TODO TODO
