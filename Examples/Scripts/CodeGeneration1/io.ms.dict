@@ -4,8 +4,10 @@ USES
  types.ms.dict
 ;
 
+ANY TYPE PRINTABLE
+
 PROCEDURE Print
- IN aValue
+ PRINTABLE IN aValue
  if (
      ( aValue IsObj ) AND ( aValue IS class::TtfwWord )
     ) then

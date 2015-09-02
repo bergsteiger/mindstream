@@ -3287,8 +3287,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
  ;
 VOID OPERATOR :: PROCEDURE : Print
- OPERATOR :: IN : aValue
+ PRINTABLE OPERATOR :: IN : aValue
 ; // Print
+IMMEDIATE VOID OPERATOR :: TYPE : PRINTABLE
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dict
  Uses: 
   axiom:axiom
