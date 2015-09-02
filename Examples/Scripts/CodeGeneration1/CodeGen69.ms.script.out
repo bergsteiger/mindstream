@@ -2844,7 +2844,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms
   axiom:clipboard
   axiom:Font
   axiom:generators
+  axiom:Tl3TokenType
  ;
+VOID OPERATOR :: PROCEDURE : axiom:Push
+ TOKEN OPERATOR :: IN : aSymbol
+ TOKEN_TYPE OPERATOR :: IN : aTokenType
+; // axiom:Push
 VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  LINK ^ OPERATOR :: IN : aSymbol
@@ -2853,6 +2858,22 @@ VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushLeftDottedSymbol
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  STRING OPERATOR :: IN : aValue
 ; // Ctx:Parser:PushLeftDottedSymbol
+IMMEDIATE VOID OPERATOR :: TYPE : TOKEN
+IMMEDIATE VOID OPERATOR :: TYPE : TOKEN_TYPE
+Dictionary: axiom:Tl3TokenType
+Tl3TokenType Tl3TokenType::l3_ttBOF
+Tl3TokenType Tl3TokenType::l3_ttComment
+Tl3TokenType Tl3TokenType::l3_ttDoubleQuotedString
+Tl3TokenType Tl3TokenType::l3_ttEOF
+Tl3TokenType Tl3TokenType::l3_ttEOL
+Tl3TokenType Tl3TokenType::l3_ttFloat
+Tl3TokenType Tl3TokenType::l3_ttInteger
+Tl3TokenType Tl3TokenType::l3_ttKeyWord
+Tl3TokenType Tl3TokenType::l3_ttSingleChar
+Tl3TokenType Tl3TokenType::l3_ttString
+Tl3TokenType Tl3TokenType::l3_ttSymbol
+Tl3TokenType Tl3TokenType:NameToValue
+STRING Tl3TokenType:ValueToName
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
  Uses: 
   axiom:axiom
@@ -3830,32 +3851,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : @(
 IMMEDIATE VOID OPERATOR :: MACRO : @[
-VOID OPERATOR :: PROCEDURE : axiom:Push
- TOKEN OPERATOR :: IN : aSymbol
- TOKEN_TYPE OPERATOR :: IN : aTokenType
-; // axiom:Push
 VOID OPERATOR :: PROCEDURE : DogAndBracket
  STRING OPERATOR :: IN : aBracketClose
  STRING OPERATOR :: IN : aBracketOpen
  ARRAY OPERATOR :: VAR : l_A
  INTERFACE OPERATOR :: VAR : l_Parser
 ; // DogAndBracket
-IMMEDIATE VOID OPERATOR :: TYPE : TOKEN
-IMMEDIATE VOID OPERATOR :: TYPE : TOKEN_TYPE
-Dictionary: axiom:Tl3TokenType
-Tl3TokenType Tl3TokenType::l3_ttBOF
-Tl3TokenType Tl3TokenType::l3_ttComment
-Tl3TokenType Tl3TokenType::l3_ttDoubleQuotedString
-Tl3TokenType Tl3TokenType::l3_ttEOF
-Tl3TokenType Tl3TokenType::l3_ttEOL
-Tl3TokenType Tl3TokenType::l3_ttFloat
-Tl3TokenType Tl3TokenType::l3_ttInteger
-Tl3TokenType Tl3TokenType::l3_ttKeyWord
-Tl3TokenType Tl3TokenType::l3_ttSingleChar
-Tl3TokenType Tl3TokenType::l3_ttString
-Tl3TokenType Tl3TokenType::l3_ttSymbol
-Tl3TokenType Tl3TokenType:NameToValue
-STRING Tl3TokenType:ValueToName
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
  Uses: 
   axiom:axiom
