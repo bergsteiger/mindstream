@@ -14,8 +14,17 @@ Test DogAndBracketTest
 PROCEDURE axiom:Push
  STRING IN aSymbol
  INTEGER IN aTokenType
- aTokenType Tl3TokenType:ValueToName Print 
- aSymbol Ctx:Parser:PushSymbol
+
+ aTokenType Case
+  Tl3TokenType::l3_ttSymbol 
+   ( aSymbol Ctx:Parser:PushSymbol )
+  Tl3TokenType::l3_ttString 
+   ( aSymbol Ctx:Parser:PushString )
+  Tl3TokenType::l3_ttInteger
+   ( aSymbol StrToInt Ctx:Parser:PushInt )
+  Default 
+   ( Error [ 'Неожиданный тип токена: ' aTokenType Tl3TokenType:ValueToName ] )
+ end // aTokenType Case
 ; // axiom:Push 
 
 PROCEDURE DogAndBracket

@@ -1,15 +1,5 @@
-l3_ttInteger
-l3_ttInteger
-l3_ttInteger
-l3_ttInteger
-l3_ttInteger
-l3_ttInteger
-l3_ttInteger
-l3_ttInteger
-l3_ttSymbol
-l3_ttString
 123
-12
+3
 6
 5
 4
@@ -37,10 +27,33 @@ VOID Test DogAndBracketTest
   STRING IN aSymbol
   INTEGER IN aTokenType
   aTokenType
-  Tl3TokenType:ValueToName
-  .
-  aSymbol
-  Ctx:Parser:PushSymbol
+  CASE
+   Tl3TokenType::l3_ttSymbol
+    (
+     aSymbol
+     Ctx:Parser:PushSymbol
+    )
+   Tl3TokenType::l3_ttString
+    (
+     aSymbol
+     Ctx:Parser:PushString
+    )
+   Tl3TokenType::l3_ttInteger
+    (
+     aSymbol
+     StrToInt
+     Ctx:Parser:PushInt
+    )
+   DEFAULT
+    (
+     ERROR
+     [
+      'Неожиданный тип токена: '
+      aTokenType
+      Tl3TokenType:ValueToName
+     ]
+    )
+  END
  ; // VOID PROCEDURE axiom:Push
  
  VOID PROCEDURE DogAndBracket
@@ -131,14 +144,14 @@ VOID Test DogAndBracketTest
  ; // VOID PROCEDURE DogAndBracket
  
  (
-  '1'
-  '2'
-  '3'
-  '4'
-  '5'
-  '6'
-  '1'
-  '2'
+  1
+  2
+  3
+  4
+  5
+  6
+  1
+  2
   +
   '123'
  )
