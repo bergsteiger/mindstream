@@ -1,4 +1,3 @@
-[ TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwAdd TkwString ]
 123
 +
 2
@@ -9,6 +8,7 @@
 3
 2
 1
+[ TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwAdd TkwString ]
 VOID Test DogAndBracketTest
  (
   @
@@ -32,6 +32,13 @@ VOID Test DogAndBracketTest
   @
   '123'
  )
+ WHILE
+ (
+  StackLevel
+  >
+  0
+ )
+ Print
  [
   @
   1

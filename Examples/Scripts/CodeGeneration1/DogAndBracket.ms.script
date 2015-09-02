@@ -7,11 +7,9 @@ USES
 
 Test DogAndBracketTest
 
-@( 1 2 3 4 5 6 1 2 + '123' ) 
+@( 1 2 3 4 5 6 1 2 + '123' ) WHILE ( StackLevel > 0 ) Print
 
-@[ 1 2 3 4 5 6 1 2 + '123' ]
-
-WHILE ( StackLevel > 0 ) Print
+@[ 1 2 3 4 5 6 1 2 + '123' ] WHILE ( StackLevel > 0 ) Print
 
 USES
  CodeDump.ms.dict
