@@ -9,27 +9,8 @@ USES
  NoCapsLock.ms.dict
  params.ms.dict
  arrays.ms.dict
+ Testing.ms.dict
 ;
-
-INTEGER String TYPE TOKEN
-INTEGER TYPE TOKEN_TYPE
- // - вообще говоря это дложен быть Tl3TokenType, но там проблема с проверкой типов
-
-Procedure axiom:Push
- TOKEN in aSymbol
- TOKEN_TYPE in aTokenType
-
- aTokenType Case
-  Tl3TokenType::l3_ttSymbol 
-   ( aSymbol Ctx:Parser:PushSymbol )
-  Tl3TokenType::l3_ttString 
-   ( aSymbol Ctx:Parser:PushString )
-  Tl3TokenType::l3_ttInteger
-   ( aSymbol Ctx:Parser:PushInt )
-  Default 
-   ( Error [ 'Неожиданный тип токена: ' aTokenType Tl3TokenType:ValueToName ] )
- end // aTokenType Case
-; // axiom:Push 
 
 Procedure DogAndBracket
  String in aBracketOpen
@@ -80,13 +61,32 @@ Procedure DogAndBracket
 ; // DogAndBracket
 
 MACRO @(
+ %SUMMARY '
+ Компилирует СПИСОК адресов слов.
+ Аналог ( @ X1 @ X2 .. @ XN )
+ '
+ ;
  NameOf (
   NameOf ) 
    DogAndBracket
 ; // @(
 
+TestsFor @(
+ Test T1 @( 1 2 3 4 5 6 1 2 + '123' ) WHILE ( StackLevel &gt; 0 ) Print ;
+; // TestsFor @(
+
 MACRO @[
+ %SUMMARY '
+ Компилирует МАССИВ адресов слов.
+ Аналог [ @ X1 @ X2 .. @ XN ]
+ '
+ ;
  NameOf [
   NameOf ]
    DogAndBracket
 ; // @[
+
+TestsFor @[
+ Test T1 @[ 1 2 3 4 5 6 1 2 + '123' ] WHILE ( StackLevel &gt; 0 ) Print ;
+; // TestsFor @[
+
