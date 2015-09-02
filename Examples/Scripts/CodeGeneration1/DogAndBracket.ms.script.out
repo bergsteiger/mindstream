@@ -1,3 +1,16 @@
+VOID TestWithDump DogAndBracketTest
+ DogAndBracketTest
+ DumpElement
+ '@('
+ @
+ Tests:@(
+ DoRunTestsFor
+ '@['
+ @
+ Tests:@[
+ DoRunTestsFor
+; // VOID TestWithDump DogAndBracketTest
+
 Testing: @(
 T1
 123
@@ -17,16 +30,3 @@ T1
 [ TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwAdd TkwString ]
 Testing end: @[
 ------------------
-VOID Test DogAndBracketTest
- '@('
- @
- Tests:@(
- DoRunTestsFor
- '@['
- @
- Tests:@[
- DoRunTestsFor
- DogAndBracketTest
- DumpElement
-; // VOID Test DogAndBracketTest
-
