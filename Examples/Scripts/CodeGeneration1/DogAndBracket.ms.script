@@ -59,6 +59,7 @@ Procedure DogAndBracket
     begin
      TOKEN in aSymbol
      TOKEN_TYPE in aTokenType
+     axiom:PushSymbol @ 
      aSymbol aTokenType axiom:Push 
     end
     l_Token Ctx:Parser:PushSymbol 
