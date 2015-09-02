@@ -1,8 +1,11 @@
 USES
  string.ms.dict
  Testing.ms.dict
- Documentation.ms.dict
 ;
 
-RunTests.in.array @[ (+)? ?(+) strings:CatSep> any:Cat ]
- %REMARK 'Запускаем тесты к указанным скриптовым словам'
+TestWithDump StringTest
+ RunTests.in.array @[ (+)? ?(+) strings:CatSep> any:Cat ]
+  %REMARK 'Запускаем тесты к указанным скриптовым словам'
+; // StringTest
+
+StringTest

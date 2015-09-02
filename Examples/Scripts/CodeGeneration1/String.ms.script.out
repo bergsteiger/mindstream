@@ -1,3 +1,24 @@
+VOID TestWithDump StringTest
+ StringTest
+ DumpElement
+ '(+)?'
+ @
+ Tests:(+)?
+ DoRunTestsFor
+ '?(+)'
+ @
+ Tests:?(+)
+ DoRunTestsFor
+ 'strings:CatSep>'
+ @
+ Tests:strings:CatSep>
+ DoRunTestsFor
+ 'any:Cat'
+ @
+ Tests:any:Cat
+ DoRunTestsFor
+; // VOID TestWithDump StringTest
+
 Testing: (+)?
 T1
 B
