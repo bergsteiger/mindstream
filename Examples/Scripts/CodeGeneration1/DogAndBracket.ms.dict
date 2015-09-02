@@ -66,7 +66,6 @@ Procedure DogAndBracket
     break
    end //l_Token = aBracketClose
   end // l_TokenType = Tl3TokenType::l3_ttSymbol
-  l_TokenType >>>[] l_A
   if ( l_TokenType = Tl3TokenType::l3_ttInteger ) then
   begin
    l_Parser pop:Parser:TokenInt >>>[] l_A
@@ -75,6 +74,7 @@ Procedure DogAndBracket
   begin
    l_Token >>>[] l_A
   end // l_TokenType = Tl3TokenType::l3_ttInteger
+  l_TokenType >>>[] l_A
   l_Parser pop:Parser:NextToken
  end // while true
 ; // DogAndBracket
