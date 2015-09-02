@@ -1,22 +1,13 @@
 // Testing.ms.script
 
 USES
- Documentation.ms.dict
  Testing.ms.dict
  string.ms.dict
 ;
 
 TestWithDump TestingTest
-
-RunTests.in.array @[ (+)? ]
- %REMARK '«апускаем "стандартные тесты" дл€ слова (+)?'
-
-USES
- CodeDump.ms.dict
-;
-
-@SELF DumpElement
-
+ RunTests.in.array @[ (+)? ]
+  %REMARK '«апускаем "стандартные тесты" дл€ слова (+)?'
 ; // TestingTest
 
 TestingTest

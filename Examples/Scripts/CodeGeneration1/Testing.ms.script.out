@@ -5,8 +5,6 @@ VOID TestWithDump TestingTest
  @
  Tests:(+)?
  DoRunTestsFor
- TestingTest
- DumpElement
 ; // VOID TestWithDump TestingTest
 
 Testing: (+)?
@@ -22,14 +20,3 @@ T5
 A123
 Testing end: (+)?
 ------------------
-VOID TestWithDump TestingTest
- TestingTest
- DumpElement
- '(+)?'
- @
- Tests:(+)?
- DoRunTestsFor
- TestingTest
- DumpElement
-; // VOID TestWithDump TestingTest
-
