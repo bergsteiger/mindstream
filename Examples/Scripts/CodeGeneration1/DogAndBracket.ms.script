@@ -32,17 +32,17 @@ Procedure axiom:Push
 Procedure DogAndBracket
  String in aBracketOpen
  String in aBracketClose
- INTERFACE VAR l_Parser 
+ INTERFACE var l_Parser 
  Ctx:Parser >>> l_Parser
- ARRAY VAR l_A
+ ARRAY var l_A
  l_A := [ ]
 
  l_Parser pop:Parser:NextToken
  while true
  begin
-  String VAR l_Token
+  String var l_Token
   l_Parser pop:Parser:TokenLongString >>> l_Token
-  INTEGER VAR l_TokenType
+  INTEGER var l_TokenType
   l_Parser pop:Parser:TokenType >>> l_TokenType
   if ( l_TokenType = Tl3TokenType::l3_ttSymbol ) then
   begin
