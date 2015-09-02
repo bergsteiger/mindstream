@@ -8,16 +8,6 @@ l3_ttInteger
 l3_ttInteger
 l3_ttSymbol
 l3_ttString
-l3_ttInteger
-l3_ttInteger
-l3_ttInteger
-l3_ttInteger
-l3_ttInteger
-l3_ttInteger
-l3_ttInteger
-l3_ttInteger
-l3_ttSymbol
-l3_ttString
 123
 12
 6
@@ -127,9 +117,6 @@ VOID Test DogAndBracketTest
    l_Token
    >>>[]
    l_A
-   l_TokenType
-   Tl3TokenType:ValueToName
-   .
    l_Parser
    pop:Parser:NextToken
   END

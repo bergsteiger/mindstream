@@ -48,7 +48,6 @@ PROCEDURE DogAndBracket
   end // l_TokenType = Tl3TokenType::l3_ttSymbol
   l_TokenType >>>[] l_A
   l_Token >>>[] l_A
-  l_TokenType Tl3TokenType:ValueToName Print
   l_Parser pop:Parser:NextToken
  end // while true
 ; // DogAndBracket
