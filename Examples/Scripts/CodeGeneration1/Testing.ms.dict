@@ -105,10 +105,12 @@ EXPORTS
 
 MACRO TestWithDump
  Literal IN aName
+ %SUMMARY 'Аналог слова Test, но с дампингом кода слова в стандартный вывод' ;
+
  @SELF Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol VOID
  axiom:PushSymbol axiom:operator
  aName |N Ctx:Parser:PushSymbol
- //axiom:PushSymbol @SELF
- //axiom:PushSymbol DumpElement
+ axiom:PushSymbol @SELF
+ axiom:PushSymbol DumpElement
 ; // TestWithDump
