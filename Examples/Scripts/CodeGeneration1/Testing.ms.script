@@ -8,15 +8,6 @@ USES
 
 Test TestingTest
 
-TestsFor (+)?
- %SUMMARY '"Стандартные тесты" для слова (+)?' ;
- Test T1 '' (+)? 'B' Print ;
- Test T2 'A' (+)? 'B' Print ;
- Test T3 'A' (+)? '' Print ;
- Test T4 'A' (+)? 'D' Print ;
- Test T5 'A' (+)? '123' Print ;
-; // TestsFor (+)?
-
 RunTests.in.array @[ (+)? ]
  %REMARK 'Запускаем "стандартные тесты" для слова (+)?'
 
