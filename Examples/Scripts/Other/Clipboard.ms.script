@@ -1,0 +1,15 @@
+USES
+ axiom:clipboard
+;
+
+'Привет мир' clipboard:SetText
+
+CF_TEXT clipboard:GetFormattedText .
+CF_UNICODETEXT clipboard:GetFormattedText .
+
+'Привет'#8201'мир' clipboard:SetText
+
+CF_TEXT clipboard:GetFormattedText .
+CF_UNICODETEXT clipboard:GetFormattedText .
+
+clipboard:Clear

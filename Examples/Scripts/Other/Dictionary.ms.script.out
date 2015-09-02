@@ -180,6 +180,7 @@ Dictionary: Dictionary.ms.script
   axiom:clipboard
   axiom:Font
   axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\Other\CodeDump.script
   H:\Dropbox\mindstream\Examples\Scripts\Other\CodeDump.ms.dict
  ;
 Dictionary: axiom:axiom
@@ -2714,6 +2715,38 @@ INTEGER pop:Font:Size
 Dictionary: axiom:generators
 VOID generators:Execute
 Ik2TagGenerator generators:Link
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Other\CodeDump.script
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\Other\CodeDump.ms.dict
+ ;
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\Other\CodeDump.ms.dict
+ ;
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Other\CodeDump.ms.dict
  Uses: 
   axiom:axiom
