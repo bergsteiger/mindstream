@@ -21,16 +21,18 @@ INTEGER TYPE TOKEN_TYPE
  // - вообще говоря это должен быть Tl3TokenType, но там проблема с проверкой типов
 
 PROCEDURE axiom:Push
- TOKEN IN aSymbol
+ TOKEN IN aToken
  TOKEN_TYPE IN aTokenType
+
+ %SUMMARY 'Запихивает во входной поток парсера токен aToken типизируя его в зависимости от aTokenType' ;
 
  aTokenType CASE
   Tl3TokenType::l3_ttSymbol 
-   ( aSymbol Ctx:Parser:PushSymbol )
+   ( aToken Ctx:Parser:PushSymbol )
   Tl3TokenType::l3_ttString 
-   ( aSymbol Ctx:Parser:PushString )
+   ( aToken Ctx:Parser:PushString )
   Tl3TokenType::l3_ttInteger
-   ( aSymbol Ctx:Parser:PushInt )
+   ( aToken Ctx:Parser:PushInt )
   DEFAULT 
    ( ERROR [ 'Неожиданный тип токена: ' aTokenType Tl3TokenType:ValueToName ] )
  end // aTokenType Case

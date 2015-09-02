@@ -2847,7 +2847,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms
   axiom:Tl3TokenType
  ;
 VOID OPERATOR :: PROCEDURE : axiom:Push
- TOKEN OPERATOR :: IN : aSymbol
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ TOKEN OPERATOR :: IN : aToken
  TOKEN_TYPE OPERATOR :: IN : aTokenType
 ; // axiom:Push
 VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
