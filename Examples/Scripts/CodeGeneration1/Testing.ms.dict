@@ -104,7 +104,11 @@ EXPORTS
  CodeDump.ms.dict
 
 MACRO TestWithDump
+ Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol VOID
  axiom:PushSymbol axiom:operator
+ aName |N Ctx:Parser:PushSymbol
+ //axiom:PushSymbol @SELF
+ //axiom:PushSymbol DumpElement
 ; // TestWithDump

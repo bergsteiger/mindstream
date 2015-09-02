@@ -3744,6 +3744,8 @@ IMMEDIATE VOID OPERATOR :: MACRO : TestsFor
  LINK ^ OPERATOR :: IN : aWord
 ; // TestsFor
 IMMEDIATE VOID OPERATOR :: MACRO : TestWithDump
+ ^L OPERATOR :: IN : aName
+; // TestWithDump
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
  Uses: 
   axiom:axiom
