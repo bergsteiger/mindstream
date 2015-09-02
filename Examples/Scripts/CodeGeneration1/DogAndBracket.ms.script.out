@@ -41,7 +41,6 @@ VOID Test DogAndBracketTest
    Tl3TokenType::l3_ttInteger
     (
      aSymbol
-     StrToInt
      Ctx:Parser:PushInt
     )
    DEFAULT
@@ -135,9 +134,25 @@ VOID Test DogAndBracketTest
    l_TokenType
    >>>[]
    l_A
-   l_Token
-   >>>[]
-   l_A
+   if
+    (
+     l_TokenType
+     =
+     Tl3TokenType::l3_ttInteger
+    )
+   then
+    BEGIN
+     l_Parser
+     pop:Parser:TokenInt
+     >>>[]
+     l_A
+    END
+   else
+    BEGIN
+     l_Token
+     >>>[]
+     l_A
+    END
    l_Parser
    pop:Parser:NextToken
   END

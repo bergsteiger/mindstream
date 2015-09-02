@@ -23,7 +23,7 @@ PROCEDURE axiom:Push
   Tl3TokenType::l3_ttString 
    ( aSymbol Ctx:Parser:PushString )
   Tl3TokenType::l3_ttInteger
-   ( aSymbol StrToInt Ctx:Parser:PushInt )
+   ( aSymbol Ctx:Parser:PushInt )
   Default 
    ( Error [ 'Неожиданный тип токена: ' aTokenType Tl3TokenType:ValueToName ] )
  end // aTokenType Case
@@ -64,7 +64,14 @@ PROCEDURE DogAndBracket
    end //l_Token = aBracketClose
   end // l_TokenType = Tl3TokenType::l3_ttSymbol
   l_TokenType >>>[] l_A
-  l_Token >>>[] l_A
+  if ( l_TokenType = Tl3TokenType::l3_ttInteger ) then
+  begin
+   l_Parser pop:Parser:TokenInt >>>[] l_A
+  end // l_TokenType = Tl3TokenType::l3_ttInteger
+  else
+  begin
+   l_Token >>>[] l_A
+  end // l_TokenType = Tl3TokenType::l3_ttInteger
   l_Parser pop:Parser:NextToken
  end // while true
 ; // DogAndBracket
