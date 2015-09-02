@@ -3863,6 +3863,9 @@ VOID OPERATOR :: PROCEDURE : DogAndBracket
  ARRAY OPERATOR :: VAR : l_A
  INTERFACE OPERATOR :: VAR : l_Parser
 ; // DogAndBracket
+VOID OPERATOR : Tests:@(
+ VOID OPERATOR :: Test : T1
+; // Tests:@(
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
  Uses: 
   axiom:axiom
