@@ -1,10 +1,10 @@
 USES
  NoCapsLock.ms.dict
  InheritsAndImplementsNew.ms.dict
- CodeDump.ms.dict
+ Testing.ms.dict
 ;
 
-Test InheritsTest
+TestWithDump InheritsTest
 
  : A
  ; // A
@@ -32,7 +32,6 @@ Test InheritsTest
   Implements I1
  ; // D
  
- @SELF DumpElement
 ; // InheritsTest
 
 InheritsTest
