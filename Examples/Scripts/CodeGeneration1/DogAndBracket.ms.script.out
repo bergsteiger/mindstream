@@ -1,6 +1,8 @@
-[ 1 2 3 4 5 6 3 123 ]
+[ TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwInteger TkwAdd TkwString ]
 123
-3
++
+2
+1
 6
 5
 4
@@ -123,6 +125,8 @@ VOID Test DogAndBracketTest
        BEGIN
         TOKEN IN aSymbol
         TOKEN_TYPE IN aTokenType
+        axiom:PushSymbol
+        @
         aSymbol
         aTokenType
         axiom:Push
@@ -170,27 +174,47 @@ VOID Test DogAndBracketTest
  ; // IMMEDIATE VOID TYPE TOKEN_TYPE
  
  (
+  @
   1
+  @
   2
+  @
   3
+  @
   4
+  @
   5
+  @
   6
+  @
   1
+  @
   2
+  @
   +
+  @
   '123'
  )
  [
+  @
   1
+  @
   2
+  @
   3
+  @
   4
+  @
   5
+  @
   6
+  @
   1
+  @
   2
+  @
   +
+  @
   '123'
  ]
  WHILE
