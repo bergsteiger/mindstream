@@ -3,11 +3,13 @@
 USES
  DogAndBracket.ms.dict
  Testing.ms.dict
+ Documentation.ms.dict
 ;
 
 Test DogAndBracketTest
 
-@( 1 2 3 4 5 6 1 2 + '123' ) WHILE ( StackLevel > 0 ) Print
+RunTests.in.array @[ @( ]
+ %REMARK 'Запускаем тесты к указанным скриптовым словам'
 
 @[ 1 2 3 4 5 6 1 2 + '123' ] WHILE ( StackLevel > 0 ) Print
 
