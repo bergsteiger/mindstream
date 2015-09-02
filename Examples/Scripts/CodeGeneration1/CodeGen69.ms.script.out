@@ -3285,10 +3285,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
   axiom:Font
   axiom:generators
  ;
-REDIFINITION : : Print
-==> Redefines
- VOID .
-<== Redefines
+VOID OPERATOR :: PROCEDURE : Print
+ OPERATOR :: IN : aValue
+; // Print
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dict
  Uses: 
   axiom:axiom

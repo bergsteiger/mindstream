@@ -210,7 +210,7 @@ VOID Test PointTest
   Point IN Self
   Self
   Point:ToPrintable
-  .
+  Print
  ; // VOID method Point:Print
  
  OVERRIDE STRING method Point:ToPrintable
@@ -327,7 +327,7 @@ VOID Test PointTest
   Rectangle IN Self
   Self
   Rectangle:ToPrintable
-  .
+  Print
  ; // VOID method Rectangle:Print
  
  Point readonly Rectangle:TopLeft
@@ -437,25 +437,25 @@ VOID Test PointTest
  l_Points
  (
   Point:X
-  .
+  Print
  )
  for
  l_Points
  (
   Point:Y
-  .
+  Print
  )
  for
  l_Points
  (
   Object:class
-  .
+  Print
  )
  for
  l_Points
  (
   Object:ClassName
-  .
+  Print
  )
  for
  l_Points
@@ -467,7 +467,7 @@ VOID Test PointTest
   )
   (
    getClassName
-   .
+   Print
   )
  )
  R1 :=
@@ -490,33 +490,33 @@ VOID Test PointTest
  'Hello '
  (+)
  'world'
- .
+ Print
  'Hello '
  (+)
  'world'
- .
+ Print
  'Hello '
  (+)
  'world'
- .
+ Print
  1
  (+)
  2
- .
+ Print
  10
  (+)
  20
- .
+ Print
  0
  (-)
  10
- .
+ Print
  Neg
  10
- .
+ Print
  Neg
  -10
- .
+ Print
 ; // VOID Test PointTest
 
 ( X: 0, Y: 0 )

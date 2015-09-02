@@ -1,3 +1,15 @@
 // io.ms.dict
 
-WordAlias Print .
+PROCEDURE Print
+ IN aValue
+ if (
+     ( aValue IsObj ) AND ( aValue IS class::TtfwWord )
+    ) then
+ begin
+  aValue /*{|N}*/ .
+ end
+ else
+ begin
+  aValue .
+ end
+; // Print

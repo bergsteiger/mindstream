@@ -21,35 +21,35 @@ VOID Test TestingTest
    ''
    (+)?
    'B'
-   .
+   Print
   ; // VOID Test T1
   
   VOID Test T2
    'A'
    (+)?
    'B'
-   .
+   Print
   ; // VOID Test T2
   
   VOID Test T3
    'A'
    (+)?
    ''
-   .
+   Print
   ; // VOID Test T3
   
   VOID Test T4
    'A'
    (+)?
    'D'
-   .
+   Print
   ; // VOID Test T4
   
   VOID Test T5
    'A'
    (+)?
    '123'
-   .
+   Print
   ; // VOID Test T5
   
  ; // VOID OPERATOR Tests:(+)?
