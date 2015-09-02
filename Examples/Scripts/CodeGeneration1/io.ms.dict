@@ -6,7 +6,7 @@ PROCEDURE Print
      ( aValue IsObj ) AND ( aValue IS class::TtfwWord )
     ) then
  begin
-  aValue /*{|N}*/ .
+  aValue |N .
  end
  else
  begin
