@@ -92,6 +92,8 @@ MACRO @[
 
 @( 1 2 3 4 5 6 1 2 + '123' ) 
 
+@[ 1 2 3 4 5 6 1 2 + '123' ]
+
 WHILE ( StackLevel > 0 ) Print
 
 USES

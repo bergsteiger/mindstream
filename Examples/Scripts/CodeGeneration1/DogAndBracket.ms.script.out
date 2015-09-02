@@ -1,3 +1,4 @@
+[ 1 2 3 4 5 6 3 123 ]
 123
 3
 6
@@ -180,6 +181,18 @@ VOID Test DogAndBracketTest
   +
   '123'
  )
+ [
+  1
+  2
+  3
+  4
+  5
+  6
+  1
+  2
+  +
+  '123'
+ ]
  WHILE
  (
   StackLevel
