@@ -3,4 +3,4 @@ USES
  Testing.ms.dict
 ;
 
-RunTestsA [ @ (+)? @ ?(+) @ strings:CatSep> @ any:Cat ]
+RunTests.in.array [ @ (+)? @ ?(+) @ strings:CatSep> @ any:Cat ]

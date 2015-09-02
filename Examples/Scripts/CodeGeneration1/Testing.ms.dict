@@ -82,9 +82,9 @@ MACRO RunTests
  aWords |^@ DoRunTests
 ; // RunTests
 
-MACRO RunTestsA
+MACRO RunTests.in.array
  ARRAY RIGHT IN aWords
   %REMARK 'aWords ссылка на список слов справа от RunTests'
  %SUMMARY 'Выполняет тесты для списка слов aWords' ;
  ( aWords |^@ DO ) DoRunTestsA
-; // RunTestsA
+; // RunTests.in.array
