@@ -1,4 +1,4 @@
-VOID Test PointTest
+VOID TestWithDump PointTest
  class_impl _:Point
   %FIELDS %Fld
    'VMT'
@@ -517,7 +517,7 @@ VOID Test PointTest
  Neg
  -10
  Print
-; // VOID Test PointTest
+; // VOID TestWithDump PointTest
 
 ( X: 0, Y: 0 )
 ( X: 0, Y: 0 )

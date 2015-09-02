@@ -4,9 +4,10 @@ USES
  params.ms.dict
  integer.ms.dict
  Object.ms.dict
+ Testing.ms.dict
 ;
 
-Test PointTest
+TestWithDump PointTest
 
 INTEGER type Pixel
 // - пиксель
@@ -96,12 +97,6 @@ void method Print
 ; // Print
 
 class-end // Rectangle
-
-USES
- CodeDump.ms.dict
-;
-
-@SELF DumpElement
 
 Point var P1
 Point var P2
