@@ -95,3 +95,16 @@ USES
 
 EXPORTS
  DogAndBracket.ms.dict
+
+USES
+ CodeDump.ms.dict
+;
+
+EXPORTS
+ CodeDump.ms.dict
+
+MACRO TestWithDump
+ @SELF Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol VOID
+ axiom:PushSymbol axiom:operator
+; // TestWithDump
