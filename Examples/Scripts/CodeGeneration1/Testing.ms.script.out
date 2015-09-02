@@ -11,12 +11,12 @@ T5
 A123
 Testing end: (+)?
 ------------------
-VOID Test TestingTest
+VOID TestWithDump TestingTest
  '(+)?'
  @
  Tests:(+)?
  DoRunTestsFor
  TestingTest
  DumpElement
-; // VOID Test TestingTest
+; // VOID TestWithDump TestingTest
 
