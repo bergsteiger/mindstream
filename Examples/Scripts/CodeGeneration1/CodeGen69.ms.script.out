@@ -125,20 +125,6 @@ Dictionary: axiom:tests
 tests:CheckEtalon
 tests:CheckOutputWithInput
 Dictionary: axiom:text
-Dictionary: axiom:Tl3TokenType
-Tl3TokenType Tl3TokenType::l3_ttBOF
-Tl3TokenType Tl3TokenType::l3_ttComment
-Tl3TokenType Tl3TokenType::l3_ttDoubleQuotedString
-Tl3TokenType Tl3TokenType::l3_ttEOF
-Tl3TokenType Tl3TokenType::l3_ttEOL
-Tl3TokenType Tl3TokenType::l3_ttFloat
-Tl3TokenType Tl3TokenType::l3_ttInteger
-Tl3TokenType Tl3TokenType::l3_ttKeyWord
-Tl3TokenType Tl3TokenType::l3_ttSingleChar
-Tl3TokenType Tl3TokenType::l3_ttString
-Tl3TokenType Tl3TokenType::l3_ttSymbol
-Tl3TokenType Tl3TokenType:NameToValue
-STRING Tl3TokenType:ValueToName
 Dictionary: axiom:WordInfo
 BOOLEAN pop:WordInfo:AcceptsValue
 TtfwAccessType pop:WordInfo:AccessType
@@ -3530,6 +3516,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
  ;
 STRING FUNCTION : (+)?
@@ -3638,6 +3625,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.di
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Sequence.It.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
+ ;
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
  ;
 STRING CONST : cTests
 PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTests
@@ -3740,6 +3731,74 @@ ARRAY FUNCTION : Sequence.It
  Sequence OPERATOR :: IN : aCode
  ARRAY FUNCTION :: Sequence.It : Result
 ; // Sequence.It
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Array
+  axiom:File
+  axiom:Font
+  axiom:generators
+  axiom:Tl3TokenType
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: MACRO : @(
+IMMEDIATE VOID OPERATOR :: MACRO : @[
+VOID OPERATOR :: PROCEDURE : axiom:Push
+ TOKEN OPERATOR :: IN : aSymbol
+ TOKEN_TYPE OPERATOR :: IN : aTokenType
+; // axiom:Push
+VOID OPERATOR :: PROCEDURE : DogAndBracket
+ STRING OPERATOR :: IN : aBracketClose
+ STRING OPERATOR :: IN : aBracketOpen
+ ARRAY OPERATOR :: VAR : l_A
+ INTERFACE OPERATOR :: VAR : l_Parser
+; // DogAndBracket
+IMMEDIATE VOID OPERATOR :: TYPE : TOKEN
+IMMEDIATE VOID OPERATOR :: TYPE : TOKEN_TYPE
+Dictionary: axiom:Tl3TokenType
+Tl3TokenType Tl3TokenType::l3_ttBOF
+Tl3TokenType Tl3TokenType::l3_ttComment
+Tl3TokenType Tl3TokenType::l3_ttDoubleQuotedString
+Tl3TokenType Tl3TokenType::l3_ttEOF
+Tl3TokenType Tl3TokenType::l3_ttEOL
+Tl3TokenType Tl3TokenType::l3_ttFloat
+Tl3TokenType Tl3TokenType::l3_ttInteger
+Tl3TokenType Tl3TokenType::l3_ttKeyWord
+Tl3TokenType Tl3TokenType::l3_ttSingleChar
+Tl3TokenType Tl3TokenType::l3_ttString
+Tl3TokenType Tl3TokenType::l3_ttSymbol
+Tl3TokenType Tl3TokenType:NameToValue
+STRING Tl3TokenType:ValueToName
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
  Uses: 
   axiom:axiom

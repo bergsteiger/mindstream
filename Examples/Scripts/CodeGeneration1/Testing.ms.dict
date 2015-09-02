@@ -88,3 +88,10 @@ MACRO RunTests.in.array
  %SUMMARY 'Выполняет тесты для списка слов aWords' ;
  ( aWords |^@ DO ) DoRunTestsA
 ; // RunTests.in.array
+
+USES
+ DogAndBracket.ms.dict
+;
+
+EXPORTS
+ DogAndBracket.ms.dict
