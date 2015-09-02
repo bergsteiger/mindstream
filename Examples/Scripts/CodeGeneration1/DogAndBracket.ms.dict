@@ -1,0 +1,92 @@
+// DogAndBracket.ms.dict
+
+USES
+ axiom:Tl3TokenType
+ axiom_push.ms.dict
+ core.ms.dict
+ io.ms.dict
+ macro.ms.dict
+ NoCapsLock.ms.dict
+ params.ms.dict
+ arrays.ms.dict
+;
+
+INTEGER String TYPE TOKEN
+INTEGER TYPE TOKEN_TYPE
+ // - вообще говоря это дложен быть Tl3TokenType, но там проблема с проверкой типов
+
+Procedure axiom:Push
+ TOKEN in aSymbol
+ TOKEN_TYPE in aTokenType
+
+ aTokenType Case
+  Tl3TokenType::l3_ttSymbol 
+   ( aSymbol Ctx:Parser:PushSymbol )
+  Tl3TokenType::l3_ttString 
+   ( aSymbol Ctx:Parser:PushString )
+  Tl3TokenType::l3_ttInteger
+   ( aSymbol Ctx:Parser:PushInt )
+  Default 
+   ( Error [ 'Неожиданный тип токена: ' aTokenType Tl3TokenType:ValueToName ] )
+ end // aTokenType Case
+; // axiom:Push 
+
+Procedure DogAndBracket
+ String in aBracketOpen
+ String in aBracketClose
+ INTERFACE var l_Parser 
+ Ctx:Parser >>> l_Parser
+ ARRAY var l_A
+ l_A := [ ]
+
+ l_Parser pop:Parser:NextToken
+ while true
+ begin
+  String var l_Token
+  l_Parser pop:Parser:TokenLongString >>> l_Token
+  TOKEN_TYPE var l_TokenType
+  l_Parser pop:Parser:TokenType >>> l_TokenType
+  if ( l_TokenType = Tl3TokenType::l3_ttSymbol ) then
+  begin
+
+   ( l_Token = NameOf ( ) ?Fail 'Вложенные скобки пока не поддерживаются'
+   ( l_Token = NameOf [ ) ?Fail 'Вложенные скобки пока не поддерживаются'
+
+   if ( l_Token = aBracketClose ) then
+   begin
+    aBracketOpen Ctx:Parser:PushSymbol
+    l_A .slice> 2 .for> 
+    begin
+     TOKEN in aSymbol
+     TOKEN_TYPE in aTokenType
+     axiom:PushSymbol @ 
+     aSymbol aTokenType axiom:Push 
+    end
+    l_Token Ctx:Parser:PushSymbol 
+    break
+   end //l_Token = aBracketClose
+  end // l_TokenType = Tl3TokenType::l3_ttSymbol
+  l_TokenType >>>[] l_A
+  if ( l_TokenType = Tl3TokenType::l3_ttInteger ) then
+  begin
+   l_Parser pop:Parser:TokenInt >>>[] l_A
+  end // l_TokenType = Tl3TokenType::l3_ttInteger
+  else
+  begin
+   l_Token >>>[] l_A
+  end // l_TokenType = Tl3TokenType::l3_ttInteger
+  l_Parser pop:Parser:NextToken
+ end // while true
+; // DogAndBracket
+
+MACRO @(
+ NameOf (
+  NameOf ) 
+   DogAndBracket
+; // @(
+
+MACRO @[
+ NameOf [
+  NameOf ]
+   DogAndBracket
+; // @[
