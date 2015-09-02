@@ -4661,6 +4661,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\MetaMetaModel
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
+IMMEDIATE VOID OPERATOR :: NamedAutolinkProducer : %VALUE
+ ^ OPERATOR :: IN : aCode
+; // %VALUE
 IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName
