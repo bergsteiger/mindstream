@@ -3119,13 +3119,25 @@ Const
 VOID continue
 default
 Default
+VOID CALLER OPERATOR : error
+ ^ OPERATOR :: IN : aMsg
+ TtfwWord OPERATOR :: IN : Caller
+; // error
+VOID CALLER OPERATOR : Error
+ ^ OPERATOR :: IN : aMsg
+ TtfwWord OPERATOR :: IN : Caller
+; // Error
 VOID exit
 IMMEDIATE VOID OPERATOR :: TYPE : Functor
 IMMEDIATE VOID OPERATOR :: TYPE : Lambda
 IMMEDIATE VOID OPERATOR :: TYPE : List
 IMMEDIATE VOID OPERATOR : private
 IMMEDIATE VOID OPERATOR : Private
+IMMEDIATE VOID OPERATOR : Procedure
+ ^L OPERATOR :: IN : aName
+; // Procedure
 IMMEDIATE VOID OPERATOR :: TYPE : Sequence
+IMMEDIATE VOID OPERATOR : String
 IMMEDIATE OPERATOR : type
  ^L OPERATOR :: IN : aName
 ; // type

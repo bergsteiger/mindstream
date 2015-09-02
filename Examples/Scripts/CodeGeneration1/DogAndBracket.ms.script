@@ -13,7 +13,7 @@ Test DogAndBracketTest
 
 INTEGER STRING TYPE TOKEN
 
-PROCEDURE axiom:Push
+Procedure axiom:Push
  TOKEN IN aSymbol
  INTEGER IN aTokenType
 
@@ -29,7 +29,7 @@ PROCEDURE axiom:Push
  end // aTokenType Case
 ; // axiom:Push 
 
-PROCEDURE DogAndBracket
+Procedure DogAndBracket
  STRING IN aBracketOpen
  STRING IN aBracketClose
  INTERFACE VAR l_Parser 
