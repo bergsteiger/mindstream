@@ -35,12 +35,12 @@ elem_proc LeaveElement
 FILE VAR g_OutFile
 ( g_OutFile := nil )
 
-STRING INTEGER ARRAY TYPE PRINTABLE
+STRING INTEGER ARRAY TYPE OUTABLE
 
 CONST cIndentChar ' '
 
 PROCEDURE OutToFile
- PRINTABLE IN aValue 
+ OUTABLE IN aValue 
  %SUMMARY 
  '
  Выводит значение в текущий файл вывода.
