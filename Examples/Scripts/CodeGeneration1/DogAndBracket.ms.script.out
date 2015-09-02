@@ -8,6 +8,16 @@ l3_ttInteger
 l3_ttInteger
 l3_ttSymbol
 l3_ttString
+l3_ttInteger
+l3_ttInteger
+l3_ttInteger
+l3_ttInteger
+l3_ttInteger
+l3_ttInteger
+l3_ttInteger
+l3_ttInteger
+l3_ttSymbol
+l3_ttString
 123
 12
 6
@@ -100,6 +110,9 @@ VOID Test DogAndBracketTest
        BEGIN
         IN aSymbol
         IN aTokenType
+        aTokenType
+        Tl3TokenType:ValueToName
+        .
         aSymbol
         Ctx:Parser:PushSymbol
        END
