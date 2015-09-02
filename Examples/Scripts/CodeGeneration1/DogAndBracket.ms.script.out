@@ -98,8 +98,8 @@ VOID Test DogAndBracketTest
        2
        IT
        BEGIN
-        IN aSymbol
-        IN aTokenType
+        STRING IN aSymbol
+        INTEGER IN aTokenType
         aTokenType
         Tl3TokenType:ValueToName
         .

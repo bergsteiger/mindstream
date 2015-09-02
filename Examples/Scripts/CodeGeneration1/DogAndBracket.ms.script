@@ -37,8 +37,8 @@ PROCEDURE DogAndBracket
     aBracketOpen Ctx:Parser:PushSymbol
     l_A .slice> 2 .for> 
     begin
-     IN aSymbol
-     IN aTokenType
+     STRING IN aSymbol
+     INTEGER IN aTokenType
      aTokenType Tl3TokenType:ValueToName Print 
      aSymbol Ctx:Parser:PushSymbol
     end
