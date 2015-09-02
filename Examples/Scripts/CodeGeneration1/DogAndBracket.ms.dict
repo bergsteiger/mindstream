@@ -60,12 +60,22 @@ Procedure DogAndBracket
 ; // DogAndBracket
 
 MACRO @(
+ %SUMMARY '
+ Компилирует СПИСОК адресов слов.
+ Аналог ( @ X1 @ X2 .. @ XN )
+ '
+ ;
  NameOf (
   NameOf ) 
    DogAndBracket
 ; // @(
 
 MACRO @[
+ %SUMMARY '
+ Компилирует МАССИВ адресов слов.
+ Аналог [ @ X1 @ X2 .. @ XN ]
+ '
+ ;
  NameOf [
   NameOf ]
    DogAndBracket

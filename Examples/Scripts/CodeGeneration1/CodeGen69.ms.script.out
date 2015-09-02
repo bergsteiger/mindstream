@@ -3851,7 +3851,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : @(
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // @(
 IMMEDIATE VOID OPERATOR :: MACRO : @[
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // @[
 VOID OPERATOR :: PROCEDURE : DogAndBracket
  STRING OPERATOR :: IN : aBracketClose
  STRING OPERATOR :: IN : aBracketOpen
