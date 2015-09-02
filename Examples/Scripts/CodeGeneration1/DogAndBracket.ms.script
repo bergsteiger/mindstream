@@ -11,8 +11,10 @@ USES
 
 Test DogAndBracketTest
 
+INTEGER STRING TYPE TOKEN
+
 PROCEDURE axiom:Push
- STRING IN aSymbol
+ TOKEN IN aSymbol
  INTEGER IN aTokenType
 
  aTokenType Case
@@ -53,7 +55,7 @@ PROCEDURE DogAndBracket
     aBracketOpen Ctx:Parser:PushSymbol
     l_A .slice> 2 .for> 
     begin
-     STRING IN aSymbol
+     TOKEN IN aSymbol
      INTEGER IN aTokenType
      aSymbol aTokenType axiom:Push 
     end

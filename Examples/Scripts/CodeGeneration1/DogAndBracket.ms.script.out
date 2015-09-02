@@ -24,7 +24,7 @@ VOID Test DogAndBracketTest
  ; // IMMEDIATE VOID MACRO @[
  
  VOID PROCEDURE axiom:Push
-  STRING IN aSymbol
+  TOKEN IN aSymbol
   INTEGER IN aTokenType
   aTokenType
   CASE
@@ -121,7 +121,7 @@ VOID Test DogAndBracketTest
        2
        IT
        BEGIN
-        STRING IN aSymbol
+        TOKEN IN aSymbol
         INTEGER IN aTokenType
         aSymbol
         aTokenType
@@ -142,6 +142,11 @@ VOID Test DogAndBracketTest
    pop:Parser:NextToken
   END
  ; // VOID PROCEDURE DogAndBracket
+ 
+ IMMEDIATE VOID TYPE TOKEN
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE TOKEN
  
  (
   1
