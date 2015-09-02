@@ -33,6 +33,16 @@ VOID Test DogAndBracketTest
   DogAndBracket
  ; // IMMEDIATE VOID MACRO @[
  
+ VOID PROCEDURE axiom:Push
+  STRING IN aSymbol
+  INTEGER IN aTokenType
+  aTokenType
+  Tl3TokenType:ValueToName
+  .
+  aSymbol
+  Ctx:Parser:PushSymbol
+ ; // VOID PROCEDURE axiom:Push
+ 
  VOID PROCEDURE DogAndBracket
   STRING IN aBracketClose
   STRING IN aBracketOpen
@@ -100,11 +110,9 @@ VOID Test DogAndBracketTest
        BEGIN
         STRING IN aSymbol
         INTEGER IN aTokenType
-        aTokenType
-        Tl3TokenType:ValueToName
-        .
         aSymbol
-        Ctx:Parser:PushSymbol
+        aTokenType
+        axiom:Push
        END
        l_Token
        Ctx:Parser:PushSymbol

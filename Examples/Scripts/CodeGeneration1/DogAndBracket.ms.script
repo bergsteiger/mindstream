@@ -11,6 +11,13 @@ USES
 
 Test DogAndBracketTest
 
+PROCEDURE axiom:Push
+ STRING IN aSymbol
+ INTEGER IN aTokenType
+ aTokenType Tl3TokenType:ValueToName Print 
+ aSymbol Ctx:Parser:PushSymbol
+; // axiom:Push 
+
 PROCEDURE DogAndBracket
  STRING IN aBracketOpen
  STRING IN aBracketClose
@@ -39,8 +46,7 @@ PROCEDURE DogAndBracket
     begin
      STRING IN aSymbol
      INTEGER IN aTokenType
-     aTokenType Tl3TokenType:ValueToName Print 
-     aSymbol Ctx:Parser:PushSymbol
+     aSymbol aTokenType axiom:Push 
     end
     l_Token Ctx:Parser:PushSymbol 
     break
