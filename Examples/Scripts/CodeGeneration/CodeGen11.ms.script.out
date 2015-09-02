@@ -101,10 +101,6 @@ VOID Test CodeGen
 
 Dictionary: axiom:char
 Dictionary: axiom:class
-Dictionary: axiom:clipboard
-VOID clipboard:clear
-STRING clipboard:GetFormattedText
-VOID clipboard:SetText
 Dictionary: axiom:CompiledWordWorkerWord
 TtfwWord pop:CompiledWordWorkerWord:Compiled
 Dictionary: axiom:Component
@@ -113,6 +109,9 @@ TComponent pop:Component:FindComponent
 TComponent pop:Component:GetComponent
 STRING pop:Component:Name
 TComponent pop:Component:Owner
+Dictionary: axiom:Dictionary
+TtfwKeyWord pop:Dictionary:KeywordByName
+ARRAY pop:Dictionary:MembersIterator
 Dictionary: axiom:exception
 Dictionary: axiom:Finder
 VOID pop:Finder:SetToCtx
@@ -279,6 +278,7 @@ Dictionary: CodeGen11.ms.script
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.script
@@ -325,6 +325,7 @@ Dictionary: axiom:axiom
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
  ;
@@ -350,6 +351,7 @@ Dictionary: axiom:axiom
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
  ;
@@ -794,6 +796,24 @@ IMMEDIATE VOID OPERATOR : CARDINAL
 CASE
 IMMEDIATE VOID OPERATOR :: TYPE : CASTABLE
 STRING Cat
+INTEGER CONST : CF_BITMAP
+INTEGER CONST : CF_DIB
+INTEGER CONST : CF_DIBV5
+INTEGER CONST : CF_DIF
+INTEGER CONST : CF_ENHMETAFILE
+INTEGER CONST : CF_HDROP
+INTEGER CONST : CF_LOCALE
+INTEGER CONST : CF_MAX
+INTEGER CONST : CF_METAFILEPICT
+INTEGER CONST : CF_OEMTEXT
+INTEGER CONST : CF_PALETTE
+INTEGER CONST : CF_PENDATA
+INTEGER CONST : CF_RIFF
+INTEGER CONST : CF_SYLK
+INTEGER CONST : CF_TEXT
+INTEGER CONST : CF_TIFF
+INTEGER CONST : CF_UNICODETEXT
+INTEGER CONST : CF_WAVE
 Char
 IMMEDIATE VOID OPERATOR : CHAR
 STRING char:Dupe
@@ -1075,7 +1095,6 @@ TClass class::TkwLOOP
 TClass class::TkwMain
 TClass class::TkwMainCodeController
 TClass class::TkwMedianBacket
-TClass class::TkwMembersIterator
 TClass class::TkwMODAL
 TClass class::TkwModFromDiv
 TClass class::TkwModifier
@@ -1132,6 +1151,8 @@ TClass class::TkwPopDictionaryExFileName
 TClass class::TkwPopDictionaryExRemoveFromCache
 TClass class::TkwPopDictionaryExUsedDictionaries
 TClass class::TkwPopDictionaryExUseDictionary
+TClass class::TkwPopDictionaryKeywordByName
+TClass class::TkwPopDictionaryMembersIterator
 TClass class::TkwPopFinderSetToCtx
 TClass class::TkwPopKeywordFinderKeywordByName
 TClass class::TkwPopKeywordFinderParentFinder
@@ -1201,11 +1222,13 @@ TClass class::TkwPopWordInfoLinkType
 TClass class::TkwPopWordInfoToString
 TClass class::TkwPopWordInfoTypeName
 TClass class::TkwPopWordInfoValueTypes
+TClass class::TkwPopWordInnerDictionary
 TClass class::TkwPopWordIsForHelp
 TClass class::TkwPopWordIsImmediate
 TClass class::TkwPopWordIsInParam
 TClass class::TkwPopWordIsVarLike
 TClass class::TkwPopWordLeftWordRefValuesCount
+TClass class::TkwPopWordMembersIterator
 TClass class::TkwPopWordName
 TClass class::TkwPopWordParent
 TClass class::TkwPopWordProducer
@@ -1665,7 +1688,7 @@ ARRAY FUNCTION : LIST
 ; // LIST
 VOID LOOP
 ARRAY MAP
-MembersIterator
+ARRAY MembersIterator
 INTEGER MOD
 VOID MODAL
 VOID Msg
@@ -2110,7 +2133,6 @@ TkwLOOP
 TkwMain
 TkwMainCodeController
 TkwMedianBacket
-TkwMembersIterator
 TkwMODAL
 TkwModFromDiv
 TkwModifier
@@ -2167,6 +2189,8 @@ TkwPopDictionaryExFileName
 TkwPopDictionaryExRemoveFromCache
 TkwPopDictionaryExUsedDictionaries
 TkwPopDictionaryExUseDictionary
+TkwPopDictionaryKeywordByName
+TkwPopDictionaryMembersIterator
 TkwPopFinderSetToCtx
 TkwPopKeywordFinderKeywordByName
 TkwPopKeywordFinderParentFinder
@@ -2236,11 +2260,13 @@ TkwPopWordInfoLinkType
 TkwPopWordInfoToString
 TkwPopWordInfoTypeName
 TkwPopWordInfoValueTypes
+TkwPopWordInnerDictionary
 TkwPopWordIsForHelp
 TkwPopWordIsImmediate
 TkwPopWordIsInParam
 TkwPopWordIsVarLike
 TkwPopWordLeftWordRefValuesCount
+TkwPopWordMembersIterator
 TkwPopWordName
 TkwPopWordParent
 TkwPopWordProducer
@@ -2640,11 +2666,13 @@ TtfwWord OPERATOR : pop:Word:GetRefDeep
 ; // pop:Word:GetRefDeep
 VOID pop:Word:IncRef
 TtfwWordInfo pop:Word:Info
+TtfwDictionary pop:Word:InnerDictionary
 BOOLEAN pop:Word:IsForHelp
 BOOLEAN pop:Word:IsImmediate
 BOOLEAN pop:Word:IsInParam
 BOOLEAN pop:Word:IsVarLike
 INTEGER pop:Word:LeftWordRefValuesCount
+ARRAY pop:Word:MembersIterator
 STRING pop:Word:Name
 TtfwWord pop:Word:Parent
 TtfwWord pop:Word:Producer
@@ -2781,6 +2809,11 @@ TtfwKeyWord pop:KeywordFinder:KeywordByName
 TtfwWord pop:KeywordFinder:ParentFinder
 Dictionary: axiom:Array
 Dictionary: axiom:File
+Dictionary: axiom:clipboard
+VOID clipboard:clear
+VOID clipboard:Clear
+STRING clipboard:GetFormattedText
+VOID clipboard:SetText
 Dictionary: axiom:Font
 TColor Font:BackColor
 TColor Font:Color
@@ -2825,6 +2858,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.script
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
@@ -2868,6 +2902,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.script
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
@@ -2913,6 +2948,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
  ;
@@ -2948,6 +2984,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
@@ -2980,6 +3017,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
  ;
@@ -3010,6 +3048,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
@@ -3071,6 +3110,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
@@ -3108,6 +3148,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dic
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
@@ -3140,6 +3181,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbo
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
@@ -3178,6 +3220,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
@@ -3231,6 +3274,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
@@ -3286,6 +3330,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
  ;
@@ -3339,6 +3384,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
  ;
@@ -3370,6 +3416,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
@@ -3400,6 +3447,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
@@ -3431,6 +3479,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
  ;
@@ -3463,6 +3512,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
  ;
@@ -3496,6 +3546,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
  ;
@@ -3529,6 +3580,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.di
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
  ;
@@ -3559,6 +3611,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
  ;
@@ -3598,6 +3651,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.di
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
@@ -3683,6 +3737,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.d
   axiom:KeywordFinder
   axiom:Array
   axiom:File
+  axiom:clipboard
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
