@@ -11,7 +11,7 @@ USES
 
 Test DogAndBracketTest
 
-INTEGER STRING TYPE TOKEN
+INTEGER String TYPE TOKEN
 
 Procedure axiom:Push
  TOKEN in aSymbol
@@ -30,8 +30,8 @@ Procedure axiom:Push
 ; // axiom:Push 
 
 Procedure DogAndBracket
- STRING in aBracketOpen
- STRING in aBracketClose
+ String in aBracketOpen
+ String in aBracketClose
  INTERFACE VAR l_Parser 
  Ctx:Parser >>> l_Parser
  ARRAY VAR l_A
@@ -40,7 +40,7 @@ Procedure DogAndBracket
  l_Parser pop:Parser:NextToken
  while true
  begin
-  STRING VAR l_Token
+  String VAR l_Token
   l_Parser pop:Parser:TokenLongString >>> l_Token
   INTEGER VAR l_TokenType
   l_Parser pop:Parser:TokenType >>> l_TokenType
