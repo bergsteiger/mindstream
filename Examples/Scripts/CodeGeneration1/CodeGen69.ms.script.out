@@ -3516,16 +3516,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dic
   axiom:Font
   axiom:generators
  ;
-ARRAY FUNCTION : .filter>
- ^ OPERATOR :: IN : aFunctor
- ARRAY OPERATOR :: IN : anArray
- ARRAY FUNCTION :: .filter> : Result
-; // .filter>
-ARRAY FUNCTION : >filter>
- ^ OPERATOR :: IN : aFunctor
- ^@ OPERATOR :: IN : anArray
- ARRAY FUNCTION :: >filter> : Result
-; // >filter>
 ARRAY filter
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
  Uses: 
@@ -3555,16 +3545,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   axiom:Font
   axiom:generators
  ;
-ARRAY FUNCTION : .map>
- ^ OPERATOR :: IN : aFunctor
- ARRAY OPERATOR :: IN : anArray
- ARRAY FUNCTION :: .map> : Result
-; // .map>
-ARRAY FUNCTION : >map>
- ^ OPERATOR :: IN : aFunctor
- ^@ OPERATOR :: IN : anArray
- ARRAY FUNCTION :: >map> : Result
-; // >map>
 ARRAY map
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
  Uses: 
