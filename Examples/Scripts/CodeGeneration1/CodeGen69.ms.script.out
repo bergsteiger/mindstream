@@ -4797,6 +4797,7 @@ GENERATOR OPERATOR :: VAR : g_CurrentGenerator
 STRING OPERATOR :: VAR : g_CurrentGeneratorName
 INTEGER OPERATOR :: VAR : g_Indent
 FILE OPERATOR :: VAR : g_OutFile
+STRING OPERATOR :: VAR : g_OutFileName
 STRING CONST : GEN_PROPERTY_PREFIX
 VOID OPERATOR :: PROCEDURE : generate
  ^@ OPERATOR :: IN : aGenerators
