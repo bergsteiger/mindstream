@@ -4794,6 +4794,12 @@ BOOLEAN OPERATOR :: MACRO :: elem_func : .IsElementNeed.OwnFile
  BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsElementNeed.OwnFile : Result
  ModelElement OPERATOR :: IN : Self
 ; // .IsElementNeed.OwnFile
+BOOLEAN OPERATOR :: MACRO :: elem_func : .IsStereotypeOf
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ LINK ^ OPERATOR :: IN : aStereo
+ BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsStereotypeOf : Result
+ ModelElement OPERATOR :: IN : Self
+; // .IsStereotypeOf
 VOID OPERATOR :: MACRO :: elem_proc : .LeaveElement
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ModelElement OPERATOR :: IN : Self

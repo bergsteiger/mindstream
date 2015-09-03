@@ -109,6 +109,12 @@ STRING FUNCTION OutFileName
  [ l_OutPath aGeneratorName ] cPathSep strings:CatSep =: Result
 ; // OutFileName
 
+BOOLEAN elem_func IsStereotypeOf
+ LINK RIGHT IN aStereo
+ %SUMMARY 'Определяет, что элемент является указанным стереотипом или его потомком' ;
+ Result := ( Self .Stereotype .Name = ( aStereo .Name ) ) 
+; // IsStereotypeOf
+
 BOOLEAN elem_func IsElementNeed.OwnFile
  %SUMMARY 'Определяет тот факт, что элементу нужен собственный файл вывода' ;
  Result := true
