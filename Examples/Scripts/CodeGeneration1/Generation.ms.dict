@@ -113,7 +113,7 @@ BOOLEAN elem_func IsElementNeed.OwnFile
  %SUMMARY 'Определяет тот факт, что элементу нужен собственный файл вывода' ;
  Result := true
  if ( Self .Stereotype .Name = '<<Const>>' ) then
-  ( Result := true )
+  ( Result := false )
 ; // IsElementNeed.OwnFile
 
 ModelElement VAR g_CurrentElementModel
