@@ -7,7 +7,7 @@ uses
  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
  FMX.Layouts, FMX.TreeView, FMX.ListView.Types, FMX.ListView, System.Generics.Collections,
- FMX.DUnit.Interfaces
+ FMX.DUnit.Interfaces, FMX.Controls.Presentation
  ;
 
 type
@@ -456,7 +456,7 @@ procedure TfmGUITestRunner.SetTreeNodeFont(aNode: TTreeViewItem; aColor: TAlphaC
 begin
  // Пока не укажешь какие из настроек стиля разрешены к работе, они работать не будут
  aNode.StyledSettings := aNode.StyledSettings -
-{$IF DEFined(VER270) OR DEFined(VER280)} [TStyledSetting.FontColor, TStyledSetting.Style];
+{$IF DEFined(VER270) OR DEFined(VER280) OR DEFined(VER290)} [TStyledSetting.FontColor, TStyledSetting.Style];
 {$ENDIF}
 {$IFDEF VER260} [TStyledSetting.ssFontColor, TStyledSetting.ssStyle]
  ;

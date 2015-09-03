@@ -91,6 +91,8 @@ object fmGUITestRunner: TfmGUITestRunner
       Size.PlatformDefault = False
       TabOrder = 0
       OnChangeCheck = tvTestTreeChangeCheck
+      Viewport.Width = 673.000000000000000000
+      Viewport.Height = 268.000000000000000000
     end
   end
   object pnlBottom: TPanel

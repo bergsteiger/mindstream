@@ -3,11 +3,12 @@ unit FMX.DUnit.msAppLog;
 interface
 
 uses
- FMX.DUnit.msLog
+ FMX.DUnit.msLog,
+ Script.Interfaces
  ;
 
 type
- TmsAppLog = class (TmsLog)
+ TmsAppLog = class (TmsLog, IscriptLog)
  strict private
   class var f_Instance: TmsAppLog;
   constructor Create(const aFileName: String);
