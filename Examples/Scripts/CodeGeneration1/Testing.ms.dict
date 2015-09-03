@@ -114,3 +114,5 @@ MACRO TestWithDump
  axiom:PushSymbol @SELF
  axiom:PushSymbol DumpElement
 ; // TestWithDump
+
+WordAlias Test&Dump TestWithDump

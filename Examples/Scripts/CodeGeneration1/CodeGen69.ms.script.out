@@ -3756,6 +3756,10 @@ IMMEDIATE VOID OPERATOR :: MACRO : RunTests.in.array
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^ OPERATOR :: IN : aWords
 ; // RunTests.in.array
+IMMEDIATE VOID OPERATOR :: MACRO : Test&Dump
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^L OPERATOR :: IN : aName
+; // Test&Dump
 IMMEDIATE VOID OPERATOR :: MACRO : TestsFor
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  LINK ^ OPERATOR :: IN : aWord
