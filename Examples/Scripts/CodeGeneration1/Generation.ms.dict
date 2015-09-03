@@ -115,10 +115,16 @@ BOOLEAN elem_func IsStereotypeOf
  Result := ( Self .Stereotype .Name = ( aStereo .Name ) ) 
 ; // IsStereotypeOf
 
+USES
+ CommonLang.ms.model
+;
+
+// - это - "времянка", чтобы увидеть символ <<Const>>
+
 BOOLEAN elem_func IsElementNeed.OwnFile
  %SUMMARY 'Определяет тот факт, что элементу нужен собственный файл вывода' ;
  Result := true
- if ( Self .Stereotype .Name = '<<Const>>' ) then
+ if ( Self .IsStereotypeOf <<Const>> ) then
  begin
   Result := false
  end
