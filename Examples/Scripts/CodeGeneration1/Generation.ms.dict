@@ -103,17 +103,7 @@ STRING FUNCTION OutFileName
  %SUMMARY 'Имя файла для вывода' ;
  STRING VAR l_OutPath
  %REMARK 'Путь для вывода'
- sysutils:GetCurrentDir =: l_OutPath
- [ l_OutPath 
-  script:FileName 
-  %REMARK 'Путь к текущему скрипту'
-  sysutils:ExtractFileName
-  %REMARK 'Вырезаем из пути только имя файла' 
-  '' sysutils:ChangeFileExt
-  %REMARK 'Убираем .script' 
-  '' sysutils:ChangeFileExt 
-  %REMARK 'Убираем .ms' 
- ] cPathSep strings:CatSep =: l_OutPath
+ l_OutPath := OutDir
  l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
  %REMARK 'Создаём директорию рекурсивно, если её ещё не было'
  //l_OutPath PureDir
