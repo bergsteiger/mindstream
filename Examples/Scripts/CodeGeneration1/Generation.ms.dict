@@ -11,6 +11,7 @@ USES
  NoCapsLock.ms.dict
  arrays.ms.dict
  ElementsRTTI.ms.dict
+ string.ms.dict
 ;
 
 INTEGER VAR g_Indent
@@ -129,9 +130,8 @@ elem_proc CallCurrentGen
     begin
      g_Indent := 0 // - тут вообще ещё надо проверять - переоткрываем мы файл или нет
      STRING VAR l_FileName
-     g_OutFileName := ( Self .Name )
+     g_OutFileName := ( g_OutFileName ?(+) '_' (+) ( Self .Name ) )
      l_FileName := ( OutFileName g_OutFileName (+) '.' (+) g_CurrentGeneratorName )
-     g_OutFileName := l_FileName
      g_OutFile := ( l_FileName File:OpenWrite )
     end // Self .IsElementNeed.OwnFile
     TRY
