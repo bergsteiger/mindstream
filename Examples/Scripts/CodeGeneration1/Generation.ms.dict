@@ -129,8 +129,8 @@ elem_proc CallCurrentGen
     begin
      g_Indent := 0 // - тут вообще ещё надо проверять - переоткрываем мы файл или нет
      STRING VAR l_FileName
-     g_OutFileName := ( Self .Name (+) '.' (+) g_CurrentGeneratorName )
-     l_FileName := ( OutFileName g_OutFileName )
+     g_OutFileName := ( Self .Name )
+     l_FileName := ( OutFileName g_OutFileName (+) '.' (+) g_CurrentGeneratorName )
      g_OutFileName := l_FileName
      g_OutFile := ( l_FileName File:OpenWrite )
     end // Self .IsElementNeed.OwnFile
