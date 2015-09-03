@@ -95,5 +95,11 @@ elem_iterator Stereotypes
  Result := ( Self .Stereotype.Words .filter> .IsModelElement )
 ; // Stereotypes
 
+BOOLEAN elem_func IsStereotypeOf
+ LINK RIGHT IN aStereo
+ %SUMMARY 'Определяет, что элемент является указанным стереотипом или его потомком' ;
+ Result := ( Self .Stereotype .Name = ( aStereo .Name ) ) 
+; // IsStereotypeOf
+
 EXPORTS
  WordsRTTI.ms.dict
