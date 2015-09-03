@@ -3,8 +3,7 @@ unit FMX.DUnit.msAppLog;
 interface
 
 uses
- FMX.DUnit.msLog,
- Script.Interfaces
+ FMX.DUnit.msLog
  ;
 
 type

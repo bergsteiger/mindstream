@@ -3,7 +3,8 @@ unit FMX.DUnit.msLog;
 interface
 
 uses
- System.Classes
+ System.Classes,
+ Script.Interfaces
  ;
 
 type
@@ -11,9 +12,13 @@ type
 
  TmsLogLambda = reference to procedure (aLog: TmsLog);
 
- TmsLog = class
+ TmsLog = class(TObject, IscriptCompileLog, IscriptRunLog)
   strict private
    f_FS : TFileStream;
+  protected
+    function QueryInterface(const IID: TGUID; out Obj): HResult; stdcall;
+    function _AddRef: Integer; stdcall;
+    function _Release: Integer; stdcall;
   public
    class procedure Log(const aFileName: String; aLambda: TmsLogLambda);
    constructor Create(const aFileName: String);
@@ -21,13 +26,33 @@ type
    procedure ToLog(const aString: AnsiString); overload;
    procedure ToLog(const aString: String); overload;
  end;//TmsLog
+
 implementation
 
 uses
  System.SysUtils
  ;
 
-//TmsLog
+// TmsLog
+
+function TmsLog.QueryInterface(const IID: TGUID; out Obj): HResult;
+begin
+  if GetInterface(IID, Obj) then
+    Result := 0
+  else
+    Result := E_NOINTERFACE;
+end;
+
+function TmsLog._AddRef: Integer;
+begin
+ Result := -1;
+end;
+
+function TmsLog._Release: Integer;
+begin
+ Result := -1;
+end;
+
 class procedure TmsLog.Log(const aFileName: String; aLambda: TmsLogLambda);
 var
  l_Log : TmsLog;
@@ -64,6 +89,5 @@ procedure TmsLog.ToLog(const aString: String);
 begin
  ToLog(AnsiString(aString));
 end;
-//TmsLog
 
 end.
