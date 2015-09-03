@@ -106,8 +106,6 @@ STRING FUNCTION OutFileName
  l_OutPath := OutDir
  l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
  %REMARK 'Создаём директорию рекурсивно, если её ещё не было'
- //OutDir PureDir
- //%REMARK 'Очищаем директорию от "старых" файлов'
  [ l_OutPath aGeneratorName ] cPathSep strings:CatSep =: Result
 ; // OutFileName
 
@@ -242,6 +240,8 @@ PROCEDURE CallGens
  ARRAY IN anElements
  ARRAY IN aGenerators
  %SUMMARY 'Вызывает все определённые генераторы на элементах массива anElements' ;
+ OutDir PureDir
+ %REMARK 'Очищаем директорию от "старых" файлов'
  g_AllRoots := anElements
  TRY 
   g_AllGenerators := aGenerators
