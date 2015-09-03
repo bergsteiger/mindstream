@@ -14,7 +14,9 @@ USES
 ;
 
 ENGINE_WORD TYPE ModelElement
-%REMARK 'Элемент модели'
+ %REMARK 'Элемент модели'
+ENGINE_WORD TYPE STEREOTYPE
+ %REMARK 'Стереотип элемента модели'
 
 MACRO elem_func
  Literal IN aName
@@ -96,7 +98,7 @@ elem_iterator Stereotypes
 ; // Stereotypes
 
 BOOLEAN elem_func IsStereotypeOf
- LINK RIGHT IN aStereo
+ STEREOTYPE LINK RIGHT IN aStereo
  %SUMMARY 'Определяет, что элемент является указанным стереотипом или его потомком' ;
  Result := ( Self .Stereotype .Name = ( aStereo .Name ) ) 
 ; // IsStereotypeOf
