@@ -4586,6 +4586,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\MetaMetaModel.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\UML.ms.model
  ;
  Exports: 
@@ -4644,6 +4645,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\MetaMetaModel
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
+ ;
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: NamedAutolinkProducer : %VALUE
  ^ OPERATOR :: IN : aCode
@@ -4682,9 +4688,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\UML.ms.model
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\MetaMetaModel.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
  ;
  Exports: 
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\MetaMetaModel.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> : <<UMLCategory>>
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
@@ -4735,6 +4744,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Generation.ms
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\ElementsRTTI.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\RefDeepest.ms.dict
@@ -4871,6 +4881,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\ElementsRTTI.
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
+ ;
+ Exports: 
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
  ;
 ARRAY OPERATOR :: MACRO :: elem_func : .Children

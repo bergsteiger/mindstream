@@ -3,6 +3,7 @@
 USES
  metaMACRO.ms.dict
  MetaMetaModel.ms.dict
+ WordsRTTI.ms.dict
 ;
 
 // ---------------------------------------------------------------------------
@@ -40,3 +41,6 @@ meta-model-end
 
 EXPORTS
  MetaMetaModel.ms.dict
+
+EXPORTS
+ WordsRTTI.ms.dict

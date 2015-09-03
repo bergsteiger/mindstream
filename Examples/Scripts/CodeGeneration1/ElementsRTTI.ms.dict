@@ -94,3 +94,6 @@ elem_iterator Parents
 elem_iterator Stereotypes
  Result := ( Self .Stereotype.Words .filter> .IsModelElement )
 ; // Stereotypes
+
+EXPORTS
+ WordsRTTI.ms.dict

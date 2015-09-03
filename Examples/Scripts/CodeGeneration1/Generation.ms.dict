@@ -10,6 +10,7 @@ USES
  params.ms.dict
  NoCapsLock.ms.dict
  arrays.ms.dict
+ WordsRTTI.ms.dict
  ElementsRTTI.ms.dict
  string.ms.dict
 ;
@@ -107,6 +108,8 @@ STRING FUNCTION OutFileName
 BOOLEAN elem_func IsElementNeed.OwnFile
  %SUMMARY 'Определяет тот факт, что элементу нужен собственный файл вывода' ;
  Result := true
+ if ( Self .Stereotype .Name = '<<Const>>' ) then
+  ( Result := true )
 ; // IsElementNeed.OwnFile
 
 ModelElement VAR g_CurrentElementModel
