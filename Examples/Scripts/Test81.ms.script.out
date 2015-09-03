@@ -594,11 +594,6 @@ FORWARD Process
   ProcessFilesWithMask
   @
   DoFile
-  '*.pas'
-  anItem
-  ProcessFilesWithMask
-  @
-  DoFile
   '*.txt'
   anItem
   ProcessFilesWithMask
