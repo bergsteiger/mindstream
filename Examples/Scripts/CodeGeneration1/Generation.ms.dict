@@ -121,7 +121,10 @@ BOOLEAN elem_func IsElementNeed.OwnFile
  else
  if ( Self .IsStereotypeOf <<Class>> ) then
  begin
-  Result := false
+  if ( Self .Parent .IsStereotypeOf <<Class>> ) then
+  begin
+   Result := false
+  end
  end
 ; // IsElementNeed.OwnFile
 
