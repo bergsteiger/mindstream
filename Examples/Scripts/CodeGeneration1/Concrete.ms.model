@@ -172,6 +172,12 @@ concrete-model-begin 'Модель конкретного проекта Project3'
  Это наш ТРЕТИЙ проект - Project3
  '
  ; // %SUMMARY
+ <<Const>> Constant1
+  %VALUE 1
+ ; // Constant1 
+ <<Const>> Constant2
+  %VALUE 2
+ ; // Constant2 
 ; // Project3
 model-end
 

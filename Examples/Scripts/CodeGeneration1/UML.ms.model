@@ -1,3 +1,5 @@
+// UML.ms.model
+
 USES
  metaMACRO.ms.dict
  MetaMetaModel.ms.dict
@@ -35,3 +37,6 @@ meta-model-begin
 meta-model-end
 
 // ---------------------------------------------------------------------------
+
+EXPORTS
+ MetaMetaModel.ms.dict
