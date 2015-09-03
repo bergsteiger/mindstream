@@ -102,6 +102,8 @@ STRING FUNCTION OutFileName
  ] cPathSep strings:CatSep =: l_OutPath
  l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
  %REMARK 'Создаём директорию рекурсивно, если её ещё не было'
+ //l_OutPath PureDir
+ //%REMARK 'Очищаем директорию от "старых" файлов'
  [ l_OutPath aGeneratorName ] cPathSep strings:CatSep =: Result
 ; // OutFileName
 
