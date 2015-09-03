@@ -127,6 +127,12 @@ concrete-model-begin 'Модель конкретного проекта Project1'
    <<Class>> InnerClass2
    ; // InnerClass2
    %REMARK 'Тут используем вложенные классы'
+   <<Const>> Constant1
+    %VALUE 1
+   ; // Constant1 
+   <<Const>> Constant2
+    %VALUE 2
+   ; // Constant2 
   ; // Class5
 
  ; // Program1
@@ -155,6 +161,12 @@ concrete-model-begin 'Модель конкретного проекта Project2'
  Это наш ВТОРОЙ проект - Project2
  '
  ; // %SUMMARY
+ <<Const>> Constant1
+  %VALUE 1
+ ; // Constant1 
+ <<Const>> Constant2
+  %VALUE 2
+ ; // Constant2 
 ; // Project2
 model-end
 

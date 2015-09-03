@@ -4423,6 +4423,12 @@ OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Pr
    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
   ; // Class4
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class5
+   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Const>> : Constant1
+    INTEGER %V
+   ; // Constant1
+   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Const>> : Constant2
+    INTEGER %V
+   ; // Constant2
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : InnerClass1
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : InnerClass2
   ; // Class5
@@ -4436,6 +4442,12 @@ OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Pr
 ; // Project1
 OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project2
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Const>> : Constant1
+  INTEGER %V
+ ; // Constant1
+ OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Const>> : Constant2
+  INTEGER %V
+ ; // Constant2
 ; // Project2
 OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project3
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
