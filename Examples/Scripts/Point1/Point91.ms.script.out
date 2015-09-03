@@ -16,7 +16,7 @@ VOID Test PointTest
    %S
    %%
    '%Fld'
-   CodeIterator
+   pop:Word:CodeIterator
   )
  ; // ARRAY FUNCTION %Fld
  
@@ -232,7 +232,7 @@ VOID Test PointTest
         DoMember
         (
          l_List
-         CodeIterator
+         pop:Word:CodeIterator
         )
         Array:Map
        )

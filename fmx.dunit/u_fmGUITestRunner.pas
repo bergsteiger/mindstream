@@ -129,7 +129,7 @@ procedure RunTestModeless(aTest: ITest);
 var
  l_GUI: TfmGUITestRunner;
 begin
- l_GUI := TfmGUITestRunner.Create(nil);
+ l_GUI := TfmGUITestRunner.Create(Application);
  l_GUI.Suite := aTest;
  l_GUI.Show;
 

@@ -1005,11 +1005,21 @@ REDIFINITION : : .
 ==> Redefines
  VOID .
 <== Redefines
+ARRAY FUNCTION : .filter>
+ ^ OPERATOR :: IN : aFunctor
+ ARRAY OPERATOR :: IN : anArray
+ ARRAY FUNCTION :: .filter> : Result
+; // .filter>
 ARRAY FUNCTION : .join>
  ARRAY OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  ARRAY FUNCTION :: .join> : Result
 ; // .join>
+ARRAY FUNCTION : .map>
+ ^ OPERATOR :: IN : aFunctor
+ ARRAY OPERATOR :: IN : anArray
+ ARRAY FUNCTION :: .map> : Result
+; // .map>
 ARRAY FUNCTION : .slice>
  ARRAY OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
@@ -1201,11 +1211,21 @@ FUNCTION : ->0
  OBJECT OPERATOR :: IN : %S
  FUNCTION :: ->0 : Result
 ; // ->0
+ARRAY FUNCTION : >filter>
+ ^ OPERATOR :: IN : aFunctor
+ ^@ OPERATOR :: IN : anArray
+ ARRAY FUNCTION :: >filter> : Result
+; // >filter>
 ARRAY FUNCTION : >join>
  ^@ OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  ARRAY FUNCTION :: >join> : Result
 ; // >join>
+ARRAY FUNCTION : >map>
+ ^ OPERATOR :: IN : aFunctor
+ ^@ OPERATOR :: IN : anArray
+ ARRAY FUNCTION :: >map> : Result
+; // >map>
 ARRAY FUNCTION : >slice>
  ^@ OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
@@ -1458,7 +1478,6 @@ TClass class::TkwClipboardGetFormattedText
 TClass class::TkwClipboardSetText
 TClass class::TkwCloseArray
 TClass class::TkwCloseBracket
-TClass class::TkwCodeIterator
 TClass class::TkwCompareStr
 TClass class::TkwCompareText
 TClass class::TkwCompiledArray
@@ -1541,10 +1560,12 @@ TClass class::TkwDivision
 TClass class::TkwDoWord
 TClass class::TkwDROP
 TClass class::TkwDROP2
+TClass class::TkwDROPN
 TClass class::TkwDualCompiledWordContainer
 TClass class::TkwDUP
 TClass class::TkwDUP2
 TClass class::TkwDUPIfNotZero
+TClass class::TkwDUPN
 TClass class::TkwElse
 TClass class::TkwEmitString
 TClass class::TkwEnabledSaveRTFPictures
@@ -1737,6 +1758,7 @@ TClass class::TkwPopValueTypesEQ
 TClass class::TkwPopValueTypesHas
 TClass class::TkwPopValueTypesMakeCustomName
 TClass class::TkwPopValueTypesName
+TClass class::TkwPopWordCodeIterator
 TClass class::TkwPopWordDecRef
 TClass class::TkwPopWordDirectives
 TClass class::TkwPopWordEndBracket
@@ -1959,7 +1981,7 @@ TClass class::TtfwWStrWord
 IMMEDIATE VOID OPERATOR : ClassProducer
  ^L OPERATOR :: IN : aName
 ; // ClassProducer
-CodeIterator
+ARRAY CodeIterator
 IMMEDIATE VOID OPERATOR :: TYPE : COMPARABLE
 INTEGER CompareStr
 INTEGER CompareText
@@ -2009,7 +2031,9 @@ VOID OPERATOR : DisableForHelp
 INTEGER DIV
 VOID DO
 VOID DROP
+VOID DROPN
 VOID DUP
+VOID DUPN
 EAccessViolation
 EAssertionFailed
 EBitsError
@@ -2496,7 +2520,6 @@ TkwClipboardGetFormattedText
 TkwClipboardSetText
 TkwCloseArray
 TkwCloseBracket
-TkwCodeIterator
 TkwCompareStr
 TkwCompareText
 TkwCompiledArray
@@ -2579,10 +2602,12 @@ TkwDivision
 TkwDoWord
 TkwDROP
 TkwDROP2
+TkwDROPN
 TkwDualCompiledWordContainer
 TkwDUP
 TkwDUP2
 TkwDUPIfNotZero
+TkwDUPN
 TkwElse
 TkwEmitString
 TkwEnabledSaveRTFPictures
@@ -2775,6 +2800,7 @@ TkwPopValueTypesEQ
 TkwPopValueTypesHas
 TkwPopValueTypesMakeCustomName
 TkwPopValueTypesName
+TkwPopWordCodeIterator
 TkwPopWordDecRef
 TkwPopWordDirectives
 TkwPopWordEndBracket
@@ -3193,6 +3219,7 @@ TtfwWord pop:Compiler:KeywordFinder
 TtfwWord pop:Compiler:NewWordDefinitor
 VOID pop:Compiler:SetToCtx
 Dictionary: axiom:Word
+ARRAY pop:Word:CodeIterator
 VOID pop:Word:DecRef
 STRING pop:Word:Directives
 STRING pop:Word:EndBracket

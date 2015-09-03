@@ -33,7 +33,7 @@ VOID Test PointTest
     Result :=
     (
      l_List
-     CodeIterator
+     pop:Word:CodeIterator
     )
    )
  ; // ARRAY FUNCTION %Fld
@@ -291,7 +291,7 @@ VOID Test PointTest
         DoMember
         (
          l_List
-         CodeIterator
+         pop:Word:CodeIterator
         )
         Array:Map
        )
