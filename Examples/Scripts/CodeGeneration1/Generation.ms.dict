@@ -118,6 +118,11 @@ BOOLEAN elem_func IsElementNeed.OwnFile
  begin
   Result := false
  end
+ else
+ if ( Self .IsStereotypeOf <<Class>> ) then
+ begin
+  Result := true
+ end
 ; // IsElementNeed.OwnFile
 
 STRING VAR g_CurrentGeneratorName
