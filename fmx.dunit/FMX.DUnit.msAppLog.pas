@@ -8,7 +8,7 @@ uses
  ;
 
 type
- TmsAppLog = class (TmsLog, IscriptLog)
+ TmsAppLog = class (TmsLog)
  strict private
   class var f_Instance: TmsAppLog;
   constructor Create(const aFileName: String);
