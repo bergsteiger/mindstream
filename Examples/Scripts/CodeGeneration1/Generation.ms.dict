@@ -85,10 +85,8 @@ STRING VAR g_CurrentGeneratorName
 CONST cPathSep '\'
 
 STRING FUNCTION OutDir
- STRING VAR l_OutPath
- %REMARK 'Путь для вывода'
- sysutils:GetCurrentDir =: l_OutPath
- [ l_OutPath 
+ sysutils:GetCurrentDir =: Result
+ [ Result
   script:FileName 
   %REMARK 'Путь к текущему скрипту'
   sysutils:ExtractFileName
@@ -97,7 +95,7 @@ STRING FUNCTION OutDir
   %REMARK 'Убираем .script' 
   '' sysutils:ChangeFileExt 
   %REMARK 'Убираем .ms' 
- ] cPathSep strings:CatSep =: l_OutPath
+ ] cPathSep strings:CatSep =: Result
 ; // OutDir
 
 STRING FUNCTION OutFileName
