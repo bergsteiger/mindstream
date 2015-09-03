@@ -1113,6 +1113,8 @@
 ..\..\Examples\Scripts\Other\Declared.ms.script
 ..\..\Examples\Scripts\Other\Dictionary.ms.script
 ..\..\Examples\Scripts\Other\Division.ms.script
+..\..\Examples\Scripts\Other\DropN.ms.script
+..\..\Examples\Scripts\Other\DupN.ms.script
 ..\..\Examples\Scripts\Other\EndsStr.ms.script
 ..\..\Examples\Scripts\Other\EndsText.ms.script
 ..\..\Examples\Scripts\Other\Equals.ms.script
@@ -1121,6 +1123,7 @@
 ..\..\Examples\Scripts\Other\ExceptionStack.ms.script
 ..\..\Examples\Scripts\Other\EXEFileName.ms.script
 ..\..\Examples\Scripts\Other\Exit.ms.script
+..\..\Examples\Scripts\Other\Filter.ms.script
 ..\..\Examples\Scripts\Other\FindMember.ms.script
 ..\..\Examples\Scripts\Other\ForTo.ms.script
 ..\..\Examples\Scripts\Other\FunctorToIterator.ms.script
@@ -1143,6 +1146,7 @@
 ..\..\Examples\Scripts\Other\K276546684.ms.script
 ..\..\Examples\Scripts\Other\Less.ms.script
 ..\..\Examples\Scripts\Other\List.ms.script
+..\..\Examples\Scripts\Other\Map.ms.script
 ..\..\Examples\Scripts\Other\MemberAccess.ms.script
 ..\..\Examples\Scripts\Other\MemberRefAccess.ms.script
 ..\..\Examples\Scripts\Other\MethodsImplementing.ms.script
@@ -1256,6 +1260,8 @@
 ..\..\Examples\Scripts\Other\Declared.ms.script.co
 ..\..\Examples\Scripts\Other\Dictionary.ms.script.co
 ..\..\Examples\Scripts\Other\Division.ms.script.co
+..\..\Examples\Scripts\Other\DropN.ms.script.co
+..\..\Examples\Scripts\Other\DupN.ms.script.co
 ..\..\Examples\Scripts\Other\EndsStr.ms.script.co
 ..\..\Examples\Scripts\Other\EndsText.ms.script.co
 ..\..\Examples\Scripts\Other\Equals.ms.script.co
@@ -1264,6 +1270,7 @@
 ..\..\Examples\Scripts\Other\ExceptionStack.ms.script.co
 ..\..\Examples\Scripts\Other\EXEFileName.ms.script.co
 ..\..\Examples\Scripts\Other\Exit.ms.script.co
+..\..\Examples\Scripts\Other\Filter.ms.script.co
 ..\..\Examples\Scripts\Other\FindMember.ms.script.co
 ..\..\Examples\Scripts\Other\ForTo.ms.script.co
 ..\..\Examples\Scripts\Other\FunctorToIterator.ms.script.co
@@ -1284,6 +1291,7 @@
 ..\..\Examples\Scripts\Other\K269058906.ms.script.co
 ..\..\Examples\Scripts\Other\Less.ms.script.co
 ..\..\Examples\Scripts\Other\List.ms.script.co
+..\..\Examples\Scripts\Other\Map.ms.script.co
 ..\..\Examples\Scripts\Other\MemberAccess.ms.script.co
 ..\..\Examples\Scripts\Other\MemberRefAccess.ms.script.co
 ..\..\Examples\Scripts\Other\MethodsImplementing.ms.script.co
@@ -5917,6 +5925,8 @@
 ..\Scripts\Other\Declared.ms.script
 ..\Scripts\Other\Dictionary.ms.script
 ..\Scripts\Other\Division.ms.script
+..\Scripts\Other\DropN.ms.script
+..\Scripts\Other\DupN.ms.script
 ..\Scripts\Other\EndsStr.ms.script
 ..\Scripts\Other\EndsText.ms.script
 ..\Scripts\Other\Equals.ms.script
@@ -5925,6 +5935,7 @@
 ..\Scripts\Other\ExceptionStack.ms.script
 ..\Scripts\Other\EXEFileName.ms.script
 ..\Scripts\Other\Exit.ms.script
+..\Scripts\Other\Filter.ms.script
 ..\Scripts\Other\FindMember.ms.script
 ..\Scripts\Other\ForTo.ms.script
 ..\Scripts\Other\FunctorToIterator.ms.script
@@ -5947,6 +5958,7 @@
 ..\Scripts\Other\K276546684.ms.script
 ..\Scripts\Other\Less.ms.script
 ..\Scripts\Other\List.ms.script
+..\Scripts\Other\Map.ms.script
 ..\Scripts\Other\MemberAccess.ms.script
 ..\Scripts\Other\MemberRefAccess.ms.script
 ..\Scripts\Other\MethodsImplementing.ms.script
@@ -6060,6 +6072,8 @@
 ..\Scripts\Other\Declared.ms.script.co
 ..\Scripts\Other\Dictionary.ms.script.co
 ..\Scripts\Other\Division.ms.script.co
+..\Scripts\Other\DropN.ms.script.co
+..\Scripts\Other\DupN.ms.script.co
 ..\Scripts\Other\EndsStr.ms.script.co
 ..\Scripts\Other\EndsText.ms.script.co
 ..\Scripts\Other\Equals.ms.script.co
@@ -6068,6 +6082,7 @@
 ..\Scripts\Other\ExceptionStack.ms.script.co
 ..\Scripts\Other\EXEFileName.ms.script.co
 ..\Scripts\Other\Exit.ms.script.co
+..\Scripts\Other\Filter.ms.script.co
 ..\Scripts\Other\FindMember.ms.script.co
 ..\Scripts\Other\ForTo.ms.script.co
 ..\Scripts\Other\FunctorToIterator.ms.script.co
@@ -6088,6 +6103,7 @@
 ..\Scripts\Other\K269058906.ms.script.co
 ..\Scripts\Other\Less.ms.script.co
 ..\Scripts\Other\List.ms.script.co
+..\Scripts\Other\Map.ms.script.co
 ..\Scripts\Other\MemberAccess.ms.script.co
 ..\Scripts\Other\MemberRefAccess.ms.script.co
 ..\Scripts\Other\MethodsImplementing.ms.script.co
