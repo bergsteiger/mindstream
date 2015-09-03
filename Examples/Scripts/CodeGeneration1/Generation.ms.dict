@@ -78,10 +78,6 @@ GENERATOR VAR g_CurrentGenerator
 %REMARK 'Текущий генератор'
 ( g_CurrentGenerator := nil )
 
-STRING VAR g_CurrentGeneratorName
-%REMARK 'Имя текущего генератора'
-( g_CurrentGeneratorName := '' )
-
 CONST cPathSep '\'
 
 STRING FUNCTION OutDir
@@ -123,6 +119,10 @@ BOOLEAN elem_func IsElementNeed.OwnFile
   Result := false
  end
 ; // IsElementNeed.OwnFile
+
+STRING VAR g_CurrentGeneratorName
+%REMARK 'Имя текущего генератора'
+( g_CurrentGeneratorName := '' )
 
 ModelElement VAR g_CurrentElementModel
  %REMARK 'Текущий генерируемый элемент'
