@@ -5,7 +5,7 @@ USES
  Testing.ms.dict
 ;
 
-TestWithDump DogAndBracketTest
+Test&Dump DogAndBracketTest
  RunTests.in.array @[ @( @[ ]
   %REMARK 'Запускаем тесты к указанным скриптовым словам' 
 ; // DogAndBracketTest

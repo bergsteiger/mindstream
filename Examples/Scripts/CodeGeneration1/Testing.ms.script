@@ -5,7 +5,7 @@ USES
  string.ms.dict
 ;
 
-TestWithDump TestingTest
+Test&Dump TestingTest
  RunTests.in.array @[ (+)? ]
   %REMARK '«апускаем "стандартные тесты" дл€ слова (+)?'
 ; // TestingTest
