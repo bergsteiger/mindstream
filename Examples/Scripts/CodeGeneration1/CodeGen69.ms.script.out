@@ -1,9 +1,9 @@
-VOID Test CodeGen
+VOID TestWithDump CodeGen
  CodeGen
  DumpElement
  help
  ( Project1 Project2 Project3 ( .dump .pas .c++ .h .script CallGensList
-; // VOID Test CodeGen
+; // VOID TestWithDump CodeGen
 
 Dictionary: axiom:char
 Dictionary: axiom:class
@@ -191,6 +191,8 @@ Dictionary: CodeGen69.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Concrete.ms.model
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Generation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms.tpl
@@ -5145,5 +5147,5 @@ STRING FUNCTION : CatSepIndent>
  STRING FUNCTION :: CatSepIndent> : Result
 ; // CatSepIndent>
 TkwMain : Main
- VOID OPERATOR :: Test : CodeGen
+ VOID OPERATOR :: MACRO :: TestWithDump : CodeGen
 ; // Main

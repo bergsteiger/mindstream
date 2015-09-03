@@ -1,9 +1,10 @@
 USES
  Documentation.ms.dict
  Object.ms.dict
+ Testing.ms.dict
 ;
 
-Test CodeGen
+TestWithDump CodeGen
  %REMARK
   '
   CodeGen - это функция в которой мы будем тестировать наш функционал
@@ -13,19 +14,6 @@ USES
  Concrete.ms.model
  // - подключаем "конкретную модель"
 ;
-
-USES
- CodeDump.ms.dict
- // - тут подключаем словарь CodeDump.ms.dict, чтобы "увидеть" слово DumpElement
-;
-
-this.method.addr DumpElement
-%REMARK
- '
- - тут дампим элемент CodeGen и его содержимое
-   в стандартное устройство вывода.
-   Чисто для отладки того, что мы сейчас написали.
- '
 
 USES
  Generation.ms.dict
