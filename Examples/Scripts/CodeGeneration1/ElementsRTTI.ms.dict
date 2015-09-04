@@ -24,6 +24,13 @@ MACRO elem_func
  aName .Name this.method.addr nil 'ModelElement' do_word_func
 ; // elem_func
 
+MACRO elem_func_v
+ Literal IN aName
+ %SUMMARY 'Виртуальная функция на элементе модели' ;
+  %TODO 'Вообще говоря это потом надо скрестить с elem_func анализируя VIRTUAL, ABSTRACT и OVERRIDE'
+ aName .Name this.method.addr nil 'ModelElement' do_word_func
+; // elem_func_v
+
 PROCEDURE do_elem_proc
  STRING IN aName
  ENGINE_WORD IN aSelf
