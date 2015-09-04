@@ -19,3 +19,6 @@ PROCEDURE SaveVarAndDo
   aVar ^:= l_OldValue
  END
 ; // SaveVarAndDo
+
+WordAlias TF SaveVarAndDo
+ %REMARK 'TF - сокращение от TRY..FINALLY'
