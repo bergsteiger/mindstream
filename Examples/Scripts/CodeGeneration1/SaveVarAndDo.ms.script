@@ -13,6 +13,7 @@ Test&Dump SaveVarAndDoTest
 
 PROCEDURE SaveVarAndDo
  RIGHT IN aVar
+ aVar |N Print
 ; // SaveVarAndDo
 
 VAR A

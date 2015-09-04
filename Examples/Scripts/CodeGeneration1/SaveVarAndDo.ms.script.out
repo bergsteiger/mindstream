@@ -2,6 +2,9 @@ VOID TestWithDump SaveVarAndDoTest
  VAR A
  VOID PROCEDURE SaveVarAndDo
   ^ IN aVar
+  aVar
+  |N
+  Print
  ; // VOID PROCEDURE SaveVarAndDo
  
  SaveVarAndDoTest
@@ -17,4 +20,5 @@ VOID TestWithDump SaveVarAndDoTest
 ; // VOID TestWithDump SaveVarAndDoTest
 
 1
+A
 1
