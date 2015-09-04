@@ -14,6 +14,7 @@ VOID TestWithDump SaveVarAndDoTest
   l_OldValue
   Trace
   TRY
+   aFunctor |^
   FINALLY
    aVar
    ^:=

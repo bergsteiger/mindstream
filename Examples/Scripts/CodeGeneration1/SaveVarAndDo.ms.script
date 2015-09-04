@@ -27,6 +27,7 @@ PROCEDURE SaveVarAndDo
  l_OldValue := ( aVar |^ )
  l_OldValue Trace
  TRY
+  aFunctor |^
  FINALLY
   aVar ^:= l_OldValue
  END
