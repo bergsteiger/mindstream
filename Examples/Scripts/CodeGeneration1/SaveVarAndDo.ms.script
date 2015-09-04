@@ -37,7 +37,9 @@ VAR A
 A := '1'
 A Trace
 
-SaveVarAndDo A ( )
+SaveVarAndDo A ( 
+ 'got it' Trace
+)
 
 A Trace
 
