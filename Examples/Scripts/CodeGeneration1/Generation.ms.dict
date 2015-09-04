@@ -143,9 +143,8 @@ STRING VAR g_OutFileName
 elem_proc CallCurrentGen
  TF g_Indent
  (
-  FILE VAR l_PrevOutFile
-  l_PrevOutFile := g_OutFile
-  TRY
+  TF g_OutFile
+  (
    TF g_OutFileName
    (
     if ( Self .IsElementNeed.OwnFile ) then
@@ -168,12 +167,9 @@ elem_proc CallCurrentGen
     FINALLY
      g_OutFile := nil
     END // TRY..FINALLY
-   )
-  FINALLY
-   g_OutFile := l_PrevOutFile
-   l_PrevOutFile := nil
-  END
- )
+   ) // TF g_OutFileName
+  ) // TF g_OutFile
+ ) // TF g_Indent
 ; // CallCurrentGen
 
 elem_proc Child.CallCurrentGen
