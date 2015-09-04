@@ -14,6 +14,9 @@ Test&Dump SaveVarAndDoTest
 PROCEDURE SaveVarAndDo
  RIGHT IN aVar
  aVar |N Print
+
+ VAR l_OldValue
+ l_OldValue := ( aVar |^ )
 ; // SaveVarAndDo
 
 VAR A

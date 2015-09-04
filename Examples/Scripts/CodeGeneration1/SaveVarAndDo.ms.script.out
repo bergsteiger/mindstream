@@ -2,9 +2,14 @@ VOID TestWithDump SaveVarAndDoTest
  VAR A
  VOID PROCEDURE SaveVarAndDo
   ^ IN aVar
+  VAR l_OldValue
   aVar
   |N
   Print
+  l_OldValue :=
+  (
+   aVar |^
+  )
  ; // VOID PROCEDURE SaveVarAndDo
  
  SaveVarAndDoTest
