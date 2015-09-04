@@ -247,7 +247,8 @@ PROCEDURE CallGens
  TF g_AllRoots
  ( 
   g_AllRoots := anElements
-  TRY
+  TF g_AllGenerators
+  (
    g_AllGenerators := aGenerators
    for anElements (
     ModelElement IN anElement
@@ -257,9 +258,7 @@ PROCEDURE CallGens
      %REMARK 'Вызываем на элементе anElement генератор aGen' 
     ) // for aGenerators
    ) // for anElements
-  FINALLY
-   g_AllGenerators := nil
-  END
+  ) // TF g_AllGenerators
  ) // TF g_AllRoots
 ; // CallGens
 
