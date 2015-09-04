@@ -11,13 +11,18 @@ USES
 
 Test&Dump SaveVarAndDoTest
 
+PROCEDURE Trace
+ IN aValue
+ aValue Print
+; // Trace
+
 PROCEDURE SaveVarAndDo
  RIGHT IN aVar
- aVar |N Print
+ aVar |N Trace
 
  VAR l_OldValue
  l_OldValue := ( aVar |^ )
- l_OldValue Print
+ l_OldValue Trace
 ; // SaveVarAndDo
 
 VAR A

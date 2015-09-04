@@ -5,14 +5,20 @@ VOID TestWithDump SaveVarAndDoTest
   VAR l_OldValue
   aVar
   |N
-  Print
+  Trace
   l_OldValue :=
   (
    aVar |^
   )
   l_OldValue
-  Print
+  Trace
  ; // VOID PROCEDURE SaveVarAndDo
+ 
+ VOID PROCEDURE Trace
+  IN aValue
+  aValue
+  Print
+ ; // VOID PROCEDURE Trace
  
  SaveVarAndDoTest
  DumpElement
