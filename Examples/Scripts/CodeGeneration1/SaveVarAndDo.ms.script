@@ -19,6 +19,7 @@ PROCEDURE Trace
 
 PROCEDURE SaveVarAndDo
  VAR_REF RIGHT IN aVar
+ FUNCTOR RIGHT IN aFunctor
 
  aVar |N Trace
 
@@ -35,7 +36,7 @@ VAR A
 A := '1'
 A Trace
 
-SaveVarAndDo A
+SaveVarAndDo A ( )
 
 A Trace
 

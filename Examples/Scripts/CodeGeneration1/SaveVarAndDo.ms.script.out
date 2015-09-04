@@ -1,6 +1,7 @@
 VOID TestWithDump SaveVarAndDoTest
  VAR A
  VOID PROCEDURE SaveVarAndDo
+  ^ IN aFunctor
   ^ IN aVar
   VAR l_OldValue
   aVar
@@ -34,6 +35,8 @@ VOID TestWithDump SaveVarAndDoTest
  Trace
  SaveVarAndDo
  A
+ (
+ )
  A
  Trace
 ; // VOID TestWithDump SaveVarAndDoTest
