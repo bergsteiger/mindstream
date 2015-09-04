@@ -20,7 +20,7 @@ INTEGER VAR g_Indent
 %REMARK 'Текущий отступ'
 ( g_Indent := 0 )
 
-BOOLEAN elem_func IsElementNeed.Indent
+BOOLEAN elem_func_v IsElementNeed.Indent
  %SUMMARY 'Определяет тот факт, что элементу нужен отступ' ;
  Result := true
 ; // IsElementNeed.Indent
