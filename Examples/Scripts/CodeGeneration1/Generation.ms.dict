@@ -224,13 +224,12 @@ elem_proc CallGen
  ' 
  ; // %SUMMARY 
 
- TRY
+ TF g_CurrentGenerator
+ (
   g_CurrentGenerator := ( aGen Dereference )
   aGen %GP Name =: g_CurrentGeneratorName
   Self .CallCurrentGen
- FINALLY
-  g_CurrentGenerator := nil
- END
+ )
 ; // CallGen
 
 ARRAY VAR g_AllRoots
