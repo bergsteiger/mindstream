@@ -1,4 +1,7 @@
 VOID TestWithDump SaveVarAndDoTest
+ VOID PROCEDURE SaveVarAndDo
+ ; // VOID PROCEDURE SaveVarAndDo
+ 
  SaveVarAndDoTest
  DumpElement
 ; // VOID TestWithDump SaveVarAndDoTest
