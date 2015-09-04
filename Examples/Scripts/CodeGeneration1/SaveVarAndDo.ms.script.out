@@ -35,6 +35,8 @@ VOID TestWithDump SaveVarAndDoTest
   Trace
   'got it'
   Trace
+  A :=
+  2
   A
   Trace
  )
@@ -47,5 +49,5 @@ A
 1
 1
 got it
-1
+2
 1
