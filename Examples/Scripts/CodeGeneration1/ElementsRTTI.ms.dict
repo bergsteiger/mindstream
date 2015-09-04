@@ -25,6 +25,7 @@ MACRO elem_func
 ; // elem_func
 
 MACRO elem_func_v
+ Literal IN aStereoName
  Literal IN aName
  %SUMMARY 'Виртуальная функция на элементе модели' ;
   %TODO 'Вообще говоря это потом надо скрестить с elem_func анализируя VIRTUAL, ABSTRACT и OVERRIDE'

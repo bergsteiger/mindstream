@@ -4957,6 +4957,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : elem_func
 IMMEDIATE VOID OPERATOR :: MACRO : elem_func_v
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^L OPERATOR :: IN : aName
+ ^L OPERATOR :: IN : aStereoName
 ; // elem_func_v
 IMMEDIATE VOID OPERATOR :: MACRO : elem_generator
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM

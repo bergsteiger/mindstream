@@ -20,7 +20,7 @@ INTEGER VAR g_Indent
 %REMARK 'Текущий отступ'
 ( g_Indent := 0 )
 
-BOOLEAN elem_func_v IsElementNeed.Indent
+BOOLEAN elem_func_v '' IsElementNeed.Indent
  %SUMMARY 'Определяет тот факт, что элементу нужен отступ' ;
  Result := true
 ; // IsElementNeed.Indent
@@ -112,7 +112,7 @@ USES
 
 // - это - "времянка", чтобы увидеть символ <<Const>>
 
-BOOLEAN elem_func_v IsElementNeed.OwnFile
+BOOLEAN elem_func_v '' IsElementNeed.OwnFile
  %SUMMARY 'Определяет тот факт, что элементу нужен собственный файл вывода' ;
  Result := true
  if ( Self .IsStereotypeOf <<Const>> ) then
