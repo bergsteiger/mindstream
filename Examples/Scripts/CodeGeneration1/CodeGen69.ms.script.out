@@ -4761,6 +4761,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Generation.ms
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\ElementsRTTI.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\SaveVarAndDo.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms.model
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\MetaMetaModel.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\RefDeepest.ms.dict
@@ -4970,6 +4971,51 @@ IMMEDIATE VOID OPERATOR :: MACRO : elem_ref_proc
 ; // elem_ref_proc
 IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
 IMMEDIATE VOID OPERATOR :: TYPE : STEREOTYPE
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\SaveVarAndDo.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+ ;
+VOID OPERATOR :: PROCEDURE : SaveVarAndDo
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aFunctor
+ ^ OPERATOR :: IN : aVar
+ OPERATOR :: VAR : l_OldValue
+; // SaveVarAndDo
+VOID OPERATOR :: PROCEDURE : TF
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aFunctor
+ ^ OPERATOR :: IN : aVar
+ OPERATOR :: VAR : l_OldValue
+; // TF
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\RefDeepest.ms.dict
  Uses: 
   axiom:axiom
