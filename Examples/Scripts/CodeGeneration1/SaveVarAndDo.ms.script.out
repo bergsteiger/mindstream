@@ -1,8 +1,14 @@
 VOID TestWithDump SaveVarAndDoTest
+ VAR A
  VOID PROCEDURE SaveVarAndDo
  ; // VOID PROCEDURE SaveVarAndDo
  
  SaveVarAndDoTest
  DumpElement
+ A :=
+ '1'
+ A
+ Print
 ; // VOID TestWithDump SaveVarAndDoTest
 
+1

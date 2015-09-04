@@ -3,6 +3,7 @@
 USES
  params.ms.dict
  macro.ms.dict
+ io.ms.dict
  Documentation.ms.dict
  Testing.ms.dict
 ;
@@ -11,6 +12,10 @@ Test&Dump SaveVarAndDoTest
 
 PROCEDURE SaveVarAndDo
 ; // SaveVarAndDo
+
+VAR A
+A := '1'
+A Print
 
 ; // SaveVarAndDoTest
 
