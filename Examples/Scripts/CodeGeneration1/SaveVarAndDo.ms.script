@@ -17,6 +17,7 @@ PROCEDURE SaveVarAndDo
 
  VAR l_OldValue
  l_OldValue := ( aVar |^ )
+ l_OldValue Print
 ; // SaveVarAndDo
 
 VAR A

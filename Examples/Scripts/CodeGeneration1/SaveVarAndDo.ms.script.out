@@ -10,6 +10,8 @@ VOID TestWithDump SaveVarAndDoTest
   (
    aVar |^
   )
+  l_OldValue
+  Print
  ; // VOID PROCEDURE SaveVarAndDo
  
  SaveVarAndDoTest
@@ -26,4 +28,5 @@ VOID TestWithDump SaveVarAndDoTest
 
 1
 A
+1
 1
