@@ -141,9 +141,8 @@ STRING VAR g_OutFileName
 ( g_OutFileName := '' )
 
 elem_proc CallCurrentGen
- INTEGER VAR l_PrevIndent
- l_PrevIndent := g_Indent
- TRY
+ TF g_Indent
+ (
   FILE VAR l_PrevOutFile
   l_PrevOutFile := g_OutFile
   TRY
@@ -174,9 +173,7 @@ elem_proc CallCurrentGen
    g_OutFile := l_PrevOutFile
    l_PrevOutFile := nil
   END
- FINALLY
-  g_Indent := l_PrevIndent
- END
+ )
 ; // CallCurrentGen
 
 elem_proc Child.CallCurrentGen
