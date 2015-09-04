@@ -18,7 +18,7 @@ PROCEDURE Trace
 ; // Trace
 
 PROCEDURE SaveVarAndDo
- RIGHT IN aVar
+ VAR_REF RIGHT IN aVar
  aVar |N Trace
 
  VAR l_OldValue
