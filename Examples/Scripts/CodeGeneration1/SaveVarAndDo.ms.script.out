@@ -12,6 +12,9 @@ VOID TestWithDump SaveVarAndDoTest
   )
   l_OldValue
   Trace
+  TRY
+  FINALLY
+  END
  ; // VOID PROCEDURE SaveVarAndDo
  
  VOID PROCEDURE Trace

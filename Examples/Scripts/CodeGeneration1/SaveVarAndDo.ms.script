@@ -23,6 +23,9 @@ PROCEDURE SaveVarAndDo
  VAR l_OldValue
  l_OldValue := ( aVar |^ )
  l_OldValue Trace
+ TRY
+ FINALLY
+ END
 ; // SaveVarAndDo
 
 VAR A
