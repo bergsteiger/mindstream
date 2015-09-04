@@ -246,10 +246,10 @@ PROCEDURE CallGens
  %SUMMARY 'Вызывает все определённые генераторы на элементах массива anElements' ;
  OutDir PureDir
  %REMARK 'Очищаем директорию от "старых" файлов'
- g_AllRoots := anElements
  TRY 
-  g_AllGenerators := aGenerators
+  g_AllRoots := anElements
   TRY
+   g_AllGenerators := aGenerators
    for anElements (
     ModelElement IN anElement
     for aGenerators ( 
