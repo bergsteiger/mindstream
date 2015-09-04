@@ -8,14 +8,10 @@ USES
  io.ms.dict
  Documentation.ms.dict
  Testing.ms.dict
+ Debug.ms.dict
 ;
 
 Test&Dump SaveVarAndDoTest
-
-PROCEDURE Trace
- IN aValue
- aValue Print
-; // Trace
 
 PROCEDURE SaveVarAndDo
  VAR_REF RIGHT IN aVar

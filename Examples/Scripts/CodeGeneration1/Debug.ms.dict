@@ -1,0 +1,10 @@
+// Debug.ms.dict
+
+USES
+ io.ms.dict
+; 
+
+PROCEDURE Trace
+ IN aValue
+ aValue Print
+; // Trace
