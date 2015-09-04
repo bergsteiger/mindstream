@@ -1,22 +1,5 @@
 VOID TestWithDump SaveVarAndDoTest
  VAR A
- VOID PROCEDURE SaveVarAndDo
-  ^ IN aFunctor
-  ^ IN aVar
-  VAR l_OldValue
-  l_OldValue :=
-  (
-   aVar |^
-  )
-  TRY
-   aFunctor |^
-  FINALLY
-   aVar
-   ^:=
-   l_OldValue
-  END
- ; // VOID PROCEDURE SaveVarAndDo
- 
  SaveVarAndDoTest
  DumpElement
  A :=
