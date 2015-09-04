@@ -17,11 +17,8 @@ PROCEDURE SaveVarAndDo
  VAR_REF RIGHT IN aVar
  FUNCTOR RIGHT IN aFunctor
 
- aVar |N Trace
-
  VAR l_OldValue
  l_OldValue := ( aVar |^ )
- l_OldValue Trace
  TRY
   aFunctor |^
  FINALLY

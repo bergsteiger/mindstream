@@ -4,15 +4,10 @@ VOID TestWithDump SaveVarAndDoTest
   ^ IN aFunctor
   ^ IN aVar
   VAR l_OldValue
-  aVar
-  |N
-  Trace
   l_OldValue :=
   (
    aVar |^
   )
-  l_OldValue
-  Trace
   TRY
    aFunctor |^
   FINALLY
@@ -44,8 +39,6 @@ VOID TestWithDump SaveVarAndDoTest
  Trace
 ; // VOID TestWithDump SaveVarAndDoTest
 
-1
-A
 1
 1
 got it
