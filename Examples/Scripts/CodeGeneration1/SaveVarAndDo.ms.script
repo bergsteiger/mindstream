@@ -34,8 +34,9 @@ A := '1'
 A Trace
 
 SaveVarAndDo A (
- A Trace 
+ A Trace
  'got it' Trace
+ A Trace
 )
 
 A Trace
