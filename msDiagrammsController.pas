@@ -399,6 +399,8 @@ end;
 
 procedure TmsDiagrammsController.cbDiagrammChange(Sender: TObject);
 begin
+ if (CurrentDiagramms = nil) then
+  Exit;
  Assert(CurrentDiagramms <> nil);
  CurrentDiagramm := CurrentDiagramms.SelectDiagramm(cbDiagramm.Items[cbDiagramm.ItemIndex]);
  Assert(CurrentDiagramm <> nil);
