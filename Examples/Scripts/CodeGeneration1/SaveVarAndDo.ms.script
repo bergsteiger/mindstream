@@ -12,13 +12,14 @@ USES
 Test&Dump SaveVarAndDoTest
 
 PROCEDURE SaveVarAndDo
+ RIGHT IN aVar
 ; // SaveVarAndDo
 
 VAR A
 A := '1'
 A Print
 
-SaveVarAndDo
+SaveVarAndDo A
 
 A Print
 
