@@ -147,9 +147,8 @@ elem_proc CallCurrentGen
  l_PrevIndent := g_Indent
  TRY
   TRY
-   STRING VAR l_PrevOutFileName
-   l_PrevOutFileName := g_OutFileName
-   TRY
+   TF g_OutFileName
+   (
     if ( Self .IsElementNeed.OwnFile ) then
     begin
      g_Indent := 0 // - тут вообще ещё надо проверять - переоткрываем мы файл или нет
@@ -170,9 +169,7 @@ elem_proc CallCurrentGen
     FINALLY
      g_OutFile := nil
     END // TRY..FINALLY
-   FINALLY
-    g_OutFileName := l_PrevOutFileName
-   END
+   )
   FINALLY
    g_OutFile := l_PrevOutFile
    l_PrevOutFile := nil
