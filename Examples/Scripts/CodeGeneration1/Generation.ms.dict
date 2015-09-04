@@ -112,7 +112,7 @@ USES
 
 // - это - "времянка", чтобы увидеть символ <<Const>>
 
-BOOLEAN elem_func IsElementNeed.OwnFile
+BOOLEAN elem_func_v IsElementNeed.OwnFile
  %SUMMARY 'Определяет тот факт, что элементу нужен собственный файл вывода' ;
  Result := true
  if ( Self .IsStereotypeOf <<Const>> ) then

@@ -4804,9 +4804,9 @@ BOOLEAN OPERATOR :: MACRO :: elem_func : .IsElementNeed.Indent
  BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsElementNeed.Indent : Result
  ModelElement OPERATOR :: IN : Self
 ; // .IsElementNeed.Indent
-BOOLEAN OPERATOR :: MACRO :: elem_func : .IsElementNeed.OwnFile
+BOOLEAN OPERATOR :: MACRO :: elem_func_v : .IsElementNeed.OwnFile
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
- BOOLEAN OPERATOR :: MACRO :: elem_func :: .IsElementNeed.OwnFile : Result
+ BOOLEAN OPERATOR :: MACRO :: elem_func_v :: .IsElementNeed.OwnFile : Result
  ModelElement OPERATOR :: IN : Self
 ; // .IsElementNeed.OwnFile
 VOID OPERATOR :: MACRO :: elem_proc : .LeaveElement
