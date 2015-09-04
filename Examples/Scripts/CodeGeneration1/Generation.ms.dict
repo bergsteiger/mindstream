@@ -141,11 +141,11 @@ STRING VAR g_OutFileName
 ( g_OutFileName := '' )
 
 elem_proc CallCurrentGen
- FILE VAR l_PrevOutFile
- l_PrevOutFile := g_OutFile
  INTEGER VAR l_PrevIndent
  l_PrevIndent := g_Indent
  TRY
+  FILE VAR l_PrevOutFile
+  l_PrevOutFile := g_OutFile
   TRY
    TF g_OutFileName
    (
