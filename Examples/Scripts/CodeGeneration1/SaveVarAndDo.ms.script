@@ -25,16 +25,17 @@ PROCEDURE SaveVarAndDo
  l_OldValue Trace
  TRY
  FINALLY
+  aVar ^:= l_OldValue
  END
 ; // SaveVarAndDo
 
 VAR A
 A := '1'
-A Print
+A Trace
 
 SaveVarAndDo A
 
-A Print
+A Trace
 
 ; // SaveVarAndDoTest
 
