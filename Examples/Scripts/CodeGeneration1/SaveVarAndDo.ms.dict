@@ -11,6 +11,13 @@ PROCEDURE SaveVarAndDo
  VAR_REF RIGHT IN aVar
  FUNCTOR RIGHT IN aFunctor
 
+ %SUMMARY '
+ Сохраняет значение переменной aVar.
+ Выполняет функтор aFunctor.
+ Восстанавливает значение переменной aVar.
+ '
+ ; // %SUMMARY
+
  VAR l_OldValue
  l_OldValue := ( aVar |^ )
  TRY
