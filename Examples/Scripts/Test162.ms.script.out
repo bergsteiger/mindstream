@@ -970,6 +970,7 @@
 ..\..\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\Inherits.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\Point96.ms.script
+..\..\Examples\Scripts\CodeGeneration1\SaveVarAndDo.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\String.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\Testing.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\arrays.ms.dict
@@ -977,6 +978,7 @@
 ..\..\Examples\Scripts\CodeGeneration1\classRelations.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\core.ms.dict
+..\..\Examples\Scripts\CodeGeneration1\Debug.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\ElementsRTTI.ms.dict
@@ -1002,6 +1004,7 @@
 ..\..\Examples\Scripts\CodeGeneration1\params.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\RefDeepest.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\reverted.ms.dict
+..\..\Examples\Scripts\CodeGeneration1\SaveVarAndDo.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\Sequence.It.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\string.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\Testing.ms.dict
@@ -1018,6 +1021,7 @@
 ..\..\Examples\Scripts\CodeGeneration1\CommonLang.ms.tpl.co
 ..\..\Examples\Scripts\CodeGeneration1\Concrete.ms.model.co
 ..\..\Examples\Scripts\CodeGeneration1\core.ms.dict.co
+..\..\Examples\Scripts\CodeGeneration1\Debug.ms.dict.co
 ..\..\Examples\Scripts\CodeGeneration1\Documentation.ms.dict.co
 ..\..\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict.co
 ..\..\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.script.co
@@ -1046,6 +1050,8 @@
 ..\..\Examples\Scripts\CodeGeneration1\Point96.ms.script.co
 ..\..\Examples\Scripts\CodeGeneration1\RefDeepest.ms.dict.co
 ..\..\Examples\Scripts\CodeGeneration1\reverted.ms.dict.co
+..\..\Examples\Scripts\CodeGeneration1\SaveVarAndDo.ms.dict.co
+..\..\Examples\Scripts\CodeGeneration1\SaveVarAndDo.ms.script.co
 ..\..\Examples\Scripts\CodeGeneration1\Sequence.It.ms.dict.co
 ..\..\Examples\Scripts\CodeGeneration1\string.ms.dict.co
 ..\..\Examples\Scripts\CodeGeneration1\String.ms.script.co
@@ -5782,6 +5788,7 @@
 ..\Scripts\CodeGeneration1\DogAndBracket.ms.script
 ..\Scripts\CodeGeneration1\Inherits.ms.script
 ..\Scripts\CodeGeneration1\Point96.ms.script
+..\Scripts\CodeGeneration1\SaveVarAndDo.ms.script
 ..\Scripts\CodeGeneration1\String.ms.script
 ..\Scripts\CodeGeneration1\Testing.ms.script
 ..\Scripts\CodeGeneration1\arrays.ms.dict
@@ -5789,6 +5796,7 @@
 ..\Scripts\CodeGeneration1\classRelations.ms.dict
 ..\Scripts\CodeGeneration1\CodeDump.ms.dict
 ..\Scripts\CodeGeneration1\core.ms.dict
+..\Scripts\CodeGeneration1\Debug.ms.dict
 ..\Scripts\CodeGeneration1\Documentation.ms.dict
 ..\Scripts\CodeGeneration1\DogAndBracket.ms.dict
 ..\Scripts\CodeGeneration1\ElementsRTTI.ms.dict
@@ -5814,6 +5822,7 @@
 ..\Scripts\CodeGeneration1\params.ms.dict
 ..\Scripts\CodeGeneration1\RefDeepest.ms.dict
 ..\Scripts\CodeGeneration1\reverted.ms.dict
+..\Scripts\CodeGeneration1\SaveVarAndDo.ms.dict
 ..\Scripts\CodeGeneration1\Sequence.It.ms.dict
 ..\Scripts\CodeGeneration1\string.ms.dict
 ..\Scripts\CodeGeneration1\Testing.ms.dict
@@ -5830,6 +5839,7 @@
 ..\Scripts\CodeGeneration1\CommonLang.ms.tpl.co
 ..\Scripts\CodeGeneration1\Concrete.ms.model.co
 ..\Scripts\CodeGeneration1\core.ms.dict.co
+..\Scripts\CodeGeneration1\Debug.ms.dict.co
 ..\Scripts\CodeGeneration1\Documentation.ms.dict.co
 ..\Scripts\CodeGeneration1\DogAndBracket.ms.dict.co
 ..\Scripts\CodeGeneration1\DogAndBracket.ms.script.co
@@ -5858,6 +5868,8 @@
 ..\Scripts\CodeGeneration1\Point96.ms.script.co
 ..\Scripts\CodeGeneration1\RefDeepest.ms.dict.co
 ..\Scripts\CodeGeneration1\reverted.ms.dict.co
+..\Scripts\CodeGeneration1\SaveVarAndDo.ms.dict.co
+..\Scripts\CodeGeneration1\SaveVarAndDo.ms.script.co
 ..\Scripts\CodeGeneration1\Sequence.It.ms.dict.co
 ..\Scripts\CodeGeneration1\string.ms.dict.co
 ..\Scripts\CodeGeneration1\String.ms.script.co
@@ -7170,6 +7182,7 @@
 .\CodeGeneration1\DogAndBracket.ms.script
 .\CodeGeneration1\Inherits.ms.script
 .\CodeGeneration1\Point96.ms.script
+.\CodeGeneration1\SaveVarAndDo.ms.script
 .\CodeGeneration1\String.ms.script
 .\CodeGeneration1\Testing.ms.script
 .\CodeGeneration1\arrays.ms.dict
@@ -7177,6 +7190,7 @@
 .\CodeGeneration1\classRelations.ms.dict
 .\CodeGeneration1\CodeDump.ms.dict
 .\CodeGeneration1\core.ms.dict
+.\CodeGeneration1\Debug.ms.dict
 .\CodeGeneration1\Documentation.ms.dict
 .\CodeGeneration1\DogAndBracket.ms.dict
 .\CodeGeneration1\ElementsRTTI.ms.dict
@@ -7202,6 +7216,7 @@
 .\CodeGeneration1\params.ms.dict
 .\CodeGeneration1\RefDeepest.ms.dict
 .\CodeGeneration1\reverted.ms.dict
+.\CodeGeneration1\SaveVarAndDo.ms.dict
 .\CodeGeneration1\Sequence.It.ms.dict
 .\CodeGeneration1\string.ms.dict
 .\CodeGeneration1\Testing.ms.dict
@@ -7218,6 +7233,7 @@
 .\CodeGeneration1\CommonLang.ms.tpl.co
 .\CodeGeneration1\Concrete.ms.model.co
 .\CodeGeneration1\core.ms.dict.co
+.\CodeGeneration1\Debug.ms.dict.co
 .\CodeGeneration1\Documentation.ms.dict.co
 .\CodeGeneration1\DogAndBracket.ms.dict.co
 .\CodeGeneration1\DogAndBracket.ms.script.co
@@ -7246,6 +7262,8 @@
 .\CodeGeneration1\Point96.ms.script.co
 .\CodeGeneration1\RefDeepest.ms.dict.co
 .\CodeGeneration1\reverted.ms.dict.co
+.\CodeGeneration1\SaveVarAndDo.ms.dict.co
+.\CodeGeneration1\SaveVarAndDo.ms.script.co
 .\CodeGeneration1\Sequence.It.ms.dict.co
 .\CodeGeneration1\string.ms.dict.co
 .\CodeGeneration1\String.ms.script.co
