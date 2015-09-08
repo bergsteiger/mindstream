@@ -31,5 +31,23 @@ macro IT
 
 WordAlias ==> IT
 
+macro for
+  ^ IN aList
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив aList вызывая лямбду aWhatToDo' ;
+ aWhatToDo CompileRef
+ aList CompileRef
+ @ DO CompileValue
+ @ ITERATE CompileValue
+ //aList DO ==> ( aWhatToDo DO )
+; // for
+
+/*{operator for
+  ^ IN aList
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив aList вызывая лямбду aWhatToDo' ;
+ aList DO ==> ( aWhatToDo DO )
+; // for}*/
+
 WordAlias >for> ==>
 WordAlias .for> ==>
