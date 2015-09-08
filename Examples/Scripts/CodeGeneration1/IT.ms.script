@@ -8,11 +8,14 @@ USES
 
 Test&Dump ITTest
 
-operator IT 
-  ARRAY IN A
+macro IT 
+  //ARRAY IN A // - слева должен быть массив
   ^ IN aWhatToDo
  %SUMMARY 'Итерирует массив A вызывая лямбду aWhatToDo' ;
- aWhatToDo A ITERATE
+ aWhatToDo CompileRef
+ @ SWAP CompileValue
+ @ ITERATE CompileValue
+ //aWhatToDo A ITERATE
 ; // IT
 
 /*{operator IT 
