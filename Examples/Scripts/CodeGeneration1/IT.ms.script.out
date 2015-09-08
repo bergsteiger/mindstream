@@ -1,20 +1,4 @@
 VOID TestWithDump ITTest
- IMMEDIATE VOID MACRO IT
-  %SUMMARY %SUM
-   'Итерирует массив A вызывая лямбду aWhatToDo'
-  ; // %SUMMARY %SUM
-  
-  ^ IN aWhatToDo
-  aWhatToDo
-  CompileRef
-  @
-  SWAP
-  CompileValue
-  @
-  Array:Iterate
-  CompileValue
- ; // IMMEDIATE VOID MACRO IT
- 
  OPERATOR for
   %SUMMARY %SUM
    'Итерирует массив aList вызывая лямбду aWhatToDo'
@@ -31,22 +15,6 @@ VOID TestWithDump ITTest
   SWAP
   Array:Iterate
  ; // OPERATOR for
- 
- IMMEDIATE VOID MACRO IT
-  %SUMMARY %SUM
-   'Итерирует массив A вызывая лямбду aWhatToDo'
-  ; // %SUMMARY %SUM
-  
-  ^ IN aWhatToDo
-  aWhatToDo
-  CompileRef
-  @
-  SWAP
-  CompileValue
-  @
-  Array:Iterate
-  CompileValue
- ; // IMMEDIATE VOID MACRO IT
  
  ITTest
  DumpElement
