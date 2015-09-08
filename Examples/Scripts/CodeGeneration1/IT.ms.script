@@ -35,6 +35,13 @@ operator for
  aList DO ==> ( aWhatToDo DO )
 ; // for
 
+/*{operator for
+  ^ IN aList
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив aList вызывая лямбду aWhatToDo' ;
+ aList DO ==> ( aWhatToDo DO )
+; // for}*/
+
  [ 1 2 3 4 5 6 7 8 9 10 ] IT Print
 
  for [ 1 2 3 4 5 6 7 8 9 10 ] Print
