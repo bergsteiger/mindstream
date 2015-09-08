@@ -434,30 +434,34 @@ VOID TestWithDump PointTest
  Point:Print
  SWAP
  Array:Iterate
- for
  l_Points
  (
   Point:X
   Print
  )
- for
+ SWAP
+ Array:Iterate
  l_Points
  (
   Point:Y
   Print
  )
- for
+ SWAP
+ Array:Iterate
  l_Points
  (
   Object:class
   Print
  )
- for
+ SWAP
+ Array:Iterate
  l_Points
  (
   Object:ClassName
   Print
  )
+ SWAP
+ Array:Iterate
  for
  l_Points
  (
