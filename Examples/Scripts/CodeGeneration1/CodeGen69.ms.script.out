@@ -3468,6 +3468,11 @@ IMMEDIATE VOID OPERATOR :: MACRO : >for>
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^ OPERATOR :: IN : aWhatToDo
 ; // >for>
+IMMEDIATE VOID OPERATOR :: MACRO : for
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aList
+ ^ OPERATOR :: IN : aWhatToDo
+; // for
 IMMEDIATE VOID OPERATOR :: MACRO : IT
  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
  ^ OPERATOR :: IN : aWhatToDo
