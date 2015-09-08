@@ -1,0 +1,61 @@
+BOOLEAN FUNCTION IsEven
+ INTEGER IN aValue
+ aValue 2 MOD 0 == >>> Result
+; // IsEven
+
+[ 1 2 3 4 5 6 7 8 9 10 ] .filter> IsEven ==> .
+[ 1 2 3 4 5 6 7 8 9 10 ] .filter> IsEven .
+
+[ 1 10 2 9 3 8 4 7 5 6 6 5 7 4 8 3 9 2 10 1 ] .slice> 2 .filter> ( INTEGER IN A INTEGER IN B A IsEven ) ==> ( . . '---' . )
+
+ STRING FUNCTION ToPrintableEx
+   IN aValue
+  if ( aValue IsArray )
+   ( 
+    [ 
+     '[ ' 
+     INTEGER VAR l_SL
+     l_SL := StackLevel
+     for aValue ( 
+      INTEGER VAR l_Delta
+      l_Delta := ( StackLevel l_SL - )
+      if ( l_Delta = 1 ) then
+       ( @SELF DO )
+      else
+       (
+        INTEGER VAR l_Index
+        l_Index := l_Delta
+        '{ '
+        l_Delta LOOP ( l_Index ROLL @SELF DO )
+        // ѕремудрость с LOOP и ROLL дл€ того, чтобы обработать slice'ы
+        '}' 
+       )
+      l_SL := StackLevel 
+     ) 
+     ']' 
+    ] ' ' strings:CatSep >>> Result 
+   )
+  else 
+   ( aValue ToPrintable >>> Result )
+ ; // ToPrintable
+ 
+[ 1 10 2 9 ] .slice> 2 .filter> ( INTEGER IN A INTEGER IN B A IsEven ) ToPrintableEx .
+
+[ 1 2 ] ToPrintableEx .
+
+[ 1 10 2 9 3 8 4 7 ] .slice> 2 .filter> ( INTEGER IN A INTEGER IN B A IsEven ) ToPrintableEx .
+
+[ 1 10 2 9 ] .slice> 2 .filter> ( INTEGER IN A INTEGER IN B A IsEven ) .
+
+[ 1 10 2 9 3 8 4 7 5 6 6 5 7 4 8 3 9 2 10 1 ] .slice> 2 .filter> ( INTEGER IN A INTEGER IN B A IsEven ) ToPrintableEx .
+
+[ 1 10 2 9 3 8 4 7 5 6 6 5 7 4 8 3 9 2 10 1 ] .slice> 2 .filter> ( INTEGER IN A INTEGER IN B A IsEven ) .
+
+//[ 1 2 3 4 5 6 7 8 9 10 ] .map> ( INTEGER IN anItem anItem IsEven ) ==> .
+//[ 1 2 3 4 5 6 7 8 9 10 ] .map> ( INTEGER IN anItem anItem IsEven ) .
+
+//[ 1 2 3 4 5 6 7 8 9 10 ] .map> ( INTEGER IN anItem if ( anItem IsEven ) ( anItem ) else ( anItem 1 + ) ) ==> .
+//[ 1 2 3 4 5 6 7 8 9 10 ] .map> ( INTEGER IN anItem if ( anItem IsEven ) ( anItem ) else ( anItem 1 + ) ) .
+
+//[ 1 2 3 4 5 6 7 8 9 10 ] .slice> 2 .map> + ==> .
+//[ 1 2 3 4 5 6 7 8 9 10 ] .slice> 2 .map> + .
