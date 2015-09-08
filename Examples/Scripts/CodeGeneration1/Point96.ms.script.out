@@ -462,6 +462,21 @@ VOID TestWithDump PointTest
  l_Points
  DO
  Array:Iterate
+ (
+  (
+   getClassName
+   Print
+  )
+  (
+   Object:class
+   .Inherited.Words
+  )
+  DO
+  Array:Iterate
+ )
+ l_Points
+ DO
+ Array:Iterate
  R1 :=
  Rectangle::
  P1
@@ -568,13 +583,4 @@ Point
 Point
 Point
 Point
-( TopLeft: ( X: 0, Y: 0 ), BottomRight: ( X: 2, Y: 2 ) )
-( TopLeft: ( X: 3, Y: 3 ), BottomRight: ( X: -1, Y: -1 ) )
-Hello world
-Hello world
-Hello world
-3
-30
--10
--10
-10
+Ошибка выполнения: "Неверный тип значения: tfw_vtObj TkwBeginLikeCompiledCode для типа Object". Главный файл: Point96.ms.script. Класс: TkwLeftParam. Слово: Self Producer: IN Parent: Object:class
