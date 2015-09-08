@@ -1,1 +1,1 @@
-call c.cmd CodeGen69.ms.script
+call c.cmd IT.ms.script
