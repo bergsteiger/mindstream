@@ -462,6 +462,7 @@ VOID TestWithDump PointTest
  )
  SWAP
  Array:Iterate
+ for
  l_Points
  (
   (
@@ -475,8 +476,6 @@ VOID TestWithDump PointTest
   SWAP
   Array:Iterate
  )
- SWAP
- Array:Iterate
  R1 :=
  Rectangle::
  P1
