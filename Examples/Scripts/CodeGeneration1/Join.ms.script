@@ -1,3 +1,8 @@
+USES
+ arrays.ms.dict
+ Testing.ms.dict
+;
+
 [ 4 5 ] [ 1 2 3 ] JOIN ==> .
 [ 4 5 ] [ 1 2 3 ] JOIN .
 [ 4 5 ] [ 1 2 3 ] JOIN Reverted ==> .
