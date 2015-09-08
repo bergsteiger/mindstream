@@ -15,6 +15,13 @@ operator IT
  aWhatToDo A ITERATE
 ; // IT
 
+/*{operator IT 
+  ARRAY IN A
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив A вызывая лямбду aWhatToDo' ;
+ aWhatToDo A ITERATE
+; // IT}*/
+
 WordAlias ==> IT
 
 operator for
