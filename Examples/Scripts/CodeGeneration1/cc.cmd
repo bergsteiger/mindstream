@@ -1,1 +1,1 @@
-call c.cmd IT.ms.script
+call c.cmd Point96.ms.script

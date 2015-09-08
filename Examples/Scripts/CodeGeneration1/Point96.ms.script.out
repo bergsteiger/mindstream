@@ -430,46 +430,38 @@ VOID TestWithDump PointTest
  ]
  >>>
  l_Points
- for
- l_Points
  Point:Print
- for
  l_Points
+ DO
+ Array:Iterate
  (
   Point:X
   Print
  )
- for
  l_Points
+ DO
+ Array:Iterate
  (
   Point:Y
   Print
  )
- for
  l_Points
+ DO
+ Array:Iterate
  (
   Object:class
   Print
  )
- for
  l_Points
+ DO
+ Array:Iterate
  (
   Object:ClassName
   Print
  )
- for
  l_Points
- (
-  for
-  (
-   Object:class
-   .Inherited.Words
-  )
-  (
-   getClassName
-   Print
-  )
- )
+ DO
+ Array:Iterate
  R1 :=
  Rectangle::
  P1
@@ -484,9 +476,10 @@ VOID TestWithDump PointTest
  ]
  >>>
  l_Rectangles
- for
- l_Rectangles
  Rectangle:Print
+ l_Rectangles
+ DO
+ Array:Iterate
  'Hello '
  (+)
  'world'
@@ -575,17 +568,6 @@ Point
 Point
 Point
 Point
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Object
 ( TopLeft: ( X: 0, Y: 0 ), BottomRight: ( X: 2, Y: 2 ) )
 ( TopLeft: ( X: 3, Y: 3 ), BottomRight: ( X: -1, Y: -1 ) )
 Hello world
