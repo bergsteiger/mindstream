@@ -24,6 +24,8 @@ VOID TestWithDump FilterTest
      '[ '
      l_SL :=
      StackLevel
+     for
+     aValue
      (
       INTEGER VAR l_Delta
       l_Delta :=
@@ -62,9 +64,6 @@ VOID TestWithDump FilterTest
       l_SL :=
       StackLevel
      )
-     aValue
-     DO
-     Array:Iterate
      ']'
     ]
     ' '

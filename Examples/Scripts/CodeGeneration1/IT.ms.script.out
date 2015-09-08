@@ -16,7 +16,7 @@ VOID TestWithDump ITTest
  Print
  SWAP
  Array:Iterate
- Print
+ for
  [
   1
   2
@@ -29,8 +29,7 @@ VOID TestWithDump ITTest
   9
   10
  ]
- DO
- Array:Iterate
+ Print
 ; // VOID TestWithDump ITTest
 
 1
