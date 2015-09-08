@@ -3,7 +3,7 @@ USES
 ;
 
 VOID IMMEDIATE operator MACRO
-// - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
+ %SUMMARY '- MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке' ;
  axiom:PushSymbol VOID
  axiom:PushSymbol IMMEDIATE
  axiom:PushSymbol axiom:operator
@@ -13,6 +13,7 @@ VOID IMMEDIATE operator MACRO
 WordAlias macro MACRO
 
 MACRO STACK_CHANGING_MACRO
+// - аналог MACRO, но который может "потрогать стек", т.е. считать что-то со стека или положить что-то на стек
  axiom:PushSymbol IMMEDIATE
  axiom:PushSymbol axiom:operator
  @SELF Ctx:SetWordProducerForCompiledClass
