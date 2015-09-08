@@ -2,6 +2,7 @@
 // Шаблоны генерации для "общепринятых языков"
 
 USES
+ core.ms.dict
  Documentation.ms.dict
  params.ms.dict
  NoStrangeSymbols.ms.dict
