@@ -10,6 +10,8 @@ VOID IMMEDIATE operator MACRO
  @SELF Ctx:SetWordProducerForCompiledClass
 ; // MACRO
 
+WordAlias macro MACRO
+
 MACRO STACK_CHANGING_MACRO
  axiom:PushSymbol IMMEDIATE
  axiom:PushSymbol axiom:operator
@@ -20,3 +22,5 @@ MACRO _MACRO
  axiom:PushSymbol VOID
  axiom:PushSymbol IMMEDIATE
 ; // _MACRO
+
+WordAlias _macro _MACRO
