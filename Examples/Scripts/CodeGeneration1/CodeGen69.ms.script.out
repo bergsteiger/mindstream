@@ -2936,8 +2936,14 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
  ;
 IMMEDIATE VOID OPERATOR : macro
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // macro
 IMMEDIATE VOID OPERATOR : MACRO
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // MACRO
 IMMEDIATE VOID OPERATOR :: MACRO : STACK_CHANGING_MACRO
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // STACK_CHANGING_MACRO
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
  Uses: 
   axiom:axiom
