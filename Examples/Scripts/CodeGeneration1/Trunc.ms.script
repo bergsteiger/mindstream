@@ -3,6 +3,8 @@ USES
  Testing.ms.dict
 ;
 
+Test&Dump TruncTest
+
 @ ( 6 != ) [ 1 2 3 4 5 6 7 8 9 10 ] TRUNC ==> .
 @ ( 6 != ) [ 1 2 3 4 5 6 7 8 9 10 ] TRUNC .
 
@@ -13,3 +15,7 @@ USES
 [ 1 2 3 4 5 6 7 8 9 10 ] >trunc> ( 6 != ) ==> .
 [ 1 2 3 4 5 6 7 8 9 10 ] >trunc> ( 6 != ) .
 '-------' .
+
+; // TruncTest
+
+TruncTest
