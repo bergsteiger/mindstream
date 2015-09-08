@@ -36,7 +36,7 @@ macro for
   ^ IN aWhatToDo
  %SUMMARY 'Итерирует массив aList вызывая лямбду aWhatToDo' ;
  aWhatToDo CompileRef
- aList |^@ CompileRef
+ aList CompileRef
  @ DO CompileValue
  @ ITERATE CompileValue
  //aList DO ==> ( aWhatToDo DO )
