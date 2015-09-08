@@ -1,3 +1,7 @@
+USES
+ Testing.ms.dict
+;
+
 BOOLEAN FUNCTION IsEven
  INTEGER IN aValue
  aValue 2 MOD 0 == >>> Result
