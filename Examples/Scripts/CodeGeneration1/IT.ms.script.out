@@ -1,4 +1,12 @@
 VOID TestWithDump ITTest
+ OPERATOR IT
+  ARRAY IN A
+  ^ IN aWhatToDo
+  aWhatToDo
+  A
+  Array:Iterate
+ ; // OPERATOR IT
+ 
  ITTest
  DumpElement
  [
