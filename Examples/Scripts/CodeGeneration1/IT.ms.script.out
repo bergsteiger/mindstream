@@ -1,5 +1,25 @@
 VOID TestWithDump ITTest
+ OPERATOR for
+  %SUMMARY %SUM
+   'Итерирует массив aList вызывая лямбду aWhatToDo'
+  ; // %SUMMARY %SUM
+  
+  ^ IN aList
+  ^ IN aWhatToDo
+  aList
+  DO
+  IT
+  (
+   aWhatToDo
+   DO
+  )
+ ; // OPERATOR for
+ 
  OPERATOR IT
+  %SUMMARY %SUM
+   'Итерирует массив A вызывая лямбду aWhatToDo'
+  ; // %SUMMARY %SUM
+  
   ARRAY IN A
   ^ IN aWhatToDo
   aWhatToDo
