@@ -430,9 +430,10 @@ VOID TestWithDump PointTest
  ]
  >>>
  l_Points
- for
  l_Points
  Point:Print
+ SWAP
+ Array:Iterate
  for
  l_Points
  (
