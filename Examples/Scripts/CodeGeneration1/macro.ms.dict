@@ -18,9 +18,10 @@ MACRO STACK_CHANGING_MACRO
  @SELF Ctx:SetWordProducerForCompiledClass
 ; // STACK_CHANGING_MACRO
 
-MACRO _MACRO
+/*{MACRO _MACRO
  axiom:PushSymbol VOID
  axiom:PushSymbol IMMEDIATE
 ; // _MACRO
 
-WordAlias _macro _MACRO
+WordAlias _macro _MACRO}*/
+ // - будем считать, что пока не пригодилось
