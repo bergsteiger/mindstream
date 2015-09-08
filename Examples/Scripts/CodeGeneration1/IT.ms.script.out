@@ -1,4 +1,16 @@
 VOID TestWithDump ITTest
+ OPERATOR IT
+  %SUMMARY %SUM
+   'Итерирует массив A вызывая лямбду aWhatToDo'
+  ; // %SUMMARY %SUM
+  
+  ARRAY IN A
+  ^ IN aWhatToDo
+  aWhatToDo
+  A
+  Array:Iterate
+ ; // OPERATOR IT
+ 
  OPERATOR for
   %SUMMARY %SUM
    'Итерирует массив aList вызывая лямбду aWhatToDo'
