@@ -27,7 +27,7 @@ Test&Dump ITTest
 
 /*{WordAlias ==> IT}*/
 
-macro for
+/*{macro for
   ^ IN aList
   ^ IN aWhatToDo
  %SUMMARY 'Итерирует массив aList вызывая лямбду aWhatToDo' ;
@@ -36,7 +36,7 @@ macro for
  @ DO CompileValue
  @ ITERATE CompileValue
  //aList DO ==> ( aWhatToDo DO )
-; // for
+; // for}*/
 
 /*{operator for
   ^ IN aList
