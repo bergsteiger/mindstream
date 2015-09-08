@@ -12,5 +12,24 @@ USES
  macro.ms.dict
 ;
 
+macro IT 
+  //ARRAY IN A // - слева должен быть массив
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив A вызывая лямбду aWhatToDo' ;
+ aWhatToDo CompileRef
+ @ SWAP CompileValue
+ @ ITERATE CompileValue
+ //aWhatToDo A ITERATE
+; // IT
+
+/*{operator IT 
+  ARRAY IN A
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив A вызывая лямбду aWhatToDo' ;
+ aWhatToDo A ITERATE
+; // IT}*/
+
+WordAlias ==> IT
+
 WordAlias >for> ==>
 WordAlias .for> ==>
