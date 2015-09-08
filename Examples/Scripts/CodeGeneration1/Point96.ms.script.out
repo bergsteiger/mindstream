@@ -465,7 +465,6 @@ VOID TestWithDump PointTest
  for
  l_Points
  (
-  for
   (
    Object:class
    .Inherited.Words
@@ -474,6 +473,8 @@ VOID TestWithDump PointTest
    getClassName
    Print
   )
+  SWAP
+  Array:Iterate
  )
  R1 :=
  Rectangle::
