@@ -462,17 +462,19 @@ VOID TestWithDump PointTest
  )
  SWAP
  Array:Iterate
+ l_Points
+ DO
  (
-  Print
   (
    Object:class
    .Inherited.Words
   )
   DO
+  Print
+  SWAP
   Array:Iterate
  )
- l_Points
- DO
+ SWAP
  Array:Iterate
  R1 :=
  Rectangle::
@@ -580,4 +582,24 @@ Point
 Point
 Point
 Point
-Ошибка выполнения: "Неверный тип значения: tfw_vtObj TkwCompiledProcedureWithStackChecking для типа Object". Главный файл: Point96.ms.script. Класс: TkwLeftParam. Слово: Self Producer: IN Parent: Object:class
+_:Object
+_:Object
+_:Object
+_:Object
+_:Object
+_:Object
+_:Object
+_:Object
+_:Object
+_:Object
+_:Object
+( TopLeft: ( X: 0, Y: 0 ), BottomRight: ( X: 2, Y: 2 ) )
+( TopLeft: ( X: 3, Y: 3 ), BottomRight: ( X: -1, Y: -1 ) )
+Hello world
+Hello world
+Hello world
+3
+30
+-10
+-10
+10
