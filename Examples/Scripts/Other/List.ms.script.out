@@ -53,20 +53,22 @@ VOID Test ListTest
  A :: 'B' :: 'C' :: 'D' |^@
  LIST
  %P
- IT
  (
   |N
   .
  )
+ SWAP
+ Array:Iterate
  A :: 'B' :: 'C' :: 'D' |^@
  LIST
  %P
  Array:Reverted
- IT
  (
   |N
   .
  )
+ SWAP
+ Array:Iterate
  ListTest
  DumpElement
 ; // VOID Test ListTest

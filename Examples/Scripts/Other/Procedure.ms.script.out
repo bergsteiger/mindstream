@@ -22,9 +22,11 @@ VOID Test ProcedureTest
  TRY
   C
  EXCEPT
-  for
   script:ExceptionStack
+  DO
   .
+  SWAP
+  Array:Iterate
  END
  ProcedureTest
  DumpElement

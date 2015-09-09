@@ -11,8 +11,9 @@ VOID Test InheritsTest
    (
     aCode
     pop:Word:CodeIterator
-    IT
     CompileRef
+    SWAP
+    Array:Iterate
    )
   else
    (
