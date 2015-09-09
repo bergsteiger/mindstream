@@ -462,20 +462,8 @@ VOID TestWithDump PointTest
  )
  SWAP
  Array:Iterate
- (
-  (
-   Object:class
-   .Inherited.Words
-  )
-  (
-   getClassName
-   Print
-  )
-  SWAP
-  Array:Iterate
- )
+ .
  l_Points
- DO
  Array:Iterate
  R1 :=
  Rectangle::
@@ -583,17 +571,17 @@ Point
 Point
 Point
 Point
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Object
-Object
+[ TkwCompiledProcedure 0 0 ]
+[ TkwCompiledProcedure 0 0 ]
+[ TkwCompiledProcedure 1 1 ]
+[ TkwCompiledProcedure 2 2 ]
+[ TkwCompiledProcedure 2 2 ]
+[ TkwCompiledProcedure 3 3 ]
+[ TkwCompiledProcedure -1 -1 ]
+[ TkwCompiledProcedure 1 1 ]
+[ TkwCompiledProcedure -2 -2 ]
+[ TkwCompiledProcedure -1 -1 ]
+[ TkwCompiledProcedure -2 2 ]
 ( TopLeft: ( X: 0, Y: 0 ), BottomRight: ( X: 2, Y: 2 ) )
 ( TopLeft: ( X: 3, Y: 3 ), BottomRight: ( X: -1, Y: -1 ) )
 Hello world
