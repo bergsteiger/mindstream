@@ -470,7 +470,10 @@ VOID TestWithDump PointTest
    .Inherited.Words
   )
   DO
-  Print
+  (
+   getClassName
+   Print
+  )
   SWAP
   Array:Iterate
  )
@@ -582,17 +585,17 @@ Point
 Point
 Point
 Point
-_:Object
-_:Object
-_:Object
-_:Object
-_:Object
-_:Object
-_:Object
-_:Object
-_:Object
-_:Object
-_:Object
+Object
+Object
+Object
+Object
+Object
+Object
+Object
+Object
+Object
+Object
+Object
 ( TopLeft: ( X: 0, Y: 0 ), BottomRight: ( X: 2, Y: 2 ) )
 ( TopLeft: ( X: 3, Y: 3 ), BottomRight: ( X: -1, Y: -1 ) )
 Hello world
