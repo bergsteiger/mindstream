@@ -177,20 +177,20 @@ VOID Test PointTest
  
  IMMEDIATE VOID OPERATOR classExpander
   ^ IN anImpl
-  for
   (
    (
     anImpl |@
    )
    %G
   )
+  DO
   (
    IN anItem
-   for
    (
     anItem
     %Fld
    )
+   DO
    (
     IN anItem
     'member'
@@ -199,7 +199,11 @@ VOID Test PointTest
     |N
     Ctx:Parser:PushSymbol
    )
+   SWAP
+   Array:Iterate
   )
+  SWAP
+  Array:Iterate
  ; // IMMEDIATE VOID OPERATOR classExpander
  
  IMMEDIATE VOID OPERATOR constructor
@@ -802,8 +806,8 @@ VOID Test PointTest
    'implementation'
    g_CurrentClassImpl
    '%FIELDS'
-   for
    g_CurrentClassMembers
+   DO
    (
     STRING IN aName
     [
@@ -813,6 +817,8 @@ VOID Test PointTest
     ]
     strings:Cat
    )
+   SWAP
+   Array:Iterate
    ';'
    'end.'
   ]
@@ -902,46 +908,60 @@ VOID Test PointTest
  ]
  >>>
  l_Points
- for
  l_Points
+ DO
  Point:Print
- for
+ SWAP
+ Array:Iterate
  l_Points
+ DO
  (
   Point:X
   .
  )
- for
+ SWAP
+ Array:Iterate
  l_Points
+ DO
  (
   Point:Y
   .
  )
- for
+ SWAP
+ Array:Iterate
  l_Points
+ DO
  (
   Object:class
   .
  )
- for
+ SWAP
+ Array:Iterate
  l_Points
+ DO
  (
   Object:ClassName
   .
  )
- for
+ SWAP
+ Array:Iterate
  l_Points
+ DO
  (
-  for
   (
    Object:class
    %G
   )
+  DO
   (
    getClassName
    .
   )
+  SWAP
+  Array:Iterate
  )
+ SWAP
+ Array:Iterate
  R1 :=
  Rectangle::
  P1
@@ -956,9 +976,11 @@ VOID Test PointTest
  ]
  >>>
  l_Rectangles
- for
  l_Rectangles
+ DO
  Rectangle:Print
+ SWAP
+ Array:Iterate
  'Hello '
  (+)
  'world'

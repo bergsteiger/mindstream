@@ -642,8 +642,8 @@ VOID Test PointTest
    'implementation'
    g_CurrentClassImpl
    '%FIELDS'
-   for
    g_CurrentClassMembers
+   DO
    (
     STRING IN aName
     [
@@ -653,6 +653,8 @@ VOID Test PointTest
     ]
     strings:Cat
    )
+   SWAP
+   Array:Iterate
    ';'
    'end.'
   ]
@@ -735,46 +737,60 @@ VOID Test PointTest
  ]
  >>>
  l_Points
- for
  l_Points
+ DO
  Point:Print
- for
+ SWAP
+ Array:Iterate
  l_Points
+ DO
  (
   Point:X
   .
  )
- for
+ SWAP
+ Array:Iterate
  l_Points
+ DO
  (
   Point:Y
   .
  )
- for
+ SWAP
+ Array:Iterate
  l_Points
+ DO
  (
   Object:class
   .
  )
- for
+ SWAP
+ Array:Iterate
  l_Points
+ DO
  (
   Object:ClassName
   .
  )
- for
+ SWAP
+ Array:Iterate
  l_Points
+ DO
  (
-  for
   (
    Object:class
    %G
   )
+  DO
   (
    getClassName
    .
   )
+  SWAP
+  Array:Iterate
  )
+ SWAP
+ Array:Iterate
  'Hello '
  (+)
  'world'
