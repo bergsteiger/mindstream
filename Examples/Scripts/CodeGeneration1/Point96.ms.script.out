@@ -462,8 +462,6 @@ VOID TestWithDump PointTest
  )
  SWAP
  Array:Iterate
- for
- l_Points
  (
   (
    Object:class
@@ -476,6 +474,9 @@ VOID TestWithDump PointTest
   SWAP
   Array:Iterate
  )
+ l_Points
+ DO
+ Array:Iterate
  R1 :=
  Rectangle::
  P1
@@ -490,9 +491,10 @@ VOID TestWithDump PointTest
  ]
  >>>
  l_Rectangles
- for
- l_Rectangles
  Rectangle:Print
+ l_Rectangles
+ DO
+ Array:Iterate
  'Hello '
  (+)
  'world'
