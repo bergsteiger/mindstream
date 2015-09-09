@@ -463,10 +463,7 @@ VOID TestWithDump PointTest
  SWAP
  Array:Iterate
  (
-  (
-   getClassName
-   Print
-  )
+  Print
   (
    Object:class
    .Inherited.Words
@@ -583,4 +580,4 @@ Point
 Point
 Point
 Point
-Ошибка выполнения: "Ошибка при получении параметра aWord: TtfwWord : Тип значения tfw_vtList несовместим с tfw_vtObj". Главный файл: Point96.ms.script. Класс: TkwDoWord. Слово: DO
+Ошибка выполнения: "Неверный тип значения: tfw_vtObj TkwCompiledProcedureWithStackChecking для типа Object". Главный файл: Point96.ms.script. Класс: TkwLeftParam. Слово: Self Producer: IN Parent: Object:class
