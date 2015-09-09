@@ -2851,7 +2851,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -2862,6 +2861,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2869,6 +2869,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem

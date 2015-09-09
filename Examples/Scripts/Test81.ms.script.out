@@ -3,7 +3,6 @@
 +
 .
 
-for
 [
  1
  2
@@ -15,7 +14,10 @@ for
  9
  10
 ]
+DO
 .
+SWAP
+Array:Iterate
 
 FORWARD Process
 : Process
@@ -673,63 +675,77 @@ VOID Test ForToTest
   Result
  ; // ARRAY OPERATOR to
  
- for
  (
   1 to
   10
  )
+ DO
  .
+ SWAP
+ Array:Iterate
  ''
  .
- for
  (
   1 to
   20
  )
+ DO
  .
+ SWAP
+ Array:Iterate
  ''
  .
- for
  (
   0 to
   20
  )
+ DO
  .
+ SWAP
+ Array:Iterate
  ''
  .
- for
  (
   -1 to
   20
  )
+ DO
  .
+ SWAP
+ Array:Iterate
  ''
  .
- for
  (
   -1 to
   21
  )
+ DO
  .
+ SWAP
+ Array:Iterate
  ''
  .
  0
- for
  (
   1 to
   10
  )
+ DO
  +
+ SWAP
+ Array:Iterate
  .
  ''
  .
- for
  (
   1 to
   10
   Array:Reverted
  )
+ DO
  .
+ SWAP
+ Array:Iterate
 ; // VOID Test ForToTest
 
 ForToTest
@@ -883,7 +899,6 @@ FORWARD Process
    .
   ; // : DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -894,6 +909,7 @@ FORWARD Process
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    @
@@ -902,6 +918,8 @@ FORWARD Process
    anItem
    ProcessFilesWithMask
   )
+  SWAP
+  Array:Iterate
  ; // : DoDir
  
  : ProcessItem
@@ -945,7 +963,6 @@ VOID PROCEDURE IterateFilesWithMask
    .
   ; // : DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -956,6 +973,7 @@ VOID PROCEDURE IterateFilesWithMask
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -963,6 +981,8 @@ VOID PROCEDURE IterateFilesWithMask
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // : DoDir
  
  : ProcessItem
@@ -994,7 +1014,6 @@ FORWARD Process
    .
   ; // : DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1005,6 +1024,7 @@ FORWARD Process
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1012,6 +1032,8 @@ FORWARD Process
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // : DoDir
  
  : ProcessItem
@@ -1043,7 +1065,6 @@ FORWARD Process
    .
   ; // : DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1054,6 +1075,7 @@ FORWARD Process
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1061,6 +1083,8 @@ FORWARD Process
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // : DoDir
  
  : ProcessItem
@@ -1101,7 +1125,6 @@ VOID PROCEDURE IterateDirs
    .
   ; // : DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1112,6 +1135,7 @@ VOID PROCEDURE IterateDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1119,6 +1143,8 @@ VOID PROCEDURE IterateDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // : DoDir
  
  : ProcessItem
@@ -1149,7 +1175,6 @@ FORWARD Process
    .
   ; // : DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1160,6 +1185,7 @@ FORWARD Process
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1167,6 +1193,8 @@ FORWARD Process
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // : DoDir
  
  : ProcessItem
@@ -1197,7 +1225,6 @@ FORWARD Process
    .
   ; // : DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1208,6 +1235,7 @@ FORWARD Process
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1215,6 +1243,8 @@ FORWARD Process
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // : DoDir
  
  : ProcessItem
@@ -1245,7 +1275,6 @@ FORWARD Process
    .
   ; // : DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1256,6 +1285,7 @@ FORWARD Process
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1263,6 +1293,8 @@ FORWARD Process
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // : DoDir
  
  : ProcessItem
@@ -1281,12 +1313,14 @@ FORWARD Process
 '..\..\'
 Process
 
-for
 (
  1 to
  20
 )
+DO
 .
+SWAP
+Array:Iterate
 
 : Process
  FORWARD ProcessItem
@@ -1299,7 +1333,6 @@ for
    .
   ; // : DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1310,6 +1343,7 @@ for
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1317,6 +1351,8 @@ for
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // : DoDir
  
  : ProcessItem
@@ -1353,7 +1389,6 @@ VOID PROCEDURE PrintThis
    anFilePath
   ; // : DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1364,6 +1399,7 @@ VOID PROCEDURE PrintThis
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1371,6 +1407,8 @@ VOID PROCEDURE PrintThis
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // : DoDir
  
  : ProcessItem
@@ -1400,7 +1438,6 @@ Process
    anFilePath
   ; // : DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1411,6 +1448,7 @@ Process
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1418,6 +1456,8 @@ Process
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // : DoDir
  
  : ProcessItem
@@ -1447,7 +1487,6 @@ VOID PROCEDURE Process
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1458,6 +1497,7 @@ VOID PROCEDURE Process
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1465,6 +1505,8 @@ VOID PROCEDURE Process
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -1494,7 +1536,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1505,6 +1546,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1512,6 +1554,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -1541,7 +1585,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1552,6 +1595,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1562,6 +1606,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -1591,7 +1637,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1602,6 +1647,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1612,6 +1658,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -1641,7 +1689,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1652,6 +1699,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1659,6 +1707,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -1688,7 +1738,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1699,6 +1748,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1706,6 +1756,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -1736,7 +1788,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1747,6 +1798,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1754,6 +1806,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -1778,7 +1832,6 @@ IMMEDIATE VOID OPERATOR ^
 ProcessDirs
 '..\..\'
 
-for
 (
  @
  (
@@ -1791,7 +1844,10 @@ for
  )
  Array:Filter
 )
+DO
 .
+SWAP
+Array:Iterate
 
 VOID PROCEDURE ProcessDirs
  FORWARD ProcessItem
@@ -1804,7 +1860,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1815,6 +1870,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1822,6 +1878,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -1852,7 +1910,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1863,6 +1920,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1870,6 +1928,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -1900,7 +1960,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1911,6 +1970,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1918,6 +1978,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -1955,7 +2017,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -1966,6 +2027,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -1973,6 +2035,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2003,7 +2067,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -2014,6 +2077,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2021,6 +2085,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2051,7 +2117,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -2062,6 +2127,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2069,6 +2135,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  : ProcessItem
@@ -2113,7 +2181,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -2124,6 +2191,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2131,6 +2199,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2150,22 +2220,26 @@ VOID PROCEDURE ProcessDirs
 ProcessDirs
 '..\..\'
 
-for
 (
  0 to
  sysutils:ParamCount
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  0 to
  sysutils:ParamCount
 )
+DO
 (
  sysutils:ParamStr
  .
 )
+SWAP
+Array:Iterate
 
 VOID PROCEDURE ProcessDirs
  FORWARD ProcessItem
@@ -2178,7 +2252,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -2189,6 +2262,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2196,6 +2270,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2218,7 +2294,6 @@ ProcessDirs
 '..\..\'
 
 0
-for
 (
  @
  (
@@ -2231,7 +2306,10 @@ for
  )
  Array:Filter
 )
+DO
 +
+SWAP
+Array:Iterate
 .
 
 VOID PROCEDURE ProcessDirs
@@ -2245,7 +2323,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -2256,6 +2333,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2263,6 +2341,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2295,7 +2375,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -2306,6 +2385,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2313,6 +2393,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2345,7 +2427,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -2356,6 +2437,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2363,6 +2445,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2399,7 +2483,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -2410,6 +2493,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2417,6 +2501,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2451,7 +2537,6 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   [
    '*.ms.script'
    '*.ms.dict'
@@ -2462,6 +2547,7 @@ VOID PROCEDURE ProcessDirs
    '*.xml'
    '*.dpr'
   ]
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2469,6 +2555,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2504,8 +2592,8 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   aMaskArray
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2513,6 +2601,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2558,10 +2648,10 @@ VOID PROCEDURE ProcessDirs
    anFilePath
   ; // VOID PROCEDURE DoFile
   
-  for
   (
    aMaskArray |^
   )
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2569,6 +2659,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2616,10 +2708,10 @@ VOID PROCEDURE ProcessDirs
    DO
   ; // VOID PROCEDURE DoFile
   
-  for
   (
    aMaskArray |^
   )
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2627,6 +2719,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2677,10 +2771,10 @@ VOID PROCEDURE ProcessDirs
    DO
   ; // VOID PROCEDURE DoFile
   
-  for
   (
    aMaskArray |^
   )
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2688,6 +2782,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2737,10 +2833,10 @@ VOID PROCEDURE ProcessDirs
    DO
   ; // VOID PROCEDURE DoFile
   
-  for
   (
    aMaskArray |^
   )
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2748,6 +2844,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2783,7 +2881,6 @@ ProcessDirs
 ]
 .
 
-for
 (
  @
  (
@@ -2800,7 +2897,10 @@ for
  )
  Array:Filter
 )
+DO
 .
+SWAP
+Array:Iterate
 
 VOID PROCEDURE ProcessDirs
  ^ IN aDir
@@ -2815,10 +2915,10 @@ VOID PROCEDURE ProcessDirs
    DO
   ; // VOID PROCEDURE DoFile
   
-  for
   (
    aMaskArray |^
   )
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2826,6 +2926,8 @@ VOID PROCEDURE ProcessDirs
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE DoDir
  
  VOID PROCEDURE ProcessItem
@@ -2874,10 +2976,10 @@ VOID PROCEDURE ProcessSubDirsWithMasks
    DO
   ; // PRIVATE VOID PROCEDURE DoFile
   
-  for
   (
    aMaskArray |^
   )
+  DO
   (
    STRING IN aMask
    IterateFilesWithMask
@@ -2885,6 +2987,8 @@ VOID PROCEDURE ProcessSubDirsWithMasks
    aMask
    DoFile
   )
+  SWAP
+  Array:Iterate
  ; // PRIVATE VOID PROCEDURE DoDir
  
  PRIVATE VOID PROCEDURE ProcessItem
@@ -2984,8 +3088,8 @@ ProcessAnySubDirsWithMasks
 
 VOID PROCEDURE ProcessAnySubDirsWithMasks
  ARRAY IN aDirMasks
- for
  aDirMasks
+ DO
  (
   STRING IN aDirMask
   ProcessSubDirsWithMasks
@@ -3003,6 +3107,8 @@ VOID PROCEDURE ProcessAnySubDirsWithMasks
   ]
   .
  )
+ SWAP
+ Array:Iterate
 ; // VOID PROCEDURE ProcessAnySubDirsWithMasks
 
 [
@@ -3013,10 +3119,10 @@ ProcessAnySubDirsWithMasks
 
 VOID PROCEDURE ProcessAnySubDirsWithMasks
  ^ IN aDirMasks
- for
  (
   aDirMasks |^
  )
+ DO
  (
   STRING IN aDirMask
   ProcessSubDirsWithMasks
@@ -3034,6 +3140,8 @@ VOID PROCEDURE ProcessAnySubDirsWithMasks
   ]
   .
  )
+ SWAP
+ Array:Iterate
 ; // VOID PROCEDURE ProcessAnySubDirsWithMasks
 
 ProcessAnySubDirsWithMasks
@@ -3045,10 +3153,10 @@ ProcessAnySubDirsWithMasks
 VOID PROCEDURE ProcessAnySubDirsWithMasks
  ^ IN aDirMasks
  ARRAY IN aFileMasks
- for
  (
   aDirMasks |^
  )
+ DO
  (
   STRING IN aDirMask
   ProcessSubDirsWithMasks
@@ -3056,6 +3164,8 @@ VOID PROCEDURE ProcessAnySubDirsWithMasks
   aFileMasks
   .
  )
+ SWAP
+ Array:Iterate
 ; // VOID PROCEDURE ProcessAnySubDirsWithMasks
 
 [
@@ -3078,10 +3188,10 @@ ProcessAnySubDirsWithMasks
 VOID PROCEDURE ProcessAnySubDirsWithMasks
  ^ IN aDirMasks
  ^ IN aFileMasks
- for
  (
   aDirMasks |^
  )
+ DO
  (
   STRING IN aDirMask
   ProcessSubDirsWithMasks
@@ -3091,6 +3201,8 @@ VOID PROCEDURE ProcessAnySubDirsWithMasks
   )
   .
  )
+ SWAP
+ Array:Iterate
 ; // VOID PROCEDURE ProcessAnySubDirsWithMasks
 
 ProcessAnySubDirsWithMasks
@@ -3114,10 +3226,10 @@ VOID PROCEDURE ProcessAnySubDirsWithMasks
  ^ IN aDirMasks
  ^ IN aFileMasks
  ^ IN aLambda
- for
  (
   aDirMasks |^
  )
+ DO
  (
   STRING IN aDirMask
   ProcessSubDirsWithMasks
@@ -3132,6 +3244,8 @@ VOID PROCEDURE ProcessAnySubDirsWithMasks
    DO
   )
  )
+ SWAP
+ Array:Iterate
 ; // VOID PROCEDURE ProcessAnySubDirsWithMasks
 
 ProcessAnySubDirsWithMasks
@@ -3152,7 +3266,6 @@ ProcessAnySubDirsWithMasks
 ]
 .
 
-for
 (
  @
  (
@@ -3169,16 +3282,19 @@ for
  )
  Array:Filter
 )
+DO
 .
+SWAP
+Array:Iterate
 
 VOID PROCEDURE ProcessAnySubDirsWithMasks
  ^ IN aDirMasks
  ^ IN aFileMasks
  ^ IN aLambda
- for
  (
   aDirMasks |^
  )
+ DO
  (
   STRING IN aDirMask
   ProcessSubDirsWithMasks
@@ -3191,6 +3307,8 @@ VOID PROCEDURE ProcessAnySubDirsWithMasks
    DO
   )
  )
+ SWAP
+ Array:Iterate
 ; // VOID PROCEDURE ProcessAnySubDirsWithMasks
 
 ProcessAnySubDirsWithMasks
@@ -3259,7 +3377,6 @@ BOOLEAN FUNCTION IsEven
  Result
 ; // BOOLEAN FUNCTION IsEven
 
-for
 (
  @
  (
@@ -3273,7 +3390,10 @@ for
  )
  Array:Filter
 )
+DO
 .
+SWAP
+Array:Iterate
 
 BOOLEAN FUNCTION IsEven
  INTEGER IN aValue
@@ -3295,7 +3415,6 @@ BOOLEAN FUNCTION IsOdd
  Result
 ; // BOOLEAN FUNCTION IsOdd
 
-for
 (
  @
  (
@@ -3309,9 +3428,11 @@ for
  )
  Array:Filter
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  @
  (
@@ -3325,14 +3446,16 @@ for
  )
  Array:Filter
 )
+DO
 .
+SWAP
+Array:Iterate
 
 1
 2
 +
 Msg
 
-for
 (
  @
  IsOdd
@@ -3342,10 +3465,12 @@ for
  )
  Array:Filter
 )
+DO
 .
+SWAP
+Array:Iterate
 
 ARRAY Array:Filter
-for
 (
  @
  IsOdd
@@ -3355,7 +3480,10 @@ for
  )
  Array:Filter
 )
+DO
 .
+SWAP
+Array:Iterate
 
 ARRAY FUNCTION >filter>
  ^ IN aFunctor
@@ -3368,7 +3496,6 @@ ARRAY FUNCTION >filter>
 ; // ARRAY FUNCTION >filter>
 
 ARRAY Array:Filter
-for
 (
  (
   1 to
@@ -3377,10 +3504,12 @@ for
  >filter>
  IsOdd
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  (
   1 to
@@ -3389,7 +3518,10 @@ for
  >filter>
  IsEven
 )
+DO
 .
+SWAP
+Array:Iterate
 
 ARRAY FUNCTION >filter>
  ^ IN aFunctor
@@ -3403,71 +3535,86 @@ ARRAY FUNCTION >filter>
 ; // ARRAY FUNCTION >filter>
 
 ARRAY Array:Filter
-for
 (
  ( to >filter>
  IsOdd
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter>
  IsEven
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  ( to >filter>
  IsOdd
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter>
  IsEven
 )
+DO
 .
+SWAP
+Array:Iterate
 
 REDIFINITION : .
  >>std::out
 ; // REDIFINITION : .
 
-for
 (
  ( to >filter>
  IsOdd
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter>
  IsEven
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  ( to >filter>
  IsOdd
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter>
  IsEven
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  @
  (
@@ -3480,10 +3627,12 @@ for
  IsOdd
  Array:Map
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  @
  (
@@ -3496,9 +3645,11 @@ for
  IsEven
  Array:Map
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  @
  (
@@ -3509,10 +3660,12 @@ for
  IsOdd
  Array:Map
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  @
  (
@@ -3523,7 +3676,10 @@ for
  IsEven
  Array:Map
 )
+DO
 .
+SWAP
+Array:Iterate
 
 @
 (
@@ -3556,7 +3712,6 @@ Array:Map
 .
 
 ARRAY Array:Map
-for
 (
  @
  (
@@ -3567,10 +3722,12 @@ for
  IsOdd
  Array:Map
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  @
  (
@@ -3581,7 +3738,10 @@ for
  IsEven
  Array:Map
 )
+DO
 .
+SWAP
+Array:Iterate
 
 ARRAY FUNCTION >map>
  ^ IN aFunctor
@@ -3595,7 +3755,6 @@ ARRAY FUNCTION >map>
 ; // ARRAY FUNCTION >map>
 
 ARRAY Array:Map
-for
 (
  ( to >filter> IsOdd >map>
  (
@@ -3603,10 +3762,12 @@ for
   +
  )
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  (
@@ -3614,9 +3775,11 @@ for
   +
  )
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  ( to >filter> IsOdd >map>
  (
@@ -3624,10 +3787,12 @@ for
   +
  )
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  (
@@ -3635,7 +3800,10 @@ for
   +
  )
 )
+DO
 .
+SWAP
+Array:Iterate
 
 ( to >filter> IsOdd >map>
 (
@@ -3652,7 +3820,6 @@ for
 )
 .
 
-for
 (
  ( to >filter> IsOdd >map>
  (
@@ -3661,10 +3828,12 @@ for
  )
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  (
@@ -3673,11 +3842,13 @@ for
  )
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 
 ARRAY Array:Reverted
 ARRAY Array:Reverted
-for
 (
  ( to >filter> IsOdd >map>
  (
@@ -3686,10 +3857,12 @@ for
  )
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  (
@@ -3698,9 +3871,11 @@ for
  )
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  ( to >filter> IsOdd >map>
  (
@@ -3709,10 +3884,12 @@ for
  )
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  (
@@ -3721,34 +3898,12 @@ for
  )
  Array:Reverted
 )
+DO
 .
-
-USES
-for
-(
- ( to >filter> IsOdd >map>
- (
-  1
-  +
- )
- Array:Reverted
-)
-.
-'-------------------'
-.
-for
-(
- ( to >filter> IsEven >map>
- (
-  1
-  +
- )
- Array:Reverted
-)
-.
+SWAP
+Array:Iterate
 
 USES
-for
 (
  ( to >filter> IsOdd >map>
  (
@@ -3757,10 +3912,12 @@ for
  )
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  (
@@ -3769,9 +3926,12 @@ for
  )
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
+USES
 (
  ( to >filter> IsOdd >map>
  (
@@ -3780,10 +3940,12 @@ for
  )
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  (
@@ -3792,109 +3954,163 @@ for
  )
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
+
+(
+ ( to >filter> IsOdd >map>
+ (
+  1
+  +
+ )
+ Array:Reverted
+)
+DO
+.
+SWAP
+Array:Iterate
+'-------------------'
+.
+(
+ ( to >filter> IsEven >map>
+ (
+  1
+  +
+ )
+ Array:Reverted
+)
+DO
+.
+SWAP
+Array:Iterate
 
 help
 
-for
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
-for
+SWAP
+Array:Iterate
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
-for
+SWAP
+Array:Iterate
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 
 for
 (
@@ -4479,8 +4695,9 @@ for
  5
 ]
 Array:Filter
-IT
 .
+SWAP
+Array:Iterate
 
 for
 числа
@@ -4581,11 +4798,12 @@ STRING FUNCTION any:Cat
  ARRAY IN anArray
  ''
  anArray
- IT
  (
   ToPrintable
   Cat
  )
+ SWAP
+ Array:Iterate
  >>>
  Result
 ; // STRING FUNCTION any:Cat
@@ -4602,8 +4820,9 @@ STRING FUNCTION any:Cat
  ARRAY IN anArray
  ''
  anArray
- IT
  string:CatWihAny
+ SWAP
+ Array:Iterate
  >>>
  Result
 ; // STRING FUNCTION any:Cat
@@ -4630,9 +4849,11 @@ any:Cat
 STRING FUNCTION any:Cat
  ARRAY IN anArray
  ''
- for
  anArray
+ DO
  string:CatWihAny
+ SWAP
+ Array:Iterate
  >>>
  Result
 ; // STRING FUNCTION any:Cat

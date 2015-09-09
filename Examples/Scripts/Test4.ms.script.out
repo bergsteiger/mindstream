@@ -121,20 +121,6 @@ Dictionary: axiom:tests
 tests:CheckEtalon
 tests:CheckOutputWithInput
 Dictionary: axiom:text
-Dictionary: axiom:Tl3TokenType
-Tl3TokenType Tl3TokenType::l3_ttBOF
-Tl3TokenType Tl3TokenType::l3_ttComment
-Tl3TokenType Tl3TokenType::l3_ttDoubleQuotedString
-Tl3TokenType Tl3TokenType::l3_ttEOF
-Tl3TokenType Tl3TokenType::l3_ttEOL
-Tl3TokenType Tl3TokenType::l3_ttFloat
-Tl3TokenType Tl3TokenType::l3_ttInteger
-Tl3TokenType Tl3TokenType::l3_ttKeyWord
-Tl3TokenType Tl3TokenType::l3_ttSingleChar
-Tl3TokenType Tl3TokenType::l3_ttString
-Tl3TokenType Tl3TokenType::l3_ttSymbol
-Tl3TokenType Tl3TokenType:NameToValue
-STRING Tl3TokenType:ValueToName
 Dictionary: axiom:WordInfo
 BOOLEAN pop:WordInfo:AcceptsValue
 TtfwAccessType pop:WordInfo:AccessType
@@ -3061,6 +3047,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\arrays.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\macro.ms.dict
  ;
  Exports: 
   axiom:axiom
@@ -3093,6 +3080,27 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\arrays.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\reverted.ms.dict
  ;
+IMMEDIATE VOID OPERATOR :: MACRO : .for>
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aWhatToDo
+; // .for>
+IMMEDIATE VOID OPERATOR :: MACRO : ==>
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aWhatToDo
+; // ==>
+IMMEDIATE VOID OPERATOR :: MACRO : >for>
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aWhatToDo
+; // >for>
+IMMEDIATE VOID OPERATOR :: MACRO : for
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aList
+ ^ OPERATOR :: IN : aWhatToDo
+; // for
+IMMEDIATE VOID OPERATOR :: MACRO : IT
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aWhatToDo
+; // IT
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\to.ms.dict
  Uses: 
   axiom:axiom
@@ -3225,6 +3233,102 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\reverted.ms.dict
 ARRAY >reverted>
 ARRAY reverted
 ARRAY REVERTED
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\macro.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\axiom_push.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR : macro
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // macro
+IMMEDIATE VOID OPERATOR : MACRO
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // MACRO
+IMMEDIATE VOID OPERATOR :: MACRO : STACK_CHANGING_MACRO
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+; // STACK_CHANGING_MACRO
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\axiom_push.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  axiom:generators
+  axiom:Tl3TokenType
+ ;
+VOID OPERATOR :: PROCEDURE : axiom:Push
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ TOKEN OPERATOR :: IN : aToken
+ TOKEN_TYPE OPERATOR :: IN : aTokenType
+; // axiom:Push
+VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ LINK ^ OPERATOR :: IN : aSymbol
+; // axiom:PushSymbol
+VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushLeftDottedSymbol
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ STRING OPERATOR :: IN : aValue
+; // Ctx:Parser:PushLeftDottedSymbol
+IMMEDIATE VOID OPERATOR :: TYPE : TOKEN
+IMMEDIATE VOID OPERATOR :: TYPE : TOKEN_TYPE
+Dictionary: axiom:Tl3TokenType
+Tl3TokenType Tl3TokenType::l3_ttBOF
+Tl3TokenType Tl3TokenType::l3_ttComment
+Tl3TokenType Tl3TokenType::l3_ttDoubleQuotedString
+Tl3TokenType Tl3TokenType::l3_ttEOF
+Tl3TokenType Tl3TokenType::l3_ttEOL
+Tl3TokenType Tl3TokenType::l3_ttFloat
+Tl3TokenType Tl3TokenType::l3_ttInteger
+Tl3TokenType Tl3TokenType::l3_ttKeyWord
+Tl3TokenType Tl3TokenType::l3_ttSingleChar
+Tl3TokenType Tl3TokenType::l3_ttString
+Tl3TokenType Tl3TokenType::l3_ttSymbol
+Tl3TokenType Tl3TokenType:NameToValue
+STRING Tl3TokenType:ValueToName
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\string.ms.dict
  Uses: 
   axiom:axiom
