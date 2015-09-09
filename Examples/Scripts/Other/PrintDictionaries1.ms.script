@@ -1,0 +1,201 @@
+WordAlias Print DROP
+
+BOOLEAN FUNCTION array:Has 
+  IN aValue 
+  ARRAY IN anArray
+  
+ false >>> Result
+
+ anArray ==> ( IN anItem
+  if ( anItem = aValue )
+   ( 
+     true >>> Result
+     BREAK-ITERATOR
+   )
+ )
+; // array:Has
+
+STRING FUNCTION ?(+)
+ STRING IN aPrefix
+ ^ IN aSuffix
+ %SUMMARY 'Если aPrefix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку' ;
+ '' >>> Result
+ if ( aPrefix <> '' ) then
+  ( aPrefix aSuffix DO Cat >>> Result )
+; // ?(+)
+
+STRING FUNCTION IndentStr
+ INTEGER IN anIndent
+ anIndent ' ' char:Dupe >>> Result
+; // IndentStr
+
+WordAlias .Stereotype %ST
+
+ARRAY FUNCTION .Stereotype.Words
+  /*TtfwWord*/ IN Self
+ ( Self LIST .Stereotype ) >>> Result
+; // .Stereotype.Words
+
+USES
+ axiom:Dictionary
+;
+
+FORWARD pop:KeyWord:Print
+
+PROCEDURE pop:Dictionary:Print
+ INTEGER IN anIndent
+ /*TtfwDictionary*/ IN aDictionary
+ 
+ if ( aDictionary IsNil ) then
+  EXIT
+
+ aDictionary pop:Dictionary:KeyWordsIterator ==> ( 
+   /*TtfwKeyWord*/ IN aKeyWord 
+   anIndent 1 + aKeyWord pop:KeyWord:Print
+ )
+; // pop:Dictionary:Print
+
+PROCEDURE pop:Word:Print
+  INTEGER IN anIndent
+  STRING IN aName
+  /*TtfwWord*/ IN aWord 
+  
+ if ( aWord pop:Word:Name = '%SUM' ) then
+ begin
+  INTEGER VAR l_SL
+  StackLevel >>> l_SL
+  aWord DO
+  if ( StackLevel > l_SL ) then
+  begin
+   [ anIndent IndentStr 'Documentation:' ] strings:Cat Print
+   while ( StackLevel > l_SL )
+   begin
+    IN aValue
+    [ anIndent 1 + IndentStr aValue ToPrintable ] strings:Cat Print
+   end
+  end
+  EXIT
+ end
+  
+ [ anIndent IndentStr
+  [ 
+   aWord pop:Word:Directives 
+   aWord .Stereotype.Words .reverted> .map> pop:Word:Name ' :: ' strings:CatSep ?(+) ' : '
+   aName 
+  ] ' ' strings:CatSep 
+ ] strings:Cat Print
+  
+ TtfwWord VAR l_Redefines 
+ aWord pop:Word:Redefines >>> l_Redefines
+ if ( l_Redefines IsNil ! ) then
+ begin
+  [ anIndent IndentStr '==> Redefines' ] strings:Cat Print
+  TRY
+   anIndent 1 + aWord pop:Word:Name l_Redefines @SELF DO
+  FINALLY
+   [ anIndent IndentStr '<== Redefines' ] strings:Cat Print
+  END
+ end
+  
+ TtfwDictionary VAR l_InnerDictionary
+ aWord pop:Word:InnerDictionary >>> l_InnerDictionary
+ 
+ if ( l_InnerDictionary IsNil ) then
+  EXIT
+  
+ anIndent l_InnerDictionary pop:Dictionary:Print
+ 
+ [ anIndent IndentStr '; // ' aName ] strings:Cat Print
+; // pop:Word:Print
+
+PROCEDURE pop:KeyWord:Print
+  INTEGER IN anIndent
+  /*TtfwKeyWord*/ IN aKeyWord 
+ 
+ TtfwWord VAR l_Word
+ aKeyWord pop:KeyWord:Word >>> l_Word
+ 
+ if ( l_Word IsNil ) then
+  EXIT
+ 
+ if ( l_Word pop:Word:IsForHelp ! ) then
+  EXIT
+  
+ if ( l_Word Ctx:DisabledForHelp array:Has ) then
+  EXIT
+  
+ anIndent aKeyWord pop:KeyWord:Name l_Word pop:Word:Print  
+; // pop:KeyWord:Print
+
+PROCEDURE pop:DictionaryEx:Print
+  INTEGER IN anIndent
+  /*TtfwDictionaryEx*/ IN aDictionary
+  
+ if ( aDictionary IsNil ) then
+  EXIT
+   
+ [ 'Dictionary: ' aDictionary pop:DictionaryEx:FileName ] strings:Cat Print
+ 
+ BOOLEAN VAR l_NeedHeader
+ 
+ true >>> l_NeedHeader
+ aDictionary pop:DictionaryEx:UsedDictionaries ==> ( 
+   /*TtfwDictionaryEx*/ IN aDictionary
+  if ( l_NeedHeader ) then
+  (
+   ' Uses: ' Print
+   false >>> l_NeedHeader
+  )
+  [ '  ' aDictionary pop:DictionaryEx:FileName ] strings:Cat Print 
+ )
+ if ( l_NeedHeader ! ) then
+  ( ' ;' Print )
+ 
+ true >>> l_NeedHeader
+ aDictionary pop:DictionaryEx:ExportedDictionaries ==> ( 
+   /*TtfwDictionaryEx*/ IN aDictionary
+  if ( l_NeedHeader ) then
+  (
+   ' Exports: ' Print
+   false >>> l_NeedHeader
+  )
+  [ '  ' aDictionary pop:DictionaryEx:FileName ] strings:Cat Print 
+ )
+ if ( l_NeedHeader ! ) then
+  ( ' ;' Print )
+ 
+ aDictionary pop:Dictionary:KeyWordsIterator ==> ( 
+   /*TtfwKeyWord*/ IN aKeyWord 
+  if ( aKeyWord pop:KeyWord:Dictionary = aDictionary ) then 
+   ( anIndent aKeyWord pop:KeyWord:Print )
+ )
+ 
+; // pop:DictionaryEx:Print
+
+USES
+ axiom:MainDictionary
+;
+
+PROCEDURE Ctx:PrintDictionaries
+
+ ARRAY VAR l_InitedDictionaries
+ Ctx:InitedDictionaries >>> l_InitedDictionaries
+ 
+ Ctx:StandardDictionaries 
+  .filter> ( l_InitedDictionaries array:Has ! ) 
+   ==> ( /*TtfwDictionaryEx*/ IN anItem 0 anItem pop:DictionaryEx:Print )
+ l_InitedDictionaries ==> ( /*TtfwDictionaryEx*/ IN anItem 0 anItem pop:DictionaryEx:Print )
+ 
+ TtfwWord VAR l_CompiledCode
+ 
+ Ctx:MainDictionary pop:MainDictionary:CompiledCode >>> l_CompiledCode
+ if ( l_CompiledCode IsNil ! ) then
+  ( 0 'Main' l_CompiledCode pop:Word:Print )
+ 
+; // Ctx:PrintDictionaries
+
+WordAlias help Ctx:PrintDictionaries
+
+//Ctx:PrintDictionaries
+
+help
