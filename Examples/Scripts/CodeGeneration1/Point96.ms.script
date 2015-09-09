@@ -146,7 +146,7 @@ R2 := Rectangle:: P6 P7
 array var l_Rectangles
 [ R1 R2 ] =: l_Rectangles
 
-for l_Rectangles Rectangle:Print
+l_Rectangles ==> Rectangle:Print
 
 'Hello ' (+) 'world' Print
 

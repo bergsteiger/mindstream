@@ -491,9 +491,9 @@ VOID TestWithDump PointTest
  ]
  >>>
  l_Rectangles
- Rectangle:Print
  l_Rectangles
- DO
+ Rectangle:Print
+ SWAP
  Array:Iterate
  'Hello '
  (+)
