@@ -3135,6 +3135,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\arrays.ms.dict
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\Point2\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\Point2\macro.ms.dict
  ;
  Exports: 
   axiom:axiom
@@ -3164,6 +3165,27 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\arrays.ms.dict
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\Point2\to.ms.dict
  ;
+IMMEDIATE VOID OPERATOR : .for>
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aWhatToDo
+; // .for>
+IMMEDIATE VOID OPERATOR : ==>
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aWhatToDo
+; // ==>
+IMMEDIATE VOID OPERATOR : >for>
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aWhatToDo
+; // >for>
+IMMEDIATE VOID OPERATOR : for
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aList
+ ^ OPERATOR :: IN : aWhatToDo
+; // for
+IMMEDIATE VOID OPERATOR : IT
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aWhatToDo
+; // IT
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\Point2\to.ms.dict
  Uses: 
   axiom:axiom

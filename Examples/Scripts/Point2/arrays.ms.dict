@@ -4,3 +4,48 @@ USES
 
 EXPORTS
  * 
+
+USES
+ macro.ms.dict
+;
+
+macro IT 
+  //ARRAY IN A // - слева должен быть массив
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив A вызывая лямбду aWhatToDo' ;
+ aWhatToDo CompileRef
+ @ SWAP CompileValue
+ @ ITERATE CompileValue
+ //aWhatToDo A ITERATE
+; // IT
+
+/*{operator IT 
+  ARRAY IN A
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив A вызывая лямбду aWhatToDo' ;
+ aWhatToDo A ITERATE
+; // IT}*/
+
+WordAlias ==> IT
+
+macro for
+  ^ IN aList
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив aList вызывая лямбду aWhatToDo' ;
+ aList CompileRef
+ @ DO CompileValue
+ aWhatToDo CompileRef
+ @ SWAP CompileValue
+ @ ITERATE CompileValue
+ //aList DO ==> ( aWhatToDo DO )
+; // for
+
+/*{operator for
+  ^ IN aList
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив aList вызывая лямбду aWhatToDo' ;
+ aList DO ==> ( aWhatToDo DO )
+; // for}*/
+
+WordAlias >for> ==>
+WordAlias .for> ==>
