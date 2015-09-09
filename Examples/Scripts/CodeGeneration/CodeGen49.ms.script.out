@@ -364,7 +364,7 @@ VOID Test CodeGen
  
  CodeGen
  DumpElement
- help
+ Ctx:PrintDictionaries
  g_Indent :=
  0
  g_OutFile :=
@@ -396,9 +396,6 @@ TComponent pop:Component:FindComponent
 TComponent pop:Component:GetComponent
 STRING pop:Component:Name
 TComponent pop:Component:Owner
-Dictionary: axiom:Dictionary
-TtfwKeyWord pop:Dictionary:KeywordByName
-ARRAY pop:Dictionary:MembersIterator
 Dictionary: axiom:exception
 Dictionary: axiom:Finder
 VOID pop:Finder:SetToCtx
@@ -509,20 +506,6 @@ Dictionary: axiom:tests
 tests:CheckEtalon
 tests:CheckOutputWithInput
 Dictionary: axiom:text
-Dictionary: axiom:Tl3TokenType
-Tl3TokenType Tl3TokenType::l3_ttBOF
-Tl3TokenType Tl3TokenType::l3_ttComment
-Tl3TokenType Tl3TokenType::l3_ttDoubleQuotedString
-Tl3TokenType Tl3TokenType::l3_ttEOF
-Tl3TokenType Tl3TokenType::l3_ttEOL
-Tl3TokenType Tl3TokenType::l3_ttFloat
-Tl3TokenType Tl3TokenType::l3_ttInteger
-Tl3TokenType Tl3TokenType::l3_ttKeyWord
-Tl3TokenType Tl3TokenType::l3_ttSingleChar
-Tl3TokenType Tl3TokenType::l3_ttString
-Tl3TokenType Tl3TokenType::l3_ttSymbol
-Tl3TokenType Tl3TokenType:NameToValue
-STRING Tl3TokenType:ValueToName
 Dictionary: axiom:WordInfo
 BOOLEAN pop:WordInfo:AcceptsValue
 TtfwAccessType pop:WordInfo:AccessType
@@ -561,8 +544,12 @@ Dictionary: CodeGen49.ms.script
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -609,8 +596,12 @@ Dictionary: axiom:axiom
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -635,8 +626,12 @@ Dictionary: axiom:axiom
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -720,11 +715,19 @@ OBJECT FUNCTION : %P
  OPERATOR :: VAR : l_P
  OBJECT FUNCTION :: %P : Result
 ; // %P
+IMMEDIATE VOID OPERATOR :: MACRO : %REMARK
+ Documentation:
+  Ремарка
+ ^L OPERATOR :: IN : aDoc
+; // %REMARK
 OBJECT FUNCTION : %ST
  OPERATOR :: IN : %S
  OBJECT FUNCTION :: %ST : Result
 ; // %ST
-IMMEDIATE VOID OPERATOR :: NamedWordProducer : %SUMMARY
+IMMEDIATE REDIFINITION VOID OPERATOR :: NamedWordProducer : %SUMMARY
+==> Redefines
+ IMMEDIATE VOID OPERATOR : %SUMMARY
+<== Redefines
 OBJECT FUNCTION : %T
  OPERATOR :: IN : %S
  OPERATOR :: VAR : l_T
@@ -734,6 +737,11 @@ STRING FUNCTION : %TN
  OPERATOR :: IN : %S
  STRING FUNCTION :: %TN : Result
 ; // %TN
+IMMEDIATE VOID OPERATOR :: MACRO : %TODO
+ Documentation:
+  Что-то, что надо сделать потом, но не забыть, и не ЗАБИТЬ
+ ^L OPERATOR :: IN : aDoc
+; // %TODO
 STRING FUNCTION : %TS
  OPERATOR :: IN : %S
  STRING FUNCTION :: %TS : Result
@@ -758,6 +766,11 @@ ARRAY FUNCTION : .filter>
  ARRAY OPERATOR :: IN : anArray
  ARRAY FUNCTION :: .filter> : Result
 ; // .filter>
+IMMEDIATE VOID OPERATOR :: MACRO : .for>
+ Documentation:
+  Итерирует массив A вызывая лямбду aWhatToDo
+ ^ OPERATOR :: IN : aWhatToDo
+; // .for>
 ARRAY FUNCTION : .join>
  ARRAY OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
@@ -768,11 +781,16 @@ ARRAY FUNCTION : .map>
  ARRAY OPERATOR :: IN : anArray
  ARRAY FUNCTION :: .map> : Result
 ; // .map>
+ARRAY .reverted>
 ARRAY FUNCTION : .slice>
  ARRAY OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  ARRAY FUNCTION :: .slice> : Result
 ; // .slice>
+OBJECT FUNCTION : .Stereotype
+ OPERATOR :: IN : %S
+ OBJECT FUNCTION :: %ST : Result
+; // .Stereotype
 ARRAY FUNCTION : .trunc>
  ARRAY OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
@@ -795,6 +813,13 @@ OPERATOR : :=
 ;
 VOID ?
 BOOLEAN ?!=
+STRING FUNCTION : ?(+)
+ Documentation:
+  Если aPrefix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку
+ STRING OPERATOR :: IN : aPrefix
+ ^ OPERATOR :: IN : aSuffix
+ STRING FUNCTION :: ?(+) : Result
+; // ?(+)
 BOOLEAN ?==
 VOID CALLER OPERATOR : ?ASSURE
  BOOLEAN OPERATOR :: IN : aCondition
@@ -809,6 +834,8 @@ VOID CALLER OPERATOR : ?FAIL
 ; // ?FAIL
 TtfwWord @
 ^@ OPERATOR : @^
+ Documentation:
+    - возвращает ссылку на слово, любое, даже непосредственного исполнения    Не адрес, а именно ССЫЛКУ.  Разница в примере:  {   @ A DO   @^ A      @ A ^:= 1   @^ A := 1   // - записи делают одно и то же  } 
  LINK ^ OPERATOR :: IN : aSelf
  ^@ OPERATOR :: @^ : Result
 ; // @^
@@ -915,8 +942,9 @@ VOID OPERATOR : =+
  ^ OPERATOR :: IN : aWhatToIncrement
 ; // =+
 BOOLEAN ==
-OPERATOR : ==>
- ARRAY OPERATOR :: IN : A
+IMMEDIATE VOID OPERATOR :: MACRO : ==>
+ Documentation:
+  Итерирует массив A вызывая лямбду aWhatToDo
  ^ OPERATOR :: IN : aWhatToDo
 ; // ==>
 BOOLEAN =0
@@ -964,6 +992,11 @@ ARRAY FUNCTION : >filter>
  ^@ OPERATOR :: IN : anArray
  ARRAY FUNCTION :: >filter> : Result
 ; // >filter>
+IMMEDIATE VOID OPERATOR :: MACRO : >for>
+ Documentation:
+  Итерирует массив A вызывая лямбду aWhatToDo
+ ^ OPERATOR :: IN : aWhatToDo
+; // >for>
 ARRAY FUNCTION : >join>
  ^@ OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
@@ -974,6 +1007,7 @@ ARRAY FUNCTION : >map>
  ^@ OPERATOR :: IN : anArray
  ARRAY FUNCTION :: >map> : Result
 ; // >map>
+ARRAY >reverted>
 ARRAY FUNCTION : >slice>
  ^@ OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
@@ -1019,6 +1053,11 @@ INTEGER Array:Count
 ARRAY Array:Filter
 ARRAY Array:FunctorToIterator
 Struct Array:GetItem
+BOOLEAN FUNCTION : array:Has
+ ARRAY OPERATOR :: IN : anArray
+ OPERATOR :: IN : aValue
+ BOOLEAN FUNCTION :: array:Has : Result
+; // array:Has
 BOOLEAN FUNCTION : array:HasString
  ARRAY OPERATOR :: IN : anArray
  STRING OPERATOR :: IN : aString
@@ -1090,6 +1129,17 @@ VOID OPERATOR :: PROCEDURE : axiom:DumpMembers
  ; // Dump
 ; // axiom:DumpMembers
 axiom:operator
+VOID OPERATOR :: PROCEDURE : axiom:Push
+ Documentation:
+  Запихивает во входной поток парсера токен aToken типизируя его в зависимости от aTokenType
+ TOKEN OPERATOR :: IN : aToken
+ TOKEN_TYPE OPERATOR :: IN : aTokenType
+; // axiom:Push
+VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
+ Documentation:
+  Запихивает во входной поток парсера имя слова aSymbol
+ LINK ^ OPERATOR :: IN : aSymbol
+; // axiom:PushSymbol
 STRING OPERATOR : axiom:SourceInfo
  OBJECT OPERATOR :: IN : aCaller
  STRING OPERATOR :: axiom:SourceInfo : Result
@@ -1248,6 +1298,7 @@ TClass class::TkwCompiledVarWorker
 TClass class::TkwCompiledWord
 TClass class::TkwCompiledWordContainer
 TClass class::TkwCompiledWordPrim
+TClass class::TkwCompiledWordPrimPrim
 TClass class::TkwCompiledWordWorker
 TClass class::TkwCompiledWordWorkerEx
 TClass class::TkwCompiledWordWorkerWord
@@ -1270,13 +1321,17 @@ TClass class::TkwCopyFile
 TClass class::TkwCopyFilesByMask
 TClass class::TkwCreateAndRaise
 TClass class::TkwCtxClearTypeInfo
+TClass class::TkwCtxDictionaries
+TClass class::TkwCtxDisabledForHelp
 TClass class::TkwCtxEngine
 TClass class::TkwCtxIncludeAccessType
 TClass class::TkwCtxIncludeLinkType
 TClass class::TkwCtxIncludeModifier
 TClass class::TkwCtxIncludeTypeModifier
 TClass class::TkwCtxIncludeValueTypes
+TClass class::TkwCtxInitedDictionaries
 TClass class::TkwCtxKeyWordDefiningNow
+TClass class::TkwCtxMainDictionary
 TClass class::TkwCtxNewWordDefinitor
 TClass class::TkwCtxParser
 TClass class::TkwCtxParserPushInt
@@ -1289,6 +1344,7 @@ TClass class::TkwCtxScriptCaller
 TClass class::TkwCtxSetNewWordName
 TClass class::TkwCtxSetValueTypes
 TClass class::TkwCtxSetWordProducerForCompiledClass
+TClass class::TkwCtxStandardDictionaries
 TClass class::TkwCtxStoredValuesStack
 TClass class::TkwCtxValueTypes
 TClass class::TkwCtxWordDefiningNow
@@ -1365,7 +1421,6 @@ TClass class::TkwGREATER
 TClass class::TkwGreaterThanZero
 TClass class::TkwHALT
 TClass class::TkwHasTabs
-TClass class::TkwHelp
 TClass class::TkwIfElse
 TClass class::TkwIMMEDIATE
 TClass class::TkwImmediateTemporaryCompiledCode
@@ -1461,12 +1516,15 @@ TClass class::TkwPopDictionaryExRemoveFromCache
 TClass class::TkwPopDictionaryExUsedDictionaries
 TClass class::TkwPopDictionaryExUseDictionary
 TClass class::TkwPopDictionaryKeywordByName
-TClass class::TkwPopDictionaryMembersIterator
+TClass class::TkwPopDictionaryKeyWordsIterator
+TClass class::TkwPopDictionaryWordsIterator
 TClass class::TkwPopFinderSetToCtx
+TClass class::TkwPopKeyWordDictionary
 TClass class::TkwPopKeywordFinderKeywordByName
 TClass class::TkwPopKeywordFinderParentFinder
 TClass class::TkwPopKeyWordName
 TClass class::TkwPopKeyWordWord
+TClass class::TkwPopMainDictionaryCompiledCode
 TClass class::TkwPopNewWordDefinitorCheckVar
 TClass class::TkwPopNewWordDefinitorCheckWord
 TClass class::TkwPopNewWordDefinitorDefineInParameter
@@ -1680,6 +1738,7 @@ TClass class::TtfwAnonimousWord
 TClass class::TtfwArrayCollector
 TClass class::TtfwBeginLikeWord
 TClass class::TtfwClassLike
+TClass class::TtfwClassLikeRunner
 TClass class::TtfwClassModifier
 TClass class::TtfwCompilingWord
 TClass class::TtfwConst
@@ -1701,6 +1760,7 @@ TClass class::TtfwIntegerConstantRegistrator
 TClass class::TtfwIntegerToEnumName
 TClass class::TtfwKeyWord
 TClass class::TtfwKeyWordPrim
+TClass class::TtfwMainDictionary
 TClass class::TtfwMapLambda
 TClass class::TtfwNewWord
 TClass class::TtfwProcedure
@@ -1881,11 +1941,15 @@ VOID File:WriteWStrLn
 ARRAY FILTER
 IMMEDIATE VOID OPERATOR : FINAL
 FINALLY
-OPERATOR : for
+IMMEDIATE VOID OPERATOR :: MACRO : for
+ Documentation:
+  Итерирует массив aList вызывая лямбду aWhatToDo
  ^ OPERATOR :: IN : aList
  ^ OPERATOR :: IN : aWhatToDo
 ; // for
-OPERATOR : FOR
+IMMEDIATE VOID OPERATOR :: MACRO : FOR
+ Documentation:
+  Итерирует массив aList вызывая лямбду aWhatToDo
  ^ OPERATOR :: IN : aList
  ^ OPERATOR :: IN : aWhatToDo
 ; // FOR
@@ -1914,7 +1978,10 @@ STRING guid::ItfwStoredValuesStack
 STRING guid::ItfwValueList
 VOID HALT
 BOOLEAN HasTabs
-VOID help
+VOID OPERATOR :: PROCEDURE : help
+ TtfwWord OPERATOR :: VAR : l_CompiledCode
+ ARRAY OPERATOR :: VAR : l_InitedDictionaries
+; // help
 if
 IInterface
 Ik2TagGenerator
@@ -1932,6 +1999,10 @@ VOID OPERATOR : INC
 ; // INC
 INCLUDE
 INCLUDES
+STRING FUNCTION : IndentStr
+ INTEGER OPERATOR :: IN : anIndent
+ STRING FUNCTION :: IndentStr : Result
+; // IndentStr
 IMMEDIATE VOID OPERATOR : inherited
  OBJECT OPERATOR :: VAR : l_Redef
 ; // inherited
@@ -1974,8 +2045,9 @@ BOOLEAN IsUnder64
 BOOLEAN IsVoid
 BOOLEAN IsWString
 BOOLEAN IsXE
-OPERATOR : IT
- ARRAY OPERATOR :: IN : A
+IMMEDIATE VOID OPERATOR :: MACRO : IT
+ Documentation:
+  Итерирует массив A вызывая лямбду aWhatToDo
  ^ OPERATOR :: IN : aWhatToDo
 ; // IT
 VOID Iterate
@@ -1998,7 +2070,20 @@ ARRAY FUNCTION : LIST
  OBJECT OPERATOR :: VAR : l_Element
  ARRAY FUNCTION :: LIST : Result
 ; // LIST
+IMMEDIATE VOID OPERATOR :: MACRO : Literal
+ Documentation:
+  Определяет модификатор правого параметра через который передаётся строка, а не ссылка на слово
+ ^L OPERATOR :: IN : aName
+; // Literal
 VOID LOOP
+IMMEDIATE VOID OPERATOR : macro
+ Documentation:
+  - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
+; // macro
+IMMEDIATE VOID OPERATOR : MACRO
+ Documentation:
+  - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
+; // MACRO
 ARRAY MAP
 ARRAY MembersIterator
 INTEGER MOD
@@ -2133,6 +2218,12 @@ IMMEDIATE VOID OPERATOR : PROCEDURE
 VOID ProcessFilesWithMask
 VOID ProcessMessages
 VOID ProcessSubDirs
+IMMEDIATE VOID OPERATOR : program
+ ^L OPERATOR :: IN : aName
+; // program
+IMMEDIATE VOID OPERATOR : PROGRAM
+ ^L OPERATOR :: IN : aName
+; // PROGRAM
 IMMEDIATE VOID OPERATOR : PROTECTED
 IMMEDIATE VOID OPERATOR : PUBLIC
 VOID PureDir
@@ -2144,6 +2235,11 @@ IMMEDIATE VOID OPERATOR : REDEFINEABLE
 IMMEDIATE VOID OPERATOR : REDEFINITION
 VOID ReduceStackLevel
 IMMEDIATE VOID OPERATOR : REFERENCE
+IMMEDIATE VOID OPERATOR :: MACRO : REMARK
+ Documentation:
+  Ремарка
+ ^L OPERATOR :: IN : aDoc
+; // REMARK
 BOOLEAN RenameFile
 ARRAY Reverted
 STRING RGB2String
@@ -2170,6 +2266,10 @@ ARRAY FUNCTION : SplitToArray
  STRING OPERATOR :: VAR : l_Tail
  ARRAY FUNCTION :: SplitToArray : Result
 ; // SplitToArray
+IMMEDIATE VOID OPERATOR :: MACRO : STACK_CHANGING_MACRO
+ Documentation:
+  - аналог MACRO, но который может "потрогать стек", т.е. считать что-то со стека или положить что-то на стек
+; // STACK_CHANGING_MACRO
 INTEGER StackLevel
 BOOLEAN StartsStr
 BOOLEAN StartsText
@@ -2290,6 +2390,7 @@ TkwCompiledVarWorker
 TkwCompiledWord
 TkwCompiledWordContainer
 TkwCompiledWordPrim
+TkwCompiledWordPrimPrim
 TkwCompiledWordWorker
 TkwCompiledWordWorkerEx
 TkwCompiledWordWorkerWord
@@ -2312,13 +2413,17 @@ TkwCopyFile
 TkwCopyFilesByMask
 TkwCreateAndRaise
 TkwCtxClearTypeInfo
+TkwCtxDictionaries
+TkwCtxDisabledForHelp
 TkwCtxEngine
 TkwCtxIncludeAccessType
 TkwCtxIncludeLinkType
 TkwCtxIncludeModifier
 TkwCtxIncludeTypeModifier
 TkwCtxIncludeValueTypes
+TkwCtxInitedDictionaries
 TkwCtxKeyWordDefiningNow
+TkwCtxMainDictionary
 TkwCtxNewWordDefinitor
 TkwCtxParser
 TkwCtxParserPushInt
@@ -2331,6 +2436,7 @@ TkwCtxScriptCaller
 TkwCtxSetNewWordName
 TkwCtxSetValueTypes
 TkwCtxSetWordProducerForCompiledClass
+TkwCtxStandardDictionaries
 TkwCtxStoredValuesStack
 TkwCtxValueTypes
 TkwCtxWordDefiningNow
@@ -2407,7 +2513,6 @@ TkwGREATER
 TkwGreaterThanZero
 TkwHALT
 TkwHasTabs
-TkwHelp
 TkwIfElse
 TkwIMMEDIATE
 TkwImmediateTemporaryCompiledCode
@@ -2503,12 +2608,15 @@ TkwPopDictionaryExRemoveFromCache
 TkwPopDictionaryExUsedDictionaries
 TkwPopDictionaryExUseDictionary
 TkwPopDictionaryKeywordByName
-TkwPopDictionaryMembersIterator
+TkwPopDictionaryKeyWordsIterator
+TkwPopDictionaryWordsIterator
 TkwPopFinderSetToCtx
+TkwPopKeyWordDictionary
 TkwPopKeywordFinderKeywordByName
 TkwPopKeywordFinderParentFinder
 TkwPopKeyWordName
 TkwPopKeyWordWord
+TkwPopMainDictionaryCompiledCode
 TkwPopNewWordDefinitorCheckVar
 TkwPopNewWordDefinitorCheckWord
 TkwPopNewWordDefinitorDefineInParameter
@@ -2721,6 +2829,13 @@ TObject
 VOID OPERATOR :: PROCEDURE : ToDo
  STRING OPERATOR :: IN : aString
 ; // ToDo
+IMMEDIATE VOID OPERATOR :: MACRO : TODO
+ Documentation:
+  Что-то, что надо сделать потом, но не забыть, и не ЗАБИТЬ
+ ^L OPERATOR :: IN : aDoc
+; // TODO
+IMMEDIATE VOID OPERATOR :: TYPE : TOKEN
+IMMEDIATE VOID OPERATOR :: TYPE : TOKEN_TYPE
 REDIFINITION STRING FUNCTION : ToPrintable
 ==> Redefines
  STRING ToPrintable
@@ -2738,6 +2853,7 @@ TtfwAnonimousWord
 TtfwArrayCollector
 TtfwBeginLikeWord
 TtfwClassLike
+TtfwClassLikeRunner
 TtfwClassModifier
 TtfwCompilingWord
 TtfwConst
@@ -2760,6 +2876,7 @@ TtfwIntegerToEnumName
 TtfwKeyWord
 TtfwKeyWordPrim
 TtfwLinkType
+TtfwMainDictionary
 TtfwMapLambda
 TtfwNewWord
 TtfwProcedure
@@ -2794,6 +2911,12 @@ IMMEDIATE OPERATOR : TYPE
 VOID OPERATOR :: PROCEDURE : UNASSUME
  STRING OPERATOR :: IN : aStr
 ; // UNASSUME
+IMMEDIATE VOID OPERATOR : unit
+ ^L OPERATOR :: IN : aName
+; // unit
+IMMEDIATE VOID OPERATOR : UNIT
+ ^L OPERATOR :: IN : aName
+; // UNIT
 USES
 IMMEDIATE VOID OPERATOR : var
  ^L OPERATOR :: IN : aName
@@ -2922,19 +3045,28 @@ BOOLEAN OPERATOR : ЯВЛЯЕТСЯ
 ; // ЯВЛЯЕТСЯ
 Dictionary: axiom:Ctx
 VOID Ctx:ClearTypeInfo
+ARRAY Ctx:Dictionaries
+ARRAY Ctx:DisabledForHelp
 ItfwScriptEngine Ctx:Engine
 VOID Ctx:IncludeAccessType
 VOID Ctx:IncludeLinkType
 VOID Ctx:IncludeModifier
 VOID Ctx:IncludeTypeModifier
 VOID Ctx:IncludeValueTypes
+ARRAY Ctx:InitedDictionaries
 TtfwKeyWord Ctx:KeyWordDefiningNow
+TtfwMainDictionary Ctx:MainDictionary
 TtfwWord Ctx:NewWordDefinitor
 ItfwParserEx Ctx:Parser
 VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushArray
  ARRAY OPERATOR :: IN : anArray
 ; // Ctx:Parser:PushArray
 VOID Ctx:Parser:PushInt
+VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushLeftDottedSymbol
+ Documentation:
+  Запихивает во входной поток парсера aValue предварённое точкой
+ STRING OPERATOR :: IN : aValue
+; // Ctx:Parser:PushLeftDottedSymbol
 VOID Ctx:Parser:PushString
 VOID Ctx:Parser:PushSymbol
 OPERATOR : Ctx:Parser:PushSymbolAtRight
@@ -2943,6 +3075,10 @@ OPERATOR : Ctx:Parser:PushSymbolAtRight
 VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushSymbols
  STRING OPERATOR :: IN : aString
 ; // Ctx:Parser:PushSymbols
+VOID OPERATOR :: PROCEDURE : Ctx:PrintDictionaries
+ TtfwWord OPERATOR :: VAR : l_CompiledCode
+ ARRAY OPERATOR :: VAR : l_InitedDictionaries
+; // Ctx:PrintDictionaries
 TtfwWord Ctx:PushCompiler
 TtfwWord Ctx:PushFinder
 STRING Ctx:ResolveIncludedFilePath
@@ -2950,6 +3086,7 @@ ItfwScriptCaller Ctx:ScriptCaller
 VOID Ctx:SetNewWordName
 VOID Ctx:SetValueTypes
 VOID Ctx:SetWordProducerForCompiledClass
+ARRAY Ctx:StandardDictionaries
 ItfwStoredValuesStack Ctx:StoredValuesStack
 TtfwValueTypes Ctx:ValueTypes
 TtfwWord Ctx:WordDefiningNow
@@ -2990,6 +3127,13 @@ INTEGER pop:Word:LeftWordRefValuesCount
 ARRAY pop:Word:MembersIterator
 STRING pop:Word:Name
 TtfwWord pop:Word:Parent
+VOID OPERATOR :: PROCEDURE : pop:Word:Print
+ STRING OPERATOR :: IN : aName
+ INTEGER OPERATOR :: IN : anIndent
+ TtfwWord OPERATOR :: IN : aWord
+ TtfwDictionary OPERATOR :: VAR : l_InnerDictionary
+ TtfwWord OPERATOR :: VAR : l_Redefines
+; // pop:Word:Print
 TtfwWord pop:Word:Producer
 VOID pop:Word:PublicateInMainDictionary
 TtfwWord pop:Word:Redefines
@@ -2997,7 +3141,13 @@ VOID pop:Word:SetProducer
 VOID pop:Word:SetValue
 STRING pop:Word:SourcePointString
 Dictionary: axiom:KeyWord
+TtfwDictionary pop:KeyWord:Dictionary
 STRING pop:KeyWord:Name
+VOID OPERATOR :: PROCEDURE : pop:KeyWord:Print
+ TtfwKeyWord OPERATOR :: IN : aKeyWord
+ INTEGER OPERATOR :: IN : anIndent
+ TtfwWord OPERATOR :: VAR : l_Word
+; // pop:KeyWord:Print
 TtfwWord pop:KeyWord:Word
 Dictionary: axiom:Parser
 STRING pop:Parser:FileName
@@ -3038,6 +3188,11 @@ VOID pop:DictionaryEx:ExportDictionary
 ARRAY pop:DictionaryEx:ExportedDictionaries
 STRING pop:DictionaryEx:FileDateTime
 STRING pop:DictionaryEx:FileName
+VOID OPERATOR :: PROCEDURE : pop:DictionaryEx:Print
+ TtfwDictionaryEx OPERATOR :: IN : aDictionary
+ INTEGER OPERATOR :: IN : anIndent
+ BOOLEAN OPERATOR :: VAR : l_NeedHeader
+; // pop:DictionaryEx:Print
 VOID pop:DictionaryEx:RemoveFromCache
 ARRAY pop:DictionaryEx:UsedDictionaries
 VOID pop:DictionaryEx:UseDictionary
@@ -3114,6 +3269,20 @@ BOOLEAN pop:ValueTypes:EQ
 BOOLEAN pop:ValueTypes:Has
 TtfwValueTypes pop:ValueTypes:MakeCustomName
 STRING pop:ValueTypes:Name
+Dictionary: axiom:Tl3TokenType
+Tl3TokenType Tl3TokenType::l3_ttBOF
+Tl3TokenType Tl3TokenType::l3_ttComment
+Tl3TokenType Tl3TokenType::l3_ttDoubleQuotedString
+Tl3TokenType Tl3TokenType::l3_ttEOF
+Tl3TokenType Tl3TokenType::l3_ttEOL
+Tl3TokenType Tl3TokenType::l3_ttFloat
+Tl3TokenType Tl3TokenType::l3_ttInteger
+Tl3TokenType Tl3TokenType::l3_ttKeyWord
+Tl3TokenType Tl3TokenType::l3_ttSingleChar
+Tl3TokenType Tl3TokenType::l3_ttString
+Tl3TokenType Tl3TokenType::l3_ttSymbol
+Tl3TokenType Tl3TokenType:NameToValue
+STRING Tl3TokenType:ValueToName
 Dictionary: axiom:std
 : : >>std::out
 VOID OPERATOR :: PROCEDURE : std::out<<
@@ -3122,6 +3291,21 @@ VOID OPERATOR :: PROCEDURE : std::out<<
 Dictionary: axiom:KeywordFinder
 TtfwKeyWord pop:KeywordFinder:KeywordByName
 TtfwWord pop:KeywordFinder:ParentFinder
+Dictionary: axiom:Stereotype
+ARRAY FUNCTION : .Stereotype.Words
+ ARRAY FUNCTION :: .Stereotype.Words : Result
+ TtfwWord OPERATOR :: IN : Self
+; // .Stereotype.Words
+Dictionary: axiom:Dictionary
+TtfwKeyWord pop:Dictionary:KeywordByName
+ARRAY pop:Dictionary:KeyWordsIterator
+VOID OPERATOR :: PROCEDURE : pop:Dictionary:Print
+ TtfwDictionary OPERATOR :: IN : aDictionary
+ INTEGER OPERATOR :: IN : anIndent
+; // pop:Dictionary:Print
+ARRAY pop:Dictionary:WordsIterator
+Dictionary: axiom:MainDictionary
+TtfwWord pop:MainDictionary:CompiledCode
 Dictionary: axiom:Array
 Dictionary: axiom:File
 Dictionary: axiom:clipboard
@@ -3169,8 +3353,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.ms.dic
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3213,8 +3401,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.ms.dic
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3259,8 +3451,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3268,11 +3464,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.
   axiom:generators
  ;
 VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Запихивает во входной поток парсера имя слова aSymbol
  LINK ^ OPERATOR :: IN : aSymbol
 ; // axiom:PushSymbol
 VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushLeftDottedSymbol
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Запихивает во входной поток парсера aValue предварённое точкой
  STRING OPERATOR :: IN : aValue
 ; // Ctx:Parser:PushLeftDottedSymbol
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
@@ -3295,8 +3493,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3329,8 +3531,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3360,8 +3566,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3394,13 +3604,15 @@ VOID OPERATOR : array:AddTo
  ^ OPERATOR :: IN : aRight
 ; // array:AddTo
 IMMEDIATE VOID OPERATOR :: MACRO : call.me
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  - запускаем "себя же" рекурсивно
 ; // call.me
 IMMEDIATE VOID OPERATOR :: MACRO : RecurseProc
  ^L OPERATOR :: IN : aName
 ; // RecurseProc
 IMMEDIATE VOID OPERATOR :: MACRO : this.do
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  - запускаем "себя же" рекурсивно
 ; // this.do
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  Uses: 
@@ -3422,8 +3634,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3433,11 +3649,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : %REMARK
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Ремарка
  ^L OPERATOR :: IN : aDoc
 ; // %REMARK
 IMMEDIATE VOID OPERATOR :: MACRO : REMARK
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Ремарка
  ^L OPERATOR :: IN : aDoc
 ; // REMARK
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
@@ -3460,8 +3678,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dic
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3493,8 +3715,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbo
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3532,8 +3758,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3586,8 +3816,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3606,17 +3840,20 @@ IMMEDIATE VOID OPERATOR : in
  ^L OPERATOR :: private:DefineNameParam : aName
 ; // in
 IMMEDIATE VOID OPERATOR :: MACRO : LVALUE
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Параметр слева, который передаётся по ссылке. И из которого можно не только читать, но и в который потенциально можно писать. Если он не Read-Only.
  ^L OPERATOR :: IN : aName
 ; // LVALUE
 IMMEDIATE VOID OPERATOR : LVALUE_MOD
 PRIVATE VOID OPERATOR : MangledNamePusher
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Реализация параметра справа
  STRING OPERATOR :: IN : aName
 ; // MangledNamePusher
 IMMEDIATE VOID OPERATOR : REF
 IMMEDIATE VOID OPERATOR :: MACRO : right
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Параметр справа, который автоматически разыменовывается
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_MangledName
  STRING OPERATOR :: VAR : l_Name
@@ -3642,8 +3879,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3696,8 +3937,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3728,8 +3973,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3760,8 +4009,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3773,24 +4026,29 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : .for>
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Итерирует массив A вызывая лямбду aWhatToDo
  ^ OPERATOR :: IN : aWhatToDo
 ; // .for>
 IMMEDIATE VOID OPERATOR :: MACRO : ==>
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Итерирует массив A вызывая лямбду aWhatToDo
  ^ OPERATOR :: IN : aWhatToDo
 ; // ==>
 IMMEDIATE VOID OPERATOR :: MACRO : >for>
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Итерирует массив A вызывая лямбду aWhatToDo
  ^ OPERATOR :: IN : aWhatToDo
 ; // >for>
 IMMEDIATE VOID OPERATOR :: MACRO : for
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Итерирует массив aList вызывая лямбду aWhatToDo
  ^ OPERATOR :: IN : aList
  ^ OPERATOR :: IN : aWhatToDo
 ; // for
 IMMEDIATE VOID OPERATOR :: MACRO : IT
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Итерирует массив A вызывая лямбду aWhatToDo
  ^ OPERATOR :: IN : aWhatToDo
 ; // IT
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
@@ -3813,8 +4071,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3846,8 +4108,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3880,8 +4146,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3914,8 +4184,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.di
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3945,8 +4219,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3985,8 +4263,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.di
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -4076,8 +4358,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.d
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -4092,30 +4378,37 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.d
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : concrete-model-begin
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Начало определения модели
  ^L OPERATOR :: IN : aDoc
  ^L OPERATOR :: IN : aModelName
 ; // concrete-model-begin
 IMMEDIATE VOID OPERATOR :: MACRO : meta-meta-model-begin
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Начало определения мета-мета-модели
  ^L OPERATOR :: IN : aDoc
 ; // meta-meta-model-begin
 IMMEDIATE VOID OPERATOR :: MACRO : meta-meta-model-end
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Конец определения мета-мета-модели
 ; // meta-meta-model-end
 IMMEDIATE VOID OPERATOR :: MACRO : meta-model-begin
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Начало определения мета-модели
  ^L OPERATOR :: IN : aDoc
 ; // meta-model-begin
 IMMEDIATE VOID OPERATOR :: MACRO : meta-model-end
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Конец определения мета-модели
 ; // meta-model-end
 IMMEDIATE VOID OPERATOR :: MACRO : model-begin
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Начало определения модели
  ^L OPERATOR :: IN : aDoc
 ; // model-begin
 IMMEDIATE VOID OPERATOR :: MACRO : model-end
- OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ Documentation:
+  Конец определения модели
 ; // model-end
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations.ms.dict
  Uses: 
@@ -4137,8 +4430,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -4150,115 +4447,144 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\classRelations
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %IMPLEMENTS
 TkwMain : Main
  VOID OPERATOR :: Test : CodeGen
-  OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+  Documentation:
+    Тут будем тестировать построение сначала мета-модели, потом модели, а потом и кодогенерации 
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer : <<@meta>>
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+     Определяем базовый элемент мета-модели Тот самый который позволяет тащить всё остальное "за волосы из болота" Через этот примитив выводятся все остальные 
    ^L OPERATOR :: IN : aName
   ; // <<@meta>>
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> : <<Class>>
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+     Наверное у нас при разработке встречаются проектные классы. Так вот Class это стереотип, который описывает наши проектные классы. 
    ^L OPERATOR :: IN : aName
   ; // <<Class>>
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> : <<Interface>>
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+     Наверное у нас при разработке встречаются интерфейсы. Так вот Interface это стереотип, который описывает наши интерфейсы. 
    ^L OPERATOR :: IN : aName
   ; // <<Interface>>
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> : <<Library>>
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+     Наверное у нас при разработке встречаются проектные библиотеки. Так вот Library это стереотип, который описывает наши библиотеки. 
    ^L OPERATOR :: IN : aName
   ; // <<Library>>
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> : <<Programm>>
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+     Наверное у нас при разработке встречаются программы. Так вот Programm это стереотип, который описывает наши программы. 
    ^L OPERATOR :: IN : aName
   ; // <<Programm>>
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> : <<Project>>
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+     Наверное у нас при разработке встречаются проекты. Так вот Project это стереотип, который описывает наши проекты. 
    ^L OPERATOR :: IN : aName
   ; // <<Project>>
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> : <<UMLCategory>>
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+     Категория в терминах UML 
    ^L OPERATOR :: IN : aName
   ; // <<UMLCategory>>
   IMMEDIATE VOID OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> : <<UMLClass>>
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+     Класс в терминах UML 
    ^L OPERATOR :: IN : aName
   ; // <<UMLClass>>
   ARRAY FUNCTION : Children
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+     Возвращает итератор детей aWord в "терминах определённой модели" 
    ModelElement OPERATOR :: IN : aWord
    ARRAY FUNCTION :: Children : Result
   ; // Children
   VOID OPERATOR :: PROCEDURE : DumpModelElement
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+     Процедура печатающая содержимое элемента модели. Рекурсивно. 
    ModelElement OPERATOR :: IN : aWord
   ; // DumpModelElement
   VOID OPERATOR :: PROCEDURE : EnterElement
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+    Начинает вывод элемента
    ModelElement OPERATOR :: IN : anElement
   ; // EnterElement
   INTEGER OPERATOR :: VAR : g_Indent
   FILE OPERATOR :: VAR : g_OutFile
   BOOLEAN FUNCTION : IsElementNeedIndent
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+    Определяет тот факт, что элементу нужен отступ
    ModelElement OPERATOR :: IN : anElement
    BOOLEAN FUNCTION :: IsElementNeedIndent : Result
   ; // IsElementNeedIndent
   BOOLEAN FUNCTION : IsModelElement
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+      Определяет тот факт, что aWord является "элементом модели" 
    ModelElement OPERATOR :: IN : aWord
    BOOLEAN FUNCTION :: IsModelElement : Result
   ; // IsModelElement
   BOOLEAN FUNCTION : IsSummary
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+      Определяет тот факт, что aWord является документацией к элементу 
    ModelElement OPERATOR :: IN : aWord
    BOOLEAN FUNCTION :: IsSummary : Result
   ; // IsSummary
   VOID OPERATOR :: PROCEDURE : LeaveElement
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+    Заканчивает вывод элемента
    ModelElement OPERATOR :: IN : anElement
   ; // LeaveElement
   IMMEDIATE VOID OPERATOR :: TYPE : ModelElement
   STRING FUNCTION : OutFileName
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+    Имя файла для вывода
    STRING FUNCTION :: OutFileName : Result
   ; // OutFileName
   VOID OPERATOR :: PROCEDURE : OutToFile
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+     Выводит строку в текущий файл вывода. С переводом каретки. 
    STRING OPERATOR :: IN : aString
   ; // OutToFile
   OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Project>> : Project1
-   OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+   Documentation:
+     Это наш первый проект - Project1 
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library1
-    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+    Documentation:
+       Наверное наш проект содержит какие-то проектные библиотеки.  Так вот Library1 - это наша первая проектная библиотека  
    ; // Library1
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library2
-    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+    Documentation:
+       Наверное наш проект достаточно серьёзен и содержит НЕ ОДНУ библиотеку.  Так вот Library2 - это наша вторая проектная библиотека.  
    ; // Library2
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Library>> : Library3
-    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+    Documentation:
+       Наверное наш проект НАСТОЛЬКО серьёзен, что содержит даже НЕ ДВЕ библиотеки.  Так вот Library3 - это наша третья проектная библиотека.  
    ; // Library3
    OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLCategory>> :: <<Programm>> : Programm1
-    OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+    Documentation:
+       Наверное наш проект реализует какую-то программу.  Иначе - зачем бы он нам был бы нужен?  Так вот Programm1 - это программа внутри нашего проекта Project1.  
     OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class1
-     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+     Documentation:
+         Наверное наша программа содержит какие-то классы реализации.   Иначе - кто будет реализовывать наш функционал?   Так вот Class1 - это наш ПЕРВЫЙ класс реализации внутри нашей программы Programm1.   
     ; // Class1
     OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class2
      OPERATOR :: NamedWordProducer :: %INHERITS : %G
      OPERATOR :: NamedWordProducer :: %IMPLEMENTS : %R
-     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+     Documentation:
+         Наверное наша программа достаточно серьёзна и содержит НЕ ОДИН классы реализации.   Так вот Class2 - это наш ВТОРОЙ класс реализации внутри нашей программы Programm1.   
     ; // Class2
     OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class3
-     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+     Documentation:
+         Возможно, что у нас такая непростая программа, что в ней даже больше, чем ДВА класса реализации.   Так вот Class3 - это наш ТРЕТИЙ класс реализации внутри нашей программы Programm1.   
     ; // Class3
     OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Class>> : Class4
      OPERATOR :: NamedWordProducer :: %INHERITS : %G
-     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+     Documentation:
+         Возможно, что мы настолько офигенно круты, что у на даже НЕ ТРИ класса реализации.   Так вот Class4 - это наш ЧЕТВЁРТЫЙ класс реализации внутри нашей программы Programm1.   
     ; // Class4
     OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Interface>> : Interface1
-     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+     Documentation:
+         Наверное наша программа настолько серьёзна, что реализует какие-то интерфейсы.   Так вот Interface1 - это наш ПЕРВЫЙ интерфейс.   
     ; // Interface1
     OPERATOR :: StereotypeStereotypeProducer :: <<@meta>> :: <<UMLClass>> :: <<Interface>> : Interface2
-     OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+     Documentation:
+         Наверное наша программа настолько серьёзна, что реализует НЕ ОДИН интерфейс, а несколько.   Так вот Interface2 - это наш ВТОРОЙ интерфейс.   
     ; // Interface2
    ; // Programm1
   ; // Project1
