@@ -436,7 +436,6 @@ VOID Test PointTest
   P3
   Point:Neg
  )
- for
  [
   P1
   P2
@@ -449,7 +448,10 @@ VOID Test PointTest
   P9
   P10
  ]
+ DO
  Point:Print
+ SWAP
+ Array:Iterate
  P1
  Point:X
  .

@@ -243,15 +243,17 @@ VOID Test PointTest
  Point constructor Point:OF
   ^ IN aPoint
   [
-   for
    (
     aPoint |@
     DO
    )
+   DO
    (
     Pixel IN aPx
     aPx
    )
+   SWAP
+   Array:Iterate
   ]
   >>>
   Result

@@ -121,11 +121,11 @@ VOID Test PointTest
   i :=
   0
   [
-   for
    (
     aPoint |@
     DO
    )
+   DO
    (
     Pixel IN aPx
     aPx
@@ -137,6 +137,8 @@ VOID Test PointTest
     INC
     i
    )
+   SWAP
+   Array:Iterate
   ]
   >>>
   Result
@@ -149,11 +151,11 @@ VOID Test PointTest
   i :=
   0
   [
-   for
    (
     aPoint |@
     DO
    )
+   DO
    (
     Pixel IN aPx
     aPx
@@ -164,6 +166,8 @@ VOID Test PointTest
     INC
     i
    )
+   SWAP
+   Array:Iterate
   ]
   >>>
   Result
@@ -181,8 +185,8 @@ VOID Test PointTest
  Point method Point:Neg
   Point IN Self
   [
-   for
    Self
+   DO
    (
     Pixel IN aPx
     aPx
@@ -190,6 +194,8 @@ VOID Test PointTest
     SWAP
     -
    )
+   SWAP
+   Array:Iterate
   ]
   >>>
   Result
@@ -198,15 +204,17 @@ VOID Test PointTest
  Point constructor Point:OF
   ^ IN aPoint
   [
-   for
    (
     aPoint |@
     DO
    )
+   DO
    (
     Pixel IN aPx
     aPx
    )
+   SWAP
+   Array:Iterate
   ]
   >>>
   Result

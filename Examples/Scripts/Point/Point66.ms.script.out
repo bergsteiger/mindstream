@@ -451,21 +451,27 @@ VOID Test PointTest
  ]
  >>>
  l_Points
- for
  l_Points
+ DO
  Point:Print
- for
+ SWAP
+ Array:Iterate
  l_Points
+ DO
  (
   Point:X
   .
  )
- for
+ SWAP
+ Array:Iterate
  l_Points
+ DO
  (
   Point:Y
   .
  )
+ SWAP
+ Array:Iterate
  'Hello '
  (+)
  'world'
