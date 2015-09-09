@@ -59,12 +59,14 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ModelElement IN Self
-  for
   (
    Self
    .Children
   )
+  DO
   .Child.CallCurrentGen
+  SWAP
+  Array:Iterate
  ; // VOID elem_proc .CallChildrenCurrentGen
  
  VOID elem_proc .CallCurrentGen
@@ -184,14 +186,16 @@ VOID Test CodeGen
   [
    g_CurrentGeneratorName
    ':'
-   for
    (
     Self
     LIST
     %ST
     Array:Reverted
    )
+   DO
    |N
+   SWAP
+   Array:Iterate
    Self
    |N
   ]
@@ -200,35 +204,41 @@ VOID Test CodeGen
   OutToFile
   [
    'Родители элемента '
-   for
    (
     Self
     .Parents
     Array:Reverted
    )
+   DO
    |N
+   SWAP
+   Array:Iterate
   ]
   '::'
   strings:CatSep
   OutToFile
-  for
   (
    Self
    .Inherited
   )
+  DO
   (
    |N
    OutToFile
   )
-  for
+  SWAP
+  Array:Iterate
   (
    Self
    .Implements
   )
+  DO
   (
    |N
    OutToFile
   )
+  SWAP
+  Array:Iterate
   TRY
    Self
    .CallChildrenCurrentGen
@@ -583,19 +593,23 @@ VOID Test CodeGen
   
   ARRAY IN aGenerators
   ARRAY IN anElements
-  for
   anElements
+  DO
   (
    ModelElement IN anElement
-   for
    aGenerators
+   DO
    (
     GENERATOR IN aGen
     anElement
     .CallGen
     aGen
    )
+   SWAP
+   Array:Iterate
   )
+  SWAP
+  Array:Iterate
  ; // VOID PROCEDURE CallGens
  
  VOID PROCEDURE CallGensList
@@ -750,11 +764,12 @@ VOID Test CodeGen
    LIST
    %P
    Array:Reverted
-   IT
    (
     |N
     '::'
    )
+   SWAP
+   Array:Iterate
    l_Self
    |N
    '::'
@@ -3914,6 +3929,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
  ;
 IMMEDIATE VOID OPERATOR : __MACRO
 IMMEDIATE VOID OPERATOR : _MACRO
+IMMEDIATE VOID OPERATOR : macro
 IMMEDIATE VOID OPERATOR : MACRO
 IMMEDIATE VOID OPERATOR : STACK_CHANGING_MACRO
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
@@ -4346,6 +4362,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
  ;
  Exports: 
   axiom:axiom
@@ -4378,6 +4395,27 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.dict
  ;
+IMMEDIATE VOID OPERATOR :: MACRO : .for>
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aWhatToDo
+; // .for>
+IMMEDIATE VOID OPERATOR :: MACRO : ==>
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aWhatToDo
+; // ==>
+IMMEDIATE VOID OPERATOR :: MACRO : >for>
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aWhatToDo
+; // >for>
+IMMEDIATE VOID OPERATOR :: MACRO : for
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aList
+ ^ OPERATOR :: IN : aWhatToDo
+; // for
+IMMEDIATE VOID OPERATOR :: MACRO : IT
+ OPERATOR :: NamedWordProducer :: %SUMMARY : %SUM
+ ^ OPERATOR :: IN : aWhatToDo
+; // IT
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
  Uses: 
   axiom:axiom

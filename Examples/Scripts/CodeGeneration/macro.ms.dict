@@ -22,3 +22,5 @@ VOID IMMEDIATE operator MACRO
  axiom:PushSymbol axiom:operator
  @SELF Ctx:SetWordProducerForCompiledClass
 ; // MACRO
+
+WordAlias macro MACRO
