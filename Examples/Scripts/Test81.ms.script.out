@@ -3986,7 +3986,7 @@ DO
 SWAP
 Array:Iterate
 
-help
+Ctx:PrintDictionaries
 
 (
  ( to >filter> IsOdd >map>
@@ -4112,203 +4112,251 @@ DO
 SWAP
 Array:Iterate
 
-for
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
-for
+SWAP
+Array:Iterate
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
-for
+SWAP
+Array:Iterate
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
-for
+SWAP
+Array:Iterate
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
-for
+SWAP
+Array:Iterate
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
-for
+SWAP
+Array:Iterate
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
-for
+SWAP
+Array:Iterate
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 '-------------------'
 .
-for
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 
 @
 (
@@ -4325,328 +4373,400 @@ for
 Array:Filter
 .
 
-for
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 
-for
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
-разделитель
-
-for
-числа
-(
- ( to >filter> IsOdd >map>
- Inc1
- Array:Reverted
-)
-.
-разделитель
-for
-числа
-(
- ( to >filter> IsEven >map>
- Inc1
- Array:Reverted
-)
-.
-разделитель
-for
-числа
-(
- ( to >filter> IsOdd >map>
- Dec1
- Array:Reverted
-)
-.
-разделитель
-for
-числа
-(
- ( to >filter> IsEven >map>
- Dec1
- Array:Reverted
-)
-.
+SWAP
+Array:Iterate
 разделитель
 
-for
 числа
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
 
-for
 числа
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
 
-for
 числа
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
 
-for
 числа
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
 
-for
 числа
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
 
-for
 числа
 (
  ( to >filter> IsOdd >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
  Inc1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
+разделитель
+
+числа
+(
+ ( to >filter> IsOdd >map>
+ Inc1
+ Array:Reverted
+)
+DO
+.
+SWAP
+Array:Iterate
+разделитель
+числа
+(
+ ( to >filter> IsEven >map>
+ Inc1
+ Array:Reverted
+)
+DO
+.
+SWAP
+Array:Iterate
+разделитель
+числа
+(
+ ( to >filter> IsOdd >map>
+ Dec1
+ Array:Reverted
+)
+DO
+.
+SWAP
+Array:Iterate
+разделитель
+числа
+(
+ ( to >filter> IsEven >map>
+ Dec1
+ Array:Reverted
+)
+DO
+.
+SWAP
+Array:Iterate
 разделитель
 
 числа
@@ -4699,7 +4819,6 @@ Array:Filter
 SWAP
 Array:Iterate
 
-for
 числа
 (
  ( to >filter> IsOdd >map>
@@ -4707,9 +4826,11 @@ for
  1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
@@ -4717,28 +4838,34 @@ for
  1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsOdd >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
  Dec1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
 
-for
 числа
 (
  ( to >filter> IsOdd >map>
@@ -4746,9 +4873,11 @@ for
  1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
@@ -4756,9 +4885,11 @@ for
  1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsOdd >map>
@@ -4766,9 +4897,11 @@ for
  1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
-for
 числа
 (
  ( to >filter> IsEven >map>
@@ -4776,7 +4909,10 @@ for
  1
  Array:Reverted
 )
+DO
 .
+SWAP
+Array:Iterate
 разделитель
 
 'Size: '
