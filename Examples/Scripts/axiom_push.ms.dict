@@ -1,0 +1,39 @@
+// axiom_push.ms.dict
+
+USES
+ axiom:Tl3TokenType
+;
+
+PROCEDURE axiom:PushSymbol
+ LINK ^ IN aSymbol
+ %SUMMARY 'Запихивает во входной поток парсера имя слова aSymbol' ;
+ aSymbol pop:Word:Name Ctx:Parser:PushSymbol
+; // axiom:PushSymbol
+
+PROCEDURE Ctx:Parser:PushLeftDottedSymbol
+ STRING IN aValue
+ %SUMMARY 'Запихивает во входной поток парсера aValue предварённое точкой' ;
+ '.' (+) aValue Ctx:Parser:PushSymbol
+; // Ctx:Parser:PushLeftDottedSymbol
+
+INTEGER STRING TYPE TOKEN
+INTEGER TYPE TOKEN_TYPE
+ // - вообще говоря это должен быть Tl3TokenType, но там проблема с проверкой типов
+
+PROCEDURE axiom:Push
+ TOKEN IN aToken
+ TOKEN_TYPE IN aTokenType
+
+ %SUMMARY 'Запихивает во входной поток парсера токен aToken типизируя его в зависимости от aTokenType' ;
+
+ aTokenType CASE
+  Tl3TokenType::l3_ttSymbol 
+   ( aToken Ctx:Parser:PushSymbol )
+  Tl3TokenType::l3_ttString 
+   ( aToken Ctx:Parser:PushString )
+  Tl3TokenType::l3_ttInteger
+   ( aToken Ctx:Parser:PushInt )
+  DEFAULT 
+   ( ERROR [ 'Неожиданный тип токена: ' aTokenType Tl3TokenType:ValueToName ] )
+ end // aTokenType Case
+; // axiom:Push 
