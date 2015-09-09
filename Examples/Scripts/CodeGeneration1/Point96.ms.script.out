@@ -462,8 +462,20 @@ VOID TestWithDump PointTest
  )
  SWAP
  Array:Iterate
- .
+ (
+  (
+   getClassName
+   Print
+  )
+  (
+   Object:class
+   .Inherited.Words
+  )
+  DO
+  Array:Iterate
+ )
  l_Points
+ DO
  Array:Iterate
  R1 :=
  Rectangle::
@@ -571,24 +583,4 @@ Point
 Point
 Point
 Point
-[ TkwCompiledProcedure 0 0 ]
-[ TkwCompiledProcedure 0 0 ]
-[ TkwCompiledProcedure 1 1 ]
-[ TkwCompiledProcedure 2 2 ]
-[ TkwCompiledProcedure 2 2 ]
-[ TkwCompiledProcedure 3 3 ]
-[ TkwCompiledProcedure -1 -1 ]
-[ TkwCompiledProcedure 1 1 ]
-[ TkwCompiledProcedure -2 -2 ]
-[ TkwCompiledProcedure -1 -1 ]
-[ TkwCompiledProcedure -2 2 ]
-( TopLeft: ( X: 0, Y: 0 ), BottomRight: ( X: 2, Y: 2 ) )
-( TopLeft: ( X: 3, Y: 3 ), BottomRight: ( X: -1, Y: -1 ) )
-Hello world
-Hello world
-Hello world
-3
-30
--10
--10
-10
+Ошибка выполнения: "Ошибка при получении параметра aWord: TtfwWord : Тип значения tfw_vtList несовместим с tfw_vtObj". Главный файл: Point96.ms.script. Класс: TkwDoWord. Слово: DO

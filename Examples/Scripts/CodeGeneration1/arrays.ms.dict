@@ -35,12 +35,9 @@ macro for
   ^ IN aList
   ^ IN aWhatToDo
  %SUMMARY 'Итерирует массив aList вызывая лямбду aWhatToDo' ;
-/* if ( aWhatToDo IS class::TkwBeginLikeCompiledCode )
-  ( 'got' Msg )
- aWhatToDo CompileRef*/
- @ . CompileRef
+ aWhatToDo CompileRef
  aList CompileValue
- //@ DO CompileValue
+ @ DO CompileValue
  @ ITERATE CompileValue
  //aList DO ==> ( aWhatToDo DO )
 ; // for
