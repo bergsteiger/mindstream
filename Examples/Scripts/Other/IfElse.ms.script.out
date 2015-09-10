@@ -17,8 +17,9 @@ VOID Test IfElseTest
    )
   then
    (
-    Result :=
     -1
+    Result
+    pop:Word:SetValue
    )
   else
    if
@@ -28,13 +29,15 @@ VOID Test IfElseTest
     )
    then
     (
-     Result :=
      1
+     Result
+     pop:Word:SetValue
     )
    else
     (
-     Result :=
      0
+     Result
+     pop:Word:SetValue
     )
  ; // INTEGER FUNCTION SIGN
  
@@ -47,8 +50,9 @@ VOID Test IfElseTest
    )
   then
    (
-    Result :=
     -1
+    Result
+    pop:Word:SetValue
    )
   else
    (
@@ -59,13 +63,15 @@ VOID Test IfElseTest
      )
     then
      (
-      Result :=
       1
+      Result
+      pop:Word:SetValue
      )
     else
      (
-      Result :=
       0
+      Result
+      pop:Word:SetValue
      )
    )
  ; // INTEGER FUNCTION SIGN1
@@ -79,8 +85,9 @@ VOID Test IfElseTest
    )
   then
    (
-    Result :=
     -1
+    Result
+    pop:Word:SetValue
    )
   else
    if
@@ -90,13 +97,15 @@ VOID Test IfElseTest
     )
    then
     (
-     Result :=
      1
+     Result
+     pop:Word:SetValue
     )
    else
     (
-     Result :=
      0
+     Result
+     pop:Word:SetValue
     )
  ; // INTEGER FUNCTION SIGN2
  

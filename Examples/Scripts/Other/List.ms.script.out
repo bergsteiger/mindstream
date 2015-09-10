@@ -25,19 +25,20 @@ VOID Test ListTest
   ^ IN aFunctor
   OBJECT IN anObject
   OBJECT VAR l_Element
-  l_Element :=
   anObject
-  Result :=
+  l_Element
+  pop:Word:SetValue
   [
    WHILE
    true
    BEGIN
-    l_Element :=
     (
      l_Element
      aFunctor
      DO
     )
+    l_Element
+    pop:Word:SetValue
     if
      (
       l_Element
@@ -48,6 +49,8 @@ VOID Test ListTest
     l_Element
    END
   ]
+  Result
+  pop:Word:SetValue
  ; // ARRAY FUNCTION LIST
  
  A :: 'B' :: 'C' :: 'D' |^@

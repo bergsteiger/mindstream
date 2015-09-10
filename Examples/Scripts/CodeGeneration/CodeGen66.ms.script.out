@@ -72,10 +72,10 @@ VOID Test CodeGen
  VOID elem_proc .CallCurrentGen
   FILE VAR l_PrevOutFile
   ModelElement IN Self
-  l_PrevOutFile :=
   g_OutFile
+  l_PrevOutFile
+  pop:Word:SetValue
   TRY
-   g_OutFile :=
    (
     OutFileName
     (
@@ -88,6 +88,8 @@ VOID Test CodeGen
     )
     File:OpenWrite
    )
+   g_OutFile
+   pop:Word:SetValue
    TRY
     g_CurrentGenerator
     IsNil
@@ -100,14 +102,17 @@ VOID Test CodeGen
      DO
     )
    FINALLY
-    g_OutFile :=
     nil
+    g_OutFile
+    pop:Word:SetValue
    END
   FINALLY
-   g_OutFile :=
    l_PrevOutFile
-   l_PrevOutFile :=
+   g_OutFile
+   pop:Word:SetValue
    nil
+   l_PrevOutFile
+   pop:Word:SetValue
   END
  ; // VOID elem_proc .CallCurrentGen
  
@@ -119,18 +124,19 @@ VOID Test CodeGen
   ^ IN aGen
   ModelElement IN Self
   aGen |RefDeepest
-  >>>
   g_CurrentGenerator
+  pop:Word:SetValue
   TRY
    aGen FieldByNameDeepest
    'gpName'
-   >>>
    g_CurrentGeneratorName
+   pop:Word:SetValue
    Self
    .CallCurrentGen
   FINALLY
-   g_CurrentGenerator :=
    nil
+   g_CurrentGenerator
+   pop:Word:SetValue
   END
  ; // VOID elem_proc .CallGen
  
@@ -159,8 +165,8 @@ VOID Test CodeGen
   ModelElement IN Self
   ( Self pop:Word:MembersIterator >filter>
   .IsModelElement
-  >>>
   Result
+  pop:Word:SetValue
  ; // ARRAY elem_func .Children
  
  VOID elem_generator .dump
@@ -260,12 +266,13 @@ VOID Test CodeGen
   ^L IN aListName
   PRIVATE BOOLEAN FUNCTION FilterElement
    OBJECT IN aMember
-   Result :=
    (
     aMember
     NotValid
     !
    )
+   Result
+   pop:Word:SetValue
   ; // PRIVATE BOOLEAN FUNCTION FilterElement
   
   PRIVATE OBJECT FUNCTION MapElement
@@ -273,8 +280,8 @@ VOID Test CodeGen
    VAR l_Element
    aMember
    DO
-   >>>
    l_Element
+   pop:Word:SetValue
    if
     (
      l_Element
@@ -282,13 +289,15 @@ VOID Test CodeGen
     )
    then
     (
-     Result :=
      nil
+     Result
+     pop:Word:SetValue
     )
    else
     (
-     Result :=
      l_Element
+     Result
+     pop:Word:SetValue
     )
   ; // PRIVATE OBJECT FUNCTION MapElement
   
@@ -300,14 +309,14 @@ VOID Test CodeGen
    )
   then
    (
-    Result :=
     [
     ]
+    Result
+    pop:Word:SetValue
    )
   else
    (
     VAR l_List
-    l_List :=
     (
      Self
      %%
@@ -316,6 +325,8 @@ VOID Test CodeGen
       |N
      )
     )
+    l_List
+    pop:Word:SetValue
     if
      (
       l_List
@@ -323,17 +334,19 @@ VOID Test CodeGen
      )
     then
      (
-      Result :=
       [
       ]
+      Result
+      pop:Word:SetValue
      )
     else
      (
-      Result :=
       (
        ( l_List pop:Word:CodeIterator >map> MapElement >filter>
        FilterElement
       )
+      Result
+      pop:Word:SetValue
      )
    )
  ; // ARRAY elem_func .ElementList
@@ -371,12 +384,13 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ModelElement IN Self
-  Result :=
   (
    Self
    .ElementList
    '%R'
   )
+  Result
+  pop:Word:SetValue
  ; // ARRAY elem_func .Implements
  
  ARRAY elem_func .Inherited
@@ -385,12 +399,13 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ModelElement IN Self
-  Result :=
   (
    Self
    .ElementList
    '%G'
   )
+  Result
+  pop:Word:SetValue
  ; // ARRAY elem_func .Inherited
  
  BOOLEAN elem_func .IsElementNeedIndent
@@ -400,8 +415,8 @@ VOID Test CodeGen
   
   ModelElement IN Self
   true
-  >>>
   Result
+  pop:Word:SetValue
  ; // BOOLEAN elem_func .IsElementNeedIndent
  
  BOOLEAN elem_func .IsModelElement
@@ -423,8 +438,8 @@ VOID Test CodeGen
    |N
    EndsStr
   )
-  >>>
   Result
+  pop:Word:SetValue
  ; // BOOLEAN elem_func .IsModelElement
  
  BOOLEAN elem_func .IsSummary
@@ -439,8 +454,8 @@ VOID Test CodeGen
   )
   =
   '%SUM'
-  >>>
   Result
+  pop:Word:SetValue
  ; // BOOLEAN elem_func .IsSummary
  
  VOID elem_proc .LeaveElement
@@ -464,8 +479,8 @@ VOID Test CodeGen
   ModelElement IN Self
   ( Self LIST >filter>
   .IsModelElement
-  >>>
   Result
+  pop:Word:SetValue
  ; // ARRAY elem_func .Parents
  
  VOID elem_generator .pas
@@ -741,17 +756,17 @@ VOID Test CodeGen
   OBJECT VAR l_Res
   ENGINE_WORD VAR l_Self
   aSelf |RefDeepest
-  >>>
   l_Self
+  pop:Word:SetValue
   aName
   |N
-  >>>
   l_Name
+  pop:Word:SetValue
   l_Self
   %%
   l_Name
-  >>>
   l_Res
+  pop:Word:SetValue
   ASSURE
   NOT
   (
@@ -776,8 +791,8 @@ VOID Test CodeGen
    l_Name
   ]
   l_Res
-  >>>
   Result
+  pop:Word:SetValue
  ; // ^@ OPERATOR FieldByNameDeepest
  
  GENERATOR VAR g_CurrentGenerator
@@ -809,8 +824,8 @@ VOID Test CodeGen
   
   STRING VAR l_OutPath
   sysutils:GetCurrentDir
-  >>>
   l_OutPath
+  pop:Word:SetValue
   [
    l_OutPath
    script:FileName
@@ -822,8 +837,8 @@ VOID Test CodeGen
   ]
   '\'
   strings:CatSep
-  >>>
   l_OutPath
+  pop:Word:SetValue
   l_OutPath
   sysutils:ForceDirectories
   ?ASSURE
@@ -839,8 +854,8 @@ VOID Test CodeGen
   ]
   '\'
   strings:CatSep
-  >>>
   Result
+  pop:Word:SetValue
  ; // STRING FUNCTION OutFileName
  
  VOID PROCEDURE OutToFile
@@ -859,15 +874,15 @@ VOID Test CodeGen
    (
     aValue
     strings:Cat
-    >>>
     l_String
+    pop:Word:SetValue
    )
   else
    (
     aValue
     ToPrintable
-    >>>
     l_String
+    pop:Word:SetValue
    )
   [
    g_Indent
@@ -998,14 +1013,18 @@ VOID Test CodeGen
  CodeGen
  DumpElement
  Ctx:PrintDictionaries
- g_Indent :=
  0
- g_OutFile :=
+ g_Indent
+ pop:Word:SetValue
  nil
- g_CurrentGenerator :=
+ g_OutFile
+ pop:Word:SetValue
  nil
- g_CurrentGeneratorName :=
+ g_CurrentGenerator
+ pop:Word:SetValue
  ''
+ g_CurrentGeneratorName
+ pop:Word:SetValue
  ( Project1 Project2 Project3 ( .dump .pas .c++ .h CallGensList
 ; // VOID Test CodeGen
 
@@ -1302,6 +1321,8 @@ BOOLEAN OPERATOR : "МЕНЬШЕ ИЛИ РАВНО"
  BOOLEAN OPERATOR :: <= : Result
 ; // "МЕНЬШЕ ИЛИ РАВНО"
 BOOLEAN OPERATOR : "НЕ РАВНО"
+ Documentation:
+  Правосторонний, а не обратный польский !=
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: <> : Result
@@ -1429,7 +1450,9 @@ INTEGER /
  OBJECT OPERATOR :: VAR : l_Self
  ^@ OPERATOR :: :: : Result
 ; // ::
-OPERATOR : :=
+IMMEDIATE VOID OPERATOR : :=
+ Documentation:
+  Присваивает слову aLeft значение aRight
  ^@ OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
 ; // :=
@@ -1483,13 +1506,22 @@ VOID OPERATOR :: PROCEDURE : __DumpMembers
  ; // Dump
 ; // __DumpMembers
 INTEGER |
+: : |^
+ Documentation:
+  Разыменовывает параметр слева
+ ^@ OPERATOR :: IN : aRef
+; // |^
 TtfwWord OPERATOR : |^@
+ Documentation:
+  Получает ссылку на параметр слева
  ^@ OPERATOR :: IN : aSelf
  TtfwWord OPERATOR :: |^@ : Result
 ; // |^@
 BOOLEAN ||
 STRING FUNCTION : |N
  OPERATOR :: IN : %S
+ Documentation:
+  Возвращает имя слова слева
  STRING FUNCTION :: |N : Result
 ; // |N
 STRING OPERATOR : |NS
@@ -1533,15 +1565,18 @@ BOOLEAN OPERATOR : <=
  BOOLEAN OPERATOR :: <= : Result
 ; // <=
 BOOLEAN OPERATOR : <>
+ Documentation:
+  Правосторонний, а не обратный польский !=
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: <> : Result
 ; // <>
 BOOLEAN <0
 BOOLEAN OPERATOR : =
+ Documentation:
+     Правосторонний, а не обратный польский ==  ТЕПЕРЬ С БЛЭКДЖЕКОМ И МАССИВАМИ!  Примеры:   1 РАВНО 1  . - True   [ 10 20 ] РАВНО ( 10 20 ) . - True   [ 10 20 ] РАВНО ( [ 10 20 ] ) . - True   [ 10 ] РАВНО ( [ 10 ] ) . - True   [ 10 ] РАВНО ( 10 ) . - True   [ 10 ] РАВНО ( 20 ) . - False 
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
- ARRAY OPERATOR :: VAR : l_Right
  BOOLEAN OPERATOR :: = : Result
 ; // =
 VOID OPERATOR : =-
@@ -1552,12 +1587,14 @@ VOID OPERATOR : -=
  ^@ OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
 ; // -=
-VOID : : =:
- OPERATOR :: IN : aValue
+IMMEDIATE VOID OPERATOR : =:
+ Documentation:
+  Присваивает значение aValue переменной aVar
  ^ OPERATOR :: IN : aVar
 ; // =:
-: : =:^
- OPERATOR :: IN : aValue
+IMMEDIATE VOID OPERATOR : =:^
+ Documentation:
+  Присваивает значение aValue по адресу слова в переменной aVar
  ^ OPERATOR :: IN : aVar
 ; // =:^
 VOID OPERATOR : =+
@@ -1593,16 +1630,18 @@ BOOLEAN OPERATOR : >=
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: >= : Result
 ; // >=
-VOID : : >>>
- OPERATOR :: IN : aValue
+IMMEDIATE VOID OPERATOR : >>>
+ Documentation:
+  Присваивает значение aValue переменной aVar
  ^ OPERATOR :: IN : aVar
 ; // >>>
 VOID OPERATOR : >>>[]
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
 ; // >>>[]
-: : >>>^
- OPERATOR :: IN : aValue
+IMMEDIATE VOID OPERATOR : >>>^
+ Documentation:
+  Присваивает значение aValue по адресу слова в переменной aVar
  ^ OPERATOR :: IN : aVar
 ; // >>>^
 BOOLEAN >0
@@ -2437,6 +2476,8 @@ VOID OPERATOR : DEC
  ^ OPERATOR :: IN : aWhatToDecrement
 ; // DEC
 IMMEDIATE VOID OPERATOR : DECLARED
+ Documentation:
+  Определяет, что слово aName определено в данном месте
  ^L OPERATOR :: IN : aName
  BOOLEAN OPERATOR :: VAR : l_Found
 ; // DECLARED
@@ -2611,6 +2652,9 @@ Ik2TagGenerator
 Il3Base
 Il3FontInfo
 VOID IMMEDIATE
+IMMEDIATE VOID OPERATOR : in
+ ^L OPERATOR :: private:DefineNameParam : aName
+; // in
 IMMEDIATE VOID OPERATOR : IN
  ^L OPERATOR :: private:DefineNameParam : aName
 ; // IN
@@ -2666,6 +2710,12 @@ BOOLEAN IsString
 BOOLEAN IsTypeOf
 BOOLEAN IsUnder64
 BOOLEAN IsVoid
+BOOLEAN FUNCTION : IsWordDeclared
+ Documentation:
+  Определяет, что слово aName определено в данном месте
+ STRING OPERATOR :: IN : aName
+ BOOLEAN FUNCTION :: IsWordDeclared : Result
+; // IsWordDeclared
 BOOLEAN IsWString
 BOOLEAN IsXE
 IMMEDIATE VOID OPERATOR :: MACRO : IT
@@ -2699,6 +2749,12 @@ IMMEDIATE VOID OPERATOR :: MACRO : Literal
  ^L OPERATOR :: IN : aName
 ; // Literal
 VOID LOOP
+IMMEDIATE VOID OPERATOR :: MACRO : LVALUE
+ Documentation:
+  Параметр слева, который передаётся по ссылке. И из которого можно не только читать, но и в который потенциально можно писать. Если он не Read-Only.
+ ^L OPERATOR :: IN : aName
+; // LVALUE
+IMMEDIATE VOID OPERATOR : LVALUE_MOD
 IMMEDIATE VOID OPERATOR : macro
  Documentation:
   - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
@@ -2707,6 +2763,11 @@ IMMEDIATE VOID OPERATOR : MACRO
  Documentation:
   - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
 ; // MACRO
+PRIVATE VOID OPERATOR : MangledNamePusher
+ Documentation:
+  Реализация параметра справа
+ STRING OPERATOR :: IN : aName
+; // MangledNamePusher
 ARRAY MAP
 ARRAY MembersIterator
 INTEGER MOD
@@ -2724,6 +2785,12 @@ IMMEDIATE VOID OPERATOR : NamedWordProducer
  ^L OPERATOR :: IN : aName
  ^L OPERATOR :: IN : aNewName
 ; // NamedWordProducer
+STRING FUNCTION : NameOf
+ Documentation:
+  Возвращает имя слова справа
+ LINK ^ OPERATOR :: IN : aWord
+ STRING FUNCTION :: NameOf : Result
+; // NameOf
 ARRAY FUNCTION : NativeMembersIterator
  TtfwWord OPERATOR :: IN : aWord
  BOOLEAN FUNCTION : FilterMember
@@ -2857,6 +2924,7 @@ IMMEDIATE VOID OPERATOR : REALIZE
 IMMEDIATE VOID OPERATOR : REDEFINEABLE
 IMMEDIATE VOID OPERATOR : REDEFINITION
 VOID ReduceStackLevel
+IMMEDIATE VOID OPERATOR : REF
 IMMEDIATE VOID OPERATOR : REFERENCE
 IMMEDIATE VOID OPERATOR :: MACRO : REMARK
  Documentation:
@@ -2866,6 +2934,14 @@ IMMEDIATE VOID OPERATOR :: MACRO : REMARK
 BOOLEAN RenameFile
 ARRAY Reverted
 STRING RGB2String
+IMMEDIATE VOID OPERATOR :: MACRO : right
+ Documentation:
+  Параметр справа, который автоматически разыменовывается
+ ^L OPERATOR :: IN : aName
+ STRING OPERATOR :: VAR : l_MangledName
+ STRING OPERATOR :: VAR : l_Name
+; // right
+IMMEDIATE VOID OPERATOR : RIGHT
 VOID ROLL
 VOID ROT
 VOID -ROT
@@ -3637,6 +3713,8 @@ BOOLEAN OPERATOR : НЕ
  BOOLEAN OPERATOR :: NOT : Result
 ; // НЕ
 BOOLEAN OPERATOR : НЕРАВНО
+ Documentation:
+  Правосторонний, а не обратный польский !=
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: <> : Result
@@ -3652,9 +3730,10 @@ OPERATOR : ПОКА
  ^ OPERATOR :: IN : aWhatToDo
 ; // ПОКА
 BOOLEAN OPERATOR : РАВНО
+ Documentation:
+     Правосторонний, а не обратный польский ==  ТЕПЕРЬ С БЛЭКДЖЕКОМ И МАССИВАМИ!  Примеры:   1 РАВНО 1  . - True   [ 10 20 ] РАВНО ( 10 20 ) . - True   [ 10 20 ] РАВНО ( [ 10 20 ] ) . - True   [ 10 ] РАВНО ( [ 10 ] ) . - True   [ 10 ] РАВНО ( 10 ) . - True   [ 10 ] РАВНО ( 20 ) . - False 
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
- ARRAY OPERATOR :: VAR : l_Right
  BOOLEAN OPERATOR :: = : Result
 ; // РАВНО
 IMMEDIATE VOID OPERATOR : Тест
@@ -4206,6 +4285,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
 BOOLEAN OPERATOR : !==
+ Documentation:
+  Правосторонний, а не обратный польский !=
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: <> : Result
@@ -4218,6 +4299,8 @@ FUNCTOR : : |@
  ^@ OPERATOR :: IN : aRef
 ; // |^
 BOOLEAN OPERATOR : =/=
+ Documentation:
+  Правосторонний, а не обратный польский !=
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: <> : Result
@@ -4353,10 +4436,14 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbo
  ;
 STRING FUNCTION : .Name
  OPERATOR :: IN : %S
+ Documentation:
+  Возвращает имя слова слева
  STRING FUNCTION :: |N : Result
 ; // .Name
 TtfwWord Addr
 TtfwWord OPERATOR : GetRefFromLeft
+ Documentation:
+  Получает ссылку на параметр слева
  ^@ OPERATOR :: IN : aSelf
  TtfwWord OPERATOR :: |^@ : Result
 ; // GetRefFromLeft

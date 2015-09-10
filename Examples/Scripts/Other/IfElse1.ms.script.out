@@ -16,8 +16,9 @@ VOID Test IfElseTest
   .
  ; // : B
  
- aNum :=
  0
+ aNum
+ pop:Word:SetValue
  if
   (
    aNum

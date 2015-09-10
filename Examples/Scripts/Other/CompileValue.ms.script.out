@@ -9,10 +9,12 @@ VOID Test TestCompileValue
  INTEGER VAR I
  OBJECT VAR O
  STRING VAR S
- S :=
  'World'
- I :=
+ S
+ pop:Word:SetValue
  30
+ I
+ pop:Word:SetValue
  20
  .
  Hello

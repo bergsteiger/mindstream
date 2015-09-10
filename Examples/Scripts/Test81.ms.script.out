@@ -214,8 +214,9 @@ FORWARD Process
    .
    TRY
    FINALLY
-    l_File :=
     nil
+    l_File
+    pop:Word:SetValue
    END
   ; // : DoFile
   
@@ -273,8 +274,9 @@ FORWARD Process
    .
    TRY
    FINALLY
-    l_File :=
     nil
+    l_File
+    pop:Word:SetValue
    END
   ; // : DoFile
   
@@ -342,8 +344,9 @@ FORWARD Process
    .
    TRY
    FINALLY
-    l_File :=
     nil
+    l_File
+    pop:Word:SetValue
    END
   ; // : DoFile
   
@@ -414,15 +417,17 @@ FORWARD Process
    FILE VAR l_File
    anItem
    .
-   l_File :=
    (
     anItem
     File:OpenRead
    )
+   l_File
+   pop:Word:SetValue
    TRY
    FINALLY
-    l_File :=
     nil
+    l_File
+    pop:Word:SetValue
    END
   ; // : DoFile
   
@@ -495,12 +500,13 @@ FORWARD Process
    .
    anItem
    File:OpenRead
-   >>>
    l_File
+   pop:Word:SetValue
    TRY
    FINALLY
-    l_File :=
     nil
+    l_File
+    pop:Word:SetValue
    END
   ; // : DoFile
   
@@ -573,8 +579,8 @@ FORWARD Process
    .
    anItem
    File:OpenRead
-   >>>
    l_File
+   pop:Word:SetValue
    TRY
     l_File
     File:ReadLines
@@ -584,8 +590,9 @@ FORWARD Process
      .
     )
    FINALLY
-    l_File :=
     nil
+    l_File
+    pop:Word:SetValue
    END
   ; // : DoFile
   
@@ -648,11 +655,12 @@ VOID Test ForToTest
   (
    OBJECT IN aLambda
    INTEGER VAR I
-   I :=
    (
     aFrom
     DO
    )
+   I
+   pop:Word:SetValue
    DEC
    I
    (
@@ -671,8 +679,8 @@ VOID Test ForToTest
    )
   )
   Array:FunctorToIterator
-  >>>
   Result
+  pop:Word:SetValue
  ; // ARRAY OPERATOR to
  
  (
@@ -3373,8 +3381,8 @@ BOOLEAN FUNCTION IsEven
  MOD
  0
  ==
- >>>
  Result
+ pop:Word:SetValue
 ; // BOOLEAN FUNCTION IsEven
 
 (
@@ -3402,8 +3410,8 @@ BOOLEAN FUNCTION IsEven
  MOD
  0
  ==
- >>>
  Result
+ pop:Word:SetValue
 ; // BOOLEAN FUNCTION IsEven
 
 BOOLEAN FUNCTION IsOdd
@@ -3411,8 +3419,8 @@ BOOLEAN FUNCTION IsOdd
  aValue
  IsEven
  !
- >>>
  Result
+ pop:Word:SetValue
 ; // BOOLEAN FUNCTION IsOdd
 
 (
@@ -3491,8 +3499,8 @@ ARRAY FUNCTION >filter>
  aFunctor
  anArray
  Array:Filter
- >>>
  Result
+ pop:Word:SetValue
 ; // ARRAY FUNCTION >filter>
 
 ARRAY Array:Filter
@@ -3530,8 +3538,8 @@ ARRAY FUNCTION >filter>
  anArray
  DO
  Array:Filter
- >>>
  Result
+ pop:Word:SetValue
 ; // ARRAY FUNCTION >filter>
 
 ARRAY Array:Filter
@@ -3750,8 +3758,8 @@ ARRAY FUNCTION >map>
  anArray
  DO
  Array:Map
- >>>
  Result
+ pop:Word:SetValue
 ; // ARRAY FUNCTION >map>
 
 ARRAY Array:Map
@@ -4940,8 +4948,8 @@ STRING FUNCTION any:Cat
  )
  SWAP
  Array:Iterate
- >>>
  Result
+ pop:Word:SetValue
 ; // STRING FUNCTION any:Cat
 
 [
@@ -4959,8 +4967,8 @@ STRING FUNCTION any:Cat
  string:CatWihAny
  SWAP
  Array:Iterate
- >>>
  Result
+ pop:Word:SetValue
 ; // STRING FUNCTION any:Cat
 
 STRING FUNCTION string:CatWihAny
@@ -4970,8 +4978,8 @@ STRING FUNCTION string:CatWihAny
  aValue
  ToPrintable
  Cat
- >>>
  Result
+ pop:Word:SetValue
 ; // STRING FUNCTION string:CatWihAny
 
 [
@@ -4990,8 +4998,8 @@ STRING FUNCTION any:Cat
  string:CatWihAny
  SWAP
  Array:Iterate
- >>>
  Result
+ pop:Word:SetValue
 ; // STRING FUNCTION any:Cat
 
 STRING FUNCTION string:CatWihAny
@@ -5001,8 +5009,8 @@ STRING FUNCTION string:CatWihAny
  aValue
  ToPrintable
  Cat
- >>>
  Result
+ pop:Word:SetValue
 ; // STRING FUNCTION string:CatWihAny
 
 [

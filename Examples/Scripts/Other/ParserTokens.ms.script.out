@@ -23,8 +23,8 @@ TkwMain TkwCompiledMain
   STRING VAR l_Name
   aName
   |N
-  >>>
   l_Name
+  pop:Word:SetValue
   'VAR'
   Ctx:Parser:PushSymbol
   l_Name
@@ -41,17 +41,17 @@ TkwMain TkwCompiledMain
  ; // IMMEDIATE OPERATOR X
  
  'A'
- >>>
  A
+ pop:Word:SetValue
  1
- >>>
  B
+ pop:Word:SetValue
  'B'
- >>>
  C
+ pop:Word:SetValue
  2
- >>>
  D
+ pop:Word:SetValue
  A
  .
  B

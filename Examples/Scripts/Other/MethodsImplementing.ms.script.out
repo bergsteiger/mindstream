@@ -98,8 +98,8 @@ VOID Test MethodImplementing
   Ctx:PushCompiler
   Ctx:PushFinder
   aWordToWork |^@
-  >>>
   l_NewCompiler
+  pop:Word:SetValue
   if
    (
     l_NewCompiler
@@ -110,8 +110,8 @@ VOID Test MethodImplementing
    BEGIN
     l_NewCompiler
     pop:CompiledWordWorkerWord:Compiled
-    >>>
     l_NewCompiler
+    pop:Word:SetValue
    END
   l_NewCompiler
   pop:Compiler:SetToCtx

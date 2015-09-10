@@ -23,15 +23,15 @@ VOID Test RighTest
   Ctx:Parser:PushSymbol
   aName
   |N
-  >>>
   l_Name
+  pop:Word:SetValue
   [
    '_'
    l_Name
   ]
   strings:Cat
-  >>>
   l_MangledName
+  pop:Word:SetValue
   l_MangledName
   Ctx:Parser:PushSymbol
   [

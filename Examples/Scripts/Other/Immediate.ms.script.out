@@ -26,8 +26,8 @@ VOID Test Immediate
  
  : TryVar2
   1024
-  >>>
   A
+  pop:Word:SetValue
   TryVarPrint
  ; // : TryVar2
  
@@ -35,8 +35,8 @@ VOID Test Immediate
   A
   .
   10
-  >>>
   A
+  pop:Word:SetValue
   A
   .
  ; // : TryVarPrint

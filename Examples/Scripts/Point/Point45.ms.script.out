@@ -148,16 +148,17 @@ VOID Test PointTest
    aX |^
    aY |^
   ]
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point constructor Point:
  
  Point method Point:-
   ^ IN aPoint
   FieldOffset VAR i
   Point IN Self
-  i :=
   0
+  i
+  pop:Word:SetValue
   [
    (
     aPoint |@
@@ -179,16 +180,17 @@ VOID Test PointTest
    SWAP
    Array:Iterate
   ]
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point method Point:-
  
  Point method Point:+
   ^ IN aPoint
   FieldOffset VAR i
   Point IN Self
-  i :=
   0
+  i
+  pop:Word:SetValue
   [
    (
     aPoint |@
@@ -210,8 +212,8 @@ VOID Test PointTest
    SWAP
    Array:Iterate
   ]
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point method Point:+
  
  Point constructor Point:0
@@ -219,8 +221,8 @@ VOID Test PointTest
    0
    0
   ]
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point constructor Point:0
  
  Point method Point:Neg
@@ -242,8 +244,8 @@ VOID Test PointTest
     Point:Y
    )
   )
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point method Point:Neg
  
  Point constructor Point:OF
@@ -261,8 +263,8 @@ VOID Test PointTest
    SWAP
    Array:Iterate
   ]
-  >>>
   Result
+  pop:Word:SetValue
   (
    Result
    Array:Count
@@ -284,8 +286,8 @@ VOID Test PointTest
   Self
   FieldByOffset
   c:Point:Offset:X
-  >>>
   Result
+  pop:Word:SetValue
  ; // Pixel readonly Point:X
  
  Point constructor Point:XY
@@ -294,8 +296,8 @@ VOID Test PointTest
    aPoint |@
    DO
   ]
-  >>>
   Result
+  pop:Word:SetValue
   (
    Result
    Array:Count
@@ -311,8 +313,8 @@ VOID Test PointTest
   Self
   FieldByOffset
   c:Point:Offset:Y
-  >>>
   Result
+  pop:Word:SetValue
  ; // Pixel readonly Point:Y
  
  IMMEDIATE VOID OPERATOR readonly
@@ -326,51 +328,61 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR readonly
  
- P1 :=
  Point:0
- P2 :=
+ P1
+ pop:Word:SetValue
  Point:0
- P3 :=
+ P2
+ pop:Word:SetValue
  Point:
  1
  1
- P4 :=
+ P3
+ pop:Word:SetValue
  Point:XY
  (
   2
   2
  )
- P5 :=
+ P4
+ pop:Word:SetValue
  Point:OF
  P4
- P6 :=
+ P5
+ pop:Word:SetValue
  (
   P3
   Point:+
   P4
  )
- P7 :=
+ P6
+ pop:Word:SetValue
  (
   P3
   Point:-
   P4
  )
- P8 :=
+ P7
+ pop:Word:SetValue
  (
   P4
   Point:-
   P3
  )
- P9 :=
+ P8
+ pop:Word:SetValue
  (
   P4
   Point:Neg
  )
- P10 :=
+ P9
+ pop:Word:SetValue
  (
   P3
   Point:Neg
  )
+ P10
+ pop:Word:SetValue
  P1
  Point:Print
  P2

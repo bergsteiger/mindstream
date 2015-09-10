@@ -15,8 +15,8 @@ VOID Test PointTest
   %S
   %%
   '%Fld'
-  >>>
   l_List
+  pop:Word:SetValue
   if
    (
     l_List
@@ -24,38 +24,42 @@ VOID Test PointTest
    )
   then
    (
-    Result :=
     [
     ]
+    Result
+    pop:Word:SetValue
    )
   else
    (
-    Result :=
     (
      l_List
      pop:Word:CodeIterator
     )
+    Result
+    pop:Word:SetValue
    )
  ; // ARRAY FUNCTION %Fld
  
  ARRAY FUNCTION %G
   IN %S
-  Result :=
   (
    '%G'
    %S
    ELEMLIST
   )
+  Result
+  pop:Word:SetValue
  ; // ARRAY FUNCTION %G
  
  ARRAY FUNCTION %R
   IN %S
-  Result :=
   (
    '%R'
    %S
    ELEMLIST
   )
+  Result
+  pop:Word:SetValue
  ; // ARRAY FUNCTION %R
  
  class_impl _:Object
@@ -115,15 +119,17 @@ VOID Test PointTest
   0
  IMMEDIATE VOID OPERATOR class
   ^L IN aName
-  g_CurrentClassMembers :=
   [
   ]
-  g_ClassFieldOffset :=
+  g_CurrentClassMembers
+  pop:Word:SetValue
   0
+  g_ClassFieldOffset
+  pop:Word:SetValue
   aName
   |N
-  >>>
   g_CurrentClass
+  pop:Word:SetValue
   [
    ':'
    @
@@ -134,8 +140,8 @@ VOID Test PointTest
     g_CurrentClass
    ]
    strings:Cat
-   >>>
    g_CurrentClassImpl
+   pop:Word:SetValue
    g_CurrentClassImpl
    if
     (
@@ -246,8 +252,8 @@ VOID Test PointTest
   OBJECT IN aMember
   aMember
   DO
-  >>>
   Result
+  pop:Word:SetValue
  ; // OBJECT FUNCTION DoMember
  
  ARRAY FUNCTION ELEMLIST
@@ -260,19 +266,21 @@ VOID Test PointTest
    )
   then
    (
-    Result :=
     [
     ]
+    Result
+    pop:Word:SetValue
    )
   else
    (
     VAR l_List
-    l_List :=
     (
      %S
      %%
      aListName
     )
+    l_List
+    pop:Word:SetValue
     if
      (
       l_List
@@ -280,13 +288,13 @@ VOID Test PointTest
      )
     then
      (
-      Result :=
       [
       ]
+      Result
+      pop:Word:SetValue
      )
     else
      (
-      Result :=
       (
        @
        FilterMember
@@ -301,6 +309,8 @@ VOID Test PointTest
        )
        Array:Filter
       )
+      Result
+      pop:Word:SetValue
      )
    )
  ; // ARRAY FUNCTION ELEMLIST
@@ -332,12 +342,13 @@ VOID Test PointTest
  
  BOOLEAN FUNCTION FilterMember
   OBJECT IN aMember
-  Result :=
   (
    aMember
    NotValid
    !
   )
+  Result
+  pop:Word:SetValue
  ; // BOOLEAN FUNCTION FilterMember
  
  INTEGER VAR g_ClassFieldOffset
@@ -350,8 +361,8 @@ VOID Test PointTest
   |N
   ':'
   string:Split
-  >>>
   Result
+  pop:Word:SetValue
   DROP
  ; // STRING : getClassName
  
@@ -368,8 +379,8 @@ VOID Test PointTest
   Ctx:PushCompiler
   Ctx:PushFinder
   aWordToWork |^@
-  >>>
   l_NewCompiler
+  pop:Word:SetValue
   if
    (
     l_NewCompiler
@@ -380,8 +391,8 @@ VOID Test PointTest
    BEGIN
     l_NewCompiler
     pop:CompiledWordWorkerWord:Compiled
-    >>>
     l_NewCompiler
+    pop:Word:SetValue
    END
   l_NewCompiler
   pop:Compiler:SetToCtx
@@ -400,8 +411,8 @@ VOID Test PointTest
    aName
   ]
   strings:Cat
-  >>>
   Result
+  pop:Word:SetValue
  ; // PRIVATE STRING OPERATOR MakeFieldOffsetName
  
  PRIVATE VOID OPERATOR MakeMethodSignature
@@ -489,8 +500,8 @@ VOID Test PointTest
   Self
   FieldByOffset
   c:Object:Offset:VMT
-  >>>
   Result
+  pop:Word:SetValue
  ; // TtfwWord readonly Object:class
  
  STRING readonly Object:ClassName
@@ -498,16 +509,16 @@ VOID Test PointTest
   Self
   Object:class
   getClassName
-  >>>
   Result
+  pop:Word:SetValue
  ; // STRING readonly Object:ClassName
  
  ABSTRACT STRING method Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
-  >>>
   Result
+  pop:Word:SetValue
  ; // ABSTRACT STRING method Object:ToPrintable
  
  Point VAR P1
@@ -555,8 +566,8 @@ VOID Test PointTest
     Point:Neg
    )
   )
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point method Point:-
  
  Point constructor Point::
@@ -582,8 +593,8 @@ VOID Test PointTest
     _aY |^
    )
   ]
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point constructor Point::
  
  Point method Point:+
@@ -617,16 +628,16 @@ VOID Test PointTest
     Point:Y
    )
   )
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point method Point:+
  
  Point constructor Point:0
   Point::
   0
   0
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point constructor Point:0
  
  Point method Point:Neg
@@ -642,8 +653,8 @@ VOID Test PointTest
    Self
    Point:Y
   )
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point method Point:Neg
  
  Point constructor Point:OF
@@ -666,8 +677,8 @@ VOID Test PointTest
    )
    Point:Y
   )
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point constructor Point:OF
  
  VOID method Point:Print
@@ -692,8 +703,8 @@ VOID Test PointTest
    ' )'
   ]
   strings:Cat
-  >>>
   Result
+  pop:Word:SetValue
  ; // OVERRIDE STRING method Point:ToPrintable
  
  Pixel readonly Point:X
@@ -701,8 +712,8 @@ VOID Test PointTest
   Self
   FieldByOffset
   c:Point:Offset:X
-  >>>
   Result
+  pop:Word:SetValue
  ; // Pixel readonly Point:X
  
  Point constructor Point:XY
@@ -718,8 +729,8 @@ VOID Test PointTest
     _aPoint |^
    )
   ]
-  >>>
   Points
+  pop:Word:SetValue
   Point::
   (
    Points
@@ -731,8 +742,8 @@ VOID Test PointTest
    FieldByOffset
    1
   )
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point constructor Point:XY
  
  Pixel readonly Point:Y
@@ -740,8 +751,8 @@ VOID Test PointTest
   Self
   FieldByOffset
   c:Point:Offset:Y
-  >>>
   Result
+  pop:Word:SetValue
  ; // Pixel readonly Point:Y
  
  Rectangle VAR R1
@@ -799,8 +810,8 @@ VOID Test PointTest
     _aBottomRight |^
    )
   ]
-  >>>
   Result
+  pop:Word:SetValue
  ; // Rectangle constructor Rectangle::
  
  Point readonly Rectangle:BottomRight
@@ -808,8 +819,8 @@ VOID Test PointTest
   Self
   FieldByOffset
   c:Rectangle:Offset:BottomRight
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point readonly Rectangle:BottomRight
  
  VOID method Rectangle:Print
@@ -824,8 +835,8 @@ VOID Test PointTest
   Self
   FieldByOffset
   c:Rectangle:Offset:TopLeft
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point readonly Rectangle:TopLeft
  
  OVERRIDE STRING method Rectangle:ToPrintable
@@ -843,8 +854,8 @@ VOID Test PointTest
    ' )'
   ]
   strings:Cat
-  >>>
   Result
+  pop:Word:SetValue
  ; // OVERRIDE STRING method Rectangle:ToPrintable
  
  IMMEDIATE VOID OPERATOR RunCompileFields
@@ -871,72 +882,88 @@ VOID Test PointTest
   Ctx:Parser:PushArray
  ; // IMMEDIATE VOID OPERATOR RunCompileFields
  
- g_CurrentClass :=
  ''
- g_CurrentClassImpl :=
+ g_CurrentClass
+ pop:Word:SetValue
  ''
- g_ClassFieldOffset :=
+ g_CurrentClassImpl
+ pop:Word:SetValue
  0
+ g_ClassFieldOffset
+ pop:Word:SetValue
  (
-  g_CurrentClassMembers :=
   [
   ]
+  g_CurrentClassMembers
+  pop:Word:SetValue
  )
  PointTest
  DumpElement
- P1 :=
  Point:0
- P2 :=
+ P1
+ pop:Word:SetValue
  Point:0
- P3 :=
+ P2
+ pop:Word:SetValue
  Point::
  1
  1
- P4 :=
+ P3
+ pop:Word:SetValue
  Point:XY
  (
   2
   2
  )
- P5 :=
+ P4
+ pop:Word:SetValue
  Point:OF
  P4
- P6 :=
+ P5
+ pop:Word:SetValue
  (
   P3
   Point:+
   P4
  )
- P7 :=
+ P6
+ pop:Word:SetValue
  (
   P3
   Point:-
   P4
  )
- P8 :=
+ P7
+ pop:Word:SetValue
  (
   P4
   Point:-
   P3
  )
- P9 :=
+ P8
+ pop:Word:SetValue
  (
   P4
   Point:Neg
  )
- P10 :=
+ P9
+ pop:Word:SetValue
  (
   P3
   Point:Neg
  )
- P11 :=
+ P10
+ pop:Word:SetValue
  Point:XY
  (
   -2
   2
  )
- O1 :=
+ P11
+ pop:Word:SetValue
  P1
+ O1
+ pop:Word:SetValue
  O1
  Point:Print
  [
@@ -952,8 +979,8 @@ VOID Test PointTest
   P10
   P11
  ]
- >>>
  l_Points
+ pop:Word:SetValue
  l_Points
  DO
  Point:Print
@@ -1008,20 +1035,22 @@ VOID Test PointTest
  )
  SWAP
  Array:Iterate
- R1 :=
  Rectangle::
  P1
  P4
- R2 :=
+ R1
+ pop:Word:SetValue
  Rectangle::
  P6
  P7
+ R2
+ pop:Word:SetValue
  [
   R1
   R2
  ]
- >>>
  l_Rectangles
+ pop:Word:SetValue
  l_Rectangles
  DO
  Rectangle:Print

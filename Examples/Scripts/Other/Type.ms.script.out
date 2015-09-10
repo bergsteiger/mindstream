@@ -42,16 +42,19 @@ VOID Test TypeTest
   Ctx:SetValueTypes
  ; // IMMEDIATE VOID TYPE Y
  
- A :=
  1
- B :=
+ A
+ pop:Word:SetValue
  2
+ B
+ pop:Word:SetValue
  A
  .
  B
  .
- B :=
  'xxx'
+ B
+ pop:Word:SetValue
  B
  .
  TypeTest
