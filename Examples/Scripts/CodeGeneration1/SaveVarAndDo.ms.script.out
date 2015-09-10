@@ -2,8 +2,9 @@ VOID TestWithDump SaveVarAndDoTest
  VAR A
  SaveVarAndDoTest
  DumpElement
- A :=
  '1'
+ A
+ pop:Word:SetValue
  A
  Trace
  SaveVarAndDo
@@ -13,8 +14,9 @@ VOID TestWithDump SaveVarAndDoTest
   Trace
   'got it'
   Trace
-  A :=
   2
+  A
+  pop:Word:SetValue
   A
   Trace
  )

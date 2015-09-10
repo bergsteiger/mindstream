@@ -91,8 +91,8 @@ VOID TestWithDump PointTest
     Point:Neg
    )
   )
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point method Point:-
  
  Point constructor Point::
@@ -118,8 +118,8 @@ VOID TestWithDump PointTest
     _aY |^
    )
   ]
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point constructor Point::
  
  Point method Point:+
@@ -153,16 +153,16 @@ VOID TestWithDump PointTest
     Point:Y
    )
   )
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point method Point:+
  
  Point constructor Point:0
   Point::
   0
   0
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point constructor Point:0
  
  Point method Point:Neg
@@ -178,8 +178,8 @@ VOID TestWithDump PointTest
    Self
    Point:Y
   )
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point method Point:Neg
  
  Point constructor Point:OF
@@ -202,8 +202,8 @@ VOID TestWithDump PointTest
    )
    Point:Y
   )
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point constructor Point:OF
  
  VOID method Point:Print
@@ -228,8 +228,8 @@ VOID TestWithDump PointTest
    ' )'
   ]
   strings:Cat
-  >>>
   Result
+  pop:Word:SetValue
  ; // OVERRIDE STRING method Point:ToPrintable
  
  Pixel readonly Point:X
@@ -237,8 +237,8 @@ VOID TestWithDump PointTest
   Self
   FieldByOffset
   c:Point:Offset:X
-  >>>
   Result
+  pop:Word:SetValue
  ; // Pixel readonly Point:X
  
  Point constructor Point:XY
@@ -254,8 +254,8 @@ VOID TestWithDump PointTest
     _aPoint |^
    )
   ]
-  >>>
   Points
+  pop:Word:SetValue
   Point::
   (
    Points
@@ -267,8 +267,8 @@ VOID TestWithDump PointTest
    FieldByOffset
    1
   )
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point constructor Point:XY
  
  Pixel readonly Point:Y
@@ -276,8 +276,8 @@ VOID TestWithDump PointTest
   Self
   FieldByOffset
   c:Point:Offset:Y
-  >>>
   Result
+  pop:Word:SetValue
  ; // Pixel readonly Point:Y
  
  Rectangle VAR R1
@@ -310,8 +310,8 @@ VOID TestWithDump PointTest
     _aBottomRight |^
    )
   ]
-  >>>
   Result
+  pop:Word:SetValue
  ; // Rectangle constructor Rectangle::
  
  Point readonly Rectangle:BottomRight
@@ -319,8 +319,8 @@ VOID TestWithDump PointTest
   Self
   FieldByOffset
   c:Rectangle:Offset:BottomRight
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point readonly Rectangle:BottomRight
  
  VOID method Rectangle:Print
@@ -335,8 +335,8 @@ VOID TestWithDump PointTest
   Self
   FieldByOffset
   c:Rectangle:Offset:TopLeft
-  >>>
   Result
+  pop:Word:SetValue
  ; // Point readonly Rectangle:TopLeft
  
  OVERRIDE STRING method Rectangle:ToPrintable
@@ -354,65 +354,77 @@ VOID TestWithDump PointTest
    ' )'
   ]
   strings:Cat
-  >>>
   Result
+  pop:Word:SetValue
  ; // OVERRIDE STRING method Rectangle:ToPrintable
  
  PointTest
  DumpElement
- P1 :=
  Point:0
- P2 :=
+ P1
+ pop:Word:SetValue
  Point:0
- P3 :=
+ P2
+ pop:Word:SetValue
  Point::
  1
  1
- P4 :=
+ P3
+ pop:Word:SetValue
  Point:XY
  (
   2
   2
  )
- P5 :=
+ P4
+ pop:Word:SetValue
  Point:OF
  P4
- P6 :=
+ P5
+ pop:Word:SetValue
  (
   P3
   Point:+
   P4
  )
- P7 :=
+ P6
+ pop:Word:SetValue
  (
   P3
   Point:-
   P4
  )
- P8 :=
+ P7
+ pop:Word:SetValue
  (
   P4
   Point:-
   P3
  )
- P9 :=
+ P8
+ pop:Word:SetValue
  (
   P4
   Point:Neg
  )
- P10 :=
+ P9
+ pop:Word:SetValue
  (
   P3
   Point:Neg
  )
- P11 :=
+ P10
+ pop:Word:SetValue
  Point:XY
  (
   -2
   2
  )
- O1 :=
+ P11
+ pop:Word:SetValue
  P1
+ O1
+ pop:Word:SetValue
  O1
  Point:Print
  [
@@ -428,8 +440,8 @@ VOID TestWithDump PointTest
   P10
   P11
  ]
- >>>
  l_Points
+ pop:Word:SetValue
  l_Points
  Point:Print
  SWAP
@@ -479,20 +491,22 @@ VOID TestWithDump PointTest
  )
  SWAP
  Array:Iterate
- R1 :=
  Rectangle::
  P1
  P4
- R2 :=
+ R1
+ pop:Word:SetValue
  Rectangle::
  P6
  P7
+ R2
+ pop:Word:SetValue
  [
   R1
   R2
  ]
- >>>
  l_Rectangles
+ pop:Word:SetValue
  l_Rectangles
  Rectangle:Print
  SWAP

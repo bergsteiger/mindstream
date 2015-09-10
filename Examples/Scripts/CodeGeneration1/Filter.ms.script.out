@@ -6,8 +6,8 @@ VOID TestWithDump FilterTest
   MOD
   0
   ==
-  >>>
   Result
+  pop:Word:SetValue
  ; // BOOLEAN FUNCTION IsEven
  
  STRING FUNCTION ToPrintableEx
@@ -22,18 +22,20 @@ VOID TestWithDump FilterTest
     [
      INTEGER VAR l_SL
      '[ '
-     l_SL :=
      StackLevel
+     l_SL
+     pop:Word:SetValue
      aValue
      DO
      (
       INTEGER VAR l_Delta
-      l_Delta :=
       (
        StackLevel
        l_SL
        -
       )
+      l_Delta
+      pop:Word:SetValue
       if
        (
         l_Delta
@@ -48,8 +50,9 @@ VOID TestWithDump FilterTest
       else
        (
         INTEGER VAR l_Index
-        l_Index :=
         l_Delta
+        l_Index
+        pop:Word:SetValue
         '{ '
         l_Delta
         LOOP
@@ -61,8 +64,9 @@ VOID TestWithDump FilterTest
         )
         '}'
        )
-      l_SL :=
       StackLevel
+      l_SL
+      pop:Word:SetValue
      )
      SWAP
      Array:Iterate
@@ -70,15 +74,15 @@ VOID TestWithDump FilterTest
     ]
     ' '
     strings:CatSep
-    >>>
     Result
+    pop:Word:SetValue
    )
   else
    (
     aValue
     ToPrintable
-    >>>
     Result
+    pop:Word:SetValue
    )
  ; // STRING FUNCTION ToPrintableEx
  
