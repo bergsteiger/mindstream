@@ -24,11 +24,12 @@ VOID TestWithDump MapTest
   9
   10
  ]
- .map>
  (
   1
   +
  )
+ SWAP
+ Array:Map
  .
  SWAP
  Array:Iterate
@@ -44,11 +45,12 @@ VOID TestWithDump MapTest
   9
   10
  ]
- .map>
  (
   1
   +
  )
+ SWAP
+ Array:Map
  .
  [
   1
@@ -62,12 +64,13 @@ VOID TestWithDump MapTest
   9
   10
  ]
- .map>
  (
   INTEGER IN anItem
   anItem
   IsEven
  )
+ SWAP
+ Array:Map
  .
  SWAP
  Array:Iterate
@@ -83,12 +86,13 @@ VOID TestWithDump MapTest
   9
   10
  ]
- .map>
  (
   INTEGER IN anItem
   anItem
   IsEven
  )
+ SWAP
+ Array:Map
  .
  [
   1
@@ -102,7 +106,6 @@ VOID TestWithDump MapTest
   9
   10
  ]
- .map>
  (
   INTEGER IN anItem
   if
@@ -121,6 +124,8 @@ VOID TestWithDump MapTest
     +
    )
  )
+ SWAP
+ Array:Map
  .
  SWAP
  Array:Iterate
@@ -136,7 +141,6 @@ VOID TestWithDump MapTest
   9
   10
  ]
- .map>
  (
   INTEGER IN anItem
   if
@@ -155,6 +159,8 @@ VOID TestWithDump MapTest
     +
    )
  )
+ SWAP
+ Array:Map
  .
  [
   1
@@ -170,8 +176,9 @@ VOID TestWithDump MapTest
  ]
  .slice>
  2
- .map>
  +
+ SWAP
+ Array:Map
  .
  SWAP
  Array:Iterate
@@ -189,8 +196,9 @@ VOID TestWithDump MapTest
  ]
  .slice>
  2
- .map>
  +
+ SWAP
+ Array:Map
  .
 ; // VOID TestWithDump MapTest
 
