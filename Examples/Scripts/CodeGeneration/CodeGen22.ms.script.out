@@ -203,6 +203,12 @@ Dictionary: axiom:ParserEx
 VOID pop:ParserEx:PushInt
 VOID pop:ParserEx:PushString
 VOID pop:ParserEx:PushSymbol
+Dictionary: axiom:RunTests
+IMMEDIATE VOID OPERATOR :: MACRO : RunTests.in.array
+ Documentation:
+  Выполняет тесты для списка слов aWords
+ ^ OPERATOR :: IN : aWords
+; // RunTests.in.array
 Dictionary: axiom:string
 Dictionary: axiom:strings
 Dictionary: axiom:SV
@@ -288,6 +294,12 @@ INTEGER .TComponent.Tag
 Dictionary: axiom:test
 test:ResolveInputFilePath
 Dictionary: axiom:tests
+VOID OPERATOR : Tests:@(
+ VOID OPERATOR :: Test : T1
+; // Tests:@(
+VOID OPERATOR : Tests:@[
+ VOID OPERATOR :: Test : T1
+; // Tests:@[
 tests:CheckEtalon
 tests:CheckOutputWithInput
 Dictionary: axiom:text
@@ -332,6 +344,7 @@ Dictionary: CodeGen22.ms.script
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -383,6 +396,7 @@ Dictionary: axiom:axiom
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -413,6 +427,7 @@ Dictionary: axiom:axiom
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -501,13 +516,15 @@ OBJECT FUNCTION : %P
  OPERATOR :: VAR : l_P
  OBJECT FUNCTION :: %P : Result
 ; // %P
-IMMEDIATE VOID OPERATOR :: MACRO : %REMARK
+IMMEDIATE VOID OPERATOR : %REMARK
  Documentation:
   Ремарка
  ^L OPERATOR :: IN : aDoc
 ; // %REMARK
 OBJECT FUNCTION : %ST
  OPERATOR :: IN : %S
+ Documentation:
+  Возвращает стереотип слова
  OBJECT FUNCTION :: %ST : Result
 ; // %ST
 IMMEDIATE REDIFINITION VOID OPERATOR :: NamedWordProducer : %SUMMARY
@@ -547,10 +564,10 @@ REDIFINITION : : .
 ==> Redefines
  VOID .
 <== Redefines
-ARRAY FUNCTION : .filter>
+IMMEDIATE VOID OPERATOR :: MACRO : .filter>
+ Documentation:
+  Фильтрует указанный массив функтором aFunctor
  ^ OPERATOR :: IN : aFunctor
- ARRAY OPERATOR :: IN : anArray
- ARRAY FUNCTION :: .filter> : Result
 ; // .filter>
 IMMEDIATE VOID OPERATOR :: MACRO : .for>
  Documentation:
@@ -562,10 +579,10 @@ ARRAY FUNCTION : .join>
  ^ OPERATOR :: IN : aRight
  ARRAY FUNCTION :: .join> : Result
 ; // .join>
-ARRAY FUNCTION : .map>
+IMMEDIATE VOID OPERATOR :: MACRO : .map>
+ Documentation:
+  Трансформирует массив фнуктором aFunctor
  ^ OPERATOR :: IN : aFunctor
- ARRAY OPERATOR :: IN : anArray
- ARRAY FUNCTION :: .map> : Result
 ; // .map>
 ARRAY .reverted>
 ARRAY FUNCTION : .slice>
@@ -575,6 +592,8 @@ ARRAY FUNCTION : .slice>
 ; // .slice>
 OBJECT FUNCTION : .Stereotype
  OPERATOR :: IN : %S
+ Documentation:
+  Возвращает стереотип слова
  OBJECT FUNCTION :: %ST : Result
 ; // .Stereotype
 ARRAY FUNCTION : .trunc>
@@ -609,18 +628,36 @@ STRING FUNCTION : ?(+)
  STRING FUNCTION :: ?(+) : Result
 ; // ?(+)
 BOOLEAN ?==
+VOID CALLER OPERATOR : ?Assure
+ BOOLEAN OPERATOR :: IN : aCondition
+ ^ OPERATOR :: IN : aMessage
+ TtfwWord OPERATOR :: IN : Caller
+; // ?Assure
 VOID CALLER OPERATOR : ?ASSURE
  BOOLEAN OPERATOR :: IN : aCondition
  ^ OPERATOR :: IN : aMessage
  TtfwWord OPERATOR :: IN : Caller
 ; // ?ASSURE
 VOID ?DUP
+VOID CALLER OPERATOR : ?Fail
+ BOOLEAN OPERATOR :: IN : aCondition
+ ^ OPERATOR :: IN : aMessage
+ TtfwWord OPERATOR :: IN : Caller
+; // ?Fail
 VOID CALLER OPERATOR : ?FAIL
  BOOLEAN OPERATOR :: IN : aCondition
  ^ OPERATOR :: IN : aMessage
  TtfwWord OPERATOR :: IN : Caller
 ; // ?FAIL
 TtfwWord @
+IMMEDIATE VOID OPERATOR :: MACRO : @(
+ Documentation:
+   Компилирует СПИСОК адресов слов. Аналог ( @ X1 @ X2 .. @ XN ) 
+; // @(
+IMMEDIATE VOID OPERATOR :: MACRO : @[
+ Documentation:
+   Компилирует МАССИВ адресов слов. Аналог [ @ X1 @ X2 .. @ XN ] 
+; // @[
 ^@ OPERATOR : @^
  Documentation:
     - возвращает ссылку на слово, любое, даже непосредственного исполнения    Не адрес, а именно ССЫЛКУ.  Разница в примере:  {   @ A DO   @^ A      @ A ^:= 1   @^ A := 1   // - записи делают одно и то же  } 
@@ -850,6 +887,8 @@ BOOLEAN OPERATOR : AND
  ^ OPERATOR :: IN : aSecond
  BOOLEAN OPERATOR :: AND : Result
 ; // AND
+IMMEDIATE VOID OPERATOR :: TYPE : ANY
+IMMEDIATE VOID OPERATOR : array
 IMMEDIATE VOID OPERATOR : ARRAY
 VOID Array:Add
 VOID Array:Clear
@@ -951,10 +990,16 @@ STRING OPERATOR : axiom:SourceInfo
 begin
 BEGIN
 IMMEDIATE VOID OPERATOR : BOOLEAN
+VOID break
 VOID BREAK
 VOID BREAK-ITERATOR
+IMMEDIATE VOID OPERATOR :: TYPE : callback
+IMMEDIATE VOID OPERATOR :: TYPE : Callback
+IMMEDIATE VOID OPERATOR :: TYPE : CallBack
 IMMEDIATE VOID OPERATOR : CALLER
 IMMEDIATE VOID OPERATOR : CARDINAL
+case
+Case
 CASE
 IMMEDIATE VOID OPERATOR :: TYPE : CASTABLE
 STRING Cat
@@ -1601,12 +1646,16 @@ VOID CompileRef
 VOID CompileValue
 VOID CompileWeakRef
 STRING ComputerName
+const
+Const
 CONST
 CONSTANT
+VOID continue
 VOID CONTINUE
 VOID CopyFile
 VOID CopyFilesByMask
 VOID CreateAndRaise
+STRING CONST : cTests
 OBJECT current:exception
 TClass current:exception:class
 STRING current:exception:ClassName
@@ -1623,6 +1672,8 @@ IMMEDIATE VOID OPERATOR : DECLARED
  ^L OPERATOR :: IN : aName
  BOOLEAN OPERATOR :: VAR : l_Found
 ; // DECLARED
+default
+Default
 DEFAULT
 Define
 VOID OPERATOR : DefineStereo
@@ -1644,6 +1695,28 @@ VOID OPERATOR : DisableForHelp
 ; // DisableForHelp
 INTEGER DIV
 VOID DO
+VOID OPERATOR :: PROCEDURE : DogAndBracket
+ STRING OPERATOR :: IN : aBracketClose
+ STRING OPERATOR :: IN : aBracketOpen
+ ARRAY OPERATOR :: VAR : l_A
+ INTERFACE OPERATOR :: VAR : l_Parser
+; // DogAndBracket
+PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTests
+ Documentation:
+  Выполняет тесты для списка слов aWords
+ Sequence OPERATOR :: IN : aWords
+; // DoRunTests
+PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTestsA
+ Documentation:
+  Выполняет тесты для списка слов aWords
+ ARRAY OPERATOR :: IN : aWords
+; // DoRunTestsA
+PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTestsFor
+ Documentation:
+  Выполняет тесты для aTestsHolder
+ STRING OPERATOR :: IN : aTestedWordName
+ ENGINE_WORD OPERATOR :: IN : aTestsHolder
+; // DoRunTestsFor
 VOID DROP
 VOID DROPN
 VOID DUP
@@ -1681,6 +1754,7 @@ end
 END
 BOOLEAN EndsStr
 BOOLEAN EndsText
+IMMEDIATE VOID OPERATOR :: TYPE : ENGINE_WORD
 EOSError
 EOutOfMemory
 EOutOfResources
@@ -1690,6 +1764,14 @@ EPrivilege
 ERangeError
 EReadError
 EResNotFound
+VOID CALLER OPERATOR : error
+ ^ OPERATOR :: IN : aMsg
+ TtfwWord OPERATOR :: IN : Caller
+; // error
+VOID CALLER OPERATOR : Error
+ ^ OPERATOR :: IN : aMsg
+ TtfwWord OPERATOR :: IN : Caller
+; // Error
 VOID CALLER OPERATOR : ERROR
  ^ OPERATOR :: IN : aMsg
  TtfwWord OPERATOR :: IN : Caller
@@ -1723,7 +1805,13 @@ OPERATOR : EVAL
 EWriteError
 EXCEPT
 Exception
+VOID exit
 VOID EXIT
+PRIVATE VOID OPERATOR :: PROCEDURE : ExpandRunTestsFor
+ ENGINE_WORD OPERATOR :: IN : aTestsHolder
+ STRING OPERATOR :: VAR : l_Name
+ STRING OPERATOR :: VAR : l_TestsHolderName
+; // ExpandRunTestsFor
 IMMEDIATE VOID OPERATOR : EXPORTS
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
@@ -1762,6 +1850,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : FOR
 FORWARD
 function
 FUNCTION
+IMMEDIATE VOID OPERATOR :: TYPE : Functor
 IMMEDIATE VOID OPERATOR :: TYPE : FUNCTOR
 ARRAY FunctorToIterator
 VOID GeneratePDFForEtalon
@@ -1865,8 +1954,10 @@ IMMEDIATE VOID OPERATOR :: MACRO : IT
   Итерирует массив A вызывая лямбду aWhatToDo
  ^ OPERATOR :: IN : aWhatToDo
 ; // IT
+IMMEDIATE VOID OPERATOR :: TYPE : ITERATABLE
 VOID Iterate
 VOID ITERATE
+IMMEDIATE VOID OPERATOR :: TYPE : ITERATOR
 ItfwFile
 ItfwIterator
 ItfwParser
@@ -1877,8 +1968,10 @@ ItfwStoredValuesStack
 ItfwValueList
 ARRAY Join
 ARRAY JOIN
+IMMEDIATE VOID OPERATOR :: TYPE : Lambda
 BOOLEAN LESS
 IMMEDIATE VOID OPERATOR : LINK
+IMMEDIATE VOID OPERATOR :: TYPE : List
 ARRAY FUNCTION : LIST
  ^ OPERATOR :: IN : aFunctor
  OBJECT OPERATOR :: IN : anObject
@@ -2040,10 +2133,20 @@ INTEGER pop:String:StrToInt
 STRING pop:String:text_Replace
 STRING pop:String:text_ReplaceFirst
 CHAR pop:String:ToChar
+VOID OPERATOR :: PROCEDURE : Print
+ PRINTABLE OPERATOR :: IN : aValue
+; // Print
+IMMEDIATE VOID OPERATOR :: TYPE : PRINTABLE
+: : PrintStack
+IMMEDIATE VOID OPERATOR : private
+IMMEDIATE VOID OPERATOR : Private
 IMMEDIATE VOID OPERATOR : PRIVATE
 IMMEDIATE VOID OPERATOR : procedure
  ^L OPERATOR :: IN : aName
 ; // procedure
+IMMEDIATE VOID OPERATOR : Procedure
+ ^L OPERATOR :: IN : aName
+; // Procedure
 IMMEDIATE VOID OPERATOR : PROCEDURE
  ^L OPERATOR :: IN : aName
 ; // PROCEDURE
@@ -2068,7 +2171,7 @@ IMMEDIATE VOID OPERATOR : REDEFINITION
 VOID ReduceStackLevel
 IMMEDIATE VOID OPERATOR : REF
 IMMEDIATE VOID OPERATOR : REFERENCE
-IMMEDIATE VOID OPERATOR :: MACRO : REMARK
+IMMEDIATE VOID OPERATOR : REMARK
  Documentation:
   Ремарка
  ^L OPERATOR :: IN : aDoc
@@ -2088,9 +2191,15 @@ VOID ROLL
 VOID ROT
 VOID -ROT
 RULES
+IMMEDIATE VOID OPERATOR :: MACRO : RunTests
+ Documentation:
+  Выполняет тесты для списка слов aWords
+ LINK ^ OPERATOR :: IN : aWords
+; // RunTests
 BOOLEAN SameStr
 BOOLEAN SameText
 IMMEDIATE VOID OPERATOR : SEALED
+IMMEDIATE VOID OPERATOR :: TYPE : Sequence
 VOID SetAppPath2CurrentDir
 VOID SetLocalDate
 VOID SetLocalDateTime
@@ -2123,8 +2232,10 @@ IMMEDIATE VOID OPERATOR : StereotypeStereotypeProducer
 ; // StereotypeStereotypeProducer
 INTEGER StopTimer
 INTEGER StopTimerEx
+IMMEDIATE VOID OPERATOR : string
 String
 IMMEDIATE VOID OPERATOR : STRING
+IMMEDIATE VOID OPERATOR : String$Define
 CHAR string:[i]
 VOID string:+!
 VOID string:++!
@@ -2160,6 +2271,11 @@ IMMEDIATE VOID OPERATOR : TClass
 TColor
 TComponent
 IMMEDIATE VOID OPERATOR : Test
+IMMEDIATE VOID OPERATOR :: MACRO : TestsFor
+ Documentation:
+  Определяет набор тестов для слова aWord
+ LINK ^ OPERATOR :: IN : aWord
+; // TestsFor
 STRING text:Replace
 STRING text:ReplaceFirst
 IMMEDIATE VOID OPERATOR : then
@@ -2746,6 +2862,12 @@ TtfwWordWorker
 TtfwWordWorkerEx
 TtfwWStrWord
 VOID TUCK
+IMMEDIATE OPERATOR : type
+ ^L OPERATOR :: IN : aName
+; // type
+IMMEDIATE OPERATOR : Type
+ ^L OPERATOR :: IN : aName
+; // Type
 IMMEDIATE OPERATOR : TYPE
  ^L OPERATOR :: IN : aName
 ; // TYPE
@@ -2765,6 +2887,11 @@ IMMEDIATE VOID OPERATOR : var
 IMMEDIATE VOID OPERATOR : VAR
  ^L OPERATOR :: IN : aName
 ; // VAR
+IMMEDIATE VOID OPERATOR : var$Define
+ ^L OPERATOR :: IN : aName
+; // var$Define
+IMMEDIATE VOID OPERATOR :: TYPE : VAR_REF
+IMMEDIATE VOID OPERATOR :: TYPE : VARIANT
 STRING FUNCTION : VarMsgToStr
  OBJECT OPERATOR :: IN : aMessage
  OPERATOR :: VAR : l_Msg
@@ -2775,12 +2902,17 @@ IMMEDIATE VOID OPERATOR : VarProducer
  STRING OPERATOR :: VAR : l_Name
 ; // VarProducer
 IMMEDIATE VOID OPERATOR : VIRTUAL
+IMMEDIATE OPERATOR : void
 IMMEDIATE OPERATOR : VOID
-OPERATOR : while
+IMMEDIATE VOID OPERATOR :: MACRO : while
+ Documentation:
+  Выполняет слово aWhatToDo пока условие aCondition истинно 
  ^ OPERATOR :: IN : aCondition
  ^ OPERATOR :: IN : aWhatToDo
 ; // while
-OPERATOR : WHILE
+IMMEDIATE VOID OPERATOR :: MACRO : WHILE
+ Documentation:
+  Выполняет слово aWhatToDo пока условие aCondition истинно 
  ^ OPERATOR :: IN : aCondition
  ^ OPERATOR :: IN : aWhatToDo
 ; // WHILE
@@ -2867,7 +2999,9 @@ BOOLEAN OPERATOR : НЕЯВЛЯЕТСЯ
  CASTABLE OPERATOR :: IN : anObj
  BOOLEAN OPERATOR :: NOTIS : Result
 ; // НЕЯВЛЯЕТСЯ
-OPERATOR : ПОКА
+IMMEDIATE VOID OPERATOR :: MACRO : ПОКА
+ Documentation:
+  Выполняет слово aWhatToDo пока условие aCondition истинно 
  ^ OPERATOR :: IN : aCondition
  ^ OPERATOR :: IN : aWhatToDo
 ; // ПОКА
@@ -3135,6 +3269,11 @@ VOID OPERATOR :: PROCEDURE : std::out<<
 Dictionary: axiom:KeywordFinder
 TtfwKeyWord pop:KeywordFinder:KeywordByName
 TtfwWord pop:KeywordFinder:ParentFinder
+Dictionary: axiom:Sequence
+ARRAY FUNCTION : Sequence.It
+ Sequence OPERATOR :: IN : aCode
+ ARRAY FUNCTION :: Sequence.It : Result
+; // Sequence.It
 Dictionary: axiom:Stereotype
 ARRAY FUNCTION : .Stereotype.Words
  ARRAY FUNCTION :: .Stereotype.Words : Result
@@ -3200,6 +3339,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.ms.dic
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3248,6 +3388,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.ms.dic
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3298,6 +3439,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3340,6 +3482,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3378,6 +3521,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3413,6 +3557,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3485,6 +3630,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3529,6 +3675,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dic
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3566,6 +3713,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbo
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3613,6 +3761,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3671,6 +3820,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3734,6 +3884,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3792,6 +3943,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3828,6 +3980,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3864,6 +4017,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3926,6 +4080,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3963,6 +4118,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4001,6 +4157,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4039,6 +4196,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.di
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4074,6 +4232,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4118,6 +4277,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.di
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4213,6 +4373,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.d
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
+  axiom:Sequence
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary

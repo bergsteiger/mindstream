@@ -29,7 +29,6 @@ VOID Test ListTest
   l_Element
   pop:Word:SetValue
   [
-   WHILE
    true
    BEGIN
     (
@@ -48,6 +47,7 @@ VOID Test ListTest
      BREAK
     l_Element
    END
+   WHILEDO
   ]
   Result
   pop:Word:SetValue
