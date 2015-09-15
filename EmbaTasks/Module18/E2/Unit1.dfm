@@ -37,7 +37,6 @@ object fmMain: TfmMain
       Height = 351
       Align = alLeft
       TabOrder = 0
-      ExplicitHeight = 254
     end
     object pnlTop: TPanel
       Left = 1
@@ -82,7 +81,6 @@ object fmMain: TfmMain
       Height = 351
       Align = alLeft
       TabOrder = 2
-      ExplicitHeight = 254
     end
   end
 end
