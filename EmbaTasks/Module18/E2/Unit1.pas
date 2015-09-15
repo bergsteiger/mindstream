@@ -69,47 +69,42 @@ begin
     fmMain.memResult.Lines.Append(IntToStr(a[i + 1]));
 end;
 
-function NumMin(a: array_n_elements; start: integer): integer;
+procedure PositiveToBegin(var a, ResArray: array_n_elements);
 var
-  i, m: integer;
+  i, PosCount, NegCount: integer;
 begin
-  m := start;
-  for i := m + 1 to n do
-    if a[i] < a[m] then
-      m := i;
-  NumMin := m;
-end;
+  PosCount := 0;
+  NegCount := 0;
+  For i := 1 to n do
+  begin
+    if a[i] > 0 then
+    begin
+      Inc(PosCount);
+      ResArray[PosCount] := a[i];
+    end
+    else
+    begin
+      Inc(NegCount);
+      ResArray[N-NegCount + 1] := a[i];
+    end;
 
-procedure change(var one, two: integer);
-var
-  temp: integer;
-begin
-  temp := one;
-  one := two;
-  two := temp;
-end;
-
-procedure SortArr(var a: array_n_elements);
-var
-  i: integer;
-begin
-  for i := 1 to n - 1 do // For each element in array
-    change(a[i], a[NumMin(a, i)]);
-  // exchange current element and the least element in the range from current to the end of array.
+  end;
 end;
 
 procedure TfmMain.btnDoItClick(Sender: TObject);
 var
   chB, chE: integer;
-  a: array_n_elements;
+  a, ResArr: array_n_elements;
 begin
   Input(chB, chE); // Input array value range,
   // from chB to chE (inclusively).
   FillArray(a, chB, chE); // Fill the array with random numbers
   // in the range from chB to chE
   OutputArray1(a, n); // Output array A into TMemo 1.
-  SortArr(a); //Sort the array A in ascending order.
-  OutputArray2(a, n); // Output array A, into TMemo 2.
+
+  PositiveToBegin(a, ResArr);
+
+  OutputArray2(ResArr, n); // Output array A, into TMemo 2.
 end;
 
 end.

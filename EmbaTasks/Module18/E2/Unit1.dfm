@@ -2,7 +2,7 @@ object fmMain: TfmMain
   Left = 0
   Top = 0
   Caption = 'Main'
-  ClientHeight = 408
+  ClientHeight = 512
   ClientWidth = 497
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,7 +15,7 @@ object fmMain: TfmMain
   TextHeight = 13
   object btnDoIt: TButton
     Left = 96
-    Top = 352
+    Top = 456
     Width = 289
     Height = 37
     Caption = 'DoIt'
@@ -26,18 +26,18 @@ object fmMain: TfmMain
     Left = 0
     Top = 0
     Width = 497
-    Height = 336
+    Height = 433
     Align = alTop
     Caption = 'pnlMain'
     TabOrder = 1
-    ExplicitWidth = 727
     object memMain: TMemo
       Left = 1
       Top = 81
       Width = 240
-      Height = 254
+      Height = 351
       Align = alLeft
       TabOrder = 0
+      ExplicitHeight = 254
     end
     object pnlTop: TPanel
       Left = 1
@@ -46,7 +46,6 @@ object fmMain: TfmMain
       Height = 80
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 725
       object edtCh1: TEdit
         Left = 16
         Top = 11
@@ -80,9 +79,10 @@ object fmMain: TfmMain
       Left = 241
       Top = 81
       Width = 256
-      Height = 254
+      Height = 351
       Align = alLeft
       TabOrder = 2
+      ExplicitHeight = 254
     end
   end
 end
