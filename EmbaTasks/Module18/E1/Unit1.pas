@@ -106,17 +106,17 @@ end;
 
 procedure SplitArray(a: array_n_elements);
 var
-  Index : Integer;
+  i : Integer;
 begin
   fmMain.memPositiveNum.Clear;
   fmMain.memNegativeNum.Clear;
 
-  for Index := 1 to n do
+  for i := 1 to n do
   begin
-    if a[Index] < 0 then
-      fmMain.memNegativeNum.Lines.Append(IntToStr(a[Index]))
+    if a[i] < 0 then
+      fmMain.memNegativeNum.Lines.Append(IntToStr(a[i]))
     else
-      fmMain.memPositiveNum.Lines.Append(IntToStr(a[Index]));
+      fmMain.memPositiveNum.Lines.Append(IntToStr(a[i]));
   end;
 end;
 
@@ -147,9 +147,9 @@ begin
   SetArrayRange(rMin, rMax); //Set range of array values
   FillArray(a, rMin, rMax);  //Fill array with numbers from the specified	range
   OutputArray(a, n); //Output array
-  Asum := sum(a);
-  Aavg := Asum / n;
-  GetQuantity(AquantityPos, AquantityNeg, a);
+  Asum := sum(a); // Get Sum
+  Aavg := Asum / n; // Get Avg
+  GetQuantity(AquantityPos, AquantityNeg, a); // Get Quantity of negative and positive elements
   Amax := max(a); //Find maximal element Amax
   Amin := min(a); //Find minimal element Amin
 
