@@ -34,7 +34,7 @@ Const
   n = 20;
 
 Type
-  array_n_elements = array [1 .. n] of integer;
+  array_n_elements = array [1 .. 2 * n] of real;
 
 procedure Input(var ch1, ch2: integer);
 begin
@@ -42,13 +42,13 @@ begin
   ch2 := StrToInt(fmMain.edtCh2.Text);
 end;
 
-procedure FillArray(var a: array_n_elements; rMin, rMax: integer);
+procedure FillArray(var a: array_n_elements; rMin, rMax: real);
 var
   i: integer;
 begin
   randomize;
-  For i := 1 to n do
-    a[i] := random(rMax - rMin) + rMin;
+  For i := 1 to 2 * n do
+    a[i] := random * (rMax - rMin) + rMin;
 end;
 
 procedure OutputArray1(a: array_n_elements);
@@ -56,8 +56,8 @@ var
   i: integer;
 begin
   fmMain.memMain.Clear;
-  for i := 0 to n - 1 do
-    fmMain.memMain.Lines.Append(IntToStr(a[i + 1]));
+  for i := 0 to 2 * n - 1 do
+    fmMain.memMain.Lines.Append(FloatToStr(a[i + 1]));
 end;
 
 procedure OutputArray2(a: array_n_elements);
@@ -65,33 +65,25 @@ var
   i: integer;
 begin
   fmMain.memResult.Clear;
-  for i := 0 to n - 1 do
-    fmMain.memResult.Lines.Append(IntToStr(a[i + 1]));
+  for i := 0 to 2 * n - 1 do
+    fmMain.memResult.Lines.Append(FloatToStr(a[i + 1]));
 end;
 
-procedure PositiveToBegin(var a : array_n_elements);
+procedure change(var one, two: real);
 var
-  i, PosCount, NegCount: integer;
-  ResArray : array_n_elements;
+  temp: real;
 begin
-  PosCount := 0;
-  NegCount := 0;
-  For i := 1 to n do
-  begin
-    if a[i] > 0 then
-    begin
-      Inc(PosCount);
-      ResArray[PosCount] := a[i];
-    end
-    else
-    begin
-      Inc(NegCount);
-      ResArray[N-NegCount + 1] := a[i];
-    end;
-  end;
+  temp:=one;
+  one:=two;
+  two:=temp;
+end;
 
+procedure ChangeBeginToEnd(var a : array_n_elements);
+var
+  i: integer;
+begin
   For i := 1 to n do
-    a[i] := ResArray[i];
+    change(a[i], a[i + n]);
 end;
 
 procedure TfmMain.btnDoItClick(Sender: TObject);
@@ -105,7 +97,7 @@ begin
   // in the range from chB to chE
   OutputArray1(a); // Output array A into TMemo 1.
 
-  PositiveToBegin(a);
+  ChangeBeginToEnd(a);
 
   OutputArray2(a); // Output array A, into TMemo 2.
 end;
