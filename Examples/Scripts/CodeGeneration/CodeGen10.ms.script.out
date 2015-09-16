@@ -205,7 +205,7 @@ TColor TColor::clWindowText
 TColor TColor::clYellow
 Dictionary: axiom:TComponent
 TComponentName .TComponent.Name
-INTEGER .TComponent.Tag
+NativeInt .TComponent.Tag
 Dictionary: axiom:test
 test:ResolveInputFilePath
 Dictionary: axiom:tests
@@ -802,6 +802,8 @@ BOOLEAN OPERATOR : AND
  ^ OPERATOR :: IN : aSecond
  BOOLEAN OPERATOR :: AND : Result
 ; // AND
+AnsiChar
+AnsiString
 IMMEDIATE VOID OPERATOR :: TYPE : ANY
 IMMEDIATE VOID OPERATOR : array
 IMMEDIATE VOID OPERATOR : ARRAY
@@ -936,7 +938,6 @@ INTEGER CONST : CF_TEXT
 INTEGER CONST : CF_TIFF
 INTEGER CONST : CF_UNICODETEXT
 INTEGER CONST : CF_WAVE
-Char
 IMMEDIATE VOID OPERATOR : CHAR
 STRING char:Dupe
 STRING char:ToString
@@ -1941,6 +1942,7 @@ STRING FUNCTION : NameOf
  LINK ^ OPERATOR :: IN : aWord
  STRING FUNCTION :: NameOf : Result
 ; // NameOf
+NativeInt
 ARRAY FUNCTION : NativeMembersIterator
  TtfwWord OPERATOR :: IN : aWord
  BOOLEAN FUNCTION : FilterMember
@@ -2024,7 +2026,7 @@ pop:object:SetFloatProp
 pop:object:SetOrdProp
 pop:object:SetStrProp
 STRING pop:String:Cat
-CHAR pop:String:Char
+AnsiChar pop:String:Char
 STRING pop:String:char_Dupe
 STRING pop:String:char_ToString
 INTEGER pop:String:CodePage
@@ -2047,7 +2049,7 @@ BOOLEAN pop:String:StartsText
 INTEGER pop:String:StrToInt
 STRING pop:String:text_Replace
 STRING pop:String:text_ReplaceFirst
-CHAR pop:String:ToChar
+AnsiChar pop:String:ToChar
 VOID OPERATOR :: PROCEDURE : Print
  PRINTABLE OPERATOR :: IN : aValue
 ; // Print
@@ -2148,10 +2150,9 @@ IMMEDIATE VOID OPERATOR : StereotypeStereotypeProducer
 INTEGER StopTimer
 INTEGER StopTimerEx
 IMMEDIATE VOID OPERATOR : string
-String
+IMMEDIATE VOID OPERATOR : String
 IMMEDIATE VOID OPERATOR : STRING
-IMMEDIATE VOID OPERATOR : String$Define
-CHAR string:[i]
+AnsiChar string:[i]
 VOID string:+!
 VOID string:++!
 INTEGER string:CodePage
@@ -2166,7 +2167,7 @@ STRING string:ReplaceFirst
 STRING string:RSplitTo!
 STRING string:Split
 STRING string:SplitTo!
-CHAR string:ToChar
+AnsiChar string:ToChar
 STRING FUNCTION : strings:Cat
  ARRAY OPERATOR :: IN : anArray
  STRING FUNCTION :: strings:Cat : Result
@@ -3022,7 +3023,7 @@ STRING pop:Word:Name
 TtfwWord pop:Word:Parent
 VOID OPERATOR :: PROCEDURE : pop:Word:Print
  STRING OPERATOR :: IN : aName
- INTEGER OPERATOR :: IN : anIndent
+ STRING OPERATOR :: IN : anIndent
  TtfwWord OPERATOR :: IN : aWord
  TtfwDictionary OPERATOR :: VAR : l_InnerDictionary
  TtfwWord OPERATOR :: VAR : l_Redefines
@@ -3038,7 +3039,7 @@ TtfwDictionary pop:KeyWord:Dictionary
 STRING pop:KeyWord:Name
 VOID OPERATOR :: PROCEDURE : pop:KeyWord:Print
  TtfwKeyWord OPERATOR :: IN : aKeyWord
- INTEGER OPERATOR :: IN : anIndent
+ STRING OPERATOR :: IN : anIndent
  TtfwWord OPERATOR :: VAR : l_Word
 ; // pop:KeyWord:Print
 TtfwWord pop:KeyWord:Word
@@ -3083,7 +3084,7 @@ STRING pop:DictionaryEx:FileDateTime
 STRING pop:DictionaryEx:FileName
 VOID OPERATOR :: PROCEDURE : pop:DictionaryEx:Print
  TtfwDictionaryEx OPERATOR :: IN : aDictionary
- INTEGER OPERATOR :: IN : anIndent
+ STRING OPERATOR :: IN : anIndent
  BOOLEAN OPERATOR :: VAR : l_NeedHeader
 ; // pop:DictionaryEx:Print
 VOID pop:DictionaryEx:RemoveFromCache
@@ -3199,7 +3200,7 @@ TtfwKeyWord pop:Dictionary:KeywordByName
 ARRAY pop:Dictionary:KeyWordsIterator
 VOID OPERATOR :: PROCEDURE : pop:Dictionary:Print
  TtfwDictionary OPERATOR :: IN : aDictionary
- INTEGER OPERATOR :: IN : anIndent
+ STRING OPERATOR :: IN : anIndent
 ; // pop:Dictionary:Print
 ARRAY pop:Dictionary:WordsIterator
 Dictionary: axiom:MainDictionary
