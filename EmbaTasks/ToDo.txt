@@ -14,3 +14,9 @@ for i:=0 to memEx1.Lines.Count - 1 do //For every line of TMemo
 
 15.E2.
 Заменить классы Delphi на список вымышленных учеников класса 
+
+Глава 19. E1. 
+Не расскрашивает грид
+
+  sgdMy.Color := clBlue;
+  sgdMy.FixedColor := clBlue;  
