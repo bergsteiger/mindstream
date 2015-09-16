@@ -38,6 +38,14 @@ type
     btnDisplayRow: TButton;
     btnDisplayColumn: TButton;
     procedure btnCreateGridClick(Sender: TObject);
+    procedure btnDisplayRowClick(Sender: TObject);
+    procedure btnDisplayColumnClick(Sender: TObject);
+    procedure btnChangeFixedRedClick(Sender: TObject);
+    procedure btnChangeFixedGreenClick(Sender: TObject);
+    procedure btnChangeRedClick(Sender: TObject);
+    procedure btnChangeFixedBlueClick(Sender: TObject);
+    procedure btnChangeGreenClick(Sender: TObject);
+    procedure btnChangeBlueClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,12 +75,68 @@ Begin
   fmMain.sgdMy.FixedCols := n4;
 end;
 
+procedure TfmMain.btnChangeBlueClick(Sender: TObject);
+begin
+  sgdMy.Color := clBlue;
+end;
+
+procedure TfmMain.btnChangeFixedBlueClick(Sender: TObject);
+begin
+  sgdMy.FixedColor := clBlue;
+end;
+
+procedure TfmMain.btnChangeFixedGreenClick(Sender: TObject);
+begin
+  sgdMy.FixedColor := clGreen;
+end;
+
+procedure TfmMain.btnChangeFixedRedClick(Sender: TObject);
+begin
+  sgdMy.FixedColor := clRed;
+end;
+
+procedure TfmMain.btnChangeGreenClick(Sender: TObject);
+begin
+  sgdMy.Color := clGreen;
+end;
+
+procedure TfmMain.btnChangeRedClick(Sender: TObject);
+begin
+  sgdMy.Color := clRed;
+end;
+
 procedure TfmMain.btnCreateGridClick(Sender: TObject);
 var
-  Row, Column, FixedRow, FixedColumn : integer;
+  RowCount, ColumnCount, FixedRowCount, FixedColumnCount : integer;
 begin
-  GetGridParam(Row, Column, FixedRow, FixedColumn);
-  CreateGrid(Row, Column, FixedRow, FixedColumn)
+  GetGridParam(RowCount, ColumnCount, FixedRowCount, FixedColumnCount);
+  CreateGrid(RowCount, ColumnCount, FixedRowCount, FixedColumnCount)
+end;
+
+procedure TfmMain.btnDisplayColumnClick(Sender: TObject);
+var
+  i : integer;
+  TmpStr : String;
+begin
+  TmpStr := '';
+
+  for i := sgdMy.FixedRows to sgdMy.RowCount do
+    TmpStr := TmpStr + sgdMy.Cells[StrToInt(edtDisplayColumn.Text), i];
+
+  memResult.Lines.Append(TmpStr);
+end;
+
+procedure TfmMain.btnDisplayRowClick(Sender: TObject);
+var
+  i : integer;
+  TmpStr : String;
+begin
+  TmpStr := '';
+
+  for i := sgdMy.FixedCols to sgdMy.ColCount do
+    TmpStr := TmpStr + sgdMy.Cells[i, StrToInt(edtDisplayRow.Text)];
+
+  memResult.Lines.Append(TmpStr);
 end;
 
 end.

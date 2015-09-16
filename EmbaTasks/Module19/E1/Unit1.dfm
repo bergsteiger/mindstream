@@ -126,7 +126,7 @@ object fmMain: TfmMain
       Height = 25
       Caption = 'Display row'
       TabOrder = 0
-      OnClick = btnCreateGridClick
+      OnClick = btnDisplayRowClick
     end
     object btnDisplayColumn: TButton
       Left = 617
@@ -135,7 +135,7 @@ object fmMain: TfmMain
       Height = 25
       Caption = 'Display column'
       TabOrder = 5
-      OnClick = btnCreateGridClick
+      OnClick = btnDisplayColumnClick
     end
   end
   object pnlMain: TPanel
@@ -155,12 +155,11 @@ object fmMain: TfmMain
       Width = 480
       Height = 438
       Align = alLeft
-      ColCount = 1
-      FixedCols = 0
-      RowCount = 1
-      FixedRows = 0
-      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing]
+      Color = clBtnFace
+      Options = [goFixedVertLine, goFixedHorzLine, goHorzLine, goRangeSelect, goEditing]
       TabOrder = 0
+      ExplicitLeft = -5
+      ExplicitTop = 2
     end
     object memResult: TMemo
       Left = 481
@@ -202,6 +201,7 @@ object fmMain: TfmMain
       Height = 25
       Caption = 'Red'
       TabOrder = 0
+      OnClick = btnChangeFixedRedClick
     end
     object btnChangeFixedBlue: TButton
       Left = 301
@@ -210,6 +210,7 @@ object fmMain: TfmMain
       Height = 25
       Caption = 'Blue'
       TabOrder = 2
+      OnClick = btnChangeFixedBlueClick
     end
     object btnChangeFixedGreen: TButton
       Left = 169
@@ -218,6 +219,7 @@ object fmMain: TfmMain
       Height = 25
       Caption = 'Green'
       TabOrder = 1
+      OnClick = btnChangeFixedGreenClick
     end
     object btnChangeRed: TButton
       Left = 37
@@ -226,6 +228,7 @@ object fmMain: TfmMain
       Height = 25
       Caption = 'Red'
       TabOrder = 3
+      OnClick = btnChangeRedClick
     end
     object btnChangeBlue: TButton
       Left = 301
@@ -234,6 +237,7 @@ object fmMain: TfmMain
       Height = 25
       Caption = 'Blue'
       TabOrder = 5
+      OnClick = btnChangeBlueClick
     end
     object btnChangeGreen: TButton
       Left = 169
@@ -242,6 +246,7 @@ object fmMain: TfmMain
       Height = 25
       Caption = 'Green'
       TabOrder = 4
+      OnClick = btnChangeGreenClick
     end
   end
 end
