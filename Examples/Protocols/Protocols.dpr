@@ -19,6 +19,14 @@ type
       procedure ForAdvancedUser1;
       procedure ForAdvancedUser2;
     end;//Advanced1
+
+    Advanced2 = record
+     private
+      f_Provider : TmyClass;
+     public
+      constructor Create(aProvider: TmyClass);
+      procedure ForAdvancedUser1;
+    end;//Advanced2
   private
    procedure ForAdvancedUser1;
    procedure ForAdvancedUser2;
@@ -26,6 +34,7 @@ type
    procedure ForRegularUser1;
    procedure ForRegularUser2;
    function AsA1: Advanced1;
+   function AsA2: Advanced2;
  end;//TmyClass
 
 // TmyClass.Advanced1
@@ -43,6 +52,18 @@ end;
 procedure TmyClass.Advanced1.ForAdvancedUser2;
 begin
  f_Provider.ForAdvancedUser2;
+end;
+
+// TmyClass.Advanced2
+
+constructor TmyClass.Advanced2.Create(aProvider: TmyClass);
+begin
+ f_Provider := aProvider;
+end;
+
+procedure TmyClass.Advanced2.ForAdvancedUser1;
+begin
+ f_Provider.ForAdvancedUser1;
 end;
 
 // TmyClass
@@ -72,6 +93,11 @@ begin
   Result := Advanced1.Create(Self);
 end;
 
+function TmyClass.AsA2: Advanced1;
+begin
+  Result := Advanced2.Create(Self);
+end;
+
 var
  l_C : TmyClass;
 begin
@@ -82,6 +108,7 @@ begin
       l_C.ForRegularUser2;
       l_C.AsA1.ForAdvancedUser1;
       l_C.AsA1.ForAdvancedUser2;
+      l_C.AsA2.ForAdvancedUser1;
     finally
       FreeAndNil(l_C);
     end;
