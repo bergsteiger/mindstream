@@ -37,6 +37,17 @@ type
       procedure ForAdvancedUser2;
     end;//Advanced3
 
+   // Дальше идут протоколы "для экспертов":
+   type
+    Expert1 = record
+     private
+      f_Provider : TmyClass;
+     public
+      constructor Create(aProvider: TmyClass);
+      procedure ForExpertUser1;
+      procedure ForExpertUser2;
+    end;//Expert1
+
   private
    procedure ForAdvancedUser1;
    procedure ForAdvancedUser2;
@@ -51,6 +62,8 @@ type
    function AsA1: Advanced1;
    function AsA2: Advanced2;
    function AsA3: Advanced3;
+
+   function AsE1: Expert1;
  end;//TmyClass
 
 // TmyClass.Advanced1
@@ -68,6 +81,23 @@ end;
 procedure TmyClass.Advanced1.ForAdvancedUser2;
 begin
  f_Provider.ForAdvancedUser2;
+end;
+
+// TmyClass.Expert1
+
+constructor TmyClass.Expert1.Create(aProvider: TmyClass);
+begin
+ f_Provider := aProvider;
+end;
+
+procedure TmyClass.Expert1.ForExpertUser1;
+begin
+ f_Provider.ForExpertUser1;
+end;
+
+procedure TmyClass.Expert1.ForExpertUser2;
+begin
+ f_Provider.ForExpertUser2;
 end;
 
 // TmyClass.Advanced2
@@ -141,6 +171,11 @@ begin
   Result := Advanced3.Create(Self);
 end;
 
+function TmyClass.AsE1: Expert1;
+begin
+  Result := Expert1.Create(Self);
+end;
+
 var
  l_C : TmyClass;
 begin
@@ -149,10 +184,14 @@ begin
     try
       l_C.ForRegularUser1;
       l_C.ForRegularUser2;
+
       l_C.AsA1.ForAdvancedUser1;
       l_C.AsA1.ForAdvancedUser2;
       l_C.AsA2.ForAdvancedUser1;
       l_C.AsA3.ForAdvancedUser2;
+
+      l_C.AsE1.ForExpertUser1;
+      l_C.AsE1.ForExpertUser2;
     finally
       FreeAndNil(l_C);
     end;
