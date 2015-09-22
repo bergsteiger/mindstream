@@ -93,7 +93,7 @@ begin
   Result := Advanced1.Create(Self);
 end;
 
-function TmyClass.AsA2: Advanced1;
+function TmyClass.AsA2: Advanced2;
 begin
   Result := Advanced2.Create(Self);
 end;
