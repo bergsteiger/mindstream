@@ -43,6 +43,8 @@ type
   public
    procedure ForRegularUser1;
    procedure ForRegularUser2;
+  public
+   // ƒалее идут методы дл€ получени€ "протоколов"
    function AsA1: Advanced1;
    function AsA2: Advanced2;
    function AsA3: Advanced3;
