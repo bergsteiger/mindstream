@@ -232,6 +232,9 @@ var
  l_C : TmyClass;
 begin
   try
+    //CloseFile(Output);
+    AssignFile(Output, ParamStr(0) + '.out');
+    Rewrite(Output);
     l_C := TmyClass.Create;
     try
       l_C.ForRegularUser1;
