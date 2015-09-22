@@ -40,6 +40,9 @@ type
   private
    procedure ForAdvancedUser1;
    procedure ForAdvancedUser2;
+
+   procedure ForExpertUser1;
+   procedure ForExpertUser2;
   public
    procedure ForRegularUser1;
    procedure ForRegularUser2;
@@ -101,6 +104,16 @@ end;
 procedure TmyClass.ForAdvancedUser2;
 begin
   WriteLn('ForAdvancedUser2');
+end;
+
+procedure TmyClass.ForExpertUser1;
+begin
+  WriteLn('ForExpertUser1');
+end;
+
+procedure TmyClass.ForExpertUser2;
+begin
+  WriteLn('ForExpertUser2');
 end;
 
 procedure TmyClass.ForRegularUser1;
