@@ -48,6 +48,14 @@ type
       procedure ForExpertUser2;
     end;//Expert1
 
+    Expert2 = record
+     private
+      f_Provider : TmyClass;
+     public
+      constructor Create(aProvider: TmyClass);
+      procedure ForExpertUser1;
+    end;//Expert2
+
   private
    procedure ForAdvancedUser1;
    procedure ForAdvancedUser2;
@@ -64,6 +72,7 @@ type
    function AsA3: Advanced3;
 
    function AsE1: Expert1;
+   function AsE2: Expert2;
  end;//TmyClass
 
 // TmyClass.Advanced1
@@ -98,6 +107,18 @@ end;
 procedure TmyClass.Expert1.ForExpertUser2;
 begin
  f_Provider.ForExpertUser2;
+end;
+
+// TmyClass.Expert2
+
+constructor TmyClass.Expert2.Create(aProvider: TmyClass);
+begin
+ f_Provider := aProvider;
+end;
+
+procedure TmyClass.Expert2.ForExpertUser1;
+begin
+ f_Provider.ForExpertUser1;
 end;
 
 // TmyClass.Advanced2
@@ -176,6 +197,11 @@ begin
   Result := Expert1.Create(Self);
 end;
 
+function TmyClass.AsE2: Expert2;
+begin
+  Result := Expert2.Create(Self);
+end;
+
 var
  l_C : TmyClass;
 begin
@@ -187,11 +213,15 @@ begin
 
       l_C.AsA1.ForAdvancedUser1;
       l_C.AsA1.ForAdvancedUser2;
+
       l_C.AsA2.ForAdvancedUser1;
+
       l_C.AsA3.ForAdvancedUser2;
 
       l_C.AsE1.ForExpertUser1;
       l_C.AsE1.ForExpertUser2;
+
+      l_C.AsE2.ForExpertUser1;
     finally
       FreeAndNil(l_C);
     end;
