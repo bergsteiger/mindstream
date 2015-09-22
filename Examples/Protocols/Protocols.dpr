@@ -10,9 +10,22 @@ uses
 type
  TmyClass = class
   public
+   procedure ForAdvancedUser1;
+   procedure ForAdvancedUser2;
+  public
    procedure ForRegularUser1;
    procedure ForRegularUser2;
  end;//TmyClass
+
+procedure TmyClass.ForAdvancedUser1;
+begin
+  WriteLn('ForAdvancedUser1');
+end;
+
+procedure TmyClass.ForAdvancedUser2;
+begin
+  WriteLn('ForAdvancedUser2');
+end;
 
 procedure TmyClass.ForRegularUser1;
 begin
