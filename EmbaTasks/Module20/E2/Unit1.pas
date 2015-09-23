@@ -33,20 +33,29 @@ implementation
 
 procedure TfmMain.btnBuildGridClick(Sender: TObject);
 var
-  i, j, RowCount, ColCount: integer;
+  i, j,
+  RowCount, ColCount, ReverseIndex: integer;
 begin
   ColCount := StrToInt(edtColCount.Text);
   RowCount := StrToInt(edtRowCount.Text);
   sgdMy.ColCount := ColCount;
   sgdMy.RowCount := RowCount;
 
-  for i := 0 to RowCount  do
-    for j := 0 to ColCount do
+  for i := 0 to ColCount do
+    for j := 0 to RowCount do
       sgdMy.Cells[i, j] := '0';
 
- for i := 0 to RowCount do
-    for j := i to ColCount - i - 1 do
-      sgdMy.Cells[j, i] := '1';
+  ReverseIndex := 0;
+
+  for i := RowCount - 1 downto (RowCount - ColCount - 1) do
+    begin
+      for j := ReverseIndex to (ColCount - ReverseIndex - 1) do
+      begin
+        sgdMy.Cells[j, i] := '1';
+      end;
+
+      ReverseIndex := ReverseIndex + 1;
+    end;
 end;
 
 end.
