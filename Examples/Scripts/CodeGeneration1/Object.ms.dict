@@ -23,6 +23,7 @@ EXPORTS
 // Понятное дело, что всю обвязку потом упрячем в отдельный словарь object.ms.dict
 
 NamedWordProducer %FIELDS %Fld
+NamedWordProducer %PROPERTIES %Props
 
 OBJECT FUNCTION DoMember 
  OBJECT IN aMember
@@ -90,6 +91,11 @@ ARRAY VAR g_CurrentClassMembers
  ( g_CurrentClassMembers := [ ] )
 ( g_CurrentClassMembers := [ ] )
 
+ARRAY VAR g_CurrentClassProperties
+[EXECUTE]
+ ( g_CurrentClassProperties := [ ] )
+( g_CurrentClassProperties := [ ] )
+
 MACRO member
  Literal IN aName
  Ctx:ClearTypeInfo
@@ -116,6 +122,7 @@ CONST cObjectName 'Object'
 MACRO class
  Literal IN aName
  g_CurrentClassMembers := [ ]
+ g_CurrentClassProperties := [ ]
  g_ClassFieldOffset := 0
  aName |N =: g_CurrentClass
  // axiom:PushSymbol class_impl
