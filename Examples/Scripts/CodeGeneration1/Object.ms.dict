@@ -160,12 +160,15 @@ PRIVATE VOID operator MakeMethodSignature
  [ g_CurrentClass ':' aName ] strings:Cat Ctx:Parser:PushSymbol
 ; // MakeMethodSignature
 
+WordAlias Trace .
+
 MACRO constructor
 // - конструктор объектов, пока "фиктивный"
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
  g_CurrentClass Ctx:Parser:PushSymbol
  aName |N MakeMethodSignature
+ aName |N Trace
 ; // constructor
 
 PRIVATE VOID operator MakeSelfParam
@@ -173,8 +176,6 @@ PRIVATE VOID operator MakeSelfParam
  axiom:PushSymbol in
  'Self' Ctx:Parser:PushSymbol
 ; // MakeSelfParam
-
-WordAlias Trace .
 
 MACRO method
 // - метод объекта, пока "фиктивный"
