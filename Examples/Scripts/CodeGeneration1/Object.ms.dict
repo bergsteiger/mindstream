@@ -174,13 +174,15 @@ PRIVATE VOID operator MakeSelfParam
  'Self' Ctx:Parser:PushSymbol
 ; // MakeSelfParam
 
+WordAlias Trace .
+
 MACRO method
 // - метод объекта, пока "фиктивный"
  Literal IN aName
  @SELF Ctx:SetWordProducerForCompiledClass
  aName |N MakeMethodSignature
  MakeSelfParam
- aName |N .
+ aName |N Trace
 ; // method
 
 MACRO readonly
