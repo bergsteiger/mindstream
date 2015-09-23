@@ -45,6 +45,12 @@ begin
     for j := 0 to RowCount do
       sgdMy.Cells[i, j] := '0';
 
+  if ColCount > RowCount * 2 then
+  begin
+    ShowMessage('Sorry it`s impossible');
+    Exit;
+  end;
+
   ReverseIndex := 0;
 
   for i := RowCount - 1 downto (RowCount - ColCount - 1) do
