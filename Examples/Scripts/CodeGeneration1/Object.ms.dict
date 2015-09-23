@@ -51,6 +51,7 @@ ARRAY FUNCTION %ClassRTTIList
 
 ARRAY FUNCTION %Fld 
  IN %S
+ %SUMMARY 'Возвращает итератор полей класса' ;
  %S %ClassRTTIList %Fld >>> Result
 ; // %Fld
 
