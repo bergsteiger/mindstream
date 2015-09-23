@@ -30,6 +30,11 @@ VOID TestWithDump PointTest
    _:Object
   ; // %INHERITS %G
   
+  %PROPERTIES %Props
+   'X'
+   'Y'
+  ; // %PROPERTIES %Props
+  
  ; // class_impl _:Point
  
  class_impl _:Rectangle
@@ -43,6 +48,11 @@ VOID TestWithDump PointTest
    @
    _:Object
   ; // %INHERITS %G
+  
+  %PROPERTIES %Props
+   'TopLeft'
+   'BottomRight'
+  ; // %PROPERTIES %Props
   
  ; // class_impl _:Rectangle
  
@@ -600,6 +610,11 @@ class_impl _:Object
  %FIELDS %Fld
   'VMT'
  ; // %FIELDS %Fld
+ 
+ %PROPERTIES %Props
+  'class'
+  'ClassName'
+ ; // %PROPERTIES %Props
  
 ; // class_impl _:Object
 

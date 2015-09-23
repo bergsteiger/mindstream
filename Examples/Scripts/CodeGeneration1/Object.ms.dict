@@ -168,7 +168,21 @@ MACRO class
 
 ; // class
 
+MACRO RunCompileProps&Methods
+ [
+  'implementation'
+  g_CurrentClassImpl
+
+   '%PROPERTIES'
+    g_CurrentClassProperties .for> ( STRING IN aName [ '`' aName '`' ] strings:Cat )
+   ';'
+
+  'end.'
+ ] Ctx:Parser:PushArray
+; // RunCompileProps&Methods
+
 MACRO class-end
+ axiom:PushSymbol RunCompileProps&Methods
 ; // class-end
 
 INTEGER type FieldOffset
@@ -218,7 +232,7 @@ MACRO readonly
  @SELF Ctx:SetWordProducerForCompiledClass
  aName |N MakeMethodSignature
  MakeSelfParam
- aName |N array:AddTo g_CurrentClassMembers
+ aName |N array:AddTo g_CurrentClassProperties
  aName |N Trace
 ; // readonly
 
@@ -232,9 +246,11 @@ MACRO RunCompileFields
  [
   'implementation'
   g_CurrentClassImpl
+
    '%FIELDS'
     g_CurrentClassMembers .for> ( STRING IN aName [ '`' aName '`' ] strings:Cat )
    ';'
+
   'end.'
  ] Ctx:Parser:PushArray
 ; // RunCompileFields
