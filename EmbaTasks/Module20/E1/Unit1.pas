@@ -35,21 +35,18 @@ procedure TfmMain.btnBuildGridClick(Sender: TObject);
 var
   i, j, RowCount, ColCount: integer;
 begin
-  sgdMy.ColCount := StrToInt(edtColCount.Text);
-  sgdMy.RowCount := StrToInt(edtRowCount.Text);
+  ColCount := StrToInt(edtColCount.Text);
+  RowCount := StrToInt(edtRowCount.Text);
+  sgdMy.ColCount := ColCount;
+  sgdMy.RowCount := RowCount;
 
-  sgdMy.Cells[1,1] := 'qwe';
-{  n := StrToInt(edit1.Text);
-  m := StrToInt(edit2.Text);
-  stringgrid1.RowCount := n;
-  stringgrid1.ColCount := m;
+  for i := 0 to RowCount  do
+    for j := 0 to ColCount do
+      sgdMy.Cells[i, j] := '0';
 
-  for i := 0 to n - 1 do
-    for j := 0 to m - 1 do
-      if i mod 2 = 0 then
-        stringgrid1.Cells[j, i] := IntToStr(i * m + j + 1)
-      else
-        stringgrid1.Cells[j, i] := IntToStr((i + 1) * m - j)   }
+ for i := 0 to RowCount do
+    for j := i to ColCount - i - 1 do
+      sgdMy.Cells[j, i] := '1';
 end;
 
 end.

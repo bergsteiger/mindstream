@@ -40,7 +40,7 @@ object fmMain: TfmMain
       Width = 74
       Height = 21
       TabOrder = 1
-      Text = '5'
+      Text = '6'
     end
     object edtColCount: TEdit
       Left = 93
@@ -48,7 +48,7 @@ object fmMain: TfmMain
       Width = 74
       Height = 21
       TabOrder = 2
-      Text = '10'
+      Text = '5'
     end
     object btnBuildGrid: TButton
       Left = 365
