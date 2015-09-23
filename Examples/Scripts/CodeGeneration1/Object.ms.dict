@@ -180,6 +180,7 @@ MACRO method
  @SELF Ctx:SetWordProducerForCompiledClass
  aName |N MakeMethodSignature
  MakeSelfParam
+ aName |N .
 ; // method
 
 MACRO readonly
