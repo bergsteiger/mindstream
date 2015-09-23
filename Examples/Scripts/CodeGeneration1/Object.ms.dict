@@ -38,6 +38,17 @@ BOOLEAN FUNCTION FilterMember
 WordAlias %R .Implemented.Words
 WordAlias %G .Inherited.Words
 
+ARRAY FUNCTION %ClassRTTIList
+ IN %S
+ RIGHT IN aName
+ VAR l_List
+ %S %% ( aName |N ) =: l_List
+ if ( l_List NotValid ) then
+  ( Result := [ ] )
+ else 
+  ( Result := ( l_List CodeIterator ) )
+;
+
 ARRAY FUNCTION %Fld 
  IN %S
  VAR l_List
