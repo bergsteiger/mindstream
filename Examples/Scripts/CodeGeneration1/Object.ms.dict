@@ -203,8 +203,6 @@ PRIVATE VOID operator MakeMethodSignature
  g_CurrentClass aName MakeMethodSignaturePrim
 ; // MakeMethodSignature
 
-WordAlias Trace .
-
 MACRO constructor
 // - конструктор объектов, пока "фиктивный"
  Literal IN aName
