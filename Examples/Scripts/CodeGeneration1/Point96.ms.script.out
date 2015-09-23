@@ -511,6 +511,37 @@ VOID TestWithDump PointTest
  Rectangle:Print
  SWAP
  Array:Iterate
+ l_Rectangles
+ (
+  Object:class
+  Print
+ )
+ SWAP
+ Array:Iterate
+ l_Rectangles
+ (
+  Object:ClassName
+  Print
+ )
+ SWAP
+ Array:Iterate
+ l_Rectangles
+ DO
+ (
+  (
+   Object:class
+   .Inherited.Words
+  )
+  DO
+  (
+   getClassName
+   Print
+  )
+  SWAP
+  Array:Iterate
+ )
+ SWAP
+ Array:Iterate
  'Hello '
  (+)
  'world'
@@ -612,6 +643,12 @@ Object
 Object
 ( TopLeft: ( X: 0, Y: 0 ), BottomRight: ( X: 2, Y: 2 ) )
 ( TopLeft: ( X: 3, Y: 3 ), BottomRight: ( X: -1, Y: -1 ) )
+_:Rectangle
+_:Rectangle
+Rectangle
+Rectangle
+Object
+Object
 Hello world
 Hello world
 Hello world
