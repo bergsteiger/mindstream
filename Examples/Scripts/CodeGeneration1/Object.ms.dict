@@ -233,7 +233,7 @@ MACRO RunCompileFields
   'implementation'
   g_CurrentClassImpl
    '%FIELDS'
-   g_CurrentClassMembers .for> ( STRING IN aName [ '`' aName '`' ] strings:Cat )
+    g_CurrentClassMembers .for> ( STRING IN aName [ '`' aName '`' ] strings:Cat )
    ';'
   'end.'
  ] Ctx:Parser:PushArray
