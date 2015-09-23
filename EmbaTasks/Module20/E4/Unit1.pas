@@ -58,14 +58,6 @@ begin
 end;
 
 procedure TfmMain.btnChangeMinClick(Sender: TObject);
-  Procedure Swap(var Num1, Num2 : integer);
-  var
-    NumTmp : Integer;
-  begin
-    NumTmp := Num2;
-    Num2 := Num1;
-    Num1 := NumTmp;
-  end;
 var
   i, j,
   RowCount, ColCount,
