@@ -154,10 +154,16 @@ MACRO class-end
 INTEGER type FieldOffset
 // - смещение поля
 
-PRIVATE VOID operator MakeMethodSignature
+PRIVATE VOID operator MakeMethodSignaturePrim
+ STRING IN aClass
  STRING IN aName
  axiom:PushSymbol :
- [ g_CurrentClass ':' aName ] strings:Cat Ctx:Parser:PushSymbol
+ [ aClass ':' aName ] strings:Cat Ctx:Parser:PushSymbol
+; // MakeMethodSignaturePrim
+
+PRIVATE VOID operator MakeMethodSignature
+ STRING IN aName
+ g_CurrentClass aName MakeMethodSignaturePrim
 ; // MakeMethodSignature
 
 WordAlias Trace .
