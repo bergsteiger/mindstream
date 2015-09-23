@@ -51,7 +51,7 @@ ARRAY FUNCTION %ClassRTTIList
 
 ARRAY FUNCTION %Fld 
  IN %S
- %S %ClassRTTIList '%Fld' >>> Result
+ %S %ClassRTTIList %Fld >>> Result
 /*{ VAR l_List
  %S %% '%Fld' =: l_List
  if ( l_List NotValid ) then
