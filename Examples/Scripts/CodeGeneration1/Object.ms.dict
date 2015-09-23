@@ -51,12 +51,13 @@ ARRAY FUNCTION %ClassRTTIList
 
 ARRAY FUNCTION %Fld 
  IN %S
- VAR l_List
+ %S %ClassRTTIList '%Fld' >>> Result
+/*{ VAR l_List
  %S %% '%Fld' =: l_List
  if ( l_List NotValid ) then
   ( Result := [ ] )
  else 
-  ( Result := ( l_List CodeIterator ) )
+  ( Result := ( l_List CodeIterator ) )}*/
 ;
 
 VOID OPERATOR class_impl
