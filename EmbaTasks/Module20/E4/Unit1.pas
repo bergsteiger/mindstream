@@ -21,7 +21,9 @@ type
     lblLowlest: TLabel;
     edtHighest: TEdit;
     edtLowlest: TEdit;
+    btnChangeMin: TButton;
     procedure btnBuildGridClick(Sender: TObject);
+    procedure btnChangeMinClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,6 +36,9 @@ var
 implementation
 
 {$R *.dfm}
+
+
+
 
 procedure TfmMain.btnBuildGridClick(Sender: TObject);
 var
@@ -49,6 +54,46 @@ begin
     for j := 0 to RowCount do
       sgdMy.Cells[i, j] := IntToStr(Random(StrToInt(edtLowlest.Text) -
                                            StrToInt(edtHighest.Text)) + StrToInt(edtHighest.Text));
+
+end;
+
+procedure TfmMain.btnChangeMinClick(Sender: TObject);
+  Procedure Swap(var Num1, Num2 : integer);
+  var
+    NumTmp : Integer;
+  begin
+    NumTmp := Num2;
+    Num2 := Num1;
+    Num1 := NumTmp;
+  end;
+var
+  i, j,
+  RowCount, ColCount,
+  Min, DiagonalNum,
+  MinColIndex : integer;
+begin
+  ColCount := sgdMy.ColCount;
+  RowCount := sgdMy.RowCount;
+
+  for j := 0 to RowCount - 1 do
+  begin
+    Min := StrToInt(sgdMy.Cells[0, j]);
+    MinColIndex := 0;
+
+    for i := 0 to ColCount - 1 do
+    begin
+      if Min < StrToInt(sgdMy.Cells[i, j]) then
+      begin
+        Min := StrToInt(sgdMy.Cells[i, j]);
+        MinColIndex := i;
+      end;
+    end;
+
+    DiagonalNum := StrToInt(sgdMy.Cells[j, j]);
+
+    sgdMy.Cells[j, j] := IntToStr(Min);
+    sgdMy.Cells[MinColIndex, j] := IntToStr(DiagonalNum);
+  end;
 end;
 
 end.

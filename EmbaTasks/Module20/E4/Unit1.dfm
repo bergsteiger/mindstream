@@ -65,7 +65,7 @@ object fmMain: TfmMain
       Text = '5'
     end
     object btnBuildGrid: TButton
-      Left = 285
+      Left = 218
       Top = 40
       Width = 103
       Height = 25
@@ -89,6 +89,15 @@ object fmMain: TfmMain
       TabOrder = 4
       Text = '50'
     end
+    object btnChangeMin: TButton
+      Left = 344
+      Top = 40
+      Width = 103
+      Height = 25
+      Caption = 'Change min'
+      TabOrder = 5
+      OnClick = btnChangeMinClick
+    end
   end
   object pnlMain: TPanel
     Left = 0
@@ -98,8 +107,6 @@ object fmMain: TfmMain
     Align = alClient
     Caption = 'pnlMain'
     TabOrder = 1
-    ExplicitTop = 49
-    ExplicitHeight = 233
     object sgdMy: TStringGrid
       Left = 1
       Top = 1
@@ -112,7 +119,6 @@ object fmMain: TfmMain
       FixedRows = 0
       Options = [goFixedVertLine, goFixedHorzLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goEditing]
       TabOrder = 0
-      ExplicitHeight = 231
     end
   end
 end
