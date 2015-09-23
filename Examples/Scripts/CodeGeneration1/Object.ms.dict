@@ -191,6 +191,7 @@ MACRO readonly
  @SELF Ctx:SetWordProducerForCompiledClass
  aName |N MakeMethodSignature
  MakeSelfParam
+ aName |N Trace
 ; // readonly
 
 MACRO new[
