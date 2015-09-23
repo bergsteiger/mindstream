@@ -48,7 +48,7 @@ begin
   for i := 0 to ColCount do
     for j := 0 to RowCount do
       sgdMy.Cells[i, j] := IntToStr(Random(StrToInt(edtLowlest.Text) -
-                                           StrToInt(edtHighest.Text)) + StrToInt(edtHighest.Text) );
+                                           StrToInt(edtHighest.Text)) + StrToInt(edtHighest.Text));
 end;
 
 end.
