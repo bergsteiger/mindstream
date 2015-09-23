@@ -11,7 +11,6 @@ object fmMain: TfmMain
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlTop: TPanel
@@ -21,31 +20,30 @@ object fmMain: TfmMain
     Height = 49
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 603
     object lbl3: TLabel
-      Left = 235
+      Left = 11
       Top = 16
-      Width = 76
+      Width = 72
       Height = 13
-      Caption = 'Scale intervals :'
+      Caption = 'Column count :'
     end
     object lbl4: TLabel
-      Left = 19
+      Left = 195
       Top = 16
-      Width = 119
+      Width = 58
       Height = 13
-      Caption = 'Number of experiments :'
+      Caption = 'Row count :'
     end
-    object edtNumExperiments: TEdit
-      Left = 144
+    object edtRowCount: TEdit
+      Left = 264
       Top = 13
       Width = 74
       Height = 21
       TabOrder = 1
       Text = '5'
     end
-    object edtScaleIntervals: TEdit
-      Left = 317
+    object edtColCount: TEdit
+      Left = 93
       Top = 13
       Width = 74
       Height = 21
@@ -53,22 +51,13 @@ object fmMain: TfmMain
       Text = '10'
     end
     object btnBuildGrid: TButton
-      Left = 429
+      Left = 365
       Top = 11
       Width = 103
       Height = 25
       Caption = 'Build grid'
       TabOrder = 0
       OnClick = btnBuildGridClick
-    end
-    object btnCalculateResult: TButton
-      Left = 557
-      Top = 11
-      Width = 103
-      Height = 25
-      Caption = 'Calculate Result'
-      TabOrder = 3
-      OnClick = btnCalculateResultClick
     end
   end
   object pnlMain: TPanel
@@ -79,19 +68,18 @@ object fmMain: TfmMain
     Align = alClient
     Caption = 'pnlMain'
     TabOrder = 1
-    ExplicitWidth = 603
     object sgdMy: TStringGrid
       Left = 1
       Top = 1
       Width = 704
       Height = 231
       Align = alClient
-      Color = clBtnFace
+      Color = clMoneyGreen
       FixedCols = 0
       RowCount = 2
+      FixedRows = 0
       Options = [goFixedVertLine, goFixedHorzLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goEditing]
       TabOrder = 0
-      ExplicitWidth = 601
     end
   end
 end
