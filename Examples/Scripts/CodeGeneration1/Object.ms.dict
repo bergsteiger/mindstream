@@ -55,6 +55,12 @@ ARRAY FUNCTION %Fld
  %S %ClassRTTIList %Fld >>> Result
 ; // %Fld
 
+ARRAY FUNCTION %Props 
+ IN %S
+ %SUMMARY 'Возвращает итератор свойств класса' ;
+ %S %ClassRTTIList %Props >>> Result
+; // %Props
+
 VOID OPERATOR class_impl
 // - имплементация класса, пока "фиктивная"
 // Тут мы будем хранить всю информацию о классе - предки, поля, методы
