@@ -3,7 +3,7 @@ object fmMain: TfmMain
   Top = 0
   Caption = 'Main'
   ClientHeight = 282
-  ClientWidth = 603
+  ClientWidth = 706
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,27 +17,27 @@ object fmMain: TfmMain
   object pnlTop: TPanel
     Left = 0
     Top = 0
-    Width = 603
+    Width = 706
     Height = 49
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 735
+    ExplicitWidth = 603
     object lbl3: TLabel
-      Left = 265
+      Left = 235
       Top = 16
       Width = 76
       Height = 13
       Caption = 'Scale intervals :'
     end
     object lbl4: TLabel
-      Left = 37
+      Left = 19
       Top = 16
       Width = 119
       Height = 13
       Caption = 'Number of experiments :'
     end
     object edtNumExperiments: TEdit
-      Left = 162
+      Left = 144
       Top = 13
       Width = 74
       Height = 21
@@ -45,48 +45,52 @@ object fmMain: TfmMain
       Text = '5'
     end
     object edtScaleIntervals: TEdit
-      Left = 347
+      Left = 317
       Top = 13
       Width = 74
       Height = 21
       TabOrder = 2
       Text = '10'
     end
-    object btnDisplayRow: TButton
-      Left = 473
+    object btnBuildGrid: TButton
+      Left = 429
       Top = 11
       Width = 103
       Height = 25
-      Caption = 'Do It'
+      Caption = 'Build grid'
       TabOrder = 0
-      OnClick = btnDisplayRowClick
+      OnClick = btnBuildGridClick
+    end
+    object btnCalculateResult: TButton
+      Left = 557
+      Top = 11
+      Width = 103
+      Height = 25
+      Caption = 'Calculate Result'
+      TabOrder = 3
+      OnClick = btnCalculateResultClick
     end
   end
   object pnlMain: TPanel
     Left = 0
     Top = 49
-    Width = 603
+    Width = 706
     Height = 233
     Align = alClient
     Caption = 'pnlMain'
     TabOrder = 1
-    ExplicitTop = 81
-    ExplicitWidth = 735
-    ExplicitHeight = 440
+    ExplicitWidth = 603
     object sgdMy: TStringGrid
       Left = 1
       Top = 1
-      Width = 601
+      Width = 704
       Height = 231
       Align = alClient
       Color = clBtnFace
       FixedCols = 0
       Options = [goFixedVertLine, goFixedHorzLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goEditing]
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 6
-      ExplicitWidth = 480
-      ExplicitHeight = 376
+      ExplicitWidth = 601
     end
   end
 end

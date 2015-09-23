@@ -16,9 +16,11 @@ type
     lbl4: TLabel;
     edtNumExperiments: TEdit;
     edtScaleIntervals: TEdit;
-    btnDisplayRow: TButton;
+    btnBuildGrid: TButton;
+    btnCalculateResult: TButton;
     procedure FormCreate(Sender: TObject);
-    procedure btnDisplayRowClick(Sender: TObject);
+    procedure btnBuildGridClick(Sender: TObject);
+    procedure btnCalculateResultClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,7 +34,7 @@ implementation
 
 {$R *.dfm}
 
-procedure TfmMain.btnDisplayRowClick(Sender: TObject);
+procedure TfmMain.btnBuildGridClick(Sender: TObject);
 var
   i : integer;
 begin
@@ -42,7 +44,16 @@ begin
     sgdMy.Cells[0, i] := IntToStr(i);
     sgdMy.Cells[1, i] := edtScaleIntervals.Text;
   end;
+end;
 
+procedure TfmMain.btnCalculateResultClick(Sender: TObject);
+var
+  i : integer;
+begin
+  for i := 1 to sgdMy.RowCount do
+    sgdMy.Cells[3, i] := IntToStr(StrToInt(sgdMy.Cells[2, i]) *
+                                  StrToInt(edtScaleIntervals.Text));
+//  GetMaxAndMinRow;
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
