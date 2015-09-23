@@ -88,6 +88,7 @@ object fmMain: TfmMain
       Align = alClient
       Color = clBtnFace
       FixedCols = 0
+      RowCount = 2
       Options = [goFixedVertLine, goFixedHorzLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goEditing]
       TabOrder = 0
       ExplicitWidth = 601

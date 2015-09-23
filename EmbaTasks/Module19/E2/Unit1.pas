@@ -48,12 +48,25 @@ end;
 
 procedure TfmMain.btnCalculateResultClick(Sender: TObject);
 var
-  i : integer;
+  i, MaxRow, MinRow : integer;
 begin
-  for i := 1 to sgdMy.RowCount do
+  MaxRow := 1;
+  MinRow := 1;
+
+  for i := 1 to sgdMy.RowCount - 1 do
+  begin
     sgdMy.Cells[3, i] := IntToStr(StrToInt(sgdMy.Cells[2, i]) *
                                   StrToInt(edtScaleIntervals.Text));
-//  GetMaxAndMinRow;
+
+    if StrToInt(sgdMy.Cells[3, i]) > StrToInt(sgdMy.Cells[3, MaxRow]) then
+      MaxRow := i;
+
+    if StrToInt(sgdMy.Cells[3, i]) < StrToInt(sgdMy.Cells[3, MinRow]) then
+      MinRow := i;
+  end;
+
+  sgdMy.Cells[4, MaxRow] := 'Max Value';
+  sgdMy.Cells[4, MinRow] := 'Min Value';
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
@@ -67,7 +80,7 @@ begin
   sgdMy.Cells[3, 0] := 'Result';
   sgdMy.ColWidths[3] := 40;
   sgdMy.Cells[4, 0] := 'Max/Min';
-  sgdMy.ColWidths[4] := 50;
+  sgdMy.ColWidths[4] := 70;
 end;
 
 end.
