@@ -205,6 +205,7 @@ MACRO readonly
  @SELF Ctx:SetWordProducerForCompiledClass
  aName |N MakeMethodSignature
  MakeSelfParam
+ aName |N array:AddTo g_CurrentClassMembers
  aName |N Trace
 ; // readonly
 
