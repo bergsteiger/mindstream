@@ -40,7 +40,7 @@ WordAlias %G .Inherited.Words
 
 ARRAY FUNCTION %ClassRTTIList
  IN %S
- RIGHT IN aName
+ Literal IN aName
  VAR l_List
  %S %% ( aName |N ) =: l_List
  if ( l_List NotValid ) then
