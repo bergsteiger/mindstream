@@ -2,7 +2,7 @@ object fmMain: TfmMain
   Left = 0
   Top = 0
   Caption = 'Main'
-  ClientHeight = 282
+  ClientHeight = 426
   ClientWidth = 706
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -89,29 +89,30 @@ object fmMain: TfmMain
       TabOrder = 4
       Text = '50'
     end
-    object btnChangeMin: TButton
+    object btnCalcPow: TButton
       Left = 344
       Top = 40
       Width = 103
       Height = 25
-      Caption = 'Change min'
+      Caption = 'Calc pow'
       TabOrder = 5
-      OnClick = btnChangeMinClick
+      OnClick = btnCalcPowClick
     end
   end
   object pnlMain: TPanel
     Left = 0
     Top = 73
     Width = 706
-    Height = 209
+    Height = 353
     Align = alClient
     Caption = 'pnlMain'
     TabOrder = 1
+    ExplicitHeight = 209
     object sgdMy: TStringGrid
       Left = 1
       Top = 1
       Width = 704
-      Height = 207
+      Height = 279
       Align = alClient
       Color = clMoneyGreen
       FixedCols = 0
@@ -119,6 +120,17 @@ object fmMain: TfmMain
       FixedRows = 0
       Options = [goFixedVertLine, goFixedHorzLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goEditing]
       TabOrder = 0
+      ExplicitTop = -2
+    end
+    object memResult: TMemo
+      Left = 1
+      Top = 280
+      Width = 704
+      Height = 72
+      Align = alBottom
+      Lines.Strings = (
+        '')
+      TabOrder = 1
     end
   end
 end

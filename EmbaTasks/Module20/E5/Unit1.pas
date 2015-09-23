@@ -21,9 +21,10 @@ type
     lblLowlest: TLabel;
     edtHighest: TEdit;
     edtLowlest: TEdit;
-    btnChangeMin: TButton;
+    btnCalcPow: TButton;
+    memResult: TMemo;
     procedure btnBuildGridClick(Sender: TObject);
-    procedure btnChangeMinClick(Sender: TObject);
+    procedure btnCalcPowClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -57,34 +58,25 @@ begin
 
 end;
 
-procedure TfmMain.btnChangeMinClick(Sender: TObject);
+procedure TfmMain.btnCalcPowClick(Sender: TObject);
 var
   i, j,
   RowCount, ColCount,
-  Min, DiagonalNum,
-  MinColIndex : integer;
+  ColumnPow : integer;
 begin
   ColCount := sgdMy.ColCount;
   RowCount := sgdMy.RowCount;
 
-  for j := 0 to RowCount - 1 do
+  for i := 0 to ColCount - 1 do
   begin
-    Min := StrToInt(sgdMy.Cells[0, j]);
-    MinColIndex := 0;
-
-    for i := 0 to ColCount - 1 do
+    ColumnPow := 1;
+    for j := 0 to RowCount - 1 do
     begin
-      if Min > StrToInt(sgdMy.Cells[i, j]) then
-      begin
-        Min := StrToInt(sgdMy.Cells[i, j]);
-        MinColIndex := i;
-      end;
+      if j mod 2 <> 0 then
+        ColumnPow := ColumnPow * StrToInt(sgdMy.Cells[i, j])
     end;
 
-    DiagonalNum := StrToInt(sgdMy.Cells[j, j]);
-
-    sgdMy.Cells[j, j] := IntToStr(Min);
-    sgdMy.Cells[MinColIndex, j] := IntToStr(DiagonalNum);
+    memResult.Lines[0] := memResult.Lines[0] + IntToStr(ColumnPow) + '           ';
   end;
 end;
 
