@@ -82,7 +82,7 @@ begin
 
     for i := 0 to ColCount - 1 do
     begin
-      if Min < StrToInt(sgdMy.Cells[i, j]) then
+      if Min > StrToInt(sgdMy.Cells[i, j]) then
       begin
         Min := StrToInt(sgdMy.Cells[i, j]);
         MinColIndex := i;
