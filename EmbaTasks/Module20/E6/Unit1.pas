@@ -67,16 +67,25 @@ begin
   ColCount := sgdMy.ColCount;
   RowCount := sgdMy.RowCount;
 
+  memResult.Lines.Clear;
+
   for i := 0 to ColCount - 1 do
   begin
-    ColumnPow := 1;
-    for j := 0 to RowCount - 1 do
+    if (i mod 2 <> 0) then
     begin
-      if j mod 2 <> 0 then
-        ColumnPow := ColumnPow * StrToInt(sgdMy.Cells[i, j])
+      ColumnPow := 1;
+      for j := 0 to RowCount - 1 do
+      begin
+        if (StrToInt(sgdMy.Cells[i, j]) > 0) then
+          ColumnPow := ColumnPow * StrToInt(sgdMy.Cells[i, j]);
+      end;
+      memResult.Lines[0] := memResult.Lines[0] +
+                            'Column - ' + IntToStr(i) +
+                            ' Pow =' + IntToStr(ColumnPow) +
+                            '           ';
     end;
 
-    memResult.Lines[0] := memResult.Lines[0] + IntToStr(ColumnPow) + '           ';
+
   end;
 end;
 
