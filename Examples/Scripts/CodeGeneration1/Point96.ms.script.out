@@ -379,6 +379,9 @@ VOID TestWithDump PointTest
  
  PointTest
  DumpElement
+ @
+ _:Object
+ DumpElement
  Point:0
  P1
  pop:Word:SetValue
@@ -592,6 +595,13 @@ VOID TestWithDump PointTest
  -10
  Print
 ; // VOID TestWithDump PointTest
+
+class_impl _:Object
+ %FIELDS %Fld
+  'VMT'
+ ; // %FIELDS %Fld
+ 
+; // class_impl _:Object
 
 ( X: 0, Y: 0 )
 ( X: 0, Y: 0 )
