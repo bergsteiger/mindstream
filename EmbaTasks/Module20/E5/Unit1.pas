@@ -67,6 +67,8 @@ begin
   ColCount := sgdMy.ColCount;
   RowCount := sgdMy.RowCount;
 
+  memResult.Lines.Clear;
+
   for i := 0 to ColCount - 1 do
   begin
     ColumnPow := 1;
