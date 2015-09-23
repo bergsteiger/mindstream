@@ -47,18 +47,12 @@ ARRAY FUNCTION %ClassRTTIList
   ( Result := [ ] )
  else 
   ( Result := ( l_List CodeIterator ) )
-;
+; // %ClassRTTIList
 
 ARRAY FUNCTION %Fld 
  IN %S
  %S %ClassRTTIList %Fld >>> Result
-/*{ VAR l_List
- %S %% '%Fld' =: l_List
- if ( l_List NotValid ) then
-  ( Result := [ ] )
- else 
-  ( Result := ( l_List CodeIterator ) )}*/
-;
+; // %Fld
 
 VOID OPERATOR class_impl
 // - имплементация класса, пока "фиктивная"
