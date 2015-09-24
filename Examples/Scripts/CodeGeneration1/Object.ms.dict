@@ -237,14 +237,20 @@ STRING FUNCTION NameAsString
  [ '`' aName '`' ] strings:Cat >>> Result
 ; // NameAsString
 
+: ListToNameAsString
+ STRING IN aName
+ ARRAY IN aList
+ aName
+  aList .for> NameAsString
+ ';'
+; // ListToNameAsString
+
 MACRO RunCompileProps&Methods
  [
   'implementation'
   g_CurrentClassImpl
 
-   '%PROPERTIES'
-    g_CurrentClassProperties .for> NameAsString
-   ';'
+   '%PROPERTIES' g_CurrentClassProperties ListToNameAsString
 
    '%METHODS'
     g_CurrentClassMethods .for> NameAsString
