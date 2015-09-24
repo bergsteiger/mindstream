@@ -218,6 +218,12 @@ VOID TestWithDump PointTest
  ; // STRING readonly Object:ClassName
  
  Object constructor Object:DoNotCall
+  [
+   @
+   _:Object
+  ]
+  Result
+  pop:Word:SetValue
  ; // Object constructor Object:DoNotCall
  
  Point method Point:Neg
@@ -397,6 +403,12 @@ VOID TestWithDump PointTest
  ; // STRING readonly Object:ClassName
  
  Object constructor Object:DoNotCall
+  [
+   @
+   _:Object
+  ]
+  Result
+  pop:Word:SetValue
  ; // Object constructor Object:DoNotCall
  
  VOID method Rectangle:Print

@@ -386,6 +386,7 @@ STRING readonly ClassName
 ; // Object:ClassName
 
 constructor DoNotCall
+ new[ ] =: Result
 ; // DoNotCall
 
 class-end // Object
