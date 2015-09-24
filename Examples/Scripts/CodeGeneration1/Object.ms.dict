@@ -154,10 +154,10 @@ MACRO classExpander
    IN aProp
    g_CurrentClass aProp |N MakeMethodSignaturePrim Trace
    anItem |N getClassNamePrim aProp |N MakeMethodSignaturePrim Trace
-/*{   'WordAlias' Ctx:Parser:PushSymbol 
+   'WordAlias' Ctx:Parser:PushSymbol 
    //axiom:PushSymbol WordAlias
    g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem |N aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol}*/
+   anItem |N getClassNamePrim aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Props .for>
 
  )
