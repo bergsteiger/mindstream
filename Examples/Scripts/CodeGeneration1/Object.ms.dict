@@ -128,9 +128,14 @@ PRIVATE STRING operator MakeMethodSignaturePrim
 
 CONST cClassImplPrefix '_:'
 
+STRING : getClassNamePrim
+ STRING IN Self
+ Self ':' string:Split =: Result DROP
+; // getClassNamePrim
+
 STRING : getClassName
  IN Self
- Self |N ':' string:Split =: Result DROP
+ Self |N getClassNamePrim =: Result
 ; // getClassName
 
 MACRO classExpander
@@ -148,7 +153,7 @@ MACRO classExpander
   anItem %Props .for> ( 
    IN aProp
    g_CurrentClass aProp |N MakeMethodSignaturePrim Trace
-   anItem |N aProp |N MakeMethodSignaturePrim Trace
+   anItem |N getClassNamePrim aProp |N MakeMethodSignaturePrim Trace
 /*{   'WordAlias' Ctx:Parser:PushSymbol 
    //axiom:PushSymbol WordAlias
    g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
