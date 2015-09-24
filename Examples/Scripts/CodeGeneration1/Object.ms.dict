@@ -120,11 +120,10 @@ MACRO member
  aName |N array:AddTo g_CurrentClassMembers
 ; // member
 
-PRIVATE VOID operator MakeMethodSignaturePrim
+PRIVATE STRING operator MakeMethodSignaturePrim
  STRING IN aClass
  STRING IN aName
- axiom:PushSymbol :
- [ aClass ':' aName ] strings:Cat Ctx:Parser:PushSymbol
+ [ aClass ':' aName ] strings:Cat >>> Result
 ; // MakeMethodSignaturePrim
 
 MACRO classExpander
@@ -140,8 +139,9 @@ MACRO classExpander
   ) // anItem %Fld .for>
 
 /*{  anItem %Props .for> ( 
-   IN aProp 
-   axiom:PushSymbol WordAlias
+   IN aProp
+   'WordAlias' Ctx:Parser:PushSymbol 
+   //axiom:PushSymbol WordAlias
    g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    anItem |N aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Props .for>}*/
@@ -209,7 +209,8 @@ INTEGER type FieldOffset
 
 PRIVATE VOID operator MakeMethodSignature
  STRING IN aName
- g_CurrentClass aName MakeMethodSignaturePrim
+ axiom:PushSymbol :
+ g_CurrentClass aName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
 ; // MakeMethodSignature
 
 MACRO constructor
