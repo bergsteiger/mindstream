@@ -149,8 +149,8 @@ array var l_Rectangles
 [ R1 R2 ] =: l_Rectangles
 
 l_Rectangles ==> Rectangle:Print
-l_Rectangles ==> ( Object:class Print )
-l_Rectangles ==> ( Object:ClassName Print )
+l_Rectangles ==> ( Rectangle:class Print )
+l_Rectangles ==> ( Rectangle:ClassName Print )
 for l_Rectangles ( for ( Object:class %G ) ( getClassName Print ) )
 
 'Hello ' (+) 'world' Print
