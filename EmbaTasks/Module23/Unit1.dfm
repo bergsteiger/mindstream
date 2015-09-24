@@ -15,23 +15,23 @@ object frmMain: TfrmMain
   TextHeight = 13
   object pbxEx: TPaintBox
     Left = 0
-    Top = 52
+    Top = 0
     Width = 400
     Height = 400
     Align = alClient
-    ExplicitTop = 0
     ExplicitWidth = 445
     ExplicitHeight = 273
   end
   object pnlButtons: TPanel
     Left = 0
-    Top = 0
+    Top = 400
     Width = 400
     Height = 52
-    Align = alTop
+    Align = alBottom
     TabOrder = 0
+    ExplicitTop = 0
     object btnSnowMan: TButton
-      Left = 256
+      Left = 136
       Top = 16
       Width = 129
       Height = 25
@@ -40,8 +40,18 @@ object frmMain: TfrmMain
       OnClick = btnSnowManClick
     end
   end
-  object tmrMain: TTimer
+  object tmrDrawStars: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = tmrDrawStarsTimer
     Left = 16
+    Top = 8
+  end
+  object tmrDieStars: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = tmrDieStarsTimer
+    Left = 64
     Top = 8
   end
 end
