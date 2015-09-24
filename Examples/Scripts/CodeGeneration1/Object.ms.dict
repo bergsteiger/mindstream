@@ -152,8 +152,7 @@ MACRO classExpander
 
   anItem %Props .for> ( 
    IN aProp
-   'WordAlias' Ctx:Parser:PushSymbol 
-   //axiom:PushSymbol WordAlias
+   axiom:PushSymbol WordAlias
    g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    anItem |N getClassNamePrim aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Props .for>
