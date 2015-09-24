@@ -221,8 +221,10 @@ INTEGER type FieldOffset
 
 PRIVATE VOID operator MakeMethodSignature
  STRING IN aName
+ STRING VAR l_Signature
+ g_CurrentClass aName MakeMethodSignaturePrim >>> l_Signature
  axiom:PushSymbol :
- g_CurrentClass aName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+ l_Signature Ctx:Parser:PushSymbol
 ; // MakeMethodSignature
 
 MACRO constructor
