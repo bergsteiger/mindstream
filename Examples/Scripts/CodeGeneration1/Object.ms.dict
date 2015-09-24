@@ -225,6 +225,7 @@ PRIVATE VOID operator MakeMethodSignature
  g_CurrentClass aName MakeMethodSignaturePrim >>> l_Signature
  if ( l_Signature IsWordDeclared ) then
  begin
+  axiom:PushSymbol REDEFINITION
  end
  axiom:PushSymbol :
  l_Signature Ctx:Parser:PushSymbol
