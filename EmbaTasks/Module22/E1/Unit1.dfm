@@ -2,7 +2,7 @@ object fmMain: TfmMain
   Left = 0
   Top = 0
   Caption = 'Main'
-  ClientHeight = 554
+  ClientHeight = 443
   ClientWidth = 706
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -64,33 +64,23 @@ object fmMain: TfmMain
     Left = 0
     Top = 73
     Width = 706
-    Height = 481
+    Height = 370
     Align = alClient
     Caption = 'pnlMain'
     TabOrder = 1
+    ExplicitHeight = 481
     object sgdMy: TStringGrid
       Left = 1
       Top = 1
       Width = 704
-      Height = 319
+      Height = 368
       Align = alClient
       Color = clMoneyGreen
       FixedCols = 0
       RowCount = 2
-      FixedRows = 0
       Options = [goFixedVertLine, goFixedHorzLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goEditing]
       TabOrder = 0
-    end
-    object memResult: TMemo
-      Left = 1
-      Top = 320
-      Width = 704
-      Height = 160
-      Align = alBottom
-      Lines.Strings = (
-        '')
-      ScrollBars = ssVertical
-      TabOrder = 1
+      ExplicitHeight = 319
     end
   end
 end

@@ -80,7 +80,6 @@ object fmMain: TfmMain
       FixedRows = 0
       Options = [goFixedVertLine, goFixedHorzLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goEditing]
       TabOrder = 0
-      ExplicitHeight = 319
     end
   end
 end

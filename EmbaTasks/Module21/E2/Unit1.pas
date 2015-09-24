@@ -24,7 +24,6 @@ type
     procedure btnBuildGridClick(Sender: TObject);
   private
     { Private declarations }
-  fArray : array[1 .. c_RowCount, 1 .. c_ColCount] of real;
   public
     { Public declarations }
   end;
@@ -42,6 +41,7 @@ var
   RowCount, ColCount : Integer;
 
   RandomValue, SumEachRow : real;
+  ArrayOfReal : array[1 .. c_RowCount, 1 .. c_ColCount] of real;
 begin
   ColCount := c_ColCount + 1;
   RowCount := c_RowCount + 1;
@@ -64,7 +64,7 @@ begin
       RandomValue := random * (StrToInt(edtLowlest.Text) -
                                StrToInt(edtHighest.Text)) + StrToInt(edtHighest.Text);
 
-      fArray[i, j] := RandomValue;
+      ArrayOfReal[i, j] := RandomValue;
     end;
 
   sgdMy.ColCount := sgdMy.ColCount + 1;
@@ -75,8 +75,8 @@ begin
     SumEachRow := 0;
     for j := 1 to ColCount - 1 do
     begin
-      sgdMy.Cells[j, i] := FloatToStr(fArray[i, j]);
-      SumEachRow := SumEachRow + (fArray[i, j]);
+      sgdMy.Cells[j, i] := FloatToStr(ArrayOfReal[i, j]);
+      SumEachRow := SumEachRow + (ArrayOfReal[i, j]);
     end;
     sgdMy.Cells[sgdMy.ColCount - 1, i] := FloatToStr(SumEachRow);
   end;
