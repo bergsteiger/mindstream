@@ -39,15 +39,19 @@ object frmMain: TfrmMain
       TabOrder = 0
       OnClick = btnDrawClick
     end
-    object dtpMain: TDateTimePicker
-      Left = 40
-      Top = 14
-      Width = 73
+    object edtClock: TEdit
+      Left = 32
+      Top = 16
+      Width = 97
       Height = 21
-      Date = 42216.283115636570000000
-      Time = 42216.283115636570000000
-      Kind = dtkTime
       TabOrder = 1
+      Text = '0:00:00'
     end
+  end
+  object tmrMain: TTimer
+    Enabled = False
+    OnTimer = tmrMainTimer
+    Left = 216
+    Top = 8
   end
 end

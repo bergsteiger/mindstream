@@ -11,8 +11,10 @@ type
     pbxEx: TPaintBox;
     pnlButtons: TPanel;
     btnDraw: TButton;
-    dtpMain: TDateTimePicker;
+    edtClock: TEdit;
+    tmrMain: TTimer;
     procedure btnDrawClick(Sender: TObject);
+    procedure tmrMainTimer(Sender: TObject);
   private
     { Private declarations }
     procedure Draw;
@@ -32,7 +34,8 @@ uses
 
 procedure TfrmMain.btnDrawClick(Sender: TObject);
 begin
-  Draw;
+  edtClock.Text := TimeToStr(Now);
+  tmrMain.Enabled := True;
 end;
 
 procedure TfrmMain.Draw;
@@ -43,9 +46,11 @@ var
   StartPoint,
   EndPoint : TPoint;
 
-  Hour, Minute : Integer;
+  Hour, Min, Sec, MSec : Word;
   Angle, Coeff : Double;
 begin
+  DecodeTime(Now, Hour, Min, Sec, MSec);
+
   pbxEx.Canvas.Pen.Color:= clBlack;
   pbxEx.Canvas.Pen.Width:= 2;
 
@@ -71,7 +76,6 @@ begin
   end;
 
   // Drawing hour hand
-  Hour := HourOf(dtpMain.Time);
   Hour := Hour mod 12;
 
   Coeff := (Abs(Hour - 12) + 3);
@@ -88,9 +92,7 @@ begin
   pbxEx.Canvas.LineTo(EndPoint.X, EndPoint.Y);
 
   // Drawing minute hand
-  Minute := MinuteOf(dtpMain.Time);
-
-  Coeff := (Abs(Minute / 5 - 12) + 3);
+  Coeff := (Abs(Min / 5 - 12) + 3);
   Angle := Coeff * (Pi / 6);
 
   EndPoint.X := CenterPoint.X + Round((c_Radius - 55) * cos(Angle));
@@ -99,7 +101,24 @@ begin
   pbxEx.Canvas.Pen.Width:= 4;
   pbxEx.Canvas.MoveTo(StartPoint.X, StartPoint.Y);
   pbxEx.Canvas.LineTo(EndPoint.X, EndPoint.Y);
+
+  // Drawing second hand
+  Coeff := (Abs(Sec / 5 - 12) + 3);
+  Angle := Coeff * (Pi / 6);
+
+  EndPoint.X := CenterPoint.X + Round((c_Radius - 55) * cos(Angle));
+  EndPoint.Y := CenterPoint.Y - Round((c_Radius - 55) * sin(Angle));
+
+  pbxEx.Canvas.Pen.Width:= 2;
+  pbxEx.Canvas.MoveTo(StartPoint.X, StartPoint.Y);
+  pbxEx.Canvas.LineTo(EndPoint.X, EndPoint.Y);
 end;
 
+
+procedure TfrmMain.tmrMainTimer(Sender: TObject);
+begin
+  edtClock.Text := TimeToStr(Now);
+  Draw;
+end;
 
 end.
