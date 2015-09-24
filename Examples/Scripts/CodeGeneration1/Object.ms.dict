@@ -244,6 +244,10 @@ MACRO RunCompileProps&Methods
     g_CurrentClassMethods .for> ( STRING IN aName [ '`' aName '`' ] strings:Cat )
    ';'
 
+   '%CONSTRUCTORS'
+    g_CurrentClassConstructors .for> ( STRING IN aName [ '`' aName '`' ] strings:Cat )
+   ';'
+
   'end.'
  ] Ctx:Parser:PushArray
 ; // RunCompileProps&Methods

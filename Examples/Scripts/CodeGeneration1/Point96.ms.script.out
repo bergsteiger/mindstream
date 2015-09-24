@@ -1,5 +1,12 @@
 VOID TestWithDump PointTest
  class_impl _:Point
+  %CONSTRUCTORS %Constructors
+   ':'
+   '0'
+   'XY'
+   'OF'
+  ; // %CONSTRUCTORS %Constructors
+  
   %FIELDS %Fld
    'VMT'
    'X'
@@ -27,6 +34,10 @@ VOID TestWithDump PointTest
  ; // class_impl _:Point
  
  class_impl _:Rectangle
+  %CONSTRUCTORS %Constructors
+   ':'
+  ; // %CONSTRUCTORS %Constructors
+  
   %FIELDS %Fld
    'VMT'
    'TopLeft'
@@ -637,6 +648,9 @@ VOID TestWithDump PointTest
 ; // VOID TestWithDump PointTest
 
 class_impl _:Object
+ %CONSTRUCTORS %Constructors
+ ; // %CONSTRUCTORS %Constructors
+ 
  %FIELDS %Fld
   'VMT'
  ; // %FIELDS %Fld
