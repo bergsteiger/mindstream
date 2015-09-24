@@ -137,7 +137,7 @@ l_Points ==> Point:Print
 l_Points ==> ( Point:X Print )
 l_Points ==> ( Point:Y Print )
 l_Points ==> ( Point:class Print )
-l_Points ==> ( Object:ClassName Print )
+l_Points ==> ( Point:ClassName Print )
 for l_Points ( for ( Object:class %G ) ( getClassName Print ) )
 
 Rectangle var R1
