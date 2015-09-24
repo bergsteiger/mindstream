@@ -134,15 +134,16 @@ MACRO classExpander
   IN anItem 
 
   anItem %Fld .for> ( 
-   IN anItem 
+   IN aField 
    axiom:PushSymbol member
-   anItem |N Ctx:Parser:PushSymbol
+   aField |N Ctx:Parser:PushSymbol
   ) // anItem %Fld .for>
 
 /*{  anItem %Props .for> ( 
-   IN anItem 
+   IN aProp 
    axiom:PushSymbol WordAlias
-   anItem |N Ctx:Parser:PushSymbol
+   g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   anItem |N aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Props .for>}*/
 
  )
