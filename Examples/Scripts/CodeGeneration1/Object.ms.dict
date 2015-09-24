@@ -188,6 +188,13 @@ MACRO classExpander
    anItem |N getClassNamePrim aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Methods .for>
 
+  anItem %Constructors .for> ( 
+   IN aProp
+   axiom:PushSymbol WordAlias
+   g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   anItem |N getClassNamePrim aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+  ) // anItem %Constructors .for>
+
  )
 ; // classExpander
 
