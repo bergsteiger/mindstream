@@ -223,6 +223,9 @@ PRIVATE VOID operator MakeMethodSignature
  STRING IN aName
  STRING VAR l_Signature
  g_CurrentClass aName MakeMethodSignaturePrim >>> l_Signature
+ if ( l_Signature IsWordDeclared ) then
+ begin
+ end
  axiom:PushSymbol :
  l_Signature Ctx:Parser:PushSymbol
 ; // MakeMethodSignature
