@@ -252,13 +252,9 @@ MACRO RunCompileProps&Methods
 
    '%PROPERTIES' g_CurrentClassProperties ListToNameAsString
 
-   '%METHODS'
-    g_CurrentClassMethods .for> NameAsString
-   ';'
+   '%METHODS' g_CurrentClassMethods ListToNameAsString
 
-   '%CONSTRUCTORS'
-    g_CurrentClassConstructors .for> NameAsString
-   ';'
+   '%CONSTRUCTORS' g_CurrentClassConstructors ListToNameAsString
 
   'end.'
  ] Ctx:Parser:PushArray
@@ -327,9 +323,7 @@ MACRO RunCompileFields
   'implementation'
   g_CurrentClassImpl
 
-   '%FIELDS'
-    g_CurrentClassMembers .for> NameAsString
-   ';'
+   '%FIELDS' g_CurrentClassMembers ListToNameAsString
 
   'end.'
  ] Ctx:Parser:PushArray
