@@ -16,12 +16,9 @@ type
     pnlTop: TPanel;
     pnlMain: TPanel;
     sgdMy: TStringGrid;
-    btnBuildGrid: TButton;
-    lblHighest: TLabel;
-    lblLowlest: TLabel;
-    edtHighest: TEdit;
-    edtLowlest: TEdit;
-    procedure btnBuildGridClick(Sender: TObject);
+    btnDetermineYoungest: TButton;
+    procedure btnDetermineYoungestClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   fArray : array[1 .. c_RowCount, 1 .. c_ColCount] of real;
@@ -36,51 +33,38 @@ implementation
 
 {$R *.dfm}
 
-procedure TfmMain.btnBuildGridClick(Sender: TObject);
+procedure TfmMain.btnDetermineYoungestClick(Sender: TObject);
 var
-  i, j,
-  RowCount, ColCount : Integer;
-
-  RandomValue, SumEachRow : real;
+  i, YoungestIndex : Integer;
+  MinDate : TDateTime;
 begin
-  ColCount := c_ColCount + 1;
-  RowCount := c_RowCount + 1;
+  for i := 1 to sgdMy.RowCount -1 do
+    sgdMy.Cells[3, i] := '';
 
-  sgdMy.ColCount := ColCount;
-  sgdMy.RowCount := RowCount;
+  MinDate := StrToDate(sgdMy.Cells[1, 1]);
+  YoungestIndex := 1;
 
-  sgdMy.FixedCols := 1;
-  sgdMy.FixedRows := 1;
-
-  for i := 1 to ColCount - 1 do
-   sgdMy.Cells[i, 0] := IntToStr(i);
-
-  for i := 1 to RowCount - 1 do
-    sgdMy.Cells[0, i] := IntToStr(i);
-
-  for i := 1 to RowCount - 1 do
-    for j := 1 to ColCount - 1 do
+  for i := 1 to sgdMy.RowCount - 1 do
+    if StrToDate(sgdMy.Cells[1, i]) < MinDate then
     begin
-      RandomValue := random * (StrToInt(edtLowlest.Text) -
-                               StrToInt(edtHighest.Text)) + StrToInt(edtHighest.Text);
-
-      fArray[i, j] := RandomValue;
+      MinDate := StrToDate(sgdMy.Cells[1, i]);
+      YoungestIndex := i;
     end;
 
-  sgdMy.ColCount := sgdMy.ColCount + 1;
-  sgdMy.Cells[sgdMy.ColCount - 1, 0] := ' Sum ';
-
-  for i := 1 to RowCount - 1 do
-  begin
-    SumEachRow := 0;
-    for j := 1 to ColCount - 1 do
-    begin
-      sgdMy.Cells[j, i] := FloatToStr(fArray[i, j]);
-      SumEachRow := SumEachRow + (fArray[i, j]);
-    end;
-    sgdMy.Cells[sgdMy.ColCount - 1, i] := FloatToStr(SumEachRow);
-  end;
+  sgdMy.Cells[3, YoungestIndex] := 'This man';
 end;
 
+
+procedure TfmMain.FormCreate(Sender: TObject);
+begin
+  sgdMy.Cells[0, 0] := 'Last name';
+  sgdMy.ColWidths[0] := 100;
+  sgdMy.Cells[1, 0] := 'Dates of birth';
+  sgdMy.ColWidths[1] := 120;
+  sgdMy.Cells[2, 0] := 'Dates of the Nobel Prize';
+  sgdMy.ColWidths[2] := 140;
+  sgdMy.Cells[3, 0] := 'Who youngest';
+  sgdMy.ColWidths[3] := 100;
+end;
 
 end.
