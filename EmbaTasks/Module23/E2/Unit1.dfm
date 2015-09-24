@@ -42,7 +42,7 @@ object fmMain: TfmMain
       Width = 121
       Height = 21
       TabOrder = 1
-      Text = '0:1:30'
+      Text = '00:00:10'
     end
   end
   object tmrMain: TTimer

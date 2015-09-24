@@ -24,6 +24,7 @@ type
 
 var
   fmMain: TfmMain;
+  IsCountDown : boolean;
 
 implementation
 
@@ -32,6 +33,7 @@ implementation
 procedure TfmMain.btnStartClick(Sender: TObject);
 begin
   tmrMain.Enabled := True;
+  IsCountDown := True;
 end;
 
 procedure TfmMain.tmrMainTimer(Sender: TObject);
@@ -39,7 +41,18 @@ var
   TimeBefore, TimeAfter : TDateTime;
 begin
   TimeBefore := StrToTime(edtTimeKeeper.Text);
-  TimeAfter := TimeBefore - (1 / 60 / 60 / 24 );
+
+  if TimeBefore = 0 then
+  begin
+    IsCountDown := False;
+    edtTimeKeeper.Color := clRed;
+  end;
+
+  if IsCountDown then
+    TimeAfter := TimeBefore - (1 / 60 / 60 / 24 )
+  else
+    TimeAfter := TimeBefore + (1 / 60 / 60 / 24 );
+
   edtTimeKeeper.Text := TimeToStr(TimeAfter);
 end;
 
