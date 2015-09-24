@@ -42,9 +42,7 @@ var
   i, j,
   RowCount, ColCount : Integer;
 
-  RandomValue, SumElements,
-  MaxValue, MinValue,
-  SumEachColumn : real;
+  RandomValue, SumEachRow : real;
 begin
   ColCount := c_ColCount + 1;
   RowCount := c_RowCount + 1;
@@ -70,11 +68,19 @@ begin
       fArray[i, j] := RandomValue;
     end;
 
-  for i := 1 to ColCount - 1 do
-    for j := 1 to RowCount - 1 do
-      sgdMy.Cells[i, j] := FloatToStr(fArray[j, i]);
-
   sgdMy.ColCount := sgdMy.ColCount + 1;
+  sgdMy.Cells[sgdMy.ColCount - 1, 0] := ' Sum ';
+
+  for i := 1 to RowCount - 1 do
+  begin
+    SumEachRow := 0;
+    for j := 1 to ColCount - 1 do
+    begin
+      sgdMy.Cells[j, i] := FloatToStr(fArray[i, j]);
+      SumEachRow := SumEachRow + (fArray[i, j]);
+    end;
+    sgdMy.Cells[sgdMy.ColCount - 1, i] := FloatToStr(SumEachRow);
+  end;
 
   memResult.Lines.Append(floatToStr(fArray[c_RowCount, c_ColCount]));
 end;
