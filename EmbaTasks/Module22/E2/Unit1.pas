@@ -3,13 +3,9 @@ unit Unit1;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.ExtCtrls;
-
-const
-  c_ColCount = 7;
-  c_RowCount = 12;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids,
+  Vcl.ExtCtrls;
 
 type
   TfmMain = class(TForm)
@@ -19,9 +15,14 @@ type
     btnBuildGrid: TButton;
     lblHighest: TLabel;
     lblLowlest: TLabel;
-    edtHighest: TEdit;
-    edtLowlest: TEdit;
+    edtDuration: TEdit;
+    edtStartTime: TEdit;
+    lbl1: TLabel;
+    lbl2: TLabel;
+    edtBreakDuration: TEdit;
+    edtNumLessons: TEdit;
     procedure btnBuildGridClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,49 +38,53 @@ implementation
 
 procedure TfmMain.btnBuildGridClick(Sender: TObject);
 var
-  i, j,
-  RowCount, ColCount : Integer;
+  i, Duration,
+  BreakDuration,
+  NumLessons : Integer;
 
-  RandomValue, SumEachRow : real;
-  ArrayOfReal : array[1 .. c_RowCount, 1 .. c_ColCount] of real;
+  StartTime : TDateTime;
 begin
-  ColCount := c_ColCount + 1;
-  RowCount := c_RowCount + 1;
+  StartTime := StrToTime(edtStartTime.Text);
+  Duration :=  StrToInt(edtDuration.Text);
+  BreakDuration :=  StrToInt(edtBreakDuration.Text);
+  NumLessons :=  StrToInt(edtNumLessons.Text);
 
-  sgdMy.ColCount := ColCount;
-  sgdMy.RowCount := RowCount;
+  sgdMy.RowCount := NumLessons * 2;
 
-  sgdMy.FixedCols := 1;
-  sgdMy.FixedRows := 1;
-
-  for i := 1 to ColCount - 1 do
-   sgdMy.Cells[i, 0] := IntToStr(i);
-
-  for i := 1 to RowCount - 1 do
-    sgdMy.Cells[0, i] := IntToStr(i);
-
-  for i := 1 to RowCount - 1 do
-    for j := 1 to ColCount - 1 do
-    begin
-      RandomValue := random * (StrToInt(edtLowlest.Text) -
-                               StrToInt(edtHighest.Text)) + StrToInt(edtHighest.Text);
-
-      ArrayOfReal[i, j] := RandomValue;
-    end;
-
-  sgdMy.ColCount := sgdMy.ColCount + 1;
-  sgdMy.Cells[sgdMy.ColCount - 1, 0] := ' Sum ';
-
-  for i := 1 to RowCount - 1 do
+  for i := 1 to sgdMy.RowCount - 1 do
   begin
-    SumEachRow := 0;
-    for j := 1 to ColCount - 1 do
+    if i = 1 then
+      sgdMy.Cells[1, i] := TimeToStr(StartTime)
+    else
+      sgdMy.Cells[1, i] := sgdMy.Cells[2, i - 1];
+
+    // We define a lesson or break
+    if (i mod 2) <> 0 then
     begin
-      sgdMy.Cells[j, i] := FloatToStr(ArrayOfReal[i, j]);
-      SumEachRow := SumEachRow + (ArrayOfReal[i, j]);
+      sgdMy.Cells[0, i] := 'Lesson ' + IntToStr(i div 2 + 1);
+      sgdMy.Cells[2, i] := TimeToStr(StrToTime(sgdMy.Cells[1, i]) +
+                                     (Duration / 60 / 24));
+    end
+    else
+    begin
+      sgdMy.Cells[0, i] := 'Break';
+      sgdMy.Cells[2, i] := TimeToStr(StrToTime(sgdMy.Cells[1, i]) +
+                                     (BreakDuration / 60 / 24));
     end;
-    sgdMy.Cells[sgdMy.ColCount - 1, i] := FloatToStr(SumEachRow);
   end;
 end;
 
+procedure TfmMain.FormCreate(Sender: TObject);
+begin
+  sgdMy.FixedCols := 1;
+  sgdMy.FixedRows := 1;
+
+  sgdMy.ColWidths[0] := 100;
+  sgdMy.Cells[1, 0] := 'Start Time';
+  sgdMy.ColWidths[1] := 85;
+  sgdMy.Cells[2, 0] := 'End Time';
+  sgdMy.ColWidths[2] := 90;
+end;
+
 end.
+
