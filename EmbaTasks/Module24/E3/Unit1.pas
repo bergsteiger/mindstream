@@ -32,30 +32,43 @@ implementation
 {$R *.dfm}
 
 procedure TfmMain.btnStartClick(Sender: TObject);
-  function IsPalindrome(const aLine : string) : Boolean;
-  var
-    i : integer;
-  begin
-    Result := True;
-    for i:=1 to (length(aLine) div 2) do
-      if aLine[i] <> aLine[length(aLine) - i + 1] then
-        Result := False;
-  end;
 var
-  FileText : TextFile;
+  FileText, FileTextSame, FileWrite : TextFile;
   Line : string;
+  Num, SumLine : integer;
 begin
+  AssignFile(FileTextSame, edtFileName.Text);
+  Reset(FileTextSame);
+
   AssignFile(FileText, edtFileName.Text);
   Reset(FileText);
 
+  AssignFile(FileWrite, 'Result.txt');
+  Rewrite(FileWrite);
+
   while not EOF(FileText) do
   begin
-    Readln(FileText, Line);
-    if IsPalindrome(Line) then
-      memResult.Lines.Append(Line);
+    SumLine := 0;
+
+    while not SeekEoln(FileText) do
+    begin
+      Read(FileText, Num);
+      SumLine := SumLine + Num;
+    end;
+
+    Readln(FileText);
+    Readln(FileTextSame, Line);
+
+    if (SumLine mod 2 = 0) then
+    begin
+      writeln(FileWrite, Line);
+      memResult.Lines.Add(Line)
+    end;
   end;
 
   CloseFile(FileText);
+  CloseFile(FileTextSame);
+  CloseFile(FileWrite);
 end;
 
 end.

@@ -20,7 +20,6 @@ object fmMain: TfmMain
     Height = 63
     Align = alTop
     TabOrder = 0
-    ExplicitHeight = 57
     object lbl1: TLabel
       Left = 118
       Top = 24
@@ -45,8 +44,6 @@ object fmMain: TfmMain
     Align = alClient
     Caption = 'pnlCenter'
     TabOrder = 1
-    ExplicitTop = 57
-    ExplicitHeight = 472
     object memResult: TMemo
       Left = 1
       Top = 1
@@ -54,10 +51,6 @@ object fmMain: TfmMain
       Height = 191
       Align = alClient
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 64
-      ExplicitWidth = 552
-      ExplicitHeight = 193
     end
   end
   object pnlBottom: TPanel
@@ -68,7 +61,6 @@ object fmMain: TfmMain
     Align = alBottom
     Caption = 'pnlBottom'
     TabOrder = 2
-    ExplicitTop = 535
     object btnStart: TButton
       Left = 118
       Top = 20
