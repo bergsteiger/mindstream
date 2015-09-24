@@ -126,6 +126,8 @@ PRIVATE STRING operator MakeMethodSignaturePrim
  [ aClass ':' aName ] strings:Cat >>> Result
 ; // MakeMethodSignaturePrim
 
+CONST cClassImplPrefix '_:'
+
 MACRO classExpander
  ^ IN anImpl
  %SUMMARY 'Тут можно копировать поля и методы' ;
@@ -165,14 +167,14 @@ MACRO class
   ':' 
 
   @ class_impl Ctx:SetWordProducerForCompiledClass
-  [ '_:' g_CurrentClass ] strings:Cat =: g_CurrentClassImpl
+  [ cClassImplPrefix g_CurrentClass ] strings:Cat =: g_CurrentClassImpl
 
   g_CurrentClassImpl
    if ( g_CurrentClass !== cObjectName ) then
    begin
     '%INHERITS'
     '@' 
-    [ '_:' cObjectName ] strings:Cat
+    [ cClassImplPrefix cObjectName ] strings:Cat
     ';'
    end
   ';'
