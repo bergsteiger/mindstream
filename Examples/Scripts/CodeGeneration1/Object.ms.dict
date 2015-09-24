@@ -385,4 +385,7 @@ STRING readonly ClassName
  Self Object:class getClassName =: Result
 ; // Object:ClassName
 
+constructor DoNotCall
+; // DoNotCall
+
 class-end // Object

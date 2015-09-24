@@ -217,6 +217,9 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING readonly Object:ClassName
  
+ Object constructor Object:DoNotCall
+ ; // Object constructor Object:DoNotCall
+ 
  Point method Point:Neg
   Point IN Self
   Point::
@@ -392,6 +395,9 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // STRING readonly Object:ClassName
+ 
+ Object constructor Object:DoNotCall
+ ; // Object constructor Object:DoNotCall
  
  VOID method Rectangle:Print
   Rectangle IN Self
@@ -649,6 +655,7 @@ VOID TestWithDump PointTest
 
 class_impl _:Object
  %CONSTRUCTORS %Constructors
+  'DoNotCall'
  ; // %CONSTRUCTORS %Constructors
  
  %FIELDS %Fld
