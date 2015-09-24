@@ -46,21 +46,30 @@ var
   MaxValue, MinValue,
   SumEachColumn : real;
 begin
-  ColCount := c_ColCount;
-  RowCount := c_RowCount;
+  ColCount := c_ColCount + 1;
+  RowCount := c_RowCount + 1;
 
   sgdMy.ColCount := ColCount;
   sgdMy.RowCount := RowCount;
+
+  sgdMy.FixedCols := 1;
+  sgdMy.FixedRows := 1;
+
+  for i := 1 to ColCount do
+   sgdMy.Cells[i, 0] := IntToStr(i);
+
+  for i := 1 to RowCount do
+    sgdMy.Cells[0, i] := IntToStr(i);
 
   SumElements := 0;
   MaxValue := fArray[1, 1];
   MinValue := fArray[1, 1];
 
-  for i := 1 to ColCount do
+  for i := 2 to ColCount do
   begin
     SumEachColumn := 0;
 
-    for j := 1 to RowCount do
+    for j := 2 to RowCount do
     begin
       RandomValue := random * (StrToInt(edtLowlest.Text) -
                                StrToInt(edtHighest.Text)) + StrToInt(edtHighest.Text);
@@ -84,6 +93,7 @@ begin
   memResult.Lines.Append('Sum of elements = ' + FloatToStr(SumElements));
   memResult.Lines.Append('Maximal element = ' + FloatToStr(MaxValue));
   memResult.Lines.Append('Minimal element = ' + FloatToStr(MinValue));
+  memResult.Lines.Append(floatToStr(fArray[RowCount, ColCount]));
 end;
 
 end.
