@@ -32,9 +32,14 @@ implementation
 {$R *.dfm}
 
 procedure TfmMain.btnStartClick(Sender: TObject);
-  function IsPalindrome(const aLine) : Boolean;
+  function IsPalindrome(const aLine : string) : Boolean;
+  var
+    i : integer;
   begin
     Result := True;
+    for i:=1 to (length(aLine) div 2) do
+      if aLine[i] <> aLine[length(aLine) - i + 1] then
+        Result := False;
   end;
 var
   FileText : TextFile;
