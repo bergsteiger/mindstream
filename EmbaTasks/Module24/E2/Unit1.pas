@@ -10,10 +10,12 @@ uses
 type
   TfmMain = class(TForm)
     pnlTop: TPanel;
-    btnStart: TButton;
     lbl1: TLabel;
     edtFileName: TEdit;
-    lblResult: TLabel;
+    pnlCenter: TPanel;
+    pnlBottom: TPanel;
+    memResult: TMemo;
+    btnStart: TButton;
     procedure btnStartClick(Sender: TObject);
   private
     { Private declarations }
@@ -30,29 +32,23 @@ implementation
 {$R *.dfm}
 
 procedure TfmMain.btnStartClick(Sender: TObject);
+  function IsPalindrome(const aLine) : Boolean;
+  begin
+    Result := True;
+  end;
 var
   FileText : TextFile;
-  Line, MinLine : string;
-  MinLength : Integer;
+  Line : string;
 begin
   AssignFile(FileText, edtFileName.Text);
   Reset(FileText);
 
-  Readln(FileText, Line);
-  MinLength := Length(Line);
-  MinLine := Line;
-
   while not EOF(FileText) do
   begin
     Readln(FileText, Line);
-    if Length(Line) <= MinLength then
-    begin
-      MinLength := Length(Line);
-      MinLine := Line;
-    end;
+    if IsPalindrome(Line) then
+      memResult.Lines.Append(Line);
   end;
-
-  lblResult.Caption := MinLine;
 
   CloseFile(FileText);
 end;
