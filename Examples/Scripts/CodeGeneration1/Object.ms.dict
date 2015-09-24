@@ -128,6 +128,11 @@ PRIVATE STRING operator MakeMethodSignaturePrim
 
 CONST cClassImplPrefix '_:'
 
+STRING : getClassName
+ IN Self
+ Self |N ':' string:Split =: Result DROP
+; // getClassName
+
 MACRO classExpander
  ^ IN anImpl
  %SUMMARY 'Тут можно копировать поля и методы' ;
@@ -313,11 +318,6 @@ INTEGER member VMT
 members-end
 
 TtfwWord readonly class read VMT
-
-STRING : getClassName
- IN Self
- Self |N ':' string:Split =: Result DROP
-; // getClassName
 
 STRING readonly ClassName
  Self Object:class getClassName =: Result
