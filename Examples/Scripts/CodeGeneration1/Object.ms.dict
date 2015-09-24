@@ -120,16 +120,31 @@ MACRO member
  aName |N array:AddTo g_CurrentClassMembers
 ; // member
 
+PRIVATE VOID operator MakeMethodSignaturePrim
+ STRING IN aClass
+ STRING IN aName
+ axiom:PushSymbol :
+ [ aClass ':' aName ] strings:Cat Ctx:Parser:PushSymbol
+; // MakeMethodSignaturePrim
+
 MACRO classExpander
  ^ IN anImpl
- // Тут можно копировать поля и методы
+ %SUMMARY 'Тут можно копировать поля и методы' ;
  anImpl |@ %G .for> ( 
   IN anItem 
+
   anItem %Fld .for> ( 
    IN anItem 
    axiom:PushSymbol member
    anItem |N Ctx:Parser:PushSymbol
-  ) 
+  ) // anItem %Fld .for>
+
+/*{  anItem %Props .for> ( 
+   IN anItem 
+   axiom:PushSymbol WordAlias
+   anItem |N Ctx:Parser:PushSymbol
+  ) // anItem %Props .for>}*/
+
  )
 ; // classExpander
 
@@ -190,13 +205,6 @@ MACRO class-end
 
 INTEGER type FieldOffset
 // - смещение поля
-
-PRIVATE VOID operator MakeMethodSignaturePrim
- STRING IN aClass
- STRING IN aName
- axiom:PushSymbol :
- [ aClass ':' aName ] strings:Cat Ctx:Parser:PushSymbol
-; // MakeMethodSignaturePrim
 
 PRIVATE VOID operator MakeMethodSignature
  STRING IN aName
