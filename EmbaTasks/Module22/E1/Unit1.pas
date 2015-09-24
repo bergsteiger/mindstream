@@ -7,10 +7,6 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.ExtCtrls;
 
-const
-  c_ColCount = 7;
-  c_RowCount = 12;
-
 type
   TfmMain = class(TForm)
     pnlTop: TPanel;
