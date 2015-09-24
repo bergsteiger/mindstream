@@ -12,8 +12,10 @@ type
     pnlTop: TPanel;
     btnStart: TButton;
     lbl1: TLabel;
-    edtTimeKeeper: TEdit;
+    edtClock: TEdit;
     tmrMain: TTimer;
+    lblDate: TLabel;
+    lblDayOfWeek: TLabel;
     procedure btnStartClick(Sender: TObject);
     procedure tmrMainTimer(Sender: TObject);
   private
@@ -31,29 +33,20 @@ implementation
 {$R *.dfm}
 
 procedure TfmMain.btnStartClick(Sender: TObject);
+var
+  Year, Month, Day, DayOfWeek : Word;
 begin
+  DecodeDateFully(Now, Year, Month, Day, DayOfWeek);
+  lblDate.Caption := lblDate.Caption + IntToStr(Day) + '.' +
+                                       IntToStr(Month) + '.' +
+                                       IntToStr(Year);
+  lblDayOfWeek.Caption := lblDayOfWeek.Caption + IntToStr(DayOfWeek);
   tmrMain.Enabled := True;
-  IsCountDown := True;
 end;
 
 procedure TfmMain.tmrMainTimer(Sender: TObject);
-var
-  TimeBefore, TimeAfter : TDateTime;
 begin
-  TimeBefore := StrToTime(edtTimeKeeper.Text);
-
-  if TimeBefore = 0 then
-  begin
-    IsCountDown := False;
-    edtTimeKeeper.Color := clRed;
-  end;
-
-  if IsCountDown then
-    TimeAfter := TimeBefore - (1 / 60 / 60 / 24 )
-  else
-    TimeAfter := TimeBefore + (1 / 60 / 60 / 24 );
-
-  edtTimeKeeper.Text := TimeToStr(TimeAfter);
+  edtClock.Text := TimeToStr(Now);
 end;
 
 end.

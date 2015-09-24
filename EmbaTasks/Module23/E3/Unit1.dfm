@@ -21,11 +21,25 @@ object fmMain: TfmMain
     Align = alClient
     TabOrder = 0
     object lbl1: TLabel
-      Left = 118
+      Left = 134
       Top = 24
-      Width = 56
+      Width = 52
       Height = 13
-      Caption = 'Enter time :'
+      Caption = 'Time now :'
+    end
+    object lblDate: TLabel
+      Left = 158
+      Top = 48
+      Width = 33
+      Height = 13
+      Caption = 'Date : '
+    end
+    object lblDayOfWeek: TLabel
+      Left = 294
+      Top = 48
+      Width = 74
+      Height = 13
+      Caption = 'Date of week : '
     end
     object btnStart: TButton
       Left = 118
@@ -36,19 +50,19 @@ object fmMain: TfmMain
       TabOrder = 0
       OnClick = btnStartClick
     end
-    object edtTimeKeeper: TEdit
+    object edtClock: TEdit
       Left = 192
       Top = 21
       Width = 121
       Height = 21
       TabOrder = 1
-      Text = '00:00:10'
+      Text = '00:00:00'
     end
   end
   object tmrMain: TTimer
     Enabled = False
     OnTimer = tmrMainTimer
-    Left = 344
-    Top = 16
+    Left = 392
+    Top = 8
   end
 end
