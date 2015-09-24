@@ -138,13 +138,14 @@ MACRO classExpander
    aField |N Ctx:Parser:PushSymbol
   ) // anItem %Fld .for>
 
-/*{  anItem %Props .for> ( 
+  anItem %Props .for> ( 
    IN aProp
-   'WordAlias' Ctx:Parser:PushSymbol 
+   g_CurrentClass aProp |N MakeMethodSignaturePrim Trace
+/*{   'WordAlias' Ctx:Parser:PushSymbol 
    //axiom:PushSymbol WordAlias
    g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem |N aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-  ) // anItem %Props .for>}*/
+   anItem |N aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol}*/
+  ) // anItem %Props .for>
 
  )
 ; // classExpander
