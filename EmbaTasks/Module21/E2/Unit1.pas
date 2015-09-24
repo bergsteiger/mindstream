@@ -25,7 +25,7 @@ type
     procedure btnBuildGridClick(Sender: TObject);
   private
     { Private declarations }
-    fArray : array[1 .. c_RowCount, 1 .. c_ColCount] of real;
+  fArray : array[1 .. c_RowCount, 1 .. c_ColCount] of real;
   public
     { Public declarations }
   end;
@@ -55,45 +55,28 @@ begin
   sgdMy.FixedCols := 1;
   sgdMy.FixedRows := 1;
 
-  for i := 1 to ColCount do
+  for i := 1 to ColCount - 1 do
    sgdMy.Cells[i, 0] := IntToStr(i);
 
-  for i := 1 to RowCount do
+  for i := 1 to RowCount - 1 do
     sgdMy.Cells[0, i] := IntToStr(i);
 
-  SumElements := 0;
-  MaxValue := fArray[1, 1];
-  MinValue := fArray[1, 1];
-
-  for i := 2 to ColCount do
-  begin
-    SumEachColumn := 0;
-
-    for j := 2 to RowCount do
+  for i := 1 to RowCount - 1 do
+    for j := 1 to ColCount - 1 do
     begin
       RandomValue := random * (StrToInt(edtLowlest.Text) -
                                StrToInt(edtHighest.Text)) + StrToInt(edtHighest.Text);
 
       fArray[i, j] := RandomValue;
-      sgdMy.Cells[i - 1, j - 1] := FloatToStr(fArray[i, j]);
-
-      SumEachColumn := SumEachColumn + fArray[i, j];
-      SumElements := SumElements + fArray[i, j];
-
-      if fArray[i, j] < MinValue then
-        MinValue := fArray[i, j];
-
-      if fArray[i, j] > MaxValue then
-        MaxValue := fArray[i, j];
     end;
 
-    memResult.Lines.Append('Sum of elements of ' + IntToStr(i) + ' column = ' + FloatToStr(SumEachColumn));
-  end;
+  for i := 1 to ColCount - 1 do
+    for j := 1 to RowCount - 1 do
+      sgdMy.Cells[i, j] := FloatToStr(fArray[j, i]);
 
-  memResult.Lines.Append('Sum of elements = ' + FloatToStr(SumElements));
-  memResult.Lines.Append('Maximal element = ' + FloatToStr(MaxValue));
-  memResult.Lines.Append('Minimal element = ' + FloatToStr(MinValue));
-  memResult.Lines.Append(floatToStr(fArray[RowCount, ColCount]));
+  sgdMy.ColCount := sgdMy.ColCount + 1;
+
+  memResult.Lines.Append(floatToStr(fArray[c_RowCount, c_ColCount]));
 end;
 
 end.
