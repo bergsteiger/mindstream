@@ -231,21 +231,27 @@ MACRO class
 
 ; // class
 
+STRING FUNCTION NameAsString
+ STRING IN aName
+ %SUMMARY 'Делает имя таким, чтобы оно было как для Ctx:Parser:PushString'; 
+ [ '`' aName '`' ] strings:Cat >>> Result
+; // NameAsString
+
 MACRO RunCompileProps&Methods
  [
   'implementation'
   g_CurrentClassImpl
 
    '%PROPERTIES'
-    g_CurrentClassProperties .for> ( STRING IN aName [ '`' aName '`' ] strings:Cat )
+    g_CurrentClassProperties .for> NameAsString
    ';'
 
    '%METHODS'
-    g_CurrentClassMethods .for> ( STRING IN aName [ '`' aName '`' ] strings:Cat )
+    g_CurrentClassMethods .for> NameAsString
    ';'
 
    '%CONSTRUCTORS'
-    g_CurrentClassConstructors .for> ( STRING IN aName [ '`' aName '`' ] strings:Cat )
+    g_CurrentClassConstructors .for> NameAsString
    ';'
 
   'end.'
@@ -316,7 +322,7 @@ MACRO RunCompileFields
   g_CurrentClassImpl
 
    '%FIELDS'
-    g_CurrentClassMembers .for> ( STRING IN aName [ '`' aName '`' ] strings:Cat )
+    g_CurrentClassMembers .for> NameAsString
    ';'
 
   'end.'
