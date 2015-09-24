@@ -65,6 +65,12 @@ ARRAY FUNCTION %Props
  %S %ClassRTTIList %Props >>> Result
 ; // %Props
 
+ARRAY FUNCTION %Methods 
+ IN %S
+ %SUMMARY 'Возвращает итератор методов класса' ;
+ %S %ClassRTTIList %Methods >>> Result
+; // %Methods
+
 VOID OPERATOR class_impl
 // - имплементация класса, пока "фиктивная"
 // Тут мы будем хранить всю информацию о классе - предки, поля, методы
@@ -112,6 +118,11 @@ ARRAY VAR g_CurrentClassProperties
 [EXECUTE]
  ( g_CurrentClassProperties := [ ] )
 ( g_CurrentClassProperties := [ ] )
+
+ARRAY VAR g_CurrentClassMethods
+[EXECUTE]
+ ( g_CurrentClassMethods := [ ] )
+( g_CurrentClassMethods := [ ] )
 
 MACRO member
  Literal IN aName
@@ -167,6 +178,7 @@ MACRO class
  Literal IN aName
  g_CurrentClassMembers := [ ]
  g_CurrentClassProperties := [ ]
+ g_CurrentClassMethods := [ ]
  g_ClassFieldOffset := 0
  aName |N =: g_CurrentClass
  // axiom:PushSymbol class_impl
@@ -252,7 +264,7 @@ MACRO method
  @SELF Ctx:SetWordProducerForCompiledClass
  aName |N MakeMethodSignature
  MakeSelfParam
- aName |N Trace
+ aName |N array:AddTo g_CurrentClassMethods
 ; // method
 
 MACRO readonly
