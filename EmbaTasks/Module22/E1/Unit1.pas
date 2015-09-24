@@ -17,7 +17,6 @@ type
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
-  fArray : array[1 .. c_RowCount, 1 .. c_ColCount] of real;
   public
     { Public declarations }
   end;

@@ -39,8 +39,6 @@ object fmMain: TfmMain
     Align = alClient
     Caption = 'pnlMain'
     TabOrder = 1
-    ExplicitTop = 73
-    ExplicitHeight = 370
     object sgdMy: TStringGrid
       Left = 1
       Top = 1
@@ -52,7 +50,6 @@ object fmMain: TfmMain
       FixedCols = 0
       Options = [goFixedVertLine, goFixedHorzLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goEditing]
       TabOrder = 0
-      ExplicitHeight = 368
     end
   end
 end
