@@ -34,6 +34,7 @@ object fmMain: TfmMain
       Height = 25
       Caption = 'Start'
       TabOrder = 0
+      OnClick = btnStartClick
     end
     object edtTimeKeeper: TEdit
       Left = 192
@@ -45,6 +46,8 @@ object fmMain: TfmMain
     end
   end
   object tmrMain: TTimer
+    Enabled = False
+    OnTimer = tmrMainTimer
     Left = 344
     Top = 16
   end

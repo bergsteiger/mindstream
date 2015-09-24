@@ -14,6 +14,8 @@ type
     lbl1: TLabel;
     edtTimeKeeper: TEdit;
     tmrMain: TTimer;
+    procedure btnStartClick(Sender: TObject);
+    procedure tmrMainTimer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,5 +28,19 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfmMain.btnStartClick(Sender: TObject);
+begin
+  tmrMain.Enabled := True;
+end;
+
+procedure TfmMain.tmrMainTimer(Sender: TObject);
+var
+  TimeBefore, TimeAfter : TDateTime;
+begin
+  TimeBefore := StrToTime(edtTimeKeeper.Text);
+  TimeAfter := TimeBefore - (1 / 60 / 60 / 24 );
+  edtTimeKeeper.Text := TimeToStr(TimeAfter);
+end;
 
 end.
