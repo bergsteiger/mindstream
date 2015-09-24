@@ -21,7 +21,6 @@ type
     lblLowlest: TLabel;
     edtHighest: TEdit;
     edtLowlest: TEdit;
-    memResult: TMemo;
     procedure btnBuildGridClick(Sender: TObject);
   private
     { Private declarations }
@@ -81,8 +80,6 @@ begin
     end;
     sgdMy.Cells[sgdMy.ColCount - 1, i] := FloatToStr(SumEachRow);
   end;
-
-  memResult.Lines.Append(floatToStr(fArray[c_RowCount, c_ColCount]));
 end;
 
 end.

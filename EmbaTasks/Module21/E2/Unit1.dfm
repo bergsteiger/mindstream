@@ -72,7 +72,7 @@ object fmMain: TfmMain
       Left = 1
       Top = 1
       Width = 704
-      Height = 319
+      Height = 479
       Align = alClient
       Color = clMoneyGreen
       FixedCols = 0
@@ -80,17 +80,7 @@ object fmMain: TfmMain
       FixedRows = 0
       Options = [goFixedVertLine, goFixedHorzLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goEditing]
       TabOrder = 0
-    end
-    object memResult: TMemo
-      Left = 1
-      Top = 320
-      Width = 704
-      Height = 160
-      Align = alBottom
-      Lines.Strings = (
-        '')
-      ScrollBars = ssVertical
-      TabOrder = 1
+      ExplicitHeight = 319
     end
   end
 end
