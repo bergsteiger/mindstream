@@ -28,6 +28,7 @@ EXPORTS
 NamedWordProducer %FIELDS %Fld
 NamedWordProducer %PROPERTIES %Props
 NamedWordProducer %METHODS %Methods
+NamedWordProducer %CONSTRUCTORS %Constructors
 
 OBJECT FUNCTION DoMember 
  OBJECT IN aMember
@@ -70,6 +71,12 @@ ARRAY FUNCTION %Methods
  %SUMMARY '¬озвращает итератор методов класса' ;
  %S %ClassRTTIList %Methods >>> Result
 ; // %Methods
+
+ARRAY FUNCTION %Constructors 
+ IN %S
+ %SUMMARY '¬озвращает итератор конструкторов класса' ;
+ %S %ClassRTTIList %Constructors >>> Result
+; // %Constructors
 
 VOID OPERATOR class_impl
 // - имплементаци€ класса, пока "фиктивна€"
@@ -123,6 +130,11 @@ ARRAY VAR g_CurrentClassMethods
 [EXECUTE]
  ( g_CurrentClassMethods := [ ] )
 ( g_CurrentClassMethods := [ ] )
+
+ARRAY VAR g_CurrentClassConstructors
+[EXECUTE]
+ ( g_CurrentClassConstructors := [ ] )
+( g_CurrentClassConstructors := [ ] )
 
 MACRO member
  Literal IN aName
@@ -186,6 +198,7 @@ MACRO class
  g_CurrentClassMembers := [ ]
  g_CurrentClassProperties := [ ]
  g_CurrentClassMethods := [ ]
+ g_CurrentClassConstructors := [ ]
  g_ClassFieldOffset := 0
  aName |N =: g_CurrentClass
  // axiom:PushSymbol class_impl
@@ -260,7 +273,7 @@ MACRO constructor
  @SELF Ctx:SetWordProducerForCompiledClass
  g_CurrentClass Ctx:Parser:PushSymbol
  aName |N MakeMethodSignature
- aName |N Trace
+ aName |N array:AddTo g_CurrentClassConstructors
 ; // constructor
 
 PRIVATE VOID operator MakeSelfParam
