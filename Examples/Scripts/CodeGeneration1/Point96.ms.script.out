@@ -16,6 +16,14 @@ VOID TestWithDump PointTest
    _:Object
   ; // %INHERITS %G
   
+  %METHODS %Methods
+   '+'
+   'Neg'
+   '-'
+   'ToPrintable'
+   'Print'
+  ; // %METHODS %Methods
+  
   %PROPERTIES %Props
    'X'
    'Y'
@@ -34,6 +42,11 @@ VOID TestWithDump PointTest
    @
    _:Object
   ; // %INHERITS %G
+  
+  %METHODS %Methods
+   'ToPrintable'
+   'Print'
+  ; // %METHODS %Methods
   
   %PROPERTIES %Props
    'TopLeft'
@@ -632,6 +645,10 @@ class_impl _:Object
  %FIELDS %Fld
   'VMT'
  ; // %FIELDS %Fld
+ 
+ %METHODS %Methods
+  'ToPrintable'
+ ; // %METHODS %Methods
  
  %PROPERTIES %Props
   'class'
