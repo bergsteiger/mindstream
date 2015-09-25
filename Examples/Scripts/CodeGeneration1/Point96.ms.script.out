@@ -267,12 +267,12 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point constructor Point:OF
  
- VOID method Point:Print
+ REDIFINITION OVERRIDE VOID method Point:Print
   Point IN Self
   Self
   Point:ToPrintable
   Print
- ; // VOID method Point:Print
+ ; // REDIFINITION OVERRIDE VOID method Point:Print
  
  REDIFINITION OVERRIDE STRING method Point:ToPrintable
   Point IN Self
@@ -411,12 +411,12 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Object constructor Object:new
  
- VOID method Rectangle:Print
+ REDIFINITION OVERRIDE VOID method Rectangle:Print
   Rectangle IN Self
   Self
   Rectangle:ToPrintable
   Print
- ; // VOID method Rectangle:Print
+ ; // REDIFINITION OVERRIDE VOID method Rectangle:Print
  
  Point readonly Rectangle:TopLeft
   Rectangle IN Self
@@ -676,6 +676,7 @@ class_impl _:Object
  
  %METHODS %Methods
   'ToPrintable'
+  'Print'
  ; // %METHODS %Methods
  
  %PROPERTIES %Props

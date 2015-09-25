@@ -4540,6 +4540,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Debug.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
@@ -4700,6 +4701,9 @@ STRING OPERATOR :: MACRO :: readonly : Object:ClassName
 Object OPERATOR :: MACRO :: constructor : Object:new
  Object OPERATOR :: MACRO :: constructor :: Object:new : Result
 ; // Object:new
+ABSTRACT VOID OPERATOR :: MACRO :: method : Object:Print
+ Object OPERATOR :: IN : Self
+; // Object:Print
 ABSTRACT STRING OPERATOR :: MACRO :: method : Object:ToPrintable
  ABSTRACT STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
  Object OPERATOR :: IN : Self
