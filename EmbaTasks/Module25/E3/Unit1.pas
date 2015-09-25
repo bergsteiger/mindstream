@@ -31,9 +31,30 @@ implementation
 {$R *.dfm}
 
 procedure TfmMain.btnStartClick(Sender: TObject);
-  function SumFromLine(const aLine : string) : integer;
+  function SumFromLine(aLine : string) : integer;
+  var
+    SpacePos, Number, Code  : integer;
+    SubStr : string;
   begin
-    Result := 20;
+    Result:= 0;
+    SpacePos := 1;
+    while SpacePos > 0 do
+    begin
+      aLine := Trim(aLine);
+      SpacePos := Pos(' ', aLine);
+
+      if (SpacePos = 0) and (Length(aLine)>0) then
+        SubStr := Copy(aLine, 0, Length(aLine))
+      else
+        SubStr := Copy(aLine, 0, SpacePos - 1);
+
+      Delete(aLine, 1, SpacePos);
+      Val(SubStr, Number, Code);
+
+      if Code = 0 then
+        Result := Result + Number;
+    end;
+
   end;
 var
   FileOpen,
