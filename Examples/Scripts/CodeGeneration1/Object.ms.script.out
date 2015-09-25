@@ -20,6 +20,15 @@ VOID TestWithDump ObjectTest
   ==
   ?ASSURE
   'Множественные типы для вызова методов объектов пока не поддерживаются'
+  [
+   aMethod
+   |N
+   ':'
+   l_FullMethodName
+  ]
+  strings:Cat
+  l_FullMethodName
+  pop:Word:SetValue
   l_FullMethodName
   Result
   pop:Word:SetValue
@@ -56,4 +65,4 @@ Object
 Object
 TtfwValueTypes
 Object
-Object
+ClassName:Object

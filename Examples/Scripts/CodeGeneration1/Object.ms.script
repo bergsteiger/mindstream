@@ -19,6 +19,8 @@ STRING operator |>
  Self pop:Word:Info pop:WordInfo:ValueTypes pop:ValueTypes:Name >>> l_FullMethodName
  l_FullMethodName ' ' string:Pos -1 == ?ASSURE 'Множественные типы для вызова методов объектов пока не поддерживаются'
 
+ [ aMethod |N ':' l_FullMethodName ] strings:Cat >>> l_FullMethodName
+
  l_FullMethodName >>> Result
 ; // |>
 
