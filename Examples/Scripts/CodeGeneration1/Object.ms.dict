@@ -352,10 +352,6 @@ class Object
  anOffset Self [i]
 ; // FieldByOffset
 
-VIRTUAL STRING method ToPrintable
- Self ToPrintable =: Result
-; // ToPrintable
-
 PRIVATE operator do-get-member
  STRING IN aName
  axiom:PushSymbol FieldByOffset
@@ -388,5 +384,9 @@ STRING readonly ClassName
 constructor new
  new[ ] =: Result
 ; // new
+
+VIRTUAL STRING method ToPrintable
+ Self ToPrintable =: Result
+; // ToPrintable
 
 class-end // Object
