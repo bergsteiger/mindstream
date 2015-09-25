@@ -1,6 +1,6 @@
 VOID TestWithDump ObjectTest
  STRING OPERATOR |>
-  IN anObject
+  ^@ IN anObject
   anObject
   pop:Word:Info
   pop:WordInfo:ValueTypes
@@ -35,9 +35,7 @@ VOID TestWithDump ObjectTest
  pop:WordInfo:ValueTypes
  pop:ValueTypes:Name
  Print
- @
- l_Obj
- |>
+ l_Obj |>
  Print
 ; // VOID TestWithDump ObjectTest
 
