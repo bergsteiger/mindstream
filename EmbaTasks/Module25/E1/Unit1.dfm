@@ -2,7 +2,7 @@ object fmMain: TfmMain
   Left = 0
   Top = 0
   Caption = 'Main'
-  ClientHeight = 317
+  ClientHeight = 99
   ClientWidth = 552
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,50 +17,36 @@ object fmMain: TfmMain
     Left = 0
     Top = 0
     Width = 552
-    Height = 63
-    Align = alTop
-    TabOrder = 0
-    object lbl1: TLabel
-      Left = 118
-      Top = 24
-      Width = 50
-      Height = 13
-      Caption = 'FileName :'
-    end
-    object edtFileName: TEdit
-      Left = 192
-      Top = 21
-      Width = 121
-      Height = 21
-      TabOrder = 0
-      Text = 'file.txt'
-    end
-  end
-  object pnlCenter: TPanel
-    Left = 0
-    Top = 63
-    Width = 552
-    Height = 193
+    Height = 38
     Align = alClient
-    Caption = 'pnlCenter'
-    TabOrder = 1
-    object memResult: TMemo
-      Left = 1
-      Top = 1
-      Width = 550
-      Height = 191
-      Align = alClient
-      TabOrder = 0
+    TabOrder = 0
+    ExplicitHeight = 41
+    object lblResult: TLabel
+      Left = 429
+      Top = 12
+      Width = 30
+      Height = 13
+      Caption = 'Result'
+    end
+    object lbl1: TLabel
+      Left = 37
+      Top = 12
+      Width = 314
+      Height = 13
+      Caption = 
+        'First dialog OpenFile. Second dialog EvenFile. Third dialog OddF' +
+        'ile'
     end
   end
   object pnlBottom: TPanel
     Left = 0
-    Top = 256
+    Top = 38
     Width = 552
     Height = 61
     Align = alBottom
     Caption = 'pnlBottom'
-    TabOrder = 2
+    TabOrder = 1
+    ExplicitTop = 256
     object btnStart: TButton
       Left = 118
       Top = 20
@@ -70,5 +56,14 @@ object fmMain: TfmMain
       TabOrder = 0
       OnClick = btnStartClick
     end
+  end
+  object dlgOpen: TOpenDialog
+    Left = 336
+  end
+  object dlgSaveEven: TSaveDialog
+    Left = 408
+  end
+  object dlgSaveOdd: TSaveDialog
+    Left = 480
   end
 end

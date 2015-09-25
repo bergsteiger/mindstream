@@ -1,4 +1,4 @@
-unit Unit1;
+﻿unit Unit1;
 
 interface
 
@@ -10,12 +10,13 @@ uses
 type
   TfmMain = class(TForm)
     pnlTop: TPanel;
-    lbl1: TLabel;
-    edtFileName: TEdit;
-    pnlCenter: TPanel;
+    lblResult: TLabel;
     pnlBottom: TPanel;
-    memResult: TMemo;
     btnStart: TButton;
+    dlgOpen: TOpenDialog;
+    dlgSaveEven: TSaveDialog;
+    dlgSaveOdd: TSaveDialog;
+    lbl1: TLabel;
     procedure btnStartClick(Sender: TObject);
   private
     { Private declarations }
@@ -25,7 +26,6 @@ type
 
 var
   fmMain: TfmMain;
-  IsCountDown : boolean;
 
 implementation
 
@@ -33,42 +33,61 @@ implementation
 
 procedure TfmMain.btnStartClick(Sender: TObject);
 var
-  FileText, FileTextSame, FileWrite : TextFile;
+  FileOpen,
+  FileSaveEven,
+  FileSaveOdd: TextFile;
+
+  FilePathOpen,
+  FilePathEven,
+  FilePathOdd,
   Line : string;
-  Num, SumLine : integer;
+
+  IsOpenFrom,
+  IsOpenEven,
+  IsOpenOdd : Boolean;
 begin
-  AssignFile(FileTextSame, edtFileName.Text);
-  Reset(FileTextSame);
+  if dlgOpen.Execute then
+    IsOpenFrom := True;
 
-  AssignFile(FileText, edtFileName.Text);
-  Reset(FileText);
+  if dlgSaveEven.Execute then
+    IsOpenEven := True;
 
-  AssignFile(FileWrite, 'Result.txt');
-  Rewrite(FileWrite);
+  if dlgSaveOdd.Execute then
+    IsOpenOdd := True;
 
-  while not EOF(FileText) do
+  if (IsOpenFrom and IsOpenEven and IsOpenOdd) then
   begin
-    SumLine := 0;
+    FilePathOpen := dlgOpen.FileName;
+    FilePathEven := dlgSaveEven.FileName;
+    FilePathOdd := dlgSaveOdd.FileName;
 
-    while not SeekEoln(FileText) do
+    AssignFile(FileOpen, FilePathOpen);
+    Reset(FileOpen);
+
+    AssignFile(FileSaveEven, FilePathEven);
+    Rewrite(FileSaveEven);
+
+    AssignFile(FileSaveOdd, FilePathOdd);
+    Rewrite(FileSaveOdd);
+
+    while not EOF(FileOpen) do
     begin
-      Read(FileText, Num);
-      SumLine := SumLine + Num;
+      Readln(FileOpen, Line);
+
+      if Length(Line) mod 2 = 0 then
+        Writeln(FileSaveEven, Line)
+      else
+        Writeln(FileSaveOdd, Line);
     end;
 
-    Readln(FileText);
-    Readln(FileTextSame, Line);
+    CloseFile(FileOpen);
+    CloseFile(FileSaveEven);
+    CloseFile(FileSaveOdd);
 
-    if (SumLine mod 2 = 0) then
-    begin
-      writeln(FileWrite, Line);
-      memResult.Lines.Add(Line)
-    end;
-  end;
-
-  CloseFile(FileText);
-  CloseFile(FileTextSame);
-  CloseFile(FileWrite);
+    lblResult.Caption := 'All right';
+  end
+  else
+    lblResult.Caption := 'Some files not open';
 end;
 
 end.
