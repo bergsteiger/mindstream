@@ -11,7 +11,8 @@ USES
 Test&Dump ObjectTest
 
 STRING operator |>
- Object ^@ IN anObject
+  Object ^@ IN anObject
+ %SUMMARY 'Вызывает метод aMethod на объекте anObject' ;
  anObject pop:Word:Info pop:WordInfo:ValueTypes pop:ValueTypes:Name >>> Result
  Result ' ' string:Pos -1 == ?ASSURE 'Множественные типы для вызова методов объектов пока не поддерживаются'
 ; // |>

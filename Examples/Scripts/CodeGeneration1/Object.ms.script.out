@@ -1,5 +1,9 @@
 VOID TestWithDump ObjectTest
  STRING OPERATOR |>
+  %SUMMARY %SUM
+   'Вызывает метод aMethod на объекте anObject'
+  ; // %SUMMARY %SUM
+  
   ^@ IN anObject
   anObject
   pop:Word:Info
