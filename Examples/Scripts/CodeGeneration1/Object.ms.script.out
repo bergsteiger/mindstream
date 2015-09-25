@@ -1,11 +1,11 @@
 VOID TestWithDump ObjectTest
  STRING OPERATOR |>
   %SUMMARY %SUM
-   'Вызывает метод aMethod на объекте anObject'
+   'Вызывает метод aMethod на объекте Self'
   ; // %SUMMARY %SUM
   
-  ^@ IN anObject
-  anObject
+  ^@ IN Self
+  Self
   pop:Word:Info
   pop:WordInfo:ValueTypes
   pop:ValueTypes:Name
