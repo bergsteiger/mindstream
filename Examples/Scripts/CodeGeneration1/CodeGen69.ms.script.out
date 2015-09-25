@@ -4697,9 +4697,9 @@ STRING OPERATOR :: MACRO :: readonly : Object:ClassName
  STRING OPERATOR :: MACRO :: readonly :: Object:ClassName : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassName
-Object OPERATOR :: MACRO :: constructor : Object:DoNotCall
- Object OPERATOR :: MACRO :: constructor :: Object:DoNotCall : Result
-; // Object:DoNotCall
+Object OPERATOR :: MACRO :: constructor : Object:new
+ Object OPERATOR :: MACRO :: constructor :: Object:new : Result
+; // Object:new
 ABSTRACT STRING OPERATOR :: MACRO :: method : Object:ToPrintable
  ABSTRACT STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
  Object OPERATOR :: IN : Self
