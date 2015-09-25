@@ -10,7 +10,7 @@ USES
 
 Test&Dump ObjectTest
 
-STRING operator |>
+MACRO |>
   Object ^@ IN Self
   Literal IN aMethod
 
@@ -21,7 +21,8 @@ STRING operator |>
 
  [ l_FullMethodName ':' aMethod |N ] strings:Cat >>> l_FullMethodName
 
- l_FullMethodName >>> Result
+ Self CompileValue
+ l_FullMethodName Ctx:Parser:PushSymbol
 ; // |>
 
  Object VAR l_Obj
