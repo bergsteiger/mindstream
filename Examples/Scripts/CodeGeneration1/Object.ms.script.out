@@ -7,6 +7,19 @@ VOID TestWithDump ObjectTest
  pop:Word:SetValue
  l_Obj
  Object:Print
+ @
+ l_Obj
+ pop:Word:Info
+ pop:WordInfo:ValueTypes
+ Print
+ @
+ l_Obj
+ pop:Word:Info
+ pop:WordInfo:ValueTypes
+ pop:ValueTypes:Name
+ Print
 ; // VOID TestWithDump ObjectTest
 
+Object
+TtfwValueTypes
 Object
