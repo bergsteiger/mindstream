@@ -6,8 +6,7 @@ VOID TestWithDump ObjectTest
  l_Obj
  pop:Word:SetValue
  l_Obj
- Object:ToPrintable
- Print
+ Object:Print
 ; // VOID TestWithDump ObjectTest
 
 Object

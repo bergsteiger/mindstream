@@ -9,7 +9,7 @@ Test&Dump ObjectTest
  Object VAR l_Obj
  l_Obj := Object:new
 
- l_Obj Object:ToPrintable Print
+ l_Obj Object:Print
 
 ; // ObjectTest
 
