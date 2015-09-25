@@ -5,20 +5,24 @@ VOID TestWithDump ObjectTest
   ; // %SUMMARY %SUM
   
   ^L IN aMethod
+  STRING VAR l_FullMethodName
   ^@ IN Self
   Self
   pop:Word:Info
   pop:WordInfo:ValueTypes
   pop:ValueTypes:Name
-  Result
+  l_FullMethodName
   pop:Word:SetValue
-  Result
+  l_FullMethodName
   ' '
   string:Pos
   -1
   ==
   ?ASSURE
   'Множественные типы для вызова методов объектов пока не поддерживаются'
+  l_FullMethodName
+  Result
+  pop:Word:SetValue
  ; // STRING OPERATOR |>
  
  Object VAR l_Obj
