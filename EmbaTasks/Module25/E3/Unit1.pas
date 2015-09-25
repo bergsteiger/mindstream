@@ -31,6 +31,10 @@ implementation
 {$R *.dfm}
 
 procedure TfmMain.btnStartClick(Sender: TObject);
+  function SumFromLine(const aLine : string) : integer;
+  begin
+    Result := 20;
+  end;
 var
   FileOpen,
   FileResult: TextFile;
@@ -63,11 +67,11 @@ begin
 
     SumNum := 0;
 
-    while not SeekEof(FileOpen) do
+    while not Eof(FileOpen) do
     begin
-      Read(FileOpen, Num);
+      Readln(FileOpen, Line);
 
-      SumNum := SumNum + Num;
+      SumNum := SumNum + SumFromLine(Line);
     end;
 
     Writeln(FileResult, SumNum);
@@ -75,7 +79,7 @@ begin
     CloseFile(FileOpen);
     CloseFile(FileResult);
 
-    lblResult.Caption := 'All right';
+    lblResult.Caption := 'All right - ' + IntToStr(SumNum);
   end
   else
     lblResult.Caption := 'Some files not open';
