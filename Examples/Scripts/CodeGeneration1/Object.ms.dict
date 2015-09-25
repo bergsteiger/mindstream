@@ -10,6 +10,7 @@ USES
  Documentation.ms.dict
  WordsRTTI.ms.dict
  arrays.ms.dict
+ io.ms.dict
  Debug.ms.dict
 ;
 
@@ -389,5 +390,9 @@ VIRTUAL STRING method ToPrintable
  //Self ToPrintable =: Result
  Self Object:ClassName =: Result
 ; // ToPrintable
+
+VIRTUAL void method Print
+ Self Object:ToPrintable Print
+; // Print
 
 class-end // Object

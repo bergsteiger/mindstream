@@ -69,7 +69,7 @@ OVERRIDE STRING method ToPrintable
  [ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat =: Result
 ; // ToPrintable
 
-void method Print
+OVERRIDE void method Print
  Self Point:ToPrintable Print
 ; // Print
 
@@ -95,7 +95,7 @@ OVERRIDE STRING method ToPrintable
  [ '( ' 'TopLeft: ' Self Rectangle:TopLeft Point:ToPrintable ', BottomRight: ' Self Rectangle:BottomRight Point:ToPrintable ' )' ] strings:Cat =: Result
 ; // ToPrintable
 
-void method Print
+OVERRIDE void method Print
  Self Rectangle:ToPrintable Print
 ; // Print
 
