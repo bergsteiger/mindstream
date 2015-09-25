@@ -4,6 +4,7 @@ VOID TestWithDump ObjectTest
    'Вызывает метод aMethod на объекте Self'
   ; // %SUMMARY %SUM
   
+  ^L IN aMethod
   ^@ IN Self
   Self
   pop:Word:Info
@@ -43,6 +44,7 @@ VOID TestWithDump ObjectTest
  pop:ValueTypes:Name
  Print
  l_Obj |>
+ 'ClassName'
  Print
 ; // VOID TestWithDump ObjectTest
 
