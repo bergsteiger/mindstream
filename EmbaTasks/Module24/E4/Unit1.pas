@@ -34,18 +34,41 @@ implementation
 procedure TfmMain.btnStartClick(Sender: TObject);
 var
   FileText : TextFile;
-  Line : string;
-  Num, SumLine : integer;
+  Line, SchoolNumStr : string;
+  SchoolNum, MinPupils : integer;
   SchoolArray : array[1..99] of Integer;
+  i: Integer;
 begin
   AssignFile(FileText, edtFileName.Text);
   Reset(FileText);
 
+  for i := 1 to 99 do
+    SchoolArray[i] := 0;
+
+  Readln(FileText);
+
   while not EOF(FileText) do
   begin
     Readln(FileText, Line);
-    mem1.Lines.Append(Copy(Line, Length(Line) - 1, 2));
+    SchoolNum := StrToInt(Copy(Line, Length(Line) - 1, 2));
+    mem1.Lines.Append(IntToStr(SchoolNum));
+
+    SchoolArray[SchoolNum] := SchoolArray[SchoolNum] + 1;
   end;
+
+  for i := 1 to 99 do
+    if SchoolArray[i] > 0 then
+    begin
+      MinPupils := SchoolArray[i];
+      if SchoolArray[i] < MinPupils then
+        MinPupils := SchoolArray[i];
+    end;
+
+  mem1.Lines.Append('---------------');
+
+  for i := 1 to 99 do
+    if SchoolArray[i] = MinPupils then
+      mem1.Lines.Append(IntToStr(i));
 
   CloseFile(FileText);
 end;
