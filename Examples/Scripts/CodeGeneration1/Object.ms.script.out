@@ -1,4 +1,14 @@
 VOID TestWithDump ObjectTest
+ STRING OPERATOR |>
+  IN anObject
+  anObject
+  pop:Word:Info
+  pop:WordInfo:ValueTypes
+  pop:ValueTypes:Name
+  Result
+  pop:Word:SetValue
+ ; // STRING OPERATOR |>
+ 
  Object VAR l_Obj
  ObjectTest
  DumpElement
@@ -18,8 +28,13 @@ VOID TestWithDump ObjectTest
  pop:WordInfo:ValueTypes
  pop:ValueTypes:Name
  Print
+ @
+ l_Obj
+ |>
+ Print
 ; // VOID TestWithDump ObjectTest
 
 Object
 TtfwValueTypes
+Object
 Object
