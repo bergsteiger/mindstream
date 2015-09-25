@@ -2,5 +2,12 @@ VOID TestWithDump ObjectTest
  Object VAR l_Obj
  ObjectTest
  DumpElement
+ Object:new
+ l_Obj
+ pop:Word:SetValue
+ l_Obj
+ Object:ToPrintable
+ Print
 ; // VOID TestWithDump ObjectTest
 
+[ TkwCompiledProcedure ]
