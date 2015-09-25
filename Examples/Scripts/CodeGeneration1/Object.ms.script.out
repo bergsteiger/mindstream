@@ -7,6 +7,13 @@ VOID TestWithDump ObjectTest
   pop:ValueTypes:Name
   Result
   pop:Word:SetValue
+  Result
+  ' '
+  string:Pos
+  -1
+  ==
+  ?ASSURE
+  'Множественные типы для вызова методов объектов пока не поддерживаются'
  ; // STRING OPERATOR |>
  
  Object VAR l_Obj

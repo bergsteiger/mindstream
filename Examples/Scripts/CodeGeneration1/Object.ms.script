@@ -13,6 +13,7 @@ Test&Dump ObjectTest
 STRING operator |>
  IN anObject
  anObject pop:Word:Info pop:WordInfo:ValueTypes pop:ValueTypes:Name >>> Result
+ Result ' ' string:Pos -1 == ?ASSURE 'Множественные типы для вызова методов объектов пока не поддерживаются'
 ; // |>
 
  Object VAR l_Obj
