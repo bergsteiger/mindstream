@@ -13,10 +13,9 @@ type
     lbl1: TLabel;
     edtFileName: TEdit;
     pnlBottom: TPanel;
-    btnStart: TButton;
+    btnDoIt: TButton;
     lblResult: TLabel;
-    mem1: TMemo;
-    procedure btnStartClick(Sender: TObject);
+    procedure btnDoItClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,10 +30,10 @@ implementation
 
 {$R *.dfm}
 
-procedure TfmMain.btnStartClick(Sender: TObject);
+procedure TfmMain.btnDoItClick(Sender: TObject);
 var
   FileText : TextFile;
-  Line, SchoolNumStr : string;
+  Line, SchoolNumStr, ResultStr : string;
   SchoolNum, MinPupils : integer;
   SchoolArray : array[1..99] of Integer;
   i: Integer;
@@ -51,7 +50,6 @@ begin
   begin
     Readln(FileText, Line);
     SchoolNum := StrToInt(Copy(Line, Length(Line) - 1, 2));
-    mem1.Lines.Append(IntToStr(SchoolNum));
 
     SchoolArray[SchoolNum] := SchoolArray[SchoolNum] + 1;
   end;
@@ -64,11 +62,12 @@ begin
         MinPupils := SchoolArray[i];
     end;
 
-  mem1.Lines.Append('---------------');
-
   for i := 1 to 99 do
     if SchoolArray[i] = MinPupils then
-      mem1.Lines.Append(IntToStr(i));
+      ResultStr := ResultStr + IntToStr(i) + ',';
+
+  Delete(ResultStr, Length(ResultStr), 1);
+  lblResult.Caption := ResultStr;
 
   CloseFile(FileText);
 end;

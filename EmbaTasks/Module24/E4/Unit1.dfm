@@ -2,7 +2,7 @@ object fmMain: TfmMain
   Left = 0
   Top = 0
   Caption = 'Main'
-  ClientHeight = 414
+  ClientHeight = 125
   ClientWidth = 552
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,10 +17,10 @@ object fmMain: TfmMain
     Left = 0
     Top = 0
     Width = 552
-    Height = 360
+    Height = 75
     Align = alClient
     TabOrder = 0
-    ExplicitHeight = 87
+    ExplicitHeight = 89
     object lbl1: TLabel
       Left = 168
       Top = 24
@@ -43,33 +43,24 @@ object fmMain: TfmMain
       TabOrder = 0
       Text = 'file.txt'
     end
-    object mem1: TMemo
-      Left = 96
-      Top = 136
-      Width = 185
-      Height = 89
-      Lines.Strings = (
-        'mem1')
-      TabOrder = 1
-    end
   end
   object pnlBottom: TPanel
     Left = 0
-    Top = 360
+    Top = 75
     Width = 552
-    Height = 54
+    Height = 50
     Align = alBottom
     Caption = 'pnlBottom'
     TabOrder = 1
-    ExplicitTop = 80
-    object btnStart: TButton
+    ExplicitTop = 112
+    object btnDoIt: TButton
       Left = 118
       Top = 11
       Width = 315
       Height = 25
-      Caption = 'Start'
+      Caption = 'DoIt'
       TabOrder = 0
-      OnClick = btnStartClick
+      OnClick = btnDoItClick
     end
   end
 end
