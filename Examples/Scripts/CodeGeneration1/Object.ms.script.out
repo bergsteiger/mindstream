@@ -21,10 +21,10 @@ VOID TestWithDump ObjectTest
   ?ASSURE
   'Множественные типы для вызова методов объектов пока не поддерживаются'
   [
+   l_FullMethodName
+   ':'
    aMethod
    |N
-   ':'
-   l_FullMethodName
   ]
   strings:Cat
   l_FullMethodName
@@ -65,4 +65,4 @@ Object
 Object
 TtfwValueTypes
 Object
-ClassName:Object
+Object:ClassName
