@@ -44,7 +44,6 @@ Dictionary: axiom:strings
 Dictionary: axiom:SV
 BOOLEAN pop:SV:IsArray
 BOOLEAN pop:SV:IsBool
-BOOLEAN pop:SV:IsBracket
 BOOLEAN pop:SV:IsChar
 BOOLEAN pop:SV:IsClass
 BOOLEAN pop:SV:IsInt
@@ -54,7 +53,6 @@ BOOLEAN pop:SV:IsObj
 BOOLEAN pop:SV:IsString
 BOOLEAN pop:SV:IsTypeOf
 BOOLEAN pop:SV:IsVoid
-BOOLEAN pop:SV:IsWString
 REDIFINITION STRING FUNCTION : pop:SV:ToPrintable
 ==> Redefines
  STRING ToPrintable
@@ -120,7 +118,7 @@ TColor TColor::clWindowText
 TColor TColor::clYellow
 Dictionary: axiom:TComponent
 TComponentName .TComponent.Name
-NativeInt .TComponent.Tag
+INTEGER .TComponent.Tag
 Dictionary: axiom:test
 test:ResolveInputFilePath
 Dictionary: axiom:tests
@@ -724,8 +722,6 @@ BOOLEAN OPERATOR : AND
  ^ OPERATOR :: IN : aSecond
  BOOLEAN OPERATOR :: AND : Result
 ; // AND
-AnsiChar
-AnsiString
 IMMEDIATE VOID OPERATOR :: TYPE : ANY
 IMMEDIATE VOID OPERATOR : array
 IMMEDIATE VOID OPERATOR : ARRAY
@@ -860,6 +856,7 @@ INTEGER CONST : CF_TEXT
 INTEGER CONST : CF_TIFF
 INTEGER CONST : CF_UNICODETEXT
 INTEGER CONST : CF_WAVE
+Char
 IMMEDIATE VOID OPERATOR : CHAR
 STRING char:Dupe
 STRING char:ToString
@@ -980,8 +977,6 @@ TClass class::TkwCompiledScriptCompileAndProcess
 TClass class::TkwCompiledTryExcept
 TClass class::TkwCompiledTryFinally
 TClass class::TkwCompiledVar
-TClass class::TkwCompiledVarAsStringWorker
-TClass class::TkwCompiledVarWorker
 TClass class::TkwCompiledWord
 TClass class::TkwCompiledWordContainer
 TClass class::TkwCompiledWordPrim
@@ -990,12 +985,6 @@ TClass class::TkwCompiledWordWorker
 TClass class::TkwCompiledWordWorkerEx
 TClass class::TkwCompiledWordWorkerWord
 TClass class::TkwCompiledWordWorkerWordRunner
-TClass class::TkwCompiledWStringShift
-TClass class::TkwCompiledWStringVarDecLen
-TClass class::TkwCompiledWStringVarInc
-TClass class::TkwCompiledWStringVarPushCharAndInc
-TClass class::TkwCompiledWStringVarRSplitTo
-TClass class::TkwCompiledWStringVarSplitTo
 TClass class::TkwCompileRef
 TClass class::TkwCompileValue
 TClass class::TkwCompileWeakRef
@@ -1125,7 +1114,6 @@ TClass class::TkwIntToStr
 TClass class::TkwInvertROT
 TClass class::TkwIsArray
 TClass class::TkwIsBool
-TClass class::TkwIsBracket
 TClass class::TkwIsChar
 TClass class::TkwIsClass
 TClass class::TkwIsInt
@@ -1136,7 +1124,6 @@ TClass class::TkwIsString
 TClass class::TkwIsTypeOf
 TClass class::TkwIsUnder64
 TClass class::TkwIsVoid
-TClass class::TkwIsWString
 TClass class::TkwIsXE
 TClass class::TkwLeftParam
 TClass class::TkwLeftWordRefParam
@@ -1224,7 +1211,6 @@ TClass class::TkwPopObjectGetOrdProp
 TClass class::TkwPopObjectGetStrProp
 TClass class::TkwPopObjectHasProp
 TClass class::TkwPopObjectInherits
-TClass class::TkwPopObjectIsNil
 TClass class::TkwPopObjectRTTIInfo
 TClass class::TkwPopObjectSetFloatProp
 TClass class::TkwPopObjectSetOrdProp
@@ -1343,12 +1329,15 @@ TClass class::TkwString
 TClass class::TkwStringChar
 TClass class::TkwStringCodePage
 TClass class::TkwStringConsistsOf
+TClass class::TkwStringFirstChar
 TClass class::TkwStringHasAnyOf
+TClass class::TkwStringInc
 TClass class::TkwStringLen
 TClass class::TkwStringPos
 TClass class::TkwStringPosEx
 TClass class::TkwStringReplace
 TClass class::TkwStringReplaceFirst
+TClass class::TkwStringShift
 TClass class::TkwStringSplit
 TClass class::TkwStringToChar
 TClass class::TkwStrToInt
@@ -1384,33 +1373,13 @@ TClass class::TkwUsesLike
 TClass class::TkwValue
 TClass class::TkwVarDecLen
 TClass class::TkwVarInc
+TClass class::TkwVarPushCharAndInc
 TClass class::TkwVarShift
-TClass class::TkwVarWorkerCompiledCode
 TClass class::TkwWHILEDO
 TClass class::TkwWinExec
 TClass class::TkwWordPtrPushWord
 TClass class::TkwWordPtrWorker
 TClass class::TkwWordWorker
-TClass class::TkwWStringChar
-TClass class::TkwWStringCodePage
-TClass class::TkwWStringConsistsOf
-TClass class::TkwWStringEnds
-TClass class::TkwWStringEndsText
-TClass class::TkwWStringFirstChar
-TClass class::TkwWStringHasAnyOf
-TClass class::TkwWStringInc
-TClass class::TkwWStringIsNil
-TClass class::TkwWStringLen
-TClass class::TkwWStringShift
-TClass class::TkwWStringStarts
-TClass class::TkwWStringStartsText
-TClass class::TkwWStringToString
-TClass class::TkwWStringVarDecLen
-TClass class::TkwWStringVarInc
-TClass class::TkwWStringVarPushCharAndInc
-TClass class::TkwWStringVarRSplitTo
-TClass class::TkwWStringVarShift
-TClass class::TkwWStringVarSplitTo
 TClass class::Tl3CastableObject
 TClass class::Tl3CastablePersistent
 TClass class::Tl3DataContainerWithoutIUnknownPrim
@@ -1437,7 +1406,6 @@ TClass class::TtfwDictionaryPrim
 TClass class::TtfwDictionaryPrimPrim
 TClass class::TtfwDictionaryPrimPrimPrim
 TClass class::TtfwDualWord
-TClass class::TtfwDualWStrWord
 TClass class::TtfwEnumConstantRegistrator
 TClass class::TtfwFilterLambda
 TClass class::TtfwIncludeLike
@@ -1459,20 +1427,17 @@ TClass class::TtfwSliceLambda
 TClass class::TtfwString
 TClass class::TtfwStringConstantRegistrator
 TClass class::TtfwStringToEnumValue
-TClass class::TtfwSysUtilsWord
 TClass class::TtfwTruncLambda
 TClass class::TtfwTwoLambdas
 TClass class::TtfwTypeInfoList
 TClass class::TtfwTypeInfoListPrim
 TClass class::TtfwTypeModifier
 TClass class::TtfwValueTypes
-TClass class::TtfwVarWorker
 TClass class::TtfwWord
 TClass class::TtfwWordInfo
 TClass class::TtfwWordPrim
 TClass class::TtfwWordWorker
 TClass class::TtfwWordWorkerEx
-TClass class::TtfwWStrWord
 IMMEDIATE VOID OPERATOR : ClassProducer
  ^L OPERATOR :: IN : aName
 ; // ClassProducer
@@ -1653,8 +1618,6 @@ PRIVATE VOID OPERATOR :: PROCEDURE : ExpandRunTestsFor
 IMMEDIATE VOID OPERATOR : EXPORTS
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
- TtfwDictionaryEx OPERATOR :: VAR : l_OurDict
- BOOLEAN OPERATOR :: VAR : l_WasExported
 ; // EXPORTS
 EZeroDivide
 BOOLEAN false
@@ -1768,7 +1731,6 @@ BOOLEAN OPERATOR : IS
 ; // IS
 BOOLEAN IsArray
 BOOLEAN IsBool
-BOOLEAN IsBracket
 BOOLEAN IsChar
 BOOLEAN IsClass
 BOOLEAN IsInt
@@ -1785,7 +1747,6 @@ BOOLEAN FUNCTION : IsWordDeclared
  STRING OPERATOR :: IN : aName
  BOOLEAN FUNCTION :: IsWordDeclared : Result
 ; // IsWordDeclared
-BOOLEAN IsWString
 BOOLEAN IsXE
 IMMEDIATE VOID OPERATOR :: MACRO : IT
  Documentation:
@@ -1814,6 +1775,7 @@ ARRAY FUNCTION : LIST
  ^ OPERATOR :: IN : aFunctor
  OBJECT OPERATOR :: IN : anObject
  OBJECT OPERATOR :: VAR : l_Element
+ BOOLEAN OPERATOR :: VAR : l_NeedDo
  ARRAY FUNCTION :: LIST : Result
 ; // LIST
 IMMEDIATE VOID OPERATOR :: MACRO : Literal
@@ -1864,7 +1826,6 @@ STRING FUNCTION : NameOf
  LINK ^ OPERATOR :: IN : aWord
  STRING FUNCTION :: NameOf : Result
 ; // NameOf
-NativeInt
 ARRAY FUNCTION : NativeMembersIterator
  TtfwWord OPERATOR :: IN : aWord
  BOOLEAN FUNCTION : FilterMember
@@ -1942,13 +1903,13 @@ pop:object:GetOrdProp
 pop:object:GetStrProp
 pop:object:HasProp
 pop:object:Inherits
-pop:object:IsNil
+BOOLEAN pop:object:IsNil
 pop:object:RTTIInfo
 pop:object:SetFloatProp
 pop:object:SetOrdProp
 pop:object:SetStrProp
 STRING pop:String:Cat
-AnsiChar pop:String:Char
+CHAR pop:String:Char
 STRING pop:String:char_Dupe
 STRING pop:String:char_ToString
 INTEGER pop:String:CodePage
@@ -1957,7 +1918,9 @@ INTEGER pop:String:CompareText
 BOOLEAN pop:String:ConsistsOf
 BOOLEAN pop:String:EndsStr
 BOOLEAN pop:String:EndsText
+CHAR pop:String:FirstChar
 BOOLEAN pop:String:HasAnyOf
+STRING pop:String:Inc
 INTEGER pop:String:Len
 INTEGER pop:String:Pos
 INTEGER pop:String:PosEx
@@ -1965,13 +1928,14 @@ STRING pop:String:Replace
 STRING pop:String:ReplaceFirst
 BOOLEAN pop:String:SameStr
 BOOLEAN pop:String:SameText
+STRING pop:String:Shift
 STRING pop:String:Split
 BOOLEAN pop:String:StartsStr
 BOOLEAN pop:String:StartsText
 INTEGER pop:String:StrToInt
 STRING pop:String:text_Replace
 STRING pop:String:text_ReplaceFirst
-AnsiChar pop:String:ToChar
+CHAR pop:String:ToChar
 VOID OPERATOR :: PROCEDURE : Print
  PRINTABLE OPERATOR :: IN : aValue
 ; // Print
@@ -2072,10 +2036,15 @@ IMMEDIATE VOID OPERATOR : StereotypeStereotypeProducer
 INTEGER StopTimer
 INTEGER StopTimerEx
 IMMEDIATE VOID OPERATOR : string
-IMMEDIATE VOID OPERATOR : String
+String
 IMMEDIATE VOID OPERATOR : STRING
-AnsiChar string:[i]
+IMMEDIATE VOID OPERATOR : String$Define
+CHAR string:[]
+CHAR string:[]++!
+CHAR string:[i]
+STRING string:+
 VOID string:+!
+STRING string:++
 VOID string:++!
 INTEGER string:CodePage
 BOOLEAN string:ConsistsOf
@@ -2089,7 +2058,7 @@ STRING string:ReplaceFirst
 STRING string:RSplitTo!
 STRING string:Split
 STRING string:SplitTo!
-AnsiChar string:ToChar
+CHAR string:ToChar
 STRING FUNCTION : strings:Cat
  ARRAY OPERATOR :: IN : anArray
  STRING FUNCTION :: strings:Cat : Result
@@ -2180,8 +2149,6 @@ TkwCompiledScriptCompileAndProcess
 TkwCompiledTryExcept
 TkwCompiledTryFinally
 TkwCompiledVar
-TkwCompiledVarAsStringWorker
-TkwCompiledVarWorker
 TkwCompiledWord
 TkwCompiledWordContainer
 TkwCompiledWordPrim
@@ -2190,12 +2157,6 @@ TkwCompiledWordWorker
 TkwCompiledWordWorkerEx
 TkwCompiledWordWorkerWord
 TkwCompiledWordWorkerWordRunner
-TkwCompiledWStringShift
-TkwCompiledWStringVarDecLen
-TkwCompiledWStringVarInc
-TkwCompiledWStringVarPushCharAndInc
-TkwCompiledWStringVarRSplitTo
-TkwCompiledWStringVarSplitTo
 TkwCompileRef
 TkwCompileValue
 TkwCompileWeakRef
@@ -2325,7 +2286,6 @@ TkwIntToStr
 TkwInvertROT
 TkwIsArray
 TkwIsBool
-TkwIsBracket
 TkwIsChar
 TkwIsClass
 TkwIsInt
@@ -2336,7 +2296,6 @@ TkwIsString
 TkwIsTypeOf
 TkwIsUnder64
 TkwIsVoid
-TkwIsWString
 TkwIsXE
 TkwLeftParam
 TkwLeftWordRefParam
@@ -2424,7 +2383,6 @@ TkwPopObjectGetOrdProp
 TkwPopObjectGetStrProp
 TkwPopObjectHasProp
 TkwPopObjectInherits
-TkwPopObjectIsNil
 TkwPopObjectRTTIInfo
 TkwPopObjectSetFloatProp
 TkwPopObjectSetOrdProp
@@ -2543,12 +2501,15 @@ TkwString
 TkwStringChar
 TkwStringCodePage
 TkwStringConsistsOf
+TkwStringFirstChar
 TkwStringHasAnyOf
+TkwStringInc
 TkwStringLen
 TkwStringPos
 TkwStringPosEx
 TkwStringReplace
 TkwStringReplaceFirst
+TkwStringShift
 TkwStringSplit
 TkwStringToChar
 TkwStrToInt
@@ -2584,33 +2545,13 @@ TkwUsesLike
 TkwValue
 TkwVarDecLen
 TkwVarInc
+TkwVarPushCharAndInc
 TkwVarShift
-TkwVarWorkerCompiledCode
 TkwWHILEDO
 TkwWinExec
 TkwWordPtrPushWord
 TkwWordPtrWorker
 TkwWordWorker
-TkwWStringChar
-TkwWStringCodePage
-TkwWStringConsistsOf
-TkwWStringEnds
-TkwWStringEndsText
-TkwWStringFirstChar
-TkwWStringHasAnyOf
-TkwWStringInc
-TkwWStringIsNil
-TkwWStringLen
-TkwWStringShift
-TkwWStringStarts
-TkwWStringStartsText
-TkwWStringToString
-TkwWStringVarDecLen
-TkwWStringVarInc
-TkwWStringVarPushCharAndInc
-TkwWStringVarRSplitTo
-TkwWStringVarShift
-TkwWStringVarSplitTo
 Tl3CastableObject
 Tl3CastablePersistent
 Tl3DataContainerWithoutIUnknownPrim
@@ -2660,7 +2601,6 @@ TtfwDictionaryPrim
 TtfwDictionaryPrimPrim
 TtfwDictionaryPrimPrimPrim
 TtfwDualWord
-TtfwDualWStrWord
 TtfwEnumConstantRegistrator
 TtfwFilterLambda
 TtfwIncludeLike
@@ -2683,7 +2623,6 @@ TtfwSliceLambda
 TtfwString
 TtfwStringConstantRegistrator
 TtfwStringToEnumValue
-TtfwSysUtilsWord
 TtfwTruncLambda
 TtfwTwoLambdas
 TtfwTypeInfoList
@@ -2691,14 +2630,12 @@ TtfwTypeInfoListPrim
 TtfwTypeModifier
 TtfwValueType
 TtfwValueTypes
-TtfwVarWorker
 TtfwWord
 TtfwWordInfo
 TtfwWordModifier
 TtfwWordPrim
 TtfwWordWorker
 TtfwWordWorkerEx
-TtfwWStrWord
 VOID TUCK
 IMMEDIATE OPERATOR : type
  ^L OPERATOR :: IN : aName
@@ -2770,26 +2707,25 @@ IMMEDIATE VOID OPERATOR : WordProducer
 WordWorker
 WORDWORKER
 IMMEDIATE VOID OPERATOR : W-STRING
-WString:[]
-WString:[]++!
-WString:[i]
-WString:+
-WString:+!
-WString:++
-WString:++!
-WString:CodePage
-WString:ConsistsOf
-WString:Ends
-WString:EndsText
-WString:HasAnyOf
-WString:IsNil
-WString:Len
-WString:--Len!
-WString:RSplitTo!
-WString:SplitTo!
-WString:Starts
-WString:StartsText
-WString:ToString
+CHAR WString:[]
+CHAR WString:[]++!
+CHAR WString:[i]
+STRING WString:+
+VOID WString:+!
+STRING WString:++
+VOID WString:++!
+INTEGER WString:CodePage
+BOOLEAN WString:ConsistsOf
+BOOLEAN WString:Ends
+BOOLEAN WString:EndsText
+BOOLEAN WString:HasAnyOf
+BOOLEAN WString:IsNil
+INTEGER WString:Len
+VOID WString:--Len!
+STRING WString:SplitTo!
+BOOLEAN WString:Starts
+BOOLEAN WString:StartsText
+VOID WString:ToString
 VOID OPERATOR : анти-тест
  ^ OPERATOR :: IN : aWhatToDo
  OPERATOR :: VAR : l_WasException
@@ -2947,8 +2883,6 @@ VOID OPERATOR :: PROCEDURE : pop:Word:Print
  STRING OPERATOR :: IN : aName
  STRING OPERATOR :: IN : anIndent
  TtfwWord OPERATOR :: IN : aWord
- TtfwDictionary OPERATOR :: VAR : l_InnerDictionary
- TtfwWord OPERATOR :: VAR : l_Redefines
 ; // pop:Word:Print
 TtfwWord pop:Word:Producer
 VOID pop:Word:PublicateInMainDictionary
@@ -3007,14 +2941,12 @@ STRING pop:DictionaryEx:FileName
 VOID OPERATOR :: PROCEDURE : pop:DictionaryEx:Print
  TtfwDictionaryEx OPERATOR :: IN : aDictionary
  STRING OPERATOR :: IN : anIndent
- BOOLEAN OPERATOR :: VAR : l_NeedHeader
 ; // pop:DictionaryEx:Print
 VOID pop:DictionaryEx:RemoveFromCache
 ARRAY pop:DictionaryEx:UsedDictionaries
 VOID pop:DictionaryEx:UseDictionary
 Dictionary: axiom:TtfwValueType
 TtfwValueType TtfwValueType::tfw_vtBool
-TtfwValueType TtfwValueType::tfw_vtBracket
 TtfwValueType TtfwValueType::tfw_vtChar
 TtfwValueType TtfwValueType::tfw_vtClass
 TtfwValueType TtfwValueType::tfw_vtFile
@@ -3025,7 +2957,6 @@ TtfwValueType TtfwValueType::tfw_vtNil
 TtfwValueType TtfwValueType::tfw_vtObj
 TtfwValueType TtfwValueType::tfw_vtStr
 TtfwValueType TtfwValueType::tfw_vtVoid
-TtfwValueType TtfwValueType::tfw_vtWStr
 TtfwValueType TtfwValueType:NameToValue
 STRING TtfwValueType:ValueToName
 Dictionary: axiom:TtfwWordModifier
@@ -4609,6 +4540,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Debug.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
  ;
@@ -4616,10 +4548,24 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  ;
+ARRAY FUNCTION : %ClassRTTIList
+ OPERATOR :: IN : %S
+ ^L OPERATOR :: IN : aName
+ OPERATOR :: VAR : l_List
+ ARRAY FUNCTION :: %ClassRTTIList : Result
+; // %ClassRTTIList
+ARRAY FUNCTION : %Constructors
+ OPERATOR :: IN : %S
+ Documentation:
+  Возвращает итератор конструкторов класса
+ ARRAY FUNCTION :: %Constructors : Result
+; // %Constructors
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CONSTRUCTORS
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %FIELDS
 ARRAY FUNCTION : %Fld
  OPERATOR :: IN : %S
- OPERATOR :: VAR : l_List
+ Documentation:
+  Возвращает итератор полей класса
  ARRAY FUNCTION :: %Fld : Result
 ; // %Fld
 ARRAY OPERATOR :: MACRO :: word_func : %G
@@ -4628,6 +4574,20 @@ ARRAY OPERATOR :: MACRO :: word_func : %G
  ARRAY OPERATOR :: MACRO :: word_func :: .Inherited.Words : Result
  ENGINE_WORD OPERATOR :: IN : Self
 ; // %G
+ARRAY FUNCTION : %Methods
+ OPERATOR :: IN : %S
+ Documentation:
+  Возвращает итератор методов класса
+ ARRAY FUNCTION :: %Methods : Result
+; // %Methods
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %METHODS
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %PROPERTIES
+ARRAY FUNCTION : %Props
+ OPERATOR :: IN : %S
+ Documentation:
+  Возвращает итератор свойств класса
+ ARRAY FUNCTION :: %Props : Result
+; // %Props
 ARRAY OPERATOR :: MACRO :: word_func : %R
  Documentation:
   Возвращает итератор элементов которые реализует наш элемент
@@ -4635,16 +4595,22 @@ ARRAY OPERATOR :: MACRO :: word_func : %R
  ENGINE_WORD OPERATOR :: IN : Self
 ; // %R
 OPERATOR :: class_impl : _:Object
+ OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
  OPERATOR :: NamedWordProducer :: %FIELDS : %Fld
+ OPERATOR :: NamedWordProducer :: %METHODS : %Methods
+ OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
 ; // _:Object
 INTEGER CONST : c:Object:Instance:Size
 INTEGER CONST : c:Object:Offset:VMT
+STRING CONST : cClassImplPrefix
 IMMEDIATE VOID OPERATOR :: MACRO : class
  ^L OPERATOR :: IN : aName
 ; // class
 VOID OPERATOR : class_impl
 IMMEDIATE VOID OPERATOR :: MACRO : class-end
 IMMEDIATE VOID OPERATOR :: MACRO : classExpander
+ Documentation:
+  Тут можно копировать поля и методы
  ^ OPERATOR :: IN : anImpl
 ; // classExpander
 STRING CONST : cObjectName
@@ -4674,22 +4640,39 @@ BOOLEAN FUNCTION : FilterMember
 ; // FilterMember
 INTEGER OPERATOR :: VAR : g_ClassFieldOffset
 STRING OPERATOR :: VAR : g_CurrentClass
+ARRAY OPERATOR :: VAR : g_CurrentClassConstructors
 STRING OPERATOR :: VAR : g_CurrentClassImpl
 ARRAY OPERATOR :: VAR : g_CurrentClassMembers
+ARRAY OPERATOR :: VAR : g_CurrentClassMethods
+ARRAY OPERATOR :: VAR : g_CurrentClassProperties
 STRING : : getClassName
  STRING : :: getClassName : Result
  OPERATOR :: IN : Self
 ; // getClassName
+STRING : : getClassNamePrim
+ STRING : :: getClassNamePrim : Result
+ STRING OPERATOR :: IN : Self
+; // getClassNamePrim
 IMMEDIATE VOID OPERATOR :: MACRO : get-member
  ^L OPERATOR :: IN : aName
 ; // get-member
+: : ListToNameAsString
+ ARRAY OPERATOR :: IN : aList
+ STRING OPERATOR :: IN : aName
+; // ListToNameAsString
 PRIVATE STRING OPERATOR : MakeFieldOffsetName
  STRING OPERATOR :: IN : aName
  PRIVATE STRING OPERATOR :: MakeFieldOffsetName : Result
 ; // MakeFieldOffsetName
 PRIVATE VOID OPERATOR : MakeMethodSignature
  STRING OPERATOR :: IN : aName
+ STRING OPERATOR :: VAR : l_Signature
 ; // MakeMethodSignature
+PRIVATE STRING OPERATOR : MakeMethodSignaturePrim
+ STRING OPERATOR :: IN : aClass
+ STRING OPERATOR :: IN : aName
+ PRIVATE STRING OPERATOR :: MakeMethodSignaturePrim : Result
+; // MakeMethodSignaturePrim
 PRIVATE VOID OPERATOR : MakeSelfParam
 IMMEDIATE VOID OPERATOR :: MACRO : member
  ^L OPERATOR :: IN : aName
@@ -4698,6 +4681,12 @@ IMMEDIATE VOID OPERATOR :: MACRO : members-end
 IMMEDIATE VOID OPERATOR :: MACRO : method
  ^L OPERATOR :: IN : aName
 ; // method
+STRING FUNCTION : NameAsString
+ Documentation:
+  Делает имя таким, чтобы оно было как для Ctx:Parser:PushString
+ STRING OPERATOR :: IN : aName
+ STRING FUNCTION :: NameAsString : Result
+; // NameAsString
 IMMEDIATE VOID OPERATOR :: MACRO : new[
 IMMEDIATE VOID OPERATOR : Object
 TtfwWord OPERATOR :: MACRO :: readonly : Object:class
@@ -4708,6 +4697,9 @@ STRING OPERATOR :: MACRO :: readonly : Object:ClassName
  STRING OPERATOR :: MACRO :: readonly :: Object:ClassName : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassName
+Object OPERATOR :: MACRO :: constructor : Object:DoNotCall
+ Object OPERATOR :: MACRO :: constructor :: Object:DoNotCall : Result
+; // Object:DoNotCall
 ABSTRACT STRING OPERATOR :: MACRO :: method : Object:ToPrintable
  ABSTRACT STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
  Object OPERATOR :: IN : Self
@@ -4719,6 +4711,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : readonly
  ^L OPERATOR :: IN : aName
 ; // readonly
 IMMEDIATE VOID OPERATOR :: MACRO : RunCompileFields
+IMMEDIATE VOID OPERATOR :: MACRO : RunCompileProps&Methods
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
  Uses: 
   axiom:axiom
@@ -4879,6 +4872,43 @@ IMMEDIATE VOID OPERATOR :: MACRO : word_func
  ^L OPERATOR :: IN : aName
 ; // word_func
 IMMEDIATE VOID OPERATOR :: MACRO : word_iterator
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Debug.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:Tl3TokenType
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Sequence
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
+ ;
+VOID OPERATOR :: PROCEDURE : Trace
+ OPERATOR :: IN : aValue
+; // Trace
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  Uses: 
   axiom:axiom

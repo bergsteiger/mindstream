@@ -41,7 +41,7 @@ VOID Test ListTest
     if
      (
       l_Element
-      pop:object:IsNil
+      IsNil
      )
     then
      BREAK
