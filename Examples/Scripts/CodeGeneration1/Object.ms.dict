@@ -386,7 +386,8 @@ constructor new
 ; // new
 
 VIRTUAL STRING method ToPrintable
- Self ToPrintable =: Result
+ //Self ToPrintable =: Result
+ Self Object:ClassName =: Result
 ; // ToPrintable
 
 class-end // Object
