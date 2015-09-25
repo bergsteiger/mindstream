@@ -38,7 +38,12 @@ begin
   begin
     InStr := Trim(InStr);
     SpacePos := Pos(' ', InStr);
-    SubStr := Copy(InStr, 0, SpacePos - 1);
+
+    if (SpacePos = 0) and (Length(InStr)>0) then
+      SubStr := Copy(InStr, 0, Length(InStr))
+    else
+      SubStr := Copy(InStr, 0, SpacePos - 1);
+
     Delete(InStr, 1, SpacePos);
     Val(SubStr, Number, Code);
 
