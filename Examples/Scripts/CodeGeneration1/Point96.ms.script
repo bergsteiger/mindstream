@@ -62,15 +62,15 @@ Point method Neg
 Point method -
  Point right aPoint
 
- Point:OF ( Self Point:+ ( aPoint Point:Neg ) ) =: Result
+ Point:OF ( Self |> + ( aPoint Point:Neg ) ) =: Result
 ; // -
 
 OVERRIDE STRING method ToPrintable
- [ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat =: Result
+ [ '( ' 'X: ' Self |> X ToPrintable ', Y: ' Self |> Y ToPrintable ' )' ] strings:Cat =: Result
 ; // ToPrintable
 
 OVERRIDE void method Print
- Self Point:ToPrintable Print
+ Self |> ToPrintable Print
 ; // Print
 
 class-end // Point
