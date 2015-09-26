@@ -567,7 +567,7 @@ VOID TestWithDump PointTest
  Array:Iterate
  l_Points
  (
-  Object IN anObj
+  Point IN anObj
   anObj
   Object:class
   .Inherited.Words
@@ -616,7 +616,7 @@ VOID TestWithDump PointTest
  Array:Iterate
  l_Rectangles
  (
-  Object IN anObj
+  Rectangle IN anObj
   anObj
   Object:class
   .Inherited.Words
