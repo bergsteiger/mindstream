@@ -49,9 +49,18 @@ PRIVATE VOID operator MangledNamePusher
  axiom:PushSymbol )
 ; // MangledNamePusher
 
+USES
+ axiom:ValueTypes
+;
+
 MACRO right
  Literal IN aName
  %SUMMARY 'Параметр справа, который автоматически разыменовывается' ;
+
+ VAR l_ValueTypes
+ Ctx:ValueTypes >>> l_ValueTypes
+ l_ValueTypes IsNil ! ? ( l_ValueTypes pop:ValueTypes:Name . )
+
  axiom:PushSymbol RIGHT
  axiom:PushSymbol IN
 
