@@ -399,7 +399,7 @@ MACRO |>
 
 STRING readonly ClassName
  Self Object:class getClassName =: Result
-; // Object:ClassName
+; // ClassName
 
 constructor new
  new[ ] =: Result
