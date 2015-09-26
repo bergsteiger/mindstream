@@ -133,11 +133,26 @@ array var l_Points
 
 [ P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 ] =: l_Points
 
-l_Points ==> Point:Print
-l_Points ==> ( Point:X Print )
-l_Points ==> ( Point:Y Print )
-l_Points ==> ( Point:class Print )
-l_Points ==> ( Point:ClassName Print )
+l_Points ==> (
+ Point IN aPt 
+ aPt |> Print
+)
+l_Points ==> (
+ Point IN aPt 
+ aPt |> X Print 
+)
+l_Points ==> ( 
+ Point IN aPt 
+ aPt |> Y Print 
+)
+l_Points ==> ( 
+ Point IN aPt 
+ aPt |> class Print 
+)
+l_Points ==> ( 
+ Point IN aPt 
+ aPt |> ClassName Print 
+)
 l_Points ==> ( 
  Point IN aPt 
  aPt |> class %G ==> ( getClassName Print ) 

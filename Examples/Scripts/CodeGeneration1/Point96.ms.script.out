@@ -534,11 +534,17 @@ VOID TestWithDump PointTest
  l_Points
  pop:Word:SetValue
  l_Points
- Point:Print
+ (
+  Point IN aPt
+  aPt
+  Point:Print
+ )
  SWAP
  Array:Iterate
  l_Points
  (
+  Point IN aPt
+  aPt
   Point:X
   Print
  )
@@ -546,6 +552,8 @@ VOID TestWithDump PointTest
  Array:Iterate
  l_Points
  (
+  Point IN aPt
+  aPt
   Point:Y
   Print
  )
@@ -553,6 +561,8 @@ VOID TestWithDump PointTest
  Array:Iterate
  l_Points
  (
+  Point IN aPt
+  aPt
   Object:class
   Print
  )
@@ -560,6 +570,8 @@ VOID TestWithDump PointTest
  Array:Iterate
  l_Points
  (
+  Point IN aPt
+  aPt
   Object:ClassName
   Print
  )
