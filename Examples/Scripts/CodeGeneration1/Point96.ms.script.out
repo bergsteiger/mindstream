@@ -616,13 +616,10 @@ VOID TestWithDump PointTest
  Array:Iterate
  l_Rectangles
  (
-  (
-   Object IN anObj
-   anObj
-   Object:class
-   .Inherited.Words
-  )
-  DO
+  Object IN anObj
+  anObj
+  Object:class
+  .Inherited.Words
   (
    getClassName
    Print
