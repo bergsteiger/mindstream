@@ -59,7 +59,6 @@ MACRO right
 
  VAR l_ValueTypes
  Ctx:ValueTypes >>> l_ValueTypes
- l_ValueTypes IsNil ! ? ( l_ValueTypes pop:ValueTypes:Name . )
 
  axiom:PushSymbol RIGHT
  axiom:PushSymbol IN
@@ -73,7 +72,8 @@ MACRO right
  l_MangledName Ctx:Parser:PushSymbol
  
   [
-   'VOID IMMEDIATE axiom:operator' 
+   'VOID'
+   'IMMEDIATE axiom:operator' 
    l_Name 
    [ '`' l_MangledName '`' ] strings:Cat
    'MangledNamePusher'
