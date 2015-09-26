@@ -151,7 +151,7 @@ array var l_Rectangles
 l_Rectangles ==> Rectangle:Print
 l_Rectangles ==> ( Rectangle:class Print )
 l_Rectangles ==> ( Rectangle:ClassName Print )
-for l_Rectangles ( for ( Object IN anObj anObj |> class %G ) ( getClassName Print ) )
+l_Rectangles ==> ( for ( Object IN anObj anObj |> class %G ) ( getClassName Print ) )
 
 'Hello ' (+) 'world' Print
 
