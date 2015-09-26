@@ -567,13 +567,10 @@ VOID TestWithDump PointTest
  Array:Iterate
  l_Points
  (
-  (
-   Object IN anObj
-   anObj
-   Object:class
-   .Inherited.Words
-  )
-  DO
+  Object IN anObj
+  anObj
+  Object:class
+  .Inherited.Words
   (
    getClassName
    Print
