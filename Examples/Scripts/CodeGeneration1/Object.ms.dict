@@ -407,7 +407,7 @@ constructor new
 
 VIRTUAL STRING method ToPrintable
  //Self ToPrintable =: Result
- Self Object:ClassName =: Result
+ Self |> ClassName =: Result
 ; // ToPrintable
 
 VIRTUAL void method Print
