@@ -72,6 +72,8 @@ MACRO right
  l_MangledName Ctx:Parser:PushSymbol
  
   [
+   // l_ValueTypes IsNil ! ? ( l_ValueTypes pop:ValueTypes:Name Ctx:Parser:PushSymbol )
+   // - тут надо определить тип параметра, но не получается, пока
    'VOID'
    'IMMEDIATE axiom:operator' 
    l_Name 
