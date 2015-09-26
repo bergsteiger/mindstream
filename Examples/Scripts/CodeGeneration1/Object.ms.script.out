@@ -1,40 +1,4 @@
 VOID TestWithDump ObjectTest
- IMMEDIATE VOID MACRO |>
-  %SUMMARY %SUM
-   'Вызывает метод aMethod на объекте Self'
-  ; // %SUMMARY %SUM
-  
-  ^L IN aMethod
-  STRING VAR l_FullMethodName
-  ^@ IN Self
-  Self
-  pop:Word:Info
-  pop:WordInfo:ValueTypes
-  pop:ValueTypes:Name
-  l_FullMethodName
-  pop:Word:SetValue
-  l_FullMethodName
-  ' '
-  string:Pos
-  -1
-  ==
-  ?ASSURE
-  'Множественные типы для вызова методов объектов пока не поддерживаются'
-  [
-   l_FullMethodName
-   ':'
-   aMethod
-   |N
-  ]
-  strings:Cat
-  l_FullMethodName
-  pop:Word:SetValue
-  Self
-  CompileValue
-  l_FullMethodName
-  Ctx:Parser:PushSymbol
- ; // IMMEDIATE VOID MACRO |>
- 
  Object VAR l_Obj
  ObjectTest
  DumpElement
