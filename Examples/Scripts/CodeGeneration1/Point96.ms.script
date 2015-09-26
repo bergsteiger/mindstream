@@ -52,11 +52,11 @@ constructor OF
 Point method +
  Point right aPoint
 
- Point:: ( Self Point:X (+) ( aPoint Point:X ) ) ( Self Point:Y (+) ( aPoint Point:Y ) ) =: Result
+ Point:: ( Self |> X (+) ( aPoint Point:X ) ) ( Self |> Y (+) ( aPoint Point:Y ) ) =: Result
 ; // +
 
 Point method Neg
- Point:: Neg ( Self Point:X ) Neg ( Self Point:Y ) =: Result
+ Point:: Neg ( Self |> X ) Neg ( Self |> Y ) =: Result
 ; // Neg
 
 Point method -
