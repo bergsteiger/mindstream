@@ -411,7 +411,7 @@ VIRTUAL STRING method ToPrintable
 ; // ToPrintable
 
 VIRTUAL void method Print
- Self Object:ToPrintable Print
+ Self |> ToPrintable Print
 ; // Print
 
 class-end // Object
