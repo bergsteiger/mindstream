@@ -30,7 +30,6 @@ object fmMain: TfmMain
     Align = alTop
     Caption = 'pnlMain'
     TabOrder = 1
-    ExplicitTop = 41
     object memMain: TMemo
       Left = 1
       Top = 1
@@ -38,16 +37,17 @@ object fmMain: TfmMain
       Height = 334
       Align = alClient
       Lines.Strings = (
-        'TObject'
-        'TPersistent'
-        'TComponent'
-        'TControl'
-        'TWinControl'
-        'TCustomEdit'
-        'TCustomMemo'
-        'TMemo')
+        'Smith'
+        'Johnson'
+        'Williams'
+        'Brown'
+        'Jones'
+        'Miller'
+        'Davis'
+        'Garcia'
+        'Rodriguez'
+        'Wilson')
       TabOrder = 0
-      ExplicitHeight = 377
     end
   end
 end
