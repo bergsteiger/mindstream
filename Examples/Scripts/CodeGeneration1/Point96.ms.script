@@ -155,8 +155,14 @@ l_Rectangles ==> (
  Rectangle IN aRt
  aRt |> Print
 )
-l_Rectangles ==> ( Rectangle:class Print )
-l_Rectangles ==> ( Rectangle:ClassName Print )
+l_Rectangles ==> ( 
+ Rectangle IN aRt
+ aRt |> class Print 
+)
+l_Rectangles ==> ( 
+ Rectangle IN aRt
+ aRt |> ClassName Print 
+)
 l_Rectangles ==> ( 
  Rectangle IN aRt 
  aRt |> class %G ==> ( getClassName Print ) 
