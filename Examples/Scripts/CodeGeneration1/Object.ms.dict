@@ -398,7 +398,7 @@ MACRO |>
 ; // |>
 
 STRING readonly ClassName
- Self Object:class getClassName =: Result
+ Self |> class getClassName =: Result
 ; // ClassName
 
 constructor new
