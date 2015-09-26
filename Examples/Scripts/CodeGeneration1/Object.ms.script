@@ -28,8 +28,8 @@ MACRO |>
  Object VAR l_Obj
  l_Obj := Object:new
 
- l_Obj Object:Print
- l_Obj Object:ClassName Print
+ l_Obj |> Print
+ l_Obj |> ClassName Print
 
  @ l_Obj pop:Word:Info pop:WordInfo:ValueTypes Print
  @ l_Obj pop:Word:Info pop:WordInfo:ValueTypes pop:ValueTypes:Name Print
