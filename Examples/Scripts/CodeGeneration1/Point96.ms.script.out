@@ -517,7 +517,7 @@ VOID TestWithDump PointTest
  O1
  pop:Word:SetValue
  O1
- Point:Print
+ Object:Print
  [
   P1
   P2
@@ -702,7 +702,7 @@ class_impl _:Object
  
 ; // class_impl _:Object
 
-( X: 0, Y: 0 )
+Point
 ( X: 0, Y: 0 )
 ( X: 0, Y: 0 )
 ( X: 1, Y: 1 )
