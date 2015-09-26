@@ -597,7 +597,11 @@ VOID TestWithDump PointTest
  l_Rectangles
  pop:Word:SetValue
  l_Rectangles
- Rectangle:Print
+ (
+  Rectangle IN aRt
+  aRt
+  Rectangle:Print
+ )
  SWAP
  Array:Iterate
  l_Rectangles
