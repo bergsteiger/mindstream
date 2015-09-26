@@ -59,6 +59,7 @@ MACRO right
 
  VAR l_ValueTypes
  Ctx:ValueTypes >>> l_ValueTypes
+ Ctx:ClearTypeInfo
 
  axiom:PushSymbol RIGHT
  axiom:PushSymbol IN
@@ -74,6 +75,11 @@ MACRO right
   [
    // l_ValueTypes IsNil ! ? ( l_ValueTypes pop:ValueTypes:Name Ctx:Parser:PushSymbol )
    // - тут надо определить тип параметра, но не получается, пока
+/*{   ':'
+   l_Name
+   l_MangledName
+   '|^'
+   ';'}*/
    'VOID'
    'IMMEDIATE axiom:operator' 
    l_Name 
