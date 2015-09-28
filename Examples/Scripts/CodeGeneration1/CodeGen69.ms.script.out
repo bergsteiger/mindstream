@@ -3678,7 +3678,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : right
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_MangledName
  STRING OPERATOR :: VAR : l_Name
- OPERATOR :: VAR : l_ValueTypes
+ TtfwValueTypes OPERATOR :: VAR : l_ValueTypes
 ; // right
 IMMEDIATE VOID OPERATOR : RIGHT
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\math.ms.dict
@@ -4591,6 +4591,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : |>
   Вызывает метод aMethod на объекте Self
  ^L OPERATOR :: IN : aMethod
  STRING OPERATOR :: VAR : l_FullMethodName
+ TtfwValueTypes OPERATOR :: VAR : l_ValueTypes
  ^@ OPERATOR :: IN : Self
 ; // |>
 INTEGER CONST : c:Object:Instance:Size
@@ -4638,10 +4639,6 @@ STRING OPERATOR :: VAR : g_CurrentClassImpl
 ARRAY OPERATOR :: VAR : g_CurrentClassMembers
 ARRAY OPERATOR :: VAR : g_CurrentClassMethods
 ARRAY OPERATOR :: VAR : g_CurrentClassProperties
-STRING : : getClassName
- STRING : :: getClassName : Result
- OPERATOR :: IN : Self
-; // getClassName
 STRING : : getClassNamePrim
  STRING : :: getClassNamePrim : Result
  STRING OPERATOR :: IN : Self
@@ -4682,8 +4679,8 @@ STRING FUNCTION : NameAsString
 ; // NameAsString
 IMMEDIATE VOID OPERATOR :: MACRO : new[
 IMMEDIATE VOID OPERATOR : Object
-TtfwWord OPERATOR :: MACRO :: readonly : Object:class
- TtfwWord OPERATOR :: MACRO :: readonly :: Object:class : Result
+ObjectClass OPERATOR :: MACRO :: readonly : Object:class
+ ObjectClass OPERATOR :: MACRO :: readonly :: Object:class : Result
  Object OPERATOR :: IN : Self
 ; // Object:class
 STRING OPERATOR :: MACRO :: readonly : Object:ClassName
@@ -4700,6 +4697,11 @@ ABSTRACT STRING OPERATOR :: MACRO :: method : Object:ToPrintable
  ABSTRACT STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
  Object OPERATOR :: IN : Self
 ; // Object:ToPrintable
+IMMEDIATE VOID OPERATOR :: TYPE : ObjectClass
+STRING : : ObjectClass:Name
+ STRING : :: ObjectClass:Name : Result
+ ObjectClass OPERATOR :: IN : Self
+; // ObjectClass:Name
 IMMEDIATE VOID OPERATOR :: MACRO : read
  ^L OPERATOR :: IN : aName
 ; // read
