@@ -199,14 +199,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point constructor Point:0
  
- TtfwWord readonly Object:class
+ ObjectClass readonly Object:class
   Object IN Self
   Self
   FieldByOffset
   c:Object:Offset:VMT
   Result
   pop:Word:SetValue
- ; // TtfwWord readonly Object:class
+ ; // ObjectClass readonly Object:class
  
  STRING readonly Object:ClassName
   Object IN Self
@@ -384,14 +384,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point readonly Rectangle:BottomRight
  
- TtfwWord readonly Object:class
+ ObjectClass readonly Object:class
   Object IN Self
   Self
   FieldByOffset
   c:Object:Offset:VMT
   Result
   pop:Word:SetValue
- ; // TtfwWord readonly Object:class
+ ; // ObjectClass readonly Object:class
  
  STRING readonly Object:ClassName
   Object IN Self

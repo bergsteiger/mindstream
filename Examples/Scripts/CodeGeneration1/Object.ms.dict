@@ -158,6 +158,8 @@ STRING : getClassNamePrim
  Self ':' string:Split =: Result DROP
 ; // getClassNamePrim
 
+TtfwWord type ObjectClass
+
 STRING : getClassName
  IN Self
  Self |N getClassNamePrim =: Result
@@ -376,7 +378,7 @@ MACRO read
 INTEGER member VMT
 members-end
 
-TtfwWord readonly class read VMT
+ObjectClass readonly class read VMT
 
 USES
  axiom:WordInfo
