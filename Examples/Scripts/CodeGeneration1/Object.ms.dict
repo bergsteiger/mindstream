@@ -26,7 +26,7 @@ EXPORTS
 
 // Понятное дело, что всю обвязку потом упрячем в отдельный словарь object.ms.dict
 
-NamedWordProducer %FIELDS %Fld
+NamedWordProducer %FIELDS %Flds
 NamedWordProducer %PROPERTIES %Props
 NamedWordProducer %METHODS %Methods
 NamedWordProducer %CONSTRUCTORS %Constructors
@@ -55,11 +55,11 @@ ARRAY FUNCTION %ClassRTTIList
   ( Result := ( l_List CodeIterator ) )
 ; // %ClassRTTIList
 
-ARRAY FUNCTION %Fld 
+ARRAY FUNCTION %Flds
  IN %S
  %SUMMARY 'Возвращает итератор полей класса' ;
- %S %ClassRTTIList %Fld >>> Result
-; // %Fld
+ %S %ClassRTTIList %Flds >>> Result
+; // %Flds
 
 ARRAY FUNCTION %Props 
  IN %S
@@ -171,11 +171,11 @@ MACRO classExpander
  anImpl |@ %G .for> ( 
   IN anItem 
 
-  anItem %Fld .for> ( 
+  anItem %Flds .for> ( 
    IN aField 
    axiom:PushSymbol member
    aField |N Ctx:Parser:PushSymbol
-  ) // anItem %Fld .for>
+  ) // anItem %Flds .for>
 
   anItem %Props .for> ( 
    IN aProp

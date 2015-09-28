@@ -4549,12 +4549,12 @@ ARRAY FUNCTION : %Constructors
 ; // %Constructors
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CONSTRUCTORS
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %FIELDS
-ARRAY FUNCTION : %Fld
+ARRAY FUNCTION : %Flds
  OPERATOR :: IN : %S
  Documentation:
   Возвращает итератор полей класса
- ARRAY FUNCTION :: %Fld : Result
-; // %Fld
+ ARRAY FUNCTION :: %Flds : Result
+; // %Flds
 ARRAY OPERATOR :: MACRO :: word_func : %G
  Documentation:
   Возвращает итератор элементов от которого наследуется наш элемент
@@ -4583,7 +4583,7 @@ ARRAY OPERATOR :: MACRO :: word_func : %R
 ; // %R
 OPERATOR :: class_impl : _:Object
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
- OPERATOR :: NamedWordProducer :: %FIELDS : %Fld
+ OPERATOR :: NamedWordProducer :: %FIELDS : %Flds
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
  OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
 ; // _:Object

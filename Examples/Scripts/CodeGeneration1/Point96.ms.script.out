@@ -7,11 +7,11 @@ VOID TestWithDump PointTest
    'OF'
   ; // %CONSTRUCTORS %Constructors
   
-  %FIELDS %Fld
+  %FIELDS %Flds
    'VMT'
    'X'
    'Y'
-  ; // %FIELDS %Fld
+  ; // %FIELDS %Flds
   
   %INHERITS %G
    @
@@ -38,11 +38,11 @@ VOID TestWithDump PointTest
    ':'
   ; // %CONSTRUCTORS %Constructors
   
-  %FIELDS %Fld
+  %FIELDS %Flds
    'VMT'
    'TopLeft'
    'BottomRight'
-  ; // %FIELDS %Fld
+  ; // %FIELDS %Flds
   
   %INHERITS %G
    @
@@ -690,9 +690,9 @@ class_impl _:Object
   'new'
  ; // %CONSTRUCTORS %Constructors
  
- %FIELDS %Fld
+ %FIELDS %Flds
   'VMT'
- ; // %FIELDS %Fld
+ ; // %FIELDS %Flds
  
  %METHODS %Methods
   'ToPrintable'
