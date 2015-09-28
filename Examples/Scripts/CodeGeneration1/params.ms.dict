@@ -61,6 +61,17 @@ MACRO right
  Ctx:ValueTypes >>> l_ValueTypes
  Ctx:ClearTypeInfo
 
+ STRING VAR l_ValueTypesName
+ 
+ if ( l_ValueTypes IsNil ) then
+ begin
+  '' >>> l_ValueTypesName
+ end
+ else
+ begin
+  l_ValueTypes pop:ValueTypes:Name >>> l_ValueTypesName
+ end
+
  axiom:PushSymbol RIGHT
  axiom:PushSymbol IN
 
