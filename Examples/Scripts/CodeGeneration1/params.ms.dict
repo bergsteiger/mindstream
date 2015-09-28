@@ -57,7 +57,7 @@ MACRO right
  Literal IN aName
  %SUMMARY 'Параметр справа, который автоматически разыменовывается' ;
 
- VAR l_ValueTypes
+ TtfwValueTypes VAR l_ValueTypes
  Ctx:ValueTypes >>> l_ValueTypes
  Ctx:ClearTypeInfo
 
