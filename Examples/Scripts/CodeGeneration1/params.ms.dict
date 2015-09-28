@@ -44,6 +44,12 @@ PRIVATE VOID operator MangledNamePusher
  STRING IN aValueTypesName
  STRING IN aName
  %SUMMARY 'Реализация параметра справа' ;
+
+ if ( aValueTypesName IsNil ! ) then
+ begin
+  aValueTypesName Ctx:Parser:PushSymbol
+ end // ( aValueTypesName IsNil ! )
+
  axiom:PushSymbol (
  aName Ctx:Parser:PushSymbol
  axiom:PushSymbol |^

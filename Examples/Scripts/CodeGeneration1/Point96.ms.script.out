@@ -120,7 +120,7 @@ VOID TestWithDump PointTest
    Self
    Point:+
    (
-    (
+    Point (
      _aPoint |^
     )
     Point:Neg
@@ -148,10 +148,10 @@ VOID TestWithDump PointTest
   [
    @
    _:Point
-   (
+   Pixel (
     _aX |^
    )
-   (
+   Pixel (
     _aY |^
    )
   ]
@@ -174,7 +174,7 @@ VOID TestWithDump PointTest
    Point:X
    (+)
    (
-    (
+    Point (
      _aPoint |^
     )
     Point:X
@@ -185,7 +185,7 @@ VOID TestWithDump PointTest
    Point:Y
    (+)
    (
-    (
+    Point (
      _aPoint |^
     )
     Point:Y
@@ -257,13 +257,13 @@ VOID TestWithDump PointTest
   
   Point::
   (
-   (
+   Point (
     _aPoint |^
    )
    Point:X
   )
   (
-   (
+   Point (
     _aPoint |^
    )
    Point:Y
@@ -310,7 +310,7 @@ VOID TestWithDump PointTest
  Point constructor Point:XY
   ^ IN _aPoint
   IMMEDIATE VOID OPERATOR aPoint
-   'PixelList'
+   ''
    '_aPoint'
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aPoint
@@ -372,10 +372,10 @@ VOID TestWithDump PointTest
   [
    @
    _:Rectangle
-   (
+   Point (
     _aTopLeft |^
    )
-   (
+   Point (
     _aBottomRight |^
    )
   ]
