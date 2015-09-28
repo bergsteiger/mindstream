@@ -41,6 +41,7 @@ MACRO LVALUE
 ; // LVALUE
 
 PRIVATE VOID operator MangledNamePusher
+ STRING IN aValueTypesName
  STRING IN aName
  %SUMMARY 'Реализация параметра справа' ;
  axiom:PushSymbol (
@@ -94,7 +95,8 @@ MACRO right
    ';'}*/
    'VOID'
    'IMMEDIATE axiom:operator' 
-   l_Name 
+   l_Name
+   [ '`' l_ValueTypesName '`' ] strings:Cat 
    [ '`' l_MangledName '`' ] strings:Cat
    'MangledNamePusher'
    ';'

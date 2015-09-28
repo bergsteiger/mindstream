@@ -109,6 +109,7 @@ VOID TestWithDump PointTest
  Point method Point:-
   ^ IN _aPoint
   IMMEDIATE VOID OPERATOR aPoint
+   'Point'
    '_aPoint'
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aPoint
@@ -133,11 +134,13 @@ VOID TestWithDump PointTest
   ^ IN _aX
   ^ IN _aY
   IMMEDIATE VOID OPERATOR aX
+   'Pixel'
    '_aX'
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aX
   
   IMMEDIATE VOID OPERATOR aY
+   'Pixel'
    '_aY'
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aY
@@ -159,6 +162,7 @@ VOID TestWithDump PointTest
  Point method Point:+
   ^ IN _aPoint
   IMMEDIATE VOID OPERATOR aPoint
+   'Point'
    '_aPoint'
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aPoint
@@ -246,6 +250,7 @@ VOID TestWithDump PointTest
  Point constructor Point:OF
   ^ IN _aPoint
   IMMEDIATE VOID OPERATOR aPoint
+   'Point'
    '_aPoint'
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aPoint
@@ -305,6 +310,7 @@ VOID TestWithDump PointTest
  Point constructor Point:XY
   ^ IN _aPoint
   IMMEDIATE VOID OPERATOR aPoint
+   'PixelList'
    '_aPoint'
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aPoint
@@ -352,11 +358,13 @@ VOID TestWithDump PointTest
   ^ IN _aBottomRight
   ^ IN _aTopLeft
   IMMEDIATE VOID OPERATOR aBottomRight
+   'Point'
    '_aBottomRight'
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aBottomRight
   
   IMMEDIATE VOID OPERATOR aTopLeft
+   'Point'
    '_aTopLeft'
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aTopLeft
