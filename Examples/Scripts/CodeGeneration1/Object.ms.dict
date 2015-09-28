@@ -161,7 +161,7 @@ STRING : getClassNamePrim
 TtfwWord type ObjectClass
 
 STRING : getClassName
- IN Self
+ ObjectClass IN Self
  Self |N getClassNamePrim =: Result
 ; // getClassName
 
