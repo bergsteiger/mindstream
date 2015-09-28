@@ -66,11 +66,12 @@ MACRO right
  if ( l_ValueTypes IsNil ) then
  begin
   '' >>> l_ValueTypesName
- end
+ end // l_ValueTypes IsNil
  else
  begin
   l_ValueTypes pop:ValueTypes:Name >>> l_ValueTypesName
- end
+  l_ValueTypesName ' ' string:Pos -1 == ?ASSURE 'Множественные типы для параметров справа пока не поддерживаются'
+ end // l_ValueTypes IsNil
 
  axiom:PushSymbol RIGHT
  axiom:PushSymbol IN
