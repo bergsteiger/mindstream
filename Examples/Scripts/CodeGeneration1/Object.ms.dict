@@ -160,10 +160,10 @@ STRING : getClassNamePrim
 
 TtfwWord type ObjectClass
 
-STRING : getClassName
+STRING : ObjectClass:Name
  ObjectClass IN Self
  Self |N getClassNamePrim =: Result
-; // getClassName
+; // ObjectClass:Name
 
 MACRO classExpander
  ^ IN anImpl
@@ -406,7 +406,7 @@ MACRO |>
 ; // |>
 
 STRING readonly ClassName
- Self |> class getClassName =: Result
+ Self |> class ObjectClass:Name =: Result
 ; // ClassName
 
 constructor new

@@ -212,7 +212,7 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
-  getClassName
+  ObjectClass:Name
   Result
   pop:Word:SetValue
  ; // STRING readonly Object:ClassName
@@ -397,7 +397,7 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
-  getClassName
+  ObjectClass:Name
   Result
   pop:Word:SetValue
  ; // STRING readonly Object:ClassName
@@ -584,7 +584,7 @@ VOID TestWithDump PointTest
   Object:class
   .Inherited.Words
   (
-   getClassName
+   ObjectClass:Name
    Print
   )
   SWAP
@@ -641,7 +641,7 @@ VOID TestWithDump PointTest
   Object:class
   .Inherited.Words
   (
-   getClassName
+   ObjectClass:Name
    Print
   )
   SWAP

@@ -156,7 +156,7 @@ l_Points ==> (
 )
 l_Points ==> ( 
  Point IN aPt 
- aPt |> class %G ==> ( getClassName Print ) 
+ aPt |> class %G ==> ( ObjectClass:Name Print ) 
 )
 
 Rectangle var R1
@@ -181,7 +181,7 @@ l_Rectangles ==> (
 )
 l_Rectangles ==> ( 
  Rectangle IN aRt 
- aRt |> class %G ==> ( getClassName Print ) 
+ aRt |> class %G ==> ( ObjectClass:Name Print ) 
 )
 
 'Hello ' (+) 'world' Print
