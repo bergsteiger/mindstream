@@ -3670,6 +3670,7 @@ PRIVATE VOID OPERATOR : MangledNamePusher
  Documentation:
   Реализация параметра справа
  STRING OPERATOR :: IN : aName
+ STRING OPERATOR :: IN : aValueTypesName
 ; // MangledNamePusher
 IMMEDIATE VOID OPERATOR : REF
 IMMEDIATE VOID OPERATOR :: MACRO : right
