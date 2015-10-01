@@ -1,5 +1,7 @@
 MACRO CompileTime-VAR
- Literal IN aName
+  Literal IN aName
+  ^ IN aValue
+
  %SUMMARY 'ќбъ€вл€ет переменную "времени компил€ции" и инициализирует еЄ' ;
 
  TtfwValueTypes VAR l_ValueTypes
@@ -28,8 +30,8 @@ USES
 ;
 
 Test&Dump CompileTimeVarTest
- STRING CompileTime-VAR A
- ARRAY CompileTime-VAR B
+ STRING CompileTime-VAR A ''
+ ARRAY CompileTime-VAR B [ ]
 ; // CompileTimeVarTest
 
 CompileTimeVarTest
