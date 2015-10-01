@@ -20,6 +20,7 @@ MACRO proc
 
  aParams MembersIterator ==> ( 
   TtfwWord IN aParam 
+  aParam pop:Word:Producer . 
   aParam pop:Word:Name . 
  )
 ; // proc
