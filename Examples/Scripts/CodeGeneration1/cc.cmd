@@ -1,1 +1,1 @@
-call c.cmd Point96.ms.script
+call c.cmd CompileTimeVar.ms.script
