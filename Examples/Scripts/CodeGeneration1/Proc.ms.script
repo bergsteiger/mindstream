@@ -17,6 +17,8 @@ MACRO proc
  aName |N >>> g_CurrentProc
  axiom:PushSymbol PROCEDURE
  g_CurrentProc Ctx:Parser:PushString
+
+ aParams MembersIterator ==> .
 ; // proc
 
 MACRO proc-end
