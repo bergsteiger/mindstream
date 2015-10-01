@@ -4,9 +4,10 @@ USES
  CompileTimeVar.ms.dict
 ;
 
-STRING CompileTime-VAR g_CurentProc ''
+STRING CompileTime-VAR g_CurrentProc ''
 
 MACRO proc
+ g_CurrentProc '' == ?ASSURE 'Вложенные процедуры пока не поддерживаются'
 ; // proc
 
 MACRO proc-end
