@@ -21,9 +21,6 @@ STACK_CHANGING_MACRO proc
  axiom:PushSymbol :
  g_CurrentProc Ctx:Parser:PushString
 
-// axiom:PushSymbol IN
-// 'anX' Ctx:Parser:PushSymbol
-
  aParams MembersIterator ==> ( 
   TtfwWord IN aParam 
   aParam pop:Word:Producer pop:Word:Name Ctx:Parser:PushSymbol 
