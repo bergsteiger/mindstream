@@ -4,7 +4,7 @@ VOID TestWithDump ObjectTest
  DumpElement
  Object:new
  l_Obj
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  l_Obj
  Object:Print
  l_Obj
