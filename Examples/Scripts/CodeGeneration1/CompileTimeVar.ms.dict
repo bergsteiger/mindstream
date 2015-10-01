@@ -1,5 +1,9 @@
 UNIT CompileTimeVar.ms.dict
 
+USES
+ axiom:TtfwValueTypesAccepts
+;
+
 STACK_CHANGING_MACRO CompileTime-VAR
   Literal IN aName
   ^ IN aValue
