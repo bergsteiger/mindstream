@@ -22,7 +22,9 @@ STACK_CHANGING_MACRO CompileTime-VAR
  end
 
  axiom:PushSymbol VAR
- aName |N Ctx:Parser:PushString
+ STRING VAR l_Name
+ aName |N >>> l_Name
+ l_Name Ctx:Parser:PushString
  axiom:PushSymbol [EXECUTE]
  axiom:PushSymbol (
  aValue DO
