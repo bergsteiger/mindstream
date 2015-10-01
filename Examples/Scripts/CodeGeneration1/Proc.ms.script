@@ -6,7 +6,7 @@ USES
 
 STRING CompileTime-VAR g_CurrentProc ''
 
-STACK_CHANGING_MACRO proc
+MACRO proc
 //MACRO proc
   Literal IN aName
   ^ IN aParams
