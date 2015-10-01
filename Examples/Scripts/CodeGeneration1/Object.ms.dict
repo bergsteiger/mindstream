@@ -95,10 +95,7 @@ VOID OPERATOR class_impl
 //; // class_imp
 
 STRING CompileTime-VAR g_CurrentClass ''
-STRING var g_CurrentClassImpl
-[EXECUTE]
- ( g_CurrentClassImpl := '' )
-( g_CurrentClassImpl := '' )
+STRING CompileTime-VAR g_CurrentClassImpl ''
 
 PRIVATE STRING operator MakeFieldOffsetName
  STRING IN aName
@@ -114,10 +111,7 @@ VOID operator define_member
  aOffset Ctx:Parser:PushInt
 ; // define_member
 
-INTEGER VAR g_ClassFieldOffset
-[EXECUTE]
- ( g_ClassFieldOffset := 0 )
-( g_ClassFieldOffset := 0 )
+INTEGER CompileTime-VAR g_ClassFieldOffset 0
 
 ARRAY VAR g_CurrentClassMembers
 [EXECUTE]
