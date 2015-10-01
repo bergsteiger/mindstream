@@ -16,6 +16,7 @@ STACK_CHANGING_MACRO proc
  g_CurrentProc '' == ?ASSURE 'Вложенные процедуры пока не поддерживаются'
 
  aName |N >>> g_CurrentProc
+ @SELF Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol VOID
  axiom:PushSymbol :
  g_CurrentProc Ctx:Parser:PushString
