@@ -1,40 +1,6 @@
-STACK_CHANGING_MACRO CompileTime-VAR
-  Literal IN aName
-  ^ IN aValue
-
- %SUMMARY 'ќбъ€вл€ет переменную "времени компил€ции" и инициализирует еЄ' ;
-
- TtfwValueTypes VAR l_ValueTypes
- Ctx:ValueTypes >>> l_ValueTypes
- Ctx:ClearTypeInfo
-
- STRING VAR l_ValueTypesName
- 
- if ( l_ValueTypes IsNil ) then
- begin
-  '' >>> l_ValueTypesName
- end // l_ValueTypes IsNil
- else
- begin
-  l_ValueTypes pop:ValueTypes:Name >>> l_ValueTypesName
-  l_ValueTypesName ' ' string:Pos -1 == ?ASSURE 'ћножественные типы дл€ переменных "времени компил€ции" пока не поддерживаютс€'
-  l_ValueTypesName Ctx:Parser:PushSymbol
- end
-
- axiom:PushSymbol VAR
- STRING VAR l_Name
- aName |N >>> l_Name
- l_Name Ctx:Parser:PushString
- axiom:PushSymbol [EXECUTE]
- axiom:PushSymbol (
- aValue DO
- axiom:PushSymbol [EXECUTE]
- axiom:PushSymbol CompileValue
- axiom:PushSymbol @
- l_Name Ctx:Parser:PushSymbol
- axiom:PushSymbol pop:Word:SetValue
- axiom:PushSymbol )
-; // CompileTime-VAR
+USES
+ CompileTimeVar.ms.dict
+;
 
 USES
  Testing.ms.dict
