@@ -10,14 +10,9 @@ STACK_CHANGING_MACRO CompileTime-VAR
  Ctx:ValueTypes >>> l_ValueTypes
  Ctx:ClearTypeInfo
 
- STRING VAR l_ValueTypesName
- 
- if ( l_ValueTypes IsNil ) then
+ if ( l_ValueTypes IsNil ! ) then
  begin
-  '' >>> l_ValueTypesName
- end // l_ValueTypes IsNil
- else
- begin
+  STRING VAR l_ValueTypesName
   l_ValueTypes pop:ValueTypes:Name >>> l_ValueTypesName
   l_ValueTypesName ' ' string:Pos -1 == ?ASSURE 'ћножественные типы дл€ переменных "времени компил€ции" пока не поддерживаютс€'
   l_ValueTypesName Ctx:Parser:PushSymbol
