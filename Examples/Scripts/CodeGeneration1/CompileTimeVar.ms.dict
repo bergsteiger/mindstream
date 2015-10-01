@@ -24,8 +24,6 @@ STACK_CHANGING_MACRO CompileTime-VAR
   //aValue pop:Word:GetRef pop:Word:Info pop:WordInfo:ValueTypes Print
  end
 
- @SELF Ctx:SetWordProducerForCompiledClass
- %REMARK 'Так пока не работает к сожалению'
  axiom:PushSymbol VAR
  STRING VAR l_Name
  aName |N >>> l_Name
