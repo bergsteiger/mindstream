@@ -94,8 +94,12 @@ VOID OPERATOR class_impl
 //; // class_imp
 
 STRING var g_CurrentClass
+[EXECUTE]
+ ( g_CurrentClass := '' )
 ( g_CurrentClass := '' )
 STRING var g_CurrentClassImpl
+[EXECUTE]
+ ( g_CurrentClassImpl := '' )
 ( g_CurrentClassImpl := '' )
 
 PRIVATE STRING operator MakeFieldOffsetName
@@ -205,6 +209,7 @@ CONST cObjectName 'Object'
 
 MACRO class
  Literal IN aName
+ ( g_CurrentClass = '' ) ?ASSURE 'Вложенные классы пока не поддерживаются'
  g_CurrentClassMembers := [ ]
  g_CurrentClassProperties := [ ]
  g_CurrentClassMethods := [ ]
