@@ -29,7 +29,8 @@ USES
 Test&Dump ProcTest
 
 proc A
-proc-end
+ 'Hello world' .
+proc-end // A
 
 A
 

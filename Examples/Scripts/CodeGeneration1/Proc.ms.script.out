@@ -1,5 +1,7 @@
 VOID TestWithDump ProcTest
  VOID PROCEDURE A
+  'Hello world'
+  .
  ; // VOID PROCEDURE A
  
  ProcTest
@@ -7,3 +9,4 @@ VOID TestWithDump ProcTest
  A
 ; // VOID TestWithDump ProcTest
 
+Hello world
