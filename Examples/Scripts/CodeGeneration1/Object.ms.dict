@@ -94,10 +94,7 @@ VOID OPERATOR class_impl
 // // axiom:PushSymbol ;
 //; // class_imp
 
-STRING var g_CurrentClass
-[EXECUTE]
- ( g_CurrentClass := '' )
-( g_CurrentClass := '' )
+STRING CompileTime-VAR g_CurrentClass ''
 STRING var g_CurrentClassImpl
 [EXECUTE]
  ( g_CurrentClassImpl := '' )
