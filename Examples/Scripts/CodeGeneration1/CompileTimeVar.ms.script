@@ -23,6 +23,9 @@ MACRO CompileTime-VAR
 
  axiom:PushSymbol VAR
  aName |N Ctx:Parser:PushString
+ axiom:PushSymbol [EXECUTE]
+ axiom:PushSymbol (
+ axiom:PushSymbol )
 ; // CompileTime-VAR
 
 USES
