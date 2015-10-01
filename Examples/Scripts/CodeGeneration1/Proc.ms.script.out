@@ -1,6 +1,8 @@
 VOID TestWithDump ProcTest
  VOID proc A
   IN aValue
+  aValue
+  .
  ; // VOID proc A
  
  ProcTest

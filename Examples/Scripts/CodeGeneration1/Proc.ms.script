@@ -42,7 +42,7 @@ USES
 Test&Dump ProcTest
 
 proc A ( IN aValue )
- //aValue .
+ aValue .
 proc-end // A
 
 //'Hello world' A
