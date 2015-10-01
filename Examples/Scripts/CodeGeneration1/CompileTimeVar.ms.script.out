@@ -1,13 +1,17 @@
 VOID TestWithDump CompileTimeVarTest
  STRING VAR A
  ARRAY VAR B
+ STRING VAR C
  CompileTimeVarTest
  DumpElement
  A
  .
  B
  .
+ C
+ .
 ; // VOID TestWithDump CompileTimeVarTest
 
 
 [ ]
+Hello
