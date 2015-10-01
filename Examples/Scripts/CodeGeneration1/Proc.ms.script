@@ -7,10 +7,13 @@ USES
 STRING CompileTime-VAR g_CurrentProc ''
 
 MACRO proc
+ %SUMMARY 'Определяет процедуру с ПОЛНЫМ контролем типов' ;
+
  g_CurrentProc '' == ?ASSURE 'Вложенные процедуры пока не поддерживаются'
 ; // proc
 
 MACRO proc-end
+ %SUMMARY 'Завершает определение процедуры с ПОЛНЫМ контролем типов' ;
 ; // proc-end
 
 USES
