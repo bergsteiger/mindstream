@@ -27,7 +27,7 @@ VOID Test ListTest
   OBJECT VAR l_Element
   anObject
   l_Element
-  pop:Word:SetValue
+  pop:Word:SetValuePrim
   [
    true
    BEGIN

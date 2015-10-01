@@ -11,10 +11,10 @@ VOID Test TestCompileValue
  STRING VAR S
  'World'
  S
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  30
  I
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  20
  .
  Hello
