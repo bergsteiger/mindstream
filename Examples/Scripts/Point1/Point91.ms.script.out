@@ -84,7 +84,7 @@ VOID Test PointTest
   pop:Word:SetValue
   0
   g_ClassFieldOffset
-  pop:Word:SetValue
+  pop:Word:SetValuePrim
   aName
   |N
   g_CurrentClass
@@ -719,10 +719,10 @@ VOID Test PointTest
  
  ''
  g_CurrentClass
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  ''
  g_CurrentClassImpl
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  (
   [
   ]
@@ -731,15 +731,15 @@ VOID Test PointTest
  )
  0
  g_ClassFieldOffset
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  PointTest
  DumpElement
  Point:0
  P1
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:0
  P2
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point::
  1
  1
@@ -791,7 +791,7 @@ VOID Test PointTest
  pop:Word:SetValue
  P1
  O1
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  O1
  Point:Print
  [

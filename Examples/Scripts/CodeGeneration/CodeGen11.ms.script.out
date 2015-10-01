@@ -229,23 +229,6 @@ VOID OPERATOR : Tests:@[
 tests:CheckEtalon
 tests:CheckOutputWithInput
 Dictionary: axiom:text
-Dictionary: axiom:WordInfo
-BOOLEAN pop:WordInfo:AcceptsValue
-TtfwAccessType pop:WordInfo:AccessType
-INTEGER pop:WordInfo:Compare
-BOOLEAN pop:WordInfo:Empty
-BOOLEAN pop:WordInfo:HasAccessType
-BOOLEAN pop:WordInfo:HasLinkType
-BOOLEAN pop:WordInfo:HasValueType
-BOOLEAN pop:WordInfo:HasWordModifier
-TtfwWordInfo pop:WordInfo:IncludeAccesType
-TtfwWordInfo pop:WordInfo:IncludeLinkType
-TtfwWordInfo pop:WordInfo:IncludeModifier
-TtfwWordInfo pop:WordInfo:IncludeTypeModifier
-TtfwLinkType pop:WordInfo:LinkType
-STRING pop:WordInfo:ToString
-STRING pop:WordInfo:TypeName
-TtfwValueTypes pop:WordInfo:ValueTypes
 Dictionary: axiom:WString
 Dictionary: CodeGen11.ms.script
  Uses: 
@@ -267,6 +250,8 @@ Dictionary: CodeGen11.ms.script
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -319,6 +304,8 @@ Dictionary: axiom:axiom
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -350,6 +337,8 @@ Dictionary: axiom:axiom
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -542,6 +531,8 @@ IMMEDIATE VOID OPERATOR : :=
   Присваивает слову aLeft значение aRight
  ^@ OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
+ TtfwValueTypes OPERATOR :: VAR : l_TL
+ TtfwValueTypes OPERATOR :: VAR : l_TR
 ; // :=
 ;
 VOID ?
@@ -809,6 +800,8 @@ OPERATOR : AllMembers==>
  ; // DoMembers
 ; // AllMembers==>
 BOOLEAN OPERATOR : AND
+ Documentation:
+  Двусторонний, а не обратный польский &&
  BOOLEAN OPERATOR :: IN : aFirst
  ^ OPERATOR :: IN : aSecond
  BOOLEAN OPERATOR :: AND : Result
@@ -1320,6 +1313,7 @@ TClass class::TkwPopScriptEngineAsKeywordFinder
 TClass class::TkwPopScriptEngineCascadeDict
 TClass class::TkwPopScriptEngineCurrentCompilingDictionary
 TClass class::TkwPopScriptEngineDisableForHelp
+TClass class::TkwPopValueTypesAccepts
 TClass class::TkwPopValueTypesAcceptsValue
 TClass class::TkwPopValueTypesAdd
 TClass class::TkwPopValueTypesCompare
@@ -1368,6 +1362,7 @@ TClass class::TkwPopWordPublicateInMainDictionary
 TClass class::TkwPopWordRedefines
 TClass class::TkwPopWordSetProducer
 TClass class::TkwPopWordSetValue
+TClass class::TkwPopWordSetValuePrim
 TClass class::TkwPopWordSourcePointString
 TClass class::TkwPrint
 TClass class::TkwProcessFilesWithMask
@@ -2493,6 +2488,7 @@ TkwPopScriptEngineAsKeywordFinder
 TkwPopScriptEngineCascadeDict
 TkwPopScriptEngineCurrentCompilingDictionary
 TkwPopScriptEngineDisableForHelp
+TkwPopValueTypesAccepts
 TkwPopValueTypesAcceptsValue
 TkwPopValueTypesAdd
 TkwPopValueTypesCompare
@@ -2541,6 +2537,7 @@ TkwPopWordPublicateInMainDictionary
 TkwPopWordRedefines
 TkwPopWordSetProducer
 TkwPopWordSetValue
+TkwPopWordSetValuePrim
 TkwPopWordSourcePointString
 TkwPrint
 TkwProcessFilesWithMask
@@ -2723,6 +2720,7 @@ TtfwTypeInfoListPrim
 TtfwTypeModifier
 TtfwValueType
 TtfwValueTypes
+TtfwValueTypesAccepts
 TtfwWord
 TtfwWordInfo
 TtfwWordModifier
@@ -2834,6 +2832,8 @@ BOOLEAN ДА
 если
 Если
 BOOLEAN OPERATOR : И
+ Documentation:
+  Двусторонний, а не обратный польский &&
  BOOLEAN OPERATOR :: IN : aFirst
  ^ OPERATOR :: IN : aSecond
  BOOLEAN OPERATOR :: AND : Result
@@ -2982,6 +2982,7 @@ VOID pop:Word:PublicateInMainDictionary
 TtfwWord pop:Word:Redefines
 VOID pop:Word:SetProducer
 VOID pop:Word:SetValue
+VOID pop:Word:SetValuePrim
 STRING pop:Word:SourcePointString
 Dictionary: axiom:KeyWord
 TtfwDictionary pop:KeyWord:Dictionary
@@ -3101,7 +3102,13 @@ PRIVATE VOID OPERATOR : private:ERROR
  OPERATOR :: IN : aMsg
 ; // private:ERROR
 Dictionary: axiom:ValueTypes
+TtfwValueTypesAccepts pop:ValueTypes:Accepts
 BOOLEAN pop:ValueTypes:AcceptsValue
+INTEGER FUNCTION : pop:ValueTypes:AcceptsValueTypes
+ TtfwValueTypes OPERATOR :: IN : aTL
+ TtfwValueTypes OPERATOR :: IN : aTR
+ INTEGER FUNCTION :: pop:ValueTypes:AcceptsValueTypes : Result
+; // pop:ValueTypes:AcceptsValueTypes
 TtfwValueTypes pop:ValueTypes:Add
 INTEGER pop:ValueTypes:Compare
 Struct pop:ValueTypes:DefaultValue
@@ -3109,6 +3116,29 @@ BOOLEAN pop:ValueTypes:EQ
 BOOLEAN pop:ValueTypes:Has
 TtfwValueTypes pop:ValueTypes:MakeCustomName
 STRING pop:ValueTypes:Name
+Dictionary: axiom:WordInfo
+BOOLEAN pop:WordInfo:AcceptsValue
+TtfwAccessType pop:WordInfo:AccessType
+INTEGER pop:WordInfo:Compare
+BOOLEAN pop:WordInfo:Empty
+BOOLEAN pop:WordInfo:HasAccessType
+BOOLEAN pop:WordInfo:HasLinkType
+BOOLEAN pop:WordInfo:HasValueType
+BOOLEAN pop:WordInfo:HasWordModifier
+TtfwWordInfo pop:WordInfo:IncludeAccesType
+TtfwWordInfo pop:WordInfo:IncludeLinkType
+TtfwWordInfo pop:WordInfo:IncludeModifier
+TtfwWordInfo pop:WordInfo:IncludeTypeModifier
+TtfwLinkType pop:WordInfo:LinkType
+STRING pop:WordInfo:ToString
+STRING pop:WordInfo:TypeName
+TtfwValueTypes pop:WordInfo:ValueTypes
+Dictionary: axiom:TtfwValueTypesAccepts
+TtfwValueTypesAccepts TtfwValueTypesAccepts::tfw_vtaMaybe
+TtfwValueTypesAccepts TtfwValueTypesAccepts::tfw_vtaNo
+TtfwValueTypesAccepts TtfwValueTypesAccepts::tfw_vtaYes
+TtfwValueTypesAccepts TtfwValueTypesAccepts:NameToValue
+STRING TtfwValueTypesAccepts:ValueToName
 Dictionary: axiom:Tl3TokenType
 Tl3TokenType Tl3TokenType::l3_ttBOF
 Tl3TokenType Tl3TokenType::l3_ttComment
@@ -3198,6 +3228,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.ms.dic
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3247,6 +3279,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.ms.dic
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3298,6 +3332,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3341,6 +3377,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3380,6 +3418,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3416,6 +3456,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3489,6 +3531,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3534,6 +3578,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dic
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3572,6 +3618,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbo
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3620,6 +3668,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3679,6 +3729,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3743,6 +3795,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3802,6 +3856,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3839,6 +3895,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3876,6 +3934,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3939,6 +3999,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -3977,6 +4039,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -4016,6 +4080,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -4055,6 +4121,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.di
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -4091,6 +4159,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -4136,6 +4206,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.di
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
@@ -4232,6 +4304,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.d
   axiom:TtfwLinkType
   axiom:private
   axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
   axiom:Tl3TokenType
   axiom:std
   axiom:KeywordFinder
