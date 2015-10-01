@@ -16,6 +16,7 @@ MACRO CompileTime-VAR
  begin
   l_ValueTypes pop:ValueTypes:Name >>> l_ValueTypesName
   l_ValueTypesName ' ' string:Pos -1 == ?ASSURE 'ћножественные типы дл€ переменных "времени компил€ции" пока не поддерживаютс€'
+  l_ValueTypesName Ctx:Parser:PushSymbol
  end
 
  axiom:PushSymbol VAR
