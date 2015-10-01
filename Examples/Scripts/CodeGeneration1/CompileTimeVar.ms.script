@@ -1,6 +1,8 @@
 MACRO CompileTime-VAR
  Literal IN aName
  %SUMMARY 'ќбъ€вл€ет переменную "времени компил€ции" и инициализирует еЄ' ;
+ axiom:PushSymbol VAR
+ aName |N Ctx:Parser:PushString
 ; // CompileTime-VAR
 
 USES
@@ -8,6 +10,8 @@ USES
 ;
 
 Test&Dump CompileTimeVarTest
+ CompileTime-VAR A
+ CompileTime-VAR B
 ; // CompileTimeVarTest
 
 CompileTimeVarTest
