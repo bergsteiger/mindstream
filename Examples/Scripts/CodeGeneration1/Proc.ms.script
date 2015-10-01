@@ -14,14 +14,16 @@ MACRO proc
 
  g_CurrentProc '' == ?ASSURE 'Вложенные процедуры пока не поддерживаются'
 
+ aName |N >>> g_CurrentProc
  axiom:PushSymbol PROCEDURE
- aName |N Ctx:Parser:PushString
+ g_CurrentProc Ctx:Parser:PushString
 ; // proc
 
 MACRO proc-end
  %SUMMARY 'Завершает определение процедуры с ПОЛНЫМ контролем типов' ;
 
  axiom:PushSymbol ;
+ '' >>> g_CurrentProc
 ; // proc-end
 
 USES
