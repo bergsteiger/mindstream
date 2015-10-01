@@ -21,7 +21,7 @@ STACK_CHANGING_MACRO proc
  axiom:PushSymbol :
  g_CurrentProc Ctx:Parser:PushString
 
- axiom:PushSymbol VAR
+ axiom:PushSymbol IN
  'anX' Ctx:Parser:PushSymbol
 
 /*{ aParams MembersIterator ==> ( 
