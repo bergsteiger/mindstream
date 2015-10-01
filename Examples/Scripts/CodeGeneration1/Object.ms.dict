@@ -272,6 +272,7 @@ MACRO RunCompileProps&Methods
 
 MACRO class-end
  axiom:PushSymbol RunCompileProps&Methods
+ g_CurrentClass := ''
 ; // class-end
 
 INTEGER type FieldOffset
