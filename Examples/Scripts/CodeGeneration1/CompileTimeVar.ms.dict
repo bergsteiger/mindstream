@@ -18,6 +18,10 @@ STACK_CHANGING_MACRO CompileTime-VAR
   l_ValueTypesName Ctx:Parser:PushSymbol
   TtfwValueTypes VAR l_ValueValueTypes
   aValue pop:Word:GetRef pop:Word:Info pop:WordInfo:ValueTypes >>> l_ValueValueTypes
+  if ( l_ValueValueTypes IsNil ! ) then
+  begin
+   l_ValueValueTypes l_ValueTypes pop:ValueTypes:Accepts .
+  end 
  end
 
  axiom:PushSymbol VAR
