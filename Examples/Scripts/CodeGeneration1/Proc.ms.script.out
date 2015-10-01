@@ -1,8 +1,8 @@
 VOID TestWithDump ProcTest
- VOID OPERATOR A
- ; // VOID OPERATOR A
+ : A
+  VAR anX
+ ; // : A
  
- VAR anX
  ProcTest
  DumpElement
 ; // VOID TestWithDump ProcTest
