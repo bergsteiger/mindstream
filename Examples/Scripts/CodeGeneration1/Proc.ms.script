@@ -11,10 +11,15 @@ MACRO proc
  %SUMMARY 'Определяет процедуру с ПОЛНЫМ контролем типов' ;
 
  g_CurrentProc '' == ?ASSURE 'Вложенные процедуры пока не поддерживаются'
+
+ axiom:PushSymbol PROCEDURE
+ aName |N Ctx:Parser:PushString
 ; // proc
 
 MACRO proc-end
  %SUMMARY 'Завершает определение процедуры с ПОЛНЫМ контролем типов' ;
+
+ axiom:PushSymbol ;
 ; // proc-end
 
 USES
