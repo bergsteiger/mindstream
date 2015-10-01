@@ -1,6 +1,22 @@
 MACRO CompileTime-VAR
  Literal IN aName
  %SUMMARY 'ќбъ€вл€ет переменную "времени компил€ции" и инициализирует еЄ' ;
+
+ TtfwValueTypes VAR l_ValueTypes
+ Ctx:ValueTypes >>> l_ValueTypes
+ Ctx:ClearTypeInfo
+
+ STRING VAR l_ValueTypesName
+ 
+ if ( l_ValueTypes IsNil ) then
+ begin
+  '' >>> l_ValueTypesName
+ end // l_ValueTypes IsNil
+ else
+ begin
+  l_ValueTypes pop:ValueTypes:Name >>> l_ValueTypesName
+ end
+
  axiom:PushSymbol VAR
  aName |N Ctx:Parser:PushString
 ; // CompileTime-VAR
