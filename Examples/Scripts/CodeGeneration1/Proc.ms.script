@@ -41,6 +41,7 @@ USES
 Test&Dump ProcTest
 
 proc A ( IN aValue )
+ IN aValue
  //aValue .
 proc-end // A
 
