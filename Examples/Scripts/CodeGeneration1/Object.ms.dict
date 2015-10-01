@@ -113,25 +113,13 @@ VOID operator define_member
 
 INTEGER CompileTime-VAR g_ClassFieldOffset 0
 
-ARRAY VAR g_CurrentClassMembers
-[EXECUTE]
- ( g_CurrentClassMembers := [ ] )
-( g_CurrentClassMembers := [ ] )
+ARRAY CompileTime-VAR g_CurrentClassMembers [ ]
 
-ARRAY VAR g_CurrentClassProperties
-[EXECUTE]
- ( g_CurrentClassProperties := [ ] )
-( g_CurrentClassProperties := [ ] )
+ARRAY CompileTime-VAR g_CurrentClassProperties [ ]
 
-ARRAY VAR g_CurrentClassMethods
-[EXECUTE]
- ( g_CurrentClassMethods := [ ] )
-( g_CurrentClassMethods := [ ] )
+ARRAY CompileTime-VAR g_CurrentClassMethods [ ]
 
-ARRAY VAR g_CurrentClassConstructors
-[EXECUTE]
- ( g_CurrentClassConstructors := [ ] )
-( g_CurrentClassConstructors := [ ] )
+ARRAY CompileTime-VAR g_CurrentClassConstructors [ ]
 
 MACRO member
  Literal IN aName
