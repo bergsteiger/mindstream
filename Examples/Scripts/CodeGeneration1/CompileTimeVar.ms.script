@@ -1,4 +1,4 @@
-MACRO CompileTime-VAR
+STACK_CHANGING_MACRO CompileTime-VAR
   Literal IN aName
   ^ IN aValue
 
@@ -25,6 +25,8 @@ MACRO CompileTime-VAR
  aName |N Ctx:Parser:PushString
  axiom:PushSymbol [EXECUTE]
  axiom:PushSymbol (
+ aValue DO
+ axiom:PushSymbol .
  axiom:PushSymbol )
 ; // CompileTime-VAR
 
