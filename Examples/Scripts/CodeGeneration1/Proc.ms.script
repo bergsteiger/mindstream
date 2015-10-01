@@ -18,11 +18,13 @@ MACRO proc
  axiom:PushSymbol PROCEDURE
  g_CurrentProc Ctx:Parser:PushString
 
- aParams MembersIterator ==> ( 
+ Ctx:ClearTypeInfo
+
+/*{ aParams MembersIterator ==> ( 
   TtfwWord IN aParam 
-  aParam pop:Word:Producer pop:Word:Name . 
-  aParam pop:Word:Name . 
- )
+  aParam pop:Word:Producer pop:Word:Name Ctx:Parser:PushSymbol 
+  aParam pop:Word:Name Ctx:Parser:PushSymbol  
+ )}*/
 ; // proc
 
 MACRO proc-end
@@ -39,10 +41,10 @@ USES
 Test&Dump ProcTest
 
 proc A ( IN aValue )
- 'Hello world' .
+ //aValue .
 proc-end // A
 
-A
+//'Hello world' A
 
 ; // ProcTest
 

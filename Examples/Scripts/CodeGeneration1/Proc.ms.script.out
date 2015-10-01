@@ -1,14 +1,8 @@
-IN
-aValue
 VOID TestWithDump ProcTest
  VOID PROCEDURE A
-  'Hello world'
-  .
  ; // VOID PROCEDURE A
  
  ProcTest
  DumpElement
- A
 ; // VOID TestWithDump ProcTest
 
-Hello world
