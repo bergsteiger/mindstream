@@ -19,7 +19,8 @@ STACK_CHANGING_MACRO proc
  axiom:PushSymbol PROCEDURE
  g_CurrentProc Ctx:Parser:PushString
 
- Ctx:ClearTypeInfo
+ axiom:PushSymbol VAR
+ 'anX' Ctx:Parser:PushSymbol
 
 /*{ aParams MembersIterator ==> ( 
   TtfwWord IN aParam 
