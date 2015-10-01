@@ -16,7 +16,8 @@ STACK_CHANGING_MACRO CompileTime-VAR
   l_ValueTypes pop:ValueTypes:Name >>> l_ValueTypesName
   l_ValueTypesName ' ' string:Pos -1 == ?ASSURE 'ћножественные типы дл€ переменных "времени компил€ции" пока не поддерживаютс€'
   l_ValueTypesName Ctx:Parser:PushSymbol
-  //aValue pop:Word:GetRef pop:Word:Info pop:WordInfo:ValueTypes Print
+  TtfwValueTypes VAR l_ValueValueTypes
+  aValue pop:Word:GetRef pop:Word:Info pop:WordInfo:ValueTypes >>> l_ValueValueTypes
  end
 
  axiom:PushSymbol VAR
