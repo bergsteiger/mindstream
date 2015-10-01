@@ -8,6 +8,8 @@ STRING CompileTime-VAR g_CurrentProc ''
 
 MACRO proc
   Literal IN aName
+  ^ IN aParams
+
  %SUMMARY 'Определяет процедуру с ПОЛНЫМ контролем типов' ;
 
  g_CurrentProc '' == ?ASSURE 'Вложенные процедуры пока не поддерживаются'
@@ -28,7 +30,7 @@ USES
 
 Test&Dump ProcTest
 
-proc A
+proc A ( )
  'Hello world' .
 proc-end // A
 
