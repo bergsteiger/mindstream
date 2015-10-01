@@ -1,7 +1,7 @@
 VOID TestWithDump ProcTest
- : A
+ VOID : A
   VAR anX
- ; // : A
+ ; // VOID : A
  
  ProcTest
  DumpElement
