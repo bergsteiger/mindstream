@@ -10,8 +10,8 @@ USES
 ;
 
 Test&Dump CompileTimeVarTest
- CompileTime-VAR A
- CompileTime-VAR B
+ STRING CompileTime-VAR A
+ ARRAY CompileTime-VAR B
 ; // CompileTimeVarTest
 
 CompileTimeVarTest
