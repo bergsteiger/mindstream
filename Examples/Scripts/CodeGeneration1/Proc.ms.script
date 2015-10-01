@@ -1,10 +1,20 @@
 PROGRAM Proc.ms.script
 
+MACRO proc
+; // proc
+
+MACRO proc-end
+; // proc-end
+
 USES
  Testing.ms.dict
 ;
 
 Test&Dump ProcTest
+
+proc
+proc-end
+
 ; // ProcTest
 
 ProcTest
