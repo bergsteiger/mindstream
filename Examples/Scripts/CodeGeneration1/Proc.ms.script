@@ -18,7 +18,7 @@ MACRO proc
  axiom:PushSymbol PROCEDURE
  g_CurrentProc Ctx:Parser:PushString
 
- aParams MembersIterator ==> .
+ aParams MembersIterator ==> ( TtfwWord IN aParam aParam . )
 ; // proc
 
 MACRO proc-end
