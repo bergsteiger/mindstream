@@ -312,7 +312,7 @@ VOID Test CodeGen
     [
     ]
     Result
-    pop:Word:SetValue
+    pop:Word:SetValuePrim
    )
   else
    (
@@ -337,7 +337,7 @@ VOID Test CodeGen
       [
       ]
       Result
-      pop:Word:SetValue
+      pop:Word:SetValuePrim
      )
     else
      (
@@ -5494,7 +5494,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : method
  ^L OPERATOR :: IN : aName
 ; // method
 IMMEDIATE VOID OPERATOR :: MACRO : new[
-IMMEDIATE VOID OPERATOR : Object
+IMMEDIATE VOID OPERATOR :: TYPE : Object
 TtfwWord OPERATOR :: MACRO :: readonly : Object:class
  TtfwWord OPERATOR :: MACRO :: readonly :: Object:class : Result
  Object OPERATOR :: IN : Self

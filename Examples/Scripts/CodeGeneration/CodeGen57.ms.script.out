@@ -662,7 +662,7 @@ VOID Test CodeGen
   .pas
  ]
  Generators
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  [
   @
   Project1
@@ -670,7 +670,7 @@ VOID Test CodeGen
   Project2
  ]
  Projects
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Project1 .CallGen
  .dump
  Project1 .CallGen

@@ -982,6 +982,7 @@
 ..\..\Examples\Scripts\CodeGeneration\CodeGen69\Project2.pas
 ..\..\Examples\Scripts\CodeGeneration\CodeGen69\Project3.pas
 ..\..\Examples\Scripts\CodeGeneration1\CodeGen69.ms.script
+..\..\Examples\Scripts\CodeGeneration1\CompileTimeVar.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\Filter.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\Inherits.ms.script
@@ -990,6 +991,7 @@
 ..\..\Examples\Scripts\CodeGeneration1\Map.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\Object.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\Point96.ms.script
+..\..\Examples\Scripts\CodeGeneration1\Proc.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\SaveVarAndDo.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\Slice.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\String.ms.script
@@ -999,6 +1001,7 @@
 ..\..\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\classRelations.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
+..\..\Examples\Scripts\CodeGeneration1\CompileTimeVar.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\core.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\Debug.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
@@ -1041,6 +1044,8 @@
 ..\..\Examples\Scripts\CodeGeneration1\CodeGen69.ms.script.co
 ..\..\Examples\Scripts\CodeGeneration1\CommonLang.ms.model.co
 ..\..\Examples\Scripts\CodeGeneration1\CommonLang.ms.tpl.co
+..\..\Examples\Scripts\CodeGeneration1\CompileTimeVar.ms.dict.co
+..\..\Examples\Scripts\CodeGeneration1\CompileTimeVar.ms.script.co
 ..\..\Examples\Scripts\CodeGeneration1\Concrete.ms.model.co
 ..\..\Examples\Scripts\CodeGeneration1\core.ms.dict.co
 ..\..\Examples\Scripts\CodeGeneration1\Debug.ms.dict.co
@@ -1075,6 +1080,7 @@
 ..\..\Examples\Scripts\CodeGeneration1\Object.ms.script.co
 ..\..\Examples\Scripts\CodeGeneration1\params.ms.dict.co
 ..\..\Examples\Scripts\CodeGeneration1\Point96.ms.script.co
+..\..\Examples\Scripts\CodeGeneration1\Proc.ms.script.co
 ..\..\Examples\Scripts\CodeGeneration1\RefDeepest.ms.dict.co
 ..\..\Examples\Scripts\CodeGeneration1\reverted.ms.dict.co
 ..\..\Examples\Scripts\CodeGeneration1\SaveVarAndDo.ms.dict.co
@@ -5833,6 +5839,7 @@
 ..\Scripts\CodeGeneration\CodeGen69\Project2.pas
 ..\Scripts\CodeGeneration\CodeGen69\Project3.pas
 ..\Scripts\CodeGeneration1\CodeGen69.ms.script
+..\Scripts\CodeGeneration1\CompileTimeVar.ms.script
 ..\Scripts\CodeGeneration1\DogAndBracket.ms.script
 ..\Scripts\CodeGeneration1\Filter.ms.script
 ..\Scripts\CodeGeneration1\Inherits.ms.script
@@ -5841,6 +5848,7 @@
 ..\Scripts\CodeGeneration1\Map.ms.script
 ..\Scripts\CodeGeneration1\Object.ms.script
 ..\Scripts\CodeGeneration1\Point96.ms.script
+..\Scripts\CodeGeneration1\Proc.ms.script
 ..\Scripts\CodeGeneration1\SaveVarAndDo.ms.script
 ..\Scripts\CodeGeneration1\Slice.ms.script
 ..\Scripts\CodeGeneration1\String.ms.script
@@ -5850,6 +5858,7 @@
 ..\Scripts\CodeGeneration1\axiom_push.ms.dict
 ..\Scripts\CodeGeneration1\classRelations.ms.dict
 ..\Scripts\CodeGeneration1\CodeDump.ms.dict
+..\Scripts\CodeGeneration1\CompileTimeVar.ms.dict
 ..\Scripts\CodeGeneration1\core.ms.dict
 ..\Scripts\CodeGeneration1\Debug.ms.dict
 ..\Scripts\CodeGeneration1\Documentation.ms.dict
@@ -5892,6 +5901,8 @@
 ..\Scripts\CodeGeneration1\CodeGen69.ms.script.co
 ..\Scripts\CodeGeneration1\CommonLang.ms.model.co
 ..\Scripts\CodeGeneration1\CommonLang.ms.tpl.co
+..\Scripts\CodeGeneration1\CompileTimeVar.ms.dict.co
+..\Scripts\CodeGeneration1\CompileTimeVar.ms.script.co
 ..\Scripts\CodeGeneration1\Concrete.ms.model.co
 ..\Scripts\CodeGeneration1\core.ms.dict.co
 ..\Scripts\CodeGeneration1\Debug.ms.dict.co
@@ -5926,6 +5937,7 @@
 ..\Scripts\CodeGeneration1\Object.ms.script.co
 ..\Scripts\CodeGeneration1\params.ms.dict.co
 ..\Scripts\CodeGeneration1\Point96.ms.script.co
+..\Scripts\CodeGeneration1\Proc.ms.script.co
 ..\Scripts\CodeGeneration1\RefDeepest.ms.dict.co
 ..\Scripts\CodeGeneration1\reverted.ms.dict.co
 ..\Scripts\CodeGeneration1\SaveVarAndDo.ms.dict.co
@@ -7249,6 +7261,7 @@
 .\CodeGeneration\CodeGen69\Project2.pas
 .\CodeGeneration\CodeGen69\Project3.pas
 .\CodeGeneration1\CodeGen69.ms.script
+.\CodeGeneration1\CompileTimeVar.ms.script
 .\CodeGeneration1\DogAndBracket.ms.script
 .\CodeGeneration1\Filter.ms.script
 .\CodeGeneration1\Inherits.ms.script
@@ -7257,6 +7270,7 @@
 .\CodeGeneration1\Map.ms.script
 .\CodeGeneration1\Object.ms.script
 .\CodeGeneration1\Point96.ms.script
+.\CodeGeneration1\Proc.ms.script
 .\CodeGeneration1\SaveVarAndDo.ms.script
 .\CodeGeneration1\Slice.ms.script
 .\CodeGeneration1\String.ms.script
@@ -7266,6 +7280,7 @@
 .\CodeGeneration1\axiom_push.ms.dict
 .\CodeGeneration1\classRelations.ms.dict
 .\CodeGeneration1\CodeDump.ms.dict
+.\CodeGeneration1\CompileTimeVar.ms.dict
 .\CodeGeneration1\core.ms.dict
 .\CodeGeneration1\Debug.ms.dict
 .\CodeGeneration1\Documentation.ms.dict
@@ -7308,6 +7323,8 @@
 .\CodeGeneration1\CodeGen69.ms.script.co
 .\CodeGeneration1\CommonLang.ms.model.co
 .\CodeGeneration1\CommonLang.ms.tpl.co
+.\CodeGeneration1\CompileTimeVar.ms.dict.co
+.\CodeGeneration1\CompileTimeVar.ms.script.co
 .\CodeGeneration1\Concrete.ms.model.co
 .\CodeGeneration1\core.ms.dict.co
 .\CodeGeneration1\Debug.ms.dict.co
@@ -7342,6 +7359,7 @@
 .\CodeGeneration1\Object.ms.script.co
 .\CodeGeneration1\params.ms.dict.co
 .\CodeGeneration1\Point96.ms.script.co
+.\CodeGeneration1\Proc.ms.script.co
 .\CodeGeneration1\RefDeepest.ms.dict.co
 .\CodeGeneration1\reverted.ms.dict.co
 .\CodeGeneration1\SaveVarAndDo.ms.dict.co

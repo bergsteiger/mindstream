@@ -827,7 +827,7 @@ VOID Test CodeGen
   .c++
  ]
  Generators
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  [
   @
   Project1
@@ -837,7 +837,7 @@ VOID Test CodeGen
   Project3
  ]
  Projects
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Projects
  Generators
  CallGens

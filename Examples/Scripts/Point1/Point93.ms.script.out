@@ -27,7 +27,7 @@ VOID Test PointTest
     [
     ]
     Result
-    pop:Word:SetValue
+    pop:Word:SetValuePrim
    )
   else
    (
@@ -100,7 +100,7 @@ VOID Test PointTest
   [
   ]
   g_CurrentClassMembers
-  pop:Word:SetValue
+  pop:Word:SetValuePrim
   0
   g_ClassFieldOffset
   pop:Word:SetValuePrim
@@ -228,7 +228,7 @@ VOID Test PointTest
     [
     ]
     Result
-    pop:Word:SetValue
+    pop:Word:SetValuePrim
    )
   else
    (
@@ -250,7 +250,7 @@ VOID Test PointTest
       [
       ]
       Result
-      pop:Word:SetValue
+      pop:Word:SetValuePrim
      )
     else
      (
@@ -454,10 +454,10 @@ VOID Test PointTest
  ; // IMMEDIATE VOID OPERATOR new[
  
  Object VAR O1
- IMMEDIATE VOID OPERATOR Object
+ IMMEDIATE VOID TYPE Object
   TtfwValueTypes
   Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID OPERATOR Object
+ ; // IMMEDIATE VOID TYPE Object
  
  TtfwWord readonly Object:class
   Object IN Self
@@ -498,10 +498,10 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE PixelList
  
- IMMEDIATE VOID OPERATOR Point
+ IMMEDIATE VOID TYPE Point
   TtfwValueTypes
   Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID OPERATOR Point
+ ; // IMMEDIATE VOID TYPE Point
  
  Point method Point:-
   ^ IN _aPoint
@@ -748,7 +748,7 @@ VOID Test PointTest
   [
   ]
   g_CurrentClassMembers
-  pop:Word:SetValue
+  pop:Word:SetValuePrim
  )
  0
  g_ClassFieldOffset

@@ -50,7 +50,7 @@ VOID Test ListTest
    WHILEDO
   ]
   Result
-  pop:Word:SetValue
+  pop:Word:SetValuePrim
  ; // ARRAY FUNCTION LIST
  
  A :: 'B' :: 'C' :: 'D' |^@

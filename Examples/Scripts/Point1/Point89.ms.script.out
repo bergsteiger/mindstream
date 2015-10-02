@@ -156,7 +156,7 @@ VOID Test PointTest
     [
     ]
     Result
-    pop:Word:SetValue
+    pop:Word:SetValuePrim
    )
   else
    (
@@ -178,7 +178,7 @@ VOID Test PointTest
       [
       ]
       Result
-      pop:Word:SetValue
+      pop:Word:SetValuePrim
      )
     else
      (
@@ -651,7 +651,7 @@ VOID Test PointTest
   [
   ]
   g_CurrentClassMembers
-  pop:Word:SetValue
+  pop:Word:SetValuePrim
  )
  PointTest
  DumpElement
