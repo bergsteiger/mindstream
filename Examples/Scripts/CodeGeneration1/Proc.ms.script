@@ -26,15 +26,16 @@ MACRO proc
   aParam pop:Word:Name Ctx:Parser:PushSymbol  
  )
 
- axiom:PushSymbol VOID
- axiom:PushSymbol :
- '_' g_CurrentProc Cat Ctx:Parser:PushSymbol
- axiom:PushSymbol ;
 ; // proc
 
 MACRO proc-end
  %SUMMARY 'Завершает определение процедуры с ПОЛНЫМ контролем типов' ;
 
+ axiom:PushSymbol ;
+
+ axiom:PushSymbol VOID
+ axiom:PushSymbol :
+ '_' g_CurrentProc Cat Ctx:Parser:PushSymbol
  axiom:PushSymbol ;
  '' >>> g_CurrentProc
 ; // proc-end
