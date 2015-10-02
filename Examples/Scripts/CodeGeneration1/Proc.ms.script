@@ -25,6 +25,11 @@ MACRO proc
   aParam pop:Word:Producer pop:Word:Name Ctx:Parser:PushSymbol 
   aParam pop:Word:Name Ctx:Parser:PushSymbol  
  )
+
+ axiom:PushSymbol VOID
+ axiom:PushSymbol :
+ '_' g_CurrentProc Cat Ctx:Parser:PushSymbol
+ axiom:PushSymbol ;
 ; // proc
 
 MACRO proc-end
