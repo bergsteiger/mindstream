@@ -19,7 +19,7 @@ VOID TestWithDump FilterTest
    )
   then
    (
-    [
+    ARRAY [
      INTEGER VAR l_SL
      '[ '
      StackLevel
@@ -88,7 +88,7 @@ VOID TestWithDump FilterTest
  
  FilterTest
  DumpElement
- [
+ ARRAY [
   1
   2
   3
@@ -106,7 +106,7 @@ VOID TestWithDump FilterTest
  .
  SWAP
  Array:Iterate
- [
+ ARRAY [
   1
   2
   3
@@ -122,7 +122,7 @@ VOID TestWithDump FilterTest
  SWAP
  Array:Filter
  .
- [
+ ARRAY [
   1
   10
   2
@@ -162,7 +162,7 @@ VOID TestWithDump FilterTest
  )
  SWAP
  Array:Iterate
- [
+ ARRAY [
   1
   10
   2
@@ -180,13 +180,13 @@ VOID TestWithDump FilterTest
  Array:Filter
  ToPrintableEx
  .
- [
+ ARRAY [
   1
   2
  ]
  ToPrintableEx
  .
- [
+ ARRAY [
   1
   10
   2
@@ -208,7 +208,7 @@ VOID TestWithDump FilterTest
  Array:Filter
  ToPrintableEx
  .
- [
+ ARRAY [
   1
   10
   2
@@ -225,7 +225,7 @@ VOID TestWithDump FilterTest
  SWAP
  Array:Filter
  .
- [
+ ARRAY [
   1
   10
   2
@@ -259,7 +259,7 @@ VOID TestWithDump FilterTest
  Array:Filter
  ToPrintableEx
  .
- [
+ ARRAY [
   1
   10
   2

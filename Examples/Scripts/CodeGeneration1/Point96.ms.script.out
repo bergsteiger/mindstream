@@ -101,10 +101,10 @@ VOID TestWithDump PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE PixelList
  
- IMMEDIATE VOID OPERATOR Point
+ IMMEDIATE VOID TYPE Point
   TtfwValueTypes
   Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID OPERATOR Point
+ ; // IMMEDIATE VOID TYPE Point
  
  Point method Point:-
   ^ IN _aPoint
@@ -145,7 +145,7 @@ VOID TestWithDump PointTest
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aY
   
-  [
+  ARRAY [
    @
    _:Point
    Pixel (
@@ -239,7 +239,7 @@ VOID TestWithDump PointTest
  ; // Point method Point:Neg
  
  Object constructor Object:new
-  [
+  ARRAY [
    @
    _:Object
   ]
@@ -281,7 +281,7 @@ VOID TestWithDump PointTest
  
  REDIFINITION OVERRIDE STRING method Point:ToPrintable
   Point IN Self
-  [
+  ARRAY [
    '( '
    'X: '
    Self
@@ -316,7 +316,7 @@ VOID TestWithDump PointTest
   ; // IMMEDIATE VOID OPERATOR aPoint
   
   ARRAY VAR Points
-  [
+  ARRAY [
    (
     _aPoint |^
    )
@@ -349,10 +349,10 @@ VOID TestWithDump PointTest
  
  Rectangle VAR R1
  Rectangle VAR R2
- IMMEDIATE VOID OPERATOR Rectangle
+ IMMEDIATE VOID TYPE Rectangle
   TtfwValueTypes
   Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID OPERATOR Rectangle
+ ; // IMMEDIATE VOID TYPE Rectangle
  
  Rectangle constructor Rectangle::
   ^ IN _aBottomRight
@@ -369,7 +369,7 @@ VOID TestWithDump PointTest
    MangledNamePusher
   ; // IMMEDIATE VOID OPERATOR aTopLeft
   
-  [
+  ARRAY [
    @
    _:Rectangle
    Point (
@@ -411,7 +411,7 @@ VOID TestWithDump PointTest
  ; // STRING readonly Object:ClassName
  
  Object constructor Object:new
-  [
+  ARRAY [
    @
    _:Object
   ]
@@ -437,7 +437,7 @@ VOID TestWithDump PointTest
  
  REDIFINITION OVERRIDE STRING method Rectangle:ToPrintable
   Rectangle IN Self
-  [
+  ARRAY [
    '( '
    'TopLeft: '
    Self
@@ -526,7 +526,7 @@ VOID TestWithDump PointTest
  pop:Word:SetValuePrim
  O1
  Object:Print
- [
+ ARRAY [
   P1
   P2
   P3
@@ -612,7 +612,7 @@ VOID TestWithDump PointTest
  P7
  R2
  pop:Word:SetValue
- [
+ ARRAY [
   R1
   R2
  ]

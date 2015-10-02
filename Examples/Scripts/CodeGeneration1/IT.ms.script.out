@@ -1,7 +1,7 @@
 VOID TestWithDump ITTest
  ITTest
  DumpElement
- [
+ ARRAY [
   1
   2
   3
@@ -16,7 +16,7 @@ VOID TestWithDump ITTest
  Print
  SWAP
  Array:Iterate
- [
+ ARRAY [
   1
   2
   3

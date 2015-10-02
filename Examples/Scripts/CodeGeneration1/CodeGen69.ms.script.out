@@ -4775,7 +4775,7 @@ STRING FUNCTION : NameAsString
  STRING FUNCTION :: NameAsString : Result
 ; // NameAsString
 IMMEDIATE VOID OPERATOR :: MACRO : new[
-IMMEDIATE VOID OPERATOR : Object
+IMMEDIATE VOID OPERATOR :: TYPE : Object
 ObjectClass OPERATOR :: MACRO :: readonly : Object:class
  ObjectClass OPERATOR :: MACRO :: readonly :: Object:class : Result
  Object OPERATOR :: IN : Self
