@@ -371,7 +371,7 @@ USES
 ;
 
 MACRO |>
-  Object ^@ IN Self
+  ^@ IN Self
   Literal IN aMethod
 
  STRING VAR l_FullMethodName
