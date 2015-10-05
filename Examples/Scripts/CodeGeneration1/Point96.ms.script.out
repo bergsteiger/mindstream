@@ -1,13 +1,4 @@
 VOID TestWithDump PointTest
- IMMEDIATE VOID MACRO .-
- ; // IMMEDIATE VOID MACRO .-
- 
- IMMEDIATE VOID MACRO .+
- ; // IMMEDIATE VOID MACRO .+
- 
- IMMEDIATE VOID MACRO .Neg
- ; // IMMEDIATE VOID MACRO .Neg
- 
  class_impl _:Point
   %CONSTRUCTORS %Constructors
    ':'
@@ -115,7 +106,7 @@ VOID TestWithDump PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Point
  
- Point : Point:-
+ Point method Point:-
   ^ IN _aPoint
   IMMEDIATE VOID OPERATOR aPoint
    'Point'
@@ -137,7 +128,7 @@ VOID TestWithDump PointTest
   )
   Result
   pop:Word:SetValue
- ; // Point : Point:-
+ ; // Point method Point:-
  
  Point constructor Point::
   ^ IN _aX
@@ -168,7 +159,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point constructor Point::
  
- Point : Point:+
+ Point method Point:+
   ^ IN _aPoint
   IMMEDIATE VOID OPERATOR aPoint
    'Point'
@@ -202,7 +193,7 @@ VOID TestWithDump PointTest
   )
   Result
   pop:Word:SetValue
- ; // Point : Point:+
+ ; // Point method Point:+
  
  Point constructor Point:0
   Point::
@@ -230,7 +221,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING readonly Object:ClassName
  
- Point : Point:Neg
+ Point method Point:Neg
   Point IN Self
   Point::
   Neg
@@ -245,7 +236,7 @@ VOID TestWithDump PointTest
   )
   Result
   pop:Word:SetValue
- ; // Point : Point:Neg
+ ; // Point method Point:Neg
  
  Object constructor Object:new
   ARRAY [
@@ -281,14 +272,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point constructor Point:OF
  
- REDIFINITION VOID method Point:Print
+ REDIFINITION OVERRIDE VOID method Point:Print
   Point IN Self
   Self
   Point:ToPrintable
   Print
- ; // REDIFINITION VOID method Point:Print
+ ; // REDIFINITION OVERRIDE VOID method Point:Print
  
- REDIFINITION STRING method Point:ToPrintable
+ REDIFINITION OVERRIDE STRING method Point:ToPrintable
   Point IN Self
   ARRAY [
    '( '
@@ -305,7 +296,7 @@ VOID TestWithDump PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // REDIFINITION STRING method Point:ToPrintable
+ ; // REDIFINITION OVERRIDE STRING method Point:ToPrintable
  
  Pixel readonly Point:X
   Point IN Self
@@ -428,12 +419,12 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Object constructor Object:new
  
- REDIFINITION VOID method Rectangle:Print
+ REDIFINITION OVERRIDE VOID method Rectangle:Print
   Rectangle IN Self
   Self
   Rectangle:ToPrintable
   Print
- ; // REDIFINITION VOID method Rectangle:Print
+ ; // REDIFINITION OVERRIDE VOID method Rectangle:Print
  
  Point readonly Rectangle:TopLeft
   Rectangle IN Self
@@ -444,7 +435,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point readonly Rectangle:TopLeft
  
- REDIFINITION STRING method Rectangle:ToPrintable
+ REDIFINITION OVERRIDE STRING method Rectangle:ToPrintable
   Rectangle IN Self
   ARRAY [
    '( '
@@ -461,7 +452,7 @@ VOID TestWithDump PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // REDIFINITION STRING method Rectangle:ToPrintable
+ ; // REDIFINITION OVERRIDE STRING method Rectangle:ToPrintable
  
  PointTest
  DumpElement
