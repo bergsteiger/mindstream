@@ -300,10 +300,12 @@ PRIVATE VOID operator MakeSelfParam
 MACRO method
 // - метод объекта, пока "фиктивный"
  Literal IN aName
+ STRING VAR l_Name
+ aName |N >>> l_Name
  @SELF Ctx:SetWordProducerForCompiledClass
- aName |N MakeMethodSignature
+ l_Name MakeMethodSignature
  MakeSelfParam
- aName |N array:AddTo g_CurrentClassMethods
+ l_Name array:AddTo g_CurrentClassMethods
 ; // method
 
 MACRO readonly
