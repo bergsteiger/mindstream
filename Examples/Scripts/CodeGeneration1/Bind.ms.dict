@@ -40,7 +40,7 @@ PROCEDURE bind
  //Ctx:ClearTypeInfo
 
  l_Name Msg
- Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary pop:DictionaryEx:FileName Msg
+ Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary pop:DictionaryEx:FileName sysutils:ExtractFileName Msg
 
 /*{ //if ( l_Name IsWordDeclared ) then
  begin
