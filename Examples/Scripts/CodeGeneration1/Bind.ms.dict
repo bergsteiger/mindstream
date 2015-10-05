@@ -37,7 +37,7 @@ PROCEDURE bind
  STRING VAR l_TypeName
  Ctx:WordInfo pop:WordInfo:TypeName >>> l_TypeName
 
- //Ctx:ClearTypeInfo
+ Ctx:ClearTypeInfo
 
  l_Name Msg
  Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary pop:DictionaryEx:FileName sysutils:ExtractFileName Msg
@@ -68,5 +68,5 @@ PROCEDURE bind
 // l_Name Ctx:Parser:PushSymbol
 // axiom:PushSymbol ;
 
- //l_TypeName Ctx:Parser:PushSymbol
+ l_TypeName Ctx:Parser:PushSymbol
 ; // bind
