@@ -24,3 +24,7 @@ MACRO |>
  Self CompileValue
  l_FullMethodName Ctx:Parser:PushSymbol
 ; // |>
+
+PROCEDURE bind
+ STRING IN aName
+; // bind

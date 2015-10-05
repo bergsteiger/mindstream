@@ -4849,6 +4849,9 @@ IMMEDIATE VOID OPERATOR :: MACRO : |>
  TtfwValueTypes OPERATOR :: VAR : l_ValueTypes
  ^@ OPERATOR :: IN : Self
 ; // |>
+VOID OPERATOR :: PROCEDURE : bind
+ STRING OPERATOR :: IN : aName
+; // bind
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
  Uses: 
   axiom:axiom
