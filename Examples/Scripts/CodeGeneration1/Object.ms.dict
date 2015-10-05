@@ -130,10 +130,12 @@ ARRAY CompileTime-VAR g_CurrentClassConstructors [ ]
 
 MACRO member
  Literal IN aName
+ STRING VAR l_Name
+ aName |N >>> l_Name
  Ctx:ClearTypeInfo
- aName |N g_ClassFieldOffset define_member
+ l_Name g_ClassFieldOffset define_member
  Inc g_ClassFieldOffset
- aName |N array:AddTo g_CurrentClassMembers
+ l_Name array:AddTo g_CurrentClassMembers
 ; // member
 
 PRIVATE STRING operator MakeMethodSignaturePrim
@@ -285,10 +287,12 @@ PRIVATE VOID operator MakeMethodSignature
 MACRO constructor
 // - конструктор объектов, пока "фиктивный"
  Literal IN aName
+ STRING VAR l_Name
+ aName |N >>> l_Name
  @SELF Ctx:SetWordProducerForCompiledClass
  g_CurrentClass Ctx:Parser:PushSymbol
- aName |N MakeMethodSignature
- aName |N array:AddTo g_CurrentClassConstructors
+ l_Name MakeMethodSignature
+ l_Name array:AddTo g_CurrentClassConstructors
 ; // constructor
 
 PRIVATE VOID operator MakeSelfParam
@@ -311,10 +315,12 @@ MACRO method
 MACRO readonly
 // - read-only свойство объекта, пока "фиктивное"
  Literal IN aName
+ STRING VAR l_Name
+ aName |N >>> l_Name
  @SELF Ctx:SetWordProducerForCompiledClass
- aName |N MakeMethodSignature
+ l_Name MakeMethodSignature
  MakeSelfParam
- aName |N array:AddTo g_CurrentClassProperties
+ l_Name array:AddTo g_CurrentClassProperties
 ; // readonly
 
 MACRO new[
