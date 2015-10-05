@@ -1,29 +1,11 @@
 UNIT Object.ms.dict
 
 USES
- axiom:WordInfo
+ Bind.ms.dict
 ;
 
-MACRO |>
-  ^@ IN Self
-  Literal IN aMethod
-
- STRING VAR l_FullMethodName
- %SUMMARY 'Вызывает метод aMethod на объекте Self' ;
-
- TtfwValueTypes VAR l_ValueTypes
- Self pop:Word:Info pop:WordInfo:ValueTypes >>> l_ValueTypes
-
- l_ValueTypes IsNil ! ?ASSURE 'Нет типа для вызова метода'
-
- l_ValueTypes pop:ValueTypes:Name >>> l_FullMethodName
- l_FullMethodName ' ' string:Pos -1 == ?ASSURE 'Множественные типы для вызова методов объектов пока не поддерживаются'
-
- [ l_FullMethodName ':' aMethod |N ] strings:Cat >>> l_FullMethodName
-
- Self CompileValue
- l_FullMethodName Ctx:Parser:PushSymbol
-; // |>
+EXPORTS
+ Bind.ms.dict
 
 USES
  core.ms.dict
