@@ -44,6 +44,13 @@ PROCEDURE bind
 
  if ( l_Name IsWordDeclared ) then
  begin
+  TtfwKeyWord VAR l_KeyWord
+  l_Name Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary pop:Dictionary:KeywordByName >>> l_KeyWord
+  if ( l_KeyWord IsNil ! ) then
+  begin
+   l_Name Msg
+   //l_KeyWord pop:KeyWord:Word pop:Word:Parent pop:DictionaryEx:FileName sysutils:ExtractFileName Msg
+  end
  end
  else
  begin
