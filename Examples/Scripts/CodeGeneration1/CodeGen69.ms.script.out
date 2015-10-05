@@ -4785,11 +4785,11 @@ STRING OPERATOR :: MACRO :: readonly : Object:ClassName
 Object OPERATOR :: MACRO :: constructor : Object:new
  Object OPERATOR :: MACRO :: constructor :: Object:new : Result
 ; // Object:new
-VOID OPERATOR :: MACRO :: method : Object:Print
+ABSTRACT VOID OPERATOR :: MACRO :: method : Object:Print
  Object OPERATOR :: IN : Self
 ; // Object:Print
-STRING OPERATOR :: MACRO :: method : Object:ToPrintable
- STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
+ABSTRACT STRING OPERATOR :: MACRO :: method : Object:ToPrintable
+ ABSTRACT STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
  Object OPERATOR :: IN : Self
 ; // Object:ToPrintable
 IMMEDIATE VOID OPERATOR :: TYPE : ObjectClass

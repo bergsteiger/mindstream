@@ -37,29 +37,36 @@ PROCEDURE bind
  STRING VAR l_TypeName
  Ctx:WordInfo pop:WordInfo:TypeName >>> l_TypeName
 
- Ctx:ClearTypeInfo
+ //Ctx:ClearTypeInfo
 
- //if ( l_Name IsWordDeclared ) then
+ l_Name Msg
+ Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary pop:DictionaryEx:FileName Msg
+
+/*{ //if ( l_Name IsWordDeclared ) then
  begin
   TtfwKeyWord VAR l_KeyWord
   l_Name Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary pop:Dictionary:KeywordByName >>> l_KeyWord
   if ( l_KeyWord IsNil ! ) then
   begin
    Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary Msg
-   Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary pop:DictionaryEx:FileName Msg
+   Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary pop:DictionaryEx:FileName sysutils:ExtractFileName Msg
    l_KeyWord Msg
    l_Name Msg
-   l_KeyWord pop:KeyWord:Dictionary pop:DictionaryEx:FileName Msg
-   //if ( l_KeyWord pop:KeyWord:Dictionary Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary == ) then
+   l_KeyWord pop:KeyWord:Dictionary pop:DictionaryEx:FileName sysutils:ExtractFileName Msg
+   if ( l_KeyWord pop:KeyWord:Dictionary pop:DictionaryEx:FileName sysutils:ExtractFileName Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary pop:DictionaryEx:FileName sysutils:ExtractFileName == ) then
    begin
-    //axiom:PushSymbol REDEFINITION
+    axiom:PushSymbol REDEFINITION
    end
   end
- end
+ end}*/
+
+// axiom:PushSymbol :
+// l_Name Ctx:Parser:PushSymbol
+// axiom:PushSymbol ;
 
 // axiom:PushSymbol MACRO
 // l_Name Ctx:Parser:PushSymbol
 // axiom:PushSymbol ;
 
- l_TypeName Ctx:Parser:PushSymbol
+ //l_TypeName Ctx:Parser:PushSymbol
 ; // bind
