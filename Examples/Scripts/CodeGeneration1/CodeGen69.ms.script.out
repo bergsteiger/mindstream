@@ -4785,11 +4785,11 @@ STRING OPERATOR :: MACRO :: readonly : Object:ClassName
 Object OPERATOR :: MACRO :: constructor : Object:new
  Object OPERATOR :: MACRO :: constructor :: Object:new : Result
 ; // Object:new
-ABSTRACT VOID OPERATOR :: MACRO :: method : Object:Print
+VOID OPERATOR :: MACRO :: method : Object:Print
  Object OPERATOR :: IN : Self
 ; // Object:Print
-ABSTRACT STRING OPERATOR :: MACRO :: method : Object:ToPrintable
- ABSTRACT STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
+STRING OPERATOR :: MACRO :: method : Object:ToPrintable
+ STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
  Object OPERATOR :: IN : Self
 ; // Object:ToPrintable
 IMMEDIATE VOID OPERATOR :: TYPE : ObjectClass
@@ -4851,6 +4851,8 @@ IMMEDIATE VOID OPERATOR :: MACRO : |>
 ; // |>
 VOID OPERATOR :: PROCEDURE : bind
  STRING OPERATOR :: IN : aName
+ STRING OPERATOR :: VAR : l_Name
+ STRING OPERATOR :: VAR : l_TypeName
 ; // bind
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
  Uses: 

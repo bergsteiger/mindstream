@@ -25,6 +25,10 @@ MACRO |>
  l_FullMethodName Ctx:Parser:PushSymbol
 ; // |>
 
+USES
+ axiom:KeywordFinder
+;
+
 PROCEDURE bind
  STRING IN aName
  STRING VAR l_Name
@@ -33,12 +37,29 @@ PROCEDURE bind
  STRING VAR l_TypeName
  Ctx:WordInfo pop:WordInfo:TypeName >>> l_TypeName
 
- l_TypeName Msg
-
  Ctx:ClearTypeInfo
- axiom:PushSymbol MACRO
- l_Name Ctx:Parser:PushSymbol
- axiom:PushSymbol ;
+
+ //if ( l_Name IsWordDeclared ) then
+ begin
+  TtfwKeyWord VAR l_KeyWord
+  l_Name Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary pop:Dictionary:KeywordByName >>> l_KeyWord
+  if ( l_KeyWord IsNil ! ) then
+  begin
+   Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary Msg
+   Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary pop:DictionaryEx:FileName Msg
+   l_KeyWord Msg
+   l_Name Msg
+   l_KeyWord pop:KeyWord:Dictionary pop:DictionaryEx:FileName Msg
+   //if ( l_KeyWord pop:KeyWord:Dictionary Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary == ) then
+   begin
+    //axiom:PushSymbol REDEFINITION
+   end
+  end
+ end
+
+// axiom:PushSymbol MACRO
+// l_Name Ctx:Parser:PushSymbol
+// axiom:PushSymbol ;
 
  l_TypeName Ctx:Parser:PushSymbol
 ; // bind
