@@ -42,6 +42,16 @@ PROCEDURE bind
  l_Name Msg
  Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary pop:DictionaryEx:FileName sysutils:ExtractFileName Msg
 
+ if ( l_Name IsWordDeclared ) then
+ begin
+ end
+ else
+ begin
+  axiom:PushSymbol MACRO
+  l_Name Ctx:Parser:PushSymbol
+  axiom:PushSymbol ;
+ end
+
 /*{ //if ( l_Name IsWordDeclared ) then
  begin
   TtfwKeyWord VAR l_KeyWord

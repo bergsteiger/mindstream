@@ -1,4 +1,13 @@
 VOID TestWithDump PointTest
+ IMMEDIATE VOID MACRO .-
+ ; // IMMEDIATE VOID MACRO .-
+ 
+ IMMEDIATE VOID MACRO .+
+ ; // IMMEDIATE VOID MACRO .+
+ 
+ IMMEDIATE VOID MACRO .Neg
+ ; // IMMEDIATE VOID MACRO .Neg
+ 
  class_impl _:Point
   %CONSTRUCTORS %Constructors
    ':'
@@ -106,7 +115,7 @@ VOID TestWithDump PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Point
  
- Point method Point:-
+ Point : Point:-
   ^ IN _aPoint
   IMMEDIATE VOID OPERATOR aPoint
    'Point'
@@ -128,7 +137,7 @@ VOID TestWithDump PointTest
   )
   Result
   pop:Word:SetValue
- ; // Point method Point:-
+ ; // Point : Point:-
  
  Point constructor Point::
   ^ IN _aX
@@ -159,7 +168,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point constructor Point::
  
- Point method Point:+
+ Point : Point:+
   ^ IN _aPoint
   IMMEDIATE VOID OPERATOR aPoint
    'Point'
@@ -193,7 +202,7 @@ VOID TestWithDump PointTest
   )
   Result
   pop:Word:SetValue
- ; // Point method Point:+
+ ; // Point : Point:+
  
  Point constructor Point:0
   Point::
@@ -221,7 +230,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING readonly Object:ClassName
  
- Point method Point:Neg
+ Point : Point:Neg
   Point IN Self
   Point::
   Neg
@@ -236,7 +245,7 @@ VOID TestWithDump PointTest
   )
   Result
   pop:Word:SetValue
- ; // Point method Point:Neg
+ ; // Point : Point:Neg
  
  Object constructor Object:new
   ARRAY [
