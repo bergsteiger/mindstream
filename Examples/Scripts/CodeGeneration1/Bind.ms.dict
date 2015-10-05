@@ -27,4 +27,18 @@ MACRO |>
 
 PROCEDURE bind
  STRING IN aName
+ STRING VAR l_Name
+ '.' aName Cat >>> l_Name
+
+ STRING VAR l_TypeName
+ Ctx:WordInfo pop:WordInfo:TypeName >>> l_TypeName
+
+ l_TypeName Msg
+
+ Ctx:ClearTypeInfo
+ axiom:PushSymbol MACRO
+ l_Name Ctx:Parser:PushSymbol
+ axiom:PushSymbol ;
+
+ l_TypeName Ctx:Parser:PushSymbol
 ; // bind
