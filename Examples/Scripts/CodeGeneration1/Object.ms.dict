@@ -310,6 +310,7 @@ MACRO method
  l_Name MakeMethodSignature
  MakeSelfParam
  l_Name array:AddTo g_CurrentClassMethods
+ l_Name bind
 ; // method
 
 MACRO readonly
