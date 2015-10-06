@@ -72,5 +72,7 @@ PROCEDURE bindInPlace
  
  Ctx:ClearTypeInfo
 
+ aName bind
+
  l_TypeInfo ' ' string:Split:for> Ctx:Parser:PushSymbol
 ; // bindInPlace
