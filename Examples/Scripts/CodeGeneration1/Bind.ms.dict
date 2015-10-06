@@ -41,6 +41,8 @@ PROCEDURE bind
 
  axiom:PushSymbol MACRO
  l_Name Ctx:Parser:PushSymbol
+ //'|>' Ctx:Parser:PushSymbol
+ //aName Ctx:Parser:PushSymbol
  axiom:PushSymbol ;
 
 ; // bind
