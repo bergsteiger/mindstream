@@ -63,7 +63,9 @@ PROCEDURE bind
 ; // bind
 
 STACK_CHANGING_MACRO DefferedSetStereo
- @SELF Ctx:SetWordProducerForCompiledClass
+  TtfwWord IN aStereo
+
+ aStereo Ctx:SetWordProducerForCompiledClass
 ; // DefferedSetStereo
 
 PROCEDURE bindInPlace
