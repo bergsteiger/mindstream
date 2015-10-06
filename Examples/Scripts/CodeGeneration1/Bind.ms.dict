@@ -70,9 +70,6 @@ PROCEDURE bindInPlace
  STRING VAR l_TypeInfo
  Ctx:WordInfo pop:WordInfo:ToString >>> l_TypeInfo
  
- l_TypeInfo Msg
- aName Msg
-
  Ctx:ClearTypeInfo
 
  l_TypeInfo ' ' string:Split:for> Ctx:Parser:PushSymbol
