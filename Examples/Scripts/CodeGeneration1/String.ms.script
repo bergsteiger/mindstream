@@ -3,9 +3,21 @@ USES
  Testing.ms.dict
 ;
 
+PROCEDURE string:Split:for>
+  STRING IN aString
+  STRING IN aSep
+  ^ IN aLambda
+ aString aSep string:Split
+ .
+ >>> aString
+ aString .
+; // string:Split:for>
+
 Test&Dump StringTest
  RunTests.in.array @[ (+)? ?(+) strings:CatSep> any:Cat ]
   %REMARK 'Запускаем тесты к указанным скриптовым словам'
+
+ 'a b c' ' ' string:Split:for> .
 ; // StringTest
 
 StringTest
