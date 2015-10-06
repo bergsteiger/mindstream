@@ -388,7 +388,7 @@ members-end
 ObjectClass readonly class read VMT
 
 STRING readonly ClassName
- Self .class |> Name =: Result
+ Self .class .Name =: Result
 ; // ClassName
 
 constructor new
