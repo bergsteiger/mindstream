@@ -1,4 +1,4 @@
-// string.ms.dict
+UNIT string.ms.dict
 
 USES
  Documentation.ms.dict
@@ -80,3 +80,30 @@ TestsFor strings:CatSep&gt;
 ; // TestsFor strings:CatSep&gt;
  
 WordAlias CatSep&gt; strings:CatSep&gt;
+
+PROCEDURE string:Split:for&gt;
+  STRING IN aString
+  STRING IN aSep
+  ^ IN aLambda
+
+ %SUMMARY 'Разделяет строку aString по разделителю aSep и для каждой части вызывает aLambda' ;
+
+ while ( aString IsNil ! ) 
+ begin
+  aSep string:SplitTo! aString
+  STRING VAR l_Part
+  &gt;&gt;&gt; l_Part
+  if ( l_Part IsNil ! ) then
+  begin
+   l_Part aLambda DO
+  end
+ end
+; // string:Split:for&gt;
+
+TestsFor string:Split:for&gt;
+ Test T1 'a b c' ' ' string:Split:for&gt; Print ;
+ Test T2 'a b  c' ' ' string:Split:for&gt; Print ;
+ Test T3 'abc' ' ' string:Split:for&gt; Print ;
+ Test T4 '' ' ' string:Split:for&gt; Print ;
+ Test T5 ' ' ' ' string:Split:for&gt; Print ;
+; // string:Split:for&gt; 

@@ -1,14 +1,13 @@
+PROGRAM String.ms.script
+
 USES
- Documentation.ms.dict
  string.ms.dict
  Testing.ms.dict
 ;
 
-RunTests (+)?
- %REMARK 'Запускаем "стандартные тесты" для слова (+)?'
-RunTests ?(+)
- %REMARK 'Запускаем "стандартные тесты" для слова ?(+)'
-RunTests strings:CatSep&gt;
- %REMARK 'Запускаем "стандартные тесты" для слова strings:CatSep&gt;'
-RunTests any:Cat
- %REMARK 'Запускаем "стандартные тесты" для слова any:Cat'
+Test&Dump StringTest
+ RunTests.in.array @[ (+)? ?(+) strings:CatSep&gt; any:Cat string:Split:for&gt; ]
+  %REMARK 'Запускаем тесты к указанным скриптовым словам'
+; // StringTest
+
+StringTest
