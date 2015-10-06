@@ -5,7 +5,7 @@ USES
  core.ms.dict
 ;
 
-PROCEDURE DO|>
+PROCEDURE ExpandMethodName
   TtfwWord IN Self
   STRING IN aMethod
 
@@ -25,7 +25,7 @@ PROCEDURE DO|>
 
  Self CompileValue
  l_FullMethodName Ctx:Parser:PushSymbol
-; // DO|>
+; // ExpandMethodName
 
 MACRO |>
   ^@ IN Self
@@ -33,7 +33,7 @@ MACRO |>
 
  %SUMMARY 'Вызывает метод aMethod на объекте Self' ;
 
- Self aMethod |N DO|>
+ Self aMethod |N ExpandMethodName
 
 /*{ STRING VAR l_FullMethodName
  %SUMMARY 'Вызывает метод aMethod на объекте Self' ;
