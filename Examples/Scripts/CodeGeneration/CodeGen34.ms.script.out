@@ -319,7 +319,7 @@ Mouse:RightUp
 mouse:SetCursorPosition
 Mouse:WheelDown
 Mouse:WheelUp
-Dictionary: axiom:object
+Dictionary: axiom:Object
 Dictionary: axiom:ParserEx
 VOID pop:ParserEx:PushInt
 VOID pop:ParserEx:PushString
@@ -1468,6 +1468,7 @@ TClass class::TkwPopDictionaryExUsedDictionaries
 TClass class::TkwPopDictionaryExUseDictionary
 TClass class::TkwPopDictionaryKeywordByName
 TClass class::TkwPopDictionaryKeyWordsIterator
+TClass class::TkwPopDictionaryOwnKeywordByName
 TClass class::TkwPopDictionaryWordsIterator
 TClass class::TkwPopFinderSetToCtx
 TClass class::TkwPopKeyWordDictionary
@@ -1546,6 +1547,7 @@ TClass class::TkwPopWordIsForHelp
 TClass class::TkwPopWordIsImmediate
 TClass class::TkwPopWordIsInParam
 TClass class::TkwPopWordIsVarLike
+TClass class::TkwPopWordKeyWord
 TClass class::TkwPopWordLeftWordRefValuesCount
 TClass class::TkwPopWordMembersIterator
 TClass class::TkwPopWordName
@@ -2175,19 +2177,30 @@ VOID pop:File:WriteLn
 VOID pop:File:WriteStr
 VOID pop:File:WriteWStr
 VOID pop:File:WriteWStrLn
-pop:object:ClassName
-pop:object:GetFloatProp
-pop:object:GetInterfaceProp
-pop:object:GetObjProp
-pop:object:GetOrdProp
-pop:object:GetStrProp
-pop:object:HasProp
-pop:object:Inherits
+STRING pop:object:ClassName
+STRING pop:Object:ClassName
+INTEGER pop:object:GetFloatProp
+INTEGER pop:Object:GetFloatProp
+INTERFACE pop:object:GetInterfaceProp
+INTERFACE pop:Object:GetInterfaceProp
+OBJECT pop:object:GetObjProp
+OBJECT pop:Object:GetObjProp
+INTEGER pop:object:GetOrdProp
+INTEGER pop:Object:GetOrdProp
+STRING pop:object:GetStrProp
+STRING pop:Object:GetStrProp
+BOOLEAN pop:object:HasProp
+BOOLEAN pop:Object:HasProp
+BOOLEAN pop:object:Inherits
+BOOLEAN pop:Object:Inherits
 BOOLEAN pop:object:IsNil
-pop:object:RTTIInfo
-pop:object:SetFloatProp
-pop:object:SetOrdProp
-pop:object:SetStrProp
+STRING pop:Object:RTTIInfo
+VOID pop:object:SetFloatProp
+VOID pop:Object:SetFloatProp
+VOID pop:object:SetOrdProp
+VOID pop:Object:SetOrdProp
+VOID pop:object:SetStrProp
+VOID pop:Object:SetStrProp
 STRING pop:String:Cat
 CHAR pop:String:Char
 STRING pop:String:char_Dupe
@@ -2643,6 +2656,7 @@ TkwPopDictionaryExUsedDictionaries
 TkwPopDictionaryExUseDictionary
 TkwPopDictionaryKeywordByName
 TkwPopDictionaryKeyWordsIterator
+TkwPopDictionaryOwnKeywordByName
 TkwPopDictionaryWordsIterator
 TkwPopFinderSetToCtx
 TkwPopKeyWordDictionary
@@ -2721,6 +2735,7 @@ TkwPopWordIsForHelp
 TkwPopWordIsImmediate
 TkwPopWordIsInParam
 TkwPopWordIsVarLike
+TkwPopWordKeyWord
 TkwPopWordLeftWordRefValuesCount
 TkwPopWordMembersIterator
 TkwPopWordName
@@ -3161,6 +3176,7 @@ BOOLEAN pop:Word:IsForHelp
 BOOLEAN pop:Word:IsImmediate
 BOOLEAN pop:Word:IsInParam
 BOOLEAN pop:Word:IsVarLike
+TtfwKeyWord pop:Word:KeyWord
 INTEGER pop:Word:LeftWordRefValuesCount
 ARRAY pop:Word:MembersIterator
 STRING pop:Word:Name
@@ -3367,6 +3383,7 @@ ARRAY FUNCTION : .Stereotype.Words
 Dictionary: axiom:Dictionary
 TtfwKeyWord pop:Dictionary:KeywordByName
 ARRAY pop:Dictionary:KeyWordsIterator
+TtfwKeyWord pop:Dictionary:OwnKeywordByName
 VOID OPERATOR :: PROCEDURE : pop:Dictionary:Print
  TtfwDictionary OPERATOR :: IN : aDictionary
  STRING OPERATOR :: IN : anIndent
