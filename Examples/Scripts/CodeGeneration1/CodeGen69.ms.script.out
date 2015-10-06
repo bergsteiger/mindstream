@@ -4861,17 +4861,21 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Bind.ms.dict
   axiom:generators
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : |>
- Documentation:
-  Вызывает метод aMethod на объекте Self
  ^L OPERATOR :: IN : aMethod
- STRING OPERATOR :: VAR : l_FullMethodName
- TtfwValueTypes OPERATOR :: VAR : l_ValueTypes
  ^@ OPERATOR :: IN : Self
 ; // |>
 VOID OPERATOR :: PROCEDURE : bind
  STRING OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
 ; // bind
+VOID OPERATOR :: PROCEDURE : DO|>
+ Documentation:
+  Вызывает метод aMethod на объекте Self
+ STRING OPERATOR :: IN : aMethod
+ STRING OPERATOR :: VAR : l_FullMethodName
+ TtfwValueTypes OPERATOR :: VAR : l_ValueTypes
+ TtfwWord OPERATOR :: IN : Self
+; // DO|>
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
  Uses: 
   axiom:axiom
