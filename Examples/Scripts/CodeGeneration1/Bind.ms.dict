@@ -62,6 +62,10 @@ PROCEDURE bind
 
 ; // bind
 
+MACRO DefferedSetStereo
+ @SELF Ctx:SetWordProducerForCompiledClass
+; // DefferedSetStereo
+
 PROCEDURE bindInPlace
   STRING IN aName
   TtfwWord IN aStereo
