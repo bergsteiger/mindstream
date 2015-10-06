@@ -47,6 +47,16 @@ PROCEDURE bind
  if ( l_Name IsWordDeclared ) then
  begin
   EXIT
+  // - там классы определяются ВНУТРИ теста и сравнение словарей - НЕ ПРОХОДИТ
+  if (
+   l_Name Ctx:PushFinder pop:KeywordFinder:KeywordByName pop:KeyWord:Dictionary
+   Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary
+    ==
+  )
+  then
+  begin
+   axiom:PushSymbol REDEFINITION
+  end
  end
 
  axiom:PushSymbol MACRO
