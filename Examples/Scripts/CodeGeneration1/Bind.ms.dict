@@ -64,6 +64,7 @@ PROCEDURE bind
 
 PROCEDURE bindInPlace
   STRING IN aName
+  TtfwWord IN aStereo
 
  %SUMMARY 'Определяет "метод с точкой", который потом разворачивается в вызов "метода объекта"' ;
 

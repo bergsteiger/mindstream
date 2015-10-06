@@ -4912,6 +4912,7 @@ VOID OPERATOR :: PROCEDURE : bindInPlace
  Documentation:
   Определяет "метод с точкой", который потом разворачивается в вызов "метода объекта"
  STRING OPERATOR :: IN : aName
+ TtfwWord OPERATOR :: IN : aStereo
  STRING OPERATOR :: VAR : l_TypeInfo
 ; // bindInPlace
 VOID OPERATOR :: PROCEDURE : ExpandMethodName
