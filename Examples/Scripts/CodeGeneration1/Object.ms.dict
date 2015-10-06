@@ -87,11 +87,6 @@ ARRAY FUNCTION %Constructors
  %S %ClassRTTIList %Constructors >>> Result
 ; // %Constructors
 
-/*{VOID OPERATOR class_impl
-// - имплементация класса, пока "фиктивная"
-// Тут мы будем хранить всю информацию о классе - предки, поля, методы
-; // class_impl}*/
-
 MACRO class_impl
 // - имплементация класса, пока "фиктивная"
 // Тут мы будем хранить всю информацию о классе - предки, поля, методы
@@ -210,11 +205,7 @@ MACRO class
  axiom:PushSymbol class_impl
  // - вообще должно быть так, почему не работает - надо разбираться
  [
-  //':' 
-
   g_CurrentClassImpl
-
-  //@ class_impl Ctx:SetWordProducerForCompiledClass
 
    if ( g_CurrentClass !== cObjectName ) then
    begin
