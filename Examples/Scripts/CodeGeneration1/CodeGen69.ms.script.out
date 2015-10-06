@@ -4703,6 +4703,12 @@ ARRAY OPERATOR :: MACRO :: word_func : %R
  ARRAY OPERATOR :: MACRO :: word_func :: .Implemented.Words : Result
  ENGINE_WORD OPERATOR :: IN : Self
 ; // %R
+IMMEDIATE VOID OPERATOR :: MACRO : .class
+ ^@ OPERATOR :: IN : Self
+; // .class
+IMMEDIATE VOID OPERATOR :: MACRO : .ClassName
+ ^@ OPERATOR :: IN : Self
+; // .ClassName
 IMMEDIATE VOID OPERATOR :: MACRO : .Print
  ^@ OPERATOR :: IN : Self
 ; // .Print
