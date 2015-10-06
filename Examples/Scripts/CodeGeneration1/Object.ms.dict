@@ -94,6 +94,7 @@ VOID OPERATOR class_impl
 
 //MACRO class_impl
 //// - имплементация класса, пока "фиктивная"
+// Тут мы будем хранить всю информацию о классе - предки, поля, методы
 // Literal IN aName
 // @SELF Ctx:SetWordProducerForCompiledClass
 // axiom:PushSymbol : 
