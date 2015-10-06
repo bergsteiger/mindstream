@@ -120,15 +120,15 @@ P3 := Point:: 1 1
 P4 := Point:XY ( 2 2 )
 P5 := Point:OF P4
 P6 := ( P3 .+ P4 )
-P7 := ( P3 |> - P4 )
-P8 := ( P4 |> - P3 )
-P9 := ( P4 |> Neg )
-P10 := ( P3 |> Neg )
+P7 := ( P3 .- P4 )
+P8 := ( P4 .- P3 )
+P9 := ( P4 .Neg )
+P10 := ( P3 .Neg )
 P11 := Point:XY ( -2 2 )
 
 Object var O1
 O1 := P1
-O1 |> Print
+O1 .Print
 // - тут вообще говор€ надо звать ¬»–“”јЋ№Ќџ… метод, но мы пока так не умеем
 
 array var l_Points
