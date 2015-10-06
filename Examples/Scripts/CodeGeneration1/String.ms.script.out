@@ -21,6 +21,10 @@ VOID TestWithDump StringTest
  ' '
  string:Split:for>
  .
+ 'a b c'
+ ' '
+ string:Split:for>
+ .
 ; // VOID TestWithDump StringTest
 
 Testing: (+)?
@@ -67,6 +71,9 @@ T2
 A124B
 Testing end: any:Cat
 ------------------
+a
+b
+c
 a
 b
 c
