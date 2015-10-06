@@ -62,10 +62,10 @@ PROCEDURE bind
 
 ; // bind
 
-STACK_CHANGING_MACRO DefferedSetStereo
-  TtfwWord IN aStereo
+TtfwWord VAR g_Stereo
 
- aStereo Ctx:SetWordProducerForCompiledClass
+MACRO DefferedSetStereo
+ g_Stereo Ctx:SetWordProducerForCompiledClass
 ; // DefferedSetStereo
 
 PROCEDURE bindInPlace
@@ -82,4 +82,7 @@ PROCEDURE bindInPlace
  aName bind
 
  l_TypeInfo ' ' string:Split:for> Ctx:Parser:PushSymbol
+
+ aStereo >>> g_Stereo 
+ axiom:PushSymbol DefferedSetStereo
 ; // bindInPlace
