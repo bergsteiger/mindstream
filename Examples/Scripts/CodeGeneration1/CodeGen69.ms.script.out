@@ -4894,6 +4894,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Bind.ms.dict
   axiom:Font
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : |>
  Documentation:
@@ -4907,6 +4908,12 @@ VOID OPERATOR :: PROCEDURE : bind
  STRING OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
 ; // bind
+VOID OPERATOR :: PROCEDURE : bindInPlace
+ Documentation:
+  Определяет "метод с точкой", который потом разворачивается в вызов "метода объекта"
+ STRING OPERATOR :: IN : aName
+ STRING OPERATOR :: VAR : l_TypeInfo
+; // bindInPlace
 VOID OPERATOR :: PROCEDURE : ExpandMethodName
  Documentation:
   Вызывает метод aMethod на объекте Self
