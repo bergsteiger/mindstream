@@ -282,8 +282,10 @@ PRIVATE VOID operator MakeMethodSignature
 ; // MakeMethodSignature
 
 MACRO constructor
-// - конструктор объектов, пока "фиктивный"
- Literal IN aName
+  Literal IN aName
+
+ %SUMMARY 'Конструктор объектов';
+
  STRING VAR l_Name
  aName |N >>> l_Name
  @SELF Ctx:SetWordProducerForCompiledClass
@@ -299,8 +301,10 @@ PRIVATE VOID operator MakeSelfParam
 ; // MakeSelfParam
 
 MACRO method
-// - метод объекта, пока "фиктивный"
- Literal IN aName
+  Literal IN aName
+
+ %SUMMARY 'Метод объекта' ;
+
  STRING VAR l_Name
  aName |N >>> l_Name
  @SELF Ctx:SetWordProducerForCompiledClass
@@ -310,8 +314,10 @@ MACRO method
 ; // method
 
 MACRO readonly
-// - read-only свойство объекта, пока "фиктивное"
- Literal IN aName
+  Literal IN aName
+
+ %SUMMARY 'read-only свойство объекта' ;
+
  STRING VAR l_Name
  aName |N >>> l_Name
  @SELF Ctx:SetWordProducerForCompiledClass

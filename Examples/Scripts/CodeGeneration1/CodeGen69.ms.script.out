@@ -4740,6 +4740,8 @@ IMMEDIATE VOID OPERATOR :: MACRO : classExpander
 ; // classExpander
 STRING CONST : cObjectName
 IMMEDIATE VOID OPERATOR :: MACRO : constructor
+ Documentation:
+  Конструктор объектов
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
 ; // constructor
@@ -4802,6 +4804,8 @@ IMMEDIATE VOID OPERATOR :: MACRO : member
 ; // member
 IMMEDIATE VOID OPERATOR :: MACRO : members-end
 IMMEDIATE VOID OPERATOR :: MACRO : method
+ Documentation:
+  Метод объекта
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
 ; // method
@@ -4834,6 +4838,8 @@ IMMEDIATE VOID OPERATOR :: MACRO : read
  ^L OPERATOR :: IN : aName
 ; // read
 IMMEDIATE VOID OPERATOR :: MACRO : readonly
+ Documentation:
+  read-only свойство объекта
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
 ; // readonly
