@@ -4715,7 +4715,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : .Print
 IMMEDIATE VOID OPERATOR :: MACRO : .ToPrintable
  ^@ OPERATOR :: IN : Self
 ; // .ToPrintable
-OPERATOR :: class_impl : _:Object
+OPERATOR :: MACRO :: class_impl : _:Object
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
  OPERATOR :: NamedWordProducer :: %FIELDS : %Flds
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
@@ -4727,7 +4727,9 @@ STRING CONST : cClassImplPrefix
 IMMEDIATE VOID OPERATOR :: MACRO : class
  ^L OPERATOR :: IN : aName
 ; // class
-VOID OPERATOR : class_impl
+IMMEDIATE VOID OPERATOR :: MACRO : class_impl
+ ^L OPERATOR :: IN : aName
+; // class_impl
 IMMEDIATE VOID OPERATOR :: MACRO : class-end
 IMMEDIATE VOID OPERATOR :: MACRO : classExpander
  Documentation:

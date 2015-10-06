@@ -87,20 +87,20 @@ ARRAY FUNCTION %Constructors
  %S %ClassRTTIList %Constructors >>> Result
 ; // %Constructors
 
-VOID OPERATOR class_impl
+/*{VOID OPERATOR class_impl
 // - имплементация класса, пока "фиктивная"
 // Тут мы будем хранить всю информацию о классе - предки, поля, методы
-; // class_impl
+; // class_impl}*/
 
-//MACRO class_impl
-//// - имплементация класса, пока "фиктивная"
+MACRO class_impl
+// - имплементация класса, пока "фиктивная"
 // Тут мы будем хранить всю информацию о классе - предки, поля, методы
-// Literal IN aName
-// @SELF Ctx:SetWordProducerForCompiledClass
-// axiom:PushSymbol : 
-// aName |N Ctx:Parser:PushSymbol
+ Literal IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol : 
+ aName |N Ctx:Parser:PushSymbol
 // // axiom:PushSymbol ;
-//; // class_imp
+; // class_impl
 
 STRING CompileTime-VAR g_CurrentClass ''
 STRING CompileTime-VAR g_CurrentClassImpl ''
@@ -207,14 +207,14 @@ MACRO class
  g_ClassFieldOffset := 0
  aName |N =: g_CurrentClass
  [ cClassImplPrefix g_CurrentClass ] strings:Cat =: g_CurrentClassImpl
- // axiom:PushSymbol class_impl
+ axiom:PushSymbol class_impl
  // - вообще должно быть так, почему не работает - надо разбираться
  [
-  ':' 
+  //':' 
 
   g_CurrentClassImpl
 
-  @ class_impl Ctx:SetWordProducerForCompiledClass
+  //@ class_impl Ctx:SetWordProducerForCompiledClass
 
    if ( g_CurrentClass !== cObjectName ) then
    begin
