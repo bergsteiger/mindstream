@@ -47,31 +47,31 @@ Pixel readonly Y read Y
 
 constructor OF
  Point right aPoint
- Point:: ( aPoint |> X ) ( aPoint |> Y ) >>> Result
+ Point:: ( aPoint .X ) ( aPoint .Y ) >>> Result
 ; // OF
 
 Point method +
  Point right aPoint
 
- Point:: ( Self |> X (+) ( aPoint |> X ) ) ( Self |> Y (+) ( aPoint |> Y ) ) >>> Result
+ Point:: ( Self .X (+) ( aPoint .X ) ) ( Self .Y (+) ( aPoint .Y ) ) >>> Result
 ; // +
 
 Point method Neg
- Point:: Neg ( Self |> X ) Neg ( Self |> Y ) >>> Result
+ Point:: Neg ( Self .X ) Neg ( Self .Y ) >>> Result
 ; // Neg
 
 Point method -
  Point right aPoint
 
- Point:OF ( Self |> + ( aPoint |> Neg ) ) >>> Result
+ Point:OF ( Self .+ ( aPoint .Neg ) ) >>> Result
 ; // -
 
 OVERRIDE STRING method ToPrintable
- [ '( ' 'X: ' Self |> X ToPrintable ', Y: ' Self |> Y ToPrintable ' )' ] strings:Cat >>> Result
+ [ '( ' 'X: ' Self .X ToPrintable ', Y: ' Self .Y ToPrintable ' )' ] strings:Cat >>> Result
 ; // ToPrintable
 
 OVERRIDE void method Print
- Self |> ToPrintable Print
+ Self .ToPrintable Print
 ; // Print
 
 class-end // Point
