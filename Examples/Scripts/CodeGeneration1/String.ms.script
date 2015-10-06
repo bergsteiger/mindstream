@@ -33,12 +33,6 @@ TestsFor string:Split:for>
 Test&Dump StringTest
  RunTests.in.array @[ (+)? ?(+) strings:CatSep> any:Cat string:Split:for> ]
   %REMARK 'Запускаем тесты к указанным скриптовым словам'
-
- 'a b c' ' ' string:Split:for> .
- 'a b  c' ' ' string:Split:for> .
- 'abc' ' ' string:Split:for> .
- '' ' ' string:Split:for> .
- ' ' ' ' string:Split:for> .
 ; // StringTest
 
 StringTest

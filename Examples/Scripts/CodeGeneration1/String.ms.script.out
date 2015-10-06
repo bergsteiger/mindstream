@@ -21,26 +21,6 @@ VOID TestWithDump StringTest
  @
  Tests:string:Split:for>
  DoRunTestsFor
- 'a b c'
- ' '
- string:Split:for>
- .
- 'a b  c'
- ' '
- string:Split:for>
- .
- 'abc'
- ' '
- string:Split:for>
- .
- ''
- ' '
- string:Split:for>
- .
- ' '
- ' '
- string:Split:for>
- .
 ; // VOID TestWithDump StringTest
 
 Testing: (+)?
@@ -102,10 +82,3 @@ T4
 T5
 Testing end: string:Split:for>
 ------------------
-a
-b
-c
-a
-b
-c
-abc
