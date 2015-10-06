@@ -88,9 +88,11 @@ ARRAY FUNCTION %Constructors
 ; // %Constructors
 
 MACRO class_impl
-// - имплементация класса, пока "фиктивная"
-// Тут мы будем хранить всю информацию о классе - предки, поля, методы
- Literal IN aName
+  Literal IN aName
+ %SUMMARY 'Реализация класса.
+ Тут мы будем хранить всю информацию о классе - предки, поля, методы'
+ ;
+
  @SELF Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol : 
  aName |N Ctx:Parser:PushSymbol

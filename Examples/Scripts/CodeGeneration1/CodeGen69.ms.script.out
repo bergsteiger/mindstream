@@ -4728,6 +4728,8 @@ IMMEDIATE VOID OPERATOR :: MACRO : class
  ^L OPERATOR :: IN : aName
 ; // class
 IMMEDIATE VOID OPERATOR :: MACRO : class_impl
+ Documentation:
+  Реализация класса. Тут мы будем хранить всю информацию о классе - предки, поля, методы
  ^L OPERATOR :: IN : aName
 ; // class_impl
 IMMEDIATE VOID OPERATOR :: MACRO : class-end
