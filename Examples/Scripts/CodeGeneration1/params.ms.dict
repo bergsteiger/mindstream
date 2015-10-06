@@ -1,4 +1,4 @@
-// params.ms.dict
+UNIT params.ms.dict
 
 USES
  axiom_push.ms.dict
@@ -92,18 +92,11 @@ MACRO right
  l_MangledName Ctx:Parser:PushSymbol
  
   [
-   // l_ValueTypes IsNil ! ? ( l_ValueTypes pop:ValueTypes:Name Ctx:Parser:PushSymbol )
-   // - тут надо определить тип параметра, но не получается, пока
-/*{   ':'
-   l_Name
-   l_MangledName
-   '|^'
-   ';'}*/
    'VOID'
    'IMMEDIATE axiom:operator' 
    l_Name
-   [ '`' l_ValueTypesName '`' ] strings:Cat 
-   [ '`' l_MangledName '`' ] strings:Cat
+   l_ValueTypesName NameAsString
+   l_MangledName NameAsString
    'MangledNamePusher'
    ';'
   ] Ctx:Parser:PushArray
