@@ -156,6 +156,9 @@ STRING : ObjectClass:Name
  Self |N getClassNamePrim =: Result
 ; // ObjectClass:Name
 
+[EXECUTE]
+( 'Name' bind )
+
 MACRO classExpander
  ^ IN anImpl
  %SUMMARY 'Тут можно копировать поля и методы' ;

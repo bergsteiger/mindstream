@@ -4723,6 +4723,9 @@ IMMEDIATE VOID OPERATOR :: MACRO : .class
 IMMEDIATE VOID OPERATOR :: MACRO : .ClassName
  ^@ OPERATOR :: IN : Self
 ; // .ClassName
+IMMEDIATE VOID OPERATOR :: MACRO : .Name
+ ^@ OPERATOR :: IN : Self
+; // .Name
 IMMEDIATE VOID OPERATOR :: MACRO : .Print
  ^@ OPERATOR :: IN : Self
 ; // .Print
