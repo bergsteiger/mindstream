@@ -93,11 +93,11 @@ constructor :
 ; // :
 
 OVERRIDE STRING method ToPrintable
- [ '( ' 'TopLeft: ' Self |> TopLeft |> ToPrintable ', BottomRight: ' Self |> BottomRight |> ToPrintable ' )' ] strings:Cat >>> Result
+ [ '( ' 'TopLeft: ' Self .TopLeft .ToPrintable ', BottomRight: ' Self .BottomRight .ToPrintable ' )' ] strings:Cat >>> Result
 ; // ToPrintable
 
 OVERRIDE void method Print
- Self |> ToPrintable Print
+ Self .ToPrintable Print
 ; // Print
 
 class-end // Rectangle
@@ -119,7 +119,7 @@ P2 := Point:0
 P3 := Point:: 1 1
 P4 := Point:XY ( 2 2 )
 P5 := Point:OF P4
-P6 := ( P3 |> + P4 )
+P6 := ( P3 .+ P4 )
 P7 := ( P3 |> - P4 )
 P8 := ( P4 |> - P3 )
 P9 := ( P4 |> Neg )
