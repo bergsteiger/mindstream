@@ -1,4 +1,13 @@
 VOID TestWithDump PointTest
+ IMMEDIATE VOID MACRO .-
+ ; // IMMEDIATE VOID MACRO .-
+ 
+ IMMEDIATE VOID MACRO .+
+ ; // IMMEDIATE VOID MACRO .+
+ 
+ IMMEDIATE VOID MACRO .Neg
+ ; // IMMEDIATE VOID MACRO .Neg
+ 
  class_impl _:Point
   %CONSTRUCTORS %Constructors
    ':'

@@ -4697,6 +4697,8 @@ ARRAY OPERATOR :: MACRO :: word_func : %R
  ARRAY OPERATOR :: MACRO :: word_func :: .Implemented.Words : Result
  ENGINE_WORD OPERATOR :: IN : Self
 ; // %R
+IMMEDIATE VOID OPERATOR :: MACRO : .Print
+IMMEDIATE VOID OPERATOR :: MACRO : .ToPrintable
 OPERATOR :: class_impl : _:Object
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
  OPERATOR :: NamedWordProducer :: %FIELDS : %Flds
@@ -4869,7 +4871,6 @@ IMMEDIATE VOID OPERATOR :: MACRO : |>
 VOID OPERATOR :: PROCEDURE : bind
  STRING OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
- STRING OPERATOR :: VAR : l_TypeName
 ; // bind
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
  Uses: 

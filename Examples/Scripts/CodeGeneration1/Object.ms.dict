@@ -267,7 +267,7 @@ MACRO RunCompileProps&Methods
 MACRO class-end
  g_CurrentClassMethods .for> ( 
   STRING IN aName 
-  aName Msg 
+  aName bind
  )
  axiom:PushSymbol RunCompileProps&Methods
  g_CurrentClass := ''
