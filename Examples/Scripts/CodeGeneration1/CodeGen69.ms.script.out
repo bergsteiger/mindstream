@@ -4216,6 +4216,13 @@ STRING FUNCTION : string:CatWihAny
  OPERATOR :: IN : aValue
  STRING FUNCTION :: string:CatWihAny : Result
 ; // string:CatWihAny
+VOID OPERATOR :: PROCEDURE : string:Split:for>
+ Documentation:
+  Разделяет строку aString по разделителю aSep и для каждой части вызывает aLambda
+ ^ OPERATOR :: IN : aLambda
+ STRING OPERATOR :: IN : aSep
+ STRING OPERATOR :: IN : aString
+; // string:Split:for>
 STRING FUNCTION : strings:CatSep>
  ^ OPERATOR :: IN : _aSep
  ^ OPERATOR :: IN : _aValues
@@ -4239,6 +4246,13 @@ VOID OPERATOR : Tests:any:Cat
  VOID OPERATOR :: Test : T1
  VOID OPERATOR :: Test : T2
 ; // Tests:any:Cat
+VOID OPERATOR : Tests:string:Split:for>
+ VOID OPERATOR :: Test : T1
+ VOID OPERATOR :: Test : T2
+ VOID OPERATOR :: Test : T3
+ VOID OPERATOR :: Test : T4
+ VOID OPERATOR :: Test : T5
+; // Tests:string:Split:for>
 VOID OPERATOR : Tests:strings:CatSep>
  VOID OPERATOR :: Test : T1
  VOID OPERATOR :: Test : T2
