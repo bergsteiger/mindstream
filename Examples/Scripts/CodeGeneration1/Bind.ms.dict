@@ -29,7 +29,9 @@ MACRO |>
   ^@ IN Self
   Literal IN aMethod
 
- STRING VAR l_FullMethodName
+ Self aMethod |N DO|>
+
+/*{ STRING VAR l_FullMethodName
  %SUMMARY 'Вызывает метод aMethod на объекте Self' ;
 
  TtfwValueTypes VAR l_ValueTypes
@@ -43,7 +45,7 @@ MACRO |>
  [ l_FullMethodName ':' aMethod |N ] strings:Cat >>> l_FullMethodName
 
  Self CompileValue
- l_FullMethodName Ctx:Parser:PushSymbol
+ l_FullMethodName Ctx:Parser:PushSymbol}*/
 ; // |>
 
 USES
