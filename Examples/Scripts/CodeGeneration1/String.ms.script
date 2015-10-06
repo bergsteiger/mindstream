@@ -13,7 +13,9 @@ PROCEDURE string:Split:for>
  while ( aString IsNil ! ) 
  begin
   aSep string:SplitTo! aString
-  aLambda DO
+  STRING VAR l_Part
+  >>> l_Part
+  l_Part aLambda DO
  end
 ; // string:Split:for>
 
