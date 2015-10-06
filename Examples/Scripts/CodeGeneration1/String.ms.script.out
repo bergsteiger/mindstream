@@ -25,6 +25,10 @@ VOID TestWithDump StringTest
  ' '
  string:Split:for>
  .
+ 'abc'
+ ' '
+ string:Split:for>
+ .
 ; // VOID TestWithDump StringTest
 
 Testing: (+)?
@@ -77,3 +81,4 @@ c
 a
 b
 c
+abc
