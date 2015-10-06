@@ -7,9 +7,11 @@ PROCEDURE string:Split:for>
   STRING IN aString
   STRING IN aSep
   ^ IN aLambda
- aSep string:SplitTo! aString
- aLambda DO
- aString aLambda DO
+ while ( aString IsNil ! ) 
+ begin
+  aSep string:SplitTo! aString
+  aLambda DO
+ end
 ; // string:Split:for>
 
 Test&Dump StringTest
