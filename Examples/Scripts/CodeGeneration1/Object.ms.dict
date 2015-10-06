@@ -212,9 +212,10 @@ MACRO class
  [
   ':' 
 
+  g_CurrentClassImpl
+
   @ class_impl Ctx:SetWordProducerForCompiledClass
 
-  g_CurrentClassImpl
    if ( g_CurrentClass !== cObjectName ) then
    begin
     '%INHERITS'
