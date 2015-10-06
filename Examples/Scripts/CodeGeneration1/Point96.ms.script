@@ -137,29 +137,29 @@ array var l_Points
 
 l_Points ==> (
  Point IN aPt 
- aPt |> Print
+ aPt .Print
 )
 l_Points ==> (
  Point IN aPt 
- aPt |> X Print 
+ aPt .X Print 
 )
 l_Points ==> ( 
  Point IN aPt 
- aPt |> Y Print 
+ aPt .Y Print 
 )
 l_Points ==> ( 
  Point IN aPt 
- aPt |> class Print 
+ aPt .class Print 
 )
 l_Points ==> ( 
  Point IN aPt 
- aPt |> ClassName Print 
+ aPt .ClassName Print 
 )
 l_Points ==> ( 
  Point IN aPt 
- aPt |> class %G ==> ( 
+ aPt .class %G ==> ( 
   ObjectClass IN aClass
-  aClass |> Name Print 
+  aClass .Name Print 
  ) 
 )
 
@@ -173,21 +173,21 @@ array var l_Rectangles
 
 l_Rectangles ==> (
  Rectangle IN aRt
- aRt |> Print
+ aRt .Print
 )
 l_Rectangles ==> ( 
  Rectangle IN aRt
- aRt |> class Print 
+ aRt .class Print 
 )
 l_Rectangles ==> ( 
  Rectangle IN aRt
- aRt |> ClassName Print 
+ aRt .ClassName Print 
 )
 l_Rectangles ==> ( 
  Rectangle IN aRt 
- aRt |> class %G ==> ( 
+ aRt .class %G ==> ( 
   ObjectClass IN aClass
-  aClass |> Name Print 
+  aClass .Name Print 
  ) 
 )
 
