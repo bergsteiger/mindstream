@@ -3,33 +3,6 @@ USES
  Testing.ms.dict
 ;
 
-PROCEDURE string:Split:for>
-  STRING IN aString
-  STRING IN aSep
-  ^ IN aLambda
-
- %SUMMARY 'Разделяет строку aString по разделителю aSep и для каждой части вызывает aLambda' ;
-
- while ( aString IsNil ! ) 
- begin
-  aSep string:SplitTo! aString
-  STRING VAR l_Part
-  >>> l_Part
-  if ( l_Part IsNil ! ) then
-  begin
-   l_Part aLambda DO
-  end
- end
-; // string:Split:for>
-
-TestsFor string:Split:for>
- Test T1 'a b c' ' ' string:Split:for> . ;
- Test T2 'a b  c' ' ' string:Split:for> . ;
- Test T3 'abc' ' ' string:Split:for> . ;
- Test T4 '' ' ' string:Split:for> . ;
- Test T5 ' ' ' ' string:Split:for> . ;
-; // string:Split:for> 
-
 Test&Dump StringTest
  RunTests.in.array @[ (+)? ?(+) strings:CatSep> any:Cat string:Split:for> ]
   %REMARK 'Запускаем тесты к указанным скриптовым словам'
