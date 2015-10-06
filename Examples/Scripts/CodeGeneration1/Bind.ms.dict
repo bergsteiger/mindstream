@@ -62,7 +62,7 @@ PROCEDURE bind
 
 ; // bind
 
-MACRO DefferedSetStereo
+STACK_CHANGING_MACRO DefferedSetStereo
  @SELF Ctx:SetWordProducerForCompiledClass
 ; // DefferedSetStereo
 
