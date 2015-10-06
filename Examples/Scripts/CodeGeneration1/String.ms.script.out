@@ -21,7 +21,7 @@ VOID TestWithDump StringTest
  ' '
  string:Split:for>
  .
- 'a b c'
+ 'a b  c'
  ' '
  string:Split:for>
  .
@@ -76,4 +76,5 @@ b
 c
 a
 b
+
 c

@@ -22,7 +22,7 @@ Test&Dump StringTest
   %REMARK 'Запускаем тесты к указанным скриптовым словам'
 
  'a b c' ' ' string:Split:for> .
- 'a b c' ' ' string:Split:for> .
+ 'a b  c' ' ' string:Split:for> .
 ; // StringTest
 
 StringTest
