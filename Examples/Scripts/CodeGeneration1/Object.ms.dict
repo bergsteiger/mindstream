@@ -259,6 +259,10 @@ MACRO RunCompileProps&Methods
 ; // RunCompileProps&Methods
 
 MACRO class-end
+ g_CurrentClassProperties .for> ( 
+  STRING IN aName 
+  aName bind
+ )
  g_CurrentClassMethods .for> ( 
   STRING IN aName 
   aName bind

@@ -11,11 +11,35 @@ VOID TestWithDump PointTest
   ExpandMethodName
  ; // IMMEDIATE VOID MACRO .+
  
+ IMMEDIATE VOID MACRO .BottomRight
+  ^@ IN Self
+  'BottomRight'
+  ExpandMethodName
+ ; // IMMEDIATE VOID MACRO .BottomRight
+ 
  IMMEDIATE VOID MACRO .Neg
   ^@ IN Self
   'Neg'
   ExpandMethodName
  ; // IMMEDIATE VOID MACRO .Neg
+ 
+ IMMEDIATE VOID MACRO .TopLeft
+  ^@ IN Self
+  'TopLeft'
+  ExpandMethodName
+ ; // IMMEDIATE VOID MACRO .TopLeft
+ 
+ IMMEDIATE VOID MACRO .X
+  ^@ IN Self
+  'X'
+  ExpandMethodName
+ ; // IMMEDIATE VOID MACRO .X
+ 
+ IMMEDIATE VOID MACRO .Y
+  ^@ IN Self
+  'Y'
+  ExpandMethodName
+ ; // IMMEDIATE VOID MACRO .Y
  
  class_impl _:Point
   %CONSTRUCTORS %Constructors
