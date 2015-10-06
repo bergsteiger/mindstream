@@ -394,11 +394,11 @@ constructor new
 
 VIRTUAL STRING method ToPrintable
  //Self ToPrintable =: Result
- Self |> ClassName =: Result
+ Self .ClassName =: Result
 ; // ToPrintable
 
 VIRTUAL void method Print
- Self |> ToPrintable Print
+ Self .ToPrintable Print
 ; // Print
 
 class-end // Object
