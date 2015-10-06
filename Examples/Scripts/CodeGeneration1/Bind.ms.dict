@@ -3,6 +3,7 @@ UNIT Bind.ms.dict
 USES
  axiom:WordInfo
  core.ms.dict
+ string.ms.dict
 ;
 
 PROCEDURE ExpandMethodName
@@ -65,4 +66,10 @@ PROCEDURE bindInPlace
   STRING IN aName
 
  %SUMMARY 'Определяет "метод с точкой", который потом разворачивается в вызов "метода объекта"' ;
+
+ STRING VAR l_TypeInfo
+ Ctx:WordInfo pop:WordInfo:ToString >>> l_TypeInfo
+ 
+ l_TypeInfo Msg
+ aName Msg
 ; // bindInPlace
