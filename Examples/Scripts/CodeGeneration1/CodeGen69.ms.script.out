@@ -3456,6 +3456,12 @@ BOOLEAN FUNCTION : IsWordDeclared
  STRING OPERATOR :: IN : aName
  BOOLEAN FUNCTION :: IsWordDeclared : Result
 ; // IsWordDeclared
+STRING FUNCTION : NameAsString
+ Documentation:
+  Делает имя таким, чтобы оно было как для Ctx:Parser:PushString
+ STRING OPERATOR :: IN : aName
+ STRING FUNCTION :: NameAsString : Result
+; // NameAsString
 STRING FUNCTION : NameOf
  LINK ^ OPERATOR :: IN : aWord
  STRING FUNCTION :: NameOf : Result
@@ -4698,7 +4704,11 @@ ARRAY OPERATOR :: MACRO :: word_func : %R
  ENGINE_WORD OPERATOR :: IN : Self
 ; // %R
 IMMEDIATE VOID OPERATOR :: MACRO : .Print
+ ^@ OPERATOR :: IN : Self
+; // .Print
 IMMEDIATE VOID OPERATOR :: MACRO : .ToPrintable
+ ^@ OPERATOR :: IN : Self
+; // .ToPrintable
 OPERATOR :: class_impl : _:Object
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
  OPERATOR :: NamedWordProducer :: %FIELDS : %Flds

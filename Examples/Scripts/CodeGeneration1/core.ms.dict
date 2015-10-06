@@ -55,3 +55,9 @@ BOOLEAN FUNCTION IsWordDeclared
  %SUMMARY 'Определяет, что слово aName определено в данном месте' ;
  aName Ctx:PushFinder pop:KeywordFinder:KeywordByName <> nil >>> Result
 ; // IsWordDeclared
+
+STRING FUNCTION NameAsString
+ STRING IN aName
+ %SUMMARY 'Делает имя таким, чтобы оно было как для Ctx:Parser:PushString'; 
+ [ '`' aName '`' ] strings:Cat >>> Result
+; // NameAsString
