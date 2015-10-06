@@ -205,13 +205,13 @@ MACRO class
  g_CurrentClassConstructors := [ ]
  g_ClassFieldOffset := 0
  aName |N =: g_CurrentClass
+ [ cClassImplPrefix g_CurrentClass ] strings:Cat =: g_CurrentClassImpl
  // axiom:PushSymbol class_impl
  // - вообще должно быть так, почему не работает - надо разбираться
  [
   ':' 
 
   @ class_impl Ctx:SetWordProducerForCompiledClass
-  [ cClassImplPrefix g_CurrentClass ] strings:Cat =: g_CurrentClassImpl
 
   g_CurrentClassImpl
    if ( g_CurrentClass !== cObjectName ) then
