@@ -7,6 +7,9 @@ PROCEDURE string:Split:for>
   STRING IN aString
   STRING IN aSep
   ^ IN aLambda
+
+ %SUMMARY 'Разделяет строку aString по разделителю aSep и для каждой части вызывает aLambda' ;
+
  while ( aString IsNil ! ) 
  begin
   aSep string:SplitTo! aString
