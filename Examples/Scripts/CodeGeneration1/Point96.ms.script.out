@@ -27,12 +27,26 @@ VOID TestWithDump PointTest
   ExpandMethodName
  ; // IMMEDIATE VOID MACRO .Neg
  
+ IMMEDIATE REDIFINITION VOID MACRO .Print
+  ^@ IN Self
+  Self
+  'Print'
+  ExpandMethodName
+ ; // IMMEDIATE REDIFINITION VOID MACRO .Print
+ 
  IMMEDIATE VOID MACRO .TopLeft
   ^@ IN Self
   Self
   'TopLeft'
   ExpandMethodName
  ; // IMMEDIATE VOID MACRO .TopLeft
+ 
+ IMMEDIATE REDIFINITION VOID MACRO .ToPrintable
+  ^@ IN Self
+  Self
+  'ToPrintable'
+  ExpandMethodName
+ ; // IMMEDIATE REDIFINITION VOID MACRO .ToPrintable
  
  IMMEDIATE VOID MACRO .X
   ^@ IN Self
