@@ -70,7 +70,7 @@ PROCEDURE bind
 
  [
   '^@ IN Self'
-  'Literal IN aMethod'
+  [ '`' aName '`' ] strings:Cat
  ] Ctx:Parser:PushArray
  //'|>' Ctx:Parser:PushSymbol
  //aName Ctx:Parser:PushSymbol
