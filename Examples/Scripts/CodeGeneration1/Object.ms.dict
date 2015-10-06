@@ -265,7 +265,10 @@ MACRO RunCompileProps&Methods
 ; // RunCompileProps&Methods
 
 MACRO class-end
- g_CurrentClassMethods .for> ( STRING VAR aName Msg )
+ g_CurrentClassMethods .for> ( 
+  STRING IN aName 
+  aName Msg 
+ )
  axiom:PushSymbol RunCompileProps&Methods
  g_CurrentClass := ''
 ; // class-end
