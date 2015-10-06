@@ -37,7 +37,9 @@ MACRO |>
 ; // |>
 
 PROCEDURE bind
- STRING IN aName
+  STRING IN aName
+
+ %SUMMARY 'Определяет "метод с точкой", который потом разворачивается в вызов "метода объекта"' ;
  STRING VAR l_Name
  '.' aName Cat >>> l_Name
 

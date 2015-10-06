@@ -4902,6 +4902,8 @@ IMMEDIATE VOID OPERATOR :: MACRO : |>
  ^@ OPERATOR :: IN : Self
 ; // |>
 VOID OPERATOR :: PROCEDURE : bind
+ Documentation:
+  Определяет "метод с точкой", который потом разворачивается в вызов "метода объекта"
  STRING OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
 ; // bind
