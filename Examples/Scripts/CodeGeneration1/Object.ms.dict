@@ -307,6 +307,9 @@ MACRO method
 
  STRING VAR l_Name
  aName |N >>> l_Name
+
+ l_Name bindInPlace
+
  @SELF Ctx:SetWordProducerForCompiledClass
  l_Name MakeMethodSignature
  MakeSelfParam
