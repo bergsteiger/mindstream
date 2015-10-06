@@ -8,8 +8,9 @@ PROCEDURE DO|>
   TtfwWord IN Self
   STRING IN aMethod
 
- STRING VAR l_FullMethodName
  %SUMMARY 'Вызывает метод aMethod на объекте Self' ;
+
+ STRING VAR l_FullMethodName
 
  TtfwValueTypes VAR l_ValueTypes
  Self pop:Word:Info pop:WordInfo:ValueTypes >>> l_ValueTypes
@@ -28,6 +29,8 @@ PROCEDURE DO|>
 MACRO |>
   ^@ IN Self
   Literal IN aMethod
+
+ %SUMMARY 'Вызывает метод aMethod на объекте Self' ;
 
  Self aMethod |N DO|>
 

@@ -4861,6 +4861,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Bind.ms.dict
   axiom:generators
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : |>
+ Documentation:
+  Вызывает метод aMethod на объекте Self
  ^L OPERATOR :: IN : aMethod
  ^@ OPERATOR :: IN : Self
 ; // |>
