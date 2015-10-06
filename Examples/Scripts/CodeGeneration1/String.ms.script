@@ -22,6 +22,14 @@ PROCEDURE string:Split:for>
  end
 ; // string:Split:for>
 
+TestsFor string:Split:for>
+ Test T1 'a b c' ' ' string:Split:for> . ;
+ Test T2 'a b  c' ' ' string:Split:for> . ;
+ Test T3 'abc' ' ' string:Split:for> . ;
+ Test T4 '' ' ' string:Split:for> . ;
+ Test T5 ' ' ' ' string:Split:for> . ;
+; // string:Split:for> 
+
 Test&Dump StringTest
  RunTests.in.array @[ (+)? ?(+) strings:CatSep> any:Cat ]
   %REMARK 'Запускаем тесты к указанным скриптовым словам'
