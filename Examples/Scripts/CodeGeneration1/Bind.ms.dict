@@ -2,6 +2,7 @@ UNIT Bind.ms.dict
 
 USES
  axiom:WordInfo
+ core.ms.dict
 ;
 
 PROCEDURE DO|>
@@ -70,7 +71,7 @@ PROCEDURE bind
 
  [
   '^@ IN Self'
-  [ '`' aName '`' ] strings:Cat
+  aName NameAsString
  ] Ctx:Parser:PushArray
  //'|>' Ctx:Parser:PushSymbol
  //aName Ctx:Parser:PushSymbol
