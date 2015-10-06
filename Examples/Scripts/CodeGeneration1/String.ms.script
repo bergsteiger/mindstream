@@ -8,9 +8,9 @@ PROCEDURE string:Split:for>
   STRING IN aSep
   ^ IN aLambda
  aString aSep string:Split
- .
+ aLambda DO
  >>> aString
- aString .
+ aString aLambda DO
 ; // string:Split:for>
 
 Test&Dump StringTest
