@@ -70,6 +70,7 @@ TtfwWord CompileTime-VAR g_Stereo nil
 
 MACRO DefferedSetStereo
  g_Stereo Ctx:SetWordProducerForCompiledClass
+ nil >>> g_Stereo
 ; // DefferedSetStereo
 
 PROCEDURE bindInPlace
@@ -86,6 +87,8 @@ PROCEDURE bindInPlace
  aName bind
 
  l_TypeInfo ' ' string:Split:for> Ctx:Parser:PushSymbol
+
+ g_Stereo IsNil ?ASSURE 'Вложенные методы пока не поддерживаются'
 
  aStereo >>> g_Stereo 
  axiom:PushSymbol DefferedSetStereo
