@@ -73,8 +73,7 @@ PROCEDURE bind
   '^@ IN Self'
   aName NameAsString
  ] Ctx:Parser:PushArray
- //'|>' Ctx:Parser:PushSymbol
- //aName Ctx:Parser:PushSymbol
+ axiom:PushSymbol ExpandMethodName
  axiom:PushSymbol ;
 
 ; // bind

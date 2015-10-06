@@ -2,16 +2,19 @@ VOID TestWithDump PointTest
  IMMEDIATE VOID MACRO .-
   ^@ IN Self
   '-'
+  ExpandMethodName
  ; // IMMEDIATE VOID MACRO .-
  
  IMMEDIATE VOID MACRO .+
   ^@ IN Self
   '+'
+  ExpandMethodName
  ; // IMMEDIATE VOID MACRO .+
  
  IMMEDIATE VOID MACRO .Neg
   ^@ IN Self
   'Neg'
+  ExpandMethodName
  ; // IMMEDIATE VOID MACRO .Neg
  
  class_impl _:Point
