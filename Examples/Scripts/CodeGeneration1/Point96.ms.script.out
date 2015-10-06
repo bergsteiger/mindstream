@@ -1,42 +1,49 @@
 VOID TestWithDump PointTest
  IMMEDIATE VOID MACRO .-
   ^@ IN Self
+  Self
   '-'
   ExpandMethodName
  ; // IMMEDIATE VOID MACRO .-
  
  IMMEDIATE VOID MACRO .+
   ^@ IN Self
+  Self
   '+'
   ExpandMethodName
  ; // IMMEDIATE VOID MACRO .+
  
  IMMEDIATE VOID MACRO .BottomRight
   ^@ IN Self
+  Self
   'BottomRight'
   ExpandMethodName
  ; // IMMEDIATE VOID MACRO .BottomRight
  
  IMMEDIATE VOID MACRO .Neg
   ^@ IN Self
+  Self
   'Neg'
   ExpandMethodName
  ; // IMMEDIATE VOID MACRO .Neg
  
  IMMEDIATE VOID MACRO .TopLeft
   ^@ IN Self
+  Self
   'TopLeft'
   ExpandMethodName
  ; // IMMEDIATE VOID MACRO .TopLeft
  
  IMMEDIATE VOID MACRO .X
   ^@ IN Self
+  Self
   'X'
   ExpandMethodName
  ; // IMMEDIATE VOID MACRO .X
  
  IMMEDIATE VOID MACRO .Y
   ^@ IN Self
+  Self
   'Y'
   ExpandMethodName
  ; // IMMEDIATE VOID MACRO .Y

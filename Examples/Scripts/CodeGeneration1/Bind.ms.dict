@@ -71,6 +71,7 @@ PROCEDURE bind
 
  [
   '^@ IN Self'
+  'Self'
   aName NameAsString
  ] Ctx:Parser:PushArray
  axiom:PushSymbol ExpandMethodName
