@@ -4795,12 +4795,6 @@ IMMEDIATE VOID OPERATOR :: MACRO : method
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
 ; // method
-STRING FUNCTION : NameAsString
- Documentation:
-  Делает имя таким, чтобы оно было как для Ctx:Parser:PushString
- STRING OPERATOR :: IN : aName
- STRING FUNCTION :: NameAsString : Result
-; // NameAsString
 IMMEDIATE VOID OPERATOR :: MACRO : new[
 IMMEDIATE VOID OPERATOR :: TYPE : Object
 ObjectClass OPERATOR :: MACRO :: readonly : Object:class
