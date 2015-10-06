@@ -15,7 +15,10 @@ PROCEDURE string:Split:for>
   aSep string:SplitTo! aString
   STRING VAR l_Part
   >>> l_Part
-  l_Part aLambda DO
+  if ( l_Part IsNil ! ) then
+  begin
+   l_Part aLambda DO
+  end
  end
 ; // string:Split:for>
 
