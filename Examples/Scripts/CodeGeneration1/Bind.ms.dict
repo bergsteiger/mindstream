@@ -46,7 +46,9 @@ PROCEDURE bind
 
  if ( l_Name IsWordDeclared ) then
  begin
-  if ( l_Name Ctx:PushFinder pop:KeywordFinder:KeywordByName pop:KeyWord:Word pop:Word:Parent Ctx:PushFinder == ) then
+  TtfwWord VAR l_CurrentParent
+  Ctx:PushFinder >>> l_CurrentParent
+  if ( l_Name l_CurrentParent pop:KeywordFinder:KeywordByName pop:KeyWord:Word pop:Word:Parent l_CurrentParent == ) then
   begin
    axiom:PushSymbol REDEFINITION
   end
