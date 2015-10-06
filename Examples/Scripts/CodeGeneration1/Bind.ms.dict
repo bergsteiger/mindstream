@@ -62,7 +62,11 @@ PROCEDURE bind
 
 ; // bind
 
-TtfwWord VAR g_Stereo
+USES
+ CompileTimeVar.ms.dict
+;
+
+TtfwWord CompileTime-VAR g_Stereo nil
 
 MACRO DefferedSetStereo
  g_Stereo Ctx:SetWordProducerForCompiledClass
