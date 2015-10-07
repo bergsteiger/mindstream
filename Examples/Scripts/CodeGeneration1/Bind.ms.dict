@@ -52,6 +52,9 @@ PROCEDURE bind
   TtfwWord VAR l_ExistingWord
   l_Name l_CurrentParent pop:KeywordFinder:KeywordByName pop:KeyWord:Word >>> l_ExistingWord
 
+  TtfwWord VAR l_ExistingWordStereo
+  l_ExistingWord pop:Word:Producer >>> l_ExistingWordStereo
+
   if ( l_ExistingWord pop:Word:Parent l_CurrentParent == ) then
   begin
    axiom:PushSymbol REDEFINITION
