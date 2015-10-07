@@ -25,6 +25,9 @@ PROCEDURE ExpandMethodName
  [ l_FullMethodName ':' aMethod ] strings:Cat >>> l_FullMethodName
 
  Self CompileValue
+ //Self |N Ctx:Parser:PushSymbol
+ // по идее Ctx:Parser:PushSymbol - тоже должен работать, но не работает
+  
  l_FullMethodName Ctx:Parser:PushSymbol
 ; // ExpandMethodName
 
