@@ -55,6 +55,8 @@ PROCEDURE bind
   TtfwWord VAR l_ExistingWordStereo
   l_ExistingWord pop:Word:Producer >>> l_ExistingWordStereo
 
+  l_ExistingWordStereo IsNil ! ?ASSURE 'ѕереопредел€емое слово должно иметь стереотип'
+
   if ( l_ExistingWord pop:Word:Parent l_CurrentParent == ) then
   begin
    axiom:PushSymbol REDEFINITION
