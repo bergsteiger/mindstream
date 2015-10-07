@@ -57,6 +57,8 @@ PROCEDURE bind
 
   l_ExistingWordStereo IsNil ! ?ASSURE 'ѕереопредел€емое слово должно иметь стереотип'
 
+  l_ExistingWordStereo pop:Word:Name NameOf MACRO == ?ASSURE 'ѕереопредел€емое слово должно быть макросом'
+
   if ( l_ExistingWord pop:Word:Parent l_CurrentParent == ) then
   begin
    axiom:PushSymbol REDEFINITION
