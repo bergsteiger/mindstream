@@ -522,6 +522,10 @@ VOID TestWithDump PointTest
  @
  _:Object
  DumpElement
+ Point::
+ 0
+ 0
+ Point:Print
  Point:0
  P1
  pop:Word:SetValuePrim
@@ -769,6 +773,7 @@ class_impl _:Object
  
 ; // class_impl _:Object
 
+( X: 0, Y: 0 )
 Point
 ( X: 0, Y: 0 )
 ( X: 0, Y: 0 )

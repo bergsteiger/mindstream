@@ -102,6 +102,9 @@ OVERRIDE void method Print
 
 class-end // Rectangle
 
+Point:: 0 0 Point:Print
+// - так работает
+
 Point var P1
 Point var P2
 Point var P3
