@@ -53,7 +53,7 @@ proc C ( STRING INTEGER in_param aValue )
  aValue .
 proc-end // C
 
-proc D ( STRING INTEGER in_param aValue )
+proc D ( STRING INTEGER OBJECT in_param aValue )
  aValue .
 proc-end // D
 

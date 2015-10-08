@@ -30,7 +30,7 @@ VOID TestWithDump ProcTest
  ; // VOID proc C
  
  VOID proc D
-  INTEGER STRING IN aValue
+  INTEGER STRING OBJECT IN aValue
   aValue
   .
  ; // VOID proc D
