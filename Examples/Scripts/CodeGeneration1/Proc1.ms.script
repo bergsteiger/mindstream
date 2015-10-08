@@ -1,4 +1,4 @@
-PROGRAM Proc.ms.script
+PROGRAM Proc1.ms.script
 
 USES
  CompileTimeVar.ms.dict
@@ -45,18 +45,18 @@ proc A ( IN aValue )
  aValue .
 proc-end // A
 
-proc B ( STRING IN aValue )
+/*{proc B ( STRING IN aValue )
  aValue .
 proc-end // B
 
 proc C ( STRING INTEGER IN aValue )
  aValue .
-proc-end // C
+proc-end // C}*/
 
 'Hello world' A
-'Hello world' B
+/*{'Hello world' B
 'Hello world' C
-123 C
+123 C}*/
 
 ; // ProcTest
 
