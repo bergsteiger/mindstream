@@ -245,6 +245,7 @@ MACRO RunCompileProps&Methods
  [
   'implementation'
   g_CurrentClassImpl
+   '%FIELDS' g_CurrentClassMembers ListToNameAsString
 
    '%PROPERTIES' g_CurrentClassProperties ListToNameAsString
 
@@ -336,14 +337,6 @@ MACRO new[
 ; // new[
 
 MACRO RunCompileFields
- [
-  'implementation'
-  g_CurrentClassImpl
-
-   '%FIELDS' g_CurrentClassMembers ListToNameAsString
-
-  'end.'
- ] Ctx:Parser:PushArray
 ; // RunCompileFields
 
 MACRO members-end
