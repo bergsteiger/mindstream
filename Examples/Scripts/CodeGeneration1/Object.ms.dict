@@ -23,6 +23,9 @@ USES
 ;
 
 EXPORTS
+ CompileTimeVar.ms.dict
+
+EXPORTS
  implementation.ms.dict
 
 USES
@@ -211,8 +214,9 @@ MACRO class
  [ cClassImplPrefix g_CurrentClass ] strings:Cat =: g_CurrentClassImpl
 
  axiom:PushSymbol INTEGER
- axiom:PushSymbol VAR
+ axiom:PushSymbol CompileTime-VAR
  [ cFieldPrefix g_CurrentClass ':Instance:Size' ] strings:Cat Ctx:Parser:PushSymbol
+ 0 Ctx:Parser:PushInt
 
  axiom:PushSymbol class_impl
  [
