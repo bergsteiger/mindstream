@@ -46,8 +46,9 @@ Pixel readonly X read X
 
 Pixel readonly Y read Y
 
-constructor OF ( )
- Point right aPoint
+constructor OF ( 
+ Point IN aPoint
+)
  Point:: ( aPoint .X ) ( aPoint .Y ) >>> Result
 ; // OF
 
