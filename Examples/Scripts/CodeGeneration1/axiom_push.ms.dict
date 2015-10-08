@@ -59,7 +59,7 @@ PROCEDURE axiom:PushWordInfo
 
 PROCEDURE axiom:Params:PushWithOtherStereo
   STRING IN aStereo
-  IN aParams
+  ENGINE_WORD IN aParams
 
  aParams MembersIterator ==> ( 
   TtfwWord IN aParam 
