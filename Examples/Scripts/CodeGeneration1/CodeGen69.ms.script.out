@@ -441,8 +441,7 @@ IMMEDIATE VOID OPERATOR : :=
   Присваивает слову aLeft значение aRight
  ^@ OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
- TtfwValueTypes OPERATOR :: VAR : l_TL
- TtfwValueTypes OPERATOR :: VAR : l_TR
+ TtfwWordInfo OPERATOR :: VAR : l_WIL
 ; // :=
 ;
 VOID ?
@@ -4839,11 +4838,11 @@ STRING OPERATOR :: MACRO :: readonly : Object:ClassName
 Object OPERATOR :: MACRO :: constructor : Object:new
  Object OPERATOR :: MACRO :: constructor :: Object:new : Result
 ; // Object:new
-ABSTRACT VOID OPERATOR :: MACRO :: method : Object:Print
+VIRTUAL VOID OPERATOR :: MACRO :: method : Object:Print
  Object OPERATOR :: IN : Self
 ; // Object:Print
-ABSTRACT STRING OPERATOR :: MACRO :: method : Object:ToPrintable
- ABSTRACT STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
+VIRTUAL STRING OPERATOR :: MACRO :: method : Object:ToPrintable
+ VIRTUAL STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
  Object OPERATOR :: IN : Self
 ; // Object:ToPrintable
 IMMEDIATE VOID OPERATOR :: TYPE : ObjectClass
