@@ -103,8 +103,8 @@ class-end // Rectangle
 Point:: 0 0 Point:Print
 // - так работает
 
-//Point:: 0 0 |> Print
-// - так НЕ работает, хотя ДОЛЖНО бы
+Point:: 0 0 |> Print
+// - теперь и ТАК работает
 
 Point var P1
 Point var P2
