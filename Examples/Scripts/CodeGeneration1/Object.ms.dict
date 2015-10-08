@@ -298,7 +298,7 @@ MACRO constructor
  @SELF Ctx:SetWordProducerForCompiledClass
  g_CurrentClass Ctx:Parser:PushSymbol
  l_Name MakeMethodSignature
- 'right' aParams axiom:Params:PushWithOtherStereo
+ @SELF 'right' aParams axiom:Params:PushWithOtherStereo
  l_Name array:AddTo g_CurrentClassConstructors
 ; // constructor
 

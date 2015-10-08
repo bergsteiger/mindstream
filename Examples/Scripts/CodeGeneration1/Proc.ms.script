@@ -20,7 +20,7 @@ MACRO proc
  axiom:PushSymbol :
  g_CurrentProc Ctx:Parser:PushString
 
- aParams axiom:Params:Push
+ @SELF aParams axiom:Params:Push
 ; // proc
 
 MACRO proc-end
