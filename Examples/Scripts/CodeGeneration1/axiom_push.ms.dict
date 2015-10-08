@@ -82,7 +82,11 @@ PROCEDURE axiom:Params:PushWithOtherStereo
 
  aParams CodeIterator .slice> 2 ==> ( 
   IN aTypes
-  IN aParam 
+  IN aParam
+
+  STRING VAR l_Types
+  aTypes DO >>> l_Types
+
   STRING VAR l_WordInfoTypeName 
   aParam pop:Word:Info pop:WordInfo:TypeName >>> l_WordInfoTypeName
   l_WordInfoTypeName axiom:PushWordInfo
