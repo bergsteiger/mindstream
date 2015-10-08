@@ -53,10 +53,16 @@ proc C ( STRING INTEGER in_param aValue )
  aValue .
 proc-end // C
 
+proc D ( STRING INTEGER in_param aValue )
+ aValue .
+proc-end // D
+
 'Hello world' A
 'Hello world' B
 'Hello world' C
 123 C
+'Hello world' D
+123 D
 
 ; // ProcTest
 
