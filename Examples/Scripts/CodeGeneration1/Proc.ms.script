@@ -50,7 +50,12 @@ proc A ( IN aValue )
  aValue .
 proc-end // A
 
+proc B ( IN aValue )
+ aValue .
+proc-end // B
+
 'Hello world' A
+'Hello world' B
 
 ; // ProcTest
 

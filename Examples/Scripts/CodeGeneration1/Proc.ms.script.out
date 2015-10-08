@@ -2,16 +2,28 @@ VOID TestWithDump ProcTest
  VOID : _A
  ; // VOID : _A
  
+ VOID : _B
+ ; // VOID : _B
+ 
  VOID proc A
   IN aValue
   aValue
   .
  ; // VOID proc A
  
+ VOID proc B
+  IN aValue
+  aValue
+  .
+ ; // VOID proc B
+ 
  ProcTest
  DumpElement
  'Hello world'
  A
+ 'Hello world'
+ B
 ; // VOID TestWithDump ProcTest
 
+Hello world
 Hello world
