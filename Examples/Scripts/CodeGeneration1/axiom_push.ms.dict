@@ -68,7 +68,7 @@ PROCEDURE axiom:Params:PushWithOtherStereo
   STRING IN aStereo
   ENGINE_WORD IN aParams
 
- aParams MembersIterator ==> ( 
+ aParams CodeIterator ==> ( 
   TtfwWord IN aParam 
   STRING VAR l_Stereo
   CONST cParamStereo 'IN'
