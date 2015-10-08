@@ -112,16 +112,19 @@ PRIVATE STRING operator MakeFieldOffsetName
  [ cFieldPrefix g_CurrentClass ':Offset:' aName ] strings:Cat =: Result
 ; // MakeFieldOffsetName
 
+INTEGER type FieldOffset
+// - смещение поля
+
 VOID operator define_member
  STRING IN aName
- INTEGER IN aOffset
+ FieldOffset IN aOffset
  axiom:PushSymbol private
  axiom:PushSymbol Const
  aName MakeFieldOffsetName Ctx:Parser:PushSymbol
  aOffset Ctx:Parser:PushInt
 ; // define_member
 
-INTEGER CompileTime-VAR g_ClassFieldOffset 0
+FieldOffset CompileTime-VAR g_ClassFieldOffset 0
 
 ARRAY CompileTime-VAR g_CurrentClassMembers [ ]
 
@@ -201,9 +204,6 @@ MACRO classExpander
 ; // classExpander
 
 CONST cObjectName 'Object'
-
-INTEGER type FieldOffset
-// - смещение поля
 
 MACRO class
  Literal IN aName
@@ -374,7 +374,7 @@ MACRO read
  axiom:PushSymbol ;
 ; // read
 
-INTEGER member VMT
+FieldOffset member VMT
 
 ObjectClass readonly class read VMT
 
