@@ -45,18 +45,18 @@ proc A ( in_param aValue )
  aValue .
 proc-end // A
 
-/*{proc B ( STRING IN aValue )
+proc B ( STRING in_param aValue )
  aValue .
 proc-end // B
 
-proc C ( STRING INTEGER IN aValue )
+proc C ( STRING INTEGER in_param aValue )
  aValue .
-proc-end // C}*/
+proc-end // C
 
 'Hello world' A
-/*{'Hello world' B
+'Hello world' B
 'Hello world' C
-123 C}*/
+123 C
 
 ; // ProcTest
 
