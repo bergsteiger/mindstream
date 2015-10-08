@@ -22,7 +22,9 @@ MACRO proc
 
  aParams MembersIterator ==> ( 
   TtfwWord IN aParam 
-  aParam pop:Word:Producer pop:Word:Name Ctx:Parser:PushSymbol 
+  STRING VAR l_Stereo
+  aParam pop:Word:Producer pop:Word:Name >>> l_Stereo
+  l_Stereo Ctx:Parser:PushSymbol 
   aParam pop:Word:Name Ctx:Parser:PushSymbol  
  )
 
