@@ -21,7 +21,6 @@ class Point
 
 Pixel member X
 Pixel member Y
-members-end
 
 constructor :
  Pixel right aX
@@ -80,7 +79,6 @@ class Rectangle
 
 Point member TopLeft
 Point member BottomRight
-members-end
 
 Point readonly TopLeft read TopLeft
 

@@ -342,9 +342,6 @@ MACRO new[
  g_CurrentClassImpl Ctx:Parser:PushSymbol
 ; // new[
 
-MACRO members-end
-; // members-end
-
 class Object
 
 : FieldByOffset
@@ -374,7 +371,6 @@ MACRO read
 ; // read
 
 INTEGER member VMT
-members-end
 
 ObjectClass readonly class read VMT
 
