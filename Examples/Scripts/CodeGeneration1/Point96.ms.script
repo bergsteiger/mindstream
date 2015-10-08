@@ -22,17 +22,17 @@ class Point
 Pixel member X
 Pixel member Y
 
-constructor :
+constructor : ( )
  Pixel right aX
  Pixel right aY
  new[ aX aY ] >>> Result
 ; // :
 
-constructor 0
+constructor 0 ( )
  Point:: 0 0 >>> Result
 ; // 0
 
-constructor XY
+constructor XY ( )
  //PixelList 
   right aPoint
  array var Points
@@ -44,7 +44,7 @@ Pixel readonly X read X
 
 Pixel readonly Y read Y
 
-constructor OF
+constructor OF ( )
  Point right aPoint
  Point:: ( aPoint .X ) ( aPoint .Y ) >>> Result
 ; // OF
@@ -84,7 +84,7 @@ Point readonly TopLeft read TopLeft
 
 Point readonly BottomRight read BottomRight
 
-constructor :
+constructor : ( )
  Point right aTopLeft
  Point right aBottomRight
  new[ aTopLeft aBottomRight ] >>> Result

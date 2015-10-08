@@ -289,6 +289,7 @@ PRIVATE VOID operator MakeMethodSignature
 
 MACRO constructor
   Literal IN aName
+  ^ IN aParams
 
  %SUMMARY 'Конструктор объектов';
 
@@ -382,7 +383,7 @@ STRING readonly ClassName
  Self .class .Name =: Result
 ; // ClassName
 
-constructor new
+constructor new ( )
  new[ ] =: Result
 ; // new
 

@@ -4776,6 +4776,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : constructor
  Documentation:
   Конструктор объектов
  ^L OPERATOR :: IN : aName
+ ^ OPERATOR :: IN : aParams
  STRING OPERATOR :: VAR : l_Name
 ; // constructor
 VOID OPERATOR : define_member
