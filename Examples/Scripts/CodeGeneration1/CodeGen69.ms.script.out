@@ -187,6 +187,7 @@ Dictionary: CodeGen69.ms.script
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Bind.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CompileTimeVar.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
@@ -4667,6 +4668,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
  ;
  Exports: 
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Bind.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CompileTimeVar.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  ;
@@ -4737,7 +4739,7 @@ OPERATOR :: MACRO :: class_impl : _:Object
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
  OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
 ; // _:Object
-INTEGER OPERATOR :: VAR : c:Object:Instance:Size
+FieldOffset OPERATOR :: VAR : c:Object:Instance:Size
 INTEGER CONST : c:Object:Offset:VMT
 STRING CONST : cClassImplPrefix
 STRING CONST : cFieldPrefix
@@ -4764,7 +4766,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : constructor
 ; // constructor
 VOID OPERATOR : define_member
  STRING OPERATOR :: IN : aName
- INTEGER OPERATOR :: IN : aOffset
+ FieldOffset OPERATOR :: IN : aOffset
 ; // define_member
 PRIVATE OPERATOR : do-get-member
  STRING OPERATOR :: IN : aName
@@ -4783,7 +4785,7 @@ BOOLEAN FUNCTION : FilterMember
  OBJECT OPERATOR :: IN : aMember
  BOOLEAN FUNCTION :: FilterMember : Result
 ; // FilterMember
-INTEGER OPERATOR :: VAR : g_ClassFieldOffset
+FieldOffset OPERATOR :: VAR : g_ClassFieldOffset
 STRING OPERATOR :: VAR : g_CurrentClass
 ARRAY OPERATOR :: VAR : g_CurrentClassConstructors
 STRING OPERATOR :: VAR : g_CurrentClassImpl

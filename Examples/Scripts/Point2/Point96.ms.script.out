@@ -513,13 +513,13 @@ VOID Test PointTest
   pop:Word:SetValue
  ; // STRING readonly Object:ClassName
  
- ABSTRACT STRING method Object:ToPrintable
+ VIRTUAL STRING method Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
   Result
   pop:Word:SetValue
- ; // ABSTRACT STRING method Object:ToPrintable
+ ; // VIRTUAL STRING method Object:ToPrintable
  
  Point VAR P1
  Point VAR P10
@@ -909,18 +909,18 @@ VOID Test PointTest
  1
  1
  P3
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:XY
  (
   2
   2
  )
  P4
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:OF
  P4
  P5
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  (
   P3
   Point:+
@@ -960,7 +960,7 @@ VOID Test PointTest
   2
  )
  P11
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  P1
  O1
  pop:Word:SetValuePrim
@@ -1039,12 +1039,12 @@ VOID Test PointTest
  P1
  P4
  R1
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Rectangle::
  P6
  P7
  R2
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  [
   R1
   R2

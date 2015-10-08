@@ -346,7 +346,7 @@ VOID Test CodeGen
        FilterElement
       )
       Result
-      pop:Word:SetValue
+      pop:Word:SetValuePrim
      )
    )
  ; // ARRAY elem_func .ElementList
@@ -1461,8 +1461,7 @@ IMMEDIATE VOID OPERATOR : :=
   Присваивает слову aLeft значение aRight
  ^@ OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
- TtfwValueTypes OPERATOR :: VAR : l_TL
- TtfwValueTypes OPERATOR :: VAR : l_TR
+ TtfwWordInfo OPERATOR :: VAR : l_WIL
 ; // :=
 ;
 VOID ?
@@ -5520,8 +5519,8 @@ STRING OPERATOR :: MACRO :: readonly : Object:ClassName
  STRING OPERATOR :: MACRO :: readonly :: Object:ClassName : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassName
-ABSTRACT STRING OPERATOR :: MACRO :: method : Object:ToPrintable
- ABSTRACT STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
+VIRTUAL STRING OPERATOR :: MACRO :: method : Object:ToPrintable
+ VIRTUAL STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
  Object OPERATOR :: IN : Self
 ; // Object:ToPrintable
 IMMEDIATE VOID OPERATOR :: MACRO : read

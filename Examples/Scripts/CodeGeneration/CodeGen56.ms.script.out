@@ -1078,8 +1078,7 @@ IMMEDIATE VOID OPERATOR : :=
   Присваивает слову aLeft значение aRight
  ^@ OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
- TtfwValueTypes OPERATOR :: VAR : l_TL
- TtfwValueTypes OPERATOR :: VAR : l_TR
+ TtfwWordInfo OPERATOR :: VAR : l_WIL
 ; // :=
 ;
 VOID ?
