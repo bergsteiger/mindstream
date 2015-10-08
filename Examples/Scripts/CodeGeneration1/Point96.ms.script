@@ -87,9 +87,10 @@ Point readonly TopLeft read TopLeft
 
 Point readonly BottomRight read BottomRight
 
-constructor : ( )
- Point right aTopLeft
- Point right aBottomRight
+constructor : ( 
+ Point IN aTopLeft
+ Point IN aBottomRight
+)
  new[ aTopLeft aBottomRight ] >>> Result
 ; // :
 
