@@ -4738,9 +4738,10 @@ OPERATOR :: MACRO :: class_impl : _:Object
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
  OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
 ; // _:Object
-INTEGER CONST : c:Object:Instance:Size
+INTEGER OPERATOR :: VAR : c:Object:Instance:Size
 INTEGER CONST : c:Object:Offset:VMT
 STRING CONST : cClassImplPrefix
+STRING CONST : cFieldPrefix
 IMMEDIATE VOID OPERATOR :: MACRO : class
  ^L OPERATOR :: IN : aName
 ; // class
@@ -4860,7 +4861,6 @@ IMMEDIATE VOID OPERATOR :: MACRO : readonly
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
 ; // readonly
-IMMEDIATE VOID OPERATOR :: MACRO : RunCompileFields
 IMMEDIATE VOID OPERATOR :: MACRO : RunCompileProps&Methods
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Bind.ms.dict
  Uses: 
