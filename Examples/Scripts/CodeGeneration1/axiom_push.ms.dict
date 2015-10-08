@@ -50,3 +50,20 @@ PROCEDURE axiom:PushWordInfo
   aWordInfo ' ' string:Split:for> Ctx:Parser:PushSymbol
  end
 ; // axiom:PushWordInfo
+
+PROCEDURE axiom:Params:Push
+  IN aParams
+
+ aParams MembersIterator ==> ( 
+  TtfwWord IN aParam 
+  STRING VAR l_Stereo
+  CONST cParamStereo 'IN'
+  aParam pop:Word:Producer pop:Word:Name >>> l_Stereo
+  l_Stereo cParamStereo == ?ASSURE [ 'ѕараметры ' @SELF pop:Word:Name ' должны быть помечены стереотипом ' cParamStereo ]
+  STRING VAR l_WordInfoTypeName 
+  aParam pop:Word:Info pop:WordInfo:TypeName >>> l_WordInfoTypeName
+  l_WordInfoTypeName axiom:PushWordInfo
+  l_Stereo Ctx:Parser:PushSymbol 
+  aParam pop:Word:Name Ctx:Parser:PushSymbol  
+ )
+; // axiom:Params:Push
