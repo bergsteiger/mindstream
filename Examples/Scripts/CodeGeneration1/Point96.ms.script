@@ -22,8 +22,10 @@ class Point
 Pixel member X
 Pixel member Y
 
-constructor : ( Pixel IN aX )
- Pixel right aY
+constructor : ( 
+ Pixel IN aX 
+ Pixel IN aY 
+)
  new[ aX aY ] >>> Result
 ; // :
 
