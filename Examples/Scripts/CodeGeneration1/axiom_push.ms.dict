@@ -70,7 +70,7 @@ PROCEDURE axiom:Params:PushWithOtherStereo
   STRING VAR l_WordInfoTypeName 
   aParam pop:Word:Info pop:WordInfo:TypeName >>> l_WordInfoTypeName
   l_WordInfoTypeName axiom:PushWordInfo
-  aStereo Ctx:Parser:PushSymbol 
+  aStereo axiom:PushSerias 
   aParam pop:Word:Name Ctx:Parser:PushSymbol  
  )
 ; // axiom:Params:PushWithOtherStereo
