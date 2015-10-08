@@ -3278,7 +3278,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
  ;
 VOID OPERATOR :: PROCEDURE : axiom:Params:Push
- OPERATOR :: IN : aParams
+ ENGINE_WORD OPERATOR :: IN : aParams
 ; // axiom:Params:Push
 VOID OPERATOR :: PROCEDURE : axiom:Params:PushWithOtherStereo
  ENGINE_WORD OPERATOR :: IN : aParams

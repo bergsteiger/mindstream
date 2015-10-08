@@ -76,7 +76,7 @@ PROCEDURE axiom:Params:PushWithOtherStereo
 ; // axiom:Params:PushWithOtherStereo
 
 PROCEDURE axiom:Params:Push
-  IN aParams
+  ENGINE_WORD IN aParams
 
  'IN' aParams axiom:Params:PushWithOtherStereo
 ; // axiom:Params:Push
