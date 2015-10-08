@@ -202,6 +202,9 @@ MACRO classExpander
 
 CONST cObjectName 'Object'
 
+INTEGER type FieldOffset
+// - смещение поля
+
 MACRO class
  Literal IN aName
  ( g_CurrentClass = '' ) ?ASSURE 'Вложенные классы пока не поддерживаются'
@@ -271,9 +274,6 @@ MACRO class-end
  axiom:PushSymbol RunCompileProps&Methods
  g_CurrentClass := ''
 ; // class-end
-
-INTEGER type FieldOffset
-// - смещение поля
 
 PRIVATE VOID operator MakeMethodSignature
  STRING IN aName
