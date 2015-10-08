@@ -44,6 +44,7 @@ VOID TestWithDump ProcTest
   .
  ; // VOID proc E
  
+ INTERFACE VAR F
  ProcTest
  DumpElement
  'Hello world'
@@ -66,6 +67,11 @@ VOID TestWithDump ProcTest
  E
  nil
  E
+ nil
+ F
+ pop:Word:SetValue
+ F
+ E
 ; // VOID TestWithDump ProcTest
 
 Hello world
@@ -77,4 +83,5 @@ Hello world
 <nil>
 Hello world
 123
+<nil>
 <nil>
