@@ -1,2 +1,2 @@
 call ..\clear.cmd
-call c.cmd Point96.ms.script
+call c.cmd Proc.ms.script
