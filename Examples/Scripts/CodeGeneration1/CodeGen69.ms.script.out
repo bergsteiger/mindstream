@@ -3280,6 +3280,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms
 VOID OPERATOR :: PROCEDURE : axiom:Params:Push
  OPERATOR :: IN : aParams
 ; // axiom:Params:Push
+VOID OPERATOR :: PROCEDURE : axiom:Params:PushWithOtherStereo
+ OPERATOR :: IN : aParams
+ STRING OPERATOR :: IN : aStereo
+; // axiom:Params:PushWithOtherStereo
 VOID OPERATOR :: PROCEDURE : axiom:Push
  Documentation:
   Запихивает во входной поток парсера токен aToken типизируя его в зависимости от aTokenType
