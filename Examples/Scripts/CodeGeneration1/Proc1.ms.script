@@ -57,6 +57,10 @@ proc D ( STRING INTEGER OBJECT in_param aValue )
  aValue .
 proc-end // D
 
+proc E ( STRING INTEGER OBJECT INTERFACE in_param aValue )
+ aValue .
+proc-end // E
+
 'Hello world' A
 'Hello world' B
 'Hello world' C
@@ -64,6 +68,9 @@ proc-end // D
 'Hello world' D
 123 D
 nil D
+'Hello world' E
+123 E
+nil E
 
 ; // ProcTest
 
