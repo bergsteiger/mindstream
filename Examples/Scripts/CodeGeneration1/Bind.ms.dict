@@ -109,7 +109,7 @@ PROCEDURE bindInPlace
 
  aName bind
 
- l_TypeInfo ' ' string:Split:for> Ctx:Parser:PushSymbol
+ l_TypeInfo axiom:PushWordInfo
 
  g_Stereo IsNil ?ASSURE 'Вложенные методы пока не поддерживаются'
 
