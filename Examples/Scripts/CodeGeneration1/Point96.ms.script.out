@@ -124,14 +124,14 @@ VOID TestWithDump PointTest
   
  ; // class_impl _:Rectangle
  
- INTEGER VAR c:Point:Instance:Size
+ FieldOffset VAR c:Point:Instance:Size
  INTEGER CONST c:Point:Offset:VMT
   0
  INTEGER CONST c:Point:Offset:X
   1
  INTEGER CONST c:Point:Offset:Y
   2
- INTEGER VAR c:Rectangle:Instance:Size
+ FieldOffset VAR c:Rectangle:Instance:Size
  INTEGER CONST c:Rectangle:Offset:BottomRight
   2
  INTEGER CONST c:Rectangle:Offset:TopLeft
