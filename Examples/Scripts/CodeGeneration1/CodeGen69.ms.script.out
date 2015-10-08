@@ -3308,6 +3308,9 @@ VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushLeftDottedSymbol
   Запихивает во входной поток парсера aValue предварённое точкой
  STRING OPERATOR :: IN : aValue
 ; // Ctx:Parser:PushLeftDottedSymbol
+IMMEDIATE VOID OPERATOR :: MACRO : in_param
+ ^L OPERATOR :: IN : aName
+; // in_param
 IMMEDIATE VOID OPERATOR :: TYPE : TOKEN
 IMMEDIATE VOID OPERATOR :: TYPE : TOKEN_TYPE
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict

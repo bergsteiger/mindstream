@@ -57,6 +57,12 @@ PROCEDURE axiom:PushWordInfo
  aWordInfo axiom:PushSerias
 ; // axiom:PushWordInfo
 
+MACRO in_param
+  Literal IN aName
+
+ aName |N CompileValue
+; // in_param
+
 PROCEDURE axiom:Params:PushWithOtherStereo
   ENGINE_WORD IN aCaller
   STRING IN aStereo
