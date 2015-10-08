@@ -92,6 +92,10 @@ MACRO DefferedSetStereo
  nil >>> g_Stereo
 ; // DefferedSetStereo
 
+USES
+ axiom_push.ms.dict
+;
+
 PROCEDURE bindInPlace
   STRING IN aName
   TtfwWord IN aStereo

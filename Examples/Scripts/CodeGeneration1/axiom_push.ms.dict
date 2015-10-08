@@ -1,4 +1,4 @@
-// axiom_push.ms.dict
+UNIT axiom_push.ms.dict
 
 USES
  axiom:Tl3TokenType
@@ -36,4 +36,14 @@ PROCEDURE axiom:Push
   DEFAULT 
    ( ERROR [ 'Неожиданный тип токена: ' aTokenType Tl3TokenType:ValueToName ] )
  end // aTokenType Case
-; // axiom:Push 
+; // axiom:Push
+
+USES
+ string.ms.dict
+; 
+
+PROCEDURE axiom:PushWordInfo
+  STRING IN aWordInfo
+
+ aWordInfo ' ' string:Split:for> Ctx:Parser:PushSymbol
+; // axiom:PushWordInfo

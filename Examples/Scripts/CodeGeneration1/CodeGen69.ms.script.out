@@ -3275,6 +3275,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms
   axiom:clipboard
   axiom:Font
   axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
  ;
 VOID OPERATOR :: PROCEDURE : axiom:Push
  Documentation:
@@ -3287,6 +3288,9 @@ VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
   Запихивает во входной поток парсера имя слова aSymbol
  LINK ^ OPERATOR :: IN : aSymbol
 ; // axiom:PushSymbol
+VOID OPERATOR :: PROCEDURE : axiom:PushWordInfo
+ STRING OPERATOR :: IN : aWordInfo
+; // axiom:PushWordInfo
 VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushLeftDottedSymbol
  Documentation:
   Запихивает во входной поток парсера aValue предварённое точкой
@@ -3294,7 +3298,7 @@ VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushLeftDottedSymbol
 ; // Ctx:Parser:PushLeftDottedSymbol
 IMMEDIATE VOID OPERATOR :: TYPE : TOKEN
 IMMEDIATE VOID OPERATOR :: TYPE : TOKEN_TYPE
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3328,151 +3332,97 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   axiom:clipboard
   axiom:Font
   axiom:generators
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
- ;
-IMMEDIATE VOID OPERATOR : macro
- Documentation:
-  - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
-; // macro
-IMMEDIATE VOID OPERATOR : MACRO
- Documentation:
-  - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
-; // MACRO
-IMMEDIATE VOID OPERATOR :: MACRO : STACK_CHANGING_MACRO
- Documentation:
-  - аналог MACRO, но который может "потрогать стек", т.е. считать что-то со стека или положить что-то на стек
-; // STACK_CHANGING_MACRO
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:WordInfo
-  axiom:TtfwValueTypesAccepts
-  axiom:Tl3TokenType
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Sequence
-  axiom:Stereotype
-  axiom:Dictionary
-  axiom:MainDictionary
-  axiom:Array
-  axiom:File
-  axiom:clipboard
-  axiom:Font
-  axiom:generators
- ;
-IMMEDIATE VOID OPERATOR :: TYPE : ANY
-IMMEDIATE VOID OPERATOR :: TYPE : ITERATABLE
-IMMEDIATE VOID OPERATOR :: TYPE : ITERATOR
-IMMEDIATE VOID OPERATOR :: TYPE : VAR_REF
-IMMEDIATE VOID OPERATOR :: TYPE : VARIANT
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:WordInfo
-  axiom:TtfwValueTypesAccepts
-  axiom:Tl3TokenType
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Sequence
-  axiom:Stereotype
-  axiom:Dictionary
-  axiom:MainDictionary
-  axiom:Array
-  axiom:File
-  axiom:clipboard
-  axiom:Font
-  axiom:generators
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
  ;
-BOOLEAN OPERATOR : !==
+STRING FUNCTION : (+)?
  Documentation:
-  Правосторонний, а не обратный польский !=
- OPERATOR :: IN : aLeft
- ^ OPERATOR :: IN : aRight
- BOOLEAN OPERATOR :: <> : Result
-; // !==
-FUNCTOR : : |@
- ^@ OPERATOR :: IN : aRef
- FUNCTOR : :: |@ : Result
-; // |@
-: : |^
- ^@ OPERATOR :: IN : aRef
-; // |^
-BOOLEAN OPERATOR : =/=
+  Если aSuffix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку
+ ^ OPERATOR :: IN : _aSuffix
+ STRING OPERATOR :: IN : aPrefix
+ IMMEDIATE VOID OPERATOR : aSuffix
+ STRING OPERATOR :: VAR : l_Suffix
+ STRING FUNCTION :: (+)? : Result
+; // (+)?
+: : (string)
+ ^ OPERATOR :: IN : aValue
+; // (string)
+STRING FUNCTION : ?(+)
  Documentation:
-  Правосторонний, а не обратный польский !=
- OPERATOR :: IN : aLeft
- ^ OPERATOR :: IN : aRight
- BOOLEAN OPERATOR :: <> : Result
-; // =/=
-VOID OPERATOR : array:AddTo
- OPERATOR :: IN : aLeft
- ^ OPERATOR :: IN : aRight
-; // array:AddTo
-IMMEDIATE VOID OPERATOR :: MACRO : call.me
+  Если aPrefix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку
+ ^ OPERATOR :: IN : _aSuffix
+ STRING OPERATOR :: IN : aPrefix
+ IMMEDIATE VOID OPERATOR : aSuffix
+ STRING FUNCTION :: ?(+) : Result
+; // ?(+)
+STRING FUNCTION : any:Cat
+ ARRAY OPERATOR :: IN : anArray
+ STRING FUNCTION :: any:Cat : Result
+; // any:Cat
+STRING FUNCTION : CatSep>
+ ^ OPERATOR :: IN : _aSep
+ ^ OPERATOR :: IN : _aValues
+ IMMEDIATE VOID OPERATOR : aSep
+ IMMEDIATE VOID OPERATOR : aValues
+ STRING FUNCTION :: strings:CatSep> : Result
+; // CatSep>
+STRING FUNCTION : string:CatWihAny
+ STRING OPERATOR :: IN : aString
+ OPERATOR :: IN : aValue
+ STRING FUNCTION :: string:CatWihAny : Result
+; // string:CatWihAny
+VOID OPERATOR :: PROCEDURE : string:Split:for>
  Documentation:
-  - запускаем "себя же" рекурсивно
-; // call.me
-BOOLEAN FUNCTION : IsWordDeclared
- Documentation:
-  Определяет, что слово aName определено в данном месте
- STRING OPERATOR :: IN : aName
- BOOLEAN FUNCTION :: IsWordDeclared : Result
-; // IsWordDeclared
-STRING FUNCTION : NameAsString
- Documentation:
-  Делает имя таким, чтобы оно было как для Ctx:Parser:PushString
- STRING OPERATOR :: IN : aName
- STRING FUNCTION :: NameAsString : Result
-; // NameAsString
-STRING FUNCTION : NameOf
- LINK ^ OPERATOR :: IN : aWord
- STRING FUNCTION :: NameOf : Result
-; // NameOf
-IMMEDIATE VOID OPERATOR :: MACRO : RecurseProc
- ^L OPERATOR :: IN : aName
-; // RecurseProc
-IMMEDIATE VOID OPERATOR :: MACRO : this.do
- Documentation:
-  - запускаем "себя же" рекурсивно
-; // this.do
+  Разделяет строку aString по разделителю aSep и для каждой части вызывает aLambda
+ ^ OPERATOR :: IN : aLambda
+ STRING OPERATOR :: IN : aSep
+ STRING OPERATOR :: IN : aString
+; // string:Split:for>
+STRING FUNCTION : strings:CatSep>
+ ^ OPERATOR :: IN : _aSep
+ ^ OPERATOR :: IN : _aValues
+ IMMEDIATE VOID OPERATOR : aSep
+ IMMEDIATE VOID OPERATOR : aValues
+ STRING FUNCTION :: strings:CatSep> : Result
+; // strings:CatSep>
+VOID OPERATOR : Tests:(+)?
+ VOID OPERATOR :: Test : T1
+ VOID OPERATOR :: Test : T2
+ VOID OPERATOR :: Test : T3
+ VOID OPERATOR :: Test : T4
+ VOID OPERATOR :: Test : T5
+; // Tests:(+)?
+VOID OPERATOR : Tests:?(+)
+ VOID OPERATOR :: Test : T1
+ VOID OPERATOR :: Test : T2
+ VOID OPERATOR :: Test : T3
+; // Tests:?(+)
+VOID OPERATOR : Tests:any:Cat
+ VOID OPERATOR :: Test : T1
+ VOID OPERATOR :: Test : T2
+; // Tests:any:Cat
+VOID OPERATOR : Tests:string:Split:for>
+ VOID OPERATOR :: Test : T1
+ VOID OPERATOR :: Test : T2
+ VOID OPERATOR :: Test : T3
+ VOID OPERATOR :: Test : T4
+ VOID OPERATOR :: Test : T5
+; // Tests:string:Split:for>
+VOID OPERATOR : Tests:strings:CatSep>
+ VOID OPERATOR :: Test : T1
+ VOID OPERATOR :: Test : T2
+ VOID OPERATOR :: Test : T3
+ VOID OPERATOR :: Test : T4
+ VOID OPERATOR :: Test : T5
+ VOID OPERATOR :: Test : T6
+; // Tests:strings:CatSep>
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  Uses: 
   axiom:axiom
@@ -3570,7 +3520,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.di
 IMMEDIATE VOID OPERATOR :: MACRO : Literal
  ^L OPERATOR :: IN : aName
 ; // Literal
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymbols.ms.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3604,110 +3554,20 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymb
   axiom:clipboard
   axiom:Font
   axiom:generators
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
  ;
-STRING FUNCTION : .Name
- OPERATOR :: IN : %S
+IMMEDIATE VOID OPERATOR : macro
  Documentation:
-  Возвращает имя слова слева
- STRING FUNCTION :: |N : Result
-; // .Name
-TtfwWord Addr
-TtfwWord OPERATOR : GetRefFromLeft
+  - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
+; // macro
+IMMEDIATE VOID OPERATOR : MACRO
  Documentation:
-  Получает ссылку на параметр слева
- ^@ OPERATOR :: IN : aSelf
- TtfwWord OPERATOR :: |^@ : Result
-; // GetRefFromLeft
-IMMEDIATE VOID OPERATOR : this.method.addr
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:WordInfo
-  axiom:TtfwValueTypesAccepts
-  axiom:Tl3TokenType
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Sequence
-  axiom:Stereotype
-  axiom:Dictionary
-  axiom:MainDictionary
-  axiom:Array
-  axiom:File
-  axiom:clipboard
-  axiom:Font
-  axiom:generators
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
- ;
-VOID CALLER OPERATOR : ?Assure
- BOOLEAN OPERATOR :: IN : aCondition
- ^ OPERATOR :: IN : aMessage
- TtfwWord OPERATOR :: IN : Caller
-; // ?Assure
-VOID CALLER OPERATOR : ?Fail
- BOOLEAN OPERATOR :: IN : aCondition
- ^ OPERATOR :: IN : aMessage
- TtfwWord OPERATOR :: IN : Caller
-; // ?Fail
-IMMEDIATE VOID OPERATOR : array
-VOID break
-IMMEDIATE VOID OPERATOR :: TYPE : callback
-IMMEDIATE VOID OPERATOR :: TYPE : Callback
-IMMEDIATE VOID OPERATOR :: TYPE : CallBack
-case
-Case
-const
-Const
-VOID continue
-default
-Default
-VOID CALLER OPERATOR : error
- ^ OPERATOR :: IN : aMsg
- TtfwWord OPERATOR :: IN : Caller
-; // error
-VOID CALLER OPERATOR : Error
- ^ OPERATOR :: IN : aMsg
- TtfwWord OPERATOR :: IN : Caller
-; // Error
-VOID exit
-IMMEDIATE VOID OPERATOR :: TYPE : Functor
-IMMEDIATE VOID OPERATOR :: TYPE : Lambda
-IMMEDIATE VOID OPERATOR :: TYPE : List
-IMMEDIATE VOID OPERATOR : private
-IMMEDIATE VOID OPERATOR : Private
-IMMEDIATE VOID OPERATOR : Procedure
- ^L OPERATOR :: IN : aName
-; // Procedure
-IMMEDIATE VOID OPERATOR :: TYPE : Sequence
-IMMEDIATE VOID OPERATOR : string
-IMMEDIATE VOID OPERATOR : String
-IMMEDIATE OPERATOR : type
- ^L OPERATOR :: IN : aName
-; // type
-IMMEDIATE OPERATOR : Type
- ^L OPERATOR :: IN : aName
-; // Type
-IMMEDIATE VOID OPERATOR : var
- ^L OPERATOR :: IN : aName
-; // var
-IMMEDIATE OPERATOR : void
+  - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
+; // MACRO
+IMMEDIATE VOID OPERATOR :: MACRO : STACK_CHANGING_MACRO
+ Documentation:
+  - аналог MACRO, но который может "потрогать стек", т.е. считать что-то со стека или положить что-то на стек
+; // STACK_CHANGING_MACRO
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
  Uses: 
   axiom:axiom
@@ -3778,7 +3638,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : right
  STRING OPERATOR :: VAR : l_ValueTypesName
 ; // right
 IMMEDIATE VOID OPERATOR : RIGHT
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\math.ms.dict
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -3812,34 +3672,242 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\math.ms.dict
   axiom:clipboard
   axiom:Font
   axiom:generators
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
-INTEGER FUNCTION : Dec1
- INTEGER OPERATOR :: IN : aValue
- INTEGER FUNCTION :: Dec1 : Result
-; // Dec1
-INTEGER FUNCTION : DecWith
- ^ OPERATOR :: IN : aDec
- INTEGER OPERATOR :: IN : aValue
- INTEGER FUNCTION :: DecWith : Result
-; // DecWith
-INTEGER FUNCTION : Inc1
- INTEGER OPERATOR :: IN : aValue
- INTEGER FUNCTION :: Inc1 : Result
-; // Inc1
-INTEGER FUNCTION : IncWith
- ^ OPERATOR :: IN : anInc
- INTEGER OPERATOR :: IN : aValue
- INTEGER FUNCTION :: IncWith : Result
-; // IncWith
-BOOLEAN FUNCTION : IsEven
- INTEGER OPERATOR :: IN : aValue
- BOOLEAN FUNCTION :: IsEven : Result
-; // IsEven
-BOOLEAN FUNCTION : IsOdd
- INTEGER OPERATOR :: IN : aValue
- BOOLEAN FUNCTION :: IsOdd : Result
-; // IsOdd
+BOOLEAN OPERATOR : !==
+ Documentation:
+  Правосторонний, а не обратный польский !=
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: <> : Result
+; // !==
+FUNCTOR : : |@
+ ^@ OPERATOR :: IN : aRef
+ FUNCTOR : :: |@ : Result
+; // |@
+: : |^
+ ^@ OPERATOR :: IN : aRef
+; // |^
+BOOLEAN OPERATOR : =/=
+ Documentation:
+  Правосторонний, а не обратный польский !=
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+ BOOLEAN OPERATOR :: <> : Result
+; // =/=
+VOID OPERATOR : array:AddTo
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+; // array:AddTo
+IMMEDIATE VOID OPERATOR :: MACRO : call.me
+ Documentation:
+  - запускаем "себя же" рекурсивно
+; // call.me
+BOOLEAN FUNCTION : IsWordDeclared
+ Documentation:
+  Определяет, что слово aName определено в данном месте
+ STRING OPERATOR :: IN : aName
+ BOOLEAN FUNCTION :: IsWordDeclared : Result
+; // IsWordDeclared
+STRING FUNCTION : NameAsString
+ Documentation:
+  Делает имя таким, чтобы оно было как для Ctx:Parser:PushString
+ STRING OPERATOR :: IN : aName
+ STRING FUNCTION :: NameAsString : Result
+; // NameAsString
+STRING FUNCTION : NameOf
+ LINK ^ OPERATOR :: IN : aWord
+ STRING FUNCTION :: NameOf : Result
+; // NameOf
+IMMEDIATE VOID OPERATOR :: MACRO : RecurseProc
+ ^L OPERATOR :: IN : aName
+; // RecurseProc
+IMMEDIATE VOID OPERATOR :: MACRO : this.do
+ Documentation:
+  - запускаем "себя же" рекурсивно
+; // this.do
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
+  axiom:Tl3TokenType
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Sequence
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  axiom:generators
+ ;
+IMMEDIATE VOID OPERATOR :: TYPE : ANY
+IMMEDIATE VOID OPERATOR :: TYPE : ITERATABLE
+IMMEDIATE VOID OPERATOR :: TYPE : ITERATOR
+IMMEDIATE VOID OPERATOR :: TYPE : VAR_REF
+IMMEDIATE VOID OPERATOR :: TYPE : VARIANT
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
+  axiom:Tl3TokenType
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Sequence
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  axiom:generators
+ ;
+ARRAY map
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
+  axiom:Tl3TokenType
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Sequence
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Sequence.It.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
+ ;
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
+ ;
+STRING CONST : cTests
+PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTests
+ Documentation:
+  Выполняет тесты для списка слов aWords
+ Sequence OPERATOR :: IN : aWords
+; // DoRunTests
+PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTestsA
+ Documentation:
+  Выполняет тесты для списка слов aWords
+ ARRAY OPERATOR :: IN : aWords
+; // DoRunTestsA
+PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTestsFor
+ Documentation:
+  Выполняет тесты для aTestsHolder
+ STRING OPERATOR :: IN : aTestedWordName
+ ENGINE_WORD OPERATOR :: IN : aTestsHolder
+; // DoRunTestsFor
+PRIVATE VOID OPERATOR :: PROCEDURE : ExpandRunTestsFor
+ ENGINE_WORD OPERATOR :: IN : aTestsHolder
+ STRING OPERATOR :: VAR : l_Name
+ STRING OPERATOR :: VAR : l_TestsHolderName
+; // ExpandRunTestsFor
+IMMEDIATE VOID OPERATOR :: MACRO : RunTests
+ Documentation:
+  Выполняет тесты для списка слов aWords
+ LINK ^ OPERATOR :: IN : aWords
+; // RunTests
+IMMEDIATE VOID OPERATOR :: MACRO : RunTests.in.array
+ Documentation:
+  Выполняет тесты для списка слов aWords
+ ^ OPERATOR :: IN : aWords
+; // RunTests.in.array
+IMMEDIATE VOID OPERATOR :: MACRO : Test&Dump
+ Documentation:
+  Аналог слова Test, но с дампингом кода слова в стандартный вывод
+ ^L OPERATOR :: IN : aName
+; // Test&Dump
+IMMEDIATE VOID OPERATOR :: MACRO : TestsFor
+ Documentation:
+  Определяет набор тестов для слова aWord
+ LINK ^ OPERATOR :: IN : aWord
+; // TestsFor
+IMMEDIATE VOID OPERATOR :: MACRO : TestWithDump
+ Documentation:
+  Аналог слова Test, но с дампингом кода слова в стандартный вывод
+ ^L OPERATOR :: IN : aName
+; // TestWithDump
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
  Uses: 
   axiom:axiom
@@ -3880,6 +3948,43 @@ VOID OPERATOR :: PROCEDURE : Print
  PRINTABLE OPERATOR :: IN : aValue
 ; // Print
 IMMEDIATE VOID OPERATOR :: TYPE : PRINTABLE
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
+  axiom:Tl3TokenType
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Sequence
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: TYPE : ENGINE_WORD
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dict
  Uses: 
   axiom:axiom
@@ -4061,42 +4166,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dic
   axiom:generators
  ;
 ARRAY filter
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:WordInfo
-  axiom:TtfwValueTypesAccepts
-  axiom:Tl3TokenType
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Sequence
-  axiom:Stereotype
-  axiom:Dictionary
-  axiom:MainDictionary
-  axiom:Array
-  axiom:File
-  axiom:clipboard
-  axiom:Font
-  axiom:generators
- ;
-ARRAY map
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
  Uses: 
   axiom:axiom
@@ -4136,271 +4205,6 @@ ARRAY .reverted>
 ARRAY >reverted>
 ARRAY reverted
 ARRAY REVERTED
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:WordInfo
-  axiom:TtfwValueTypesAccepts
-  axiom:Tl3TokenType
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Sequence
-  axiom:Stereotype
-  axiom:Dictionary
-  axiom:MainDictionary
-  axiom:Array
-  axiom:File
-  axiom:clipboard
-  axiom:Font
-  axiom:generators
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
- ;
-STRING FUNCTION : (+)?
- Documentation:
-  Если aSuffix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку
- ^ OPERATOR :: IN : _aSuffix
- STRING OPERATOR :: IN : aPrefix
- IMMEDIATE VOID OPERATOR : aSuffix
- STRING OPERATOR :: VAR : l_Suffix
- STRING FUNCTION :: (+)? : Result
-; // (+)?
-: : (string)
- ^ OPERATOR :: IN : aValue
-; // (string)
-STRING FUNCTION : ?(+)
- Documentation:
-  Если aPrefix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку
- ^ OPERATOR :: IN : _aSuffix
- STRING OPERATOR :: IN : aPrefix
- IMMEDIATE VOID OPERATOR : aSuffix
- STRING FUNCTION :: ?(+) : Result
-; // ?(+)
-STRING FUNCTION : any:Cat
- ARRAY OPERATOR :: IN : anArray
- STRING FUNCTION :: any:Cat : Result
-; // any:Cat
-STRING FUNCTION : CatSep>
- ^ OPERATOR :: IN : _aSep
- ^ OPERATOR :: IN : _aValues
- IMMEDIATE VOID OPERATOR : aSep
- IMMEDIATE VOID OPERATOR : aValues
- STRING FUNCTION :: strings:CatSep> : Result
-; // CatSep>
-STRING FUNCTION : string:CatWihAny
- STRING OPERATOR :: IN : aString
- OPERATOR :: IN : aValue
- STRING FUNCTION :: string:CatWihAny : Result
-; // string:CatWihAny
-VOID OPERATOR :: PROCEDURE : string:Split:for>
- Documentation:
-  Разделяет строку aString по разделителю aSep и для каждой части вызывает aLambda
- ^ OPERATOR :: IN : aLambda
- STRING OPERATOR :: IN : aSep
- STRING OPERATOR :: IN : aString
-; // string:Split:for>
-STRING FUNCTION : strings:CatSep>
- ^ OPERATOR :: IN : _aSep
- ^ OPERATOR :: IN : _aValues
- IMMEDIATE VOID OPERATOR : aSep
- IMMEDIATE VOID OPERATOR : aValues
- STRING FUNCTION :: strings:CatSep> : Result
-; // strings:CatSep>
-VOID OPERATOR : Tests:(+)?
- VOID OPERATOR :: Test : T1
- VOID OPERATOR :: Test : T2
- VOID OPERATOR :: Test : T3
- VOID OPERATOR :: Test : T4
- VOID OPERATOR :: Test : T5
-; // Tests:(+)?
-VOID OPERATOR : Tests:?(+)
- VOID OPERATOR :: Test : T1
- VOID OPERATOR :: Test : T2
- VOID OPERATOR :: Test : T3
-; // Tests:?(+)
-VOID OPERATOR : Tests:any:Cat
- VOID OPERATOR :: Test : T1
- VOID OPERATOR :: Test : T2
-; // Tests:any:Cat
-VOID OPERATOR : Tests:string:Split:for>
- VOID OPERATOR :: Test : T1
- VOID OPERATOR :: Test : T2
- VOID OPERATOR :: Test : T3
- VOID OPERATOR :: Test : T4
- VOID OPERATOR :: Test : T5
-; // Tests:string:Split:for>
-VOID OPERATOR : Tests:strings:CatSep>
- VOID OPERATOR :: Test : T1
- VOID OPERATOR :: Test : T2
- VOID OPERATOR :: Test : T3
- VOID OPERATOR :: Test : T4
- VOID OPERATOR :: Test : T5
- VOID OPERATOR :: Test : T6
-; // Tests:strings:CatSep>
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:WordInfo
-  axiom:TtfwValueTypesAccepts
-  axiom:Tl3TokenType
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Sequence
-  axiom:Stereotype
-  axiom:Dictionary
-  axiom:MainDictionary
-  axiom:Array
-  axiom:File
-  axiom:clipboard
-  axiom:Font
-  axiom:generators
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Sequence.It.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
- ;
- Exports: 
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
- ;
-STRING CONST : cTests
-PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTests
- Documentation:
-  Выполняет тесты для списка слов aWords
- Sequence OPERATOR :: IN : aWords
-; // DoRunTests
-PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTestsA
- Documentation:
-  Выполняет тесты для списка слов aWords
- ARRAY OPERATOR :: IN : aWords
-; // DoRunTestsA
-PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTestsFor
- Documentation:
-  Выполняет тесты для aTestsHolder
- STRING OPERATOR :: IN : aTestedWordName
- ENGINE_WORD OPERATOR :: IN : aTestsHolder
-; // DoRunTestsFor
-PRIVATE VOID OPERATOR :: PROCEDURE : ExpandRunTestsFor
- ENGINE_WORD OPERATOR :: IN : aTestsHolder
- STRING OPERATOR :: VAR : l_Name
- STRING OPERATOR :: VAR : l_TestsHolderName
-; // ExpandRunTestsFor
-IMMEDIATE VOID OPERATOR :: MACRO : RunTests
- Documentation:
-  Выполняет тесты для списка слов aWords
- LINK ^ OPERATOR :: IN : aWords
-; // RunTests
-IMMEDIATE VOID OPERATOR :: MACRO : RunTests.in.array
- Documentation:
-  Выполняет тесты для списка слов aWords
- ^ OPERATOR :: IN : aWords
-; // RunTests.in.array
-IMMEDIATE VOID OPERATOR :: MACRO : Test&Dump
- Documentation:
-  Аналог слова Test, но с дампингом кода слова в стандартный вывод
- ^L OPERATOR :: IN : aName
-; // Test&Dump
-IMMEDIATE VOID OPERATOR :: MACRO : TestsFor
- Documentation:
-  Определяет набор тестов для слова aWord
- LINK ^ OPERATOR :: IN : aWord
-; // TestsFor
-IMMEDIATE VOID OPERATOR :: MACRO : TestWithDump
- Documentation:
-  Аналог слова Test, но с дампингом кода слова в стандартный вывод
- ^L OPERATOR :: IN : aName
-; // TestWithDump
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:WordInfo
-  axiom:TtfwValueTypesAccepts
-  axiom:Tl3TokenType
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Sequence
-  axiom:Stereotype
-  axiom:Dictionary
-  axiom:MainDictionary
-  axiom:Array
-  axiom:File
-  axiom:clipboard
-  axiom:Font
-  axiom:generators
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
- ;
-IMMEDIATE VOID OPERATOR :: TYPE : ENGINE_WORD
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Sequence.It.ms.dict
  Uses: 
   axiom:axiom
@@ -4450,6 +4254,94 @@ ARRAY FUNCTION : Sequence.It
  Sequence OPERATOR :: IN : aCode
  ARRAY FUNCTION :: Sequence.It : Result
 ; // Sequence.It
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
+  axiom:Tl3TokenType
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Sequence
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+ ;
+VOID CALLER OPERATOR : ?Assure
+ BOOLEAN OPERATOR :: IN : aCondition
+ ^ OPERATOR :: IN : aMessage
+ TtfwWord OPERATOR :: IN : Caller
+; // ?Assure
+VOID CALLER OPERATOR : ?Fail
+ BOOLEAN OPERATOR :: IN : aCondition
+ ^ OPERATOR :: IN : aMessage
+ TtfwWord OPERATOR :: IN : Caller
+; // ?Fail
+IMMEDIATE VOID OPERATOR : array
+VOID break
+IMMEDIATE VOID OPERATOR :: TYPE : callback
+IMMEDIATE VOID OPERATOR :: TYPE : Callback
+IMMEDIATE VOID OPERATOR :: TYPE : CallBack
+case
+Case
+const
+Const
+VOID continue
+default
+Default
+VOID CALLER OPERATOR : error
+ ^ OPERATOR :: IN : aMsg
+ TtfwWord OPERATOR :: IN : Caller
+; // error
+VOID CALLER OPERATOR : Error
+ ^ OPERATOR :: IN : aMsg
+ TtfwWord OPERATOR :: IN : Caller
+; // Error
+VOID exit
+IMMEDIATE VOID OPERATOR :: TYPE : Functor
+IMMEDIATE VOID OPERATOR :: TYPE : Lambda
+IMMEDIATE VOID OPERATOR :: TYPE : List
+IMMEDIATE VOID OPERATOR : private
+IMMEDIATE VOID OPERATOR : Private
+IMMEDIATE VOID OPERATOR : Procedure
+ ^L OPERATOR :: IN : aName
+; // Procedure
+IMMEDIATE VOID OPERATOR :: TYPE : Sequence
+IMMEDIATE VOID OPERATOR : string
+IMMEDIATE VOID OPERATOR : String
+IMMEDIATE OPERATOR : type
+ ^L OPERATOR :: IN : aName
+; // type
+IMMEDIATE OPERATOR : Type
+ ^L OPERATOR :: IN : aName
+; // Type
+IMMEDIATE VOID OPERATOR : var
+ ^L OPERATOR :: IN : aName
+; // var
+IMMEDIATE OPERATOR : void
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
  Uses: 
   axiom:axiom
@@ -4610,6 +4502,118 @@ VOID WORDWORKER : OutEx
  STRING OPERATOR :: VAR : aValue
  ^ OPERATOR :: IN : WordToWork
 ; // OutEx
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymbols.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
+  axiom:Tl3TokenType
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Sequence
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
+ ;
+STRING FUNCTION : .Name
+ OPERATOR :: IN : %S
+ Documentation:
+  Возвращает имя слова слева
+ STRING FUNCTION :: |N : Result
+; // .Name
+TtfwWord Addr
+TtfwWord OPERATOR : GetRefFromLeft
+ Documentation:
+  Получает ссылку на параметр слева
+ ^@ OPERATOR :: IN : aSelf
+ TtfwWord OPERATOR :: |^@ : Result
+; // GetRefFromLeft
+IMMEDIATE VOID OPERATOR : this.method.addr
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\math.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
+  axiom:Tl3TokenType
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Sequence
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
+ ;
+INTEGER FUNCTION : Dec1
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: Dec1 : Result
+; // Dec1
+INTEGER FUNCTION : DecWith
+ ^ OPERATOR :: IN : aDec
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: DecWith : Result
+; // DecWith
+INTEGER FUNCTION : Inc1
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: Inc1 : Result
+; // Inc1
+INTEGER FUNCTION : IncWith
+ ^ OPERATOR :: IN : anInc
+ INTEGER OPERATOR :: IN : aValue
+ INTEGER FUNCTION :: IncWith : Result
+; // IncWith
+BOOLEAN FUNCTION : IsEven
+ INTEGER OPERATOR :: IN : aValue
+ BOOLEAN FUNCTION :: IsEven : Result
+; // IsEven
+BOOLEAN FUNCTION : IsOdd
+ INTEGER OPERATOR :: IN : aValue
+ BOOLEAN FUNCTION :: IsOdd : Result
+; // IsOdd
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dict
  Uses: 
   axiom:axiom
@@ -4899,6 +4903,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Bind.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CompileTimeVar.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : |>
  Documentation:
