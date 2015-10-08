@@ -63,6 +63,9 @@ MACRO in_param
  TtfwWordInfo VAR l_WordInfo
  Ctx:WordInfo >>> l_WordInfo
 
+ STRING VAR l_TypeInfo
+ l_WordInfo pop:WordInfo:ToString >>> l_TypeInfo
+
  Ctx:ClearTypeInfo
  
  aName |N CompileValue

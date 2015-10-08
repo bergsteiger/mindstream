@@ -3310,6 +3310,8 @@ VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushLeftDottedSymbol
 ; // Ctx:Parser:PushLeftDottedSymbol
 IMMEDIATE VOID OPERATOR :: MACRO : in_param
  ^L OPERATOR :: IN : aName
+ STRING OPERATOR :: VAR : l_TypeInfo
+ TtfwWordInfo OPERATOR :: VAR : l_WordInfo
 ; // in_param
 IMMEDIATE VOID OPERATOR :: TYPE : TOKEN
 IMMEDIATE VOID OPERATOR :: TYPE : TOKEN_TYPE
