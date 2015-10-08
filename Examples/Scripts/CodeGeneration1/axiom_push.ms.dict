@@ -60,6 +60,11 @@ PROCEDURE axiom:PushWordInfo
 MACRO in_param
   Literal IN aName
 
+ TtfwWordInfo VAR l_WordInfo
+ Ctx:WordInfo >>> l_WordInfo
+
+ Ctx:ClearTypeInfo
+ 
  aName |N CompileValue
 ; // in_param
 
