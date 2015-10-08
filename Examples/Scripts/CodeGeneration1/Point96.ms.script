@@ -23,8 +23,8 @@ Pixel member X
 Pixel member Y
 
 constructor : ( 
- Pixel in_param aX 
- Pixel in_param aY 
+ Pixel IN aX 
+ Pixel IN aY 
 )
  new[ aX aY ] >>> Result
 ; // :
@@ -35,7 +35,7 @@ constructor 0 ( )
 
 constructor XY ( 
  //PixelList 
-  in_param aPoint
+  IN aPoint
 )
  array var Points
  [ aPoint ] >>> Points
@@ -47,7 +47,7 @@ Pixel readonly X read X
 Pixel readonly Y read Y
 
 constructor OF ( 
- Point in_param aPoint
+ Point IN aPoint
 )
  Point:: ( aPoint .X ) ( aPoint .Y ) >>> Result
 ; // OF
@@ -88,8 +88,8 @@ Point readonly TopLeft read TopLeft
 Point readonly BottomRight read BottomRight
 
 constructor : ( 
- Point in_param aTopLeft
- Point in_param aBottomRight
+ Point IN aTopLeft
+ Point IN aBottomRight
 )
  new[ aTopLeft aBottomRight ] >>> Result
 ; // :
