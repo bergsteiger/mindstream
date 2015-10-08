@@ -87,6 +87,7 @@ PROCEDURE axiom:Params:PushWithOtherStereo
   STRING VAR l_Types
   aTypes DO >>> l_Types
 
+  l_Types axiom:PushSerias
   aStereo axiom:PushSerias 
   aParam pop:Word:Name Ctx:Parser:PushSymbol  
  )

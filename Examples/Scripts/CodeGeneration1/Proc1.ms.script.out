@@ -15,13 +15,13 @@ VOID TestWithDump ProcTest
  ; // VOID proc A
  
  VOID proc B
-  IN aValue
+  STRING IN aValue
   aValue
   .
  ; // VOID proc B
  
  VOID proc C
-  IN aValue
+  INTEGER STRING IN aValue
   aValue
   .
  ; // VOID proc C
