@@ -29,6 +29,7 @@ MACRO proc
   STRING VAR l_WordInfoTypeName 
   aParam pop:Word:Info pop:WordInfo:TypeName >>> l_WordInfoTypeName
   l_WordInfoTypeName Msg
+  l_WordInfoTypeName axiom:PushWordInfo
   l_Stereo Ctx:Parser:PushSymbol 
   aParam pop:Word:Name Ctx:Parser:PushSymbol  
  )

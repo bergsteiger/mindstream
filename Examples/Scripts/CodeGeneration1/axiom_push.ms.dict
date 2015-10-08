@@ -45,5 +45,8 @@ USES
 PROCEDURE axiom:PushWordInfo
   STRING IN aWordInfo
 
- aWordInfo ' ' string:Split:for> Ctx:Parser:PushSymbol
+ if ( aWordInfo IsNil ! ) then
+ begin
+  aWordInfo ' ' string:Split:for> Ctx:Parser:PushSymbol
+ end
 ; // axiom:PushWordInfo
