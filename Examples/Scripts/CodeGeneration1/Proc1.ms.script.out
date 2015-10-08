@@ -9,7 +9,6 @@ VOID TestWithDump ProcTest
  ; // VOID : _C
  
  VOID proc A
-  IN
   IN aValue
   aValue
   .
@@ -17,14 +16,12 @@ VOID TestWithDump ProcTest
  
  VOID proc B
   IN aValue
-  IN STRING
   aValue
   .
  ; // VOID proc B
  
  VOID proc C
   IN aValue
-  IN INTEGER STRING
   aValue
   .
  ; // VOID proc C
@@ -41,4 +38,7 @@ VOID TestWithDump ProcTest
  C
 ; // VOID TestWithDump ProcTest
 
-Стек пустой
+Hello world
+Hello world
+Hello world
+123
