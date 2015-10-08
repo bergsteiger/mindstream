@@ -62,8 +62,13 @@ proc B ( STRING IN aValue )
  aValue .
 proc-end // B
 
+proc C ( STRING INTEGER IN aValue )
+ aValue .
+proc-end // C
+
 'Hello world' A
 'Hello world' B
+'Hello world' C
 
 ; // ProcTest
 

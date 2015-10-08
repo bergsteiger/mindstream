@@ -5,6 +5,9 @@ VOID TestWithDump ProcTest
  VOID : _B
  ; // VOID : _B
  
+ VOID : _C
+ ; // VOID : _C
+ 
  VOID proc A
   IN aValue
   aValue
@@ -17,13 +20,22 @@ VOID TestWithDump ProcTest
   .
  ; // VOID proc B
  
+ VOID proc C
+  INTEGER STRING IN aValue
+  aValue
+  .
+ ; // VOID proc C
+ 
  ProcTest
  DumpElement
  'Hello world'
  A
  'Hello world'
  B
+ 'Hello world'
+ C
 ; // VOID TestWithDump ProcTest
 
+Hello world
 Hello world
 Hello world
