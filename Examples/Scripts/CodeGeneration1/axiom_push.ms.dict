@@ -42,13 +42,19 @@ USES
  string.ms.dict
 ; 
 
-PROCEDURE axiom:PushWordInfo
+PROCEDURE axiom:PushSerias
   STRING IN aWordInfo
 
  if ( aWordInfo IsNil ! ) then
  begin
   aWordInfo ' ' string:Split:for> Ctx:Parser:PushSymbol
  end
+; // axiom:PushSerias
+
+PROCEDURE axiom:PushWordInfo
+  STRING IN aWordInfo
+
+ aWordInfo axiom:PushSerias
 ; // axiom:PushWordInfo
 
 PROCEDURE axiom:Params:Push

@@ -3286,6 +3286,9 @@ VOID OPERATOR :: PROCEDURE : axiom:Push
  TOKEN OPERATOR :: IN : aToken
  TOKEN_TYPE OPERATOR :: IN : aTokenType
 ; // axiom:Push
+VOID OPERATOR :: PROCEDURE : axiom:PushSerias
+ STRING OPERATOR :: IN : aWordInfo
+; // axiom:PushSerias
 VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
  Documentation:
   Запихивает во входной поток парсера имя слова aSymbol
