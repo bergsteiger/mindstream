@@ -1,1 +1,17 @@
-Proc1.ms.script line: 44 |=> ѕараметры proc : MACRO должны быть помечены стереотипом IN
+VOID TestWithDump ProcTest
+ VOID : _A
+ ; // VOID : _A
+ 
+ VOID proc A
+  IN aValue
+  aValue
+  .
+ ; // VOID proc A
+ 
+ ProcTest
+ DumpElement
+ 'Hello world'
+ A
+; // VOID TestWithDump ProcTest
+
+Hello world
