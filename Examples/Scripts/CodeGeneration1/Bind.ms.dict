@@ -25,6 +25,7 @@ PROCEDURE ExpandMethodName
  [ l_FullMethodName ':' aMethod ] strings:Cat >>> l_FullMethodName
  l_FullMethodName IsWordDeclared ?ASSURE [ 'Метод ' l_FullMethodName ' не определён' ]
 
+ //Self |N Msg
  Self CompileValue
  //Self |N Ctx:Parser:PushSymbol
  // по идее Ctx:Parser:PushSymbol - тоже должен работать, но не работает
