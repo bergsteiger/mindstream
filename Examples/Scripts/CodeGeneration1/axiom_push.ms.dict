@@ -70,8 +70,8 @@ MACRO in_param
  
  l_TypeInfo CompileValue
 
- //@SELF CompileRef
-
+ '' CompileValue
+ 
  aName |N CompileValue
 ; // in_param
 
@@ -80,9 +80,9 @@ PROCEDURE axiom:Params:PushWithOtherStereo
   STRING IN aStereo
   ENGINE_WORD IN aParams
 
- aParams CodeIterator .slice> 2 ==> ( 
+ aParams CodeIterator .slice> 3 ==> ( 
   IN aTypes
-  //IN aStereo
+  IN aStereoC
   IN aParam
 
   STRING VAR l_Types
