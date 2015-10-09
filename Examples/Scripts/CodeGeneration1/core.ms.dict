@@ -31,7 +31,7 @@ MACRO RecurseProc
 FUNCTOR : |@
 // - получаем ссылку из параметра слева
  ^@ IN aRef
- aRef pop:Word:GetRef =: Result
+ aRef pop:Word:GetRef >>> Result
 ; // |@
 
 MACRO this.do

@@ -17,12 +17,12 @@ USES
 STRING FUNCTION string:CatWihAny
  STRING IN aString
  IN aValue
- aString aValue ToPrintable Cat =: Result
+ aString aValue ToPrintable Cat >>> Result
 ; // string:CatWihAny
 
 STRING FUNCTION any:Cat
  ARRAY IN anArray
- anArray .map> ToPrintable strings:Cat =: Result
+ anArray .map> ToPrintable strings:Cat >>> Result
 ; // any:Cat
 
 TestsFor any:Cat
@@ -36,9 +36,9 @@ STRING FUNCTION (+)?
  %SUMMARY 'Если aSuffix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку' ;
  Result := ''
  STRING VAR l_Suffix
- aSuffix =: l_Suffix
+ aSuffix >>> l_Suffix
  if ( l_Suffix =/= '' ) then
-  ( aPrefix l_Suffix Cat =: Result )
+  ( aPrefix l_Suffix Cat >>> Result )
 ; // (+)?
 
 TestsFor (+)?
@@ -55,7 +55,7 @@ STRING FUNCTION ?(+)
  %SUMMARY 'Если aPrefix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку' ;
  Result := ''
  if ( aPrefix =/= '' ) then
-  ( aPrefix aSuffix Cat =: Result )
+  ( aPrefix aSuffix Cat >>> Result )
 ; // ?(+)
 
 TestsFor ?(+)
@@ -67,7 +67,7 @@ TestsFor ?(+)
 STRING FUNCTION strings:CatSep>
  STRING right aSep
  ARRAY right aValues
- aValues aSep strings:CatSep =: Result
+ aValues aSep strings:CatSep >>> Result
 ; // strings:CatSep>
 
 TestsFor strings:CatSep>

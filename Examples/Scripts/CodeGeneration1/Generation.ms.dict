@@ -53,9 +53,9 @@ PROCEDURE OutToFile
 
  STRING VAR l_String
  if ( aValue IsArray ) then
-  ( aValue strings:Cat =: l_String )
+  ( aValue strings:Cat >>> l_String )
  else
-  ( aValue ToPrintable =: l_String )
+  ( aValue ToPrintable >>> l_String )
  [ g_Indent cIndentChar char:Dupe l_String ] strings:Cat g_OutFile File:WriteLn
  %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; //OutToFile
@@ -82,7 +82,7 @@ GENERATOR VAR g_CurrentGenerator
 CONST cPathSep '\'
 
 STRING FUNCTION OutDir
- sysutils:GetCurrentDir =: Result
+ sysutils:GetCurrentDir >>> Result
  [ Result
   script:FileName 
   %REMARK 'Путь к текущему скрипту'
@@ -92,7 +92,7 @@ STRING FUNCTION OutDir
   %REMARK 'Убираем .script' 
   '' sysutils:ChangeFileExt 
   %REMARK 'Убираем .ms' 
- ] cPathSep strings:CatSep =: Result
+ ] cPathSep strings:CatSep >>> Result
 ; // OutDir
 
 STRING FUNCTION OutFileName
@@ -103,7 +103,7 @@ STRING FUNCTION OutFileName
  l_OutPath := OutDir
  l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
  %REMARK 'Создаём директорию рекурсивно, если её ещё не было'
- [ l_OutPath aGeneratorName ] cPathSep strings:CatSep =: Result
+ [ l_OutPath aGeneratorName ] cPathSep strings:CatSep >>> Result
 ; // OutFileName
 
 USES
@@ -225,7 +225,7 @@ elem_proc CallGen
  TF g_CurrentGenerator
  (
   g_CurrentGenerator := ( aGen Dereference )
-  aGen %GP Name =: g_CurrentGeneratorName
+  aGen %GP Name >>> g_CurrentGeneratorName
   Self .CallCurrentGen
  )
 ; // CallGen

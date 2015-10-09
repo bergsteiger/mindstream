@@ -17,7 +17,7 @@ USES
 
 STRING FUNCTION CatSepIndent>
  ARRAY right aValues
- CatSep> cIndentChar aValues =: Result
+ CatSep> cIndentChar aValues >>> Result
 ; // CatSepIndent>
 
 MACRO call.inherited

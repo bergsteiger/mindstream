@@ -44,7 +44,7 @@ NamedWordProducer %CONSTRUCTORS %Constructors
 
 OBJECT FUNCTION DoMember 
  OBJECT IN aMember
- aMember DO =: Result
+ aMember DO >>> Result
 ; // DoMember
 
 BOOLEAN FUNCTION FilterMember 
@@ -59,7 +59,7 @@ ARRAY FUNCTION %ClassRTTIList
  IN %S
  Literal IN aName
  VAR l_List
- %S %% ( aName |N ) =: l_List
+ %S %% ( aName |N ) >>> l_List
  if ( l_List NotValid ) then
   ( Result := [ ] )
  else 
@@ -109,7 +109,7 @@ CONST cFieldPrefix 'c:'
 
 PRIVATE STRING operator MakeFieldOffsetName
  STRING IN aName
- [ cFieldPrefix g_CurrentClass ':Offset:' aName ] strings:Cat =: Result
+ [ cFieldPrefix g_CurrentClass ':Offset:' aName ] strings:Cat >>> Result
 ; // MakeFieldOffsetName
 
 INTEGER type FieldOffset
@@ -154,14 +154,14 @@ CONST cClassImplPrefix '_:'
 
 STRING : getClassNamePrim
  STRING IN Self
- Self ':' string:Split =: Result DROP
+ Self ':' string:Split >>> Result DROP
 ; // getClassNamePrim
 
 TtfwWord type ObjectClass
 
 STRING : ObjectClass:Name
  ObjectClass IN Self
- Self |N getClassNamePrim =: Result
+ Self |N getClassNamePrim >>> Result
 ; // ObjectClass:Name
 
 [EXECUTE]
@@ -213,8 +213,8 @@ MACRO class
  g_CurrentClassMethods := [ ]
  g_CurrentClassConstructors := [ ]
  g_ClassFieldOffset := 0
- aName |N =: g_CurrentClass
- [ cClassImplPrefix g_CurrentClass ] strings:Cat =: g_CurrentClassImpl
+ aName |N >>> g_CurrentClass
+ [ cClassImplPrefix g_CurrentClass ] strings:Cat >>> g_CurrentClassImpl
 
  axiom:PushSymbol FieldOffset
  axiom:PushSymbol CompileTime-VAR
@@ -376,7 +376,7 @@ MACRO read
  Literal IN aName
  'Self' Ctx:Parser:PushSymbol 
  aName |N do-get-member
- axiom:PushSymbol =:
+ axiom:PushSymbol >>>
  'Result' Ctx:Parser:PushSymbol
  axiom:PushSymbol ;
 ; // read
@@ -386,16 +386,16 @@ FieldOffset member VMT
 ObjectClass readonly class read VMT
 
 STRING readonly ClassName
- Self .class .Name =: Result
+ Self .class .Name >>> Result
 ; // ClassName
 
 constructor new ( )
- new[ ] =: Result
+ new[ ] >>> Result
 ; // new
 
 VIRTUAL STRING method ToPrintable
- //Self ToPrintable =: Result
- Self .ClassName =: Result
+ //Self ToPrintable >>> Result
+ Self .ClassName >>> Result
 ; // ToPrintable
 
 VIRTUAL void method Print
