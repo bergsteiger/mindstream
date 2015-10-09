@@ -182,8 +182,17 @@ MACRO class-method
  axiom:PushSymbol :
 
  STRING VAR l_ClassName
+
  g_CurrentClass >>> l_ClassName
- NameOf ObjectClass >>> l_ClassName
+ 
+ if ( l_ClassName IsNil ) then
+ begin
+  NameOf ObjectClass >>> l_ClassName
+ end
+ else
+ begin
+  [ l_ClassName 'Class' ] strings:Cat >>> l_ClassName
+ end
  
  l_ClassName l_Name MakeMethodSignaturePrim >>> l_Name
  l_Name Ctx:Parser:PushSymbol
