@@ -167,6 +167,24 @@ STRING FUNCTION ClassImplName
 
 TtfwWord type ObjectClass
 
+MACRO class-method
+  Literal IN aName
+
+ %SUMMARY 'Метод класса' ;
+
+ STRING VAR l_Name
+ aName |N >>> l_Name
+
+ //l_Name @SELF bindInPlace
+ 
+ @SELF Ctx:SetWordProducerForCompiledClass
+
+ l_Name Ctx:Parser:PushSymbol
+ //l_Name MakeMethodSignature
+ //MakeSelfParam
+ //l_Name array:AddTo g_CurrentClassMethods
+; // class-method
+
 [EXECUTE]
 ( 'Name' bind )
 
