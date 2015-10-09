@@ -182,6 +182,7 @@ MACRO class-method
  axiom:PushSymbol :
 
  STRING VAR l_ClassName
+ g_CurrentClass >>> l_ClassName
  NameOf ObjectClass >>> l_ClassName
  
  l_ClassName l_Name MakeMethodSignaturePrim >>> l_Name
