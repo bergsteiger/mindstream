@@ -41,15 +41,15 @@ USES
 
 Test&Dump ProcTest
 
-proc A ( IN aValue )
+proc A ( in_param aValue )
  aValue .
 proc-end // A
 
-proc B ( STRING IN aValue )
+proc B ( STRING in_param aValue )
  aValue .
 proc-end // B
 
-proc C ( STRING INTEGER IN aValue )
+proc C ( STRING INTEGER in_param aValue )
  aValue .
 proc-end // C
 
