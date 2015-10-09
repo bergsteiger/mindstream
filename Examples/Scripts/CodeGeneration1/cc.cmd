@@ -1,2 +1,2 @@
 call ..\clear.cmd
-call c.cmd Proc1.ms.script
+call c.cmd Object.ms.script
