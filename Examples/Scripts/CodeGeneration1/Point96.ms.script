@@ -30,7 +30,7 @@ constructor : (
 ; // :
 
 constructor 0 ( )
- Point:: 0 0 >>> Result
+ Point:: 0 0 >>> Self
 ; // 0
 
 constructor XY ( 
@@ -39,7 +39,7 @@ constructor XY (
 )
  array var Points
  [ aPoint ] >>> Points
- Point:: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) >>> Result
+ Point:: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) >>> Self
 ; // XY
 
 Pixel readonly X read X
@@ -49,7 +49,7 @@ Pixel readonly Y read Y
 constructor OF ( 
  Point in_param aPoint
 )
- Point:: ( aPoint .X ) ( aPoint .Y ) >>> Result
+ Point:: ( aPoint .X ) ( aPoint .Y ) >>> Self
 ; // OF
 
 Point method +
