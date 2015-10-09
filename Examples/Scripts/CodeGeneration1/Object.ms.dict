@@ -180,8 +180,11 @@ MACRO class-method
  @SELF Ctx:SetWordProducerForCompiledClass
 
  axiom:PushSymbol :
+
+ STRING VAR l_ClassName
+ NameOf ObjectClass >>> l_ClassName
  
- NameOf ObjectClass l_Name MakeMethodSignaturePrim >>> l_Name
+ l_ClassName l_Name MakeMethodSignaturePrim >>> l_Name
  l_Name Ctx:Parser:PushSymbol
  //MakeSelfParam
  //l_Name array:AddTo g_CurrentClassMethods
