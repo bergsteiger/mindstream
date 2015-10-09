@@ -280,6 +280,11 @@ MACRO class
  aName |N >>> g_CurrentClass
  g_CurrentClass ClassImplName >>> g_CurrentClassImpl
 
+ if ( g_CurrentClass !== cObjectName ) then
+ begin
+  g_CurrentClass Msg
+ end // g_CurrentClass !== cObjectName
+
  axiom:PushSymbol class_impl
  [
   g_CurrentClassImpl
