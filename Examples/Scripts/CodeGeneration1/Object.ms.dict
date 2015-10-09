@@ -167,13 +167,13 @@ STRING FUNCTION ClassImplName
 
 TtfwWord type ObjectClass
 
+[EXECUTE]
+( 'Name' bind )
+
 STRING : ObjectClass:Name
  ObjectClass IN Self
  Self |N ':' string:Split >>> Result DROP
 ; // ObjectClass:Name
-
-[EXECUTE]
-( 'Name' bind )
 
 CONST cInstanceSizeName 'Instance:Size'
 
