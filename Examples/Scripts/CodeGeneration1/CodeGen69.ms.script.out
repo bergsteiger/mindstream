@@ -4830,10 +4830,6 @@ STRING OPERATOR :: VAR : g_CurrentClassImpl
 ARRAY OPERATOR :: VAR : g_CurrentClassMembers
 ARRAY OPERATOR :: VAR : g_CurrentClassMethods
 ARRAY OPERATOR :: VAR : g_CurrentClassProperties
-STRING : : getClassNamePrim
- STRING : :: getClassNamePrim : Result
- STRING OPERATOR :: IN : Self
-; // getClassNamePrim
 IMMEDIATE VOID OPERATOR :: MACRO : get-member
  Documentation:
   Компилирует способ доступа к члену класса

@@ -165,11 +165,6 @@ STRING FUNCTION ClassImplName
  [ cClassImplPrefix aName ] strings:Cat >>> Result
 ; // ClassImplName
 
-STRING : getClassNamePrim
- STRING IN Self
- Self ':' string:Split >>> Result DROP
-; // getClassNamePrim
-
 TtfwWord type ObjectClass
 
 STRING : ObjectClass:Name
