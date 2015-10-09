@@ -167,6 +167,8 @@ STRING FUNCTION ClassImplName
 
 TtfwWord type ObjectClass
 
+Const ClassRefSuffix 'Class'
+
 MACRO class-method
   Literal IN aName
 
@@ -191,7 +193,7 @@ MACRO class-method
  end
  else
  begin
-  [ l_ClassName 'Class' ] strings:Cat >>> l_ClassName
+  [ l_ClassName ClassRefSuffix ] strings:Cat >>> l_ClassName
  end
  
  l_ClassName l_Name MakeMethodSignaturePrim >>> l_Name
