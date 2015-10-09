@@ -943,6 +943,9 @@ VOID TestWithDump PointTest
  P7
  R2
  pop:Word:SetValuePrim
+ R1
+ Object:InstanceSize
+ Print
  ARRAY [
   R1
   R2
@@ -1197,6 +1200,7 @@ Object
 Object
 Object
 Object
+3
 ( TopLeft: ( X: 0, Y: 0 ), BottomRight: ( X: 2, Y: 2 ) )
 ( TopLeft: ( X: 3, Y: 3 ), BottomRight: ( X: -1, Y: -1 ) )
 _:Rectangle
