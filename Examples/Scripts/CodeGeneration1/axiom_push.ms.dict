@@ -85,7 +85,7 @@ PROCEDURE axiom:Params:PushWithOtherStereo
   IN aStereoC
   IN aParam
 
-  aStereoC |N NameOf in_param == ?ASSURE 'Входные параметры должны быть помечены стереотипом in_param'
+  aStereoC |N NameOf in_param == ?ASSURE [ 'Входные параметры должны быть помечены стереотипом ' NameOf in_param ]
 
   STRING VAR l_Types
   aTypes DO >>> l_Types
