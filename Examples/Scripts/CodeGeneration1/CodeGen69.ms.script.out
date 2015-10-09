@@ -4759,9 +4759,9 @@ OPERATOR :: MACRO :: class_impl : _:Object
  OPERATOR :: NamedWordProducer :: %FIELDS : %Flds
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
  OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
+ FieldOffset OPERATOR :: VAR : c:Object:Instance:Size
  INTEGER CONST : c:Object:Offset:VMT
 ; // _:Object
-FieldOffset OPERATOR :: VAR : c:Object:Instance:Size
 INTEGER CONST : c:Object:Offset:VMT
 STRING CONST : cClassImplPrefix
 STRING CONST : cFieldPrefix

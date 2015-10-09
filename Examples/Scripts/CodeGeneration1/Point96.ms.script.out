@@ -94,6 +94,7 @@ VOID TestWithDump PointTest
    'Y'
   ; // %PROPERTIES %Props
   
+  FieldOffset VAR c:Point:Instance:Size
   INTEGER CONST c:Point:Offset:VMT
    0
   INTEGER CONST c:Point:Offset:X
@@ -128,6 +129,7 @@ VOID TestWithDump PointTest
    'BottomRight'
   ; // %PROPERTIES %Props
   
+  FieldOffset VAR c:Rectangle:Instance:Size
   INTEGER CONST c:Rectangle:Offset:BottomRight
    2
   INTEGER CONST c:Rectangle:Offset:TopLeft
@@ -136,14 +138,12 @@ VOID TestWithDump PointTest
    0
  ; // class_impl _:Rectangle
  
- FieldOffset VAR c:Point:Instance:Size
  INTEGER CONST c:Point:Offset:VMT
   0
  INTEGER CONST c:Point:Offset:X
   1
  INTEGER CONST c:Point:Offset:Y
   2
- FieldOffset VAR c:Rectangle:Instance:Size
  INTEGER CONST c:Rectangle:Offset:BottomRight
   2
  INTEGER CONST c:Rectangle:Offset:TopLeft
@@ -824,6 +824,7 @@ class_impl _:Object
   'ClassName'
  ; // %PROPERTIES %Props
  
+ FieldOffset VAR c:Object:Instance:Size
  INTEGER CONST c:Object:Offset:VMT
   0
 ; // class_impl _:Object
@@ -860,6 +861,7 @@ class_impl _:Point
   'Y'
  ; // %PROPERTIES %Props
  
+ FieldOffset VAR c:Point:Instance:Size
  INTEGER CONST c:Point:Offset:VMT
   0
  INTEGER CONST c:Point:Offset:X
@@ -894,6 +896,7 @@ class_impl _:Rectangle
   'BottomRight'
  ; // %PROPERTIES %Props
  
+ FieldOffset VAR c:Rectangle:Instance:Size
  INTEGER CONST c:Rectangle:Offset:BottomRight
   2
  INTEGER CONST c:Rectangle:Offset:TopLeft
