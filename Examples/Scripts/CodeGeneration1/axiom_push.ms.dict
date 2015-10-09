@@ -66,8 +66,6 @@ MACRO in_param
  STRING VAR l_TypeInfo
  l_WordInfo pop:WordInfo:ToString >>> l_TypeInfo
 
- l_TypeInfo Msg
-
  Ctx:ClearTypeInfo
  
  l_TypeInfo CompileValue
