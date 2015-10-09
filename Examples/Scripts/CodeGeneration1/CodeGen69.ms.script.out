@@ -4759,7 +4759,7 @@ OPERATOR :: MACRO :: class_impl : _:Object
  OPERATOR :: NamedWordProducer :: %FIELDS : %Flds
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
  OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
- FieldOffset OPERATOR :: VAR : c:Object:Instance:Size
+ FieldOffset OPERATOR :: VAR : c:Instance:Size
  INTEGER CONST : c:Object:Offset:VMT
 ; // _:Object
 INTEGER CONST : c:Object:Offset:VMT

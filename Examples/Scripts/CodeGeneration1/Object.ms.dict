@@ -225,10 +225,10 @@ MACRO classExpander
 
 CONST cObjectName 'Object'
 
-CONST cInstanceSizeName ':Instance:Size'
+CONST cInstanceSizeName 'Instance:Size'
 
 STRING FUNCTION InstanceSizeName
- [ cFieldPrefix g_CurrentClass cInstanceSizeName ] strings:Cat >>> Result
+ [ cFieldPrefix cInstanceSizeName ] strings:Cat >>> Result
 ; // InstanceSizeName
 
 MACRO class

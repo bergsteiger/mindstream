@@ -121,9 +121,9 @@ _:Object :: c:Object:Offset:VMT .
 _:Point :: c:Point:Offset:VMT .
 _:Rectangle :: c:Rectangle:Offset:VMT .
 
-_:Object :: c:Object:Instance:Size .
-_:Point :: c:Point:Instance:Size .
-_:Rectangle :: c:Rectangle:Instance:Size .
+_:Object :: c:Instance:Size .
+_:Point :: c:Instance:Size .
+_:Rectangle :: c:Instance:Size .
 
 Point:: 0 0 Point:Print
 // - так работает
