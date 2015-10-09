@@ -236,11 +236,6 @@ MACRO class
  aName |N >>> g_CurrentClass
  g_CurrentClass ClassImplName >>> g_CurrentClassImpl
 
-// axiom:PushSymbol FieldOffset
-// axiom:PushSymbol CompileTime-VAR
-// [ cFieldPrefix g_CurrentClass ':Instance:Size' ] strings:Cat Ctx:Parser:PushSymbol
-// 0 Ctx:Parser:PushInt
-
  axiom:PushSymbol class_impl
  [
   g_CurrentClassImpl
