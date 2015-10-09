@@ -181,7 +181,8 @@ STRING : ObjectClass:Name
 ( 'Name' bind )
 
 MACRO classExpander
- ^ IN anImpl
+  ^ IN anImpl
+
  %SUMMARY 'Тут можно копировать поля и методы' ;
  anImpl |@ %G .for> ( 
   IN anItem 
