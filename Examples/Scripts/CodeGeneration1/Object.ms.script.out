@@ -2,6 +2,9 @@ VOID TestWithDump ObjectTest
  Object VAR l_Obj
  ObjectTest
  DumpElement
+ @
+ _:Object
+ DumpElement
  Object:new
  l_Obj
  pop:Word:SetValuePrim
@@ -25,6 +28,29 @@ VOID TestWithDump ObjectTest
  Object:ClassName
  Print
 ; // VOID TestWithDump ObjectTest
+
+class_impl _:Object
+ %CONSTRUCTORS %Constructors
+  'new'
+ ; // %CONSTRUCTORS %Constructors
+ 
+ %FIELDS %Flds
+  'VMT'
+ ; // %FIELDS %Flds
+ 
+ %METHODS %Methods
+  'ToPrintable'
+  'Print'
+ ; // %METHODS %Methods
+ 
+ %PROPERTIES %Props
+  'class'
+  'ClassName'
+ ; // %PROPERTIES %Props
+ 
+ INTEGER CONST c:Object:Offset:VMT
+  0
+; // class_impl _:Object
 
 Object
 Object
