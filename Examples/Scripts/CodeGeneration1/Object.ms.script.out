@@ -27,6 +27,9 @@ VOID TestWithDump ObjectTest
  l_Obj
  Object:ClassName
  Print
+ l_Obj
+ Object:InstanceSize
+ Print
 ; // VOID TestWithDump ObjectTest
 
 class_impl _:Object
@@ -59,3 +62,4 @@ Object
 TtfwValueTypes
 Object
 Object
+1
