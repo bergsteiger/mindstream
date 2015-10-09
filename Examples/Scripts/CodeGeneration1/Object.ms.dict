@@ -160,6 +160,11 @@ PRIVATE STRING operator MakeMethodSignaturePrim
 
 CONST cClassImplPrefix '_:'
 
+STRING FUNCTION ClassImplName
+  STRING IN aName
+ [ cClassImplPrefix aName ] strings:Cat >>> Result
+; // ClassImplName
+
 STRING : getClassNamePrim
  STRING IN Self
  Self ':' string:Split >>> Result DROP
@@ -222,7 +227,7 @@ MACRO class
  g_CurrentClassConstructors := [ ]
  g_ClassFieldOffset := 0
  aName |N >>> g_CurrentClass
- [ cClassImplPrefix g_CurrentClass ] strings:Cat >>> g_CurrentClassImpl
+ g_CurrentClass ClassImplName >>> g_CurrentClassImpl
 
  axiom:PushSymbol FieldOffset
  axiom:PushSymbol CompileTime-VAR
@@ -237,7 +242,7 @@ MACRO class
    begin
     '%INHERITS'
     '@' 
-    [ cClassImplPrefix cObjectName ] strings:Cat
+    cObjectName ClassImplName
     ';'
    end
   ';'

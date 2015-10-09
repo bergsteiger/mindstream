@@ -4779,6 +4779,10 @@ IMMEDIATE VOID OPERATOR :: MACRO : classExpander
   Тут можно копировать поля и методы
  ^ OPERATOR :: IN : anImpl
 ; // classExpander
+STRING FUNCTION : ClassImplName
+ STRING OPERATOR :: IN : aName
+ STRING FUNCTION :: ClassImplName : Result
+; // ClassImplName
 STRING CONST : cObjectName
 IMMEDIATE VOID OPERATOR :: MACRO : constructor
  Documentation:
