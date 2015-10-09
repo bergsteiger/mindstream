@@ -227,6 +227,10 @@ CONST cObjectName 'Object'
 
 CONST cInstanceSizeName ':Instance:Size'
 
+STRING FUNCTION InstanceSizeName
+ [ cFieldPrefix g_CurrentClass cInstanceSizeName ] strings:Cat >>> Result
+; // InstanceSizeName
+
 MACRO class
  Literal IN aName
  ( g_CurrentClass = '' ) ?ASSURE 'Вложенные классы пока не поддерживаются'
@@ -244,7 +248,7 @@ MACRO class
 
   'FieldOffset'
   'CompileTime-VAR'
-  [ cFieldPrefix g_CurrentClass cInstanceSizeName ] strings:Cat
+  InstanceSizeName
  ] Ctx:Parser:PushArray
 
   0 Ctx:Parser:PushInt

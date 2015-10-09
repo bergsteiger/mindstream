@@ -4831,6 +4831,9 @@ IMMEDIATE VOID OPERATOR :: MACRO : get-member
   Компилирует способ доступа к члену класса
  ^L OPERATOR :: IN : aName
 ; // get-member
+STRING FUNCTION : InstanceSizeName
+ STRING FUNCTION :: InstanceSizeName : Result
+; // InstanceSizeName
 : : ListToNameAsString
  ARRAY OPERATOR :: IN : aList
  STRING OPERATOR :: IN : aName
