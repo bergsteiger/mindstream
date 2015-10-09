@@ -4765,6 +4765,7 @@ OPERATOR :: MACRO :: class_impl : _:Object
 INTEGER CONST : c:Object:Offset:VMT
 STRING CONST : cClassImplPrefix
 STRING CONST : cFieldPrefix
+STRING CONST : cInstanceSizeName
 IMMEDIATE VOID OPERATOR :: MACRO : class
  ^L OPERATOR :: IN : aName
 ; // class

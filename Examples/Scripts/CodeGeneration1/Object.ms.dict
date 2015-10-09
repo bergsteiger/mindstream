@@ -225,6 +225,8 @@ MACRO classExpander
 
 CONST cObjectName 'Object'
 
+CONST cInstanceSizeName ':Instance:Size'
+
 MACRO class
  Literal IN aName
  ( g_CurrentClass = '' ) ?ASSURE 'Вложенные классы пока не поддерживаются'
@@ -242,7 +244,7 @@ MACRO class
 
   'FieldOffset'
   'CompileTime-VAR'
-  [ cFieldPrefix g_CurrentClass ':Instance:Size' ] strings:Cat
+  [ cFieldPrefix g_CurrentClass cInstanceSizeName ] strings:Cat
  ] Ctx:Parser:PushArray
 
   0 Ctx:Parser:PushInt
@@ -300,7 +302,7 @@ MACRO class-end
  axiom:PushSymbol (
  g_CurrentClass ClassImplName Ctx:Parser:PushSymbol
  axiom:PushSymbol ::
- [ cFieldPrefix g_CurrentClass ':Instance:Size' ] strings:Cat Ctx:Parser:PushSymbol
+ [ cFieldPrefix g_CurrentClass cInstanceSizeName ] strings:Cat Ctx:Parser:PushSymbol
  axiom:PushSymbol :=
  g_ClassFieldOffset Ctx:Parser:PushInt
  axiom:PushSymbol )
