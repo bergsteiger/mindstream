@@ -181,13 +181,13 @@ STRING FUNCTION InstanceSizeName
  [ cFieldPrefix cInstanceSizeName ] strings:Cat >>> Result
 ; // InstanceSizeName
 
+[EXECUTE]
+( 'InstanceSize' bind )
+
 INTEGER : ObjectClass:InstanceSize
  ObjectClass IN Self
  Self %% InstanceSizeName DO >>> Result
 ; // InstanceSize
-
-[EXECUTE]
-( 'InstanceSize' bind )
 
 MACRO classExpander
   ^ IN anImpl
