@@ -169,6 +169,11 @@ TtfwWord type ObjectClass
 
 Const ClassRefSuffix 'Class'
 
+STRING FUNCTION ClassRefName
+  STRING IN aName
+ [ aName ClassRefSuffix ] strings:Cat >>> Result
+; // ClassRefName
+
 MACRO class-method
   Literal IN aName
 
@@ -193,7 +198,7 @@ MACRO class-method
  end
  else
  begin
-  [ l_ClassName ClassRefSuffix ] strings:Cat >>> l_ClassName
+  l_ClassName ClassRefName >>> l_ClassName
  end
  
  l_ClassName l_Name MakeMethodSignaturePrim >>> l_Name
@@ -282,7 +287,9 @@ MACRO class
 
  if ( g_CurrentClass !== cObjectName ) then
  begin
-  g_CurrentClass Msg
+  axiom:PushSymbol TtfwWord 
+  axiom:PushSymbol type
+  g_CurrentClass ClassRefName Ctx:Parser:PushSymbol
  end // g_CurrentClass !== cObjectName
 
  axiom:PushSymbol class_impl

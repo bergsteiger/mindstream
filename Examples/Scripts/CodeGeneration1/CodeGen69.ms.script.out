@@ -4799,6 +4799,10 @@ IMMEDIATE VOID OPERATOR :: MACRO : class-method
  STRING OPERATOR :: VAR : l_ClassName
  STRING OPERATOR :: VAR : l_Name
 ; // class-method
+STRING FUNCTION : ClassRefName
+ STRING OPERATOR :: IN : aName
+ STRING FUNCTION :: ClassRefName : Result
+; // ClassRefName
 STRING CONST : ClassRefSuffix
 STRING CONST : cObjectName
 IMMEDIATE VOID OPERATOR :: MACRO : constructor

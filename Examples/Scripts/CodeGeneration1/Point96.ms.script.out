@@ -245,6 +245,11 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // VIRTUAL STRING method Object:ToPrintable
  
+ IMMEDIATE VOID TYPE BarClass
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE BarClass
+ 
  INTEGER CONST c:Bar:Offset:VMT
   0
  INTEGER CONST c:Foo:Offset:VMT
@@ -319,6 +324,11 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // VIRTUAL STRING method Object:ToPrintable
+ 
+ IMMEDIATE VOID TYPE FooClass
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE FooClass
  
  ARRAY VAR l_Points
  ARRAY VAR l_Rectangles
@@ -608,6 +618,11 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Pixel readonly Point:Y
  
+ IMMEDIATE VOID TYPE PointClass
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE PointClass
+ 
  Rectangle VAR R1
  Rectangle VAR R2
  IMMEDIATE VOID TYPE Rectangle
@@ -732,6 +747,11 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // REDIFINITION OVERRIDE STRING method Rectangle:ToPrintable
+ 
+ IMMEDIATE VOID TYPE RectangleClass
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE RectangleClass
  
  PointTest
  DumpElement
