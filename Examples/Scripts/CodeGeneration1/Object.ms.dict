@@ -190,7 +190,7 @@ MACRO class-method
 [EXECUTE]
 ( 'Name' bind )
 
-STRING : ObjectClass:Name
+STRING class-method ObjectClass:Name
  ObjectClass IN Self
  Self |N ':' string:Split >>> Result DROP
 ; // ObjectClass:Name

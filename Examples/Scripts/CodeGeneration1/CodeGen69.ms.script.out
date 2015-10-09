@@ -4902,8 +4902,8 @@ INTEGER : : ObjectClass:InstanceSize
  INTEGER : :: ObjectClass:InstanceSize : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:InstanceSize
-STRING : : ObjectClass:Name
- STRING : :: ObjectClass:Name : Result
+STRING OPERATOR :: MACRO :: class-method : ObjectClass:Name
+ STRING OPERATOR :: MACRO :: class-method :: ObjectClass:Name : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:Name
 IMMEDIATE VOID OPERATOR :: MACRO : read
