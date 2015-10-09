@@ -306,7 +306,7 @@ MACRO class-end
  axiom:PushSymbol (
  g_CurrentClass ClassImplName Ctx:Parser:PushSymbol
  axiom:PushSymbol ::
- [ cFieldPrefix g_CurrentClass cInstanceSizeName ] strings:Cat Ctx:Parser:PushSymbol
+ InstanceSizeName Ctx:Parser:PushSymbol
  axiom:PushSymbol :=
  g_ClassFieldOffset Ctx:Parser:PushInt
  axiom:PushSymbol )
