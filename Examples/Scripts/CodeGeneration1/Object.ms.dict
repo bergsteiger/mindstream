@@ -189,6 +189,7 @@ MACRO classExpander
 
   anItem MembersIterator .for> ( 
    TtfwWord IN aMember
+   aMember pop:Word:Producer pop:Word:Name Msg
    aMember pop:Word:Name Msg
   )
 
