@@ -204,7 +204,7 @@ STRING FUNCTION InstanceSizeName
 [EXECUTE]
 ( 'InstanceSize' bind )
 
-INTEGER : ObjectClass:InstanceSize
+INTEGER class-method ObjectClass:InstanceSize
  ObjectClass IN Self
  Self %% InstanceSizeName DO >>> Result
 ; // InstanceSize
