@@ -445,7 +445,7 @@ STRING readonly ClassName
 ; // ClassName
 
 INTEGER readonly InstanceSize
- Self .class %% InstanceSizeName DO >>> Result
+ Self .class .InstanceSize >>> Result
 ; // InstanceSize
 
 constructor new ( )

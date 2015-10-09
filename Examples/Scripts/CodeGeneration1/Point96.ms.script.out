@@ -216,9 +216,7 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
-  %%
-  InstanceSizeName
-  DO
+  ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
  ; // INTEGER readonly Object:InstanceSize
@@ -293,9 +291,7 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
-  %%
-  InstanceSizeName
-  DO
+  ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
  ; // INTEGER readonly Object:InstanceSize
@@ -475,9 +471,7 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
-  %%
-  InstanceSizeName
-  DO
+  ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
  ; // INTEGER readonly Object:InstanceSize
@@ -687,9 +681,7 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
-  %%
-  InstanceSizeName
-  DO
+  ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
  ; // INTEGER readonly Object:InstanceSize
