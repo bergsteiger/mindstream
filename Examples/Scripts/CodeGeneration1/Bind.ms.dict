@@ -23,6 +23,7 @@ PROCEDURE ExpandMethodName
  l_FullMethodName ' ' string:Pos -1 == ?ASSURE 'Множественные типы для вызова методов объектов пока не поддерживаются'
 
  [ l_FullMethodName ':' aMethod ] strings:Cat >>> l_FullMethodName
+ l_FullMethodName IsWordDeclared ?ASSURE [ 'Метод ' l_FullMethodName ' не определён' ]
 
  Self CompileValue
  //Self |N Ctx:Parser:PushSymbol
