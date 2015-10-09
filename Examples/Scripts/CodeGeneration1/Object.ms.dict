@@ -122,6 +122,14 @@ VOID operator define_member
  axiom:PushSymbol Const
  aName MakeFieldOffsetName Ctx:Parser:PushSymbol
  aOffset Ctx:Parser:PushInt
+
+ axiom:PushSymbol implementation
+ g_CurrentClassImpl Ctx:Parser:PushSymbol
+ axiom:PushSymbol Const
+ aName MakeFieldOffsetName Ctx:Parser:PushSymbol
+ aOffset Ctx:Parser:PushInt
+ axiom:PushSymbol end.
+
 ; // define_member
 
 FieldOffset CompileTime-VAR g_ClassFieldOffset 0
