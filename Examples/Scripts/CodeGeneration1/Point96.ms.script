@@ -116,6 +116,8 @@ _:Point :: c:Point:Offset:VMT .
 _:Rectangle :: c:Rectangle:Offset:VMT .
 
 _:Object :: c:Object:Instance:Size .
+_:Point :: c:Point:Instance:Size .
+_:Rectangle :: c:Rectangle:Instance:Size .
 
 Point:: 0 0 Point:Print
 // - так работает
