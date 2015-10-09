@@ -108,6 +108,8 @@ class-end // Rectangle
 @ _:Rectangle DumpElement
 
 c:Object:Offset:VMT .
+c:Point:Offset:VMT .
+c:Rectangle:Offset:VMT .
 
 Point:: 0 0 Point:Print
 // - так работает
