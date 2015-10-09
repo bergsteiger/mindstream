@@ -532,6 +532,12 @@ VOID TestWithDump PointTest
  @
  _:Object
  DumpElement
+ @
+ _:Point
+ DumpElement
+ @
+ _:Rectangle
+ DumpElement
  Point::
  0
  0
@@ -788,6 +794,80 @@ class_impl _:Object
  INTEGER CONST c:Object:Offset:VMT
   0
 ; // class_impl _:Object
+
+class_impl _:Point
+ %CONSTRUCTORS %Constructors
+  ':'
+  '0'
+  'XY'
+  'OF'
+ ; // %CONSTRUCTORS %Constructors
+ 
+ %FIELDS %Flds
+  'VMT'
+  'X'
+  'Y'
+ ; // %FIELDS %Flds
+ 
+ %INHERITS %G
+  @
+  _:Object
+ ; // %INHERITS %G
+ 
+ %METHODS %Methods
+  '+'
+  'Neg'
+  '-'
+  'ToPrintable'
+  'Print'
+ ; // %METHODS %Methods
+ 
+ %PROPERTIES %Props
+  'X'
+  'Y'
+ ; // %PROPERTIES %Props
+ 
+ INTEGER CONST c:Point:Offset:VMT
+  0
+ INTEGER CONST c:Point:Offset:X
+  1
+ INTEGER CONST c:Point:Offset:Y
+  2
+; // class_impl _:Point
+
+class_impl _:Rectangle
+ %CONSTRUCTORS %Constructors
+  ':'
+ ; // %CONSTRUCTORS %Constructors
+ 
+ %FIELDS %Flds
+  'VMT'
+  'TopLeft'
+  'BottomRight'
+ ; // %FIELDS %Flds
+ 
+ %INHERITS %G
+  @
+  _:Object
+ ; // %INHERITS %G
+ 
+ %METHODS %Methods
+  'ToPrintable'
+  'Print'
+ ; // %METHODS %Methods
+ 
+ %PROPERTIES %Props
+  'TopLeft'
+  'BottomRight'
+ ; // %PROPERTIES %Props
+ 
+ INTEGER CONST c:Rectangle:Offset:BottomRight
+  2
+ INTEGER CONST c:Rectangle:Offset:TopLeft
+  1
+ INTEGER CONST c:Rectangle:Offset:VMT
+  0
+; // class_impl _:Rectangle
 
 ( X: 0, Y: 0 )
 ( X: 0, Y: 0 )

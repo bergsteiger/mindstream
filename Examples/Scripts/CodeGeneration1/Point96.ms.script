@@ -104,6 +104,9 @@ OVERRIDE void method Print
 
 class-end // Rectangle
 
+@ _:Point DumpElement
+@ _:Rectangle DumpElement
+
 Point:: 0 0 Point:Print
 // - так работает
 
