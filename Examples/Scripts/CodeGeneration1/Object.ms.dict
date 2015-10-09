@@ -174,7 +174,7 @@ TtfwWord type ObjectClass
 
 STRING : ObjectClass:Name
  ObjectClass IN Self
- Self |N getClassNamePrim >>> Result
+ Self |N ':' string:Split >>> Result DROP
 ; // ObjectClass:Name
 
 [EXECUTE]
