@@ -299,6 +299,11 @@ MACRO constructor
  g_CurrentClass Ctx:Parser:PushSymbol
  l_Name MakeMethodSignature
  @SELF 'right' aParams axiom:Params:PushWithOtherStereo
+
+ axiom:PushSymbol WordAlias
+ 'Self' Ctx:Parser:PushSymbol
+ 'Result' Ctx:Parser:PushSymbol
+
  l_Name array:AddTo g_CurrentClassConstructors
 ; // constructor
 

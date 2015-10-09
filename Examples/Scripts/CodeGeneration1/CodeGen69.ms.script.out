@@ -4861,6 +4861,7 @@ STRING OPERATOR :: MACRO :: readonly : Object:ClassName
 ; // Object:ClassName
 Object OPERATOR :: MACRO :: constructor : Object:new
  Object OPERATOR :: MACRO :: constructor :: Object:new : Result
+ Object OPERATOR :: MACRO :: constructor :: Object:new : Self
 ; // Object:new
 VIRTUAL VOID OPERATOR :: MACRO :: method : Object:Print
  Object OPERATOR :: IN : Self
