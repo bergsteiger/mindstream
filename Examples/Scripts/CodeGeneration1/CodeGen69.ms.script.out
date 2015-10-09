@@ -4745,6 +4745,9 @@ IMMEDIATE VOID OPERATOR :: MACRO : .class
 IMMEDIATE VOID OPERATOR :: MACRO : .ClassName
  ^@ OPERATOR :: IN : Self
 ; // .ClassName
+IMMEDIATE VOID OPERATOR :: MACRO : .InstanceSize
+ ^@ OPERATOR :: IN : Self
+; // .InstanceSize
 IMMEDIATE VOID OPERATOR :: MACRO : .Name
  ^@ OPERATOR :: IN : Self
 ; // .Name
@@ -4872,6 +4875,10 @@ STRING OPERATOR :: MACRO :: readonly : Object:ClassName
  STRING OPERATOR :: MACRO :: readonly :: Object:ClassName : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassName
+INTEGER OPERATOR :: MACRO :: readonly : Object:InstanceSize
+ INTEGER OPERATOR :: MACRO :: readonly :: Object:InstanceSize : Result
+ Object OPERATOR :: IN : Self
+; // Object:InstanceSize
 Object OPERATOR :: MACRO :: constructor : Object:new
  Object OPERATOR :: MACRO :: constructor :: Object:new : Result
  Object OPERATOR :: MACRO :: constructor :: Object:new : Self

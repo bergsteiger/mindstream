@@ -212,6 +212,15 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING readonly Object:ClassName
  
+ INTEGER readonly Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class Self FieldByOffset pop:Word:SetValue ::
+  'InstanceSizeName'
+  Result
+  pop:Word:SetValue
+ ; // INTEGER readonly Object:InstanceSize
+ 
  Object constructor Object:new
   ARRAY [
    @
@@ -277,6 +286,15 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // STRING readonly Object:ClassName
+ 
+ INTEGER readonly Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class Self FieldByOffset pop:Word:SetValue ::
+  'InstanceSizeName'
+  Result
+  pop:Word:SetValue
+ ; // INTEGER readonly Object:InstanceSize
  
  Object constructor Object:new
   ARRAY [
@@ -448,6 +466,15 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // STRING readonly Object:ClassName
+ 
+ INTEGER readonly Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class Self FieldByOffset pop:Word:SetValue ::
+  'InstanceSizeName'
+  Result
+  pop:Word:SetValue
+ ; // INTEGER readonly Object:InstanceSize
  
  Point method Point:Neg
   Point IN Self
@@ -649,6 +676,15 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // STRING readonly Object:ClassName
+ 
+ INTEGER readonly Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class Self FieldByOffset pop:Word:SetValue ::
+  'InstanceSizeName'
+  Result
+  pop:Word:SetValue
+ ; // INTEGER readonly Object:InstanceSize
  
  Object constructor Object:new
   ARRAY [
@@ -983,6 +1019,7 @@ class_impl _:Object
  %PROPERTIES %Props
   'class'
   'ClassName'
+  'InstanceSize'
  ; // %PROPERTIES %Props
  
  FieldOffset VAR c:Instance:Size

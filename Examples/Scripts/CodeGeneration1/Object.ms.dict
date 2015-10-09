@@ -436,6 +436,10 @@ STRING readonly ClassName
  Self .class .Name >>> Result
 ; // ClassName
 
+INTEGER readonly InstanceSize
+ Self .class :: InstanceSizeName >>> Result
+; // InstanceSize
+
 constructor new ( )
  new[ ] >>> Result
 ; // new
