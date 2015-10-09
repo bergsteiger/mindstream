@@ -187,7 +187,7 @@ MACRO classExpander
  anImpl |@ %G .for> ( 
   IN anItem 
 
-  anItem MembersIterator .for> ( 
+  anItem MembersIterator .filter> ( pop:Word:Producer pop:Word:Name NameOf CONST == ) .for> ( 
    TtfwWord IN aMember
    aMember pop:Word:Producer pop:Word:Name Msg
    aMember pop:Word:Name Msg
