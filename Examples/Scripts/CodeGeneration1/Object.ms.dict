@@ -295,6 +295,16 @@ MACRO RunCompileProps&Methods
 
 MACRO class-end
  axiom:PushSymbol RunCompileProps&Methods
+
+ axiom:PushSymbol [EXECUTE]
+ axiom:PushSymbol (
+ g_CurrentClass ClassImplName Ctx:Parser:PushSymbol
+ axiom:PushSymbol ::
+ [ cFieldPrefix g_CurrentClass ':Instance:Size' ] strings:Cat Ctx:Parser:PushSymbol
+ axiom:PushSymbol :=
+ g_ClassFieldOffset Ctx:Parser:PushInt
+ axiom:PushSymbol )
+
  g_CurrentClass := ''
 ; // class-end
 
