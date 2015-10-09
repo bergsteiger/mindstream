@@ -179,6 +179,8 @@ MACRO class-method
  
  @SELF Ctx:SetWordProducerForCompiledClass
 
+ axiom:PushSymbol :
+
  l_Name Ctx:Parser:PushSymbol
  //l_Name MakeMethodSignature
  //MakeSelfParam
