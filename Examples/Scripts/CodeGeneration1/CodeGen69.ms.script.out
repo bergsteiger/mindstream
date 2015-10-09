@@ -4812,6 +4812,8 @@ IMMEDIATE VOID OPERATOR :: MACRO : constructor
  ^ OPERATOR :: IN : aParams
  STRING OPERATOR :: VAR : l_Name
 ; // constructor
+STRING CONST : cResult
+STRING CONST : cSelf
 VOID OPERATOR : define_member
  STRING OPERATOR :: IN : aName
  FieldOffset OPERATOR :: IN : aOffset
