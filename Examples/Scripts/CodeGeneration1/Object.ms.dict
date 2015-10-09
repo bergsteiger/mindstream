@@ -437,7 +437,7 @@ STRING readonly ClassName
 ; // ClassName
 
 INTEGER readonly InstanceSize
- Self .class :: InstanceSizeName >>> Result
+ Self .class %% InstanceSizeName >>> Result
 ; // InstanceSize
 
 constructor new ( )

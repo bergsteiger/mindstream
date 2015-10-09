@@ -215,8 +215,9 @@ VOID TestWithDump PointTest
  INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
-  Object:class Self FieldByOffset pop:Word:SetValue ::
-  'InstanceSizeName'
+  Object:class
+  %%
+  InstanceSizeName
   Result
   pop:Word:SetValue
  ; // INTEGER readonly Object:InstanceSize
@@ -290,8 +291,9 @@ VOID TestWithDump PointTest
  INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
-  Object:class Self FieldByOffset pop:Word:SetValue ::
-  'InstanceSizeName'
+  Object:class
+  %%
+  InstanceSizeName
   Result
   pop:Word:SetValue
  ; // INTEGER readonly Object:InstanceSize
@@ -470,8 +472,9 @@ VOID TestWithDump PointTest
  INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
-  Object:class Self FieldByOffset pop:Word:SetValue ::
-  'InstanceSizeName'
+  Object:class
+  %%
+  InstanceSizeName
   Result
   pop:Word:SetValue
  ; // INTEGER readonly Object:InstanceSize
@@ -680,8 +683,9 @@ VOID TestWithDump PointTest
  INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
-  Object:class Self FieldByOffset pop:Word:SetValue ::
-  'InstanceSizeName'
+  Object:class
+  %%
+  InstanceSizeName
   Result
   pop:Word:SetValue
  ; // INTEGER readonly Object:InstanceSize
