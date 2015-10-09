@@ -280,7 +280,10 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   FieldByOffset
-  c:Object:Offset:VMT
+  ^@ (
+   _:Object ::
+   'c:Object:Offset:VMT'
+  )
   Result
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
@@ -375,7 +378,10 @@ VOID TestWithDump PointTest
   Point IN Self
   Self
   FieldByOffset
-  c:Point:Offset:X
+  ^@ (
+   _:Point ::
+   'c:Point:Offset:X'
+  )
   Result
   pop:Word:SetValue
  ; // Pixel readonly Point:X
@@ -415,7 +421,10 @@ VOID TestWithDump PointTest
   Point IN Self
   Self
   FieldByOffset
-  c:Point:Offset:Y
+  ^@ (
+   _:Point ::
+   'c:Point:Offset:Y'
+  )
   Result
   pop:Word:SetValue
  ; // Pixel readonly Point:Y
@@ -460,7 +469,10 @@ VOID TestWithDump PointTest
   Rectangle IN Self
   Self
   FieldByOffset
-  c:Rectangle:Offset:BottomRight
+  ^@ (
+   _:Rectangle ::
+   'c:Rectangle:Offset:BottomRight'
+  )
   Result
   pop:Word:SetValue
  ; // Point readonly Rectangle:BottomRight
@@ -469,7 +481,10 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   FieldByOffset
-  c:Object:Offset:VMT
+  ^@ (
+   _:Object ::
+   'c:Object:Offset:VMT'
+  )
   Result
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
@@ -503,7 +518,10 @@ VOID TestWithDump PointTest
   Rectangle IN Self
   Self
   FieldByOffset
-  c:Rectangle:Offset:TopLeft
+  ^@ (
+   _:Rectangle ::
+   'c:Rectangle:Offset:TopLeft'
+  )
   Result
   pop:Word:SetValue
  ; // Point readonly Rectangle:TopLeft

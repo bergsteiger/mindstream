@@ -379,7 +379,11 @@ PRIVATE operator do-get-member
  
  %SUMMARY 'Определяет способ доступа к члену класса' ;
  axiom:PushSymbol FieldByOffset
+ axiom:PushSymbol (
+ g_CurrentClass ClassImplName Ctx:Parser:PushSymbol
+ axiom:PushSymbol ::
  aName MakeFieldOffsetName Ctx:Parser:PushSymbol 
+ axiom:PushSymbol )
 ; // do-get-member
 
 MACRO get-member
