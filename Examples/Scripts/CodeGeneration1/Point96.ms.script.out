@@ -571,6 +571,9 @@ VOID TestWithDump PointTest
  _:Rectangle ::
  'c:Rectangle:Offset:VMT'
  .
+ _:Object ::
+ 'c:Object:Instance:Size'
+ .
  Point::
  0
  0
@@ -905,6 +908,7 @@ class_impl _:Rectangle
   0
 ; // class_impl _:Rectangle
 
+0
 0
 0
 0
