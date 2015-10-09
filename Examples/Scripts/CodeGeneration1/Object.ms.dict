@@ -187,6 +187,10 @@ MACRO classExpander
  anImpl |@ %G .for> ( 
   IN anItem 
 
+  anItem MembersIterator .for> ( 
+   TtfwWord IN aMember
+  )
+
   anItem %Flds .for> ( 
    IN aField 
    axiom:PushSymbol member
