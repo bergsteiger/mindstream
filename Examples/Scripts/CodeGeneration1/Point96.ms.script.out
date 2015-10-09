@@ -218,6 +218,7 @@ VOID TestWithDump PointTest
   Object:class
   %%
   InstanceSizeName
+  DO
   Result
   pop:Word:SetValue
  ; // INTEGER readonly Object:InstanceSize
@@ -294,6 +295,7 @@ VOID TestWithDump PointTest
   Object:class
   %%
   InstanceSizeName
+  DO
   Result
   pop:Word:SetValue
  ; // INTEGER readonly Object:InstanceSize
@@ -475,6 +477,7 @@ VOID TestWithDump PointTest
   Object:class
   %%
   InstanceSizeName
+  DO
   Result
   pop:Word:SetValue
  ; // INTEGER readonly Object:InstanceSize
@@ -686,6 +689,7 @@ VOID TestWithDump PointTest
   Object:class
   %%
   InstanceSizeName
+  DO
   Result
   pop:Word:SetValue
  ; // INTEGER readonly Object:InstanceSize
@@ -847,6 +851,9 @@ VOID TestWithDump PointTest
  pop:Word:SetValuePrim
  O1
  Object:Print
+ O1
+ Object:InstanceSize
+ Print
  ARRAY [
   P1
   P2
@@ -1119,6 +1126,7 @@ class_impl _:Rectangle
 ( X: 0, Y: 0 )
 ( X: 0, Y: 0 )
 Point
+3
 ( X: 0, Y: 0 )
 ( X: 0, Y: 0 )
 ( X: 1, Y: 1 )
