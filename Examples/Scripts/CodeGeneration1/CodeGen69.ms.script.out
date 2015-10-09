@@ -4796,6 +4796,8 @@ VOID OPERATOR : define_member
  FieldOffset OPERATOR :: IN : aOffset
 ; // define_member
 PRIVATE OPERATOR : do-get-member
+ Documentation:
+  Определяет способ доступа к члену класса
  STRING OPERATOR :: IN : aName
 ; // do-get-member
 OBJECT FUNCTION : DoMember
@@ -4824,6 +4826,8 @@ STRING : : getClassNamePrim
  STRING OPERATOR :: IN : Self
 ; // getClassNamePrim
 IMMEDIATE VOID OPERATOR :: MACRO : get-member
+ Documentation:
+  Компилирует способ доступа к члену класса
  ^L OPERATOR :: IN : aName
 ; // get-member
 : : ListToNameAsString
