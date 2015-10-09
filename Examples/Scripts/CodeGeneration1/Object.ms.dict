@@ -180,9 +180,9 @@ MACRO class-method
  @SELF Ctx:SetWordProducerForCompiledClass
 
  axiom:PushSymbol :
-
+ 
+ NameOf ObjectClass l_Name MakeMethodSignaturePrim >>> l_Name
  l_Name Ctx:Parser:PushSymbol
- //l_Name MakeMethodSignature
  //MakeSelfParam
  //l_Name array:AddTo g_CurrentClassMethods
 ; // class-method
@@ -190,7 +190,7 @@ MACRO class-method
 [EXECUTE]
 ( 'Name' bind )
 
-STRING class-method ObjectClass:Name
+STRING class-method Name
  ObjectClass IN Self
  Self |N ':' string:Split >>> Result DROP
 ; // ObjectClass:Name
@@ -204,7 +204,7 @@ STRING FUNCTION InstanceSizeName
 [EXECUTE]
 ( 'InstanceSize' bind )
 
-INTEGER class-method ObjectClass:InstanceSize
+INTEGER class-method InstanceSize
  ObjectClass IN Self
  Self %% InstanceSizeName DO >>> Result
 ; // InstanceSize
