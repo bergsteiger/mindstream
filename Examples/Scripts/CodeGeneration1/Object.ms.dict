@@ -180,6 +180,20 @@ STRING : ObjectClass:Name
 [EXECUTE]
 ( 'Name' bind )
 
+CONST cInstanceSizeName 'Instance:Size'
+
+STRING FUNCTION InstanceSizeName
+ [ cFieldPrefix cInstanceSizeName ] strings:Cat >>> Result
+; // InstanceSizeName
+
+INTEGER : ObjectClass:InstanceSize
+ ObjectClass IN Self
+ Self %% InstanceSizeName DO >>> Result
+; // InstanceSize
+
+[EXECUTE]
+( 'InstanceSize' bind )
+
 MACRO classExpander
   ^ IN anImpl
 
@@ -224,12 +238,6 @@ MACRO classExpander
 ; // classExpander
 
 CONST cObjectName 'Object'
-
-CONST cInstanceSizeName 'Instance:Size'
-
-STRING FUNCTION InstanceSizeName
- [ cFieldPrefix cInstanceSizeName ] strings:Cat >>> Result
-; // InstanceSizeName
 
 MACRO class
  Literal IN aName
