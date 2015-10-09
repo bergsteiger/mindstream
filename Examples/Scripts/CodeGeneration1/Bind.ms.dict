@@ -29,6 +29,7 @@ PROCEDURE ExpandMethodName
  Self CompileValue
  //Self |N Ctx:Parser:PushSymbol
  // по идее Ctx:Parser:PushSymbol - тоже должен работать, но не работает
+ // НЕ РАБОТАЕТ из-за "правых" параметров, которые дают "скобку" - (
   
  l_FullMethodName Ctx:Parser:PushSymbol
 ; // ExpandMethodName
