@@ -62,6 +62,54 @@ VOID TestWithDump PointTest
   ExpandMethodName
  ; // IMMEDIATE VOID MACRO .Y
  
+ class_impl _:Bar
+  %CONSTRUCTORS %Constructors
+  ; // %CONSTRUCTORS %Constructors
+  
+  %FIELDS %Flds
+   'VMT'
+  ; // %FIELDS %Flds
+  
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+  ; // %PROPERTIES %Props
+  
+  FieldOffset VAR c:Bar:Instance:Size
+  INTEGER CONST c:Bar:Offset:VMT
+   0
+ ; // class_impl _:Bar
+ 
+ class_impl _:Foo
+  %CONSTRUCTORS %Constructors
+  ; // %CONSTRUCTORS %Constructors
+  
+  %FIELDS %Flds
+   'VMT'
+  ; // %FIELDS %Flds
+  
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+  ; // %PROPERTIES %Props
+  
+  FieldOffset VAR c:Foo:Instance:Size
+  INTEGER CONST c:Foo:Offset:VMT
+   0
+ ; // class_impl _:Foo
+ 
  class_impl _:Point
   %CONSTRUCTORS %Constructors
    ':'
@@ -138,6 +186,60 @@ VOID TestWithDump PointTest
    0
  ; // class_impl _:Rectangle
  
+ IMMEDIATE VOID TYPE Bar
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE Bar
+ 
+ ObjectClass readonly Object:class
+  Object IN Self
+  Self
+  FieldByOffset
+  ^@ (
+   _:Object ::
+   'c:Object:Offset:VMT'
+  )
+  Result
+  pop:Word:SetValue
+ ; // ObjectClass readonly Object:class
+ 
+ STRING readonly Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:Name
+  Result
+  pop:Word:SetValue
+ ; // STRING readonly Object:ClassName
+ 
+ Object constructor Object:new
+  ARRAY [
+   @
+   _:Object
+  ]
+  Result
+  pop:Word:SetValue
+ ; // Object constructor Object:new
+ 
+ VIRTUAL VOID method Object:Print
+  Object IN Self
+  Self
+  Object:ToPrintable
+  Print
+ ; // VIRTUAL VOID method Object:Print
+ 
+ VIRTUAL STRING method Object:ToPrintable
+  Object IN Self
+  Self
+  Object:ClassName
+  Result
+  pop:Word:SetValue
+ ; // VIRTUAL STRING method Object:ToPrintable
+ 
+ INTEGER CONST c:Bar:Offset:VMT
+  0
+ INTEGER CONST c:Foo:Offset:VMT
+  0
  INTEGER CONST c:Point:Offset:VMT
   0
  INTEGER CONST c:Point:Offset:X
@@ -150,6 +252,56 @@ VOID TestWithDump PointTest
   1
  INTEGER CONST c:Rectangle:Offset:VMT
   0
+ IMMEDIATE VOID TYPE Foo
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE Foo
+ 
+ ObjectClass readonly Object:class
+  Object IN Self
+  Self
+  FieldByOffset
+  ^@ (
+   _:Object ::
+   'c:Object:Offset:VMT'
+  )
+  Result
+  pop:Word:SetValue
+ ; // ObjectClass readonly Object:class
+ 
+ STRING readonly Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:Name
+  Result
+  pop:Word:SetValue
+ ; // STRING readonly Object:ClassName
+ 
+ Object constructor Object:new
+  ARRAY [
+   @
+   _:Object
+  ]
+  Result
+  pop:Word:SetValue
+ ; // Object constructor Object:new
+ 
+ VIRTUAL VOID method Object:Print
+  Object IN Self
+  Self
+  Object:ToPrintable
+  Print
+ ; // VIRTUAL VOID method Object:Print
+ 
+ VIRTUAL STRING method Object:ToPrintable
+  Object IN Self
+  Self
+  Object:ClassName
+  Result
+  pop:Word:SetValue
+ ; // VIRTUAL STRING method Object:ToPrintable
+ 
  ARRAY VAR l_Points
  ARRAY VAR l_Rectangles
  Object VAR O1

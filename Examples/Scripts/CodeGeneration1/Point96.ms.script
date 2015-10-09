@@ -104,6 +104,12 @@ OVERRIDE void method Print
 
 class-end // Rectangle
 
+class Foo
+class-end // Foo
+
+class Bar
+class-end // Bar
+
 @ _:Point DumpElement
 @ _:Rectangle DumpElement
 
