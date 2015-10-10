@@ -118,14 +118,7 @@ PROCEDURE bindInPlace
 
  %SUMMARY 'Определяет "метод с точкой", который потом разворачивается в вызов "метода объекта"' ;
 
- STRING VAR l_TypeInfo
- Ctx:WordInfo pop:WordInfo:ToString >>> l_TypeInfo
- 
- Ctx:ClearTypeInfo
-
- aName bind
-
- l_TypeInfo axiom:PushWordInfo
+ aName bindAndRestoreContext
 
  g_Stereo IsNil ?ASSURE 'Вложенные методы пока не поддерживаются'
 
