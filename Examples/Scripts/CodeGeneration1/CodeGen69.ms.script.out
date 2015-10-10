@@ -4845,6 +4845,7 @@ STRING OPERATOR :: VAR : g_CurrentClass
 ARRAY OPERATOR :: VAR : g_CurrentClassConstructors
 STRING OPERATOR :: VAR : g_CurrentClassImpl
 ARRAY OPERATOR :: VAR : g_CurrentClassMembers
+STRING OPERATOR :: VAR : g_CurrentClassMethod
 ARRAY OPERATOR :: VAR : g_CurrentClassMethods
 ARRAY OPERATOR :: VAR : g_CurrentClassProperties
 IMMEDIATE VOID OPERATOR :: MACRO : get-member

@@ -176,10 +176,14 @@ STRING FUNCTION ClassRefName
 
 CONST cSelf 'Self'
 
+STRING CompileTime-VAR g_CurrentClassMethod ''
+
 MACRO class-method
   Literal IN aName
 
  %SUMMARY 'Метод класса' ;
+
+ g_CurrentClassMethod '' == ?ASSURE 'Вложенные методы класса пока не поддерживаются'
 
  STRING VAR l_Name
  aName |N >>> l_Name
@@ -345,6 +349,9 @@ ObjectClass readonly class read VMT
 
 MACRO class-method-end
  axiom:PushSymbol ;
+ //axiom:PushSymbol method
+ //axiom:PushSymbol ;
+ '' >>> g_CurrentClassMethod
 ; // class-method-end
 
 STRING class-method ClassName
