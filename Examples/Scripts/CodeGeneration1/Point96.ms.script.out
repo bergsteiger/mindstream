@@ -212,23 +212,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING method Object:ClassName
  
- REDIFINITION INTEGER readonly Object:InstanceSize
+ INTEGER method Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // REDIFINITION INTEGER readonly Object:InstanceSize
- 
- REDIFINITION INTEGER readonly Object:InstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // REDIFINITION INTEGER readonly Object:InstanceSize
+ ; // INTEGER method Object:InstanceSize
  
  Object constructor Object:new
   ARRAY [
@@ -301,23 +292,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING method Object:ClassName
  
- REDIFINITION INTEGER readonly Object:InstanceSize
+ INTEGER method Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // REDIFINITION INTEGER readonly Object:InstanceSize
- 
- REDIFINITION INTEGER readonly Object:InstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // REDIFINITION INTEGER readonly Object:InstanceSize
+ ; // INTEGER method Object:InstanceSize
  
  Object constructor Object:new
   ARRAY [
@@ -495,23 +477,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING method Object:ClassName
  
- REDIFINITION INTEGER readonly Object:InstanceSize
+ INTEGER method Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // REDIFINITION INTEGER readonly Object:InstanceSize
- 
- REDIFINITION INTEGER readonly Object:InstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // REDIFINITION INTEGER readonly Object:InstanceSize
+ ; // INTEGER method Object:InstanceSize
  
  Point method Point:Neg
   Point IN Self
@@ -719,23 +692,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING method Object:ClassName
  
- REDIFINITION INTEGER readonly Object:InstanceSize
+ INTEGER method Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // REDIFINITION INTEGER readonly Object:InstanceSize
- 
- REDIFINITION INTEGER readonly Object:InstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // REDIFINITION INTEGER readonly Object:InstanceSize
+ ; // INTEGER method Object:InstanceSize
  
  Object constructor Object:new
   ARRAY [
@@ -1085,7 +1049,6 @@ class_impl _:Object
  
  %PROPERTIES %Props
   'class'
-  'InstanceSize'
  ; // %PROPERTIES %Props
  
  FieldOffset VAR c:Instance:Size

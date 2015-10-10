@@ -519,9 +519,9 @@ MACRO get-member
 // Self .class .ClassName >>> Result
 //; // ClassName
 
-INTEGER readonly InstanceSize
- Self .class .InstanceSize >>> Result
-; // InstanceSize
+//INTEGER readonly InstanceSize
+// Self .class .InstanceSize >>> Result
+//; // InstanceSize
 
 constructor new ( )
  new[ ] >>> Result
