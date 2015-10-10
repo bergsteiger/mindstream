@@ -377,7 +377,7 @@ MACRO class-method-end
  axiom:PushSymbol ;
  g_CurrentClassMethodModifiers axiom:PushWordInfo
  axiom:PushSymbol method
- [ 'XXX' g_CurrentClassMethod ] strings:Cat Ctx:Parser:PushSymbol
+ g_CurrentClassMethod Ctx:Parser:PushSymbol
  'Self' Ctx:Parser:PushSymbol 
  '.class' Ctx:Parser:PushSymbol 
  [ '.' g_CurrentClassMethod ] strings:Cat Ctx:Parser:PushSymbol

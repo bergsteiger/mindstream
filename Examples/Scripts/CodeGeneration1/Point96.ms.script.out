@@ -203,23 +203,41 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING readonly Object:ClassName
+ REDIFINITION STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING readonly Object:ClassName
+ ; // REDIFINITION STRING readonly Object:ClassName
  
- INTEGER readonly Object:InstanceSize
+ REDIFINITION STRING readonly Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassName
+  Result
+  pop:Word:SetValue
+ ; // REDIFINITION STRING readonly Object:ClassName
+ 
+ REDIFINITION INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER readonly Object:InstanceSize
+ ; // REDIFINITION INTEGER readonly Object:InstanceSize
+ 
+ REDIFINITION INTEGER readonly Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:InstanceSize
+  Result
+  pop:Word:SetValue
+ ; // REDIFINITION INTEGER readonly Object:InstanceSize
  
  Object constructor Object:new
   ARRAY [
@@ -244,24 +262,6 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // VIRTUAL STRING method Object:ToPrintable
- 
- STRING method Object:XXXClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // STRING method Object:XXXClassName
- 
- INTEGER method Object:XXXInstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // INTEGER method Object:XXXInstanceSize
  
  IMMEDIATE VOID TYPE BarClass
   TtfwValueTypes
@@ -301,23 +301,41 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING readonly Object:ClassName
+ REDIFINITION STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING readonly Object:ClassName
+ ; // REDIFINITION STRING readonly Object:ClassName
  
- INTEGER readonly Object:InstanceSize
+ REDIFINITION STRING readonly Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassName
+  Result
+  pop:Word:SetValue
+ ; // REDIFINITION STRING readonly Object:ClassName
+ 
+ REDIFINITION INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER readonly Object:InstanceSize
+ ; // REDIFINITION INTEGER readonly Object:InstanceSize
+ 
+ REDIFINITION INTEGER readonly Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:InstanceSize
+  Result
+  pop:Word:SetValue
+ ; // REDIFINITION INTEGER readonly Object:InstanceSize
  
  Object constructor Object:new
   ARRAY [
@@ -342,24 +360,6 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // VIRTUAL STRING method Object:ToPrintable
- 
- STRING method Object:XXXClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // STRING method Object:XXXClassName
- 
- INTEGER method Object:XXXInstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // INTEGER method Object:XXXInstanceSize
  
  IMMEDIATE VOID TYPE FooClass
   TtfwValueTypes
@@ -504,23 +504,41 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING readonly Object:ClassName
+ REDIFINITION STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING readonly Object:ClassName
+ ; // REDIFINITION STRING readonly Object:ClassName
  
- INTEGER readonly Object:InstanceSize
+ REDIFINITION STRING readonly Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassName
+  Result
+  pop:Word:SetValue
+ ; // REDIFINITION STRING readonly Object:ClassName
+ 
+ REDIFINITION INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER readonly Object:InstanceSize
+ ; // REDIFINITION INTEGER readonly Object:InstanceSize
+ 
+ REDIFINITION INTEGER readonly Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:InstanceSize
+  Result
+  pop:Word:SetValue
+ ; // REDIFINITION INTEGER readonly Object:InstanceSize
  
  Point method Point:Neg
   Point IN Self
@@ -610,24 +628,6 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // Pixel readonly Point:X
- 
- STRING method Object:XXXClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // STRING method Object:XXXClassName
- 
- INTEGER method Object:XXXInstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // INTEGER method Object:XXXInstanceSize
  
  Point constructor Point:XY
   ^ IN _aPoint
@@ -737,23 +737,41 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING readonly Object:ClassName
+ REDIFINITION STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING readonly Object:ClassName
+ ; // REDIFINITION STRING readonly Object:ClassName
  
- INTEGER readonly Object:InstanceSize
+ REDIFINITION STRING readonly Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassName
+  Result
+  pop:Word:SetValue
+ ; // REDIFINITION STRING readonly Object:ClassName
+ 
+ REDIFINITION INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER readonly Object:InstanceSize
+ ; // REDIFINITION INTEGER readonly Object:InstanceSize
+ 
+ REDIFINITION INTEGER readonly Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:InstanceSize
+  Result
+  pop:Word:SetValue
+ ; // REDIFINITION INTEGER readonly Object:InstanceSize
  
  Object constructor Object:new
   ARRAY [
@@ -801,24 +819,6 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // REDIFINITION OVERRIDE STRING method Rectangle:ToPrintable
- 
- STRING method Object:XXXClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // STRING method Object:XXXClassName
- 
- INTEGER method Object:XXXInstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // INTEGER method Object:XXXInstanceSize
  
  IMMEDIATE VOID TYPE RectangleClass
   TtfwValueTypes
@@ -1113,8 +1113,8 @@ class_impl _:Object
  ; // %FIELDS %Flds
  
  %METHODS %Methods
-  'XXXClassName'
-  'XXXInstanceSize'
+  'ClassName'
+  'InstanceSize'
   'ToPrintable'
   'Print'
  ; // %METHODS %Methods
