@@ -279,6 +279,10 @@ STRING class-method ClassName
  Self |N ':' string:Split >>> Result DROP
 ; // ClassName
 
+INTEGER class-method InstanceSize
+ Self %% InstanceSizeName DO >>> Result
+; // InstanceSize
+
 MACRO classExpander
   ^ IN anImpl
 
@@ -321,10 +325,6 @@ MACRO classExpander
 
  )
 ; // classExpander
-
-INTEGER class-method InstanceSize
- Self %% InstanceSizeName DO >>> Result
-; // InstanceSize
 
 : ListToNameAsString
  STRING IN aName
