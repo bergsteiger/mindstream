@@ -177,6 +177,7 @@ STRING FUNCTION ClassRefName
 CONST cSelf 'Self'
 
 STRING CompileTime-VAR g_CurrentClassMethod ''
+STRING CompileTime-VAR g_CurrentClassMethodModifiers ''
 
 MACRO class-method
   Literal IN aName
@@ -377,6 +378,7 @@ MACRO class-method-end
  //cResult Ctx:Parser:PushSymbol
  axiom:PushSymbol ;
  '' >>> g_CurrentClassMethod
+ '' >>> g_CurrentClassMethodModifiers
 ; // class-method-end
 
 STRING class-method ClassName
