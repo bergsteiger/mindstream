@@ -215,9 +215,6 @@ MACRO class-method
  //l_Name array:AddTo g_CurrentClassMethods
 ; // class-method
 
-[EXECUTE]
-( 'Name' bind )
-
 STRING class-method Name
  Self |N ':' string:Split >>> Result DROP
 ; // ObjectClass:Name
