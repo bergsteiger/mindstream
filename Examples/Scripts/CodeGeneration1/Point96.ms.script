@@ -192,7 +192,7 @@ l_Points ==> (
  Point IN aPt 
  aPt .class %G ==> ( 
   ObjectClass IN aClass
-  aClass .Name Print 
+  aClass .ClassName Print 
  ) 
 )
 
@@ -222,7 +222,7 @@ l_Rectangles ==> (
  Rectangle IN aRt 
  aRt .class %G ==> ( 
   ObjectClass IN aClass
-  aClass .Name Print 
+  aClass .ClassName Print 
  ) 
 )
 

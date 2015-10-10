@@ -275,9 +275,9 @@ MACRO class
 
 class Object
 
-STRING class-method Name
+STRING class-method ClassName
  Self |N ':' string:Split >>> Result DROP
-; // ObjectClass:Name
+; // ClassName
 
 MACRO classExpander
   ^ IN anImpl
@@ -302,21 +302,21 @@ MACRO classExpander
    IN aProp
    axiom:PushSymbol WordAlias
    g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .Name aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   anItem .ClassName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Props .for>
 
   anItem %Methods .for> ( 
    IN aProp
    axiom:PushSymbol WordAlias
    g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .Name aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   anItem .ClassName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Methods .for>
 
   anItem %Constructors .for> ( 
    IN aProp
    axiom:PushSymbol WordAlias
    g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .Name aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   anItem .ClassName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Constructors .for>
 
  )
@@ -484,7 +484,7 @@ FieldOffset member VMT
 ObjectClass readonly class read VMT
 
 STRING readonly ClassName
- Self .class .Name >>> Result
+ Self .class .ClassName >>> Result
 ; // ClassName
 
 INTEGER readonly InstanceSize

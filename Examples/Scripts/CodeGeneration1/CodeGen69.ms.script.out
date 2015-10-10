@@ -4742,7 +4742,12 @@ ARRAY OPERATOR :: MACRO :: word_func : %R
 IMMEDIATE VOID OPERATOR :: MACRO : .class
  ^@ OPERATOR :: IN : Self
 ; // .class
-IMMEDIATE VOID OPERATOR :: MACRO : .ClassName
+IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .ClassName
+==> Redefines
+ IMMEDIATE VOID OPERATOR :: MACRO : .ClassName
+  ^@ OPERATOR :: IN : Self
+ ; // .ClassName
+<== Redefines
  ^@ OPERATOR :: IN : Self
 ; // .ClassName
 IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .InstanceSize
@@ -4753,9 +4758,6 @@ IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .InstanceSize
 <== Redefines
  ^@ OPERATOR :: IN : Self
 ; // .InstanceSize
-IMMEDIATE VOID OPERATOR :: MACRO : .Name
- ^@ OPERATOR :: IN : Self
-; // .Name
 IMMEDIATE VOID OPERATOR :: MACRO : .Print
  ^@ OPERATOR :: IN : Self
 ; // .Print
@@ -4906,14 +4908,14 @@ VIRTUAL STRING OPERATOR :: MACRO :: method : Object:ToPrintable
  Object OPERATOR :: IN : Self
 ; // Object:ToPrintable
 IMMEDIATE VOID OPERATOR :: TYPE : ObjectClass
+STRING : : ObjectClass:ClassName
+ STRING : :: ObjectClass:ClassName : Result
+ ObjectClass OPERATOR :: IN : Self
+; // ObjectClass:ClassName
 INTEGER : : ObjectClass:InstanceSize
  INTEGER : :: ObjectClass:InstanceSize : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:InstanceSize
-STRING : : ObjectClass:Name
- STRING : :: ObjectClass:Name : Result
- ObjectClass OPERATOR :: IN : Self
-; // ObjectClass:Name
 IMMEDIATE VOID OPERATOR :: MACRO : read
  ^L OPERATOR :: IN : aName
 ; // read
