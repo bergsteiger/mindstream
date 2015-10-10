@@ -249,12 +249,16 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
+  Result
+  pop:Word:SetValue
  ; // STRING method Object:XXXClassName
  
  INTEGER method Object:XXXInstanceSize
   Object IN Self
   Self
   Object:class
+  Result
+  pop:Word:SetValue
  ; // INTEGER method Object:XXXInstanceSize
  
  IMMEDIATE VOID TYPE BarClass
@@ -341,12 +345,16 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
+  Result
+  pop:Word:SetValue
  ; // STRING method Object:XXXClassName
  
  INTEGER method Object:XXXInstanceSize
   Object IN Self
   Self
   Object:class
+  Result
+  pop:Word:SetValue
  ; // INTEGER method Object:XXXInstanceSize
  
  IMMEDIATE VOID TYPE FooClass
@@ -603,12 +611,16 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
+  Result
+  pop:Word:SetValue
  ; // STRING method Object:XXXClassName
  
  INTEGER method Object:XXXInstanceSize
   Object IN Self
   Self
   Object:class
+  Result
+  pop:Word:SetValue
  ; // INTEGER method Object:XXXInstanceSize
  
  Point constructor Point:XY
@@ -788,12 +800,16 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
+  Result
+  pop:Word:SetValue
  ; // STRING method Object:XXXClassName
  
  INTEGER method Object:XXXInstanceSize
   Object IN Self
   Self
   Object:class
+  Result
+  pop:Word:SetValue
  ; // INTEGER method Object:XXXInstanceSize
  
  IMMEDIATE VOID TYPE RectangleClass

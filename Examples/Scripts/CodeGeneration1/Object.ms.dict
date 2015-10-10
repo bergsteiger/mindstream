@@ -382,8 +382,8 @@ MACRO class-method-end
  'Self' Ctx:Parser:PushSymbol 
  '.class' Ctx:Parser:PushSymbol 
  //.InstanceSize 
- //axiom:PushSymbol >>> 
- //cResult Ctx:Parser:PushSymbol
+ axiom:PushSymbol >>> 
+ cResult Ctx:Parser:PushSymbol
  axiom:PushSymbol ;
  '' >>> g_CurrentClassMethod
  '' >>> g_CurrentClassMethodModifiers
