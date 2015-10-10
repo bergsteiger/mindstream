@@ -223,6 +223,9 @@ STRING FUNCTION InstanceSizeName
  [ cFieldPrefix cInstanceSizeName ] strings:Cat >>> Result
 ; // InstanceSizeName
 
+//FORWARD classExpander
+// - так почему-то не работает, хотя должно бы
+
 MACRO class
  Literal IN aName
  ( g_CurrentClass = '' ) ?ASSURE 'Вложенные классы пока не поддерживаются'
