@@ -4918,10 +4918,12 @@ VIRTUAL STRING OPERATOR :: MACRO :: method : Object:ToPrintable
  VIRTUAL STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
  Object OPERATOR :: IN : Self
 ; // Object:ToPrintable
-OPERATOR :: MACRO :: method : Object:XXXClassName
+STRING OPERATOR :: MACRO :: method : Object:XXXClassName
+ STRING OPERATOR :: MACRO :: method :: Object:XXXClassName : Result
  Object OPERATOR :: IN : Self
 ; // Object:XXXClassName
-OPERATOR :: MACRO :: method : Object:XXXInstanceSize
+INTEGER OPERATOR :: MACRO :: method : Object:XXXInstanceSize
+ INTEGER OPERATOR :: MACRO :: method :: Object:XXXInstanceSize : Result
  Object OPERATOR :: IN : Self
 ; // Object:XXXInstanceSize
 IMMEDIATE VOID OPERATOR :: TYPE : ObjectClass

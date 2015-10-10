@@ -245,17 +245,17 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // VIRTUAL STRING method Object:ToPrintable
  
- method Object:XXXClassName
+ STRING method Object:XXXClassName
   Object IN Self
   Self
   Object:class
- ; // method Object:XXXClassName
+ ; // STRING method Object:XXXClassName
  
- method Object:XXXInstanceSize
+ INTEGER method Object:XXXInstanceSize
   Object IN Self
   Self
   Object:class
- ; // method Object:XXXInstanceSize
+ ; // INTEGER method Object:XXXInstanceSize
  
  IMMEDIATE VOID TYPE BarClass
   TtfwValueTypes
@@ -337,17 +337,17 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // VIRTUAL STRING method Object:ToPrintable
  
- method Object:XXXClassName
+ STRING method Object:XXXClassName
   Object IN Self
   Self
   Object:class
- ; // method Object:XXXClassName
+ ; // STRING method Object:XXXClassName
  
- method Object:XXXInstanceSize
+ INTEGER method Object:XXXInstanceSize
   Object IN Self
   Self
   Object:class
- ; // method Object:XXXInstanceSize
+ ; // INTEGER method Object:XXXInstanceSize
  
  IMMEDIATE VOID TYPE FooClass
   TtfwValueTypes
@@ -599,17 +599,17 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Pixel readonly Point:X
  
- method Object:XXXClassName
+ STRING method Object:XXXClassName
   Object IN Self
   Self
   Object:class
- ; // method Object:XXXClassName
+ ; // STRING method Object:XXXClassName
  
- method Object:XXXInstanceSize
+ INTEGER method Object:XXXInstanceSize
   Object IN Self
   Self
   Object:class
- ; // method Object:XXXInstanceSize
+ ; // INTEGER method Object:XXXInstanceSize
  
  Point constructor Point:XY
   ^ IN _aPoint
@@ -784,17 +784,17 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // REDIFINITION OVERRIDE STRING method Rectangle:ToPrintable
  
- method Object:XXXClassName
+ STRING method Object:XXXClassName
   Object IN Self
   Self
   Object:class
- ; // method Object:XXXClassName
+ ; // STRING method Object:XXXClassName
  
- method Object:XXXInstanceSize
+ INTEGER method Object:XXXInstanceSize
   Object IN Self
   Self
   Object:class
- ; // method Object:XXXInstanceSize
+ ; // INTEGER method Object:XXXInstanceSize
  
  IMMEDIATE VOID TYPE RectangleClass
   TtfwValueTypes
