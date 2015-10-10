@@ -179,6 +179,41 @@ CONST cSelf 'Self'
 STRING CompileTime-VAR g_CurrentClassMethod ''
 STRING CompileTime-VAR g_CurrentClassMethodModifiers ''
 
+PRIVATE VOID operator MakeMethodSignature
+ STRING IN aName
+ STRING VAR l_Signature
+ g_CurrentClass aName MakeMethodSignaturePrim >>> l_Signature
+ if ( l_Signature IsWordDeclared ) then
+ begin
+  axiom:PushSymbol REDEFINITION
+ end
+ axiom:PushSymbol :
+ l_Signature Ctx:Parser:PushSymbol
+; // MakeMethodSignature
+
+PRIVATE VOID operator MakeSelfParam
+ g_CurrentClass Ctx:Parser:PushSymbol
+ axiom:PushSymbol in
+ cSelf Ctx:Parser:PushSymbol
+; // MakeSelfParam
+
+MACRO method
+  Literal IN aName
+
+ %SUMMARY 'Метод объекта' ;
+
+ STRING VAR l_Name
+ aName |N >>> l_Name
+
+ l_Name @SELF bindInPlace
+ 
+ //@SELF Ctx:SetWordProducerForCompiledClass
+
+ l_Name MakeMethodSignature
+ MakeSelfParam
+ l_Name array:AddTo g_CurrentClassMethods
+; // method
+
 MACRO class-method
   Literal IN aName
 
@@ -290,24 +325,6 @@ class Object
 
 FieldOffset member VMT
 
-PRIVATE VOID operator MakeMethodSignature
- STRING IN aName
- STRING VAR l_Signature
- g_CurrentClass aName MakeMethodSignaturePrim >>> l_Signature
- if ( l_Signature IsWordDeclared ) then
- begin
-  axiom:PushSymbol REDEFINITION
- end
- axiom:PushSymbol :
- l_Signature Ctx:Parser:PushSymbol
-; // MakeMethodSignature
-
-PRIVATE VOID operator MakeSelfParam
- g_CurrentClass Ctx:Parser:PushSymbol
- axiom:PushSymbol in
- cSelf Ctx:Parser:PushSymbol
-; // MakeSelfParam
-
 MACRO readonly
   Literal IN aName
 
@@ -355,23 +372,6 @@ MACRO read
 ; // read
 
 ObjectClass readonly class read VMT
-
-MACRO method
-  Literal IN aName
-
- %SUMMARY 'Метод объекта' ;
-
- STRING VAR l_Name
- aName |N >>> l_Name
-
- l_Name @SELF bindInPlace
- 
- //@SELF Ctx:SetWordProducerForCompiledClass
-
- l_Name MakeMethodSignature
- MakeSelfParam
- l_Name array:AddTo g_CurrentClassMethods
-; // method
 
 MACRO class-method-end
  axiom:PushSymbol ;
