@@ -275,6 +275,8 @@ MACRO class
 
 class Object
 
+FieldOffset member VMT
+
 STRING class-method ClassName
  Self |N ':' string:Split >>> Result DROP
 ; // ClassName
@@ -478,8 +480,6 @@ MACRO read
  cResult Ctx:Parser:PushSymbol
  axiom:PushSymbol ;
 ; // read
-
-FieldOffset member VMT
 
 ObjectClass readonly class read VMT
 
