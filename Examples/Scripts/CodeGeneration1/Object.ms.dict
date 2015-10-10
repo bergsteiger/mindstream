@@ -277,6 +277,41 @@ class Object
 
 FieldOffset member VMT
 
+PRIVATE VOID operator MakeMethodSignature
+ STRING IN aName
+ STRING VAR l_Signature
+ g_CurrentClass aName MakeMethodSignaturePrim >>> l_Signature
+ if ( l_Signature IsWordDeclared ) then
+ begin
+  axiom:PushSymbol REDEFINITION
+ end
+ axiom:PushSymbol :
+ l_Signature Ctx:Parser:PushSymbol
+; // MakeMethodSignature
+
+PRIVATE VOID operator MakeSelfParam
+ g_CurrentClass Ctx:Parser:PushSymbol
+ axiom:PushSymbol in
+ cSelf Ctx:Parser:PushSymbol
+; // MakeSelfParam
+
+MACRO readonly
+  Literal IN aName
+
+ %SUMMARY 'read-only свойство объекта' ;
+
+ STRING VAR l_Name
+ aName |N >>> l_Name
+
+ l_Name @SELF bindInPlace
+
+ //@SELF Ctx:SetWordProducerForCompiledClass
+
+ l_Name MakeMethodSignature
+ MakeSelfParam
+ l_Name array:AddTo g_CurrentClassProperties
+; // readonly
+
 STRING class-method ClassName
  Self |N ':' string:Split >>> Result DROP
 ; // ClassName
@@ -367,18 +402,6 @@ MACRO class-end
  g_CurrentClass := ''
 ; // class-end
 
-PRIVATE VOID operator MakeMethodSignature
- STRING IN aName
- STRING VAR l_Signature
- g_CurrentClass aName MakeMethodSignaturePrim >>> l_Signature
- if ( l_Signature IsWordDeclared ) then
- begin
-  axiom:PushSymbol REDEFINITION
- end
- axiom:PushSymbol :
- l_Signature Ctx:Parser:PushSymbol
-; // MakeMethodSignature
-
 CONST cResult 'Result'
 
 MACRO constructor
@@ -401,12 +424,6 @@ MACRO constructor
  l_Name array:AddTo g_CurrentClassConstructors
 ; // constructor
 
-PRIVATE VOID operator MakeSelfParam
- g_CurrentClass Ctx:Parser:PushSymbol
- axiom:PushSymbol in
- cSelf Ctx:Parser:PushSymbol
-; // MakeSelfParam
-
 MACRO method
   Literal IN aName
 
@@ -423,23 +440,6 @@ MACRO method
  MakeSelfParam
  l_Name array:AddTo g_CurrentClassMethods
 ; // method
-
-MACRO readonly
-  Literal IN aName
-
- %SUMMARY 'read-only свойство объекта' ;
-
- STRING VAR l_Name
- aName |N >>> l_Name
-
- l_Name @SELF bindInPlace
-
- //@SELF Ctx:SetWordProducerForCompiledClass
-
- l_Name MakeMethodSignature
- MakeSelfParam
- l_Name array:AddTo g_CurrentClassProperties
-; // readonly
 
 MACRO new[
  axiom:PushSymbol [
