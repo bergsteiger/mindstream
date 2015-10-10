@@ -515,14 +515,6 @@ MACRO get-member
  aName |N do-get-member
 ; // get-member
 
-//STRING readonly ClassName
-// Self .class .ClassName >>> Result
-//; // ClassName
-
-//INTEGER readonly InstanceSize
-// Self .class .InstanceSize >>> Result
-//; // InstanceSize
-
 constructor new ( )
  new[ ] >>> Result
 ; // new
