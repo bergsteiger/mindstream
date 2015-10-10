@@ -249,6 +249,7 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
+  ObjectClass:ClassName
   Result
   pop:Word:SetValue
  ; // STRING method Object:XXXClassName
@@ -257,6 +258,7 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
+  ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
  ; // INTEGER method Object:XXXInstanceSize
@@ -345,6 +347,7 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
+  ObjectClass:ClassName
   Result
   pop:Word:SetValue
  ; // STRING method Object:XXXClassName
@@ -353,6 +356,7 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
+  ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
  ; // INTEGER method Object:XXXInstanceSize
@@ -611,6 +615,7 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
+  ObjectClass:ClassName
   Result
   pop:Word:SetValue
  ; // STRING method Object:XXXClassName
@@ -619,6 +624,7 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
+  ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
  ; // INTEGER method Object:XXXInstanceSize
@@ -800,6 +806,7 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
+  ObjectClass:ClassName
   Result
   pop:Word:SetValue
  ; // STRING method Object:XXXClassName
@@ -808,6 +815,7 @@ VOID TestWithDump PointTest
   Object IN Self
   Self
   Object:class
+  ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
  ; // INTEGER method Object:XXXInstanceSize

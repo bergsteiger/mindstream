@@ -381,7 +381,7 @@ MACRO class-method-end
  [ 'XXX' g_CurrentClassMethod ] strings:Cat Ctx:Parser:PushSymbol
  'Self' Ctx:Parser:PushSymbol 
  '.class' Ctx:Parser:PushSymbol 
- //.InstanceSize 
+ [ '.' g_CurrentClassMethod ] strings:Cat Ctx:Parser:PushSymbol 
  axiom:PushSymbol >>> 
  cResult Ctx:Parser:PushSymbol
  axiom:PushSymbol ;
