@@ -203,23 +203,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- REDIFINITION STRING readonly Object:ClassName
+ STRING method Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // REDIFINITION STRING readonly Object:ClassName
- 
- REDIFINITION STRING readonly Object:ClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // REDIFINITION STRING readonly Object:ClassName
+ ; // STRING method Object:ClassName
  
  REDIFINITION INTEGER readonly Object:InstanceSize
   Object IN Self
@@ -301,23 +292,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- REDIFINITION STRING readonly Object:ClassName
+ STRING method Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // REDIFINITION STRING readonly Object:ClassName
- 
- REDIFINITION STRING readonly Object:ClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // REDIFINITION STRING readonly Object:ClassName
+ ; // STRING method Object:ClassName
  
  REDIFINITION INTEGER readonly Object:InstanceSize
   Object IN Self
@@ -504,23 +486,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- REDIFINITION STRING readonly Object:ClassName
+ STRING method Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // REDIFINITION STRING readonly Object:ClassName
- 
- REDIFINITION STRING readonly Object:ClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // REDIFINITION STRING readonly Object:ClassName
+ ; // STRING method Object:ClassName
  
  REDIFINITION INTEGER readonly Object:InstanceSize
   Object IN Self
@@ -737,23 +710,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- REDIFINITION STRING readonly Object:ClassName
+ STRING method Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // REDIFINITION STRING readonly Object:ClassName
- 
- REDIFINITION STRING readonly Object:ClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // REDIFINITION STRING readonly Object:ClassName
+ ; // STRING method Object:ClassName
  
  REDIFINITION INTEGER readonly Object:InstanceSize
   Object IN Self
@@ -1121,7 +1085,6 @@ class_impl _:Object
  
  %PROPERTIES %Props
   'class'
-  'ClassName'
   'InstanceSize'
  ; // %PROPERTIES %Props
  

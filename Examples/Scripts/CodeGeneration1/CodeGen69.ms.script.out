@@ -4744,12 +4744,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : .class
 ; // .class
 IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .ClassName
 ==> Redefines
- IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .ClassName
- ==> Redefines
-  IMMEDIATE VOID OPERATOR :: MACRO : .ClassName
-   ^@ OPERATOR :: IN : Self
-  ; // .ClassName
- <== Redefines
+ IMMEDIATE VOID OPERATOR :: MACRO : .ClassName
   ^@ OPERATOR :: IN : Self
  ; // .ClassName
 <== Redefines
@@ -4903,14 +4898,8 @@ ObjectClass OPERATOR :: MACRO :: readonly : Object:class
  ObjectClass OPERATOR :: MACRO :: readonly :: Object:class : Result
  Object OPERATOR :: IN : Self
 ; // Object:class
-REDIFINITION STRING OPERATOR :: MACRO :: readonly : Object:ClassName
-==> Redefines
- STRING OPERATOR :: MACRO :: method : Object:ClassName
-  STRING OPERATOR :: MACRO :: method :: Object:ClassName : Result
-  Object OPERATOR :: IN : Self
- ; // Object:ClassName
-<== Redefines
- REDIFINITION STRING OPERATOR :: MACRO :: readonly :: Object:ClassName : Result
+STRING OPERATOR :: MACRO :: method : Object:ClassName
+ STRING OPERATOR :: MACRO :: method :: Object:ClassName : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassName
 REDIFINITION INTEGER OPERATOR :: MACRO :: readonly : Object:InstanceSize
