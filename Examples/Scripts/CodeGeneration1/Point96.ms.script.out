@@ -247,10 +247,14 @@ VOID TestWithDump PointTest
  
  method Object:XXXClassName
   Object IN Self
+  Self
+  Object:class
  ; // method Object:XXXClassName
  
  method Object:XXXInstanceSize
   Object IN Self
+  Self
+  Object:class
  ; // method Object:XXXInstanceSize
  
  IMMEDIATE VOID TYPE BarClass
@@ -335,10 +339,14 @@ VOID TestWithDump PointTest
  
  method Object:XXXClassName
   Object IN Self
+  Self
+  Object:class
  ; // method Object:XXXClassName
  
  method Object:XXXInstanceSize
   Object IN Self
+  Self
+  Object:class
  ; // method Object:XXXInstanceSize
  
  IMMEDIATE VOID TYPE FooClass
@@ -593,10 +601,14 @@ VOID TestWithDump PointTest
  
  method Object:XXXClassName
   Object IN Self
+  Self
+  Object:class
  ; // method Object:XXXClassName
  
  method Object:XXXInstanceSize
   Object IN Self
+  Self
+  Object:class
  ; // method Object:XXXInstanceSize
  
  Point constructor Point:XY
@@ -774,10 +786,14 @@ VOID TestWithDump PointTest
  
  method Object:XXXClassName
   Object IN Self
+  Self
+  Object:class
  ; // method Object:XXXClassName
  
  method Object:XXXInstanceSize
   Object IN Self
+  Self
+  Object:class
  ; // method Object:XXXInstanceSize
  
  IMMEDIATE VOID TYPE RectangleClass

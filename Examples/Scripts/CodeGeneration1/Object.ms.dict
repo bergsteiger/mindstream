@@ -370,6 +370,11 @@ MACRO class-method-end
  axiom:PushSymbol ;
  axiom:PushSymbol method
  [ 'XXX' g_CurrentClassMethod ] strings:Cat Ctx:Parser:PushSymbol
+ 'Self' Ctx:Parser:PushSymbol 
+ '.class' Ctx:Parser:PushSymbol 
+ //.InstanceSize 
+ //axiom:PushSymbol >>> 
+ //cResult Ctx:Parser:PushSymbol
  axiom:PushSymbol ;
  '' >>> g_CurrentClassMethod
 ; // class-method-end
