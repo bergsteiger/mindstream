@@ -188,6 +188,8 @@ MACRO class-method
  STRING VAR l_Name
  aName |N >>> l_Name
 
+ l_Name >>> g_CurrentClassMethod
+
  l_Name bindAndRestoreContext
 
  //l_Name @SELF bindInPlace
@@ -347,10 +349,28 @@ MACRO read
 
 ObjectClass readonly class read VMT
 
+MACRO method
+  Literal IN aName
+
+ %SUMMARY 'Метод объекта' ;
+
+ STRING VAR l_Name
+ aName |N >>> l_Name
+
+ l_Name @SELF bindInPlace
+ 
+ //@SELF Ctx:SetWordProducerForCompiledClass
+
+ l_Name MakeMethodSignature
+ MakeSelfParam
+ l_Name array:AddTo g_CurrentClassMethods
+; // method
+
 MACRO class-method-end
  axiom:PushSymbol ;
- //axiom:PushSymbol method
- //axiom:PushSymbol ;
+ axiom:PushSymbol method
+ [ 'XXX' g_CurrentClassMethod ] strings:Cat Ctx:Parser:PushSymbol
+ axiom:PushSymbol ;
  '' >>> g_CurrentClassMethod
 ; // class-method-end
 
@@ -463,23 +483,6 @@ MACRO constructor
 
  l_Name array:AddTo g_CurrentClassConstructors
 ; // constructor
-
-MACRO method
-  Literal IN aName
-
- %SUMMARY 'Метод объекта' ;
-
- STRING VAR l_Name
- aName |N >>> l_Name
-
- l_Name @SELF bindInPlace
- 
- //@SELF Ctx:SetWordProducerForCompiledClass
-
- l_Name MakeMethodSignature
- MakeSelfParam
- l_Name array:AddTo g_CurrentClassMethods
-; // method
 
 MACRO new[
  axiom:PushSymbol [

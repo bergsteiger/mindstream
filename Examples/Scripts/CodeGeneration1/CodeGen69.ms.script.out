@@ -4764,6 +4764,12 @@ IMMEDIATE VOID OPERATOR :: MACRO : .Print
 IMMEDIATE VOID OPERATOR :: MACRO : .ToPrintable
  ^@ OPERATOR :: IN : Self
 ; // .ToPrintable
+IMMEDIATE VOID OPERATOR :: MACRO : .XXXClassName
+ ^@ OPERATOR :: IN : Self
+; // .XXXClassName
+IMMEDIATE VOID OPERATOR :: MACRO : .XXXInstanceSize
+ ^@ OPERATOR :: IN : Self
+; // .XXXInstanceSize
 OPERATOR :: MACRO :: class_impl : _:Object
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
  OPERATOR :: NamedWordProducer :: %FIELDS : %Flds
@@ -4909,6 +4915,12 @@ VIRTUAL STRING OPERATOR :: MACRO :: method : Object:ToPrintable
  VIRTUAL STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
  Object OPERATOR :: IN : Self
 ; // Object:ToPrintable
+OPERATOR :: MACRO :: method : Object:XXXClassName
+ Object OPERATOR :: IN : Self
+; // Object:XXXClassName
+OPERATOR :: MACRO :: method : Object:XXXInstanceSize
+ Object OPERATOR :: IN : Self
+; // Object:XXXInstanceSize
 IMMEDIATE VOID OPERATOR :: TYPE : ObjectClass
 STRING : : ObjectClass:ClassName
  STRING : :: ObjectClass:ClassName : Result

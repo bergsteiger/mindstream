@@ -245,6 +245,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // VIRTUAL STRING method Object:ToPrintable
  
+ method Object:XXXClassName
+  Object IN Self
+ ; // method Object:XXXClassName
+ 
+ method Object:XXXInstanceSize
+  Object IN Self
+ ; // method Object:XXXInstanceSize
+ 
  IMMEDIATE VOID TYPE BarClass
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -324,6 +332,14 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // VIRTUAL STRING method Object:ToPrintable
+ 
+ method Object:XXXClassName
+  Object IN Self
+ ; // method Object:XXXClassName
+ 
+ method Object:XXXInstanceSize
+  Object IN Self
+ ; // method Object:XXXInstanceSize
  
  IMMEDIATE VOID TYPE FooClass
   TtfwValueTypes
@@ -575,6 +591,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Pixel readonly Point:X
  
+ method Object:XXXClassName
+  Object IN Self
+ ; // method Object:XXXClassName
+ 
+ method Object:XXXInstanceSize
+  Object IN Self
+ ; // method Object:XXXInstanceSize
+ 
  Point constructor Point:XY
   ^ IN _aPoint
   IMMEDIATE VOID OPERATOR aPoint
@@ -747,6 +771,14 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // REDIFINITION OVERRIDE STRING method Rectangle:ToPrintable
+ 
+ method Object:XXXClassName
+  Object IN Self
+ ; // method Object:XXXClassName
+ 
+ method Object:XXXInstanceSize
+  Object IN Self
+ ; // method Object:XXXInstanceSize
  
  IMMEDIATE VOID TYPE RectangleClass
   TtfwValueTypes
@@ -1041,6 +1073,8 @@ class_impl _:Object
  ; // %FIELDS %Flds
  
  %METHODS %Methods
+  'XXXClassName'
+  'XXXInstanceSize'
   'ToPrintable'
   'Print'
  ; // %METHODS %Methods
