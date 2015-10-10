@@ -191,6 +191,7 @@ MACRO class-method
 
  STRING VAR l_TypeInfo
  l_WordInfo pop:WordInfo:ToString >>> g_CurrentClassMethodModifiers
+ g_CurrentClassMethodModifiers Msg
 
  STRING VAR l_Name
  aName |N >>> l_Name
