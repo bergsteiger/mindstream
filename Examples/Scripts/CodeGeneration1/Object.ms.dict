@@ -186,6 +186,12 @@ MACRO class-method
 
  g_CurrentClassMethod '' == ?ASSURE 'Вложенные методы класса пока не поддерживаются'
 
+ TtfwWordInfo VAR l_WordInfo
+ Ctx:WordInfo >>> l_WordInfo
+
+ STRING VAR l_TypeInfo
+ l_WordInfo pop:WordInfo:ToString >>> g_CurrentClassMethodModifiers
+
  STRING VAR l_Name
  aName |N >>> l_Name
 
