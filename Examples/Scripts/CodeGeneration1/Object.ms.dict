@@ -353,7 +353,7 @@ class-method-end // ClassName
 
 INTEGER class-method InstanceSize
  Self %% InstanceSizeName DO >>> Result
-; // InstanceSize
+class-method-end // InstanceSize
 
 MACRO classExpander
   ^ IN anImpl
