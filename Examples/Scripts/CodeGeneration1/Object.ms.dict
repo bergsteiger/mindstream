@@ -215,64 +215,13 @@ MACRO class-method
  //l_Name array:AddTo g_CurrentClassMethods
 ; // class-method
 
-STRING class-method Name
- Self |N ':' string:Split >>> Result DROP
-; // ObjectClass:Name
+CONST cObjectName 'Object'
 
 CONST cInstanceSizeName 'Instance:Size'
 
 STRING FUNCTION InstanceSizeName
  [ cFieldPrefix cInstanceSizeName ] strings:Cat >>> Result
 ; // InstanceSizeName
-
-INTEGER class-method InstanceSize
- Self %% InstanceSizeName DO >>> Result
-; // InstanceSize
-
-MACRO classExpander
-  ^ IN anImpl
-
- %SUMMARY 'Тут можно копировать поля и методы' ;
- anImpl |@ %G .for> ( 
-  ObjectClass IN anItem 
-
-  anItem MembersIterator .filter> ( pop:Word:Producer pop:Word:Name NameOf CONST == ) .for> ( 
-   TtfwWord IN aMember
-   //aMember pop:Word:Producer pop:Word:Name Msg
-   //aMember pop:Word:Name Msg
-  )
-
-  anItem %Flds .for> ( 
-   IN aField 
-   axiom:PushSymbol member
-   aField |N Ctx:Parser:PushSymbol
-  ) // anItem %Flds .for>
-
-  anItem %Props .for> ( 
-   IN aProp
-   axiom:PushSymbol WordAlias
-   g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .Name aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-  ) // anItem %Props .for>
-
-  anItem %Methods .for> ( 
-   IN aProp
-   axiom:PushSymbol WordAlias
-   g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .Name aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-  ) // anItem %Methods .for>
-
-  anItem %Constructors .for> ( 
-   IN aProp
-   axiom:PushSymbol WordAlias
-   g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .Name aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-  ) // anItem %Constructors .for>
-
- )
-; // classExpander
-
-CONST cObjectName 'Object'
 
 MACRO class
  Literal IN aName
@@ -320,10 +269,66 @@ MACRO class
   g_CurrentClass
  ] Ctx:Parser:PushArray
 
- axiom:PushSymbol classExpander
- g_CurrentClassImpl Ctx:Parser:PushSymbol
+ if ( g_CurrentClass !== cObjectName ) then
+ begin
+  'classExpander' Ctx:Parser:PushSymbol
+  g_CurrentClassImpl Ctx:Parser:PushSymbol
+ end
 
 ; // class
+
+class Object
+
+STRING class-method Name
+ Self |N ':' string:Split >>> Result DROP
+; // ObjectClass:Name
+
+MACRO classExpander
+  ^ IN anImpl
+
+ %SUMMARY 'Тут можно копировать поля и методы' ;
+ anImpl |@ %G .for> ( 
+  ObjectClass IN anItem 
+
+  anItem MembersIterator .filter> ( pop:Word:Producer pop:Word:Name NameOf CONST == ) .for> ( 
+   TtfwWord IN aMember
+   //aMember pop:Word:Producer pop:Word:Name Msg
+   //aMember pop:Word:Name Msg
+  )
+
+  anItem %Flds .for> ( 
+   IN aField 
+   axiom:PushSymbol member
+   aField |N Ctx:Parser:PushSymbol
+  ) // anItem %Flds .for>
+
+  anItem %Props .for> ( 
+   IN aProp
+   axiom:PushSymbol WordAlias
+   g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   anItem .Name aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+  ) // anItem %Props .for>
+
+  anItem %Methods .for> ( 
+   IN aProp
+   axiom:PushSymbol WordAlias
+   g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   anItem .Name aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+  ) // anItem %Methods .for>
+
+  anItem %Constructors .for> ( 
+   IN aProp
+   axiom:PushSymbol WordAlias
+   g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   anItem .Name aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+  ) // anItem %Constructors .for>
+
+ )
+; // classExpander
+
+INTEGER class-method InstanceSize
+ Self %% InstanceSizeName DO >>> Result
+; // InstanceSize
 
 : ListToNameAsString
  STRING IN aName
@@ -443,8 +448,6 @@ MACRO new[
  axiom:PushSymbol @
  g_CurrentClassImpl Ctx:Parser:PushSymbol
 ; // new[
-
-class Object
 
 : FieldByOffset
  Object in Self
