@@ -184,6 +184,15 @@ MACRO class-method
  STRING VAR l_Name
  aName |N >>> l_Name
 
+ STRING VAR l_TypeInfo
+ Ctx:WordInfo pop:WordInfo:ToString >>> l_TypeInfo
+ 
+ Ctx:ClearTypeInfo
+
+ l_Name bind
+
+ l_TypeInfo axiom:PushWordInfo
+
  //l_Name @SELF bindInPlace
  
  @SELF Ctx:SetWordProducerForCompiledClass
