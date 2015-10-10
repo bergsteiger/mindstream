@@ -190,7 +190,7 @@ MACRO class-method
  Ctx:WordInfo >>> l_WordInfo
 
  STRING VAR l_TypeInfo
- l_WordInfo pop:WordInfo:ToString >>> g_CurrentClassMethodModifiers
+ l_WordInfo pop:WordInfo:TypeName >>> g_CurrentClassMethodModifiers
  //g_CurrentClassMethodModifiers Msg
 
  STRING VAR l_Name
