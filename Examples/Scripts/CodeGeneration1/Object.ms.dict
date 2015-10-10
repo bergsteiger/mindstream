@@ -381,9 +381,14 @@ MACRO class-method-end
  [ 'XXX' g_CurrentClassMethod ] strings:Cat Ctx:Parser:PushSymbol
  'Self' Ctx:Parser:PushSymbol 
  '.class' Ctx:Parser:PushSymbol 
- [ '.' g_CurrentClassMethod ] strings:Cat Ctx:Parser:PushSymbol 
- axiom:PushSymbol >>> 
- cResult Ctx:Parser:PushSymbol
+ [ '.' g_CurrentClassMethod ] strings:Cat Ctx:Parser:PushSymbol
+
+ if ( g_CurrentClassMethodModifiers IsNil ! ) then
+ begin 
+  axiom:PushSymbol >>> 
+  cResult Ctx:Parser:PushSymbol
+ end // g_CurrentClassMethodModifiers IsNil !
+
  axiom:PushSymbol ;
  '' >>> g_CurrentClassMethod
  '' >>> g_CurrentClassMethodModifiers
