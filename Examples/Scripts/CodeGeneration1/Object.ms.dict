@@ -312,6 +312,37 @@ MACRO readonly
  l_Name array:AddTo g_CurrentClassProperties
 ; // readonly
 
+: FieldByOffset
+ Object in Self
+ FieldOffset right anOffset
+ anOffset Self [i]
+; // FieldByOffset
+
+PRIVATE operator do-get-member
+  STRING IN aName
+ 
+ %SUMMARY 'Определяет способ доступа к члену класса' ;
+ axiom:PushSymbol FieldByOffset
+ axiom:PushSymbol (
+ g_CurrentClass ClassImplName Ctx:Parser:PushSymbol
+ axiom:PushSymbol ::
+ aName MakeFieldOffsetName Ctx:Parser:PushSymbol 
+ axiom:PushSymbol )
+; // do-get-member
+
+CONST cResult 'Result'
+
+MACRO read
+ Literal IN aName
+ cSelf Ctx:Parser:PushSymbol 
+ aName |N do-get-member
+ axiom:PushSymbol >>>
+ cResult Ctx:Parser:PushSymbol
+ axiom:PushSymbol ;
+; // read
+
+ObjectClass readonly class read VMT
+
 STRING class-method ClassName
  Self |N ':' string:Split >>> Result DROP
 ; // ClassName
@@ -402,8 +433,6 @@ MACRO class-end
  g_CurrentClass := ''
 ; // class-end
 
-CONST cResult 'Result'
-
 MACRO constructor
   Literal IN aName
   ^ IN aParams
@@ -447,41 +476,12 @@ MACRO new[
  g_CurrentClassImpl Ctx:Parser:PushSymbol
 ; // new[
 
-: FieldByOffset
- Object in Self
- FieldOffset right anOffset
- anOffset Self [i]
-; // FieldByOffset
-
-PRIVATE operator do-get-member
-  STRING IN aName
- 
- %SUMMARY 'Определяет способ доступа к члену класса' ;
- axiom:PushSymbol FieldByOffset
- axiom:PushSymbol (
- g_CurrentClass ClassImplName Ctx:Parser:PushSymbol
- axiom:PushSymbol ::
- aName MakeFieldOffsetName Ctx:Parser:PushSymbol 
- axiom:PushSymbol )
-; // do-get-member
-
 MACRO get-member
   Literal IN aName
 
  %SUMMARY 'Компилирует способ доступа к члену класса' ;
  aName |N do-get-member
 ; // get-member
-
-MACRO read
- Literal IN aName
- cSelf Ctx:Parser:PushSymbol 
- aName |N do-get-member
- axiom:PushSymbol >>>
- cResult Ctx:Parser:PushSymbol
- axiom:PushSymbol ;
-; // read
-
-ObjectClass readonly class read VMT
 
 STRING readonly ClassName
  Self .class .ClassName >>> Result
