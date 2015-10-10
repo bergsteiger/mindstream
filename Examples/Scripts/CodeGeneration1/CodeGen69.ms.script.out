@@ -4747,12 +4747,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : .ClassName
 ; // .ClassName
 IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .InstanceSize
 ==> Redefines
- IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .InstanceSize
- ==> Redefines
-  IMMEDIATE VOID OPERATOR :: MACRO : .InstanceSize
-   ^@ OPERATOR :: IN : Self
-  ; // .InstanceSize
- <== Redefines
+ IMMEDIATE VOID OPERATOR :: MACRO : .InstanceSize
   ^@ OPERATOR :: IN : Self
  ; // .InstanceSize
 <== Redefines

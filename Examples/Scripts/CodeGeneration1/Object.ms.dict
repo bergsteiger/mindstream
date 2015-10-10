@@ -225,9 +225,6 @@ STRING FUNCTION InstanceSizeName
  [ cFieldPrefix cInstanceSizeName ] strings:Cat >>> Result
 ; // InstanceSizeName
 
-[EXECUTE]
-( 'InstanceSize' bind )
-
 INTEGER class-method InstanceSize
  Self %% InstanceSizeName DO >>> Result
 ; // InstanceSize
