@@ -99,6 +99,19 @@ USES
  axiom_push.ms.dict
 ;
 
+PROCEDURE bindAndRestoreContext
+  STRING IN aName
+
+ STRING VAR l_TypeInfo
+ Ctx:WordInfo pop:WordInfo:ToString >>> l_TypeInfo
+ 
+ Ctx:ClearTypeInfo
+
+ aName bind
+
+ l_TypeInfo axiom:PushWordInfo
+; // bindAndRestoreContext
+
 PROCEDURE bindInPlace
   STRING IN aName
   TtfwWord IN aStereo

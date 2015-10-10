@@ -4986,6 +4986,10 @@ VOID OPERATOR :: PROCEDURE : bind
  STRING OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
 ; // bind
+VOID OPERATOR :: PROCEDURE : bindAndRestoreContext
+ STRING OPERATOR :: IN : aName
+ STRING OPERATOR :: VAR : l_TypeInfo
+; // bindAndRestoreContext
 VOID OPERATOR :: PROCEDURE : bindInPlace
  Documentation:
   Определяет "метод с точкой", который потом разворачивается в вызов "метода объекта"
