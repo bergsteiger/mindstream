@@ -4808,7 +4808,6 @@ IMMEDIATE VOID OPERATOR :: MACRO : class-method
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_ClassName
  STRING OPERATOR :: VAR : l_Name
- STRING OPERATOR :: VAR : l_TypeInfo
 ; // class-method
 STRING FUNCTION : ClassRefName
  STRING OPERATOR :: IN : aName
