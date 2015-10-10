@@ -343,9 +343,13 @@ MACRO read
 
 ObjectClass readonly class read VMT
 
+MACRO class-method-end
+ axiom:PushSymbol ;
+; // class-method-end
+
 STRING class-method ClassName
  Self |N ':' string:Split >>> Result DROP
-; // ClassName
+class-method-end // ClassName
 
 INTEGER class-method InstanceSize
  Self %% InstanceSizeName DO >>> Result
