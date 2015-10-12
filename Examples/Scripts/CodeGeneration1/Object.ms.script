@@ -25,7 +25,7 @@ Test&Dump ObjectTest
  l_Obj .ClassName Print
  l_Obj .InstanceSize Print
 
- _:Object pop:Word:Name .
+ _:Object pop:Word:Name Print
  _:Object pop:Word:Name .
 
 ; // ObjectTest
