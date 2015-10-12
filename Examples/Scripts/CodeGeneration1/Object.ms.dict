@@ -409,7 +409,8 @@ STRING class-method ClassName
 class-method-end // ClassName
 
 INTEGER class-method InstanceSize
- Self %% InstanceSizeName DO >>> Result
+ //Self %% InstanceSizeName DO >>> Result
+ 1 >>> Result
 class-method-end // InstanceSize
 
 MACRO classExpander
