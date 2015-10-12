@@ -267,7 +267,7 @@ MACRO class-method
  axiom:PushSymbol in
  cSelf Ctx:Parser:PushSymbol
 
- //l_Name array:AddTo g_CurrentClassMethods
+ l_Name array:AddTo g_CurrentMetaClassMethods
 ; // class-method
 
 CONST cObjectName 'Object'
