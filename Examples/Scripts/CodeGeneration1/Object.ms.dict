@@ -329,6 +329,10 @@ MACRO class
   'array' 
   'type' 
   g_CurrentClass
+
+  'WordAlias'
+  [ 'class::' g_CurrentClass ] strings:Cat
+  g_CurrentClassImpl
  ] Ctx:Parser:PushArray
 
  if ( g_CurrentClass !== cObjectName ) then

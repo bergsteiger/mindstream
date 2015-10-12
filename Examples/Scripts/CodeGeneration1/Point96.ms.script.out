@@ -278,6 +278,142 @@ VOID TestWithDump PointTest
   1
  INTEGER CONST c:Rectangle:Offset:VMT
   0
+ BarClass class_impl _:Bar
+  %CONSTRUCTORS %Constructors
+  ; // %CONSTRUCTORS %Constructors
+  
+  %FIELDS %Flds
+   'VMT'
+  ; // %FIELDS %Flds
+  
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+  ; // %PROPERTIES %Props
+  
+  INTEGER CONST c::Offset:VMT
+   0
+  VAR c:Instance:Size
+  _:Bar
+  Result
+  pop:Word:SetValue
+ ; // BarClass class_impl _:Bar
+ 
+ FooClass class_impl _:Foo
+  %CONSTRUCTORS %Constructors
+  ; // %CONSTRUCTORS %Constructors
+  
+  %FIELDS %Flds
+   'VMT'
+  ; // %FIELDS %Flds
+  
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+  ; // %PROPERTIES %Props
+  
+  INTEGER CONST c::Offset:VMT
+   0
+  VAR c:Instance:Size
+  _:Foo
+  Result
+  pop:Word:SetValue
+ ; // FooClass class_impl _:Foo
+ 
+ PointClass class_impl _:Point
+  %CONSTRUCTORS %Constructors
+   ':'
+   '0'
+   'XY'
+   'OF'
+  ; // %CONSTRUCTORS %Constructors
+  
+  %FIELDS %Flds
+   'VMT'
+   'X'
+   'Y'
+  ; // %FIELDS %Flds
+  
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %METHODS %Methods
+   '+'
+   'Neg'
+   '-'
+   'ToPrintable'
+   'Print'
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'X'
+   'Y'
+  ; // %PROPERTIES %Props
+  
+  INTEGER CONST c::Offset:VMT
+   0
+  INTEGER CONST c::Offset:X
+   1
+  INTEGER CONST c::Offset:Y
+   2
+  VAR c:Instance:Size
+  _:Point
+  Result
+  pop:Word:SetValue
+ ; // PointClass class_impl _:Point
+ 
+ RectangleClass class_impl _:Rectangle
+  %CONSTRUCTORS %Constructors
+   ':'
+  ; // %CONSTRUCTORS %Constructors
+  
+  %FIELDS %Flds
+   'VMT'
+   'TopLeft'
+   'BottomRight'
+  ; // %FIELDS %Flds
+  
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %METHODS %Methods
+   'ToPrintable'
+   'Print'
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'TopLeft'
+   'BottomRight'
+  ; // %PROPERTIES %Props
+  
+  INTEGER CONST c::Offset:BottomRight
+   2
+  INTEGER CONST c::Offset:TopLeft
+   1
+  INTEGER CONST c::Offset:VMT
+   0
+  VAR c:Instance:Size
+  _:Rectangle
+  Result
+  pop:Word:SetValue
+ ; // RectangleClass class_impl _:Rectangle
+ 
  IMMEDIATE VOID TYPE Foo
   TtfwValueTypes
   Ctx:IncludeValueTypes
