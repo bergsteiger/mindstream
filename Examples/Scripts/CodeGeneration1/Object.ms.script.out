@@ -33,6 +33,9 @@ VOID TestWithDump ObjectTest
  _:Object
  pop:Word:Name
  .
+ _:Object
+ pop:Word:Name
+ .
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
@@ -69,4 +72,5 @@ TtfwValueTypes
 Object
 Object
 1
+_:Object
 _:Object
