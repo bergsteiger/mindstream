@@ -230,7 +230,7 @@ MACRO method
 
 MACRO class-method
   Literal IN aName
-
+  
  %SUMMARY 'Метод класса' ;
 
  g_CurrentClassMethod '' == ?ASSURE 'Вложенные методы класса пока не поддерживаются'
@@ -248,8 +248,6 @@ MACRO class-method
 
  l_Name bindAndRestoreContext
 
- //l_Name @SELF bindInPlace
- 
  @SELF Ctx:SetWordProducerForCompiledClass
 
  axiom:PushSymbol :
