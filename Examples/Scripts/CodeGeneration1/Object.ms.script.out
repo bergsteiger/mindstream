@@ -30,6 +30,9 @@ VOID TestWithDump ObjectTest
  _:Object
  pop:Word:Name
  Print
+ _:Object
+ pop:Word:Name
+ Print
  l_Obj
  Object:InstanceSize
  Print
@@ -74,6 +77,7 @@ Object
 TtfwValueTypes
 Object
 Object
+_:Object
 _:Object
 1
 _:Object
