@@ -236,6 +236,24 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING method Object:ClassName
  
+ STRING method Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassName
+  Result
+  pop:Word:SetValue
+ ; // STRING method Object:ClassName
+ 
+ INTEGER method Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:InstanceSize
+  Result
+  pop:Word:SetValue
+ ; // INTEGER method Object:InstanceSize
+ 
  INTEGER method Object:InstanceSize
   Object IN Self
   Self
@@ -464,6 +482,24 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING method Object:ClassName
  
+ STRING method Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassName
+  Result
+  pop:Word:SetValue
+ ; // STRING method Object:ClassName
+ 
+ INTEGER method Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:InstanceSize
+  Result
+  pop:Word:SetValue
+ ; // INTEGER method Object:InstanceSize
+ 
  INTEGER method Object:InstanceSize
   Object IN Self
   Self
@@ -648,6 +684,24 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // STRING method Object:ClassName
+ 
+ STRING method Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassName
+  Result
+  pop:Word:SetValue
+ ; // STRING method Object:ClassName
+ 
+ INTEGER method Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:InstanceSize
+  Result
+  pop:Word:SetValue
+ ; // INTEGER method Object:InstanceSize
  
  INTEGER method Object:InstanceSize
   Object IN Self
@@ -863,6 +917,24 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // STRING method Object:ClassName
+ 
+ STRING method Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassName
+  Result
+  pop:Word:SetValue
+ ; // STRING method Object:ClassName
+ 
+ INTEGER method Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:InstanceSize
+  Result
+  pop:Word:SetValue
+ ; // INTEGER method Object:InstanceSize
  
  INTEGER method Object:InstanceSize
   Object IN Self
