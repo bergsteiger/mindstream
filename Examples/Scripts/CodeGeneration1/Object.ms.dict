@@ -316,6 +316,9 @@ MACRO class
     cObjectName ClassImplName
     ';'
    end
+  '@SELF'
+  '>>>'
+  'Result'
   ';'
  ] Ctx:Parser:PushArray
 

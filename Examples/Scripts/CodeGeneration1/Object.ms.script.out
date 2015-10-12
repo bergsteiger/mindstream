@@ -55,6 +55,9 @@ ObjectClass class_impl _:Object
  INTEGER CONST c::Offset:VMT
   0
  FieldOffset VAR c:Instance:Size
+ _:Object
+ Result
+ pop:Word:SetValue
 ; // ObjectClass class_impl _:Object
 
 Object
