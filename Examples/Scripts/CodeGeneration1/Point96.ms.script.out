@@ -92,6 +92,10 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // BarClass class_impl _:Bar
  
+ STRING CONST _:Bar:ClassName
+  'XXX'
+ STRING CONST _:Bar:InstanceSize
+  'XXX'
  FooClass class_impl _:Foo
   %CLASS-METHODS %Class-Methods
   ; // %CLASS-METHODS %Class-Methods
@@ -122,6 +126,10 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // FooClass class_impl _:Foo
  
+ STRING CONST _:Foo:ClassName
+  'XXX'
+ STRING CONST _:Foo:InstanceSize
+  'XXX'
  PointClass class_impl _:Point
   %CLASS-METHODS %Class-Methods
   ; // %CLASS-METHODS %Class-Methods
@@ -169,6 +177,10 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // PointClass class_impl _:Point
  
+ STRING CONST _:Point:ClassName
+  'XXX'
+ STRING CONST _:Point:InstanceSize
+  'XXX'
  RectangleClass class_impl _:Rectangle
   %CLASS-METHODS %Class-Methods
   ; // %CLASS-METHODS %Class-Methods
@@ -210,6 +222,10 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // RectangleClass class_impl _:Rectangle
  
+ STRING CONST _:Rectangle:ClassName
+  'XXX'
+ STRING CONST _:Rectangle:InstanceSize
+  'XXX'
  IMMEDIATE VOID TYPE Bar
   TtfwValueTypes
   Ctx:IncludeValueTypes
