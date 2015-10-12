@@ -4780,14 +4780,6 @@ IMMEDIATE VOID OPERATOR :: MACRO : class
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_ClassRefName
 ; // class
-ObjectClass OPERATOR :: MACRO :: class_impl : class::Object
- OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
- OPERATOR :: NamedWordProducer :: %FIELDS : %Flds
- OPERATOR :: NamedWordProducer :: %METHODS : %Methods
- OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
- INTEGER CONST : c::Offset:VMT
- ObjectClass OPERATOR :: MACRO :: class_impl :: _:Object : Result
-; // class::Object
 IMMEDIATE VOID OPERATOR :: MACRO : class_impl
  Documentation:
   Реализация класса. Тут мы будем хранить всю информацию о классе - предки, поля, методы
@@ -4813,6 +4805,14 @@ IMMEDIATE VOID OPERATOR :: MACRO : class-method
  TtfwWordInfo OPERATOR :: VAR : l_WordInfo
 ; // class-method
 IMMEDIATE VOID OPERATOR :: MACRO : class-method-end
+ObjectClass OPERATOR :: MACRO :: class_impl : ClassOf::Object
+ OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
+ OPERATOR :: NamedWordProducer :: %FIELDS : %Flds
+ OPERATOR :: NamedWordProducer :: %METHODS : %Methods
+ OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
+ INTEGER CONST : c::Offset:VMT
+ ObjectClass OPERATOR :: MACRO :: class_impl :: _:Object : Result
+; // ClassOf::Object
 STRING FUNCTION : ClassRefName
  STRING OPERATOR :: IN : aName
  STRING FUNCTION :: ClassRefName : Result
