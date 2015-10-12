@@ -468,6 +468,7 @@ MACRO classExpander
 
   anItem %Class-Methods .for> ( 
    IN aProp
+   aProp |N Msg
   )
 
   anItem %Constructors .for> ( 
