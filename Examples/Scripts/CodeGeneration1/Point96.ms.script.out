@@ -83,7 +83,10 @@ VOID TestWithDump PointTest
   
   INTEGER CONST c::Offset:VMT
    0
-  FieldOffset VAR c:Instance:Size
+  VAR c:Instance:Size
+  _:Bar
+  Result
+  pop:Word:SetValue
  ; // BarClass class_impl _:Bar
  
  FooClass class_impl _:Foo
@@ -107,7 +110,10 @@ VOID TestWithDump PointTest
   
   INTEGER CONST c::Offset:VMT
    0
-  FieldOffset VAR c:Instance:Size
+  VAR c:Instance:Size
+  _:Foo
+  Result
+  pop:Word:SetValue
  ; // FooClass class_impl _:Foo
  
  PointClass class_impl _:Point
@@ -148,7 +154,10 @@ VOID TestWithDump PointTest
    1
   INTEGER CONST c::Offset:Y
    2
-  FieldOffset VAR c:Instance:Size
+  VAR c:Instance:Size
+  _:Point
+  Result
+  pop:Word:SetValue
  ; // PointClass class_impl _:Point
  
  RectangleClass class_impl _:Rectangle
@@ -183,7 +192,10 @@ VOID TestWithDump PointTest
    1
   INTEGER CONST c::Offset:VMT
    0
-  FieldOffset VAR c:Instance:Size
+  VAR c:Instance:Size
+  _:Rectangle
+  Result
+  pop:Word:SetValue
  ; // RectangleClass class_impl _:Rectangle
  
  IMMEDIATE VOID TYPE Bar
@@ -196,7 +208,7 @@ VOID TestWithDump PointTest
   Self
   FieldByOffset
   ^@ (
-   _:Object ::
+   _:Object _:Object pop:Word:SetValue ::
    'c::Offset:VMT'
   )
   Result
@@ -276,7 +288,7 @@ VOID TestWithDump PointTest
   Self
   FieldByOffset
   ^@ (
-   _:Object ::
+   _:Object _:Object pop:Word:SetValue ::
    'c::Offset:VMT'
   )
   Result
@@ -461,7 +473,7 @@ VOID TestWithDump PointTest
   Self
   FieldByOffset
   ^@ (
-   _:Object ::
+   _:Object _:Object pop:Word:SetValue ::
    'c::Offset:VMT'
   )
   Result
@@ -568,7 +580,7 @@ VOID TestWithDump PointTest
   Self
   FieldByOffset
   ^@ (
-   _:Point ::
+   _:Point _:Point pop:Word:SetValue ::
    'c::Offset:X'
   )
   Result
@@ -611,7 +623,7 @@ VOID TestWithDump PointTest
   Self
   FieldByOffset
   ^@ (
-   _:Point ::
+   _:Point _:Point pop:Word:SetValue ::
    'c::Offset:Y'
   )
   Result
@@ -664,7 +676,7 @@ VOID TestWithDump PointTest
   Self
   FieldByOffset
   ^@ (
-   _:Rectangle ::
+   _:Rectangle _:Rectangle pop:Word:SetValue ::
    'c::Offset:BottomRight'
   )
   Result
@@ -676,7 +688,7 @@ VOID TestWithDump PointTest
   Self
   FieldByOffset
   ^@ (
-   _:Object ::
+   _:Object _:Object pop:Word:SetValue ::
    'c::Offset:VMT'
   )
   Result
@@ -722,7 +734,7 @@ VOID TestWithDump PointTest
   Self
   FieldByOffset
   ^@ (
-   _:Rectangle ::
+   _:Rectangle _:Rectangle pop:Word:SetValue ::
    'c::Offset:TopLeft'
   )
   Result
@@ -770,24 +782,24 @@ VOID TestWithDump PointTest
  .
  c:Rectangle:Offset:VMT
  .
- _:Object ::
+ _:Object _:Object pop:Word:SetValue ::
  'c::Offset:VMT'
  .
- _:Point ::
+ _:Point _:Point pop:Word:SetValue ::
  'c::Offset:VMT'
  .
- _:Rectangle ::
+ _:Rectangle _:Rectangle pop:Word:SetValue ::
  'c::Offset:VMT'
  .
  _:Object
  .
- _:Object ::
+ _:Object _:Object pop:Word:SetValue ::
  'c:Instance:Size'
  .
- _:Point ::
+ _:Point _:Point pop:Word:SetValue ::
  'c:Instance:Size'
  .
- _:Rectangle ::
+ _:Rectangle _:Rectangle pop:Word:SetValue ::
  'c:Instance:Size'
  .
  Point::
@@ -1055,7 +1067,10 @@ ObjectClass class_impl _:Object
  
  INTEGER CONST c::Offset:VMT
   0
- FieldOffset VAR c:Instance:Size
+ VAR c:Instance:Size
+ _:Object
+ Result
+ pop:Word:SetValue
 ; // ObjectClass class_impl _:Object
 
 PointClass class_impl _:Point
@@ -1096,7 +1111,10 @@ PointClass class_impl _:Point
   1
  INTEGER CONST c::Offset:Y
   2
- FieldOffset VAR c:Instance:Size
+ VAR c:Instance:Size
+ _:Point
+ Result
+ pop:Word:SetValue
 ; // PointClass class_impl _:Point
 
 RectangleClass class_impl _:Rectangle
@@ -1131,7 +1149,10 @@ RectangleClass class_impl _:Rectangle
   1
  INTEGER CONST c::Offset:VMT
   0
- FieldOffset VAR c:Instance:Size
+ VAR c:Instance:Size
+ _:Rectangle
+ Result
+ pop:Word:SetValue
 ; // RectangleClass class_impl _:Rectangle
 
 0
@@ -1140,8 +1161,8 @@ RectangleClass class_impl _:Rectangle
 0
 0
 0
-<nil>
-<void>
+TkwCompiledFunction
+1
 3
 3
 ( X: 0, Y: 0 )

@@ -4764,13 +4764,13 @@ IMMEDIATE VOID OPERATOR :: MACRO : .Print
 IMMEDIATE VOID OPERATOR :: MACRO : .ToPrintable
  ^@ OPERATOR :: IN : Self
 ; // .ToPrintable
-OPERATOR :: MACRO :: class_impl : _:Object
+ObjectClass OPERATOR :: MACRO :: class_impl : _:Object
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
  OPERATOR :: NamedWordProducer :: %FIELDS : %Flds
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
  OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
- FieldOffset OPERATOR :: VAR : c:Instance:Size
- INTEGER CONST : c:Object:Offset:VMT
+ INTEGER CONST : c::Offset:VMT
+ ObjectClass OPERATOR :: MACRO :: class_impl :: _:Object : Result
 ; // _:Object
 INTEGER CONST : c:Object:Offset:VMT
 STRING CONST : cClassImplPrefix
@@ -4778,6 +4778,7 @@ STRING CONST : cFieldPrefix
 STRING CONST : cInstanceSizeName
 IMMEDIATE VOID OPERATOR :: MACRO : class
  ^L OPERATOR :: IN : aName
+ STRING OPERATOR :: VAR : l_ClassRefName
 ; // class
 IMMEDIATE VOID OPERATOR :: MACRO : class_impl
  Documentation:
