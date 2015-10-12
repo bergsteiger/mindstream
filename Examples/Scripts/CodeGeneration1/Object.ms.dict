@@ -284,13 +284,19 @@ MACRO class
  aName |N >>> g_CurrentClass
  g_CurrentClass ClassImplName >>> g_CurrentClassImpl
 
+ STRING VAR l_ClassRefName
+ g_CurrentClass ClassRefName >>> l_ClassRefName
+
+ l_ClassRefName Msg
+
  if ( g_CurrentClass !== cObjectName ) then
  begin
   axiom:PushSymbol TtfwWord 
   axiom:PushSymbol type
-  g_CurrentClass ClassRefName Ctx:Parser:PushSymbol
+  l_ClassRefName Ctx:Parser:PushSymbol
  end // g_CurrentClass !== cObjectName
 
+ //ClassRefName Ctx:Parser:PushSymbol
  axiom:PushSymbol class_impl
  [
   g_CurrentClassImpl
