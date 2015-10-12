@@ -108,7 +108,8 @@ STRING CompileTime-VAR g_CurrentClassImpl ''
 CONST cFieldPrefix 'c:'
 
 PRIVATE STRING operator MakeFieldOffsetName
- STRING IN aName
+  STRING IN aName
+ %SUMMARY 'Делает имя для доступа к полю' ; 
  [ cFieldPrefix g_CurrentClass ':Offset:' aName ] strings:Cat >>> Result
 ; // MakeFieldOffsetName
 
