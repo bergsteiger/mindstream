@@ -466,6 +466,10 @@ MACRO classExpander
    anItem .ClassName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Methods .for>
 
+  anItem %Class-Methods .for> ( 
+   IN aProp
+  )
+
   anItem %Constructors .for> ( 
    IN aProp
    axiom:PushSymbol WordAlias
