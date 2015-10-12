@@ -469,7 +469,7 @@ MACRO classExpander
    g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    anItem .ClassName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
 
-   axiom:PushSymbol CONST
+   axiom:PushSymbol WordAlias
    g_CurrentClassImpl aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    anItem pop:Word:Name aProp |N MakeMethodSignaturePrim Ctx:Parser:PushString 
    //anItem pop:Word:Name aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol

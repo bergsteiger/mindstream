@@ -92,10 +92,8 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // BarClass class_impl _:Bar
  
- STRING CONST _:Bar:ClassName
-  '_:Object:ClassName'
- STRING CONST _:Bar:InstanceSize
-  '_:Object:InstanceSize'
+ STRING '_:Object:ClassName'
+ STRING '_:Object:InstanceSize'
  FooClass class_impl _:Foo
   %CLASS-METHODS %Class-Methods
   ; // %CLASS-METHODS %Class-Methods
@@ -126,10 +124,8 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // FooClass class_impl _:Foo
  
- STRING CONST _:Foo:ClassName
-  '_:Object:ClassName'
- STRING CONST _:Foo:InstanceSize
-  '_:Object:InstanceSize'
+ STRING '_:Object:ClassName'
+ STRING '_:Object:InstanceSize'
  PointClass class_impl _:Point
   %CLASS-METHODS %Class-Methods
   ; // %CLASS-METHODS %Class-Methods
@@ -177,10 +173,8 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // PointClass class_impl _:Point
  
- STRING CONST _:Point:ClassName
-  '_:Object:ClassName'
- STRING CONST _:Point:InstanceSize
-  '_:Object:InstanceSize'
+ STRING '_:Object:ClassName'
+ STRING '_:Object:InstanceSize'
  RectangleClass class_impl _:Rectangle
   %CLASS-METHODS %Class-Methods
   ; // %CLASS-METHODS %Class-Methods
@@ -222,10 +216,8 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // RectangleClass class_impl _:Rectangle
  
- STRING CONST _:Rectangle:ClassName
-  '_:Object:ClassName'
- STRING CONST _:Rectangle:InstanceSize
-  '_:Object:InstanceSize'
+ STRING '_:Object:ClassName'
+ STRING '_:Object:InstanceSize'
  IMMEDIATE VOID TYPE Bar
   TtfwValueTypes
   Ctx:IncludeValueTypes
