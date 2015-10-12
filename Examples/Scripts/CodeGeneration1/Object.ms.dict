@@ -495,7 +495,7 @@ MACRO RunCompileProps&Methods
  [
   'implementation'
   g_CurrentClassImpl
-   '%FIELDS' g_CurrentClassMembers ListToNameAsString
+   NameOf %FIELDS g_CurrentClassMembers ListToNameAsString
 
    '%PROPERTIES' g_CurrentClassProperties ListToNameAsString
 
