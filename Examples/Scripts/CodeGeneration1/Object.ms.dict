@@ -296,7 +296,7 @@ MACRO class
   l_ClassRefName Ctx:Parser:PushSymbol
  end // g_CurrentClass !== cObjectName
 
- //ClassRefName Ctx:Parser:PushSymbol
+ l_ClassRefName Ctx:Parser:PushSymbol
  axiom:PushSymbol class_impl
  [
   g_CurrentClassImpl

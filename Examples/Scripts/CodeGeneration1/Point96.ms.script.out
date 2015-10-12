@@ -62,7 +62,7 @@ VOID TestWithDump PointTest
   ExpandMethodName
  ; // IMMEDIATE VOID MACRO .Y
  
- class_impl _:Bar
+ BarClass class_impl _:Bar
   %CONSTRUCTORS %Constructors
   ; // %CONSTRUCTORS %Constructors
   
@@ -84,9 +84,9 @@ VOID TestWithDump PointTest
   INTEGER CONST c::Offset:VMT
    0
   FieldOffset VAR c:Instance:Size
- ; // class_impl _:Bar
+ ; // BarClass class_impl _:Bar
  
- class_impl _:Foo
+ FooClass class_impl _:Foo
   %CONSTRUCTORS %Constructors
   ; // %CONSTRUCTORS %Constructors
   
@@ -108,9 +108,9 @@ VOID TestWithDump PointTest
   INTEGER CONST c::Offset:VMT
    0
   FieldOffset VAR c:Instance:Size
- ; // class_impl _:Foo
+ ; // FooClass class_impl _:Foo
  
- class_impl _:Point
+ PointClass class_impl _:Point
   %CONSTRUCTORS %Constructors
    ':'
    '0'
@@ -149,9 +149,9 @@ VOID TestWithDump PointTest
   INTEGER CONST c::Offset:Y
    2
   FieldOffset VAR c:Instance:Size
- ; // class_impl _:Point
+ ; // PointClass class_impl _:Point
  
- class_impl _:Rectangle
+ RectangleClass class_impl _:Rectangle
   %CONSTRUCTORS %Constructors
    ':'
   ; // %CONSTRUCTORS %Constructors
@@ -184,7 +184,7 @@ VOID TestWithDump PointTest
   INTEGER CONST c::Offset:VMT
    0
   FieldOffset VAR c:Instance:Size
- ; // class_impl _:Rectangle
+ ; // RectangleClass class_impl _:Rectangle
  
  IMMEDIATE VOID TYPE Bar
   TtfwValueTypes
@@ -1031,7 +1031,7 @@ VOID TestWithDump PointTest
  Print
 ; // VOID TestWithDump PointTest
 
-class_impl _:Object
+ObjectClass class_impl _:Object
  %CONSTRUCTORS %Constructors
   'new'
  ; // %CONSTRUCTORS %Constructors
@@ -1054,9 +1054,9 @@ class_impl _:Object
  INTEGER CONST c::Offset:VMT
   0
  FieldOffset VAR c:Instance:Size
-; // class_impl _:Object
+; // ObjectClass class_impl _:Object
 
-class_impl _:Point
+PointClass class_impl _:Point
  %CONSTRUCTORS %Constructors
   ':'
   '0'
@@ -1095,9 +1095,9 @@ class_impl _:Point
  INTEGER CONST c::Offset:Y
   2
  FieldOffset VAR c:Instance:Size
-; // class_impl _:Point
+; // PointClass class_impl _:Point
 
-class_impl _:Rectangle
+RectangleClass class_impl _:Rectangle
  %CONSTRUCTORS %Constructors
   ':'
  ; // %CONSTRUCTORS %Constructors
@@ -1130,7 +1130,7 @@ class_impl _:Rectangle
  INTEGER CONST c::Offset:VMT
   0
  FieldOffset VAR c:Instance:Size
-; // class_impl _:Rectangle
+; // RectangleClass class_impl _:Rectangle
 
 0
 0
