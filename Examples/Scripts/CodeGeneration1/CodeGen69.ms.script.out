@@ -4864,6 +4864,8 @@ STRING FUNCTION : InstanceSizeName
  STRING OPERATOR :: IN : aName
 ; // ListToNameAsString
 PRIVATE STRING OPERATOR : MakeFieldOffsetName
+ Documentation:
+  Делает имя для доступа к полю
  STRING OPERATOR :: IN : aName
  PRIVATE STRING OPERATOR :: MakeFieldOffsetName : Result
 ; // MakeFieldOffsetName
