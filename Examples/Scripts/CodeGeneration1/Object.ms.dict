@@ -257,9 +257,11 @@ MACRO class-method
  g_CurrentClass >>> l_ClassName
  
  l_ClassName ClassRefName >>> l_ClassName
+
+ STRING VAR l_ClassMethodName
  
- l_ClassName l_Name MakeMethodSignaturePrim >>> l_Name
- l_Name Ctx:Parser:PushSymbol
+ l_ClassName l_Name MakeMethodSignaturePrim >>> l_ClassMethodName
+ l_ClassMethodName Ctx:Parser:PushSymbol
 
  l_ClassName Ctx:Parser:PushSymbol
  axiom:PushSymbol in

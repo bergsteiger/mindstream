@@ -45,8 +45,8 @@ VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
  %CLASS-METHODS %Class-Methods
-  'ObjectClass:ClassName'
-  'ObjectClass:InstanceSize'
+  'ClassName'
+  'InstanceSize'
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
