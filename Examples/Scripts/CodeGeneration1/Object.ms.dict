@@ -109,6 +109,7 @@ CONST cFieldPrefix 'c:'
 
 PRIVATE STRING operator MakeFieldOffsetName
   STRING IN aName
+  BOOLEAN IN aNeedClassName
  %SUMMARY 'Делает имя для доступа к полю' ; 
  [ cFieldPrefix g_CurrentClass ':Offset:' aName ] strings:Cat >>> Result
 ; // MakeFieldOffsetName
@@ -121,13 +122,13 @@ VOID operator define_member
  FieldOffset IN aOffset
  axiom:PushSymbol private
  axiom:PushSymbol Const
- aName MakeFieldOffsetName Ctx:Parser:PushSymbol
+ aName true MakeFieldOffsetName Ctx:Parser:PushSymbol
  aOffset Ctx:Parser:PushInt
 
  axiom:PushSymbol implementation
  g_CurrentClassImpl Ctx:Parser:PushSymbol
  axiom:PushSymbol Const
- aName MakeFieldOffsetName Ctx:Parser:PushSymbol
+ aName false MakeFieldOffsetName Ctx:Parser:PushSymbol
  aOffset Ctx:Parser:PushInt
  axiom:PushSymbol end.
 
@@ -357,7 +358,7 @@ PRIVATE operator do-get-member
  axiom:PushSymbol (
  g_CurrentClass ClassImplName Ctx:Parser:PushSymbol
  axiom:PushSymbol ::
- aName MakeFieldOffsetName Ctx:Parser:PushSymbol 
+ aName false MakeFieldOffsetName Ctx:Parser:PushSymbol 
  axiom:PushSymbol )
 ; // do-get-member
 

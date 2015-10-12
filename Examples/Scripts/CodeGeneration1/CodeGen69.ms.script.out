@@ -4867,6 +4867,7 @@ PRIVATE STRING OPERATOR : MakeFieldOffsetName
  Documentation:
   Делает имя для доступа к полю
  STRING OPERATOR :: IN : aName
+ BOOLEAN OPERATOR :: IN : aNeedClassName
  PRIVATE STRING OPERATOR :: MakeFieldOffsetName : Result
 ; // MakeFieldOffsetName
 PRIVATE VOID OPERATOR : MakeMethodSignature
