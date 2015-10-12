@@ -4772,6 +4772,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : .ToPrintable
  ^@ OPERATOR :: IN : Self
 ; // .ToPrintable
 ObjectClass OPERATOR :: MACRO :: class_impl : _:Object
+ OPERATOR :: NamedWordProducer :: %CLASS-METHODS : %Class-Methods
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
  OPERATOR :: NamedWordProducer :: %FIELDS : %Flds
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
@@ -4814,6 +4815,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : class-method
 ; // class-method
 IMMEDIATE VOID OPERATOR :: MACRO : class-method-end
 ObjectClass OPERATOR :: MACRO :: class_impl : ClassOf::Object
+ OPERATOR :: NamedWordProducer :: %CLASS-METHODS : %Class-Methods
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
  OPERATOR :: NamedWordProducer :: %FIELDS : %Flds
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
@@ -4868,6 +4870,7 @@ STRING OPERATOR :: VAR : g_CurrentClassMethod
 STRING OPERATOR :: VAR : g_CurrentClassMethodModifiers
 ARRAY OPERATOR :: VAR : g_CurrentClassMethods
 ARRAY OPERATOR :: VAR : g_CurrentClassProperties
+ARRAY OPERATOR :: VAR : g_CurrentMetaClassMethods
 IMMEDIATE VOID OPERATOR :: MACRO : get-member
  Documentation:
   Компилирует способ доступа к члену класса

@@ -44,6 +44,9 @@ VOID TestWithDump ObjectTest
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
+ %CLASS-METHODS %Class-Methods
+ ; // %CLASS-METHODS %Class-Methods
+ 
  %CONSTRUCTORS %Constructors
   'new'
  ; // %CONSTRUCTORS %Constructors

@@ -63,6 +63,9 @@ VOID TestWithDump PointTest
  ; // IMMEDIATE VOID MACRO .Y
  
  BarClass class_impl _:Bar
+  %CLASS-METHODS %Class-Methods
+  ; // %CLASS-METHODS %Class-Methods
+  
   %CONSTRUCTORS %Constructors
   ; // %CONSTRUCTORS %Constructors
   
@@ -90,6 +93,9 @@ VOID TestWithDump PointTest
  ; // BarClass class_impl _:Bar
  
  FooClass class_impl _:Foo
+  %CLASS-METHODS %Class-Methods
+  ; // %CLASS-METHODS %Class-Methods
+  
   %CONSTRUCTORS %Constructors
   ; // %CONSTRUCTORS %Constructors
   
@@ -117,6 +123,9 @@ VOID TestWithDump PointTest
  ; // FooClass class_impl _:Foo
  
  PointClass class_impl _:Point
+  %CLASS-METHODS %Class-Methods
+  ; // %CLASS-METHODS %Class-Methods
+  
   %CONSTRUCTORS %Constructors
    ':'
    '0'
@@ -161,6 +170,9 @@ VOID TestWithDump PointTest
  ; // PointClass class_impl _:Point
  
  RectangleClass class_impl _:Rectangle
+  %CLASS-METHODS %Class-Methods
+  ; // %CLASS-METHODS %Class-Methods
+  
   %CONSTRUCTORS %Constructors
    ':'
   ; // %CONSTRUCTORS %Constructors
@@ -279,6 +291,9 @@ VOID TestWithDump PointTest
  INTEGER CONST c:Rectangle:Offset:VMT
   0
  BarClass class_impl _:Bar
+  %CLASS-METHODS %Class-Methods
+  ; // %CLASS-METHODS %Class-Methods
+  
   %CONSTRUCTORS %Constructors
   ; // %CONSTRUCTORS %Constructors
   
@@ -306,6 +321,9 @@ VOID TestWithDump PointTest
  ; // BarClass class_impl _:Bar
  
  FooClass class_impl _:Foo
+  %CLASS-METHODS %Class-Methods
+  ; // %CLASS-METHODS %Class-Methods
+  
   %CONSTRUCTORS %Constructors
   ; // %CONSTRUCTORS %Constructors
   
@@ -333,6 +351,9 @@ VOID TestWithDump PointTest
  ; // FooClass class_impl _:Foo
  
  PointClass class_impl _:Point
+  %CLASS-METHODS %Class-Methods
+  ; // %CLASS-METHODS %Class-Methods
+  
   %CONSTRUCTORS %Constructors
    ':'
    '0'
@@ -377,6 +398,9 @@ VOID TestWithDump PointTest
  ; // PointClass class_impl _:Point
  
  RectangleClass class_impl _:Rectangle
+  %CLASS-METHODS %Class-Methods
+  ; // %CLASS-METHODS %Class-Methods
+  
   %CONSTRUCTORS %Constructors
    ':'
   ; // %CONSTRUCTORS %Constructors
@@ -1177,6 +1201,9 @@ VOID TestWithDump PointTest
 ; // VOID TestWithDump PointTest
 
 ObjectClass class_impl _:Object
+ %CLASS-METHODS %Class-Methods
+ ; // %CLASS-METHODS %Class-Methods
+ 
  %CONSTRUCTORS %Constructors
   'new'
  ; // %CONSTRUCTORS %Constructors
@@ -1205,6 +1232,9 @@ ObjectClass class_impl _:Object
 ; // ObjectClass class_impl _:Object
 
 PointClass class_impl _:Point
+ %CLASS-METHODS %Class-Methods
+ ; // %CLASS-METHODS %Class-Methods
+ 
  %CONSTRUCTORS %Constructors
   ':'
   '0'
@@ -1249,6 +1279,9 @@ PointClass class_impl _:Point
 ; // PointClass class_impl _:Point
 
 RectangleClass class_impl _:Rectangle
+ %CLASS-METHODS %Class-Methods
+ ; // %CLASS-METHODS %Class-Methods
+ 
  %CONSTRUCTORS %Constructors
   ':'
  ; // %CONSTRUCTORS %Constructors

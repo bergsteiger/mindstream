@@ -152,6 +152,8 @@ ARRAY CompileTime-VAR g_CurrentClassProperties [ ]
 
 ARRAY CompileTime-VAR g_CurrentClassMethods [ ]
 
+ARRAY CompileTime-VAR g_CurrentMetaClassMethods [ ]
+
 ARRAY CompileTime-VAR g_CurrentClassConstructors [ ]
 
 MACRO member
@@ -287,6 +289,7 @@ MACRO class
  g_CurrentClassMembers := [ ]
  g_CurrentClassProperties := [ ]
  g_CurrentClassMethods := [ ]
+ g_CurrentMetaClassMethods := [ ]
  g_CurrentClassConstructors := [ ]
  g_ClassFieldOffset := 0
  aName |N >>> g_CurrentClass
@@ -492,6 +495,8 @@ MACRO RunCompileProps&Methods
    '%PROPERTIES' g_CurrentClassProperties ListToNameAsString
 
    '%METHODS' g_CurrentClassMethods ListToNameAsString
+
+   '%CLASS-METHODS' g_CurrentMetaClassMethods ListToNameAsString
 
    '%CONSTRUCTORS' g_CurrentClassConstructors ListToNameAsString
 
