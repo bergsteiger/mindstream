@@ -298,8 +298,6 @@ MACRO class
  STRING VAR l_ClassRefName
  g_CurrentClass ClassRefName >>> l_ClassRefName
 
- //l_ClassRefName Msg
-
  if ( g_CurrentClass !== cObjectName ) then
  begin
   axiom:PushSymbol TtfwWord 
@@ -471,6 +469,8 @@ MACRO classExpander
   anItem %Class-Methods .for> ( 
    IN aProp
    aProp |N Msg
+   g_CurrentClass aProp |N MakeMethodSignaturePrim Msg
+   anItem .ClassName aProp |N MakeMethodSignaturePrim Msg
   )
 
   anItem %Constructors .for> ( 
