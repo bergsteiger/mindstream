@@ -331,7 +331,7 @@ MACRO class
   g_CurrentClass
 
   'WordAlias'
-  [ 'class::' g_CurrentClass ] strings:Cat
+  [ 'ClassOf::' g_CurrentClass ] strings:Cat
   g_CurrentClassImpl
  ] Ctx:Parser:PushArray
 
