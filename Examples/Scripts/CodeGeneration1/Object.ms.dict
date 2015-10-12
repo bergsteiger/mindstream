@@ -297,15 +297,7 @@ MACRO class
 
  l_ClassRefName Ctx:Parser:PushSymbol
  axiom:PushSymbol class_impl
- [
-  g_CurrentClassImpl
-
-  'FieldOffset'
-  'CompileTime-VAR'
-  InstanceSizeName
- ] Ctx:Parser:PushArray
-
-  0 Ctx:Parser:PushInt
+ g_CurrentClassImpl Ctx:Parser:PushSymbol
 
  [
    if ( g_CurrentClass !== cObjectName ) then
@@ -318,6 +310,13 @@ MACRO class
   '@SELF'
   '>>>'
   'Result'
+  'FieldOffset'
+  'CompileTime-VAR'
+  InstanceSizeName
+ ] Ctx:Parser:PushArray
+
+  0 Ctx:Parser:PushInt
+ [
   ';'
  ] Ctx:Parser:PushArray
 
