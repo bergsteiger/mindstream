@@ -12,7 +12,7 @@ Test&Dump ObjectTest
 
  @ ClassOf::Object DumpElement
 
- _:Object pop:Word:Name Print
+ ClassOf::Object pop:Word:Name Print
 
  Object VAR l_Obj
  l_Obj := Object:new
@@ -23,11 +23,11 @@ Test&Dump ObjectTest
  @ l_Obj pop:Word:Info pop:WordInfo:ValueTypes Print
  @ l_Obj pop:Word:Info pop:WordInfo:ValueTypes pop:ValueTypes:Name Print
  l_Obj .ClassName Print
- _:Object pop:Word:Name Print
+ ClassOf::Object pop:Word:Name Print
  l_Obj .InstanceSize Print
 
- _:Object pop:Word:Name Print
- _:Object pop:Word:Name Print
+ ClassOf::Object pop:Word:Name Print
+ ClassOf::Object pop:Word:Name Print
 
 ; // ObjectTest
 
