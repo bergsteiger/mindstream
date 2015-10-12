@@ -92,8 +92,24 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // BarClass class_impl _:Bar
  
- STRING 'Object:ClassName'
- STRING 'Object:InstanceSize'
+ STRING method Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassName
+  Result
+  pop:Word:SetValue
+ ; // STRING method Object:ClassName
+ 
+ INTEGER method Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:InstanceSize
+  Result
+  pop:Word:SetValue
+ ; // INTEGER method Object:InstanceSize
+ 
  FooClass class_impl _:Foo
   %CLASS-METHODS %Class-Methods
   ; // %CLASS-METHODS %Class-Methods
@@ -124,8 +140,24 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // FooClass class_impl _:Foo
  
- STRING 'Object:ClassName'
- STRING 'Object:InstanceSize'
+ STRING method Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassName
+  Result
+  pop:Word:SetValue
+ ; // STRING method Object:ClassName
+ 
+ INTEGER method Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:InstanceSize
+  Result
+  pop:Word:SetValue
+ ; // INTEGER method Object:InstanceSize
+ 
  PointClass class_impl _:Point
   %CLASS-METHODS %Class-Methods
   ; // %CLASS-METHODS %Class-Methods
@@ -173,8 +205,24 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // PointClass class_impl _:Point
  
- STRING 'Object:ClassName'
- STRING 'Object:InstanceSize'
+ STRING method Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassName
+  Result
+  pop:Word:SetValue
+ ; // STRING method Object:ClassName
+ 
+ INTEGER method Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:InstanceSize
+  Result
+  pop:Word:SetValue
+ ; // INTEGER method Object:InstanceSize
+ 
  RectangleClass class_impl _:Rectangle
   %CLASS-METHODS %Class-Methods
   ; // %CLASS-METHODS %Class-Methods
@@ -216,8 +264,24 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // RectangleClass class_impl _:Rectangle
  
- STRING 'Object:ClassName'
- STRING 'Object:InstanceSize'
+ STRING method Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassName
+  Result
+  pop:Word:SetValue
+ ; // STRING method Object:ClassName
+ 
+ INTEGER method Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:InstanceSize
+  Result
+  pop:Word:SetValue
+ ; // INTEGER method Object:InstanceSize
+ 
  IMMEDIATE VOID TYPE Bar
   TtfwValueTypes
   Ctx:IncludeValueTypes
