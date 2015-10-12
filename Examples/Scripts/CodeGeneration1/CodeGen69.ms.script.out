@@ -4693,6 +4693,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  ;
+ARRAY FUNCTION : %Class-Methods
+ OPERATOR :: IN : %S
+ Documentation:
+  ¬озвращает итератор методов мета-класса
+ ARRAY FUNCTION :: %Class-Methods : Result
+; // %Class-Methods
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CLASS-METHODS
 ARRAY FUNCTION : %ClassRTTIList
  OPERATOR :: IN : %S
  ^L OPERATOR :: IN : aName

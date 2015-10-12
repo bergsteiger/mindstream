@@ -40,6 +40,7 @@ EXPORTS
 NamedWordProducer %FIELDS %Flds
 NamedWordProducer %PROPERTIES %Props
 NamedWordProducer %METHODS %Methods
+NamedWordProducer %CLASS-METHODS %Class-Methods
 NamedWordProducer %CONSTRUCTORS %Constructors
 
 OBJECT FUNCTION DoMember 
@@ -83,6 +84,12 @@ ARRAY FUNCTION %Methods
  %SUMMARY '¬озвращает итератор методов класса' ;
  %S %ClassRTTIList %Methods >>> Result
 ; // %Methods
+
+ARRAY FUNCTION %Class-Methods 
+ IN %S
+ %SUMMARY '¬озвращает итератор методов мета-класса' ;
+ %S %ClassRTTIList %Class-Methods >>> Result
+; // %Class-Methods
 
 ARRAY FUNCTION %Constructors 
  IN %S
