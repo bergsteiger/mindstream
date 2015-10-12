@@ -112,7 +112,7 @@ PRIVATE STRING operator MakeFieldOffsetName
   BOOLEAN IN aNeedClassName
  %SUMMARY 'Делает имя для доступа к полю' ; 
  [ cFieldPrefix 
-   g_CurrentClass 
+   aNeedClassName ? g_CurrentClass 
    ':Offset:' 
    aName 
  ] strings:Cat >>> Result

@@ -117,9 +117,9 @@ c:Object:Offset:VMT .
 c:Point:Offset:VMT .
 c:Rectangle:Offset:VMT .
 
-_:Object :: c:Object:Offset:VMT .
-_:Point :: c:Point:Offset:VMT .
-_:Rectangle :: c:Rectangle:Offset:VMT .
+_:Object :: c::Offset:VMT .
+_:Point :: c::Offset:VMT .
+_:Rectangle :: c::Offset:VMT .
 
 _:Object :: c:Instance:Size .
 _:Point :: c:Instance:Size .
