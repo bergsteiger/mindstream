@@ -471,7 +471,7 @@ MACRO classExpander
 
    axiom:PushSymbol CONST
    g_CurrentClassImpl aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   'XXX'Ctx:Parser:PushString 
+   'XXX' Ctx:Parser:PushString 
    //anItem pop:Word:Name aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   )
 
