@@ -307,16 +307,23 @@ MACRO class
     cObjectName ClassImplName
     ';'
    end
+
   '@SELF'
   '>>>'
   'Result'
-  'FieldOffset'
-  'CompileTime-VAR'
+
+  //'FieldOffset'
+  '[EXECUTE]'
+  '('
+  '@SELF'
+  '->'
   InstanceSizeName
+  ':='
  ] Ctx:Parser:PushArray
 
   0 Ctx:Parser:PushInt
  [
+  ')'
   ';'
 
   'array' 
