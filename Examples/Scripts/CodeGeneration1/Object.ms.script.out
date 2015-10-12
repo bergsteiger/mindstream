@@ -5,8 +5,6 @@ VOID TestWithDump ObjectTest
  @
  _:Object
  DumpElement
- _:Object
- .
  Object:new
  l_Obj
  pop:Word:SetValuePrim
@@ -59,10 +57,9 @@ ObjectClass class_impl _:Object
  FieldOffset VAR c:Instance:Size
 ; // ObjectClass class_impl _:Object
 
-<nil>
 Object
 Object
 TtfwValueTypes
 Object
 Object
-Ошибка выполнения: "Неверный тип значения: tfw_vtVoid для типа INTEGER". Главный файл: Object.ms.script. Класс: TkwCompiledVar. Слово: Result Producer: ObjectClass:InstanceSize Parent: ObjectClass:InstanceSize
+1
