@@ -497,13 +497,13 @@ MACRO RunCompileProps&Methods
   g_CurrentClassImpl
    NameOf %FIELDS g_CurrentClassMembers ListToNameAsString
 
-   '%PROPERTIES' g_CurrentClassProperties ListToNameAsString
+   NameOf %PROPERTIES g_CurrentClassProperties ListToNameAsString
 
-   '%METHODS' g_CurrentClassMethods ListToNameAsString
+   NameOf %METHODS g_CurrentClassMethods ListToNameAsString
 
-   '%CLASS-METHODS' g_CurrentMetaClassMethods ListToNameAsString
+   NameOf %CLASS-METHODS g_CurrentMetaClassMethods ListToNameAsString
 
-   '%CONSTRUCTORS' g_CurrentClassConstructors ListToNameAsString
+   NameOf %CONSTRUCTORS g_CurrentClassConstructors ListToNameAsString
 
   'end.'
  ] Ctx:Parser:PushArray
