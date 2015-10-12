@@ -12,7 +12,7 @@ Test&Dump ObjectTest
 
  @ _:Object DumpElement
 
- //_:Object pop:Word:Name Print
+ _:Object pop:Word:Name Print
 
  Object VAR l_Obj
  l_Obj := Object:new

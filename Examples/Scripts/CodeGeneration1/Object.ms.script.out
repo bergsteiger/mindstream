@@ -5,6 +5,9 @@ VOID TestWithDump ObjectTest
  @
  _:Object
  DumpElement
+ _:Object
+ pop:Word:Name
+ Print
  Object:new
  l_Obj
  pop:Word:SetValuePrim
@@ -69,6 +72,7 @@ ObjectClass class_impl _:Object
  pop:Word:SetValue
 ; // ObjectClass class_impl _:Object
 
+_:Object
 Object
 Object
 TtfwValueTypes
