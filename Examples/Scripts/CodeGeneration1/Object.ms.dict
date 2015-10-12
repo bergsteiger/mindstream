@@ -99,7 +99,6 @@ MACRO class_impl
  @SELF Ctx:SetWordProducerForCompiledClass
  axiom:PushSymbol : 
  aName |N Ctx:Parser:PushSymbol
-// // axiom:PushSymbol ;
 ; // class_impl
 
 STRING CompileTime-VAR g_CurrentClass ''
