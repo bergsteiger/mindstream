@@ -474,6 +474,7 @@ MACRO classExpander
    anItem .ClassName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
 
    g_CurrentClassImpl aProp |N MakeMethodSignaturePrim Msg
+   anItem .ClassName aProp |N MakeMethodSignaturePrim Msg
   )
 
   anItem %Constructors .for> ( 
