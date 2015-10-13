@@ -288,6 +288,14 @@ STRING FUNCTION ClassOfName
  [ cClassTypePrefix aClassName ] strings:Cat >>> Result
 ; // ClassOfName
 
+MACRO ClassOf
+  Literal IN aName
+ STRING VAR l_ClassName
+ aName |N ClassOfName >>> l_ClassName
+ l_ClassName IsWordDeclared ?ASSURE [ 'Класс ' l_ClassName ' не определён' ]
+ l_ClassName Ctx:Parser:PushSymbol
+; // ClassOf
+
 MACRO class
  Literal IN aName
  ( g_CurrentClass = '' ) ?ASSURE 'Вложенные классы пока не поддерживаются'

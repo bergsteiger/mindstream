@@ -4815,6 +4815,10 @@ IMMEDIATE VOID OPERATOR :: MACRO : class-method
  TtfwWordInfo OPERATOR :: VAR : l_WordInfo
 ; // class-method
 IMMEDIATE VOID OPERATOR :: MACRO : class-method-end
+IMMEDIATE VOID OPERATOR :: MACRO : ClassOf
+ ^L OPERATOR :: IN : aName
+ STRING OPERATOR :: VAR : l_ClassName
+; // ClassOf
 ObjectClass OPERATOR :: MACRO :: class_impl : ClassOf::Object
  OPERATOR :: NamedWordProducer :: %CLASS-METHODS : %Class-Methods
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
