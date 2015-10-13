@@ -443,9 +443,13 @@ STRING class-method ClassName
 class-method-end // ClassName
 
 MACRO VMTFieldOffset
-  ObjectClass right aClass
+  ^@ IN aClass
+  //Literal IN aFieldName
 
- aClass .ClassName Msg
+ ObjectClass VAR l_Class
+ aClass |^ >>> l_Class
+ l_Class .ClassName Msg
+ //aFieldName |N Msg
 ; // VMTFieldOffset
 
 INTEGER class-method InstanceSize
