@@ -181,6 +181,12 @@ STRING FUNCTION ClassImplName
 
 TtfwWord type ObjectClass
 
+PROCEDURE VMTFieldOffset
+ ObjectClass IN aClass
+ 
+ aClass Msg
+; // VMTFieldOffset
+
 Const ClassRefSuffix 'Class'
 
 STRING FUNCTION ClassRefName
