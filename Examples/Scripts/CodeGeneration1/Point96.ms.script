@@ -121,11 +121,11 @@ ClassOf Object :: c::Offset:VMT .
 ClassOf Point :: c::Offset:VMT .
 ClassOf Rectangle :: c::Offset:VMT .
 
-ClassOf::Object .InstanceSize .
-ClassOf::Point .InstanceSize .
-ClassOf::Rectangle .InstanceSize .
-ClassOf::Foo .InstanceSize .
-ClassOf::Bar .InstanceSize .
+ClassOf Object .InstanceSize .
+ClassOf Point .InstanceSize .
+ClassOf Rectangle .InstanceSize .
+ClassOf Foo .InstanceSize .
+ClassOf Bar .InstanceSize .
 
 Point:: 0 0 Point:Print
 // - так работает
