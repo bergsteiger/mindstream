@@ -1053,6 +1053,9 @@ VOID TestWithDump PointTest
  P1
  Object:InstanceSize
  Print
+ P1
+ Object:InstanceSize
+ Print
  l_Points
  (
   Point IN aPt
@@ -1333,6 +1336,7 @@ RectangleClass class_impl _:Rectangle
 ( X: 0, Y: 0 )
 ( X: 0, Y: 0 )
 Point
+3
 3
 3
 ( X: 0, Y: 0 )
