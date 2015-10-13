@@ -4824,6 +4824,10 @@ ObjectClass OPERATOR :: MACRO :: class_impl : ClassOf::Object
  INTEGER CONST : c::Offset:VMT
  ObjectClass OPERATOR :: MACRO :: class_impl :: _:Object : Result
 ; // ClassOf::Object
+STRING FUNCTION : ClassOfName
+ STRING OPERATOR :: IN : aClassName
+ STRING FUNCTION :: ClassOfName : Result
+; // ClassOfName
 STRING FUNCTION : ClassRefName
  STRING OPERATOR :: IN : aName
  STRING FUNCTION :: ClassRefName : Result

@@ -283,6 +283,11 @@ STRING FUNCTION InstanceSizeName
 
 CONST cClassTypePrefix 'ClassOf::'
 
+STRING FUNCTION ClassOfName
+  STRING IN aClassName
+ [ cClassTypePrefix aClassName ] strings:Cat >>> Result
+; // ClassOfName
+
 MACRO class
  Literal IN aName
  ( g_CurrentClass = '' ) ?ASSURE 'Вложенные классы пока не поддерживаются'
@@ -341,7 +346,7 @@ MACRO class
   g_CurrentClass
 
   'WordAlias'
-  [ cClassTypePrefix g_CurrentClass ] strings:Cat
+  g_CurrentClass ClassOfName
   g_CurrentClassImpl
  ] Ctx:Parser:PushArray
 
