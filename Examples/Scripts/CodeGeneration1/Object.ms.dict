@@ -445,7 +445,7 @@ class-method-end // ClassName
 PROCEDURE VMTFieldOffset
  ObjectClass IN aClass
  
- aClass Msg
+ aClass .ClassName Msg
 ; // VMTFieldOffset
 
 INTEGER class-method InstanceSize
