@@ -274,8 +274,14 @@ VOID TestWithDump PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE BarClass
  
- STRING '_:Object:ClassName'
- STRING '_:Object:InstanceSize'
+ : BarClass:ClassName
+  '_:Object:ClassName'
+ ; // : BarClass:ClassName
+ 
+ : BarClass:InstanceSize
+  '_:Object:InstanceSize'
+ ; // : BarClass:InstanceSize
+ 
  INTEGER CONST c:Bar:Offset:VMT
   0
  INTEGER CONST c:Foo:Offset:VMT
@@ -504,8 +510,14 @@ VOID TestWithDump PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE FooClass
  
- STRING '_:Object:ClassName'
- STRING '_:Object:InstanceSize'
+ : FooClass:ClassName
+  '_:Object:ClassName'
+ ; // : FooClass:ClassName
+ 
+ : FooClass:InstanceSize
+  '_:Object:InstanceSize'
+ ; // : FooClass:InstanceSize
+ 
  ARRAY VAR l_Points
  ARRAY VAR l_Rectangles
  Object VAR O1
@@ -799,8 +811,14 @@ VOID TestWithDump PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE PointClass
  
- STRING '_:Object:ClassName'
- STRING '_:Object:InstanceSize'
+ : PointClass:ClassName
+  '_:Object:ClassName'
+ ; // : PointClass:ClassName
+ 
+ : PointClass:InstanceSize
+  '_:Object:InstanceSize'
+ ; // : PointClass:InstanceSize
+ 
  Rectangle VAR R1
  Rectangle VAR R2
  IMMEDIATE VOID TYPE Rectangle
@@ -931,8 +949,14 @@ VOID TestWithDump PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE RectangleClass
  
- STRING '_:Object:ClassName'
- STRING '_:Object:InstanceSize'
+ : RectangleClass:ClassName
+  '_:Object:ClassName'
+ ; // : RectangleClass:ClassName
+ 
+ : RectangleClass:InstanceSize
+  '_:Object:InstanceSize'
+ ; // : RectangleClass:InstanceSize
+ 
  PointTest
  DumpElement
  _:Object
