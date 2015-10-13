@@ -1023,6 +1023,8 @@ VOID TestWithDump PointTest
  .
  c:Rectangle:Offset:VMT
  .
+ _:Object
+ VMTFieldOffset
  _:Object _:Object pop:Word:SetValue ::
  'c::Offset:VMT'
  .
@@ -1032,8 +1034,6 @@ VOID TestWithDump PointTest
  _:Rectangle _:Rectangle pop:Word:SetValue ::
  'c::Offset:VMT'
  .
- _:Object
- VMTFieldOffset
  _:Object
  ObjectClass:InstanceSize
  .
