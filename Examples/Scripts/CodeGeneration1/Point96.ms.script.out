@@ -92,14 +92,6 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // BarClass class_impl _:Bar
  
- : _:Bar:ClassName
-  Object:ClassName
- ; // : _:Bar:ClassName
- 
- : _:Bar:InstanceSize
-  Object:InstanceSize
- ; // : _:Bar:InstanceSize
- 
  FooClass class_impl _:Foo
   %CLASS-METHODS %Class-Methods
   ; // %CLASS-METHODS %Class-Methods
@@ -129,14 +121,6 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // FooClass class_impl _:Foo
- 
- : _:Foo:ClassName
-  Object:ClassName
- ; // : _:Foo:ClassName
- 
- : _:Foo:InstanceSize
-  Object:InstanceSize
- ; // : _:Foo:InstanceSize
  
  PointClass class_impl _:Point
   %CLASS-METHODS %Class-Methods
@@ -185,14 +169,6 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // PointClass class_impl _:Point
  
- : _:Point:ClassName
-  Object:ClassName
- ; // : _:Point:ClassName
- 
- : _:Point:InstanceSize
-  Object:InstanceSize
- ; // : _:Point:InstanceSize
- 
  RectangleClass class_impl _:Rectangle
   %CLASS-METHODS %Class-Methods
   ; // %CLASS-METHODS %Class-Methods
@@ -233,14 +209,6 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // RectangleClass class_impl _:Rectangle
- 
- : _:Rectangle:ClassName
-  Object:ClassName
- ; // : _:Rectangle:ClassName
- 
- : _:Rectangle:InstanceSize
-  Object:InstanceSize
- ; // : _:Rectangle:InstanceSize
  
  IMMEDIATE VOID TYPE Bar
   TtfwValueTypes

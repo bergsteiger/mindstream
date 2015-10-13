@@ -429,6 +429,10 @@ STRING class-method ClassName
  Self |N ':' string:Split >>> Result DROP
 class-method-end // ClassName
 
+INTEGER class-method InstanceSize
+ Self %% InstanceSizeName DO >>> Result
+class-method-end // InstanceSize
+
 MACRO classExpander
   ^ IN anImpl
 
@@ -470,10 +474,10 @@ MACRO classExpander
 //   anItem .ClassName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
 //   axiom:PushSymbol ;
 
-   axiom:PushSymbol :
-   g_CurrentClassImpl aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem ObjectClass:ClassName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   axiom:PushSymbol ;
+//   axiom:PushSymbol :
+//   g_CurrentClassImpl aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+//   anItem Object:class pop:Word:Name aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+//   axiom:PushSymbol ;
   )
 
   anItem %Constructors .for> ( 
@@ -485,10 +489,6 @@ MACRO classExpander
 
  )
 ; // classExpander
-
-INTEGER class-method InstanceSize
- Self %% InstanceSizeName DO >>> Result
-class-method-end // InstanceSize
 
 : ListToNameAsString
  STRING IN aName
