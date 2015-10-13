@@ -954,6 +954,9 @@ VOID TestWithDump PointTest
  _:Point _:Point pop:Word:SetValue ::
  'c:Instance:Size'
  .
+ _:Point _:Point pop:Word:SetValue ::
+ 'c:Instance:Size'
+ .
  _:Rectangle _:Rectangle pop:Word:SetValue ::
  'c:Instance:Size'
  .
@@ -1331,6 +1334,7 @@ RectangleClass class_impl _:Rectangle
 0
 0
 1
+3
 3
 3
 ( X: 0, Y: 0 )
