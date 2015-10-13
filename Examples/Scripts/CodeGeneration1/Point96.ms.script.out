@@ -92,23 +92,13 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // BarClass class_impl _:Bar
  
- STRING method Object:ClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // STRING method Object:ClassName
+ : _:Bar:ClassName
+  Object:ClassName
+ ; // : _:Bar:ClassName
  
- INTEGER method Object:InstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ : _:Bar:InstanceSize
+  Object:InstanceSize
+ ; // : _:Bar:InstanceSize
  
  FooClass class_impl _:Foo
   %CLASS-METHODS %Class-Methods
@@ -140,23 +130,13 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // FooClass class_impl _:Foo
  
- STRING method Object:ClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // STRING method Object:ClassName
+ : _:Foo:ClassName
+  Object:ClassName
+ ; // : _:Foo:ClassName
  
- INTEGER method Object:InstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ : _:Foo:InstanceSize
+  Object:InstanceSize
+ ; // : _:Foo:InstanceSize
  
  PointClass class_impl _:Point
   %CLASS-METHODS %Class-Methods
@@ -205,23 +185,13 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // PointClass class_impl _:Point
  
- STRING method Object:ClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // STRING method Object:ClassName
+ : _:Point:ClassName
+  Object:ClassName
+ ; // : _:Point:ClassName
  
- INTEGER method Object:InstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ : _:Point:InstanceSize
+  Object:InstanceSize
+ ; // : _:Point:InstanceSize
  
  RectangleClass class_impl _:Rectangle
   %CLASS-METHODS %Class-Methods
@@ -264,23 +234,13 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // RectangleClass class_impl _:Rectangle
  
- STRING method Object:ClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // STRING method Object:ClassName
+ : _:Rectangle:ClassName
+  Object:ClassName
+ ; // : _:Rectangle:ClassName
  
- INTEGER method Object:InstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ : _:Rectangle:InstanceSize
+  Object:InstanceSize
+ ; // : _:Rectangle:InstanceSize
  
  IMMEDIATE VOID TYPE Bar
   TtfwValueTypes
@@ -307,24 +267,6 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // STRING method Object:ClassName
- 
- STRING method Object:ClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // STRING method Object:ClassName
- 
- INTEGER method Object:InstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
  
  INTEGER method Object:InstanceSize
   Object IN Self
@@ -554,24 +496,6 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING method Object:ClassName
  
- STRING method Object:ClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // STRING method Object:ClassName
- 
- INTEGER method Object:InstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
- 
  INTEGER method Object:InstanceSize
   Object IN Self
   Self
@@ -756,24 +680,6 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // STRING method Object:ClassName
- 
- STRING method Object:ClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // STRING method Object:ClassName
- 
- INTEGER method Object:InstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
  
  INTEGER method Object:InstanceSize
   Object IN Self
@@ -989,24 +895,6 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // STRING method Object:ClassName
- 
- STRING method Object:ClassName
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:ClassName
-  Result
-  pop:Word:SetValue
- ; // STRING method Object:ClassName
- 
- INTEGER method Object:InstanceSize
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:InstanceSize
-  Result
-  pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
  
  INTEGER method Object:InstanceSize
   Object IN Self
