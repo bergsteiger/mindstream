@@ -122,7 +122,7 @@ _:Point :: c::Offset:VMT .
 _:Rectangle :: c::Offset:VMT .
 
 ClassOf::Object .InstanceSize .
-ClassOf::Point :: c:Instance:Size .
+//ClassOf::Point .InstanceSize .
 _:Point :: c:Instance:Size .
 _:Rectangle :: c:Instance:Size .
 
