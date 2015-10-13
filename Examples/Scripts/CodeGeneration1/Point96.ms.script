@@ -123,7 +123,7 @@ _:Rectangle :: c::Offset:VMT .
 
 ClassOf::Object .InstanceSize .
 ClassOf::Point .InstanceSize .
-_:Rectangle :: c:Instance:Size .
+ClassOf::Rectangle .InstanceSize .
 
 Point:: 0 0 Point:Print
 // - так работает
