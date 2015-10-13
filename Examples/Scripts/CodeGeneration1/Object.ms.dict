@@ -442,10 +442,13 @@ STRING class-method ClassName
  Self |N ':' string:Split >>> Result DROP
 class-method-end // ClassName
 
-PROCEDURE VMTFieldOffset
- ObjectClass IN aClass
+MACRO VMTFieldOffset
+  ^@ IN aClass
+
+ ObjectClass VAR l_Class
+ aClass |^ >>> l_Class
  
- aClass .ClassName Msg
+ l_Class .ClassName Msg
 ; // VMTFieldOffset
 
 INTEGER class-method InstanceSize
