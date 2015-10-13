@@ -444,7 +444,7 @@ class-method-end // ClassName
 
 MACRO VMTFieldOffset
   ^@ IN aClass
-  //Literal IN aFieldName
+  Literal IN aFieldName
 
  ObjectClass VAR l_Class
  aClass |^ >>> l_Class
