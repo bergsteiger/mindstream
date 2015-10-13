@@ -471,7 +471,7 @@ MACRO classExpander
 
    axiom:PushSymbol :
    g_CurrentClass ClassRefName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem ObjectClass:ClassName ClassRefName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   anItem .ClassName ClassRefName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    axiom:PushSymbol ;
   )
 
