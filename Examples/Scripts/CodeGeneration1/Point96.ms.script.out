@@ -274,13 +274,26 @@ VOID TestWithDump PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE BarClass
  
- : BarClass:ClassName
-  ObjectClass:ClassName
- ; // : BarClass:ClassName
+ STRING : ObjectClass:ClassName
+  ObjectClass IN Self
+  Self
+  |N
+  ':'
+  string:Split
+  Result
+  pop:Word:SetValue
+  DROP
+ ; // STRING : ObjectClass:ClassName
  
- : BarClass:InstanceSize
-  ObjectClass:InstanceSize
- ; // : BarClass:InstanceSize
+ INTEGER : ObjectClass:InstanceSize
+  ObjectClass IN Self
+  Self
+  %%
+  InstanceSizeName
+  DO
+  Result
+  pop:Word:SetValue
+ ; // INTEGER : ObjectClass:InstanceSize
  
  INTEGER CONST c:Bar:Offset:VMT
   0
@@ -510,13 +523,26 @@ VOID TestWithDump PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE FooClass
  
- : FooClass:ClassName
-  ObjectClass:ClassName
- ; // : FooClass:ClassName
+ STRING : ObjectClass:ClassName
+  ObjectClass IN Self
+  Self
+  |N
+  ':'
+  string:Split
+  Result
+  pop:Word:SetValue
+  DROP
+ ; // STRING : ObjectClass:ClassName
  
- : FooClass:InstanceSize
-  ObjectClass:InstanceSize
- ; // : FooClass:InstanceSize
+ INTEGER : ObjectClass:InstanceSize
+  ObjectClass IN Self
+  Self
+  %%
+  InstanceSizeName
+  DO
+  Result
+  pop:Word:SetValue
+ ; // INTEGER : ObjectClass:InstanceSize
  
  ARRAY VAR l_Points
  ARRAY VAR l_Rectangles
@@ -811,13 +837,26 @@ VOID TestWithDump PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE PointClass
  
- : PointClass:ClassName
-  ObjectClass:ClassName
- ; // : PointClass:ClassName
+ STRING : ObjectClass:ClassName
+  ObjectClass IN Self
+  Self
+  |N
+  ':'
+  string:Split
+  Result
+  pop:Word:SetValue
+  DROP
+ ; // STRING : ObjectClass:ClassName
  
- : PointClass:InstanceSize
-  ObjectClass:InstanceSize
- ; // : PointClass:InstanceSize
+ INTEGER : ObjectClass:InstanceSize
+  ObjectClass IN Self
+  Self
+  %%
+  InstanceSizeName
+  DO
+  Result
+  pop:Word:SetValue
+ ; // INTEGER : ObjectClass:InstanceSize
  
  Rectangle VAR R1
  Rectangle VAR R2
@@ -949,13 +988,26 @@ VOID TestWithDump PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE RectangleClass
  
- : RectangleClass:ClassName
-  ObjectClass:ClassName
- ; // : RectangleClass:ClassName
+ STRING : ObjectClass:ClassName
+  ObjectClass IN Self
+  Self
+  |N
+  ':'
+  string:Split
+  Result
+  pop:Word:SetValue
+  DROP
+ ; // STRING : ObjectClass:ClassName
  
- : RectangleClass:InstanceSize
-  ObjectClass:InstanceSize
- ; // : RectangleClass:InstanceSize
+ INTEGER : ObjectClass:InstanceSize
+  ObjectClass IN Self
+  Self
+  %%
+  InstanceSizeName
+  DO
+  Result
+  pop:Word:SetValue
+ ; // INTEGER : ObjectClass:InstanceSize
  
  PointTest
  DumpElement
@@ -984,16 +1036,16 @@ VOID TestWithDump PointTest
  ObjectClass:InstanceSize
  .
  _:Point
- PointClass:InstanceSize
+ ObjectClass:InstanceSize
  .
  _:Rectangle
- RectangleClass:InstanceSize
+ ObjectClass:InstanceSize
  .
  _:Foo
- FooClass:InstanceSize
+ ObjectClass:InstanceSize
  .
  _:Bar
- BarClass:InstanceSize
+ ObjectClass:InstanceSize
  .
  Point::
  0
