@@ -275,11 +275,11 @@ VOID TestWithDump PointTest
  ; // IMMEDIATE VOID TYPE BarClass
  
  : BarClass:ClassName
-  'ObjectClass:ClassName'
+  ObjectClass:ClassName
  ; // : BarClass:ClassName
  
  : BarClass:InstanceSize
-  'ObjectClass:InstanceSize'
+  ObjectClass:InstanceSize
  ; // : BarClass:InstanceSize
  
  INTEGER CONST c:Bar:Offset:VMT
@@ -511,11 +511,11 @@ VOID TestWithDump PointTest
  ; // IMMEDIATE VOID TYPE FooClass
  
  : FooClass:ClassName
-  'ObjectClass:ClassName'
+  ObjectClass:ClassName
  ; // : FooClass:ClassName
  
  : FooClass:InstanceSize
-  'ObjectClass:InstanceSize'
+  ObjectClass:InstanceSize
  ; // : FooClass:InstanceSize
  
  ARRAY VAR l_Points
@@ -812,11 +812,11 @@ VOID TestWithDump PointTest
  ; // IMMEDIATE VOID TYPE PointClass
  
  : PointClass:ClassName
-  'ObjectClass:ClassName'
+  ObjectClass:ClassName
  ; // : PointClass:ClassName
  
  : PointClass:InstanceSize
-  'ObjectClass:InstanceSize'
+  ObjectClass:InstanceSize
  ; // : PointClass:InstanceSize
  
  Rectangle VAR R1
@@ -950,11 +950,11 @@ VOID TestWithDump PointTest
  ; // IMMEDIATE VOID TYPE RectangleClass
  
  : RectangleClass:ClassName
-  'ObjectClass:ClassName'
+  ObjectClass:ClassName
  ; // : RectangleClass:ClassName
  
  : RectangleClass:InstanceSize
-  'ObjectClass:InstanceSize'
+  ObjectClass:InstanceSize
  ; // : RectangleClass:InstanceSize
  
  PointTest
