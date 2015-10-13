@@ -181,12 +181,6 @@ STRING FUNCTION ClassImplName
 
 TtfwWord type ObjectClass
 
-PROCEDURE VMTFieldOffset
- ObjectClass IN aClass
- 
- aClass Msg
-; // VMTFieldOffset
-
 Const ClassRefSuffix 'Class'
 
 STRING FUNCTION ClassRefName
@@ -447,6 +441,12 @@ MACRO class-method-end
 STRING class-method ClassName
  Self |N ':' string:Split >>> Result DROP
 class-method-end // ClassName
+
+PROCEDURE VMTFieldOffset
+ ObjectClass IN aClass
+ 
+ aClass Msg
+; // VMTFieldOffset
 
 INTEGER class-method InstanceSize
  Self %% InstanceSizeName DO >>> Result
