@@ -1017,7 +1017,8 @@ VOID TestWithDump PointTest
  DumpElement
  _:Rectangle
  DumpElement
- c:Object:Offset:VMT
+ _:Object _:Object pop:Word:SetValue ::
+ 'c::Offset:VMT'
  .
  c:Point:Offset:VMT
  .
