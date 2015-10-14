@@ -247,7 +247,15 @@ VOID TestWithDump PointTest
  VIRTUAL STRING method Object:ToPrintable
   Object IN Self
   Self
-  Object:ClassName
+  ToPrintable
+  Result
+  pop:Word:SetValue
+  ARRAY [
+   Self
+   Object:ClassName
+   Result
+  ]
+  strings:Cat
   Result
   pop:Word:SetValue
  ; // VIRTUAL STRING method Object:ToPrintable
@@ -460,7 +468,15 @@ VOID TestWithDump PointTest
  VIRTUAL STRING method Object:ToPrintable
   Object IN Self
   Self
-  Object:ClassName
+  ToPrintable
+  Result
+  pop:Word:SetValue
+  ARRAY [
+   Self
+   Object:ClassName
+   Result
+  ]
+  strings:Cat
   Result
   pop:Word:SetValue
  ; // VIRTUAL STRING method Object:ToPrintable
@@ -1377,7 +1393,7 @@ RectangleClass class_impl _:Rectangle
 1
 ( X: 0, Y: 0 )
 ( X: 0, Y: 0 )
-Point
+Point[ TkwCompiledFunction 0 0 ]
 3
 3
 3
