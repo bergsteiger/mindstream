@@ -64,9 +64,9 @@ ObjectClass class_impl _:Object
   'class'
  ; // %PROPERTIES %Props
  
- INTEGER CONST c::Offset:VMT
+ VAR c:Offset:Instance:Size
+ INTEGER CONST c:Offset:VMT
   0
- VAR c:Instance:Size
  _:Object
  Result
  pop:Word:SetValue
