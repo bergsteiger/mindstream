@@ -1,10 +1,12 @@
 1
+1
 VOID TestWithDump ObjectTest
  Object1Class class_impl _:Object1
   %CLASS-METHODS %Class-Methods
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
   ; // %CONSTRUCTORS %Constructors
   
   %INHERITS %G
@@ -31,6 +33,7 @@ VOID TestWithDump ObjectTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
   ; // %CONSTRUCTORS %Constructors
   
   %INHERITS %G
@@ -89,14 +92,14 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // INTEGER method Object:InstanceSize
  
- Object constructor Object:new
+ REDIFINITION Object1 constructor Object1:new
   ARRAY [
    @
-   _:Object
+   _:Object1
   ]
   Result
   pop:Word:SetValue
- ; // Object constructor Object:new
+ ; // REDIFINITION Object1 constructor Object1:new
  
  VIRTUAL VOID method Object:Print
   Object IN Self

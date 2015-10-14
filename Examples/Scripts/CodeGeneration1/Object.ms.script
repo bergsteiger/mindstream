@@ -30,6 +30,9 @@ Test&Dump ObjectTest
  ClassOf Object pop:Word:Name Print
 
  class Object1
+  constructor new ( )
+   new[ ] >>> Result
+  ; // new
  class-end // Object1
 
  Object VAR l_Obj1
