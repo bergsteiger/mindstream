@@ -473,6 +473,7 @@ MACRO classExpander
    TtfwWord IN aMember
    axiom:PushSymbol member
 
+   aMember DO >>> g_ClassFieldOffset
    [ aMember pop:Word:Name [ cFieldPrefix cFieldOffset ] strings:Cat '' string:ReplaceFirst ] strings:Cat Ctx:Parser:PushSymbol
    //aMember DO Ctx:Parser:PushInt
    
