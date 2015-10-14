@@ -29,6 +29,15 @@ Test&Dump ObjectTest
  ClassOf Object pop:Word:Name Print
  ClassOf Object pop:Word:Name Print
 
+ Object VAR l_Obj1
+ l_Obj1 := Object:new
+
+ l_Obj1 .Print
+ l_Obj1 .ClassName Print
+
+ l_Obj1 .ClassName Print
+ l_Obj1 .InstanceSize Print
+
 ; // ObjectTest
 
 ObjectTest

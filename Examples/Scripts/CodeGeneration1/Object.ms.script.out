@@ -1,6 +1,7 @@
 1
 VOID TestWithDump ObjectTest
  Object VAR l_Obj
+ Object VAR l_Obj1
  ObjectTest
  DumpElement
  _:Object
@@ -30,6 +31,20 @@ VOID TestWithDump ObjectTest
  Print
  _:Object
  pop:Word:Name
+ Print
+ Object:new
+ l_Obj1
+ pop:Word:SetValuePrim
+ l_Obj1
+ Object:Print
+ l_Obj1
+ Object:ClassName
+ Print
+ l_Obj1
+ Object:ClassName
+ Print
+ l_Obj1
+ Object:InstanceSize
  Print
 ; // VOID TestWithDump ObjectTest
 
@@ -70,3 +85,7 @@ _:Object
 1
 _:Object
 _:Object
+Object
+Object
+Object
+1
