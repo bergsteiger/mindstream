@@ -597,7 +597,7 @@ MACRO constructor
 ; // constructor
 
 MACRO new[
- ClassOf Object .ClassName Msg
+ ClassOf Object .InstanceSize Msg
  g_CurrentClassImplWord %% InstanceSizeName DO .
  axiom:PushSymbol [
  axiom:PushSymbol @
