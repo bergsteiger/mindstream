@@ -4963,6 +4963,13 @@ IMMEDIATE VOID OPERATOR :: MACRO : readonly
  STRING OPERATOR :: VAR : l_Name
 ; // readonly
 IMMEDIATE VOID OPERATOR :: MACRO : RunCompileProps&Methods
+IMMEDIATE VOID OPERATOR :: MACRO : VMTFieldOffset
+ ^@ OPERATOR :: IN : aClass
+ ^L OPERATOR :: IN : aFieldName
+ ObjectClass OPERATOR :: VAR : l_Class
+ STRING OPERATOR :: VAR : l_ClassName
+ STRING OPERATOR :: VAR : l_FieldName
+; // VMTFieldOffset
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Bind.ms.dict
  Uses: 
   axiom:axiom
