@@ -549,27 +549,6 @@ PROCEDURE DefineInstanceSize
  end // g_InstanceSizeDefined !
 ; // DefineInstanceSize
 
-MACRO RunCompileProps&Methods
- [
-  'implementation'
-  g_CurrentClassImplWord pop:Word:Name
-
-   NameOf %PROPERTIES g_CurrentClassProperties ListToNameAsString
-
-   NameOf %METHODS g_CurrentClassMethods ListToNameAsString
-
-   NameOf %CLASS-METHODS g_CurrentMetaClassMethods ListToNameAsString
-
-   NameOf %CONSTRUCTORS g_CurrentClassConstructors ListToNameAsString
-
-  'end.'
- ] Ctx:Parser:PushArray
-
- g_CurrentClass := ''
- g_CurrentClassImplWord := nil
- g_InstanceSizeDefined := false
-; // RunCompileProps&Methods
-
 MACRO class-end
  DefineInstanceSize
 
