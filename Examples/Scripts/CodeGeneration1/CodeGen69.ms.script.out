@@ -4923,9 +4923,9 @@ INTEGER OPERATOR :: MACRO :: method : Object:InstanceSize
  INTEGER OPERATOR :: MACRO :: method :: Object:InstanceSize : Result
  Object OPERATOR :: IN : Self
 ; // Object:InstanceSize
-Object : : Object:new
- Object : :: Object:new : Result
- Object : :: Object:new : Self
+Object OPERATOR :: MACRO :: constructor : Object:new
+ Object OPERATOR :: MACRO :: constructor :: Object:new : Result
+ Object OPERATOR :: MACRO :: constructor :: Object:new : Self
 ; // Object:new
 VIRTUAL VOID OPERATOR :: MACRO :: method : Object:Print
  Object OPERATOR :: IN : Self
