@@ -149,8 +149,11 @@ ARRAY CompileTime-VAR g_CurrentMetaClassMethods [ ]
 ARRAY CompileTime-VAR g_CurrentClassConstructors [ ]
 
 MACRO member
- Literal IN aName
- STRING VAR l_Name
+  Literal IN aName
+  STRING VAR l_Name
+
+ %SUMMARY 'Определяет член текущего класса' ;
+ g_InstanceSizeDefined ?FAIL [ 'Класс ' g_CurrentClass ' уже определён. Нельзя доопределять его члены.' ]
  aName |N >>> l_Name
  Ctx:ClearTypeInfo
  l_Name g_ClassFieldOffset define_member

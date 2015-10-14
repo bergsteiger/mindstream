@@ -4891,6 +4891,8 @@ PRIVATE STRING OPERATOR : MakeMethodSignaturePrim
 ; // MakeMethodSignaturePrim
 PRIVATE VOID OPERATOR : MakeSelfParam
 IMMEDIATE VOID OPERATOR :: MACRO : member
+ Documentation:
+  Определяет член текущего класса
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
 ; // member
