@@ -35,8 +35,8 @@ Test&Dump ObjectTest
   ; // new
  class-end // Object1
 
- Object VAR l_Obj1
- l_Obj1 := Object:new
+ Object1 VAR l_Obj1
+ l_Obj1 := Object1:new
 
  l_Obj1 .Print
  l_Obj1 .ClassName Print
