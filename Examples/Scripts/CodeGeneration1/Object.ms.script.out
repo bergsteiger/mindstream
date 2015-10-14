@@ -173,6 +173,7 @@ VOID TestWithDump ObjectTest
   ARRAY [
    Self
    Object:ClassName
+   ' : '
    Result
   ]
   strings:Cat
@@ -266,6 +267,7 @@ VOID TestWithDump ObjectTest
   ARRAY [
    Self
    Object:ClassName
+   ' : '
    Result
   ]
   strings:Cat
@@ -389,18 +391,18 @@ ObjectClass class_impl _:Object
 ; // ObjectClass class_impl _:Object
 
 _:Object
-Object[ TkwCompiledFunction ]
+Object : [ TkwCompiledFunction ]
 Object
 Object
 _:Object
 1
 _:Object
 _:Object
-Object1[ TkwCompiledFunction ]
+Object1 : [ TkwCompiledFunction ]
 Object1
 Object1
 1
-Object2[ TkwCompiledFunction ]
+Object2 : [ TkwCompiledFunction ]
 Object2
 Object2
 1

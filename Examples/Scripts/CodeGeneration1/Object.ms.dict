@@ -623,7 +623,7 @@ constructor new ( )
 
 VIRTUAL STRING method ToPrintable
  Self ToPrintable >>> Result
- [ Self .ClassName Result ] strings:Cat >>> Result
+ [ Self .ClassName ' : ' Result ] strings:Cat >>> Result
  //Self .ClassName >>> Result
 ; // ToPrintable
 
