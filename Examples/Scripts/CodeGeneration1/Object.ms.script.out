@@ -385,6 +385,9 @@ VOID TestWithDump ObjectTest
  l_Obj2
  Object:InstanceSize
  Print
+ l_Obj2
+ Object2:FakeField
+ Print
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
@@ -432,3 +435,4 @@ Object2 : [ TkwCompiledFunction 256 ]
 Object2
 Object2
 2
+256
