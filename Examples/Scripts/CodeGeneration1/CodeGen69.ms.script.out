@@ -5074,6 +5074,14 @@ IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : CompileTime-VAR
  STRING OPERATOR :: VAR : l_Name
  TtfwValueTypes OPERATOR :: VAR : l_ValueTypes
 ; // CompileTime-VAR
+IMMEDIATE VOID OPERATOR : STATIC-VAR
+ ^L OPERATOR :: IN : aName
+; // STATIC-VAR
+PROTECTED : : STATIC-VAR:DefineVar
+PRIVATE : : STATIC-VAR:DefineVarEx
+ STRING OPERATOR :: IN : aName
+ OBJECT OPERATOR :: IN : aStereo
+; // STATIC-VAR:DefineVarEx
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
  Uses: 
   axiom:axiom

@@ -4,6 +4,27 @@ USES
  axiom:TtfwValueTypesAccepts
 ;
 
+PRIVATE : STATIC-VAR:DefineVarEx
+  STRING IN aName
+  OBJECT IN aStereo
+ 
+ aName Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckWord pop:KeyWord:Word pop:object:IsNil
+  ?ASSURE [ 'Слово ' aName ' уже существует. Нельзя определить переменную с таким же именем' ]
+
+ aName false Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckVar
+ DUP aStereo SWAP pop:Word:SetProducer
+ Ctx:ClearTypeInfo
+; // STATIC-VAR:DefineVarEx
+
+PROTECTED : STATIC-VAR:DefineVar
+ STATIC-VAR:DefineVarEx DROP
+; // STATIC-VAR:DefineVar
+
+IMMEDIATE VOID OPERATOR STATIC-VAR
+ ^L IN aName
+ aName |N @SELF STATIC-VAR:DefineVar
+; // STATIC-VAR
+
 STACK_CHANGING_MACRO CompileTime-VAR
   Literal IN aName
   ^ IN aValue
