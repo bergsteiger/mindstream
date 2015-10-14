@@ -452,6 +452,7 @@ MACRO VMTFieldOffset
 
  STRING VAR l_FieldName
  aFieldName |N >>> l_FieldName
+ l_FieldName false MakeFieldOffsetName >>> l_FieldName
  l_FieldName Msg
 ; // VMTFieldOffset
 
