@@ -64,7 +64,7 @@ ObjectClass class_impl _:Object
   'class'
  ; // %PROPERTIES %Props
  
- VAR c:Offset:Instance:Size
+ FieldOffset STATIC-VAR c:Offset:Instance:Size
  INTEGER CONST c:Offset:VMT
   0
  _:Object
