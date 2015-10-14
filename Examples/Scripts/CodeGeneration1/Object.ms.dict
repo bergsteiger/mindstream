@@ -597,7 +597,7 @@ MACRO constructor
 
  %SUMMARY 'Конструктор объектов';
 
- DefineInstanceSizeRunner
+ DoDefineInstanceSize
  // - тут определяем размер экземпляров класса
 
  STRING VAR l_Name
