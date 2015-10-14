@@ -1047,9 +1047,6 @@ VOID TestWithDump PointTest
  _:Rectangle _:Rectangle pop:Word:SetValue ::
  'c::Offset:BottomRight'
  .
- _:Rectangle _:Rectangle pop:Word:SetValue ::
- 'c::Offset:TopLeft'
- .
  _:Object
  ObjectClass:InstanceSize
  .
@@ -1443,7 +1440,6 @@ RectangleClass class_impl _:Rectangle
 1
 1
 2
-1
 1
 3
 3
