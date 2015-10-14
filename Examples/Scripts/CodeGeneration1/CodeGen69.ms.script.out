@@ -4843,6 +4843,7 @@ VOID OPERATOR : define_member
  FieldOffset OPERATOR :: IN : aOffset
 ; // define_member
 VOID OPERATOR :: PROCEDURE : DefineInstanceSize
+IMMEDIATE VOID OPERATOR :: MACRO : DefineInstanceSizeRunner
 PRIVATE OPERATOR : do-get-member
  Documentation:
   Определяет способ доступа к члену класса

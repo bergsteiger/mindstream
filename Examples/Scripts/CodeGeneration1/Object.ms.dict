@@ -569,6 +569,10 @@ PROCEDURE DefineInstanceSize
  end // g_InstanceSizeDefined !
 ; // DefineInstanceSize
 
+MACRO DefineInstanceSizeRunner
+ axiom:PushSymbol DefineInstanceSize
+; // DefineInstanceSizeRunner
+
 MACRO class-end
  axiom:PushSymbol RunCompileProps&Methods
 
