@@ -458,7 +458,11 @@ MACRO VMTFieldOffset
  l_FieldName false MakeFieldOffsetName >>> l_FieldName
  l_FieldName Msg
 
- //axiom:Push:Symbol ClassOf
+ axiom:PushSymbol ClassOf
+ l_ClassName Ctx:Parser:PushSymbol
+
+ axiom:PushSymbol ::
+ l_FieldName Ctx:Parser:PushSymbol
  
 ; // VMTFieldOffset
 
