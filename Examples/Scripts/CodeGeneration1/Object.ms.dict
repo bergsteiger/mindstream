@@ -601,7 +601,7 @@ MACRO new[
  INTEGER VAR l_InstanceSize
  ClassOf Object .InstanceSize >>> l_InstanceSize
  Dec l_InstanceSize
- l_InstanceSize .
+ //l_InstanceSize .
 
  axiom:PushSymbol [
  axiom:PushSymbol @
