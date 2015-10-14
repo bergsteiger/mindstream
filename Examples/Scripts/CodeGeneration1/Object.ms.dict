@@ -567,9 +567,9 @@ MACRO RunCompileProps&Methods
 ; // RunCompileProps&Methods
 
 MACRO class-end
- axiom:PushSymbol RunCompileProps&Methods
-
  DefineInstanceSize
+
+ axiom:PushSymbol RunCompileProps&Methods
 
  g_CurrentClass := ''
  //nil >>> g_CurrentClassImplWord
