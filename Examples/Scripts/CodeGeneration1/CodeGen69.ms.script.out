@@ -4846,10 +4846,6 @@ VOID OPERATOR :: PROCEDURE : DefineInstanceSize
  Documentation:
   Определяем размер экземпляров класса
 ; // DefineInstanceSize
-IMMEDIATE VOID OPERATOR :: MACRO : DefineInstanceSizeRunner
- Documentation:
-  Компилирем код, который определяет размер экземпляров класса
-; // DefineInstanceSizeRunner
 VOID OPERATOR :: PROCEDURE : DoDefineInstanceSize
  Documentation:
   Определяем размер экземпляров класса

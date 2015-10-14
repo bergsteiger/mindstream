@@ -573,15 +573,6 @@ PROCEDURE DefineInstanceSize
  end // g_InstanceSizeDefined !
 ; // DefineInstanceSize
 
-MACRO DefineInstanceSizeRunner
- %SUMMARY 'Компилирем код, который определяет размер экземпляров класса' ;
- if ( g_InstanceSizeDefined ! ) then
- begin
-  axiom:PushSymbol [EXECUTE]
-  axiom:PushSymbol DefineInstanceSize
- end // g_InstanceSizeDefined !
-; // DefineInstanceSizeRunner
-
 MACRO class-end
  axiom:PushSymbol RunCompileProps&Methods
 
