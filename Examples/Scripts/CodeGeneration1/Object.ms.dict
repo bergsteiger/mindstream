@@ -302,7 +302,7 @@ MACRO class
 
  if ( g_CurrentClass !== cObjectName ) then
  begin
-  axiom:PushSymbol TtfwWord 
+  axiom:PushSymbol ObjectClass
   axiom:PushSymbol type
   l_ClassRefName Ctx:Parser:PushSymbol
  end // g_CurrentClass !== cObjectName
