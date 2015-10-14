@@ -478,9 +478,13 @@ MACRO classExpander
   anItem MembersIterator .filter> ( pop:Word:Producer pop:Word:Name NameOf CONST == ) .for> ( 
    TtfwWord IN aMember
    axiom:PushSymbol implementation
-   anItem |N Ctx:Parser:PushSymbol
-   aMember pop:Word:Name Msg
-   aMember DO Msg
+   g_CurrentClass Ctx:Parser:PushSymbol
+
+   axiom:PushSymbol :
+   aMember pop:Word:Name Ctx:Parser:PushSymbol
+   aMember DO Ctx:Parser:PushInt
+   axiom:PushSymbol ;
+   
    axiom:PushSymbol end.
   )
 
