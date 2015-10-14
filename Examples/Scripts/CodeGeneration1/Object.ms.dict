@@ -571,6 +571,7 @@ MACRO class-end
  g_CurrentClass := ''
  g_CurrentClassImplWord := nil
  g_InstanceSizeDefined := false
+ g_ClassFieldOffset := 0
  
 ; // class-end
 
