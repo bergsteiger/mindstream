@@ -469,6 +469,9 @@ MACRO classExpander
  anImpl |@ %G .for> ( 
   ObjectClass IN anItem 
 
+  INTEGER VAR l_ClassFieldOffset
+  l_ClassFieldOffset := 0
+
   anItem MembersIterator .filter> ( pop:Word:Producer pop:Word:Name NameOf CONST == ) .for> ( 
    TtfwWord IN aMember
    axiom:PushSymbol member
