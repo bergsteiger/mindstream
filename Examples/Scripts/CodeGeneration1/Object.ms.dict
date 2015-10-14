@@ -465,7 +465,11 @@ MACRO classExpander
   INTEGER VAR l_ClassFieldOffset
   l_ClassFieldOffset := 0
 
-  anItem MembersIterator .filter> ( pop:Word:Producer pop:Word:Name NameOf CONST == ) .for> ( 
+  anItem MembersIterator 
+   .filter> ( pop:Word:Producer pop:Word:Name NameOf CONST == )
+   .filter> ( pop:Word:Name cFieldPrefix SWAP StartsStr )  
+   .for> 
+  ( 
    TtfwWord IN aMember
    axiom:PushSymbol member
 
