@@ -598,7 +598,11 @@ MACRO constructor
 
 MACRO new[
  ClassOf Object .InstanceSize Msg
- g_CurrentClassImplWord %% InstanceSizeName DO .
+
+ INTEGER VAR l_InstanceSize
+ g_CurrentClassImplWord %% InstanceSizeName DO >>> l_InstanceSize
+ l_InstanceSize .
+
  axiom:PushSymbol [
  axiom:PushSymbol @
  g_CurrentClassImplWord pop:Word:Name Ctx:Parser:PushSymbol

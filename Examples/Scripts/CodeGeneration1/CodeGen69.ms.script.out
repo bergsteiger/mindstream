@@ -4907,6 +4907,8 @@ IMMEDIATE VOID OPERATOR :: MACRO : method
  STRING OPERATOR :: VAR : l_Name
 ; // method
 IMMEDIATE VOID OPERATOR :: MACRO : new[
+ INTEGER OPERATOR :: VAR : l_InstanceSize
+; // new[
 IMMEDIATE VOID OPERATOR :: TYPE : Object
 ObjectClass OPERATOR :: MACRO :: readonly : Object:class
  ObjectClass OPERATOR :: MACRO :: readonly :: Object:class : Result
