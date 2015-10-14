@@ -572,6 +572,7 @@ MACRO class-end
  DefineInstanceSize
 
  g_CurrentClass := ''
+ //nil >>> g_CurrentClassImplWord
  g_InstanceSizeDefined := false
 ; // class-end
 
