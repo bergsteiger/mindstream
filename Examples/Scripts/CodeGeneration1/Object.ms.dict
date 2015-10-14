@@ -549,9 +549,7 @@ MACRO RunCompileProps&Methods
  ] Ctx:Parser:PushArray
 ; // RunCompileProps&Methods
 
-MACRO class-end
- axiom:PushSymbol RunCompileProps&Methods
-
+PROCEDURE DefineInstanceSize
  axiom:PushSymbol [EXECUTE]
  axiom:PushSymbol (
  g_CurrentClass ClassImplName Ctx:Parser:PushSymbol
@@ -560,6 +558,12 @@ MACRO class-end
  axiom:PushSymbol :=
  g_ClassFieldOffset Ctx:Parser:PushInt
  axiom:PushSymbol )
+; // DefineInstanceSize
+
+MACRO class-end
+ axiom:PushSymbol RunCompileProps&Methods
+
+ DefineInstanceSize
 
  g_CurrentClass := ''
 ; // class-end
