@@ -300,7 +300,10 @@ MACRO class
  g_ClassFieldOffset := 0
  g_InstanceSizeDefined := false
  aName |N >>> g_CurrentClass
- g_CurrentClass ClassImplName >>> g_CurrentClassImpl
+ STRING VAR l_CurrentClassImpl
+ g_CurrentClass ClassImplName >>> l_CurrentClassImpl
+
+ l_CurrentClassImpl >>> g_CurrentClassImpl
 
  STRING VAR l_ClassRefName
  g_CurrentClass ClassRefName >>> l_ClassRefName
