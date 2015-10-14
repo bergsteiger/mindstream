@@ -124,6 +124,8 @@ ClassOf Point VMTFieldOffset X .
 ClassOf Point VMTFieldOffset Y .
 
 ClassOf Rectangle VMTFieldOffset VMT .
+ClassOf Rectangle VMTFieldOffset TopLeft .
+ClassOf Rectangle VMTFieldOffset BottomRight .
 
 ClassOf Object .InstanceSize .
 ClassOf Point .InstanceSize .
