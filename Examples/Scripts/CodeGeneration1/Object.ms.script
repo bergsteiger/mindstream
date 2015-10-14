@@ -45,6 +45,21 @@ Test&Dump ObjectTest
  l_Obj1 .ClassName Print
  l_Obj1 .InstanceSize Print
 
+ class Object2
+  constructor new ( )
+   new[ ] >>> Result 
+  ; // new
+ class-end // Object2
+
+ Object2 VAR l_Obj2
+ l_Obj2 := Object2:new
+
+ l_Obj2 .Print
+ l_Obj2 .ClassName Print
+
+ l_Obj2 .ClassName Print
+ l_Obj2 .InstanceSize Print
+
 ; // ObjectTest
 
 ObjectTest
