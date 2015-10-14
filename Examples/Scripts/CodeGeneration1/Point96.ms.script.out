@@ -275,22 +275,6 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // INTEGER : ObjectClass:InstanceSize
  
- INTEGER CONST c:Bar:Offset:VMT
-  0
- INTEGER CONST c:Foo:Offset:VMT
-  0
- INTEGER CONST c:Point:Offset:VMT
-  0
- INTEGER CONST c:Point:Offset:X
-  1
- INTEGER CONST c:Point:Offset:Y
-  2
- INTEGER CONST c:Rectangle:Offset:BottomRight
-  2
- INTEGER CONST c:Rectangle:Offset:TopLeft
-  1
- INTEGER CONST c:Rectangle:Offset:VMT
-  0
  BarClass class_impl _:Bar
   %CLASS-METHODS %Class-Methods
   ; // %CLASS-METHODS %Class-Methods

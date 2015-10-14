@@ -124,10 +124,10 @@ INTEGER type FieldOffset
 VOID operator define_member
  STRING IN aName
  FieldOffset IN aOffset
- axiom:PushSymbol private
- axiom:PushSymbol Const
- aName true MakeFieldOffsetName Ctx:Parser:PushSymbol
- aOffset Ctx:Parser:PushInt
+// axiom:PushSymbol private
+// axiom:PushSymbol Const
+// aName true MakeFieldOffsetName Ctx:Parser:PushSymbol
+// aOffset Ctx:Parser:PushInt
 
  axiom:PushSymbol implementation
  g_CurrentClassImpl Ctx:Parser:PushSymbol
