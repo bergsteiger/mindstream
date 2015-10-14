@@ -365,7 +365,7 @@ MACRO class
 
 class Object
 
-FieldOffset member VMT
+ObjectClass member VMT
 
 MACRO readonly
   Literal IN aName
