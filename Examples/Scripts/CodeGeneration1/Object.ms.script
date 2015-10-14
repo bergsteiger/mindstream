@@ -61,6 +61,9 @@ Test&Dump ObjectTest
 
  l_Obj2 .ClassName Print
  l_Obj2 .InstanceSize Print
+
+ ClassOf Object2 VMTFieldOffset VMT .
+
  l_Obj2 .FakeField Print
 
 ; // ObjectTest
