@@ -16,17 +16,6 @@ VOID TestWithDump ObjectTest
  l_Obj
  Object:ClassName
  Print
- @
- l_Obj
- pop:Word:Info
- pop:WordInfo:ValueTypes
- Print
- @
- l_Obj
- pop:Word:Info
- pop:WordInfo:ValueTypes
- pop:ValueTypes:Name
- Print
  l_Obj
  Object:ClassName
  Print
@@ -75,8 +64,6 @@ ObjectClass class_impl _:Object
 
 _:Object
 Object
-Object
-TtfwValueTypes
 Object
 Object
 _:Object
