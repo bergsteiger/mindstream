@@ -575,9 +575,6 @@ MACRO class-end
 
  axiom:PushSymbol RunCompileProps&Methods
 
- g_CurrentClass := ''
- //nil >>> g_CurrentClassImplWord
- g_InstanceSizeDefined := false
 ; // class-end
 
 MACRO constructor
