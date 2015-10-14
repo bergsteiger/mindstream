@@ -451,12 +451,10 @@ MACRO VMTFieldOffset
 
  STRING VAR l_ClassName
  l_Class .ClassName >>> l_ClassName
- l_ClassName Msg
 
  STRING VAR l_FieldName
  aFieldName |N >>> l_FieldName
  l_FieldName false MakeFieldOffsetName >>> l_FieldName
- l_FieldName Msg
 
  axiom:PushSymbol ClassOf
  l_ClassName Ctx:Parser:PushSymbol
