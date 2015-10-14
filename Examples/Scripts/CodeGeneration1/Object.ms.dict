@@ -335,9 +335,18 @@ MACRO class
  ] Ctx:Parser:PushArray
 
   0 Ctx:Parser:PushInt
- [
-  ';'
 
+ axiom:PushSymbol ;
+
+ [
+  '[EXECUTE] ('
+  g_CurrentClassImpl
+  '>>>'
+  'g_CurrentClassImplWord'
+  ')'
+ ] Ctx:Parser:PushArray
+
+ [
   'array' 
   'type' 
   g_CurrentClass
@@ -346,11 +355,6 @@ MACRO class
   g_CurrentClass ClassOfName
   g_CurrentClassImpl
 
-  '[EXECUTE] ('
-  g_CurrentClassImpl
-  '>>>'
-  'g_CurrentClassImplWord'
-  ')'
  ] Ctx:Parser:PushArray
 
  if ( g_CurrentClass !== cObjectName ) then
