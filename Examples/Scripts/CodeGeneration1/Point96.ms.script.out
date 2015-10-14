@@ -253,6 +253,7 @@ VOID TestWithDump PointTest
   ARRAY [
    Self
    Object:ClassName
+   ' : '
    Result
   ]
   strings:Cat
@@ -474,6 +475,7 @@ VOID TestWithDump PointTest
   ARRAY [
    Self
    Object:ClassName
+   ' : '
    Result
   ]
   strings:Cat
@@ -1393,7 +1395,7 @@ RectangleClass class_impl _:Rectangle
 1
 ( X: 0, Y: 0 )
 ( X: 0, Y: 0 )
-Point[ TkwCompiledFunction 0 0 ]
+Point : [ TkwCompiledFunction 0 0 ]
 3
 3
 3
