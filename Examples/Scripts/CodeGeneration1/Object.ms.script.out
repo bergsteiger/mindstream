@@ -2,6 +2,13 @@
 0
 0
 VOID TestWithDump ObjectTest
+ IMMEDIATE VOID MACRO .class
+  ^@ IN Self
+  Self
+  'class'
+  ExpandMethodName
+ ; // IMMEDIATE VOID MACRO .class
+ 
  Object1Class class_impl _:Object1
   %CLASS-METHODS %Class-Methods
   ; // %CLASS-METHODS %Class-Methods
@@ -46,6 +53,7 @@ VOID TestWithDump ObjectTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
   ; // %PROPERTIES %Props
   
   INTEGER CONST c:Offset:FakeField
@@ -102,6 +110,7 @@ VOID TestWithDump ObjectTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
   ; // %PROPERTIES %Props
   
   INTEGER CONST c:Offset:FakeField
@@ -216,17 +225,17 @@ VOID TestWithDump ObjectTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Object2
  
- ObjectClass readonly Object:class
-  Object IN Self
+ REDIFINITION INTEGER readonly Object2:class
+  Object2 IN Self
   Self
   FieldByOffset
   ^@ (
-   _:Object _:Object pop:Word:SetValue ::
-   'c:Offset:VMT'
+   _:Object2 _:Object2 pop:Word:SetValue ::
+   'c:Offset:FakeField'
   )
   Result
   pop:Word:SetValue
- ; // ObjectClass readonly Object:class
+ ; // REDIFINITION INTEGER readonly Object2:class
  
  STRING method Object:ClassName
   Object IN Self
