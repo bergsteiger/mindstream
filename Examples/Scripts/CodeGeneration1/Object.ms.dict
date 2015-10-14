@@ -605,6 +605,8 @@ MACRO new[
  axiom:PushSymbol [
  axiom:PushSymbol @
  g_CurrentClassImplWord pop:Word:Name Ctx:Parser:PushSymbol
+ 
+ l_InstanceSize LOOP ( 'uninited member' Ctx:Parser:PushString )
 ; // new[
 
 MACRO get-member
