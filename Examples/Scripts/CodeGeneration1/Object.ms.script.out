@@ -2,12 +2,12 @@
 0
 0
 VOID TestWithDump ObjectTest
- IMMEDIATE VOID MACRO .class
+ IMMEDIATE VOID MACRO .FakeField
   ^@ IN Self
   Self
-  'class'
+  'FakeField'
   ExpandMethodName
- ; // IMMEDIATE VOID MACRO .class
+ ; // IMMEDIATE VOID MACRO .FakeField
  
  Object1Class class_impl _:Object1
   %CLASS-METHODS %Class-Methods
@@ -53,7 +53,7 @@ VOID TestWithDump ObjectTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
-   'class'
+   'FakeField'
   ; // %PROPERTIES %Props
   
   INTEGER CONST c:Offset:FakeField
@@ -110,7 +110,7 @@ VOID TestWithDump ObjectTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
-   'class'
+   'FakeField'
   ; // %PROPERTIES %Props
   
   INTEGER CONST c:Offset:FakeField
@@ -225,17 +225,17 @@ VOID TestWithDump ObjectTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Object2
  
- REDIFINITION INTEGER readonly Object2:class
-  Object2 IN Self
+ ObjectClass readonly Object:class
+  Object IN Self
   Self
   FieldByOffset
   ^@ (
-   _:Object2 _:Object2 pop:Word:SetValue ::
-   'c:Offset:FakeField'
+   _:Object _:Object pop:Word:SetValue ::
+   'c:Offset:VMT'
   )
   Result
   pop:Word:SetValue
- ; // REDIFINITION INTEGER readonly Object2:class
+ ; // ObjectClass readonly Object:class
  
  STRING method Object:ClassName
   Object IN Self
@@ -245,6 +245,18 @@ VOID TestWithDump ObjectTest
   Result
   pop:Word:SetValue
  ; // STRING method Object:ClassName
+ 
+ INTEGER readonly Object2:FakeField
+  Object2 IN Self
+  Self
+  FieldByOffset
+  ^@ (
+   _:Object2 _:Object2 pop:Word:SetValue ::
+   'c:Offset:FakeField'
+  )
+  Result
+  pop:Word:SetValue
+ ; // INTEGER readonly Object2:FakeField
  
  INTEGER method Object:InstanceSize
   Object IN Self

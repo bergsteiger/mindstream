@@ -47,7 +47,7 @@ Test&Dump ObjectTest
 
  class Object2
   INTEGER member FakeField
-  INTEGER readonly class read FakeField
+  INTEGER readonly FakeField read FakeField
   constructor new ( )
    new[ 256 ] >>> Result 
   ; // new
