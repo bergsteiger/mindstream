@@ -48,6 +48,8 @@ VOID TestWithDump ObjectTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
+  INTEGER CONST c:Offset:FakeField
+   1
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -102,6 +104,8 @@ VOID TestWithDump ObjectTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
+  INTEGER CONST c:Offset:FakeField
+   1
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -246,6 +250,7 @@ VOID TestWithDump ObjectTest
   ARRAY [
    @
    _:Object2
+   256
   ]
   Result
   pop:Word:SetValue
@@ -402,7 +407,7 @@ Object1 : [ TkwCompiledFunction ]
 Object1
 Object1
 1
-Object2 : [ TkwCompiledFunction ]
+Object2 : [ TkwCompiledFunction 256 ]
 Object2
 Object2
-1
+2

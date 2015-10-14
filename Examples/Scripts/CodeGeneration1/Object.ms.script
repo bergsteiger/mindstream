@@ -46,8 +46,9 @@ Test&Dump ObjectTest
  l_Obj1 .InstanceSize Print
 
  class Object2
+  INTEGER member FakeField
   constructor new ( )
-   new[ ] >>> Result 
+   new[ 256 ] >>> Result 
   ; // new
  class-end // Object2
 
