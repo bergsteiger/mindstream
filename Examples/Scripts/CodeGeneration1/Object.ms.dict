@@ -570,14 +570,6 @@ PROCEDURE DefineInstanceSize
  if ( g_InstanceSizeDefined ! ) then
  begin
   DoDefineInstanceSize
-  axiom:PushSymbol [EXECUTE]
-  axiom:PushSymbol (
-  g_CurrentClass ClassImplName Ctx:Parser:PushSymbol
-  axiom:PushSymbol ::
-  InstanceSizeName Ctx:Parser:PushSymbol
-  axiom:PushSymbol :=
-  g_ClassFieldOffset Ctx:Parser:PushInt
-  axiom:PushSymbol )
  end // g_InstanceSizeDefined !
 ; // DefineInstanceSize
 
