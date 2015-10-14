@@ -103,6 +103,7 @@ MACRO class_impl
 
 STRING CompileTime-VAR g_CurrentClass ''
 STRING CompileTime-VAR g_CurrentClassImpl ''
+TtfwWord CompileTime-VAR g_CurrentClassImplWord nil
 
 CONST cFieldPrefix 'c:Offset:'
 
@@ -343,6 +344,12 @@ MACRO class
   'WordAlias'
   g_CurrentClass ClassOfName
   g_CurrentClassImpl
+
+  '[EXECUTE] ('
+  g_CurrentClassImpl
+  '>>>'
+  'g_CurrentClassImplWord'
+  ')'
  ] Ctx:Parser:PushArray
 
  if ( g_CurrentClass !== cObjectName ) then
@@ -582,6 +589,13 @@ MACRO constructor
 ; // constructor
 
 MACRO new[
+ g_CurrentClass Msg
+ g_CurrentClassImpl Msg
+ g_CurrentClassImplWord pop:Word:Name Msg
+ g_CurrentClassImplWord %% 'c:Offset:Instance:Size' Msg
+ //g_CurrentClassImpl %% 'c:Instance:Size' Msg
+ //g_CurrentClass ClassOfName Msg
+ //%% 'c:Instance:Size' Msg
  axiom:PushSymbol [
  axiom:PushSymbol @
  g_CurrentClassImpl Ctx:Parser:PushSymbol
