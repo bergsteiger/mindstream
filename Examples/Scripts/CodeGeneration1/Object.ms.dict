@@ -554,11 +554,22 @@ MACRO RunCompileProps&Methods
  ] Ctx:Parser:PushArray
 ; // RunCompileProps&Methods
 
-PROCEDURE DefineInstanceSize
+PROCEDURE DoDefineInstanceSize
  %SUMMARY 'ќпредел€ем размер экземпл€ров класса' ;
  if ( g_InstanceSizeDefined ! ) then
  begin
   g_InstanceSizeDefined := true
+  g_CurrentClassImplWord %% InstanceSizeName DO Msg
+  g_ClassFieldOffset g_CurrentClassImplWord %% InstanceSizeName pop:Word:SetValue
+  g_CurrentClassImplWord %% InstanceSizeName DO Msg
+ end // g_InstanceSizeDefined !
+; // DoDefineInstanceSize
+
+PROCEDURE DefineInstanceSize
+ %SUMMARY 'ќпредел€ем размер экземпл€ров класса' ;
+ if ( g_InstanceSizeDefined ! ) then
+ begin
+  DoDefineInstanceSize
   axiom:PushSymbol [EXECUTE]
   axiom:PushSymbol (
   g_CurrentClass ClassImplName Ctx:Parser:PushSymbol

@@ -4850,6 +4850,10 @@ IMMEDIATE VOID OPERATOR :: MACRO : DefineInstanceSizeRunner
  Documentation:
   Компилирем код, который определяет размер экземпляров класса
 ; // DefineInstanceSizeRunner
+VOID OPERATOR :: PROCEDURE : DoDefineInstanceSize
+ Documentation:
+  Определяем размер экземпляров класса
+; // DoDefineInstanceSize
 PRIVATE OPERATOR : do-get-member
  Documentation:
   Определяет способ доступа к члену класса
