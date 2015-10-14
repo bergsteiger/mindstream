@@ -128,7 +128,7 @@ VOID operator define_member
  FieldOffset IN aOffset
 
  axiom:PushSymbol implementation
- g_CurrentClassImpl Ctx:Parser:PushSymbol
+ g_CurrentClassImplWord pop:Word:Name Ctx:Parser:PushSymbol
  axiom:PushSymbol Const
  aName MakeFieldOffsetName Ctx:Parser:PushSymbol
  aOffset Ctx:Parser:PushInt
