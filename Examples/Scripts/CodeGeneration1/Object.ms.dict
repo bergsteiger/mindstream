@@ -103,6 +103,7 @@ MACRO class_impl
 
 STRING CompileTime-VAR g_CurrentClass ''
 STRING CompileTime-VAR g_CurrentClassImpl ''
+BOOLEAN CompileTime-VAR g_InstanceSizeDefined false
 
 TtfwWord type ObjectClass
 
@@ -294,6 +295,7 @@ MACRO class
  g_CurrentMetaClassMethods := [ ]
  g_CurrentClassConstructors := [ ]
  g_ClassFieldOffset := 0
+ g_InstanceSizeDefined := false
  aName |N >>> g_CurrentClass
  g_CurrentClass ClassImplName >>> g_CurrentClassImpl
 
@@ -550,6 +552,7 @@ MACRO RunCompileProps&Methods
 ; // RunCompileProps&Methods
 
 PROCEDURE DefineInstanceSize
+ g_InstanceSizeDefined := true
  axiom:PushSymbol [EXECUTE]
  axiom:PushSymbol (
  g_CurrentClass ClassImplName Ctx:Parser:PushSymbol
