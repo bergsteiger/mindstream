@@ -478,6 +478,8 @@ MACRO classExpander
 
    aMember DO >>> g_ClassFieldOffset
 
+   g_ClassFieldOffset Msg
+
    if ( l_ClassFieldOffset < g_ClassFieldOffset ) then
    begin
     g_ClassFieldOffset >>> l_ClassFieldOffset
@@ -487,7 +489,8 @@ MACRO classExpander
    
   )
 
-  //l_ClassFieldOffset >>> g_ClassFieldOffset
+  l_ClassFieldOffset >>> g_ClassFieldOffset
+  l_ClassFieldOffset Msg
   //Inc g_ClassFieldOffset
 
   anItem %Props .for> ( 
