@@ -477,10 +477,18 @@ MACRO classExpander
    axiom:PushSymbol member
 
    aMember DO >>> g_ClassFieldOffset
+
+   if ( l_ClassFieldOffset < g_ClassFieldOffset ) then
+   begin
+    g_ClassFieldOffset >>> l_ClassFieldOffset
+   end
+
    [ aMember pop:Word:Name [ cFieldPrefix cFieldOffset ] strings:Cat '' string:ReplaceFirst ] strings:Cat Ctx:Parser:PushSymbol
-   //aMember DO Ctx:Parser:PushInt
    
   )
+
+  //l_ClassFieldOffset >>> g_ClassFieldOffset
+  //Inc g_ClassFieldOffset
 
   anItem %Props .for> ( 
    IN aProp
