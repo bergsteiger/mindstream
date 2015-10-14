@@ -69,10 +69,6 @@ VOID TestWithDump PointTest
   %CONSTRUCTORS %Constructors
   ; // %CONSTRUCTORS %Constructors
   
-  %FIELDS %Flds
-   'VMT'
-  ; // %FIELDS %Flds
-  
   %INHERITS %G
    @
    _:Object
@@ -98,10 +94,6 @@ VOID TestWithDump PointTest
   
   %CONSTRUCTORS %Constructors
   ; // %CONSTRUCTORS %Constructors
-  
-  %FIELDS %Flds
-   'VMT'
-  ; // %FIELDS %Flds
   
   %INHERITS %G
    @
@@ -132,12 +124,6 @@ VOID TestWithDump PointTest
    'XY'
    'OF'
   ; // %CONSTRUCTORS %Constructors
-  
-  %FIELDS %Flds
-   'VMT'
-   'X'
-   'Y'
-  ; // %FIELDS %Flds
   
   %INHERITS %G
    @
@@ -176,12 +162,6 @@ VOID TestWithDump PointTest
   %CONSTRUCTORS %Constructors
    ':'
   ; // %CONSTRUCTORS %Constructors
-  
-  %FIELDS %Flds
-   'VMT'
-   'TopLeft'
-   'BottomRight'
-  ; // %FIELDS %Flds
   
   %INHERITS %G
    @
@@ -318,10 +298,6 @@ VOID TestWithDump PointTest
   %CONSTRUCTORS %Constructors
   ; // %CONSTRUCTORS %Constructors
   
-  %FIELDS %Flds
-   'VMT'
-  ; // %FIELDS %Flds
-  
   %INHERITS %G
    @
    _:Object
@@ -347,10 +323,6 @@ VOID TestWithDump PointTest
   
   %CONSTRUCTORS %Constructors
   ; // %CONSTRUCTORS %Constructors
-  
-  %FIELDS %Flds
-   'VMT'
-  ; // %FIELDS %Flds
   
   %INHERITS %G
    @
@@ -381,12 +353,6 @@ VOID TestWithDump PointTest
    'XY'
    'OF'
   ; // %CONSTRUCTORS %Constructors
-  
-  %FIELDS %Flds
-   'VMT'
-   'X'
-   'Y'
-  ; // %FIELDS %Flds
   
   %INHERITS %G
    @
@@ -425,12 +391,6 @@ VOID TestWithDump PointTest
   %CONSTRUCTORS %Constructors
    ':'
   ; // %CONSTRUCTORS %Constructors
-  
-  %FIELDS %Flds
-   'VMT'
-   'TopLeft'
-   'BottomRight'
-  ; // %FIELDS %Flds
   
   %INHERITS %G
    @
@@ -1318,10 +1278,6 @@ ObjectClass class_impl _:Object
   'new'
  ; // %CONSTRUCTORS %Constructors
  
- %FIELDS %Flds
-  'VMT'
- ; // %FIELDS %Flds
- 
  %METHODS %Methods
   'ClassName'
   'InstanceSize'
@@ -1351,12 +1307,6 @@ PointClass class_impl _:Point
   'XY'
   'OF'
  ; // %CONSTRUCTORS %Constructors
- 
- %FIELDS %Flds
-  'VMT'
-  'X'
-  'Y'
- ; // %FIELDS %Flds
  
  %INHERITS %G
   @
@@ -1395,12 +1345,6 @@ RectangleClass class_impl _:Rectangle
  %CONSTRUCTORS %Constructors
   ':'
  ; // %CONSTRUCTORS %Constructors
- 
- %FIELDS %Flds
-  'VMT'
-  'TopLeft'
-  'BottomRight'
- ; // %FIELDS %Flds
  
  %INHERITS %G
   @

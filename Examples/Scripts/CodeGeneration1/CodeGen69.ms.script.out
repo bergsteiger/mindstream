@@ -4713,13 +4713,6 @@ ARRAY FUNCTION : %Constructors
  ARRAY FUNCTION :: %Constructors : Result
 ; // %Constructors
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CONSTRUCTORS
-IMMEDIATE VOID OPERATOR :: NamedWordProducer : %FIELDS
-ARRAY FUNCTION : %Flds
- OPERATOR :: IN : %S
- Documentation:
-  Возвращает итератор полей класса
- ARRAY FUNCTION :: %Flds : Result
-; // %Flds
 ARRAY OPERATOR :: MACRO :: word_func : %G
  Documentation:
   Возвращает итератор элементов от которого наследуется наш элемент
@@ -4774,7 +4767,6 @@ IMMEDIATE VOID OPERATOR :: MACRO : .ToPrintable
 ObjectClass OPERATOR :: MACRO :: class_impl : _:Object
  OPERATOR :: NamedWordProducer :: %CLASS-METHODS : %Class-Methods
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
- OPERATOR :: NamedWordProducer :: %FIELDS : %Flds
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
  OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
  INTEGER CONST : c::Offset:VMT
@@ -4823,7 +4815,6 @@ IMMEDIATE VOID OPERATOR :: MACRO : ClassOf
 ObjectClass OPERATOR :: MACRO :: class_impl : ClassOf::Object
  OPERATOR :: NamedWordProducer :: %CLASS-METHODS : %Class-Methods
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
- OPERATOR :: NamedWordProducer :: %FIELDS : %Flds
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
  OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
  INTEGER CONST : c::Offset:VMT
