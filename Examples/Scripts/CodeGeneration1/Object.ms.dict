@@ -481,7 +481,7 @@ MACRO classExpander
    g_CurrentClass Ctx:Parser:PushSymbol
 
    axiom:PushSymbol CONST
-   aMember pop:Word:Name Ctx:Parser:PushSymbol
+   [ 'xx' aMember pop:Word:Name 'c::Offset:' '' string:ReplaceFirst ] strings:Cat Ctx:Parser:PushSymbol
    aMember DO Ctx:Parser:PushInt
    
    axiom:PushSymbol end.
