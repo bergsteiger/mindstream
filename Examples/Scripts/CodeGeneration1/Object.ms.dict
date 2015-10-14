@@ -480,10 +480,9 @@ MACRO classExpander
    axiom:PushSymbol implementation
    g_CurrentClass Ctx:Parser:PushSymbol
 
-   axiom:PushSymbol :
+   axiom:PushSymbol CONST
    aMember pop:Word:Name Ctx:Parser:PushSymbol
    aMember DO Ctx:Parser:PushInt
-   axiom:PushSymbol ;
    
    axiom:PushSymbol end.
   )
