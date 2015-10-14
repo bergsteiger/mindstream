@@ -1023,6 +1023,8 @@ VOID TestWithDump PointTest
  .
  c:Rectangle:Offset:VMT
  .
+ _:Object
+ .
  _:Object _:Object pop:Word:SetValue ::
  'c::Offset:VMT'
  .
@@ -1417,6 +1419,7 @@ RectangleClass class_impl _:Rectangle
 0
 0
 0
+TkwCompiledFunction
 0
 0
 0
