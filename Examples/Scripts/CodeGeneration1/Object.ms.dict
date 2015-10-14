@@ -102,7 +102,6 @@ MACRO class_impl
 ; // class_impl
 
 STRING CompileTime-VAR g_CurrentClass ''
-STRING CompileTime-VAR g_CurrentClassImpl ''
 BOOLEAN CompileTime-VAR g_InstanceSizeDefined false
 
 TtfwWord type ObjectClass
@@ -302,8 +301,6 @@ MACRO class
  aName |N >>> g_CurrentClass
  STRING VAR l_CurrentClassImpl
  g_CurrentClass ClassImplName >>> l_CurrentClassImpl
-
- l_CurrentClassImpl >>> g_CurrentClassImpl
 
  STRING VAR l_ClassRefName
  g_CurrentClass ClassRefName >>> l_ClassRefName
