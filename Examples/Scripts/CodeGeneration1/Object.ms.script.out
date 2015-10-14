@@ -382,6 +382,8 @@ VOID TestWithDump ObjectTest
  l_Obj2
  Object:ClassName
  Print
+ '--------'
+ Print
  l_Obj2
  Object:InstanceSize
  Print
@@ -437,6 +439,7 @@ Object1
 Object2 : [ TkwCompiledFunction 256 ]
 Object2
 Object2
+--------
 2
 0
 1
