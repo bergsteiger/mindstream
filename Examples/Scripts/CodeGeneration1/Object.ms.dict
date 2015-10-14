@@ -347,9 +347,7 @@ MACRO class
   '>>>'
   'g_CurrentClassImplWord'
   ')'
- ] Ctx:Parser:PushArray
-
- [
+  
   'array' 
   'type' 
   g_CurrentClass
