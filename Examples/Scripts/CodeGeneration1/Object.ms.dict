@@ -479,6 +479,7 @@ MACRO classExpander
    aMember DO >>> g_ClassFieldOffset
 
    if ( l_ClassFieldOffset < g_ClassFieldOffset ) then
+   // - тут исправляем "кривизну" с сортировкой
    begin
     g_ClassFieldOffset >>> l_ClassFieldOffset
    end
@@ -489,6 +490,7 @@ MACRO classExpander
 
   l_ClassFieldOffset >>> g_ClassFieldOffset
   //Inc g_ClassFieldOffset
+  // - это тут не надо
 
   anItem %Props .for> ( 
    IN aProp
