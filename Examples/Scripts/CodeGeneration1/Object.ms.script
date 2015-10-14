@@ -31,7 +31,8 @@ Test&Dump ObjectTest
 
  class Object1
   constructor new ( )
-   new[ ] >>> Result
+//   Object:new >>> Result
+   new[ ] >>> Result 
   ; // new
  class-end // Object1
 
