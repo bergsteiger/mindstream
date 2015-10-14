@@ -1029,6 +1029,12 @@ VOID TestWithDump PointTest
  _:Point _:Point pop:Word:SetValue ::
  'c::Offset:VMT'
  .
+ _:Point _:Point pop:Word:SetValue ::
+ 'c::Offset:X'
+ .
+ _:Point _:Point pop:Word:SetValue ::
+ 'c::Offset:Y'
+ .
  _:Rectangle _:Rectangle pop:Word:SetValue ::
  'c::Offset:VMT'
  .
@@ -1419,6 +1425,8 @@ RectangleClass class_impl _:Rectangle
 0
 0
 0
+1
+2
 0
 1
 3
