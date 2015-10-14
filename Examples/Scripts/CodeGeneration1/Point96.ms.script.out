@@ -80,9 +80,9 @@ VOID TestWithDump PointTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c::Offset:VMT
+  VAR c:Offset:Instance:Size
+  INTEGER CONST c:Offset:VMT
    0
-  VAR c:Instance:Size
   _:Bar
   Result
   pop:Word:SetValue
@@ -106,9 +106,9 @@ VOID TestWithDump PointTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c::Offset:VMT
+  VAR c:Offset:Instance:Size
+  INTEGER CONST c:Offset:VMT
    0
-  VAR c:Instance:Size
   _:Foo
   Result
   pop:Word:SetValue
@@ -143,13 +143,13 @@ VOID TestWithDump PointTest
    'Y'
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c::Offset:VMT
+  VAR c:Offset:Instance:Size
+  INTEGER CONST c:Offset:VMT
    0
-  INTEGER CONST c::Offset:X
+  INTEGER CONST c:Offset:X
    1
-  INTEGER CONST c::Offset:Y
+  INTEGER CONST c:Offset:Y
    2
-  VAR c:Instance:Size
   _:Point
   Result
   pop:Word:SetValue
@@ -178,13 +178,13 @@ VOID TestWithDump PointTest
    'BottomRight'
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c::Offset:BottomRight
+  INTEGER CONST c:Offset:BottomRight
    2
-  INTEGER CONST c::Offset:TopLeft
+  VAR c:Offset:Instance:Size
+  INTEGER CONST c:Offset:TopLeft
    1
-  INTEGER CONST c::Offset:VMT
+  INTEGER CONST c:Offset:VMT
    0
-  VAR c:Instance:Size
   _:Rectangle
   Result
   pop:Word:SetValue
@@ -201,7 +201,7 @@ VOID TestWithDump PointTest
   FieldByOffset
   ^@ (
    _:Object _:Object pop:Word:SetValue ::
-   'c::Offset:VMT'
+   'c:Offset:VMT'
   )
   Result
   pop:Word:SetValue
@@ -293,9 +293,9 @@ VOID TestWithDump PointTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c::Offset:VMT
+  VAR c:Offset:Instance:Size
+  INTEGER CONST c:Offset:VMT
    0
-  VAR c:Instance:Size
   _:Bar
   Result
   pop:Word:SetValue
@@ -319,9 +319,9 @@ VOID TestWithDump PointTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c::Offset:VMT
+  VAR c:Offset:Instance:Size
+  INTEGER CONST c:Offset:VMT
    0
-  VAR c:Instance:Size
   _:Foo
   Result
   pop:Word:SetValue
@@ -356,13 +356,13 @@ VOID TestWithDump PointTest
    'Y'
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c::Offset:VMT
+  VAR c:Offset:Instance:Size
+  INTEGER CONST c:Offset:VMT
    0
-  INTEGER CONST c::Offset:X
+  INTEGER CONST c:Offset:X
    1
-  INTEGER CONST c::Offset:Y
+  INTEGER CONST c:Offset:Y
    2
-  VAR c:Instance:Size
   _:Point
   Result
   pop:Word:SetValue
@@ -391,13 +391,13 @@ VOID TestWithDump PointTest
    'BottomRight'
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c::Offset:BottomRight
+  INTEGER CONST c:Offset:BottomRight
    2
-  INTEGER CONST c::Offset:TopLeft
+  VAR c:Offset:Instance:Size
+  INTEGER CONST c:Offset:TopLeft
    1
-  INTEGER CONST c::Offset:VMT
+  INTEGER CONST c:Offset:VMT
    0
-  VAR c:Instance:Size
   _:Rectangle
   Result
   pop:Word:SetValue
@@ -414,7 +414,7 @@ VOID TestWithDump PointTest
   FieldByOffset
   ^@ (
    _:Object _:Object pop:Word:SetValue ::
-   'c::Offset:VMT'
+   'c:Offset:VMT'
   )
   Result
   pop:Word:SetValue
@@ -620,7 +620,7 @@ VOID TestWithDump PointTest
   FieldByOffset
   ^@ (
    _:Object _:Object pop:Word:SetValue ::
-   'c::Offset:VMT'
+   'c:Offset:VMT'
   )
   Result
   pop:Word:SetValue
@@ -727,7 +727,7 @@ VOID TestWithDump PointTest
   FieldByOffset
   ^@ (
    _:Point _:Point pop:Word:SetValue ::
-   'c::Offset:X'
+   'c:Offset:X'
   )
   Result
   pop:Word:SetValue
@@ -770,7 +770,7 @@ VOID TestWithDump PointTest
   FieldByOffset
   ^@ (
    _:Point _:Point pop:Word:SetValue ::
-   'c::Offset:Y'
+   'c:Offset:Y'
   )
   Result
   pop:Word:SetValue
@@ -844,7 +844,7 @@ VOID TestWithDump PointTest
   FieldByOffset
   ^@ (
    _:Rectangle _:Rectangle pop:Word:SetValue ::
-   'c::Offset:BottomRight'
+   'c:Offset:BottomRight'
   )
   Result
   pop:Word:SetValue
@@ -856,7 +856,7 @@ VOID TestWithDump PointTest
   FieldByOffset
   ^@ (
    _:Object _:Object pop:Word:SetValue ::
-   'c::Offset:VMT'
+   'c:Offset:VMT'
   )
   Result
   pop:Word:SetValue
@@ -902,7 +902,7 @@ VOID TestWithDump PointTest
   FieldByOffset
   ^@ (
    _:Rectangle _:Rectangle pop:Word:SetValue ::
-   'c::Offset:TopLeft'
+   'c:Offset:TopLeft'
   )
   Result
   pop:Word:SetValue
@@ -962,34 +962,34 @@ VOID TestWithDump PointTest
  _:Rectangle
  DumpElement
  _:Object _:Object pop:Word:SetValue ::
- 'c::Offset:VMT'
+ 'c:Offset:VMT'
  .
  _:Point _:Point pop:Word:SetValue ::
- 'c::Offset:VMT'
+ 'c:Offset:VMT'
  .
  _:Rectangle _:Rectangle pop:Word:SetValue ::
- 'c::Offset:VMT'
+ 'c:Offset:VMT'
  .
  _:Object _:Object pop:Word:SetValue ::
- 'c::Offset:VMT'
+ 'c:Offset:VMT'
  .
  _:Point _:Point pop:Word:SetValue ::
- 'c::Offset:VMT'
+ 'c:Offset:VMT'
  .
  _:Point _:Point pop:Word:SetValue ::
- 'c::Offset:X'
+ 'c:Offset:X'
  .
  _:Point _:Point pop:Word:SetValue ::
- 'c::Offset:Y'
+ 'c:Offset:Y'
  .
  _:Rectangle _:Rectangle pop:Word:SetValue ::
- 'c::Offset:VMT'
+ 'c:Offset:VMT'
  .
  _:Rectangle _:Rectangle pop:Word:SetValue ::
- 'c::Offset:TopLeft'
+ 'c:Offset:TopLeft'
  .
  _:Rectangle _:Rectangle pop:Word:SetValue ::
- 'c::Offset:BottomRight'
+ 'c:Offset:BottomRight'
  .
  _:Object
  ObjectClass:InstanceSize
@@ -1273,9 +1273,9 @@ ObjectClass class_impl _:Object
   'class'
  ; // %PROPERTIES %Props
  
- INTEGER CONST c::Offset:VMT
+ VAR c:Offset:Instance:Size
+ INTEGER CONST c:Offset:VMT
   0
- VAR c:Instance:Size
  _:Object
  Result
  pop:Word:SetValue
@@ -1310,13 +1310,13 @@ PointClass class_impl _:Point
   'Y'
  ; // %PROPERTIES %Props
  
- INTEGER CONST c::Offset:VMT
+ VAR c:Offset:Instance:Size
+ INTEGER CONST c:Offset:VMT
   0
- INTEGER CONST c::Offset:X
+ INTEGER CONST c:Offset:X
   1
- INTEGER CONST c::Offset:Y
+ INTEGER CONST c:Offset:Y
   2
- VAR c:Instance:Size
  _:Point
  Result
  pop:Word:SetValue
@@ -1345,13 +1345,13 @@ RectangleClass class_impl _:Rectangle
   'BottomRight'
  ; // %PROPERTIES %Props
  
- INTEGER CONST c::Offset:BottomRight
+ INTEGER CONST c:Offset:BottomRight
   2
- INTEGER CONST c::Offset:TopLeft
+ VAR c:Offset:Instance:Size
+ INTEGER CONST c:Offset:TopLeft
   1
- INTEGER CONST c::Offset:VMT
+ INTEGER CONST c:Offset:VMT
   0
- VAR c:Instance:Size
  _:Rectangle
  Result
  pop:Word:SetValue

@@ -104,15 +104,13 @@ MACRO class_impl
 STRING CompileTime-VAR g_CurrentClass ''
 STRING CompileTime-VAR g_CurrentClassImpl ''
 
-CONST cFieldPrefix 'c:'
-CONST cFieldOffset ':Offset:'
+CONST cFieldPrefix 'c:Offset:'
 
 PRIVATE STRING operator MakeFieldOffsetName
   STRING IN aName
 
  %SUMMARY 'Делает имя для доступа к полю' ; 
  [ cFieldPrefix 
-   cFieldOffset
    aName 
  ] strings:Cat >>> Result
 ; // MakeFieldOffsetName
@@ -479,7 +477,7 @@ MACRO classExpander
     g_ClassFieldOffset >>> l_ClassFieldOffset
    end
 
-   [ aMember pop:Word:Name [ cFieldPrefix cFieldOffset ] strings:Cat '' string:ReplaceFirst ] strings:Cat Ctx:Parser:PushSymbol
+   [ aMember pop:Word:Name [ cFieldPrefix ] strings:Cat '' string:ReplaceFirst ] strings:Cat Ctx:Parser:PushSymbol
    
   )
 
