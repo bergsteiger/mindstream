@@ -167,7 +167,15 @@ VOID TestWithDump ObjectTest
  VIRTUAL STRING method Object:ToPrintable
   Object IN Self
   Self
-  Object:ClassName
+  ToPrintable
+  Result
+  pop:Word:SetValue
+  ARRAY [
+   Self
+   Object:ClassName
+   Result
+  ]
+  strings:Cat
   Result
   pop:Word:SetValue
  ; // VIRTUAL STRING method Object:ToPrintable
@@ -252,7 +260,15 @@ VOID TestWithDump ObjectTest
  VIRTUAL STRING method Object:ToPrintable
   Object IN Self
   Self
-  Object:ClassName
+  ToPrintable
+  Result
+  pop:Word:SetValue
+  ARRAY [
+   Self
+   Object:ClassName
+   Result
+  ]
+  strings:Cat
   Result
   pop:Word:SetValue
  ; // VIRTUAL STRING method Object:ToPrintable
@@ -373,18 +389,18 @@ ObjectClass class_impl _:Object
 ; // ObjectClass class_impl _:Object
 
 _:Object
-Object
+Object[ TkwCompiledFunction ]
 Object
 Object
 _:Object
 1
 _:Object
 _:Object
-Object1
+Object1[ TkwCompiledFunction ]
 Object1
 Object1
 1
-Object2
+Object2[ TkwCompiledFunction ]
 Object2
 Object2
 1

@@ -622,8 +622,9 @@ constructor new ( )
 ; // new
 
 VIRTUAL STRING method ToPrintable
- //Self ToPrintable >>> Result
- Self .ClassName >>> Result
+ Self ToPrintable >>> Result
+ [ Self .ClassName Result ] strings:Cat >>> Result
+ //Self .ClassName >>> Result
 ; // ToPrintable
 
 VIRTUAL void method Print
