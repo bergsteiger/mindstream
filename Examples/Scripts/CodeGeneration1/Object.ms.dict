@@ -601,7 +601,7 @@ MACRO new[
  g_CurrentClassImplWord %% InstanceSizeName DO .
  axiom:PushSymbol [
  axiom:PushSymbol @
- g_CurrentClassImpl Ctx:Parser:PushSymbol
+ g_CurrentClassImplWord pop:Word:Name Ctx:Parser:PushSymbol
 ; // new[
 
 MACRO get-member
