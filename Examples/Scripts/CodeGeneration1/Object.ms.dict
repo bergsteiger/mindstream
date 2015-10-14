@@ -592,7 +592,7 @@ MACRO new[
  g_CurrentClass Msg
  g_CurrentClassImpl Msg
  g_CurrentClassImplWord pop:Word:Name Msg
- g_CurrentClassImplWord %% 'c:Offset:Instance:Size' Msg
+ g_CurrentClassImplWord %% 'c:Offset:Instance:Size' DO Msg
  //g_CurrentClassImpl %% 'c:Instance:Size' Msg
  //g_CurrentClass ClassOfName Msg
  //%% 'c:Instance:Size' Msg
