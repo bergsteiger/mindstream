@@ -29,6 +29,9 @@ Test&Dump ObjectTest
  ClassOf Object pop:Word:Name Print
  ClassOf Object pop:Word:Name Print
 
+ class Object1
+ class-end // Object1
+
  Object VAR l_Obj1
  l_Obj1 := Object:new
 

@@ -1,7 +1,144 @@
 1
 VOID TestWithDump ObjectTest
+ Object1Class class_impl _:Object1
+  %CLASS-METHODS %Class-Methods
+  ; // %CLASS-METHODS %Class-Methods
+  
+  %CONSTRUCTORS %Constructors
+  ; // %CONSTRUCTORS %Constructors
+  
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+  ; // %PROPERTIES %Props
+  
+  FieldOffset STATIC-VAR c:Offset:Instance:Size
+  INTEGER CONST c:Offset:VMT
+   0
+  _:Object1
+  Result
+  pop:Word:SetValue
+ ; // Object1Class class_impl _:Object1
+ 
+ Object1Class class_impl _:Object1
+  %CLASS-METHODS %Class-Methods
+  ; // %CLASS-METHODS %Class-Methods
+  
+  %CONSTRUCTORS %Constructors
+  ; // %CONSTRUCTORS %Constructors
+  
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+  ; // %PROPERTIES %Props
+  
+  FieldOffset STATIC-VAR c:Offset:Instance:Size
+  INTEGER CONST c:Offset:VMT
+   0
+  _:Object1
+  Result
+  pop:Word:SetValue
+ ; // Object1Class class_impl _:Object1
+ 
  Object VAR l_Obj
  Object VAR l_Obj1
+ IMMEDIATE VOID TYPE Object1
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE Object1
+ 
+ ObjectClass readonly Object:class
+  Object IN Self
+  Self
+  FieldByOffset
+  ^@ (
+   _:Object _:Object pop:Word:SetValue ::
+   'c:Offset:VMT'
+  )
+  Result
+  pop:Word:SetValue
+ ; // ObjectClass readonly Object:class
+ 
+ STRING method Object:ClassName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassName
+  Result
+  pop:Word:SetValue
+ ; // STRING method Object:ClassName
+ 
+ INTEGER method Object:InstanceSize
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:InstanceSize
+  Result
+  pop:Word:SetValue
+ ; // INTEGER method Object:InstanceSize
+ 
+ Object constructor Object:new
+  ARRAY [
+   @
+   _:Object
+  ]
+  Result
+  pop:Word:SetValue
+ ; // Object constructor Object:new
+ 
+ VIRTUAL VOID method Object:Print
+  Object IN Self
+  Self
+  Object:ToPrintable
+  Print
+ ; // VIRTUAL VOID method Object:Print
+ 
+ VIRTUAL STRING method Object:ToPrintable
+  Object IN Self
+  Self
+  Object:ClassName
+  Result
+  pop:Word:SetValue
+ ; // VIRTUAL STRING method Object:ToPrintable
+ 
+ IMMEDIATE VOID TYPE Object1Class
+  TtfwValueTypes
+  Ctx:IncludeValueTypes
+ ; // IMMEDIATE VOID TYPE Object1Class
+ 
+ STRING : ObjectClass:ClassName
+  ObjectClass IN Self
+  Self
+  |N
+  ':'
+  string:Split
+  Result
+  pop:Word:SetValue
+  DROP
+ ; // STRING : ObjectClass:ClassName
+ 
+ INTEGER : ObjectClass:InstanceSize
+  ObjectClass IN Self
+  Self
+  %%
+  InstanceSizeName
+  DO
+  Result
+  pop:Word:SetValue
+ ; // INTEGER : ObjectClass:InstanceSize
+ 
  ObjectTest
  DumpElement
  _:Object
