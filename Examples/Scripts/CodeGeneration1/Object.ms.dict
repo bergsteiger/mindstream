@@ -589,10 +589,7 @@ MACRO constructor
 ; // constructor
 
 MACRO new[
- //g_CurrentClass Msg
- //g_CurrentClassImpl Msg
- //g_CurrentClassImplWord pop:Word:Name Msg
- g_CurrentClassImplWord %% InstanceSizeName DO Msg
+ g_CurrentClassImplWord %% InstanceSizeName DO .
  axiom:PushSymbol [
  axiom:PushSymbol @
  g_CurrentClassImpl Ctx:Parser:PushSymbol
