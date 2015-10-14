@@ -1042,6 +1042,9 @@ VOID TestWithDump PointTest
  'c::Offset:TopLeft'
  .
  _:Rectangle _:Rectangle pop:Word:SetValue ::
+ 'c::Offset:TopLeft'
+ .
+ _:Rectangle _:Rectangle pop:Word:SetValue ::
  'c::Offset:BottomRight'
  .
  _:Rectangle _:Rectangle pop:Word:SetValue ::
@@ -1437,6 +1440,7 @@ RectangleClass class_impl _:Rectangle
 1
 2
 0
+1
 1
 2
 1
