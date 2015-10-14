@@ -597,8 +597,6 @@ MACRO constructor
 ; // constructor
 
 MACRO new[
- ClassOf Object .InstanceSize Msg
-
  INTEGER VAR l_InstanceSize
  ClassOf Object .InstanceSize >>> l_InstanceSize
  l_InstanceSize .
