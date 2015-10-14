@@ -478,21 +478,18 @@ MACRO classExpander
 
   anItem MembersIterator .filter> ( pop:Word:Producer pop:Word:Name NameOf CONST == ) .for> ( 
    TtfwWord IN aMember
-   axiom:PushSymbol implementation
-   g_CurrentClass Ctx:Parser:PushSymbol
+   axiom:PushSymbol member
 
-   axiom:PushSymbol CONST
    [ aMember pop:Word:Name [ cFieldPrefix cFieldOffset ] strings:Cat '' string:ReplaceFirst ] strings:Cat Ctx:Parser:PushSymbol
-   aMember DO Ctx:Parser:PushInt
+   //aMember DO Ctx:Parser:PushInt
    
-   axiom:PushSymbol end.
   )
 
-  anItem %Flds .for> ( 
-   IN aField 
-   axiom:PushSymbol member
-   aField |N Ctx:Parser:PushSymbol
-  ) // anItem %Flds .for>
+//  anItem %Flds .for> ( 
+//   IN aField 
+//   axiom:PushSymbol member
+//   aField |N Ctx:Parser:PushSymbol
+//  ) // anItem %Flds .for>
 
   anItem %Props .for> ( 
    IN aProp

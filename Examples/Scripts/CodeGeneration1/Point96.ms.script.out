@@ -211,8 +211,6 @@ VOID TestWithDump PointTest
  ; // RectangleClass class_impl _:Rectangle
  
  IMMEDIATE VOID TYPE Bar
-  INTEGER CONST VMT
-   0
   TtfwValueTypes
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Bar
@@ -462,8 +460,6 @@ VOID TestWithDump PointTest
  ; // RectangleClass class_impl _:Rectangle
  
  IMMEDIATE VOID TYPE Foo
-  INTEGER CONST VMT
-   0
   TtfwValueTypes
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Foo
@@ -573,8 +569,6 @@ VOID TestWithDump PointTest
  ; // IMMEDIATE VOID TYPE PixelList
  
  IMMEDIATE VOID TYPE Point
-  INTEGER CONST VMT
-   0
   TtfwValueTypes
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Point
@@ -867,8 +861,6 @@ VOID TestWithDump PointTest
  Rectangle VAR R1
  Rectangle VAR R2
  IMMEDIATE VOID TYPE Rectangle
-  INTEGER CONST VMT
-   0
   TtfwValueTypes
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Rectangle
