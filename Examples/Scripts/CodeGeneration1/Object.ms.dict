@@ -555,6 +555,7 @@ MACRO RunCompileProps&Methods
 ; // RunCompileProps&Methods
 
 PROCEDURE DefineInstanceSize
+ %SUMMARY 'Определяем размер экземпляров класса' ;
  if ( g_InstanceSizeDefined ! ) then
  begin
   g_InstanceSizeDefined := true
@@ -570,6 +571,7 @@ PROCEDURE DefineInstanceSize
 ; // DefineInstanceSize
 
 MACRO DefineInstanceSizeRunner
+ %SUMMARY 'Компилирем код, который определяет размер экземпляров класса' ;
  if ( g_InstanceSizeDefined ! ) then
  begin
   axiom:PushSymbol DefineInstanceSize
@@ -590,6 +592,9 @@ MACRO constructor
   ^ IN aParams
 
  %SUMMARY 'Конструктор объектов';
+
+ DefineInstanceSizeRunner
+ // - тут определяем размер экземпляров класса
 
  STRING VAR l_Name
  aName |N >>> l_Name

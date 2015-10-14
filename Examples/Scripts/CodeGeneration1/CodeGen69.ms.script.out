@@ -1,4 +1,4 @@
-0
+1
 VOID TestWithDump CodeGen
  CodeGen
  DumpElement
@@ -4843,7 +4843,13 @@ VOID OPERATOR : define_member
  FieldOffset OPERATOR :: IN : aOffset
 ; // define_member
 VOID OPERATOR :: PROCEDURE : DefineInstanceSize
+ Documentation:
+  Определяем размер экземпляров класса
+; // DefineInstanceSize
 IMMEDIATE VOID OPERATOR :: MACRO : DefineInstanceSizeRunner
+ Documentation:
+  Компилирем код, который определяет размер экземпляров класса
+; // DefineInstanceSizeRunner
 PRIVATE OPERATOR : do-get-member
  Documentation:
   Определяет способ доступа к члену класса
@@ -4917,9 +4923,9 @@ INTEGER OPERATOR :: MACRO :: method : Object:InstanceSize
  INTEGER OPERATOR :: MACRO :: method :: Object:InstanceSize : Result
  Object OPERATOR :: IN : Self
 ; // Object:InstanceSize
-Object OPERATOR :: MACRO :: constructor : Object:new
- Object OPERATOR :: MACRO :: constructor :: Object:new : Result
- Object OPERATOR :: MACRO :: constructor :: Object:new : Self
+Object : : Object:new
+ Object : :: Object:new : Result
+ Object : :: Object:new : Self
 ; // Object:new
 VIRTUAL VOID OPERATOR :: MACRO :: method : Object:Print
  Object OPERATOR :: IN : Self
