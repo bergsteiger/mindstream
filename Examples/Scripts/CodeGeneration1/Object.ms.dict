@@ -554,21 +554,13 @@ MACRO RunCompileProps&Methods
  ] Ctx:Parser:PushArray
 ; // RunCompileProps&Methods
 
-PROCEDURE DoDefineInstanceSize
+PROCEDURE DefineInstanceSize
  %SUMMARY 'Определяем размер экземпляров класса' ;
  if ( g_InstanceSizeDefined ! ) then
  begin
   g_InstanceSizeDefined := true
   g_CurrentClassImplWord %% InstanceSizeName DO =0 ?ASSURE [ 'Размер класса ' g_CurrentClass ' почему-то уже определён' ]
   g_ClassFieldOffset g_CurrentClassImplWord %% InstanceSizeName pop:Word:SetValue
- end // g_InstanceSizeDefined !
-; // DoDefineInstanceSize
-
-PROCEDURE DefineInstanceSize
- %SUMMARY 'Определяем размер экземпляров класса' ;
- if ( g_InstanceSizeDefined ! ) then
- begin
-  DoDefineInstanceSize
  end // g_InstanceSizeDefined !
 ; // DefineInstanceSize
 
@@ -587,7 +579,7 @@ MACRO constructor
 
  %SUMMARY 'Конструктор объектов';
 
- DoDefineInstanceSize
+ DefineInstanceSize
  // - тут определяем размер экземпляров класса
 
  STRING VAR l_Name
