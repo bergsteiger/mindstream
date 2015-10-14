@@ -564,6 +564,10 @@ MACRO RunCompileProps&Methods
 
   'end.'
  ] Ctx:Parser:PushArray
+
+ g_CurrentClass := ''
+ //nil >>> g_CurrentClassImplWord
+ g_InstanceSizeDefined := false
 ; // RunCompileProps&Methods
 
 MACRO class-end
