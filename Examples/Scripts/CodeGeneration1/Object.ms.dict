@@ -545,7 +545,7 @@ MACRO classExpander
 MACRO RunCompileProps&Methods
  [
   'implementation'
-  g_CurrentClassImpl
+  g_CurrentClassImplWord pop:Word:Name
 
    NameOf %PROPERTIES g_CurrentClassProperties ListToNameAsString
 
