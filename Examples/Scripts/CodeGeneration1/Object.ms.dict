@@ -449,7 +449,7 @@ MACRO VMTFieldOffset
  ObjectClass VAR l_Class
  aClass |^ >>> l_Class
  l_Class .ClassName Msg
- //aFieldName |N Msg
+ aFieldName |N Msg
 ; // VMTFieldOffset
 
 INTEGER class-method InstanceSize
