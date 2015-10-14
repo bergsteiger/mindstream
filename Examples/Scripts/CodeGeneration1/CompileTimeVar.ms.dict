@@ -49,7 +49,7 @@ STACK_CHANGING_MACRO CompileTime-VAR
   end 
  end
 
- axiom:PushSymbol VAR
+ axiom:PushSymbol STATIC-VAR
  STRING VAR l_Name
  aName |N >>> l_Name
  l_Name Ctx:Parser:PushString

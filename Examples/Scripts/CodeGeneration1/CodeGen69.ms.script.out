@@ -4860,17 +4860,6 @@ BOOLEAN FUNCTION : FilterMember
  OBJECT OPERATOR :: IN : aMember
  BOOLEAN FUNCTION :: FilterMember : Result
 ; // FilterMember
-FieldOffset OPERATOR :: VAR : g_ClassFieldOffset
-STRING OPERATOR :: VAR : g_CurrentClass
-ARRAY OPERATOR :: VAR : g_CurrentClassConstructors
-STRING OPERATOR :: VAR : g_CurrentClassImpl
-ObjectClass OPERATOR :: VAR : g_CurrentClassImplWord
-ARRAY OPERATOR :: VAR : g_CurrentClassMembers
-STRING OPERATOR :: VAR : g_CurrentClassMethod
-STRING OPERATOR :: VAR : g_CurrentClassMethodModifiers
-ARRAY OPERATOR :: VAR : g_CurrentClassMethods
-ARRAY OPERATOR :: VAR : g_CurrentClassProperties
-ARRAY OPERATOR :: VAR : g_CurrentMetaClassMethods
 IMMEDIATE VOID OPERATOR :: MACRO : get-member
  Documentation:
   Компилирует способ доступа к члену класса
@@ -5030,7 +5019,6 @@ VOID OPERATOR :: PROCEDURE : ExpandMethodName
  TtfwValueTypes OPERATOR :: VAR : l_ValueTypes
  TtfwWord OPERATOR :: IN : Self
 ; // ExpandMethodName
-TtfwWord OPERATOR :: VAR : g_Stereo
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CompileTimeVar.ms.dict
  Uses: 
   axiom:axiom
