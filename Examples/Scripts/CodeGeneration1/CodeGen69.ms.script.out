@@ -4864,6 +4864,7 @@ FieldOffset OPERATOR :: VAR : g_ClassFieldOffset
 STRING OPERATOR :: VAR : g_CurrentClass
 ARRAY OPERATOR :: VAR : g_CurrentClassConstructors
 STRING OPERATOR :: VAR : g_CurrentClassImpl
+ObjectClass OPERATOR :: VAR : g_CurrentClassImplWord
 ARRAY OPERATOR :: VAR : g_CurrentClassMembers
 STRING OPERATOR :: VAR : g_CurrentClassMethod
 STRING OPERATOR :: VAR : g_CurrentClassMethodModifiers

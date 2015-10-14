@@ -103,7 +103,10 @@ MACRO class_impl
 
 STRING CompileTime-VAR g_CurrentClass ''
 STRING CompileTime-VAR g_CurrentClassImpl ''
-TtfwWord CompileTime-VAR g_CurrentClassImplWord nil
+
+TtfwWord type ObjectClass
+
+ObjectClass CompileTime-VAR g_CurrentClassImplWord nil
 
 CONST cFieldPrefix 'c:Offset:'
 
@@ -166,8 +169,6 @@ STRING FUNCTION ClassImplName
   STRING IN aName
  [ cClassImplPrefix aName ] strings:Cat >>> Result
 ; // ClassImplName
-
-TtfwWord type ObjectClass
 
 Const ClassRefSuffix 'Class'
 
