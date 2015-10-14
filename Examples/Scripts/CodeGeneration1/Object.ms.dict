@@ -552,15 +552,18 @@ MACRO RunCompileProps&Methods
 ; // RunCompileProps&Methods
 
 PROCEDURE DefineInstanceSize
- g_InstanceSizeDefined := true
- axiom:PushSymbol [EXECUTE]
- axiom:PushSymbol (
- g_CurrentClass ClassImplName Ctx:Parser:PushSymbol
- axiom:PushSymbol ::
- InstanceSizeName Ctx:Parser:PushSymbol
- axiom:PushSymbol :=
- g_ClassFieldOffset Ctx:Parser:PushInt
- axiom:PushSymbol )
+ if ( g_InstanceSizeDefined ! ) then
+ begin
+  g_InstanceSizeDefined := true
+  axiom:PushSymbol [EXECUTE]
+  axiom:PushSymbol (
+  g_CurrentClass ClassImplName Ctx:Parser:PushSymbol
+  axiom:PushSymbol ::
+  InstanceSizeName Ctx:Parser:PushSymbol
+  axiom:PushSymbol :=
+  g_ClassFieldOffset Ctx:Parser:PushInt
+  axiom:PushSymbol )
+ end // g_InstanceSizeDefined !
 ; // DefineInstanceSize
 
 MACRO class-end
@@ -569,6 +572,7 @@ MACRO class-end
  DefineInstanceSize
 
  g_CurrentClass := ''
+ g_InstanceSizeDefined := false
 ; // class-end
 
 MACRO constructor
