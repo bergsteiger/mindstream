@@ -317,7 +317,7 @@ MACRO class
 
  l_ClassRefName Ctx:Parser:PushSymbol
  axiom:PushSymbol class_impl
- g_CurrentClassImpl Ctx:Parser:PushSymbol
+ l_CurrentClassImpl Ctx:Parser:PushSymbol
 
  [
    if ( g_CurrentClass !== cObjectName ) then
@@ -343,7 +343,7 @@ MACRO class
 
  [
   '[EXECUTE] ('
-  g_CurrentClassImpl
+  l_CurrentClassImpl
   '>>>'
   'g_CurrentClassImplWord'
   ')'
@@ -356,14 +356,14 @@ MACRO class
 
   'WordAlias'
   g_CurrentClass ClassOfName
-  g_CurrentClassImpl
+  l_CurrentClassImpl
 
  ] Ctx:Parser:PushArray
 
  if ( g_CurrentClass !== cObjectName ) then
  begin
   'classExpander' Ctx:Parser:PushSymbol
-  g_CurrentClassImpl Ctx:Parser:PushSymbol
+  l_CurrentClassImpl Ctx:Parser:PushSymbol
  end
 
 ; // class
