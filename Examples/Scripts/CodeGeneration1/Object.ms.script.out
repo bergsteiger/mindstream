@@ -472,8 +472,9 @@ VOID TestWithDump ObjectTest
  l_Obj1
  Object:InstanceSize
  Print
- _:Object1 _:Object1 pop:Word:SetValue ::
- 'c:Offset:VMT'
+ _:Object1
+ ObjectClass:FieldOffset
+ 'VMT'
  Print
  Object2:new
  l_Obj2
@@ -491,11 +492,13 @@ VOID TestWithDump ObjectTest
  l_Obj2
  Object:InstanceSize
  Print
- _:Object2 _:Object2 pop:Word:SetValue ::
- 'c:Offset:VMT'
+ _:Object2
+ ObjectClass:FieldOffset
+ 'VMT'
  Print
- _:Object2 _:Object2 pop:Word:SetValue ::
- 'c:Offset:FakeField'
+ _:Object2
+ ObjectClass:FieldOffset
+ 'FakeField'
  Print
  l_Obj2
  Object2:FakeField
