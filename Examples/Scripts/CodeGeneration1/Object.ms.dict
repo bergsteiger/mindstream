@@ -315,9 +315,6 @@ MACRO class
   cObjectName ClassOfName Ctx:Parser:PushSymbol 
   axiom:PushSymbol >>> 
   axiom:PushSymbol g_CurrentClassParent
-  axiom:PushSymbol g_CurrentClassParent
-  axiom:PushSymbol pop:Word:Name
-  axiom:PushSymbol Msg
   axiom:PushSymbol )
 
   axiom:PushSymbol ObjectClass
