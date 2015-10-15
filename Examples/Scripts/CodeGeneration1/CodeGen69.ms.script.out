@@ -4750,6 +4750,14 @@ IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .ClassName
 <== Redefines
  ^@ OPERATOR :: IN : Self
 ; // .ClassName
+IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .FieldOffset
+==> Redefines
+ IMMEDIATE VOID OPERATOR :: MACRO : .FieldOffset
+  ^@ OPERATOR :: IN : Self
+ ; // .FieldOffset
+<== Redefines
+ ^@ OPERATOR :: IN : Self
+; // .FieldOffset
 IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .InstanceSize
 ==> Redefines
  IMMEDIATE VOID OPERATOR :: MACRO : .InstanceSize
@@ -4917,6 +4925,10 @@ STRING OPERATOR :: MACRO :: method : Object:ClassName
  STRING OPERATOR :: MACRO :: method :: Object:ClassName : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassName
+FieldOffset OPERATOR :: MACRO :: method : Object:FieldOffset
+ FieldOffset OPERATOR :: MACRO :: method :: Object:FieldOffset : Result
+ Object OPERATOR :: IN : Self
+; // Object:FieldOffset
 INTEGER OPERATOR :: MACRO :: method : Object:InstanceSize
  INTEGER OPERATOR :: MACRO :: method :: Object:InstanceSize : Result
  Object OPERATOR :: IN : Self
@@ -4937,6 +4949,13 @@ STRING : : ObjectClass:ClassName
  STRING : :: ObjectClass:ClassName : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:ClassName
+FieldOffset : : ObjectClass:FieldOffset
+ ^L OPERATOR :: IN : aFieldName
+ STRING OPERATOR :: VAR : l_ClassName
+ STRING OPERATOR :: VAR : l_FieldName
+ FieldOffset : :: ObjectClass:FieldOffset : Result
+ ObjectClass OPERATOR :: IN : Self
+; // ObjectClass:FieldOffset
 INTEGER : : ObjectClass:InstanceSize
  INTEGER : :: ObjectClass:InstanceSize : Result
  ObjectClass OPERATOR :: IN : Self
