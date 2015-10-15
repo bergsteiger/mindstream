@@ -206,6 +206,10 @@ VOID TestWithDump ObjectTest
  ; // IMMEDIATE VOID TYPE Object1Class
  
  STRING : ObjectClass:ClassName
+  %SUMMARY %SUM
+   'Возвращает имя класса'
+  ; // %SUMMARY %SUM
+  
   ObjectClass IN Self
   Self
   |N
@@ -256,6 +260,10 @@ VOID TestWithDump ObjectTest
  ; // FieldOffset : ObjectClass:FieldOffset
  
  INTEGER : ObjectClass:InstanceSize
+  %SUMMARY %SUM
+   'Возвращает размер экземпляров класса'
+  ; // %SUMMARY %SUM
+  
   ObjectClass IN Self
   Self
   %%
@@ -361,6 +369,10 @@ VOID TestWithDump ObjectTest
  ; // IMMEDIATE VOID TYPE Object2Class
  
  STRING : ObjectClass:ClassName
+  %SUMMARY %SUM
+   'Возвращает имя класса'
+  ; // %SUMMARY %SUM
+  
   ObjectClass IN Self
   Self
   |N
@@ -411,6 +423,10 @@ VOID TestWithDump ObjectTest
  ; // FieldOffset : ObjectClass:FieldOffset
  
  INTEGER : ObjectClass:InstanceSize
+  %SUMMARY %SUM
+   'Возвращает размер экземпляров класса'
+  ; // %SUMMARY %SUM
+  
   ObjectClass IN Self
   Self
   %%

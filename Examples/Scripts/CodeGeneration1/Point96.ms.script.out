@@ -273,6 +273,10 @@ VOID TestWithDump PointTest
  ; // IMMEDIATE VOID TYPE BarClass
  
  STRING : ObjectClass:ClassName
+  %SUMMARY %SUM
+   'Возвращает имя класса'
+  ; // %SUMMARY %SUM
+  
   ObjectClass IN Self
   Self
   |N
@@ -323,6 +327,10 @@ VOID TestWithDump PointTest
  ; // FieldOffset : ObjectClass:FieldOffset
  
  INTEGER : ObjectClass:InstanceSize
+  %SUMMARY %SUM
+   'Возвращает размер экземпляров класса'
+  ; // %SUMMARY %SUM
+  
   ObjectClass IN Self
   Self
   %%
@@ -543,6 +551,10 @@ VOID TestWithDump PointTest
  ; // IMMEDIATE VOID TYPE FooClass
  
  STRING : ObjectClass:ClassName
+  %SUMMARY %SUM
+   'Возвращает имя класса'
+  ; // %SUMMARY %SUM
+  
   ObjectClass IN Self
   Self
   |N
@@ -593,6 +605,10 @@ VOID TestWithDump PointTest
  ; // FieldOffset : ObjectClass:FieldOffset
  
  INTEGER : ObjectClass:InstanceSize
+  %SUMMARY %SUM
+   'Возвращает размер экземпляров класса'
+  ; // %SUMMARY %SUM
+  
   ObjectClass IN Self
   Self
   %%
@@ -905,6 +921,10 @@ VOID TestWithDump PointTest
  ; // IMMEDIATE VOID TYPE PointClass
  
  STRING : ObjectClass:ClassName
+  %SUMMARY %SUM
+   'Возвращает имя класса'
+  ; // %SUMMARY %SUM
+  
   ObjectClass IN Self
   Self
   |N
@@ -955,6 +975,10 @@ VOID TestWithDump PointTest
  ; // FieldOffset : ObjectClass:FieldOffset
  
  INTEGER : ObjectClass:InstanceSize
+  %SUMMARY %SUM
+   'Возвращает размер экземпляров класса'
+  ; // %SUMMARY %SUM
+  
   ObjectClass IN Self
   Self
   %%
@@ -1104,6 +1128,10 @@ VOID TestWithDump PointTest
  ; // IMMEDIATE VOID TYPE RectangleClass
  
  STRING : ObjectClass:ClassName
+  %SUMMARY %SUM
+   'Возвращает имя класса'
+  ; // %SUMMARY %SUM
+  
   ObjectClass IN Self
   Self
   |N
@@ -1154,6 +1182,10 @@ VOID TestWithDump PointTest
  ; // FieldOffset : ObjectClass:FieldOffset
  
  INTEGER : ObjectClass:InstanceSize
+  %SUMMARY %SUM
+   'Возвращает размер экземпляров класса'
+  ; // %SUMMARY %SUM
+  
   ObjectClass IN Self
   Self
   %%

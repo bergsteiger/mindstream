@@ -431,30 +431,9 @@ MACRO class-method-end
 ; // class-method-end
 
 STRING class-method ClassName
+ %SUMMARY 'Возвращает имя класса' ;
  Self |N ':' string:Split >>> Result DROP
 class-method-end // ClassName
-
-MACRO VMTFieldOffset
-  ^@ IN aClass
-  Literal IN aFieldName
-
- ObjectClass VAR l_Class
- aClass |^ >>> l_Class
-
- STRING VAR l_ClassName
- l_Class .ClassName >>> l_ClassName
-
- STRING VAR l_FieldName
- aFieldName |N >>> l_FieldName
- l_FieldName MakeFieldOffsetName >>> l_FieldName
-
- axiom:PushSymbol ClassOf
- l_ClassName Ctx:Parser:PushSymbol
-
- axiom:PushSymbol ::
- l_FieldName Ctx:Parser:PushSymbol
- 
-; // VMTFieldOffset
 
 FieldOffset class-method FieldOffset
   // - этод метод можно сделать КОМПИЛИРУЕМЫМ
@@ -474,6 +453,7 @@ FieldOffset class-method FieldOffset
 class-method-end // FieldOffset
 
 INTEGER class-method InstanceSize
+ %SUMMARY 'Возвращает размер экземпляров класса' ;
  Self %% InstanceSizeName DO >>> Result
 class-method-end // InstanceSize
 

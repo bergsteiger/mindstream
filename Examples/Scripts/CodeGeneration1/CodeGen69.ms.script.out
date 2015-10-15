@@ -4946,6 +4946,8 @@ VIRTUAL STRING OPERATOR :: MACRO :: method : Object:ToPrintable
 ; // Object:ToPrintable
 IMMEDIATE VOID OPERATOR :: TYPE : ObjectClass
 STRING : : ObjectClass:ClassName
+ Documentation:
+  Возвращает имя класса
  STRING : :: ObjectClass:ClassName : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:ClassName
@@ -4959,6 +4961,8 @@ FieldOffset : : ObjectClass:FieldOffset
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:FieldOffset
 INTEGER : : ObjectClass:InstanceSize
+ Documentation:
+  Возвращает размер экземпляров класса
  INTEGER : :: ObjectClass:InstanceSize : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:InstanceSize
@@ -4971,13 +4975,6 @@ IMMEDIATE VOID OPERATOR :: MACRO : readonly
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
 ; // readonly
-IMMEDIATE VOID OPERATOR :: MACRO : VMTFieldOffset
- ^@ OPERATOR :: IN : aClass
- ^L OPERATOR :: IN : aFieldName
- ObjectClass OPERATOR :: VAR : l_Class
- STRING OPERATOR :: VAR : l_ClassName
- STRING OPERATOR :: VAR : l_FieldName
-; // VMTFieldOffset
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Bind.ms.dict
  Uses: 
   axiom:axiom
