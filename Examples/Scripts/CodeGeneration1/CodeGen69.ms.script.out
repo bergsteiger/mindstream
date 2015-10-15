@@ -4941,8 +4941,8 @@ STRING OPERATOR :: MACRO :: method : Object:ClassName
  STRING OPERATOR :: MACRO :: method :: Object:ClassName : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassName
-INTEGER OPERATOR :: MACRO :: method : Object:ClassParent
- INTEGER OPERATOR :: MACRO :: method :: Object:ClassParent : Result
+ObjectClass OPERATOR :: MACRO :: method : Object:ClassParent
+ ObjectClass OPERATOR :: MACRO :: method :: Object:ClassParent : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassParent
 FieldOffset OPERATOR :: MACRO :: method : Object:FieldOffset
@@ -4971,10 +4971,10 @@ STRING : : ObjectClass:ClassName
  STRING : :: ObjectClass:ClassName : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:ClassName
-INTEGER : : ObjectClass:ClassParent
+ObjectClass : : ObjectClass:ClassParent
  Documentation:
   Возвращает родительский класс
- INTEGER : :: ObjectClass:ClassParent : Result
+ ObjectClass : :: ObjectClass:ClassParent : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:ClassParent
 FieldOffset : : ObjectClass:FieldOffset

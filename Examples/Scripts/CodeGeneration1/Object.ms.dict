@@ -479,7 +479,7 @@ INTEGER class-method InstanceSize
  Self %% InstanceSizeName DO >>> Result
 class-method-end // InstanceSize
 
-INTEGER class-method ClassParent
+ObjectClass class-method ClassParent
  %SUMMARY 'Возвращает родительский класс' ;
  Self %% ClassParentName DO >>> Result
 class-method-end // ClassParent
