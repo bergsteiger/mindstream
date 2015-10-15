@@ -475,8 +475,6 @@ MACRO classExpander
    STRING VAR l_MemberName
    [ aMember pop:Word:Name [ cFieldPrefix ] strings:Cat '' string:ReplaceFirst ] strings:Cat >>> l_MemberName
 
-   l_MemberName Msg
-
    FieldOffset VAR l_ClassFieldOffset
 
    aMember DO >>> l_ClassFieldOffset
