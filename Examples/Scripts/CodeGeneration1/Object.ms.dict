@@ -466,12 +466,8 @@ FieldOffset class-method FieldOffset
  aFieldName |N >>> l_FieldName
  l_FieldName MakeFieldOffsetName >>> l_FieldName
 
- axiom:PushSymbol ClassOf
- l_ClassName Ctx:Parser:PushSymbol
+ Self %% l_FieldName DO >>> Result
 
- axiom:PushSymbol ::
- l_FieldName Ctx:Parser:PushSymbol
- 
 class-method-end // FieldOffset
 
 INTEGER class-method InstanceSize

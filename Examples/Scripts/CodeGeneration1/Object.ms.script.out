@@ -233,14 +233,12 @@ VOID TestWithDump ObjectTest
   MakeFieldOffsetName
   l_FieldName
   pop:Word:SetValue
-  axiom:PushSymbol
-  ClassOf
-  l_ClassName
-  Ctx:Parser:PushSymbol
-  axiom:PushSymbol
-  ::
+  Self
+  %%
   l_FieldName
-  Ctx:Parser:PushSymbol
+  DO
+  Result
+  pop:Word:SetValue
  ; // FieldOffset : ObjectClass:FieldOffset
  
  INTEGER : ObjectClass:InstanceSize
@@ -376,14 +374,12 @@ VOID TestWithDump ObjectTest
   MakeFieldOffsetName
   l_FieldName
   pop:Word:SetValue
-  axiom:PushSymbol
-  ClassOf
-  l_ClassName
-  Ctx:Parser:PushSymbol
-  axiom:PushSymbol
-  ::
+  Self
+  %%
   l_FieldName
-  Ctx:Parser:PushSymbol
+  DO
+  Result
+  pop:Word:SetValue
  ; // FieldOffset : ObjectClass:FieldOffset
  
  INTEGER : ObjectClass:InstanceSize
