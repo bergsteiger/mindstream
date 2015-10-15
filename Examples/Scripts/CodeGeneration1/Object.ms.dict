@@ -384,7 +384,7 @@ MACRO readonly
  anOffset Self [i]
 ; // FieldByOffset
 
-PRIVATE operator do-get-member
+PRIVATE operator do_get_member
   STRING IN aName
  
  %SUMMARY 'Определяет способ доступа к члену класса' ;
@@ -394,14 +394,14 @@ PRIVATE operator do-get-member
  axiom:PushSymbol ::
  aName MakeFieldOffsetName Ctx:Parser:PushSymbol 
  axiom:PushSymbol )
-; // do-get-member
+; // do_get_member
 
 CONST cResult 'Result'
 
 MACRO read
  Literal IN aName
  cSelf Ctx:Parser:PushSymbol 
- aName |N do-get-member
+ aName |N do_get_member
  axiom:PushSymbol >>>
  cResult Ctx:Parser:PushSymbol
  axiom:PushSymbol ;
@@ -619,7 +619,7 @@ MACRO get-member
   Literal IN aName
 
  %SUMMARY 'Компилирует способ доступа к члену класса' ;
- aName |N do-get-member
+ aName |N do_get_member
 ; // get-member
 
 constructor new ( )
