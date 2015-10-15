@@ -493,9 +493,11 @@ MACRO classExpander
    
   )
   
+  axiom:PushSymbol (
   axiom:PushSymbol g_ClassFieldOffset
   axiom:PushSymbol :=
   l_ClassFieldOffset Ctx:Parser:PushInt
+  axiom:PushSymbol )
 
   l_ClassFieldOffset >>> g_ClassFieldOffset
 

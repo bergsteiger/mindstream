@@ -184,9 +184,11 @@ VOID TestWithDump ObjectTest
  _:Object
  pop:Word:Name
  Print
- 0
- g_ClassFieldOffset
- pop:Word:SetValuePrim
+ (
+  0
+  g_ClassFieldOffset
+  pop:Word:SetValuePrim
+ )
  Object1:new
  l_Obj1
  pop:Word:SetValuePrim
