@@ -122,8 +122,6 @@ PRIVATE STRING operator MakeFieldOffsetName
 INTEGER type FieldOffset
 // - смещение поля
 
-ARRAY CompileTime-VAR g_CurrentClassMembers [ ]
-
 VOID operator define_member
  STRING IN aName
  FieldOffset IN aOffset
@@ -135,7 +133,6 @@ VOID operator define_member
  aOffset Ctx:Parser:PushInt
  axiom:PushSymbol end.
 
- aName array:AddTo g_CurrentClassMembers
 ; // define_member
 
 FieldOffset CompileTime-VAR g_ClassFieldOffset 0
@@ -288,7 +285,6 @@ MACRO ClassOf
 MACRO class
  Literal IN aName
  ( g_CurrentClass = '' ) ?ASSURE 'Вложенные классы пока не поддерживаются'
- g_CurrentClassMembers := [ ]
  g_CurrentClassProperties := [ ]
  g_CurrentClassMethods := [ ]
  g_CurrentMetaClassMethods := [ ]
