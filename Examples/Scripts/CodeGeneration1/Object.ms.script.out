@@ -122,7 +122,6 @@ VOID TestWithDump ObjectTest
  
  Object VAR l_Obj
  Object1 VAR l_Obj1
- Object2 VAR l_Obj2
  IMMEDIATE VOID TYPE Object1
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -372,28 +371,6 @@ VOID TestWithDump ObjectTest
  l_Obj1
  Object:InstanceSize
  Print
- Object2:new
- l_Obj2
- pop:Word:SetValuePrim
- l_Obj2
- Object:Print
- l_Obj2
- Object:ClassName
- Print
- l_Obj2
- Object:ClassName
- Print
- '--------'
- Print
- l_Obj2
- Object:InstanceSize
- Print
- _:Object2 _:Object2 pop:Word:SetValue ::
- 'c:Offset:VMT'
- .
- _:Object2 _:Object2 pop:Word:SetValue ::
- 'c:Offset:FakeField'
- .
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
@@ -438,11 +415,4 @@ Object1 : [ TkwCompiledFunction ]
 Object1
 Object1
 --------
-1
-Object2 : [ TkwCompiledFunction 256 ]
-Object2
-Object2
---------
-2
-0
 1
