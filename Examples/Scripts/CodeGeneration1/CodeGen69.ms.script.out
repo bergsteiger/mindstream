@@ -4840,6 +4840,7 @@ STRING FUNCTION : ClassRefName
  STRING FUNCTION :: ClassRefName : Result
 ; // ClassRefName
 STRING CONST : ClassRefSuffix
+STRING CONST : cMetaPrefix
 STRING CONST : cObjectName
 IMMEDIATE VOID OPERATOR :: MACRO : constructor
  Documentation:
@@ -4873,6 +4874,9 @@ OBJECT FUNCTION : DoMember
  Object OPERATOR :: IN : Self
 ; // FieldByOffset
 IMMEDIATE VOID OPERATOR :: TYPE : FieldOffset
+STRING FUNCTION : FieldPrefix
+ STRING FUNCTION :: FieldPrefix : Result
+; // FieldPrefix
 BOOLEAN FUNCTION : FilterMember
  OBJECT OPERATOR :: IN : aMember
  BOOLEAN FUNCTION :: FilterMember : Result
