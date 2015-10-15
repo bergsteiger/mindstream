@@ -525,9 +525,14 @@ VOID TestWithDump ObjectTest
  _:Object
  pop:Word:Name
  Print
- _:Object
- g_CurrentClassParent
- pop:Word:SetValue
+ (
+  _:Object
+  g_CurrentClassParent
+  pop:Word:SetValue
+  g_CurrentClassParent
+  pop:Word:Name
+  Msg
+ )
  Object1:new
  l_Obj1
  pop:Word:SetValuePrim
@@ -551,9 +556,14 @@ VOID TestWithDump ObjectTest
  _:Object1
  ObjectClass:ClassParent
  Print
- _:Object
- g_CurrentClassParent
- pop:Word:SetValue
+ (
+  _:Object
+  g_CurrentClassParent
+  pop:Word:SetValue
+  g_CurrentClassParent
+  pop:Word:Name
+  Msg
+ )
  Object2:new
  l_Obj2
  pop:Word:SetValuePrim
