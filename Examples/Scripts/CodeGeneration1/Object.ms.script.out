@@ -18,6 +18,8 @@ VOID TestWithDump ObjectTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
+  INTEGER CONST c:Offset:Fake
+   1
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -45,6 +47,8 @@ VOID TestWithDump ObjectTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
+  INTEGER CONST c:Offset:Fake
+   1
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -94,6 +98,7 @@ VOID TestWithDump ObjectTest
   ARRAY [
    @
    _:Object1
+   'uninited member'
   ]
   Result
   pop:Word:SetValue
@@ -226,6 +231,8 @@ ObjectClass class_impl _:Object
   'class'
  ; // %PROPERTIES %Props
  
+ INTEGER CONST c:Offset:Fake
+  1
  FieldOffset STATIC-VAR c:Offset:Instance:Size
  INTEGER CONST c:Offset:VMT
   0
@@ -235,18 +242,18 @@ ObjectClass class_impl _:Object
 ; // ObjectClass class_impl _:Object
 
 _:Object
-Object : [ TkwCompiledFunction ]
+Object : [ TkwCompiledFunction uninited member ]
 Object
 Object
 _:Object
 --------
-1
+2
 0
 _:Object
 _:Object
-Object1 : [ TkwCompiledFunction ]
+Object1 : [ TkwCompiledFunction uninited member ]
 Object1
 Object1
 --------
-1
+2
 0
