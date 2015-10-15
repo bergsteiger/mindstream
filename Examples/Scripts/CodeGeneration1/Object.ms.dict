@@ -348,7 +348,7 @@ MACRO class
   'ObjectClass'
   'CompileTime-VAR'
   ClassParentName
-  'nil'
+  'g_CurrentClassParent'
  ] Ctx:Parser:PushArray
 
  axiom:PushSymbol ;
