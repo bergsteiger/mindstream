@@ -122,6 +122,8 @@ PRIVATE STRING operator MakeFieldOffsetName
 INTEGER type FieldOffset
 // - смещение поля
 
+ARRAY CompileTime-VAR g_CurrentClassMembers [ ]
+
 VOID operator define_member
  STRING IN aName
  FieldOffset IN aOffset
@@ -133,11 +135,10 @@ VOID operator define_member
  aOffset Ctx:Parser:PushInt
  axiom:PushSymbol end.
 
+ aName array:AddTo g_CurrentClassMembers
 ; // define_member
 
 FieldOffset CompileTime-VAR g_ClassFieldOffset 0
-
-ARRAY CompileTime-VAR g_CurrentClassMembers [ ]
 
 ARRAY CompileTime-VAR g_CurrentClassProperties [ ]
 
@@ -157,7 +158,6 @@ MACRO member
  Ctx:ClearTypeInfo
  l_Name g_ClassFieldOffset define_member
  Inc g_ClassFieldOffset
- l_Name array:AddTo g_CurrentClassMembers
 ; // member
 
 PRIVATE STRING operator MakeMethodSignaturePrim
