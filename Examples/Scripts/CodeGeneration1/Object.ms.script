@@ -24,6 +24,9 @@ Test&Dump ObjectTest
  //@ l_Obj pop:Word:Info pop:WordInfo:ValueTypes pop:ValueTypes:Name Print
  l_Obj .ClassName Print
  ClassOf Object pop:Word:Name Print
+
+ '--------' Print
+
  l_Obj .InstanceSize Print
 
  ClassOf Object pop:Word:Name Print
@@ -43,6 +46,9 @@ Test&Dump ObjectTest
  l_Obj1 .ClassName Print
 
  l_Obj1 .ClassName Print
+
+ '--------' Print
+
  l_Obj1 .InstanceSize Print
 
  class Object2

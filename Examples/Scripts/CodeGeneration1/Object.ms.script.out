@@ -345,6 +345,8 @@ VOID TestWithDump ObjectTest
  _:Object
  pop:Word:Name
  Print
+ '--------'
+ Print
  l_Obj
  Object:InstanceSize
  Print
@@ -364,6 +366,8 @@ VOID TestWithDump ObjectTest
  Print
  l_Obj1
  Object:ClassName
+ Print
+ '--------'
  Print
  l_Obj1
  Object:InstanceSize
@@ -426,12 +430,14 @@ Object : [ TkwCompiledFunction ]
 Object
 Object
 _:Object
+--------
 1
 _:Object
 _:Object
 Object1 : [ TkwCompiledFunction ]
 Object1
 Object1
+--------
 1
 Object2 : [ TkwCompiledFunction 256 ]
 Object2
