@@ -266,7 +266,7 @@ CONST cObjectName 'Object'
 CONST cInstanceSizeName 'Instance:Size'
 
 STRING FUNCTION InstanceSizeName
- [ cMetaPrefix cFieldPrefix cInstanceSizeName ] strings:Cat >>> Result
+ [ cMetaPrefix cInstanceSizeName ] strings:Cat >>> Result
 ; // InstanceSizeName
 
 CONST cClassParentName 'Class:Parent'
