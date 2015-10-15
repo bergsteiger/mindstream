@@ -25,7 +25,7 @@ VOID TestWithDump ObjectTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  ObjectClass STATIC-VAR c:Offset:Class:Parent
+  ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -54,7 +54,7 @@ VOID TestWithDump ObjectTest
    'FakeField'
   ; // %PROPERTIES %Props
   
-  ObjectClass STATIC-VAR c:Offset:Class:Parent
+  ObjectClass STATIC-VAR c:Class:Parent
   INTEGER CONST c:Offset:FakeField
    1
   FieldOffset STATIC-VAR c:Offset:Instance:Size
@@ -84,7 +84,7 @@ VOID TestWithDump ObjectTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  ObjectClass STATIC-VAR c:Offset:Class:Parent
+  ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -113,7 +113,7 @@ VOID TestWithDump ObjectTest
    'FakeField'
   ; // %PROPERTIES %Props
   
-  ObjectClass STATIC-VAR c:Offset:Class:Parent
+  ObjectClass STATIC-VAR c:Class:Parent
   INTEGER CONST c:Offset:FakeField
    1
   FieldOffset STATIC-VAR c:Offset:Instance:Size
@@ -554,7 +554,7 @@ ObjectClass class_impl _:Object
   'class'
  ; // %PROPERTIES %Props
  
- ObjectClass STATIC-VAR c:Offset:Class:Parent
+ ObjectClass STATIC-VAR c:Class:Parent
  FieldOffset STATIC-VAR c:Offset:Instance:Size
  INTEGER CONST c:Offset:VMT
   0

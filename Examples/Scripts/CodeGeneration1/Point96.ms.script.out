@@ -80,7 +80,7 @@ VOID TestWithDump PointTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  ObjectClass STATIC-VAR c:Offset:Class:Parent
+  ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -107,7 +107,7 @@ VOID TestWithDump PointTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  ObjectClass STATIC-VAR c:Offset:Class:Parent
+  ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -145,7 +145,7 @@ VOID TestWithDump PointTest
    'Y'
   ; // %PROPERTIES %Props
   
-  ObjectClass STATIC-VAR c:Offset:Class:Parent
+  ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -181,9 +181,9 @@ VOID TestWithDump PointTest
    'BottomRight'
   ; // %PROPERTIES %Props
   
+  ObjectClass STATIC-VAR c:Class:Parent
   INTEGER CONST c:Offset:BottomRight
    2
-  ObjectClass STATIC-VAR c:Offset:Class:Parent
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:TopLeft
    1
@@ -362,7 +362,7 @@ VOID TestWithDump PointTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  ObjectClass STATIC-VAR c:Offset:Class:Parent
+  ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -389,7 +389,7 @@ VOID TestWithDump PointTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  ObjectClass STATIC-VAR c:Offset:Class:Parent
+  ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -427,7 +427,7 @@ VOID TestWithDump PointTest
    'Y'
   ; // %PROPERTIES %Props
   
-  ObjectClass STATIC-VAR c:Offset:Class:Parent
+  ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -463,9 +463,9 @@ VOID TestWithDump PointTest
    'BottomRight'
   ; // %PROPERTIES %Props
   
+  ObjectClass STATIC-VAR c:Class:Parent
   INTEGER CONST c:Offset:BottomRight
    2
-  ObjectClass STATIC-VAR c:Offset:Class:Parent
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:TopLeft
    1
@@ -1547,7 +1547,7 @@ ObjectClass class_impl _:Object
   'class'
  ; // %PROPERTIES %Props
  
- ObjectClass STATIC-VAR c:Offset:Class:Parent
+ ObjectClass STATIC-VAR c:Class:Parent
  FieldOffset STATIC-VAR c:Offset:Instance:Size
  INTEGER CONST c:Offset:VMT
   0
@@ -1585,7 +1585,7 @@ PointClass class_impl _:Point
   'Y'
  ; // %PROPERTIES %Props
  
- ObjectClass STATIC-VAR c:Offset:Class:Parent
+ ObjectClass STATIC-VAR c:Class:Parent
  FieldOffset STATIC-VAR c:Offset:Instance:Size
  INTEGER CONST c:Offset:VMT
   0
@@ -1621,9 +1621,9 @@ RectangleClass class_impl _:Rectangle
   'BottomRight'
  ; // %PROPERTIES %Props
  
+ ObjectClass STATIC-VAR c:Class:Parent
  INTEGER CONST c:Offset:BottomRight
   2
- ObjectClass STATIC-VAR c:Offset:Class:Parent
  FieldOffset STATIC-VAR c:Offset:Instance:Size
  INTEGER CONST c:Offset:TopLeft
   1

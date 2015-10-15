@@ -272,7 +272,7 @@ STRING FUNCTION InstanceSizeName
 CONST cClassParentName 'Class:Parent'
 
 STRING FUNCTION ClassParentName
- [ cMetaPrefix cFieldPrefix cClassParentName ] strings:Cat >>> Result
+ [ cMetaPrefix cClassParentName ] strings:Cat >>> Result
 ; // ClassParentName
 
 CONST cClassTypePrefix 'ClassOf::'
