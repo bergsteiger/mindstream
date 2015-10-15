@@ -548,6 +548,9 @@ VOID TestWithDump ObjectTest
  ObjectClass:FieldOffset
  'VMT'
  Print
+ _:Object1
+ ObjectClass:ClassParent
+ Print
  _:Object
  g_CurrentClassParent
  pop:Word:SetValue
@@ -570,6 +573,9 @@ VOID TestWithDump ObjectTest
  _:Object2
  ObjectClass:FieldOffset
  'VMT'
+ Print
+ _:Object2
+ ObjectClass:ClassParent
  Print
  _:Object2
  ObjectClass:FieldOffset
@@ -631,11 +637,13 @@ Object1
 --------
 1
 0
+<nil>
 Object2 : [ TkwCompiledFunction 256 ]
 Object2
 Object2
 --------
 2
 0
+<nil>
 1
 256

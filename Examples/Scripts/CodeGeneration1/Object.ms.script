@@ -55,6 +55,7 @@ Test&Dump ObjectTest
  l_Obj1 .InstanceSize Print
  
  ClassOf Object1 .FieldOffset VMT Print
+ ClassOf Object1 .ClassParent Print
 
  class Object2
   INTEGER member FakeField
@@ -77,6 +78,7 @@ Test&Dump ObjectTest
  l_Obj2 .InstanceSize Print
 
  ClassOf Object2 .FieldOffset VMT Print
+ ClassOf Object2 .ClassParent Print
  ClassOf Object2 .FieldOffset FakeField Print
 
  l_Obj2 .FakeField Print
