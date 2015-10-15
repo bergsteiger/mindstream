@@ -107,15 +107,18 @@ TtfwWord type ObjectClass
 ObjectClass CompileTime-VAR g_CurrentClassImpl nil
 ObjectClass CompileTime-VAR g_CurrentClassParent nil
 
-CONST cFieldPrefix 'c:Offset:'
+CONST cMetaPrefix 'c:'
+CONST cFieldPrefix 'Offset:'
+
+STRING FUNCTION FieldPrefix
+ [ cMetaPrefix cFieldPrefix ] strings:Cat >>> Result
+; // FieldPrefix
 
 PRIVATE STRING operator MakeFieldOffsetName
   STRING IN aName
 
  %SUMMARY 'Делает имя для доступа к полю' ; 
- [ cFieldPrefix 
-   aName 
- ] strings:Cat >>> Result
+ [ FieldPrefix aName ] strings:Cat >>> Result
 ; // MakeFieldOffsetName
 
 INTEGER type FieldOffset
@@ -263,13 +266,13 @@ CONST cObjectName 'Object'
 CONST cInstanceSizeName 'Instance:Size'
 
 STRING FUNCTION InstanceSizeName
- [ cFieldPrefix cInstanceSizeName ] strings:Cat >>> Result
+ [ cMetaPrefix cFieldPrefix cInstanceSizeName ] strings:Cat >>> Result
 ; // InstanceSizeName
 
 CONST cClassParentName 'Class:Parent'
 
 STRING FUNCTION ClassParentName
- [ cFieldPrefix cClassParentName ] strings:Cat >>> Result
+ [ cMetaPrefix cFieldPrefix cClassParentName ] strings:Cat >>> Result
 ; // ClassParentName
 
 CONST cClassTypePrefix 'ClassOf::'
@@ -485,12 +488,12 @@ MACRO classExpander
 
   anItem MembersIterator
    .filter> ( pop:Word:Producer pop:Word:Name NameOf CONST == )
-   .filter> ( pop:Word:Name cFieldPrefix SWAP StartsStr )  
+   .filter> ( pop:Word:Name FieldPrefix SWAP StartsStr )  
    .for> 
   ( 
    TtfwWord IN aMember
    STRING VAR l_MemberName
-   [ aMember pop:Word:Name [ cFieldPrefix ] strings:Cat '' string:ReplaceFirst ] strings:Cat >>> l_MemberName
+   [ aMember pop:Word:Name FieldPrefix '' string:ReplaceFirst ] strings:Cat >>> l_MemberName
 
    FieldOffset VAR l_ClassFieldOffset
 
