@@ -539,8 +539,11 @@ PROCEDURE DefineInstanceSize
  if ( g_InstanceSizeDefined ! ) then
  begin
   g_InstanceSizeDefined := true
-  g_CurrentClassImpl %% InstanceSizeName DO =0 ?ASSURE [ 'Размер класса ' g_CurrentClass ' почему-то уже определён' ]
-  g_ClassFieldOffset g_CurrentClassImpl %% InstanceSizeName pop:Word:SetValue
+
+  TtfwWord VAR l_InstanceSizeVAR
+  g_CurrentClassImpl %% InstanceSizeName >>> l_InstanceSizeVAR
+  l_InstanceSizeVAR DO =0 ?ASSURE [ 'Размер класса ' g_CurrentClass ' почему-то уже определён' ]
+  g_ClassFieldOffset l_InstanceSizeVAR pop:Word:SetValue
  end // g_InstanceSizeDefined !
 ; // DefineInstanceSize
 
