@@ -113,19 +113,19 @@ class-end // Bar
 ClassOf Point DumpElement
 ClassOf Rectangle DumpElement
 
-ClassOf Object VMTFieldOffset VMT Print
-ClassOf Point VMTFieldOffset VMT Print
-ClassOf Rectangle VMTFieldOffset VMT Print
+ClassOf Object .FieldOffset VMT Print
+ClassOf Point .FieldOffset VMT Print
+ClassOf Rectangle .FieldOffset VMT Print
 
-ClassOf Object VMTFieldOffset VMT Print
+ClassOf Object .FieldOffset VMT Print
 
-ClassOf Point VMTFieldOffset VMT Print
-ClassOf Point VMTFieldOffset X Print
-ClassOf Point VMTFieldOffset Y Print
+ClassOf Point .FieldOffset VMT Print
+ClassOf Point .FieldOffset X Print
+ClassOf Point .FieldOffset Y Print
 
-ClassOf Rectangle VMTFieldOffset VMT Print
-ClassOf Rectangle VMTFieldOffset TopLeft Print
-ClassOf Rectangle VMTFieldOffset BottomRight Print
+ClassOf Rectangle .FieldOffset VMT Print
+ClassOf Rectangle .FieldOffset TopLeft Print
+ClassOf Rectangle .FieldOffset BottomRight Print
 
 ClassOf Object .InstanceSize Print
 ClassOf Point .InstanceSize Print

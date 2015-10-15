@@ -1171,35 +1171,45 @@ VOID TestWithDump PointTest
  DumpElement
  _:Rectangle
  DumpElement
- _:Object _:Object pop:Word:SetValue ::
- 'c:Offset:VMT'
+ _:Object
+ ObjectClass:FieldOffset
+ 'VMT'
  Print
- _:Point _:Point pop:Word:SetValue ::
- 'c:Offset:VMT'
+ _:Point
+ ObjectClass:FieldOffset
+ 'VMT'
  Print
- _:Rectangle _:Rectangle pop:Word:SetValue ::
- 'c:Offset:VMT'
+ _:Rectangle
+ ObjectClass:FieldOffset
+ 'VMT'
  Print
- _:Object _:Object pop:Word:SetValue ::
- 'c:Offset:VMT'
+ _:Object
+ ObjectClass:FieldOffset
+ 'VMT'
  Print
- _:Point _:Point pop:Word:SetValue ::
- 'c:Offset:VMT'
+ _:Point
+ ObjectClass:FieldOffset
+ 'VMT'
  Print
- _:Point _:Point pop:Word:SetValue ::
- 'c:Offset:X'
+ _:Point
+ ObjectClass:FieldOffset
+ 'X'
  Print
- _:Point _:Point pop:Word:SetValue ::
- 'c:Offset:Y'
+ _:Point
+ ObjectClass:FieldOffset
+ 'Y'
  Print
- _:Rectangle _:Rectangle pop:Word:SetValue ::
- 'c:Offset:VMT'
+ _:Rectangle
+ ObjectClass:FieldOffset
+ 'VMT'
  Print
- _:Rectangle _:Rectangle pop:Word:SetValue ::
- 'c:Offset:TopLeft'
+ _:Rectangle
+ ObjectClass:FieldOffset
+ 'TopLeft'
  Print
- _:Rectangle _:Rectangle pop:Word:SetValue ::
- 'c:Offset:BottomRight'
+ _:Rectangle
+ ObjectClass:FieldOffset
+ 'BottomRight'
  Print
  _:Object
  ObjectClass:InstanceSize
