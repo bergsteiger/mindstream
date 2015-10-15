@@ -48,8 +48,6 @@ Test&Dump ObjectTest
  l_Obj1 .Print
  l_Obj1 .ClassName Print
 
- l_Obj1 .ClassName Print
-
  '--------' Print
 
  l_Obj1 .InstanceSize Print
@@ -69,8 +67,6 @@ Test&Dump ObjectTest
  l_Obj2 := Object2:new
 
  l_Obj2 .Print
- l_Obj2 .ClassName Print
-
  l_Obj2 .ClassName Print
 
  '--------' Print

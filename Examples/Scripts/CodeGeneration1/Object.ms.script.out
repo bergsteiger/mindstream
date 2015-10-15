@@ -533,9 +533,6 @@ VOID TestWithDump ObjectTest
  l_Obj1
  Object:ClassName
  Print
- l_Obj1
- Object:ClassName
- Print
  '--------'
  Print
  l_Obj1
@@ -553,9 +550,6 @@ VOID TestWithDump ObjectTest
  pop:Word:SetValuePrim
  l_Obj2
  Object:Print
- l_Obj2
- Object:ClassName
- Print
  l_Obj2
  Object:ClassName
  Print
@@ -627,13 +621,11 @@ _:Object
 _:Object
 Object1 : [ TkwCompiledFunction ]
 Object1
-Object1
 --------
 1
 0
 _:Object
 Object2 : [ TkwCompiledFunction 256 ]
-Object2
 Object2
 --------
 2
