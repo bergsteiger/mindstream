@@ -307,7 +307,7 @@ MACRO class
  if ( g_CurrentClass !== cObjectName ) then
  begin
 
-  [ cClassTypePrefix cObjectName ] strings:Cat Ctx:Parser:PushSymbol 
+  cObjectName ClassOfName Ctx:Parser:PushSymbol 
   axiom:PushSymbol >>> 
   axiom:PushSymbol g_CurrentClassParent
 
