@@ -35,8 +35,6 @@ USES
 EXPORTS
  InheritsAndImplementsNew.ms.dict
 
-// Понятное дело, что всю обвязку потом упрячем в отдельный словарь object.ms.dict
-
 NamedWordProducer %PROPERTIES %Props
 NamedWordProducer %METHODS %Methods
 NamedWordProducer %CLASS-METHODS %Class-Methods
