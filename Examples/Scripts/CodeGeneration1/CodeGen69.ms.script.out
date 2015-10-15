@@ -4769,6 +4769,7 @@ ObjectClass OPERATOR :: MACRO :: class_impl : _:Object
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
  OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
+ INTEGER CONST : c:Offset:Fake
  INTEGER CONST : c:Offset:VMT
  ObjectClass OPERATOR :: MACRO :: class_impl :: _:Object : Result
 ; // _:Object
@@ -4816,6 +4817,7 @@ ObjectClass OPERATOR :: MACRO :: class_impl : ClassOf::Object
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
  OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
+ INTEGER CONST : c:Offset:Fake
  INTEGER CONST : c:Offset:VMT
  ObjectClass OPERATOR :: MACRO :: class_impl :: _:Object : Result
 ; // ClassOf::Object
