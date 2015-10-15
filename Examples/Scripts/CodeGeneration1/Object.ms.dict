@@ -494,8 +494,8 @@ MACRO classExpander
   )
   
   axiom:PushSymbol (
-  axiom:PushSymbol Dec
-  axiom:PushSymbol g_ClassFieldOffset
+//  axiom:PushSymbol Dec
+//  axiom:PushSymbol l_ClassFieldOffset
   axiom:PushSymbol g_ClassFieldOffset
   axiom:PushSymbol :=
   l_ClassFieldOffset Ctx:Parser:PushInt
