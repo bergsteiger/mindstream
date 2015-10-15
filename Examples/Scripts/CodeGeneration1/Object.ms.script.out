@@ -517,6 +517,9 @@ VOID TestWithDump ObjectTest
  'VMT'
  Print
  _:Object
+ ObjectClass:ClassParent
+ Print
+ _:Object
  pop:Word:Name
  Print
  _:Object
@@ -619,6 +622,7 @@ _:Object
 --------
 1
 0
+<nil>
 _:Object
 _:Object
 Object1 : [ TkwCompiledFunction ]
