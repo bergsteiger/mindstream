@@ -349,6 +349,9 @@ VOID TestWithDump ObjectTest
  l_Obj
  Object:InstanceSize
  Print
+ _:Object _:Object pop:Word:SetValue ::
+ 'c:Offset:VMT'
+ .
  _:Object
  pop:Word:Name
  Print
@@ -409,6 +412,7 @@ Object
 _:Object
 --------
 1
+0
 _:Object
 _:Object
 Object1 : [ TkwCompiledFunction ]
