@@ -410,6 +410,9 @@ VOID TestWithDump ObjectTest
  _:Object2 _:Object2 pop:Word:SetValue ::
  'c:Offset:FakeField'
  Print
+ l_Obj2
+ Object2:FakeField
+ Print
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
@@ -466,3 +469,4 @@ Object2
 3
 0
 2
+256
