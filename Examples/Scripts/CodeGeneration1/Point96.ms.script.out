@@ -81,7 +81,7 @@ VOID TestWithDump PointTest
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
-  FieldOffset STATIC-VAR c:Offset:Instance:Size
+  FieldOffset STATIC-VAR c:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
   _:Bar
@@ -108,7 +108,7 @@ VOID TestWithDump PointTest
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
-  FieldOffset STATIC-VAR c:Offset:Instance:Size
+  FieldOffset STATIC-VAR c:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
   _:Foo
@@ -146,7 +146,7 @@ VOID TestWithDump PointTest
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
-  FieldOffset STATIC-VAR c:Offset:Instance:Size
+  FieldOffset STATIC-VAR c:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
   INTEGER CONST c:Offset:X
@@ -182,9 +182,9 @@ VOID TestWithDump PointTest
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
+  FieldOffset STATIC-VAR c:Instance:Size
   INTEGER CONST c:Offset:BottomRight
    2
-  FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:TopLeft
    1
   INTEGER CONST c:Offset:VMT
@@ -386,7 +386,7 @@ VOID TestWithDump PointTest
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
-  FieldOffset STATIC-VAR c:Offset:Instance:Size
+  FieldOffset STATIC-VAR c:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
   _:Bar
@@ -413,7 +413,7 @@ VOID TestWithDump PointTest
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
-  FieldOffset STATIC-VAR c:Offset:Instance:Size
+  FieldOffset STATIC-VAR c:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
   _:Foo
@@ -451,7 +451,7 @@ VOID TestWithDump PointTest
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
-  FieldOffset STATIC-VAR c:Offset:Instance:Size
+  FieldOffset STATIC-VAR c:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
   INTEGER CONST c:Offset:X
@@ -487,9 +487,9 @@ VOID TestWithDump PointTest
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
+  FieldOffset STATIC-VAR c:Instance:Size
   INTEGER CONST c:Offset:BottomRight
    2
-  FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:TopLeft
    1
   INTEGER CONST c:Offset:VMT
@@ -1642,7 +1642,7 @@ ObjectClass class_impl _:Object
  ; // %PROPERTIES %Props
  
  ObjectClass STATIC-VAR c:Class:Parent
- FieldOffset STATIC-VAR c:Offset:Instance:Size
+ FieldOffset STATIC-VAR c:Instance:Size
  INTEGER CONST c:Offset:VMT
   0
  _:Object
@@ -1680,7 +1680,7 @@ PointClass class_impl _:Point
  ; // %PROPERTIES %Props
  
  ObjectClass STATIC-VAR c:Class:Parent
- FieldOffset STATIC-VAR c:Offset:Instance:Size
+ FieldOffset STATIC-VAR c:Instance:Size
  INTEGER CONST c:Offset:VMT
   0
  INTEGER CONST c:Offset:X
@@ -1716,9 +1716,9 @@ RectangleClass class_impl _:Rectangle
  ; // %PROPERTIES %Props
  
  ObjectClass STATIC-VAR c:Class:Parent
+ FieldOffset STATIC-VAR c:Instance:Size
  INTEGER CONST c:Offset:BottomRight
   2
- FieldOffset STATIC-VAR c:Offset:Instance:Size
  INTEGER CONST c:Offset:TopLeft
   1
  INTEGER CONST c:Offset:VMT
