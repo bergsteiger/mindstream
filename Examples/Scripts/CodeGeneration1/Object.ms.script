@@ -55,7 +55,7 @@ Test&Dump ObjectTest
  
  ClassOf Object1 VMTFieldOffset VMT Print
 
-/*{ class Object2
+ class Object2
   INTEGER member FakeField
   INTEGER readonly FakeField read FakeField
   constructor new ( )
@@ -78,7 +78,7 @@ Test&Dump ObjectTest
  ClassOf Object2 VMTFieldOffset VMT Print
  ClassOf Object2 VMTFieldOffset FakeField Print
 
- //l_Obj2 .FakeField Print}*/
+ //l_Obj2 .FakeField Print
 
 ; // ObjectTest
 
