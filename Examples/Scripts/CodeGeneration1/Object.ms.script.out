@@ -177,7 +177,7 @@ VOID TestWithDump ObjectTest
  Print
  _:Object _:Object pop:Word:SetValue ::
  'c:Offset:VMT'
- .
+ Print
  _:Object
  pop:Word:Name
  Print
@@ -202,7 +202,7 @@ VOID TestWithDump ObjectTest
  Print
  _:Object1 _:Object1 pop:Word:SetValue ::
  'c:Offset:VMT'
- .
+ Print
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object

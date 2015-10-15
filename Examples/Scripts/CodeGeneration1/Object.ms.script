@@ -29,7 +29,7 @@ Test&Dump ObjectTest
 
  l_Obj .InstanceSize Print
 
- ClassOf Object VMTFieldOffset VMT .
+ ClassOf Object VMTFieldOffset VMT Print
 
  ClassOf Object pop:Word:Name Print
  ClassOf Object pop:Word:Name Print
@@ -53,7 +53,7 @@ Test&Dump ObjectTest
 
  l_Obj1 .InstanceSize Print
  
- ClassOf Object1 VMTFieldOffset VMT .
+ ClassOf Object1 VMTFieldOffset VMT Print
 
 /*{ class Object2
   INTEGER member FakeField
@@ -75,8 +75,8 @@ Test&Dump ObjectTest
 
  l_Obj2 .InstanceSize Print
 
- ClassOf Object2 VMTFieldOffset VMT .
- ClassOf Object2 VMTFieldOffset FakeField .
+ ClassOf Object2 VMTFieldOffset VMT Print
+ ClassOf Object2 VMTFieldOffset FakeField Print
 
  //l_Obj2 .FakeField Print}*/
 

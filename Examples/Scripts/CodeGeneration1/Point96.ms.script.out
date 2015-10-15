@@ -981,49 +981,49 @@ VOID TestWithDump PointTest
  DumpElement
  _:Object _:Object pop:Word:SetValue ::
  'c:Offset:VMT'
- .
+ Print
  _:Point _:Point pop:Word:SetValue ::
  'c:Offset:VMT'
- .
+ Print
  _:Rectangle _:Rectangle pop:Word:SetValue ::
  'c:Offset:VMT'
- .
+ Print
  _:Object _:Object pop:Word:SetValue ::
  'c:Offset:VMT'
- .
+ Print
  _:Point _:Point pop:Word:SetValue ::
  'c:Offset:VMT'
- .
+ Print
  _:Point _:Point pop:Word:SetValue ::
  'c:Offset:X'
- .
+ Print
  _:Point _:Point pop:Word:SetValue ::
  'c:Offset:Y'
- .
+ Print
  _:Rectangle _:Rectangle pop:Word:SetValue ::
  'c:Offset:VMT'
- .
+ Print
  _:Rectangle _:Rectangle pop:Word:SetValue ::
  'c:Offset:TopLeft'
- .
+ Print
  _:Rectangle _:Rectangle pop:Word:SetValue ::
  'c:Offset:BottomRight'
- .
+ Print
  _:Object
  ObjectClass:InstanceSize
- .
+ Print
  _:Point
  ObjectClass:InstanceSize
- .
+ Print
  _:Rectangle
  ObjectClass:InstanceSize
- .
+ Print
  _:Foo
  ObjectClass:InstanceSize
- .
+ Print
  _:Bar
  ObjectClass:InstanceSize
- .
+ Print
  Point::
  0
  0
