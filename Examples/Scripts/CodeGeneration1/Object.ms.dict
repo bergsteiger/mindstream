@@ -359,7 +359,7 @@ MACRO class
 class Object
 
 ObjectClass member VMT
-member Fake
+STRING member Fake
 
 MACRO readonly
   Literal IN aName
