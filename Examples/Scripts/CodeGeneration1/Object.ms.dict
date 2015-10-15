@@ -492,9 +492,10 @@ MACRO classExpander
    [ aMember pop:Word:Name [ cFieldPrefix ] strings:Cat '' string:ReplaceFirst ] strings:Cat Ctx:Parser:PushSymbol
    
   )
-
+  
+  axiom:PushSymbol g_ClassFieldOffset
+  axiom:PushSymbol :=
   l_ClassFieldOffset Ctx:Parser:PushInt
-  axiom:PushSymbol Msg
 
   l_ClassFieldOffset >>> g_ClassFieldOffset
 
