@@ -493,7 +493,11 @@ MACRO classExpander
    
   )
 
+  l_ClassFieldOffset Ctx:Parser:PushInt
+  axiom:PushSymbol Msg
+
   l_ClassFieldOffset >>> g_ClassFieldOffset
+
   //Inc g_ClassFieldOffset
   // - это тут не надо
 
