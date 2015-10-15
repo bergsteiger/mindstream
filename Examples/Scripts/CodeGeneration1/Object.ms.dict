@@ -468,6 +468,8 @@ FieldOffset class-method FieldOffset
 
  TtfwWord VAR l_FieldVAR
  Self %% l_FieldName >>> l_FieldVAR
+
+ l_FieldVAR IsNil ?FAIL [ 'Поле ' l_FieldName ' на классе ' Self .ClassName ' не определено' ]
  l_FieldVAR DO >>> Result
 
 class-method-end // FieldOffset

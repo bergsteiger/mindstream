@@ -240,6 +240,17 @@ VOID TestWithDump ObjectTest
   l_FieldVAR
   pop:Word:SetValue
   l_FieldVAR
+  IsNil
+  ?FAIL
+  ARRAY [
+   'Поле '
+   l_FieldName
+   ' на классе '
+   Self
+   ObjectClass:ClassName
+   ' не определено'
+  ]
+  l_FieldVAR
   DO
   Result
   pop:Word:SetValue
@@ -384,6 +395,17 @@ VOID TestWithDump ObjectTest
   l_FieldName
   l_FieldVAR
   pop:Word:SetValue
+  l_FieldVAR
+  IsNil
+  ?FAIL
+  ARRAY [
+   'Поле '
+   l_FieldName
+   ' на классе '
+   Self
+   ObjectClass:ClassName
+   ' не определено'
+  ]
   l_FieldVAR
   DO
   Result
