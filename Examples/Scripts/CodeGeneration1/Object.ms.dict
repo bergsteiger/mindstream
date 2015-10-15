@@ -106,7 +106,7 @@ BOOLEAN CompileTime-VAR g_InstanceSizeDefined false
 
 TtfwWord type ObjectClass
 
-ObjectClass CompileTime-VAR g_CurrentClassImplWord nil
+ObjectClass CompileTime-VAR g_CurrentClassImpl nil
 
 CONST cFieldPrefix 'c:Offset:'
 
@@ -137,7 +137,7 @@ VOID operator define_member
   FieldOffset IN aOffset
 
  axiom:PushSymbol implementation
- g_CurrentClassImplWord pop:Word:Name Ctx:Parser:PushSymbol
+ g_CurrentClassImpl pop:Word:Name Ctx:Parser:PushSymbol
  axiom:PushSymbol Const
  aName MakeFieldOffsetName Ctx:Parser:PushSymbol
  aOffset Ctx:Parser:PushInt
@@ -341,7 +341,7 @@ MACRO class
   '[EXECUTE] ('
   l_CurrentClassImpl
   '>>>'
-  'g_CurrentClassImplWord'
+  'g_CurrentClassImpl'
   ')'
   
   'array' 
@@ -539,8 +539,8 @@ PROCEDURE DefineInstanceSize
  if ( g_InstanceSizeDefined ! ) then
  begin
   g_InstanceSizeDefined := true
-  g_CurrentClassImplWord %% InstanceSizeName DO =0 ?ASSURE [ 'Размер класса ' g_CurrentClass ' почему-то уже определён' ]
-  g_ClassFieldOffset g_CurrentClassImplWord %% InstanceSizeName pop:Word:SetValue
+  g_CurrentClassImpl %% InstanceSizeName DO =0 ?ASSURE [ 'Размер класса ' g_CurrentClass ' почему-то уже определён' ]
+  g_ClassFieldOffset g_CurrentClassImpl %% InstanceSizeName pop:Word:SetValue
  end // g_InstanceSizeDefined !
 ; // DefineInstanceSize
 
@@ -549,7 +549,7 @@ MACRO class-end
 
  [
   'implementation'
-  g_CurrentClassImplWord pop:Word:Name
+  g_CurrentClassImpl pop:Word:Name
 
    NameOf %PROPERTIES g_CurrentClassProperties ListToNameAsString
 
@@ -563,7 +563,7 @@ MACRO class-end
  ] Ctx:Parser:PushArray
 
  g_CurrentClass := ''
- g_CurrentClassImplWord := nil
+ g_CurrentClassImpl := nil
  g_InstanceSizeDefined := false
  g_ClassFieldOffset := 0
  
@@ -600,7 +600,7 @@ MACRO new[
 
  axiom:PushSymbol [
  axiom:PushSymbol @
- g_CurrentClassImplWord pop:Word:Name Ctx:Parser:PushSymbol
+ g_CurrentClassImpl pop:Word:Name Ctx:Parser:PushSymbol
  
  l_InstanceSize LOOP ( 'uninited member' Ctx:Parser:PushString )
 ; // new[
