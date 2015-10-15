@@ -284,14 +284,14 @@ VOID TestWithDump PointTest
  ; // STRING : ObjectClass:ClassName
  
  FieldOffset : ObjectClass:FieldOffset
+  %SUMMARY %SUM
+   'Вычисляет смещение поля класса'
+  ; // %SUMMARY %SUM
+  
   ^L IN aFieldName
-  STRING VAR l_ClassName
   STRING VAR l_FieldName
+  TtfwWord VAR l_FieldVAR
   ObjectClass IN Self
-  Self
-  ObjectClass:ClassName
-  l_ClassName
-  pop:Word:SetValue
   aFieldName
   |N
   l_FieldName
@@ -300,14 +300,26 @@ VOID TestWithDump PointTest
   MakeFieldOffsetName
   l_FieldName
   pop:Word:SetValue
-  axiom:PushSymbol
-  ClassOf
-  l_ClassName
-  Ctx:Parser:PushSymbol
-  axiom:PushSymbol
-  ::
+  Self
+  %%
   l_FieldName
-  Ctx:Parser:PushSymbol
+  l_FieldVAR
+  pop:Word:SetValue
+  l_FieldVAR
+  IsNil
+  ?FAIL
+  ARRAY [
+   'Поле '
+   l_FieldName
+   ' на классе '
+   Self
+   ObjectClass:ClassName
+   ' не определено'
+  ]
+  l_FieldVAR
+  DO
+  Result
+  pop:Word:SetValue
  ; // FieldOffset : ObjectClass:FieldOffset
  
  INTEGER : ObjectClass:InstanceSize
@@ -542,14 +554,14 @@ VOID TestWithDump PointTest
  ; // STRING : ObjectClass:ClassName
  
  FieldOffset : ObjectClass:FieldOffset
+  %SUMMARY %SUM
+   'Вычисляет смещение поля класса'
+  ; // %SUMMARY %SUM
+  
   ^L IN aFieldName
-  STRING VAR l_ClassName
   STRING VAR l_FieldName
+  TtfwWord VAR l_FieldVAR
   ObjectClass IN Self
-  Self
-  ObjectClass:ClassName
-  l_ClassName
-  pop:Word:SetValue
   aFieldName
   |N
   l_FieldName
@@ -558,14 +570,26 @@ VOID TestWithDump PointTest
   MakeFieldOffsetName
   l_FieldName
   pop:Word:SetValue
-  axiom:PushSymbol
-  ClassOf
-  l_ClassName
-  Ctx:Parser:PushSymbol
-  axiom:PushSymbol
-  ::
+  Self
+  %%
   l_FieldName
-  Ctx:Parser:PushSymbol
+  l_FieldVAR
+  pop:Word:SetValue
+  l_FieldVAR
+  IsNil
+  ?FAIL
+  ARRAY [
+   'Поле '
+   l_FieldName
+   ' на классе '
+   Self
+   ObjectClass:ClassName
+   ' не определено'
+  ]
+  l_FieldVAR
+  DO
+  Result
+  pop:Word:SetValue
  ; // FieldOffset : ObjectClass:FieldOffset
  
  INTEGER : ObjectClass:InstanceSize
@@ -892,14 +916,14 @@ VOID TestWithDump PointTest
  ; // STRING : ObjectClass:ClassName
  
  FieldOffset : ObjectClass:FieldOffset
+  %SUMMARY %SUM
+   'Вычисляет смещение поля класса'
+  ; // %SUMMARY %SUM
+  
   ^L IN aFieldName
-  STRING VAR l_ClassName
   STRING VAR l_FieldName
+  TtfwWord VAR l_FieldVAR
   ObjectClass IN Self
-  Self
-  ObjectClass:ClassName
-  l_ClassName
-  pop:Word:SetValue
   aFieldName
   |N
   l_FieldName
@@ -908,14 +932,26 @@ VOID TestWithDump PointTest
   MakeFieldOffsetName
   l_FieldName
   pop:Word:SetValue
-  axiom:PushSymbol
-  ClassOf
-  l_ClassName
-  Ctx:Parser:PushSymbol
-  axiom:PushSymbol
-  ::
+  Self
+  %%
   l_FieldName
-  Ctx:Parser:PushSymbol
+  l_FieldVAR
+  pop:Word:SetValue
+  l_FieldVAR
+  IsNil
+  ?FAIL
+  ARRAY [
+   'Поле '
+   l_FieldName
+   ' на классе '
+   Self
+   ObjectClass:ClassName
+   ' не определено'
+  ]
+  l_FieldVAR
+  DO
+  Result
+  pop:Word:SetValue
  ; // FieldOffset : ObjectClass:FieldOffset
  
  INTEGER : ObjectClass:InstanceSize
@@ -1079,14 +1115,14 @@ VOID TestWithDump PointTest
  ; // STRING : ObjectClass:ClassName
  
  FieldOffset : ObjectClass:FieldOffset
+  %SUMMARY %SUM
+   'Вычисляет смещение поля класса'
+  ; // %SUMMARY %SUM
+  
   ^L IN aFieldName
-  STRING VAR l_ClassName
   STRING VAR l_FieldName
+  TtfwWord VAR l_FieldVAR
   ObjectClass IN Self
-  Self
-  ObjectClass:ClassName
-  l_ClassName
-  pop:Word:SetValue
   aFieldName
   |N
   l_FieldName
@@ -1095,14 +1131,26 @@ VOID TestWithDump PointTest
   MakeFieldOffsetName
   l_FieldName
   pop:Word:SetValue
-  axiom:PushSymbol
-  ClassOf
-  l_ClassName
-  Ctx:Parser:PushSymbol
-  axiom:PushSymbol
-  ::
+  Self
+  %%
   l_FieldName
-  Ctx:Parser:PushSymbol
+  l_FieldVAR
+  pop:Word:SetValue
+  l_FieldVAR
+  IsNil
+  ?FAIL
+  ARRAY [
+   'Поле '
+   l_FieldName
+   ' на классе '
+   Self
+   ObjectClass:ClassName
+   ' не определено'
+  ]
+  l_FieldVAR
+  DO
+  Result
+  pop:Word:SetValue
  ; // FieldOffset : ObjectClass:FieldOffset
  
  INTEGER : ObjectClass:InstanceSize

@@ -4950,9 +4950,11 @@ STRING : : ObjectClass:ClassName
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:ClassName
 FieldOffset : : ObjectClass:FieldOffset
+ Documentation:
+  Вычисляет смещение поля класса
  ^L OPERATOR :: IN : aFieldName
- STRING OPERATOR :: VAR : l_ClassName
  STRING OPERATOR :: VAR : l_FieldName
+ TtfwWord OPERATOR :: VAR : l_FieldVAR
  FieldOffset : :: ObjectClass:FieldOffset : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:FieldOffset
