@@ -458,10 +458,8 @@ MACRO VMTFieldOffset
 
 FieldOffset class-method FieldOffset
   Literal IN aFieldName
-
- STRING VAR l_ClassName
- Self .ClassName >>> l_ClassName
-
+ 
+ %SUMMARY 'Вычисляет смещение поля класса' ;
  STRING VAR l_FieldName
  aFieldName |N >>> l_FieldName
  l_FieldName MakeFieldOffsetName >>> l_FieldName

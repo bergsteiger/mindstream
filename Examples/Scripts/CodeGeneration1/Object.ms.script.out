@@ -217,15 +217,14 @@ VOID TestWithDump ObjectTest
  ; // STRING : ObjectClass:ClassName
  
  FieldOffset : ObjectClass:FieldOffset
+  %SUMMARY %SUM
+   'Вычисляет смещение поля класса'
+  ; // %SUMMARY %SUM
+  
   ^L IN aFieldName
-  STRING VAR l_ClassName
   STRING VAR l_FieldName
   TtfwWord VAR l_FieldVAR
   ObjectClass IN Self
-  Self
-  ObjectClass:ClassName
-  l_ClassName
-  pop:Word:SetValue
   aFieldName
   |N
   l_FieldName
@@ -373,15 +372,14 @@ VOID TestWithDump ObjectTest
  ; // STRING : ObjectClass:ClassName
  
  FieldOffset : ObjectClass:FieldOffset
+  %SUMMARY %SUM
+   'Вычисляет смещение поля класса'
+  ; // %SUMMARY %SUM
+  
   ^L IN aFieldName
-  STRING VAR l_ClassName
   STRING VAR l_FieldName
   TtfwWord VAR l_FieldVAR
   ObjectClass IN Self
-  Self
-  ObjectClass:ClassName
-  l_ClassName
-  pop:Word:SetValue
   aFieldName
   |N
   l_FieldName
