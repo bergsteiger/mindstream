@@ -122,6 +122,16 @@ PRIVATE STRING operator MakeFieldOffsetName
 INTEGER type FieldOffset
 // - смещение поля
 
+FieldOffset CompileTime-VAR g_ClassFieldOffset 0
+
+ARRAY CompileTime-VAR g_CurrentClassProperties [ ]
+
+ARRAY CompileTime-VAR g_CurrentClassMethods [ ]
+
+ARRAY CompileTime-VAR g_CurrentMetaClassMethods [ ]
+
+ARRAY CompileTime-VAR g_CurrentClassConstructors [ ]
+
 VOID operator define_member
  STRING IN aName
  FieldOffset IN aOffset
@@ -134,16 +144,6 @@ VOID operator define_member
  axiom:PushSymbol end.
 
 ; // define_member
-
-FieldOffset CompileTime-VAR g_ClassFieldOffset 0
-
-ARRAY CompileTime-VAR g_CurrentClassProperties [ ]
-
-ARRAY CompileTime-VAR g_CurrentClassMethods [ ]
-
-ARRAY CompileTime-VAR g_CurrentMetaClassMethods [ ]
-
-ARRAY CompileTime-VAR g_CurrentClassConstructors [ ]
 
 MACRO member
   Literal IN aName
