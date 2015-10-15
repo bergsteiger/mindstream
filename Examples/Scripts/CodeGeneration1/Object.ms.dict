@@ -296,6 +296,7 @@ MACRO class
  g_CurrentClassConstructors := [ ]
  g_ClassFieldOffset := 0
  g_InstanceSizeDefined := false
+ g_CurrentClassParent := nil
  aName |N >>> g_CurrentClass
  STRING VAR l_CurrentClassImpl
  g_CurrentClass ClassImplName >>> l_CurrentClassImpl
