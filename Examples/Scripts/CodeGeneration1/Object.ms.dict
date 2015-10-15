@@ -107,6 +107,7 @@ BOOLEAN CompileTime-VAR g_InstanceSizeDefined false
 TtfwWord type ObjectClass
 
 ObjectClass CompileTime-VAR g_CurrentClassImpl nil
+ObjectClass CompileTime-VAR g_CurrentClassParent nil
 
 CONST cFieldPrefix 'c:Offset:'
 
@@ -568,6 +569,7 @@ MACRO class-end
 
  g_CurrentClass := ''
  g_CurrentClassImpl := nil
+ g_CurrentClassParent := nil
  g_InstanceSizeDefined := false
  g_ClassFieldOffset := 0
  
