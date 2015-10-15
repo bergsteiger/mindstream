@@ -463,6 +463,12 @@ INTEGER class-method InstanceSize
  Self %% InstanceSizeName DO >>> Result
 class-method-end // InstanceSize
 
+PROCEDURE CompileMember
+  STRING IN aMemberName
+  INTEGER IN aMemberOffset
+ aMemberName aMemberOffset define_member
+; // CompileMember
+
 MACRO classExpander
   ^ IN anImpl
 
@@ -481,9 +487,14 @@ MACRO classExpander
    TtfwWord IN aMember
    STRING VAR l_MemberName
    [ aMember pop:Word:Name [ cFieldPrefix ] strings:Cat '' string:ReplaceFirst ] strings:Cat >>> l_MemberName
-   axiom:PushSymbol member
 
    aMember DO >>> g_ClassFieldOffset
+
+   l_MemberName Ctx:Parser:PushString
+   l_MemberName Msg
+   g_ClassFieldOffset Ctx:Parser:PushInt
+   g_ClassFieldOffset Msg
+   axiom:PushSymbol CompileMember
 
    if ( l_ClassFieldOffset < g_ClassFieldOffset ) then
    // - тут исправляем "кривизну" с сортировкой
@@ -491,8 +502,6 @@ MACRO classExpander
     g_ClassFieldOffset >>> l_ClassFieldOffset
    end
 
-   l_MemberName Ctx:Parser:PushSymbol
-   
   )
   
   axiom:PushSymbol (

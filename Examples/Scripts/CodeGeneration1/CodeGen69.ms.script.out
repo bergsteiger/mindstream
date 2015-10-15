@@ -4829,6 +4829,10 @@ STRING FUNCTION : ClassRefName
 ; // ClassRefName
 STRING CONST : ClassRefSuffix
 STRING CONST : cObjectName
+IMMEDIATE VOID OPERATOR :: MACRO : CompileMember
+ STRING OPERATOR :: IN : aMemberName
+ INTEGER OPERATOR :: IN : aMemberOffset
+; // CompileMember
 IMMEDIATE VOID OPERATOR :: MACRO : constructor
  Documentation:
   Конструктор объектов

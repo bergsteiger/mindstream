@@ -19,8 +19,6 @@ VOID TestWithDump ObjectTest
   ; // %PROPERTIES %Props
   
   FieldOffset STATIC-VAR c:Offset:Instance:Size
-  INTEGER CONST c:Offset:VMT
-   0
   _:Object1
   Result
   pop:Word:SetValue
@@ -46,8 +44,6 @@ VOID TestWithDump ObjectTest
   ; // %PROPERTIES %Props
   
   FieldOffset STATIC-VAR c:Offset:Instance:Size
-  INTEGER CONST c:Offset:VMT
-   0
   _:Object1
   Result
   pop:Word:SetValue
@@ -184,6 +180,9 @@ VOID TestWithDump ObjectTest
  _:Object
  pop:Word:Name
  Print
+ 'VMT'
+ 0
+ CompileMember
  (
   0
   g_ClassFieldOffset
@@ -249,9 +248,4 @@ _:Object
 0
 _:Object
 _:Object
-Object1 : [ TkwCompiledFunction ]
-Object1
-Object1
---------
-1
-0
+Access violation at address 0048E6E5 in module 'call.ms.script.exe'. Read of address 00000000
