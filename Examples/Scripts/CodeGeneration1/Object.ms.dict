@@ -267,6 +267,12 @@ STRING FUNCTION InstanceSizeName
  [ cFieldPrefix cInstanceSizeName ] strings:Cat >>> Result
 ; // InstanceSizeName
 
+CONST cClassParentName 'Class:Parent'
+
+STRING FUNCTION ClassParentName
+ [ cFieldPrefix cClassParentName ] strings:Cat >>> Result
+; // ClassParentName
+
 CONST cClassTypePrefix 'ClassOf::'
 
 STRING FUNCTION ClassOfName

@@ -4781,6 +4781,7 @@ ObjectClass OPERATOR :: MACRO :: class_impl : _:Object
  ObjectClass OPERATOR :: MACRO :: class_impl :: _:Object : Result
 ; // _:Object
 STRING CONST : cClassImplPrefix
+STRING CONST : cClassParentName
 STRING CONST : cClassTypePrefix
 STRING CONST : cFieldPrefix
 STRING CONST : cInstanceSizeName
@@ -4831,6 +4832,9 @@ STRING FUNCTION : ClassOfName
  STRING OPERATOR :: IN : aClassName
  STRING FUNCTION :: ClassOfName : Result
 ; // ClassOfName
+STRING FUNCTION : ClassParentName
+ STRING FUNCTION :: ClassParentName : Result
+; // ClassParentName
 STRING FUNCTION : ClassRefName
  STRING OPERATOR :: IN : aName
  STRING FUNCTION :: ClassRefName : Result
