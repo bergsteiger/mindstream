@@ -359,8 +359,8 @@ MACRO class
 class Object
 
 ObjectClass member VMT
-STRING member Fake
-INTEGER member Fake1
+//STRING member Fake
+//INTEGER member Fake1
 
 MACRO readonly
   Literal IN aName

@@ -80,10 +80,6 @@ VOID TestWithDump PointTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c:Offset:Fake
-   1
-  INTEGER CONST c:Offset:Fake1
-   2
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -110,10 +106,6 @@ VOID TestWithDump PointTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c:Offset:Fake
-   1
-  INTEGER CONST c:Offset:Fake1
-   2
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -151,17 +143,13 @@ VOID TestWithDump PointTest
    'Y'
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c:Offset:Fake
-   1
-  INTEGER CONST c:Offset:Fake1
-   2
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
   INTEGER CONST c:Offset:X
-   3
+   1
   INTEGER CONST c:Offset:Y
-   4
+   2
   _:Point
   Result
   pop:Word:SetValue
@@ -191,14 +179,10 @@ VOID TestWithDump PointTest
   ; // %PROPERTIES %Props
   
   INTEGER CONST c:Offset:BottomRight
-   4
-  INTEGER CONST c:Offset:Fake
-   1
-  INTEGER CONST c:Offset:Fake1
    2
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:TopLeft
-   3
+   1
   INTEGER CONST c:Offset:VMT
    0
   _:Rectangle
@@ -245,8 +229,6 @@ VOID TestWithDump PointTest
   ARRAY [
    @
    _:Object
-   'uninited member'
-   'uninited member'
   ]
   Result
   pop:Word:SetValue
@@ -320,10 +302,6 @@ VOID TestWithDump PointTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c:Offset:Fake
-   1
-  INTEGER CONST c:Offset:Fake1
-   2
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -350,10 +328,6 @@ VOID TestWithDump PointTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c:Offset:Fake
-   1
-  INTEGER CONST c:Offset:Fake1
-   2
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -391,17 +365,13 @@ VOID TestWithDump PointTest
    'Y'
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c:Offset:Fake
-   1
-  INTEGER CONST c:Offset:Fake1
-   2
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
   INTEGER CONST c:Offset:X
-   3
+   1
   INTEGER CONST c:Offset:Y
-   4
+   2
   _:Point
   Result
   pop:Word:SetValue
@@ -431,14 +401,10 @@ VOID TestWithDump PointTest
   ; // %PROPERTIES %Props
   
   INTEGER CONST c:Offset:BottomRight
-   4
-  INTEGER CONST c:Offset:Fake
-   1
-  INTEGER CONST c:Offset:Fake1
    2
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:TopLeft
-   3
+   1
   INTEGER CONST c:Offset:VMT
    0
   _:Rectangle
@@ -485,8 +451,6 @@ VOID TestWithDump PointTest
   ARRAY [
    @
    _:Object
-   'uninited member'
-   'uninited member'
   ]
   Result
   pop:Word:SetValue
@@ -613,8 +577,6 @@ VOID TestWithDump PointTest
   ARRAY [
    @
    _:Point
-   'uninited member'
-   'uninited member'
    Pixel (
     _aX |^
    )
@@ -721,8 +683,6 @@ VOID TestWithDump PointTest
   ARRAY [
    @
    _:Object
-   'uninited member'
-   'uninited member'
   ]
   Result
   pop:Word:SetValue
@@ -885,8 +845,6 @@ VOID TestWithDump PointTest
   ARRAY [
    @
    _:Rectangle
-   'uninited member'
-   'uninited member'
    Point (
     _aTopLeft |^
    )
@@ -944,8 +902,6 @@ VOID TestWithDump PointTest
   ARRAY [
    @
    _:Object
-   'uninited member'
-   'uninited member'
   ]
   Result
   pop:Word:SetValue
@@ -1335,10 +1291,6 @@ ObjectClass class_impl _:Object
   'class'
  ; // %PROPERTIES %Props
  
- INTEGER CONST c:Offset:Fake
-  1
- INTEGER CONST c:Offset:Fake1
-  2
  FieldOffset STATIC-VAR c:Offset:Instance:Size
  INTEGER CONST c:Offset:VMT
   0
@@ -1376,17 +1328,13 @@ PointClass class_impl _:Point
   'Y'
  ; // %PROPERTIES %Props
  
- INTEGER CONST c:Offset:Fake
-  1
- INTEGER CONST c:Offset:Fake1
-  2
  FieldOffset STATIC-VAR c:Offset:Instance:Size
  INTEGER CONST c:Offset:VMT
   0
  INTEGER CONST c:Offset:X
-  3
+  1
  INTEGER CONST c:Offset:Y
-  4
+  2
  _:Point
  Result
  pop:Word:SetValue
@@ -1416,14 +1364,10 @@ RectangleClass class_impl _:Rectangle
  ; // %PROPERTIES %Props
  
  INTEGER CONST c:Offset:BottomRight
-  4
- INTEGER CONST c:Offset:Fake
-  1
- INTEGER CONST c:Offset:Fake1
   2
  FieldOffset STATIC-VAR c:Offset:Instance:Size
  INTEGER CONST c:Offset:TopLeft
-  3
+  1
  INTEGER CONST c:Offset:VMT
   0
  _:Rectangle
@@ -1436,22 +1380,22 @@ RectangleClass class_impl _:Rectangle
 0
 0
 0
-3
-4
+1
+2
 0
-3
-4
-3
-5
-5
+1
+2
+1
 3
 3
+1
+1
 ( X: 0, Y: 0 )
 ( X: 0, Y: 0 )
-Point : [ TkwCompiledFunction uninited member uninited member 0 0 ]
-5
-5
-5
+Point : [ TkwCompiledFunction 0 0 ]
+3
+3
+3
 ( X: 0, Y: 0 )
 ( X: 0, Y: 0 )
 ( X: 1, Y: 1 )
@@ -1518,7 +1462,7 @@ Object
 Object
 Object
 Object
-5
+3
 ( TopLeft: ( X: 0, Y: 0 ), BottomRight: ( X: 2, Y: 2 ) )
 ( TopLeft: ( X: 3, Y: 3 ), BottomRight: ( X: -1, Y: -1 ) )
 _:Rectangle

@@ -25,10 +25,6 @@ VOID TestWithDump ObjectTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c:Offset:Fake
-   1
-  INTEGER CONST c:Offset:Fake1
-   2
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -57,12 +53,8 @@ VOID TestWithDump ObjectTest
    'FakeField'
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c:Offset:Fake
-   1
-  INTEGER CONST c:Offset:Fake1
-   2
   INTEGER CONST c:Offset:FakeField
-   3
+   1
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -90,10 +82,6 @@ VOID TestWithDump ObjectTest
   %PROPERTIES %Props
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c:Offset:Fake
-   1
-  INTEGER CONST c:Offset:Fake1
-   2
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -122,12 +110,8 @@ VOID TestWithDump ObjectTest
    'FakeField'
   ; // %PROPERTIES %Props
   
-  INTEGER CONST c:Offset:Fake
-   1
-  INTEGER CONST c:Offset:Fake1
-   2
   INTEGER CONST c:Offset:FakeField
-   3
+   1
   FieldOffset STATIC-VAR c:Offset:Instance:Size
   INTEGER CONST c:Offset:VMT
    0
@@ -178,8 +162,6 @@ VOID TestWithDump ObjectTest
   ARRAY [
    @
    _:Object1
-   'uninited member'
-   'uninited member'
   ]
   Result
   pop:Word:SetValue
@@ -286,8 +268,6 @@ VOID TestWithDump ObjectTest
   ARRAY [
    @
    _:Object2
-   'uninited member'
-   'uninited member'
    256
   ]
   Result
@@ -446,10 +426,6 @@ ObjectClass class_impl _:Object
   'class'
  ; // %PROPERTIES %Props
  
- INTEGER CONST c:Offset:Fake
-  1
- INTEGER CONST c:Offset:Fake1
-  2
  FieldOffset STATIC-VAR c:Offset:Instance:Size
  INTEGER CONST c:Offset:VMT
   0
@@ -459,26 +435,26 @@ ObjectClass class_impl _:Object
 ; // ObjectClass class_impl _:Object
 
 _:Object
-Object : [ TkwCompiledFunction uninited member uninited member ]
+Object : [ TkwCompiledFunction ]
 Object
 Object
 _:Object
 --------
-3
+1
 0
 _:Object
 _:Object
-Object1 : [ TkwCompiledFunction uninited member uninited member ]
+Object1 : [ TkwCompiledFunction ]
 Object1
 Object1
 --------
-3
+1
 0
-Object2 : [ TkwCompiledFunction uninited member uninited member 256 ]
+Object2 : [ TkwCompiledFunction 256 ]
 Object2
 Object2
 --------
-4
+2
 0
-3
+1
 256
