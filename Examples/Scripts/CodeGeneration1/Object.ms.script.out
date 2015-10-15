@@ -220,6 +220,7 @@ VOID TestWithDump ObjectTest
   ^L IN aFieldName
   STRING VAR l_ClassName
   STRING VAR l_FieldName
+  TtfwWord VAR l_FieldVAR
   ObjectClass IN Self
   Self
   ObjectClass:ClassName
@@ -236,6 +237,9 @@ VOID TestWithDump ObjectTest
   Self
   %%
   l_FieldName
+  l_FieldVAR
+  pop:Word:SetValue
+  l_FieldVAR
   DO
   Result
   pop:Word:SetValue
@@ -361,6 +365,7 @@ VOID TestWithDump ObjectTest
   ^L IN aFieldName
   STRING VAR l_ClassName
   STRING VAR l_FieldName
+  TtfwWord VAR l_FieldVAR
   ObjectClass IN Self
   Self
   ObjectClass:ClassName
@@ -377,6 +382,9 @@ VOID TestWithDump ObjectTest
   Self
   %%
   l_FieldName
+  l_FieldVAR
+  pop:Word:SetValue
+  l_FieldVAR
   DO
   Result
   pop:Word:SetValue

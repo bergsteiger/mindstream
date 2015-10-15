@@ -466,7 +466,9 @@ FieldOffset class-method FieldOffset
  aFieldName |N >>> l_FieldName
  l_FieldName MakeFieldOffsetName >>> l_FieldName
 
- Self %% l_FieldName DO >>> Result
+ TtfwWord VAR l_FieldVAR
+ Self %% l_FieldName >>> l_FieldVAR
+ l_FieldVAR DO >>> Result
 
 class-method-end // FieldOffset
 
