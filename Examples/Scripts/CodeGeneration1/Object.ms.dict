@@ -469,7 +469,7 @@ MACRO classExpander
   INTEGER VAR l_ClassFieldOffset
   l_ClassFieldOffset := 0
 
-  anItem MembersIterator 
+  anItem MembersIterator
    .filter> ( pop:Word:Producer pop:Word:Name NameOf CONST == )
    .filter> ( pop:Word:Name cFieldPrefix SWAP StartsStr )  
    .for> 
@@ -489,21 +489,8 @@ MACRO classExpander
 
    l_MemberName Ctx:Parser:PushSymbol
    
-  )
+  ) // anItem MembersIterator
   
-  axiom:PushSymbol (
-//  axiom:PushSymbol Dec
-//  axiom:PushSymbol l_ClassFieldOffset
-  axiom:PushSymbol g_ClassFieldOffset
-  axiom:PushSymbol :=
-  l_ClassFieldOffset Ctx:Parser:PushInt
-  axiom:PushSymbol )
-
-  //l_ClassFieldOffset >>> g_ClassFieldOffset
-
-  //Inc g_ClassFieldOffset
-  // - это тут не надо
-
   anItem %Props .for> ( 
    IN aProp
    axiom:PushSymbol WordAlias
