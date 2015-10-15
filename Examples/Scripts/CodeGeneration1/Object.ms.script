@@ -30,7 +30,6 @@ Test&Dump ObjectTest
  l_Obj .InstanceSize Print
 
  ClassOf Object .FieldOffset VMT Print
- ClassOf Object VMTFieldOffset VMT Print
 
  ClassOf Object pop:Word:Name Print
  ClassOf Object pop:Word:Name Print

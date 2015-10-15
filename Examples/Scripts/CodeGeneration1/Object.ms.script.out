@@ -450,9 +450,6 @@ VOID TestWithDump ObjectTest
  ObjectClass:FieldOffset
  'VMT'
  Print
- _:Object _:Object pop:Word:SetValue ::
- 'c:Offset:VMT'
- Print
  _:Object
  pop:Word:Name
  Print
@@ -543,7 +540,6 @@ Object
 _:Object
 --------
 1
-0
 0
 _:Object
 _:Object
