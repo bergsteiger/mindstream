@@ -4865,11 +4865,11 @@ BOOLEAN FUNCTION : FilterMember
  OBJECT OPERATOR :: IN : aMember
  BOOLEAN FUNCTION :: FilterMember : Result
 ; // FilterMember
-IMMEDIATE VOID OPERATOR :: MACRO : get-member
+IMMEDIATE VOID OPERATOR :: MACRO : get_member
  Documentation:
   Компилирует способ доступа к члену класса
  ^L OPERATOR :: IN : aName
-; // get-member
+; // get_member
 STRING FUNCTION : InstanceSizeName
  STRING FUNCTION :: InstanceSizeName : Result
 ; // InstanceSizeName
