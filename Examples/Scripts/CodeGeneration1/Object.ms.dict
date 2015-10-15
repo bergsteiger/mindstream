@@ -479,6 +479,8 @@ MACRO classExpander
    .for> 
   ( 
    TtfwWord IN aMember
+   STRING VAR l_MemberName
+   [ aMember pop:Word:Name [ cFieldPrefix ] strings:Cat '' string:ReplaceFirst ] strings:Cat >>> l_MemberName
    axiom:PushSymbol member
 
    aMember DO >>> g_ClassFieldOffset
@@ -489,7 +491,7 @@ MACRO classExpander
     g_ClassFieldOffset >>> l_ClassFieldOffset
    end
 
-   [ aMember pop:Word:Name [ cFieldPrefix ] strings:Cat '' string:ReplaceFirst ] strings:Cat Ctx:Parser:PushSymbol
+   l_MemberName Ctx:Parser:PushSymbol
    
   )
   
