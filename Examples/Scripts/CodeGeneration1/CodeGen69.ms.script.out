@@ -4750,6 +4750,14 @@ IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .ClassName
 <== Redefines
  ^@ OPERATOR :: IN : Self
 ; // .ClassName
+IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .ClassParent
+==> Redefines
+ IMMEDIATE VOID OPERATOR :: MACRO : .ClassParent
+  ^@ OPERATOR :: IN : Self
+ ; // .ClassParent
+<== Redefines
+ ^@ OPERATOR :: IN : Self
+; // .ClassParent
 IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .FieldOffset
 ==> Redefines
  IMMEDIATE VOID OPERATOR :: MACRO : .FieldOffset
@@ -4933,6 +4941,10 @@ STRING OPERATOR :: MACRO :: method : Object:ClassName
  STRING OPERATOR :: MACRO :: method :: Object:ClassName : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassName
+INTEGER OPERATOR :: MACRO :: method : Object:ClassParent
+ INTEGER OPERATOR :: MACRO :: method :: Object:ClassParent : Result
+ Object OPERATOR :: IN : Self
+; // Object:ClassParent
 FieldOffset OPERATOR :: MACRO :: method : Object:FieldOffset
  FieldOffset OPERATOR :: MACRO :: method :: Object:FieldOffset : Result
  Object OPERATOR :: IN : Self
@@ -4959,6 +4971,12 @@ STRING : : ObjectClass:ClassName
  STRING : :: ObjectClass:ClassName : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:ClassName
+INTEGER : : ObjectClass:ClassParent
+ Documentation:
+  Возвращает родительский класс
+ INTEGER : :: ObjectClass:ClassParent : Result
+ ObjectClass OPERATOR :: IN : Self
+; // ObjectClass:ClassParent
 FieldOffset : : ObjectClass:FieldOffset
  Documentation:
   Вычисляет смещение поля класса

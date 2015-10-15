@@ -220,6 +220,15 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING method Object:ClassName
  
+ INTEGER method Object:ClassParent
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassParent
+  Result
+  pop:Word:SetValue
+ ; // INTEGER method Object:ClassParent
+ 
  FieldOffset method Object:FieldOffset
   Object IN Self
   Self
@@ -290,6 +299,20 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
   DROP
  ; // STRING : ObjectClass:ClassName
+ 
+ INTEGER : ObjectClass:ClassParent
+  %SUMMARY %SUM
+   'Возвращает родительский класс'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass IN Self
+  Self
+  %%
+  ClassParentName
+  DO
+  Result
+  pop:Word:SetValue
+ ; // INTEGER : ObjectClass:ClassParent
  
  FieldOffset : ObjectClass:FieldOffset
   %SUMMARY %SUM
@@ -502,6 +525,15 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING method Object:ClassName
  
+ INTEGER method Object:ClassParent
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassParent
+  Result
+  pop:Word:SetValue
+ ; // INTEGER method Object:ClassParent
+ 
  FieldOffset method Object:FieldOffset
   Object IN Self
   Self
@@ -572,6 +604,20 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
   DROP
  ; // STRING : ObjectClass:ClassName
+ 
+ INTEGER : ObjectClass:ClassParent
+  %SUMMARY %SUM
+   'Возвращает родительский класс'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass IN Self
+  Self
+  %%
+  ClassParentName
+  DO
+  Result
+  pop:Word:SetValue
+ ; // INTEGER : ObjectClass:ClassParent
  
  FieldOffset : ObjectClass:FieldOffset
   %SUMMARY %SUM
@@ -773,6 +819,15 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING method Object:ClassName
  
+ INTEGER method Object:ClassParent
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassParent
+  Result
+  pop:Word:SetValue
+ ; // INTEGER method Object:ClassParent
+ 
  FieldOffset method Object:FieldOffset
   Object IN Self
   Self
@@ -943,6 +998,20 @@ VOID TestWithDump PointTest
   DROP
  ; // STRING : ObjectClass:ClassName
  
+ INTEGER : ObjectClass:ClassParent
+  %SUMMARY %SUM
+   'Возвращает родительский класс'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass IN Self
+  Self
+  %%
+  ClassParentName
+  DO
+  Result
+  pop:Word:SetValue
+ ; // INTEGER : ObjectClass:ClassParent
+ 
  FieldOffset : ObjectClass:FieldOffset
   %SUMMARY %SUM
    'Вычисляет смещение поля класса'
@@ -1065,6 +1134,15 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // STRING method Object:ClassName
  
+ INTEGER method Object:ClassParent
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassParent
+  Result
+  pop:Word:SetValue
+ ; // INTEGER method Object:ClassParent
+ 
  FieldOffset method Object:FieldOffset
   Object IN Self
   Self
@@ -1149,6 +1227,20 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
   DROP
  ; // STRING : ObjectClass:ClassName
+ 
+ INTEGER : ObjectClass:ClassParent
+  %SUMMARY %SUM
+   'Возвращает родительский класс'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass IN Self
+  Self
+  %%
+  ClassParentName
+  DO
+  Result
+  pop:Word:SetValue
+ ; // INTEGER : ObjectClass:ClassParent
  
  FieldOffset : ObjectClass:FieldOffset
   %SUMMARY %SUM
@@ -1529,6 +1621,7 @@ ObjectClass class_impl _:Object
   'ClassName'
   'FieldOffset'
   'InstanceSize'
+  'ClassParent'
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
@@ -1539,6 +1632,7 @@ ObjectClass class_impl _:Object
   'ClassName'
   'FieldOffset'
   'InstanceSize'
+  'ClassParent'
   'ToPrintable'
   'Print'
  ; // %METHODS %Methods
