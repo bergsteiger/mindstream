@@ -133,8 +133,8 @@ ARRAY CompileTime-VAR g_CurrentMetaClassMethods [ ]
 ARRAY CompileTime-VAR g_CurrentClassConstructors [ ]
 
 VOID operator define_member
- STRING IN aName
- FieldOffset IN aOffset
+  STRING IN aName
+  FieldOffset IN aOffset
 
  axiom:PushSymbol implementation
  g_CurrentClassImplWord pop:Word:Name Ctx:Parser:PushSymbol
@@ -466,9 +466,6 @@ MACRO classExpander
  anImpl |@ %G .for> ( 
   ObjectClass IN anItem 
 
-  INTEGER VAR l_ClassFieldOffset
-  l_ClassFieldOffset := 0
-
   anItem MembersIterator
    .filter> ( pop:Word:Producer pop:Word:Name NameOf CONST == )
    .filter> ( pop:Word:Name cFieldPrefix SWAP StartsStr )  
@@ -477,20 +474,24 @@ MACRO classExpander
    TtfwWord IN aMember
    STRING VAR l_MemberName
    [ aMember pop:Word:Name [ cFieldPrefix ] strings:Cat '' string:ReplaceFirst ] strings:Cat >>> l_MemberName
-   axiom:PushSymbol member
 
-   aMember DO >>> g_ClassFieldOffset
+   l_MemberName Msg
 
-   if ( l_ClassFieldOffset < g_ClassFieldOffset ) then
+   FieldOffset VAR l_ClassFieldOffset
+
+   aMember DO >>> l_ClassFieldOffset
+
+   l_MemberName l_ClassFieldOffset define_member
+
+   if ( l_ClassFieldOffset >= g_ClassFieldOffset ) then
    // - тут исправляем "кривизну" с сортировкой
    begin
-    g_ClassFieldOffset >>> l_ClassFieldOffset
+    g_ClassFieldOffset := l_ClassFieldOffset
+    Inc g_ClassFieldOffset
    end
 
-   l_MemberName Ctx:Parser:PushSymbol
-   
   ) // anItem MembersIterator
-  
+
   anItem %Props .for> ( 
    IN aProp
    axiom:PushSymbol WordAlias
