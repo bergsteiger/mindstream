@@ -456,6 +456,24 @@ MACRO VMTFieldOffset
  
 ; // VMTFieldOffset
 
+FieldOffset class-method FieldOffset
+  Literal IN aFieldName
+
+ STRING VAR l_ClassName
+ Self .ClassName >>> l_ClassName
+
+ STRING VAR l_FieldName
+ aFieldName |N >>> l_FieldName
+ l_FieldName MakeFieldOffsetName >>> l_FieldName
+
+ axiom:PushSymbol ClassOf
+ l_ClassName Ctx:Parser:PushSymbol
+
+ axiom:PushSymbol ::
+ l_FieldName Ctx:Parser:PushSymbol
+ 
+class-method-end // FieldOffset
+
 INTEGER class-method InstanceSize
  Self %% InstanceSizeName DO >>> Result
 class-method-end // InstanceSize

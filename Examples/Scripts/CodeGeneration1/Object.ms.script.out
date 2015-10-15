@@ -149,6 +149,15 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // STRING method Object:ClassName
  
+ FieldOffset method Object:FieldOffset
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:FieldOffset
+  '>>>'
+  Result
+ ; // FieldOffset method Object:FieldOffset
+ 
  INTEGER method Object:InstanceSize
   Object IN Self
   Self
@@ -207,6 +216,33 @@ VOID TestWithDump ObjectTest
   DROP
  ; // STRING : ObjectClass:ClassName
  
+ FieldOffset : ObjectClass:FieldOffset
+  ^L IN aFieldName
+  STRING VAR l_ClassName
+  STRING VAR l_FieldName
+  ObjectClass IN Self
+  Self
+  ObjectClass:ClassName
+  l_ClassName
+  pop:Word:SetValue
+  aFieldName
+  |N
+  l_FieldName
+  pop:Word:SetValue
+  l_FieldName
+  MakeFieldOffsetName
+  l_FieldName
+  pop:Word:SetValue
+  axiom:PushSymbol
+  ClassOf
+  l_ClassName
+  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  ::
+  l_FieldName
+  Ctx:Parser:PushSymbol
+ ; // FieldOffset : ObjectClass:FieldOffset
+ 
  INTEGER : ObjectClass:InstanceSize
   ObjectClass IN Self
   Self
@@ -254,6 +290,15 @@ VOID TestWithDump ObjectTest
   Result
   pop:Word:SetValue
  ; // INTEGER readonly Object2:FakeField
+ 
+ FieldOffset method Object:FieldOffset
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:FieldOffset
+  '>>>'
+  Result
+ ; // FieldOffset method Object:FieldOffset
  
  INTEGER method Object:InstanceSize
   Object IN Self
@@ -313,6 +358,33 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
   DROP
  ; // STRING : ObjectClass:ClassName
+ 
+ FieldOffset : ObjectClass:FieldOffset
+  ^L IN aFieldName
+  STRING VAR l_ClassName
+  STRING VAR l_FieldName
+  ObjectClass IN Self
+  Self
+  ObjectClass:ClassName
+  l_ClassName
+  pop:Word:SetValue
+  aFieldName
+  |N
+  l_FieldName
+  pop:Word:SetValue
+  l_FieldName
+  MakeFieldOffsetName
+  l_FieldName
+  pop:Word:SetValue
+  axiom:PushSymbol
+  ClassOf
+  l_ClassName
+  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  ::
+  l_FieldName
+  Ctx:Parser:PushSymbol
+ ; // FieldOffset : ObjectClass:FieldOffset
  
  INTEGER : ObjectClass:InstanceSize
   ObjectClass IN Self
@@ -408,6 +480,7 @@ VOID TestWithDump ObjectTest
 ObjectClass class_impl _:Object
  %CLASS-METHODS %Class-Methods
   'ClassName'
+  'FieldOffset'
   'InstanceSize'
  ; // %CLASS-METHODS %Class-Methods
  
@@ -417,6 +490,7 @@ ObjectClass class_impl _:Object
  
  %METHODS %Methods
   'ClassName'
+  'FieldOffset'
   'InstanceSize'
   'ToPrintable'
   'Print'
