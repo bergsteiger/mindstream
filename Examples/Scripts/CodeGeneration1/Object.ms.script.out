@@ -185,6 +185,8 @@ VOID TestWithDump ObjectTest
  pop:Word:Name
  Print
  (
+  DEC
+  g_ClassFieldOffset
   0
   g_ClassFieldOffset
   pop:Word:SetValuePrim
