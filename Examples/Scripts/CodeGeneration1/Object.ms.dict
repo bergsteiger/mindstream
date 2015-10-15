@@ -457,6 +457,7 @@ MACRO VMTFieldOffset
 ; // VMTFieldOffset
 
 FieldOffset class-method FieldOffset
+  // - этод метод можно сделать КОМПИЛИРУЕМЫМ
   Literal IN aFieldName
  
  %SUMMARY 'Вычисляет смещение поля класса' ;
