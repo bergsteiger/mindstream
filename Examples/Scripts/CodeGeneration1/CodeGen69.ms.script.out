@@ -4846,11 +4846,11 @@ VOID OPERATOR :: PROCEDURE : DefineInstanceSize
  Documentation:
   ќпредел€ем размер экземпл€ров класса
 ; // DefineInstanceSize
-PRIVATE OPERATOR : do-get-member
+PRIVATE OPERATOR : do_get_member
  Documentation:
   ќпредел€ет способ доступа к члену класса
  STRING OPERATOR :: IN : aName
-; // do-get-member
+; // do_get_member
 OBJECT FUNCTION : DoMember
  OBJECT OPERATOR :: IN : aMember
  OBJECT FUNCTION :: DoMember : Result
