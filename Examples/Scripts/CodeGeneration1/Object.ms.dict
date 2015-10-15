@@ -336,9 +336,17 @@ MACRO class
   'FieldOffset'
   'CompileTime-VAR'
   InstanceSizeName
+
  ] Ctx:Parser:PushArray
 
   0 Ctx:Parser:PushInt
+
+ [
+  'ObjectClass'
+  'CompileTime-VAR'
+  ClassParentName
+  'nil'
+ ] Ctx:Parser:PushArray
 
  axiom:PushSymbol ;
 
