@@ -418,6 +418,10 @@ VOID TestWithDump ObjectTest
  l_Obj
  Object:InstanceSize
  Print
+ _:Object
+ ObjectClass:FieldOffset
+ 'VMT'
+ Print
  _:Object _:Object pop:Word:SetValue ::
  'c:Offset:VMT'
  Print
@@ -511,6 +515,7 @@ Object
 _:Object
 --------
 1
+0
 0
 _:Object
 _:Object
