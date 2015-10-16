@@ -297,16 +297,6 @@ MACRO class
  TtfwWordInfo VAR l_WordInfo
  Ctx:WordInfo >>> l_WordInfo
 
- STRING VAR l_TypeInfo
- l_WordInfo pop:WordInfo:TypeName >>> l_TypeInfo
-
- if ( l_TypeInfo <> '' ) then
- begin
-  l_TypeInfo Msg
- end
-
- Ctx:ClearTypeInfo
-
  g_CurrentClassProperties := [ ]
  g_CurrentClassMethods := [ ]
  g_CurrentMetaClassMethods := [ ]
@@ -315,6 +305,18 @@ MACRO class
  g_InstanceSizeDefined := false
  g_CurrentClassParent := nil
  aName |N >>> g_CurrentClass
+
+ STRING VAR l_TypeInfo
+ l_WordInfo pop:WordInfo:TypeName >>> l_TypeInfo
+
+ if ( l_TypeInfo <> '' ) then
+ begin
+  l_TypeInfo ' ' string:Pos -1 == ?ASSURE [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ]
+  l_TypeInfo Msg
+ end
+
+ Ctx:ClearTypeInfo
+
  STRING VAR l_CurrentClassImpl
  g_CurrentClass ClassImplName >>> l_CurrentClassImpl
 
