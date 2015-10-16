@@ -656,6 +656,9 @@ VOID TestWithDump ObjectTest
  ObjectClass:ClassParent
  Print
  _:Object2
+ ObjectClass:ClassParentName
+ Print
+ _:Object2
  ObjectClass:FieldOffset
  'FakeField'
  Print
@@ -725,5 +728,6 @@ Object2
 2
 0
 _:Object
+Object
 1
 256
