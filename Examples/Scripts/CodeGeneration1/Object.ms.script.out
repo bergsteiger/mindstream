@@ -198,19 +198,19 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // REDIFINITION Object1 constructor Object1:new
  
- method Object:Out
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:Out
- ; // method Object:Out
- 
- VIRTUAL VOID method Object:Print
+ REDIFINITION VIRTUAL VOID method Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // VIRTUAL VOID method Object:Print
+ ; // REDIFINITION VIRTUAL VOID method Object:Print
+ 
+ REDIFINITION VIRTUAL VOID method Object:Print
+  Object IN Self
+  Self
+  Object:ToPrintable
+  Print
+ ; // REDIFINITION VIRTUAL VOID method Object:Print
  
  VIRTUAL STRING method Object:ToPrintable
   Object IN Self
@@ -349,7 +349,7 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // INTEGER : ObjectClass:InstanceSize
  
- : ObjectClass:Out
+ : ObjectClass:Print
   %SUMMARY %SUM
    'Печатает класс'
   ; // %SUMMARY %SUM
@@ -371,7 +371,7 @@ VOID TestWithDump ObjectTest
     ObjectClass:ClassName
     .
    END
- ; // : ObjectClass:Out
+ ; // : ObjectClass:Print
  
  IMMEDIATE VOID TYPE Object2
   TtfwValueTypes
@@ -457,19 +457,19 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // REDIFINITION Object2 constructor Object2:new
  
- method Object:Out
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:Out
- ; // method Object:Out
- 
- VIRTUAL VOID method Object:Print
+ REDIFINITION VIRTUAL VOID method Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // VIRTUAL VOID method Object:Print
+ ; // REDIFINITION VIRTUAL VOID method Object:Print
+ 
+ REDIFINITION VIRTUAL VOID method Object:Print
+  Object IN Self
+  Self
+  Object:ToPrintable
+  Print
+ ; // REDIFINITION VIRTUAL VOID method Object:Print
  
  VIRTUAL STRING method Object:ToPrintable
   Object IN Self
@@ -608,7 +608,7 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // INTEGER : ObjectClass:InstanceSize
  
- : ObjectClass:Out
+ : ObjectClass:Print
   %SUMMARY %SUM
    'Печатает класс'
   ; // %SUMMARY %SUM
@@ -630,7 +630,7 @@ VOID TestWithDump ObjectTest
     ObjectClass:ClassName
     .
    END
- ; // : ObjectClass:Out
+ ; // : ObjectClass:Print
  
  ObjectTest
  DumpElement
@@ -667,7 +667,7 @@ VOID TestWithDump ObjectTest
  Print
  _:Object
  ObjectClass:ClassParent
- ObjectClass:Out
+ ObjectClass:Print
  _:Object
  ObjectClass:ClassParentName
  Print
@@ -739,7 +739,7 @@ ObjectClass class_impl _:Object
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
-  'Out'
+  'Print'
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
@@ -752,7 +752,7 @@ ObjectClass class_impl _:Object
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
-  'Out'
+  'Print'
   'ToPrintable'
   'Print'
  ; // %METHODS %Methods

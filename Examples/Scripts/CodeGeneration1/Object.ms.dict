@@ -500,7 +500,7 @@ STRING class-method ClassParentName
  end
 class-method-end // ClassParentName
 
-class-method Out
+class-method Print
  %SUMMARY 'Печатает класс' ;
  if ( Self IsNil ) then
  begin
