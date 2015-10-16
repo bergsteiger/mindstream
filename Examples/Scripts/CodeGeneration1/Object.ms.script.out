@@ -162,14 +162,14 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // ObjectClass method Object:ClassParent
  
- ObjectClass method Object:ClassParentName
+ STRING method Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParentName
+ ; // STRING method Object:ClassParentName
  
  FieldOffset method Object:FieldOffset
   Object IN Self
@@ -256,7 +256,7 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // ObjectClass : ObjectClass:ClassParent
  
- ObjectClass : ObjectClass:ClassParentName
+ STRING : ObjectClass:ClassParentName
   %SUMMARY %SUM
    '¬озвращает им€ родительского класса'
   ; // %SUMMARY %SUM
@@ -287,7 +287,7 @@ VOID TestWithDump ObjectTest
     Result
     pop:Word:SetValue
    END
- ; // ObjectClass : ObjectClass:ClassParentName
+ ; // STRING : ObjectClass:ClassParentName
  
  FieldOffset : ObjectClass:FieldOffset
   %SUMMARY %SUM
@@ -377,14 +377,14 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // ObjectClass method Object:ClassParent
  
- ObjectClass method Object:ClassParentName
+ STRING method Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParentName
+ ; // STRING method Object:ClassParentName
  
  INTEGER readonly Object2:FakeField
   Object2 IN Self
@@ -484,7 +484,7 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // ObjectClass : ObjectClass:ClassParent
  
- ObjectClass : ObjectClass:ClassParentName
+ STRING : ObjectClass:ClassParentName
   %SUMMARY %SUM
    '¬озвращает им€ родительского класса'
   ; // %SUMMARY %SUM
@@ -515,7 +515,7 @@ VOID TestWithDump ObjectTest
     Result
     pop:Word:SetValue
    END
- ; // ObjectClass : ObjectClass:ClassParentName
+ ; // STRING : ObjectClass:ClassParentName
  
  FieldOffset : ObjectClass:FieldOffset
   %SUMMARY %SUM
@@ -602,6 +602,9 @@ VOID TestWithDump ObjectTest
  Print
  _:Object
  ObjectClass:ClassParent
+ Print
+ _:Object
+ ObjectClass:ClassParentName
  Print
  _:Object
  pop:Word:Name
@@ -703,6 +706,7 @@ _:Object
 1
 0
 <nil>
+<base>
 _:Object
 _:Object
 Object1 : [ TkwCompiledFunction ]

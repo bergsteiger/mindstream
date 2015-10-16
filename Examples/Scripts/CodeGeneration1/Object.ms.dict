@@ -486,7 +486,7 @@ ObjectClass class-method ClassParent
  Self %% ClassParentName DO >>> Result
 class-method-end // ClassParent
 
-ObjectClass class-method ClassParentName
+STRING class-method ClassParentName
   %SUMMARY '¬озвращает им€ родительского класса' ;
  ObjectClass VAR l_ClassParent
  Self %% ClassParentName DO >>> l_ClassParent
