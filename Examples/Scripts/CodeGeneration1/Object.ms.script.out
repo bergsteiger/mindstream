@@ -162,6 +162,15 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // ObjectClass method Object:ClassParent
  
+ ObjectClass method Object:ClassParentName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassParentName
+  Result
+  pop:Word:SetValue
+ ; // ObjectClass method Object:ClassParentName
+ 
  FieldOffset method Object:FieldOffset
   Object IN Self
   Self
@@ -246,6 +255,39 @@ VOID TestWithDump ObjectTest
   Result
   pop:Word:SetValue
  ; // ObjectClass : ObjectClass:ClassParent
+ 
+ ObjectClass : ObjectClass:ClassParentName
+  %SUMMARY %SUM
+   '¬озвращает им€ родительского класса'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass VAR l_ClassParent
+  ObjectClass IN Self
+  Self
+  %%
+  ClassParentName
+  DO
+  l_ClassParent
+  pop:Word:SetValue
+  if
+   (
+    l_ClassParent
+    IsNil
+   )
+  then
+   BEGIN
+    '<base>'
+    Result
+    pop:Word:SetValue
+   END
+  else
+   BEGIN
+    l_ClassParent
+    ObjectClass:ClassName
+    Result
+    pop:Word:SetValue
+   END
+ ; // ObjectClass : ObjectClass:ClassParentName
  
  FieldOffset : ObjectClass:FieldOffset
   %SUMMARY %SUM
@@ -334,6 +376,15 @@ VOID TestWithDump ObjectTest
   Result
   pop:Word:SetValue
  ; // ObjectClass method Object:ClassParent
+ 
+ ObjectClass method Object:ClassParentName
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:ClassParentName
+  Result
+  pop:Word:SetValue
+ ; // ObjectClass method Object:ClassParentName
  
  INTEGER readonly Object2:FakeField
   Object2 IN Self
@@ -432,6 +483,39 @@ VOID TestWithDump ObjectTest
   Result
   pop:Word:SetValue
  ; // ObjectClass : ObjectClass:ClassParent
+ 
+ ObjectClass : ObjectClass:ClassParentName
+  %SUMMARY %SUM
+   '¬озвращает им€ родительского класса'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass VAR l_ClassParent
+  ObjectClass IN Self
+  Self
+  %%
+  ClassParentName
+  DO
+  l_ClassParent
+  pop:Word:SetValue
+  if
+   (
+    l_ClassParent
+    IsNil
+   )
+  then
+   BEGIN
+    '<base>'
+    Result
+    pop:Word:SetValue
+   END
+  else
+   BEGIN
+    l_ClassParent
+    ObjectClass:ClassName
+    Result
+    pop:Word:SetValue
+   END
+ ; // ObjectClass : ObjectClass:ClassParentName
  
  FieldOffset : ObjectClass:FieldOffset
   %SUMMARY %SUM
@@ -580,6 +664,7 @@ ObjectClass class_impl _:Object
   'FieldOffset'
   'InstanceSize'
   'ClassParent'
+  'ClassParentName'
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
@@ -591,6 +676,7 @@ ObjectClass class_impl _:Object
   'FieldOffset'
   'InstanceSize'
   'ClassParent'
+  'ClassParentName'
   'ToPrintable'
   'Print'
  ; // %METHODS %Methods

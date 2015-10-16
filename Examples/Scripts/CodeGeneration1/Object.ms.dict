@@ -486,6 +486,20 @@ ObjectClass class-method ClassParent
  Self %% ClassParentName DO >>> Result
 class-method-end // ClassParent
 
+ObjectClass class-method ClassParentName
+  %SUMMARY '¬озвращает им€ родительского класса' ;
+ ObjectClass VAR l_ClassParent
+ Self %% ClassParentName DO >>> l_ClassParent
+ if ( l_ClassParent IsNil ) then
+ begin
+  '<base>' >>> Result
+ end
+ else
+ begin
+  l_ClassParent .ClassName >>> Result
+ end
+class-method-end // ClassParentName
+
 MACRO classExpander
   ^ IN anImpl
 
