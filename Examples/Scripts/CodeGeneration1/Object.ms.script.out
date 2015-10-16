@@ -724,6 +724,9 @@ VOID TestWithDump ObjectTest
  ObjectClass:ClassParent
  Print
  _:Object2
+ ObjectClass:ClassParent
+ ObjectClass:Print
+ _:Object2
  ObjectClass:ClassParentName
  Print
  _:Object2
@@ -800,6 +803,7 @@ Object2
 2
 0
 _:Object
+Object
 Object
 1
 256
