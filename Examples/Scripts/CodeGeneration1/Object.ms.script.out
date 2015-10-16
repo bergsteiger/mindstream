@@ -666,6 +666,9 @@ VOID TestWithDump ObjectTest
  ObjectClass:ClassParent
  Print
  _:Object
+ ObjectClass:ClassParent
+ ObjectClass:Out
+ _:Object
  ObjectClass:ClassParentName
  Print
  _:Object
@@ -776,6 +779,7 @@ _:Object
 1
 0
 <nil>
+<base>
 <base>
 _:Object
 _:Object
