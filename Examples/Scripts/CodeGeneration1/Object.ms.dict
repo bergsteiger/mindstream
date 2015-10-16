@@ -500,7 +500,7 @@ STRING class-method ClassParentName
  end
 class-method-end // ClassParentName
 
-/*{VOID class-method Print
+class-method Out
  %SUMMARY 'Печатает класс' ;
  if ( Self IsNil ) then
  begin
@@ -510,7 +510,7 @@ class-method-end // ClassParentName
  begin
   Self .ClassName .
  end
-class-method-end // Print}*/
+class-method-end // Out
 
 MACRO classExpander
   ^ IN anImpl

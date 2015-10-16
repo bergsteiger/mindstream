@@ -4782,6 +4782,14 @@ IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .InstanceSize
 <== Redefines
  ^@ OPERATOR :: IN : Self
 ; // .InstanceSize
+IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .Out
+==> Redefines
+ IMMEDIATE VOID OPERATOR :: MACRO : .Out
+  ^@ OPERATOR :: IN : Self
+ ; // .Out
+<== Redefines
+ ^@ OPERATOR :: IN : Self
+; // .Out
 IMMEDIATE VOID OPERATOR :: MACRO : .Print
  ^@ OPERATOR :: IN : Self
 ; // .Print
@@ -4969,6 +4977,9 @@ Object OPERATOR :: MACRO :: constructor : Object:new
  Object OPERATOR :: MACRO :: constructor :: Object:new : Result
  Object OPERATOR :: MACRO :: constructor :: Object:new : Self
 ; // Object:new
+OPERATOR :: MACRO :: method : Object:Out
+ Object OPERATOR :: IN : Self
+; // Object:Out
 VIRTUAL VOID OPERATOR :: MACRO :: method : Object:Print
  Object OPERATOR :: IN : Self
 ; // Object:Print
@@ -5011,6 +5022,11 @@ INTEGER : : ObjectClass:InstanceSize
  INTEGER : :: ObjectClass:InstanceSize : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:InstanceSize
+: : ObjectClass:Out
+ Documentation:
+  Печатает класс
+ ObjectClass OPERATOR :: IN : Self
+; // ObjectClass:Out
 IMMEDIATE VOID OPERATOR :: MACRO : read
  ^L OPERATOR :: IN : aName
 ; // read

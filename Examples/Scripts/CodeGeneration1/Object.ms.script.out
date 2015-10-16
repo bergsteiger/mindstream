@@ -198,6 +198,13 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // REDIFINITION Object1 constructor Object1:new
  
+ method Object:Out
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:Out
+ ; // method Object:Out
+ 
  VIRTUAL VOID method Object:Print
   Object IN Self
   Self
@@ -342,6 +349,30 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // INTEGER : ObjectClass:InstanceSize
  
+ : ObjectClass:Out
+  %SUMMARY %SUM
+   'Печатает класс'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass IN Self
+  if
+   (
+    Self
+    IsNil
+   )
+  then
+   BEGIN
+    '<base>'
+    .
+   END
+  else
+   BEGIN
+    Self
+    ObjectClass:ClassName
+    .
+   END
+ ; // : ObjectClass:Out
+ 
  IMMEDIATE VOID TYPE Object2
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -425,6 +456,13 @@ VOID TestWithDump ObjectTest
   Result
   pop:Word:SetValue
  ; // REDIFINITION Object2 constructor Object2:new
+ 
+ method Object:Out
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:Out
+ ; // method Object:Out
  
  VIRTUAL VOID method Object:Print
   Object IN Self
@@ -570,6 +608,30 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // INTEGER : ObjectClass:InstanceSize
  
+ : ObjectClass:Out
+  %SUMMARY %SUM
+   'Печатает класс'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass IN Self
+  if
+   (
+    Self
+    IsNil
+   )
+  then
+   BEGIN
+    '<base>'
+    .
+   END
+  else
+   BEGIN
+    Self
+    ObjectClass:ClassName
+    .
+   END
+ ; // : ObjectClass:Out
+ 
  ObjectTest
  DumpElement
  _:Object
@@ -674,6 +736,7 @@ ObjectClass class_impl _:Object
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
+  'Out'
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
@@ -686,6 +749,7 @@ ObjectClass class_impl _:Object
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
+  'Out'
   'ToPrintable'
   'Print'
  ; // %METHODS %Methods

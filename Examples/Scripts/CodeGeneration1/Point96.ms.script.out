@@ -265,6 +265,13 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Object constructor Object:new
  
+ method Object:Out
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:Out
+ ; // method Object:Out
+ 
  VIRTUAL VOID method Object:Print
   Object IN Self
   Self
@@ -408,6 +415,30 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // INTEGER : ObjectClass:InstanceSize
+ 
+ : ObjectClass:Out
+  %SUMMARY %SUM
+   'Печатает класс'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass IN Self
+  if
+   (
+    Self
+    IsNil
+   )
+  then
+   BEGIN
+    '<base>'
+    .
+   END
+  else
+   BEGIN
+    Self
+    ObjectClass:ClassName
+    .
+   END
+ ; // : ObjectClass:Out
  
  BarClass class_impl _:Bar
   %CLASS-METHODS %Class-Methods
@@ -612,6 +643,13 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Object constructor Object:new
  
+ method Object:Out
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:Out
+ ; // method Object:Out
+ 
  VIRTUAL VOID method Object:Print
   Object IN Self
   Self
@@ -755,6 +793,30 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // INTEGER : ObjectClass:InstanceSize
+ 
+ : ObjectClass:Out
+  %SUMMARY %SUM
+   'Печатает класс'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass IN Self
+  if
+   (
+    Self
+    IsNil
+   )
+  then
+   BEGIN
+    '<base>'
+    .
+   END
+  else
+   BEGIN
+    Self
+    ObjectClass:ClassName
+    .
+   END
+ ; // : ObjectClass:Out
  
  ARRAY VAR l_Points
  ARRAY VAR l_Rectangles
@@ -990,6 +1052,13 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point constructor Point:OF
  
+ method Object:Out
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:Out
+ ; // method Object:Out
+ 
  REDIFINITION OVERRIDE VOID method Point:Print
   Point IN Self
   Self
@@ -1191,6 +1260,30 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // INTEGER : ObjectClass:InstanceSize
  
+ : ObjectClass:Out
+  %SUMMARY %SUM
+   'Печатает класс'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass IN Self
+  if
+   (
+    Self
+    IsNil
+   )
+  then
+   BEGIN
+    '<base>'
+    .
+   END
+  else
+   BEGIN
+    Self
+    ObjectClass:ClassName
+    .
+   END
+ ; // : ObjectClass:Out
+ 
  Rectangle VAR R1
  Rectangle VAR R2
  IMMEDIATE VOID TYPE Rectangle
@@ -1304,6 +1397,13 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // Object constructor Object:new
+ 
+ method Object:Out
+  Object IN Self
+  Self
+  Object:class
+  ObjectClass:Out
+ ; // method Object:Out
  
  REDIFINITION OVERRIDE VOID method Rectangle:Print
   Rectangle IN Self
@@ -1462,6 +1562,30 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // INTEGER : ObjectClass:InstanceSize
+ 
+ : ObjectClass:Out
+  %SUMMARY %SUM
+   'Печатает класс'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass IN Self
+  if
+   (
+    Self
+    IsNil
+   )
+  then
+   BEGIN
+    '<base>'
+    .
+   END
+  else
+   BEGIN
+    Self
+    ObjectClass:ClassName
+    .
+   END
+ ; // : ObjectClass:Out
  
  PointTest
  DumpElement
@@ -1805,6 +1929,7 @@ ObjectClass class_impl _:Object
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
+  'Out'
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
@@ -1817,6 +1942,7 @@ ObjectClass class_impl _:Object
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
+  'Out'
   'ToPrintable'
   'Print'
  ; // %METHODS %Methods
