@@ -265,19 +265,19 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Object constructor Object:new
  
- method Object:Out
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:Out
- ; // method Object:Out
- 
- VIRTUAL VOID method Object:Print
+ REDIFINITION VIRTUAL VOID method Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // VIRTUAL VOID method Object:Print
+ ; // REDIFINITION VIRTUAL VOID method Object:Print
+ 
+ REDIFINITION VIRTUAL VOID method Object:Print
+  Object IN Self
+  Self
+  Object:ToPrintable
+  Print
+ ; // REDIFINITION VIRTUAL VOID method Object:Print
  
  VIRTUAL STRING method Object:ToPrintable
   Object IN Self
@@ -416,7 +416,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // INTEGER : ObjectClass:InstanceSize
  
- : ObjectClass:Out
+ : ObjectClass:Print
   %SUMMARY %SUM
    'Печатает класс'
   ; // %SUMMARY %SUM
@@ -438,7 +438,7 @@ VOID TestWithDump PointTest
     ObjectClass:ClassName
     .
    END
- ; // : ObjectClass:Out
+ ; // : ObjectClass:Print
  
  BarClass class_impl _:Bar
   %CLASS-METHODS %Class-Methods
@@ -643,19 +643,19 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Object constructor Object:new
  
- method Object:Out
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:Out
- ; // method Object:Out
- 
- VIRTUAL VOID method Object:Print
+ REDIFINITION VIRTUAL VOID method Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // VIRTUAL VOID method Object:Print
+ ; // REDIFINITION VIRTUAL VOID method Object:Print
+ 
+ REDIFINITION VIRTUAL VOID method Object:Print
+  Object IN Self
+  Self
+  Object:ToPrintable
+  Print
+ ; // REDIFINITION VIRTUAL VOID method Object:Print
  
  VIRTUAL STRING method Object:ToPrintable
   Object IN Self
@@ -794,7 +794,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // INTEGER : ObjectClass:InstanceSize
  
- : ObjectClass:Out
+ : ObjectClass:Print
   %SUMMARY %SUM
    'Печатает класс'
   ; // %SUMMARY %SUM
@@ -816,7 +816,7 @@ VOID TestWithDump PointTest
     ObjectClass:ClassName
     .
    END
- ; // : ObjectClass:Out
+ ; // : ObjectClass:Print
  
  ARRAY VAR l_Points
  ARRAY VAR l_Rectangles
@@ -1052,19 +1052,19 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point constructor Point:OF
  
- method Object:Out
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:Out
- ; // method Object:Out
- 
  REDIFINITION OVERRIDE VOID method Point:Print
   Point IN Self
   Self
   Point:ToPrintable
   Print
  ; // REDIFINITION OVERRIDE VOID method Point:Print
+ 
+ REDIFINITION VIRTUAL VOID method Object:Print
+  Object IN Self
+  Self
+  Object:ToPrintable
+  Print
+ ; // REDIFINITION VIRTUAL VOID method Object:Print
  
  REDIFINITION OVERRIDE STRING method Point:ToPrintable
   Point IN Self
@@ -1260,7 +1260,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // INTEGER : ObjectClass:InstanceSize
  
- : ObjectClass:Out
+ : ObjectClass:Print
   %SUMMARY %SUM
    'Печатает класс'
   ; // %SUMMARY %SUM
@@ -1282,7 +1282,7 @@ VOID TestWithDump PointTest
     ObjectClass:ClassName
     .
    END
- ; // : ObjectClass:Out
+ ; // : ObjectClass:Print
  
  Rectangle VAR R1
  Rectangle VAR R2
@@ -1398,19 +1398,19 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Object constructor Object:new
  
- method Object:Out
-  Object IN Self
-  Self
-  Object:class
-  ObjectClass:Out
- ; // method Object:Out
- 
  REDIFINITION OVERRIDE VOID method Rectangle:Print
   Rectangle IN Self
   Self
   Rectangle:ToPrintable
   Print
  ; // REDIFINITION OVERRIDE VOID method Rectangle:Print
+ 
+ REDIFINITION VIRTUAL VOID method Object:Print
+  Object IN Self
+  Self
+  Object:ToPrintable
+  Print
+ ; // REDIFINITION VIRTUAL VOID method Object:Print
  
  Point readonly Rectangle:TopLeft
   Rectangle IN Self
@@ -1563,7 +1563,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // INTEGER : ObjectClass:InstanceSize
  
- : ObjectClass:Out
+ : ObjectClass:Print
   %SUMMARY %SUM
    'Печатает класс'
   ; // %SUMMARY %SUM
@@ -1585,7 +1585,7 @@ VOID TestWithDump PointTest
     ObjectClass:ClassName
     .
    END
- ; // : ObjectClass:Out
+ ; // : ObjectClass:Print
  
  PointTest
  DumpElement
@@ -1929,7 +1929,7 @@ ObjectClass class_impl _:Object
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
-  'Out'
+  'Print'
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
@@ -1942,7 +1942,7 @@ ObjectClass class_impl _:Object
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
-  'Out'
+  'Print'
   'ToPrintable'
   'Print'
  ; // %METHODS %Methods

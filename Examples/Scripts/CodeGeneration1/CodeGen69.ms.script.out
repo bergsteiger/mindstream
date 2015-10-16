@@ -4782,15 +4782,17 @@ IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .InstanceSize
 <== Redefines
  ^@ OPERATOR :: IN : Self
 ; // .InstanceSize
-IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .Out
+IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .Print
 ==> Redefines
- IMMEDIATE VOID OPERATOR :: MACRO : .Out
+ IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .Print
+ ==> Redefines
+  IMMEDIATE VOID OPERATOR :: MACRO : .Print
+   ^@ OPERATOR :: IN : Self
+  ; // .Print
+ <== Redefines
   ^@ OPERATOR :: IN : Self
- ; // .Out
+ ; // .Print
 <== Redefines
- ^@ OPERATOR :: IN : Self
-; // .Out
-IMMEDIATE VOID OPERATOR :: MACRO : .Print
  ^@ OPERATOR :: IN : Self
 ; // .Print
 IMMEDIATE VOID OPERATOR :: MACRO : .ToPrintable
@@ -4977,10 +4979,12 @@ Object OPERATOR :: MACRO :: constructor : Object:new
  Object OPERATOR :: MACRO :: constructor :: Object:new : Result
  Object OPERATOR :: MACRO :: constructor :: Object:new : Self
 ; // Object:new
-OPERATOR :: MACRO :: method : Object:Out
- Object OPERATOR :: IN : Self
-; // Object:Out
-VIRTUAL VOID OPERATOR :: MACRO :: method : Object:Print
+REDIFINITION VIRTUAL VOID OPERATOR :: MACRO :: method : Object:Print
+==> Redefines
+ OPERATOR :: MACRO :: method : Object:Print
+  Object OPERATOR :: IN : Self
+ ; // Object:Print
+<== Redefines
  Object OPERATOR :: IN : Self
 ; // Object:Print
 VIRTUAL STRING OPERATOR :: MACRO :: method : Object:ToPrintable
@@ -5022,11 +5026,11 @@ INTEGER : : ObjectClass:InstanceSize
  INTEGER : :: ObjectClass:InstanceSize : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:InstanceSize
-: : ObjectClass:Out
+: : ObjectClass:Print
  Documentation:
   Печатает класс
  ObjectClass OPERATOR :: IN : Self
-; // ObjectClass:Out
+; // ObjectClass:Print
 IMMEDIATE VOID OPERATOR :: MACRO : read
  ^L OPERATOR :: IN : aName
 ; // read
