@@ -125,6 +125,12 @@ ClassOf Rectangle .ClassParentName Print
 ClassOf Foo .ClassParentName Print
 ClassOf Bar .ClassParentName Print
 
+ClassOf Object .ClassParent Print
+ClassOf Point .ClassParent Print
+ClassOf Rectangle .ClassParent Print
+ClassOf Foo .ClassParent Print
+ClassOf Bar .ClassParent Print
+
 ClassOf Point .FieldOffset X Print
 ClassOf Point .FieldOffset Y Print
 

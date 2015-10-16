@@ -1506,6 +1506,21 @@ VOID TestWithDump PointTest
  _:Bar
  ObjectClass:ClassParentName
  Print
+ _:Object
+ ObjectClass:ClassParent
+ Print
+ _:Point
+ ObjectClass:ClassParent
+ Print
+ _:Rectangle
+ ObjectClass:ClassParent
+ Print
+ _:Foo
+ ObjectClass:ClassParent
+ Print
+ _:Bar
+ ObjectClass:ClassParent
+ Print
  _:Point
  ObjectClass:FieldOffset
  'X'
@@ -1907,6 +1922,11 @@ Object
 Object
 Object
 Object
+<nil>
+_:Object
+_:Object
+_:Object
+_:Object
 1
 2
 1
