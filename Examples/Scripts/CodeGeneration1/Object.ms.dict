@@ -510,7 +510,7 @@ class-method Print
  begin
   Self .ClassName .
  end
-class-method-end // Out
+class-method-end // Print
 
 MACRO classExpander
   ^ IN anImpl
