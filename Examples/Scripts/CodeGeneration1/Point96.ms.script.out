@@ -1315,6 +1315,14 @@ VOID TestWithDump PointTest
  ObjectClass:FieldOffset
  'VMT'
  Print
+ _:Foo
+ ObjectClass:FieldOffset
+ 'VMT'
+ Print
+ _:Bar
+ ObjectClass:FieldOffset
+ 'VMT'
+ Print
  _:Point
  ObjectClass:FieldOffset
  'X'
@@ -1704,6 +1712,8 @@ RectangleClass class_impl _:Rectangle
  pop:Word:SetValue
 ; // RectangleClass class_impl _:Rectangle
 
+0
+0
 0
 0
 0
