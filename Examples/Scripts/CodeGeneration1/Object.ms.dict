@@ -314,7 +314,7 @@ MACRO class
  begin
   l_TypeInfo 'ARRAY' == ?FAIL [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ' Заявленные предки ' l_TypeInfo ]
   l_TypeInfo ' ' string:Pos -1 == ?ASSURE [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ' Заявленные предки ' l_TypeInfo ]
-  l_TypeInfo Msg
+  //l_TypeInfo Msg
  end
 
  STRING VAR l_CurrentClassImpl
