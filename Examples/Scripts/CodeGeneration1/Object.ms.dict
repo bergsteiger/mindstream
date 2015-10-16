@@ -310,11 +310,16 @@ MACRO class
  STRING VAR l_TypeInfo
  l_WordInfo pop:WordInfo:TypeName >>> l_TypeInfo
 
+ STRING VAR l_ParentClassName
  if ( l_TypeInfo <> '' ) then
  begin
   l_TypeInfo 'ARRAY' == ?FAIL [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ' Заявленные предки ' l_TypeInfo ]
   l_TypeInfo ' ' string:Pos -1 == ?ASSURE [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ' Заявленные предки ' l_TypeInfo ]
-  //l_TypeInfo Msg
+  l_TypeInfo >>> l_ParentClassName
+ end
+ else
+ begin
+  cObjectName ClassImplName >>> l_ParentClassName
  end
 
  STRING VAR l_CurrentClassImpl
