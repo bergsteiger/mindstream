@@ -1315,14 +1315,6 @@ VOID TestWithDump PointTest
  ObjectClass:FieldOffset
  'VMT'
  Print
- _:Object
- ObjectClass:FieldOffset
- 'VMT'
- Print
- _:Point
- ObjectClass:FieldOffset
- 'VMT'
- Print
  _:Point
  ObjectClass:FieldOffset
  'X'
@@ -1330,10 +1322,6 @@ VOID TestWithDump PointTest
  _:Point
  ObjectClass:FieldOffset
  'Y'
- Print
- _:Rectangle
- ObjectClass:FieldOffset
- 'VMT'
  Print
  _:Rectangle
  ObjectClass:FieldOffset
@@ -1719,11 +1707,8 @@ RectangleClass class_impl _:Rectangle
 0
 0
 0
-0
-0
 1
 2
-0
 1
 2
 1
