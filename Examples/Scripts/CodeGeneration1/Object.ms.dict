@@ -351,7 +351,7 @@ MACRO class
    begin
     '%INHERITS'
     '@' 
-    cObjectName ClassImplName
+    l_ParentClassName
     ';'
    end
 
