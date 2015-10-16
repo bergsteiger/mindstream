@@ -632,6 +632,9 @@ VOID TestWithDump ObjectTest
  _:Object1
  ObjectClass:ClassParent
  Print
+ _:Object1
+ ObjectClass:ClassParentName
+ Print
  Object2:new
  l_Obj2
  pop:Word:SetValuePrim
@@ -715,6 +718,7 @@ Object1
 1
 0
 _:Object
+Object
 Object2 : [ TkwCompiledFunction 256 ]
 Object2
 --------
