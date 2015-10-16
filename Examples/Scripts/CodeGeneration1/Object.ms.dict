@@ -500,6 +500,18 @@ STRING class-method ClassParentName
  end
 class-method-end // ClassParentName
 
+/*{VOID class-method Print
+ %SUMMARY 'Печатает класс' ;
+ if ( Self IsNil ) then
+ begin
+  '<base>' .
+ end
+ else
+ begin
+  Self .ClassName .
+ end
+class-method-end // Print}*/
+
 MACRO classExpander
   ^ IN anImpl
 
