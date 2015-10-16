@@ -119,6 +119,12 @@ ClassOf Rectangle .FieldOffset VMT Print
 ClassOf Foo .FieldOffset VMT Print
 ClassOf Bar .FieldOffset VMT Print
 
+ClassOf Object .ClassParentName Print
+ClassOf Point .ClassParentName Print
+ClassOf Rectangle .ClassParentName Print
+ClassOf Foo .ClassParentName Print
+ClassOf Bar .ClassParentName Print
+
 ClassOf Point .FieldOffset X Print
 ClassOf Point .FieldOffset Y Print
 

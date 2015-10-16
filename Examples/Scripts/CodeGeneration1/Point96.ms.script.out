@@ -229,14 +229,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass method Object:ClassParent
  
- ObjectClass method Object:ClassParentName
+ STRING method Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParentName
+ ; // STRING method Object:ClassParentName
  
  FieldOffset method Object:FieldOffset
   Object IN Self
@@ -323,7 +323,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass : ObjectClass:ClassParent
  
- ObjectClass : ObjectClass:ClassParentName
+ STRING : ObjectClass:ClassParentName
   %SUMMARY %SUM
    '¬озвращает им€ родительского класса'
   ; // %SUMMARY %SUM
@@ -354,7 +354,7 @@ VOID TestWithDump PointTest
     Result
     pop:Word:SetValue
    END
- ; // ObjectClass : ObjectClass:ClassParentName
+ ; // STRING : ObjectClass:ClassParentName
  
  FieldOffset : ObjectClass:FieldOffset
   %SUMMARY %SUM
@@ -576,14 +576,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass method Object:ClassParent
  
- ObjectClass method Object:ClassParentName
+ STRING method Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParentName
+ ; // STRING method Object:ClassParentName
  
  FieldOffset method Object:FieldOffset
   Object IN Self
@@ -670,7 +670,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass : ObjectClass:ClassParent
  
- ObjectClass : ObjectClass:ClassParentName
+ STRING : ObjectClass:ClassParentName
   %SUMMARY %SUM
    '¬озвращает им€ родительского класса'
   ; // %SUMMARY %SUM
@@ -701,7 +701,7 @@ VOID TestWithDump PointTest
     Result
     pop:Word:SetValue
    END
- ; // ObjectClass : ObjectClass:ClassParentName
+ ; // STRING : ObjectClass:ClassParentName
  
  FieldOffset : ObjectClass:FieldOffset
   %SUMMARY %SUM
@@ -912,14 +912,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass method Object:ClassParent
  
- ObjectClass method Object:ClassParentName
+ STRING method Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParentName
+ ; // STRING method Object:ClassParentName
  
  FieldOffset method Object:FieldOffset
   Object IN Self
@@ -1105,7 +1105,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass : ObjectClass:ClassParent
  
- ObjectClass : ObjectClass:ClassParentName
+ STRING : ObjectClass:ClassParentName
   %SUMMARY %SUM
    '¬озвращает им€ родительского класса'
   ; // %SUMMARY %SUM
@@ -1136,7 +1136,7 @@ VOID TestWithDump PointTest
     Result
     pop:Word:SetValue
    END
- ; // ObjectClass : ObjectClass:ClassParentName
+ ; // STRING : ObjectClass:ClassParentName
  
  FieldOffset : ObjectClass:FieldOffset
   %SUMMARY %SUM
@@ -1269,14 +1269,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass method Object:ClassParent
  
- ObjectClass method Object:ClassParentName
+ STRING method Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParentName
+ ; // STRING method Object:ClassParentName
  
  FieldOffset method Object:FieldOffset
   Object IN Self
@@ -1377,7 +1377,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass : ObjectClass:ClassParent
  
- ObjectClass : ObjectClass:ClassParentName
+ STRING : ObjectClass:ClassParentName
   %SUMMARY %SUM
    '¬озвращает им€ родительского класса'
   ; // %SUMMARY %SUM
@@ -1408,7 +1408,7 @@ VOID TestWithDump PointTest
     Result
     pop:Word:SetValue
    END
- ; // ObjectClass : ObjectClass:ClassParentName
+ ; // STRING : ObjectClass:ClassParentName
  
  FieldOffset : ObjectClass:FieldOffset
   %SUMMARY %SUM
@@ -1490,6 +1490,21 @@ VOID TestWithDump PointTest
  _:Bar
  ObjectClass:FieldOffset
  'VMT'
+ Print
+ _:Object
+ ObjectClass:ClassParentName
+ Print
+ _:Point
+ ObjectClass:ClassParentName
+ Print
+ _:Rectangle
+ ObjectClass:ClassParentName
+ Print
+ _:Foo
+ ObjectClass:ClassParentName
+ Print
+ _:Bar
+ ObjectClass:ClassParentName
  Print
  _:Point
  ObjectClass:FieldOffset
@@ -1887,6 +1902,11 @@ RectangleClass class_impl _:Rectangle
 0
 0
 0
+<base>
+Object
+Object
+Object
+Object
 1
 2
 1
