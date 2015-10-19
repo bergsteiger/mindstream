@@ -1062,6 +1062,9 @@ VOID TestWithDump ObjectTest
  _:Object
  pop:Word:Name
  Print
+ l_Obj
+ Object:class
+ Print
  Object1:new
  l_Obj1
  pop:Word:SetValuePrim
@@ -1238,6 +1241,7 @@ _:Object
 <nil>
 <base>
 <base>
+_:Object
 _:Object
 _:Object
 Object1 : [ TkwCompiledFunction ]

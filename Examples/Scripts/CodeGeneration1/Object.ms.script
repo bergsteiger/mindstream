@@ -37,6 +37,8 @@ Test&Dump ObjectTest
  ClassOf Object pop:Word:Name Print
  ClassOf Object pop:Word:Name Print
 
+ l_Obj .class Print
+
  class Object1
   constructor new ( )
 //   Object:new >>> Result
