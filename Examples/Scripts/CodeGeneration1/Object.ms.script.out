@@ -1136,6 +1136,22 @@ VOID TestWithDump ObjectTest
  Print
  '--------'
  Print
+ l_Obj3
+ Object:InstanceSize
+ Print
+ _:Object3
+ ObjectClass:FieldOffset
+ 'VMT'
+ Print
+ _:Object3
+ ObjectClass:ClassParent
+ Print
+ _:Object3
+ ObjectClass:ClassParent
+ ObjectClass:Print
+ _:Object3
+ ObjectClass:ClassParentName
+ Print
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
@@ -1219,3 +1235,8 @@ Object2
 Object3 : [ TkwCompiledFunction ]
 Object3
 --------
+2
+0
+_:Object2
+Object2
+Object2
