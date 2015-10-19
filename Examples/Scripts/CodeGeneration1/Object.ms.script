@@ -106,10 +106,10 @@ Test&Dump ObjectTest
  ClassOf Object3 .ClassParent Print
  ClassOf Object3 .ClassParentName Print
 
-/*{ Object3 VAR l_Obj3
+ Object3 VAR l_Obj3
  l_Obj3 := Object3:new
 
- l_Obj3 .Print
+/*{ l_Obj3 .Print
  l_Obj3 .ClassName Print
 
  '--------' Print

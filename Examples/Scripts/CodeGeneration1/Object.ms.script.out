@@ -223,6 +223,7 @@ VOID TestWithDump ObjectTest
  Object VAR l_Obj
  Object1 VAR l_Obj1
  Object2 VAR l_Obj2
+ Object3 VAR l_Obj3
  IMMEDIATE VOID TYPE Object1
   TtfwValueTypes
   Ctx:IncludeValueTypes
@@ -1014,6 +1015,9 @@ VOID TestWithDump ObjectTest
  _:Object3
  ObjectClass:ClassParentName
  Print
+ Object3:new
+ l_Obj3
+ pop:Word:SetValuePrim
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
