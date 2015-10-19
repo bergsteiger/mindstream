@@ -92,6 +92,8 @@ Test&Dump ObjectTest
   ; // new
  class-end // Object3
 
+ ClassOf Object3 Print
+
 /*{ Object3 VAR l_Obj3
  l_Obj3 := Object3:new
 
