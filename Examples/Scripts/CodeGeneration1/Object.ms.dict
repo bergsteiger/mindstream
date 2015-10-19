@@ -571,16 +571,28 @@ MACRO classExpander
   ) // anItem MembersIterator
 
   STRING FUNCTION MapItem
-   TtfwWord IN aProp
+    TtfwWord IN aProp
    aProp |N >>> Result
   ; // MapItem
 
   PROCEDURE MakeAlias
-   STRING IN aProp
-   ^ IN aLambda
+    STRING IN aProp
+    ^ IN aLambda
+
    axiom:PushSymbol WordAlias
    aProp aLambda DO
   ; // MakeAlias
+
+  PROCEDURE MakeAliasAndAdd
+    STRING IN aProp
+    ^ IN anArray
+    ^ IN aLambda
+
+   ARRAY VAR l_Array
+   anArray DO >>> l_Array
+   axiom:PushSymbol WordAlias
+   aProp aLambda DO
+  ; // MakeAliasAndAdd
 
   anItem %Props .map> MapItem .for> MakeAlias (
    STRING IN aProp 
