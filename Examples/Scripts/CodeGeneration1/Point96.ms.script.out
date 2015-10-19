@@ -64,6 +64,12 @@ VOID TestWithDump PointTest
  
  BarClass class_impl _:Bar
   %CLASS-METHODS %Class-Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
@@ -91,6 +97,12 @@ VOID TestWithDump PointTest
  
  FooClass class_impl _:Foo
   %CLASS-METHODS %Class-Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
@@ -118,6 +130,12 @@ VOID TestWithDump PointTest
  
  PointClass class_impl _:Point
   %CLASS-METHODS %Class-Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
@@ -160,6 +178,12 @@ VOID TestWithDump PointTest
  
  RectangleClass class_impl _:Rectangle
   %CLASS-METHODS %Class-Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
@@ -435,6 +459,12 @@ VOID TestWithDump PointTest
  
  BarClass class_impl _:Bar
   %CLASS-METHODS %Class-Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
@@ -462,6 +492,12 @@ VOID TestWithDump PointTest
  
  FooClass class_impl _:Foo
   %CLASS-METHODS %Class-Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
@@ -489,6 +525,12 @@ VOID TestWithDump PointTest
  
  PointClass class_impl _:Point
   %CLASS-METHODS %Class-Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
@@ -531,6 +573,12 @@ VOID TestWithDump PointTest
  
  RectangleClass class_impl _:Rectangle
   %CLASS-METHODS %Class-Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
@@ -1933,6 +1981,12 @@ ObjectClass class_impl _:Object
 
 PointClass class_impl _:Point
  %CLASS-METHODS %Class-Methods
+  'ClassName'
+  'FieldOffset'
+  'InstanceSize'
+  'ClassParent'
+  'ClassParentName'
+  'Print'
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
@@ -1975,6 +2029,12 @@ PointClass class_impl _:Point
 
 RectangleClass class_impl _:Rectangle
  %CLASS-METHODS %Class-Methods
+  'ClassName'
+  'FieldOffset'
+  'InstanceSize'
+  'ClassParent'
+  'ClassParentName'
+  'Print'
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
