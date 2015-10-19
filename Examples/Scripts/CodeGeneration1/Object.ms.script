@@ -110,11 +110,11 @@ Test&Dump ObjectTest
  l_Obj3 := Object3:new
 
  l_Obj3 .Print
-/*{ l_Obj3 .ClassName Print
+ l_Obj3 .ClassName Print
 
  '--------' Print
 
- l_Obj3 .InstanceSize Print
+/*{ l_Obj3 .InstanceSize Print
 
  ClassOf Object3 .FieldOffset VMT Print
  ClassOf Object3 .ClassParent Print
