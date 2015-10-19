@@ -614,8 +614,9 @@ MACRO classExpander
    anItem .ClassName ClassRefName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   )
 
-  anItem %Constructors .map> MapItem .for> 
-   MakeAliasAndAdd g_CurrentClassConstructors 
+  anItem %Constructors .map> MapItem .for>
+   MakeAlias 
+   //MakeAliasAndAdd g_CurrentClassConstructors 
   ( 
    STRING IN aProp
    //aProp Msg
