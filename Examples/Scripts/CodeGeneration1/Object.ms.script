@@ -92,6 +92,9 @@ Test&Dump ObjectTest
 
  l_Obj2 .FakeField Print
 
+ l_Obj2 .class Print
+ l_Obj2 .class .Print
+
  Object2 class Object3
   constructor new ( )
    new[ 257
