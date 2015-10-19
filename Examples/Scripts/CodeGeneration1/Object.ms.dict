@@ -588,25 +588,22 @@ MACRO classExpander
    anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Props .for>
 
-  anItem %Methods .map> MapItem .for> ( 
+  anItem %Methods .map> MapItem .for> MakeAlias ( 
    STRING IN aProp
-   axiom:PushSymbol WordAlias
    g_CurrentClass aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Methods .for>
 
-  anItem %Class-Methods .map> MapItem .for> ( 
+  anItem %Class-Methods .map> MapItem .for> MakeAlias ( 
    STRING IN aProp
-   axiom:PushSymbol WordAlias
    g_CurrentClass ClassRefName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    anItem .ClassName ClassRefName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    //aProp |N Msg
    // g_CurrentMetaClassMethods
   )
 
-  anItem %Constructors .map> MapItem .for> ( 
+  anItem %Constructors .map> MapItem .for> MakeAlias ( 
    STRING IN aProp
-   axiom:PushSymbol WordAlias
    g_CurrentClass aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Constructors .for>
