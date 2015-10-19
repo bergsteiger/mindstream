@@ -1005,6 +1005,9 @@ VOID TestWithDump ObjectTest
  Print
  _:Object3
  ObjectClass:Print
+ _:Object3
+ ObjectClass:ClassName
+ Print
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
@@ -1081,4 +1084,5 @@ Object3
 _:Object2
 Object2
 --------
+Object3
 Object3
