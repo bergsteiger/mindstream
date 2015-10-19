@@ -248,6 +248,7 @@ l_Rectangles ==> (
 Point VAR PointFake
 PointFake := Point:new
 PointFake Print
+PointFake .class Print
 
 'Hello ' (+) 'world' Print
 
