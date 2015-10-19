@@ -93,6 +93,7 @@ Test&Dump ObjectTest
  class-end // Object3
 
  ClassOf Object3 Print
+ ClassOf Object3 ObjectClass:ClassName Print
 
 /*{ Object3 VAR l_Obj3
  l_Obj3 := Object3:new
