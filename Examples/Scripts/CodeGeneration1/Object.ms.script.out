@@ -1129,6 +1129,8 @@ VOID TestWithDump ObjectTest
  Object3:new
  l_Obj3
  pop:Word:SetValuePrim
+ l_Obj3
+ Object:Print
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
@@ -1209,3 +1211,4 @@ Object3
 Object3
 _:Object2
 Object2
+Object3 : [ TkwCompiledFunction ]
