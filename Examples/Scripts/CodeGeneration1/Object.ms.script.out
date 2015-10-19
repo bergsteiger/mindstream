@@ -8,6 +8,12 @@ VOID TestWithDump ObjectTest
  
  Object1Class class_impl _:Object1
   %CLASS-METHODS %Class-Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
@@ -36,6 +42,12 @@ VOID TestWithDump ObjectTest
  
  Object2Class class_impl _:Object2
   %CLASS-METHODS %Class-Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
@@ -67,6 +79,12 @@ VOID TestWithDump ObjectTest
  
  Object3Class class_impl _:Object3
   %CLASS-METHODS %Class-Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
@@ -97,6 +115,12 @@ VOID TestWithDump ObjectTest
  
  Object1Class class_impl _:Object1
   %CLASS-METHODS %Class-Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
@@ -125,6 +149,12 @@ VOID TestWithDump ObjectTest
  
  Object2Class class_impl _:Object2
   %CLASS-METHODS %Class-Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
@@ -156,6 +186,12 @@ VOID TestWithDump ObjectTest
  
  Object3Class class_impl _:Object3
   %CLASS-METHODS %Class-Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
@@ -708,6 +744,145 @@ VOID TestWithDump ObjectTest
   TtfwValueTypes
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Object3Class
+ 
+ STRING : ObjectClass:ClassName
+  %SUMMARY %SUM
+   'Возвращает имя класса'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass IN Self
+  Self
+  |N
+  ':'
+  string:Split
+  Result
+  pop:Word:SetValue
+  DROP
+ ; // STRING : ObjectClass:ClassName
+ 
+ ObjectClass : ObjectClass:ClassParent
+  %SUMMARY %SUM
+   'Возвращает родительский класс'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass IN Self
+  Self
+  %%
+  ClassParentName
+  DO
+  Result
+  pop:Word:SetValue
+ ; // ObjectClass : ObjectClass:ClassParent
+ 
+ STRING : ObjectClass:ClassParentName
+  %SUMMARY %SUM
+   'Возвращает имя родительского класса'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass VAR l_ClassParent
+  ObjectClass IN Self
+  Self
+  %%
+  ClassParentName
+  DO
+  l_ClassParent
+  pop:Word:SetValue
+  if
+   (
+    l_ClassParent
+    IsNil
+   )
+  then
+   BEGIN
+    '<base>'
+    Result
+    pop:Word:SetValue
+   END
+  else
+   BEGIN
+    l_ClassParent
+    ObjectClass:ClassName
+    Result
+    pop:Word:SetValue
+   END
+ ; // STRING : ObjectClass:ClassParentName
+ 
+ FieldOffset : ObjectClass:FieldOffset
+  %SUMMARY %SUM
+   'Вычисляет смещение поля класса'
+  ; // %SUMMARY %SUM
+  
+  ^L IN aFieldName
+  STRING VAR l_FieldName
+  TtfwWord VAR l_FieldVAR
+  ObjectClass IN Self
+  aFieldName
+  |N
+  l_FieldName
+  pop:Word:SetValue
+  l_FieldName
+  MakeFieldOffsetName
+  l_FieldName
+  pop:Word:SetValue
+  Self
+  %%
+  l_FieldName
+  l_FieldVAR
+  pop:Word:SetValue
+  l_FieldVAR
+  IsNil
+  ?FAIL
+  ARRAY [
+   'Поле '
+   l_FieldName
+   ' на классе '
+   Self
+   ObjectClass:ClassName
+   ' не определено'
+  ]
+  l_FieldVAR
+  DO
+  Result
+  pop:Word:SetValue
+ ; // FieldOffset : ObjectClass:FieldOffset
+ 
+ INTEGER : ObjectClass:InstanceSize
+  %SUMMARY %SUM
+   'Возвращает размер экземпляров класса'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass IN Self
+  Self
+  %%
+  InstanceSizeName
+  DO
+  Result
+  pop:Word:SetValue
+ ; // INTEGER : ObjectClass:InstanceSize
+ 
+ : ObjectClass:Print
+  %SUMMARY %SUM
+   'Печатает класс'
+  ; // %SUMMARY %SUM
+  
+  ObjectClass IN Self
+  if
+   (
+    Self
+    IsNil
+   )
+  then
+   BEGIN
+    '<base>'
+    .
+   END
+  else
+   BEGIN
+    Self
+    ObjectClass:ClassName
+    .
+   END
+ ; // : ObjectClass:Print
  
  ObjectTest
  DumpElement
