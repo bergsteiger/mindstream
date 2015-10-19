@@ -4806,6 +4806,11 @@ ObjectClass OPERATOR :: MACRO :: class_impl : _:Object
  INTEGER CONST : c:Offset:VMT
  ObjectClass OPERATOR :: MACRO :: class_impl :: _:Object : Result
 ; // _:Object
+VOID OPERATOR :: PROCEDURE : array:?AddTo
+ ^ OPERATOR :: IN : anArray
+ STRING OPERATOR :: IN : aValue
+ ARRAY OPERATOR :: VAR : l_Array
+; // array:?AddTo
 STRING CONST : cClassImplPrefix
 STRING CONST : cClassParentName
 STRING CONST : cClassTypePrefix
