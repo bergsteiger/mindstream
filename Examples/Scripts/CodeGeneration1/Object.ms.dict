@@ -575,6 +575,13 @@ MACRO classExpander
    aProp |N >>> Result
   ; // MapItem
 
+  PROCEDURE MakeAlias
+   STRING IN aProp
+   ^ IN aLambda
+   axiom:PushSymbol WordAlias
+   aProp aLambda DO
+  ; // MakeAlias
+
   anItem %Props .map> MapItem .for> (
    STRING IN aProp 
    axiom:PushSymbol WordAlias
