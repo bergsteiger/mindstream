@@ -1986,6 +1986,8 @@ VOID TestWithDump PointTest
  Object:new
  PointFake
  pop:Word:SetValuePrim
+ PointFake
+ Print
  'Hello '
  (+)
  'world'
@@ -2256,6 +2258,7 @@ Rectangle
 Rectangle
 Object
 Object
+[ TkwCompiledFunction ]
 Hello world
 3
 30
