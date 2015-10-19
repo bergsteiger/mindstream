@@ -272,13 +272,6 @@ VOID TestWithDump PointTest
   Print
  ; // REDIFINITION VIRTUAL VOID method Object:Print
  
- REDIFINITION VIRTUAL VOID method Object:Print
-  Object IN Self
-  Self
-  Object:ToPrintable
-  Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
- 
  VIRTUAL STRING method Object:ToPrintable
   Object IN Self
   Self
@@ -642,13 +635,6 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
  ; // Object constructor Object:new
- 
- REDIFINITION VIRTUAL VOID method Object:Print
-  Object IN Self
-  Self
-  Object:ToPrintable
-  Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
  
  REDIFINITION VIRTUAL VOID method Object:Print
   Object IN Self
@@ -1059,13 +1045,6 @@ VOID TestWithDump PointTest
   Print
  ; // REDIFINITION OVERRIDE VOID method Point:Print
  
- REDIFINITION VIRTUAL VOID method Object:Print
-  Object IN Self
-  Self
-  Object:ToPrintable
-  Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
- 
  REDIFINITION OVERRIDE STRING method Point:ToPrintable
   Point IN Self
   ARRAY [
@@ -1404,13 +1383,6 @@ VOID TestWithDump PointTest
   Rectangle:ToPrintable
   Print
  ; // REDIFINITION OVERRIDE VOID method Rectangle:Print
- 
- REDIFINITION VIRTUAL VOID method Object:Print
-  Object IN Self
-  Self
-  Object:ToPrintable
-  Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
  
  Point readonly Rectangle:TopLeft
   Rectangle IN Self
@@ -1944,7 +1916,6 @@ ObjectClass class_impl _:Object
   'ClassParentName'
   'Print'
   'ToPrintable'
-  'Print'
  ; // %METHODS %Methods
  
  %PROPERTIES %Props
