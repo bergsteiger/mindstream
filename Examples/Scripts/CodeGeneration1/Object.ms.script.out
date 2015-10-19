@@ -1160,6 +1160,10 @@ VOID TestWithDump ObjectTest
  _:Object3
  ObjectClass:ClassParentName
  Print
+ _:Object3
+ ObjectClass:FieldOffset
+ 'FakeField'
+ Print
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
@@ -1250,3 +1254,4 @@ Object3
 _:Object2
 Object2
 Object2
+1
