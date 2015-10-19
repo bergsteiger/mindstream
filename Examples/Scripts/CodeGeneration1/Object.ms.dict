@@ -202,6 +202,13 @@ PRIVATE VOID operator MakeSelfParam
  cSelf Ctx:Parser:PushSymbol
 ; // MakeSelfParam
 
+PROCEDURE array:?AddTo
+  STRING IN aValue
+  ^ IN anArray
+ aValue Msg
+ anArray Msg
+; // array:?AddTo
+
 MACRO method
   Literal IN aName
 
@@ -216,6 +223,7 @@ MACRO method
 
  l_Name MakeMethodSignature
  MakeSelfParam
+ l_Name array:?AddTo g_CurrentClassMethods
  l_Name array:AddTo g_CurrentClassMethods
 ; // method
 
@@ -538,13 +546,13 @@ class-method-end // Print
 MACRO classExpander
   ^ IN anImpl
 
- anImpl pop:Word:Name Msg
+ //anImpl pop:Word:Name Msg
 
  %SUMMARY 'Тут можно копировать поля и методы' ;
  anImpl |@ %G .for> ( 
   ObjectClass IN anItem
 
-  anItem pop:Word:Name Msg
+  //anItem pop:Word:Name Msg
 
   anItem MembersIterator
    .filter> ( pop:Word:Producer pop:Word:Name NameOf CONST == )
