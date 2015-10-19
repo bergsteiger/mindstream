@@ -570,6 +570,11 @@ MACRO classExpander
 
   ) // anItem MembersIterator
 
+  STRING FUNCTION MapItem
+   IN aProp
+   aProp |N >>> Result
+  ; // MapItem
+
   anItem %Props .for> ( 
    IN aProp
    STRING VAR l_MemberName
