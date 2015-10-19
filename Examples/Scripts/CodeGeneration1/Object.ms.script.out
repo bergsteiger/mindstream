@@ -1206,6 +1206,12 @@ VOID TestWithDump ObjectTest
  l_Obj3
  Object2:FakeField
  Print
+ l_Obj3
+ Object:class
+ Print
+ l_Obj3
+ Object:class
+ ObjectClass:Print
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
@@ -1304,3 +1310,5 @@ Object2
 Object2
 1
 257
+_:Object3
+Object3
