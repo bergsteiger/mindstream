@@ -209,9 +209,9 @@ PROCEDURE array:?AddTo
  ARRAY VAR l_Array
  anArray DO >>> l_Array
 
- l_Array aValue array:HasString ! ? (
+ aValue l_Array array:Has ! ? (
   aValue array:AddTo l_Array
- ) // l_Array aValue array:HasString ! ?
+ ) // aValue l_Array array:Has ! ?
 ; // array:?AddTo
 
 MACRO method
