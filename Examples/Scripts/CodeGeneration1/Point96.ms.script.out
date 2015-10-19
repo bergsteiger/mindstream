@@ -1983,6 +1983,9 @@ VOID TestWithDump PointTest
  )
  SWAP
  Array:Iterate
+ Object:new
+ PointFake
+ pop:Word:SetValuePrim
  'Hello '
  (+)
  'world'
