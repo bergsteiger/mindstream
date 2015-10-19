@@ -1148,6 +1148,10 @@ VOID TestWithDump ObjectTest
  'VMT'
  Print
  _:Object3
+ ObjectClass:FieldOffset
+ 'FakeField'
+ Print
+ _:Object3
  ObjectClass:ClassParent
  Print
  _:Object3
@@ -1242,6 +1246,7 @@ Object3
 --------
 2
 0
+1
 _:Object2
 Object2
 Object2
