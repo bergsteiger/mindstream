@@ -4808,7 +4808,7 @@ ObjectClass OPERATOR :: MACRO :: class_impl : _:Object
 ; // _:Object
 VOID OPERATOR :: PROCEDURE : array:?AddTo
  ^ OPERATOR :: IN : anArray
- STRING OPERATOR :: IN : aValue
+ OPERATOR :: IN : aValue
  ARRAY OPERATOR :: VAR : l_Array
 ; // array:?AddTo
 STRING CONST : cClassImplPrefix
