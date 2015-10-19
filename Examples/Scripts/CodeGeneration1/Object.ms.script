@@ -92,7 +92,7 @@ Test&Dump ObjectTest
   ; // new
  class-end // Object3
 
- Object3 VAR l_Obj3
+/*{ Object3 VAR l_Obj3
  l_Obj3 := Object3:new
 
  l_Obj3 .Print
@@ -108,7 +108,7 @@ Test&Dump ObjectTest
  ClassOf Object3 .ClassParentName Print
  //ClassOf Object3 .FieldOffset FakeField Print
 
- //l_Obj3 .FakeField Print
+ //l_Obj3 .FakeField Print}*/
 
 ; // ObjectTest
 
