@@ -575,13 +575,11 @@ MACRO classExpander
    aProp |N >>> Result
   ; // MapItem
 
-  anItem %Props .for> ( 
-   IN aProp
-   STRING VAR l_MemberName
-   aProp |N >>> l_MemberName
+  anItem %Props .map> MapItem .for> (
+   IN aProp 
    axiom:PushSymbol WordAlias
-   g_CurrentClass l_MemberName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .ClassName l_MemberName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   g_CurrentClass aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Props .for>
 
   anItem %Methods .for> ( 
