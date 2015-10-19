@@ -208,8 +208,8 @@ PROCEDURE array:?AddTo
 
  ARRAY VAR l_Array
  anArray DO >>> l_Array
- aValue Print
- l_Array Print
+
+ aValue array:AddTo l_Array
 ; // array:?AddTo
 
 MACRO method
@@ -227,7 +227,6 @@ MACRO method
  l_Name MakeMethodSignature
  MakeSelfParam
  l_Name array:?AddTo g_CurrentClassMethods
- l_Name array:AddTo g_CurrentClassMethods
 ; // method
 
 MACRO class-method
