@@ -138,6 +138,31 @@ Test&Dump ObjectTest
  l_Obj3 .class Print
  l_Obj3 .class .Print
 
+ class Object4
+  constructor new ( )
+//   Object:new >>> Result
+   new[ ] >>> Result 
+  ; // new
+ class-end // Object4
+
+ Object4 VAR l_Obj4
+ l_Obj4 := Object4:new
+
+ l_Obj4 .Print
+ l_Obj4 .ClassName Print
+
+ '--------' Print
+
+ l_Obj4 .InstanceSize Print
+ 
+ ClassOf Object4 .FieldOffset VMT Print
+ ClassOf Object4 .ClassParent Print
+ ClassOf Object4 .ClassParent .Print
+ ClassOf Object4 .ClassParentName Print
+
+ l_Obj4 .class Print
+ l_Obj4 .class .Print
+
 ; // ObjectTest
 
 ObjectTest
