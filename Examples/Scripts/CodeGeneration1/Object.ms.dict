@@ -596,7 +596,7 @@ MACRO classExpander
    aProp MakeAlias ( aLambda DO )
   ; // MakeAliasAndAdd
 
-  anItem %Props .map> MapItem .for> MakeAlias (
+  anItem %Props .map> MapItem .for> MakeAliasAndAdd g_CurrentClassProperties (
    STRING IN aProp 
    g_CurrentClass aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol

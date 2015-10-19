@@ -36,6 +36,7 @@ VOID TestWithDump ObjectTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -77,6 +78,7 @@ VOID TestWithDump ObjectTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
    'FakeField'
   ; // %PROPERTIES %Props
   
@@ -121,6 +123,8 @@ VOID TestWithDump ObjectTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
+   'FakeField'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -164,6 +168,7 @@ VOID TestWithDump ObjectTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -205,6 +210,7 @@ VOID TestWithDump ObjectTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
    'FakeField'
   ; // %PROPERTIES %Props
   
@@ -249,6 +255,8 @@ VOID TestWithDump ObjectTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
+   'FakeField'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -761,6 +769,18 @@ VOID TestWithDump ObjectTest
   TtfwValueTypes
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Object3
+ 
+ ObjectClass readonly Object:class
+  Object IN Self
+  Self
+  FieldByOffset
+  ^@ (
+   _:Object _:Object pop:Word:SetValue ::
+   'c:Offset:VMT'
+  )
+  Result
+  pop:Word:SetValue
+ ; // ObjectClass readonly Object:class
  
  STRING method Object:ClassName
   Object IN Self
