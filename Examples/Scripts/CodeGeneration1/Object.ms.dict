@@ -593,8 +593,7 @@ MACRO classExpander
   
    aProp array:?AddTo l_Array
   
-   axiom:PushSymbol WordAlias
-   aProp aLambda DO
+   aProp MakeAlias ( aLambda DO )
   ; // MakeAliasAndAdd
 
   anItem %Props .map> MapItem .for> MakeAlias (
