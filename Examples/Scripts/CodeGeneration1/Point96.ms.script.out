@@ -81,6 +81,13 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
@@ -114,6 +121,13 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
@@ -151,11 +165,16 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
    '+'
    'Neg'
    '-'
-   'ToPrintable'
-   'Print'
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
@@ -196,8 +215,13 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
-   'ToPrintable'
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
    'Print'
+   'ToPrintable'
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
@@ -476,6 +500,13 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
@@ -509,6 +540,13 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
@@ -546,11 +584,16 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
    '+'
    'Neg'
    '-'
-   'ToPrintable'
-   'Print'
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
@@ -591,8 +634,13 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
-   'ToPrintable'
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
    'Print'
+   'ToPrintable'
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
@@ -2002,11 +2050,16 @@ PointClass class_impl _:Point
  ; // %INHERITS %G
  
  %METHODS %Methods
+  'ClassName'
+  'FieldOffset'
+  'InstanceSize'
+  'ClassParent'
+  'ClassParentName'
+  'Print'
+  'ToPrintable'
   '+'
   'Neg'
   '-'
-  'ToPrintable'
-  'Print'
  ; // %METHODS %Methods
  
  %PROPERTIES %Props
@@ -2047,8 +2100,13 @@ RectangleClass class_impl _:Rectangle
  ; // %INHERITS %G
  
  %METHODS %Methods
-  'ToPrintable'
+  'ClassName'
+  'FieldOffset'
+  'InstanceSize'
+  'ClassParent'
+  'ClassParentName'
   'Print'
+  'ToPrintable'
  ; // %METHODS %Methods
  
  %PROPERTIES %Props
