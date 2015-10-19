@@ -592,6 +592,7 @@ MACRO classExpander
    anArray DO >>> l_Array
   
    l_Array Print
+   aProp array:?AddTo l_Array
   
    axiom:PushSymbol WordAlias
    aProp aLambda DO
