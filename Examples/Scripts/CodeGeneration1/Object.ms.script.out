@@ -988,6 +988,8 @@ VOID TestWithDump ObjectTest
  l_Obj2
  Object2:FakeField
  Print
+ '--------'
+ Print
  _:Object3
  Print
  _:Object3
@@ -1069,6 +1071,7 @@ Object
 Object
 1
 256
+--------
 _:Object3
 Object3
 _:Object2
