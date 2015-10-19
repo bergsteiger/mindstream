@@ -1001,6 +1001,8 @@ VOID TestWithDump ObjectTest
  _:Object3
  ObjectClass:ClassParentName
  Print
+ '--------'
+ Print
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
@@ -1076,3 +1078,4 @@ _:Object3
 Object3
 _:Object2
 Object2
+--------
