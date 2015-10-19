@@ -3715,6 +3715,11 @@ BOOLEAN OPERATOR : =/=
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: <> : Result
 ; // =/=
+VOID OPERATOR :: PROCEDURE : array:?AddTo
+ ^ OPERATOR :: IN : anArray
+ OPERATOR :: IN : aValue
+ ARRAY OPERATOR :: VAR : l_Array
+; // array:?AddTo
 VOID OPERATOR : array:AddTo
  OPERATOR :: IN : aLeft
  ^ OPERATOR :: IN : aRight
@@ -4806,11 +4811,6 @@ ObjectClass OPERATOR :: MACRO :: class_impl : _:Object
  INTEGER CONST : c:Offset:VMT
  ObjectClass OPERATOR :: MACRO :: class_impl :: _:Object : Result
 ; // _:Object
-VOID OPERATOR :: PROCEDURE : array:?AddTo
- ^ OPERATOR :: IN : anArray
- OPERATOR :: IN : aValue
- ARRAY OPERATOR :: VAR : l_Array
-; // array:?AddTo
 STRING CONST : cClassImplPrefix
 STRING CONST : cClassParentName
 STRING CONST : cClassTypePrefix
