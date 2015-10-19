@@ -203,7 +203,7 @@ PRIVATE VOID operator MakeSelfParam
 ; // MakeSelfParam
 
 PROCEDURE array:?AddTo
-  STRING IN aValue
+  IN aValue
   ^ IN anArray
 
  ARRAY VAR l_Array
