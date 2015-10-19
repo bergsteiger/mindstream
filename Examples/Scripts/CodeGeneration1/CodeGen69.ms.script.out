@@ -3715,15 +3715,6 @@ BOOLEAN OPERATOR : =/=
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: <> : Result
 ; // =/=
-VOID OPERATOR :: PROCEDURE : array:?AddTo
- ^ OPERATOR :: IN : anArray
- OPERATOR :: IN : aValue
- ARRAY OPERATOR :: VAR : l_Array
-; // array:?AddTo
-VOID OPERATOR : array:AddTo
- OPERATOR :: IN : aLeft
- ^ OPERATOR :: IN : aRight
-; // array:AddTo
 IMMEDIATE VOID OPERATOR :: MACRO : call.me
  Documentation:
   - запускаем "себя же" рекурсивно
@@ -4100,6 +4091,15 @@ IMMEDIATE VOID OPERATOR :: MACRO : >for>
   Итерирует массив A вызывая лямбду aWhatToDo
  ^ OPERATOR :: IN : aWhatToDo
 ; // >for>
+VOID OPERATOR :: PROCEDURE : array:?AddTo
+ ^ OPERATOR :: IN : anArray
+ OPERATOR :: IN : aValue
+ ARRAY OPERATOR :: VAR : l_Array
+; // array:?AddTo
+VOID OPERATOR : array:AddTo
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+; // array:AddTo
 IMMEDIATE VOID OPERATOR :: MACRO : for
  Documentation:
   Итерирует массив aList вызывая лямбду aWhatToDo
