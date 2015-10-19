@@ -202,18 +202,6 @@ PRIVATE VOID operator MakeSelfParam
  cSelf Ctx:Parser:PushSymbol
 ; // MakeSelfParam
 
-PROCEDURE array:?AddTo
-  IN aValue
-  ^ IN anArray
-
- ARRAY VAR l_Array
- anArray DO >>> l_Array
-
- aValue l_Array array:Has ! ? (
-  aValue array:AddTo l_Array
- ) // aValue l_Array array:Has ! ?
-; // array:?AddTo
-
 MACRO method
   Literal IN aName
 
