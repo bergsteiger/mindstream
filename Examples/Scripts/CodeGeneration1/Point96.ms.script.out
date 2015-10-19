@@ -91,6 +91,7 @@ VOID TestWithDump PointTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -131,6 +132,7 @@ VOID TestWithDump PointTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -178,6 +180,7 @@ VOID TestWithDump PointTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
    'X'
    'Y'
   ; // %PROPERTIES %Props
@@ -225,6 +228,7 @@ VOID TestWithDump PointTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
    'TopLeft'
    'BottomRight'
   ; // %PROPERTIES %Props
@@ -510,6 +514,7 @@ VOID TestWithDump PointTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -550,6 +555,7 @@ VOID TestWithDump PointTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -597,6 +603,7 @@ VOID TestWithDump PointTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
    'X'
    'Y'
   ; // %PROPERTIES %Props
@@ -644,6 +651,7 @@ VOID TestWithDump PointTest
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
+   'class'
    'TopLeft'
    'BottomRight'
   ; // %PROPERTIES %Props
@@ -2063,6 +2071,7 @@ PointClass class_impl _:Point
  ; // %METHODS %Methods
  
  %PROPERTIES %Props
+  'class'
   'X'
   'Y'
  ; // %PROPERTIES %Props
@@ -2110,6 +2119,7 @@ RectangleClass class_impl _:Rectangle
  ; // %METHODS %Methods
  
  %PROPERTIES %Props
+  'class'
   'TopLeft'
   'BottomRight'
  ; // %PROPERTIES %Props
