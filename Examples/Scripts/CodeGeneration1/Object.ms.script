@@ -62,6 +62,9 @@ Test&Dump ObjectTest
  ClassOf Object1 .ClassParent .Print
  ClassOf Object1 .ClassParentName Print
 
+ l_Obj1 .class Print
+ l_Obj1 .class .Print
+
  class Object2
   INTEGER member FakeField
   INTEGER readonly FakeField read FakeField
