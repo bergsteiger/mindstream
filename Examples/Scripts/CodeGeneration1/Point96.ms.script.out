@@ -1997,6 +1997,9 @@ VOID TestWithDump PointTest
  PointFake
  Object:ClassParent
  Print
+ PointFake
+ Object:ClassParent
+ ObjectClass:Print
  'Hello '
  (+)
  'world'
@@ -2271,6 +2274,7 @@ Object
 _:Object
 Object
 <nil>
+<base>
 Hello world
 3
 30
