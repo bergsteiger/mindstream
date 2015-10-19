@@ -265,13 +265,6 @@ VOID TestWithDump ObjectTest
   Print
  ; // REDIFINITION VIRTUAL VOID method Object:Print
  
- REDIFINITION VIRTUAL VOID method Object:Print
-  Object IN Self
-  Self
-  Object:ToPrintable
-  Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
- 
  VIRTUAL STRING method Object:ToPrintable
   Object IN Self
   Self
@@ -516,13 +509,6 @@ VOID TestWithDump ObjectTest
   Result
   pop:Word:SetValue
  ; // REDIFINITION Object2 constructor Object2:new
- 
- REDIFINITION VIRTUAL VOID method Object:Print
-  Object IN Self
-  Self
-  Object:ToPrintable
-  Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
  
  REDIFINITION VIRTUAL VOID method Object:Print
   Object IN Self
@@ -862,7 +848,6 @@ ObjectClass class_impl _:Object
   'ClassParentName'
   'Print'
   'ToPrintable'
-  'Print'
  ; // %METHODS %Methods
  
  %PROPERTIES %Props
