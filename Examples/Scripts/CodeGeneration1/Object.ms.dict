@@ -334,7 +334,7 @@ MACRO class
  begin
   axiom:PushSymbol [EXECUTE]
   axiom:PushSymbol (
-  cObjectName ClassOfName Ctx:Parser:PushSymbol 
+  l_ParentClassName ClassOfName Ctx:Parser:PushSymbol 
   axiom:PushSymbol >>> 
   axiom:PushSymbol g_CurrentClassParent
   axiom:PushSymbol )
