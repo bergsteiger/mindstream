@@ -316,10 +316,13 @@ MACRO class
   l_TypeInfo 'ARRAY' == ?FAIL [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ' Заявленные предки ' l_TypeInfo ]
   l_TypeInfo ' ' string:Pos -1 == ?ASSURE [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ' Заявленные предки ' l_TypeInfo ]
   l_TypeInfo >>> l_ParentClassName
+  l_ParentClassName ClassImplName >>> l_ParentClassName
+  l_ParentClassName Msg
  end
  else
  begin
   cObjectName ClassImplName >>> l_ParentClassName
+  l_ParentClassName Msg
  end
 
  STRING VAR l_CurrentClassImpl
