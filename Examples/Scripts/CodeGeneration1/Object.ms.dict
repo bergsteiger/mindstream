@@ -590,6 +590,9 @@ MACRO classExpander
 
    ARRAY VAR l_Array
    anArray DO >>> l_Array
+  
+   l_Array Print
+  
    axiom:PushSymbol WordAlias
    aProp aLambda DO
   ; // MakeAliasAndAdd
@@ -600,7 +603,7 @@ MACRO classExpander
    anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Props .for>
 
-  anItem %Methods .map> MapItem .for> MakeAlias ( 
+  anItem %Methods .map> MapItem .for> MakeAliasAndAdd g_CurrentClassMethods ( 
    STRING IN aProp
    g_CurrentClass aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
