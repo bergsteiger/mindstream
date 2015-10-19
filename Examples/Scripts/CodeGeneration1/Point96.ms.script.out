@@ -1991,6 +1991,9 @@ VOID TestWithDump PointTest
  PointFake
  Object:class
  Print
+ PointFake
+ Object:class
+ ObjectClass:Print
  'Hello '
  (+)
  'world'
@@ -2263,6 +2266,7 @@ Object
 Object
 [ TkwCompiledFunction ]
 _:Object
+Object
 Hello world
 3
 30
