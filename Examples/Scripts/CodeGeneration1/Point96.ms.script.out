@@ -73,6 +73,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
   ; // %CONSTRUCTORS %Constructors
   
   %INHERITS %G
@@ -114,6 +115,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
   ; // %CONSTRUCTORS %Constructors
   
   %INHERITS %G
@@ -155,6 +157,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
    ':'
    '0'
    'XY'
@@ -209,6 +212,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
    ':'
   ; // %CONSTRUCTORS %Constructors
   
@@ -496,6 +500,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
   ; // %CONSTRUCTORS %Constructors
   
   %INHERITS %G
@@ -537,6 +542,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
   ; // %CONSTRUCTORS %Constructors
   
   %INHERITS %G
@@ -578,6 +584,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
    ':'
    '0'
    'XY'
@@ -632,6 +639,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
    ':'
   ; // %CONSTRUCTORS %Constructors
   
@@ -2046,6 +2054,7 @@ PointClass class_impl _:Point
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
+  'new'
   ':'
   '0'
   'XY'
@@ -2100,6 +2109,7 @@ RectangleClass class_impl _:Rectangle
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
+  'new'
   ':'
  ; // %CONSTRUCTORS %Constructors
  
