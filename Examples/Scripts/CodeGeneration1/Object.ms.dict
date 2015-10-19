@@ -592,6 +592,7 @@ MACRO classExpander
    STRING IN aProp
    g_CurrentClass aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   aProp array:?AddTo g_CurrentClassMethods
   ) // anItem %Methods .for>
 
   anItem %Class-Methods .map> MapItem .for> MakeAlias ( 
