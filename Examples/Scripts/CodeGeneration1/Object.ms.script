@@ -78,6 +78,7 @@ Test&Dump ObjectTest
  l_Obj2 .InstanceSize Print
 
  ClassOf Object2 .FieldOffset VMT Print
+ ClassOf Object2 .FieldOffset FakeField Print
  ClassOf Object2 .ClassParent Print
  ClassOf Object2 .ClassParent .Print
  ClassOf Object2 .ClassParentName Print
