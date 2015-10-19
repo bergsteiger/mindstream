@@ -205,8 +205,11 @@ PRIVATE VOID operator MakeSelfParam
 PROCEDURE array:?AddTo
   STRING IN aValue
   ^ IN anArray
+
+ ARRAY VAR l_Array
+ anArray DO >>> l_Array
  aValue Msg
- anArray Msg
+ l_Array Msg
 ; // array:?AddTo
 
 MACRO method
