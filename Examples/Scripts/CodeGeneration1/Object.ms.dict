@@ -576,7 +576,7 @@ MACRO classExpander
   ; // MapItem
 
   anItem %Props .map> MapItem .for> (
-   IN aProp 
+   STRING IN aProp 
    axiom:PushSymbol WordAlias
    g_CurrentClass aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
