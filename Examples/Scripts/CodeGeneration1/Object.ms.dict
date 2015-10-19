@@ -572,31 +572,42 @@ MACRO classExpander
 
   anItem %Props .for> ( 
    IN aProp
+   STRING VAR l_MemberName
+   aProp |N >>> l_MemberName
    axiom:PushSymbol WordAlias
-   g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .ClassName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   g_CurrentClass l_MemberName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   anItem .ClassName l_MemberName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Props .for>
 
   anItem %Methods .for> ( 
    IN aProp
+   STRING VAR l_MemberName
+   aProp |N >>> l_MemberName
    axiom:PushSymbol WordAlias
-   g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .ClassName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   g_CurrentClass l_MemberName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   anItem .ClassName l_MemberName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Methods .for>
 
   anItem %Class-Methods .for> ( 
    IN aProp
-
+   STRING VAR l_MemberName
+   aProp |N >>> l_MemberName
+   
    axiom:PushSymbol WordAlias
-   g_CurrentClass ClassRefName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .ClassName ClassRefName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   g_CurrentClass ClassRefName l_MemberName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   anItem .ClassName ClassRefName l_MemberName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   //aProp |N Msg
+   // g_CurrentMetaClassMethods
   )
 
   anItem %Constructors .for> ( 
    IN aProp
+   STRING VAR l_MemberName
+   aProp |N >>> l_MemberName
+
    axiom:PushSymbol WordAlias
-   g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .ClassName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   g_CurrentClass l_MemberName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   anItem .ClassName l_MemberName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Constructors .for>
 
  )
