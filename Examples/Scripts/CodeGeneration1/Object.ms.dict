@@ -268,7 +268,7 @@ MACRO class-method
  axiom:PushSymbol in
  cSelf Ctx:Parser:PushSymbol
 
- l_Name array:AddTo g_CurrentMetaClassMethods
+ l_Name array:?AddTo g_CurrentMetaClassMethods
 ; // class-method
 
 CONST cObjectName 'Object'
@@ -433,7 +433,7 @@ MACRO readonly
 
  l_Name MakeMethodSignature
  MakeSelfParam
- l_Name array:AddTo g_CurrentClassProperties
+ l_Name array:?AddTo g_CurrentClassProperties
 ; // readonly
 
 : FieldByOffset
@@ -680,7 +680,7 @@ MACRO constructor
  cSelf Ctx:Parser:PushSymbol
  cResult Ctx:Parser:PushSymbol
 
- l_Name array:AddTo g_CurrentClassConstructors
+ l_Name array:?AddTo g_CurrentClassConstructors
 ; // constructor
 
 MACRO new[
