@@ -208,8 +208,8 @@ PROCEDURE array:?AddTo
 
  ARRAY VAR l_Array
  anArray DO >>> l_Array
- aValue Msg
- l_Array Msg
+ aValue Print
+ l_Array Print
 ; // array:?AddTo
 
 MACRO method
