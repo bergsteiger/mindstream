@@ -688,6 +688,13 @@ MACRO constructor
 
  STRING VAR l_Name
  aName |N >>> l_Name
+
+ l_Name Msg
+
+ if ( l_Name <> 'new' ) then
+  DefineInstanceSize
+  // - тут определ€ем размер экземпл€ров класса
+
  @SELF Ctx:SetWordProducerForCompiledClass
  g_CurrentClass Ctx:Parser:PushSymbol
  l_Name MakeMethodSignature
