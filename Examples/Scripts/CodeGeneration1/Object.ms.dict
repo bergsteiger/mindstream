@@ -630,8 +630,8 @@ MACRO classExpander
 
   anItem %Props .map> |N .for> MakeAliasAndAdd g_CurrentClassProperties (
    STRING IN aProp 
-   g_CurrentClass aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+   g_CurrentClass aProp PushMethodSignature
+   anItem .ClassName aProp PushMethodSignature
   ) // anItem %Props .for>
 
   anItem %Methods .map> |N .for> MakeAliasAndAdd g_CurrentClassMethods ( 
