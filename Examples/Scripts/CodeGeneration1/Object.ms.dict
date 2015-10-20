@@ -86,6 +86,7 @@ ARRAY FUNCTION %Constructors
 MACRO DefineMetaList
   Literal IN aWordName
   Literal IN aListName
+  Literal IN aDoc
  %SUMMARY 'Определяет список мета-информации к элементу. И итератор к нему' ;
  axiom:PushSymbol NamedWordProducer
  [ 
@@ -101,7 +102,7 @@ MACRO DefineMetaList
  ] Ctx:Parser:PushArray
 ; // DefineMetaList
 
-DefineMetaList %PROPERTIES %Props
+DefineMetaList %PROPERTIES %Props 'Свойства класса'
 
 //NamedWordProducer %PROPERTIES %Props
 NamedWordProducer %METHODS %Methods
