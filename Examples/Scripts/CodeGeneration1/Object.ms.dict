@@ -601,11 +601,6 @@ MACRO classExpander
 
   ) // anItem MembersIterator
 
-  STRING FUNCTION MapItem
-    TtfwWord IN aProp
-   aProp |N >>> Result
-  ; // MapItem
-
   PROCEDURE MakeAlias
     STRING IN aProp
     ^ IN aLambda
