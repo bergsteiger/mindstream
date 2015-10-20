@@ -627,25 +627,25 @@ MACRO classExpander
    aProp MakeAlias ( aLambda DO )
   ; // MakeAliasAndAdd
 
-  anItem %Props .map> MapItem .for> MakeAliasAndAdd g_CurrentClassProperties (
+  anItem %Props .map> |N .for> MakeAliasAndAdd g_CurrentClassProperties (
    STRING IN aProp 
    g_CurrentClass aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Props .for>
 
-  anItem %Methods .map> MapItem .for> MakeAliasAndAdd g_CurrentClassMethods ( 
+  anItem %Methods .map> |N .for> MakeAliasAndAdd g_CurrentClassMethods ( 
    STRING IN aProp
    g_CurrentClass aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ) // anItem %Methods .for>
 
-  anItem %Class-Methods .map> MapItem .for> MakeAliasAndAdd g_CurrentMetaClassMethods ( 
+  anItem %Class-Methods .map> |N .for> MakeAliasAndAdd g_CurrentMetaClassMethods ( 
    STRING IN aProp
    g_CurrentClass ClassRefName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
    anItem .ClassName ClassRefName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   )
 
-  anItem %Constructors .map> MapItem .for> ( 
+  anItem %Constructors .map> |N .for> ( 
    STRING IN aProp
    if ( aProp = cDefConstructorName ) then
     def_constructor_empty_do
