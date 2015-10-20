@@ -73,6 +73,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
   ; // %CONSTRUCTORS %Constructors
   
   %INHERITS %G
@@ -114,6 +115,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
   ; // %CONSTRUCTORS %Constructors
   
   %INHERITS %G
@@ -155,6 +157,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
    ':'
    '0'
    'XY'
@@ -209,6 +212,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
    ':'
   ; // %CONSTRUCTORS %Constructors
   
@@ -308,14 +312,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // INTEGER method Object:InstanceSize
  
- Object constructor Object:new
+ Bar constructor Bar:new
   ARRAY [
    @
-   _:Object
+   _:Bar
   ]
   Result
   pop:Word:SetValue
- ; // Object constructor Object:new
+ ; // Bar constructor Bar:new
  
  REDIFINITION VIRTUAL VOID method Object:Print
   Object IN Self
@@ -496,6 +500,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
   ; // %CONSTRUCTORS %Constructors
   
   %INHERITS %G
@@ -537,6 +542,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
   ; // %CONSTRUCTORS %Constructors
   
   %INHERITS %G
@@ -578,6 +584,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
    ':'
    '0'
    'XY'
@@ -632,6 +639,7 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
+   'new'
    ':'
   ; // %CONSTRUCTORS %Constructors
   
@@ -731,14 +739,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // INTEGER method Object:InstanceSize
  
- Object constructor Object:new
+ Foo constructor Foo:new
   ARRAY [
    @
-   _:Object
+   _:Foo
   ]
   Result
   pop:Word:SetValue
- ; // Object constructor Object:new
+ ; // Foo constructor Foo:new
  
  REDIFINITION VIRTUAL VOID method Object:Print
   Object IN Self
@@ -1108,14 +1116,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point method Point:Neg
  
- Object constructor Object:new
+ Point constructor Point:new
   ARRAY [
    @
-   _:Object
+   _:Point
   ]
   Result
   pop:Word:SetValue
- ; // Object constructor Object:new
+ ; // Point constructor Point:new
  
  Point constructor Point:OF
   ^ IN _aPoint
@@ -1473,14 +1481,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // INTEGER method Object:InstanceSize
  
- Object constructor Object:new
+ Rectangle constructor Rectangle:new
   ARRAY [
    @
-   _:Object
+   _:Rectangle
   ]
   Result
   pop:Word:SetValue
- ; // Object constructor Object:new
+ ; // Rectangle constructor Rectangle:new
  
  REDIFINITION OVERRIDE VOID method Rectangle:Print
   Rectangle IN Self
@@ -1975,7 +1983,7 @@ VOID TestWithDump PointTest
  )
  SWAP
  Array:Iterate
- Object:new
+ Point:new
  PointFake
  pop:Word:SetValuePrim
  PointFake
@@ -2067,6 +2075,7 @@ PointClass class_impl _:Point
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
+  'new'
   ':'
   '0'
   'XY'
@@ -2121,6 +2130,7 @@ RectangleClass class_impl _:Rectangle
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
+  'new'
   ':'
  ; // %CONSTRUCTORS %Constructors
  
@@ -2264,11 +2274,11 @@ Rectangle
 Object
 Object
 [ TkwCompiledFunction ]
+_:Point
+Point
 _:Object
 Object
-<nil>
-<base>
-<base>
+Object
 Hello world
 3
 30
