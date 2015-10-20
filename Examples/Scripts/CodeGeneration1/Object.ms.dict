@@ -573,11 +573,9 @@ MACRO def_constructor_empty
 ; // def_constructor_empty
 
 PROCEDURE CopyConstructors
- ObjectClass IN anImpl
-
  if ( g_ConstructorsCopied ! ) then
  begin
-  g_CurrentClassImpl IsNil ?FAIL 'Нет текущего определяемого класса'
+  g_CurrentClassImpl IsNil ?FAIL [ 'Нет текущего определяемого класса. Возможное имя класса ' g_CurrentClass ]
   g_ConstructorsCopied := true
   g_CurrentClassImpl %G .for> (
    ObjectClass IN anItem
@@ -671,7 +669,7 @@ MACRO classExpander
 
  ) // l_Impl %G .for>
 
- l_Impl CopyConstructors
+ CopyConstructors
 ; // classExpander
 
 : ListToNameAsString

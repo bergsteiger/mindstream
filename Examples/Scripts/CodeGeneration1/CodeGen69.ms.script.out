@@ -4886,8 +4886,6 @@ IMMEDIATE VOID OPERATOR :: MACRO : constructor
  STRING OPERATOR :: VAR : l_Name
 ; // constructor
 VOID OPERATOR :: PROCEDURE : CopyConstructors
- ObjectClass OPERATOR :: IN : anImpl
-; // CopyConstructors
 STRING CONST : cResult
 STRING CONST : cSelf
 IMMEDIATE VOID OPERATOR :: MACRO : def_constructor
