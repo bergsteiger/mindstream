@@ -4699,7 +4699,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  ;
 ARRAY FUNCTION : %Class-Methods
- OPERATOR :: IN : %S
+ TtfwWord OPERATOR :: IN : %S
  Documentation:
   Методы мета-класса
  ARRAY FUNCTION :: %Class-Methods : Result
@@ -4712,7 +4712,7 @@ ARRAY FUNCTION : %ClassRTTIList
  ARRAY FUNCTION :: %ClassRTTIList : Result
 ; // %ClassRTTIList
 ARRAY FUNCTION : %Constructors
- OPERATOR :: IN : %S
+ TtfwWord OPERATOR :: IN : %S
  Documentation:
   Конструкторы класса
  ARRAY FUNCTION :: %Constructors : Result
@@ -4725,7 +4725,7 @@ ARRAY OPERATOR :: MACRO :: word_func : %G
  ENGINE_WORD OPERATOR :: IN : Self
 ; // %G
 ARRAY FUNCTION : %Methods
- OPERATOR :: IN : %S
+ TtfwWord OPERATOR :: IN : %S
  Documentation:
   Методы класса
  ARRAY FUNCTION :: %Methods : Result
@@ -4733,7 +4733,7 @@ ARRAY FUNCTION : %Methods
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %METHODS
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %PROPERTIES
 ARRAY FUNCTION : %Props
- OPERATOR :: IN : %S
+ TtfwWord OPERATOR :: IN : %S
  Documentation:
   Свойства класса
  ARRAY FUNCTION :: %Props : Result
