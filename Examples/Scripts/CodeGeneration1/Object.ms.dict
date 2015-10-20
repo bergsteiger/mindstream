@@ -578,7 +578,7 @@ MACRO classExpander
  l_Impl pop:Word:Name Msg
 
  %SUMMARY 'Тут можно копировать поля и методы' ;
- anImpl |@ %G .for> ( 
+ l_Impl %G .for> ( 
   ObjectClass IN anItem
 
   anItem MembersIterator
@@ -654,7 +654,7 @@ MACRO classExpander
     def_constructor_empty_do
   ) // anItem %Constructors .for>
 
- ) // anImpl |@ %G .for>
+ ) // l_Impl %G .for>
 ; // classExpander
 
 : ListToNameAsString
