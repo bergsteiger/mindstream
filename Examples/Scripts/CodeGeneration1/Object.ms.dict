@@ -59,11 +59,15 @@ ARRAY FUNCTION %ClassRTTIList
   ( Result := ( l_List CodeIterator ) )
 ; // %ClassRTTIList
 
+ARRAY CompileTime-VAR g_MetaListPoducerNames [ ]
+
 MACRO DefineMetaList
   Literal IN aWordName
   Literal IN aListName
   Literal IN aDoc
  %SUMMARY 'Определяет список мета-информации к элементу. И итератор к нему' ;
+ aWordName |N array:?AddTo g_MetaListPoducerNames
+ g_MetaListPoducerNames .
  axiom:PushSymbol NamedWordProducer
  [ 
   aWordName |N
