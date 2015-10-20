@@ -4814,6 +4814,7 @@ ObjectClass OPERATOR :: MACRO :: class_impl : _:Object
 STRING CONST : cClassImplPrefix
 STRING CONST : cClassParentName
 STRING CONST : cClassTypePrefix
+STRING CONST : cDefConstructorName
 STRING CONST : cFieldPrefix
 STRING CONST : cInstanceSizeName
 IMMEDIATE VOID OPERATOR :: MACRO : class
@@ -4885,6 +4886,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : constructor
 ; // constructor
 STRING CONST : cResult
 STRING CONST : cSelf
+IMMEDIATE VOID OPERATOR :: MACRO : def_constructor
 VOID OPERATOR : define_member
  STRING OPERATOR :: IN : aName
  FieldOffset OPERATOR :: IN : aOffset
