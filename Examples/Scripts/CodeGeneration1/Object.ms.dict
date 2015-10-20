@@ -577,6 +577,7 @@ PROCEDURE CopyConstructors
 
  if ( g_ConstructorsCopied ! ) then
  begin
+  g_CurrentClassImpl IsNil ?FAIL 'Нет текущего определяемого класса'
   g_ConstructorsCopied := true
   anImpl %G .for> (
    ObjectClass IN anItem
