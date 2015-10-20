@@ -726,6 +726,13 @@ MACRO get_member
  aName |N do_get_member
 ; // get_member
 
+MACRO def_constructor
+ axiom:PushSymbol constructor
+ cDefConstructorName Ctx:Parser:PushSymbol
+ axiom:PushSymbol (
+ axiom:PushSymbol )
+; // def_constructor
+
 constructor new ( )
  new[ ] >>> Result
 ; // new
