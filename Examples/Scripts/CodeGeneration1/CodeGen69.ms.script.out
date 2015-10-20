@@ -4734,8 +4734,6 @@ IMMEDIATE VOID OPERATOR :: NamedWordProducer : %METHODS
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %PROPERTIES
 ARRAY FUNCTION : %Props
  OPERATOR :: IN : %S
- Documentation:
-  ¬озвращает итератор свойств класса
  ARRAY FUNCTION :: %Props : Result
 ; // %Props
 ARRAY OPERATOR :: MACRO :: word_func : %R
