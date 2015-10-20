@@ -4834,6 +4834,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : classExpander
  Documentation:
   Тут можно копировать поля и методы
  ^ OPERATOR :: IN : anImpl
+ ObjectClass OPERATOR :: VAR : l_Impl
 ; // classExpander
 STRING FUNCTION : ClassImplName
  STRING OPERATOR :: IN : aName
@@ -4928,11 +4929,6 @@ BOOLEAN FUNCTION : FilterMember
  OBJECT OPERATOR :: IN : aMember
  BOOLEAN FUNCTION :: FilterMember : Result
 ; // FilterMember
-IMMEDIATE VOID OPERATOR :: MACRO : get_member
- Documentation:
-  Компилирует способ доступа к члену класса
- ^L OPERATOR :: IN : aName
-; // get_member
 STRING FUNCTION : InstanceSizeName
  STRING FUNCTION :: InstanceSizeName : Result
 ; // InstanceSizeName
