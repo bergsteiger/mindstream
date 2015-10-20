@@ -622,6 +622,12 @@ MACRO classExpander
    aProp MakeAlias ( aLambda DO )
   ; // MakeAliasAndAdd
 
+  PROCEDURE PushMethodSignature
+    STRING IN aClass
+    STRING IN aName
+   aClass aName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+  ; // PushMethodSignature
+
   anItem %Props .map> |N .for> MakeAliasAndAdd g_CurrentClassProperties (
    STRING IN aProp 
    g_CurrentClass aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
