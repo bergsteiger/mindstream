@@ -733,7 +733,7 @@ MACRO def_constructor
  axiom:PushSymbol )
 ; // def_constructor
 
-constructor new ( )
+def_constructor
  new[ ] >>> Result
 ; // new
 
