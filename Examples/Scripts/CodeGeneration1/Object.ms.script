@@ -67,6 +67,7 @@ Test&Dump ObjectTest
   INTEGER readonly FakeField read FakeField
   def_constructor
    new[ 256 ] >>> Result 
+   //Self .FieldOffset VMT Msg
   ; // new
  class-end // Object2
 

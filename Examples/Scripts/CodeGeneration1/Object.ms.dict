@@ -751,13 +751,6 @@ MACRO new[
  l_InstanceSize LOOP ( 'uninited member' Ctx:Parser:PushString )
 ; // new[
 
-MACRO .member
-  Literal IN aName
-
- %SUMMARY 'Компилирует способ доступа к члену класса' ;
- aName |N do_get_member
-; // .member
-
 def_constructor_empty
 
 VIRTUAL STRING method ToPrintable
