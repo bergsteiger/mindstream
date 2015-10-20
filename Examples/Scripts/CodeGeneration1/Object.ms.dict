@@ -650,12 +650,7 @@ MACRO classExpander
   ( 
    STRING IN aProp
    if ( aProp = cDefConstructorName ) then
-   begin
     def_constructor_empty_do
-/*{    axiom:PushSymbol WordAlias
-    g_CurrentClass aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-    anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol}*/
-   end // ( aProp = cDefConstructorName )
   ) // anItem %Constructors .for>
 
  )
@@ -703,14 +698,6 @@ MACRO class-end
 
     aName aVar DO ListToNameAsString 
    ) // g_MetaListPoducerNames .slice> cMetaListPoducerNamesElementSize .for>
-
-/*{   NameOf %PROPERTIES g_CurrentClassProperties ListToNameAsString
-
-   NameOf %METHODS g_CurrentClassMethods ListToNameAsString
-
-   NameOf %CLASS-METHODS g_CurrentMetaClassMethods ListToNameAsString
-
-   NameOf %CONSTRUCTORS g_CurrentClassConstructors ListToNameAsString}*/
 
   'end.'
  ] Ctx:Parser:PushArray
