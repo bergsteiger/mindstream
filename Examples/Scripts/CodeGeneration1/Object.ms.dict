@@ -692,15 +692,20 @@ MACRO class-end
   'implementation'
   g_CurrentClassImpl pop:Word:Name
 
-   g_MetaListPoducerNames .slice> 2 .for> ( SWAP . pop:Word:Name . )
+   g_MetaListPoducerNames .slice> 2 .for> ( 
+     STRING IN aName 
+     TtfwWord IN aVar 
 
-   NameOf %PROPERTIES g_CurrentClassProperties ListToNameAsString
+    aName aVar DO ListToNameAsString 
+   )
+
+/*{   NameOf %PROPERTIES g_CurrentClassProperties ListToNameAsString
 
    NameOf %METHODS g_CurrentClassMethods ListToNameAsString
 
    NameOf %CLASS-METHODS g_CurrentMetaClassMethods ListToNameAsString
 
-   NameOf %CONSTRUCTORS g_CurrentClassConstructors ListToNameAsString
+   NameOf %CONSTRUCTORS g_CurrentClassConstructors ListToNameAsString}*/
 
   'end.'
  ] Ctx:Parser:PushArray
