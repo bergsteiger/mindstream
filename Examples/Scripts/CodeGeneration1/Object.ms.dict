@@ -118,6 +118,7 @@ MACRO class_impl
 
 STRING CompileTime-VAR g_CurrentClass ''
 BOOLEAN CompileTime-VAR g_InstanceSizeDefined false
+BOOLEAN CompileTime-VAR g_ConstructorsCopied false
 
 TtfwWord type ObjectClass
 
@@ -314,6 +315,7 @@ MACRO class
  g_CurrentClassConstructors := [ ]
  g_ClassFieldOffset := 0
  g_InstanceSizeDefined := false
+ g_ConstructorsCopied := false
  g_CurrentClassParent := nil
  g_CurrentClassParentName := ''
 
@@ -718,6 +720,7 @@ MACRO class-end
  g_CurrentClassParent := nil
  g_CurrentClassParentName := ''
  g_InstanceSizeDefined := false
+ g_ConstructorsCopied := false
  g_ClassFieldOffset := 0
  
 ; // class-end
