@@ -692,6 +692,8 @@ MACRO class-end
   'implementation'
   g_CurrentClassImpl pop:Word:Name
 
+   g_MetaListPoducerNames .for> .
+
    NameOf %PROPERTIES g_CurrentClassProperties ListToNameAsString
 
    NameOf %METHODS g_CurrentClassMethods ListToNameAsString
