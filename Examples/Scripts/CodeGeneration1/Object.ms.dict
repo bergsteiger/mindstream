@@ -689,6 +689,7 @@ MACRO constructor
 
  if ( ( l_Name <> cDefConstructorName ) OR ( g_CurrentClass = cObjectName ) ) then
  begin
+  //g_CurrentClass Msg
   DefineInstanceSize
   // - тут определ€ем размер экземпл€ров класса
  end
