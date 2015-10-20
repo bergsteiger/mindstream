@@ -727,7 +727,7 @@ MACRO get_member
 ; // get_member
 
 MACRO def_constructor
- axiom:PushSymbol constructor
+ 'constructor' Ctx:Parser:PushSymbol
  cDefConstructorName Ctx:Parser:PushSymbol
  axiom:PushSymbol (
  axiom:PushSymbol )
