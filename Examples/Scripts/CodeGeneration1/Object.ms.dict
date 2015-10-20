@@ -84,7 +84,14 @@ ARRAY FUNCTION %Constructors
 ; // %Constructors
 
 MACRO DefineMetaList
+  Literal IN aWordName
+  Literal IN aListName
  %SUMMARY 'Определяет список мета-информации к элементу. И итератор к нему' ;
+ axiom:PushSymbol NamedWordProducer
+ [ 
+  aWordName |N
+  aListName |N 
+ ] Ctx:Parser:PushArray
 ; // DefineMetaList
 
 NamedWordProducer %PROPERTIES %Props

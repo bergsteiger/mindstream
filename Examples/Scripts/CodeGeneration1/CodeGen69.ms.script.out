@@ -4900,6 +4900,8 @@ VOID OPERATOR :: PROCEDURE : DefineInstanceSize
 IMMEDIATE VOID OPERATOR :: MACRO : DefineMetaList
  Documentation:
   Определяет список мета-информации к элементу. И итератор к нему
+ ^L OPERATOR :: IN : aListName
+ ^L OPERATOR :: IN : aWordName
 ; // DefineMetaList
 PRIVATE OPERATOR : do_get_member
  Documentation:
