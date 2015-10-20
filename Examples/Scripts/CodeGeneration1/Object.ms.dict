@@ -650,7 +650,7 @@ MACRO classExpander
     def_constructor_empty_do
   ) // anItem %Constructors .for>
 
- )
+ ) // anImpl |@ %G .for>
 ; // classExpander
 
 : ListToNameAsString
