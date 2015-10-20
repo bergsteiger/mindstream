@@ -628,6 +628,12 @@ MACRO classExpander
    aClass aName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
   ; // PushMethodSignature
 
+  PROCEDURE PushMethodSignatureAlias
+   STRING IN aProp 
+   g_CurrentClass aProp PushMethodSignature
+   anItem .ClassName aProp PushMethodSignature
+  ; // PushMethodSignatureAlias
+
   anItem %Props .map> |N .for> MakeAliasAndAdd g_CurrentClassProperties (
    STRING IN aProp 
    g_CurrentClass aProp PushMethodSignature
