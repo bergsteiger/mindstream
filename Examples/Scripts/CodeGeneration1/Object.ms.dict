@@ -67,7 +67,6 @@ MACRO DefineMetaList
   Literal IN aDoc
  %SUMMARY 'Определяет список мета-информации к элементу. И итератор к нему' ;
  aWordName |N array:?AddTo g_MetaListPoducerNames
- g_MetaListPoducerNames .
  axiom:PushSymbol NamedWordProducer
  [ 
   aWordName |N
@@ -658,11 +657,18 @@ MACRO classExpander
 ; // classExpander
 
 : ListToNameAsString
- STRING IN aName
- ARRAY IN aList
+  STRING IN aName
+  ARRAY IN aList
+
+ %SUMMARY 'Выводит элементы массива как строки в список метаинформации aName' ;
+
+ //aList DO >>> l_List
+ //ARRAY VAR l_List
  aName
+ %REMARK 'Открываем список'
   aList .for> NameAsString
  ';'
+ %REMARK 'Закрываем список'
 ; // ListToNameAsString
 
 PROCEDURE DefineInstanceSize
