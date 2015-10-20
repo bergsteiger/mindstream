@@ -1164,14 +1164,14 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // INTEGER method Object:InstanceSize
  
- REDIFINITION Object4 constructor Object4:new
+ Object4 constructor Object4:new
   ARRAY [
    @
    _:Object4
   ]
   Result
   pop:Word:SetValue
- ; // REDIFINITION Object4 constructor Object4:new
+ ; // Object4 constructor Object4:new
  
  REDIFINITION VIRTUAL VOID method Object:Print
   Object IN Self
