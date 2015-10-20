@@ -65,6 +65,7 @@ MACRO DefineMetaList
   Literal IN aWordName
   Literal IN aListName
   Literal IN aDoc
+  ^ IN aListForValues
  %SUMMARY 'Определяет список мета-информации к элементу. И итератор к нему' ;
  aWordName |N array:?AddTo g_MetaListPoducerNames
  axiom:PushSymbol NamedWordProducer
@@ -92,10 +93,10 @@ ARRAY CompileTime-VAR g_CurrentClassMethods [ ]
 ARRAY CompileTime-VAR g_CurrentMetaClassMethods [ ]
 ARRAY CompileTime-VAR g_CurrentClassConstructors [ ]
 
-DefineMetaList %PROPERTIES %Props 'Свойства класса'
-DefineMetaList %METHODS %Methods 'Методы класса'
-DefineMetaList %CLASS-METHODS %Class-Methods 'Методы мета-класса'
-DefineMetaList %CONSTRUCTORS %Constructors 'Конструкторы класса'
+DefineMetaList %PROPERTIES %Props 'Свойства класса' g_CurrentClassProperties
+DefineMetaList %METHODS %Methods 'Методы класса' g_CurrentClassMethods
+DefineMetaList %CLASS-METHODS %Class-Methods 'Методы мета-класса' g_CurrentMetaClassMethods
+DefineMetaList %CONSTRUCTORS %Constructors 'Конструкторы класса' g_CurrentClassConstructors
 
 MACRO class_impl
   Literal IN aName
