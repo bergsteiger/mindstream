@@ -573,6 +573,10 @@ MACRO def_constructor_empty
 MACRO classExpander
   ^ IN anImpl
 
+ ObjectClass VAR l_Impl 
+ anImpl |@ >>> l_Impl
+ l_Impl pop:Word:Name Msg
+
  %SUMMARY 'Тут можно копировать поля и методы' ;
  anImpl |@ %G .for> ( 
   ObjectClass IN anItem
