@@ -685,7 +685,7 @@ MACRO constructor
  STRING VAR l_Name
  aName |N >>> l_Name
 
- l_Name Msg
+ //l_Name Msg
 
  if ( ( l_Name <> cDefConstructorName ) OR ( g_CurrentClass = cObjectName ) ) then
   DefineInstanceSize
