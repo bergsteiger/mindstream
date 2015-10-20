@@ -535,6 +535,13 @@ class-method-end // Print
 
 CONST cDefConstructorName 'new'
 
+MACRO def_constructor
+ 'constructor' Ctx:Parser:PushSymbol
+ cDefConstructorName Ctx:Parser:PushSymbol
+ axiom:PushSymbol (
+ axiom:PushSymbol )
+; // def_constructor
+
 MACRO classExpander
   ^ IN anImpl
 
@@ -725,13 +732,6 @@ MACRO get_member
  %SUMMARY 'Компилирует способ доступа к члену класса' ;
  aName |N do_get_member
 ; // get_member
-
-MACRO def_constructor
- 'constructor' Ctx:Parser:PushSymbol
- cDefConstructorName Ctx:Parser:PushSymbol
- axiom:PushSymbol (
- axiom:PushSymbol )
-; // def_constructor
 
 def_constructor
  new[ ] >>> Result
