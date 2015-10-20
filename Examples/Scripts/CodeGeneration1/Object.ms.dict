@@ -35,6 +35,9 @@ USES
 EXPORTS
  InheritsAndImplementsNew.ms.dict
 
+WordAlias %R .Implemented.Words
+WordAlias %G .Inherited.Words
+
 NamedWordProducer %PROPERTIES %Props
 NamedWordProducer %METHODS %Methods
 NamedWordProducer %CLASS-METHODS %Class-Methods
@@ -50,9 +53,6 @@ BOOLEAN FUNCTION FilterMember
  Result := ( aMember NotValid ! )
 ; // FilterMember
  
-WordAlias %R .Implemented.Words
-WordAlias %G .Inherited.Words
-
 ARRAY FUNCTION %ClassRTTIList
  IN %S
  Literal IN aName
