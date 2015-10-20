@@ -570,6 +570,21 @@ MACRO def_constructor_empty
  def_constructor_empty_do
 ; // def_constructor_empty
 
+PROCEDURE CopyConstructors
+ ObjectClass IN anImpl
+
+ anImpl %G .for> (
+  ObjectClass IN anItem
+
+  anItem %Constructors .map> |N .for> ( 
+   STRING IN aProp
+   if ( aProp = cDefConstructorName ) then
+    def_constructor_empty_do
+  ) // anItem %Constructors .for>
+
+ ) // anImpl %G .for>
+; // CopyConstructors
+
 MACRO classExpander
   ^ IN anImpl
 
