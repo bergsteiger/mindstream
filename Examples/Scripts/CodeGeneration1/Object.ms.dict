@@ -59,11 +59,11 @@ ARRAY FUNCTION %ClassRTTIList
   ( Result := ( l_List CodeIterator ) )
 ; // %ClassRTTIList
 
-ARRAY FUNCTION %Props 
+/*{ARRAY FUNCTION %Props 
  IN %S
  %SUMMARY '¬озвращает итератор свойств класса' ;
  %S %ClassRTTIList %Props >>> Result
-; // %Props
+; // %Props}*/
 
 ARRAY FUNCTION %Methods 
  IN %S
@@ -91,6 +91,13 @@ MACRO DefineMetaList
  [ 
   aWordName |N
   aListName |N 
+ ] Ctx:Parser:PushArray
+ [
+  'ARRAY FUNCTION' aListName |N  
+  'IN %S'
+//   %SUMMARY '¬озвращает итератор свойств класса' ;
+  '%S %ClassRTTIList %Props >>> Result'
+  ';'
  ] Ctx:Parser:PushArray
 ; // DefineMetaList
 
