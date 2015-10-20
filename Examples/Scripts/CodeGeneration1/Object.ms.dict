@@ -547,10 +547,7 @@ MACRO def_constructor
 ; // def_constructor
 
 MACRO def_constructor_empty
- 'constructor' Ctx:Parser:PushSymbol
- cDefConstructorName Ctx:Parser:PushSymbol
- axiom:PushSymbol (
- axiom:PushSymbol )
+ def_constructor_do
  'new[' Ctx:Parser:PushSymbol
  axiom:PushSymbol ] 
  axiom:PushSymbol >>> 
