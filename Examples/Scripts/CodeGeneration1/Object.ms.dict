@@ -575,7 +575,6 @@ MACRO classExpander
 
  ObjectClass VAR l_Impl 
  anImpl |@ >>> l_Impl
- l_Impl pop:Word:Name Msg
 
  %SUMMARY 'Тут можно копировать поля и методы' ;
  l_Impl %G .for> ( 
