@@ -59,30 +59,6 @@ ARRAY FUNCTION %ClassRTTIList
   ( Result := ( l_List CodeIterator ) )
 ; // %ClassRTTIList
 
-/*{ARRAY FUNCTION %Props 
- IN %S
- %SUMMARY 'Возвращает итератор свойств класса' ;
- %S %ClassRTTIList %Props >>> Result
-; // %Props}*/
-
-ARRAY FUNCTION %Methods 
- IN %S
- %SUMMARY 'Возвращает итератор методов класса' ;
- %S %ClassRTTIList %Methods >>> Result
-; // %Methods
-
-ARRAY FUNCTION %Class-Methods 
- IN %S
- %SUMMARY 'Возвращает итератор методов мета-класса' ;
- %S %ClassRTTIList %Class-Methods >>> Result
-; // %Class-Methods
-
-ARRAY FUNCTION %Constructors 
- IN %S
- %SUMMARY 'Возвращает итератор конструкторов класса' ;
- %S %ClassRTTIList %Constructors >>> Result
-; // %Constructors
-
 MACRO DefineMetaList
   Literal IN aWordName
   Literal IN aListName
@@ -95,23 +71,23 @@ MACRO DefineMetaList
  ] Ctx:Parser:PushArray
  [
   'ARRAY FUNCTION' aListName |N  
-  'TtfwWord IN %S'
+  'IN %S'
   '%SUMMARY' 
  ] Ctx:Parser:PushArray
   aDoc |N Ctx:Parser:PushString 
  [
   ';'
-  '%S %ClassRTTIList %Props >>> Result'
+  '%S %ClassRTTIList'
+  aListName |N
+  '>>> Result'
   ';'
  ] Ctx:Parser:PushArray
 ; // DefineMetaList
 
 DefineMetaList %PROPERTIES %Props 'Свойства класса'
-
-//NamedWordProducer %PROPERTIES %Props
-NamedWordProducer %METHODS %Methods
-NamedWordProducer %CLASS-METHODS %Class-Methods
-NamedWordProducer %CONSTRUCTORS %Constructors
+DefineMetaList %METHODS %Methods 'Методы класса'
+DefineMetaList %CLASS-METHODS %Class-Methods 'Методы мета-класса'
+DefineMetaList %CONSTRUCTORS %Constructors 'Конструкторы класса'
 
 MACRO class_impl
   Literal IN aName
