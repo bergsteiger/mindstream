@@ -62,6 +62,8 @@ ARRAY FUNCTION %ClassRTTIList
 ARRAY CompileTime-VAR g_MetaListPoducerNames [ ]
  %REMARK 'Список содержащий пары (имя списка, указатель на массив)'
 
+CONST cMetaListPoducerNamesElementSize 2
+
 MACRO DefineMetaList
   Literal IN aWordName
   Literal IN aListName
@@ -695,7 +697,7 @@ MACRO class-end
   'implementation'
   g_CurrentClassImpl pop:Word:Name
 
-   g_MetaListPoducerNames .slice> 2 .for> ( 
+   g_MetaListPoducerNames .slice> cMetaListPoducerNamesElementSize .for> ( 
      STRING IN aName 
      TtfwWord IN aVar 
 
