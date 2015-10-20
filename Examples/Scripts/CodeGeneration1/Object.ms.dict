@@ -38,11 +38,6 @@ EXPORTS
 WordAlias %R .Implemented.Words
 WordAlias %G .Inherited.Words
 
-NamedWordProducer %PROPERTIES %Props
-NamedWordProducer %METHODS %Methods
-NamedWordProducer %CLASS-METHODS %Class-Methods
-NamedWordProducer %CONSTRUCTORS %Constructors
-
 OBJECT FUNCTION DoMember 
  OBJECT IN aMember
  aMember DO >>> Result
@@ -87,6 +82,15 @@ ARRAY FUNCTION %Constructors
  %SUMMARY 'Возвращает итератор конструкторов класса' ;
  %S %ClassRTTIList %Constructors >>> Result
 ; // %Constructors
+
+MACRO DefineMetaList
+ %SUMMARY 'Определяет список мета-информации к элементу. И итератор к нему' ;
+; // DefineMetaList
+
+NamedWordProducer %PROPERTIES %Props
+NamedWordProducer %METHODS %Methods
+NamedWordProducer %CLASS-METHODS %Class-Methods
+NamedWordProducer %CONSTRUCTORS %Constructors
 
 MACRO class_impl
   Literal IN aName

@@ -4897,6 +4897,10 @@ VOID OPERATOR :: PROCEDURE : DefineInstanceSize
  Documentation:
   Определяем размер экземпляров класса
 ; // DefineInstanceSize
+IMMEDIATE VOID OPERATOR :: MACRO : DefineMetaList
+ Documentation:
+  Определяет список мета-информации к элементу. И итератор к нему
+; // DefineMetaList
 PRIVATE OPERATOR : do_get_member
  Documentation:
   Определяет способ доступа к члену класса
