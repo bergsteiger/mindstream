@@ -41,7 +41,7 @@ Test&Dump ObjectTest
  l_Obj .class .Print
 
  class Object1
-  constructor new ( )
+  def_constructor
 //   Object:new >>> Result
    new[ ] >>> Result 
   ; // new
@@ -68,7 +68,7 @@ Test&Dump ObjectTest
  class Object2
   INTEGER member FakeField
   INTEGER readonly FakeField read FakeField
-  constructor new ( )
+  def_constructor
    new[ 256 ] >>> Result 
   ; // new
  class-end // Object2
@@ -96,7 +96,7 @@ Test&Dump ObjectTest
  l_Obj2 .class .Print
 
  Object2 class Object3
-  constructor new ( )
+  def_constructor
    new[ 257 ] >>> Result 
   ; // new
  class-end // Object3
@@ -138,7 +138,7 @@ Test&Dump ObjectTest
  l_Obj3 .class .Print
 
  class Object4
-  constructor new ( )
+  def_constructor
    new[ ] >>> Result 
   ; // new
  class-end // Object4
