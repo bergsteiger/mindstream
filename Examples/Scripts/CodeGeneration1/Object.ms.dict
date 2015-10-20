@@ -95,7 +95,7 @@ MACRO DefineMetaList
  ] Ctx:Parser:PushArray
  [
   'ARRAY FUNCTION' aListName |N  
-  'IN %S'
+  'TtfwWord IN %S'
   '%SUMMARY' 
  ] Ctx:Parser:PushArray
   aDoc |N Ctx:Parser:PushString 
