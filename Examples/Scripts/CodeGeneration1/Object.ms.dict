@@ -535,11 +535,15 @@ class-method-end // Print
 
 CONST cDefConstructorName 'new'
 
-MACRO def_constructor
+PROCEDURE def_constructor_do
  'constructor' Ctx:Parser:PushSymbol
  cDefConstructorName Ctx:Parser:PushSymbol
  axiom:PushSymbol (
  axiom:PushSymbol )
+; // def_constructor_do
+
+MACRO def_constructor
+ def_constructor_do
 ; // def_constructor
 
 MACRO def_constructor_empty
