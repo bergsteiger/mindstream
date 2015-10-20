@@ -316,12 +316,10 @@ MACRO class
   l_TypeInfo 'ARRAY' == ?FAIL [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ' Заявленные предки ' l_TypeInfo ]
   l_TypeInfo ' ' string:Pos -1 == ?ASSURE [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ' Заявленные предки ' l_TypeInfo ]
   l_TypeInfo >>> l_ParentClassName
-  //l_ParentClassName Msg
  end
  else
  begin
   cObjectName >>> l_ParentClassName
-  //l_ParentClassName Msg
  end
 
  STRING VAR l_CurrentClassImpl
@@ -540,13 +538,9 @@ CONST cDefConstructorName 'new'
 MACRO classExpander
   ^ IN anImpl
 
- //anImpl pop:Word:Name Msg
-
  %SUMMARY 'Тут можно копировать поля и методы' ;
  anImpl |@ %G .for> ( 
   ObjectClass IN anItem
-
-  //anItem pop:Word:Name Msg
 
   anItem MembersIterator
    .filter> ( pop:Word:Producer pop:Word:Name NameOf CONST == )
