@@ -87,6 +87,11 @@ MACRO DefineMetaList
  ] Ctx:Parser:PushArray
 ; // DefineMetaList
 
+ARRAY CompileTime-VAR g_CurrentClassProperties [ ]
+ARRAY CompileTime-VAR g_CurrentClassMethods [ ]
+ARRAY CompileTime-VAR g_CurrentMetaClassMethods [ ]
+ARRAY CompileTime-VAR g_CurrentClassConstructors [ ]
+
 DefineMetaList %PROPERTIES %Props 'Свойства класса'
 DefineMetaList %METHODS %Methods 'Методы класса'
 DefineMetaList %CLASS-METHODS %Class-Methods 'Методы мета-класса'
@@ -130,14 +135,6 @@ INTEGER type FieldOffset
 // - смещение поля
 
 FieldOffset CompileTime-VAR g_ClassFieldOffset 0
-
-ARRAY CompileTime-VAR g_CurrentClassProperties [ ]
-
-ARRAY CompileTime-VAR g_CurrentClassMethods [ ]
-
-ARRAY CompileTime-VAR g_CurrentMetaClassMethods [ ]
-
-ARRAY CompileTime-VAR g_CurrentClassConstructors [ ]
 
 VOID operator define_member
   STRING IN aName
