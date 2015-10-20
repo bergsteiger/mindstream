@@ -4701,7 +4701,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
 ARRAY FUNCTION : %Class-Methods
  OPERATOR :: IN : %S
  Documentation:
-  Возвращает итератор методов мета-класса
+  Методы мета-класса
  ARRAY FUNCTION :: %Class-Methods : Result
 ; // %Class-Methods
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CLASS-METHODS
@@ -4714,7 +4714,7 @@ ARRAY FUNCTION : %ClassRTTIList
 ARRAY FUNCTION : %Constructors
  OPERATOR :: IN : %S
  Documentation:
-  Возвращает итератор конструкторов класса
+  Конструкторы класса
  ARRAY FUNCTION :: %Constructors : Result
 ; // %Constructors
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CONSTRUCTORS
@@ -4727,13 +4727,13 @@ ARRAY OPERATOR :: MACRO :: word_func : %G
 ARRAY FUNCTION : %Methods
  OPERATOR :: IN : %S
  Documentation:
-  Возвращает итератор методов класса
+  Методы класса
  ARRAY FUNCTION :: %Methods : Result
 ; // %Methods
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %METHODS
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %PROPERTIES
 ARRAY FUNCTION : %Props
- TtfwWord OPERATOR :: IN : %S
+ OPERATOR :: IN : %S
  Documentation:
   Свойства класса
  ARRAY FUNCTION :: %Props : Result
