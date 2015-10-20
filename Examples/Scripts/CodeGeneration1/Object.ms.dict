@@ -546,13 +546,17 @@ MACRO def_constructor
  def_constructor_do
 ; // def_constructor
 
-MACRO def_constructor_empty
+PROCEDURE def_constructor_empty_do
  def_constructor_do
  'new[' Ctx:Parser:PushSymbol
  axiom:PushSymbol ] 
  axiom:PushSymbol >>> 
  'Result' Ctx:Parser:PushSymbol
  axiom:PushSymbol ;
+; // def_constructor_empty_do
+
+MACRO def_constructor_empty
+ def_constructor_empty_do
 ; // def_constructor_empty
 
 MACRO classExpander
