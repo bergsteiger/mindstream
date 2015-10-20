@@ -106,6 +106,7 @@ TtfwWord type ObjectClass
 
 ObjectClass CompileTime-VAR g_CurrentClassImpl nil
 ObjectClass CompileTime-VAR g_CurrentClassParent nil
+STRING CompileTime-VAR g_CurrentClassParentName ''
 
 CONST cMetaPrefix 'c:'
 CONST cFieldPrefix 'Offset:'
@@ -305,21 +306,22 @@ MACRO class
  g_ClassFieldOffset := 0
  g_InstanceSizeDefined := false
  g_CurrentClassParent := nil
+ g_CurrentClassParentName := ''
+
  aName |N >>> g_CurrentClass
 
  STRING VAR l_TypeInfo
  l_WordInfo pop:WordInfo:TypeName >>> l_TypeInfo
 
- STRING VAR l_ParentClassName
  if ( l_TypeInfo <> '' ) then
  begin
   l_TypeInfo 'ARRAY' == ?FAIL [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ' Заявленные предки ' l_TypeInfo ]
   l_TypeInfo ' ' string:Pos -1 == ?ASSURE [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ' Заявленные предки ' l_TypeInfo ]
-  l_TypeInfo >>> l_ParentClassName
+  l_TypeInfo >>> g_CurrentClassParentName
  end
  else
  begin
-  cObjectName >>> l_ParentClassName
+  cObjectName >>> g_CurrentClassParentName
  end
 
  STRING VAR l_CurrentClassImpl
@@ -332,7 +334,7 @@ MACRO class
  begin
   axiom:PushSymbol [EXECUTE]
   axiom:PushSymbol (
-  l_ParentClassName ClassOfName Ctx:Parser:PushSymbol 
+  g_CurrentClassParentName ClassOfName Ctx:Parser:PushSymbol 
   axiom:PushSymbol >>> 
   axiom:PushSymbol g_CurrentClassParent
   axiom:PushSymbol )
@@ -351,7 +353,7 @@ MACRO class
    begin
     '%INHERITS'
     '@' 
-    l_ParentClassName ClassImplName
+    g_CurrentClassParentName ClassImplName
     ';'
    end
 
@@ -693,6 +695,7 @@ MACRO class-end
  g_CurrentClass := ''
  g_CurrentClassImpl := nil
  g_CurrentClassParent := nil
+ g_CurrentClassParentName := ''
  g_InstanceSizeDefined := false
  g_ClassFieldOffset := 0
  
