@@ -96,7 +96,11 @@ MACRO DefineMetaList
  [
   'ARRAY FUNCTION' aListName |N  
   'IN %S'
-//   %SUMMARY '¬озвращает итератор свойств класса' ;
+  '%SUMMARY' 
+ ] Ctx:Parser:PushArray
+  aDoc |N Ctx:Parser:PushString 
+ [
+  ';'
   '%S %ClassRTTIList %Props >>> Result'
   ';'
  ] Ctx:Parser:PushArray

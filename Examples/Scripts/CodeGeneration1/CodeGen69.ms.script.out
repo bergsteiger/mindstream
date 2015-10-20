@@ -4734,6 +4734,8 @@ IMMEDIATE VOID OPERATOR :: NamedWordProducer : %METHODS
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %PROPERTIES
 ARRAY FUNCTION : %Props
  OPERATOR :: IN : %S
+ Documentation:
+  Свойства класса
  ARRAY FUNCTION :: %Props : Result
 ; // %Props
 ARRAY OPERATOR :: MACRO :: word_func : %R
@@ -4898,6 +4900,7 @@ VOID OPERATOR :: PROCEDURE : DefineInstanceSize
 IMMEDIATE VOID OPERATOR :: MACRO : DefineMetaList
  Documentation:
   Определяет список мета-информации к элементу. И итератор к нему
+ ^L OPERATOR :: IN : aDoc
  ^L OPERATOR :: IN : aListName
  ^L OPERATOR :: IN : aWordName
 ; // DefineMetaList
