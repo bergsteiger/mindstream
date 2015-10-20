@@ -94,7 +94,9 @@ MACRO DefineMetaList
  ] Ctx:Parser:PushArray
 ; // DefineMetaList
 
-NamedWordProducer %PROPERTIES %Props
+DefineMetaList %PROPERTIES %Props
+
+//NamedWordProducer %PROPERTIES %Props
 NamedWordProducer %METHODS %Methods
 NamedWordProducer %CLASS-METHODS %Class-Methods
 NamedWordProducer %CONSTRUCTORS %Constructors
