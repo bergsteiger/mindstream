@@ -66,6 +66,7 @@ Test&Dump ObjectTest
   INTEGER member FakeField
   INTEGER readonly FakeField read FakeField
   def_constructor
+   //[EXECUTE] ( g_InstanceSizeDefined Msg )
    new[ 256 ] >>> Result 
    //Self .FieldOffset 'VMT' Msg
   ; // new
