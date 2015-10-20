@@ -1,3 +1,7 @@
+[ %PROPERTIES TkwGlobalVar ]
+[ %PROPERTIES TkwGlobalVar %METHODS TkwGlobalVar ]
+[ %PROPERTIES TkwGlobalVar %METHODS TkwGlobalVar %CLASS-METHODS TkwGlobalVar ]
+[ %PROPERTIES TkwGlobalVar %METHODS TkwGlobalVar %CLASS-METHODS TkwGlobalVar %CONSTRUCTORS TkwGlobalVar ]
 VOID TestWithDump ObjectTest
  IMMEDIATE VOID MACRO .FakeField
   ^@ IN Self
