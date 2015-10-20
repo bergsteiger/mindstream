@@ -60,16 +60,19 @@ ARRAY FUNCTION %ClassRTTIList
 ; // %ClassRTTIList
 
 ARRAY CompileTime-VAR g_MetaListPoducerNames [ ]
+ %REMARK 'Список содержащий пары (имя списка, указатель на массив)'
 
 MACRO DefineMetaList
   Literal IN aWordName
   Literal IN aListName
   Literal IN aDoc
   ^ IN aListForValues
+
  %SUMMARY 'Определяет список мета-информации к элементу. И итератор к нему' ;
+
  aWordName |N array:AddTo g_MetaListPoducerNames
  aListForValues array:AddTo g_MetaListPoducerNames
- g_MetaListPoducerNames .
+
  axiom:PushSymbol NamedWordProducer
  [ 
   aWordName |N
