@@ -640,9 +640,10 @@ MACRO classExpander
    STRING IN aProp
    if ( aProp = cDefConstructorName ) then
    begin
-    axiom:PushSymbol WordAlias
+    def_constructor_empty_do
+/*{    axiom:PushSymbol WordAlias
     g_CurrentClass aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-    anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+    anItem .ClassName aProp MakeMethodSignaturePrim Ctx:Parser:PushSymbol}*/
    end // ( aProp = cDefConstructorName )
   ) // anItem %Constructors .for>
 
@@ -688,7 +689,7 @@ MACRO class-end
 
   'end.'
  ] Ctx:Parser:PushArray
-
+ 
  g_CurrentClass := ''
  g_CurrentClassImpl := nil
  g_CurrentClassParent := nil
@@ -702,9 +703,6 @@ MACRO constructor
   ^ IN aParams
 
  %SUMMARY 'Конструктор объектов';
-
- DefineInstanceSize
- // - тут определяем размер экземпляров класса
 
  STRING VAR l_Name
  aName |N >>> l_Name
