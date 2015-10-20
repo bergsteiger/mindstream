@@ -662,13 +662,9 @@ MACRO classExpander
    anItem .ClassName ClassRefName aProp PushMethodSignature
   )
 
-  anItem %Constructors .map> |N .for> ( 
-   STRING IN aProp
-   if ( aProp = cDefConstructorName ) then
-    def_constructor_empty_do
-  ) // anItem %Constructors .for>
-
  ) // l_Impl %G .for>
+
+ l_Impl CopyConstructors
 ; // classExpander
 
 : ListToNameAsString
