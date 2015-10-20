@@ -751,12 +751,12 @@ MACRO new[
  l_InstanceSize LOOP ( 'uninited member' Ctx:Parser:PushString )
 ; // new[
 
-MACRO get_member
+MACRO .member
   Literal IN aName
 
  %SUMMARY 'Компилирует способ доступа к члену класса' ;
  aName |N do_get_member
-; // get_member
+; // .member
 
 def_constructor_empty
 
