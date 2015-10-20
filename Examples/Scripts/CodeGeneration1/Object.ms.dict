@@ -700,7 +700,7 @@ MACRO class-end
      TtfwWord IN aVar 
 
     aName aVar DO ListToNameAsString 
-   )
+   ) // g_MetaListPoducerNames .slice> 2 .for>
 
 /*{   NameOf %PROPERTIES g_CurrentClassProperties ListToNameAsString
 
