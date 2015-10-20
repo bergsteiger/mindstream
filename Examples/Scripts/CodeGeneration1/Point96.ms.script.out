@@ -1672,6 +1672,7 @@ VOID TestWithDump PointTest
    END
  ; // : ObjectClass:Print
  
+ Rectangle VAR RectangleFake
  PointTest
  DumpElement
  _:Object
@@ -2003,6 +2004,26 @@ VOID TestWithDump PointTest
  PointFake
  Object:ClassParentName
  Print
+ Rectangle:new
+ RectangleFake
+ pop:Word:SetValuePrim
+ RectangleFake
+ Print
+ RectangleFake
+ Object:class
+ Print
+ RectangleFake
+ Object:class
+ ObjectClass:Print
+ RectangleFake
+ Object:ClassParent
+ Print
+ RectangleFake
+ Object:ClassParent
+ ObjectClass:Print
+ RectangleFake
+ Object:ClassParentName
+ Print
  'Hello '
  (+)
  'world'
@@ -2276,6 +2297,12 @@ Object
 [ TkwCompiledFunction ]
 _:Point
 Point
+_:Object
+Object
+Object
+[ TkwCompiledFunction ]
+_:Rectangle
+Rectangle
 _:Object
 Object
 Object

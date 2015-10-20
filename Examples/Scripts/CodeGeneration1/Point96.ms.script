@@ -254,6 +254,15 @@ PointFake .ClassParent Print
 PointFake .ClassParent .Print
 PointFake .ClassParentName Print
 
+Rectangle VAR RectangleFake
+RectangleFake := Rectangle:new
+RectangleFake Print
+RectangleFake .class Print
+RectangleFake .class .Print
+RectangleFake .ClassParent Print
+RectangleFake .ClassParent .Print
+RectangleFake .ClassParentName Print
+
 'Hello ' (+) 'world' Print
 
 1 (+) 2 Print
