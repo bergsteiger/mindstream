@@ -2,46 +2,46 @@
 [ %PROPERTIES TkwGlobalVar %METHODS TkwGlobalVar ]
 [ %PROPERTIES TkwGlobalVar %METHODS TkwGlobalVar %CLASS-METHODS TkwGlobalVar ]
 [ %PROPERTIES TkwGlobalVar %METHODS TkwGlobalVar %CLASS-METHODS TkwGlobalVar %CONSTRUCTORS TkwGlobalVar ]
-TkwGlobalVar
 %PROPERTIES
-TkwGlobalVar
+g_CurrentClassProperties
 %METHODS
-TkwGlobalVar
+g_CurrentClassMethods
 %CLASS-METHODS
-TkwGlobalVar
+g_CurrentMetaClassMethods
 %CONSTRUCTORS
-TkwGlobalVar
+g_CurrentClassConstructors
 %PROPERTIES
-TkwGlobalVar
+g_CurrentClassProperties
 %METHODS
-TkwGlobalVar
+g_CurrentClassMethods
 %CLASS-METHODS
-TkwGlobalVar
+g_CurrentMetaClassMethods
 %CONSTRUCTORS
-TkwGlobalVar
+g_CurrentClassConstructors
 %PROPERTIES
-TkwGlobalVar
+g_CurrentClassProperties
 %METHODS
-TkwGlobalVar
+g_CurrentClassMethods
 %CLASS-METHODS
-TkwGlobalVar
+g_CurrentMetaClassMethods
 %CONSTRUCTORS
-TkwGlobalVar
+g_CurrentClassConstructors
 %PROPERTIES
-TkwGlobalVar
+g_CurrentClassProperties
 %METHODS
-TkwGlobalVar
+g_CurrentClassMethods
 %CLASS-METHODS
-TkwGlobalVar
+g_CurrentMetaClassMethods
 %CONSTRUCTORS
-TkwGlobalVar
+g_CurrentClassConstructors
 %PROPERTIES
-TkwGlobalVar
+g_CurrentClassProperties
 %METHODS
-TkwGlobalVar
+g_CurrentClassMethods
 %CLASS-METHODS
-TkwGlobalVar
+g_CurrentMetaClassMethods
 %CONSTRUCTORS
+g_CurrentClassConstructors
 VOID TestWithDump ObjectTest
  IMMEDIATE VOID MACRO .FakeField
   ^@ IN Self
