@@ -551,6 +551,7 @@ MACRO def_constructor_empty
  axiom:PushSymbol ] 
  axiom:PushSymbol >>> 
  'Result' Ctx:Parser:PushSymbol
+ axiom:PushSymbol ;
 ; // def_constructor_empty
 
 MACRO classExpander
@@ -744,9 +745,7 @@ MACRO get_member
  aName |N do_get_member
 ; // get_member
 
-def_constructor
- new[ ] >>> Result
-; // new
+def_constructor_empty
 
 VIRTUAL STRING method ToPrintable
  Self ToPrintable >>> Result
