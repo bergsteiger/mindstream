@@ -542,6 +542,17 @@ MACRO def_constructor
  axiom:PushSymbol )
 ; // def_constructor
 
+MACRO def_constructor_empty
+ 'constructor' Ctx:Parser:PushSymbol
+ cDefConstructorName Ctx:Parser:PushSymbol
+ axiom:PushSymbol (
+ axiom:PushSymbol )
+ 'new[' Ctx:Parser:PushSymbol
+ axiom:PushSymbol ] 
+ axiom:PushSymbol >>> 
+ 'Result' Ctx:Parser:PushSymbol
+; // def_constructor_empty
+
 MACRO classExpander
   ^ IN anImpl
 
