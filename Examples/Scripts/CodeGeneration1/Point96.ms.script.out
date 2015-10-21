@@ -1,3 +1,181 @@
+%PROPERTIES
+g_CurrentClassProperties
+[ ]
+[ ]
+%METHODS
+g_CurrentClassMethods
+[ ]
+[ ]
+%CLASS-METHODS
+g_CurrentMetaClassMethods
+[ ]
+[ ]
+%CONSTRUCTORS
+g_CurrentClassConstructors
+[ ]
+[ ]
+[ new ]
+[ new ]
+%PROPERTIES
+g_CurrentClassProperties
+[ class ]
+[ ]
+%METHODS
+g_CurrentClassMethods
+[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ToPrintable ]
+[ ]
+%CLASS-METHODS
+g_CurrentMetaClassMethods
+[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ]
+[ ]
+%CONSTRUCTORS
+g_CurrentClassConstructors
+[ new ]
+[ ]
+%PROPERTIES
+g_CurrentClassProperties
+[ ]
+[ ]
+%METHODS
+g_CurrentClassMethods
+[ ]
+[ ]
+%CLASS-METHODS
+g_CurrentMetaClassMethods
+[ ]
+[ ]
+%CONSTRUCTORS
+g_CurrentClassConstructors
+[ ]
+[ ]
+_:Point
+new
+[ new : 0 XY OF ]
+[ new : 0 XY OF ]
+%PROPERTIES
+g_CurrentClassProperties
+[ class X Y ]
+[ ]
+%METHODS
+g_CurrentClassMethods
+[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ToPrintable + Neg - ]
+[ ]
+%CLASS-METHODS
+g_CurrentMetaClassMethods
+[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ]
+[ ]
+%CONSTRUCTORS
+g_CurrentClassConstructors
+[ new : 0 XY OF ]
+[ ]
+%PROPERTIES
+g_CurrentClassProperties
+[ ]
+[ ]
+%METHODS
+g_CurrentClassMethods
+[ ]
+[ ]
+%CLASS-METHODS
+g_CurrentMetaClassMethods
+[ ]
+[ ]
+%CONSTRUCTORS
+g_CurrentClassConstructors
+[ ]
+[ ]
+_:Rectangle
+new
+[ new : ]
+[ new : ]
+%PROPERTIES
+g_CurrentClassProperties
+[ class TopLeft BottomRight ]
+[ ]
+%METHODS
+g_CurrentClassMethods
+[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ToPrintable ]
+[ ]
+%CLASS-METHODS
+g_CurrentMetaClassMethods
+[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ]
+[ ]
+%CONSTRUCTORS
+g_CurrentClassConstructors
+[ new : ]
+[ ]
+%PROPERTIES
+g_CurrentClassProperties
+[ ]
+[ ]
+%METHODS
+g_CurrentClassMethods
+[ ]
+[ ]
+%CLASS-METHODS
+g_CurrentMetaClassMethods
+[ ]
+[ ]
+%CONSTRUCTORS
+g_CurrentClassConstructors
+[ ]
+[ ]
+_:Foo
+new
+[ new ]
+[ new ]
+%PROPERTIES
+g_CurrentClassProperties
+[ class ]
+[ ]
+%METHODS
+g_CurrentClassMethods
+[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ToPrintable ]
+[ ]
+%CLASS-METHODS
+g_CurrentMetaClassMethods
+[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ]
+[ ]
+%CONSTRUCTORS
+g_CurrentClassConstructors
+[ new ]
+[ ]
+%PROPERTIES
+g_CurrentClassProperties
+[ ]
+[ ]
+%METHODS
+g_CurrentClassMethods
+[ ]
+[ ]
+%CLASS-METHODS
+g_CurrentMetaClassMethods
+[ ]
+[ ]
+%CONSTRUCTORS
+g_CurrentClassConstructors
+[ ]
+[ ]
+_:Bar
+new
+[ new ]
+[ new ]
+%PROPERTIES
+g_CurrentClassProperties
+[ class ]
+[ ]
+%METHODS
+g_CurrentClassMethods
+[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ToPrintable ]
+[ ]
+%CLASS-METHODS
+g_CurrentMetaClassMethods
+[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ]
+[ ]
+%CONSTRUCTORS
+g_CurrentClassConstructors
+[ new ]
+[ ]
 VOID TestWithDump PointTest
  IMMEDIATE VOID MACRO .-
   ^@ IN Self

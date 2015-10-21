@@ -1,3 +1,37 @@
+%PROPERTIES
+g_CurrentClassProperties
+[ ]
+[ ]
+%METHODS
+g_CurrentClassMethods
+[ ]
+[ ]
+%CLASS-METHODS
+g_CurrentMetaClassMethods
+[ ]
+[ ]
+%CONSTRUCTORS
+g_CurrentClassConstructors
+[ ]
+[ ]
+[ new ]
+[ new ]
+%PROPERTIES
+g_CurrentClassProperties
+[ class ]
+[ ]
+%METHODS
+g_CurrentClassMethods
+[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ToPrintable ]
+[ ]
+%CLASS-METHODS
+g_CurrentMetaClassMethods
+[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ]
+[ ]
+%CONSTRUCTORS
+g_CurrentClassConstructors
+[ new ]
+[ ]
 VOID TestWithDump CodeGen
  CodeGen
  DumpElement
@@ -4876,6 +4910,7 @@ STRING FUNCTION : ClassRefName
 ; // ClassRefName
 STRING CONST : ClassRefSuffix
 IMMEDIATE VOID OPERATOR :: MACRO : ClearClassInfo
+VOID OPERATOR :: PROCEDURE : ClearMetaLists
 INTEGER CONST : cMetaListPoducerNamesElementSize
 STRING CONST : cMetaPrefix
 STRING CONST : cObjectName
@@ -4931,6 +4966,7 @@ BOOLEAN FUNCTION : FilterMember
  OBJECT OPERATOR :: IN : aMember
  BOOLEAN FUNCTION :: FilterMember : Result
 ; // FilterMember
+VOID OPERATOR :: PROCEDURE : FinishClassDefinition
 STRING FUNCTION : InstanceSizeName
  STRING FUNCTION :: InstanceSizeName : Result
 ; // InstanceSizeName
@@ -4940,6 +4976,10 @@ STRING FUNCTION : InstanceSizeName
  ARRAY OPERATOR :: IN : aList
  STRING OPERATOR :: IN : aName
 ; // ListToNameAsString
+REDIFINITION : : Log
+==> Redefines
+ VOID .
+<== Redefines
 PRIVATE STRING OPERATOR : MakeFieldOffsetName
  Documentation:
   Делает имя для доступа к полю
@@ -4962,6 +5002,9 @@ IMMEDIATE VOID OPERATOR :: MACRO : member
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
 ; // member
+ARRAY FUNCTION : MetaListPoducerIt
+ ARRAY FUNCTION :: MetaListPoducerIt : Result
+; // MetaListPoducerIt
 IMMEDIATE VOID OPERATOR :: MACRO : method
  Documentation:
   Метод объекта
