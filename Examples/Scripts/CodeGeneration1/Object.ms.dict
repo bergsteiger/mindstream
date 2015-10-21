@@ -310,7 +310,8 @@ MACRO ClassOf
 PROCEDURE ClearMetaLists
  MetaListPoducerIt .for> ( 
    STRING IN aName 
-   TtfwWord IN aVar 
+   TtfwWord IN aVar
+  aName Log 
   aVar pop:Word:Name Log
   aVar DO Log
   [ ] aVar pop:Word:SetValue
