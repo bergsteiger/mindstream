@@ -735,12 +735,12 @@ MACRO class-end
   'implementation'
   g_CurrentClassImpl pop:Word:Name
 
-   g_MetaListPoducerNames .slice> cMetaListPoducerNamesElementSize .for> ( 
+   MetaListPoducerIt .for> ( 
      STRING IN aName 
      TtfwWord IN aVar 
 
     aName aVar DO ListToNameAsString 
-   ) // g_MetaListPoducerNames .slice> cMetaListPoducerNamesElementSize .for>
+   ) // MetaListPoducerIt .for>
 
   'end.'
   'ClearClassInfo'
