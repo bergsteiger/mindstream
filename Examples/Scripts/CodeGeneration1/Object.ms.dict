@@ -736,8 +736,9 @@ MACRO ClearClassInfo
 ; // ClearClassInfo
 
 PROCEDURE FinishClassDefinition
+ axiom:PushSymbol implementation
+
  [
-  'implementation'
   g_CurrentClassImpl pop:Word:Name
 
    MetaListPoducerIt .for> ( 
@@ -748,8 +749,9 @@ PROCEDURE FinishClassDefinition
    ) // MetaListPoducerIt .for>
 
   'end.'
-  'ClearClassInfo'
  ] Ctx:Parser:PushArray
+
+ axiom:PushSymbol ClearClassInfo
 ; // FinishClassDefinition
 
 MACRO class-end
