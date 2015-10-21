@@ -10,6 +10,11 @@ PROCEDURE axiom:PushSymbol
  aSymbol pop:Word:Name Ctx:Parser:PushSymbol
 ; // axiom:PushSymbol
 
+MACRO [] 
+ axiom:PushSymbol [ 
+ axiom:PushSymbol ]
+; // []
+
 PROCEDURE axiom:PushStringAsSymbol
  ^ IN aString
  aString DO Ctx:Parser:PushSymbol
