@@ -4909,7 +4909,7 @@ STRING FUNCTION : ClassRefName
  STRING FUNCTION :: ClassRefName : Result
 ; // ClassRefName
 STRING CONST : ClassRefSuffix
-IMMEDIATE VOID OPERATOR :: MACRO : ClearClassInfo
+VOID OPERATOR :: PROCEDURE : ClearClassInfo
 VOID OPERATOR :: PROCEDURE : ClearMetaLists
 INTEGER CONST : cMetaListPoducerNamesElementSize
 STRING CONST : cMetaPrefix
