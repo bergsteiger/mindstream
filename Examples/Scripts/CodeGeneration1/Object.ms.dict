@@ -724,7 +724,7 @@ PROCEDURE DefineInstanceSize
  end // g_InstanceSizeDefined !
 ; // DefineInstanceSize
 
-MACRO ClearClassInfo
+PROCEDURE ClearClassInfo
  g_CurrentClass := ''
  g_CurrentClassImpl := nil
  g_CurrentClassParent := nil
@@ -751,7 +751,7 @@ PROCEDURE FinishClassDefinition
  ] Ctx:Parser:PushArray
 
  axiom:PushSymbol end.
- axiom:PushSymbol ClearClassInfo
+ ClearClassInfo
 ; // FinishClassDefinition
 
 MACRO class-end
