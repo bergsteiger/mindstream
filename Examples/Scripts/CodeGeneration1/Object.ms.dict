@@ -703,6 +703,7 @@ PROCEDURE DefineInstanceSize
 
 MACRO class-end
  DefineInstanceSize
+ CopyConstructors
 
  [
   'implementation'
@@ -742,6 +743,8 @@ MACRO constructor
   DefineInstanceSize
   // - тут определ€ем размер экземпл€ров класса
  end
+
+ CopyConstructors
 
  @SELF Ctx:SetWordProducerForCompiledClass
  g_CurrentClass Ctx:Parser:PushSymbol
