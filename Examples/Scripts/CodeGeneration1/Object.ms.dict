@@ -61,7 +61,7 @@ ARRAY FUNCTION %ClassRTTIList
   ( Result := ( l_List CodeIterator ) )
 ; // %ClassRTTIList
 
-ARRAY CompileTime-VAR g_MetaListPoducerNames [ ]
+ARRAY CompileTime-VAR g_MetaListPoducerNames []
  %REMARK 'Список содержащий пары (имя списка, указатель на массив)'
 
 CONST cMetaListPoducerNamesElementSize 2
