@@ -328,10 +328,6 @@ MACRO class
 
  ClearMetaLists
 
- g_CurrentClassProperties := [ ]
- g_CurrentClassMethods := [ ]
- g_CurrentMetaClassMethods := [ ]
- g_CurrentClassConstructors := [ ]
  g_ClassFieldOffset := 0
  g_InstanceSizeDefined := false
  g_ConstructorsCopied := false
