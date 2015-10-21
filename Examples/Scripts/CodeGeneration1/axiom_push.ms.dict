@@ -64,6 +64,12 @@ PROCEDURE axiom:PushWordInfo
 
 CONST cInParamItemsCount 3
 
+ARRAY FUNCTION axiom:InParams:It
+  ENGINE_WORD IN aParams
+
+ aParams CodeIterator .slice> cInParamItemsCount >>> Result
+; // axiom:InParams:It
+
 MACRO in_param
   Literal IN aName
 
