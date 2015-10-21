@@ -572,6 +572,20 @@ MACRO def_constructor_empty
  def_constructor_empty_do
 ; // def_constructor_empty
 
+PROCEDURE DefineInstanceSize
+ %SUMMARY 'Определяем размер экземпляров класса' ;
+ if ( g_InstanceSizeDefined ! ) then
+ begin
+  g_InstanceSizeDefined := true
+
+  TtfwWord VAR l_InstanceSizeVAR
+  g_CurrentClassImpl %% InstanceSizeName >>> l_InstanceSizeVAR
+  l_InstanceSizeVAR IsNil ?FAIL [ 'Переменная для размера класса ' g_CurrentClass ' почему-то не определена' ]
+  l_InstanceSizeVAR DO =0 ?ASSURE [ 'Размер класса ' g_CurrentClass ' почему-то уже определён' ]
+  g_ClassFieldOffset l_InstanceSizeVAR pop:Word:SetValue
+ end // g_InstanceSizeDefined !
+; // DefineInstanceSize
+
 PROCEDURE CopyConstructors
  if ( g_ConstructorsCopied ! ) then
  begin
@@ -583,12 +597,42 @@ PROCEDURE CopyConstructors
    anItem %Constructors .map> |N .for> ( 
     STRING IN aProp
     if ( aProp = cDefConstructorName ) then
-     def_constructor_empty_do
+     def_constructor_empty
    ) // anItem %Constructors .for>
 
   ) // anImpl %G .for>
  end
 ; // CopyConstructors
+
+MACRO constructor
+  Literal IN aName
+  ^ IN aParams
+
+ %SUMMARY 'Конструктор объектов';
+
+ STRING VAR l_Name
+ aName |N >>> l_Name
+
+ if ( ( l_Name <> cDefConstructorName ) OR ( g_CurrentClass = cObjectName ) ) then
+ begin
+  DefineInstanceSize
+  // - тут определяем размер экземпляров класса
+ end
+
+ if ( g_CurrentClass != cObjectName ) then
+  CopyConstructors
+
+ @SELF Ctx:SetWordProducerForCompiledClass
+ g_CurrentClass Ctx:Parser:PushSymbol
+ l_Name MakeMethodSignature
+ @SELF NameOf right aParams axiom:Params:PushWithOtherStereo
+
+ axiom:PushSymbol WordAlias
+ cSelf Ctx:Parser:PushSymbol
+ cResult Ctx:Parser:PushSymbol
+
+ l_Name array:?AddTo g_CurrentClassConstructors
+; // constructor
 
 MACRO classExpander
   ^ IN anImpl
@@ -669,7 +713,6 @@ MACRO classExpander
 
  ) // l_Impl %G .for>
 
- CopyConstructors
 ; // classExpander
 
 : ListToNameAsString
@@ -687,22 +730,10 @@ MACRO classExpander
  %REMARK 'Закрываем список'
 ; // ListToNameAsString
 
-PROCEDURE DefineInstanceSize
- %SUMMARY 'Определяем размер экземпляров класса' ;
- if ( g_InstanceSizeDefined ! ) then
- begin
-  g_InstanceSizeDefined := true
-
-  TtfwWord VAR l_InstanceSizeVAR
-  g_CurrentClassImpl %% InstanceSizeName >>> l_InstanceSizeVAR
-  l_InstanceSizeVAR IsNil ?FAIL [ 'Переменная для размера класса ' g_CurrentClass ' почему-то не определена' ]
-  l_InstanceSizeVAR DO =0 ?ASSURE [ 'Размер класса ' g_CurrentClass ' почему-то уже определён' ]
-  g_ClassFieldOffset l_InstanceSizeVAR pop:Word:SetValue
- end // g_InstanceSizeDefined !
-; // DefineInstanceSize
-
 MACRO class-end
  DefineInstanceSize
+ g_CurrentClassImpl pop:Word:Name .
+ g_ConstructorsCopied .
  CopyConstructors
 
  [
@@ -728,35 +759,6 @@ MACRO class-end
  g_ClassFieldOffset := 0
  
 ; // class-end
-
-MACRO constructor
-  Literal IN aName
-  ^ IN aParams
-
- %SUMMARY 'Конструктор объектов';
-
- STRING VAR l_Name
- aName |N >>> l_Name
-
- if ( ( l_Name <> cDefConstructorName ) OR ( g_CurrentClass = cObjectName ) ) then
- begin
-  DefineInstanceSize
-  // - тут определяем размер экземпляров класса
- end
-
- CopyConstructors
-
- @SELF Ctx:SetWordProducerForCompiledClass
- g_CurrentClass Ctx:Parser:PushSymbol
- l_Name MakeMethodSignature
- @SELF NameOf right aParams axiom:Params:PushWithOtherStereo
-
- axiom:PushSymbol WordAlias
- cSelf Ctx:Parser:PushSymbol
- cResult Ctx:Parser:PushSymbol
-
- l_Name array:?AddTo g_CurrentClassConstructors
-; // constructor
 
 MACRO new[
  INTEGER VAR l_InstanceSize
