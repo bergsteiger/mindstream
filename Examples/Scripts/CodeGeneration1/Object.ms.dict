@@ -770,7 +770,10 @@ MACRO constructor
   // - тут определ€ем размер экземпл€ров класса
  end
 
- CopyConstructors
+ if ( l_Name <> cDefConstructorName ) then
+ begin
+  CopyConstructors
+ end
 
  g_CurrentClass l_Name MakeMethodSignaturePrim Log
 
