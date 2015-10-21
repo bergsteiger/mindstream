@@ -728,6 +728,7 @@ MACRO ClearClassInfo
  g_InstanceSizeDefined := false
  g_ConstructorsCopied := false
  g_ClassFieldOffset := 0 
+ ClearMetaLists
 ; // ClearClassInfo
 
 MACRO class-end
