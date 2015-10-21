@@ -10,6 +10,11 @@ PROCEDURE axiom:PushSymbol
  aSymbol pop:Word:Name Ctx:Parser:PushSymbol
 ; // axiom:PushSymbol
 
+PROCEDURE axiom:PushStringAsSymbol
+ ^ IN aString
+ aString DO Ctx:Parser:PushSymbol
+; // axiom:PushString
+
 PROCEDURE Ctx:Parser:PushLeftDottedSymbol
  STRING IN aValue
  %SUMMARY 'Запихивает во входной поток парсера aValue предварённое точкой' ;
