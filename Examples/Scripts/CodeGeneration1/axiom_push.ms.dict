@@ -62,6 +62,8 @@ PROCEDURE axiom:PushWordInfo
  aWordInfo axiom:PushSerias
 ; // axiom:PushWordInfo
 
+CONST cInParamItemsCount 3
+
 MACRO in_param
   Literal IN aName
 
@@ -85,7 +87,7 @@ PROCEDURE axiom:Params:PushWithOtherStereo
   STRING IN aStereo
   ENGINE_WORD IN aParams
 
- aParams CodeIterator .slice> 3 ==> ( 
+ aParams CodeIterator .slice> cInParamItemsCount ==> ( 
   IN aTypes
   IN aStereoC
   IN aParam
