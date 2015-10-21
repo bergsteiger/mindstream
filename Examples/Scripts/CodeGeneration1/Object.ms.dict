@@ -315,11 +315,11 @@ MACRO class
  Ctx:WordInfo >>> l_WordInfo
  Ctx:ClearTypeInfo
 
-   g_MetaListPoducerNames .slice> cMetaListPoducerNamesElementSize .for> ( 
+   MetaListPoducerIt .for> ( 
      STRING IN aName 
      TtfwWord IN aVar 
      aVar pop:Word:Name Log
-   )
+   ) // MetaListPoducerIt .for>
 
  g_CurrentClassProperties := [ ]
  g_CurrentClassMethods := [ ]
