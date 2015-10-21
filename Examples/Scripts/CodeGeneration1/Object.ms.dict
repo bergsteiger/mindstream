@@ -471,10 +471,10 @@ CONST cResult 'Result'
 
 MACRO read
  Literal IN aName
- cSelf Ctx:Parser:PushSymbol 
+ axiom:PushStringAsSymbol cSelf
  aName |N do_get_member
  axiom:PushSymbol >>>
- cResult Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol cResult
  axiom:PushSymbol ;
 ; // read
 
@@ -484,9 +484,9 @@ MACRO class-method-end
  axiom:PushSymbol ;
  g_CurrentClassMethodModifiers axiom:PushWordInfo
  axiom:PushSymbol method
- g_CurrentClassMethod Ctx:Parser:PushSymbol
- 'Self' Ctx:Parser:PushSymbol 
- '.class' Ctx:Parser:PushSymbol 
+ axiom:PushStringAsSymbol g_CurrentClassMethod
+ axiom:PushStringAsSymbol 'Self'
+ axiom:PushStringAsSymbol '.class'
  [ '.' g_CurrentClassMethod ] strings:Cat Ctx:Parser:PushSymbol
 
  if ( g_CurrentClassMethodModifiers IsNil ! ) then
