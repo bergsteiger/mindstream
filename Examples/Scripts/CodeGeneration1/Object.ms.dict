@@ -736,6 +736,7 @@ PROCEDURE FinishClassDefinition
  axiom:PushSymbol implementation
 
  'FinishClassDefinition' Log
+ g_CurrentClassConstructors Log
  [
   g_CurrentClassImpl pop:Word:Name
 
