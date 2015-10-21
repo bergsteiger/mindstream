@@ -779,13 +779,13 @@ MACRO constructor
  CopyConstructors
 
  @SELF Ctx:SetWordProducerForCompiledClass
- g_CurrentClass Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol g_CurrentClass
  l_Name MakeMethodSignature
  @SELF NameOf right aParams axiom:Params:PushWithOtherStereo
 
  axiom:PushSymbol WordAlias
- cSelf Ctx:Parser:PushSymbol
- cResult Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol cSelf
+ axiom:PushStringAsSymbol cResult
 
  l_Name array:?AddTo g_CurrentClassConstructors
 ; // constructor
