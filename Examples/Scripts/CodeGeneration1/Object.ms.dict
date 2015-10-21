@@ -748,14 +748,16 @@ PROCEDURE FinishClassDefinition
     aName aVar DO ListToNameAsString 
    ) // MetaListPoducerIt .for>
 
-  'end.'
  ] Ctx:Parser:PushArray
 
+ axiom:PushSymbol end.
  axiom:PushSymbol ClearClassInfo
 ; // FinishClassDefinition
 
 MACRO class-end
  DefineInstanceSize
+
+ g_CurrentClassConstructors Log
  CopyConstructors
 
  FinishClassDefinition
