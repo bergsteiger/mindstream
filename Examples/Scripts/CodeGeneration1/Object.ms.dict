@@ -416,10 +416,7 @@ MACRO class
  g_CurrentClass Ctx:Parser:PushSymbol
  axiom:PushSymbol WordAlias
  g_CurrentClass ClassOfName Ctx:Parser:PushSymbol
- [
-  l_CurrentClassImpl
-
- ] Ctx:Parser:PushArray
+ l_CurrentClassImpl Ctx:Parser:PushSymbol
 
  if ( g_CurrentClass !== cObjectName ) then
  begin
