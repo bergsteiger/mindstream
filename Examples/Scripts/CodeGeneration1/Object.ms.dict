@@ -791,6 +791,7 @@ MACRO constructor
  axiom:PushStringAsSymbol cSelf
  axiom:PushStringAsSymbol cResult
 
+ 'constructor' Log
  g_CurrentClassConstructors Log
  l_Name array:?AddTo g_CurrentClassConstructors
  g_CurrentClassConstructors Log
