@@ -602,7 +602,10 @@ PROCEDURE CopyConstructors
     anItem %Constructors .map> |N .for> ( 
      STRING IN aProp
      if ( aProp = cDefConstructorName ) then
+     begin
+      aProp Log
       def_constructor_empty_do
+     end
     ) // anItem %Constructors .for>
 
    ) // anImpl %G .for>
