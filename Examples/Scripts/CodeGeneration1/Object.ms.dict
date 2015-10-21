@@ -551,7 +551,7 @@ class-method Print
  end
  else
  begin
-  Self .ClassName .
+  Self .ClassName Print
  end
 class-method-end // Print
 
