@@ -56,7 +56,7 @@ ARRAY FUNCTION %ClassRTTIList
  VAR l_List
  %S %% ( aName |N ) >>> l_List
  if ( l_List NotValid ) then
-  ( Result := [ ] )
+  ( Result := [] )
  else 
   ( Result := ( l_List CodeIterator ) )
 ; // %ClassRTTIList
