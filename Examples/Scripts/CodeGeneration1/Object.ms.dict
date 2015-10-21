@@ -771,7 +771,7 @@ MACRO constructor
 
  CopyConstructors
 
- l_Name Log
+ g_CurrentClass l_Name MakeMethodSignaturePrim Log
 
  @SELF Ctx:SetWordProducerForCompiledClass
  axiom:PushStringAsSymbol g_CurrentClass
