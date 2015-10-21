@@ -773,6 +773,7 @@ MACRO constructor
 
  if ( l_Name <> cDefConstructorName ) then
  begin
+  l_Name Log
   CopyConstructors
  end
  else
