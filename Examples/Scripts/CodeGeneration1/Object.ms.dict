@@ -214,9 +214,9 @@ PRIVATE VOID operator MakeMethodSignature
 ; // MakeMethodSignature
 
 PRIVATE VOID operator MakeSelfParam
- g_CurrentClass Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol g_CurrentClass
  axiom:PushSymbol in
- cSelf Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol cSelf
 ; // MakeSelfParam
 
 MACRO method
@@ -269,11 +269,11 @@ MACRO class-method
  STRING VAR l_ClassMethodName
  
  l_ClassName l_Name MakeMethodSignaturePrim >>> l_ClassMethodName
- l_ClassMethodName Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol l_ClassMethodName
 
- l_ClassName Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol l_ClassName
  axiom:PushSymbol in
- cSelf Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol cSelf
 
  l_Name array:?AddTo g_CurrentMetaClassMethods
 ; // class-method
@@ -304,7 +304,7 @@ MACRO ClassOf
  STRING VAR l_ClassName
  aName |N ClassOfName >>> l_ClassName
  l_ClassName IsWordDeclared ?ASSURE [ ' ласс ' l_ClassName ' не определЄн' ]
- l_ClassName Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol l_ClassName
 ; // ClassOf
 
 PROCEDURE ClearMetaLists
@@ -368,12 +368,12 @@ MACRO class
 
   axiom:PushSymbol ObjectClass
   axiom:PushSymbol type
-  l_ClassRefName Ctx:Parser:PushSymbol
+  axiom:PushStringAsSymbol l_ClassRefName
  end // g_CurrentClass !== cObjectName
 
- l_ClassRefName Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol l_ClassRefName
  axiom:PushSymbol class_impl
- l_CurrentClassImpl Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol l_CurrentClassImpl
 
  [
    if ( g_CurrentClass !== cObjectName ) then
@@ -407,7 +407,7 @@ MACRO class
 
  axiom:PushSymbol [EXECUTE]
  axiom:PushSymbol (
- l_CurrentClassImpl Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol l_CurrentClassImpl
  axiom:PushSymbol >>>
  axiom:PushSymbol g_CurrentClassImpl
  axiom:PushSymbol )
@@ -416,12 +416,12 @@ MACRO class
  axiom:PushStringAsSymbol g_CurrentClass
  axiom:PushSymbol WordAlias
  g_CurrentClass ClassOfName Ctx:Parser:PushSymbol
- l_CurrentClassImpl Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol l_CurrentClassImpl
 
  if ( g_CurrentClass !== cObjectName ) then
  begin
-  'classExpander' Ctx:Parser:PushSymbol
-  l_CurrentClassImpl Ctx:Parser:PushSymbol
+  axiom:PushStringAsSymbol 'classExpander'
+  axiom:PushStringAsSymbol l_CurrentClassImpl
  end
 
 ; // class
