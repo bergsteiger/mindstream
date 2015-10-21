@@ -320,6 +320,7 @@ MACRO class
      TtfwWord IN aVar 
      aVar pop:Word:Name Log
      aVar DO Log
+     aVar DO Log
    ) // MetaListPoducerIt .for>
 
  g_CurrentClassProperties := [ ]
