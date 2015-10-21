@@ -101,10 +101,10 @@ MACRO DefineMetaList
  ] Ctx:Parser:PushArray
 ; // DefineMetaList
 
-ARRAY CompileTime-VAR g_CurrentClassProperties [ ]
-ARRAY CompileTime-VAR g_CurrentClassMethods [ ]
-ARRAY CompileTime-VAR g_CurrentMetaClassMethods [ ]
-ARRAY CompileTime-VAR g_CurrentClassConstructors [ ]
+ARRAY CompileTime-VAR g_CurrentClassProperties []
+ARRAY CompileTime-VAR g_CurrentClassMethods []
+ARRAY CompileTime-VAR g_CurrentMetaClassMethods []
+ARRAY CompileTime-VAR g_CurrentClassConstructors []
 
 DefineMetaList %PROPERTIES %Props 'Свойства класса' g_CurrentClassProperties
 DefineMetaList %METHODS %Methods 'Методы класса' g_CurrentClassMethods
@@ -311,7 +311,7 @@ PROCEDURE ClearMetaLists
  MetaListPoducerIt .for> ( 
    STRING IN aName 
    TtfwWord IN aVar
-  [ ] aVar pop:Word:SetValue
+  [] aVar pop:Word:SetValue
  ) // MetaListPoducerIt .for>
 ; // ClearMetaLists
 
