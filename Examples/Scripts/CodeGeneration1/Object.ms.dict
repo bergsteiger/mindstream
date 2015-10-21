@@ -589,6 +589,7 @@ PROCEDURE CopyConstructors
  begin
   if ( g_CurrentClass !== cObjectName ) then
   begin
+   'CopyConstructors' Log
    g_CurrentClassImpl pop:Word:Name Log
    g_CurrentClassImpl IsNil ?FAIL [ 'Нет текущего определяемого класса. Возможное имя класса ' g_CurrentClass ]
    g_ConstructorsCopied := true
@@ -734,6 +735,7 @@ PROCEDURE ClearClassInfo
 PROCEDURE FinishClassDefinition
  axiom:PushSymbol implementation
 
+ 'FinishClassDefinition' Log
  [
   g_CurrentClassImpl pop:Word:Name
 
@@ -754,7 +756,8 @@ MACRO class-end
  DefineInstanceSize
 
  g_CurrentClassConstructors Log
- CopyConstructors
+ axiom:PushSymbol [EXECUTE]
+ axiom:PushSymbol CopyConstructors
  g_CurrentClassConstructors Log
 
  axiom:PushSymbol [EXECUTE]
