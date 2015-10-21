@@ -35,6 +35,8 @@ USES
 EXPORTS
  InheritsAndImplementsNew.ms.dict
 
+WordAlias Log .
+
 WordAlias %R .Implemented.Words
 WordAlias %G .Inherited.Words
 
@@ -312,7 +314,7 @@ MACRO class
    g_MetaListPoducerNames .slice> cMetaListPoducerNamesElementSize .for> ( 
      STRING IN aName 
      TtfwWord IN aVar 
-     aVar pop:Word:Name Msg
+     aVar pop:Word:Name Log
    )
 
  g_CurrentClassProperties := [ ]
@@ -583,7 +585,7 @@ PROCEDURE CopyConstructors
  begin
   if ( g_CurrentClass !== cObjectName ) then
   begin
-   g_CurrentClassImpl pop:Word:Name Msg
+   g_CurrentClassImpl pop:Word:Name Log
    g_CurrentClassImpl IsNil ?FAIL [ 'Нет текущего определяемого класса. Возможное имя класса ' g_CurrentClass ]
    g_ConstructorsCopied := true
    g_CurrentClassImpl %G .for> (
