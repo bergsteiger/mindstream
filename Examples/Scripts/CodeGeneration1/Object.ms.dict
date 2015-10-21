@@ -559,8 +559,7 @@ CONST cDefConstructorName 'new'
 PROCEDURE def_constructor_do
  axiom:PushStringAsSymbol 'constructor'
  axiom:PushStringAsSymbol cDefConstructorName
- axiom:PushSymbol (
- axiom:PushSymbol )
+ axiom:PushSymbol ()
 ; // def_constructor_do
 
 MACRO def_constructor
