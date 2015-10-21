@@ -66,6 +66,10 @@ ARRAY CompileTime-VAR g_MetaListPoducerNames [ ]
 
 CONST cMetaListPoducerNamesElementSize 2
 
+ARRAY FUNCTION MetaListPoducerIt
+ g_MetaListPoducerNames .slice> cMetaListPoducerNamesElementSize >>> Result
+; // MetaListPoducerIt 
+
 MACRO DefineMetaList
   Literal IN aWordName
   Literal IN aListName
