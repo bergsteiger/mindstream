@@ -405,15 +405,15 @@ MACRO class
 
  axiom:PushSymbol ;
 
+ axiom:PushSymbol [EXECUTE]
+ axiom:PushSymbol (
+ l_CurrentClassImpl Ctx:Parser:PushSymbol
+ axiom:PushSymbol >>>
+ axiom:PushSymbol g_CurrentClassImpl
+ axiom:PushSymbol )
+ axiom:PushSymbol array
+ axiom:PushSymbol type
  [
-  '[EXECUTE] ('
-  l_CurrentClassImpl
-  '>>>'
-  'g_CurrentClassImpl'
-  ')'
-  
-  'array' 
-  'type' 
   g_CurrentClass
 
   'WordAlias'
@@ -761,7 +761,8 @@ MACRO class-end
  CopyConstructors
  g_CurrentClassConstructors Log
 
- FinishClassDefinition
+ axiom:PushSymbol [EXECUTE]
+ axiom:PushSymbol FinishClassDefinition
 ; // class-end
 
 MACRO constructor
