@@ -1,181 +1,3 @@
-%PROPERTIES
-g_CurrentClassProperties
-[ ]
-[ ]
-%METHODS
-g_CurrentClassMethods
-[ ]
-[ ]
-%CLASS-METHODS
-g_CurrentMetaClassMethods
-[ ]
-[ ]
-%CONSTRUCTORS
-g_CurrentClassConstructors
-[ ]
-[ ]
-[ new ]
-[ new ]
-%PROPERTIES
-g_CurrentClassProperties
-[ class ]
-[ ]
-%METHODS
-g_CurrentClassMethods
-[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ToPrintable ]
-[ ]
-%CLASS-METHODS
-g_CurrentMetaClassMethods
-[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ]
-[ ]
-%CONSTRUCTORS
-g_CurrentClassConstructors
-[ new ]
-[ ]
-%PROPERTIES
-g_CurrentClassProperties
-[ ]
-[ ]
-%METHODS
-g_CurrentClassMethods
-[ ]
-[ ]
-%CLASS-METHODS
-g_CurrentMetaClassMethods
-[ ]
-[ ]
-%CONSTRUCTORS
-g_CurrentClassConstructors
-[ ]
-[ ]
-_:Object1
-new
-[ new ]
-[ new ]
-%PROPERTIES
-g_CurrentClassProperties
-[ class ]
-[ ]
-%METHODS
-g_CurrentClassMethods
-[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ToPrintable ]
-[ ]
-%CLASS-METHODS
-g_CurrentMetaClassMethods
-[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ]
-[ ]
-%CONSTRUCTORS
-g_CurrentClassConstructors
-[ new ]
-[ ]
-%PROPERTIES
-g_CurrentClassProperties
-[ ]
-[ ]
-%METHODS
-g_CurrentClassMethods
-[ ]
-[ ]
-%CLASS-METHODS
-g_CurrentMetaClassMethods
-[ ]
-[ ]
-%CONSTRUCTORS
-g_CurrentClassConstructors
-[ ]
-[ ]
-_:Object2
-new
-[ new ]
-[ new ]
-%PROPERTIES
-g_CurrentClassProperties
-[ class FakeField ]
-[ ]
-%METHODS
-g_CurrentClassMethods
-[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ToPrintable ]
-[ ]
-%CLASS-METHODS
-g_CurrentMetaClassMethods
-[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ]
-[ ]
-%CONSTRUCTORS
-g_CurrentClassConstructors
-[ new ]
-[ ]
-%PROPERTIES
-g_CurrentClassProperties
-[ ]
-[ ]
-%METHODS
-g_CurrentClassMethods
-[ ]
-[ ]
-%CLASS-METHODS
-g_CurrentMetaClassMethods
-[ ]
-[ ]
-%CONSTRUCTORS
-g_CurrentClassConstructors
-[ ]
-[ ]
-_:Object3
-new
-[ new ]
-[ new ]
-%PROPERTIES
-g_CurrentClassProperties
-[ class FakeField ]
-[ ]
-%METHODS
-g_CurrentClassMethods
-[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ToPrintable ]
-[ ]
-%CLASS-METHODS
-g_CurrentMetaClassMethods
-[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ]
-[ ]
-%CONSTRUCTORS
-g_CurrentClassConstructors
-[ new ]
-[ ]
-%PROPERTIES
-g_CurrentClassProperties
-[ ]
-[ ]
-%METHODS
-g_CurrentClassMethods
-[ ]
-[ ]
-%CLASS-METHODS
-g_CurrentMetaClassMethods
-[ ]
-[ ]
-%CONSTRUCTORS
-g_CurrentClassConstructors
-[ ]
-[ ]
-_:Object4
-new
-[ new ]
-[ new ]
-%PROPERTIES
-g_CurrentClassProperties
-[ class ]
-[ ]
-%METHODS
-g_CurrentClassMethods
-[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ToPrintable ]
-[ ]
-%CLASS-METHODS
-g_CurrentMetaClassMethods
-[ ClassName FieldOffset InstanceSize ClassParent ClassParentName Print ]
-[ ]
-%CONSTRUCTORS
-g_CurrentClassConstructors
-[ new ]
-[ ]
 VOID TestWithDump ObjectTest
  IMMEDIATE VOID MACRO .FakeField
   ^@ IN Self
@@ -772,7 +594,7 @@ VOID TestWithDump ObjectTest
    BEGIN
     Self
     ObjectClass:ClassName
-    .
+    Print
    END
  ; // : ObjectClass:Print
  
@@ -1024,7 +846,7 @@ VOID TestWithDump ObjectTest
    BEGIN
     Self
     ObjectClass:ClassName
-    .
+    Print
    END
  ; // : ObjectClass:Print
  
@@ -1276,7 +1098,7 @@ VOID TestWithDump ObjectTest
    BEGIN
     Self
     ObjectClass:ClassName
-    .
+    Print
    END
  ; // : ObjectClass:Print
  
@@ -1515,7 +1337,7 @@ VOID TestWithDump ObjectTest
    BEGIN
     Self
     ObjectClass:ClassName
-    .
+    Print
    END
  ; // : ObjectClass:Print
  
