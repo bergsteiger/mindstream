@@ -701,6 +701,16 @@ PROCEDURE DefineInstanceSize
  end // g_InstanceSizeDefined !
 ; // DefineInstanceSize
 
+PROCEDURE ClearClassInfo
+ g_CurrentClass := ''
+ g_CurrentClassImpl := nil
+ g_CurrentClassParent := nil
+ g_CurrentClassParentName := ''
+ g_InstanceSizeDefined := false
+ g_ConstructorsCopied := false
+ g_ClassFieldOffset := 0 
+; // ClearClassInfo
+
 MACRO class-end
  DefineInstanceSize
  CopyConstructors
@@ -718,15 +728,7 @@ MACRO class-end
 
   'end.'
  ] Ctx:Parser:PushArray
- 
- g_CurrentClass := ''
- g_CurrentClassImpl := nil
- g_CurrentClassParent := nil
- g_CurrentClassParentName := ''
- g_InstanceSizeDefined := false
- g_ConstructorsCopied := false
- g_ClassFieldOffset := 0
- 
+ ClearClassInfo
 ; // class-end
 
 MACRO constructor
