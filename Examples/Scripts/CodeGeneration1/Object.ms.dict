@@ -701,7 +701,7 @@ PROCEDURE DefineInstanceSize
  end // g_InstanceSizeDefined !
 ; // DefineInstanceSize
 
-PROCEDURE ClearClassInfo
+MACRO ClearClassInfo
  g_CurrentClass := ''
  g_CurrentClassImpl := nil
  g_CurrentClassParent := nil
@@ -727,8 +727,8 @@ MACRO class-end
    ) // g_MetaListPoducerNames .slice> cMetaListPoducerNamesElementSize .for>
 
   'end.'
+  'ClearClassInfo'
  ] Ctx:Parser:PushArray
- ClearClassInfo
 ; // class-end
 
 MACRO constructor
