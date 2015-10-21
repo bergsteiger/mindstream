@@ -4875,6 +4875,7 @@ STRING FUNCTION : ClassRefName
  STRING FUNCTION :: ClassRefName : Result
 ; // ClassRefName
 STRING CONST : ClassRefSuffix
+IMMEDIATE VOID OPERATOR :: MACRO : ClearClassInfo
 INTEGER CONST : cMetaListPoducerNamesElementSize
 STRING CONST : cMetaPrefix
 STRING CONST : cObjectName
