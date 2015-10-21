@@ -774,6 +774,10 @@ MACRO constructor
  begin
   CopyConstructors
  end
+ else
+ begin
+  g_ConstructorsCopied := true
+ end 
 
  g_CurrentClass l_Name MakeMethodSignaturePrim Log
 
