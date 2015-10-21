@@ -3277,6 +3277,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms
   axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
  ;
+ARRAY FUNCTION : axiom:InParams:It
+ ENGINE_WORD OPERATOR :: IN : aParams
+ ARRAY FUNCTION :: axiom:InParams:It : Result
+; // axiom:InParams:It
 VOID OPERATOR :: PROCEDURE : axiom:Params:Push
  ENGINE_WORD OPERATOR :: IN : aCaller
  ENGINE_WORD OPERATOR :: IN : aParams
@@ -3306,6 +3310,7 @@ VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
 VOID OPERATOR :: PROCEDURE : axiom:PushWordInfo
  STRING OPERATOR :: IN : aWordInfo
 ; // axiom:PushWordInfo
+INTEGER CONST : cInParamItemsCount
 VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushLeftDottedSymbol
  Documentation:
   Запихивает во входной поток парсера aValue предварённое точкой
