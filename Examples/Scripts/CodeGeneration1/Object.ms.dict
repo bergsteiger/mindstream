@@ -210,7 +210,7 @@ PRIVATE VOID operator MakeMethodSignature
   axiom:PushSymbol REDEFINITION
  end
  axiom:PushSymbol :
- l_Signature Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol l_Signature
 ; // MakeMethodSignature
 
 PRIVATE VOID operator MakeSelfParam
