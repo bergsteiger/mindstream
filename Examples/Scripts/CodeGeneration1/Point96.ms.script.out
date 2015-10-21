@@ -1,3 +1,17 @@
+Object:new
+CopyConstructors
+Point::
+Point:new
+Point:0
+Point:XY
+Point:OF
+CopyConstructors
+Rectangle::
+Rectangle:new
+CopyConstructors
+Foo:new
+CopyConstructors
+Bar:new
 VOID TestWithDump PointTest
  IMMEDIATE VOID MACRO .-
   ^@ IN Self
@@ -157,8 +171,8 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
-   'new'
    ':'
+   'new'
    '0'
    'XY'
    'OF'
@@ -212,8 +226,8 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
-   'new'
    ':'
+   'new'
   ; // %CONSTRUCTORS %Constructors
   
   %INHERITS %G
@@ -584,8 +598,8 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
-   'new'
    ':'
+   'new'
    '0'
    'XY'
    'OF'
@@ -639,8 +653,8 @@ VOID TestWithDump PointTest
   ; // %CLASS-METHODS %Class-Methods
   
   %CONSTRUCTORS %Constructors
-   'new'
    ':'
+   'new'
   ; // %CONSTRUCTORS %Constructors
   
   %INHERITS %G
@@ -969,7 +983,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point method Point:-
  
- Point constructor Point::
+ Point : Point::
   ^ IN _aX
   ^ IN _aY
   IMMEDIATE VOID OPERATOR aX
@@ -996,7 +1010,7 @@ VOID TestWithDump PointTest
   ]
   Result
   pop:Word:SetValue
- ; // Point constructor Point::
+ ; // Point : Point::
  
  Point method Point:+
   ^ IN _aPoint
@@ -1383,7 +1397,7 @@ VOID TestWithDump PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Rectangle
  
- Rectangle constructor Rectangle::
+ Rectangle : Rectangle::
   ^ IN _aBottomRight
   ^ IN _aTopLeft
   IMMEDIATE VOID OPERATOR aBottomRight
@@ -1410,7 +1424,7 @@ VOID TestWithDump PointTest
   ]
   Result
   pop:Word:SetValue
- ; // Rectangle constructor Rectangle::
+ ; // Rectangle : Rectangle::
  
  Point readonly Rectangle:BottomRight
   Rectangle IN Self
@@ -2096,8 +2110,8 @@ PointClass class_impl _:Point
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
-  'new'
   ':'
+  'new'
   '0'
   'XY'
   'OF'
@@ -2151,8 +2165,8 @@ RectangleClass class_impl _:Rectangle
  ; // %CLASS-METHODS %Class-Methods
  
  %CONSTRUCTORS %Constructors
-  'new'
   ':'
+  'new'
  ; // %CONSTRUCTORS %Constructors
  
  %INHERITS %G
