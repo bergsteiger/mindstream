@@ -311,11 +311,8 @@ PROCEDURE ClearMetaLists
  MetaListPoducerIt .for> ( 
    STRING IN aName 
    TtfwWord IN aVar
-  aName Log 
   aVar pop:Word:Name Log
-  aVar DO Log
   [ ] aVar pop:Word:SetValue
-  aVar DO Log
  ) // MetaListPoducerIt .for>
 ; // ClearMetaLists
 
@@ -589,8 +586,6 @@ PROCEDURE CopyConstructors
  begin
   if ( g_CurrentClass !== cObjectName ) then
   begin
-   'CopyConstructors' Log
-   g_CurrentClassImpl pop:Word:Name Log
    g_CurrentClassImpl IsNil ?FAIL [ 'Нет текущего определяемого класса. Возможное имя класса ' g_CurrentClass ]
    g_ConstructorsCopied := true
    g_CurrentClassImpl %G .for> (
@@ -600,7 +595,6 @@ PROCEDURE CopyConstructors
      STRING IN aProp
      if ( aProp = cDefConstructorName ) then
      begin
-      aProp Log
       def_constructor_empty_do
      end
     ) // anItem %Constructors .for>
@@ -735,8 +729,6 @@ PROCEDURE ClearClassInfo
 PROCEDURE FinishClassDefinition
  axiom:PushSymbol implementation
 
- 'FinishClassDefinition' Log
- g_CurrentClassConstructors Log
  [
   g_CurrentClassImpl pop:Word:Name
 
@@ -756,10 +748,8 @@ PROCEDURE FinishClassDefinition
 MACRO class-end
  DefineInstanceSize
 
- g_CurrentClassConstructors Log
  axiom:PushSymbol [EXECUTE]
  axiom:PushSymbol CopyConstructors
- g_CurrentClassConstructors Log
 
  axiom:PushSymbol [EXECUTE]
  axiom:PushSymbol FinishClassDefinition
@@ -791,10 +781,7 @@ MACRO constructor
  axiom:PushStringAsSymbol cSelf
  axiom:PushStringAsSymbol cResult
 
- 'constructor' Log
- g_CurrentClassConstructors Log
  l_Name array:?AddTo g_CurrentClassConstructors
- g_CurrentClassConstructors Log
 ; // constructor
 
 MACRO new[
