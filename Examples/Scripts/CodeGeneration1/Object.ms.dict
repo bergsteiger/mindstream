@@ -747,8 +747,8 @@ PROCEDURE FinishClassDefinition
 MACRO class-end
  DefineInstanceSize
 
- //axiom:PushSymbol [EXECUTE]
- //axiom:PushSymbol 
+ axiom:PushSymbol [EXECUTE]
+ axiom:PushSymbol 
  CopyConstructors
 
  axiom:PushSymbol [EXECUTE]
