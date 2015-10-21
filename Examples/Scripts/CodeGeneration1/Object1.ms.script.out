@@ -1,8 +1,6 @@
 Object:new
 CopyConstructors
 Object1:new
-CopyConstructors
-Object2:new
 Object2:new
 VOID TestWithDump ObjectTest
  IMMEDIATE VOID MACRO .FakeField
@@ -502,7 +500,7 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // INTEGER method Object:InstanceSize
  
- REDIFINITION Object2 constructor Object2:new
+ Object2 constructor Object2:new
   ARRAY [
    @
    _:Object2
@@ -510,7 +508,7 @@ VOID TestWithDump ObjectTest
   ]
   Result
   pop:Word:SetValue
- ; // REDIFINITION Object2 constructor Object2:new
+ ; // Object2 constructor Object2:new
  
  REDIFINITION VIRTUAL VOID method Object:Print
   Object IN Self
