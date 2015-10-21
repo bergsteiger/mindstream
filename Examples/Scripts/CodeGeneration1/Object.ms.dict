@@ -773,13 +773,16 @@ MACRO constructor
 
  if ( l_Name <> cDefConstructorName ) then
  begin
-  l_Name Log
-  CopyConstructors
- end
+  if ( g_ConstructorsCopied ! ) then
+  begin
+   l_Name Log
+   CopyConstructors
+  end // g_ConstructorsCopied !
+ end // l_Name <> cDefConstructorName
  else
  begin
   g_ConstructorsCopied := true
- end 
+ end // l_Name <> cDefConstructorName
 
  g_CurrentClass l_Name MakeMethodSignaturePrim Log
 
