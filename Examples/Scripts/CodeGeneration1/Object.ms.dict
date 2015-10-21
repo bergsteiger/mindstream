@@ -413,7 +413,7 @@ MACRO class
  axiom:PushSymbol )
  axiom:PushSymbol array
  axiom:PushSymbol type
- g_CurrentClass Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol g_CurrentClass
  axiom:PushSymbol WordAlias
  g_CurrentClass ClassOfName Ctx:Parser:PushSymbol
  l_CurrentClassImpl Ctx:Parser:PushSymbol
