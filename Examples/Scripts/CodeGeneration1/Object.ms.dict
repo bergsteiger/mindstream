@@ -485,14 +485,14 @@ MACRO class-method-end
  g_CurrentClassMethodModifiers axiom:PushWordInfo
  axiom:PushSymbol method
  axiom:PushStringAsSymbol g_CurrentClassMethod
- axiom:PushStringAsSymbol 'Self'
+ axiom:PushStringAsSymbol cSelf
  axiom:PushStringAsSymbol '.class'
  [ '.' g_CurrentClassMethod ] strings:Cat Ctx:Parser:PushSymbol
 
  if ( g_CurrentClassMethodModifiers IsNil ! ) then
  begin 
   axiom:PushSymbol >>> 
-  cResult Ctx:Parser:PushSymbol
+  axiom:PushStringAsSymbol cResult
  end // g_CurrentClassMethodModifiers IsNil !
 
  axiom:PushSymbol ;
@@ -561,8 +561,8 @@ class-method-end // Print
 CONST cDefConstructorName 'new'
 
 PROCEDURE def_constructor_do
- 'constructor' Ctx:Parser:PushSymbol
- cDefConstructorName Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol 'constructor'
+ axiom:PushStringAsSymbol cDefConstructorName
  axiom:PushSymbol (
  axiom:PushSymbol )
 ; // def_constructor_do
@@ -573,10 +573,10 @@ MACRO def_constructor
 
 PROCEDURE def_constructor_empty_do
  def_constructor_do
- 'new[' Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol 'new['
  axiom:PushSymbol ] 
  axiom:PushSymbol >>> 
- 'Result' Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol cResult
  axiom:PushSymbol ;
 ; // def_constructor_empty_do
 
