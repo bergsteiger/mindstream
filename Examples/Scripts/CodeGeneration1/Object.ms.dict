@@ -575,19 +575,22 @@ MACRO def_constructor_empty
 PROCEDURE CopyConstructors
  if ( g_ConstructorsCopied ! ) then
  begin
-  g_CurrentClassImpl IsNil ?FAIL [ 'Нет текущего определяемого класса. Возможное имя класса ' g_CurrentClass ]
-  g_ConstructorsCopied := true
-  g_CurrentClassImpl %G .for> (
-   ObjectClass IN anItem
+  if ( g_CurrentClass !== cObjectName ) then
+  begin
+   g_CurrentClassImpl IsNil ?FAIL [ 'Нет текущего определяемого класса. Возможное имя класса ' g_CurrentClass ]
+   g_ConstructorsCopied := true
+   g_CurrentClassImpl %G .for> (
+    ObjectClass IN anItem
 
-   anItem %Constructors .map> |N .for> ( 
-    STRING IN aProp
-    if ( aProp = cDefConstructorName ) then
-     def_constructor_empty_do
-   ) // anItem %Constructors .for>
+    anItem %Constructors .map> |N .for> ( 
+     STRING IN aProp
+     if ( aProp = cDefConstructorName ) then
+      def_constructor_empty_do
+    ) // anItem %Constructors .for>
 
-  ) // anImpl %G .for>
- end
+   ) // anImpl %G .for>
+  end // ( g_CurrentClass !== cObjectName ) 
+ end // ( g_ConstructorsCopied ! )
 ; // CopyConstructors
 
 MACRO classExpander
