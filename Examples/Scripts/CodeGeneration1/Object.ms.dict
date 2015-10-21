@@ -735,10 +735,7 @@ MACRO ClearClassInfo
  ClearMetaLists
 ; // ClearClassInfo
 
-MACRO class-end
- DefineInstanceSize
- CopyConstructors
-
+PROCEDURE FinishClassDefinition
  [
   'implementation'
   g_CurrentClassImpl pop:Word:Name
@@ -753,6 +750,13 @@ MACRO class-end
   'end.'
   'ClearClassInfo'
  ] Ctx:Parser:PushArray
+; // FinishClassDefinition
+
+MACRO class-end
+ DefineInstanceSize
+ CopyConstructors
+
+ FinishClassDefinition
 ; // class-end
 
 MACRO constructor
