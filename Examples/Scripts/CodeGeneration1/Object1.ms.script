@@ -60,6 +60,39 @@ Test&Dump ObjectTest
  l_Obj1 .class Print
  l_Obj1 .class .Print
 
+ class Object2
+  INTEGER member FakeField
+  INTEGER readonly FakeField read FakeField
+  def_constructor
+   //[EXECUTE] ( g_InstanceSizeDefined Msg )
+   new[ 256 ] >>> Result 
+   //Self .FieldOffset 'VMT' Msg
+  ; // new
+ class-end // Object2
+
+ Object2 VAR l_Obj2
+ l_Obj2 := Object2:new
+
+ l_Obj2 .Print
+ l_Obj2 .ClassName Print
+
+ '--------' Print
+
+ l_Obj2 .InstanceSize Print
+
+ ClassOf Object2 .FieldOffset VMT Print
+ ClassOf Object2 .FieldOffset FakeField Print
+ ClassOf Object2 .ClassParent Print
+ ClassOf Object2 .ClassParent .Print
+ ClassOf Object2 .ClassParentName Print
+ ClassOf Object2 .FieldOffset FakeField Print
+
+ l_Obj2 .FakeField Print
+
+ l_Obj2 .class Print
+ l_Obj2 .class .Print
+ //l_Obj2 .member FakeField Print
+
 ; // ObjectTest
 
 ObjectTest
