@@ -137,7 +137,6 @@ TtfwWord type ObjectClass
 
 ObjectClass CompileTime-VAR g_CurrentClassImpl nil
 ObjectClass CompileTime-VAR g_CurrentClassParent nil
-STRING CompileTime-VAR g_CurrentClassParentName ''
 
 CONST cMetaPrefix 'c:'
 CONST cFieldPrefix 'Offset:'
@@ -324,7 +323,6 @@ PROCEDURE ClearClassInfo
  g_CurrentClass := ''
  g_CurrentClassImpl := nil
  g_CurrentClassParent := nil
- g_CurrentClassParentName := ''
  g_InstanceSizeDefined := false
  g_ConstructorsCopied := false
  g_ClassFieldOffset := 0 
