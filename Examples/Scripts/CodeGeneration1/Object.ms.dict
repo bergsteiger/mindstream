@@ -339,13 +339,7 @@ MACRO class
  Ctx:WordInfo >>> l_WordInfo
  Ctx:ClearTypeInfo
 
- ClearMetaLists
-
- g_ClassFieldOffset := 0
- g_InstanceSizeDefined := false
- g_ConstructorsCopied := false
- g_CurrentClassParent := nil
- g_CurrentClassParentName := ''
+ ClearClassInfo
 
  aName |N >>> g_CurrentClass
 
