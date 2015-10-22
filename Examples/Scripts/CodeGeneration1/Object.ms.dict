@@ -118,13 +118,13 @@ DefineMetaList %CONSTRUCTORS %Constructors 'Конструкторы класса' g_CurrentClassC
  axiom:PushSymbol Ctx:SetWordProducerForCompiledClass
 ; // CompileSetWordProducerForCompiledClass
 
-MACRO class_impl
+STACK_CHANGING_MACRO class_impl
   Literal IN aName
  %SUMMARY 'Реализация класса.
  Тут мы будем хранить всю информацию о классе - предки, поля, методы'
  ;
 
- @SELF Ctx:SetWordProducerForCompiledClass
+ @SELF CompileSetWordProducerForCompiledClass
  axiom:PushSymbol : 
  aName |N Ctx:Parser:PushSymbol
 ; // class_impl

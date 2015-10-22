@@ -4814,13 +4814,13 @@ IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .Print
 IMMEDIATE VOID OPERATOR :: MACRO : .ToPrintable
  ^@ OPERATOR :: IN : Self
 ; // .ToPrintable
-ObjectClass OPERATOR :: MACRO :: class_impl : _:Object
+ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl : _:Object
  OPERATOR :: NamedWordProducer :: %CLASS-METHODS : %Class-Methods
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
  OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
  INTEGER CONST : c:Offset:VMT
- ObjectClass OPERATOR :: MACRO :: class_impl :: _:Object : Result
+ ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl :: _:Object : Result
 ; // _:Object
 STRING CONST : cClassImplPrefix
 STRING CONST : cClassParentName
@@ -4835,7 +4835,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : class
  STRING OPERATOR :: VAR : l_TypeInfo
  TtfwWordInfo OPERATOR :: VAR : l_WordInfo
 ; // class
-IMMEDIATE VOID OPERATOR :: MACRO : class_impl
+IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : class_impl
  Documentation:
   Реализация класса. Тут мы будем хранить всю информацию о классе - предки, поля, методы
  ^L OPERATOR :: IN : aName
@@ -4866,13 +4866,13 @@ IMMEDIATE VOID OPERATOR :: MACRO : ClassOf
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_ClassName
 ; // ClassOf
-ObjectClass OPERATOR :: MACRO :: class_impl : ClassOf::Object
+ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl : ClassOf::Object
  OPERATOR :: NamedWordProducer :: %CLASS-METHODS : %Class-Methods
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
  OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
  INTEGER CONST : c:Offset:VMT
- ObjectClass OPERATOR :: MACRO :: class_impl :: _:Object : Result
+ ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl :: _:Object : Result
 ; // ClassOf::Object
 STRING FUNCTION : ClassOfName
  STRING OPERATOR :: IN : aClassName
