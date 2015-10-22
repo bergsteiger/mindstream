@@ -31,6 +31,10 @@ VOID TestWithDump ObjectTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'class'
    'ClassName'
    'FieldOffset'
    'InstanceSize'
@@ -38,10 +42,6 @@ VOID TestWithDump ObjectTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
-   'class'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -73,6 +73,10 @@ VOID TestWithDump ObjectTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'class'
    'ClassName'
    'FieldOffset'
    'InstanceSize'
@@ -80,10 +84,6 @@ VOID TestWithDump ObjectTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
-   'class'
    'FakeField'
   ; // %PROPERTIES %Props
   
@@ -118,6 +118,10 @@ VOID TestWithDump ObjectTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'class'
    'ClassName'
    'FieldOffset'
    'InstanceSize'
@@ -125,10 +129,6 @@ VOID TestWithDump ObjectTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
-   'class'
    'FakeField'
   ; // %PROPERTIES %Props
   
@@ -163,6 +163,10 @@ VOID TestWithDump ObjectTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'class'
    'ClassName'
    'FieldOffset'
    'InstanceSize'
@@ -170,10 +174,6 @@ VOID TestWithDump ObjectTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
-   'class'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -205,6 +205,10 @@ VOID TestWithDump ObjectTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'class'
    'ClassName'
    'FieldOffset'
    'InstanceSize'
@@ -212,10 +216,6 @@ VOID TestWithDump ObjectTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
-   'class'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -247,6 +247,10 @@ VOID TestWithDump ObjectTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'class'
    'ClassName'
    'FieldOffset'
    'InstanceSize'
@@ -254,10 +258,6 @@ VOID TestWithDump ObjectTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
-   'class'
    'FakeField'
   ; // %PROPERTIES %Props
   
@@ -292,6 +292,10 @@ VOID TestWithDump ObjectTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'class'
    'ClassName'
    'FieldOffset'
    'InstanceSize'
@@ -299,10 +303,6 @@ VOID TestWithDump ObjectTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
-   'class'
    'FakeField'
   ; // %PROPERTIES %Props
   
@@ -337,6 +337,10 @@ VOID TestWithDump ObjectTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'class'
    'ClassName'
    'FieldOffset'
    'InstanceSize'
@@ -344,10 +348,6 @@ VOID TestWithDump ObjectTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
-   'class'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -381,50 +381,50 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING method Object:ClassName
+ STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassName
+ ; // STRING readonly Object:ClassName
  
- ObjectClass method Object:ClassParent
+ ObjectClass readonly Object:ClassParent
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParent
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParent
+ ; // ObjectClass readonly Object:ClassParent
  
- STRING method Object:ClassParentName
+ STRING readonly Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassParentName
+ ; // STRING readonly Object:ClassParentName
  
- FieldOffset method Object:FieldOffset
+ FieldOffset readonly Object:FieldOffset
   Object IN Self
   Self
   Object:class
   ObjectClass:FieldOffset
   '>>>'
   Result
- ; // FieldOffset method Object:FieldOffset
+ ; // FieldOffset readonly Object:FieldOffset
  
- INTEGER method Object:InstanceSize
+ INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ ; // INTEGER readonly Object:InstanceSize
  
  Object1 constructor Object1:new
   ARRAY [
@@ -435,14 +435,14 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // Object1 constructor Object1:new
  
- REDIFINITION VIRTUAL VOID method Object:Print
+ REDIFINITION VIRTUAL VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
+ ; // REDIFINITION VIRTUAL VOID readonly Object:Print
  
- VIRTUAL STRING method Object:ToPrintable
+ VIRTUAL STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -457,7 +457,7 @@ VOID TestWithDump ObjectTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING method Object:ToPrintable
+ ; // VIRTUAL STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE Object1Class
   TtfwValueTypes
@@ -620,32 +620,32 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING method Object:ClassName
+ STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassName
+ ; // STRING readonly Object:ClassName
  
- ObjectClass method Object:ClassParent
+ ObjectClass readonly Object:ClassParent
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParent
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParent
+ ; // ObjectClass readonly Object:ClassParent
  
- STRING method Object:ClassParentName
+ STRING readonly Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassParentName
+ ; // STRING readonly Object:ClassParentName
  
  INTEGER readonly Object2:FakeField
   Object2 IN Self
@@ -659,23 +659,23 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // INTEGER readonly Object2:FakeField
  
- FieldOffset method Object:FieldOffset
+ FieldOffset readonly Object:FieldOffset
   Object IN Self
   Self
   Object:class
   ObjectClass:FieldOffset
   '>>>'
   Result
- ; // FieldOffset method Object:FieldOffset
+ ; // FieldOffset readonly Object:FieldOffset
  
- INTEGER method Object:InstanceSize
+ INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ ; // INTEGER readonly Object:InstanceSize
  
  Object2 constructor Object2:new
   ARRAY [
@@ -687,14 +687,14 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // Object2 constructor Object2:new
  
- REDIFINITION VIRTUAL VOID method Object:Print
+ REDIFINITION VIRTUAL VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
+ ; // REDIFINITION VIRTUAL VOID readonly Object:Print
  
- VIRTUAL STRING method Object:ToPrintable
+ VIRTUAL STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -709,7 +709,7 @@ VOID TestWithDump ObjectTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING method Object:ToPrintable
+ ; // VIRTUAL STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE Object2Class
   TtfwValueTypes
@@ -872,32 +872,32 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING method Object:ClassName
+ STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassName
+ ; // STRING readonly Object:ClassName
  
- ObjectClass method Object:ClassParent
+ ObjectClass readonly Object:ClassParent
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParent
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParent
+ ; // ObjectClass readonly Object:ClassParent
  
- STRING method Object:ClassParentName
+ STRING readonly Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassParentName
+ ; // STRING readonly Object:ClassParentName
  
  INTEGER readonly Object2:FakeField
   Object2 IN Self
@@ -911,23 +911,23 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // INTEGER readonly Object2:FakeField
  
- FieldOffset method Object:FieldOffset
+ FieldOffset readonly Object:FieldOffset
   Object IN Self
   Self
   Object:class
   ObjectClass:FieldOffset
   '>>>'
   Result
- ; // FieldOffset method Object:FieldOffset
+ ; // FieldOffset readonly Object:FieldOffset
  
- INTEGER method Object:InstanceSize
+ INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ ; // INTEGER readonly Object:InstanceSize
  
  Object3 constructor Object3:new
   ARRAY [
@@ -939,14 +939,14 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // Object3 constructor Object3:new
  
- REDIFINITION VIRTUAL VOID method Object:Print
+ REDIFINITION VIRTUAL VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
+ ; // REDIFINITION VIRTUAL VOID readonly Object:Print
  
- VIRTUAL STRING method Object:ToPrintable
+ VIRTUAL STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -961,7 +961,7 @@ VOID TestWithDump ObjectTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING method Object:ToPrintable
+ ; // VIRTUAL STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE Object3Class
   TtfwValueTypes
@@ -1124,50 +1124,50 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING method Object:ClassName
+ STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassName
+ ; // STRING readonly Object:ClassName
  
- ObjectClass method Object:ClassParent
+ ObjectClass readonly Object:ClassParent
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParent
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParent
+ ; // ObjectClass readonly Object:ClassParent
  
- STRING method Object:ClassParentName
+ STRING readonly Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassParentName
+ ; // STRING readonly Object:ClassParentName
  
- FieldOffset method Object:FieldOffset
+ FieldOffset readonly Object:FieldOffset
   Object IN Self
   Self
   Object:class
   ObjectClass:FieldOffset
   '>>>'
   Result
- ; // FieldOffset method Object:FieldOffset
+ ; // FieldOffset readonly Object:FieldOffset
  
- INTEGER method Object:InstanceSize
+ INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ ; // INTEGER readonly Object:InstanceSize
  
  Object4 constructor Object4:new
   ARRAY [
@@ -1178,14 +1178,14 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // Object4 constructor Object4:new
  
- REDIFINITION VIRTUAL VOID method Object:Print
+ REDIFINITION VIRTUAL VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
+ ; // REDIFINITION VIRTUAL VOID readonly Object:Print
  
- VIRTUAL STRING method Object:ToPrintable
+ VIRTUAL STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -1200,7 +1200,7 @@ VOID TestWithDump ObjectTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING method Object:ToPrintable
+ ; // VIRTUAL STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE Object4Class
   TtfwValueTypes
@@ -1590,6 +1590,10 @@ ObjectClass class_impl _:Object
  ; // %CONSTRUCTORS %Constructors
  
  %METHODS %Methods
+ ; // %METHODS %Methods
+ 
+ %PROPERTIES %Props
+  'class'
   'ClassName'
   'FieldOffset'
   'InstanceSize'
@@ -1597,10 +1601,6 @@ ObjectClass class_impl _:Object
   'ClassParentName'
   'Print'
   'ToPrintable'
- ; // %METHODS %Methods
- 
- %PROPERTIES %Props
-  'class'
  ; // %PROPERTIES %Props
  
  ObjectClass STATIC-VAR c:Class:Parent

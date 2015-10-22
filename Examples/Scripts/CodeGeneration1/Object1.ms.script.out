@@ -29,8 +29,6 @@ VOID TestWithDump ObjectTest
   ; // %INHERITS %G
   
   %METHODS %Methods
-   'ToPrintable'
-   'Print'
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
@@ -41,6 +39,7 @@ VOID TestWithDump ObjectTest
    'ClassParent'
    'ClassParentName'
    'Print'
+   'ToPrintable'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -72,8 +71,6 @@ VOID TestWithDump ObjectTest
   ; // %INHERITS %G
   
   %METHODS %Methods
-   'ToPrintable'
-   'Print'
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
@@ -84,6 +81,7 @@ VOID TestWithDump ObjectTest
    'ClassParent'
    'ClassParentName'
    'Print'
+   'ToPrintable'
    'FakeField'
   ; // %PROPERTIES %Props
   
@@ -118,8 +116,6 @@ VOID TestWithDump ObjectTest
   ; // %INHERITS %G
   
   %METHODS %Methods
-   'ToPrintable'
-   'Print'
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
@@ -130,6 +126,7 @@ VOID TestWithDump ObjectTest
    'ClassParent'
    'ClassParentName'
    'Print'
+   'ToPrintable'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -161,8 +158,6 @@ VOID TestWithDump ObjectTest
   ; // %INHERITS %G
   
   %METHODS %Methods
-   'ToPrintable'
-   'Print'
   ; // %METHODS %Methods
   
   %PROPERTIES %Props
@@ -173,6 +168,7 @@ VOID TestWithDump ObjectTest
    'ClassParent'
    'ClassParentName'
    'Print'
+   'ToPrintable'
    'FakeField'
   ; // %PROPERTIES %Props
   
@@ -261,21 +257,14 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // Object1 constructor Object1:new
  
- REDIFINITION VIRTUAL VOID method Object:Print
+ REDIFINITION VIRTUAL VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
+ ; // REDIFINITION VIRTUAL VOID readonly Object:Print
  
- REDIFINITION VIRTUAL VOID method Object:Print
-  Object IN Self
-  Self
-  Object:ToPrintable
-  Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
- 
- VIRTUAL STRING method Object:ToPrintable
+ VIRTUAL STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -290,7 +279,7 @@ VOID TestWithDump ObjectTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING method Object:ToPrintable
+ ; // VIRTUAL STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE Object1Class
   TtfwValueTypes
@@ -520,21 +509,14 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // Object2 constructor Object2:new
  
- REDIFINITION VIRTUAL VOID method Object:Print
+ REDIFINITION VIRTUAL VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
+ ; // REDIFINITION VIRTUAL VOID readonly Object:Print
  
- REDIFINITION VIRTUAL VOID method Object:Print
-  Object IN Self
-  Self
-  Object:ToPrintable
-  Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
- 
- VIRTUAL STRING method Object:ToPrintable
+ VIRTUAL STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -549,7 +531,7 @@ VOID TestWithDump ObjectTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING method Object:ToPrintable
+ ; // VIRTUAL STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE Object2Class
   TtfwValueTypes
@@ -838,8 +820,6 @@ ObjectClass class_impl _:Object
  ; // %CONSTRUCTORS %Constructors
  
  %METHODS %Methods
-  'ToPrintable'
-  'Print'
  ; // %METHODS %Methods
  
  %PROPERTIES %Props
@@ -850,6 +830,7 @@ ObjectClass class_impl _:Object
   'ClassParent'
   'ClassParentName'
   'Print'
+  'ToPrintable'
  ; // %PROPERTIES %Props
  
  ObjectClass STATIC-VAR c:Class:Parent

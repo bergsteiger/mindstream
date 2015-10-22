@@ -94,6 +94,10 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'class'
    'ClassName'
    'FieldOffset'
    'InstanceSize'
@@ -101,10 +105,6 @@ VOID TestWithDump PointTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
-   'class'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -136,6 +136,10 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'class'
    'ClassName'
    'FieldOffset'
    'InstanceSize'
@@ -143,10 +147,6 @@ VOID TestWithDump PointTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
-   'class'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -182,13 +182,6 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
-   'ClassName'
-   'FieldOffset'
-   'InstanceSize'
-   'ClassParent'
-   'ClassParentName'
-   'Print'
-   'ToPrintable'
    '+'
    'Neg'
    '-'
@@ -196,6 +189,13 @@ VOID TestWithDump PointTest
   
   %PROPERTIES %Props
    'class'
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
    'X'
    'Y'
   ; // %PROPERTIES %Props
@@ -234,6 +234,10 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'class'
    'ClassName'
    'FieldOffset'
    'InstanceSize'
@@ -241,10 +245,6 @@ VOID TestWithDump PointTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
-   'class'
    'TopLeft'
    'BottomRight'
   ; // %PROPERTIES %Props
@@ -279,50 +279,50 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING method Object:ClassName
+ STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassName
+ ; // STRING readonly Object:ClassName
  
- ObjectClass method Object:ClassParent
+ ObjectClass readonly Object:ClassParent
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParent
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParent
+ ; // ObjectClass readonly Object:ClassParent
  
- STRING method Object:ClassParentName
+ STRING readonly Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassParentName
+ ; // STRING readonly Object:ClassParentName
  
- FieldOffset method Object:FieldOffset
+ FieldOffset readonly Object:FieldOffset
   Object IN Self
   Self
   Object:class
   ObjectClass:FieldOffset
   '>>>'
   Result
- ; // FieldOffset method Object:FieldOffset
+ ; // FieldOffset readonly Object:FieldOffset
  
- INTEGER method Object:InstanceSize
+ INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ ; // INTEGER readonly Object:InstanceSize
  
  Bar constructor Bar:new
   ARRAY [
@@ -333,14 +333,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Bar constructor Bar:new
  
- REDIFINITION VIRTUAL VOID method Object:Print
+ REDIFINITION VIRTUAL VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
+ ; // REDIFINITION VIRTUAL VOID readonly Object:Print
  
- VIRTUAL STRING method Object:ToPrintable
+ VIRTUAL STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -355,7 +355,7 @@ VOID TestWithDump PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING method Object:ToPrintable
+ ; // VIRTUAL STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE BarClass
   TtfwValueTypes
@@ -521,6 +521,10 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'class'
    'ClassName'
    'FieldOffset'
    'InstanceSize'
@@ -528,10 +532,6 @@ VOID TestWithDump PointTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
-   'class'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -563,6 +563,10 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'class'
    'ClassName'
    'FieldOffset'
    'InstanceSize'
@@ -570,10 +574,6 @@ VOID TestWithDump PointTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
-   'class'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -609,13 +609,6 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
-   'ClassName'
-   'FieldOffset'
-   'InstanceSize'
-   'ClassParent'
-   'ClassParentName'
-   'Print'
-   'ToPrintable'
    '+'
    'Neg'
    '-'
@@ -623,6 +616,13 @@ VOID TestWithDump PointTest
   
   %PROPERTIES %Props
    'class'
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
    'X'
    'Y'
   ; // %PROPERTIES %Props
@@ -661,6 +661,10 @@ VOID TestWithDump PointTest
   ; // %INHERITS %G
   
   %METHODS %Methods
+  ; // %METHODS %Methods
+  
+  %PROPERTIES %Props
+   'class'
    'ClassName'
    'FieldOffset'
    'InstanceSize'
@@ -668,10 +672,6 @@ VOID TestWithDump PointTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
-   'class'
    'TopLeft'
    'BottomRight'
   ; // %PROPERTIES %Props
@@ -706,50 +706,50 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING method Object:ClassName
+ STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassName
+ ; // STRING readonly Object:ClassName
  
- ObjectClass method Object:ClassParent
+ ObjectClass readonly Object:ClassParent
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParent
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParent
+ ; // ObjectClass readonly Object:ClassParent
  
- STRING method Object:ClassParentName
+ STRING readonly Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassParentName
+ ; // STRING readonly Object:ClassParentName
  
- FieldOffset method Object:FieldOffset
+ FieldOffset readonly Object:FieldOffset
   Object IN Self
   Self
   Object:class
   ObjectClass:FieldOffset
   '>>>'
   Result
- ; // FieldOffset method Object:FieldOffset
+ ; // FieldOffset readonly Object:FieldOffset
  
- INTEGER method Object:InstanceSize
+ INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ ; // INTEGER readonly Object:InstanceSize
  
  Foo constructor Foo:new
   ARRAY [
@@ -760,14 +760,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Foo constructor Foo:new
  
- REDIFINITION VIRTUAL VOID method Object:Print
+ REDIFINITION VIRTUAL VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
+ ; // REDIFINITION VIRTUAL VOID readonly Object:Print
  
- VIRTUAL STRING method Object:ToPrintable
+ VIRTUAL STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -782,7 +782,7 @@ VOID TestWithDump PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING method Object:ToPrintable
+ ; // VIRTUAL STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE FooClass
   TtfwValueTypes
@@ -1066,50 +1066,50 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING method Object:ClassName
+ STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassName
+ ; // STRING readonly Object:ClassName
  
- ObjectClass method Object:ClassParent
+ ObjectClass readonly Object:ClassParent
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParent
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParent
+ ; // ObjectClass readonly Object:ClassParent
  
- STRING method Object:ClassParentName
+ STRING readonly Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassParentName
+ ; // STRING readonly Object:ClassParentName
  
- FieldOffset method Object:FieldOffset
+ FieldOffset readonly Object:FieldOffset
   Object IN Self
   Self
   Object:class
   ObjectClass:FieldOffset
   '>>>'
   Result
- ; // FieldOffset method Object:FieldOffset
+ ; // FieldOffset readonly Object:FieldOffset
  
- INTEGER method Object:InstanceSize
+ INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ ; // INTEGER readonly Object:InstanceSize
  
  Point method Point:Neg
   Point IN Self
@@ -1162,14 +1162,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point constructor Point:OF
  
- REDIFINITION OVERRIDE VOID method Point:Print
+ REDIFINITION OVERRIDE VOID readonly Point:Print
   Point IN Self
   Self
   Point:ToPrintable
   Print
- ; // REDIFINITION OVERRIDE VOID method Point:Print
+ ; // REDIFINITION OVERRIDE VOID readonly Point:Print
  
- REDIFINITION OVERRIDE STRING method Point:ToPrintable
+ REDIFINITION OVERRIDE STRING readonly Point:ToPrintable
   Point IN Self
   ARRAY [
    '( '
@@ -1186,7 +1186,7 @@ VOID TestWithDump PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // REDIFINITION OVERRIDE STRING method Point:ToPrintable
+ ; // REDIFINITION OVERRIDE STRING readonly Point:ToPrintable
  
  Pixel readonly Point:X
   Point IN Self
@@ -1448,50 +1448,50 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING method Object:ClassName
+ STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassName
+ ; // STRING readonly Object:ClassName
  
- ObjectClass method Object:ClassParent
+ ObjectClass readonly Object:ClassParent
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParent
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParent
+ ; // ObjectClass readonly Object:ClassParent
  
- STRING method Object:ClassParentName
+ STRING readonly Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassParentName
+ ; // STRING readonly Object:ClassParentName
  
- FieldOffset method Object:FieldOffset
+ FieldOffset readonly Object:FieldOffset
   Object IN Self
   Self
   Object:class
   ObjectClass:FieldOffset
   '>>>'
   Result
- ; // FieldOffset method Object:FieldOffset
+ ; // FieldOffset readonly Object:FieldOffset
  
- INTEGER method Object:InstanceSize
+ INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ ; // INTEGER readonly Object:InstanceSize
  
  Rectangle constructor Rectangle:new
   ARRAY [
@@ -1502,12 +1502,12 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Rectangle constructor Rectangle:new
  
- REDIFINITION OVERRIDE VOID method Rectangle:Print
+ REDIFINITION OVERRIDE VOID readonly Rectangle:Print
   Rectangle IN Self
   Self
   Rectangle:ToPrintable
   Print
- ; // REDIFINITION OVERRIDE VOID method Rectangle:Print
+ ; // REDIFINITION OVERRIDE VOID readonly Rectangle:Print
  
  Point readonly Rectangle:TopLeft
   Rectangle IN Self
@@ -1521,7 +1521,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point readonly Rectangle:TopLeft
  
- REDIFINITION OVERRIDE STRING method Rectangle:ToPrintable
+ REDIFINITION OVERRIDE STRING readonly Rectangle:ToPrintable
   Rectangle IN Self
   ARRAY [
    '( '
@@ -1538,7 +1538,7 @@ VOID TestWithDump PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // REDIFINITION OVERRIDE STRING method Rectangle:ToPrintable
+ ; // REDIFINITION OVERRIDE STRING readonly Rectangle:ToPrintable
  
  IMMEDIATE VOID TYPE RectangleClass
   TtfwValueTypes
@@ -2075,6 +2075,10 @@ ObjectClass class_impl _:Object
  ; // %CONSTRUCTORS %Constructors
  
  %METHODS %Methods
+ ; // %METHODS %Methods
+ 
+ %PROPERTIES %Props
+  'class'
   'ClassName'
   'FieldOffset'
   'InstanceSize'
@@ -2082,10 +2086,6 @@ ObjectClass class_impl _:Object
   'ClassParentName'
   'Print'
   'ToPrintable'
- ; // %METHODS %Methods
- 
- %PROPERTIES %Props
-  'class'
  ; // %PROPERTIES %Props
  
  ObjectClass STATIC-VAR c:Class:Parent
@@ -2121,13 +2121,6 @@ PointClass class_impl _:Point
  ; // %INHERITS %G
  
  %METHODS %Methods
-  'ClassName'
-  'FieldOffset'
-  'InstanceSize'
-  'ClassParent'
-  'ClassParentName'
-  'Print'
-  'ToPrintable'
   '+'
   'Neg'
   '-'
@@ -2135,6 +2128,13 @@ PointClass class_impl _:Point
  
  %PROPERTIES %Props
   'class'
+  'ClassName'
+  'FieldOffset'
+  'InstanceSize'
+  'ClassParent'
+  'ClassParentName'
+  'Print'
+  'ToPrintable'
   'X'
   'Y'
  ; // %PROPERTIES %Props
@@ -2173,6 +2173,10 @@ RectangleClass class_impl _:Rectangle
  ; // %INHERITS %G
  
  %METHODS %Methods
+ ; // %METHODS %Methods
+ 
+ %PROPERTIES %Props
+  'class'
   'ClassName'
   'FieldOffset'
   'InstanceSize'
@@ -2180,10 +2184,6 @@ RectangleClass class_impl _:Rectangle
   'ClassParentName'
   'Print'
   'ToPrintable'
- ; // %METHODS %Methods
- 
- %PROPERTIES %Props
-  'class'
   'TopLeft'
   'BottomRight'
  ; // %PROPERTIES %Props

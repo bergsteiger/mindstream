@@ -5005,40 +5005,40 @@ ObjectClass OPERATOR :: MACRO :: readonly : Object:class
  ObjectClass OPERATOR :: MACRO :: readonly :: Object:class : Result
  Object OPERATOR :: IN : Self
 ; // Object:class
-STRING OPERATOR :: MACRO :: method : Object:ClassName
- STRING OPERATOR :: MACRO :: method :: Object:ClassName : Result
+STRING OPERATOR :: MACRO :: readonly : Object:ClassName
+ STRING OPERATOR :: MACRO :: readonly :: Object:ClassName : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassName
-ObjectClass OPERATOR :: MACRO :: method : Object:ClassParent
- ObjectClass OPERATOR :: MACRO :: method :: Object:ClassParent : Result
+ObjectClass OPERATOR :: MACRO :: readonly : Object:ClassParent
+ ObjectClass OPERATOR :: MACRO :: readonly :: Object:ClassParent : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassParent
-STRING OPERATOR :: MACRO :: method : Object:ClassParentName
- STRING OPERATOR :: MACRO :: method :: Object:ClassParentName : Result
+STRING OPERATOR :: MACRO :: readonly : Object:ClassParentName
+ STRING OPERATOR :: MACRO :: readonly :: Object:ClassParentName : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassParentName
-FieldOffset OPERATOR :: MACRO :: method : Object:FieldOffset
- FieldOffset OPERATOR :: MACRO :: method :: Object:FieldOffset : Result
+FieldOffset OPERATOR :: MACRO :: readonly : Object:FieldOffset
+ FieldOffset OPERATOR :: MACRO :: readonly :: Object:FieldOffset : Result
  Object OPERATOR :: IN : Self
 ; // Object:FieldOffset
-INTEGER OPERATOR :: MACRO :: method : Object:InstanceSize
- INTEGER OPERATOR :: MACRO :: method :: Object:InstanceSize : Result
+INTEGER OPERATOR :: MACRO :: readonly : Object:InstanceSize
+ INTEGER OPERATOR :: MACRO :: readonly :: Object:InstanceSize : Result
  Object OPERATOR :: IN : Self
 ; // Object:InstanceSize
 Object OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: constructor : Object:new
  Object OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: constructor :: Object:new : Result
  Object OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: constructor :: Object:new : Self
 ; // Object:new
-REDIFINITION VIRTUAL VOID OPERATOR :: MACRO :: method : Object:Print
+REDIFINITION VIRTUAL VOID OPERATOR :: MACRO :: readonly : Object:Print
 ==> Redefines
- OPERATOR :: MACRO :: method : Object:Print
+ OPERATOR :: MACRO :: readonly : Object:Print
   Object OPERATOR :: IN : Self
  ; // Object:Print
 <== Redefines
  Object OPERATOR :: IN : Self
 ; // Object:Print
-VIRTUAL STRING OPERATOR :: MACRO :: method : Object:ToPrintable
- VIRTUAL STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
+VIRTUAL STRING OPERATOR :: MACRO :: readonly : Object:ToPrintable
+ VIRTUAL STRING OPERATOR :: MACRO :: readonly :: Object:ToPrintable : Result
  Object OPERATOR :: IN : Self
 ; // Object:ToPrintable
 IMMEDIATE VOID OPERATOR :: TYPE : ObjectClass
