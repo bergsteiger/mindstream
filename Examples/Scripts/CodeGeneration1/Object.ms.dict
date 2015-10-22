@@ -320,6 +320,17 @@ PROCEDURE ClearMetaLists
  ) // MetaListPoducerIt .for>
 ; // ClearMetaLists
 
+PROCEDURE ClearClassInfo
+ g_CurrentClass := ''
+ g_CurrentClassImpl := nil
+ g_CurrentClassParent := nil
+ g_CurrentClassParentName := ''
+ g_InstanceSizeDefined := false
+ g_ConstructorsCopied := false
+ g_ClassFieldOffset := 0 
+ ClearMetaLists
+; // ClearClassInfo
+
 MACRO class
  Literal IN aName
  ( g_CurrentClass = '' ) ?ASSURE 'Вложенные классы пока не поддерживаются'
@@ -715,17 +726,6 @@ MACRO classExpander
  ';'
  %REMARK 'Закрываем список'
 ; // ListToNameAsString
-
-PROCEDURE ClearClassInfo
- g_CurrentClass := ''
- g_CurrentClassImpl := nil
- g_CurrentClassParent := nil
- g_CurrentClassParentName := ''
- g_InstanceSizeDefined := false
- g_ConstructorsCopied := false
- g_ClassFieldOffset := 0 
- ClearMetaLists
-; // ClearClassInfo
 
 PROCEDURE FinishClassDefinition
  axiom:PushSymbol implementation
