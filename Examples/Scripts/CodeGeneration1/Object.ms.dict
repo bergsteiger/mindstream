@@ -754,11 +754,8 @@ STACK_CHANGING_MACRO constructor
  STRING VAR l_Name
  aName |N >>> l_Name
 
- //if ( ( l_Name <> cDefConstructorName ) OR ( g_CurrentClass = cObjectName ) ) then
- begin
-  DefineInstanceSize
-  // - тут определ€ем размер экземпл€ров класса
- end
+ DefineInstanceSize
+ // - тут определ€ем размер экземпл€ров класса
 
  if ( l_Name <> cDefConstructorName ) then
  begin
