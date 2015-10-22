@@ -239,6 +239,21 @@ MACRO method
  l_Name array:?AddTo g_CurrentClassMethods
 ; // method
 
+MACRO readonly
+  Literal IN aName
+
+ %SUMMARY 'read-only свойство объекта' ;
+
+ STRING VAR l_Name
+ aName |N >>> l_Name
+
+ l_Name @SELF bindInPlace
+
+ l_Name MakeMethodSignature
+ MakeSelfParam
+ l_Name array:?AddTo g_CurrentClassProperties
+; // readonly
+
 STACK_CHANGING_MACRO class_method
   Literal IN aName
   
@@ -434,21 +449,6 @@ class Object
 ObjectClass member VMT
 //STRING member Fake
 //INTEGER member Fake1
-
-MACRO readonly
-  Literal IN aName
-
- %SUMMARY 'read-only свойство объекта' ;
-
- STRING VAR l_Name
- aName |N >>> l_Name
-
- l_Name @SELF bindInPlace
-
- l_Name MakeMethodSignature
- MakeSelfParam
- l_Name array:?AddTo g_CurrentClassProperties
-; // readonly
 
 : FieldByOffset
  Object in Self
