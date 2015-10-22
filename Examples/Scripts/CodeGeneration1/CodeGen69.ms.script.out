@@ -4714,13 +4714,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  ;
-ARRAY FUNCTION : %Class-Methods
+ARRAY FUNCTION : %Class_Methods
  TtfwWord OPERATOR :: IN : %S
  Documentation:
   Методы мета-класса
- ARRAY FUNCTION :: %Class-Methods : Result
-; // %Class-Methods
-IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CLASS-METHODS
+ ARRAY FUNCTION :: %Class_Methods : Result
+; // %Class_Methods
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CLASS_METHODS
 ARRAY FUNCTION : %ClassRTTIList
  OPERATOR :: IN : %S
  ^L OPERATOR :: IN : aName
@@ -4820,7 +4820,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : .ToPrintable
  ^@ OPERATOR :: IN : Self
 ; // .ToPrintable
 ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl : _:Object
- OPERATOR :: NamedWordProducer :: %CLASS-METHODS : %Class-Methods
+ OPERATOR :: NamedWordProducer :: %CLASS_METHODS : %Class_Methods
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
  OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
@@ -4873,7 +4873,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : ClassOf
  STRING OPERATOR :: VAR : l_ClassName
 ; // ClassOf
 ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl : ClassOf::Object
- OPERATOR :: NamedWordProducer :: %CLASS-METHODS : %Class-Methods
+ OPERATOR :: NamedWordProducer :: %CLASS_METHODS : %Class_Methods
  OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
  OPERATOR :: NamedWordProducer :: %METHODS : %Methods
  OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props

@@ -75,14 +75,14 @@ VOID TestWithDump PointTest
  ; // IMMEDIATE VOID MACRO .Y
  
  BarClass class_impl _:Bar
-  %CLASS-METHODS %Class-Methods
+  %CLASS_METHODS %Class_Methods
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS-METHODS %Class-Methods
+  ; // %CLASS_METHODS %Class_Methods
   
   %CONSTRUCTORS %Constructors
    'new'
@@ -117,14 +117,14 @@ VOID TestWithDump PointTest
  ; // BarClass class_impl _:Bar
  
  FooClass class_impl _:Foo
-  %CLASS-METHODS %Class-Methods
+  %CLASS_METHODS %Class_Methods
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS-METHODS %Class-Methods
+  ; // %CLASS_METHODS %Class_Methods
   
   %CONSTRUCTORS %Constructors
    'new'
@@ -159,14 +159,14 @@ VOID TestWithDump PointTest
  ; // FooClass class_impl _:Foo
  
  PointClass class_impl _:Point
-  %CLASS-METHODS %Class-Methods
+  %CLASS_METHODS %Class_Methods
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS-METHODS %Class-Methods
+  ; // %CLASS_METHODS %Class_Methods
   
   %CONSTRUCTORS %Constructors
    ':'
@@ -214,14 +214,14 @@ VOID TestWithDump PointTest
  ; // PointClass class_impl _:Point
  
  RectangleClass class_impl _:Rectangle
-  %CLASS-METHODS %Class-Methods
+  %CLASS_METHODS %Class_Methods
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS-METHODS %Class-Methods
+  ; // %CLASS_METHODS %Class_Methods
   
   %CONSTRUCTORS %Constructors
    ':'
@@ -502,14 +502,14 @@ VOID TestWithDump PointTest
  ; // class_method ObjectClass:Print
  
  BarClass class_impl _:Bar
-  %CLASS-METHODS %Class-Methods
+  %CLASS_METHODS %Class_Methods
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS-METHODS %Class-Methods
+  ; // %CLASS_METHODS %Class_Methods
   
   %CONSTRUCTORS %Constructors
    'new'
@@ -544,14 +544,14 @@ VOID TestWithDump PointTest
  ; // BarClass class_impl _:Bar
  
  FooClass class_impl _:Foo
-  %CLASS-METHODS %Class-Methods
+  %CLASS_METHODS %Class_Methods
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS-METHODS %Class-Methods
+  ; // %CLASS_METHODS %Class_Methods
   
   %CONSTRUCTORS %Constructors
    'new'
@@ -586,14 +586,14 @@ VOID TestWithDump PointTest
  ; // FooClass class_impl _:Foo
  
  PointClass class_impl _:Point
-  %CLASS-METHODS %Class-Methods
+  %CLASS_METHODS %Class_Methods
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS-METHODS %Class-Methods
+  ; // %CLASS_METHODS %Class_Methods
   
   %CONSTRUCTORS %Constructors
    ':'
@@ -641,14 +641,14 @@ VOID TestWithDump PointTest
  ; // PointClass class_impl _:Point
  
  RectangleClass class_impl _:Rectangle
-  %CLASS-METHODS %Class-Methods
+  %CLASS_METHODS %Class_Methods
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS-METHODS %Class-Methods
+  ; // %CLASS_METHODS %Class_Methods
   
   %CONSTRUCTORS %Constructors
    ':'
@@ -2061,14 +2061,14 @@ VOID TestWithDump PointTest
 ; // VOID TestWithDump PointTest
 
 ObjectClass class_impl _:Object
- %CLASS-METHODS %Class-Methods
+ %CLASS_METHODS %Class_Methods
   'ClassName'
   'FieldOffset'
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
   'Print'
- ; // %CLASS-METHODS %Class-Methods
+ ; // %CLASS_METHODS %Class_Methods
  
  %CONSTRUCTORS %Constructors
   'new'
@@ -2098,14 +2098,14 @@ ObjectClass class_impl _:Object
 ; // ObjectClass class_impl _:Object
 
 PointClass class_impl _:Point
- %CLASS-METHODS %Class-Methods
+ %CLASS_METHODS %Class_Methods
   'ClassName'
   'FieldOffset'
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
   'Print'
- ; // %CLASS-METHODS %Class-Methods
+ ; // %CLASS_METHODS %Class_Methods
  
  %CONSTRUCTORS %Constructors
   ':'
@@ -2153,14 +2153,14 @@ PointClass class_impl _:Point
 ; // PointClass class_impl _:Point
 
 RectangleClass class_impl _:Rectangle
- %CLASS-METHODS %Class-Methods
+ %CLASS_METHODS %Class_Methods
   'ClassName'
   'FieldOffset'
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
   'Print'
- ; // %CLASS-METHODS %Class-Methods
+ ; // %CLASS_METHODS %Class_Methods
  
  %CONSTRUCTORS %Constructors
   ':'
