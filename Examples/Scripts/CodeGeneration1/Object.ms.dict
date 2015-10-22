@@ -226,6 +226,7 @@ PRIVATE VOID operator MakeSelfParam
 
 MACRO method
   Literal IN aName
+  ^ IN aParams
 
  %SUMMARY 'Метод объекта' ;
 
@@ -236,6 +237,9 @@ MACRO method
  
  l_Name MakeMethodSignature
  MakeSelfParam
+
+ @SELF NameOf right aParams axiom:Params:PushWithOtherStereo
+
  l_Name array:?AddTo g_CurrentClassMethods
 ; // method
 

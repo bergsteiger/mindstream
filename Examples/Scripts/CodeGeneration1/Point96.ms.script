@@ -52,8 +52,7 @@ constructor OF (
  Point:: ( aPoint .X ) ( aPoint .Y ) >>> Self
 ; // OF
 
-Point method +
- Point right aPoint
+Point method + ( Point in_param aPoint )
 
  Point:: ( Self .X (+) ( aPoint .X ) ) ( Self .Y (+) ( aPoint .Y ) ) >>> Result
 ; // +
@@ -62,8 +61,7 @@ Point readonly Neg
  Point:: Neg ( Self .X ) Neg ( Self .Y ) >>> Result
 ; // Neg
 
-Point method -
- Point right aPoint
+Point method - ( Point in_param aPoint )
 
  Point:OF ( Self .+ ( aPoint .Neg ) ) >>> Result
 ; // -
