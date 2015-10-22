@@ -364,8 +364,7 @@ MACRO class
 
  if ( g_CurrentClass !== cObjectName ) then
  begin
-  axiom:PushSymbol [EXECUTE]
-  axiom:PushSymbol (
+  axiom:PushImmediateSymbol (
   l_CurrentClassParentName ClassOfName Ctx:Parser:PushSymbol 
   axiom:PushSymbol >>> 
   axiom:PushSymbol g_CurrentClassParent
