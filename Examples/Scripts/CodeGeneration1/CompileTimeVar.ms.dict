@@ -56,8 +56,7 @@ STACK_CHANGING_MACRO CompileTime-VAR
  l_Name Ctx:Parser:PushString
  axiom:PushImmediateSymbol (
  aValue DO
- axiom:PushSymbol [EXECUTE]
- axiom:PushSymbol CompileValue
+ axiom:PushImmediateSymbol CompileValue
  axiom:PushSymbol @
  l_Name Ctx:Parser:PushSymbol
  axiom:PushSymbol pop:Word:SetValue
