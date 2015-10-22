@@ -108,7 +108,7 @@ ARRAY CompileTime-VAR g_CurrentClassConstructors []
 
 DefineMetaList %PROPERTIES %Props 'Свойства класса' g_CurrentClassProperties
 DefineMetaList %METHODS %Methods 'Методы класса' g_CurrentClassMethods
-DefineMetaList %CLASS-METHODS %Class-Methods 'Методы мета-класса' g_CurrentMetaClassMethods
+DefineMetaList %CLASS_METHODS %Class_Methods 'Методы мета-класса' g_CurrentMetaClassMethods
 DefineMetaList %CONSTRUCTORS %Constructors 'Конструкторы класса' g_CurrentClassConstructors
 
 : CompileSetWordProducerForCompiledClass
@@ -693,7 +693,7 @@ MACRO classExpander
 
   anItem %Methods .map> |N .for> MakeAliasAndAdd g_CurrentClassMethods PushMethodSignatureAlias 
 
-  anItem %Class-Methods .map> |N .for> MakeAliasAndAdd g_CurrentMetaClassMethods ( 
+  anItem %Class_Methods .map> |N .for> MakeAliasAndAdd g_CurrentMetaClassMethods ( 
    STRING IN aProp
    g_CurrentClass ClassRefName aProp PushMethodSignature
    anItem .ClassName ClassRefName aProp PushMethodSignature

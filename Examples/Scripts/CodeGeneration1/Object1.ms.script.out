@@ -10,14 +10,14 @@ VOID TestWithDump ObjectTest
  ; // IMMEDIATE VOID MACRO .FakeField
  
  Object1Class class_impl _:Object1
-  %CLASS-METHODS %Class-Methods
+  %CLASS_METHODS %Class_Methods
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS-METHODS %Class-Methods
+  ; // %CLASS_METHODS %Class_Methods
   
   %CONSTRUCTORS %Constructors
    'new'
@@ -52,14 +52,14 @@ VOID TestWithDump ObjectTest
  ; // Object1Class class_impl _:Object1
  
  Object2Class class_impl _:Object2
-  %CLASS-METHODS %Class-Methods
+  %CLASS_METHODS %Class_Methods
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS-METHODS %Class-Methods
+  ; // %CLASS_METHODS %Class_Methods
   
   %CONSTRUCTORS %Constructors
    'new'
@@ -97,14 +97,14 @@ VOID TestWithDump ObjectTest
  ; // Object2Class class_impl _:Object2
  
  Object1Class class_impl _:Object1
-  %CLASS-METHODS %Class-Methods
+  %CLASS_METHODS %Class_Methods
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS-METHODS %Class-Methods
+  ; // %CLASS_METHODS %Class_Methods
   
   %CONSTRUCTORS %Constructors
    'new'
@@ -139,14 +139,14 @@ VOID TestWithDump ObjectTest
  ; // Object1Class class_impl _:Object1
  
  Object2Class class_impl _:Object2
-  %CLASS-METHODS %Class-Methods
+  %CLASS_METHODS %Class_Methods
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS-METHODS %Class-Methods
+  ; // %CLASS_METHODS %Class_Methods
   
   %CONSTRUCTORS %Constructors
    'new'
@@ -806,14 +806,14 @@ VOID TestWithDump ObjectTest
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
- %CLASS-METHODS %Class-Methods
+ %CLASS_METHODS %Class_Methods
   'ClassName'
   'FieldOffset'
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
   'Print'
- ; // %CLASS-METHODS %Class-Methods
+ ; // %CLASS_METHODS %Class_Methods
  
  %CONSTRUCTORS %Constructors
   'new'
