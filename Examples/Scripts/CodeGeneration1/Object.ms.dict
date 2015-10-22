@@ -597,7 +597,7 @@ PROCEDURE DefineInstanceSize
 ; // DefineInstanceSize
 
 PROCEDURE CopyConstructors
- //DefineInstanceSize
+ DefineInstanceSize
  if ( g_ConstructorsCopied ! ) then
  begin
   if ( g_CurrentClass !== cObjectName ) then
