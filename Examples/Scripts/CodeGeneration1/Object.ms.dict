@@ -229,8 +229,6 @@ MACRO method
 
  l_Name @SELF bindInPlace
  
- //@SELF Ctx:SetWordProducerForCompiledClass
-
  l_Name MakeMethodSignature
  MakeSelfParam
  l_Name array:?AddTo g_CurrentClassMethods
@@ -437,8 +435,6 @@ MACRO readonly
  aName |N >>> l_Name
 
  l_Name @SELF bindInPlace
-
- //@SELF Ctx:SetWordProducerForCompiledClass
 
  l_Name MakeMethodSignature
  MakeSelfParam
