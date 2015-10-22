@@ -484,7 +484,7 @@ ObjectClass readonly class read VMT
 MACRO class_method_end
  axiom:PushSymbol ;
  g_CurrentClassMethodModifiers axiom:PushWordInfo
- axiom:PushSymbol method
+ axiom:PushSymbol readonly
  axiom:PushStringAsSymbol g_CurrentClassMethod
  axiom:PushStringAsSymbol cSelf
  axiom:PushStringAsSymbol '.class'
