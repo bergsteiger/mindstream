@@ -742,11 +742,9 @@ PROCEDURE FinishClassDefinition
 MACRO class-end
  DefineInstanceSize
 
- axiom:PushSymbol [EXECUTE]
- axiom:PushSymbol CopyConstructors
+ axiom:PushImmediateSymbol CopyConstructors
 
- axiom:PushSymbol [EXECUTE]
- axiom:PushSymbol FinishClassDefinition
+ axiom:PushImmediateSymbol FinishClassDefinition
 ; // class-end
 
 STACK_CHANGING_MACRO constructor
