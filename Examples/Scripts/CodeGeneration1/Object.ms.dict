@@ -599,7 +599,6 @@ PROCEDURE CopyConstructors
  begin
   if ( g_CurrentClass !== cObjectName ) then
   begin
-   'CopyConstructors' Log
    g_CurrentClassImpl IsNil ?FAIL [ 'Нет текущего определяемого класса. Возможное имя класса ' g_CurrentClass ]
    g_ConstructorsCopied := true
    g_CurrentClassImpl %G .for> (
