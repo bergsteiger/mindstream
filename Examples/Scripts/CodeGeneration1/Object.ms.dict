@@ -409,8 +409,7 @@ MACRO class
 
  axiom:PushSymbol ;
 
- axiom:PushSymbol [EXECUTE]
- axiom:PushSymbol (
+ axiom:PushImmediateSymbol (
  axiom:PushStringAsSymbol l_CurrentClassImpl
  axiom:PushSymbol >>>
  axiom:PushSymbol g_CurrentClassImpl
