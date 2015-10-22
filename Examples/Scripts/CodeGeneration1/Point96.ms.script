@@ -58,7 +58,7 @@ Point method +
  Point:: ( Self .X (+) ( aPoint .X ) ) ( Self .Y (+) ( aPoint .Y ) ) >>> Result
 ; // +
 
-Point method Neg
+Point readonly Neg
  Point:: Neg ( Self .X ) Neg ( Self .Y ) >>> Result
 ; // Neg
 

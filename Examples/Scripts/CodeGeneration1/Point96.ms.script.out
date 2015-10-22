@@ -183,7 +183,6 @@ VOID TestWithDump PointTest
   
   %METHODS %Methods
    '+'
-   'Neg'
    '-'
   ; // %METHODS %Methods
   
@@ -198,6 +197,7 @@ VOID TestWithDump PointTest
    'ToPrintable'
    'X'
    'Y'
+   'Neg'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -610,7 +610,6 @@ VOID TestWithDump PointTest
   
   %METHODS %Methods
    '+'
-   'Neg'
    '-'
   ; // %METHODS %Methods
   
@@ -625,6 +624,7 @@ VOID TestWithDump PointTest
    'ToPrintable'
    'X'
    'Y'
+   'Neg'
   ; // %PROPERTIES %Props
   
   ObjectClass STATIC-VAR c:Class:Parent
@@ -1111,7 +1111,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // INTEGER readonly Object:InstanceSize
  
- Point method Point:Neg
+ Point readonly Point:Neg
   Point IN Self
   Point::
   Neg
@@ -1126,7 +1126,7 @@ VOID TestWithDump PointTest
   )
   Result
   pop:Word:SetValue
- ; // Point method Point:Neg
+ ; // Point readonly Point:Neg
  
  Point constructor Point:new
   ARRAY [
@@ -2122,7 +2122,6 @@ PointClass class_impl _:Point
  
  %METHODS %Methods
   '+'
-  'Neg'
   '-'
  ; // %METHODS %Methods
  
@@ -2137,6 +2136,7 @@ PointClass class_impl _:Point
   'ToPrintable'
   'X'
   'Y'
+  'Neg'
  ; // %PROPERTIES %Props
  
  ObjectClass STATIC-VAR c:Class:Parent
