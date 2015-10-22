@@ -241,7 +241,7 @@ MACRO method
  l_Name array:?AddTo g_CurrentClassMethods
 ; // method
 
-MACRO class-method
+STACK_CHANGING_MACRO class-method
   Literal IN aName
   
  %SUMMARY 'Метод класса' ;
@@ -261,7 +261,7 @@ MACRO class-method
 
  l_Name bindAndRestoreContext
 
- @SELF Ctx:SetWordProducerForCompiledClass
+ @SELF CompileSetWordProducerForCompiledClass
 
  axiom:PushSymbol :
 
