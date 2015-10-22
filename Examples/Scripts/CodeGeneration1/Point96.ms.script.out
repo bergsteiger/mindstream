@@ -981,7 +981,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point method Point:-
  
- Point : Point::
+ Point constructor Point::
   ^ IN _aX
   ^ IN _aY
   IMMEDIATE VOID OPERATOR aX
@@ -1008,7 +1008,7 @@ VOID TestWithDump PointTest
   ]
   Result
   pop:Word:SetValue
- ; // Point : Point::
+ ; // Point constructor Point::
  
  Point method Point:+
   ^ IN _aPoint
@@ -1395,7 +1395,7 @@ VOID TestWithDump PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Rectangle
  
- Rectangle : Rectangle::
+ Rectangle constructor Rectangle::
   ^ IN _aBottomRight
   ^ IN _aTopLeft
   IMMEDIATE VOID OPERATOR aBottomRight
@@ -1422,7 +1422,7 @@ VOID TestWithDump PointTest
   ]
   Result
   pop:Word:SetValue
- ; // Rectangle : Rectangle::
+ ; // Rectangle constructor Rectangle::
  
  Point readonly Rectangle:BottomRight
   Rectangle IN Self

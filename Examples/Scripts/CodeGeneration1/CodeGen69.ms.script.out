@@ -4891,10 +4891,10 @@ VOID OPERATOR :: PROCEDURE : ClearMetaLists
 INTEGER CONST : cMetaListPoducerNamesElementSize
 STRING CONST : cMetaPrefix
 STRING CONST : cObjectName
-VOID OPERATOR :: PROCEDURE : CompileSetWordProducerForCompiledClass
+: : CompileSetWordProducerForCompiledClass
  TtfwWord OPERATOR :: IN : aWord
 ; // CompileSetWordProducerForCompiledClass
-IMMEDIATE VOID OPERATOR :: MACRO : constructor
+IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : constructor
  Documentation:
   Конструктор объектов
  ^L OPERATOR :: IN : aName
@@ -5019,9 +5019,9 @@ INTEGER OPERATOR :: MACRO :: method : Object:InstanceSize
  INTEGER OPERATOR :: MACRO :: method :: Object:InstanceSize : Result
  Object OPERATOR :: IN : Self
 ; // Object:InstanceSize
-Object OPERATOR :: MACRO :: constructor : Object:new
- Object OPERATOR :: MACRO :: constructor :: Object:new : Result
- Object OPERATOR :: MACRO :: constructor :: Object:new : Self
+Object OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: constructor : Object:new
+ Object OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: constructor :: Object:new : Result
+ Object OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: constructor :: Object:new : Self
 ; // Object:new
 REDIFINITION VIRTUAL VOID OPERATOR :: MACRO :: method : Object:Print
 ==> Redefines

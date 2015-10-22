@@ -751,12 +751,14 @@ MACRO class-end
  axiom:PushSymbol FinishClassDefinition
 ; // class-end
 
-PROCEDURE CompileSetWordProducerForCompiledClass
+: CompileSetWordProducerForCompiledClass
   TtfwWord IN aWord
- aWord Ctx:SetWordProducerForCompiledClass
+ aWord
+ axiom:PushSymbol [EXECUTE]
+ axiom:PushSymbol Ctx:SetWordProducerForCompiledClass
 ; // CompileSetWordProducerForCompiledClass
 
-MACRO constructor
+STACK_CHANGING_MACRO constructor
   Literal IN aName
   ^ IN aParams
 
