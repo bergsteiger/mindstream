@@ -751,6 +751,11 @@ MACRO class-end
  axiom:PushSymbol FinishClassDefinition
 ; // class-end
 
+PROCEDURE CompileSetWordProducerForCompiledClass
+  TtfwWord IN aWord
+ aWord Ctx:SetWordProducerForCompiledClass
+; // CompileSetWordProducerForCompiledClass
+
 MACRO constructor
   Literal IN aName
   ^ IN aParams
@@ -781,7 +786,7 @@ MACRO constructor
 
  g_CurrentClass l_Name MakeMethodSignaturePrim Log
 
- @SELF Ctx:SetWordProducerForCompiledClass
+ @SELF CompileSetWordProducerForCompiledClass
  axiom:PushStringAsSymbol g_CurrentClass
  l_Name MakeMethodSignature
  @SELF NameOf right aParams axiom:Params:PushWithOtherStereo

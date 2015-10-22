@@ -4891,6 +4891,9 @@ VOID OPERATOR :: PROCEDURE : ClearMetaLists
 INTEGER CONST : cMetaListPoducerNamesElementSize
 STRING CONST : cMetaPrefix
 STRING CONST : cObjectName
+VOID OPERATOR :: PROCEDURE : CompileSetWordProducerForCompiledClass
+ TtfwWord OPERATOR :: IN : aWord
+; // CompileSetWordProducerForCompiledClass
 IMMEDIATE VOID OPERATOR :: MACRO : constructor
  Documentation:
   Конструктор объектов
