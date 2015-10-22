@@ -114,8 +114,7 @@ DefineMetaList %CONSTRUCTORS %Constructors 'Конструкторы класса' g_CurrentClassC
 : CompileSetWordProducerForCompiledClass
   TtfwWord IN aWord
  aWord
- axiom:PushSymbol [EXECUTE]
- axiom:PushSymbol Ctx:SetWordProducerForCompiledClass
+ axiom:PushImmediateSymbol Ctx:SetWordProducerForCompiledClass
 ; // CompileSetWordProducerForCompiledClass
 
 STACK_CHANGING_MACRO class_impl
