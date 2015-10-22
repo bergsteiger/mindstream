@@ -10,6 +10,13 @@ PROCEDURE axiom:PushSymbol
  aSymbol pop:Word:Name Ctx:Parser:PushSymbol
 ; // axiom:PushSymbol
 
+PROCEDURE axiom:PushImmediateSymbol
+ LINK ^ IN aSymbol
+ %SUMMARY '«апихивает во входной поток парсера им€ слова aSymbol дл€ непосредственного выполнени€' ;
+ axiom:PushSymbol [EXECUTE]
+ aSymbol pop:Word:Name Ctx:Parser:PushSymbol
+; // axiom:PushSymbol
+
 MACRO [] 
  axiom:PushSymbol [ 
  axiom:PushSymbol ]
