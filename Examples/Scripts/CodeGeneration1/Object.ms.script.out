@@ -464,7 +464,7 @@ VOID TestWithDump ObjectTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Object1Class
  
- STRING class-method ObjectClass:ClassName
+ STRING class_method ObjectClass:ClassName
   %SUMMARY %SUM
    'Возвращает имя класса'
   ; // %SUMMARY %SUM
@@ -477,9 +477,9 @@ VOID TestWithDump ObjectTest
   Result
   pop:Word:SetValue
   DROP
- ; // STRING class-method ObjectClass:ClassName
+ ; // STRING class_method ObjectClass:ClassName
  
- ObjectClass class-method ObjectClass:ClassParent
+ ObjectClass class_method ObjectClass:ClassParent
   %SUMMARY %SUM
    'Возвращает родительский класс'
   ; // %SUMMARY %SUM
@@ -491,9 +491,9 @@ VOID TestWithDump ObjectTest
   DO
   Result
   pop:Word:SetValue
- ; // ObjectClass class-method ObjectClass:ClassParent
+ ; // ObjectClass class_method ObjectClass:ClassParent
  
- STRING class-method ObjectClass:ClassParentName
+ STRING class_method ObjectClass:ClassParentName
   %SUMMARY %SUM
    'Возвращает имя родительского класса'
   ; // %SUMMARY %SUM
@@ -524,9 +524,9 @@ VOID TestWithDump ObjectTest
     Result
     pop:Word:SetValue
    END
- ; // STRING class-method ObjectClass:ClassParentName
+ ; // STRING class_method ObjectClass:ClassParentName
  
- FieldOffset class-method ObjectClass:FieldOffset
+ FieldOffset class_method ObjectClass:FieldOffset
   %SUMMARY %SUM
    'Вычисляет смещение поля класса'
   ; // %SUMMARY %SUM
@@ -563,9 +563,9 @@ VOID TestWithDump ObjectTest
   DO
   Result
   pop:Word:SetValue
- ; // FieldOffset class-method ObjectClass:FieldOffset
+ ; // FieldOffset class_method ObjectClass:FieldOffset
  
- INTEGER class-method ObjectClass:InstanceSize
+ INTEGER class_method ObjectClass:InstanceSize
   %SUMMARY %SUM
    'Возвращает размер экземпляров класса'
   ; // %SUMMARY %SUM
@@ -577,9 +577,9 @@ VOID TestWithDump ObjectTest
   DO
   Result
   pop:Word:SetValue
- ; // INTEGER class-method ObjectClass:InstanceSize
+ ; // INTEGER class_method ObjectClass:InstanceSize
  
- class-method ObjectClass:Print
+ class_method ObjectClass:Print
   %SUMMARY %SUM
    'Печатает класс'
   ; // %SUMMARY %SUM
@@ -601,7 +601,7 @@ VOID TestWithDump ObjectTest
     ObjectClass:ClassName
     Print
    END
- ; // class-method ObjectClass:Print
+ ; // class_method ObjectClass:Print
  
  IMMEDIATE VOID TYPE Object2
   TtfwValueTypes
@@ -716,7 +716,7 @@ VOID TestWithDump ObjectTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Object2Class
  
- STRING class-method ObjectClass:ClassName
+ STRING class_method ObjectClass:ClassName
   %SUMMARY %SUM
    'Возвращает имя класса'
   ; // %SUMMARY %SUM
@@ -729,9 +729,9 @@ VOID TestWithDump ObjectTest
   Result
   pop:Word:SetValue
   DROP
- ; // STRING class-method ObjectClass:ClassName
+ ; // STRING class_method ObjectClass:ClassName
  
- ObjectClass class-method ObjectClass:ClassParent
+ ObjectClass class_method ObjectClass:ClassParent
   %SUMMARY %SUM
    'Возвращает родительский класс'
   ; // %SUMMARY %SUM
@@ -743,9 +743,9 @@ VOID TestWithDump ObjectTest
   DO
   Result
   pop:Word:SetValue
- ; // ObjectClass class-method ObjectClass:ClassParent
+ ; // ObjectClass class_method ObjectClass:ClassParent
  
- STRING class-method ObjectClass:ClassParentName
+ STRING class_method ObjectClass:ClassParentName
   %SUMMARY %SUM
    'Возвращает имя родительского класса'
   ; // %SUMMARY %SUM
@@ -776,9 +776,9 @@ VOID TestWithDump ObjectTest
     Result
     pop:Word:SetValue
    END
- ; // STRING class-method ObjectClass:ClassParentName
+ ; // STRING class_method ObjectClass:ClassParentName
  
- FieldOffset class-method ObjectClass:FieldOffset
+ FieldOffset class_method ObjectClass:FieldOffset
   %SUMMARY %SUM
    'Вычисляет смещение поля класса'
   ; // %SUMMARY %SUM
@@ -815,9 +815,9 @@ VOID TestWithDump ObjectTest
   DO
   Result
   pop:Word:SetValue
- ; // FieldOffset class-method ObjectClass:FieldOffset
+ ; // FieldOffset class_method ObjectClass:FieldOffset
  
- INTEGER class-method ObjectClass:InstanceSize
+ INTEGER class_method ObjectClass:InstanceSize
   %SUMMARY %SUM
    'Возвращает размер экземпляров класса'
   ; // %SUMMARY %SUM
@@ -829,9 +829,9 @@ VOID TestWithDump ObjectTest
   DO
   Result
   pop:Word:SetValue
- ; // INTEGER class-method ObjectClass:InstanceSize
+ ; // INTEGER class_method ObjectClass:InstanceSize
  
- class-method ObjectClass:Print
+ class_method ObjectClass:Print
   %SUMMARY %SUM
    'Печатает класс'
   ; // %SUMMARY %SUM
@@ -853,7 +853,7 @@ VOID TestWithDump ObjectTest
     ObjectClass:ClassName
     Print
    END
- ; // class-method ObjectClass:Print
+ ; // class_method ObjectClass:Print
  
  IMMEDIATE VOID TYPE Object3
   TtfwValueTypes
@@ -968,7 +968,7 @@ VOID TestWithDump ObjectTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Object3Class
  
- STRING class-method ObjectClass:ClassName
+ STRING class_method ObjectClass:ClassName
   %SUMMARY %SUM
    'Возвращает имя класса'
   ; // %SUMMARY %SUM
@@ -981,9 +981,9 @@ VOID TestWithDump ObjectTest
   Result
   pop:Word:SetValue
   DROP
- ; // STRING class-method ObjectClass:ClassName
+ ; // STRING class_method ObjectClass:ClassName
  
- ObjectClass class-method ObjectClass:ClassParent
+ ObjectClass class_method ObjectClass:ClassParent
   %SUMMARY %SUM
    'Возвращает родительский класс'
   ; // %SUMMARY %SUM
@@ -995,9 +995,9 @@ VOID TestWithDump ObjectTest
   DO
   Result
   pop:Word:SetValue
- ; // ObjectClass class-method ObjectClass:ClassParent
+ ; // ObjectClass class_method ObjectClass:ClassParent
  
- STRING class-method ObjectClass:ClassParentName
+ STRING class_method ObjectClass:ClassParentName
   %SUMMARY %SUM
    'Возвращает имя родительского класса'
   ; // %SUMMARY %SUM
@@ -1028,9 +1028,9 @@ VOID TestWithDump ObjectTest
     Result
     pop:Word:SetValue
    END
- ; // STRING class-method ObjectClass:ClassParentName
+ ; // STRING class_method ObjectClass:ClassParentName
  
- FieldOffset class-method ObjectClass:FieldOffset
+ FieldOffset class_method ObjectClass:FieldOffset
   %SUMMARY %SUM
    'Вычисляет смещение поля класса'
   ; // %SUMMARY %SUM
@@ -1067,9 +1067,9 @@ VOID TestWithDump ObjectTest
   DO
   Result
   pop:Word:SetValue
- ; // FieldOffset class-method ObjectClass:FieldOffset
+ ; // FieldOffset class_method ObjectClass:FieldOffset
  
- INTEGER class-method ObjectClass:InstanceSize
+ INTEGER class_method ObjectClass:InstanceSize
   %SUMMARY %SUM
    'Возвращает размер экземпляров класса'
   ; // %SUMMARY %SUM
@@ -1081,9 +1081,9 @@ VOID TestWithDump ObjectTest
   DO
   Result
   pop:Word:SetValue
- ; // INTEGER class-method ObjectClass:InstanceSize
+ ; // INTEGER class_method ObjectClass:InstanceSize
  
- class-method ObjectClass:Print
+ class_method ObjectClass:Print
   %SUMMARY %SUM
    'Печатает класс'
   ; // %SUMMARY %SUM
@@ -1105,7 +1105,7 @@ VOID TestWithDump ObjectTest
     ObjectClass:ClassName
     Print
    END
- ; // class-method ObjectClass:Print
+ ; // class_method ObjectClass:Print
  
  IMMEDIATE VOID TYPE Object4
   TtfwValueTypes
@@ -1207,7 +1207,7 @@ VOID TestWithDump ObjectTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE Object4Class
  
- STRING class-method ObjectClass:ClassName
+ STRING class_method ObjectClass:ClassName
   %SUMMARY %SUM
    'Возвращает имя класса'
   ; // %SUMMARY %SUM
@@ -1220,9 +1220,9 @@ VOID TestWithDump ObjectTest
   Result
   pop:Word:SetValue
   DROP
- ; // STRING class-method ObjectClass:ClassName
+ ; // STRING class_method ObjectClass:ClassName
  
- ObjectClass class-method ObjectClass:ClassParent
+ ObjectClass class_method ObjectClass:ClassParent
   %SUMMARY %SUM
    'Возвращает родительский класс'
   ; // %SUMMARY %SUM
@@ -1234,9 +1234,9 @@ VOID TestWithDump ObjectTest
   DO
   Result
   pop:Word:SetValue
- ; // ObjectClass class-method ObjectClass:ClassParent
+ ; // ObjectClass class_method ObjectClass:ClassParent
  
- STRING class-method ObjectClass:ClassParentName
+ STRING class_method ObjectClass:ClassParentName
   %SUMMARY %SUM
    'Возвращает имя родительского класса'
   ; // %SUMMARY %SUM
@@ -1267,9 +1267,9 @@ VOID TestWithDump ObjectTest
     Result
     pop:Word:SetValue
    END
- ; // STRING class-method ObjectClass:ClassParentName
+ ; // STRING class_method ObjectClass:ClassParentName
  
- FieldOffset class-method ObjectClass:FieldOffset
+ FieldOffset class_method ObjectClass:FieldOffset
   %SUMMARY %SUM
    'Вычисляет смещение поля класса'
   ; // %SUMMARY %SUM
@@ -1306,9 +1306,9 @@ VOID TestWithDump ObjectTest
   DO
   Result
   pop:Word:SetValue
- ; // FieldOffset class-method ObjectClass:FieldOffset
+ ; // FieldOffset class_method ObjectClass:FieldOffset
  
- INTEGER class-method ObjectClass:InstanceSize
+ INTEGER class_method ObjectClass:InstanceSize
   %SUMMARY %SUM
    'Возвращает размер экземпляров класса'
   ; // %SUMMARY %SUM
@@ -1320,9 +1320,9 @@ VOID TestWithDump ObjectTest
   DO
   Result
   pop:Word:SetValue
- ; // INTEGER class-method ObjectClass:InstanceSize
+ ; // INTEGER class_method ObjectClass:InstanceSize
  
- class-method ObjectClass:Print
+ class_method ObjectClass:Print
   %SUMMARY %SUM
    'Печатает класс'
   ; // %SUMMARY %SUM
@@ -1344,7 +1344,7 @@ VOID TestWithDump ObjectTest
     ObjectClass:ClassName
     Print
    END
- ; // class-method ObjectClass:Print
+ ; // class_method ObjectClass:Print
  
  ObjectTest
  DumpElement
