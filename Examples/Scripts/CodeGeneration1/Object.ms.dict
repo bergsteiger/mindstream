@@ -239,7 +239,7 @@ MACRO method
  l_Name array:?AddTo g_CurrentClassMethods
 ; // method
 
-STACK_CHANGING_MACRO class-method
+STACK_CHANGING_MACRO class_method
   Literal IN aName
   
  %SUMMARY 'Метод класса' ;
@@ -279,7 +279,7 @@ STACK_CHANGING_MACRO class-method
  axiom:PushStringAsSymbol cSelf
 
  l_Name array:?AddTo g_CurrentMetaClassMethods
-; // class-method
+; // class_method
 
 CONST cObjectName 'Object'
 
@@ -481,7 +481,7 @@ MACRO read
 
 ObjectClass readonly class read VMT
 
-MACRO class-method-end
+MACRO class_method_end
  axiom:PushSymbol ;
  g_CurrentClassMethodModifiers axiom:PushWordInfo
  axiom:PushSymbol method
@@ -499,14 +499,14 @@ MACRO class-method-end
  axiom:PushSymbol ;
  '' >>> g_CurrentClassMethod
  '' >>> g_CurrentClassMethodModifiers
-; // class-method-end
+; // class_method_end
 
-STRING class-method ClassName
+STRING class_method ClassName
  %SUMMARY 'Возвращает имя класса' ;
  Self |N ':' string:Split >>> Result DROP
-class-method-end // ClassName
+class_method_end // ClassName
 
-FieldOffset class-method FieldOffset
+FieldOffset class_method FieldOffset
   // - этод метод можно сделать КОМПИЛИРУЕМЫМ
   Literal IN aFieldName
  
@@ -521,19 +521,19 @@ FieldOffset class-method FieldOffset
  l_FieldVAR IsNil ?FAIL [ 'Поле ' l_FieldName ' на классе ' Self .ClassName ' не определено' ]
  l_FieldVAR DO >>> Result
 
-class-method-end // FieldOffset
+class_method_end // FieldOffset
 
-INTEGER class-method InstanceSize
+INTEGER class_method InstanceSize
  %SUMMARY 'Возвращает размер экземпляров класса' ;
  Self %% InstanceSizeName DO >>> Result
-class-method-end // InstanceSize
+class_method_end // InstanceSize
 
-ObjectClass class-method ClassParent
+ObjectClass class_method ClassParent
  %SUMMARY 'Возвращает родительский класс' ;
  Self %% ClassParentName DO >>> Result
-class-method-end // ClassParent
+class_method_end // ClassParent
 
-STRING class-method ClassParentName
+STRING class_method ClassParentName
   %SUMMARY 'Возвращает имя родительского класса' ;
  ObjectClass VAR l_ClassParent
  Self %% ClassParentName DO >>> l_ClassParent
@@ -545,9 +545,9 @@ STRING class-method ClassParentName
  begin
   l_ClassParent .ClassName >>> Result
  end
-class-method-end // ClassParentName
+class_method_end // ClassParentName
 
-class-method Print
+class_method Print
  %SUMMARY 'Печатает класс' ;
  if ( Self IsNil ) then
  begin
@@ -557,7 +557,7 @@ class-method Print
  begin
   Self .ClassName Print
  end
-class-method-end // Print
+class_method_end // Print
 
 CONST cDefConstructorName 'new'
 
