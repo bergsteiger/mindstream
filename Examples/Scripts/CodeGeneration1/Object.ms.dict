@@ -346,15 +346,17 @@ MACRO class
  STRING VAR l_TypeInfo
  l_WordInfo pop:WordInfo:TypeName >>> l_TypeInfo
 
+ STRING VAR l_CurrentClassParentName
+
  if ( l_TypeInfo <> '' ) then
  begin
   l_TypeInfo 'ARRAY' == ?FAIL [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ' Заявленные предки ' l_TypeInfo ]
   l_TypeInfo ' ' string:Pos -1 == ?ASSURE [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ' Заявленные предки ' l_TypeInfo ]
-  l_TypeInfo >>> g_CurrentClassParentName
+  l_TypeInfo >>> l_CurrentClassParentName
  end
  else
  begin
-  cObjectName >>> g_CurrentClassParentName
+  cObjectName >>> l_CurrentClassParentName
  end
 
  STRING VAR l_CurrentClassImpl
@@ -367,7 +369,7 @@ MACRO class
  begin
   axiom:PushSymbol [EXECUTE]
   axiom:PushSymbol (
-  g_CurrentClassParentName ClassOfName Ctx:Parser:PushSymbol 
+  l_CurrentClassParentName ClassOfName Ctx:Parser:PushSymbol 
   axiom:PushSymbol >>> 
   axiom:PushSymbol g_CurrentClassParent
   axiom:PushSymbol )
@@ -386,7 +388,7 @@ MACRO class
    begin
     '%INHERITS'
     '@' 
-    g_CurrentClassParentName ClassImplName
+    l_CurrentClassParentName ClassImplName
     ';'
    end
 
