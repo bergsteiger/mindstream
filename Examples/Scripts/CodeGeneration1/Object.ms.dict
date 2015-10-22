@@ -111,6 +111,13 @@ DefineMetaList %METHODS %Methods 'Методы класса' g_CurrentClassMethods
 DefineMetaList %CLASS-METHODS %Class-Methods 'Методы мета-класса' g_CurrentMetaClassMethods
 DefineMetaList %CONSTRUCTORS %Constructors 'Конструкторы класса' g_CurrentClassConstructors
 
+: CompileSetWordProducerForCompiledClass
+  TtfwWord IN aWord
+ aWord
+ axiom:PushSymbol [EXECUTE]
+ axiom:PushSymbol Ctx:SetWordProducerForCompiledClass
+; // CompileSetWordProducerForCompiledClass
+
 MACRO class_impl
   Literal IN aName
  %SUMMARY 'Реализация класса.
@@ -750,13 +757,6 @@ MACRO class-end
  axiom:PushSymbol [EXECUTE]
  axiom:PushSymbol FinishClassDefinition
 ; // class-end
-
-: CompileSetWordProducerForCompiledClass
-  TtfwWord IN aWord
- aWord
- axiom:PushSymbol [EXECUTE]
- axiom:PushSymbol Ctx:SetWordProducerForCompiledClass
-; // CompileSetWordProducerForCompiledClass
 
 STACK_CHANGING_MACRO constructor
   Literal IN aName
