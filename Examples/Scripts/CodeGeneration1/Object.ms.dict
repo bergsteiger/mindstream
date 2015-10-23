@@ -109,6 +109,7 @@ MACRO DefineMetaList
   ';'
   '%S %ClassRTTIList'
   l_ListName
+  'MapToName'
   '>>> Result'
   ';'
  ] Ctx:Parser:PushArray
@@ -675,7 +676,7 @@ PROCEDURE CopyConstructors
    g_CurrentClassImpl %G .for> (
     ObjectClass IN anItem
 
-    anItem .%Constructors.It MapToName .for> ( 
+    anItem .%Constructors.It .for> ( 
      STRING IN aProp
      if ( aProp = cDefConstructorName ) then
      begin
@@ -751,7 +752,7 @@ MACRO classExpander
    ARRAY IN aArray
    ^ IN anRArray
    ^ IN aLambda
-   aArray MapToName .for> MakeAliasAndAdd ( anRArray DO ) ( aLambda DO )
+   aArray .for> MakeAliasAndAdd ( anRArray DO ) ( aLambda DO )
   ; // .for.MakeAliasAndAdd>
 
   anItem .%Properties.It .for.MakeAliasAndAdd> g_CurrentClassProperties PushMethodSignatureAlias
