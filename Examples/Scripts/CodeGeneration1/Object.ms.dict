@@ -78,12 +78,15 @@ MACRO DefineMetaList
 
  %SUMMARY 'Определяет список мета-информации к элементу. И итератор к нему' ;
 
- aWordName |N array:AddTo g_MetaListPoducerNames
+ STRING VAR l_WordName
+ aWordName |N >>> l_WordName
+
+ l_WordName array:AddTo g_MetaListPoducerNames
  aListForValues array:AddTo g_MetaListPoducerNames
 
  axiom:PushSymbol NamedWordProducer
  [ 
-  aWordName |N
+  l_WordName
   aListName |N 
  ] Ctx:Parser:PushArray
  [
