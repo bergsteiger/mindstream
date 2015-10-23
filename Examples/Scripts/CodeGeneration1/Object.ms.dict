@@ -437,9 +437,10 @@ MACRO class
   '>>>'
   'Result'
 
-  'FieldOffset'
-  'CompileTime-VAR'
  ] Ctx:Parser:PushArray
+
+ axiom:PushSymbol FieldOffset
+ axiom:PushSymbol CompileTime-VAR
 
  axiom:PushStringAsSymbol InstanceSizeName
 
