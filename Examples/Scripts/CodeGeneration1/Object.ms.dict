@@ -104,9 +104,9 @@ MACRO DefineMetaList
   'TtfwWord IN %S'
   '%SUMMARY' 
  ] Ctx:Parser:PushArray
-  aDoc |N Ctx:Parser:PushString 
+  aDoc |N Ctx:Parser:PushString
+ axiom:PushSymbol ; 
  [
-  ';'
   '%S %ClassRTTIList'
   l_ListName
   'MapToName'
