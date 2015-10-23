@@ -84,7 +84,7 @@ MACRO DefineMetaList
  [ cMetaListPrefix aWordName |N ] strings:Cat >>> l_WordName
 
  STRING VAR l_ListName
- aListName |N >>> l_ListName
+ [ cMetaListPrefix aListName |N ] strings:Cat >>> l_ListName
 
  l_WordName array:AddTo g_MetaListPoducerNames
  aListForValues array:AddTo g_MetaListPoducerNames
@@ -114,10 +114,10 @@ ARRAY CompileTime-VAR g_CurrentClassMethods []
 ARRAY CompileTime-VAR g_CurrentMetaClassMethods []
 ARRAY CompileTime-VAR g_CurrentClassConstructors []
 
-DefineMetaList PROPERTIES %Props 'Свойства класса' g_CurrentClassProperties
-DefineMetaList METHODS %Methods 'Методы класса' g_CurrentClassMethods
-DefineMetaList CLASS_METHODS %Class_Methods 'Методы мета-класса' g_CurrentMetaClassMethods
-DefineMetaList CONSTRUCTORS %Constructors 'Конструкторы класса' g_CurrentClassConstructors
+DefineMetaList PROPERTIES Props 'Свойства класса' g_CurrentClassProperties
+DefineMetaList METHODS Methods 'Методы класса' g_CurrentClassMethods
+DefineMetaList CLASS_METHODS Class_Methods 'Методы мета-класса' g_CurrentMetaClassMethods
+DefineMetaList CONSTRUCTORS Constructors 'Конструкторы класса' g_CurrentClassConstructors
 
 : CompileSetWordProducerForCompiledClass
   TtfwWord IN aWord
