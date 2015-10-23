@@ -111,8 +111,11 @@ MACRO DefineMetaList
  [
   '%S %ClassRTTIList'
   l_ListName
-  'MapToName'
-  '>>> Result'
+ ] Ctx:Parser:PushArray
+ axiom:PushSymbol MapToName
+ axiom:PushSymbol >>>
+ [
+  'Result'
  ] Ctx:Parser:PushArray
  axiom:PushSymbol ; 
 ; // DefineMetaList
