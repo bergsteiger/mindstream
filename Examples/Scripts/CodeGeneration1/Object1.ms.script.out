@@ -15,18 +15,18 @@ VOID TestWithDump ObjectTest
    _:Object
   ; // %INHERITS %G
   
-  %Class_Methods .%Class_Methods.It
+  %Constructors .%Constructors.It
+   'new'
+  ; // %Constructors .%Constructors.It
+  
+  %MetaMethods .%MetaMethods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %Class_Methods .%Class_Methods.It
-  
-  %Constructors .%Constructors.It
-   'new'
-  ; // %Constructors .%Constructors.It
+  ; // %MetaMethods .%MetaMethods.It
   
   %Methods .%Methods.It
   ; // %Methods .%Methods.It
@@ -57,18 +57,18 @@ VOID TestWithDump ObjectTest
    _:Object
   ; // %INHERITS %G
   
-  %Class_Methods .%Class_Methods.It
+  %Constructors .%Constructors.It
+   'new'
+  ; // %Constructors .%Constructors.It
+  
+  %MetaMethods .%MetaMethods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %Class_Methods .%Class_Methods.It
-  
-  %Constructors .%Constructors.It
-   'new'
-  ; // %Constructors .%Constructors.It
+  ; // %MetaMethods .%MetaMethods.It
   
   %Methods .%Methods.It
   ; // %Methods .%Methods.It
@@ -102,18 +102,18 @@ VOID TestWithDump ObjectTest
    _:Object
   ; // %INHERITS %G
   
-  %Class_Methods .%Class_Methods.It
+  %Constructors .%Constructors.It
+   'new'
+  ; // %Constructors .%Constructors.It
+  
+  %MetaMethods .%MetaMethods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %Class_Methods .%Class_Methods.It
-  
-  %Constructors .%Constructors.It
-   'new'
-  ; // %Constructors .%Constructors.It
+  ; // %MetaMethods .%MetaMethods.It
   
   %Methods .%Methods.It
   ; // %Methods .%Methods.It
@@ -144,18 +144,18 @@ VOID TestWithDump ObjectTest
    _:Object
   ; // %INHERITS %G
   
-  %Class_Methods .%Class_Methods.It
+  %Constructors .%Constructors.It
+   'new'
+  ; // %Constructors .%Constructors.It
+  
+  %MetaMethods .%MetaMethods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %Class_Methods .%Class_Methods.It
-  
-  %Constructors .%Constructors.It
-   'new'
-  ; // %Constructors .%Constructors.It
+  ; // %MetaMethods .%MetaMethods.It
   
   %Methods .%Methods.It
   ; // %Methods .%Methods.It
@@ -806,18 +806,18 @@ VOID TestWithDump ObjectTest
 ; // VOID TestWithDump ObjectTest
 
 ObjectClass class_impl _:Object
- %Class_Methods .%Class_Methods.It
+ %Constructors .%Constructors.It
+  'new'
+ ; // %Constructors .%Constructors.It
+ 
+ %MetaMethods .%MetaMethods.It
   'ClassName'
   'FieldOffset'
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
   'Print'
- ; // %Class_Methods .%Class_Methods.It
- 
- %Constructors .%Constructors.It
-  'new'
- ; // %Constructors .%Constructors.It
+ ; // %MetaMethods .%MetaMethods.It
  
  %Methods .%Methods.It
  ; // %Methods .%Methods.It
