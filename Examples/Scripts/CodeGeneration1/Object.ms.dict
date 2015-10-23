@@ -652,6 +652,11 @@ MACRO def_constructor_empty
  def_constructor_empty_do
 ; // def_constructor_empty
 
+ARRAY FUNCTION MapToName
+ ARRAY IN aArray
+ aArray .map> |N >>> Result
+; // MapToName
+
 PROCEDURE CopyConstructors
  DefineInstanceSize
  if ( g_ConstructorsCopied ! ) then
@@ -663,7 +668,7 @@ PROCEDURE CopyConstructors
    g_CurrentClassImpl %G .for> (
     ObjectClass IN anItem
 
-    anItem .%Constructors.It .map> |N .for> ( 
+    anItem .%Constructors.It MapToName .for> ( 
      STRING IN aProp
      if ( aProp = cDefConstructorName ) then
      begin
@@ -742,11 +747,6 @@ MACRO classExpander
    g_CurrentClass aProp PushMethodSignature
    anItem .ClassName aProp PushMethodSignature
   ; // PushMethodSignatureAlias
-
-  ARRAY FUNCTION MapToName
-   ARRAY IN aArray
-   aArray .map> |N >>> Result
-  ; // MapToName
 
   PROCEDURE .for.MakeAliasAndAdd>
    ARRAY IN aArray
