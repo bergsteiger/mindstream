@@ -4968,6 +4968,10 @@ REDIFINITION : : Log
 ==> Redefines
  VOID .
 <== Redefines
+VOID OPERATOR :: PROCEDURE : MakeAlias
+ ^ OPERATOR :: IN : aLambda
+ STRING OPERATOR :: IN : aProp
+; // MakeAlias
 PRIVATE STRING OPERATOR : MakeFieldOffsetName
  Documentation:
   Делает имя для доступа к полю

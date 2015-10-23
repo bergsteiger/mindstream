@@ -114,6 +114,14 @@ ARRAY CompileTime-VAR g_CurrentClassMethods []
 ARRAY CompileTime-VAR g_CurrentMetaClassMethods []
 ARRAY CompileTime-VAR g_CurrentClassConstructors []
 
+  PROCEDURE MakeAlias
+    STRING IN aProp
+    ^ IN aLambda
+
+   axiom:PushSymbol WordAlias
+   aProp aLambda DO
+  ; // MakeAlias
+
 DefineMetaList Properties 'Свойства класса' g_CurrentClassProperties
 DefineMetaList Methods 'Методы класса' g_CurrentClassMethods
 DefineMetaList Class_Methods 'Методы мета-класса' g_CurrentMetaClassMethods
@@ -713,14 +721,6 @@ MACRO classExpander
    end
 
   ) // anItem MembersIterator
-
-  PROCEDURE MakeAlias
-    STRING IN aProp
-    ^ IN aLambda
-
-   axiom:PushSymbol WordAlias
-   aProp aLambda DO
-  ; // MakeAlias
 
   PROCEDURE MakeAliasAndAdd
     STRING IN aProp
