@@ -755,7 +755,7 @@ MACRO classExpander
    aArray MapToName .for> MakeAliasAndAdd ( anRArray DO ) ( aLambda DO )
   ; // .for.MakeAliasAndAdd>
 
-  anItem %Props MapToName .for> MakeAliasAndAdd g_CurrentClassProperties PushMethodSignatureAlias
+  anItem %Props .for.MakeAliasAndAdd> g_CurrentClassProperties PushMethodSignatureAlias
 
   anItem %Methods MapToName .for> MakeAliasAndAdd g_CurrentClassMethods PushMethodSignatureAlias 
 
