@@ -80,18 +80,18 @@ VOID TestWithDump PointTest
    _:Object
   ; // %INHERITS %G
   
-  %Class_Methods .%Class_Methods.It
+  %Constructors .%Constructors.It
+   'new'
+  ; // %Constructors .%Constructors.It
+  
+  %MetaMethods .%MetaMethods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %Class_Methods .%Class_Methods.It
-  
-  %Constructors .%Constructors.It
-   'new'
-  ; // %Constructors .%Constructors.It
+  ; // %MetaMethods .%MetaMethods.It
   
   %Methods .%Methods.It
   ; // %Methods .%Methods.It
@@ -122,18 +122,18 @@ VOID TestWithDump PointTest
    _:Object
   ; // %INHERITS %G
   
-  %Class_Methods .%Class_Methods.It
+  %Constructors .%Constructors.It
+   'new'
+  ; // %Constructors .%Constructors.It
+  
+  %MetaMethods .%MetaMethods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %Class_Methods .%Class_Methods.It
-  
-  %Constructors .%Constructors.It
-   'new'
-  ; // %Constructors .%Constructors.It
+  ; // %MetaMethods .%MetaMethods.It
   
   %Methods .%Methods.It
   ; // %Methods .%Methods.It
@@ -164,15 +164,6 @@ VOID TestWithDump PointTest
    _:Object
   ; // %INHERITS %G
   
-  %Class_Methods .%Class_Methods.It
-   'ClassName'
-   'FieldOffset'
-   'InstanceSize'
-   'ClassParent'
-   'ClassParentName'
-   'Print'
-  ; // %Class_Methods .%Class_Methods.It
-  
   %Constructors .%Constructors.It
    ':'
    'new'
@@ -180,6 +171,15 @@ VOID TestWithDump PointTest
    'XY'
    'OF'
   ; // %Constructors .%Constructors.It
+  
+  %MetaMethods .%MetaMethods.It
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+  ; // %MetaMethods .%MetaMethods.It
   
   %Methods .%Methods.It
    '+'
@@ -219,19 +219,19 @@ VOID TestWithDump PointTest
    _:Object
   ; // %INHERITS %G
   
-  %Class_Methods .%Class_Methods.It
+  %Constructors .%Constructors.It
+   ':'
+   'new'
+  ; // %Constructors .%Constructors.It
+  
+  %MetaMethods .%MetaMethods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %Class_Methods .%Class_Methods.It
-  
-  %Constructors .%Constructors.It
-   ':'
-   'new'
-  ; // %Constructors .%Constructors.It
+  ; // %MetaMethods .%MetaMethods.It
   
   %Methods .%Methods.It
   ; // %Methods .%Methods.It
@@ -507,18 +507,18 @@ VOID TestWithDump PointTest
    _:Object
   ; // %INHERITS %G
   
-  %Class_Methods .%Class_Methods.It
+  %Constructors .%Constructors.It
+   'new'
+  ; // %Constructors .%Constructors.It
+  
+  %MetaMethods .%MetaMethods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %Class_Methods .%Class_Methods.It
-  
-  %Constructors .%Constructors.It
-   'new'
-  ; // %Constructors .%Constructors.It
+  ; // %MetaMethods .%MetaMethods.It
   
   %Methods .%Methods.It
   ; // %Methods .%Methods.It
@@ -549,18 +549,18 @@ VOID TestWithDump PointTest
    _:Object
   ; // %INHERITS %G
   
-  %Class_Methods .%Class_Methods.It
+  %Constructors .%Constructors.It
+   'new'
+  ; // %Constructors .%Constructors.It
+  
+  %MetaMethods .%MetaMethods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %Class_Methods .%Class_Methods.It
-  
-  %Constructors .%Constructors.It
-   'new'
-  ; // %Constructors .%Constructors.It
+  ; // %MetaMethods .%MetaMethods.It
   
   %Methods .%Methods.It
   ; // %Methods .%Methods.It
@@ -591,15 +591,6 @@ VOID TestWithDump PointTest
    _:Object
   ; // %INHERITS %G
   
-  %Class_Methods .%Class_Methods.It
-   'ClassName'
-   'FieldOffset'
-   'InstanceSize'
-   'ClassParent'
-   'ClassParentName'
-   'Print'
-  ; // %Class_Methods .%Class_Methods.It
-  
   %Constructors .%Constructors.It
    ':'
    'new'
@@ -607,6 +598,15 @@ VOID TestWithDump PointTest
    'XY'
    'OF'
   ; // %Constructors .%Constructors.It
+  
+  %MetaMethods .%MetaMethods.It
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+  ; // %MetaMethods .%MetaMethods.It
   
   %Methods .%Methods.It
    '+'
@@ -646,19 +646,19 @@ VOID TestWithDump PointTest
    _:Object
   ; // %INHERITS %G
   
-  %Class_Methods .%Class_Methods.It
+  %Constructors .%Constructors.It
+   ':'
+   'new'
+  ; // %Constructors .%Constructors.It
+  
+  %MetaMethods .%MetaMethods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %Class_Methods .%Class_Methods.It
-  
-  %Constructors .%Constructors.It
-   ':'
-   'new'
-  ; // %Constructors .%Constructors.It
+  ; // %MetaMethods .%MetaMethods.It
   
   %Methods .%Methods.It
   ; // %Methods .%Methods.It
@@ -2061,18 +2061,18 @@ VOID TestWithDump PointTest
 ; // VOID TestWithDump PointTest
 
 ObjectClass class_impl _:Object
- %Class_Methods .%Class_Methods.It
+ %Constructors .%Constructors.It
+  'new'
+ ; // %Constructors .%Constructors.It
+ 
+ %MetaMethods .%MetaMethods.It
   'ClassName'
   'FieldOffset'
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
   'Print'
- ; // %Class_Methods .%Class_Methods.It
- 
- %Constructors .%Constructors.It
-  'new'
- ; // %Constructors .%Constructors.It
+ ; // %MetaMethods .%MetaMethods.It
  
  %Methods .%Methods.It
  ; // %Methods .%Methods.It
@@ -2103,15 +2103,6 @@ PointClass class_impl _:Point
   _:Object
  ; // %INHERITS %G
  
- %Class_Methods .%Class_Methods.It
-  'ClassName'
-  'FieldOffset'
-  'InstanceSize'
-  'ClassParent'
-  'ClassParentName'
-  'Print'
- ; // %Class_Methods .%Class_Methods.It
- 
  %Constructors .%Constructors.It
   ':'
   'new'
@@ -2119,6 +2110,15 @@ PointClass class_impl _:Point
   'XY'
   'OF'
  ; // %Constructors .%Constructors.It
+ 
+ %MetaMethods .%MetaMethods.It
+  'ClassName'
+  'FieldOffset'
+  'InstanceSize'
+  'ClassParent'
+  'ClassParentName'
+  'Print'
+ ; // %MetaMethods .%MetaMethods.It
  
  %Methods .%Methods.It
   '+'
@@ -2158,19 +2158,19 @@ RectangleClass class_impl _:Rectangle
   _:Object
  ; // %INHERITS %G
  
- %Class_Methods .%Class_Methods.It
+ %Constructors .%Constructors.It
+  ':'
+  'new'
+ ; // %Constructors .%Constructors.It
+ 
+ %MetaMethods .%MetaMethods.It
   'ClassName'
   'FieldOffset'
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
   'Print'
- ; // %Class_Methods .%Class_Methods.It
- 
- %Constructors .%Constructors.It
-  ':'
-  'new'
- ; // %Constructors .%Constructors.It
+ ; // %MetaMethods .%MetaMethods.It
  
  %Methods .%Methods.It
  ; // %Methods .%Methods.It
