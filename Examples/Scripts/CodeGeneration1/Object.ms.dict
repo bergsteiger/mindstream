@@ -786,9 +786,8 @@ MACRO classExpander
 PROCEDURE FinishClassDefinition
  axiom:PushSymbol implementation
 
+ g_CurrentClassImpl pop:Word:Name Ctx:Parser:PushSymbol
  [
-  g_CurrentClassImpl pop:Word:Name
-
    MetaListPoducerIt .for> ( 
      STRING IN aName 
      TtfwWord IN aVar 
