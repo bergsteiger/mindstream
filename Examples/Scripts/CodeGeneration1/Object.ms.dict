@@ -112,8 +112,9 @@ MACRO DefineMetaList
  axiom:PushSymbol %SUMMARY
  aDoc |N Ctx:Parser:PushString
  axiom:PushSymbol ; 
+ axiom:PushStringAsSymbol cSelf
+ axiom:PushSymbol %ClassRTTIList
  [
-  'Self %ClassRTTIList'
   l_ListName
  ] Ctx:Parser:PushArray
  axiom:PushSymbol MapToName
