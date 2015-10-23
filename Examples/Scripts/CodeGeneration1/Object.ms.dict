@@ -428,9 +428,7 @@ MACRO class
  begin
   axiom:PushSymbol %INHERITS
   axiom:PushSymbol @
-  [
-    l_CurrentClassParentName ClassImplName
-  ] Ctx:Parser:PushArray
+  l_CurrentClassParentName ClassImplName Ctx:Parser:PushSymbol
   axiom:PushSymbol ;
  end
 
