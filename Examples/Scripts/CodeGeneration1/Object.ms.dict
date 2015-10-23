@@ -105,12 +105,12 @@ MACRO DefineMetaList
  ] Ctx:Parser:PushArray
  axiom:PushSymbol ARRAY
  axiom:PushSymbol FUNCTION
- [
-  l_ListName  
-  'TtfwWord IN Self'
- ] Ctx:Parser:PushArray
-  axiom:PushSymbol %SUMMARY
-  aDoc |N Ctx:Parser:PushString
+ axiom:PushStringAsSymbol l_ListName
+ axiom:PushSymbol TtfwWord
+ axiom:PushSymbol IN
+ axiom:PushStringAsSymbol cSelf
+ axiom:PushSymbol %SUMMARY
+ aDoc |N Ctx:Parser:PushString
  axiom:PushSymbol ; 
  [
   'Self %ClassRTTIList'
