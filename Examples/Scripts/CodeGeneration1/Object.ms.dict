@@ -77,6 +77,8 @@ ARRAY FUNCTION MapToName
  aArray .map> |N >>> Result
 ; // MapToName
 
+CONST cResult 'Result'
+
 MACRO DefineMetaList
   Literal IN aWordName
   Literal IN aDoc
@@ -114,9 +116,7 @@ MACRO DefineMetaList
  ] Ctx:Parser:PushArray
  axiom:PushSymbol MapToName
  axiom:PushSymbol >>>
- [
-  'Result'
- ] Ctx:Parser:PushArray
+ axiom:PushStringAsSymbol cResult
  axiom:PushSymbol ; 
 ; // DefineMetaList
 
@@ -498,8 +498,6 @@ PRIVATE operator do_get_member
  aName MakeFieldOffsetName Ctx:Parser:PushSymbol 
  axiom:PushSymbol )
 ; // do_get_member
-
-CONST cResult 'Result'
 
 MACRO read
  Literal IN aName
