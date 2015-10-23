@@ -83,16 +83,19 @@ MACRO DefineMetaList
  STRING VAR l_WordName
  [ cMetaListPrefix aWordName |N ] strings:Cat >>> l_WordName
 
+ STRING VAR l_ListName
+ aListName |N >>> l_ListName
+
  l_WordName array:AddTo g_MetaListPoducerNames
  aListForValues array:AddTo g_MetaListPoducerNames
 
  axiom:PushSymbol NamedWordProducer
  [ 
   l_WordName
-  aListName |N 
+  l_ListName 
  ] Ctx:Parser:PushArray
  [
-  'ARRAY FUNCTION' aListName |N  
+  'ARRAY FUNCTION' l_ListName  
   'TtfwWord IN %S'
   '%SUMMARY' 
  ] Ctx:Parser:PushArray
@@ -100,7 +103,7 @@ MACRO DefineMetaList
  [
   ';'
   '%S %ClassRTTIList'
-  aListName |N
+  l_ListName
   '>>> Result'
   ';'
  ] Ctx:Parser:PushArray
