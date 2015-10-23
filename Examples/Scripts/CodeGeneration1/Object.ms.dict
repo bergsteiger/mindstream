@@ -99,8 +99,10 @@ MACRO DefineMetaList
   l_WordName
   l_ListName 
  ] Ctx:Parser:PushArray
+ axiom:PushSymbol ARRAY
+ axiom:PushSymbol FUNCTION
  [
-  'ARRAY FUNCTION' l_ListName  
+  l_ListName  
   'TtfwWord IN %S'
  ] Ctx:Parser:PushArray
   axiom:PushSymbol %SUMMARY
