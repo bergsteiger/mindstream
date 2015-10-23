@@ -75,28 +75,28 @@ VOID TestWithDump PointTest
  ; // IMMEDIATE VOID MACRO .Y
  
  BarClass class_impl _:Bar
-  %CLASS_METHODS %Class_Methods
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %CLASS_METHODS .%Class_Methods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS_METHODS %Class_Methods
+  ; // %CLASS_METHODS .%Class_Methods.It
   
-  %CONSTRUCTORS %Constructors
+  %CONSTRUCTORS .%Constructors.It
    'new'
-  ; // %CONSTRUCTORS %Constructors
+  ; // %CONSTRUCTORS .%Constructors.It
   
-  %INHERITS %G
-   @
-   _:Object
-  ; // %INHERITS %G
+  %METHODS .%Methods.It
+  ; // %METHODS .%Methods.It
   
-  %METHODS %Methods
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
+  %PROPERTIES .%Props.It
    'class'
    'ClassName'
    'FieldOffset'
@@ -105,7 +105,7 @@ VOID TestWithDump PointTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %PROPERTIES %Props
+  ; // %PROPERTIES .%Props.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -117,28 +117,28 @@ VOID TestWithDump PointTest
  ; // BarClass class_impl _:Bar
  
  FooClass class_impl _:Foo
-  %CLASS_METHODS %Class_Methods
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %CLASS_METHODS .%Class_Methods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS_METHODS %Class_Methods
+  ; // %CLASS_METHODS .%Class_Methods.It
   
-  %CONSTRUCTORS %Constructors
+  %CONSTRUCTORS .%Constructors.It
    'new'
-  ; // %CONSTRUCTORS %Constructors
+  ; // %CONSTRUCTORS .%Constructors.It
   
-  %INHERITS %G
-   @
-   _:Object
-  ; // %INHERITS %G
+  %METHODS .%Methods.It
+  ; // %METHODS .%Methods.It
   
-  %METHODS %Methods
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
+  %PROPERTIES .%Props.It
    'class'
    'ClassName'
    'FieldOffset'
@@ -147,7 +147,7 @@ VOID TestWithDump PointTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %PROPERTIES %Props
+  ; // %PROPERTIES .%Props.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -159,34 +159,34 @@ VOID TestWithDump PointTest
  ; // FooClass class_impl _:Foo
  
  PointClass class_impl _:Point
-  %CLASS_METHODS %Class_Methods
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %CLASS_METHODS .%Class_Methods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS_METHODS %Class_Methods
+  ; // %CLASS_METHODS .%Class_Methods.It
   
-  %CONSTRUCTORS %Constructors
+  %CONSTRUCTORS .%Constructors.It
    ':'
    'new'
    '0'
    'XY'
    'OF'
-  ; // %CONSTRUCTORS %Constructors
+  ; // %CONSTRUCTORS .%Constructors.It
   
-  %INHERITS %G
-   @
-   _:Object
-  ; // %INHERITS %G
-  
-  %METHODS %Methods
+  %METHODS .%Methods.It
    '+'
    '-'
-  ; // %METHODS %Methods
+  ; // %METHODS .%Methods.It
   
-  %PROPERTIES %Props
+  %PROPERTIES .%Props.It
    'class'
    'ClassName'
    'FieldOffset'
@@ -198,7 +198,7 @@ VOID TestWithDump PointTest
    'X'
    'Y'
    'Neg'
-  ; // %PROPERTIES %Props
+  ; // %PROPERTIES .%Props.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -214,29 +214,29 @@ VOID TestWithDump PointTest
  ; // PointClass class_impl _:Point
  
  RectangleClass class_impl _:Rectangle
-  %CLASS_METHODS %Class_Methods
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %CLASS_METHODS .%Class_Methods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS_METHODS %Class_Methods
+  ; // %CLASS_METHODS .%Class_Methods.It
   
-  %CONSTRUCTORS %Constructors
+  %CONSTRUCTORS .%Constructors.It
    ':'
    'new'
-  ; // %CONSTRUCTORS %Constructors
+  ; // %CONSTRUCTORS .%Constructors.It
   
-  %INHERITS %G
-   @
-   _:Object
-  ; // %INHERITS %G
+  %METHODS .%Methods.It
+  ; // %METHODS .%Methods.It
   
-  %METHODS %Methods
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
+  %PROPERTIES .%Props.It
    'class'
    'ClassName'
    'FieldOffset'
@@ -247,7 +247,7 @@ VOID TestWithDump PointTest
    'ToPrintable'
    'TopLeft'
    'BottomRight'
-  ; // %PROPERTIES %Props
+  ; // %PROPERTIES .%Props.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -502,28 +502,28 @@ VOID TestWithDump PointTest
  ; // class_method ObjectClass:Print
  
  BarClass class_impl _:Bar
-  %CLASS_METHODS %Class_Methods
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %CLASS_METHODS .%Class_Methods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS_METHODS %Class_Methods
+  ; // %CLASS_METHODS .%Class_Methods.It
   
-  %CONSTRUCTORS %Constructors
+  %CONSTRUCTORS .%Constructors.It
    'new'
-  ; // %CONSTRUCTORS %Constructors
+  ; // %CONSTRUCTORS .%Constructors.It
   
-  %INHERITS %G
-   @
-   _:Object
-  ; // %INHERITS %G
+  %METHODS .%Methods.It
+  ; // %METHODS .%Methods.It
   
-  %METHODS %Methods
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
+  %PROPERTIES .%Props.It
    'class'
    'ClassName'
    'FieldOffset'
@@ -532,7 +532,7 @@ VOID TestWithDump PointTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %PROPERTIES %Props
+  ; // %PROPERTIES .%Props.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -544,28 +544,28 @@ VOID TestWithDump PointTest
  ; // BarClass class_impl _:Bar
  
  FooClass class_impl _:Foo
-  %CLASS_METHODS %Class_Methods
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %CLASS_METHODS .%Class_Methods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS_METHODS %Class_Methods
+  ; // %CLASS_METHODS .%Class_Methods.It
   
-  %CONSTRUCTORS %Constructors
+  %CONSTRUCTORS .%Constructors.It
    'new'
-  ; // %CONSTRUCTORS %Constructors
+  ; // %CONSTRUCTORS .%Constructors.It
   
-  %INHERITS %G
-   @
-   _:Object
-  ; // %INHERITS %G
+  %METHODS .%Methods.It
+  ; // %METHODS .%Methods.It
   
-  %METHODS %Methods
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
+  %PROPERTIES .%Props.It
    'class'
    'ClassName'
    'FieldOffset'
@@ -574,7 +574,7 @@ VOID TestWithDump PointTest
    'ClassParentName'
    'Print'
    'ToPrintable'
-  ; // %PROPERTIES %Props
+  ; // %PROPERTIES .%Props.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -586,34 +586,34 @@ VOID TestWithDump PointTest
  ; // FooClass class_impl _:Foo
  
  PointClass class_impl _:Point
-  %CLASS_METHODS %Class_Methods
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %CLASS_METHODS .%Class_Methods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS_METHODS %Class_Methods
+  ; // %CLASS_METHODS .%Class_Methods.It
   
-  %CONSTRUCTORS %Constructors
+  %CONSTRUCTORS .%Constructors.It
    ':'
    'new'
    '0'
    'XY'
    'OF'
-  ; // %CONSTRUCTORS %Constructors
+  ; // %CONSTRUCTORS .%Constructors.It
   
-  %INHERITS %G
-   @
-   _:Object
-  ; // %INHERITS %G
-  
-  %METHODS %Methods
+  %METHODS .%Methods.It
    '+'
    '-'
-  ; // %METHODS %Methods
+  ; // %METHODS .%Methods.It
   
-  %PROPERTIES %Props
+  %PROPERTIES .%Props.It
    'class'
    'ClassName'
    'FieldOffset'
@@ -625,7 +625,7 @@ VOID TestWithDump PointTest
    'X'
    'Y'
    'Neg'
-  ; // %PROPERTIES %Props
+  ; // %PROPERTIES .%Props.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -641,29 +641,29 @@ VOID TestWithDump PointTest
  ; // PointClass class_impl _:Point
  
  RectangleClass class_impl _:Rectangle
-  %CLASS_METHODS %Class_Methods
+  %INHERITS %G
+   @
+   _:Object
+  ; // %INHERITS %G
+  
+  %CLASS_METHODS .%Class_Methods.It
    'ClassName'
    'FieldOffset'
    'InstanceSize'
    'ClassParent'
    'ClassParentName'
    'Print'
-  ; // %CLASS_METHODS %Class_Methods
+  ; // %CLASS_METHODS .%Class_Methods.It
   
-  %CONSTRUCTORS %Constructors
+  %CONSTRUCTORS .%Constructors.It
    ':'
    'new'
-  ; // %CONSTRUCTORS %Constructors
+  ; // %CONSTRUCTORS .%Constructors.It
   
-  %INHERITS %G
-   @
-   _:Object
-  ; // %INHERITS %G
+  %METHODS .%Methods.It
+  ; // %METHODS .%Methods.It
   
-  %METHODS %Methods
-  ; // %METHODS %Methods
-  
-  %PROPERTIES %Props
+  %PROPERTIES .%Props.It
    'class'
    'ClassName'
    'FieldOffset'
@@ -674,7 +674,7 @@ VOID TestWithDump PointTest
    'ToPrintable'
    'TopLeft'
    'BottomRight'
-  ; // %PROPERTIES %Props
+  ; // %PROPERTIES .%Props.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -2061,23 +2061,23 @@ VOID TestWithDump PointTest
 ; // VOID TestWithDump PointTest
 
 ObjectClass class_impl _:Object
- %CLASS_METHODS %Class_Methods
+ %CLASS_METHODS .%Class_Methods.It
   'ClassName'
   'FieldOffset'
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
   'Print'
- ; // %CLASS_METHODS %Class_Methods
+ ; // %CLASS_METHODS .%Class_Methods.It
  
- %CONSTRUCTORS %Constructors
+ %CONSTRUCTORS .%Constructors.It
   'new'
- ; // %CONSTRUCTORS %Constructors
+ ; // %CONSTRUCTORS .%Constructors.It
  
- %METHODS %Methods
- ; // %METHODS %Methods
+ %METHODS .%Methods.It
+ ; // %METHODS .%Methods.It
  
- %PROPERTIES %Props
+ %PROPERTIES .%Props.It
   'class'
   'ClassName'
   'FieldOffset'
@@ -2086,7 +2086,7 @@ ObjectClass class_impl _:Object
   'ClassParentName'
   'Print'
   'ToPrintable'
- ; // %PROPERTIES %Props
+ ; // %PROPERTIES .%Props.It
  
  ObjectClass STATIC-VAR c:Class:Parent
  FieldOffset STATIC-VAR c:Instance:Size
@@ -2098,34 +2098,34 @@ ObjectClass class_impl _:Object
 ; // ObjectClass class_impl _:Object
 
 PointClass class_impl _:Point
- %CLASS_METHODS %Class_Methods
+ %INHERITS %G
+  @
+  _:Object
+ ; // %INHERITS %G
+ 
+ %CLASS_METHODS .%Class_Methods.It
   'ClassName'
   'FieldOffset'
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
   'Print'
- ; // %CLASS_METHODS %Class_Methods
+ ; // %CLASS_METHODS .%Class_Methods.It
  
- %CONSTRUCTORS %Constructors
+ %CONSTRUCTORS .%Constructors.It
   ':'
   'new'
   '0'
   'XY'
   'OF'
- ; // %CONSTRUCTORS %Constructors
+ ; // %CONSTRUCTORS .%Constructors.It
  
- %INHERITS %G
-  @
-  _:Object
- ; // %INHERITS %G
- 
- %METHODS %Methods
+ %METHODS .%Methods.It
   '+'
   '-'
- ; // %METHODS %Methods
+ ; // %METHODS .%Methods.It
  
- %PROPERTIES %Props
+ %PROPERTIES .%Props.It
   'class'
   'ClassName'
   'FieldOffset'
@@ -2137,7 +2137,7 @@ PointClass class_impl _:Point
   'X'
   'Y'
   'Neg'
- ; // %PROPERTIES %Props
+ ; // %PROPERTIES .%Props.It
  
  ObjectClass STATIC-VAR c:Class:Parent
  FieldOffset STATIC-VAR c:Instance:Size
@@ -2153,29 +2153,29 @@ PointClass class_impl _:Point
 ; // PointClass class_impl _:Point
 
 RectangleClass class_impl _:Rectangle
- %CLASS_METHODS %Class_Methods
+ %INHERITS %G
+  @
+  _:Object
+ ; // %INHERITS %G
+ 
+ %CLASS_METHODS .%Class_Methods.It
   'ClassName'
   'FieldOffset'
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
   'Print'
- ; // %CLASS_METHODS %Class_Methods
+ ; // %CLASS_METHODS .%Class_Methods.It
  
- %CONSTRUCTORS %Constructors
+ %CONSTRUCTORS .%Constructors.It
   ':'
   'new'
- ; // %CONSTRUCTORS %Constructors
+ ; // %CONSTRUCTORS .%Constructors.It
  
- %INHERITS %G
-  @
-  _:Object
- ; // %INHERITS %G
+ %METHODS .%Methods.It
+ ; // %METHODS .%Methods.It
  
- %METHODS %Methods
- ; // %METHODS %Methods
- 
- %PROPERTIES %Props
+ %PROPERTIES .%Props.It
   'class'
   'ClassName'
   'FieldOffset'
@@ -2186,7 +2186,7 @@ RectangleClass class_impl _:Rectangle
   'ToPrintable'
   'TopLeft'
   'BottomRight'
- ; // %PROPERTIES %Props
+ ; // %PROPERTIES .%Props.It
  
  ObjectClass STATIC-VAR c:Class:Parent
  FieldOffset STATIC-VAR c:Instance:Size

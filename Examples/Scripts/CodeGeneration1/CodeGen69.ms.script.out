@@ -4714,12 +4714,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  ;
-ARRAY FUNCTION : %Class_Methods
- TtfwWord OPERATOR :: IN : %S
- Documentation:
-  Методы мета-класса
- ARRAY FUNCTION :: %Class_Methods : Result
-; // %Class_Methods
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CLASS_METHODS
 ARRAY FUNCTION : %ClassRTTIList
  OPERATOR :: IN : %S
@@ -4727,12 +4721,6 @@ ARRAY FUNCTION : %ClassRTTIList
  OPERATOR :: VAR : l_List
  ARRAY FUNCTION :: %ClassRTTIList : Result
 ; // %ClassRTTIList
-ARRAY FUNCTION : %Constructors
- TtfwWord OPERATOR :: IN : %S
- Documentation:
-  Конструкторы класса
- ARRAY FUNCTION :: %Constructors : Result
-; // %Constructors
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CONSTRUCTORS
 ARRAY OPERATOR :: MACRO :: word_func : %G
  Documentation:
@@ -4740,26 +4728,38 @@ ARRAY OPERATOR :: MACRO :: word_func : %G
  ARRAY OPERATOR :: MACRO :: word_func :: .Inherited.Words : Result
  ENGINE_WORD OPERATOR :: IN : Self
 ; // %G
-ARRAY FUNCTION : %Methods
- TtfwWord OPERATOR :: IN : %S
- Documentation:
-  Методы класса
- ARRAY FUNCTION :: %Methods : Result
-; // %Methods
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %METHODS
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %PROPERTIES
-ARRAY FUNCTION : %Props
- TtfwWord OPERATOR :: IN : %S
- Documentation:
-  Свойства класса
- ARRAY FUNCTION :: %Props : Result
-; // %Props
 ARRAY OPERATOR :: MACRO :: word_func : %R
  Documentation:
   Возвращает итератор элементов которые реализует наш элемент
  ARRAY OPERATOR :: MACRO :: word_func :: .Implemented.Words : Result
  ENGINE_WORD OPERATOR :: IN : Self
 ; // %R
+ARRAY FUNCTION : .%Class_Methods.It
+ TtfwWord OPERATOR :: IN : %S
+ Documentation:
+  Методы мета-класса
+ ARRAY FUNCTION :: .%Class_Methods.It : Result
+; // .%Class_Methods.It
+ARRAY FUNCTION : .%Constructors.It
+ TtfwWord OPERATOR :: IN : %S
+ Documentation:
+  Конструкторы класса
+ ARRAY FUNCTION :: .%Constructors.It : Result
+; // .%Constructors.It
+ARRAY FUNCTION : .%Methods.It
+ TtfwWord OPERATOR :: IN : %S
+ Documentation:
+  Методы класса
+ ARRAY FUNCTION :: .%Methods.It : Result
+; // .%Methods.It
+ARRAY FUNCTION : .%Props.It
+ TtfwWord OPERATOR :: IN : %S
+ Documentation:
+  Свойства класса
+ ARRAY FUNCTION :: .%Props.It : Result
+; // .%Props.It
 IMMEDIATE VOID OPERATOR :: MACRO : .class
  ^@ OPERATOR :: IN : Self
 ; // .class
@@ -4820,10 +4820,10 @@ IMMEDIATE VOID OPERATOR :: MACRO : .ToPrintable
  ^@ OPERATOR :: IN : Self
 ; // .ToPrintable
 ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl : _:Object
- OPERATOR :: NamedWordProducer :: %CLASS_METHODS : %Class_Methods
- OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
- OPERATOR :: NamedWordProducer :: %METHODS : %Methods
- OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
+ OPERATOR :: NamedWordProducer :: %CLASS_METHODS : .%Class_Methods.It
+ OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : .%Constructors.It
+ OPERATOR :: NamedWordProducer :: %METHODS : .%Methods.It
+ OPERATOR :: NamedWordProducer :: %PROPERTIES : .%Props.It
  INTEGER CONST : c:Offset:VMT
  ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl :: _:Object : Result
 ; // _:Object
@@ -4873,10 +4873,10 @@ IMMEDIATE VOID OPERATOR :: MACRO : ClassOf
  STRING OPERATOR :: VAR : l_ClassName
 ; // ClassOf
 ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl : ClassOf::Object
- OPERATOR :: NamedWordProducer :: %CLASS_METHODS : %Class_Methods
- OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
- OPERATOR :: NamedWordProducer :: %METHODS : %Methods
- OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
+ OPERATOR :: NamedWordProducer :: %CLASS_METHODS : .%Class_Methods.It
+ OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : .%Constructors.It
+ OPERATOR :: NamedWordProducer :: %METHODS : .%Methods.It
+ OPERATOR :: NamedWordProducer :: %PROPERTIES : .%Props.It
  INTEGER CONST : c:Offset:VMT
  ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl :: _:Object : Result
 ; // ClassOf::Object
@@ -4985,6 +4985,10 @@ PRIVATE STRING OPERATOR : MakeMethodSignaturePrim
  PRIVATE STRING OPERATOR :: MakeMethodSignaturePrim : Result
 ; // MakeMethodSignaturePrim
 PRIVATE VOID OPERATOR : MakeSelfParam
+ARRAY FUNCTION : MapToName
+ ARRAY OPERATOR :: IN : aArray
+ ARRAY FUNCTION :: MapToName : Result
+; // MapToName
 IMMEDIATE VOID OPERATOR :: MACRO : member
  Documentation:
   Определяет член текущего класса
