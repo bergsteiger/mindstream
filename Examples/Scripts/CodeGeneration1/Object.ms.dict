@@ -424,15 +424,15 @@ MACRO class
  axiom:PushSymbol class_impl
  axiom:PushStringAsSymbol l_CurrentClassImpl
 
- [
    if ( g_CurrentClass !== cObjectName ) then
    begin
+ [
     '%INHERITS'
     '@' 
     l_CurrentClassParentName ClassImplName
     ';'
-   end
  ] Ctx:Parser:PushArray
+   end
 
  axiom:PushSymbol @SELF
  axiom:PushSymbol >>>
