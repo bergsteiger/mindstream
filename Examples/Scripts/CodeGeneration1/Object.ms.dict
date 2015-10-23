@@ -432,10 +432,9 @@ MACRO class
     l_CurrentClassParentName ClassImplName
     ';'
    end
-
-  '@SELF'
  ] Ctx:Parser:PushArray
 
+ axiom:PushSymbol @SELF
  axiom:PushSymbol >>>
  axiom:PushStringAsSymbol cResult
  axiom:PushSymbol FieldOffset
