@@ -79,6 +79,8 @@ ARRAY FUNCTION MapToName
 
 CONST cResult 'Result'
 
+CONST cSelf 'Self'
+
 MACRO DefineMetaList
   Literal IN aWordName
   Literal IN aDoc
@@ -227,8 +229,6 @@ STRING FUNCTION ClassRefName
   STRING IN aName
  [ aName ClassRefSuffix ] strings:Cat >>> Result
 ; // ClassRefName
-
-CONST cSelf 'Self'
 
 STRING CompileTime-VAR g_CurrentClassMethod ''
 STRING CompileTime-VAR g_CurrentClassMethodModifiers ''
