@@ -450,8 +450,9 @@ MACRO class
 
  [
   ClassParentName
-  'g_CurrentClassParent'
  ] Ctx:Parser:PushArray
+
+ axiom:PushSymbol g_CurrentClassParent
 
  axiom:PushSymbol ;
 
