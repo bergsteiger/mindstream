@@ -114,9 +114,7 @@ MACRO DefineMetaList
  axiom:PushSymbol ; 
  axiom:PushStringAsSymbol cSelf
  axiom:PushSymbol %ClassRTTIList
- [
-  l_ListName
- ] Ctx:Parser:PushArray
+ axiom:PushStringAsSymbol l_ListName 
  axiom:PushSymbol MapToName
  axiom:PushSymbol >>>
  axiom:PushStringAsSymbol cResult
