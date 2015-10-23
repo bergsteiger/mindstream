@@ -748,7 +748,7 @@ MACRO classExpander
    aArray .map> |N >>> Result
   ; // MapToName
 
-  anItem %Props .map> |N .for> MakeAliasAndAdd g_CurrentClassProperties PushMethodSignatureAlias
+  anItem %Props MapToName .for> MakeAliasAndAdd g_CurrentClassProperties PushMethodSignatureAlias
 
   anItem %Methods .map> |N .for> MakeAliasAndAdd g_CurrentClassMethods PushMethodSignatureAlias 
 
