@@ -85,7 +85,7 @@ MACRO DefineMetaList
  [ cMetaListPrefix l_WordName ] strings:Cat >>> l_WordName
 
  STRING VAR l_ListName
- [ cMetaListPrefix aListName |N ] strings:Cat >>> l_ListName
+ [ '.' cMetaListPrefix aListName |N ] strings:Cat >>> l_ListName
 
  l_WordName array:AddTo g_MetaListPoducerNames
  aListForValues array:AddTo g_MetaListPoducerNames
@@ -663,13 +663,13 @@ PROCEDURE CopyConstructors
    g_CurrentClassImpl %G .for> (
     ObjectClass IN anItem
 
-    anItem %Constructors .map> |N .for> ( 
+    anItem .%Constructors .map> |N .for> ( 
      STRING IN aProp
      if ( aProp = cDefConstructorName ) then
      begin
       def_constructor_empty_do
      end
-    ) // anItem %Constructors .for>
+    ) // anItem .%Constructors .for>
 
    ) // anImpl %G .for>
   end // ( g_CurrentClass !== cObjectName ) 
@@ -755,11 +755,11 @@ MACRO classExpander
    aArray MapToName .for> MakeAliasAndAdd ( anRArray DO ) ( aLambda DO )
   ; // .for.MakeAliasAndAdd>
 
-  anItem %Props .for.MakeAliasAndAdd> g_CurrentClassProperties PushMethodSignatureAlias
+  anItem .%Props .for.MakeAliasAndAdd> g_CurrentClassProperties PushMethodSignatureAlias
 
-  anItem %Methods .for.MakeAliasAndAdd> g_CurrentClassMethods PushMethodSignatureAlias 
+  anItem .%Methods .for.MakeAliasAndAdd> g_CurrentClassMethods PushMethodSignatureAlias 
 
-  anItem %Class_Methods .for.MakeAliasAndAdd> g_CurrentMetaClassMethods ( 
+  anItem .%Class_Methods .for.MakeAliasAndAdd> g_CurrentMetaClassMethods ( 
    STRING IN aProp
    g_CurrentClass ClassRefName aProp PushMethodSignature
    anItem .ClassName ClassRefName aProp PushMethodSignature
