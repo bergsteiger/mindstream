@@ -103,7 +103,6 @@ MACRO DefineMetaList
  axiom:PushSymbol CompileTime-VAR
  axiom:PushStringAsSymbol l_ListForValues
  axiom:PushSymbol []
- l_ListForValues Msg
 
  aListForValues array:AddTo g_MetaListPoducerNames
 
