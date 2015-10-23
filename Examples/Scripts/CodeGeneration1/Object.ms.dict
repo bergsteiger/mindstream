@@ -74,7 +74,6 @@ CONST cMetaListPrefix '%'
 
 MACRO DefineMetaList
   Literal IN aWordName
-  Literal IN aListName
   Literal IN aDoc
   ^ IN aListForValues
 
@@ -115,10 +114,10 @@ ARRAY CompileTime-VAR g_CurrentClassMethods []
 ARRAY CompileTime-VAR g_CurrentMetaClassMethods []
 ARRAY CompileTime-VAR g_CurrentClassConstructors []
 
-DefineMetaList Properties Props 'Свойства класса' g_CurrentClassProperties
-DefineMetaList Methods Methods 'Методы класса' g_CurrentClassMethods
-DefineMetaList Class_Methods Class_Methods 'Методы мета-класса' g_CurrentMetaClassMethods
-DefineMetaList Constructors Constructors 'Конструкторы класса' g_CurrentClassConstructors
+DefineMetaList Properties 'Свойства класса' g_CurrentClassProperties
+DefineMetaList Methods 'Методы класса' g_CurrentClassMethods
+DefineMetaList Class_Methods 'Методы мета-класса' g_CurrentMetaClassMethods
+DefineMetaList Constructors 'Конструкторы класса' g_CurrentClassConstructors
 
 : CompileSetWordProducerForCompiledClass
   TtfwWord IN aWord
