@@ -748,6 +748,12 @@ MACRO classExpander
    aArray .map> |N >>> Result
   ; // MapToName
 
+  PROCEDURE .for.MakeAliasAndAdd
+   ARRAY IN aArray
+   ^ IN aLambda
+   aArray MapToName ( aLambda DO )
+  ; // .for.MakeAliasAndAdd
+
   anItem %Props MapToName .for> MakeAliasAndAdd g_CurrentClassProperties PushMethodSignatureAlias
 
   anItem %Methods MapToName .for> MakeAliasAndAdd g_CurrentClassMethods PushMethodSignatureAlias 
