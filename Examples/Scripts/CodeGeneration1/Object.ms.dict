@@ -742,7 +742,7 @@ PROCEDURE FinishClassDefinition
 ; // FinishClassDefinition
 
 MACRO class-end
- DefineInstanceSize
+ //DefineInstanceSize
 
  axiom:PushImmediateSymbol CopyConstructors
 
