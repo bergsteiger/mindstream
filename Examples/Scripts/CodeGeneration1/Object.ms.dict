@@ -81,7 +81,8 @@ MACRO DefineMetaList
  %SUMMARY 'Определяет список мета-информации к элементу. И итератор к нему' ;
 
  STRING VAR l_WordName
- [ cMetaListPrefix aWordName |N ] strings:Cat >>> l_WordName
+ aWordName |N >>> l_WordName
+ [ cMetaListPrefix l_WordName ] strings:Cat >>> l_WordName
 
  STRING VAR l_ListName
  [ cMetaListPrefix aListName |N ] strings:Cat >>> l_ListName
