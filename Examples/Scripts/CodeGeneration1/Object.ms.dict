@@ -96,6 +96,11 @@ MACRO DefineMetaList
  [ '.' l_WordName '.It' ] strings:Cat >>> l_ListName
 
  l_WordName array:AddTo g_MetaListPoducerNames
+
+ STRING VAR l_ListForValues
+ [ 'g_' l_WordName ] strings:Cat >>> l_ListForValues
+ l_ListForValues Msg
+
  aListForValues array:AddTo g_MetaListPoducerNames
 
  axiom:PushSymbol NamedWordProducer
