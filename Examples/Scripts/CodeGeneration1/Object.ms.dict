@@ -72,6 +72,11 @@ ARRAY FUNCTION MetaListPoducerIt
 
 CONST cMetaListPrefix '%'
 
+ARRAY FUNCTION MapToName
+ ARRAY IN aArray
+ aArray .map> |N >>> Result
+; // MapToName
+
 MACRO DefineMetaList
   Literal IN aWordName
   Literal IN aDoc
@@ -658,11 +663,6 @@ PROCEDURE def_constructor_empty_do
 MACRO def_constructor_empty
  def_constructor_empty_do
 ; // def_constructor_empty
-
-ARRAY FUNCTION MapToName
- ARRAY IN aArray
- aArray .map> |N >>> Result
-; // MapToName
 
 PROCEDURE CopyConstructors
  DefineInstanceSize
