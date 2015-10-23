@@ -448,9 +448,7 @@ MACRO class
  axiom:PushSymbol ObjectClass
  axiom:PushSymbol CompileTime-VAR
 
- [
-  ClassParentName
- ] Ctx:Parser:PushArray
+ axiom:PushStringAsSymbol ClassParentName
 
  axiom:PushSymbol g_CurrentClassParent
 
