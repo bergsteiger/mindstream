@@ -434,11 +434,10 @@ MACRO class
    end
 
   '@SELF'
-  '>>>'
-  'Result'
-
  ] Ctx:Parser:PushArray
 
+ axiom:PushSymbol >>>
+ axiom:PushStringAsSymbol cResult
  axiom:PushSymbol FieldOffset
  axiom:PushSymbol CompileTime-VAR
 
