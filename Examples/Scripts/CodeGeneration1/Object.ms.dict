@@ -743,6 +743,11 @@ MACRO classExpander
    anItem .ClassName aProp PushMethodSignature
   ; // PushMethodSignatureAlias
 
+  ARRAY FUNCTION MapToName
+   ARRAY IN aArray
+   aArray .map> |N >>> Result
+  ; // MapToName
+
   anItem %Props .map> |N .for> MakeAliasAndAdd g_CurrentClassProperties PushMethodSignatureAlias
 
   anItem %Methods .map> |N .for> MakeAliasAndAdd g_CurrentClassMethods PushMethodSignatureAlias 
