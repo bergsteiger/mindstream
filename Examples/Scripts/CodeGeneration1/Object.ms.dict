@@ -427,8 +427,8 @@ MACRO class
  if ( g_CurrentClass !== cObjectName ) then
  begin
   axiom:PushSymbol %INHERITS
+  axiom:PushSymbol @
   [
-    '@' 
     l_CurrentClassParentName ClassImplName
   ] Ctx:Parser:PushArray
   axiom:PushSymbol ;
