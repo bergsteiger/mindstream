@@ -111,8 +111,8 @@ MACRO DefineMetaList
   l_ListName
   'MapToName'
   '>>> Result'
-  ';'
  ] Ctx:Parser:PushArray
+ axiom:PushSymbol ; 
 ; // DefineMetaList
 
 ARRAY CompileTime-VAR g_CurrentClassProperties []
