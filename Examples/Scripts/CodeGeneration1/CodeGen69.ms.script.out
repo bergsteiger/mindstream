@@ -4714,22 +4714,22 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  ;
-IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CLASS_METHODS
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %Class_Methods
 ARRAY FUNCTION : %ClassRTTIList
  OPERATOR :: IN : %S
  ^L OPERATOR :: IN : aName
  OPERATOR :: VAR : l_List
  ARRAY FUNCTION :: %ClassRTTIList : Result
 ; // %ClassRTTIList
-IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CONSTRUCTORS
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %Constructors
 ARRAY OPERATOR :: MACRO :: word_func : %G
  Documentation:
   Возвращает итератор элементов от которого наследуется наш элемент
  ARRAY OPERATOR :: MACRO :: word_func :: .Inherited.Words : Result
  ENGINE_WORD OPERATOR :: IN : Self
 ; // %G
-IMMEDIATE VOID OPERATOR :: NamedWordProducer : %METHODS
-IMMEDIATE VOID OPERATOR :: NamedWordProducer : %PROPERTIES
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %Methods
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %Properties
 ARRAY OPERATOR :: MACRO :: word_func : %R
  Documentation:
   Возвращает итератор элементов которые реализует наш элемент
@@ -4754,12 +4754,12 @@ ARRAY FUNCTION : .%Methods.It
   Методы класса
  ARRAY FUNCTION :: .%Methods.It : Result
 ; // .%Methods.It
-ARRAY FUNCTION : .%Props.It
+ARRAY FUNCTION : .%Properties.It
  TtfwWord OPERATOR :: IN : %S
  Documentation:
   Свойства класса
- ARRAY FUNCTION :: .%Props.It : Result
-; // .%Props.It
+ ARRAY FUNCTION :: .%Properties.It : Result
+; // .%Properties.It
 IMMEDIATE VOID OPERATOR :: MACRO : .class
  ^@ OPERATOR :: IN : Self
 ; // .class
@@ -4820,10 +4820,10 @@ IMMEDIATE VOID OPERATOR :: MACRO : .ToPrintable
  ^@ OPERATOR :: IN : Self
 ; // .ToPrintable
 ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl : _:Object
- OPERATOR :: NamedWordProducer :: %CLASS_METHODS : .%Class_Methods.It
- OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : .%Constructors.It
- OPERATOR :: NamedWordProducer :: %METHODS : .%Methods.It
- OPERATOR :: NamedWordProducer :: %PROPERTIES : .%Props.It
+ OPERATOR :: NamedWordProducer :: %Class_Methods : .%Class_Methods.It
+ OPERATOR :: NamedWordProducer :: %Constructors : .%Constructors.It
+ OPERATOR :: NamedWordProducer :: %Methods : .%Methods.It
+ OPERATOR :: NamedWordProducer :: %Properties : .%Properties.It
  INTEGER CONST : c:Offset:VMT
  ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl :: _:Object : Result
 ; // _:Object
@@ -4873,10 +4873,10 @@ IMMEDIATE VOID OPERATOR :: MACRO : ClassOf
  STRING OPERATOR :: VAR : l_ClassName
 ; // ClassOf
 ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl : ClassOf::Object
- OPERATOR :: NamedWordProducer :: %CLASS_METHODS : .%Class_Methods.It
- OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : .%Constructors.It
- OPERATOR :: NamedWordProducer :: %METHODS : .%Methods.It
- OPERATOR :: NamedWordProducer :: %PROPERTIES : .%Props.It
+ OPERATOR :: NamedWordProducer :: %Class_Methods : .%Class_Methods.It
+ OPERATOR :: NamedWordProducer :: %Constructors : .%Constructors.It
+ OPERATOR :: NamedWordProducer :: %Methods : .%Methods.It
+ OPERATOR :: NamedWordProducer :: %Properties : .%Properties.It
  INTEGER CONST : c:Offset:VMT
  ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl :: _:Object : Result
 ; // ClassOf::Object
