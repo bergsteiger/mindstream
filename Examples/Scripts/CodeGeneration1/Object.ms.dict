@@ -759,7 +759,7 @@ MACRO classExpander
 
   anItem %Methods .for.MakeAliasAndAdd> g_CurrentClassMethods PushMethodSignatureAlias 
 
-  anItem %Class_Methods MapToName .for> MakeAliasAndAdd g_CurrentMetaClassMethods ( 
+  anItem %Class_Methods .for.MakeAliasAndAdd> g_CurrentMetaClassMethods ( 
    STRING IN aProp
    g_CurrentClass ClassRefName aProp PushMethodSignature
    anItem .ClassName ClassRefName aProp PushMethodSignature
