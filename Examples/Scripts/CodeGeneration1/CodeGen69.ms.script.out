@@ -4895,6 +4895,7 @@ STRING CONST : ClassRefSuffix
 VOID OPERATOR :: PROCEDURE : ClearClassInfo
 VOID OPERATOR :: PROCEDURE : ClearMetaLists
 INTEGER CONST : cMetaListPoducerNamesElementSize
+STRING CONST : cMetaListPrefix
 STRING CONST : cMetaPrefix
 STRING CONST : cObjectName
 : : CompileSetWordProducerForCompiledClass
@@ -4929,6 +4930,7 @@ IMMEDIATE VOID OPERATOR :: MACRO : DefineMetaList
  ^ OPERATOR :: IN : aListForValues
  ^L OPERATOR :: IN : aListName
  ^L OPERATOR :: IN : aWordName
+ STRING OPERATOR :: VAR : l_WordName
 ; // DefineMetaList
 PRIVATE OPERATOR : do_get_member
  Documentation:
