@@ -68,7 +68,9 @@ CONST cMetaListPoducerNamesElementSize 2
 
 ARRAY FUNCTION MetaListPoducerIt
  g_MetaListPoducerNames .slice> cMetaListPoducerNamesElementSize >>> Result
-; // MetaListPoducerIt 
+; // MetaListPoducerIt
+
+CONST cMetaListPrefix '%'
 
 MACRO DefineMetaList
   Literal IN aWordName
@@ -79,7 +81,7 @@ MACRO DefineMetaList
  %SUMMARY 'Определяет список мета-информации к элементу. И итератор к нему' ;
 
  STRING VAR l_WordName
- aWordName |N >>> l_WordName
+ [ cMetaListPrefix aWordName |N ] strings:Cat >>> l_WordName
 
  l_WordName array:AddTo g_MetaListPoducerNames
  aListForValues array:AddTo g_MetaListPoducerNames
@@ -109,10 +111,10 @@ ARRAY CompileTime-VAR g_CurrentClassMethods []
 ARRAY CompileTime-VAR g_CurrentMetaClassMethods []
 ARRAY CompileTime-VAR g_CurrentClassConstructors []
 
-DefineMetaList %PROPERTIES %Props 'Свойства класса' g_CurrentClassProperties
-DefineMetaList %METHODS %Methods 'Методы класса' g_CurrentClassMethods
-DefineMetaList %CLASS_METHODS %Class_Methods 'Методы мета-класса' g_CurrentMetaClassMethods
-DefineMetaList %CONSTRUCTORS %Constructors 'Конструкторы класса' g_CurrentClassConstructors
+DefineMetaList PROPERTIES %Props 'Свойства класса' g_CurrentClassProperties
+DefineMetaList METHODS %Methods 'Методы класса' g_CurrentClassMethods
+DefineMetaList CLASS_METHODS %Class_Methods 'Методы мета-класса' g_CurrentMetaClassMethods
+DefineMetaList CONSTRUCTORS %Constructors 'Конструкторы класса' g_CurrentClassConstructors
 
 : CompileSetWordProducerForCompiledClass
   TtfwWord IN aWord
