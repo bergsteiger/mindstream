@@ -621,7 +621,7 @@ STACK_CHANGING_MACRO constructor
 ; // constructor
 
 PROCEDURE def_constructor_do
- axiom:PushStringAsSymbol 'constructor'
+ axiom:PushSymbol constructor
  axiom:PushStringAsSymbol cDefConstructorName
  axiom:PushSymbol ()
 ; // def_constructor_do
