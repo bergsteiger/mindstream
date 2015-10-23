@@ -4737,28 +4737,28 @@ ARRAY OPERATOR :: MACRO :: word_func : %R
  ENGINE_WORD OPERATOR :: IN : Self
 ; // %R
 ARRAY FUNCTION : .%Class_Methods.It
- TtfwWord OPERATOR :: IN : %S
  Documentation:
   Методы мета-класса
  ARRAY FUNCTION :: .%Class_Methods.It : Result
+ TtfwWord OPERATOR :: IN : Self
 ; // .%Class_Methods.It
 ARRAY FUNCTION : .%Constructors.It
- TtfwWord OPERATOR :: IN : %S
  Documentation:
   Конструкторы класса
  ARRAY FUNCTION :: .%Constructors.It : Result
+ TtfwWord OPERATOR :: IN : Self
 ; // .%Constructors.It
 ARRAY FUNCTION : .%Methods.It
- TtfwWord OPERATOR :: IN : %S
  Documentation:
   Методы класса
  ARRAY FUNCTION :: .%Methods.It : Result
+ TtfwWord OPERATOR :: IN : Self
 ; // .%Methods.It
 ARRAY FUNCTION : .%Properties.It
- TtfwWord OPERATOR :: IN : %S
  Documentation:
   Свойства класса
  ARRAY FUNCTION :: .%Properties.It : Result
+ TtfwWord OPERATOR :: IN : Self
 ; // .%Properties.It
 IMMEDIATE VOID OPERATOR :: MACRO : .class
  ^@ OPERATOR :: IN : Self
