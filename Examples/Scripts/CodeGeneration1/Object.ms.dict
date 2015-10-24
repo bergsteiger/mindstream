@@ -84,7 +84,6 @@ CONST cSelf 'Self'
 MACRO DefineMetaList
   Literal IN aWordName
   Literal IN aDoc
-  ^ IN aListForValues
 
  %SUMMARY 'Определяет список мета-информации к элементу. И итератор к нему' ;
 
@@ -111,14 +110,6 @@ MACRO DefineMetaList
  axiom:PushSymbol array:AddTo 
  axiom:PushSymbol g_MetaListPoducerNames
  axiom:PushSymbol )
-
-/*{ axiom:PushSymbol [EXECUTE]
- axiom:PushSymbol (
- axiom:PushSymbol @
- aListForValues |N Ctx:Parser:PushSymbol
- axiom:PushSymbol array:AddTo 
- axiom:PushSymbol g_MetaListPoducerNames
- axiom:PushSymbol )}*/
 
  axiom:PushSymbol NamedWordProducer
  [ 
@@ -156,10 +147,10 @@ ARRAY CompileTime-VAR g_CurrentClassConstructors []
    aProp aLambda DO
   ; // MakeAlias
 
-DefineMetaList Properties 'Свойства класса' g_CurrentClassProperties
-DefineMetaList Methods 'Методы класса' g_CurrentClassMethods
-DefineMetaList MetaMethods 'Методы мета-класса' g_CurrentClassMetaMethods
-DefineMetaList Constructors 'Конструкторы класса' g_CurrentClassConstructors
+DefineMetaList Properties 'Свойства класса'
+DefineMetaList Methods 'Методы класса'
+DefineMetaList MetaMethods 'Методы мета-класса'
+DefineMetaList Constructors 'Конструкторы класса'
 
 : CompileSetWordProducerForCompiledClass
   TtfwWord IN aWord
