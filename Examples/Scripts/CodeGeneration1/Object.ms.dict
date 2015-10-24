@@ -111,8 +111,13 @@ MACRO DefineMetaList
  axiom:PushSymbol []
  axiom:PushSymbol )
 
+ axiom:PushSymbol [EXECUTE]
  axiom:PushSymbol (
- aListForValues array:AddTo g_MetaListPoducerNames
+ aListForValues |N Msg
+ axiom:PushSymbol @
+ aListForValues |N Ctx:Parser:PushSymbol
+ axiom:PushSymbol array:AddTo 
+ axiom:PushSymbol g_MetaListPoducerNames
  axiom:PushSymbol )
 
  axiom:PushSymbol NamedWordProducer
