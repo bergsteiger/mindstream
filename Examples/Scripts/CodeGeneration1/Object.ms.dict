@@ -98,7 +98,7 @@ MACRO DefineMetaList
  l_WordName array:AddTo g_MetaListPoducerNames
 
  STRING VAR l_ListForValues
- [ 'g_CurrentClass' l_WordName ] strings:Cat >>> l_ListForValues
+ [ 'g_' l_WordName ] strings:Cat >>> l_ListForValues
  axiom:PushSymbol ARRAY
  axiom:PushSymbol CompileTime-VAR
  axiom:PushStringAsSymbol l_ListForValues
@@ -288,7 +288,7 @@ MACRO method
 
  @SELF NameOf right aParams axiom:Params:PushWithOtherStereo
 
- l_Name array:?AddTo g_CurrentClass%Methods
+ l_Name array:?AddTo g_%Methods
 ; // method
 
 MACRO readonly
@@ -303,7 +303,7 @@ MACRO readonly
 
  l_Name MakeMethodSignature
  MakeSelfParam
- l_Name array:?AddTo g_CurrentClass%Properties
+ l_Name array:?AddTo g_%Properties
 ; // readonly
 
 STACK_CHANGING_MACRO class_method
@@ -345,7 +345,7 @@ STACK_CHANGING_MACRO class_method
  axiom:PushSymbol in
  axiom:PushStringAsSymbol cSelf
 
- l_Name array:?AddTo g_CurrentClass%MetaMethods
+ l_Name array:?AddTo g_%MetaMethods
 ; // class_method
 
 CONST cObjectName 'Object'
@@ -660,7 +660,7 @@ STACK_CHANGING_MACRO constructor
  axiom:PushStringAsSymbol cSelf
  axiom:PushStringAsSymbol cResult
 
- l_Name array:?AddTo g_CurrentClass%Constructors
+ l_Name array:?AddTo g_%Constructors
 ; // constructor
 
 PROCEDURE def_constructor_do
@@ -776,11 +776,11 @@ MACRO classExpander
    aArray .for> MakeAliasAndAdd ( anRArray DO ) ( aLambda DO )
   ; // .for.MakeAliasAndAdd>
 
-  anItem .%Properties.It .for.MakeAliasAndAdd> g_CurrentClass%Properties PushMethodSignatureAlias
+  anItem .%Properties.It .for.MakeAliasAndAdd> g_%Properties PushMethodSignatureAlias
 
-  anItem .%Methods.It .for.MakeAliasAndAdd> g_CurrentClass%Methods PushMethodSignatureAlias 
+  anItem .%Methods.It .for.MakeAliasAndAdd> g_%Methods PushMethodSignatureAlias 
 
-  anItem .%MetaMethods.It .for.MakeAliasAndAdd> g_CurrentClass%MetaMethods ( 
+  anItem .%MetaMethods.It .for.MakeAliasAndAdd> g_%MetaMethods ( 
    STRING IN aProp
    g_CurrentClass ClassRefName aProp PushMethodSignature
    anItem .ClassName ClassRefName aProp PushMethodSignature
