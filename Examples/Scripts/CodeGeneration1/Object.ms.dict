@@ -109,16 +109,16 @@ MACRO DefineMetaList
  axiom:PushSymbol @
  axiom:PushStringAsSymbol l_ListForValues
  axiom:PushSymbol array:AddTo 
- axiom:PushSymbol []
+ axiom:PushSymbol g_MetaListPoducerNames
  axiom:PushSymbol )
 
- axiom:PushSymbol [EXECUTE]
+/*{ axiom:PushSymbol [EXECUTE]
  axiom:PushSymbol (
  axiom:PushSymbol @
  aListForValues |N Ctx:Parser:PushSymbol
  axiom:PushSymbol array:AddTo 
  axiom:PushSymbol g_MetaListPoducerNames
- axiom:PushSymbol )
+ axiom:PushSymbol )}*/
 
  axiom:PushSymbol NamedWordProducer
  [ 
@@ -288,7 +288,7 @@ MACRO method
 
  @SELF NameOf right aParams axiom:Params:PushWithOtherStereo
 
- l_Name array:?AddTo g_CurrentClassMethods
+ l_Name array:?AddTo g_CurrentClass%Methods
 ; // method
 
 MACRO readonly
@@ -303,7 +303,7 @@ MACRO readonly
 
  l_Name MakeMethodSignature
  MakeSelfParam
- l_Name array:?AddTo g_CurrentClassProperties
+ l_Name array:?AddTo g_CurrentClass%Properties
 ; // readonly
 
 STACK_CHANGING_MACRO class_method
@@ -345,7 +345,7 @@ STACK_CHANGING_MACRO class_method
  axiom:PushSymbol in
  axiom:PushStringAsSymbol cSelf
 
- l_Name array:?AddTo g_CurrentClassMetaMethods
+ l_Name array:?AddTo g_CurrentClass%MetaMethods
 ; // class_method
 
 CONST cObjectName 'Object'
@@ -660,7 +660,7 @@ STACK_CHANGING_MACRO constructor
  axiom:PushStringAsSymbol cSelf
  axiom:PushStringAsSymbol cResult
 
- l_Name array:?AddTo g_CurrentClassConstructors
+ l_Name array:?AddTo g_CurrentClass%Constructors
 ; // constructor
 
 PROCEDURE def_constructor_do
@@ -776,11 +776,11 @@ MACRO classExpander
    aArray .for> MakeAliasAndAdd ( anRArray DO ) ( aLambda DO )
   ; // .for.MakeAliasAndAdd>
 
-  anItem .%Properties.It .for.MakeAliasAndAdd> g_CurrentClassProperties PushMethodSignatureAlias
+  anItem .%Properties.It .for.MakeAliasAndAdd> g_CurrentClass%Properties PushMethodSignatureAlias
 
-  anItem .%Methods.It .for.MakeAliasAndAdd> g_CurrentClassMethods PushMethodSignatureAlias 
+  anItem .%Methods.It .for.MakeAliasAndAdd> g_CurrentClass%Methods PushMethodSignatureAlias 
 
-  anItem .%MetaMethods.It .for.MakeAliasAndAdd> g_CurrentClassMetaMethods ( 
+  anItem .%MetaMethods.It .for.MakeAliasAndAdd> g_CurrentClass%MetaMethods ( 
    STRING IN aProp
    g_CurrentClass ClassRefName aProp PushMethodSignature
    anItem .ClassName ClassRefName aProp PushMethodSignature
