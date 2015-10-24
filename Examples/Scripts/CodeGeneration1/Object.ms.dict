@@ -106,6 +106,7 @@ MACRO DefineMetaList
 
  axiom:PushSymbol [EXECUTE]
  axiom:PushSymbol (
+ axiom:PushSymbol @
  axiom:PushStringAsSymbol l_ListForValues
  axiom:PushSymbol array:AddTo 
  axiom:PushSymbol []
