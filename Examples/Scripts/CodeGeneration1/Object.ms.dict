@@ -116,6 +116,7 @@ MACRO DefineMetaList
   l_WordName
   l_ListName 
  ] Ctx:Parser:PushArray
+
  axiom:PushSymbol ARRAY
  axiom:PushSymbol FUNCTION
  axiom:PushStringAsSymbol l_ListName
