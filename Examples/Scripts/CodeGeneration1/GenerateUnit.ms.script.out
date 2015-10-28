@@ -13,12 +13,16 @@ VOID TestWithDump GenerateUnitTest
    GenerateClass
   )
   NOP
+  g_OutedClasses
+  Print
   'Unit2'
   GenerateUnit
   NOP
   STRING (
    'test'
   )
+  g_OutedClasses
+  Print
   'Unit3'
   GenerateUnit
   NOP
@@ -33,7 +37,9 @@ VOID TestWithDump GenerateUnitTest
 ; // VOID TestWithDump GenerateUnitTest
 
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\GenerateUnit\Unit1.pas
+[ test test ]
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\GenerateUnit\Unit2.pas
+[ test test ]
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\GenerateUnit\Unit3.pas
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\GenerateUnit\Unit4.pas
 [ Unit1 Unit2 Unit3 Unit4 ]
