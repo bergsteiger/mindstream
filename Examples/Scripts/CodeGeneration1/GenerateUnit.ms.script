@@ -157,7 +157,13 @@ PROCEDURE GenerateUnit
 
  aClassName array:AddTo g_OutedClasses
  aClassName IsNil ?FAIL 'Имя класса не может быть пустым'
- 'type'
+
+ if ( g_WasType ! ) then
+ begin
+  true >>> g_WasType
+  'type'
+ end
+
  aClassName
  [ 'end; // ' aClassName ]
 ; // GenerateClass
