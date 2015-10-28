@@ -93,8 +93,21 @@ USES
  SaveVarAndDo.ms.dict
 ;
 
+: ExpandLambda
+   FUNCTOR IN aLambda
+
+  ARRAY VAR l_LambdaCode
+  [ aLambda DO ] &gt;&gt;&gt; l_LambdaCode
+  if ( l_LambdaCode Array:Count &lt;&gt; 0 ) then
+  begin
+   l_LambdaCode
+   ''
+  end
+; // ExpandLambda
+
 PROCEDURE GenerateUnit
   STRING IN aUnitName
+  ^ IN anInterfaceLambda
 
  aUnitName IsNil ?FAIL 'Имя модуля не может быть пустым'
  
@@ -110,14 +123,22 @@ PROCEDURE GenerateUnit
  TF g_OutFile (
   [
    [ 'unit' ' ' aUnitName ';' ]
+   ''
+   'interface'
+   ''
+
+   anInterfaceLambda ExpandLambda
+
+   'implementation'
+   ''
    'end.'
   ] array:OutToFileLn
  ) // TF g_OutFile
 ; // GenerateUnit 
 
 Test&Dump GenerateUnitTest
- 'Unit1' GenerateUnit
- 'Unit2' GenerateUnit
+ 'Unit1' GenerateUnit ( 'test' )
+ 'Unit2' GenerateUnit ()
 ; // GenerateUnitTest
 
 GenerateUnitTest
