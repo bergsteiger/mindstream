@@ -4,6 +4,22 @@ USES
  Testing.ms.dict
 ;
 
+CONST cPathSep '\'
+
+STRING FUNCTION OutDir
+ sysutils:GetCurrentDir >>> Result
+ [ Result
+  script:FileName 
+  %REMARK 'Путь к текущему скрипту'
+  sysutils:ExtractFileName
+  %REMARK 'Вырезаем из пути только имя файла' 
+  '' sysutils:ChangeFileExt
+  %REMARK 'Убираем .script' 
+  '' sysutils:ChangeFileExt 
+  %REMARK 'Убираем .ms' 
+ ] cPathSep strings:CatSep >>> Result
+; // OutDir
+
 Test&Dump GenerateUnit
 ; // GenerateUnit
 
