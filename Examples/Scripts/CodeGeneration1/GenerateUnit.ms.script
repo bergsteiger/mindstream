@@ -53,7 +53,7 @@ PROCEDURE OutToFileLn
   ( aValue strings:Cat >>> l_String )
  else
   ( aValue ToPrintable >>> l_String )
- [ g_Indent cIndentChar char:Dupe l_String ] strings:Cat g_OutFile File:WriteLn
+ [ g_Indent cIndentChar char:Dupe l_String ] strings:Cat g_OutFile File:WriteStr
  %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; // OutToFileLn
 
