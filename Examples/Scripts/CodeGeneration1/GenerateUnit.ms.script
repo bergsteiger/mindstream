@@ -160,7 +160,7 @@ USES
 Test&Dump GenerateUnitTest
  TF g_OutedUnits (
   'Unit1' GenerateUnit ( 
-   'test' GenerateClass 
+   'TTest1' GenerateClass 
    'test' GenerateClass
   ) ()
   g_OutedClasses Print
