@@ -102,8 +102,10 @@ PROCEDURE GenerateUnit
 
  l_UnitPath File:OpenWrite >>> g_OutFile
  TF g_OutFile (
-  [ 'unit' ' ' aUnitName ';' ] strings:Cat OutToFileLn
-  'end.' OutToFileLn
+  [
+   [ 'unit' ' ' aUnitName ';' ] strings:Cat
+   'end.'
+  ] array:OutToFileLn
  ) // TF g_OutFile
 ; // GenerateUnit 
 
