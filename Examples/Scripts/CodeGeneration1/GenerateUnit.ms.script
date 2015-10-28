@@ -138,6 +138,11 @@ PROCEDURE GenerateUnit
  ) // TF g_OutFile
 ; // GenerateUnit 
 
+: GenerateClass
+  STRING IN aClassName
+ aClassName IsNil ?FAIL 'Имя класса не может быть пустым'
+; // GenerateClass
+
 USES
  Testing.ms.dict
 ;
