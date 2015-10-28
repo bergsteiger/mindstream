@@ -1,9 +1,5 @@
 PROGRAM GenerateUnit.ms.script
 
-USES
- Testing.ms.dict
-;
-
 CONST cPathSep '\'
 
 STRING FUNCTION OutDir
@@ -141,6 +137,10 @@ PROCEDURE GenerateUnit
   ] array:OutToFileLn
  ) // TF g_OutFile
 ; // GenerateUnit 
+
+USES
+ Testing.ms.dict
+;
 
 Test&Dump GenerateUnitTest
  TF g_OutedUnits (
