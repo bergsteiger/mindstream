@@ -20,6 +20,11 @@ STRING FUNCTION OutDir
  ] cPathSep strings:CatSep >>> Result
 ; // OutDir
 
+STRING FUNCTION MakeOutPath
+ OutDir >>> Result
+ Result sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' Result ]
+; // MakeOutPath
+
 Test&Dump GenerateUnit
  OutDir Print
 ; // GenerateUnit
