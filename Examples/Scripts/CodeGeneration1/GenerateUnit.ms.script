@@ -152,6 +152,7 @@ Test&Dump GenerateUnitTest
  TF g_OutedUnits (
   'Unit1' GenerateUnit ( 
    'test' GenerateClass 
+   'test' GenerateClass
   ) ()
   'Unit2' GenerateUnit () ( 'test' )
   'Unit3' GenerateUnit () ()
