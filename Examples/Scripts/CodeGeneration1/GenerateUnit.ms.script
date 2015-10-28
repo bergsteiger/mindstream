@@ -159,6 +159,7 @@ PROCEDURE GenerateUnit
 
  aClassName array:AddTo g_OutedClasses
  aClassName IsNil ?FAIL 'Имя класса не может быть пустым'
+ 'type'
  aClassName
  'end;'
  \n
