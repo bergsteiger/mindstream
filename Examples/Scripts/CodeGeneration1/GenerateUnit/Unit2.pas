@@ -1,2 +1,2 @@
-unit Unit2;
+unit Unit2test;
 end.
