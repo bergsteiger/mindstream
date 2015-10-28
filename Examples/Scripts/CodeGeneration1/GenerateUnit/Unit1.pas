@@ -6,7 +6,7 @@ TTest1
 end;
 
 
-test
+TTest2
 end;
 
 
