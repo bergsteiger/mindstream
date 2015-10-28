@@ -130,6 +130,7 @@ PROCEDURE GenerateUnit
    anInterfaceLambda ExpandLambda
    'implementation'
    ''
+   anImplementationLambda ExpandLambda
    'end.'
   ] array:OutToFileLn
  ) // TF g_OutFile
