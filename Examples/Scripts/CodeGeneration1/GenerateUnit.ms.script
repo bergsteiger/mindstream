@@ -45,7 +45,7 @@ STRING FUNCTION ValueToString
   OUTABLE IN aValue
 
  if ( aValue IsArray ) then
-  ( aValue strings:Cat >>> Result )
+  ( [ aValue .for> ValueToString ] strings:Cat >>> Result )
  else
   ( aValue ToPrintable >>> Result )
 ; // ValueToString
