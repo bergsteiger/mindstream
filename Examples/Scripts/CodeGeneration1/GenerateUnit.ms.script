@@ -123,20 +123,22 @@ PROCEDURE GenerateUnit
  [ l_UnitPath cPathSep l_UnitFileName ] strings:Cat >>> l_UnitPath
  l_UnitPath Print
 
- l_UnitPath File:OpenWrite >>> g_OutFile
- TF g_OutFile (
-  [
-   [ 'unit' ' ' aUnitName ';' ]
-   ''
-   'interface'
-   ''
-   anInterfaceLambda ExpandLambda
-   'implementation'
-   ''
-   anImplementationLambda ExpandLambda
-   'end.'
-  ] array:OutToFileLn
- ) // TF g_OutFile
+ TF g_OutedClasses (
+  l_UnitPath File:OpenWrite >>> g_OutFile
+  TF g_OutFile (
+   [
+    [ 'unit' ' ' aUnitName ';' ]
+    ''
+    'interface'
+    ''
+    anInterfaceLambda ExpandLambda
+    'implementation'
+    ''
+    anImplementationLambda ExpandLambda
+    'end.'
+   ] array:OutToFileLn
+  ) // TF g_OutFile
+ ) // TF g_OutedClasses
 ; // GenerateUnit 
 
 : GenerateClass
