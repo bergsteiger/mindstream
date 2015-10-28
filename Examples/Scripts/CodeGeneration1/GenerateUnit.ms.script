@@ -114,7 +114,9 @@ PROCEDURE GenerateUnit
    ''
    'interface'
    ''
-   anInterfaceLambda DO
+   ARRAY VAR l_InterfaceCode
+   [ anInterfaceLambda DO ] >>> l_InterfaceCode
+   l_InterfaceCode
    'implementation'
    ''
    'end.'
