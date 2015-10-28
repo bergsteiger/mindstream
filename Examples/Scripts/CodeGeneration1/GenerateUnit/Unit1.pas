@@ -3,11 +3,11 @@ unit Unit1;
 interface
 
 TTest1
-end
+end;
 
 
 test
-end
+end;
 
 
 implementation
