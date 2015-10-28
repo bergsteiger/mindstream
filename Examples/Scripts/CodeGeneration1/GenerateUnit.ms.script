@@ -96,10 +96,12 @@ USES
   [ aLambda DO ] >>> l_LambdaCode
   if ( l_LambdaCode Array:Count <> 0 ) then
   begin
+   [
    l_LambdaCode .for> (
     IN aValue
     aValue
    )
+   ]
   end
 ; // ExpandLambda
 
