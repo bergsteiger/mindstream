@@ -10,6 +10,10 @@ TTest2
 end;
 
 
+TTest3
+end;
+
+
 implementation
 
 end.
