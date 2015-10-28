@@ -39,12 +39,12 @@ STRING INTEGER ARRAY TYPE OUTABLE
 
 CONST cIndentChar ' '
 
-PROCEDURE OutToFileLn
+PROCEDURE OutToFile
  OUTABLE IN aValue 
  %SUMMARY 
  '
  Выводит значение в текущий файл вывода.
- С переводом каретки.
+ БЕЗ перевода каретки.
  '
  ; // %SUMMARY 
 
@@ -54,6 +54,21 @@ PROCEDURE OutToFileLn
  else
   ( aValue ToPrintable >>> l_String )
  [ g_Indent cIndentChar char:Dupe l_String ] strings:Cat g_OutFile File:WriteStr
+ %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
+; // OutToFile
+
+CONST \n #13#10
+
+PROCEDURE OutToFileLn
+ OUTABLE IN aValue 
+ %SUMMARY 
+ '
+ Выводит значение в текущий файл вывода.
+ С переводом каретки.
+ '
+ ; // %SUMMARY 
+
+ aValue OutToFile
  %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; // OutToFileLn
 
