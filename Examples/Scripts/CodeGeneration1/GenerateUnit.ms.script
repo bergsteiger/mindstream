@@ -39,6 +39,8 @@ STRING INTEGER ARRAY TYPE OUTABLE
 
 CONST cIndentChar ' '
 
+FORWARD ValueToString
+
 STRING FUNCTION ValueToString
   OUTABLE IN aValue
 
