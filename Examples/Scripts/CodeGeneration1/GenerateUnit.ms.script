@@ -110,6 +110,7 @@ PROCEDURE GenerateUnit
  TF g_OutFile (
   [
    [ 'unit' ' ' aUnitName ';' ]
+   \n
    'end.'
   ] array:OutToFileLn
  ) // TF g_OutFile
