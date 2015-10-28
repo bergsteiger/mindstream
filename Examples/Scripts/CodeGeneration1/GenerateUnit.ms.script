@@ -157,7 +157,6 @@ PROCEDURE GenerateUnit
  'type'
  aClassName
  [ 'end; // ' aClassName ] strings:Cat
- ''
 ; // GenerateClass
 
 USES
@@ -168,8 +167,11 @@ Test&Dump GenerateUnitTest
  TF g_OutedUnits (
   'Unit1' GenerateUnit ( 
    'TTest1' GenerateClass 
+   ''
    'TTest2' GenerateClass
+   ''
    'TTest3' GenerateClass
+   ''
    'TTest4' GenerateClass 
   ) ()
   g_OutedClasses Print

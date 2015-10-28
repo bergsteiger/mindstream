@@ -18,7 +18,6 @@ type
 TTest4
 end; // TTest4
 
-
 implementation
 
 end.
