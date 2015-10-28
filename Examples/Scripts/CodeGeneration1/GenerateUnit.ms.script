@@ -94,7 +94,7 @@ USES
 ;
 
 : ExpandLambda
-   IN aLambda
+   FUNCTOR IN aLambda
 
   ARRAY VAR l_LambdaCode
   [ aLambda DO ] >>> l_LambdaCode
