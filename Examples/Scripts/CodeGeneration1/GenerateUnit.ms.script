@@ -25,8 +25,16 @@ STRING FUNCTION MakeOutPath
  Result sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' Result ]
 ; // MakeOutPath
 
+PROCEDURE GenerateUnit
+  STRING IN aUnitName
+  
+ STRING VAR l_UnitName
+ MakeOutPath >>> l_UnitName
+ l_UnitName Print
+; // GenerateUnit 
+
 Test&Dump GenerateUnitTest
- MakeOutPath Print
+ 'Unit1' GenerateUnit
 ; // GenerateUnitTest
 
 GenerateUnitTest
