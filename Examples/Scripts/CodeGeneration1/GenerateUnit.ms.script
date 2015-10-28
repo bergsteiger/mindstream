@@ -46,6 +46,7 @@ PROCEDURE GenerateUnit
  [ l_UnitPath cPathSep l_UnitFileName ] strings:Cat >>> l_UnitPath
  l_UnitPath Print
 
+ l_UnitPath File:OpenWrite >>> g_OutFile
  TF g_OutFile (
  ) // TF g_OutFile
 ; // GenerateUnit 
