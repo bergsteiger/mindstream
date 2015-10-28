@@ -173,7 +173,7 @@ Test&Dump GenerateUnitTest
   ) ()
   g_OutedClasses Print
 
-  'Unit2' GenerateUnit () ( 'test' )
+  'Unit2' GenerateUnit ( 'test' ) ( 'test' )
   g_OutedClasses Print
 
   'Unit3' GenerateUnit () ()

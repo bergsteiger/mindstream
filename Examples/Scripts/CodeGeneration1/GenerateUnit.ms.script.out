@@ -19,7 +19,9 @@ VOID TestWithDump GenerateUnitTest
   Print
   'Unit2'
   GenerateUnit
-  NOP
+  STRING (
+   'test'
+  )
   STRING (
    'test'
   )
