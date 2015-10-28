@@ -1,9 +1,5 @@
 PROGRAM GenerateUnit.ms.script
 
-USES
- Testing.ms.dict
-;
-
 CONST cPathSep '\'
 
 STRING FUNCTION OutDir
@@ -100,12 +96,18 @@ USES
   [ aLambda DO ] &gt;&gt;&gt; l_LambdaCode
   if ( l_LambdaCode Array:Count &lt;&gt; 0 ) then
   begin
-   l_LambdaCode
-   ''
+   [
+   l_LambdaCode .for&gt; (
+    IN aValue
+    aValue
+    \n
+   )
+   ]
   end
 ; // ExpandLambda
 
 ARRAY CompileTime-VAR g_OutedUnits []
+ARRAY CompileTime-VAR g_OutedClasses []
 
 PROCEDURE GenerateUnit
   STRING IN aUnitName
@@ -126,26 +128,54 @@ PROCEDURE GenerateUnit
  [ l_UnitPath cPathSep l_UnitFileName ] strings:Cat &gt;&gt;&gt; l_UnitPath
  l_UnitPath Print
 
- l_UnitPath File:OpenWrite &gt;&gt;&gt; g_OutFile
- TF g_OutFile (
-  [
-   [ 'unit' ' ' aUnitName ';' ]
-   ''
-   'interface'
-   ''
-   anInterfaceLambda ExpandLambda
-   'implementation'
-   ''
-   anImplementationLambda ExpandLambda
-   'end.'
-  ] array:OutToFileLn
- ) // TF g_OutFile
+ TF g_OutedClasses (
+  [] &gt;&gt;&gt; g_OutedClasses
+  l_UnitPath File:OpenWrite &gt;&gt;&gt; g_OutFile
+  TF g_OutFile (
+   [
+    [ 'unit' ' ' aUnitName ';' ]
+    ''
+    'interface'
+    ''
+    anInterfaceLambda ExpandLambda
+    'implementation'
+    ''
+    anImplementationLambda ExpandLambda
+    'end.'
+   ] array:OutToFileLn
+  ) // TF g_OutFile
+ ) // TF g_OutedClasses
 ; // GenerateUnit 
+
+: GenerateClass
+  STRING IN aClassName
+
+ aClassName g_OutedClasses array:Has ?FAIL [ 'Класс ' aClassName ' уже генерировался' ]
+
+ aClassName array:AddTo g_OutedClasses
+ aClassName IsNil ?FAIL 'Имя класса не может быть пустым'
+ 'type'
+ aClassName
+ 'end;'
+ ''
+; // GenerateClass
+
+USES
+ Testing.ms.dict
+;
 
 Test&Dump GenerateUnitTest
  TF g_OutedUnits (
-  'Unit1' GenerateUnit ( 'test' ) ()
-  'Unit2' GenerateUnit () ( 'test' )
+  'Unit1' GenerateUnit ( 
+   'TTest1' GenerateClass 
+   'TTest2' GenerateClass
+   'TTest3' GenerateClass
+  ) ()
+  g_OutedClasses Print
+
+  'Unit2' GenerateUnit ( 'test' ) ( 'test' )
+  g_OutedClasses Print
+
   'Unit3' GenerateUnit () ()
   'Unit4' GenerateUnit () ()
 

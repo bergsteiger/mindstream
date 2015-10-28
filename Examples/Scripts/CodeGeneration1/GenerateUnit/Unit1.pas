@@ -14,6 +14,10 @@ type
 TTest3
 end;
 
+type
+TTest4
+end;
+
 
 implementation
 
