@@ -28,10 +28,10 @@ STRING FUNCTION MakeOutPath
 PROCEDURE GenerateUnit
   STRING IN aUnitName
   
- STRING VAR l_UnitName
- MakeOutPath >>> l_UnitName
- [ l_UnitName cPathSep aUnitName ] strings:Cat >>> l_UnitName
- l_UnitName Print
+ STRING VAR l_UnitPath
+ MakeOutPath >>> l_UnitPath
+ [ l_UnitPath cPathSep aUnitName ] strings:Cat >>> l_UnitPath
+ l_UnitPath Print
 ; // GenerateUnit 
 
 Test&Dump GenerateUnitTest
