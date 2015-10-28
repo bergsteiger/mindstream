@@ -114,9 +114,14 @@ PROCEDURE GenerateUnit
    ''
    'interface'
    ''
+
    ARRAY VAR l_InterfaceCode
    [ anInterfaceLambda DO ] >>> l_InterfaceCode
-   l_InterfaceCode
+   if ( l_InterfaceCode Array:Count <> 0 ) then
+   begin
+    l_InterfaceCode
+   end
+
    'implementation'
    ''
    'end.'
