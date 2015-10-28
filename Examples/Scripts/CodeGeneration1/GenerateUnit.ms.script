@@ -95,6 +95,7 @@ USES
 
 PROCEDURE GenerateUnit
   STRING IN aUnitName
+  ^ IN anInterfaceLambda
 
  aUnitName IsNil ?FAIL 'Имя модуля не может быть пустым'
  
@@ -113,6 +114,7 @@ PROCEDURE GenerateUnit
    ''
    'interface'
    ''
+   anInterfaceLambda DO
    'implementation'
    ''
    'end.'
@@ -121,8 +123,8 @@ PROCEDURE GenerateUnit
 ; // GenerateUnit 
 
 Test&Dump GenerateUnitTest
- 'Unit1' GenerateUnit
- 'Unit2' GenerateUnit
+ 'Unit1' GenerateUnit ()
+ 'Unit2' GenerateUnit ()
 ; // GenerateUnitTest
 
 GenerateUnitTest
