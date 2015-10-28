@@ -74,11 +74,8 @@ PROCEDURE OutToFileLn
 
  aValue OutToFile
  %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
- //if ( \n l_Value EndsStr ! ) then
- begin
-  \n g_OutFile File:WriteStr
-  %REMARK '- выводим перевод каретки'
- end
+ \n g_OutFile File:WriteStr
+ %REMARK '- выводим перевод каретки'
 ; // OutToFileLn
 
 PROCEDURE array:OutToFileLn
