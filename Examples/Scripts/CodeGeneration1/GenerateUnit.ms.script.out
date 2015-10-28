@@ -6,8 +6,9 @@ VOID TestWithDump GenerateUnitTest
  (
   'Unit1'
   GenerateUnit
-  STRING (
+  (
    'test'
+   GenerateClass
   )
   NOP
   'Unit2'
