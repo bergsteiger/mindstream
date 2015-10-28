@@ -80,6 +80,8 @@ USES
 
 PROCEDURE GenerateUnit
   STRING IN aUnitName
+
+ aUnitName IsNil ?FAIL 'Имя модуля не может быть пустым'
  
  STRING VAR l_UnitFileName 
  [ aUnitName '.pas' ] strings:Cat >>> l_UnitFileName
@@ -91,7 +93,7 @@ PROCEDURE GenerateUnit
 
  l_UnitPath File:OpenWrite >>> g_OutFile
  TF g_OutFile (
-  'unit' OutToFileLn
+  [ 'unit' ' ' aUnitName ';' ] strings:Cat OutToFileLn
   'end.' OutToFileLn
  ) // TF g_OutFile
 ; // GenerateUnit 

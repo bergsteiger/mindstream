@@ -1,2 +1,2 @@
-unit
+unit Unit2;
 end.
