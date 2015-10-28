@@ -16,7 +16,7 @@ VOID TestWithDump GenerateUnitTest
   STRING (
    'test'
   )
-  'Unit3'
+  'Unit2'
   GenerateUnit
   NOP
   NOP
@@ -27,5 +27,4 @@ VOID TestWithDump GenerateUnitTest
 
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\GenerateUnit\Unit1.pas
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\GenerateUnit\Unit2.pas
-H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\GenerateUnit\Unit3.pas
-[ Unit1 Unit2 Unit3 ]
+PROCEDURE GenerateUnit (Line 110, GenerateUnit.ms.script) |=> Модуль Unit2 уже генерировался
