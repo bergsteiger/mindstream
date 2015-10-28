@@ -3,7 +3,9 @@ VOID TestWithDump GenerateUnitTest
  DumpElement
  'Unit1'
  GenerateUnit
- NOP
+ STRING (
+  'test'
+ )
  'Unit2'
  GenerateUnit
  NOP
