@@ -30,6 +30,7 @@ PROCEDURE GenerateUnit
   
  STRING VAR l_UnitName
  MakeOutPath >>> l_UnitName
+ [ l_UnitName cPathSep aUnitName ] strings:Cat >>> l_UnitName
  l_UnitName Print
 ; // GenerateUnit 
 
