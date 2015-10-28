@@ -102,6 +102,7 @@ USES
 ; // ExpandLambda
 
 ARRAY CompileTime-VAR g_OutedUnits []
+ARRAY CompileTime-VAR g_OutedClasses []
 
 PROCEDURE GenerateUnit
   STRING IN aUnitName
@@ -140,6 +141,8 @@ PROCEDURE GenerateUnit
 
 : GenerateClass
   STRING IN aClassName
+
+ aClassName array:AddTo g_OutedClasses
  aClassName IsNil ?FAIL 'Имя класса не может быть пустым'
  aClassName
  \n
