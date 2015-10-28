@@ -141,6 +141,7 @@ PROCEDURE GenerateUnit
 : GenerateClass
   STRING IN aClassName
  aClassName IsNil ?FAIL 'Имя класса не может быть пустым'
+ aClassName
 ; // GenerateClass
 
 USES
