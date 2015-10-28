@@ -39,6 +39,15 @@ STRING INTEGER ARRAY TYPE OUTABLE
 
 CONST cIndentChar ' '
 
+STRING FUNCTION ValueToString
+  OUTABLE IN aValue
+
+ if ( aValue IsArray ) then
+  ( aValue strings:Cat >>> Result )
+ else
+  ( aValue ToPrintable >>> Result )
+; // ValueToString
+
 PROCEDURE OutToFile
   OUTABLE IN aValue 
 
@@ -50,10 +59,7 @@ PROCEDURE OutToFile
  ; // %SUMMARY 
 
  STRING VAR l_String
- if ( aValue IsArray ) then
-  ( aValue strings:Cat >>> l_String )
- else
-  ( aValue ToPrintable >>> l_String )
+ aValue ValueToString >>> l_String
  [ g_Indent cIndentChar char:Dupe l_String ] strings:Cat g_OutFile File:WriteStr
  %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; // OutToFile
