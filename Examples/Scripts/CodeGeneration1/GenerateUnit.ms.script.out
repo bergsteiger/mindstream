@@ -34,7 +34,19 @@ VOID TestWithDump GenerateUnitTest
   Print
   'Unit3'
   GenerateUnit
-  NOP
+  (
+   'TTest1'
+   GenerateClass
+   ''
+   'TTest2'
+   GenerateClass
+   ''
+   'TTest3'
+   GenerateClass
+   ''
+   'TTest4'
+   GenerateClass
+  )
   NOP
   'Unit4'
   GenerateUnit
