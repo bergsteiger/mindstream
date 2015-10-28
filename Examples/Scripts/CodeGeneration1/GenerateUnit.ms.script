@@ -93,6 +93,18 @@ USES
  SaveVarAndDo.ms.dict
 ;
 
+: ExpandLambda
+   ^ IN aLambda
+
+  ARRAY VAR l_LambdaCode
+  [ aLambda DO ] >>> l_LambdaCode
+  if ( l_LambdaCode Array:Count <> 0 ) then
+  begin
+   l_LambdaCode
+   ''
+  end
+; // ExpandLambda
+
 PROCEDURE GenerateUnit
   STRING IN aUnitName
   ^ IN anInterfaceLambda
