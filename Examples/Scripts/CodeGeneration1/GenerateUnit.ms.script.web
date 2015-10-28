@@ -1,0 +1,117 @@
+PROGRAM GenerateUnit.ms.script
+
+USES
+ Testing.ms.dict
+;
+
+CONST cPathSep '\'
+
+STRING FUNCTION OutDir
+ sysutils:GetCurrentDir &gt;&gt;&gt; Result
+ [ Result
+  script:FileName 
+  %REMARK 'Путь к текущему скрипту'
+  sysutils:ExtractFileName
+  %REMARK 'Вырезаем из пути только имя файла' 
+  '' sysutils:ChangeFileExt
+  %REMARK 'Убираем .script' 
+  '' sysutils:ChangeFileExt 
+  %REMARK 'Убираем .ms' 
+ ] cPathSep strings:CatSep &gt;&gt;&gt; Result
+; // OutDir
+
+STRING FUNCTION MakeOutPath
+ OutDir &gt;&gt;&gt; Result
+ Result sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' Result ]
+; // MakeOutPath
+
+USES
+ CompileTimeVar.ms.dict
+;
+
+FILE CompileTime-VAR g_OutFile nil
+%REMARK 'Текущий файл'
+
+INTEGER CompileTime-VAR g_Indent 0
+%REMARK 'Текущий отступ'
+
+STRING INTEGER ARRAY TYPE OUTABLE
+
+CONST cIndentChar ' '
+
+PROCEDURE OutToFile
+  OUTABLE IN aValue 
+
+ %SUMMARY 
+ '
+ Выводит значение в текущий файл вывода.
+ БЕЗ перевода каретки.
+ '
+ ; // %SUMMARY 
+
+ STRING VAR l_String
+ if ( aValue IsArray ) then
+  ( aValue strings:Cat &gt;&gt;&gt; l_String )
+ else
+  ( aValue ToPrintable &gt;&gt;&gt; l_String )
+ [ g_Indent cIndentChar char:Dupe l_String ] strings:Cat g_OutFile File:WriteStr
+ %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
+; // OutToFile
+
+CONST \n #13#10
+
+PROCEDURE OutToFileLn
+  OUTABLE IN aValue
+ 
+ %SUMMARY 
+ '
+ Выводит значение в текущий файл вывода.
+ С переводом каретки.
+ '
+ ; // %SUMMARY 
+
+ aValue OutToFile
+ %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
+ \n g_OutFile File:WriteStr
+ %REMARK '- выводим перевод каретки'
+; // OutToFileLn
+
+PROCEDURE array:OutToFileLn
+  ARRAY IN aValue
+
+ %SUMMARY 'Выводит значения элементов массива построчно' ;
+ aValue .for&gt; OutToFileLn
+; // array:OutToFileLn
+
+USES
+ SaveVarAndDo.ms.dict
+;
+
+PROCEDURE GenerateUnit
+  STRING IN aUnitName
+
+ aUnitName IsNil ?FAIL 'Имя модуля не может быть пустым'
+ 
+ STRING VAR l_UnitFileName 
+ [ aUnitName '.pas' ] strings:Cat &gt;&gt;&gt; l_UnitFileName
+
+ STRING VAR l_UnitPath
+ MakeOutPath &gt;&gt;&gt; l_UnitPath
+ [ l_UnitPath cPathSep l_UnitFileName ] strings:Cat &gt;&gt;&gt; l_UnitPath
+ l_UnitPath Print
+
+ l_UnitPath File:OpenWrite &gt;&gt;&gt; g_OutFile
+ TF g_OutFile (
+  [
+   [ 'unit' ' ' aUnitName ';' ]
+   'end.'
+  ] array:OutToFileLn
+ ) // TF g_OutFile
+; // GenerateUnit 
+
+Test&Dump GenerateUnitTest
+ 'Unit1' GenerateUnit
+ 'Unit2' GenerateUnit
+; // GenerateUnitTest
+
+GenerateUnitTest
