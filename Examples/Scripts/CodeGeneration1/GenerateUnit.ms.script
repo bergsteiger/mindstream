@@ -138,7 +138,7 @@ PROCEDURE GenerateUnit
 
 Test&Dump GenerateUnitTest
  'Unit1' GenerateUnit ( 'test' ) ()
- 'Unit2' GenerateUnit () ()
+ 'Unit2' GenerateUnit () ( 'test' )
 ; // GenerateUnitTest
 
 GenerateUnitTest
