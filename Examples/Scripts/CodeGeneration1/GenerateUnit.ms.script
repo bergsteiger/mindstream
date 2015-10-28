@@ -111,6 +111,9 @@ PROCEDURE GenerateUnit
   [
    [ 'unit' ' ' aUnitName ';' ]
    ''
+   'interface'
+   ''
+   'implementation'
    'end.'
   ] array:OutToFileLn
  ) // TF g_OutFile
