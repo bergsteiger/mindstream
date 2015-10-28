@@ -120,6 +120,7 @@ PROCEDURE GenerateUnit
    if ( l_InterfaceCode Array:Count <> 0 ) then
    begin
     l_InterfaceCode
+    ''
    end
 
    'implementation'
