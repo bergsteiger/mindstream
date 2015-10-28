@@ -58,9 +58,7 @@ PROCEDURE OutToFile
  '
  ; // %SUMMARY 
 
- STRING VAR l_String
- aValue ValueToString >>> l_String
- [ g_Indent cIndentChar char:Dupe l_String ] strings:Cat g_OutFile File:WriteStr
+ [ g_Indent cIndentChar char:Dupe aValue ValueToString ] strings:Cat g_OutFile File:WriteStr
  %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; // OutToFile
 
