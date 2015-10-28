@@ -6,8 +6,10 @@ VOID TestWithDump GenerateUnitTest
  STRING (
   'test'
  )
+ NOP
  'Unit2'
  GenerateUnit
+ NOP
  NOP
 ; // VOID TestWithDump GenerateUnitTest
 
