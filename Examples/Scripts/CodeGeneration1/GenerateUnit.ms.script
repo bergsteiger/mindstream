@@ -146,7 +146,7 @@ Test&Dump GenerateUnitTest
  TF g_OutedUnits (
   'Unit1' GenerateUnit ( 'test' ) ()
   'Unit2' GenerateUnit () ( 'test' )
-  'Unit2' GenerateUnit () ()
+  'Unit3' GenerateUnit () ()
 
   g_OutedUnits Print
  )
