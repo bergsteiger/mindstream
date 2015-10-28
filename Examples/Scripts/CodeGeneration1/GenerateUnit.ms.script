@@ -113,6 +113,8 @@ PROCEDURE GenerateUnit
   ^ IN anImplementationLambda
 
  aUnitName IsNil ?FAIL 'Имя модуля не может быть пустым'
+
+ aUnitName array:AddTo g_OutedUnits
  
  STRING VAR l_UnitFileName 
  [ aUnitName '.pas' ] strings:Cat >>> l_UnitFileName
