@@ -40,7 +40,8 @@ STRING INTEGER ARRAY TYPE OUTABLE
 CONST cIndentChar ' '
 
 PROCEDURE OutToFile
- OUTABLE IN aValue 
+  OUTABLE IN aValue 
+
  %SUMMARY 
  '
  Выводит значение в текущий файл вывода.
@@ -60,7 +61,8 @@ PROCEDURE OutToFile
 CONST \n #13#10
 
 PROCEDURE OutToFileLn
- OUTABLE IN aValue 
+  OUTABLE IN aValue
+ 
  %SUMMARY 
  '
  Выводит значение в текущий файл вывода.
@@ -73,6 +75,13 @@ PROCEDURE OutToFileLn
  \n g_OutFile File:WriteStr
  %REMARK '- выводим перевод каретки'
 ; // OutToFileLn
+
+PROCEDURE array:OutToFileLn
+  ARRAY IN aValue
+
+ %SUMMARY 'Выводит значения элементов массива построчно' ;
+ aValue .for> OutToFileLn
+; // array:OutToFileLn
 
 USES
  SaveVarAndDo.ms.dict
