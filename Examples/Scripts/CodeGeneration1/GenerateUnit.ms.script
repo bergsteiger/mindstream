@@ -27,10 +27,13 @@ STRING FUNCTION MakeOutPath
 
 PROCEDURE GenerateUnit
   STRING IN aUnitName
-  
+ 
+ STRING VAR l_UnitFileName 
+ [ aUnitName '.pas' ] strings:Cat >>> l_UnitFileName
+
  STRING VAR l_UnitPath
  MakeOutPath >>> l_UnitPath
- [ l_UnitPath cPathSep aUnitName ] strings:Cat >>> l_UnitPath
+ [ l_UnitPath cPathSep l_UnitFileName ] strings:Cat >>> l_UnitPath
  l_UnitPath Print
 ; // GenerateUnit 
 
