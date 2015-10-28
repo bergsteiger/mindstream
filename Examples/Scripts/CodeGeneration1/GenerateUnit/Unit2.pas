@@ -5,5 +5,4 @@ interface
 implementation
 
 test
-
 end.
