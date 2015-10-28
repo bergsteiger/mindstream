@@ -31,6 +31,10 @@ USES
 
 FILE CompileTime-VAR g_OutFile nil
 
+USES
+ SaveVarAndDo.ms.dict
+;
+
 PROCEDURE GenerateUnit
   STRING IN aUnitName
  
@@ -42,6 +46,8 @@ PROCEDURE GenerateUnit
  [ l_UnitPath cPathSep l_UnitFileName ] strings:Cat >>> l_UnitPath
  l_UnitPath Print
 
+ TF g_OutFile (
+ ) // TF g_OutFile
 ; // GenerateUnit 
 
 Test&Dump GenerateUnitTest
