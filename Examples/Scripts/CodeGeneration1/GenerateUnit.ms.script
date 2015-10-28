@@ -94,7 +94,7 @@ USES
 ;
 
 : ExpandLambda
-   ^ IN aLambda
+   IN aLambda
 
   ARRAY VAR l_LambdaCode
   [ aLambda DO ] >>> l_LambdaCode
@@ -127,7 +127,7 @@ PROCEDURE GenerateUnit
    'interface'
    ''
 
-   ExpandLambda ( anInterfaceLambda DO )
+   anInterfaceLambda ExpandLambda
 
    'implementation'
    ''
