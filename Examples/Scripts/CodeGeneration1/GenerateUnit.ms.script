@@ -30,6 +30,10 @@ USES
 ;
 
 FILE CompileTime-VAR g_OutFile nil
+%REMARK 'Текущий файл'
+
+INTEGER CompileTime-VAR g_Indent 0
+%REMARK 'Текущий отступ'
 
 USES
  SaveVarAndDo.ms.dict
