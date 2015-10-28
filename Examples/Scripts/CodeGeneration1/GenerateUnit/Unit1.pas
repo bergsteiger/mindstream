@@ -4,19 +4,19 @@ interface
 
 type
 TTest1
-end;
+end; // TTest1
 
 type
 TTest2
-end;
+end; // TTest2
 
 type
 TTest3
-end;
+end; // TTest3
 
 type
 TTest4
-end;
+end; // TTest4
 
 
 implementation

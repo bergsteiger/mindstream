@@ -156,7 +156,7 @@ PROCEDURE GenerateUnit
  aClassName IsNil ?FAIL 'Имя класса не может быть пустым'
  'type'
  aClassName
- 'end;'
+ [ 'end; // ' aClassName ] strings:Cat
  ''
 ; // GenerateClass
 
