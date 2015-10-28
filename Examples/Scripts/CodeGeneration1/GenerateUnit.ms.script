@@ -70,6 +70,8 @@ PROCEDURE OutToFileLn
 
  aValue OutToFile
  %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
+ \n OutToFile
+ %REMARK '- выводим перевод каретки'
 ; // OutToFileLn
 
 USES
