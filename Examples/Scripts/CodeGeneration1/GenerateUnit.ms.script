@@ -103,7 +103,7 @@ PROCEDURE GenerateUnit
  l_UnitPath File:OpenWrite >>> g_OutFile
  TF g_OutFile (
   [
-   [ 'unit' ' ' aUnitName ';' ] strings:Cat
+   [ 'unit' ' ' aUnitName ';' ]
    'end.'
   ] array:OutToFileLn
  ) // TF g_OutFile
