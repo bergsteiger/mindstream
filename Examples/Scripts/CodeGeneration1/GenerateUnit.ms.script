@@ -114,6 +114,8 @@ PROCEDURE GenerateUnit
 
  aUnitName IsNil ?FAIL 'Имя модуля не может быть пустым'
 
+ aUnitName g_OutedUnits array:Has ?FAIL [ 'Модуль ' aUnitName ' уже генерировался' ]
+
  aUnitName array:AddTo g_OutedUnits
  
  STRING VAR l_UnitFileName 
