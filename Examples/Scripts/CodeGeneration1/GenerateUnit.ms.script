@@ -145,6 +145,8 @@ Test&Dump GenerateUnitTest
   'Unit1' GenerateUnit ( 'test' ) ()
   'Unit2' GenerateUnit () ( 'test' )
   'Unit3' GenerateUnit () ()
+
+  g_OutedUnits Print
  )
 ; // GenerateUnitTest
 
