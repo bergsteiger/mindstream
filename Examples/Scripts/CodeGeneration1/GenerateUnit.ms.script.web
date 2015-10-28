@@ -105,12 +105,18 @@ USES
   end
 ; // ExpandLambda
 
+ARRAY CompileTime-VAR g_OutedUnits []
+
 PROCEDURE GenerateUnit
   STRING IN aUnitName
   ^ IN anInterfaceLambda
   ^ IN anImplementationLambda
 
  aUnitName IsNil ?FAIL 'Имя модуля не может быть пустым'
+
+ aUnitName g_OutedUnits array:Has ?FAIL [ 'Модуль ' aUnitName ' уже генерировался' ]
+
+ aUnitName array:AddTo g_OutedUnits
  
  STRING VAR l_UnitFileName 
  [ aUnitName '.pas' ] strings:Cat &gt;&gt;&gt; l_UnitFileName
@@ -137,9 +143,14 @@ PROCEDURE GenerateUnit
 ; // GenerateUnit 
 
 Test&Dump GenerateUnitTest
- 'Unit1' GenerateUnit ( 'test' ) ()
- 'Unit2' GenerateUnit () ( 'test' )
- 'Unit3' GenerateUnit () ()
+ TF g_OutedUnits (
+  'Unit1' GenerateUnit ( 'test' ) ()
+  'Unit2' GenerateUnit () ( 'test' )
+  'Unit3' GenerateUnit () ()
+  'Unit4' GenerateUnit () ()
+
+  g_OutedUnits Print
+ )
 ; // GenerateUnitTest
 
 GenerateUnitTest
