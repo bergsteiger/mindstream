@@ -108,6 +108,7 @@ USES
 
 ARRAY CompileTime-VAR g_OutedUnits []
 ARRAY CompileTime-VAR g_OutedClasses []
+BOOLEAN CompileTime-VAR g_WasType false
 
 PROCEDURE GenerateUnit
   STRING IN aUnitName
@@ -137,9 +138,11 @@ PROCEDURE GenerateUnit
     ''
     'interface'
     ''
+    false >>> g_WasType 
     anInterfaceLambda ExpandLambda
     'implementation'
     ''
+    false >>> g_WasType
     anImplementationLambda ExpandLambda
     'end.'
    ] array:OutToFileLn
