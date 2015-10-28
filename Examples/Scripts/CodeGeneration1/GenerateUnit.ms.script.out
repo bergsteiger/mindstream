@@ -1,22 +1,26 @@
 VOID TestWithDump GenerateUnitTest
  GenerateUnitTest
  DumpElement
- 'Unit1'
- GenerateUnit
- STRING (
-  'test'
+ SaveVarAndDo
+ g_OutedUnits
+ (
+  'Unit1'
+  GenerateUnit
+  STRING (
+   'test'
+  )
+  NOP
+  'Unit2'
+  GenerateUnit
+  NOP
+  STRING (
+   'test'
+  )
+  'Unit3'
+  GenerateUnit
+  NOP
+  NOP
  )
- NOP
- 'Unit2'
- GenerateUnit
- NOP
- STRING (
-  'test'
- )
- 'Unit3'
- GenerateUnit
- NOP
- NOP
 ; // VOID TestWithDump GenerateUnitTest
 
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\GenerateUnit\Unit1.pas

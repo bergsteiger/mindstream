@@ -108,6 +108,7 @@ USES
 PROCEDURE GenerateUnit
   STRING IN aUnitName
   ^ IN anInterfaceLambda
+  ^ IN anImplementationLambda
 
  aUnitName IsNil ?FAIL 'Имя модуля не может быть пустым'
  
@@ -126,19 +127,19 @@ PROCEDURE GenerateUnit
    ''
    'interface'
    ''
-
    anInterfaceLambda ExpandLambda
-
    'implementation'
    ''
+   anImplementationLambda ExpandLambda
    'end.'
   ] array:OutToFileLn
  ) // TF g_OutFile
 ; // GenerateUnit 
 
 Test&Dump GenerateUnitTest
- 'Unit1' GenerateUnit ( 'test' )
- 'Unit2' GenerateUnit ()
+ 'Unit1' GenerateUnit ( 'test' ) ()
+ 'Unit2' GenerateUnit () ( 'test' )
+ 'Unit3' GenerateUnit () ()
 ; // GenerateUnitTest
 
 GenerateUnitTest

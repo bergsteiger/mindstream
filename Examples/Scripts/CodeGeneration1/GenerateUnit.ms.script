@@ -105,6 +105,8 @@ USES
   end
 ; // ExpandLambda
 
+ARRAY CompileTime-VAR g_OutedUnits []
+
 PROCEDURE GenerateUnit
   STRING IN aUnitName
   ^ IN anInterfaceLambda
@@ -137,9 +139,11 @@ PROCEDURE GenerateUnit
 ; // GenerateUnit 
 
 Test&Dump GenerateUnitTest
- 'Unit1' GenerateUnit ( 'test' ) ()
- 'Unit2' GenerateUnit () ( 'test' )
- 'Unit3' GenerateUnit () ()
+ TF g_OutedUnits (
+  'Unit1' GenerateUnit ( 'test' ) ()
+  'Unit2' GenerateUnit () ( 'test' )
+  'Unit3' GenerateUnit () ()
+ )
 ; // GenerateUnitTest
 
 GenerateUnitTest
