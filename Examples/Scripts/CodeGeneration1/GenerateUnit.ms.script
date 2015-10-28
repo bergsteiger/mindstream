@@ -25,6 +25,12 @@ STRING FUNCTION MakeOutPath
  Result sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' Result ]
 ; // MakeOutPath
 
+USES
+ CompileTimeVar.ms.dict
+;
+
+FILE CompileTime-VAR g_OutFile nil
+
 PROCEDURE GenerateUnit
   STRING IN aUnitName
  
@@ -35,6 +41,7 @@ PROCEDURE GenerateUnit
  MakeOutPath >>> l_UnitPath
  [ l_UnitPath cPathSep l_UnitFileName ] strings:Cat >>> l_UnitPath
  l_UnitPath Print
+
 ; // GenerateUnit 
 
 Test&Dump GenerateUnitTest
