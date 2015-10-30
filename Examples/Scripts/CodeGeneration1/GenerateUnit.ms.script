@@ -35,6 +35,10 @@ STRING INTEGER ARRAY TYPE OUTABLE
 
 CONST cIndentChar ' '
 
+STRING FUNCTION IndentStr
+ g_Indent cIndentChar char:Dupe >>> Result
+; // IndentStr
+
 FORWARD ValueToString
 
 STRING FUNCTION ValueToString
@@ -56,7 +60,7 @@ PROCEDURE OutToFile
  '
  ; // %SUMMARY 
 
- [ g_Indent cIndentChar char:Dupe aValue ValueToString ] strings:Cat g_OutFile File:WriteStr
+ [ IndentStr aValue ValueToString ] strings:Cat g_OutFile File:WriteStr
  %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
 ; // OutToFile
 
