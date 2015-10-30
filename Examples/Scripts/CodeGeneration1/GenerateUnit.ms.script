@@ -168,7 +168,7 @@ PROCEDURE GenerateUnit
   ''
  end
 
- aClassName
+ [ aClassName ' = class' ]
  [ 'end; // ' aClassName ]
 ; // GenerateClass
 
