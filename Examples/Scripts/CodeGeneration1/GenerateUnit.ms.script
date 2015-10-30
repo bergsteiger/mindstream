@@ -172,8 +172,10 @@ PROCEDURE GenerateUnit
   ''
  end
 
+ INC g_Indent
  [ aClassName ' = class' ]
  [ 'end; // ' aClassName ]
+ DEC g_Indent
 ; // GenerateClass
 
 USES
