@@ -173,8 +173,8 @@ PROCEDURE GenerateUnit
  end
 
  INC g_Indent
- [ aClassName ' = class' ]
- [ 'end; // ' aClassName ]
+ [ IndentStr aClassName ' = class' ]
+ [ IndentStr 'end; // ' aClassName ]
  DEC g_Indent
 ; // GenerateClass
 
