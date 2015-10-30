@@ -6283,14 +6283,14 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\SaveVarAndDo.
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
-VOID OPERATOR :: PROCEDURE : SaveVarAndDo
+: : SaveVarAndDo
  Documentation:
    Сохраняет значение переменной aVar. Выполняет функтор aFunctor. Восстанавливает значение переменной aVar. 
  ^ OPERATOR :: IN : aFunctor
  ^ OPERATOR :: IN : aVar
  OPERATOR :: VAR : l_OldValue
 ; // SaveVarAndDo
-VOID OPERATOR :: PROCEDURE : TF
+: : TF
  Documentation:
    Сохраняет значение переменной aVar. Выполняет функтор aFunctor. Восстанавливает значение переменной aVar. 
  ^ OPERATOR :: IN : aFunctor
