@@ -163,6 +163,10 @@ PROCEDURE GenerateUnit
   true >>> g_WasType
   'type'
  end
+ else
+ begin
+  ''
+ end
 
  aClassName
  [ 'end; // ' aClassName ]
@@ -176,11 +180,8 @@ Test&Dump GenerateUnitTest
  TF g_OutedUnits (
   'Unit1' GenerateUnit ( 
    'TTest1' GenerateClass 
-   ''
    'TTest2' GenerateClass
-   ''
    'TTest3' GenerateClass
-   ''
    'TTest4' GenerateClass 
   ) ()
   g_OutedClasses Print
@@ -190,11 +191,8 @@ Test&Dump GenerateUnitTest
 
   'Unit3' GenerateUnit (
    'TTest1' GenerateClass 
-   ''
    'TTest2' GenerateClass
-   ''
    'TTest3' GenerateClass
-   ''
    'TTest4' GenerateClass 
   ) ()
   'Unit4' GenerateUnit () ()
