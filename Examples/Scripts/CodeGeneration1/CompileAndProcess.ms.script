@@ -3,6 +3,12 @@
  sysutils:GetCurrentDir >>> l_FileName 
  [ l_FileName '\' 'CompileAndProcess.used.ms.dict' ] strings:Cat >>> l_FileName
  l_FileName .
+
+ FILE VAR l_File
+ TRY
+ FINALLY
+  nil >>> l_File
+ END
 ; // LW
 
 LW
