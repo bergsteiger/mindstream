@@ -21,7 +21,4 @@
  [ l_FileName '.co' ] strings:Cat DeleteFile DROP
 ; // LW
 
-VAR l_Ptr
-'X' 'CompileAndProcess.ms.dict' LW
->>> l_Ptr
-l_Ptr pop:Word:Name .
+'X' 'CompileAndProcess.ms.dict' LW pop:Word:Name .
