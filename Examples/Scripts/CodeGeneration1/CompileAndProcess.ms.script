@@ -10,14 +10,14 @@
  l_FileName File:OpenWrite >>> l_File
  TRY
   [ 'INCLUDE ' '''' aDictName '''' ] strings:Cat l_File File:WriteLn
-  [ ': ' aWordName ' @ ' aWordName ' ; ' ] strings:Cat l_File File:WriteLn
-  aWordName l_File File:WriteLn
+  [ ': ' '_get' ' if ( DECLARED ' aWordName ' ) ( @ ' aWordName ' ) else ( @ . ) ; ' ] strings:Cat l_File File:WriteLn
+  '_get' l_File File:WriteLn
  FINALLY
   nil >>> l_File
  END
  l_FileName script:CompileAndProcess DO
 
- l_FileName DeleteFile DROP
+ //l_FileName DeleteFile DROP
  [ l_FileName '.co' ] strings:Cat DeleteFile DROP
 ; // LW
 
