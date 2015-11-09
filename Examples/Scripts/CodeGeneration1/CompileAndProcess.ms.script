@@ -7,6 +7,8 @@
  l_FileName .
 
  FILE VAR l_File
+
+ l_FileName File:OpenWrite >>> l_File
  TRY
  FINALLY
   nil >>> l_File
