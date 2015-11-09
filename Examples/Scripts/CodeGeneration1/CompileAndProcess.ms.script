@@ -12,6 +12,7 @@
  TRY
   [ 'INCLUDE ' aDictName ] strings:Cat l_File File:WriteLn
   [ ': ' aWordName ' @ ' aWordName ' ; ' ] strings:Cat l_File File:WriteLn
+  aWordName l_File File:WriteLn
  FINALLY
   nil >>> l_File
  END
