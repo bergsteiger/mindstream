@@ -351,9 +351,6 @@ REDIFINITION STRING FUNCTION : pop:SV:ToPrintable
  OPERATOR :: IN : aValue
  REDIFINITION STRING FUNCTION :: ToPrintable : Result
 ; // pop:SV:ToPrintable
-Dictionary: axiom:TagGenerator
-VOID pop:TagGenerator:generators_Execute
-Ik2TagGenerator pop:TagGenerator:generators_Link
 Dictionary: axiom:TColor
 TColor TColor::cl3DDkShadow
 TColor TColor::cl3DLight
@@ -456,7 +453,6 @@ Dictionary: CodeGen34.ms.script
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
@@ -510,7 +506,6 @@ Dictionary: axiom:axiom
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
  Exports: 
   axiom:Ctx
@@ -543,7 +538,6 @@ Dictionary: axiom:axiom
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 INTEGER -
 INTEGER --
@@ -1006,7 +1000,6 @@ VOID Array:Clear
 INTEGER Array:Count
 ARRAY Array:Filter
 ARRAY Array:FunctorToIterator
-Struct Array:GetItem
 BOOLEAN FUNCTION : array:Has
  ARRAY OPERATOR :: IN : anArray
  OPERATOR :: IN : aValue
@@ -1028,11 +1021,11 @@ BOOLEAN FUNCTION : array:HasText
   STRING OPERATOR :: IN : anItem
  ; // Поиск
 ; // array:HasText
+Struct Array:Item
 VOID Array:Iterate
 ARRAY Array:Join
 ARRAY Array:Map
 ARRAY Array:Reverted
-VOID Array:SetItem
 ARRAY Array:Slice
 INTEGER FUNCTION : array:StringCount
  ARRAY OPERATOR :: IN : anArray
@@ -1202,12 +1195,11 @@ TClass class::TkwArrayClear
 TClass class::TkwArrayCount
 TClass class::TkwArrayFilter
 TClass class::TkwArrayFunctorToIterator
-TClass class::TkwArrayGetItem
+TClass class::TkwArrayItem
 TClass class::TkwArrayIterate
 TClass class::TkwArrayJoin
 TClass class::TkwArrayMap
 TClass class::TkwArrayReverted
-TClass class::TkwArraySetItem
 TClass class::TkwArraySlice
 TClass class::TkwArrayTrunc
 TClass class::TkwASSERTS
@@ -1362,8 +1354,6 @@ TClass class::TkwForwardDeclaration
 TClass class::TkwForwardDeclarationHolder
 TClass class::TkwFUNCTION
 TClass class::TkwGeneratePDFForEtalon
-TClass class::TkwGeneratorsExecute
-TClass class::TkwGeneratorsLink
 TClass class::TkwGetLocalDate
 TClass class::TkwGetLocalDateTime
 TClass class::TkwGetLocalTime
@@ -1689,6 +1679,7 @@ TClass class::TtfwDictionaryPrimPrimPrim
 TClass class::TtfwDualWord
 TClass class::TtfwEnumConstantRegistrator
 TClass class::TtfwFilterLambda
+TClass class::TtfwGlobalKeyWord
 TClass class::TtfwIncludeLike
 TClass class::TtfwInitCodeWord
 TClass class::TtfwInteger
@@ -1700,6 +1691,7 @@ TClass class::TtfwMainDictionary
 TClass class::TtfwMapLambda
 TClass class::TtfwNewWord
 TClass class::TtfwProcedure
+TClass class::TtfwPropertyLike
 TClass class::TtfwRegisterableWord
 TClass class::TtfwRegisterableWordPrim
 TClass class::TtfwRTTIProperty
@@ -1942,7 +1934,6 @@ VOID GetLocalTime
 INTEGER GetTickCount
 BOOLEAN GREATER
 STRING guid::IInterface
-STRING guid::Ik2TagGenerator
 STRING guid::Il3Base
 STRING guid::Il3FontInfo
 STRING guid::ItfwFile
@@ -1961,7 +1952,6 @@ VOID OPERATOR :: PROCEDURE : help
 ; // help
 if
 IInterface
-Ik2TagGenerator
 Il3Base
 Il3FontInfo
 VOID IMMEDIATE
@@ -2156,12 +2146,11 @@ VOID pop:Array:Clear
 INTEGER pop:Array:Count
 ARRAY pop:Array:Filter
 ARRAY pop:Array:FunctorToIterator
-Struct pop:Array:GetItem
+Struct pop:Array:Item
 VOID pop:Array:Iterate
 ARRAY pop:Array:Join
 ARRAY pop:Array:Map
 ARRAY pop:Array:Reverted
-VOID pop:Array:SetItem
 ARRAY pop:Array:Slice
 ARRAY pop:Array:Trunc
 pop:class:Inherits
@@ -2390,12 +2379,11 @@ TkwArrayClear
 TkwArrayCount
 TkwArrayFilter
 TkwArrayFunctorToIterator
-TkwArrayGetItem
+TkwArrayItem
 TkwArrayIterate
 TkwArrayJoin
 TkwArrayMap
 TkwArrayReverted
-TkwArraySetItem
 TkwArraySlice
 TkwArrayTrunc
 TkwASSERTS
@@ -2550,8 +2538,6 @@ TkwForwardDeclaration
 TkwForwardDeclarationHolder
 TkwFUNCTION
 TkwGeneratePDFForEtalon
-TkwGeneratorsExecute
-TkwGeneratorsLink
 TkwGetLocalDate
 TkwGetLocalDateTime
 TkwGetLocalTime
@@ -2900,6 +2886,7 @@ TtfwDictionaryPrimPrimPrim
 TtfwDualWord
 TtfwEnumConstantRegistrator
 TtfwFilterLambda
+TtfwGlobalKeyWord
 TtfwIncludeLike
 TtfwInitCodeWord
 TtfwInteger
@@ -2912,6 +2899,7 @@ TtfwMainDictionary
 TtfwMapLambda
 TtfwNewWord
 TtfwProcedure
+TtfwPropertyLike
 TtfwRegisterableWord
 TtfwRegisterableWordPrim
 TtfwRTTIProperty
@@ -3414,9 +3402,6 @@ BOOLEAN pop:Font:IsStrikeOut
 BOOLEAN pop:Font:IsUnderline
 STRING pop:Font:Name
 INTEGER pop:Font:Size
-Dictionary: axiom:generators
-VOID generators:Execute
-Ik2TagGenerator generators:Link
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.ms.dict
  Uses: 
   axiom:axiom
@@ -3450,7 +3435,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.ms.dic
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
@@ -3501,7 +3485,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.ms.dic
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
@@ -3554,7 +3537,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
  Documentation:
@@ -3599,7 +3581,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
  ;
 IMMEDIATE VOID OPERATOR : __MACRO
@@ -3640,7 +3621,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 IMMEDIATE VOID OPERATOR :: TYPE : ANY
 IMMEDIATE VOID OPERATOR :: TYPE : ITERATABLE
@@ -3678,7 +3658,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
@@ -3753,7 +3732,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
  ;
@@ -3800,7 +3778,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dic
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
  ;
@@ -3840,7 +3817,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbo
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
 STRING FUNCTION : .Name
@@ -3890,7 +3866,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
  ;
 VOID CALLER OPERATOR : ?Assure
@@ -3951,7 +3926,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.ms.dict
@@ -4017,7 +3991,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 INTEGER FUNCTION : Dec1
  INTEGER OPERATOR :: IN : aValue
@@ -4078,7 +4051,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 REDIFINITION : : Print
 ==> Redefines
@@ -4117,7 +4089,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
@@ -4156,7 +4127,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
@@ -4221,7 +4191,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 ARRAY OPERATOR : to
  ^@ OPERATOR :: IN : aFrom
@@ -4261,7 +4230,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 ARRAY FUNCTION : >filter>
  ^ OPERATOR :: IN : aFunctor
@@ -4302,7 +4270,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 ARRAY FUNCTION : >map>
  ^ OPERATOR :: IN : aFunctor
@@ -4343,7 +4310,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.di
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 ARRAY >reverted>
 ARRAY reverted
@@ -4381,7 +4347,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 : : (string)
  ^ OPERATOR :: IN : aValue
@@ -4428,7 +4393,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.di
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
@@ -4526,7 +4490,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.d
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
