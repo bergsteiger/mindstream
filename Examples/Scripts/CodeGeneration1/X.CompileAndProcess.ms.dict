@@ -1,3 +1,0 @@
-INCLUDE 'CompileAndProcess.ms.dict'
-: _get if ( DECLARED X ) ( @ X ) else nil ; 
-_get

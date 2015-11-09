@@ -1,3 +1,0 @@
-INCLUDE 'core.ms.dict'
-: _get if ( DECLARED NameOf ) ( @ NameOf ) else nil ; 
-_get

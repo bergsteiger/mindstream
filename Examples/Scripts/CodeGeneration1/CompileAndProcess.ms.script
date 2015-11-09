@@ -17,7 +17,7 @@
  END
  l_FileName script:CompileAndProcess DO
 
- //l_FileName DeleteFile DROP
+ l_FileName DeleteFile DROP
  [ l_FileName '.co' ] strings:Cat DeleteFile DROP
 ; // LW
 

@@ -1,3 +1,0 @@
-INCLUDE 'Debug.ms.dict'
-: _get if ( DECLARED Trace ) ( @ Trace ) else nil ; 
-_get
