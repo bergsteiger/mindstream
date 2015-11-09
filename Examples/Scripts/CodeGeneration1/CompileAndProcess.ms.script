@@ -1,4 +1,7 @@
-sysutils:GetCurrentDir .
+STRING VAR l_FileName
+sysutils:GetCurrentDir >>> l_FileName 
+[ l_FileName 'CompileAndProcess.used.ms.dict' ] strings:Cat >>> l_FileName
+l_FileName .
 
 VAR l_Ptr
 'CompileAndProcess.ms.dict' script:CompileAndProcess DO
