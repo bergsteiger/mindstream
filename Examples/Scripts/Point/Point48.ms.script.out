@@ -94,7 +94,7 @@ VOID Test PointTest
   Object IN Self
   anOffset |^
   Self
-  Array:GetItem
+  Array:Item
  ; // : FieldByOffset
  
  IMMEDIATE VOID TYPE FieldOffset
