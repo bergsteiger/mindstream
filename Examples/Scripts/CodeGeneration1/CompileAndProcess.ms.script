@@ -1,7 +1,8 @@
 : LW
+  STRING IN aDictName
  STRING VAR l_FileName
  sysutils:GetCurrentDir >>> l_FileName 
- [ l_FileName '\' 'CompileAndProcess.used.ms.dict' ] strings:Cat >>> l_FileName
+ [ l_FileName '\' aDictName ] strings:Cat >>> l_FileName
  l_FileName .
 
  FILE VAR l_File
@@ -11,7 +12,7 @@
  END
 ; // LW
 
-LW
+'CompileAndProcess.used.ms.dict' LW
 
 VAR l_Ptr
 'CompileAndProcess.ms.dict' script:CompileAndProcess DO
