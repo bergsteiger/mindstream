@@ -10,17 +10,16 @@
 
  l_FileName File:OpenWrite >>> l_File
  TRY
-  [ 'INCLUDE ' aDictName ] strings:Cat l_File File:WriteLn
+  [ 'INCLUDE ' '''' aDictName '''' ] strings:Cat l_File File:WriteLn
   [ ': ' aWordName ' @ ' aWordName ' ; ' ] strings:Cat l_File File:WriteLn
   aWordName l_File File:WriteLn
  FINALLY
   nil >>> l_File
  END
+ l_FileName script:CompileAndProcess DO
 ; // LW
 
-'X' 'CompileAndProcess.used.ms.dict' LW
-
 VAR l_Ptr
-'CompileAndProcess.ms.dict' script:CompileAndProcess DO
+'X' 'CompileAndProcess.used.ms.dict' LW
 >>> l_Ptr
 l_Ptr DO .
