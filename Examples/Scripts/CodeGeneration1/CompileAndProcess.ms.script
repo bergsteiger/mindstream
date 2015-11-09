@@ -17,6 +17,8 @@
   nil >>> l_File
  END
  l_FileName script:CompileAndProcess DO
+
+ l_FileName DeleteFile DROP
 ; // LW
 
 VAR l_Ptr
