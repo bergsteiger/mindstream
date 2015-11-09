@@ -10,6 +10,7 @@
 
  l_FileName File:OpenWrite >>> l_File
  TRY
+  [ 'INCLUDE' aDictName ] strings:Cat l_File File:WriteLn
  FINALLY
   nil >>> l_File
  END
