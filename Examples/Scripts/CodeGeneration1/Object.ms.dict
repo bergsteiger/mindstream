@@ -35,7 +35,8 @@ USES
 EXPORTS
  InheritsAndImplementsNew.ms.dict
 
-WordAlias Log .
+WordAlias Log DROP
+// WordAlias Log .
 
 WordAlias %R .Implemented.Words
 WordAlias %G .Inherited.Words

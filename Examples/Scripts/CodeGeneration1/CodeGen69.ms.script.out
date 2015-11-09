@@ -1,4 +1,3 @@
-Object:new
 VOID TestWithDump CodeGen
  CodeGen
  DumpElement
@@ -4923,10 +4922,7 @@ STRING FUNCTION : InstanceSizeName
  ARRAY OPERATOR :: IN : aList
  STRING OPERATOR :: IN : aName
 ; // ListToNameAsString
-REDIFINITION : : Log
-==> Redefines
- VOID .
-<== Redefines
+VOID Log
 VOID OPERATOR :: PROCEDURE : MakeAlias
  ^ OPERATOR :: IN : aLambda
  STRING OPERATOR :: IN : aProp

@@ -1,14 +1,3 @@
-:
-Point::
-Point:new
-Point:0
-Point:XY
-Point:OF
-:
-Rectangle::
-Rectangle:new
-Foo:new
-Bar:new
 VOID TestWithDump PointTest
  IMMEDIATE VOID MACRO .-
   ^@ IN Self
