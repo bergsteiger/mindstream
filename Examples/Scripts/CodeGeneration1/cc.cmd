@@ -1,2 +1,2 @@
 call ..\clear.cmd
-call c.cmd GenerateUnit.ms.script
+call c.cmd CompileAndProcess.ms.script
