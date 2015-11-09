@@ -4,7 +4,6 @@
  STRING VAR l_FileName
  sysutils:GetCurrentDir >>> l_FileName 
  [ l_FileName '\' aWordName '.' aDictName ] strings:Cat >>> l_FileName
- l_FileName .
 
  FILE VAR l_File
 
