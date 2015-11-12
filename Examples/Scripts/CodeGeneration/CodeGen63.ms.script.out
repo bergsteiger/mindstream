@@ -1787,6 +1787,7 @@ TClass class::TkwClipboardGetFormattedText
 TClass class::TkwClipboardSetText
 TClass class::TkwCloseArray
 TClass class::TkwCloseBracket
+TClass class::TkwCompareFiles
 TClass class::TkwCompareStr
 TClass class::TkwCompareText
 TClass class::TkwCompiledArray
@@ -1801,6 +1802,7 @@ TClass class::TkwCompiledProcedureWithStackChecking
 TClass class::TkwCompiledPushWord
 TClass class::TkwCompiledRules
 TClass class::TkwCompiledScriptCompileAndProcess
+TClass class::TkwCompiledScriptCompileStringAndProcess
 TClass class::TkwCompiledTryExcept
 TClass class::TkwCompiledTryFinally
 TClass class::TkwCompiledVar
@@ -1894,6 +1896,7 @@ TClass class::TkwFileOpenWrite
 TClass class::TkwFileReadLines
 TClass class::TkwFileReadLn
 TClass class::TkwFileReadWStrLn
+TClass class::TkwFileSize
 TClass class::TkwFileWriteChar
 TClass class::TkwFileWriteLn
 TClass class::TkwFileWriteStr
@@ -2132,6 +2135,7 @@ TClass class::TkwRuntimeWordWithCodeExecution
 TClass class::TkwSameStr
 TClass class::TkwSameText
 TClass class::TkwScriptCompileAndProcess
+TClass class::TkwScriptCompileStringAndProcess
 TClass class::TkwScriptExceptionStack
 TClass class::TkwScriptFileName
 TClass class::TkwSendInputSupport
@@ -2275,6 +2279,7 @@ IMMEDIATE VOID OPERATOR : ClassProducer
 ; // ClassProducer
 ARRAY CodeIterator
 IMMEDIATE VOID OPERATOR :: TYPE : COMPARABLE
+BOOLEAN CompareFiles
 INTEGER CompareStr
 INTEGER CompareText
 VOID CompileRef
@@ -2465,6 +2470,7 @@ VOID File:WriteLn
 VOID File:WriteStr
 VOID File:WriteWStr
 VOID File:WriteWStrLn
+INTEGER FileSize
 ARRAY FILTER
 IMMEDIATE VOID OPERATOR : FINAL
 FINALLY
@@ -2971,6 +2977,7 @@ TkwClipboardGetFormattedText
 TkwClipboardSetText
 TkwCloseArray
 TkwCloseBracket
+TkwCompareFiles
 TkwCompareStr
 TkwCompareText
 TkwCompiledArray
@@ -2985,6 +2992,7 @@ TkwCompiledProcedureWithStackChecking
 TkwCompiledPushWord
 TkwCompiledRules
 TkwCompiledScriptCompileAndProcess
+TkwCompiledScriptCompileStringAndProcess
 TkwCompiledTryExcept
 TkwCompiledTryFinally
 TkwCompiledVar
@@ -3078,6 +3086,7 @@ TkwFileOpenWrite
 TkwFileReadLines
 TkwFileReadLn
 TkwFileReadWStrLn
+TkwFileSize
 TkwFileWriteChar
 TkwFileWriteLn
 TkwFileWriteStr
@@ -3316,6 +3325,7 @@ TkwRuntimeWordWithCodeExecution
 TkwSameStr
 TkwSameText
 TkwScriptCompileAndProcess
+TkwScriptCompileStringAndProcess
 TkwScriptExceptionStack
 TkwScriptFileName
 TkwSendInputSupport
@@ -3515,7 +3525,7 @@ IMMEDIATE VOID OPERATOR :: TYPE : VARIANT
 STRING FUNCTION : VarMsgToStr
  OBJECT OPERATOR :: IN : aMessage
  OPERATOR :: VAR : l_Msg
- STRING FUNCTION :: FUNCTION : Result
+ STRING FUNCTION :: VarMsgToStr : Result
 ; // VarMsgToStr
 IMMEDIATE VOID OPERATOR : VarProducer
  ^L OPERATOR :: IN : aName
@@ -3757,6 +3767,7 @@ STRING pop:Parser:TokenLongString
 Tl3TokenType pop:Parser:TokenType
 Dictionary: axiom:script
 script:CompileAndProcess
+script:CompileStringAndProcess
 ARRAY script:ExceptionStack
 STRING script:FileName
 Dictionary: axiom:sysutils
@@ -4977,7 +4988,7 @@ VOID OPERATOR :: PROCEDURE : DumpCodeCall
   OBJECT OPERATOR :: IN : aCode
   STRING OPERATOR :: IN : aName
   INTEGER OPERATOR :: VAR : l_LeftWordRefsCount
-  STRING FUNCTION :: FUNCTION : Result
+  STRING FUNCTION :: CalcLeftParams : Result
  ; // CalcLeftParams
  STRING OPERATOR :: VAR : l_Name
  BOOLEAN OPERATOR :: VAR : l_NeedBracket
