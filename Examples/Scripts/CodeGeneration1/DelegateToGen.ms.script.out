@@ -14,9 +14,6 @@ VOID TestWithDump DelegateToGen
   Ctx:PushFinder
   CompileWeakRef
   @
-  pop:Word:Name
-  CompileValue
-  @
   pop:KeywordFinder:KeywordByName
   CompileValue
  ; // IMMEDIATE VOID MACRO .?
@@ -40,11 +37,11 @@ VOID TestWithDump DelegateToGen
  pop:Word:SetValue
  A
  DelegateToGen
- pop:Word:Name
  pop:KeywordFinder:KeywordByName
  .
  A
  .
 ; // VOID TestWithDump DelegateToGen
 
-DelegateToGen.ms.script : Ошибка выполнения: "Ошибка при получении параметра aKeywordFinder: TtfwKeywordFinder : Тип значения tfw_vtStr несовместим с tfw_vtObj". Главный файл: DelegateToGen.ms.script. Класс: TkwPopKeywordFinderKeywordByName. Слово: pop:KeywordFinder:KeywordByName
+TtfwKeyWord
+1
