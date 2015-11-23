@@ -1,11 +1,3 @@
-A
-B
-C
-D
-A
-B
-C
-D
 VOID TestWithDump DelegateToGen
  : ...FindWordAndDoElsePushFalse.
   ^L IN aName
@@ -63,8 +55,6 @@ VOID TestWithDump DelegateToGen
   pop:Word:Name
   l_Name
   pop:Word:SetValue
-  l_Name
-  .
   axiom:PushSymbol
   (
   axiom:PushSymbol
