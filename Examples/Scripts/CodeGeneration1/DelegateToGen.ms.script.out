@@ -3,6 +3,12 @@ VOID TestWithDump DelegateToGen
   1
  ; // : A
  
+ : Gen
+  : A
+  ; // : A
+  
+ ; // : Gen
+ 
  DelegateToGen
  DumpElement
  A
