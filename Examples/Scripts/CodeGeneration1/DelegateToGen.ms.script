@@ -26,9 +26,9 @@ Test&Dump DelegateToGen
  TtfwWord VAR g_Gen
 
  MACRO [.?]
-  ^ IN aName
+  Literal IN aName
   STRING VAR l_Name
-  aName DO >>> l_Name
+  aName |N >>> l_Name
 
   axiom:PushSymbol [EXECUTE]
   axiom:PushSymbol (
@@ -37,10 +37,10 @@ Test&Dump DelegateToGen
 
  ; // [.?]
 
- : .?
-  Literal IN aName
-  [.?] ( aName |N )
- ; // .?
+// : .?
+//  Literal IN aName
+//  [.?] ( aName |N )
+// ; // .?
 
  : A
   1
