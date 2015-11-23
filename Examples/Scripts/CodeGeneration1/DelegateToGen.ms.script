@@ -40,8 +40,6 @@ Test&Dump DelegateToGen
   axiom:PushSymbol (
   l_Name Ctx:Parser:PushString 
   axiom:PushSymbol DROP
-  axiom:PushSymbol g_Gen
-  axiom:PushSymbol DROP
   axiom:PushSymbol true
   axiom:PushSymbol )
   axiom:PushSymbol (
