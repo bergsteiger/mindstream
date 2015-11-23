@@ -1,1 +1,43 @@
-DelegateToGen.ms.script : DelegateToGen.ms.script line: 42 |=> Слово  не определено
+VOID TestWithDump DelegateToGen
+ : .?
+  ^L IN aName
+ ; // : .?
+ 
+ IMMEDIATE VOID MACRO [.?]
+  ^ IN aName
+  STRING VAR l_Name
+  aName
+  DO
+  l_Name
+  pop:Word:SetValue
+  axiom:PushSymbol
+  CompileWordByName
+ ; // IMMEDIATE VOID MACRO [.?]
+ 
+ : A
+  1
+ ; // : A
+ 
+ IMMEDIATE VOID MACRO CompileWordByName
+ ; // IMMEDIATE VOID MACRO CompileWordByName
+ 
+ TtfwWord VAR g_Gen
+ : Gen
+  : A
+  ; // : A
+  
+ ; // : Gen
+ 
+ DelegateToGen
+ DumpElement
+ @
+ Gen
+ g_Gen
+ pop:Word:SetValue
+ .?
+ 'A'
+ A
+ .
+; // VOID TestWithDump DelegateToGen
+
+1

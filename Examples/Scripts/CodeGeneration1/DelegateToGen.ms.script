@@ -7,14 +7,14 @@ USES
 Test&Dump DelegateToGen
 
  MACRO CompileWordByName
-  ^ IN aName
-  STRING VAR l_Name
-  aName DO >>> l_Name
+//  ^ IN aName
+//  STRING VAR l_Name
+//  aName DO >>> l_Name
 
-  TtfwKeyWord VAR l_KeyWord
-  l_Name Ctx:PushFinder pop:KeywordFinder:KeywordByName >>> l_KeyWord
+//  TtfwKeyWord VAR l_KeyWord
+//  l_Name Ctx:PushFinder pop:KeywordFinder:KeywordByName >>> l_KeyWord
   
-  l_KeyWord <> nil ?ASSURE [ 'Слово ' l_Name ' не определено' ]
+//  l_KeyWord <> nil ?ASSURE [ 'Слово ' l_Name ' не определено' ]
 
  ; // CompileWordByName
 
@@ -30,10 +30,7 @@ Test&Dump DelegateToGen
   STRING VAR l_Name
   aName DO >>> l_Name
 
-  TtfwKeyWord VAR l_KeyWord
-  l_Name Ctx:PushFinder pop:KeywordFinder:KeywordByName >>> l_KeyWord
-  
-  l_KeyWord <> nil ?ASSURE [ 'Слово ' l_Name ' не определено' ]
+  axiom:PushSymbol CompileWordByName
 
  ; // [.?]
 
