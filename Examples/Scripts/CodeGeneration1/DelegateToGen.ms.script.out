@@ -1,6 +1,7 @@
 A
 B
 C
+D
 VOID TestWithDump DelegateToGen
  IMMEDIATE VOID MACRO .?
   ^ IN aWord
@@ -30,6 +31,11 @@ VOID TestWithDump DelegateToGen
   +
  ; // : C
  
+ : D
+  4
+  +
+ ; // : D
+ 
  TtfwWord VAR g_Gen
  : Gen
   : A
@@ -53,6 +59,9 @@ VOID TestWithDump DelegateToGen
  C
  .
  1
+ D
+ .
+ 1
  A
  .
 ; // VOID TestWithDump DelegateToGen
@@ -60,4 +69,5 @@ VOID TestWithDump DelegateToGen
 2
 3
 4
+5
 2
