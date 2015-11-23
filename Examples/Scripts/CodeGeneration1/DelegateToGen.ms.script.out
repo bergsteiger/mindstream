@@ -21,9 +21,7 @@ VOID TestWithDump DelegateToGen
   l_Name
   Ctx:Parser:PushString
   axiom:PushSymbol
-  DROP
-  axiom:PushSymbol
-  true
+  .FindWord
   axiom:PushSymbol
   )
   axiom:PushSymbol
@@ -119,8 +117,7 @@ VOID TestWithDump DelegateToGen
   if
    (
     'A'
-    DROP
-    true
+    .FindWord
    )
   then
    (
@@ -133,8 +130,7 @@ VOID TestWithDump DelegateToGen
   if
    (
     'B'
-    DROP
-    true
+    .FindWord
    )
   then
    (
@@ -147,8 +143,7 @@ VOID TestWithDump DelegateToGen
   if
    (
     'C'
-    DROP
-    true
+    .FindWord
    )
   then
    (
@@ -161,8 +156,7 @@ VOID TestWithDump DelegateToGen
   if
    (
     'D'
-    DROP
-    true
+    .FindWord
    )
   then
    (
@@ -182,10 +176,4 @@ VOID TestWithDump DelegateToGen
  .
 ; // VOID TestWithDump DelegateToGen
 
-2
-3
-4
-5
-2
-11
-False
+DelegateToGen.ms.script : Тип значения tfw_vtInt несовместим с tfw_vtBool
