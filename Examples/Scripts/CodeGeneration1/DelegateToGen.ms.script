@@ -5,6 +5,12 @@ USES
 ;
 
 Test&Dump DelegateToGen
+
+ : A
+  1
+ ; // A
+
+ A .
 ; // DelegateToGen
 
 DelegateToGen

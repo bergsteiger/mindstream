@@ -1,5 +1,12 @@
 VOID TestWithDump DelegateToGen
+ : A
+  1
+ ; // : A
+ 
  DelegateToGen
  DumpElement
+ A
+ .
 ; // VOID TestWithDump DelegateToGen
 
+1
