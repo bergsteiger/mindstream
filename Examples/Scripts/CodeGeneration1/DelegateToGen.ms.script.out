@@ -18,6 +18,10 @@ VOID TestWithDump DelegateToGen
   if
   axiom:PushSymbol
   (
+  l_Name
+  Ctx:Parser:PushString
+  axiom:PushSymbol
+  DROP
   axiom:PushSymbol
   true
   axiom:PushSymbol
@@ -114,7 +118,9 @@ VOID TestWithDump DelegateToGen
  1
  (
   if
-   BOOLEAN (
+   (
+    'A'
+    DROP
     true
    )
   then
@@ -130,7 +136,9 @@ VOID TestWithDump DelegateToGen
  1
  (
   if
-   BOOLEAN (
+   (
+    'B'
+    DROP
     true
    )
   then
@@ -146,7 +154,9 @@ VOID TestWithDump DelegateToGen
  1
  (
   if
-   BOOLEAN (
+   (
+    'C'
+    DROP
     true
    )
   then
@@ -162,7 +172,9 @@ VOID TestWithDump DelegateToGen
  1
  (
   if
-   BOOLEAN (
+   (
+    'D'
+    DROP
     true
    )
   then

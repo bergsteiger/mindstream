@@ -35,6 +35,8 @@ Test&Dump DelegateToGen
   axiom:PushSymbol (
   axiom:PushSymbol if
   axiom:PushSymbol (
+  l_Name Ctx:Parser:PushString 
+  axiom:PushSymbol DROP
   axiom:PushSymbol true
   axiom:PushSymbol )
   axiom:PushSymbol (
