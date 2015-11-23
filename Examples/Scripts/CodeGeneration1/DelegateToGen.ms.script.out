@@ -24,12 +24,8 @@ VOID TestWithDump DelegateToGen
   l_Name
   axiom:PushSymbol
   )
-  axiom:PushSymbol
-  (
   axiom:PushStringAsSymbol
   l_Name
-  axiom:PushSymbol
-  )
   axiom:PushSymbol
   )
  ; // IMMEDIATE VOID MACRO .?
@@ -126,9 +122,7 @@ VOID TestWithDump DelegateToGen
     'A'
    )
   then
-   (
-    A
-   )
+   A
  )
  .
  1
@@ -139,9 +133,7 @@ VOID TestWithDump DelegateToGen
     'B'
    )
   then
-   (
-    B
-   )
+   B
  )
  .
  1
@@ -152,9 +144,7 @@ VOID TestWithDump DelegateToGen
     'C'
    )
   then
-   (
-    C
-   )
+   C
  )
  .
  1
@@ -165,9 +155,7 @@ VOID TestWithDump DelegateToGen
     'D'
    )
   then
-   (
-    D
-   )
+   D
  )
  .
  1

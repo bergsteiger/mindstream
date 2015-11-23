@@ -43,9 +43,7 @@ Test&Dump DelegateToGen
   axiom:PushSymbol .FindWordAndDoElsePushFalse
   axiom:PushStringAsSymbol l_Name 
   axiom:PushSymbol )
-  axiom:PushSymbol (
   axiom:PushStringAsSymbol l_Name
-  axiom:PushSymbol )
   axiom:PushSymbol )
 
  ; // .?
