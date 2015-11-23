@@ -11,9 +11,13 @@ Test&Dump DelegateToGen
   ; // A
  ; // Gen
 
+ TtfwWord VAR g_Gen
+
  : A
   1
  ; // A
+
+ @ Gen >>> g_Gen
 
  A .
 ; // DelegateToGen
