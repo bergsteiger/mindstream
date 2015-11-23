@@ -78,6 +78,10 @@ VOID TestWithDump DelegateToGen
  ; // : Gen1
  
  : Gen2
+  Inherits %G
+   Gen1
+  ; // Inherits %G
+  
   : B
    20
    +
