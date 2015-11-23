@@ -8,9 +8,9 @@ Test&Dump DelegateToGen
 
  TtfwWord VAR g_Gen
 
- OBJECT operator .FindWord
+ TtfwWord operator .FindWord
   STRING IN aName
-  OBJECT IN aWord
+  TtfwWord IN aWord
  
   OBJECT VAR l_Member
   aName aWord pop:Word:FindMember >>> l_Member
