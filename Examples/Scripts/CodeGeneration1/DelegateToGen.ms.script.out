@@ -36,7 +36,7 @@ VOID TestWithDump DelegateToGen
   )
  ; // IMMEDIATE VOID MACRO .?
  
- TtfwWord OPERATOR .FindWord
+ : .FindWord
   STRING IN aName
   TtfwKeyWord VAR l_Member
   TtfwWord VAR l_Word
@@ -64,9 +64,7 @@ VOID TestWithDump DelegateToGen
     pop:Word:SetValue
    )
   l_Word
-  Result
-  pop:Word:SetValue
- ; // TtfwWord OPERATOR .FindWord
+ ; // : .FindWord
  
  : A
   1
