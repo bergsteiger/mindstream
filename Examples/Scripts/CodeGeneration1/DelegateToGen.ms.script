@@ -76,7 +76,7 @@ Test&Dump DelegateToGen
  1 .? C . 
  1 .? D . 
  1 A .
- 1 'A' .FindWord .
+ 1 'A' .FindWord DROP .
  'B' .FindWord .
 ; // DelegateToGen
 
