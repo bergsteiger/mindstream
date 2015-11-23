@@ -21,6 +21,10 @@ Test&Dump DelegateToGen
    ( Result := ( l_Member pop:KeyWord:Word ) ) 
  ; // .FindWord
 
+ : .FindWordAndDup
+  .FindWord DUP
+ ; // .FindWordAndDup
+
  MACRO .?
    ^ IN aWord
 
