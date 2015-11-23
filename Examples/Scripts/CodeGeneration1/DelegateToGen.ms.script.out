@@ -15,7 +15,11 @@ VOID TestWithDump DelegateToGen
   axiom:PushSymbol
   if
   axiom:PushSymbol
+  (
+  axiom:PushSymbol
   true
+  axiom:PushSymbol
+  )
   axiom:PushStringAsSymbol
   l_Name
  ; // IMMEDIATE VOID MACRO .?
@@ -55,25 +59,33 @@ VOID TestWithDump DelegateToGen
  pop:Word:SetValue
  1
  if
-  true
+  BOOLEAN (
+   true
+  )
  then
   A
  .
  1
  if
-  true
+  BOOLEAN (
+   true
+  )
  then
   B
  .
  1
  if
-  true
+  BOOLEAN (
+   true
+  )
  then
   C
  .
  1
  if
-  true
+  BOOLEAN (
+   true
+  )
  then
   D
  .
