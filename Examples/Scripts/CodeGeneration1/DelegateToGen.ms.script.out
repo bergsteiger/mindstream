@@ -13,6 +13,8 @@ VOID TestWithDump DelegateToGen
   l_Name
   .
   axiom:PushSymbol
+  (
+  axiom:PushSymbol
   if
   axiom:PushSymbol
   (
@@ -32,6 +34,8 @@ VOID TestWithDump DelegateToGen
   (
   axiom:PushSymbol
   DO
+  axiom:PushSymbol
+  )
   axiom:PushSymbol
   )
  ; // IMMEDIATE VOID MACRO .?
@@ -108,60 +112,68 @@ VOID TestWithDump DelegateToGen
  g_Gen
  pop:Word:SetValue
  1
- if
-  BOOLEAN (
-   true
-  )
- then
-  (
-   A
-  )
- else
-  VOID (
-   DO
-  )
+ (
+  if
+   BOOLEAN (
+    true
+   )
+  then
+   (
+    A
+   )
+  else
+   VOID (
+    DO
+   )
+ )
  .
  1
- if
-  BOOLEAN (
-   true
-  )
- then
-  (
-   B
-  )
- else
-  VOID (
-   DO
-  )
+ (
+  if
+   BOOLEAN (
+    true
+   )
+  then
+   (
+    B
+   )
+  else
+   VOID (
+    DO
+   )
+ )
  .
  1
- if
-  BOOLEAN (
-   true
-  )
- then
-  (
-   C
-  )
- else
-  VOID (
-   DO
-  )
+ (
+  if
+   BOOLEAN (
+    true
+   )
+  then
+   (
+    C
+   )
+  else
+   VOID (
+    DO
+   )
+ )
  .
  1
- if
-  BOOLEAN (
-   true
-  )
- then
-  (
-   D
-  )
- else
-  VOID (
-   DO
-  )
+ (
+  if
+   BOOLEAN (
+    true
+   )
+  then
+   (
+    D
+   )
+  else
+   VOID (
+    DO
+   )
+ )
  .
  1
  A

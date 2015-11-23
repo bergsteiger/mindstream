@@ -32,6 +32,7 @@ Test&Dump DelegateToGen
   aWord pop:Word:Name >>> l_Name
   l_Name .
 
+  axiom:PushSymbol (
   axiom:PushSymbol if
   axiom:PushSymbol (
   axiom:PushSymbol true
@@ -42,6 +43,7 @@ Test&Dump DelegateToGen
   axiom:PushSymbol else
   axiom:PushSymbol (
   axiom:PushSymbol DO
+  axiom:PushSymbol )
   axiom:PushSymbol )
 
  ; // .?
