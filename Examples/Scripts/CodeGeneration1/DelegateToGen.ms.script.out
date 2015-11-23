@@ -175,6 +175,9 @@ VOID TestWithDump DelegateToGen
  'A'
  .FindWord
  .
+ 'B'
+ .FindWord
+ .
 ; // VOID TestWithDump DelegateToGen
 
 2
@@ -183,3 +186,4 @@ VOID TestWithDump DelegateToGen
 5
 2
 TkwCompiledProcedure
+False
