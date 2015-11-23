@@ -12,6 +12,10 @@ VOID TestWithDump DelegateToGen
   pop:Word:SetValue
   l_Name
   .
+  axiom:PushSymbol
+  if
+  axiom:PushSymbol
+  true
   axiom:PushStringAsSymbol
   l_Name
  ; // IMMEDIATE VOID MACRO .?
@@ -50,16 +54,28 @@ VOID TestWithDump DelegateToGen
  g_Gen
  pop:Word:SetValue
  1
- A
+ if
+  true
+ then
+  A
  .
  1
- B
+ if
+  true
+ then
+  B
  .
  1
- C
+ if
+  true
+ then
+  C
  .
  1
- D
+ if
+  true
+ then
+  D
  .
  1
  A
