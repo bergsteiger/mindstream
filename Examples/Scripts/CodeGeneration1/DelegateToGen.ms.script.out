@@ -110,6 +110,14 @@ VOID TestWithDump DelegateToGen
   
  ; // : Gen2
  
+ : Gen3
+  : B
+   20
+   +
+  ; // : B
+  
+ ; // : Gen3
+ 
  DelegateToGen
  DumpElement
  @
@@ -212,10 +220,65 @@ VOID TestWithDump DelegateToGen
  .
  '----'
  .
+ @
+ Gen2
+ g_Gen
+ pop:Word:SetValue
+ 1
+ (
+  if
+   (
+    ...FindWordAndDoElsePushFalse.
+    'A'
+   )
+  then
+   A
+ )
+ .
+ 1
+ (
+  if
+   (
+    ...FindWordAndDoElsePushFalse.
+    'B'
+   )
+  then
+   B
+ )
+ .
+ 1
+ (
+  if
+   (
+    ...FindWordAndDoElsePushFalse.
+    'C'
+   )
+  then
+   C
+ )
+ .
+ 1
+ (
+  if
+   (
+    ...FindWordAndDoElsePushFalse.
+    'D'
+   )
+  then
+   D
+ )
+ .
+ '----'
+ .
 ; // VOID TestWithDump DelegateToGen
 
 11
 3
+4
+5
+----
+2
+21
 4
 5
 ----
