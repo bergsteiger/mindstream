@@ -13,8 +13,14 @@ Test&Dump DelegateToGen
 
  TtfwWord VAR g_Gen
 
+ MACRO [.?]
+  ^ IN aName
+  aName DO Ctx:PushFinder pop:KeywordFinder:KeywordByName <> nil .
+ ; // [.?]
+
  : .?
   Literal IN aName
+  [.?] ( aName |N )
  ; // .?
 
  : A

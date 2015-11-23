@@ -1,7 +1,19 @@
+False
 VOID TestWithDump DelegateToGen
  : .?
   ^L IN aName
  ; // : .?
+ 
+ IMMEDIATE VOID MACRO [.?]
+  ^ IN aName
+  aName
+  DO
+  Ctx:PushFinder
+  pop:KeywordFinder:KeywordByName
+  <>
+  nil
+  .
+ ; // IMMEDIATE VOID MACRO [.?]
  
  : A
   1
