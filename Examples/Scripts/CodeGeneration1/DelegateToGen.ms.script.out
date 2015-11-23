@@ -12,7 +12,7 @@ VOID TestWithDump DelegateToGen
   l_Name
   .
   l_Name
-  CompileValue
+  Ctx:Parser:PushString
   Ctx:PushFinder
   CompileWeakRef
   @
@@ -55,32 +55,29 @@ VOID TestWithDump DelegateToGen
  g_Gen
  pop:Word:SetValue
  1
- A
  DelegateToGen
  pop:KeywordFinder:KeywordByName
  pop:KeyWord:Word
  DO
+ 'A'
  .
  1
- B
  DelegateToGen
  pop:KeywordFinder:KeywordByName
  pop:KeyWord:Word
  DO
+ 'B'
  .
  1
- C
  DelegateToGen
  pop:KeywordFinder:KeywordByName
  pop:KeyWord:Word
  DO
+ 'C'
  .
  1
  A
  .
 ; // VOID TestWithDump DelegateToGen
 
-2
-3
-4
-2
+DelegateToGen.ms.script : Ошибка выполнения: "Ошибка при получении параметра aName: Il3CString : Тип значения tfw_vtInt несовместим с tfw_vtStr". Главный файл: DelegateToGen.ms.script. Класс: TkwPopKeywordFinderKeywordByName. Слово: pop:KeywordFinder:KeywordByName
