@@ -24,9 +24,10 @@ VOID TestWithDump DelegateToGen
  pop:Word:SetValue
  .?
  A
+ .
  A
  .
 ; // VOID TestWithDump DelegateToGen
 
 1
-DelegateToGen.ms.script : Ошибка выполнения: "Процедура не может возвращать значения через стек". Главный файл: DelegateToGen.ms.script. Класс: TkwCompiledProcedureWithStackChecking. Слово: DelegateToGen Producer: TestWithDump Parent: 
+1
