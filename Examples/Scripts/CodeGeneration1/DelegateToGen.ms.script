@@ -15,7 +15,9 @@ Test&Dump DelegateToGen
 
  MACRO [.?]
   ^ IN aName
-  if ( aName DO Ctx:PushFinder pop:KeywordFinder:KeywordByName <> nil ) then
+  STRING VAR l_Name
+  aName DO >>> l_Name
+  if ( l_Name Ctx:PushFinder pop:KeywordFinder:KeywordByName <> nil ) then
   begin
   end
   else

@@ -5,10 +5,14 @@ VOID TestWithDump DelegateToGen
  
  IMMEDIATE VOID MACRO [.?]
   ^ IN aName
+  STRING VAR l_Name
+  aName
+  DO
+  l_Name
+  pop:Word:SetValue
   if
    (
-    aName
-    DO
+    l_Name
     Ctx:PushFinder
     pop:KeywordFinder:KeywordByName
     <>
