@@ -19,6 +19,9 @@ VOID TestWithDump DelegateToGen
   @
   pop:KeyWord:Word
   CompileValue
+  @
+  DO
+  CompileValue
  ; // IMMEDIATE VOID MACRO .?
  
  : A
@@ -42,10 +45,11 @@ VOID TestWithDump DelegateToGen
  DelegateToGen
  pop:KeywordFinder:KeywordByName
  pop:KeyWord:Word
+ DO
  .
  A
  .
 ; // VOID TestWithDump DelegateToGen
 
-TkwCompiledProcedure
+1
 1
