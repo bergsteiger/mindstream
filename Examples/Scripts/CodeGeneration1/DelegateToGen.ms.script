@@ -15,7 +15,7 @@ Test&Dump DelegateToGen
   aWord pop:Word:Name >>> l_Name
   l_Name .
 
-  Ctx:PushFinder CompileRef
+  Ctx:PushFinder CompileWeakRef
   @ . CompileValue
 
   //aWord DO
