@@ -21,7 +21,7 @@ VOID TestWithDump DelegateToGen
   l_Name
   Ctx:Parser:PushString
   axiom:PushSymbol
-  .FindWord
+  .FindWordAndDoElsePushFalse
   axiom:PushSymbol
   )
   axiom:PushSymbol
@@ -34,7 +34,7 @@ VOID TestWithDump DelegateToGen
   )
  ; // IMMEDIATE VOID MACRO .?
  
- : .FindWord
+ : .FindWordAndDoElsePushFalse
   STRING IN aName
   TtfwKeyWord VAR l_Member
   TtfwWord VAR l_Word
@@ -76,7 +76,7 @@ VOID TestWithDump DelegateToGen
     DO
     true
    )
- ; // : .FindWord
+ ; // : .FindWordAndDoElsePushFalse
  
  : A
   1
@@ -118,7 +118,7 @@ VOID TestWithDump DelegateToGen
   if
    (
     'A'
-    .FindWord
+    .FindWordAndDoElsePushFalse
    )
   then
    (
@@ -131,7 +131,7 @@ VOID TestWithDump DelegateToGen
   if
    (
     'B'
-    .FindWord
+    .FindWordAndDoElsePushFalse
    )
   then
    (
@@ -144,7 +144,7 @@ VOID TestWithDump DelegateToGen
   if
    (
     'C'
-    .FindWord
+    .FindWordAndDoElsePushFalse
    )
   then
    (
@@ -157,7 +157,7 @@ VOID TestWithDump DelegateToGen
   if
    (
     'D'
-    .FindWord
+    .FindWordAndDoElsePushFalse
    )
   then
    (
@@ -170,12 +170,12 @@ VOID TestWithDump DelegateToGen
  .
  1
  'A'
- .FindWord
+ .FindWordAndDoElsePushFalse
  DROP
  .
  1
  'B'
- .FindWord
+ .FindWordAndDoElsePushFalse
  DROP
  .
 ; // VOID TestWithDump DelegateToGen
