@@ -12,7 +12,7 @@ Test&Dump DelegateToGen
   STRING IN aName
   TtfwWord IN aWord
  
-  OBJECT VAR l_Member
+  TtfwKeyWord VAR l_Member
   aName aWord pop:Word:FindMember >>> l_Member
  
   if ( l_Member IsNil ) then

@@ -27,7 +27,7 @@ VOID TestWithDump DelegateToGen
  TtfwWord OPERATOR .FindWord
   STRING IN aName
   TtfwWord IN aWord
-  OBJECT VAR l_Member
+  TtfwKeyWord VAR l_Member
   aName
   aWord
   pop:Word:FindMember
