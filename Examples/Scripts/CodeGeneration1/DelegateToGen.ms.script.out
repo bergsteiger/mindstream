@@ -1,5 +1,6 @@
 A
 B
+C
 VOID TestWithDump DelegateToGen
  IMMEDIATE VOID MACRO .?
   ^ IN aWord
@@ -35,6 +36,11 @@ VOID TestWithDump DelegateToGen
   +
  ; // : B
  
+ : C
+  3
+  +
+ ; // : C
+ 
  TtfwWord VAR g_Gen
  : Gen
   : A
@@ -63,10 +69,18 @@ VOID TestWithDump DelegateToGen
  DO
  .
  1
+ C
+ DelegateToGen
+ pop:KeywordFinder:KeywordByName
+ pop:KeyWord:Word
+ DO
+ .
+ 1
  A
  .
 ; // VOID TestWithDump DelegateToGen
 
 2
 3
+4
 2
