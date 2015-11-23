@@ -33,9 +33,14 @@ Test&Dump DelegateToGen
   1
  ; // A
 
+ : B
+  2
+ ; // B
+
  @ Gen >>> g_Gen
 
  .? A . 
+ .? B . 
  A .
 ; // DelegateToGen
 
