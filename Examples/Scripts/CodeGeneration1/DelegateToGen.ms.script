@@ -20,14 +20,6 @@ Test&Dump DelegateToGen
    ( Result := ( l_Member pop:KeyWord:Word ) ) 
  ; // .FindWord
 
- : .FindWordAndDup
-  .FindWord DUP
- ; // .FindWordAndDup
-
- : .FindWordAndDropIfNilElsePushTrue
-  .FindWordAndDup
- ; // .FindWordAndDropIfNilElsePushTrue
-
  MACRO .?
    ^ IN aWord
 
