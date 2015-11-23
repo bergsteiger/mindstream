@@ -25,9 +25,9 @@ Test&Dump DelegateToGen
   .FindWord DUP
  ; // .FindWordAndDup
 
- : .FindWordAndDropIfNil
+ : .FindWordAndDropIfNilElsePushTrue
   .FindWordAndDup
- ; // FindWordAndDropIfNil
+ ; // .FindWordAndDropIfNilElsePushTrue
 
  MACRO .?
    ^ IN aWord
