@@ -24,6 +24,37 @@ VOID TestWithDump DelegateToGen
   l_Name
  ; // IMMEDIATE VOID MACRO .?
  
+ OBJECT OPERATOR .FindWord
+  STRING IN aName
+  OBJECT IN aWord
+  OBJECT VAR l_Member
+  aName
+  aWord
+  pop:Word:FindMember
+  l_Member
+  pop:Word:SetValue
+  if
+   (
+    l_Member
+    IsNil
+   )
+  then
+   (
+    nil
+    Result
+    pop:Word:SetValue
+   )
+  else
+   (
+    (
+     l_Member
+     pop:KeyWord:Word
+    )
+    Result
+    pop:Word:SetValue
+   )
+ ; // OBJECT OPERATOR .FindWord
+ 
  : A
   1
   +
