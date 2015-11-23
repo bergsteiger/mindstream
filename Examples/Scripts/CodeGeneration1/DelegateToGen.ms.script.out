@@ -100,18 +100,26 @@ VOID TestWithDump DelegateToGen
  ; // : D
  
  TtfwWord VAR g_Gen
- : Gen
+ : Gen1
   : A
    10
    +
   ; // : A
   
- ; // : Gen
+ ; // : Gen1
+ 
+ : Gen2
+  : A
+   10
+   +
+  ; // : A
+  
+ ; // : Gen2
  
  DelegateToGen
  DumpElement
  @
- Gen
+ Gen1
  g_Gen
  pop:Word:SetValue
  1
