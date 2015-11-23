@@ -15,7 +15,12 @@ Test&Dump DelegateToGen
 
  MACRO [.?]
   ^ IN aName
-  aName DO Ctx:PushFinder pop:KeywordFinder:KeywordByName <> nil .
+  if ( aName DO Ctx:PushFinder pop:KeywordFinder:KeywordByName <> nil ) then
+  begin
+  end
+  else
+  begin
+  end
  ; // [.?]
 
  : .?

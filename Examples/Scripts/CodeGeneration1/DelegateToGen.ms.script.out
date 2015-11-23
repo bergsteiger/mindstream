@@ -1,4 +1,3 @@
-False
 VOID TestWithDump DelegateToGen
  : .?
   ^L IN aName
@@ -6,13 +5,21 @@ VOID TestWithDump DelegateToGen
  
  IMMEDIATE VOID MACRO [.?]
   ^ IN aName
-  aName
-  DO
-  Ctx:PushFinder
-  pop:KeywordFinder:KeywordByName
-  <>
-  nil
-  .
+  if
+   (
+    aName
+    DO
+    Ctx:PushFinder
+    pop:KeywordFinder:KeywordByName
+    <>
+    nil
+   )
+  then
+   BEGIN
+   END
+  else
+   BEGIN
+   END
  ; // IMMEDIATE VOID MACRO [.?]
  
  : A
