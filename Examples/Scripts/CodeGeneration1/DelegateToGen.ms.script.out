@@ -11,7 +11,13 @@ VOID TestWithDump DelegateToGen
   l_Name
   pop:Word:SetValue
   axiom:PushSymbol
+  [EXECUTE]
+  axiom:PushSymbol
+  (
+  axiom:PushSymbol
   CompileWordByName
+  axiom:PushSymbol
+  )
  ; // IMMEDIATE VOID MACRO [.?]
  
  : A

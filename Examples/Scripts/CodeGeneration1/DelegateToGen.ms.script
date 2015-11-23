@@ -30,7 +30,10 @@ Test&Dump DelegateToGen
   STRING VAR l_Name
   aName DO >>> l_Name
 
+  axiom:PushSymbol [EXECUTE]
+  axiom:PushSymbol (
   axiom:PushSymbol CompileWordByName
+  axiom:PushSymbol )
 
  ; // [.?]
 
