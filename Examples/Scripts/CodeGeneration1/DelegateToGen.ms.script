@@ -16,12 +16,7 @@ Test&Dump DelegateToGen
   l_Name .
 
   axiom:PushStringAsSymbol l_Name
-  Ctx:PushFinder CompileWeakRef
-  @ pop:KeywordFinder:KeywordByName CompileValue
-  @ pop:KeyWord:Word CompileValue
-  @ DO CompileValue
 
-  //aWord DO
  ; // .?
 
  : Gen
