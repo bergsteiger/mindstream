@@ -13,11 +13,15 @@ Test&Dump DelegateToGen
  
   TtfwKeyWord VAR l_Member
   aName g_Gen pop:Word:FindMember >>> l_Member
+
+  TtfwWord VAR l_Word
  
   if ( l_Member IsNil ) then
-   ( Result := nil )
+   ( nil >>> l_Word )
   else
-   ( Result := ( l_Member pop:KeyWord:Word ) ) 
+   ( l_Member pop:KeyWord:Word >>> l_Word )
+
+  l_Word >>> Result
  ; // .FindWord
 
  MACRO .?

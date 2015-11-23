@@ -47,6 +47,7 @@ VOID TestWithDump DelegateToGen
  TtfwWord OPERATOR .FindWord
   STRING IN aName
   TtfwKeyWord VAR l_Member
+  TtfwWord VAR l_Word
   aName
   g_Gen
   pop:Word:FindMember
@@ -60,18 +61,19 @@ VOID TestWithDump DelegateToGen
   then
    (
     nil
-    Result
+    l_Word
     pop:Word:SetValue
    )
   else
    (
-    (
-     l_Member
-     pop:KeyWord:Word
-    )
-    Result
+    l_Member
+    pop:KeyWord:Word
+    l_Word
     pop:Word:SetValue
    )
+  l_Word
+  Result
+  pop:Word:SetValue
  ; // TtfwWord OPERATOR .FindWord
  
  : A
