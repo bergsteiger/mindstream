@@ -5,16 +5,20 @@ VOID TestWithDump DelegateToGen
  
  IMMEDIATE VOID MACRO [.?]
   ^ IN aName
+  TtfwKeyWord VAR l_KeyWord
   STRING VAR l_Name
   aName
   DO
   l_Name
   pop:Word:SetValue
+  l_Name
+  Ctx:PushFinder
+  pop:KeywordFinder:KeywordByName
+  l_KeyWord
+  pop:Word:SetValue
   if
    (
-    l_Name
-    Ctx:PushFinder
-    pop:KeywordFinder:KeywordByName
+    l_KeyWord
     <>
     nil
    )

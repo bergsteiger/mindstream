@@ -17,7 +17,10 @@ Test&Dump DelegateToGen
   ^ IN aName
   STRING VAR l_Name
   aName DO >>> l_Name
-  if ( l_Name Ctx:PushFinder pop:KeywordFinder:KeywordByName <> nil ) then
+
+  TtfwKeyWord VAR l_KeyWord
+  l_Name Ctx:PushFinder pop:KeywordFinder:KeywordByName >>> l_KeyWord
+  if ( l_KeyWord <> nil ) then
   begin
   end
   else
