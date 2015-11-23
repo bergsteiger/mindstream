@@ -50,10 +50,9 @@ VOID TestWithDump DelegateToGen
  
  TtfwWord OPERATOR .FindWord
   STRING IN aName
-  TtfwWord IN aWord
   TtfwKeyWord VAR l_Member
   aName
-  aWord
+  g_Gen
   pop:Word:FindMember
   l_Member
   pop:Word:SetValue
@@ -207,7 +206,6 @@ VOID TestWithDump DelegateToGen
  A
  .
  'A'
- g_Gen
  .FindWord
  .
 ; // VOID TestWithDump DelegateToGen

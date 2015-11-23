@@ -10,10 +10,9 @@ Test&Dump DelegateToGen
 
  TtfwWord operator .FindWord
   STRING IN aName
-  TtfwWord IN aWord
  
   TtfwKeyWord VAR l_Member
-  aName aWord pop:Word:FindMember >>> l_Member
+  aName g_Gen pop:Word:FindMember >>> l_Member
  
   if ( l_Member IsNil ) then
    ( Result := nil )
@@ -85,7 +84,7 @@ Test&Dump DelegateToGen
  1 .? C . 
  1 .? D . 
  1 A .
- 'A' g_Gen .FindWord .
+ 'A' .FindWord .
 ; // DelegateToGen
 
 DelegateToGen
