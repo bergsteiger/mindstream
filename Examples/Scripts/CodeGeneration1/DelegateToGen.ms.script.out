@@ -8,6 +8,11 @@ VOID TestWithDump DelegateToGen
   pop:Word:SetValue
   l_Name
   .
+  Ctx:PushFinder
+  CompileValue
+  @
+  .
+  CompileValue
   aWord
   DO
  ; // : .?
@@ -37,5 +42,4 @@ VOID TestWithDump DelegateToGen
 ; // VOID TestWithDump DelegateToGen
 
 A
-1
-1
+DelegateToGen.ms.script : Ошибка выполнения: "Слово не может содержать кода". Главный файл: DelegateToGen.ms.script. Класс: TkwMain. Слово: 
