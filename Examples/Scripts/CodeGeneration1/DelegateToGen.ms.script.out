@@ -11,8 +11,8 @@ VOID TestWithDump DelegateToGen
   pop:Word:SetValue
   l_Name
   .
+  axiom:PushStringAsSymbol
   l_Name
-  Ctx:Parser:PushString
   Ctx:PushFinder
   CompileWeakRef
   @
@@ -59,21 +59,21 @@ VOID TestWithDump DelegateToGen
  pop:KeywordFinder:KeywordByName
  pop:KeyWord:Word
  DO
- 'A'
+ A
  .
  1
  DelegateToGen
  pop:KeywordFinder:KeywordByName
  pop:KeyWord:Word
  DO
- 'B'
+ B
  .
  1
  DelegateToGen
  pop:KeywordFinder:KeywordByName
  pop:KeyWord:Word
  DO
- 'C'
+ C
  .
  1
  A

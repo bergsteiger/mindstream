@@ -15,7 +15,7 @@ Test&Dump DelegateToGen
   aWord pop:Word:Name >>> l_Name
   l_Name .
 
-  l_Name Ctx:Parser:PushString
+  axiom:PushStringAsSymbol l_Name
   Ctx:PushFinder CompileWeakRef
   @ pop:KeywordFinder:KeywordByName CompileValue
   @ pop:KeyWord:Word CompileValue
