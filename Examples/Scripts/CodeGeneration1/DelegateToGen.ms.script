@@ -9,10 +9,13 @@ Test&Dump DelegateToGen
  TtfwWord VAR g_Gen
 
  : .FindWordAndDoElsePushFalse
-  STRING IN aName
+  Literal IN aName
+
+  STRING VAR l_Name
+  aName |N >>> l_Name
  
   TtfwKeyWord VAR l_Member
-  aName g_Gen pop:Word:FindMember >>> l_Member
+  l_Name g_Gen pop:Word:FindMember >>> l_Member
 
   TtfwWord VAR l_Word
  
@@ -37,8 +40,8 @@ Test&Dump DelegateToGen
   axiom:PushSymbol (
   axiom:PushSymbol if
   axiom:PushSymbol (
-  l_Name Ctx:Parser:PushString 
   axiom:PushSymbol .FindWordAndDoElsePushFalse
+  l_Name Ctx:Parser:PushString 
   axiom:PushSymbol )
   axiom:PushSymbol (
   axiom:PushStringAsSymbol l_Name
@@ -76,8 +79,8 @@ Test&Dump DelegateToGen
  1 .? C . 
  1 .? D . 
  1 A .
- 1 'A' .FindWordAndDoElsePushFalse DROP .
- 1 'B' .FindWordAndDoElsePushFalse DROP .
+ 1 .FindWordAndDoElsePushFalse A DROP .
+ 1 .FindWordAndDoElsePushFalse B DROP .
 ; // DelegateToGen
 
 DelegateToGen
