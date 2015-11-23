@@ -20,8 +20,12 @@ VOID TestWithDump DelegateToGen
   true
   axiom:PushSymbol
   )
+  axiom:PushSymbol
+  (
   axiom:PushStringAsSymbol
   l_Name
+  axiom:PushSymbol
+  )
   axiom:PushSymbol
   else
   axiom:PushSymbol
@@ -109,7 +113,9 @@ VOID TestWithDump DelegateToGen
    true
   )
  then
-  A
+  (
+   A
+  )
  else
   VOID (
    DO
@@ -121,7 +127,9 @@ VOID TestWithDump DelegateToGen
    true
   )
  then
-  B
+  (
+   B
+  )
  else
   VOID (
    DO
@@ -133,7 +141,9 @@ VOID TestWithDump DelegateToGen
    true
   )
  then
-  C
+  (
+   C
+  )
  else
   VOID (
    DO
@@ -145,7 +155,9 @@ VOID TestWithDump DelegateToGen
    true
   )
  then
-  D
+  (
+   D
+  )
  else
   VOID (
    DO

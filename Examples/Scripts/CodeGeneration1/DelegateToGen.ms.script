@@ -36,7 +36,9 @@ Test&Dump DelegateToGen
   axiom:PushSymbol (
   axiom:PushSymbol true
   axiom:PushSymbol )
+  axiom:PushSymbol (
   axiom:PushStringAsSymbol l_Name
+  axiom:PushSymbol )
   axiom:PushSymbol else
   axiom:PushSymbol (
   axiom:PushSymbol DO
