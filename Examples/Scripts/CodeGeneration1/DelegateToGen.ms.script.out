@@ -1,5 +1,4 @@
 A
-TkwCompiledProcedureWithStackChecking
 VOID TestWithDump DelegateToGen
  IMMEDIATE VOID MACRO .?
   ^ IN aWord
@@ -11,7 +10,7 @@ VOID TestWithDump DelegateToGen
   l_Name
   .
   Ctx:PushFinder
-  .
+  CompileRef
   @
   .
   CompileValue
@@ -34,10 +33,12 @@ VOID TestWithDump DelegateToGen
  Gen
  g_Gen
  pop:Word:SetValue
+ DelegateToGen
  .
  .
  A
  .
 ; // VOID TestWithDump DelegateToGen
 
+TkwCompiledProcedureWithStackChecking
 DelegateToGen.ms.script : Стек пустой
