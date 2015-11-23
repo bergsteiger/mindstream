@@ -22,12 +22,7 @@ Test&Dump DelegateToGen
   l_Name Ctx:PushFinder pop:KeywordFinder:KeywordByName >>> l_KeyWord
   
   l_KeyWord <> nil ?ASSURE [ 'Слово ' l_Name ' не определено' ]
-  if ( l_KeyWord <> nil ) then
-  begin
-  end
-  else
-  begin
-  end
+
  ; // [.?]
 
  : .?
