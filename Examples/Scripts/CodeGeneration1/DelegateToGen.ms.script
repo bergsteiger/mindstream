@@ -4,6 +4,10 @@ USES
  Testing.ms.dict
 ;
 
+USES
+ classRelations.ms.dict
+;
+
 Test&Dump DelegateToGen
 
  TtfwWord VAR g_Gen
