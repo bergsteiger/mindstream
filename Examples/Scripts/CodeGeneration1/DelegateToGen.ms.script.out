@@ -73,8 +73,9 @@ VOID TestWithDump DelegateToGen
     false
    )
   else
-   TtfwWord (
+   (
     l_Word
+    DO
    )
  ; // : .FindWord
  
@@ -185,5 +186,4 @@ VOID TestWithDump DelegateToGen
 4
 5
 2
-TkwCompiledProcedure
-False
+DelegateToGen.ms.script : Ошибка выполнения: "Ошибка при получении параметра aA: TtfwStackValue : Стек пустой". Главный файл: DelegateToGen.ms.script. Класс: TkwAdd. Слово: +
