@@ -173,8 +173,10 @@ VOID TestWithDump DelegateToGen
  .FindWord
  DROP
  .
+ 1
  'B'
  .FindWord
+ DROP
  .
 ; // VOID TestWithDump DelegateToGen
 
@@ -184,4 +186,4 @@ VOID TestWithDump DelegateToGen
 1
 2
 11
-False
+1
