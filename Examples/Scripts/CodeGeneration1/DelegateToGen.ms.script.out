@@ -12,7 +12,7 @@ VOID TestWithDump DelegateToGen
   Ctx:PushFinder
   CompileWeakRef
   @
-  DO
+  pop:Word:Name
   CompileRef
   @
   .
@@ -37,13 +37,13 @@ VOID TestWithDump DelegateToGen
  g_Gen
  pop:Word:SetValue
  DelegateToGen
- DO
+ pop:Word:Name
  .
  .
  A
  .
 ; // VOID TestWithDump DelegateToGen
 
-TkwDoWord
+TkwPopWordName
 TkwCompiledProcedureWithStackChecking
 1
