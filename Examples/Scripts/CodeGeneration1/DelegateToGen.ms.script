@@ -9,7 +9,12 @@ Test&Dump DelegateToGen
  TtfwWord VAR g_Gen
 
  : .?
-  ^ IN aWord
+   ^ IN aWord
+
+  STRING VAR l_Name
+  aWord pop:Word:Name >>> l_Name
+  l_Name .
+
   aWord DO
  ; // .?
 

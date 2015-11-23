@@ -1,6 +1,13 @@
 VOID TestWithDump DelegateToGen
  : .?
   ^ IN aWord
+  STRING VAR l_Name
+  aWord
+  pop:Word:Name
+  l_Name
+  pop:Word:SetValue
+  l_Name
+  .
   aWord
   DO
  ; // : .?
@@ -29,5 +36,6 @@ VOID TestWithDump DelegateToGen
  .
 ; // VOID TestWithDump DelegateToGen
 
+A
 1
 1
