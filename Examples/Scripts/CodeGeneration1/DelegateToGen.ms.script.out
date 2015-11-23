@@ -1,5 +1,7 @@
+A
+TkwCompiledProcedureWithStackChecking
 VOID TestWithDump DelegateToGen
- : .?
+ IMMEDIATE VOID MACRO .?
   ^ IN aWord
   STRING VAR l_Name
   aWord
@@ -9,13 +11,11 @@ VOID TestWithDump DelegateToGen
   l_Name
   .
   Ctx:PushFinder
-  CompileValue
+  .
   @
   .
   CompileValue
-  aWord
-  DO
- ; // : .?
+ ; // IMMEDIATE VOID MACRO .?
  
  : A
   1
@@ -34,12 +34,10 @@ VOID TestWithDump DelegateToGen
  Gen
  g_Gen
  pop:Word:SetValue
- .?
- A
+ .
  .
  A
  .
 ; // VOID TestWithDump DelegateToGen
 
-A
-DelegateToGen.ms.script : Ошибка выполнения: "Слово не может содержать кода". Главный файл: DelegateToGen.ms.script. Класс: TkwMain. Слово: 
+DelegateToGen.ms.script : Стек пустой

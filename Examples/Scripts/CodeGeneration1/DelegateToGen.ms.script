@@ -8,17 +8,17 @@ Test&Dump DelegateToGen
 
  TtfwWord VAR g_Gen
 
- : .?
+ MACRO .?
    ^ IN aWord
 
   STRING VAR l_Name
   aWord pop:Word:Name >>> l_Name
   l_Name .
 
-  Ctx:PushFinder CompileValue
+  Ctx:PushFinder .
   @ . CompileValue
 
-  aWord DO
+  //aWord DO
  ; // .?
 
  : Gen
