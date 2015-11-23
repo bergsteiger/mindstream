@@ -3,34 +3,7 @@ B
 C
 D
 VOID TestWithDump DelegateToGen
- IMMEDIATE VOID MACRO .?
-  ^ IN aWord
-  STRING VAR l_Name
-  aWord
-  pop:Word:Name
-  l_Name
-  pop:Word:SetValue
-  l_Name
-  .
-  axiom:PushSymbol
-  (
-  axiom:PushSymbol
-  if
-  axiom:PushSymbol
-  (
-  axiom:PushSymbol
-  .FindWordAndDoElsePushFalse
-  axiom:PushStringAsSymbol
-  l_Name
-  axiom:PushSymbol
-  )
-  axiom:PushStringAsSymbol
-  l_Name
-  axiom:PushSymbol
-  )
- ; // IMMEDIATE VOID MACRO .?
- 
- : .FindWordAndDoElsePushFalse
+ : ...FindWordAndDoElsePushFalse.
   ^L IN aName
   TtfwKeyWord VAR l_Member
   STRING VAR l_Name
@@ -77,7 +50,34 @@ VOID TestWithDump DelegateToGen
     DO
     true
    )
- ; // : .FindWordAndDoElsePushFalse
+ ; // : ...FindWordAndDoElsePushFalse.
+ 
+ IMMEDIATE VOID MACRO .?
+  ^ IN aWord
+  STRING VAR l_Name
+  aWord
+  pop:Word:Name
+  l_Name
+  pop:Word:SetValue
+  l_Name
+  .
+  axiom:PushSymbol
+  (
+  axiom:PushSymbol
+  if
+  axiom:PushSymbol
+  (
+  axiom:PushSymbol
+  ...FindWordAndDoElsePushFalse.
+  axiom:PushStringAsSymbol
+  l_Name
+  axiom:PushSymbol
+  )
+  axiom:PushStringAsSymbol
+  l_Name
+  axiom:PushSymbol
+  )
+ ; // IMMEDIATE VOID MACRO .?
  
  : A
   1
@@ -118,7 +118,7 @@ VOID TestWithDump DelegateToGen
  (
   if
    (
-    .FindWordAndDoElsePushFalse
+    ...FindWordAndDoElsePushFalse.
     'A'
    )
   then
@@ -129,7 +129,7 @@ VOID TestWithDump DelegateToGen
  (
   if
    (
-    .FindWordAndDoElsePushFalse
+    ...FindWordAndDoElsePushFalse.
     'B'
    )
   then
@@ -140,7 +140,7 @@ VOID TestWithDump DelegateToGen
  (
   if
    (
-    .FindWordAndDoElsePushFalse
+    ...FindWordAndDoElsePushFalse.
     'C'
    )
   then
@@ -151,7 +151,7 @@ VOID TestWithDump DelegateToGen
  (
   if
    (
-    .FindWordAndDoElsePushFalse
+    ...FindWordAndDoElsePushFalse.
     'D'
    )
   then
@@ -162,12 +162,12 @@ VOID TestWithDump DelegateToGen
  A
  .
  1
- .FindWordAndDoElsePushFalse
+ ...FindWordAndDoElsePushFalse.
  'A'
  DROP
  .
  1
- .FindWordAndDoElsePushFalse
+ ...FindWordAndDoElsePushFalse.
  'B'
  DROP
  .

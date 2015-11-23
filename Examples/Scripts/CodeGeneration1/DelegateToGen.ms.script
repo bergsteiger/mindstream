@@ -8,7 +8,7 @@ Test&Dump DelegateToGen
 
  TtfwWord VAR g_Gen
 
- : .FindWordAndDoElsePushFalse
+ : ...FindWordAndDoElsePushFalse.
   Literal IN aName
 
   STRING VAR l_Name
@@ -28,7 +28,7 @@ Test&Dump DelegateToGen
    ( false )
   else
    ( l_Word DO true )
- ; // .FindWordAndDoElsePushFalse
+ ; // ...FindWordAndDoElsePushFalse.
 
  MACRO .?
    ^ IN aWord
@@ -40,7 +40,7 @@ Test&Dump DelegateToGen
   axiom:PushSymbol (
   axiom:PushSymbol if
   axiom:PushSymbol (
-  axiom:PushSymbol .FindWordAndDoElsePushFalse
+  axiom:PushSymbol ...FindWordAndDoElsePushFalse.
   axiom:PushStringAsSymbol l_Name 
   axiom:PushSymbol )
   axiom:PushStringAsSymbol l_Name
@@ -77,8 +77,8 @@ Test&Dump DelegateToGen
  1 .? C . 
  1 .? D . 
  1 A .
- 1 .FindWordAndDoElsePushFalse A DROP .
- 1 .FindWordAndDoElsePushFalse B DROP .
+ 1 ...FindWordAndDoElsePushFalse. A DROP .
+ 1 ...FindWordAndDoElsePushFalse. B DROP .
 ; // DelegateToGen
 
 DelegateToGen
