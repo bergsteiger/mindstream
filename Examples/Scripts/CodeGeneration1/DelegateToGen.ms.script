@@ -6,41 +6,17 @@ USES
 
 Test&Dump DelegateToGen
 
- MACRO CompileWordByName
-//  ^ IN aName
-//  STRING VAR l_Name
-//  aName DO >>> l_Name
+ TtfwWord VAR g_Gen
 
-//  TtfwKeyWord VAR l_KeyWord
-//  l_Name Ctx:PushFinder pop:KeywordFinder:KeywordByName >>> l_KeyWord
-  
-//  l_KeyWord <> nil ?ASSURE [ 'Слово ' l_Name ' не определено' ]
-
- ; // CompileWordByName
+ : .?
+  ^ IN aWord
+  aWord DO
+ ; // .?
 
  : Gen
   : A
   ; // A
  ; // Gen
-
- TtfwWord VAR g_Gen
-
- MACRO [.?]
-  Literal IN aName
-  STRING VAR l_Name
-  aName |N >>> l_Name
-
-  axiom:PushSymbol [EXECUTE]
-  axiom:PushSymbol (
-  axiom:PushSymbol CompileWordByName
-  axiom:PushSymbol )
-
- ; // [.?]
-
-// : .?
-//  Literal IN aName
-//  [.?] ( aName |N )
-// ; // .?
 
  : A
   1
@@ -48,7 +24,7 @@ Test&Dump DelegateToGen
 
  @ Gen >>> g_Gen
 
- [.?] A A .
+ .? A A .
 ; // DelegateToGen
 
 DelegateToGen

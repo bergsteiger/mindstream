@@ -1,27 +1,13 @@
 VOID TestWithDump DelegateToGen
- IMMEDIATE VOID MACRO [.?]
-  ^L IN aName
-  STRING VAR l_Name
-  aName
-  |N
-  l_Name
-  pop:Word:SetValue
-  axiom:PushSymbol
-  [EXECUTE]
-  axiom:PushSymbol
-  (
-  axiom:PushSymbol
-  CompileWordByName
-  axiom:PushSymbol
-  )
- ; // IMMEDIATE VOID MACRO [.?]
+ : .?
+  ^ IN aWord
+  aWord
+  DO
+ ; // : .?
  
  : A
   1
  ; // : A
- 
- IMMEDIATE VOID MACRO CompileWordByName
- ; // IMMEDIATE VOID MACRO CompileWordByName
  
  TtfwWord VAR g_Gen
  : Gen
@@ -36,8 +22,11 @@ VOID TestWithDump DelegateToGen
  Gen
  g_Gen
  pop:Word:SetValue
+ .?
+ A
  A
  .
 ; // VOID TestWithDump DelegateToGen
 
 1
+DelegateToGen.ms.script : Ошибка выполнения: "Процедура не может возвращать значения через стек". Главный файл: DelegateToGen.ms.script. Класс: TkwCompiledProcedureWithStackChecking. Слово: DelegateToGen Producer: TestWithDump Parent: 
