@@ -22,6 +22,14 @@ VOID TestWithDump DelegateToGen
   )
   axiom:PushStringAsSymbol
   l_Name
+  axiom:PushSymbol
+  else
+  axiom:PushSymbol
+  (
+  axiom:PushSymbol
+  DO
+  axiom:PushSymbol
+  )
  ; // IMMEDIATE VOID MACRO .?
  
  TtfwWord OPERATOR .FindWord
@@ -102,6 +110,10 @@ VOID TestWithDump DelegateToGen
   )
  then
   A
+ else
+  VOID (
+   DO
+  )
  .
  1
  if
@@ -110,6 +122,10 @@ VOID TestWithDump DelegateToGen
   )
  then
   B
+ else
+  VOID (
+   DO
+  )
  .
  1
  if
@@ -118,6 +134,10 @@ VOID TestWithDump DelegateToGen
   )
  then
   C
+ else
+  VOID (
+   DO
+  )
  .
  1
  if
@@ -126,6 +146,10 @@ VOID TestWithDump DelegateToGen
   )
  then
   D
+ else
+  VOID (
+   DO
+  )
  .
  1
  A
