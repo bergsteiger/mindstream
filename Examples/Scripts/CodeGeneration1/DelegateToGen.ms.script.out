@@ -38,13 +38,13 @@ VOID TestWithDump DelegateToGen
    )
   then
    BOOLEAN (
-    false
+    true
    )
   else
    (
     l_Word
     DO
-    true
+    false
    )
  ; // : ...FindWordAndDoElsePushFalse.
  
@@ -210,11 +210,11 @@ VOID TestWithDump DelegateToGen
  .
 ; // VOID TestWithDump DelegateToGen
 
-12
+11
+4
+4
+5
 2
-1
-1
-1
-24
-1
-1
+22
+4
+5

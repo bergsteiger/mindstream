@@ -25,9 +25,9 @@ Test&Dump DelegateToGen
    ( l_Member pop:KeyWord:Word >>> l_Word )
 
   if ( l_Word IsNil ) then
-   ( false )
+   ( true )
   else
-   ( l_Word DO true )
+   ( l_Word DO false )
  ; // ...FindWordAndDoElsePushFalse.
 
  MACRO .?
