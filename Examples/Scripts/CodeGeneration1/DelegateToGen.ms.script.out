@@ -2,6 +2,10 @@ A
 B
 C
 D
+A
+B
+C
+D
 VOID TestWithDump DelegateToGen
  : ...FindWordAndDoElsePushFalse.
   ^L IN aName
@@ -169,8 +173,64 @@ VOID TestWithDump DelegateToGen
  1
  A
  .
+ @
+ Gen1
+ g_Gen
+ pop:Word:SetValue
+ 1
+ (
+  if
+   (
+    ...FindWordAndDoElsePushFalse.
+    'A'
+   )
+  then
+   A
+ )
+ .
+ 1
+ (
+  if
+   (
+    ...FindWordAndDoElsePushFalse.
+    'B'
+   )
+  then
+   B
+ )
+ .
+ 1
+ (
+  if
+   (
+    ...FindWordAndDoElsePushFalse.
+    'C'
+   )
+  then
+   C
+ )
+ .
+ 1
+ (
+  if
+   (
+    ...FindWordAndDoElsePushFalse.
+    'D'
+   )
+  then
+   D
+ )
+ .
+ 1
+ A
+ .
 ; // VOID TestWithDump DelegateToGen
 
+12
+1
+1
+1
+2
 12
 1
 1
