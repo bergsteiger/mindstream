@@ -20,8 +20,8 @@ VOID TestWithDump DelegateToGen
   (
   axiom:PushSymbol
   .FindWordAndDoElsePushFalse
+  axiom:PushStringAsSymbol
   l_Name
-  Ctx:Parser:PushString
   axiom:PushSymbol
   )
   axiom:PushSymbol
