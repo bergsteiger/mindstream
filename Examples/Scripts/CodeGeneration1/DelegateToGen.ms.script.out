@@ -23,6 +23,10 @@ VOID TestWithDump DelegateToGen
   axiom:PushSymbol
   DROP
   axiom:PushSymbol
+  g_Gen
+  axiom:PushSymbol
+  DROP
+  axiom:PushSymbol
   true
   axiom:PushSymbol
   )
@@ -121,6 +125,8 @@ VOID TestWithDump DelegateToGen
    (
     'A'
     DROP
+    g_Gen
+    DROP
     true
    )
   then
@@ -138,6 +144,8 @@ VOID TestWithDump DelegateToGen
   if
    (
     'B'
+    DROP
+    g_Gen
     DROP
     true
    )
@@ -157,6 +165,8 @@ VOID TestWithDump DelegateToGen
    (
     'C'
     DROP
+    g_Gen
+    DROP
     true
    )
   then
@@ -174,6 +184,8 @@ VOID TestWithDump DelegateToGen
   if
    (
     'D'
+    DROP
+    g_Gen
     DROP
     true
    )
