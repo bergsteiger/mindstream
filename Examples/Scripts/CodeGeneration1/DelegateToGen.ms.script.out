@@ -74,6 +74,7 @@ VOID TestWithDump DelegateToGen
    (
     l_Word
     DO
+    true
    )
  ; // : .FindWord
  
@@ -176,4 +177,11 @@ VOID TestWithDump DelegateToGen
  .
 ; // VOID TestWithDump DelegateToGen
 
-DelegateToGen.ms.script : Тип значения tfw_vtInt несовместим с tfw_vtBool
+12
+1
+1
+1
+2
+True
+False
+DelegateToGen.ms.script : Ошибка выполнения: "Процедура не может возвращать значения через стек". Главный файл: DelegateToGen.ms.script. Класс: TkwCompiledProcedureWithStackChecking. Слово: DelegateToGen Producer: TestWithDump Parent: 

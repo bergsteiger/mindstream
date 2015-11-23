@@ -24,7 +24,7 @@ Test&Dump DelegateToGen
   if ( l_Word IsNil ) then
    ( false )
   else
-   ( l_Word DO )
+   ( l_Word DO true )
  ; // .FindWord
 
  MACRO .?
