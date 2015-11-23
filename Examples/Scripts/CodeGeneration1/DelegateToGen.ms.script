@@ -48,12 +48,6 @@ Test&Dump DelegateToGen
 
  ; // .?
 
- : Gen
-  : A
-   10 +
-  ; // A
- ; // Gen
-
  : A
   1 +
  ; // A
@@ -69,6 +63,12 @@ Test&Dump DelegateToGen
  : D
   4 +
  ; // D
+
+ : Gen
+  : A
+   10 +
+  ; // A
+ ; // Gen
 
  @ Gen >>> g_Gen
 
