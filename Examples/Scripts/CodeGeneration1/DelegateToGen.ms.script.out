@@ -1,5 +1,6 @@
 VOID TestWithDump DelegateToGen
  : .?
+  ^L IN aName
  ; // : .?
  
  : A
@@ -20,6 +21,7 @@ VOID TestWithDump DelegateToGen
  g_Gen
  pop:Word:SetValue
  .?
+ 'A'
  A
  .
 ; // VOID TestWithDump DelegateToGen

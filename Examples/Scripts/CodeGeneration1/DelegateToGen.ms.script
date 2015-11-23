@@ -14,6 +14,7 @@ Test&Dump DelegateToGen
  TtfwWord VAR g_Gen
 
  : .?
+  Literal IN aName
  ; // .?
 
  : A
@@ -22,7 +23,7 @@ Test&Dump DelegateToGen
 
  @ Gen >>> g_Gen
 
- .? A .
+ .? A A .
 ; // DelegateToGen
 
 DelegateToGen
