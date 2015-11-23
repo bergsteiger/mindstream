@@ -79,6 +79,10 @@ VOID TestWithDump DelegateToGen
    )
  ; // TtfwWord OPERATOR .FindWord
  
+ : .FindWordAndDropIfNil
+  .FindWordAndDup
+ ; // : .FindWordAndDropIfNil
+ 
  : .FindWordAndDup
   .FindWord
   DUP

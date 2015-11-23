@@ -25,6 +25,10 @@ Test&Dump DelegateToGen
   .FindWord DUP
  ; // .FindWordAndDup
 
+ : .FindWordAndDropIfNil
+  .FindWordAndDup
+ ; // FindWordAndDropIfNil
+
  MACRO .?
    ^ IN aWord
 
