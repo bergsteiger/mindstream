@@ -14,9 +14,6 @@ VOID TestWithDump DelegateToGen
   @
   pop:Word:Name
   CompileValue
-  @
-  .
-  CompileValue
  ; // IMMEDIATE VOID MACRO .?
  
  : A
@@ -39,10 +36,9 @@ VOID TestWithDump DelegateToGen
  DelegateToGen
  pop:Word:Name
  .
- .
  A
  .
 ; // VOID TestWithDump DelegateToGen
 
 DelegateToGen
-DelegateToGen.ms.script : Стек пустой
+1
