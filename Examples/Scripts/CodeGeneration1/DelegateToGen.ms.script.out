@@ -63,7 +63,19 @@ VOID TestWithDump DelegateToGen
     l_Word
     pop:Word:SetValue
    )
-  l_Word
+  if
+   (
+    l_Word
+    IsNil
+   )
+  then
+   BOOLEAN (
+    false
+   )
+  else
+   TtfwWord (
+    l_Word
+   )
  ; // : .FindWord
  
  : A

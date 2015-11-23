@@ -21,7 +21,10 @@ Test&Dump DelegateToGen
   else
    ( l_Member pop:KeyWord:Word >>> l_Word )
 
-  l_Word
+  if ( l_Word IsNil ) then
+   ( false )
+  else
+   ( l_Word )
  ; // .FindWord
 
  MACRO .?
