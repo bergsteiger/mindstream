@@ -48,30 +48,54 @@ VOID TestWithDump DelegateToGen
    )
  ; // : ...FindWordAndDoElsePushFalse.
  
- IMMEDIATE VOID MACRO .?
+ : .?
   ^ IN aWord
+  TtfwKeyWord VAR l_Member
   STRING VAR l_Name
+  TtfwWord VAR l_Word
   aWord
-  pop:Word:Name
+  |N
   l_Name
   pop:Word:SetValue
-  axiom:PushSymbol
-  (
-  axiom:PushSymbol
+  l_Name
+  g_Gen
+  pop:Word:FindMember
+  l_Member
+  pop:Word:SetValue
   if
-  axiom:PushSymbol
-  (
-  axiom:PushSymbol
-  ...FindWordAndDoElsePushFalse.
-  axiom:PushStringAsSymbol
-  l_Name
-  axiom:PushSymbol
-  )
-  axiom:PushStringAsSymbol
-  l_Name
-  axiom:PushSymbol
-  )
- ; // IMMEDIATE VOID MACRO .?
+   (
+    l_Member
+    IsNil
+   )
+  then
+   (
+    nil
+    l_Word
+    pop:Word:SetValue
+   )
+  else
+   (
+    l_Member
+    pop:KeyWord:Word
+    l_Word
+    pop:Word:SetValue
+   )
+  if
+   (
+    l_Word
+    IsNil
+   )
+  then
+   (
+    aWord
+    DO
+   )
+  else
+   (
+    l_Word
+    DO
+   )
+ ; // : .?
  
  : A
   1
@@ -133,48 +157,20 @@ VOID TestWithDump DelegateToGen
  g_Gen
  pop:Word:SetValue
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'A'
-   )
-  then
-   A
- )
+ .?
+ A
  .
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'B'
-   )
-  then
-   B
- )
+ .?
+ B
  .
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'C'
-   )
-  then
-   C
- )
+ .?
+ C
  .
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'D'
-   )
-  then
-   D
- )
+ .?
+ D
  .
  '----'
  .
@@ -183,48 +179,20 @@ VOID TestWithDump DelegateToGen
  g_Gen
  pop:Word:SetValue
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'A'
-   )
-  then
-   A
- )
+ .?
+ A
  .
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'B'
-   )
-  then
-   B
- )
+ .?
+ B
  .
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'C'
-   )
-  then
-   C
- )
+ .?
+ C
  .
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'D'
-   )
-  then
-   D
- )
+ .?
+ D
  .
  '----'
  .
@@ -233,48 +201,20 @@ VOID TestWithDump DelegateToGen
  g_Gen
  pop:Word:SetValue
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'A'
-   )
-  then
-   A
- )
+ .?
+ A
  .
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'B'
-   )
-  then
-   B
- )
+ .?
+ B
  .
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'C'
-   )
-  then
-   C
- )
+ .?
+ C
  .
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'D'
-   )
-  then
-   D
- )
+ .?
+ D
  .
  '----'
  .
@@ -283,48 +223,20 @@ VOID TestWithDump DelegateToGen
  g_Gen
  pop:Word:SetValue
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'A'
-   )
-  then
-   A
- )
+ .?
+ A
  .
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'B'
-   )
-  then
-   B
- )
+ .?
+ B
  .
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'C'
-   )
-  then
-   C
- )
+ .?
+ C
  .
  1
- (
-  if
-   (
-    ...FindWordAndDoElsePushFalse.
-    'D'
-   )
-  then
-   D
- )
+ .?
+ D
  .
  '----'
  .
