@@ -49,7 +49,7 @@ MACRO call.inherited
  : C
   INTEGER IN Self
 
-  Inherits A
+  // Inherits A
 
   Self 2 +
   call.inherited +
