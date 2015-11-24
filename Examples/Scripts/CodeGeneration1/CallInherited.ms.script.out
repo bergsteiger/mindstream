@@ -75,6 +75,14 @@ VOID TestWithDump CallInheritedTest
   .Inherited.Words
   (
    TtfwWord IN anAncestor
+   Result
+   IsNil
+   ?ASSURE
+   ARRAY [
+    'Множественное наследование не поддерживается для '
+    Self
+    |N
+   ]
    anAncestor
    Result
    pop:Word:SetValue
