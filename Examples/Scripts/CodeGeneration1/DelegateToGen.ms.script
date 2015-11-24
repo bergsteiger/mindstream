@@ -34,6 +34,8 @@ Test&Dump DelegateToGen
    ( 
     aGen .Inherited.Words .for> ( 
      IN anItem 
+     BOOLEAN VAR l_WasNil
+     Result IsNil >>> l_WasNil 
      aName anItem call.me >>> Result
     ) 
    )

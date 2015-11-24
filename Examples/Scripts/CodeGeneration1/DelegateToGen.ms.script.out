@@ -63,6 +63,11 @@ VOID TestWithDump DelegateToGen
     .Inherited.Words
     (
      IN anItem
+     BOOLEAN VAR l_WasNil
+     Result
+     IsNil
+     l_WasNil
+     pop:Word:SetValue
      aName
      anItem
      (
