@@ -142,6 +142,10 @@ VOID TestWithDump DelegateToGen
  ; // : Gen2
  
  : Gen3
+  Inherits %G
+   Gen1
+  ; // Inherits %G
+  
   : C
    30
    +
@@ -259,7 +263,7 @@ VOID TestWithDump DelegateToGen
 4
 5
 ----
-2
+11
 3
 31
 5
