@@ -77,7 +77,6 @@ VOID TestWithDump DelegateToGen
      )
      l_Found
      pop:Word:SetValue
-     NOT
      (
       l_WasNil
       OR
@@ -88,7 +87,7 @@ VOID TestWithDump DelegateToGen
        )
       )
      )
-     ?FAIL
+     ?ASSURE
      ARRAY [
       'Множественное наследование не поддерживается. Слово: '
       aName
