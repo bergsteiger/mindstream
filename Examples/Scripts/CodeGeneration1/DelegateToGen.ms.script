@@ -18,8 +18,6 @@ USES
 
 Test&Dump DelegateToGen
 
- TtfwWord VAR g_Gen
-
  TtfwWord FUNCTION .FindMemberRecur
    STRING IN aName
    TtfwWord IN aGen
@@ -44,6 +42,8 @@ Test&Dump DelegateToGen
    )
 
  ; // .FindMemberRecur
+
+ TtfwWord VAR g_Gen
 
  : .?
    ^ IN aWord
