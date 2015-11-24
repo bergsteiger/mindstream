@@ -21,12 +21,13 @@ Test&Dump DelegateToGen
   TtfwKeyWord VAR l_Member
   aName aGen pop:Word:FindMember >>> l_Member
 
-  TtfwWord VAR l_Word
- 
   if ( l_Member IsNil ) then
    ( nil >>> Result )
   else
    ( l_Member pop:KeyWord:Word >>> Result )
+
+  if ( Result IsNil ) then
+   ( aGen .Inherited.Words .map> pop:Word:Name .for> Msg )
 
  ; // .FindMemberRecur
 

@@ -29,7 +29,6 @@ VOID TestWithDump DelegateToGen
   TtfwWord IN aGen
   STRING IN aName
   TtfwKeyWord VAR l_Member
-  TtfwWord VAR l_Word
   aName
   aGen
   pop:Word:FindMember
@@ -52,6 +51,22 @@ VOID TestWithDump DelegateToGen
     pop:KeyWord:Word
     Result
     pop:Word:SetValue
+   )
+  if
+   (
+    Result
+    IsNil
+   )
+  then
+   (
+    aGen
+    .Inherited.Words
+    pop:Word:Name
+    SWAP
+    Array:Map
+    Msg
+    SWAP
+    Array:Iterate
    )
  ; // TtfwWord FUNCTION .FindMemberRecur
  
