@@ -9,6 +9,11 @@ USES
 
 Test&Dump CallInheritedTest
 
+ TtfwWord FUNCTION find.inherited
+   TtfwWord IN Self
+  nil >>> Result
+ ; // find.inherited
+
 MACRO call.inherited
  // - пон€тно, что это надо делать через честную компил€цию ссылки на Inherited
 
@@ -19,11 +24,6 @@ MACRO call.inherited
    '@SELF .Inherited.Words .for> ( Self SWAP DO )'
  ] Ctx:Parser:PushArray
 ; // call.inherited
-
- TtfwWord FUNCTION find.inherited
-   TtfwWord IN Self
-  nil >>> Result
- ; // find.inherited
 
  : A
   INTEGER IN Self
