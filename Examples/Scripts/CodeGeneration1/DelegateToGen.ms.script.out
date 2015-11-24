@@ -90,7 +90,13 @@ VOID TestWithDump DelegateToGen
       )
      )
      ?FAIL
-     'Множественное наследование не поддерживается'
+     ARRAY [
+      'Множественное наследование не поддерживается. Слово: '
+      aName
+      ' генератор '
+      aGen
+      pop:Word:Name
+     ]
      l_Found
      Result
      pop:Word:SetValue
