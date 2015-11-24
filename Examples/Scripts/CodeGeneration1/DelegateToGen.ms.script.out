@@ -84,10 +84,10 @@ VOID TestWithDump DelegateToGen
       'Множественное наследование не поддерживается. Слово: '
       aName
       ' генератор '
-      g_Gen
+      aGen
       pop:Word:Name
       ' родительский генератор '
-      aGen
+      anItem
       pop:Word:Name
      ]
      l_Found
@@ -142,6 +142,7 @@ VOID TestWithDump DelegateToGen
  
  : Gen3
   Inherits %G
+   Gen1
    Gen2
   ; // Inherits %G
   
@@ -266,13 +267,4 @@ VOID TestWithDump DelegateToGen
 5
 6
 ----
-13
-23
-33
-7
-----
-14
-24
-34
-44
-----
+DelegateToGen.ms.script : ( (Line 37, DelegateToGen.ms.script) |=> Множественное наследование не поддерживается. Слово: A генератор Gen3 родительский генератор Gen2

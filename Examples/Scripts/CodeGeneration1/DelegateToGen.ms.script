@@ -38,7 +38,7 @@ Test&Dump DelegateToGen
      IN anItem 
      TtfwWord VAR l_Found 
      aName anItem call.me >>> l_Found
-     Result IsNil OR ( l_Found IsNil ) ?ASSURE [ 'Множественное наследование не поддерживается. Слово: ' aName ' генератор ' g_Gen pop:Word:Name ' родительский генератор ' aGen pop:Word:Name ]
+     Result IsNil OR ( l_Found IsNil ) ?ASSURE [ 'Множественное наследование не поддерживается. Слово: ' aName ' генератор ' aGen pop:Word:Name ' родительский генератор ' anItem pop:Word:Name ]
      l_Found >>> Result
     ) 
    )
@@ -106,7 +106,7 @@ Test&Dump DelegateToGen
  '----' .
 
  : Gen3
-  Inherits Gen2
+  Inherits ( Gen1 Gen2 )
   : C
    30 +
   ; // C
