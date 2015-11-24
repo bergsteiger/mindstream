@@ -7,6 +7,13 @@ VOID TestWithDump CallInheritedTest
   2
  ; // : B
  
+ IMMEDIATE VOID MACRO call.inherited
+  ARRAY [
+   '@SELF .Inherited.Words .for> ( Self SWAP DO )'
+  ]
+  Ctx:Parser:PushArray
+ ; // IMMEDIATE VOID MACRO call.inherited
+ 
  CallInheritedTest
  DumpElement
  A

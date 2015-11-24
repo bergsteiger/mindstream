@@ -6,6 +6,13 @@ USES
 
 Test&Dump CallInheritedTest
 
+MACRO call.inherited
+ // - пон€тно, что это надо делать через честную компил€цию ссылки на Inherited
+ [ 
+   '@SELF .Inherited.Words .for> ( Self SWAP DO )'
+ ] Ctx:Parser:PushArray
+; // call.inherited
+
  : A
   1
  ; // A
