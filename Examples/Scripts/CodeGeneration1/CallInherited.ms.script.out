@@ -1,5 +1,6 @@
 A
 A
+A
 VOID TestWithDump CallInheritedTest
  : A
   INTEGER IN Self
@@ -54,6 +55,20 @@ VOID TestWithDump CallInheritedTest
   CompileValue
  ; // IMMEDIATE STACK_CHANGING_MACRO compile.inherited
  
+ : D
+  Inherits %G
+   A
+  ; // Inherits %G
+  
+  INTEGER IN Self
+  Self
+  2
+  +
+  Self
+  A
+  +
+ ; // : D
+ 
  TtfwWord FUNCTION find.inherited
   TtfwWord IN Self
   nil
@@ -94,8 +109,12 @@ VOID TestWithDump CallInheritedTest
  1
  C
  .
+ 1
+ D
+ .
 ; // VOID TestWithDump CallInheritedTest
 
 2
+5
 5
 5
