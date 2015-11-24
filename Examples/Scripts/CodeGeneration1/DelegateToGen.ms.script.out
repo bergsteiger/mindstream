@@ -72,8 +72,10 @@ VOID TestWithDump DelegateToGen
      )
      l_Found
      pop:Word:SetValue
-     Result
-     IsNil
+     (
+      Result
+      IsNil
+     )
      OR
      (
       l_Found
