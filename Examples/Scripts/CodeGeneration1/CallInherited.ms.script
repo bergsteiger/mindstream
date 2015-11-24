@@ -22,6 +22,9 @@ MACRO call.inherited
 
  : B
   INTEGER IN Self
+
+  Inherits A
+
   Self 2 +
   call.inherited
  ; // B

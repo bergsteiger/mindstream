@@ -7,6 +7,10 @@ VOID TestWithDump CallInheritedTest
  ; // : A
  
  : B
+  Inherits %G
+   A
+  ; // Inherits %G
+  
   INTEGER IN Self
   Self
   2
@@ -40,4 +44,5 @@ VOID TestWithDump CallInheritedTest
 ; // VOID TestWithDump CallInheritedTest
 
 2
-3
+2
+CallInherited.ms.script : Ошибка выполнения: "Процедура не может возвращать значения через стек". Главный файл: CallInherited.ms.script. Класс: TkwCompiledProcedureWithStackChecking. Слово: CallInheritedTest Producer: TestWithDump Parent: 
