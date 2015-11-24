@@ -68,7 +68,7 @@ VOID TestWithDump CallInheritedTest
  
  : E
   Inherits %G
-   C
+   D
   ; // Inherits %G
   
   INTEGER IN Self
@@ -76,7 +76,7 @@ VOID TestWithDump CallInheritedTest
   5
   +
   Self
-  C
+  D
   +
  ; // : E
  
@@ -140,4 +140,4 @@ VOID TestWithDump CallInheritedTest
 7
 15
 26
-31
+40
