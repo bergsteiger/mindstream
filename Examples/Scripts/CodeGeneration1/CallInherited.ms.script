@@ -1,6 +1,7 @@
 PROGRAM CallInherited.ms.script
 
 USES
+ WordsRTTI.ms.dict
  Testing.ms.dict
 ;
 
@@ -21,6 +22,7 @@ MACRO call.inherited
  : B
   INTEGER IN Self
   Self 2 +
+  call.inherited +
  ; // B
 
  1 A .
