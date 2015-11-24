@@ -50,7 +50,7 @@ MACRO call.inherited
  : C
   INTEGER IN Self
 
-  Inherits A
+  Inherits B
 
   Self 3 +
   call.inherited +
