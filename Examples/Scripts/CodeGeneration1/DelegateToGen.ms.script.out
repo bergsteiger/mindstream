@@ -77,14 +77,12 @@ VOID TestWithDump DelegateToGen
      )
      l_Found
      pop:Word:SetValue
+     l_WasNil
+     OR
      (
-      l_WasNil
-      OR
       (
-       (
-        l_Found
-        IsNil
-       )
+       l_Found
+       IsNil
       )
      )
      ?ASSURE
