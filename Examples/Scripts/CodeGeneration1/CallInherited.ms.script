@@ -1,6 +1,7 @@
 PROGRAM CallInherited.ms.script
 
 USES
+ axiom_push.ms.dict
  WordsRTTI.ms.dict
  classRelations.ms.dict
  Testing.ms.dict
@@ -10,6 +11,10 @@ Test&Dump CallInheritedTest
 
 MACRO call.inherited
  // - пон€тно, что это надо делать через честную компил€цию ссылки на Inherited
+
+ '@SELF' Ctx:Parser:PushSymbol
+ axiom:PushSymbol DROP
+ 
  [ 
    '@SELF .Inherited.Words .for> ( Self SWAP DO )'
  ] Ctx:Parser:PushArray
