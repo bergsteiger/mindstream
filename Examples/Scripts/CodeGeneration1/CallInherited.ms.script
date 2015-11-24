@@ -12,6 +12,10 @@ Test&Dump CallInheritedTest
  TtfwWord FUNCTION find.inherited
    TtfwWord IN Self
   nil >>> Result
+  Self .Inherited.Words .for> (
+   TtfwWord IN anAncestor
+   anAncestor .
+  )
  ; // find.inherited
 
 MACRO call.inherited

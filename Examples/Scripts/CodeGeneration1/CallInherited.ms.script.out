@@ -48,6 +48,15 @@ VOID TestWithDump CallInheritedTest
   nil
   Result
   pop:Word:SetValue
+  Self
+  .Inherited.Words
+  (
+   TtfwWord IN anAncestor
+   anAncestor
+   .
+  )
+  SWAP
+  Array:Iterate
  ; // TtfwWord FUNCTION find.inherited
  
  CallInheritedTest
@@ -61,4 +70,5 @@ VOID TestWithDump CallInheritedTest
 ; // VOID TestWithDump CallInheritedTest
 
 2
+TkwCompiledProcedure
 5
