@@ -12,6 +12,7 @@ Test&Dump CallInheritedTest
  TtfwWord FUNCTION find.inherited
    TtfwWord IN Self
   nil >>> Result
+  Self |N .
   Self .Inherited.Words .for> (
    TtfwWord IN anAncestor
    Result IsNil ?ASSURE [ 'Множественное наследование не поддерживается для ' Self ToPrintable Self |N ' второй предок ' anAncestor |N ]
