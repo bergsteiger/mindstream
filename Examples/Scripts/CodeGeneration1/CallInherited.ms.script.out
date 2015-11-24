@@ -66,6 +66,20 @@ VOID TestWithDump CallInheritedTest
   +
  ; // : D
  
+ : E
+  Inherits %G
+   C
+  ; // Inherits %G
+  
+  INTEGER IN Self
+  Self
+  5
+  +
+  Self
+  C
+  +
+ ; // : E
+ 
  TtfwWord FUNCTION find.inherited
   TtfwWord IN Self
   nil
@@ -114,9 +128,13 @@ VOID TestWithDump CallInheritedTest
  4
  D
  .
+ 5
+ E
+ .
 ; // VOID TestWithDump CallInheritedTest
 
 2
 7
 15
 26
+31
