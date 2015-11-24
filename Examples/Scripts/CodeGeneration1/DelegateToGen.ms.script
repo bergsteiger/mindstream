@@ -14,6 +14,24 @@ USES
 
 Test&Dump DelegateToGen
 
+ TtfwWord FUNCTION FindMemberRecur
+   STRING IN aName
+   TtfwWord IN aGen
+
+  nil >>> Result
+
+  TtfwKeyWord VAR l_Member
+  aName aGen pop:Word:FindMember >>> l_Member
+
+  TtfwWord VAR l_Word
+ 
+  if ( l_Member IsNil ) then
+   ( nil >>> Result )
+  else
+   ( l_Member pop:KeyWord:Word >>> Result )
+
+ ; // FindMemberRecur
+
  TtfwWord VAR g_Gen
 
  : .?
