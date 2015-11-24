@@ -18,6 +18,7 @@ MACRO call.inherited
  // - пон€тно, что это надо делать через честную компил€цию ссылки на Inherited
 
  '@SELF' Ctx:Parser:PushSymbol
+ axiom:PushSymbol find.inherited
  axiom:PushSymbol DROP
  
  [ 

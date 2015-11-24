@@ -16,6 +16,7 @@ VOID TestWithDump CallInheritedTest
   2
   +
   B
+  find.inherited
   DROP
   B
   .Inherited.Words
@@ -32,6 +33,8 @@ VOID TestWithDump CallInheritedTest
  IMMEDIATE VOID MACRO call.inherited
   '@SELF'
   Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  find.inherited
   axiom:PushSymbol
   DROP
   ARRAY [
