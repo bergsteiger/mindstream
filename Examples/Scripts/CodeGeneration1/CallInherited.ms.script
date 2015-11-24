@@ -14,7 +14,6 @@ Test&Dump CallInheritedTest
   nil >>> Result
   Self .Inherited.Words .for> (
    TtfwWord IN anAncestor
-   anAncestor |N .
    anAncestor >>> Result
   )
   Result IsNil ! ?ASSURE [ 'Не найден предок для ' Self |N ]
