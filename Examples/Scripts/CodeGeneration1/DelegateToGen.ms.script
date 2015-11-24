@@ -35,19 +35,10 @@ Test&Dump DelegateToGen
  : .?
    ^ IN aWord
 
-  STRING VAR l_Name
-  aWord |N >>> l_Name
- 
-  TtfwKeyWord VAR l_Member
-  l_Name g_Gen pop:Word:FindMember >>> l_Member
-
   TtfwWord VAR l_Word
  
-  if ( l_Member IsNil ) then
-   ( nil >>> l_Word )
-  else
-   ( l_Member pop:KeyWord:Word >>> l_Word )
-
+  aWord |N g_Gen .FindMemberRecur >>> l_Word
+ 
   if ( l_Word IsNil ) then
    ( aWord DO )
   else

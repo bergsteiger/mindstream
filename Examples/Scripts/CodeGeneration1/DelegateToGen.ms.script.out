@@ -1,36 +1,13 @@
 VOID TestWithDump DelegateToGen
  : .?
   ^ IN aWord
-  TtfwKeyWord VAR l_Member
-  STRING VAR l_Name
   TtfwWord VAR l_Word
   aWord
   |N
-  l_Name
-  pop:Word:SetValue
-  l_Name
   g_Gen
-  pop:Word:FindMember
-  l_Member
+  .FindMemberRecur
+  l_Word
   pop:Word:SetValue
-  if
-   (
-    l_Member
-    IsNil
-   )
-  then
-   (
-    nil
-    l_Word
-    pop:Word:SetValue
-   )
-  else
-   (
-    l_Member
-    pop:KeyWord:Word
-    l_Word
-    pop:Word:SetValue
-   )
   if
    (
     l_Word
