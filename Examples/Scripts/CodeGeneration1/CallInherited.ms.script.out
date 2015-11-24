@@ -34,6 +34,13 @@ VOID TestWithDump CallInheritedTest
   Ctx:Parser:PushArray
  ; // IMMEDIATE VOID MACRO call.inherited
  
+ TtfwWord FUNCTION find.inherited
+  TtfwWord IN Self
+  nil
+  Result
+  pop:Word:SetValue
+ ; // TtfwWord FUNCTION find.inherited
+ 
  CallInheritedTest
  DumpElement
  1

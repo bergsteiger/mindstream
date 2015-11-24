@@ -15,6 +15,11 @@ MACRO call.inherited
  ] Ctx:Parser:PushArray
 ; // call.inherited
 
+ TtfwWord FUNCTION find.inherited
+   TtfwWord IN Self
+  nil >>> Result
+ ; // find.inherited
+
  : A
   INTEGER IN Self
   Self 1 +
