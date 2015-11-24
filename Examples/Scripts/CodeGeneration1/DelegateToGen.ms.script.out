@@ -63,6 +63,14 @@ VOID TestWithDump DelegateToGen
     .Inherited.Words
     (
      IN anItem
+     aName
+     anItem
+     (
+      .FindMemberRecur
+      DO
+     )
+     Result
+     pop:Word:SetValue
     )
     SWAP
     Array:Iterate
@@ -223,7 +231,7 @@ VOID TestWithDump DelegateToGen
 4
 5
 ----
-2
+11
 21
 4
 5

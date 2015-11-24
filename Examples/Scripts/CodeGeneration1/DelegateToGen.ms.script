@@ -34,7 +34,7 @@ Test&Dump DelegateToGen
    ( 
     aGen .Inherited.Words .for> ( 
      IN anItem 
-     //anItem
+     aName anItem call.me >>> Result
     ) 
    )
 
