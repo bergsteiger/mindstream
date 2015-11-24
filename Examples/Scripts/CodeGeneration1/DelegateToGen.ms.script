@@ -38,7 +38,8 @@ Test&Dump DelegateToGen
      aName anItem call.me >>> l_Found
      ( Result IsNil ) 
      OR ( l_Found IsNil ) 
-     OR ( Result = l_Found ) ?ASSURE [ 'Множественное наследование не поддерживается. Слово: ' aName ' генератор ' aGen pop:Word:Name ' родительский генератор ' anItem pop:Word:Name ]
+     OR ( Result = l_Found ) 
+      ?ASSURE [ 'Множественное наследование не поддерживается. Слово: ' aName ' генератор ' aGen pop:Word:Name ' родительский генератор ' anItem pop:Word:Name ]
      l_Found >>> Result
     ) 
    )
