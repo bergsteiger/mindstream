@@ -1,6 +1,10 @@
 PROGRAM DelegateToGen.ms.script
 
 USES
+ core.ms.dict
+;
+
+USES
  Testing.ms.dict
 ;
 
@@ -30,6 +34,7 @@ Test&Dump DelegateToGen
    ( 
     aGen .Inherited.Words .for> ( 
      IN anItem 
+     //anItem
     ) 
    )
 
