@@ -38,7 +38,7 @@ Test&Dump DelegateToGen
      Result IsNil >>> l_WasNil
      TtfwWord VAR l_Found 
      aName anItem call.me >>> l_Found
-     ( NOT l_WasNil AND ( NOT ( l_Found IsNil ) ) ) ?FAIL [ 'Множественное наследование не поддерживается. Слово: ' aName ' генератор ' aGen pop:Word:Name ]
+     NOT ( l_WasNil OR ( ( l_Found IsNil ) ) ) ?FAIL [ 'Множественное наследование не поддерживается. Слово: ' aName ' генератор ' aGen pop:Word:Name ]
      l_Found >>> Result
     ) 
    )

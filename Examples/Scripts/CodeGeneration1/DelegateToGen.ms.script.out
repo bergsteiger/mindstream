@@ -77,12 +77,11 @@ VOID TestWithDump DelegateToGen
      )
      l_Found
      pop:Word:SetValue
+     NOT
      (
-      NOT
       l_WasNil
-      AND
-      BOOLEAN (
-       NOT
+      OR
+      (
        (
         l_Found
         IsNil
