@@ -1,10 +1,16 @@
 VOID TestWithDump CallInheritedTest
  : A
+  INTEGER IN Self
+  Self
   1
+  +
  ; // : A
  
  : B
+  INTEGER IN Self
+  Self
   2
+  +
  ; // : B
  
  IMMEDIATE VOID MACRO call.inherited
@@ -16,11 +22,13 @@ VOID TestWithDump CallInheritedTest
  
  CallInheritedTest
  DumpElement
+ 1
  A
  .
+ 1
  B
  .
 ; // VOID TestWithDump CallInheritedTest
 
-1
 2
+3

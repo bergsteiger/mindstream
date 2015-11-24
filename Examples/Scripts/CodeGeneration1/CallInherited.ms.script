@@ -14,15 +14,17 @@ MACRO call.inherited
 ; // call.inherited
 
  : A
-  1
+  INTEGER IN Self
+  Self 1 +
  ; // A
 
  : B
-  2
+  INTEGER IN Self
+  Self 2 +
  ; // B
 
- A .
- B .
+ 1 A .
+ 1 B .
 
 ; // CallInheritedTest
 
