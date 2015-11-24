@@ -27,7 +27,11 @@ Test&Dump DelegateToGen
    ( l_Member pop:KeyWord:Word >>> Result )
 
   if ( Result IsNil ) then
-   ( aGen .Inherited.Words .map> pop:Word:Name .for> . )
+   ( 
+    aGen .Inherited.Words .for> ( 
+     IN anItem 
+    ) 
+   )
 
  ; // .FindMemberRecur
 
