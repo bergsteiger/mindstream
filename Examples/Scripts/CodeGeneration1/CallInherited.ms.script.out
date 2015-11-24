@@ -61,6 +61,15 @@ VOID TestWithDump CallInheritedTest
   )
   SWAP
   Array:Iterate
+  Result
+  IsNil
+  !
+  ?ASSURE
+  ARRAY [
+   'Не найден предок для '
+   Self
+   |N
+  ]
  ; // TtfwWord FUNCTION find.inherited
  
  CallInheritedTest
