@@ -31,6 +31,10 @@ VOID TestWithDump CallInheritedTest
  ; // : B
  
  : C
+  Inherits %G
+   A
+  ; // Inherits %G
+  
   INTEGER IN Self
   Self
   2
@@ -108,4 +112,5 @@ VOID TestWithDump CallInheritedTest
 2
 A
 5
-CallInherited.ms.script : FUNCTION find.inherited (Line 12, CallInherited.ms.script) |=> Не найден предок для C
+A
+5
