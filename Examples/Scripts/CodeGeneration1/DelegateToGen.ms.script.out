@@ -63,6 +63,7 @@ VOID TestWithDump DelegateToGen
     .Inherited.Words
     (
      IN anItem
+     TtfwWord VAR l_Found
      BOOLEAN VAR l_WasNil
      Result
      IsNil
@@ -74,7 +75,7 @@ VOID TestWithDump DelegateToGen
       .FindMemberRecur
       DO
      )
-     Result
+     l_Found
      pop:Word:SetValue
      (
       NOT
@@ -83,13 +84,16 @@ VOID TestWithDump DelegateToGen
       BOOLEAN (
        NOT
        (
-        Result
+        l_Found
         IsNil
        )
       )
      )
      ?FAIL
      'Множественное наследование не поддерживается'
+     l_Found
+     Result
+     pop:Word:SetValue
     )
     SWAP
     Array:Iterate
