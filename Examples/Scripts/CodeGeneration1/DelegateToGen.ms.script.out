@@ -64,7 +64,7 @@ VOID TestWithDump DelegateToGen
     pop:Word:Name
     SWAP
     Array:Map
-    Msg
+    .
     SWAP
     Array:Iterate
    )
@@ -224,9 +224,12 @@ VOID TestWithDump DelegateToGen
 4
 5
 ----
+Gen1
 2
 21
+Gen1
 4
+Gen1
 5
 ----
 2
