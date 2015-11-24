@@ -20,6 +20,11 @@ Test&Dump CallInheritedTest
   Result IsNil ! ?ASSURE [ 'Не найден предок для ' Self |N ]
  ; // find.inherited
 
+ STACK_CHANGING_MACRO compile.inherited
+   TtfwWord IN Self
+  Self find.inherited CompileValue
+ ; // compile.inherited
+
 MACRO call.inherited
  // - понятно, что это надо делать через честную компиляцию ссылки на Inherited
 

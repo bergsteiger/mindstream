@@ -67,6 +67,13 @@ VOID TestWithDump CallInheritedTest
   Ctx:Parser:PushArray
  ; // IMMEDIATE VOID MACRO call.inherited
  
+ IMMEDIATE STACK_CHANGING_MACRO compile.inherited
+  TtfwWord IN Self
+  Self
+  find.inherited
+  CompileValue
+ ; // IMMEDIATE STACK_CHANGING_MACRO compile.inherited
+ 
  TtfwWord FUNCTION find.inherited
   TtfwWord IN Self
   nil
