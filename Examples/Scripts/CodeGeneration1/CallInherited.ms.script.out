@@ -1,1 +1,143 @@
-CallInherited.ms.script : CallInherited.ms.script line: 75 |=> Множественное наследование не поддерживается для : второй предок D
+VOID TestWithDump CallInheritedTest
+ : A
+  INTEGER IN Self
+  Self
+  1
+  +
+ ; // : A
+ 
+ : B
+  Inherits %G
+   A
+  ; // Inherits %G
+  
+  INTEGER IN Self
+  Self
+  2
+  +
+  Self
+  A
+  +
+ ; // : B
+ 
+ : C
+  Inherits %G
+   B
+  ; // Inherits %G
+  
+  INTEGER IN Self
+  Self
+  3
+  +
+  Self
+  B
+  +
+ ; // : C
+ 
+ IMMEDIATE VOID MACRO call.inherited
+  'Self'
+  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  [EXECUTE]
+  '@SELF'
+  Ctx:Parser:PushSymbol
+  axiom:PushSymbol
+  compile.inherited
+ ; // IMMEDIATE VOID MACRO call.inherited
+ 
+ IMMEDIATE STACK_CHANGING_MACRO compile.inherited
+  TtfwWord IN Self
+  Self
+  find.inherited
+  CompileValue
+ ; // IMMEDIATE STACK_CHANGING_MACRO compile.inherited
+ 
+ : D
+  Inherits %G
+   C
+  ; // Inherits %G
+  
+  INTEGER IN Self
+  Self
+  4
+  +
+  Self
+  C
+  +
+ ; // : D
+ 
+ : E
+  Inherits %G
+   C
+  ; // Inherits %G
+  
+  INTEGER IN Self
+  Self
+  5
+  +
+  Self
+  C
+  +
+ ; // : E
+ 
+ TtfwWord FUNCTION find.inherited
+  TtfwWord IN Self
+  nil
+  Result
+  pop:Word:SetValue
+  Self
+  .Inherited.Words
+  (
+   TtfwWord IN anAncestor
+   Result
+   IsNil
+   ?ASSURE
+   ARRAY [
+    'Множественное наследование не поддерживается для '
+    Self
+    |N
+    ' второй предок '
+    anAncestor
+    |N
+   ]
+   anAncestor
+   Result
+   pop:Word:SetValue
+  )
+  SWAP
+  Array:Iterate
+  Result
+  IsNil
+  !
+  ?ASSURE
+  ARRAY [
+   'Не найден предок для '
+   Self
+   |N
+  ]
+ ; // TtfwWord FUNCTION find.inherited
+ 
+ CallInheritedTest
+ DumpElement
+ 1
+ A
+ .
+ 2
+ B
+ .
+ 3
+ C
+ .
+ 4
+ D
+ .
+ 5
+ E
+ .
+; // VOID TestWithDump CallInheritedTest
+
+2
+7
+15
+26
+31
