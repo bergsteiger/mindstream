@@ -136,7 +136,7 @@ VOID Test PointTest
     Pixel IN aPx
     i
     Self
-    Array:GetItem
+    Array:Item
     aPx
     -
     INC
@@ -169,7 +169,7 @@ VOID Test PointTest
     (
      i
      Self
-     Array:GetItem
+     Array:Item
     )
     INC
     i

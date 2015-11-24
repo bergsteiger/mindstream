@@ -162,7 +162,7 @@ VOID Test PointTest
     (
      i
      Self
-     Array:GetItem
+     Array:Item
     )
     (-)
     aPx
@@ -194,7 +194,7 @@ VOID Test PointTest
     (
      i
      Self
-     Array:GetItem
+     Array:Item
     )
     (+)
     aPx
@@ -272,7 +272,7 @@ VOID Test PointTest
   Point IN Self
   c:Point:Offset:X
   Self
-  Array:GetItem
+  Array:Item
   Result
   pop:Word:SetValue
  ; // Pixel readonly Point:X
@@ -299,7 +299,7 @@ VOID Test PointTest
   Point IN Self
   c:Point:Offset:Y
   Self
-  Array:GetItem
+  Array:Item
   Result
   pop:Word:SetValue
  ; // Pixel readonly Point:Y

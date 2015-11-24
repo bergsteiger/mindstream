@@ -60,9 +60,6 @@ REDIFINITION STRING FUNCTION : pop:SV:ToPrintable
  OPERATOR :: IN : aValue
  REDIFINITION STRING FUNCTION :: ToPrintable : Result
 ; // pop:SV:ToPrintable
-Dictionary: axiom:TagGenerator
-VOID pop:TagGenerator:generators_Execute
-Ik2TagGenerator pop:TagGenerator:generators_Link
 Dictionary: axiom:TColor
 TColor TColor::cl3DDkShadow
 TColor TColor::cl3DLight
@@ -132,7 +129,7 @@ tests:CheckEtalon
 tests:CheckOutputWithInput
 Dictionary: axiom:text
 Dictionary: axiom:WString
-Dictionary: CodeGen69.ms.script
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeGen69.ms.script
  Uses: 
   axiom:axiom
   axiom:Ctx
@@ -165,7 +162,6 @@ Dictionary: CodeGen69.ms.script
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Exports.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
@@ -228,7 +224,6 @@ Dictionary: axiom:axiom
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
  Exports: 
   axiom:Ctx
@@ -261,7 +256,6 @@ Dictionary: axiom:axiom
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 INTEGER -
 INTEGER --
@@ -724,7 +718,6 @@ VOID Array:Clear
 INTEGER Array:Count
 ARRAY Array:Filter
 ARRAY Array:FunctorToIterator
-Struct Array:GetItem
 BOOLEAN FUNCTION : array:Has
  ARRAY OPERATOR :: IN : anArray
  OPERATOR :: IN : aValue
@@ -746,11 +739,11 @@ BOOLEAN FUNCTION : array:HasText
   STRING OPERATOR :: IN : anItem
  ; // Поиск
 ; // array:HasText
+Struct Array:Item
 VOID Array:Iterate
 ARRAY Array:Join
 ARRAY Array:Map
 ARRAY Array:Reverted
-VOID Array:SetItem
 ARRAY Array:Slice
 INTEGER FUNCTION : array:StringCount
  ARRAY OPERATOR :: IN : anArray
@@ -920,12 +913,11 @@ TClass class::TkwArrayClear
 TClass class::TkwArrayCount
 TClass class::TkwArrayFilter
 TClass class::TkwArrayFunctorToIterator
-TClass class::TkwArrayGetItem
+TClass class::TkwArrayItem
 TClass class::TkwArrayIterate
 TClass class::TkwArrayJoin
 TClass class::TkwArrayMap
 TClass class::TkwArrayReverted
-TClass class::TkwArraySetItem
 TClass class::TkwArraySlice
 TClass class::TkwArrayTrunc
 TClass class::TkwASSERTS
@@ -954,6 +946,7 @@ TClass class::TkwClipboardGetFormattedText
 TClass class::TkwClipboardSetText
 TClass class::TkwCloseArray
 TClass class::TkwCloseBracket
+TClass class::TkwCompareFiles
 TClass class::TkwCompareStr
 TClass class::TkwCompareText
 TClass class::TkwCompiledArray
@@ -968,6 +961,7 @@ TClass class::TkwCompiledProcedureWithStackChecking
 TClass class::TkwCompiledPushWord
 TClass class::TkwCompiledRules
 TClass class::TkwCompiledScriptCompileAndProcess
+TClass class::TkwCompiledScriptCompileStringAndProcess
 TClass class::TkwCompiledTryExcept
 TClass class::TkwCompiledTryFinally
 TClass class::TkwCompiledVar
@@ -1061,6 +1055,7 @@ TClass class::TkwFileOpenWrite
 TClass class::TkwFileReadLines
 TClass class::TkwFileReadLn
 TClass class::TkwFileReadWStrLn
+TClass class::TkwFileSize
 TClass class::TkwFileWriteChar
 TClass class::TkwFileWriteLn
 TClass class::TkwFileWriteStr
@@ -1080,8 +1075,6 @@ TClass class::TkwForwardDeclaration
 TClass class::TkwForwardDeclarationHolder
 TClass class::TkwFUNCTION
 TClass class::TkwGeneratePDFForEtalon
-TClass class::TkwGeneratorsExecute
-TClass class::TkwGeneratorsLink
 TClass class::TkwGetLocalDate
 TClass class::TkwGetLocalDateTime
 TClass class::TkwGetLocalTime
@@ -1301,6 +1294,7 @@ TClass class::TkwRuntimeWordWithCodeExecution
 TClass class::TkwSameStr
 TClass class::TkwSameText
 TClass class::TkwScriptCompileAndProcess
+TClass class::TkwScriptCompileStringAndProcess
 TClass class::TkwScriptExceptionStack
 TClass class::TkwScriptFileName
 TClass class::TkwSendInputSupport
@@ -1407,6 +1401,7 @@ TClass class::TtfwDictionaryPrimPrimPrim
 TClass class::TtfwDualWord
 TClass class::TtfwEnumConstantRegistrator
 TClass class::TtfwFilterLambda
+TClass class::TtfwGlobalKeyWord
 TClass class::TtfwIncludeLike
 TClass class::TtfwInitCodeWord
 TClass class::TtfwInteger
@@ -1418,6 +1413,7 @@ TClass class::TtfwMainDictionary
 TClass class::TtfwMapLambda
 TClass class::TtfwNewWord
 TClass class::TtfwProcedure
+TClass class::TtfwPropertyLike
 TClass class::TtfwRegisterableWord
 TClass class::TtfwRegisterableWordPrim
 TClass class::TtfwRTTIProperty
@@ -1442,6 +1438,7 @@ IMMEDIATE VOID OPERATOR : ClassProducer
 ; // ClassProducer
 ARRAY CodeIterator
 IMMEDIATE VOID OPERATOR :: TYPE : COMPARABLE
+BOOLEAN CompareFiles
 INTEGER CompareStr
 INTEGER CompareText
 VOID CompileRef
@@ -1632,6 +1629,7 @@ VOID File:WriteLn
 VOID File:WriteStr
 VOID File:WriteWStr
 VOID File:WriteWStrLn
+INTEGER FileSize
 ARRAY FILTER
 IMMEDIATE VOID OPERATOR : FINAL
 FINALLY
@@ -1660,7 +1658,6 @@ VOID GetLocalTime
 INTEGER GetTickCount
 BOOLEAN GREATER
 STRING guid::IInterface
-STRING guid::Ik2TagGenerator
 STRING guid::Il3Base
 STRING guid::Il3FontInfo
 STRING guid::ItfwFile
@@ -1679,7 +1676,6 @@ VOID OPERATOR :: PROCEDURE : help
 ; // help
 if
 IInterface
-Ik2TagGenerator
 Il3Base
 Il3FontInfo
 VOID IMMEDIATE
@@ -1874,12 +1870,11 @@ VOID pop:Array:Clear
 INTEGER pop:Array:Count
 ARRAY pop:Array:Filter
 ARRAY pop:Array:FunctorToIterator
-Struct pop:Array:GetItem
+Struct pop:Array:Item
 VOID pop:Array:Iterate
 ARRAY pop:Array:Join
 ARRAY pop:Array:Map
 ARRAY pop:Array:Reverted
-VOID pop:Array:SetItem
 ARRAY pop:Array:Slice
 ARRAY pop:Array:Trunc
 pop:class:Inherits
@@ -2108,12 +2103,11 @@ TkwArrayClear
 TkwArrayCount
 TkwArrayFilter
 TkwArrayFunctorToIterator
-TkwArrayGetItem
+TkwArrayItem
 TkwArrayIterate
 TkwArrayJoin
 TkwArrayMap
 TkwArrayReverted
-TkwArraySetItem
 TkwArraySlice
 TkwArrayTrunc
 TkwASSERTS
@@ -2142,6 +2136,7 @@ TkwClipboardGetFormattedText
 TkwClipboardSetText
 TkwCloseArray
 TkwCloseBracket
+TkwCompareFiles
 TkwCompareStr
 TkwCompareText
 TkwCompiledArray
@@ -2156,6 +2151,7 @@ TkwCompiledProcedureWithStackChecking
 TkwCompiledPushWord
 TkwCompiledRules
 TkwCompiledScriptCompileAndProcess
+TkwCompiledScriptCompileStringAndProcess
 TkwCompiledTryExcept
 TkwCompiledTryFinally
 TkwCompiledVar
@@ -2249,6 +2245,7 @@ TkwFileOpenWrite
 TkwFileReadLines
 TkwFileReadLn
 TkwFileReadWStrLn
+TkwFileSize
 TkwFileWriteChar
 TkwFileWriteLn
 TkwFileWriteStr
@@ -2268,8 +2265,6 @@ TkwForwardDeclaration
 TkwForwardDeclarationHolder
 TkwFUNCTION
 TkwGeneratePDFForEtalon
-TkwGeneratorsExecute
-TkwGeneratorsLink
 TkwGetLocalDate
 TkwGetLocalDateTime
 TkwGetLocalTime
@@ -2489,6 +2484,7 @@ TkwRuntimeWordWithCodeExecution
 TkwSameStr
 TkwSameText
 TkwScriptCompileAndProcess
+TkwScriptCompileStringAndProcess
 TkwScriptExceptionStack
 TkwScriptFileName
 TkwSendInputSupport
@@ -2618,6 +2614,7 @@ TtfwDictionaryPrimPrimPrim
 TtfwDualWord
 TtfwEnumConstantRegistrator
 TtfwFilterLambda
+TtfwGlobalKeyWord
 TtfwIncludeLike
 TtfwInitCodeWord
 TtfwInteger
@@ -2630,6 +2627,7 @@ TtfwMainDictionary
 TtfwMapLambda
 TtfwNewWord
 TtfwProcedure
+TtfwPropertyLike
 TtfwRegisterableWord
 TtfwRegisterableWordPrim
 TtfwRTTIProperty
@@ -2686,7 +2684,7 @@ IMMEDIATE VOID OPERATOR :: TYPE : VARIANT
 STRING FUNCTION : VarMsgToStr
  OBJECT OPERATOR :: IN : aMessage
  OPERATOR :: VAR : l_Msg
- STRING FUNCTION :: FUNCTION : Result
+ STRING FUNCTION :: VarMsgToStr : Result
 ; // VarMsgToStr
 IMMEDIATE VOID OPERATOR : VarProducer
  ^L OPERATOR :: IN : aName
@@ -2928,6 +2926,7 @@ STRING pop:Parser:TokenLongString
 Tl3TokenType pop:Parser:TokenType
 Dictionary: axiom:script
 script:CompileAndProcess
+script:CompileStringAndProcess
 ARRAY script:ExceptionStack
 STRING script:FileName
 Dictionary: axiom:sysutils
@@ -3132,9 +3131,6 @@ BOOLEAN pop:Font:IsStrikeOut
 BOOLEAN pop:Font:IsUnderline
 STRING pop:Font:Name
 INTEGER pop:Font:Size
-Dictionary: axiom:generators
-VOID generators:Execute
-Ik2TagGenerator generators:Link
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Exports.ms.dict
  Uses: 
   axiom:axiom
@@ -3168,7 +3164,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Exports.ms.di
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
@@ -3220,7 +3215,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Exports.ms.di
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
@@ -3274,9 +3268,14 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
  ;
+VOID ()
+IMMEDIATE VOID OPERATOR :: MACRO : []
+ARRAY FUNCTION : axiom:InParams:It
+ ENGINE_WORD OPERATOR :: IN : aParams
+ ARRAY FUNCTION :: axiom:InParams:It : Result
+; // axiom:InParams:It
 VOID OPERATOR :: PROCEDURE : axiom:Params:Push
  ENGINE_WORD OPERATOR :: IN : aCaller
  ENGINE_WORD OPERATOR :: IN : aParams
@@ -3292,9 +3291,17 @@ VOID OPERATOR :: PROCEDURE : axiom:Push
  TOKEN OPERATOR :: IN : aToken
  TOKEN_TYPE OPERATOR :: IN : aTokenType
 ; // axiom:Push
+VOID OPERATOR :: PROCEDURE : axiom:PushImmediateSymbol
+ Documentation:
+  Запихивает во входной поток парсера имя слова aSymbol для непосредственного выполнения
+ LINK ^ OPERATOR :: IN : aSymbol
+; // axiom:PushImmediateSymbol
 VOID OPERATOR :: PROCEDURE : axiom:PushSerias
  STRING OPERATOR :: IN : aWordInfo
 ; // axiom:PushSerias
+VOID OPERATOR :: PROCEDURE : axiom:PushStringAsSymbol
+ ^ OPERATOR :: IN : aString
+; // axiom:PushStringAsSymbol
 VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
  Documentation:
   Запихивает во входной поток парсера имя слова aSymbol
@@ -3303,6 +3310,7 @@ VOID OPERATOR :: PROCEDURE : axiom:PushSymbol
 VOID OPERATOR :: PROCEDURE : axiom:PushWordInfo
  STRING OPERATOR :: IN : aWordInfo
 ; // axiom:PushWordInfo
+INTEGER CONST : cInParamItemsCount
 VOID OPERATOR :: PROCEDURE : Ctx:Parser:PushLeftDottedSymbol
  Documentation:
   Запихивает во входной поток парсера aValue предварённое точкой
@@ -3348,7 +3356,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dic
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
@@ -3473,7 +3480,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
  ;
@@ -3530,7 +3536,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.di
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
  ;
@@ -3570,7 +3575,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
  ;
 IMMEDIATE VOID OPERATOR : macro
@@ -3618,7 +3622,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dic
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
@@ -3688,7 +3691,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
@@ -3715,10 +3717,6 @@ BOOLEAN OPERATOR : =/=
  ^ OPERATOR :: IN : aRight
  BOOLEAN OPERATOR :: <> : Result
 ; // =/=
-VOID OPERATOR : array:AddTo
- OPERATOR :: IN : aLeft
- ^ OPERATOR :: IN : aRight
-; // array:AddTo
 IMMEDIATE VOID OPERATOR :: MACRO : call.me
  Documentation:
   - запускаем "себя же" рекурсивно
@@ -3779,7 +3777,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 IMMEDIATE VOID OPERATOR :: TYPE : ANY
 IMMEDIATE VOID OPERATOR :: TYPE : ITERATABLE
@@ -3819,7 +3816,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 ARRAY map
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
@@ -3855,7 +3851,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.di
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
@@ -3958,7 +3953,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
  ;
 VOID OPERATOR :: PROCEDURE : Print
@@ -3998,7 +3992,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.m
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: TYPE : ENGINE_WORD
@@ -4035,7 +4028,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dic
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
@@ -4074,7 +4066,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\arrays.ms.dic
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
@@ -4095,6 +4086,15 @@ IMMEDIATE VOID OPERATOR :: MACRO : >for>
   Итерирует массив A вызывая лямбду aWhatToDo
  ^ OPERATOR :: IN : aWhatToDo
 ; // >for>
+VOID OPERATOR :: PROCEDURE : array:?AddTo
+ ^ OPERATOR :: IN : anArray
+ OPERATOR :: IN : aValue
+ ARRAY OPERATOR :: VAR : l_Array
+; // array:?AddTo
+VOID OPERATOR : array:AddTo
+ OPERATOR :: IN : aLeft
+ ^ OPERATOR :: IN : aRight
+; // array:AddTo
 IMMEDIATE VOID OPERATOR :: MACRO : for
  Documentation:
   Итерирует массив aList вызывая лямбду aWhatToDo
@@ -4139,7 +4139,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\to.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
  ;
 ARRAY OPERATOR : to
@@ -4180,7 +4179,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\filter.ms.dic
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 ARRAY filter
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
@@ -4216,7 +4214,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.d
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 ARRAY .reverted>
 ARRAY >reverted>
@@ -4255,7 +4252,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Sequence.It.m
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
@@ -4304,7 +4300,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
 VOID CALLER OPERATOR : ?Assure
@@ -4392,7 +4387,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
@@ -4460,7 +4454,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.d
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
  ;
 STRING FUNCTION : Check
  STRING OPERATOR :: IN : aName
@@ -4480,7 +4473,7 @@ VOID OPERATOR :: PROCEDURE : DumpCodeCall
   OBJECT OPERATOR :: IN : aCode
   STRING OPERATOR :: IN : aName
   INTEGER OPERATOR :: VAR : l_LeftWordRefsCount
-  STRING FUNCTION :: FUNCTION : Result
+  STRING FUNCTION :: CalcLeftParams : Result
  ; // CalcLeftParams
  STRING OPERATOR :: VAR : l_Name
  BOOLEAN OPERATOR :: VAR : l_NeedBracket
@@ -4552,7 +4545,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymb
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
 STRING FUNCTION : .Name
@@ -4602,7 +4594,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\math.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
  ;
 INTEGER FUNCTION : Dec1
@@ -4664,7 +4655,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Bind.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
@@ -4693,52 +4683,52 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Object.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
  ;
-ARRAY FUNCTION : %Class-Methods
- OPERATOR :: IN : %S
- Documentation:
-  Возвращает итератор методов мета-класса
- ARRAY FUNCTION :: %Class-Methods : Result
-; // %Class-Methods
-IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CLASS-METHODS
 ARRAY FUNCTION : %ClassRTTIList
  OPERATOR :: IN : %S
  ^L OPERATOR :: IN : aName
  OPERATOR :: VAR : l_List
  ARRAY FUNCTION :: %ClassRTTIList : Result
 ; // %ClassRTTIList
-ARRAY FUNCTION : %Constructors
- OPERATOR :: IN : %S
- Documentation:
-  Возвращает итератор конструкторов класса
- ARRAY FUNCTION :: %Constructors : Result
-; // %Constructors
-IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CONSTRUCTORS
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %Constructors
 ARRAY OPERATOR :: MACRO :: word_func : %G
  Documentation:
   Возвращает итератор элементов от которого наследуется наш элемент
  ARRAY OPERATOR :: MACRO :: word_func :: .Inherited.Words : Result
  ENGINE_WORD OPERATOR :: IN : Self
 ; // %G
-ARRAY FUNCTION : %Methods
- OPERATOR :: IN : %S
- Documentation:
-  Возвращает итератор методов класса
- ARRAY FUNCTION :: %Methods : Result
-; // %Methods
-IMMEDIATE VOID OPERATOR :: NamedWordProducer : %METHODS
-IMMEDIATE VOID OPERATOR :: NamedWordProducer : %PROPERTIES
-ARRAY FUNCTION : %Props
- OPERATOR :: IN : %S
- Documentation:
-  Возвращает итератор свойств класса
- ARRAY FUNCTION :: %Props : Result
-; // %Props
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %MetaMethods
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %Methods
+IMMEDIATE VOID OPERATOR :: NamedWordProducer : %Properties
 ARRAY OPERATOR :: MACRO :: word_func : %R
  Documentation:
   Возвращает итератор элементов которые реализует наш элемент
  ARRAY OPERATOR :: MACRO :: word_func :: .Implemented.Words : Result
  ENGINE_WORD OPERATOR :: IN : Self
 ; // %R
+ARRAY FUNCTION : .%Constructors.It
+ Documentation:
+  Конструкторы класса
+ ARRAY FUNCTION :: .%Constructors.It : Result
+ TtfwWord OPERATOR :: IN : Self
+; // .%Constructors.It
+ARRAY FUNCTION : .%MetaMethods.It
+ Documentation:
+  Методы мета-класса
+ ARRAY FUNCTION :: .%MetaMethods.It : Result
+ TtfwWord OPERATOR :: IN : Self
+; // .%MetaMethods.It
+ARRAY FUNCTION : .%Methods.It
+ Documentation:
+  Методы класса
+ ARRAY FUNCTION :: .%Methods.It : Result
+ TtfwWord OPERATOR :: IN : Self
+; // .%Methods.It
+ARRAY FUNCTION : .%Properties.It
+ Documentation:
+  Свойства класса
+ ARRAY FUNCTION :: .%Properties.It : Result
+ TtfwWord OPERATOR :: IN : Self
+; // .%Properties.It
 IMMEDIATE VOID OPERATOR :: MACRO : .class
  ^@ OPERATOR :: IN : Self
 ; // .class
@@ -4798,42 +4788,34 @@ IMMEDIATE REDIFINITION VOID OPERATOR :: MACRO : .Print
 IMMEDIATE VOID OPERATOR :: MACRO : .ToPrintable
  ^@ OPERATOR :: IN : Self
 ; // .ToPrintable
-ObjectClass OPERATOR :: MACRO :: class_impl : _:Object
- OPERATOR :: NamedWordProducer :: %CLASS-METHODS : %Class-Methods
- OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
- OPERATOR :: NamedWordProducer :: %METHODS : %Methods
- OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
+ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl : _:Object
+ OPERATOR :: NamedWordProducer :: %Constructors : .%Constructors.It
+ OPERATOR :: NamedWordProducer :: %MetaMethods : .%MetaMethods.It
+ OPERATOR :: NamedWordProducer :: %Methods : .%Methods.It
+ OPERATOR :: NamedWordProducer :: %Properties : .%Properties.It
  INTEGER CONST : c:Offset:VMT
- ObjectClass OPERATOR :: MACRO :: class_impl :: _:Object : Result
+ ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl :: _:Object : Result
 ; // _:Object
 STRING CONST : cClassImplPrefix
 STRING CONST : cClassParentName
 STRING CONST : cClassTypePrefix
+STRING CONST : cDefConstructorName
 STRING CONST : cFieldPrefix
 STRING CONST : cInstanceSizeName
 IMMEDIATE VOID OPERATOR :: MACRO : class
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_ClassRefName
  STRING OPERATOR :: VAR : l_CurrentClassImpl
+ STRING OPERATOR :: VAR : l_CurrentClassParentName
  STRING OPERATOR :: VAR : l_TypeInfo
  TtfwWordInfo OPERATOR :: VAR : l_WordInfo
 ; // class
-IMMEDIATE VOID OPERATOR :: MACRO : class_impl
+IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : class_impl
  Documentation:
   Реализация класса. Тут мы будем хранить всю информацию о классе - предки, поля, методы
  ^L OPERATOR :: IN : aName
 ; // class_impl
-IMMEDIATE VOID OPERATOR :: MACRO : class-end
-IMMEDIATE VOID OPERATOR :: MACRO : classExpander
- Documentation:
-  Тут можно копировать поля и методы
- ^ OPERATOR :: IN : anImpl
-; // classExpander
-STRING FUNCTION : ClassImplName
- STRING OPERATOR :: IN : aName
- STRING FUNCTION :: ClassImplName : Result
-; // ClassImplName
-IMMEDIATE VOID OPERATOR :: MACRO : class-method
+IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : class_method
  Documentation:
   Метод класса
  ^L OPERATOR :: IN : aName
@@ -4842,19 +4824,30 @@ IMMEDIATE VOID OPERATOR :: MACRO : class-method
  STRING OPERATOR :: VAR : l_Name
  STRING OPERATOR :: VAR : l_TypeInfo
  TtfwWordInfo OPERATOR :: VAR : l_WordInfo
-; // class-method
-IMMEDIATE VOID OPERATOR :: MACRO : class-method-end
+; // class_method
+IMMEDIATE VOID OPERATOR :: MACRO : class_method_end
+IMMEDIATE VOID OPERATOR :: MACRO : class-end
+IMMEDIATE VOID OPERATOR :: MACRO : classExpander
+ Documentation:
+  Тут можно копировать поля и методы
+ ^ OPERATOR :: IN : anImpl
+ ObjectClass OPERATOR :: VAR : l_Impl
+; // classExpander
+STRING FUNCTION : ClassImplName
+ STRING OPERATOR :: IN : aName
+ STRING FUNCTION :: ClassImplName : Result
+; // ClassImplName
 IMMEDIATE VOID OPERATOR :: MACRO : ClassOf
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_ClassName
 ; // ClassOf
-ObjectClass OPERATOR :: MACRO :: class_impl : ClassOf::Object
- OPERATOR :: NamedWordProducer :: %CLASS-METHODS : %Class-Methods
- OPERATOR :: NamedWordProducer :: %CONSTRUCTORS : %Constructors
- OPERATOR :: NamedWordProducer :: %METHODS : %Methods
- OPERATOR :: NamedWordProducer :: %PROPERTIES : %Props
+ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl : ClassOf::Object
+ OPERATOR :: NamedWordProducer :: %Constructors : .%Constructors.It
+ OPERATOR :: NamedWordProducer :: %MetaMethods : .%MetaMethods.It
+ OPERATOR :: NamedWordProducer :: %Methods : .%Methods.It
+ OPERATOR :: NamedWordProducer :: %Properties : .%Properties.It
  INTEGER CONST : c:Offset:VMT
- ObjectClass OPERATOR :: MACRO :: class_impl :: _:Object : Result
+ ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_impl :: _:Object : Result
 ; // ClassOf::Object
 STRING FUNCTION : ClassOfName
  STRING OPERATOR :: IN : aClassName
@@ -4868,17 +4861,29 @@ STRING FUNCTION : ClassRefName
  STRING FUNCTION :: ClassRefName : Result
 ; // ClassRefName
 STRING CONST : ClassRefSuffix
+VOID OPERATOR :: PROCEDURE : ClearClassInfo
+VOID OPERATOR :: PROCEDURE : ClearMetaLists
+INTEGER CONST : cMetaListPoducerNamesElementSize
+STRING CONST : cMetaListPrefix
 STRING CONST : cMetaPrefix
 STRING CONST : cObjectName
-IMMEDIATE VOID OPERATOR :: MACRO : constructor
+: : CompileSetWordProducerForCompiledClass
+ TtfwWord OPERATOR :: IN : aWord
+; // CompileSetWordProducerForCompiledClass
+IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : constructor
  Documentation:
   Конструктор объектов
  ^L OPERATOR :: IN : aName
  ^ OPERATOR :: IN : aParams
  STRING OPERATOR :: VAR : l_Name
 ; // constructor
+VOID OPERATOR :: PROCEDURE : CopyConstructors
 STRING CONST : cResult
 STRING CONST : cSelf
+IMMEDIATE VOID OPERATOR :: MACRO : def_constructor
+VOID OPERATOR :: PROCEDURE : def_constructor_do
+IMMEDIATE VOID OPERATOR :: MACRO : def_constructor_empty
+VOID OPERATOR :: PROCEDURE : def_constructor_empty_do
 VOID OPERATOR : define_member
  STRING OPERATOR :: IN : aName
  FieldOffset OPERATOR :: IN : aOffset
@@ -4887,6 +4892,15 @@ VOID OPERATOR :: PROCEDURE : DefineInstanceSize
  Documentation:
   Определяем размер экземпляров класса
 ; // DefineInstanceSize
+IMMEDIATE VOID OPERATOR :: MACRO : DefineMetaList
+ Documentation:
+  Определяет список мета-информации к элементу. И итератор к нему
+ ^L OPERATOR :: IN : aDoc
+ ^L OPERATOR :: IN : aWordName
+ STRING OPERATOR :: VAR : l_ListForValues
+ STRING OPERATOR :: VAR : l_ListName
+ STRING OPERATOR :: VAR : l_WordName
+; // DefineMetaList
 PRIVATE OPERATOR : do_get_member
  Documentation:
   Определяет способ доступа к члену класса
@@ -4909,18 +4923,21 @@ BOOLEAN FUNCTION : FilterMember
  OBJECT OPERATOR :: IN : aMember
  BOOLEAN FUNCTION :: FilterMember : Result
 ; // FilterMember
-IMMEDIATE VOID OPERATOR :: MACRO : get_member
- Documentation:
-  Компилирует способ доступа к члену класса
- ^L OPERATOR :: IN : aName
-; // get_member
+VOID OPERATOR :: PROCEDURE : FinishClassDefinition
 STRING FUNCTION : InstanceSizeName
  STRING FUNCTION :: InstanceSizeName : Result
 ; // InstanceSizeName
 : : ListToNameAsString
+ Documentation:
+  Выводит элементы массива как строки в список метаинформации aName
  ARRAY OPERATOR :: IN : aList
  STRING OPERATOR :: IN : aName
 ; // ListToNameAsString
+VOID Log
+VOID OPERATOR :: PROCEDURE : MakeAlias
+ ^ OPERATOR :: IN : aLambda
+ STRING OPERATOR :: IN : aProp
+; // MakeAlias
 PRIVATE STRING OPERATOR : MakeFieldOffsetName
  Documentation:
   Делает имя для доступа к полю
@@ -4937,16 +4954,24 @@ PRIVATE STRING OPERATOR : MakeMethodSignaturePrim
  PRIVATE STRING OPERATOR :: MakeMethodSignaturePrim : Result
 ; // MakeMethodSignaturePrim
 PRIVATE VOID OPERATOR : MakeSelfParam
+ARRAY FUNCTION : MapToName
+ ARRAY OPERATOR :: IN : aArray
+ ARRAY FUNCTION :: MapToName : Result
+; // MapToName
 IMMEDIATE VOID OPERATOR :: MACRO : member
  Documentation:
   Определяет член текущего класса
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
 ; // member
+ARRAY FUNCTION : MetaListPoducerIt
+ ARRAY FUNCTION :: MetaListPoducerIt : Result
+; // MetaListPoducerIt
 IMMEDIATE VOID OPERATOR :: MACRO : method
  Documentation:
   Метод объекта
  ^L OPERATOR :: IN : aName
+ ^ OPERATOR :: IN : aParams
  STRING OPERATOR :: VAR : l_Name
 ; // method
 IMMEDIATE VOID OPERATOR :: MACRO : new[
@@ -4957,78 +4982,78 @@ ObjectClass OPERATOR :: MACRO :: readonly : Object:class
  ObjectClass OPERATOR :: MACRO :: readonly :: Object:class : Result
  Object OPERATOR :: IN : Self
 ; // Object:class
-STRING OPERATOR :: MACRO :: method : Object:ClassName
- STRING OPERATOR :: MACRO :: method :: Object:ClassName : Result
+STRING OPERATOR :: MACRO :: readonly : Object:ClassName
+ STRING OPERATOR :: MACRO :: readonly :: Object:ClassName : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassName
-ObjectClass OPERATOR :: MACRO :: method : Object:ClassParent
- ObjectClass OPERATOR :: MACRO :: method :: Object:ClassParent : Result
+ObjectClass OPERATOR :: MACRO :: readonly : Object:ClassParent
+ ObjectClass OPERATOR :: MACRO :: readonly :: Object:ClassParent : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassParent
-STRING OPERATOR :: MACRO :: method : Object:ClassParentName
- STRING OPERATOR :: MACRO :: method :: Object:ClassParentName : Result
+STRING OPERATOR :: MACRO :: readonly : Object:ClassParentName
+ STRING OPERATOR :: MACRO :: readonly :: Object:ClassParentName : Result
  Object OPERATOR :: IN : Self
 ; // Object:ClassParentName
-FieldOffset OPERATOR :: MACRO :: method : Object:FieldOffset
- FieldOffset OPERATOR :: MACRO :: method :: Object:FieldOffset : Result
+FieldOffset OPERATOR :: MACRO :: readonly : Object:FieldOffset
+ FieldOffset OPERATOR :: MACRO :: readonly :: Object:FieldOffset : Result
  Object OPERATOR :: IN : Self
 ; // Object:FieldOffset
-INTEGER OPERATOR :: MACRO :: method : Object:InstanceSize
- INTEGER OPERATOR :: MACRO :: method :: Object:InstanceSize : Result
+INTEGER OPERATOR :: MACRO :: readonly : Object:InstanceSize
+ INTEGER OPERATOR :: MACRO :: readonly :: Object:InstanceSize : Result
  Object OPERATOR :: IN : Self
 ; // Object:InstanceSize
-Object OPERATOR :: MACRO :: constructor : Object:new
- Object OPERATOR :: MACRO :: constructor :: Object:new : Result
- Object OPERATOR :: MACRO :: constructor :: Object:new : Self
+Object OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: constructor : Object:new
+ Object OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: constructor :: Object:new : Result
+ Object OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: constructor :: Object:new : Self
 ; // Object:new
-REDIFINITION VIRTUAL VOID OPERATOR :: MACRO :: method : Object:Print
+REDIFINITION VIRTUAL VOID OPERATOR :: MACRO :: readonly : Object:Print
 ==> Redefines
- OPERATOR :: MACRO :: method : Object:Print
+ OPERATOR :: MACRO :: readonly : Object:Print
   Object OPERATOR :: IN : Self
  ; // Object:Print
 <== Redefines
  Object OPERATOR :: IN : Self
 ; // Object:Print
-VIRTUAL STRING OPERATOR :: MACRO :: method : Object:ToPrintable
- VIRTUAL STRING OPERATOR :: MACRO :: method :: Object:ToPrintable : Result
+VIRTUAL STRING OPERATOR :: MACRO :: readonly : Object:ToPrintable
+ VIRTUAL STRING OPERATOR :: MACRO :: readonly :: Object:ToPrintable : Result
  Object OPERATOR :: IN : Self
 ; // Object:ToPrintable
 IMMEDIATE VOID OPERATOR :: TYPE : ObjectClass
-STRING : : ObjectClass:ClassName
+STRING OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_method : ObjectClass:ClassName
  Documentation:
   Возвращает имя класса
- STRING : :: ObjectClass:ClassName : Result
+ STRING OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_method :: ObjectClass:ClassName : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:ClassName
-ObjectClass : : ObjectClass:ClassParent
+ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_method : ObjectClass:ClassParent
  Documentation:
   Возвращает родительский класс
- ObjectClass : :: ObjectClass:ClassParent : Result
+ ObjectClass OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_method :: ObjectClass:ClassParent : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:ClassParent
-STRING : : ObjectClass:ClassParentName
+STRING OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_method : ObjectClass:ClassParentName
  Documentation:
   Возвращает имя родительского класса
  ObjectClass OPERATOR :: VAR : l_ClassParent
- STRING : :: ObjectClass:ClassParentName : Result
+ STRING OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_method :: ObjectClass:ClassParentName : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:ClassParentName
-FieldOffset : : ObjectClass:FieldOffset
+FieldOffset OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_method : ObjectClass:FieldOffset
  Documentation:
   Вычисляет смещение поля класса
  ^L OPERATOR :: IN : aFieldName
  STRING OPERATOR :: VAR : l_FieldName
  TtfwWord OPERATOR :: VAR : l_FieldVAR
- FieldOffset : :: ObjectClass:FieldOffset : Result
+ FieldOffset OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_method :: ObjectClass:FieldOffset : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:FieldOffset
-INTEGER : : ObjectClass:InstanceSize
+INTEGER OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_method : ObjectClass:InstanceSize
  Documentation:
   Возвращает размер экземпляров класса
- INTEGER : :: ObjectClass:InstanceSize : Result
+ INTEGER OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_method :: ObjectClass:InstanceSize : Result
  ObjectClass OPERATOR :: IN : Self
 ; // ObjectClass:InstanceSize
-: : ObjectClass:Print
+OPERATOR :: MACRO :: STACK_CHANGING_MACRO :: class_method : ObjectClass:Print
  Documentation:
   Печатает класс
  ObjectClass OPERATOR :: IN : Self
@@ -5075,7 +5100,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Bind.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CompileTimeVar.ms.dict
@@ -5145,7 +5169,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CompileTimeVa
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
  ;
 IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : CompileTime-VAR
  Documentation:
@@ -5196,7 +5220,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementatio
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   axiom:CompiledWordWorkerWord
   axiom:Finder
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
@@ -5245,7 +5268,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
@@ -5360,7 +5382,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Debug.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
  ;
 VOID OPERATOR :: PROCEDURE : Trace
@@ -5399,7 +5420,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndIm
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
@@ -5447,7 +5467,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProd
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
@@ -5502,7 +5521,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Concrete.ms.m
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\classRelations.ms.dict
@@ -5622,7 +5640,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
@@ -5698,7 +5715,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\classRelation
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
@@ -5741,7 +5757,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\MetaMetaModel.ms.dict
@@ -5814,7 +5829,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\MetaMetaModel
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
@@ -5864,7 +5878,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\UML.ms.model
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\metaMACRO.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\MetaMetaModel.ms.dict
@@ -5918,7 +5931,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Generation.ms
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
@@ -6080,7 +6092,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\ElementsRTTI.
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
@@ -6216,21 +6227,20 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\SaveVarAndDo.
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Literal.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
  ;
-VOID OPERATOR :: PROCEDURE : SaveVarAndDo
+: : SaveVarAndDo
  Documentation:
    Сохраняет значение переменной aVar. Выполняет функтор aFunctor. Восстанавливает значение переменной aVar. 
  ^ OPERATOR :: IN : aFunctor
  ^ OPERATOR :: IN : aVar
  OPERATOR :: VAR : l_OldValue
 ; // SaveVarAndDo
-VOID OPERATOR :: PROCEDURE : TF
+: : TF
  Documentation:
    Сохраняет значение переменной aVar. Выполняет функтор aFunctor. Восстанавливает значение переменной aVar. 
  ^ OPERATOR :: IN : aFunctor
@@ -6270,7 +6280,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\RefDeepest.ms
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoStrangeSymbols.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
@@ -6336,7 +6345,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\FieldByNameDe
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
@@ -6392,7 +6400,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms
   axiom:File
   axiom:clipboard
   axiom:Font
-  axiom:generators
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict

@@ -2,6 +2,7 @@ UNIT CompileTimeVar.ms.dict
 
 USES
  axiom:TtfwValueTypesAccepts
+ axiom_push.ms.dict
 ;
 
 PRIVATE : STATIC-VAR:DefineVarEx
@@ -53,11 +54,9 @@ STACK_CHANGING_MACRO CompileTime-VAR
  STRING VAR l_Name
  aName |N >>> l_Name
  l_Name Ctx:Parser:PushString
- axiom:PushSymbol [EXECUTE]
- axiom:PushSymbol (
+ axiom:PushImmediateSymbol (
  aValue DO
- axiom:PushSymbol [EXECUTE]
- axiom:PushSymbol CompileValue
+ axiom:PushImmediateSymbol CompileValue
  axiom:PushSymbol @
  l_Name Ctx:Parser:PushSymbol
  axiom:PushSymbol pop:Word:SetValue

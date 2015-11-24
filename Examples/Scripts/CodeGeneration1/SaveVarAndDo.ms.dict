@@ -7,7 +7,7 @@ USES
  Documentation.ms.dict
 ;
 
-PROCEDURE SaveVarAndDo
+: SaveVarAndDo
  VAR_REF RIGHT IN aVar
  FUNCTOR RIGHT IN aFunctor
 

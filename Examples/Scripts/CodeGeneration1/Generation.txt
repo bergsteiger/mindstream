@@ -1,0 +1,127 @@
+UNIT Generation.ms.dict
+
+USES 
+ ElementsRTTI.ms.dict
+;
+
+USES
+ CompileTimeVar.ms.dict
+;
+
+USES
+ SaveVarAndDo.ms.dict
+;
+
+INTEGER CompileTime-VAR g_Indent 0
+%REMARK 'Текущий отступ'
+
+CONST cIndentChar ' '
+
+STRING FUNCTION IndentStr
+ g_Indent cIndentChar char:Dupe &gt;&gt;&gt; Result
+; // IndentStr
+
+OBJECT STRING INTEGER ARRAY BOOLEAN TYPE OUTABLE
+
+FORWARD ValueToString
+
+STRING FUNCTION ValueToString
+  OUTABLE IN aValue
+
+ if ( aValue IsArray ) then
+ begin
+  [ aValue .for&gt; ValueToString ] strings:Cat &gt;&gt;&gt; Result
+ end 
+ else
+ if (
+     ( aValue IsObj ) AND ( aValue IS class::TtfwWord )
+    ) then
+ begin
+  aValue |N &gt;&gt;&gt; Result
+ end
+ else
+ begin
+  aValue ToPrintable &gt;&gt;&gt; Result
+ end 
+; // ValueToString
+
+PROCEDURE .Out
+ OUTABLE IN aValue
+ [ IndentStr aValue ValueToString ] strings:Cat .
+; // .Out
+
+PROCEDURE Indented
+  ^ IN aLambda
+  
+ TF g_Indent (
+  INC g_Indent
+  aLambda DO
+ ) 
+; // Indented
+
+PROCEDURE Bracketed
+  ^ IN aLambda
+  
+ '{' .Out
+ Indented ( aLambda DO ) 
+ '}' .Out
+; // Bracketed
+
+FORWARD .Generate.pas
+
+PROCEDURE .Generate.pas
+ ModelElement IN Self
+ //Self pop:Object:ClassName .Out
+ //Self pop:Word:Producer .Out
+ Self .Out
+ Bracketed (
+  Self MembersIterator .for&gt; ( 
+    OBJECT IN aCode
+    
+   STRING VAR l_Out  
+   STRING VAR l_Name
+   aCode pop:Word:Name &gt;&gt;&gt; l_Name
+   [ l_Name ' : ' ] strings:Cat &gt;&gt;&gt; l_Out 
+   [ aCode DO ] .for&gt; ( 
+     IN anItem
+     
+    if ( anItem IsArray ) then
+    begin
+     if ( 
+         ( l_Name = 'Children' )
+         OR ( l_Name = 'Attributes' )
+         OR ( l_Name = 'Operations' )
+         OR ( l_Name = 'Constants' )
+         OR ( l_Name = 'Dependencies' )
+         OR ( l_Name = 'Parameters' )
+        ) then
+     begin
+      '' &gt;&gt;&gt; l_Out
+      l_Name .Out
+      Bracketed (
+       anItem .for&gt; .Generate.pas
+      ) // Bracketed
+     end
+     else
+     begin
+      l_Out [ anItem .for&gt; ValueToString ] ' ' strings:CatSep Cat &gt;&gt;&gt; l_Out
+     end
+    end // anItem IsArray
+    else
+    begin
+     l_Out anItem ValueToString Cat &gt;&gt;&gt; l_Out
+    end // anItem IsArray
+     
+    if ( l_Out &lt;&gt; '' ) then
+    begin
+     l_Out .Out
+    end // l_Out &lt;&gt; ''
+   ) // [ aCode DO ] .for&gt;
+  ) // Self MembersIterator
+ ) // Bracketed
+; // .Generate.pas
+
+PROCEDURE .Generate
+ ModelElement IN Self
+ Self .Generate.pas
+; // .Generate

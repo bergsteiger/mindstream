@@ -1,0 +1,29 @@
+INCLUDE 'CompileAndProcess.ms.dict'
+INCLUDE 'core.ms.dict'
+INCLUDE 'Debug.ms.dict'
+
+: LW
+  STRING IN aWordName
+  STRING IN aDictName
+ STRING VAR l_FileName
+ sysutils:GetCurrentDir >>> l_FileName 
+ [ l_FileName '\' aWordName '.' aDictName ] strings:Cat >>> l_FileName
+
+ FILE VAR l_File
+
+ l_FileName File:OpenWrite >>> l_File
+ TRY
+  [ 'INCLUDE ' '''' aDictName '''' ' @ ' aWordName ] strings:Cat l_File File:WriteLn
+ FINALLY
+  nil >>> l_File
+ END
+ l_FileName script:CompileAndProcess DO
+
+ l_FileName DeleteFile DROP
+ [ l_FileName '.co' ] strings:Cat DeleteFile DROP
+; // LW
+
+'X' 'CompileAndProcess.ms.dict' LW pop:Word:Name .
+'Y' 'CompileAndProcess.ms.dict' LW pop:Word:Name .
+'NameOf' 'core.ms.dict' LW pop:Word:Name .
+'Trace' 'Debug.ms.dict' LW pop:Word:Name .

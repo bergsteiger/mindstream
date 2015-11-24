@@ -10,6 +10,25 @@ PROCEDURE axiom:PushSymbol
  aSymbol pop:Word:Name Ctx:Parser:PushSymbol
 ; // axiom:PushSymbol
 
+PROCEDURE axiom:PushImmediateSymbol
+ LINK ^ IN aSymbol
+ %SUMMARY 'Запихивает во входной поток парсера имя слова aSymbol для непосредственного выполнения' ;
+ axiom:PushSymbol [EXECUTE]
+ aSymbol pop:Word:Name Ctx:Parser:PushSymbol
+; // axiom:PushSymbol
+
+MACRO [] 
+ axiom:PushSymbol [ 
+ axiom:PushSymbol ]
+; // []
+
+WordAlias () NOP
+
+PROCEDURE axiom:PushStringAsSymbol
+ ^ IN aString
+ aString DO Ctx:Parser:PushSymbol
+; // axiom:PushString
+
 PROCEDURE Ctx:Parser:PushLeftDottedSymbol
  STRING IN aValue
  %SUMMARY 'Запихивает во входной поток парсера aValue предварённое точкой' ;
@@ -57,6 +76,14 @@ PROCEDURE axiom:PushWordInfo
  aWordInfo axiom:PushSerias
 ; // axiom:PushWordInfo
 
+CONST cInParamItemsCount 3
+
+ARRAY FUNCTION axiom:InParams:It
+  ENGINE_WORD IN aParams
+
+ aParams CodeIterator .slice> cInParamItemsCount >>> Result
+; // axiom:InParams:It
+
 MACRO in_param
   Literal IN aName
 
@@ -80,7 +107,7 @@ PROCEDURE axiom:Params:PushWithOtherStereo
   STRING IN aStereo
   ENGINE_WORD IN aParams
 
- aParams CodeIterator .slice> 3 ==> ( 
+ aParams axiom:InParams:It ==> ( 
   IN aTypes
   IN aStereoC
   IN aParam

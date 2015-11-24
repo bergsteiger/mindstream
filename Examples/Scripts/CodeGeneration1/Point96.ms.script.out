@@ -63,22 +63,37 @@ VOID TestWithDump PointTest
  ; // IMMEDIATE VOID MACRO .Y
  
  BarClass class_impl _:Bar
-  %CLASS-METHODS %Class-Methods
-  ; // %CLASS-METHODS %Class-Methods
-  
-  %CONSTRUCTORS %Constructors
-  ; // %CONSTRUCTORS %Constructors
-  
   %INHERITS %G
    @
    _:Object
   ; // %INHERITS %G
   
-  %METHODS %Methods
-  ; // %METHODS %Methods
+  %Constructors .%Constructors.It
+   'new'
+  ; // %Constructors .%Constructors.It
   
-  %PROPERTIES %Props
-  ; // %PROPERTIES %Props
+  %MetaMethods .%MetaMethods.It
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+  ; // %MetaMethods .%MetaMethods.It
+  
+  %Methods .%Methods.It
+  ; // %Methods .%Methods.It
+  
+  %Properties .%Properties.It
+   'class'
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
+  ; // %Properties .%Properties.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -90,22 +105,37 @@ VOID TestWithDump PointTest
  ; // BarClass class_impl _:Bar
  
  FooClass class_impl _:Foo
-  %CLASS-METHODS %Class-Methods
-  ; // %CLASS-METHODS %Class-Methods
-  
-  %CONSTRUCTORS %Constructors
-  ; // %CONSTRUCTORS %Constructors
-  
   %INHERITS %G
    @
    _:Object
   ; // %INHERITS %G
   
-  %METHODS %Methods
-  ; // %METHODS %Methods
+  %Constructors .%Constructors.It
+   'new'
+  ; // %Constructors .%Constructors.It
   
-  %PROPERTIES %Props
-  ; // %PROPERTIES %Props
+  %MetaMethods .%MetaMethods.It
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+  ; // %MetaMethods .%MetaMethods.It
+  
+  %Methods .%Methods.It
+  ; // %Methods .%Methods.It
+  
+  %Properties .%Properties.It
+   'class'
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
+  ; // %Properties .%Properties.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -117,33 +147,46 @@ VOID TestWithDump PointTest
  ; // FooClass class_impl _:Foo
  
  PointClass class_impl _:Point
-  %CLASS-METHODS %Class-Methods
-  ; // %CLASS-METHODS %Class-Methods
-  
-  %CONSTRUCTORS %Constructors
-   ':'
-   '0'
-   'XY'
-   'OF'
-  ; // %CONSTRUCTORS %Constructors
-  
   %INHERITS %G
    @
    _:Object
   ; // %INHERITS %G
   
-  %METHODS %Methods
-   '+'
-   'Neg'
-   '-'
-   'ToPrintable'
-   'Print'
-  ; // %METHODS %Methods
+  %Constructors .%Constructors.It
+   ':'
+   'new'
+   '0'
+   'XY'
+   'OF'
+  ; // %Constructors .%Constructors.It
   
-  %PROPERTIES %Props
+  %MetaMethods .%MetaMethods.It
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+  ; // %MetaMethods .%MetaMethods.It
+  
+  %Methods .%Methods.It
+   '+'
+   '-'
+  ; // %Methods .%Methods.It
+  
+  %Properties .%Properties.It
+   'class'
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
    'X'
    'Y'
-  ; // %PROPERTIES %Props
+   'Neg'
+  ; // %Properties .%Properties.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -159,27 +202,40 @@ VOID TestWithDump PointTest
  ; // PointClass class_impl _:Point
  
  RectangleClass class_impl _:Rectangle
-  %CLASS-METHODS %Class-Methods
-  ; // %CLASS-METHODS %Class-Methods
-  
-  %CONSTRUCTORS %Constructors
-   ':'
-  ; // %CONSTRUCTORS %Constructors
-  
   %INHERITS %G
    @
    _:Object
   ; // %INHERITS %G
   
-  %METHODS %Methods
-   'ToPrintable'
-   'Print'
-  ; // %METHODS %Methods
+  %Constructors .%Constructors.It
+   ':'
+   'new'
+  ; // %Constructors .%Constructors.It
   
-  %PROPERTIES %Props
+  %MetaMethods .%MetaMethods.It
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+  ; // %MetaMethods .%MetaMethods.It
+  
+  %Methods .%Methods.It
+  ; // %Methods .%Methods.It
+  
+  %Properties .%Properties.It
+   'class'
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
    'TopLeft'
    'BottomRight'
-  ; // %PROPERTIES %Props
+  ; // %Properties .%Properties.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -211,75 +267,68 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING method Object:ClassName
+ STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassName
+ ; // STRING readonly Object:ClassName
  
- ObjectClass method Object:ClassParent
+ ObjectClass readonly Object:ClassParent
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParent
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParent
+ ; // ObjectClass readonly Object:ClassParent
  
- STRING method Object:ClassParentName
+ STRING readonly Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassParentName
+ ; // STRING readonly Object:ClassParentName
  
- FieldOffset method Object:FieldOffset
+ FieldOffset readonly Object:FieldOffset
   Object IN Self
   Self
   Object:class
   ObjectClass:FieldOffset
   '>>>'
   Result
- ; // FieldOffset method Object:FieldOffset
+ ; // FieldOffset readonly Object:FieldOffset
  
- INTEGER method Object:InstanceSize
+ INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ ; // INTEGER readonly Object:InstanceSize
  
- Object constructor Object:new
+ Bar constructor Bar:new
   ARRAY [
    @
-   _:Object
+   _:Bar
   ]
   Result
   pop:Word:SetValue
- ; // Object constructor Object:new
+ ; // Bar constructor Bar:new
  
- REDIFINITION VIRTUAL VOID method Object:Print
+ REDIFINITION VIRTUAL VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
+ ; // REDIFINITION VIRTUAL VOID readonly Object:Print
  
- REDIFINITION VIRTUAL VOID method Object:Print
-  Object IN Self
-  Self
-  Object:ToPrintable
-  Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
- 
- VIRTUAL STRING method Object:ToPrintable
+ VIRTUAL STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -294,14 +343,14 @@ VOID TestWithDump PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING method Object:ToPrintable
+ ; // VIRTUAL STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE BarClass
   TtfwValueTypes
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE BarClass
  
- STRING : ObjectClass:ClassName
+ STRING class_method ObjectClass:ClassName
   %SUMMARY %SUM
    'Возвращает имя класса'
   ; // %SUMMARY %SUM
@@ -314,9 +363,9 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
   DROP
- ; // STRING : ObjectClass:ClassName
+ ; // STRING class_method ObjectClass:ClassName
  
- ObjectClass : ObjectClass:ClassParent
+ ObjectClass class_method ObjectClass:ClassParent
   %SUMMARY %SUM
    'Возвращает родительский класс'
   ; // %SUMMARY %SUM
@@ -328,9 +377,9 @@ VOID TestWithDump PointTest
   DO
   Result
   pop:Word:SetValue
- ; // ObjectClass : ObjectClass:ClassParent
+ ; // ObjectClass class_method ObjectClass:ClassParent
  
- STRING : ObjectClass:ClassParentName
+ STRING class_method ObjectClass:ClassParentName
   %SUMMARY %SUM
    'Возвращает имя родительского класса'
   ; // %SUMMARY %SUM
@@ -361,9 +410,9 @@ VOID TestWithDump PointTest
     Result
     pop:Word:SetValue
    END
- ; // STRING : ObjectClass:ClassParentName
+ ; // STRING class_method ObjectClass:ClassParentName
  
- FieldOffset : ObjectClass:FieldOffset
+ FieldOffset class_method ObjectClass:FieldOffset
   %SUMMARY %SUM
    'Вычисляет смещение поля класса'
   ; // %SUMMARY %SUM
@@ -400,9 +449,9 @@ VOID TestWithDump PointTest
   DO
   Result
   pop:Word:SetValue
- ; // FieldOffset : ObjectClass:FieldOffset
+ ; // FieldOffset class_method ObjectClass:FieldOffset
  
- INTEGER : ObjectClass:InstanceSize
+ INTEGER class_method ObjectClass:InstanceSize
   %SUMMARY %SUM
    'Возвращает размер экземпляров класса'
   ; // %SUMMARY %SUM
@@ -414,9 +463,9 @@ VOID TestWithDump PointTest
   DO
   Result
   pop:Word:SetValue
- ; // INTEGER : ObjectClass:InstanceSize
+ ; // INTEGER class_method ObjectClass:InstanceSize
  
- : ObjectClass:Print
+ class_method ObjectClass:Print
   %SUMMARY %SUM
    'Печатает класс'
   ; // %SUMMARY %SUM
@@ -436,27 +485,42 @@ VOID TestWithDump PointTest
    BEGIN
     Self
     ObjectClass:ClassName
-    .
+    Print
    END
- ; // : ObjectClass:Print
+ ; // class_method ObjectClass:Print
  
  BarClass class_impl _:Bar
-  %CLASS-METHODS %Class-Methods
-  ; // %CLASS-METHODS %Class-Methods
-  
-  %CONSTRUCTORS %Constructors
-  ; // %CONSTRUCTORS %Constructors
-  
   %INHERITS %G
    @
    _:Object
   ; // %INHERITS %G
   
-  %METHODS %Methods
-  ; // %METHODS %Methods
+  %Constructors .%Constructors.It
+   'new'
+  ; // %Constructors .%Constructors.It
   
-  %PROPERTIES %Props
-  ; // %PROPERTIES %Props
+  %MetaMethods .%MetaMethods.It
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+  ; // %MetaMethods .%MetaMethods.It
+  
+  %Methods .%Methods.It
+  ; // %Methods .%Methods.It
+  
+  %Properties .%Properties.It
+   'class'
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
+  ; // %Properties .%Properties.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -468,22 +532,37 @@ VOID TestWithDump PointTest
  ; // BarClass class_impl _:Bar
  
  FooClass class_impl _:Foo
-  %CLASS-METHODS %Class-Methods
-  ; // %CLASS-METHODS %Class-Methods
-  
-  %CONSTRUCTORS %Constructors
-  ; // %CONSTRUCTORS %Constructors
-  
   %INHERITS %G
    @
    _:Object
   ; // %INHERITS %G
   
-  %METHODS %Methods
-  ; // %METHODS %Methods
+  %Constructors .%Constructors.It
+   'new'
+  ; // %Constructors .%Constructors.It
   
-  %PROPERTIES %Props
-  ; // %PROPERTIES %Props
+  %MetaMethods .%MetaMethods.It
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+  ; // %MetaMethods .%MetaMethods.It
+  
+  %Methods .%Methods.It
+  ; // %Methods .%Methods.It
+  
+  %Properties .%Properties.It
+   'class'
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
+  ; // %Properties .%Properties.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -495,33 +574,46 @@ VOID TestWithDump PointTest
  ; // FooClass class_impl _:Foo
  
  PointClass class_impl _:Point
-  %CLASS-METHODS %Class-Methods
-  ; // %CLASS-METHODS %Class-Methods
-  
-  %CONSTRUCTORS %Constructors
-   ':'
-   '0'
-   'XY'
-   'OF'
-  ; // %CONSTRUCTORS %Constructors
-  
   %INHERITS %G
    @
    _:Object
   ; // %INHERITS %G
   
-  %METHODS %Methods
-   '+'
-   'Neg'
-   '-'
-   'ToPrintable'
-   'Print'
-  ; // %METHODS %Methods
+  %Constructors .%Constructors.It
+   ':'
+   'new'
+   '0'
+   'XY'
+   'OF'
+  ; // %Constructors .%Constructors.It
   
-  %PROPERTIES %Props
+  %MetaMethods .%MetaMethods.It
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+  ; // %MetaMethods .%MetaMethods.It
+  
+  %Methods .%Methods.It
+   '+'
+   '-'
+  ; // %Methods .%Methods.It
+  
+  %Properties .%Properties.It
+   'class'
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
    'X'
    'Y'
-  ; // %PROPERTIES %Props
+   'Neg'
+  ; // %Properties .%Properties.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -537,27 +629,40 @@ VOID TestWithDump PointTest
  ; // PointClass class_impl _:Point
  
  RectangleClass class_impl _:Rectangle
-  %CLASS-METHODS %Class-Methods
-  ; // %CLASS-METHODS %Class-Methods
-  
-  %CONSTRUCTORS %Constructors
-   ':'
-  ; // %CONSTRUCTORS %Constructors
-  
   %INHERITS %G
    @
    _:Object
   ; // %INHERITS %G
   
-  %METHODS %Methods
-   'ToPrintable'
-   'Print'
-  ; // %METHODS %Methods
+  %Constructors .%Constructors.It
+   ':'
+   'new'
+  ; // %Constructors .%Constructors.It
   
-  %PROPERTIES %Props
+  %MetaMethods .%MetaMethods.It
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+  ; // %MetaMethods .%MetaMethods.It
+  
+  %Methods .%Methods.It
+  ; // %Methods .%Methods.It
+  
+  %Properties .%Properties.It
+   'class'
+   'ClassName'
+   'FieldOffset'
+   'InstanceSize'
+   'ClassParent'
+   'ClassParentName'
+   'Print'
+   'ToPrintable'
    'TopLeft'
    'BottomRight'
-  ; // %PROPERTIES %Props
+  ; // %Properties .%Properties.It
   
   ObjectClass STATIC-VAR c:Class:Parent
   FieldOffset STATIC-VAR c:Instance:Size
@@ -589,75 +694,68 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING method Object:ClassName
+ STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassName
+ ; // STRING readonly Object:ClassName
  
- ObjectClass method Object:ClassParent
+ ObjectClass readonly Object:ClassParent
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParent
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParent
+ ; // ObjectClass readonly Object:ClassParent
  
- STRING method Object:ClassParentName
+ STRING readonly Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassParentName
+ ; // STRING readonly Object:ClassParentName
  
- FieldOffset method Object:FieldOffset
+ FieldOffset readonly Object:FieldOffset
   Object IN Self
   Self
   Object:class
   ObjectClass:FieldOffset
   '>>>'
   Result
- ; // FieldOffset method Object:FieldOffset
+ ; // FieldOffset readonly Object:FieldOffset
  
- INTEGER method Object:InstanceSize
+ INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ ; // INTEGER readonly Object:InstanceSize
  
- Object constructor Object:new
+ Foo constructor Foo:new
   ARRAY [
    @
-   _:Object
+   _:Foo
   ]
   Result
   pop:Word:SetValue
- ; // Object constructor Object:new
+ ; // Foo constructor Foo:new
  
- REDIFINITION VIRTUAL VOID method Object:Print
+ REDIFINITION VIRTUAL VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
+ ; // REDIFINITION VIRTUAL VOID readonly Object:Print
  
- REDIFINITION VIRTUAL VOID method Object:Print
-  Object IN Self
-  Self
-  Object:ToPrintable
-  Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
- 
- VIRTUAL STRING method Object:ToPrintable
+ VIRTUAL STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -672,14 +770,14 @@ VOID TestWithDump PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING method Object:ToPrintable
+ ; // VIRTUAL STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE FooClass
   TtfwValueTypes
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE FooClass
  
- STRING : ObjectClass:ClassName
+ STRING class_method ObjectClass:ClassName
   %SUMMARY %SUM
    'Возвращает имя класса'
   ; // %SUMMARY %SUM
@@ -692,9 +790,9 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
   DROP
- ; // STRING : ObjectClass:ClassName
+ ; // STRING class_method ObjectClass:ClassName
  
- ObjectClass : ObjectClass:ClassParent
+ ObjectClass class_method ObjectClass:ClassParent
   %SUMMARY %SUM
    'Возвращает родительский класс'
   ; // %SUMMARY %SUM
@@ -706,9 +804,9 @@ VOID TestWithDump PointTest
   DO
   Result
   pop:Word:SetValue
- ; // ObjectClass : ObjectClass:ClassParent
+ ; // ObjectClass class_method ObjectClass:ClassParent
  
- STRING : ObjectClass:ClassParentName
+ STRING class_method ObjectClass:ClassParentName
   %SUMMARY %SUM
    'Возвращает имя родительского класса'
   ; // %SUMMARY %SUM
@@ -739,9 +837,9 @@ VOID TestWithDump PointTest
     Result
     pop:Word:SetValue
    END
- ; // STRING : ObjectClass:ClassParentName
+ ; // STRING class_method ObjectClass:ClassParentName
  
- FieldOffset : ObjectClass:FieldOffset
+ FieldOffset class_method ObjectClass:FieldOffset
   %SUMMARY %SUM
    'Вычисляет смещение поля класса'
   ; // %SUMMARY %SUM
@@ -778,9 +876,9 @@ VOID TestWithDump PointTest
   DO
   Result
   pop:Word:SetValue
- ; // FieldOffset : ObjectClass:FieldOffset
+ ; // FieldOffset class_method ObjectClass:FieldOffset
  
- INTEGER : ObjectClass:InstanceSize
+ INTEGER class_method ObjectClass:InstanceSize
   %SUMMARY %SUM
    'Возвращает размер экземпляров класса'
   ; // %SUMMARY %SUM
@@ -792,9 +890,9 @@ VOID TestWithDump PointTest
   DO
   Result
   pop:Word:SetValue
- ; // INTEGER : ObjectClass:InstanceSize
+ ; // INTEGER class_method ObjectClass:InstanceSize
  
- : ObjectClass:Print
+ class_method ObjectClass:Print
   %SUMMARY %SUM
    'Печатает класс'
   ; // %SUMMARY %SUM
@@ -814,9 +912,9 @@ VOID TestWithDump PointTest
    BEGIN
     Self
     ObjectClass:ClassName
-    .
+    Print
    END
- ; // : ObjectClass:Print
+ ; // class_method ObjectClass:Print
  
  ARRAY VAR l_Points
  ARRAY VAR l_Rectangles
@@ -956,52 +1054,52 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING method Object:ClassName
+ STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassName
+ ; // STRING readonly Object:ClassName
  
- ObjectClass method Object:ClassParent
+ ObjectClass readonly Object:ClassParent
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParent
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParent
+ ; // ObjectClass readonly Object:ClassParent
  
- STRING method Object:ClassParentName
+ STRING readonly Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassParentName
+ ; // STRING readonly Object:ClassParentName
  
- FieldOffset method Object:FieldOffset
+ FieldOffset readonly Object:FieldOffset
   Object IN Self
   Self
   Object:class
   ObjectClass:FieldOffset
   '>>>'
   Result
- ; // FieldOffset method Object:FieldOffset
+ ; // FieldOffset readonly Object:FieldOffset
  
- INTEGER method Object:InstanceSize
+ INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ ; // INTEGER readonly Object:InstanceSize
  
- Point method Point:Neg
+ Point readonly Point:Neg
   Point IN Self
   Point::
   Neg
@@ -1016,16 +1114,16 @@ VOID TestWithDump PointTest
   )
   Result
   pop:Word:SetValue
- ; // Point method Point:Neg
+ ; // Point readonly Point:Neg
  
- Object constructor Object:new
+ Point constructor Point:new
   ARRAY [
    @
-   _:Object
+   _:Point
   ]
   Result
   pop:Word:SetValue
- ; // Object constructor Object:new
+ ; // Point constructor Point:new
  
  Point constructor Point:OF
   ^ IN _aPoint
@@ -1052,21 +1150,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point constructor Point:OF
  
- REDIFINITION OVERRIDE VOID method Point:Print
+ REDIFINITION OVERRIDE VOID readonly Point:Print
   Point IN Self
   Self
   Point:ToPrintable
   Print
- ; // REDIFINITION OVERRIDE VOID method Point:Print
+ ; // REDIFINITION OVERRIDE VOID readonly Point:Print
  
- REDIFINITION VIRTUAL VOID method Object:Print
-  Object IN Self
-  Self
-  Object:ToPrintable
-  Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
- 
- REDIFINITION OVERRIDE STRING method Point:ToPrintable
+ REDIFINITION OVERRIDE STRING readonly Point:ToPrintable
   Point IN Self
   ARRAY [
    '( '
@@ -1083,7 +1174,7 @@ VOID TestWithDump PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // REDIFINITION OVERRIDE STRING method Point:ToPrintable
+ ; // REDIFINITION OVERRIDE STRING readonly Point:ToPrintable
  
  Pixel readonly Point:X
   Point IN Self
@@ -1145,7 +1236,7 @@ VOID TestWithDump PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE PointClass
  
- STRING : ObjectClass:ClassName
+ STRING class_method ObjectClass:ClassName
   %SUMMARY %SUM
    'Возвращает имя класса'
   ; // %SUMMARY %SUM
@@ -1158,9 +1249,9 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
   DROP
- ; // STRING : ObjectClass:ClassName
+ ; // STRING class_method ObjectClass:ClassName
  
- ObjectClass : ObjectClass:ClassParent
+ ObjectClass class_method ObjectClass:ClassParent
   %SUMMARY %SUM
    'Возвращает родительский класс'
   ; // %SUMMARY %SUM
@@ -1172,9 +1263,9 @@ VOID TestWithDump PointTest
   DO
   Result
   pop:Word:SetValue
- ; // ObjectClass : ObjectClass:ClassParent
+ ; // ObjectClass class_method ObjectClass:ClassParent
  
- STRING : ObjectClass:ClassParentName
+ STRING class_method ObjectClass:ClassParentName
   %SUMMARY %SUM
    'Возвращает имя родительского класса'
   ; // %SUMMARY %SUM
@@ -1205,9 +1296,9 @@ VOID TestWithDump PointTest
     Result
     pop:Word:SetValue
    END
- ; // STRING : ObjectClass:ClassParentName
+ ; // STRING class_method ObjectClass:ClassParentName
  
- FieldOffset : ObjectClass:FieldOffset
+ FieldOffset class_method ObjectClass:FieldOffset
   %SUMMARY %SUM
    'Вычисляет смещение поля класса'
   ; // %SUMMARY %SUM
@@ -1244,9 +1335,9 @@ VOID TestWithDump PointTest
   DO
   Result
   pop:Word:SetValue
- ; // FieldOffset : ObjectClass:FieldOffset
+ ; // FieldOffset class_method ObjectClass:FieldOffset
  
- INTEGER : ObjectClass:InstanceSize
+ INTEGER class_method ObjectClass:InstanceSize
   %SUMMARY %SUM
    'Возвращает размер экземпляров класса'
   ; // %SUMMARY %SUM
@@ -1258,9 +1349,9 @@ VOID TestWithDump PointTest
   DO
   Result
   pop:Word:SetValue
- ; // INTEGER : ObjectClass:InstanceSize
+ ; // INTEGER class_method ObjectClass:InstanceSize
  
- : ObjectClass:Print
+ class_method ObjectClass:Print
   %SUMMARY %SUM
    'Печатает класс'
   ; // %SUMMARY %SUM
@@ -1280,10 +1371,11 @@ VOID TestWithDump PointTest
    BEGIN
     Self
     ObjectClass:ClassName
-    .
+    Print
    END
- ; // : ObjectClass:Print
+ ; // class_method ObjectClass:Print
  
+ Point VAR PointFake
  Rectangle VAR R1
  Rectangle VAR R2
  IMMEDIATE VOID TYPE Rectangle
@@ -1344,73 +1436,66 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // ObjectClass readonly Object:class
  
- STRING method Object:ClassName
+ STRING readonly Object:ClassName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassName
+ ; // STRING readonly Object:ClassName
  
- ObjectClass method Object:ClassParent
+ ObjectClass readonly Object:ClassParent
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParent
   Result
   pop:Word:SetValue
- ; // ObjectClass method Object:ClassParent
+ ; // ObjectClass readonly Object:ClassParent
  
- STRING method Object:ClassParentName
+ STRING readonly Object:ClassParentName
   Object IN Self
   Self
   Object:class
   ObjectClass:ClassParentName
   Result
   pop:Word:SetValue
- ; // STRING method Object:ClassParentName
+ ; // STRING readonly Object:ClassParentName
  
- FieldOffset method Object:FieldOffset
+ FieldOffset readonly Object:FieldOffset
   Object IN Self
   Self
   Object:class
   ObjectClass:FieldOffset
   '>>>'
   Result
- ; // FieldOffset method Object:FieldOffset
+ ; // FieldOffset readonly Object:FieldOffset
  
- INTEGER method Object:InstanceSize
+ INTEGER readonly Object:InstanceSize
   Object IN Self
   Self
   Object:class
   ObjectClass:InstanceSize
   Result
   pop:Word:SetValue
- ; // INTEGER method Object:InstanceSize
+ ; // INTEGER readonly Object:InstanceSize
  
- Object constructor Object:new
+ Rectangle constructor Rectangle:new
   ARRAY [
    @
-   _:Object
+   _:Rectangle
   ]
   Result
   pop:Word:SetValue
- ; // Object constructor Object:new
+ ; // Rectangle constructor Rectangle:new
  
- REDIFINITION OVERRIDE VOID method Rectangle:Print
+ REDIFINITION OVERRIDE VOID readonly Rectangle:Print
   Rectangle IN Self
   Self
   Rectangle:ToPrintable
   Print
- ; // REDIFINITION OVERRIDE VOID method Rectangle:Print
- 
- REDIFINITION VIRTUAL VOID method Object:Print
-  Object IN Self
-  Self
-  Object:ToPrintable
-  Print
- ; // REDIFINITION VIRTUAL VOID method Object:Print
+ ; // REDIFINITION OVERRIDE VOID readonly Rectangle:Print
  
  Point readonly Rectangle:TopLeft
   Rectangle IN Self
@@ -1424,7 +1509,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point readonly Rectangle:TopLeft
  
- REDIFINITION OVERRIDE STRING method Rectangle:ToPrintable
+ REDIFINITION OVERRIDE STRING readonly Rectangle:ToPrintable
   Rectangle IN Self
   ARRAY [
    '( '
@@ -1441,14 +1526,14 @@ VOID TestWithDump PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // REDIFINITION OVERRIDE STRING method Rectangle:ToPrintable
+ ; // REDIFINITION OVERRIDE STRING readonly Rectangle:ToPrintable
  
  IMMEDIATE VOID TYPE RectangleClass
   TtfwValueTypes
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE RectangleClass
  
- STRING : ObjectClass:ClassName
+ STRING class_method ObjectClass:ClassName
   %SUMMARY %SUM
    'Возвращает имя класса'
   ; // %SUMMARY %SUM
@@ -1461,9 +1546,9 @@ VOID TestWithDump PointTest
   Result
   pop:Word:SetValue
   DROP
- ; // STRING : ObjectClass:ClassName
+ ; // STRING class_method ObjectClass:ClassName
  
- ObjectClass : ObjectClass:ClassParent
+ ObjectClass class_method ObjectClass:ClassParent
   %SUMMARY %SUM
    'Возвращает родительский класс'
   ; // %SUMMARY %SUM
@@ -1475,9 +1560,9 @@ VOID TestWithDump PointTest
   DO
   Result
   pop:Word:SetValue
- ; // ObjectClass : ObjectClass:ClassParent
+ ; // ObjectClass class_method ObjectClass:ClassParent
  
- STRING : ObjectClass:ClassParentName
+ STRING class_method ObjectClass:ClassParentName
   %SUMMARY %SUM
    'Возвращает имя родительского класса'
   ; // %SUMMARY %SUM
@@ -1508,9 +1593,9 @@ VOID TestWithDump PointTest
     Result
     pop:Word:SetValue
    END
- ; // STRING : ObjectClass:ClassParentName
+ ; // STRING class_method ObjectClass:ClassParentName
  
- FieldOffset : ObjectClass:FieldOffset
+ FieldOffset class_method ObjectClass:FieldOffset
   %SUMMARY %SUM
    'Вычисляет смещение поля класса'
   ; // %SUMMARY %SUM
@@ -1547,9 +1632,9 @@ VOID TestWithDump PointTest
   DO
   Result
   pop:Word:SetValue
- ; // FieldOffset : ObjectClass:FieldOffset
+ ; // FieldOffset class_method ObjectClass:FieldOffset
  
- INTEGER : ObjectClass:InstanceSize
+ INTEGER class_method ObjectClass:InstanceSize
   %SUMMARY %SUM
    'Возвращает размер экземпляров класса'
   ; // %SUMMARY %SUM
@@ -1561,9 +1646,9 @@ VOID TestWithDump PointTest
   DO
   Result
   pop:Word:SetValue
- ; // INTEGER : ObjectClass:InstanceSize
+ ; // INTEGER class_method ObjectClass:InstanceSize
  
- : ObjectClass:Print
+ class_method ObjectClass:Print
   %SUMMARY %SUM
    'Печатает класс'
   ; // %SUMMARY %SUM
@@ -1583,10 +1668,11 @@ VOID TestWithDump PointTest
    BEGIN
     Self
     ObjectClass:ClassName
-    .
+    Print
    END
- ; // : ObjectClass:Print
+ ; // class_method ObjectClass:Print
  
+ Rectangle VAR RectangleFake
  PointTest
  DumpElement
  _:Object
@@ -1898,6 +1984,46 @@ VOID TestWithDump PointTest
  )
  SWAP
  Array:Iterate
+ Point:new
+ PointFake
+ pop:Word:SetValuePrim
+ PointFake
+ Print
+ PointFake
+ Object:class
+ Print
+ PointFake
+ Object:class
+ ObjectClass:Print
+ PointFake
+ Object:ClassParent
+ Print
+ PointFake
+ Object:ClassParent
+ ObjectClass:Print
+ PointFake
+ Object:ClassParentName
+ Print
+ Rectangle:new
+ RectangleFake
+ pop:Word:SetValuePrim
+ RectangleFake
+ Print
+ RectangleFake
+ Object:class
+ Print
+ RectangleFake
+ Object:class
+ ObjectClass:Print
+ RectangleFake
+ Object:ClassParent
+ Print
+ RectangleFake
+ Object:ClassParent
+ ObjectClass:Print
+ RectangleFake
+ Object:ClassParentName
+ Print
  'Hello '
  (+)
  'world'
@@ -1923,20 +2049,24 @@ VOID TestWithDump PointTest
 ; // VOID TestWithDump PointTest
 
 ObjectClass class_impl _:Object
- %CLASS-METHODS %Class-Methods
+ %Constructors .%Constructors.It
+  'new'
+ ; // %Constructors .%Constructors.It
+ 
+ %MetaMethods .%MetaMethods.It
   'ClassName'
   'FieldOffset'
   'InstanceSize'
   'ClassParent'
   'ClassParentName'
   'Print'
- ; // %CLASS-METHODS %Class-Methods
+ ; // %MetaMethods .%MetaMethods.It
  
- %CONSTRUCTORS %Constructors
-  'new'
- ; // %CONSTRUCTORS %Constructors
+ %Methods .%Methods.It
+ ; // %Methods .%Methods.It
  
- %METHODS %Methods
+ %Properties .%Properties.It
+  'class'
   'ClassName'
   'FieldOffset'
   'InstanceSize'
@@ -1944,12 +2074,7 @@ ObjectClass class_impl _:Object
   'ClassParentName'
   'Print'
   'ToPrintable'
-  'Print'
- ; // %METHODS %Methods
- 
- %PROPERTIES %Props
-  'class'
- ; // %PROPERTIES %Props
+ ; // %Properties .%Properties.It
  
  ObjectClass STATIC-VAR c:Class:Parent
  FieldOffset STATIC-VAR c:Instance:Size
@@ -1961,33 +2086,46 @@ ObjectClass class_impl _:Object
 ; // ObjectClass class_impl _:Object
 
 PointClass class_impl _:Point
- %CLASS-METHODS %Class-Methods
- ; // %CLASS-METHODS %Class-Methods
- 
- %CONSTRUCTORS %Constructors
-  ':'
-  '0'
-  'XY'
-  'OF'
- ; // %CONSTRUCTORS %Constructors
- 
  %INHERITS %G
   @
   _:Object
  ; // %INHERITS %G
  
- %METHODS %Methods
-  '+'
-  'Neg'
-  '-'
-  'ToPrintable'
-  'Print'
- ; // %METHODS %Methods
+ %Constructors .%Constructors.It
+  ':'
+  'new'
+  '0'
+  'XY'
+  'OF'
+ ; // %Constructors .%Constructors.It
  
- %PROPERTIES %Props
+ %MetaMethods .%MetaMethods.It
+  'ClassName'
+  'FieldOffset'
+  'InstanceSize'
+  'ClassParent'
+  'ClassParentName'
+  'Print'
+ ; // %MetaMethods .%MetaMethods.It
+ 
+ %Methods .%Methods.It
+  '+'
+  '-'
+ ; // %Methods .%Methods.It
+ 
+ %Properties .%Properties.It
+  'class'
+  'ClassName'
+  'FieldOffset'
+  'InstanceSize'
+  'ClassParent'
+  'ClassParentName'
+  'Print'
+  'ToPrintable'
   'X'
   'Y'
- ; // %PROPERTIES %Props
+  'Neg'
+ ; // %Properties .%Properties.It
  
  ObjectClass STATIC-VAR c:Class:Parent
  FieldOffset STATIC-VAR c:Instance:Size
@@ -2003,27 +2141,40 @@ PointClass class_impl _:Point
 ; // PointClass class_impl _:Point
 
 RectangleClass class_impl _:Rectangle
- %CLASS-METHODS %Class-Methods
- ; // %CLASS-METHODS %Class-Methods
- 
- %CONSTRUCTORS %Constructors
-  ':'
- ; // %CONSTRUCTORS %Constructors
- 
  %INHERITS %G
   @
   _:Object
  ; // %INHERITS %G
  
- %METHODS %Methods
-  'ToPrintable'
-  'Print'
- ; // %METHODS %Methods
+ %Constructors .%Constructors.It
+  ':'
+  'new'
+ ; // %Constructors .%Constructors.It
  
- %PROPERTIES %Props
+ %MetaMethods .%MetaMethods.It
+  'ClassName'
+  'FieldOffset'
+  'InstanceSize'
+  'ClassParent'
+  'ClassParentName'
+  'Print'
+ ; // %MetaMethods .%MetaMethods.It
+ 
+ %Methods .%Methods.It
+ ; // %Methods .%Methods.It
+ 
+ %Properties .%Properties.It
+  'class'
+  'ClassName'
+  'FieldOffset'
+  'InstanceSize'
+  'ClassParent'
+  'ClassParentName'
+  'Print'
+  'ToPrintable'
   'TopLeft'
   'BottomRight'
- ; // %PROPERTIES %Props
+ ; // %Properties .%Properties.It
  
  ObjectClass STATIC-VAR c:Class:Parent
  FieldOffset STATIC-VAR c:Instance:Size
@@ -2141,6 +2292,18 @@ _:Rectangle
 _:Rectangle
 Rectangle
 Rectangle
+Object
+Object
+[ TkwCompiledFunction ]
+_:Point
+Point
+_:Object
+Object
+Object
+[ TkwCompiledFunction ]
+_:Rectangle
+Rectangle
+_:Object
 Object
 Object
 Hello world

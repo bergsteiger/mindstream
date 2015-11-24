@@ -29,7 +29,7 @@ constructor : (
  new[ aX aY ] >>> Self
 ; // :
 
-constructor 0 ( )
+constructor 0 ()
  Point:: 0 0 >>> Self
 ; // 0
 
@@ -52,27 +52,25 @@ constructor OF (
  Point:: ( aPoint .X ) ( aPoint .Y ) >>> Self
 ; // OF
 
-Point method +
- Point right aPoint
+Point method + ( Point in_param aPoint )
 
  Point:: ( Self .X (+) ( aPoint .X ) ) ( Self .Y (+) ( aPoint .Y ) ) >>> Result
 ; // +
 
-Point method Neg
+Point readonly Neg
  Point:: Neg ( Self .X ) Neg ( Self .Y ) >>> Result
 ; // Neg
 
-Point method -
- Point right aPoint
+Point method - ( Point in_param aPoint )
 
  Point:OF ( Self .+ ( aPoint .Neg ) ) >>> Result
 ; // -
 
-OVERRIDE STRING method ToPrintable
+OVERRIDE STRING readonly ToPrintable
  [ '( ' 'X: ' Self .X ToPrintable ', Y: ' Self .Y ToPrintable ' )' ] strings:Cat >>> Result
 ; // ToPrintable
 
-OVERRIDE void method Print
+OVERRIDE void readonly Print
  Self .ToPrintable Print
 ; // Print
 
@@ -94,11 +92,11 @@ constructor : (
  new[ aTopLeft aBottomRight ] >>> Self
 ; // :
 
-OVERRIDE STRING method ToPrintable
+OVERRIDE STRING readonly ToPrintable
  [ '( ' 'TopLeft: ' Self .TopLeft .ToPrintable ', BottomRight: ' Self .BottomRight .ToPrintable ' )' ] strings:Cat >>> Result
 ; // ToPrintable
 
-OVERRIDE void method Print
+OVERRIDE void readonly Print
  Self .ToPrintable Print
 ; // Print
 
@@ -244,6 +242,24 @@ l_Rectangles ==> (
   aClass .ClassName Print 
  ) 
 )
+
+Point VAR PointFake
+PointFake := Point:new
+PointFake Print
+PointFake .class Print
+PointFake .class .Print
+PointFake .ClassParent Print
+PointFake .ClassParent .Print
+PointFake .ClassParentName Print
+
+Rectangle VAR RectangleFake
+RectangleFake := Rectangle:new
+RectangleFake Print
+RectangleFake .class Print
+RectangleFake .class .Print
+RectangleFake .ClassParent Print
+RectangleFake .ClassParent .Print
+RectangleFake .ClassParentName Print
 
 'Hello ' (+) 'world' Print
 

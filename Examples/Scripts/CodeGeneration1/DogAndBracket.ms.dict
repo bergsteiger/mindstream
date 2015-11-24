@@ -18,7 +18,7 @@ Procedure DogAndBracket
  INTERFACE var l_Parser 
  Ctx:Parser >>> l_Parser
  ARRAY var l_A
- l_A := [ ]
+ l_A := []
 
  l_Parser pop:Parser:NextToken
  while true

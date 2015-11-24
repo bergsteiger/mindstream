@@ -35,10 +35,11 @@ USES
 EXPORTS
  InheritsAndImplementsNew.ms.dict
 
-NamedWordProducer %PROPERTIES %Props
-NamedWordProducer %METHODS %Methods
-NamedWordProducer %CLASS-METHODS %Class-Methods
-NamedWordProducer %CONSTRUCTORS %Constructors
+WordAlias Log DROP
+// WordAlias Log .
+
+WordAlias %R .Implemented.Words
+WordAlias %G .Inherited.Words
 
 OBJECT FUNCTION DoMember 
  OBJECT IN aMember
@@ -50,57 +51,124 @@ BOOLEAN FUNCTION FilterMember
  Result := ( aMember NotValid ! )
 ; // FilterMember
  
-WordAlias %R .Implemented.Words
-WordAlias %G .Inherited.Words
-
 ARRAY FUNCTION %ClassRTTIList
  IN %S
  Literal IN aName
  VAR l_List
  %S %% ( aName |N ) >>> l_List
  if ( l_List NotValid ) then
-  ( Result := [ ] )
+  ( Result := [] )
  else 
   ( Result := ( l_List CodeIterator ) )
 ; // %ClassRTTIList
 
-ARRAY FUNCTION %Props 
- IN %S
- %SUMMARY 'Возвращает итератор свойств класса' ;
- %S %ClassRTTIList %Props >>> Result
-; // %Props
+ARRAY CompileTime-VAR g_MetaListPoducerNames []
+ %REMARK 'Список содержащий пары (имя списка, указатель на массив)'
 
-ARRAY FUNCTION %Methods 
- IN %S
- %SUMMARY 'Возвращает итератор методов класса' ;
- %S %ClassRTTIList %Methods >>> Result
-; // %Methods
+CONST cMetaListPoducerNamesElementSize 2
 
-ARRAY FUNCTION %Class-Methods 
- IN %S
- %SUMMARY 'Возвращает итератор методов мета-класса' ;
- %S %ClassRTTIList %Class-Methods >>> Result
-; // %Class-Methods
+ARRAY FUNCTION MetaListPoducerIt
+ g_MetaListPoducerNames .slice> cMetaListPoducerNamesElementSize >>> Result
+; // MetaListPoducerIt
 
-ARRAY FUNCTION %Constructors 
- IN %S
- %SUMMARY 'Возвращает итератор конструкторов класса' ;
- %S %ClassRTTIList %Constructors >>> Result
-; // %Constructors
+CONST cMetaListPrefix '%'
 
-MACRO class_impl
+ARRAY FUNCTION MapToName
+ ARRAY IN aArray
+ aArray .map> |N >>> Result
+; // MapToName
+
+CONST cResult 'Result'
+
+CONST cSelf 'Self'
+
+MACRO DefineMetaList
+  Literal IN aWordName
+  Literal IN aDoc
+
+ %SUMMARY 'Определяет список мета-информации к элементу. И итератор к нему' ;
+
+ STRING VAR l_WordName
+ aWordName |N >>> l_WordName
+ [ cMetaListPrefix l_WordName ] strings:Cat >>> l_WordName
+
+ STRING VAR l_ListName
+ [ '.' l_WordName '.It' ] strings:Cat >>> l_ListName
+
+ l_WordName array:AddTo g_MetaListPoducerNames
+
+ STRING VAR l_ListForValues
+ [ 'g_' l_WordName ] strings:Cat >>> l_ListForValues
+ axiom:PushSymbol ARRAY
+ axiom:PushSymbol CompileTime-VAR
+ axiom:PushStringAsSymbol l_ListForValues
+ axiom:PushSymbol []
+
+ axiom:PushSymbol [EXECUTE]
+ axiom:PushSymbol (
+ axiom:PushSymbol @
+ axiom:PushStringAsSymbol l_ListForValues
+ axiom:PushSymbol array:AddTo 
+ axiom:PushSymbol g_MetaListPoducerNames
+ axiom:PushSymbol )
+
+ axiom:PushSymbol NamedWordProducer
+ [ 
+  l_WordName
+  l_ListName 
+ ] Ctx:Parser:PushArray
+
+ axiom:PushSymbol ARRAY
+ axiom:PushSymbol FUNCTION
+ axiom:PushStringAsSymbol l_ListName
+ axiom:PushSymbol TtfwWord
+ axiom:PushSymbol IN
+ axiom:PushStringAsSymbol cSelf
+ axiom:PushSymbol %SUMMARY
+ aDoc |N Ctx:Parser:PushString
+ axiom:PushSymbol ; 
+ axiom:PushStringAsSymbol cSelf
+ axiom:PushSymbol %ClassRTTIList
+ axiom:PushStringAsSymbol l_ListName 
+ axiom:PushSymbol MapToName
+ axiom:PushSymbol >>>
+ axiom:PushStringAsSymbol cResult
+ axiom:PushSymbol ; 
+; // DefineMetaList
+
+  PROCEDURE MakeAlias
+    STRING IN aProp
+    ^ IN aLambda
+
+   axiom:PushSymbol WordAlias
+   aProp aLambda DO
+  ; // MakeAlias
+
+DefineMetaList Properties 'Свойства класса'
+DefineMetaList Methods 'Методы класса'
+DefineMetaList MetaMethods 'Методы мета-класса'
+DefineMetaList Constructors 'Конструкторы класса'
+
+: CompileSetWordProducerForCompiledClass
+  TtfwWord IN aWord
+ aWord
+ axiom:PushImmediateSymbol Ctx:SetWordProducerForCompiledClass
+; // CompileSetWordProducerForCompiledClass
+
+STACK_CHANGING_MACRO class_impl
   Literal IN aName
  %SUMMARY 'Реализация класса.
  Тут мы будем хранить всю информацию о классе - предки, поля, методы'
  ;
 
- @SELF Ctx:SetWordProducerForCompiledClass
+ @SELF CompileSetWordProducerForCompiledClass
  axiom:PushSymbol : 
  aName |N Ctx:Parser:PushSymbol
 ; // class_impl
 
 STRING CompileTime-VAR g_CurrentClass ''
 BOOLEAN CompileTime-VAR g_InstanceSizeDefined false
+BOOLEAN CompileTime-VAR g_ConstructorsCopied false
 
 TtfwWord type ObjectClass
 
@@ -125,14 +193,6 @@ INTEGER type FieldOffset
 // - смещение поля
 
 FieldOffset CompileTime-VAR g_ClassFieldOffset 0
-
-ARRAY CompileTime-VAR g_CurrentClassProperties [ ]
-
-ARRAY CompileTime-VAR g_CurrentClassMethods [ ]
-
-ARRAY CompileTime-VAR g_CurrentMetaClassMethods [ ]
-
-ARRAY CompileTime-VAR g_CurrentClassConstructors [ ]
 
 VOID operator define_member
   STRING IN aName
@@ -179,8 +239,6 @@ STRING FUNCTION ClassRefName
  [ aName ClassRefSuffix ] strings:Cat >>> Result
 ; // ClassRefName
 
-CONST cSelf 'Self'
-
 STRING CompileTime-VAR g_CurrentClassMethod ''
 STRING CompileTime-VAR g_CurrentClassMethodModifiers ''
 
@@ -193,17 +251,18 @@ PRIVATE VOID operator MakeMethodSignature
   axiom:PushSymbol REDEFINITION
  end
  axiom:PushSymbol :
- l_Signature Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol l_Signature
 ; // MakeMethodSignature
 
 PRIVATE VOID operator MakeSelfParam
- g_CurrentClass Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol g_CurrentClass
  axiom:PushSymbol in
- cSelf Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol cSelf
 ; // MakeSelfParam
 
 MACRO method
   Literal IN aName
+  ^ IN aParams
 
  %SUMMARY 'Метод объекта' ;
 
@@ -212,14 +271,30 @@ MACRO method
 
  l_Name @SELF bindInPlace
  
- //@SELF Ctx:SetWordProducerForCompiledClass
+ l_Name MakeMethodSignature
+ MakeSelfParam
+
+ @SELF NameOf right aParams axiom:Params:PushWithOtherStereo
+
+ l_Name array:?AddTo g_%Methods
+; // method
+
+MACRO readonly
+  Literal IN aName
+
+ %SUMMARY 'read-only свойство объекта' ;
+
+ STRING VAR l_Name
+ aName |N >>> l_Name
+
+ l_Name @SELF bindInPlace
 
  l_Name MakeMethodSignature
  MakeSelfParam
- l_Name array:AddTo g_CurrentClassMethods
-; // method
+ l_Name array:?AddTo g_%Properties
+; // readonly
 
-MACRO class-method
+STACK_CHANGING_MACRO class_method
   Literal IN aName
   
  %SUMMARY 'Метод класса' ;
@@ -239,7 +314,7 @@ MACRO class-method
 
  l_Name bindAndRestoreContext
 
- @SELF Ctx:SetWordProducerForCompiledClass
+ @SELF CompileSetWordProducerForCompiledClass
 
  axiom:PushSymbol :
 
@@ -252,14 +327,14 @@ MACRO class-method
  STRING VAR l_ClassMethodName
  
  l_ClassName l_Name MakeMethodSignaturePrim >>> l_ClassMethodName
- l_ClassMethodName Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol l_ClassMethodName
 
- l_ClassName Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol l_ClassName
  axiom:PushSymbol in
- cSelf Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol cSelf
 
- l_Name array:AddTo g_CurrentMetaClassMethods
-; // class-method
+ l_Name array:?AddTo g_%MetaMethods
+; // class_method
 
 CONST cObjectName 'Object'
 
@@ -287,8 +362,26 @@ MACRO ClassOf
  STRING VAR l_ClassName
  aName |N ClassOfName >>> l_ClassName
  l_ClassName IsWordDeclared ?ASSURE [ 'Класс ' l_ClassName ' не определён' ]
- l_ClassName Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol l_ClassName
 ; // ClassOf
+
+PROCEDURE ClearMetaLists
+ MetaListPoducerIt .for> ( 
+   STRING IN aName 
+   TtfwWord IN aVar
+  [] aVar pop:Word:SetValue
+ ) // MetaListPoducerIt .for>
+; // ClearMetaLists
+
+PROCEDURE ClearClassInfo
+ g_CurrentClass := ''
+ g_CurrentClassImpl := nil
+ g_CurrentClassParent := nil
+ g_InstanceSizeDefined := false
+ g_ConstructorsCopied := false
+ g_ClassFieldOffset := 0 
+ ClearMetaLists
+; // ClearClassInfo
 
 MACRO class
  Literal IN aName
@@ -298,28 +391,24 @@ MACRO class
  Ctx:WordInfo >>> l_WordInfo
  Ctx:ClearTypeInfo
 
- g_CurrentClassProperties := [ ]
- g_CurrentClassMethods := [ ]
- g_CurrentMetaClassMethods := [ ]
- g_CurrentClassConstructors := [ ]
- g_ClassFieldOffset := 0
- g_InstanceSizeDefined := false
- g_CurrentClassParent := nil
+ ClearClassInfo
+
  aName |N >>> g_CurrentClass
 
  STRING VAR l_TypeInfo
  l_WordInfo pop:WordInfo:TypeName >>> l_TypeInfo
 
- STRING VAR l_ParentClassName
+ STRING VAR l_CurrentClassParentName
+
  if ( l_TypeInfo <> '' ) then
  begin
   l_TypeInfo 'ARRAY' == ?FAIL [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ' Заявленные предки ' l_TypeInfo ]
   l_TypeInfo ' ' string:Pos -1 == ?ASSURE [ 'Множественное наследование пока не поддерживается. Класс: ' g_CurrentClass ' Заявленные предки ' l_TypeInfo ]
-  l_TypeInfo >>> l_ParentClassName
+  l_TypeInfo >>> l_CurrentClassParentName
  end
  else
  begin
-  cObjectName ClassImplName >>> l_ParentClassName
+  cObjectName >>> l_CurrentClassParentName
  end
 
  STRING VAR l_CurrentClassImpl
@@ -330,73 +419,64 @@ MACRO class
 
  if ( g_CurrentClass !== cObjectName ) then
  begin
-  axiom:PushSymbol [EXECUTE]
-  axiom:PushSymbol (
-  cObjectName ClassOfName Ctx:Parser:PushSymbol 
+  axiom:PushImmediateSymbol (
+  l_CurrentClassParentName ClassOfName Ctx:Parser:PushSymbol 
   axiom:PushSymbol >>> 
   axiom:PushSymbol g_CurrentClassParent
   axiom:PushSymbol )
 
   axiom:PushSymbol ObjectClass
   axiom:PushSymbol type
-  l_ClassRefName Ctx:Parser:PushSymbol
+  axiom:PushStringAsSymbol l_ClassRefName
  end // g_CurrentClass !== cObjectName
 
- l_ClassRefName Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol l_ClassRefName
  axiom:PushSymbol class_impl
- l_CurrentClassImpl Ctx:Parser:PushSymbol
-
- [
-   if ( g_CurrentClass !== cObjectName ) then
-   begin
-    '%INHERITS'
-    '@' 
-    cObjectName ClassImplName
-    ';'
-   end
-
-  '@SELF'
-  '>>>'
-  'Result'
-
-  'FieldOffset'
-  'CompileTime-VAR'
-  InstanceSizeName
-
- ] Ctx:Parser:PushArray
-
-  0 Ctx:Parser:PushInt
-
- [
-  'ObjectClass'
-  'CompileTime-VAR'
-  ClassParentName
-  'g_CurrentClassParent'
- ] Ctx:Parser:PushArray
-
- axiom:PushSymbol ;
-
- [
-  '[EXECUTE] ('
-  l_CurrentClassImpl
-  '>>>'
-  'g_CurrentClassImpl'
-  ')'
-  
-  'array' 
-  'type' 
-  g_CurrentClass
-
-  'WordAlias'
-  g_CurrentClass ClassOfName
-  l_CurrentClassImpl
-
- ] Ctx:Parser:PushArray
+ axiom:PushStringAsSymbol l_CurrentClassImpl
 
  if ( g_CurrentClass !== cObjectName ) then
  begin
-  'classExpander' Ctx:Parser:PushSymbol
-  l_CurrentClassImpl Ctx:Parser:PushSymbol
+  axiom:PushSymbol %INHERITS
+  axiom:PushSymbol @
+  l_CurrentClassParentName ClassImplName Ctx:Parser:PushSymbol
+  axiom:PushSymbol ;
+ end
+
+ axiom:PushSymbol @SELF
+ axiom:PushSymbol >>>
+ axiom:PushStringAsSymbol cResult
+ axiom:PushSymbol FieldOffset
+ axiom:PushSymbol CompileTime-VAR
+
+ axiom:PushStringAsSymbol InstanceSizeName
+
+ 0 Ctx:Parser:PushInt
+
+ axiom:PushSymbol ObjectClass
+ axiom:PushSymbol CompileTime-VAR
+
+ axiom:PushStringAsSymbol ClassParentName
+
+ axiom:PushSymbol g_CurrentClassParent
+
+ axiom:PushSymbol ;
+
+ axiom:PushImmediateSymbol (
+ axiom:PushStringAsSymbol l_CurrentClassImpl
+ axiom:PushSymbol >>>
+ axiom:PushSymbol g_CurrentClassImpl
+ axiom:PushSymbol )
+ axiom:PushSymbol array
+ axiom:PushSymbol type
+ axiom:PushStringAsSymbol g_CurrentClass
+ axiom:PushSymbol WordAlias
+ g_CurrentClass ClassOfName Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol l_CurrentClassImpl
+
+ if ( g_CurrentClass !== cObjectName ) then
+ begin
+  axiom:PushStringAsSymbol 'classExpander'
+  axiom:PushStringAsSymbol l_CurrentClassImpl
  end
 
 ; // class
@@ -406,23 +486,6 @@ class Object
 ObjectClass member VMT
 //STRING member Fake
 //INTEGER member Fake1
-
-MACRO readonly
-  Literal IN aName
-
- %SUMMARY 'read-only свойство объекта' ;
-
- STRING VAR l_Name
- aName |N >>> l_Name
-
- l_Name @SELF bindInPlace
-
- //@SELF Ctx:SetWordProducerForCompiledClass
-
- l_Name MakeMethodSignature
- MakeSelfParam
- l_Name array:AddTo g_CurrentClassProperties
-; // readonly
 
 : FieldByOffset
  Object in Self
@@ -442,45 +505,43 @@ PRIVATE operator do_get_member
  axiom:PushSymbol )
 ; // do_get_member
 
-CONST cResult 'Result'
-
 MACRO read
  Literal IN aName
- cSelf Ctx:Parser:PushSymbol 
+ axiom:PushStringAsSymbol cSelf
  aName |N do_get_member
  axiom:PushSymbol >>>
- cResult Ctx:Parser:PushSymbol
+ axiom:PushStringAsSymbol cResult
  axiom:PushSymbol ;
 ; // read
 
 ObjectClass readonly class read VMT
 
-MACRO class-method-end
+MACRO class_method_end
  axiom:PushSymbol ;
  g_CurrentClassMethodModifiers axiom:PushWordInfo
- axiom:PushSymbol method
- g_CurrentClassMethod Ctx:Parser:PushSymbol
- 'Self' Ctx:Parser:PushSymbol 
- '.class' Ctx:Parser:PushSymbol 
+ axiom:PushSymbol readonly
+ axiom:PushStringAsSymbol g_CurrentClassMethod
+ axiom:PushStringAsSymbol cSelf
+ axiom:PushStringAsSymbol '.class'
  [ '.' g_CurrentClassMethod ] strings:Cat Ctx:Parser:PushSymbol
 
  if ( g_CurrentClassMethodModifiers IsNil ! ) then
  begin 
   axiom:PushSymbol >>> 
-  cResult Ctx:Parser:PushSymbol
+  axiom:PushStringAsSymbol cResult
  end // g_CurrentClassMethodModifiers IsNil !
 
  axiom:PushSymbol ;
  '' >>> g_CurrentClassMethod
  '' >>> g_CurrentClassMethodModifiers
-; // class-method-end
+; // class_method_end
 
-STRING class-method ClassName
+STRING class_method ClassName
  %SUMMARY 'Возвращает имя класса' ;
  Self |N ':' string:Split >>> Result DROP
-class-method-end // ClassName
+class_method_end // ClassName
 
-FieldOffset class-method FieldOffset
+FieldOffset class_method FieldOffset
   // - этод метод можно сделать КОМПИЛИРУЕМЫМ
   Literal IN aFieldName
  
@@ -495,19 +556,19 @@ FieldOffset class-method FieldOffset
  l_FieldVAR IsNil ?FAIL [ 'Поле ' l_FieldName ' на классе ' Self .ClassName ' не определено' ]
  l_FieldVAR DO >>> Result
 
-class-method-end // FieldOffset
+class_method_end // FieldOffset
 
-INTEGER class-method InstanceSize
+INTEGER class_method InstanceSize
  %SUMMARY 'Возвращает размер экземпляров класса' ;
  Self %% InstanceSizeName DO >>> Result
-class-method-end // InstanceSize
+class_method_end // InstanceSize
 
-ObjectClass class-method ClassParent
+ObjectClass class_method ClassParent
  %SUMMARY 'Возвращает родительский класс' ;
  Self %% ClassParentName DO >>> Result
-class-method-end // ClassParent
+class_method_end // ClassParent
 
-STRING class-method ClassParentName
+STRING class_method ClassParentName
   %SUMMARY 'Возвращает имя родительского класса' ;
  ObjectClass VAR l_ClassParent
  Self %% ClassParentName DO >>> l_ClassParent
@@ -519,9 +580,9 @@ STRING class-method ClassParentName
  begin
   l_ClassParent .ClassName >>> Result
  end
-class-method-end // ClassParentName
+class_method_end // ClassParentName
 
-class-method Print
+class_method Print
  %SUMMARY 'Печатает класс' ;
  if ( Self IsNil ) then
  begin
@@ -529,16 +590,123 @@ class-method Print
  end
  else
  begin
-  Self .ClassName .
+  Self .ClassName Print
  end
-class-method-end // Print
+class_method_end // Print
+
+CONST cDefConstructorName 'new'
+
+PROCEDURE DefineInstanceSize
+ %SUMMARY 'Определяем размер экземпляров класса' ;
+ if ( g_InstanceSizeDefined ! ) then
+ begin
+  g_InstanceSizeDefined := true
+
+  TtfwWord VAR l_InstanceSizeVAR
+  g_CurrentClassImpl %% InstanceSizeName >>> l_InstanceSizeVAR
+  l_InstanceSizeVAR IsNil ?FAIL [ 'Переменная для размера класса ' g_CurrentClass ' почему-то не определена' ]
+  l_InstanceSizeVAR DO =0 ?ASSURE [ 'Размер класса ' g_CurrentClass ' почему-то уже определён' ]
+  g_ClassFieldOffset l_InstanceSizeVAR pop:Word:SetValue
+ end // g_InstanceSizeDefined !
+; // DefineInstanceSize
+
+FORWARD CopyConstructors
+
+STACK_CHANGING_MACRO constructor
+  Literal IN aName
+  ^ IN aParams
+
+ %SUMMARY 'Конструктор объектов';
+
+ STRING VAR l_Name
+ aName |N >>> l_Name
+
+ DefineInstanceSize
+ // - тут определяем размер экземпляров класса
+
+ if ( l_Name <> cDefConstructorName ) then
+ begin
+  if ( g_ConstructorsCopied ! ) then
+  begin
+   l_Name Log
+   CopyConstructors
+  end // g_ConstructorsCopied !
+ end // l_Name <> cDefConstructorName
+ else
+ begin
+  g_ConstructorsCopied := true
+ end // l_Name <> cDefConstructorName
+
+ g_CurrentClass l_Name MakeMethodSignaturePrim Log
+
+ @SELF CompileSetWordProducerForCompiledClass
+ axiom:PushStringAsSymbol g_CurrentClass
+ l_Name MakeMethodSignature
+ @SELF NameOf right aParams axiom:Params:PushWithOtherStereo
+
+ axiom:PushSymbol WordAlias
+ axiom:PushStringAsSymbol cSelf
+ axiom:PushStringAsSymbol cResult
+
+ l_Name array:?AddTo g_%Constructors
+; // constructor
+
+PROCEDURE def_constructor_do
+ axiom:PushSymbol constructor
+ axiom:PushStringAsSymbol cDefConstructorName
+ axiom:PushSymbol ()
+; // def_constructor_do
+
+MACRO def_constructor
+ def_constructor_do
+; // def_constructor
+
+PROCEDURE def_constructor_empty_do
+ def_constructor_do
+ axiom:PushStringAsSymbol 'new['
+ axiom:PushSymbol ] 
+ axiom:PushSymbol >>> 
+ axiom:PushStringAsSymbol cResult
+ axiom:PushSymbol ;
+; // def_constructor_empty_do
+
+MACRO def_constructor_empty
+ def_constructor_empty_do
+; // def_constructor_empty
+
+PROCEDURE CopyConstructors
+ DefineInstanceSize
+ if ( g_ConstructorsCopied ! ) then
+ begin
+  if ( g_CurrentClass !== cObjectName ) then
+  begin
+   g_CurrentClassImpl IsNil ?FAIL [ 'Нет текущего определяемого класса. Возможное имя класса ' g_CurrentClass ]
+   g_ConstructorsCopied := true
+   g_CurrentClassImpl %G .for> (
+    ObjectClass IN anItem
+
+    anItem .%Constructors.It .for> ( 
+     STRING IN aProp
+     if ( aProp = cDefConstructorName ) then
+     begin
+      def_constructor_empty_do
+     end
+    ) // anItem .%Constructors.It .for>
+
+   ) // anImpl %G .for>
+  end // ( g_CurrentClass !== cObjectName ) 
+ end // ( g_ConstructorsCopied ! )
+; // CopyConstructors
 
 MACRO classExpander
   ^ IN anImpl
 
+ ObjectClass VAR l_Impl 
+ anImpl |@ >>> l_Impl
+
  %SUMMARY 'Тут можно копировать поля и методы' ;
- anImpl |@ %G .for> ( 
-  ObjectClass IN anItem 
+ l_Impl %G .for> ( 
+  ObjectClass IN anItem
 
   anItem MembersIterator
    .filter> ( pop:Word:Producer pop:Word:Name NameOf CONST == )
@@ -564,108 +732,92 @@ MACRO classExpander
 
   ) // anItem MembersIterator
 
-  anItem %Props .for> ( 
-   IN aProp
-   axiom:PushSymbol WordAlias
-   g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .ClassName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-  ) // anItem %Props .for>
+  PROCEDURE MakeAliasAndAdd
+    STRING IN aProp
+    ^ IN anArray
+    ^ IN aLambda
 
-  anItem %Methods .for> ( 
-   IN aProp
-   axiom:PushSymbol WordAlias
-   g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .ClassName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-  ) // anItem %Methods .for>
+   ARRAY VAR l_Array
+   anArray DO >>> l_Array
+  
+   aProp array:?AddTo l_Array
+  
+   aProp MakeAlias ( aLambda DO )
+  ; // MakeAliasAndAdd
 
-  anItem %Class-Methods .for> ( 
-   IN aProp
+  PROCEDURE PushMethodSignature
+    STRING IN aClass
+    STRING IN aName
+   aClass aName MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+  ; // PushMethodSignature
 
-   axiom:PushSymbol WordAlias
-   g_CurrentClass ClassRefName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .ClassName ClassRefName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
+  PROCEDURE PushMethodSignatureAlias
+   STRING IN aProp 
+   g_CurrentClass aProp PushMethodSignature
+   anItem .ClassName aProp PushMethodSignature
+  ; // PushMethodSignatureAlias
+
+  PROCEDURE .for.MakeAliasAndAdd>
+   ARRAY IN aArray
+   ^ IN anRArray
+   ^ IN aLambda
+   aArray .for> MakeAliasAndAdd ( anRArray DO ) ( aLambda DO )
+  ; // .for.MakeAliasAndAdd>
+
+  anItem .%Properties.It .for.MakeAliasAndAdd> g_%Properties PushMethodSignatureAlias
+
+  anItem .%Methods.It .for.MakeAliasAndAdd> g_%Methods PushMethodSignatureAlias 
+
+  anItem .%MetaMethods.It .for.MakeAliasAndAdd> g_%MetaMethods ( 
+   STRING IN aProp
+   g_CurrentClass ClassRefName aProp PushMethodSignature
+   anItem .ClassName ClassRefName aProp PushMethodSignature
   )
 
-  anItem %Constructors .for> ( 
-   IN aProp
-   axiom:PushSymbol WordAlias
-   g_CurrentClass aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-   anItem .ClassName aProp |N MakeMethodSignaturePrim Ctx:Parser:PushSymbol
-  ) // anItem %Constructors .for>
+ ) // l_Impl %G .for>
 
- )
 ; // classExpander
 
 : ListToNameAsString
- STRING IN aName
- ARRAY IN aList
+  STRING IN aName
+  ARRAY IN aList
+
+ %SUMMARY 'Выводит элементы массива как строки в список метаинформации aName' ;
+
+ //aList DO >>> l_List
+ //ARRAY VAR l_List
  aName
+ %REMARK 'Открываем список'
   aList .for> NameAsString
  ';'
+ %REMARK 'Закрываем список'
 ; // ListToNameAsString
 
-PROCEDURE DefineInstanceSize
- %SUMMARY 'Определяем размер экземпляров класса' ;
- if ( g_InstanceSizeDefined ! ) then
- begin
-  g_InstanceSizeDefined := true
+PROCEDURE FinishClassDefinition
+ axiom:PushSymbol implementation
 
-  TtfwWord VAR l_InstanceSizeVAR
-  g_CurrentClassImpl %% InstanceSizeName >>> l_InstanceSizeVAR
-  l_InstanceSizeVAR IsNil ?FAIL [ 'Переменная для размера класса ' g_CurrentClass ' почему-то не определена' ]
-  l_InstanceSizeVAR DO =0 ?ASSURE [ 'Размер класса ' g_CurrentClass ' почему-то уже определён' ]
-  g_ClassFieldOffset l_InstanceSizeVAR pop:Word:SetValue
- end // g_InstanceSizeDefined !
-; // DefineInstanceSize
-
-MACRO class-end
- DefineInstanceSize
-
+ g_CurrentClassImpl pop:Word:Name Ctx:Parser:PushSymbol
  [
-  'implementation'
-  g_CurrentClassImpl pop:Word:Name
+   MetaListPoducerIt .for> ( 
+     STRING IN aName 
+     TtfwWord IN aVar 
 
-   NameOf %PROPERTIES g_CurrentClassProperties ListToNameAsString
+    aName aVar DO ListToNameAsString 
+   ) // MetaListPoducerIt .for>
 
-   NameOf %METHODS g_CurrentClassMethods ListToNameAsString
-
-   NameOf %CLASS-METHODS g_CurrentMetaClassMethods ListToNameAsString
-
-   NameOf %CONSTRUCTORS g_CurrentClassConstructors ListToNameAsString
-
-  'end.'
  ] Ctx:Parser:PushArray
 
- g_CurrentClass := ''
- g_CurrentClassImpl := nil
- g_CurrentClassParent := nil
- g_InstanceSizeDefined := false
- g_ClassFieldOffset := 0
- 
+ axiom:PushSymbol end.
+ ClearClassInfo
+; // FinishClassDefinition
+
+MACRO class-end
+ //DefineInstanceSize
+
+ axiom:PushImmediateSymbol CopyConstructors
+
+ axiom:PushImmediateSymbol FinishClassDefinition
 ; // class-end
-
-MACRO constructor
-  Literal IN aName
-  ^ IN aParams
-
- %SUMMARY 'Конструктор объектов';
-
- DefineInstanceSize
- // - тут определяем размер экземпляров класса
-
- STRING VAR l_Name
- aName |N >>> l_Name
- @SELF Ctx:SetWordProducerForCompiledClass
- g_CurrentClass Ctx:Parser:PushSymbol
- l_Name MakeMethodSignature
- @SELF NameOf right aParams axiom:Params:PushWithOtherStereo
-
- axiom:PushSymbol WordAlias
- cSelf Ctx:Parser:PushSymbol
- cResult Ctx:Parser:PushSymbol
-
- l_Name array:AddTo g_CurrentClassConstructors
-; // constructor
 
 MACRO new[
  INTEGER VAR l_InstanceSize
@@ -680,24 +832,15 @@ MACRO new[
  l_InstanceSize LOOP ( 'uninited member' Ctx:Parser:PushString )
 ; // new[
 
-MACRO get_member
-  Literal IN aName
+def_constructor_empty
 
- %SUMMARY 'Компилирует способ доступа к члену класса' ;
- aName |N do_get_member
-; // get_member
-
-constructor new ( )
- new[ ] >>> Result
-; // new
-
-VIRTUAL STRING method ToPrintable
+VIRTUAL STRING readonly ToPrintable
  Self ToPrintable >>> Result
  [ Self .ClassName ' : ' Result ] strings:Cat >>> Result
  //Self .ClassName >>> Result
 ; // ToPrintable
 
-VIRTUAL void method Print
+VIRTUAL void readonly Print
  Self .ToPrintable Print
 ; // Print
 
