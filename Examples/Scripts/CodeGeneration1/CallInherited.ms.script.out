@@ -19,16 +19,6 @@ VOID TestWithDump CallInheritedTest
   +
   Self
   A
-  DROP
-  B
-  .Inherited.Words
-  (
-   Self
-   SWAP
-   DO
-  )
-  SWAP
-  Array:Iterate
   +
  ; // : B
  
@@ -43,16 +33,6 @@ VOID TestWithDump CallInheritedTest
   +
   Self
   A
-  DROP
-  C
-  .Inherited.Words
-  (
-   Self
-   SWAP
-   DO
-  )
-  SWAP
-  Array:Iterate
   +
  ; // : C
  
@@ -65,12 +45,6 @@ VOID TestWithDump CallInheritedTest
   Ctx:Parser:PushSymbol
   axiom:PushSymbol
   compile.inherited
-  axiom:PushSymbol
-  DROP
-  ARRAY [
-   '@SELF .Inherited.Words .for> ( Self SWAP DO )'
-  ]
-  Ctx:Parser:PushArray
  ; // IMMEDIATE VOID MACRO call.inherited
  
  IMMEDIATE STACK_CHANGING_MACRO compile.inherited

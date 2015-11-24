@@ -32,11 +32,6 @@ MACRO call.inherited
  axiom:PushSymbol [EXECUTE]
  '@SELF' Ctx:Parser:PushSymbol
  axiom:PushSymbol compile.inherited
- axiom:PushSymbol DROP
- 
- [ 
-   '@SELF .Inherited.Words .for> ( Self SWAP DO )'
- ] Ctx:Parser:PushArray
 ; // call.inherited
 
  : A
