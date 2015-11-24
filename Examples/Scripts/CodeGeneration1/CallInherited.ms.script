@@ -1,0 +1,10 @@
+PROGRAM CallInherited.ms.script
+
+USES
+ Testing.ms.dict
+;
+
+Test&Dump CallInheritedTest
+; // CallInheritedTest
+
+CallInheritedTest
