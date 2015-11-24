@@ -64,10 +64,6 @@ VOID TestWithDump DelegateToGen
     (
      IN anItem
      TtfwWord VAR l_Found
-     TtfwWord VAR l_PrevFound
-     Result
-     l_PrevFound
-     pop:Word:SetValue
      aName
      anItem
      (
@@ -76,7 +72,7 @@ VOID TestWithDump DelegateToGen
      )
      l_Found
      pop:Word:SetValue
-     l_PrevFound
+     Result
      IsNil
      OR
      (

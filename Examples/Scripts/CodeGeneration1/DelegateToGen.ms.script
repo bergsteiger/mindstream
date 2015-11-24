@@ -36,11 +36,9 @@ Test&Dump DelegateToGen
    ( 
     aGen .Inherited.Words .for> ( 
      IN anItem 
-     TtfwWord VAR l_PrevFound
-     Result >>> l_PrevFound
      TtfwWord VAR l_Found 
      aName anItem call.me >>> l_Found
-     l_PrevFound IsNil OR ( l_Found IsNil ) ?ASSURE [ 'Множественное наследование не поддерживается. Слово: ' aName ' генератор ' g_Gen pop:Word:Name ' родительский генератор ' aGen pop:Word:Name ]
+     Result IsNil OR ( l_Found IsNil ) ?ASSURE [ 'Множественное наследование не поддерживается. Слово: ' aName ' генератор ' g_Gen pop:Word:Name ' родительский генератор ' aGen pop:Word:Name ]
      l_Found >>> Result
     ) 
    )
