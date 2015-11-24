@@ -69,7 +69,7 @@ MACRO call.inherited
  : E
   INTEGER IN Self
 
-  Inherits ( C /*D*/ )
+  Inherits ( C )
 
   Self 5 +
   call.inherited +
