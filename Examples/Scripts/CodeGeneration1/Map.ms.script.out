@@ -12,7 +12,7 @@ VOID TestWithDump MapTest
  
  MapTest
  DumpElement
- [
+ ARRAY [
   1
   2
   3
@@ -33,7 +33,7 @@ VOID TestWithDump MapTest
  .
  SWAP
  Array:Iterate
- [
+ ARRAY [
   1
   2
   3
@@ -52,7 +52,7 @@ VOID TestWithDump MapTest
  SWAP
  Array:Map
  .
- [
+ ARRAY [
   1
   2
   3
@@ -74,7 +74,7 @@ VOID TestWithDump MapTest
  .
  SWAP
  Array:Iterate
- [
+ ARRAY [
   1
   2
   3
@@ -94,7 +94,7 @@ VOID TestWithDump MapTest
  SWAP
  Array:Map
  .
- [
+ ARRAY [
   1
   2
   3
@@ -114,7 +114,7 @@ VOID TestWithDump MapTest
     IsEven
    )
   then
-   (
+   INTEGER (
     anItem
    )
   else
@@ -129,7 +129,7 @@ VOID TestWithDump MapTest
  .
  SWAP
  Array:Iterate
- [
+ ARRAY [
   1
   2
   3
@@ -149,7 +149,7 @@ VOID TestWithDump MapTest
     IsEven
    )
   then
-   (
+   INTEGER (
     anItem
    )
   else
@@ -162,7 +162,7 @@ VOID TestWithDump MapTest
  SWAP
  Array:Map
  .
- [
+ ARRAY [
   1
   2
   3
@@ -182,7 +182,7 @@ VOID TestWithDump MapTest
  .
  SWAP
  Array:Iterate
- [
+ ARRAY [
   1
   2
   3

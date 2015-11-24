@@ -1,10 +1,12 @@
+PROGRAM String.ms.script
+
 USES
  string.ms.dict
  Testing.ms.dict
 ;
 
 Test&Dump StringTest
- RunTests.in.array @[ (+)? ?(+) strings:CatSep> any:Cat ]
+ RunTests.in.array @[ (+)? ?(+) strings:CatSep> any:Cat string:Split:for> ]
   %REMARK 'Запускаем тесты к указанным скриптовым словам'
 ; // StringTest
 

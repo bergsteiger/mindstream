@@ -27,7 +27,7 @@ VOID Test PointTest
     [
     ]
     Result
-    pop:Word:SetValue
+    pop:Word:SetValuePrim
    )
   else
    (
@@ -122,10 +122,10 @@ VOID Test PointTest
   [
   ]
   g_CurrentClassMembers
-  pop:Word:SetValue
+  pop:Word:SetValuePrim
   0
   g_ClassFieldOffset
-  pop:Word:SetValue
+  pop:Word:SetValuePrim
   aName
   |N
   g_CurrentClass
@@ -253,7 +253,7 @@ VOID Test PointTest
     [
     ]
     Result
-    pop:Word:SetValue
+    pop:Word:SetValuePrim
    )
   else
    (
@@ -275,7 +275,7 @@ VOID Test PointTest
       [
       ]
       Result
-      pop:Word:SetValue
+      pop:Word:SetValuePrim
      )
     else
      (
@@ -316,7 +316,7 @@ VOID Test PointTest
    _anOffset |^
   )
   Self
-  Array:GetItem
+  Array:Item
  ; // : FieldByOffset
  
  IMMEDIATE VOID TYPE FieldOffset
@@ -479,10 +479,10 @@ VOID Test PointTest
  ; // IMMEDIATE VOID OPERATOR new[
  
  Object VAR O1
- IMMEDIATE VOID OPERATOR Object
+ IMMEDIATE VOID TYPE Object
   TtfwValueTypes
   Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID OPERATOR Object
+ ; // IMMEDIATE VOID TYPE Object
  
  TtfwWord readonly Object:class
   Object IN Self
@@ -523,10 +523,10 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE PixelList
  
- IMMEDIATE VOID OPERATOR Point
+ IMMEDIATE VOID TYPE Point
   TtfwValueTypes
   Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID OPERATOR Point
+ ; // IMMEDIATE VOID TYPE Point
  
  Point method Point:-
   ^ IN _aPoint
@@ -748,10 +748,10 @@ VOID Test PointTest
   MakeSelfParam
  ; // IMMEDIATE VOID OPERATOR readonly
  
- IMMEDIATE VOID OPERATOR Rectangle
+ IMMEDIATE VOID TYPE Rectangle
   TtfwValueTypes
   Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID OPERATOR Rectangle
+ ; // IMMEDIATE VOID TYPE Rectangle
  
  Rectangle constructor Rectangle::
   ^ IN aBottomRight
@@ -836,43 +836,43 @@ VOID Test PointTest
  
  ''
  g_CurrentClass
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  ''
  g_CurrentClassImpl
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  (
   [
   ]
   g_CurrentClassMembers
-  pop:Word:SetValue
+  pop:Word:SetValuePrim
  )
  0
  g_ClassFieldOffset
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  PointTest
  DumpElement
  Point:0
  P1
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:0
  P2
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point::
  1
  1
  P3
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:XY
  (
   2
   2
  )
  P4
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:OF
  P4
  P5
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  (
   P3
   Point:+
@@ -912,10 +912,10 @@ VOID Test PointTest
   2
  )
  P11
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  P1
  O1
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  O1
  Point:Print
  [
@@ -991,7 +991,7 @@ VOID Test PointTest
  P1
  P4
  R1
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  R1
  Rectangle:Print
  'Hello '

@@ -1,0 +1,17 @@
+VOID TestWithDump CompileTimeVarTest
+ STRING STATIC-VAR A
+ ARRAY STATIC-VAR B
+ STRING STATIC-VAR C
+ CompileTimeVarTest
+ DumpElement
+ A
+ .
+ B
+ .
+ C
+ .
+; // VOID TestWithDump CompileTimeVarTest
+
+
+[ ]
+Hello

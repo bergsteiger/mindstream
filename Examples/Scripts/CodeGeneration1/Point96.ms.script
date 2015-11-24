@@ -10,6 +10,8 @@ USES
 
 Test&Dump PointTest
 
+ClassOf Object DumpElement
+
 INTEGER type Pixel
 // - пиксель
 List type PixelList
@@ -19,56 +21,57 @@ class Point
 
 Pixel member X
 Pixel member Y
-members-end
 
-constructor :
- Pixel right aX
- Pixel right aY
- new[ aX aY ] =: Result
+constructor : ( 
+ Pixel in_param aX 
+ Pixel in_param aY 
+)
+ new[ aX aY ] >>> Self
 ; // :
 
-constructor 0
- Point:: 0 0 =: Result
+constructor 0 ()
+ Point:: 0 0 >>> Self
 ; // 0
 
-constructor XY
- PixelList right aPoint
+constructor XY ( 
+ //PixelList 
+  in_param aPoint
+)
  array var Points
- [ aPoint ] =: Points
- Point:: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) =: Result
+ [ aPoint ] >>> Points
+ Point:: ( Points FieldByOffset 0 ) ( Points FieldByOffset 1 ) >>> Self
 ; // XY
 
 Pixel readonly X read X
 
 Pixel readonly Y read Y
 
-constructor OF
- Point right aPoint
- Point:: ( aPoint Point:X ) ( aPoint Point:Y ) =: Result
+constructor OF ( 
+ Point in_param aPoint
+)
+ Point:: ( aPoint .X ) ( aPoint .Y ) >>> Self
 ; // OF
 
-Point method +
- Point right aPoint
+Point method + ( Point in_param aPoint )
 
- Point:: ( Self Point:X (+) ( aPoint Point:X ) ) ( Self Point:Y (+) ( aPoint Point:Y ) ) =: Result
+ Point:: ( Self .X (+) ( aPoint .X ) ) ( Self .Y (+) ( aPoint .Y ) ) >>> Result
 ; // +
 
-Point method Neg
- Point:: Neg ( Self Point:X ) Neg ( Self Point:Y ) =: Result
+Point readonly Neg
+ Point:: Neg ( Self .X ) Neg ( Self .Y ) >>> Result
 ; // Neg
 
-Point method -
- Point right aPoint
+Point method - ( Point in_param aPoint )
 
- Point:OF ( Self Point:+ ( aPoint Point:Neg ) ) =: Result
+ Point:OF ( Self .+ ( aPoint .Neg ) ) >>> Result
 ; // -
 
-OVERRIDE STRING method ToPrintable
- [ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat =: Result
+OVERRIDE STRING readonly ToPrintable
+ [ '( ' 'X: ' Self .X ToPrintable ', Y: ' Self .Y ToPrintable ' )' ] strings:Cat >>> Result
 ; // ToPrintable
 
-void method Print
- Self Point:ToPrintable Print
+OVERRIDE void readonly Print
+ Self .ToPrintable Print
 ; // Print
 
 class-end // Point
@@ -77,27 +80,72 @@ class Rectangle
 
 Point member TopLeft
 Point member BottomRight
-members-end
 
 Point readonly TopLeft read TopLeft
 
 Point readonly BottomRight read BottomRight
 
-constructor :
- Point right aTopLeft
- Point right aBottomRight
- new[ aTopLeft aBottomRight ] =: Result
+constructor : ( 
+ Point in_param aTopLeft
+ Point in_param aBottomRight
+)
+ new[ aTopLeft aBottomRight ] >>> Self
 ; // :
 
-OVERRIDE STRING method ToPrintable
- [ '( ' 'TopLeft: ' Self Rectangle:TopLeft Point:ToPrintable ', BottomRight: ' Self Rectangle:BottomRight Point:ToPrintable ' )' ] strings:Cat =: Result
+OVERRIDE STRING readonly ToPrintable
+ [ '( ' 'TopLeft: ' Self .TopLeft .ToPrintable ', BottomRight: ' Self .BottomRight .ToPrintable ' )' ] strings:Cat >>> Result
 ; // ToPrintable
 
-void method Print
- Self Rectangle:ToPrintable Print
+OVERRIDE void readonly Print
+ Self .ToPrintable Print
 ; // Print
 
 class-end // Rectangle
+
+class Foo
+class-end // Foo
+
+class Bar
+class-end // Bar
+
+ClassOf Point DumpElement
+ClassOf Rectangle DumpElement
+
+ClassOf Object .FieldOffset VMT Print
+ClassOf Point .FieldOffset VMT Print
+ClassOf Rectangle .FieldOffset VMT Print
+ClassOf Foo .FieldOffset VMT Print
+ClassOf Bar .FieldOffset VMT Print
+
+ClassOf Object .ClassParentName Print
+ClassOf Point .ClassParentName Print
+ClassOf Rectangle .ClassParentName Print
+ClassOf Foo .ClassParentName Print
+ClassOf Bar .ClassParentName Print
+
+ClassOf Object .ClassParent Print
+ClassOf Point .ClassParent Print
+ClassOf Rectangle .ClassParent Print
+ClassOf Foo .ClassParent Print
+ClassOf Bar .ClassParent Print
+
+ClassOf Point .FieldOffset X Print
+ClassOf Point .FieldOffset Y Print
+
+ClassOf Rectangle .FieldOffset TopLeft Print
+ClassOf Rectangle .FieldOffset BottomRight Print
+
+ClassOf Object .InstanceSize Print
+ClassOf Point .InstanceSize Print
+ClassOf Rectangle .InstanceSize Print
+ClassOf Foo .InstanceSize Print
+ClassOf Bar .InstanceSize Print
+
+Point:: 0 0 Point:Print
+// - так работает
+
+Point:: 0 0 |> Print
+// - теперь и “ј  работает
 
 Point var P1
 Point var P2
@@ -116,41 +164,102 @@ P2 := Point:0
 P3 := Point:: 1 1
 P4 := Point:XY ( 2 2 )
 P5 := Point:OF P4
-P6 := ( P3 Point:+ P4 )
-P7 := ( P3 Point:- P4 )
-P8 := ( P4 Point:- P3 )
-P9 := ( P4 Point:Neg )
-P10 := ( P3 Point:Neg )
+P6 := ( P3 .+ P4 )
+P7 := ( P3 .- P4 )
+P8 := ( P4 .- P3 )
+P9 := ( P4 .Neg )
+P10 := ( P3 .Neg )
 P11 := Point:XY ( -2 2 )
 
 Object var O1
 O1 := P1
-O1 Point:Print
+O1 .Print
+// - тут вообще говор€ надо звать ¬»–“”јЋ№Ќџ… метод, но мы пока так не умеем
+
+O1 .InstanceSize Print
 
 array var l_Points
 
-[ P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 ] =: l_Points
+[ P1 P2 P3 P4 P5 P6 P7 P8 P9 P10 P11 ] >>> l_Points
 
-l_Points ==> Point:Print
-l_Points ==> ( Point:X Print )
-l_Points ==> ( Point:Y Print )
-l_Points ==> ( Object:class Print )
-l_Points ==> ( Object:ClassName Print )
-for l_Points ( for ( Object:class %G ) ( getClassName Print ) )
+P1 .InstanceSize Print
+P1 Point:InstanceSize Print
+
+l_Points ==> (
+ Point IN aPt 
+ aPt .Print
+)
+l_Points ==> (
+ Point IN aPt 
+ aPt .X Print 
+)
+l_Points ==> ( 
+ Point IN aPt 
+ aPt .Y Print 
+)
+l_Points ==> ( 
+ Point IN aPt 
+ aPt .class Print 
+)
+l_Points ==> ( 
+ Point IN aPt 
+ aPt .ClassName Print 
+)
+l_Points ==> ( 
+ Point IN aPt 
+ aPt .class %G ==> ( 
+  ObjectClass IN aClass
+  aClass .ClassName Print 
+ ) 
+)
 
 Rectangle var R1
 Rectangle var R2
 R1 := Rectangle:: P1 P4
 R2 := Rectangle:: P6 P7
 
+R1 .InstanceSize Print
+
 array var l_Rectangles
-[ R1 R2 ] =: l_Rectangles
+[ R1 R2 ] >>> l_Rectangles
 
-l_Rectangles ==> Rectangle:Print
+l_Rectangles ==> (
+ Rectangle IN aRt
+ aRt .Print
+)
+l_Rectangles ==> ( 
+ Rectangle IN aRt
+ aRt .class Print 
+)
+l_Rectangles ==> ( 
+ Rectangle IN aRt
+ aRt .ClassName Print 
+)
+l_Rectangles ==> ( 
+ Rectangle IN aRt 
+ aRt .class %G ==> ( 
+  ObjectClass IN aClass
+  aClass .ClassName Print 
+ ) 
+)
 
-'Hello ' (+) 'world' Print
+Point VAR PointFake
+PointFake := Point:new
+PointFake Print
+PointFake .class Print
+PointFake .class .Print
+PointFake .ClassParent Print
+PointFake .ClassParent .Print
+PointFake .ClassParentName Print
 
-'Hello ' (+) 'world' Print
+Rectangle VAR RectangleFake
+RectangleFake := Rectangle:new
+RectangleFake Print
+RectangleFake .class Print
+RectangleFake .class .Print
+RectangleFake .ClassParent Print
+RectangleFake .ClassParent .Print
+RectangleFake .ClassParentName Print
 
 'Hello ' (+) 'world' Print
 

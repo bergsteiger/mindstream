@@ -1,0 +1,145 @@
+PROGRAM DelegateToGen.ms.script
+
+USES
+ core.ms.dict
+;
+
+USES
+ Testing.ms.dict
+;
+
+USES
+ classRelations.ms.dict
+;
+
+USES
+ WordsRTTI.ms.dict
+;
+
+Test&Dump DelegateToGen
+
+ TtfwWord FUNCTION .FindMemberRecur
+   STRING IN aName
+   TtfwWord IN aGen
+
+  TtfwKeyWord VAR l_Member
+  aName aGen pop:Word:FindMember >>> l_Member
+
+  if ( l_Member IsNil ) then
+   ( nil >>> Result )
+  else
+   ( l_Member pop:KeyWord:Word >>> Result )
+
+  if ( Result IsNil ) then
+   ( 
+    aGen .Inherited.Words .for> ( 
+     IN anItem 
+     TtfwWord VAR l_Found 
+     aName anItem call.me >>> l_Found
+     ( Result IsNil ) 
+     OR ( l_Found IsNil ) 
+     OR ( Result = l_Found ) 
+      ?ASSURE [ 'Множественное наследование не поддерживается. Слово: ' aName ' генератор ' aGen pop:Word:Name ' родительский генератор ' anItem pop:Word:Name ]
+     l_Found >>> Result
+    ) 
+   )
+
+ ; // .FindMemberRecur
+
+ TtfwWord VAR g_Gen
+
+ : .?
+   ^ IN aWord
+
+  TtfwWord VAR l_Word
+ 
+  aWord |N g_Gen .FindMemberRecur >>> l_Word
+ 
+  if ( l_Word IsNil ) then
+   ( aWord DO )
+  else
+   ( l_Word DO )
+ ; // .?
+
+ : A
+  1 +
+ ; // A
+
+ : B
+  2 +
+ ; // B
+
+ : C
+  3 +
+ ; // C
+
+ : D
+  4 +
+ ; // D
+
+ : Gen1
+  : A
+   10 +
+  ; // A
+ ; // Gen1
+
+ @ Gen1 >>> g_Gen
+
+ 1 .? A . 
+ 1 .? B . 
+ 1 .? C . 
+ 1 .? D . 
+
+ '----' .
+
+ : Gen2
+  Inherits Gen1
+  : B
+   20 +
+  ; // B
+ ; // Gen2
+
+ @ Gen2 >>> g_Gen
+
+ 2 .? A . 
+ 2 .? B . 
+ 2 .? C . 
+ 2 .? D . 
+
+ '----' .
+
+ : Gen3
+  Inherits ( Gen1 Gen2 )
+  : C
+   30 +
+  ; // C
+ ; // Gen3
+
+ @ Gen3 >>> g_Gen
+
+ 3 .? A . 
+ 3 .? B . 
+ 3 .? C . 
+ 3 .? D . 
+
+ '----' .
+
+ : Gen4
+  Inherits Gen3
+  : D
+   40 +
+  ; // D
+ ; // Gen4
+
+ @ Gen4 >>> g_Gen
+
+ 4 .? A . 
+ 4 .? B . 
+ 4 .? C . 
+ 4 .? D . 
+
+ '----' .
+
+; // DelegateToGen
+
+DelegateToGen

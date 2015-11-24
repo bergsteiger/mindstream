@@ -1,0 +1,80 @@
+PROGRAM Proc1.ms.script
+
+USES
+ CompileTimeVar.ms.dict
+;
+
+STRING CompileTime-VAR g_CurrentProc ''
+
+MACRO proc
+  Literal IN aName
+  ^ IN aParams
+
+ %SUMMARY 'Определяет процедуру с ПОЛНЫМ контролем типов' ;
+
+ g_CurrentProc '' == ?ASSURE 'Вложенные процедуры пока не поддерживаются'
+
+ aName |N >>> g_CurrentProc
+ @SELF Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol VOID
+ axiom:PushSymbol :
+ g_CurrentProc Ctx:Parser:PushString
+
+ @SELF aParams axiom:Params:Push
+; // proc
+
+MACRO proc-end
+ %SUMMARY 'Завершает определение процедуры с ПОЛНЫМ контролем типов' ;
+
+ axiom:PushSymbol ;
+
+ axiom:PushSymbol VOID
+ axiom:PushSymbol :
+ '_' g_CurrentProc Cat Ctx:Parser:PushSymbol
+ axiom:PushSymbol ;
+ '' >>> g_CurrentProc
+; // proc-end
+
+USES
+ Testing.ms.dict
+;
+
+Test&Dump ProcTest
+
+proc A ( in_param aValue )
+ aValue .
+proc-end // A
+
+proc B ( STRING in_param aValue )
+ aValue .
+proc-end // B
+
+proc C ( STRING INTEGER in_param aValue )
+ aValue .
+proc-end // C
+
+proc D ( STRING INTEGER OBJECT in_param aValue )
+ aValue .
+proc-end // D
+
+proc E ( STRING INTEGER OBJECT INTERFACE in_param aValue )
+ aValue .
+proc-end // E
+
+'Hello world' A
+'Hello world' B
+'Hello world' C
+123 C
+'Hello world' D
+123 D
+nil D
+'Hello world' E
+123 E
+nil E
+INTERFACE VAR F
+F := nil
+F E
+
+; // ProcTest
+
+ProcTest

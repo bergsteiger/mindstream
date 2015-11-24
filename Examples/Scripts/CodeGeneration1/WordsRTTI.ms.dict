@@ -1,4 +1,4 @@
-// WordsRTTI.ms.dict
+UNIT WordsRTTI.ms.dict
 
 USES
  Documentation.ms.dict
@@ -70,14 +70,14 @@ word_iterator ElementList
  ; // MapElement
 
  if ( Self NotValid ) then
-  ( Result := [ ] )
+  ( Result := [] )
  else
   (
    VAR l_List
    l_List := ( Self %% ( aListName .Name ) )
    
    if ( l_List NotValid ) then
-    ( Result := [ ] )
+    ( Result := [] )
    else 
     ( Result := ( l_List CodeIterator .map> MapElement .filter> FilterElement ) )
   )

@@ -2,7 +2,7 @@
 
  PROCEDURE P1
   STRING VAR S
-  S := 1
+  S := STRING ( 1 )
  ;
  
  PROCEDURE P2

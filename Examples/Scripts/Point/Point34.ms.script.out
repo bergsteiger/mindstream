@@ -9,11 +9,11 @@
 [ -2 -2 ]
 [ -1 -1 ]
 VOID Test PointTest
- TYPE _Object_
- ; // TYPE _Object_
+ : _Object_
+ ; // : _Object_
  
- TYPE _Point_
- ; // TYPE _Point_
+ : _Point_
+ ; // : _Point_
  
  INTEGER CONST c:Point:CoordCount
   2
@@ -73,10 +73,10 @@ VOID Test PointTest
   Ctx:Parser:PushSymbol
  ; // IMMEDIATE VOID OPERATOR method
  
- IMMEDIATE VOID OPERATOR Object
+ IMMEDIATE VOID TYPE Object
   TtfwValueTypes
   Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID OPERATOR Object
+ ; // IMMEDIATE VOID TYPE Object
  
  Point VAR P1
  Point VAR P10
@@ -98,10 +98,10 @@ VOID Test PointTest
   Ctx:IncludeValueTypes
  ; // IMMEDIATE VOID TYPE PixelList
  
- IMMEDIATE VOID OPERATOR Point
+ IMMEDIATE VOID TYPE Point
   TtfwValueTypes
   Ctx:IncludeValueTypes
- ; // IMMEDIATE VOID OPERATOR Point
+ ; // IMMEDIATE VOID TYPE Point
  
  Point constructor Point:
   ^ IN aX
@@ -120,7 +120,7 @@ VOID Test PointTest
   Point IN Self
   0
   i
-  pop:Word:SetValue
+  pop:Word:SetValuePrim
   [
    (
     aPoint |@
@@ -132,7 +132,7 @@ VOID Test PointTest
     aPx
     i
     Self
-    Array:GetItem
+    Array:Item
     SWAP
     -
     INC
@@ -151,7 +151,7 @@ VOID Test PointTest
   Point IN Self
   0
   i
-  pop:Word:SetValue
+  pop:Word:SetValuePrim
   [
    (
     aPoint |@
@@ -163,7 +163,7 @@ VOID Test PointTest
     aPx
     i
     Self
-    Array:GetItem
+    Array:Item
     +
     INC
     i
@@ -256,26 +256,26 @@ VOID Test PointTest
  
  Point:0
  P1
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:0
  P2
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:
  1
  1
  P3
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:XY
  (
   2
   2
  )
  P4
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:OF
  P4
  P5
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  (
   P3
   Point:+

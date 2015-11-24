@@ -19,7 +19,7 @@ VOID Test IfElseTest
    (
     -1
     Result
-    pop:Word:SetValue
+    pop:Word:SetValuePrim
    )
   else
    if
@@ -31,13 +31,13 @@ VOID Test IfElseTest
     (
      1
      Result
-     pop:Word:SetValue
+     pop:Word:SetValuePrim
     )
    else
     (
      0
      Result
-     pop:Word:SetValue
+     pop:Word:SetValuePrim
     )
  ; // INTEGER FUNCTION SIGN
  
@@ -52,7 +52,7 @@ VOID Test IfElseTest
    (
     -1
     Result
-    pop:Word:SetValue
+    pop:Word:SetValuePrim
    )
   else
    (
@@ -65,13 +65,13 @@ VOID Test IfElseTest
      (
       1
       Result
-      pop:Word:SetValue
+      pop:Word:SetValuePrim
      )
     else
      (
       0
       Result
-      pop:Word:SetValue
+      pop:Word:SetValuePrim
      )
    )
  ; // INTEGER FUNCTION SIGN1
@@ -87,7 +87,7 @@ VOID Test IfElseTest
    (
     -1
     Result
-    pop:Word:SetValue
+    pop:Word:SetValuePrim
    )
   else
    if
@@ -99,13 +99,13 @@ VOID Test IfElseTest
     (
      1
      Result
-     pop:Word:SetValue
+     pop:Word:SetValuePrim
     )
    else
     (
      0
      Result
-     pop:Word:SetValue
+     pop:Word:SetValuePrim
     )
  ; // INTEGER FUNCTION SIGN2
  
