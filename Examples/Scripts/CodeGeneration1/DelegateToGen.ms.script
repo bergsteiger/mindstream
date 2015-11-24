@@ -18,6 +18,8 @@ USES
 
 Test&Dump DelegateToGen
 
+ TtfwWord VAR g_Gen
+
  TtfwWord FUNCTION .FindMemberRecur
    STRING IN aName
    TtfwWord IN aGen
@@ -38,14 +40,12 @@ Test&Dump DelegateToGen
      Result IsNil >>> l_WasNil
      TtfwWord VAR l_Found 
      aName anItem call.me >>> l_Found
-     l_WasNil OR ( l_Found IsNil ) ?ASSURE [ 'Множественное наследование не поддерживается. Слово: ' aName ' генератор ' aGen pop:Word:Name ]
+     l_WasNil OR ( l_Found IsNil ) ?ASSURE [ 'Множественное наследование не поддерживается. Слово: ' aName ' генератор ' g_Gen pop:Word:Name ' родительский генератор ' aGen pop:Word:Name ]
      l_Found >>> Result
     ) 
    )
 
  ; // .FindMemberRecur
-
- TtfwWord VAR g_Gen
 
  : .?
    ^ IN aWord

@@ -88,6 +88,9 @@ VOID TestWithDump DelegateToGen
       'Множественное наследование не поддерживается. Слово: '
       aName
       ' генератор '
+      g_Gen
+      pop:Word:Name
+      ' родительский генератор '
       aGen
       pop:Word:Name
      ]
