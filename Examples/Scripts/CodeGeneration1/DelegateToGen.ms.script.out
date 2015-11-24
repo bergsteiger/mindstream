@@ -80,10 +80,8 @@ VOID TestWithDump DelegateToGen
      l_WasNil
      OR
      (
-      (
-       l_Found
-       IsNil
-      )
+      l_Found
+      IsNil
      )
      ?ASSURE
      ARRAY [
