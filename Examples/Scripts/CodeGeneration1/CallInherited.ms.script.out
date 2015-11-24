@@ -24,6 +24,7 @@ VOID TestWithDump CallInheritedTest
   )
   SWAP
   Array:Iterate
+  +
  ; // : B
  
  IMMEDIATE VOID MACRO call.inherited
@@ -44,5 +45,4 @@ VOID TestWithDump CallInheritedTest
 ; // VOID TestWithDump CallInheritedTest
 
 2
-2
-CallInherited.ms.script : Ошибка выполнения: "Процедура не может возвращать значения через стек". Главный файл: CallInherited.ms.script. Класс: TkwCompiledProcedureWithStackChecking. Слово: CallInheritedTest Producer: TestWithDump Parent: 
+5
