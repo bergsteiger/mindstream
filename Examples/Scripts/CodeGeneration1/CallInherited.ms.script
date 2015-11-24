@@ -14,7 +14,7 @@ Test&Dump CallInheritedTest
   nil >>> Result
   Self .Inherited.Words .for> (
    TtfwWord IN anAncestor
-   Result IsNil ?ASSURE [ 'Множественное наследование не поддерживается для ' Self |N ' второй предок ' anAncestor |N ]
+   Result IsNil ?ASSURE [ 'Множественное наследование не поддерживается для ' Self ToPrintable Self |N ' второй предок ' anAncestor |N ]
    anAncestor >>> Result
   )
   Result IsNil ! ?ASSURE [ 'Не найден предок для ' Self |N ]
