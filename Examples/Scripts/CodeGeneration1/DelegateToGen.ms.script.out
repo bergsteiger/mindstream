@@ -64,9 +64,8 @@ VOID TestWithDump DelegateToGen
     (
      IN anItem
      TtfwWord VAR l_Found
-     BOOLEAN VAR l_WasNil
+     TtfwWord VAR l_WasNil
      Result
-     IsNil
      l_WasNil
      pop:Word:SetValue
      aName
@@ -78,6 +77,7 @@ VOID TestWithDump DelegateToGen
      l_Found
      pop:Word:SetValue
      l_WasNil
+     IsNil
      OR
      (
       l_Found
