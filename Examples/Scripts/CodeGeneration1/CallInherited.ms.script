@@ -5,6 +5,18 @@ USES
 ;
 
 Test&Dump CallInheritedTest
+
+ : A
+  1
+ ; // A
+
+ : B
+  2
+ ; // B
+
+ A .
+ B .
+
 ; // CallInheritedTest
 
 CallInheritedTest
