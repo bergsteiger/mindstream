@@ -15,6 +15,7 @@ Test&Dump CallInheritedTest
   Self .Inherited.Words .for> (
    TtfwWord IN anAncestor
    anAncestor |N .
+   anAncestor >>> Result
   )
  ; // find.inherited
 

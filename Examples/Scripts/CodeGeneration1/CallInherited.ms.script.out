@@ -55,6 +55,9 @@ VOID TestWithDump CallInheritedTest
    anAncestor
    |N
    .
+   anAncestor
+   Result
+   pop:Word:SetValue
   )
   SWAP
   Array:Iterate
