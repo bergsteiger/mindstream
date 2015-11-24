@@ -280,6 +280,17 @@
 ..\..\EmbaTasks\Module9\E6\ToDo.txt
 ..\..\EmbaTasks\Module9\E6\Project1.dpr
 ..\..\EmbaTasks\Module9\E6\Project1.dproj
+..\..\Examples\1160\afwBaseControl.pas
+..\..\Examples\1160\vcmBase.pas
+..\..\Examples\1165\BasicsPack.pas
+..\..\Examples\1165\l3UnknownPrim.imp.pas
+..\..\Examples\1167\l3TypedList.imp.pas
+..\..\Examples\1167\l3TypedListPrim.imp.pas
+..\..\Examples\1167\tfwValueStack.pas
+..\..\Examples\LongProcess\afwLongProcessVisualizer.pas
+..\..\Examples\LongProcess\l3AsincMessageWindow.pas
+..\..\Examples\Protocols\Protocols.dpr
+..\..\Examples\Protocols\Protocols.dproj
 ..\..\Examples\ScriptedAxiomatics\ComboBoxProcessingPack.pas
 ..\..\Examples\ScriptedAxiomatics\kwCodeIterator.pas
 ..\..\Examples\ScriptedAxiomatics\vtComboBoxWordsPack.pas
@@ -688,13 +699,21 @@
 ..\..\Examples\Scripts\CodeGeneration\CodeGen69\Project2.pas
 ..\..\Examples\Scripts\CodeGeneration\CodeGen69\Project3.pas
 ..\..\Examples\Scripts\CodeGeneration1\CodeGen69.ms.script
+..\..\Examples\Scripts\CodeGeneration1\CompileAndProcess.ms.script
+..\..\Examples\Scripts\CodeGeneration1\CompileTimeVar.ms.script
+..\..\Examples\Scripts\CodeGeneration1\DelegateToGen.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\Filter.ms.script
+..\..\Examples\Scripts\CodeGeneration1\GenerateUnit.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\Inherits.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\IT.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\Join.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\Map.ms.script
+..\..\Examples\Scripts\CodeGeneration1\Object.ms.script
+..\..\Examples\Scripts\CodeGeneration1\Object1.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\Point96.ms.script
+..\..\Examples\Scripts\CodeGeneration1\Proc.ms.script
+..\..\Examples\Scripts\CodeGeneration1\Proc1.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\SaveVarAndDo.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\Slice.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\String.ms.script
@@ -702,8 +721,11 @@
 ..\..\Examples\Scripts\CodeGeneration1\Trunc.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\arrays.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
+..\..\Examples\Scripts\CodeGeneration1\Bind.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\classRelations.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
+..\..\Examples\Scripts\CodeGeneration1\CompileAndProcess.ms.dict
+..\..\Examples\Scripts\CodeGeneration1\CompileTimeVar.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\core.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\Debug.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\Documentation.ms.dict
@@ -739,6 +761,8 @@
 ..\..\Examples\Scripts\CodeGeneration1\types.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
 ..\..\Examples\Scripts\CodeGeneration1\commits.comments.txt
+..\..\Examples\Scripts\CodeGeneration1\Generation.txt
+..\..\Examples\Scripts\CodeGeneration1\l3CoreObjects.txt
 ..\..\Examples\Scripts\CodeGeneration1\CodeGen69\Project1.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\CodeGen69\Project1_Library1.ms.script
 ..\..\Examples\Scripts\CodeGeneration1\CodeGen69\Project1_Library2.ms.script
@@ -767,6 +791,10 @@
 ..\..\Examples\Scripts\CodeGeneration1\CodeGen69\Project1_Program1_Interface2.pas
 ..\..\Examples\Scripts\CodeGeneration1\CodeGen69\Project2.pas
 ..\..\Examples\Scripts\CodeGeneration1\CodeGen69\Project3.pas
+..\..\Examples\Scripts\CodeGeneration1\GenerateUnit\Unit1.pas
+..\..\Examples\Scripts\CodeGeneration1\GenerateUnit\Unit2.pas
+..\..\Examples\Scripts\CodeGeneration1\GenerateUnit\Unit3.pas
+..\..\Examples\Scripts\CodeGeneration1\GenerateUnit\Unit4.pas
 ..\..\Examples\Scripts\Other\2DROP.ms.script
 ..\..\Examples\Scripts\Other\2DUP.ms.script
 ..\..\Examples\Scripts\Other\2OVER.ms.script
@@ -2883,7 +2911,7 @@ VOID PROCEDURE ProcessDirs
   aDir
   (
    (
-    OPERATOR
+    ProcessItem
     DO
    )
   )

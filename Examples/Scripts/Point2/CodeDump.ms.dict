@@ -256,7 +256,7 @@ PROCEDURE DumpCodeCall OBJECT IN aCode
       )
     )
    
-   ( 
+/*{   ( 
     ( aCode Is class::TkwCompiledVarWorker )
 //    OR
 //    ( aCode Is class::TkwVarModifier )
@@ -267,7 +267,7 @@ PROCEDURE DumpCodeCall OBJECT IN aCode
        aCode DumpCodeCall
       ) 
       Dec Indent 
-    )
+    )}*/
    
    ( aCode Is class::TkwCompiledWordWorker )
     (

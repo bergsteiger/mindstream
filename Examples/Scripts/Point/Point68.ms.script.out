@@ -155,7 +155,7 @@ VOID Test PointTest
   Object IN Self
   anOffset |^
   Self
-  Array:GetItem
+  Array:Item
  ; // : FieldByOffset
  
  IMMEDIATE VOID TYPE FieldOffset
@@ -407,35 +407,35 @@ VOID Test PointTest
  
  ''
  g_CurrentClass
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  ''
  g_CurrentClassImpl
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  0
  g_ClassFieldOffset
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:0
  P1
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:0
  P2
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:
  1
  1
  P3
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:XY
  (
   2
   2
  )
  P4
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:OF
  P4
  P5
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  (
   P3
   Point:+

@@ -585,7 +585,7 @@ FORWARD Process
     l_File
     File:ReadLines
     (
-     W-STRING IN aString
+     STRING IN aString
      aString
      .
     )
@@ -2465,7 +2465,7 @@ VOID PROCEDURE ProcessDirs
   aDir
   (
    (
-    OPERATOR
+    ProcessItem
     DO
    )
   )
@@ -3462,7 +3462,7 @@ Array:Iterate
 1
 2
 +
-Msg
+.
 
 (
  @

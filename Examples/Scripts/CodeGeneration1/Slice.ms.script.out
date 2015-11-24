@@ -2,7 +2,7 @@ VOID TestWithDump SliceTest
  SliceTest
  DumpElement
  2
- [
+ ARRAY [
   1
   2
   3
@@ -24,7 +24,7 @@ VOID TestWithDump SliceTest
  SWAP
  Array:Iterate
  2
- [
+ ARRAY [
   1
   2
   3
@@ -39,7 +39,7 @@ VOID TestWithDump SliceTest
  Array:Slice
  .
  3
- [
+ ARRAY [
   1
   2
   3
@@ -64,7 +64,7 @@ VOID TestWithDump SliceTest
  SWAP
  Array:Iterate
  3
- [
+ ARRAY [
   1
   2
   3
@@ -83,7 +83,7 @@ VOID TestWithDump SliceTest
  '------'
  .
  2
- [
+ ARRAY [
   1
   2
   3
@@ -106,7 +106,7 @@ VOID TestWithDump SliceTest
  SWAP
  Array:Iterate
  2
- [
+ ARRAY [
   1
   2
   3
@@ -122,7 +122,7 @@ VOID TestWithDump SliceTest
  Array:Reverted
  .
  3
- [
+ ARRAY [
   1
   2
   3
@@ -148,7 +148,7 @@ VOID TestWithDump SliceTest
  SWAP
  Array:Iterate
  3
- [
+ ARRAY [
   1
   2
   3
@@ -167,7 +167,7 @@ VOID TestWithDump SliceTest
  .
  '------'
  .
- [
+ ARRAY [
   1
   2
   3
@@ -189,7 +189,7 @@ VOID TestWithDump SliceTest
  )
  SWAP
  Array:Iterate
- [
+ ARRAY [
   1
   2
   3
@@ -216,7 +216,7 @@ VOID TestWithDump SliceTest
  Array:Iterate
  '------'
  .
- [
+ ARRAY [
   1
   2
   3
@@ -239,7 +239,7 @@ VOID TestWithDump SliceTest
  )
  SWAP
  Array:Iterate
- [
+ ARRAY [
   1
   2
   3

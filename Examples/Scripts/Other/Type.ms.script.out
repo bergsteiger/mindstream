@@ -44,17 +44,17 @@ VOID Test TypeTest
  
  1
  A
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  2
  B
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  A
  .
  B
  .
  'xxx'
  B
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  B
  .
  TypeTest

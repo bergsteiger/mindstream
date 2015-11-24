@@ -1,0 +1,18 @@
+USES
+ CompileTimeVar.ms.dict
+;
+
+USES
+ Testing.ms.dict
+;
+
+Test&Dump CompileTimeVarTest
+ STRING CompileTime-VAR A ''
+ ARRAY CompileTime-VAR B []
+ STRING CompileTime-VAR C 'Hello'
+ A .
+ B .
+ C .
+; // CompileTimeVarTest
+
+CompileTimeVarTest

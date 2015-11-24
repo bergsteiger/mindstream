@@ -1,0 +1,287 @@
+VOID TestWithDump DelegateToGen
+ : .?
+  ^ IN aWord
+  TtfwWord VAR l_Word
+  aWord
+  |N
+  g_Gen
+  .FindMemberRecur
+  l_Word
+  pop:Word:SetValue
+  if
+   (
+    l_Word
+    IsNil
+   )
+  then
+   (
+    aWord
+    DO
+   )
+  else
+   (
+    l_Word
+    DO
+   )
+ ; // : .?
+ 
+ TtfwWord FUNCTION .FindMemberRecur
+  TtfwWord IN aGen
+  STRING IN aName
+  TtfwKeyWord VAR l_Member
+  aName
+  aGen
+  pop:Word:FindMember
+  l_Member
+  pop:Word:SetValue
+  if
+   (
+    l_Member
+    IsNil
+   )
+  then
+   (
+    nil
+    Result
+    pop:Word:SetValue
+   )
+  else
+   (
+    l_Member
+    pop:KeyWord:Word
+    Result
+    pop:Word:SetValue
+   )
+  if
+   (
+    Result
+    IsNil
+   )
+  then
+   (
+    aGen
+    .Inherited.Words
+    (
+     IN anItem
+     TtfwWord VAR l_Found
+     aName
+     anItem
+     (
+      .FindMemberRecur
+      DO
+     )
+     l_Found
+     pop:Word:SetValue
+     (
+      Result
+      IsNil
+     )
+     OR
+     (
+      l_Found
+      IsNil
+     )
+     OR
+     (
+      Result
+      =
+      l_Found
+     )
+     ?ASSURE
+     ARRAY [
+      'Множественное наследование не поддерживается. Слово: '
+      aName
+      ' генератор '
+      aGen
+      pop:Word:Name
+      ' родительский генератор '
+      anItem
+      pop:Word:Name
+     ]
+     l_Found
+     Result
+     pop:Word:SetValue
+    )
+    SWAP
+    Array:Iterate
+   )
+ ; // TtfwWord FUNCTION .FindMemberRecur
+ 
+ : A
+  1
+  +
+ ; // : A
+ 
+ : B
+  2
+  +
+ ; // : B
+ 
+ : C
+  3
+  +
+ ; // : C
+ 
+ : D
+  4
+  +
+ ; // : D
+ 
+ TtfwWord VAR g_Gen
+ : Gen1
+  : A
+   10
+   +
+  ; // : A
+  
+ ; // : Gen1
+ 
+ : Gen2
+  Inherits %G
+   Gen1
+  ; // Inherits %G
+  
+  : B
+   20
+   +
+  ; // : B
+  
+ ; // : Gen2
+ 
+ : Gen3
+  Inherits %G
+   Gen1
+   Gen2
+  ; // Inherits %G
+  
+  : C
+   30
+   +
+  ; // : C
+  
+ ; // : Gen3
+ 
+ : Gen4
+  Inherits %G
+   Gen3
+  ; // Inherits %G
+  
+  : D
+   40
+   +
+  ; // : D
+  
+ ; // : Gen4
+ 
+ DelegateToGen
+ DumpElement
+ @
+ Gen1
+ g_Gen
+ pop:Word:SetValue
+ 1
+ .?
+ A
+ .
+ 1
+ .?
+ B
+ .
+ 1
+ .?
+ C
+ .
+ 1
+ .?
+ D
+ .
+ '----'
+ .
+ @
+ Gen2
+ g_Gen
+ pop:Word:SetValue
+ 2
+ .?
+ A
+ .
+ 2
+ .?
+ B
+ .
+ 2
+ .?
+ C
+ .
+ 2
+ .?
+ D
+ .
+ '----'
+ .
+ @
+ Gen3
+ g_Gen
+ pop:Word:SetValue
+ 3
+ .?
+ A
+ .
+ 3
+ .?
+ B
+ .
+ 3
+ .?
+ C
+ .
+ 3
+ .?
+ D
+ .
+ '----'
+ .
+ @
+ Gen4
+ g_Gen
+ pop:Word:SetValue
+ 4
+ .?
+ A
+ .
+ 4
+ .?
+ B
+ .
+ 4
+ .?
+ C
+ .
+ 4
+ .?
+ D
+ .
+ '----'
+ .
+; // VOID TestWithDump DelegateToGen
+
+11
+3
+4
+5
+----
+12
+22
+5
+6
+----
+13
+23
+33
+7
+----
+14
+24
+34
+44
+----

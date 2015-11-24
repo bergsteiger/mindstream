@@ -1,0 +1,164 @@
+USES
+ io.ms.dict
+ Object.ms.dict
+ Testing.ms.dict
+;
+
+USES
+ axiom:WordInfo
+;
+
+Test&Dump ObjectTest
+
+ ClassOf Object DumpElement
+
+ ClassOf Object pop:Word:Name Print
+
+ Object VAR l_Obj
+ l_Obj := Object:new
+
+ l_Obj .Print
+ l_Obj .ClassName Print
+
+ //@ l_Obj pop:Word:Info pop:WordInfo:ValueTypes Print
+ //@ l_Obj pop:Word:Info pop:WordInfo:ValueTypes pop:ValueTypes:Name Print
+ l_Obj .ClassName Print
+ ClassOf Object pop:Word:Name Print
+
+ '--------' Print
+
+ l_Obj .InstanceSize Print
+
+ ClassOf Object .FieldOffset VMT Print
+ ClassOf Object .ClassParent Print
+ ClassOf Object .ClassParent .Print
+ ClassOf Object .ClassParentName Print
+
+ ClassOf Object pop:Word:Name Print
+ ClassOf Object pop:Word:Name Print
+
+ l_Obj .class Print
+ l_Obj .class .Print
+
+ class Object1
+  //def_constructor_empty
+ class-end // Object1
+
+ Object1 VAR l_Obj1
+ l_Obj1 := Object1:new
+
+ l_Obj1 .Print
+ l_Obj1 .ClassName Print
+
+ '--------' Print
+
+ l_Obj1 .InstanceSize Print
+ 
+ ClassOf Object1 .FieldOffset VMT Print
+ ClassOf Object1 .ClassParent Print
+ ClassOf Object1 .ClassParent .Print
+ ClassOf Object1 .ClassParentName Print
+
+ l_Obj1 .class Print
+ l_Obj1 .class .Print
+
+ class Object2
+  INTEGER member FakeField
+  INTEGER readonly FakeField read FakeField
+  def_constructor
+   //[EXECUTE] ( g_InstanceSizeDefined Msg )
+   new[ 256 ] >>> Result 
+   //Self .FieldOffset 'VMT' Msg
+  ; // new
+ class-end // Object2
+
+ Object2 VAR l_Obj2
+ l_Obj2 := Object2:new
+
+ l_Obj2 .Print
+ l_Obj2 .ClassName Print
+
+ '--------' Print
+
+ l_Obj2 .InstanceSize Print
+
+ ClassOf Object2 .FieldOffset VMT Print
+ ClassOf Object2 .FieldOffset FakeField Print
+ ClassOf Object2 .ClassParent Print
+ ClassOf Object2 .ClassParent .Print
+ ClassOf Object2 .ClassParentName Print
+ ClassOf Object2 .FieldOffset FakeField Print
+
+ l_Obj2 .FakeField Print
+
+ l_Obj2 .class Print
+ l_Obj2 .class .Print
+ //l_Obj2 .member FakeField Print
+
+ Object2 class Object3
+  def_constructor
+   new[ 257 ] >>> Result 
+  ; // new
+ class-end // Object3
+
+ '--------' Print
+
+ ClassOf Object3 Print
+ ClassOf Object3 ObjectClass:ClassName Print
+ ClassOf Object3 ObjectClass:ClassParent Print
+ ClassOf Object3 ObjectClass:ClassParentName Print
+
+ '--------' Print
+
+ ClassOf Object3 .Print
+ ClassOf Object3 .ClassName Print
+ ClassOf Object3 .ClassParent Print
+ ClassOf Object3 .ClassParentName Print
+
+ Object3 VAR l_Obj3
+ l_Obj3 := Object3:new
+
+ l_Obj3 .Print
+ l_Obj3 .ClassName Print
+
+ '--------' Print
+
+ l_Obj3 .InstanceSize Print
+
+ ClassOf Object3 .FieldOffset VMT Print
+ ClassOf Object3 .FieldOffset FakeField Print
+ ClassOf Object3 .ClassParent Print
+ ClassOf Object3 .ClassParent .Print
+ ClassOf Object3 .ClassParentName Print
+ ClassOf Object3 .FieldOffset FakeField Print
+
+ l_Obj3 .FakeField Print
+
+ l_Obj3 .class Print
+ l_Obj3 .class .Print
+
+ class Object4
+  //def_constructor_empty
+ class-end // Object4
+
+ Object4 VAR l_Obj4
+ l_Obj4 := Object4:new
+
+ l_Obj4 .Print
+ l_Obj4 .ClassName Print
+
+ '--------' Print
+
+ l_Obj4 .InstanceSize Print
+ 
+ ClassOf Object4 .FieldOffset VMT Print
+ ClassOf Object4 .ClassParent Print
+ ClassOf Object4 .ClassParent .Print
+ ClassOf Object4 .ClassParentName Print
+
+ l_Obj4 .class Print
+ l_Obj4 .class .Print
+
+; // ObjectTest
+
+ObjectTest

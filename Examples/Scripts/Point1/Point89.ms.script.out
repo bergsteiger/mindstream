@@ -156,7 +156,7 @@ VOID Test PointTest
     [
     ]
     Result
-    pop:Word:SetValue
+    pop:Word:SetValuePrim
    )
   else
    (
@@ -178,7 +178,7 @@ VOID Test PointTest
       [
       ]
       Result
-      pop:Word:SetValue
+      pop:Word:SetValuePrim
      )
     else
      (
@@ -219,7 +219,7 @@ VOID Test PointTest
    _anOffset |^
   )
   Self
-  Array:GetItem
+  Array:Item
  ; // : FieldByOffset
  
  IMMEDIATE VOID TYPE FieldOffset
@@ -640,43 +640,43 @@ VOID Test PointTest
  
  ''
  g_CurrentClass
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  ''
  g_CurrentClassImpl
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  0
  g_ClassFieldOffset
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  (
   [
   ]
   g_CurrentClassMembers
-  pop:Word:SetValue
+  pop:Word:SetValuePrim
  )
  PointTest
  DumpElement
  Point:0
  P1
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:0
  P2
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point::
  1
  1
  P3
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:XY
  (
   2
   2
  )
  P4
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:OF
  P4
  P5
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  (
   P3
   Point:+
@@ -712,7 +712,7 @@ VOID Test PointTest
  pop:Word:SetValue
  P1
  O1
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  O1
  Point:Print
  [

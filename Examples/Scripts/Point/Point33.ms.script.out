@@ -107,7 +107,7 @@ VOID Test PointTest
   Point IN Self
   0
   i
-  pop:Word:SetValue
+  pop:Word:SetValuePrim
   [
    (
     aPoint |@
@@ -119,7 +119,7 @@ VOID Test PointTest
     aPx
     i
     Self
-    Array:GetItem
+    Array:Item
     SWAP
     -
     INC
@@ -138,7 +138,7 @@ VOID Test PointTest
   Point IN Self
   0
   i
-  pop:Word:SetValue
+  pop:Word:SetValuePrim
   [
    (
     aPoint |@
@@ -150,7 +150,7 @@ VOID Test PointTest
     aPx
     i
     Self
-    Array:GetItem
+    Array:Item
     +
     INC
     i
@@ -243,26 +243,26 @@ VOID Test PointTest
  
  Point:0
  P1
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:0
  P2
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:
  1
  1
  P3
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:XY
  (
   2
   2
  )
  P4
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  Point:OF
  P4
  P5
- pop:Word:SetValue
+ pop:Word:SetValuePrim
  (
   P3
   Point:+

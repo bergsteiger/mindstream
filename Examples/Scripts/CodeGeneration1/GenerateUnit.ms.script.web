@@ -1,0 +1,186 @@
+PROGRAM GenerateUnit.ms.script
+
+CONST cPathSep '\'
+
+STRING FUNCTION OutDir
+ sysutils:GetCurrentDir &gt;&gt;&gt; Result
+ [ Result
+  script:FileName 
+  %REMARK 'Путь к текущему скрипту'
+  sysutils:ExtractFileName
+  %REMARK 'Вырезаем из пути только имя файла' 
+  '' sysutils:ChangeFileExt
+  %REMARK 'Убираем .script' 
+  '' sysutils:ChangeFileExt 
+  %REMARK 'Убираем .ms' 
+ ] cPathSep strings:CatSep &gt;&gt;&gt; Result
+; // OutDir
+
+STRING FUNCTION MakeOutPath
+ OutDir &gt;&gt;&gt; Result
+ Result sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' Result ]
+; // MakeOutPath
+
+USES
+ CompileTimeVar.ms.dict
+;
+
+FILE CompileTime-VAR g_OutFile nil
+%REMARK 'Текущий файл'
+
+INTEGER CompileTime-VAR g_Indent 0
+%REMARK 'Текущий отступ'
+
+STRING INTEGER ARRAY TYPE OUTABLE
+
+CONST cIndentChar ' '
+
+FORWARD ValueToString
+
+STRING FUNCTION ValueToString
+  OUTABLE IN aValue
+
+ if ( aValue IsArray ) then
+  ( [ aValue .for&gt; ValueToString ] strings:Cat &gt;&gt;&gt; Result )
+ else
+  ( aValue ToPrintable &gt;&gt;&gt; Result )
+; // ValueToString
+
+PROCEDURE OutToFile
+  OUTABLE IN aValue 
+
+ %SUMMARY 
+ '
+ Выводит значение в текущий файл вывода.
+ БЕЗ перевода каретки.
+ '
+ ; // %SUMMARY 
+
+ [ g_Indent cIndentChar char:Dupe aValue ValueToString ] strings:Cat g_OutFile File:WriteStr
+ %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
+; // OutToFile
+
+CONST \n #13#10
+
+PROCEDURE OutToFileLn
+  OUTABLE IN aValue
+ 
+ %SUMMARY 
+ '
+ Выводит значение в текущий файл вывода.
+ С переводом каретки.
+ '
+ ; // %SUMMARY 
+
+ aValue OutToFile
+ %REMARK '- выводим элементы модели в файл, а не в стандартный вывод.'
+ \n g_OutFile File:WriteStr
+ %REMARK '- выводим перевод каретки'
+; // OutToFileLn
+
+PROCEDURE array:OutToFileLn
+  ARRAY IN aValue
+
+ %SUMMARY 'Выводит значения элементов массива построчно' ;
+ aValue .for&gt; OutToFileLn
+; // array:OutToFileLn
+
+USES
+ SaveVarAndDo.ms.dict
+;
+
+: ExpandLambda
+   FUNCTOR IN aLambda
+
+  ARRAY VAR l_LambdaCode
+  [ aLambda DO ] &gt;&gt;&gt; l_LambdaCode
+  if ( l_LambdaCode Array:Count &lt;&gt; 0 ) then
+  begin
+   [
+   l_LambdaCode .for&gt; (
+    IN aValue
+    aValue
+    \n
+   )
+   ]
+  end
+; // ExpandLambda
+
+ARRAY CompileTime-VAR g_OutedUnits []
+ARRAY CompileTime-VAR g_OutedClasses []
+
+PROCEDURE GenerateUnit
+  STRING IN aUnitName
+  ^ IN anInterfaceLambda
+  ^ IN anImplementationLambda
+
+ aUnitName IsNil ?FAIL 'Имя модуля не может быть пустым'
+
+ aUnitName g_OutedUnits array:Has ?FAIL [ 'Модуль ' aUnitName ' уже генерировался' ]
+
+ aUnitName array:AddTo g_OutedUnits
+ 
+ STRING VAR l_UnitFileName 
+ [ aUnitName '.pas' ] strings:Cat &gt;&gt;&gt; l_UnitFileName
+
+ STRING VAR l_UnitPath
+ MakeOutPath &gt;&gt;&gt; l_UnitPath
+ [ l_UnitPath cPathSep l_UnitFileName ] strings:Cat &gt;&gt;&gt; l_UnitPath
+ l_UnitPath Print
+
+ TF g_OutedClasses (
+  [] &gt;&gt;&gt; g_OutedClasses
+  l_UnitPath File:OpenWrite &gt;&gt;&gt; g_OutFile
+  TF g_OutFile (
+   [
+    [ 'unit' ' ' aUnitName ';' ]
+    ''
+    'interface'
+    ''
+    anInterfaceLambda ExpandLambda
+    'implementation'
+    ''
+    anImplementationLambda ExpandLambda
+    'end.'
+   ] array:OutToFileLn
+  ) // TF g_OutFile
+ ) // TF g_OutedClasses
+; // GenerateUnit 
+
+: GenerateClass
+  STRING IN aClassName
+
+ aClassName g_OutedClasses array:Has ?FAIL [ 'Класс ' aClassName ' уже генерировался' ]
+
+ aClassName array:AddTo g_OutedClasses
+ aClassName IsNil ?FAIL 'Имя класса не может быть пустым'
+ 'type'
+ aClassName
+ 'end;'
+ ''
+; // GenerateClass
+
+USES
+ Testing.ms.dict
+;
+
+Test&Dump GenerateUnitTest
+ TF g_OutedUnits (
+  'Unit1' GenerateUnit ( 
+   'TTest1' GenerateClass 
+   'TTest2' GenerateClass
+   'TTest3' GenerateClass
+  ) ()
+  g_OutedClasses Print
+
+  'Unit2' GenerateUnit ( 'test' ) ( 'test' )
+  g_OutedClasses Print
+
+  'Unit3' GenerateUnit () ()
+  'Unit4' GenerateUnit () ()
+
+  g_OutedUnits Print
+ )
+; // GenerateUnitTest
+
+GenerateUnitTest
