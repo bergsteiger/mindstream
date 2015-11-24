@@ -48,27 +48,7 @@ VOID TestWithDump DelegateToGen
    )
  ; // : .?
  
- : A
-  1
-  +
- ; // : A
- 
- : B
-  2
-  +
- ; // : B
- 
- : C
-  3
-  +
- ; // : C
- 
- : D
-  4
-  +
- ; // : D
- 
- TtfwWord FUNCTION FindMemberRecur
+ TtfwWord FUNCTION .FindMemberRecur
   TtfwWord IN aGen
   STRING IN aName
   TtfwKeyWord VAR l_Member
@@ -99,7 +79,27 @@ VOID TestWithDump DelegateToGen
     Result
     pop:Word:SetValue
    )
- ; // TtfwWord FUNCTION FindMemberRecur
+ ; // TtfwWord FUNCTION .FindMemberRecur
+ 
+ : A
+  1
+  +
+ ; // : A
+ 
+ : B
+  2
+  +
+ ; // : B
+ 
+ : C
+  3
+  +
+ ; // : C
+ 
+ : D
+  4
+  +
+ ; // : D
  
  TtfwWord VAR g_Gen
  : Gen1

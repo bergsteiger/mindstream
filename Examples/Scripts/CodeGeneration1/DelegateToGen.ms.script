@@ -14,7 +14,7 @@ USES
 
 Test&Dump DelegateToGen
 
- TtfwWord FUNCTION FindMemberRecur
+ TtfwWord FUNCTION .FindMemberRecur
    STRING IN aName
    TtfwWord IN aGen
 
@@ -30,7 +30,7 @@ Test&Dump DelegateToGen
   else
    ( l_Member pop:KeyWord:Word >>> Result )
 
- ; // FindMemberRecur
+ ; // .FindMemberRecur
 
  TtfwWord VAR g_Gen
 
