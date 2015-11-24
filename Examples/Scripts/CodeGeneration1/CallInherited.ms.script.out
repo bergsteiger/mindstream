@@ -17,6 +17,7 @@ VOID TestWithDump CallInheritedTest
   Self
   2
   +
+  Self
   A
   DROP
   B
@@ -40,6 +41,7 @@ VOID TestWithDump CallInheritedTest
   Self
   2
   +
+  Self
   A
   DROP
   C
@@ -55,6 +57,8 @@ VOID TestWithDump CallInheritedTest
  ; // : C
  
  IMMEDIATE VOID MACRO call.inherited
+  'Self'
+  Ctx:Parser:PushSymbol
   axiom:PushSymbol
   [EXECUTE]
   '@SELF'
@@ -119,4 +123,5 @@ VOID TestWithDump CallInheritedTest
 ; // VOID TestWithDump CallInheritedTest
 
 2
-CallInherited.ms.script : Ошибка выполнения: "Ошибка при получении параметра aA: TtfwStackValue : Стек пустой". Главный файл: CallInherited.ms.script. Класс: TkwAdd. Слово: +
+5
+5

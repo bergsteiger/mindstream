@@ -27,7 +27,8 @@ Test&Dump CallInheritedTest
 
 MACRO call.inherited
  // - пон€тно, что это надо делать через честную компил€цию ссылки на Inherited
-
+                              
+ 'Self' Ctx:Parser:PushSymbol
  axiom:PushSymbol [EXECUTE]
  '@SELF' Ctx:Parser:PushSymbol
  axiom:PushSymbol compile.inherited
