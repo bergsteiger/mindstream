@@ -1,3 +1,5 @@
+A
+A
 VOID TestWithDump CallInheritedTest
  : A
   INTEGER IN Self
@@ -15,8 +17,7 @@ VOID TestWithDump CallInheritedTest
   Self
   2
   +
-  B
-  find.inherited
+  A
   DROP
   B
   .Inherited.Words
@@ -39,8 +40,7 @@ VOID TestWithDump CallInheritedTest
   Self
   2
   +
-  C
-  find.inherited
+  A
   DROP
   C
   .Inherited.Words
@@ -55,10 +55,12 @@ VOID TestWithDump CallInheritedTest
  ; // : C
  
  IMMEDIATE VOID MACRO call.inherited
+  axiom:PushSymbol
+  [EXECUTE]
   '@SELF'
   Ctx:Parser:PushSymbol
   axiom:PushSymbol
-  find.inherited
+  compile.inherited
   axiom:PushSymbol
   DROP
   ARRAY [
@@ -117,7 +119,4 @@ VOID TestWithDump CallInheritedTest
 ; // VOID TestWithDump CallInheritedTest
 
 2
-A
-5
-A
-5
+CallInherited.ms.script : Ошибка выполнения: "Ошибка при получении параметра aA: TtfwStackValue : Стек пустой". Главный файл: CallInherited.ms.script. Класс: TkwAdd. Слово: +
