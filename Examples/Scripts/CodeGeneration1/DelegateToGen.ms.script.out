@@ -76,6 +76,20 @@ VOID TestWithDump DelegateToGen
      )
      Result
      pop:Word:SetValue
+     (
+      NOT
+      l_WasNil
+      AND
+      BOOLEAN (
+       NOT
+       (
+        Result
+        IsNil
+       )
+      )
+     )
+     ?FAIL
+     'Множественное наследование не поддерживается'
     )
     SWAP
     Array:Iterate

@@ -37,6 +37,8 @@ Test&Dump DelegateToGen
      BOOLEAN VAR l_WasNil
      Result IsNil >>> l_WasNil 
      aName anItem call.me >>> Result
+     ( NOT l_WasNil AND ( NOT ( Result IsNil ) ) ) ?FAIL 'Множественное наследование не поддерживается'
+      
     ) 
    )
 
