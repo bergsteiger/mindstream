@@ -1,4 +1,7 @@
 VOID TestWithDump CallAncestorTest
+ IMMEDIATE VOID MACRO .call.ancestor
+ ; // IMMEDIATE VOID MACRO .call.ancestor
+ 
  : A
   : X
    INTEGER IN aValue
@@ -24,9 +27,6 @@ VOID TestWithDump CallAncestorTest
   ; // : X
   
  ; // : B
- 
- IMMEDIATE VOID MACRO call.ancestor
- ; // IMMEDIATE VOID MACRO call.ancestor
  
  CallAncestorTest
  DumpElement
