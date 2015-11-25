@@ -23,8 +23,6 @@ STACK_CHANGING_MACRO compile.inherited
 ; // compile.inherited
 
 MACRO call.inherited
- // - пон€тно, что это надо делать через честную компил€цию ссылки на Inherited
-                              
  'Self' Ctx:Parser:PushSymbol
  axiom:PushSymbol [EXECUTE]
  '@SELF' Ctx:Parser:PushSymbol
