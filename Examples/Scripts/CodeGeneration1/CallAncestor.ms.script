@@ -16,7 +16,7 @@ Test&Dump CallAncestorTest
 
  MACRO .call.ancestor
   Ctx:KeyWordDefiningNow pop:KeyWord:Name .
-  Ctx:WordDefiningNow pop:Word:Parent .Inherited.Words .for> .
+  Ctx:WordDefiningNow pop:Word:Parent .Inherited.Words .for> ( DUP Msg . )
  ; // .call.ancestor
 
  : A
