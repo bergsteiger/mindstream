@@ -17,7 +17,7 @@ Test&Dump CallParentInheritedTest
   ; // X
  ; // A
 
- : B
+ : B Inherits A
   : X
     INTEGER IN aValue
    aValue 2 + A :: X
