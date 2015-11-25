@@ -9,6 +9,11 @@ VOID TestWithDump CallAncestorTest
   l_WordName
   pop:Word:SetValue
   l_WordName
+  IsNil
+  !
+  ?ASSURE
+  'No name for word calling .call.ancestor'
+  l_WordName
   .
   Ctx:WordDefiningNow
   pop:Word:Parent

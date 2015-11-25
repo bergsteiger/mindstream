@@ -17,6 +17,7 @@ Test&Dump CallAncestorTest
  MACRO .call.ancestor
   STRING VAR l_WordName
   Ctx:KeyWordDefiningNow pop:KeyWord:Name >>> l_WordName
+  l_WordName IsNil ! ?ASSURE 'No name for word calling .call.ancestor'
   l_WordName .
 
   TtfwWord VAR l_WordParent
