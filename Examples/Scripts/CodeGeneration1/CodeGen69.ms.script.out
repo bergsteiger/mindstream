@@ -3895,6 +3895,10 @@ PRIVATE VOID OPERATOR :: PROCEDURE : ExpandRunTestsFor
  STRING OPERATOR :: VAR : l_Name
  STRING OPERATOR :: VAR : l_TestsHolderName
 ; // ExpandRunTestsFor
+REDIFINITION : : Log
+==> Redefines
+ VOID .
+<== Redefines
 IMMEDIATE VOID OPERATOR :: MACRO : RunTests
  Documentation:
   Выполняет тесты для списка слов aWords
