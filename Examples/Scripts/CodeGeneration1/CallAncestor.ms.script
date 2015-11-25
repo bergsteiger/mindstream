@@ -5,13 +5,17 @@ USES
 ;
 
 USES
+ WordsRTTI.ms.dict
+;
+
+USES
  Testing.ms.dict
 ;
 
 Test&Dump CallAncestorTest
 
  MACRO .call.ancestor
-  Ctx:WordDefiningNow pop:Word:Parent .
+  Ctx:WordDefiningNow pop:Word:Parent .Inherited.Words .for> .
  ; // .call.ancestor
 
  : A

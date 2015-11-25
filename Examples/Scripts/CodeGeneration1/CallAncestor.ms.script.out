@@ -3,7 +3,10 @@ VOID TestWithDump CallAncestorTest
  IMMEDIATE VOID MACRO .call.ancestor
   Ctx:WordDefiningNow
   pop:Word:Parent
+  .Inherited.Words
   .
+  SWAP
+  Array:Iterate
  ; // IMMEDIATE VOID MACRO .call.ancestor
  
  : A
