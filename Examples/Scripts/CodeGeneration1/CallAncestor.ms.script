@@ -31,7 +31,7 @@ Test&Dump CallAncestorTest
    l_Ancestor %% l_WordName >>> l_AncestorMember
    if ( l_AncestorMember IsNil ! ) then
    begin
-    l_AncestorMember .
+    l_AncestorMember pop:Word:Name .
    end
   )
  ; // .call.ancestor

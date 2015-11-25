@@ -1,5 +1,5 @@
 A
-TkwCompiledProcedure
+X
 VOID TestWithDump CallAncestorTest
  IMMEDIATE VOID MACRO .call.ancestor
   STRING VAR l_WordName
@@ -51,6 +51,7 @@ VOID TestWithDump CallAncestorTest
    then
     BEGIN
      l_AncestorMember
+     pop:Word:Name
      .
     END
   )
