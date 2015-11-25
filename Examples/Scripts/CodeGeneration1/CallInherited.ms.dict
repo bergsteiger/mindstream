@@ -17,14 +17,14 @@ TtfwWord FUNCTION find.inherited
  Result IsNil ! ?ASSURE [ 'Не найден предок для ' Self |N ]
 ; // find.inherited
 
-STACK_CHANGING_MACRO compile.inherited
+: compile.inherited
   TtfwWord IN Self
  Self find.inherited CompileValue
 ; // compile.inherited
 
 : call.inherited.do
  Ctx:WordDefiningNow
- axiom:PushSymbol compile.inherited
+ compile.inherited
 ; // call.inherited.do
 
 STACK_CHANGING_MACRO .inherited
@@ -33,5 +33,6 @@ STACK_CHANGING_MACRO .inherited
 
 STACK_CHANGING_MACRO call.inherited
  'Self' Ctx:Parser:PushSymbol
- call.inherited.do
+ axiom:PushSymbol [EXECUTE]
+ axiom:PushSymbol call.inherited.do
 ; // call.inherited
