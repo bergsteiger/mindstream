@@ -46,7 +46,8 @@ Test&Dump CallInheritedTest
   Inherits D
 
   Self 5 +
-  call.inherited +
+  Self .inherited +
+  //call.inherited +
  ; // E
 
  1 A .
