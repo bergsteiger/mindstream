@@ -11,7 +11,11 @@ VOID TestWithDump CallAncestorTest
   IsNil
   !
   ?ASSURE
-  'No name for word calling .call.ancestor'
+  ARRAY [
+   'No name for word calling '
+   .call.ancestor
+   pop:Word:Name
+  ]
   Ctx:WordDefiningNow
   pop:Word:Parent
   l_WordParent
