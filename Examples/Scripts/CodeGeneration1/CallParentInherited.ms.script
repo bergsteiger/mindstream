@@ -10,6 +10,9 @@ USES
 
 Test&Dump CallParentInheritedTest
 
+ MACRO call.ancestor
+ ; // call.ancestor
+
  : A
   : X
     INTEGER IN aValue

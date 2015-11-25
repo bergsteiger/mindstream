@@ -25,6 +25,9 @@ VOID TestWithDump CallParentInheritedTest
   
  ; // : B
  
+ IMMEDIATE VOID MACRO call.ancestor
+ ; // IMMEDIATE VOID MACRO call.ancestor
+ 
  CallParentInheritedTest
  DumpElement
  1
