@@ -1,5 +1,5 @@
 X
-TkwCompiledProcedure
+A
 VOID TestWithDump CallAncestorTest
  IMMEDIATE VOID MACRO .call.ancestor
   Ctx:KeyWordDefiningNow
@@ -9,6 +9,7 @@ VOID TestWithDump CallAncestorTest
   pop:Word:Parent
   .Inherited.Words
   (
+   pop:Word:Name
    DUP
    Msg
    .
