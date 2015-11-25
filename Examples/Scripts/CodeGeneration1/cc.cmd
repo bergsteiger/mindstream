@@ -1,2 +1,2 @@
 call ..\clear.cmd
-call c.cmd CallParentInherited.ms.script
+call c.cmd CallAncestor.ms.script
