@@ -25,7 +25,7 @@ MACRO .inherited
  call.inherited.do
 ; // .inherited
 
-STACK_CHANGING_MACRO call.inherited
+MACRO call.inherited
  Ctx:WordDefiningNow %% 'Self' CompileValue
  call.inherited.do
 ; // call.inherited
