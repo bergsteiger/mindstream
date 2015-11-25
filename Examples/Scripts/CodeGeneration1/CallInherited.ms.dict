@@ -28,6 +28,10 @@ PROCEDURE call.inherited.do
  axiom:PushSymbol compile.inherited
 ; // call.inherited.do
 
+MACRO .inherited
+ call.inherited.do
+; // .inherited
+
 MACRO call.inherited
  'Self' Ctx:Parser:PushSymbol
  call.inherited.do
