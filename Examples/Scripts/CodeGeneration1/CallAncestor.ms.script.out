@@ -1,4 +1,4 @@
-VOID TestWithDump CallParentInheritedTest
+VOID TestWithDump CallAncestorTest
  : A
   : X
    INTEGER IN aValue
@@ -28,7 +28,7 @@ VOID TestWithDump CallParentInheritedTest
  IMMEDIATE VOID MACRO call.ancestor
  ; // IMMEDIATE VOID MACRO call.ancestor
  
- CallParentInheritedTest
+ CallAncestorTest
  DumpElement
  1
  A ::
@@ -38,7 +38,7 @@ VOID TestWithDump CallParentInheritedTest
  B ::
  'X'
  .
-; // VOID TestWithDump CallParentInheritedTest
+; // VOID TestWithDump CallAncestorTest
 
 2
 5

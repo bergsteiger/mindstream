@@ -8,7 +8,7 @@ USES
  Testing.ms.dict
 ;
 
-Test&Dump CallParentInheritedTest
+Test&Dump CallAncestorTest
 
  MACRO call.ancestor
  ; // call.ancestor
@@ -30,6 +30,6 @@ Test&Dump CallParentInheritedTest
  1 A :: X .
  2 B :: X .
 
-; // CallParentInheritedTest
+; // CallAncestorTest
 
-CallParentInheritedTest
+CallAncestorTest
