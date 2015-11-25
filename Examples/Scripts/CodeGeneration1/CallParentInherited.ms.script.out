@@ -1,4 +1,10 @@
 VOID TestWithDump CallParentInheritedTest
+ : A
+ ; // : A
+ 
+ : B
+ ; // : B
+ 
  CallParentInheritedTest
  DumpElement
 ; // VOID TestWithDump CallParentInheritedTest
