@@ -20,8 +20,7 @@ Test&Dump CallParentInheritedTest
  : B
   : X
     INTEGER IN aValue
-   aValue 2 +
-   A :: X
+   aValue 2 + A :: X
   ; // X
  ; // B
 
