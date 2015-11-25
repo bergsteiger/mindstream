@@ -6508,8 +6508,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CallInherited
 IMMEDIATE VOID OPERATOR :: MACRO : .inherited
 IMMEDIATE VOID OPERATOR :: MACRO : call.inherited
 : : call.inherited.do
- TtfwWord FUNCTION : find.inherited
-  TtfwWord FUNCTION :: find.inherited : Result
+ PRIVATE TtfwWord FUNCTION : find.inherited
+  PRIVATE TtfwWord FUNCTION :: find.inherited : Result
   TtfwWord OPERATOR :: IN : Self
  ; // find.inherited
 ; // call.inherited.do

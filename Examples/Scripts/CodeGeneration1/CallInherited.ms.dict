@@ -8,7 +8,7 @@ USES
 
 : call.inherited.do
 
- TtfwWord FUNCTION find.inherited
+ PRIVATE TtfwWord FUNCTION find.inherited
    TtfwWord IN Self
   nil >>> Result
   Self .Inherited.Words .for> (
