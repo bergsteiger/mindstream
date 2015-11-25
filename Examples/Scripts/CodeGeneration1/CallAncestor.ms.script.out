@@ -33,12 +33,16 @@ VOID TestWithDump CallAncestorTest
   .Inherited.Words
   (
    TtfwWord IN l_Ancestor
+   VAR l_AncestorMember
    l_Ancestor
    pop:Word:Name
    .
    l_Ancestor
    %%
    l_WordName
+   l_AncestorMember
+   pop:Word:SetValue
+   l_AncestorMember
    .
   )
   SWAP
