@@ -3,6 +3,7 @@ A
 VOID TestWithDump CallAncestorTest
  IMMEDIATE VOID MACRO .call.ancestor
   STRING VAR l_WordName
+  TtfwWord VAR l_WordParent
   Ctx:KeyWordDefiningNow
   pop:KeyWord:Name
   l_WordName
@@ -11,6 +12,9 @@ VOID TestWithDump CallAncestorTest
   .
   Ctx:WordDefiningNow
   pop:Word:Parent
+  l_WordParent
+  pop:Word:SetValue
+  l_WordParent
   .Inherited.Words
   (
    pop:Word:Name

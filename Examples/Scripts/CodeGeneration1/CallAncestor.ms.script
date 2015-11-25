@@ -18,7 +18,11 @@ Test&Dump CallAncestorTest
   STRING VAR l_WordName
   Ctx:KeyWordDefiningNow pop:KeyWord:Name >>> l_WordName
   l_WordName .
-  Ctx:WordDefiningNow pop:Word:Parent .Inherited.Words .for> ( pop:Word:Name . )
+
+  TtfwWord VAR l_WordParent
+  Ctx:WordDefiningNow pop:Word:Parent >>> l_WordParent
+
+  l_WordParent .Inherited.Words .for> ( pop:Word:Name . )
  ; // .call.ancestor
 
  : A
