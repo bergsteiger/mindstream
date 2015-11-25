@@ -27,7 +27,7 @@ Test&Dump CallAncestorTest
    TtfwWord IN l_Ancestor
    l_Ancestor pop:Word:Name .
 
-   VAR l_AncestorMember 
+   TtfwWord VAR l_AncestorMember 
    l_Ancestor %% l_WordName >>> l_AncestorMember
    l_AncestorMember .
   )
