@@ -6418,6 +6418,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CallInherited.ms.dict
  ;
 VOID OPERATOR :: MACRO :: elem_generator : .c++
  OPERATOR :: MACRO :: NamedCodeProducer :: Inherits : %G
@@ -6459,12 +6460,59 @@ VOID OPERATOR :: MACRO :: elem_generator : .script
  STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
  ModelElement OPERATOR :: IN : Self
 ; // .script
-IMMEDIATE VOID OPERATOR :: MACRO : call.inherited
 STRING FUNCTION : CatSepIndent>
  ^ OPERATOR :: IN : _aValues
  IMMEDIATE VOID OPERATOR : aValues
  STRING FUNCTION :: CatSepIndent> : Result
 ; // CatSepIndent>
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CallInherited.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
+  axiom:Tl3TokenType
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Sequence
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: MACRO : call.inherited
+IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : compile.inherited
+ TtfwWord OPERATOR :: IN : Self
+; // compile.inherited
+TtfwWord FUNCTION : find.inherited
+ TtfwWord FUNCTION :: find.inherited : Result
+ TtfwWord OPERATOR :: IN : Self
+; // find.inherited
 TkwMain : Main
  VOID OPERATOR :: MACRO :: TestWithDump : CodeGen
 ; // Main
