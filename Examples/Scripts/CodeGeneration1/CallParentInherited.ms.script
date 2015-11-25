@@ -7,9 +7,13 @@ USES
 Test&Dump CallParentInheritedTest
 
  : A
+  : X
+  ; // X
  ; // A
 
  : B
+  : X
+  ; // X
  ; // B
 
 ; // CallParentInheritedTest
