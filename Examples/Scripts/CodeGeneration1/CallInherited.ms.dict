@@ -32,7 +32,8 @@ STACK_CHANGING_MACRO .inherited
 ; // .inherited
 
 STACK_CHANGING_MACRO call.inherited
- 'Self' Ctx:Parser:PushSymbol
+ Ctx:WordDefiningNow %% 'Self' CompileValue
+ // 'Self' Ctx:Parser:PushSymbol
  axiom:PushSymbol [EXECUTE]
  axiom:PushSymbol call.inherited.do
 ; // call.inherited
