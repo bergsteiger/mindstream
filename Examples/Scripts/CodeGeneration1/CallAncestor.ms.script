@@ -11,7 +11,7 @@ USES
 Test&Dump CallAncestorTest
 
  MACRO .call.ancestor
-  Ctx:WordDefiningNow pop:Word:Parent pop:Word:Name .
+  Ctx:WordDefiningNow pop:Word:Parent .
  ; // .call.ancestor
 
  : A

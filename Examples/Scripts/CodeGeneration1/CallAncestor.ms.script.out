@@ -1,9 +1,8 @@
-:
+TkwCompiledProcedure
 VOID TestWithDump CallAncestorTest
  IMMEDIATE VOID MACRO .call.ancestor
   Ctx:WordDefiningNow
   pop:Word:Parent
-  pop:Word:Name
   .
  ; // IMMEDIATE VOID MACRO .call.ancestor
  
