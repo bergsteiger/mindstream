@@ -24,7 +24,9 @@ Test&Dump CallAncestorTest
   Ctx:WordDefiningNow pop:Word:Parent >>> l_WordParent
   l_WordParent IsNil ! ?ASSURE [ 'No parent for ' l_WordName ]
 
-  l_WordParent .Inherited.Words .for> ( pop:Word:Name . )
+  l_WordParent .Inherited.Words .for> ( 
+   pop:Word:Name . 
+  )
  ; // .call.ancestor
 
  : A
