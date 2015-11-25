@@ -6508,9 +6508,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CallInherited
 IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : .inherited
 IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : call.inherited
 : : call.inherited.do
-: : compile.inherited
- TtfwWord OPERATOR :: IN : Self
-; // compile.inherited
 TtfwWord FUNCTION : find.inherited
  TtfwWord FUNCTION :: find.inherited : Result
  TtfwWord OPERATOR :: IN : Self
