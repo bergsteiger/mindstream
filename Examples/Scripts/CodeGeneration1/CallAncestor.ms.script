@@ -23,6 +23,9 @@ Test&Dump CallAncestorTest
   Ctx:WordDefiningNow pop:Word:Parent >>> l_WordParent
   l_WordParent IsNil ! ?ASSURE [ 'No parent for ' l_WordName ]
 
+  TtfwWord VAR l_FoundWord
+  nil >>> l_FoundWord
+
   l_WordParent .Inherited.Words .for> ( 
    TtfwWord IN l_Ancestor
    l_Ancestor pop:Word:Name Log

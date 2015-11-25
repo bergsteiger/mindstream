@@ -2,6 +2,7 @@ A
 X
 VOID TestWithDump CallAncestorTest
  IMMEDIATE VOID MACRO .call.ancestor
+  TtfwWord VAR l_FoundWord
   STRING VAR l_WordName
   TtfwWord VAR l_WordParent
   Ctx:KeyWordDefiningNow
@@ -29,6 +30,9 @@ VOID TestWithDump CallAncestorTest
    'No parent for '
    l_WordName
   ]
+  nil
+  l_FoundWord
+  pop:Word:SetValue
   l_WordParent
   .Inherited.Words
   (
