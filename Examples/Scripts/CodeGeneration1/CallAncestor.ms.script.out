@@ -1,4 +1,5 @@
 A
+TkwCompiledProcedure
 VOID TestWithDump CallAncestorTest
  IMMEDIATE VOID MACRO .call.ancestor
   STRING VAR l_WordName
@@ -34,6 +35,10 @@ VOID TestWithDump CallAncestorTest
    TtfwWord IN l_Ancestor
    l_Ancestor
    pop:Word:Name
+   .
+   l_Ancestor
+   %%
+   l_WordName
    .
   )
   SWAP
