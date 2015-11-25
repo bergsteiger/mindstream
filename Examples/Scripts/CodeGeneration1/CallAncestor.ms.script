@@ -11,6 +11,9 @@ USES
 Test&Dump CallAncestorTest
 
  MACRO .call.ancestor
+  STRING VAR l_WordName
+  Ctx:WordDefiningNow |N >>> l_WordName
+  l_WordName .
  ; // .call.ancestor
 
  : A

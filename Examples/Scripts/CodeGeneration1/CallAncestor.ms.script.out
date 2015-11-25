@@ -1,5 +1,13 @@
+:
 VOID TestWithDump CallAncestorTest
  IMMEDIATE VOID MACRO .call.ancestor
+  STRING VAR l_WordName
+  Ctx:WordDefiningNow
+  |N
+  l_WordName
+  pop:Word:SetValue
+  l_WordName
+  .
  ; // IMMEDIATE VOID MACRO .call.ancestor
  
  : A
