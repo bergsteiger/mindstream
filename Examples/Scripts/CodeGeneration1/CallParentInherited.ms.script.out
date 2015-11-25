@@ -19,7 +19,6 @@ VOID TestWithDump CallParentInheritedTest
     A ::
     'X'
    )
-   +
   ; // : X
   
  ; // : B
@@ -37,4 +36,4 @@ VOID TestWithDump CallParentInheritedTest
 ; // VOID TestWithDump CallParentInheritedTest
 
 2
-CallParentInherited.ms.script : Ошибка выполнения: "Ошибка при получении параметра aA: TtfwStackValue : Стек пустой". Главный файл: CallParentInherited.ms.script. Класс: TkwAdd. Слово: +
+4
