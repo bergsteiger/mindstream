@@ -15,6 +15,14 @@ VOID TestWithDump CallAncestorTest
   l_WordParent
   pop:Word:SetValue
   l_WordParent
+  IsNil
+  !
+  ?ASSURE
+  ARRAY [
+   'No parent for '
+   l_WordName
+  ]
+  l_WordParent
   .Inherited.Words
   (
    pop:Word:Name
