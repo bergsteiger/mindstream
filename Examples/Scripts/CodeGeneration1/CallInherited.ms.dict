@@ -24,8 +24,6 @@ STACK_CHANGING_MACRO compile.inherited
 
 : call.inherited.do
  Ctx:WordDefiningNow
- // axiom:PushSymbol [EXECUTE]
- // '@SELF' Ctx:Parser:PushSymbol
  axiom:PushSymbol compile.inherited
 ; // call.inherited.do
 
