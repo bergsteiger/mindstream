@@ -1,12 +1,14 @@
 VOID TestWithDump CallParentInheritedTest
  : A
   : X
+   1
   ; // : X
   
  ; // : A
  
  : B
   : X
+   2
   ; // : X
   
  ; // : B
@@ -15,7 +17,11 @@ VOID TestWithDump CallParentInheritedTest
  DumpElement
  A ::
  'X'
+ .
  B ::
  'X'
+ .
 ; // VOID TestWithDump CallParentInheritedTest
 
+1
+2

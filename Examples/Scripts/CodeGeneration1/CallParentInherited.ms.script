@@ -8,16 +8,18 @@ Test&Dump CallParentInheritedTest
 
  : A
   : X
+   1
   ; // X
  ; // A
 
  : B
   : X
+   2
   ; // X
  ; // B
 
- A :: X
- B :: X
+ A :: X .
+ B :: X .
 
 ; // CallParentInheritedTest
 
