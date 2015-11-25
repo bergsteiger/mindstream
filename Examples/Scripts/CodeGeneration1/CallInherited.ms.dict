@@ -21,7 +21,7 @@ TtfwWord FUNCTION find.inherited
  Ctx:WordDefiningNow find.inherited CompileValue
 ; // call.inherited.do
 
-STACK_CHANGING_MACRO .inherited
+MACRO .inherited
  call.inherited.do
 ; // .inherited
 

@@ -6505,7 +6505,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CallInherited
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
  ;
-IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : .inherited
+IMMEDIATE VOID OPERATOR :: MACRO : .inherited
 IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : call.inherited
 : : call.inherited.do
 TtfwWord FUNCTION : find.inherited
