@@ -1,6 +1,9 @@
+TtfwKeyWord
 TkwCompiledProcedure
 VOID TestWithDump CallAncestorTest
  IMMEDIATE VOID MACRO .call.ancestor
+  Ctx:KeyWordDefiningNow
+  .
   Ctx:WordDefiningNow
   pop:Word:Parent
   .Inherited.Words
