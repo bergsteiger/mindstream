@@ -30,6 +30,8 @@ VOID TestWithDump CallAncestorTest
   l_WordParent
   .Inherited.Words
   (
+   TtfwWord IN l_Ancestor
+   l_Ancestor
    pop:Word:Name
    .
   )

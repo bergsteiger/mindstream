@@ -25,7 +25,8 @@ Test&Dump CallAncestorTest
   l_WordParent IsNil ! ?ASSURE [ 'No parent for ' l_WordName ]
 
   l_WordParent .Inherited.Words .for> ( 
-   pop:Word:Name . 
+   TtfwWord IN l_Ancestor
+   l_Ancestor pop:Word:Name . 
   )
  ; // .call.ancestor
 
