@@ -17,11 +17,6 @@ TtfwWord FUNCTION find.inherited
  Result IsNil ! ?ASSURE [ 'Не найден предок для ' Self |N ]
 ; // find.inherited
 
-: compile.inherited
-  TtfwWord IN Self
- Self find.inherited CompileValue
-; // compile.inherited
-
 : call.inherited.do
  Ctx:WordDefiningNow find.inherited CompileValue
 ; // call.inherited.do
