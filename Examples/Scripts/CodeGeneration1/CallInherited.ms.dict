@@ -1,0 +1,33 @@
+UNIT CallInherited.ms.dict
+
+USES
+ axiom_push.ms.dict
+ WordsRTTI.ms.dict
+ classRelations.ms.dict
+ Testing.ms.dict
+;
+
+TtfwWord FUNCTION find.inherited
+  TtfwWord IN Self
+ nil >>> Result
+ Self .Inherited.Words .for> (
+  TtfwWord IN anAncestor
+  Result IsNil ?ASSURE [ 'Множественное наследование не поддерживается для ' Self |N ' второй предок ' anAncestor |N ]
+  anAncestor >>> Result
+ )
+ Result IsNil ! ?ASSURE [ 'Не найден предок для ' Self |N ]
+; // find.inherited
+
+STACK_CHANGING_MACRO compile.inherited
+  TtfwWord IN Self
+ Self find.inherited CompileValue
+; // compile.inherited
+
+MACRO call.inherited
+ // - понятно, что это надо делать через честную компиляцию ссылки на Inherited
+                              
+ 'Self' Ctx:Parser:PushSymbol
+ axiom:PushSymbol [EXECUTE]
+ '@SELF' Ctx:Parser:PushSymbol
+ axiom:PushSymbol compile.inherited
+; // call.inherited
