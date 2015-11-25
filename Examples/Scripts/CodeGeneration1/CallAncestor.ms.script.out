@@ -42,8 +42,17 @@ VOID TestWithDump CallAncestorTest
    l_WordName
    l_AncestorMember
    pop:Word:SetValue
-   l_AncestorMember
-   .
+   if
+    (
+     l_AncestorMember
+     IsNil
+     !
+    )
+   then
+    BEGIN
+     l_AncestorMember
+     .
+    END
   )
   SWAP
   Array:Iterate
