@@ -34,24 +34,6 @@ VOID TestWithDump CallInheritedTest
   +
  ; // : C
  
- IMMEDIATE VOID MACRO call.inherited
-  'Self'
-  Ctx:Parser:PushSymbol
-  axiom:PushSymbol
-  [EXECUTE]
-  '@SELF'
-  Ctx:Parser:PushSymbol
-  axiom:PushSymbol
-  compile.inherited
- ; // IMMEDIATE VOID MACRO call.inherited
- 
- IMMEDIATE STACK_CHANGING_MACRO compile.inherited
-  TtfwWord IN Self
-  Self
-  find.inherited
-  CompileValue
- ; // IMMEDIATE STACK_CHANGING_MACRO compile.inherited
- 
  : D
   Inherits %G
    C
@@ -79,43 +61,6 @@ VOID TestWithDump CallInheritedTest
   D
   +
  ; // : E
- 
- TtfwWord FUNCTION find.inherited
-  TtfwWord IN Self
-  nil
-  Result
-  pop:Word:SetValue
-  Self
-  .Inherited.Words
-  (
-   TtfwWord IN anAncestor
-   Result
-   IsNil
-   ?ASSURE
-   ARRAY [
-    'Множественное наследование не поддерживается для '
-    Self
-    |N
-    ' второй предок '
-    anAncestor
-    |N
-   ]
-   anAncestor
-   Result
-   pop:Word:SetValue
-  )
-  SWAP
-  Array:Iterate
-  Result
-  IsNil
-  !
-  ?ASSURE
-  ARRAY [
-   'Не найден предок для '
-   Self
-   |N
-  ]
- ; // TtfwWord FUNCTION find.inherited
  
  CallInheritedTest
  DumpElement
