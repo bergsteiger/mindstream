@@ -9,6 +9,9 @@ VOID TestWithDump CallParentInheritedTest
  : B
   : X
    2
+   A ::
+   'X'
+   +
   ; // : X
   
  ; // : B
@@ -24,4 +27,4 @@ VOID TestWithDump CallParentInheritedTest
 ; // VOID TestWithDump CallParentInheritedTest
 
 1
-2
+3
