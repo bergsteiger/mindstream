@@ -22,9 +22,13 @@ STACK_CHANGING_MACRO compile.inherited
  Self find.inherited CompileValue
 ; // compile.inherited
 
-MACRO call.inherited
- 'Self' Ctx:Parser:PushSymbol
+PROCEDURE call.inherited.do
  axiom:PushSymbol [EXECUTE]
  '@SELF' Ctx:Parser:PushSymbol
  axiom:PushSymbol compile.inherited
+; // call.inherited.do
+
+MACRO call.inherited
+ 'Self' Ctx:Parser:PushSymbol
+ call.inherited.do
 ; // call.inherited
