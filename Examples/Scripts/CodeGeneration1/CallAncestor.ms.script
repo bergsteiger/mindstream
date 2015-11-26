@@ -39,6 +39,7 @@ Test&Dump CallAncestorTest
   ) // l_WordParent .Inherited.Words .for>
 
   l_FoundWord IsNil ! ?ASSURE [ 'Method ' l_WordName ' not found in ' l_WordParent pop:Word:Name ]
+  l_FoundWord CompileValue
  ; // .call.ancestor
 
  : A

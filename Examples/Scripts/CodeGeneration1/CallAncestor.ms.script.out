@@ -78,6 +78,8 @@ VOID TestWithDump CallAncestorTest
    l_WordParent
    pop:Word:Name
   ]
+  l_FoundWord
+  CompileValue
  ; // IMMEDIATE VOID MACRO .call.ancestor
  
  : A
@@ -100,6 +102,7 @@ VOID TestWithDump CallAncestorTest
    aValue
    2
    +
+   X
    A ::
    'X'
   ; // : X
@@ -119,4 +122,4 @@ VOID TestWithDump CallAncestorTest
 ; // VOID TestWithDump CallAncestorTest
 
 2
-5
+6
