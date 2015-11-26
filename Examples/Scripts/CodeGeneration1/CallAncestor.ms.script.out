@@ -97,6 +97,7 @@ VOID TestWithDump CallAncestorTest
  ; // VOID PROCEDURE .call.ancestor.do
  
  TtfwWord FUNCTION .find.ancestor.method
+  TtfwWord IN aWhereToSearch
   STRING IN aWordName
   nil
   Result
