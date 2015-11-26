@@ -55,6 +55,13 @@ Test&Dump CallAncestorTest
   ; // X
  ; // B
 
+ : C // Inherits A
+  : X
+    INTEGER IN aValue
+   aValue 2 + .call.ancestor A :: X
+  ; // X
+ ; // C
+
  1 A :: X .
  2 B :: X .
 
