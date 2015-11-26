@@ -111,6 +111,13 @@ VOID TestWithDump CallAncestorTest
    )
   then
    BEGIN
+    aWhereToSearch
+    .Inherited.Words
+    (
+     TtfwWord IN anAncestor
+    )
+    SWAP
+    Array:Iterate
    END
  ; // TtfwWord FUNCTION .find.ancestor.method
  
