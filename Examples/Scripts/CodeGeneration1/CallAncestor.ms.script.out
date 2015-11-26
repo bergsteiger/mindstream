@@ -190,10 +190,6 @@ VOID TestWithDump CallAncestorTest
  B ::
  'X'
  .
- 3
- C ::
- 'X'
- .
  4
  D ::
  'X'
@@ -202,4 +198,4 @@ VOID TestWithDump CallAncestorTest
 
 2
 5
-CallAncestor.ms.script : OPERATOR :: (Line 1866, kwMain.script) |=> Не найдено поле: TkwCompiledMain::CallAncestorTest::C::X
+11
