@@ -46,27 +46,7 @@ Test&Dump CallAncestorTest
   Ctx:KeyWordDefiningNow pop:KeyWord:Name >>> l_WordName
   l_WordName IsNil ! ?ASSURE [ 'No name for word calling ' @SELF pop:Word:Name ]
 
-  TtfwWord VAR l_WordParent
-  Ctx:WordDefiningNow pop:Word:Parent >>> l_WordParent
-  l_WordParent IsNil ! ?ASSURE [ 'No parent for ' l_WordName ]
-
-  TtfwWord VAR l_FoundWord
-  nil >>> l_FoundWord
-
-  l_WordParent .Inherited.Words .for> ( 
-   TtfwWord IN l_Ancestor
-
-   TtfwWord VAR l_AncestorMember 
-   l_Ancestor %% l_WordName >>> l_AncestorMember
-   if ( l_AncestorMember IsNil ! ) then
-   begin
-    l_FoundWord IsNil ?ASSURE [ 'Method ' l_WordName ' was already found in ' l_FoundWord pop:Word:Parent pop:Word:Name ]
-    l_AncestorMember >>> l_FoundWord
-   end // l_AncestorMember IsNil !
-  ) // l_WordParent .Inherited.Words .for>
-
-  l_FoundWord IsNil ! ?ASSURE [ 'Method ' l_WordName ' not found in ' l_WordParent pop:Word:Name ]
-  l_FoundWord CompileValue
+  l_WordName Ctx:WordDefiningNow .call.ancestor.do
  ; // .call.ancestor
 
  : A
