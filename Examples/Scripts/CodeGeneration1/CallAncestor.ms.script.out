@@ -99,9 +99,55 @@ VOID TestWithDump CallAncestorTest
  TtfwWord FUNCTION .find.ancestor.method
   TtfwWord IN aWhereToSearch
   STRING IN aWordName
+  TtfwWord VAR l_FoundWord
   nil
   Result
   pop:Word:SetValue
+  nil
+  l_FoundWord
+  pop:Word:SetValue
+  aWhereToSearch
+  .Inherited.Words
+  (
+   TtfwWord IN l_Ancestor
+   TtfwWord VAR l_AncestorMember
+   l_Ancestor
+   %%
+   aWordName
+   l_AncestorMember
+   pop:Word:SetValue
+   if
+    (
+     l_AncestorMember
+     IsNil
+     !
+    )
+   then
+    BEGIN
+     l_FoundWord
+     IsNil
+     OR
+     (
+      l_AncestorMember
+      =
+      l_FoundWord
+     )
+     ?ASSURE
+     ARRAY [
+      'Method '
+      aWordName
+      ' was already found in '
+      l_FoundWord
+      pop:Word:Parent
+      pop:Word:Name
+     ]
+     l_AncestorMember
+     l_FoundWord
+     pop:Word:SetValue
+    END
+  )
+  SWAP
+  Array:Iterate
  ; // TtfwWord FUNCTION .find.ancestor.method
  
  : A

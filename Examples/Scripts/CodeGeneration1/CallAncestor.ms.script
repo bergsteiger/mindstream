@@ -17,7 +17,25 @@ Test&Dump CallAncestorTest
  TtfwWord FUNCTION .find.ancestor.method
    STRING IN aWordName
    TtfwWord IN aWhereToSearch
+
   nil >>> Result
+
+  TtfwWord VAR l_FoundWord
+  nil >>> l_FoundWord
+  
+  aWhereToSearch .Inherited.Words .for> ( 
+   TtfwWord IN l_Ancestor
+
+   TtfwWord VAR l_AncestorMember 
+   l_Ancestor %% aWordName >>> l_AncestorMember
+   if ( l_AncestorMember IsNil ! ) then
+   begin
+    l_FoundWord IsNil OR ( l_AncestorMember = l_FoundWord ) 
+     ?ASSURE 
+      [ 'Method ' aWordName ' was already found in ' l_FoundWord pop:Word:Parent pop:Word:Name ]
+    l_AncestorMember >>> l_FoundWord
+   end // l_AncestorMember IsNil !
+  ) // aWhereToSearch .Inherited.Words .for>
  ; // .find.ancestor.method
 
  PROCEDURE .call.ancestor.do
@@ -30,7 +48,7 @@ Test&Dump CallAncestorTest
 
   TtfwWord VAR l_FoundWord
   nil >>> l_FoundWord
-
+  
   l_WordParent .Inherited.Words .for> ( 
    TtfwWord IN l_Ancestor
 
