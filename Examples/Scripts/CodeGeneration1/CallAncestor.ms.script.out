@@ -1,4 +1,3 @@
-X
 VOID TestWithDump CallAncestorTest
  IMMEDIATE VOID MACRO .call.ancestor
   TtfwWord VAR l_FoundWord
@@ -64,9 +63,6 @@ VOID TestWithDump CallAncestorTest
      l_AncestorMember
      l_FoundWord
      pop:Word:SetValue
-     l_FoundWord
-     pop:Word:Name
-     .
     END
   )
   SWAP
