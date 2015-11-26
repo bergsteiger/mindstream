@@ -146,6 +146,21 @@ VOID TestWithDump CallAncestorTest
   
  ; // : C
  
+ : D
+  Inherits %G
+   C
+  ; // Inherits %G
+  
+  : X
+   INTEGER IN aValue
+   aValue
+   2
+   +
+   X
+  ; // : X
+  
+ ; // : D
+ 
  CallAncestorTest
  DumpElement
  1

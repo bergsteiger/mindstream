@@ -79,12 +79,12 @@ Test&Dump CallAncestorTest
   ; // X
  ; // C
 
-/*{ : C // Inherits A
+ : D Inherits C
   : X
     INTEGER IN aValue
    aValue 2 + .call.ancestor
   ; // X
- ; // C}*/
+ ; // D
 
  1 A :: X .
  2 B :: X .
