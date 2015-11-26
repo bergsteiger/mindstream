@@ -33,6 +33,10 @@ Test&Dump CallAncestorTest
     l_AncestorMember >>> Result
    end // l_AncestorMember IsNil !
   ) // aWhereToSearch .Inherited.Words .for>
+
+  if ( Result IsNil ) then
+  begin
+  end // Result IsNil
  ; // .find.ancestor.method
 
  PROCEDURE .call.ancestor.do

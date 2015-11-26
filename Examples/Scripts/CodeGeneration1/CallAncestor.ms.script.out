@@ -104,6 +104,14 @@ VOID TestWithDump CallAncestorTest
   )
   SWAP
   Array:Iterate
+  if
+   (
+    Result
+    IsNil
+   )
+  then
+   BEGIN
+   END
  ; // TtfwWord FUNCTION .find.ancestor.method
  
  : A
