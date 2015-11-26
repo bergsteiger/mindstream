@@ -82,6 +82,89 @@ VOID TestWithDump CallAncestorTest
   CompileValue
  ; // IMMEDIATE VOID MACRO .call.ancestor
  
+ IMMEDIATE VOID MACRO .call.ancestor.do
+  TtfwWord VAR l_FoundWord
+  STRING VAR l_WordName
+  TtfwWord VAR l_WordParent
+  Ctx:KeyWordDefiningNow
+  pop:KeyWord:Name
+  l_WordName
+  pop:Word:SetValue
+  l_WordName
+  IsNil
+  !
+  ?ASSURE
+  ARRAY [
+   'No name for word calling '
+   .call.ancestor.do
+   pop:Word:Name
+  ]
+  Ctx:WordDefiningNow
+  pop:Word:Parent
+  l_WordParent
+  pop:Word:SetValue
+  l_WordParent
+  IsNil
+  !
+  ?ASSURE
+  ARRAY [
+   'No parent for '
+   l_WordName
+  ]
+  nil
+  l_FoundWord
+  pop:Word:SetValue
+  l_WordParent
+  .Inherited.Words
+  (
+   TtfwWord IN l_Ancestor
+   TtfwWord VAR l_AncestorMember
+   l_Ancestor
+   %%
+   l_WordName
+   l_AncestorMember
+   pop:Word:SetValue
+   if
+    (
+     l_AncestorMember
+     IsNil
+     !
+    )
+   then
+    BEGIN
+     l_FoundWord
+     IsNil
+     ?ASSURE
+     ARRAY [
+      'Method '
+      l_WordName
+      ' was already found in '
+      l_FoundWord
+      pop:Word:Parent
+      pop:Word:Name
+     ]
+     l_AncestorMember
+     l_FoundWord
+     pop:Word:SetValue
+    END
+  )
+  SWAP
+  Array:Iterate
+  l_FoundWord
+  IsNil
+  !
+  ?ASSURE
+  ARRAY [
+   'Method '
+   l_WordName
+   ' not found in '
+   l_WordParent
+   pop:Word:Name
+  ]
+  l_FoundWord
+  CompileValue
+ ; // IMMEDIATE VOID MACRO .call.ancestor.do
+ 
  : A
   : X
    INTEGER IN aValue
