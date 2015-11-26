@@ -15,6 +15,7 @@ USES
 Test&Dump CallAncestorTest
 
  TtfwWord FUNCTION .find.ancestor.method
+   STRING IN aWordName
   nil >>> Result
  ; // .find.ancestor.method
 
