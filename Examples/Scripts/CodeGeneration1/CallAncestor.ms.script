@@ -39,8 +39,8 @@ Test&Dump CallAncestorTest
    aWhereToSearch .Inherited.Words .for> ( 
     TtfwWord IN anAncestor
     TtfwWord VAR l_Found
-    //aWordName anAncestor call.me >>> l_Found
-    //l_Found anAncestor >>> Result 
+    aWordName anAncestor call.me >>> l_Found
+    l_Found >>> Result 
    ) // aWhereToSearch .Inherited.Words .for>
   end // Result IsNil
  ; // .find.ancestor.method
