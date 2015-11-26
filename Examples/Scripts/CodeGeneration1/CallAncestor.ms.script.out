@@ -180,6 +180,21 @@ VOID TestWithDump CallAncestorTest
   
  ; // : D
  
+ : E
+  Inherits %G
+   C
+  ; // Inherits %G
+  
+  : X
+   INTEGER IN aValue
+   aValue
+   4
+   +
+   X
+  ; // : X
+  
+ ; // : E
+ 
  CallAncestorTest
  DumpElement
  1
@@ -194,8 +209,13 @@ VOID TestWithDump CallAncestorTest
  D ::
  'X'
  .
+ 5
+ E ::
+ 'X'
+ .
 ; // VOID TestWithDump CallAncestorTest
 
 2
 5
 11
+12
