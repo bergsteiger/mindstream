@@ -36,51 +36,11 @@ VOID TestWithDump CallAncestorTest
    'No parent for '
    aWordName
   ]
-  nil
+  aWordName
+  l_WordParent
+  .find.ancestor.method
   l_FoundWord
   pop:Word:SetValue
-  l_WordParent
-  .Inherited.Words
-  (
-   TtfwWord IN l_Ancestor
-   TtfwWord VAR l_AncestorMember
-   l_Ancestor
-   %%
-   aWordName
-   l_AncestorMember
-   pop:Word:SetValue
-   if
-    (
-     l_AncestorMember
-     IsNil
-     !
-    )
-   then
-    BEGIN
-     l_FoundWord
-     IsNil
-     OR
-     (
-      l_AncestorMember
-      =
-      l_FoundWord
-     )
-     ?ASSURE
-     ARRAY [
-      'Method '
-      aWordName
-      ' was already found in '
-      l_FoundWord
-      pop:Word:Parent
-      pop:Word:Name
-     ]
-     l_AncestorMember
-     l_FoundWord
-     pop:Word:SetValue
-    END
-  )
-  SWAP
-  Array:Iterate
   l_FoundWord
   IsNil
   !

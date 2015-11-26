@@ -44,21 +44,7 @@ Test&Dump CallAncestorTest
   l_WordParent IsNil ! ?ASSURE [ 'No parent for ' aWordName ]
 
   TtfwWord VAR l_FoundWord
-  nil >>> l_FoundWord
-  
-  l_WordParent .Inherited.Words .for> ( 
-   TtfwWord IN l_Ancestor
-
-   TtfwWord VAR l_AncestorMember 
-   l_Ancestor %% aWordName >>> l_AncestorMember
-   if ( l_AncestorMember IsNil ! ) then
-   begin
-    l_FoundWord IsNil OR ( l_AncestorMember = l_FoundWord ) 
-     ?ASSURE 
-      [ 'Method ' aWordName ' was already found in ' l_FoundWord pop:Word:Parent pop:Word:Name ]
-    l_AncestorMember >>> l_FoundWord
-   end // l_AncestorMember IsNil !
-  ) // l_WordParent .Inherited.Words .for>
+  aWordName l_WordParent .find.ancestor.method >>> l_FoundWord
 
   l_FoundWord IsNil ! ?ASSURE [ 'Method ' aWordName ' not found in ' l_WordParent pop:Word:Name ]
   l_FoundWord CompileValue
