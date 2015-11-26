@@ -83,22 +83,9 @@ VOID TestWithDump CallAncestorTest
  ; // IMMEDIATE VOID MACRO .call.ancestor
  
  IMMEDIATE VOID MACRO .call.ancestor.do
+  STRING IN aWordName
   TtfwWord VAR l_FoundWord
-  STRING VAR l_WordName
   TtfwWord VAR l_WordParent
-  Ctx:KeyWordDefiningNow
-  pop:KeyWord:Name
-  l_WordName
-  pop:Word:SetValue
-  l_WordName
-  IsNil
-  !
-  ?ASSURE
-  ARRAY [
-   'No name for word calling '
-   .call.ancestor.do
-   pop:Word:Name
-  ]
   Ctx:WordDefiningNow
   pop:Word:Parent
   l_WordParent
@@ -109,7 +96,7 @@ VOID TestWithDump CallAncestorTest
   ?ASSURE
   ARRAY [
    'No parent for '
-   l_WordName
+   aWordName
   ]
   nil
   l_FoundWord
@@ -121,7 +108,7 @@ VOID TestWithDump CallAncestorTest
    TtfwWord VAR l_AncestorMember
    l_Ancestor
    %%
-   l_WordName
+   aWordName
    l_AncestorMember
    pop:Word:SetValue
    if
@@ -137,7 +124,7 @@ VOID TestWithDump CallAncestorTest
      ?ASSURE
      ARRAY [
       'Method '
-      l_WordName
+      aWordName
       ' was already found in '
       l_FoundWord
       pop:Word:Parent
@@ -156,7 +143,7 @@ VOID TestWithDump CallAncestorTest
   ?ASSURE
   ARRAY [
    'Method '
-   l_WordName
+   aWordName
    ' not found in '
    l_WordParent
    pop:Word:Name
