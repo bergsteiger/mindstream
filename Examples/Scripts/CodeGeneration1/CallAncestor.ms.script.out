@@ -54,6 +54,17 @@ VOID TestWithDump CallAncestorTest
     )
    then
     BEGIN
+     l_FoundWord
+     IsNil
+     ?ASSURE
+     ARRAY [
+      'Method '
+      l_WordName
+      ' was already found in '
+      l_FoundWord
+      pop:Word:Parent
+      pop:Word:Name
+     ]
      l_AncestorMember
      pop:Word:Name
      .
