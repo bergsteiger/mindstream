@@ -83,10 +83,11 @@ VOID TestWithDump CallAncestorTest
  ; // IMMEDIATE VOID MACRO .call.ancestor
  
  IMMEDIATE VOID MACRO .call.ancestor.do
+  TtfwWord IN aWord
   STRING IN aWordName
   TtfwWord VAR l_FoundWord
   TtfwWord VAR l_WordParent
-  Ctx:WordDefiningNow
+  aWord
   pop:Word:Parent
   l_WordParent
   pop:Word:SetValue

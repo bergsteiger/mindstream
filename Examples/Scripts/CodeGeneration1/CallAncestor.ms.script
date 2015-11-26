@@ -16,9 +16,10 @@ Test&Dump CallAncestorTest
 
  MACRO .call.ancestor.do
   STRING IN aWordName
+  TtfwWord IN aWord
 
   TtfwWord VAR l_WordParent
-  Ctx:WordDefiningNow pop:Word:Parent >>> l_WordParent
+  aWord pop:Word:Parent >>> l_WordParent
   l_WordParent IsNil ! ?ASSURE [ 'No parent for ' aWordName ]
 
   TtfwWord VAR l_FoundWord
