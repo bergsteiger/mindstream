@@ -59,6 +59,12 @@ VOID TestWithDump CallAncestorTest
     BEGIN
      l_FoundWord
      IsNil
+     OR
+     (
+      l_AncestorMember
+      =
+      l_FoundWord
+     )
      ?ASSURE
      ARRAY [
       'Method '
