@@ -90,6 +90,12 @@ VOID TestWithDump CallAncestorTest
   CompileValue
  ; // VOID PROCEDURE .call.ancestor.do
  
+ TtfwWord FUNCTION .find.ancestor.method
+  nil
+  Result
+  pop:Word:SetValue
+ ; // TtfwWord FUNCTION .find.ancestor.method
+ 
  : A
   : X
    INTEGER IN aValue
