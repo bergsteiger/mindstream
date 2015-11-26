@@ -66,6 +66,9 @@ VOID TestWithDump CallAncestorTest
       pop:Word:Name
      ]
      l_AncestorMember
+     l_FoundWord
+     pop:Word:SetValue
+     l_FoundWord
      pop:Word:Name
      .
     END

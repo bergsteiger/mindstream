@@ -35,7 +35,8 @@ Test&Dump CallAncestorTest
    if ( l_AncestorMember IsNil ! ) then
    begin
     l_FoundWord IsNil ?ASSURE [ 'Method ' l_WordName ' was already found in ' l_FoundWord pop:Word:Parent pop:Word:Name ]
-    l_AncestorMember pop:Word:Name Log
+    l_AncestorMember >>> l_FoundWord
+    l_FoundWord pop:Word:Name Log
    end // l_AncestorMember IsNil !
   ) // l_WordParent .Inherited.Words .for>
  ; // .call.ancestor
