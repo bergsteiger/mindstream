@@ -115,6 +115,18 @@ VOID TestWithDump CallAncestorTest
     .Inherited.Words
     (
      TtfwWord IN anAncestor
+     TtfwWord VAR l_Found
+     aWordName
+     (
+      .find.ancestor.method
+      DO
+     )
+     l_Found
+     pop:Word:SetValue
+     l_Found
+     anAncestor
+     Result
+     pop:Word:SetValue
     )
     SWAP
     Array:Iterate
