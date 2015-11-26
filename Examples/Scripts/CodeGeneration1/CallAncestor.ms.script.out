@@ -82,7 +82,7 @@ VOID TestWithDump CallAncestorTest
   CompileValue
  ; // IMMEDIATE VOID MACRO .call.ancestor
  
- IMMEDIATE VOID MACRO .call.ancestor.do
+ VOID PROCEDURE .call.ancestor.do
   TtfwWord IN aWord
   STRING IN aWordName
   TtfwWord VAR l_FoundWord
@@ -151,7 +151,7 @@ VOID TestWithDump CallAncestorTest
   ]
   l_FoundWord
   CompileValue
- ; // IMMEDIATE VOID MACRO .call.ancestor.do
+ ; // VOID PROCEDURE .call.ancestor.do
  
  : A
   : X

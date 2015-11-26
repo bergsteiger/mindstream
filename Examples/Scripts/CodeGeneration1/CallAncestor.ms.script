@@ -14,7 +14,7 @@ USES
 
 Test&Dump CallAncestorTest
 
- MACRO .call.ancestor.do
+ PROCEDURE .call.ancestor.do
   STRING IN aWordName
   TtfwWord IN aWord
 
