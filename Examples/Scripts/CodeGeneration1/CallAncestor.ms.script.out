@@ -99,12 +99,8 @@ VOID TestWithDump CallAncestorTest
  TtfwWord FUNCTION .find.ancestor.method
   TtfwWord IN aWhereToSearch
   STRING IN aWordName
-  TtfwWord VAR l_FoundWord
   nil
   Result
-  pop:Word:SetValue
-  nil
-  l_FoundWord
   pop:Word:SetValue
   aWhereToSearch
   .Inherited.Words
@@ -124,25 +120,25 @@ VOID TestWithDump CallAncestorTest
     )
    then
     BEGIN
-     l_FoundWord
+     Result
      IsNil
      OR
      (
       l_AncestorMember
       =
-      l_FoundWord
+      Result
      )
      ?ASSURE
      ARRAY [
       'Method '
       aWordName
       ' was already found in '
-      l_FoundWord
+      Result
       pop:Word:Parent
       pop:Word:Name
      ]
      l_AncestorMember
-     l_FoundWord
+     Result
      pop:Word:SetValue
     END
   )
