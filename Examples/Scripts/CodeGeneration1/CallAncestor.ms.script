@@ -28,7 +28,6 @@ Test&Dump CallAncestorTest
 
   l_WordParent .Inherited.Words .for> ( 
    TtfwWord IN l_Ancestor
-   l_Ancestor pop:Word:Name Log
 
    TtfwWord VAR l_AncestorMember 
    l_Ancestor %% l_WordName >>> l_AncestorMember

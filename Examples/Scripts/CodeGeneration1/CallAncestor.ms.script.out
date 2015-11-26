@@ -1,4 +1,3 @@
-A
 X
 VOID TestWithDump CallAncestorTest
  IMMEDIATE VOID MACRO .call.ancestor
@@ -38,9 +37,6 @@ VOID TestWithDump CallAncestorTest
   (
    TtfwWord IN l_Ancestor
    TtfwWord VAR l_AncestorMember
-   l_Ancestor
-   pop:Word:Name
-   .
    l_Ancestor
    %%
    l_WordName
