@@ -61,7 +61,7 @@ Test&Dump CallAncestorTest
  : A
   : X
     INTEGER IN aValue
-   aValue 3 +
+   aValue 1 +
   ; // X
  ; // A
 
@@ -75,14 +75,14 @@ Test&Dump CallAncestorTest
  : C Inherits B
   : X
     INTEGER IN aValue
-   aValue 2 + .call.ancestor
+   aValue 3 + .call.ancestor
   ; // X
  ; // C
 
  : D Inherits C
   : X
     INTEGER IN aValue
-   aValue 2 + .call.ancestor
+   aValue 4 + .call.ancestor
   ; // X
  ; // D
 

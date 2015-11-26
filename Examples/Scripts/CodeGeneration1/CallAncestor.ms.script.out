@@ -110,7 +110,7 @@ VOID TestWithDump CallAncestorTest
   : X
    INTEGER IN aValue
    aValue
-   3
+   1
    +
   ; // : X
   
@@ -139,7 +139,7 @@ VOID TestWithDump CallAncestorTest
   : X
    INTEGER IN aValue
    aValue
-   2
+   3
    +
    X
   ; // : X
@@ -154,7 +154,7 @@ VOID TestWithDump CallAncestorTest
   : X
    INTEGER IN aValue
    aValue
-   2
+   4
    +
    X
   ; // : X
@@ -177,6 +177,6 @@ VOID TestWithDump CallAncestorTest
  .
 ; // VOID TestWithDump CallAncestorTest
 
-4
-7
-10
+2
+5
+9
