@@ -67,6 +67,17 @@ VOID TestWithDump CallAncestorTest
   )
   SWAP
   Array:Iterate
+  l_FoundWord
+  IsNil
+  !
+  ?ASSURE
+  ARRAY [
+   'Method '
+   l_WordName
+   ' not found in '
+   l_WordParent
+   pop:Word:Name
+  ]
  ; // IMMEDIATE VOID MACRO .call.ancestor
  
  : A
