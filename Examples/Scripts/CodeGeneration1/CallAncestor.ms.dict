@@ -1,4 +1,8 @@
-PROGRAM CallAncestor.ms.script
+UNIT CallAncestor.ms.dict
+
+USES
+ core.ms.dict
+;
 
 USES
  classRelations.ms.dict
@@ -7,16 +11,6 @@ USES
 USES
  WordsRTTI.ms.dict
 ;
-
-USES
- CallAncestor.ms.dict
-;
-
-USES
- Testing.ms.dict
-;
-
-Test&Dump CallAncestorTest
 
  TtfwWord FUNCTION .find.ancestor.method
    STRING IN aWordName
@@ -98,44 +92,3 @@ Test&Dump CallAncestorTest
 
   l_WordName Ctx:WordDefiningNow .call.ancestor.do
  ; // .call.ancestor
-
- : A
-  : X
-    INTEGER IN aValue
-   aValue 1 +
-  ; // X
- ; // A
-
- : B Inherits A
-  : X
-    INTEGER IN aValue
-   aValue 2 + .call.ancestor
-  ; // X
- ; // B
-
- : C Inherits B
- ; // C
-
- : D Inherits C
-  : X
-    INTEGER IN aValue
-   aValue 4 + .call.ancestor
-  ; // X
- ; // D
-
- : E Inherits C
-  : X
-    INTEGER IN aValue
-   aValue 5 + .call.ancestor
-  ; // X
- ; // E
-
- 1 A ?-> X .
- 2 B ?-> X .
- 3 C ?-> X .
- 4 D ?-> X .
- 5 E ?-> X .
-
-; // CallAncestorTest
-
-CallAncestorTest
