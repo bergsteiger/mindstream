@@ -117,7 +117,7 @@ Test&Dump CallAncestorTest
   ; // X
  ; // E
 
- 1 'X' @ A .find.method DO .
+ 1 'X' @ A .call.method .
  1 A :: X .
  2 B :: X .
  3 'X' @ C .find.method DO .
