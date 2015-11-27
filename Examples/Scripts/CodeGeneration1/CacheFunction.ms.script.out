@@ -20,7 +20,7 @@ VOID TestWithDump CacheFunction.ms.script.test
  STRING FUNCTION X
   ^@ IN aWord
   aWord |@
-  DO
+  pop:Word:Name
   Result
   pop:Word:SetValue
  ; // STRING FUNCTION X
@@ -33,4 +33,5 @@ VOID TestWithDump CacheFunction.ms.script.test
  .
 ; // VOID TestWithDump CacheFunction.ms.script.test
 
-CacheFunction.ms.script : Ошибка выполнения: "Ошибка при получении параметра aValue: TtfwStackValue : Стек пустой". Главный файл: CacheFunction.ms.script. Класс: TkwPopWordSetValue. Слово: pop:Word:SetValue
+A
+B

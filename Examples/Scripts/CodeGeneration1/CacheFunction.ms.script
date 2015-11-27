@@ -26,7 +26,7 @@ Test&Dump CacheFunction.ms.script.test
 
  STRING FUNCTION X
    TtfwWord ^@ IN aWord
-  aWord |@ DO >>> Result
+  aWord |@ pop:Word:Name >>> Result
  ; // X
 
  A X .
