@@ -26,10 +26,13 @@ VOID TestWithDump CacheFunction.ms.script.test
  
  STRING FUNCTION X
   TtfwWord IN aWord
-  aWord
-  %%
-  'X'
-  pop:Word:Name
+  Cache
+  (
+   aWord
+   %%
+   'X'
+   pop:Word:Name
+  )
   Result
   pop:Word:SetValue
  ; // STRING FUNCTION X
