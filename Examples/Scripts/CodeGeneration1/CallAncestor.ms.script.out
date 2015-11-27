@@ -66,6 +66,16 @@ VOID TestWithDump CallAncestorTest
   l_Method
   pop:Word:SetValue
   l_Method
+  IsNil
+  ?FAIL
+  ARRAY [
+   'Method '
+   aWordName
+   ' not found in word '
+   aWhereToSearch
+   |N
+  ]
+  l_Method
   DO
  ; // : .call.method
  
@@ -253,4 +263,4 @@ VOID TestWithDump CallAncestorTest
 2
 2
 5
-CallAncestor.ms.script : Access violation at address 004B0C01 in module 'call.ms.script.exe'. Read of address 0000000C
+CallAncestor.ms.script : : .call.method (Line 54, CallAncestor.ms.script) |=> Method X not found in word C
