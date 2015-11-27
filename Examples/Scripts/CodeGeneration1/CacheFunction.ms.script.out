@@ -1,8 +1,20 @@
 VOID TestWithDump CacheFunction.ms.script.test
  : A
+  STRING FUNCTION X
+   '1'
+   Result
+   pop:Word:SetValue
+  ; // STRING FUNCTION X
+  
  ; // : A
  
  : B
+  STRING FUNCTION X
+   '1'
+   Result
+   pop:Word:SetValue
+  ; // STRING FUNCTION X
+  
  ; // : B
  
  STRING FUNCTION X

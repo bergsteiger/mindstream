@@ -7,9 +7,15 @@ USES
 Test&Dump CacheFunction.ms.script.test
 
  : A
+  STRING FUNCTION X
+   '1' >>> Result
+  ; // X
  ; // A
 
  : B
+  STRING FUNCTION X
+   '1' >>> Result
+  ; // X
  ; // B
 
  STRING FUNCTION X
