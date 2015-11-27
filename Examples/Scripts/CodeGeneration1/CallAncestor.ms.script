@@ -110,10 +110,6 @@ Test&Dump CallAncestorTest
  ; // B
 
  : C Inherits B
-/*{  : X
-    INTEGER IN aValue
-   aValue 3 + .call.ancestor
-  ; // X}*/
  ; // C
 
  : D Inherits C
