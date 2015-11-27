@@ -45,6 +45,12 @@ Test&Dump CallAncestorTest
   end // Result IsNil
  ; // .find.ancestor.method
 
+ TtfwWord FUNCTION .find.method
+   STRING IN aWordName
+   TtfwWord IN aWhereToSearch
+  aWhereToSearch %% aWordName >>> Result
+ ; // .find.method
+
  PROCEDURE .call.ancestor.do
   STRING IN aWordName
   TtfwWord IN aWord

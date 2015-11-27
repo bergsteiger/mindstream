@@ -133,6 +133,16 @@ VOID TestWithDump CallAncestorTest
    END
  ; // TtfwWord FUNCTION .find.ancestor.method
  
+ TtfwWord FUNCTION .find.method
+  TtfwWord IN aWhereToSearch
+  STRING IN aWordName
+  aWhereToSearch
+  %%
+  aWordName
+  Result
+  pop:Word:SetValue
+ ; // TtfwWord FUNCTION .find.method
+ 
  : A
   : X
    INTEGER IN aValue
