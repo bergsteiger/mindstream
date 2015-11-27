@@ -22,7 +22,7 @@ VOID TestWithDump CacheFunction.ms.script.test
  ; // : B
  
  STRING FUNCTION X
-  ^@ IN aWord
+  TtfwWord IN aWord
   aWord |@
   pop:Word:Name
   Result
@@ -31,11 +31,15 @@ VOID TestWithDump CacheFunction.ms.script.test
  
  CacheFunction.ms.script.test
  DumpElement
- A ERROR X
+ @
+ A
+ X
  .
- B ERROR X
+ @
+ B
+ X
  .
 ; // VOID TestWithDump CacheFunction.ms.script.test
 
-A
-B
+aWord
+aWord
