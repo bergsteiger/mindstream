@@ -23,6 +23,8 @@ VOID TestWithDump CacheFunction.ms.script.test
  
  IMMEDIATE VOID MACRO Cache
   axiom:PushSymbol
+  @SELF
+  axiom:PushSymbol
   Cache.do
  ; // IMMEDIATE VOID MACRO Cache
  
