@@ -20,7 +20,7 @@ Test&Dump CacheFunction.ms.script.test
   aCacheWhere pop:Word:Name Log
 
   STRING VAR l_CacheWhat
-  aCacheWhat pop:Word:Name >>> l_CacheWhat
+  'cached:' aCacheWhat pop:Word:Name Cat >>> l_CacheWhat
   l_CacheWhat Log
 
   aLambda DO

@@ -36,8 +36,10 @@ VOID TestWithDump CacheFunction.ms.script.test
   aCacheWhere
   pop:Word:Name
   .
+  'cached:'
   aCacheWhat
   pop:Word:Name
+  Cat
   l_CacheWhat
   pop:Word:SetValue
   l_CacheWhat
@@ -74,8 +76,8 @@ VOID TestWithDump CacheFunction.ms.script.test
 ; // VOID TestWithDump CacheFunction.ms.script.test
 
 A
-X
+cached:X
 X
 B
-X
+cached:X
 X
