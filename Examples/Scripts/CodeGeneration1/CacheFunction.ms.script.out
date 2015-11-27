@@ -18,7 +18,7 @@ VOID TestWithDump CacheFunction.ms.script.test
  ; // : B
  
  STRING FUNCTION X
-  TtfwWord IN aWord
+  ^ IN aWord
   aWord
   pop:Word:Name
   Result
@@ -27,15 +27,12 @@ VOID TestWithDump CacheFunction.ms.script.test
  
  CacheFunction.ms.script.test
  DumpElement
- @
  A
  X
  .
- @
  B
  X
  .
 ; // VOID TestWithDump CacheFunction.ms.script.test
 
-A
-B
+CacheFunction.ms.script : Ошибка выполнения: "Процедура не может возвращать значения через стек". Главный файл: CacheFunction.ms.script. Класс: TkwCompiledProcedureWithStackChecking. Слово: CacheFunction.ms.script.test Producer: TestWithDump Parent: 
