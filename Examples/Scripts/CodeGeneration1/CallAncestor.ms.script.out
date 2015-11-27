@@ -164,6 +164,19 @@ VOID TestWithDump CallAncestorTest
   aWordName
   Result
   pop:Word:SetValue
+  if
+   (
+    Result
+    IsNil
+   )
+  then
+   BEGIN
+    aWordName
+    aWhereToSearch
+    .find.ancestor.method
+    Result
+    pop:Word:SetValue
+   END
  ; // TtfwWord FUNCTION .find.method
  
  : A
@@ -263,4 +276,4 @@ VOID TestWithDump CallAncestorTest
 2
 2
 5
-CallAncestor.ms.script : : .call.method (Line 54, CallAncestor.ms.script) |=> Method X not found in word C
+CallAncestor.ms.script : : .call.method (Line 59, CallAncestor.ms.script) |=> Method X not found in word C

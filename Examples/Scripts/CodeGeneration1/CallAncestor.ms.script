@@ -49,6 +49,11 @@ Test&Dump CallAncestorTest
    STRING IN aWordName
    TtfwWord IN aWhereToSearch
   aWhereToSearch %% aWordName >>> Result
+
+  if ( Result IsNil ) then
+  begin
+   aWordName aWhereToSearch .find.ancestor.method >>> Result
+  end // Result IsNil
  ; // .find.method
 
  : .call.method
