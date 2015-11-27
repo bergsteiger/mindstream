@@ -6,6 +6,9 @@ USES
 
 Test&Dump CacheFunction.ms.script.test
 
+ : Cache
+ ; // Cache
+
  : A
 
   STRING FUNCTION X
@@ -26,7 +29,7 @@ Test&Dump CacheFunction.ms.script.test
 
  STRING FUNCTION X
    TtfwWord IN aWord
-  aWord %% 'X' pop:Word:Name &gt;&gt;&gt; Result
+  Cache ( aWord %% 'X' pop:Word:Name ) &gt;&gt;&gt; Result
  ; // X
 
  @ A X .
