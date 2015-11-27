@@ -69,7 +69,7 @@ Test&Dump CallAncestorTest
    ^@ IN aWhereToSearch
    Literal IN aWordName
 
-  aWordName aWhereToSearch .call.method
+  aWordName |N aWhereToSearch .call.method
  ; // ?->
 
  PROCEDURE .call.ancestor.do
@@ -130,7 +130,7 @@ Test&Dump CallAncestorTest
   ; // X
  ; // E
 
- 1 'X' @ A .call.method .
+ 1 A ?-> X .
  1 A :: X .
  2 B :: X .
  3 'X' @ C .call.method .

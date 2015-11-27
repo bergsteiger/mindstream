@@ -183,6 +183,7 @@ VOID TestWithDump CallAncestorTest
   ^@ IN aWhereToSearch
   ^L IN aWordName
   aWordName
+  |N
   aWhereToSearch
   .call.method
  ; // : ?->
@@ -252,10 +253,8 @@ VOID TestWithDump CallAncestorTest
  CallAncestorTest
  DumpElement
  1
+ A ?->
  'X'
- @
- A
- .call.method
  .
  1
  A ::
