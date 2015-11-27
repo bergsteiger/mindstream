@@ -26,7 +26,7 @@ VOID TestWithDump CacheFunction.ms.script.test
   aWord
   %%
   'X'
-  ToPrintable
+  pop:Word:Name
   Result
   pop:Word:SetValue
  ; // STRING FUNCTION X
@@ -43,5 +43,5 @@ VOID TestWithDump CacheFunction.ms.script.test
  .
 ; // VOID TestWithDump CacheFunction.ms.script.test
 
-TkwCompiledFunction
-TkwCompiledFunction
+X
+X
