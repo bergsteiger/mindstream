@@ -7,6 +7,8 @@ USES
 Test&Dump CacheFunction.ms.script.test
 
  : Cache
+   ^ IN aLambda
+  aLambda DO
  ; // Cache
 
  : A
