@@ -10,6 +10,7 @@ Test&Dump CacheFunction.ms.script.test
    TtfwWord IN aCacheWhere
     %REMARK 'Где кешировать результат'
    ^ IN aLambda
+    %REMARK 'Лямбда, которая вычисляет результат'
   aLambda DO
  ; // Cache
 
