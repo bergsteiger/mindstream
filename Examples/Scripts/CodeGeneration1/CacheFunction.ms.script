@@ -15,10 +15,7 @@ Test&Dump CacheFunction.ms.script.test
     %REMARK 'Лямбда, которая вычисляет результат'
   aCacheWhere pop:Word:Name Log
 
-  TtfwWord VAR l_CacheWhat
-   %REMARK 'Что кешировать'
-  aCacheWhat >>> l_CacheWhat
-  l_CacheWhat pop:Word:Name Log
+  aCacheWhat pop:Word:Name Log
 
   aLambda DO
  ; // Cache
@@ -31,7 +28,7 @@ Test&Dump CacheFunction.ms.script.test
 
   ERROR 'fake A'
  ; // A
-
+ 
  : B
 
   STRING FUNCTION X
