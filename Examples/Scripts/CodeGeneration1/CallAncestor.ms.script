@@ -51,6 +51,14 @@ Test&Dump CallAncestorTest
   aWhereToSearch %% aWordName >>> Result
  ; // .find.method
 
+ : .call.method
+   STRING IN aWordName
+   TtfwWord IN aWhereToSearch
+  TtfwWord VAR l_Method
+  aWhereToSearch %% aWordName >>> l_Method
+  l_Method DO
+ ; // .call.method
+
  PROCEDURE .call.ancestor.do
   STRING IN aWordName
   TtfwWord IN aWord

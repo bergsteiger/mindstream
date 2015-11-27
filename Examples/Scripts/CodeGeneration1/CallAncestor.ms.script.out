@@ -56,6 +56,19 @@ VOID TestWithDump CallAncestorTest
   CompileValue
  ; // VOID PROCEDURE .call.ancestor.do
  
+ : .call.method
+  TtfwWord IN aWhereToSearch
+  STRING IN aWordName
+  TtfwWord VAR l_Method
+  aWhereToSearch
+  %%
+  aWordName
+  l_Method
+  pop:Word:SetValue
+  l_Method
+  DO
+ ; // : .call.method
+ 
  TtfwWord FUNCTION .find.ancestor.method
   TtfwWord IN aWhereToSearch
   STRING IN aWordName
