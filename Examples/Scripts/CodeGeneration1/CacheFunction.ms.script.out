@@ -21,6 +21,9 @@ VOID TestWithDump CacheFunction.ms.script.test
   'fake B'
  ; // : B
  
+ : Cache
+ ; // : Cache
+ 
  STRING FUNCTION X
   TtfwWord IN aWord
   aWord
