@@ -1,2 +1,2 @@
 call ..\clear.cmd
-call c.cmd CallAncestor.ms.script
+call c.cmd CacheFunction.ms.script
