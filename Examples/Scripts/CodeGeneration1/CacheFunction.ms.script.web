@@ -1,17 +1,34 @@
 PROGRAM CacheFunction.ms.script
 
 USES
+ axiom_push.ms.dict
+;
+
+USES
  Testing.ms.dict
 ;
 
 Test&Dump CacheFunction.ms.script.test
 
- : Cache
+ : Cache.do
    TtfwWord IN aCacheWhere
     %REMARK 'Где кешировать результат'
+   TtfwWord IN aCacheWhat
+    %REMARK 'Что кешировать'
    ^ IN aLambda
     %REMARK 'Лямбда, которая вычисляет результат'
+  aCacheWhere pop:Word:Name Log
+
+  STRING VAR l_CacheWhat
+  aCacheWhat pop:Word:Name &gt;&gt;&gt; l_CacheWhat
+  l_CacheWhat Log
+
   aLambda DO
+ ; // Cache.do
+
+ MACRO Cache
+  axiom:PushSymbol @SELF
+  axiom:PushSymbol Cache.do
  ; // Cache
 
  : A
@@ -22,7 +39,7 @@ Test&Dump CacheFunction.ms.script.test
 
   ERROR 'fake A'
  ; // A
-
+ 
  : B
 
   STRING FUNCTION X
