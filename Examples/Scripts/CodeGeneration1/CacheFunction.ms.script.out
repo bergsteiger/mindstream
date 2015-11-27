@@ -1,1 +1,20 @@
-CacheFunction.ms.script : Ошибка компиляции: "Слово X не найдено". Тип токена: l3_ttSymbol : X в строке 16. Файл: CacheFunction.ms.script. Класс: TkwCompiledWordWorkerWord. Слово: >>> Producer: OPERATOR Parent: 
+VOID TestWithDump CacheFunction.ms.script.test
+ : A
+ ; // : A
+ 
+ : B
+ ; // : B
+ 
+ STRING FUNCTION X
+  'dummy'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION X
+ 
+ CacheFunction.ms.script.test
+ DumpElement
+ X
+ .
+; // VOID TestWithDump CacheFunction.ms.script.test
+
+dummy
