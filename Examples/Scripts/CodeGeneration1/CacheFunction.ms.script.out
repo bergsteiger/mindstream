@@ -24,6 +24,9 @@ VOID TestWithDump CacheFunction.ms.script.test
  : Cache
   TtfwWord IN aCacheWhere
   ^ IN aLambda
+  aCacheWhere
+  pop:Word:Name
+  .
   aLambda
   DO
  ; // : Cache
@@ -54,5 +57,7 @@ VOID TestWithDump CacheFunction.ms.script.test
  .
 ; // VOID TestWithDump CacheFunction.ms.script.test
 
+A
 X
+B
 X

@@ -11,6 +11,7 @@ Test&Dump CacheFunction.ms.script.test
     %REMARK 'Где кешировать результат'
    ^ IN aLambda
     %REMARK 'Лямбда, которая вычисляет результат'
+  aCacheWhere pop:Word:Name Log
   aLambda DO
  ; // Cache
 
