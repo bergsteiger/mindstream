@@ -5,6 +5,18 @@ USES
 ;
 
 Test&Dump CacheFunction.ms.script.test
+
+ : A
+ ; // A
+
+ : B
+ ; // B
+
+ STRING FUNCTION X
+  'dummy' >>> X
+ ; // X
+
+ X .
 ; // CacheFunction.ms.script.test
 
 CacheFunction.ms.script.test
