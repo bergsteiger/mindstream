@@ -14,7 +14,7 @@ Test&Dump CacheFunction.ms.script.test
 
  STRING FUNCTION X
    TtfwWord IN aWord
-  aWord >>> Result
+  aWord ToPrintable >>> Result
  ; // X
 
  @ A X .
