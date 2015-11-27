@@ -25,10 +25,14 @@ VOID TestWithDump CacheFunction.ms.script.test
   TtfwWord IN aCacheWhat
   TtfwWord IN aCacheWhere
   ^ IN aLambda
+  TtfwWord VAR l_CacheWhat
   aCacheWhere
   pop:Word:Name
   .
   aCacheWhat
+  l_CacheWhat
+  pop:Word:SetValue
+  l_CacheWhat
   pop:Word:Name
   .
   aLambda
