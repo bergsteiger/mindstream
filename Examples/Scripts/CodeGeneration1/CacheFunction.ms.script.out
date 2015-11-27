@@ -21,7 +21,7 @@ VOID TestWithDump CacheFunction.ms.script.test
   'fake B'
  ; // : B
  
- : Cache
+ : Cache.do
   TtfwWord IN aCacheWhat
   TtfwWord IN aCacheWhere
   ^ IN aLambda
@@ -33,13 +33,13 @@ VOID TestWithDump CacheFunction.ms.script.test
   .
   aLambda
   DO
- ; // : Cache
+ ; // : Cache.do
  
  STRING FUNCTION X
   TtfwWord IN aWord
   aWord
   X
-  Cache
+  Cache.do
   (
    aWord
    %%

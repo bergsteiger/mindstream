@@ -6,7 +6,7 @@ USES
 
 Test&Dump CacheFunction.ms.script.test
 
- : Cache
+ : Cache.do
    TtfwWord IN aCacheWhere
     %REMARK 'Где кешировать результат'
    TtfwWord IN aCacheWhat
@@ -18,7 +18,7 @@ Test&Dump CacheFunction.ms.script.test
   aCacheWhat pop:Word:Name Log
 
   aLambda DO
- ; // Cache
+ ; // Cache.do
 
  : A
 
@@ -40,7 +40,7 @@ Test&Dump CacheFunction.ms.script.test
 
  STRING FUNCTION X
    TtfwWord IN aWord
-  aWord @SELF Cache ( aWord %% 'X' pop:Word:Name ) >>> Result
+  aWord @SELF Cache.do ( aWord %% 'X' pop:Word:Name ) >>> Result
  ; // X
 
  @ A X .
