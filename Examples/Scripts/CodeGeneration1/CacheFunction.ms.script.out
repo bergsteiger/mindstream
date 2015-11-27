@@ -21,6 +21,11 @@ VOID TestWithDump CacheFunction.ms.script.test
   'fake B'
  ; // : B
  
+ IMMEDIATE VOID MACRO Cache
+  axiom:PushSymbol
+  Cache.do
+ ; // IMMEDIATE VOID MACRO Cache
+ 
  : Cache.do
   TtfwWord IN aCacheWhat
   TtfwWord IN aCacheWhere

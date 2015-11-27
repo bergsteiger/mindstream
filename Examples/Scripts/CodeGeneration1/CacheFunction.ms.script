@@ -24,6 +24,10 @@ Test&Dump CacheFunction.ms.script.test
   aLambda DO
  ; // Cache.do
 
+ MACRO Cache
+  axiom:PushSymbol Cache.do
+ ; // Cache
+
  : A
 
   STRING FUNCTION X
