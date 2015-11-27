@@ -1,0 +1,36 @@
+PROGRAM CacheFunction.ms.script
+
+USES
+ Testing.ms.dict
+;
+
+Test&Dump CacheFunction.ms.script.test
+
+ : A
+
+  STRING FUNCTION X
+   '1' >>> Result
+  ; // X
+
+  ERROR 'fake A'
+ ; // A
+
+ : B
+
+  STRING FUNCTION X
+   '2' >>> Result
+  ; // X
+
+  ERROR 'fake B'
+ ; // B
+
+ STRING FUNCTION X
+   TtfwWord IN aWord
+  aWord %% 'X' pop:Word:Name >>> Result
+ ; // X
+
+ @ A X .
+ @ B X .
+; // CacheFunction.ms.script.test
+
+CacheFunction.ms.script.test
