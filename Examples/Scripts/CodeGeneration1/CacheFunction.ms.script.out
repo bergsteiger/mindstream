@@ -21,7 +21,7 @@ VOID TestWithDump CacheFunction.ms.script.test
  
  STRING FUNCTION X
   ^ IN aWord
-  aWord |^@
+  aWord
   ToPrintable
   Result
   pop:Word:SetValue
