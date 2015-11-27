@@ -19,7 +19,9 @@ Test&Dump CacheFunction.ms.script.test
     %REMARK 'Лямбда, которая вычисляет результат'
   aCacheWhere pop:Word:Name Log
 
-  aCacheWhat pop:Word:Name Log
+  STRING VAR l_CacheWhat
+  aCacheWhat pop:Word:Name >>> l_CacheWhat
+  l_CacheWhat Log
 
   aLambda DO
  ; // Cache.do
