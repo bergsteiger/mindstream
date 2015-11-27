@@ -23,7 +23,7 @@ VOID TestWithDump CacheFunction.ms.script.test
  
  STRING FUNCTION X
   TtfwWord IN aWord
-  aWord |@
+  aWord
   pop:Word:Name
   Result
   pop:Word:SetValue
@@ -41,5 +41,5 @@ VOID TestWithDump CacheFunction.ms.script.test
  .
 ; // VOID TestWithDump CacheFunction.ms.script.test
 
-aWord
-aWord
+A
+B
