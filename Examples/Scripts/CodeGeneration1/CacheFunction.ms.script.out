@@ -6,6 +6,7 @@ VOID TestWithDump CacheFunction.ms.script.test
  ; // : B
  
  STRING FUNCTION X
+  TtfwWord IN aWord
   'dummy'
   Result
   pop:Word:SetValue
@@ -13,8 +14,15 @@ VOID TestWithDump CacheFunction.ms.script.test
  
  CacheFunction.ms.script.test
  DumpElement
+ @
+ A
+ X
+ .
+ @
+ B
  X
  .
 ; // VOID TestWithDump CacheFunction.ms.script.test
 
+dummy
 dummy
