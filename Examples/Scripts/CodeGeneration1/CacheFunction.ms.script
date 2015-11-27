@@ -7,6 +7,7 @@ USES
 Test&Dump CacheFunction.ms.script.test
 
  : Cache
+   TtfwWord IN aCacheWhere
    ^ IN aLambda
   aLambda DO
  ; // Cache
@@ -31,7 +32,7 @@ Test&Dump CacheFunction.ms.script.test
 
  STRING FUNCTION X
    TtfwWord IN aWord
-  Cache ( aWord %% 'X' pop:Word:Name ) >>> Result
+  aWord Cache ( aWord %% 'X' pop:Word:Name ) >>> Result
  ; // X
 
  @ A X .
