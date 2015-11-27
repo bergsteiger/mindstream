@@ -222,6 +222,13 @@ VOID TestWithDump CallAncestorTest
  B ::
  'X'
  .
+ 3
+ 'X'
+ @
+ C
+ .find.method
+ DO
+ .
  4
  D ::
  'X'
@@ -235,5 +242,4 @@ VOID TestWithDump CallAncestorTest
 2
 2
 5
-11
-13
+CallAncestor.ms.script : Access violation at address 004B0C01 in module 'call.ms.script.exe'. Read of address 0000000C
