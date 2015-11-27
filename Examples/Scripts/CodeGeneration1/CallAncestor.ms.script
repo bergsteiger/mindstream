@@ -65,6 +65,13 @@ Test&Dump CallAncestorTest
   l_Method DO
  ; // .call.method
 
+ : ?->
+   ^@ IN aWhereToSearch
+   Literal IN aWordName
+
+  aWordName aWhereToSearch .call.method
+ ; // ?->
+
  PROCEDURE .call.ancestor.do
   STRING IN aWordName
   TtfwWord IN aWord

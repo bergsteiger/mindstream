@@ -179,6 +179,14 @@ VOID TestWithDump CallAncestorTest
    END
  ; // TtfwWord FUNCTION .find.method
  
+ : ?->
+  ^@ IN aWhereToSearch
+  ^L IN aWordName
+  aWordName
+  aWhereToSearch
+  .call.method
+ ; // : ?->
+ 
  : A
   : X
    INTEGER IN aValue
