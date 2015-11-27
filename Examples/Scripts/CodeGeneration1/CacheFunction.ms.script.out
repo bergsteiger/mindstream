@@ -22,6 +22,7 @@ VOID TestWithDump CacheFunction.ms.script.test
  STRING FUNCTION X
   ^ IN aWord
   aWord |^@
+  DO
   pop:Word:Name
   Result
   pop:Word:SetValue
@@ -37,4 +38,5 @@ VOID TestWithDump CacheFunction.ms.script.test
  .
 ; // VOID TestWithDump CacheFunction.ms.script.test
 
-CacheFunction.ms.script : Ошибка выполнения: "Процедура не может возвращать значения через стек". Главный файл: CacheFunction.ms.script. Класс: TkwCompiledProcedureWithStackChecking. Слово: CacheFunction.ms.script.test Producer: TestWithDump Parent: 
+fake A
+CacheFunction.ms.script : Ошибка выполнения: "Ошибка при получении параметра aWord: TtfwWord : Стек пустой". Главный файл: CacheFunction.ms.script. Класс: TkwPopWordName. Слово: pop:Word:Name
