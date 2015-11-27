@@ -60,9 +60,9 @@ VOID TestWithDump CallAncestorTest
   TtfwWord IN aWhereToSearch
   STRING IN aWordName
   TtfwWord VAR l_Method
-  aWhereToSearch
-  %%
   aWordName
+  aWhereToSearch
+  .find.method
   l_Method
   pop:Word:SetValue
   l_Method
@@ -276,4 +276,6 @@ VOID TestWithDump CallAncestorTest
 2
 2
 5
-CallAncestor.ms.script : : .call.method (Line 59, CallAncestor.ms.script) |=> Method X not found in word C
+6
+11
+13

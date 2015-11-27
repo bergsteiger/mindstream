@@ -60,7 +60,7 @@ Test&Dump CallAncestorTest
    STRING IN aWordName
    TtfwWord IN aWhereToSearch
   TtfwWord VAR l_Method
-  aWhereToSearch %% aWordName >>> l_Method
+  aWordName aWhereToSearch .find.method >>> l_Method
   l_Method IsNil ?FAIL [ 'Method ' aWordName ' not found in word ' aWhereToSearch |N ]
   l_Method DO
  ; // .call.method
