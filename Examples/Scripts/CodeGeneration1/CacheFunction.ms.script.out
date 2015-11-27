@@ -6,6 +6,7 @@ VOID TestWithDump CacheFunction.ms.script.test
    pop:Word:SetValue
   ; // STRING FUNCTION X
   
+  'fake A'
  ; // : A
  
  : B
@@ -15,6 +16,7 @@ VOID TestWithDump CacheFunction.ms.script.test
    pop:Word:SetValue
   ; // STRING FUNCTION X
   
+  'fake B'
  ; // : B
  
  STRING FUNCTION X
