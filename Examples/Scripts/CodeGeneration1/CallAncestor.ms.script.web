@@ -65,6 +65,13 @@ Test&Dump CallAncestorTest
   l_Method DO
  ; // .call.method
 
+ : ?-&gt;
+   ^@ IN aWhereToSearch
+   Literal IN aWordName
+
+  aWordName |N aWhereToSearch .call.method
+ ; // ?-&gt;
+
  PROCEDURE .call.ancestor.do
   STRING IN aWordName
   TtfwWord IN aWord
@@ -103,10 +110,6 @@ Test&Dump CallAncestorTest
  ; // B
 
  : C Inherits B
-/*{  : X
-    INTEGER IN aValue
-   aValue 3 + .call.ancestor
-  ; // X}*/
  ; // C
 
  : D Inherits C
@@ -123,13 +126,11 @@ Test&Dump CallAncestorTest
   ; // X
  ; // E
 
- 1 'X' @ A .call.method .
- 1 A :: X .
- 2 B :: X .
- 3 'X' @ C .call.method .
- // 3 C :: X .
- 4 D :: X .
- 5 E :: X .
+ 1 A ?-&gt; X .
+ 2 B ?-&gt; X .
+ 3 C ?-&gt; X .
+ 4 D ?-&gt; X .
+ 5 E ?-&gt; X .
 
 ; // CallAncestorTest
 
