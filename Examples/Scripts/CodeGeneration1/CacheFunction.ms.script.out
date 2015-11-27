@@ -22,6 +22,9 @@ VOID TestWithDump CacheFunction.ms.script.test
  ; // : B
  
  : Cache
+  ^ IN aLambda
+  aLambda
+  DO
  ; // : Cache
  
  STRING FUNCTION X
