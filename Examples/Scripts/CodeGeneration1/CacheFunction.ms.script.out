@@ -26,6 +26,7 @@ VOID TestWithDump CacheFunction.ms.script.test
   aWord
   %%
   'X'
+  ToPrintable
   Result
   pop:Word:SetValue
  ; // STRING FUNCTION X
@@ -42,4 +43,5 @@ VOID TestWithDump CacheFunction.ms.script.test
  .
 ; // VOID TestWithDump CacheFunction.ms.script.test
 
-CacheFunction.ms.script : Ошибка выполнения: "Неверный тип значения: tfw_vtObj TkwCompiledFunction для типа STRING". Главный файл: CacheFunction.ms.script. Класс: TkwCompiledVar. Слово: Result Producer: X Parent: X
+TkwCompiledFunction
+TkwCompiledFunction
