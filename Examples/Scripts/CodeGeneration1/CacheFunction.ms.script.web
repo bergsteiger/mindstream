@@ -9,7 +9,7 @@ Test&Dump CacheFunction.ms.script.test
  : A
 
   STRING FUNCTION X
-   '1' >>> Result
+   '1' &gt;&gt;&gt; Result
   ; // X
 
   ERROR 'fake A'
@@ -18,7 +18,7 @@ Test&Dump CacheFunction.ms.script.test
  : B
 
   STRING FUNCTION X
-   '2' >>> Result
+   '2' &gt;&gt;&gt; Result
   ; // X
 
   ERROR 'fake B'
@@ -26,7 +26,7 @@ Test&Dump CacheFunction.ms.script.test
 
  STRING FUNCTION X
    TtfwWord IN aWord
-  aWord %% 'X' pop:Word:Name >>> Result
+  aWord %% 'X' pop:Word:Name &gt;&gt;&gt; Result
  ; // X
 
  @ A X .
