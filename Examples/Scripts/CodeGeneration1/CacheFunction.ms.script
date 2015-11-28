@@ -82,7 +82,7 @@ Test&Dump CacheFunction.ms.script.test
  STRING FUNCTION X
    STRING IN aPrefix
    TtfwWord IN aWord
-  aPrefix aWord Cache ( aWord %% 'X' DO ) Cat >>> Result
+  aPrefix aWord Cache ( aWord %% ( @SELF pop:Word:Name ) DO ) Cat >>> Result
  ; // X
 
  STRING FUNCTION Y
