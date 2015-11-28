@@ -62,9 +62,18 @@ VOID TestWithDump CacheFunction.ms.script.test
     Cache.do
     l_NewVar
     pop:Word:SetProducer
+    aLambda
+    DO
+    l_NewVar
+    pop:Word:SetValue
+    l_NewVar
+    DO
    END
-  aLambda
-  DO
+  else
+   BEGIN
+    l_FieldVar
+    DO
+   END
  ; // : Cache.do
  
  STRING FUNCTION X

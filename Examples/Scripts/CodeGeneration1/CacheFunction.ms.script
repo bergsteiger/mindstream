@@ -29,9 +29,15 @@ Test&Dump CacheFunction.ms.script.test
    VAR l_NewVar
    l_CacheWhat false aCacheWhere pop:NewWordDefinitor:CheckVar >>> l_NewVar
    @SELF l_NewVar pop:Word:SetProducer
+   aLambda DO 
+   l_NewVar pop:Word:SetValue
+   l_NewVar DO
   end // l_FieldVar NotValid
+  else
+  begin
+   l_FieldVar DO
+  end
 
-  aLambda DO
  ; // Cache.do
 
  MACRO Cache
