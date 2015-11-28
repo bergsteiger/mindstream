@@ -131,7 +131,9 @@ VOID TestWithDump CacheFunction.ms.script.test
  ; // STRING FUNCTION X
  
  STRING FUNCTION Y
+  STRING IN aPrefix
   TtfwWord IN aWord
+  aPrefix
   aWord
   Y
   Cache.do
@@ -144,6 +146,7 @@ VOID TestWithDump CacheFunction.ms.script.test
    )
    DO
   )
+  Cat
   Result
   pop:Word:SetValue
  ; // STRING FUNCTION Y
@@ -176,10 +179,12 @@ VOID TestWithDump CacheFunction.ms.script.test
  B
  X
  .
+ '1'
  @
  A
  Y
  .
+ '2'
  @
  B
  Y
@@ -190,10 +195,12 @@ VOID TestWithDump CacheFunction.ms.script.test
  @
  B
  DumpElement
+ '3'
  @
  A
  Y
  .
+ '4'
  @
  B
  Y
@@ -236,8 +243,8 @@ VOID TestWithDump CacheFunction.ms.script.test
 
 3A.X
 4B.X
-A.Y
-B.Y
+1A.Y
+2B.Y
 : A
  Cache.do cached:X
  Cache.do cached:Y
@@ -272,5 +279,5 @@ B.Y
  
 ; // : B
 
-A.Y
-B.Y
+3A.Y
+4B.Y

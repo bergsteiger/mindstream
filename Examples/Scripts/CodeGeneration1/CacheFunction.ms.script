@@ -86,8 +86,9 @@ Test&Dump CacheFunction.ms.script.test
  ; // X
 
  STRING FUNCTION Y
+   STRING IN aPrefix
    TtfwWord IN aWord
-  aWord Cache ( aWord %% ( @SELF pop:Word:Name ) DO ) >>> Result
+  aPrefix aWord Cache ( aWord %% ( @SELF pop:Word:Name ) DO ) Cat >>> Result
  ; // Y
 
  '1' @ A X .
@@ -99,14 +100,14 @@ Test&Dump CacheFunction.ms.script.test
  '3' @ A X .
  '4' @ B X .
 
- @ A Y .
- @ B Y .
+ '1' @ A Y .
+ '2' @ B Y .
 
  @ A DumpElement
  @ B DumpElement
 
- @ A Y .
- @ B Y .
+ '3' @ A Y .
+ '4' @ B Y .
 
 ; // CacheFunction.ms.script.test
 
