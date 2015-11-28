@@ -138,7 +138,10 @@ VOID TestWithDump CacheFunction.ms.script.test
   (
    aWord
    %%
-   'Y'
+   (
+    Y
+    pop:Word:Name
+   )
    DO
   )
   Result
