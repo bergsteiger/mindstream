@@ -87,7 +87,7 @@ Test&Dump CacheFunction.ms.script.test
 
  STRING FUNCTION Y
    TtfwWord IN aWord
-  aWord Cache ( aWord %% 'X' DO ) >>> Result
+  aWord Cache ( aWord %% 'Y' DO ) >>> Result
  ; // Y
 
  '1' @ A X .

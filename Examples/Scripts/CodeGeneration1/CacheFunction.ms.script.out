@@ -135,7 +135,7 @@ VOID TestWithDump CacheFunction.ms.script.test
   (
    aWord
    %%
-   'X'
+   'Y'
    DO
   )
   Result
@@ -230,8 +230,8 @@ VOID TestWithDump CacheFunction.ms.script.test
 
 3A.X
 4B.X
-A.X
-B.X
+A.Y
+B.Y
 : A
  Cache.do cached:X
  Cache.do cached:Y
@@ -266,5 +266,5 @@ B.X
  
 ; // : B
 
-A.X
-B.X
+A.Y
+B.Y
