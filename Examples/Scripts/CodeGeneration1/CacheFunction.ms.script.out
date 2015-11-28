@@ -91,12 +91,6 @@ VOID TestWithDump CacheFunction.ms.script.test
  DumpElement
  @
  A
- DumpElement
- @
- B
- DumpElement
- @
- A
  X
  .
  @
@@ -124,24 +118,6 @@ VOID TestWithDump CacheFunction.ms.script.test
  B
  DumpElement
 ; // VOID TestWithDump CacheFunction.ms.script.test
-
-: A
- STRING FUNCTION X
-  '1'
-  Result
-  pop:Word:SetValue
- ; // STRING FUNCTION X
- 
-; // : A
-
-: B
- STRING FUNCTION X
-  '2'
-  Result
-  pop:Word:SetValue
- ; // STRING FUNCTION X
- 
-; // : B
 
 1
 2

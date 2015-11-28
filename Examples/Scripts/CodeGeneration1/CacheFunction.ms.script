@@ -68,8 +68,8 @@ Test&Dump CacheFunction.ms.script.test
   aWord Cache ( aWord %% 'X' DO ) >>> Result
  ; // X
 
- @ A DumpElement
- @ B DumpElement
+ // @ A DumpElement
+ // @ B DumpElement
 
  @ A X .
  @ B X .
