@@ -33,6 +33,7 @@ VOID TestWithDump CacheFunction.ms.script.test
   TtfwWord IN aCacheWhere
   ^ IN aLambda
   STRING VAR l_CacheWhat
+  VAR l_FieldVar
   aCacheWhere
   pop:Word:Name
   .
@@ -44,6 +45,11 @@ VOID TestWithDump CacheFunction.ms.script.test
   pop:Word:SetValue
   l_CacheWhat
   .
+  aCacheWhere
+  %%
+  l_CacheWhat
+  l_FieldVar
+  pop:Word:SetValue
   aLambda
   DO
  ; // : Cache.do
