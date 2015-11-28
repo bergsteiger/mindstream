@@ -51,7 +51,7 @@ Test&Dump CacheFunction.ms.script.test
    '1' >>> Result
   ; // X
 
-  ERROR 'fake A'
+  // ERROR 'fake A'
  ; // A
  
  : B
@@ -60,9 +60,9 @@ Test&Dump CacheFunction.ms.script.test
    '2' >>> Result
   ; // X
 
-  ERROR 'fake B'
+  // ERROR 'fake B'
  ; // B
-
+ 
  STRING FUNCTION X
    TtfwWord IN aWord
   aWord Cache ( aWord %% 'X' DO ) >>> Result

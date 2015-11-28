@@ -6,8 +6,6 @@ VOID TestWithDump CacheFunction.ms.script.test
    pop:Word:SetValue
   ; // STRING FUNCTION X
   
-  ERROR
-  'fake A'
  ; // : A
  
  : B
@@ -17,8 +15,6 @@ VOID TestWithDump CacheFunction.ms.script.test
    pop:Word:SetValue
   ; // STRING FUNCTION X
   
-  ERROR
-  'fake B'
  ; // : B
  
  IMMEDIATE VOID MACRO Cache
@@ -136,8 +132,6 @@ VOID TestWithDump CacheFunction.ms.script.test
   pop:Word:SetValue
  ; // STRING FUNCTION X
  
- ERROR
- 'fake A'
 ; // : A
 
 : B
@@ -147,8 +141,6 @@ VOID TestWithDump CacheFunction.ms.script.test
   pop:Word:SetValue
  ; // STRING FUNCTION X
  
- ERROR
- 'fake B'
 ; // : B
 
 1
@@ -161,8 +153,6 @@ VOID TestWithDump CacheFunction.ms.script.test
   pop:Word:SetValue
  ; // STRING FUNCTION X
  
- ERROR
- 'fake A'
 ; // : A
 
 : B
@@ -173,8 +163,6 @@ VOID TestWithDump CacheFunction.ms.script.test
   pop:Word:SetValue
  ; // STRING FUNCTION X
  
- ERROR
- 'fake B'
 ; // : B
 
 1
@@ -187,8 +175,6 @@ VOID TestWithDump CacheFunction.ms.script.test
   pop:Word:SetValue
  ; // STRING FUNCTION X
  
- ERROR
- 'fake A'
 ; // : A
 
 : B
@@ -199,7 +185,5 @@ VOID TestWithDump CacheFunction.ms.script.test
   pop:Word:SetValue
  ; // STRING FUNCTION X
  
- ERROR
- 'fake B'
 ; // : B
 
