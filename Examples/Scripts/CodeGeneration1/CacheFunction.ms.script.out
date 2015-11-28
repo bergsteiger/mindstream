@@ -85,7 +85,7 @@ VOID TestWithDump CacheFunction.ms.script.test
    aWord
    %%
    'X'
-   pop:Word:Name
+   DO
   )
   Result
   pop:Word:SetValue
@@ -151,8 +151,8 @@ VOID TestWithDump CacheFunction.ms.script.test
  'fake B'
 ; // : B
 
-X
-X
+1
+2
 : A
  Cache.do cached:X
  STRING FUNCTION X
@@ -177,8 +177,8 @@ X
  'fake B'
 ; // : B
 
-X
-X
+1
+2
 : A
  Cache.do cached:X
  STRING FUNCTION X
