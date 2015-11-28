@@ -12,6 +12,12 @@ VOID TestWithDump CacheFunction.ms.script.test
    pop:Word:SetValue
   ; // STRING FUNCTION Y
   
+  STRING FUNCTION Z
+   'A.Z'
+   Result
+   pop:Word:SetValue
+  ; // STRING FUNCTION Z
+  
  ; // : A
  
  : B
@@ -26,6 +32,12 @@ VOID TestWithDump CacheFunction.ms.script.test
    Result
    pop:Word:SetValue
   ; // STRING FUNCTION Y
+  
+  STRING FUNCTION Z
+   'B.Z'
+   Result
+   pop:Word:SetValue
+  ; // STRING FUNCTION Z
   
  ; // : B
  
@@ -223,6 +235,12 @@ VOID TestWithDump CacheFunction.ms.script.test
   pop:Word:SetValue
  ; // STRING FUNCTION Y
  
+ STRING FUNCTION Z
+  'A.Z'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Z
+ 
 ; // : A
 
 : B
@@ -238,6 +256,12 @@ VOID TestWithDump CacheFunction.ms.script.test
   Result
   pop:Word:SetValue
  ; // STRING FUNCTION Y
+ 
+ STRING FUNCTION Z
+  'B.Z'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Z
  
 ; // : B
 
@@ -260,6 +284,12 @@ VOID TestWithDump CacheFunction.ms.script.test
   pop:Word:SetValue
  ; // STRING FUNCTION Y
  
+ STRING FUNCTION Z
+  'A.Z'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Z
+ 
 ; // : A
 
 : B
@@ -276,6 +306,12 @@ VOID TestWithDump CacheFunction.ms.script.test
   Result
   pop:Word:SetValue
  ; // STRING FUNCTION Y
+ 
+ STRING FUNCTION Z
+  'B.Z'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Z
  
 ; // : B
 

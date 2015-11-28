@@ -65,6 +65,10 @@ Test&Dump CacheFunction.ms.script.test
    'A.Y' >>> Result
   ; // Y
 
+  STRING FUNCTION Z
+   'A.Z' >>> Result
+  ; // Z
+
  ; // A
  
  : B
@@ -76,6 +80,10 @@ Test&Dump CacheFunction.ms.script.test
   STRING FUNCTION Y
    'B.Y' >>> Result
   ; // Y
+
+  STRING FUNCTION Z
+   'B.Z' >>> Result
+  ; // Z
 
  ; // B
  
