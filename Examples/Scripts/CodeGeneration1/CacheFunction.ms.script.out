@@ -151,6 +151,28 @@ VOID TestWithDump CacheFunction.ms.script.test
  B
  X
  .
+ @
+ A
+ Y
+ .
+ @
+ B
+ Y
+ .
+ @
+ A
+ DumpElement
+ @
+ B
+ DumpElement
+ @
+ A
+ Y
+ .
+ @
+ B
+ Y
+ .
 ; // VOID TestWithDump CacheFunction.ms.script.test
 
 1
@@ -167,6 +189,32 @@ VOID TestWithDump CacheFunction.ms.script.test
 
 : B
  Cache.do cached:X
+ STRING FUNCTION X
+  '2'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION X
+ 
+; // : B
+
+1
+2
+1
+2
+: A
+ Cache.do cached:X
+ Cache.do cached:Y
+ STRING FUNCTION X
+  '1'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION X
+ 
+; // : A
+
+: B
+ Cache.do cached:X
+ Cache.do cached:Y
  STRING FUNCTION X
   '2'
   Result
