@@ -20,8 +20,13 @@ Test&Dump CacheFunction.ms.script.test
   aCacheWhere pop:Word:Name Log
 
   STRING VAR l_CacheWhat
-  aCacheWhat pop:Word:Name &gt;&gt;&gt; l_CacheWhat
+  'cached:' aCacheWhat pop:Word:Name Cat &gt;&gt;&gt; l_CacheWhat
   l_CacheWhat Log
+
+  VAR l_FieldVar
+  aCacheWhere %% l_CacheWhat &gt;&gt;&gt; l_FieldVar
+
+  l_FieldVar Log
 
   aLambda DO
  ; // Cache.do
@@ -54,8 +59,20 @@ Test&Dump CacheFunction.ms.script.test
   aWord Cache ( aWord %% 'X' pop:Word:Name ) &gt;&gt;&gt; Result
  ; // X
 
+ @ A DumpElement
+ @ B DumpElement
+
  @ A X .
  @ B X .
+
+ @ A DumpElement
+ @ B DumpElement
+
+ @ A X .
+ @ B X .
+
+ @ A DumpElement
+ @ B DumpElement
 ; // CacheFunction.ms.script.test
 
 CacheFunction.ms.script.test
