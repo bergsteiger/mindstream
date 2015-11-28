@@ -30,6 +30,7 @@ Test&Dump CacheFunction.ms.script.test
 
   if ( l_FieldVar NotValid ) then
   begin
+   l_CacheWhat false aCacheWhere pop:NewWordDefinitor:CheckVar DROP
   end
 
   aLambda DO
