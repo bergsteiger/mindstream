@@ -54,8 +54,12 @@ Test&Dump CacheFunction.ms.script.test
   aWord Cache ( aWord %% 'X' pop:Word:Name ) >>> Result
  ; // X
 
+ @ A DumpElement
+ @ B DumpElement
+
  @ A X .
  @ B X .
+
  @ A DumpElement
  @ B DumpElement
 ; // CacheFunction.ms.script.test
