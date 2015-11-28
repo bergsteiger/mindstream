@@ -76,6 +76,9 @@ VOID TestWithDump CacheFunction.ms.script.test
  @
  A
  DumpElement
+ @
+ B
+ DumpElement
 ; // VOID TestWithDump CacheFunction.ms.script.test
 
 A
@@ -94,4 +97,15 @@ X
  ERROR
  'fake A'
 ; // : A
+
+: B
+ STRING FUNCTION X
+  '2'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION X
+ 
+ ERROR
+ 'fake B'
+; // : B
 
