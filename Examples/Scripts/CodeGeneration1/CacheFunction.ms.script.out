@@ -34,6 +34,13 @@ VOID TestWithDump CacheFunction.ms.script.test
    'cached'
    aCacheWhat
    .Parent.Words
+   (
+    class::TkwCompiledMain
+    SWAP
+    pop:Object:Inherits
+   )
+   SWAP
+   Array:Filter
    pop:Word:Name
    SWAP
    Array:Iterate
@@ -130,7 +137,7 @@ VOID TestWithDump CacheFunction.ms.script.test
 1
 2
 : A
- Cache.do cached:CacheFunction.ms.script.test:TkwCompiledMain:X
+ Cache.do cached:TkwCompiledMain:X
  STRING FUNCTION X
   '1'
   Result
@@ -140,7 +147,7 @@ VOID TestWithDump CacheFunction.ms.script.test
 ; // : A
 
 : B
- Cache.do cached:CacheFunction.ms.script.test:TkwCompiledMain:X
+ Cache.do cached:TkwCompiledMain:X
  STRING FUNCTION X
   '2'
   Result
@@ -152,7 +159,7 @@ VOID TestWithDump CacheFunction.ms.script.test
 1
 2
 : A
- Cache.do cached:CacheFunction.ms.script.test:TkwCompiledMain:X
+ Cache.do cached:TkwCompiledMain:X
  STRING FUNCTION X
   '1'
   Result
@@ -162,7 +169,7 @@ VOID TestWithDump CacheFunction.ms.script.test
 ; // : A
 
 : B
- Cache.do cached:CacheFunction.ms.script.test:TkwCompiledMain:X
+ Cache.do cached:TkwCompiledMain:X
  STRING FUNCTION X
   '2'
   Result

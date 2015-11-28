@@ -23,7 +23,7 @@ Test&Dump CacheFunction.ms.script.test
     %REMARK 'Лямбда, которая вычисляет результат'
 
   STRING VAR l_CacheWhat
-  [ 'cached' aCacheWhat .Parent.Words .for> pop:Word:Name aCacheWhat pop:Word:Name ] ':' strings:CatSep >>> l_CacheWhat
+  [ 'cached' aCacheWhat .Parent.Words .filter> ( class::TkwCompiledMain SWAP pop:Object:Inherits ) .for> pop:Word:Name aCacheWhat pop:Word:Name ] ':' strings:CatSep >>> l_CacheWhat
 
   VAR l_FieldVar
   aCacheWhere %% l_CacheWhat >>> l_FieldVar
