@@ -34,9 +34,6 @@ VOID TestWithDump CacheFunction.ms.script.test
   ^ IN aLambda
   STRING VAR l_CacheWhat
   VAR l_FieldVar
-  aCacheWhere
-  pop:Word:Name
-  .
   'cached:'
   aCacheWhat
   pop:Word:Name
@@ -149,11 +146,9 @@ VOID TestWithDump CacheFunction.ms.script.test
  'fake B'
 ; // : B
 
-A
 cached:X
 <nil>
 X
-B
 cached:X
 <nil>
 X
@@ -181,11 +176,9 @@ X
  'fake B'
 ; // : B
 
-A
 cached:X
 TkwGlobalVar
 X
-B
 cached:X
 TkwGlobalVar
 X
