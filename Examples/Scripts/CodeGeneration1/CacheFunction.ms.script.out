@@ -226,6 +226,26 @@ VOID TestWithDump CacheFunction.ms.script.test
  B
  Y
  .
+ '1'
+ @
+ A
+ Z
+ .
+ '2'
+ @
+ B
+ Z
+ .
+ '3'
+ @
+ A
+ Z
+ .
+ '4'
+ @
+ B
+ Z
+ .
  @
  A
  DumpElement
@@ -242,9 +262,14 @@ VOID TestWithDump CacheFunction.ms.script.test
 2B.Y
 3A.Y
 4B.Y
+1A.Z
+2B.Z
+3A.Z
+4B.Z
 : A
  Cache.do cached:X
  Cache.do cached:Y
+ Cache.do cached:Z
  STRING FUNCTION X
   'A.X'
   Result
@@ -268,6 +293,7 @@ VOID TestWithDump CacheFunction.ms.script.test
 : B
  Cache.do cached:X
  Cache.do cached:Y
+ Cache.do cached:Z
  STRING FUNCTION X
   'B.X'
   Result
