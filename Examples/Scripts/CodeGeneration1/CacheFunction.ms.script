@@ -28,6 +28,10 @@ Test&Dump CacheFunction.ms.script.test
 
   l_FieldVar Log
 
+  if ( l_FieldVar NotValid ) then
+  begin
+  end
+
   aLambda DO
  ; // Cache.do
 

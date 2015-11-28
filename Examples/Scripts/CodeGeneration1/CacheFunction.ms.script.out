@@ -52,6 +52,14 @@ VOID TestWithDump CacheFunction.ms.script.test
   pop:Word:SetValue
   l_FieldVar
   .
+  if
+   (
+    l_FieldVar
+    NotValid
+   )
+  then
+   BEGIN
+   END
   aLambda
   DO
  ; // : Cache.do
