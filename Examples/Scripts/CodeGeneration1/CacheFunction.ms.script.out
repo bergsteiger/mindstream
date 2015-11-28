@@ -66,6 +66,10 @@ VOID TestWithDump CacheFunction.ms.script.test
     pop:NewWordDefinitor:CheckVar
     l_NewVar
     pop:Word:SetValue
+    @
+    VAR
+    l_NewVar
+    pop:Word:SetProducer
    END
   aLambda
   DO
@@ -155,7 +159,7 @@ cached:X
 <nil>
 X
 : A
- pop:NewWordDefinitor:CheckVar cached:X
+ VAR cached:X
  STRING FUNCTION X
   '1'
   Result
@@ -167,7 +171,7 @@ X
 ; // : A
 
 : B
- pop:NewWordDefinitor:CheckVar cached:X
+ VAR cached:X
  STRING FUNCTION X
   '2'
   Result
@@ -187,7 +191,7 @@ cached:X
 TkwGlobalVar
 X
 : A
- pop:NewWordDefinitor:CheckVar cached:X
+ VAR cached:X
  STRING FUNCTION X
   '1'
   Result
@@ -199,7 +203,7 @@ X
 ; // : A
 
 : B
- pop:NewWordDefinitor:CheckVar cached:X
+ VAR cached:X
  STRING FUNCTION X
   '2'
   Result

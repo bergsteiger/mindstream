@@ -32,6 +32,7 @@ Test&Dump CacheFunction.ms.script.test
   begin
    VAR l_NewVar
    l_CacheWhat false aCacheWhere pop:NewWordDefinitor:CheckVar >>> l_NewVar
+   @ VAR l_NewVar pop:Word:SetProducer
   end
 
   aLambda DO
