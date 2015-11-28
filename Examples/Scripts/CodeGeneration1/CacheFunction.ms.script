@@ -85,13 +85,13 @@ Test&Dump CacheFunction.ms.script.test
  ; // Y
 
  '1' @ A X .
- '1' @ B X .
+ '2' @ B X .
 
  @ A DumpElement
  @ B DumpElement
 
- '1' @ A X .
- '1' @ B X .
+ '3' @ A X .
+ '4' @ B X .
 
  @ A Y .
  @ B Y .
