@@ -26,6 +26,8 @@ Test&Dump CacheFunction.ms.script.test
   VAR l_FieldVar
   aCacheWhere %% l_CacheWhat >>> l_FieldVar
 
+  l_FieldVar Log
+
   aLambda DO
  ; // Cache.do
 

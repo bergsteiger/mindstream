@@ -50,6 +50,8 @@ VOID TestWithDump CacheFunction.ms.script.test
   l_CacheWhat
   l_FieldVar
   pop:Word:SetValue
+  l_FieldVar
+  .
   aLambda
   DO
  ; // : Cache.do
@@ -131,9 +133,11 @@ VOID TestWithDump CacheFunction.ms.script.test
 
 A
 cached:X
+<nil>
 X
 B
 cached:X
+<nil>
 X
 : A
  STRING FUNCTION X
@@ -159,9 +163,11 @@ X
 
 A
 cached:X
+<nil>
 X
 B
 cached:X
+<nil>
 X
 : A
  STRING FUNCTION X
