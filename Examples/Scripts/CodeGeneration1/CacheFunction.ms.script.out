@@ -33,6 +33,11 @@ VOID TestWithDump CacheFunction.ms.script.test
   ARRAY [
    'cached:'
    aCacheWhat
+   .Parent.Words
+   pop:Word:Name
+   SWAP
+   Array:Iterate
+   aCacheWhat
    pop:Word:Name
   ]
   strings:Cat
@@ -124,7 +129,7 @@ VOID TestWithDump CacheFunction.ms.script.test
 1
 2
 : A
- Cache.do cached:X
+ Cache.do cached:CacheFunction.ms.script.testTkwCompiledMainX
  STRING FUNCTION X
   '1'
   Result
@@ -134,7 +139,7 @@ VOID TestWithDump CacheFunction.ms.script.test
 ; // : A
 
 : B
- Cache.do cached:X
+ Cache.do cached:CacheFunction.ms.script.testTkwCompiledMainX
  STRING FUNCTION X
   '2'
   Result
@@ -146,7 +151,7 @@ VOID TestWithDump CacheFunction.ms.script.test
 1
 2
 : A
- Cache.do cached:X
+ Cache.do cached:CacheFunction.ms.script.testTkwCompiledMainX
  STRING FUNCTION X
   '1'
   Result
@@ -156,7 +161,7 @@ VOID TestWithDump CacheFunction.ms.script.test
 ; // : A
 
 : B
- Cache.do cached:X
+ Cache.do cached:CacheFunction.ms.script.testTkwCompiledMainX
  STRING FUNCTION X
   '2'
   Result
