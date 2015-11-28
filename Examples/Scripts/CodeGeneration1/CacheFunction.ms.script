@@ -20,7 +20,6 @@ Test&Dump CacheFunction.ms.script.test
 
   STRING VAR l_CacheWhat
   'cached:' aCacheWhat pop:Word:Name Cat >>> l_CacheWhat
-  l_CacheWhat Log
 
   VAR l_FieldVar
   aCacheWhere %% l_CacheWhat >>> l_FieldVar

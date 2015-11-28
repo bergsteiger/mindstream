@@ -40,8 +40,6 @@ VOID TestWithDump CacheFunction.ms.script.test
   Cat
   l_CacheWhat
   pop:Word:SetValue
-  l_CacheWhat
-  .
   aCacheWhere
   %%
   l_CacheWhat
@@ -146,10 +144,8 @@ VOID TestWithDump CacheFunction.ms.script.test
  'fake B'
 ; // : B
 
-cached:X
 <nil>
 X
-cached:X
 <nil>
 X
 : A
@@ -176,10 +172,8 @@ X
  'fake B'
 ; // : B
 
-cached:X
 TkwGlobalVar
 X
-cached:X
 TkwGlobalVar
 X
 : A
