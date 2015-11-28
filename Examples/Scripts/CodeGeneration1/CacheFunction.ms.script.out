@@ -38,6 +38,7 @@ VOID TestWithDump CacheFunction.ms.script.test
     class::TkwCompiledMain
     SWAP
     pop:Object:Inherits
+    !
    )
    SWAP
    Array:Filter
@@ -137,7 +138,7 @@ VOID TestWithDump CacheFunction.ms.script.test
 1
 2
 : A
- Cache.do cached:TkwCompiledMain:X
+ Cache.do cached:CacheFunction.ms.script.test:X
  STRING FUNCTION X
   '1'
   Result
@@ -147,7 +148,7 @@ VOID TestWithDump CacheFunction.ms.script.test
 ; // : A
 
 : B
- Cache.do cached:TkwCompiledMain:X
+ Cache.do cached:CacheFunction.ms.script.test:X
  STRING FUNCTION X
   '2'
   Result
@@ -159,7 +160,7 @@ VOID TestWithDump CacheFunction.ms.script.test
 1
 2
 : A
- Cache.do cached:TkwCompiledMain:X
+ Cache.do cached:CacheFunction.ms.script.test:X
  STRING FUNCTION X
   '1'
   Result
@@ -169,7 +170,7 @@ VOID TestWithDump CacheFunction.ms.script.test
 ; // : A
 
 : B
- Cache.do cached:TkwCompiledMain:X
+ Cache.do cached:CacheFunction.ms.script.test:X
  STRING FUNCTION X
   '2'
   Result
