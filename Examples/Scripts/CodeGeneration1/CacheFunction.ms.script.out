@@ -163,6 +163,27 @@ VOID TestWithDump CacheFunction.ms.script.test
   pop:Word:SetValue
  ; // STRING FUNCTION Y
  
+ STRING FUNCTION Z
+  STRING IN aPrefix
+  TtfwWord IN aWord
+  aPrefix
+  aWord
+  Z
+  Cache.do
+  (
+   aWord
+   %%
+   (
+    Z
+    pop:Word:Name
+   )
+   DO
+  )
+  Cat
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Z
+ 
  CacheFunction.ms.script.test
  DumpElement
  '1'

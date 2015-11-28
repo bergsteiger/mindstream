@@ -99,6 +99,12 @@ Test&Dump CacheFunction.ms.script.test
   aPrefix aWord Cache ( aWord %% ( @SELF pop:Word:Name ) DO ) Cat >>> Result
  ; // Y
 
+ STRING FUNCTION Z
+   STRING IN aPrefix
+   TtfwWord IN aWord
+  aPrefix aWord Cache ( aWord %% ( @SELF pop:Word:Name ) DO ) Cat >>> Result
+ ; // Z
+
  '1' @ A X .
  '2' @ B X .
 
