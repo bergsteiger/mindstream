@@ -108,20 +108,17 @@ Test&Dump CacheFunction.ms.script.test
  '1' @ A X .
  '2' @ B X .
 
- @ A DumpElement
- @ B DumpElement
-
  '3' @ A X .
  '4' @ B X .
 
  '1' @ A Y .
  '2' @ B Y .
 
- @ A DumpElement
- @ B DumpElement
-
  '3' @ A Y .
  '4' @ B Y .
+
+ @ A DumpElement
+ @ B DumpElement
 
 ; // CacheFunction.ms.script.test
 

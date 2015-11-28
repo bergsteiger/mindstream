@@ -196,12 +196,6 @@ VOID TestWithDump CacheFunction.ms.script.test
  B
  X
  .
- @
- A
- DumpElement
- @
- B
- DumpElement
  '3'
  @
  A
@@ -222,12 +216,6 @@ VOID TestWithDump CacheFunction.ms.script.test
  B
  Y
  .
- @
- A
- DumpElement
- @
- B
- DumpElement
  '3'
  @
  A
@@ -238,58 +226,22 @@ VOID TestWithDump CacheFunction.ms.script.test
  B
  Y
  .
+ @
+ A
+ DumpElement
+ @
+ B
+ DumpElement
 ; // VOID TestWithDump CacheFunction.ms.script.test
 
 1A.X
 2B.X
-: A
- Cache.do cached:X
- STRING FUNCTION X
-  'A.X'
-  Result
-  pop:Word:SetValue
- ; // STRING FUNCTION X
- 
- STRING FUNCTION Y
-  'A.Y'
-  Result
-  pop:Word:SetValue
- ; // STRING FUNCTION Y
- 
- STRING FUNCTION Z
-  'A.Z'
-  Result
-  pop:Word:SetValue
- ; // STRING FUNCTION Z
- 
-; // : A
-
-: B
- Cache.do cached:X
- STRING FUNCTION X
-  'B.X'
-  Result
-  pop:Word:SetValue
- ; // STRING FUNCTION X
- 
- STRING FUNCTION Y
-  'B.Y'
-  Result
-  pop:Word:SetValue
- ; // STRING FUNCTION Y
- 
- STRING FUNCTION Z
-  'B.Z'
-  Result
-  pop:Word:SetValue
- ; // STRING FUNCTION Z
- 
-; // : B
-
 3A.X
 4B.X
 1A.Y
 2B.Y
+3A.Y
+4B.Y
 : A
  Cache.do cached:X
  Cache.do cached:Y
@@ -336,5 +288,3 @@ VOID TestWithDump CacheFunction.ms.script.test
  
 ; // : B
 
-3A.Y
-4B.Y
