@@ -1,7 +1,7 @@
 VOID TestWithDump CacheFunction.ms.script.test
  : A
   STRING FUNCTION X
-   '1'
+   'A.X'
    Result
    pop:Word:SetValue
   ; // STRING FUNCTION X
@@ -10,7 +10,7 @@ VOID TestWithDump CacheFunction.ms.script.test
  
  : B
   STRING FUNCTION X
-   '2'
+   'B.X'
    Result
    pop:Word:SetValue
   ; // STRING FUNCTION X
@@ -182,12 +182,12 @@ VOID TestWithDump CacheFunction.ms.script.test
  .
 ; // VOID TestWithDump CacheFunction.ms.script.test
 
-11
-22
+1A.X
+2B.X
 : A
  Cache.do cached:X
  STRING FUNCTION X
-  '1'
+  'A.X'
   Result
   pop:Word:SetValue
  ; // STRING FUNCTION X
@@ -197,22 +197,22 @@ VOID TestWithDump CacheFunction.ms.script.test
 : B
  Cache.do cached:X
  STRING FUNCTION X
-  '2'
+  'B.X'
   Result
   pop:Word:SetValue
  ; // STRING FUNCTION X
  
 ; // : B
 
-31
-42
-1
-2
+3A.X
+4B.X
+A.X
+B.X
 : A
  Cache.do cached:X
  Cache.do cached:Y
  STRING FUNCTION X
-  '1'
+  'A.X'
   Result
   pop:Word:SetValue
  ; // STRING FUNCTION X
@@ -223,12 +223,12 @@ VOID TestWithDump CacheFunction.ms.script.test
  Cache.do cached:X
  Cache.do cached:Y
  STRING FUNCTION X
-  '2'
+  'B.X'
   Result
   pop:Word:SetValue
  ; // STRING FUNCTION X
  
 ; // : B
 
-1
-2
+A.X
+B.X
