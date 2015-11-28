@@ -26,6 +26,7 @@ Test&Dump CacheFunction.ms.script.test
   [ 'cached' 
      aCacheWhat .Parent.Words 
       .filter> ( class::TkwCompiledMain SWAP pop:Object:Inherits ! ) 
+      .filter> ( pop:Word:Parent class::TkwCompiledMain SWAP pop:Object:Inherits ! )
        .for> pop:Word:Name 
      aCacheWhat pop:Word:Name 
   ] ':' strings:CatSep >>> l_CacheWhat
