@@ -6,6 +6,12 @@ VOID TestWithDump CacheFunction.ms.script.test
    pop:Word:SetValue
   ; // STRING FUNCTION X
   
+  STRING FUNCTION Y
+   'A.Y'
+   Result
+   pop:Word:SetValue
+  ; // STRING FUNCTION Y
+  
  ; // : A
  
  : B
@@ -14,6 +20,12 @@ VOID TestWithDump CacheFunction.ms.script.test
    Result
    pop:Word:SetValue
   ; // STRING FUNCTION X
+  
+  STRING FUNCTION Y
+   'B.Y'
+   Result
+   pop:Word:SetValue
+  ; // STRING FUNCTION Y
   
  ; // : B
  
@@ -192,6 +204,12 @@ VOID TestWithDump CacheFunction.ms.script.test
   pop:Word:SetValue
  ; // STRING FUNCTION X
  
+ STRING FUNCTION Y
+  'A.Y'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Y
+ 
 ; // : A
 
 : B
@@ -201,6 +219,12 @@ VOID TestWithDump CacheFunction.ms.script.test
   Result
   pop:Word:SetValue
  ; // STRING FUNCTION X
+ 
+ STRING FUNCTION Y
+  'B.Y'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Y
  
 ; // : B
 
@@ -217,6 +241,12 @@ B.X
   pop:Word:SetValue
  ; // STRING FUNCTION X
  
+ STRING FUNCTION Y
+  'A.Y'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Y
+ 
 ; // : A
 
 : B
@@ -227,6 +257,12 @@ B.X
   Result
   pop:Word:SetValue
  ; // STRING FUNCTION X
+ 
+ STRING FUNCTION Y
+  'B.Y'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Y
  
 ; // : B
 

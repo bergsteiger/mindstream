@@ -61,7 +61,10 @@ Test&Dump CacheFunction.ms.script.test
    'A.X' >>> Result
   ; // X
 
-  // ERROR 'fake A'
+  STRING FUNCTION Y
+   'A.Y' >>> Result
+  ; // Y
+
  ; // A
  
  : B
@@ -70,7 +73,10 @@ Test&Dump CacheFunction.ms.script.test
    'B.X' >>> Result
   ; // X
 
-  // ERROR 'fake B'
+  STRING FUNCTION Y
+   'B.Y' >>> Result
+  ; // Y
+
  ; // B
  
  STRING FUNCTION X
