@@ -21,7 +21,11 @@ PROCEDURE Print
  else
  if ( aValue IsArray )  then
  begin
-  [ '[' ']' ] ' ' strings:CatSep .
+  [ 
+   '[' 
+    aValue .for> ( ToPrintable ) 
+   ']' 
+  ] ' ' strings:CatSep .
  end
  else
  begin
