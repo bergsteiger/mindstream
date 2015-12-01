@@ -28,7 +28,14 @@ PROCEDURE Print
    '[' 
     aValue .for> ( 
       PRINTABLE IN aValue
-     aValue ToPrintable 
+     if ( aValue IsObj .IsTfwWord ) then
+     begin
+      aValue |N
+     end
+     else
+     begin
+      aValue ToPrintable 
+     end
     ) 
    ']' 
   ] ' ' strings:CatSep .
