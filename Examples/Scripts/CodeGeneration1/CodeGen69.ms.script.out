@@ -3272,6 +3272,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms
  ;
 VOID ()
 IMMEDIATE VOID OPERATOR :: MACRO : []
+ Documentation:
+  Пустой массив
+; // []
 ARRAY FUNCTION : axiom:InParams:It
  ENGINE_WORD OPERATOR :: IN : aParams
  ARRAY FUNCTION :: axiom:InParams:It : Result
