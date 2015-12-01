@@ -26,7 +26,10 @@ PROCEDURE Print
  begin
   [ 
    '[' 
-    aValue .for> ( ToPrintable ) 
+    aValue .for> ( 
+      PRINTABLE IN aValue
+     aValue ToPrintable 
+    ) 
    ']' 
   ] ' ' strings:CatSep .
  end
