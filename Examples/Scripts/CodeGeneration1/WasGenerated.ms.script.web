@@ -1,4 +1,4 @@
-UNIT WasGenerated.ms.script
+PROGRAM WasGenerated.ms.script
 
 USES
  Testing.ms.dict
@@ -23,10 +23,14 @@ Test&Dump WasGenerated.ms.script.test
 
  [ A A A B B B C C C A A A B B B C C C ] 
  // - это массив значений
+ .filter&gt; ( @ B != )
+ // - отфильтровываем значения равные ссылке на B
+ // ВАЖНО: тут сравниваем УКАЗАТЕЛИ на функции
  .map&gt; pop:Word:Name 
  // - мапируем значение на вызов функции pop:Word:Name  
  .filter&gt; ( 'C' != )
  // - отфильтровываем значения равные 'C'
+ // ВАЖНО: тут сравниваем ИМЕНА на функций
  .for&gt; 
  // - итерируем смапированные значения
  .
