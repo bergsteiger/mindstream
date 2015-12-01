@@ -1,7 +1,13 @@
 PROGRAM WasGenerated.ms.script
 
 USES
+ DogAndBracket.ms.dict
+ // - в этом словаре описано слово @[
+;
+
+USES
  Testing.ms.dict
+ // - в этом словаре описано слово Test&Dump
 ;
 
 Test&Dump WasGenerated.ms.script.test
