@@ -14,6 +14,12 @@ Test&Dump WasGenerated.ms.script.test
 
  %SUMMARY 'Метод WasGenerated.ms.script.test' ;
 
+ BOOLEAN FUNCTION .WasGenerated
+   TtfwWord IN aWord
+  %SUMMARY 'Определяет тот факт, что слово aWord уже использовалось для генерации' ;
+  false >>> Result
+ ; // .WasGenerated
+
  : A
   %SUMMARY 'Метод A' ;
  ; // A
