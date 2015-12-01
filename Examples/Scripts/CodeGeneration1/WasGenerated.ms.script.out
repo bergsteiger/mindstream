@@ -1,5 +1,23 @@
 VOID TestWithDump WasGenerated.ms.script.test
+ : A
+  A
+ ; // : A
+ 
  WasGenerated.ms.script.test
  DumpElement
+ ARRAY [
+  A
+  A
+  A
+ ]
+ pop:Word:Name
+ SWAP
+ Array:Map
+ .
+ SWAP
+ Array:Iterate
 ; // VOID TestWithDump WasGenerated.ms.script.test
 
+A
+A
+A

@@ -5,6 +5,13 @@ USES
 ;
 
 Test&Dump WasGenerated.ms.script.test
+
+ : A
+  @SELF
+ ; // A
+
+ [ A A A ] .map> pop:Word:Name .for> .
+
 ; // WasGenerated.ms.script.test
 
 WasGenerated.ms.script.test
