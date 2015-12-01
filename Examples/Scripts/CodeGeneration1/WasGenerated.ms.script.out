@@ -7,6 +7,10 @@ VOID TestWithDump WasGenerated.ms.script.test
   B
  ; // : B
  
+ : C
+  C
+ ; // : C
+ 
  WasGenerated.ms.script.test
  DumpElement
  ARRAY [
@@ -16,6 +20,9 @@ VOID TestWithDump WasGenerated.ms.script.test
   B
   B
   B
+  C
+  C
+  C
  ]
  pop:Word:Name
  SWAP
@@ -31,3 +38,6 @@ A
 B
 B
 B
+C
+C
+C

@@ -14,7 +14,11 @@ Test&Dump WasGenerated.ms.script.test
   @SELF
  ; // B
 
- [ A A A B B B ] .map> pop:Word:Name .for> .
+ : C
+  @SELF
+ ; // C
+
+ [ A A A B B B C C C ] .map> pop:Word:Name .for> .
 
 ; // WasGenerated.ms.script.test
 
