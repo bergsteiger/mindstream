@@ -1,8 +1,18 @@
 PROGRAM WasGenerated.ms.script
 
 USES
+ axiom_push.ms.dict
+ // - в этом словаре описано слово []
+;
+
+USES
  DogAndBracket.ms.dict
  // - в этом словаре описано слово @[
+;
+
+USES
+ CompileTimeVar.ms.dict
+ // - в этом словаре описано слово CompileTime-VAR
 ;
 
 USES
@@ -14,9 +24,14 @@ Test&Dump WasGenerated.ms.script.test
 
  %SUMMARY 'Метод WasGenerated.ms.script.test' ;
 
+ ARRAY CompileTime-VAR g_WasGenerated []
+
  BOOLEAN FUNCTION .WasGenerated
    TtfwWord IN aWord
   %SUMMARY 'Определяет тот факт, что слово aWord уже использовалось для генерации' ;
+  aWord g_WasGenerated array:Has ! ? (
+   aWord array:AddTo g_WasGenerated
+  ) // aValue l_Array array:Has ! ?
   false >>> Result
  ; // .WasGenerated
 

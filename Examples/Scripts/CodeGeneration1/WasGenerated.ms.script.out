@@ -9,6 +9,16 @@ VOID TestWithDump WasGenerated.ms.script.test
   ; // %SUMMARY %SUM
   
   TtfwWord IN aWord
+  aWord
+  g_WasGenerated
+  array:Has
+  !
+  ?
+  (
+   aWord
+   >>>[]
+   g_WasGenerated
+  )
   false
   Result
   pop:Word:SetValue
@@ -35,6 +45,7 @@ VOID TestWithDump WasGenerated.ms.script.test
   
  ; // : C
  
+ ARRAY STATIC-VAR g_WasGenerated
  WasGenerated.ms.script.test
  DumpElement
  ARRAY [
