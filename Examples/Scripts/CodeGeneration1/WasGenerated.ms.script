@@ -21,7 +21,16 @@ Test&Dump WasGenerated.ms.script.test
   // - функци€ возвращает ссылку на саму себ€
  ; // C
 
- [ A A A B B B C C C A A A B B B C C C ] .map> pop:Word:Name .for> .
+ [ A A A B B B C C C A A A B B B C C C ] 
+ // - это массив значений
+ .map> pop:Word:Name 
+ // - мапируем значение на вызов функции pop:Word:Name  
+ .for> 
+ // - итерируем смапированные значени€
+ .
+ // - печатаем каждое итерируемое значение
+
+ // ¬ итоге:
  // - тут итерируем массив и дл€ каждого слова выводим его им€
  // т.е. мапируем Element на pop:Word:Name
 
