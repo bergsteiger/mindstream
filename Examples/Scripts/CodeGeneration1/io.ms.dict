@@ -10,6 +10,11 @@ USES
 
 ANY TYPE PRINTABLE
 
+BOOLEAN FUNCTION IsTfwWord 
+  PRINTABLE IN aValue
+ ( aValue IsObj ) AND ( aValue IS class::TtfwWord ) >>> Result
+; // IsTfwWord
+
 PROCEDURE Print
  PRINTABLE IN aValue
  if (
