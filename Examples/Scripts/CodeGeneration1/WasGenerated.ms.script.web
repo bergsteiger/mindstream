@@ -19,6 +19,7 @@ Test&Dump WasGenerated.ms.script.test
  ; // C
 
  [ A A A B B B C C C A A A B B B C C C ] .map&gt; pop:Word:Name .for&gt; .
+ // - тут итерируем массив и для каждого слова выводим его имя
 
 ; // WasGenerated.ms.script.test
 
