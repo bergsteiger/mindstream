@@ -3961,7 +3961,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
   axiom:clipboard
   axiom:Font
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
  ;
+BOOLEAN FUNCTION : .IsTfwWord
+ PRINTABLE OPERATOR :: IN : aValue
+ BOOLEAN FUNCTION :: .IsTfwWord : Result
+; // .IsTfwWord
 VOID OPERATOR :: PROCEDURE : Print
  PRINTABLE OPERATOR :: IN : aValue
 ; // Print

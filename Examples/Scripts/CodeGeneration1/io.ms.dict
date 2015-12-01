@@ -17,7 +17,7 @@ BOOLEAN FUNCTION .IsTfwWord
 
 PROCEDURE Print
  PRINTABLE IN aValue
- if ( aValue IsObj .IsTfwWord ) then
+ if ( aValue .IsTfwWord ) then
  begin
   aValue |N .
  end
@@ -28,7 +28,7 @@ PROCEDURE Print
    '[' 
     aValue .for> ( 
       PRINTABLE IN aValue
-     if ( aValue IsObj .IsTfwWord ) then
+     if ( aValue .IsTfwWord ) then
      begin
       aValue |N
      end
