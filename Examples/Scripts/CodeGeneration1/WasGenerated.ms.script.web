@@ -13,17 +13,21 @@ USES
 Test&Dump WasGenerated.ms.script.test
 
  %SUMMARY 'Метод WasGenerated.ms.script.test' ;
+ // - Эта строчка будет видна в дампе кода
 
  : A
   %SUMMARY 'Метод A' ;
+  // - Эта строчка будет видна в дампе кода
  ; // A
 
  : B
   %SUMMARY 'Метод B' ;
+  // - Эта строчка будет видна в дампе кода
  ; // B
 
  : C
   %SUMMARY 'Метод C' ;
+  // - Эта строчка будет видна в дампе кода
  ; // C
 
  @[ 
