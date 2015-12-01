@@ -10,16 +10,14 @@ USES
 
 ANY TYPE PRINTABLE
 
-BOOLEAN FUNCTION IsTfwWord 
+BOOLEAN FUNCTION .IsTfwWord 
   PRINTABLE IN aValue
  ( aValue IsObj ) AND ( aValue IS class::TtfwWord ) >>> Result
-; // IsTfwWord
+; // .IsTfwWord
 
 PROCEDURE Print
  PRINTABLE IN aValue
- if (
-     ( aValue IsObj ) AND ( aValue IS class::TtfwWord )
-    ) then
+ if ( aValue IsObj .IsTfwWord ) then
  begin
   aValue |N .
  end
