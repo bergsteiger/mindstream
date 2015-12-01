@@ -33,6 +33,13 @@ VOID TestWithDump WasGenerated.ms.script.test
   C
   C
  ]
+ (
+  @
+  B
+  !=
+ )
+ SWAP
+ Array:Filter
  pop:Word:Name
  SWAP
  Array:Map
@@ -50,12 +57,6 @@ VOID TestWithDump WasGenerated.ms.script.test
 A
 A
 A
-B
-B
-B
 A
 A
 A
-B
-B
-B

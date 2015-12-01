@@ -23,6 +23,8 @@ Test&Dump WasGenerated.ms.script.test
 
  [ A A A B B B C C C A A A B B B C C C ] 
  // - это массив значений
+ .filter> ( @ B != )
+ // - отфильтровываем значения равные ссылке на B
  .map> pop:Word:Name 
  // - мапируем значение на вызов функции pop:Word:Name  
  .filter> ( 'C' != )
