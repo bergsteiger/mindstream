@@ -6,6 +6,11 @@ USES
 ;
 
 USES
+ io.ms.dict
+ // - в этом словаре определено слово Print
+;
+
+USES
  DogAndBracket.ms.dict
  // - в этом словаре описано слово @[
 ;
@@ -65,9 +70,11 @@ Test&Dump WasGenerated.ms.script.test
   ВАЖНО: тут сравниваем ИМЕНА на функций'
  .for&gt; 
  %REMARK ' - итерируем смапированные значения'
- .
+ Print
  %REMARK ' - печатаем каждое итерируемое значение'
 
+ g_WasGenerated Print
+ %REMARK ' - печатаем слова участвовавшие в генерации.'
 ; // WasGenerated.ms.script.test
 
 WasGenerated.ms.script.test
