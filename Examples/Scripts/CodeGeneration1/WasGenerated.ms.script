@@ -12,14 +12,18 @@ USES
 
 Test&Dump WasGenerated.ms.script.test
 
+ %SUMMARY 'Метод WasGenerated.ms.script.test' ;
+
  : A
   %SUMMARY 'Метод A' ;
  ; // A
 
  : B
+  %SUMMARY 'Метод B' ;
  ; // B
 
  : C
+  %SUMMARY 'Метод C' ;
  ; // C
 
  @[ 

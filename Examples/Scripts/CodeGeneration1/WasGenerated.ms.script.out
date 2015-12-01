@@ -1,4 +1,8 @@
 VOID TestWithDump WasGenerated.ms.script.test
+ %SUMMARY %SUM
+  'Метод WasGenerated.ms.script.test'
+ ; // %SUMMARY %SUM
+ 
  : A
   %SUMMARY %SUM
    'Метод A'
@@ -7,9 +11,17 @@ VOID TestWithDump WasGenerated.ms.script.test
  ; // : A
  
  : B
+  %SUMMARY %SUM
+   'Метод B'
+  ; // %SUMMARY %SUM
+  
  ; // : B
  
  : C
+  %SUMMARY %SUM
+   'Метод C'
+  ; // %SUMMARY %SUM
+  
  ; // : C
  
  WasGenerated.ms.script.test
