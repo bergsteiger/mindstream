@@ -1,0 +1,25 @@
+UNIT WasGenerated.ms.script
+
+USES
+ Testing.ms.dict
+;
+
+Test&Dump WasGenerated.ms.script.test
+
+ : A
+  @SELF
+ ; // A
+
+ : B
+  @SELF
+ ; // B
+
+ : C
+  @SELF
+ ; // C
+
+ [ A A A B B B C C C A A A B B B C C C ] .map&gt; pop:Word:Name .for&gt; .
+
+; // WasGenerated.ms.script.test
+
+WasGenerated.ms.script.test
