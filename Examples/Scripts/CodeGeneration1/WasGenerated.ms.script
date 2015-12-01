@@ -27,7 +27,7 @@ Test&Dump WasGenerated.ms.script.test
   // - функция возвращает ссылку на саму себя
  ; // C
 
- [ A A A B B B C C C A A A B B B C C C ] 
+ @[ A A A B B B C C C A A A B B B C C C ] 
  // - это массив значений
  .filter> ( @ B != )
  // - отфильтровываем значения равные ссылке на B
