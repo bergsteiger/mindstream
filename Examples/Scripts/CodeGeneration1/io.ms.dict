@@ -19,6 +19,11 @@ PROCEDURE Print
   aValue |N .
  end
  else
+ if ( aValue IsArray )  then
+ begin
+  [ '[' ']' ] ' ' strings:CatSep .
+ end
+ else
  begin
   aValue .
  end
