@@ -37,6 +37,8 @@ Test&Dump WasGenerated.ms.script.test
   A A A B B B C C C A A A B B B C C C 
  ] 
  %REMARK ' - это массив ССЫЛОК на функции (слова)'
+ .filter> ( .WasGenerated ! )
+ %REMARK ' - отфильтровываем те слова, которые уже были использованы для генерации'
  .filter> ( @ B != )
  %REMARK ' - отфильтровываем значения равные ссылке на B
   ВАЖНО: тут сравниваем УКАЗАТЕЛИ на функции'

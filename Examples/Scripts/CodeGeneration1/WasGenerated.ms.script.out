@@ -76,6 +76,12 @@ VOID TestWithDump WasGenerated.ms.script.test
   C
  ]
  (
+  .WasGenerated
+  !
+ )
+ SWAP
+ Array:Filter
+ (
   @
   B
   !=
