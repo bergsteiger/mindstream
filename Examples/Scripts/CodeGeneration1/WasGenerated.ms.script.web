@@ -1,7 +1,13 @@
 PROGRAM WasGenerated.ms.script
 
 USES
+ DogAndBracket.ms.dict
+ // - в этом словаре описано слово @[
+;
+
+USES
  Testing.ms.dict
+ // - в этом словаре описано слово Test&Dump
 ;
 
 Test&Dump WasGenerated.ms.script.test
@@ -21,8 +27,11 @@ Test&Dump WasGenerated.ms.script.test
   // - функция возвращает ссылку на саму себя
  ; // C
 
- [ A A A B B B C C C A A A B B B C C C ] 
- // - это массив значений
+ @[ 
+ // - слово @[ открываем массив ССЫЛОК, а не ЗНАЧЕНИЙ
+  A A A B B B C C C A A A B B B C C C 
+ ] 
+ // - это массив ССЫЛОК на функции (слова)
  .filter&gt; ( @ B != )
  // - отфильтровываем значения равные ссылке на B
  // ВАЖНО: тут сравниваем УКАЗАТЕЛИ на функции
