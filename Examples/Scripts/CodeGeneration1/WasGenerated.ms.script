@@ -8,14 +8,17 @@ Test&Dump WasGenerated.ms.script.test
 
  : A
   @SELF
+  // - функция возвращает ссылку на саму себя
  ; // A
 
  : B
   @SELF
+  // - функция возвращает ссылку на саму себя
  ; // B
 
  : C
   @SELF
+  // - функция возвращает ссылку на саму себя
  ; // C
 
  [ A A A B B B C C C A A A B B B C C C ] .map> pop:Word:Name .for> .
