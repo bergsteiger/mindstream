@@ -14,6 +14,12 @@ Test&Dump WasGenerated.ms.script.test
 
  %SUMMARY 'Метод WasGenerated.ms.script.test' ;
 
+ BOOLEAN FUNCTION .WasGenerated
+   TtfwWord IN aWord
+  %SUMMARY 'Определяет тот факт, что слово aWord уже использовалось для генерации' ;
+  false &gt;&gt;&gt; Result
+ ; // .WasGenerated
+
  : A
   %SUMMARY 'Метод A' ;
  ; // A
@@ -27,10 +33,12 @@ Test&Dump WasGenerated.ms.script.test
  ; // C
 
  @[ 
- // - слово @[ открываем массив ССЫЛОК, а не ЗНАЧЕНИЙ
+ // - слово @[ открывает массив ССЫЛОК, а не ЗНАЧЕНИЙ
   A A A B B B C C C A A A B B B C C C 
  ] 
  %REMARK ' - это массив ССЫЛОК на функции (слова)'
+ .filter&gt; ( .WasGenerated ! )
+ %REMARK ' - отфильтровываем те слова, которые уже были использованы для генерации'
  .filter&gt; ( @ B != )
  %REMARK ' - отфильтровываем значения равные ссылке на B
   ВАЖНО: тут сравниваем УКАЗАТЕЛИ на функции'
