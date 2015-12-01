@@ -1,8 +1,18 @@
 PROGRAM WasGenerated.ms.script
 
 USES
+ axiom_push.ms.dict
+ // - в этом словаре описано слово []
+;
+
+USES
  DogAndBracket.ms.dict
  // - в этом словаре описано слово @[
+;
+
+USES
+ CompileTimeVar.ms.dict
+ // - в этом словаре описано слово CompileTime-VAR
 ;
 
 USES
@@ -14,9 +24,14 @@ Test&Dump WasGenerated.ms.script.test
 
  %SUMMARY 'ћетод WasGenerated.ms.script.test' ;
 
+ ARRAY CompileTime-VAR g_WasGenerated []
+
  BOOLEAN FUNCTION .WasGenerated
    TtfwWord IN aWord
   %SUMMARY 'ќпредел€ет тот факт, что слово aWord уже использовалось дл€ генерации' ;
+  aWord g_WasGenerated array:Has ! ? (
+   aWord array:AddTo g_WasGenerated
+  ) // aValue l_Array array:Has ! ?
   false &gt;&gt;&gt; Result
  ; // .WasGenerated
 
@@ -38,7 +53,8 @@ Test&Dump WasGenerated.ms.script.test
  ] 
  %REMARK ' - это массив ——џЋќ  на функции (слова)'
  .filter&gt; ( .WasGenerated ! )
- %REMARK ' - отфильтровываем те слова, которые уже были использованы дл€ генерации'
+ %REMARK ' - отфильтровываем те слова, которые уже были использованы дл€ генерации
+  —ѕ≈÷»јЋ№Ќќ вызываем функцию .WasGenerated ƒќ всех ќ—“јЋ№Ќџ’ фильтров'
  .filter&gt; ( @ B != )
  %REMARK ' - отфильтровываем значени€ равные ссылке на B
   ¬ј∆Ќќ: тут сравниваем ” ј«ј“≈Ћ» на функции'
