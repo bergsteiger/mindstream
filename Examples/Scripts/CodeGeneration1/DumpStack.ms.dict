@@ -23,4 +23,10 @@ USES
  l_StackLevel Print
 
  l_StackLevel >= 0 ?ASSURE 'ѕриращение стека не может быть отрицательным'
+
+ while ( l_StackLevel > 0 )
+ begin
+  Dec l_StackLevel
+ end // while ( l_StackLevel > 0 ) 
+ 
 ; // DumpStack
