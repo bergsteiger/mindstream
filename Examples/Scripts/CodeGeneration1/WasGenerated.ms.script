@@ -60,7 +60,12 @@ Test&Dump WasGenerated.ms.script.test
 
  @[ 
  // - ñëîâî @[ îòêðûâàåò ìàññèâ ÑÑÛËÎÊ, à íå ÇÍÀ×ÅÍÈÉ
-  A A A B B B C C C A A A B B B C C C 
+  A A A 
+  B B B 
+  C C C 
+  A A A 
+  B B B 
+  C C C 
  ] 
  %REMARK ' - ýòî ìàññèâ ÑÑÛËÎÊ íà ôóíêöèè (ñëîâà)'
  .filter> ( @ B != )
