@@ -7,7 +7,7 @@ USES
 : DumpStack
  ^ IN aLambda
 
- %SUMMARY 'Печатает состояние стека после вызова aLambda' ;
+ %SUMMARY 'Печатает состояние стека после вычисления выражения aLambda' ;
 
  INTEGER VAR l_StackLevel
  %REMARK 'Уровень стека'
