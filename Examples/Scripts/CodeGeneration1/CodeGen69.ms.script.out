@@ -4468,12 +4468,16 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.
   axiom:Font
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
  ;
-: : DumpStack
+VOID OPERATOR :: PROCEDURE : DumpStack
+ ^ OPERATOR :: IN : aLambda
+; // DumpStack
+VOID OPERATOR :: PROCEDURE : DumpStackTo
  Documentation:
   Печатает состояние стека после вычисления выражения aLambda
  ^ OPERATOR :: IN : aLambda
+ ^ OPERATOR :: IN : aOutput
  INTEGER OPERATOR :: VAR : l_StackLevel
-; // DumpStack
+; // DumpStackTo
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
  Uses: 
   axiom:axiom
