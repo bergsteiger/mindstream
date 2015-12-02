@@ -57,6 +57,18 @@ Test&Dump WasGenerated.ms.script.test
   %SUMMARY 'Метод C' ;
  ; // C
 
+ STRING FUNCTION .NameOfWordOrString
+   STRING TtfwWord IN aValue
+  if ( aValue IsString ) then
+  begin
+   aValue &gt;&gt;&gt; Result
+  end // aValue IsString
+  else
+  begin
+   aValue |N &gt;&gt;&gt; Result
+  end // aValue IsString
+ ; // .NameOfWordOrString
+
  @[ 
  // - слово @[ открывает массив ССЫЛОК, а не ЗНАЧЕНИЙ
   A A A B B B C C C A A A B B B C C C 
@@ -70,7 +82,7 @@ Test&Dump WasGenerated.ms.script.test
   теперь СПЕЦИАЛЬНО вызываем функцию .WasGenerated ПОСЛЕ всех ОСТАЛЬНЫХ фильтров'
  .map&gt; pop:Word:Name 
  %REMARK ' - мапируем значение на вызов функции pop:Word:Name'
- .filter&gt; ( 'C' != )
+ .filter&gt; ( .NameOfWordOrString 'C' != )
  %REMARK ' - отфильтровываем значения равные ''C''
   ВАЖНО: тут сравниваем ИМЕНА функций'
  .for&gt; 
