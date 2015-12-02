@@ -35,6 +35,14 @@ PROCEDURE DumpStackTo
  
 ; // DumpStackTo
 
+PROCEDURE .DumpStack
+  IN aLambdaRef
+ %REMARK 'Вычисляемое значение'
+
+ %SUMMARY 'Печатает состояние стека после вычисления выражения aLambda' ;
+ DumpStackTo ( aLambdaRef DO ) Log
+; // .DumpStack
+
 PROCEDURE DumpStack
   ^ IN aLambda
  %REMARK 'Вычисляемое значение'

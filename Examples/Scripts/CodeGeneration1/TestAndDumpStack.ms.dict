@@ -5,12 +5,19 @@ USES
  DumpStack.ms.dict
 ;
 
-MACRO Test&DumpStack
+STACK_CHANGING_MACRO Test&DumpStack
  Literal IN aName
+ ^ IN aCode
  
  axiom:PushSymbol Test
  aName |N Ctx:Parser:PushSymbol
- axiom:PushSymbol DumpStack
+
+ aCode
+ axiom:PushSymbol [EXECUTE]
+ axiom:PushSymbol CompileRef
+
+ axiom:PushSymbol .DumpStack
+ axiom:PushSymbol ;
 ; // Test&DumpStack
 
 EXPORTS
