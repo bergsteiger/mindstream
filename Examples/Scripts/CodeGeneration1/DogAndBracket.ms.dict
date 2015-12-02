@@ -60,6 +60,10 @@ Procedure DogAndBracket
  end // while true
 ; // DogAndBracket
 
+USES
+ DumpStack.ms.dict
+;
+
 MACRO @(
  %SUMMARY '
  Компилирует СПИСОК адресов слов.
