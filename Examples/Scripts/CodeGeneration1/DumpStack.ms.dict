@@ -17,4 +17,8 @@ USES
 
  aLambda DO
  %REMARK 'Вызываем лямбду'
+
+ StackLevel l_StackLevel - >>> l_StackLevel
+ %REMARK 'Вычисляем приращение стека'
+ l_StackLevel Print
 ; // DumpStack
