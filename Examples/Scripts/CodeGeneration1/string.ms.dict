@@ -27,7 +27,7 @@ STRING FUNCTION any:Cat
 
 TestsFor any:Cat
  Test&DumpStack T1 ( [ 'A' 123 'B' ] any:Cat )
- Test T2 [ 'A' 124 'B' ] any:Cat Print ;
+ Test&DumpStack T2 ( [ 'A' 124 'B' ] any:Cat )
 ; // TestsFor any:Cat
 
 STRING FUNCTION (+)?

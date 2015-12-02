@@ -4408,6 +4408,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.
   axiom:Font
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
  ;
+VOID OPERATOR :: PROCEDURE : .DumpStack
+ Documentation:
+  Печатает состояние стека после вычисления выражения aLambda
+ OPERATOR :: IN : aLambdaRef
+; // .DumpStack
 VOID OPERATOR :: PROCEDURE : DumpStack
  Documentation:
   Печатает состояние стека после вычисления выражения aLambda
@@ -4528,7 +4533,11 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpSt
  Exports: 
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
  ;
-IMMEDIATE VOID OPERATOR :: MACRO : Test&DumpStack
+IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : DoCompileCodeRef
+ TtfwWord OPERATOR :: IN : aCode
+; // DoCompileCodeRef
+IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : Test&DumpStack
+ ^ OPERATOR :: IN : aCode
  ^L OPERATOR :: IN : aName
 ; // Test&DumpStack
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict

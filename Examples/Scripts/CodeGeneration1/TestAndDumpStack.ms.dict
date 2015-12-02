@@ -5,6 +5,12 @@ USES
  DumpStack.ms.dict
 ;
 
+STACK_CHANGING_MACRO DoCompileCodeRef
+ TtfwWord IN aCode
+ aCode CompileRef
+ aCode pop:Word:DecRef
+; // DoCompileCodeRef
+
 STACK_CHANGING_MACRO Test&DumpStack
  Literal IN aName
  ^ IN aCode
@@ -12,9 +18,9 @@ STACK_CHANGING_MACRO Test&DumpStack
  axiom:PushSymbol Test
  aName |N Ctx:Parser:PushSymbol
 
+ aCode pop:Word:IncRef
  aCode
- axiom:PushSymbol [EXECUTE]
- axiom:PushSymbol CompileRef
+ axiom:PushSymbol DoCompileCodeRef
 
  axiom:PushSymbol .DumpStack
  axiom:PushSymbol ;
