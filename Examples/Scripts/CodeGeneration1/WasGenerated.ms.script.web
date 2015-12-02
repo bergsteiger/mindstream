@@ -58,9 +58,26 @@ Test&Dump WasGenerated.ms.script.test
   %SUMMARY 'Метод C' ;
  ; // C
 
+ : D
+  %SUMMARY 'Метод D' ;
+ ; // D
+
+ : E
+  %SUMMARY 'Метод E' ;
+ ; // E
+
  @[ 
  // - слово @[ открывает массив ССЫЛОК, а не ЗНАЧЕНИЙ
-  A A A B B B C C C A A A B B B C C C 
+  A A A 
+  B B B 
+  C C C
+  D D D
+  E E E 
+  A A A 
+  B B B 
+  C C C
+  D D D
+  E E E 
  ] 
  %REMARK ' - это массив ССЫЛОК на функции (слова)'
  .filter&gt; ( @ B != )
@@ -69,6 +86,9 @@ Test&Dump WasGenerated.ms.script.test
  .filter&gt; ( |N 'C' != )
  %REMARK ' - отфильтровываем значения равные ''C''
   ВАЖНО: тут сравниваем ИМЕНА функций'
+ .filter&gt; ( @ E != )
+ %REMARK ' - отфильтровываем значения равные ссылке на E
+  ВАЖНО: тут сравниваем УКАЗАТЕЛИ на функции'
  .filter&gt; ( .WasGenerated ! )
  %REMARK ' - отфильтровываем те слова, которые уже были использованы для генерации
   теперь СПЕЦИАЛЬНО вызываем функцию .WasGenerated ПОСЛЕ всех ОСТАЛЬНЫХ фильтров'
