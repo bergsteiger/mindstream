@@ -20,7 +20,7 @@ USES
  l_StackLevel Print
 
  aLambda DO
- %REMARK 'Вызываем лямбду'
+ %REMARK 'Вычисляем выражение aLambda. Оно может положить на стек "сколько угодно" значений'
 
  StackLevel l_StackLevel - >>> l_StackLevel
  %REMARK 'Вычисляем приращение стека'
