@@ -5,7 +5,8 @@ USES
 ;
 
 PROCEDURE DumpStack
- ^ IN aLambda
+  ^ IN aLambda
+ %REMARK '¬ычисл€емое значение'
 
  %SUMMARY 'ѕечатает состо€ние стека после вычислени€ выражени€ aLambda' ;
 
