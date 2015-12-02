@@ -4,10 +4,6 @@ USES
  io.ms.dict
 ;
 
-USES
- Testing.ms.dict
-;
-
 : DumpStack
  ^ IN aLambda
 
@@ -17,21 +13,21 @@ USES
  %REMARK 'Уровень стека'
 
  StackLevel &gt;&gt;&gt; l_StackLevel
- l_StackLevel Print
+ l_StackLevel Log
 
  aLambda DO
  %REMARK 'Вычисляем выражение aLambda. Оно может положить на стек "сколько угодно" значений'
 
  StackLevel l_StackLevel - &gt;&gt;&gt; l_StackLevel
  %REMARK 'Вычисляем приращение стека'
- l_StackLevel Print
+ l_StackLevel Log
 
  l_StackLevel &gt;= 0 ?ASSURE 'Приращение стека не может быть отрицательным'
 
  while ( l_StackLevel &gt; 0 )
  begin
   Dec l_StackLevel
-  l_StackLevel Print
+  l_StackLevel Log
  end // while ( l_StackLevel &gt; 0 ) 
  
 ; // DumpStack
