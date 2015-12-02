@@ -96,15 +96,15 @@ VOID TestWithDump WasGenerated.ms.script.test
   C
  ]
  (
-  .WasGenerated
-  !
+  @
+  B
+  !=
  )
  SWAP
  Array:Filter
  (
-  @
-  B
-  !=
+  .WasGenerated
+  !
  )
  SWAP
  Array:Filter
@@ -125,4 +125,4 @@ VOID TestWithDump WasGenerated.ms.script.test
 ; // VOID TestWithDump WasGenerated.ms.script.test
 
 A
-[ A B C ]
+[ A C ]
