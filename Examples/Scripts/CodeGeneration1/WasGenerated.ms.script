@@ -57,18 +57,6 @@ Test&Dump WasGenerated.ms.script.test
   %SUMMARY 'Ìåòîä C' ;
  ; // C
 
- STRING FUNCTION .NameOfWordOrString
-   STRING TtfwWord IN aValue
-  if ( aValue IsString ) then
-  begin
-   aValue >>> Result
-  end // aValue IsString
-  else
-  begin
-   aValue |N >>> Result
-  end // aValue IsString
- ; // .NameOfWordOrString
-
  @[ 
  // - ñëîâî @[ îòêğûâàåò ìàññèâ ÑÑÛËÎÊ, à íå ÇÍÀ×ÅÍÈÉ
   A A A B B B C C C A A A B B B C C C 
@@ -77,7 +65,7 @@ Test&Dump WasGenerated.ms.script.test
  .filter> ( @ B != )
  %REMARK ' - îòôèëüòğîâûâàåì çíà÷åíèÿ ğàâíûå ññûëêå íà B
   ÂÀÆÍÎ: òóò ñğàâíèâàåì ÓÊÀÇÀÒÅËÈ íà ôóíêöèè'
- .filter> ( .NameOfWordOrString 'C' != )
+ .filter> ( |N 'C' != )
  %REMARK ' - îòôèëüòğîâûâàåì çíà÷åíèÿ ğàâíûå ''C''
   ÂÀÆÍÎ: òóò ñğàâíèâàåì ÈÌÅÍÀ ôóíêöèé'
  .filter> ( .WasGenerated ! )

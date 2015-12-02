@@ -3,28 +3,6 @@ VOID TestWithDump WasGenerated.ms.script.test
   'Метод WasGenerated.ms.script.test'
  ; // %SUMMARY %SUM
  
- STRING FUNCTION .NameOfWordOrString
-  STRING TtfwWord IN aValue
-  if
-   (
-    aValue
-    IsString
-   )
-  then
-   BEGIN
-    aValue
-    Result
-    pop:Word:SetValue
-   END
-  else
-   BEGIN
-    aValue
-    |N
-    Result
-    pop:Word:SetValue
-   END
- ; // STRING FUNCTION .NameOfWordOrString
- 
  BOOLEAN FUNCTION .WasGenerated
   %SUMMARY %SUM
    'Определяет тот факт, что слово aWord уже использовалось для генерации'
@@ -125,7 +103,7 @@ VOID TestWithDump WasGenerated.ms.script.test
  SWAP
  Array:Filter
  (
-  .NameOfWordOrString
+  |N
   'C'
   !=
  )
