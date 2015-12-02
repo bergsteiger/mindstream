@@ -1,4 +1,4 @@
-// Testing.ms.dict
+UNIT Testing.ms.dict
 
 USES
  axiom_push.ms.dict
@@ -118,4 +118,4 @@ MACRO TestWithDump
 
 WordAlias Test&Dump TestWithDump
 
-WordAlias Log Print
+//WordAlias Log Print
