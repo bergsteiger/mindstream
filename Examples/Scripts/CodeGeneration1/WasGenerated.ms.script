@@ -80,11 +80,11 @@ Test&Dump WasGenerated.ms.script.test
  .filter> ( .WasGenerated ! )
  %REMARK ' - отфильтровываем те слова, которые уже были использованы для генерации
   теперь СПЕЦИАЛЬНО вызываем функцию .WasGenerated ПОСЛЕ всех ОСТАЛЬНЫХ фильтров'
- .map> pop:Word:Name 
- %REMARK ' - мапируем значение на вызов функции pop:Word:Name'
  .filter> ( .NameOfWordOrString 'C' != )
  %REMARK ' - отфильтровываем значения равные ''C''
   ВАЖНО: тут сравниваем ИМЕНА функций'
+ .map> pop:Word:Name 
+ %REMARK ' - мапируем значение на вызов функции pop:Word:Name'
  .for> 
  %REMARK ' - итерируем смапированные значения'
  Print

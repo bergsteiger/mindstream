@@ -130,9 +130,6 @@ VOID TestWithDump WasGenerated.ms.script.test
  )
  SWAP
  Array:Filter
- pop:Word:Name
- SWAP
- Array:Map
  (
   .NameOfWordOrString
   'C'
@@ -140,6 +137,9 @@ VOID TestWithDump WasGenerated.ms.script.test
  )
  SWAP
  Array:Filter
+ pop:Word:Name
+ SWAP
+ Array:Map
  Print
  SWAP
  Array:Iterate
