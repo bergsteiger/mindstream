@@ -4469,11 +4469,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
  ;
 VOID OPERATOR :: PROCEDURE : DumpStack
+ Documentation:
+  Печатает состояние стека после вычисления выражения aLambda
  ^ OPERATOR :: IN : aLambda
 ; // DumpStack
 VOID OPERATOR :: PROCEDURE : DumpStackTo
  Documentation:
-  Печатает состояние стека после вычисления выражения aLambda
+  Печатает состояние стека в "устройство" aOutput после вычисления выражения aLambda
  ^ OPERATOR :: IN : aLambda
  ^ OPERATOR :: IN : aOutput
  INTEGER OPERATOR :: VAR : l_StackLevel

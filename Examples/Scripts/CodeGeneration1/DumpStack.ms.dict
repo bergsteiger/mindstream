@@ -10,7 +10,7 @@ PROCEDURE DumpStackTo
   ^ IN aOutput
  %REMARK '”стройство вывода'
 
- %SUMMARY 'ѕечатает состо€ние стека после вычислени€ выражени€ aLambda' ;
+ %SUMMARY 'ѕечатает состо€ние стека в "устройство" aOutput после вычислени€ выражени€ aLambda' ;
 
  INTEGER VAR l_StackLevel
  %REMARK '”ровень стека'
@@ -38,5 +38,7 @@ PROCEDURE DumpStackTo
 PROCEDURE DumpStack
   ^ IN aLambda
  %REMARK '¬ычисл€емое значение'
+
+ %SUMMARY 'ѕечатает состо€ние стека после вычислени€ выражени€ aLambda' ;
  DumpStackTo ( aLambda DO ) Log
 ; // DumpStack
