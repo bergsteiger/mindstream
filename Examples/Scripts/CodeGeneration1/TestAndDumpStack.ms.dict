@@ -5,11 +5,11 @@ USES
  DumpStack.ms.dict
 ;
 
-MACRO DoCompileCodeRef
+MACRO _CompileCodeRefAndFree
  TtfwWord IN aCode
  aCode CompileRef
  aCode pop:Word:DecRef
-; // DoCompileCodeRef
+; // _CompileCodeRefAndFree
 
 STACK_CHANGING_MACRO Test&DumpStack
  Literal IN aName
@@ -20,7 +20,7 @@ STACK_CHANGING_MACRO Test&DumpStack
 
  aCode pop:Word:IncRef
  aCode
- axiom:PushSymbol DoCompileCodeRef
+ axiom:PushSymbol _CompileCodeRefAndFree
 
  axiom:PushSymbol .DumpStack
  axiom:PushSymbol ;

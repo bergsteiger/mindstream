@@ -4533,9 +4533,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpSt
  Exports: 
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
  ;
-IMMEDIATE VOID OPERATOR :: MACRO : DoCompileCodeRef
+IMMEDIATE VOID OPERATOR :: MACRO : _CompileCodeRefAndFree
  TtfwWord OPERATOR :: IN : aCode
-; // DoCompileCodeRef
+; // _CompileCodeRefAndFree
 IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : Test&DumpStack
  ^ OPERATOR :: IN : aCode
  ^L OPERATOR :: IN : aName
