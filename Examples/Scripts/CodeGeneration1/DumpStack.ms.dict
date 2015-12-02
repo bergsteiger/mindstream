@@ -4,9 +4,11 @@ USES
  io.ms.dict
 ;
 
-PROCEDURE DumpStack
+PROCEDURE DumpStackTo
   ^ IN aLambda
  %REMARK 'Вычисляемое значение'
+  ^ IN aOutput
+ %REMARK 'Устройство вывода'
 
  %SUMMARY 'Печатает состояние стека после вычисления выражения aLambda' ;
 
@@ -27,8 +29,14 @@ PROCEDURE DumpStack
  %REMARK 'Цикл по значениям в стеке'
  begin
   Dec l_StackLevel
-  Log
+  aOutput DO
   %REMARK 'Печатаем значение со стека'
  end // while ( l_StackLevel > 0 ) 
  
+; // DumpStackTo
+
+PROCEDURE DumpStack
+  ^ IN aLambda
+ %REMARK 'Вычисляемое значение'
+ DumpStackTo ( aLambda DO ) Log
 ; // DumpStack
