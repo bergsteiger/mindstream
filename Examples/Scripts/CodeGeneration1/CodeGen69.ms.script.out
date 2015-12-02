@@ -4518,9 +4518,12 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpSt
   axiom:File
   axiom:clipboard
   axiom:Font
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : Test&DumpStack
+ ^L OPERATOR :: IN : aName
+; // Test&DumpStack
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
  Uses: 
   axiom:axiom
