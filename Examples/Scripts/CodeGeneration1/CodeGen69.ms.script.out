@@ -3898,9 +3898,6 @@ PRIVATE VOID OPERATOR :: PROCEDURE : ExpandRunTestsFor
  STRING OPERATOR :: VAR : l_Name
  STRING OPERATOR :: VAR : l_TestsHolderName
 ; // ExpandRunTestsFor
-VOID OPERATOR :: PROCEDURE : Log
- PRINTABLE OPERATOR :: IN : aValue
-; // Log
 IMMEDIATE VOID OPERATOR :: MACRO : RunTests
  Documentation:
   Выполняет тесты для списка слов aWords
@@ -3966,6 +3963,9 @@ BOOLEAN FUNCTION : .IsTfwWord
  PRINTABLE OPERATOR :: IN : aValue
  BOOLEAN FUNCTION :: .IsTfwWord : Result
 ; // .IsTfwWord
+VOID OPERATOR :: PROCEDURE : Log
+ PRINTABLE OPERATOR :: IN : aValue
+; // Log
 VOID OPERATOR :: PROCEDURE : Print
  PRINTABLE OPERATOR :: IN : aValue
 ; // Print
@@ -4467,7 +4467,6 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.
   axiom:clipboard
   axiom:Font
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
  ;
 : : DumpStack
  Documentation:
