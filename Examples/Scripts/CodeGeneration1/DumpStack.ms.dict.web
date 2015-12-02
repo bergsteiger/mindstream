@@ -1,0 +1,26 @@
+UNIT DumpStack.ms.dict
+
+USES
+ io.ms.dict
+;
+
+: DumpStack
+ ^ IN aLambda
+
+ %SUMMARY 'Печатает состояние стека после вызова aLambda' ;
+
+ INTEGER VAR l_StackLevel
+ %REMARK 'Уровень стека'
+
+ StackLevel &gt;&gt;&gt; l_StackLevel
+ l_StackLevel Print
+
+ aLambda DO
+ %REMARK 'Вызываем лямбду'
+
+ StackLevel l_StackLevel - &gt;&gt;&gt; l_StackLevel
+ %REMARK 'Вычисляем приращение стека'
+ l_StackLevel Print
+
+ l_StackLevel &gt;= 0 ?ASSURE 'Приращение стека не может быть отрицательным'
+; // DumpStack
