@@ -34,9 +34,10 @@ Test&Dump WasGenerated.ms.script.test
  BOOLEAN FUNCTION .WasGenerated
    TtfwWord IN aWord
   %SUMMARY 'Определяет тот факт, что слово aWord уже использовалось для генерации' ;
-  aWord g_WasGenerated array:Has ! ? (
+  if ( aWord g_WasGenerated array:Has ! )
+  begin
    aWord array:AddTo g_WasGenerated
-  ) // aValue l_Array array:Has ! ?
+  end // aValue l_Array array:Has !
   false >>> Result
  ; // .WasGenerated
 
