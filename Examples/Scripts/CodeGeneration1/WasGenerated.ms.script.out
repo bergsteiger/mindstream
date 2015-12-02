@@ -55,6 +55,13 @@ VOID TestWithDump WasGenerated.ms.script.test
   
  ; // : C
  
+ : D
+  %SUMMARY %SUM
+   'Метод D'
+  ; // %SUMMARY %SUM
+  
+ ; // : D
+ 
  WasGenerated.ms.script.test
  DumpElement
  ARRAY [
@@ -77,6 +84,12 @@ VOID TestWithDump WasGenerated.ms.script.test
   @
   C
   @
+  D
+  @
+  D
+  @
+  D
+  @
   A
   @
   A
@@ -94,6 +107,12 @@ VOID TestWithDump WasGenerated.ms.script.test
   C
   @
   C
+  @
+  D
+  @
+  D
+  @
+  D
  ]
  (
   @
@@ -124,3 +143,4 @@ VOID TestWithDump WasGenerated.ms.script.test
 ; // VOID TestWithDump WasGenerated.ms.script.test
 
 A
+D

@@ -58,14 +58,20 @@ Test&Dump WasGenerated.ms.script.test
   %SUMMARY 'Метод C' ;
  ; // C
 
+ : D
+  %SUMMARY 'Метод D' ;
+ ; // D
+
  @[ 
  // - слово @[ открывает массив ССЫЛОК, а не ЗНАЧЕНИЙ
   A A A 
   B B B 
-  C C C 
+  C C C
+  D D D 
   A A A 
   B B B 
-  C C C 
+  C C C
+  D D D 
  ] 
  %REMARK ' - это массив ССЫЛОК на функции (слова)'
  .filter> ( @ B != )
