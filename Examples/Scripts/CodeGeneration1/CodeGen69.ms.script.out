@@ -4521,6 +4521,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpSt
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
  ;
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
+ ;
 IMMEDIATE VOID OPERATOR :: MACRO : Test&DumpStack
  ^L OPERATOR :: IN : aName
 ; // Test&DumpStack

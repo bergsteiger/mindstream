@@ -12,3 +12,6 @@ MACRO Test&DumpStack
  aName |N Ctx:Parser:PushSymbol
  axiom:PushSymbol DumpStack
 ; // Test&DumpStack
+
+EXPORTS
+ DumpStack.ms.dict
