@@ -21,4 +21,6 @@ USES
  StackLevel l_StackLevel - >>> l_StackLevel
  %REMARK '¬ычисл€ем приращение стека'
  l_StackLevel Print
+
+ l_StackLevel >= 0 ?ASSURE 'ѕриращение стека не может быть отрицательным'
 ; // DumpStack
