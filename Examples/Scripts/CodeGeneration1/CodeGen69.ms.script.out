@@ -3898,10 +3898,9 @@ PRIVATE VOID OPERATOR :: PROCEDURE : ExpandRunTestsFor
  STRING OPERATOR :: VAR : l_Name
  STRING OPERATOR :: VAR : l_TestsHolderName
 ; // ExpandRunTestsFor
-REDIFINITION : : Log
-==> Redefines
- VOID .
-<== Redefines
+VOID OPERATOR :: PROCEDURE : Log
+ PRINTABLE OPERATOR :: IN : aValue
+; // Log
 IMMEDIATE VOID OPERATOR :: MACRO : RunTests
  Documentation:
   ¬ыполн€ет тесты дл€ списка слов aWords
@@ -4412,6 +4411,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : @(
  Documentation:
@@ -4433,6 +4433,47 @@ VOID OPERATOR : Tests:@(
 VOID OPERATOR : Tests:@[
  VOID OPERATOR :: Test : T1
 ; // Tests:@[
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
+  axiom:Tl3TokenType
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Sequence
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
+ ;
+: : DumpStack
+ Documentation:
+  ѕечатает состо€ние стека после вычислени€ выражени€ aLambda
+ ^ OPERATOR :: IN : aLambda
+ INTEGER OPERATOR :: VAR : l_StackLevel
+; // DumpStack
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
  Uses: 
   axiom:axiom
