@@ -9,6 +9,7 @@ VOID TestWithDump WasGenerated.ms.script.test
   ; // %SUMMARY %SUM
   
   TtfwWord IN aWord
+  ARRAY STATIC-VAR g_WasGenerated
   if
    (
     aWord
@@ -54,7 +55,6 @@ VOID TestWithDump WasGenerated.ms.script.test
   
  ; // : C
  
- ARRAY STATIC-VAR g_WasGenerated
  WasGenerated.ms.script.test
  DumpElement
  ARRAY [

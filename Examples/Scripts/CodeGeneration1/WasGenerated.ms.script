@@ -29,11 +29,12 @@ Test&Dump WasGenerated.ms.script.test
 
  %SUMMARY 'Метод WasGenerated.ms.script.test' ;
 
- ARRAY CompileTime-VAR g_WasGenerated []
-
  BOOLEAN FUNCTION .WasGenerated
    TtfwWord IN aWord
   %SUMMARY 'Определяет тот факт, что слово aWord уже использовалось для генерации' ;
+
+  ARRAY CompileTime-VAR g_WasGenerated []
+
   if ( aWord g_WasGenerated array:Has ! )
   begin
    aWord array:AddTo g_WasGenerated
