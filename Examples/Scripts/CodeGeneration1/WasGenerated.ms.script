@@ -37,8 +37,12 @@ Test&Dump WasGenerated.ms.script.test
   if ( aWord g_WasGenerated array:Has ! )
   begin
    aWord array:AddTo g_WasGenerated
+   false >>> Result
   end // aValue l_Array array:Has !
-  false >>> Result
+  else
+  begin
+   true >>> Result
+  end // aValue l_Array array:Has !
  ; // .WasGenerated
 
  : A

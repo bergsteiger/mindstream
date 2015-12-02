@@ -21,10 +21,16 @@ VOID TestWithDump WasGenerated.ms.script.test
     aWord
     >>>[]
     g_WasGenerated
+    false
+    Result
+    pop:Word:SetValue
    END
-  false
-  Result
-  pop:Word:SetValue
+  else
+   BEGIN
+    true
+    Result
+    pop:Word:SetValue
+   END
  ; // BOOLEAN FUNCTION .WasGenerated
  
  : A
@@ -118,10 +124,5 @@ VOID TestWithDump WasGenerated.ms.script.test
  Print
 ; // VOID TestWithDump WasGenerated.ms.script.test
 
-A
-A
-A
-A
-A
 A
 [ A B C ]
