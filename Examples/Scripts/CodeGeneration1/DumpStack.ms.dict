@@ -9,6 +9,11 @@ USES
 
  %SUMMARY 'Печатает состояние стека после вызова aLambda' ;
 
+ INTEGER VAR l_StackLevel
+ %REMARK 'Уровень стека'
+
+ StackLevel >>> l_StackLevel
+
  aLambda DO
  %REMARK 'Вызываем лямбду'
 ; // DumpStack
