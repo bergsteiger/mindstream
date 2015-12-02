@@ -1,2 +1,2 @@
 call ..\clear.cmd
-call c.cmd WasGenerated.ms.script
+call c.cmd DogAndBracket.ms.script
