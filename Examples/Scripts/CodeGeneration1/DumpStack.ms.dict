@@ -9,4 +9,6 @@ PROCEDURE DumpStack
 
  %SUMMARY 'Печатает состояние стека после вызова aLambda' ;
 
+ aLambda DO
+ %REMARK 'Вызываем лямбду'
 ; // DumpStack
