@@ -25,6 +25,7 @@ USES
  l_StackLevel >= 0 ?ASSURE 'Приращение стека не может быть отрицательным'
 
  while ( l_StackLevel > 0 )
+ %REMARK 'Цикл по значениям в стеке'
  begin
   Dec l_StackLevel
   l_StackLevel Log
