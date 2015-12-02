@@ -189,6 +189,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeGen69.ms.
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpStack.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Concrete.ms.model
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Generation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms.tpl
@@ -3369,6 +3370,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpStack.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
  ;
 STRING FUNCTION : (+)?
@@ -3874,11 +3876,13 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.di
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpStack.ms.dict
  ;
  Exports: 
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpStack.ms.dict
  ;
 STRING CONST : cTests
 PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTests
@@ -6611,6 +6615,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CallInherited
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpStack.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : .inherited
 IMMEDIATE VOID OPERATOR :: MACRO : call.inherited

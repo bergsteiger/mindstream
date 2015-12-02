@@ -124,3 +124,10 @@ MACRO TestWithDump
 ; // TestWithDump
 
 WordAlias Test&Dump TestWithDump
+
+USES
+ TestAndDumpStack.ms.dict
+;
+
+EXPORTS
+ TestAndDumpStack.ms.dict
