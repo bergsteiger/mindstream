@@ -3869,9 +3869,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.di
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Sequence.It.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
  ;
  Exports: 
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
@@ -4366,6 +4366,53 @@ IMMEDIATE VOID OPERATOR : var
  ^L OPERATOR :: IN : aName
 ; // var
 IMMEDIATE OPERATOR : void
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
+  axiom:Tl3TokenType
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Sequence
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
+ ;
+VOID OPERATOR :: PROCEDURE : DumpStack
+ Documentation:
+  Печатает состояние стека после вычисления выражения aLambda
+ ^ OPERATOR :: IN : aLambda
+; // DumpStack
+VOID OPERATOR :: PROCEDURE : DumpStackTo
+ Documentation:
+  Печатает состояние стека в "устройство" aOutput после вычисления выражения aLambda
+ ^ OPERATOR :: IN : aLambda
+ ^ OPERATOR :: IN : aOutput
+ INTEGER OPERATOR :: VAR : l_StackLevel
+; // DumpStackTo
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
  Uses: 
   axiom:axiom
@@ -4434,53 +4481,6 @@ VOID OPERATOR : Tests:@(
 VOID OPERATOR : Tests:@[
  VOID OPERATOR :: Test : T1
 ; // Tests:@[
-Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
- Uses: 
-  axiom:axiom
-  axiom:Ctx
-  axiom:NewWordDefinitor
-  axiom:Compiler
-  axiom:Word
-  axiom:KeyWord
-  axiom:Parser
-  axiom:script
-  axiom:sysutils
-  axiom:application
-  axiom:ScriptEngine
-  axiom:DictionaryEx
-  axiom:TtfwValueType
-  axiom:TtfwWordModifier
-  axiom:TtfwAccessType
-  axiom:TtfwLinkType
-  axiom:private
-  axiom:ValueTypes
-  axiom:WordInfo
-  axiom:TtfwValueTypesAccepts
-  axiom:Tl3TokenType
-  axiom:std
-  axiom:KeywordFinder
-  axiom:Sequence
-  axiom:Stereotype
-  axiom:Dictionary
-  axiom:MainDictionary
-  axiom:Array
-  axiom:File
-  axiom:clipboard
-  axiom:Font
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
- ;
-VOID OPERATOR :: PROCEDURE : DumpStack
- Documentation:
-  Печатает состояние стека после вычисления выражения aLambda
- ^ OPERATOR :: IN : aLambda
-; // DumpStack
-VOID OPERATOR :: PROCEDURE : DumpStackTo
- Documentation:
-  Печатает состояние стека в "устройство" aOutput после вычисления выражения aLambda
- ^ OPERATOR :: IN : aLambda
- ^ OPERATOR :: IN : aOutput
- INTEGER OPERATOR :: VAR : l_StackLevel
-; // DumpStackTo
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
  Uses: 
   axiom:axiom
