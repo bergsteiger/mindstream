@@ -4,6 +4,10 @@ USES
  io.ms.dict
 ;
 
+USES
+ Testing.ms.dict
+;
+
 : DumpStack
  ^ IN aLambda
 
