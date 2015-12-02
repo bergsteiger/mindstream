@@ -27,6 +27,7 @@ USES
  while ( l_StackLevel > 0 )
  begin
   Dec l_StackLevel
+  l_StackLevel Print
  end // while ( l_StackLevel > 0 ) 
  
 ; // DumpStack
