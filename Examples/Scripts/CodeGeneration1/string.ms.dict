@@ -42,11 +42,11 @@ STRING FUNCTION (+)?
 ; // (+)?
 
 TestsFor (+)?
- Test&DumpStack T1 ( '' (+)? 'B' Print )
- Test T2 'A' (+)? 'B' Print ;
- Test T3 'A' (+)? '' Print ;
- Test T4 'A' (+)? 'D' Print ;
- Test T5 'A' (+)? '123' Print ;
+ Test&DumpStack T1 ( '' (+)? 'B' )
+ Test&DumpStack T2 ( 'A' (+)? 'B' )
+ Test&DumpStack T3 ( 'A' (+)? '' )
+ Test&DumpStack T4 ( 'A' (+)? 'D' )
+ Test&DumpStack T5 ( 'A' (+)? '123' )
 ; // TestsFor (+)?
 
 STRING FUNCTION ?(+)
