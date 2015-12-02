@@ -28,6 +28,8 @@ USES
  %REMARK 'Цикл по значениям в стеке'
  begin
   Dec l_StackLevel
+  Log
+  %REMARK 'Печатаем значение со стека'
   l_StackLevel Log
  end // while ( l_StackLevel > 0 ) 
  
