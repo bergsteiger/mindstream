@@ -5,7 +5,7 @@ USES
  DumpStack.ms.dict
 ;
 
-STACK_CHANGING_MACRO DoCompileCodeRef
+MACRO DoCompileCodeRef
  TtfwWord IN aCode
  aCode CompileRef
  aCode pop:Word:DecRef
