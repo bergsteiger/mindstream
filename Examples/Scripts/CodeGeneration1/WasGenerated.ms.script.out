@@ -125,15 +125,15 @@ VOID TestWithDump WasGenerated.ms.script.test
  SWAP
  Array:Filter
  (
-  .WasGenerated
-  !
+  .NameOfWordOrString
+  'C'
+  !=
  )
  SWAP
  Array:Filter
  (
-  .NameOfWordOrString
-  'C'
-  !=
+  .WasGenerated
+  !
  )
  SWAP
  Array:Filter
@@ -148,4 +148,4 @@ VOID TestWithDump WasGenerated.ms.script.test
 ; // VOID TestWithDump WasGenerated.ms.script.test
 
 A
-[ A C ]
+[ A ]
