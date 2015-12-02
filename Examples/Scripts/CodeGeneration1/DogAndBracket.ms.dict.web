@@ -62,6 +62,7 @@ Procedure DogAndBracket
 
 USES
  DumpStack.ms.dict
+ TestAndDumpStack.ms.dict
 ;
 
 MACRO @(
@@ -76,7 +77,7 @@ MACRO @(
 ; // @(
 
 TestsFor @(
- Test T1 DumpStack @( 1 2 3 4 5 6 1 2 + '123' ) ;
+ Test&DumpStack T1 @( 1 2 3 4 5 6 1 2 + '123' ) ;
 ; // TestsFor @(
 
 MACRO @[
@@ -91,6 +92,6 @@ MACRO @[
 ; // @[
 
 TestsFor @[
- Test T1 DumpStack @[ 1 2 3 4 5 6 1 2 + '123' ] ;
+ Test&DumpStack T1 @[ 1 2 3 4 5 6 1 2 + '123' ] ;
 ; // TestsFor @[
 
