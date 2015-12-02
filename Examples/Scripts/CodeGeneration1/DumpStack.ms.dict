@@ -4,7 +4,7 @@ USES
  io.ms.dict
 ;
 
-PROCEDURE DumpStack
+: DumpStack
  ^ IN aLambda
 
  %SUMMARY 'Печатает состояние стека после вызова aLambda' ;
