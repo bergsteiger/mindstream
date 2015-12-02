@@ -148,6 +148,13 @@ VOID TestWithDump WasGenerated.ms.script.test
  SWAP
  Array:Filter
  (
+  @
+  E
+  !=
+ )
+ SWAP
+ Array:Filter
+ (
   .WasGenerated
   !
  )
@@ -163,4 +170,3 @@ VOID TestWithDump WasGenerated.ms.script.test
 
 A
 D
-E
