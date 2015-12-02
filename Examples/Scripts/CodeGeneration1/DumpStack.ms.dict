@@ -3,3 +3,10 @@ UNIT DumpStack.ms.dict
 USES
  io.ms.dict
 ;
+
+PROCEDURE DumpStack
+ ^ IN aLambda
+
+ %SUMMARY 'Печатает состояние стека после вызова aLambda' ;
+
+; // DumpStack
