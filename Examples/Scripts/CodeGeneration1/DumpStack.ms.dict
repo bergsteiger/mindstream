@@ -13,6 +13,7 @@ USES
  %REMARK 'Уровень стека'
 
  StackLevel >>> l_StackLevel
+ l_StackLevel Print
 
  aLambda DO
  %REMARK 'Вызываем лямбду'
