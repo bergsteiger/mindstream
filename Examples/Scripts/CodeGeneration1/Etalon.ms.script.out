@@ -86,7 +86,22 @@ VOID TestWithDump Etalon.ms.script.test
    l_FileName
    l_FileNameOut
    CompareFiles
-   Print
+   !
+   ?
+   (
+    STRING VAR l_Compare
+    ARRAY [
+     'afc.cmd '
+     l_FileName
+     ' '
+     l_FileNameOut
+    ]
+    strings:Cat
+    l_Compare
+    pop:Word:SetValue
+    l_Compare
+    WinExec
+   )
   )
   l_FileName
   DeleteEmptyFile
@@ -121,7 +136,3 @@ VOID TestWithDump Etalon.ms.script.test
  ]
 ; // VOID TestWithDump Etalon.ms.script.test
 
-True
-True
-True
-True
