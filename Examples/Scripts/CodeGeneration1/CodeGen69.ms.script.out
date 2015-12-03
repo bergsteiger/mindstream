@@ -4410,7 +4410,6 @@ VOID OPERATOR :: PROCEDURE : DumpStackTo
   Печатает состояние стека в "устройство" aOutput после вычисления выражения aLambda
  ^ OPERATOR :: IN : aLambda
  ^ OPERATOR :: IN : aOutput
- INTEGER OPERATOR :: VAR : l_StackLevel
 ; // DumpStackTo
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
  Uses: 
