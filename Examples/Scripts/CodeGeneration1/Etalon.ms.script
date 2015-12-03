@@ -39,7 +39,8 @@ Test&Dump Etalon.ms.script.test
   STRING VAR l_FileName
   script:FileName >>> l_FileName
 
-  DumpStackTo ( 
+  DumpStackTo (
+   l_FileName 
    g_EtalonCount 
    aLambda DO 
   ) Out

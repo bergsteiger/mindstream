@@ -13,6 +13,7 @@ VOID TestWithDump Etalon.ms.script.test
   pop:Word:SetValue
   DumpStackTo
   (
+   l_FileName
    g_EtalonCount
    aLambda
    DO
@@ -40,7 +41,9 @@ VOID TestWithDump Etalon.ms.script.test
  )
 ; // VOID TestWithDump Etalon.ms.script.test
 
+Etalon.ms.script
 0
+Etalon.ms.script
 Etalon.ms.script
 1
 3
