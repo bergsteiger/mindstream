@@ -101,9 +101,9 @@ PROCEDURE string:Split:for>
 ; // string:Split:for>
 
 TestsFor string:Split:for>
- Test T1 'a b c' ' ' string:Split:for> Print ;
- Test T2 'a b  c' ' ' string:Split:for> Print ;
- Test T3 'abc' ' ' string:Split:for> Print ;
- Test T4 '' ' ' string:Split:for> Print ;
- Test T5 ' ' ' ' string:Split:for> Print ;
+ Test&DumpStack T1 ( 'a b c' ' ' string:Split:for> Print )
+ Test&DumpStack T2 ( 'a b  c' ' ' string:Split:for> Print )
+ Test&DumpStack T3 ( 'abc' ' ' string:Split:for> Print )
+ Test&DumpStack T4 ( '' ' ' string:Split:for> Print )
+ Test&DumpStack T5 ( ' ' ' ' string:Split:for> Print )
 ; // string:Split:for> 
