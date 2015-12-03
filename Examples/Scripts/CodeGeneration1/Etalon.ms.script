@@ -69,6 +69,10 @@ Test&Dump Etalon.ms.script.test
     aLambda DO 
    ) Out
   ) // TF g_OutFile
+
+  l_FileName sysutils:FileExists ? (
+   '' l_FileName l_FileNameOut CompareFiles Print
+  )
   
   l_FileName DeleteEmptyFile
   l_FileNameOut DeleteEmptyFile

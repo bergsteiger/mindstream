@@ -79,6 +79,16 @@ VOID TestWithDump Etalon.ms.script.test
    Out
   )
   l_FileName
+  sysutils:FileExists
+  ?
+  (
+   ''
+   l_FileName
+   l_FileNameOut
+   CompareFiles
+   Print
+  )
+  l_FileName
   DeleteEmptyFile
   l_FileNameOut
   DeleteEmptyFile
@@ -111,3 +121,7 @@ VOID TestWithDump Etalon.ms.script.test
  ]
 ; // VOID TestWithDump Etalon.ms.script.test
 
+True
+True
+True
+True
