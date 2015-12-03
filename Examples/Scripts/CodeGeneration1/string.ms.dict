@@ -101,7 +101,7 @@ WordAlias CatSep> strings:CatSep>
 ; // string:Split:for>
 
 : ?SWAP
- StackLevel > 0 ? SWAP
+ StackLevel > 1 ? SWAP
 ; // ?SWAP
 
 TestsFor string:Split:for>
