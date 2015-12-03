@@ -1,12 +1,14 @@
 VOID TestWithDump Etalon.ms.script.test
  VOID PROCEDURE Etalon
+  ^ IN aLambda
+  aLambda
+  Print
  ; // VOID PROCEDURE Etalon
  
  Etalon.ms.script.test
  DumpElement
  Etalon
  script:FileName
- Print
 ; // VOID TestWithDump Etalon.ms.script.test
 
-Etalon.ms.script
+script:FileName

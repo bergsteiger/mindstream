@@ -11,9 +11,11 @@ USES
 Test&Dump Etalon.ms.script.test
  
  PROCEDURE Etalon
+  ^ IN aLambda
+  aLambda Print
  ; // Etalon
 
- Etalon script:FileName Print
+ Etalon script:FileName
 ; // Etalon.ms.script.test
 
 Etalon.ms.script.test
