@@ -16,7 +16,7 @@ Test&Dump Etalon.ms.script.test
  
  PROCEDURE Etalon
   ^ IN aLambda
-  aLambda DO Print
+  DumpStack ( aLambda DO )
  ; // Etalon
 
  Etalon script:FileName
