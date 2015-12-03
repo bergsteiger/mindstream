@@ -53,7 +53,11 @@ Test&Dump Etalon.ms.script.test
     aLambda DO 
    ) Out
   ) // TF g_OutFile
-  l_FileName FileSize Out
+  
+  l_FileName FileSize 0 == ? (
+   l_FileName DeleteFile DROP
+  )
+
   Inc g_EtalonCount
  ; // Etalon
 
