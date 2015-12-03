@@ -100,10 +100,6 @@ WordAlias CatSep> strings:CatSep>
  end
 ; // string:Split:for>
 
-: ?SWAP
- StackLevel > 1 ? SWAP
-; // ?SWAP
-
 TestsFor string:Split:for>
  Test&DumpStack T1 ( 'a b c' ' ' string:Split:for> Print )
  Test&DumpStack T2 ( 'a b  c' ' ' string:Split:for> Print )
