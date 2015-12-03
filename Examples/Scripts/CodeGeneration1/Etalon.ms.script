@@ -34,7 +34,7 @@ Test&Dump Etalon.ms.script.test
   PROCEDURE Out
     IN aValue
    g_OutFile IsNil ?FAIL 'Файл для вывода не открыт'
-   aValue g_OutFile File:WriteLn
+   aValue ToPrintable g_OutFile File:WriteLn
   ; // Out
 
   STRING VAR l_FileName
