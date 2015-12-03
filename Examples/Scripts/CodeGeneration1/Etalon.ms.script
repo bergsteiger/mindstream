@@ -70,14 +70,15 @@ Test&Dump Etalon.ms.script.test
    ) Out
   ) // TF g_OutFile
 
-  l_FileName sysutils:FileExists ? (
+  if ( l_FileName sysutils:FileExists ) then
+  begin
    '' l_FileName l_FileNameOut CompareFiles ! ? (
     STRING VAR l_Compare
     [ 'q:\afc.cmd ' l_FileName ' ' l_FileNameOut ] strings:Cat >>> l_Compare
     l_Compare .
     l_Compare WinExec
    )
-  )
+  end
   
   l_FileName DeleteEmptyFile
   l_FileNameOut DeleteEmptyFile

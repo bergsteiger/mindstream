@@ -78,33 +78,36 @@ VOID TestWithDump Etalon.ms.script.test
    )
    Out
   )
-  l_FileName
-  sysutils:FileExists
-  ?
-  (
-   ''
-   l_FileName
-   l_FileNameOut
-   CompareFiles
-   !
-   ?
+  if
    (
-    STRING VAR l_Compare
-    ARRAY [
-     'q:\afc.cmd '
-     l_FileName
-     ' '
-     l_FileNameOut
-    ]
-    strings:Cat
-    l_Compare
-    pop:Word:SetValue
-    l_Compare
-    .
-    l_Compare
-    WinExec
+    l_FileName
+    sysutils:FileExists
    )
-  )
+  then
+   BEGIN
+    ''
+    l_FileName
+    l_FileNameOut
+    CompareFiles
+    !
+    ?
+    (
+     STRING VAR l_Compare
+     ARRAY [
+      'q:\afc.cmd '
+      l_FileName
+      ' '
+      l_FileNameOut
+     ]
+     strings:Cat
+     l_Compare
+     pop:Word:SetValue
+     l_Compare
+     .
+     l_Compare
+     WinExec
+    )
+   END
   l_FileName
   DeleteEmptyFile
   l_FileNameOut
