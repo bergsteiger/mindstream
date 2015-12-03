@@ -32,7 +32,11 @@ VOID TestWithDump Etalon.ms.script.test
   pop:Word:SetValue
   SaveVarAndDo
   g_OutFile
-  VOID (
+  (
+   l_FileName
+   File:OpenWrite
+   g_OutFile
+   pop:Word:SetValue
    DumpStackTo
    (
     l_FileName

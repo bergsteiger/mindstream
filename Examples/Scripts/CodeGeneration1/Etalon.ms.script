@@ -46,6 +46,7 @@ Test&Dump Etalon.ms.script.test
   ] strings:Cat >>> l_FileName
 
   TF g_OutFile (
+   l_FileName File:OpenWrite >>> g_OutFile
    DumpStackTo (
     l_FileName 
     g_EtalonCount 
