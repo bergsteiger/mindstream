@@ -7,6 +7,8 @@ VOID TestWithDump Etalon.ms.script.test
    aLambda
    DO
   )
+  INC
+  g_EtalonCount
  ; // VOID PROCEDURE Etalon
  
  INTEGER VAR g_EtalonCount
@@ -30,4 +32,4 @@ VOID TestWithDump Etalon.ms.script.test
 Etalon.ms.script
 0
 3
-0
+1
