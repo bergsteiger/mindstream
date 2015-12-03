@@ -1,11 +1,15 @@
 PROGRAM Etalon.ms.script
 
 USES
+ io.ms.dict
+;
+
+USES
  Testing.ms.dict
 ;
 
 Test&Dump Etalon.ms.script.test
- script:FileName .
+ script:FileName Print
 ; // Etalon.ms.script.test
 
 Etalon.ms.script.test
