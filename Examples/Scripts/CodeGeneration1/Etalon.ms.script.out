@@ -4,8 +4,13 @@ VOID TestWithDump Etalon.ms.script.test
   STRING VAR l_FileName
   VOID PROCEDURE Out
    IN aValue
+   g_OutFile
+   IsNil
+   ?FAIL
+   'Файл для вывода не открыт'
    aValue
-   Print
+   g_OutFile
+   File:WriteLn
   ; // VOID PROCEDURE Out
   
   script:FileName
@@ -83,9 +88,4 @@ VOID TestWithDump Etalon.ms.script.test
  )
 ; // VOID TestWithDump Etalon.ms.script.test
 
-Etalon.ms.script.prn
-0
-Etalon.ms.script
-Etalon.ms.script.1.prn
-1
-3
+Etalon.ms.script : Ошибка выполнения: "Ошибка при получении параметра aValue: Il3CString : Тип значения tfw_vtInt несовместим с tfw_vtStr". Главный файл: Etalon.ms.script. Класс: TkwFileWriteLn. Слово: File:WriteLn
