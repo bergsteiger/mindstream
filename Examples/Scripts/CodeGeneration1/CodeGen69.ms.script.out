@@ -3582,20 +3582,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
  ;
-IMMEDIATE VOID OPERATOR : macro
- Documentation:
-  - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
-; // macro
-IMMEDIATE VOID OPERATOR : MACRO
- Documentation:
-  - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
-; // MACRO
-IMMEDIATE VOID OPERATOR :: MACRO : STACK_CHANGING_MACRO
- Documentation:
-  - аналог MACRO, но который может "потрогать стек", т.е. считать что-то со стека или положить что-то на стек
-; // STACK_CHANGING_MACRO
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
  Uses: 
   axiom:axiom
