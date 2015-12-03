@@ -45,7 +45,6 @@ VOID TestWithDump Etalon.ms.script.test
    pop:Word:SetValue
    DumpStackTo
    (
-    l_FileName
     g_EtalonCount
     aLambda
     DO
