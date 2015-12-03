@@ -3393,6 +3393,7 @@ STRING FUNCTION : ?(+)
  IMMEDIATE VOID OPERATOR : aSuffix
  STRING FUNCTION :: ?(+) : Result
 ; // ?(+)
+: : ?SWAP
 STRING FUNCTION : any:Cat
  ARRAY OPERATOR :: IN : anArray
  STRING FUNCTION :: any:Cat : Result
@@ -3409,7 +3410,7 @@ STRING FUNCTION : string:CatWihAny
  OPERATOR :: IN : aValue
  STRING FUNCTION :: string:CatWihAny : Result
 ; // string:CatWihAny
-VOID OPERATOR :: PROCEDURE : string:Split:for>
+: : string:Split:for>
  Documentation:
   Разделяет строку aString по разделителю aSep и для каждой части вызывает aLambda
  ^ OPERATOR :: IN : aLambda
