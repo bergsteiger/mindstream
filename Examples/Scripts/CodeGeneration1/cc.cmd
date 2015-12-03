@@ -1,2 +1,2 @@
 call ..\clear.cmd
-call c.cmd DogAndBracket.ms.script
+call c.cmd Etalon.ms.script
