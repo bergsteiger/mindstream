@@ -3409,7 +3409,7 @@ STRING FUNCTION : string:CatWihAny
  OPERATOR :: IN : aValue
  STRING FUNCTION :: string:CatWihAny : Result
 ; // string:CatWihAny
-VOID OPERATOR :: PROCEDURE : string:Split:for>
+: : string:Split:for>
  Documentation:
   Разделяет строку aString по разделителю aSep и для каждой части вызывает aLambda
  ^ OPERATOR :: IN : aLambda

@@ -81,7 +81,7 @@ TestsFor strings:CatSep>
  
 WordAlias CatSep> strings:CatSep>
 
-PROCEDURE string:Split:for>
+: string:Split:for>
   STRING IN aString
   STRING IN aSep
   ^ IN aLambda
@@ -101,7 +101,7 @@ PROCEDURE string:Split:for>
 ; // string:Split:for>
 
 TestsFor string:Split:for>
- Test&DumpStack T1 ( 'a b c' ' ' string:Split:for> Print )
+ Test&DumpStack T1 ( 'a b c' ' ' string:Split:for> NOP )
  Test&DumpStack T2 ( 'a b  c' ' ' string:Split:for> Print )
  Test&DumpStack T3 ( 'abc' ' ' string:Split:for> Print )
  Test&DumpStack T4 ( '' ' ' string:Split:for> Print )
