@@ -12,27 +12,7 @@ PROCEDURE DumpStackTo
 
  %SUMMARY 'Печатает состояние стека в "устройство" aOutput после вычисления выражения aLambda' ;
 
- INTEGER VAR l_StackLevel
- %REMARK 'Уровень стека'
-
- StackLevel >>> l_StackLevel
-
- aLambda DO
- %REMARK 'Вычисляем выражение aLambda. Оно может положить на стек "сколько угодно" значений'
-
- StackLevel l_StackLevel - >>> l_StackLevel
- %REMARK 'Вычисляем приращение стека'
-
- l_StackLevel >= 0 ?ASSURE 'Приращение стека не может быть отрицательным'
-
- while ( l_StackLevel > 0 )
- %REMARK 'Цикл по значениям в стеке'
- begin
-  Dec l_StackLevel
-  aOutput DO
-  %REMARK 'Печатаем значение со стека'
- end // while ( l_StackLevel > 0 ) 
- 
+ [ aLambda DO ] .for> ( aOutput DO )
 ; // DumpStackTo
 
 PROCEDURE .DumpStack
