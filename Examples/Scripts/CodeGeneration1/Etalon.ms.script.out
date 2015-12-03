@@ -11,9 +11,13 @@ VOID TestWithDump Etalon.ms.script.test
   script:FileName
   l_FileName
   pop:Word:SetValue
-  l_FileName
-  '.prn'
-  Cat
+  ARRAY [
+   l_FileName
+   g_EtalonCount
+   IntToStr
+   '.prn'
+  ]
+  strings:Cat
   l_FileName
   pop:Word:SetValue
   SaveVarAndDo
@@ -50,9 +54,9 @@ VOID TestWithDump Etalon.ms.script.test
  )
 ; // VOID TestWithDump Etalon.ms.script.test
 
-Etalon.ms.script.prn
+Etalon.ms.script0.prn
 0
 Etalon.ms.script
-Etalon.ms.script.prn
+Etalon.ms.script1.prn
 1
 3

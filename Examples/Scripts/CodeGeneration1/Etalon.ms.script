@@ -38,7 +38,7 @@ Test&Dump Etalon.ms.script.test
 
   STRING VAR l_FileName
   script:FileName >>> l_FileName
-  l_FileName '.prn' Cat >>> l_FileName
+  [ l_FileName g_EtalonCount IntToStr '.prn' ] strings:Cat >>> l_FileName
 
   TF g_OutFile (
    DumpStackTo (
