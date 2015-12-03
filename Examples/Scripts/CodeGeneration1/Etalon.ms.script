@@ -14,6 +14,9 @@ USES
 
 Test&Dump Etalon.ms.script.test
  
+ INTEGER VAR g_EtalonCount
+ ( 0 >>> g_EtalonCount )
+
  PROCEDURE Etalon
   ^ IN aLambda
   DumpStack ( aLambda DO )
