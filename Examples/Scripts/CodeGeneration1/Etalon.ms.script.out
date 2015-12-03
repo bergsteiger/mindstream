@@ -16,14 +16,18 @@ VOID TestWithDump Etalon.ms.script.test
   Cat
   l_FileName
   pop:Word:SetValue
-  DumpStackTo
-  (
-   l_FileName
-   g_EtalonCount
-   aLambda
-   DO
+  SaveVarAndDo
+  g_OutFile
+  VOID (
+   DumpStackTo
+   (
+    l_FileName
+    g_EtalonCount
+    aLambda
+    DO
+   )
+   Out
   )
-  Out
   INC
   g_EtalonCount
  ; // VOID PROCEDURE Etalon

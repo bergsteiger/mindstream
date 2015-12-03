@@ -40,11 +40,13 @@ Test&Dump Etalon.ms.script.test
   script:FileName >>> l_FileName
   l_FileName '.prn' Cat >>> l_FileName
 
-  DumpStackTo (
-   l_FileName 
-   g_EtalonCount 
-   aLambda DO 
-  ) Out
+  TF g_OutFile (
+   DumpStackTo (
+    l_FileName 
+    g_EtalonCount 
+    aLambda DO 
+   ) Out
+  ) // TF g_OutFile
   Inc g_EtalonCount
  ; // Etalon
 
