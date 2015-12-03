@@ -45,6 +45,9 @@ VOID TestWithDump Etalon.ms.script.test
     DO
    )
    Out
+   l_FileName
+   FileSize
+   Out
   )
   INC
   g_EtalonCount
@@ -71,6 +74,8 @@ VOID TestWithDump Etalon.ms.script.test
 Etalon.ms.script.prn
 0
 Etalon.ms.script
+0
 Etalon.ms.script.1.prn
 1
 3
+0

@@ -52,6 +52,7 @@ Test&Dump Etalon.ms.script.test
     g_EtalonCount 
     aLambda DO 
    ) Out
+   l_FileName FileSize Out
   ) // TF g_OutFile
   Inc g_EtalonCount
  ; // Etalon
