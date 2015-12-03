@@ -45,10 +45,10 @@ VOID TestWithDump Etalon.ms.script.test
     DO
    )
    Out
-   l_FileName
-   FileSize
-   Out
   )
+  l_FileName
+  FileSize
+  Out
   INC
   g_EtalonCount
  ; // VOID PROCEDURE Etalon
