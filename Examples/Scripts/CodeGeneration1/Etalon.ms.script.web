@@ -1,0 +1,70 @@
+PROGRAM Etalon.ms.script
+
+USES
+ io.ms.dict
+;
+
+USES
+ DumpStack.ms.dict
+;
+
+USES
+ SaveVarAndDo.ms.dict
+;
+
+USES
+ Testing.ms.dict
+;
+
+USES
+ CompileTimeVar.ms.dict
+;
+
+FILE CompileTime-VAR g_OutFile nil
+%REMARK 'Текущий файл'
+
+Test&Dump Etalon.ms.script.test
+ 
+ INTEGER VAR g_EtalonCount
+ ( 0 &gt;&gt;&gt; g_EtalonCount )
+
+ PROCEDURE Etalon
+  ^ IN aLambda
+  
+  PROCEDURE Out
+    IN aValue
+   g_OutFile IsNil ?FAIL 'Файл для вывода не открыт'
+   aValue ToPrintable g_OutFile File:WriteLn
+  ; // Out
+
+  STRING VAR l_FileName
+  script:FileName &gt;&gt;&gt; l_FileName
+  [ 
+    l_FileName 
+    if ( g_EtalonCount &gt; 0 ) 
+     ( '.' g_EtalonCount IntToStr ) 
+    '.prn' 
+  ] strings:Cat &gt;&gt;&gt; l_FileName
+
+  TF g_OutFile (
+   l_FileName File:OpenWrite &gt;&gt;&gt; g_OutFile
+   DumpStackTo (
+    aLambda DO 
+   ) Out
+  ) // TF g_OutFile
+  
+  l_FileName FileSize 0 == ? (
+   l_FileName sysutils:FileExists ? (
+    l_FileName DeleteFile DROP
+   ) // l_FileName sysutils:FileExists
+  ) // l_FileName FileSize 0 ==
+
+  Inc g_EtalonCount
+ ; // Etalon
+
+ Etalon script:FileName
+ Etalon ( 1 2 + )
+ Etalon 'Hello world'
+; // Etalon.ms.script.test
+
+Etalon.ms.script.test
