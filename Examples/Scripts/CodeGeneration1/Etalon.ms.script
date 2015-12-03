@@ -19,7 +19,13 @@ Test&Dump Etalon.ms.script.test
 
  PROCEDURE Etalon
   ^ IN aLambda
-  DumpStack ( g_EtalonCount aLambda DO )
+  
+  PROCEDURE Out
+    IN aValue
+   aValue Log
+  ; // Out
+
+  DumpStackTo ( g_EtalonCount aLambda DO ) Out
   Inc g_EtalonCount
  ; // Etalon
 

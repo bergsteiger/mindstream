@@ -1,12 +1,19 @@
 VOID TestWithDump Etalon.ms.script.test
  VOID PROCEDURE Etalon
   ^ IN aLambda
-  DumpStack
+  VOID PROCEDURE Out
+   IN aValue
+   aValue
+   Print
+  ; // VOID PROCEDURE Out
+  
+  DumpStackTo
   (
    g_EtalonCount
    aLambda
    DO
   )
+  Out
   INC
   g_EtalonCount
  ; // VOID PROCEDURE Etalon
