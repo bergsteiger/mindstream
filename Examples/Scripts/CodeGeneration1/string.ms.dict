@@ -59,9 +59,9 @@ STRING FUNCTION ?(+)
 ; // ?(+)
 
 TestsFor ?(+)
- Test T1 '' ?(+) 'B' Print ;
- Test T2 'A' ?(+) 'B' Print ;
- Test T3 'A' ?(+) '' Print ;
+ Test&DumpStack T1 ( '' ?(+) 'B' )
+ Test&DumpStack T2 ( 'A' ?(+) 'B' )
+ Test&DumpStack T3 ( 'A' ?(+) '' )
 ; // TestsFor ?(+)
 
 STRING FUNCTION strings:CatSep>
@@ -71,12 +71,12 @@ STRING FUNCTION strings:CatSep>
 ; // strings:CatSep>
 
 TestsFor strings:CatSep>
- Test T1 strings:CatSep> ' ' [ 'A' 'B' ] Print ;
- Test T2 strings:CatSep> ' ' [ 'A ' 'B' ] Print ;
- Test T3 strings:CatSep> ' ' [ 'A ' ' B' ] Print ;
- Test T4 strings:CatSep> ' ' [ 'A' ' B' ] Print ;
- Test T5 strings:CatSep> ' ' [ '' 'B' ] Print ;
- Test T6 strings:CatSep> ' ' [ 'A' '' ] Print ;
+ Test&DumpStack T1 ( strings:CatSep> ' ' [ 'A' 'B' ] )
+ Test&DumpStack T2 ( strings:CatSep> ' ' [ 'A ' 'B' ] )
+ Test&DumpStack T3 ( strings:CatSep> ' ' [ 'A ' ' B' ] )
+ Test&DumpStack T4 ( strings:CatSep> ' ' [ 'A' ' B' ] )
+ Test&DumpStack T5 ( strings:CatSep> ' ' [ '' 'B' ] )
+ Test&DumpStack T6 ( strings:CatSep> ' ' [ 'A' '' ] )
 ; // TestsFor strings:CatSep>
  
 WordAlias CatSep> strings:CatSep>
