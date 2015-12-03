@@ -11,6 +11,11 @@ VOID TestWithDump Etalon.ms.script.test
   script:FileName
   l_FileName
   pop:Word:SetValue
+  l_FileName
+  '.prn'
+  Cat
+  l_FileName
+  pop:Word:SetValue
   DumpStackTo
   (
    l_FileName
@@ -41,9 +46,9 @@ VOID TestWithDump Etalon.ms.script.test
  )
 ; // VOID TestWithDump Etalon.ms.script.test
 
-Etalon.ms.script
+Etalon.ms.script.prn
 0
 Etalon.ms.script
-Etalon.ms.script
+Etalon.ms.script.prn
 1
 3

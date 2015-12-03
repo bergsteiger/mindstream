@@ -38,6 +38,7 @@ Test&Dump Etalon.ms.script.test
 
   STRING VAR l_FileName
   script:FileName >>> l_FileName
+  l_FileName '.prn' Cat >>> l_FileName
 
   DumpStackTo (
    l_FileName 
