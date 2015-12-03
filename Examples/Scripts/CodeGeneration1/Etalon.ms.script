@@ -31,6 +31,15 @@ Test&Dump Etalon.ms.script.test
  PROCEDURE Etalon
   ^ IN aLambda
   
+  PROCEDURE DeleteEmptyFile
+    STRING IN aFileName
+   aFileName FileSize 0 == ? (
+    aFileName sysutils:FileExists ? (
+     aFileName DeleteFile DROP
+    ) // aFileName sysutils:FileExists
+   ) // aFileName FileSize 0 ==
+  ; // DeleteEmptyFile
+
   PROCEDURE Out
     IN aValue
    g_OutFile IsNil ?FAIL 'Файл для вывода не открыт'
@@ -46,18 +55,18 @@ Test&Dump Etalon.ms.script.test
     '.prn' 
   ] strings:Cat >>> l_FileName
 
+  STRING VAR l_FileNameOut
+  l_FileName >>> l_FileNameOut
+
   TF g_OutFile (
-   l_FileName File:OpenWrite >>> g_OutFile
+   l_FileNameOut File:OpenWrite >>> g_OutFile
    DumpStackTo (
     aLambda DO 
    ) Out
   ) // TF g_OutFile
   
-  l_FileName FileSize 0 == ? (
-   l_FileName sysutils:FileExists ? (
-    l_FileName DeleteFile DROP
-   ) // l_FileName sysutils:FileExists
-  ) // l_FileName FileSize 0 ==
+  l_FileName DeleteEmptyFile
+  l_FileNameOut DeleteEmptyFile
 
   Inc g_EtalonCount
  ; // Etalon

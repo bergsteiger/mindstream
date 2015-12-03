@@ -1,7 +1,27 @@
 VOID TestWithDump Etalon.ms.script.test
  VOID PROCEDURE Etalon
   ^ IN aLambda
+  VOID PROCEDURE DeleteEmptyFile
+   STRING IN aFileName
+   aFileName
+   FileSize
+   0
+   ==
+   ?
+   (
+    aFileName
+    sysutils:FileExists
+    ?
+    (
+     aFileName
+     DeleteFile
+     DROP
+    )
+   )
+  ; // VOID PROCEDURE DeleteEmptyFile
+  
   STRING VAR l_FileName
+  STRING VAR l_FileNameOut
   VOID PROCEDURE Out
    IN aValue
    g_OutFile
@@ -36,10 +56,13 @@ VOID TestWithDump Etalon.ms.script.test
   strings:Cat
   l_FileName
   pop:Word:SetValue
+  l_FileName
+  l_FileNameOut
+  pop:Word:SetValue
   SaveVarAndDo
   g_OutFile
   (
-   l_FileName
+   l_FileNameOut
    File:OpenWrite
    g_OutFile
    pop:Word:SetValue
@@ -51,20 +74,9 @@ VOID TestWithDump Etalon.ms.script.test
    Out
   )
   l_FileName
-  FileSize
-  0
-  ==
-  ?
-  (
-   l_FileName
-   sysutils:FileExists
-   ?
-   (
-    l_FileName
-    DeleteFile
-    DROP
-   )
-  )
+  DeleteEmptyFile
+  l_FileNameOut
+  DeleteEmptyFile
   INC
   g_EtalonCount
  ; // VOID PROCEDURE Etalon
