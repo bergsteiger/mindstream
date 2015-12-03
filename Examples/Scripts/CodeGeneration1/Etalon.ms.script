@@ -55,8 +55,10 @@ Test&Dump Etalon.ms.script.test
   ) // TF g_OutFile
   
   l_FileName FileSize 0 == ? (
-   l_FileName DeleteFile DROP
-  )
+   l_FileName sysutils:FileExists ? (
+    l_FileName DeleteFile DROP
+   ) // l_FileName sysutils:FileExists
+  ) // l_FileName FileSize 0 ==
 
   Inc g_EtalonCount
  ; // Etalon

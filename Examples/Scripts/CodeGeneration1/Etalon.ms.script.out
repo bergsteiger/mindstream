@@ -53,8 +53,13 @@ VOID TestWithDump Etalon.ms.script.test
   ?
   (
    l_FileName
-   DeleteFile
-   DROP
+   sysutils:FileExists
+   ?
+   (
+    l_FileName
+    DeleteFile
+    DROP
+   )
   )
   INC
   g_EtalonCount
