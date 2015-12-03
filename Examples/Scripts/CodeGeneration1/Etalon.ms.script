@@ -12,7 +12,7 @@ Test&Dump Etalon.ms.script.test
  
  PROCEDURE Etalon
   ^ IN aLambda
-  aLambda Print
+  aLambda DO Print
  ; // Etalon
 
  Etalon script:FileName
