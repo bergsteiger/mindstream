@@ -81,7 +81,7 @@ TestsFor strings:CatSep>
  
 WordAlias CatSep> strings:CatSep>
 
-: string:Split:for>
+PROCEDURE string:Split:for>
   STRING IN aString
   STRING IN aSep
   ^ IN aLambda
