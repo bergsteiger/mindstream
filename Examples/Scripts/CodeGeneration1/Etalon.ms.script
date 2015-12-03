@@ -16,6 +16,13 @@ USES
  Testing.ms.dict
 ;
 
+USES
+ CompileTimeVar.ms.dict
+;
+
+FILE CompileTime-VAR g_OutFile nil
+%REMARK 'Текущий файл'
+
 Test&Dump Etalon.ms.script.test
  
  INTEGER VAR g_EtalonCount
