@@ -59,6 +59,11 @@ VOID TestWithDump Etalon.ms.script.test
   l_FileName
   l_FileNameOut
   pop:Word:SetValue
+  l_FileNameOut
+  '.out'
+  Cat
+  l_FileNameOut
+  pop:Word:SetValue
   SaveVarAndDo
   g_OutFile
   (

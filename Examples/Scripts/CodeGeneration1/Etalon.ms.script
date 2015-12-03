@@ -61,6 +61,7 @@ Test&Dump Etalon.ms.script.test
 
   STRING VAR l_FileNameOut
   l_FileName >>> l_FileNameOut
+  l_FileNameOut '.out' Cat >>> l_FileNameOut
 
   TF g_OutFile (
    l_FileNameOut File:OpenWrite >>> g_OutFile
