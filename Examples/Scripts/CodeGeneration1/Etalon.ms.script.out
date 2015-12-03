@@ -1,12 +1,16 @@
 VOID TestWithDump Etalon.ms.script.test
  VOID PROCEDURE Etalon
   ^ IN aLambda
+  STRING VAR l_FileName
   VOID PROCEDURE Out
    IN aValue
    aValue
    Print
   ; // VOID PROCEDURE Out
   
+  script:FileName
+  l_FileName
+  pop:Word:SetValue
   DumpStackTo
   (
    g_EtalonCount

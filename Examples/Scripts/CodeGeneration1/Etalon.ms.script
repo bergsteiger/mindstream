@@ -36,7 +36,13 @@ Test&Dump Etalon.ms.script.test
    aValue Log
   ; // Out
 
-  DumpStackTo ( g_EtalonCount aLambda DO ) Out
+  STRING VAR l_FileName
+  script:FileName >>> l_FileName
+
+  DumpStackTo ( 
+   g_EtalonCount 
+   aLambda DO 
+  ) Out
   Inc g_EtalonCount
  ; // Etalon
 
