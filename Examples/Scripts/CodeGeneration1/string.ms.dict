@@ -101,9 +101,9 @@ WordAlias CatSep> strings:CatSep>
 ; // string:Split:for>
 
 TestsFor string:Split:for>
- Test&DumpStack T1 ( 'a b c' ' ' string:Split:for> Print )
- Test&DumpStack T2 ( 'a b  c' ' ' string:Split:for> Print )
- Test&DumpStack T3 ( 'abc' ' ' string:Split:for> Print )
- Test&DumpStack T4 ( '' ' ' string:Split:for> Print )
- Test&DumpStack T5 ( ' ' ' ' string:Split:for> Print )
+ Test&DumpStack T1 ( 'a b c' ' ' string:Split:for> NOP )
+ Test&DumpStack T2 ( 'a b  c' ' ' string:Split:for> NOP )
+ Test&DumpStack T3 ( 'abc' ' ' string:Split:for> NOP )
+ Test&DumpStack T4 ( '' ' ' string:Split:for> NOP )
+ Test&DumpStack T5 ( ' ' ' ' string:Split:for> NOP )
 ; // string:Split:for> 
