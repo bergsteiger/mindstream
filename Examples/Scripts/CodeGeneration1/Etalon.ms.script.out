@@ -91,7 +91,7 @@ VOID TestWithDump Etalon.ms.script.test
    (
     STRING VAR l_Compare
     ARRAY [
-     'afc.cmd '
+     'q:\afc.cmd '
      l_FileName
      ' '
      l_FileNameOut
@@ -99,6 +99,8 @@ VOID TestWithDump Etalon.ms.script.test
     strings:Cat
     l_Compare
     pop:Word:SetValue
+    l_Compare
+    .
     l_Compare
     WinExec
    )
@@ -124,7 +126,7 @@ VOID TestWithDump Etalon.ms.script.test
  Etalon
  (
   1
-  2
+  3
   +
  )
  Etalon

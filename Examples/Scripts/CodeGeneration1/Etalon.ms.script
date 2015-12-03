@@ -73,7 +73,8 @@ Test&Dump Etalon.ms.script.test
   l_FileName sysutils:FileExists ? (
    '' l_FileName l_FileNameOut CompareFiles ! ? (
     STRING VAR l_Compare
-    [ 'afc.cmd ' l_FileName ' ' l_FileNameOut ] strings:Cat >>> l_Compare
+    [ 'q:\afc.cmd ' l_FileName ' ' l_FileNameOut ] strings:Cat >>> l_Compare
+    l_Compare .
     l_Compare WinExec
    )
   )
@@ -85,7 +86,7 @@ Test&Dump Etalon.ms.script.test
  ; // Etalon
 
  Etalon script:FileName
- Etalon ( 1 2 + )
+ Etalon ( 1 3 + )
  Etalon 'Hello world'
  Etalon ()
  Etalon []
