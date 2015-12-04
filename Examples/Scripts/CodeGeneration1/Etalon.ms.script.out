@@ -169,6 +169,9 @@ VOID TestWithDump Etalon.ms.script.test
     DO
    )
    Out
+   nil
+   g_OutFile
+   pop:Word:SetValue
   )
   if
    (
@@ -238,6 +241,7 @@ VOID TestWithDump Etalon.ms.script.test
  )
  (
   ARRAY [
+   0
   ]
   g_EtalonPath
   pop:Word:SetValue

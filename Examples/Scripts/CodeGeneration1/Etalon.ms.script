@@ -34,7 +34,7 @@ Test&Dump Etalon.ms.script.test
  INTEGER VAR g_EtalonLevel
  ( 0 >>> g_EtalonLevel )
  ARRAY VAR g_EtalonPath
- ( [] >>> g_EtalonPath )
+ ( [ 0 ] >>> g_EtalonPath )
 
  CONST cCompareUtilCmd 'q:\afc.cmd'
  %REMARK 'Путь к утилите сравнения'
@@ -102,6 +102,7 @@ Test&Dump Etalon.ms.script.test
    DumpStackTo (
     aLambda DO 
    ) Out
+   nil >>> g_OutFile
   ) // TF g_OutFile
 
   if ( l_FileName sysutils:FileExists ) then
