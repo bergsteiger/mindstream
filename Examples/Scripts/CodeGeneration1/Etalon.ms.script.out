@@ -3,6 +3,12 @@ VOID TestWithDump Etalon.ms.script.test
   'q:\afc.cmd'
  VOID PROCEDURE Etalon
   ^ IN aLambda
+  aLambda
+  Etalon.do
+ ; // VOID PROCEDURE Etalon
+ 
+ VOID PROCEDURE Etalon.do
+  IN aLambda
   STRING CONST cPathSep
    '\'
   VOID PROCEDURE DeleteEmptyFile
@@ -201,7 +207,7 @@ VOID TestWithDump Etalon.ms.script.test
   DeleteEmptyFile
   INC
   g_EtalonCount
- ; // VOID PROCEDURE Etalon
+ ; // VOID PROCEDURE Etalon.do
  
  INTEGER VAR g_EtalonCount
  INTEGER VAR g_EtalonLevel

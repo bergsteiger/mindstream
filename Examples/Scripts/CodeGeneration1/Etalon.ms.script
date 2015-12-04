@@ -37,8 +37,8 @@ Test&Dump Etalon.ms.script.test
  CONST cCompareUtilCmd 'q:\afc.cmd'
  %REMARK 'Путь к утилите сравнения'
 
- PROCEDURE Etalon
-  ^ IN aLambda
+ PROCEDURE Etalon.do
+   IN aLambda
 
   CONST cPathSep '\'
 
@@ -118,6 +118,12 @@ Test&Dump Etalon.ms.script.test
   l_EtalonFileName DeleteEmptyFile
 
   Inc g_EtalonCount
+ ; // Etalon.do
+
+ PROCEDURE Etalon
+   ^ IN aLambda
+
+  aLambda Etalon.do
  ; // Etalon
 
  Etalon ( script:FileName sysutils:ExtractFileName )
