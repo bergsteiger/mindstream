@@ -77,19 +77,19 @@ Test&Dump Etalon.ms.script.test
     '.prn' 
   ] strings:Cat >>> l_FileName
 
-  STRING VAR l_FileNameOut
-  l_FileName >>> l_FileNameOut
-  l_FileNameOut '.etalon' Cat >>> l_FileNameOut
+  STRING VAR l_EtalonFileName
+  l_FileName >>> l_EtalonFileName
+  l_EtalonFileName '.etalon' Cat >>> l_EtalonFileName
 
   [ l_CurrentDir 'Etalons' l_FileName ] cPathSep strings:CatSep >>> l_FileName
 
   STRING VAR l_OutDir
   [ l_CurrentDir 'Out' ] cPathSep strings:CatSep >>> l_OutDir
   l_OutDir sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutDir ]
-  [ l_OutDir l_FileNameOut ] cPathSep strings:CatSep >>> l_FileNameOut
+  [ l_OutDir l_EtalonFileName ] cPathSep strings:CatSep >>> l_EtalonFileName
 
   TF g_OutFile (
-   l_FileNameOut File:OpenWrite >>> g_OutFile
+   l_EtalonFileName File:OpenWrite >>> g_OutFile
    DumpStackTo (
     aLambda DO 
    ) Out
@@ -97,21 +97,21 @@ Test&Dump Etalon.ms.script.test
 
   if ( l_FileName sysutils:FileExists ) then
   begin
-   '' l_FileName l_FileNameOut CompareFiles ! ? (
+   '' l_FileName l_EtalonFileName CompareFiles ! ? (
     cCompareUtilCmd sysutils:FileExists ?ASSURE [ 'Не найдена утилита сравнения: ' cCompareUtilCmd ]
     STRING VAR l_Compare
-    [ cCompareUtilCmd ' ' l_FileName ' ' l_FileNameOut ] strings:Cat >>> l_Compare
+    [ cCompareUtilCmd ' ' l_FileName ' ' l_EtalonFileName ] strings:Cat >>> l_Compare
     l_Compare WinExec
     %REMARK 'Вызываем внешнюю утилиту сравнения файлов'
    )
   end // l_FileName sysutils:FileExists
   else
   begin
-   $20 l_FileName l_FileNameOut CopyFile
+   $20 l_FileName l_EtalonFileName CopyFile
   end // l_FileName sysutils:FileExists
   
   l_FileName DeleteEmptyFile
-  l_FileNameOut DeleteEmptyFile
+  l_EtalonFileName DeleteEmptyFile
 
   Inc g_EtalonCount
  ; // Etalon

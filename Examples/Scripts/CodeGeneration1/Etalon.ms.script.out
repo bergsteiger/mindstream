@@ -33,8 +33,8 @@ VOID TestWithDump Etalon.ms.script.test
   ; // BOOLEAN FUNCTION FileIsEmpty
   
   STRING VAR l_CurrentDir
+  STRING VAR l_EtalonFileName
   STRING VAR l_FileName
-  STRING VAR l_FileNameOut
   STRING VAR l_OutDir
   VOID PROCEDURE Out
    IN aValue
@@ -87,12 +87,12 @@ VOID TestWithDump Etalon.ms.script.test
   l_FileName
   pop:Word:SetValue
   l_FileName
-  l_FileNameOut
+  l_EtalonFileName
   pop:Word:SetValue
-  l_FileNameOut
+  l_EtalonFileName
   '.etalon'
   Cat
-  l_FileNameOut
+  l_EtalonFileName
   pop:Word:SetValue
   ARRAY [
    l_CurrentDir
@@ -120,16 +120,16 @@ VOID TestWithDump Etalon.ms.script.test
   ]
   ARRAY [
    l_OutDir
-   l_FileNameOut
+   l_EtalonFileName
   ]
   cPathSep
   strings:CatSep
-  l_FileNameOut
+  l_EtalonFileName
   pop:Word:SetValue
   SaveVarAndDo
   g_OutFile
   (
-   l_FileNameOut
+   l_EtalonFileName
    File:OpenWrite
    g_OutFile
    pop:Word:SetValue
@@ -149,7 +149,7 @@ VOID TestWithDump Etalon.ms.script.test
    BEGIN
     ''
     l_FileName
-    l_FileNameOut
+    l_EtalonFileName
     CompareFiles
     !
     ?
@@ -167,7 +167,7 @@ VOID TestWithDump Etalon.ms.script.test
       ' '
       l_FileName
       ' '
-      l_FileNameOut
+      l_EtalonFileName
      ]
      strings:Cat
      l_Compare
@@ -180,12 +180,12 @@ VOID TestWithDump Etalon.ms.script.test
    BEGIN
     32
     l_FileName
-    l_FileNameOut
+    l_EtalonFileName
     CopyFile
    END
   l_FileName
   DeleteEmptyFile
-  l_FileNameOut
+  l_EtalonFileName
   DeleteEmptyFile
   INC
   g_EtalonCount
