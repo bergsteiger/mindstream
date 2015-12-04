@@ -76,10 +76,7 @@ Test&Dump Etalon.ms.script.test
 
   [ 
     l_FileName 
-    if ( g_EtalonLevel > 1 ) 
-     ( '.' g_EtalonLevel IntToStr ) 
-    if ( g_EtalonCount > 0 ) 
-     ( '.' g_EtalonCount IntToStr ) 
+    [ g_EtalonPath .for> IntToStr ] '.' strings:CatSep
     '.prn' 
   ] strings:Cat >>> l_FileName
 
@@ -149,6 +146,7 @@ Test&Dump Etalon.ms.script.test
    begin
     TF g_EtalonPath (
      0 >>>[] g_EtalonPath
+     0 >>> g_EtalonCount
      aLambda Etalon.do
     ) // TF g_EtalonPath
    end // l_SameLevel
