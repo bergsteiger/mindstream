@@ -3,6 +3,8 @@ VOID TestWithDump Etalon.ms.script.test
   'q:\afc.cmd'
  VOID PROCEDURE Etalon
   ^ IN aLambda
+  STRING CONST cPathSep
+   '\'
   VOID PROCEDURE DeleteEmptyFile
    STRING IN aFileName
    aFileName
@@ -72,7 +74,7 @@ VOID TestWithDump Etalon.ms.script.test
    'Etalons'
    l_FileName
   ]
-  '\'
+  cPathSep
   strings:CatSep
   l_FileName
   pop:Word:SetValue
@@ -80,7 +82,7 @@ VOID TestWithDump Etalon.ms.script.test
    sysutils:GetCurrentDir
    'Out'
   ]
-  '\'
+  cPathSep
   strings:CatSep
   l_OutDir
   pop:Word:SetValue
@@ -95,7 +97,7 @@ VOID TestWithDump Etalon.ms.script.test
    l_OutDir
    l_FileNameOut
   ]
-  '\'
+  cPathSep
   strings:CatSep
   l_FileNameOut
   pop:Word:SetValue
@@ -172,7 +174,7 @@ VOID TestWithDump Etalon.ms.script.test
        l_OutPath
        l_FileName
       ]
-      '\'
+      cPathSep
       strings:CatSep
       l_FileName
       pop:Word:SetValue

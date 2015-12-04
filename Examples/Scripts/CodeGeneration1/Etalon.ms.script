@@ -37,6 +37,8 @@ Test&Dump Etalon.ms.script.test
 
  PROCEDURE Etalon
   ^ IN aLambda
+
+  CONST cPathSep '\'
   
   PROCEDURE DeleteEmptyFile
     STRING IN aFileName
@@ -66,12 +68,12 @@ Test&Dump Etalon.ms.script.test
   l_FileName >>> l_FileNameOut
   l_FileNameOut '.out' Cat >>> l_FileNameOut
 
-  [ sysutils:GetCurrentDir 'Etalons' l_FileName ] '\' strings:CatSep >>> l_FileName
+  [ sysutils:GetCurrentDir 'Etalons' l_FileName ] cPathSep strings:CatSep >>> l_FileName
 
   STRING VAR l_OutDir
-  [ sysutils:GetCurrentDir 'Out' ] '\' strings:CatSep >>> l_OutDir
+  [ sysutils:GetCurrentDir 'Out' ] cPathSep strings:CatSep >>> l_OutDir
   l_OutDir sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutDir ]
-  [ l_OutDir l_FileNameOut ] '\' strings:CatSep >>> l_FileNameOut
+  [ l_OutDir l_FileNameOut ] cPathSep strings:CatSep >>> l_FileNameOut
 
   TF g_OutFile (
    l_FileNameOut File:OpenWrite >>> g_OutFile
@@ -98,7 +100,7 @@ Test&Dump Etalon.ms.script.test
    if ( l_OutPath IsNil ) then
    begin
     sysutils:GetCurrentDir >>> l_OutPath
-    [ l_OutPath l_FileName ] '\' strings:CatSep >>> l_FileName
+    [ l_OutPath l_FileName ] cPathSep strings:CatSep >>> l_FileName
    end
    l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
    $20 l_FileName l_FileNameOut CopyFile
