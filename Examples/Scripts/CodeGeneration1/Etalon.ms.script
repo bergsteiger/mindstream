@@ -88,7 +88,6 @@ Test&Dump Etalon.ms.script.test
     cCompareUtilCmd sysutils:FileExists ?ASSURE [ 'Не найдена утилита сравнения: ' cCompareUtilCmd ]
     STRING VAR l_Compare
     [ cCompareUtilCmd ' ' l_FileName ' ' l_FileNameOut ] strings:Cat >>> l_Compare
-    l_Compare Print
     l_Compare WinExec
     %REMARK 'Вызываем внешнюю утилиту сравнения файлов'
    )
