@@ -24,6 +24,7 @@ VOID TestWithDump Etalon.ms.script.test
    )
   ; // VOID PROCEDURE DeleteEmptyFile
   
+  STRING VAR l_CurrentDir
   STRING VAR l_FileName
   STRING VAR l_FileNameOut
   STRING VAR l_OutDir
@@ -42,6 +43,9 @@ VOID TestWithDump Etalon.ms.script.test
   script:FileName
   sysutils:ExtractFileName
   l_FileName
+  pop:Word:SetValue
+  sysutils:GetCurrentDir
+  l_CurrentDir
   pop:Word:SetValue
   ARRAY [
    l_FileName
@@ -71,7 +75,7 @@ VOID TestWithDump Etalon.ms.script.test
   l_FileNameOut
   pop:Word:SetValue
   ARRAY [
-   sysutils:GetCurrentDir
+   l_CurrentDir
    'Etalons'
    l_FileName
   ]
@@ -80,7 +84,7 @@ VOID TestWithDump Etalon.ms.script.test
   l_FileName
   pop:Word:SetValue
   ARRAY [
-   sysutils:GetCurrentDir
+   l_CurrentDir
    'Out'
   ]
   cPathSep
