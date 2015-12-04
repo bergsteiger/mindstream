@@ -32,7 +32,7 @@ Test&Dump Etalon.ms.script.test
  INTEGER VAR g_EtalonCount
  ( 0 >>> g_EtalonCount )
  INTEGER VAR g_EtalonLevel
- ( -1 >>> g_EtalonLevel )
+ ( 0 >>> g_EtalonLevel )
 
  CONST cCompareUtilCmd 'q:\afc.cmd'
  %REMARK 'Путь к утилите сравнения'
@@ -74,7 +74,7 @@ Test&Dump Etalon.ms.script.test
 
   [ 
     l_FileName 
-    if ( g_EtalonLevel > 0 ) 
+    if ( g_EtalonLevel > 1 ) 
      ( '.' g_EtalonLevel IntToStr ) 
     if ( g_EtalonCount > 0 ) 
      ( '.' g_EtalonCount IntToStr ) 
