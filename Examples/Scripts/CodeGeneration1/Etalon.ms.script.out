@@ -132,7 +132,6 @@ VOID TestWithDump Etalon.ms.script.test
    ]
    '.'
    strings:CatSep
-   '.prn'
   ]
   strings:Cat
   l_FileName
@@ -141,7 +140,7 @@ VOID TestWithDump Etalon.ms.script.test
   l_OutFileName
   pop:Word:SetValue
   l_OutFileName
-  '.etalon'
+  '.prn'
   Cat
   l_OutFileName
   pop:Word:SetValue
@@ -149,6 +148,8 @@ VOID TestWithDump Etalon.ms.script.test
    l_CurrentDir
    'Etalons'
    l_FileName
+   '.prn.etalon'
+   Cat
   ]
   cPathSep
   strings:CatSep
