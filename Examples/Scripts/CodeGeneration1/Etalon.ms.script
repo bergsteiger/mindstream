@@ -103,7 +103,7 @@ Test&Dump Etalon.ms.script.test
   Inc g_EtalonCount
  ; // Etalon
 
- Etalon script:FileName
+ Etalon ( script:FileName sysutils:ExtractFileName )
  Etalon ( 1 3 + )
  Etalon 'Hello world'
  Etalon ()

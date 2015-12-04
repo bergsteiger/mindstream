@@ -176,7 +176,10 @@ VOID TestWithDump Etalon.ms.script.test
   pop:Word:SetValue
  )
  Etalon
- script:FileName
+ (
+  script:FileName
+  sysutils:ExtractFileName
+ )
  Etalon
  (
   1
