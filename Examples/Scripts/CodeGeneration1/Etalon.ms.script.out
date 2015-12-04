@@ -66,7 +66,7 @@ VOID TestWithDump Etalon.ms.script.test
   l_FileNameOut
   pop:Word:SetValue
   l_FileNameOut
-  '.out'
+  '.etalon'
   Cat
   l_FileNameOut
   pop:Word:SetValue
