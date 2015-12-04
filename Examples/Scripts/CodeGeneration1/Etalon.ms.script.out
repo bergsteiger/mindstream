@@ -91,6 +91,14 @@ VOID TestWithDump Etalon.ms.script.test
    'Не удалось создать директорию '
    l_OutDir
   ]
+  ARRAY [
+   l_OutDir
+   l_FileNameOut
+  ]
+  '\'
+  strings:CatSep
+  l_FileNameOut
+  pop:Word:SetValue
   SaveVarAndDo
   g_OutFile
   (

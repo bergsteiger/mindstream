@@ -71,6 +71,7 @@ Test&Dump Etalon.ms.script.test
   STRING VAR l_OutDir
   [ sysutils:GetCurrentDir 'Out' ] '\' strings:CatSep >>> l_OutDir
   l_OutDir sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutDir ]
+  [ l_OutDir l_FileNameOut ] '\' strings:CatSep >>> l_FileNameOut
 
   TF g_OutFile (
    l_FileNameOut File:OpenWrite >>> g_OutFile
