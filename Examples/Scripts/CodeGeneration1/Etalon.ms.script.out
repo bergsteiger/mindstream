@@ -90,7 +90,7 @@ VOID TestWithDump Etalon.ms.script.test
   ; // BOOLEAN FUNCTION FileIsEmpty
   
   STRING VAR l_CurrentDir
-  STRING VAR l_FileName
+  STRING VAR l_EtalonFileName
   STRING VAR l_OutDir
   STRING VAR l_OutFileName
   VOID PROCEDURE Out
@@ -111,7 +111,7 @@ VOID TestWithDump Etalon.ms.script.test
   pop:Word:SetValue
   script:FileName
   sysutils:ExtractFileName
-  l_FileName
+  l_EtalonFileName
   pop:Word:SetValue
   if
    (
@@ -125,7 +125,7 @@ VOID TestWithDump Etalon.ms.script.test
     pop:Word:SetValue
    END
   ARRAY [
-   l_FileName
+   l_EtalonFileName
    ARRAY [
     g_EtalonPath
     IntToStr
@@ -136,9 +136,9 @@ VOID TestWithDump Etalon.ms.script.test
    strings:CatSep
   ]
   strings:Cat
-  l_FileName
+  l_EtalonFileName
   pop:Word:SetValue
-  l_FileName
+  l_EtalonFileName
   l_OutFileName
   pop:Word:SetValue
   l_OutFileName
@@ -150,7 +150,7 @@ VOID TestWithDump Etalon.ms.script.test
    l_CurrentDir
    'Etalons'
    ARRAY [
-    l_FileName
+    l_EtalonFileName
     cPrnExt
     '.etalon'
    ]
@@ -158,7 +158,7 @@ VOID TestWithDump Etalon.ms.script.test
   ]
   cPathSep
   strings:CatSep
-  l_FileName
+  l_EtalonFileName
   pop:Word:SetValue
   ARRAY [
    l_CurrentDir
@@ -207,13 +207,13 @@ VOID TestWithDump Etalon.ms.script.test
   )
   if
    (
-    l_FileName
+    l_EtalonFileName
     sysutils:FileExists
    )
   then
    BEGIN
     ''
-    l_FileName
+    l_EtalonFileName
     l_OutFileName
     CompareFiles
     !
@@ -226,11 +226,11 @@ VOID TestWithDump Etalon.ms.script.test
   else
    BEGIN
     32
-    l_FileName
+    l_EtalonFileName
     l_OutFileName
     CopyFile
    END
-  l_FileName
+  l_EtalonFileName
   DeleteEmptyFile
   l_OutFileName
   DeleteEmptyFile

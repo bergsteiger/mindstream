@@ -62,10 +62,10 @@ Test&Dump Etalon.ms.script.test
    aValue ToPrintable g_OutFile File:WriteLn
   ; // Out
 
-  STRING VAR l_FileName
+  STRING VAR l_EtalonFileName
   STRING VAR l_CurrentDir
   script:FileName sysutils:ExtractFilePath >>> l_CurrentDir
-  script:FileName sysutils:ExtractFileName >>> l_FileName
+  script:FileName sysutils:ExtractFileName >>> l_EtalonFileName
 
   if ( l_CurrentDir IsNil ) then
   begin
@@ -73,16 +73,16 @@ Test&Dump Etalon.ms.script.test
   end // l_CurrentDir IsNil
 
   [ 
-    l_FileName 
+    l_EtalonFileName 
     [ g_EtalonPath .for> IntToStr ] '.' strings:CatSep
-  ] strings:Cat >>> l_FileName
+  ] strings:Cat >>> l_EtalonFileName
 
   CONST cPrnExt '.prn'
   STRING VAR l_OutFileName
-  l_FileName >>> l_OutFileName
+  l_EtalonFileName >>> l_OutFileName
   l_OutFileName cPrnExt Cat >>> l_OutFileName
 
-  [ l_CurrentDir 'Etalons' [ l_FileName cPrnExt '.etalon' ] strings:Cat ] cPathSep strings:CatSep >>> l_FileName
+  [ l_CurrentDir 'Etalons' [ l_EtalonFileName cPrnExt '.etalon' ] strings:Cat ] cPathSep strings:CatSep >>> l_EtalonFileName
 
   STRING VAR l_OutDir
   [ l_CurrentDir 'Out' ] cPathSep strings:CatSep >>> l_OutDir
@@ -100,23 +100,23 @@ Test&Dump Etalon.ms.script.test
    nil >>> g_OutFile
   ) // TF g_OutFile
 
-  if ( l_FileName sysutils:FileExists ) then
+  if ( l_EtalonFileName sysutils:FileExists ) then
   begin
-   '' l_FileName l_OutFileName CompareFiles ! ? (
+   '' l_EtalonFileName l_OutFileName CompareFiles ! ? (
    'got' Msg
 /*{    cCompareUtilCmd sysutils:FileExists ?ASSURE [ 'Не найдена утилита сравнения: ' cCompareUtilCmd ]
     STRING VAR l_Compare
-    [ cCompareUtilCmd ' ' l_FileName ' ' l_OutFileName ] strings:Cat >>> l_Compare
+    [ cCompareUtilCmd ' ' l_EtalonFileName ' ' l_OutFileName ] strings:Cat >>> l_Compare
     l_Compare WinExec
     %REMARK 'Вызываем внешнюю утилиту сравнения файлов'}*/
    )
-  end // l_FileName sysutils:FileExists
+  end // l_EtalonFileName sysutils:FileExists
   else
   begin
-   $20 l_FileName l_OutFileName CopyFile
-  end // l_FileName sysutils:FileExists
+   $20 l_EtalonFileName l_OutFileName CopyFile
+  end // l_EtalonFileName sysutils:FileExists
   
-  l_FileName DeleteEmptyFile
+  l_EtalonFileName DeleteEmptyFile
   l_OutFileName DeleteEmptyFile
 
  ; // Etalon.do
