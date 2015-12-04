@@ -192,11 +192,17 @@ VOID TestWithDump Etalon.ms.script.test
  ; // VOID PROCEDURE Etalon
  
  INTEGER VAR g_EtalonCount
+ INTEGER VAR g_EtalonLevel
  Etalon.ms.script.test
  DumpElement
  (
   0
   g_EtalonCount
+  pop:Word:SetValue
+ )
+ (
+  0
+  g_EtalonLevel
   pop:Word:SetValue
  )
  Etalon
