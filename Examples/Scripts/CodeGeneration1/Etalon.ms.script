@@ -56,7 +56,7 @@ Test&Dump Etalon.ms.script.test
   ; // Out
 
   STRING VAR l_FileName
-  script:FileName >>> l_FileName
+  script:FileName sysutils:ExtractFileName >>> l_FileName
   [ 
     l_FileName 
     if ( g_EtalonCount > 0 ) 

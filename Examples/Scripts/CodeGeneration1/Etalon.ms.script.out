@@ -40,6 +40,7 @@ VOID TestWithDump Etalon.ms.script.test
   ; // VOID PROCEDURE Out
   
   script:FileName
+  sysutils:ExtractFileName
   l_FileName
   pop:Word:SetValue
   ARRAY [
@@ -226,3 +227,4 @@ VOID TestWithDump Etalon.ms.script.test
  1
 ; // VOID TestWithDump Etalon.ms.script.test
 
+q:\afc.cmd H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.prn.out
