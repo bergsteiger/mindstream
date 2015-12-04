@@ -141,6 +141,10 @@ VOID TestWithDump Etalon.ms.script.test
      'Не удалось создать директорию '
      l_OutPath
     ]
+    32
+    l_FileName
+    l_FileNameOut
+    CopyFile
    END
   l_FileName
   DeleteEmptyFile
@@ -173,5 +177,7 @@ VOID TestWithDump Etalon.ms.script.test
  Etalon
  ARRAY [
  ]
+ Etalon
+ 1
 ; // VOID TestWithDump Etalon.ms.script.test
 
