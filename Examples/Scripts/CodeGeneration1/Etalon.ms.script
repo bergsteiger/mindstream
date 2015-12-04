@@ -56,9 +56,9 @@ Test&Dump Etalon.ms.script.test
   ; // Out
 
   STRING VAR l_FileName
+  STRING VAR l_CurrentDir
   script:FileName sysutils:ExtractFileName >>> l_FileName
 
-  STRING VAR l_CurrentDir
   sysutils:GetCurrentDir >>> l_CurrentDir
   [ 
     l_FileName 
