@@ -97,6 +97,9 @@ Test&Dump Etalon.ms.script.test
   TF g_OutFile (
    l_EtalonFileName File:OpenWrite >>> g_OutFile
    DumpStackTo (
+    g_EtalonPath
+   ) Out
+   DumpStackTo (
     aLambda DO 
    ) Out
   ) // TF g_OutFile
