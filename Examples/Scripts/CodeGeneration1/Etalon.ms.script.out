@@ -7,9 +7,15 @@ VOID TestWithDump Etalon.ms.script.test
   g_EtalonLevel
   TRY
    INTEGER VAR l_Level
+   BOOLEAN VAR l_SameLevel
    g_EtalonPath
    Array:Count
    l_Level
+   pop:Word:SetValue
+   l_Level
+   g_EtalonLevel
+   ==
+   l_SameLevel
    pop:Word:SetValue
    SaveVarAndDo
    g_EtalonPath
