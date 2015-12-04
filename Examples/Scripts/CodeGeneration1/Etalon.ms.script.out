@@ -139,8 +139,7 @@ VOID TestWithDump Etalon.ms.script.test
     SWAP
     Array:Iterate
    ]
-   '.'
-   strings:CatSep
+   strings:Cat
   ]
   strings:Cat
   l_EtalonFileName
