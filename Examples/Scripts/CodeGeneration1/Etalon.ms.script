@@ -137,7 +137,13 @@ Test&Dump Etalon.ms.script.test
    l_Level g_EtalonLevel == >>> l_SameLevel
    if l_SameLevel then
    begin
+    DEC l_Level
+    INTEGER VAR l_EtalonCount
+    l_Level g_EtalonPath Array:Item >>> l_EtalonCount
+    l_EtalonCount >>> g_EtalonCount
     aLambda Etalon.do
+    INC l_EtalonCount
+    l_Level g_EtalonPath Array:Item := l_EtalonCount
    end // l_SameLevel
    else
    begin
