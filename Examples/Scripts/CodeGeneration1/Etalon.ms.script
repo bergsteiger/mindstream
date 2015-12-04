@@ -129,8 +129,8 @@ Test&Dump Etalon.ms.script.test
  PROCEDURE Etalon
    ^ IN aLambda
 
-  INC g_EtalonLevel
-  TRY
+  TF g_EtalonLevel (
+   INC g_EtalonLevel
    INTEGER VAR l_Level
    g_EtalonPath Array:Count >>> l_Level
    BOOLEAN VAR l_SameLevel
@@ -151,9 +151,7 @@ Test&Dump Etalon.ms.script.test
      aLambda Etalon.do
     ) // TF g_EtalonPath
    end // l_SameLevel
-  FINALLY
-   DEC g_EtalonLevel
-  END
+  ) 
  ; // Etalon
 
  Etalon ( script:FileName sysutils:ExtractFileName )
