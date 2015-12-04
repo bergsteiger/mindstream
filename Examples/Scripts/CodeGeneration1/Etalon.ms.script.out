@@ -17,12 +17,22 @@ VOID TestWithDump Etalon.ms.script.test
    ==
    l_SameLevel
    pop:Word:SetValue
-   SaveVarAndDo
-   g_EtalonPath
-   (
-    aLambda
-    Etalon.do
-   )
+   if
+    l_SameLevel
+   then
+    BEGIN
+     aLambda
+     Etalon.do
+    END
+   else
+    BEGIN
+     SaveVarAndDo
+     g_EtalonPath
+     (
+      aLambda
+      Etalon.do
+     )
+    END
   FINALLY
    DEC
    g_EtalonLevel
