@@ -24,6 +24,7 @@ VOID TestWithDump Etalon.ms.script.test
   
   STRING VAR l_FileName
   STRING VAR l_FileNameOut
+  STRING VAR l_OutDir
   VOID PROCEDURE Out
    IN aValue
    g_OutFile
@@ -75,6 +76,21 @@ VOID TestWithDump Etalon.ms.script.test
   strings:CatSep
   l_FileName
   pop:Word:SetValue
+  ARRAY [
+   sysutils:GetCurrentDir
+   'Out'
+  ]
+  '\'
+  strings:CatSep
+  l_OutDir
+  pop:Word:SetValue
+  l_OutDir
+  sysutils:ForceDirectories
+  ?ASSURE
+  ARRAY [
+   'Не удалось создать директорию '
+   l_OutDir
+  ]
   SaveVarAndDo
   g_OutFile
   (
