@@ -143,7 +143,9 @@ Test&Dump Etalon.ms.script.test
  Etalon (
   'Root'
   Etalon 'Nested1'
-  Etalon 'Nested2'
+  Etalon ( 
+   'Nested2'
+  )
  )
 ; // Etalon.ms.script.test
 
