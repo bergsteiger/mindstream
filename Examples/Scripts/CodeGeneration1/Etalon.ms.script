@@ -77,11 +77,12 @@ Test&Dump Etalon.ms.script.test
     [ g_EtalonPath .for> IntToStr ] '.' strings:CatSep
   ] strings:Cat >>> l_FileName
 
+  CONST cPrnExt '.prn'
   STRING VAR l_OutFileName
   l_FileName >>> l_OutFileName
-  l_OutFileName '.prn' Cat >>> l_OutFileName
+  l_OutFileName cPrnExt Cat >>> l_OutFileName
 
-  [ l_CurrentDir 'Etalons' l_FileName '.prn.etalon' Cat ] cPathSep strings:CatSep >>> l_FileName
+  [ l_CurrentDir 'Etalons' [ l_FileName cPrnExt '.etalon' ] strings:Cat ] cPathSep strings:CatSep >>> l_FileName
 
   STRING VAR l_OutDir
   [ l_CurrentDir 'Out' ] cPathSep strings:CatSep >>> l_OutDir

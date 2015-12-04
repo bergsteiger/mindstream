@@ -60,6 +60,8 @@ VOID TestWithDump Etalon.ms.script.test
   IN aLambda
   STRING CONST cPathSep
    '\'
+  STRING CONST cPrnExt
+   '.prn'
   VOID PROCEDURE DeleteEmptyFile
    STRING IN aFileName
    aFileName
@@ -140,16 +142,19 @@ VOID TestWithDump Etalon.ms.script.test
   l_OutFileName
   pop:Word:SetValue
   l_OutFileName
-  '.prn'
+  cPrnExt
   Cat
   l_OutFileName
   pop:Word:SetValue
   ARRAY [
    l_CurrentDir
    'Etalons'
-   l_FileName
-   '.prn.etalon'
-   Cat
+   ARRAY [
+    l_FileName
+    cPrnExt
+    '.etalon'
+   ]
+   strings:Cat
   ]
   cPathSep
   strings:CatSep
