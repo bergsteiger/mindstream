@@ -48,9 +48,17 @@ VOID TestWithDump Etalon.ms.script.test
   sysutils:ExtractFileName
   l_FileName
   pop:Word:SetValue
-  sysutils:GetCurrentDir
-  l_CurrentDir
-  pop:Word:SetValue
+  if
+   (
+    l_CurrentDir
+    IsNil
+   )
+  then
+   BEGIN
+    sysutils:GetCurrentDir
+    l_CurrentDir
+    pop:Word:SetValue
+   END
   ARRAY [
    l_FileName
    if

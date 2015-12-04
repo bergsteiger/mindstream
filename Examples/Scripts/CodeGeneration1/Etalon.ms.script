@@ -60,7 +60,11 @@ Test&Dump Etalon.ms.script.test
   script:FileName sysutils:ExtractFilePath >>> l_CurrentDir
   script:FileName sysutils:ExtractFileName >>> l_FileName
 
-  sysutils:GetCurrentDir >>> l_CurrentDir
+  if ( l_CurrentDir IsNil ) then
+  begin
+   sysutils:GetCurrentDir >>> l_CurrentDir
+  end // l_CurrentDir IsNil
+
   [ 
     l_FileName 
     if ( g_EtalonCount > 0 ) 
