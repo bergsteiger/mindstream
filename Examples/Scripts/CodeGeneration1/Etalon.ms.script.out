@@ -71,6 +71,18 @@ VOID TestWithDump Etalon.ms.script.test
    l_FileName
    if
     (
+     g_EtalonLevel
+     >
+     0
+    )
+   then
+    (
+     '.'
+     g_EtalonLevel
+     IntToStr
+    )
+   if
+    (
      g_EtalonCount
      >
      0
