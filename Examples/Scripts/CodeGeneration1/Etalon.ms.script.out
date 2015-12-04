@@ -218,6 +218,7 @@ VOID TestWithDump Etalon.ms.script.test
  
  INTEGER VAR g_EtalonCount
  INTEGER VAR g_EtalonLevel
+ ARRAY VAR g_EtalonPath
  Etalon.ms.script.test
  DumpElement
  (
@@ -228,6 +229,12 @@ VOID TestWithDump Etalon.ms.script.test
  (
   0
   g_EtalonLevel
+  pop:Word:SetValue
+ )
+ (
+  ARRAY [
+  ]
+  g_EtalonPath
   pop:Word:SetValue
  )
  Etalon

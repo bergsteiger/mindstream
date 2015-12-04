@@ -33,6 +33,8 @@ Test&Dump Etalon.ms.script.test
  ( 0 >>> g_EtalonCount )
  INTEGER VAR g_EtalonLevel
  ( 0 >>> g_EtalonLevel )
+ ARRAY VAR g_EtalonPath
+ ( [] >>> g_EtalonPath )
 
  CONST cCompareUtilCmd 'q:\afc.cmd'
  %REMARK 'Путь к утилите сравнения'
