@@ -11,8 +11,12 @@ VOID TestWithDump Etalon.ms.script.test
    Array:Count
    l_Level
    pop:Word:SetValue
-   aLambda
-   Etalon.do
+   SaveVarAndDo
+   g_EtalonPath
+   (
+    aLambda
+    Etalon.do
+   )
   FINALLY
    DEC
    g_EtalonLevel

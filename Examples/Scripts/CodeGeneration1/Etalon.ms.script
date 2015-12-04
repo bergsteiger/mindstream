@@ -133,8 +133,10 @@ Test&Dump Etalon.ms.script.test
   TRY
    INTEGER VAR l_Level
    g_EtalonPath Array:Count >>> l_Level
-   // g_EtalonLevel
-   aLambda Etalon.do
+   TF g_EtalonPath (
+    // g_EtalonLevel
+    aLambda Etalon.do
+   ) // TF g_EtalonPath
   FINALLY
    DEC g_EtalonLevel
   END
