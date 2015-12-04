@@ -77,8 +77,22 @@ Test&Dump Etalon.ms.script.test
     [ 'q:\afc.cmd ' l_FileName ' ' l_FileNameOut ] strings:Cat >>> l_Compare
     l_Compare .
     l_Compare WinExec
+    %REMARK 'Вызываем внешнюю утилиту сравнения файлов'
    )
-  end
+  end // l_FileName sysutils:FileExists
+  else
+  begin
+   STRING VAR l_OutPath
+   l_FileName sysutils:ExtractFilePath >>> l_OutPath
+   if ( l_OutPath IsNil ) then
+   begin
+    sysutils:GetCurrentDir >>> l_OutPath
+    [ l_OutPath l_FileName ] '\' strings:CatSep >>> l_FileName
+   end
+   l_FileName Msg
+   l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
+   //$20 l_FileName l_FileNameOut CopyFile
+  end // l_FileName sysutils:FileExists
   
   l_FileName DeleteEmptyFile
   l_FileNameOut DeleteEmptyFile

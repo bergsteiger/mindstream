@@ -108,6 +108,42 @@ VOID TestWithDump Etalon.ms.script.test
      WinExec
     )
    END
+  else
+   BEGIN
+    STRING VAR l_OutPath
+    l_FileName
+    sysutils:ExtractFilePath
+    l_OutPath
+    pop:Word:SetValue
+    if
+     (
+      l_OutPath
+      IsNil
+     )
+    then
+     BEGIN
+      sysutils:GetCurrentDir
+      l_OutPath
+      pop:Word:SetValue
+      ARRAY [
+       l_OutPath
+       l_FileName
+      ]
+      '\'
+      strings:CatSep
+      l_FileName
+      pop:Word:SetValue
+     END
+    l_FileName
+    Msg
+    l_OutPath
+    sysutils:ForceDirectories
+    ?ASSURE
+    ARRAY [
+     'Не удалось создать директорию '
+     l_OutPath
+    ]
+   END
   l_FileName
   DeleteEmptyFile
   l_FileNameOut
