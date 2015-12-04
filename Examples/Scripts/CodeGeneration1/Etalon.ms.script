@@ -24,11 +24,11 @@ USES
  CompileTimeVar.ms.dict
 ;
 
-FILE CompileTime-VAR g_OutFile nil
-%REMARK 'Текущий файл'
-
 Test&Dump Etalon.ms.script.test
  
+ FILE VAR g_OutFile
+ %REMARK 'Текущий файл'
+ ( nil >>> g_OutFile )
  INTEGER VAR g_EtalonCount
  ( 0 >>> g_EtalonCount )
  INTEGER VAR g_EtalonLevel
