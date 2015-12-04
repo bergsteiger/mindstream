@@ -66,6 +66,15 @@ VOID TestWithDump Etalon.ms.script.test
   Cat
   l_FileNameOut
   pop:Word:SetValue
+  ARRAY [
+   sysutils:GetCurrentDir
+   'Etalons'
+   l_FileName
+  ]
+  '\'
+  strings:CatSep
+  l_FileName
+  pop:Word:SetValue
   SaveVarAndDo
   g_OutFile
   (

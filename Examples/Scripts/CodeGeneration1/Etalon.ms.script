@@ -66,6 +66,8 @@ Test&Dump Etalon.ms.script.test
   l_FileName >>> l_FileNameOut
   l_FileNameOut '.out' Cat >>> l_FileNameOut
 
+  [ sysutils:GetCurrentDir 'Etalons' l_FileName ] '\' strings:CatSep >>> l_FileName
+
   TF g_OutFile (
    l_FileNameOut File:OpenWrite >>> g_OutFile
    DumpStackTo (
