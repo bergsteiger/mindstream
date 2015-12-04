@@ -148,6 +148,7 @@ Test&Dump Etalon.ms.script.test
    else
    begin
     TF g_EtalonPath (
+     0 >>>[] g_EtalonPath
      aLambda Etalon.do
     ) // TF g_EtalonPath
    end // l_SameLevel

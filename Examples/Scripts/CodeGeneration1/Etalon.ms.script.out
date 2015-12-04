@@ -49,6 +49,9 @@ VOID TestWithDump Etalon.ms.script.test
      SaveVarAndDo
      g_EtalonPath
      (
+      0
+      >>>[]
+      g_EtalonPath
       aLambda
       Etalon.do
      )
@@ -325,7 +328,13 @@ VOID TestWithDump Etalon.ms.script.test
   'Nested1'
   Etalon
   (
-   'Nested2'
+   '
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1>if exist "C:\Program Files\Araxis\Araxis Merge\Compare.exe" (start "" "C:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.3.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.3.prn.etalon )  else (if exist "D:\Program Files\Araxis\Araxis Merge\Compare.exe" (start "" "D:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.3.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.3.prn.etalon )  else (if "C:\Program Files (x86)" == "" (start "" "C:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.3.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.3.prn.etalon )  else (start "" "D:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.3.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.3.prn.etalon ) ) ) 
+
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1>rem start "" "C:\Programs\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.3.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.3.prn.etalon 
+
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1>if exist "C:\Program Files\Araxis\Araxis Merge\Compare.exe" (start "" "C:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.3.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.3.prn.etalon )  else (if exist "D:\Program Files\Araxis\Araxis Merge\Compare.exe" (start "" "D:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.3.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.3.prn.etalon )  else (if "C:\Program Files (x86)" == "" (start "" "C:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.3.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.3.prn.etalon )  else (start "" "D:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.3.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.3.prn.etalon ) ) ) 
+Nested2'
    Etalon
    'Nested2.1'
    Etalon
@@ -334,3 +343,9 @@ VOID TestWithDump Etalon.ms.script.test
  )
 ; // VOID TestWithDump Etalon.ms.script.test
 
+
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1>if exist "C:\Program Files\Araxis\Araxis Merge\Compare.exe" (start "" "C:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.2.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.2.prn.etalon )  else (if exist "D:\Program Files\Araxis\Araxis Merge\Compare.exe" (start "" "D:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.2.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.2.prn.etalon )  else (if "C:\Program Files (x86)" == "" (start "" "C:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.2.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.2.prn.etalon )  else (start "" "D:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.2.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.2.prn.etalon ) ) ) 
+
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1>rem start "" "C:\Programs\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.3.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.3.prn.etalon 
+
+H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1>rem start "" "C:\Programs\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script.2.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script.2.prn.etalon 
