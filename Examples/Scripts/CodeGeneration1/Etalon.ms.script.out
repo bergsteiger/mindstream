@@ -41,6 +41,10 @@ VOID TestWithDump Etalon.ms.script.test
   ; // VOID PROCEDURE Out
   
   script:FileName
+  sysutils:ExtractFilePath
+  l_CurrentDir
+  pop:Word:SetValue
+  script:FileName
   sysutils:ExtractFileName
   l_FileName
   pop:Word:SetValue
