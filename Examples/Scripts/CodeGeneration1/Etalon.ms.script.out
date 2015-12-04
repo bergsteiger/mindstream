@@ -95,6 +95,13 @@ VOID TestWithDump Etalon.ms.script.test
     ?
     (
      STRING VAR l_Compare
+     cCompareUtilCmd
+     sysutils:FileExists
+     ?ASSURE
+     ARRAY [
+      'Не найдена утилита сравнения: '
+      cCompareUtilCmd
+     ]
      ARRAY [
       cCompareUtilCmd
       ' '
