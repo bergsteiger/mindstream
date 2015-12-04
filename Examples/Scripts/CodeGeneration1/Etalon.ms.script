@@ -74,7 +74,7 @@ Test&Dump Etalon.ms.script.test
 
   [ 
     l_EtalonFileName 
-    [ g_EtalonPath .for> IntToStr ] '.' strings:CatSep
+    [ g_EtalonPath .map> IntToStr .for> NOP  ] '.' strings:CatSep
   ] strings:Cat >>> l_EtalonFileName
 
   CONST cPrnExt '.prn'

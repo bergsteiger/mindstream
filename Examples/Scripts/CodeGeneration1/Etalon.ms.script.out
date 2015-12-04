@@ -130,6 +130,9 @@ VOID TestWithDump Etalon.ms.script.test
     g_EtalonPath
     IntToStr
     SWAP
+    Array:Map
+    NOP
+    SWAP
     Array:Iterate
    ]
    '.'
