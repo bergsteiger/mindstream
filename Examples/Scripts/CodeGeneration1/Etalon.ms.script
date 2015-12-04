@@ -89,7 +89,6 @@ Test&Dump Etalon.ms.script.test
     sysutils:GetCurrentDir >>> l_OutPath
     [ l_OutPath l_FileName ] '\' strings:CatSep >>> l_FileName
    end
-   l_FileName Msg
    l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
    //$20 l_FileName l_FileNameOut CopyFile
   end // l_FileName sysutils:FileExists

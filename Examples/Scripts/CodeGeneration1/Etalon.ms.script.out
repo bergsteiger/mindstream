@@ -134,8 +134,6 @@ VOID TestWithDump Etalon.ms.script.test
       l_FileName
       pop:Word:SetValue
      END
-    l_FileName
-    Msg
     l_OutPath
     sysutils:ForceDirectories
     ?ASSURE
