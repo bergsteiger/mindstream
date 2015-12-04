@@ -6,6 +6,11 @@ VOID TestWithDump Etalon.ms.script.test
   INC
   g_EtalonLevel
   TRY
+   INTEGER VAR l_Level
+   g_EtalonPath
+   Array:Count
+   l_Level
+   pop:Word:SetValue
    aLambda
    Etalon.do
   FINALLY

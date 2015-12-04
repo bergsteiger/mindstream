@@ -131,6 +131,9 @@ Test&Dump Etalon.ms.script.test
 
   INC g_EtalonLevel
   TRY
+   INTEGER VAR l_Level
+   g_EtalonPath Array:Count >>> l_Level
+   // g_EtalonLevel
    aLambda Etalon.do
   FINALLY
    DEC g_EtalonLevel
