@@ -32,8 +32,13 @@ Test&Dump Etalon.ms.script.test
  INTEGER VAR g_EtalonCount
  ( 0 &gt;&gt;&gt; g_EtalonCount )
 
+ CONST cCompareUtilCmd 'q:\afc.cmd'
+ %REMARK 'Путь к утилите сравнения'
+
  PROCEDURE Etalon
   ^ IN aLambda
+
+  CONST cPathSep '\'
   
   PROCEDURE DeleteEmptyFile
     STRING IN aFileName
@@ -51,7 +56,15 @@ Test&Dump Etalon.ms.script.test
   ; // Out
 
   STRING VAR l_FileName
-  script:FileName &gt;&gt;&gt; l_FileName
+  STRING VAR l_CurrentDir
+  script:FileName sysutils:ExtractFilePath &gt;&gt;&gt; l_CurrentDir
+  script:FileName sysutils:ExtractFileName &gt;&gt;&gt; l_FileName
+
+  if ( l_CurrentDir IsNil ) then
+  begin
+   sysutils:GetCurrentDir &gt;&gt;&gt; l_CurrentDir
+  end // l_CurrentDir IsNil
+
   [ 
     l_FileName 
     if ( g_EtalonCount &gt; 0 ) 
@@ -61,7 +74,14 @@ Test&Dump Etalon.ms.script.test
 
   STRING VAR l_FileNameOut
   l_FileName &gt;&gt;&gt; l_FileNameOut
-  l_FileNameOut '.out' Cat &gt;&gt;&gt; l_FileNameOut
+  l_FileNameOut '.etalon' Cat &gt;&gt;&gt; l_FileNameOut
+
+  [ l_CurrentDir 'Etalons' l_FileName ] cPathSep strings:CatSep &gt;&gt;&gt; l_FileName
+
+  STRING VAR l_OutDir
+  [ l_CurrentDir 'Out' ] cPathSep strings:CatSep &gt;&gt;&gt; l_OutDir
+  l_OutDir sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutDir ]
+  [ l_OutDir l_FileNameOut ] cPathSep strings:CatSep &gt;&gt;&gt; l_FileNameOut
 
   TF g_OutFile (
    l_FileNameOut File:OpenWrite &gt;&gt;&gt; g_OutFile
@@ -73,23 +93,15 @@ Test&Dump Etalon.ms.script.test
   if ( l_FileName sysutils:FileExists ) then
   begin
    '' l_FileName l_FileNameOut CompareFiles ! ? (
+    cCompareUtilCmd sysutils:FileExists ?ASSURE [ 'Не найдена утилита сравнения: ' cCompareUtilCmd ]
     STRING VAR l_Compare
-    [ 'q:\afc.cmd ' l_FileName ' ' l_FileNameOut ] strings:Cat &gt;&gt;&gt; l_Compare
-    l_Compare .
+    [ cCompareUtilCmd ' ' l_FileName ' ' l_FileNameOut ] strings:Cat &gt;&gt;&gt; l_Compare
     l_Compare WinExec
     %REMARK 'Вызываем внешнюю утилиту сравнения файлов'
    )
   end // l_FileName sysutils:FileExists
   else
   begin
-   STRING VAR l_OutPath
-   l_FileName sysutils:ExtractFilePath &gt;&gt;&gt; l_OutPath
-   if ( l_OutPath IsNil ) then
-   begin
-    sysutils:GetCurrentDir &gt;&gt;&gt; l_OutPath
-    [ l_OutPath l_FileName ] '\' strings:CatSep &gt;&gt;&gt; l_FileName
-   end
-   l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
    $20 l_FileName l_FileNameOut CopyFile
   end // l_FileName sysutils:FileExists
   
@@ -99,12 +111,13 @@ Test&Dump Etalon.ms.script.test
   Inc g_EtalonCount
  ; // Etalon
 
- Etalon script:FileName
- Etalon ( 1 3 + )
+ Etalon ( script:FileName sysutils:ExtractFileName )
+ Etalon ( 1 2 + )
  Etalon 'Hello world'
  Etalon ()
  Etalon []
  Etalon 1
+ Etalon 'Another string'
 ; // Etalon.ms.script.test
 
 Etalon.ms.script.test
