@@ -131,7 +131,11 @@ VOID TestWithDump Etalon.ms.script.test
     IntToStr
     SWAP
     Array:Map
-    NOP
+    (
+     '.'
+     SWAP
+     Cat
+    )
     SWAP
     Array:Iterate
    ]
