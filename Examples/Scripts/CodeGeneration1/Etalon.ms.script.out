@@ -8,9 +8,7 @@ VOID TestWithDump Etalon.ms.script.test
   VOID PROCEDURE DeleteEmptyFile
    STRING IN aFileName
    aFileName
-   FileSize
-   0
-   ==
+   FileIsEmpty
    ?
    (
     aFileName
@@ -23,6 +21,16 @@ VOID TestWithDump Etalon.ms.script.test
     )
    )
   ; // VOID PROCEDURE DeleteEmptyFile
+  
+  BOOLEAN FUNCTION FileIsEmpty
+   STRING IN aFileName
+   aFileName
+   FileSize
+   0
+   ==
+   Result
+   pop:Word:SetValue
+  ; // BOOLEAN FUNCTION FileIsEmpty
   
   STRING VAR l_CurrentDir
   STRING VAR l_FileName

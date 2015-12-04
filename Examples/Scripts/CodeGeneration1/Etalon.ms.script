@@ -39,10 +39,15 @@ Test&Dump Etalon.ms.script.test
   ^ IN aLambda
 
   CONST cPathSep '\'
+
+  BOOLEAN FUNCTION FileIsEmpty
+    STRING IN aFileName
+   aFileName FileSize 0 == >>> Result
+  ; // FileIsEmpty
   
   PROCEDURE DeleteEmptyFile
     STRING IN aFileName
-   aFileName FileSize 0 == ? (
+   aFileName FileIsEmpty ? (
     aFileName sysutils:FileExists ? (
      aFileName DeleteFile DROP
     ) // aFileName sysutils:FileExists
