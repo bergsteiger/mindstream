@@ -31,9 +31,6 @@ VOID TestWithDump Etalon.ms.script.test
      Array:Item
      l_EtalonCount
      pop:Word:SetValue
-     l_EtalonCount
-     g_EtalonCount
-     pop:Word:SetValue
      aLambda
      Etalon.do
      INC
@@ -52,9 +49,6 @@ VOID TestWithDump Etalon.ms.script.test
       0
       >>>[]
       g_EtalonPath
-      0
-      g_EtalonCount
-      pop:Word:SetValue
       aLambda
       Etalon.do
      )
@@ -94,9 +88,9 @@ VOID TestWithDump Etalon.ms.script.test
   ; // BOOLEAN FUNCTION FileIsEmpty
   
   STRING VAR l_CurrentDir
-  STRING VAR l_EtalonFileName
   STRING VAR l_FileName
   STRING VAR l_OutDir
+  STRING VAR l_OutFileName
   VOID PROCEDURE Out
    IN aValue
    g_OutFile
@@ -144,12 +138,12 @@ VOID TestWithDump Etalon.ms.script.test
   l_FileName
   pop:Word:SetValue
   l_FileName
-  l_EtalonFileName
+  l_OutFileName
   pop:Word:SetValue
-  l_EtalonFileName
+  l_OutFileName
   '.etalon'
   Cat
-  l_EtalonFileName
+  l_OutFileName
   pop:Word:SetValue
   ARRAY [
    l_CurrentDir
@@ -177,16 +171,16 @@ VOID TestWithDump Etalon.ms.script.test
   ]
   ARRAY [
    l_OutDir
-   l_EtalonFileName
+   l_OutFileName
   ]
   cPathSep
   strings:CatSep
-  l_EtalonFileName
+  l_OutFileName
   pop:Word:SetValue
   SaveVarAndDo
   g_OutFile
   (
-   l_EtalonFileName
+   l_OutFileName
    File:OpenWrite
    g_OutFile
    pop:Word:SetValue
@@ -214,7 +208,7 @@ VOID TestWithDump Etalon.ms.script.test
    BEGIN
     ''
     l_FileName
-    l_EtalonFileName
+    l_OutFileName
     CompareFiles
     !
     ?
@@ -232,7 +226,7 @@ VOID TestWithDump Etalon.ms.script.test
       ' '
       l_FileName
       ' '
-      l_EtalonFileName
+      l_OutFileName
      ]
      strings:Cat
      l_Compare
@@ -245,18 +239,15 @@ VOID TestWithDump Etalon.ms.script.test
    BEGIN
     32
     l_FileName
-    l_EtalonFileName
+    l_OutFileName
     CopyFile
    END
   l_FileName
   DeleteEmptyFile
-  l_EtalonFileName
+  l_OutFileName
   DeleteEmptyFile
-  INC
-  g_EtalonCount
  ; // VOID PROCEDURE Etalon.do
  
- INTEGER VAR g_EtalonCount
  INTEGER VAR g_EtalonLevel
  ARRAY VAR g_EtalonPath
  FILE VAR g_OutFile
@@ -265,11 +256,6 @@ VOID TestWithDump Etalon.ms.script.test
  (
   nil
   g_OutFile
-  pop:Word:SetValue
- )
- (
-  0
-  g_EtalonCount
   pop:Word:SetValue
  )
  (
@@ -322,13 +308,13 @@ VOID TestWithDump Etalon.ms.script.test
    'Nested2.2'
   )
  )
-; // VOID TestWi
+; // VOID TestW
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1>if exist "C:\Program Files\Araxis\Araxis Merge\Compare.exe" (start "" "C:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script8.0.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script8.0.prn.etalon )  else (if exist "D:\Program Files\Araxis\Araxis Merge\Compare.exe" (start "" "D:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script8.0.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script8.0.prn.etalon )  else (if "C:\Program Files (x86)" == "" (start "" "C:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script8.0.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script8.0.prn.etalon )  else (start "" "D:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script8.0.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script8.0.prn.etalon ) ) ) 
 
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1>rem start "" "C:\Programs\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script8.0.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script8.0.prn.etalon 
 
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1>if exist "C:\Program Files\Araxis\Araxis Merge\Compare.exe" (start "" "C:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script8.0.0.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script8.0.0.prn.etalon )  else (if exist "D:\Program Files\Araxis\Araxis Merge\Compare.exe" (start "" "D:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script8.0.0.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script8.0.0.prn.etalon )  else (if "C:\Program Files (x86)" == "" (start "" "C:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script8.0.0.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script8.0.0.prn.etalon )  else (start "" "D:\Program Files\Araxis\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script8.0.0.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script8.0.0.prn.etalon ) ) ) 
-thDump Etalon.ms.script.test
+ithDump Etalon.ms.script.test
 
 
 H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1>rem start "" "C:\Programs\Araxis Merge\Compare.exe " H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Etalons\Etalon.ms.script8.0.0.prn H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Out\Etalon.ms.script8.0.0.prn.etalon 

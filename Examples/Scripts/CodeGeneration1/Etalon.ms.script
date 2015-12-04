@@ -29,8 +29,6 @@ Test&Dump Etalon.ms.script.test
  FILE VAR g_OutFile
  %REMARK 'Текущий файл'
  ( nil >>> g_OutFile )
- INTEGER VAR g_EtalonCount
- ( 0 >>> g_EtalonCount )
  INTEGER VAR g_EtalonLevel
  ( 0 >>> g_EtalonLevel )
  ARRAY VAR g_EtalonPath
@@ -80,19 +78,19 @@ Test&Dump Etalon.ms.script.test
     '.prn' 
   ] strings:Cat >>> l_FileName
 
-  STRING VAR l_EtalonFileName
-  l_FileName >>> l_EtalonFileName
-  l_EtalonFileName '.etalon' Cat >>> l_EtalonFileName
+  STRING VAR l_OutFileName
+  l_FileName >>> l_OutFileName
+  l_OutFileName '.etalon' Cat >>> l_OutFileName
 
   [ l_CurrentDir 'Etalons' l_FileName ] cPathSep strings:CatSep >>> l_FileName
 
   STRING VAR l_OutDir
   [ l_CurrentDir 'Out' ] cPathSep strings:CatSep >>> l_OutDir
   l_OutDir sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutDir ]
-  [ l_OutDir l_EtalonFileName ] cPathSep strings:CatSep >>> l_EtalonFileName
+  [ l_OutDir l_OutFileName ] cPathSep strings:CatSep >>> l_OutFileName
 
   TF g_OutFile (
-   l_EtalonFileName File:OpenWrite >>> g_OutFile
+   l_OutFileName File:OpenWrite >>> g_OutFile
    DumpStackTo (
     g_EtalonPath
    ) Out
@@ -104,23 +102,22 @@ Test&Dump Etalon.ms.script.test
 
   if ( l_FileName sysutils:FileExists ) then
   begin
-   '' l_FileName l_EtalonFileName CompareFiles ! ? (
+   '' l_FileName l_OutFileName CompareFiles ! ? (
     cCompareUtilCmd sysutils:FileExists ?ASSURE [ 'Не найдена утилита сравнения: ' cCompareUtilCmd ]
     STRING VAR l_Compare
-    [ cCompareUtilCmd ' ' l_FileName ' ' l_EtalonFileName ] strings:Cat >>> l_Compare
+    [ cCompareUtilCmd ' ' l_FileName ' ' l_OutFileName ] strings:Cat >>> l_Compare
     l_Compare WinExec
     %REMARK 'Вызываем внешнюю утилиту сравнения файлов'
    )
   end // l_FileName sysutils:FileExists
   else
   begin
-   $20 l_FileName l_EtalonFileName CopyFile
+   $20 l_FileName l_OutFileName CopyFile
   end // l_FileName sysutils:FileExists
   
   l_FileName DeleteEmptyFile
-  l_EtalonFileName DeleteEmptyFile
+  l_OutFileName DeleteEmptyFile
 
-  Inc g_EtalonCount
  ; // Etalon.do
 
  PROCEDURE Etalon
@@ -137,7 +134,6 @@ Test&Dump Etalon.ms.script.test
     DEC l_Level
     INTEGER VAR l_EtalonCount
     l_Level g_EtalonPath Array:Item >>> l_EtalonCount
-    l_EtalonCount >>> g_EtalonCount
     aLambda Etalon.do
     INC l_EtalonCount
     l_Level g_EtalonPath Array:Item := l_EtalonCount
@@ -146,7 +142,6 @@ Test&Dump Etalon.ms.script.test
    begin
     TF g_EtalonPath (
      0 >>>[] g_EtalonPath
-     0 >>> g_EtalonCount
      aLambda Etalon.do
     ) // TF g_EtalonPath
    end // l_SameLevel
