@@ -123,7 +123,12 @@ Test&Dump Etalon.ms.script.test
  PROCEDURE Etalon
    ^ IN aLambda
 
-  aLambda Etalon.do
+  INC g_EtalonLevel
+  TRY
+   aLambda Etalon.do
+  FINALLY
+   DEC g_EtalonLevel
+  END
  ; // Etalon
 
  Etalon ( script:FileName sysutils:ExtractFileName )

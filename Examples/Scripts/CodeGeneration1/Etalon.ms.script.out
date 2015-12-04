@@ -3,8 +3,15 @@ VOID TestWithDump Etalon.ms.script.test
   'q:\afc.cmd'
  VOID PROCEDURE Etalon
   ^ IN aLambda
-  aLambda
-  Etalon.do
+  INC
+  g_EtalonLevel
+  TRY
+   aLambda
+   Etalon.do
+  FINALLY
+   DEC
+   g_EtalonLevel
+  END
  ; // VOID PROCEDURE Etalon
  
  VOID PROCEDURE Etalon.do
