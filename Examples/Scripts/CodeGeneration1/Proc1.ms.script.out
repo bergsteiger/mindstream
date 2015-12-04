@@ -1,0 +1,87 @@
+VOID TestWithDump ProcTest
+ VOID : _A
+ ; // VOID : _A
+ 
+ VOID : _B
+ ; // VOID : _B
+ 
+ VOID : _C
+ ; // VOID : _C
+ 
+ VOID : _D
+ ; // VOID : _D
+ 
+ VOID : _E
+ ; // VOID : _E
+ 
+ VOID proc A
+  IN aValue
+  aValue
+  .
+ ; // VOID proc A
+ 
+ VOID proc B
+  STRING IN aValue
+  aValue
+  .
+ ; // VOID proc B
+ 
+ VOID proc C
+  INTEGER STRING IN aValue
+  aValue
+  .
+ ; // VOID proc C
+ 
+ VOID proc D
+  INTEGER STRING OBJECT IN aValue
+  aValue
+  .
+ ; // VOID proc D
+ 
+ VOID proc E
+  INTEGER STRING OBJECT INTERFACE IN aValue
+  aValue
+  .
+ ; // VOID proc E
+ 
+ INTERFACE VAR F
+ ProcTest
+ DumpElement
+ 'Hello world'
+ A
+ 'Hello world'
+ B
+ 'Hello world'
+ C
+ 123
+ C
+ 'Hello world'
+ D
+ 123
+ D
+ nil
+ D
+ 'Hello world'
+ E
+ 123
+ E
+ nil
+ E
+ nil
+ F
+ pop:Word:SetValue
+ F
+ E
+; // VOID TestWithDump ProcTest
+
+Hello world
+Hello world
+Hello world
+123
+Hello world
+123
+<nil>
+Hello world
+123
+<nil>
+<nil>

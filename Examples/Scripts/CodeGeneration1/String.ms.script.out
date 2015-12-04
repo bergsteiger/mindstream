@@ -1,0 +1,84 @@
+VOID TestWithDump StringTest
+ StringTest
+ DumpElement
+ '(+)?'
+ @
+ Tests:(+)?
+ DoRunTestsFor
+ '?(+)'
+ @
+ Tests:?(+)
+ DoRunTestsFor
+ 'strings:CatSep>'
+ @
+ Tests:strings:CatSep>
+ DoRunTestsFor
+ 'any:Cat'
+ @
+ Tests:any:Cat
+ DoRunTestsFor
+ 'string:Split:for>'
+ @
+ Tests:string:Split:for>
+ DoRunTestsFor
+; // VOID TestWithDump StringTest
+
+Testing: (+)?
+T1
+B
+T2
+AB
+T3
+
+T4
+AD
+T5
+A123
+Testing end: (+)?
+------------------
+Testing: ?(+)
+T1
+
+T2
+AB
+T3
+A
+Testing end: ?(+)
+------------------
+Testing: strings:CatSep>
+T1
+A B
+T2
+A B
+T3
+A  B
+T4
+A  B
+T5
+B
+T6
+A
+Testing end: strings:CatSep>
+------------------
+Testing: any:Cat
+T1
+A123B
+T2
+A124B
+Testing end: any:Cat
+------------------
+Testing: string:Split:for>
+T1
+a
+b
+c
+T2
+a
+b
+c
+T3
+abc
+T4
+T5
+Testing end: string:Split:for>
+------------------

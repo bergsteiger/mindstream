@@ -1,0 +1,124 @@
+VOID TestWithDump TruncTest
+ TruncTest
+ DumpElement
+ @
+ (
+  6
+  !=
+ )
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ Array:Trunc
+ .
+ SWAP
+ Array:Iterate
+ @
+ (
+  6
+  !=
+ )
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ Array:Trunc
+ .
+ '-------'
+ .
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ .trunc>
+ (
+  6
+  !=
+ )
+ .
+ SWAP
+ Array:Iterate
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ .trunc>
+ (
+  6
+  !=
+ )
+ .
+ '-------'
+ .
+ [ 1 2 3 4 5 6 7 8 9 10 >trunc>
+ (
+  6
+  !=
+ )
+ .
+ SWAP
+ Array:Iterate
+ [ 1 2 3 4 5 6 7 8 9 10 >trunc>
+ (
+  6
+  !=
+ )
+ .
+ '-------'
+ .
+; // VOID TestWithDump TruncTest
+
+1
+2
+3
+4
+5
+[ 1 2 3 4 5 ]
+-------
+1
+2
+3
+4
+5
+[ 1 2 3 4 5 ]
+-------
+1
+2
+3
+4
+5
+[ 1 2 3 4 5 ]
+-------

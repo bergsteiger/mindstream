@@ -1,0 +1,56 @@
+VOID TestWithDump ITTest
+ ITTest
+ DumpElement
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ Print
+ SWAP
+ Array:Iterate
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ DO
+ Print
+ SWAP
+ Array:Iterate
+; // VOID TestWithDump ITTest
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10

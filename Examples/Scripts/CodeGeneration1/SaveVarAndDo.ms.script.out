@@ -1,0 +1,31 @@
+VOID TestWithDump SaveVarAndDoTest
+ VAR A
+ SaveVarAndDoTest
+ DumpElement
+ '1'
+ A
+ pop:Word:SetValue
+ A
+ Trace
+ SaveVarAndDo
+ A
+ (
+  A
+  Trace
+  'got it'
+  Trace
+  2
+  A
+  pop:Word:SetValue
+  A
+  Trace
+ )
+ A
+ Trace
+; // VOID TestWithDump SaveVarAndDoTest
+
+1
+1
+got it
+2
+1

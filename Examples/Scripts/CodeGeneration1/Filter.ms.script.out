@@ -1,0 +1,323 @@
+VOID TestWithDump FilterTest
+ BOOLEAN FUNCTION IsEven
+  INTEGER IN aValue
+  aValue
+  2
+  MOD
+  0
+  ==
+  Result
+  pop:Word:SetValue
+ ; // BOOLEAN FUNCTION IsEven
+ 
+ STRING FUNCTION ToPrintableEx
+  IN aValue
+  if
+   (
+    aValue
+    IsArray
+   )
+  then
+   (
+    ARRAY [
+     INTEGER VAR l_SL
+     '[ '
+     StackLevel
+     l_SL
+     pop:Word:SetValuePrim
+     aValue
+     DO
+     (
+      INTEGER VAR l_Delta
+      (
+       StackLevel
+       l_SL
+       -
+      )
+      l_Delta
+      pop:Word:SetValue
+      if
+       (
+        l_Delta
+        =
+        1
+       )
+      then
+       (
+        ToPrintableEx
+        DO
+       )
+      else
+       (
+        INTEGER VAR l_Index
+        l_Delta
+        l_Index
+        pop:Word:SetValuePrim
+        '{ '
+        l_Delta
+        LOOP
+        (
+         l_Index
+         ROLL
+         ToPrintableEx
+         DO
+        )
+        '}'
+       )
+      StackLevel
+      l_SL
+      pop:Word:SetValuePrim
+     )
+     SWAP
+     Array:Iterate
+     ']'
+    ]
+    ' '
+    strings:CatSep
+    Result
+    pop:Word:SetValue
+   )
+  else
+   (
+    aValue
+    ToPrintable
+    Result
+    pop:Word:SetValue
+   )
+ ; // STRING FUNCTION ToPrintableEx
+ 
+ FilterTest
+ DumpElement
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ IsEven
+ SWAP
+ Array:Filter
+ .
+ SWAP
+ Array:Iterate
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ IsEven
+ SWAP
+ Array:Filter
+ .
+ ARRAY [
+  1
+  10
+  2
+  9
+  3
+  8
+  4
+  7
+  5
+  6
+  6
+  5
+  7
+  4
+  8
+  3
+  9
+  2
+  10
+  1
+ ]
+ .slice>
+ 2
+ (
+  INTEGER IN A
+  INTEGER IN B
+  A
+  IsEven
+ )
+ SWAP
+ Array:Filter
+ (
+  .
+  .
+  '---'
+  .
+ )
+ SWAP
+ Array:Iterate
+ ARRAY [
+  1
+  10
+  2
+  9
+ ]
+ .slice>
+ 2
+ (
+  INTEGER IN A
+  INTEGER IN B
+  A
+  IsEven
+ )
+ SWAP
+ Array:Filter
+ ToPrintableEx
+ .
+ ARRAY [
+  1
+  2
+ ]
+ ToPrintableEx
+ .
+ ARRAY [
+  1
+  10
+  2
+  9
+  3
+  8
+  4
+  7
+ ]
+ .slice>
+ 2
+ (
+  INTEGER IN A
+  INTEGER IN B
+  A
+  IsEven
+ )
+ SWAP
+ Array:Filter
+ ToPrintableEx
+ .
+ ARRAY [
+  1
+  10
+  2
+  9
+ ]
+ .slice>
+ 2
+ (
+  INTEGER IN A
+  INTEGER IN B
+  A
+  IsEven
+ )
+ SWAP
+ Array:Filter
+ .
+ ARRAY [
+  1
+  10
+  2
+  9
+  3
+  8
+  4
+  7
+  5
+  6
+  6
+  5
+  7
+  4
+  8
+  3
+  9
+  2
+  10
+  1
+ ]
+ .slice>
+ 2
+ (
+  INTEGER IN A
+  INTEGER IN B
+  A
+  IsEven
+ )
+ SWAP
+ Array:Filter
+ ToPrintableEx
+ .
+ ARRAY [
+  1
+  10
+  2
+  9
+  3
+  8
+  4
+  7
+  5
+  6
+  6
+  5
+  7
+  4
+  8
+  3
+  9
+  2
+  10
+  1
+ ]
+ .slice>
+ 2
+ (
+  INTEGER IN A
+  INTEGER IN B
+  A
+  IsEven
+ )
+ SWAP
+ Array:Filter
+ .
+; // VOID TestWithDump FilterTest
+
+2
+4
+6
+8
+10
+[ 2 4 6 8 10 ]
+9
+2
+---
+7
+4
+---
+5
+6
+---
+3
+8
+---
+1
+10
+---
+[ { 2 9 } ]
+[ 1 2 ]
+[ { 2 9 } { 4 7 } ]
+[ { 2 9 } ]
+[ { 2 9 } { 4 7 } { 6 5 } { 8 3 } { 10 1 } ]
+[ { 2 9 } { 4 7 } { 6 5 } { 8 3 } { 10 1 } ]

@@ -1,0 +1,287 @@
+VOID TestWithDump JoinTest
+ JoinTest
+ DumpElement
+ ARRAY [
+  4
+  5
+ ]
+ ARRAY [
+  1
+  2
+  3
+ ]
+ Array:Join
+ .
+ SWAP
+ Array:Iterate
+ ARRAY [
+  4
+  5
+ ]
+ ARRAY [
+  1
+  2
+  3
+ ]
+ Array:Join
+ .
+ ARRAY [
+  4
+  5
+ ]
+ ARRAY [
+  1
+  2
+  3
+ ]
+ Array:Join
+ Array:Reverted
+ .
+ SWAP
+ Array:Iterate
+ ARRAY [
+  4
+  5
+ ]
+ ARRAY [
+  1
+  2
+  3
+ ]
+ Array:Join
+ Array:Reverted
+ .
+ '------'
+ .
+ ARRAY [
+  1
+  2
+  3
+ ]
+ .join>
+ ARRAY [
+  4
+  5
+ ]
+ .
+ SWAP
+ Array:Iterate
+ ARRAY [
+  1
+  2
+  3
+ ]
+ .join>
+ ARRAY [
+  4
+  5
+ ]
+ .
+ ARRAY [
+  1
+  2
+  3
+ ]
+ .join>
+ ARRAY [
+  4
+  5
+ ]
+ Array:Reverted
+ .
+ SWAP
+ Array:Iterate
+ ARRAY [
+  1
+  2
+  3
+ ]
+ .join>
+ ARRAY [
+  4
+  5
+ ]
+ Array:Reverted
+ .
+ '------'
+ .
+ [ 1 2 3 >join>
+ ARRAY [
+  4
+  5
+ ]
+ .
+ SWAP
+ Array:Iterate
+ [ 1 2 3 >join>
+ ARRAY [
+  4
+  5
+ ]
+ .
+ [ 1 2 3 >join>
+ ARRAY [
+  4
+  5
+ ]
+ Array:Reverted
+ .
+ SWAP
+ Array:Iterate
+ [ 1 2 3 >join>
+ ARRAY [
+  4
+  5
+ ]
+ Array:Reverted
+ .
+ '------'
+ .
+ ARRAY [
+  1
+  2
+  3
+ ]
+ .join>
+ ARRAY [
+  4
+  5
+ ]
+ .join>
+ ARRAY [
+  6
+  7
+  8
+  9
+  10
+ ]
+ .
+ SWAP
+ Array:Iterate
+ ARRAY [
+  1
+  2
+  3
+ ]
+ .join>
+ ARRAY [
+  4
+  5
+ ]
+ .join>
+ ARRAY [
+  6
+  7
+  8
+  9
+  10
+ ]
+ .
+ ARRAY [
+  1
+  2
+  3
+ ]
+ .join>
+ ARRAY [
+  4
+  5
+ ]
+ .join>
+ ARRAY [
+  6
+  7
+  8
+  9
+  10
+ ]
+ Array:Reverted
+ .
+ SWAP
+ Array:Iterate
+ ARRAY [
+  1
+  2
+  3
+ ]
+ .join>
+ ARRAY [
+  4
+  5
+ ]
+ .join>
+ ARRAY [
+  6
+  7
+  8
+  9
+  10
+ ]
+ Array:Reverted
+ .
+ '------'
+ .
+; // VOID TestWithDump JoinTest
+
+1
+2
+3
+4
+5
+[ 1 2 3 4 5 ]
+5
+4
+3
+2
+1
+[ 5 4 3 2 1 ]
+------
+1
+2
+3
+4
+5
+[ 1 2 3 4 5 ]
+5
+4
+3
+2
+1
+[ 5 4 3 2 1 ]
+------
+1
+2
+3
+4
+5
+[ 1 2 3 4 5 ]
+5
+4
+3
+2
+1
+[ 5 4 3 2 1 ]
+------
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+[ 1 2 3 4 5 6 7 8 9 10 ]
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+[ 10 9 8 7 6 5 4 3 2 1 ]
+------

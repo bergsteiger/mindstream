@@ -1,0 +1,243 @@
+VOID TestWithDump MapTest
+ BOOLEAN FUNCTION IsEven
+  INTEGER IN aValue
+  aValue
+  2
+  MOD
+  0
+  ==
+  Result
+  pop:Word:SetValue
+ ; // BOOLEAN FUNCTION IsEven
+ 
+ MapTest
+ DumpElement
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ (
+  1
+  +
+ )
+ SWAP
+ Array:Map
+ .
+ SWAP
+ Array:Iterate
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ (
+  1
+  +
+ )
+ SWAP
+ Array:Map
+ .
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ (
+  INTEGER IN anItem
+  anItem
+  IsEven
+ )
+ SWAP
+ Array:Map
+ .
+ SWAP
+ Array:Iterate
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ (
+  INTEGER IN anItem
+  anItem
+  IsEven
+ )
+ SWAP
+ Array:Map
+ .
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ (
+  INTEGER IN anItem
+  if
+   (
+    anItem
+    IsEven
+   )
+  then
+   INTEGER (
+    anItem
+   )
+  else
+   (
+    anItem
+    1
+    +
+   )
+ )
+ SWAP
+ Array:Map
+ .
+ SWAP
+ Array:Iterate
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ (
+  INTEGER IN anItem
+  if
+   (
+    anItem
+    IsEven
+   )
+  then
+   INTEGER (
+    anItem
+   )
+  else
+   (
+    anItem
+    1
+    +
+   )
+ )
+ SWAP
+ Array:Map
+ .
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ .slice>
+ 2
+ +
+ SWAP
+ Array:Map
+ .
+ SWAP
+ Array:Iterate
+ ARRAY [
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+ ]
+ .slice>
+ 2
+ +
+ SWAP
+ Array:Map
+ .
+; // VOID TestWithDump MapTest
+
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+[ 2 3 4 5 6 7 8 9 10 11 ]
+False
+True
+False
+True
+False
+True
+False
+True
+False
+True
+[ False True False True False True False True False True ]
+2
+2
+4
+4
+6
+6
+8
+8
+10
+10
+[ 2 2 4 4 6 6 8 8 10 10 ]
+3
+7
+11
+15
+19
+[ 3 7 11 15 19 ]

@@ -1,0 +1,48 @@
+VOID TestWithDump InheritsTest
+ : A
+ ; // : A
+ 
+ : B
+ ; // : B
+ 
+ : C
+  Inherits %G
+   A
+   B
+  ; // Inherits %G
+  
+ ; // : C
+ 
+ : D
+  Inherits %G
+   A
+  ; // Inherits %G
+  
+  Implements %R
+   I1
+   I2
+  ; // Implements %R
+  
+ ; // : D
+ 
+ : E
+  Inherits %G
+   A
+  ; // Inherits %G
+  
+  Implements %R
+   I1
+  ; // Implements %R
+  
+ ; // : E
+ 
+ : I1
+ ; // : I1
+ 
+ : I2
+ ; // : I2
+ 
+ InheritsTest
+ DumpElement
+; // VOID TestWithDump InheritsTest
+

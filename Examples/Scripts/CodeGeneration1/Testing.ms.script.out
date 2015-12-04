@@ -1,0 +1,22 @@
+VOID TestWithDump TestingTest
+ TestingTest
+ DumpElement
+ '(+)?'
+ @
+ Tests:(+)?
+ DoRunTestsFor
+; // VOID TestWithDump TestingTest
+
+Testing: (+)?
+T1
+B
+T2
+AB
+T3
+
+T4
+AD
+T5
+A123
+Testing end: (+)?
+------------------
