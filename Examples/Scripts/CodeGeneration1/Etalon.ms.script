@@ -32,6 +32,9 @@ Test&Dump Etalon.ms.script.test
  INTEGER VAR g_EtalonCount
  ( 0 >>> g_EtalonCount )
 
+ CONST cCompareUtilCmd 'q:\afc.cmd'
+ %REMARK 'Путь к утилите сравнения'
+
  PROCEDURE Etalon
   ^ IN aLambda
   
@@ -74,7 +77,7 @@ Test&Dump Etalon.ms.script.test
   begin
    '' l_FileName l_FileNameOut CompareFiles ! ? (
     STRING VAR l_Compare
-    [ 'q:\afc.cmd ' l_FileName ' ' l_FileNameOut ] strings:Cat >>> l_Compare
+    [ cCompareUtilCmd ' ' l_FileName ' ' l_FileNameOut ] strings:Cat >>> l_Compare
     l_Compare .
     l_Compare WinExec
     %REMARK 'Вызываем внешнюю утилиту сравнения файлов'

@@ -1,4 +1,6 @@
 VOID TestWithDump Etalon.ms.script.test
+ STRING CONST cCompareUtilCmd
+  'q:\afc.cmd'
  VOID PROCEDURE Etalon
   ^ IN aLambda
   VOID PROCEDURE DeleteEmptyFile
@@ -94,7 +96,8 @@ VOID TestWithDump Etalon.ms.script.test
     (
      STRING VAR l_Compare
      ARRAY [
-      'q:\afc.cmd '
+      cCompareUtilCmd
+      ' '
       l_FileName
       ' '
       l_FileNameOut
