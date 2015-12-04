@@ -154,37 +154,6 @@ VOID TestWithDump Etalon.ms.script.test
    END
   else
    BEGIN
-    STRING VAR l_OutPath
-    l_FileName
-    sysutils:ExtractFilePath
-    l_OutPath
-    pop:Word:SetValue
-    if
-     (
-      l_OutPath
-      IsNil
-     )
-    then
-     BEGIN
-      sysutils:GetCurrentDir
-      l_OutPath
-      pop:Word:SetValue
-      ARRAY [
-       l_OutPath
-       l_FileName
-      ]
-      cPathSep
-      strings:CatSep
-      l_FileName
-      pop:Word:SetValue
-     END
-    l_OutPath
-    sysutils:ForceDirectories
-    ?ASSURE
-    ARRAY [
-     'Не удалось создать директорию '
-     l_OutPath
-    ]
     32
     l_FileName
     l_FileNameOut

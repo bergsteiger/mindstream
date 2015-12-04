@@ -94,14 +94,6 @@ Test&Dump Etalon.ms.script.test
   end // l_FileName sysutils:FileExists
   else
   begin
-   STRING VAR l_OutPath
-   l_FileName sysutils:ExtractFilePath >>> l_OutPath
-   if ( l_OutPath IsNil ) then
-   begin
-    sysutils:GetCurrentDir >>> l_OutPath
-    [ l_OutPath l_FileName ] cPathSep strings:CatSep >>> l_FileName
-   end
-   l_OutPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutPath ]
    $20 l_FileName l_FileNameOut CopyFile
   end // l_FileName sysutils:FileExists
   
