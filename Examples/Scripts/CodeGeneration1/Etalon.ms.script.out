@@ -64,6 +64,14 @@ VOID TestWithDump Etalon.ms.script.test
      )
     END
   )
+  g_EtalonLevel
+  >
+  0
+  ?
+  (
+   g_EtalonLevel
+   Out
+  )
  ; // VOID PROCEDURE Etalon
  
  VOID PROCEDURE Etalon.do

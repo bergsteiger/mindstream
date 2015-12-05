@@ -157,6 +157,7 @@ Test&Dump Etalon.ms.script.test
     ) // TF g_EtalonPath
    end // l_SameLevel
   ) // TF g_EtalonLevel
+  g_EtalonLevel > 0 ? ( g_EtalonLevel Out )
  ; // Etalon
 
  Etalon ( script:FileName sysutils:ExtractFileName )
