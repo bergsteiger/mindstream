@@ -69,7 +69,10 @@ VOID TestWithDump Etalon.ms.script.test
     (
      g_EtalonLevel
      <
-     l_EtalonPathCount
+     (
+      g_EtalonPath
+      Array:Count
+     )
     )
    then
     BEGIN
@@ -432,6 +435,7 @@ VOID TestWithDump Etalon.ms.script.test
 2
 1
 1
+got
 2
 1
 got
