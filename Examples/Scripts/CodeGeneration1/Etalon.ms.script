@@ -141,8 +141,6 @@ Test&Dump Etalon.ms.script.test
 
    aLambda Etalon.do
 
-   l_EtalonPathCount Print
-   g_EtalonLevel Print
    if ( g_EtalonLevel < ( g_EtalonPath Array:Count ) ) then
    begin
     l_EtalonPathCopy >>> g_EtalonPath 
