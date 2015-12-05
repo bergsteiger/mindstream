@@ -103,7 +103,7 @@ Test&Dump Etalon.ms.script.test
   if ( l_EtalonFileName sysutils:FileExists ) then
   begin
    '' l_EtalonFileName l_OutFileName CompareFiles ! ? (
-   'got' Msg
+   l_OutFileName Msg
 /*{    cCompareUtilCmd sysutils:FileExists ?ASSURE [ 'Не найдена утилита сравнения: ' cCompareUtilCmd ]
     STRING VAR l_Compare
     [ cCompareUtilCmd ' ' l_EtalonFileName ' ' l_OutFileName ] strings:Cat >>> l_Compare
@@ -124,11 +124,11 @@ Test&Dump Etalon.ms.script.test
  PROCEDURE Etalon
    ^ IN aLambda
 
+  INTEGER VAR l_Level
+  BOOLEAN VAR l_SameLevel
   TF g_EtalonLevel (
    INC g_EtalonLevel
-   INTEGER VAR l_Level
    g_EtalonPath Array:Count >>> l_Level
-   BOOLEAN VAR l_SameLevel
    l_Level g_EtalonLevel == >>> l_SameLevel
    if l_SameLevel then
    begin

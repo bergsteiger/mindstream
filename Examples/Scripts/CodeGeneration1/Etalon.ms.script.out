@@ -3,11 +3,11 @@ VOID TestWithDump Etalon.ms.script.test
   'q:\afc.cmd'
  VOID PROCEDURE Etalon
   ^ IN aLambda
+  INTEGER VAR l_Level
+  BOOLEAN VAR l_SameLevel
   SaveVarAndDo
   g_EtalonLevel
   (
-   INTEGER VAR l_Level
-   BOOLEAN VAR l_SameLevel
    INC
    g_EtalonLevel
    g_EtalonPath
@@ -225,7 +225,7 @@ VOID TestWithDump Etalon.ms.script.test
     !
     ?
     (
-     'got'
+     l_OutFileName
      Msg
     )
    END
