@@ -75,6 +75,11 @@ VOID TestWithDump Etalon.ms.script.test
    'Значение не может быть отрицательным'
    INC
    l_Value
+   l_Index
+   g_EtalonPath
+   l_Value
+   Array:Item
+   pop:Word:SetValuePrim
   )
   EXIT
   SaveVarAndDo
