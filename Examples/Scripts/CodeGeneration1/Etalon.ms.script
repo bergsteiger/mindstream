@@ -126,12 +126,6 @@ Test&Dump Etalon.ms.script.test
   INTEGER VAR l_Level
   INTEGER VAR l_EtalonCount
 
-  PROCEDURE EtalonPrim
-   aLambda Etalon.do
-   INC l_EtalonCount
-   l_Level g_EtalonPath Array:Item := l_EtalonCount
-  ; // EtalonPrim
-
   ARRAY VAR l_EtalonPathCopy
   [ g_EtalonPath .for> NOP ] >>> l_EtalonPathCopy
 

@@ -3,18 +3,6 @@ VOID TestWithDump Etalon.ms.script.test
   'q:\afc.cmd'
  VOID PROCEDURE Etalon
   ^ IN aLambda
-  VOID PROCEDURE EtalonPrim
-   aLambda
-   Etalon.do
-   INC
-   l_EtalonCount
-   l_Level
-   g_EtalonPath
-   l_EtalonCount
-   Array:Item
-   pop:Word:SetValuePrim
-  ; // VOID PROCEDURE EtalonPrim
-  
   INTEGER VAR l_EtalonCount
   ARRAY VAR l_EtalonPathCopy
   INTEGER VAR l_EtalonPathCount
