@@ -16,7 +16,16 @@ VOID TestWithDump Etalon.ms.script.test
   ; // VOID PROCEDURE EtalonPrim
   
   INTEGER VAR l_EtalonCount
+  ARRAY VAR l_EtalonPathCopy
   INTEGER VAR l_Level
+  ARRAY [
+   g_EtalonPath
+   NOP
+   SWAP
+   Array:Iterate
+  ]
+  l_EtalonPathCopy
+  pop:Word:SetValue
   SaveVarAndDo
   g_EtalonLevel
   (
@@ -39,12 +48,7 @@ VOID TestWithDump Etalon.ms.script.test
      SaveVarAndDo
      g_EtalonPath
      (
-      ARRAY [
-       g_EtalonPath
-       NOP
-       SWAP
-       Array:Iterate
-      ]
+      l_EtalonPathCopy
       g_EtalonPath
       pop:Word:SetValue
       DEC
@@ -62,12 +66,7 @@ VOID TestWithDump Etalon.ms.script.test
      SaveVarAndDo
      g_EtalonPath
      (
-      ARRAY [
-       g_EtalonPath
-       NOP
-       SWAP
-       Array:Iterate
-      ]
+      l_EtalonPathCopy
       g_EtalonPath
       pop:Word:SetValue
       0

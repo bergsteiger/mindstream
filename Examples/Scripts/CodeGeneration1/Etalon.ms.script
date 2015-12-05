@@ -133,6 +133,9 @@ Test&Dump Etalon.ms.script.test
    l_Level g_EtalonPath Array:Item := l_EtalonCount
   ; // EtalonPrim
 
+  ARRAY VAR l_EtalonPathCopy
+  [ g_EtalonPath .for> NOP ] >>> l_EtalonPathCopy 
+
   TF g_EtalonLevel (
    INC g_EtalonLevel
    g_EtalonPath Array:Count >>> l_Level
@@ -141,7 +144,7 @@ Test&Dump Etalon.ms.script.test
    if l_SameLevel then
    begin
     TF g_EtalonPath (
-     [ g_EtalonPath .for> NOP ] >>> g_EtalonPath
+     l_EtalonPathCopy >>> g_EtalonPath
      DEC l_Level
      l_Level g_EtalonPath Array:Item >>> l_EtalonCount
      EtalonPrim
@@ -150,7 +153,7 @@ Test&Dump Etalon.ms.script.test
    else
    begin
     TF g_EtalonPath (
-     [ g_EtalonPath .for> NOP ] >>> g_EtalonPath
+     l_EtalonPathCopy >>> g_EtalonPath
      0 >>> l_EtalonCount
      l_EtalonCount >>>[] g_EtalonPath
      EtalonPrim
