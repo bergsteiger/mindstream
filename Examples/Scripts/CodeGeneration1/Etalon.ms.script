@@ -150,6 +150,11 @@ Test&Dump Etalon.ms.script.test
    end
 
    aLambda Etalon.do
+
+   INTEGER VAR l_Index
+   g_EtalonPath Array:Count >>> l_Index
+   Dec l_Index 
+   l_Index >= 0 ?ASSURE 'Индекс не может быть отрицательным'
   ) // TF g_EtalonLevel
 
   EXIT

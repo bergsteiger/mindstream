@@ -34,6 +34,7 @@ VOID TestWithDump Etalon.ms.script.test
   SaveVarAndDo
   g_EtalonLevel
   (
+   INTEGER VAR l_Index
    INC
    g_EtalonLevel
    if
@@ -50,6 +51,17 @@ VOID TestWithDump Etalon.ms.script.test
     END
    aLambda
    Etalon.do
+   g_EtalonPath
+   Array:Count
+   l_Index
+   pop:Word:SetValue
+   DEC
+   l_Index
+   l_Index
+   >=
+   0
+   ?ASSURE
+   'Индекс не может быть отрицательным'
   )
   EXIT
   SaveVarAndDo
