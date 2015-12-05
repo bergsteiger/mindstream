@@ -140,9 +140,11 @@ Test&Dump Etalon.ms.script.test
    l_Level g_EtalonLevel == >>> l_SameLevel
    if l_SameLevel then
    begin
-    DEC l_Level
-    l_Level g_EtalonPath Array:Item >>> l_EtalonCount
-    EtalonPrim
+    TF g_EtalonPath (
+     DEC l_Level
+     l_Level g_EtalonPath Array:Item >>> l_EtalonCount
+     EtalonPrim
+    ) // TF g_EtalonPath
    end // l_SameLevel
    else
    begin
