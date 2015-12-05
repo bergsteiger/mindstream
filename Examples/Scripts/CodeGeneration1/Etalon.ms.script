@@ -144,7 +144,7 @@ Test&Dump Etalon.ms.script.test
   TF g_EtalonLevel (
    INC g_EtalonLevel
 
-   if ( g_EtalonLevel <= l_EtalonPathCount ) then
+   if ( g_EtalonLevel < l_EtalonPathCount ) then
    begin
     0 >>>[] g_EtalonPath
    end
