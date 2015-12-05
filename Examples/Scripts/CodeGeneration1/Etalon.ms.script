@@ -149,13 +149,13 @@ Test&Dump Etalon.ms.script.test
    else
    begin
     TF g_EtalonPath (
+     [ g_EtalonPath .for> NOP ] >>> g_EtalonPath
      0 >>> l_EtalonCount
      l_EtalonCount >>>[] g_EtalonPath
      EtalonPrim
     ) // TF g_EtalonPath
    end // l_SameLevel
   ) // TF g_EtalonLevel
-  g_EtalonLevel > 0 ? ( g_EtalonLevel Out )
  ; // Etalon
 
  Etalon ( script:FileName sysutils:ExtractFileName )

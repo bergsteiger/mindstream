@@ -54,6 +54,14 @@ VOID TestWithDump Etalon.ms.script.test
      SaveVarAndDo
      g_EtalonPath
      (
+      ARRAY [
+       g_EtalonPath
+       NOP
+       SWAP
+       Array:Iterate
+      ]
+      g_EtalonPath
+      pop:Word:SetValue
       0
       l_EtalonCount
       pop:Word:SetValue
@@ -63,14 +71,6 @@ VOID TestWithDump Etalon.ms.script.test
       EtalonPrim
      )
     END
-  )
-  g_EtalonLevel
-  >
-  0
-  ?
-  (
-   g_EtalonLevel
-   Out
   )
  ; // VOID PROCEDURE Etalon
  
