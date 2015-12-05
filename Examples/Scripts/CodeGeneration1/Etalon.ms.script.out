@@ -39,7 +39,7 @@ VOID TestWithDump Etalon.ms.script.test
    if
     (
      g_EtalonLevel
-     <
+     <=
      l_EtalonPathCount
     )
    then
@@ -48,6 +48,8 @@ VOID TestWithDump Etalon.ms.script.test
      >>>[]
      g_EtalonPath
     END
+   aLambda
+   Etalon.do
   )
   EXIT
   SaveVarAndDo
@@ -248,6 +250,7 @@ VOID TestWithDump Etalon.ms.script.test
    g_OutFile
    pop:Word:SetValue
   )
+  EXIT
   if
    (
     l_EtalonFileName

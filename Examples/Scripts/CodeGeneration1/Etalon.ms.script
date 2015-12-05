@@ -100,6 +100,8 @@ Test&Dump Etalon.ms.script.test
    nil >>> g_OutFile
   ) // TF g_OutFile
 
+  EXIT
+
   if ( l_EtalonFileName sysutils:FileExists ) then
   begin
    '' l_EtalonFileName l_OutFileName CompareFiles ! ? (
@@ -142,10 +144,12 @@ Test&Dump Etalon.ms.script.test
   TF g_EtalonLevel (
    INC g_EtalonLevel
 
-   if ( g_EtalonLevel < l_EtalonPathCount ) then
+   if ( g_EtalonLevel <= l_EtalonPathCount ) then
    begin
     0 >>>[] g_EtalonPath
    end
+
+   aLambda Etalon.do
   ) // TF g_EtalonLevel
 
   EXIT
