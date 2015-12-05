@@ -92,9 +92,6 @@ Test&Dump Etalon.ms.script.test
   TF g_OutFile (
    l_OutFileName File:OpenWrite >>> g_OutFile
    DumpStackTo (
-    g_EtalonPath
-   ) Out
-   DumpStackTo (
     aLambda DO 
    ) Out
    nil >>> g_OutFile
