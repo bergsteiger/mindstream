@@ -33,6 +33,12 @@ VOID TestWithDump Etalon.ms.script.test
   pop:Word:SetValue
   SaveVarAndDo
   g_EtalonLevel
+  VOID (
+   INC
+   g_EtalonLevel
+  )
+  SaveVarAndDo
+  g_EtalonLevel
   (
    BOOLEAN VAR l_SameLevel
    INC
