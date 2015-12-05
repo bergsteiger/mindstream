@@ -146,7 +146,7 @@ Test&Dump Etalon.ms.script.test
      aLambda Etalon.do
     ) // TF g_EtalonPath
    end // l_SameLevel
-  ) 
+  ) // TF g_EtalonLevel
  ; // Etalon
 
  Etalon ( script:FileName sysutils:ExtractFileName )
