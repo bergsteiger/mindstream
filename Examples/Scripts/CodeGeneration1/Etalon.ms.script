@@ -171,32 +171,6 @@ Test&Dump Etalon.ms.script.test
    l_Index g_EtalonPath Array:Item := l_Value
   ) // TF g_EtalonLevel
 
-  EXIT
-
-  TF g_EtalonLevel (
-   INC g_EtalonLevel
-   g_EtalonPath Array:Count >>> l_Level
-   BOOLEAN VAR l_SameLevel
-   l_Level g_EtalonLevel == >>> l_SameLevel
-   if l_SameLevel then
-   begin
-    TF g_EtalonPath (
-     l_EtalonPathCopy >>> g_EtalonPath
-     DEC l_Level
-     l_Level g_EtalonPath Array:Item >>> l_EtalonCount
-     EtalonPrim
-    ) // TF g_EtalonPath
-   end // l_SameLevel
-   else
-   begin
-    TF g_EtalonPath (
-     l_EtalonPathCopy >>> g_EtalonPath
-     0 >>> l_EtalonCount
-     l_EtalonCount >>>[] g_EtalonPath
-     EtalonPrim
-    ) // TF g_EtalonPath
-   end // l_SameLevel
-  ) // TF g_EtalonLevel
  ; // Etalon
 
  Etalon ( script:FileName sysutils:ExtractFileName )
