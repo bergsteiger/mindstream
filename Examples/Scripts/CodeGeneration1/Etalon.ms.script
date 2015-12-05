@@ -105,7 +105,7 @@ Test&Dump Etalon.ms.script.test
   if ( l_EtalonFileName sysutils:FileExists ) then
   begin
    '' l_EtalonFileName l_OutFileName CompareFiles ! ? (
-   //l_OutFileName Msg
+   l_OutFileName Msg
 /*{    cCompareUtilCmd sysutils:FileExists ?ASSURE [ 'Не найдена утилита сравнения: ' cCompareUtilCmd ]
     STRING VAR l_Compare
     [ cCompareUtilCmd ' ' l_EtalonFileName ' ' l_OutFileName ] strings:Cat >>> l_Compare
