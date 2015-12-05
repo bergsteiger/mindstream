@@ -73,6 +73,8 @@ VOID TestWithDump Etalon.ms.script.test
    0
    ?ASSURE
    'Значение не может быть отрицательным'
+   INC
+   l_Value
   )
   EXIT
   SaveVarAndDo
