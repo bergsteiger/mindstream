@@ -372,8 +372,10 @@ VOID TestWithDump Etalon.ms.script.test
    'Nested2.3'
   )
   Etalon
-  STRING (
+  (
    'Nested3'
+   Etalon
+   'Nested3.1'
   )
   Etalon
   'Nested4'
@@ -412,6 +414,8 @@ VOID TestWithDump Etalon.ms.script.test
 3
 2
 2
+2
+3
 2
 2
 2
