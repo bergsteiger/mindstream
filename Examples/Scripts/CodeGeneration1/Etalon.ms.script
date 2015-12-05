@@ -123,9 +123,6 @@ Test&Dump Etalon.ms.script.test
  PROCEDURE Etalon
    ^ IN aLambda
 
-  INTEGER VAR l_Level
-  INTEGER VAR l_EtalonCount
-
   ARRAY VAR l_EtalonPathCopy
   [ g_EtalonPath .for> NOP ] >>> l_EtalonPathCopy
 

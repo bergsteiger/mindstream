@@ -3,10 +3,8 @@ VOID TestWithDump Etalon.ms.script.test
   'q:\afc.cmd'
  VOID PROCEDURE Etalon
   ^ IN aLambda
-  INTEGER VAR l_EtalonCount
   ARRAY VAR l_EtalonPathCopy
   INTEGER VAR l_EtalonPathCount
-  INTEGER VAR l_Level
   ARRAY [
    g_EtalonPath
    NOP
