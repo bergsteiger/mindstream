@@ -125,7 +125,6 @@ Test&Dump Etalon.ms.script.test
    ^ IN aLambda
 
   INTEGER VAR l_Level
-  BOOLEAN VAR l_SameLevel
   INTEGER VAR l_EtalonCount
 
   PROCEDURE EtalonPrim
@@ -137,6 +136,7 @@ Test&Dump Etalon.ms.script.test
   TF g_EtalonLevel (
    INC g_EtalonLevel
    g_EtalonPath Array:Count >>> l_Level
+   BOOLEAN VAR l_SameLevel
    l_Level g_EtalonLevel == >>> l_SameLevel
    if l_SameLevel then
    begin

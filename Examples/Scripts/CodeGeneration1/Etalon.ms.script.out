@@ -17,10 +17,10 @@ VOID TestWithDump Etalon.ms.script.test
   
   INTEGER VAR l_EtalonCount
   INTEGER VAR l_Level
-  BOOLEAN VAR l_SameLevel
   SaveVarAndDo
   g_EtalonLevel
   (
+   BOOLEAN VAR l_SameLevel
    INC
    g_EtalonLevel
    g_EtalonPath
