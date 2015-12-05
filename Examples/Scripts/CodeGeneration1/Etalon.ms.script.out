@@ -248,7 +248,6 @@ VOID TestWithDump Etalon.ms.script.test
   DeleteEmptyFile
  ; // VOID PROCEDURE Etalon.do
  
- INTEGER VAR g_EtalonCount
  INTEGER VAR g_EtalonLevel
  ARRAY VAR g_EtalonPath
  FILE VAR g_OutFile
@@ -277,13 +276,8 @@ VOID TestWithDump Etalon.ms.script.test
   pop:Word:SetValue
  )
  (
-  0
-  g_EtalonCount
-  pop:Word:SetValue
- )
- (
   ARRAY [
-   g_EtalonCount
+   0
   ]
   g_EtalonPath
   pop:Word:SetValue
