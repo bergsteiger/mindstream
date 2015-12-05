@@ -141,7 +141,6 @@ Test&Dump Etalon.ms.script.test
   INTEGER VAR l_EtalonPathCount
   l_EtalonPathCopy Array:Count >>> l_EtalonPathCount
 
-
   g_EtalonLevel >= 0 ?ASSURE [ 'g_EtalonLevel is bad: ' g_EtalonLevel IntToStr ]
 
   TF g_EtalonLevel (
