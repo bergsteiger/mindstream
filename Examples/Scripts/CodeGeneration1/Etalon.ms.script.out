@@ -17,6 +17,7 @@ VOID TestWithDump Etalon.ms.script.test
   
   INTEGER VAR l_EtalonCount
   ARRAY VAR l_EtalonPathCopy
+  INTEGER VAR l_EtalonPathCount
   INTEGER VAR l_Level
   ARRAY [
    g_EtalonPath
@@ -25,6 +26,10 @@ VOID TestWithDump Etalon.ms.script.test
    Array:Iterate
   ]
   l_EtalonPathCopy
+  pop:Word:SetValue
+  l_EtalonPathCopy
+  Array:Count
+  l_EtalonPathCount
   pop:Word:SetValue
   SaveVarAndDo
   g_EtalonLevel

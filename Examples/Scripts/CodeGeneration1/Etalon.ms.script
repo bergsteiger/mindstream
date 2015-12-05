@@ -134,7 +134,10 @@ Test&Dump Etalon.ms.script.test
   ; // EtalonPrim
 
   ARRAY VAR l_EtalonPathCopy
-  [ g_EtalonPath .for> NOP ] >>> l_EtalonPathCopy 
+  [ g_EtalonPath .for> NOP ] >>> l_EtalonPathCopy
+
+  INTEGER VAR l_EtalonPathCount
+  l_EtalonPathCopy Array:Count >>> l_EtalonPathCount
 
   TF g_EtalonLevel (
    INC g_EtalonLevel
