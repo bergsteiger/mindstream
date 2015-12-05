@@ -155,6 +155,10 @@ Test&Dump Etalon.ms.script.test
 
    l_EtalonPathCount Print
    g_EtalonLevel Print
+   if ( g_EtalonLevel < l_EtalonPathCount ) then
+   begin
+    'got' Print
+   end
 
    INTEGER VAR l_Index
    g_EtalonPath Array:Count >>> l_Index

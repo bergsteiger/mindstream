@@ -65,6 +65,17 @@ VOID TestWithDump Etalon.ms.script.test
    Print
    g_EtalonLevel
    Print
+   if
+    (
+     g_EtalonLevel
+     <
+     l_EtalonPathCount
+    )
+   then
+    BEGIN
+     'got'
+     Print
+    END
    g_EtalonPath
    Array:Count
    l_Index
@@ -423,3 +434,4 @@ VOID TestWithDump Etalon.ms.script.test
 1
 2
 1
+got
