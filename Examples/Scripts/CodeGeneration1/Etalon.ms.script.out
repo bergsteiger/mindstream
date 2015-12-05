@@ -76,8 +76,9 @@ VOID TestWithDump Etalon.ms.script.test
     )
    then
     BEGIN
-     'got'
-     Print
+     l_EtalonPathCopy
+     g_EtalonPath
+     pop:Word:SetValue
     END
    g_EtalonPath
    Array:Count
@@ -435,7 +436,5 @@ VOID TestWithDump Etalon.ms.script.test
 2
 1
 1
-got
-2
 1
-got
+1
