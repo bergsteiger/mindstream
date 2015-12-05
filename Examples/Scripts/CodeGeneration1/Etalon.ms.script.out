@@ -63,6 +63,8 @@ VOID TestWithDump Etalon.ms.script.test
    Etalon.do
    l_EtalonPathCount
    Print
+   g_EtalonLevel
+   Print
    g_EtalonPath
    Array:Count
    l_Index
@@ -413,6 +415,11 @@ VOID TestWithDump Etalon.ms.script.test
 
 1
 1
-2
 1
 2
+2
+2
+1
+1
+2
+1
