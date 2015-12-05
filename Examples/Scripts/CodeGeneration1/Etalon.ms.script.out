@@ -41,7 +41,9 @@ VOID TestWithDump Etalon.ms.script.test
      (
       DEC
       l_Level
-      g_EtalonCount
+      l_Level
+      g_EtalonPath
+      Array:Item
       l_EtalonCount
       pop:Word:SetValue
       EtalonPrim

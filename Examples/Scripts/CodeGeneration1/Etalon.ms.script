@@ -144,7 +144,7 @@ Test&Dump Etalon.ms.script.test
    begin
     TF g_EtalonPath (
      DEC l_Level
-     g_EtalonCount >>> l_EtalonCount
+     l_Level g_EtalonPath Array:Item >>> l_EtalonCount
      EtalonPrim
     ) // TF g_EtalonPath
    end // l_SameLevel
