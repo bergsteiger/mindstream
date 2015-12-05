@@ -33,9 +33,18 @@ VOID TestWithDump Etalon.ms.script.test
   pop:Word:SetValue
   SaveVarAndDo
   g_EtalonLevel
-  VOID (
+  (
    INC
    g_EtalonLevel
+   if
+    (
+     g_EtalonLevel
+     <
+     l_EtalonPathCount
+    )
+   then
+    BEGIN
+    END
   )
   EXIT
   SaveVarAndDo

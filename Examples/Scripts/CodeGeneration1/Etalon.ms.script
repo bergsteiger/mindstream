@@ -141,6 +141,10 @@ Test&Dump Etalon.ms.script.test
 
   TF g_EtalonLevel (
    INC g_EtalonLevel
+
+   if ( g_EtalonLevel < l_EtalonPathCount ) then
+   begin
+   end
   ) // TF g_EtalonLevel
 
   EXIT
