@@ -194,8 +194,8 @@ Test&Dump Etalon.ms.script.test
  ; // Etalon
 
  Etalon ( script:FileName sysutils:ExtractFileName )
- EXIT
  Etalon ( 1 2 + )
+ EXIT
  Etalon 'Hello world'
  Etalon ()
  Etalon []
