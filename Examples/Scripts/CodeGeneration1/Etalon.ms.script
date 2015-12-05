@@ -149,9 +149,7 @@ Test&Dump Etalon.ms.script.test
     TF g_EtalonPath (
      0 >>> l_EtalonCount
      l_EtalonCount >>>[] g_EtalonPath
-     aLambda Etalon.do
-     INC l_EtalonCount
-     l_Level g_EtalonPath Array:Item := l_EtalonCount
+     EtalonPrim
     ) // TF g_EtalonPath
    end // l_SameLevel
   ) // TF g_EtalonLevel

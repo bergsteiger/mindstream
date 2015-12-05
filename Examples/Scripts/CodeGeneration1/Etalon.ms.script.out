@@ -56,15 +56,7 @@ VOID TestWithDump Etalon.ms.script.test
       l_EtalonCount
       >>>[]
       g_EtalonPath
-      aLambda
-      Etalon.do
-      INC
-      l_EtalonCount
-      l_Level
-      g_EtalonPath
-      l_EtalonCount
-      Array:Item
-      pop:Word:SetValuePrim
+      EtalonPrim
      )
     END
   )
