@@ -308,7 +308,6 @@ VOID TestWithDump Etalon.ms.script.test
    g_OutFile
    pop:Word:SetValue
   )
-  EXIT
   if
    (
     l_EtalonFileName

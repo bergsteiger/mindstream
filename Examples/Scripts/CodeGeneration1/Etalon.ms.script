@@ -100,8 +100,6 @@ Test&Dump Etalon.ms.script.test
    nil >>> g_OutFile
   ) // TF g_OutFile
 
-  EXIT
-
   if ( l_EtalonFileName sysutils:FileExists ) then
   begin
    '' l_EtalonFileName l_OutFileName CompareFiles ! ? (
