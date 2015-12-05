@@ -126,6 +126,8 @@ Test&Dump Etalon.ms.script.test
 
   INTEGER VAR l_Level
   BOOLEAN VAR l_SameLevel
+  INTEGER VAR l_EtalonCount
+
   TF g_EtalonLevel (
    INC g_EtalonLevel
    g_EtalonPath Array:Count >>> l_Level
@@ -133,7 +135,6 @@ Test&Dump Etalon.ms.script.test
    if l_SameLevel then
    begin
     DEC l_Level
-    INTEGER VAR l_EtalonCount
     l_Level g_EtalonPath Array:Item >>> l_EtalonCount
     aLambda Etalon.do
     INC l_EtalonCount
@@ -142,7 +143,8 @@ Test&Dump Etalon.ms.script.test
    else
    begin
     TF g_EtalonPath (
-     0 >>>[] g_EtalonPath
+     0 >>> l_EtalonCount
+     l_EtalonCount >>>[] g_EtalonPath
      aLambda Etalon.do
     ) // TF g_EtalonPath
    end // l_SameLevel

@@ -3,6 +3,7 @@ VOID TestWithDump Etalon.ms.script.test
   'q:\afc.cmd'
  VOID PROCEDURE Etalon
   ^ IN aLambda
+  INTEGER VAR l_EtalonCount
   INTEGER VAR l_Level
   BOOLEAN VAR l_SameLevel
   SaveVarAndDo
@@ -23,7 +24,6 @@ VOID TestWithDump Etalon.ms.script.test
     l_SameLevel
    then
     BEGIN
-     INTEGER VAR l_EtalonCount
      DEC
      l_Level
      l_Level
@@ -47,6 +47,9 @@ VOID TestWithDump Etalon.ms.script.test
      g_EtalonPath
      (
       0
+      l_EtalonCount
+      pop:Word:SetValue
+      l_EtalonCount
       >>>[]
       g_EtalonPath
       aLambda
