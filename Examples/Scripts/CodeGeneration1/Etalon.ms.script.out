@@ -36,14 +36,26 @@ VOID TestWithDump Etalon.ms.script.test
     l_SameLevel
    then
     BEGIN
-     DEC
-     l_Level
-     l_Level
+     SaveVarAndDo
      g_EtalonPath
-     Array:Item
-     l_EtalonCount
-     pop:Word:SetValue
-     EtalonPrim
+     (
+      ARRAY [
+       g_EtalonPath
+       NOP
+       SWAP
+       Array:Iterate
+      ]
+      g_EtalonPath
+      pop:Word:SetValue
+      DEC
+      l_Level
+      l_Level
+      g_EtalonPath
+      Array:Item
+      l_EtalonCount
+      pop:Word:SetValue
+      EtalonPrim
+     )
     END
    else
     BEGIN
