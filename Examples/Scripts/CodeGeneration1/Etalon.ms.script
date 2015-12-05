@@ -31,12 +31,14 @@ Test&Dump Etalon.ms.script.test
  ( nil >>> g_OutFile )
  INTEGER VAR g_EtalonLevel
  ( 0 >>> g_EtalonLevel )
+ INTEGER VAR g_EtalonCount
+ ( 0 >>> g_EtalonCount )
  ARRAY VAR g_EtalonPath
  ( [ 0 ] >>> g_EtalonPath )
 
  CONST cCompareUtilCmd 'q:\afc.cmd'
  %REMARK 'Путь к утилите сравнения'
-
+ 
  PROCEDURE Etalon.do
    IN aLambda
 
