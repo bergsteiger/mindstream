@@ -3,6 +3,18 @@ VOID TestWithDump Etalon.ms.script.test
   'q:\afc.cmd'
  VOID PROCEDURE Etalon
   ^ IN aLambda
+  VOID PROCEDURE EtalonPrim
+   aLambda
+   Etalon.do
+   INC
+   l_EtalonCount
+   l_Level
+   g_EtalonPath
+   l_EtalonCount
+   Array:Item
+   pop:Word:SetValuePrim
+  ; // VOID PROCEDURE EtalonPrim
+  
   INTEGER VAR l_EtalonCount
   INTEGER VAR l_Level
   BOOLEAN VAR l_SameLevel
@@ -31,15 +43,7 @@ VOID TestWithDump Etalon.ms.script.test
      Array:Item
      l_EtalonCount
      pop:Word:SetValue
-     aLambda
-     Etalon.do
-     INC
-     l_EtalonCount
-     l_Level
-     g_EtalonPath
-     l_EtalonCount
-     Array:Item
-     pop:Word:SetValuePrim
+     EtalonPrim
     END
    else
     BEGIN
