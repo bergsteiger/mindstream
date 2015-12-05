@@ -103,18 +103,6 @@ VOID TestWithDump Etalon.ms.script.test
   STRING VAR l_EtalonFileName
   STRING VAR l_OutDir
   STRING VAR l_OutFileName
-  VOID PROCEDURE Out
-   IN aValue
-   g_OutFile
-   IsNil
-   ?FAIL
-   'Файл для вывода не открыт'
-   aValue
-   ToPrintable
-   g_OutFile
-   File:WriteLn
-  ; // VOID PROCEDURE Out
-  
   script:FileName
   sysutils:ExtractFilePath
   l_CurrentDir
@@ -256,6 +244,18 @@ VOID TestWithDump Etalon.ms.script.test
  INTEGER VAR g_EtalonLevel
  ARRAY VAR g_EtalonPath
  FILE VAR g_OutFile
+ VOID PROCEDURE Out
+  IN aValue
+  g_OutFile
+  IsNil
+  ?FAIL
+  'Файл для вывода не открыт'
+  aValue
+  ToPrintable
+  g_OutFile
+  File:WriteLn
+ ; // VOID PROCEDURE Out
+ 
  Etalon.ms.script.test
  DumpElement
  (

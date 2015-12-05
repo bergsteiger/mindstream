@@ -36,6 +36,12 @@ Test&Dump Etalon.ms.script.test
  ARRAY VAR g_EtalonPath
  ( [ g_EtalonCount ] >>> g_EtalonPath )
 
+ PROCEDURE Out
+   IN aValue
+  g_OutFile IsNil ?FAIL 'Файл для вывода не открыт'
+  aValue ToPrintable g_OutFile File:WriteLn
+ ; // Out
+
  CONST cCompareUtilCmd 'q:\afc.cmd'
  %REMARK 'Путь к утилите сравнения'
  
@@ -57,12 +63,6 @@ Test&Dump Etalon.ms.script.test
     ) // aFileName sysutils:FileExists
    ) // aFileName FileSize 0 ==
   ; // DeleteEmptyFile
-
-  PROCEDURE Out
-    IN aValue
-   g_OutFile IsNil ?FAIL 'Файл для вывода не открыт'
-   aValue ToPrintable g_OutFile File:WriteLn
-  ; // Out
 
   STRING VAR l_EtalonFileName
   STRING VAR l_CurrentDir
