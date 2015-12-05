@@ -158,6 +158,7 @@ Test&Dump Etalon.ms.script.test
 
    INTEGER VAR l_Value
    l_Index g_EtalonPath Array:Item >>> l_Value
+   l_Value >= 0 ?ASSURE 'Значение не может быть отрицательным'
   ) // TF g_EtalonLevel
 
   EXIT
