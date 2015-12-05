@@ -37,6 +37,7 @@ VOID TestWithDump Etalon.ms.script.test
    INC
    g_EtalonLevel
   )
+  EXIT
   SaveVarAndDo
   g_EtalonLevel
   (

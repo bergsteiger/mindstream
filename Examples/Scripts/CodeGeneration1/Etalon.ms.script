@@ -143,6 +143,8 @@ Test&Dump Etalon.ms.script.test
    INC g_EtalonLevel
   ) // TF g_EtalonLevel
 
+  EXIT
+
   TF g_EtalonLevel (
    INC g_EtalonLevel
    g_EtalonPath Array:Count >>> l_Level
