@@ -148,8 +148,8 @@ Test&Dump Etalon.ms.script.test
    end // l_SameLevel
    else
    begin
-    [ g_EtalonPath .for> NOP ] >>> g_EtalonPath
     TF g_EtalonPath (
+     [ g_EtalonPath .for> NOP ] >>> g_EtalonPath
      0 >>> l_EtalonCount
      l_EtalonCount >>>[] g_EtalonPath
      EtalonPrim
