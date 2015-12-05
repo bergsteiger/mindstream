@@ -31,6 +31,15 @@ VOID TestWithDump Etalon.ms.script.test
   Array:Count
   l_EtalonPathCount
   pop:Word:SetValue
+  g_EtalonLevel
+  >=
+  0
+  ?ASSURE
+  ARRAY [
+   'g_EtalonLevel is bad: '
+   g_EtalonLevel
+   IntToStr
+  ]
   SaveVarAndDo
   g_EtalonLevel
   (
@@ -41,7 +50,7 @@ VOID TestWithDump Etalon.ms.script.test
    if
     (
      g_EtalonLevel
-     <
+     >
      l_EtalonPathCount
     )
    then
@@ -356,6 +365,8 @@ VOID TestWithDump Etalon.ms.script.test
    2
    +
   )
+  Etalon
+  'Inner1'
  )
  EXIT
  Etalon

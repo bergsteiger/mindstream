@@ -141,10 +141,13 @@ Test&Dump Etalon.ms.script.test
   INTEGER VAR l_EtalonPathCount
   l_EtalonPathCopy Array:Count >>> l_EtalonPathCount
 
+
+  g_EtalonLevel >= 0 ?ASSURE [ 'g_EtalonLevel is bad: ' g_EtalonLevel IntToStr ]
+
   TF g_EtalonLevel (
    INC g_EtalonLevel
 
-   if ( g_EtalonLevel < l_EtalonPathCount ) then
+   if ( g_EtalonLevel > l_EtalonPathCount ) then
    begin
     0 >>>[] g_EtalonPath
    end
@@ -196,6 +199,7 @@ Test&Dump Etalon.ms.script.test
  Etalon ( script:FileName sysutils:ExtractFileName )
  Etalon (
   ( 1 2 + )
+  Etalon 'Inner1'
  )
  EXIT
  Etalon 'Hello world'
