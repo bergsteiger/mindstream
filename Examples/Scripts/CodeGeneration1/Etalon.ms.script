@@ -188,7 +188,9 @@ Test&Dump Etalon.ms.script.test
    Etalon 'Nested2.2'
    Etalon 'Nested2.3'
   )
-  Etalon 'Nested3'
+  Etalon (
+   'Nested3'
+  )
   Etalon 'Nested4'
  )
 ; // Etalon.ms.script.test
