@@ -153,6 +153,8 @@ Test&Dump Etalon.ms.script.test
 
    aLambda Etalon.do
 
+   l_EtalonPathCount Print
+
    INTEGER VAR l_Index
    g_EtalonPath Array:Count >>> l_Index
    Dec l_Index 
