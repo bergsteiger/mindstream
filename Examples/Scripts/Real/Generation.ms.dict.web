@@ -1,0 +1,806 @@
+UNIT Generation.ms.dict
+
+USES
+ axiom_push.ms.dict
+;
+
+USES
+ core.ms.dict
+;
+
+USES
+ WordsRTTI.ms.dict
+;
+
+USES 
+ ElementsRTTI.ms.dict
+;
+
+USES
+ CompileTimeVar.ms.dict
+;
+
+USES
+ SaveVarAndDo.ms.dict
+;
+
+CONST GEN_PROPERTY_PREFIX 'gp'
+%REMARK 'Префикс имени свойства генератора'
+
+MACRO %GEN_PROPERTY
+ Literal IN aName
+ %SUMMARY 'Свойство генератора' ;
+ this.method.addr Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol CONST
+ GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
+; // %GEN_PROPERTY
+
+USES
+ RefDeepest.ms.dict
+ FieldByNameDeepest.ms.dict
+;
+
+MACRO %GP
+ Literal IN aName
+ %SUMMARY 'Метод получения свойства генератора' ;
+ axiom:PushSymbol FieldByNameDeepest
+ GEN_PROPERTY_PREFIX (+) ( aName |N ) Ctx:Parser:PushSymbol
+; // %GP
+
+CONST cPathSep '\'
+
+FILE CompileTime-VAR g_OutFile nil
+%REMARK 'Текущий файл'
+
+INTEGER CompileTime-VAR g_Indent 0
+%REMARK 'Текущий отступ'
+
+CONST cIndentChar ' '
+
+STRING FUNCTION IndentStr
+ g_Indent cIndentChar char:Dupe &gt;&gt;&gt; Result
+; // IndentStr
+
+OBJECT STRING INTEGER ARRAY BOOLEAN TYPE OUTABLE
+
+STRING FUNCTION ValueToString
+  OUTABLE IN aValue
+
+ if ( aValue IsArray ) then
+ begin
+  [ aValue .for&gt; call.me ] strings:Cat &gt;&gt;&gt; Result
+ end 
+ else
+ if ( aValue .IsWord ) then
+ begin
+  aValue |N &gt;&gt;&gt; Result
+ end
+ else
+ begin
+  aValue ToPrintable &gt;&gt;&gt; Result
+ end 
+; // ValueToString
+
+STRING FUNCTION ValueToStringOrName
+  OUTABLE IN aValue
+ 
+ if ( aValue .IsWord ) then
+ begin
+  aValue .Name &gt;&gt;&gt; Result
+  if ( Result = '' ) then
+  begin
+   aValue pop:Word:Name &gt;&gt;&gt; Result
+  end
+ end
+ else
+ begin
+  aValue ValueToString &gt;&gt;&gt; Result
+ end
+; // ValueToStringOrName
+
+CONST \n #13#10
+
+PROCEDURE .Out
+ OUTABLE IN aValue
+ [ IndentStr aValue ValueToString ] strings:Cat g_OutFile File:WriteStr
+ \n g_OutFile File:WriteStr
+; // .Out
+
+PROCEDURE Indented:
+  ^ IN aLambda
+  
+ TF g_Indent (
+  INC g_Indent
+  aLambda DO
+ ) 
+; // Indented:
+
+PROCEDURE Bracketed
+  ^ IN aLambda
+  
+ '{' .Out
+ Indented: ( aLambda DO ) 
+ '}' .Out
+; // Bracketed
+
+USES
+ axiom:SysUtils
+;
+
+USES
+ arrays.ms.dict
+;
+
+TtfwWord FUNCTION .FindMemberRecur
+  STRING IN aName
+  TtfwWord IN aGen
+
+ TtfwKeyWord VAR l_Member
+ aName aGen pop:Word:FindMember &gt;&gt;&gt; l_Member
+
+ if ( l_Member IsNil ) then
+  ( nil &gt;&gt;&gt; Result )
+ else
+  ( l_Member pop:KeyWord:Word &gt;&gt;&gt; Result )
+
+ if ( Result IsNil ) then
+  ( 
+   aGen .Inherited.Words .for&gt; ( 
+    IN anItem 
+    TtfwWord VAR l_Found 
+    aName anItem call.me &gt;&gt;&gt; l_Found
+    ( Result IsNil ) 
+    OR ( l_Found IsNil ) 
+    OR ( Result = l_Found ) 
+     ?ASSURE [ 'Multiply inheritance. Word: ' aName ' generator ' aGen pop:Word:Name ' parent generator ' anItem pop:Word:Name ]
+    l_Found &gt;&gt;&gt; Result
+   ) 
+  )
+
+; // .FindMemberRecur
+
+ARRAY CompileTime-VAR g_GeneratedFiles []
+%REMARK 'Ранее сгенерированные файлы'
+
+TtfwWord VAR g_CurrentGenerator
+%REMARK 'Текущий генератор'
+
+: .?
+  ^ IN aWord
+
+ TtfwWord VAR l_Word
+
+ aWord |N g_CurrentGenerator .FindMemberRecur &gt;&gt;&gt; l_Word
+
+ if ( l_Word IsNil ) then
+  ( aWord DO )
+ else
+  ( l_Word DO )
+; // .?
+
+STRING FUNCTION Ext
+ '.dump' &gt;&gt;&gt; Result
+; // Ext
+
+PROCEDURE .GenerateWordToFile
+ ModelElement IN Self
+ ^ IN aLambda
+ 
+ TF g_Indent (
+  0 &gt;&gt;&gt; g_Indent
+  STRING VAR l_FileName 
+  [ Self pop:Word:Name .? Ext ] strings:Cat &gt;&gt;&gt; l_FileName
+ 
+  STRING VAR l_TempPath
+  'C:\Temp\GenScripts\' &gt;&gt;&gt; l_TempPath
+  l_TempPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_TempPath ]
+  
+  STRING VAR l_RealPath
+  'W:\common\GenScripts\' &gt;&gt;&gt; l_RealPath
+  l_RealPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_RealPath ]
+  
+  STRING VAR l_TempFileName
+  
+  [ l_TempPath l_FileName ] cPathSep strings:CatSep &gt;&gt;&gt; l_TempFileName
+  
+  STRING VAR l_RealFileName
+  
+  [ l_RealPath l_FileName ] cPathSep strings:CatSep &gt;&gt;&gt; l_RealFileName
+  
+  if ( g_GeneratedFiles l_TempFileName array:HasText ! ) then
+  begin
+   l_TempFileName array:AddTo g_GeneratedFiles
+   TF g_OutFile (
+    l_TempFileName File:OpenWrite &gt;&gt;&gt; g_OutFile
+    Self aLambda DO
+   )
+   
+   if (
+       ( l_RealFileName sysutils:FileExists ! )
+       OR ( '' l_RealFileName l_TempFileName CompareFiles ! ) 
+      ) then
+   begin
+    $20 l_RealFileName l_TempFileName CopyFile
+   end 
+  end // g_GeneratedFiles l_TempFileName array:HasText !
+ ) 
+; // .GenerateWordToFile
+
+PROCEDURE .DeleteWordFile
+ ModelElement IN Self
+ 
+  STRING VAR l_FileName 
+  [ Self pop:Word:Name .? Ext ] strings:Cat &gt;&gt;&gt; l_FileName
+  
+  STRING VAR l_RealPath
+  'W:\common\GenScripts\' &gt;&gt;&gt; l_RealPath
+  
+  STRING VAR l_RealFileName
+  
+  [ l_RealPath l_FileName ] cPathSep strings:CatSep &gt;&gt;&gt; l_RealFileName
+  
+  if ( l_RealFileName sysutils:FileExists ) then
+  begin
+   l_RealFileName DeleteFile DROP
+  end
+; // .DeleteWordFile
+
+BOOLEAN elem_func IsScriptKeyword
+ Self .IsStereotype st_ScriptKeyword &gt;&gt;&gt; Result
+; // IsScriptKeyword
+
+BOOLEAN elem_func IsSimpleClass
+ RULES
+  ( Self .IsStereotype st_SimpleClass ) 
+   ( true &gt;&gt;&gt; Result )
+  ( Self .IsStereotype st_Service ) 
+   ( true &gt;&gt;&gt; Result )
+  ( Self .IsStereotype st_ServiceImplementation ) 
+   ( true &gt;&gt;&gt; Result )
+  ( Self .IsScriptKeyword ) 
+   ( true &gt;&gt;&gt; Result )
+  ( Self .IsStereotype st_TestCase ) 
+   ( true &gt;&gt;&gt; Result )
+  ( Self .IsStereotype st_GuiControl ) 
+   ( true &gt;&gt;&gt; Result )
+  ( Self .IsStereotype st_VCMForm ) 
+   ( true &gt;&gt;&gt; Result )
+  ( Self .IsStereotype st_VCMFinalForm ) 
+   ( true &gt;&gt;&gt; Result )
+  ( Self .IsStereotype st_VCMContainer ) 
+   ( true &gt;&gt;&gt; Result )
+  ( Self .IsStereotype st_VCMFinalContainer ) 
+   ( true &gt;&gt;&gt; Result )
+  DEFAULT
+   ( false &gt;&gt;&gt; Result )
+ ; // RULES  
+; // IsSimpleClass
+ 
+BOOLEAN elem_func IsUtilityPack
+ RULES
+  ( Self .IsStereotype st_UtilityPack )
+   ( true &gt;&gt;&gt; Result )
+  ( Self .IsStereotype st_ScriptKeywordsPack ) 
+   ( true &gt;&gt;&gt; Result )
+  DEFAULT
+   ( false &gt;&gt;&gt; Result )
+ ; // RULES 
+; // IsUtilityPack
+
+BOOLEAN elem_func IsInterfaces
+ RULES
+  ( Self .IsStereotype st_Interfaces ) 
+   ( true &gt;&gt;&gt; Result )
+  ( Self .IsStereotype st_InternalInterfaces )
+   ( true &gt;&gt;&gt; Result )
+  DEFAULT
+   ( false &gt;&gt;&gt; Result )
+ ; // RULES 
+; // IsInterfaces
+
+BOOLEAN elem_func IsMixIn
+ Self .IsStereotype st_Impurity &gt;&gt;&gt; Result
+; // IsMixIn
+
+BOOLEAN elem_func IsPureMixIn
+ Self .IsStereotype st_PureMixIn &gt;&gt;&gt; Result
+; // IsPureMixIn
+
+BOOLEAN elem_func IsTagTable
+ Self .IsStereotype st_TagTable &gt;&gt;&gt; Result
+; // IsTagTable
+
+BOOLEAN FUNCTION NeedOwnFile
+ ModelElement IN Self
+ 
+ RULES
+  ( Self .IsStereotype st_ScriptKeywords ) 
+   ( false &gt;&gt;&gt; Result )
+   
+  ( Self .IsStereotype st_TestClass ) 
+   ( true &gt;&gt;&gt; Result )
+   
+  ( Self .IsStereotype st_ExeTarget ) 
+   ( true &gt;&gt;&gt; Result )
+   
+  ( Self .IsStereotype st_AdapterTarget ) 
+   ( true &gt;&gt;&gt; Result )
+   
+  ( Self .IsStereotype st_TestTarget ) 
+   ( true &gt;&gt;&gt; Result )
+   
+  ( Self .IsTagTable ) 
+   ( true &gt;&gt;&gt; Result )
+   
+  ( Self .IsInterfaces )
+   ( true &gt;&gt;&gt; Result )
+  
+  ( Self .IsUtilityPack )
+   ( true &gt;&gt;&gt; Result )
+  
+  ( Self .IsMixIn )
+   ( true &gt;&gt;&gt; Result )
+  
+  ( Self .IsSimpleClass )
+  begin
+   RULES
+    ( Self .Visibility = ProtectedAccess )
+     ( false &gt;&gt;&gt; Result )
+    ( Self .Visibility = PrivateAccess )
+     ( false &gt;&gt;&gt; Result )
+    DEFAULT
+     ( 
+      ModelElement VAR l_Parent
+      Self .Parent &gt;&gt;&gt; l_Parent
+      if (
+          ( l_Parent .IsSimpleClass ) 
+          OR ( l_Parent .IsMixIn )
+          OR ( l_Parent .IsUtilityPack )
+          OR ( l_Parent .IsInterfaces )
+         ) then
+      begin
+       false &gt;&gt;&gt; Result
+      end 
+      else
+      begin
+       true &gt;&gt;&gt; Result
+      end 
+     )
+   ; // RULES
+  end
+  
+  DEFAULT
+   ( false &gt;&gt;&gt; Result )
+ ; // RULES
+; // NeedOwnFile
+
+PROCEDURE .CurrentGenerator
+ ModelElement IN Self
+ Self g_CurrentGenerator DO
+; // .CurrentGenerator
+
+USES
+ CallInherited.ms.dict
+;
+
+USES
+ classRelations.ms.dict
+;
+
+BOOLEAN elem_func NeedOwnFile
+ Self .? NeedOwnFile &gt;&gt;&gt; Result
+; // NeedOwnFile
+
+elem_proc dump
+ Self .Out
+ Bracketed (
+  Self MembersIterator .for&gt; ( 
+    OBJECT IN aCode
+    
+   STRING VAR l_Out  
+   STRING VAR l_Name
+   aCode pop:Word:Name &gt;&gt;&gt; l_Name
+   [ l_Name ' : ' ] strings:Cat &gt;&gt;&gt; l_Out 
+   [ aCode DO ] .for&gt; ( 
+     IN anItem
+     
+    if ( anItem .IsSequence ) then
+     ( anItem .SequenceCode.It &gt;&gt;&gt; anItem )
+    if ( anItem IsArray ) then
+    begin
+     if ( 
+         ( l_Name = 'Children' )
+        ) then
+     begin
+      '' &gt;&gt;&gt; l_Out
+      l_Name .Out
+      Bracketed (
+       ARRAY VAR l_Items
+       anItem 
+        .filter&gt; ( .NeedOwnFile ! ) 
+        &gt;&gt;&gt; l_Items 
+       l_Items .filter&gt; ( .Visibility = PrivateAccess ) .for&gt; call.me
+       l_Items .filter&gt; ( .Visibility = ProtectedAccess ) .for&gt; call.me
+       l_Items .filter&gt; ( .Visibility = PublicAccess ) .for&gt; call.me
+       l_Items .filter&gt; ( .Visibility = UnknownAccess ) .for&gt; call.me
+      ) // Bracketed
+     end
+     else
+     if ( 
+         ( l_Name = 'Attributes' )
+         OR ( l_Name = 'Operations' )
+         OR ( l_Name = 'Constants' )
+         OR ( l_Name = 'Dependencies' )
+         OR ( l_Name = 'Parameters' )
+        ) then
+     begin
+      '' &gt;&gt;&gt; l_Out
+      l_Name .Out
+      Bracketed (
+       ARRAY VAR l_Items
+       anItem 
+        // .filter&gt; ( .NeedOwnFile ! ) 
+        &gt;&gt;&gt; l_Items 
+       l_Items .filter&gt; ( .Visibility = PrivateAccess ) .for&gt; call.me
+       l_Items .filter&gt; ( .Visibility = ProtectedAccess ) .for&gt; call.me
+       l_Items .filter&gt; ( .Visibility = PublicAccess ) .for&gt; call.me
+       l_Items .filter&gt; ( .Visibility = UnknownAccess ) .for&gt; call.me
+      ) // Bracketed
+     end
+     else
+     begin
+      l_Out [ anItem .for&gt; ValueToStringOrName ] ' ' strings:CatSep Cat &gt;&gt;&gt; l_Out
+     end
+    end // anItem IsArray
+    else
+    begin
+     l_Out anItem ValueToStringOrName Cat &gt;&gt;&gt; l_Out
+    end // anItem IsArray
+     
+    if ( l_Out &lt;&gt; '' ) then
+    begin
+     l_Out .Out
+    end // l_Out &lt;&gt; ''
+   ) // [ aCode DO ] .for&gt;
+  ) // Self MembersIterator
+ ) // Bracketed
+; // dump
+
+PROCEDURE OutLn
+ '' .Out
+; // OutLn
+
+elem_proc WithDelim
+  STRING IN aDelim
+  TtfwWord IN aVar
+  TtfwWord IN aLambda
+ [ 
+  if ( aVar DO ! ) then
+  begin
+   true aVar pop:Word:SetValue
+  end
+  else
+  begin
+   aDelim
+  end
+  Self 
+ ] aLambda DO
+; // WithDelim
+
+elem_proc WithComma:
+  ^ IN aVar
+  ^ IN aLambda
+ Self ', ' aVar aLambda .WithDelim
+; // WithComma:
+
+STRING FUNCTION .CutT
+  STRING IN aName
+ aName &gt;&gt;&gt; Result
+ if ( 'T' Result StartsStr ) then
+ begin
+  Result 'T' '' string:ReplaceFirst &gt;&gt;&gt; Result
+ end // 'T' Result StartsStr
+; // .CutT
+
+STRING elem_func UnitName
+ RULES
+  ( Self IsNil )
+    ''
+  ( Self .IsTagTable )
+   ( Self .Name '_Schema' Cat )
+  ( Self .IsScriptKeyword )
+   ( Self .Name .CutT )
+  ( Self .IsSimpleClass )
+   ( Self .Name .CutT )
+  DEFAULT
+   ( Self .Name )
+ ; // RULES
+ &gt;&gt;&gt; Result
+; // UnitName
+
+ModelElement elem_func UnitProducer
+ if ( Self IsNil ) then
+ begin
+  nil &gt;&gt;&gt; Result
+ end
+ else
+ if ( Self IsString ) then
+ begin
+  Self &gt;&gt;&gt; Result
+ end // Self IsString
+ else
+ if ( Self .NeedOwnFile ) then
+ begin
+  Self &gt;&gt;&gt; Result
+ end // Self .NeedOwnFile
+ else
+ begin
+  Self .Parent call.me &gt;&gt;&gt; Result
+ end // Self .NeedOwnFile
+; // UnitProducer
+
+ARRAY FUNCTION .filterNil&gt;
+  ARRAY IN anArray
+ anArray
+ .filter&gt; ( IsNil ! ) 
+ &gt;&gt;&gt; Result
+; // .filterNil&gt;
+
+ARRAY FUNCTION .filterMixIns&gt;
+  ARRAY IN anArray
+ anArray
+ .filter&gt; ( .IsMixIn ! ) 
+ // .filter&gt; ( .IsPureMixIn ! )
+ &gt;&gt;&gt; Result
+; // .filterMixIns&gt;
+
+elem_proc OutUses:
+  ^ IN aUsed
+  ^ IN aLambda
+  
+ ARRAY VAR l_Used
+ aUsed DO &gt;&gt;&gt; l_Used
+  
+ ARRAY FUNCTION .filterUsed&gt;
+   ARRAY IN anArray
+  anArray
+  .filter&gt; ( 
+    IN anItem 
+   if ( anItem l_Used array:Has ! ) then
+   begin
+    anItem array:AddTo l_Used
+    true
+   end
+   else
+   begin
+    false
+   end 
+  ) &gt;&gt;&gt; Result  
+ ; // .filterUsed&gt; 
+  
+ 'uses' .Out
+   BOOLEAN VAR l_NeedComma
+   false &gt;&gt;&gt; l_NeedComma
+   Indented: ( 
+    aLambda DO 
+     .map&gt; .UnitProducer 
+     .filterNil&gt; 
+     .filterMixIns&gt;
+     .filter&gt; ( Self ?!= )
+     .filter&gt; ( .UnitName Self .UnitName ?!= )
+     .filter&gt; ( .UnitName 'System' ?!= )
+     .map&gt; .UnitName 
+     .filterUsed&gt; 
+     .for&gt; ( .WithComma: l_NeedComma .Out ) 
+   ) // Indented:
+ ';' .Out
+ OutLn
+; // OutUses:
+
+ARRAY FUNCTION .mapToTarget&gt;
+  ARRAY IN anArray
+ anArray .map&gt; .Target &gt;&gt;&gt; Result
+; // .mapToTarget&gt;
+
+ARRAY FUNCTION .joinWithLambded&gt;
+  ARRAY IN anArrayToJoin
+  ^ IN anArrayToIterate
+  ^ IN aLambda
+  
+ anArrayToJoin 
+ anArrayToIterate DO .for&gt; ( IN aChild .join&gt; ( aChild aLambda DO ) )
+ &gt;&gt;&gt; Result
+; // .joinWithLambded&gt;
+
+ARRAY FUNCTION .OperationsNeededElements
+  ARRAY IN anArray
+ anArray .mapToTarget&gt; 
+ .join&gt; ( anArray .map&gt; .ValueType )
+ .joinWithLambded&gt; anArray ( .Parameters .mapToTarget&gt; )
+ .joinWithLambded&gt; anArray ( .Parameters .map&gt; .ValueType )
+ .joinWithLambded&gt; anArray ( .Attributes call.me )
+ .joinWithLambded&gt; anArray ( .Operations call.me )
+ &gt;&gt;&gt; Result 
+; // .OperationsNeededElements
+
+elem_iterator NeededElements
+ ( Self .Inherits )
+ .join&gt; ( Self .Implements )
+ .join&gt; ( Self .Attributes .OperationsNeededElements )
+ .join&gt; ( Self .Operations .OperationsNeededElements )
+ .join&gt; ( Self .Implemented .OperationsNeededElements )
+ .join&gt; ( Self .Overridden .OperationsNeededElements )
+ &gt;&gt;&gt; Result
+; // NeededElements
+
+elem_iterator ChildrenWithoutOwnFile
+ Self .Children .filter&gt; ( .NeedOwnFile ! ) &gt;&gt;&gt; Result
+; // ChildrenWithoutOwnFile
+
+elem_iterator NeededElementsTotal
+ Self .NeededElements
+ .joinWithLambded&gt; ( Self .ChildrenWithoutOwnFile ) call.me
+ &gt;&gt;&gt; Result
+; // NeededElementsTotal
+
+BOOLEAN elem_func IsForInterface
+ Self .Visibility PublicAccess == &gt;&gt;&gt; Result
+; // IsForInterface
+
+BOOLEAN elem_func IsForImplementation
+ Self .IsForInterface ! &gt;&gt;&gt; Result
+; // IsForImplementation
+
+elem_iterator IntfUses
+ [ 'l3IntfUses' ]
+ if ( Self .IsForInterface ) then
+ begin
+  .join&gt; ( Self .NeededElementsTotal )
+ end // Self .IsForInterface
+ &gt;&gt;&gt; Result
+; // IntfUses
+
+elem_iterator Used
+ Self .Dependencies .filter&gt; ( .IsStereotype st_uses::Dependency ) .mapToTarget&gt; &gt;&gt;&gt; Result
+; // Used
+
+elem_iterator UsedTotal
+ Self .Used
+ .joinWithLambded&gt; ( Self .ChildrenWithoutOwnFile ) call.me
+ .joinWithLambded&gt; ( Self .Operations ) call.me
+ &gt;&gt;&gt; Result
+; // UsedTotal
+
+elem_iterator ImplUses
+ [ 'l3ImplUses' ]
+ if ( Self .IsForImplementation ) then
+ begin
+  .join&gt; ( Self .NeededElementsTotal )
+ end // Self .IsForImplementation
+ .join&gt; ( Self .UsedTotal ) 
+ &gt;&gt;&gt; Result
+; // ImplUses
+
+elem_proc OutUnit
+ [ 'unit ' Self .UnitName ';' ] .Out
+ OutLn
+ 'interface' .Out
+ OutLn
+ 
+ ARRAY VAR l_Used
+ [] &gt;&gt;&gt; l_Used
+ 
+ Self .OutUses: l_Used ( Self .IntfUses )
+ 
+ 'implementation' .Out
+ OutLn
+ 
+ Self .OutUses: l_Used ( Self .ImplUses )
+ 
+ 'end.' .Out
+; // OutUnit
+
+elem_proc OutMixIn
+ Self .Name .Out
+; // OutMixIn
+
+elem_generator pas
+ 
+ CONST Ext '.pas'
+
+ RULES
+  ( Self .IsMixIn )
+   ( Self .OutMixIn )
+   
+  ( Self .IsInterfaces )
+   ( Self .OutUnit )
+  ( Self .IsSimpleClass )
+   ( Self .OutUnit )
+  ( Self .IsUtilityPack )
+   ( Self .OutUnit )
+  ( Self .IsStereotype st_TestClass ) 
+   ( Self .OutUnit )
+  ( Self .IsStereotype st_ExeTarget ) 
+   ( Self .OutUnit )
+  ( Self .IsStereotype st_AdapterTarget ) 
+   ( Self .OutUnit )
+  ( Self .IsStereotype st_TestTarget ) 
+   ( Self .OutUnit )
+  ( Self .IsTagTable ) 
+   ( Self .OutUnit )
+  DEFAULT
+   ( Self .dump )
+ ; // RULES
+; // pas
+
+elem_generator res.cmd
+ 
+ Inherits .pas
+
+ CONST Ext '.res.cmd'
+ 
+ BOOLEAN FUNCTION NeedOwnFile
+   ModelElement IN Self
+   
+  Self .UPisTrue "needs script" &gt;&gt;&gt; Result 
+ ; // NeedOwnFile
+  
+ [ 'MakeCo ' Self .Name '.rc.script' ] .Out
+ [ 'brcc32 ' Self .Name '.rc' ] .Out
+ //call.inherited
+; // res.cmd
+
+elem_generator rc
+ 
+ Inherits .res.cmd
+
+ CONST Ext '.rc'
+ 
+ [ Self .Name ' RCDATA LOADONCALL MOVEABLE DISCARDABLE ' Self .Name '.rc.script.co' ] .Out
+ //call.inherited
+; // rc
+
+ARRAY CompileTime-VAR g_GeneratedElements []
+%REMARK 'Ранее сгенерированные элементы'
+
+PROCEDURE .GenerateWithChildren
+ ModelElement IN Self
+ Sequence IN aGenerators
+ 
+ if ( Self g_GeneratedElements array:Has ! ) then
+ begin
+  Self array:AddTo g_GeneratedElements
+  aGenerators CodeIterator .for&gt; (
+  // - цикл по генераторам для Self
+   TtfwWord IN aGenerator
+   TF g_CurrentGenerator (
+    aGenerator &gt;&gt;&gt; g_CurrentGenerator
+    if ( Self .NeedOwnFile ) then
+     ( Self .GenerateWordToFile .CurrentGenerator )
+    else
+     ( Self .DeleteWordFile ) 
+   ) // TF g_CurrentGenerator
+  ) // aGenerators CodeIterator .for&gt;
+  
+  Self .Children 
+ //  .filter&gt; ( .NeedOwnFile )
+    .for&gt; ( aGenerators call.me )
+  // - тут генерируем детей  
+ end // Self g_GeneratedElements array:Has !
+; // .GenerateWithChildren
+
+PROCEDURE .call.generators.in.list
+ ModelElement IN Self
+ Sequence ^ IN aGenerators
+ Self aGenerators .GenerateWithChildren
+; // .call.generators.in.list
+
+PROCEDURE .Generate
+ ModelElement IN Self
+ 
+ g_GeneratedFiles = nil ?FAIL 'Массив g_GeneratedFiles не инициализирован'
+ g_GeneratedElements = nil ?FAIL 'Массив g_GeneratedElements не инициализирован'
+ 
+ Self .call.generators.in.list ( .pas .res.cmd .rc )
+ 
+; // .Generate
