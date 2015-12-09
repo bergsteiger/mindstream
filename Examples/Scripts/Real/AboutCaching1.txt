@@ -108,4 +108,21 @@ CONST D C
 <br />
 Где Dict( ... ) - внутренний словарь слова A.<br />
 <br />
+Ну и новый пример:<br/><br/>
+<pre class="brush:delphi">: A
+ VAR X
+ ACode
+; // A
+
+VAR B
+
+CONST C 1
+CONST D C
+</pre>
+<br />
+Будет представлен в словаре так:<br/><br/>
+&nbsp;( : A ACode Dict( VAR X {XValue} ) )<br />
+&nbsp;( VAR B {BValue} Dict( ) )<br />
+&nbsp;( CONST C 1 Dict( ) )<br />
+&nbsp;( CONST D ref C Dict( ) )<br />
 <br /></div>
