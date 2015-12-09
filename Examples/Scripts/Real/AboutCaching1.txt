@@ -62,4 +62,28 @@ CONST C 1
 &nbsp;( VAR B {BValue} )<br />
 &nbsp;( CONST C 1 )<br />
 <br />
+А пример:<br/><br/>
+<pre class="brush:delphi">: A
+ ACode
+; // A
+
+VAR B
+
+CONST C 1
+CONST D C
+</pre>
+Будет преставлен в словаре так:<br/>
+&nbsp;( : A ACode )<br />
+&nbsp;( VAR B {BValue} )<br />
+&nbsp;( CONST C 1 )<br />
+&nbsp;( CONST D ref C )<br />
+<br />
+<b>Обратите</b> внимание, что элемент D <b>не</b> представлен значением "1", а ссылается на элемент C - "ref C".<br/><br/>
+
+Мы этот факт потом ещё обсудим.<br/><br/>
+
+А что же со вложенными словами?<br/><br/>
+
+Как они представляются в словаре?<br/><br/>
+
 <br /></div>
