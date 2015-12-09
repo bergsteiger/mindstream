@@ -15,6 +15,16 @@
  VAR Var1
  ...
  VAR VarN
+
+ : InnerElement1
+  InnerElementCode1
+ ; // InnerElement1
+ ...
+ : InnerElementN
+  InnerElementCodeN
+ ; // InnerElementN
+
+ ElementCode
 ; // Element
 </pre>
 
