@@ -165,6 +165,9 @@ ARRAY CompileTime-VAR g_GeneratedFiles []
 TtfwWord VAR g_CurrentGenerator
 %REMARK 'Текущий генератор'
 
+WordAlias Cached: CacheMethod
+WordAlias GenCached: CacheMethod
+
 : .?
   ^ IN aWord
 
@@ -250,52 +253,64 @@ BOOLEAN elem_func IsScriptKeyword
 ; // IsScriptKeyword
 
 BOOLEAN elem_func IsSimpleClass
- RULES
-  ( Self .IsStereotype st_SimpleClass ) 
-   ( true &gt;&gt;&gt; Result )
-  ( Self .IsStereotype st_Service ) 
-   ( true &gt;&gt;&gt; Result )
-  ( Self .IsStereotype st_ServiceImplementation ) 
-   ( true &gt;&gt;&gt; Result )
-  ( Self .IsScriptKeyword ) 
-   ( true &gt;&gt;&gt; Result )
-  ( Self .IsStereotype st_TestCase ) 
-   ( true &gt;&gt;&gt; Result )
-  ( Self .IsStereotype st_GuiControl ) 
-   ( true &gt;&gt;&gt; Result )
-  ( Self .IsStereotype st_VCMForm ) 
-   ( true &gt;&gt;&gt; Result )
-  ( Self .IsStereotype st_VCMFinalForm ) 
-   ( true &gt;&gt;&gt; Result )
-  ( Self .IsStereotype st_VCMContainer ) 
-   ( true &gt;&gt;&gt; Result )
-  ( Self .IsStereotype st_VCMFinalContainer ) 
-   ( true &gt;&gt;&gt; Result )
-  DEFAULT
-   ( false &gt;&gt;&gt; Result )
- ; // RULES  
+ Cached:
+ (
+  RULES
+   ( Self .IsStereotype st_SimpleClass ) 
+    true
+   ( Self .IsStereotype st_Service ) 
+    true
+   ( Self .IsStereotype st_ServiceImplementation ) 
+    true
+   ( Self .IsScriptKeyword ) 
+    true
+   ( Self .IsStereotype st_TestCase ) 
+    true
+   ( Self .IsStereotype st_GuiControl ) 
+    true
+   ( Self .IsStereotype st_VCMForm ) 
+    true
+   ( Self .IsStereotype st_VCMFinalForm ) 
+    true
+   ( Self .IsStereotype st_VCMContainer ) 
+    true
+   ( Self .IsStereotype st_VCMFinalContainer ) 
+    true
+   DEFAULT
+    false 
+  ; // RULES
+ )  
+ &gt;&gt;&gt; Result
 ; // IsSimpleClass
  
 BOOLEAN elem_func IsUtilityPack
- RULES
-  ( Self .IsStereotype st_UtilityPack )
-   ( true &gt;&gt;&gt; Result )
-  ( Self .IsStereotype st_ScriptKeywordsPack ) 
-   ( true &gt;&gt;&gt; Result )
-  DEFAULT
-   ( false &gt;&gt;&gt; Result )
- ; // RULES 
+ Cached:
+ (
+  RULES
+   ( Self .IsStereotype st_UtilityPack )
+    true
+   ( Self .IsStereotype st_ScriptKeywordsPack ) 
+    true
+   DEFAULT
+    false
+  ; // RULES 
+ ) 
+ &gt;&gt;&gt; Result
 ; // IsUtilityPack
 
 BOOLEAN elem_func IsInterfaces
- RULES
-  ( Self .IsStereotype st_Interfaces ) 
-   ( true &gt;&gt;&gt; Result )
-  ( Self .IsStereotype st_InternalInterfaces )
-   ( true &gt;&gt;&gt; Result )
-  DEFAULT
-   ( false &gt;&gt;&gt; Result )
- ; // RULES 
+ Cached:
+ (
+  RULES
+   ( Self .IsStereotype st_Interfaces ) 
+    true
+   ( Self .IsStereotype st_InternalInterfaces )
+    true
+   DEFAULT
+    false
+  ; // RULES 
+ )
+ &gt;&gt;&gt; Result
 ; // IsInterfaces
 
 BOOLEAN elem_func IsMixIn
@@ -306,72 +321,102 @@ BOOLEAN elem_func IsPureMixIn
  Self .IsStereotype st_PureMixIn &gt;&gt;&gt; Result
 ; // IsPureMixIn
 
+BOOLEAN elem_func IsTypedef
+ Self .IsStereotype st_Typedef &gt;&gt;&gt; Result
+; // IsTypedef
+
 BOOLEAN elem_func IsTagTable
  Self .IsStereotype st_TagTable &gt;&gt;&gt; Result
 ; // IsTagTable
 
+BOOLEAN elem_func IsTarget
+ Cached:
+ (
+  RULES
+   ( Self .IsStereotype st_ExeTarget ) 
+    true
+    
+   ( Self .IsStereotype st_AdapterTarget ) 
+    true
+    
+   ( Self .IsStereotype st_TestTarget ) 
+    true
+    
+   DEFAULT
+    false
+  ; // RULES
+ )
+ &gt;&gt;&gt; Result
+; // IsTarget
+
 BOOLEAN FUNCTION NeedOwnFile
  ModelElement IN Self
- 
- RULES
-  ( Self .IsStereotype st_ScriptKeywords ) 
-   ( false &gt;&gt;&gt; Result )
+ Cached:
+ (
+  RULES
+   ( Self .IsStereotype st_ScriptKeywords ) 
+    false 
+    
+   ( Self .IsStereotype st_TestClass ) 
+    true
+    
+   ( Self .IsStereotype st_Atom ) 
+    true
+    
+   ( Self .IsStereotype st_Tag ) 
+    true
+    
+   ( Self .IsTarget ) 
+    true
+    
+   ( Self .IsStereotype st_TestResults ) 
+    true
+    
+   ( Self .IsTagTable ) 
+    true
+    
+   ( Self .IsInterfaces )
+    true
    
-  ( Self .IsStereotype st_TestClass ) 
-   ( true &gt;&gt;&gt; Result )
+   ( Self .IsUtilityPack )
+    true
    
-  ( Self .IsStereotype st_ExeTarget ) 
-   ( true &gt;&gt;&gt; Result )
+   ( Self .IsMixIn )
+    true
    
-  ( Self .IsStereotype st_AdapterTarget ) 
-   ( true &gt;&gt;&gt; Result )
+   ( Self .IsSimpleClass )
+   begin
+    RULES
+     ( Self .Visibility = ProtectedAccess )
+      false
+     ( Self .Visibility = PrivateAccess )
+      false
+     DEFAULT
+      ( 
+       ModelElement VAR l_Parent
+       Self .Parent &gt;&gt;&gt; l_Parent
+       if (
+           ( l_Parent .IsSimpleClass ) 
+           OR ( l_Parent .IsMixIn )
+           OR ( l_Parent .IsUtilityPack )
+           OR ( l_Parent .IsInterfaces )
+          ) then
+       begin
+        false
+       end 
+       else
+       begin
+        true
+       end 
+      )
+    ; // RULES
+   end
    
-  ( Self .IsStereotype st_TestTarget ) 
-   ( true &gt;&gt;&gt; Result )
-   
-  ( Self .IsTagTable ) 
-   ( true &gt;&gt;&gt; Result )
-   
-  ( Self .IsInterfaces )
-   ( true &gt;&gt;&gt; Result )
-  
-  ( Self .IsUtilityPack )
-   ( true &gt;&gt;&gt; Result )
-  
-  ( Self .IsMixIn )
-   ( true &gt;&gt;&gt; Result )
-  
-  ( Self .IsSimpleClass )
-  begin
-   RULES
-    ( Self .Visibility = ProtectedAccess )
-     ( false &gt;&gt;&gt; Result )
-    ( Self .Visibility = PrivateAccess )
-     ( false &gt;&gt;&gt; Result )
-    DEFAULT
-     ( 
-      ModelElement VAR l_Parent
-      Self .Parent &gt;&gt;&gt; l_Parent
-      if (
-          ( l_Parent .IsSimpleClass ) 
-          OR ( l_Parent .IsMixIn )
-          OR ( l_Parent .IsUtilityPack )
-          OR ( l_Parent .IsInterfaces )
-         ) then
-      begin
-       false &gt;&gt;&gt; Result
-      end 
-      else
-      begin
-       true &gt;&gt;&gt; Result
-      end 
-     )
-   ; // RULES
-  end
-  
-  DEFAULT
-   ( false &gt;&gt;&gt; Result )
- ; // RULES
+   DEFAULT
+    false
+  ; // RULES
+ )
+ &gt;&gt;&gt; Result
 ; // NeedOwnFile
 
 PROCEDURE .CurrentGenerator
@@ -503,40 +548,47 @@ STRING FUNCTION .CutT
 ; // .CutT
 
 STRING elem_func UnitName
- RULES
-  ( Self IsNil )
-    ''
-  ( Self .IsTagTable )
-   ( Self .Name '_Schema' Cat )
-  ( Self .IsScriptKeyword )
-   ( Self .Name .CutT )
-  ( Self .IsSimpleClass )
-   ( Self .Name .CutT )
-  DEFAULT
-   ( Self .Name )
- ; // RULES
+ GenCached:
+ (
+  STRING VAR l_Path
+  Self .GetUP 'intf.pas:Path' &gt;&gt;&gt; l_Path
+  RULES
+   ( l_Path &lt;&gt; '' )
+    ( 'w:\' 
+      // - это потому, что в пути нету диска, а для ExtractFileName он нужен
+      l_Path Cat sysutils:ExtractFileName '' sysutils:ChangeFileExt 
+      'NOT_FINISHED_' '' string:ReplaceFirst
+    )
+   ( Self IsNil )
+     ''
+   ( Self .IsTagTable )
+    ( Self .Name '_Schema' Cat )
+   ( Self .IsScriptKeyword )
+    ( Self .Name .CutT )
+   ( Self .IsSimpleClass )
+    ( Self .Name .CutT )
+   DEFAULT
+    ( Self .Name )
+  ; // RULES
+ )
  &gt;&gt;&gt; Result
 ; // UnitName
 
 ModelElement elem_func UnitProducer
- if ( Self IsNil ) then
- begin
-  nil &gt;&gt;&gt; Result
- end
- else
- if ( Self IsString ) then
- begin
-  Self &gt;&gt;&gt; Result
- end // Self IsString
- else
- if ( Self .NeedOwnFile ) then
- begin
-  Self &gt;&gt;&gt; Result
- end // Self .NeedOwnFile
- else
- begin
-  Self .Parent call.me &gt;&gt;&gt; Result
- end // Self .NeedOwnFile
+ GenCached:
+ (
+  RULES
+   ( Self IsNil )
+    nil
+   ( Self IsString )
+    Self
+   ( Self .NeedOwnFile )
+    Self
+   DEFAULT 
+    ( Self .Parent call.me )
+  ; // RULES
+ )
+ &gt;&gt;&gt; Result
 ; // UnitProducer
 
 ARRAY FUNCTION .filterNil&gt;
@@ -612,43 +664,90 @@ ARRAY FUNCTION .joinWithLambded&gt;
  &gt;&gt;&gt; Result
 ; // .joinWithLambded&gt;
 
+ARRAY FUNCTION .mapToTargetAndValueType&gt;
+  ARRAY IN anArray
+ anArray .mapToTarget&gt;
+ .join&gt; ( anArray .map&gt; .ValueType )
+ &gt;&gt;&gt; Result
+; // .mapToTargetAndValueType&gt;
+
+elem_iterator AttributesAndOperations
+ Cached:
+ (
+  Self .Attributes
+  .join&gt; ( Self .Operations )
+ )
+ &gt;&gt;&gt; Result
+; // AttributesAndOperations
+
+elem_iterator ChildrenWithoutOwnFile
+ Cached:
+ ( 
+  Self .Children .filter&gt; ( .NeedOwnFile ! ) 
+ )
+ &gt;&gt;&gt; Result
+; // ChildrenWithoutOwnFile
+
+elem_iterator ConstantsAndChildrenWithoutOwnFile
+ Cached:
+ ( 
+  Self .Constants
+  .join&gt; ( Self .ChildrenWithoutOwnFile )
+ )
+ &gt;&gt;&gt; Result
+; // ConstantsAndChildrenWithoutOwnFile
+
+elem_iterator AllOwnChildren
+ Cached:
+ ( 
+  Self .ConstantsAndChildrenWithoutOwnFile
+  .join&gt; ( Self .AttributesAndOperations )
+ )
+ &gt;&gt;&gt; Result
+; // AllOwnChildren
+
 ARRAY FUNCTION .OperationsNeededElements
   ARRAY IN anArray
- anArray .mapToTarget&gt; 
- .join&gt; ( anArray .map&gt; .ValueType )
- .joinWithLambded&gt; anArray ( .Parameters .mapToTarget&gt; )
- .joinWithLambded&gt; anArray ( .Parameters .map&gt; .ValueType )
- .joinWithLambded&gt; anArray ( .Attributes call.me )
- .joinWithLambded&gt; anArray ( .Operations call.me )
+ anArray .mapToTargetAndValueType&gt;
+ .joinWithLambded&gt; anArray ( .Parameters .mapToTargetAndValueType&gt; )
+ .joinWithLambded&gt; anArray ( .AttributesAndOperations call.me )
  &gt;&gt;&gt; Result 
 ; // .OperationsNeededElements
 
 elem_iterator NeededElements
  ( Self .Inherits )
  .join&gt; ( Self .Implements )
- .join&gt; ( Self .Attributes .OperationsNeededElements )
- .join&gt; ( Self .Operations .OperationsNeededElements )
+ .join&gt; ( Self .AttributesAndOperations .OperationsNeededElements )
+ 
+ if ( Self .IsTypedef ! ) then
+ begin
  .join&gt; ( Self .Implemented .OperationsNeededElements )
  .join&gt; ( Self .Overridden .OperationsNeededElements )
+ end // Self .IsTypedef !
+ 
  &gt;&gt;&gt; Result
 ; // NeededElements
 
-elem_iterator ChildrenWithoutOwnFile
- Self .Children .filter&gt; ( .NeedOwnFile ! ) &gt;&gt;&gt; Result
-; // ChildrenWithoutOwnFile
-
 elem_iterator NeededElementsTotal
  Self .NeededElements
- .joinWithLambded&gt; ( Self .ChildrenWithoutOwnFile ) call.me
+ .joinWithLambded&gt; ( Self .ConstantsAndChildrenWithoutOwnFile ) call.me
  &gt;&gt;&gt; Result
 ; // NeededElementsTotal
 
 BOOLEAN elem_func IsForInterface
- Self .Visibility PublicAccess == &gt;&gt;&gt; Result
+ Cached:
+ (
+  Self .Visibility PublicAccess == 
+ ) 
+ &gt;&gt;&gt; Result
 ; // IsForInterface
 
 BOOLEAN elem_func IsForImplementation
- Self .IsForInterface ! &gt;&gt;&gt; Result
+ Cached:
+ (
+  Self .IsForInterface ! 
+ ) 
+ &gt;&gt;&gt; Result
 ; // IsForImplementation
 
 elem_iterator IntfUses
@@ -660,14 +759,47 @@ elem_iterator IntfUses
  &gt;&gt;&gt; Result
 ; // IntfUses
 
+BOOLEAN elem_func IsInterface
+ Self .IsStereotype st_Facet &gt;&gt;&gt; Result
+; // IsInterface
+
+elem_iterator InjectedElements
+ Self .Injected .filter&gt; ( .IsStereotype st_injects::Dependency ) .map&gt; .Parent
+ &gt;&gt;&gt; Result
+; // InjectedElements
+
+BOOLEAN elem_func IsClassImplementable
+ Cached:
+ (
+  RULES
+   ( Self .IsPureMixIn )
+    false
+   ( Self .IsMixIn )
+    false
+   ( Self .IsStereotype st_Atom )
+    false 
+   DEFAULT
+    true
+  ; // RULES
+ )
+ &gt;&gt;&gt; Result
+; // IsClassImplementable
+
 elem_iterator Used
- Self .Dependencies .filter&gt; ( .IsStereotype st_uses::Dependency ) .mapToTarget&gt; &gt;&gt;&gt; Result
+ Cached:
+ (
+  Self .Dependencies .filter&gt; ( .IsStereotype st_uses::Dependency ) .mapToTarget&gt; 
+  if ( Self .IsInterface ! ) then
+  begin
+   .join&gt; ( Self .InjectedElements )
+  end // Self .IsInterface !
+ )
+ &gt;&gt;&gt; Result
 ; // Used
 
 elem_iterator UsedTotal
  Self .Used
- .joinWithLambded&gt; ( Self .ChildrenWithoutOwnFile ) call.me
- .joinWithLambded&gt; ( Self .Operations ) call.me
+ .joinWithLambded&gt; ( Self .AllOwnChildren ) call.me
  &gt;&gt;&gt; Result
 ; // UsedTotal
 
@@ -681,6 +813,142 @@ elem_iterator ImplUses
  &gt;&gt;&gt; Result
 ; // ImplUses
 
+STRING elem_func TypeName
+ Cached:
+ (
+  STRING VAR l_ExtName
+  Self .GetUP 'extprop:pas:TypeName' &gt;&gt;&gt; l_ExtName
+  RULES
+   ( l_ExtName &lt;&gt; '' )
+    l_ExtName
+   DEFAULT
+    ( Self .Name )
+  ; // RULES
+ )
+ &gt;&gt;&gt; Result
+; // TypeName
+
+BOOLEAN elem_func IsClass
+ Self .IsSimpleClass &gt;&gt;&gt; Result
+; // IsClass
+
+ModelElement elem_func MainAncestor
+ Cached:
+ (
+  ModelElement VAR l_Found
+  nil &gt;&gt;&gt; l_Found
+  Self .Inherits .trunc&gt; ( DROP l_Found IsNil ) .for&gt; ( &gt;&gt;&gt; l_Found )
+  l_Found
+ )
+ &gt;&gt;&gt; Result
+; // MainAncestor
+
+: .With()
+  OUTABLE IN aValue
+ if ( aValue IsNil ! ) then
+  [ '(' aValue ')' ]
+; // .With()
+
+elem_proc OutDocumentation
+ STRING VAR l_Doc
+ Self .Documentation &gt;&gt;&gt; l_Doc
+ if ( l_Doc IsNil ! ) then
+ begin
+  l_Doc '{' '[' string:Replace &gt;&gt;&gt; l_Doc
+  l_Doc '}' ']' string:Replace &gt;&gt;&gt; l_Doc
+  Indented: ( [ '{* ' l_Doc ' }' ] .Out )
+ end // l_Doc IsNil !
+; // OutDocumentation
+
+elem_proc OutClass
+ [ Self .TypeName ' = class' 
+  [ Self .MainAncestor ] 
+  .join&gt; ( 
+   Self .Implements 
+   .filter&gt; .IsClassImplementable
+  ) 
+  .map&gt; .TypeName
+  ', ' strings:CatSep
+  .With() 
+ ] .Out
+ 
+ Self .OutDocumentation
+ 
+ [ 'end;//' Self .TypeName ] .Out
+; // OutClass
+
+elem_proc OutInterface
+ [ Self .TypeName ' = interface' Self .MainAncestor .TypeName .With() ] .Out
+ [ 'end;//' Self .TypeName ] .Out
+; // OutInterface
+
+elem_proc OutType
+ RULES
+  ( Self .IsClass )
+   ( Self .OutClass )
+  ( Self .IsInterface )
+   ( Self .OutInterface )
+  DEFAULT
+   ( [ '// ' Self .TypeName ] .Out )
+ ; // RULES 
+ OutLn
+; // OutType
+
+BOOLEAN elem_func IsType
+ Cached:
+ (
+  RULES
+   ( Self .IsUtilityPack )
+    false
+   ( Self .IsInterfaces )
+    false
+   ( Self .IsTarget )
+    false
+   DEFAULT
+    true
+  ; // RULES
+ )
+ &gt;&gt;&gt; Result
+; // IsType
+
+elem_proc OutTypes
+  ^ IN aValid
+  
+ BOOLEAN VAR l_WasType 
+ 
+ false &gt;&gt;&gt; l_WasType
+ 
+ elem_proc DoOutTypes
+  Self .ChildrenWithoutOwnFile .for&gt; call.me
+  if ( Self aValid DO ) then
+  begin
+   if ( Self .IsType ) then
+   begin
+    if ( l_WasType ! ) then
+    begin
+     'type' .Out
+     true &gt;&gt;&gt; l_WasType
+    end
+    Indented: ( Self .OutType )
+   end // Self .IsType
+  end 
+ ; // DoOutTypes
+ 
+ Self .DoOutTypes
+; // OutTypes
+
+elem_proc OutInterfaceSection
+
+ Self .OutTypes .IsForInterface
+ 
+; // OutInterfaceSection
+
+elem_proc OutImplementationSection
+
+ Self .OutTypes .IsForImplementation
+ 
+; // OutImplementationSection
+
 elem_proc OutUnit
  [ 'unit ' Self .UnitName ';' ] .Out
  OutLn
@@ -692,10 +960,14 @@ elem_proc OutUnit
  
  Self .OutUses: l_Used ( Self .IntfUses )
  
+ Self .OutInterfaceSection
+ 
  'implementation' .Out
  OutLn
  
  Self .OutUses: l_Used ( Self .ImplUses )
+ 
+ Self .OutImplementationSection
  
  'end.' .Out
 ; // OutUnit
@@ -720,11 +992,7 @@ elem_generator pas
    ( Self .OutUnit )
   ( Self .IsStereotype st_TestClass ) 
    ( Self .OutUnit )
-  ( Self .IsStereotype st_ExeTarget ) 
-   ( Self .OutUnit )
-  ( Self .IsStereotype st_AdapterTarget ) 
-   ( Self .OutUnit )
-  ( Self .IsStereotype st_TestTarget ) 
+  ( Self .IsTarget ) 
    ( Self .OutUnit )
   ( Self .IsTagTable ) 
    ( Self .OutUnit )
