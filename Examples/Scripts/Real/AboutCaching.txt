@@ -7,7 +7,7 @@
 У нас все элементы, что "модели", что вообще говоря "словаря скриптовой машины" выглядят примерно так:
 
 <pre class=brush:delphi>
-: Element
+: OuterElement1
  CONST Const1 Value1
  ...
  CONST ConstN ValueN
@@ -24,7 +24,36 @@
   InnerElementCodeN
  ; // InnerElementN
 
- ElementCode
-; // Element
+ OuterElementCode1
+; // OuterElement1
+...
+: OuterElementN
+ CONST Const1 Value1
+ ...
+ CONST ConstN ValueN
+
+ VAR Var1
+ ...
+ VAR VarN
+
+ : InnerElement1
+  InnerElementCode1
+ ; // InnerElement1
+ ...
+ : InnerElementN
+  InnerElementCodeN
+ ; // InnerElementN
+
+ OuterElementCodeN
+; // OuterElementN
 </pre>
+
+Что тут написано?
+
+Договоримся для начала, что "элемент словаря" и "слово" - это ТОЖДЕСТВЕННЫЕ понятия, если другое не оговорено особо.
+
+: - определяет новый элемент словаря.
+CONST - определяет константу внутри элемента словаря.
+VAR - определяет переменную внутри элемента словаря.
+[XXX]ElementCode[YYY] - "код" слова, который будет выполнен при "вызове" слова.
 
