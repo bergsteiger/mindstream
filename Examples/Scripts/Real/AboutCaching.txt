@@ -1,0 +1,16 @@
+О кешировании.
+
+"Предыдущая" серия была тут - http://programmingmindstream.blogspot.ru/2015/12/1145.html
+
+Теперь хотелось бы поговорить о кешировании значений функций.
+
+У нас все элементы, что "модели", что вообще говоря "словаря скриптовой машины" выглядят примерно так:
+
+<pre class=brush:delphi>
+: Element
+ CONST Const1 Value1
+ ...
+ CONST ConstN ValueN
+; // Element
+</pre>
+
