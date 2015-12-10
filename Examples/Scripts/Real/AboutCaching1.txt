@@ -219,4 +219,29 @@ end
 А можно ли обойтись без <b>@</b> и <b>DO</b>?<br/><br/>
 
 Ответ - можно.<br/><br/>
+
+Для этого у нас есть слово - <b>::</b>.<br/><br/>
+
+Вот как оно определено:<br/><br/>
+<pre class=brush:delphi>
+^@ operator ::
+ ^@ IN aSelf
+ ^L IN aName
+
+ OBJECT VAR l_Self
+ aSelf |^@ >>> l_Self
+ 
+ STRING VAR l_Name
+ aName |N >>> l_Name
+ 
+ OBJECT VAR l_Res
+ l_Self %% l_Name >>> l_Res
+ 
+ ASSURE 
+  NOT ( l_Res pop:object:IsNil ) 
+  [ 'Не найдено поле: ' l_Self LIST %P Reverted ==> ( |N '::' ) l_Self |N '::' l_Name ]
+ l_Res >>> Result
+; // ::
+</pre>
+<br/>
 <br /></div>
