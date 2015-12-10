@@ -325,6 +325,34 @@ BOOLEAN elem_func IsTypedef
  Self .IsStereotype st_Typedef &gt;&gt;&gt; Result
 ; // IsTypedef
 
+BOOLEAN elem_func IsEnum
+ Self .IsStereotype st_Enum &gt;&gt;&gt; Result
+; // IsEnum
+
+BOOLEAN elem_func IsRecord
+ Self .IsStereotype st_Struct &gt;&gt;&gt; Result
+; // IsRecord
+
+BOOLEAN elem_func IsStaticObject
+ Self .IsStereotype st_StaticObject &gt;&gt;&gt; Result
+; // IsStaticObject
+
+BOOLEAN elem_func IsArray
+ Self .IsStereotype st_Vector &gt;&gt;&gt; Result
+; // IsArray
+
+BOOLEAN elem_func IsElementProxy
+ Self .IsStereotype st_ElementProxy &gt;&gt;&gt; Result
+; // IsElementProxy
+
+BOOLEAN elem_func IsSetOf
+ Self .IsStereotype st_SetOf &gt;&gt;&gt; Result
+; // IsSetOf
+
+BOOLEAN elem_func IsException
+ Self .IsStereotype st_Exception &gt;&gt;&gt; Result
+; // IsException
+
 BOOLEAN elem_func IsTagTable
  Self .IsStereotype st_TagTable &gt;&gt;&gt; Result
 ; // IsTagTable
@@ -349,6 +377,10 @@ BOOLEAN elem_func IsTarget
  &gt;&gt;&gt; Result
 ; // IsTarget
 
+BOOLEAN elem_func IsEvdSchemaElement
+ Self .IsStereotype st_Atom &gt;&gt;&gt; Result
+; // IsEvdSchemaElement
+
 BOOLEAN FUNCTION NeedOwnFile
  ModelElement IN Self
  Cached:
@@ -360,10 +392,7 @@ BOOLEAN FUNCTION NeedOwnFile
    ( Self .IsStereotype st_TestClass ) 
     true
     
-   ( Self .IsStereotype st_Atom ) 
-    true
-    
-   ( Self .IsStereotype st_Tag ) 
+   ( Self .IsEvdSchemaElement ) 
     true
     
    ( Self .IsTarget ) 
@@ -382,6 +411,9 @@ BOOLEAN FUNCTION NeedOwnFile
     true
    
    ( Self .IsMixIn )
+    true
+   
+   ( Self .IsElementProxy )
     true
    
    ( Self .IsSimpleClass )
@@ -561,6 +593,8 @@ STRING elem_func UnitName
     )
    ( Self IsNil )
      ''
+   ( Self .IsElementProxy )
+    ( Self .Name '_Proxy' Cat )
    ( Self .IsTagTable )
     ( Self .Name '_Schema' Cat )
    ( Self .IsScriptKeyword )
@@ -776,7 +810,7 @@ BOOLEAN elem_func IsClassImplementable
     false
    ( Self .IsMixIn )
     false
-   ( Self .IsStereotype st_Atom )
+   ( Self .IsEvdSchemaElement )
     false 
    DEFAULT
     true
@@ -832,16 +866,29 @@ BOOLEAN elem_func IsClass
  Self .IsSimpleClass &gt;&gt;&gt; Result
 ; // IsClass
 
+: .FirstElement
+  ARRAY IN anArray
+ ModelElement VAR l_Found
+ nil &gt;&gt;&gt; l_Found
+ anArray .trunc&gt; ( DROP l_Found IsNil ) .for&gt; ( &gt;&gt;&gt; l_Found )
+ l_Found
+; // .FirstElement
+
 ModelElement elem_func MainAncestor
  Cached:
  (
-  ModelElement VAR l_Found
-  nil &gt;&gt;&gt; l_Found
-  Self .Inherits .trunc&gt; ( DROP l_Found IsNil ) .for&gt; ( &gt;&gt;&gt; l_Found )
-  l_Found
+  Self .Inherits .FirstElement
  )
  &gt;&gt;&gt; Result
 ; // MainAncestor
+
+ModelElement elem_func FirstAttribute
+ Cached:
+ (
+  Self .Attributes .FirstElement
+ )
+ &gt;&gt;&gt; Result
+; // FirstAttribute
 
 : .With()
   OUTABLE IN aValue
@@ -879,19 +926,155 @@ elem_proc OutClass
 
 elem_proc OutInterface
  [ Self .TypeName ' = interface' Self .MainAncestor .TypeName .With() ] .Out
+ Self .OutDocumentation
  [ 'end;//' Self .TypeName ] .Out
 ; // OutInterface
 
+elem_proc OutRecord
+ [ Self .TypeName ' = record' ] .Out
+ Self .OutDocumentation
+ [ 'end;//' Self .TypeName ] .Out
+; // OutRecord
+
+elem_proc OutStaticObject
+ [ Self .TypeName ' = object' Self .MainAncestor .TypeName .With() ] .Out
+ Self .OutDocumentation
+ [ 'end;//' Self .TypeName ] .Out
+; // OutStaticObject
+
+elem_proc OutPureMixIn
+ '(*' .Out
+ Self .OutInterface
+ '*)' .Out
+; // OutPureMixIn
+
+elem_proc OutTypedef
+ ModelElement VAR l_MainAncestor
+ Self .MainAncestor &gt;&gt;&gt; l_MainAncestor
+ [ Self .TypeName 
+   ' = ' 
+   if ( Self .UPisTrue "isPointer" ) then
+    '^'
+   if ( Self .UPisTrue "isClassRef" ) then
+    'class of '
+   if ( Self .UPisTrue "isPointer" ! ) then
+   begin
+    STRING VAR l_OtherUnit
+    l_MainAncestor .UnitProducer .UnitName &gt;&gt;&gt; l_OtherUnit
+    if ( l_OtherUnit '' != ) then
+    begin
+     if ( Self .TypeName l_MainAncestor .TypeName == ) then
+     begin
+      STRING VAR l_OurUnit
+      Self .UnitProducer .UnitName &gt;&gt;&gt; l_OurUnit
+      if ( l_OurUnit l_OtherUnit != ) then
+      begin
+       l_OtherUnit '.'
+      end // l_OurUnit l_OtherUnit !=
+     end // Self .TypeName l_MainAncestor .TypeName ==
+    end // l_OtherUnit '' !=
+   end // Self .UPisTrue "isPointer" !
+   l_MainAncestor .TypeName 
+   ';' 
+ ] .Out
+ Self .OutDocumentation
+; // OutTypedef
+
+elem_proc OutEnum
+ [ Self .TypeName ' = (' ] .Out
+ Self .OutDocumentation
+  STRING VAR l_Prefix
+  Self .GetUP 'extprop:pas:ElementPrefix' &gt;&gt;&gt; l_Prefix
+  BOOLEAN VAR l_NeedComma
+  false &gt;&gt;&gt; l_NeedComma
+  Indented: ( 
+   Self .Attributes .for&gt; (
+     IN aChild
+    l_Prefix aChild .Name Cat 
+     .WithComma: l_NeedComma .Out
+    aChild .OutDocumentation
+   ) // Self .Attributes .for&gt;
+  ) // Indented:
+ [ ');//' Self .TypeName ] .Out
+; // OutEnum
+
+elem_proc OutSetOf
+ [ Self .TypeName ' = set of ' Self .MainAncestor .TypeName ';' ] .Out
+ Self .OutDocumentation
+; // OutSetOf
+
+elem_proc OutArray
+ if ( Self .GetUP "array type" 'open' != ) then
+ begin
+  [ 
+   Self .TypeName ' = array ' 
+   if ( Self .MainAncestor IsNil ! ) then
+   begin
+    '[' Self .MainAncestor .TypeName '] '
+   end // ( Self .MainAncestor IsNil ! )
+   'of ' 
+   Self .FirstAttribute .Target .TypeName ';'
+  ] .Out
+  Self .OutDocumentation
+ end // ( Self .GetUP "array type" 'open' != )
+; // OutArray
+
+ARRAY CompileTime-VAR g_OutedTypes []
+
+elem_proc OutForward
+ if ( Self g_OutedTypes array:Has ! ) then
+ begin
+  RULES
+   ( Self .IsPureMixIn ) 
+    ()
+   ( Self .IsClass )
+    ( [ Self .TypeName ' = class;' ] .Out OutLn )
+   ( Self .IsInterface )
+    ( [ Self .TypeName ' = interface;' ] .Out OutLn )
+  ; // RULES  
+ end // ( Self g_OutedTypes array:Has ! )
+; // OutForward
+
 elem_proc OutType
  RULES
-  ( Self .IsClass )
-   ( Self .OutClass )
-  ( Self .IsInterface )
-   ( Self .OutInterface )
+  ( Self .IsUtilityPack )
+   ()
+  ( Self .IsInterfaces )
+   ()
   DEFAULT
-   ( [ '// ' Self .TypeName ] .Out )
- ; // RULES 
- OutLn
+   (
+    if ( Self g_OutedTypes array:Has ! ) then
+    begin
+     Self array:AddTo g_OutedTypes
+     Self .Forwarded .for&gt; .OutForward
+     RULES
+      ( Self .IsSetOf )
+       ( Self .OutSetOf )
+      ( Self .IsArray )
+       ( Self .OutArray )
+      ( Self .IsEnum )
+       ( Self .OutEnum )
+      ( Self .IsTypedef )
+       ( Self .OutTypedef )
+      ( Self .IsException )
+       ( Self .OutClass )
+      ( Self .IsClass )
+       ( Self .OutClass )
+      ( Self .IsPureMixIn ) 
+       ( Self .OutPureMixIn )
+      ( Self .IsInterface )
+       ( Self .OutInterface )
+      ( Self .IsStaticObject )
+       ( Self .OutStaticObject )
+      ( Self .IsRecord )
+       ( Self .OutRecord )
+      DEFAULT
+       ( [ '// ' Self .TypeName ] .Out )
+     ; // RULES 
+     OutLn
+    end // ( Self g_OutedTypes array:Has ! )
+   ) // DEFAULT
+ ; // RULES
 ; // OutType
 
 BOOLEAN elem_func IsType
@@ -903,6 +1086,10 @@ BOOLEAN elem_func IsType
    ( Self .IsInterfaces )
     false
    ( Self .IsTarget )
+    false
+   ( Self .IsEvdSchemaElement )
+    false
+   ( Self .IsPureMixIn )
     false
    DEFAULT
     true
@@ -928,9 +1115,9 @@ elem_proc OutTypes
     begin
      'type' .Out
      true &gt;&gt;&gt; l_WasType
-    end
-    Indented: ( Self .OutType )
+    end // l_WasType !
    end // Self .IsType
+   Indented: ( Self .OutType )
   end 
  ; // DoOutTypes
  
@@ -950,26 +1137,28 @@ elem_proc OutImplementationSection
 ; // OutImplementationSection
 
 elem_proc OutUnit
- [ 'unit ' Self .UnitName ';' ] .Out
- OutLn
- 'interface' .Out
- OutLn
- 
- ARRAY VAR l_Used
- [] &gt;&gt;&gt; l_Used
- 
- Self .OutUses: l_Used ( Self .IntfUses )
- 
- Self .OutInterfaceSection
- 
- 'implementation' .Out
- OutLn
- 
- Self .OutUses: l_Used ( Self .ImplUses )
- 
- Self .OutImplementationSection
- 
- 'end.' .Out
+ TF g_OutedTypes (
+  [ 'unit ' Self .UnitName ';' ] .Out
+  OutLn
+  'interface' .Out
+  OutLn
+  
+  ARRAY VAR l_Used
+  [] &gt;&gt;&gt; l_Used
+  
+  Self .OutUses: l_Used ( Self .IntfUses )
+  
+  Self .OutInterfaceSection
+  
+  'implementation' .Out
+  OutLn
+  
+  Self .OutUses: l_Used ( Self .ImplUses )
+  
+  Self .OutImplementationSection
+  
+  'end.' .Out
+ ) // TF g_OutedTypes
 ; // OutUnit
 
 elem_proc OutMixIn
@@ -986,7 +1175,11 @@ elem_generator pas
    
   ( Self .IsInterfaces )
    ( Self .OutUnit )
+  ( Self .IsEvdSchemaElement )
+   ( Self .OutUnit )
   ( Self .IsSimpleClass )
+   ( Self .OutUnit )
+  ( Self .IsElementProxy )
    ( Self .OutUnit )
   ( Self .IsUtilityPack )
    ( Self .OutUnit )
