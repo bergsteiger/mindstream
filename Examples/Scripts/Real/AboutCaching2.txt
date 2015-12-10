@@ -4,76 +4,72 @@
 Предыдущая серия была тут - <a href="http://programmingmindstream.blogspot.ru/2015/12/1148.html">http://programmingmindstream.blogspot.ru/2015/12/1148.html</a>.<br />
 <br />
 <br />
-
-Там мы поговорили про внутреннее устройство слов словарей.<br/><br/>
-
-А также обсудили возможность получения внутренних элементов слов по их имени.<br/><br/>
-
-И там у нас возник вопрос:<br/><br/>
-
+Там мы поговорили про внутреннее устройство слов словарей.<br />
+<br />
+А также обсудили возможность получения внутренних элементов слов по их имени.<br />
+<br />
+И там у нас возник вопрос:<br />
+<br />
 Теперь возникает закономерный вопрос - "а если мы можем получать внутренние элементы слов, то можем ли мы добавлять новые элементы?"<br />
 <br />
 Ответ - "да можем".<br />
 <br />
 Как?<br />
 <br />
-
-Сейчас мы это рассмотрим.<br/><br/>
-
-Мы уже рассмотрели слова <b>%%</b> и <b>::</b>. Теперь рассмотрим слово <b>-></b>.<br/><br/>
-
-Вот его определение:<br/><br/>
-<pre class=brush:delphi>
-OBJECT operator ->^
+Сейчас мы это рассмотрим.<br />
+<br />
+Мы уже рассмотрели слова <b>%%</b> и <b>::</b>. Теперь рассмотрим слово <b>-&gt;</b>.<br />
+<br />
+Вот его определение:<br />
+<br />
+<pre class="brush:delphi">OBJECT operator -&gt;^
  ^@ IN aSelf
  ^ IN aName
  
  STRING VAR l_Name
- aName DO >>> l_Name
+ aName DO &gt;&gt;&gt; l_Name
  
  OBJECT VAR l_Self
- aSelf |^@ >>> l_Self
+ aSelf |^@ &gt;&gt;&gt; l_Self
  
  if ( l_Self pop:object:IsNil ) then
  begin
-  nil >>> Result
+  nil &gt;&gt;&gt; Result
  end 
  else 
  begin
   VAR l_NewVar
   
-  l_Name l_Self pop:NewWordDefinitor:CheckWord pop:KeyWord:Word >>> l_NewVar
+  l_Name l_Self pop:NewWordDefinitor:CheckWord pop:KeyWord:Word &gt;&gt;&gt; l_NewVar
   
   if ( l_NewVar pop:object:IsNil ) then
    (
     l_Name false l_Self pop:NewWordDefinitor:CheckVar
     
-     >>> l_NewVar
+     &gt;&gt;&gt; l_NewVar
     Ctx:ClearTypeInfo
     
     @ VAR l_NewVar pop:Word:SetProducer
    )
   
-  l_NewVar >>> Result
+  l_NewVar &gt;&gt;&gt; Result
  end // l_Self pop:object:IsNil
-; // ->^
+; // -&gt;^
 
-^@ operator ->
+^@ operator -&gt;
  ^@ IN aSelf
  ^L IN aName
 
- aSelf ->^ ( aName |N ) >>> Result
-; // ->
+ aSelf -&gt;^ ( aName |N ) &gt;&gt;&gt; Result
+; // -&gt;
 </pre>
-<br/>
-
-Тут даже два слова определено - <b>->^</b> и <b>-></b>.<br/><br/>
-
-Слово <b>->^</b> - мы рассмотрим позднее.<br/><br/>
-
-А пока приведём пример использования слова <b>-></b>:<br/><br/>
-<pre class=brush:delphi>
-</pre>
-<br/>
-<br/>
-</div>
+<br />
+Тут даже два слова определено - <b>-&gt;^</b> и <b>-&gt;</b>.<br />
+<br />
+Слово <b>-&gt;^</b> - мы рассмотрим позднее.<br />
+<br />
+А пока приведём пример использования слова <b>-&gt;</b>:<br />
+<br />
+<pre class="brush:delphi"></pre>
+<br />
+<br /></div>
