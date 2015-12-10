@@ -143,7 +143,6 @@ CONST D C
 
 Вот как определено слово <b>%%</b>:<br/><br/>
 <pre class=brush:delphi>
-</pre>
 OBJECT operator %%
  OBJECT IN aWord
  ^ IN aName
@@ -156,5 +155,6 @@ OBJECT operator %%
  else
   ( Result := ( l_Member pop:KeyWord:Word ) ) 
 ; // %%
+</pre>
 <br/>
 <br /></div>
