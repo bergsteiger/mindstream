@@ -140,15 +140,15 @@ CONST D C
 &nbsp;<b>@</b> - получает адрес слова.<br />
 &nbsp;<b>DO</b> - выполняет слово по адресу (обратная к <b>@</b>).<br />
 &nbsp;<b>%%</b> - получает по адресу слова вложенный элемент по его имени.<br />
-
-Вот как определено слово <b>%%</b>:<br/><br/>
-<pre class=brush:delphi>
-OBJECT operator %%
+<br />
+Вот как определено слово <b>%%</b>:<br />
+<br />
+<pre class="brush:delphi">OBJECT operator %%
  OBJECT IN aWord
  ^ IN aName
  
  OBJECT VAR l_Member
- aName DO aWord pop:Word:FindMember >>> l_Member
+ aName DO aWord pop:Word:FindMember &gt;&gt;&gt; l_Member
  
  if ( l_Member pop:object:IsNil ) then
   ( Result := nil )
@@ -156,5 +156,5 @@ OBJECT operator %%
   ( Result := ( l_Member pop:KeyWord:Word ) ) 
 ; // %%
 </pre>
-<br/>
+<br />
 <br /></div>
