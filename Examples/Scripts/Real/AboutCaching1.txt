@@ -190,8 +190,7 @@ Print // - печатаем значение
 <br />
 ѕример:<br />
 <br />
-<pre class=brush:delphi>
-: A
+<pre class="brush:delphi">: A
  : X
   2
  ; // X
@@ -200,14 +199,14 @@ Print // - печатаем значение
 
 VAR l_ElementAddr // - переменна€ дл€ сохранени€ адреса элемента
 
-@ A %% 'X' >>> l_ElementAddr // - получаем адрес элемента X
+@ A %% 'X' &gt;&gt;&gt; l_ElementAddr // - получаем адрес элемента X
 if NOT ( l_ElementAddr IsNil ) then
 // - провер€ем его
 begin
  l_ElementAddr DO // - напечатаетс€ 2
 end
 
-@ A %% 'Y' >>> l_ElementAddr // - получаем адрес элемента Y
+@ A %% 'Y' &gt;&gt;&gt; l_ElementAddr // - получаем адрес элемента Y
 if NOT ( l_ElementAddr IsNil ) then
 // - провер€ем его
 begin
