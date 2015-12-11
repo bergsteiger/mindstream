@@ -451,7 +451,7 @@ ARRAY FUNCTION : .join>
 ; // .join>
 IMMEDIATE VOID OPERATOR :: MACRO : .map>
  Documentation:
-  Трансформирует массив фнуктором aFunctor
+  Трансформирует массив функтором aFunctor
  ^ OPERATOR :: IN : aFunctor
 ; // .map>
 ARRAY .reverted>
@@ -769,25 +769,25 @@ INTEGER Array:Count
 ARRAY Array:Filter
 ARRAY Array:FunctorToIterator
 BOOLEAN FUNCTION : array:Has
+ Documentation:
+  Проверяет, что массив содержит значение
  ARRAY OPERATOR :: IN : anArray
  OPERATOR :: IN : aValue
  BOOLEAN FUNCTION :: array:Has : Result
 ; // array:Has
 BOOLEAN FUNCTION : array:HasString
+ Documentation:
+  Проверяет, что массив содержит строку. С учётом регистра
  ARRAY OPERATOR :: IN : anArray
  STRING OPERATOR :: IN : aString
  BOOLEAN FUNCTION :: array:HasString : Result
- VOID OPERATOR :: PROCEDURE : Поиск
-  STRING OPERATOR :: IN : anItem
- ; // Поиск
 ; // array:HasString
 BOOLEAN FUNCTION : array:HasText
+ Documentation:
+  Проверяет, что массив содержит строку. Без учёта регистра
  ARRAY OPERATOR :: IN : anArray
  STRING OPERATOR :: IN : aString
  BOOLEAN FUNCTION :: array:HasText : Result
- VOID OPERATOR :: PROCEDURE : Поиск
-  STRING OPERATOR :: IN : anItem
- ; // Поиск
 ; // array:HasText
 Struct Array:Item
 VOID Array:Iterate
