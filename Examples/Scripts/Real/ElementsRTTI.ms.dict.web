@@ -54,12 +54,12 @@ CONST at_override 3
  
 BOOLEAN FUNCTION .IsWord
  IN aValue
- ( aValue IsObj ) AND ( aValue IS class::TtfwWord ) >>> Result
+ ( aValue IsObj ) AND ( aValue IS class::TtfwWord ) &gt;&gt;&gt; Result
 ; // .IsWord
 
 BOOLEAN FUNCTION .IsSequence
  IN aValue
- ( aValue .IsWord ) AND ( aValue IS class::TkwBeginLikeCompiledCode ) >>> Result
+ ( aValue .IsWord ) AND ( aValue IS class::TkwBeginLikeCompiledCode ) &gt;&gt;&gt; Result
 ; // .IsSequence
 
 USES
@@ -119,13 +119,13 @@ MACRO elem_iterator
 ARRAY FUNCTION .SequenceCode.It
   TkwBeginLikeCompiledCode IN aCode
  %SUMMARY 'Преобразует список компилированных слов в итератор вызывающий каждое из этих слов' ;
- aCode CodeIterator .map> DO >>> Result
+ aCode CodeIterator .map&gt; DO &gt;&gt;&gt; Result
 ; // .SequenceCode.It
 
 ARRAY FUNCTION Seq:
   ^ IN aCode
  %SUMMARY 'Преобразует список компилированных слов в итератор вызывающий каждое из этих слов' ;
- aCode CodeIterator .map> DO >>> Result
+ aCode CodeIterator .map&gt; DO &gt;&gt;&gt; Result
 ; // Seq:
 
 : DoCache
@@ -145,14 +145,14 @@ ARRAY FUNCTION Seq:
  end // aCacheWhere IsString
  else
  begin 
-  'cache:' aKey Cat >>> aKey
+  'cache:' aKey Cat &gt;&gt;&gt; aKey
   VAR l_FieldVar
-  aCacheWhere %% aKey >>> l_FieldVar
+  aCacheWhere %% aKey &gt;&gt;&gt; l_FieldVar
  
   if ( l_FieldVar NotValid ) then    
   begin
    VAR l_NewVar
-   aKey false aCacheWhere pop:NewWordDefinitor:CheckVar >>> l_NewVar
+   aKey false aCacheWhere pop:NewWordDefinitor:CheckVar &gt;&gt;&gt; l_NewVar
    @SELF l_NewVar pop:Word:SetProducer
    TRY
     aLambda DO
@@ -194,43 +194,43 @@ ANY elem_func ElemMember
   
  if ( Self IsNil ) then
  begin
-  aDefaultValue >>> Result
+  aDefaultValue &gt;&gt;&gt; Result
  end // Self IsNil
  else
  if ( Self IsString ) then
  begin
-  aDefaultValue >>> Result
+  aDefaultValue &gt;&gt;&gt; Result
  end // Self IsString
  else
  begin
   TtfwWord VAR l_FieldVar
   
-  Self %% aMemberName >>> l_FieldVar
+  Self %% aMemberName &gt;&gt;&gt; l_FieldVar
   
   if ( l_FieldVar NotValid ) then
   begin
-   Self %% 'Original' >>> l_FieldVar
+   Self %% 'Original' &gt;&gt;&gt; l_FieldVar
    if ( l_FieldVar NotValid ) then
    begin
-    aDefaultValue >>> Result
+    aDefaultValue &gt;&gt;&gt; Result
    end // l_FieldVar NotValid
    else
    begin
     TtfwWord VAR l_Original
-    l_FieldVar DO >>> l_Original
+    l_FieldVar DO &gt;&gt;&gt; l_Original
     if ( l_Original IsNil ) then
     begin
-     aDefaultValue >>> Result
+     aDefaultValue &gt;&gt;&gt; Result
     end // l_Original IsNil
     else
     begin
-     l_Original aMemberName aDefaultValue call.me >>> Result
+     l_Original aMemberName aDefaultValue call.me &gt;&gt;&gt; Result
     end // l_Original IsNil
    end // l_FieldVar NotValid
   end // l_FieldVar NotValid
   else
   begin
-   l_FieldVar DO >>> Result
+   l_FieldVar DO &gt;&gt;&gt; Result
   end // l_FieldVar NotValid
  end // Self IsString
 ; // ElemMember
@@ -241,7 +241,7 @@ elem_iterator ElemList
  (
   Self aMemberName [empty] .ElemMember 
  )
- >>> Result 
+ &gt;&gt;&gt; Result 
 ; // ElemList
 
 STRING elem_func ElemString
@@ -250,7 +250,7 @@ STRING elem_func ElemString
  (
   Self aMemberName '' .ElemMember 
  ) 
- >>> Result 
+ &gt;&gt;&gt; Result 
 ; // ElemString
 
 TtfwWord elem_func ElemWord
@@ -259,94 +259,94 @@ TtfwWord elem_func ElemWord
  (
   Self aMemberName nil .ElemMember 
  ) 
- >>> Result 
+ &gt;&gt;&gt; Result 
 ; // ElemWord
 
 elem_iterator Children
- Self 'Children' .ElemList >>> Result
+ Self 'Children' .ElemList &gt;&gt;&gt; Result
 ; // Children
 
 elem_iterator Constants
- Self 'Constants' .ElemList >>> Result
+ Self 'Constants' .ElemList &gt;&gt;&gt; Result
 ; // Constants
 
 elem_iterator Dependencies
- Self 'Dependencies' .ElemList >>> Result
+ Self 'Dependencies' .ElemList &gt;&gt;&gt; Result
 ; // Dependencies
 
 elem_iterator Injected
- Self 'Injected' .ElemList >>> Result
+ Self 'Injected' .ElemList &gt;&gt;&gt; Result
 ; // Injected
 
 elem_iterator Forwarded
- Self 'Forwarded' .ElemList >>> Result
+ Self 'Forwarded' .ElemList &gt;&gt;&gt; Result
 ; // Forwarded
 
 elem_iterator Attributes
- Self 'Attributes' .ElemList >>> Result
+ Self 'Attributes' .ElemList &gt;&gt;&gt; Result
 ; // Attributes
 
 elem_iterator Parameters
- Self 'Parameters' .ElemList >>> Result
+ Self 'Parameters' .ElemList &gt;&gt;&gt; Result
 ; // Parameters
 
 elem_iterator Operations
- Self 'Operations' .ElemList >>> Result
+ Self 'Operations' .ElemList &gt;&gt;&gt; Result
 ; // Operations
 
 elem_iterator Overridden
- Self 'Overridden' .ElemList >>> Result
+ Self 'Overridden' .ElemList &gt;&gt;&gt; Result
 ; // Overridden
 
 elem_iterator Implemented
- Self 'Implemented' .ElemList >>> Result
+ Self 'Implemented' .ElemList &gt;&gt;&gt; Result
 ; // Implemented
 
 elem_iterator Inherits
- Self 'Inherits' .ElemList >>> Result
+ Self 'Inherits' .ElemList &gt;&gt;&gt; Result
 ; // Inherits
 
 elem_iterator Implements
- Self 'Implements' .ElemList >>> Result
+ Self 'Implements' .ElemList &gt;&gt;&gt; Result
 ; // Implements
 
 STRING elem_func Name
  if ( Self IsString ) then
  begin
-  Self >>> Result
+  Self &gt;&gt;&gt; Result
  end // Self IsString
  else
  begin
-  Self 'Name' .ElemString >>> Result
+  Self 'Name' .ElemString &gt;&gt;&gt; Result
  end // Self IsString
 ; // Name
 
 STRING elem_func Documentation
- Self '%SUM' .ElemString >>> Result
+ Self '%SUM' .ElemString &gt;&gt;&gt; Result
 ; // Documentation
 
 TtfwWord elem_func Target
- Self 'Target' .ElemWord >>> Result
+ Self 'Target' .ElemWord &gt;&gt;&gt; Result
 ; // Target
 
 TtfwWord elem_func ValueType
- Self 'ValueType' .ElemWord >>> Result
+ Self 'ValueType' .ElemWord &gt;&gt;&gt; Result
 ; // ValueType
 
 ANY elem_func GetUP
   Literal IN aName
   
- Self aName |N '' .ElemMember >>> Result 
+ Self aName |N '' .ElemMember &gt;&gt;&gt; Result 
 ; // GetUP
 
 BOOLEAN elem_func UPisTrue
   Literal IN aName
   
- Self aName |N false .ElemMember true ?== >>> Result  
+ Self aName |N false .ElemMember true ?== &gt;&gt;&gt; Result  
 ; // UPisTrue
 
 TtfwWord STRING elem_func Stereotype
- Self 'Stereotype' .ElemWord >>> Result
+ Self 'Stereotype' .ElemWord &gt;&gt;&gt; Result
 ; // Stereotype
 
 BOOLEAN elem_func IsStereotype
@@ -360,61 +360,61 @@ BOOLEAN elem_func IsStereotype
   false
   DoCache (
    BOOLEAN VAR l_Is
-   anOurStereo anOtherStereo == >>> l_Is
+   anOurStereo anOtherStereo == &gt;&gt;&gt; l_Is
    if ( l_Is ! ) then
    begin
-    anOurStereo .Name anOtherStereo .Name == >>> l_Is
+    anOurStereo .Name anOtherStereo .Name == &gt;&gt;&gt; l_Is
    end // l_Is !
    if ( l_Is ! ) then
    begin
     anOurStereo .Inherited.Words 
-    .trunc> ( DROP l_Is ! ) 
-    .for> (
+    .trunc&gt; ( DROP l_Is ! ) 
+    .for&gt; (
      TtfwWord IN anAncestor
      if ( anAncestor anOtherStereo call.me ) then
      begin
-      true >>> l_Is
+      true &gt;&gt;&gt; l_Is
      end
     ) 
    end // l_Is !
    l_Is
-  ) >>> Result
+  ) &gt;&gt;&gt; Result
  ; // IsStereoKindOf
 
  TtfwWord VAR l_OurStereo
- Self .Stereotype >>> l_OurStereo
+ Self .Stereotype &gt;&gt;&gt; l_OurStereo
  
  if ( l_OurStereo IsNil ) then
  begin
-  false >>> Result
+  false &gt;&gt;&gt; Result
  end // l_OurStereo IsNil
  else
  begin
   TtfwWord VAR l_Stereo
-  aStereo DO >>> l_Stereo
-  l_OurStereo l_Stereo IsStereoKindOf >>> Result
+  aStereo DO &gt;&gt;&gt; l_Stereo
+  l_OurStereo l_Stereo IsStereoKindOf &gt;&gt;&gt; Result
  end // // l_OurStereo IsNil
  
 ; // IsStereotype
 
 INTEGER elem_func Visibility
- Self 'Visibility' UnknownAccess .ElemMember >>> Result
+ Self 'Visibility' UnknownAccess .ElemMember &gt;&gt;&gt; Result
 ; // Visibility
 
 INTEGER elem_func Abstraction
- Self 'Abstraction' at_unknown .ElemMember >>> Result
+ Self 'Abstraction' at_unknown .ElemMember &gt;&gt;&gt; Result
 ; // Abstraction
 
 STRING elem_func GUID
- Self 'GUID' '' .ElemMember >>> Result
+ Self 'GUID' '' .ElemMember &gt;&gt;&gt; Result
 ; // GUID
 
 INTEGER elem_func OpKind
- Self 'OpKind' opkind_Normal .ElemMember >>> Result
+ Self 'OpKind' opkind_Normal .ElemMember &gt;&gt;&gt; Result
 ; // OpKind
 
 ModelElement elem_func Parent
- Self 'Parent' .ElemWord >>> Result
+ Self 'Parent' .ElemWord &gt;&gt;&gt; Result
 ; // Parent
 
 USES
