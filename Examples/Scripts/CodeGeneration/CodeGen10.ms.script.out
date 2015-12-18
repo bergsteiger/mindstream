@@ -88,6 +88,8 @@ VOID Test CodeGen
 
 Dictionary: axiom:char
 Dictionary: axiom:class
+Dictionary: axiom:CompiledProcedure
+TkwCompiledProcedure CompiledProcedure:Create
 Dictionary: axiom:CompiledWordWorkerWord
 TtfwWord pop:CompiledWordWorkerWord:Compiled
 Dictionary: axiom:Component
@@ -593,6 +595,12 @@ TtfwWord OPERATOR : |^@
  ^@ OPERATOR :: IN : aSelf
  TtfwWord OPERATOR :: |^@ : Result
 ; // |^@
+TtfwWord OPERATOR : |^@Deepest
+ Documentation:
+  Получает ссылку на параметр слева
+ ^@ OPERATOR :: IN : aSelf
+ TtfwWord OPERATOR :: |^@Deepest : Result
+; // |^@Deepest
 BOOLEAN ||
 STRING FUNCTION : |N
  OPERATOR :: IN : %S
@@ -856,6 +864,7 @@ IMMEDIATE VOID OPERATOR : axiom:CLASS
 IMMEDIATE VOID OPERATOR : axiom:CompileSetValueTypes
  TtfwValueTypes OPERATOR :: IN : aValues
 ; // axiom:CompileSetValueTypes
+PROTECTED : : axiom:DefineBox
 PROTECTED : : axiom:DefineVar
 PROTECTED VOID : : axiom:DefineVarWithInit
  STRING OPERATOR :: IN : aName
@@ -888,6 +897,9 @@ STRING OPERATOR : axiom:SourceInfo
 begin
 BEGIN
 IMMEDIATE VOID OPERATOR : BOOLEAN
+IMMEDIATE VOID OPERATOR : BOX
+ ^L OPERATOR :: IN : aName
+; // BOX
 VOID break
 VOID BREAK
 VOID BREAK-ITERATOR
@@ -1033,6 +1045,7 @@ TClass class::TkwCompiledIfElse
 TClass class::TkwCompiledIncluded
 TClass class::TkwCompiledMain
 TClass class::TkwCompiledProcedure
+TClass class::TkwCompiledProcedureCreate
 TClass class::TkwCompiledProcedureWithStackChecking
 TClass class::TkwCompiledPushWord
 TClass class::TkwCompiledRules
@@ -1261,8 +1274,10 @@ TClass class::TkwPopKeyWordDictionary
 TClass class::TkwPopKeywordFinderKeywordByName
 TClass class::TkwPopKeywordFinderParentFinder
 TClass class::TkwPopKeyWordName
+TClass class::TkwPopKeyWordSetWord
 TClass class::TkwPopKeyWordWord
 TClass class::TkwPopMainDictionaryCompiledCode
+TClass class::TkwPopNewWordDefinitorCheckRefcountVar
 TClass class::TkwPopNewWordDefinitorCheckVar
 TClass class::TkwPopNewWordDefinitorCheckWord
 TClass class::TkwPopNewWordDefinitorDefineInParameter
@@ -1341,6 +1356,8 @@ TClass class::TkwPopWordParent
 TClass class::TkwPopWordProducer
 TClass class::TkwPopWordPublicateInMainDictionary
 TClass class::TkwPopWordRedefines
+TClass class::TkwPopWordSetKey
+TClass class::TkwPopWordSetParent
 TClass class::TkwPopWordSetProducer
 TClass class::TkwPopWordSetValue
 TClass class::TkwPopWordSetValuePrim
@@ -1355,6 +1372,8 @@ TClass class::TkwRAISE
 TClass class::TkwRandom
 TClass class::TkwRandomize
 TClass class::TkwReduceStackLevel
+TClass class::TkwRefcountGlobalVar
+TClass class::TkwRefcountVar
 TClass class::TkwRefParam
 TClass class::TkwRenameFile
 TClass class::TkwRGB2String
@@ -2223,6 +2242,7 @@ TkwCompiledIfElse
 TkwCompiledIncluded
 TkwCompiledMain
 TkwCompiledProcedure
+TkwCompiledProcedureCreate
 TkwCompiledProcedureWithStackChecking
 TkwCompiledPushWord
 TkwCompiledRules
@@ -2451,8 +2471,10 @@ TkwPopKeyWordDictionary
 TkwPopKeywordFinderKeywordByName
 TkwPopKeywordFinderParentFinder
 TkwPopKeyWordName
+TkwPopKeyWordSetWord
 TkwPopKeyWordWord
 TkwPopMainDictionaryCompiledCode
+TkwPopNewWordDefinitorCheckRefcountVar
 TkwPopNewWordDefinitorCheckVar
 TkwPopNewWordDefinitorCheckWord
 TkwPopNewWordDefinitorDefineInParameter
@@ -2531,6 +2553,8 @@ TkwPopWordParent
 TkwPopWordProducer
 TkwPopWordPublicateInMainDictionary
 TkwPopWordRedefines
+TkwPopWordSetKey
+TkwPopWordSetParent
 TkwPopWordSetProducer
 TkwPopWordSetValue
 TkwPopWordSetValuePrim
@@ -2545,6 +2569,8 @@ TkwRAISE
 TkwRandom
 TkwRandomize
 TkwReduceStackLevel
+TkwRefcountGlobalVar
+TkwRefcountVar
 TkwRefParam
 TkwRenameFile
 TkwRGB2String
@@ -2936,6 +2962,7 @@ TtfwValueTypes Ctx:ValueTypes
 TtfwWord Ctx:WordDefiningNow
 TtfwWordInfo Ctx:WordInfo
 Dictionary: axiom:NewWordDefinitor
+TtfwWord pop:NewWordDefinitor:CheckRefcountVar
 TtfwWord pop:NewWordDefinitor:CheckVar
 TtfwKeyWord pop:NewWordDefinitor:CheckWord
 TtfwWord pop:NewWordDefinitor:DefineInParameter
@@ -2960,6 +2987,10 @@ TtfwWord OPERATOR : pop:Word:GetRefDeep
  TtfwWord OPERATOR :: IN : aSelf
  TtfwWord OPERATOR :: pop:Word:GetRefDeep : Result
 ; // pop:Word:GetRefDeep
+TtfwWord OPERATOR : pop:Word:GetRefDeepest
+ TtfwWord OPERATOR :: IN : aSelf
+ TtfwWord OPERATOR :: pop:Word:GetRefDeepest : Result
+; // pop:Word:GetRefDeepest
 VOID pop:Word:IncRef
 TtfwWordInfo pop:Word:Info
 TtfwDictionary pop:Word:InnerDictionary
@@ -2980,6 +3011,8 @@ VOID OPERATOR :: PROCEDURE : pop:Word:Print
 TtfwWord pop:Word:Producer
 VOID pop:Word:PublicateInMainDictionary
 TtfwWord pop:Word:Redefines
+VOID pop:Word:SetKey
+VOID pop:Word:SetParent
 VOID pop:Word:SetProducer
 VOID pop:Word:SetValue
 VOID pop:Word:SetValuePrim
@@ -2992,6 +3025,7 @@ VOID OPERATOR :: PROCEDURE : pop:KeyWord:Print
  STRING OPERATOR :: IN : anIndent
  TtfwWord OPERATOR :: VAR : l_Word
 ; // pop:KeyWord:Print
+VOID pop:KeyWord:SetWord
 TtfwWord pop:KeyWord:Word
 Dictionary: axiom:Parser
 STRING pop:Parser:FileName
@@ -3092,6 +3126,10 @@ PRIVATE STRING FUNCTION : private:CheckSpaces
  STRING OPERATOR :: IN : aName
  PRIVATE STRING FUNCTION :: private:CheckSpaces : Result
 ; // private:CheckSpaces
+PRIVATE : : private:DefineBoxEx
+ STRING OPERATOR :: IN : aName
+ OBJECT OPERATOR :: IN : aStereo
+; // private:DefineBoxEx
 IMMEDIATE PRIVATE VOID OPERATOR : private:DefineNameParam
 PRIVATE OPERATOR : private:DefineParam
 PRIVATE : : private:DefineVarEx
