@@ -307,6 +307,10 @@ BOOLEAN elem_func IsSimpleClass
  Cached:
  (
   RULES
+   ( Self .IsStereotype st_UseCaseControllerImp )
+    ( Self .Abstraction at_abstract != )
+   ( Self .IsStereotype st_ViewAreaControllerImp )
+    ( Self .Abstraction at_abstract != )
    ( Self .IsStereotype st_SimpleClass ) 
     true
    ( Self .IsStereotype st_ObjStub ) 
@@ -367,7 +371,22 @@ BOOLEAN elem_func IsInterfaces
 ; // IsInterfaces
 
 BOOLEAN elem_func IsMixIn
- Self .IsStereotype st_Impurity >>> Result
+ Cached:
+ (
+  RULES
+   ( Self .IsStereotype st_Impurity )
+    true
+   ( Self .IsStereotype st_TestCaseMixIn )
+    true
+   ( Self .IsStereotype st_UseCaseControllerImp )
+    ( Self .Abstraction at_abstract == )
+   ( Self .IsStereotype st_ViewAreaControllerImp )
+    ( Self .Abstraction at_abstract == )
+   DEFAULT
+    false 
+  ; // RULES 
+ )
+ >>> Result
 ; // IsMixIn
 
 BOOLEAN elem_func IsPureMixIn
@@ -472,6 +491,9 @@ BOOLEAN FUNCTION NeedOwnFile
   RULES
    ( Self .IsStereotype st_ScriptKeywords ) 
     false 
+    
+   ( Self .IsStereotype st_UserType ) 
+    true
     
    ( Self .IsStereotype st_TestClass ) 
     true
@@ -898,6 +920,8 @@ BOOLEAN elem_func IsInterface
     false
    ( Self .IsStereotype st_Facet )
     true
+   ( Self .IsStereotype st_Interface )
+    true
    DEFAULT
     false 
   ; // RULES 
@@ -923,6 +947,8 @@ BOOLEAN elem_func IsClassImplementable
    ( Self .IsStereotype st_MixInMirror )
     false 
    ( Self .IsStereotype st_UseCase )
+    false 
+   ( Self .IsStereotype st_VCMOperations )
     false 
    DEFAULT
     true
@@ -1045,10 +1071,22 @@ elem_proc OutDocumentation
  end // l_Doc IsNil !
 ; // OutDocumentation
 
+BOOLEAN elem_func IsControlPrim
+ Self .IsStereotype st_ControlPrim >>> Result
+; // IsControlPrim
+
+BOOLEAN elem_func IsControlOverride
+ Self .IsStereotype st_ControlOverride >>> Result
+; // IsControlOverride
+
 ModelElement elem_func MethodType
  Cached:
  (
   RULES
+   ( Self .IsControlOverride )
+    ( Self .MainAncestor call.me ) 
+   ( Self .IsControlPrim )
+    ( Self .MainAncestor ) 
    ( Self .IsStereotype st_method )
     ( Self .FirstOperation .Target )
    ( Self .IsFunction )
@@ -1174,7 +1212,7 @@ STRING elem_func ParamPrefix
   ( Self .IsStereotype st_inout )
    'var '
   DEFAULT
-   '' 
+   ( Self .Target .InPrefix ) 
  ; // RULES
  >>> Result
 ; // ParamPrefix
@@ -1211,6 +1249,18 @@ BOOLEAN elem_func IsDestructor
  Self .MethodName 'Destroy' == >>> Result
 ; // IsDestructor
 
+BOOLEAN elem_func IsStaticMethod
+ RULES
+  ( Self .IsStereotype st_static::Operation )
+   true
+  ( Self .UPisTrue "is static" ) 
+   true
+  DEFAULT
+   false 
+ ; // RULES 
+ >>> Result
+; // IsStaticMethod
+
 OUTABLE elem_func MethodKeyword
  Cached:
  (
@@ -1230,9 +1280,7 @@ OUTABLE elem_func MethodKeyword
      
      [
      RULES
-      ( Self .IsStereotype st_static::Operation )
-       'class '
-      ( Self .UPisTrue "is static" ) 
+      ( Self .IsStaticMethod )
        'class '
      ; // RULES 
   
@@ -1251,15 +1299,23 @@ OUTABLE elem_func MethodKeyword
  >>> Result
 ; // MethodKeyword
 
+BOOLEAN elem_func IsReadonlyProperty
+ Self .IsStereotype st_readonly::Attribute >>> Result
+; // IsReadonlyProperty
+
+BOOLEAN elem_func IsWriteonlyProperty
+ Self .IsStereotype st_writeonly::Attribute >>> Result
+; // IsWriteonlyProperty
+
 BOOLEAN elem_func IsProperty
  Cached:
  (
   RULES
    ( Self .IsStereotype st_property::Attribute )
     true
-   ( Self .IsStereotype st_readonly::Attribute )
+   ( Self .IsReadonlyProperty )
     true
-   ( Self .IsStereotype st_writeonly::Attribute )
+   ( Self .IsWriteonlyProperty )
     true
    DEFAULT
     false 
@@ -1308,6 +1364,31 @@ INTEGER elem_func MethodAbstraction
  >>> Result
 ; // MethodAbstraction
 
+STRING elem_func MethodNamePrefix
+ BOOLEAN IN aGetter
+         if aGetter then
+         begin
+          if ( Self .UPisTrue "pm" ) then
+           'pm_Get'
+          else 
+           'Get_'
+         end
+         else 
+         begin
+          if ( Self .UPisTrue "pm" ) then
+           'pm_Set'
+          else 
+           'Set_'
+         end
+ >>> Result
+; // MethodNamePrefix
+
+elem_iterator PropertyKeys
+ Self .Attributes
+ .filter> ( .IsControlPrim ! )
+ >>> Result
+; // PropertyKeys
+
 CONST opModifyNone 1
 CONST opModifySetter 2
 
@@ -1333,7 +1414,7 @@ elem_iterator MethodInterfacePrim
  [ 
   RULES
    ( 
-    ( Self .IsStereotype st_writeonly::Attribute ) 
+    ( Self .IsWriteonlyProperty ) 
     AND ( aOpModify opModifySetter != )
    )
     ()
@@ -1364,24 +1445,13 @@ elem_iterator MethodInterfacePrim
       RULES
        ( Self .IsProperty )
         (
-         if l_IsFunc then
-         begin
-          if ( Self .UPisTrue "pm" ) then
-           'pm_Get'
-          else 
-           'Get_'
-         end
-         else 
-         begin
-          if ( Self .UPisTrue "pm" ) then
-           'pm_Set'
-          else 
-           'Set_'
-         end
+         Self l_IsFunc .MethodNamePrefix 
+         Self .MethodName 
         )
+       DEFAULT
+        ( Self .MethodName  )
       ; // RULES
       
-      Self .MethodName 
      end // ( Self .IsFunction ! )
      
      VAR l_WasParam
@@ -1389,7 +1459,7 @@ elem_iterator MethodInterfacePrim
      
      RULES
       ( Self .IsProperty )
-       ( Self .Attributes )
+       ( Self .PropertyKeys )
       DEFAULT
       ( Self .MethodParameters )
      ; // RULES  
@@ -1471,8 +1541,27 @@ elem_iterator MethodInterfacePrim
  ] >>> Result
 ; // MethodInterfacePrim
 
+BOOLEAN elem_func NeedPutToDFM
+ Self .UPisTrue "put to dfm" >>> Result
+ if Result then
+ begin
+  if ( Self .Parent .IsControlPrim ) then
+  begin
+   Self .Parent call.me >>> Result
+  end // ( Self .Parent .IsControlPrim )
+ end // Result
+; // NeedPutToDFM
+
 BOOLEAN elem_func ReadsField
- Self .UPisTrue "reads field" >>> Result
+ RULES
+  ( Self .IsControlPrim )
+   ( Self .NeedPutToDFM ! )
+  ( Self .UPisTrue "reads field" )
+   true
+  DEFAULT
+   false 
+ ; // RULES
+ >>> Result
 ; // elem_func ReadsField
 
 BOOLEAN elem_func WritesField
@@ -1493,13 +1582,13 @@ elem_iterator MethodInterfaceEx
   ; // CallAsSetter
   
   RULES
-   ( Self .IsStereotype st_readonly::Attribute )
+   ( Self .IsReadonlyProperty )
     if ( Self .ReadsField ! ) then
      NormalCall
-   ( Self .IsStereotype st_writeonly::Attribute ) 
+   ( Self .IsWriteonlyProperty ) 
     if ( Self .WritesField ! ) then
      CallAsSetter
-   ( Self .IsStereotype st_property::Attribute ) 
+   ( Self .IsProperty ) 
     ( 
      VAR l_NeedLN
      false >>> l_NeedLN
@@ -1555,12 +1644,17 @@ INTEGER FUNCTION .CountIt
 
 elem_iterator OwnOperations
  Self .Operations 
- .filter> ( .IsStereotype st_static::Operation ! )
+ .filter> ( .IsStaticMethod ! )
  >>> Result
 ; // OwnOperations
 
 elem_iterator Properties
- Self .Attributes .filter> .IsProperty
+ Cached:
+ (
+  Self .Attributes 
+  .filter> .IsProperty
+  .filter> ( .IsControlOverride ! )
+ )
  >>> Result
 ; // Properties
 
@@ -1636,8 +1730,7 @@ elem_iterator AllOperationsForDefine
     ( Self .InterfacePropertiesTotal )
    ( Self .IsClassOrMixIn )
     ( 
-     Self .Attributes 
-     .filter> .IsProperty
+     Self .Properties
      .filter> ( IN anItem
       ( anItem .ReadsField ! )
       OR ( anItem .WritesField ! )
@@ -1675,8 +1768,198 @@ elem_iterator MethodInterfaceFor:
  >>> Result
 ; // MethodInterfaceFor:
 
+elem_proc OutProperty
+ [
+  'property '
+  Self .Name
+  
+  VAR l_WasParam
+  false >>> l_WasParam
+
+  Self .PropertyKeys .for> (
+    IN aParam
+   if l_WasParam then
+    '; '
+   else
+   begin
+    true >>> l_WasParam
+    '['
+   end
+   aParam .ParamPrefix
+   aParam .Name
+   ': '
+   aParam .Target .TypeName
+  )
+
+  if l_WasParam then
+   ']'
+  ': '
+  Self .MethodType .TypeName
+
+  : OutRead
+   \n ' ' 'read' ' ' 
+   if ( Self .ReadsField ) then
+    'f_'
+   else
+   begin
+    Self true .MethodNamePrefix 
+   end // ( Self .ReadsField )
+   Self .MethodName
+  ; // OutRead
+
+  : OutWrite
+   \n ' ' 'write' ' ' 
+   if ( Self .WritesField ) then
+    'f_'
+   else
+   begin
+    Self false .MethodNamePrefix 
+   end // ( Self .WritesField )
+   Self .MethodName
+  ; // OutWrite
+
+  RULES
+   ( Self .IsReadonlyProperty )
+    OutRead
+   ( Self .IsWriteonlyProperty )
+    ()
+   ( Self .IsProperty )
+    OutRead
+  ; // RULES
+  RULES
+   ( Self .IsReadonlyProperty )
+    ()
+   ( Self .IsWriteonlyProperty )
+    OutWrite
+   ( Self .IsProperty )
+    OutWrite
+  ; // RULES
+
+  if ( Self .UPisTrue "needs stored directive" ) then
+  begin
+   \n
+   ' stored '
+   Self .MethodName
+   'Stored'
+  end // ( Self .UPisTrue "needs stored directive" )
+
+  ';'
+
+  if ( Self .UPisTrue "is default" ) then
+  begin
+   \n
+   ' default;'
+  end // ( Self .UPisTrue "is default" )
+ ] .Out? ?
+  ( Self .OutDocumentation )
+; // OutProperty
+
+elem_iterator Fields
+ Self .Attributes
+ .filter> ( .IsProperty ! )
+ .filter> ( .IsStereotype st_impurity_value::Attribute ! )
+ .filter> ( .IsStereotype st_impurity_param::Attribute ! )
+ .filter> ( .IsStereotype st_static::Attribute ! )
+ >>> Result
+; // Fields
+
+elem_iterator MixInValues
+ Self .Attributes
+ .filter> ( .IsStereotype st_impurity_value::Attribute )
+ >>> Result
+; // MixInValues
+
+PROCEDURE .ByVisibility>
+  ARRAY IN anArray
+  ^ IN aFilter
+  ^ IN aOut
+  
+  BOOLEAN VAR l_WasOut
+  STRING VAR l_Separator
+  
+  PROCEDURE DoOut
+    IN anItem
+   if ( l_WasOut ! ) then
+   begin
+    true >>> l_WasOut
+    l_Separator .Out
+   end // ( l_WasOut )
+   Indented: ( anItem aOut DO )
+  ; // DoOut
+  
+ false >>> l_WasOut 
+ 'private' >>> l_Separator
+ anArray .filter> ( aFilter DO PrivateAccess == ) .for> DoOut
+ false >>> l_WasOut 
+ 'protected' >>> l_Separator
+ anArray .filter> ( aFilter DO ProtectedAccess == ) .for> DoOut
+ false >>> l_WasOut 
+ 'public' >>> l_Separator
+ anArray .filter> ( aFilter DO PublicAccess == ) .for> DoOut
+; // .ByVisibility>
+
+elem_proc OutField
+ [ 
+  Self .Name 
+  ': '
+  Self .Target .TypeName
+  ';'
+ ] .Out? ? (
+  Self .OutDocumentation
+ ) 
+; // OutField
+
+INTEGER elem_func MethodVisibility
+ Cached:
+ (
+  RULES
+   ( Self .IsProperty )
+    ProtectedAccess
+   ( Self .OpKind opkind_Implemented == )
+    RULES
+     ( Self .Parent .IsPureMixIn )
+      PublicAccess
+     ( Self .ParentIsInterface )
+      ProtectedAccess
+     ( Self .IsStaticMethod ) 
+      PublicAccess
+     DEFAULT
+      ( Self .Visibility )
+    ; // RULES
+   ( Self .OpKind opkind_Overridden == )
+    RULES
+     ( 
+      Self .IsStaticMethod 
+      AND ( Self .Abstraction at_abstract == )
+     )
+      PublicAccess
+     DEFAULT
+      ( Self .Visibility )
+    ; // RULES
+   DEFAULT
+    ( Self .Visibility )
+  ; // RULES
+ )
+ >>> Result
+; // MethodVisibility
+
 elem_proc OutClass
- [ Self .TypeName ' = class' 
+ Self .MixInValues .for> (
+   IN aValue
+  [ '_' aValue .Name '_' ' = ' aValue .Target .TypeName ';' ] .Out
+ )
+ [ 
+  Self .TypeName 
+  ' = ' 
+  
+  Self .Abstraction CASE
+   at_abstract
+    ( '{abstract}' ' ' )
+   at_final
+    ( '{final}' ' ' )
+  END // CASE
+  
+  'class' 
   [ Self .MainAncestor ] 
   .join> ( 
    Self .Implements 
@@ -1690,15 +1973,19 @@ elem_proc OutClass
  Self .OutDocumentation
  
  Indented: (
+  Self .Fields .ByVisibility> .Visibility .OutField
+  
   VAR l_AllOps
   Self .AllOperationsForOverload >>> l_AllOps
   
-  Self .AllOperationsForDefine .for> (
+  Self .AllOperationsForDefine .ByVisibility> .MethodVisibility (
     IN aMethod
    aMethod .MethodInterfaceFor: l_AllOps .Out? ? (
     aMethod .OutDocumentation
    ) // aMethod .MethodInterfaceFor: l_AllOps .Out? ?
   ) // .for>
+
+  Self .Properties .ByVisibility> .Visibility .OutProperty
  ) // Indented:
  
  [ 'end;//' Self .TypeName ] .Out
@@ -1714,19 +2001,9 @@ elem_proc OutInterfaceBody
     IN aMethod
    aMethod .MethodInterfaceFor: l_AllOps .Out? ? (
     aMethod .OutDocumentation
-   ) 
-  )
-  Self .InterfaceProperties .for> (
-    IN aProperty
-   [
-    'property '
-    aProperty .Name
-    ': '
-    aProperty .Target .TypeName
-    ';'
-   ] .Out
-   aProperty .OutDocumentation  
-  )
+   ) // aMethod .MethodInterfaceFor: l_AllOps .Out? ?
+  ) // l_Ops .for>
+  Self .InterfaceProperties .for> .OutProperty
  ) // Indented:
 ; // OutInterfaceBody
 
@@ -1876,6 +2153,10 @@ elem_proc OutForward
 
 elem_proc OutType
  RULES
+  ( Self .IsStereotype st_ScriptKeywordDocumentation )
+   ()
+  ( Self .IsStereotype st_ScriptKeywordsDocumentation )
+   ()
   ( Self .IsUtilityPack )
    ()
   ( Self .IsInterfaces )
@@ -1900,6 +2181,8 @@ elem_proc OutType
       ( Self .IsTypedef )
        ( Self .OutTypedef )
       ( Self .IsException )
+       ( Self .OutClass )
+      ( Self .IsMixIn )
        ( Self .OutClass )
       ( Self .IsClass )
        ( Self .OutClass )
@@ -1932,6 +2215,12 @@ BOOLEAN elem_func IsType
  Cached:
  (
   RULES
+   ( Self .IsStereotype st_UserType ) 
+    false
+   ( Self .IsStereotype st_ScriptKeywordDocumentation ) 
+    false
+   ( Self .IsStereotype st_ScriptKeywordsDocumentation ) 
+    false
    ( Self .IsUtilityPack )
     false
    ( Self .IsInterfaces )
@@ -1951,6 +2240,27 @@ BOOLEAN elem_func IsType
  >>> Result
 ; // IsType
 
+elem_proc OutChildrenRec
+  IN aValid
+  IN aOut
+  
+  elem_proc DoOut
+   Self .ChildrenWithoutOwnFile .for> call.me
+   if ( Self aValid DO ) then
+   begin
+    Self aOut DO
+   end // ( Self aValid DO )
+  ; // DoOut
+  
+ Self .DoOut 
+; // OutChildrenRec
+
+elem_proc OutChildrenRec:
+  ^ IN aValid
+  ^ IN aOut
+ Self aValid aOut .OutChildrenRec
+; // OutChildrenRec:
+  
 elem_proc OutTypes
   ^ IN aValid
   
@@ -1958,35 +2268,52 @@ elem_proc OutTypes
  
  false >>> l_WasType
  
- elem_proc DoOutTypes
-  Self .ChildrenWithoutOwnFile .for> call.me
-  if ( Self aValid DO ) then
+ Self aValid @ (
+   IN aChild
+  if ( aChild .IsType ) then
   begin
-   if ( Self .IsType ) then
+   if ( l_WasType ! ) then
    begin
-    if ( l_WasType ! ) then
-    begin
-     'type' .Out
-     true >>> l_WasType
-    end // l_WasType !
-   end // Self .IsType
-   Indented: ( Self .OutType )
-  end 
- ; // DoOutTypes
- 
- Self .DoOutTypes
+    'type' .Out
+    true >>> l_WasType
+   end // l_WasType !
+  end // aChild .IsType
+  Indented: ( aChild .OutType )
+ ) .OutChildrenRec
 ; // OutTypes
 
-elem_proc OutInterfaceSection
+elem_proc OutConstants
+ [ '//' ' ' Self .Name ] .Out
+; // OutConstants
 
- Self .OutTypes .IsForInterface
+elem_proc OutDefinitionsSection:
+  ^ IN aValid
+  
+ : Validate aValid DO ; 
+  
+ Self .OutChildrenRec: Validate (
+  .Constants .filter> ( .Visibility PublicAccess == ) .for> .OutConstants
+ )
+
+ Self .OutTypes Validate
  
+ Self .OutChildrenRec: Validate (
+  .Constants .filter> ( .Visibility ProtectedAccess == ) .for> .OutConstants
+ )
+
+; // OutDefinitionsSection:
+
+elem_proc OutInterfaceSection
+ Self .OutDefinitionsSection: .IsForInterface
 ; // OutInterfaceSection
 
 elem_proc OutImplementationSection
-
- Self .OutTypes .IsForImplementation
+ Self .OutDefinitionsSection: .IsForImplementation
  
+ Self .OutChildrenRec: .True (
+  .Constants .filter> ( .Visibility PrivateAccess == ) .for> .OutConstants
+ )
+
 ; // OutImplementationSection
 
 elem_proc OutUnit
@@ -2025,7 +2352,8 @@ elem_generator pas
  RULES
   ( Self .IsMixIn )
    ( Self .OutMixIn )
-   
+  ( Self .IsStereotype st_UserType ) 
+   ( Self .OutUnit )
   ( Self .IsInterfaces )
    ( Self .OutUnit )
   ( Self .IsEvdSchemaElement )
