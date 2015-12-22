@@ -83,6 +83,10 @@ MACRO elem_func_v
  aName |N this.method.addr nil 'ModelElement' do_word_func
 ; // elem_func_v
 
+BOOLEAN elem_func True
+ true >>> Result
+; // True
+
 PROCEDURE do_elem_proc
  STRING IN aName
  ENGINE_WORD IN aSelf
