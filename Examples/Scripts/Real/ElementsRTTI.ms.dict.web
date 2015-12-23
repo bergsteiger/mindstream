@@ -15,7 +15,7 @@ USES
 ARRAY CompileTime-VAR [empty] []
 %REMARK 'Пустой итератор'
 
-STRING ENGINE_WORD TYPE ModelElement
+STRING ENGINE_WORD INTERFACE TYPE ModelElement
  %REMARK 'Элемент модели'
 ENGINE_WORD TYPE STEREOTYPE
  %REMARK 'Стереотип элемента модели'
@@ -132,6 +132,10 @@ ARRAY FUNCTION Seq:
  aCode CodeIterator .map&gt; DO &gt;&gt;&gt; Result
 ; // Seq:
 
+USES
+ axiom:WordBox
+;
+
 : DoCache
   ModelElement IN aCacheWhere
   STRING IN aKey
@@ -149,19 +153,29 @@ ARRAY FUNCTION Seq:
  end // aCacheWhere IsString
  else
  begin 
+  ModelElement VAR l_CacheWhere
+  if ( aCacheWhere IsIntf ) then
+  begin
+   aCacheWhere pop:WordBox:Boxed &gt;&gt;&gt; l_CacheWhere
+  end // ( aCacheWhere IsIntf )
+  else
+  begin
+   aCacheWhere &gt;&gt;&gt; l_CacheWhere
+  end
+  
   'cache:' aKey Cat &gt;&gt;&gt; aKey
   VAR l_FieldVar
-  aCacheWhere %% aKey &gt;&gt;&gt; l_FieldVar
+  l_CacheWhere %% aKey &gt;&gt;&gt; l_FieldVar
  
   if ( l_FieldVar NotValid ) then    
   begin
    VAR l_NewVar
-   aKey false aCacheWhere pop:NewWordDefinitor:CheckVar &gt;&gt;&gt; l_NewVar
+   aKey false l_CacheWhere pop:NewWordDefinitor:CheckVar &gt;&gt;&gt; l_NewVar
    @SELF l_NewVar pop:Word:SetProducer
    TRY
     aLambda DO
    EXCEPT
-    [ 'Ошибка вызова: ' aKey ' на ' aCacheWhere pop:Word:Name ] strings:Cat .
+    [ 'Ошибка вызова: ' aKey ' на ' l_CacheWhere pop:Word:Name ] strings:Cat .
     aDefault
    END
    l_NewVar pop:Word:SetValue
@@ -192,51 +206,56 @@ MACRO CacheMethod
  axiom:PushSymbol CacheWord
 ; // CacheMethod
 
+ANY elem_func ElemMemberPrim
+  STRING IN aMemberName
+  IN aDefaultValue
+  
+ TtfwWord VAR l_FieldVar
+ 
+ Self %% aMemberName &gt;&gt;&gt; l_FieldVar
+ 
+ if ( l_FieldVar NotValid ) then
+ begin
+  Self %% 'Original' &gt;&gt;&gt; l_FieldVar
+  if ( l_FieldVar NotValid ) then
+  begin
+   aDefaultValue &gt;&gt;&gt; Result
+  end // l_FieldVar NotValid
+  else
+  begin
+   TtfwWord VAR l_Original
+   l_FieldVar DO &gt;&gt;&gt; l_Original
+   if ( l_Original IsNil ) then
+   begin
+    aDefaultValue &gt;&gt;&gt; Result
+   end // l_Original IsNil
+   else
+   begin
+    l_Original aMemberName aDefaultValue call.me &gt;&gt;&gt; Result
+   end // l_Original IsNil
+  end // l_FieldVar NotValid
+ end // l_FieldVar NotValid
+ else
+ begin
+  l_FieldVar DO &gt;&gt;&gt; Result
+ end // l_FieldVar NotValid
+; // ElemMemberPrim
+
 ANY elem_func ElemMember
   STRING IN aMemberName
   IN aDefaultValue
   
- if ( Self IsNil ) then
- begin
-  aDefaultValue &gt;&gt;&gt; Result
- end // Self IsNil
- else
- if ( Self IsString ) then
- begin
-  aDefaultValue &gt;&gt;&gt; Result
- end // Self IsString
- else
- begin
-  TtfwWord VAR l_FieldVar
-  
-  Self %% aMemberName &gt;&gt;&gt; l_FieldVar
-  
-  if ( l_FieldVar NotValid ) then
-  begin
-   Self %% 'Original' &gt;&gt;&gt; l_FieldVar
-   if ( l_FieldVar NotValid ) then
-   begin
-    aDefaultValue &gt;&gt;&gt; Result
-   end // l_FieldVar NotValid
-   else
-   begin
-    TtfwWord VAR l_Original
-    l_FieldVar DO &gt;&gt;&gt; l_Original
-    if ( l_Original IsNil ) then
-    begin
-     aDefaultValue &gt;&gt;&gt; Result
-    end // l_Original IsNil
-    else
-    begin
-     l_Original aMemberName aDefaultValue call.me &gt;&gt;&gt; Result
-    end // l_Original IsNil
-   end // l_FieldVar NotValid
-  end // l_FieldVar NotValid
-  else
-  begin
-   l_FieldVar DO &gt;&gt;&gt; Result
-  end // l_FieldVar NotValid
- end // Self IsString
+ RULES 
+  ( Self IsNil )
+   aDefaultValue
+  ( Self IsString )
+   aDefaultValue
+  ( Self IsIntf ) 
+   ( Self pop:WordBox:Boxed aMemberName aDefaultValue .ElemMemberPrim )
+  DEFAULT
+   ( Self aMemberName aDefaultValue .ElemMemberPrim )
+ ; // RULES
+ &gt;&gt;&gt; Result
 ; // ElemMember
 
 elem_iterator ElemList

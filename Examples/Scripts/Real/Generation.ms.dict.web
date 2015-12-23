@@ -1400,6 +1400,27 @@ elem_iterator PropertyKeys
  &gt;&gt;&gt; Result
 ; // PropertyKeys
 
+USES
+ axiom:CompiledProcedure
+;
+
+INTERFACE FUNCTION MakeParam
+  STRING IN aName
+  ModelElement IN aType
+ VAR l_Param
+ 
+ CompiledProcedure:Create &gt;&gt;&gt; l_Param
+ 
+ l_Param pop:Word:Box &gt;&gt;&gt; Result
+ 
+ l_Param -&gt; Name := aName
+ l_Param -&gt; Target := aType
+ 
+ l_Param pop:Word:DecRef 
+; // MakeParam
+
+WordAlias MakeFunction MakeParam
+
 CONST opModifyNone 1
 CONST opModifySetter 2
 
@@ -1469,6 +1490,11 @@ elem_iterator MethodInterfacePrim
      false &gt;&gt;&gt; l_WasParam
      
      RULES
+      ( aOpModify opModifySetter == )
+       ( 
+        Self .PropertyKeys 
+        .join&gt; [ 'aValue' l_Type MakeParam ]
+       )
       ( Self .IsProperty )
        ( Self .PropertyKeys )
       DEFAULT
@@ -1501,7 +1527,8 @@ elem_iterator MethodInterfacePrim
        ' ' l_Doc
       end // ( l_Doc IsNil ! )
      ) // Self .MethodParameters .for&gt;
-     
+
+/*{     
      if ( aOpModify opModifySetter == ) then
      begin
       if ( l_WasParam ) then
@@ -1516,6 +1543,7 @@ elem_iterator MethodInterfacePrim
       l_Type .InPrefix
       'aValue' ': ' l_Type .TypeName
      end // ( aOpModify opModifySetter == )
+}*/     
      
      if ( l_WasParam ) then
       ')'
@@ -1653,9 +1681,55 @@ INTEGER FUNCTION .CountIt
  ) 
 ; // .CountIt
 
+BOOLEAN elem_func CanBeClassAncestor
+ RULES
+  ( Self .IsClassOrMixIn )
+   true
+  ( Self .IsException )
+   true
+  ( Self .IsEvdSchemaElement ) 
+   true
+  ( Self .IsTypedef )
+   RULES
+    ( Self .UPisTrue "isPointer" )
+     false
+    DEFAULT
+     ( Self .MainAncestor call.me )
+   ; // RULES  
+  DEFAULT
+   false
+ ; // RULES
+ &gt;&gt;&gt; Result
+; // CanBeClassAncestor
+
+ModelElement elem_func MainClassAncestor
+ Cached:
+ (
+  Self .Inherits 
+  .filter&gt; .CanBeClassAncestor 
+  .FirstElement
+ )
+ &gt;&gt;&gt; Result
+; // MainClassAncestor
+
+elem_iterator ForClassImplements
+ Self .Implements 
+ .filter&gt; .IsClassImplementable
+ &gt;&gt;&gt; Result
+; // ForClassImplements
+
+elem_iterator InterfaceForClassImplements
+ Self .ForClassImplements 
+ &gt;&gt;&gt; Result
+; // InterfaceForClassImplements
+
 elem_iterator OwnOperations
  Self .Operations 
  .filter&gt; ( .IsStaticMethod ! )
+ .joinWithLambded&gt; ( Self .InterfaceForClassImplements ) (
+   IN anItem
+   [ 'As_' anItem .TypeName Cat anItem MakeFunction ]
+ )
  &gt;&gt;&gt; Result
 ; // OwnOperations
 
@@ -1953,46 +2027,6 @@ INTEGER elem_func MethodVisibility
  )
  &gt;&gt;&gt; Result
 ; // MethodVisibility
-
-BOOLEAN elem_func CanBeClassAncestor
- RULES
-  ( Self .IsClassOrMixIn )
-   true
-  ( Self .IsException )
-   true
-  ( Self .IsTypedef )
-   RULES
-    ( Self .UPisTrue "isPointer" )
-     false
-    DEFAULT
-     ( Self .MainAncestor call.me )
-   ; // RULES  
-  DEFAULT
-   false
- ; // RULES
- &gt;&gt;&gt; Result
-; // CanBeClassAncestor
-
-ModelElement elem_func MainClassAncestor
- Cached:
- (
-  Self .Inherits 
-  .filter&gt; .CanBeClassAncestor 
-  .FirstElement
- )
- &gt;&gt;&gt; Result
-; // MainClassAncestor
-
-elem_iterator ForClassImplements
- Self .Implements 
- .filter&gt; .IsClassImplementable
- &gt;&gt;&gt; Result
-; // ForClassImplements
-
-elem_iterator InterfaceForClassImplements
- Self .ForClassImplements 
- &gt;&gt;&gt; Result
-; // InterfaceForClassImplements
 
 elem_iterator ClassImplementsPrim
  Self .ForClassImplements 
