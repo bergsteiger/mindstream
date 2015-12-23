@@ -7,4 +7,16 @@
 <br />
 Рассмотрим теперь "параметры справа".<br />
 <br />
-Пусть у нас есть пример с "параметрами слева":</div>
+Пусть у нас есть пример с "параметрами слева":
+
+<br />
+<br />
+<pre class="brush:delphi">INTEGER FUNCTION Plus
+ INTEGER IN A
+ INTEGER IN B
+ A B + &gt;&gt;&gt; Result // - складываем A и B и помещаем в Result
+; // Plus
+
+1 2 Plus . // - вызываем нашу функцию и печатаем результат
+</pre>
+<br /></div>
