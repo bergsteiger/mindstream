@@ -477,6 +477,8 @@ VOID OPERATOR : Tests:@[
 tests:CheckEtalon
 tests:CheckOutputWithInput
 Dictionary: axiom:text
+Dictionary: axiom:WordBox
+TtfwWord pop:WordBox:Boxed
 Dictionary: axiom:WString
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen42.ms.script
  Uses: 
@@ -1580,6 +1582,8 @@ TClass class::TkwPopValueTypesEQ
 TClass class::TkwPopValueTypesHas
 TClass class::TkwPopValueTypesMakeCustomName
 TClass class::TkwPopValueTypesName
+TClass class::TkwPopWordBox
+TClass class::TkwPopWordBoxBoxed
 TClass class::TkwPopWordCodeIterator
 TClass class::TkwPopWordDecRef
 TClass class::TkwPopWordDirectives
@@ -2026,6 +2030,7 @@ STRING guid::ItfwScriptCaller
 STRING guid::ItfwScriptEngine
 STRING guid::ItfwStoredValuesStack
 STRING guid::ItfwValueList
+STRING guid::ItfwWordBox
 VOID HALT
 BOOLEAN HasTabs
 VOID OPERATOR :: PROCEDURE : help
@@ -2118,6 +2123,7 @@ ItfwScriptCaller
 ItfwScriptEngine
 ItfwStoredValuesStack
 ItfwValueList
+ItfwWordBox
 ARRAY Join
 ARRAY JOIN
 IMMEDIATE VOID OPERATOR :: TYPE : Lambda
@@ -2777,6 +2783,8 @@ TkwPopValueTypesEQ
 TkwPopValueTypesHas
 TkwPopValueTypesMakeCustomName
 TkwPopValueTypesName
+TkwPopWordBox
+TkwPopWordBoxBoxed
 TkwPopWordCodeIterator
 TkwPopWordDecRef
 TkwPopWordDirectives
@@ -3238,6 +3246,7 @@ TtfwWord pop:Compiler:KeywordFinder
 TtfwWord pop:Compiler:NewWordDefinitor
 VOID pop:Compiler:SetToCtx
 Dictionary: axiom:Word
+ItfwWordBox pop:Word:Box
 ARRAY pop:Word:CodeIterator
 VOID pop:Word:DecRef
 STRING pop:Word:Directives
