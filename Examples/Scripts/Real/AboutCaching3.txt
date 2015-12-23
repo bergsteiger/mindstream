@@ -28,7 +28,8 @@ call.ms.script.exe Example.script &gt; a.out<br />
 Утилита call.ms.script.exe находится тут - <a href="https://bitbucket.org/lulinalex/mindstream/src/0bea4adaed7cbc645faa484fcb38f8aae6562827/Examples/Scripts/call.ms.script.exe?at=B284_Inheritance_Try">https://bitbucket.org/lulinalex/mindstream/src/0bea4adaed7cbc645faa484fcb38f8aae6562827/Examples/Scripts/call.ms.script.exe?at=B284_Inheritance_Try</a><br />
 <br />
 <b>Замечение:</b><br />
-Утилита может молча не запускаться, это значит, что её блокирует антивирус. Так как она "получена не из благонадёжного источника"<br />
+Утилита может молча не запускаться, это значит, что её блокирует антивирус. Так как она "получена не из благонадёжного источника".<br />
+<br />
 В этом случае её стоит проверить антивирусом и включить в список разрешённых программ.<br />
 Продолжим.<br />
 <br />
@@ -45,9 +46,8 @@ call.ms.script.exe Example.script &gt; a.out<br />
 1 A // - вызов нашего слова A с передачей ему ЗНАЧЕНИЯ числа 1 как значения параметра
 </pre>
 <br />
-
-Можно расширить пример и определить ТИП параметра. Вот так:<br/>
-<br/>
+Можно расширить пример и определить ТИП параметра. Вот так:<br />
+<br />
 <pre class="brush:delphi">: A
   INTEGER IN aParam // - определяем ЦЕЛОЧИСЛЕННЫЙ параметр aParam, слева от нашего слова A
  aParam // - получаем значение параметра
@@ -56,15 +56,17 @@ call.ms.script.exe Example.script &gt; a.out<br />
 
 1 A // - вызов нашего слова A с передачей ему ЗНАЧЕНИЯ числа 1 как значения параметра
 </pre>
-<br/>
-Тогда в нашу функцию можно будет передать ТОЛЬКО ЦЕЛОЧИСЛЕННЫЕ значения.<br/>
-<br/>
-Но о типах параметров и переменных мы поговорим чуть позже. В <b>отдельной</b> статье.<br/>
-<br/>
-В качестве "лирического отступления" рекомендую ознакомиться с описанием "базовой аксиоматики" - https://bitbucket.org/lulinalex/mindstream/src/a071353dbd21d3afaf8f42b774cc890e0f5a74ce/Examples/ScriptedAxiomatics/kwMain.rc.script?at=B284_Inheritance_Try&fileviewer=file-view-default<br/>
-<br/>
-До сих пор мы рассмотрели ОДИН параметр слева. Рассмотрим НЕСКОЛЬКО параметров слева.<br/>
-<br/>
-Пример:<br/>
-<br/>
+<br />
+Тогда в нашу функцию можно будет передать ТОЛЬКО ЦЕЛОЧИСЛЕННЫЕ значения.<br />
+<br />
+Но о типах параметров и переменных мы поговорим чуть позже. В <b>отдельной</b> статье.<br />
+<br />
+В качестве "лирического отступления" рекомендую ознакомиться с описанием "базовой аксиоматики" - <a href="https://bitbucket.org/lulinalex/mindstream/src/a071353dbd21d3afaf8f42b774cc890e0f5a74ce/Examples/ScriptedAxiomatics/kwMain.rc.script?at=B284_Inheritance_Try&amp;fileviewer=file-view-default">https://bitbucket.org/lulinalex/mindstream/src/a071353dbd21d3afaf8f42b774cc890e0f5a74ce/Examples/ScriptedAxiomatics/kwMain.rc.script?at=B284_Inheritance_Try&amp;fileviewer=file-view-default</a><br />
+<br />
+До сих пор мы рассмотрели ОДИН параметр слева.<br />
+<br />
+Рассмотрим теперь НЕСКОЛЬКО параметров слева.<br />
+<br />
+Пример:<br />
+<br />
 <br /></div>
