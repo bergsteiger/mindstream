@@ -264,4 +264,61 @@ A . // - печатаем
 <b>Параметры справа</b> также удобно использовать для обращения к <a href="https://ru.wikipedia.org/wiki/%D0%9B%D1%8F%D0%BC%D0%B1%D0%B4%D0%B0-%D0%B2%D1%8B%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F">лямбда-выражениям</a>.
 <br />
 <br />
-Приведу пример:</div>
+Приведу пример:
+<br />
+<br />
+<pre class="brush:delphi">: Iteration
+  ^ IN aLambda
+ 0 // - начальное значение
+ 1 aLambda DO
+ 2 aLambda DO
+ 3 aLambda DO
+ 4 aLambda DO
+ 5 aLambda DO
+ 6 aLambda DO
+ 7 aLambda DO
+ 8 aLambda DO
+ 9 aLambda DO
+ 10 aLambda DO
+; // Iteration
+
+// Вызов:
+
+Iteration ( IN A IN B A B + ) . // - просуммирует числа от 0 до 10 и напечатает сумму
+
+// Или короче:
+
+Iteration + . // - просуммирует числа от 0 до 10 и напечатает сумму
+</pre>
+<br />
+Можно вынести начальное значение за скобки:
+
+<br />
+<br />
+<pre class="brush:delphi">: Iteration
+  ^ IN aLambda
+ 1 aLambda DO
+ 2 aLambda DO
+ 3 aLambda DO
+ 4 aLambda DO
+ 5 aLambda DO
+ 6 aLambda DO
+ 7 aLambda DO
+ 8 aLambda DO
+ 9 aLambda DO
+ 10 aLambda DO
+; // Iteration
+
+// Вызов:
+
+0 Iteration ( IN A IN B A B + ) . // - просуммирует числа от 0 до 10 и напечатает сумму
+
+// Или короче:
+
+0 Iteration + . // - просуммирует числа от 0 до 10 и напечатает сумму
+</pre>
+<br />
+Также можно использовать массивы и итерацию по ним:
+
+
+</div>
