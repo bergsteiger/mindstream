@@ -934,6 +934,22 @@ elem_iterator InjectedElements
  >>> Result
 ; // InjectedElements
 
+: .FirstElement
+  ARRAY IN anArray
+ ModelElement VAR l_Found
+ nil >>> l_Found
+ anArray .trunc> ( DROP l_Found IsNil ) .for> ( >>> l_Found )
+ l_Found
+; // .FirstElement
+
+ModelElement elem_func MainAncestor
+ Cached:
+ (
+  Self .Inherits .FirstElement
+ )
+ >>> Result
+; // MainAncestor
+
 BOOLEAN elem_func IsClassImplementable
  Cached:
  (
@@ -941,6 +957,8 @@ BOOLEAN elem_func IsClassImplementable
    ( Self .IsPureMixIn )
     false
    ( Self .IsMixIn )
+    false
+   ( Self .IsSimpleClass )
     false
    ( Self .IsEvdSchemaElement )
     false 
@@ -950,6 +968,15 @@ BOOLEAN elem_func IsClassImplementable
     false 
    ( Self .IsStereotype st_VCMOperations )
     false 
+   ( Self .IsInterface )
+    true
+   ( Self .IsTypedef )
+    RULES
+     ( Self .UPisTrue "isPointer" )
+      false
+     DEFAULT
+      ( Self .MainAncestor call.me )
+    ; // RULES  
    DEFAULT
     true
   ; // RULES
@@ -1005,22 +1032,6 @@ STRING elem_func TypeName
 BOOLEAN elem_func IsClass
  Self .IsSimpleClass >>> Result
 ; // IsClass
-
-: .FirstElement
-  ARRAY IN anArray
- ModelElement VAR l_Found
- nil >>> l_Found
- anArray .trunc> ( DROP l_Found IsNil ) .for> ( >>> l_Found )
- l_Found
-; // .FirstElement
-
-ModelElement elem_func MainAncestor
- Cached:
- (
-  Self .Inherits .FirstElement
- )
- >>> Result
-; // MainAncestor
 
 ModelElement elem_func MainImplements
  Cached:
@@ -1943,6 +1954,57 @@ INTEGER elem_func MethodVisibility
  >>> Result
 ; // MethodVisibility
 
+BOOLEAN elem_func CanBeClassAncestor
+ RULES
+  ( Self .IsClassOrMixIn )
+   true
+  ( Self .IsException )
+   true
+  ( Self .IsTypedef )
+   RULES
+    ( Self .UPisTrue "isPointer" )
+     false
+    DEFAULT
+     ( Self .MainAncestor call.me )
+   ; // RULES  
+  DEFAULT
+   false
+ ; // RULES
+ >>> Result
+; // CanBeClassAncestor
+
+ModelElement elem_func MainClassAncestor
+ Cached:
+ (
+  Self .Inherits 
+  .filter> .CanBeClassAncestor 
+  .FirstElement
+ )
+ >>> Result
+; // MainClassAncestor
+
+elem_iterator ForClassImplements
+ Self .Implements 
+ .filter> .IsClassImplementable
+ >>> Result
+; // ForClassImplements
+
+elem_iterator InterfaceForClassImplements
+ Self .ForClassImplements 
+ >>> Result
+; // InterfaceForClassImplements
+
+elem_iterator ClassImplementsPrim
+ Self .ForClassImplements 
+ >>> Result
+; // ClassImplementsPrim
+
+elem_iterator ClassImplements
+ Self .ClassImplementsPrim
+ .joinWithLambded> ( Self .ClassImplementsPrim ) .InterfaceForClassImplements
+ >>> Result
+; // ClassImplements
+
 elem_proc OutClass
  Self .MixInValues .for> (
    IN aValue
@@ -1959,12 +2021,27 @@ elem_proc OutClass
     ( '{final}' ' ' )
   END // CASE
   
-  'class' 
-  [ Self .MainAncestor ] 
+  'class'
+
+  ARRAY VAR l_Implements 
+  [] >>> l_Implements
+
+  [ Self .MainClassAncestor ] 
   .join> ( 
-   Self .Implements 
-   .filter> .IsClassImplementable
-  ) 
+   Self .ClassImplements 
+   .filter> (
+     IN anItem
+    if ( anItem l_Implements array:Has ! ) then
+    begin
+     anItem array:AddTo l_Implements
+     true
+    end // ( anItem l_Implements array:Has ! )
+    else
+    begin
+     false
+    end // ( anItem l_Implements array:Has ! )
+   ) // .filter>
+  ) // .join>
   .map> .TypeName
   ', ' strings:CatSep
   .With() 
