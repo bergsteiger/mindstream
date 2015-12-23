@@ -1419,6 +1419,8 @@ INTERFACE FUNCTION MakeParam
  l_Param pop:Word:DecRef 
 ; // MakeParam
 
+WordAlias MakeFunction MakeParam
+
 CONST opModifyNone 1
 CONST opModifySetter 2
 
@@ -1679,9 +1681,55 @@ INTEGER FUNCTION .CountIt
  ) 
 ; // .CountIt
 
+BOOLEAN elem_func CanBeClassAncestor
+ RULES
+  ( Self .IsClassOrMixIn )
+   true
+  ( Self .IsException )
+   true
+  ( Self .IsEvdSchemaElement ) 
+   true
+  ( Self .IsTypedef )
+   RULES
+    ( Self .UPisTrue "isPointer" )
+     false
+    DEFAULT
+     ( Self .MainAncestor call.me )
+   ; // RULES  
+  DEFAULT
+   false
+ ; // RULES
+ >>> Result
+; // CanBeClassAncestor
+
+ModelElement elem_func MainClassAncestor
+ Cached:
+ (
+  Self .Inherits 
+  .filter> .CanBeClassAncestor 
+  .FirstElement
+ )
+ >>> Result
+; // MainClassAncestor
+
+elem_iterator ForClassImplements
+ Self .Implements 
+ .filter> .IsClassImplementable
+ >>> Result
+; // ForClassImplements
+
+elem_iterator InterfaceForClassImplements
+ Self .ForClassImplements 
+ >>> Result
+; // InterfaceForClassImplements
+
 elem_iterator OwnOperations
  Self .Operations 
  .filter> ( .IsStaticMethod ! )
+ .joinWithLambded> ( Self .InterfaceForClassImplements ) (
+   IN anItem
+   [ 'As_' anItem .TypeName Cat anItem MakeFunction ]
+ )
  >>> Result
 ; // OwnOperations
 
@@ -1979,48 +2027,6 @@ INTEGER elem_func MethodVisibility
  )
  >>> Result
 ; // MethodVisibility
-
-BOOLEAN elem_func CanBeClassAncestor
- RULES
-  ( Self .IsClassOrMixIn )
-   true
-  ( Self .IsException )
-   true
-  ( Self .IsEvdSchemaElement ) 
-   true
-  ( Self .IsTypedef )
-   RULES
-    ( Self .UPisTrue "isPointer" )
-     false
-    DEFAULT
-     ( Self .MainAncestor call.me )
-   ; // RULES  
-  DEFAULT
-   false
- ; // RULES
- >>> Result
-; // CanBeClassAncestor
-
-ModelElement elem_func MainClassAncestor
- Cached:
- (
-  Self .Inherits 
-  .filter> .CanBeClassAncestor 
-  .FirstElement
- )
- >>> Result
-; // MainClassAncestor
-
-elem_iterator ForClassImplements
- Self .Implements 
- .filter> .IsClassImplementable
- >>> Result
-; // ForClassImplements
-
-elem_iterator InterfaceForClassImplements
- Self .ForClassImplements 
- >>> Result
-; // InterfaceForClassImplements
 
 elem_iterator ClassImplementsPrim
  Self .ForClassImplements 
