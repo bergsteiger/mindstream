@@ -126,14 +126,18 @@ BOOLEAN operator OR
 ; // OR
 
 </pre>
-Тут видно, что параметр aSecond будет вычисляться ТОЛЬКО если он нужен для вычисления всего выражения.<br />
+Тут видно, что параметр <b>aSecond</b> будет вычисляться ТОЛЬКО если он нужен для вычисления всего выражения.<br />
 <br />
-Т.е. если по параметру aFirst - результат выражения будет <b>ещё неясен</b>.
+Т.е. если по параметру <b>aFirst</b> - результат выражения будет <b>ещё неясен</b>.
 <br />
 <br />
 Слово operator является аналогом слов : и FUNCTION. ОН лишь подчёркивает "операторную сущность" определяемых слов.<br />
 <br />
-В частности операторам можно задавать "<a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%B8%D1%82%D0%B5%D1%82_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B8">приоритет выполнения</a>" как например в <a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D0%BB%D0%BE%D0%B3_(%D1%8F%D0%B7%D1%8B%D0%BA_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)">Prolog</a>. Чтобы например избавиться от скобок в примере со словом Plus выше. Но об этом расскажу отдельно.<br />
+В частности - операторам можно задавать "<a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%B8%D1%82%D0%B5%D1%82_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B8">приоритет выполнения</a>" как например в <a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D0%BB%D0%BE%D0%B3_(%D1%8F%D0%B7%D1%8B%D0%BA_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)">Prolog</a>.<br />
+<br />
+Чтобы например избавиться от скобок в примере со словом Plus выше.<br />
+<br />
+Но об этом расскажу отдельно.<br />
 <br />
 Но пока будем считать, что operator определён как:<br />
 <br />
@@ -180,4 +184,73 @@ Access Violation - не будет.<br />
 <br />
 Реализуем например методы инкремента и декремента.<br />
 <br />
-Так как они описаны в аксиоматике:</div>
+Так как они описаны в аксиоматике:
+
+<br />
+<br />
+<pre class="brush:delphi">VOID operator DEC
+  ^ IN aWhatToDecrement
+ aWhatToDecrement DO // - разыменовываем переменную aWhatToDecrement
+ 1 - // - вычитаем единицу
+ &gt;&gt;&gt;^ aWhatToDecrement // - записываем значение туда куда указывает aWhatToDecrement
+; // DEC
+
+VOID operator INC
+  ^ IN aWhatToIncrement
+ aWhatToIncrement DO // - разыменовываем переменную aWhatToDecrement
+ 1 + // - прибавляем единицу
+ &gt;&gt;&gt;^ aWhatToIncrement // - записываем значение туда куда указывает aWhatToIncrement
+; // INC
+
+</pre>
+И вызов:
+
+<br />
+<br />
+<pre class="brush:delphi">INTEGER VAR A // - определяем целочисленную переменную A
+0 &gt;&gt;&gt; A // - инициализируем её нулём
+A . // - печатаем
+INC A // - увеличиваем A на единицу
+A . // - печатаем
+DEC A // - уменьшаем A на единицу
+A . // - печатаем
+</pre>
+<br />
+Ну и предположим нам надо описать методы IncBy и DecBy.<br />
+<br />
+Вот они:
+
+<br />
+<br />
+<pre class="brush:delphi">VOID operator DecBy
+  ^ IN aWhatToDecrement
+  ^ IN aDelta
+ aWhatToDecrement DO // - разыменовываем переменную aWhatToDecrement
+ aDelta DO // - разыменовываем переменную aDelta
+ - // - вычитаем
+ &gt;&gt;&gt;^ aWhatToDecrement // - записываем значение туда куда указывает aWhatToDecrement
+; // DecBy
+
+VOID operator IncBy
+  ^ IN aWhatToIncrement
+  ^ IN aDelta
+ aWhatToIncrement DO // - разыменовываем переменную aWhatToDecrement
+ aDelta DO // - разыменовываем переменную aDelta
+ + // - прибавляем
+ &gt;&gt;&gt;^ aWhatToIncrement // - записываем значение туда куда указывает aWhatToIncrement
+; // IncBy
+</pre>
+<br />
+И вызов:
+
+<br />
+<br />
+<pre class="brush:delphi">INTEGER VAR A // - определяем целочисленную переменную A
+0 &gt;&gt;&gt; A // - инициализируем её нулём
+A . // - печатаем
+IncBy A 2 // - увеличиваем A на 2
+A . // - печатаем
+DecBy A 2 // - уменьшаем A на 2
+A . // - печатаем
+</pre>
+</div>
