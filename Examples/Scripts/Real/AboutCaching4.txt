@@ -96,4 +96,37 @@
 Рассмотрим реализацию булевских операций AND и OR.<br />
 <br />
 Вот она:<br />
-<br /></div>
+<br />
+<pre class="brush:delphi">BOOLEAN operator AND 
+  BOOLEAN IN aFirst
+  ^ IN aSecond
+ %SUMMARY 'Двусторонний, а не обратный польский &amp;&amp;' ;
+ if aFirst then
+  (
+   if ( aSecond DO ) then
+    ( true &gt;&gt;&gt; Result )
+   else
+    ( false &gt;&gt;&gt; Result )
+   )
+ else
+  ( false &gt;&gt;&gt; Result )
+; // AND
+
+BOOLEAN operator OR 
+  BOOLEAN IN aFirst
+  ^ IN aSecond
+ // Двусторонний, а не обратный польский ||
+ if aFirst then
+  ( Result := true )
+ else
+  if ( aSecond DO ) then
+   ( Result := true )
+  else
+   ( Result := false )
+; // OR
+
+</pre>
+Тут видно, что параметр aSecond будет вычисляться ТОЛЬКО если он нужен для вычисления всего выражения.<br />
+<br />
+Т.е. если по параметру aFirst - результат выражения будет <b>ещё неясен</b>.
+</div>
