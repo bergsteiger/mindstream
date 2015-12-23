@@ -208,6 +208,26 @@ PROCEDURE // - используем PROCEDURE вместо :
 <br/>
 Также мы слегка коснулись типизации значений.<br/>
 <br/>
+Кроме типа INTEGER бывают ещё - STRING, OBJECT, CLASS, INTERFACE, CHAR, ARRAY, FILE, BOOLEAN.<br/>
+<br/>
+А также есть ещё <b>ANY</b> - которое означает "значение любого типа". И <b>PRINTABLE</b> - которое означает "любое значение пригодное для вывода на печать".<br/>
+А также - VOID, который означеает "гарантированное отсутствие значения".<br/>
+Также есть ещё типы ITERATABLE, ORDINAL и ATOMIC. О них мы также поговорим позже.<br/>
+Пока лишь пример из аксиоматики:<br/>
+<pre class=brush:delphi>
+INTEGER BOOLEAN TYPE ORDINAL
+STRING ORDINAL TYPE ATOMIC
+ATOMIC TYPE COMPARABLE
+
+FILE ARRAY TYPE ITERATABLE
+ITERATABLE ATOMIC CASTABLE INTERFACE TYPE ANY
+ANY TYPE VARIANT
+
+ARRAY TYPE ITERATOR
+
+FUNCTOR TYPE VAR_REF
+</pre>
+<br/>
 В следующей статье мы рассмотрим "параметры справа". Зачем они нужны и как ими пользоваться.<br/>
 <br/>
 Надеюсь, что данная статья была вам полезна.<br/>
