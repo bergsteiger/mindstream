@@ -141,4 +141,29 @@ BOOLEAN operator OR
 WordAlias OPERATOR :
 </pre>
 <br />
-И что мы получаем с <b>ленивыми вычислениями</b>?</div>
+И что мы получаем с <b>ленивыми вычислениями</b>?<br />
+<br />
+Если написать без ленивых вычислений:<br />
+<br />
+<pre class="brush:delphi">if ( ( anObject &lt;&gt; nil ) ( anObject .SomeMethod ) &amp;&amp; ) then
+</pre>
+<br />
+То получим Access Violation.<br />
+<br />
+А с ленивыми вычислениями:<br />
+<br />
+<pre class="brush:delphi">if ( ( anObject &lt;&gt; nil ) AND ( anObject .SomeMethod ) ) then
+</pre>
+<br />
+Access Violation - не будет.<br />
+<br />
+Надеюсь - понятно почему.
+<br />
+<br />
+Пойдём далее.<br />
+<br />
+Тот факт, что передаётся ссылка на слово, а не значение означает то, что если в качестве слова падали переменную, то мы можем писать в неё.<br />
+<br />
+Реализуем например методы инкремента и декремента.<br />
+<br />
+Так как они описаны в аксиоматике:</div>
