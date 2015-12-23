@@ -11,4 +11,20 @@
 <br />
 Простейшее слово определяется так:<br />
 <br />
+<pre class=brush:delphi>
+: // - признак начала слова
+A // - имя слова
+ 1 >>std::out // - код слова - печатает число 1 или
+ 1 . // - также печатает число 1
+; // - признак конца слова
+
+A // - вызов слова
+</pre>
+<br/>
+Пример можно скопировать в файл Example.script и запустить:<br/>
+<br/>
+call.ms.script.exe Example.script или<br/>
+call.ms.script.exe Example.script > a.out<br/>
+<br/>
+Утилита call.ms.script.exe находится тут - https://bitbucket.org/lulinalex/mindstream/src/0bea4adaed7cbc645faa484fcb38f8aae6562827/Examples/Scripts/call.ms.script.exe?at=B284_Inheritance_Try<br/>
 <br /></div>
