@@ -1400,6 +1400,25 @@ elem_iterator PropertyKeys
  >>> Result
 ; // PropertyKeys
 
+USES
+ axiom:CompiledProcedure
+;
+
+INTERFACE FUNCTION MakeParam
+  STRING IN aName
+  ModelElement IN aType
+ VAR l_Param
+ 
+ CompiledProcedure:Create >>> l_Param
+ 
+ l_Param pop:Word:Box >>> Result
+ 
+ l_Param -> Name := aName
+ l_Param -> Target := aType
+ 
+ l_Param pop:Word:DecRef 
+; // MakeParam
+
 CONST opModifyNone 1
 CONST opModifySetter 2
 
@@ -1469,6 +1488,11 @@ elem_iterator MethodInterfacePrim
      false >>> l_WasParam
      
      RULES
+      ( aOpModify opModifySetter == )
+       ( 
+        Self .PropertyKeys 
+        .join> [ 'aValue' l_Type MakeParam ]
+       )
       ( Self .IsProperty )
        ( Self .PropertyKeys )
       DEFAULT
@@ -1501,7 +1525,8 @@ elem_iterator MethodInterfacePrim
        ' ' l_Doc
       end // ( l_Doc IsNil ! )
      ) // Self .MethodParameters .for>
-     
+
+/*{     
      if ( aOpModify opModifySetter == ) then
      begin
       if ( l_WasParam ) then
@@ -1516,6 +1541,7 @@ elem_iterator MethodInterfacePrim
       l_Type .InPrefix
       'aValue' ': ' l_Type .TypeName
      end // ( aOpModify opModifySetter == )
+}*/     
      
      if ( l_WasParam ) then
       ')'
@@ -1959,6 +1985,8 @@ BOOLEAN elem_func CanBeClassAncestor
   ( Self .IsClassOrMixIn )
    true
   ( Self .IsException )
+   true
+  ( Self .IsEvdSchemaElement ) 
    true
   ( Self .IsTypedef )
    RULES
