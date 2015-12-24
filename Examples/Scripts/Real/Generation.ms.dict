@@ -1402,6 +1402,7 @@ elem_iterator PropertyKeys
 
 USES
  axiom:CompiledProcedure
+ axiom:KeyValues
 ;
 
 INTERFACE FUNCTION MakeParam
@@ -1409,7 +1410,7 @@ INTERFACE FUNCTION MakeParam
   ModelElement IN aType
  VAR l_Param
  
- CompiledProcedure:Create >>> l_Param
+ KeyValues:Create >>> l_Param
  
  l_Param pop:Word:Box >>> Result
  
@@ -1427,6 +1428,21 @@ INTERFACE elem_func ValueParam
   'aValue' Self MakeParam
  ) >>> Result
 ; // ValueParam
+
+BOOLEAN FUNCTION .IsValueValid
+  IN aValue
+ RULES
+  ( aValue IsInt )
+   true
+  ( aValue IsBool )
+   true
+  ( aValue IsNil )
+   false
+  DEFAULT
+   true
+ ; // RULES
+ >>> Result
+; // .IsValueValid
 
 CONST opModifyNone 1
 CONST opModifySetter 2
@@ -1520,12 +1536,20 @@ elem_iterator MethodInterfacePrim
       end  
       aParam .ParamPrefix
       aParam .Name
+      
       VAR l_Type 
       aParam .Target >>> l_Type
       if ( l_Type IsNil ! ) then
       begin
        ': ' l_Type .TypeName
       end // ( l_Type IsNil ! )
+      
+      VAR l_Value
+      aParam .GetUP 'extprop:pas:Value' >>> l_Value
+      if ( l_Value .IsValueValid ) then
+      begin
+       ' = ' l_Value
+      end // ( l_Value .IsValueValid )
       
       VAR l_Doc
       aParam .FineDocumentation >>> l_Doc
@@ -1973,6 +1997,14 @@ elem_proc OutProperty
    'Stored'
   end // ( Self .UPisTrue "needs stored directive" )
 
+  VAR l_Value
+  Self .GetUP 'extprop:pas:Value' >>> l_Value
+  if ( l_Value .IsValueValid ) then
+  begin
+   \n
+   ' default ' l_Value
+  end // ( l_Value .IsValueValid )
+  
   ';'
 
   if ( Self .UPisTrue "is default" ) then
@@ -2448,8 +2480,58 @@ elem_proc OutDefinitionsSection:
 
 ; // OutDefinitionsSection:
 
+elem_iterator GlobalOperationsPrim
+ Cached:
+ (
+  RULES
+   ( Self .IsInterface )
+    ( 
+     Self .Operations 
+     .filter> .IsStaticMethod
+    ) 
+   ( Self .IsRecord )
+    ( 
+     Self .Operations 
+     .filter> .IsConstructor
+    ) 
+   ( Self .IsUtilityPack )
+    ( Self .Operations )
+   DEFAULT
+    [empty]
+  ; // RULES
+ )
+ >>> Result
+; // GlobalOperationsPrim
+
+elem_iterator GlobalOperations
+ Self .GlobalOperationsPrim
+ .filter> ( .IsStereotype st_ini::Operation ! )
+ .filter> ( .IsStereotype st_fini::Operation ! )
+ .filter> ( .IsStereotype st_keyword::Operation ! )
+ .filter> ( .IsStereotype st_globalkeyword::Operation ! )
+ >>> Result
+; // GlobalOperations
+
 elem_proc OutInterfaceSection
  Self .OutDefinitionsSection: .IsForInterface
+ 
+ VAR l_WasOut
+ false >>> l_WasOut
+ Self .OutChildrenRec: .IsForInterface (
+   IN anItem
+  VAR l_GlobalOperations
+  anItem .GlobalOperations >>> l_GlobalOperations
+  l_GlobalOperations 
+  .filter> ( .Visibility PrivateAccess != )
+  .for> (
+    IN aMethod
+   aMethod .MethodInterfaceFor: l_GlobalOperations .Out? ? (
+    true >>> l_WasOut
+    aMethod .OutDocumentation
+   ) // aMethod .MethodInterfaceFor: l_AllOps .Out? ?
+  ) // l_Ops .for>
+ )
+ l_WasOut ? OutLn
 ; // OutInterfaceSection
 
 elem_proc OutImplementationSection
@@ -2459,6 +2541,23 @@ elem_proc OutImplementationSection
   .Constants .filter> ( .Visibility PrivateAccess == ) .for> .OutConstants
  )
 
+ VAR l_WasOut
+ false >>> l_WasOut
+ Self .OutChildrenRec: .IsForInterface (
+   IN anItem
+  VAR l_GlobalOperations
+  anItem .GlobalOperations >>> l_GlobalOperations
+  l_GlobalOperations 
+  .filter> ( .Visibility PrivateAccess == )
+  .for> (
+    IN aMethod
+   aMethod .MethodInterfaceFor: l_GlobalOperations .Out? ? (
+    true >>> l_WasOut
+    aMethod .OutDocumentation
+   ) // aMethod .MethodInterfaceFor: l_AllOps .Out? ?
+  ) // l_Ops .for>
+ )
+ l_WasOut ? OutLn
 ; // OutImplementationSection
 
 elem_proc OutUnit
