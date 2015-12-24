@@ -1421,6 +1421,13 @@ INTERFACE FUNCTION MakeParam
 
 WordAlias MakeFunction MakeParam
 
+INTERFACE elem_func ValueParam
+ Cached:
+ (
+  'aValue' Self MakeParam
+ ) >>> Result
+; // ValueParam
+
 CONST opModifyNone 1
 CONST opModifySetter 2
 
@@ -1493,7 +1500,7 @@ elem_iterator MethodInterfacePrim
       ( aOpModify opModifySetter == )
        ( 
         Self .PropertyKeys 
-        .join> [ 'aValue' l_Type MakeParam ]
+        .join> [ l_Type .ValueParam ]
        )
       ( Self .IsProperty )
        ( Self .PropertyKeys )
@@ -1723,12 +1730,31 @@ elem_iterator InterfaceForClassImplements
  >>> Result
 ; // InterfaceForClassImplements
 
+USES
+ axiom:WordBox
+;
+
+INTERFACE elem_func CastMethod
+ Cached:
+ (
+  VAR l_TypeName
+  Self .TypeName >>> l_TypeName
+  'As_' l_TypeName Cat Self MakeFunction
+  DUP
+  VAR l_Boxed
+  pop:WordBox:Boxed >>> l_Boxed
+  l_Boxed -> %SUM := ( 'Метод приведения нашего интерфейса к ' l_TypeName Cat )
+  l_Boxed -> Visibility := ProtectedAccess
+ )
+ >>> Result
+; // CastMethod
+
 elem_iterator OwnOperations
  Self .Operations 
  .filter> ( .IsStaticMethod ! )
  .joinWithLambded> ( Self .InterfaceForClassImplements ) (
    IN anItem
-   [ 'As_' anItem .TypeName Cat anItem MakeFunction ]
+   [ anItem .CastMethod ]
  )
  >>> Result
 ; // OwnOperations
@@ -1782,6 +1808,17 @@ elem_iterator InterfaceProperties
  >>> Result
 ; // InterfaceProperties
 
+elem_iterator ClassImplementsPrim
+ Self .ForClassImplements 
+ >>> Result
+; // ClassImplementsPrim
+
+elem_iterator ClassImplements
+ Self .ClassImplementsPrim
+ .joinWithLambded> ( Self .ClassImplementsPrim ) .InterfaceForClassImplements
+ >>> Result
+; // ClassImplements
+
 elem_iterator AllOperationsForOverload
  Cached:
  (
@@ -1793,6 +1830,14 @@ elem_iterator AllOperationsForOverload
    ( Self .IsClassOrMixIn )
     ( 
       Self .Operations 
+  ( Self .ClassImplementsPrim ) .for> (
+// .joinWithLambded> ( Self .ClassImplementsPrim ) (
+   IN anItem
+  .joinWithLambded> ( anItem .InterfaceForClassImplements ) (
+    IN anItem
+   [ anItem .CastMethod ]
+  )
+ )
       .filter> ( .IsStereotype st_responsibility::Operation ! ) 
       .filter> ( .IsStereotype st_ini::Operation ! )
       .filter> ( .IsStereotype st_fini::Operation ! )
@@ -2027,17 +2072,6 @@ INTEGER elem_func MethodVisibility
  )
  >>> Result
 ; // MethodVisibility
-
-elem_iterator ClassImplementsPrim
- Self .ForClassImplements 
- >>> Result
-; // ClassImplementsPrim
-
-elem_iterator ClassImplements
- Self .ClassImplementsPrim
- .joinWithLambded> ( Self .ClassImplementsPrim ) .InterfaceForClassImplements
- >>> Result
-; // ClassImplements
 
 elem_proc OutClass
  Self .MixInValues .for> (

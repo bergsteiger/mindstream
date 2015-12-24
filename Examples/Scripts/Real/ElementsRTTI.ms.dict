@@ -421,11 +421,11 @@ BOOLEAN elem_func IsStereotype
 ; // IsStereotype
 
 INTEGER elem_func Visibility
- Self 'Visibility' UnknownAccess .ElemMember >>> Result
+ Self 'Visibility' UnknownAccess /*PublicAccess*/ .ElemMember >>> Result
 ; // Visibility
 
 INTEGER elem_func Abstraction
- Self 'Abstraction' at_unknown .ElemMember >>> Result
+ Self 'Abstraction' /*at_unknown*/ at_final .ElemMember >>> Result
 ; // Abstraction
 
 STRING elem_func GUID
