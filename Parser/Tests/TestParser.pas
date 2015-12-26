@@ -36,11 +36,9 @@ end;
 procedure TestTParser.TestSomeDo;
 var
   l_In: string;
-  l_Parser : TParser;
+  l_Parser : TscriptParser;
 begin
-  l_Parser := TParser.Create;
-
-  l_Parser.SomeDo(l_In);
+  l_Parser := TscriptParser.Create;
 
   FreeAndNil(l_Parser);
 end;
