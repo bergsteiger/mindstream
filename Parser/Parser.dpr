@@ -3,7 +3,9 @@ program Parser;
 uses
   Vcl.Forms,
   GUITestRunner,
-  uMain in 'uMain.pas' {Form6};
+  uMain in 'uMain.pas' {Form6},
+  uParser in 'uParser.pas',
+  TestParser in 'Tests\TestParser.pas';
 
 {$R *.res}
 

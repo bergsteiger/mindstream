@@ -40,8 +40,9 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <SanitizedProjectName>Parser</SanitizedProjectName>
+        <DCC_UnitSearchPath>$(BDS)\Source\DUnit\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
+        <SanitizedProjectName>Parser</SanitizedProjectName>
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
@@ -87,6 +88,8 @@
             <Form>Form6</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uParser.pas"/>
+        <DCCReference Include="Tests\TestParser.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
