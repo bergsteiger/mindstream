@@ -16,6 +16,7 @@ type
     f_CurrentLine: String;
     f_PosInCurrentLine: integer;
   public
+    function GetChar(out aChar: AnsiChar) : boolean;
     constructor Create(const aStream: TStringStream); overload;
     constructor Create(const aFileName: String); overload;
     destructor Destroy; override;
@@ -57,6 +58,11 @@ end;
 function TNewParser.EOF: Boolean;
 begin
   Result := f_EOF AND (f_CurrentLine = '');
+end;
+
+function TNewParser.GetChar(out aChar: AnsiChar): boolean;
+begin
+  Result := False;
 end;
 
 end.
