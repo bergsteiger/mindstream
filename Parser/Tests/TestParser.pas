@@ -44,7 +44,7 @@ var
 begin
   l_Parser := TNewParser.Create('1.txt');
 
-  CheckTrue(l_Parser.GetChar(l_Char));
+  CheckTrue(l_Parser.GetChar(l_Char) and (l_Char = 'A'));
 
   FreeAndNil(l_Parser);
 end;
