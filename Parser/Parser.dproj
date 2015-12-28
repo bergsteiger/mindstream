@@ -91,6 +91,7 @@
         <DCCReference Include="uParser.pas"/>
         <DCCReference Include="Tests\TestParser.pas"/>
         <DCCReference Include="uNewParser.pas"/>
+        <None Include="1.txt"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -116,6 +117,12 @@
                 <DeployFile LocalName="Win32\Debug\Parser.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>Parser.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="1.txt" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
