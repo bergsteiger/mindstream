@@ -17,6 +17,8 @@ type
     procedure TestCreate;
     procedure FirstTest;
     procedure Test_4_1;
+    procedure Test_4_2;
+    procedure Test_4_3;
   end;
 
 implementation
@@ -61,6 +63,52 @@ begin
 
   FreeAndNil(l_Parser);
 end;
+
+procedure TestTParser.Test_4_2;
+var
+  l_Parser : TScriptParser;
+  l_Char : AnsiChar;
+begin
+  l_Parser := TScriptParser.Create('Test_4_2.txt');
+
+  l_Parser.NextToken;
+
+  CheckTrue((l_Parser.TokenString = 'A') and
+            (l_Parser.TokenType = ttToken));
+
+  l_Parser.NextToken;
+
+  CheckTrue((l_Parser.TokenString = 'B') and
+            (l_Parser.TokenType = ttToken));
+
+  l_Parser.NextToken;
+
+  CheckTrue((l_Parser.TokenString = '+') and
+            (l_Parser.TokenType = ttToken));
+
+  FreeAndNil(l_Parser);
+end;
+
+procedure TestTParser.Test_4_3;
+var
+  l_Parser : TScriptParser;
+  l_Char : AnsiChar;
+begin
+  l_Parser := TScriptParser.Create('Test_4_2.txt');
+
+  l_Parser.NextToken;
+
+  CheckTrue((l_Parser.TokenString = 'A') and
+            (l_Parser.TokenType = ttToken));
+
+  l_Parser.NextToken;
+
+  CheckTrue((l_Parser.TokenString = 'B+') and
+            (l_Parser.TokenType = ttToken));
+
+  FreeAndNil(l_Parser);
+end;
+
 
 initialization
   // Register any test cases with the test runner
