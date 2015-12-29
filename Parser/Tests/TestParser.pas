@@ -94,7 +94,7 @@ var
   l_Parser : TScriptParser;
   l_Char : AnsiChar;
 begin
-  l_Parser := TScriptParser.Create('Test_4_2.txt');
+  l_Parser := TScriptParser.Create('Test_4_3.txt');
 
   l_Parser.NextToken;
 

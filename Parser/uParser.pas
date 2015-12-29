@@ -27,8 +27,6 @@ type
    constructor Create(const aStream : TStream); overload;
    constructor Create(const aFileName : String); overload;
    destructor Destroy; override;
-   //   class function Make(const aFileName : String): IscriptParser;
-//    {* - Фабрика интерфейса IscriptParser. }
 
    function EOF: Boolean;
     {* - Достигнут конец входного потока. }
@@ -66,7 +64,6 @@ type
   public
    constructor Create(aParser: TscriptParser);
    destructor Destroy; override;
-//   class function Make(aParser: TscriptParser): IscriptParser;
  end;//TscriptParserContainer
 
 constructor TscriptParserContainer.Create(aParser: TscriptParser);
@@ -81,11 +78,6 @@ begin
   FreeAndNil(f_Parser);
   inherited;
 end;
-
-{class function TscriptParserContainer.Make(aParser: TscriptParser): IscriptParser;
-begin
- Result := TscriptParserContainer.Create(aParser);
-end;}
 
 function TscriptParserContainer.Get_TokenType: TscriptTokenType;
 begin
@@ -134,40 +126,23 @@ begin
   inherited;
 end;
 
-{* - Фабрика интерфейса IscriptParser. }
-{class function TscriptParser.Make(const aFileName : String): IscriptParser;
-begin
- Result := TscriptParserContainer.Make(Self.Create(aFileName));
-end;}
-
 function TscriptParser.GetChar(out aChar: AnsiChar): Boolean;
 begin
  if (f_Stream.Read(aChar, SizeOf(aChar)) = SizeOf(aChar)) then
  begin
   Result := true;
-  {$IfDef TestParser}
-  TtestEngine.CurrentTest.SocketMetric(TtestSocket.Create(Self, 'GetChar')).PutValue(aChar);
-  // - снимаем показания с текущей контрольной точки
-  {$EndIf TestParser}
  end
  else
   Result := false;
 end;
 
 function TscriptParser.ReadLn: String;
-{$IfDef TestParser}
-var
- l_Result : AnsiString;
-{$EndIf TestParser}
 var
  l_Char : AnsiChar;
  l_Line : String;
  l_LineCommentPos : Integer;
 begin
  Inc(f_CurrentLineNumber);
- {$IfDef TestParser}
- try
- {$EndIf TestParser}
   try
    l_Line := '';
    while GetChar(l_Char) do
@@ -198,12 +173,6 @@ begin
     Delete(Result, l_LineCommentPos, Length(Result) - l_LineCommentPos + 1);
    end;//l_LineCommentPos > 0
   end;//try..finally
- {$IfDef TestParser}
- finally
-  TtestEngine.CurrentTest.SocketMetric(TtestSocket.Create(Self, 'ReadLn')).PutValue(Result);
-  // - снимаем показания с текущей контрольной точки
- end;//try..finally
- {$EndIf TestParser}
 end;
 
 procedure TscriptParser.NextToken;
@@ -273,21 +242,6 @@ begin
   if (Self.f_TokenType = ttUnknown) then
    if Self.EOF then
     f_TokenType := ttEOF;
-  {$IfDef TestParser}
-  case f_TokenType of
-   script_ttEOF:
-    TtestEngine.CurrentTest.SocketMetric(TtestSocket.Create(Self, 'NextToken')).PutValue('Конец файла');
-   script_ttString:
-    TtestEngine.CurrentTest.SocketMetric(TtestSocket.Create(Self, 'NextToken')).PutValue('Single quoted string:');
-   script_ttToken:
-    // - ничего не делаем
-    ;
-   else
-    Assert(false, 'Что-то пошло не так');
-  end;//case f_TokenType
-  TtestEngine.CurrentTest.SocketMetric(TtestSocket.Create(Self, 'NextToken')).PutValue(f_Token);
-  // - снимаем показания с текущей контрольной точки
-  {$EndIf TestParser}
  end;//try..finally
 end;
 
