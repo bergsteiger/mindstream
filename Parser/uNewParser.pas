@@ -6,18 +6,18 @@ uses
   Classes;
 
 type
-  TscriptTokenType = (ttUnknown, ttString);
+  TTokenType = (ttUnknown, ttToken, ttString, ttStringComment, ttBoolean, ttNumber, ttIdent);
 
 type
   TNewParser = class
   private
-    f_Stream: TStringStream;
+    f_Stream: TFileStream;
     f_EOF: Boolean;
     f_CurrentLine: String;
     f_PosInCurrentLine: integer;
   public
     function GetChar(out aChar: AnsiChar) : boolean;
-    constructor Create(const aStream: TStringStream); overload;
+    constructor Create(const aStream: TFileStream); overload;
     constructor Create(const aFileName: String); overload;
     destructor Destroy; override;
     function EOF: Boolean;
@@ -31,7 +31,7 @@ uses
 
 { TNewParser }
 
-constructor TNewParser.Create(const aStream: TStringStream);
+constructor TNewParser.Create(const aStream: TFileStream);
 begin
   inherited Create;
   f_PosInCurrentLine := 1;
@@ -46,7 +46,7 @@ begin
   l_FileName := aFileName;
   if (ExtractFilePath(l_FileName) = '') then
     l_FileName := ExtractFilePath(ParamStr(0)) + '\' + l_FileName;
-  Create(TStringStream.Create(l_FileName, fmOpenRead));
+  Create(TFileStream.Create(l_FileName, fmOpenRead));
 end;
 
 destructor TNewParser.Destroy;
