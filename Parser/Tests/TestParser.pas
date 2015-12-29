@@ -46,7 +46,18 @@ begin
 
   l_Parser.NextToken;
 
-  CheckTrue(l_Parser.TokenString = 'A');
+  CheckTrue((l_Parser.TokenString = 'A') and
+            (l_Parser.TokenType = ttToken));
+
+  l_Parser.NextToken;
+
+  CheckTrue((l_Parser.TokenString = 'B') and
+            (l_Parser.TokenType = ttToken));
+
+  l_Parser.NextToken;
+
+  CheckTrue((l_Parser.TokenString = 'C') and
+            (l_Parser.TokenType = ttToken));
 
   FreeAndNil(l_Parser);
 end;
