@@ -16,7 +16,7 @@ type
   published
     procedure TestCreate;
     procedure FirstTest;
-    procedure TestGetChar;
+    procedure Test_4_1;
   end;
 
 implementation
@@ -30,19 +30,19 @@ procedure TestTParser.TestCreate;
 var
   l_Parser : TScriptParser;
 begin
-  l_Parser := TScriptParser.Create('1.txt');
+  l_Parser := TScriptParser.Create('Test_4_1.txt');
 
   CheckFalse(l_Parser.EOF);
 
   FreeAndNil(l_Parser);
 end;
 
-procedure TestTParser.TestGetChar;
+procedure TestTParser.Test_4_1;
 var
   l_Parser : TScriptParser;
   l_Char : AnsiChar;
 begin
-  l_Parser := TScriptParser.Create('1.txt');
+  l_Parser := TScriptParser.Create('Test_4_1.txt');
 
   l_Parser.NextToken;
 
