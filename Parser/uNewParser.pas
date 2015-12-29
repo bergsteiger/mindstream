@@ -62,7 +62,10 @@ end;
 
 function TNewParser.GetChar(out aChar: AnsiChar): boolean;
 begin
-  Result := False;
+  if f_Stream.Read(aChar, SizeOf(aChar)) = SizeOf(aChar) then
+    result := True
+  else
+    Result := False;
 end;
 
 end.
