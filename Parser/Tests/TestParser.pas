@@ -4,7 +4,7 @@ interface
 
 uses
   TestFramework
-  , uNewParser
+  , uParser
   , SysUtils
   ;
 
@@ -28,9 +28,9 @@ end;
 
 procedure TestTParser.TestCreate;
 var
-  l_Parser : TNewParser;
+  l_Parser : TScriptParser;
 begin
-  l_Parser := TNewParser.Create('1.txt');
+  l_Parser := TScriptParser.Create('1.txt');
 
   CheckFalse(l_Parser.EOF);
 
@@ -39,12 +39,14 @@ end;
 
 procedure TestTParser.TestGetChar;
 var
-  l_Parser : TNewParser;
+  l_Parser : TScriptParser;
   l_Char : AnsiChar;
 begin
-  l_Parser := TNewParser.Create('1.txt');
+  l_Parser := TScriptParser.Create('1.txt');
 
-  CheckTrue(l_Parser.GetChar(l_Char) and (l_Char = 'A'));
+  l_Parser.NextToken;
+
+  CheckTrue(l_Parser.TokenString = 'A');
 
   FreeAndNil(l_Parser);
 end;

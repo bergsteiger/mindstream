@@ -6,7 +6,8 @@ uses
   Classes;
 
 type
-  TTokenType = (ttUnknown, ttToken, ttString, ttStringComment, ttBoolean, ttNumber, ttIdent);
+  TTokenType = (ttUnknown, ttToken, ttString, ttStringComment,
+                ttBlockComment, ttBoolean, ttNumber, ttIdent);
 
 type
   TNewParser = class

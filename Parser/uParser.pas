@@ -10,7 +10,7 @@ type
   TscriptTokenType = (ttUnknown, ttString, ttToken, ttEOF);
 
 type
- TscriptParser = class
+ TScriptParser = class
   private
    f_Stream : TStream;
    f_EOF : Boolean;
