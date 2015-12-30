@@ -23,6 +23,7 @@ type
     procedure Test_4_5;
     procedure Test_5;
     procedure Test_5_1;
+    procedure Test_6;
   end;
 
 implementation
@@ -181,6 +182,27 @@ var
   l_Char : AnsiChar;
 begin
   l_Parser := TScriptParser.Create('Test_5_1.txt');
+
+  try
+    l_Parser.NextToken;
+
+    CheckTrue((l_Parser.TokenString = 'A+B') and
+              (l_Parser.TokenType = ttToken));
+
+    l_Parser.NextToken;
+    CheckTrue((l_Parser.TokenString = 'AA') and
+              (l_Parser.TokenType = ttToken));
+  finally
+    FreeAndNil(l_Parser);
+  end;
+end;
+
+procedure TestTParser.Test_6;
+var
+  l_Parser : TScriptParser;
+  l_Char : AnsiChar;
+begin
+  l_Parser := TScriptParser.Create('Test_6.txt');
 
   try
     l_Parser.NextToken;
