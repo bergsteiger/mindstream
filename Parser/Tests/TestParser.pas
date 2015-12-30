@@ -19,6 +19,7 @@ type
     procedure Test_4_1;
     procedure Test_4_2;
     procedure Test_4_3;
+    procedure Test_4_4;
   end;
 
 implementation
@@ -46,22 +47,24 @@ var
 begin
   l_Parser := TScriptParser.Create('Test_4_1.txt');
 
-  l_Parser.NextToken;
+  try
+    l_Parser.NextToken;
 
-  CheckTrue((l_Parser.TokenString = 'A') and
-            (l_Parser.TokenType = ttToken));
+    CheckTrue((l_Parser.TokenString = 'A') and
+              (l_Parser.TokenType = ttToken));
 
-  l_Parser.NextToken;
+    l_Parser.NextToken;
 
-  CheckTrue((l_Parser.TokenString = 'B') and
-            (l_Parser.TokenType = ttToken));
+    CheckTrue((l_Parser.TokenString = 'B') and
+              (l_Parser.TokenType = ttToken));
 
-  l_Parser.NextToken;
+    l_Parser.NextToken;
 
-  CheckTrue((l_Parser.TokenString = 'C') and
-            (l_Parser.TokenType = ttToken));
-
-  FreeAndNil(l_Parser);
+    CheckTrue((l_Parser.TokenString = 'C') and
+              (l_Parser.TokenType = ttToken));
+  finally
+    FreeAndNil(l_Parser);
+  end;
 end;
 
 procedure TestTParser.Test_4_2;
@@ -71,22 +74,24 @@ var
 begin
   l_Parser := TScriptParser.Create('Test_4_2.txt');
 
-  l_Parser.NextToken;
+  try
+    l_Parser.NextToken;
 
-  CheckTrue((l_Parser.TokenString = 'A') and
-            (l_Parser.TokenType = ttToken));
+    CheckTrue((l_Parser.TokenString = 'A') and
+              (l_Parser.TokenType = ttToken));
 
-  l_Parser.NextToken;
+    l_Parser.NextToken;
 
-  CheckTrue((l_Parser.TokenString = 'B') and
-            (l_Parser.TokenType = ttToken));
+    CheckTrue((l_Parser.TokenString = 'B') and
+              (l_Parser.TokenType = ttToken));
 
-  l_Parser.NextToken;
+    l_Parser.NextToken;
 
-  CheckTrue((l_Parser.TokenString = '+') and
-            (l_Parser.TokenType = ttToken));
-
-  FreeAndNil(l_Parser);
+    CheckTrue((l_Parser.TokenString = '+') and
+              (l_Parser.TokenType = ttToken));
+  finally
+    FreeAndNil(l_Parser);
+  end;
 end;
 
 procedure TestTParser.Test_4_3;
@@ -96,17 +101,41 @@ var
 begin
   l_Parser := TScriptParser.Create('Test_4_3.txt');
 
-  l_Parser.NextToken;
+  try
+    l_Parser.NextToken;
 
-  CheckTrue((l_Parser.TokenString = 'A') and
-            (l_Parser.TokenType = ttToken));
+    CheckTrue((l_Parser.TokenString = 'A') and
+              (l_Parser.TokenType = ttToken));
 
-  l_Parser.NextToken;
+    l_Parser.NextToken;
 
-  CheckTrue((l_Parser.TokenString = 'B+') and
-            (l_Parser.TokenType = ttToken));
+    CheckTrue((l_Parser.TokenString = 'B+') and
+              (l_Parser.TokenType = ttToken));
+  finally
+    FreeAndNil(l_Parser);
+  end;
+end;
 
-  FreeAndNil(l_Parser);
+procedure TestTParser.Test_4_4;
+var
+  l_Parser : TScriptParser;
+  l_Char : AnsiChar;
+begin
+  l_Parser := TScriptParser.Create('Test_4_4.txt');
+
+  try
+    l_Parser.NextToken;
+
+    CheckTrue((l_Parser.TokenString = 'A+') and
+              (l_Parser.TokenType = ttToken));
+
+    l_Parser.NextToken;
+
+    CheckTrue((l_Parser.TokenString = 'B') and
+              (l_Parser.TokenType = ttToken));
+  finally
+    FreeAndNil(l_Parser);
+  end;
 end;
 
 
