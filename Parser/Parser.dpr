@@ -5,8 +5,7 @@ uses
   GUITestRunner,
   uMain in 'uMain.pas' {Form6},
   uParser in 'uParser.pas',
-  TestParser in 'Tests\TestParser.pas',
-  uNewParser in 'uNewParser.pas';
+  TestParser in 'Tests\TestParser.pas';
 
 {$R *.res}
 
