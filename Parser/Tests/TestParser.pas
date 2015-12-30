@@ -181,7 +181,7 @@ begin
   end);
 end;
 
-procedure TestTParser.Test_6;
+procedure TestTParser.Test_6_1;
 begin
  DoIt(FileName,
   procedure(aParser: TScriptParser)
