@@ -17,6 +17,7 @@ type
   TestTParser = class(TTestCase)
   private
     function DoIt(const aFileName: String; const aLambda: TSomeProcedure): boolean;
+    function FileName : string;
   published
     procedure TestCreate;
     procedure FirstTest;
@@ -45,6 +46,11 @@ begin
   end;
 end;
 
+function TestTParser.FileName: string;
+begin
+  Result := Name + '.txt';
+end;
+
 procedure TestTParser.FirstTest;
 begin
   Check(True);
@@ -52,7 +58,7 @@ end;
 
 procedure TestTParser.TestCreate;
 begin
-  doIt('Test_4_1.txt',
+  doIt(FileName,
     procedure (aParser : TScriptParser)
     begin
       CheckFalse(aParser.EOF);
@@ -61,7 +67,7 @@ end;
 
 procedure TestTParser.Test_4_1;
 begin
-  doIt(Name + '.txt',
+  doIt(FileName,
     procedure (aParser : TScriptParser)
     begin
       aParser.NextToken;
