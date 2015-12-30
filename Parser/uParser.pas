@@ -138,7 +138,9 @@ function TScriptParser.ReadLn: String;
 var
  l_Char: AnsiChar;
  l_Line: String;
- l_LineCommentPos: Integer;
+ l_LineCommentPos,
+ l_BlockCommentPosBegin,
+ l_BlockCommentPosEnd : Integer;
 begin
  Inc(f_CurrentLineNumber);
  try
@@ -165,11 +167,25 @@ begin
   f_EOF := true;
   Result := l_Line;
  finally
+  // Коментарий //
   l_LineCommentPos := Pos('//', Result);
   if (l_LineCommentPos > 0) then
   begin
    Delete(Result, l_LineCommentPos, Length(Result) - l_LineCommentPos + 1);
   end; // l_LineCommentPos > 0
+
+  // Коментарий /* */
+  l_BlockCommentPosBegin := Pos('/*', Result);
+  l_BlockCommentPosEnd := Pos('*/', Result);
+
+  if (l_BlockCommentPosBegin > 0) or f_IsBlockComment then
+  begin
+   f_IsBlockComment := True;
+    if (l_BlockCommentPosEnd  > 0) then
+     f_IsBlockComment := False;
+
+   Delete(Result, l_BlockCommentPosBegin, l_BlockCommentPosEnd - l_BlockCommentPosBegin + 2);
+  end; // (l_BlockCommentPosBegin > 0) or f_IsBlockComment
  end; // try..finally
 end;
 
@@ -177,8 +193,6 @@ procedure TScriptParser.NextToken;
 const
  cQuote = #39;
  cWhiteSpace = [#32, #9];
- cBlockCommentBegin = '/*';
- cBlockCommentEnd = '*/';
 begin
  f_TokenType := ttUnknown;
  f_Token := '';
@@ -229,22 +243,16 @@ begin
   end // f_CurrentLine[f_PosInCurrentLine] = ''
   else
   begin
-   if Pos(cBlockCommentBegin, f_CurrentLine) > 0 then
-    f_IsBlockComment := true
-   else
-   begin
-    f_TokenType := ttToken;
-    while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
-     if (not(f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)) then
-     begin
-      f_Token := f_Token + f_CurrentLine[f_PosInCurrentLine];
-      Inc(f_PosInCurrentLine);
-     end // not (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)
-     else
-      break;
-   end;
+   f_TokenType := ttToken;
+   while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
+    if (not(f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)) then
+    begin
+     f_Token := f_Token + f_CurrentLine[f_PosInCurrentLine];
+     Inc(f_PosInCurrentLine);
+    end // not (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)
+    else
+     break;
   end; // else
-  // f_CurrentLine := '';
  finally
   if (Self.f_TokenType = ttUnknown) then
    if Self.EOF then
