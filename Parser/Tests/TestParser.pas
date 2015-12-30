@@ -187,6 +187,10 @@ begin
 
     CheckTrue((l_Parser.TokenString = 'A+B') and
               (l_Parser.TokenType = ttToken));
+
+    l_Parser.NextToken;
+    CheckTrue((l_Parser.TokenString = 'AA') and
+              (l_Parser.TokenType = ttToken));
   finally
     FreeAndNil(l_Parser);
   end;
