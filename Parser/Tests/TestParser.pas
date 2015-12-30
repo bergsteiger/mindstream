@@ -20,6 +20,7 @@ type
     procedure Test_4_2;
     procedure Test_4_3;
     procedure Test_4_4;
+    procedure Test_4_5;
   end;
 
 implementation
@@ -138,6 +139,22 @@ begin
   end;
 end;
 
+procedure TestTParser.Test_4_5;
+var
+  l_Parser : TScriptParser;
+  l_Char : AnsiChar;
+begin
+  l_Parser := TScriptParser.Create('Test_4_5.txt');
+
+  try
+    l_Parser.NextToken;
+
+    CheckTrue((l_Parser.TokenString = 'A+B') and
+              (l_Parser.TokenType = ttToken));
+  finally
+    FreeAndNil(l_Parser);
+  end;
+end;
 
 initialization
   // Register any test cases with the test runner
