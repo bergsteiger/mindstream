@@ -143,6 +143,8 @@ var
  l_BlockCommentPosEnd : Integer;
 
  procedure DeleteComments;
+ var
+  l_CharCount : Integer;
  begin
   // Коментарий //
   l_LineCommentPos := Pos('//', Result);
@@ -158,10 +160,18 @@ var
   if (l_BlockCommentPosBegin > 0) or f_IsBlockComment then
   begin
    f_IsBlockComment := True;
-    if (l_BlockCommentPosEnd  > 0) then
-     f_IsBlockComment := False;
 
-   Delete(Result, l_BlockCommentPosBegin, l_BlockCommentPosEnd - l_BlockCommentPosBegin + 2);
+   if (l_BlockCommentPosEnd  > 0) then
+    f_IsBlockComment := False
+   else
+    l_BlockCommentPosEnd := Length(Result);
+
+   if l_BlockCommentPosBegin = 0 then
+    l_BlockCommentPosBegin := 1;
+
+   l_CharCount := l_BlockCommentPosEnd - l_BlockCommentPosBegin + 2;
+
+   Delete(Result, l_BlockCommentPosBegin, l_CharCount);
   end; // (l_BlockCommentPosBegin > 0) or f_IsBlockComment
  end;
 begin
