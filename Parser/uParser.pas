@@ -141,24 +141,21 @@ var
  l_LineCommentPos,
  l_BlockCommentPosBegin,
  l_BlockCommentPosEnd : Integer;
-
  procedure DeleteComments;
  var
   l_CharCount : Integer;
- begin
-  // Коментарий //
-  l_LineCommentPos := Pos('//', Result);
-  if (l_LineCommentPos > 0) then
+  procedure DeleteLineComment;
   begin
-   Delete(Result, l_LineCommentPos, Length(Result) - l_LineCommentPos + 1);
-  end; // l_LineCommentPos > 0
+   // Коментарий //
+   if (l_LineCommentPos > 0) then
+   begin
+    Delete(Result, l_LineCommentPos, Length(Result) - l_LineCommentPos + 1);
+   end; // l_LineCommentPos > 0
+  end;
 
-  // Коментарий /* */
-  l_BlockCommentPosBegin := Pos('/*', Result);
-  l_BlockCommentPosEnd := Pos('*/', Result);
-
-  if (l_BlockCommentPosBegin > 0) or f_IsBlockComment then
+  procedure DeleteBlockComment;
   begin
+   // Коментарий /* */
    f_IsBlockComment := True;
 
    if (l_BlockCommentPosEnd  > 0) then
@@ -172,7 +169,28 @@ var
    l_CharCount := l_BlockCommentPosEnd - l_BlockCommentPosBegin + 2;
 
    Delete(Result, l_BlockCommentPosBegin, l_CharCount);
-  end; // (l_BlockCommentPosBegin > 0) or f_IsBlockComment
+  end;
+ begin
+  l_LineCommentPos := Pos('//', Result);
+  l_BlockCommentPosBegin := Pos('/*', Result);
+  l_BlockCommentPosEnd := Pos('*/', Result);
+
+  // Если в строке есть оба признака комментария
+  if (l_LineCommentPos > 0) and (l_BlockCommentPosBegin > 0) then
+  begin
+   if l_LineCommentPos < l_BlockCommentPosBegin then
+    DeleteLineComment
+   else
+    DeleteBlockComment;
+  end // (l_LineCommentPos > 0) and (l_BlockCommentPosBegin > 0)
+  else
+  begin
+   if (l_BlockCommentPosBegin > 0) or f_IsBlockComment then
+    DeleteBlockComment;
+
+   if l_LineCommentPos > 0 then
+    DeleteLineComment;
+  end // else
  end;
 begin
  Inc(f_CurrentLineNumber);
@@ -249,13 +267,13 @@ begin
     begin
      f_Token := f_Token + f_CurrentLine[f_PosInCurrentLine];
      Inc(f_PosInCurrentLine);
-    end // not (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)
+    end // (f_CurrentLine[f_PosInCurrentLine] <> cQuote)
     else
     begin
      Inc(f_PosInCurrentLine);
      break;
-    end; // f_CurrentLine[f_PosInCurrentLine] <> cQuote
-  end // f_CurrentLine[f_PosInCurrentLine] = ''
+    end; // else
+  end // (f_CurrentLine[f_PosInCurrentLine] = cQuote)
   else
   begin
    f_TokenType := ttToken;
