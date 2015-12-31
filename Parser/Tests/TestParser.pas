@@ -28,6 +28,7 @@ type
   procedure Test_5_1;
   procedure Test_6_1;
   procedure Test_6_2;
+  procedure Test_6_3;
  end;
 
 implementation
@@ -195,6 +196,22 @@ begin
 end;
 
 procedure TestTParser.Test_6_2;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+
+   CheckTrue((aParser.TokenString = 'AA') and
+             (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'BB') and
+             (aParser.TokenType = ttToken));
+  end);
+end;
+
+procedure TestTParser.Test_6_3;
 begin
  DoIt(FileName,
   procedure(aParser: TScriptParser)
