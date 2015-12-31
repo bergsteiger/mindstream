@@ -189,7 +189,7 @@ begin
   begin
    aParser.NextToken;
 
-   CheckTrue((aParser.TokenString = 'A+B') and
+   CheckTrue((aParser.TokenString = 'AA') and
              (aParser.TokenType = ttToken));
   end);
 end;
@@ -201,11 +201,11 @@ begin
   begin
    aParser.NextToken;
 
-   CheckTrue((aParser.TokenString = 'A+B') and
+   CheckTrue((aParser.TokenString = 'AA') and
              (aParser.TokenType = ttToken));
 
    aParser.NextToken;
-   CheckTrue((aParser.TokenString = 'AA') and
+   CheckTrue((aParser.TokenString = 'BB') and
              (aParser.TokenType = ttToken));
   end);
 end;
