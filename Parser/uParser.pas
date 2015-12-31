@@ -146,6 +146,13 @@ var
  var
   l_CharCount : Integer;
  begin
+  // Коментарий //
+  l_LineCommentPos := Pos('//', Result);
+  if (l_LineCommentPos > 0) then
+  begin
+   Delete(Result, l_LineCommentPos, Length(Result) - l_LineCommentPos + 1);
+  end; // l_LineCommentPos > 0
+
   // Коментарий /* */
   l_BlockCommentPosBegin := Pos('/*', Result);
   l_BlockCommentPosEnd := Pos('*/', Result);
@@ -166,13 +173,6 @@ var
 
    Delete(Result, l_BlockCommentPosBegin, l_CharCount);
   end; // (l_BlockCommentPosBegin > 0) or f_IsBlockComment
-
-  // Коментарий //
-  l_LineCommentPos := Pos('//', Result);
-  if (l_LineCommentPos > 0) then
-  begin
-   Delete(Result, l_LineCommentPos, Length(Result) - l_LineCommentPos + 1);
-  end; // l_LineCommentPos > 0
  end;
 begin
  Inc(f_CurrentLineNumber);
