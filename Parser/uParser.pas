@@ -6,7 +6,7 @@ uses
  Classes;
 
 type
- TscriptTokenType = (ttUnknown, ttString, ttToken, ttEOF);
+ TscriptTokenType = (ttUnknown, ttString, ttToken, ttEOF, ttBoolean);
 
 type
  TScriptParser = class
