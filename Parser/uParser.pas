@@ -19,6 +19,8 @@ type
   f_TokenType: TscriptTokenType;
   f_CurrentLineNumber: Integer;
   f_IsBlockComment: Boolean;
+ procedure ExamineToken;
+ // Определяем что за тип у токена ttToken
  protected
   function ReadLn: String;
  protected
@@ -306,6 +308,8 @@ begin
     end // not (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)
     else
      break;
+
+   ExamineToken;
   end; // else
  finally
   if (Self.f_TokenType = ttUnknown) then
@@ -317,6 +321,16 @@ end;
 function TScriptParser.EOF: Boolean;
 begin
  Result := f_EOF AND (f_CurrentLine = '');
+end;
+
+procedure TScriptParser.ExamineToken;
+begin
+ if TokenType = ttToken then
+ begin
+  if (TokenString = 'false') or
+     (TokenString = 'true') then
+   f_TokenType := ttBoolean;
+ end;
 end;
 
 end.

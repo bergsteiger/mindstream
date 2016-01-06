@@ -436,7 +436,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'false') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = ttBoolean));
   end);
 end;
 
