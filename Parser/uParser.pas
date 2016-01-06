@@ -141,7 +141,6 @@ var
  l_LineCommentPos,
  l_BlockCommentPosBegin,
  l_BlockCommentPosEnd : Integer;
-
  procedure DeleteComments;
  var
   l_CharCount : Integer;
@@ -155,8 +154,6 @@ var
   end;
 
   procedure DeleteBlockComment;
-  var
-   IsMoreOneBlockComent : Boolean;
   begin
    // Коментарий /* */
    f_IsBlockComment := True;
@@ -169,47 +166,52 @@ var
    if l_BlockCommentPosBegin = 0 then
     l_BlockCommentPosBegin := 1;
 
-   l_CharCount := l_BlockCommentPosEnd - l_BlockCommentPosBegin + 2;
+   if l_BlockCommentPosEnd < l_BlockCommentPosBegin then
+   begin
+    l_CharCount := l_BlockCommentPosEnd + 2;
+    Delete(l_Line, 1, l_CharCount);
+   end // l_BlockCommentPosEnd < l_BlockCommentPosBegin
+   else
+   begin
+    l_CharCount := l_BlockCommentPosEnd - l_BlockCommentPosBegin + 2;
+    Delete(l_Line, l_BlockCommentPosBegin, l_CharCount);
+   end; // else l_BlockCommentPosEnd < l_BlockCommentPosBegin
 
-   Delete(l_Line, l_BlockCommentPosBegin, l_CharCount);
   end;
 
-  function IsStringHasComment : boolean;
+  function IsStringHasCommentBegin : boolean;
   begin
    Result := False;
-
    l_LineCommentPos := Pos('//', l_Line);
    l_BlockCommentPosBegin := Pos('/*', l_Line);
    l_BlockCommentPosEnd := Pos('*/', l_Line);
 
    if (l_LineCommentPos > 0) or (l_BlockCommentPosBegin > 0) then
     Result := True;
-
-   if (l_BlockCommentPosEnd > 0) and f_IsBlockComment then
-    Result := True;
   end;
  begin
-  while IsStringHasComment do
+  IsStringHasCommentBegin;
+
+  // Если в строке есть оба признака комментария
+  if (l_LineCommentPos > 0) and (l_BlockCommentPosBegin > 0) then
   begin
-   // Если в строке есть оба признака комментария
-   if (l_LineCommentPos > 0) and (l_BlockCommentPosBegin > 0) then
-   begin
-    if l_LineCommentPos < l_BlockCommentPosBegin then
-     DeleteLineComment
-    else
-     DeleteBlockComment;
-   end // (l_LineCommentPos > 0) and (l_BlockCommentPosBegin > 0)
+   if l_LineCommentPos < l_BlockCommentPosBegin then
+    DeleteLineComment
    else
-   begin
-    if (l_BlockCommentPosBegin > 0) or f_IsBlockComment then
-     DeleteBlockComment;
+    DeleteBlockComment;
+  end // (l_LineCommentPos > 0) and (l_BlockCommentPosBegin > 0)
+  else
+  begin
+   if (l_BlockCommentPosBegin > 0) or f_IsBlockComment then
+    DeleteBlockComment;
 
-    if l_LineCommentPos > 0 then
-     DeleteLineComment;
-   end // else
-  end; // while IsHaveComment
+   if l_LineCommentPos > 0 then
+    DeleteLineComment;
+  end; // else
 
-  Result := l_Line;
+  // Если в строке есть ещё комментарии запускаем заново удаление
+  if IsStringHasCommentBegin then
+   DeleteComments;
  end;
 begin
  Inc(f_CurrentLineNumber);
@@ -235,9 +237,9 @@ begin
    l_Line := l_Line + l_Char;
   end; // while GetChar(l_Char)
   f_EOF := true;
-  //Result := l_Line;
  finally
   DeleteComments;
+  Result := l_Line;
  end; // try..finally
 end;
 
@@ -318,3 +320,4 @@ begin
 end;
 
 end.
+
