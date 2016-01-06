@@ -43,6 +43,7 @@ type
   procedure Test_6_15;
   procedure Test_6_16;
   procedure Test_7;
+  procedure Test_7_1;
  end;
 
 implementation
@@ -434,6 +435,21 @@ begin
  DoIt(FileName,
   procedure(aParser: TScriptParser)
   begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'false') and
+             (aParser.TokenType = ttBoolean));
+  end);
+end;
+
+procedure TestTParser.Test_7_1;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'A') and
+             (aParser.TokenType = ttToken));
+
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'false') and
              (aParser.TokenType = ttBoolean));
