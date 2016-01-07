@@ -249,6 +249,19 @@ procedure TScriptParser.NextToken;
 const
  cQuote = #39;
  cWhiteSpace = [#32, #9];
+
+ function IsTokenMultiLineString : boolean;
+ var
+  l_LastChar : char;
+ begin
+  Result := False;
+
+  l_LastChar := f_CurrentLine[Length(f_CurrentLine)];
+  // Делаем проверку ttString на многострочность
+  if (f_TokenType = ttString) and
+     (l_LastChar <> cQuote) then
+   Result := True;
+ end;
 begin
  f_TokenType := ttUnknown;
  f_Token := '';
@@ -312,6 +325,9 @@ begin
    ExamineToken;
   end; // else
  finally
+  if IsTokenMultiLineString then
+   NextToken;
+
   if (Self.f_TokenType = ttUnknown) then
    if Self.EOF then
     f_TokenType := ttEOF;
