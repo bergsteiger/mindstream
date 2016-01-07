@@ -54,9 +54,6 @@ type
 
 implementation
 
-uses
- Dialogs;
-
 procedure TestTParser.DoIt(const aFileName: String;
                            const aLambda: TSomeProcedure);
 var
@@ -521,17 +518,11 @@ procedure TestTParser.Test_10_3;
 begin
  DoIt(FileName,
   procedure(aParser: TScriptParser)
-  var
-   l_Expected,
-   l_Received : string;
   begin
    aParser.NextToken;
-   //showmessage(aParser.TokenString);
-   l_Expected := aParser.TokenString;
-   l_Received := 'ab' + #13#10 + 'ñ';
-   //CheckTrue((aParser.TokenString = 'ab' + #13#10 + 'ñ') and
-   //          (aParser.TokenType = ttString));
-   CheckTrue(l_Expected = l_Received);
+
+   CheckTrue((aParser.TokenString = 'ab' + #13#10 + 'c') and
+             (aParser.TokenType = ttString));
   end);
 end;
 
