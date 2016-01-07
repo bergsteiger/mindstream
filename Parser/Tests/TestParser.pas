@@ -49,6 +49,7 @@ type
   // ------- TODO Test 9
   procedure Test_10_1;
   procedure Test_10_2;
+  procedure Test_10_3;
  end;
 
 implementation
@@ -509,6 +510,17 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'abc d') and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_10_3;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'ab#13#10c') and
              (aParser.TokenType = ttString));
   end);
 end;
