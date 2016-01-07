@@ -251,20 +251,31 @@ const
  cWhiteSpace = [#32, #9];
 
  function IsTokenMultiLineString : boolean;
+ // ƒелаем проверку ttString на многострочность
  var
   l_LastChar : char;
  begin
   Result := False;
 
-  l_LastChar := f_CurrentLine[Length(f_CurrentLine)];
-  // ƒелаем проверку ttString на многострочность
+  if f_CurrentLine <> '' then
+   l_LastChar := f_CurrentLine[Length(f_CurrentLine)];
+
   if (f_TokenType = ttString) and
      (l_LastChar <> cQuote) then
    Result := True;
  end;
 begin
- f_TokenType := ttUnknown;
- f_Token := '';
+ // ≈сли не многострочный стринг обнул€ем токен
+ if not IsTokenMultiLineString then
+ begin
+  f_TokenType := ttUnknown;
+  f_Token := '';
+ end
+ else
+ begin
+  f_Token := f_Token + #13#10;;
+ end;
+
  try
   while true do
   begin
