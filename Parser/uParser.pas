@@ -268,8 +268,8 @@ begin
  // Если не многострочный стринг обнуляем токен
  if not IsTokenMultiLineString then
  begin
-  f_TokenType := ttUnknown;
   f_Token := '';
+  f_TokenType := ttUnknown;
  end
  else
  begin
@@ -305,10 +305,14 @@ begin
   end; // while true
 
   // Тут накапливаем НЕ пустые символы:
-  if (f_CurrentLine[f_PosInCurrentLine] = cQuote) then
+  if (f_CurrentLine[f_PosInCurrentLine] = cQuote) or
+     (TokenType = ttString) then
   begin
    f_TokenType := ttString;
-   Inc(f_PosInCurrentLine);
+
+   if (f_CurrentLine[f_PosInCurrentLine] = cQuote) then
+    Inc(f_PosInCurrentLine);
+
    while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
     if (f_CurrentLine[f_PosInCurrentLine] <> cQuote) then
     begin
