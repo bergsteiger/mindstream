@@ -19,8 +19,6 @@ type
   f_TokenType: TscriptTokenType;
   f_CurrentLineNumber: Integer;
   f_IsBlockComment: Boolean;
- procedure ExamineToken;
- // Определяем что за тип у токена ttToken
  protected
   function ReadLn: String;
  protected
@@ -250,6 +248,8 @@ const
  cQuote = #39;
  cWhiteSpace = [#32, #9];
 
+ // Определяем многострочность строки
+ {$REGION 'IsTokenMultiLineString'}
  function IsTokenMultiLineString : boolean;
  // Делаем проверку ttString на многострочность
  var
@@ -264,6 +264,20 @@ const
      (l_LastChar <> cQuote) then
    Result := True;
  end;
+ {$ENDREGION}
+
+ // Определяем что за тип у токена ttToken
+ {$Region 'ExamineToken'}
+ procedure ExamineToken;
+ begin
+  if TokenType = ttToken then
+  begin
+   if (TokenString = 'false') or
+      (TokenString = 'true') then
+    f_TokenType := ttBoolean;
+  end;
+ end;
+ {$ENDREGION}
 begin
  // Если не многострочный стринг обнуляем токен
  if not IsTokenMultiLineString then
@@ -352,16 +366,6 @@ end;
 function TScriptParser.EOF: Boolean;
 begin
  Result := f_EOF AND (f_CurrentLine = '');
-end;
-
-procedure TScriptParser.ExamineToken;
-begin
- if TokenType = ttToken then
- begin
-  if (TokenString = 'false') or
-     (TokenString = 'true') then
-   f_TokenType := ttBoolean;
- end;
 end;
 
 end.
