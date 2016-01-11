@@ -290,6 +290,13 @@ const
   end;
  end;
  {$ENDREGION}
+
+ function IsStringDelimiter : boolean;
+ begin
+  Result := False;
+  Result := (f_CurrentLine[f_PosInCurrentLine] = cQuote);
+ end;
+
 begin
  // Если не многострочный стринг обнуляем токен
  if not IsTokenMultiLineString then
@@ -331,16 +338,16 @@ begin
   end; // while true
 
   // Тут накапливаем НЕ пустые символы:
-  if (f_CurrentLine[f_PosInCurrentLine] = cQuote) or
+  if IsStringDelimiter or
      (TokenType = ttString) then
   begin
    f_TokenType := ttString;
 
-   if (f_CurrentLine[f_PosInCurrentLine] = cQuote) then
+   if IsStringDelimiter then
     Inc(f_PosInCurrentLine);
 
    while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
-    if (f_CurrentLine[f_PosInCurrentLine] <> cQuote) then
+    if not IsStringDelimiter then
     begin
      f_Token := f_Token + f_CurrentLine[f_PosInCurrentLine];
      Inc(f_PosInCurrentLine);
