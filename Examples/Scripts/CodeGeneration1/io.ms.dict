@@ -1,21 +1,49 @@
-// io.ms.dict
+UNIT io.ms.dict
 
 USES
  types.ms.dict
 ;
 
+USES
+ core.ms.dict
+;
+
 ANY TYPE PRINTABLE
+
+BOOLEAN FUNCTION .IsTfwWord 
+  PRINTABLE IN aValue
+ ( aValue IsObj ) AND ( aValue IS class::TtfwWord ) >>> Result
+; // .IsTfwWord
 
 PROCEDURE Print
  PRINTABLE IN aValue
- if (
-     ( aValue IsObj ) AND ( aValue IS class::TtfwWord )
-    ) then
+ if ( aValue .IsTfwWord ) then
  begin
   aValue |N .
+ end
+ else
+ if ( aValue IsArray )  then
+ begin
+  [ 
+   '[' 
+    aValue .for> ( 
+      PRINTABLE IN aValue
+     if ( aValue .IsTfwWord ) then
+     begin
+      aValue |N
+     end
+     else
+     begin
+      aValue ToPrintable 
+     end
+    ) 
+   ']' 
+  ] ' ' strings:CatSep .
  end
  else
  begin
   aValue .
  end
 ; // Print
+
+WordAlias Log Print

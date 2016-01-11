@@ -1,4 +1,4 @@
-// Testing.ms.dict
+UNIT Testing.ms.dict
 
 USES
  axiom_push.ms.dict
@@ -91,6 +91,13 @@ MACRO RunTests.in.array
 ; // RunTests.in.array
 
 USES
+ DumpStack.ms.dict
+;
+
+EXPORTS
+ DumpStack.ms.dict
+
+USES
  DogAndBracket.ms.dict
 ;
 
@@ -117,3 +124,10 @@ MACRO TestWithDump
 ; // TestWithDump
 
 WordAlias Test&Dump TestWithDump
+
+USES
+ TestAndDumpStack.ms.dict
+;
+
+EXPORTS
+ TestAndDumpStack.ms.dict

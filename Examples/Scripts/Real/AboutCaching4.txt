@@ -1,0 +1,354 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+Предыдущая серия была тут - <a href="http://programmingmindstream.blogspot.ru/2015/12/1163-wordworker-operator.html">#1163. :, PROCEDURE, FUNCTION. Параметры справа и слева.Часть 1</a>.<br />
+<br />
+Там мы рассмотрели ключевые слова <b>:</b>, <b>;</b>, <b>FUNCTION</b>, <b>PROCEDURE</b>.<br />
+<br />
+А также "параметры слева".<br />
+<br />
+Рассмотрим теперь "параметры справа".<br />
+<br />
+Пусть у нас есть пример с "параметрами слева":
+
+<br />
+<br />
+<pre class="brush:delphi">INTEGER FUNCTION Plus
+ INTEGER IN A
+ INTEGER IN B
+ A B + &gt;&gt;&gt; Result // - складываем A и B и помещаем в Result
+; // Plus
+
+1 2 Plus . // - вызываем нашу функцию и печатаем результат
+</pre>
+<br />
+Тут мы имеет "типичную" <a href="https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%80%D0%B0%D1%82%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F_%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D1%8C">ОПЗ</a>.
+<br />
+<br />
+А что делать, если мы хотим пользоваться <a href="https://ru.wikipedia.org/wiki/%D0%98%D0%BD%D1%84%D0%B8%D0%BA%D1%81%D0%BD%D0%B0%D1%8F_%D0%BD%D0%BE%D1%82%D0%B0%D1%86%D0%B8%D1%8F">инфиксной нотацией</a>?<br />
+<br />
+Вот тут нам помогут <b>параметры справа</b>.<br />
+<br />
+Перепишем наш пример с использованием <b>параметров справа</b>:<br />
+<br />
+<pre class="brush:delphi">INTEGER FUNCTION Plus
+ INTEGER IN A // - параметр слева
+ ^ IN B // - параметр СПРАВА передаётся по ССЫЛКЕ, а не по ЗНАЧЕНИЮ. 
+        //   Его надо разыменовывать.
+ A // - значение параметра A
+ B DO // - разыменовываем значение B. Т.е. зовём метод DO на том слове на которое указывает B
+ + &gt;&gt;&gt; Result // - складываем A и B и помещаем в Result
+; // Plus
+
+1 Plus 2 . // - вызываем нашу функцию ИНФИКСНО и печатаем результат
+</pre>
+<br />
+Подчеркну, что <b>параметры справа</b> передаются <a href="https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)#.D0.9F.D0.B5.D1.80.D0.B5.D0.B4.D0.B0.D1.87.D0.B0_.D0.BF.D0.B0.D1.80.D0.B0.D0.BC.D0.B5.D1.82.D1.80.D0.B0_.D0.BF.D0.BE_.D1.81.D1.81.D1.8B.D0.BB.D0.BA.D0.B5">по ссылке</a>.<br />
+<br />
+Также можно написать:<br />
+<br />
+<pre class="brush:delphi">1 Plus ( 2 Plus ( 3 Plus 4 ) ) .
+</pre>
+<br />
+Скобки пока обязательны.<br />
+<br />
+Как обойтись без скобок - напишу отдельно.<br />
+<br />
+Также наш пример можно переписать так:<br />
+<br />
+<pre class="brush:delphi">INTEGER FUNCTION Plus
+ INTEGER IN A // - параметр слева
+ ^ IN B // - параметр СПРАВА передаётся по ССЫЛКЕ, а не по ЗНАЧЕНИЮ. 
+        //   Его надо разыменовывать.
+ A // - значение параметра A
+ B |^ // - разыменовываем значение B. Т.е. зовём метод |^ на том слове на которое указывает B
+ + &gt;&gt;&gt; Result // - складываем A и B и помещаем в Result
+; // Plus
+
+1 Plus 2 . // - вызываем нашу функцию ИНФИКСНО и печатаем результат
+</pre>
+<br />
+Тут используется |^ вместо DO.<br />
+<br />
+Они вообще говоря равноценны.<br />
+<br />
+Про <b>отличия</b> я напишу несколько позже.<br />
+<br />
+Метод&nbsp;|^ в аксиоматике определяется так:<br />
+<br />
+<pre class="brush:delphi">: |^
+  ^@ IN aRef
+  
+ %SUMMARY 'Разыменовывает параметр слева' ;
+ aRef pop:Word:GetRef DO
+; // |^
+</pre>
+<br />
+Детали реализации |^ я также опишу позже.
+<br />
+<br />
+Но пока отмечу, что |^ использует DO. Т.е. |^ является производным от DO.<br />
+<br />
+Пойдём далее.<br />
+<br />
+Зачем параметры справа передаются по ссылке,а не по значению?<br />
+<br />
+Тому есть много причин.<br />
+<br />
+В частности - "<a href="https://ru.wikipedia.org/wiki/%D0%9B%D0%B5%D0%BD%D0%B8%D0%B2%D1%8B%D0%B5_%D0%B2%D1%8B%D1%87%D0%B8%D1%81%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F">ленивые вычисления</a>".<br />
+<br />
+Рассмотрим реализацию булевских операций AND и OR.<br />
+<br />
+Вот она:<br />
+<br />
+<pre class="brush:delphi">BOOLEAN operator AND 
+  BOOLEAN IN aFirst
+  ^ IN aSecond
+ %SUMMARY 'Двусторонний, а не обратный польский &amp;&amp;' ;
+ if aFirst then
+  (
+   if ( aSecond DO ) then
+    ( true &gt;&gt;&gt; Result )
+   else
+    ( false &gt;&gt;&gt; Result )
+   )
+ else
+  ( false &gt;&gt;&gt; Result )
+; // AND
+
+BOOLEAN operator OR 
+  BOOLEAN IN aFirst
+  ^ IN aSecond
+ // Двусторонний, а не обратный польский ||
+ if aFirst then
+  ( Result := true )
+ else
+  if ( aSecond DO ) then
+   ( Result := true )
+  else
+   ( Result := false )
+; // OR
+
+</pre>
+Тут видно, что параметр <b>aSecond</b> будет вычисляться ТОЛЬКО если он нужен для вычисления всего выражения.<br />
+<br />
+Т.е. если по параметру <b>aFirst</b> - результат выражения будет <b>ещё неясен</b>.
+<br />
+<br />
+Слово operator является аналогом слов : и FUNCTION. ОН лишь подчёркивает "операторную сущность" определяемых слов.<br />
+<br />
+В частности - операторам можно задавать "<a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%B8%D1%82%D0%B5%D1%82_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B8">приоритет выполнения</a>" как например в <a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D0%BB%D0%BE%D0%B3_(%D1%8F%D0%B7%D1%8B%D0%BA_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)">Prolog</a>.<br />
+<br />
+Чтобы например избавиться от скобок в примере со словом Plus выше.<br />
+<br />
+Но об этом расскажу отдельно.<br />
+<br />
+Но пока будем считать, что operator определён как:<br />
+<br />
+<pre class="brush:delphi">WordAlias operator :
+WordAlias OPERATOR :
+</pre>
+<br />
+И что мы получаем с <b>ленивыми вычислениями</b>?<br />
+<br />
+Если написать без ленивых вычислений:<br />
+<br />
+<pre class="brush:delphi">if ( ( anObject &lt;&gt; nil ) ( anObject .SomeMethod ) &amp;&amp; ) then
+</pre>
+<br />
+То получим Access Violation.<br />
+<br />
+А с ленивыми вычислениями:<br />
+<br />
+<pre class="brush:delphi">if ( ( anObject &lt;&gt; nil ) AND ( anObject .SomeMethod ) ) then
+</pre>
+<br />
+Access Violation - не будет.<br />
+<br />
+Надеюсь - понятно почему.
+<br />
+<br />
+Операция <b>&lt;&gt;</b> кстати тоже определена в базовой аксиоматике при помощи <b>правых</b> и <b>левых</b> параметров. И через операцию =.<br />
+<br />
+Вот так:<br />
+<br />
+<pre class="brush:delphi">BOOLEAN operator &lt;&gt;
+  IN aLeft
+  ^ IN aRight
+ %SUMMARY 'Правосторонний, а не обратный польский !=' ;
+ Result := ( aLeft = ( aRight DO ) ! )
+; //&lt;&gt;
+</pre>
+<br />
+Комментировать не буду. Отмечу лишь, что операция <b>!</b> - это <a href="https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%80%D0%B0%D1%82%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F_%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D1%8C">постфиксное</a> отрицание.<br />
+<br />
+Пойдём далее.<br />
+<br />
+Тот факт, что передаётся ссылка на слово, а не значение означает то, что если в качестве слова падали переменную, то мы можем писать в неё.<br />
+<br />
+Реализуем например методы инкремента и декремента.<br />
+<br />
+Так как они описаны в аксиоматике:
+
+<br />
+<br />
+<pre class="brush:delphi">VOID operator DEC
+  ^ IN aWhatToDecrement
+ aWhatToDecrement DO // - разыменовываем переменную aWhatToDecrement
+ 1 - // - вычитаем единицу
+ &gt;&gt;&gt;^ aWhatToDecrement // - записываем значение туда куда указывает aWhatToDecrement
+; // DEC
+
+VOID operator INC
+  ^ IN aWhatToIncrement
+ aWhatToIncrement DO // - разыменовываем переменную aWhatToDecrement
+ 1 + // - прибавляем единицу
+ &gt;&gt;&gt;^ aWhatToIncrement // - записываем значение туда куда указывает aWhatToIncrement
+; // INC
+
+</pre>
+И вызов:
+
+<br />
+<br />
+<pre class="brush:delphi">INTEGER VAR A // - определяем целочисленную переменную A
+0 &gt;&gt;&gt; A // - инициализируем её нулём
+A . // - печатаем
+INC A // - увеличиваем A на единицу
+A . // - печатаем
+DEC A // - уменьшаем A на единицу
+A . // - печатаем
+</pre>
+<br />
+Понятное дело, что если мы напишем Inc 1, то мы получим ошибку если не <a href="https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D1%8F%D1%82%D0%BE%D1%80">компиляции</a>, то времени исполнения.<br />
+<br />
+Ну и предположим нам надо описать методы IncBy и DecBy.<br />
+<br />
+Вот они:
+
+<br />
+<br />
+<pre class="brush:delphi">VOID operator DecBy
+  ^ IN aWhatToDecrement
+  ^ IN aDelta
+ aWhatToDecrement DO // - разыменовываем переменную aWhatToDecrement
+ aDelta DO // - разыменовываем переменную aDelta
+ - // - вычитаем
+ &gt;&gt;&gt;^ aWhatToDecrement // - записываем значение туда куда указывает aWhatToDecrement
+; // DecBy
+
+VOID operator IncBy
+  ^ IN aWhatToIncrement
+  ^ IN aDelta
+ aWhatToIncrement DO // - разыменовываем переменную aWhatToDecrement
+ aDelta DO // - разыменовываем переменную aDelta
+ + // - прибавляем
+ &gt;&gt;&gt;^ aWhatToIncrement // - записываем значение туда куда указывает aWhatToIncrement
+; // IncBy
+</pre>
+<br />
+И вызов:
+
+<br />
+<br />
+<pre class="brush:delphi">INTEGER VAR A // - определяем целочисленную переменную A
+0 &gt;&gt;&gt; A // - инициализируем её нулём
+A . // - печатаем
+IncBy A 2 // - увеличиваем A на 2
+A . // - печатаем
+DecBy A 2 // - уменьшаем A на 2
+A . // - печатаем
+</pre>
+<br />
+Пойдём далее.&nbsp;
+<br />
+<br />
+<b>Параметры справа</b> также удобно использовать для обращения к <a href="https://ru.wikipedia.org/wiki/%D0%9B%D1%8F%D0%BC%D0%B1%D0%B4%D0%B0-%D0%B2%D1%8B%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F">лямбда-выражениям</a>.
+<br />
+<br />
+Приведу пример:
+<br />
+<br />
+<pre class="brush:delphi">: Iteration
+  ^ IN aLambda
+ 0 // - начальное значение
+ 1 aLambda DO
+ 2 aLambda DO
+ 3 aLambda DO
+ 4 aLambda DO
+ 5 aLambda DO
+ 6 aLambda DO
+ 7 aLambda DO
+ 8 aLambda DO
+ 9 aLambda DO
+ 10 aLambda DO
+; // Iteration
+
+// Вызов:
+
+Iteration ( IN A IN B A B + ) . // - просуммирует числа от 0 до 10 и напечатает сумму
+
+// Или короче:
+
+Iteration + . // - просуммирует числа от 0 до 10 и напечатает сумму
+</pre>
+<br />
+Можно вынести начальное значение за скобки:
+
+<br />
+<br />
+<pre class="brush:delphi">: Iteration
+  ^ IN aLambda
+ 1 aLambda DO
+ 2 aLambda DO
+ 3 aLambda DO
+ 4 aLambda DO
+ 5 aLambda DO
+ 6 aLambda DO
+ 7 aLambda DO
+ 8 aLambda DO
+ 9 aLambda DO
+ 10 aLambda DO
+; // Iteration
+
+// Вызов:
+
+0 Iteration ( IN A IN B A B + ) . // - просуммирует числа от 0 до 10 и напечатает сумму
+
+// Или короче:
+
+0 Iteration + . // - просуммирует числа от 0 до 10 и напечатает сумму
+
+1 Iteration * . // - перемножит числа от 1 до 10 и напечатает произведение
+</pre>
+<br />
+Также можно использовать <a href="http://programmingmindstream.blogspot.ru/2014/01/todo_24.html">массивы</a> и <a href="http://programmingmindstream.blogspot.ru/2014/01/array-iteratable.html">итерацию</a> по ним:
+
+<br />
+<pre class="brush:delphi">: Iteration
+  ^ IN aLambda
+ [ 1 2 3 4 5 6 7 8 9 10 ] .for&gt; ( aLambda DO )
+; // Iteration
+
+// Вызов:
+
+0 Iteration ( IN A IN B A B + ) . // - просуммирует числа от 0 до 10 и напечатает сумму
+
+// Или короче:
+
+0 Iteration + . // - просуммирует числа от 0 до 10 и напечатает сумму
+
+1 Iteration * . // - перемножит числа от 1 до 10 и напечатает произведение
+</pre>
+<br />
+Подведём итоги.<br />
+<br />
+Мы разобрали <b>параметры справа</b>. Их <a href="https://ru.wikipedia.org/wiki/%D0%A3%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C_(%D1%82%D0%B8%D0%BF_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85)">разыменование</a>.<br />
+<br />
+Также мы разобрали запись значений в те переменные на которые указывают параметры справа.<br />
+<br />
+Также мы рассмотрели как параметры справа могут использоваться для лямбда-выражений.<br />
+<br />
+Также мы немного коснулись массивов и итерации по ним.<br />
+<br />
+В следующей статье мы разберём <b>параметры слева</b> передаваемые <b>по ссылке</b> и рассмотрим как например реализовать операции такие как&nbsp;<b>+=</b> <b>-=</b> и т.п.<br />
+<br />
+Надеюсь, что данная статья была вам полезна.</div>

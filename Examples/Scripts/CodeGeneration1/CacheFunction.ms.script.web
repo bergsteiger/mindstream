@@ -1,0 +1,78 @@
+PROGRAM CacheFunction.ms.script
+
+USES
+ axiom_push.ms.dict
+;
+
+USES
+ Testing.ms.dict
+;
+
+Test&Dump CacheFunction.ms.script.test
+
+ : Cache.do
+   TtfwWord IN aCacheWhere
+    %REMARK 'Где кешировать результат'
+   TtfwWord IN aCacheWhat
+    %REMARK 'Что кешировать'
+   ^ IN aLambda
+    %REMARK 'Лямбда, которая вычисляет результат'
+  aCacheWhere pop:Word:Name Log
+
+  STRING VAR l_CacheWhat
+  'cached:' aCacheWhat pop:Word:Name Cat &gt;&gt;&gt; l_CacheWhat
+  l_CacheWhat Log
+
+  VAR l_FieldVar
+  aCacheWhere %% l_CacheWhat &gt;&gt;&gt; l_FieldVar
+
+  l_FieldVar Log
+
+  aLambda DO
+ ; // Cache.do
+
+ MACRO Cache
+  axiom:PushSymbol @SELF
+  axiom:PushSymbol Cache.do
+ ; // Cache
+
+ : A
+
+  STRING FUNCTION X
+   '1' &gt;&gt;&gt; Result
+  ; // X
+
+  ERROR 'fake A'
+ ; // A
+ 
+ : B
+
+  STRING FUNCTION X
+   '2' &gt;&gt;&gt; Result
+  ; // X
+
+  ERROR 'fake B'
+ ; // B
+
+ STRING FUNCTION X
+   TtfwWord IN aWord
+  aWord Cache ( aWord %% 'X' pop:Word:Name ) &gt;&gt;&gt; Result
+ ; // X
+
+ @ A DumpElement
+ @ B DumpElement
+
+ @ A X .
+ @ B X .
+
+ @ A DumpElement
+ @ B DumpElement
+
+ @ A X .
+ @ B X .
+
+ @ A DumpElement
+ @ B DumpElement
+; // CacheFunction.ms.script.test
+
+CacheFunction.ms.script.test

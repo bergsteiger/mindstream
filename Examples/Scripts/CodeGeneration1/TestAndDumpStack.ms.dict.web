@@ -1,0 +1,17 @@
+UNIT TestAndDumpStack.ms.dict
+
+USES
+ axiom_push.ms.dict
+ DumpStack.ms.dict
+;
+
+MACRO Test&DumpStack
+ Literal IN aName
+ 
+ axiom:PushSymbol Test
+ aName |N Ctx:Parser:PushSymbol
+ axiom:PushSymbol DumpStack
+; // Test&DumpStack
+
+EXPORTS
+ DumpStack.ms.dict

@@ -1,0 +1,92 @@
+VOID TestWithDump CallAncestorTest
+ : A
+  : X
+   INTEGER IN aValue
+   aValue
+   1
+   +
+  ; // : X
+  
+ ; // : A
+ 
+ : B
+  Inherits %G
+   A
+  ; // Inherits %G
+  
+  : X
+   INTEGER IN aValue
+   aValue
+   2
+   +
+   X
+  ; // : X
+  
+ ; // : B
+ 
+ : C
+  Inherits %G
+   B
+  ; // Inherits %G
+  
+ ; // : C
+ 
+ : D
+  Inherits %G
+   C
+  ; // Inherits %G
+  
+  : X
+   INTEGER IN aValue
+   aValue
+   4
+   +
+   X
+  ; // : X
+  
+ ; // : D
+ 
+ : E
+  Inherits %G
+   C
+  ; // Inherits %G
+  
+  : X
+   INTEGER IN aValue
+   aValue
+   5
+   +
+   X
+  ; // : X
+  
+ ; // : E
+ 
+ CallAncestorTest
+ DumpElement
+ 1
+ A ?->
+ 'X'
+ .
+ 2
+ B ?->
+ 'X'
+ .
+ 3
+ C ?->
+ 'X'
+ .
+ 4
+ D ?->
+ 'X'
+ .
+ 5
+ E ?->
+ 'X'
+ .
+; // VOID TestWithDump CallAncestorTest
+
+2
+5
+6
+11
+13

@@ -1,0 +1,511 @@
+UNIT ElementsRTTI.ms.dict
+
+USES 
+ types.ms.dict
+ axiom_push.ms.dict
+ core.ms.dict
+ NoStrangeSymbols.ms.dict
+ WordsRTTI.ms.dict
+;
+
+USES
+ CompileTimeVar.ms.dict
+;
+
+ARRAY CompileTime-VAR [empty] []
+%REMARK 'Пустой итератор'
+
+STRING ENGINE_WORD INTERFACE TYPE ModelElement
+ %REMARK 'Элемент модели'
+ENGINE_WORD TYPE STEREOTYPE
+ %REMARK 'Стереотип элемента модели'
+ 
+CONST kind_NormalClass 0
+CONST kind_ParameterizedClass 1
+
+CONST opkind_Normal 0
+CONST opkind_Implemented 1
+CONST opkind_Overridden 2
+ 
+CONST class_Class 0
+CONST class_Category 1
+CONST class_Attribute 2
+CONST class_Operation 3
+CONST class_Dependency 4
+CONST class_Parameter 5
+
+CONST UnknownAccess -1 
+CONST PrivateAccess 0
+CONST ProtectedAccess 1
+CONST PublicAccess 2
+CONST ImplementationAccess 3
+
+CONST lt_unknown -1
+CONST lt_agr 0
+CONST lt_lnk 1
+CONST lt_ref 1
+
+CONST at_unknown -1
+CONST at_regular 0
+CONST at_virtual 0
+CONST at_abstract 1
+CONST at_final 2
+CONST at_override 3
+ 
+BOOLEAN FUNCTION .IsWord
+ IN aValue
+ ( aValue IsObj ) AND ( aValue IS class::TtfwWord ) >>> Result
+; // .IsWord
+
+BOOLEAN FUNCTION .IsSequence
+ IN aValue
+ ( aValue .IsWord ) AND ( aValue IS class::TkwBeginLikeCompiledCode ) >>> Result
+; // .IsSequence
+
+USES
+ ref.ms.dict
+;
+
+EXPORTS
+ ref.ms.dict
+
+MACRO elem_func
+ Literal IN aName
+ %SUMMARY 'Функция на элементе модели' ;
+ aName |N this.method.addr nil 'ModelElement' do_word_func
+; // elem_func
+
+MACRO elem_func_v
+ Literal IN aStereoName
+ Literal IN aName
+ %SUMMARY 'Виртуальная функция на элементе модели' ;
+  %TODO 'Вообще говоря это потом надо скрестить с elem_func анализируя VIRTUAL, ABSTRACT и OVERRIDE'
+ aName |N this.method.addr nil 'ModelElement' do_word_func
+; // elem_func_v
+
+BOOLEAN elem_func True
+ true >>> Result
+; // True
+
+PROCEDURE do_elem_proc
+ STRING IN aName
+ ENGINE_WORD IN aSelf
+ ENGINE_WORD IN aModifier
+ %SUMMARY 'Реализация elem_proc и elem_generator' ;
+ Ctx:ClearTypeInfo
+ axiom:PushSymbol VOID
+ aName aSelf aModifier 'ModelElement' do_word_func
+; // do_elem_proc
+
+MACRO elem_proc
+ Literal IN aName
+ %SUMMARY 'Процедура на элементе модели' ;
+ aName |N this.method.addr nil do_elem_proc
+; // elem_proc
+
+MACRO elem_generator
+ Literal IN aName
+ %SUMMARY 'Генератор содержимого элемента' ;
+ aName |N this.method.addr nil do_elem_proc
+; // elem_generator
+
+MACRO elem_ref_proc
+ Literal IN aName
+ %SUMMARY 'Процедура на элементе модели, который передаётся по ссылке' ;
+ aName |N this.method.addr Addr LVALUE_MOD do_elem_proc
+; // elem_ref_proc
+
+MACRO elem_iterator
+ [ 'ARRAY elem_func' ] Ctx:Parser:PushArray
+ @SELF Ctx:SetWordProducerForCompiledClass
+; // elem_iterator
+
+ARRAY FUNCTION .SequenceCode.It
+  TkwBeginLikeCompiledCode IN aCode
+ %SUMMARY 'Преобразует список компилированных слов в итератор вызывающий каждое из этих слов' ;
+ aCode CodeIterator .map> DO >>> Result
+; // .SequenceCode.It
+
+ARRAY FUNCTION Seq:
+  ^ IN aCode
+ %SUMMARY 'Преобразует список компилированных слов в итератор вызывающий каждое из этих слов' ;
+ aCode CodeIterator .map> DO >>> Result
+; // Seq:
+
+USES
+ axiom:WordBox
+;
+
+: DoCache
+  ModelElement IN aCacheWhere
+  STRING IN aKey
+  IN aDefault
+  ^ IN aLambda
+  
+ if ( aCacheWhere IsNil ) then
+ begin
+  aLambda DO
+ end // aCacheWhere IsNil
+ else
+ if ( aCacheWhere IsString ) then
+ begin
+  aLambda DO
+ end // aCacheWhere IsString
+ else
+ begin 
+  ModelElement VAR l_CacheWhere
+  if ( aCacheWhere IsIntf ) then
+  begin
+   aCacheWhere pop:WordBox:Boxed >>> l_CacheWhere
+  end // ( aCacheWhere IsIntf )
+  else
+  begin
+   aCacheWhere >>> l_CacheWhere
+  end
+  
+  'cache:' aKey Cat >>> aKey
+  VAR l_FieldVar
+  l_CacheWhere %% aKey >>> l_FieldVar
+ 
+  if ( l_FieldVar NotValid ) then    
+  begin
+   VAR l_NewVar
+   aKey false l_CacheWhere pop:NewWordDefinitor:CheckVar >>> l_NewVar
+   @SELF l_NewVar pop:Word:SetProducer
+   TRY
+    aLambda DO
+   EXCEPT
+    [ 'Ошибка вызова: ' aKey ' на ' l_CacheWhere pop:Word:Name ] strings:Cat .
+    aDefault
+   END
+   l_NewVar pop:Word:SetValue
+   l_NewVar DO
+  end
+  else 
+  begin
+   l_FieldVar DO
+  end
+ end // aCacheWhere IsNil
+; // DoCache
+
+: CacheWord
+  ModelElement IN aCacheWhere
+  TtfwWord IN aWord
+  ^ IN aLambda
+ aCacheWhere aWord pop:Word:Name nil DoCache ( aLambda DO )
+; // CacheWord
+
+MACRO Cache
+ axiom:PushSymbol @SELF
+ axiom:PushSymbol CacheWord
+; // Cache
+
+MACRO CacheMethod
+ 'Self' Ctx:Parser:PushSymbol
+ axiom:PushSymbol @SELF
+ axiom:PushSymbol CacheWord
+; // CacheMethod
+
+ANY elem_func ElemMemberPrim
+  STRING IN aMemberName
+  IN aDefaultValue
+  
+ TtfwWord VAR l_FieldVar
+ 
+ Self %% aMemberName >>> l_FieldVar
+ 
+ if ( l_FieldVar NotValid ) then
+ begin
+  Self %% 'Original' >>> l_FieldVar
+  if ( l_FieldVar NotValid ) then
+  begin
+   aDefaultValue >>> Result
+  end // l_FieldVar NotValid
+  else
+  begin
+   TtfwWord VAR l_Original
+   l_FieldVar DO >>> l_Original
+   if ( l_Original IsNil ) then
+   begin
+    aDefaultValue >>> Result
+   end // l_Original IsNil
+   else
+   begin
+    l_Original aMemberName aDefaultValue call.me >>> Result
+   end // l_Original IsNil
+  end // l_FieldVar NotValid
+ end // l_FieldVar NotValid
+ else
+ begin
+  l_FieldVar DO >>> Result
+ end // l_FieldVar NotValid
+; // ElemMemberPrim
+
+ANY elem_func ElemMember
+  STRING IN aMemberName
+  IN aDefaultValue
+  
+ RULES 
+  ( Self IsNil )
+   aDefaultValue
+  ( Self IsString )
+   aDefaultValue
+  ( Self IsIntf ) 
+   ( Self pop:WordBox:Boxed aMemberName aDefaultValue .ElemMemberPrim )
+  DEFAULT
+   ( Self aMemberName aDefaultValue .ElemMemberPrim )
+ ; // RULES
+ >>> Result
+; // ElemMember
+
+elem_iterator ElemList
+  STRING IN aMemberName
+ Self aMemberName [empty] DoCache
+ (
+  Self aMemberName [empty] .ElemMember 
+ )
+ >>> Result 
+; // ElemList
+
+STRING elem_func ElemString
+  STRING IN aMemberName
+ Self aMemberName '' DoCache
+ (
+  Self aMemberName '' .ElemMember 
+ ) 
+ >>> Result 
+; // ElemString
+
+TtfwWord elem_func ElemWord
+  STRING IN aMemberName
+ Self aMemberName nil DoCache
+ (
+  Self aMemberName nil .ElemMember 
+ ) 
+ >>> Result 
+; // ElemWord
+
+elem_iterator Children
+ Self 'Children' .ElemList >>> Result
+; // Children
+
+elem_iterator Constants
+ Self 'Constants' .ElemList >>> Result
+; // Constants
+
+elem_iterator Dependencies
+ Self 'Dependencies' .ElemList >>> Result
+; // Dependencies
+
+elem_iterator Injected
+ Self 'Injected' .ElemList >>> Result
+; // Injected
+
+elem_iterator Forwarded
+ Self 'Forwarded' .ElemList >>> Result
+; // Forwarded
+
+elem_iterator Attributes
+ Self 'Attributes' .ElemList >>> Result
+; // Attributes
+
+elem_iterator Parameters
+ Self 'Parameters' .ElemList >>> Result
+; // Parameters
+
+elem_iterator Operations
+ Self 'Operations' .ElemList >>> Result
+; // Operations
+
+elem_iterator Overridden
+ Self 'Overridden' .ElemList >>> Result
+; // Overridden
+
+elem_iterator Implemented
+ Self 'Implemented' .ElemList >>> Result
+; // Implemented
+
+elem_iterator Inherits
+ Self 'Inherits' .ElemList >>> Result
+; // Inherits
+
+elem_iterator Implements
+ Self 'Implements' .ElemList >>> Result
+; // Implements
+
+STRING elem_func Name
+ if ( Self IsString ) then
+ begin
+  Self >>> Result
+ end // Self IsString
+ else
+ begin
+  Self 'Name' .ElemString >>> Result
+ end // Self IsString
+; // Name
+
+STRING elem_func Documentation
+ Self '%SUM' .ElemString >>> Result
+; // Documentation
+
+TtfwWord elem_func Target
+ Self 'Target' .ElemWord >>> Result
+; // Target
+
+TtfwWord elem_func ValueType
+ Self 'ValueType' .ElemWord >>> Result
+; // ValueType
+
+ANY elem_func GetUP
+  Literal IN aName
+  
+ Self aName |N '' .ElemMember >>> Result 
+; // GetUP
+
+BOOLEAN elem_func UPisTrue
+  Literal IN aName
+  
+ Self aName |N false .ElemMember true ?== >>> Result  
+; // UPisTrue
+
+TtfwWord STRING elem_func Stereotype
+ Self 'Stereotype' .ElemWord >>> Result
+; // Stereotype
+
+BOOLEAN elem_func IsStereotype
+  ^ IN aStereo
+  
+ BOOLEAN FUNCTION IsStereoKindOf
+   TtfwWord IN anOurStereo
+   TtfwWord IN anOtherStereo
+  anOurStereo 
+  'isA:' anOtherStereo pop:Word:Name Cat 
+  false
+  DoCache (
+   BOOLEAN VAR l_Is
+   anOurStereo anOtherStereo == >>> l_Is
+   if ( l_Is ! ) then
+   begin
+    anOurStereo .Name anOtherStereo .Name == >>> l_Is
+   end // l_Is !
+   if ( l_Is ! ) then
+   begin
+    anOurStereo .Inherited.Words 
+    .trunc> ( DROP l_Is ! ) 
+    .for> (
+     TtfwWord IN anAncestor
+     if ( anAncestor anOtherStereo call.me ) then
+     begin
+      true >>> l_Is
+     end
+    ) 
+   end // l_Is !
+   l_Is
+  ) >>> Result
+ ; // IsStereoKindOf
+
+ TtfwWord VAR l_OurStereo
+ Self .Stereotype >>> l_OurStereo
+ 
+ if ( l_OurStereo IsNil ) then
+ begin
+  false >>> Result
+ end // l_OurStereo IsNil
+ else
+ begin
+  TtfwWord VAR l_Stereo
+  aStereo DO >>> l_Stereo
+  l_OurStereo l_Stereo IsStereoKindOf >>> Result
+ end // // l_OurStereo IsNil
+ 
+; // IsStereotype
+
+INTEGER elem_func Visibility
+ Self 'Visibility' UnknownAccess /*PublicAccess*/ .ElemMember >>> Result
+; // Visibility
+
+INTEGER elem_func Abstraction
+ Self 'Abstraction' /*at_unknown*/ at_final .ElemMember >>> Result
+; // Abstraction
+
+STRING elem_func GUID
+ Self 'GUID' '' .ElemMember >>> Result
+; // GUID
+
+INTEGER elem_func OpKind
+ Self 'OpKind' opkind_Normal .ElemMember >>> Result
+; // OpKind
+
+ModelElement elem_func Parent
+ Self 'Parent' .ElemWord >>> Result
+; // Parent
+
+USES
+ LoadOnDemand.ms.dict
+;
+
+EXPORTS
+ LoadOnDemand.ms.dict
+ 
+USES
+ MDProcess_CoreTemplates.tpi.script
+;
+
+EXPORTS
+ MDProcess_CoreTemplates.tpi.script
+ 
+USES
+ MDProcess_Templates.tpi.script
+;
+
+EXPORTS
+ MDProcess_Templates.tpi.script
+ 
+USES
+ MDProcess_ForDelphi.tpi.script
+;
+
+EXPORTS
+ MDProcess_ForDelphi.tpi.script
+ 
+USES
+ MDProcess_ForF1.tpi.script
+;
+
+EXPORTS
+ MDProcess_ForF1.tpi.script 
+ 
+: st_in
+ CONST Name 'in'
+ @SELF
+; // st_in
+
+: st_inout
+ CONST Name 'inout'
+ @SELF
+; // st_inout
+
+: st_out
+ CONST Name 'out'
+ @SELF
+; // st_out
+
+: st_const
+ CONST Name 'const'
+ @SELF
+; // st_const
+
+: st_noconst
+ CONST Name 'noconst'
+ @SELF
+; // st_noconst
+
+: st_NodeType_
+ CONST Name 'NodeType_'
+ @SELF
+; // st_NodeType_
+
+//: st_VCMAbstractFormSetFactory
+// CONST Name 'VCMAbstractFormSetFactory'
+// @SELF
+//; // st_VCMAbstractFormSetFactory

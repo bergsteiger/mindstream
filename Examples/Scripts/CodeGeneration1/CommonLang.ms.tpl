@@ -20,12 +20,9 @@ STRING FUNCTION CatSepIndent>
  CatSep> cIndentChar aValues >>> Result
 ; // CatSepIndent>
 
-MACRO call.inherited
- // - понятно, что это надо делать через честную компиляцию ссылки на Inherited
- [ 
-   '@SELF .Inherited.Words .for> ( Self SWAP DO )'
- ] Ctx:Parser:PushArray
-; // call.inherited
+USES
+ CallInherited.ms.dict
+;
 
 elem_generator DumpAsIs
  %SUMMARY 'Процедура печатающая содержимое элемента модели. Рекурсивно.' ;

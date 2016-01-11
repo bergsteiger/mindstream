@@ -1,0 +1,34 @@
+Тут можно сделать join:
+
+<pre class=brush:delphi>
+ARRAY FUNCTION .OperationsNeededElements
+  ARRAY IN anArray
+ anArray .mapToTarget>
+ .join> ( anArray .map> .ValueType )
+ .joinWithLambded> anArray ( .Parameters .mapToTarget> )
+ .joinWithLambded> anArray ( .Parameters .map> .ValueType )
+...
+</pre>
+
+Вот так:
+
+Вводим .mapToTarget&ValueType>
+
+<pre class=brush:delphi>
+ARRAY FUNCTION .mapToTarget&ValueType>
+  ARRAY IN anArray
+ anArray .mapToTarget>
+ .join> ( anArray .map> .ValueType )
+ >>> Result
+; // .mapToTarget&ValueType>
+</pre>
+
+Используем .mapToTarget&ValueType>
+
+<pre class=brush:delphi>
+ARRAY FUNCTION .OperationsNeededElements
+  ARRAY IN anArray
+ anArray .mapToTarget&ValueType>
+ .joinWithLambded> anArray ( .Parameters .mapToTarget&ValueType> )
+...
+</pre>

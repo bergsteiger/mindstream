@@ -26,8 +26,8 @@ STRING FUNCTION any:Cat
 ; // any:Cat
 
 TestsFor any:Cat
- Test T1 [ 'A' 123 'B' ] any:Cat Print ;
- Test T2 [ 'A' 124 'B' ] any:Cat Print ;
+ Test&DumpStack T1 ( [ 'A' 123 'B' ] any:Cat )
+ Test&DumpStack T2 ( [ 'A' 124 'B' ] any:Cat )
 ; // TestsFor any:Cat
 
 STRING FUNCTION (+)?
@@ -42,11 +42,11 @@ STRING FUNCTION (+)?
 ; // (+)?
 
 TestsFor (+)?
- Test T1 '' (+)? 'B' Print ;
- Test T2 'A' (+)? 'B' Print ;
- Test T3 'A' (+)? '' Print ;
- Test T4 'A' (+)? 'D' Print ;
- Test T5 'A' (+)? '123' Print ;
+ Test&DumpStack T1 ( '' (+)? 'B' )
+ Test&DumpStack T2 ( 'A' (+)? 'B' )
+ Test&DumpStack T3 ( 'A' (+)? '' )
+ Test&DumpStack T4 ( 'A' (+)? 'D' )
+ Test&DumpStack T5 ( 'A' (+)? '123' )
 ; // TestsFor (+)?
 
 STRING FUNCTION ?(+)
@@ -59,9 +59,9 @@ STRING FUNCTION ?(+)
 ; // ?(+)
 
 TestsFor ?(+)
- Test T1 '' ?(+) 'B' Print ;
- Test T2 'A' ?(+) 'B' Print ;
- Test T3 'A' ?(+) '' Print ;
+ Test&DumpStack T1 ( '' ?(+) 'B' )
+ Test&DumpStack T2 ( 'A' ?(+) 'B' )
+ Test&DumpStack T3 ( 'A' ?(+) '' )
 ; // TestsFor ?(+)
 
 STRING FUNCTION strings:CatSep>
@@ -71,17 +71,17 @@ STRING FUNCTION strings:CatSep>
 ; // strings:CatSep>
 
 TestsFor strings:CatSep>
- Test T1 strings:CatSep> ' ' [ 'A' 'B' ] Print ;
- Test T2 strings:CatSep> ' ' [ 'A ' 'B' ] Print ;
- Test T3 strings:CatSep> ' ' [ 'A ' ' B' ] Print ;
- Test T4 strings:CatSep> ' ' [ 'A' ' B' ] Print ;
- Test T5 strings:CatSep> ' ' [ '' 'B' ] Print ;
- Test T6 strings:CatSep> ' ' [ 'A' '' ] Print ;
+ Test&DumpStack T1 ( strings:CatSep> ' ' [ 'A' 'B' ] )
+ Test&DumpStack T2 ( strings:CatSep> ' ' [ 'A ' 'B' ] )
+ Test&DumpStack T3 ( strings:CatSep> ' ' [ 'A ' ' B' ] )
+ Test&DumpStack T4 ( strings:CatSep> ' ' [ 'A' ' B' ] )
+ Test&DumpStack T5 ( strings:CatSep> ' ' [ '' 'B' ] )
+ Test&DumpStack T6 ( strings:CatSep> ' ' [ 'A' '' ] )
 ; // TestsFor strings:CatSep>
  
 WordAlias CatSep> strings:CatSep>
 
-PROCEDURE string:Split:for>
+: string:Split:for>
   STRING IN aString
   STRING IN aSep
   ^ IN aLambda
@@ -101,9 +101,9 @@ PROCEDURE string:Split:for>
 ; // string:Split:for>
 
 TestsFor string:Split:for>
- Test T1 'a b c' ' ' string:Split:for> Print ;
- Test T2 'a b  c' ' ' string:Split:for> Print ;
- Test T3 'abc' ' ' string:Split:for> Print ;
- Test T4 '' ' ' string:Split:for> Print ;
- Test T5 ' ' ' ' string:Split:for> Print ;
+ Test&DumpStack T1 ( 'a b c' ' ' string:Split:for> NOP )
+ Test&DumpStack T2 ( 'a b  c' ' ' string:Split:for> NOP )
+ Test&DumpStack T3 ( 'abc' ' ' string:Split:for> NOP )
+ Test&DumpStack T4 ( '' ' ' string:Split:for> NOP )
+ Test&DumpStack T5 ( ' ' ' ' string:Split:for> NOP )
 ; // string:Split:for> 

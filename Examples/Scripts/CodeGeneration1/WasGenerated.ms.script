@@ -1,0 +1,104 @@
+PROGRAM WasGenerated.ms.script
+
+USES
+ axiom_push.ms.dict
+ // - в этом словаре описано слово []
+;
+
+USES
+ io.ms.dict
+ // - в этом словаре определено слово Print
+;
+
+USES
+ DogAndBracket.ms.dict
+ // - в этом словаре описано слово @[
+;
+
+USES
+ CompileTimeVar.ms.dict
+ // - в этом словаре описано слово CompileTime-VAR
+;
+
+USES
+ Testing.ms.dict
+ // - в этом словаре описано слово Test&Dump
+;
+
+Test&Dump WasGenerated.ms.script.test
+
+ %SUMMARY 'Метод WasGenerated.ms.script.test' ;
+
+ BOOLEAN FUNCTION .WasGenerated
+   TtfwWord IN aWord
+  %SUMMARY 'Определяет тот факт, что слово aWord уже использовалось для генерации' ;
+
+  ARRAY CompileTime-VAR g_WasGenerated []
+
+  if ( aWord g_WasGenerated array:Has ! )
+  begin
+   aWord array:AddTo g_WasGenerated
+   false >>> Result
+  end // aValue l_Array array:Has !
+  else
+  begin
+   true >>> Result
+  end // aValue l_Array array:Has !
+ ; // .WasGenerated
+
+ : A
+  %SUMMARY 'Метод A' ;
+ ; // A
+
+ : B
+  %SUMMARY 'Метод B' ;
+ ; // B
+
+ : C
+  %SUMMARY 'Метод C' ;
+ ; // C
+
+ : D
+  %SUMMARY 'Метод D' ;
+ ; // D
+
+ : E
+  %SUMMARY 'Метод E' ;
+ ; // E
+
+ @[ 
+ // - слово @[ открывает массив ССЫЛОК, а не ЗНАЧЕНИЙ
+  A A A 
+  B B B 
+  C C C
+  D D D
+  E E E 
+  A A A 
+  B B B 
+  C C C
+  D D D
+  E E E 
+ ] 
+ %REMARK ' - это массив ССЫЛОК на функции (слова)'
+ .filter> ( @ B != )
+ %REMARK ' - отфильтровываем значения равные ссылке на B
+  ВАЖНО: тут сравниваем УКАЗАТЕЛИ на функции'
+ .filter> ( |N 'C' != )
+ %REMARK ' - отфильтровываем значения равные ''C''
+  ВАЖНО: тут сравниваем ИМЕНА функций'
+ .filter> ( @ E != )
+ %REMARK ' - отфильтровываем значения равные ссылке на E
+  ВАЖНО: тут сравниваем УКАЗАТЕЛИ на функции'
+ .filter> ( .WasGenerated ! )
+ %REMARK ' - отфильтровываем те слова, которые уже были использованы для генерации
+  теперь СПЕЦИАЛЬНО вызываем функцию .WasGenerated ПОСЛЕ всех ОСТАЛЬНЫХ фильтров'
+ .map> pop:Word:Name 
+ %REMARK ' - мапируем значение на вызов функции pop:Word:Name'
+ .for> 
+ %REMARK ' - итерируем смапированные значения'
+ Print
+ %REMARK ' - печатаем каждое итерируемое значение'
+
+; // WasGenerated.ms.script.test
+
+WasGenerated.ms.script.test

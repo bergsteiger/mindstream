@@ -7,6 +7,8 @@ VOID TestWithDump CodeGen
 
 Dictionary: axiom:char
 Dictionary: axiom:class
+Dictionary: axiom:CompiledProcedure
+TkwCompiledProcedure CompiledProcedure:Create
 Dictionary: axiom:Component
 INTEGER pop:Component:ComponentCount
 TComponent pop:Component:FindComponent
@@ -128,6 +130,8 @@ VOID OPERATOR : Tests:@[
 tests:CheckEtalon
 tests:CheckOutputWithInput
 Dictionary: axiom:text
+Dictionary: axiom:WordBox
+TtfwWord pop:WordBox:Boxed
 Dictionary: axiom:WString
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeGen69.ms.script
  Uses: 
@@ -187,7 +191,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeGen69.ms.
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\implementation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpStack.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Concrete.ms.model
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Generation.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms.tpl
@@ -401,7 +407,7 @@ ARRAY FUNCTION : .join>
 ; // .join>
 IMMEDIATE VOID OPERATOR :: MACRO : .map>
  Documentation:
-  Трансформирует массив фнуктором aFunctor
+  Трансформирует массив функтором aFunctor
  ^ OPERATOR :: IN : aFunctor
 ; // .map>
 ARRAY .reverted>
@@ -517,6 +523,12 @@ TtfwWord OPERATOR : |^@
  ^@ OPERATOR :: IN : aSelf
  TtfwWord OPERATOR :: |^@ : Result
 ; // |^@
+TtfwWord OPERATOR : |^@Deepest
+ Documentation:
+  Получает ссылку на параметр слева
+ ^@ OPERATOR :: IN : aSelf
+ TtfwWord OPERATOR :: |^@Deepest : Result
+; // |^@Deepest
 BOOLEAN ||
 STRING FUNCTION : |N
  OPERATOR :: IN : %S
@@ -719,25 +731,25 @@ INTEGER Array:Count
 ARRAY Array:Filter
 ARRAY Array:FunctorToIterator
 BOOLEAN FUNCTION : array:Has
+ Documentation:
+  Проверяет, что массив содержит значение
  ARRAY OPERATOR :: IN : anArray
  OPERATOR :: IN : aValue
  BOOLEAN FUNCTION :: array:Has : Result
 ; // array:Has
 BOOLEAN FUNCTION : array:HasString
+ Documentation:
+  Проверяет, что массив содержит строку. С учётом регистра
  ARRAY OPERATOR :: IN : anArray
  STRING OPERATOR :: IN : aString
  BOOLEAN FUNCTION :: array:HasString : Result
- VOID OPERATOR :: PROCEDURE : Поиск
-  STRING OPERATOR :: IN : anItem
- ; // Поиск
 ; // array:HasString
 BOOLEAN FUNCTION : array:HasText
+ Documentation:
+  Проверяет, что массив содержит строку. Без учёта регистра
  ARRAY OPERATOR :: IN : anArray
  STRING OPERATOR :: IN : aString
  BOOLEAN FUNCTION :: array:HasText : Result
- VOID OPERATOR :: PROCEDURE : Поиск
-  STRING OPERATOR :: IN : anItem
- ; // Поиск
 ; // array:HasText
 Struct Array:Item
 VOID Array:Iterate
@@ -780,6 +792,7 @@ IMMEDIATE VOID OPERATOR : axiom:CLASS
 IMMEDIATE VOID OPERATOR : axiom:CompileSetValueTypes
  TtfwValueTypes OPERATOR :: IN : aValues
 ; // axiom:CompileSetValueTypes
+PROTECTED : : axiom:DefineBox
 PROTECTED : : axiom:DefineVar
 PROTECTED VOID : : axiom:DefineVarWithInit
  STRING OPERATOR :: IN : aName
@@ -812,6 +825,9 @@ STRING OPERATOR : axiom:SourceInfo
 begin
 BEGIN
 IMMEDIATE VOID OPERATOR : BOOLEAN
+IMMEDIATE VOID OPERATOR : BOX
+ ^L OPERATOR :: IN : aName
+; // BOX
 VOID break
 VOID BREAK
 VOID BREAK-ITERATOR
@@ -957,6 +973,7 @@ TClass class::TkwCompiledIfElse
 TClass class::TkwCompiledIncluded
 TClass class::TkwCompiledMain
 TClass class::TkwCompiledProcedure
+TClass class::TkwCompiledProcedureCreate
 TClass class::TkwCompiledProcedureWithStackChecking
 TClass class::TkwCompiledPushWord
 TClass class::TkwCompiledRules
@@ -1185,8 +1202,10 @@ TClass class::TkwPopKeyWordDictionary
 TClass class::TkwPopKeywordFinderKeywordByName
 TClass class::TkwPopKeywordFinderParentFinder
 TClass class::TkwPopKeyWordName
+TClass class::TkwPopKeyWordSetWord
 TClass class::TkwPopKeyWordWord
 TClass class::TkwPopMainDictionaryCompiledCode
+TClass class::TkwPopNewWordDefinitorCheckRefcountVar
 TClass class::TkwPopNewWordDefinitorCheckVar
 TClass class::TkwPopNewWordDefinitorCheckWord
 TClass class::TkwPopNewWordDefinitorDefineInParameter
@@ -1226,6 +1245,8 @@ TClass class::TkwPopValueTypesEQ
 TClass class::TkwPopValueTypesHas
 TClass class::TkwPopValueTypesMakeCustomName
 TClass class::TkwPopValueTypesName
+TClass class::TkwPopWordBox
+TClass class::TkwPopWordBoxBoxed
 TClass class::TkwPopWordCodeIterator
 TClass class::TkwPopWordDecRef
 TClass class::TkwPopWordDirectives
@@ -1265,6 +1286,8 @@ TClass class::TkwPopWordParent
 TClass class::TkwPopWordProducer
 TClass class::TkwPopWordPublicateInMainDictionary
 TClass class::TkwPopWordRedefines
+TClass class::TkwPopWordSetKey
+TClass class::TkwPopWordSetParent
 TClass class::TkwPopWordSetProducer
 TClass class::TkwPopWordSetValue
 TClass class::TkwPopWordSetValuePrim
@@ -1279,6 +1302,8 @@ TClass class::TkwRAISE
 TClass class::TkwRandom
 TClass class::TkwRandomize
 TClass class::TkwReduceStackLevel
+TClass class::TkwRefcountGlobalVar
+TClass class::TkwRefcountVar
 TClass class::TkwRefParam
 TClass class::TkwRenameFile
 TClass class::TkwRGB2String
@@ -1668,6 +1693,7 @@ STRING guid::ItfwScriptCaller
 STRING guid::ItfwScriptEngine
 STRING guid::ItfwStoredValuesStack
 STRING guid::ItfwValueList
+STRING guid::ItfwWordBox
 VOID HALT
 BOOLEAN HasTabs
 VOID OPERATOR :: PROCEDURE : help
@@ -1760,6 +1786,7 @@ ItfwScriptCaller
 ItfwScriptEngine
 ItfwStoredValuesStack
 ItfwValueList
+ItfwWordBox
 ARRAY Join
 ARRAY JOIN
 IMMEDIATE VOID OPERATOR :: TYPE : Lambda
@@ -2147,6 +2174,7 @@ TkwCompiledIfElse
 TkwCompiledIncluded
 TkwCompiledMain
 TkwCompiledProcedure
+TkwCompiledProcedureCreate
 TkwCompiledProcedureWithStackChecking
 TkwCompiledPushWord
 TkwCompiledRules
@@ -2375,8 +2403,10 @@ TkwPopKeyWordDictionary
 TkwPopKeywordFinderKeywordByName
 TkwPopKeywordFinderParentFinder
 TkwPopKeyWordName
+TkwPopKeyWordSetWord
 TkwPopKeyWordWord
 TkwPopMainDictionaryCompiledCode
+TkwPopNewWordDefinitorCheckRefcountVar
 TkwPopNewWordDefinitorCheckVar
 TkwPopNewWordDefinitorCheckWord
 TkwPopNewWordDefinitorDefineInParameter
@@ -2416,6 +2446,8 @@ TkwPopValueTypesEQ
 TkwPopValueTypesHas
 TkwPopValueTypesMakeCustomName
 TkwPopValueTypesName
+TkwPopWordBox
+TkwPopWordBoxBoxed
 TkwPopWordCodeIterator
 TkwPopWordDecRef
 TkwPopWordDirectives
@@ -2455,6 +2487,8 @@ TkwPopWordParent
 TkwPopWordProducer
 TkwPopWordPublicateInMainDictionary
 TkwPopWordRedefines
+TkwPopWordSetKey
+TkwPopWordSetParent
 TkwPopWordSetProducer
 TkwPopWordSetValue
 TkwPopWordSetValuePrim
@@ -2469,6 +2503,8 @@ TkwRAISE
 TkwRandom
 TkwRandomize
 TkwReduceStackLevel
+TkwRefcountGlobalVar
+TkwRefcountVar
 TkwRefParam
 TkwRenameFile
 TkwRGB2String
@@ -2860,6 +2896,7 @@ TtfwValueTypes Ctx:ValueTypes
 TtfwWord Ctx:WordDefiningNow
 TtfwWordInfo Ctx:WordInfo
 Dictionary: axiom:NewWordDefinitor
+TtfwWord pop:NewWordDefinitor:CheckRefcountVar
 TtfwWord pop:NewWordDefinitor:CheckVar
 TtfwKeyWord pop:NewWordDefinitor:CheckWord
 TtfwWord pop:NewWordDefinitor:DefineInParameter
@@ -2872,6 +2909,7 @@ TtfwWord pop:Compiler:KeywordFinder
 TtfwWord pop:Compiler:NewWordDefinitor
 VOID pop:Compiler:SetToCtx
 Dictionary: axiom:Word
+ItfwWordBox pop:Word:Box
 ARRAY pop:Word:CodeIterator
 VOID pop:Word:DecRef
 STRING pop:Word:Directives
@@ -2884,6 +2922,10 @@ TtfwWord OPERATOR : pop:Word:GetRefDeep
  TtfwWord OPERATOR :: IN : aSelf
  TtfwWord OPERATOR :: pop:Word:GetRefDeep : Result
 ; // pop:Word:GetRefDeep
+TtfwWord OPERATOR : pop:Word:GetRefDeepest
+ TtfwWord OPERATOR :: IN : aSelf
+ TtfwWord OPERATOR :: pop:Word:GetRefDeepest : Result
+; // pop:Word:GetRefDeepest
 VOID pop:Word:IncRef
 TtfwWordInfo pop:Word:Info
 TtfwDictionary pop:Word:InnerDictionary
@@ -2904,6 +2946,8 @@ VOID OPERATOR :: PROCEDURE : pop:Word:Print
 TtfwWord pop:Word:Producer
 VOID pop:Word:PublicateInMainDictionary
 TtfwWord pop:Word:Redefines
+VOID pop:Word:SetKey
+VOID pop:Word:SetParent
 VOID pop:Word:SetProducer
 VOID pop:Word:SetValue
 VOID pop:Word:SetValuePrim
@@ -2916,6 +2960,7 @@ VOID OPERATOR :: PROCEDURE : pop:KeyWord:Print
  STRING OPERATOR :: IN : anIndent
  TtfwWord OPERATOR :: VAR : l_Word
 ; // pop:KeyWord:Print
+VOID pop:KeyWord:SetWord
 TtfwWord pop:KeyWord:Word
 Dictionary: axiom:Parser
 STRING pop:Parser:FileName
@@ -3016,6 +3061,10 @@ PRIVATE STRING FUNCTION : private:CheckSpaces
  STRING OPERATOR :: IN : aName
  PRIVATE STRING FUNCTION :: private:CheckSpaces : Result
 ; // private:CheckSpaces
+PRIVATE : : private:DefineBoxEx
+ STRING OPERATOR :: IN : aName
+ OBJECT OPERATOR :: IN : aStereo
+; // private:DefineBoxEx
 IMMEDIATE PRIVATE VOID OPERATOR : private:DefineNameParam
 PRIVATE OPERATOR : private:DefineParam
 PRIVATE : : private:DefineVarEx
@@ -3272,6 +3321,9 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms
  ;
 VOID ()
 IMMEDIATE VOID OPERATOR :: MACRO : []
+ Documentation:
+  Пустой массив
+; // []
 ARRAY FUNCTION : axiom:InParams:It
  ENGINE_WORD OPERATOR :: IN : aParams
  ARRAY FUNCTION :: axiom:InParams:It : Result
@@ -3362,8 +3414,10 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dic
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpStack.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
  ;
 STRING FUNCTION : (+)?
@@ -3402,7 +3456,7 @@ STRING FUNCTION : string:CatWihAny
  OPERATOR :: IN : aValue
  STRING FUNCTION :: string:CatWihAny : Result
 ; // string:CatWihAny
-VOID OPERATOR :: PROCEDURE : string:Split:for>
+: : string:Split:for>
  Documentation:
   Разделяет строку aString по разделителю aSep и для каждой части вызывает aLambda
  ^ OPERATOR :: IN : aLambda
@@ -3575,20 +3629,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\macro.ms.dict
   axiom:File
   axiom:clipboard
   axiom:Font
-  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
  ;
-IMMEDIATE VOID OPERATOR : macro
- Documentation:
-  - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
-; // macro
-IMMEDIATE VOID OPERATOR : MACRO
- Documentation:
-  - MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке
-; // MACRO
-IMMEDIATE VOID OPERATOR :: MACRO : STACK_CHANGING_MACRO
- Documentation:
-  - аналог MACRO, но который может "потрогать стек", т.е. считать что-то со стека или положить что-то на стек
-; // STACK_CHANGING_MACRO
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\params.ms.dict
  Uses: 
   axiom:axiom
@@ -3866,12 +3907,16 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.di
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Sequence.It.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NoCapsLock.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpStack.ms.dict
  ;
  Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpStack.ms.dict
  ;
 STRING CONST : cTests
 PRIVATE VOID OPERATOR :: PROCEDURE : DoRunTests
@@ -3954,7 +3999,15 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
   axiom:clipboard
   axiom:Font
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\types.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\core.ms.dict
  ;
+BOOLEAN FUNCTION : .IsTfwWord
+ PRINTABLE OPERATOR :: IN : aValue
+ BOOLEAN FUNCTION :: .IsTfwWord : Result
+; // .IsTfwWord
+VOID OPERATOR :: PROCEDURE : Log
+ PRINTABLE OPERATOR :: IN : aValue
+; // Log
 VOID OPERATOR :: PROCEDURE : Print
  PRINTABLE OPERATOR :: IN : aValue
 ; // Print
@@ -4354,6 +4407,57 @@ IMMEDIATE VOID OPERATOR : var
  ^L OPERATOR :: IN : aName
 ; // var
 IMMEDIATE OPERATOR : void
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
+  axiom:Tl3TokenType
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Sequence
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\io.ms.dict
+ ;
+VOID OPERATOR :: PROCEDURE : .DumpStack
+ Documentation:
+  Печатает состояние стека после вычисления выражения aLambda
+ OPERATOR :: IN : aLambdaRef
+; // .DumpStack
+VOID OPERATOR :: PROCEDURE : DumpStack
+ Documentation:
+  Печатает состояние стека после вычисления выражения aLambda
+ ^ OPERATOR :: IN : aLambda
+; // DumpStack
+VOID OPERATOR :: PROCEDURE : DumpStackTo
+ Documentation:
+  Печатает состояние стека в "устройство" aOutput после вычисления выражения aLambda
+ ^ OPERATOR :: IN : aLambda
+ ^ OPERATOR :: IN : aOutput
+; // DumpStackTo
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
  Uses: 
   axiom:axiom
@@ -4400,6 +4504,8 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\map.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\reverted.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpStack.ms.dict
  ;
 IMMEDIATE VOID OPERATOR :: MACRO : @(
  Documentation:
@@ -4421,6 +4527,52 @@ VOID OPERATOR : Tests:@(
 VOID OPERATOR : Tests:@[
  VOID OPERATOR :: Test : T1
 ; // Tests:@[
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpStack.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
+  axiom:Tl3TokenType
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Sequence
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
+ ;
+ Exports: 
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: MACRO : _CompileCodeRefAndFree
+ TtfwWord OPERATOR :: IN : aCode
+; // _CompileCodeRefAndFree
+IMMEDIATE OPERATOR :: MACRO :: STACK_CHANGING_MACRO : Test&DumpStack
+ ^ OPERATOR :: IN : aCode
+ ^L OPERATOR :: IN : aName
+; // Test&DumpStack
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
  Uses: 
   axiom:axiom
@@ -6418,6 +6570,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CommonLang.ms
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\string.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\InheritsAndImplementsNew.ms.dict
   H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\NamedCodeProducer.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CallInherited.ms.dict
  ;
 VOID OPERATOR :: MACRO :: elem_generator : .c++
  OPERATOR :: MACRO :: NamedCodeProducer :: Inherits : %G
@@ -6459,12 +6612,61 @@ VOID OPERATOR :: MACRO :: elem_generator : .script
  STRING OPERATOR :: MACRO :: %GEN_PROPERTY : gpName
  ModelElement OPERATOR :: IN : Self
 ; // .script
-IMMEDIATE VOID OPERATOR :: MACRO : call.inherited
 STRING FUNCTION : CatSepIndent>
  ^ OPERATOR :: IN : _aValues
  IMMEDIATE VOID OPERATOR : aValues
  STRING FUNCTION :: CatSepIndent> : Result
 ; // CatSepIndent>
+Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CallInherited.ms.dict
+ Uses: 
+  axiom:axiom
+  axiom:Ctx
+  axiom:NewWordDefinitor
+  axiom:Compiler
+  axiom:Word
+  axiom:KeyWord
+  axiom:Parser
+  axiom:script
+  axiom:sysutils
+  axiom:application
+  axiom:ScriptEngine
+  axiom:DictionaryEx
+  axiom:TtfwValueType
+  axiom:TtfwWordModifier
+  axiom:TtfwAccessType
+  axiom:TtfwLinkType
+  axiom:private
+  axiom:ValueTypes
+  axiom:WordInfo
+  axiom:TtfwValueTypesAccepts
+  axiom:Tl3TokenType
+  axiom:std
+  axiom:KeywordFinder
+  axiom:Sequence
+  axiom:Stereotype
+  axiom:Dictionary
+  axiom:MainDictionary
+  axiom:Array
+  axiom:File
+  axiom:clipboard
+  axiom:Font
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\axiom_push.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\WordsRTTI.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\EngineTypes.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\Testing.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DumpStack.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\DogAndBracket.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\CodeDump.ms.dict
+  H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration1\TestAndDumpStack.ms.dict
+ ;
+IMMEDIATE VOID OPERATOR :: MACRO : .inherited
+IMMEDIATE VOID OPERATOR :: MACRO : call.inherited
+: : call.inherited.do
+ PRIVATE TtfwWord FUNCTION : find.inherited
+  PRIVATE TtfwWord FUNCTION :: find.inherited : Result
+  TtfwWord OPERATOR :: IN : Self
+ ; // find.inherited
+; // call.inherited.do
 TkwMain : Main
  VOID OPERATOR :: MACRO :: TestWithDump : CodeGen
 ; // Main
