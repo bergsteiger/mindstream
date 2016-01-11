@@ -256,6 +256,7 @@ const
   l_LastChar : char;
  begin
   Result := False;
+  l_LastChar := #0;
 
   if f_CurrentLine <> '' then
    l_LastChar := f_CurrentLine[Length(f_CurrentLine)];
