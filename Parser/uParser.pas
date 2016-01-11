@@ -141,21 +141,28 @@ var
  l_LineCommentPos,
  l_BlockCommentPosBegin,
  l_BlockCommentPosEnd : Integer;
+
+ // Удаляем все комментарии из строки l_Line
+ {$Region 'DeleteComments'}
  procedure DeleteComments;
  var
   l_CharCount : Integer;
+
+  // Удаляет все символы после //
+  {$Region 'DeleteLineComment'}
   procedure DeleteLineComment;
   begin
-   // Коментарий //
    if (l_LineCommentPos > 0) then
    begin
     Delete(l_Line, l_LineCommentPos, Length(l_Line) - l_LineCommentPos + 1);
    end; // l_LineCommentPos > 0
-  end;
-
+  end; // DeleteLineComment
+  {$ENDREGION}
+  // Удаляет все символы внутри  /* */
+  {$Region 'DeleteBlockComment'}
   procedure DeleteBlockComment;
   begin
-   // Коментарий /* */
+
    f_IsBlockComment := True;
 
    if (l_BlockCommentPosEnd  > 0) then
@@ -176,9 +183,10 @@ var
     l_CharCount := l_BlockCommentPosEnd - l_BlockCommentPosBegin + 2;
     Delete(l_Line, l_BlockCommentPosBegin, l_CharCount);
    end; // else l_BlockCommentPosEnd < l_BlockCommentPosBegin
-
   end;
-
+  {$ENDREGION}
+  // Проверяет есть ли комментарий в строке l_Line
+  {$Region 'IsStringHasCommentBegin'}
   function IsStringHasCommentBegin : boolean;
   begin
    Result := False;
@@ -189,6 +197,7 @@ var
    if (l_LineCommentPos > 0) or (l_BlockCommentPosBegin > 0) then
     Result := True;
   end;
+  {$ENDREGION}
  begin
   IsStringHasCommentBegin;
 
@@ -212,7 +221,9 @@ var
   // Если в строке есть ещё комментарии запускаем заново удаление
   if IsStringHasCommentBegin then
    DeleteComments;
- end;
+ end; // DeleteComennts
+ {$ENDREGION}
+
 begin
  Inc(f_CurrentLineNumber);
  try
