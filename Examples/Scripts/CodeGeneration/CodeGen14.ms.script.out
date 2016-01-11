@@ -129,6 +129,8 @@ Dictionary: axiom:exception
 Dictionary: axiom:Finder
 VOID pop:Finder:SetToCtx
 Dictionary: axiom:guid
+Dictionary: axiom:KeyValues
+TkwKeyValues KeyValues:Create
 Dictionary: axiom:Mouse
 mouse:GetCursorIndex
 mouse:GetCursorNameByIndex
@@ -1230,6 +1232,8 @@ TClass class::TkwIsTypeOf
 TClass class::TkwIsUnder64
 TClass class::TkwIsVoid
 TClass class::TkwIsXE
+TClass class::TkwKeyValues
+TClass class::TkwKeyValuesCreate
 TClass class::TkwLeftParam
 TClass class::TkwLeftWordRefParam
 TClass class::TkwLESS
@@ -2431,6 +2435,8 @@ TkwIsTypeOf
 TkwIsUnder64
 TkwIsVoid
 TkwIsXE
+TkwKeyValues
+TkwKeyValuesCreate
 TkwLeftParam
 TkwLeftWordRefParam
 TkwLESS
