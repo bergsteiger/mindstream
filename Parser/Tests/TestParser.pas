@@ -50,6 +50,8 @@ type
   procedure Test_10_1;
   procedure Test_10_2;
   procedure Test_10_3;
+  procedure Test_10_4;
+  procedure Test_12_1;
  end;
 
 implementation
@@ -522,6 +524,30 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'ab' + #13#10 + 'c') and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_10_4;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+
+   CheckTrue((aParser.TokenString = 'ab'#13#10'qwe qwe'#13#10'qwe qwe'#13#10'c') and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_12_1;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+
+   CheckTrue((aParser.TokenString = #12#13#14) and
              (aParser.TokenType = ttString));
   end);
 end;
