@@ -333,14 +333,12 @@ const
  end;
 begin
  // ≈сли не многострочный стринг обнул€ем токен
- if not IsTokenMultiLineString then
+ if IsTokenMultiLineString then
+  f_Token := f_Token + #13#10
+ else
  begin
   f_Token := '';
   f_TokenType := ttUnknown;
- end
- else
- begin
-  f_Token := f_Token + #13#10;;
  end;
 
  try
