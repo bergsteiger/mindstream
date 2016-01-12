@@ -100,6 +100,8 @@ STRING FUNCTION ValueToStringOrName
 
 CONST \n #13#10
 
+BOOLEAN CompileTime-VAR g_EnableAutoEOL true
+
 BOOLEAN FUNCTION .Out?
 
   OUTABLE IN aValue
@@ -147,9 +149,11 @@ BOOLEAN FUNCTION .Out?
  aValue .OutValue
  
  if l_WasOut then
- begin
-  \n g_OutFile File:WriteStr
- end // l_WasOut
+  if g_EnableAutoEOL then
+  begin
+   \n g_OutFile File:WriteStr
+  end // l_WasOut
+  
  l_WasOut >>> Result
 ; // .Out?
 
@@ -649,7 +653,7 @@ elem_proc dump
 ; // dump
 
 PROCEDURE OutLn
- '' .Out
+ \n g_OutFile File:WriteStr
 ; // OutLn
 
 elem_proc WithDelim
@@ -1513,11 +1517,13 @@ CONST opModifySetter 2
 
 STRING CompileTime-VAR g_MethodParentPrefix ''
 BOOLEAN CompileTime-VAR g_EnableMethodDirectives true
+BOOLEAN CompileTime-VAR g_EnableMethodDocumentation true
 
-elem_iterator MethodInterfacePrim
+elem_proc MethodInterfacePrim
  IN aPrefix
  IN aOverload
  IN aOfObject
+ IN aBody
  IN aOpModify
  
  : OutOverloadAndCallingConventions
@@ -1659,7 +1665,16 @@ elem_iterator MethodInterfacePrim
      ' override;'
    END // CASE
   end // g_EnableMethodDirectives
- ] >>> Result
+ ] 
+ .Out? ? (
+  if g_EnableMethodDocumentation then
+   if ( Self .IsProperty ! ) then
+   begin
+    Self .OutDocumentation
+   end // ( Self .IsProperty ! )
+  Self aBody DO
+ )
+ //>>> Result
 ; // MethodInterfacePrim
 
 BOOLEAN elem_func NeedPutToDFM
@@ -1696,21 +1711,11 @@ elem_proc MethodInterfaceEx
  IN aBody
  
  : NormalCall 
-  Self aPrefix aOverload aOfObject opModifyNone .MethodInterfacePrim
-  .Out? ? (
-   if ( Self .IsProperty ! ) then
-   begin
-    Self .OutDocumentation
-   end // ( Self .IsProperty ! )
-   Self aBody DO
-  )
+  Self aPrefix aOverload aOfObject aBody opModifyNone .MethodInterfacePrim
  ; // NormalCall
  
  : CallAsSetter
-  Self aPrefix aOverload aOfObject opModifySetter .MethodInterfacePrim
-  .Out? ? (
-   Self aBody DO
-  )
+  Self aPrefix aOverload aOfObject aBody opModifySetter .MethodInterfacePrim
  ; // CallAsSetter
  
  RULES
@@ -2550,53 +2555,47 @@ elem_proc OutTypes
 ; // OutTypes
 
 elem_proc OutConstants
- RULES
-  ( Self .IsStereotype st_LocalConst )
-   ()
-  DEFAULT
-   (
-    STRING VAR l_Prefix
-    Self .GetUP 'extprop:pas:ElementPrefix' >>> l_Prefix
-    Self .Attributes .for> (
-      IN anItem
-     [ 
-      l_Prefix anItem .Name
+ STRING VAR l_Prefix
+ Self .GetUP 'extprop:pas:ElementPrefix' >>> l_Prefix
+ Self .Attributes .for> (
+   IN anItem
+  [ 
+   l_Prefix anItem .Name
 
-      if ( anItem .UPisTrue "is define" ! ) then
-      begin
-       VAR l_Type 
-       anItem .Target >>> l_Type
-       l_Type IsNil ! ? ( ': ' l_Type .TypeName )
-      end // ( anItem .UPisTrue "is define" ! )
+   if ( anItem .UPisTrue "is define" ! ) then
+   begin
+    VAR l_Type 
+    anItem .Target >>> l_Type
+    l_Type IsNil ! ? ( ': ' l_Type .TypeName )
+   end // ( anItem .UPisTrue "is define" ! )
 
-      BOOLEAN VAR l_NeedSuffix
-      false >>> l_NeedSuffix
-      VAR l_Value
-      anItem .GetUP 'extprop:pas:Value' >>> l_Value
-      if ( l_Value .IsValueValid ! ) then
-      begin
-       anItem .GetUP 'Value' >>> l_Value
-       true >>> l_NeedSuffix
-      end
+   BOOLEAN VAR l_NeedSuffix
+   false >>> l_NeedSuffix
+   VAR l_Value
+   anItem .GetUP 'extprop:pas:Value' >>> l_Value
+   if ( l_Value .IsValueValid ! ) then
+   begin
+    anItem .GetUP 'Value' >>> l_Value
+    true >>> l_NeedSuffix
+   end
 
-      ' = ' l_Value
+   ' = ' l_Value
 
-      if l_NeedSuffix then
-      begin
-       VAR l_Suffix
-       anItem .GetUP "suffix expr" >>> l_Suffix
-       if ( l_Suffix .IsValueValid ) then
-       begin
-        ' ' l_Suffix 
-       end // ( l_Suffix .IsValueValid )
-      end // l_NeedSuffix
+   if l_NeedSuffix then
+   begin
+    VAR l_Suffix
+    anItem .GetUP "suffix expr" >>> l_Suffix
+    if ( l_Suffix .IsValueValid ) then
+    begin
+     ' ' l_Suffix 
+    end // ( l_Suffix .IsValueValid )
+   end // l_NeedSuffix
 
-      ';' 
-     ] .Out
-    )
-   )
-   //( [ '//' ' ' Self .Name ] .Out )
- ; // RULES 
+   ';' 
+  ] .Out? ? (
+   anItem .OutDocumentation
+  ) // ] .Out? ?
+ ) // Self .Attributes .for>
 ; // OutConstants
 
 PROCEDURE .OutConstantsList
@@ -2605,12 +2604,20 @@ PROCEDURE .OutConstantsList
  false >>> l_WasConst
  aList .for> (
    IN anItem
-  if ( l_WasConst ! ) then
-  begin
-   true >>> l_WasConst
-   'const' .Out
-  end
-  Indented: ( anItem .OutConstants )
+  RULES
+   ( anItem .IsStereotype st_LocalConst )
+    ()
+   DEFAULT
+    (
+     if ( l_WasConst ! ) then
+     begin
+      true >>> l_WasConst
+      'const' .Out
+     end
+     anItem .OutDocumentation
+     Indented: ( anItem .OutConstants )
+    ) // DEFAULT
+  ; // RULES 
  )
  if l_WasConst then
   OutLn
@@ -2693,38 +2700,78 @@ elem_proc OutInterfaceSection
  l_WasOut ? OutLn
 ; // OutInterfaceSection
 
+elem_proc UserCode:
+ ^ IN aSuffix
+ ^ IN aCode
+ 
+ STRING VAR l_Suffix
+ 
+ aSuffix DO >>> l_Suffix
+ 
+ if ( Self .IsProperty ) then
+ begin
+  'get' l_Suffix Cat >>> l_Suffix
+ end // ( Self .IsProperty )
+ 
+ VAR l_Implementor
+ Self .Implementor >>> l_Implementor
+ if ( l_Implementor IsNil ! ) then
+ begin
+  [ '_' l_Implementor .UID l_Suffix ] strings:Cat >>> l_Suffix
+ end // ( l_Implementor IsNil ! )
+ 
+ STRING VAR l_UID
+ Self .UID >>> l_UID
+ 
+ [ '//#UC START# *' l_UID l_Suffix '*' ] .Out
+ [ aCode DO ] .Out
+ [ '//#UC END# *' l_UID l_Suffix '*' ] .Out
+; // UserCode:
+
 elem_proc MethodBody
+ Self .UserCode: '_var' ()
  'begin' .Out
+ Self .UserCode: '_impl' ( ' !!! Needs to be implemented !!!' )
  'end;' .Out
  OutLn
 ; // MethodBody
 
 elem_iterator AllInlinedOperations
- Self .Implemented
- .join> ( Self .Overridden )
- .filter> ( .IsStereotype st_inline::Operation ) 
+ Cached:
+ (
+  Self .Implemented
+  .join> ( Self .Overridden )
+  .filter> ( .IsStereotype st_inline::Operation ) 
+ )
  >>> Result
 ; // AllInlinedOperations
 
 elem_proc OutClassImplementation
  BOOLEAN VAR l_WasFirst
  false >>> l_WasFirst
- Self .AllInlinedOperations 
- .filter> (
-   IN aMethod
-  if l_WasFirst then
-   true
-  else
-  begin
-   true >>> l_WasFirst
-   false
-  end
- )
- .for> .MethodInterfaceForEx: nil (
-   IN aMethod
-  ' forward;' .Out
-  OutLn
- )
+ TF g_EnableAutoEOL (
+  false >>> g_EnableAutoEOL
+  TF g_EnableMethodDocumentation (
+   false >>> g_EnableMethodDocumentation
+   Self .AllInlinedOperations 
+   .filter> (
+     IN aMethod
+    if l_WasFirst then
+     true
+    else
+    begin
+     true >>> l_WasFirst
+     false
+    end
+   ) // .filter>
+   .for> .MethodInterfaceForEx: nil (
+     IN aMethod
+    ' forward;' .Out
+    OutLn
+    OutLn
+   ) // .for> .MethodInterfaceForEx: nil
+  ) // TF g_EnableMethodDocumentation
+ ) // TF g_EnableAutoEOL 
  Self .AllInlinedOperations .for> .MethodInterfaceForEx: nil .MethodBody
  TF g_MethodParentPrefix (
   Self .TypeName >>> g_MethodParentPrefix

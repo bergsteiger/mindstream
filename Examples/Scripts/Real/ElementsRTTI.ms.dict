@@ -432,6 +432,10 @@ STRING elem_func GUID
  Self 'GUID' '' .ElemMember >>> Result
 ; // GUID
 
+STRING elem_func UID
+ Self 'UID' '' .ElemMember >>> Result
+; // UID
+
 INTEGER elem_func OpKind
  Self 'OpKind' opkind_Normal .ElemMember >>> Result
 ; // OpKind
@@ -439,6 +443,10 @@ INTEGER elem_func OpKind
 ModelElement elem_func Parent
  Self 'Parent' .ElemWord >>> Result
 ; // Parent
+
+ModelElement elem_func Implementor
+ Self 'Implementor' .ElemWord >>> Result
+; // Implementor
 
 USES
  LoadOnDemand.ms.dict
