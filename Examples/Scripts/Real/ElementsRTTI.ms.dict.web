@@ -421,16 +421,20 @@ BOOLEAN elem_func IsStereotype
 ; // IsStereotype
 
 INTEGER elem_func Visibility
- Self 'Visibility' UnknownAccess .ElemMember &gt;&gt;&gt; Result
+ Self 'Visibility' UnknownAccess /*PublicAccess*/ .ElemMember &gt;&gt;&gt; Result
 ; // Visibility
 
 INTEGER elem_func Abstraction
- Self 'Abstraction' at_unknown .ElemMember &gt;&gt;&gt; Result
+ Self 'Abstraction' /*at_unknown*/ at_final .ElemMember &gt;&gt;&gt; Result
 ; // Abstraction
 
 STRING elem_func GUID
  Self 'GUID' '' .ElemMember &gt;&gt;&gt; Result
 ; // GUID
+
+STRING elem_func UID
+ Self 'UID' '' .ElemMember &gt;&gt;&gt; Result
+; // UID
 
 INTEGER elem_func OpKind
  Self 'OpKind' opkind_Normal .ElemMember &gt;&gt;&gt; Result
@@ -439,6 +443,10 @@ INTEGER elem_func OpKind
 ModelElement elem_func Parent
  Self 'Parent' .ElemWord &gt;&gt;&gt; Result
 ; // Parent
+
+ModelElement elem_func Implementor
+ Self 'Implementor' .ElemWord &gt;&gt;&gt; Result
+; // Implementor
 
 USES
  LoadOnDemand.ms.dict
