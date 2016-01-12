@@ -281,20 +281,47 @@ const
  // Определяем что за тип у токена ttToken
  {$Region 'ExamineToken'}
  procedure ExamineToken;
+  function IsBooleanToken : Boolean;
+  begin
+   Result := False;
+
+   if (TokenString = 'false') or
+      (TokenString = 'true') then
+    Result := True;
+  end;
+
+  function IsStringToken(const aToken: String) : Boolean;
+  var
+   l_Pos : Integer;
+   l_Char : Char;
+   l_Str : String;
+  begin
+   Result := False;
+   l_Pos := 1;
+   l_Str := aToken;
+   //while l_Pos < Length(l_Str) do
+   begin
+    if l_Str[l_Pos]='#' then
+    begin
+
+     Result := True;
+     Exit;
+    end; // l_Str[l_Pos]='#'
+   end; // l_Pos < Length(l_Str)
+  end;// IsStringToken
  begin
   if TokenType = ttToken then
   begin
-   if (TokenString = 'false') or
-      (TokenString = 'true') then
+   if IsBooleanToken then
    begin
     f_TokenType := ttBoolean;
     Exit;
-   end
-   else if f_Token[1]='#' then
-    begin
-     f_TokenType := ttString;
-     Exit;
-    end;
+   end // IsBooleanToken
+   else if IsStringToken(f_Token) then
+   begin
+    f_TokenType := ttString;
+    Exit;
+   end // IsStringToken(f_Token)
   end
  end;
  {$ENDREGION}
