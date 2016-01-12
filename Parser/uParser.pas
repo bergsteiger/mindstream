@@ -286,8 +286,16 @@ const
   begin
    if (TokenString = 'false') or
       (TokenString = 'true') then
+   begin
     f_TokenType := ttBoolean;
-  end;
+    Exit;
+   end
+   else if f_Token[1]='#' then
+    begin
+     f_TokenType := ttString;
+     Exit;
+    end;
+  end
  end;
  {$ENDREGION}
 
@@ -296,7 +304,6 @@ const
   Result := False;
   Result := (f_CurrentLine[f_PosInCurrentLine] = cQuote);
  end;
-
 begin
  // ≈сли не многострочный стринг обнул€ем токен
  if not IsTokenMultiLineString then
@@ -369,12 +376,12 @@ begin
     end // not (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)
     else
      break;
-
-   ExamineToken;
   end; // else
  finally
   if IsTokenMultiLineString then
    NextToken;
+
+  ExamineToken;
 
   if (Self.f_TokenType = ttUnknown) then
    if Self.EOF then
