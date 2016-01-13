@@ -81,23 +81,6 @@ STRING FUNCTION ValueToString
  end 
 ; // ValueToString
 
-STRING FUNCTION ValueToStringOrName
-  OUTABLE IN aValue
- 
- if ( aValue .IsWord ) then
- begin
-  aValue .Name >>> Result
-  if ( Result = '' ) then
-  begin
-   aValue pop:Word:Name >>> Result
-  end
- end
- else
- begin
-  aValue ValueToString >>> Result
- end
-; // ValueToStringOrName
-
 CONST \n #13#10
 
 BOOLEAN CompileTime-VAR g_EnableAutoEOL true
@@ -577,86 +560,11 @@ BOOLEAN elem_func NeedOwnFile
  Self .? NeedOwnFile >>> Result
 ; // NeedOwnFile
 
-elem_proc dump
- Self .Out
- Bracketed (
-  Self MembersIterator .for> ( 
-    OBJECT IN aCode
-    
-   STRING VAR l_Out  
-   STRING VAR l_Name
-   aCode pop:Word:Name >>> l_Name
-   [ l_Name ' : ' ] strings:Cat >>> l_Out 
-   [ aCode DO ] .for> ( 
-     IN anItem
-     
-    if ( anItem .IsSequence ) then
-     ( anItem .SequenceCode.It >>> anItem )
-    if ( anItem IsArray ) then
-    begin
-     if ( 
-         ( l_Name = 'Children' )
-        ) then
-     begin
-      '' >>> l_Out
-      l_Name .Out
-      Bracketed (
-       ARRAY VAR l_Items
-       anItem 
-        .filter> ( .NeedOwnFile ! ) 
-        >>> l_Items 
-       l_Items .filter> ( .Visibility = PrivateAccess ) .for> call.me
-       l_Items .filter> ( .Visibility = ProtectedAccess ) .for> call.me
-       l_Items .filter> ( .Visibility = PublicAccess ) .for> call.me
-       l_Items .filter> ( .Visibility = UnknownAccess ) .for> call.me
-      ) // Bracketed
-     end
-     else
-     if ( 
-         ( l_Name = 'Attributes' )
-         OR ( l_Name = 'Operations' )
-         OR ( l_Name = 'Constants' )
-         OR ( l_Name = 'Dependencies' )
-         OR ( l_Name = 'Parameters' )
-        ) then
-     begin
-      '' >>> l_Out
-      l_Name .Out
-      Bracketed (
-       ARRAY VAR l_Items
-       anItem 
-        // .filter> ( .NeedOwnFile ! ) 
-        >>> l_Items 
-       l_Items .filter> ( .Visibility = PrivateAccess ) .for> call.me
-       l_Items .filter> ( .Visibility = ProtectedAccess ) .for> call.me
-       l_Items .filter> ( .Visibility = PublicAccess ) .for> call.me
-       l_Items .filter> ( .Visibility = UnknownAccess ) .for> call.me
-      ) // Bracketed
-     end
-     else
-     begin
-      l_Out [ anItem .for> ValueToStringOrName ] ' ' strings:CatSep Cat >>> l_Out
-     end
-    end // anItem IsArray
-    else
-    begin
-     l_Out anItem ValueToStringOrName Cat >>> l_Out
-    end // anItem IsArray
-     
-    if ( l_Out <> '' ) then
-    begin
-     l_Out .Out
-    end // l_Out <> ''
-   ) // [ aCode DO ] .for>
-  ) // Self MembersIterator
- ) // Bracketed
-; // dump
-
 PROCEDURE OutLn
  \n g_OutFile File:WriteStr
 ; // OutLn
 
-elem_proc WithDelim
+elem: WithDelim
   STRING IN aDelim
   TtfwWord IN aVar
   TtfwWord IN aLambda
@@ -673,7 +581,7 @@ elem_proc WithDelim
  ] aLambda DO
 ; // WithDelim
 
-elem_proc WithComma:
+elem: WithComma:
   ^ IN aVar
   ^ IN aLambda
  Self ', ' aVar aLambda .WithDelim
@@ -1061,10 +969,43 @@ ModelElement elem_func FirstOperation
  >>> Result
 ; // FirstOperation
 
+INTEGER FUNCTION .CountIt
+  ARRAY IN anArray
+ 0 >>> Result
+ anArray .for> ( 
+   IN anItem 
+  Inc Result 
+ ) 
+; // .CountIt
+
 : .With()
   OUTABLE IN aValue
- if ( aValue IsNil ! ) then
-  [ '(' aValue ')' ]
+ RULES 
+  ( aValue IsNil )
+   ()
+  ( aValue IsArray )
+   (
+    [
+     VAR l_WasBracket
+     false >>> l_WasBracket
+     aValue .for> (
+       IN anItem
+      if ( l_WasBracket ! ) then
+      begin
+       '('
+       true >>> l_WasBracket
+      end
+      anItem
+     ) // aValue .for>
+     if l_WasBracket then
+     begin
+      ')'
+     end 
+    ]
+   ) // ( aValue IsArray )
+  DEFAULT 
+   [ '(' aValue ')' ]
+ ; // RULES
 ; // .With()
 
 STRING elem_func FineDocumentation
@@ -1133,21 +1074,16 @@ BOOLEAN elem_func IsFactory
  >>> Result
 ; // IsFactory
 
-INTEGER FUNCTION .CountIt
-  ARRAY IN anArray
- 0 >>> Result
- anArray .for> ( 
-   IN anItem 
-  Inc Result 
- ) 
-; // .CountIt
-
 BOOLEAN elem_func IsConstructorsHolder
  ( Self .MainAncestor IsNil ! )
  AND ( Self .Attributes .CountIt <= 0 )
  AND ( Self .Operations .filter> ( .IsConstructor ! ) .CountIt <= 0 )
  >>> Result
 ; // IsConstructorsHolder
+
+BOOLEAN elem_func IsMethod
+ Self .IsStereotype st_method >>> Result
+; // IsMethod
 
 ModelElement elem_func MethodType
  Cached:
@@ -1162,7 +1098,9 @@ ModelElement elem_func MethodType
     ( Self .MainAncestor call.me ) 
    ( Self .IsControlPrim )
     ( Self .MainAncestor ) 
-   ( Self .IsStereotype st_method )
+   ( Self .IsStereotype st_Area )
+    ( Self .MainAncestor )
+   ( Self .IsMethod )
     ( Self .FirstOperation .Target )
    ( Self .IsFunction )
     ( Self .FirstOperation .Target )
@@ -1208,7 +1146,7 @@ ModelElement elem_func MethodType
 
 ARRAY elem_func MethodParameters
  RULES
-  ( Self .IsStereotype st_method )
+  ( Self .IsMethod )
    ( Self .FirstOperation .Parameters )
   ( Self .IsFunction )
    ( Self .FirstOperation .Parameters )
@@ -1462,21 +1400,24 @@ BOOLEAN elem_func IsSetter
 ; // IsSetter
 
 STRING elem_func MethodNamePrefix
- BOOLEAN IN aGetter
- if ( Self .IsSetter ! ) then
- begin
-  if ( Self .UPisTrue "pm" ) then
-   'pm_Get'
-  else 
-   'Get_'
- end
- else 
- begin
-  if ( Self .UPisTrue "pm" ) then
-   'pm_Set'
-  else 
-   'Set_'
- end
+ RULES
+  ( Self .IsSetter )
+   begin
+    if ( Self .UPisTrue "pm" ) then
+     'pm_Set'
+    else 
+     'Set_'
+   end // ( Self .IsSetter )
+  ( Self .IsProperty )
+   begin
+    if ( Self .UPisTrue "pm" ) then
+     'pm_Get'
+    else 
+     'Get_'
+   end // ( Self .IsProperty )
+  DEFAULT
+   ''
+ ; // RULES 
  >>> Result
 ; // MethodNamePrefix
 
@@ -1589,7 +1530,7 @@ elem_proc MethodInterfacePrim
    RULES
     ( Self .IsProperty )
      (
-      Self l_IsFunc .MethodNamePrefix 
+      Self .MethodNamePrefix 
       Self .MethodName 
      )
     DEFAULT
@@ -1826,6 +1767,19 @@ USES
  axiom:WordBox
 ;
 
+CONST cImplementationUserCodeSuffix '_impl'
+CONST cVarUserCodeSuffix '_var'
+CONST cUserCodePrefix 'uc:'
+CONST cEmptyUserCode #1
+
+STRING FUNCTION cImplementationUserCodeName
+ cUserCodePrefix cImplementationUserCodeSuffix Cat >>> Result
+; // cImplementationUserCodeName
+
+STRING FUNCTION cVarUserCodeName
+ cUserCodePrefix cVarUserCodeSuffix Cat >>> Result
+; // cVarUserCodeName
+
 INTERFACE elem_func CastMethod
  Cached:
  (
@@ -1837,6 +1791,8 @@ INTERFACE elem_func CastMethod
   pop:WordBox:Boxed >>> l_Boxed
   l_Boxed -> %SUM := ( 'Метод приведения нашего интерфейса к ' l_TypeName Cat )
   l_Boxed -> Visibility := ProtectedAccess
+  l_Boxed ->^ cVarUserCodeName ^:= cEmptyUserCode
+  l_Boxed ->^ cImplementationUserCodeName ^:= ' Result := Self;'
  )
  >>> Result
 ; // CastMethod
@@ -2046,7 +2002,7 @@ elem_proc OutProperty
     'f_'
    else
    begin
-    Self true .MethodNamePrefix 
+    Self .MethodNamePrefix 
    end // ( Self .ReadsField )
    Self .MethodName
   ; // OutRead
@@ -2057,7 +2013,7 @@ elem_proc OutProperty
     'f_'
    else
    begin
-    Self .AsSetterDo: ( false .MethodNamePrefix )
+    Self .AsSetterDo: .MethodNamePrefix
    end // ( Self .WritesField )
    Self .MethodName
   ; // OutWrite
@@ -2735,6 +2691,26 @@ elem_proc OutInterfaceSection
  l_WasOut ? OutLn
 ; // OutInterfaceSection
 
+STRING elem_func UIDforUserCode
+ RULES
+  ( Self .IsMethod )
+   ( Self .FirstOperation .UID )
+  DEFAULT
+   ( Self .UID )
+ ; // RULES
+ >>> Result
+; // UIDforUserCode
+
+ARRAY elem_func ParametersList
+ [
+  VAR l_WasComma
+  false >>> l_WasComma
+  Self .MethodParameters .map> .Name .for> ( 
+   .WithComma: l_WasComma NOP
+  )
+ ] .With() >>> Result
+; // ParametersList
+
 elem_proc UserCode:
  ^ IN aSuffix
  ^ IN aCode
@@ -2743,33 +2719,83 @@ elem_proc UserCode:
  
  aSuffix DO >>> l_Suffix
  
- RULES
-  ( Self .IsSetter ) then
-   ( 'set' l_Suffix Cat >>> l_Suffix )
-  ( Self .IsProperty ) then
-   ( 'get' l_Suffix Cat >>> l_Suffix )
- ; // RULES
+ VAR l_Code
+ Self cUserCodePrefix l_Suffix Cat '' .ElemMember >>> l_Code
  
- VAR l_Implementor
- Self .Implementor >>> l_Implementor
- if ( l_Implementor IsNil ! ) then
+ if ( l_Code .IsValueValid ) then
  begin
-  [ '_' l_Implementor .UID l_Suffix ] strings:Cat >>> l_Suffix
- end // ( l_Implementor IsNil ! )
- 
- STRING VAR l_UID
- Self .UID >>> l_UID
- 
- [ '//#UC START# *' l_UID l_Suffix '*' ] .Out
- [ aCode DO ] .Out
- [ '//#UC END# *' l_UID l_Suffix '*' ] .Out
+  if ( l_Code cEmptyUserCode != ) then
+  begin
+   l_Code .Out
+  end // ( l_Code cEmptyUserCode != )
+ end // ( l_Code .IsValueValid )
+ else
+ begin
+  RULES
+   ( Self .IsFactory )
+    begin
+     RULES
+      ( l_Suffix cVarUserCodeSuffix == )
+       begin
+        'var' .Out
+        [ ' l_Inst : ' Self .Parent .TypeName ';' ] .Out
+       end // ( l_Suffix cVarUserCodeSuffix == )
+      ( l_Suffix cImplementationUserCodeSuffix == )
+       begin
+        [ ' l_Inst := Create' Self .ParametersList ';' ] .Out
+        ' try' .Out
+        '  Result := l_Inst;' .Out
+        ' finally' .Out
+        '  l_Inst.Free;' .Out
+        ' end;//try..finally' .Out
+       end // ( l_Suffix cImplementationUserCodeSuffix == )
+     ; // RULES
+    end // ( Self .IsFactory )
+   DEFAULT
+    begin
+     RULES
+      ( Self .IsSetter ) then
+       ( 'set' l_Suffix Cat >>> l_Suffix )
+      ( Self .IsProperty ) then
+       ( 'get' l_Suffix Cat >>> l_Suffix )
+     ; // RULES
+     
+     VAR l_Implementor
+     Self .Implementor >>> l_Implementor
+     
+     if ( l_Implementor IsNil ) then
+     begin
+      Self .Parent >>> l_Implementor
+     end // ( l_Implementor IsNil )
+     
+     if ( l_Implementor IsNil ! ) then
+     begin
+      [ '_' l_Implementor .UID l_Suffix ] strings:Cat >>> l_Suffix
+     end // ( l_Implementor IsNil ! )
+     
+     Self .UIDforUserCode l_Suffix Cat >>> l_Suffix
+     
+     [ '//#UC START# *' l_Suffix '*' ] .Out
+     [ aCode DO ] .Out
+     [ '//#UC END# *' l_Suffix '*' ] .Out
+    end // DEFAULT
+  ; // RULES 
+ end // ( l_Code .IsValueValid ) 
 ; // UserCode:
 
 elem_proc MethodBody
- Self .UserCode: '_var' ()
- 'begin' .Out
- Self .UserCode: '_impl' ( ' !!! Needs to be implemented !!!' )
- 'end;' .Out
+ if ( Self .UPisTrue 'extprop:isAsm' ) then
+ begin
+  'asm' .Out
+  ' jmp l3LocalStub' .Out
+ end 
+ else 
+ begin
+  Self .UserCode: cVarUserCodeSuffix ()
+  'begin' .Out
+  Self .UserCode: cImplementationUserCodeSuffix ( ' !!! Needs to be implemented !!!' )
+ end
+ [ 'end;//' g_MethodParentPrefix Self .MethodNamePrefix Self .MethodName ] .Out
  OutLn
 ; // MethodBody
 
@@ -2917,7 +2943,7 @@ elem_generator pas
   ( Self .IsTagTable ) 
    ( Self .OutUnit )
   DEFAULT
-   ( Self .dump )
+   ( Self .Name .Out )
  ; // RULES
 ; // pas
 
