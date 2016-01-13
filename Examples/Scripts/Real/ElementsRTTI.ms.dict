@@ -87,15 +87,33 @@ BOOLEAN elem_func True
  true >>> Result
 ; // True
 
+PROCEDURE do_elem_proc_prim
+ STRING IN aName
+ ENGINE_WORD IN aSelf
+ ENGINE_WORD IN aModifier
+ STRING IN aType
+ %SUMMARY 'Реализация elem_proc и elem_generator' ;
+ Ctx:ClearTypeInfo
+ if ( aType IsNil ! ) then
+ begin
+  aType Ctx:Parser:PushSymbol
+ end // ( aType IsNil ! )
+ aName aSelf aModifier 'ModelElement' do_word_func
+; // do_elem_proc_prim
+
 PROCEDURE do_elem_proc
  STRING IN aName
  ENGINE_WORD IN aSelf
  ENGINE_WORD IN aModifier
  %SUMMARY 'Реализация elem_proc и elem_generator' ;
- Ctx:ClearTypeInfo
- axiom:PushSymbol VOID
- aName aSelf aModifier 'ModelElement' do_word_func
+ aName aSelf aModifier 'VOID' do_elem_proc_prim
 ; // do_elem_proc
+
+MACRO elem:
+ Literal IN aName
+ %SUMMARY 'Процедура на элементе модели' ;
+ aName |N this.method.addr nil '' do_elem_proc_prim
+; // elem:
 
 MACRO elem_proc
  Literal IN aName
@@ -432,6 +450,10 @@ STRING elem_func GUID
  Self 'GUID' '' .ElemMember >>> Result
 ; // GUID
 
+STRING elem_func UID
+ Self 'UID' '' .ElemMember >>> Result
+; // UID
+
 INTEGER elem_func OpKind
  Self 'OpKind' opkind_Normal .ElemMember >>> Result
 ; // OpKind
@@ -439,6 +461,10 @@ INTEGER elem_func OpKind
 ModelElement elem_func Parent
  Self 'Parent' .ElemWord >>> Result
 ; // Parent
+
+ModelElement elem_func Implementor
+ Self 'Implementor' .ElemWord >>> Result
+; // Implementor
 
 USES
  LoadOnDemand.ms.dict
