@@ -316,7 +316,10 @@ const
   {$REGION 'AddCharToResultToken'}
   procedure AddCharToResultToken;
   begin
-   l_ResultToken := l_ResultToken + Chr(StrToInt(l_Buffer));
+   if l_Buffer[1].IsDigit then
+    l_ResultToken := l_ResultToken + Chr(StrToInt(l_Buffer));
+   //else
+
    l_Buffer := '';
   end;
   {$ENDREGION}
@@ -342,6 +345,12 @@ const
      else if l_CharInPos.IsDigit then
      begin
       l_Buffer := l_Buffer + l_CharInPos;
+      Inc(l_Pos);
+     end // l_CharInPos.IsDigit
+     else if l_CharInPos = cQuote then
+     begin
+      if l_Buffer <> '' then
+       AddCharToResultToken;
       Inc(l_Pos);
      end // l_CharInPos.IsDigit
      else
