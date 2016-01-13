@@ -350,8 +350,7 @@ const
      end // l_CharInPos.IsDigit
      else if l_CharInPos = cQuote then
      begin
-      // AddBuffer To Result
-      l_IsQuotedOpen := True;
+      l_IsQuotedOpen := not l_IsQuotedOpen;
       Inc(l_Pos);
      end // l_CharInPos.IsDigit
      else if l_IsQuotedOpen then

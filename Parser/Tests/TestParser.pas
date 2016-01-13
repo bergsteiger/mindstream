@@ -573,7 +573,7 @@ begin
   begin
    aParser.NextToken;
 
-   CheckTrue((aParser.TokenString = #12#13#14'a'#15) and
+   CheckTrue((aParser.TokenString = #12#13#14'ab'#15) and
              (aParser.TokenType = ttString));
   end);
 end;
