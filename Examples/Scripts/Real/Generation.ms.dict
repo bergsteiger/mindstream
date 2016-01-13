@@ -1442,9 +1442,28 @@ INTEGER elem_func MethodAbstraction
  >>> Result
 ; // MethodAbstraction
 
+CONST opModifyNone 1
+CONST opModifySetter 2
+
+INTEGER elem_func OpModify
+ Self 'OpModify' opModifyNone .ElemMember >>> Result
+; // OpModify
+
+BOOLEAN elem_func IsSetter
+ RULES
+  ( Self .IsWriteonlyProperty ) 
+   true
+  ( Self .OpModify opModifySetter == )
+   true 
+  DEFAULT
+   false
+ ; // RULES
+ >>> Result
+; // IsSetter
+
 STRING elem_func MethodNamePrefix
  BOOLEAN IN aGetter
- if aGetter then
+ if ( Self .IsSetter ! ) then
  begin
   if ( Self .UPisTrue "pm" ) then
    'pm_Get'
@@ -1512,9 +1531,6 @@ BOOLEAN FUNCTION .IsValueValid
  >>> Result
 ; // .IsValueValid
 
-CONST opModifyNone 1
-CONST opModifySetter 2
-
 STRING CompileTime-VAR g_MethodParentPrefix ''
 BOOLEAN CompileTime-VAR g_EnableMethodDirectives true
 BOOLEAN CompileTime-VAR g_EnableMethodDocumentation true
@@ -1524,7 +1540,6 @@ elem_proc MethodInterfacePrim
  IN aOverload
  IN aOfObject
  IN aBody
- IN aOpModify
  
  : OutOverloadAndCallingConventions
   aOverload DO 
@@ -1553,7 +1568,7 @@ elem_proc MethodInterfacePrim
   VAR l_IsFunc
 
   RULES
-   ( aOpModify opModifySetter == ) 
+   ( Self .IsSetter ) 
     ( 
       false >>> l_IsFunc
       'procedure' 
@@ -1587,7 +1602,7 @@ elem_proc MethodInterfacePrim
   false >>> l_WasParam
   
   RULES
-   ( aOpModify opModifySetter == )
+   ( Self .IsSetter )
     ( 
      Self .PropertyKeys 
      .join> [ l_Type .ValueParam ]
@@ -1704,6 +1719,26 @@ BOOLEAN elem_func WritesField
  Self .UPisTrue "writes field" >>> Result
 ; // elem_func WritesField
 
+elem: AsSetterDo:
+  ^ IN aLambda
+ RULES
+  ( Self .IsWriteonlyProperty )
+   ( Self aLambda DO )
+  DEFAULT 
+   (
+    VAR l_Setter
+    KeyValues:Create >>> l_Setter
+    TRY
+     l_Setter -> Original := Self
+     l_Setter -> OpModify := opModifySetter
+     l_Setter aLambda DO 
+    FINALLY
+     l_Setter pop:Word:DecRef 
+    END
+   ) // DEFAULT
+ ; // RULES
+; // AsSetterDo:
+
 elem_proc MethodInterfaceEx
  IN aPrefix
  IN aOverload
@@ -1711,11 +1746,11 @@ elem_proc MethodInterfaceEx
  IN aBody
  
  : NormalCall 
-  Self aPrefix aOverload aOfObject aBody opModifyNone .MethodInterfacePrim
+  Self aPrefix aOverload aOfObject aBody .MethodInterfacePrim
  ; // NormalCall
  
  : CallAsSetter
-  Self aPrefix aOverload aOfObject aBody opModifySetter .MethodInterfacePrim
+  Self .AsSetterDo: ( aPrefix aOverload aOfObject aBody .MethodInterfacePrim )
  ; // CallAsSetter
  
  RULES
@@ -2022,7 +2057,7 @@ elem_proc OutProperty
     'f_'
    else
    begin
-    Self false .MethodNamePrefix 
+    Self .AsSetterDo: ( false .MethodNamePrefix )
    end // ( Self .WritesField )
    Self .MethodName
   ; // OutWrite
@@ -2708,10 +2743,12 @@ elem_proc UserCode:
  
  aSuffix DO >>> l_Suffix
  
- if ( Self .IsProperty ) then
- begin
-  'get' l_Suffix Cat >>> l_Suffix
- end // ( Self .IsProperty )
+ RULES
+  ( Self .IsSetter ) then
+   ( 'set' l_Suffix Cat >>> l_Suffix )
+  ( Self .IsProperty ) then
+   ( 'get' l_Suffix Cat >>> l_Suffix )
+ ; // RULES
  
  VAR l_Implementor
  Self .Implementor >>> l_Implementor
