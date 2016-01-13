@@ -296,6 +296,7 @@ const
    l_Str,
    l_Buffer,
    l_ResultToken : String;
+   l_IsQuotedOpen : Boolean;
   {$REGION 'ExistNextChar'}
   function ExistNextChar : boolean;
   begin
@@ -316,10 +317,7 @@ const
   {$REGION 'AddCharToResultToken'}
   procedure AddCharToResultToken;
   begin
-   if l_Buffer[1].IsDigit then
-    l_ResultToken := l_ResultToken + Chr(StrToInt(l_Buffer));
-   //else
-
+   l_ResultToken := l_ResultToken + Chr(StrToInt(l_Buffer));
    l_Buffer := '';
   end;
   {$ENDREGION}
@@ -330,6 +328,7 @@ const
    l_ResultToken := '';
    l_Pos := 1;
    l_Str := aToken;
+   l_IsQuotedOpen := False;
    try
     repeat
      l_CharInPos := l_Str[l_Pos];
@@ -349,10 +348,15 @@ const
      end // l_CharInPos.IsDigit
      else if l_CharInPos = cQuote then
      begin
-      if l_Buffer <> '' then
-       AddCharToResultToken;
+      // AddBuffer To Result
+      l_IsQuotedOpen := True;
       Inc(l_Pos);
      end // l_CharInPos.IsDigit
+     else if l_IsQuotedOpen then
+     begin
+      l_ResultToken := l_ResultToken + l_CharInPos;
+      Inc(l_Pos);
+     end
      else
      begin
       Result := False;
