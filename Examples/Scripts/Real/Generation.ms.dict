@@ -223,8 +223,46 @@ STRING FUNCTION Ext
  '.dump' >>> Result
 ; // Ext
 
-PROCEDURE .GenerateWordToFile
- ModelElement IN Self
+PROCEDURE CopyChangedFile
+  STRING IN aTo
+  STRING IN aFrom
+ if (
+     ( aTo sysutils:FileExists ! )
+     OR ( '' aTo aFrom CompareFiles ! ) 
+    ) then
+ begin
+  $20 aTo aFrom CopyFile
+ end 
+; // CopyChangedFile
+
+STRING elem_func FinalFileName
+ RULES
+  ( g_CurrentGenerator pop:Word:Name '.pas' == )
+   begin
+    Self .GetUP 'intf.pas:Path' >>> Result
+    if ( Result IsNil ) then
+    begin
+     Self .GetUP 'pascal:Path' >>> Result
+    end // ( Result IsNil )
+    if ( Result IsNil ! ) then
+    begin
+     'w:\' 
+     // - это потому, что в пути нету диска, а для ExtractFileName он нужен
+     Result Cat >>> Result
+    end // ( Result IsNil ! )
+   end
+  DEFAULT
+   ( '' >>> Result )  
+ ; // RULES 
+; // FinalFileName
+
+STRING CompileTime-VAR g_TempFileName ''
+STRING CompileTime-VAR g_RealFileName ''
+STRING CompileTime-VAR g_FinalFileName ''
+
+CONST cGenScriptsFolder 'W:\common\GenScripts\'
+
+elem_proc GenerateWordToFileWith:
  ^ IN aLambda
  
  TF g_Indent (
@@ -237,54 +275,49 @@ PROCEDURE .GenerateWordToFile
   l_TempPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_TempPath ]
   
   STRING VAR l_RealPath
-  'W:\common\GenScripts\' >>> l_RealPath
+  cGenScriptsFolder >>> l_RealPath
   l_RealPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_RealPath ]
   
-  STRING VAR l_TempFileName
-  
-  [ l_TempPath l_FileName ] cPathSep strings:CatSep >>> l_TempFileName
-  
-  STRING VAR l_RealFileName
-  
-  [ l_RealPath l_FileName ] cPathSep strings:CatSep >>> l_RealFileName
-  
-  if ( g_GeneratedFiles l_TempFileName array:HasText ! ) then
-  begin
-   l_TempFileName array:AddTo g_GeneratedFiles
-   TF g_OutFile (
-    l_TempFileName File:OpenWrite >>> g_OutFile
-    Self aLambda DO
-   )
+  TF g_TempFileName (
+   [ l_TempPath l_FileName ] cPathSep strings:CatSep >>> g_TempFileName
    
-   if (
-       ( l_RealFileName sysutils:FileExists ! )
-       OR ( '' l_RealFileName l_TempFileName CompareFiles ! ) 
-      ) then
-   begin
-    $20 l_RealFileName l_TempFileName CopyFile
-   end 
-  end // g_GeneratedFiles l_TempFileName array:HasText !
- ) 
-; // .GenerateWordToFile
+   TF g_RealFileName (
+    [ l_RealPath l_FileName ] cPathSep strings:CatSep >>> g_RealFileName
+    
+    if ( g_GeneratedFiles g_TempFileName array:HasText ! ) then
+    begin
+     g_TempFileName array:AddTo g_GeneratedFiles
+     TF g_FinalFileName (
+      Self .FinalFileName >>> g_FinalFileName
+      TF g_OutFile (
+       g_TempFileName File:OpenWrite >>> g_OutFile
+       Self aLambda DO
+      ) // TF g_OutFile
+      g_RealFileName g_TempFileName CopyChangedFile
+     ) // TF g_FinalFileName
+    end // g_GeneratedFiles g_TempFileName array:HasText !
+   ) // TF g_RealFileName
+  ) // TF g_TempFileName
+ ) // TF g_Indent 
+; // GenerateWordToFileWith:
 
-PROCEDURE .DeleteWordFile
- ModelElement IN Self
+elem_proc DeleteWordFile
  
   STRING VAR l_FileName 
   [ Self pop:Word:Name .? Ext ] strings:Cat >>> l_FileName
   
   STRING VAR l_RealPath
-  'W:\common\GenScripts\' >>> l_RealPath
+  cGenScriptsFolder >>> l_RealPath
   
-  STRING VAR l_RealFileName
-  
-  [ l_RealPath l_FileName ] cPathSep strings:CatSep >>> l_RealFileName
-  
-  if ( l_RealFileName sysutils:FileExists ) then
-  begin
-   l_RealFileName DeleteFile DROP
-  end
-; // .DeleteWordFile
+  TF g_RealFileName (
+   [ l_RealPath l_FileName ] cPathSep strings:CatSep >>> g_RealFileName
+   
+   if ( g_RealFileName sysutils:FileExists ) then
+   begin
+    g_RealFileName DeleteFile DROP
+   end // ( g_RealFileName sysutils:FileExists )
+  ) // TF g_RealFileName 
+; // DeleteWordFile
 
 BOOLEAN elem_func IsScriptKeyword
  Self .IsStereotype st_ScriptKeyword >>> Result
@@ -600,13 +633,10 @@ STRING elem_func UnitNamePrim
  GenCached:
  (
   STRING VAR l_Path
-  Self .GetUP 'intf.pas:Path' >>> l_Path
+  Self .FinalFileName >>> l_Path
   RULES
    ( l_Path <> '' )
-    ( 'w:\' 
-      // - это потому, что в пути нету диска, а для ExtractFileName он нужен
-      l_Path Cat sysutils:ExtractFileName '' sysutils:ChangeFileExt 
-    )
+    ( l_Path sysutils:ExtractFileName '' sysutils:ChangeFileExt )
    ( Self IsNil )
      ''
    ( Self .IsElementProxy )
@@ -2990,7 +3020,7 @@ PROCEDURE .GenerateWithChildren
    TF g_CurrentGenerator (
     aGenerator >>> g_CurrentGenerator
     if ( Self .NeedOwnFile ) then
-     ( Self .GenerateWordToFile .CurrentGenerator )
+     ( Self .GenerateWordToFileWith: .CurrentGenerator )
     else
      ( Self .DeleteWordFile ) 
    ) // TF g_CurrentGenerator
