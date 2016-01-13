@@ -335,12 +335,16 @@ const
        If NextCharIsDigit then
         Inc(l_Pos);
      end // l_Str[l_Pos]='#'
+     else if l_CharInPos.IsDigit then
+     begin
+      l_Buffer := l_Buffer + l_CharInPos;
+      Inc(l_Pos);
+     end
      else
-      if l_CharInPos.IsDigit then
-      begin
-       l_Buffer := l_Buffer + l_CharInPos;
-       Inc(l_Pos);
-      end;
+     begin
+      Result := False;
+      Break;
+     end;
     until l_Pos > Length(l_Str); // l_Pos < Length(l_Str)
 
     if l_Buffer <> '' then
