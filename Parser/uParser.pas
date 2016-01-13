@@ -317,7 +317,9 @@ const
   {$REGION 'AddCharToResultToken'}
   procedure AddCharToResultToken;
   begin
-   l_ResultToken := l_ResultToken + Chr(StrToInt(l_Buffer));
+   if l_Buffer <> '' then
+    l_ResultToken := l_ResultToken + Chr(StrToInt(l_Buffer));
+
    l_Buffer := '';
   end;
   {$ENDREGION}
@@ -354,6 +356,7 @@ const
      end // l_CharInPos.IsDigit
      else if l_IsQuotedOpen then
      begin
+      AddCharToResultToken;
       l_ResultToken := l_ResultToken + l_CharInPos;
       Inc(l_Pos);
      end
@@ -429,6 +432,7 @@ begin
      Inc(f_PosInCurrentLine)
     else
      break;
+
    if (f_PosInCurrentLine <= Length(f_CurrentLine)) then
     break;
   end; // while true
