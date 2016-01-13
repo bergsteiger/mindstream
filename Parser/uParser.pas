@@ -291,8 +291,9 @@ const
   var
    l_Pos : Integer;
    l_CharInPos : Char;
-   l_Str : String;
-   l_Buffer : String;
+   l_Str,
+   l_Buffer,
+   l_ResultToken : String;
 
   function ExistNextChar : boolean;
   begin
@@ -308,31 +309,46 @@ const
    l_Ch := l_Str[l_Pos + 1];
    Result := l_Ch.IsDigit;
   end;
-  begin
-   Result := False;
 
+  procedure AddCharToResultToken;
+  begin
+   l_ResultToken := l_ResultToken + Chr(StrToInt(l_Buffer));
+   l_Buffer := '';
+  end;
+
+  // IsStringTokenBegin
+  begin
+   Result := True;
+   l_Buffer := '';
+   l_ResultToken := '';
    l_Pos := 1;
    l_Str := aToken;
    try
-    while l_Pos < Length(l_Str) do
-    begin
+    repeat
      l_CharInPos := l_Str[l_Pos];
      if l_CharInPos = '#' then
      begin
-      l_Buffer := '';
+      if l_Buffer <> '' then
+       AddCharToResultToken;
+
       if ExistNextChar then
        If NextCharIsDigit then
         Inc(l_Pos);
      end // l_Str[l_Pos]='#'
      else
       if l_CharInPos.IsDigit then
+      begin
        l_Buffer := l_Buffer + l_CharInPos;
+       Inc(l_Pos);
+      end;
+    until l_Pos > Length(l_Str); // l_Pos < Length(l_Str)
 
-
-   end; // l_Pos < Length(l_Str)
+    if l_Buffer <> '' then
+     AddCharToResultToken;
 
    finally
-
+    if Result then
+     f_Token := l_ResultToken;
    end;
 
   end;// IsStringToken
