@@ -43,10 +43,7 @@ implementation
 
 uses
  System.SysUtils
-{$IFDEF TestParser}
-  ,
- Testing.Engine
-{$ENDIF TestParser}
+ , System.Character
   ;
 
 type
@@ -293,21 +290,51 @@ const
   function IsStringToken(const aToken: String) : Boolean;
   var
    l_Pos : Integer;
-   l_Char : Char;
+   l_CharInPos : Char;
    l_Str : String;
+   l_Buffer : String;
+
+  function ExistNextChar : boolean;
   begin
    Result := False;
+   Result := l_Pos + 1 <= Length(l_Str);
+  end;
+
+  function NextCharIsDigit : boolean;
+  var
+   l_Ch : Char;
+  begin
+   Result := False;
+   l_Ch := l_Str[l_Pos + 1];
+   Result := l_Ch.IsDigit;
+  end;
+  begin
+   Result := False;
+
    l_Pos := 1;
    l_Str := aToken;
-   //while l_Pos < Length(l_Str) do
-   begin
-    if l_Str[l_Pos]='#' then
+   try
+    while l_Pos < Length(l_Str) do
     begin
+     l_CharInPos := l_Str[l_Pos];
+     if l_CharInPos = '#' then
+     begin
+      l_Buffer := '';
+      if ExistNextChar then
+       If NextCharIsDigit then
+        Inc(l_Pos);
+     end // l_Str[l_Pos]='#'
+     else
+      if l_CharInPos.IsDigit then
+       l_Buffer := l_Buffer + l_CharInPos;
 
-     Result := True;
-     Exit;
-    end; // l_Str[l_Pos]='#'
+
    end; // l_Pos < Length(l_Str)
+
+   finally
+
+   end;
+
   end;// IsStringToken
  begin
   if TokenType = ttToken then
