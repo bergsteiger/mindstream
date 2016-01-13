@@ -278,6 +278,7 @@ const
  // Определяем что за тип у токена ttToken
  {$Region 'ExamineToken'}
  procedure ExamineToken;
+  {$REGION 'IsBooleanToken'}
   function IsBooleanToken : Boolean;
   begin
    Result := False;
@@ -286,7 +287,8 @@ const
       (TokenString = 'true') then
     Result := True;
   end;
-
+  {$ENDREGION}
+  {$REGION 'IsStringToken'}
   function IsStringToken(const aToken: String) : Boolean;
   var
    l_Pos : Integer;
@@ -294,13 +296,14 @@ const
    l_Str,
    l_Buffer,
    l_ResultToken : String;
-
+  {$REGION 'ExistNextChar'}
   function ExistNextChar : boolean;
   begin
    Result := False;
    Result := l_Pos + 1 <= Length(l_Str);
   end;
-
+  {$ENDREGION}
+  {$REGION 'NextCharIsDigit'}
   function NextCharIsDigit : boolean;
   var
    l_Ch : Char;
@@ -309,13 +312,14 @@ const
    l_Ch := l_Str[l_Pos + 1];
    Result := l_Ch.IsDigit;
   end;
-
+  {$ENDREGION}
+  {$REGION 'AddCharToResultToken'}
   procedure AddCharToResultToken;
   begin
    l_ResultToken := l_ResultToken + Chr(StrToInt(l_Buffer));
    l_Buffer := '';
   end;
-
+  {$ENDREGION}
   // IsStringTokenBegin
   begin
    Result := True;
@@ -339,7 +343,7 @@ const
      begin
       l_Buffer := l_Buffer + l_CharInPos;
       Inc(l_Pos);
-     end
+     end // l_CharInPos.IsDigit
      else
      begin
       Result := False;
@@ -354,8 +358,8 @@ const
     if Result then
      f_Token := l_ResultToken;
    end;
-
   end;// IsStringToken
+  {$ENDREGION}
  begin
   if TokenType = ttToken then
   begin
