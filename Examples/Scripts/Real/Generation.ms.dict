@@ -259,6 +259,7 @@ STRING elem_func FinalFileName
 STRING CompileTime-VAR g_TempFileName ''
 STRING CompileTime-VAR g_RealFileName ''
 STRING CompileTime-VAR g_FinalFileName ''
+BOOLEAN CompileTime-VAR g_UCRead false
 
 CONST cGenScriptsFolder 'W:\common\GenScripts\'
 
@@ -291,7 +292,9 @@ elem_proc GenerateWordToFileWith:
       Self .FinalFileName >>> g_FinalFileName
       TF g_OutFile (
        g_TempFileName File:OpenWrite >>> g_OutFile
-       Self aLambda DO
+       TF g_UCRead (
+        Self aLambda DO
+       ) // TF g_UCRead
       ) // TF g_OutFile
       g_RealFileName g_TempFileName CopyChangedFile
      ) // TF g_FinalFileName
@@ -2724,7 +2727,8 @@ elem_proc OutInterfaceSection
 STRING elem_func UIDforUserCode
  RULES
   ( Self .IsMethod )
-   ( Self .FirstOperation .UID )
+   ( Self .UID )
+//   ( Self .FirstOperation .UID )
   DEFAULT
    ( Self .UID )
  ; // RULES
@@ -2740,6 +2744,107 @@ ARRAY elem_func ParametersList
   )
  ] .With() >>> Result
 ; // ParametersList
+
+CONST cUCStart '//#UC START# *'
+CONST cUCEnd '//#UC END# *'
+
+elem_proc OutUserCode
+  STRING IN aKey
+  TtfwWord IN aCode
+  
+ BOOLEAN VAR l_Found
+ false >>> l_Found
+ 
+ if ( g_UCRead ! ) then
+ begin
+  true >>> g_UCRead
+  if ( g_FinalFileName sysutils:FileExists ) then
+  begin
+   STRING VAR l_TempFileName
+   g_TempFileName '.uc.txt' Cat >>> l_TempFileName 
+   STRING VAR l_RealFileName
+   g_RealFileName '.uc.txt' Cat >>> l_RealFileName
+   
+   FILE VAR l_Out
+   l_TempFileName File:OpenWrite >>> l_Out
+   TRY
+    FILE VAR l_In
+    g_FinalFileName File:OpenRead >>> l_In
+    TRY
+     VAR l_UCOpened
+     ARRAY VAR l_Accumulated
+     STRING VAR l_Key
+     
+     false >>> l_UCOpened
+     l_In File:ReadLines (
+       IN aStr
+      RULES 
+       ( aStr cUCStart string:Pos -1 != )
+        ( 
+         l_UCOpened ! ?ASSURE [ 'Секция кода уже открыта. Файл: ' g_FinalFileName ' строка:' aStr ]
+         true >>> l_UCOpened
+         [] >>> l_Accumulated
+         
+         aStr >>> l_Key
+         '*' string:SplitTo! l_Key DROP
+         
+         //l_Key l_Out File:WriteWStrLn 
+         aStr l_Out File:WriteWStrLn 
+        )
+       ( aStr cUCEnd string:Pos -1 != )
+        ( 
+         l_UCOpened ?ASSURE [ 'Секция кода не открыта. Файл: ' g_FinalFileName ' строка:' aStr  ]
+         false >>> l_UCOpened
+         
+         g_CurrentGenerator ->^ l_Key ^:= l_Accumulated
+         
+         nil >>> l_Accumulated
+         aStr l_Out File:WriteWStrLn 
+        )
+       DEFAULT
+        (
+         l_UCOpened ? ( 
+          aStr array:AddTo l_Accumulated
+          aStr l_Out File:WriteWStrLn 
+         ) // l_UCOpened ?
+        ) 
+      ; // RULES  
+     ) // l_In File:ReadLines
+    FINALLY
+     nil >>> l_Out
+    END // TRY..FINALLY
+   FINALLY
+    nil >>> l_Out
+   END // TRY..FINALLY
+   l_RealFileName l_TempFileName CopyChangedFile
+  end // ( g_FinalFileName sysutils:FileExists )
+ end //( g_UCRead ! ) 
+ 
+ l_Found ! ? (
+  VAR l_Field
+  g_CurrentGenerator %% aKey >>> l_Field
+  if ( l_Field IsNil ) then
+  begin
+   [ aCode DO ] .Out
+  end // ( l_Field IsNil )
+  else
+  begin
+   l_Field DO .for> ( g_OutFile File:WriteWStrLn )
+  end // ( l_Field IsNil )
+ ) // l_Found ! ?
+; // OutUserCode
+
+elem_proc DefaultUserCode
+  STRING IN aKey
+  TtfwWord IN aCode
+ Self .UIDforUserCode aKey Cat >>> aKey
+ 
+ aKey '*' Cat >>> aKey
+ 
+ [ cUCStart aKey ] .Out
+ Self aKey aCode .OutUserCode
+ [ cUCEnd aKey ] .Out
+; // DefaultUserCode
 
 elem_proc UserCode:
  ^ IN aSuffix
@@ -2803,11 +2908,7 @@ elem_proc UserCode:
       [ '_' l_Implementor .UID l_Suffix ] strings:Cat >>> l_Suffix
      end // ( l_Implementor IsNil ! )
      
-     Self .UIDforUserCode l_Suffix Cat >>> l_Suffix
-     
-     [ '//#UC START# *' l_Suffix '*' ] .Out
-     [ aCode DO ] .Out
-     [ '//#UC END# *' l_Suffix '*' ] .Out
+     Self l_Suffix aCode .DefaultUserCode
     end // DEFAULT
   ; // RULES 
  end // ( l_Code .IsValueValid ) 
