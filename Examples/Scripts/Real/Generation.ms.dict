@@ -2208,6 +2208,212 @@ INTEGER elem_func MethodVisibility
  >>> Result
 ; // MethodVisibility
 
+STRING elem_func UIDforUserCode
+ RULES
+  ( Self .IsMethod )
+   ( Self .UID )
+//   ( Self .FirstOperation .UID )
+  DEFAULT
+   ( Self .UID )
+ ; // RULES
+ >>> Result
+; // UIDforUserCode
+
+ARRAY elem_func ParametersList
+ [
+  VAR l_WasComma
+  false >>> l_WasComma
+  Self .MethodParameters .map> .Name .for> ( 
+   .WithComma: l_WasComma NOP
+  )
+ ] .With() >>> Result
+; // ParametersList
+
+CONST cUCStart '//#UC START# *'
+CONST cUCEnd '//#UC END# *'
+
+elem_proc OutUserCode
+  STRING IN aKey
+  TtfwWord IN aCode
+  
+ BOOLEAN VAR l_Found
+ false >>> l_Found
+ 
+ if ( g_UCRead ! ) then
+ begin
+  true >>> g_UCRead
+  if ( g_FinalFileName sysutils:FileExists ) then
+  begin
+   STRING VAR l_TempFileName
+   g_TempFileName '.uc.txt' Cat >>> l_TempFileName 
+   STRING VAR l_RealFileName
+   g_RealFileName '.uc.txt' Cat >>> l_RealFileName
+   
+   FILE VAR l_Out
+   l_TempFileName File:OpenWrite >>> l_Out
+   TRY
+    FILE VAR l_In
+    g_FinalFileName File:OpenRead >>> l_In
+    TRY
+     VAR l_UCOpened
+     ARRAY VAR l_Accumulated
+     STRING VAR l_Key
+     
+     false >>> l_UCOpened
+     l_In File:ReadLines (
+       IN aStr
+      RULES 
+       ( aStr cUCStart string:Pos -1 != )
+        ( 
+         l_UCOpened ! ?ASSURE [ 'Секция кода уже открыта. Файл: ' g_FinalFileName ' строка:' aStr ]
+         true >>> l_UCOpened
+         [] >>> l_Accumulated
+         
+         aStr >>> l_Key
+         '*' string:SplitTo! l_Key DROP
+         
+         //l_Key l_Out File:WriteWStrLn 
+         aStr l_Out File:WriteWStrLn 
+        )
+       ( aStr cUCEnd string:Pos -1 != )
+        ( 
+         l_UCOpened ?ASSURE [ 'Секция кода не открыта. Файл: ' g_FinalFileName ' строка:' aStr  ]
+         false >>> l_UCOpened
+         
+         g_CurrentGenerator ->^ l_Key ^:= l_Accumulated
+         
+         nil >>> l_Accumulated
+         aStr l_Out File:WriteWStrLn 
+        )
+       DEFAULT
+        (
+         l_UCOpened ? ( 
+          aStr array:AddTo l_Accumulated
+          aStr l_Out File:WriteWStrLn 
+         ) // l_UCOpened ?
+        ) 
+      ; // RULES  
+     ) // l_In File:ReadLines
+    FINALLY
+     nil >>> l_Out
+    END // TRY..FINALLY
+   FINALLY
+    nil >>> l_Out
+   END // TRY..FINALLY
+   l_RealFileName l_TempFileName CopyChangedFile
+   
+   if ( l_RealFileName FileSize 0 == ) then
+   begin
+    l_RealFileName DeleteFile DROP
+   end // ( l_RealFileName FileSize 0 == )
+   
+  end // ( g_FinalFileName sysutils:FileExists )
+ end //( g_UCRead ! ) 
+ 
+ l_Found ! ? (
+  VAR l_Field
+  g_CurrentGenerator %% aKey >>> l_Field
+  if ( l_Field IsNil ) then
+  begin
+   [ aCode DO ] .Out
+  end // ( l_Field IsNil )
+  else
+  begin
+   l_Field DO .for> ( g_OutFile File:WriteWStrLn )
+  end // ( l_Field IsNil )
+ ) // l_Found ! ?
+; // OutUserCode
+
+elem_proc DefaultUserCode
+  STRING IN aKey
+  TtfwWord IN aCode
+ Self .UIDforUserCode aKey Cat >>> aKey
+ 
+ aKey '*' Cat >>> aKey
+ 
+ [ cUCStart aKey ] .Out
+ Self aKey aCode .OutUserCode
+ [ cUCEnd aKey ] .Out
+; // DefaultUserCode
+
+elem_proc MethodUserCode
+  STRING IN aKey
+  TtfwWord IN aCode
+ RULES
+  ( Self .IsSetter ) then
+   ( 'set' aKey Cat >>> aKey )
+  ( Self .IsProperty ) then
+   ( 'get' aKey Cat >>> aKey )
+ ; // RULES
+ 
+ VAR l_Implementor
+ Self .Implementor >>> l_Implementor
+ 
+ if ( l_Implementor IsNil ) then
+ begin
+  Self .Parent >>> l_Implementor
+ end // ( l_Implementor IsNil )
+ 
+ if ( l_Implementor IsNil ! ) then
+ begin
+  [ '_' l_Implementor .UID aKey ] strings:Cat >>> aKey
+ end // ( l_Implementor IsNil ! )
+ 
+ Self aKey aCode .DefaultUserCode
+; // MethodUserCode
+
+elem_proc UserCode:
+ ^ IN aSuffix
+ ^ IN aCode
+ 
+ STRING VAR l_Key
+ 
+ aSuffix DO >>> l_Key
+ 
+ VAR l_Code
+ Self cUserCodePrefix l_Key Cat '' .ElemMember >>> l_Code
+ 
+ if ( l_Code .IsValueValid ) then
+ begin
+  if ( l_Code cEmptyUserCode != ) then
+  begin
+   l_Code .Out
+  end // ( l_Code cEmptyUserCode != )
+ end // ( l_Code .IsValueValid )
+ else
+ begin
+  RULES
+   ( Self .IsFactory )
+    begin
+     RULES
+      ( l_Key cVarUserCodeSuffix == )
+       begin
+        'var' .Out
+        [ ' l_Inst : ' Self .Parent .TypeName ';' ] .Out
+       end // ( l_Key cVarUserCodeSuffix == )
+      ( l_Key cImplementationUserCodeSuffix == )
+       begin
+        Indented: (
+         [ 'l_Inst := Create' Self .ParametersList ';' ] .Out
+         'try' .Out
+         ' Result := l_Inst;' .Out
+         'finally' .Out
+         ' l_Inst.Free;' .Out
+         'end;//try..finally' .Out
+        ) // Indented:
+       end // ( l_Key cImplementationUserCodeSuffix == )
+      DEFAULT
+       ( Self l_Key aCode .DefaultUserCode ) 
+     ; // RULES
+    end // ( Self .IsFactory )
+   ( Self .IsClassOrMixIn )
+    ( Self l_Key aCode .DefaultUserCode ) 
+   DEFAULT
+    ( Self l_Key aCode .MethodUserCode )
+  ; // RULES 
+ end // ( l_Code .IsValueValid ) 
+; // UserCode:
+
 elem_proc OutClassInner
  Indented: (
   Self .Fields .ByVisibility> .Visibility .OutField
@@ -2225,10 +2431,21 @@ elem_proc OutClassInner
 ; // OutClassInner
 
 elem_proc OutClass
+
+//      [{%S{need UC}=true}%U[{ci}\n]\n]\
+ if ( Self .UPisTrue "need UC" ) then
+ begin
+  Self .UserCode: 'ci' ()
+ end // ( Self .UPisTrue "need UC" ) 
+
  Self .MixInValues .for> (
    IN aValue
   [ '_' aValue .Name '_' ' = ' aValue .Target .TypeName ';' ] .Out
  )
+ 
+//	%f_CalcParentAndInclude(%S)\
+//	[{%S{need UC}=true}%U[{cit}\n]\n]\
+ 
  [ 
   Self .TypeName 
   ' = ' 
@@ -2723,196 +2940,6 @@ elem_proc OutInterfaceSection
  )
  l_WasOut ? OutLn
 ; // OutInterfaceSection
-
-STRING elem_func UIDforUserCode
- RULES
-  ( Self .IsMethod )
-   ( Self .UID )
-//   ( Self .FirstOperation .UID )
-  DEFAULT
-   ( Self .UID )
- ; // RULES
- >>> Result
-; // UIDforUserCode
-
-ARRAY elem_func ParametersList
- [
-  VAR l_WasComma
-  false >>> l_WasComma
-  Self .MethodParameters .map> .Name .for> ( 
-   .WithComma: l_WasComma NOP
-  )
- ] .With() >>> Result
-; // ParametersList
-
-CONST cUCStart '//#UC START# *'
-CONST cUCEnd '//#UC END# *'
-
-elem_proc OutUserCode
-  STRING IN aKey
-  TtfwWord IN aCode
-  
- BOOLEAN VAR l_Found
- false >>> l_Found
- 
- if ( g_UCRead ! ) then
- begin
-  true >>> g_UCRead
-  if ( g_FinalFileName sysutils:FileExists ) then
-  begin
-   STRING VAR l_TempFileName
-   g_TempFileName '.uc.txt' Cat >>> l_TempFileName 
-   STRING VAR l_RealFileName
-   g_RealFileName '.uc.txt' Cat >>> l_RealFileName
-   
-   FILE VAR l_Out
-   l_TempFileName File:OpenWrite >>> l_Out
-   TRY
-    FILE VAR l_In
-    g_FinalFileName File:OpenRead >>> l_In
-    TRY
-     VAR l_UCOpened
-     ARRAY VAR l_Accumulated
-     STRING VAR l_Key
-     
-     false >>> l_UCOpened
-     l_In File:ReadLines (
-       IN aStr
-      RULES 
-       ( aStr cUCStart string:Pos -1 != )
-        ( 
-         l_UCOpened ! ?ASSURE [ 'Секция кода уже открыта. Файл: ' g_FinalFileName ' строка:' aStr ]
-         true >>> l_UCOpened
-         [] >>> l_Accumulated
-         
-         aStr >>> l_Key
-         '*' string:SplitTo! l_Key DROP
-         
-         //l_Key l_Out File:WriteWStrLn 
-         aStr l_Out File:WriteWStrLn 
-        )
-       ( aStr cUCEnd string:Pos -1 != )
-        ( 
-         l_UCOpened ?ASSURE [ 'Секция кода не открыта. Файл: ' g_FinalFileName ' строка:' aStr  ]
-         false >>> l_UCOpened
-         
-         g_CurrentGenerator ->^ l_Key ^:= l_Accumulated
-         
-         nil >>> l_Accumulated
-         aStr l_Out File:WriteWStrLn 
-        )
-       DEFAULT
-        (
-         l_UCOpened ? ( 
-          aStr array:AddTo l_Accumulated
-          aStr l_Out File:WriteWStrLn 
-         ) // l_UCOpened ?
-        ) 
-      ; // RULES  
-     ) // l_In File:ReadLines
-    FINALLY
-     nil >>> l_Out
-    END // TRY..FINALLY
-   FINALLY
-    nil >>> l_Out
-   END // TRY..FINALLY
-   l_RealFileName l_TempFileName CopyChangedFile
-  end // ( g_FinalFileName sysutils:FileExists )
- end //( g_UCRead ! ) 
- 
- l_Found ! ? (
-  VAR l_Field
-  g_CurrentGenerator %% aKey >>> l_Field
-  if ( l_Field IsNil ) then
-  begin
-   [ aCode DO ] .Out
-  end // ( l_Field IsNil )
-  else
-  begin
-   l_Field DO .for> ( g_OutFile File:WriteWStrLn )
-  end // ( l_Field IsNil )
- ) // l_Found ! ?
-; // OutUserCode
-
-elem_proc DefaultUserCode
-  STRING IN aKey
-  TtfwWord IN aCode
- Self .UIDforUserCode aKey Cat >>> aKey
- 
- aKey '*' Cat >>> aKey
- 
- [ cUCStart aKey ] .Out
- Self aKey aCode .OutUserCode
- [ cUCEnd aKey ] .Out
-; // DefaultUserCode
-
-elem_proc UserCode:
- ^ IN aSuffix
- ^ IN aCode
- 
- STRING VAR l_Suffix
- 
- aSuffix DO >>> l_Suffix
- 
- VAR l_Code
- Self cUserCodePrefix l_Suffix Cat '' .ElemMember >>> l_Code
- 
- if ( l_Code .IsValueValid ) then
- begin
-  if ( l_Code cEmptyUserCode != ) then
-  begin
-   l_Code .Out
-  end // ( l_Code cEmptyUserCode != )
- end // ( l_Code .IsValueValid )
- else
- begin
-  RULES
-   ( Self .IsFactory )
-    begin
-     RULES
-      ( l_Suffix cVarUserCodeSuffix == )
-       begin
-        'var' .Out
-        [ ' l_Inst : ' Self .Parent .TypeName ';' ] .Out
-       end // ( l_Suffix cVarUserCodeSuffix == )
-      ( l_Suffix cImplementationUserCodeSuffix == )
-       begin
-        [ ' l_Inst := Create' Self .ParametersList ';' ] .Out
-        ' try' .Out
-        '  Result := l_Inst;' .Out
-        ' finally' .Out
-        '  l_Inst.Free;' .Out
-        ' end;//try..finally' .Out
-       end // ( l_Suffix cImplementationUserCodeSuffix == )
-     ; // RULES
-    end // ( Self .IsFactory )
-   DEFAULT
-    begin
-     RULES
-      ( Self .IsSetter ) then
-       ( 'set' l_Suffix Cat >>> l_Suffix )
-      ( Self .IsProperty ) then
-       ( 'get' l_Suffix Cat >>> l_Suffix )
-     ; // RULES
-     
-     VAR l_Implementor
-     Self .Implementor >>> l_Implementor
-     
-     if ( l_Implementor IsNil ) then
-     begin
-      Self .Parent >>> l_Implementor
-     end // ( l_Implementor IsNil )
-     
-     if ( l_Implementor IsNil ! ) then
-     begin
-      [ '_' l_Implementor .UID l_Suffix ] strings:Cat >>> l_Suffix
-     end // ( l_Implementor IsNil ! )
-     
-     Self l_Suffix aCode .DefaultUserCode
-    end // DEFAULT
-  ; // RULES 
- end // ( l_Code .IsValueValid ) 
-; // UserCode:
 
 elem_proc MethodBody
  if ( Self .UPisTrue 'extprop:isAsm' ) then
