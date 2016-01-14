@@ -3022,6 +3022,7 @@ elem_proc OutClassImplementation
  if ( Self .UPisTrue "need UC" ) then
  begin
   Self .UserCode: 'impl' ()
+  OutLn
  end // ( Self .UPisTrue "need UC" ) 
 //	[{%Cx=true|%Ox=true|%ox=true|"%S%f_pas_OutOverridesImpl()"!=""|<{}{%G#f_IsMixIn()=true}{C}>!=0|<{}{%R#f_IsMixIn()=true}{C}>!=0}\
 //      [\n\n%S%f_close_ifdef()]\
