@@ -2408,6 +2408,8 @@ elem_proc UserCode:
     end // ( Self .IsFactory )
    ( Self .IsClassOrMixIn )
     ( Self l_Key aCode .DefaultUserCode ) 
+   ( Self .IsRecord )
+    ( Self l_Key aCode .DefaultUserCode ) 
    DEFAULT
     ( Self l_Key aCode .MethodUserCode )
   ; // RULES 
@@ -2428,6 +2430,12 @@ elem_proc OutClassInner
   Self .Properties .ByVisibility> .Visibility .OutProperty
  ) // Indented:
  
+//	[{%S{need UC}=true}%U[{publ}\n]\n]\
+ if ( Self .UPisTrue "need UC" ) then
+ begin
+  Self .UserCode: 'publ' ()
+ end // ( Self .UPisTrue "need UC" )
+  
 ; // OutClassInner
 
 elem_proc OutClass
@@ -2445,6 +2453,10 @@ elem_proc OutClass
  
 //	%f_CalcParentAndInclude(%S)\
 //	[{%S{need UC}=true}%U[{cit}\n]\n]\
+ if ( Self .UPisTrue "need UC" ) then
+ begin
+  Self .UserCode: 'cit' ()
+ end // ( Self .UPisTrue "need UC" ) 
  
  [ 
   Self .TypeName 
@@ -2546,8 +2558,10 @@ elem_proc OutStaticObject
 
    'object' Self .MainAncestor .TypeName .With() 
   ] .Out
+  
   Self .OutDocumentation
   Self .OutClassInner
+  
   [ 'end;//' Self .TypeName ] .Out
  end // ( Self .IsConstructorsHolder ! )
 ; // OutStaticObject
@@ -3002,6 +3016,16 @@ elem_proc OutClassImplementation
    Self .AllOperationsForDefine .for> .MethodInterfaceForEx: nil .MethodBody
   ) // TF g_EnableMethodDirectives
  ) // TF g_MethodParentPrefix
+ 
+//	%f_clear_list(CAST_METHODS)\
+//	[{%S{need UC}=true}%f_with_gen_id(intf.pas,\n\n%U[{impl}\n])]\
+ if ( Self .UPisTrue "need UC" ) then
+ begin
+  Self .UserCode: 'impl' ()
+ end // ( Self .UPisTrue "need UC" ) 
+//	[{%Cx=true|%Ox=true|%ox=true|"%S%f_pas_OutOverridesImpl()"!=""|<{}{%G#f_IsMixIn()=true}{C}>!=0|<{}{%R#f_IsMixIn()=true}{C}>!=0}\
+//      [\n\n%S%f_close_ifdef()]\
+
 ; // OutClassImplementation
 
 elem_proc OutImplementation
