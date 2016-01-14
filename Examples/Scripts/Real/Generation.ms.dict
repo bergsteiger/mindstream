@@ -2537,6 +2537,14 @@ elem_proc OutRecord
  ] .Out
  Self .OutDocumentation
  Indented: ( Self .Fields .for> .OutField )
+ 
+//	[{%S{need UC}=true}%U[{publ}\n]\n]\
+ if ( Self .UPisTrue "need UC" ) then
+ begin
+  Self .UserCode: 'publ' ()
+  OutLn
+ end // ( Self .UPisTrue "need UC" ) 
+ 
  [ 'end;//' Self .TypeName ] .Out
 ; // OutRecord
 
