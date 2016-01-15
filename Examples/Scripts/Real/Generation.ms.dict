@@ -1207,6 +1207,42 @@ STRING elem_func MethodCallingConventions
  end // ( Result IsNil ! )
 ; // MethodCallingConventions
 
+BOOLEAN elem_func IsManaged
+ Cached:
+ (
+  RULES
+   ( Self .IsRecord )
+    true
+   ( Self .IsUnion )
+    true
+   ( Self .IsArray )
+    true
+   ( Self .IsInterface )
+    true
+   ( Self .IsTypedef )
+    RULES
+     ( Self .UPisTrue "isPointer" )
+      false
+     DEFAULT
+      ( Self .MainAncestor call.me )
+    ; // RULES  
+   ( Self .IsStereotype st_ImpurityParamType )
+    true
+   ( Self .Name 'a-string' == )
+    true
+   ( Self .Name 'a-wstring' == )
+    true
+   ( Self .Name 'object' == )
+    true
+   ( Self .Name 'void' == )
+    true
+   DEFAULT
+    false
+  ; // RULES
+ )
+ >>> Result
+; // IsManaged
+
 CONST cConstPrefix 'const '
 
 STRING elem_func InPrefix
@@ -2232,9 +2268,10 @@ ARRAY elem_func ParametersList
 CONST cUCStart '//#UC START# *'
 CONST cUCEnd '//#UC END# *'
 
-elem_proc OutUserCode
+elem_proc OutUserCode:
   STRING IN aKey
-  TtfwWord IN aCode
+  ^ IN aOutExisting
+  ^ IN aOutNew
   
  BOOLEAN VAR l_Found
  false >>> l_Found
@@ -2315,51 +2352,155 @@ elem_proc OutUserCode
   g_CurrentGenerator %% aKey >>> l_Field
   if ( l_Field IsNil ) then
   begin
-   [ aCode DO ] .Out
+   aKey aOutNew DO
   end // ( l_Field IsNil )
   else
   begin
-   l_Field DO .for> ( g_OutFile File:WriteWStrLn )
+   aKey l_Field DO aOutExisting DO
   end // ( l_Field IsNil )
  ) // l_Found ! ?
-; // OutUserCode
+; // OutUserCode:
 
-elem_proc DefaultUserCode
+elem_proc DefaultUserCodePrim:
   STRING IN aKey
-  TtfwWord IN aCode
+  ^ IN aOutExisting
+  
  Self .UIDforUserCode aKey Cat >>> aKey
  
  aKey '*' Cat >>> aKey
  
- [ cUCStart aKey ] .Out
- Self aKey aCode .OutUserCode
- [ cUCEnd aKey ] .Out
+ Self aKey .OutUserCode: (
+   IN aKey
+   IN aValue
+  [ cUCStart aKey ] .Out
+  aValue .for> ( g_OutFile File:WriteWStrLn )
+  [ cUCEnd aKey ] .Out
+ ) (
+  aOutExisting DO
+ ) // Self aKey .OutUserCode:
+; // DefaultUserCodePrim:
+
+elem_proc DefaultUserCode
+  STRING IN aKey
+  TtfwWord IN aCode
+ Self aKey .DefaultUserCodePrim: (
+   IN aKey
+  [ cUCStart aKey ] .Out
+  [ aCode DO ] .Out
+  [ cUCEnd aKey ] .Out
+ ) // Self aKey .OutUserCode:
 ; // DefaultUserCode
+
+elem_proc PredefinedUserCode:
+  STRING IN aKey
+  ^ IN aCode
+ Self aKey .DefaultUserCodePrim: (
+   IN aKey
+  [ aCode DO ] .Out
+ ) // Self aKey .OutUserCode:
+; // PredefinedUserCode:
+
+elem_proc PredefinedMethodUserCode:
+  STRING IN aSuffix
+  STRING IN aKey
+  TtfwWord IN aCode
+  ^ IN aVarCode
+  ^ IN aImplCode
+ RULES
+  ( aSuffix cVarUserCodeSuffix == )
+   ( Self aKey .PredefinedUserCode: ( aVarCode DO ) )
+  ( aSuffix cImplementationUserCodeSuffix == )
+   ( Self aKey .PredefinedUserCode: ( aImplCode DO ) )
+  DEFAULT 
+   ( Self aKey aCode .DefaultUserCode )
+ ; // RULES
+; // PredefinedMethodUserCode:
+
+ModelElement elem_func ImplementorOrParent
+ Self .Implementor >>> Result
+ 
+ if ( Result IsNil ) then
+ begin
+  Self .Parent >>> Result
+ end // ( Result IsNil )
+; // ImplementorOrParent
 
 elem_proc MethodUserCode
   STRING IN aKey
   TtfwWord IN aCode
+  
+ STRING VAR l_Key 
+ aKey >>> l_Key
+ 
  RULES
   ( Self .IsSetter ) then
-   ( 'set' aKey Cat >>> aKey )
+   ( 'set' l_Key Cat >>> l_Key )
   ( Self .IsProperty ) then
-   ( 'get' aKey Cat >>> aKey )
+   ( 'get' l_Key Cat >>> l_Key )
  ; // RULES
  
  VAR l_Implementor
- Self .Implementor >>> l_Implementor
- 
- if ( l_Implementor IsNil ) then
- begin
-  Self .Parent >>> l_Implementor
- end // ( l_Implementor IsNil )
+ Self .ImplementorOrParent >>> l_Implementor
  
  if ( l_Implementor IsNil ! ) then
  begin
-  [ '_' l_Implementor .UID aKey ] strings:Cat >>> aKey
+  [ '_' l_Implementor .UID l_Key ] strings:Cat >>> l_Key
  end // ( l_Implementor IsNil ! )
  
- Self aKey aCode .DefaultUserCode
+ BOOLEAN elem_func IsSingletonExists
+  Self .Name 'Exists' ==
+  AND ( Self .IsStereotype st_static::Operation )
+  AND ( l_Implementor .UPisTrue "singleton" )
+  >>> Result
+ ; // IsSingletonExists
+ 
+ RULES
+  ( Self .IsSingletonExists )
+   (
+    Self aKey l_Key aCode .PredefinedMethodUserCode: 
+    () 
+    ( 
+     ' Result := g_' l_Implementor .TypeName ' <> nil;'
+    ) 
+   ) // ( Self .IsSingletonExists )
+  ( 
+   Self .Name 'Alien' ==
+   AND ( Self .IsSetter ) 
+   AND ( l_Implementor .IsStereotype st_Service )
+  )
+   (
+    Self aKey l_Key aCode .PredefinedMethodUserCode: 
+    () 
+    (
+     ' Assert((f_Alien = nil) OR (aValue = nil));' \n
+     ' f_Alien := aValue;'
+    ) 
+   ) // Self .Name 'Alien' ==  
+  ( Self .Name 'ClearFields' == )
+   (
+    Self aKey l_Key aCode .PredefinedMethodUserCode: 
+    () 
+    ( 
+     l_Implementor .Fields 
+     .filter> ( .LinkType lt_ref == )
+     .filter> ( .Target .IsManaged )
+     .for> (
+       IN aField
+      ' ' 
+      RULES 
+       ( aField .Target .IsInterface )
+        ( aField .Name ' := nil' )
+       DEFAULT
+        ( 'Finalize(' aField .Name ')' )
+      ; // RULES 
+      ';' \n
+     ) // l_Implementor .Fields
+     ' inherited;'
+    ) 
+   )
+  DEFAULT
+   ( Self l_Key aCode .DefaultUserCode )
+ ; // RULES 
 ; // MethodUserCode
 
 elem_proc UserCode:
@@ -2394,7 +2535,11 @@ elem_proc UserCode:
       ( l_Key cImplementationUserCodeSuffix == )
        begin
         Indented: (
-         [ 'l_Inst := Create' Self .ParametersList ';' ] .Out
+         [ 
+          'l_Inst := ' 
+          'Create' 
+          Self .ParametersList ';' 
+         ] .Out
          'try' .Out
          ' Result := l_Inst;' .Out
          'finally' .Out
@@ -2542,7 +2687,6 @@ elem_proc OutRecord
  if ( Self .UPisTrue "need UC" ) then
  begin
   Self .UserCode: 'publ' ()
-  OutLn
  end // ( Self .UPisTrue "need UC" ) 
  
  [ 'end;//' Self .TypeName ] .Out
