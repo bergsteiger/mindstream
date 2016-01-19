@@ -1687,6 +1687,8 @@ TClass class::TkwString
 TClass class::TkwStringChar
 TClass class::TkwStringCodePage
 TClass class::TkwStringConsistsOf
+TClass class::TkwStringDeleteDoubleChars
+TClass class::TkwStringDeleteDoubleSpaces
 TClass class::TkwStringFirstChar
 TClass class::TkwStringHasAnyOf
 TClass class::TkwStringInc
@@ -1697,7 +1699,11 @@ TClass class::TkwStringReplace
 TClass class::TkwStringReplaceFirst
 TClass class::TkwStringShift
 TClass class::TkwStringSplit
+TClass class::TkwStringSubstring
 TClass class::TkwStringToChar
+TClass class::TkwStringTrim
+TClass class::TkwStringTrimLeft
+TClass class::TkwStringTrimRight
 TClass class::TkwStrToInt
 TClass class::TkwSub
 TClass class::TkwSWAP
@@ -2289,6 +2295,8 @@ INTEGER pop:String:CodePage
 INTEGER pop:String:CompareStr
 INTEGER pop:String:CompareText
 BOOLEAN pop:String:ConsistsOf
+STRING pop:String:DeleteDoubleChars
+STRING pop:String:DeleteDoubleSpaces
 BOOLEAN pop:String:EndsStr
 BOOLEAN pop:String:EndsText
 CHAR pop:String:FirstChar
@@ -2306,9 +2314,13 @@ STRING pop:String:Split
 BOOLEAN pop:String:StartsStr
 BOOLEAN pop:String:StartsText
 INTEGER pop:String:StrToInt
+STRING pop:String:Substring
 STRING pop:String:text_Replace
 STRING pop:String:text_ReplaceFirst
 CHAR pop:String:ToChar
+STRING pop:String:Trim
+STRING pop:String:TrimLeft
+STRING pop:String:TrimRight
 VOID OPERATOR :: PROCEDURE : Print
  PRINTABLE OPERATOR :: IN : aValue
 ; // Print
@@ -2411,7 +2423,6 @@ INTEGER StopTimerEx
 IMMEDIATE VOID OPERATOR : string
 String
 IMMEDIATE VOID OPERATOR : STRING
-IMMEDIATE VOID OPERATOR : String$Define
 CHAR string:[]
 CHAR string:[]++!
 CHAR string:[i]
@@ -2421,6 +2432,8 @@ STRING string:++
 VOID string:++!
 INTEGER string:CodePage
 BOOLEAN string:ConsistsOf
+STRING string:DeleteDoubleChars
+STRING string:DeleteDoubleSpaces
 BOOLEAN string:HasAnyOf
 INTEGER string:Len
 VOID string:--Len!
@@ -2431,7 +2444,11 @@ STRING string:ReplaceFirst
 STRING string:RSplitTo!
 STRING string:Split
 STRING string:SplitTo!
+STRING string:Substring
 CHAR string:ToChar
+STRING string:Trim
+STRING string:TrimLeft
+STRING string:TrimRight
 STRING FUNCTION : strings:Cat
  ARRAY OPERATOR :: IN : anArray
  STRING FUNCTION :: strings:Cat : Result
@@ -2890,6 +2907,8 @@ TkwString
 TkwStringChar
 TkwStringCodePage
 TkwStringConsistsOf
+TkwStringDeleteDoubleChars
+TkwStringDeleteDoubleSpaces
 TkwStringFirstChar
 TkwStringHasAnyOf
 TkwStringInc
@@ -2900,7 +2919,11 @@ TkwStringReplace
 TkwStringReplaceFirst
 TkwStringShift
 TkwStringSplit
+TkwStringSubstring
 TkwStringToChar
+TkwStringTrim
+TkwStringTrimLeft
+TkwStringTrimRight
 TkwStrToInt
 TkwSub
 TkwSWAP
@@ -3055,9 +3078,6 @@ IMMEDIATE VOID OPERATOR : var
 IMMEDIATE VOID OPERATOR : VAR
  ^L OPERATOR :: IN : aName
 ; // VAR
-IMMEDIATE VOID OPERATOR : var$Define
- ^L OPERATOR :: IN : aName
-; // var$Define
 IMMEDIATE VOID OPERATOR :: TYPE : VAR_REF
 IMMEDIATE VOID OPERATOR :: TYPE : VARIANT
 STRING FUNCTION : VarMsgToStr
