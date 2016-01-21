@@ -42,8 +42,8 @@ type
   procedure Test_6_14;
   procedure Test_6_15;
   procedure Test_6_16;
-  {procedure Test_7;
-  procedure Test_7_1;
+  procedure Test_7;
+  {procedure Test_7_1;
   procedure Test_7_2;
   procedure Test_8;
   // ------- TODO Test 9
@@ -442,7 +442,7 @@ begin
              (aParser.TokenType = ttToken));
   end);
 end;
-{
+
 procedure TestTParser.Test_7;
 begin
  DoIt(FileName,
@@ -453,7 +453,7 @@ begin
              (aParser.TokenType = ttBoolean));
   end);
 end;
-
+{
 procedure TestTParser.Test_7_1;
 begin
  DoIt(FileName,
