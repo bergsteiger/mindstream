@@ -3533,13 +3533,13 @@ PROCEDURE .OutConstantsList
 elem_proc OutDefinitionsSection:
   ^ IN aValid
   
- : Validate aValid DO ; 
+ : .Sutable aValid DO ; 
   
- Self .ForChildren> Validate (
+ Self .ForChildren> .Sutable (
   .Constants .filter> ( .Visibility PublicAccess == ) .OutConstantsList
  )
 
- Self .OutTypes Validate
+ Self .OutTypes .Sutable
  
  Self .ForChildren> Validate (
   .Constants .filter> ( .Visibility ProtectedAccess == ) .OutConstantsList
