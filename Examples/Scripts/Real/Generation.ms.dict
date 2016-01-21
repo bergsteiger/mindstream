@@ -3541,7 +3541,7 @@ elem_proc OutDefinitionsSection:
 
  Self .OutTypes .Sutable
  
- Self .ForChildren> Validate (
+ Self .ForChildren> .Sutable (
   .Constants .filter> ( .Visibility ProtectedAccess == ) .OutConstantsList
  )
 
