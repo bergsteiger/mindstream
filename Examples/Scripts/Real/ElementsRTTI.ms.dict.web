@@ -43,7 +43,7 @@ CONST ImplementationAccess 3
 CONST lt_unknown -1
 CONST lt_agr 0
 CONST lt_lnk 1
-CONST lt_ref 1
+CONST lt_ref 2
 
 CONST at_unknown -1
 CONST at_regular 0
@@ -87,15 +87,33 @@ BOOLEAN elem_func True
  true &gt;&gt;&gt; Result
 ; // True
 
+PROCEDURE do_elem_proc_prim
+ STRING IN aName
+ ENGINE_WORD IN aSelf
+ ENGINE_WORD IN aModifier
+ STRING IN aType
+ %SUMMARY 'Реализация elem_proc и elem_generator' ;
+ Ctx:ClearTypeInfo
+ if ( aType IsNil ! ) then
+ begin
+  aType Ctx:Parser:PushSymbol
+ end // ( aType IsNil ! )
+ aName aSelf aModifier 'ModelElement' do_word_func
+; // do_elem_proc_prim
+
 PROCEDURE do_elem_proc
  STRING IN aName
  ENGINE_WORD IN aSelf
  ENGINE_WORD IN aModifier
  %SUMMARY 'Реализация elem_proc и elem_generator' ;
- Ctx:ClearTypeInfo
- axiom:PushSymbol VOID
- aName aSelf aModifier 'ModelElement' do_word_func
+ aName aSelf aModifier 'VOID' do_elem_proc_prim
 ; // do_elem_proc
+
+MACRO elem:
+ Literal IN aName
+ %SUMMARY 'Процедура на элементе модели' ;
+ aName |N this.method.addr nil '' do_elem_proc_prim
+; // elem:
 
 MACRO elem_proc
  Literal IN aName
@@ -424,6 +442,10 @@ INTEGER elem_func Visibility
  Self 'Visibility' UnknownAccess /*PublicAccess*/ .ElemMember &gt;&gt;&gt; Result
 ; // Visibility
 
+INTEGER elem_func LinkType
+ Self 'LinkType' lt_unknown .ElemMember &gt;&gt;&gt; Result
+; // LinkType
+
 INTEGER elem_func Abstraction
  Self 'Abstraction' /*at_unknown*/ at_final .ElemMember &gt;&gt;&gt; Result
 ; // Abstraction
@@ -513,7 +535,30 @@ EXPORTS
  @SELF
 ; // st_NodeType_
 
-//: st_VCMAbstractFormSetFactory
-// CONST Name 'VCMAbstractFormSetFactory'
-// @SELF
-//; // st_VCMAbstractFormSetFactory
+: gen_rc.pas
+ CONST UID '55B8D28B0157'
+ CONST Name 'rc.pas'
+ CONST Stereotype 'generator'
+ @SELF
+; // gen_rc.pas
+
+: gen_res.cmd.pas
+ CONST UID '55B8DD9C0301'
+ CONST Name 'res.cmd.pas'
+ CONST Stereotype 'generator'
+ @SELF
+; // gen_res.cmd.pas
+
+: gen_pascal
+ CONST UID '561D336E0099'
+ CONST Name 'pascal'
+ CONST Stereotype 'generator'
+ @SELF
+; // gen_pascal
+
+: gen_forth_structure
+ CONST UID '4F368B80039E'
+ CONST Name 'forth_structure'
+ CONST Stereotype 'generator'
+ @SELF
+; // gen_forth_structure
