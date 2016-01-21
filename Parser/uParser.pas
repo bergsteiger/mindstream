@@ -259,7 +259,7 @@ const
 
 var
  l_CurrentChar : Char;
-
+ l_IsTokenCompleted : Boolean;
  procedure NextChar;
  begin
   Inc(f_PosInCurrentLine);
@@ -269,13 +269,15 @@ var
  begin
   f_Token := f_Token + l_Char;
  end;
+
 begin
  f_Token := '';
  f_TokenType := ttUnknown;
  l_CurrentChar := #0;
 
+ l_IsTokenCompleted := False;
  try
-  while true do
+  while not l_IsTokenCompleted do
   begin
    if (f_PosInCurrentLine >= Length(f_CurrentLine)) then
    begin
@@ -300,15 +302,23 @@ begin
      Break;
    until (f_PosInCurrentLine > Length(f_CurrentLine));
 
+   l_IsTokenCompleted := False;
    // тут накапливаем символы
    repeat
     l_CurrentChar := f_CurrentLine[f_PosInCurrentLine];
 
-    addCharToToken(l_CurrentChar);
+    if l_CurrentChar in cWhiteSpace then
+    begin
+     l_IsTokenCompleted := True;
+     Break;
+    end;
 
+    addCharToToken(l_CurrentChar);
     NextChar;
    until (f_PosInCurrentLine > Length(f_CurrentLine));
-  end; // while true
+
+   f_TokenType := ttToken;
+  end; // while not l_IsTokenCompleted
  finally
   if (Self.f_TokenType = ttUnknown) then
    if Self.EOF then
