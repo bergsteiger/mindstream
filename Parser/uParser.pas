@@ -255,157 +255,24 @@ procedure TScriptParser.NextToken;
 const
  cQuote = #39;
  cWhiteSpace = [#32, #9];
+ cDoubleQuote = #35;
 
- // Определяем многострочность строки
- {$REGION 'IsTokenMultiLineString'}
- function IsTokenMultiLineString : boolean;
- // Делаем проверку ttString на многострочность
- var
-  l_LastChar : char;
+var
+ l_CurrentChar : Char;
+
+ procedure NextChar;
  begin
-  Result := False;
-  l_LastChar := #0;
-
-  if f_CurrentLine <> '' then
-   l_LastChar := f_CurrentLine[Length(f_CurrentLine)];
-
-  if (f_TokenType = ttString) and
-     (l_LastChar <> cQuote) then
-   Result := True;
+  Inc(f_PosInCurrentLine);
  end;
- {$ENDREGION}
 
- // Определяем что за тип у токена ttToken
- {$Region 'ExamineToken'}
- procedure ExamineToken;
-  {$REGION 'IsBooleanToken'}
-  function IsBooleanToken : Boolean;
-  begin
-   Result := False;
-
-   if (TokenString = 'false') or
-      (TokenString = 'true') then
-    Result := True;
-  end;
-  {$ENDREGION}
-  {$REGION 'IsStringToken'}
-  function IsStringToken(const aToken: String) : Boolean;
-  var
-   l_Pos : Integer;
-   l_CharInPos : Char;
-   l_Str,
-   l_Buffer,
-   l_ResultToken : String;
-   l_IsQuotedOpen : Boolean;
-  {$REGION 'ExistNextChar'}
-  function ExistNextChar : boolean;
-  begin
-   Result := False;
-   Result := l_Pos + 1 <= Length(l_Str);
-  end;
-  {$ENDREGION}
-  {$REGION 'NextCharIsDigit'}
-  function NextCharIsDigit : boolean;
-  var
-   l_Ch : Char;
-  begin
-   Result := False;
-   l_Ch := l_Str[l_Pos + 1];
-   Result := l_Ch.IsDigit;
-  end;
-  {$ENDREGION}
-  {$REGION 'AddCharToResultToken'}
-  procedure AddCharToResultToken;
-  begin
-   if l_Buffer <> '' then
-    l_ResultToken := l_ResultToken + Chr(StrToInt(l_Buffer));
-
-   l_Buffer := '';
-  end;
-  {$ENDREGION}
-  // IsStringTokenBegin
-  begin
-   Result := True;
-   l_Buffer := '';
-   l_ResultToken := '';
-   l_Pos := 1;
-   l_Str := aToken;
-   l_IsQuotedOpen := False;
-   try
-    repeat
-     l_CharInPos := l_Str[l_Pos];
-     if l_CharInPos = '#' then
-     begin
-      if l_Buffer <> '' then
-       AddCharToResultToken;
-
-      if ExistNextChar then
-       If NextCharIsDigit then
-        Inc(l_Pos);
-     end // l_Str[l_Pos]='#'
-     else if l_CharInPos.IsDigit then
-     begin
-      l_Buffer := l_Buffer + l_CharInPos;
-      Inc(l_Pos);
-     end // l_CharInPos.IsDigit
-     else if l_CharInPos = cQuote then
-     begin
-      l_IsQuotedOpen := not l_IsQuotedOpen;
-      Inc(l_Pos);
-     end // l_CharInPos.IsDigit
-     else if l_IsQuotedOpen then
-     begin
-      AddCharToResultToken;
-      l_ResultToken := l_ResultToken + l_CharInPos;
-      Inc(l_Pos);
-     end
-     else
-     begin
-      Result := False;
-      Break;
-     end;
-    until l_Pos > Length(l_Str); // l_Pos < Length(l_Str)
-
-    if l_Buffer <> '' then
-     AddCharToResultToken;
-
-   finally
-    if Result then
-     f_Token := l_ResultToken;
-   end;
-  end;// IsStringToken
-  {$ENDREGION}
+ procedure addCharToToken(l_Char : Char);
  begin
-  if TokenType = ttToken then
-  begin
-   if IsBooleanToken then
-   begin
-    f_TokenType := ttBoolean;
-    Exit;
-   end // IsBooleanToken
-   else if IsStringToken(f_Token) then
-   begin
-    f_TokenType := ttString;
-    Exit;
-   end // IsStringToken(f_Token)
-  end
- end;
- {$ENDREGION}
-
- function IsStringDelimiter : boolean;
- begin
-  Result := False;
-  Result := (f_CurrentLine[f_PosInCurrentLine] = cQuote);
+  f_Token := f_Token + l_Char;
  end;
 begin
- // Если не многострочный стринг обнуляем токен
- if IsTokenMultiLineString then
-  f_Token := f_Token + #13#10
- else
- begin
-  f_Token := '';
-  f_TokenType := ttUnknown;
- end;
+ f_Token := '';
+ f_TokenType := ttUnknown;
+ l_CurrentChar := #0;
 
  try
   while true do
@@ -425,56 +292,24 @@ begin
       Exit;
    end; // while(f_NextToken = '')
 
-   // Тут пропускаем пустые символы:
-   while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
+   // Пропускаем пустые символы
+   repeat
     if (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace) then
-     Inc(f_PosInCurrentLine)
+     NextChar
     else
-     break;
+     Break;
+   until (f_PosInCurrentLine > Length(f_CurrentLine));
 
-   if (f_PosInCurrentLine <= Length(f_CurrentLine)) then
-    break;
+   // тут накапливаем символы
+   repeat
+    l_CurrentChar := f_CurrentLine[f_PosInCurrentLine];
+
+    addCharToToken(l_CurrentChar);
+
+    NextChar;
+   until (f_PosInCurrentLine > Length(f_CurrentLine));
   end; // while true
-
-  // Тут накапливаем НЕ пустые символы:
-  if IsStringDelimiter or
-     (TokenType = ttString) then
-  begin
-   f_TokenType := ttString;
-
-   if IsStringDelimiter then
-    Inc(f_PosInCurrentLine);
-
-   while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
-    if not IsStringDelimiter then
-    begin
-     f_Token := f_Token + f_CurrentLine[f_PosInCurrentLine];
-     Inc(f_PosInCurrentLine);
-    end // (f_CurrentLine[f_PosInCurrentLine] <> cQuote)
-    else
-    begin
-     Inc(f_PosInCurrentLine);
-     break;
-    end; // else
-  end // (f_CurrentLine[f_PosInCurrentLine] = cQuote)
-  else
-  begin
-   f_TokenType := ttToken;
-   while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
-    if (not(f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)) then
-    begin
-     f_Token := f_Token + f_CurrentLine[f_PosInCurrentLine];
-     Inc(f_PosInCurrentLine);
-    end // not (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)
-    else
-     break;
-  end; // else
  finally
-  if IsTokenMultiLineString then
-   NextToken;
-
-  ExamineToken;
-
   if (Self.f_TokenType = ttUnknown) then
    if Self.EOF then
     f_TokenType := ttEOF;
