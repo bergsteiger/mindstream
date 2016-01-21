@@ -20,7 +20,7 @@ type
   procedure TestCreate;
   procedure FirstTest;
   procedure Test_4_1;
-{  procedure Test_4_2;
+  procedure Test_4_2;
   procedure Test_4_3;
   procedure Test_4_4;
   procedure Test_4_5;
@@ -42,7 +42,7 @@ type
   procedure Test_6_14;
   procedure Test_6_15;
   procedure Test_6_16;
-  procedure Test_7;
+  {procedure Test_7;
   procedure Test_7_1;
   procedure Test_7_2;
   procedure Test_8;
@@ -114,7 +114,7 @@ begin
              (aParser.TokenType = ttToken));
   end);
 end;
- {
+
 procedure TestTParser.Test_4_2;
 begin
  DoIt(FileName,
@@ -442,7 +442,7 @@ begin
              (aParser.TokenType = ttToken));
   end);
 end;
-
+{
 procedure TestTParser.Test_7;
 begin
  DoIt(FileName,
