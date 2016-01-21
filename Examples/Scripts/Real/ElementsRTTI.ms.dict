@@ -535,7 +535,30 @@ EXPORTS
  @SELF
 ; // st_NodeType_
 
-//: st_VCMAbstractFormSetFactory
-// CONST Name 'VCMAbstractFormSetFactory'
-// @SELF
-//; // st_VCMAbstractFormSetFactory
+: gen_rc.pas
+ CONST UID '55B8D28B0157'
+ CONST Name 'rc.pas'
+ CONST Stereotype 'generator'
+ @SELF
+; // gen_rc.pas
+
+: gen_res.cmd.pas
+ CONST UID '55B8DD9C0301'
+ CONST Name 'res.cmd.pas'
+ CONST Stereotype 'generator'
+ @SELF
+; // gen_res.cmd.pas
+
+: gen_pascal
+ CONST UID '561D336E0099'
+ CONST Name 'pascal'
+ CONST Stereotype 'generator'
+ @SELF
+; // gen_pascal
+
+: gen_forth_structure
+ CONST UID '4F368B80039E'
+ CONST Name 'forth_structure'
+ CONST Stereotype 'generator'
+ @SELF
+; // gen_forth_structure
