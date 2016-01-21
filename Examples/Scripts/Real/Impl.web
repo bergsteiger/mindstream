@@ -1,0 +1,49 @@
+elem_proc OutImplementationSection
+ Self .OutDefinitionsSection: .IsForImplementation
+ 
+ VAR l_WasOut
+ false &gt;&gt;&gt; l_WasOut
+ Self .ForChildren&gt; .IsForImplementation (
+   IN anItem
+  anItem .GlobalVars 
+  .filter&gt; ( .Visibility PrivateAccess != ) 
+  .for&gt; ( .OutVar true &gt;&gt;&gt; l_WasOut )
+ ) 
+ Self .ForChildren&gt; .All (
+   IN anItem
+  anItem .GlobalVars 
+  .filter&gt; ( .Visibility PrivateAccess == ) 
+  .for&gt; ( .OutVar true &gt;&gt;&gt; l_WasOut )
+ ) 
+ 
+ l_WasOut ? OutLn
+ 
+ Self .ForChildren&gt; .All (
+  .Constants .filter&gt; ( .Visibility PrivateAccess == ) .OutConstantsList
+ )
+
+ Self .ForChildren&gt; .IsForInterface (
+   IN anItem
+  VAR l_GlobalOperations
+  anItem .GlobalOperations &gt;&gt;&gt; l_GlobalOperations
+  VAR l_GlobalOperationsForOverload
+  anItem .GlobalOperationsForOverload &gt;&gt;&gt; l_GlobalOperationsForOverload
+  l_GlobalOperations 
+  .filter&gt; ( .Visibility PrivateAccess == )
+  .for&gt; .MethodInterfaceForEx: l_GlobalOperationsForOverload .MethodBody
+  l_GlobalOperations 
+  .filter&gt; ( .Visibility PrivateAccess != )
+  .for&gt; .MethodInterfaceForEx: nil .MethodBody
+ )
+ Self .ForChildren&gt; .IsForImplementation (
+   IN anItem
+  VAR l_GlobalOperations
+  anItem .GlobalOperations &gt;&gt;&gt; l_GlobalOperations
+  VAR l_GlobalOperationsForOverload
+  anItem .GlobalOperationsForOverload &gt;&gt;&gt; l_GlobalOperationsForOverload
+  l_GlobalOperations 
+  .for&gt; .MethodInterfaceForEx: l_GlobalOperationsForOverload .MethodBody
+ )
+ 
+ Self .ForChildren&gt; .All .OutImplementation
+; // OutImplementationSection
