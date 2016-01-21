@@ -3533,15 +3533,15 @@ PROCEDURE .OutConstantsList
 elem_proc OutDefinitionsSection:
   ^ IN aValid
   
- : .Sutable aValid DO ; 
+ : .Suitable aValid DO ; 
   
- Self .ForChildren> .Sutable (
+ Self .ForChildren> .Suitable (
   .Constants .filter> ( .Visibility PublicAccess == ) .OutConstantsList
  )
 
- Self .OutTypes .Sutable
+ Self .OutTypes .Suitable
  
- Self .ForChildren> .Sutable (
+ Self .ForChildren> .Suitable (
   .Constants .filter> ( .Visibility ProtectedAccess == ) .OutConstantsList
  )
 
