@@ -261,6 +261,7 @@ const
 var
  l_CurrentChar : Char;
  l_IsTokenCompleted : Boolean;
+
  procedure NextChar;
  begin
   Inc(f_PosInCurrentLine);
@@ -275,7 +276,32 @@ begin
  f_Token := '';
  f_TokenType := ttUnknown;
 
+ try
+  while True do
+  begin
+   if f_PosInCurrentLine > Length(f_CurrentLine) then
+   begin
+    f_CurrentLine := ReadLn;
+    f_PosInCurrentLine := 1;
+   end;
 
+   l_CurrentChar := f_CurrentLine[f_PosInCurrentLine];
+
+   if (l_CurrentChar in cWhiteSpace) then
+   begin
+    NextChar;
+    break;
+   end
+   else
+   begin
+    addCharToToken(l_CurrentChar);
+    NextChar;
+   end;
+  end;
+ finally
+  if f_Token <> '' then
+   f_TokenType := ttToken;
+ end;
 end;
 
 function TScriptParser.EOF: Boolean;
