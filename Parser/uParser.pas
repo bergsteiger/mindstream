@@ -307,11 +307,12 @@ begin
    repeat
     l_CurrentChar := f_CurrentLine[f_PosInCurrentLine];
 
-    if l_CurrentChar in cWhiteSpace then
+    if (l_CurrentChar in cWhiteSpace) then
     begin
      l_IsTokenCompleted := True;
      Break;
     end;
+
 
     addCharToToken(l_CurrentChar);
     NextChar;
