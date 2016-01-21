@@ -19,7 +19,7 @@ type
  published
   procedure TestCreate;
   procedure FirstTest;
-  procedure Test_4_1;
+ { procedure Test_4_1;
   procedure Test_4_2;
   procedure Test_4_3;
   procedure Test_4_4;
@@ -92,7 +92,7 @@ begin
    CheckFalse(aParser.EOF);
   end);
 end;
-
+{
 procedure TestTParser.Test_4_1;
 begin
  DoIt(FileName,

@@ -178,6 +178,7 @@ var
    else
    begin
     l_CharCount := l_BlockCommentPosEnd - l_BlockCommentPosBegin + 2;
+
     Delete(l_Line, l_BlockCommentPosBegin, l_CharCount);
    end; // else l_BlockCommentPosEnd < l_BlockCommentPosBegin
   end;
@@ -273,58 +274,8 @@ var
 begin
  f_Token := '';
  f_TokenType := ttUnknown;
- l_CurrentChar := #0;
-
- l_IsTokenCompleted := False;
- try
-  while not l_IsTokenCompleted do
-  begin
-   if (f_PosInCurrentLine >= Length(f_CurrentLine)) then
-   begin
-    // - Типа текущая строка ВСЯ обработана
-    f_CurrentLine := '';
-    f_PosInCurrentLine := 1;
-   end; // f_PosInCurrentLine > Length(f_CurrentLine)
-
-   while (f_CurrentLine = '') do
-   begin
-    f_CurrentLine := ReadLn;
-    if (f_CurrentLine = '') then
-     if f_EOF then
-      Exit;
-   end; // while(f_NextToken = '')
-
-   // Пропускаем пустые символы
-   repeat
-    if (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace) then
-     NextChar
-    else
-     Break;
-   until (f_PosInCurrentLine > Length(f_CurrentLine));
-
-   l_IsTokenCompleted := False;
-   // тут накапливаем символы
-   repeat
-    l_CurrentChar := f_CurrentLine[f_PosInCurrentLine];
-
-    if (l_CurrentChar in cWhiteSpace) then
-    begin
-     l_IsTokenCompleted := True;
-     Break;
-    end;
 
 
-    addCharToToken(l_CurrentChar);
-    NextChar;
-   until (f_PosInCurrentLine > Length(f_CurrentLine));
-
-   f_TokenType := ttToken;
-  end; // while not l_IsTokenCompleted
- finally
-  if (Self.f_TokenType = ttUnknown) then
-   if Self.EOF then
-    f_TokenType := ttEOF;
- end; // try..finally
 end;
 
 function TScriptParser.EOF: Boolean;
