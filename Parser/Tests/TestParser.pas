@@ -20,7 +20,7 @@ type
   procedure TestCreate;
   procedure FirstTest;
   procedure Test_4_1;
-  procedure Test_4_2;
+{  procedure Test_4_2;
   procedure Test_4_3;
   procedure Test_4_4;
   procedure Test_4_5;
@@ -56,7 +56,7 @@ type
   procedure Test_12_3;
   procedure Test_12_4;
   procedure Test_12_5;
-  procedure Test_12_6;
+  procedure Test_12_6;    }
  end;
 
 implementation
@@ -114,7 +114,7 @@ begin
              (aParser.TokenType = ttToken));
   end);
 end;
-
+ {
 procedure TestTParser.Test_4_2;
 begin
  DoIt(FileName,
@@ -615,7 +615,7 @@ begin
    CheckTrue((aParser.TokenString = #12#13'abc'#13#10'def'#14#15) and
              (aParser.TokenType = ttString));
   end);
-end;
+end;            }
 
 initialization
 
