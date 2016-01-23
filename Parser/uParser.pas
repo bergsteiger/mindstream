@@ -262,6 +262,13 @@ var
  l_CurrentChar : Char;
  l_IsTokenCompleted : Boolean;
 
+ procedure ExamineToken;
+ begin
+  if (f_Token = 'false') or
+     (f_Token = 'true') then
+   f_TokenType := ttBoolean;
+ end;
+
  procedure NextChar;
  begin
   Inc(f_PosInCurrentLine);
@@ -325,6 +332,8 @@ begin
    else
     break;
 
+  // Определяем тип токена
+  ExamineToken;
  end; // else
 
  if (Self.f_TokenType = ttUnknown) then
