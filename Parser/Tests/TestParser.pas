@@ -75,6 +75,9 @@ type
   procedure Test_12_8;
   procedure Test_12_9;
   procedure Test_12_10;
+  procedure Test_12_11;
+  procedure Test_12_12;
+  procedure Test_12_13;
  end;
 
 implementation
@@ -613,21 +616,6 @@ begin
   end);
 end;
 
-procedure TestTParser.Test_12_10;
-begin
- DoIt(FileName,
-  procedure(aParser: TScriptParser)
-  begin
-   aParser.NextToken;
-   CheckTrue((aParser.TokenString = #13) and
-             (aParser.TokenType = ttString));
-
-   aParser.NextToken;
-   CheckTrue((aParser.TokenString = #10) and
-             (aParser.TokenType = ttString));
-  end);
-end;
-
 procedure TestTParser.Test_12_1_1;
 begin
  DoIt(FileName,
@@ -752,6 +740,68 @@ begin
 
    CheckTrue((aParser.TokenString = '!') and
              (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_12_10;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = #13) and
+             (aParser.TokenType = ttString));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = #10) and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_12_11;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = #6) and
+             (aParser.TokenType = ttString));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '5') and
+             (aParser.TokenType = ttToken));
+  end);
+end;
+
+procedure TestTParser.Test_12_12;
+begin
+// #2Z #13'a'
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '#2Z') and
+             (aParser.TokenType = ttUnknown));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '5') and
+             (aParser.TokenType = ttToken));
+  end);
+end;
+
+procedure TestTParser.Test_12_13;
+begin
+ //#32 #2Z'Qqwe<CRLF>23 121212#$a #13#10'
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = #32) and
+             (aParser.TokenType = ttString));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '#2Z' + '''' + 'Qqwe<CRLF>23 121212#$a #13#10' + '''') and
+             (aParser.TokenType = ttToken));
   end);
 end;
 
