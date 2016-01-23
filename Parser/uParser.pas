@@ -398,7 +398,7 @@ begin
 
    AddBufferToToken;
 
-   if (CurrentChar in cWhiteSpace) then
+   if (CurrentChar in cWhiteSpace) or (CurrentChar = #13) then
     f_IsSymbol := false
    else
     NextToken;

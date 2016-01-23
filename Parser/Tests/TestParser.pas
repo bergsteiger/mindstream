@@ -72,6 +72,9 @@ type
   procedure Test_12_5;
   procedure Test_12_6;
   procedure Test_12_7;
+  procedure Test_12_8;
+  procedure Test_12_9;
+  procedure Test_12_10;
  end;
 
 implementation
@@ -610,6 +613,21 @@ begin
   end);
 end;
 
+procedure TestTParser.Test_12_10;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = #13) and
+             (aParser.TokenType = ttString));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = #10) and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
 procedure TestTParser.Test_12_1_1;
 begin
  DoIt(FileName,
@@ -707,11 +725,32 @@ begin
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
-   CheckTrue((aParser.TokenString = #13) and
-             (aParser.TokenType = ttString));
 
+   CheckTrue((aParser.TokenString = ' ') and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_12_8;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
    aParser.NextToken;
-   CheckTrue((aParser.TokenString = #10) and
+
+   CheckTrue((aParser.TokenString = 'A') and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_12_9;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+
+   CheckTrue((aParser.TokenString = '!') and
              (aParser.TokenType = ttString));
   end);
 end;
