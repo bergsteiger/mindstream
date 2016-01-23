@@ -276,32 +276,47 @@ begin
  f_Token := '';
  f_TokenType := ttUnknown;
 
- try
-  while True do
+ while true do
+ begin
+  if (f_PosInCurrentLine >= Length(f_CurrentLine)) then
   begin
-   if f_PosInCurrentLine > Length(f_CurrentLine) then
-   begin
-    f_CurrentLine := ReadLn;
-    f_PosInCurrentLine := 1;
-   end;
+   // - “ипа текуща€ строка ¬—я обработана
+   f_CurrentLine := '';
+   f_PosInCurrentLine := 1;
+  end; // f_PosInCurrentLine > Length(f_CurrentLine)
 
-   l_CurrentChar := f_CurrentLine[f_PosInCurrentLine];
+  while (f_CurrentLine = '') do
+  begin
+   f_CurrentLine := ReadLn;
+   if (f_CurrentLine = '') then
+    if f_EOF then
+     Exit;
+  end; // while(f_NextToken = '')
 
-   if (l_CurrentChar in cWhiteSpace) then
-   begin
-    NextChar;
-    break;
-   end
+  // “ут пропускаем пустые символы:
+  while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
+   if (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace) then
+    NextChar
    else
-   begin
-    addCharToToken(l_CurrentChar);
-    NextChar;
-   end;
-  end;
- finally
-  if f_Token <> '' then
-   f_TokenType := ttToken;
- end;
+    break;
+
+  if (f_PosInCurrentLine <= Length(f_CurrentLine)) then
+   break;
+ end; // while true
+
+ f_TokenType := ttToken;
+ while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
+  if (not(f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)) then
+  begin
+   f_Token := f_Token + f_CurrentLine[f_PosInCurrentLine];
+   NextChar;
+  end // not (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)
+  else
+   break;
+
+ if (Self.f_TokenType = ttUnknown) then
+  if Self.EOF then
+   f_TokenType := ttEOF;
 end;
 
 function TScriptParser.EOF: Boolean;
