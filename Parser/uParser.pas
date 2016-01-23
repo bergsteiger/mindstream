@@ -19,6 +19,9 @@ type
   f_TokenType: TscriptTokenType;
   f_CurrentLineNumber: Integer;
   f_IsBlockComment: Boolean;
+  f_CurrentChar : Char;
+ procedure NextChar;
+ // Увеличивает f_PosInCurrentLine и читает f_CurrentChar
  protected
   function ReadLn: String;
  protected
@@ -129,6 +132,12 @@ begin
  end
  else
   Result := false;
+end;
+
+procedure TScriptParser.NextChar;
+begin
+ Inc(f_PosInCurrentLine);
+ f_CurrentChar := f_CurrentLine[f_PosInCurrentLine];
 end;
 
 function TScriptParser.ReadLn: String;
@@ -258,20 +267,11 @@ const
  cWhiteSpace = [#32, #9];
  cDoubleQuote = #35;
 
-var
- l_CurrentChar : Char;
- l_IsTokenCompleted : Boolean;
-
  procedure ExamineToken;
  begin
   if (f_Token = 'false') or
      (f_Token = 'true') then
    f_TokenType := ttBoolean;
- end;
-
- procedure NextChar;
- begin
-  Inc(f_PosInCurrentLine);
  end;
 
  procedure addCharToToken(l_Char : Char);
@@ -289,8 +289,9 @@ begin
   begin
    // - Типа текущая строка ВСЯ обработана
    f_CurrentLine := '';
-   f_PosInCurrentLine := 1;
-  end; // f_PosInCurrentLine > Length(f_CurrentLine)
+   f_PosInCurrentLine := 0;
+   f_CurrentChar := #0;
+  end;
 
   while (f_CurrentLine = '') do
   begin
@@ -300,9 +301,12 @@ begin
      Exit;
   end; // while(f_NextToken = '')
 
+  // Получаем первый символ в f_CurrentChar
+  NextChar;
+
   // Тут пропускаем пустые символы:
   while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
-   if (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace) then
+   if (f_CurrentChar in cWhiteSpace) then
     NextChar
    else
     break;
@@ -312,21 +316,28 @@ begin
  end; // while true
 
  // Читаем токен
- l_CurrentChar := f_CurrentLine[f_PosInCurrentLine];
-
- if l_CurrentChar = '''' then
+ if f_CurrentChar = cQuote then
  begin
   f_TokenType := ttString;
-  // TODO STRING
+
+  NextChar;
+  while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
+   if f_CurrentChar <> cQuote then
+   begin
+    addCharToToken(f_CurrentLine[f_PosInCurrentLine]);
+    NextChar;
+   end
+   else
+    Break;
  end
  else // not
  begin
   f_TokenType := ttToken;
 
   while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
-   if (not (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)) then
+   if (not (f_CurrentChar in cWhiteSpace)) then
    begin
-    addCharToToken(f_CurrentLine[f_PosInCurrentLine]);
+    addCharToToken(f_CurrentChar);
     NextChar;
    end // (not (l_CurrentChar in cWhiteSpace))
    else
