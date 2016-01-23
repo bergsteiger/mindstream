@@ -52,11 +52,10 @@ type
   procedure Test_7;
   procedure Test_7_1;
   procedure Test_7_2;
-
-{  //
   procedure Test_8;
+
   // ------- TODO Test 9
-  procedure Test_10_1;
+{  procedure Test_10_1;
   procedure Test_10_2;
   procedure Test_10_3;
   procedure Test_10_4;
@@ -497,7 +496,6 @@ begin
   end);
 end;
 
-{
 procedure TestTParser.Test_8;
 begin
  DoIt(FileName,
@@ -509,7 +507,7 @@ begin
   end);
 end;
 
-procedure TestTParser.Test_10_1;
+{procedure TestTParser.Test_10_1;
 begin
  DoIt(FileName,
   procedure(aParser: TScriptParser)
