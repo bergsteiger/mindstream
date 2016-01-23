@@ -596,16 +596,7 @@ begin
   begin
    aParser.NextToken;
 
-   CheckTrue((aParser.TokenString = '#a') and
-             (aParser.TokenType = ttUnknown));
-   aParser.NextToken;
-
-   CheckTrue((aParser.TokenString = 'a') and
-             (aParser.TokenType = ttToken));
-   aParser.NextToken;
-
-   CheckTrue((aParser.TokenString = #13#14) and
-             (aParser.TokenType = ttString));
+   CheckTrue(aParser.TokenType = ttUnknown);
   end);
 end;
 

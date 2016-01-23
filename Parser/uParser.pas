@@ -309,6 +309,7 @@ var
  begin
   l_Num := StrToInt(l_Buffer);
   AddCharToToken(Chr(l_Num));
+  l_Buffer := '';
  end;
 
 begin
@@ -414,13 +415,18 @@ begin
    ExamineToken;
   end; // else
  except
-  on E : Exception do
+  On E : Exception do
+  begin
    f_TokenType := ttUnknown;
+
+  end;
+
  end;
 
  if (Self.f_TokenType = ttUnknown) then
   if Self.EOF then
    f_TokenType := ttEOF;
+
 end;
 
 function TScriptParser.EOF: Boolean;
