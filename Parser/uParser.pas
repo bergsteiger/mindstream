@@ -304,15 +304,19 @@ begin
    break;
  end; // while true
 
- f_TokenType := ttToken;
  while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
-  if (not(f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)) then
+ begin
+  l_CurrentChar := f_CurrentLine[f_PosInCurrentLine];
+
+  f_TokenType := ttToken;
+  if (not (l_CurrentChar in cWhiteSpace)) then
   begin
-   f_Token := f_Token + f_CurrentLine[f_PosInCurrentLine];
+   addCharToToken(l_CurrentChar);
    NextChar;
   end // not (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)
   else
    break;
+ end;
 
  if (Self.f_TokenType = ttUnknown) then
   if Self.EOF then
