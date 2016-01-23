@@ -580,7 +580,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'a') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = ttToken));
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = #13#14) and

@@ -312,7 +312,7 @@ var
  end;
 
 begin
- if f_TokenType <> ttString then
+ if not (f_IsString or f_IsSymbol) then
  begin
   f_Token := '';
   f_TokenType := ttUnknown;
@@ -364,7 +364,7 @@ begin
    while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
     if CurrentChar <> cQuote then
     begin
-     AddCharToToken(f_CurrentLine[f_PosInCurrentLine]);
+     AddCharToToken(CurrentChar);
      NextChar;
     end
     else
@@ -372,13 +372,15 @@ begin
 
    NextToken;
   end
-  else if (CurrentChar = '#') or f_IsSymbol then
+  else if (CurrentChar = '#') then
   begin
    f_TokenType := ttString;
    f_IsSymbol := True;
 
    NextChar;
-   while not ((CurrentChar = '#') or (CurrentChar = cQuote)) do
+   while not ((CurrentChar = '#') or
+              (CurrentChar = cQuote) or
+              (CurrentChar in cWhiteSpace)) do
    begin
     AddCharToBuffer(CurrentChar);
 
@@ -389,8 +391,11 @@ begin
    end;
 
    AddBufferToToken;
-   NextToken;
-   f_IsSymbol := False;
+
+   if (CurrentChar in cWhiteSpace) then
+    f_IsSymbol := false
+   else
+    NextToken;
   end
   else
   begin
