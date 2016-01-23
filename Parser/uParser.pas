@@ -378,9 +378,13 @@ begin
    f_IsSymbol := True;
 
    NextChar;
-   while not ((CurrentChar = '#') or (CurrentChar = cQuote)) do
+   while (not ((CurrentChar = '#') or (CurrentChar = cQuote))) do
    begin
     AddCharToBuffer(CurrentChar);
+
+    if (f_PosInCurrentLine >= Length(f_CurrentLine)) then
+     Break;
+
     NextChar;
    end;
 
