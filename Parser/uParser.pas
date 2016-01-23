@@ -304,19 +304,28 @@ begin
    break;
  end; // while true
 
- while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
- begin
-  l_CurrentChar := f_CurrentLine[f_PosInCurrentLine];
+ // Читаем токен
+ l_CurrentChar := f_CurrentLine[f_PosInCurrentLine];
 
+ if l_CurrentChar = '''' then
+ begin
+  f_TokenType := ttString;
+  // TODO STRING
+ end
+ else // not
+ begin
   f_TokenType := ttToken;
-  if (not (l_CurrentChar in cWhiteSpace)) then
-  begin
-   addCharToToken(l_CurrentChar);
-   NextChar;
-  end // not (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)
-  else
-   break;
- end;
+
+  while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
+   if (not (f_CurrentLine[f_PosInCurrentLine] in cWhiteSpace)) then
+   begin
+    addCharToToken(f_CurrentLine[f_PosInCurrentLine]);
+    NextChar;
+   end // (not (l_CurrentChar in cWhiteSpace))
+   else
+    break;
+
+ end; // else
 
  if (Self.f_TokenType = ttUnknown) then
   if Self.EOF then
