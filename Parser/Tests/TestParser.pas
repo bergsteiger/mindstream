@@ -19,13 +19,18 @@ type
  published
   procedure TestCreate;
   procedure FirstTest;
+
+  // Simple token
   procedure Test_4_1;
   procedure Test_4_2;
   procedure Test_4_3;
   procedure Test_4_4;
   procedure Test_4_5;
+
   procedure Test_5;
   procedure Test_5_1;
+
+  // Comennt
   procedure Test_6_1;
   procedure Test_6_2;
   procedure Test_6_3;
@@ -42,9 +47,13 @@ type
   procedure Test_6_14;
   procedure Test_6_15;
   procedure Test_6_16;
+
+  // Boolean
   procedure Test_7;
-  {procedure Test_7_1;
+  procedure Test_7_1;
   procedure Test_7_2;
+
+{  //
   procedure Test_8;
   // ------- TODO Test 9
   procedure Test_10_1;
@@ -453,7 +462,7 @@ begin
              (aParser.TokenType = ttBoolean));
   end);
 end;
-{
+
 procedure TestTParser.Test_7_1;
 begin
  DoIt(FileName,
@@ -488,6 +497,7 @@ begin
   end);
 end;
 
+{
 procedure TestTParser.Test_8;
 begin
  DoIt(FileName,
