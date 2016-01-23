@@ -27,7 +27,7 @@ type
   f_IsString : Boolean;
   f_IsSymbol : Boolean;
  procedure NextChar;
- // Увеличивает f_PosInCurrentLine и читает f_CurrentChar
+ // Увеличивает f_PosInCurrentLine на 1
  function CurrentChar : Char;
  protected
   function ReadLn: String;
@@ -324,8 +324,7 @@ begin
   begin
    // - Типа текущая строка ВСЯ обработана
    f_CurrentLine := '';
-   f_PosInCurrentLine := 0;
-   //f_CurrentChar := #0;
+   f_PosInCurrentLine := 1;
   end;
 
   while (f_CurrentLine = '') do
@@ -335,9 +334,6 @@ begin
     if f_EOF then
      Exit;
   end; // while(f_NextToken = '')
-
-  // Получаем первый символ в f_CurrentChar
-  NextChar;
 
   // Тут пропускаем пустые символы:
   if not f_IsString then
