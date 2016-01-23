@@ -15,7 +15,7 @@ type
   f_Stream: TStream;
   f_EOF: Boolean;
   f_UnknownToken: String;
-  f_PosInCurrentToken: Integer;
+  f_PosInUnknown: Integer;
   f_Token: String;
   f_TokenType: TscriptTokenType;
   {f_IsBlockComment: Boolean;
@@ -23,7 +23,7 @@ type
   f_IsSymbol : Boolean;}
  procedure NextChar;
  // Увеличивает f_PosInCurrentToken на 1
- function CurrentChar : Char;
+ function CurrentCharInBuffer : Char;
  protected
   function ReadUnknownToken: String;
  protected
@@ -54,38 +54,51 @@ uses
 
 constructor TScriptParser.Create(const aStream: TStream);
 begin
-
+ inherited Create;
+ f_PosInUnknown := 1;
+ f_EOF := false;
+ f_Stream := aStream;
 end;
 
 constructor TScriptParser.Create(const aFileName: String);
+var
+ l_FileName: String;
 begin
-
+ l_FileName := aFileName;
+ if (ExtractFilePath(l_FileName) = '') then
+  l_FileName := ExtractFilePath(ParamStr(0)) + '\' + l_FileName;
+ Create(TFileStream.Create(l_FileName, fmOpenRead));
 end;
 
-function TScriptParser.CurrentChar: Char;
+function TScriptParser.CurrentCharInBuffer: Char;
 begin
-
+ Result := f_UnknownToken[f_PosInUnknown];
 end;
 
 destructor TScriptParser.Destroy;
 begin
-
-  inherited;
+ FreeAndNil(f_Stream);
+ inherited;
 end;
 
 function TScriptParser.EOF: Boolean;
 begin
-
+ Result := f_EOF AND (f_UnknownToken = '');
 end;
 
 function TScriptParser.GetChar(out aChar: AnsiChar): Boolean;
 begin
-
+ if (f_Stream.Read(aChar, SizeOf(aChar)) = SizeOf(aChar)) then
+ begin
+  Result := true;
+ end
+ else
+  Result := false;
 end;
 
 procedure TScriptParser.NextChar;
 begin
-
+ Inc(f_PosInUnknown);
 end;
 
 procedure TScriptParser.NextToken;
