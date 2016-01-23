@@ -21,6 +21,7 @@ type
   f_IsBlockComment: Boolean;
   f_CurrentChar : Char;
   f_IsString : Boolean;
+  f_IsSymbol : Boolean;
  procedure NextChar;
  // Увеличивает f_PosInCurrentLine и читает f_CurrentChar
  protected
@@ -268,6 +269,9 @@ const
  cWhiteSpace = [#32, #9];
  cDoubleQuote = #35;
 
+var
+ l_Buffer : String;
+
  procedure ExamineToken;
  begin
   if (f_Token = 'false') or
@@ -275,15 +279,21 @@ const
    f_TokenType := ttBoolean;
  end;
 
- procedure AddCharToToken(l_Char : Char);
+ procedure AddCharToToken(aChar : Char);
  begin
-  f_Token := f_Token + l_Char;
+  f_Token := f_Token + aChar;
  end;
 
  procedure AddEndLineToToken;
  begin
   AddCharToToken(#13);
   AddCharToToken(#10);
+ end;
+
+ procedure AddCharToBuffer(aChar : Char);
+ begin
+  if aChar.IsDigit then
+   l_Buffer := l_Buffer + aChar;
  end;
 
 begin
@@ -326,6 +336,7 @@ begin
    break;
  end; // while true
 
+ // !!!
  // Читаем токен
  if (f_CurrentChar = cQuote) or f_IsString then
  begin
@@ -346,8 +357,18 @@ begin
    end
    else
     Break;
+
+  NextToken;
  end
- else // not
+ else if f_CurrentChar = '#' then
+ begin
+   f_TokenType := ttString;
+   f_IsSymbol := True;
+
+   NextChar;
+   //AddCharToBuffer(f_CurrentChar);
+ end
+ else
  begin
   f_TokenType := ttToken;
 
@@ -363,11 +384,6 @@ begin
   // Определяем тип токена
   ExamineToken;
  end; // else
-
- if f_IsString then
- begin
-  NextToken;
- end;
 
  if (Self.f_TokenType = ttUnknown) then
   if Self.EOF then
