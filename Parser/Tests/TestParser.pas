@@ -21,7 +21,7 @@ type
   procedure FirstTest;
 
   // Simple token
-  procedure Test_4_1;
+  {procedure Test_4_1;
   procedure Test_4_2;
   procedure Test_4_3;
   procedure Test_4_4;
@@ -77,7 +77,7 @@ type
   procedure Test_12_10;
   procedure Test_12_11;
   procedure Test_12_12;
-  procedure Test_12_13;
+  procedure Test_12_13;  }
  end;
 
 implementation
@@ -113,7 +113,7 @@ begin
    CheckFalse(aParser.EOF);
   end);
 end;
-
+{
 procedure TestTParser.Test_4_1;
 begin
  DoIt(FileName,
@@ -803,7 +803,7 @@ begin
    CheckTrue((aParser.TokenString = '#2Z' + '''' + 'Qqwe<CRLF>23 121212#$a #13#10' + '''') and
              (aParser.TokenType = ttToken));
   end);
-end;
+end;          }
 
 initialization
 
