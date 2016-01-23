@@ -71,6 +71,7 @@ type
   procedure Test_12_4;
   procedure Test_12_5;
   procedure Test_12_6;
+  procedure Test_12_7;
  end;
 
 implementation
@@ -696,6 +697,21 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = #12#13'abc'#13#10'def'#14#15) and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_12_7;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = #13) and
+             (aParser.TokenType = ttString));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = #10) and
              (aParser.TokenType = ttString));
   end);
 end;
