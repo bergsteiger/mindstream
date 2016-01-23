@@ -63,6 +63,7 @@ type
   // SymbolTests
   procedure Test_12_1;
   procedure Test_12_1_1;
+  procedure Test_12_1_2;
   {procedure Test_12_2;
   procedure Test_12_3;
   procedure Test_12_4;
@@ -577,6 +578,26 @@ begin
 
    CheckTrue((aParser.TokenString = #12) and
              (aParser.TokenType = ttString));
+   aParser.NextToken;
+
+   CheckTrue((aParser.TokenString = 'a') and
+             (aParser.TokenType = ttToken));
+   aParser.NextToken;
+
+   CheckTrue((aParser.TokenString = #13#14) and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_12_1_2;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+
+   CheckTrue((aParser.TokenString = '#a') and
+             (aParser.TokenType = ttUnknown));
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'a') and
