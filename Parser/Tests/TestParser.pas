@@ -64,10 +64,10 @@ type
   procedure Test_12_1;
   procedure Test_12_1_1;
   procedure Test_12_1_2;
-  {procedure Test_12_2;
+  procedure Test_12_2;
   procedure Test_12_3;
   procedure Test_12_4;
-  procedure Test_12_5;
+  {procedure Test_12_5;
   procedure Test_12_6;    }
  end;
 
@@ -600,7 +600,6 @@ begin
   end);
 end;
 
-{
 procedure TestTParser.Test_12_2;
 begin
  DoIt(FileName,
@@ -636,7 +635,7 @@ begin
              (aParser.TokenType = ttString));
   end);
 end;
-
+{
 procedure TestTParser.Test_12_5;
 begin
  DoIt(FileName,
