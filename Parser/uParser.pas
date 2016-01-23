@@ -3,10 +3,15 @@ unit uParser;
 interface
 
 uses
- Classes;
+ Classes
+ ,SysUtils
+ ;
 
 type
  TscriptTokenType = (ttUnknown, ttString, ttToken, ttEOF, ttBoolean);
+
+type
+ EUnknownToken = class(Exception);
 
 type
  TScriptParser = class
@@ -47,9 +52,8 @@ type
 implementation
 
 uses
- System.SysUtils
- , System.Character
-  ;
+ System.Character
+ ;
 
 type
  TscriptParserContainer = class
@@ -292,12 +296,19 @@ var
 
  procedure AddCharToBuffer(aChar : Char);
  begin
-  if aChar.IsDigit then
-   l_Buffer := l_Buffer + aChar;
+  l_Buffer := l_Buffer + aChar;
+ end;
+
+ procedure AddBufferToToken;
+ var
+  l_Num : Integer;
+ begin
+  l_Num := StrToInt(l_Buffer);
+  AddCharToToken(Chr(l_Num));
  end;
 
 begin
- if not f_IsString then
+ if f_TokenType <> ttString then
  begin
   f_Token := '';
   f_TokenType := ttUnknown;
@@ -322,7 +333,8 @@ begin
   end; // while(f_NextToken = '')
 
   // Получаем первый символ в f_CurrentChar
-  NextChar;
+  if f_TokenType <> ttString then
+   NextChar;
 
   // Тут пропускаем пустые символы:
   if not f_IsString then
@@ -338,52 +350,65 @@ begin
 
  // !!!
  // Читаем токен
- if (f_CurrentChar = cQuote) or f_IsString then
- begin
-  if not f_IsString then
+ try
+  if (f_CurrentChar = cQuote) or f_IsString then
   begin
-   f_TokenType := ttString;
-   f_IsString := True;
-   NextChar;
-  end
-  else
-   AddEndLineToToken;
-
-  while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
-   if f_CurrentChar <> cQuote then
+   if not f_IsString then
    begin
-    AddCharToToken(f_CurrentLine[f_PosInCurrentLine]);
+    f_TokenType := ttString;
+    f_IsString := True;
     NextChar;
    end
    else
-    Break;
+    AddEndLineToToken;
 
-  NextToken;
- end
- else if f_CurrentChar = '#' then
- begin
+   while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
+    if f_CurrentChar <> cQuote then
+    begin
+     AddCharToToken(f_CurrentLine[f_PosInCurrentLine]);
+     NextChar;
+    end
+    else
+     Break;
+
+   NextToken;
+  end
+  else if (f_CurrentChar = '#') or f_IsSymbol then
+  begin
    f_TokenType := ttString;
    f_IsSymbol := True;
 
    NextChar;
-   //AddCharToBuffer(f_CurrentChar);
- end
- else
- begin
-  f_TokenType := ttToken;
-
-  while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
-   if (not (f_CurrentChar in cWhiteSpace)) then
+   while not ((f_CurrentChar = '#') or (f_CurrentChar = cQuote)) do
    begin
-    AddCharToToken(f_CurrentChar);
+    AddCharToBuffer(f_CurrentChar);
     NextChar;
-   end // (not (l_CurrentChar in cWhiteSpace))
-   else
-    break;
+   end;
 
-  // Определяем тип токена
-  ExamineToken;
- end; // else
+   AddBufferToToken;
+   NextToken;
+   f_IsSymbol := False;
+  end
+  else
+  begin
+   f_TokenType := ttToken;
+
+   while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
+    if (not (f_CurrentChar in cWhiteSpace)) then
+    begin
+     AddCharToToken(f_CurrentChar);
+     NextChar;
+    end // (not (l_CurrentChar in cWhiteSpace))
+    else
+     break;
+
+   // Определяем тип токена
+   ExamineToken;
+  end; // else
+ except
+  on E : Exception do
+   f_TokenType := ttUnknown;
+ end;
 
  if (Self.f_TokenType = ttUnknown) then
   if Self.EOF then
