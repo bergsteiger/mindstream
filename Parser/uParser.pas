@@ -375,7 +375,7 @@ begin
      Break;
     end;
 
-   if f_IsString then
+   if f_IsString or f_IsSymbol then
     NextToken;
   end
   else if (CurrentChar = '#') then
