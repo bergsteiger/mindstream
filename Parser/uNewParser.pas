@@ -112,11 +112,25 @@ end;
 procedure TScriptParser.NextToken;
 var
  l_Token : String;
+
+procedure AnalyzeToken;
+begin
+ while f_PosInUnknown <= Length(f_UnknownToken) do
+ begin
+  f_Token := f_Token + CurrentCharInBuffer;
+  NextChar;
+ end;
+
+ f_TokenType := ttToken;
+end; // AnalyzeToken
+
 begin
  f_TokenType := ttUnknown;
  f_UnknownToken := ReadUnknownToken;
+ f_PosInUnknown := 1;
+ f_Token := '';
 
- f_Token := f_UnknownToken;
+ AnalyzeToken;
 
  if f_Token <> f_UnknownToken then
  begin
@@ -153,17 +167,17 @@ begin
    if l_Char = #13 then
     if GetChar(l_Char) then
      if l_Char = #10 then
-     begin
       if (Length(l_Buffer) > 0) then
        Break
-      else
+      else // (Length(l_Buffer) > 0)
       Continue
-     end
-     else
+
+     else // l_Char = #10
       Assert(false, 'Not character LF after character CR')
-     else
+
+     else // GetChar(l_Char)
       Assert(false, 'End of file, after character CR');
-  end;
+  end; // not l_IsOpenQute
 
   if l_Char = cQuote then
    l_IsOpenQute := not l_IsOpenQute;
