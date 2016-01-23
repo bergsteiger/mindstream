@@ -11,7 +11,10 @@ type
 
 Const
  cQuote = #39;
- cWhiteSpace = [#32, #9];
+ cTab = #9;
+ cSpace = #32;
+ cCRLF = #13#10;
+ cWhiteSpace = [cSpace, cTab];
  cDoubleQuote = #35;
 
 type
@@ -129,30 +132,41 @@ function TScriptParser.ReadUnknownToken: String;
 var
  l_Buffer : String;
  l_Char : AnsiChar;
- l_IsTokenBegin : Boolean;
+ l_IsOpenQute : Boolean;
 begin
  l_Buffer := '';
+ l_IsOpenQute := False;
+
  while GetChar(l_Char) do
  begin
-  if l_Char in cWhiteSpace then
-   if (Length(l_Buffer) > 0) then
-    Break
-   else
-    Continue;
+  if not l_IsOpenQute then
+  begin
+   if l_Char in cWhiteSpace then
+    if (Length(l_Buffer) > 0) then
+     Break
+    else
+     Continue;
+  end;
 
-  if l_Char = #13 then
-   if GetChar(l_Char) then
-    if l_Char = #10 then
-    begin
-     if (Length(l_Buffer) > 0) then
-      Break
+  if not l_IsOpenQute then
+  begin
+   if l_Char = #13 then
+    if GetChar(l_Char) then
+     if l_Char = #10 then
+     begin
+      if (Length(l_Buffer) > 0) then
+       Break
+      else
+      Continue
+     end
      else
-     Continue
-    end
-    else
-     Assert(false, 'Not character LF after character CR')
-    else
-     Assert(false, 'End of file, after character CR');
+      Assert(false, 'Not character LF after character CR')
+     else
+      Assert(false, 'End of file, after character CR');
+  end;
+
+  if l_Char = cQuote then
+   l_IsOpenQute := not l_IsOpenQute;
 
   l_Buffer := l_Buffer + l_Char;
  end;
