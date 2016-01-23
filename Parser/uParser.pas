@@ -275,9 +275,15 @@ const
    f_TokenType := ttBoolean;
  end;
 
- procedure addCharToToken(l_Char : Char);
+ procedure AddCharToToken(l_Char : Char);
  begin
   f_Token := f_Token + l_Char;
+ end;
+
+ procedure AddEndLineToToken;
+ begin
+  AddCharToToken(#13);
+  AddCharToToken(#10);
  end;
 
 begin
@@ -328,16 +334,14 @@ begin
    f_TokenType := ttString;
    f_IsString := True;
    NextChar;
-  end else
-  begin
-   addCharToToken(#13);
-   addCharToToken(#10);
-  end;
+  end
+  else
+   AddEndLineToToken;
 
   while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
    if f_CurrentChar <> cQuote then
    begin
-    addCharToToken(f_CurrentLine[f_PosInCurrentLine]);
+    AddCharToToken(f_CurrentLine[f_PosInCurrentLine]);
     NextChar;
    end
    else
@@ -350,7 +354,7 @@ begin
   while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
    if (not (f_CurrentChar in cWhiteSpace)) then
    begin
-    addCharToToken(f_CurrentChar);
+    AddCharToToken(f_CurrentChar);
     NextChar;
    end // (not (l_CurrentChar in cWhiteSpace))
    else
