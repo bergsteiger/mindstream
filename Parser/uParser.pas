@@ -20,6 +20,7 @@ type
   f_CurrentLineNumber: Integer;
   f_IsBlockComment: Boolean;
   f_CurrentChar : Char;
+  f_IsString : Boolean;
  procedure NextChar;
  // Увеличивает f_PosInCurrentLine и читает f_CurrentChar
  protected
@@ -280,8 +281,11 @@ const
  end;
 
 begin
- f_Token := '';
- f_TokenType := ttUnknown;
+ if not f_IsString then
+ begin
+  f_Token := '';
+  f_TokenType := ttUnknown;
+ end;
 
  while true do
  begin
@@ -305,22 +309,31 @@ begin
   NextChar;
 
   // Тут пропускаем пустые символы:
-  while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
-   if (f_CurrentChar in cWhiteSpace) then
-    NextChar
-   else
-    break;
+  if not f_IsString then
+   while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
+    if (f_CurrentChar in cWhiteSpace) then
+     NextChar
+    else
+     break;
 
   if (f_PosInCurrentLine <= Length(f_CurrentLine)) then
    break;
  end; // while true
 
  // Читаем токен
- if f_CurrentChar = cQuote then
+ if (f_CurrentChar = cQuote) or f_IsString then
  begin
-  f_TokenType := ttString;
+  if not f_IsString then
+  begin
+   f_TokenType := ttString;
+   f_IsString := True;
+   NextChar;
+  end else
+  begin
+   addCharToToken(#13);
+   addCharToToken(#10);
+  end;
 
-  NextChar;
   while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
    if f_CurrentChar <> cQuote then
    begin
@@ -346,6 +359,11 @@ begin
   // Определяем тип токена
   ExamineToken;
  end; // else
+
+ if f_IsString then
+ begin
+  NextToken;
+ end;
 
  if (Self.f_TokenType = ttUnknown) then
   if Self.EOF then
