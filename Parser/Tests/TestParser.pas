@@ -25,6 +25,7 @@ type
   procedure FirstTest;
   procedure Test_3_1;
   procedure Test_3_2;
+  procedure Test_3_3;
   // Simple token
   {procedure Test_4_1;
   procedure Test_4_2;
@@ -145,6 +146,34 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'a#') and
+             (aParser.TokenType = ttUnknown));
+
+   aParser.NextToken;
+   CheckTrue(aParser.EOF);
+  end);
+end;
+{
+
+   a#
+	b#
+
+}
+procedure TestTParser.Test_3_3;
+begin
+ //
+ //   a#
+ //	b#
+ //
+
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'a#') and
+             (aParser.TokenType = ttUnknown));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'b#') and
              (aParser.TokenType = ttUnknown));
 
    aParser.NextToken;
