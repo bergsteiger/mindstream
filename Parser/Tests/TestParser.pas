@@ -23,7 +23,7 @@ type
  published
   procedure TestCreate;
   procedure FirstTest;
-
+  procedure Test_3_1;
   // Simple token
   {procedure Test_4_1;
   procedure Test_4_2;
@@ -117,6 +117,22 @@ begin
    CheckFalse(aParser.EOF);
   end);
 end;
+
+procedure TestTParser.Test_3_1;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+
+   CheckTrue((aParser.TokenString = 'a#') and
+             (aParser.TokenType = ttUnknown));
+
+   aParser.NextToken;
+   CheckTrue(aParser.EOF);
+  end);
+end;
+
 {
 procedure TestTParser.Test_4_1;
 begin
