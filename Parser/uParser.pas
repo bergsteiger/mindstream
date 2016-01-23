@@ -24,11 +24,11 @@ type
   f_TokenType: TscriptTokenType;
   f_CurrentLineNumber: Integer;
   f_IsBlockComment: Boolean;
-  f_CurrentChar : Char;
   f_IsString : Boolean;
   f_IsSymbol : Boolean;
  procedure NextChar;
  // Увеличивает f_PosInCurrentLine и читает f_CurrentChar
+ function CurrentChar : Char;
  protected
   function ReadLn: String;
  protected
@@ -124,6 +124,11 @@ begin
  Create(TFileStream.Create(l_FileName, fmOpenRead));
 end;
 
+function TScriptParser.CurrentChar: Char;
+begin
+ Result := f_CurrentLine[f_PosInCurrentLine];
+end;
+
 destructor TScriptParser.Destroy;
 begin
  FreeAndNil(f_Stream);
@@ -143,7 +148,6 @@ end;
 procedure TScriptParser.NextChar;
 begin
  Inc(f_PosInCurrentLine);
- f_CurrentChar := f_CurrentLine[f_PosInCurrentLine];
 end;
 
 function TScriptParser.ReadLn: String;
@@ -321,7 +325,7 @@ begin
    // - Типа текущая строка ВСЯ обработана
    f_CurrentLine := '';
    f_PosInCurrentLine := 0;
-   f_CurrentChar := #0;
+   //f_CurrentChar := #0;
   end;
 
   while (f_CurrentLine = '') do
@@ -333,13 +337,12 @@ begin
   end; // while(f_NextToken = '')
 
   // Получаем первый символ в f_CurrentChar
-  //if f_TokenType <> ttString then
-   NextChar;
+  NextChar;
 
   // Тут пропускаем пустые символы:
   if not f_IsString then
    while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
-    if (f_CurrentChar in cWhiteSpace) then
+    if (CurrentChar in cWhiteSpace) then
      NextChar
     else
      break;
@@ -351,7 +354,7 @@ begin
  // !!!
  // Читаем токен
  try
-  if (f_CurrentChar = cQuote) or f_IsString then
+  if (CurrentChar = cQuote) or f_IsString then
   begin
    if not f_IsString then
    begin
@@ -363,7 +366,7 @@ begin
     AddEndLineToToken;
 
    while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
-    if f_CurrentChar <> cQuote then
+    if CurrentChar <> cQuote then
     begin
      AddCharToToken(f_CurrentLine[f_PosInCurrentLine]);
      NextChar;
@@ -373,15 +376,15 @@ begin
 
    NextToken;
   end
-  else if (f_CurrentChar = '#') or f_IsSymbol then
+  else if (CurrentChar = '#') or f_IsSymbol then
   begin
    f_TokenType := ttString;
    f_IsSymbol := True;
 
    NextChar;
-   while not ((f_CurrentChar = '#') or (f_CurrentChar = cQuote)) do
+   while not ((CurrentChar = '#') or (CurrentChar = cQuote)) do
    begin
-    AddCharToBuffer(f_CurrentChar);
+    AddCharToBuffer(CurrentChar);
     NextChar;
    end;
 
@@ -394,9 +397,9 @@ begin
    f_TokenType := ttToken;
 
    while (f_PosInCurrentLine <= Length(f_CurrentLine)) do
-    if (not (f_CurrentChar in cWhiteSpace)) then
+    if (not (CurrentChar in cWhiteSpace)) then
     begin
-     AddCharToToken(f_CurrentChar);
+     AddCharToToken(CurrentChar);
      NextChar;
     end // (not (l_CurrentChar in cWhiteSpace))
     else
