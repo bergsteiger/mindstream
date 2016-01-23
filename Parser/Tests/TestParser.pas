@@ -69,8 +69,8 @@ type
   procedure Test_12_2;
   procedure Test_12_3;
   procedure Test_12_4;
-  {procedure Test_12_5;
-  procedure Test_12_6;    }
+  procedure Test_12_5;
+  procedure Test_12_6;
  end;
 
 implementation
@@ -675,7 +675,7 @@ begin
              (aParser.TokenType = ttString));
   end);
 end;
-{
+
 procedure TestTParser.Test_12_5;
 begin
  DoIt(FileName,
@@ -698,7 +698,7 @@ begin
    CheckTrue((aParser.TokenString = #12#13'abc'#13#10'def'#14#15) and
              (aParser.TokenType = ttString));
   end);
-end;            }
+end;
 
 initialization
 

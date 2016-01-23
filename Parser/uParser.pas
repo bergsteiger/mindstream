@@ -423,15 +423,12 @@ begin
   On E : Exception do
   begin
    f_TokenType := ttUnknown;
-
   end;
-
  end;
 
  if (Self.f_TokenType = ttUnknown) then
   if Self.EOF then
    f_TokenType := ttEOF;
-
 end;
 
 function TScriptParser.EOF: Boolean;
