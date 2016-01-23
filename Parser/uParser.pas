@@ -333,7 +333,7 @@ begin
   end; // while(f_NextToken = '')
 
   // Получаем первый символ в f_CurrentChar
-  if f_TokenType <> ttString then
+  //if f_TokenType <> ttString then
    NextChar;
 
   // Тут пропускаем пустые символы:
