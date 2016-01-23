@@ -9,6 +9,11 @@ uses
 type
  TscriptTokenType = (ttUnknown, ttString, ttToken, ttEOF, ttBoolean);
 
+Const
+ cQuote = #39;
+ cWhiteSpace = [#32, #9];
+ cDoubleQuote = #35;
+
 type
  TScriptParser = class
  private
@@ -102,13 +107,50 @@ begin
 end;
 
 procedure TScriptParser.NextToken;
+var
+ l_Token : String;
 begin
+ f_TokenType := ttUnknown;
+ f_UnknownToken := ReadUnknownToken;
 
+ f_Token := f_UnknownToken;
+
+ if f_Token <> f_UnknownToken then
+ begin
+  f_TokenType := ttUnknown;
+ end;
+
+ if f_EOF then
+  if f_UnknownToken = '' then
+   f_TokenType := ttEOF;
 end;
 
 function TScriptParser.ReadUnknownToken: String;
+var
+ l_Buffer : String;
+ l_Char : AnsiChar;
+ l_IsTokenBegin : Boolean;
 begin
+ l_Buffer := '';
+ while GetChar(l_Char) do
+ begin
+  if l_Char in cWhiteSpace then
+   Continue;
 
+  if l_Char = #13 then
+   if GetChar(l_Char) then
+    if l_Char = #10 then
+     Continue
+    else
+     Assert(false, 'Not character LF after character CR')
+    else
+     Assert(false, 'End of file, after character CR');
+
+  l_Buffer := l_Buffer + l_Char;
+ end;
+
+ f_EOF := True;
+ Result := l_Buffer;
 end;
 
 end.
