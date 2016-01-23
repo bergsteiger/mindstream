@@ -135,12 +135,20 @@ begin
  while GetChar(l_Char) do
  begin
   if l_Char in cWhiteSpace then
-   Continue;
+   if (Length(l_Buffer) > 0) then
+    Break
+   else
+    Continue;
 
   if l_Char = #13 then
    if GetChar(l_Char) then
     if l_Char = #10 then
+    begin
+     if (Length(l_Buffer) > 0) then
+      Break
+     else
      Continue
+    end
     else
      Assert(false, 'Not character LF after character CR')
     else
