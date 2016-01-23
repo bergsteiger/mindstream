@@ -370,11 +370,13 @@ begin
     end
     else
     begin
+     f_IsString := False;
      NextChar;
      Break;
     end;
 
-   NextToken;
+   if f_IsString then
+    NextToken;
   end
   else if (CurrentChar = '#') then
   begin
