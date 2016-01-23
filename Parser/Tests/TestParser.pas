@@ -60,6 +60,7 @@ type
   procedure Test_10_3;
   procedure Test_10_4;
   //procedure Test_10_5;
+  procedure Test_10_6;
 
   // SymbolTests
   procedure Test_12_1;
@@ -557,7 +558,8 @@ begin
              (aParser.TokenType = ttString));
   end);
 end;
-    {
+
+{
 procedure TestTParser.Test_10_5;
 begin
  DoIt(FileName,
@@ -576,6 +578,25 @@ begin
              (aParser.TokenType = ttString));
   end);
 end;              }
+
+procedure TestTParser.Test_10_6;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'abc') and
+             (aParser.TokenType = ttString));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'cba') and
+             (aParser.TokenType = ttString));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'zxc') and
+             (aParser.TokenType = ttString));
+  end);
+end;
 
 procedure TestTParser.Test_12_1;
 begin

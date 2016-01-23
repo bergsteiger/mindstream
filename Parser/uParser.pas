@@ -369,7 +369,10 @@ begin
      NextChar;
     end
     else
+    begin
+     NextChar;
      Break;
+    end;
 
    NextToken;
   end
