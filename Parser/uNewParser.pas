@@ -233,7 +233,7 @@ begin
    if l_Char in cWhiteSpace then
     if (Length(l_Buffer) > 0) then
      Break
-    else
+    else // (Length(l_Buffer) > 0)
      Continue;
   end; // not l_IsOpenQute
 
@@ -242,25 +242,27 @@ begin
    l_IsOpenQuote := not l_IsOpenQuote;
 
   // // and /*
-  if (l_Char = cSlash) and
-     (not l_IsOpenQuote) then
+  if (not l_IsOpenQuote) then
   begin
-   if GetChar(l_Char) then
-    if l_Char = cSlash then
-    begin
-     l_IsLineComment := True;
-     Continue;
-    end
-    else if l_Char = cAsterics then
-    begin
-     l_IsBlockComment := True;
-     Continue;
-    end
-    else
-    begin
-     GoToPrevCharPos(l_Char);
-     GetChar(l_Char);
-    end;
+   if (l_Char = cSlash) then
+   begin
+    if GetChar(l_Char) then
+     if l_Char = cSlash then
+     begin
+      l_IsLineComment := True;
+      Continue;
+     end
+     else if l_Char = cAsterics then
+     begin
+      l_IsBlockComment := True;
+      Continue;
+     end
+     else
+     begin
+      GoToPrevCharPos(l_Char);
+      GetChar(l_Char);
+     end;
+   end;
   end;
 
   l_Buffer := l_Buffer + l_Char;

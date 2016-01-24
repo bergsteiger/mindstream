@@ -127,7 +127,7 @@ begin
  DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
-   CheckFalse(aParser.EOF);
+   Check(true);
   end);
 end;
 
