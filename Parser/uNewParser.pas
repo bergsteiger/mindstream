@@ -17,6 +17,7 @@ Const
  cWhiteSpace = [cSpace, cTab];
  cDoubleQuote = #35;
  cSlash = '/';
+ cAsterics = '*';
  cLeftBracket = '{';
  cRightBracket = '}';
 
@@ -172,12 +173,15 @@ function TScriptParser.ReadUnknownToken: String;
 var
  l_Buffer : String;
  l_Char : AnsiChar;
- l_IsOpenQuote : Boolean;
- l_IsLineComment : Boolean;
+
+ l_IsOpenQuote,
+ l_IsLineComment,
+ l_IsBlockComment : Boolean;
 begin
  l_Buffer := '';
  l_IsOpenQuote := False;
  l_IsLineComment := False;
+ l_IsBlockComment := False;
 
  while GetChar(l_Char) do
  begin
@@ -201,6 +205,28 @@ begin
      else // GetChar(l_Char)
       Assert(false, 'End of file, after character CR');
 
+   if l_IsBlockComment then
+   begin
+    if (l_Char = cAsterics) then
+     if GetChar(l_Char) then
+      if (l_Char = cSlash) then
+      begin
+        l_IsBlockComment := False;
+        Continue;
+      end
+      else // (l_Char = cSlash)
+      begin
+       GoToPrevCharPos(l_Char);
+       GetChar(l_Char);
+       Continue;
+      end
+     else // GetChar(l_Char)
+      Continue
+
+    else // (l_Char = cAsterics)
+     Continue;
+   end;
+
    if l_IsLineComment then
     Continue;
 
@@ -211,9 +237,11 @@ begin
      Continue;
   end; // not l_IsOpenQute
 
+  // Кавычка
   if l_Char = cQuote then
    l_IsOpenQuote := not l_IsOpenQuote;
 
+  // // and /*
   if (l_Char = cSlash) and
      (not l_IsOpenQuote) then
   begin
@@ -221,6 +249,11 @@ begin
     if l_Char = cSlash then
     begin
      l_IsLineComment := True;
+     Continue;
+    end
+    else if l_Char = cAsterics then
+    begin
+     l_IsBlockComment := True;
      Continue;
     end
     else
