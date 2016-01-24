@@ -34,6 +34,7 @@ type
   f_IsSymbol : Boolean;}
  procedure NextChar;
  // Увеличивает f_PosInCurrentToken на 1
+ procedure GoToPrevCharPos(const aChar: AnsiChar);
  function CurrentCharInBuffer : Char;
  protected
   function ReadUnknownToken: String;
@@ -107,6 +108,11 @@ begin
   Result := false;
 end;
 
+procedure TScriptParser.GoToPrevCharPos(const aChar: AnsiChar);
+begin
+ f_Stream.Position := f_Stream.Position - SizeOf(aChar) - SizeOf(aChar);
+end;
+
 procedure TScriptParser.NextChar;
 begin
  Inc(f_PosInUnknown);
@@ -117,14 +123,27 @@ var
  l_Token : String;
 
 procedure AnalyzeToken;
+var
+ l_IsQuoteOpen : Boolean;
 begin
+ l_IsQuoteOpen := False;
  while f_PosInUnknown <= Length(f_UnknownToken) do
  begin
+  if (CurrentCharInBuffer = cSlash) or
+     (CurrentCharInBuffer = '#') then
+   Exit;
+
+  if CurrentCharInBuffer = cQuote then
+   l_IsQuoteOpen := not l_IsQuoteOpen;
+
   f_Token := f_Token + CurrentCharInBuffer;
   NextChar;
  end;
 
- f_TokenType := ttToken;
+ if l_IsQuoteOpen then
+  Exit
+ else
+  f_TokenType := ttToken;
 end; // AnalyzeToken
 
 begin
@@ -137,6 +156,7 @@ begin
 
  if f_Token <> f_UnknownToken then
  begin
+  f_Token := f_UnknownToken;
   f_TokenType := ttUnknown;
  end;
 
@@ -149,58 +169,62 @@ function TScriptParser.ReadUnknownToken: String;
 var
  l_Buffer : String;
  l_Char : AnsiChar;
- l_IsOpenQute : Boolean;
+ l_IsOpenQuote : Boolean;
+ l_IsLineComment : Boolean;
 begin
  l_Buffer := '';
- l_IsOpenQute := False;
+ l_IsOpenQuote := False;
+ l_IsLineComment := False;
 
  while GetChar(l_Char) do
  begin
-  if not l_IsOpenQute then
-  begin
-   if l_Char in cWhiteSpace then
-    if (Length(l_Buffer) > 0) then
-     Break
-    else
-     Continue;
-  end;
-
-  if not l_IsOpenQute then
+  if not l_IsOpenQuote then
   begin
    if l_Char = #13 then
     if GetChar(l_Char) then
      if l_Char = #10 then
+     begin
+      if l_IsLineComment then
+       l_IsLineComment := False;
+
       if (Length(l_Buffer) > 0) then
        Break
       else // (Length(l_Buffer) > 0)
       Continue
-
+     end
      else // l_Char = #10
       Assert(false, 'Not character LF after character CR')
 
      else // GetChar(l_Char)
       Assert(false, 'End of file, after character CR');
+
+   if l_IsLineComment then
+    Continue;
+
+   if l_Char in cWhiteSpace then
+    if (Length(l_Buffer) > 0) then
+     Break
+    else
+     Continue;
   end; // not l_IsOpenQute
 
   if l_Char = cQuote then
-   l_IsOpenQute := not l_IsOpenQute;
+   l_IsOpenQuote := not l_IsOpenQuote;
 
   if (l_Char = cSlash) and
-     (not l_IsOpenQute) then
+     (not l_IsOpenQuote) then
   begin
    if GetChar(l_Char) then
     if l_Char = cSlash then
-     while GetChar(l_Char) do
-      if l_Char = #13 then
-      begin
-       l_Char := #0;
-       Break
-      end
-      else // l_Char = #13
-       Continue
-    else // l_Char = cSlash
-    l_Buffer := l_Buffer + cSlash;
-
+    begin
+     l_IsLineComment := True;
+     Continue;
+    end
+    else
+    begin
+     GoToPrevCharPos(l_Char);
+     GetChar(l_Char);
+    end;
   end;
 
   l_Buffer := l_Buffer + l_Char;

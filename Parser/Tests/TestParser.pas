@@ -37,6 +37,10 @@ type
   procedure Test_4_5;
 
   procedure Test_5;
+  procedure Test_5_0_1;
+  procedure Test_5_0_2;
+  procedure Test_5_0_3;
+  procedure Test_5_0_4;
   procedure Test_5_1;
 
   // Comennt
@@ -350,6 +354,112 @@ begin
    aParser.NextToken;
    CheckTrue(aParser.EOF);
  end);
+end;
+
+procedure TestTParser.Test_5_0_1;
+begin
+ {
+ A+B
+ /2/ A+B
+ }
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'A+B') and
+             (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '/2/') and
+             (aParser.TokenType = ttUnknown));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'A+B') and
+             (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue(aParser.EOF);
+  end);
+end;
+
+procedure TestTParser.Test_5_0_2;
+begin
+ {
+ A+B
+ /2/ 'A+B // qwe
+ 'A
+ }
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'A+B') and
+             (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '/2/') and
+             (aParser.TokenType = ttUnknown));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = cQuote + 'A+B // qwe' + cCRLF +
+                                    cQuote + 'A') and
+             (aParser.TokenType = ttUnknown));
+
+   aParser.NextToken;
+   CheckTrue(aParser.EOF);
+  end);
+end;
+
+procedure TestTParser.Test_5_0_3;
+begin
+ {
+ A+B
+ /2/ A+B // qwe
+ 'A
+ }
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'A+B') and
+             (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '/2/') and
+             (aParser.TokenType = ttUnknown));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'A+B') and
+             (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = cQuote + 'A') and
+             (aParser.TokenType = ttUnknown));
+
+   aParser.NextToken;
+   CheckTrue(aParser.EOF);
+  end);
+end;
+
+procedure TestTParser.Test_5_0_4;
+begin
+ {
+ / a
+ }
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = cSlash) and
+             (aParser.TokenType = ttUnknown));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'a') and
+             (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue(aParser.EOF);
+  end);
 end;
 
 procedure TestTParser.Test_5;
