@@ -35,7 +35,7 @@ type
   f_IsSymbol : Boolean;}
  procedure NextChar;
  // Увеличивает f_PosInCurrentToken на 1
- procedure GoToPrevCharPos(const aChar: AnsiChar);
+ procedure GetPrevChar(out aChar: AnsiChar);
  function CurrentCharInBuffer : Char;
  protected
   function ReadUnknownToken: String;
@@ -109,9 +109,11 @@ begin
   Result := false;
 end;
 
-procedure TScriptParser.GoToPrevCharPos(const aChar: AnsiChar);
+procedure TScriptParser.GetPrevChar(out aChar: AnsiChar);
 begin
+ // Надо ли тут делать проверку на то что это возможно первый символ?
  f_Stream.Position := f_Stream.Position - SizeOf(aChar) - SizeOf(aChar);
+ GetChar(aChar);
 end;
 
 procedure TScriptParser.NextChar;
@@ -216,8 +218,7 @@ begin
       end
       else // (l_Char = cSlash)
       begin
-       GoToPrevCharPos(l_Char);
-       GetChar(l_Char);
+       GetPrevChar(l_Char);
        Continue;
       end
      else // GetChar(l_Char)
@@ -256,14 +257,11 @@ begin
      begin
       l_IsBlockComment := True;
       Continue;
-     end
+     end // l_Char = cAsterics
      else
-     begin
-      GoToPrevCharPos(l_Char);
-      GetChar(l_Char);
-     end;
-   end;
-  end;
+      GetPrevChar(l_Char);
+   end; // (l_Char = cSlash)
+  end; // (not l_IsOpenQuote)
 
   l_Buffer := l_Buffer + l_Char;
  end;
