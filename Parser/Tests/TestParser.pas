@@ -36,6 +36,7 @@ type
   procedure Test_4_4;
   procedure Test_4_5;
 
+  // Comment //
   procedure Test_5;
   procedure Test_5_0_1;
   procedure Test_5_0_2;
@@ -43,7 +44,7 @@ type
   procedure Test_5_0_4;
   procedure Test_5_1;
 
-  // Comennt
+  // Comennt // and /* */
   procedure Test_6_1;
   procedure Test_6_2;
   procedure Test_6_3;
@@ -552,6 +553,10 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
+             (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'B') and
              (aParser.TokenType = ttToken));
   end);
 end;
