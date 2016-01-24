@@ -17,8 +17,8 @@ type
 
  TestTParser = class(TTestCase)
  private
-  procedure DoIt(const aFileName: String;
-                 const aLambda: TSomeProcedure);
+  procedure DoTestsAndTestEOF(const aFileName: String;
+                              const aLambda: TSomeProcedure);
   function FileName: string;
  published
   procedure TestCreate;
@@ -95,7 +95,7 @@ type
 
 implementation
 
-procedure TestTParser.DoIt(const aFileName: String;
+procedure TestTParser.DoTestsAndTestEOF(const aFileName: String;
                            const aLambda: TSomeProcedure);
 var
  l_Parser: TScriptParser;
@@ -103,6 +103,9 @@ begin
  l_Parser := TScriptParser.Create(aFileName);
  try
   aLambda(l_Parser);
+
+  l_Parser.NextToken;
+  CheckTrue(l_Parser.EOF);
  finally
   FreeAndNil(l_Parser);
  end;
@@ -120,7 +123,7 @@ end;
 
 procedure TestTParser.TestCreate;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    CheckFalse(aParser.EOF);
@@ -130,16 +133,13 @@ end;
 procedure TestTParser.Test_3_1;
 begin
  //   a#
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'a#') and
              (aParser.TokenType = ttUnknown));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
@@ -147,16 +147,13 @@ procedure TestTParser.Test_3_2;
 begin
  //
  //   a#
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'a#') and
              (aParser.TokenType = ttUnknown));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
@@ -167,7 +164,7 @@ begin
  //	b#
  //
 
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -177,9 +174,6 @@ begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'b#') and
              (aParser.TokenType = ttUnknown));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
@@ -190,7 +184,7 @@ begin
  //b#
  //
 
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -200,9 +194,6 @@ begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'b#') and
              (aParser.TokenType = ttUnknown));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
@@ -213,7 +204,7 @@ begin
 //b#
 //
 
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -221,9 +212,6 @@ begin
                                     'b#' + cCRLF +
                                     cTab + cCRLF) and
              (aParser.TokenType = ttUnknown));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
@@ -234,7 +222,7 @@ begin
 //b#
 //' a#
 //
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -245,15 +233,12 @@ begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'a#')  and
              (aParser.TokenType = ttUnknown));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
 procedure TestTParser.Test_4_1;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -270,15 +255,12 @@ begin
 
    CheckTrue((aParser.TokenString = 'C') and
              (aParser.TokenType = ttToken));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
 procedure TestTParser.Test_4_2;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -295,15 +277,12 @@ begin
 
    CheckTrue((aParser.TokenString = '+') and
              (aParser.TokenType = ttToken));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
  end);
 end;
 
 procedure TestTParser.Test_4_3;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -315,15 +294,12 @@ begin
 
    CheckTrue((aParser.TokenString = 'B+') and
              (aParser.TokenType = ttToken));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
 procedure TestTParser.Test_4_4;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -335,24 +311,18 @@ begin
 
    CheckTrue((aParser.TokenString = 'B') and
              (aParser.TokenType = ttToken));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
 procedure TestTParser.Test_4_5;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'A+B') and
              (aParser.TokenType = ttToken));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
  end);
 end;
 
@@ -362,7 +332,7 @@ begin
  A+B
  /2/ A+B
  }
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -376,9 +346,6 @@ begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A+B') and
              (aParser.TokenType = ttToken));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
@@ -389,7 +356,7 @@ begin
  /2/ 'A+B // qwe
  'A
  }
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -404,9 +371,6 @@ begin
    CheckTrue((aParser.TokenString = cQuote + 'A+B // qwe' + cCRLF +
                                     cQuote + 'A') and
              (aParser.TokenType = ttUnknown));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
@@ -417,7 +381,7 @@ begin
  /2/ A+B // qwe
  'A
  }
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -435,9 +399,6 @@ begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cQuote + 'A') and
              (aParser.TokenType = ttUnknown));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
@@ -446,7 +407,7 @@ begin
  {
  / a
  }
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -456,30 +417,24 @@ begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'a') and
              (aParser.TokenType = ttToken));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
 procedure TestTParser.Test_5;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'A+B') and
              (aParser.TokenType = ttToken));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
 procedure TestTParser.Test_5_1;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -490,15 +445,12 @@ begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'AA') and
              (aParser.TokenType = ttToken));
-
-   aParser.NextToken;
-   CheckTrue(aParser.EOF);
   end);
 end;
 
 procedure TestTParser.Test_6_1;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -510,7 +462,7 @@ end;
 
 procedure TestTParser.Test_6_2;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -526,7 +478,7 @@ end;
 
 procedure TestTParser.Test_6_3;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -542,7 +494,7 @@ end;
 
 procedure TestTParser.Test_6_4;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -554,7 +506,7 @@ end;
 
 procedure TestTParser.Test_6_5;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -569,7 +521,7 @@ end;
 
 procedure TestTParser.Test_6_6;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -580,7 +532,7 @@ end;
 
 procedure TestTParser.Test_6_7;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -595,7 +547,7 @@ end;
 
 procedure TestTParser.Test_6_8;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -606,7 +558,7 @@ end;
 
 procedure TestTParser.Test_6_9;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -621,7 +573,7 @@ end;
 
 procedure TestTParser.Test_6_10;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -630,7 +582,7 @@ begin
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '*/') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = ttUnknown));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'B') and
@@ -640,7 +592,7 @@ end;
 
 procedure TestTParser.Test_6_11;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -655,7 +607,7 @@ end;
 
 procedure TestTParser.Test_6_12;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -674,7 +626,7 @@ end;
 
 procedure TestTParser.Test_6_13;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -693,7 +645,7 @@ end;
 
 procedure TestTParser.Test_6_14;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -704,7 +656,7 @@ end;
 
 procedure TestTParser.Test_6_15;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
@@ -715,7 +667,7 @@ end;
 
 procedure TestTParser.Test_6_16;
 begin
- DoIt(FileName,
+ DoTestsAndTestEOF(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
