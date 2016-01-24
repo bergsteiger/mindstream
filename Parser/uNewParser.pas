@@ -127,8 +127,10 @@ var
  l_IsQuoteOpen : Boolean;
 begin
  l_IsQuoteOpen := False;
+
  while f_PosInUnknown <= Length(f_UnknownToken) do
  begin
+  // Заглушка
   if (CurrentCharInBuffer = cSlash) or
      (CurrentCharInBuffer = '#') then
    Exit;
@@ -140,6 +142,7 @@ begin
   NextChar;
  end;
 
+ // Если кавычка не закрыта то это ttUnknown
  if l_IsQuoteOpen then
   Exit
  else

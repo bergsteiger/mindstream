@@ -44,7 +44,7 @@ type
   procedure Test_5_1;
 
   // Comennt
-{  procedure Test_6_1;
+  procedure Test_6_1;
   procedure Test_6_2;
   procedure Test_6_3;
   procedure Test_6_4;
@@ -60,7 +60,7 @@ type
   procedure Test_6_14;
   procedure Test_6_15;
   procedure Test_6_16;
-
+         {
   // Boolean
   procedure Test_7;
   procedure Test_7_1;
@@ -495,7 +495,7 @@ begin
    CheckTrue(aParser.EOF);
   end);
 end;
-{
+
 procedure TestTParser.Test_6_1;
 begin
  DoIt(FileName,
@@ -727,7 +727,7 @@ begin
              (aParser.TokenType = ttToken));
   end);
 end;
-
+                         {
 procedure TestTParser.Test_7;
 begin
  DoIt(FileName,
