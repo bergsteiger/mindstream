@@ -31,7 +31,7 @@ type
   procedure Test_3_6;
   // Simple token
   procedure Test_4_1;
-  {procedure Test_4_2;
+  procedure Test_4_2;
   procedure Test_4_3;
   procedure Test_4_4;
   procedure Test_4_5;
@@ -40,7 +40,7 @@ type
   procedure Test_5_1;
 
   // Comennt
-  procedure Test_6_1;
+{  procedure Test_6_1;
   procedure Test_6_2;
   procedure Test_6_3;
   procedure Test_6_4;
@@ -266,9 +266,12 @@ begin
 
    CheckTrue((aParser.TokenString = 'C') and
              (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue(aParser.EOF);
   end);
 end;
-{
+
 procedure TestTParser.Test_4_2;
 begin
  DoIt(FileName,
@@ -288,6 +291,9 @@ begin
 
    CheckTrue((aParser.TokenString = '+') and
              (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue(aParser.EOF);
  end);
 end;
 
@@ -305,6 +311,9 @@ begin
 
    CheckTrue((aParser.TokenString = 'B+') and
              (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue(aParser.EOF);
   end);
 end;
 
@@ -322,6 +331,9 @@ begin
 
    CheckTrue((aParser.TokenString = 'B') and
              (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue(aParser.EOF);
   end);
 end;
 
@@ -334,6 +346,9 @@ begin
 
    CheckTrue((aParser.TokenString = 'A+B') and
              (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue(aParser.EOF);
  end);
 end;
 
@@ -346,6 +361,9 @@ begin
 
    CheckTrue((aParser.TokenString = 'A+B') and
              (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue(aParser.EOF);
   end);
 end;
 
@@ -362,9 +380,12 @@ begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'AA') and
              (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue(aParser.EOF);
   end);
 end;
-
+{
 procedure TestTParser.Test_6_1;
 begin
  DoIt(FileName,
