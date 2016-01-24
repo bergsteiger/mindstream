@@ -16,6 +16,9 @@ Const
  cCRLF = #13#10;
  cWhiteSpace = [cSpace, cTab];
  cDoubleQuote = #35;
+ cSlash = '/';
+ cLeftBracket = '{';
+ cRightBracket = '}';
 
 type
  TScriptParser = class
@@ -181,6 +184,24 @@ begin
 
   if l_Char = cQuote then
    l_IsOpenQute := not l_IsOpenQute;
+
+  if (l_Char = cSlash) and
+     (not l_IsOpenQute) then
+  begin
+   if GetChar(l_Char) then
+    if l_Char = cSlash then
+     while GetChar(l_Char) do
+      if l_Char = #13 then
+      begin
+       l_Char := #0;
+       Break
+      end
+      else // l_Char = #13
+       Continue
+    else // l_Char = cSlash
+    l_Buffer := l_Buffer + cSlash;
+
+  end;
 
   l_Buffer := l_Buffer + l_Char;
  end;
