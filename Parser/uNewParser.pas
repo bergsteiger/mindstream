@@ -30,12 +30,10 @@ type
   f_PosInUnknown: Integer;
   f_Token: String;
   f_TokenType: TscriptTokenType;
-  {f_IsBlockComment: Boolean;
-  f_IsString : Boolean;
-  f_IsSymbol : Boolean;}
  procedure NextChar;
  // Увеличивает f_PosInCurrentToken на 1
  procedure GetPrevChar(out aChar: AnsiChar);
+ // Возвращает предыдущий символ в aChar
  function CurrentCharInBuffer : Char;
  protected
   function ReadUnknownToken: String;
