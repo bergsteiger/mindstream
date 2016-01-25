@@ -438,6 +438,10 @@ BOOLEAN elem_func IsStereotype
  
 ; // IsStereotype
 
+BOOLEAN elem_func IsSummoned
+ Self 'IsSummoned' false .ElemMember >>> Result
+; // IsSummoned
+
 INTEGER elem_func Visibility
  Self 'Visibility' UnknownAccess /*PublicAccess*/ .ElemMember >>> Result
 ; // Visibility
