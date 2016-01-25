@@ -150,9 +150,12 @@ begin
    begin
     l_IsQuoteOpen := not l_IsQuoteOpen;
     f_TokenType := ttString;
+    NextChar;
    end;
 
-   f_Token := f_Token + CurrentCharInBuffer;
+   if CurrentCharInBuffer <> #0 then
+    f_Token := f_Token + CurrentCharInBuffer;
+
    NextChar;
   end;
  except
@@ -179,7 +182,8 @@ begin
 
  AnalyzeToken;
 
- if f_Token <> f_UnknownToken then
+ if (f_Token <> f_UnknownToken) and
+    (TokenType <> ttString) then
  begin
   f_Token := f_UnknownToken;
   f_TokenType := ttUnknown;
