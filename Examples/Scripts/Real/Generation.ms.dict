@@ -40,24 +40,6 @@ STRING FUNCTION IndentStr
 
 OBJECT STRING INTEGER ARRAY BOOLEAN TYPE OUTABLE
 
-STRING FUNCTION ValueToString
-  OUTABLE IN aValue
-
- if ( aValue IsArray ) then
- begin
-  [ aValue .for> call.me ] strings:Cat >>> Result
- end 
- else
- if ( aValue .IsWord ) then
- begin
-  aValue |N >>> Result
- end
- else
- begin
-  aValue ToPrintable >>> Result
- end 
-; // ValueToString
-
 CONST \n #13#10
 
 BOOLEAN CompileTime-VAR g_EnableAutoEOL true
@@ -200,6 +182,8 @@ TtfwWord VAR g_CurrentGenerator
   aLambda DO
  ) // TF g_CurrentGenerator
 ; // WithGen:
+
+WordAlias .All .True
 
 WordAlias Cached: CacheMethod
 WordAlias GenCached: CacheMethod
@@ -3449,6 +3433,8 @@ elem_proc OutChildrenRec:
   ^ IN aOut
  Self aValid aOut .OutChildrenRec
 ; // OutChildrenRec:
+
+WordAlias .ForChildren> .OutChildrenRec:
   
 elem_proc OutTypes
   ^ IN aValid
@@ -3547,15 +3533,15 @@ PROCEDURE .OutConstantsList
 elem_proc OutDefinitionsSection:
   ^ IN aValid
   
- : Validate aValid DO ; 
+ : .Suitable aValid DO ; 
   
- Self .OutChildrenRec: Validate (
+ Self .ForChildren> .Suitable (
   .Constants .filter> ( .Visibility PublicAccess == ) .OutConstantsList
  )
 
- Self .OutTypes Validate
+ Self .OutTypes .Suitable
  
- Self .OutChildrenRec: Validate (
+ Self .ForChildren> .Suitable (
   .Constants .filter> ( .Visibility ProtectedAccess == ) .OutConstantsList
  )
 
@@ -3639,7 +3625,7 @@ elem_proc OutInterfaceSection
  
  VAR l_WasOut
  false >>> l_WasOut
- Self .OutChildrenRec: .IsForInterface (
+ Self .ForChildren> .IsForInterface (
    IN anItem
   VAR l_GlobalOperations
   anItem .GlobalOperations >>> l_GlobalOperations
@@ -3653,7 +3639,7 @@ elem_proc OutInterfaceSection
  l_WasOut ? OutLn
  
  false >>> l_WasOut
- Self .OutChildrenRec: .IsForInterface (
+ Self .ForChildren> .IsForInterface (
    IN anItem
   anItem .GlobalVars 
   .filter> ( .Visibility PrivateAccess != ) 
@@ -3754,13 +3740,13 @@ elem_proc OutImplementationSection
  
  VAR l_WasOut
  false >>> l_WasOut
- Self .OutChildrenRec: .IsForImplementation (
+ Self .ForChildren> .IsForImplementation (
    IN anItem
   anItem .GlobalVars 
   .filter> ( .Visibility PrivateAccess != ) 
   .for> ( .OutVar true >>> l_WasOut )
  ) 
- Self .OutChildrenRec: .True (
+ Self .ForChildren> .All (
    IN anItem
   anItem .GlobalVars 
   .filter> ( .Visibility PrivateAccess == ) 
@@ -3769,11 +3755,11 @@ elem_proc OutImplementationSection
  
  l_WasOut ? OutLn
  
- Self .OutChildrenRec: .True (
+ Self .ForChildren> .All (
   .Constants .filter> ( .Visibility PrivateAccess == ) .OutConstantsList
  )
 
- Self .OutChildrenRec: .IsForInterface (
+ Self .ForChildren> .IsForInterface (
    IN anItem
   VAR l_GlobalOperations
   anItem .GlobalOperations >>> l_GlobalOperations
@@ -3786,7 +3772,7 @@ elem_proc OutImplementationSection
   .filter> ( .Visibility PrivateAccess != )
   .for> .MethodInterfaceForEx: nil .MethodBody
  )
- Self .OutChildrenRec: .IsForImplementation (
+ Self .ForChildren> .IsForImplementation (
    IN anItem
   VAR l_GlobalOperations
   anItem .GlobalOperations >>> l_GlobalOperations
@@ -3796,7 +3782,7 @@ elem_proc OutImplementationSection
   .for> .MethodInterfaceForEx: l_GlobalOperationsForOverload .MethodBody
  )
  
- Self .OutChildrenRec: .True .OutImplementation
+ Self .ForChildren> .All .OutImplementation
 ; // OutImplementationSection
 
 STRING elem_func Defines
