@@ -135,9 +135,7 @@ begin
   f_Token := f_UnknownToken;
   f_TokenType := ttBoolean;
   Exit;
- end
- else
-  f_TokenType := ttUnknown;
+ end;
 
  try
   while f_PosInUnknown <= Length(f_UnknownToken) do
@@ -147,8 +145,11 @@ begin
       (CurrentCharInBuffer = '#') then
     Exit;
 
+   // Начало String
    if CurrentCharInBuffer = cQuote then
+   begin
     l_IsQuoteOpen := not l_IsQuoteOpen;
+   end;
 
    f_Token := f_Token + CurrentCharInBuffer;
    NextChar;
@@ -159,8 +160,13 @@ begin
 
  // Если кавычка не закрыта то это ttUnknown
  if l_IsQuoteOpen then
+ begin
+  f_TokenType := ttUnknown;
   Exit
- else
+ end;
+
+ // Финальная проверка
+ if (TokenType <> ttString) then
   f_TokenType := ttToken;
 end; // AnalyzeToken
 
