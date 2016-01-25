@@ -129,18 +129,32 @@ var
 begin
  l_IsQuoteOpen := False;
 
- while f_PosInUnknown <= Length(f_UnknownToken) do
+ // Проверка на Boolean, и другие зарезервированные слова
+ if (f_UnknownToken = 'false') or (f_UnknownToken = 'true') then
  begin
-  // Заглушка
-  if (CurrentCharInBuffer = cSlash) or
-     (CurrentCharInBuffer = '#') then
-   Exit;
+  f_Token := f_UnknownToken;
+  f_TokenType := ttBoolean;
+  Exit;
+ end
+ else
+  f_TokenType := ttUnknown;
 
-  if CurrentCharInBuffer = cQuote then
-   l_IsQuoteOpen := not l_IsQuoteOpen;
+ try
+  while f_PosInUnknown <= Length(f_UnknownToken) do
+  begin
+   // Заглушка
+   if (CurrentCharInBuffer = cSlash) or
+      (CurrentCharInBuffer = '#') then
+    Exit;
 
-  f_Token := f_Token + CurrentCharInBuffer;
-  NextChar;
+   if CurrentCharInBuffer = cQuote then
+    l_IsQuoteOpen := not l_IsQuoteOpen;
+
+   f_Token := f_Token + CurrentCharInBuffer;
+   NextChar;
+  end;
+ except
+  f_TokenType := ttUnknown;
  end;
 
  // Если кавычка не закрыта то это ttUnknown
