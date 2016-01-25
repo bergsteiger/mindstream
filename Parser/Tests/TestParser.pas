@@ -76,7 +76,7 @@ type
   procedure Test_10_4;
   procedure Test_10_5;
   procedure Test_10_6;
-  {
+
   // SymbolTests
   procedure Test_12_1;
   procedure Test_12_1_1;
@@ -92,7 +92,7 @@ type
   procedure Test_12_10;
   procedure Test_12_11;
   procedure Test_12_12;
-  procedure Test_12_13;  }
+  procedure Test_12_13;
  end;
 
 implementation
@@ -825,7 +825,7 @@ begin
              (aParser.TokenType = ttString));
   end);
 end;
-                            {
+
 procedure TestTParser.Test_12_1;
 begin
  DoIt(FileName,
@@ -1025,7 +1025,7 @@ begin
    CheckTrue((aParser.TokenString = '#2Z' + '''' + 'Qqwe<CRLF>23 121212#$a #13#10' + '''') and
              (aParser.TokenType = ttToken));
   end);
-end;          }
+end;
 
 initialization
 

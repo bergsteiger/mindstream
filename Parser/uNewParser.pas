@@ -34,7 +34,7 @@ type
  // Увеличивает f_PosInCurrentToken на 1
  procedure GetPrevChar(out aChar: AnsiChar);
  // Возвращает предыдущий символ в aChar
- function CurrentCharInBuffer : Char;
+ function CurrentChar : Char;
  protected
   function ReadUnknownToken: String;
  protected
@@ -81,7 +81,7 @@ begin
  Create(TFileStream.Create(l_FileName, fmOpenRead));
 end;
 
-function TScriptParser.CurrentCharInBuffer: Char;
+function TScriptParser.CurrentChar: Char;
 begin
  Result := f_UnknownToken[f_PosInUnknown];
 end;
@@ -123,56 +123,99 @@ procedure TScriptParser.NextToken;
 var
  l_Token : String;
 
-procedure AnalyzeToken;
-var
- l_IsQuoteOpen : Boolean;
-begin
- l_IsQuoteOpen := False;
+ procedure AnalyzeToken;
+ var
+  l_IsQuoteOpen : Boolean;
+  f_IsSymbol : Boolean;
+  l_Buffer : String;
 
- // Проверка на Boolean, и другие зарезервированные слова
- if (f_UnknownToken = 'false') or (f_UnknownToken = 'true') then
+ procedure AddBufferToToken;
+ var
+  l_Num : Integer;
  begin
-  f_Token := f_UnknownToken;
-  f_TokenType := ttBoolean;
-  Exit;
+  l_Num := StrToInt(l_Buffer);
+  f_Token := f_Token + (Chr(l_Num));
+  l_Buffer := '';
  end;
 
- try
-  while f_PosInUnknown <= Length(f_UnknownToken) do
-  begin
-   // Заглушка
-   if (CurrentCharInBuffer = cSlash) or
-      (CurrentCharInBuffer = '#') then
-    Exit;
+ procedure AddCharToBuffer(aChar : Char);
+ begin
+  l_Buffer := l_Buffer + aChar;
+ end;
 
-   // Начало String
-   if CurrentCharInBuffer = cQuote then
+ begin
+  l_IsQuoteOpen := False;
+
+  // Проверка на Boolean, и другие зарезервированные слова
+  if (f_UnknownToken = 'false') or (f_UnknownToken = 'true') then
+  begin
+   f_Token := f_UnknownToken;
+   f_TokenType := ttBoolean;
+   Exit;
+  end;
+
+  try
+   while f_PosInUnknown <= Length(f_UnknownToken) do
    begin
-    l_IsQuoteOpen := not l_IsQuoteOpen;
-    f_TokenType := ttString;
+    // Заглушка
+    if (CurrentChar = cSlash) then
+       //(CurrentCharInBuffer = '#') then
+     Exit;
+
+    // Начало символов
+    if (CurrentChar = '#') and (not l_IsQuoteOpen) then
+    begin
+     f_IsSymbol := True;
+     l_Buffer := '';
+     f_TokenType := ttString;
+
+     NextChar;
+     while not ((CurrentChar = '#') or
+                (CurrentChar = cQuote)) do
+     begin
+      AddCharToBuffer(CurrentChar);
+
+      NextChar;
+     end;
+
+     AddBufferToToken;
+
+     Continue;
+    end;
+
+    if f_IsSymbol then
+    begin
+     AddCharToBuffer(CurrentChar);
+    end;
+
+    // Начало String
+    if CurrentChar = cQuote then
+    begin
+     l_IsQuoteOpen := not l_IsQuoteOpen;
+     f_TokenType := ttString;
+     NextChar;
+    end;
+
+    if CurrentChar <> #0 then
+     f_Token := f_Token + CurrentChar;
+
     NextChar;
    end;
-
-   if CurrentCharInBuffer <> #0 then
-    f_Token := f_Token + CurrentCharInBuffer;
-
-   NextChar;
+  except
+   f_TokenType := ttUnknown;
   end;
- except
-  f_TokenType := ttUnknown;
- end;
 
- // Если кавычка не закрыта то это ttUnknown
- if l_IsQuoteOpen then
- begin
-  f_TokenType := ttUnknown;
-  Exit
- end;
+  // Если кавычка не закрыта то это ttUnknown
+  if l_IsQuoteOpen then
+  begin
+   f_TokenType := ttUnknown;
+   Exit
+  end;
 
- // Финальная проверка
- if (TokenType <> ttString) then
-  f_TokenType := ttToken;
-end; // AnalyzeToken
+  // Финальная проверка
+  if (TokenType <> ttString) then
+   f_TokenType := ttToken;
+ end; // AnalyzeToken
 
 begin
  f_TokenType := ttUnknown;
