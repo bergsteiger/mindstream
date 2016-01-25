@@ -67,7 +67,7 @@ type
   procedure Test_7_1;
   procedure Test_7_2;
 
-  {procedure Test_8;
+  procedure Test_8;
 
   // StringTests
   procedure Test_10_1;
@@ -76,7 +76,7 @@ type
   procedure Test_10_4;
   procedure Test_10_5;
   procedure Test_10_6;
-
+  {
   // SymbolTests
   procedure Test_12_1;
   procedure Test_12_1_1;
@@ -730,7 +730,7 @@ begin
              (aParser.TokenType = ttBoolean));
   end);
 end;
-           {
+
 procedure TestTParser.Test_8;
 begin
  DoIt(FileName,
@@ -825,7 +825,7 @@ begin
              (aParser.TokenType = ttString));
   end);
 end;
-
+                            {
 procedure TestTParser.Test_12_1;
 begin
  DoIt(FileName,

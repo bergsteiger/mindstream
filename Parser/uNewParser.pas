@@ -149,6 +149,7 @@ begin
    if CurrentCharInBuffer = cQuote then
    begin
     l_IsQuoteOpen := not l_IsQuoteOpen;
+    f_TokenType := ttString;
    end;
 
    f_Token := f_Token + CurrentCharInBuffer;
