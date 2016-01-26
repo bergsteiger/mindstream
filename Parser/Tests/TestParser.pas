@@ -96,6 +96,10 @@ type
 
   // Quotes in string
   procedure Test_13_1;
+  procedure Test_13_2;
+  procedure Test_13_3;
+  procedure Test_13_4;
+  procedure Test_13_5;
  end;
 
 implementation
@@ -1043,6 +1047,55 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cQuote) and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_13_2;
+begin
+ //''''''
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = cQuote + cQuote) and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+
+procedure TestTParser.Test_13_3;
+begin
+ //'''a'''
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = cQuote + 'a' + cQuote) and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_13_4;
+begin
+ //'a'''
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'a' + cQuote) and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_13_5;
+begin
+ //'''a'
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = cQuote + 'a') and
              (aParser.TokenType = ttString));
   end);
 end;

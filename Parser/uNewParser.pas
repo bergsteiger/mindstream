@@ -219,7 +219,8 @@ var
       l_IsQuoteOpen := not l_IsQuoteOpen;
       Inc(l_QuoteCount);
 
-      if (l_QuoteCount div 4) = 1 then
+      // Написать не валидный тест сюда
+      if (l_QuoteCount div 3) = 1 then
       begin
        NextChar;
        Break;
