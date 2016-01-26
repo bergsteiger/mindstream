@@ -171,7 +171,8 @@ var
 
      NextChar;
      while not ((CurrentChar = '#') or
-                (CurrentChar = cQuote)) do
+                (CurrentChar = cQuote) or
+                (CurrentChar = #0)) do
      begin
       AddCharToBuffer(CurrentChar);
 
@@ -190,6 +191,7 @@ var
      l_IsQuoteOpen := not l_IsQuoteOpen;
      f_TokenType := ttString;
      NextChar;
+     Continue;
     end;
 
     if CurrentChar <> #0 then
