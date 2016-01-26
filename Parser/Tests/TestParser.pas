@@ -982,16 +982,17 @@ end;
 
 procedure TestTParser.Test_12_11;
 begin
+ // #2Z #13'a'
  DoIt(FileName,
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
-   CheckTrue((aParser.TokenString = #6) and
-             (aParser.TokenType = ttString));
+   CheckTrue((aParser.TokenString = '#2Z') and
+             (aParser.TokenType = ttUnknown));
 
    aParser.NextToken;
-   CheckTrue((aParser.TokenString = '5') and
-             (aParser.TokenType = ttToken));
+   CheckTrue((aParser.TokenString = #13 + 'a') and
+             (aParser.TokenType = ttString));
   end);
 end;
 
@@ -1001,13 +1002,16 @@ begin
  DoIt(FileName,
   procedure(aParser: TScriptParser)
   begin
-   aParser.NextToken;
    CheckTrue((aParser.TokenString = '#2Z') and
              (aParser.TokenType = ttUnknown));
 
    aParser.NextToken;
-   CheckTrue((aParser.TokenString = '5') and
-             (aParser.TokenType = ttToken));
+   CheckTrue((aParser.TokenString = #13 + 'a') and
+             (aParser.TokenType = ttString));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = #0) and
+             (aParser.TokenType = ttString));
   end);
 end;
 
@@ -1022,8 +1026,8 @@ begin
              (aParser.TokenType = ttString));
 
    aParser.NextToken;
-   CheckTrue((aParser.TokenString = '#2Z' + '''' + 'Qqwe<CRLF>23 121212#$a #13#10' + '''') and
-             (aParser.TokenType = ttToken));
+   CheckTrue((aParser.TokenString = '#2Z' + '''' + 'Qqwe'#13#10'23 121212#$a #13#10' + '''') and
+             (aParser.TokenType = ttUnknown));
   end);
 end;
 

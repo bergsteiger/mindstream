@@ -158,9 +158,9 @@ var
    while f_PosInUnknown <= Length(f_UnknownToken) do
    begin
     // Заглушка
-    if (CurrentChar = cSlash) then
+    {if (CurrentChar = cSlash) then
        //(CurrentCharInBuffer = '#') then
-     Exit;
+     Exit; }
 
     // Начало символов
     if (CurrentChar = '#') and (not l_IsQuoteOpen) then
