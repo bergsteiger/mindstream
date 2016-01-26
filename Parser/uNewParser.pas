@@ -219,7 +219,7 @@ var
       l_IsQuoteOpen := not l_IsQuoteOpen;
       Inc(l_QuoteCount);
 
-      // Написать не валидный тест сюда
+      // Делим на три, так как ''' дают '
       if (l_QuoteCount div 3) = 1 then
       begin
        NextChar;

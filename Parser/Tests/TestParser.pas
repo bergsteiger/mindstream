@@ -100,6 +100,7 @@ type
   procedure Test_13_3;
   procedure Test_13_4;
   procedure Test_13_5;
+  procedure Test_13_6;
  end;
 
 implementation
@@ -1096,6 +1097,18 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cQuote + 'a') and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_13_6;
+begin
+ //''''''''''''
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = cQuote + cQuote + cQuote + cQuote) and
              (aParser.TokenType = ttString));
   end);
 end;
