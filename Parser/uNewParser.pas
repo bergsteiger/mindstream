@@ -139,6 +139,13 @@ var
   f_IsSymbol : Boolean;
   l_SymbBuffer : String;
 
+ function ValidStringChar : boolean;
+ begin
+  Result := ((CurrentChar = '#') or
+             (CurrentChar = cQuote) or
+             (CurrentChar = #0));
+ end;
+
  function IsQuoteClose : Boolean;
  begin
   Result := not l_IsQuoteOpen;
@@ -180,9 +187,7 @@ var
      f_TokenType := ttString;
 
      NextChar;
-     while not ((CurrentChar = '#') or
-                (CurrentChar = cQuote) or
-                (CurrentChar = #0)) do
+     while not ValidStringChar do
      begin
       AddCharToBuffer(CurrentChar);
 
@@ -203,9 +208,7 @@ var
 
      NextChar;
 
-     if IsQuoteClose and (not ((CurrentChar = '#') or
-                (CurrentChar = cQuote) or
-                (CurrentChar = #0))) then
+     if IsQuoteClose and (not ValidStringChar) then
       raise EUnknownToken.Create('Error Message');
 
 
