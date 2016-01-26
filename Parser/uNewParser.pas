@@ -160,7 +160,7 @@ var
     // Заглушка
     {if (CurrentChar = cSlash) then
        //(CurrentCharInBuffer = '#') then
-     Exit; }
+     Exit;}
 
     // Начало символов
     if (CurrentChar = '#') and (not l_IsQuoteOpen) then
