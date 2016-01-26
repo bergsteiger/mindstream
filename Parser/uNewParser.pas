@@ -6,9 +6,6 @@ uses
  ,SysUtils
  ;
 
-type
- TscriptTokenType = (ttUnknown, ttString, ttToken, ttEOF, ttBoolean);
-
 Const
  cQuote = #39;
  cTab = #9;
@@ -22,6 +19,12 @@ Const
  cRightBracket = '}';
 
 type
+ TscriptTokenType = (ttUnknown, ttString, ttToken, ttEOF, ttBoolean);
+
+type
+ EUnknownToken = Class(Exception);
+
+type
  TScriptParser = class
  private
   f_Stream: TStream;
@@ -32,6 +35,8 @@ type
   f_TokenType: TscriptTokenType;
  procedure NextChar;
  // Увеличивает f_PosInCurrentToken на 1
+ procedure PrevChar;
+ // Уменьшает f_PosInCurrentToken на 1
  procedure GetPrevChar(out aChar: AnsiChar);
  // Возвращает предыдущий символ в aChar
  function CurrentChar : Char;
@@ -119,6 +124,11 @@ begin
  Inc(f_PosInUnknown);
 end;
 
+procedure TScriptParser.PrevChar;
+begin
+ Dec(f_PosInUnknown);
+end;
+
 procedure TScriptParser.NextToken;
 var
  l_Token : String;
@@ -127,20 +137,25 @@ var
  var
   l_IsQuoteOpen : Boolean;
   f_IsSymbol : Boolean;
-  l_Buffer : String;
+  l_SymbBuffer : String;
+
+ function IsQuoteClose : Boolean;
+ begin
+  Result := not l_IsQuoteOpen;
+ end;
 
  procedure AddBufferToToken;
  var
   l_Num : Integer;
  begin
-  l_Num := StrToInt(l_Buffer);
+  l_Num := StrToInt(l_SymbBuffer);
   f_Token := f_Token + (Chr(l_Num));
-  l_Buffer := '';
+  l_SymbBuffer := '';
  end;
 
  procedure AddCharToBuffer(aChar : Char);
  begin
-  l_Buffer := l_Buffer + aChar;
+  l_SymbBuffer := l_SymbBuffer + aChar;
  end;
 
  begin
@@ -157,16 +172,11 @@ var
   try
    while f_PosInUnknown <= Length(f_UnknownToken) do
    begin
-    // Заглушка
-    {if (CurrentChar = cSlash) then
-       //(CurrentCharInBuffer = '#') then
-     Exit;}
-
     // Начало символов
     if (CurrentChar = '#') and (not l_IsQuoteOpen) then
     begin
      f_IsSymbol := True;
-     l_Buffer := '';
+     l_SymbBuffer := '';
      f_TokenType := ttString;
 
      NextChar;
@@ -190,7 +200,15 @@ var
     begin
      l_IsQuoteOpen := not l_IsQuoteOpen;
      f_TokenType := ttString;
+
      NextChar;
+
+     if IsQuoteClose and (not ((CurrentChar = '#') or
+                (CurrentChar = cQuote) or
+                (CurrentChar = #0))) then
+      raise EUnknownToken.Create('Error Message');
+
+
      Continue;
     end;
 
