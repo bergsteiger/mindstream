@@ -470,6 +470,10 @@ ModelElement elem_func Parent
  Self 'Parent' .ElemWord &gt;&gt;&gt; Result
 ; // Parent
 
+ModelElement elem_func SpelledFor
+ Self 'SpelledFor' .ElemWord &gt;&gt;&gt; Result
+; // SpelledFor
+
 ModelElement elem_func Implementor
  Self 'Implementor' .ElemWord &gt;&gt;&gt; Result
 ; // Implementor
