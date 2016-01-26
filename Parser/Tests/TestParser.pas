@@ -343,7 +343,7 @@ begin
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '/2/') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = ttToken));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A+B') and
@@ -367,7 +367,7 @@ begin
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '/2/') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = ttToken));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cQuote + 'A+B // qwe' + cCRLF +
@@ -392,7 +392,7 @@ begin
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '/2/') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = ttToken));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A+B') and
@@ -414,7 +414,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cSlash) and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = ttToken));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'a') and
@@ -588,7 +588,7 @@ begin
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '*/') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = ttToken));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'B') and

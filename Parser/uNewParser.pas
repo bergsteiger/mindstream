@@ -194,7 +194,7 @@ var
      Continue;
     end;
 
-    if CurrentChar <> #0 then
+    if (CurrentChar <> #0) then
      f_Token := f_Token + CurrentChar;
 
     NextChar;
