@@ -138,8 +138,9 @@ var
   l_IsQuoteOpen : Boolean;
   f_IsSymbol : Boolean;
   l_SymbBuffer : String;
+  l_QuoteCount : Integer;
 
- function ValidStringChar : boolean;
+ function ValidStringChar : Boolean;
  begin
   Result := ((CurrentChar = '#') or
              (CurrentChar = cQuote) or
@@ -205,12 +206,31 @@ var
     begin
      l_IsQuoteOpen := not l_IsQuoteOpen;
      f_TokenType := ttString;
+     l_QuoteCount := 1;
 
      NextChar;
 
+     // Проверка на символ полсле строки
      if IsQuoteClose and (not ValidStringChar) then
       raise EUnknownToken.Create('Error Message');
 
+     while CurrentChar = cQuote do
+     begin
+      l_IsQuoteOpen := not l_IsQuoteOpen;
+      Inc(l_QuoteCount);
+
+      if (l_QuoteCount div 4) = 1 then
+      begin
+       NextChar;
+       Break;
+      end;
+
+      NextChar;
+     end;
+
+     // '''' and '''
+     if ((l_QuoteCount div 4) = 1) or ((l_QuoteCount div 3) = 1)then
+      f_Token := f_Token + cQuote;
 
      Continue;
     end;
