@@ -998,10 +998,11 @@ end;
 
 procedure TestTParser.Test_12_12;
 begin
-// #2Z #13'a'
+// #2Z #13'a' #0
  DoIt(FileName,
   procedure(aParser: TScriptParser)
   begin
+   aParser.NextToken;
    CheckTrue((aParser.TokenString = '#2Z') and
              (aParser.TokenType = ttUnknown));
 
