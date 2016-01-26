@@ -93,6 +93,9 @@ type
   procedure Test_12_11;
   procedure Test_12_12;
   procedure Test_12_13;
+
+  // Quotes in string
+  procedure Test_13_1;
  end;
 
 implementation
@@ -1029,6 +1032,18 @@ begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '#2Z' + '''' + 'Qqwe'#13#10'23 121212#$a #13#10' + '''') and
              (aParser.TokenType = ttUnknown));
+  end);
+end;
+
+procedure TestTParser.Test_13_1;
+begin
+ //''''
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = cQuote) and
+             (aParser.TokenType = ttString));
   end);
 end;
 
