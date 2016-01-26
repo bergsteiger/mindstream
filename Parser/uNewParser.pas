@@ -179,13 +179,9 @@ var
      end;
 
      AddBufferToToken;
+     f_IsSymbol := False;
 
      Continue;
-    end;
-
-    if f_IsSymbol then
-    begin
-     AddCharToBuffer(CurrentChar);
     end;
 
     // Начало String
