@@ -101,6 +101,14 @@ type
   procedure Test_13_4;
   procedure Test_13_5;
   procedure Test_13_6;
+
+  // Dec numbers
+  procedure Test_15_1;
+  procedure Test_15_2;
+  procedure Test_15_3;
+  procedure Test_15_4;
+  procedure Test_15_5;
+  procedure Test_15_6;
  end;
 
 implementation
@@ -1110,6 +1118,125 @@ begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cQuote + cQuote + cQuote + cQuote) and
              (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_15_1;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '1') and
+             (aParser.TokenType = ttNumber));
+  end);
+end;
+
+procedure TestTParser.Test_15_2;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '1') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '2') and
+             (aParser.TokenType = ttNumber));
+  end);
+end;
+
+procedure TestTParser.Test_15_3;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '1') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '2') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '0') and
+             (aParser.TokenType = ttNumber));
+  end);
+end;
+
+procedure TestTParser.Test_15_4;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '1') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '2') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '0') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '20') and
+             (aParser.TokenType = ttNumber));
+  end);
+end;
+
+procedure TestTParser.Test_15_5;
+begin
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '1') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '2') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '0') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '20') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '200') and
+             (aParser.TokenType = ttNumber));
+  end);
+end;
+
+procedure TestTParser.Test_15_6;
+begin
+//200 a a2 2a
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '200') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'a') and
+             (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'a2') and
+             (aParser.TokenType = ttToken));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '2a') and
+             (aParser.TokenType = ttUnknown));
   end);
 end;
 
