@@ -13,6 +13,7 @@ Const
  cCRLF = #13#10;
  cWhiteSpace = [cSpace, cTab];
  cDoubleQuote = #35;
+ cMinus = '-';
  cSlash = '/';
  cAsterics = '*';
  cLeftBracket = '{';
