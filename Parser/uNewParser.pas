@@ -19,10 +19,10 @@ Const
  cRightBracket = '}';
 
 type
- TscriptTokenType = (ttUnknown, ttString, ttToken, ttEOF, ttBoolean);
+ EUnknownToken = Class(Exception);
 
 type
- EUnknownToken = Class(Exception);
+ TscriptTokenType = (ttUnknown, ttString, ttToken, ttEOF, ttBoolean, ttNumber);
 
 type
  TScriptParser = class
@@ -234,6 +234,25 @@ var
       f_Token := f_Token + cQuote;
 
      Continue;
+    end;
+
+    // ײטפנû
+    if CurrentChar.IsDigit and (f_Token = '') then
+    begin
+     while CurrentChar.IsDigit do
+     begin
+      f_Token := f_Token + CurrentChar;
+      NextChar;
+     end;
+
+     if f_Token = f_UnknownToken then
+     begin
+      f_TokenType := ttNumber;
+      Exit;
+     end
+     else
+      raise EUnknownToken.Create('Error Message');
+
     end;
 
     if (CurrentChar <> #0) then
