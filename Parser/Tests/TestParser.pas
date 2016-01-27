@@ -109,6 +109,8 @@ type
   procedure Test_15_4;
   procedure Test_15_5;
   procedure Test_15_6;
+
+  procedure Test_16_1;
  end;
 
 implementation
@@ -1239,6 +1241,31 @@ begin
              (aParser.TokenType = ttUnknown));
   end);
 end;
+
+procedure TestTParser.Test_16_1;
+begin
+//-1
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-1') and
+             (aParser.TokenType = ttNumber));
+  end);
+end;
+
+// -1 -2
+
+// -1 -2 -0
+
+//-1 -2 -0 -20
+
+//-1 -2 -0 -20 -200
+
+//-1 -2 -0 -20 -200 - 2
+
+//-1 -2 -0 -20 -200 - 2 --- -2a
+
 
 initialization
 
