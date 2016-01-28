@@ -12,7 +12,7 @@ Const
  cSpace = #32;
  cCRLF = #13#10;
  cWhiteSpace = [cSpace, cTab];
- cDoubleQuote = #35;
+ cDoubleQuote = '"';
  cMinus = '-';
  cSlash = '/';
  cAsterics = '*';
@@ -23,7 +23,7 @@ type
  EUnknownToken = Class(Exception);
 
 type
- TscriptTokenType = (ttUnknown, ttString, ttToken, ttEOF, ttBoolean, ttNumber);
+ TscriptTokenType = (ttUnknown, ttString, ttToken, ttEOF, ttBoolean, ttNumber, ttIdentifier);
 
 type
  TScriptParser = class
@@ -141,6 +141,7 @@ var
   l_SymbBuffer : String;
   l_QuoteCount : Integer;
   l_Number : Integer;
+  l_IsDoubleQuote : Boolean;
 
  function ValidStringChar : Boolean;
  begin
@@ -180,6 +181,7 @@ var
 
  begin
   l_IsQuoteOpen := False;
+  l_IsDoubleQuote := False;
 
   // Проверка на Boolean, и другие зарезервированные слова
   if (f_UnknownToken = 'false') or (f_UnknownToken = 'true') then
@@ -272,11 +274,27 @@ var
      end
      else
       raise EUnknownToken.Create('Error Message')
-
     end;
 
+    // Идентификатор
+    if (CurrentChar = cDoubleQuote) and (not l_IsQuoteOpen) then
+    begin
+     l_IsDoubleQuote := not l_IsDoubleQuote;
+
+     if not l_IsDoubleQuote then
+     begin
+      f_TokenType := ttIdentifier;
+     end;
+    end;
+
+    // не включаем конец строки в токен
     if (CurrentChar <> #0) then
      f_Token := f_Token + CurrentChar;
+
+    // Проверка на невалидный идентификатор
+    if (f_TokenType = ttIdentifier) and
+       (f_Token <> f_UnknownToken) then
+     raise EUnknownToken.Create('Error Message');
 
     NextChar;
    end;
@@ -293,7 +311,7 @@ var
   end;
 
   // Финальная проверка
-  if (TokenType <> ttString) then
+  if not (TokenType in [ttString, ttIdentifier, ttNumber]) then
    f_TokenType := ttToken;
  end; // AnalyzeToken
 
@@ -307,7 +325,8 @@ begin
 
  if (f_Token <> f_UnknownToken) and
     (TokenType <> ttString) and
-    (TokenType <> ttNumber) then
+    (TokenType <> ttNumber) and
+    (TokenType <> ttIdentifier) then
  begin
   f_Token := f_UnknownToken;
   f_TokenType := ttUnknown;
@@ -325,16 +344,18 @@ var
 
  l_IsOpenQuote,
  l_IsLineComment,
+ l_IsDoubleQuoteOpen,
  l_IsBlockComment : Boolean;
 begin
  l_Buffer := '';
  l_IsOpenQuote := False;
+ l_IsDoubleQuoteOpen := False;
  l_IsLineComment := False;
  l_IsBlockComment := False;
 
  while GetChar(l_Char) do
  begin
-  if not l_IsOpenQuote then
+  if (not l_IsOpenQuote) and (not l_IsDoubleQuoteOpen) then
   begin
    if l_Char = #13 then
     if GetChar(l_Char) then
@@ -385,12 +406,16 @@ begin
      Continue;
   end; // not l_IsOpenQute
 
-  // Кавычка
+  // Кавычка '
   if l_Char = cQuote then
    l_IsOpenQuote := not l_IsOpenQuote;
 
+  // Двойная кавычка "
+  if l_Char = cDoubleQuote then
+   l_IsDoubleQuoteOpen := not l_IsDoubleQuoteOpen;
+
   // // and /*
-  if (not l_IsOpenQuote) then
+  if (not l_IsOpenQuote) and (not l_IsDoubleQuoteOpen) then
   begin
    if (l_Char = cSlash) then
    begin
