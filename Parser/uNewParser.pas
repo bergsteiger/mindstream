@@ -158,9 +158,13 @@ var
  var
   l_Num : Integer;
  begin
-  l_Num := StrToInt(l_SymbBuffer);
-  f_Token := f_Token + (Chr(l_Num));
-  l_SymbBuffer := '';
+  if TryStrToInt(l_SymbBuffer, l_Num) then
+   f_Token := f_Token + (Chr(l_Num))
+  else
+  begin
+   l_SymbBuffer := '';
+   raise EUnknownToken.Create('Error Message');
+  end;
  end;
 
  procedure AddCharToBuffer(aChar : Char);

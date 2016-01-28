@@ -1568,7 +1568,7 @@ begin
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
-   CheckTrue((aParser.TokenString = '#0') and
+   CheckTrue((aParser.TokenString = #0) and
              (aParser.TokenType = ttString));
   end);
 end;
@@ -1580,7 +1580,7 @@ begin
   procedure(aParser: TScriptParser)
   begin
    aParser.NextToken;
-   CheckTrue((aParser.TokenString = '#10') and
+   CheckTrue((aParser.TokenString = #10) and
              (aParser.TokenType = ttString));
   end);
 end;
