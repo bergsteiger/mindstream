@@ -137,6 +137,7 @@ type
   procedure Test_18_5;
   procedure Test_18_6;
   procedure Test_18_7;
+  procedure Test_18_8;
  end;
 
 implementation
@@ -1650,6 +1651,21 @@ begin
   end);
 end;
 
+procedure TestTParser.Test_18_8;
+begin
+//#$D'''' #$P
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = #13 + cQuote) and
+             (aParser.TokenType = ttString));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '#$P') and
+             (aParser.TokenType = ttUnknown));
+  end);
+end;
 
 initialization
 
