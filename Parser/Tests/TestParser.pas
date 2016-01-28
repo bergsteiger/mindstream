@@ -132,6 +132,11 @@ type
   // Symbols in hex
   procedure Test_18_1;
   procedure Test_18_2;
+  procedure Test_18_3;
+  procedure Test_18_4;
+  procedure Test_18_5;
+  procedure Test_18_6;
+  procedure Test_18_7;
  end;
 
 implementation
@@ -1584,6 +1589,67 @@ begin
              (aParser.TokenType = ttString));
   end);
 end;
+
+procedure TestTParser.Test_18_3;
+begin
+//#$D
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = #13) and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_18_4;
+begin
+//#$D'a'
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = #13'a') and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_18_5;
+begin
+//'a'#$D
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = 'a'#13) and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_18_6;
+begin
+//''''#$D
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = cQuote + #13) and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_18_7;
+begin
+//#$D''''
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = #13 + cQuote) and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
 
 initialization
 
