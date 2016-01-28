@@ -138,6 +138,14 @@ type
   procedure Test_18_6;
   procedure Test_18_7;
   procedure Test_18_8;
+
+  // Identifiers
+  procedure Test_19_1;
+  procedure Test_19_2;
+  procedure Test_19_3;
+  procedure Test_19_4;
+  procedure Test_19_5;
+  procedure Test_19_6;
  end;
 
 implementation
@@ -1663,6 +1671,83 @@ begin
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '#$P') and
+             (aParser.TokenType = ttUnknown));
+  end);
+end;
+
+procedure TestTParser.Test_19_1;
+begin
+//""
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '""') and
+             (aParser.TokenType = ttIdentifier));
+  end);
+end;
+
+procedure TestTParser.Test_19_2;
+begin
+//"a"
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '"a"') and
+             (aParser.TokenType = ttIdentifier));
+  end);
+end;
+
+procedure TestTParser.Test_19_3;
+begin
+//"ab"
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '"ab"') and
+             (aParser.TokenType = ttIdentifier));
+  end);
+end;
+
+procedure TestTParser.Test_19_4;
+begin
+//"a
+//b"
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '"a'#13#10'b"') and
+             (aParser.TokenType = ttIdentifier));
+  end);
+end;
+
+procedure TestTParser.Test_19_5;
+begin
+//"a
+//b
+//c"
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '"a'#13#10'b'#13#10'c"') and
+             (aParser.TokenType = ttIdentifier));
+  end);
+end;
+
+procedure TestTParser.Test_19_6;
+begin
+//"a
+//b
+//c"qwe
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '"a'#13#10'b'#13#10'c"qwe') and
              (aParser.TokenType = ttUnknown));
   end);
 end;
