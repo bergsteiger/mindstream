@@ -110,7 +110,15 @@ type
   procedure Test_15_5;
   procedure Test_15_6;
 
+  // Dec negative numbers
   procedure Test_16_1;
+  procedure Test_16_2;
+  procedure Test_16_3;
+  procedure Test_16_4;
+  procedure Test_16_5;
+  procedure Test_16_6;
+
+  procedure Test_17_1;
  end;
 
 implementation
@@ -1254,18 +1262,144 @@ begin
   end);
 end;
 
+
+procedure TestTParser.Test_16_2;
+begin
 // -1 -2
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-1') and
+             (aParser.TokenType = ttNumber));
 
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-2') and
+             (aParser.TokenType = ttNumber));
+  end);
+end;
+
+procedure TestTParser.Test_16_3;
+begin
 // -1 -2 -0
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-1') and
+             (aParser.TokenType = ttNumber));
 
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-2') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '0') and
+             (aParser.TokenType = ttNumber));
+  end);
+end;
+
+
+procedure TestTParser.Test_16_4;
+begin
 //-1 -2 -0 -20
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-1') and
+             (aParser.TokenType = ttNumber));
 
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-2') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '0') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-20') and
+             (aParser.TokenType = ttNumber));
+  end);
+end;
+
+procedure TestTParser.Test_16_5;
+begin
 //-1 -2 -0 -20 -200
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-1') and
+             (aParser.TokenType = ttNumber));
 
-//-1 -2 -0 -20 -200 - 2
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-2') and
+             (aParser.TokenType = ttNumber));
 
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '0') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-20') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-200') and
+             (aParser.TokenType = ttNumber));
+  end);
+end;
+
+procedure TestTParser.Test_16_6;
+begin
 //-1 -2 -0 -20 -200 - 2 --- -2a
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-1') and
+             (aParser.TokenType = ttNumber));
 
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-2') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '0') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-20') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-200') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-') and
+             (aParser.TokenType = ttUnknown));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '2') and
+             (aParser.TokenType = ttNumber));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '---') and
+             (aParser.TokenType = ttUnknown));
+
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '-2a') and
+             (aParser.TokenType = ttUnknown));
+  end);
+end;
+
+procedure TestTParser.Test_17_1;
+begin
+
+end;
 
 initialization
 

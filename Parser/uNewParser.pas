@@ -264,6 +264,10 @@ var
      if TryStrToInt(f_UnknownToken, l_Number) then
      begin
       f_Token := f_UnknownToken;
+
+      if l_Number = 0 then
+       f_Token := IntToStr(l_Number);
+
       f_TokenType := ttNumber;
       Exit;
      end
@@ -302,7 +306,8 @@ begin
  AnalyzeToken;
 
  if (f_Token <> f_UnknownToken) and
-    (TokenType <> ttString) then
+    (TokenType <> ttString) and
+    (TokenType <> ttNumber) then
  begin
   f_Token := f_UnknownToken;
   f_TokenType := ttUnknown;
