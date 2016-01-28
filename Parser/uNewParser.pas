@@ -140,6 +140,7 @@ var
   f_IsSymbol : Boolean;
   l_SymbBuffer : String;
   l_QuoteCount : Integer;
+  l_Number : Integer;
 
  function ValidStringChar : Boolean;
  begin
@@ -165,6 +166,12 @@ var
  procedure AddCharToBuffer(aChar : Char);
  begin
   l_SymbBuffer := l_SymbBuffer + aChar;
+ end;
+
+ function IsNumBegin : Boolean;
+ begin
+  Result := (CurrentChar.IsDigit or (CurrentChar = cMinus) or (CurrentChar = '$')) and
+            (f_Token = '');
  end;
 
  begin
@@ -238,9 +245,9 @@ var
     end;
 
     // ײטפנû
-    if CurrentChar.IsDigit and (f_Token = '') then
+    if IsNumBegin then
     begin
-     while CurrentChar.IsDigit do
+     {while CurrentChar.IsDigit do
      begin
       f_Token := f_Token + CurrentChar;
       NextChar;
@@ -252,7 +259,16 @@ var
       Exit;
      end
      else
-      raise EUnknownToken.Create('Error Message');
+      raise EUnknownToken.Create('Error Message');}
+
+     if TryStrToInt(f_UnknownToken, l_Number) then
+     begin
+      f_Token := f_UnknownToken;
+      f_TokenType := ttNumber;
+      Exit;
+     end
+     else
+      raise EUnknownToken.Create('Error Message')
 
     end;
 
