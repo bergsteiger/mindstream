@@ -128,6 +128,10 @@ type
   procedure Test_17_7;
   procedure Test_17_8;
   procedure Test_17_9;
+
+  // Symbols in hex
+  procedure Test_18_1;
+  procedure Test_18_2;
  end;
 
 implementation
@@ -1554,6 +1558,30 @@ begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-$A') and
              (aParser.TokenType = ttUnknown));
+  end);
+end;
+
+procedure TestTParser.Test_18_1;
+begin
+//#$0
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '#0') and
+             (aParser.TokenType = ttString));
+  end);
+end;
+
+procedure TestTParser.Test_18_2;
+begin
+//#$A
+ DoIt(FileName,
+  procedure(aParser: TScriptParser)
+  begin
+   aParser.NextToken;
+   CheckTrue((aParser.TokenString = '#10') and
+             (aParser.TokenType = ttString));
   end);
 end;
 
