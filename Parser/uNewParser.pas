@@ -247,26 +247,21 @@ var
     // Цифры
     if IsNumBegin then
     begin
-     {while CurrentChar.IsDigit do
-     begin
-      f_Token := f_Token + CurrentChar;
-      NextChar;
-     end;
-
-     if f_Token = f_UnknownToken then
-     begin
-      f_TokenType := ttNumber;
-      Exit;
-     end
-     else
-      raise EUnknownToken.Create('Error Message');}
-
      if TryStrToInt(f_UnknownToken, l_Number) then
      begin
       f_Token := f_UnknownToken;
 
-      if l_Number = 0 then
+      // Приведение числа в dec форму
+      if (l_Number = 0) or (CurrentChar = '$') then
        f_Token := IntToStr(l_Number);
+
+      // Если число отрицательное Hex
+      if CurrentChar = cMinus then
+      begin
+       NextChar;
+       if CurrentChar = '$' then
+        raise EUnknownToken.Create('Error Message');
+      end;
 
       f_TokenType := ttNumber;
       Exit;
@@ -283,6 +278,7 @@ var
    end;
   except
    f_TokenType := ttUnknown;
+   Exit;
   end;
 
   // Если кавычка не закрыта то это ttUnknown
