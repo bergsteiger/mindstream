@@ -218,14 +218,24 @@ STRING elem_func FinalFileNamePrim
  cEmptyStr &gt;&gt;&gt; Result 
 ; // FinalFileNamePrim
 
+STRING FUNCTION .CutPrefix
+  STRING IN aString
+  STRING IN aPrefix
+ aString &gt;&gt;&gt; Result 
+ if ( aPrefix Result StartsStr ) then
+ begin
+  Result string:Len aPrefix string:Len - 
+  aPrefix string:Len
+  Result
+  string:Substring &gt;&gt;&gt; Result
+ end // ( aPrefix Result StartsStr )
+; // .CutPrefix
+
 STRING elem_func FinalFileName
  Self .? .FinalFileNamePrim &gt;&gt;&gt; Result
  if ( Result IsNil ! ) then
  begin
-  if ( '\' Result StartsStr ) then
-  begin
-   Result '\' cEmptyStr string:ReplaceFirst &gt;&gt;&gt; Result
-  end // '\' Result StartsStr
+  Result '\' .CutPrefix &gt;&gt;&gt; Result
   [ 'w:' 
   // - это потому, что в пути нету диска, а для ExtractFileName он нужен
   Result ] cPathSep strings:CatSep &gt;&gt;&gt; Result
@@ -724,11 +734,7 @@ elem: WithComma:
 
 STRING FUNCTION .CutT
   STRING IN aName
- aName &gt;&gt;&gt; Result
- if ( 'T' Result StartsStr ) then
- begin
-  Result 'T' cEmptyStr string:ReplaceFirst &gt;&gt;&gt; Result
- end // 'T' Result StartsStr
+ aName 'T' .CutPrefix &gt;&gt;&gt; Result
 ; // .CutT
 
 STRING elem_func UnitNamePrim
@@ -759,7 +765,7 @@ STRING elem_func UnitNamePrim
 STRING elem_func UnitName
  GenCached:
  (
-  Self .UnitNamePrim 'NOT_FINISHED_' cEmptyStr string:ReplaceFirst
+  Self .UnitNamePrim 'NOT_FINISHED_' .CutPrefix
  )
  &gt;&gt;&gt; Result
 ; // UnitName
@@ -2201,6 +2207,7 @@ ARRAY FUNCTION .OperationsNeededElements
  .joinWithLambded&gt; anArray ( .Parameters .mapToTargetAndValueType&gt; )
  .joinWithLambded&gt; anArray ( .AttributesAndOperations call.me )
  .joinWithLambded&gt; anArray .CanRaise
+ .joinWithLambded&gt; anArray .CanRaiseInSet
  &gt;&gt;&gt; Result 
 ; // .OperationsNeededElements
 
@@ -2883,7 +2890,13 @@ elem_proc MethodInterfacePrim
    VAR l_WasOut
    false &gt;&gt;&gt; l_WasOut
    
-   Self .CanRaise .for&gt; (
+   RULES
+    ( Self .IsSetter )
+     ( Self .CanRaiseInSet )
+    DEFAULT
+     ( Self .CanRaise )
+   ; // RULES
+   .for&gt; (
      IN anItem
     if ( l_WasOut ! ) then
     begin
@@ -4820,6 +4833,31 @@ elem_generator res.cmd
  //call.inherited
 ; // res.cmd
 
+BOOLEAN elem_func NeedsWordsAliases
+ Cached:
+ (
+  RULES
+   ( Self .IsScriptKeywordsPack ! )
+    false
+   ( Self .UPisTrue "no class name" )
+    true
+   ( Self .UPisTrue "no_pop" ) 
+    true
+   DEFAULT
+    false 
+  ; // RULES
+ ) 
+ &gt;&gt;&gt; Result
+; // NeedsWordsAliases
+
+STRING elem_func SelfName
+ Self .GetUP 'extprop:rc:SelfName' &gt;&gt;&gt; Result
+ if ( Result IsNil ) then
+ begin
+  Self .TypeName &gt;&gt;&gt; Result
+ end 
+; // SelfName
+
 elem_generator rc.script
  
  Inherits .res.cmd
@@ -4827,17 +4865,108 @@ elem_generator rc.script
  CONST Ext '.rc.script'
 
  BOOLEAN elem_func CanCopyToFinalFile
+  /*{
   RULES
-   (
-    ( Self .UPisTrue "no class name" ! )
-    AND ( Self .UPisTrue "no_pop" ! )
-   )
+   ( Self .NeedsWordsAliases ! )
     true
    DEFAULT
     false
   ; // RULES
-  &gt;&gt;&gt; Result
+  }*/
+  true &gt;&gt;&gt; Result
  ; // CanCopyToFinalFile
+ 
+ Self .OutUnitHeader
+ 
+ VAR l_WasManUses
+ false &gt;&gt;&gt; l_WasManUses
+ 
+ : OutManUses
+  l_WasManUses ! ? (
+   true &gt;&gt;&gt; l_WasManUses
+   OutLn
+   Self .UserCode: 'man_uses' () 
+   OutLn
+  ) // l_WasManUses ! ? 
+ ; // OutManUses
+ 
+ Self .NeedsWordsAliases ?
+  OutManUses
+  
+ : OutScriptFrameWorkAliases
+ 
+  : OutWordAlias
+    IN aG
+    
+   if ( 
+       ( Self .UPisTrue "no class name" ! ) 
+       AND ( aG .SelfName 'SV' != )
+      ) then
+   begin
+    'USES' .Out
+    [ cSpace 'axiom:' aG .SelfName ] .Out
+    ';' .Out
+    OutLn
+   end // ( Self .UPisTrue "no class name" ! )
+   
+   [ '// Класс ' aG .Name ' - ' aG .SelfName ] .Out 
+   
+   Self .Operations
+   .filter&gt; .IsStereotype st_keyword::Operation
+   .for&gt; (
+     IN anOp
+    VAR l_NameForScript 
+    anOp .GetUP "NameForScript" &gt;&gt;&gt; l_NameForScript
+    [ 
+      '//  Операция ' anOp .Name 
+      if ( l_NameForScript IsNil ! ) then
+      begin
+       ' - ' l_NameForScript
+      end // ( l_NameForScript IsNil ! )
+    ] .Out
+    
+    anOp .Speller .GetUP "NameForScript" &gt;&gt;&gt; l_NameForScript
+    [
+     '//  Класс реализующий операцию '
+     anOp .Speller .Name
+     ' - '
+     l_NameForScript
+    ] .Out
+    
+    VAR l_CanonicName
+    [ 
+     'pop:' 
+     aG .SelfName
+     ':' 
+     anOp .Name 
+      'pop_' .CutPrefix
+      [ aG .SelfName string:Lower '_' ] strings:Cat .CutPrefix
+    ] strings:Cat &gt;&gt;&gt; l_CanonicName
+    
+    if ( l_CanonicName l_NameForScript != ) then
+    begin
+     [ 'WordAlias ' l_CanonicName cSpace l_NameForScript ] .Out
+    end // ( l_CanonicName l_NameForScript != )
+    
+   ) // Self .Operations
+   
+   OutLn
+   
+  ; // OutWordAlias
+  
+  if ( Self .NeedsWordsAliases ) then
+  begin
+   Self .Inherits
+   .join&gt; ( Self .Implements )
+   .filter&gt; ( .UPisTrue 'extprop:rc:isAcceptableForScripts' )
+   //.filter&gt; ( DROP Self .NeedsWordsAliases /* Тут надо ещё проверку на SV */ )
+   .for&gt; OutWordAlias
+  end // ( Self .NeedsWordsAliases )
+  
+ ; // OutScriptFrameWorkAliases 
+  
+ Self .IsScriptKeywordsPack ?
+  OutScriptFrameWorkAliases
  
  Self .UserCode: 'impl' ()
  OutLn
@@ -4851,6 +4980,8 @@ elem_generator rc
  Inherits .res.cmd
 
  CONST Ext '.rc'
+ 
+ Self .OutUnitHeader
  
  VAR l_Name
  WithGen: .pas ( Self .EffectiveUnitName &gt;&gt;&gt; l_Name )
