@@ -566,3 +566,10 @@ EXPORTS
  CONST Stereotype 'generator'
  @SELF
 ; // gen_forth_structure
+
+: gen_rc.script.pas
+ CONST UID '55B8D2F80145'
+ CONST Name 'rc.script.pas'
+ CONST Stereotype 'generator'
+ @SELF
+; // gen_rc.script.pas
