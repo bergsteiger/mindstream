@@ -1,7 +1,7 @@
 unit l3SimpleDataContainer;
 
 
-{$Include ..\L3\l3Define.inc}
+{$Include l3Define.inc}
 
 interface
 

@@ -1,5 +1,5 @@
 unit l3CacheableBase;
-{$Include ..\L3\l3Define.inc}
+{$Include l3Define.inc}
 
 interface
 

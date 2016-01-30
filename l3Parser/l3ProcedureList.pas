@@ -1,5 +1,5 @@
 unit l3ProcedureList;
-{$Include ..\L3\l3Define.inc}
+{$Include l3Define.inc}
 
 interface
 
