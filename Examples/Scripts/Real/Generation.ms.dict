@@ -4739,13 +4739,26 @@ BOOLEAN elem_func UseNewGen
  >>> Result
 ; // UseNewGen
 
+STRING elem_func PasPathOnly
+ Cached:
+ (
+  Self .GetUP 'intf.pas:PathOnly' >>> Result
+  if ( Result IsNil ) then
+  begin
+   Self .Parent call.me >>> Result
+  end // ( Result IsNil )
+  Result
+ )
+ >>> Result
+; // PathOnly
+
 STRING elem_func PasFinalFileName
  Self .GetUP 'intf.pas:Path' >>> Result
  if ( Result IsNil ) then
  begin
   if ( Self .IsElementProxy ) then
   begin
-   Self .Parent .GetUP 'intf.pas:PathOnly' >>> Result
+   Self .PasPathOnly >>> Result
    if ( Result IsNil ! ) then
    begin
     Result '\MDProcess\' '\common\' string:ReplaceFirst >>> Result
