@@ -208,6 +208,8 @@ MACRO CacheMethod
  axiom:PushSymbol CacheWord
 ; // CacheMethod
 
+WordAlias Cached: CacheMethod
+
 ANY elem_func ElemMemberPrim
   STRING IN aMemberName
   IN aDefaultValue
@@ -474,6 +476,77 @@ ModelElement elem_func Implementor
  Self 'Implementor' .ElemWord >>> Result
 ; // Implementor
 
+STRING elem_func UIDEx
+ Cached:
+ (
+  VAR l_UID
+  Self .UID >>> l_UID
+  RULES
+   ( l_UID IsNil )
+    (
+     VAR l_Name
+     Self .Name >>> l_Name 
+     RULES
+      ( l_Name IsNil )
+       ( Self pop:Word:Name )
+      DEFAULT
+       l_Name 
+     ; // RULES
+    )
+   DEFAULT
+    l_UID
+  ; // RULES
+ )
+ >>> Result  
+; // UIDEx 
+
+STRING FUNCTION ValueToKey
+  ANY IN aValue
+ RULES
+  ( aValue IsString )
+   aValue
+  ( aValue IsArray )
+   ( 
+    aValue 
+    .map> call.me
+    strings:Cat
+   )
+  ( aValue IsBool )
+   ( aValue ToPrintable )
+  ( aValue IsInt )
+   ( aValue ToPrintable )  
+  ( aValue IsIntf )
+   ERROR 'Невозможно построить ключ для интерфейса'
+  ( aValue Is class::TkwCompiledWord )
+   ( aValue .UIDEx )
+  ( aValue Is class::TtfwWord )
+   ( aValue pop:Word:Name )
+  ( aValue IsObj )
+   ERROR 'Невозможно построить ключ для абстрактного объекта'
+  ( aValue IsNil )
+   ''   
+  DEFAULT
+   ( aValue ToPrintable )
+ ; // RULES
+ >>> Result
+; // ValueToKey
+
+: CacheWordEx
+  ANY IN aKey
+  ModelElement IN aCacheWhere
+  TtfwWord IN aWord
+  ^ IN aLambda
+ aCacheWhere 
+ aKey ValueToKey aWord pop:Word:Name Cat 
+ nil DoCache ( aLambda DO )
+; // CacheWordEx
+
+MACRO :Cached:
+ 'Self' Ctx:Parser:PushSymbol
+ axiom:PushSymbol @SELF
+ axiom:PushSymbol CacheWordEx
+; // :Cached:
+
 USES
  LoadOnDemand.ms.dict
 ;
@@ -538,38 +611,3 @@ EXPORTS
  CONST Name 'NodeType_'
  @SELF
 ; // st_NodeType_
-
-: gen_rc.pas
- CONST UID '55B8D28B0157'
- CONST Name 'rc.pas'
- CONST Stereotype 'generator'
- @SELF
-; // gen_rc.pas
-
-: gen_res.cmd.pas
- CONST UID '55B8DD9C0301'
- CONST Name 'res.cmd.pas'
- CONST Stereotype 'generator'
- @SELF
-; // gen_res.cmd.pas
-
-: gen_pascal
- CONST UID '561D336E0099'
- CONST Name 'pascal'
- CONST Stereotype 'generator'
- @SELF
-; // gen_pascal
-
-: gen_forth_structure
- CONST UID '4F368B80039E'
- CONST Name 'forth_structure'
- CONST Stereotype 'generator'
- @SELF
-; // gen_forth_structure
-
-: gen_rc.script.pas
- CONST UID '55B8D2F80145'
- CONST Name 'rc.script.pas'
- CONST Stereotype 'generator'
- @SELF
-; // gen_rc.script.pas

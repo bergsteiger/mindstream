@@ -1,6 +1,10 @@
 UNIT Generation.ms.dict
 
 USES
+ params.ms.dict
+;
+
+USES
  axiom_push.ms.dict
 ;
 
@@ -341,6 +345,10 @@ BOOLEAN elem_func IsTestCase
  Self .IsStereotype st_TestCase >>> Result
 ; // IsTestCase
 
+BOOLEAN elem_func IsVCMForm
+ Self .IsStereotype st_VCMForm >>> Result
+; // IsVCMForm
+
 BOOLEAN elem_func IsSimpleClass
  Cached:
  (
@@ -363,7 +371,7 @@ BOOLEAN elem_func IsSimpleClass
     true
    ( Self .IsStereotype st_GuiControl ) 
     true
-   ( Self .IsStereotype st_VCMForm ) 
+   ( Self .IsVCMForm ) 
     true
    ( Self .IsStereotype st_VCMFinalForm ) 
     true
@@ -443,6 +451,10 @@ ModelElement elem_func MainAncestor
  >>> Result
 ; // MainAncestor
 
+BOOLEAN elem_func IsVCMCustomForm
+ Self .IsStereotype st_VCMCustomForm >>> Result
+; // IsVCMCustomForm
+
 BOOLEAN elem_func IsMixIn
  Cached:
  (
@@ -451,7 +463,7 @@ BOOLEAN elem_func IsMixIn
     true
    ( Self .IsStereotype st_TestCaseMixIn )
     true
-   ( Self .IsStereotype st_VCMCustomForm )
+   ( Self .IsVCMCustomForm )
     RULES
      ( Self .Abstraction at_abstract == )
       RULES
@@ -1886,16 +1898,19 @@ INTEGER FUNCTION .CountIt
 
 BOOLEAN elem_func InheritsFrom
   STRING IN anAncestor
- RULES
-  ( Self .TypeName anAncestor == )
-   true
-  DEFAULT
-   (
-    Self .Inherits 
-    .filter> ( anAncestor call.me )
-    .CountIt > 0
-   )
- ; // RULES
+ anAncestor :Cached:
+ ( 
+  RULES
+   ( Self .TypeName anAncestor == )
+    true
+   DEFAULT
+    (
+     Self .Inherits 
+     .filter> ( anAncestor call.me )
+     .CountIt > 0
+    )
+  ; // RULES
+ ) 
  >>> Result
 ; // InheritsFrom
 
@@ -4792,6 +4807,107 @@ elem_generator pas_dependent
  
 ; // pas_dependent
 
+BOOLEAN elem_func IsOverride
+ Self .IsControlOverride >>> Result
+; // IsOverride
+
+STRING elem_func AttrName
+ RULES
+  ( Self .IsOverride )
+   ( Self .MainAncestor call.me )
+  DEFAULT
+   ( Self .Name )
+ ; // RULES  
+ >>> Result
+; // AttrName
+
+ModelElement elem_func AttrType
+ RULES
+  //( Self .IsOverride )
+  // ( Self .MainAncestor call.me )
+  DEFAULT
+   ( Self .MethodType )
+ ; // RULES  
+ >>> Result
+; // AttrType
+
+ARRAY CompileTime-VAR g_FormControls nil
+
+elem_proc ToDFM
+//	<%C#f_ToDFM()>\
+//	<%G#f_ToDFM()>\
+//      <%R#f_ToDFM()>
+
+//	[{%S%f_NeedPutToDFM()=true}\
+//	[{%f_exists_in_list(FORM_CONTROLS,"%S%f_pas_AttrName()")=false}\
+//	%f_add_to_list(FORM_CONTROLS,"%S%f_pas_AttrName()")\
+//	\n# object %S%f_pas_AttrName(): %S%f_pas_ResultTypeName()\
+//	[{"%SD"!=""&%S{need Caption}!=false}\n#  Caption = '%SD']\
+//	<%C#f_ToDFM()>\
+//	[{%S%f_IsOverride()=true}\
+//	<{}{}{r}%g<%C#f_ToDFM()>>\
+//	]
+//	# end\
+//	]\
+//      ]
+
+ RULES
+  ( Self .IsVCMCustomForm )
+   (
+    Self .Attributes .for> call.me
+    Self .Inherits .for> call.me
+    Self .Implements .for> call.me
+   )
+  ( Self .IsControlPrim )
+   (
+    if ( Self .NeedPutToDFM ) then
+    begin
+     if ( g_FormControls Self .AttrName array:HasText ! ) then
+     begin
+      Self .AttrName array:AddTo g_FormControls
+      Indented: (
+       [ ' object ' Self .AttrName ': ' Self .AttrType .TypeName ] .Out
+       Self .Attributes .for> call.me
+       
+       if ( Self .IsOverride ) then
+       begin
+        Self .Inherits .for> ( .Attributes .for> call.me )
+       end // ( Self .IsOverride )
+       
+       [ ' end' ] .Out
+      ) // Indented:
+     end // ( g_FormControls Self .AttrName array:HasText ! )
+    end // ( Self .NeedPutToDFM )
+   ) 
+ ; // RULES
+
+; // ToDFM
+
+elem_proc BeforeDFMControls
+ RULES
+  ( Self .IsVCMForm )
+   (
+    [ '  Caption = ' cQuote Self .Documentation cQuote ] .Out
+    [ '  Color = $00F9F8FA' ] .Out
+    
+    VAR l_ZoneType
+    Self .GetUP "ZoneType" >>> l_ZoneType
+    if ( l_ZoneType IsNil ! ) then
+     if ( l_ZoneType 'Any' != ) then
+     begin
+      [ '  ZoneType = vcm_zt' l_ZoneType ] .Out
+     end // ( l_ZoneType 'Any' != )
+     
+    [ '  PixelsPerInch = 96' ] .Out
+    [ '  TextHeight = 13' ] .Out
+    [ '  object Entities: TvcmEntities' ] .Out
+    [ '    Left = 24' ] .Out
+    [ '    Top = 24' ] .Out
+    [ '  end' ] .Out
+   )
+ ; // RULES  
+; // BeforeDFMControls
+
 elem_generator dfm
  
  Inherits .pas_dependent
@@ -4799,16 +4915,26 @@ elem_generator dfm
  CONST Ext '.dfm'
 
  BOOLEAN elem_func NeedOwnFilePrim
-  Self .IsStereotype st_VCMCustomForm
+  Self .IsVCMCustomForm
   AND ( Self .Abstraction at_final == )
   >>> Result 
  ; // NeedOwnFilePrim
  
  BOOLEAN elem_func CanCopyToFinalFile
-  false >>> Result
+  Self .GetUP "finished dfm" false ?!= >>> Result
  ; // CanCopyToFinalFile
  
- Self .Name .Out
+ TF g_FormControls (
+  [] >>> g_FormControls
+  [ 'object ' Self .TypeName .CutT ': ' Self .TypeName ] .Out
+  [ '  Left = 204' ] .Out
+  [ '  Top = 118' ] .Out
+  [ '  Width = 320' ] .Out
+  [ '  Height = 240' ] .Out
+  Self .BeforeDFMControls
+  Self .ToDFM
+  [ 'end' ] .Out
+ ) // TF g_FormControls
  
 ; // dfm
  
