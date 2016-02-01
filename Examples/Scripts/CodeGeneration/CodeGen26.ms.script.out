@@ -525,11 +525,9 @@ OBJECT OPERATOR : %%
  OBJECT OPERATOR :: %% : Result
 ; // %%
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CHILDREN
-IMMEDIATE VOID OPERATOR : %DISABLE_CASCADE_DICT
 IMMEDIATE VOID OPERATOR :: NamedInitedVarProducer : %DOCUMENTATION
  ^ OPERATOR :: IN : aValue
 ; // %DOCUMENTATION
-%INCLUDES
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %INHERITS
 OBJECT FUNCTION : %P
  OPERATOR :: IN : %S
@@ -1302,11 +1300,7 @@ TClass class::TkwInc
 TClass class::TkwInclude
 TClass class::TkwIncluded
 TClass class::TkwIncludedPrim
-TClass class::TkwINCLUDES
-TClass class::TkwIncludesInChildren
 TClass class::TkwInlinedWord
-TClass class::TkwInnerIncluded
-TClass class::TkwInnerIncludedInChildren
 TClass class::TkwInteger
 TClass class::TkwIntToStr
 TClass class::TkwInvertROT
@@ -1429,7 +1423,6 @@ TClass class::TkwPopParserTokenLongString
 TClass class::TkwPopParserTokenType
 TClass class::TkwPopScriptEngineAddInitialization
 TClass class::TkwPopScriptEngineAsKeywordFinder
-TClass class::TkwPopScriptEngineCascadeDict
 TClass class::TkwPopScriptEngineCurrentCompilingDictionary
 TClass class::TkwPopScriptEngineDisableForHelp
 TClass class::TkwPopValueTypesAccepts
@@ -1548,6 +1541,7 @@ TClass class::TkwStringFirstChar
 TClass class::TkwStringHasAnyOf
 TClass class::TkwStringInc
 TClass class::TkwStringLen
+TClass class::TkwStringLower
 TClass class::TkwStringPos
 TClass class::TkwStringPosEx
 TClass class::TkwStringReplace
@@ -1559,6 +1553,7 @@ TClass class::TkwStringToChar
 TClass class::TkwStringTrim
 TClass class::TkwStringTrimLeft
 TClass class::TkwStringTrimRight
+TClass class::TkwStringUpper
 TClass class::TkwStrToInt
 TClass class::TkwSub
 TClass class::TkwSWAP
@@ -1920,7 +1915,6 @@ VOID OPERATOR : INC
  ^ OPERATOR :: IN : aWhatToIncrement
 ; // INC
 INCLUDE
-INCLUDES
 STRING FUNCTION : IndentStr
  INTEGER OPERATOR :: IN : anIndent
  STRING FUNCTION :: IndentStr : Result
@@ -2158,6 +2152,7 @@ CHAR pop:String:FirstChar
 BOOLEAN pop:String:HasAnyOf
 STRING pop:String:Inc
 INTEGER pop:String:Len
+STRING pop:String:Lower
 INTEGER pop:String:Pos
 INTEGER pop:String:PosEx
 STRING pop:String:Replace
@@ -2176,6 +2171,7 @@ CHAR pop:String:ToChar
 STRING pop:String:Trim
 STRING pop:String:TrimLeft
 STRING pop:String:TrimRight
+STRING pop:String:Upper
 VOID OPERATOR :: PROCEDURE : Print
  PRINTABLE OPERATOR :: IN : aValue
 ; // Print
@@ -2292,6 +2288,7 @@ STRING string:DeleteDoubleSpaces
 BOOLEAN string:HasAnyOf
 INTEGER string:Len
 VOID string:--Len!
+STRING string:Lower
 INTEGER string:Pos
 INTEGER string:PosEx
 STRING string:Replace
@@ -2304,6 +2301,7 @@ CHAR string:ToChar
 STRING string:Trim
 STRING string:TrimLeft
 STRING string:TrimRight
+STRING string:Upper
 STRING FUNCTION : strings:Cat
  ARRAY OPERATOR :: IN : anArray
  STRING FUNCTION :: strings:Cat : Result
@@ -2522,11 +2520,7 @@ TkwInc
 TkwInclude
 TkwIncluded
 TkwIncludedPrim
-TkwINCLUDES
-TkwIncludesInChildren
 TkwInlinedWord
-TkwInnerIncluded
-TkwInnerIncludedInChildren
 TkwInteger
 TkwIntToStr
 TkwInvertROT
@@ -2649,7 +2643,6 @@ TkwPopParserTokenLongString
 TkwPopParserTokenType
 TkwPopScriptEngineAddInitialization
 TkwPopScriptEngineAsKeywordFinder
-TkwPopScriptEngineCascadeDict
 TkwPopScriptEngineCurrentCompilingDictionary
 TkwPopScriptEngineDisableForHelp
 TkwPopValueTypesAccepts
@@ -2768,6 +2761,7 @@ TkwStringFirstChar
 TkwStringHasAnyOf
 TkwStringInc
 TkwStringLen
+TkwStringLower
 TkwStringPos
 TkwStringPosEx
 TkwStringReplace
@@ -2779,6 +2773,7 @@ TkwStringToChar
 TkwStringTrim
 TkwStringTrimLeft
 TkwStringTrimRight
+TkwStringUpper
 TkwStrToInt
 TkwSub
 TkwSWAP
@@ -3212,7 +3207,6 @@ STRING application:ExeName
 Dictionary: axiom:ScriptEngine
 VOID pop:ScriptEngine:AddInitialization
 TtfwWord pop:ScriptEngine:AsKeywordFinder
-BOOLEAN pop:ScriptEngine:CascadeDict
 TtfwDictionaryEx pop:ScriptEngine:CurrentCompilingDictionary
 VOID pop:ScriptEngine:DisableForHelp
 Dictionary: axiom:DictionaryEx
@@ -3244,7 +3238,6 @@ STRING TtfwValueType:ValueToName
 Dictionary: axiom:TtfwWordModifier
 TtfwWordModifier TtfwWordModifier::tfw_wmAbstract
 TtfwWordModifier TtfwWordModifier::tfw_wmCaller
-TtfwWordModifier TtfwWordModifier::tfw_wmCanBeMerged
 TtfwWordModifier TtfwWordModifier::tfw_wmFinal
 TtfwWordModifier TtfwWordModifier::tfw_wmImmediate
 TtfwWordModifier TtfwWordModifier::tfw_wmInline

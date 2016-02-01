@@ -218,14 +218,24 @@ STRING elem_func FinalFileNamePrim
  cEmptyStr &gt;&gt;&gt; Result 
 ; // FinalFileNamePrim
 
+STRING FUNCTION .CutPrefix
+  STRING IN aString
+  STRING IN aPrefix
+ aString &gt;&gt;&gt; Result 
+ if ( aPrefix Result StartsStr ) then
+ begin
+  Result string:Len aPrefix string:Len - 
+  aPrefix string:Len
+  Result
+  string:Substring &gt;&gt;&gt; Result
+ end // ( aPrefix Result StartsStr )
+; // .CutPrefix
+
 STRING elem_func FinalFileName
  Self .? .FinalFileNamePrim &gt;&gt;&gt; Result
  if ( Result IsNil ! ) then
  begin
-  if ( '\' Result StartsStr ) then
-  begin
-   Result '\' cEmptyStr string:ReplaceFirst &gt;&gt;&gt; Result
-  end // '\' Result StartsStr
+  Result '\' .CutPrefix &gt;&gt;&gt; Result
   [ 'w:' 
   // - это потому, что в пути нету диска, а для ExtractFileName он нужен
   Result ] cPathSep strings:CatSep &gt;&gt;&gt; Result
@@ -236,6 +246,7 @@ STRING CompileTime-VAR g_TempFileName ''
 STRING CompileTime-VAR g_RealFileName ''
 STRING CompileTime-VAR g_FinalFileName ''
 BOOLEAN CompileTime-VAR g_UCRead false
+ModelElement CompileTime-VAR g_CurrentGeneratedElement nil
 
 CONST cGenScriptsFolder 'W:\common\GenScripts\'
 
@@ -274,7 +285,10 @@ elem_proc GenerateWordToFileWith:
        g_TempFileName File:OpenWrite &gt;&gt;&gt; g_OutFile
        TF g_UCRead (
         TF g_NeedOutLn (
-         Self aLambda DO
+         TF g_CurrentGeneratedElement (
+          Self &gt;&gt;&gt; g_CurrentGeneratedElement
+          Self aLambda DO
+         )
         ) // TF g_NeedOutLn
        ) // TF g_UCRead
       ) // TF g_OutFile
@@ -398,45 +412,6 @@ BOOLEAN elem_func IsInterfaces
  &gt;&gt;&gt; Result
 ; // IsInterfaces
 
-BOOLEAN elem_func IsMixIn
- Cached:
- (
-  RULES
-   ( Self .IsStereotype st_Impurity )
-    true
-   ( Self .IsStereotype st_TestCaseMixIn )
-    true
-   ( Self .IsStereotype st_UseCaseControllerImp )
-    ( Self .Abstraction at_abstract == )
-   ( Self .IsStereotype st_ViewAreaControllerImp )
-    ( Self .Abstraction at_abstract == )
-   DEFAULT
-    false 
-  ; // RULES 
- )
- &gt;&gt;&gt; Result
-; // IsMixIn
-
-BOOLEAN elem_func IsPureMixIn
- Self .IsStereotype st_PureMixIn &gt;&gt;&gt; Result
-; // IsPureMixIn
-
-BOOLEAN elem_func IsTypedef
- Self .IsStereotype st_Typedef &gt;&gt;&gt; Result
-; // IsTypedef
-
-BOOLEAN elem_func IsRange
- Self .IsStereotype st_Range &gt;&gt;&gt; Result
-; // IsRange
-
-BOOLEAN elem_func IsEnum
- Self .IsStereotype st_Enum &gt;&gt;&gt; Result
-; // IsEnum
-
-BOOLEAN elem_func IsFunction
- Self .IsStereotype st_Function &gt;&gt;&gt; Result
-; // IsFunction
-
 : .FirstElement
   ARRAY IN anArray
  ModelElement VAR l_Found
@@ -467,6 +442,59 @@ ModelElement elem_func MainAncestor
  )
  &gt;&gt;&gt; Result
 ; // MainAncestor
+
+BOOLEAN elem_func IsMixIn
+ Cached:
+ (
+  RULES
+   ( Self .IsStereotype st_Impurity )
+    true
+   ( Self .IsStereotype st_TestCaseMixIn )
+    true
+   ( Self .IsStereotype st_VCMCustomForm )
+    RULES
+     ( Self .Abstraction at_abstract == )
+      RULES
+       ( Self .MainAncestor IsNil )
+        true
+       ( Self .MainAncestor call.me )
+        true
+       DEFAULT
+        false
+      ; // RULES
+     DEFAULT
+      false
+    ; // RULES
+   ( Self .IsStereotype st_UseCaseControllerImp )
+    ( Self .Abstraction at_abstract == )
+   ( Self .IsStereotype st_ViewAreaControllerImp )
+    ( Self .Abstraction at_abstract == )
+   DEFAULT
+    false 
+  ; // RULES 
+ )
+ &gt;&gt;&gt; Result
+; // IsMixIn
+
+BOOLEAN elem_func IsPureMixIn
+ Self .IsStereotype st_PureMixIn &gt;&gt;&gt; Result
+; // IsPureMixIn
+
+BOOLEAN elem_func IsTypedef
+ Self .IsStereotype st_Typedef &gt;&gt;&gt; Result
+; // IsTypedef
+
+BOOLEAN elem_func IsRange
+ Self .IsStereotype st_Range &gt;&gt;&gt; Result
+; // IsRange
+
+BOOLEAN elem_func IsEnum
+ Self .IsStereotype st_Enum &gt;&gt;&gt; Result
+; // IsEnum
+
+BOOLEAN elem_func IsFunction
+ Self .IsStereotype st_Function &gt;&gt;&gt; Result
+; // IsFunction
 
 BOOLEAN elem_func IsRecord
  RULES
@@ -706,11 +734,7 @@ elem: WithComma:
 
 STRING FUNCTION .CutT
   STRING IN aName
- aName &gt;&gt;&gt; Result
- if ( 'T' Result StartsStr ) then
- begin
-  Result 'T' cEmptyStr string:ReplaceFirst &gt;&gt;&gt; Result
- end // 'T' Result StartsStr
+ aName 'T' .CutPrefix &gt;&gt;&gt; Result
 ; // .CutT
 
 STRING elem_func UnitNamePrim
@@ -741,7 +765,7 @@ STRING elem_func UnitNamePrim
 STRING elem_func UnitName
  GenCached:
  (
-  Self .UnitNamePrim 'NOT_FINISHED_' cEmptyStr string:ReplaceFirst
+  Self .UnitNamePrim 'NOT_FINISHED_' .CutPrefix
  )
  &gt;&gt;&gt; Result
 ; // UnitName
@@ -874,6 +898,84 @@ CONST cUCStart '//#UC START# *'
 CONST cUCEnd '//#UC END# *'
 CONST cUserCodePrefix 'uc:'
 
+PROCEDURE ReadUCFromFile
+  STRING IN aFileName
+  STRING IN aCurrentGeneratedElementPrefix
+ if ( aFileName sysutils:FileExists ) then
+ begin
+  FILE VAR l_In
+  aFileName File:OpenRead &gt;&gt;&gt; l_In
+  TRY
+   VAR l_UCOpened
+   ARRAY VAR l_Accumulated
+   STRING VAR l_Key
+   
+   false &gt;&gt;&gt; l_UCOpened
+   l_In File:ReadLines (
+     IN aStr
+     
+    VAR l_Pos
+    
+    : Has
+     string:Pos &gt;&gt;&gt; l_Pos
+     l_Pos -1 !=
+    ; // Has
+     
+    RULES 
+     ( aStr cUCStart Has )
+      ( 
+       l_UCOpened ! ?ASSURE [ 'Секция кода уже открыта. Файл: ' aFileName ' строка:' aStr ]
+       true &gt;&gt;&gt; l_UCOpened
+       aStr string:Trim &gt;&gt;&gt; aStr
+       [] &gt;&gt;&gt; l_Accumulated
+       
+       aStr &gt;&gt;&gt; l_Key
+       '*' string:SplitTo! l_Key DROP
+       
+      )
+     ( aStr cUCEnd Has )
+      ( 
+       l_UCOpened ?ASSURE [ 'Секция кода не открыта. Файл: ' aFileName ' строка:' aStr  ]
+       false &gt;&gt;&gt; l_UCOpened
+       
+       VAR l_Head
+       if ( l_Pos &gt; 0 ) then
+       begin
+        l_Pos 0 aStr string:Substring &gt;&gt;&gt; l_Head
+        if ( l_Head string:TrimLeft IsNil ! ) then
+        begin
+         l_Head array:AddTo l_Accumulated
+         
+         aStr string:Len l_Pos - 
+         l_Pos 
+         aStr 
+         string:Substring &gt;&gt;&gt; aStr
+        end // ( l_Head IsNil ! )
+       end // ( l_Pos &gt; 0 )
+       
+       aStr string:Trim &gt;&gt;&gt; aStr
+       
+       g_CurrentGenerator -&gt;^ l_Key ^:= l_Accumulated
+       g_CurrentGenerator -&gt;^ ( aCurrentGeneratedElementPrefix l_Key Cat ) ^:= l_Accumulated
+       
+       nil &gt;&gt;&gt; l_Accumulated
+      )
+     DEFAULT
+      (
+       l_UCOpened ? ( 
+        aStr array:AddTo l_Accumulated
+       ) // l_UCOpened ?
+      ) 
+    ; // RULES  
+   ) // l_In File:ReadLines
+  FINALLY
+   nil &gt;&gt;&gt; l_In
+  END // TRY..FINALLY
+ end // ( aFileName sysutils:FileExists )
+; // ReadUCFromFile
+
+CONST cPalka '|'
+
 elem_proc OutUserCode:
   STRING IN aKey
   ^ IN aOutExisting
@@ -885,110 +987,51 @@ elem_proc OutUserCode:
  if ( g_UCRead ! ) then
  begin
   true &gt;&gt;&gt; g_UCRead
-  if ( g_FinalFileName sysutils:FileExists ) then
-  begin
-   STRING VAR l_TempFileName
-   g_TempFileName '.uc.txt' Cat &gt;&gt;&gt; l_TempFileName 
-   STRING VAR l_RealFileName
-   g_RealFileName '.uc.txt' Cat &gt;&gt;&gt; l_RealFileName
-   
-   FILE VAR l_Out
-   l_TempFileName File:OpenWrite &gt;&gt;&gt; l_Out
-   TRY
-    FILE VAR l_In
-    g_FinalFileName File:OpenRead &gt;&gt;&gt; l_In
-    TRY
-     VAR l_UCOpened
-     ARRAY VAR l_Accumulated
-     STRING VAR l_Key
+  STRING VAR l_TempFileName
+  g_TempFileName '.uc.txt' Cat &gt;&gt;&gt; l_TempFileName 
+  STRING VAR l_RealFileName
+  g_RealFileName '.uc.txt' Cat &gt;&gt;&gt; l_RealFileName
+  
+  STRING VAR l_CurrentGeneratedElementPrefix
+  [ cUserCodePrefix g_CurrentGeneratedElement .UID cPalka ] strings:Cat &gt;&gt;&gt; l_CurrentGeneratedElementPrefix
+  
+  l_RealFileName l_CurrentGeneratedElementPrefix ReadUCFromFile
+  g_FinalFileName l_CurrentGeneratedElementPrefix ReadUCFromFile
+
+  FILE VAR l_Out
+  l_TempFileName File:OpenWrite &gt;&gt;&gt; l_Out
+  TRY
+   g_CurrentGenerator MembersIterator 
+   .filter&gt; ( pop:Word:Name l_CurrentGeneratedElementPrefix SWAP StartsStr )
+   .for&gt; (
+     IN anItem
+    STRING VAR l_Key 
+    anItem pop:Word:Name cPalka string:Split &gt;&gt;&gt; l_Key DROP
+    
+    cUCStart l_Out File:WriteStr
+    l_Key l_Out File:WriteWStrLn
+    
+    anItem DO .for&gt; ( l_Out File:WriteWStrLn )
      
-     false &gt;&gt;&gt; l_UCOpened
-     l_In File:ReadLines (
-       IN aStr
-       
-      VAR l_Pos
-      
-      : Has
-       string:Pos &gt;&gt;&gt; l_Pos
-       l_Pos -1 !=
-      ; // Has
-       
-      RULES 
-       ( aStr cUCStart Has )
-        ( 
-         l_UCOpened ! ?ASSURE [ 'Секция кода уже открыта. Файл: ' g_FinalFileName ' строка:' aStr ]
-         true &gt;&gt;&gt; l_UCOpened
-         aStr string:Trim &gt;&gt;&gt; aStr
-         [] &gt;&gt;&gt; l_Accumulated
-         
-         aStr &gt;&gt;&gt; l_Key
-         '*' string:SplitTo! l_Key DROP
-         
-         //l_Key l_Out File:WriteWStrLn 
-         aStr l_Out File:WriteWStrLn 
-        )
-       ( aStr cUCEnd Has )
-        ( 
-         l_UCOpened ?ASSURE [ 'Секция кода не открыта. Файл: ' g_FinalFileName ' строка:' aStr  ]
-         false &gt;&gt;&gt; l_UCOpened
-         
-         VAR l_Head
-         if ( l_Pos &gt; 0 ) then
-         begin
-          l_Pos 0 aStr string:Substring &gt;&gt;&gt; l_Head
-          l_Head string:TrimLeft &gt;&gt;&gt; l_Head
-          if ( l_Head IsNil ! ) then
-          begin
-           l_Head array:AddTo l_Accumulated
-           l_Head l_Out File:WriteWStrLn
-           
-           aStr string:Len l_Pos - 
-           l_Pos 
-           aStr 
-           string:Substring &gt;&gt;&gt; aStr
-          end // ( l_Head IsNil ! )
-         end // ( l_Pos &gt; 0 )
-         
-         aStr string:Trim &gt;&gt;&gt; aStr
-         
-         g_CurrentGenerator -&gt;^ ( cUserCodePrefix l_Key Cat ) ^:= l_Accumulated
-         
-         nil &gt;&gt;&gt; l_Accumulated
-         aStr l_Out File:WriteWStrLn 
-        )
-       DEFAULT
-        (
-         l_UCOpened ? ( 
-          aStr array:AddTo l_Accumulated
-          aStr l_Out File:WriteWStrLn 
-         ) // l_UCOpened ?
-        ) 
-      ; // RULES  
-     ) // l_In File:ReadLines
-    FINALLY
-     nil &gt;&gt;&gt; l_In
-    END // TRY..FINALLY
-    g_CurrentGenerator MembersIterator 
-    .for&gt; (
-      IN anItem
-     anItem pop:Word:Name l_Out File:WriteWStrLn 
-    ) // g_CurrentGenerator MembersIterator
-   FINALLY
-    nil &gt;&gt;&gt; l_Out
-   END // TRY..FINALLY
-   l_RealFileName l_TempFileName CopyChangedFile
-   
-   if ( l_RealFileName FileSize 0 == ) then
-   begin
-    l_RealFileName DeleteFile DROP
-   end // ( l_RealFileName FileSize 0 == )
-   
-  end // ( g_FinalFileName sysutils:FileExists )
+    cUCEnd l_Out File:WriteStr
+    l_Key l_Out File:WriteWStrLn
+     
+   ) // g_CurrentGenerator MembersIterator
+  FINALLY
+   nil &gt;&gt;&gt; l_Out
+  END // TRY..FINALLY
+  l_RealFileName l_TempFileName CopyChangedFile
+  
+  if ( l_RealFileName FileSize 0 == ) then
+  begin
+   l_RealFileName DeleteFile DROP
+  end // ( l_RealFileName FileSize 0 == )
+  
  end //( g_UCRead ! ) 
  
  l_Found ! ? (
   VAR l_Field
-  g_CurrentGenerator %% ( cUserCodePrefix aKey Cat ) &gt;&gt;&gt; l_Field
+  g_CurrentGenerator %% aKey &gt;&gt;&gt; l_Field
   if ( l_Field IsNil ) then
   begin
    aKey aOutNew DO
@@ -1135,19 +1178,47 @@ BOOLEAN elem_func IsProperty
  &gt;&gt;&gt; Result
 ; // IsProperty
 
+BOOLEAN elem_func IsMixInParamType
+ Self .IsStereotype st_ImpurityParamType &gt;&gt;&gt; Result
+; // IsMixInParamType
+
+: g_MixInParamTypes
+ @SELF
+; // g_MixInParamTypes
+  
 STRING elem_func TypeName
  Cached:
  (
-  STRING VAR l_ExtName
-  Self .GetUP 'extprop:pas:TypeName' &gt;&gt;&gt; l_ExtName
   RULES
-   ( l_ExtName IsNil ! )
-    l_ExtName
-   DEFAULT
-    ( Self .Name )
-  ; // RULES
+   ( Self IsString )
+    Self
+   DEFAULT  
+    (
+     STRING VAR l_ExtName
+     Self .GetUP 'extprop:pas:TypeName' &gt;&gt;&gt; l_ExtName
+     RULES
+      ( l_ExtName IsNil ! )
+       l_ExtName
+      DEFAULT
+       ( Self .Name )
+     ; // RULES
+    )
+  ; // RULES  
  )
  &gt;&gt;&gt; Result
+ if ( Self .IsMixInParamType ) then
+ begin
+  VAR l_Field
+  @ g_MixInParamTypes %% ( Self .Name ) &gt;&gt;&gt; l_Field
+  if ( l_Field IsNil ! ) then
+  begin
+   l_Field DO &gt;&gt;&gt; l_Field
+   if ( l_Field IsNil ! ) then
+   begin
+    l_Field call.me &gt;&gt;&gt; Result
+   end // ( l_Field IsNil ! )
+  end // ( l_Field IsNil ! )
+ end // ( Self .IsMixInParamType )
 ; // TypeName
 
 ARRAY FUNCTION .joinWithLambded&gt;
@@ -1316,7 +1387,7 @@ BOOLEAN elem_func IsString
 BOOLEAN elem_func IsUntyped
  Self .Name 'void' == &gt;&gt;&gt; Result
 ; // IsUntyped
-  
+
 BOOLEAN elem_func IsManaged
  Cached:
  (
@@ -1336,7 +1407,7 @@ BOOLEAN elem_func IsManaged
      DEFAULT
       ( Self .MainAncestor call.me )
     ; // RULES  
-   ( Self .IsStereotype st_ImpurityParamType )
+   ( Self .IsMixInParamType )
     true
    ( Self .IsString )
     true
@@ -1440,6 +1511,7 @@ ARRAY FUNCTION array:Copy
 ; // array:Copy
 
 elem: IfDefPrim:
+  IN aElseLambda
   ^ IN aOutLambda
   ^ IN aLambda
  
@@ -1541,6 +1613,13 @@ elem: IfDefPrim:
         false &gt;&gt;&gt; l_NeedOut
         nil &gt;&gt;&gt; g_IfDefArr
         nil &gt;&gt;&gt; g_IfNDefArr
+        
+        if ( aElseLambda IsNil ! ) then
+        begin
+         [ cOpenComment '$Else' l_Body cCloseComment \n ] aOutLambda DO
+         aElseLambda DO
+        end // ( aElseLambda IsNil ! )
+        
         [ 
          cOpenComment '$IfEnd' cCloseComment cSpace '//' 
          l_Body 
@@ -1568,9 +1647,15 @@ elem: IfDefPrim:
 
 elem_proc IfDef:
   ^ IN aLambda
- Self .IfDefPrim: .Out ( aLambda DO ) 
+ Self nil .IfDefPrim: .Out ( aLambda DO ) 
 ; // IfDef:
  
+elem_proc IfDefElse:
+  ^ IN aLambda
+  ^ IN aElseLambda
+ Self aElseLambda .IfDefPrim: .Out ( aLambda DO ) 
+; // IfDefElse:
+
 BOOLEAN FUNCTION .IsValueValid
   IN aValue
  RULES
@@ -1717,7 +1802,7 @@ elem_proc MethodUserCode
      .filter&gt; ( .Target .IsManaged )
      .for&gt; (
        IN aField
-      aField .IfDefPrim: \n
+      aField nil .IfDefPrim: \n
       ( 
        VAR l_FieldName
        
@@ -1772,7 +1857,7 @@ elem: IfDefBrace:
   ^ IN aLambda
  VAR l_WasIf 
  false &gt;&gt;&gt; l_WasIf
- Self .IfDefPrim: ( l_WasIf ! ? ( true &gt;&gt;&gt; l_WasIf \n ) )
+ Self nil .IfDefPrim: ( l_WasIf ! ? ( true &gt;&gt;&gt; l_WasIf \n ) )
  (
   aLambda DO
   l_WasIf ? \n
@@ -1783,7 +1868,7 @@ elem: IfDefBraceLn:
   ^ IN aLambda
  VAR l_WasIf 
  false &gt;&gt;&gt; l_WasIf
- Self .IfDefPrim: ( true &gt;&gt;&gt; l_WasIf \n )
+ Self nil .IfDefPrim: ( true &gt;&gt;&gt; l_WasIf \n )
  (
   aLambda DO
   l_WasIf ? \n
@@ -1853,6 +1938,32 @@ ANY elem_func GetUserCode
        end 
       ] 
      ( 
+      ( 'Init_Str_' Self .Name StartsStr ) 
+      AND ( Self .SpelledFor IsNil ! )
+     )
+      [
+       VAR l_SpelledFor
+       Self .SpelledFor &gt;&gt;&gt; l_SpelledFor
+//	 %{Attr_Inst}%f_pas_Prefix()%f_N(%{Attr_Inst}).Init;\
+//      %C%f_AdditionalInitCode("%{Attr_Inst}%f_pas_Prefix()%f_N(%{Attr_Inst})")\
+       ' ' l_SpelledFor .Parent .GetUP 'extprop:pas:ElementPrefix' l_SpelledFor .Name '.Init;'
+       if ( Self .Speller .IsStereotype st_Message ) then
+       begin
+        \n
+        '!!! Lost Message ini !!!'
+       end // ( Self .Speller .IsStereotype st_Message )
+      ]
+     ( 
+      ( 'Ini_FormFactory_' Self .Name StartsStr ) 
+      AND ( Self .SpelledFor IsNil ! )
+     )
+      [
+       VAR l_SpelledFor
+       Self .SpelledFor &gt;&gt;&gt; l_SpelledFor
+//       fm_%f_cut_prefix(%f_pas_TypeName(%S),T).SetFactory(%f_pas_TypeName(%S).Make);\      
+       ' ' 'fm_' l_SpelledFor .TypeName .CutT '.SetFactory(' l_SpelledFor .TypeName '.Make);'  
+      ]
+     ( 
       ( 'Reg_Type_' Self .Name StartsStr ) 
       AND ( Self .SpelledFor IsNil ! )
      )
@@ -1886,6 +1997,11 @@ ANY elem_func GetUserCode
       '!!! Lost ini !!!'
     ; // RULES  
    )
+  ( 
+   Self .IsFini
+   AND ( Self .IsSummoned )
+  )
+   '!!! Lost fini !!!'
   DEFAULT
    ( Self aKey cEmptyStr .ElemMember )
  ; // RULES
@@ -1971,6 +2087,8 @@ elem_proc UserCode:
    ( Self .IsRecord )
     AsDefault
    ( Self .IsUtilityPack )
+    AsDefault
+   ( Self .IsTarget )
     AsDefault
    ( Self .IsIni )
     AsDefault
@@ -2088,20 +2206,26 @@ ARRAY FUNCTION .OperationsNeededElements
  anArray .mapToTargetAndValueType&gt;
  .joinWithLambded&gt; anArray ( .Parameters .mapToTargetAndValueType&gt; )
  .joinWithLambded&gt; anArray ( .AttributesAndOperations call.me )
+ .joinWithLambded&gt; anArray .CanRaise
+ .joinWithLambded&gt; anArray .CanRaiseInSet
  &gt;&gt;&gt; Result 
 ; // .OperationsNeededElements
 
 elem_iterator NeededElements
- ( Self .Inherits )
- .join&gt; ( Self .Implements )
- .join&gt; ( Self .AttributesAndOperations .OperationsNeededElements )
- 
- if ( Self .IsTypedef ! ) then
- begin
- .join&gt; ( Self .Implemented .OperationsNeededElements )
- .join&gt; ( Self .Overridden .OperationsNeededElements )
- end // Self .IsTypedef !
- 
+ Cached:
+ (
+  ( Self .Inherits )
+  .join&gt; ( Self .Implements )
+  .join&gt; ( Self .AttributesAndOperations .OperationsNeededElements )
+  
+  if ( Self .IsTypedef ! ) then
+  begin
+  .join&gt; ( Self .Implemented .OperationsNeededElements )
+  .join&gt; ( Self .Overridden .OperationsNeededElements )
+  end // Self .IsTypedef !
+  .joinWithLambded&gt; ( Self .Inherits .filter&gt; .IsMixIn ) call.me
+  .joinWithLambded&gt; ( Self .Implements .filter&gt; .IsMixIn ) call.me
+ )
  &gt;&gt;&gt; Result
 ; // NeededElements
 
@@ -2404,7 +2528,7 @@ STRING elem_func InPrefix
      DEFAULT
       ( Self .MainAncestor call.me )
     ; // RULES  
-   ( Self .IsStereotype st_ImpurityParamType )
+   ( Self .IsMixInParamType )
     cConstPrefix
    ( Self .IsString )
     cConstPrefix
@@ -2760,6 +2884,32 @@ elem_proc MethodInterfacePrim
       ' override;'
     END // CASE
    end // g_EnableMethodDirectives
+   
+   VAR l_WasComma
+   false &gt;&gt;&gt; l_WasComma
+   VAR l_WasOut
+   false &gt;&gt;&gt; l_WasOut
+   
+   RULES
+    ( Self .IsSetter )
+     ( Self .CanRaiseInSet )
+    DEFAULT
+     ( Self .CanRaise )
+   ; // RULES
+   .for&gt; (
+     IN anItem
+    if ( l_WasOut ! ) then
+    begin
+     true &gt;&gt;&gt; l_WasOut
+     cSpace cOpenComment ' can raise '
+    end // ( l_WasOut ! )
+    anItem .TypeName .WithComma: l_WasComma NOP 
+   ) // Self .CanRaise .for&gt;
+   if l_WasOut then
+   begin
+    cSpace
+    cCloseComment
+   end // l_WasOut
   ] 
   .Out? ? (
    if g_EnableMethodDocumentation then
@@ -3341,6 +3491,139 @@ elem_proc OutClassInner
   
 ; // OutClassInner
 
+STRING elem_func MainParentName
+// Возвращает имя родительского класса, который не является примесью.
+/*
+	[{}{\
+	%S%f_pas_DefaultAncestor()\
+	}\
+	&lt;{}{%G#f_IsMixIn()!=true}\
+	%f_pas_TypeName(%G)[{%GS=Tag}Class]\
+	&gt;\
+        ]
+*/
+ [
+  Self .Inherits .filterMixIns&gt; .for&gt; (
+    IN aG
+   aG .TypeName
+   aG .IsStereotype st_Tag ? 'Class'
+  )
+ ] strings:Cat
+ &gt;&gt;&gt; Result
+; // MainParentName        
+
+STRING elem_func ImpurityParentName
+// Имя родительского типа примеси.
+ Self .TypeName 'Parent_' Cat &gt;&gt;&gt; Result
+; // ImpurityParentName
+        
+/*
+f _OutIncludePrimPrim
+	\{$Include \
+	%f_IncPath(%S,%1)\
+	\\%f_pas_UnitFileName(%S)\}
+
+f _OutIncludePrim
+//@ %SU_%1U
+	#%f_OutIncludePrimPrim(%S,%1)
+
+f _OutInclude
+	[%1%f_open_ifdef()\n]\
+	%f_OutIncludePrim(%S,%1)\
+	[\n%1%f_close_ifdef()]
+*/
+
+elem_proc OutMixInInclude
+ [ cOpenComment '$Include' ' ' Self .UnitName '.pas' cCloseComment ] .Out
+; // OutMixInInclude
+
+BOOLEAN elem_func HasNonMixInAncestor
+ Cached:
+ (
+  RULES
+   ( Self .Inherits .filterMixIns&gt; .CountIt &gt; 0 )
+    true
+   ( Self .Inherits .filter&gt; call.me .CountIt &gt; 0 )
+    true
+   DEFAULT
+    false
+  ; // RULES   
+ ) 
+ &gt;&gt;&gt; Result
+; // HasNonMixInAncestor
+
+ModelElement elem_func CalcParentAndInclude
+ RULES
+  ( Self .IsMixIn )
+   RULES
+    ( Self .Inherits .filterMixIns&gt; .CountIt 0 != )
+     ( Self .MainClassAncestor )
+    DEFAULT
+     ( Self .ImpurityParentName )
+   ; // RULES  
+  DEFAULT
+   ( Self .MainParentName )
+ ; // RULES 
+ &gt;&gt;&gt; Result
+ 
+ : RefG
+   IN aG
+  if ( Result IsNil ! ) then
+  begin 
+   [ aG .ImpurityParentName ' = ' Result .TypeName ';' ] .Out
+  end // ( Result IsNil ! )
+ ; // RefG
+ 
+ VAR l_WasProlog
+ false &gt;&gt;&gt; l_WasProlog
+ 
+ : DoG
+   IN aG
+  aG .TypeName &gt;&gt;&gt; Result
+  
+  if ( l_WasProlog ! ) then
+  begin
+   true &gt;&gt;&gt; l_WasProlog
+   if ( aG '_l3Items_' .InheritsFrom ) then
+   begin
+   
+    : OutIsProto
+     [ cOpenComment '$Define ' 'l3Items_IsProto' cCloseComment ] .Out
+    ; // OutIsProto
+    
+    RULES
+     ( Self 'Tl3ProtoObject' .InheritsFrom )
+      OutIsProto
+     ( 
+      ( Self 'Tl3DataContainerWithoutIUnknownPrim' .InheritsFrom )
+      AND NOT ( Self 'Tl3DataContainerWithoutIUnknown' .InheritsFrom )
+     ) 
+      OutIsProto
+    ; // RULES
+   end // ( aG '_l3Items_' .InheritsFrom )
+  end // ( l_WasProlog ! )
+  
+  aG .OutMixInInclude
+ ; // DoG
+ 
+ Self .Inherits .filter&gt; .IsMixIn .for&gt; (
+   IN aG
+  if ( Result IsNil ! ) then
+  begin 
+   if ( aG .HasNonMixInAncestor ! ) then
+   begin
+    aG RefG 
+   end // ( aG .HasNonMixInAncestor ! )
+  end // ( Result IsNil ! )
+  aG DoG
+ )
+ Self .Implements .filter&gt; .IsMixIn .for&gt; (
+   IN aG
+  aG RefG 
+  aG DoG
+ )
+; // CalcParentAndInclude
+        
 elem_proc OutClass
 
  if ( Self .UPisTrue "need UC" ) then
@@ -3353,7 +3636,9 @@ elem_proc OutClass
   [ '_' aValue .Name '_' ' = ' aValue .Target .TypeName ';' ] .Out
  )
  
-//	%f_CalcParentAndInclude(%S)\
+ VAR l_Parent
+ Self .CalcParentAndInclude &gt;&gt;&gt; l_Parent
+ 
  if ( Self .UPisTrue "need UC" ) then
  begin
   Self .UserCode: 'cit' ()
@@ -3378,7 +3663,7 @@ elem_proc OutClass
   VAR l_WasComma
   false &gt;&gt;&gt; l_WasComma
   
-  [ Self .MainClassAncestor ] 
+   [ l_Parent ]
   .join&gt; ( 
    Self .ClassImplements 
    .filter&gt; (
@@ -3421,6 +3706,13 @@ elem_proc OutInterfaceBody
 ; // OutInterfaceBody
 
 elem_proc OutInterface
+
+ Self .MixInValues .for&gt; (
+   IN aValue
+  g_MixInParamTypes -&gt;^ ( aValue .Name ) ^:= ( aValue .Target )
+  [ '//' '_' aValue .Name '_' ' = ' aValue .Target .TypeName ';' ] .Out
+ ) // Self .MixInValues .for&gt;
+ 
  [ Self .TypeName ' = interface' Self .MainAncestor .TypeName .With() ] .Out
  Self .OutDocumentation
  
@@ -3433,6 +3725,12 @@ elem_proc OutInterface
  
  Self .OutInterfaceBody
  [ 'end;//' Self .TypeName ] .Out
+ 
+ Self .MixInValues .for&gt; (
+   IN aValue
+  g_MixInParamTypes -&gt;^ ( aValue .Name ) ^:= nil
+ ) // Self .MixInValues .for&gt;
+ 
 ; // OutInterface
 
 elem_proc OutRecord
@@ -3711,6 +4009,8 @@ BOOLEAN elem_func IsType
     false
    ( Self .IsDefine )
     false
+   ( Self .IsMixIn )
+    false
    DEFAULT
     true
   ; // RULES
@@ -3767,42 +4067,45 @@ elem_proc OutConstants
  Self .GetUP 'extprop:pas:ElementPrefix' &gt;&gt;&gt; l_Prefix
  Self .Attributes .for&gt; (
    IN anItem
-  [ 
-   l_Prefix anItem .Name
-
-   if ( anItem .UPisTrue "is define" ! ) then
-   begin
-    VAR l_Type 
-    anItem .Target &gt;&gt;&gt; l_Type
-    l_Type IsNil ! ? ( ': ' l_Type .TypeName )
-   end // ( anItem .UPisTrue "is define" ! )
-
-   BOOLEAN VAR l_NeedSuffix
-   false &gt;&gt;&gt; l_NeedSuffix
-   VAR l_Value
-   anItem .ExtValue &gt;&gt;&gt; l_Value
-   if ( l_Value .IsValueValid ! ) then
-   begin
-    anItem .GetUP 'Value' &gt;&gt;&gt; l_Value
-    true &gt;&gt;&gt; l_NeedSuffix
-   end
-
-   ' = ' l_Value
-
-   if l_NeedSuffix then
-   begin
-    VAR l_Suffix
-    anItem .GetUP "suffix expr" &gt;&gt;&gt; l_Suffix
-    if ( l_Suffix .IsValueValid ) then
+  anItem .IfDef: 
+  ( 
+   [ 
+    l_Prefix anItem .Name
+ 
+    if ( anItem .UPisTrue "is define" ! ) then
     begin
-     cSpace l_Suffix 
-    end // ( l_Suffix .IsValueValid )
-   end // l_NeedSuffix
-
-   ';' 
-  ] .Out? ? (
-   anItem .OutDocumentation
-  ) // ] .Out? ?
+     VAR l_Type 
+     anItem .Target &gt;&gt;&gt; l_Type
+     l_Type IsNil ! ? ( ': ' l_Type .TypeName )
+    end // ( anItem .UPisTrue "is define" ! )
+ 
+    BOOLEAN VAR l_NeedSuffix
+    false &gt;&gt;&gt; l_NeedSuffix
+    VAR l_Value
+    anItem .ExtValue &gt;&gt;&gt; l_Value
+    if ( l_Value .IsValueValid ! ) then
+    begin
+     anItem .GetUP 'Value' &gt;&gt;&gt; l_Value
+     true &gt;&gt;&gt; l_NeedSuffix
+    end
+ 
+    ' = ' l_Value
+ 
+    if l_NeedSuffix then
+    begin
+     VAR l_Suffix
+     anItem .GetUP "suffix expr" &gt;&gt;&gt; l_Suffix
+     if ( l_Suffix .IsValueValid ) then
+     begin
+      cSpace l_Suffix 
+     end // ( l_Suffix .IsValueValid )
+    end // l_NeedSuffix
+ 
+    ';' 
+   ] .Out? ? (
+    anItem .OutDocumentation
+   ) // ] .Out? ?
+  ) // anItem .IfDef: 
  ) // Self .Attributes .for&gt;
 ; // OutConstants
 
@@ -3822,7 +4125,8 @@ PROCEDURE .OutConstantsList
       true &gt;&gt;&gt; l_WasConst
       'const' .Out
      end
-     anItem .IfDef: (
+     anItem .IfDef: 
+     (
       anItem .OutDocumentation
       Indented: ( 
        anItem .OutConstants 
@@ -3979,6 +4283,23 @@ elem_iterator AllInlinedOperations
  &gt;&gt;&gt; Result
 ; // AllInlinedOperations
 
+BOOLEAN elem_func NeedsInstanceR
+ Cached:
+ (
+  RULES
+   ( Self .UPisTrue "needs InstanceR" )
+    true
+   ( Self .Inherits .filter&gt; call.me .CountIt &gt; 0 )
+    true 
+   ( Self .Implements .filter&gt; call.me .CountIt &gt; 0 )
+    true 
+   DEFAULT
+    false
+  ; // RULES
+ )
+ &gt;&gt;&gt; Result
+; // NeedsInstanceR
+
 elem_proc OutClassImplementation
  BOOLEAN VAR l_WasFirst
  false &gt;&gt;&gt; l_WasFirst
@@ -4006,6 +4327,29 @@ elem_proc OutClassImplementation
   ) // TF g_EnableMethodDocumentation
  ) // TF g_EnableAutoEOL 
  Self .AllInlinedOperations .for&gt; .MethodInterfaceForEx: nil .MethodBody
+ 
+ VAR l_WasInstanceR
+ false &gt;&gt;&gt; l_WasInstanceR
+ 
+ Self .Inherits 
+ .join&gt; ( Self .Implements )
+ .filter&gt; .IsMixIn 
+ .for&gt; ( 
+   IN aG
+   
+  if ( l_WasInstanceR ! ) then
+  begin
+   if ( aG .NeedsInstanceR ) then
+   begin
+    true &gt;&gt;&gt; l_WasInstanceR
+    [ 'type _Instance_R_ = ' Self .TypeName ';' ] .Out
+    OutLn
+   end // ( aG .NeedsInstanceR )
+  end // ( l_WasInstanceR ! )
+  
+  aG .OutMixInInclude
+  OutLn
+ ) // .for&gt;
  
  TF g_MethodParentPrefix (
   Self .TypeName &gt;&gt;&gt; g_MethodParentPrefix
@@ -4117,6 +4461,59 @@ elem_iterator FiniOperations
  &gt;&gt;&gt; Result
 ; // FiniOperations
 
+ARRAY CompileTime-VAR g_DeferredInitialization nil
+
+elem_proc OutIniFiniSection
+
+ : OutInitialization
+  if ( g_DeferredInitialization IsNil ) then
+  begin
+   'initialization' .Out
+  end // ( g_DeferredInitialization IsNil )
+  else
+  begin
+   g_DeferredInitialization .Out
+   nil &gt;&gt;&gt; g_DeferredInitialization
+  end // ( g_DeferredInitialization IsNil )
+ ; // OutInitialization
+ 
+ VAR l_WasOut
+ false &gt;&gt;&gt; l_WasOut
+ VAR l_WasInitialization
+ false &gt;&gt;&gt; l_WasInitialization
+ Self .ForChildren&gt; .All (
+  .IniOperations .for&gt; (
+   if ( l_WasOut ! ) then
+   begin
+    true &gt;&gt;&gt; l_WasOut
+    true &gt;&gt;&gt; l_WasInitialization
+    OutInitialization
+   end // ( l_WasOut ! )
+   .OutIniOrFini
+  ) // .IniOperations .for&gt;
+ ) // Self .ForChildren&gt; .All
+ l_WasOut ? OutLn
+ 
+ false &gt;&gt;&gt; l_WasOut
+ Self .ForChildren&gt; .All (
+  .FiniOperations .for&gt; (
+   if ( l_WasOut ! ) then
+   begin
+    true &gt;&gt;&gt; l_WasOut
+    if ( l_WasInitialization ! ) then
+    begin
+     true &gt;&gt;&gt; l_WasInitialization
+     OutInitialization
+     OutLn
+    end // ( l_WasInitialization ! )
+    'finalization' .Out
+   end // ( l_WasOut ! )
+   .OutIniOrFini
+  ) // .FiniOperations .for&gt;
+ ) // Self .ForChildren&gt; .All
+ l_WasOut ? OutLn
+; // OutIniFiniSection
+
 elem_proc OutImplementationSection
  Self .OutDefinitionsSection: .IsForImplementation
  
@@ -4164,31 +4561,7 @@ elem_proc OutImplementationSection
  
  Self .ForChildren&gt; .All .OutImplementation
  
- false &gt;&gt;&gt; l_WasOut
- Self .ForChildren&gt; .All (
-  .IniOperations .for&gt; (
-   if ( l_WasOut ! ) then
-   begin
-    true &gt;&gt;&gt; l_WasOut
-    'initialization' .Out
-   end // ( l_WasOut ! )
-   .OutIniOrFini
-  ) // .IniOperations .for&gt;
- ) // Self .ForChildren&gt; .All
- l_WasOut ? OutLn
- 
- false &gt;&gt;&gt; l_WasOut
- Self .ForChildren&gt; .All (
-  .FiniOperations .for&gt; (
-   if ( l_WasOut ! ) then
-   begin
-    true &gt;&gt;&gt; l_WasOut
-    'finalization' .Out
-   end // ( l_WasOut ! )
-   .OutIniOrFini
-  ) // .FiniOperations .for&gt;
- ) // Self .ForChildren&gt; .All
- l_WasOut ? OutLn
+ Self .OutIniFiniSection
  
 ; // OutImplementationSection
 
@@ -4204,6 +4577,12 @@ STRING elem_func Defines
   end // ( l_Parent IsNil ! )
  end // ( Result IsNil )
 ; // Defines
+
+elem_proc OutUnitHeader
+ [ '// Модуль: "' g_FinalFileName '"' ] .Out
+ [ '// Стереотип: "' Self .Stereotype .Name '"' ] .Out
+ OutLn
+; // OutUnitHeader
 
 elem_proc OutUnit
  TF g_OutedTypes (
@@ -4222,9 +4601,7 @@ elem_proc OutUnit
   Self .OutDocumentation
   OutLn
   
-  [ '// Модуль: "' g_FinalFileName '"' ] .Out
-  [ '// Стереотип: "' Self .Stereotype .Name '"' ] .Out
-  OutLn
+  Self .OutUnitHeader
   
   VAR l_Defines
   Self .Defines &gt;&gt;&gt; l_Defines
@@ -4260,19 +4637,79 @@ elem_proc OutUnit
   
    Self .OutImplementationSection
    
-   if ( Self .IsElementProxy ) then
-   begin
-    Self .UserCode: 'impl_code' ()
-    OutLn
-   end // ( Self .IsElementProxy )
+   RULES
+    ( Self .IsElementProxy )
+     (
+      Self .UserCode: 'impl_code' ()
+      OutLn
+     )
+    ( Self .IsDLL )
+     (
+      'exports' .Out
+      Self .UserCode: 'exports' ( )
+      ';' .Out
+      OutLn
+     )
+   ; // RULES
   ) // Self .IfDef:
   
   'end.' .Out
  ) // TF g_OutedTypes
 ; // OutUnit
 
+STRING elem_func DefineName
+ Cached:
+ (
+  Self .UnitName '.' '_' string:Replace
+ ) 
+ &gt;&gt;&gt; Result
+; // DefineName
+
 elem_proc OutMixIn
- Self .OutUnit
+ TF g_OutedTypes (
+  
+  VAR l_DefineName
+  Self .DefineName &gt;&gt;&gt; l_DefineName
+  
+  [ cOpenComment '$IfNDef ' l_DefineName cCloseComment \n ] .Out
+  
+  Self .OutUnitHeader
+  
+  [ cOpenComment '$Define ' l_DefineName cCloseComment \n ] .Out
+  
+  Self .IfDefElse: 
+  ( 
+   Self .OutInterfaceSection
+  ) 
+  (
+   VAR l_Parent
+   Self .CalcParentAndInclude &gt;&gt;&gt; l_Parent
+   [ Self .TypeName ' = ' l_Parent .TypeName ';' \n ] .Out
+  )
+  // Self .IfDefElse:
+  
+  [ cOpenComment '$Else ' l_DefineName cCloseComment \n ] .Out
+  
+  VAR l_DefineNameImpl
+  [ l_DefineName '_impl' ] &gt;&gt;&gt; l_DefineNameImpl
+  
+  [ cOpenComment '$IfNDef ' l_DefineNameImpl cCloseComment \n ] .Out
+  
+  [ cOpenComment '$Define ' l_DefineNameImpl cCloseComment \n ] .Out
+  
+  TF g_DeferredInitialization (
+   [ cOpenComment '$Else ' l_DefineNameImpl cCloseComment \n ] &gt;&gt;&gt; g_DeferredInitialization
+   
+   Self .IfDef: ( 
+    Self .OutImplementationSection
+   ) // Self .IfDef:
+  )
+  
+  [ cOpenComment '$EndIf ' l_DefineNameImpl cCloseComment \n ] .Out
+  
+  [ cOpenComment '$EndIf ' l_DefineName cCloseComment \n ] .Out
+  
+ ) // TF g_OutedTypes
 ; // OutMixIn
 
 BOOLEAN elem_func UseNewGen
@@ -4396,6 +4833,31 @@ elem_generator res.cmd
  //call.inherited
 ; // res.cmd
 
+BOOLEAN elem_func NeedsWordsAliases
+ Cached:
+ (
+  RULES
+   ( Self .IsScriptKeywordsPack ! )
+    false
+   ( Self .UPisTrue "no class name" )
+    true
+   ( Self .UPisTrue "no_pop" ) 
+    true
+   DEFAULT
+    false 
+  ; // RULES
+ ) 
+ &gt;&gt;&gt; Result
+; // NeedsWordsAliases
+
+STRING elem_func SelfName
+ Self .GetUP 'extprop:rc:SelfName' &gt;&gt;&gt; Result
+ if ( Result IsNil ) then
+ begin
+  Self .TypeName &gt;&gt;&gt; Result
+ end 
+; // SelfName
+
 elem_generator rc.script
  
  Inherits .res.cmd
@@ -4403,17 +4865,108 @@ elem_generator rc.script
  CONST Ext '.rc.script'
 
  BOOLEAN elem_func CanCopyToFinalFile
+  /*{
   RULES
-   (
-    ( Self .UPisTrue "no class name" ! )
-    AND ( Self .UPisTrue "no_pop" ! )
-   )
+   ( Self .NeedsWordsAliases ! )
     true
    DEFAULT
     false
   ; // RULES
-  &gt;&gt;&gt; Result
+  }*/
+  true &gt;&gt;&gt; Result
  ; // CanCopyToFinalFile
+ 
+ Self .OutUnitHeader
+ 
+ VAR l_WasManUses
+ false &gt;&gt;&gt; l_WasManUses
+ 
+ : OutManUses
+  l_WasManUses ! ? (
+   true &gt;&gt;&gt; l_WasManUses
+   OutLn
+   Self .UserCode: 'man_uses' () 
+   OutLn
+  ) // l_WasManUses ! ? 
+ ; // OutManUses
+ 
+ Self .NeedsWordsAliases ?
+  OutManUses
+  
+ : OutScriptFrameWorkAliases
+ 
+  : OutWordAlias
+    IN aG
+    
+   if ( 
+       ( Self .UPisTrue "no class name" ! ) 
+       AND ( aG .SelfName 'SV' != )
+      ) then
+   begin
+    'USES' .Out
+    [ cSpace 'axiom:' aG .SelfName ] .Out
+    ';' .Out
+    OutLn
+   end // ( Self .UPisTrue "no class name" ! )
+   
+   [ '// Класс ' aG .Name ' - ' aG .SelfName ] .Out 
+   
+   Self .Operations
+   .filter&gt; .IsStereotype st_keyword::Operation
+   .for&gt; (
+     IN anOp
+    VAR l_NameForScript 
+    anOp .GetUP "NameForScript" &gt;&gt;&gt; l_NameForScript
+    [ 
+      '//  Операция ' anOp .Name 
+      if ( l_NameForScript IsNil ! ) then
+      begin
+       ' - ' l_NameForScript
+      end // ( l_NameForScript IsNil ! )
+    ] .Out
+    
+    anOp .Speller .GetUP "NameForScript" &gt;&gt;&gt; l_NameForScript
+    [
+     '//  Класс реализующий операцию '
+     anOp .Speller .Name
+     ' - '
+     l_NameForScript
+    ] .Out
+    
+    VAR l_CanonicName
+    [ 
+     'pop:' 
+     aG .SelfName
+     ':' 
+     anOp .Name 
+      'pop_' .CutPrefix
+      [ aG .SelfName string:Lower '_' ] strings:Cat .CutPrefix
+    ] strings:Cat &gt;&gt;&gt; l_CanonicName
+    
+    if ( l_CanonicName l_NameForScript != ) then
+    begin
+     [ 'WordAlias ' l_CanonicName cSpace l_NameForScript ] .Out
+    end // ( l_CanonicName l_NameForScript != )
+    
+   ) // Self .Operations
+   
+   OutLn
+   
+  ; // OutWordAlias
+  
+  if ( Self .NeedsWordsAliases ) then
+  begin
+   Self .Inherits
+   .join&gt; ( Self .Implements )
+   .filter&gt; ( .UPisTrue 'extprop:rc:isAcceptableForScripts' )
+   //.filter&gt; ( DROP Self .NeedsWordsAliases /* Тут надо ещё проверку на SV */ )
+   .for&gt; OutWordAlias
+  end // ( Self .NeedsWordsAliases )
+  
+ ; // OutScriptFrameWorkAliases 
+  
+ Self .IsScriptKeywordsPack ?
+  OutScriptFrameWorkAliases
  
  Self .UserCode: 'impl' ()
  OutLn
@@ -4427,6 +4980,8 @@ elem_generator rc
  Inherits .res.cmd
 
  CONST Ext '.rc'
+ 
+ Self .OutUnitHeader
  
  VAR l_Name
  WithGen: .pas ( Self .EffectiveUnitName &gt;&gt;&gt; l_Name )
