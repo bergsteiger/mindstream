@@ -1,4 +1,19 @@
 {$IfNDef l3DataContainer_imp}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Библиотека "L3"
+// Автор: Люлин А.В.
+// Модуль: "w:/common/components/rtl/Garant/L3/l3DataContainer.imp.pas"
+// Начат: 08.07.2009 22:05
+// Родные Delphi интерфейсы (.pas)
+// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Low Level::L3::l3CoreObjects::l3DataContainer
+//
+//
+// Все права принадлежат ООО НПП "Гарант-Сервис".
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 {$Define l3DataContainer_imp}
  _l3DataContainer_ = {abstract mixin} class(_l3DataContainer_Parent_)
  protected

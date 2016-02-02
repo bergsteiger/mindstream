@@ -6,8 +6,7 @@ uses
   uMain in 'uMain.pas' {Form6},
   TestParser in 'Tests\TestParser.pas',
   uNewParser in 'uNewParser.pas',
-  l3Parser in '..\l3Parser\l3Parser.pas',
-  D4ActiveX in '..\l3Parser\D4ActiveX.pas';
+  l3Parser in '..\l3Parser\l3Parser.pas';
 
 {$R *.res}
 

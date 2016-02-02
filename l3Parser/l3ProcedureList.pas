@@ -20,7 +20,7 @@ type
  _ItemType_ = TProcedure;
  _l3StandardMemTypedList_Parent_ = Tl3SimpleDataContainer;
  {$Define l3Items_IsProto}
- {$Include ..\L3\l3StandardMemTypedList.imp.pas}
+ {$Include l3StandardMemTypedList.imp.pas}
  Tl3ProcedureList = class(_l3StandardMemTypedList_)
   {* Список процедур. }
  end;//Tl3ProcedureList
