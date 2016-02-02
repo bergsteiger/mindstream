@@ -394,7 +394,7 @@ uses
   {$EndIF LINUX}
   {$Else  Delphi6}
   Windows,
-  ActiveX,
+  D4ActiveX,
   {$EndIf Delphi6}
   Classes,
 
@@ -738,6 +738,7 @@ type
    TStatStg = ActiveX.TStatStg;
   {$EndIF LINUX}
   {$Else Delphi6}
+   ActiveX = D4ActiveX;
    IStream = ActiveX.IStream;
    TStatStg = ActiveX.TStatStg;
   {$EndIf Delphi6}
