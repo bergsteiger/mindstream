@@ -4346,7 +4346,14 @@ INTEGER elem_func ConstantsListVisibility
        Self .MainImplements >>> l_MainImplements
        RULES
         ( l_MainImplements IsNil ! )
-         ProtectedAccess
+         (
+          RULES
+           ( Self .UnitProducer l_MainImplements == )
+            ProtectedAccess
+           DEFAULT
+            l_Vis
+          ; // RULES
+         ) 
         DEFAULT
          l_Vis
        ; // RULES
