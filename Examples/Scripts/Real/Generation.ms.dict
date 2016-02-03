@@ -4336,7 +4336,25 @@ PROCEDURE .OutConstantsList
 INTEGER elem_func ConstantsListVisibility
  RULES
   ( Self .IsConstantArray )
-   ( Self .Visibility )
+   (
+    VAR l_Vis 
+    Self .Visibility >>> l_Vis
+    RULES
+     ( l_Vis PublicAccess == )
+      (
+       VAR l_MainImplements
+       Self .MainImplements >>> l_MainImplements
+       RULES
+        ( l_MainImplements IsNil ! )
+         ProtectedAccess
+        DEFAULT
+         l_Vis
+       ; // RULES
+      ) // ( l_Vis PublicAccess == )
+     DEFAULT
+      l_Vis
+    ; // RULES  
+   )
   DEFAULT
    ( Self .Visibility )
  ; // RULES
