@@ -4233,7 +4233,16 @@ elem_proc OutConstants
      Self .Name 
      ': array '
      '['
+     VAR l_MainImplements
+     Self .MainImplements >>> l_MainImplements
+     if ( l_MainImplements IsNil ) then
+     begin
      '0 .. ' Self .Attributes .CountIt
+     end // ( l_MainImplements IsNil )
+     else
+     begin
+      l_MainImplements .TypeName
+     end // ( l_MainImplements IsNil )
      ']'
      ' of ' 
      Self .MainAncestor .TypeName
