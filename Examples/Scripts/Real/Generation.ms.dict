@@ -4225,9 +4225,13 @@ elem_proc OutTypes
  ) .OutChildrenRec
 ; // OutTypes
 
+BOOLEAN elem_func IsConstantArray
+ Self .IsStereotype st_ConstantArray >>> Result
+; // IsConstantArray
+
 elem_proc OutConstants
  RULES
-  ( Self .IsStereotype st_ConstantArray )
+  ( Self .IsConstantArray )
    (
     [ 
      Self .Name 
@@ -4248,7 +4252,7 @@ elem_proc OutConstants
      Self .MainAncestor .TypeName
      ' = ( );' 
     ] .Out
-   ) // ( Self .IsStereotype st_ConstantArray )
+   ) // ( Self .IsConstantArray )
   DEFAULT
    (
     STRING VAR l_Prefix
@@ -4329,19 +4333,29 @@ PROCEDURE .OutConstantsList
   OutLn
 ; // .OutConstantsList
 
+INTEGER elem_func ConstantsListVisibility
+ RULES
+  ( Self .IsConstantArray )
+   ( Self .Visibility )
+  DEFAULT
+   ( Self .Visibility )
+ ; // RULES
+ >>> Result
+; // ConstantsListVisibility
+
 elem_proc OutDefinitionsSection:
   ^ IN aValid
   
  : .Suitable aValid DO ; 
   
  Self .ForChildren> .Suitable (
-  .Constants .filter> ( .Visibility PublicAccess == ) .OutConstantsList
+  .Constants .filter> ( .ConstantsListVisibility PublicAccess == ) .OutConstantsList
  )
 
  Self .OutTypes .Suitable
  
  Self .ForChildren> .Suitable (
-  .Constants .filter> ( .Visibility ProtectedAccess == ) .OutConstantsList
+  .Constants .filter> ( .ConstantsListVisibility ProtectedAccess == ) .OutConstantsList
  )
 
 ; // OutDefinitionsSection:
@@ -4723,7 +4737,7 @@ elem_proc OutImplementationSection
  l_WasOut ? OutLn
  
  Self .ForChildren> .All (
-  .Constants .filter> ( .Visibility PrivateAccess == ) .OutConstantsList
+  .Constants .filter> ( .ConstantsListVisibility PrivateAccess == ) .OutConstantsList
  )
 
  Self .ForChildren> .IsForInterface (
