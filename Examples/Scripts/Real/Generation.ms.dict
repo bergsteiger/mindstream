@@ -4226,50 +4226,67 @@ elem_proc OutTypes
 ; // OutTypes
 
 elem_proc OutConstants
- STRING VAR l_Prefix
- Self .GetUP 'extprop:pas:ElementPrefix' >>> l_Prefix
- Self .Attributes .for> (
-   IN anItem
-  anItem .IfDef: 
-  ( 
-   [ 
-    l_Prefix anItem .Name
- 
-    if ( anItem .UPisTrue "is define" ! ) then
-    begin
-     VAR l_Type 
-     anItem .Target >>> l_Type
-     l_Type IsNil ! ? ( ': ' l_Type .TypeName )
-    end // ( anItem .UPisTrue "is define" ! )
- 
-    BOOLEAN VAR l_NeedSuffix
-    false >>> l_NeedSuffix
-    VAR l_Value
-    anItem .ExtValue >>> l_Value
-    if ( l_Value .IsValueValid ! ) then
-    begin
-     anItem .GetUP 'Value' >>> l_Value
-     true >>> l_NeedSuffix
-    end
- 
-    ' = ' l_Value
- 
-    if l_NeedSuffix then
-    begin
-     VAR l_Suffix
-     anItem .GetUP "suffix expr" >>> l_Suffix
-     if ( l_Suffix .IsValueValid ) then
-     begin
-      cSpace l_Suffix 
-     end // ( l_Suffix .IsValueValid )
-    end // l_NeedSuffix
- 
-    ';' 
-   ] .Out? ? (
-    anItem .OutDocumentation
-   ) // ] .Out? ?
-  ) // anItem .IfDef: 
- ) // Self .Attributes .for>
+ RULES
+  ( Self .IsStereotype st_ConstantArray )
+   (
+    [ 
+     Self .Name 
+     ': array '
+     '['
+     ']'
+     ' of ' 
+     Self .MainAncestor .TypeName
+     ' = ( );' 
+    ] .Out
+   ) // ( Self .IsStereotype st_ConstantArray )
+  DEFAULT
+   (
+    STRING VAR l_Prefix
+    Self .GetUP 'extprop:pas:ElementPrefix' >>> l_Prefix
+    Self .Attributes .for> (
+      IN anItem
+     anItem .IfDef: 
+     ( 
+      [ 
+       l_Prefix anItem .Name
+    
+       if ( anItem .UPisTrue "is define" ! ) then
+       begin
+        VAR l_Type 
+        anItem .Target >>> l_Type
+        l_Type IsNil ! ? ( ': ' l_Type .TypeName )
+       end // ( anItem .UPisTrue "is define" ! )
+    
+       BOOLEAN VAR l_NeedSuffix
+       false >>> l_NeedSuffix
+       VAR l_Value
+       anItem .ExtValue >>> l_Value
+       if ( l_Value .IsValueValid ! ) then
+       begin
+        anItem .GetUP 'Value' >>> l_Value
+        true >>> l_NeedSuffix
+       end
+    
+       ' = ' l_Value
+    
+       if l_NeedSuffix then
+       begin
+        VAR l_Suffix
+        anItem .GetUP "suffix expr" >>> l_Suffix
+        if ( l_Suffix .IsValueValid ) then
+        begin
+         cSpace l_Suffix 
+        end // ( l_Suffix .IsValueValid )
+       end // l_NeedSuffix
+    
+       ';' 
+      ] .Out? ? (
+       anItem .OutDocumentation
+      ) // ] .Out? ?
+     ) // anItem .IfDef: 
+    ) // Self .Attributes .for>
+   ) // DEFAULT 
+ ; // RULES  
 ; // OutConstants
 
 PROCEDURE .OutConstantsList
