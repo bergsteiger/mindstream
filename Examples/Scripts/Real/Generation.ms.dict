@@ -4250,7 +4250,8 @@ elem_proc OutConstants
      ']'
      ' of ' 
      Self .MainAncestor .TypeName
-     ' = ( );' 
+     ' = ('
+     ');' 
     ] .Out
    ) // ( Self .IsConstantArray )
   DEFAULT
@@ -4348,7 +4349,7 @@ INTEGER elem_func ConstantsListVisibility
         ( l_MainImplements IsNil ! )
          (
           RULES
-           ( Self .UnitProducer l_MainImplements == )
+           ( Self .UnitProducer l_MainImplements .UnitProducer == )
             ProtectedAccess
            DEFAULT
             l_Vis
