@@ -845,8 +845,64 @@ STRING elem_func UIDforUserCode
  >>> Result
 ; // UIDforUserCode
 
+BOOLEAN elem_func IsIterator
+ Self .IsStereotype st_Iterator >>> Result
+; // IsIterator
+
+USES
+ axiom:CompiledProcedure
+ axiom:KeyValues
+;
+
+INTERFACE FUNCTION MakeParam
+  STRING IN aName
+  ModelElement IN aType
+ VAR l_Param
+ 
+ KeyValues:Create >>> l_Param
+ 
+ l_Param pop:Word:Box >>> Result
+ 
+ l_Param -> Name := aName
+ if ( aType IsNil ! ) then
+ begin
+  l_Param -> Target := aType
+ end // ( aType IsNil ! )
+ 
+ l_Param pop:Word:DecRef 
+; // MakeParam
+
+WordAlias MakeFunction MakeParam
+WordAlias MakeField MakeParam
+
+USES
+ axiom:WordBox
+;
+
+INTERFACE elem_func ActionParam
+ Cached:
+ (
+  'anAction' Self .Action MakeParam
+ ) >>> Result
+; // ActionParam
+
 ARRAY elem_func MethodParameters
  RULES
+  ( Self .IsIterator )
+   (
+    RULES
+     ( Self .MainAncestor IsNil ! )
+      ( Self .MainAncestor call.me )
+     DEFAULT
+      (
+       [ Self .ActionParam ]
+       .join> (
+        Self .Attributes
+        .filter> ( .IsStereotype st_in::Attribute )
+       ) // .join>
+      ) // DEFAULT
+    ; // RULES
+   ) 
   ( Self .IsMethod )
    ( Self .FirstOperation .Parameters )
   ( Self .IsFunction )
@@ -1152,10 +1208,16 @@ BOOLEAN elem_func IsWriteonlyProperty
 
 CONST opModifyNone 1
 CONST opModifySetter 2
+CONST opModifyIteratorF 3
 
 INTEGER elem_func OpModify
  Self 'OpModify' opModifyNone .ElemMember >>> Result
 ; // OpModify
+
+BOOLEAN elem_func IsIteratorF
+ Self .OpModify opModifyIteratorF ==
+ >>> Result
+; // IsIteratorF
 
 BOOLEAN elem_func IsSetter
  RULES
@@ -1242,36 +1304,6 @@ ARRAY FUNCTION .joinWithLambded>
  anArrayToIterate DO .for> ( IN aChild .join> ( aChild aLambda DO ) )
  >>> Result
 ; // .joinWithLambded>
-
-USES
- axiom:CompiledProcedure
- axiom:KeyValues
-;
-
-INTERFACE FUNCTION MakeParam
-  STRING IN aName
-  ModelElement IN aType
- VAR l_Param
- 
- KeyValues:Create >>> l_Param
- 
- l_Param pop:Word:Box >>> Result
- 
- l_Param -> Name := aName
- if ( aType IsNil ! ) then
- begin
-  l_Param -> Target := aType
- end // ( aType IsNil ! )
- 
- l_Param pop:Word:DecRef 
-; // MakeParam
-
-WordAlias MakeFunction MakeParam
-WordAlias MakeField MakeParam
-
-USES
- axiom:WordBox
-;
 
 INTERFACE elem_func InterfaceLinkField
  Cached:
@@ -1683,6 +1715,60 @@ BOOLEAN FUNCTION .IsValueValid
  >>> Result
 ; // .IsValueValid
 
+BOOLEAN elem_func IsConstructor
+  RULES
+   ( Self .IsStereotype st_ctor::Operation )
+    true
+   ( Self .IsStereotype st_Constructor )
+    true
+   DEFAULT
+    false
+  ; //RULES   
+ >>> Result
+; // IsConstructor
+
+BOOLEAN elem_func IsStaticConstructor
+  RULES
+   ( Self .IsConstructor )
+    RULES
+     ( Self .Parent .IsRecord )
+      true
+     DEFAULT
+      false
+    ; // RULES
+   DEFAULT
+    false
+  ; //RULES   
+ >>> Result
+; // IsStaticConstructor
+
+INTEGER FUNCTION .CountIt
+  ARRAY IN anArray
+ 0 >>> Result
+ anArray .for> ( 
+   IN anItem 
+  Inc Result 
+ ) 
+; // .CountIt
+
+BOOLEAN elem_func NeedFinalize
+ Cached:
+ (
+  RULES
+   ( Self IsNil )
+    false
+   DEFAULT
+    ( 
+     Self .Attributes 
+     .filter> ( .Target .IsManaged )
+     .CountIt > 0
+     OR ( Self .MainAncestor call.me )
+    )
+  ; // RULES  
+ )
+ >>> Result
+; // NeedFinalize
+
 elem_proc MethodUserCode
   STRING IN aKey
   TtfwWord IN aCode
@@ -1841,7 +1927,20 @@ elem_proc MethodUserCode
     ) 
    )
   DEFAULT
-   ( Self l_Key aCode .DefaultUserCode )
+   (
+    if ( Self .IsStaticConstructor ) then
+    begin
+     if ( aKey cImplementationUserCodeSuffix == ) then
+     begin
+      if ( l_Implementor .NeedFinalize ) then
+      begin
+       ' Finalize(Result);' .Out
+      end // ( l_Implementor .NeedFinalize )
+      ' System.FillChar(Result, SizeOf(Result), 0);' .Out
+     end // ( aKey cImplementationUserCodeSuffix == )
+    end // ( Self .IsStaticConstructor )
+    Self l_Key aCode .DefaultUserCode 
+   )
  ; // RULES 
 ; // MethodUserCode
 
@@ -1886,15 +1985,6 @@ elem: IfDefBraceLn:
   l_WasIf ? \n
  ) // Self .IfDefPrim:
 ; // IfDefBraceLn:
-
-INTEGER FUNCTION .CountIt
-  ARRAY IN anArray
- 0 >>> Result
- anArray .for> ( 
-   IN anItem 
-  Inc Result 
- ) 
-; // .CountIt
 
 BOOLEAN elem_func InheritsFrom
   STRING IN anAncestor
@@ -2411,33 +2501,6 @@ BOOLEAN elem_func IsControlOverride
  Self .IsStereotype st_ControlOverride >>> Result
 ; // IsControlOverride
 
-BOOLEAN elem_func IsConstructor
-  RULES
-   ( Self .IsStereotype st_ctor::Operation )
-    true
-   ( Self .IsStereotype st_Constructor )
-    true
-   DEFAULT
-    false
-  ; //RULES   
- >>> Result
-; // IsConstructor
-
-BOOLEAN elem_func IsStaticConstructor
-  RULES
-   ( Self .IsConstructor )
-    RULES
-     ( Self .Parent .IsRecord )
-      true
-     DEFAULT
-      false
-    ; // RULES
-   DEFAULT
-    false
-  ; //RULES   
- >>> Result
-; // IsStaticConstructor
-
 BOOLEAN elem_func IsConstructorsHolder
  ( Self .MainAncestor IsNil ! )
  AND ( Self .Attributes .CountIt <= 0 )
@@ -2449,6 +2512,28 @@ ModelElement elem_func MethodType
  Cached:
  (
   RULES
+   ( Self .IsIterator )
+    (
+     RULES
+      ( Self .MainAncestor IsNil ! )
+       ( Self .MainAncestor call.me )
+      ( Self .UPisTrue "needs result" ) 
+       (
+        VAR l_Type
+        Self .Attributes 
+        .filter> ( .IsStereotype st_result_type::Attribute )
+        .FirstElement >>> l_Type
+        RULES
+         ( l_Type IsNil ! )
+          ( l_Type .Target )
+         DEFAULT
+          'Integer'
+        ; // RULES  
+       ) 
+      DEFAULT
+       nil
+     ; // RULES 
+    )
    ( Self .IsStaticConstructor )
     if ( Self .Parent .IsConstructorsHolder ) then
      ( Self .Parent .MainAncestor )
@@ -2578,6 +2663,17 @@ STRING elem_func MethodName
  Cached:
  (
   RULES
+   ( Self .IsIterator )
+    (
+     RULES
+      ( Self .IsIteratorF )
+       ( Self .Name 'F' Cat )
+      ( Self .MainAncestor IsNil ! )
+       ( Self .MainAncestor call.me )
+      DEFAULT
+       ( Self .Name )
+     ; // RULES
+    ) // ( Self .IsIterator )
    ( Self .IsStaticConstructor )
     if ( Self .Parent .IsConstructorsHolder ) then
      ( [ Self .Parent .MainAncestor .TypeName '_' Self .Name ] strings:Cat )
@@ -2663,6 +2759,11 @@ INTEGER elem_func MethodAbstraction
    opkind_Normal
     ( 
      RULES
+      (
+       ( Self .IsIterator )
+       AND ( Self .MainAncestor IsNil ! )
+      ) 
+       at_override
       ( Self .IsStaticConstructor )
        at_final
       ( Self .Parent .IsUtilityPack )
@@ -2984,6 +3085,43 @@ elem: AsSetterDo:
  ; // RULES
 ; // AsSetterDo:
 
+elem: AsIteratorFDo:
+  ^ IN aLambda
+ RULES
+  ( Self .IsWriteonlyProperty )
+   ( Self aLambda DO )
+  DEFAULT 
+   (
+    VAR l_Setter
+    KeyValues:Create >>> l_Setter
+    TRY
+     l_Setter -> Original := Self
+     l_Setter -> OpModify := opModifyIteratorF
+     l_Setter ->^ cVarUserCodeName ^:= [
+     'var' \n
+     ' Hack : Pointer absolute anAction;'
+     ]
+     l_Setter ->^ cImplementationUserCodeName ^:= [
+     ' try' \n
+     '  '
+     if ( Self .UPisTrue "needs result" ) then
+      'Result := '
+     Self .Name 
+     Self .ParametersList
+     ';'
+     \n
+     ' finally' \n
+     '  l3FreeLocalStub(Hack);' \n
+     ' end;//try..finally'
+     ]
+     l_Setter aLambda DO 
+    FINALLY
+     l_Setter pop:Word:DecRef 
+    END
+   ) // DEFAULT
+ ; // RULES
+; // AsIteratorFDo:
+
 elem_proc MethodInterfaceEx
  IN aPrefix
  IN aOverload
@@ -3016,6 +3154,15 @@ elem_proc MethodInterfaceEx
     CallAsGetter
     CallAsSetter 
    ) // ( Self .IsProperty )
+  ( Self .IsIterator )
+   (
+    NormalCall
+    if ( 'F' Self .Name EndsStr ! )
+     if ( Self .MainAncestor IsNil ) then
+     begin
+      ( Self .AsIteratorFDo: ( aPrefix aOverload aOfObject aBody .MethodInterfacePrim ) )
+     end // ( Self .MainAncestor IsNil )
+   ) // ( Self .IsIterator )
   DEFAULT
    NormalCall 
  ; // RULES
@@ -3225,6 +3372,7 @@ elem_iterator AllOperationsForOverload
        )
       )
       .filter> ( .IsStereotype st_responsibility::Operation ! ) 
+      .filter> ( .IsStereotype st_serviceiterator ! ) 
       .filter> ( .IsIni ! )
       .filter> ( .IsFini ! )
       .join> ( Self .Implemented )
@@ -4344,7 +4492,7 @@ elem_proc OutClassImplementation
  Self .AllInlinedOperations .for> .MethodInterfaceForEx: nil .MethodBody
  
  VAR l_WasInstanceR
- false >>> l_WasInstanceR
+ Self .IsMixIn >>> l_WasInstanceR
  
  Self .Inherits 
  .join> ( Self .Implements )
@@ -4728,14 +4876,19 @@ elem_proc OutMixIn
 ; // OutMixIn
 
 BOOLEAN elem_func UseNewGen
- RULES
-  ( Self .IsElementProxy )
-   true
-  ( Self .UPisTrue "UseNewGen" )
-   true 
-  DEFAULT
-   false
- ; // RULES
+ Cached:
+ (
+  RULES
+   ( Self IsNil )
+    false
+   ( Self .IsElementProxy )
+    true
+   ( Self .UPisTrue "UseNewGen" )
+    true 
+   DEFAULT
+    ( Self .Parent call.me )
+  ; // RULES
+ )
  >>> Result
 ; // UseNewGen
 

@@ -472,6 +472,10 @@ ModelElement elem_func Speller
  Self 'Speller' .ElemWord >>> Result
 ; // Speller
 
+ModelElement elem_func Action
+ Self 'Action' .ElemWord >>> Result
+; // Action
+
 ModelElement elem_func Implementor
  Self 'Implementor' .ElemWord >>> Result
 ; // Implementor
