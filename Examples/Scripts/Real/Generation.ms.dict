@@ -4233,6 +4233,7 @@ elem_proc OutConstants
      Self .Name 
      ': array '
      '['
+     '0 .. ' Self .Attributes .CountIt
      ']'
      ' of ' 
      Self .MainAncestor .TypeName
