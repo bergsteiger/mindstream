@@ -947,9 +947,11 @@ ARRAY FUNCTION .With()>
  >>> Result
 ; // .With()
 
+WordAlias .KeepInStack NOP
+
 ARRAY FUNCTION .With()
   OUTABLE IN aValue
- aValue .With()> NOP >>> Result 
+ aValue .With()> .KeepInStack >>> Result 
 ; // .With()
   
 ARRAY elem_func ParametersList
@@ -957,7 +959,7 @@ ARRAY elem_func ParametersList
   VAR l_WasComma
   false >>> l_WasComma
   Self .MethodParameters .map> .Name .for> ( 
-   .WithComma: l_WasComma NOP
+   .WithComma: l_WasComma .KeepInStack
   )
  ] .With() >>> Result
 ; // ParametersList
@@ -1551,7 +1553,7 @@ ARRAY CompileTime-VAR g_IfNDefArr []
 
 ARRAY FUNCTION array:Copy
   IN anArray
- [ anArray .for> NOP ] >>> Result
+ [ anArray .for> .KeepInStack ] >>> Result
 ; // array:Copy
 
 elem: IfDefPrim:
@@ -3019,7 +3021,7 @@ elem_proc MethodInterfacePrim
      true >>> l_WasOut
      cSpace cOpenComment ' can raise '
     end // ( l_WasOut ! )
-    anItem .TypeName .WithComma: l_WasComma NOP 
+    anItem .TypeName .WithComma: l_WasComma .KeepInStack
    ) // Self .CanRaise .for>
    if l_WasOut then
    begin
@@ -3846,7 +3848,7 @@ elem_proc OutClass
     IN anItem
    anItem .IfDefBraceLn:
    ( 
-    anItem .TypeName .WithComma: l_WasComma NOP
+    anItem .TypeName .WithComma: l_WasComma .KeepInStack
    ) // anItem .IfDefBraceLn:
   ) // .With()>
  ] .Out
