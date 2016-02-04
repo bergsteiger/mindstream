@@ -4261,14 +4261,16 @@ elem_proc OutConstants
      end // ( l_MainImplements IsNil )
      ']'
      ' of ' 
-     Self .MainAncestor .TypeName
+     VAR l_MainAncestor
+     Self .MainAncestor >>> l_MainAncestor
+     l_MainAncestor .TypeName
      ' = ('
      
      VAR l_WasComma
      false >>> l_WasComma
      
      VAR l_IsPointer
-     Self .IsPointer >>> l_IsPointer
+     l_MainAncestor .IsPointer >>> l_IsPointer
      
      Self .Attributes
      .map> .ExtValue
