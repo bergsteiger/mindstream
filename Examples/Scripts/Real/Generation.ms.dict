@@ -4272,7 +4272,13 @@ elem_proc OutConstants
      
      Self .Attributes
      .map> .ExtValue
-     .for> .WithComma: l_WasComma .KeepInStack
+     .for> .WithComma: l_WasComma (
+      .KeepInStack
+      if l_IsPointer then
+      begin
+       '@'
+      end // l_IsPointer
+     )
      
      ');' 
     ] .Out
