@@ -4254,9 +4254,12 @@ elem_proc OutConstants
      Self .MainAncestor .TypeName
      ' = ('
      
+     VAR l_WasComma
+     false >>> l_WasComma
+     
      Self .Attributes
      .map> .ExtValue
-     .for> .KeepInStack
+     .for> .WithComma: l_WasComma .KeepInStack
      
      ');' 
     ] .Out
