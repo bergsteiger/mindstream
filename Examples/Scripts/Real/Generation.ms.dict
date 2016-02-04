@@ -4282,7 +4282,7 @@ elem_proc OutConstants
        Cat
       end // l_IsPointer
      ) 
-     .for> .WithComma: l_WasComma .KeepInStack
+     .for> .WithComma: l_WasComma \n
      
      ');' 
     ] .Out
