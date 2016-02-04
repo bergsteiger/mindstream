@@ -4267,6 +4267,9 @@ elem_proc OutConstants
      VAR l_WasComma
      false >>> l_WasComma
      
+     VAR l_IsPointer
+     Self .IsPointer l_IsPointer
+     
      Self .Attributes
      .map> .ExtValue
      .for> .WithComma: l_WasComma .KeepInStack
