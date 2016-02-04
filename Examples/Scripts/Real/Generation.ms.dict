@@ -4253,6 +4253,11 @@ elem_proc OutConstants
      ' of ' 
      Self .MainAncestor .TypeName
      ' = ('
+     
+     Self .Attributes
+     .map> .ExtValue
+     .for> .KeepInStack
+     
      ');' 
     ] .Out
    ) // ( Self .IsConstantArray )
