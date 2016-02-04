@@ -4273,14 +4273,16 @@ elem_proc OutConstants
      l_MainAncestor .IsPointer >>> l_IsPointer
      
      Self .Attributes
-     .map> .ExtValue
-     .for> .WithComma: l_WasComma (
-      .KeepInStack
+     .map> ( 
+      .ExtValue
       if l_IsPointer then
       begin
        '@'
+       SWAP
+       Cat
       end // l_IsPointer
-     )
+     ) 
+     .for> .WithComma: l_WasComma .KeepInStack
      
      ');' 
     ] .Out
