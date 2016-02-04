@@ -508,13 +508,18 @@ BOOLEAN elem_func IsFunction
  Self .IsStereotype st_Function >>> Result
 ; // IsFunction
 
+BOOLEAN elem_func IsPointer
+ Self .UPisTrue "isPointer"
+ >>> Result
+; // IsPointer
+
 BOOLEAN elem_func IsRecord
  RULES
   ( Self .IsStereotype st_Struct )
    true
   ( Self .IsTypedef )
    RULES
-    ( Self .UPisTrue "isPointer" )
+    ( Self .IsPointer )
      false
     DEFAULT
      ( Self .MainAncestor call.me )
@@ -1396,7 +1401,7 @@ BOOLEAN elem_func IsInterface
     true
    ( Self .IsTypedef )
     RULES
-     ( Self .UPisTrue "isPointer" )
+     ( Self .IsPointer )
       false
      DEFAULT
       ( Self .MainAncestor call.me )
@@ -1418,7 +1423,7 @@ BOOLEAN elem_func IsString
     true
    ( Self .IsTypedef )
     RULES
-     ( Self .UPisTrue "isPointer" )
+     ( Self .IsPointer )
       false
      DEFAULT
       ( Self .MainAncestor call.me )
@@ -1448,7 +1453,7 @@ BOOLEAN elem_func IsManaged
     true
    ( Self .IsTypedef )
     RULES
-     ( Self .UPisTrue "isPointer" )
+     ( Self .IsPointer )
       false
      DEFAULT
       ( Self .MainAncestor call.me )
@@ -1988,6 +1993,11 @@ elem: IfDefBraceLn:
  ) // Self .IfDefPrim:
 ; // IfDefBraceLn:
 
+BOOLEAN elem_func IsClassRef
+ Self .UPisTrue "isClassRef"
+ >>> Result
+; // IsClassRef
+
 BOOLEAN elem_func InheritsFrom
   STRING IN anAncestor
  anAncestor :Cached:
@@ -2092,7 +2102,7 @@ ANY elem_func GetUserCode
          '@tfw_tiString'
         ( l_SpelledFor .IsRecord )
          '@tfw_tiStruct'
-        ( l_SpelledFor .UPisTrue "isClassRef" ) 
+        ( l_SpelledFor .IsClassRef ) 
          '@tfw_tiClassRef'
         DEFAULT
          ( 'TypeInfo(' l_SpelledFor .TypeName ')' )
@@ -2401,7 +2411,7 @@ BOOLEAN elem_func IsClassImplementable
     true
    ( Self .IsTypedef )
     RULES
-     ( Self .UPisTrue "isPointer" )
+     ( Self .IsPointer )
       false
      DEFAULT
       ( Self .MainAncestor call.me )
@@ -2625,7 +2635,7 @@ STRING elem_func InPrefix
     cConstPrefix
    ( Self .IsTypedef )
     RULES
-     ( Self .UPisTrue "isPointer" )
+     ( Self .IsPointer )
       cEmptyStr
      DEFAULT
       ( Self .MainAncestor call.me )
@@ -3188,7 +3198,7 @@ BOOLEAN elem_func CanBeClassAncestor
    true
   ( Self .IsTypedef )
    RULES
-    ( Self .UPisTrue "isPointer" )
+    ( Self .IsPointer )
      false
     DEFAULT
      ( Self .MainAncestor call.me )
@@ -3984,11 +3994,11 @@ elem_proc OutTypedef
    ' = ' 
    if ( Self .UPisTrue "newRTTI" ) then
     'type '
-   if ( Self .UPisTrue "isPointer" ) then
+   if ( Self .IsPointer ) then
     '^'
-   if ( Self .UPisTrue "isClassRef" ) then
+   if ( Self .IsClassRef ) then
     'class of '
-   if ( Self .UPisTrue "isPointer" ! ) then
+   if ( Self .IsPointer ! ) then
    begin
     STRING VAR l_OtherUnit
     l_MainAncestor .EffectiveUnitName >>> l_OtherUnit
@@ -4004,7 +4014,7 @@ elem_proc OutTypedef
       end // l_OurUnit l_OtherUnit !=
      end // Self .TypeName l_MainAncestor .TypeName ==
     end // l_OtherUnit IsNil !
-   end // Self .UPisTrue "isPointer" !
+   end // Self .IsPointer !
    l_MainAncestor .TypeName 
    ';' 
  ] .Out
