@@ -2568,6 +2568,10 @@ BOOLEAN elem_func IsClassImplementable
  >>> Result
 ; // IsClassImplementable
 
+USES
+ GarantModel.ms.dict
+;
+
 elem_iterator Used
  Cached:
  (
