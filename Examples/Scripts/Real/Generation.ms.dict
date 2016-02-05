@@ -4476,6 +4476,10 @@ elem_proc OutTypes
  ) .OutChildrenRec
 ; // OutTypes
 
+BOOLEAN elem_func IsConstants
+ Self .IsStereotype st_Constants >>> Result
+; // IsConstants
+
 BOOLEAN elem_func IsConstantArray
  Self .IsStereotype st_ConstantArray >>> Result
 ; // IsConstantArray
