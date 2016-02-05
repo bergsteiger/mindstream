@@ -1,6 +1,10 @@
 UNIT Generation.ms.dict
 
 USES
+ params.ms.dict
+;
+
+USES
  axiom_push.ms.dict
 ;
 
@@ -29,13 +33,13 @@ CONST cPathSep '\'
 FILE CompileTime-VAR g_OutFile nil
 %REMARK 'Текущий файл'
 
-INTEGER CompileTime-VAR g_Indent 0
+STRING CompileTime-VAR g_Indent ''
 %REMARK 'Текущий отступ'
 
 CONST cIndentChar ' '
 
 STRING FUNCTION IndentStr
- g_Indent cIndentChar char:Dupe &gt;&gt;&gt; Result
+ g_Indent &gt;&gt;&gt; Result
 ; // IndentStr
 
 OBJECT STRING INTEGER ARRAY BOOLEAN TYPE OUTABLE
@@ -124,7 +128,7 @@ PROCEDURE Indented:
   ^ IN aLambda
   
  TF g_Indent (
-  INC g_Indent
+  g_Indent cIndentChar Cat &gt;&gt;&gt; g_Indent
   aLambda DO
  ) 
 ; // Indented:
@@ -258,7 +262,7 @@ elem_proc GenerateWordToFileWith:
  ^ IN aLambda
  
  TF g_Indent (
-  0 &gt;&gt;&gt; g_Indent
+  '' &gt;&gt;&gt; g_Indent
   STRING VAR l_FileName 
   [ Self pop:Word:Name .? Ext ] strings:Cat &gt;&gt;&gt; l_FileName
  
@@ -341,6 +345,10 @@ BOOLEAN elem_func IsTestCase
  Self .IsStereotype st_TestCase &gt;&gt;&gt; Result
 ; // IsTestCase
 
+BOOLEAN elem_func IsVCMForm
+ Self .IsStereotype st_VCMForm &gt;&gt;&gt; Result
+; // IsVCMForm
+
 BOOLEAN elem_func IsSimpleClass
  Cached:
  (
@@ -363,7 +371,7 @@ BOOLEAN elem_func IsSimpleClass
     true
    ( Self .IsStereotype st_GuiControl ) 
     true
-   ( Self .IsStereotype st_VCMForm ) 
+   ( Self .IsVCMForm ) 
     true
    ( Self .IsStereotype st_VCMFinalForm ) 
     true
@@ -435,13 +443,74 @@ BOOLEAN elem_func IsInterfaces
  l_Found
 ; // .SecondElement
 
+ModelElement CompileTime-VAR g_DefaultInterfaceAncestor nil
+
+BOOLEAN elem_func IsTypedef
+ Self .IsStereotype st_Typedef &gt;&gt;&gt; Result
+; // IsTypedef
+
+BOOLEAN elem_func IsPointer
+ Self .UPisTrue "isPointer"
+ &gt;&gt;&gt; Result
+; // IsPointer
+
+ModelElement elem_func MainAncestorPrim
+ Self .Inherits .FirstElement &gt;&gt;&gt; Result
+; // MainAncestorPrim
+
+BOOLEAN elem_func IsInterface
+ Cached:
+ (
+  RULES
+   ( Self .IsStereotype st_ObjStub ) 
+    false
+   ( Self .IsStereotype st_Facet )
+    true
+   ( Self .IsStereotype st_Interface )
+    true
+   ( Self .Name 'object' == )
+    true
+   ( Self .IsTypedef )
+    RULES
+     ( Self .IsPointer )
+      false
+     DEFAULT
+      ( Self .MainAncestorPrim call.me )
+    ; // RULES  
+   DEFAULT
+    false 
+  ; // RULES 
+ )  
+ &gt;&gt;&gt; Result
+; // IsInterface
+
 ModelElement elem_func MainAncestor
  Cached:
  (
-  Self .Inherits .FirstElement
+  RULES
+   ( Self .IsInterface )
+    (
+     RULES
+      (
+       ( g_DefaultInterfaceAncestor IsNil ! )
+       AND ( g_DefaultInterfaceAncestor Self != )
+       AND ( Self .MainAncestorPrim IsNil )
+      )
+       g_DefaultInterfaceAncestor
+      DEFAULT
+       ( Self .MainAncestorPrim )
+     ; // RULES 
+    ) 
+   DEFAULT
+    ( Self .MainAncestorPrim )
+  ; // RULES 
  )
  &gt;&gt;&gt; Result
 ; // MainAncestor
+
+BOOLEAN elem_func IsVCMCustomForm
+ Self .IsStereotype st_VCMCustomForm &gt;&gt;&gt; Result
+; // IsVCMCustomForm
 
 BOOLEAN elem_func IsMixIn
  Cached:
@@ -451,7 +520,7 @@ BOOLEAN elem_func IsMixIn
     true
    ( Self .IsStereotype st_TestCaseMixIn )
     true
-   ( Self .IsStereotype st_VCMCustomForm )
+   ( Self .IsVCMCustomForm )
     RULES
      ( Self .Abstraction at_abstract == )
       RULES
@@ -480,10 +549,6 @@ BOOLEAN elem_func IsPureMixIn
  Self .IsStereotype st_PureMixIn &gt;&gt;&gt; Result
 ; // IsPureMixIn
 
-BOOLEAN elem_func IsTypedef
- Self .IsStereotype st_Typedef &gt;&gt;&gt; Result
-; // IsTypedef
-
 BOOLEAN elem_func IsRange
  Self .IsStereotype st_Range &gt;&gt;&gt; Result
 ; // IsRange
@@ -502,7 +567,7 @@ BOOLEAN elem_func IsRecord
    true
   ( Self .IsTypedef )
    RULES
-    ( Self .UPisTrue "isPointer" )
+    ( Self .IsPointer )
      false
     DEFAULT
      ( Self .MainAncestor call.me )
@@ -833,8 +898,64 @@ STRING elem_func UIDforUserCode
  &gt;&gt;&gt; Result
 ; // UIDforUserCode
 
+BOOLEAN elem_func IsIterator
+ Self .IsStereotype st_Iterator &gt;&gt;&gt; Result
+; // IsIterator
+
+USES
+ axiom:CompiledProcedure
+ axiom:KeyValues
+;
+
+INTERFACE FUNCTION MakeParam
+  STRING IN aName
+  ModelElement IN aType
+ VAR l_Param
+ 
+ KeyValues:Create &gt;&gt;&gt; l_Param
+ 
+ l_Param pop:Word:Box &gt;&gt;&gt; Result
+ 
+ l_Param -&gt; Name := aName
+ if ( aType IsNil ! ) then
+ begin
+  l_Param -&gt; Target := aType
+ end // ( aType IsNil ! )
+ 
+ l_Param pop:Word:DecRef 
+; // MakeParam
+
+WordAlias MakeFunction MakeParam
+WordAlias MakeField MakeParam
+
+USES
+ axiom:WordBox
+;
+
+INTERFACE elem_func ActionParam
+ Cached:
+ (
+  'anAction' Self .Action MakeParam
+ ) &gt;&gt;&gt; Result
+; // ActionParam
+
 ARRAY elem_func MethodParameters
  RULES
+  ( Self .IsIterator )
+   (
+    RULES
+     ( Self .MainAncestor IsNil ! )
+      ( Self .MainAncestor call.me )
+     DEFAULT
+      (
+       [ Self .ActionParam ]
+       .join&gt; (
+        Self .Attributes
+        .filter&gt; ( .IsStereotype st_in::Attribute )
+       ) // .join&gt;
+      ) // DEFAULT
+    ; // RULES
+   ) 
   ( Self .IsMethod )
    ( Self .FirstOperation .Parameters )
   ( Self .IsFunction )
@@ -879,9 +1000,11 @@ ARRAY FUNCTION .With()&gt;
  &gt;&gt;&gt; Result
 ; // .With()
 
+WordAlias .KeepInStack NOP
+
 ARRAY FUNCTION .With()
   OUTABLE IN aValue
- aValue .With()&gt; NOP &gt;&gt;&gt; Result 
+ aValue .With()&gt; .KeepInStack &gt;&gt;&gt; Result 
 ; // .With()
   
 ARRAY elem_func ParametersList
@@ -889,7 +1012,7 @@ ARRAY elem_func ParametersList
   VAR l_WasComma
   false &gt;&gt;&gt; l_WasComma
   Self .MethodParameters .map&gt; .Name .for&gt; ( 
-   .WithComma: l_WasComma NOP
+   .WithComma: l_WasComma .KeepInStack
   )
  ] .With() &gt;&gt;&gt; Result
 ; // ParametersList
@@ -1140,10 +1263,16 @@ BOOLEAN elem_func IsWriteonlyProperty
 
 CONST opModifyNone 1
 CONST opModifySetter 2
+CONST opModifyIteratorF 3
 
 INTEGER elem_func OpModify
  Self 'OpModify' opModifyNone .ElemMember &gt;&gt;&gt; Result
 ; // OpModify
+
+BOOLEAN elem_func IsIteratorF
+ Self .OpModify opModifyIteratorF ==
+ &gt;&gt;&gt; Result
+; // IsIteratorF
 
 BOOLEAN elem_func IsSetter
  RULES
@@ -1231,36 +1360,6 @@ ARRAY FUNCTION .joinWithLambded&gt;
  &gt;&gt;&gt; Result
 ; // .joinWithLambded&gt;
 
-USES
- axiom:CompiledProcedure
- axiom:KeyValues
-;
-
-INTERFACE FUNCTION MakeParam
-  STRING IN aName
-  ModelElement IN aType
- VAR l_Param
- 
- KeyValues:Create &gt;&gt;&gt; l_Param
- 
- l_Param pop:Word:Box &gt;&gt;&gt; Result
- 
- l_Param -&gt; Name := aName
- if ( aType IsNil ! ) then
- begin
-  l_Param -&gt; Target := aType
- end // ( aType IsNil ! )
- 
- l_Param pop:Word:DecRef 
-; // MakeParam
-
-WordAlias MakeFunction MakeParam
-WordAlias MakeField MakeParam
-
-USES
- axiom:WordBox
-;
-
 INTERFACE elem_func InterfaceLinkField
  Cached:
  (
@@ -1280,6 +1379,7 @@ elem_iterator Fields
  Self .Attributes
  .filter&gt; ( .IsProperty ! )
  .filter&gt; ( .IsStereotype st_impurity_value::Attribute ! )
+ .filter&gt; ( .IsStereotype st_switch::Attribute ! )
  .filter&gt; ( .IsStereotype st_impurity_param::Attribute ! )
  .filter&gt; ( .IsStereotype st_static::Attribute ! )
  
@@ -1336,32 +1436,6 @@ elem_iterator GlobalVars
  &gt;&gt;&gt; Result
 ; // GlobalVars
 
-BOOLEAN elem_func IsInterface
- Cached:
- (
-  RULES
-   ( Self .IsStereotype st_ObjStub ) 
-    false
-   ( Self .IsStereotype st_Facet )
-    true
-   ( Self .IsStereotype st_Interface )
-    true
-   ( Self .Name 'object' == )
-    true
-   ( Self .IsTypedef )
-    RULES
-     ( Self .UPisTrue "isPointer" )
-      false
-     DEFAULT
-      ( Self .MainAncestor call.me )
-    ; // RULES  
-   DEFAULT
-    false 
-  ; // RULES 
- )  
- &gt;&gt;&gt; Result
-; // IsInterface
-
 BOOLEAN elem_func IsString
  Cached:
  (
@@ -1372,7 +1446,7 @@ BOOLEAN elem_func IsString
     true
    ( Self .IsTypedef )
     RULES
-     ( Self .UPisTrue "isPointer" )
+     ( Self .IsPointer )
       false
      DEFAULT
       ( Self .MainAncestor call.me )
@@ -1402,7 +1476,7 @@ BOOLEAN elem_func IsManaged
     true
    ( Self .IsTypedef )
     RULES
-     ( Self .UPisTrue "isPointer" )
+     ( Self .IsPointer )
       false
      DEFAULT
       ( Self .MainAncestor call.me )
@@ -1507,7 +1581,7 @@ ARRAY CompileTime-VAR g_IfNDefArr []
 
 ARRAY FUNCTION array:Copy
   IN anArray
- [ anArray .for&gt; NOP ] &gt;&gt;&gt; Result
+ [ anArray .for&gt; .KeepInStack ] &gt;&gt;&gt; Result
 ; // array:Copy
 
 elem: IfDefPrim:
@@ -1671,6 +1745,60 @@ BOOLEAN FUNCTION .IsValueValid
  &gt;&gt;&gt; Result
 ; // .IsValueValid
 
+BOOLEAN elem_func IsConstructor
+  RULES
+   ( Self .IsStereotype st_ctor::Operation )
+    true
+   ( Self .IsStereotype st_Constructor )
+    true
+   DEFAULT
+    false
+  ; //RULES   
+ &gt;&gt;&gt; Result
+; // IsConstructor
+
+BOOLEAN elem_func IsStaticConstructor
+  RULES
+   ( Self .IsConstructor )
+    RULES
+     ( Self .Parent .IsRecord )
+      true
+     DEFAULT
+      false
+    ; // RULES
+   DEFAULT
+    false
+  ; //RULES   
+ &gt;&gt;&gt; Result
+; // IsStaticConstructor
+
+INTEGER FUNCTION .CountIt
+  ARRAY IN anArray
+ 0 &gt;&gt;&gt; Result
+ anArray .for&gt; ( 
+   IN anItem 
+  Inc Result 
+ ) 
+; // .CountIt
+
+BOOLEAN elem_func NeedFinalize
+ Cached:
+ (
+  RULES
+   ( Self IsNil )
+    false
+   DEFAULT
+    ( 
+     Self .Attributes 
+     .filter&gt; ( .Target .IsManaged )
+     .CountIt &gt; 0
+     OR ( Self .MainAncestor call.me )
+    )
+  ; // RULES  
+ )
+ &gt;&gt;&gt; Result
+; // NeedFinalize
+
 elem_proc MethodUserCode
   STRING IN aKey
   TtfwWord IN aCode
@@ -1829,7 +1957,20 @@ elem_proc MethodUserCode
     ) 
    )
   DEFAULT
-   ( Self l_Key aCode .DefaultUserCode )
+   (
+    if ( Self .IsStaticConstructor ) then
+    begin
+     if ( aKey cImplementationUserCodeSuffix == ) then
+     begin
+      if ( l_Implementor .NeedFinalize ) then
+      begin
+       ' Finalize(Result);' .Out
+      end // ( l_Implementor .NeedFinalize )
+      ' System.FillChar(Result, SizeOf(Result), 0);' .Out
+     end // ( aKey cImplementationUserCodeSuffix == )
+    end // ( Self .IsStaticConstructor )
+    Self l_Key aCode .DefaultUserCode 
+   )
  ; // RULES 
 ; // MethodUserCode
 
@@ -1875,27 +2016,26 @@ elem: IfDefBraceLn:
  ) // Self .IfDefPrim:
 ; // IfDefBraceLn:
 
-INTEGER FUNCTION .CountIt
-  ARRAY IN anArray
- 0 &gt;&gt;&gt; Result
- anArray .for&gt; ( 
-   IN anItem 
-  Inc Result 
- ) 
-; // .CountIt
+BOOLEAN elem_func IsClassRef
+ Self .UPisTrue "isClassRef"
+ &gt;&gt;&gt; Result
+; // IsClassRef
 
 BOOLEAN elem_func InheritsFrom
   STRING IN anAncestor
- RULES
-  ( Self .TypeName anAncestor == )
-   true
-  DEFAULT
-   (
-    Self .Inherits 
-    .filter&gt; ( anAncestor call.me )
-    .CountIt &gt; 0
-   )
- ; // RULES
+ anAncestor :Cached:
+ ( 
+  RULES
+   ( Self .TypeName anAncestor == )
+    true
+   DEFAULT
+    (
+     Self .Inherits 
+     .filter&gt; ( anAncestor call.me )
+     .CountIt &gt; 0
+    )
+  ; // RULES
+ ) 
  &gt;&gt;&gt; Result
 ; // InheritsFrom
 
@@ -1985,7 +2125,7 @@ ANY elem_func GetUserCode
          '@tfw_tiString'
         ( l_SpelledFor .IsRecord )
          '@tfw_tiStruct'
-        ( l_SpelledFor .UPisTrue "isClassRef" ) 
+        ( l_SpelledFor .IsClassRef ) 
          '@tfw_tiClassRef'
         DEFAULT
          ( 'TypeInfo(' l_SpelledFor .TypeName ')' )
@@ -2007,6 +2147,110 @@ ANY elem_func GetUserCode
  ; // RULES
  &gt;&gt;&gt; Result
 ; // GetUserCode
+
+BOOLEAN elem_func IsControlPrim
+ Self .IsStereotype st_ControlPrim &gt;&gt;&gt; Result
+; // IsControlPrim
+
+BOOLEAN elem_func IsControlOverride
+ Self .IsStereotype st_ControlOverride &gt;&gt;&gt; Result
+; // IsControlOverride
+
+BOOLEAN elem_func IsConstructorsHolder
+ ( Self .MainAncestor IsNil ! )
+ AND ( Self .Attributes .CountIt &lt;= 0 )
+ AND ( Self .Operations .filter&gt; ( .IsConstructor ! ) .CountIt &lt;= 0 )
+ &gt;&gt;&gt; Result
+; // IsConstructorsHolder
+
+ModelElement elem_func MainImplements
+ Cached:
+ (
+  Self .Implements .FirstElement
+ )
+ &gt;&gt;&gt; Result
+; // MainImplements
+
+ModelElement elem_func MethodType
+ Cached:
+ (
+  RULES
+   ( Self .IsIterator )
+    (
+     RULES
+      ( Self .MainAncestor IsNil ! )
+       ( Self .MainAncestor call.me )
+      ( Self .UPisTrue "needs result" ) 
+       (
+        VAR l_Type
+        Self .Attributes 
+        .filter&gt; ( .IsStereotype st_result_type::Attribute )
+        .FirstElement &gt;&gt;&gt; l_Type
+        RULES
+         ( l_Type IsNil ! )
+          ( l_Type .Target )
+         DEFAULT
+          'Integer'
+        ; // RULES  
+       ) 
+      DEFAULT
+       nil
+     ; // RULES 
+    )
+   ( Self .IsStaticConstructor )
+    if ( Self .Parent .IsConstructorsHolder ) then
+     ( Self .Parent .MainAncestor )
+    else
+     ( Self .Parent )
+   ( Self .IsControlOverride )
+    ( Self .MainAncestor call.me ) 
+   ( Self .IsControlPrim )
+    ( Self .MainAncestor ) 
+   ( Self .IsStereotype st_Area )
+    ( Self .MainAncestor )
+   ( Self .IsMethod )
+    ( Self .FirstOperation .Target )
+   ( Self .IsFunction )
+    ( Self .FirstOperation .Target )
+   DEFAULT 
+    ( Self .Target )
+  ; // RULES
+  VAR l_Type
+  &gt;&gt;&gt; l_Type
+  RULES 
+   ( l_Type IsNil )
+   begin
+    RULES
+     ( Self .IsStereotype st_factory::Operation )
+      ( Self .Parent .MainImplements )
+     ( Self .IsStereotype st_Factory )
+      ( Self .MainImplements )
+     DEFAULT
+      l_Type
+    ; // RULES
+   end // ( l_Type IsNil )
+   DEFAULT
+    l_Type
+  ; // RULES
+  &gt;&gt;&gt; l_Type
+  RULES 
+   ( l_Type IsNil )
+   begin
+    RULES
+     ( Self .IsStereotype st_factory::Operation )
+      ( 'BadFactoryType' )
+     ( Self .IsStereotype st_Factory )
+      ( Self .Parent .MainImplements )
+     DEFAULT
+      l_Type
+    ; // RULES
+   end // ( l_Type IsNil )
+   DEFAULT
+    l_Type
+  ; // RULES
+ )
+ &gt;&gt;&gt; Result
+; // MethodType
 
 elem_proc UserCode:
  ^ IN aSuffix
@@ -2064,7 +2308,19 @@ elem_proc UserCode:
           Self .ParametersList ';' 
          ] .Out
          'try' .Out
-         ' Result := l_Inst;' .Out
+         [
+          ' Result := '
+          
+          if (
+              ( Self .MethodType .IsMixInParamType )
+              AND ( Self .Parent .IsMixIn )
+             ) then
+           '_Instance_R_(l_Inst)'
+          else    
+           'l_Inst' 
+          
+          ';' 
+         ] .Out
          'finally' .Out
          ' l_Inst.Free;' .Out
          'end;//try..finally' .Out
@@ -2294,7 +2550,7 @@ BOOLEAN elem_func IsClassImplementable
     true
    ( Self .IsTypedef )
     RULES
-     ( Self .UPisTrue "isPointer" )
+     ( Self .IsPointer )
       false
      DEFAULT
       ( Self .MainAncestor call.me )
@@ -2337,21 +2593,17 @@ elem_iterator ImplUses
  begin
   .join&gt; ( Self .NeededElementsTotal )
  end // Self .IsForImplementation
- .join&gt; ( Self .UsedTotal ) 
+ .join&gt; ( Self .UsedTotal )
+ if ( Self .Name 'l3IID' == ) then
+ begin
+  .join&gt; [ 'Windows' 'SysUtils' ]
+ end // ( Self .Name 'l3IID' == )
  &gt;&gt;&gt; Result
 ; // ImplUses
 
 BOOLEAN elem_func IsClass
  Self .IsSimpleClass &gt;&gt;&gt; Result
 ; // IsClass
-
-ModelElement elem_func MainImplements
- Cached:
- (
-  Self .Implements .FirstElement
- )
- &gt;&gt;&gt; Result
-; // MainImplements
 
 ModelElement elem_func FirstAttribute
  Cached:
@@ -2388,107 +2640,6 @@ elem_proc OutDocumentation
  end // l_Doc IsNil !
 ; // OutDocumentation
 
-BOOLEAN elem_func IsControlPrim
- Self .IsStereotype st_ControlPrim &gt;&gt;&gt; Result
-; // IsControlPrim
-
-BOOLEAN elem_func IsControlOverride
- Self .IsStereotype st_ControlOverride &gt;&gt;&gt; Result
-; // IsControlOverride
-
-BOOLEAN elem_func IsConstructor
-  RULES
-   ( Self .IsStereotype st_ctor::Operation )
-    true
-   ( Self .IsStereotype st_Constructor )
-    true
-   DEFAULT
-    false
-  ; //RULES   
- &gt;&gt;&gt; Result
-; // IsConstructor
-
-BOOLEAN elem_func IsStaticConstructor
-  RULES
-   ( Self .IsConstructor )
-    RULES
-     ( Self .Parent .IsRecord )
-      true
-     DEFAULT
-      false
-    ; // RULES
-   DEFAULT
-    false
-  ; //RULES   
- &gt;&gt;&gt; Result
-; // IsStaticConstructor
-
-BOOLEAN elem_func IsConstructorsHolder
- ( Self .MainAncestor IsNil ! )
- AND ( Self .Attributes .CountIt &lt;= 0 )
- AND ( Self .Operations .filter&gt; ( .IsConstructor ! ) .CountIt &lt;= 0 )
- &gt;&gt;&gt; Result
-; // IsConstructorsHolder
-
-ModelElement elem_func MethodType
- Cached:
- (
-  RULES
-   ( Self .IsStaticConstructor )
-    if ( Self .Parent .IsConstructorsHolder ) then
-     ( Self .Parent .MainAncestor )
-    else
-     ( Self .Parent )
-   ( Self .IsControlOverride )
-    ( Self .MainAncestor call.me ) 
-   ( Self .IsControlPrim )
-    ( Self .MainAncestor ) 
-   ( Self .IsStereotype st_Area )
-    ( Self .MainAncestor )
-   ( Self .IsMethod )
-    ( Self .FirstOperation .Target )
-   ( Self .IsFunction )
-    ( Self .FirstOperation .Target )
-   DEFAULT 
-    ( Self .Target )
-  ; // RULES
-  VAR l_Type
-  &gt;&gt;&gt; l_Type
-  RULES 
-   ( l_Type IsNil )
-   begin
-    RULES
-     ( Self .IsStereotype st_factory::Operation )
-      ( Self .Parent .MainImplements )
-     ( Self .IsStereotype st_Factory )
-      ( Self .MainImplements )
-     DEFAULT
-      l_Type
-    ; // RULES
-   end // ( l_Type IsNil )
-   DEFAULT
-    l_Type
-  ; // RULES
-  &gt;&gt;&gt; l_Type
-  RULES 
-   ( l_Type IsNil )
-   begin
-    RULES
-     ( Self .IsStereotype st_factory::Operation )
-      ( 'BadFactoryType' )
-     ( Self .IsStereotype st_Factory )
-      ( Self .Parent .MainImplements )
-     DEFAULT
-      l_Type
-    ; // RULES
-   end // ( l_Type IsNil )
-   DEFAULT
-    l_Type
-  ; // RULES
- )
- &gt;&gt;&gt; Result
-; // MethodType
-
 STRING elem_func MethodCallingConventions
  RULES
   DEFAULT
@@ -2523,7 +2674,7 @@ STRING elem_func InPrefix
     cConstPrefix
    ( Self .IsTypedef )
     RULES
-     ( Self .UPisTrue "isPointer" )
+     ( Self .IsPointer )
       cEmptyStr
      DEFAULT
       ( Self .MainAncestor call.me )
@@ -2559,15 +2710,46 @@ STRING elem_func ParamPrefix
  &gt;&gt;&gt; Result
 ; // ParamPrefix
 
+STRING FUNCTION .ToBorland
+  STRING IN aValue
+ '' &gt;&gt;&gt; Result
+ aValue '_' string:Split:for&gt; ( 
+   IN aSubstr
+/*{  if ( aSubstr IsNil ) then 
+  begin
+   Result '_' Cat &gt;&gt;&gt; Result
+  end 
+  else}*/
+  begin
+   Result aSubstr Cat &gt;&gt;&gt; Result
+  end 
+ )
+; // .ToBorland
+
 STRING elem_func MethodName
  Cached:
  (
   RULES
+   ( Self .IsIterator )
+    (
+     RULES
+      ( Self .IsIteratorF )
+       ( Self .Name 'F' Cat )
+      ( Self .MainAncestor IsNil ! )
+       ( Self .MainAncestor call.me )
+      DEFAULT
+       ( Self .Name )
+     ; // RULES
+    ) // ( Self .IsIterator )
    ( Self .IsStaticConstructor )
     if ( Self .Parent .IsConstructorsHolder ) then
      ( [ Self .Parent .MainAncestor .TypeName '_' Self .Name ] strings:Cat )
     else
      ( [ Self .Parent .TypeName '_' Self .Name ] strings:Cat )
+   ( Self .UPisTrue 'extprop:isGlobal' )
+    ( Self .Name .ToBorland )
+   ( '__' Self .Name StartsStr ) 
+    ( Self .Name '__' '_' string:ReplaceFirst )
    DEFAULT
     ( Self .Name )
   ; // RULES 
@@ -2576,7 +2758,15 @@ STRING elem_func MethodName
 ; // MethodName
 
 BOOLEAN elem_func IsDestructor
- Self .MethodName 'Destroy' == &gt;&gt;&gt; Result
+ RULES
+  ( Self .MethodName 'Destroy' == )
+   true
+  ( Self .MethodName 'destroy' == )
+   true
+  DEFAULT
+   false 
+ ; // RULES 
+ &gt;&gt;&gt; Result
 ; // IsDestructor
 
 BOOLEAN elem_func IsStaticMethod
@@ -2648,6 +2838,11 @@ INTEGER elem_func MethodAbstraction
    opkind_Normal
     ( 
      RULES
+      (
+       ( Self .IsIterator )
+       AND ( Self .MainAncestor IsNil ! )
+      ) 
+       at_override
       ( Self .IsStaticConstructor )
        at_final
       ( Self .Parent .IsUtilityPack )
@@ -2743,10 +2938,13 @@ elem_proc MethodInterfacePrim
  IN aOfObject
  IN aBody
  
- : OutOverloadAndCallingConventions
+ : OutOverload
   aOverload DO 
+ ; // OutOverload
+ 
+ : OutCallingConventions
   Self .MethodCallingConventions
- ; // OutOverloadAndCallingConventions
+ ; // OutCallingConventions
 
  : OutReintroduce
   RULES
@@ -2818,38 +3016,58 @@ elem_proc MethodInterfacePrim
    ; // RULES  
    .for&gt; (
      IN aParam
-    if ( l_WasParam ) then
-    begin
-     ';' \n cSpace
-    end 
-    else
-    begin
+    if ( l_WasParam ! ) then
      '('
+    
+    VAR l_WasIf 
+    false &gt;&gt;&gt; l_WasIf
+    
+    elem: IfDefBraceLn:
+      ^ IN aLambda
+     Self nil .IfDefPrim: ( 
+      \n 
+      l_WasIf ! ? SWAP
+      true &gt;&gt;&gt; l_WasIf
+     )
+     (
+      aLambda DO
+      l_WasIf ? \n
+     ) // Self .IfDefPrim:
+    ; // IfDefBraceLn:
+    
+    aParam .IfDefBraceLn:
+    (
+     if ( l_WasParam ) then
+     begin
+      ';' \n cSpace
+     end 
+     
      true &gt;&gt;&gt; l_WasParam
-    end  
-    aParam .ParamPrefix
-    aParam .Name
-    
-    VAR l_Type 
-    aParam .Target &gt;&gt;&gt; l_Type
-    if ( l_Type IsNil ! ) then
-    begin
-     ': ' l_Type .TypeName
-    end // ( l_Type IsNil ! )
-    
-    VAR l_Value
-    aParam .ExtValue &gt;&gt;&gt; l_Value
-    if ( l_Value .IsValueValid ) then
-    begin
-     ' = ' l_Value
-    end // ( l_Value .IsValueValid )
-    
-    VAR l_Doc
-    aParam .FineDocumentation &gt;&gt;&gt; l_Doc
-    if ( l_Doc IsNil ! ) then
-    begin
-     cSpace l_Doc
-    end // ( l_Doc IsNil ! )
+     
+     aParam .ParamPrefix
+     aParam .Name
+     
+     VAR l_Type 
+     aParam .Target &gt;&gt;&gt; l_Type
+     if ( l_Type IsNil ! ) then
+     begin
+      ': ' l_Type .TypeName
+     end // ( l_Type IsNil ! )
+     
+     VAR l_Value
+     aParam .ExtValue &gt;&gt;&gt; l_Value
+     if ( l_Value .IsValueValid ) then
+     begin
+      ' = ' l_Value
+     end // ( l_Value .IsValueValid )
+     
+     VAR l_Doc
+     aParam .FineDocumentation &gt;&gt;&gt; l_Doc
+     if ( l_Doc IsNil ! ) then
+     begin
+      \n cSpace l_Doc
+     end // ( l_Doc IsNil ! )
+    ) // aParam .IfDefBraceLn:
    ) // Self .MethodParameters .for&gt;
  
    if ( l_WasParam ) then
@@ -2868,17 +3086,20 @@ elem_proc MethodInterfacePrim
     Self .MethodAbstraction CASE
      at_final (
       OutReintroduce
-      OutOverloadAndCallingConventions
+      OutOverload
+      OutCallingConventions
      ) 
      at_virtual ( 
       OutReintroduce
-      OutOverloadAndCallingConventions 
-      ' virtual;' 
+      OutOverload
+      ' virtual;'
+      OutCallingConventions 
      )
      at_abstract ( 
       OutReintroduce
-      OutOverloadAndCallingConventions 
+      OutOverload
       ' virtual; abstract;' 
+      OutCallingConventions
      )
      at_override 
       ' override;'
@@ -2903,7 +3124,7 @@ elem_proc MethodInterfacePrim
      true &gt;&gt;&gt; l_WasOut
      cSpace cOpenComment ' can raise '
     end // ( l_WasOut ! )
-    anItem .TypeName .WithComma: l_WasComma NOP 
+    anItem .TypeName .WithComma: l_WasComma .KeepInStack
    ) // Self .CanRaise .for&gt;
    if l_WasOut then
    begin
@@ -2969,6 +3190,43 @@ elem: AsSetterDo:
  ; // RULES
 ; // AsSetterDo:
 
+elem: AsIteratorFDo:
+  ^ IN aLambda
+ RULES
+  ( Self .IsWriteonlyProperty )
+   ( Self aLambda DO )
+  DEFAULT 
+   (
+    VAR l_Setter
+    KeyValues:Create &gt;&gt;&gt; l_Setter
+    TRY
+     l_Setter -&gt; Original := Self
+     l_Setter -&gt; OpModify := opModifyIteratorF
+     l_Setter -&gt;^ cVarUserCodeName ^:= [
+     'var' \n
+     ' Hack : Pointer absolute anAction;'
+     ]
+     l_Setter -&gt;^ cImplementationUserCodeName ^:= [
+     ' try' \n
+     '  '
+     if ( Self .UPisTrue "needs result" ) then
+      'Result := '
+     Self .Name 
+     Self .ParametersList
+     ';'
+     \n
+     ' finally' \n
+     '  l3FreeLocalStub(Hack);' \n
+     ' end;//try..finally'
+     ]
+     l_Setter aLambda DO 
+    FINALLY
+     l_Setter pop:Word:DecRef 
+    END
+   ) // DEFAULT
+ ; // RULES
+; // AsIteratorFDo:
+
 elem_proc MethodInterfaceEx
  IN aPrefix
  IN aOverload
@@ -3001,6 +3259,15 @@ elem_proc MethodInterfaceEx
     CallAsGetter
     CallAsSetter 
    ) // ( Self .IsProperty )
+  ( Self .IsIterator )
+   (
+    NormalCall
+    if ( 'F' Self .Name EndsStr ! )
+     if ( Self .MainAncestor IsNil ) then
+     begin
+      ( Self .AsIteratorFDo: ( aPrefix aOverload aOfObject aBody .MethodInterfacePrim ) )
+     end // ( Self .MainAncestor IsNil )
+   ) // ( Self .IsIterator )
   DEFAULT
    NormalCall 
  ; // RULES
@@ -3024,7 +3291,7 @@ BOOLEAN elem_func CanBeClassAncestor
    true
   ( Self .IsTypedef )
    RULES
-    ( Self .UPisTrue "isPointer" )
+    ( Self .IsPointer )
      false
     DEFAULT
      ( Self .MainAncestor call.me )
@@ -3088,7 +3355,7 @@ elem_iterator Properties
  (
   Self .Attributes 
   .filter&gt; .IsProperty
-  .filter&gt; ( .IsControlOverride ! )
+  .filter&gt; ( .IsControlOverride ! )  
  )
  &gt;&gt;&gt; Result
 ; // Properties
@@ -3210,6 +3477,7 @@ elem_iterator AllOperationsForOverload
        )
       )
       .filter&gt; ( .IsStereotype st_responsibility::Operation ! ) 
+      .filter&gt; ( .IsStereotype st_serviceiterator ! ) 
       .filter&gt; ( .IsIni ! )
       .filter&gt; ( .IsFini ! )
       .join&gt; ( Self .Implemented )
@@ -3450,6 +3718,11 @@ INTEGER elem_func MethodVisibility
       ProtectedAccess
      ( Self .IsStaticMethod ) 
       PublicAccess
+     (
+      ( Self .Visibility PrivateAccess == ) 
+      AND ( Self .Abstraction at_abstract == )
+     ) 
+      ProtectedAccess
      DEFAULT
       ( Self .Visibility )
     ; // RULES
@@ -3460,6 +3733,8 @@ INTEGER elem_func MethodVisibility
       AND ( Self .Abstraction at_abstract == )
      )
       PublicAccess
+     ( Self .Visibility PrivateAccess == ) 
+      ProtectedAccess
      DEFAULT
       ( Self .Visibility )
     ; // RULES
@@ -3482,6 +3757,42 @@ elem_proc OutClassInner
   .MethodInterfaceFor: l_AllOps
 
   Self .Properties .ByVisibility&gt; .Visibility .OutProperty
+  
+  if ( Self .IsStaticObject ) then
+  begin
+   VAR l_WasSection
+   false &gt;&gt;&gt; l_WasSection
+   ( Self .Attributes .filter&gt; ( .Target .IsUnion ) ) .for&gt; (
+     IN aProp
+    aProp .Target .Attributes 
+    .filter&gt; ( .IsStereotype st_switch::Attribute ! ) 
+    .filter&gt; ( .Name 'void' SWAP StartsStr )
+    .for&gt; (
+      IN aField
+     aField .Target .Attributes .for&gt; (
+       IN aField
+       
+      if ( l_WasSection ! ) then
+      begin
+       'public' .Out
+       true &gt;&gt;&gt; l_WasSection
+      end // ( l_WasSection ! )
+      
+      Indented:
+      (
+       [ 
+        'property ' aField .Name ': ' aField .Target .TypeName
+        \n 
+        cSpace 'read' cSpace aProp .Name '.' aField .Name
+        \n
+        cSpace 'write' cSpace aProp .Name '.' aField .Name
+        ';'
+       ] .Out 
+      ) // Indented:
+     )
+    )
+   )
+  end // ( Self .IsStaticObject )
  ) // Indented:
  
  if ( Self .UPisTrue "need UC" ) then
@@ -3683,7 +3994,7 @@ elem_proc OutClass
     IN anItem
    anItem .IfDefBraceLn:
    ( 
-    anItem .TypeName .WithComma: l_WasComma NOP
+    anItem .TypeName .WithComma: l_WasComma .KeepInStack
    ) // anItem .IfDefBraceLn:
   ) // .With()&gt;
  ] .Out
@@ -3742,7 +4053,74 @@ elem_proc OutRecord
   'record' 
  ] .Out
  Self .OutDocumentation
- Indented: ( Self .Fields .for&gt; .OutField )
+ 
+ Indented: ( 
+  VAR l_Switch
+  Self .Attributes 
+  .filter&gt; ( .IsStereotype st_switch::Attribute ) 
+  .FirstElement
+  &gt;&gt;&gt; l_Switch
+  
+  if ( l_Switch IsNil ! ) then
+  begin
+   [ 
+    'Case ' 
+    
+    if ( l_Switch .Name 'void' != ) then
+    begin
+     l_Switch .Name ': '
+    end // ( l_Switch .Name 'void' != )
+    
+    l_Switch .Target .TypeName
+    ' of' 
+   ] .Out 
+   Indented: (
+    Self .Fields .for&gt; (
+      IN aField
+     [ 
+      VAR l_Value
+      aField .GetUP 'Value' &gt;&gt;&gt; l_Value
+      
+      if ( l_Value .IsValueValid ) then
+       l_Value
+      else
+       '!!!' 
+      ': ' 
+      '('
+      if ( 'void' aField .Name StartsStr ) then 
+      begin
+       VAR l_WasField
+       false &gt;&gt;&gt; l_WasField
+       aField .Target .Fields .for&gt; (
+         IN aField
+         
+        if l_WasField then
+         '; ' 
+         
+        aField .Name 
+        ': '
+        aField .Target .TypeName
+        true &gt;&gt;&gt; l_WasField
+       ) // aField .Target .Fields .for&gt;
+      end // ( 'void' aField .Name StartsStr )
+      else
+      begin
+       aField .Name 
+       ': '
+       aField .Target .TypeName
+      end // ( 'void' aField .Name StartsStr )
+      ');'
+     ] .Out? ? (
+      aField .OutDocumentation
+     ) // .Out? ?
+    ) // Self .Fields .for&gt;
+   ) // Indented:
+  end // ( l_Switch IsNil ! )
+  else
+  begin
+   Self .Fields .for&gt; .OutField 
+  end // ( l_Switch IsNil ! )
+ ) // Indented:
  
  if ( Self .UPisTrue "need UC" ) then
  begin
@@ -3763,6 +4141,11 @@ elem_proc OutUndef
 elem_proc OutStaticObject
  if ( Self .IsConstructorsHolder ! ) then
  begin
+  if ( Self .UPisTrue "need UC" ) then
+  begin
+   Self .UserCode: 'ci' ()
+  end // ( Self .UPisTrue "need UC" ) 
+ 
   [ 
    Self .TypeName ' = ' 
 
@@ -3804,9 +4187,32 @@ elem_proc OutRange
     l_First &gt;&gt;&gt; l_Second
    end // ( l_Second IsNil )
    
-   l_First .ExtValueOrName
+   VAR l_ElementPrefix
+   if ( Self .GetUP "elements prefix" '&lt;none&gt;' == ) then
+   begin
+    '' &gt;&gt;&gt; l_ElementPrefix
+   end
+   else
+   begin 
+    Self .MainAncestor .GetUP 'extprop:pas:ElementPrefix' &gt;&gt;&gt; l_ElementPrefix
+   end
+   
+   : .ValueWithPrefix
+     IN aValue
+    if ( aValue IsString ! ) then
+     aValue
+    else 
+    if ( l_ElementPrefix aValue StartsStr ) then
+     aValue
+    else
+    begin
+     l_ElementPrefix aValue
+    end 
+   ; // .ValueWithPrefix
+   
+   l_First .ExtValueOrName .ValueWithPrefix
    ' .. '
-   l_Second .ExtValueOrName
+   l_Second .ExtValueOrName .ValueWithPrefix
    ';' 
  ] .Out
  Self .OutDocumentation
@@ -3819,17 +4225,17 @@ elem_proc OutTypedef
    ' = ' 
    if ( Self .UPisTrue "newRTTI" ) then
     'type '
-   if ( Self .UPisTrue "isPointer" ) then
+   if ( Self .IsPointer ) then
     '^'
-   if ( Self .UPisTrue "isClassRef" ) then
+   if ( Self .IsClassRef ) then
     'class of '
-   if ( Self .UPisTrue "isPointer" ! ) then
+   if ( Self .IsPointer ! ) then
    begin
     STRING VAR l_OtherUnit
     l_MainAncestor .EffectiveUnitName &gt;&gt;&gt; l_OtherUnit
     if ( l_OtherUnit IsNil ! ) then
     begin
-     if ( Self .TypeName l_MainAncestor .TypeName == ) then
+     if ( Self .TypeName l_MainAncestor .TypeName SameText ) then
      begin
       STRING VAR l_OurUnit
       Self .EffectiveUnitName &gt;&gt;&gt; l_OurUnit
@@ -3839,7 +4245,7 @@ elem_proc OutTypedef
       end // l_OurUnit l_OtherUnit !=
      end // Self .TypeName l_MainAncestor .TypeName ==
     end // l_OtherUnit IsNil !
-   end // Self .UPisTrue "isPointer" !
+   end // Self .IsPointer !
    l_MainAncestor .TypeName 
    ';' 
  ] .Out
@@ -4011,6 +4417,8 @@ BOOLEAN elem_func IsType
     false
    ( Self .IsMixIn )
     false
+   ( Self .IsMixInParamType )
+    false 
    DEFAULT
     true
   ; // RULES
@@ -4062,51 +4470,104 @@ elem_proc OutTypes
  ) .OutChildrenRec
 ; // OutTypes
 
+BOOLEAN elem_func IsConstantArray
+ Self .IsStereotype st_ConstantArray &gt;&gt;&gt; Result
+; // IsConstantArray
+
 elem_proc OutConstants
- STRING VAR l_Prefix
- Self .GetUP 'extprop:pas:ElementPrefix' &gt;&gt;&gt; l_Prefix
- Self .Attributes .for&gt; (
-   IN anItem
-  anItem .IfDef: 
-  ( 
-   [ 
-    l_Prefix anItem .Name
- 
-    if ( anItem .UPisTrue "is define" ! ) then
-    begin
-     VAR l_Type 
-     anItem .Target &gt;&gt;&gt; l_Type
-     l_Type IsNil ! ? ( ': ' l_Type .TypeName )
-    end // ( anItem .UPisTrue "is define" ! )
- 
-    BOOLEAN VAR l_NeedSuffix
-    false &gt;&gt;&gt; l_NeedSuffix
-    VAR l_Value
-    anItem .ExtValue &gt;&gt;&gt; l_Value
-    if ( l_Value .IsValueValid ! ) then
-    begin
-     anItem .GetUP 'Value' &gt;&gt;&gt; l_Value
-     true &gt;&gt;&gt; l_NeedSuffix
-    end
- 
-    ' = ' l_Value
- 
-    if l_NeedSuffix then
-    begin
-     VAR l_Suffix
-     anItem .GetUP "suffix expr" &gt;&gt;&gt; l_Suffix
-     if ( l_Suffix .IsValueValid ) then
+ RULES
+  ( Self .IsConstantArray )
+   (
+    [ 
+     Self .Name 
+     ': array '
+     '['
+     VAR l_MainImplements
+     Self .MainImplements &gt;&gt;&gt; l_MainImplements
+     if ( l_MainImplements IsNil ) then
      begin
-      cSpace l_Suffix 
-     end // ( l_Suffix .IsValueValid )
-    end // l_NeedSuffix
- 
-    ';' 
-   ] .Out? ? (
-    anItem .OutDocumentation
-   ) // ] .Out? ?
-  ) // anItem .IfDef: 
- ) // Self .Attributes .for&gt;
+     '0 .. ' Self .Attributes .CountIt 1 -
+     end // ( l_MainImplements IsNil )
+     else
+     begin
+      l_MainImplements .TypeName
+     end // ( l_MainImplements IsNil )
+     ']'
+     ' of ' 
+     VAR l_MainAncestor
+     Self .MainAncestor &gt;&gt;&gt; l_MainAncestor
+     l_MainAncestor .TypeName
+     ' = ('
+     
+     VAR l_WasComma
+     false &gt;&gt;&gt; l_WasComma
+     
+     VAR l_IsPointer
+     l_MainAncestor .IsPointer &gt;&gt;&gt; l_IsPointer
+     
+     Self .Attributes
+     .map&gt; ( 
+      .ExtValue
+      if l_IsPointer then
+      begin
+       '@'
+       SWAP
+       Cat
+      end // l_IsPointer
+     ) 
+     .for&gt; .WithComma: l_WasComma \n
+     
+     ');' 
+    ] .Out
+   ) // ( Self .IsConstantArray )
+  DEFAULT
+   (
+    STRING VAR l_Prefix
+    Self .GetUP 'extprop:pas:ElementPrefix' &gt;&gt;&gt; l_Prefix
+    Self .Attributes .for&gt; (
+      IN anItem
+     anItem .IfDef: 
+     ( 
+      [ 
+       l_Prefix anItem .Name
+    
+       if ( anItem .UPisTrue "is define" ! ) then
+       begin
+        VAR l_Type 
+        anItem .Target &gt;&gt;&gt; l_Type
+        l_Type IsNil ! ? ( ': ' l_Type .TypeName )
+       end // ( anItem .UPisTrue "is define" ! )
+    
+       BOOLEAN VAR l_NeedSuffix
+       false &gt;&gt;&gt; l_NeedSuffix
+       VAR l_Value
+       anItem .ExtValue &gt;&gt;&gt; l_Value
+       if ( l_Value .IsValueValid ! ) then
+       begin
+        anItem .GetUP 'Value' &gt;&gt;&gt; l_Value
+        true &gt;&gt;&gt; l_NeedSuffix
+       end
+    
+       ' = ' l_Value
+    
+       if l_NeedSuffix then
+       begin
+        VAR l_Suffix
+        anItem .GetUP "suffix expr" &gt;&gt;&gt; l_Suffix
+        if ( l_Suffix .IsValueValid ) then
+        begin
+         cSpace l_Suffix 
+        end // ( l_Suffix .IsValueValid )
+       end // l_NeedSuffix
+    
+       ';' 
+      ] .Out? ? (
+       anItem .OutDocumentation
+      ) // ] .Out? ?
+     ) // anItem .IfDef: 
+    ) // Self .Attributes .for&gt;
+   ) // DEFAULT 
+ ; // RULES  
 ; // OutConstants
 
 PROCEDURE .OutConstantsList
@@ -4139,19 +4600,54 @@ PROCEDURE .OutConstantsList
   OutLn
 ; // .OutConstantsList
 
+INTEGER elem_func ConstantsListVisibility
+ RULES
+  ( Self .IsConstantArray )
+   (
+    VAR l_Vis 
+    Self .Visibility &gt;&gt;&gt; l_Vis
+    RULES
+     ( l_Vis PublicAccess == )
+      (
+       VAR l_MainImplements
+       Self .MainImplements &gt;&gt;&gt; l_MainImplements
+       RULES
+        ( l_MainImplements IsNil ! )
+         (
+          RULES
+           ( Self .UnitProducer l_MainImplements .UnitProducer == )
+            ProtectedAccess
+           DEFAULT
+            l_Vis
+          ; // RULES
+         ) 
+        DEFAULT
+         l_Vis
+       ; // RULES
+      ) // ( l_Vis PublicAccess == )
+     DEFAULT
+      l_Vis
+    ; // RULES  
+   )
+  DEFAULT
+   ( Self .Visibility )
+ ; // RULES
+ &gt;&gt;&gt; Result
+; // ConstantsListVisibility
+
 elem_proc OutDefinitionsSection:
   ^ IN aValid
   
  : .Suitable aValid DO ; 
   
  Self .ForChildren&gt; .Suitable (
-  .Constants .filter&gt; ( .Visibility PublicAccess == ) .OutConstantsList
+  .Constants .filter&gt; ( .ConstantsListVisibility PublicAccess == ) .OutConstantsList
  )
 
  Self .OutTypes .Suitable
  
  Self .ForChildren&gt; .Suitable (
-  .Constants .filter&gt; ( .Visibility ProtectedAccess == ) .OutConstantsList
+  .Constants .filter&gt; ( .ConstantsListVisibility ProtectedAccess == ) .OutConstantsList
  )
 
 ; // OutDefinitionsSection:
@@ -4214,14 +4710,22 @@ elem_proc OutVar
    'var '
    Self .Name
    ': '
-   Self .Target .TypeName
-   
-   VAR l_Value
-   Self .ExtValue &gt;&gt;&gt; l_Value
-   if ( l_Value .IsValueValid ) then
+   if ( Self .Target .IsMethod ) then
    begin
-    ' = ' l_Value
-   end // ( l_Value .IsValueValid )
+    Self .Target .MainAncestor .TypeName
+    ' = ' Self .Target .MethodName
+   end // ( Self .Target .IsMethod )
+   else
+   begin
+    Self .Target .TypeName
+    
+    VAR l_Value
+    Self .ExtValue &gt;&gt;&gt; l_Value
+    if ( l_Value .IsValueValid ) then
+    begin
+     ' = ' l_Value
+    end // ( l_Value .IsValueValid )
+   end // ( Self .Target .IsMethod )
    
    ';'
   ] .Out
@@ -4329,7 +4833,7 @@ elem_proc OutClassImplementation
  Self .AllInlinedOperations .for&gt; .MethodInterfaceForEx: nil .MethodBody
  
  VAR l_WasInstanceR
- false &gt;&gt;&gt; l_WasInstanceR
+ Self .IsMixIn &gt;&gt;&gt; l_WasInstanceR
  
  Self .Inherits 
  .join&gt; ( Self .Implements )
@@ -4533,7 +5037,7 @@ elem_proc OutImplementationSection
  l_WasOut ? OutLn
  
  Self .ForChildren&gt; .All (
-  .Constants .filter&gt; ( .Visibility PrivateAccess == ) .OutConstantsList
+  .Constants .filter&gt; ( .ConstantsListVisibility PrivateAccess == ) .OutConstantsList
  )
 
  Self .ForChildren&gt; .IsForInterface (
@@ -4585,76 +5089,81 @@ elem_proc OutUnitHeader
 ; // OutUnitHeader
 
 elem_proc OutUnit
- TF g_OutedTypes (
-  [ 
-   RULES
-    ( Self .IsDLL )
-     'library'
-    ( Self .IsExe )
-     'program'
-    DEFAULT
-     'unit' 
-   ; // RULES  
-   cSpace
-   Self .UnitNamePrim ';' 
-  ] .Out
-  Self .OutDocumentation
-  OutLn
+ TF g_DefaultInterfaceAncestor (
+ 
+  Self .Children .filter&gt; ( .UPisTrue "is default ancestor" ) .FirstElement &gt;&gt;&gt; g_DefaultInterfaceAncestor
   
-  Self .OutUnitHeader
-  
-  VAR l_Defines
-  Self .Defines &gt;&gt;&gt; l_Defines
-  if ( l_Defines IsNil ! ) then
-  begin
-   [ cOpenComment '$Include ' l_Defines cCloseComment ] .Out
+  TF g_OutedTypes (
+   [ 
+    RULES
+     ( Self .IsDLL )
+      'library'
+     ( Self .IsExe )
+      'program'
+     DEFAULT
+      'unit' 
+    ; // RULES  
+    cSpace
+    Self .UnitNamePrim ';' 
+   ] .Out
+   Self .OutDocumentation
    OutLn
-  end // ( l_Defines IsNil ! )
-  
-  'interface' .Out
-  OutLn
-  
-  ARRAY VAR l_Used
-  [] &gt;&gt;&gt; l_Used
-  
-  Self .IfDef: ( 
-   Self 'intf_uses' .OutUses: l_Used ( Self .IntfUses )
-  
-   Self .OutInterfaceSection
    
-   if ( Self .IsElementProxy ) then
+   Self .OutUnitHeader
+   
+   VAR l_Defines
+   Self .Defines &gt;&gt;&gt; l_Defines
+   if ( l_Defines IsNil ! ) then
    begin
-    Self .UserCode: 'intf_code' ()
+    [ cOpenComment '$Include ' l_Defines cCloseComment ] .Out
     OutLn
-   end // ( Self .IsElementProxy )
-  ) // Self .IfDef:
-  
-  'implementation' .Out
-  OutLn
-  
-  Self .IfDef: ( 
-   Self 'impl_uses' .OutUses: l_Used ( Self .ImplUses )
-  
-   Self .OutImplementationSection
+   end // ( l_Defines IsNil ! )
    
-   RULES
-    ( Self .IsElementProxy )
-     (
-      Self .UserCode: 'impl_code' ()
-      OutLn
-     )
-    ( Self .IsDLL )
-     (
-      'exports' .Out
-      Self .UserCode: 'exports' ( )
-      ';' .Out
-      OutLn
-     )
-   ; // RULES
-  ) // Self .IfDef:
-  
-  'end.' .Out
- ) // TF g_OutedTypes
+   'interface' .Out
+   OutLn
+   
+   ARRAY VAR l_Used
+   [] &gt;&gt;&gt; l_Used
+   
+   Self .IfDef: ( 
+    Self 'intf_uses' .OutUses: l_Used ( Self .IntfUses )
+   
+    Self .OutInterfaceSection
+    
+    if ( Self .IsElementProxy ) then
+    begin
+     Self .UserCode: 'intf_code' ()
+     OutLn
+    end // ( Self .IsElementProxy )
+   ) // Self .IfDef:
+   
+   'implementation' .Out
+   OutLn
+   
+   Self .IfDef: ( 
+    Self 'impl_uses' .OutUses: l_Used ( Self .ImplUses )
+   
+    Self .OutImplementationSection
+    
+    RULES
+     ( Self .IsElementProxy )
+      (
+       Self .UserCode: 'impl_code' ()
+       OutLn
+      )
+     ( Self .IsDLL )
+      (
+       'exports' .Out
+       Self .UserCode: 'exports' ( )
+       ';' .Out
+       OutLn
+      )
+    ; // RULES
+   ) // Self .IfDef:
+   
+   'end.' .Out
+  ) // TF g_OutedTypes
+ ) // TF g_DefaultInterfaceAncestor 
 ; // OutUnit
 
 STRING elem_func DefineName
@@ -4713,16 +5222,34 @@ elem_proc OutMixIn
 ; // OutMixIn
 
 BOOLEAN elem_func UseNewGen
- RULES
-  ( Self .IsElementProxy )
-   true
-  ( Self .UPisTrue "UseNewGen" )
-   true 
-  DEFAULT
-   false
- ; // RULES
+ Cached:
+ (
+  RULES
+   ( Self IsNil )
+    false
+   ( Self .IsElementProxy )
+    true
+   ( Self .UPisTrue "UseNewGen" )
+    true 
+   DEFAULT
+    ( Self .Parent call.me )
+  ; // RULES
+ )
  &gt;&gt;&gt; Result
 ; // UseNewGen
+
+STRING elem_func PasPathOnly
+ Cached:
+ (
+  Self .GetUP 'intf.pas:PathOnly' &gt;&gt;&gt; Result
+  if ( Result IsNil ) then
+  begin
+   Self .Parent call.me &gt;&gt;&gt; Result
+  end // ( Result IsNil )
+  Result
+ )
+ &gt;&gt;&gt; Result
+; // PathOnly
 
 STRING elem_func PasFinalFileName
  Self .GetUP 'intf.pas:Path' &gt;&gt;&gt; Result
@@ -4730,7 +5257,7 @@ STRING elem_func PasFinalFileName
  begin
   if ( Self .IsElementProxy ) then
   begin
-   Self .Parent .GetUP 'intf.pas:PathOnly' &gt;&gt;&gt; Result
+   Self .PasPathOnly &gt;&gt;&gt; Result
    if ( Result IsNil ! ) then
    begin
     Result '\MDProcess\' '\common\' string:ReplaceFirst &gt;&gt;&gt; Result
@@ -4745,7 +5272,13 @@ elem_generator pas
  CONST Ext '.pas'
 
  BOOLEAN elem_func CanCopyToFinalFile
-  Self .UseNewGen &gt;&gt;&gt; Result
+  RULES
+   ( Self .UseNewGen )
+    true
+   DEFAULT
+    false 
+  ; // RULES
+  &gt;&gt;&gt; Result
  ; // CanCopyToFinalFile
  
  STRING elem_func FinalFileNamePrim
@@ -4792,6 +5325,107 @@ elem_generator pas_dependent
  
 ; // pas_dependent
 
+BOOLEAN elem_func IsOverride
+ Self .IsControlOverride &gt;&gt;&gt; Result
+; // IsOverride
+
+STRING elem_func AttrName
+ RULES
+  ( Self .IsOverride )
+   ( Self .MainAncestor call.me )
+  DEFAULT
+   ( Self .Name )
+ ; // RULES  
+ &gt;&gt;&gt; Result
+; // AttrName
+
+ModelElement elem_func AttrType
+ RULES
+  //( Self .IsOverride )
+  // ( Self .MainAncestor call.me )
+  DEFAULT
+   ( Self .MethodType )
+ ; // RULES  
+ &gt;&gt;&gt; Result
+; // AttrType
+
+ARRAY CompileTime-VAR g_FormControls nil
+
+elem_proc ToDFM
+//	&lt;%C#f_ToDFM()&gt;\
+//	&lt;%G#f_ToDFM()&gt;\
+//      &lt;%R#f_ToDFM()&gt;
+
+//	[{%S%f_NeedPutToDFM()=true}\
+//	[{%f_exists_in_list(FORM_CONTROLS,"%S%f_pas_AttrName()")=false}\
+//	%f_add_to_list(FORM_CONTROLS,"%S%f_pas_AttrName()")\
+//	\n# object %S%f_pas_AttrName(): %S%f_pas_ResultTypeName()\
+//	[{"%SD"!=""&%S{need Caption}!=false}\n#  Caption = '%SD']\
+//	&lt;%C#f_ToDFM()&gt;\
+//	[{%S%f_IsOverride()=true}\
+//	&lt;{}{}{r}%g&lt;%C#f_ToDFM()&gt;&gt;\
+//	]
+//	# end\
+//	]\
+//      ]
+
+ RULES
+  ( Self .IsVCMCustomForm )
+   (
+    Self .Attributes .for&gt; call.me
+    Self .Inherits .for&gt; call.me
+    Self .Implements .for&gt; call.me
+   )
+  ( Self .IsControlPrim )
+   (
+    if ( Self .NeedPutToDFM ) then
+    begin
+     if ( g_FormControls Self .AttrName array:HasText ! ) then
+     begin
+      Self .AttrName array:AddTo g_FormControls
+      Indented: (
+       [ ' object ' Self .AttrName ': ' Self .AttrType .TypeName ] .Out
+       Self .Attributes .for&gt; call.me
+       
+       if ( Self .IsOverride ) then
+       begin
+        Self .Inherits .for&gt; ( .Attributes .for&gt; call.me )
+       end // ( Self .IsOverride )
+       
+       [ ' end' ] .Out
+      ) // Indented:
+     end // ( g_FormControls Self .AttrName array:HasText ! )
+    end // ( Self .NeedPutToDFM )
+   ) 
+ ; // RULES
+
+; // ToDFM
+
+elem_proc BeforeDFMControls
+ RULES
+  ( Self .IsVCMForm )
+   (
+    [ '  Caption = ' cQuote Self .Documentation cQuote ] .Out
+    [ '  Color = $00F9F8FA' ] .Out
+    
+    VAR l_ZoneType
+    Self .GetUP "ZoneType" &gt;&gt;&gt; l_ZoneType
+    if ( l_ZoneType IsNil ! ) then
+     if ( l_ZoneType 'Any' != ) then
+     begin
+      [ '  ZoneType = vcm_zt' l_ZoneType ] .Out
+     end // ( l_ZoneType 'Any' != )
+     
+    [ '  PixelsPerInch = 96' ] .Out
+    [ '  TextHeight = 13' ] .Out
+    [ '  object Entities: TvcmEntities' ] .Out
+    [ '    Left = 24' ] .Out
+    [ '    Top = 24' ] .Out
+    [ '  end' ] .Out
+   )
+ ; // RULES  
+; // BeforeDFMControls
+
 elem_generator dfm
  
  Inherits .pas_dependent
@@ -4799,16 +5433,26 @@ elem_generator dfm
  CONST Ext '.dfm'
 
  BOOLEAN elem_func NeedOwnFilePrim
-  Self .IsStereotype st_VCMCustomForm
+  Self .IsVCMCustomForm
   AND ( Self .Abstraction at_final == )
   &gt;&gt;&gt; Result 
  ; // NeedOwnFilePrim
  
  BOOLEAN elem_func CanCopyToFinalFile
-  false &gt;&gt;&gt; Result
+  Self .GetUP "finished dfm" false ?!= &gt;&gt;&gt; Result
  ; // CanCopyToFinalFile
  
- Self .Name .Out
+ TF g_FormControls (
+  [] &gt;&gt;&gt; g_FormControls
+  [ 'object ' Self .TypeName .CutT ': ' Self .TypeName ] .Out
+  [ '  Left = 204' ] .Out
+  [ '  Top = 118' ] .Out
+  [ '  Width = 320' ] .Out
+  [ '  Height = 240' ] .Out
+  Self .BeforeDFMControls
+  Self .ToDFM
+  [ 'end' ] .Out
+ ) // TF g_FormControls
  
 ; // dfm
  
