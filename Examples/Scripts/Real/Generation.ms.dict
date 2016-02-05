@@ -4484,6 +4484,10 @@ BOOLEAN elem_func IsConstantArray
  Self .IsStereotype st_ConstantArray >>> Result
 ; // IsConstantArray
 
+BOOLEAN elem_func IsLocalConst
+ Self .IsStereotype st_LocalConst >>> Result
+; // IsLocalConst
+
 elem_proc OutConstants
  RULES
   ( Self .IsConstantArray )
@@ -4587,7 +4591,7 @@ PROCEDURE .OutConstantsList
  aList .for> (
    IN anItem
   RULES
-   ( anItem .IsStereotype st_LocalConst )
+   ( anItem .IsLocalConst )
     ()
    DEFAULT
     (
@@ -4611,37 +4615,69 @@ PROCEDURE .OutConstantsList
 ; // .OutConstantsList
 
 INTEGER elem_func ConstantsListVisibility
- RULES
-  ( Self .IsConstantArray )
-   (
-    VAR l_Vis 
-    Self .Visibility >>> l_Vis
-    RULES
-     ( l_Vis PublicAccess == )
-      (
-       VAR l_MainImplements
-       Self .MainImplements >>> l_MainImplements
-       RULES
-        ( l_MainImplements IsNil ! )
-         (
-          RULES
-           ( Self .UnitProducer l_MainImplements .UnitProducer == )
-            ProtectedAccess
-           DEFAULT
-            l_Vis
-          ; // RULES
-         ) 
-        DEFAULT
-         l_Vis
-       ; // RULES
-      ) // ( l_Vis PublicAccess == )
-     DEFAULT
-      l_Vis
-    ; // RULES  
-   )
-  DEFAULT
-   ( Self .Visibility )
- ; // RULES
+ Cached:
+ (
+  RULES
+   ( Self .IsConstantArray )
+    (
+     VAR l_Vis 
+     Self .Visibility >>> l_Vis
+     RULES
+      ( l_Vis PublicAccess == )
+       (
+        VAR l_MainImplements
+        Self .MainImplements >>> l_MainImplements
+        RULES
+         ( l_MainImplements IsNil ! )
+          (
+           RULES
+            ( Self .UnitProducer l_MainImplements .UnitProducer == )
+             ProtectedAccess
+            DEFAULT
+             l_Vis
+           ; // RULES
+          ) 
+         DEFAULT
+          l_Vis
+        ; // RULES
+       ) // ( l_Vis PublicAccess == )
+      DEFAULT
+       l_Vis
+     ; // RULES  
+    ) // ( Self .IsConstantArray )
+   ( Self .IsLocalConst )
+    ( Self .Visibility ) 
+   ( Self .IsConstants )
+    (
+     VAR l_Vis 
+     Self .Visibility >>> l_Vis
+     RULES
+      ( l_Vis PublicAccess == )
+       (
+        VAR l_Protected
+        Self .Attributes
+        .filter> ( .Target IsNil ! )
+        .filter> (
+          IN aConst 
+         Self .UnitProducer aConst .Target .UnitProducer == 
+        )
+        .CountIt > 0 
+        >>> l_Protected
+        RULES
+         l_Protected
+          ProtectedAccess
+         DEFAULT
+          l_Vis
+        ; // RULES   
+       ) // ( l_Vis PublicAccess == )
+      DEFAULT 
+       l_Vis
+     ; // RULES  
+    ) // ( Self .IsConstants )   
+   DEFAULT
+    ( Self .Visibility )
+  ; // RULES
+ )
  >>> Result
 ; // ConstantsListVisibility
 
