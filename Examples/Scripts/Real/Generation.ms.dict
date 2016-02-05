@@ -484,10 +484,20 @@ BOOLEAN elem_func IsInterface
  >>> Result
 ; // IsInterface
 
+BOOLEAN elem_func IsPureMixIn
+ Self .IsStereotype st_PureMixIn >>> Result
+; // IsPureMixIn
+
 ModelElement elem_func MainAncestor
  Cached:
  (
   RULES
+   ( Self .IsPointer )
+    ( Self .MainAncestorPrim )
+   ( Self .IsTypedef )
+    ( Self .MainAncestorPrim )
+   ( Self .IsPureMixIn )
+    ( Self .MainAncestorPrim )
    ( Self .IsInterface )
     (
      RULES
@@ -544,10 +554,6 @@ BOOLEAN elem_func IsMixIn
  )
  >>> Result
 ; // IsMixIn
-
-BOOLEAN elem_func IsPureMixIn
- Self .IsStereotype st_PureMixIn >>> Result
-; // IsPureMixIn
 
 BOOLEAN elem_func IsRange
  Self .IsStereotype st_Range >>> Result
