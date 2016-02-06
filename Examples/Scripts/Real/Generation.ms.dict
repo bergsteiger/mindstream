@@ -2585,7 +2585,7 @@ elem_iterator Used
   
   if ( Self .IsSingleton ) then
   begin
-   .join> [ 'SysUtils' 'l3Base' ]
+   .join> [ 'SysUtils' GarantModel::l3Base ]
   end // ( Self .IsSingleton )
  )
  >>> Result
