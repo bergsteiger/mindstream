@@ -2585,7 +2585,7 @@ elem_iterator Used
   
   if ( Self .IsSingleton ) then
   begin
-   .join> [ 'SysUtils' GarantModel::l3Base ]
+   .join> [ GarantModel::SysUtils GarantModel::l3Base ]
   end // ( Self .IsSingleton )
  )
  >>> Result
@@ -2606,7 +2606,7 @@ elem_iterator ImplUses
  .join> ( Self .UsedTotal )
  if ( Self .Name 'l3IID' == ) then
  begin
-  .join> [ 'Windows' 'SysUtils' ]
+  .join> [ GarantModel::Windows GarantModel::SysUtils ]
  end // ( Self .Name 'l3IID' == )
  >>> Result
 ; // ImplUses

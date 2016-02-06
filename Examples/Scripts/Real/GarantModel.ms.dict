@@ -1,8 +1,20 @@
 USES
+ 4AB0C3F60375.pas.ms.script // Windows
+;
+
+WordAlias GarantModel::Windows ME_48A41FF10094 
+
+USES
  4AB0997B00A2.pas.ms.script  // Classes
 ;
 
 WordAlias GarantModel::Classes ME_478CF30500C1
+
+USES
+ 4AB0C3C60310.pas.ms.script // SysUtils
+;
+
+WordAlias GarantModel::SysUtils ME_47877EB202FB
 
 USES
  47913B47006E.pas.ms.script // l3Base
