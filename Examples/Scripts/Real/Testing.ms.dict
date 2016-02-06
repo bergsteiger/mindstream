@@ -1,0 +1,119 @@
+// Testing.ms.dict
+
+USES
+ axiom_push.ms.dict
+ macro.ms.dict
+ core.ms.dict
+ params.ms.dict
+ io.ms.dict
+ EngineTypes.ms.dict
+ Documentation.ms.dict
+ arrays.ms.dict
+ Sequence.It.ms.dict
+;
+
+CONST cTests 'Tests:'
+
+MACRO TestsFor
+ ENGINE_WORD RIGHT LINK IN aWord
+  %REMARK 'aWord ссылка на слово справа от TestsFor'
+ %SUMMARY 'ќпредел€ет набор тестов дл€ слова aWord' ;
+
+ axiom:PushSymbol VOID
+ axiom:PushSymbol axiom:operator
+ cTests aWord |N Cat Ctx:Parser:PushSymbol
+; // TestsFor
+
+PRIVATE PROCEDURE DoRunTestsFor
+ STRING IN aTestedWordName
+ ENGINE_WORD IN aTestsHolder
+ %SUMMARY '¬ыполн€ет тесты дл€ aTestsHolder' ;
+
+ [ 'Testing: ' aTestedWordName ] strings:Cat Print
+ aTestsHolder MembersIterator .for> (
+  IN aTest
+   %REMARK 'aTest - вложенный элемент aTestsHolder'
+  if ( ( aTest %ST |N ) = ( NameOf Test ) ) then
+   %REMARK '- фильтруем только тесты.'
+  begin
+   aTest |N Print
+    %REMARK 'ѕечатаем им€ теста'
+   aTest DO
+    %REMARK '«апускаем тест'
+  end // ( ( aTest %ST |N ) = 'Test' )
+ )
+ [ 'Testing end: ' aTestedWordName ] strings:Cat Print
+ '------------------' Print
+; // DoRunTestsFor
+
+PRIVATE PROCEDURE ExpandRunTestsFor
+ ENGINE_WORD IN aTestsHolder
+ STRING VAR l_Name
+ aTestsHolder |N >>> l_Name
+ STRING VAR l_TestsHolderName
+ cTests l_Name Cat >>> l_TestsHolderName
+
+ if ( l_TestsHolderName IsWordDeclared ! ) then
+  EXIT
+
+ l_Name Ctx:Parser:PushString
+ axiom:PushSymbol @
+ l_TestsHolderName Ctx:Parser:PushSymbol
+ axiom:PushSymbol DoRunTestsFor
+; // ExpandRunTestsFor
+
+PRIVATE PROCEDURE DoRunTestsA
+ ARRAY IN aWords
+  %REMARK 'aWords ссылка на список слов слева от DoRunTests'
+ %SUMMARY '¬ыполн€ет тесты дл€ списка слов aWords' ;
+ aWords .for> ExpandRunTestsFor
+; // DoRunTestsA
+
+PRIVATE PROCEDURE DoRunTests
+ Sequence IN aWords
+  %REMARK 'aWords ссылка на список слов слева от DoRunTests'
+ %SUMMARY '¬ыполн€ет тесты дл€ списка слов aWords' ;
+ aWords Sequence.It DoRunTestsA
+; // DoRunTests
+
+MACRO RunTests
+ Sequence RIGHT LINK IN aWords
+  %REMARK 'aWords ссылка на список слов справа от RunTests'
+ %SUMMARY '¬ыполн€ет тесты дл€ списка слов aWords' ;
+ aWords |^@ DoRunTests
+; // RunTests
+
+MACRO RunTests.in.array
+ ARRAY RIGHT IN aWords
+  %REMARK 'aWords ссылка на список слов справа от RunTests'
+ %SUMMARY '¬ыполн€ет тесты дл€ списка слов aWords' ;
+ ( aWords |^@ DO ) DoRunTestsA
+; // RunTests.in.array
+
+USES
+ DogAndBracket.ms.dict
+;
+
+EXPORTS
+ DogAndBracket.ms.dict
+
+USES
+ CodeDump.ms.dict
+;
+
+EXPORTS
+ CodeDump.ms.dict
+
+MACRO TestWithDump
+ Literal IN aName
+ %SUMMARY 'јналог слова Test, но с дампингом кода слова в стандартный вывод' ;
+
+ @SELF Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol VOID
+ axiom:PushSymbol axiom:operator
+ aName |N Ctx:Parser:PushSymbol
+ axiom:PushSymbol @SELF
+ axiom:PushSymbol DumpElement
+; // TestWithDump
+
+WordAlias Test&Dump TestWithDump

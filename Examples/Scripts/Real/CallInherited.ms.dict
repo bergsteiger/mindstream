@@ -1,0 +1,37 @@
+UNIT CallInherited.ms.dict
+
+USES
+ axiom_push.ms.dict
+ WordsRTTI.ms.dict
+ Testing.ms.dict
+;
+
+TtfwWord FUNCTION find.inherited
+  TtfwWord IN Self
+ nil >>> Result
+ Self .Inherited.Words .for> (
+  TtfwWord IN anAncestor
+  Result IsNil ?ASSURE [ 'Множественное наследование не поддерживается. Слово ' Self |N ' Второй предок ' anAncestor |N ]
+  anAncestor >>> Result
+ )
+ Result IsNil ! ?ASSURE [ 'Не найден предок для ' Self |N ]
+; // find.inherited
+
+: compile.inherited
+  TtfwWord IN Self
+ Self find.inherited CompileValue
+; // compile.inherited
+
+: call.inherited.do
+ Ctx:WordDefiningNow
+ compile.inherited
+; // call.inherited.do
+
+STACK_CHANGING_MACRO .inherited
+ call.inherited.do
+; // .inherited
+
+STACK_CHANGING_MACRO call.inherited
+ Ctx:WordDefiningNow %% 'Self' CompileValue
+ call.inherited.do
+; // call.inherited

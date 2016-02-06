@@ -1,0 +1,12 @@
+UNIT ref.ms.dict
+
+USES 
+ axiom_push.ms.dict
+ WordsRTTI.ms.dict
+;
+
+MACRO ref;
+ %SUMMARY 'Выводит ссылку на слово и заканчивает его определение' ;
+ axiom:PushSymbol @SELF
+ axiom:PushSymbol ;
+; // ref;

@@ -1,0 +1,21 @@
+// Sequence.It.ms.dict
+
+USES
+ core.ms.dict
+ params.ms.dict
+ macro.ms.dict
+ EngineTypes.ms.dict
+ Documentation.ms.dict
+ NoCapsLock.ms.dict
+;
+
+EXPORTS
+ NoCapsLock.ms.dict
+
+ARRAY FUNCTION Sequence.It
+ Sequence IN aCode
+ if ( aCode IS class::TkwBeginLikeCompiledCode ) then  
+  ( aCode CodeIterator >>> Result )
+ else
+  ( [ aCode ] >>> Result ) 
+; // Sequence.It
