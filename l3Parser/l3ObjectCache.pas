@@ -69,7 +69,7 @@ end;//CompareExistingItems
 
 type _Instance_R_ = Tl3ObjectCache;
 
-{$Include ..\L3\l3UncomparabeObjectRefList.imp.pas}
+{$Include l3UncomparabeObjectRefList.imp.pas}
 
 // start class Tl3ObjectCache
 

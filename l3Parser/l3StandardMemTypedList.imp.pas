@@ -11,7 +11,7 @@
 {$Else l3StandardMemTypedList_imp}
 
 
-{$Include ..\L3\l3TypedList.imp.pas}
+{$Include l3TypedList.imp.pas}
 
 
 {$EndIf l3StandardMemTypedList_imp}

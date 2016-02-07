@@ -1,7 +1,5 @@
 unit l3ProtoObject;
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
-
+ 
 {$Include l3Define.inc}
 
 interface

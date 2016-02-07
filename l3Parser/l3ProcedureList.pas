@@ -150,6 +150,6 @@ end;//CompareExistingItems
 
 type _Instance_R_ = Tl3ProcedureList;
 
-{$Include ..\L3\l3StandardMemTypedList.imp.pas}
+{$Include l3StandardMemTypedList.imp.pas}
 
 end.

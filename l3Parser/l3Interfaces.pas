@@ -3,24 +3,7 @@ unit l3Interfaces;
 {$IfDef DesignTimeLibrary}
 {.$WEAKPACKAGEUNIT ON}
 {$EndIf DesignTimeLibrary}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// Библиотека "L3$Domain"
-// Автор: Люлин А.В.
-// Модуль: "w:/common/components/rtl/Garant/L3/l3Interfaces.pas"
-// Начат: 30.12.2004 13:56
-// Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Interfaces::Category>> Shared Delphi Требования к низкоуровневым библиотекам::L3$Domain::l3Interfaces
-//
-// Базовые интерфейсы.
-//
-//
-//
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// ! Полностью генерируется с модели. Править руками - нельзя. !
-
+ 
 {$Include l3Define.inc}
 
 interface

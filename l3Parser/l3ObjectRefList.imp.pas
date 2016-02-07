@@ -1,19 +1,5 @@
 {$IfNDef l3ObjectRefList_imp}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// Библиотека "L3"
-// Модуль: "w:/common/components/rtl/Garant/L3/l3ObjectRefList.imp.pas"
-// Родные Delphi интерфейсы (.pas)
-// Generated from UML model, root element: <<Impurity::Class>> Shared Delphi Low Level::L3::l3CoreObjects::l3ObjectRefList
-//
-// Список ссылок на объекты.
-//
-//
-// Все права принадлежат ООО НПП "Гарант-Сервис".
-//
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+ 
 {$Define l3ObjectRefList_imp}
  _l3UncomparabeObjectRefList_Parent_ = _l3ObjectRefList_Parent_;
  {$Include ..\L3\l3UncomparabeObjectRefList.imp.pas}

@@ -4,7 +4,7 @@ interface
 
 uses
  TestFramework
- //, uParser
+ , l3Parser
  , uNewParser
  , SysUtils
  ;
@@ -1755,6 +1755,6 @@ end;
 initialization
 
 // Register any test cases with the test runner
-RegisterTest(TestTParser.Suite);
+//RegisterTest(TestTParser.Suite);
 
 end.

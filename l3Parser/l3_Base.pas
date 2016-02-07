@@ -28,7 +28,7 @@ uses
   l3Base
   ;
 
-{$Include ..\L3\l3Changing.imp.pas}
+{$Include l3Changing.imp.pas}
 
 // start class Tl3_Base
 

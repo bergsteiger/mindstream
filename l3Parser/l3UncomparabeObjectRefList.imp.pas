@@ -47,7 +47,7 @@ begin
 end;//FreeItem
 
 
-{$Include ..\L3\l3ObjectRefListPrim.imp.pas}
+{$Include l3ObjectRefListPrim.imp.pas}
 
 
 {$EndIf l3UncomparabeObjectRefList_imp}

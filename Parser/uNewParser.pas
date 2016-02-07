@@ -23,7 +23,7 @@ type
  EUnknownToken = Class(Exception);
 
 type
- TscriptTokenType = (ttUnknown, ttString, ttToken, ttEOF, ttBoolean, ttNumber, ttIdentifier);
+ TTokenType = (ttUnknown, ttString, ttToken, ttEOF, ttBoolean, ttNumber, ttIdentifier);
 
 type
  TScriptParser = class
@@ -33,7 +33,7 @@ type
   f_UnknownToken: String;
   f_PosInUnknown: Integer;
   f_Token: String;
-  f_TokenType: TscriptTokenType;
+  f_TokenType: TTokenType;
  procedure NextChar;
  // ”величивает f_PosInCurrentToken на 1
  procedure PrevChar;
@@ -57,7 +57,7 @@ type
  public
   property TokenString: String read f_Token;
   { * - текущий токен. }
-  property TokenType: TscriptTokenType read f_TokenType;
+  property TokenType: TTokenType read f_TokenType;
   { * - тип текущего токена. }
  end; // TscriptParser
 

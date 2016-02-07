@@ -10,7 +10,7 @@ uses
 
 type
  _l3Unknown_Parent_ = Tl3CastablePersistent;
- {$Include ..\L3\l3Unknown.imp.pas}
+ {$Include l3Unknown.imp.pas}
  Tl3ProtoPersistent = {abstract} class(_l3Unknown_)
  end;//Tl3ProtoPersistent
 
@@ -26,6 +26,6 @@ uses
   l3Interlocked
   ;
 
-{$Include ..\L3\l3Unknown.imp.pas}
+{$Include l3Unknown.imp.pas}
 
 end.
