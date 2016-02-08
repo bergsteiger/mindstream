@@ -27,6 +27,10 @@ type
 
 implementation
 
+uses
+ l3Filer
+ , l3Types
+ ;
 { TL3ParserVsTNewParser }
 
 const
@@ -47,11 +51,12 @@ end;
 procedure TL3ParserVsTNewParser.CheckL3Parser;
 var
  l_Parser : Tl3CustomParser;
- l_File : TFileStream;
+ l_Filer : Tl3DosFiler;
  l_TokenType : Tl3TokenType;
 begin
- l_File := TFileStream.Create('Test_4_1.txt', fmOpenRead);
- l_Parser := Tl3CustomParser.Make(l_File, l3_DefaultParserOptions);
+ l_Filer := Tl3DosFiler.Make('Test_4_1.txt', l3_fmRead, True, 500);
+ l_Parser := Tl3CustomParser.Create;
+ l_Parser.Filer := l_Filer;
 
  l_TokenType := l3_ttBOF;
  try
@@ -60,7 +65,7 @@ begin
    l_TokenType := l_Parser.NextToken;
   end;
  finally
-  FreeAndNil(l_File);
+  FreeAndNil(l_Filer);
   FreeAndNil(l_Parser);
  end;
 
