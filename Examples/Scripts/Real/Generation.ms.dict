@@ -2609,7 +2609,7 @@ USES
 elem_iterator Used
  Cached:
  (
-  Self .Dependencies .filter> ( .IsStereotype st_uses::Dependency ) .mapToTarget> 
+  Self .Dependencies .filter> ( .IsStereotype st_uses::Dependency ) .mapToTarget>
   if ( Self .IsInterface ! ) then
   begin
    .join> ( Self .InjectedElements )
@@ -2643,7 +2643,7 @@ elem_iterator AbstractUses
    aG .Implements 
    .filter> .IsMixIn
   ) // .joinWithLambded> 
-  .UsedTotal
+  .Dependencies .filter> ( .IsStereotype st_uses::Dependency ) .mapToTarget>
  ) // .for>
  >>> Result
 ; // AbstractUses
