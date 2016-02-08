@@ -2609,7 +2609,7 @@ USES
 elem_iterator Used
  Cached:
  (
-  Self .Dependencies .filter> ( .IsStereotype st_uses::Dependency ) .mapToTarget> 
+  Self .Dependencies .filter> ( .IsStereotype st_uses::Dependency ) .mapToTarget>
   if ( Self .IsInterface ! ) then
   begin
    .join> ( Self .InjectedElements )
@@ -2631,6 +2631,24 @@ elem_iterator UsedTotal
  >>> Result
 ; // UsedTotal
 
+elem_iterator AbstractUses
+ [empty]
+ ( 
+  Self .Inherits 
+  .filter> .IsSimpleClass 
+  .filter> ( .Abstraction at_abstract == )
+ ) .for> ( 
+   IN aG
+  .joinWithLambded> ( 
+   aG .Implements 
+   .filter> .IsMixIn
+  ) // .joinWithLambded> 
+  .Dependencies .filter> ( .IsStereotype st_uses::Dependency ) .mapToTarget>
+  .join> ( aG call.me ) 
+ ) // .for>
+ >>> Result
+; // AbstractUses
+
 elem_iterator ImplUses
  [ 'l3ImplUses' ]
  if ( Self .IsForImplementation ) then
@@ -2638,6 +2656,12 @@ elem_iterator ImplUses
   .join> ( Self .NeededElementsTotal )
  end // Self .IsForImplementation
  .join> ( Self .UsedTotal )
+ 
+ if ( Self .IsClassOrMixIn ) then
+ begin
+  .join> ( Self .AbstractUses )
+ end // ( Self .IsClassOrMixIn )
+  
  if ( Self .Name 'l3IID' == ) then
  begin
   .join> [ GarantModel::Windows GarantModel::SysUtils ]
@@ -4895,6 +4919,7 @@ elem_iterator LocalMethods
 elem_iterator LocalVars
  Self .Attributes
  .filter> .IsLocalVar
+ .filter> ( .IsGlobalVar ! )
  >>> Result
 ; // LocalVars
 
