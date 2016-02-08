@@ -54,8 +54,28 @@ var
  l_Filer : Tl3DosFiler;
  l_TokenType : Tl3TokenType;
  l_Tokens : string;
+ l_SR: TSearchRec;
+ l_Path : string;
+ procedure DoSome(aName: string);
+ begin
+  l_Tokens := l_Tokens + ' ' + l_Tokens;
+ end;
 begin
- l_Filer := Tl3DosFiler.Make('Test_4_1.txt');
+ l_Tokens := '';
+ l_Path :=  '*.txt';
+ if FindFirst(l_Path, faAnyFile, l_SR) = 0 then
+ begin
+   repeat
+     if (l_SR.Attr <> faDirectory) then
+     begin
+      DoSome(l_SR.Name);
+     end;
+   until FindNext(l_SR) <> 0;
+   FindClose(l_SR.FindHandle);
+ end;
+
+ ShowMessage(l_Tokens);
+{ l_Filer := Tl3DosFiler.Make('Test_18_8.txt');
  l_Parser := Tl3CustomParser.Create;
  l_Filer.Open;
  l_Parser.Filer := l_Filer;
@@ -65,13 +85,13 @@ begin
   while not (l_TokenType = l3_ttEOF) do
   begin
    l_TokenType := l_Parser.NextToken;
-   l_Tokens := l_Tokens + l_Parser.TokenString;
+   l_Tokens := l_Tokens + '; ' + l_Parser.TokenString;
   end;
  finally
   FreeAndNil(l_Filer);
   FreeAndNil(l_Parser);
  end;
- ShowMessage(l_Tokens);
+ ShowMessage(l_Tokens);  }
 end;
 
 function TL3ParserVsTNewParser.FileName: string;
@@ -81,6 +101,6 @@ end;
 
 initialization
   // Register any test cases with the test runner
-// RegisterTest(TL3ParserVsTNewParser.Suite);
+ RegisterTest(TL3ParserVsTNewParser.Suite);
 end.
 
