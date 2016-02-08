@@ -2644,6 +2644,7 @@ elem_iterator AbstractUses
    .filter> .IsMixIn
   ) // .joinWithLambded> 
   .Dependencies .filter> ( .IsStereotype st_uses::Dependency ) .mapToTarget>
+  .join> ( aG call.me ) 
  ) // .for>
  >>> Result
 ; // AbstractUses
