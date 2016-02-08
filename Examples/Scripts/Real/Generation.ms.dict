@@ -4839,6 +4839,11 @@ elem_proc OutVar
    begin
     Self .Target .TypeName
     
+    if ( Self .UPisTrue "IsResult" ) then
+    begin
+     ' absolute Result'
+    end // ( Self .UPisTrue "IsResult" )
+    
     VAR l_Value
     Self .ExtValue >>> l_Value
     if ( l_Value .IsValueValid ) then
