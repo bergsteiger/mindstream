@@ -2,7 +2,7 @@
  
 {$Define l3ObjectRefList_imp}
  _l3UncomparabeObjectRefList_Parent_ = _l3ObjectRefList_Parent_;
- {$Include ..\L3\l3UncomparabeObjectRefList.imp.pas}
+ {$Include l3UncomparabeObjectRefList.imp.pas}
  _l3ObjectRefList_ = {mixin} class(_l3UncomparabeObjectRefList_)
   {* Список ссылок на объекты. }
  end;//_l3ObjectRefList_
@@ -39,7 +39,7 @@ begin
 end;//CompareExistingItems
 
 
-{$Include ..\L3\l3UncomparabeObjectRefList.imp.pas}
+{$Include l3UncomparabeObjectRefList.imp.pas}
 
 
 {$EndIf l3ObjectRefList_imp}

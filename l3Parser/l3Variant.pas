@@ -1440,7 +1440,7 @@ function L2Ml3TagHolderIteratePropertiesAction(anAction: pointer): Ml3TagHolder_
 asm
  jmp l3LocalStub
 end;//L2Ml3TagHolderIteratePropertiesAction
-{$Include ..\L3\l3Changing.imp.pas}
+{$Include l3Changing.imp.pas}
 
 // start class Tl3Variant
 

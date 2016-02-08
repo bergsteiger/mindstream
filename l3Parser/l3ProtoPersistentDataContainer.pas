@@ -1,6 +1,6 @@
 unit l3ProtoPersistentDataContainer;
  
-{$Include ..\L3\l3Define.inc}
+{$Include l3Define.inc}
 
 interface
 

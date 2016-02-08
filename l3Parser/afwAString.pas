@@ -1,6 +1,6 @@
 unit afwAString;
  
-{$Include ..\AFW\afwDefine.inc}
+{$Include afwDefine.inc}
 
 interface
 

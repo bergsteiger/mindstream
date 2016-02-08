@@ -38,10 +38,10 @@ uses
   l3InterfacesMisc
   ;
 
-{$Include ..\L3\l3Unknown.imp.pas}
+{$Include l3Unknown.imp.pas}
 
-{$Include ..\L3\l3DataContainer.imp.pas}
+{$Include l3DataContainer.imp.pas}
 
-{$Include ..\L3\l3COMQueryInterface.imp.pas}
+{$Include l3COMQueryInterface.imp.pas}
 
 end.

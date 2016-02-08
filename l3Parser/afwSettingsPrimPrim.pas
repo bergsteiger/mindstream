@@ -1,6 +1,7 @@
 unit afwSettingsPrimPrim;
+
  
-{$Include ..\AFW\afwDefine.inc}
+{$Include afwDefine.inc}
 
 interface
 
@@ -14,7 +15,7 @@ uses
 type
  _SettingsClass_ = IafwSettingsImpl;
  _afwSettingsPrim_Parent_ = Tl3ProtoObject;
- {$Include ..\AFW\afwSettingsPrim.imp.pas}
+ {$Include afwSettingsPrim.imp.pas}
  TafwSettingsPrimPrim = {abstract} class(_afwSettingsPrim_, IafwSettingsPrim)
  public
  // public methods
@@ -33,7 +34,7 @@ uses
   l3VCLStrings
   ;
 
-{$Include ..\AFW\afwSettingsPrim.imp.pas}
+{$Include afwSettingsPrim.imp.pas}
 
 // start class TafwSettingsPrimPrim
 

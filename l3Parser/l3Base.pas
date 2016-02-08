@@ -7647,7 +7647,7 @@ end;
 {$EndIf D+}
 
 initialization
-{!touched!}{$IfDef LogInit} WriteLn('W:\common\components\rtl\Garant\L3\l3Base.pas initialization enter'); {$EndIf}
+{!touched!}{$IfDef LogInit} WriteLn('l3Base.pas initialization enter'); {$EndIf}
  l3MemU := Tl3System; 
  {$IfDef l3UseMMX}
  if not MMX_Supported then
@@ -7662,7 +7662,7 @@ initialization
  //{$EndIf l3TraceSysGetMem}
  //InitializeCriticalSection(l3StubHeadCS);
  l3System;
-{!touched!}{$IfDef LogInit} WriteLn('W:\common\components\rtl\Garant\L3\l3Base.pas initialization leave'); {$EndIf}
+{!touched!}{$IfDef LogInit} WriteLn('l3Base.pas initialization leave'); {$EndIf}
 finalization
  l3OutMemStat;
  l3FreeGlobal(g_l3System);

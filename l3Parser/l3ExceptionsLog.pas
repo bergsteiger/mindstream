@@ -797,10 +797,10 @@ begin
 end;
 
 initialization
-{!touched!}{$IfDef LogInit} WriteLn('W:\common\components\rtl\Garant\L3\l3ExceptionsLog.pas initialization enter'); {$EndIf}
+{!touched!}{$IfDef LogInit} WriteLn('l3ExceptionsLog.pas initialization enter'); {$EndIf}
  OpenLog;
 
-{!touched!}{$IfDef LogInit} WriteLn('W:\common\components\rtl\Garant\L3\l3ExceptionsLog.pas initialization leave'); {$EndIf}
+{!touched!}{$IfDef LogInit} WriteLn('l3ExceptionsLog.pas initialization leave'); {$EndIf}
 finalization
  _Finalization;
 

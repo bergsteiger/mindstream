@@ -1,6 +1,6 @@
 unit afwSettingsImplSing;
  
-{$Include ..\AFW\afwDefine.inc}
+{$Include afwDefine.inc}
 
 interface
 

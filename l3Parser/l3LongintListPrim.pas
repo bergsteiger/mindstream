@@ -61,9 +61,9 @@ uses
 
 type _Instance_R_ = Tl3LongintListPrim;
 
-{$Include ..\L3\l3AtomicList.imp.pas}
+{$Include l3AtomicList.imp.pas}
 
-{$Include ..\L3\l3Storable.imp.pas}
+{$Include l3Storable.imp.pas}
 
 // start class Tl3LongintListPrim
 

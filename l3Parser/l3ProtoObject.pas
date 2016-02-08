@@ -27,6 +27,6 @@ uses
   l3Interlocked
   ;
 
-{$Include ..\L3\l3Unknown.imp.pas}
+{$Include l3Unknown.imp.pas}
 
 end.

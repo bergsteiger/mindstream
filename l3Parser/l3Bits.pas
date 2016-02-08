@@ -297,9 +297,9 @@ begin
 end;
 
 initialization
-{!touched!}{$IfDef LogInit} WriteLn('W:\common\components\rtl\Garant\L3\l3Bits.pas initialization enter'); {$EndIf}
+{!touched!}{$IfDef LogInit} WriteLn('l3Bits.pas initialization enter'); {$EndIf}
  LoadBitTable;
 
-{!touched!}{$IfDef LogInit} WriteLn('W:\common\components\rtl\Garant\L3\l3Bits.pas initialization leave'); {$EndIf}
+{!touched!}{$IfDef LogInit} WriteLn('l3Bits.pas initialization leave'); {$EndIf}
 end.
 

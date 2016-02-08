@@ -5,7 +5,7 @@ unit afwTypes;
 {$EndIf DesignTimeLibrary}
 
  
-{$Include ..\AFW\afwDefine.inc}
+{$Include afwDefine.inc}
 
 interface
 

@@ -1216,9 +1216,9 @@ end;
 
 
 initialization
-{!touched!}{$IfDef LogInit} WriteLn('W:\common\components\rtl\Garant\L3\l3UnicodeBMSearch.pas initialization enter'); {$EndIf}
+{!touched!}{$IfDef LogInit} WriteLn('l3UnicodeBMSearch.pas initialization enter'); {$EndIf}
 
-{!touched!}{$IfDef LogInit} WriteLn('W:\common\components\rtl\Garant\L3\l3UnicodeBMSearch.pas initialization leave'); {$EndIf}
+{!touched!}{$IfDef LogInit} WriteLn('l3UnicodeBMSearch.pas initialization leave'); {$EndIf}
 finalization
  if Assigned(LoadInProgress) then
   FreeAndNil(LoadInProgress);

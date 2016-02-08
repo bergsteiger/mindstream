@@ -1923,8 +1923,8 @@ begin
 end;
 
 initialization
-{!touched!}{$IfDef LogInit} WriteLn('W:\common\components\rtl\Garant\L3\l3Memory.pas initialization enter'); {$EndIf}
+{!touched!}{$IfDef LogInit} WriteLn('l3Memory.pas initialization enter'); {$EndIf}
   l3System.AddExitProc(l3FreeMemoryChains);
 
-{!touched!}{$IfDef LogInit} WriteLn('W:\common\components\rtl\Garant\L3\l3Memory.pas initialization leave'); {$EndIf}
+{!touched!}{$IfDef LogInit} WriteLn('l3Memory.pas initialization leave'); {$EndIf}
 end.

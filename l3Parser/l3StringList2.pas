@@ -1,6 +1,6 @@
 unit l3StringList2;
  
-{$Include ..\L3\l3Define.inc}
+{$Include l3Define.inc}
 
 interface
 
@@ -13,7 +13,7 @@ uses
 type
  _FindDataType_ = Tl3WString;
  _l3Searcher_Parent_ = Tl3StringList1;
- {$Include ..\L3\l3Searcher.imp.pas}
+ {$Include l3Searcher.imp.pas}
  Tl3StringList2 = class(_l3Searcher_)
  end;//Tl3StringList2
 
@@ -44,6 +44,6 @@ end;//CompareItemWithData
 
 type _Instance_R_ = Tl3StringList2;
 
-{$Include ..\L3\l3Searcher.imp.pas}
+{$Include l3Searcher.imp.pas}
 
 end.

@@ -30,7 +30,7 @@ begin
 end;//CompareExistingItems
 
 
-{$Include ..\L3\l3AtomicListPrim.imp.pas}
+{$Include l3AtomicListPrim.imp.pas}
 
 
 {$EndIf l3AtomicList_imp}

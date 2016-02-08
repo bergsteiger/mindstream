@@ -1,6 +1,6 @@
 unit afwSettingsImplPersistent;
  
-{$Include ..\AFW\afwDefine.inc}
+{$Include afwDefine.inc}
 
 interface
 
