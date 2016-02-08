@@ -1,0 +1,17 @@
+// to.ms.dict
+
+USES
+ core.ms.dict
+;
+
+ARRAY operator to 
+  ^@ IN aFrom
+  ^ IN aTo
+ @ ( 
+  OBJECT IN aLambda
+  INTEGER VAR I
+  I := ( aFrom DO )
+  Dec I
+  ( aTo DO I ) - LOOP ( Inc I I aLambda DO ) 
+ ) FunctorToIterator >>> Result
+; // to

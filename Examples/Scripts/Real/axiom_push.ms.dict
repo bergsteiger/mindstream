@@ -1,0 +1,131 @@
+UNIT axiom_push.ms.dict
+
+USES
+ axiom:Tl3TokenType
+;
+
+PROCEDURE axiom:PushSymbol
+ LINK ^ IN aSymbol
+ %SUMMARY '«апихивает во входной поток парсера им€ слова aSymbol' ;
+ aSymbol pop:Word:Name Ctx:Parser:PushSymbol
+; // axiom:PushSymbol
+
+PROCEDURE axiom:PushImmediateSymbol
+ LINK ^ IN aSymbol
+ %SUMMARY '«апихивает во входной поток парсера им€ слова aSymbol дл€ непосредственного выполнени€' ;
+ axiom:PushSymbol [EXECUTE]
+ aSymbol pop:Word:Name Ctx:Parser:PushSymbol
+; // axiom:PushSymbol
+
+MACRO [] 
+ axiom:PushSymbol [ 
+ axiom:PushSymbol ]
+; // []
+
+WordAlias () NOP
+
+PROCEDURE axiom:PushStringAsSymbol
+ ^ IN aString
+ aString DO Ctx:Parser:PushSymbol
+; // axiom:PushString
+
+PROCEDURE Ctx:Parser:PushLeftDottedSymbol
+ STRING IN aValue
+ %SUMMARY '«апихивает во входной поток парсера aValue предварЄнное точкой' ;
+ '.' (+) aValue Ctx:Parser:PushSymbol
+; // Ctx:Parser:PushLeftDottedSymbol
+
+INTEGER STRING TYPE TOKEN
+INTEGER TYPE TOKEN_TYPE
+ // - вообще говор€ это должен быть Tl3TokenType, но там проблема с проверкой типов
+
+PROCEDURE axiom:Push
+ TOKEN IN aToken
+ TOKEN_TYPE IN aTokenType
+
+ %SUMMARY '«апихивает во входной поток парсера токен aToken типизиру€ его в зависимости от aTokenType' ;
+
+ aTokenType CASE
+  Tl3TokenType::l3_ttSymbol 
+   ( aToken Ctx:Parser:PushSymbol )
+  Tl3TokenType::l3_ttString 
+   ( aToken Ctx:Parser:PushString )
+  Tl3TokenType::l3_ttInteger
+   ( aToken Ctx:Parser:PushInt )
+  DEFAULT 
+   ( ERROR [ 'Ќеожиданный тип токена: ' aTokenType Tl3TokenType:ValueToName ] )
+ end // aTokenType Case
+; // axiom:Push
+
+USES
+ string.ms.dict
+; 
+
+PROCEDURE axiom:PushSerias
+  STRING IN aWordInfo
+
+ if ( aWordInfo IsNil ! ) then
+ begin
+  aWordInfo ' ' string:Split:for> Ctx:Parser:PushSymbol
+ end
+; // axiom:PushSerias
+
+PROCEDURE axiom:PushWordInfo
+  STRING IN aWordInfo
+
+ aWordInfo axiom:PushSerias
+; // axiom:PushWordInfo
+
+CONST cInParamItemsCount 3
+
+ARRAY FUNCTION axiom:InParams:It
+  ENGINE_WORD IN aParams
+
+ aParams CodeIterator .slice> cInParamItemsCount >>> Result
+; // axiom:InParams:It
+
+MACRO in_param
+  Literal IN aName
+
+ TtfwWordInfo VAR l_WordInfo
+ Ctx:WordInfo >>> l_WordInfo
+
+ STRING VAR l_TypeInfo
+ l_WordInfo pop:WordInfo:ToString >>> l_TypeInfo
+
+ Ctx:ClearTypeInfo
+ 
+ l_TypeInfo CompileValue
+
+ @SELF CompileValue
+ 
+ aName |N CompileValue
+; // in_param
+
+PROCEDURE axiom:Params:PushWithOtherStereo
+  ENGINE_WORD IN aCaller
+  STRING IN aStereo
+  ENGINE_WORD IN aParams
+
+ aParams axiom:InParams:It ==> ( 
+  IN aTypes
+  IN aStereoC
+  IN aParam
+
+  aStereoC |N NameOf in_param == ?ASSURE [ '¬ходные параметры должны быть помечены стереотипом ' NameOf in_param ]
+
+  STRING VAR l_Types
+  aTypes DO >>> l_Types
+
+  l_Types axiom:PushSerias
+  aStereo axiom:PushSerias 
+  aParam pop:Word:Name Ctx:Parser:PushSymbol  
+ )
+; // axiom:Params:PushWithOtherStereo
+
+PROCEDURE axiom:Params:Push
+  ENGINE_WORD IN aCaller
+  ENGINE_WORD IN aParams
+
+ aCaller 'IN' aParams axiom:Params:PushWithOtherStereo
+; // axiom:Params:Push

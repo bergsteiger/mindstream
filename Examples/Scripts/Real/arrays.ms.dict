@@ -1,0 +1,70 @@
+UNIT arrays.ms.dict
+
+USES
+ to.ms.dict
+ filter.ms.dict
+ map.ms.dict
+ reverted.ms.dict
+;
+
+EXPORTS
+ * 
+
+USES
+ macro.ms.dict
+;
+
+macro IT 
+  //ARRAY IN A // - слева должен быть массив
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив A вызывая лямбду aWhatToDo' ;
+ aWhatToDo CompileRef
+ @ SWAP CompileValue
+ @ ITERATE CompileValue
+ //aWhatToDo A ITERATE
+; // IT
+
+/*{operator IT 
+  ARRAY IN A
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив A вызывая лямбду aWhatToDo' ;
+ aWhatToDo A ITERATE
+; // IT}*/
+
+WordAlias ==> IT
+
+macro for
+  ^ IN aList
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив aList вызывая лямбду aWhatToDo' ;
+ aList CompileRef
+ @ DO CompileValue
+ aWhatToDo CompileRef
+ @ SWAP CompileValue
+ @ ITERATE CompileValue
+ //aList DO ==> ( aWhatToDo DO )
+; // for
+
+/*{operator for
+  ^ IN aList
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив aList вызывая лямбду aWhatToDo' ;
+ aList DO ==> ( aWhatToDo DO )
+; // for}*/
+
+WordAlias >for> ==>
+WordAlias .for> ==>
+
+WordAlias array:AddTo >>>[]
+
+PROCEDURE array:?AddTo
+  IN aValue
+  ^ IN anArray
+
+ ARRAY VAR l_Array
+ anArray DO >>> l_Array
+
+ aValue l_Array array:Has ! ? (
+  aValue array:AddTo l_Array
+ ) // aValue l_Array array:Has ! ?
+; // array:?AddTo

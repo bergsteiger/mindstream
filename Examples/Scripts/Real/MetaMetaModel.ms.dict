@@ -1,0 +1,36 @@
+UNIT MetaMetaModel.ms.dict
+
+USES
+ metaMACRO.ms.dict
+;
+
+// ---------------------------------------------------------------------------
+
+meta-meta-model-begin
+ 'Тут будем определять аксиоматику мета-мета-модели, а потом вынесем её 
+  в отдельный словарь.
+ '
+
+StereotypeStereotypeProducer meta
+ %SUMMARY '
+ Определяем базовый элемент мета-модели
+ Тот самый который позволяет тащить всё остальное "за волосы из болота"
+ Через этот примитив выводятся все остальные
+ '
+ ; // %SUMMARY 
+; // meta
+
+NamedAutolinkProducer %VALUE %V
+ %REMARK 'Значение элемента'
+
+meta-meta-model-end
+
+USES
+ WordsRTTI.ms.dict
+;
+
+EXPORTS
+ WordsRTTI.ms.dict
+
+// ---------------------------------------------------------------------------
+

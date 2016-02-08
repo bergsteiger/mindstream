@@ -1,0 +1,127 @@
+UNIT Bind.ms.dict
+
+USES
+ axiom:WordInfo
+ core.ms.dict
+ string.ms.dict
+;
+
+PROCEDURE ExpandMethodName
+  TtfwWord IN Self
+  STRING IN aMethod
+
+ %SUMMARY 'Вызывает метод aMethod на объекте Self' ;
+
+ STRING VAR l_FullMethodName
+
+ TtfwValueTypes VAR l_ValueTypes
+ Self pop:Word:Info pop:WordInfo:ValueTypes >>> l_ValueTypes
+
+ l_ValueTypes IsNil ! ?ASSURE [ 'Нет типа для вызова метода. Значение ' Self ToPrintable ]
+
+ l_ValueTypes pop:ValueTypes:Name >>> l_FullMethodName
+ l_FullMethodName ' ' string:Pos -1 == ?ASSURE 'Множественные типы для вызова методов объектов пока не поддерживаются'
+
+ [ l_FullMethodName ':' aMethod ] strings:Cat >>> l_FullMethodName
+ l_FullMethodName IsWordDeclared ?ASSURE [ 'Метод ' l_FullMethodName ' не определён' ]
+
+ //Self |N Msg
+ Self CompileValue
+ //Self |N Ctx:Parser:PushSymbol
+ // по идее Ctx:Parser:PushSymbol - тоже должен работать, но не работает
+ // НЕ РАБОТАЕТ из-за "правых" параметров, которые дают "скобку" - (
+  
+ l_FullMethodName Ctx:Parser:PushSymbol
+; // ExpandMethodName
+
+MACRO |>
+  ^@ IN Self
+  Literal IN aMethod
+
+ %SUMMARY 'Вызывает метод aMethod на объекте Self' ;
+
+ Self aMethod |N ExpandMethodName
+; // |>
+
+PROCEDURE bind
+  STRING IN aName
+
+ %SUMMARY 'Определяет "метод с точкой", который потом разворачивается в вызов "метода объекта"' ;
+ STRING VAR l_Name
+ '.' aName Cat >>> l_Name
+
+ if ( l_Name IsWordDeclared ) then
+ begin
+  TtfwWord VAR l_CurrentParent
+  Ctx:PushFinder >>> l_CurrentParent
+
+  TtfwWord VAR l_ExistingWord
+  l_Name l_CurrentParent pop:KeywordFinder:KeywordByName pop:KeyWord:Word >>> l_ExistingWord
+
+  TtfwWord VAR l_ExistingWordStereo
+  l_ExistingWord pop:Word:Producer >>> l_ExistingWordStereo
+
+  l_ExistingWordStereo IsNil ! ?ASSURE 'Переопределяемое слово должно иметь стереотип'
+
+  l_ExistingWordStereo pop:Word:Name NameOf MACRO == ?ASSURE 'Переопределяемое слово должно быть макросом'
+
+  if ( l_ExistingWord pop:Word:Parent l_CurrentParent == ) then
+  begin
+   axiom:PushSymbol REDEFINITION
+  end
+ end
+
+ axiom:PushSymbol MACRO
+ l_Name Ctx:Parser:PushSymbol
+
+ [
+  '^@ IN Self'
+  'Self'
+  aName NameAsString
+ ] Ctx:Parser:PushArray
+ axiom:PushSymbol ExpandMethodName
+ axiom:PushSymbol ;
+
+; // bind
+
+USES
+ CompileTimeVar.ms.dict
+;
+
+TtfwWord CompileTime-VAR g_Stereo nil
+
+MACRO DefferedSetStereo
+ g_Stereo Ctx:SetWordProducerForCompiledClass
+ nil >>> g_Stereo
+; // DefferedSetStereo
+
+USES
+ axiom_push.ms.dict
+;
+
+PROCEDURE bindAndRestoreContext
+  STRING IN aName
+
+ STRING VAR l_TypeInfo
+ Ctx:WordInfo pop:WordInfo:ToString >>> l_TypeInfo
+ 
+ Ctx:ClearTypeInfo
+
+ aName bind
+
+ l_TypeInfo axiom:PushWordInfo
+; // bindAndRestoreContext
+
+PROCEDURE bindInPlace
+  STRING IN aName
+  TtfwWord IN aStereo
+
+ %SUMMARY 'Определяет "метод с точкой", который потом разворачивается в вызов "метода объекта"' ;
+
+ aName bindAndRestoreContext
+
+ g_Stereo IsNil ?ASSURE 'Вложенные методы пока не поддерживаются'
+
+ aStereo >>> g_Stereo 
+ axiom:PushSymbol DefferedSetStereo
+; // bindInPlace

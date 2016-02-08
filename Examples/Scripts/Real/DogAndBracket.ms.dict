@@ -1,0 +1,92 @@
+// DogAndBracket.ms.dict
+
+USES
+ axiom:Tl3TokenType
+ axiom_push.ms.dict
+ core.ms.dict
+ io.ms.dict
+ macro.ms.dict
+ NoCapsLock.ms.dict
+ params.ms.dict
+ arrays.ms.dict
+ Testing.ms.dict
+;
+
+Procedure DogAndBracket
+ String in aBracketOpen
+ String in aBracketClose
+ INTERFACE var l_Parser 
+ Ctx:Parser >>> l_Parser
+ ARRAY var l_A
+ l_A := []
+
+ l_Parser pop:Parser:NextToken
+ while true
+ begin
+  String var l_Token
+  l_Parser pop:Parser:TokenLongString >>> l_Token
+  TOKEN_TYPE var l_TokenType
+  l_Parser pop:Parser:TokenType >>> l_TokenType
+  if ( l_TokenType = Tl3TokenType::l3_ttSymbol ) then
+  begin
+
+   ( l_Token = NameOf ( ) ?Fail 'Вложенные скобки пока не поддерживаются'
+   ( l_Token = NameOf [ ) ?Fail 'Вложенные скобки пока не поддерживаются'
+
+   if ( l_Token = aBracketClose ) then
+   begin
+    aBracketOpen Ctx:Parser:PushSymbol
+    l_A .slice> 2 .for> 
+    begin
+     TOKEN in aSymbol
+     TOKEN_TYPE in aTokenType
+     axiom:PushSymbol @ 
+     aSymbol aTokenType axiom:Push 
+    end
+    l_Token Ctx:Parser:PushSymbol 
+    break
+   end //l_Token = aBracketClose
+  end // l_TokenType = Tl3TokenType::l3_ttSymbol
+  if ( l_TokenType = Tl3TokenType::l3_ttInteger ) then
+  begin
+   l_Parser pop:Parser:TokenInt >>>[] l_A
+  end // l_TokenType = Tl3TokenType::l3_ttInteger
+  else
+  begin
+   l_Token >>>[] l_A
+  end // l_TokenType = Tl3TokenType::l3_ttInteger
+  l_TokenType >>>[] l_A
+  l_Parser pop:Parser:NextToken
+ end // while true
+; // DogAndBracket
+
+MACRO @(
+ %SUMMARY '
+ Компилирует СПИСОК адресов слов.
+ Аналог ( @ X1 @ X2 .. @ XN )
+ '
+ ;
+ NameOf (
+  NameOf ) 
+   DogAndBracket
+; // @(
+
+TestsFor @(
+ Test T1 @( 1 2 3 4 5 6 1 2 + '123' ) WHILE ( StackLevel > 0 ) Print ;
+; // TestsFor @(
+
+MACRO @[
+ %SUMMARY '
+ Компилирует МАССИВ адресов слов.
+ Аналог [ @ X1 @ X2 .. @ XN ]
+ '
+ ;
+ NameOf [
+  NameOf ]
+   DogAndBracket
+; // @[
+
+TestsFor @[
+ Test T1 @[ 1 2 3 4 5 6 1 2 + '123' ] WHILE ( StackLevel > 0 ) Print ;
+; // TestsFor @[
+

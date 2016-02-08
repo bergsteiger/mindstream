@@ -1,0 +1,62 @@
+// NoCapsLock.ms.dict
+
+USES
+ Documentation.ms.dict
+;
+
+WordAlias array ARRAY
+ %REMARK 'Массив'
+WordAlias private PRIVATE
+ %REMARK 'Приватный член'
+WordAlias Private PRIVATE
+ %REMARK 'Приватный член'
+WordAlias type TYPE
+ %REMARK 'Определение типа'
+WordAlias Type TYPE
+ %REMARK 'Определение типа'
+WordAlias var VAR
+ %REMARK 'Определение переменной'
+WordAlias ?Assure ?ASSURE
+ %REMARK 'Проверка инварианта'
+WordAlias Const CONST
+ %REMARK 'Определение константы'
+WordAlias const Const
+ %REMARK 'Определение константы'
+WordAlias Functor FUNCTOR
+ %REMARK 'Функтор/слово/лямбда'
+Functor Type Lambda
+ %REMARK 'Лямбда'
+Functor Type CallBack
+ %REMARK 'Функция обратного вызова'
+Functor Type Callback
+ %REMARK 'Функция обратного вызова'
+Functor Type callback
+ %REMARK 'Функция обратного вызова'
+Functor Type List
+ %REMARK ' - список слов'
+Functor Type Sequence
+ %REMARK 'Последовательность слов'
+WordAlias void VOID
+ %REMARK ' - метод не возвращающий результата'
+
+WordAlias break BREAK
+
+WordAlias exit EXIT
+
+WordAlias continue CONTINUE
+
+WordAlias ?Fail ?FAIL
+
+WordAlias case CASE
+WordAlias Case CASE
+
+WordAlias default DEFAULT
+WordAlias Default DEFAULT
+
+WordAlias error ERROR
+WordAlias Error ERROR
+
+WordAlias Procedure PROCEDURE
+
+WordAlias String STRING
+WordAlias string STRING

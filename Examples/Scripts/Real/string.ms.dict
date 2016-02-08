@@ -1,0 +1,105 @@
+UNIT string.ms.dict
+
+: (string)
+ ^ IN aValue
+ aValue DO ToPrintable
+; // (string)
+
+STRING FUNCTION string:CatWihAny
+ STRING IN aString
+ IN aValue
+ aString aValue ToPrintable Cat >>> Result
+; // string:CatWihAny
+
+STRING FUNCTION any:Cat
+ ARRAY IN anArray
+ anArray .map> ToPrintable strings:Cat >>> Result
+; // any:Cat
+
+: string:Split:for>
+  STRING IN aString
+  STRING IN aSep
+  ^ IN aLambda
+
+ %SUMMARY 'Разделяет строку aString по разделителю aSep и для каждой части вызывает aLambda' ;
+
+ while ( aString IsNil ! ) 
+ begin
+  aSep string:SplitTo! aString
+  STRING VAR l_Part
+  >>> l_Part
+  if ( l_Part IsNil ! ) then
+  begin
+   l_Part aLambda DO
+  end
+ end
+; // string:Split:for>
+
+USES
+ core.ms.dict
+ Testing.ms.dict
+;
+
+TestsFor any:Cat
+ Test T1 [ 'A' 123 'B' ] any:Cat Print ;
+ Test T2 [ 'A' 124 'B' ] any:Cat Print ;
+; // TestsFor any:Cat
+
+STRING FUNCTION (+)?
+ STRING in aPrefix
+ STRING right aSuffix
+ %SUMMARY 'Если aSuffix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку' ;
+ Result := ''
+ STRING VAR l_Suffix
+ aSuffix >>> l_Suffix
+ if ( l_Suffix =/= '' ) then
+  ( aPrefix l_Suffix Cat >>> Result )
+; // (+)?
+
+TestsFor (+)?
+ Test T1 '' (+)? 'B' Print ;
+ Test T2 'A' (+)? 'B' Print ;
+ Test T3 'A' (+)? '' Print ;
+ Test T4 'A' (+)? 'D' Print ;
+ Test T5 'A' (+)? '123' Print ;
+; // TestsFor (+)?
+
+STRING FUNCTION ?(+)
+ STRING in aPrefix
+ STRING right aSuffix
+ %SUMMARY 'Если aPrefix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку' ;
+ Result := ''
+ if ( aPrefix =/= '' ) then
+  ( aPrefix aSuffix Cat >>> Result )
+; // ?(+)
+
+TestsFor ?(+)
+ Test T1 '' ?(+) 'B' Print ;
+ Test T2 'A' ?(+) 'B' Print ;
+ Test T3 'A' ?(+) '' Print ;
+; // TestsFor ?(+)
+
+STRING FUNCTION strings:CatSep>
+ STRING right aSep
+ ARRAY right aValues
+ aValues aSep strings:CatSep >>> Result
+; // strings:CatSep>
+
+TestsFor strings:CatSep>
+ Test T1 strings:CatSep> ' ' [ 'A' 'B' ] Print ;
+ Test T2 strings:CatSep> ' ' [ 'A ' 'B' ] Print ;
+ Test T3 strings:CatSep> ' ' [ 'A ' ' B' ] Print ;
+ Test T4 strings:CatSep> ' ' [ 'A' ' B' ] Print ;
+ Test T5 strings:CatSep> ' ' [ '' 'B' ] Print ;
+ Test T6 strings:CatSep> ' ' [ 'A' '' ] Print ;
+; // TestsFor strings:CatSep>
+ 
+WordAlias CatSep> strings:CatSep>
+
+TestsFor string:Split:for>
+ Test T1 'a b c' ' ' string:Split:for> Print ;
+ Test T2 'a b  c' ' ' string:Split:for> Print ;
+ Test T3 'abc' ' ' string:Split:for> Print ;
+ Test T4 '' ' ' string:Split:for> Print ;
+ Test T5 ' ' ' ' string:Split:for> Print ;
+; // string:Split:for> 
