@@ -476,6 +476,10 @@ ModelElement elem_func Action
  Self 'Action' .ElemWord >>> Result
 ; // Action
 
+ModelElement elem_func Stub
+ Self 'Stub' .ElemWord >>> Result
+; // Stub
+
 ModelElement elem_func Implementor
  Self 'Implementor' .ElemWord >>> Result
 ; // Implementor
