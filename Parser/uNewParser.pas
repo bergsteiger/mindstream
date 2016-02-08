@@ -23,7 +23,13 @@ type
  EUnknownToken = Class(Exception);
 
 type
- TTokenType = (ttUnknown, ttString, ttToken, ttEOF, ttBoolean, ttNumber, ttIdentifier);
+ TTokenType = (ttUnknown,
+               ttString,
+               ttToken,
+               ttBoolean,
+               ttNumber,
+               ttIdentifier,
+               ttEOF);
 
 type
  TScriptParser = class

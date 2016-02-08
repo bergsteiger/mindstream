@@ -53,22 +53,25 @@ var
  l_Parser : Tl3CustomParser;
  l_Filer : Tl3DosFiler;
  l_TokenType : Tl3TokenType;
+ l_Tokens : string;
 begin
- l_Filer := Tl3DosFiler.Make('Test_4_1.txt', l3_fmRead, True, 500);
+ l_Filer := Tl3DosFiler.Make('Test_4_1.txt');
  l_Parser := Tl3CustomParser.Create;
+ l_Filer.Open;
  l_Parser.Filer := l_Filer;
-
+ l_Tokens := ' ';
  l_TokenType := l3_ttBOF;
  try
   while not (l_TokenType = l3_ttEOF) do
   begin
    l_TokenType := l_Parser.NextToken;
+   l_Tokens := l_Tokens + l_Parser.TokenString;
   end;
  finally
   FreeAndNil(l_Filer);
   FreeAndNil(l_Parser);
  end;
-
+ ShowMessage(l_Tokens);
 end;
 
 function TL3ParserVsTNewParser.FileName: string;
@@ -78,6 +81,6 @@ end;
 
 initialization
   // Register any test cases with the test runner
- RegisterTest(TL3ParserVsTNewParser.Suite);
+// RegisterTest(TL3ParserVsTNewParser.Suite);
 end.
 
