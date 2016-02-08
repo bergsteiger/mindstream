@@ -2655,7 +2655,12 @@ elem_iterator ImplUses
   .join> ( Self .NeededElementsTotal )
  end // Self .IsForImplementation
  .join> ( Self .UsedTotal )
- .join> ( Self .AbstractUses )
+ 
+ if ( Self .IsClassOrMixIn ) then
+ begin
+  .join> ( Self .AbstractUses )
+ end // ( Self .IsClassOrMixIn )
+  
  if ( Self .Name 'l3IID' == ) then
  begin
   .join> [ GarantModel::Windows GarantModel::SysUtils ]
