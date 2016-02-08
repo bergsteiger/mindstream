@@ -2631,6 +2631,23 @@ elem_iterator UsedTotal
  >>> Result
 ; // UsedTotal
 
+elem_iterator AbstractUses
+ [empty]
+ ( 
+  Self .Inherits 
+  .filter> .IsSimpleClass 
+  .filter> ( .Abstraction at_abstract == )
+ ) .for> ( 
+   IN aG
+  .joinWithLambded> ( 
+   aG .Implements 
+   .filter> .IsMixIn
+  ) // .joinWithLambded> 
+  .UsedTotal
+ ) // .for>
+ >>> Result
+; // AbstractUses
+
 elem_iterator ImplUses
  [ 'l3ImplUses' ]
  if ( Self .IsForImplementation ) then
@@ -2638,6 +2655,7 @@ elem_iterator ImplUses
   .join> ( Self .NeededElementsTotal )
  end // Self .IsForImplementation
  .join> ( Self .UsedTotal )
+ .join> ( Self .AbstractUses )
  if ( Self .Name 'l3IID' == ) then
  begin
   .join> [ GarantModel::Windows GarantModel::SysUtils ]
