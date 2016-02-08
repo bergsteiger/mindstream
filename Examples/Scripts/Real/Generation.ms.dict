@@ -945,6 +945,10 @@ INTERFACE elem_func ActionParam
  ) >>> Result
 ; // ActionParam
 
+BOOLEAN elem_func IsInParam
+ Self .IsStereotype st_in::Attribute >>> Result
+; // IsInParam
+
 ARRAY elem_func MethodParameters
  RULES
   ( Self .IsIterator )
@@ -957,7 +961,7 @@ ARRAY elem_func MethodParameters
        [ Self .ActionParam ]
        .join> (
         Self .Attributes
-        .filter> ( .IsStereotype st_in::Attribute )
+        .filter> .IsInParam
        ) // .join>
       ) // DEFAULT
     ; // RULES
@@ -1805,6 +1809,18 @@ BOOLEAN elem_func NeedFinalize
  >>> Result
 ; // NeedFinalize
 
+BOOLEAN elem_func IsLocalMethod
+ Self .IsStereotype st_localmethod >>> Result
+; // IsLocalMethod
+
+BOOLEAN elem_func IsLocalVar
+ Self .IsStereotype st_var::Attribute >>> Result
+; // IsLocalVar
+
+BOOLEAN elem_func IsGlobalVar
+ Self .IsStereotype st_globalvar::Attribute >>> Result
+; // IsGlobalVar
+
 elem_proc MethodUserCode
   STRING IN aKey
   TtfwWord IN aCode
@@ -1812,20 +1828,38 @@ elem_proc MethodUserCode
  STRING VAR l_Key 
  aKey >>> l_Key
  
- RULES
-  ( Self .IsSetter ) then
-   ( 'set' l_Key Cat >>> l_Key )
-  ( Self .IsProperty ) then
-   ( 'get' l_Key Cat >>> l_Key )
- ; // RULES
- 
  VAR l_Implementor
  Self .ImplementorOrParent >>> l_Implementor
  
- if ( l_Implementor IsNil ! ) then
- begin
-  [ '_' l_Implementor .UID l_Key ] strings:Cat >>> l_Key
- end // ( l_Implementor IsNil ! )
+ RULES
+  ( l_Key 'iter' == )
+   ()
+  ( l_Key 'afteriter' == )
+   ()
+  ( l_Key 'iterparam' == )
+   ()
+  DEFAULT
+   (
+    RULES
+     ( Self .IsSetter ) then
+      ( 'set' l_Key Cat >>> l_Key )
+     ( Self .IsProperty ) then
+      ( 'get' l_Key Cat >>> l_Key )
+    ; // RULES
+    
+    if ( l_Implementor IsNil ! ) then
+    begin
+     [ 
+      '_' 
+      if ( Self .IsLocalMethod ! ) then
+      begin
+       l_Implementor .UID 
+      end // ( Self .IsLocalMethod ! )
+      l_Key 
+     ] strings:Cat >>> l_Key
+    end // ( l_Implementor IsNil ! )
+   ) // DEFAULT
+ ; // RULES
  
  BOOLEAN elem_func IsSingletonExists
   Self .Name 'Exists' ==
@@ -2058,7 +2092,7 @@ ANY elem_func GetUserCode
     RULES
      ( l_Parent .IsServiceImplementation )
       [
-       l_Parent .Dependencies 
+       l_Parent .Dependencies
        .filter> ( .IsStereotype st_implements::Dependency )
        .for> (
          IN anItem
@@ -2881,7 +2915,12 @@ INTEGER elem_func MethodAbstraction
      ; // RULES
     ) // opkind_Implemented
    opkind_Overridden
-    at_override
+    RULES
+     ( Self .IsStereotype st_inline::Operation )
+      at_final
+     DEFAULT 
+      at_override
+    ; // RULES  
    DEFAULT
     at_final 
   END // CASE
@@ -3462,6 +3501,10 @@ INTERFACE elem_func InstanceMethod
  >>> Result
 ; // InstanceMethod
 
+BOOLEAN elem_func IsServiceIterator
+ Self .IsStereotype st_serviceiterator >>> Result
+; // IsServiceIterator
+
 elem_iterator AllOperationsForOverload
  Cached:
  (
@@ -3487,7 +3530,7 @@ elem_iterator AllOperationsForOverload
        )
       )
       .filter> ( .IsStereotype st_responsibility::Operation ! ) 
-      .filter> ( .IsStereotype st_serviceiterator ! ) 
+      .filter> ( .IsServiceIterator ! ) 
       .filter> ( .IsIni ! )
       .filter> ( .IsFini ! )
       .join> ( Self .Implemented )
@@ -4466,7 +4509,7 @@ elem_proc OutTypes
  
  false >>> l_WasType
  
- Self aValid @ (
+ : DoOutType
    IN aChild
   if ( aChild .IsType ) then
   begin
@@ -4477,7 +4520,27 @@ elem_proc OutTypes
    end // l_WasType !
   end // aChild .IsType
   Indented: ( aChild .OutType )
- ) .OutChildrenRec
+ ; // DoOutType
+ 
+ Self @ ( 
+   IN aChild 
+  aChild aValid DO 
+  AND ( aChild .UPisTrue "is default ancestor" )
+ ) @ DoOutType .OutChildrenRec
+ 
+ Self @ ( 
+   IN aChild 
+  aChild aValid DO 
+  AND ( aChild .UPisTrue "is default ancestor" ! )
+  AND ( aChild .IsPointer )
+ ) @ DoOutType .OutChildrenRec
+ 
+ Self @ ( 
+   IN aChild 
+  aChild aValid DO 
+  AND ( aChild .UPisTrue "is default ancestor" ! )
+  AND ( aChild .IsPointer ! )
+ ) @ DoOutType .OutChildrenRec
 ; // OutTypes
 
 BOOLEAN elem_func IsConstants
@@ -4758,6 +4821,13 @@ elem_proc OutVar
  (
   [
    'var '
+   
+   if ( Self .IsGlobalVar ) then
+    'g_'
+   else 
+   if ( Self .IsLocalVar ) then
+    'l_'
+    
    Self .Name
    ': '
    if ( Self .Target .IsMethod ) then
@@ -4811,6 +4881,18 @@ elem_proc OutInterfaceSection
  l_WasOut ? OutLn
 ; // OutInterfaceSection
 
+elem_iterator LocalMethods
+ Self .Operations
+ .filter> .IsLocalMethod
+ >>> Result
+; // LocalMethods
+
+elem_iterator LocalVars
+ Self .Attributes
+ .filter> .IsLocalVar
+ >>> Result
+; // LocalVars
+
 elem_proc MethodBody
  if ( Self .UPisTrue 'extprop:isAsm' ) then
  begin
@@ -4819,9 +4901,103 @@ elem_proc MethodBody
  end 
  else 
  begin
+  TF g_MethodParentPrefix (
+   '' >>> g_MethodParentPrefix
+   
+   Self .LocalVars .for> .OutVar
+    
+   Indented:
+   (
+    Self .LocalMethods .for> (
+      IN aMethod
+     OutLn 
+     aMethod .MethodInterfaceForEx: nil ( call.me )
+    ) // Self .LocalMethods .for>
+   ) // Indented:
+  ) // TF g_MethodParentPrefix
+   
   Self .UserCode: cVarUserCodeSuffix ()
   'begin' .Out
-  Self .UserCode: cImplementationUserCodeSuffix ( ' !!! Needs to be implemented !!!' )
+  
+  VAR l_WasOut
+  false >>> l_WasOut
+  
+  Indented:
+  (
+   Self .Dependencies
+   .filter> ( .IsStereotype st_call::Dependency )
+   .filter> ( .Target .IsIterator )
+   .for> (
+     IN aDep
+    Self .UserCode: 'iter' () 
+    
+    VAR l_Target
+    aDep .Target >>> l_Target
+    
+    VAR l_NeedsParams
+    aDep .UPisTrue "iterator needs params" >>> l_NeedsParams
+    
+    if l_NeedsParams then
+    begin
+     if ( l_Target .MethodParameters .filter> .IsInParam .CountIt 0 == ) then
+     begin
+      false >>> l_NeedsParams
+     end // ( l_Target .MethodParameters .filter> .IsInParam .CountIt 0 == )
+    end // l_NeedsParams
+    
+    VAR l_NeedsAfter
+    aDep .UPisTrue "needs after iterator UC" >>> l_NeedsAfter
+    [
+     if ( l_Target .IsServiceIterator ) then
+     begin
+      l_Target .Parent .TypeName '.Instance.'
+     end // ( l_Target .IsServiceIterator )
+     
+     VAR l_Name 
+     l_Target .MethodName >>> l_Name
+     l_Name
+     
+     if ( 'F' l_Name EndsStr ! ) then
+      'F'
+      
+     '('
+     l_Target .Stub .MethodName
+     '('
+     '@'
+     aDep .GetUP "iterator func name"
+     ')' 
+     
+     if ( l_NeedsParams ! ) then
+     begin
+      ')'
+      if ( l_NeedsAfter ! ) then
+       ';' 
+     end // ( l_NeedsParams ! )
+    ] .Out
+    
+    if l_NeedsParams then
+    begin
+     Self .UserCode: 'iterparam' ()
+     [ 
+      ')' 
+      if ( l_NeedsAfter ! ) then
+       ';' 
+     ] .Out
+    end // l_NeedsParams
+    
+    if l_NeedsAfter then
+    begin
+     Self .UserCode: 'afteriter' ()
+    end // l_NeedsAfter
+    
+    true >>> l_WasOut
+   ) // .for>
+  ) // Indented:
+  
+  if ( l_WasOut ! ) then
+  begin
+   Self .UserCode: cImplementationUserCodeSuffix ( ' !!! Needs to be implemented !!!' )
+  end // ( l_WasOut ! )
  end
  [ 'end;//' g_MethodParentPrefix Self .MethodNamePrefix Self .MethodName ] .Out
  OutLn
