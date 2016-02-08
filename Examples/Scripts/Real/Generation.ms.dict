@@ -4895,6 +4895,7 @@ elem_iterator LocalMethods
 elem_iterator LocalVars
  Self .Attributes
  .filter> .IsLocalVar
+ .filter> ( .IsGlobalVar ! )
  >>> Result
 ; // LocalVars
 
