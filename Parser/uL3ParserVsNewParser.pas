@@ -43,6 +43,14 @@ const
                   l3_poAddDigits2WordChars,
                   l3_poNullAsEOF];
 
+type
+ TTokenRec = record
+  rToken : string;
+  rTokenType : Tl3TokenType;
+ constructor Create(const aToken : string; const aTokenType : Tl3TokenType);
+ class operator Equal(const Left, Right : TTokenRec) : Boolean;
+ end;
+
 procedure TL3ParserVsTNewParser.First;
 begin
  Check(True);
@@ -56,6 +64,9 @@ var
  l_Tokens : string;
  l_SR: TSearchRec;
  l_Path : string;
+
+ l_Token1, l_Token2 : TTokenRec;
+
  procedure DoSome(aName: string);
  begin
   l_Tokens := l_Tokens + ' ' + aName;
@@ -73,6 +84,11 @@ begin
    until FindNext(l_SR) <> 0;
    FindClose(l_SR.FindHandle);
  end;
+
+ l_Token1 := TTokenRec.Create('qwe', l3_ttSymbol);
+ l_Token2 := TTokenRec.Create('qwe', l3_ttSymbol);
+
+ Check(l_Token1 = l_Token2);
 { l_Filer := Tl3DosFiler.Make('Test_18_8.txt');
  l_Parser := Tl3CustomParser.Create;
  l_Filer.Open;
@@ -97,8 +113,24 @@ begin
  Result := 'test';
 end;
 
+{ TTokenRec }
+
+constructor TTokenRec.Create(const aToken: string;
+  const aTokenType: Tl3TokenType);
+begin
+ Self.rToken := aToken;
+ Self.rTokenType := aTokenType;
+end;
+
+class operator TTokenRec.Equal(const Left, Right: TTokenRec): Boolean;
+begin
+ Result := False;
+ if (Left.rToken = Right.rToken) and (Left.rTokenType = Right.rTokenType) then
+  Result := True;
+end;
+
 initialization
   // Register any test cases with the test runner
-// RegisterTest(TL3ParserVsTNewParser.Suite);
+ RegisterTest(TL3ParserVsTNewParser.Suite);
 end.
 
