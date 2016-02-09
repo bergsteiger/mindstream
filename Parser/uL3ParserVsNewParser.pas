@@ -22,6 +22,7 @@ type
    function FileName: string;
   published
    procedure First;
+   procedure CheckTokenEquals;
    procedure CheckL3Parser;
  end;
 
@@ -65,8 +66,6 @@ var
  l_SR: TSearchRec;
  l_Path : string;
 
- l_Token1, l_Token2 : TTokenRec;
-
  procedure DoSome(aName: string);
  begin
   l_Tokens := l_Tokens + ' ' + aName;
@@ -85,10 +84,6 @@ begin
    FindClose(l_SR.FindHandle);
  end;
 
- l_Token1 := TTokenRec.Create('qwe', l3_ttSymbol);
- l_Token2 := TTokenRec.Create('qwe', l3_ttSymbol);
-
- Check(l_Token1 = l_Token2);
 { l_Filer := Tl3DosFiler.Make('Test_18_8.txt');
  l_Parser := Tl3CustomParser.Create;
  l_Filer.Open;
@@ -106,6 +101,16 @@ begin
   FreeAndNil(l_Parser);
  end;
  ShowMessage(l_Tokens);  }
+end;
+
+procedure TL3ParserVsTNewParser.CheckTokenEquals;
+var
+ l_Token1, l_Token2 : TTokenRec;
+begin
+ l_Token1 := TTokenRec.Create('qwe', l3_ttSymbol);
+ l_Token2 := TTokenRec.Create('qwe', l3_ttSymbol);
+
+ Check(l_Token1 = l_Token2);
 end;
 
 function TL3ParserVsTNewParser.FileName: string;
