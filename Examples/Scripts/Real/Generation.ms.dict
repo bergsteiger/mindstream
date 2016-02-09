@@ -2361,7 +2361,11 @@ elem_proc UserCode:
        ( 
         VAR l_Op
         Self .Implementor .SpelledFor >>> l_Op
-        ' Result := 1;' .Out 
+        [ 
+         ' Result := '
+         l_Op .Parameters .CountIt
+         ';' 
+        ] .Out 
        ) // ( l_Key cImplementationUserCodeSuffix == )
       DEFAULT
        AsDefault 
