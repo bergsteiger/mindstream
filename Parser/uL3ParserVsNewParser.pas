@@ -132,33 +132,41 @@ end;
 
 procedure TL3ParserVsTNewParser.CheckL3Parser;
 var
- l_Parser : Tl3CustomParser;
- l_Filer : Tl3DosFiler;
- l_TokenType : Tl3TokenType;
  l_Tokens : string;
  l_SR: TSearchRec;
  l_Path : string;
 
- l_l3ParserTokens, l_NewParserTokens : TokenArray;
-
  procedure DoSome(aName: string);
+ var
+  l_Parser : Tl3CustomParser;
+  l_Filer : Tl3DosFiler;
+  l_TokenType : Tl3TokenType;
+  l_l3ParserTokens, l_NewParserTokens : TokenArray;
+  l_i : integer;
  begin
   l_Filer := Tl3DosFiler.Make(aName);
   l_Parser := Tl3CustomParser.Create;
   l_Filer.Open;
   l_Parser.Filer := l_Filer;
-  l_Tokens := ' ';
+  SetLength(l_l3ParserTokens, 1);
   l_TokenType := l3_ttBOF;
+  l_i := 0;
   try
    while not (l_TokenType = l3_ttEOF) do
    begin
+    l_l3ParserTokens[l_i].Create(l_Parser.TokenString, l_TokenType);
     l_TokenType := l_Parser.NextToken;
-    l_Tokens := l_Tokens + '; ' + l_Parser.TokenString;
+
+    SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
+    Inc(l_i);
    end;
   finally
    FreeAndNil(l_Filer);
    FreeAndNil(l_Parser);
   end;
+
+  for l_i := Low(l_l3ParserTokens) to High(l_l3ParserTokens) do
+   l_Tokens := l_Tokens + '; ' + l_l3ParserTokens[l_i].rToken;
  end;
 begin
  l_Tokens := '';
