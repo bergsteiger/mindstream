@@ -48,6 +48,7 @@ implementation
 uses
  l3Filer
  , l3Types
+ ,System.TypInfo
  ;
 { TL3ParserVsTNewParser }
 
@@ -166,7 +167,8 @@ var
   end;
 
   for l_i := Low(l_l3ParserTokens) to High(l_l3ParserTokens) do
-   l_Tokens := l_Tokens + '; ' + l_l3ParserTokens[l_i].rToken;
+   l_Tokens := l_Tokens + '; ' + l_l3ParserTokens[l_i].rToken + '-' +
+               GetEnumName(TypeInfo(TTokenType), Ord(l_l3ParserTokens[l_i].rTokenType)) + '; ';
  end;
 begin
  l_Tokens := '';
