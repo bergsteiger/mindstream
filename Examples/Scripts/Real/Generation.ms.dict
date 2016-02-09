@@ -2107,6 +2107,30 @@ BOOLEAN elem_func InheritsFrom
  >>> Result
 ; // InheritsFrom
 
+STRING elem_func TypeInfo
+ RULES
+  ( Self IsNil )
+   '@tfw_tiVoid'
+  ( Self .TypeName 'Tl3PCharLen' == )
+   '@tfw_tiWString'
+  ( Self .IsString )
+   '@tfw_tiString'
+  ( Self .TypeName 'Il3CString' == )
+   '@tfw_tiString'
+  ( Self .TypeName 'Tl3WString' == )
+   '@tfw_tiString'
+  ( Self .TypeName 'Tl3PCharLenPrim' == )
+   '@tfw_tiString'
+  ( Self .IsRecord )
+   '@tfw_tiStruct'
+  ( Self .IsClassRef ) 
+   '@tfw_tiClassRef'
+  DEFAULT
+   ( 'TypeInfo(' Self .TypeName ')' )
+ ; // RULES
+ >>> Result 
+; // TypeInfo 
+
 ANY elem_func GetUserCode
   STRING IN aKey
  RULES
@@ -2180,24 +2204,7 @@ ANY elem_func GetUserCode
        Self .SpelledFor >>> l_SpelledFor
        ' TtfwTypeRegistrator.RegisterType('
        
-       RULES
-        ( l_SpelledFor .TypeName 'Tl3PCharLen' == )
-         '@tfw_tiWString'
-        ( l_SpelledFor .IsString )
-         '@tfw_tiString'
-        ( l_SpelledFor .TypeName 'Il3CString' == )
-         '@tfw_tiString'
-        ( l_SpelledFor .TypeName 'Tl3WString' == )
-         '@tfw_tiString'
-        ( l_SpelledFor .TypeName 'Tl3PCharLenPrim' == )
-         '@tfw_tiString'
-        ( l_SpelledFor .IsRecord )
-         '@tfw_tiStruct'
-        ( l_SpelledFor .IsClassRef ) 
-         '@tfw_tiClassRef'
-        DEFAULT
-         ( 'TypeInfo(' l_SpelledFor .TypeName ')' )
-       ; // RULES 
+       l_SpelledFor .TypeInfo
        
        ');'
       ] 
@@ -2394,6 +2401,32 @@ elem_proc UserCode:
   ; // AsMethod
   
   RULES
+   ( 
+    ( Self .UID '551544E2001A' == ) // GetResultTypeInfo
+    AND ( Self .Implementor .IsSummoned )
+   ) 
+     RULES
+      ( l_Key cVarUserCodeSuffix == )
+       ()
+      ( l_Key cImplementationUserCodeSuffix == )
+       ( 
+        VAR l_Op
+        Self .Implementor .SpelledFor >>> l_Op
+        [ 
+         ' Result := '
+         if ( l_Op .IsCreator ) then
+         begin
+          '!!!'
+         end // ( l_Op .IsCreator )
+         else
+         begin
+         end // ( l_Op .IsCreator )
+         ';' 
+        ] .Out 
+       ) // ( l_Key cImplementationUserCodeSuffix == )
+      DEFAULT
+       AsDefault 
+     ; // RULES
    ( 
     ( Self .UID '559687E6025A' == ) // GetAllParamsCount
     AND ( Self .Implementor .IsSummoned )
