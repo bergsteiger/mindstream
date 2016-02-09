@@ -58,7 +58,7 @@ var
  l_Path : string;
  procedure DoSome(aName: string);
  begin
-  l_Tokens := l_Tokens + ' ' + l_Tokens;
+  l_Tokens := l_Tokens + ' ' + aName;
  end;
 begin
  l_Tokens := '';
