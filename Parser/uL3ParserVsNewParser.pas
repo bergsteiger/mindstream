@@ -143,12 +143,27 @@ var
 
  procedure DoSome(aName: string);
  begin
-  l_Tokens := l_Tokens + ' ' + aName;
+  l_Filer := Tl3DosFiler.Make(aName);
+  l_Parser := Tl3CustomParser.Create;
+  l_Filer.Open;
+  l_Parser.Filer := l_Filer;
+  l_Tokens := ' ';
+  l_TokenType := l3_ttBOF;
+  try
+   while not (l_TokenType = l3_ttEOF) do
+   begin
+    l_TokenType := l_Parser.NextToken;
+    l_Tokens := l_Tokens + '; ' + l_Parser.TokenString;
+   end;
+  finally
+   FreeAndNil(l_Filer);
+   FreeAndNil(l_Parser);
+  end;
  end;
 begin
-{ l_Tokens := '';
+ l_Tokens := '';
  l_Path :=  '*.txt';
- if FindFirst(l_Path, faAnyFile, l_SR) = 0 then
+{ if FindFirst(l_Path, faAnyFile, l_SR) = 0 then
  begin
    repeat
      if (l_SR.Attr <> faDirectory) then
@@ -157,25 +172,10 @@ begin
      end;
    until FindNext(l_SR) <> 0;
    FindClose(l_SR.FindHandle);
- end;
+ end;       }
 
-{ l_Filer := Tl3DosFiler.Make('Test_18_8.txt');
- l_Parser := Tl3CustomParser.Create;
- l_Filer.Open;
- l_Parser.Filer := l_Filer;
- l_Tokens := ' ';
- l_TokenType := l3_ttBOF;
- try
-  while not (l_TokenType = l3_ttEOF) do
-  begin
-   l_TokenType := l_Parser.NextToken;
-   l_Tokens := l_Tokens + '; ' + l_Parser.TokenString;
-  end;
- finally
-  FreeAndNil(l_Filer);
-  FreeAndNil(l_Parser);
- end;
- ShowMessage(l_Tokens);  }
+ DoSome('Test_4_1.txt');
+ ShowMessage(l_Tokens);
 end;
 
 procedure TL3ParserVsTNewParser.CheckTokenEquals;
