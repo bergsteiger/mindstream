@@ -54,7 +54,7 @@ type
 //                 );
 
 type
- TScriptParser = class
+ TNewParser = class
  private
   f_Stream: TStream;
   f_EOF: Boolean;
@@ -97,7 +97,7 @@ uses
 
 { TScriptParser }
 
-constructor TScriptParser.Create(const aStream: TStream);
+constructor TNewParser.Create(const aStream: TStream);
 begin
  inherited Create;
  f_PosInUnknown := 1;
@@ -105,7 +105,7 @@ begin
  f_Stream := aStream;
 end;
 
-constructor TScriptParser.Create(const aFileName: String);
+constructor TNewParser.Create(const aFileName: String);
 var
  l_FileName: String;
 begin
@@ -115,23 +115,23 @@ begin
  Create(TFileStream.Create(l_FileName, fmOpenRead));
 end;
 
-function TScriptParser.CurrentChar: Char;
+function TNewParser.CurrentChar: Char;
 begin
  Result := f_UnknownToken[f_PosInUnknown];
 end;
 
-destructor TScriptParser.Destroy;
+destructor TNewParser.Destroy;
 begin
  FreeAndNil(f_Stream);
  inherited;
 end;
 
-function TScriptParser.EOF: Boolean;
+function TNewParser.EOF: Boolean;
 begin
  Result := f_EOF AND (f_UnknownToken = '');
 end;
 
-function TScriptParser.GetChar(out aChar: AnsiChar): Boolean;
+function TNewParser.GetChar(out aChar: AnsiChar): Boolean;
 begin
  if (f_Stream.Read(aChar, SizeOf(aChar)) = SizeOf(aChar)) then
  begin
@@ -141,24 +141,24 @@ begin
   Result := false;
 end;
 
-procedure TScriptParser.GetPrevChar(out aChar: AnsiChar);
+procedure TNewParser.GetPrevChar(out aChar: AnsiChar);
 begin
  // Надо ли тут делать проверку на то что это возможно первый символ?
  f_Stream.Position := f_Stream.Position - SizeOf(aChar) - SizeOf(aChar);
  GetChar(aChar);
 end;
 
-procedure TScriptParser.NextChar;
+procedure TNewParser.NextChar;
 begin
  Inc(f_PosInUnknown);
 end;
 
-procedure TScriptParser.PrevChar;
+procedure TNewParser.PrevChar;
 begin
  Dec(f_PosInUnknown);
 end;
 
-procedure TScriptParser.NextToken;
+procedure TNewParser.NextToken;
 var
  l_Token : String;
 
@@ -366,7 +366,7 @@ begin
    f_TokenType := l3_ttEOF;
 end;
 
-function TScriptParser.ReadUnknownToken: String;
+function TNewParser.ReadUnknownToken: String;
 var
  l_Buffer : String;
  l_Char : AnsiChar;

@@ -49,6 +49,7 @@ uses
  l3Filer
  , l3Types
  ,System.TypInfo
+ ,uNewParser
  ;
 { TL3ParserVsTNewParser }
 
@@ -139,36 +140,58 @@ var
 
  procedure DoSome(aName: string);
  var
-  l_Parser : Tl3CustomParser;
+  l_l3Parser : Tl3CustomParser;
+  l_NewParser : TNewParser;
   l_Filer : Tl3DosFiler;
   l_TokenType : Tl3TokenType;
   l_l3ParserTokens, l_NewParserTokens : TokenArray;
   l_i : integer;
  begin
   l_Filer := Tl3DosFiler.Make(aName);
-  l_Parser := Tl3CustomParser.Create;
-  l_Filer.Open;
-  l_Parser.Filer := l_Filer;
-  SetLength(l_l3ParserTokens, 1);
-  l_TokenType := l3_ttBOF;
-  l_i := 0;
+  l_l3Parser := Tl3CustomParser.Create;
   try
+   l_Filer.Open;
+   l_l3Parser.Filer := l_Filer;
+
+   SetLength(l_l3ParserTokens, 1);
+   l_TokenType := l3_ttBOF;
+
+   l_i := 0;
    while not (l_TokenType = l3_ttEOF) do
    begin
-    l_l3ParserTokens[l_i].Create(l_Parser.TokenString, l_TokenType);
-    l_TokenType := l_Parser.NextToken;
+    l_l3ParserTokens[l_i].Create(l_l3Parser.TokenString, l_TokenType);
+    l_TokenType := l_l3Parser.NextToken;
 
     SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
     Inc(l_i);
    end;
   finally
    FreeAndNil(l_Filer);
-   FreeAndNil(l_Parser);
+   FreeAndNil(l_l3Parser);
   end;
 
-  for l_i := Low(l_l3ParserTokens) to High(l_l3ParserTokens) do
-   l_Tokens := l_Tokens + '; ' + l_l3ParserTokens[l_i].rToken + '-' +
+  l_NewParser := TNewParser.Create(aName);
+  try
+   SetLength(l_NewParserTokens, 1);
+   l_TokenType := l3_ttBOF;
+   l_i := 0;
+   while not (l_TokenType = l3_ttEOF) do
+   begin
+    l_NewParserTokens[l_i].Create(l_NewParser.TokenString, l_TokenType);
+    l_TokenType := l_NewParser.NextToken;
+
+    SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
+    Inc(l_i);
+   end;
+
+  finally
+   FreeAndNil(l_NewParser);
+  end;
+
+{  for l_i := Low(l_l3ParserTokens) to High(l_l3ParserTokens) do
+   l_Tokens := l_Tokens + '; ' + l_l3ParserTokens[l_i].rToken; + '-' +
                GetEnumName(TypeInfo(TTokenType), Ord(l_l3ParserTokens[l_i].rTokenType)) + '; ';
+  ShowMessage(l_Tokens);}
  end;
 begin
  l_Tokens := '';
@@ -185,7 +208,6 @@ begin
  end;       }
 
  DoSome('Test_4_1.txt');
- ShowMessage(l_Tokens);
 end;
 
 procedure TL3ParserVsTNewParser.CheckTokenEquals;
