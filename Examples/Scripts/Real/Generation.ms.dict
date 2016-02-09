@@ -2107,7 +2107,7 @@ BOOLEAN elem_func InheritsFrom
  >>> Result
 ; // InheritsFrom
 
-STRING elem_func TypeInfo
+ARRAY STRING elem_func TypeInfo
  RULES
   ( Self IsNil )
    '@tfw_tiVoid'
@@ -2126,7 +2126,7 @@ STRING elem_func TypeInfo
   ( Self .IsClassRef ) 
    '@tfw_tiClassRef'
   DEFAULT
-   ( 'TypeInfo(' Self .TypeName ')' )
+   [ 'TypeInfo(' Self .TypeName ')' ]
  ; // RULES
  >>> Result 
 ; // TypeInfo 
