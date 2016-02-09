@@ -241,7 +241,8 @@ type
                   l3_ttInteger,    {- целое число}
                   l3_ttFloat,      {- вещественное число}
                   l3_ttComment,    {- комментарий}
-                  l3_ttDoubleQuotedString // - строка в двойных кавычках
+                  l3_ttDoubleQuotedString, // - строка в двойных кавычках
+                  l3_ttUnknown
                  );
    {* - тип токена.
        |<br>

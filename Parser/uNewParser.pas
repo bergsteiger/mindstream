@@ -4,6 +4,7 @@ interface
 uses
  Classes
  ,SysUtils
+ ,l3Parser
  ;
 
 Const
@@ -30,14 +31,14 @@ type
 //               ttIdentifier,
 //               ttEOF);
 
-type
+{type
  TTokenType = (l3_ttUnknown,
                l3_ttString,
                l3_ttSymbol,
                //ttBoolean,
                l3_ttInteger,
                l3_ttDoubleQuotedString,
-               l3_ttEOF);
+               l3_ttEOF);  }
 //  Tl3TokenType = (
 //                  l3_ttBOF,        {- начало файла}
 //                  l3_ttEOF,        {- конец файла}
@@ -60,7 +61,7 @@ type
   f_UnknownToken: String;
   f_PosInUnknown: Integer;
   f_Token: String;
-  f_TokenType: TTokenType;
+  f_TokenType: Tl3TokenType;
  procedure NextChar;
  // Увеличивает f_PosInCurrentToken на 1
  procedure PrevChar;
@@ -84,7 +85,7 @@ type
  public
   property TokenString: String read f_Token;
   { * - текущий токен. }
-  property TokenType: TTokenType read f_TokenType;
+  property TokenType: Tl3TokenType read f_TokenType;
   { * - тип текущего токена. }
  end; // TscriptParser
 
