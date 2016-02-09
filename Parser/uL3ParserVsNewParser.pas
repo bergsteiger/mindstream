@@ -73,8 +73,6 @@ begin
    until FindNext(l_SR) <> 0;
    FindClose(l_SR.FindHandle);
  end;
-
- ShowMessage(l_Tokens);
 { l_Filer := Tl3DosFiler.Make('Test_18_8.txt');
  l_Parser := Tl3CustomParser.Create;
  l_Filer.Open;
@@ -101,6 +99,6 @@ end;
 
 initialization
   // Register any test cases with the test runner
- RegisterTest(TL3ParserVsTNewParser.Suite);
+// RegisterTest(TL3ParserVsTNewParser.Suite);
 end.
 

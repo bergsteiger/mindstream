@@ -194,7 +194,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'a#') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
   end);
 end;
 
@@ -208,7 +208,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'a#') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
   end);
 end;
 
@@ -224,11 +224,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'a#') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'b#') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
   end);
 end;
 
@@ -244,11 +244,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'a#') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'b#') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
   end);
 end;
 
@@ -266,7 +266,7 @@ begin
    CheckTrue((aParser.TokenString = 'a#' + CQuote + cTab + 'q' + cCRLF +
                                     'b#' + cCRLF +
                                     cTab + cCRLF) and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
   end);
 end;
 
@@ -283,11 +283,11 @@ begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'a#' + CQuote + cTab + 'q' +
                                     cCRLF + 'b#' + cCRLF + cQuote) and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'a#')  and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
   end);
 end;
 
@@ -299,17 +299,17 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'C') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -321,17 +321,17 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = '+') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
  end);
 end;
 
@@ -343,12 +343,12 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'B+') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -360,12 +360,12 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'A+') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -377,7 +377,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'A+B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
  end);
 end;
 
@@ -392,15 +392,15 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A+B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '/2/') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A+B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -416,16 +416,16 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A+B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '/2/') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cQuote + 'A+B // qwe' + cCRLF +
                                     cQuote + 'A') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
   end);
 end;
 
@@ -441,19 +441,19 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A+B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '/2/') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A+B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cQuote + 'A') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
   end);
 end;
 
@@ -467,11 +467,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cSlash) and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'a') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -483,7 +483,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'A+B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -495,11 +495,11 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'A+B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'AA') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -511,7 +511,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'AA') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -523,11 +523,11 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'AA') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'BB') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -539,11 +539,11 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'AA') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'BB') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -555,7 +555,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'AA') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -566,11 +566,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -581,7 +581,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -592,11 +592,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -607,11 +607,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -622,11 +622,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -637,15 +637,15 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '*/') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -656,11 +656,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -671,15 +671,15 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'C') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -690,15 +690,15 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'C') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -709,7 +709,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -720,7 +720,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -731,11 +731,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -746,7 +746,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'false') and
-             (aParser.TokenType = ttBoolean));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -757,11 +757,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'false') and
-             (aParser.TokenType = ttBoolean));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -772,15 +772,15 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'B') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'false') and
-             (aParser.TokenType = ttBoolean));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -791,7 +791,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'true') and
-             (aParser.TokenType = ttBoolean));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -802,7 +802,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'abc') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -813,7 +813,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'abc d') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -825,7 +825,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'ab' + #13#10 + 'c') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -837,7 +837,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'ab'#13#10'qwe qwe'#13#10'qwe qwe'#13#10'c') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -848,15 +848,15 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'abc') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'token') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'abc') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -867,15 +867,15 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'abc') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'cba') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'zxc') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -887,7 +887,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = #12#13#14) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -899,15 +899,15 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = #12) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'a') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = #13#14) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -918,7 +918,7 @@ begin
   begin
    aParser.NextToken;
 
-   CheckTrue(aParser.TokenType = ttUnknown);
+   CheckTrue(aParser.TokenType = l3_ttUnknown);
   end);
 end;
 
@@ -930,7 +930,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = #12#13#14'a') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -942,7 +942,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = #12#13#14'ab') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -954,7 +954,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = #12#13#14'ab'#15) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -966,7 +966,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = #12#13#14'ab'#15'cd') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -978,7 +978,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = #12#13'abc'#13#10'def'#14#15) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -990,7 +990,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = ' ') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1002,7 +1002,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1014,7 +1014,7 @@ begin
    aParser.NextToken;
 
    CheckTrue((aParser.TokenString = '!') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1025,11 +1025,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = #13) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = #10) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1041,11 +1041,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '#2Z') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = #13 + 'a') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1057,15 +1057,15 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '#2Z') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = #13 + 'a') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = #0) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1077,11 +1077,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = #32) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '#2Z' + '''' + 'Qqwe'#13#10'23 121212#$a #13#10' + '''') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
   end);
 end;
 
@@ -1093,7 +1093,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cQuote) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1105,7 +1105,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cQuote + cQuote) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1118,7 +1118,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cQuote + 'a' + cQuote) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1130,7 +1130,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'a' + cQuote) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1142,7 +1142,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cQuote + 'a') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1154,7 +1154,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cQuote + cQuote + cQuote + cQuote) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1165,7 +1165,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1176,11 +1176,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '2') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1191,15 +1191,15 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '2') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '0') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1210,19 +1210,19 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '2') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '0') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '20') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1233,23 +1233,23 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '2') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '0') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '20') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '200') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1261,19 +1261,19 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '200') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'a') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'a2') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '2a') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
   end);
 end;
 
@@ -1285,7 +1285,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1298,11 +1298,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-2') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1314,15 +1314,15 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-2') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '0') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1335,19 +1335,19 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-2') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '0') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-20') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1359,23 +1359,23 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-2') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '0') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-20') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-200') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1387,39 +1387,39 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-2') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '0') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-20') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-200') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '2') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '---') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-2a') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
   end);
 end;
 
@@ -1431,7 +1431,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '0') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1443,11 +1443,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '0') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1459,15 +1459,15 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '0') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '2') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1479,19 +1479,19 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '0') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '2') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '10') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1503,23 +1503,23 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '0') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '1') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '2') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '10') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '15') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1531,7 +1531,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '16') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1543,7 +1543,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '255') and
-             (aParser.TokenType = ttNumber));
+             (aParser.TokenType = l3_ttInteger));
   end);
 end;
 
@@ -1555,11 +1555,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '$') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'A') and
-             (aParser.TokenType = ttToken));
+             (aParser.TokenType = l3_ttSymbol));
   end);
 end;
 
@@ -1571,7 +1571,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '-$A') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
   end);
 end;
 
@@ -1583,7 +1583,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = #0) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1595,7 +1595,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = #10) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1607,7 +1607,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = #13) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1619,7 +1619,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = #13'a') and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1631,7 +1631,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = 'a'#13) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1643,7 +1643,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = cQuote + #13) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1655,7 +1655,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = #13 + cQuote) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
   end);
 end;
 
@@ -1667,11 +1667,11 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = #13 + cQuote) and
-             (aParser.TokenType = ttString));
+             (aParser.TokenType = l3_ttString));
 
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '#$P') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
   end);
 end;
 
@@ -1683,7 +1683,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '""') and
-             (aParser.TokenType = ttIdentifier));
+             (aParser.TokenType = l3_ttDoubleQuotedString));
   end);
 end;
 
@@ -1695,7 +1695,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '"a"') and
-             (aParser.TokenType = ttIdentifier));
+             (aParser.TokenType = l3_ttDoubleQuotedString));
   end);
 end;
 
@@ -1707,7 +1707,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '"ab"') and
-             (aParser.TokenType = ttIdentifier));
+             (aParser.TokenType = l3_ttDoubleQuotedString));
   end);
 end;
 
@@ -1720,7 +1720,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '"a'#13#10'b"') and
-             (aParser.TokenType = ttIdentifier));
+             (aParser.TokenType = l3_ttDoubleQuotedString));
   end);
 end;
 
@@ -1734,7 +1734,7 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '"a'#13#10'b'#13#10'c"') and
-             (aParser.TokenType = ttIdentifier));
+             (aParser.TokenType = l3_ttDoubleQuotedString));
   end);
 end;
 
@@ -1748,13 +1748,13 @@ begin
   begin
    aParser.NextToken;
    CheckTrue((aParser.TokenString = '"a'#13#10'b'#13#10'c"qwe') and
-             (aParser.TokenType = ttUnknown));
+             (aParser.TokenType = l3_ttUnknown));
   end);
 end;
 
 initialization
 
 // Register any test cases with the test runner
-//RegisterTest(TestTParser.Suite);
+RegisterTest(TestTParser.Suite);
 
 end.

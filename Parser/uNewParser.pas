@@ -22,14 +22,35 @@ Const
 type
  EUnknownToken = Class(Exception);
 
+// TTokenType = (ttUnknown,
+//               ttString,
+//               ttToken,
+//               ttBoolean,
+//               ttNumber,
+//               ttIdentifier,
+//               ttEOF);
+
 type
- TTokenType = (ttUnknown,
-               ttString,
-               ttToken,
-               ttBoolean,
-               ttNumber,
-               ttIdentifier,
-               ttEOF);
+ TTokenType = (l3_ttUnknown,
+               l3_ttString,
+               l3_ttSymbol,
+               //ttBoolean,
+               l3_ttInteger,
+               l3_ttDoubleQuotedString,
+               l3_ttEOF);
+//  Tl3TokenType = (
+//                  l3_ttBOF,        {- начало файла}
+//                  l3_ttEOF,        {- конец файла}
+//                  l3_ttEOL,        {- конец строки}
+//                  l3_ttSingleChar, {- единичный (управляющий) символ}
+//                  l3_ttSymbol,     {- идентификатор}
+//                  l3_ttKeyWord,    {- ключевое слово}
+//                  l3_ttString,     {- строка (в кавычках)}
+//                  l3_ttInteger,    {- целое число}
+//                  l3_ttFloat,      {- вещественное число}
+//                  l3_ttComment,    {- комментарий}
+//                  l3_ttDoubleQuotedString // - строка в двойных кавычках
+//                 );
 
 type
  TScriptParser = class
@@ -193,7 +214,8 @@ var
   if (f_UnknownToken = 'false') or (f_UnknownToken = 'true') then
   begin
    f_Token := f_UnknownToken;
-   f_TokenType := ttBoolean;
+   //f_TokenType := ttBoolean;
+   f_TokenType := l3_ttSymbol;
    Exit;
   end;
 
@@ -205,7 +227,7 @@ var
     begin
      f_IsSymbol := True;
      l_SymbBuffer := '';
-     f_TokenType := ttString;
+     f_TokenType := l3_ttString;
 
      NextChar;
      while not ValidStringChar do
@@ -225,7 +247,7 @@ var
     if CurrentChar = cQuote then
     begin
      l_IsQuoteOpen := not l_IsQuoteOpen;
-     f_TokenType := ttString;
+     f_TokenType := l3_ttString;
      l_QuoteCount := 1;
 
      NextChar;
@@ -275,7 +297,7 @@ var
         raise EUnknownToken.Create('Error Message');
       end;
 
-      f_TokenType := ttNumber;
+      f_TokenType := l3_ttInteger;
       Exit;
      end
      else
@@ -289,7 +311,7 @@ var
 
      if not l_IsDoubleQuote then
      begin
-      f_TokenType := ttIdentifier;
+      f_TokenType := l3_ttDoubleQuotedString;
      end;
     end;
 
@@ -298,31 +320,31 @@ var
      f_Token := f_Token + CurrentChar;
 
     // Проверка на невалидный идентификатор
-    if (f_TokenType = ttIdentifier) and
+    if (f_TokenType = l3_ttDoubleQuotedString) and
        (f_Token <> f_UnknownToken) then
      raise EUnknownToken.Create('Error Message');
 
     NextChar;
    end;
   except
-   f_TokenType := ttUnknown;
+   f_TokenType := l3_ttUnknown;
    Exit;
   end;
 
   // Если кавычка не закрыта то это ttUnknown
   if l_IsQuoteOpen then
   begin
-   f_TokenType := ttUnknown;
+   f_TokenType := l3_ttUnknown;
    Exit
   end;
 
   // Финальная проверка
-  if not (TokenType in [ttString, ttIdentifier, ttNumber]) then
-   f_TokenType := ttToken;
+  if not (TokenType in [l3_ttString, l3_ttDoubleQuotedString, l3_ttInteger]) then
+   f_TokenType := l3_ttSymbol;
  end; // AnalyzeToken
 
 begin
- f_TokenType := ttUnknown;
+ f_TokenType := l3_ttUnknown;
  f_UnknownToken := ReadUnknownToken;
  f_PosInUnknown := 1;
  f_Token := '';
@@ -330,17 +352,17 @@ begin
  AnalyzeToken;
 
  if (f_Token <> f_UnknownToken) and
-    (TokenType <> ttString) and
-    (TokenType <> ttNumber) and
-    (TokenType <> ttIdentifier) then
+    (TokenType <> l3_ttString) and
+    (TokenType <> l3_ttInteger) and
+    (TokenType <> l3_ttDoubleQuotedString) then
  begin
   f_Token := f_UnknownToken;
-  f_TokenType := ttUnknown;
+  f_TokenType := l3_ttUnknown;
  end;
 
  if f_EOF then
   if f_UnknownToken = '' then
-   f_TokenType := ttEOF;
+   f_TokenType := l3_ttEOF;
 end;
 
 function TScriptParser.ReadUnknownToken: String;
