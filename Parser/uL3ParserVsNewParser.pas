@@ -36,6 +36,10 @@ type
   published
    procedure First;
    procedure CheckTokenEquals;
+   procedure CheckTokenNotEquals;
+   procedure CheckArraysIsEqual;
+   procedure CheckArraysIsNotEqual;
+   procedure CheckArraysLengthIsNotEqual;
    procedure CheckL3Parser;
  end;
 
@@ -67,21 +71,63 @@ function TL3ParserVsTNewParser.IsArraysEqual(const aArrayLeft : TokenArray;
 var
  l_i : integer;
 begin
- Result := True;
+ Result := False;
  if Length(aArrayLeft) <> Length(aArrayRight) then
- begin
-  Result := False;
   Exit;
- end;
 
  for l_i := Low(aArrayLeft) to High(aArrayRight) do
-  if (aArrayLeft[l_i] = aArrayRight[l_i]) then
-
-  else
-  begin
-   Result := False;
+  if (aArrayLeft[l_i] <> aArrayRight[l_i]) then
    Exit;
-  end;
+
+ Result := True;
+end;
+
+procedure TL3ParserVsTNewParser.CheckArraysIsEqual;
+var
+ l_l3ParserTokens, l_NewParserTokens : TokenArray;
+begin
+ SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
+ SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
+
+ l_l3ParserTokens[0].Create('qwe', l3_ttSymbol);
+ l_NewParserTokens[0].Create('qwe', l3_ttSymbol);
+
+ SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
+ SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
+
+ l_l3ParserTokens[1].Create('asd', l3_ttSymbol);
+ l_NewParserTokens[1].Create('asd', l3_ttSymbol);
+
+ Check(IsArraysEqual(l_l3ParserTokens, l_NewParserTokens));
+end;
+
+procedure TL3ParserVsTNewParser.CheckArraysIsNotEqual;
+var
+ l_l3ParserTokens, l_NewParserTokens : TokenArray;
+begin
+ SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
+ SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
+
+ l_l3ParserTokens[0].Create('qwe', l3_ttSymbol);
+ l_NewParserTokens[0].Create('asd', l3_ttSymbol);
+
+ SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
+ SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
+
+ l_l3ParserTokens[1].Create('qwe', l3_ttSymbol);
+ l_NewParserTokens[1].Create('asd', l3_ttSymbol);
+
+ Check(not IsArraysEqual(l_l3ParserTokens, l_NewParserTokens));
+end;
+
+procedure TL3ParserVsTNewParser.CheckArraysLengthIsNotEqual;
+var
+ l_l3ParserTokens, l_NewParserTokens : TokenArray;
+begin
+ SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
+ SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 2);
+
+ Check(not IsArraysEqual(l_l3ParserTokens, l_NewParserTokens));
 end;
 
 procedure TL3ParserVsTNewParser.CheckL3Parser;
@@ -100,7 +146,7 @@ var
   l_Tokens := l_Tokens + ' ' + aName;
  end;
 begin
- l_Tokens := '';
+{ l_Tokens := '';
  l_Path :=  '*.txt';
  if FindFirst(l_Path, faAnyFile, l_SR) = 0 then
  begin
@@ -130,19 +176,6 @@ begin
   FreeAndNil(l_Parser);
  end;
  ShowMessage(l_Tokens);  }
- SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
- SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
-
- l_l3ParserTokens[0].Create('qwe', l3_ttSymbol);
- l_NewParserTokens[0].Create('qwe', l3_ttSymbol);
-
- SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
- SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
-
- l_l3ParserTokens[1].Create('asd', l3_ttSymbol);
- l_NewParserTokens[1].Create('asd', l3_ttSymbol);
-
- Check(IsArraysEqual(l_l3ParserTokens, l_NewParserTokens));
 end;
 
 procedure TL3ParserVsTNewParser.CheckTokenEquals;
@@ -153,6 +186,16 @@ begin
  l_Token2 := TTokenRec.Create('qwe', l3_ttSymbol);
 
  Check(l_Token1 = l_Token2);
+end;
+
+procedure TL3ParserVsTNewParser.CheckTokenNotEquals;
+var
+ l_Token1, l_Token2 : TTokenRec;
+begin
+ l_Token1 := TTokenRec.Create('qwe', l3_ttSymbol);
+ l_Token2 := TTokenRec.Create('asd', l3_ttSymbol);
+
+ Check(l_Token1 <> l_Token2);
 end;
 
 function TL3ParserVsTNewParser.FileName: string;
