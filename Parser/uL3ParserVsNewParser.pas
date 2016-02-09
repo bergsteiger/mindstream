@@ -17,9 +17,22 @@ uses
   l3Parser;
 
 type
+ TTokenRec = record
+  rToken : string;
+  rTokenType : Tl3TokenType;
+ constructor Create(const aToken : string; const aTokenType : Tl3TokenType);
+ class operator Equal(const Left, Right : TTokenRec) : Boolean;
+ class operator NotEqual(const Left, Right : TTokenRec) : Boolean;
+ end;
+
+type
+ TokenArray = array of TTokenRec;
+
+type
  TL3ParserVsTNewParser = class(TTestCase)
   private
    function FileName: string;
+   function IsArraysEqual(const aArrayLeft, aArrayRight : TokenArray) : Boolean;
   published
    procedure First;
    procedure CheckTokenEquals;
@@ -44,17 +57,31 @@ const
                   l3_poAddDigits2WordChars,
                   l3_poNullAsEOF];
 
-type
- TTokenRec = record
-  rToken : string;
-  rTokenType : Tl3TokenType;
- constructor Create(const aToken : string; const aTokenType : Tl3TokenType);
- class operator Equal(const Left, Right : TTokenRec) : Boolean;
- end;
-
 procedure TL3ParserVsTNewParser.First;
 begin
  Check(True);
+end;
+
+function TL3ParserVsTNewParser.IsArraysEqual(const aArrayLeft : TokenArray;
+  const aArrayRight: TokenArray): Boolean;
+var
+ l_i : integer;
+begin
+ Result := True;
+ if Length(aArrayLeft) <> Length(aArrayRight) then
+ begin
+  Result := False;
+  Exit;
+ end;
+
+ for l_i := Low(aArrayLeft) to High(aArrayRight) do
+  if (aArrayLeft[l_i] = aArrayRight[l_i]) then
+
+  else
+  begin
+   Result := False;
+   Exit;
+  end;
 end;
 
 procedure TL3ParserVsTNewParser.CheckL3Parser;
@@ -65,6 +92,8 @@ var
  l_Tokens : string;
  l_SR: TSearchRec;
  l_Path : string;
+
+ l_l3ParserTokens, l_NewParserTokens : TokenArray;
 
  procedure DoSome(aName: string);
  begin
@@ -101,6 +130,19 @@ begin
   FreeAndNil(l_Parser);
  end;
  ShowMessage(l_Tokens);  }
+ SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
+ SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
+
+ l_l3ParserTokens[0].Create('qwe', l3_ttSymbol);
+ l_NewParserTokens[0].Create('qwe', l3_ttSymbol);
+
+ SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
+ SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
+
+ l_l3ParserTokens[1].Create('asd', l3_ttSymbol);
+ l_NewParserTokens[1].Create('asd', l3_ttSymbol);
+
+ Check(IsArraysEqual(l_l3ParserTokens, l_NewParserTokens));
 end;
 
 procedure TL3ParserVsTNewParser.CheckTokenEquals;
@@ -131,6 +173,13 @@ class operator TTokenRec.Equal(const Left, Right: TTokenRec): Boolean;
 begin
  Result := False;
  if (Left.rToken = Right.rToken) and (Left.rTokenType = Right.rTokenType) then
+  Result := True;
+end;
+
+class operator TTokenRec.NotEqual(const Left, Right: TTokenRec): Boolean;
+begin
+ Result := False;
+ if (Left.rToken <> Right.rToken) or (Left.rTokenType <> Right.rTokenType) then
   Result := True;
 end;
 
