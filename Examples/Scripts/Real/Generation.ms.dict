@@ -1408,12 +1408,52 @@ BOOLEAN elem_func IsSingleton
  Self .UPisTrue "singleton" >>> Result
 ; // IsSingleton
 
+BOOLEAN elem_func IsFactory
+  RULES
+   ( Self .IsStereotype st_factory::Operation )
+    true
+   ( Self .IsStereotype st_Factory )
+    true
+   DEFAULT
+    false
+  ; //RULES   
+ >>> Result
+; // IsFactory
+
+INTEGER FUNCTION .CountIt
+  ARRAY IN anArray
+ 0 >>> Result
+ anArray .for> ( 
+   IN anItem 
+  Inc Result 
+ ) 
+; // .CountIt
+
+BOOLEAN elem_func HasFactory
+ Cached:
+ (
+  Self .Operations .filter> .IsFactory .CountIt > 0
+ ) 
+ >>> Result
+; // HasFactory
+
+USES
+ GarantModel.ms.dict
+;
+
 INTERFACE elem_func InstanceField
  Cached:
  (
   VAR l_TypeName
   Self .TypeName >>> l_TypeName
-  'g_' l_TypeName Cat Self MakeField
+  
+  'g_' l_TypeName Cat 
+   if ( Self .HasFactory ) then
+    GarantModel::Pointer
+   else
+    Self 
+   MakeField
+   
   DUP
   VAR l_Boxed
   pop:WordBox:Boxed >>> l_Boxed
@@ -1423,6 +1463,25 @@ INTERFACE elem_func InstanceField
  )
  >>> Result
 ; // InstanceField
+
+BOOLEAN elem_func IsLocalMethod
+ Self .IsStereotype st_localmethod >>> Result
+; // IsLocalMethod
+
+BOOLEAN elem_func IsLocalVar
+ Self .IsStereotype st_var::Attribute >>> Result
+; // IsLocalVar
+
+BOOLEAN elem_func IsGlobalVar
+ Self .IsStereotype st_globalvar::Attribute >>> Result
+; // IsGlobalVar
+
+elem_iterator InnerGlobalVars
+ Self .Attributes
+ .filter> .IsGlobalVar
+ .joinWithLambded> ( Self .Operations ) call.me
+ >>> Result
+; // InnerGlobalVars
 
 elem_iterator GlobalVars
  RULES
@@ -1434,11 +1493,13 @@ elem_iterator GlobalVars
     begin
      .join> [ Self .InstanceField ]
     end // ( Self .IsSingleton )
+    .join> ( Self .InnerGlobalVars )
    )
   ( Self .IsUtilityPack ) 
    (
     Self .Attributes
     .filter> ( .IsProperty ! )
+    .join> ( Self .InnerGlobalVars )
    )
   DEFAULT
    [empty] 
@@ -1782,15 +1843,6 @@ BOOLEAN elem_func IsStaticConstructor
  >>> Result
 ; // IsStaticConstructor
 
-INTEGER FUNCTION .CountIt
-  ARRAY IN anArray
- 0 >>> Result
- anArray .for> ( 
-   IN anItem 
-  Inc Result 
- ) 
-; // .CountIt
-
 BOOLEAN elem_func NeedFinalize
  Cached:
  (
@@ -1808,18 +1860,6 @@ BOOLEAN elem_func NeedFinalize
  )
  >>> Result
 ; // NeedFinalize
-
-BOOLEAN elem_func IsLocalMethod
- Self .IsStereotype st_localmethod >>> Result
-; // IsLocalMethod
-
-BOOLEAN elem_func IsLocalVar
- Self .IsStereotype st_var::Attribute >>> Result
-; // IsLocalVar
-
-BOOLEAN elem_func IsGlobalVar
- Self .IsStereotype st_globalvar::Attribute >>> Result
-; // IsGlobalVar
 
 elem_proc MethodUserCode
   STRING IN aKey
@@ -2013,18 +2053,6 @@ elem_proc MethodUserCode
    )
  ; // RULES 
 ; // MethodUserCode
-
-BOOLEAN elem_func IsFactory
-  RULES
-   ( Self .IsStereotype st_factory::Operation )
-    true
-   ( Self .IsStereotype st_Factory )
-    true
-   DEFAULT
-    false
-  ; //RULES   
- >>> Result
-; // IsFactory
 
 BOOLEAN elem_func IsIni
  Self .IsStereotype st_ini::Operation >>> Result
@@ -2322,15 +2350,46 @@ elem_proc UserCode:
   ; // AsMethod
   
   RULES
+   ( 
+    ( Self .UID '52E9282B0271' == ) // RightParamsCount
+    AND ( Self .Implementor .IsSummoned )
+   ) 
+     RULES
+      ( l_Key cVarUserCodeSuffix == )
+       ()
+      ( l_Key cImplementationUserCodeSuffix == )
+       ( ' Result := 1;' .Out )
+      DEFAULT
+       AsDefault 
+     ; // RULES
    ( Self .IsFactory )
     begin
      RULES
       ( l_Key cVarUserCodeSuffix == )
+       if ( Self .Parent .IsSingleton ! ) then
        begin
         'var' .Out
         [ ' l_Inst : ' Self .Parent .TypeName ';' ] .Out
        end // ( l_Key cVarUserCodeSuffix == )
       ( l_Key cImplementationUserCodeSuffix == )
+       if ( Self .Parent .IsSingleton ) then
+       begin
+        Indented: (
+         [
+          VAR l_TypeName
+          Self .Parent .TypeName >>> l_TypeName
+          'if (' 'g_' l_TypeName ' = nil) then' \n
+          'begin' \n
+          ' l3System.AddExitProc(' l_TypeName 'Free' ');' \n
+          VAR l_Type
+          Self .MethodType .TypeName >>> l_Type
+          ' ' l_Type '(' 'g_' l_TypeName ')' ' := inherited ' Self .Name ';' \n
+          'end;' \n
+          'Result := ' l_Type '(' 'g_' l_TypeName ')' ';'
+         ] .Out
+        ) // Indented:
+       end // ( Self .Parent .IsSingleton )
+       else
        begin
         Indented: (
          [ 
@@ -2479,6 +2538,14 @@ elem_iterator ChildrenWithoutOwnFile
  >>> Result
 ; // ChildrenWithoutOwnFile
 
+elem_iterator ChildrenWithOwnFile
+ Cached:
+ ( 
+  Self .Children .filter> .NeedOwnFile
+ )
+ >>> Result
+; // ChildrenWithOwnFile
+
 elem_iterator ConstantsAndChildrenWithoutOwnFile
  Cached:
  ( 
@@ -2602,20 +2669,29 @@ BOOLEAN elem_func IsClassImplementable
  >>> Result
 ; // IsClassImplementable
 
-USES
- GarantModel.ms.dict
-;
+BOOLEAN elem_func IsUses
+ Self .IsStereotype st_uses::Dependency >>> Result
+; // IsUses
+
+elem_iterator OperationsUsed
+ [empty]
+ .joinWithLambded> ( Self .Operations ) ( .Dependencies .filter> .IsUses .mapToTarget> )
+ .joinWithLambded> ( Self .Operations ) call.me
+ >>> Result
+; // OperationsUsed
 
 elem_iterator Used
  Cached:
  (
-  Self .Dependencies .filter> ( .IsStereotype st_uses::Dependency ) .mapToTarget>
+  Self .Dependencies .filter> .IsUses .mapToTarget>
   if ( Self .IsInterface ! ) then
   begin
    .join> ( Self .InjectedElements )
+   .joinWithLambded> ( Self .Implements .filter> .IsInterface ) .InjectedElements
   end // Self .IsInterface !
   .joinWithLambded> ( Self .Inherits .filter> .IsMixIn ) call.me
   .joinWithLambded> ( Self .Implements .filter> .IsMixIn ) call.me
+  .join> ( Self .OperationsUsed )
   
   if ( Self .IsSingleton ) then
   begin
@@ -2632,20 +2708,23 @@ elem_iterator UsedTotal
 ; // UsedTotal
 
 elem_iterator AbstractUses
- [empty]
- ( 
-  Self .Inherits 
-  .filter> .IsSimpleClass 
-  .filter> ( .Abstraction at_abstract == )
- ) .for> ( 
-   IN aG
-  .joinWithLambded> ( 
-   aG .Implements 
-   .filter> .IsMixIn
-  ) // .joinWithLambded> 
-  .Dependencies .filter> ( .IsStereotype st_uses::Dependency ) .mapToTarget>
-  .join> ( aG call.me ) 
- ) // .for>
+ Cached:
+ (
+  [empty]
+  ( 
+   Self .Inherits 
+   .filter> .IsSimpleClass 
+   .filter> ( .Abstraction at_abstract == )
+  ) .for> ( 
+    IN aG
+   .joinWithLambded> ( 
+    aG .Implements 
+    .filter> .IsMixIn
+   ) // .joinWithLambded> 
+   .Dependencies .filter> .IsUses .mapToTarget>
+   .join> ( aG call.me ) 
+  ) // .for>
+ ) 
  >>> Result
 ; // AbstractUses
 
@@ -2656,6 +2735,11 @@ elem_iterator ImplUses
   .join> ( Self .NeededElementsTotal )
  end // Self .IsForImplementation
  .join> ( Self .UsedTotal )
+ 
+ if ( Self .IsScriptKeywordsPack ) then
+ begin
+  .join> ( Self .ChildrenWithOwnFile )
+ end // ( Self .IsScriptKeywordsPack )
  
  if ( Self .IsClassOrMixIn ) then
  begin
@@ -2817,9 +2901,9 @@ STRING elem_func MethodName
    ( Self .UPisTrue 'extprop:isGlobal' )
     ( Self .Name .ToBorland )
    ( '__' Self .Name StartsStr ) 
-    ( Self .Name '__' '_' string:ReplaceFirst )
+    ( Self .Name '__' '_' string:Replace )
    DEFAULT
-    ( Self .Name )
+    ( Self .Name '__' '_' string:Replace )
   ; // RULES 
  )
  >>> Result
@@ -3446,15 +3530,26 @@ elem_iterator InterfaceOperationsTotal
  >>> Result
 ; // InterfaceOperationsTotal
 
+elem_iterator MixInPropertiesTotal
+ Cached:
+ (
+  Self .Properties
+  .joinWithLambded> ( Self .Implements .filter> .IsPureMixIn ) call.me
+  .joinWithLambded> ( Self .Inherits .filter> .IsPureMixIn ) call.me
+ ) 
+ >>> Result
+; // PropertiesTotal
+
 elem_iterator InterfacePropertiesTotal
  Cached:
  (
   Self .Properties
-  .joinWithLambded> ( Self .Implements .filter> .IsPureMixIn ) (
+  .joinWithLambded> ( Self .Implements .filter> .IsPureMixIn ) .MixInPropertiesTotal
+/*{  .joinWithLambded> ( Self .Implements .filter> .IsPureMixIn ) (
     IN anItem
    anItem call.me
-   .joinWithLambded> ( anItem .Inherits .filter> .IsPureMixIn ) .Properties
-  ) 
+   .joinWithLambded> ( anItem .Inherits .filter> .IsPureMixIn ) call.me //.Properties
+  ) }*/
  ) 
  >>> Result
 ; // InterfacePropertiesTotal
@@ -3495,7 +3590,16 @@ INTERFACE elem_func InstanceFreeMethod
   l_Boxed -> %SUM := ( 'Метод освобождения экземпляра синглетона ' l_TypeName Cat )
   l_Boxed -> Visibility := PrivateAccess
   l_Boxed ->^ cVarUserCodeName ^:= cEmptyUserCode
-  l_Boxed ->^ cImplementationUserCodeName ^:= [ ' l3Free(' 'g_' l_TypeName ');' ]
+  l_Boxed ->^ cImplementationUserCodeName ^:= [ 
+   if ( Self .HasFactory ) then
+   begin
+    ' IUnknown(' 'g_' l_TypeName ') := nil;' 
+   end
+   else
+   begin
+    ' l3Free(' 'g_' l_TypeName ');' 
+   end // ( Self .HasFactory )
+  ]
  )
  >>> Result
 ; // InstanceFreeMethod
@@ -3559,9 +3663,10 @@ elem_iterator AllOperationsForOverload
       .filter> ( .IsFini ! )
       .join> ( Self .Implemented )
       if ( Self .IsSingleton ) then
-      begin
-       .join> [ Self .InstanceMethod ]
-      end // ( Self .IsSingleton )
+       if ( Self .HasFactory ! ) then
+       begin
+        .join> [ Self .InstanceMethod ]
+       end // ( Self .IsSingleton )
     )
    DEFAULT
     ( Self .Operations )
