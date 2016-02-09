@@ -2320,6 +2320,50 @@ ModelElement elem_func MethodType
  >>> Result
 ; // MethodType
 
+BOOLEAN elem_func IsKeyWord
+ Self .IsStereotype st_keyword::Operation >>> Result
+; // IsKeyWord
+
+BOOLEAN elem_func IsGlobalKeyWord
+ Self .IsStereotype st_globalkeyword::Operation >>> Result
+; // IsGlobalKeyWord
+
+BOOLEAN elem_func IsCreator
+ Self .IsStereotype st_creator::Operation >>> Result
+; // IsCreator
+
+BOOLEAN elem_func IsAcceptableForScripts
+ Self .UPisTrue 'extprop:rc:isAcceptableForScripts' >>> Result
+; // IsAcceptableForScripts
+
+BOOLEAN elem_func HasSelf
+ RULES
+  ( Self .IsCreator )
+   false
+  ( Self .IsKeyWord )
+   true
+  DEFAULT
+   false
+ ; // RULES
+ >>> Result
+; // HasSelf
+
+BOOLEAN elem_func IsVarWorker
+ RULES
+  ( Self .IsStereotype st_varworker::Operation )
+   true
+  ( Self .IsStereotype st_globalvarworker::Operation )
+   true
+  DEFAULT
+   false 
+ ; // RULES
+ >>> Result
+; // IsVarWorker
+
+BOOLEAN elem_func IsOutParam
+ Self .IsStereotype st_out >>> Result
+; // IsOutParam
+
 elem_proc UserCode:
  ^ IN aSuffix
  ^ IN aCode
@@ -2350,6 +2394,28 @@ elem_proc UserCode:
   ; // AsMethod
   
   RULES
+   ( 
+    ( Self .UID '559687E6025A' == ) // GetAllParamsCount
+    AND ( Self .Implementor .IsSummoned )
+   ) 
+     RULES
+      ( l_Key cVarUserCodeSuffix == )
+       ()
+      ( l_Key cImplementationUserCodeSuffix == )
+       ( 
+        VAR l_Op
+        Self .Implementor .SpelledFor >>> l_Op
+        [ 
+         ' Result := '
+         l_Op .Parameters .filter> ( .IsOutParam ! ) .CountIt
+         l_Op .HasSelf ? ( 1 + )
+         l_Op .IsVarWorker ? ( 1 + )
+         ';' 
+        ] .Out 
+       ) // ( l_Key cImplementationUserCodeSuffix == )
+      DEFAULT
+       AsDefault 
+     ; // RULES
    ( 
     ( Self .UID '52E9282B0271' == ) // RightParamsCount
     AND ( Self .Implementor .IsSummoned )
@@ -2852,7 +2918,7 @@ STRING elem_func ParamPrefix
    cConstPrefix
   ( Self .IsStereotype st_noconst )
    cEmptyStr
-  ( Self .IsStereotype st_out )
+  ( Self .IsOutParam )
    'out '
   ( Self .IsStereotype st_inout )
    'var '
@@ -5963,7 +6029,7 @@ elem_generator rc.script
   begin
    Self .Inherits
    .join> ( Self .Implements )
-   .filter> ( .UPisTrue 'extprop:rc:isAcceptableForScripts' )
+   .filter> .IsAcceptableForScripts
    //.filter> ( DROP Self .NeedsWordsAliases /* Тут надо ещё проверку на SV */ )
    .for> OutWordAlias
   end // ( Self .NeedsWordsAliases )
