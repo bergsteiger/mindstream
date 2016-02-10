@@ -2555,6 +2555,13 @@ BOOLEAN elem_func IsOutParam
  Self .IsStereotype st_out >>> Result
 ; // IsOutParam
 
+ARRAY FUNCTION .filterOutParam>
+  ARRAY IN anArray
+ anArray
+ .filter> ( .IsOutParam ! ) 
+ >>> Result
+; // .filterOutParam>
+
 ARRAY FUNCTION .mapToTarget>
   ARRAY IN anArray
  anArray .map> .Target >>> Result
@@ -2777,7 +2784,7 @@ elem_proc UserCode:
         (
          [
           l_Call .ParametersWithoutContext
-          .filter> ( .IsOutParam ! ) 
+          .filterOutParam>
           .for> (
             IN aParam
            aParam .ParamPop 
@@ -2860,7 +2867,7 @@ elem_proc UserCode:
          .join>  
          (
           l_Op .Parameters 
-          .filter> ( .IsOutParam ! ) 
+          .filterOutParam>
           .mapToTarget>
          ) // .join>
          .map> .TypeInfo
@@ -2895,7 +2902,9 @@ elem_proc UserCode:
        ( 
         [ 
          ' Result := '
-         l_Op .Parameters .filter> ( .IsOutParam ! ) .CountIt
+         l_Op .Parameters 
+         .filterOutParam>
+         .CountIt
          l_Op .HasSelf ? ( 1 + )
          l_Op .IsVarWorker ? ( 1 + )
          ';' 
