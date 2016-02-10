@@ -2675,6 +2675,54 @@ elem_proc UserCode:
    >>> Result
   ; // ParametersWithoutContext
   
+  : .AsVar
+    STRING IN aName
+    ModelElement IN aType
+   'var' cSpace 'l_' aName ': ' aType .TypeName ';' 
+  ; // .AsVar
+  
+  elem: ParamAsVar
+   Self .Name Self .Target .AsVar
+  ; // ParamAsVar
+  
+  : .Pop
+    STRING IN aName
+    ModelElement IN aType
+   'try' \n
+   
+   ' ' 'l_' aName 
+   ' := ' 
+   
+   VAR l_CastSig
+   aType .CastSig >>> l_CastSig
+   
+   if ( l_CastSig IsNil ! ) then
+   begin
+    l_CastSig '('
+   end
+   
+   'aCtx.rEngine.' aType .PopSig
+   
+   if ( l_CastSig IsNil ! ) then
+   begin
+    ')'
+   end
+   
+   ';' \n
+   
+   'except' \n 
+   ' on E: Exception do' \n
+   ' begin' \n
+   '  RunnerError(''Ошибка при получении параметра ' aName ': ' aType .TypeName ' : '' + E.Message, aCtx);' \n
+   '  Exit;' \n
+   ' end;//on E: Exception' \n
+   'end;//try..except' \n
+  ; // .Pop
+  
+  elem: ParamPop
+   Self .Name Self .Target .Pop
+  ; // ParamPop
+  
   RULES
    (
     ( l_Op IsNil ! )
@@ -2702,7 +2750,7 @@ elem_proc UserCode:
         l_Call .ParametersWithoutContext
         .for> (
           IN aParam
-         [ 'var' cSpace 'l_' aParam .Name ': ' aParam .Target .TypeName ';' ] .Out
+         [ aParam .ParamAsVar ] .Out
         ) // .for>
        )
        (
@@ -2713,35 +2761,7 @@ elem_proc UserCode:
           .filter> ( .IsOutParam ! ) 
           .for> (
             IN aParam
-           'try' \n
-           
-           ' ' 'l_' aParam .Name 
-           ' := ' 
-           
-           VAR l_CastSig
-           aParam .Target .CastSig >>> l_CastSig
-           
-           if ( l_CastSig IsNil ! ) then
-           begin
-            l_CastSig '('
-           end
-           
-           'aCtx.rEngine.' aParam .Target .PopSig
-           
-           if ( l_CastSig IsNil ! ) then
-           begin
-            ')'
-           end
-           
-           ';' \n
-           
-           'except' \n 
-           ' on E: Exception do' \n
-           ' begin' \n
-           '  RunnerError(''Ошибка при получении параметра ' aParam .Name ': ' aParam .Target .TypeName ' : '' + E.Message, aCtx);' \n
-           '  Exit;' \n
-           ' end;//on E: Exception' \n
-           'end;//try..except' \n
+           aParam .ParamPop 
           ) // .for>
           
           VAR l_PushSig
