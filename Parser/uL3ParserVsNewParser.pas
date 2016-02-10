@@ -21,6 +21,7 @@ type
   rToken : string;
   rTokenType : Tl3TokenType;
  constructor Create(const aToken : string; const aTokenType : Tl3TokenType);
+ function ToString : String;
  class operator Equal(const Left, Right : TTokenRec) : Boolean;
  class operator NotEqual(const Left, Right : TTokenRec) : Boolean;
  end;
@@ -41,6 +42,7 @@ type
    procedure CheckArraysIsNotEqual;
    procedure CheckArraysLengthIsNotEqual;
    procedure CheckL3Parser;
+   procedure CheckTokenRecToString;
  end;
 
 implementation
@@ -256,6 +258,14 @@ begin
  Check(l_Token1 <> l_Token2);
 end;
 
+procedure TL3ParserVsTNewParser.CheckTokenRecToString;
+var
+ l_TokenRec : TTokenRec;
+begin
+ l_TokenRec := TTokenRec.Create('ABC', l3_ttSymbol);
+ Check(l_TokenRec.ToString = 'ABC - l3_ttSymbol');
+end;
+
 function TL3ParserVsTNewParser.FileName: string;
 begin
  Result := 'test';
@@ -282,6 +292,11 @@ begin
  Result := False;
  if (Left.rToken <> Right.rToken) or (Left.rTokenType <> Right.rTokenType) then
   Result := True;
+end;
+
+function TTokenRec.ToString: String;
+begin
+ Result := '';
 end;
 
 initialization
