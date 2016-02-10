@@ -188,7 +188,9 @@ var
     l_l3ParserTokens[l_i].Create(l_l3Parser.TokenString,
                                  l_l3Parser.TokenType);
 
-    SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
+    if l_l3Parser.TokenType <> l3_ttEOF then
+     SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
+     
     Inc(l_i);
    end;
   finally
@@ -206,7 +208,9 @@ var
     l_NewParserTokens[l_i].Create(l_NewParser.TokenString,
                                   l_NewParser.TokenType);
 
-    SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
+    if l_NewParser.TokenType <> l3_ttEOF then
+     SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
+     
     Inc(l_i);
    end;
 
