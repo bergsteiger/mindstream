@@ -2790,24 +2790,27 @@ elem_proc UserCode:
             aParam .ParamPop
            ) // .for>
            
-           'DoSetValue' 
-           '('
-           l_Self .SelfName
-           
-           l_Op .Parameters 
-           .filterOutParam>
-           .for> (
-             IN aParam
-           ', '
-           'l_'
-            aParam .Name
-           ) // .for>
-           
-           ', '
-           'aValue'
-           
-           ')'
-           ';'
+           if ( l_Self IsNil ! ) then
+           begin
+            'DoSetValue' 
+            '('
+            l_Self .SelfName
+            
+            l_Op .Parameters 
+            .filterOutParam>
+            .for> (
+              IN aParam
+            ', '
+            'l_'
+             aParam .Name
+            ) // .for>
+            
+            ', '
+            'aValue'
+            
+            ')'
+            ';'
+           end // ( l_Self IsNil ! )
           ] .Out
          ) // Indented:
         end // ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' == )
