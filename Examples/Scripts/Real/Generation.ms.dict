@@ -2684,6 +2684,9 @@ elem_proc UserCode:
   VAR l_Op
   l_Implementor .SpelledFor >>> l_Op
   
+  VAR l_Self
+  l_Implementor .Speller >>> l_Self
+  
   elem_iterator ParametersWithoutContext
    Self .Parameters
    .filter> ( .Name 'aCtx' != )
@@ -2741,14 +2744,13 @@ elem_proc UserCode:
   RULES
    (
     ( l_Op IsNil ! )
+    AND ( l_Self IsNil ! )
     AND ( '52D00B00031A' IsUID ) // SetValuePrim
    ) 
      Pair:
        (
         if ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' != ) then
         begin
-         VAR l_Self
-         l_Implementor .Speller >>> l_Self
          if ( l_Self IsNil ! ) then
          begin
           [ l_Self .SelfName l_Self .AsVar ] .Out
@@ -2773,8 +2775,6 @@ elem_proc UserCode:
         end // ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' == )
         else
         begin
-         VAR l_Self
-         l_Implementor .Speller >>> l_Self
          Indented:
          (
           [
@@ -2904,8 +2904,6 @@ elem_proc UserCode:
    ( '5617F4D00243' IsUID ) // ParamsTypes
      Code:
        ( 
-        VAR l_Self
-        l_Implementor .Speller >>> l_Self
         VAR l_NeedComma
         false >>> l_NeedComma
         [ 
@@ -2935,8 +2933,6 @@ elem_proc UserCode:
    ( '551544E2001A' IsUID ) // GetResultTypeInfo
      Code:
        ( 
-        VAR l_Self
-        l_Implementor .Speller >>> l_Self
         [ 
          ' Result := '
          if ( l_Op .IsCreator ) then
