@@ -2753,17 +2753,24 @@ elem_proc UserCode:
          begin
           [ l_Self .SelfName l_Self .AsVar ] .Out
          end // ( l_Self IsNil ! )
+         
+         l_Op .Parameters 
+         .filterOutParam>
+         .for> (
+           IN aParam
+          [ aParam .ParamAsVar ] .Out 
+         ) // .for>
         end // ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' != )
        )
        (
-        [
-         if ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' == ) then
-         begin
+        if ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' == ) then
+        begin
+         [
           ' RunnerError(''Ќельз€ присваивать значение readonly свойству '
           l_Op .GetUP 'extprop:prop_name'
           ''', aCtx);'
-         end // ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' == )
-        ] .Out
+         ] .Out
+        end // ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' == )
        )
        
    (
