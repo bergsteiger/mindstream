@@ -188,6 +188,7 @@ var
   finally
    FreeAndNil(l_NewParser);
   end;
+  Check(IsArraysEqual(l_l3ParserTokens, l_NewParserTokens));
 
 {  for l_i := Low(l_l3ParserTokens) to High(l_l3ParserTokens) do
    l_Tokens := l_Tokens + '; ' + l_l3ParserTokens[l_i].rToken; + '-' +
@@ -208,7 +209,7 @@ begin
    FindClose(l_SR.FindHandle);
  end;       }
 
- DoSome('Test_4_1.txt');
+ DoSome('Test_4_4.txt');
 end;
 
 procedure TL3ParserVsTNewParser.CheckTokenEquals;
