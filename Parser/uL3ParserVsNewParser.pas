@@ -175,10 +175,11 @@ var
    SetLength(l_NewParserTokens, 1);
    l_TokenType := l3_ttBOF;
    l_i := 0;
-   while not (l_TokenType = l3_ttEOF) do
+   while not l_NewParser.EOF do
    begin
-    l_NewParserTokens[l_i].Create(l_NewParser.TokenString, l_TokenType);
-    l_TokenType := l_NewParser.NextToken;
+    l_NewParser.NextToken;
+    l_NewParserTokens[l_i].Create(l_NewParser.TokenString,
+                                  l_NewParser.TokenType);
 
     SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
     Inc(l_i);
