@@ -2749,7 +2749,10 @@ elem_proc UserCode:
         begin
          VAR l_Self
          l_Implementor .Speller >>> l_Self
-         [ l_Self .SelfName l_Self .AsVar ] .Out
+         if ( l_Self IsNil ! ) then
+         begin
+          [ l_Self .SelfName l_Self .AsVar ] .Out
+         end // ( l_Self IsNil ! )
         end // ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' != )
        )
        (
