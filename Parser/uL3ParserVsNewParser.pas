@@ -47,9 +47,10 @@ implementation
 
 uses
  l3Filer
- , l3Types
+ ,l3Types
  ,System.TypInfo
  ,uNewParser
+ ,l3Chars
  ;
 { TL3ParserVsTNewParser }
 
@@ -150,6 +151,30 @@ var
   l_Filer := Tl3DosFiler.Make(aName);
   l_l3Parser := Tl3CustomParser.Create;
   try
+   if (l_l3Parser <> nil) then
+   begin
+    l_l3Parser.CheckFloat := false;
+    l_l3Parser.CheckComment := false;
+    l_l3Parser.CheckStringBracket := false;
+    l_l3Parser.AddDigits2WordChars := true;
+    l_l3Parser.WordChars := l_l3Parser.WordChars +
+                     cc_ANSIRussian +
+                     [':', '.', '-', '+', '=', '<', '>', '?', '!', '&', '|',
+                      '(', ')', '"', '@', '[', ']', ',',
+                      '/', '^', '№', '~', '$', '%', '*', '\',
+                      ';', '`'] +
+                     cc_Digits;
+    l_l3Parser.CheckStringBracket := false;
+    // - не смотрим на символ '<' в строковых константах
+    l_l3Parser.SkipSoftEnter := true;
+    // - плюём на #10 модели, которые не смогли победить
+    l_l3Parser.SkipHardEnter := true;
+    // - плюём на #13 модели, которые не смогли победить
+    l_l3Parser.CheckKeyWords := false;
+    // - ключевые слова будем обрабатывать сами
+   end;//f_Parser <> nil0:02
+
+
    l_Filer.Open;
    l_l3Parser.Filer := l_Filer;
 
