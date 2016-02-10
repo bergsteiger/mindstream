@@ -2297,6 +2297,38 @@ STRING elem_func CastSig
  >>> Result  
 ; // CastSig
 
+STRING elem_func TypeValue
+ RULES
+  ( Self .TypeName 'TtfwStackValue' == )
+   ''
+  ( Self .IsSimpleClass ) 
+   ( [ '.AsObject(' Self .TypeName ')' ] strings:Cat ) 
+  ( Self .TypeName 'Integer' == )
+   '.AsInt'
+  ( Self .TypeName 'TColor' == )
+   '.AsInt'
+  ( Self .TypeName 'Cardinal' == )
+   '.AsInt'
+  ( Self .IsEnum )
+   '.AsInt'
+  ( Self .TypeName 'String' == )
+   '.AsDelphiString'
+  ( Self .TypeName 'AnsiString' == )
+   '.AsDelphiString'
+  ( Self .TypeName 'Char' == )
+   '.AsChar'
+  ( Self .TypeName 'AnsiChar' == )
+   '.AsChar'
+  ( Self .TypeName 'Boolean' == )
+   '.AsBoolean'
+  ( Self .IsTypedef )
+   ( Self .MainAncestor call.me ) 
+  DEFAULT
+   ( [ 'Ќе знаем как приводить значение типа ' Self .TypeName ] strings:Cat )
+ ; // RULES
+ >>> Result  
+; // TypeValue
+
 STRING elem_func UnCastSig
  RULES
   ( Self .TypeName 'TColor' == )
@@ -2798,7 +2830,7 @@ elem_proc UserCode:
              '.'
              l_Op .GetUP 'extprop:prop_name'
              ' := '
-             'aValue' l_Op .Target .TypeName
+             'aValue' l_Op .Target .TypeValue
             end // ( l_Op .UPisTrue "mapped" )
             else
             begin
@@ -2816,7 +2848,7 @@ elem_proc UserCode:
              ) // .for>
              
              ', '
-             'aValue' l_Op .Target .TypeName
+             'aValue' l_Op .Target .TypeValue
              
              ')'
             end
