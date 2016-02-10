@@ -2607,6 +2607,14 @@ STRING elem_func MethodName
  >>> Result
 ; // MethodName
 
+STRING elem_func SelfName
+ Self .GetUP 'extprop:rc:SelfName' >>> Result
+ if ( Result IsNil ) then
+ begin
+  Self .TypeName >>> Result
+ end 
+; // SelfName
+
 elem_proc UserCode:
  ^ IN aSuffix
  ^ IN aCode
@@ -2728,12 +2736,23 @@ elem_proc UserCode:
     ( l_Op IsNil ! )
     AND ( '52D00B00031A' IsUID ) // SetValuePrim
    ) 
-     Code:
+     Pair:
+       (
+        if ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' != ) then
+        begin
+         VAR l_Self
+         l_Implementor .Speller >>> l_Self
+         [ l_Self .SelfName l_Self .AsVar ] .Out
+        end // ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' != )
+       )
        (
         [
-         ' RunnerError(''Ќельз€ присваивать значение readonly свойству '
-         l_Op .GetUP 'extprop:prop_name'
-         ''', aCtx);'
+         if ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' == ) then
+         begin
+          ' RunnerError(''Ќельз€ присваивать значение readonly свойству '
+          l_Op .GetUP 'extprop:prop_name'
+          ''', aCtx);'
+         end // ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' == )
         ] .Out
        )
        
@@ -6326,14 +6345,6 @@ BOOLEAN elem_func NeedsWordsAliases
  ) 
  >>> Result
 ; // NeedsWordsAliases
-
-STRING elem_func SelfName
- Self .GetUP 'extprop:rc:SelfName' >>> Result
- if ( Result IsNil ) then
- begin
-  Self .TypeName >>> Result
- end 
-; // SelfName
 
 elem_generator rc.script
  
