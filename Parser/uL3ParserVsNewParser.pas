@@ -296,7 +296,7 @@ end;
 
 function TTokenRec.ToString: String;
 begin
- Result := '';
+ Result := rToken + ' - ' + GetEnumName(TypeInfo(Tl3TokenType), Ord(self.rTokenType));
 end;
 
 initialization
