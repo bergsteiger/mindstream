@@ -50,7 +50,8 @@ uses
  ,l3Types
  ,System.TypInfo
  ,uNewParser
- ,l3Chars
+ ,l3Chars,
+ Generics.Collections
  ;
 { TL3ParserVsTNewParser }
 
@@ -144,12 +145,12 @@ var
   l_l3Parser : Tl3CustomParser;
   l_NewParser : TNewParser;
   l_Filer : Tl3DosFiler;
-  l_TokenType : Tl3TokenType;
   l_l3ParserTokens, l_NewParserTokens : TokenArray;
   l_i : integer;
  begin
   l_Filer := Tl3DosFiler.Make(aName);
   l_l3Parser := Tl3CustomParser.Create;
+
   try
    if (l_l3Parser <> nil) then
    begin
@@ -179,13 +180,13 @@ var
    l_l3Parser.Filer := l_Filer;
 
    SetLength(l_l3ParserTokens, 1);
-   l_TokenType := l3_ttBOF;
 
    l_i := 0;
-   while not (l_TokenType = l3_ttEOF) do
+   while not (l_l3Parser.TokenType = l3_ttEOF) do
    begin
-    l_l3ParserTokens[l_i].Create(l_l3Parser.TokenString, l_TokenType);
-    l_TokenType := l_l3Parser.NextToken;
+    l_l3Parser.NextToken;
+    l_l3ParserTokens[l_i].Create(l_l3Parser.TokenString,
+                                 l_l3Parser.TokenType);
 
     SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
     Inc(l_i);
@@ -198,7 +199,6 @@ var
   l_NewParser := TNewParser.Create(aName);
   try
    SetLength(l_NewParserTokens, 1);
-   l_TokenType := l3_ttBOF;
    l_i := 0;
    while not l_NewParser.EOF do
    begin
@@ -214,11 +214,6 @@ var
    FreeAndNil(l_NewParser);
   end;
   Check(IsArraysEqual(l_l3ParserTokens, l_NewParserTokens));
-
-{  for l_i := Low(l_l3ParserTokens) to High(l_l3ParserTokens) do
-   l_Tokens := l_Tokens + '; ' + l_l3ParserTokens[l_i].rToken; + '-' +
-               GetEnumName(TypeInfo(TTokenType), Ord(l_l3ParserTokens[l_i].rTokenType)) + '; ';
-  ShowMessage(l_Tokens);}
  end;
 begin
  l_Tokens := '';
@@ -234,7 +229,7 @@ begin
    FindClose(l_SR.FindHandle);
  end;       }
 
- DoSome('Test_4_4.txt');
+ DoSome('Test_4_1.txt');
 end;
 
 procedure TL3ParserVsTNewParser.CheckTokenEquals;
