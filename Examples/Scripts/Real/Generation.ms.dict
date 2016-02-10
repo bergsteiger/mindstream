@@ -2109,7 +2109,7 @@ BOOLEAN elem_func InheritsFrom
 
 ARRAY STRING TYPE ArrayOrString
 
-ArrayOrString elem_func TypeInfo
+STRING elem_func TypeInfo
  RULES
   ( Self IsNil )
    '@tfw_tiVoid'
@@ -2128,10 +2128,192 @@ ArrayOrString elem_func TypeInfo
   ( Self .IsClassRef ) 
    '@tfw_tiClassRef'
   DEFAULT
-   [ 'TypeInfo(' Self .TypeName ')' ]
+   ( [ 'TypeInfo(' Self .TypeName ')' ] strings:Cat )
  ; // RULES
  >>> Result 
 ; // TypeInfo 
+
+STRING elem_func PopSig
+ RULES
+  ( Self .TypeName 'TClass' == )
+   'PopClass'
+  ( Self .TypeName 'TtfwStackValue' == )
+   'Pop'
+  ( Self .TypeName 'TClass' == )
+   'PopClass'
+  ( Self .TypeName 'ItfwValueList' == )
+   'PopList'
+  ( Self .TypeName 'ItfwFile' == )
+   'PopFile'
+  ( Self .IsClassRef )
+   ( [ 'PopClassAs(' Self .TypeName ')' ] strings:Cat )
+  ( Self .TypeName 'Tl3WString' == )
+   'PopWStr'
+  ( Self .TypeName 'Tl3PCharLenPrim' == )
+   'PopWStr'
+  ( Self .TypeName 'Tl3PCharLen' == )
+   'PopWStr'
+  ( Self .TypeName 'Il3CString' == )
+   'PopString'
+  ( Self .IsSimpleClass )
+   ( [ 'PopObjAs(' Self .TypeName ')' ] strings:Cat )
+  ( Self .IsInterface )
+   ( [ 'PopIntf(' Self .TypeName ')' ] strings:Cat )
+  ( Self .TypeName 'String' == )
+   'PopDelphiString'
+  ( Self .TypeName 'Char' == )
+   'PopChar'
+  ( Self .TypeName 'AnsiChar' == )
+   'PopChar'
+  ( Self .TypeName 'TPoint' == )
+   'PopPoint'
+  ( Self .TypeName 'WideString' == )
+   'PopWideString'
+  ( Self .TypeName 'AnsiString' == )
+   'PopDelphiString'
+  ( Self .TypeName 'Integer' == )
+   'PopInt'
+  ( Self .TypeName 'TColor' == )
+   'PopInt'
+  ( Self .TypeName 'Cardinal' == )
+   'PopInt'
+  ( Self .IsEnum )
+   'PopInt'
+  ( Self .TypeName 'THandle' == )
+   'PopInt'
+  ( Self .TypeName 'Boolean' == )
+   'PopBool'
+  ( Self .IsTypedef )
+   ( Self .MainAncestor call.me ) 
+  DEFAULT 
+   ( [ 'Не знаем как снять со стека : ' Self .TypeName ] strings:Cat )
+ ; // RULES
+ >>> Result  
+; // PopSig
+
+STRING elem_func PushType
+ RULES
+  ( Self .TypeName 'ItfwValueList' == )
+   ''
+  ( Self .TypeName 'ItfwFile' == )
+   ''
+  ( Self .TypeName 'Il3CString' == )
+   ''
+  ( Self .IsInterface )
+   ( [ ',' Self .TypeName ] strings:Cat )
+  DEFAULT
+  ''
+ ; // RULES
+ >>> Result
+; // PushType
+
+STRING elem_func PushSig
+ RULES
+  ( Self IsNil )
+   ''
+  ( Self .TypeName 'TClass' == )
+   'PushClass'
+  ( Self .TypeName 'TtfwStackValue' == )
+   'Push'
+  ( Self .TypeName 'TClass' == )
+   'PushClass'
+  ( Self .TypeName 'ItfwValueList' == )
+   'PushList'
+  ( Self .TypeName 'ItfwFile' == )
+   'PushFile'
+  ( Self .IsClassRef )
+   'PushClass'
+  ( Self .TypeName 'Tl3WString' == )
+   'PushString'
+  ( Self .TypeName 'Tl3PCharLenPrim' == )
+   'PushString'
+  ( Self .TypeName 'Tl3PCharLen' == )
+   'PushWStr'
+  ( Self .TypeName 'Il3CString' == )
+   'PushString'
+  ( Self .IsSimpleClass )
+   'PushObj'
+  ( Self .IsInterface )
+   'PushIntf'
+  ( Self .TypeName 'String' == )
+   'PushString'
+  ( Self .TypeName 'Char' == )
+   'PushChar'
+  ( Self .TypeName 'AnsiChar' == )
+   'PushChar'
+  ( Self .TypeName 'TPoint' == )
+   'PushPoint'
+  ( Self .TypeName 'WideString' == )
+   'PushWideString'
+  ( Self .TypeName 'AnsiString' == )
+   'PushString'
+  ( Self .TypeName 'Integer' == )
+   'PushInt'
+  ( Self .TypeName 'TColor' == )
+   'PushInt'
+  ( Self .TypeName 'Cardinal' == )
+   'PushInt'
+  ( Self .IsEnum )
+   'PushInt'
+  ( Self .TypeName 'THandle' == )
+   'PushInt'
+  ( Self .TypeName 'Boolean' == )
+   'PushBool'
+  ( Self .IsTypedef )
+   ( Self .MainAncestor call.me ) 
+  DEFAULT 
+   ( [ 'Не знаем как положить на стек: ' Self .TypeName ] strings:Cat )
+ ; // RULES
+ >>> Result  
+; // PushSig
+
+STRING elem_func CastSig
+ RULES
+  ( Self .TypeName 'ItfwValueList' == )
+   ''
+  ( Self .TypeName 'ItfwFile' == )
+   ''
+  ( Self .IsClassRef )
+   ( Self .TypeName )
+  ( Self .TypeName 'Tl3PCharLen' == )
+   ( Self .TypeName )
+  ( Self .IsSimpleClass ) 
+   ( Self .TypeName )
+  ( Self .IsInterface ) 
+   ( Self .TypeName )
+  ( Self .TypeName 'TColor' == )
+   ( Self .TypeName )
+  ( Self .TypeName 'Cardinal' == )
+   ( Self .TypeName )
+  ( Self .IsEnum )
+   ( Self .TypeName )
+  ( Self .TypeName 'THandle' == )
+   ( Self .TypeName )
+  ( Self .IsTypedef )
+   ( Self .MainAncestor call.me ) 
+  DEFAULT
+   ''
+ ; // RULES
+ >>> Result  
+; // CastSig
+
+STRING elem_func UnCastSig
+ RULES
+  ( Self .TypeName 'TColor' == )
+   'Integer'
+  ( Self .TypeName 'Cardinal' == )
+   'Integer'
+  ( Self .IsEnum )
+   'Ord'
+  ( Self .TypeName 'THandle' == )
+   'Integer'
+  ( Self .IsTypedef )
+   ( Self .MainAncestor call.me ) 
+  DEFAULT
+   ''
+ ; // RULES
+ >>> Result  
+; // UnCastSig
 
 ANY elem_func GetUserCode
   STRING IN aKey
@@ -2373,6 +2555,58 @@ BOOLEAN elem_func IsOutParam
  Self .IsStereotype st_out >>> Result
 ; // IsOutParam
 
+ARRAY FUNCTION .mapToTarget>
+  ARRAY IN anArray
+ anArray .map> .Target >>> Result
+; // .mapToTarget>
+
+STRING FUNCTION .ToBorland
+  STRING IN aValue
+ '' >>> Result
+ aValue '_' string:Split:for> ( 
+   IN aSubstr
+/*{  if ( aSubstr IsNil ) then 
+  begin
+   Result '_' Cat >>> Result
+  end 
+  else}*/
+  begin
+   Result aSubstr Cat >>> Result
+  end 
+ )
+; // .ToBorland
+
+STRING elem_func MethodName
+ Cached:
+ (
+  RULES
+   ( Self .IsIterator )
+    (
+     RULES
+      ( Self .IsIteratorF )
+       ( Self .Name 'F' Cat )
+      ( Self .MainAncestor IsNil ! )
+       ( Self .MainAncestor call.me )
+      DEFAULT
+       ( Self .Name )
+     ; // RULES
+    ) // ( Self .IsIterator )
+   ( Self .IsStaticConstructor )
+    if ( Self .Parent .IsConstructorsHolder ) then
+     ( [ Self .Parent .MainAncestor .TypeName '_' Self .Name ] strings:Cat )
+    else
+     ( [ Self .Parent .TypeName '_' Self .Name ] strings:Cat )
+   ( Self .UPisTrue 'extprop:isGlobal' )
+    ( Self .Name .ToBorland )
+   ( '__' Self .Name StartsStr ) 
+    ( Self .Name '__' '_' string:Replace )
+   DEFAULT
+    ( Self .Name '__' '_' string:Replace )
+  ; // RULES 
+ )
+ >>> Result
+; // MethodName
+
 elem_proc UserCode:
  ^ IN aSuffix
  ^ IN aCode
@@ -2402,23 +2636,213 @@ elem_proc UserCode:
    Self l_Key aCode .MethodUserCode
   ; // AsMethod
   
+  VAR l_Implementor
+  Self .Implementor >>> l_Implementor
+  
+  BOOLEAN FUNCTION IsUID
+    STRING IN anUID
+   ( Self .UID anUID == ) 
+   AND ( l_Implementor .IsSummoned ) >>> Result
+  ; // IsUID
+  
+  : Pair:
+    ^ IN aVar
+    ^ IN aCode
+   RULES
+    ( l_Key cVarUserCodeSuffix == )
+     ( aVar DO )
+    ( l_Key cImplementationUserCodeSuffix == )
+     ( aCode DO )
+    DEFAULT
+     AsDefault 
+   ; // RULES
+  ; // Pair:
+  
+  : Code:
+    ^ IN aCode
+   Pair: () ( aCode DO )
+  ; // Code:
+  
+  VAR l_Call
+  l_Implementor .Stub >>> l_Call
+  
+  VAR l_Op
+  l_Implementor .SpelledFor >>> l_Op
+  
+  elem_iterator ParametersWithoutContext
+   Self .Parameters
+   .filter> ( .Name 'aCtx' != )
+   >>> Result
+  ; // ParametersWithoutContext
+  
   RULES
-   ( 
-    ( Self .UID '551544E2001A' == ) // GetResultTypeInfo
-    AND ( Self .Implementor .IsSummoned )
+   (
+    ( l_Op IsNil ! )
+    AND ( '52D00B00031A' IsUID ) // SetValuePrim
    ) 
-     RULES
-      ( l_Key cVarUserCodeSuffix == )
-       ()
-      ( l_Key cImplementationUserCodeSuffix == )
+     Code:
+       (
+        [
+         ' RunnerError(''Нельзя присваивать значение readonly свойству '
+         l_Op .GetUP 'extprop:prop_name'
+         ''', aCtx);'
+        ] .Out
+       )
+       
+   (
+    ( l_Call IsNil ! )
+    AND 
+    (
+     ( '4DAEEDE10285' IsUID ) // DoDoIt
+     OR ( '5512949D0048' IsUID ) // DoRun
+    ) 
+   )
+     Pair:
+       (
+        l_Call .ParametersWithoutContext
+        .for> (
+          IN aParam
+         [ 'var' cSpace 'l_' aParam .Name ': ' aParam .Target .TypeName ';' ] .Out
+        ) // .for>
+       )
+       (
+        Indented:
+        (
+         [
+          l_Call .ParametersWithoutContext
+          .filter> ( .IsOutParam ! ) 
+          .for> (
+            IN aParam
+           'try' \n
+           
+           ' ' 'l_' aParam .Name 
+           ' := ' 
+           
+           VAR l_CastSig
+           aParam .Target .CastSig >>> l_CastSig
+           
+           if ( l_CastSig IsNil ! ) then
+           begin
+            l_CastSig '('
+           end
+           
+           'aCtx.rEngine.' aParam .Target .PopSig
+           
+           if ( l_CastSig IsNil ! ) then
+           begin
+            ')'
+           end
+           
+           ';' \n
+           
+           'except' \n 
+           ' on E: Exception do' \n
+           ' begin' \n
+           '  RunnerError(''Ошибка при получении параметра ' aParam .Name ': ' aParam .Target .TypeName ' : '' + E.Message, aCtx);' \n
+           '  Exit;' \n
+           ' end;//on E: Exception' \n
+           'end;//try..except' \n
+          ) // .for>
+          
+          VAR l_PushSig
+          l_Call .Target .PushSig >>> l_PushSig
+          
+          VAR l_UnCastSig
+          '' >>> l_UnCastSig
+          
+          if ( l_PushSig IsNil ! ) then
+          begin
+           'aCtx.rEngine.' l_PushSig '('
+           l_Call .Target .UnCastSig >>> l_UnCastSig
+           
+           if ( l_UnCastSig IsNil ! ) then
+           begin
+            l_UnCastSig '('
+           end // ( l_UnCastSig IsNil ! )
+          end
+          
+          l_Call .MethodName 
+          '(' 
+          'aCtx' 
+          l_Call .ParametersWithoutContext
+          .for> (
+            IN aParam
+           ', ' 'l_' aParam .Name
+          ) // .for>  
+          ')'
+          
+          if ( l_PushSig IsNil ! ) then
+          begin
+           if ( l_UnCastSig IsNil ! ) then
+           begin
+            ')'
+           end // ( l_UnCastSig IsNil ! )
+           l_Call .Target .PushType
+           ')'
+          end
+          
+          ';'
+          
+          l_Call .ParametersWithoutContext
+          .filter> ( .IsOutParam )
+          .reverted> 
+          .for> (
+            IN aParam
+           \n 
+           'aCtx.rEngine.' 
+           aParam .Target .PushSig 
+           '(' 
+           'l_' aParam .Name 
+           aParam .Target .PushType
+           ')'
+           ';'
+          ) // .for>
+            
+         ] .Out
+        ) // Indented:
+       )
+   
+   ( '5617F4D00243' IsUID ) // ParamsTypes
+     Code:
        ( 
-        VAR l_Op
-        Self .Implementor .SpelledFor >>> l_Op
+        VAR l_Self
+        l_Implementor .Speller >>> l_Self
+        VAR l_NeedComma
+        false >>> l_NeedComma
+        [ 
+         ' Result := '
+         'OpenTypesToTypes'
+         '('
+         '['
+         if ( l_Self IsNil ) then
+          [empty]
+         else
+          [ l_Self ]
+         .join>  
+         (
+          l_Op .Parameters 
+          .filter> ( .IsOutParam ! ) 
+          .mapToTarget>
+         ) // .join>
+         .map> .TypeInfo
+         .for> (
+          .WithComma: l_NeedComma .KeepInStack
+         )
+         ']'
+         ')'
+         ';' 
+        ] .Out 
+       ) // ( l_Key cImplementationUserCodeSuffix == )
+   ( '551544E2001A' IsUID ) // GetResultTypeInfo
+     Code:
+       ( 
+        VAR l_Self
+        l_Implementor .Speller >>> l_Self
         [ 
          ' Result := '
          if ( l_Op .IsCreator ) then
          begin
-          '!!!'
+          l_Self .TypeInfo
          end // ( l_Op .IsCreator )
          else
          begin
@@ -2427,20 +2851,9 @@ elem_proc UserCode:
          ';' 
         ] .Out 
        ) // ( l_Key cImplementationUserCodeSuffix == )
-      DEFAULT
-       AsDefault 
-     ; // RULES
-   ( 
-    ( Self .UID '559687E6025A' == ) // GetAllParamsCount
-    AND ( Self .Implementor .IsSummoned )
-   ) 
-     RULES
-      ( l_Key cVarUserCodeSuffix == )
-       ()
-      ( l_Key cImplementationUserCodeSuffix == )
+   ( '559687E6025A' IsUID ) // GetAllParamsCount
+     Code:
        ( 
-        VAR l_Op
-        Self .Implementor .SpelledFor >>> l_Op
         [ 
          ' Result := '
          l_Op .Parameters .filter> ( .IsOutParam ! ) .CountIt
@@ -2449,31 +2862,22 @@ elem_proc UserCode:
          ';' 
         ] .Out 
        ) // ( l_Key cImplementationUserCodeSuffix == )
-      DEFAULT
-       AsDefault 
-     ; // RULES
-   ( 
-    ( Self .UID '52E9282B0271' == ) // RightParamsCount
-    AND ( Self .Implementor .IsSummoned )
-   ) 
-     RULES
-      ( l_Key cVarUserCodeSuffix == )
-       ()
-      ( l_Key cImplementationUserCodeSuffix == )
+   ( '52E9282B0271' IsUID ) // RightParamsCount
+     Code:
        ( ' Result := 1;' .Out )
-      DEFAULT
-       AsDefault 
-     ; // RULES
+       
    ( Self .IsFactory )
     begin
-     RULES
-      ( l_Key cVarUserCodeSuffix == )
+     Pair:
+      (
        if ( Self .Parent .IsSingleton ! ) then
        begin
         'var' .Out
         [ ' l_Inst : ' Self .Parent .TypeName ';' ] .Out
-       end // ( l_Key cVarUserCodeSuffix == )
-      ( l_Key cImplementationUserCodeSuffix == )
+       end // ( Self .Parent .IsSingleton ! )
+      ) 
+      
+      ( 
        if ( Self .Parent .IsSingleton ) then
        begin
         Indented: (
@@ -2526,10 +2930,8 @@ elem_proc UserCode:
          ' l_Inst.Free;' .Out
          'end;//try..finally' .Out
         ) // Indented:
-       end // ( l_Key cImplementationUserCodeSuffix == )
-      DEFAULT
-       AsDefault 
-     ; // RULES
+       end // ( Self .Parent .IsSingleton )
+      ) 
     end // ( Self .IsFactory )
    ( 
     'ResNameGetter' Self .Name EndsStr 
@@ -2610,11 +3012,6 @@ elem_proc OutUses:
  ';' .Out
  OutLn
 ; // OutUses:
-
-ARRAY FUNCTION .mapToTarget>
-  ARRAY IN anArray
- anArray .map> .Target >>> Result
-; // .mapToTarget>
 
 ARRAY FUNCTION .mapToTargetAndValueType>
   ARRAY IN anArray
@@ -2963,53 +3360,6 @@ STRING elem_func ParamPrefix
  ; // RULES
  >>> Result
 ; // ParamPrefix
-
-STRING FUNCTION .ToBorland
-  STRING IN aValue
- '' >>> Result
- aValue '_' string:Split:for> ( 
-   IN aSubstr
-/*{  if ( aSubstr IsNil ) then 
-  begin
-   Result '_' Cat >>> Result
-  end 
-  else}*/
-  begin
-   Result aSubstr Cat >>> Result
-  end 
- )
-; // .ToBorland
-
-STRING elem_func MethodName
- Cached:
- (
-  RULES
-   ( Self .IsIterator )
-    (
-     RULES
-      ( Self .IsIteratorF )
-       ( Self .Name 'F' Cat )
-      ( Self .MainAncestor IsNil ! )
-       ( Self .MainAncestor call.me )
-      DEFAULT
-       ( Self .Name )
-     ; // RULES
-    ) // ( Self .IsIterator )
-   ( Self .IsStaticConstructor )
-    if ( Self .Parent .IsConstructorsHolder ) then
-     ( [ Self .Parent .MainAncestor .TypeName '_' Self .Name ] strings:Cat )
-    else
-     ( [ Self .Parent .TypeName '_' Self .Name ] strings:Cat )
-   ( Self .UPisTrue 'extprop:isGlobal' )
-    ( Self .Name .ToBorland )
-   ( '__' Self .Name StartsStr ) 
-    ( Self .Name '__' '_' string:Replace )
-   DEFAULT
-    ( Self .Name '__' '_' string:Replace )
-  ; // RULES 
- )
- >>> Result
-; // MethodName
 
 BOOLEAN elem_func IsDestructor
  RULES
