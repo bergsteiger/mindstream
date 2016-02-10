@@ -2792,23 +2792,34 @@ elem_proc UserCode:
            
            if ( l_Self IsNil ! ) then
            begin
-            'DoSetValue' 
-            '('
-            l_Self .SelfName
-            
-            l_Op .Parameters 
-            .filterOutParam>
-            .for> (
-              IN aParam
-            ', '
-            'l_'
-             aParam .Name
-            ) // .for>
-            
-            ', '
-            'aValue' l_Op .Target .TypeName
-            
-            ')'
+            if ( l_Op .UPisTrue "mapped" ) then
+            begin
+             l_Self .SelfName
+             '.'
+             l_Op .GetUP 'extprop:prop_name'
+             ' := '
+             'aValue' l_Op .Target .TypeName
+            end // ( l_Op .UPisTrue "mapped" )
+            else
+            begin
+             'DoSetValue' 
+             '('
+             l_Self .SelfName
+             
+             l_Op .Parameters 
+             .filterOutParam>
+             .for> (
+               IN aParam
+             ', '
+             'l_'
+              aParam .Name
+             ) // .for>
+             
+             ', '
+             'aValue' l_Op .Target .TypeName
+             
+             ')'
+            end
             ';'
            end // ( l_Self IsNil ! )
           ] .Out
