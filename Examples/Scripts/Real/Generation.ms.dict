@@ -2771,6 +2771,43 @@ elem_proc UserCode:
           ''', aCtx);'
          ] .Out
         end // ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' == )
+        else
+        begin
+         VAR l_Self
+         l_Implementor .Speller >>> l_Self
+         [
+          if ( l_Self IsNil ! ) then
+          begin
+           l_Self .SelfName l_Self .Pop
+          end // ( l_Self IsNil ! )
+          
+          l_Op .Parameters 
+          .filterOutParam>
+          .for> (
+            IN aParam
+           aParam .ParamPop
+          ) // .for>
+          
+          'DoSetValue' 
+          '('
+          l_Self .SelfName
+          
+          l_Op .Parameters 
+          .filterOutParam>
+          .for> (
+            IN aParam
+          ', '
+          'l_'
+           aParam .Name
+          ) // .for>
+          
+          ', '
+          'aValue'
+          
+          ')'
+          ';'
+         ] .Out
+        end // ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' == )
        )
        
    (
