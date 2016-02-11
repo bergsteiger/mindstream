@@ -3103,6 +3103,7 @@ elem_proc UserCode:
     AND ( l_Self IsNil ! )
     AND ( l_Implementor .IsSummoned )
     AND ( l_Op .UPisTrue "mapped" )
+    AND ( Self .Name 'GetWordNameForRegister' != )
    )
      Code:
        ( [ '!!! mapped' l_Op .Name ] .Out )
