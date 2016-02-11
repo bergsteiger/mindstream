@@ -150,6 +150,10 @@ type
 
 implementation
 
+uses
+ uTypes
+ ;
+
 procedure TestTParser.DoIt(const aFileName: String;
                            const aLambda: TSomeProcedure);
 var

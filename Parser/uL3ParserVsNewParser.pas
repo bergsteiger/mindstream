@@ -14,7 +14,9 @@ interface
 uses
   TestFramework, System.SysUtils, Vcl.Graphics, Winapi.Windows, System.Variants,
   Vcl.Dialogs, Vcl.Controls, Vcl.Forms, Winapi.Messages, System.Classes, uMain,
-  l3Parser;
+  l3Parser
+  ,uTypes
+  ;
 
 type
  TTokenRec = record
@@ -219,7 +221,16 @@ var
   finally
    FreeAndNil(l_NewParser);
   end;
-  Check(IsArraysEqual(l_l3ParserTokens, l_NewParserTokens));
+
+  if not IsArraysEqual(l_l3ParserTokens, l_NewParserTokens) then
+  begin
+   Check(False);
+   {for l_i := Low to High do
+   begin
+
+   end;     }
+
+  end;
  end;
 begin
  l_Tokens := '';

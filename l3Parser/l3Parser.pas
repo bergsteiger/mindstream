@@ -226,24 +226,25 @@ uses
   l3StringList,
   l3ProtoPersistent,
   l3Interfaces,
-  l3ParserInterfaces
+  l3ParserInterfaces,
+  uTypes
   ;
 
 type
-  Tl3TokenType = (
-                  l3_ttBOF,        {- начало файла}
-                  l3_ttEOF,        {- конец файла}
-                  l3_ttEOL,        {- конец строки}
-                  l3_ttSingleChar, {- единичный (управл€ющий) символ}
-                  l3_ttSymbol,     {- идентификатор}
-                  l3_ttKeyWord,    {- ключевое слово}
-                  l3_ttString,     {- строка (в кавычках)}
-                  l3_ttInteger,    {- целое число}
-                  l3_ttFloat,      {- вещественное число}
-                  l3_ttComment,    {- комментарий}
-                  l3_ttDoubleQuotedString, // - строка в двойных кавычках
-                  l3_ttUnknown
-                 );
+//  Tl3TokenType = (
+//                  l3_ttBOF,        {- начало файла}
+//                  l3_ttEOF,        {- конец файла}
+//                  l3_ttEOL,        {- конец строки}
+//                  l3_ttSingleChar, {- единичный (управл€ющий) символ}
+//                  l3_ttSymbol,     {- идентификатор}
+//                  l3_ttKeyWord,    {- ключевое слово}
+//                  l3_ttString,     {- строка (в кавычках)}
+//                  l3_ttInteger,    {- целое число}
+//                  l3_ttFloat,      {- вещественное число}
+//                  l3_ttComment,    {- комментарий}
+//                  l3_ttDoubleQuotedString, // - строка в двойных кавычках
+//                  l3_ttUnknown
+//                 );
    {* - тип токена.
        |<br>
        |<ul>
