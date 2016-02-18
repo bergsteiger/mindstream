@@ -43,6 +43,7 @@ type
    procedure CheckArraysIsEqual;
    procedure CheckArraysIsNotEqual;
    procedure CheckArraysLengthIsNotEqual;
+   procedure CheckArrayToString;
    procedure CheckL3Parser;
    procedure CheckTokenRecToString;
  end;
@@ -57,8 +58,13 @@ uses
  ,l3Chars,
  Generics.Collections
  ;
-{ TL3ParserVsTNewParser }
 
+ function ArrayToString(const aArray : TokenArray) : string;
+ begin
+  Result := '';
+ end;
+
+{ TL3ParserVsTNewParser }
 const
  cParseOptions = [l3_poCheckKeyWords,
                   l3_poCheckInt,
@@ -138,6 +144,23 @@ begin
  Check(not IsArraysEqual(l_l3ParserTokens, l_NewParserTokens));
 end;
 
+procedure TL3ParserVsTNewParser.CheckArrayToString;
+var
+ l_l3ParserTokens : TokenArray;
+ l_ExpectedString : string;
+begin
+ SetLength(l_l3ParserTokens, 2);
+
+ l_l3ParserTokens[0].rToken := 'ABC';
+ l_l3ParserTokens[0].rTokenType := l3_ttSymbol;
+ l_l3ParserTokens[1].rToken := 'CBA';
+ l_l3ParserTokens[1].rTokenType := l3_ttSymbol;
+
+ l_ExpectedString := 'ABC - l3_ttSymbol | CBA - l3_ttSymbol |';
+
+ Check(ArrayToString(l_l3ParserTokens) = l_ExpectedString);
+end;
+
 procedure TL3ParserVsTNewParser.CheckL3Parser;
 var
  l_Tokens : string;
@@ -214,7 +237,7 @@ var
 
     if l_NewParser.TokenType <> l3_ttEOF then
      SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
-     
+
     Inc(l_i);
    end;
 
@@ -225,6 +248,7 @@ var
   if not IsArraysEqual(l_l3ParserTokens, l_NewParserTokens) then
   begin
    Check(False);
+   // ToLog(ArrayToString)
    {for l_i := Low to High do
    begin
 
