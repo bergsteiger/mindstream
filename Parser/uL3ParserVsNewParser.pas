@@ -57,7 +57,7 @@ uses
  ,uNewParser
  ,l3Chars
  ,Generics.Collections
- ,l3Base
+ ,CodeSiteLogging
  ;
 
  function ArrayToString(const aArray : TokenArray) : string;
@@ -179,9 +179,16 @@ var
   l_Filer : Tl3DosFiler;
   l_l3ParserTokens, l_NewParserTokens : TokenArray;
   l_i : integer;
+  l_Dest: TCodeSiteDestination;
  begin
   l_Filer := Tl3DosFiler.Make(aName);
   l_l3Parser := Tl3CustomParser.Create;
+  // Create Log file
+  l_Dest := TCodeSiteDestination.Create(nil);
+  l_Dest.LogFile.FilePath:=ExtractFilePath(Application.ExeName);
+  l_Dest.LogFile.FileName:='ParserTest.log';
+  l_Dest.LogFile.Active:=true;
+  CodeSite.Destination:=l_Dest;
 
   try
    try
@@ -254,11 +261,13 @@ var
   finally
    if not IsArraysEqual(l_l3ParserTokens, l_NewParserTokens) then
    begin
-    Check(False);
-    l3System.Msg2Log('----------------------------------------');
-    l3System.Msg2Log(aName);
-    l3System.Msg2Log(ArrayToString(l_l3ParserTokens));
-    l3System.Msg2Log(ArrayToString(l_NewParserTokens));
+    CodeSite.Send('----------------------------------------');
+    CodeSite.Send(aName);
+    CodeSite.Send('----------------------------------------');
+    CodeSite.Send('l_l3ParserTokens');
+    CodeSite.Send(ArrayToString(l_l3ParserTokens));
+    CodeSite.Send('l_NewParserTokens');
+    CodeSite.Send(ArrayToString(l_NewParserTokens));
    end;
   end;
  end;
@@ -271,9 +280,11 @@ begin
      if (l_SR.Attr <> faDirectory) then
      begin
       DoSome(l_SR.Name);
+       l_Tokens := l_Tokens + ' ' + l_SR.Name;
      end;
    until FindNext(l_SR) <> 0;
    FindClose(l_SR.FindHandle);
+   ShowMessage(l_Tokens);
  end;
 
 // DoSome('Test_4_1.txt');
