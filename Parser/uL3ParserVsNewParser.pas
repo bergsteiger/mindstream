@@ -55,13 +55,18 @@ uses
  ,l3Types
  ,System.TypInfo
  ,uNewParser
- ,l3Chars,
- Generics.Collections
+ ,l3Chars
+ ,Generics.Collections
+ ,l3Base
  ;
 
  function ArrayToString(const aArray : TokenArray) : string;
+ var
+  l_I : integer;
  begin
   Result := '';
+  for l_I := Low(aArray) to High(aArray) do
+   Result := Result + ' ' + aArray[l_I].ToString + ' |';
  end;
 
 { TL3ParserVsTNewParser }
@@ -156,7 +161,7 @@ begin
  l_l3ParserTokens[1].rToken := 'CBA';
  l_l3ParserTokens[1].rTokenType := l3_ttSymbol;
 
- l_ExpectedString := 'ABC - l3_ttSymbol | CBA - l3_ttSymbol |';
+ l_ExpectedString := ' ABC - l3_ttSymbol | CBA - l3_ttSymbol |';
 
  Check(ArrayToString(l_l3ParserTokens) = l_ExpectedString);
 end;
@@ -179,87 +184,88 @@ var
   l_l3Parser := Tl3CustomParser.Create;
 
   try
-   if (l_l3Parser <> nil) then
-   begin
-    l_l3Parser.CheckFloat := false;
-    l_l3Parser.CheckComment := false;
-    l_l3Parser.CheckStringBracket := false;
-    l_l3Parser.AddDigits2WordChars := true;
-    l_l3Parser.WordChars := l_l3Parser.WordChars +
-                     cc_ANSIRussian +
-                     [':', '.', '-', '+', '=', '<', '>', '?', '!', '&', '|',
-                      '(', ')', '"', '@', '[', ']', ',',
-                      '/', '^', '№', '~', '$', '%', '*', '\',
-                      ';', '`'] +
-                     cc_Digits;
-    l_l3Parser.CheckStringBracket := false;
-    // - не смотрим на символ '<' в строковых константах
-    l_l3Parser.SkipSoftEnter := true;
-    // - плюём на #10 модели, которые не смогли победить
-    l_l3Parser.SkipHardEnter := true;
-    // - плюём на #13 модели, которые не смогли победить
-    l_l3Parser.CheckKeyWords := false;
-    // - ключевые слова будем обрабатывать сами
-   end;//f_Parser <> nil0:02
+   try
+    if (l_l3Parser <> nil) then
+    begin
+     l_l3Parser.CheckFloat := false;
+     l_l3Parser.CheckComment := false;
+     l_l3Parser.CheckStringBracket := false;
+     l_l3Parser.AddDigits2WordChars := true;
+     l_l3Parser.WordChars := l_l3Parser.WordChars +
+                      cc_ANSIRussian +
+                      [':', '.', '-', '+', '=', '<', '>', '?', '!', '&', '|',
+                       '(', ')', '"', '@', '[', ']', ',',
+                       '/', '^', '№', '~', '$', '%', '*', '\',
+                       ';', '`'] +
+                      cc_Digits;
+     l_l3Parser.CheckStringBracket := false;
+     // - не смотрим на символ '<' в строковых константах
+     l_l3Parser.SkipSoftEnter := true;
+     // - плюём на #10 модели, которые не смогли победить
+     l_l3Parser.SkipHardEnter := true;
+     // - плюём на #13 модели, которые не смогли победить
+     l_l3Parser.CheckKeyWords := false;
+     // - ключевые слова будем обрабатывать сами
+    end;//f_Parser <> nil0:02
 
 
-   l_Filer.Open;
-   l_l3Parser.Filer := l_Filer;
+    l_Filer.Open;
+    l_l3Parser.Filer := l_Filer;
 
-   SetLength(l_l3ParserTokens, 1);
+    SetLength(l_l3ParserTokens, 1);
 
-   l_i := 0;
-   while not (l_l3Parser.TokenType = l3_ttEOF) do
-   begin
-    l_l3Parser.NextToken;
-    l_l3ParserTokens[l_i].Create(l_l3Parser.TokenString,
-                                 l_l3Parser.TokenType);
+    l_i := 0;
+    while not (l_l3Parser.TokenType = l3_ttEOF) do
+    begin
+     l_l3Parser.NextToken;
+     l_l3ParserTokens[l_i].Create(l_l3Parser.TokenString,
+                                  l_l3Parser.TokenType);
 
-    if l_l3Parser.TokenType <> l3_ttEOF then
-     SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
-     
-    Inc(l_i);
-   end;
-  finally
-   FreeAndNil(l_Filer);
-   FreeAndNil(l_l3Parser);
-  end;
+     if l_l3Parser.TokenType <> l3_ttEOF then
+      SetLength(l_l3ParserTokens, Length(l_l3ParserTokens) + 1);
 
-  l_NewParser := TNewParser.Create(aName);
-  try
-   SetLength(l_NewParserTokens, 1);
-   l_i := 0;
-   while not l_NewParser.EOF do
-   begin
-    l_NewParser.NextToken;
-    l_NewParserTokens[l_i].Create(l_NewParser.TokenString,
-                                  l_NewParser.TokenType);
-
-    if l_NewParser.TokenType <> l3_ttEOF then
-     SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
-
-    Inc(l_i);
+     Inc(l_i);
+    end;
+   finally
+    FreeAndNil(l_Filer);
+    FreeAndNil(l_l3Parser);
    end;
 
+   l_NewParser := TNewParser.Create(aName);
+   try
+    SetLength(l_NewParserTokens, 1);
+    l_i := 0;
+    while not l_NewParser.EOF do
+    begin
+     l_NewParser.NextToken;
+     l_NewParserTokens[l_i].Create(l_NewParser.TokenString,
+                                   l_NewParser.TokenType);
+
+     if l_NewParser.TokenType <> l3_ttEOF then
+      SetLength(l_NewParserTokens, Length(l_NewParserTokens) + 1);
+
+     Inc(l_i);
+    end;
+
+   finally
+    FreeAndNil(l_NewParser);
+   end;
+
   finally
-   FreeAndNil(l_NewParser);
-  end;
-
-  if not IsArraysEqual(l_l3ParserTokens, l_NewParserTokens) then
-  begin
-   Check(False);
-   // ToLog(ArrayToString)
-   {for l_i := Low to High do
+   if not IsArraysEqual(l_l3ParserTokens, l_NewParserTokens) then
    begin
-
-   end;     }
-
+    Check(False);
+    l3System.Msg2Log('----------------------------------------');
+    l3System.Msg2Log(aName);
+    l3System.Msg2Log(ArrayToString(l_l3ParserTokens));
+    l3System.Msg2Log(ArrayToString(l_NewParserTokens));
+   end;
   end;
  end;
 begin
  l_Tokens := '';
  l_Path :=  '*.txt';
-{ if FindFirst(l_Path, faAnyFile, l_SR) = 0 then
+ if FindFirst(l_Path, faAnyFile, l_SR) = 0 then
  begin
    repeat
      if (l_SR.Attr <> faDirectory) then
@@ -268,9 +274,9 @@ begin
      end;
    until FindNext(l_SR) <> 0;
    FindClose(l_SR.FindHandle);
- end;       }
+ end;
 
- DoSome('Test_4_1.txt');
+// DoSome('Test_4_1.txt');
 end;
 
 procedure TL3ParserVsTNewParser.CheckTokenEquals;
