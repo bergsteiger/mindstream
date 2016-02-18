@@ -1,4 +1,4 @@
-unit uL3ParserVsNewParser;
+п»їunit uL3ParserVsNewParser;
 {
 
   Delphi DUnit Test Case
@@ -34,6 +34,8 @@ type
 type
  TL3ParserVsTNewParser = class(TTestCase)
   private
+   f_NotEqualTestCount : Integer = 0;
+   f_ExceptionCount : Integer = 0;
    function FileName: string;
    function IsArraysEqual(const aArrayLeft, aArrayRight : TokenArray) : Boolean;
   published
@@ -58,6 +60,7 @@ uses
  ,l3Chars
  ,Generics.Collections
  ,CodeSiteLogging
+ ,l3Logger
  ;
 
  function ArrayToString(const aArray : TokenArray) : string;
@@ -180,6 +183,7 @@ var
   l_l3ParserTokens, l_NewParserTokens : TokenArray;
   l_i : integer;
   l_Dest: TCodeSiteDestination;
+  l_Logger : Tl3Logger;
  begin
   l_Filer := Tl3DosFiler.Make(aName);
   l_l3Parser := Tl3CustomParser.Create;
@@ -188,7 +192,8 @@ var
   l_Dest.LogFile.FilePath:=ExtractFilePath(Application.ExeName);
   l_Dest.LogFile.FileName:='ParserTest.log';
   l_Dest.LogFile.Active:=true;
-  CodeSite.Destination:=l_Dest;
+  //CodeSite.Destination:=l_Dest;
+  l_Logger := Tl3Logger.Create('ParsingTestResults');
 
   try
    try
@@ -202,17 +207,17 @@ var
                       cc_ANSIRussian +
                       [':', '.', '-', '+', '=', '<', '>', '?', '!', '&', '|',
                        '(', ')', '"', '@', '[', ']', ',',
-                       '/', '^', '№', '~', '$', '%', '*', '\',
+                       '/', '^', 'в„–', '~', '$', '%', '*', '\',
                        ';', '`'] +
                       cc_Digits;
      l_l3Parser.CheckStringBracket := false;
-     // - не смотрим на символ '<' в строковых константах
+     // - РЅРµ СЃРјРѕС‚СЂРёРј РЅР° СЃРёРјРІРѕР» '<' РІ СЃС‚СЂРѕРєРѕРІС‹С… РєРѕРЅСЃС‚Р°РЅС‚Р°С…
      l_l3Parser.SkipSoftEnter := true;
-     // - плюём на #10 модели, которые не смогли победить
+     // - РїР»СЋС‘Рј РЅР° #10 РјРѕРґРµР»Рё, РєРѕС‚РѕСЂС‹Рµ РЅРµ СЃРјРѕРіР»Рё РїРѕР±РµРґРёС‚СЊ
      l_l3Parser.SkipHardEnter := true;
-     // - плюём на #13 модели, которые не смогли победить
+     // - РїР»СЋС‘Рј РЅР° #13 РјРѕРґРµР»Рё, РєРѕС‚РѕСЂС‹Рµ РЅРµ СЃРјРѕРіР»Рё РїРѕР±РµРґРёС‚СЊ
      l_l3Parser.CheckKeyWords := false;
-     // - ключевые слова будем обрабатывать сами
+     // - РєР»СЋС‡РµРІС‹Рµ СЃР»РѕРІР° Р±СѓРґРµРј РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ СЃР°РјРё
     end;//f_Parser <> nil0:02
 
 
@@ -261,6 +266,7 @@ var
   finally
    if not IsArraysEqual(l_l3ParserTokens, l_NewParserTokens) then
    begin
+    Inc(f_NotEqualTestCount);
     CodeSite.Send('----------------------------------------');
     CodeSite.Send(aName);
     CodeSite.Send('----------------------------------------');
@@ -268,7 +274,18 @@ var
     CodeSite.Send(ArrayToString(l_l3ParserTokens));
     CodeSite.Send('l_NewParserTokens');
     CodeSite.Send(ArrayToString(l_NewParserTokens));
+
+    l_Logger.ToLog('----------------------------------------');
+    l_Logger.ToLog(aName);
+    l_Logger.ToLog('----------------------------------------');
+    l_Logger.ToLog('l_l3ParserTokens');
+    l_Logger.ToLog(ArrayToString(l_l3ParserTokens));
+    l_Logger.ToLog('l_NewParserTokens');
+    l_Logger.ToLog(ArrayToString(l_NewParserTokens));
    end;
+
+   FreeAndNil(l_Logger);
+   FreeAndNil(l_Dest);
   end;
  end;
 begin
@@ -279,8 +296,12 @@ begin
    repeat
      if (l_SR.Attr <> faDirectory) then
      begin
-      DoSome(l_SR.Name);
+      try
+       DoSome(l_SR.Name);
+      except
+       Inc(f_ExceptionCount);
        l_Tokens := l_Tokens + ' ' + l_SR.Name;
+      end;
      end;
    until FindNext(l_SR) <> 0;
    FindClose(l_SR.FindHandle);
