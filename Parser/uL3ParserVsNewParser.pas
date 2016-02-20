@@ -34,8 +34,8 @@ type
 type
  TL3ParserVsTNewParser = class(TTestCase)
   private
-   f_NotEqualTestCount : Integer = 0;
-   f_ExceptionCount : Integer = 0;
+   f_NotEqualTestCount : Integer;
+   f_ExceptionCount : Integer;
    function FileName: string;
    function IsArraysEqual(const aArrayLeft, aArrayRight : TokenArray) : Boolean;
   published
@@ -46,8 +46,8 @@ type
    procedure CheckArraysIsNotEqual;
    procedure CheckArraysLengthIsNotEqual;
    procedure CheckArrayToString;
-   procedure CheckL3Parser;
    procedure CheckTokenRecToString;
+   procedure CheckL3Parser;
  end;
 
 implementation
