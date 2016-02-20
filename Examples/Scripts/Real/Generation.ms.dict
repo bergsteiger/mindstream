@@ -2297,6 +2297,38 @@ STRING elem_func CastSig
  >>> Result  
 ; // CastSig
 
+STRING elem_func TypeValue
+ RULES
+  ( Self .TypeName 'TtfwStackValue' == )
+   ''
+  ( Self .IsSimpleClass ) 
+   ( [ '.AsObject(' Self .TypeName ')' ] strings:Cat ) 
+  ( Self .TypeName 'Integer' == )
+   '.AsInt'
+  ( Self .TypeName 'TColor' == )
+   '.AsInt'
+  ( Self .TypeName 'Cardinal' == )
+   '.AsInt'
+  ( Self .IsEnum )
+   '.AsInt'
+  ( Self .TypeName 'String' == )
+   '.AsDelphiString'
+  ( Self .TypeName 'AnsiString' == )
+   '.AsDelphiString'
+  ( Self .TypeName 'Char' == )
+   '.AsChar'
+  ( Self .TypeName 'AnsiChar' == )
+   '.AsChar'
+  ( Self .TypeName 'Boolean' == )
+   '.AsBoolean'
+  ( Self .IsTypedef )
+   ( Self .MainAncestor call.me ) 
+  DEFAULT
+   ( [ 'Не знаем как приводить значение типа ' Self .TypeName ] strings:Cat )
+ ; // RULES
+ >>> Result  
+; // TypeValue
+
 STRING elem_func UnCastSig
  RULES
   ( Self .TypeName 'TColor' == )
@@ -2555,6 +2587,13 @@ BOOLEAN elem_func IsOutParam
  Self .IsStereotype st_out >>> Result
 ; // IsOutParam
 
+ARRAY FUNCTION .filterOutParam>
+  ARRAY IN anArray
+ anArray
+ .filter> ( .IsOutParam ! ) 
+ >>> Result
+; // .filterOutParam>
+
 ARRAY FUNCTION .mapToTarget>
   ARRAY IN anArray
  anArray .map> .Target >>> Result
@@ -2606,6 +2645,14 @@ STRING elem_func MethodName
  )
  >>> Result
 ; // MethodName
+
+STRING elem_func SelfName
+ Self .GetUP 'extprop:rc:SelfName' >>> Result
+ if ( Result IsNil ) then
+ begin
+  Self .TypeName >>> Result
+ end 
+; // SelfName
 
 elem_proc UserCode:
  ^ IN aSuffix
@@ -2669,24 +2716,171 @@ elem_proc UserCode:
   VAR l_Op
   l_Implementor .SpelledFor >>> l_Op
   
+  VAR l_Self
+  l_Implementor .Speller >>> l_Self
+  
   elem_iterator ParametersWithoutContext
    Self .Parameters
    .filter> ( .Name 'aCtx' != )
    >>> Result
   ; // ParametersWithoutContext
   
+  : .AsVar
+    STRING IN aName
+    ModelElement IN aType
+   'var' cSpace 'l_' aName ': ' aType .TypeName ';' 
+  ; // .AsVar
+  
+  elem: ParamAsVar
+   Self .Name Self .Target .AsVar
+  ; // ParamAsVar
+  
+  : .Pop
+    STRING IN aName
+    ModelElement IN aType
+   'try' \n
+   
+   ' ' 'l_' aName 
+   ' := ' 
+   
+   VAR l_CastSig
+   aType .CastSig >>> l_CastSig
+   
+   if ( l_CastSig IsNil ! ) then
+   begin
+    l_CastSig '('
+   end
+   
+   'aCtx.rEngine.' aType .PopSig
+   
+   if ( l_CastSig IsNil ! ) then
+   begin
+    ')'
+   end
+   
+   ';' \n
+   
+   'except' \n 
+   ' on E: Exception do' \n
+   ' begin' \n
+   '  RunnerError(''Ошибка при получении параметра ' aName ': ' aType .TypeName ' : '' + E.Message, aCtx);' \n
+   '  Exit;' \n
+   ' end;//on E: Exception' \n
+   'end;//try..except' \n
+  ; // .Pop
+  
+  elem: ParamPop
+   Self .Name Self .Target .Pop
+  ; // ParamPop
+  
   RULES
    (
     ( l_Op IsNil ! )
+    AND ( l_Self IsNil ! )
     AND ( '52D00B00031A' IsUID ) // SetValuePrim
    ) 
-     Code:
+     Pair:
        (
-        [
-         ' RunnerError(''Нельзя присваивать значение readonly свойству '
-         l_Op .GetUP 'extprop:prop_name'
-         ''', aCtx);'
-        ] .Out
+        if ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' != ) then
+        begin
+         if ( l_Self IsNil ! ) then
+         begin
+          [ l_Self .SelfName l_Self .AsVar ] .Out
+         end // ( l_Self IsNil ! )
+         
+         l_Op .Parameters 
+         .filterOutParam>
+         .for> (
+           IN aParam
+          [ aParam .ParamAsVar ] .Out 
+         ) // .for>
+        end // ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' != )
+       )
+       (
+        if ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' == ) then
+        begin
+         [
+          ' RunnerError(''Нельзя присваивать значение readonly свойству '
+          l_Op .GetUP 'extprop:prop_name'
+          ''', aCtx);'
+         ] .Out
+        end // ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' == )
+        else
+        begin
+         Indented:
+         (
+          [
+           if ( l_Self IsNil ! ) then
+           begin
+            l_Self .SelfName l_Self .Pop
+           end // ( l_Self IsNil ! )
+           
+           l_Op .Parameters 
+           .filterOutParam>
+           .for> (
+             IN aParam
+            aParam .ParamPop
+           ) // .for>
+           
+           if ( l_Self IsNil ! ) then
+           begin
+            if ( l_Op .UPisTrue "mapped" ) then
+            begin
+             l_Self .SelfName
+             '.'
+             l_Op .GetUP 'extprop:prop_name'
+             ' := '
+             
+             VAR l_CastSig
+             l_Op .Target .CastSig >>> l_CastSig
+             
+             if ( l_CastSig IsNil ! ) then
+             begin
+              l_CastSig '('
+             end
+             
+             'aValue' l_Op .Target .TypeValue
+             
+             if ( l_CastSig IsNil ! ) then
+              ')'
+            end // ( l_Op .UPisTrue "mapped" )
+            else
+            begin
+             'DoSetValue' 
+             '('
+             l_Self .SelfName
+             
+             l_Op .Parameters 
+             .filterOutParam>
+             .for> (
+               IN aParam
+             ', '
+             'l_'
+              aParam .Name
+             ) // .for>
+             
+             ', '
+             
+             VAR l_CastSig
+             l_Op .Target .CastSig >>> l_CastSig
+             
+             if ( l_CastSig IsNil ! ) then
+             begin
+              l_CastSig '('
+             end
+             
+             'aValue' l_Op .Target .TypeValue
+             
+             if ( l_CastSig IsNil ! ) then
+              ')'
+              
+             ')'
+            end
+            ';'
+           end // ( l_Self IsNil ! )
+          ] .Out
+         ) // Indented:
+        end // ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' == )
        )
        
    (
@@ -2702,7 +2896,7 @@ elem_proc UserCode:
         l_Call .ParametersWithoutContext
         .for> (
           IN aParam
-         [ 'var' cSpace 'l_' aParam .Name ': ' aParam .Target .TypeName ';' ] .Out
+         [ aParam .ParamAsVar ] .Out
         ) // .for>
        )
        (
@@ -2710,38 +2904,10 @@ elem_proc UserCode:
         (
          [
           l_Call .ParametersWithoutContext
-          .filter> ( .IsOutParam ! ) 
+          .filterOutParam>
           .for> (
             IN aParam
-           'try' \n
-           
-           ' ' 'l_' aParam .Name 
-           ' := ' 
-           
-           VAR l_CastSig
-           aParam .Target .CastSig >>> l_CastSig
-           
-           if ( l_CastSig IsNil ! ) then
-           begin
-            l_CastSig '('
-           end
-           
-           'aCtx.rEngine.' aParam .Target .PopSig
-           
-           if ( l_CastSig IsNil ! ) then
-           begin
-            ')'
-           end
-           
-           ';' \n
-           
-           'except' \n 
-           ' on E: Exception do' \n
-           ' begin' \n
-           '  RunnerError(''Ошибка при получении параметра ' aParam .Name ': ' aParam .Target .TypeName ' : '' + E.Message, aCtx);' \n
-           '  Exit;' \n
-           ' end;//on E: Exception' \n
-           'end;//try..except' \n
+           aParam .ParamPop 
           ) // .for>
           
           VAR l_PushSig
@@ -2805,8 +2971,6 @@ elem_proc UserCode:
    ( '5617F4D00243' IsUID ) // ParamsTypes
      Code:
        ( 
-        VAR l_Self
-        l_Implementor .Speller >>> l_Self
         VAR l_NeedComma
         false >>> l_NeedComma
         [ 
@@ -2821,7 +2985,7 @@ elem_proc UserCode:
          .join>  
          (
           l_Op .Parameters 
-          .filter> ( .IsOutParam ! ) 
+          .filterOutParam>
           .mapToTarget>
          ) // .join>
          .map> .TypeInfo
@@ -2836,8 +3000,6 @@ elem_proc UserCode:
    ( '551544E2001A' IsUID ) // GetResultTypeInfo
      Code:
        ( 
-        VAR l_Self
-        l_Implementor .Speller >>> l_Self
         [ 
          ' Result := '
          if ( l_Op .IsCreator ) then
@@ -2856,7 +3018,9 @@ elem_proc UserCode:
        ( 
         [ 
          ' Result := '
-         l_Op .Parameters .filter> ( .IsOutParam ! ) .CountIt
+         l_Op .Parameters 
+         .filterOutParam>
+         .CountIt
          l_Op .HasSelf ? ( 1 + )
          l_Op .IsVarWorker ? ( 1 + )
          ';' 
@@ -2933,6 +3097,17 @@ elem_proc UserCode:
        end // ( Self .Parent .IsSingleton )
       ) 
     end // ( Self .IsFactory )
+    
+   (
+    ( l_Op IsNil ! )
+    AND ( l_Self IsNil ! )
+    AND ( l_Implementor .IsSummoned )
+    AND ( l_Op .UPisTrue "mapped" )
+    AND ( Self .Name 'GetWordNameForRegister' != )
+   )
+     Code:
+       ( [ '!!! mapped' l_Op .Name ] .Out )
+    
    ( 
     'ResNameGetter' Self .Name EndsStr 
     AND ( l_Key 'impl' == )
@@ -6306,14 +6481,6 @@ BOOLEAN elem_func NeedsWordsAliases
  ) 
  >>> Result
 ; // NeedsWordsAliases
-
-STRING elem_func SelfName
- Self .GetUP 'extprop:rc:SelfName' >>> Result
- if ( Result IsNil ) then
- begin
-  Self .TypeName >>> Result
- end 
-; // SelfName
 
 elem_generator rc.script
  
