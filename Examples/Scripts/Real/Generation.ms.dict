@@ -684,6 +684,10 @@ BOOLEAN elem_func IsUserType
  Self .IsStereotype st_UserType >>> Result
 ; // IsUserType
 
+BOOLEAN elem_func IsVCMFormSetFactory
+ Self .IsStereotype st_VCMFormSetFactory >>> Result
+; // IsVCMFormSetFactory
+
 BOOLEAN elem_func NeedOwnFilePrim
  Cached:
  (
@@ -719,6 +723,12 @@ BOOLEAN elem_func NeedOwnFilePrim
     true
    
    ( Self .IsElementProxy )
+    true
+    
+   ( Self .IsVCMFormSetFactory )
+    true
+    
+   ( Self .IsVCMCustomForm )
     true
    
    ( Self .IsSimpleClass )
@@ -3400,18 +3410,22 @@ elem_iterator NeededElementsFromInheritsOrImplements
  >>> Result
 ; // NeededElementsFromInheritsOrImplements
 
+elem_iterator AttributesAndOperationsNeededElements
+ Self .AttributesAndOperations .OperationsNeededElements
+ >>> Result
+; // AttributesAndOperationsNeededElements
+
 elem_iterator NeededElements
  Cached:
  (
   Self .NeededElementsFromInheritsOrImplements
-  .join> ( Self .AttributesAndOperations .OperationsNeededElements )
+  .join> ( Self .AttributesAndOperationsNeededElements )
   if ( Self .IsTypedef ! ) then
   begin
   .join> ( Self .Implemented .OperationsNeededElements )
   .join> ( Self .Overridden .OperationsNeededElements )
   end // Self .IsTypedef !
-  .joinWithLambded> ( Self .Inherits .filter> .IsMixIn ) call.me
-  .joinWithLambded> ( Self .Implements .filter> .IsMixIn ) call.me
+  .joinWithLambded> ( Self .NeededElementsFromInheritsOrImplements .filter> .IsMixIn ) call.me
  )
  >>> Result
 ; // NeededElements
@@ -3432,14 +3446,7 @@ elem_iterator NeededElementsTotal
   
  [empty]
   
- .joinWithLambded> ( 
-  ( 
-   Self .ConstantsAndChildrenWithoutOwnFile .filter> ( 
-     IN aChild
-    aChild aChildAcceptable DO 
-   ) // Self .ConstantsAndChildrenWithoutOwnFile .filter>
-  )
- ) .NeededElements
+ .joinWithLambded> ( Self .ConstantsAndChildrenWithoutOwnFile .filter> ( aChildAcceptable DO ) ) .NeededElements
  
  .joinWithLambded> ( Self .ConstantsAndChildrenWithoutOwnFile ) ( aChildAcceptable call.me )
  
@@ -3497,7 +3504,10 @@ BOOLEAN elem_func IsForImplementation
 
 elem_iterator IntfUses
  [ 'l3IntfUses' ]
- .join> ( Self .NeededElements: .IsForInterface )
+ if ( Self .IsScriptKeywordsPack ! ) then
+ begin
+  .join> ( Self .NeededElements: .IsForInterface )
+ end // ( Self .IsScriptKeywordsPack ! )
  .join> ( Self .NeededElementsTotal: .IsForInterface )
  >>> Result
 ; // IntfUses
@@ -3635,8 +3645,16 @@ elem_iterator AbstractUses
 
 elem_iterator ImplUses
  [ 'l3ImplUses' ]
- .join> ( Self .NeededElements: .IsForImplementation )
- .join> ( Self .NeededElementsTotal: .IsForImplementation )
+ if ( Self .IsScriptKeywordsPack ) then
+ begin
+  .join> ( Self .NeededElements: .All )
+  .join> ( Self .NeededElementsTotal: .All )
+ end // ( Self .IsScriptKeywordsPack )
+ else
+ begin
+  .join> ( Self .NeededElements: .IsForImplementation )
+  .join> ( Self .NeededElementsTotal: .IsForImplementation )
+ end // ( Self .IsScriptKeywordsPack )
  .join> ( Self .UsedTotal )
  
  if ( Self .IsScriptKeywordsPack ) then
@@ -4946,22 +4964,6 @@ STRING elem_func ImpurityParentName
  Self .TypeName 'Parent_' Cat >>> Result
 ; // ImpurityParentName
         
-/*
-f _OutIncludePrimPrim
-	\{$Include \
-	%f_IncPath(%S,%1)\
-	\\%f_pas_UnitFileName(%S)\}
-
-f _OutIncludePrim
-//@ %SU_%1U
-	#%f_OutIncludePrimPrim(%S,%1)
-
-f _OutInclude
-	[%1%f_open_ifdef()\n]\
-	%f_OutIncludePrim(%S,%1)\
-	[\n%1%f_close_ifdef()]
-*/
-
 STRING elem_func PasPathOnly
  Cached:
  (
@@ -4972,7 +4974,7 @@ STRING elem_func PasPathOnly
   end // ( Result IsNil )
   else
   begin
-   Result '\MDProcess\' '\common\' string:ReplaceFirst >>> Result
+   Result '\MDProcess\components\' '\common\components\' string:ReplaceFirst >>> Result
   end // ( Result IsNil )
   Result
  )
