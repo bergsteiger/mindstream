@@ -7,8 +7,7 @@ uses
  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
  FMX.Layouts, FMX.TreeView, FMX.ListView.Types, FMX.ListView, System.Generics.Collections,
- FMX.DUnit.Interfaces, FMX.Controls.Presentation,
- FMX.ListView.Appearances, FMX.ListView.Adapters.Base
+ FMX.DUnit.Interfaces, FMX.Controls.Presentation
  ;
 
 type
@@ -330,7 +329,7 @@ begin
  lvFailureListView.Items.Clear;
  {$Else}
  lvFailureListView.ClearItems;
- {$IfEnd}
+ {$Endif}
  f_Runned := 0;
  TraverseTree(tvTestTree,
   procedure (const aNode: TTreeViewItem)
