@@ -49,6 +49,7 @@ CONST at_virtual 0
 CONST at_abstract 1
 CONST at_final 2
 CONST at_override 3
+CONST at_message 4
  
 BOOLEAN FUNCTION .IsWord
  IN aValue
