@@ -1,0 +1,2677 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Библиотека "ScriptEngine"
+// Автор: Люлин А.В.
+// Модуль: "kwMain.rc.script"
+// Начат: 10.05.2011 13:49
+// Скрипты в ресурсах (.rc.script)
+// Generated from UML model, root element: SimpleClass::Class Shared Delphi Low Level::ScriptEngine::Scripting Axiomatics::TkwMain
+//
+// Поддержка основного кода скрипта.
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//#UC START# *4DC90A1E03C2impl*
+
+// Аксиоматика
+
+USES
+ axiom:Ctx
+ axiom:NewWordDefinitor
+ axiom:Compiler
+ axiom:Word
+ axiom:KeyWord
+ axiom:Parser
+ axiom:Script
+ axiom:SysUtils
+ axiom:Application
+ axiom:ScriptEngine
+ axiom:DictionaryEx
+ axiom:TtfwValueType
+ axiom:TtfwWordModifier
+ axiom:TtfwAccessType
+ axiom:TtfwLinkType
+;
+
+IMMEDIATE OPERATOR VOID
+ TtfwValueType::tfw_vtVoid Ctx:IncludeTypeModifier
+; // VOID
+
+VOID IMMEDIATE OPERATOR ^@
+ TtfwWordModifier::tfw_wmLeftWordRef Ctx:IncludeModifier
+; //^@ 
+
+VOID IMMEDIATE OPERATOR ^
+ TtfwWordModifier::tfw_wmRightWordRef Ctx:IncludeModifier
+; // ^
+
+VOID IMMEDIATE OPERATOR AGGREGATION
+ TtfwLinkType::tfw_ltAggregation Ctx:IncludeLinkType
+; // AGGREGATION
+
+VOID IMMEDIATE OPERATOR LINK
+ TtfwLinkType::tfw_ltLink Ctx:IncludeLinkType
+; // LINK
+
+VOID IMMEDIATE OPERATOR REFERENCE
+ TtfwLinkType::tfw_ltReference Ctx:IncludeLinkType
+; // REFERENCE
+
+VOID IMMEDIATE OPERATOR INLINE
+ TtfwWordModifier::tfw_wmInline Ctx:IncludeModifier
+; // INLINE
+
+VOID IMMEDIATE OPERATOR SUMMONED
+ TtfwWordModifier::tfw_wmSummoned Ctx:IncludeModifier
+; // SUMMONED
+
+VOID IMMEDIATE OPERATOR ABSTRACT
+ TtfwWordModifier::tfw_wmAbstract Ctx:IncludeModifier
+; // ABSTRACT
+
+VOID IMMEDIATE OPERATOR VIRTUAL
+ TtfwWordModifier::tfw_wmVirtual Ctx:IncludeModifier
+; // VIRTUAL
+
+VOID IMMEDIATE OPERATOR FINAL
+ TtfwWordModifier::tfw_wmFinal Ctx:IncludeModifier
+; // FINAL
+
+VOID IMMEDIATE OPERATOR SEALED
+ TtfwWordModifier::tfw_wmSealed Ctx:IncludeModifier
+; // SEALED
+
+VOID IMMEDIATE OPERATOR OVERRIDE
+ TtfwWordModifier::tfw_wmOverride Ctx:IncludeModifier
+; // OVERRIDE
+
+VOID IMMEDIATE OPERATOR REDEFINITION
+ TtfwWordModifier::tfw_wmRedefinition Ctx:IncludeModifier
+; // REDEFINITION
+
+VOID IMMEDIATE OPERATOR REDEFINEABLE
+ TtfwWordModifier::tfw_wmRedefineable Ctx:IncludeModifier
+; // REDEFINEABLE
+
+VOID IMMEDIATE OPERATOR REALIZE
+ TtfwWordModifier::tfw_wmRealize Ctx:IncludeModifier
+; // REALIZE
+
+VOID IMMEDIATE OPERATOR PRIVATE
+ TtfwAccessType::tfw_atPrivate Ctx:IncludeAccessType
+; // PRIVATE
+
+VOID IMMEDIATE OPERATOR PROTECTED
+ TtfwAccessType::tfw_atProtected Ctx:IncludeAccessType
+; // PROTECTED
+
+VOID IMMEDIATE OPERATOR PUBLIC
+ TtfwAccessType::tfw_atPublic Ctx:IncludeAccessType
+; // PUBLIC
+
+VOID IMMEDIATE OPERATOR STRING
+ TtfwValueType::tfw_vtStr Ctx:IncludeTypeModifier
+; // STRING
+
+VOID IMMEDIATE OPERATOR W-STRING
+ //TtfwValueType::tfw_vtWStr Ctx:IncludeTypeModifier
+ TtfwValueType::tfw_vtStr Ctx:IncludeTypeModifier
+; // W-STRING
+
+VOID IMMEDIATE OPERATOR FILE
+ TtfwValueType::tfw_vtFile Ctx:IncludeTypeModifier
+; // FILE
+
+VOID IMMEDIATE OPERATOR OBJECT
+ TtfwValueType::tfw_vtObj Ctx:IncludeTypeModifier
+; // OBJECT
+
+VOID IMMEDIATE OPERATOR ^L
+ // - определяет ПРАВЫЙ параметр, который может быть как словом, так и неизвестным идентификатором
+ //   L - сокращение типа от слова Literal
+ //   При этом передаётся ссылка на ИСХОДНОЕ слово, а не на КОМПИЛИРОВАННУЮ последовательность.
+ //   Это важно для ОПЕРАТОРОВ и WordWorker'ов.
+ TtfwWordModifier::tfw_wmRightWordRef Ctx:IncludeModifier
+ TtfwWordModifier::tfw_wmTreatUnknownAsString Ctx:IncludeModifier
+; // ^L
+
+PRIVATE OPERATOR private:DefineParam
+ // - тут стереотип на стеке
+ // - тут имя на стеке
+ // ПОЭТОМУ тут нельзя VOID ставить
+ Ctx:NewWordDefinitor pop:NewWordDefinitor:DefineInParameter
+ // - тут параметр на стеке
+ Ctx:PushCompiler pop:Compiler:CompileInParameterPopCode
+ Ctx:ClearTypeInfo
+; // private:DefineParam
+
+USES
+ axiom:private
+;
+
+VOID IMMEDIATE OPERATOR @SELF
+ Ctx:WordDefiningNow CompileWeakRef
+; // @SELF
+
+PRIVATE IMMEDIATE VOID OPERATOR private:DefineNameParam
+ @SELF 'aName' private:DefineParam
+; // private:DefineNameParam
+ 
+IMMEDIATE VOID OPERATOR IN
+ ^L private:DefineNameParam
+ @SELF aName DO private:DefineParam
+; // IN
+
+TtfwWord OPERATOR pop:Word:GetRefDeep
+ TtfwWord IN aSelf
+ aSelf pop:Word:GetRef @ Result pop:Word:SetValue
+ if ( class::TkwLeftParam Result pop:Object:Inherits )
+  ( Result DO @SELF DO @ Result pop:Word:SetValue )
+; // pop:Word:GetRefDeep
+
+TtfwWord OPERATOR pop:Word:GetRefDeepest
+ TtfwWord IN aSelf
+ aSelf pop:Word:GetRef @ Result pop:Word:SetValue
+ if ( class::TkwLeftParam Result pop:Object:Inherits )
+  ( Result DO @SELF DO @ Result pop:Word:SetValue )
+ else 
+ if ( class::TkwCompiledVar Result pop:Object:Inherits )
+  ( Result DO @SELF DO @ Result pop:Word:SetValue )
+ else 
+ if ( class::TkwRefcountVar Result pop:Object:Inherits )
+  ( Result DO @SELF DO @ Result pop:Word:SetValue )
+; // pop:Word:GetRefDeepest
+
+VOID IMMEDIATE OPERATOR %SUMMARY
+ Ctx:ClearTypeInfo
+ @SELF Ctx:SetWordProducerForCompiledClass
+ //'VOID' Ctx:Parser:PushSymbol
+ 'OPERATOR' Ctx:Parser:PushSymbol 
+ '%SUM' Ctx:Parser:PushSymbol
+; // %SUMMARY
+ 
+: |^
+  ^@ IN aRef
+  
+ %SUMMARY 'Разыменовывает параметр слева' ;
+ aRef pop:Word:GetRef DO
+; // |^
+
+TtfwWord OPERATOR |^@
+  ^@ IN aSelf
+  
+ %SUMMARY 'Получает ссылку на параметр слева' ;
+ aSelf pop:Word:GetRefDeep @ Result pop:Word:SetValue
+; // |^@
+
+TtfwWord OPERATOR |^@Deepest
+  ^@ IN aSelf
+  
+ %SUMMARY 'Получает ссылку на параметр слева' ;
+ aSelf pop:Word:GetRefDeepest @ Result pop:Word:SetValue
+; // |^@Deepest
+
+//REDEFINITION
+ VOID IMMEDIATE OPERATOR >>>
+   /*{IN aValue}*/ // - слева должно быть значение
+   ^ IN aVar
+
+  %SUMMARY 'Присваивает значение aValue переменной aVar' ; 
+  aVar CompileRef
+  @ pop:Word:SetValue CompileValue
+ ; // >>>
+
+/*{ VOID : >>>
+   IN aValue
+   ^ IN aVar
+
+  %SUMMARY 'Присваивает значение aValue переменной aVar' ; 
+  aValue 
+  aVar 
+   pop:Word:GetRef 
+   // - убрано, т.к. http://mdp.garant.ru/pages/viewpage.action?pageId=600103362&focusedCommentId=605371522#comment-605371522
+   // Что-то всё-таки с GetRef - я сам себе не догоняю
+   // ВЕРНУЛ, потому, что переделал TkwObjRefParam.GetRef
+    pop:Word:SetValue
+ ; // >>>}*/
+ 
+//REDEFINITION
+ VOID IMMEDIATE OPERATOR >>>^
+   /*{IN aValue}*/ // - слева должно быть значение
+   ^ IN aVar
+
+  %SUMMARY 'Присваивает значение aValue по адресу слова в переменной aVar' ; 
+  aVar CompileValue
+  @ pop:Word:SetValue CompileValue
+ ; // >>>^
+ 
+/*{// VOID : >>>^
+ : >>>^
+ // - пока так, иначе конструкция Ctx:Engine pop:ScriptEngine:CascadeDict := false - не работает, т.к. Ctx:Engine снимается со стека уже в контексте >>>^ И срабатывает КОНТРОЛЬ СТЕКА
+ // На самом деле надо делать getter/setter'ы для свойств, чтобы они получали левый параметр по ссылке
+ // Т.е. брали параметр из компилированного кода, а не из стека
+ // Как будто там ^@ IN aSelf написано
+ // Да и вообще для всех "методов"
+   IN aValue
+   ^ IN aVar
+  
+  %SUMMARY 'Присваивает значение aValue по адресу слова в переменной aVar' ; 
+  aValue 
+  aVar DO 
+   pop:Word:GetRef 
+   // - убрано, т.к. http://mdp.garant.ru/pages/viewpage.action?pageId=600103362&focusedCommentId=605371522#comment-605371522
+   // Что-то всё-таки с GetRef - я сам себе не догоняю
+   // ВЕРНУЛ, потому, что переделал TkwObjRefParam.GetRef
+    pop:Word:SetValue
+ ; // >>>^}*/
+ 
+FUNCTION ->0 
+ // - возвращает первый параметр указанного слова
+  OBJECT IN %S
+ 0 %S pop:Word:GetParam DO >>> Result
+; // ->0
+
+VOID IMMEDIATE OPERATOR BOOLEAN
+ TtfwValueType::tfw_vtBool Ctx:IncludeTypeModifier
+; // BOOLEAN
+
+VOID IMMEDIATE OPERATOR CALLER
+ TtfwWordModifier::tfw_wmCaller Ctx:IncludeModifier
+; // BOOLEAN
+
+VOID IMMEDIATE OPERATOR CARDINAL
+ TtfwValueType::tfw_vtInt Ctx:IncludeTypeModifier
+; // CARDINAL
+
+VOID IMMEDIATE OPERATOR INTEGER
+ TtfwValueType::tfw_vtInt Ctx:IncludeTypeModifier
+; // INTEGER
+
+VOID IMMEDIATE OPERATOR ARRAY
+ TtfwValueType::tfw_vtList Ctx:IncludeTypeModifier
+; // ARRAY
+
+VOID IMMEDIATE OPERATOR INTERFACE
+ TtfwValueType::tfw_vtIntf Ctx:IncludeTypeModifier
+; // INTERFACE
+
+VOID IMMEDIATE OPERATOR CHAR
+ TtfwValueType::tfw_vtChar Ctx:IncludeTypeModifier
+; // CHAR
+
+VOID IMMEDIATE OPERATOR axiom:CLASS
+ TtfwValueType::tfw_vtClass Ctx:IncludeTypeModifier
+; // CLASS
+
+/*{INLINE OPERATOR then
+  ^ IN aWhatToThen
+ aWhatToThen DO
+; // then}*/
+
+VOID IMMEDIATE OPERATOR then
+  ^ IN aWhatToThen
+ aWhatToThen CompileValue
+; // then
+
+BOOLEAN FUNCTION NotValid IN %S
+ if ( %S IsVoid ) then
+  ( true >>> Result )
+ else
+ if ( %S IsNil ) then
+  ( true >>> Result )
+ else 
+  ( false >>> Result )
+; // NotValid
+
+STRING FUNCTION |N
+
+  /*OBJECT*/ IN %S
+  
+ %SUMMARY 'Возвращает имя слова слева' ;
+ if ( %S IsVoid ) then
+  ( '' >>> Result )
+ else
+ if ( %S IsNil ) then
+  ( '' >>> Result )
+ else
+/*{ if ( class::TkwString %S pop:object:Inherits ) then
+  ( %S DO >>> Result )
+ else
+ if ( class::TkwInteger %S pop:object:Inherits ) then
+  ( %S DO IntToStr >>> Result )
+ else
+ if ( class::TkwMain %S pop:object:Inherits ) then
+  ( %S pop:object:ClassName >>> Result )
+ else
+ if ( class::TkwCompiledMain %S pop:object:Inherits ) then
+  ( %S pop:object:ClassName >>> Result )
+ else}*/
+  ( %S pop:Word:Name >>> Result )
+; // |N
+
+STRING FUNCTION NameOf
+  ^ LINK IN aWord
+  
+ %SUMMARY 'Возвращает имя слова справа' ;
+ aWord |N >>> Result
+; // NameOf
+
+STRING OPERATOR (+)
+ STRING IN aLeft
+ ^ IN aRight
+ aLeft aRight DO Cat >>> Result
+; // (+)
+
+IMMEDIATE OPERATOR WordAlias
+ ^L IN aName
+ ^ LINK IN aCode
+ aCode aName |N Define
+; // WordAlias
+
+WordAlias pop:object:IsNil IsNil
+WordAlias pop:object:Inherits pop:Object:Inherits
+
+WordAlias TClass axiom:CLASS
+WordAlias begin BEGIN
+WordAlias end END
+
+WordAlias operator OPERATOR
+WordAlias axiom:operator OPERATOR
+
+WordAlias Iterate Array:Iterate
+WordAlias ITERATE Iterate
+WordAlias WordWorker WORDWORKER
+
+VOID IMMEDIATE OPERATOR axiom:CompileSetValueTypes
+ TtfwValueTypes IN aValues
+ aValues CompileValue @ Ctx:IncludeValueTypes CompileValue
+; // axiom:CompileSetValueTypes
+
+USES
+ axiom:ValueTypes
+;
+
+IMMEDIATE OPERATOR TYPE
+ ^L IN aName
+ 
+ aName |N
+ Ctx:ValueTypes
+ pop:ValueTypes:MakeCustomName
+ 
+ Ctx:ClearTypeInfo
+ @SELF Ctx:SetWordProducerForCompiledClass
+ 
+  'IMMEDIATE' Ctx:Parser:PushSymbol 
+  'VOID' Ctx:Parser:PushSymbol
+  'axiom:operator' Ctx:Parser:PushSymbol
+  aName |N Ctx:Parser:PushSymbol
+  'axiom:CompileSetValueTypes' Ctx:Parser:PushSymbol
+  ';' Ctx:Parser:PushSymbol
+  
+; // TYPE
+
+axiom:CLASS OBJECT TYPE CASTABLE
+
+BOOLEAN OPERATOR IS
+  CASTABLE IN anObj
+  ^ IN aClass
+ if ( anObj IsClass ) then
+  ( ( aClass DO anObj pop:class:Inherits ) >>> Result )
+ else
+  ( ( aClass DO anObj pop:object:Inherits ) >>> Result )
+; // IS
+
+STRING FUNCTION strings:Cat ARRAY IN anArray
+ // - складывает строки массива на стеке
+ '' >>> Result
+ @ ( Result SWAP Cat >>> Result ) anArray Iterate
+; // strings:Cat
+
+STRING OPERATOR axiom:SourceInfo
+ OBJECT IN aCaller
+ if ( Ctx:Parser IsNil ) then
+ begin
+  aCaller pop:Word:SourcePointString >>> Result
+ end
+ else
+ begin
+  [ Ctx:Parser pop:Parser:FileName ' line: ' Ctx:Parser pop:Parser:SourceLine IntToStr ] strings:Cat >>> Result
+ end
+; // axiom:SourceInfo
+
+FORWARD VarMsgToStr
+
+PRIVATE VOID OPERATOR private:ERROR
+ IN aMsg
+ OBJECT IN aCaller
+ if ( Ctx:Parser IsNil ) then
+ begin
+  [ aCaller axiom:SourceInfo ' |=> ' aMsg VarMsgToStr ] strings:Cat class::EtfwRunner CreateAndRaise
+ end
+ else
+ begin
+  [ aCaller axiom:SourceInfo ' |=> ' aMsg VarMsgToStr ] strings:Cat class::EtfwCompiler CreateAndRaise
+ end
+; // private:ERROR
+
+OPERATOR EVAL
+ ^ IN aWhat
+ aWhat |^@ DO
+; // EVAL
+
+VOID CALLER OPERATOR ASSURE
+ ^ IN aCondition
+ ^ IN aMessage
+ EVAL aCondition ! ?
+ begin
+  aMessage Caller private:ERROR
+ end
+; // ASSURE
+
+VOID CALLER OPERATOR ?ASSURE
+ BOOLEAN IN aCondition
+ ^ IN aMessage
+ aCondition ! ?
+ begin
+  aMessage Caller private:ERROR
+ end
+; // ?ASSURE
+
+VOID CALLER OPERATOR ?FAIL
+ BOOLEAN IN aCondition
+ ^ IN aMessage
+ aCondition ?
+ begin
+  aMessage Caller private:ERROR
+ end
+; // ?FAIL
+
+VOID CALLER OPERATOR ERROR
+ ^ IN aMsg
+ aMsg Caller private:ERROR
+; // ERROR
+
+PRIVATE : private:DefineVarEx
+  STRING IN aName
+  OBJECT IN aStereo
+ 
+ aName Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckWord pop:KeyWord:Word pop:object:IsNil
+  ?ASSURE [ 'Слово ' aName ' уже существует. Нельзя определить переменную с таким же именем' ]
+
+ aName true Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckVar
+ DUP aStereo SWAP pop:Word:SetProducer
+ Ctx:ClearTypeInfo
+; // private:DefineVarEx
+
+PROTECTED : axiom:DefineVar
+ private:DefineVarEx DROP
+; // axiom:DefineVar
+
+IMMEDIATE VOID OPERATOR VAR
+ ^L IN aName
+ aName |N @SELF axiom:DefineVar
+; // VAR
+
+PRIVATE : private:DefineBoxEx
+  STRING IN aName
+  OBJECT IN aStereo
+ 
+ aName Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckWord pop:KeyWord:Word pop:object:IsNil
+  ?ASSURE [ 'Слово ' aName ' уже существует. Нельзя определить переменную с таким же именем' ]
+
+ aName true Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckRefcountVar
+ DUP aStereo SWAP pop:Word:SetProducer
+ Ctx:ClearTypeInfo
+; // private:DefineBoxEx
+
+PROTECTED : axiom:DefineBox
+ private:DefineBoxEx DROP
+; // axiom:DefineBox
+
+IMMEDIATE VOID OPERATOR BOX
+ ^L IN aName
+ aName |N @SELF axiom:DefineBox
+; // BOX
+
+STRING FUNCTION VarMsgToStr
+ OBJECT IN aMessage
+  VAR l_Msg
+  aMessage DO >>> l_Msg
+  if ( l_Msg IsArray ) then
+   ( l_Msg strings:Cat >>> Result )
+  else
+   ( l_Msg >>> Result )
+; // VarMsgToStr
+
+WordAlias var VAR
+
+IMMEDIATE VOID operator PROCEDURE
+ ^L IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass
+ 'VOID' Ctx:Parser:PushSymbol
+ 'axiom:operator' Ctx:Parser:PushSymbol
+ aName |N Ctx:Parser:PushSymbol
+; // PROCEDURE
+
+WordAlias procedure PROCEDURE
+WordAlias function FUNCTION
+
+TtfwWord TYPE FUNCTOR
+
+VOID IMMEDIATE operator PROGRAM
+ ^L IN aName
+; // PROGRAM
+
+WordAlias program PROGRAM
+
+VOID IMMEDIATE operator UNIT
+ ^L IN aName
+; // UNIT
+
+WordAlias unit UNIT
+
+UNIT Documentation.ms.dict
+
+VOID IMMEDIATE OPERATOR REMARK
+ ^L IN aDoc
+ %SUMMARY 'Ремарка' ;
+; // REMARK
+
+WordAlias %REMARK REMARK
+
+// end. Documentation.ms.dict
+
+UNIT NoCapsLock.ms.dict
+
+//USES
+// Documentation.ms.dict
+//;
+
+WordAlias array ARRAY
+ %REMARK 'Массив'
+WordAlias private PRIVATE
+ %REMARK 'Приватный член'
+WordAlias Private PRIVATE
+ %REMARK 'Приватный член'
+WordAlias type TYPE
+ %REMARK 'Определение типа'
+WordAlias Type TYPE
+ %REMARK 'Определение типа'
+WordAlias var VAR
+ %REMARK 'Определение переменной'
+WordAlias ?Assure ?ASSURE
+ %REMARK 'Проверка инварианта'
+WordAlias Const CONST
+ %REMARK 'Определение константы'
+WordAlias const Const
+ %REMARK 'Определение константы'
+WordAlias Functor FUNCTOR
+ %REMARK 'Функтор/слово/лямбда'
+Functor Type Lambda
+ %REMARK 'Лямбда'
+Functor Type CallBack
+ %REMARK 'Функция обратного вызова'
+Functor Type Callback
+ %REMARK 'Функция обратного вызова'
+Functor Type callback
+ %REMARK 'Функция обратного вызова'
+Functor Type List
+ %REMARK ' - список слов'
+Functor Type Sequence
+ %REMARK 'Последовательность слов'
+WordAlias void VOID
+ %REMARK ' - метод не возвращающий результата'
+
+WordAlias break BREAK
+
+WordAlias exit EXIT
+
+WordAlias continue CONTINUE
+
+WordAlias ?Fail ?FAIL
+
+WordAlias case CASE
+WordAlias Case CASE
+
+WordAlias default DEFAULT
+WordAlias Default DEFAULT
+
+WordAlias error ERROR
+WordAlias Error ERROR
+
+WordAlias Procedure PROCEDURE
+
+WordAlias String STRING
+WordAlias string STRING
+
+// end. NoCapsLock.ms.dict
+
+UNIT types.ms.dict
+
+INTEGER BOOLEAN TYPE ORDINAL
+STRING ORDINAL TYPE ATOMIC
+ATOMIC TYPE COMPARABLE
+
+FILE ARRAY TYPE ITERATABLE
+ITERATABLE ATOMIC CASTABLE INTERFACE TYPE ANY
+ANY TYPE VARIANT
+
+ARRAY TYPE ITERATOR
+
+FUNCTOR TYPE VAR_REF
+
+// end. types.ms.dict
+
+UNIT EngineTypes.ms.dict
+
+//USES
+// Documentation.ms.dict
+//;
+
+TtfwWord TYPE ENGINE_WORD
+ %REMARK 'Слово скриптовой машины'
+ 
+// end. EngineTypes.ms.dict
+
+UNIT Sequence.It.ms.dict
+
+//USES
+ //core.ms.dict
+ //params.ms.dict
+ //macro.ms.dict
+ //EngineTypes.ms.dict
+ //Documentation.ms.dict
+ //NoCapsLock.ms.dict
+//;
+
+//EXPORTS
+// NoCapsLock.ms.dict
+
+ARRAY FUNCTION Sequence.It
+ Sequence IN aCode
+ if ( aCode IS class::TkwBeginLikeCompiledCode ) then  
+  ( aCode pop:Word:CodeIterator >>> Result )
+ else
+  ( [ aCode ] >>> Result ) 
+; // Sequence.It
+
+// end. Sequence.It.ms.dict
+
+^@ OPERATOR @^
+  ^ LINK IN aSelf
+  
+ %SUMMARY '
+  - возвращает ссылку на слово, любое, даже непосредственного исполнения
+    Не адрес, а именно ССЫЛКУ.
+  Разница в примере:
+  {
+   @ A DO
+   @^ A
+   
+   @ A ^:= 1
+   @^ A := 1
+   // - записи делают одно и то же
+  }
+ ' ;
+ 
+ aSelf >>> Result
+; // @^
+
+BOOLEAN operator AND BOOLEAN
+  IN aFirst
+  ^ IN aSecond
+ %SUMMARY 'Двусторонний, а не обратный польский &&' ;
+ if aFirst then
+  (
+   if ( aSecond DO ) then
+    ( true >>> Result )
+   else
+    ( false >>> Result )
+   )
+ else
+  ( false >>> Result )
+; // AND
+
+USES
+ axiom:WordInfo
+;
+
+USES
+ axiom:TtfwValueTypesAccepts
+;
+
+INTEGER FUNCTION pop:ValueTypes:AcceptsValueTypes
+ TtfwValueTypes IN aTR
+ TtfwValueTypes IN aTL
+ 
+ aTR aTL pop:ValueTypes:Accepts >>> Result
+ 
+; // pop:ValueTypes:AcceptsValueTypes
+
+USES
+ axiom:ValueTypes
+;
+
+VOID IMMEDIATE operator :=
+  ^@ IN aLeft
+  ^ IN aRight
+ 
+ %SUMMARY 'Присваивает слову aLeft значение aRight' ;
+ 
+ aRight CompileValue
+ aLeft CompileRef
+ 
+ TtfwWordInfo VAR l_WIL
+ aLeft pop:Word:Info >>> l_WIL
+ 
+ if ( TtfwWordModifier::tfw_wmLeftWordRef l_WIL pop:WordInfo:HasWordModifier ! ) then
+ begin
+ 
+  TtfwValueTypes VAR l_TL
+  TtfwValueTypes VAR l_TR
+  
+  l_WIL pop:WordInfo:ValueTypes >>> l_TL
+  aRight pop:Word:Info pop:WordInfo:ValueTypes >>> l_TR
+  
+  //if ( l_TL IsNil ! ) then
+  if ( ( l_TL IsNil ! ) AND ( l_TR IsNil ! ) ) then
+  begin
+   INTEGER VAR l_Accepts
+   l_TR l_TL pop:ValueTypes:AcceptsValueTypes >>> l_Accepts
+   if ( l_Accepts TtfwValueTypesAccepts::tfw_vtaYes == ) then
+   begin
+    @ pop:Word:SetValuePrim CompileValue
+    EXIT
+   end
+   else
+   if ( l_Accepts TtfwValueTypesAccepts::tfw_vtaNo == ) then
+   begin
+    ERROR [ l_TL pop:ValueTypes:Name ' не совместим с ' l_TR pop:ValueTypes:Name ]
+   end
+  end
+ end
+ 
+ @ pop:Word:SetValue CompileValue
+; // :=
+
+/*{VOID IMMEDIATE operator :=
+  ^@ IN aLeft
+  ^ IN aRight
+ 
+ %SUMMARY 'Присваивает слову aLeft значение aRight' ;
+ aRight CompileValue
+ aLeft CompileRef
+ @ pop:Word:SetValue CompileValue
+; // :=}*/
+
+/*{//VOID operator :=
+operator :=
+// - пока так, иначе конструкция Ctx:Engine pop:ScriptEngine:CascadeDict := false - не работает, т.к. Ctx:Engine снимается со стека уже в контексте := И срабатывает КОНТРОЛЬ СТЕКА
+  ^@ IN aLeft
+  ^ IN aRight
+ 
+ %SUMMARY 'Присваивает слову aLeft значение aRight' ;
+ aRight DO >>>^ aLeft
+; // :=}*/
+
+VOID operator ^:=
+  IN aLeft
+  ^ IN aRight
+ aRight DO >>>^ aLeft
+; // ^:=
+
+VOID operator >>>[]
+  IN aLeft
+  ^ IN aRight
+ aLeft aRight DO Array:Add
+; // >>>[]
+
+UNIT axiom_push.ms.dict
+
+USES
+ axiom:Tl3TokenType
+;
+
+PROCEDURE axiom:PushSymbol
+ LINK ^ IN aSymbol
+ %SUMMARY 'Запихивает во входной поток парсера имя слова aSymbol' ;
+ aSymbol pop:Word:Name Ctx:Parser:PushSymbol
+; // axiom:PushSymbol
+
+PROCEDURE Ctx:Parser:PushLeftDottedSymbol
+ STRING IN aValue
+ %SUMMARY 'Запихивает во входной поток парсера aValue предварённое точкой' ;
+ '.' (+) aValue Ctx:Parser:PushSymbol
+; // Ctx:Parser:PushLeftDottedSymbol
+
+INTEGER STRING TYPE TOKEN
+INTEGER TYPE TOKEN_TYPE
+ // - вообще говоря это должен быть Tl3TokenType, но там проблема с проверкой типов
+
+PROCEDURE axiom:Push
+ TOKEN IN aToken
+ TOKEN_TYPE IN aTokenType
+
+ %SUMMARY 'Запихивает во входной поток парсера токен aToken типизируя его в зависимости от aTokenType' ;
+
+ aTokenType CASE
+  Tl3TokenType::l3_ttSymbol 
+   ( aToken Ctx:Parser:PushSymbol )
+  Tl3TokenType::l3_ttString 
+   ( aToken Ctx:Parser:PushString )
+  Tl3TokenType::l3_ttInteger
+   ( aToken Ctx:Parser:PushInt )
+  DEFAULT 
+   ( ERROR [ 'Неожиданный тип токена: ' aTokenType Tl3TokenType:ValueToName ] )
+ end // aTokenType Case
+; // axiom:Push 
+
+// end. axiom_push.ms.dict
+
+UNIT macro.ms.dict
+
+//USES
+// axiom_push.ms.dict
+//;
+
+VOID IMMEDIATE operator MACRO
+ %SUMMARY '- MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке' ;
+ axiom:PushSymbol VOID
+ axiom:PushSymbol IMMEDIATE
+ axiom:PushSymbol axiom:operator
+ @SELF Ctx:SetWordProducerForCompiledClass
+; // MACRO
+
+WordAlias macro MACRO
+
+MACRO STACK_CHANGING_MACRO
+ %SUMMARY '- аналог MACRO, но который может "потрогать стек", т.е. считать что-то со стека или положить что-то на стек' ;
+ axiom:PushSymbol IMMEDIATE
+ axiom:PushSymbol axiom:operator
+ @SELF Ctx:SetWordProducerForCompiledClass
+; // STACK_CHANGING_MACRO
+
+/*{MACRO _MACRO
+ axiom:PushSymbol VOID
+ axiom:PushSymbol IMMEDIATE
+; // _MACRO
+
+WordAlias _macro _MACRO}*/
+ // - будем считать, что пока не пригодилось
+ 
+// end. macro.ms.dict
+
+UNIT Literal.ms.dict
+
+//USES
+// axiom_push.ms.dict
+// macro.ms.dict
+//;
+
+MACRO Literal
+ ^L IN aName
+ %SUMMARY 'Определяет модификатор правого параметра через который передаётся строка, а не ссылка на слово' ;
+ @SELF Ctx:SetWordProducerForCompiledClass
+ axiom:PushSymbol ^L
+ aName |N Ctx:Parser:PushSymbol
+; // Literal
+
+// end. Literal.ms.dict
+
+UNIT Documentation.ms.dict
+
+//USES
+// Literal.ms.dict
+// macro.ms.dict
+//;
+
+/*{MACRO REMARK
+ Literal IN aDoc
+ %SUMMARY 'Ремарка' ;
+; // REMARK
+
+WordAlias %REMARK REMARK}*/
+
+MACRO TODO
+ Literal IN aDoc
+ %SUMMARY 'Что-то, что надо сделать потом, но не забыть, и не ЗАБИТЬ' ;
+; // TODO
+
+WordAlias %TODO TODO
+
+// end. Documentation.ms.dict
+
+UNIT params.ms.dict
+
+//USES
+ //axiom_push.ms.dict
+ //macro.ms.dict
+ //Documentation.ms.dict
+//;
+
+WordAlias RIGHT ^
+ %REMARK 'Модификатор параметра справа'
+
+WordAlias LVALUE_MOD ^@
+ %REMARK 'Модификатор параметра слева, который передаётся по ссылке. И из которого можно не только читать, но и в который потенциально можно писать. Если он не Read-Only.'
+
+WordAlias REF ^@
+ %REMARK 'Ссылка на значение, из которого можно не только читать, но и писать'
+
+WordAlias in IN
+ %REMARK 'Описатель входного параметра (справа или слева)'
+
+//USES
+// Literal.ms.dict
+//;
+
+//EXPORTS
+// Literal.ms.dict
+
+//USES
+// core.ms.dict
+//;
+
+//EXPORTS
+// core.ms.dict
+
+MACRO LVALUE
+ Literal IN aName
+ %SUMMARY 'Параметр слева, который передаётся по ссылке. И из которого можно не только читать, но и в который потенциально можно писать. Если он не Read-Only.' ;
+ axiom:PushSymbol LVALUE_MOD
+ axiom:PushSymbol IN
+ aName |N Ctx:Parser:PushSymbol
+; // LVALUE
+
+PRIVATE VOID operator MangledNamePusher
+ STRING IN aName
+ %SUMMARY 'Реализация параметра справа' ;
+ axiom:PushSymbol (
+ aName Ctx:Parser:PushSymbol
+ axiom:PushSymbol |^
+ axiom:PushSymbol )
+; // MangledNamePusher
+
+MACRO right
+ Literal IN aName
+ %SUMMARY 'Параметр справа, который автоматически разыменовывается' ;
+ axiom:PushSymbol RIGHT
+ axiom:PushSymbol IN
+
+ STRING VAR l_Name
+ aName |N >>> l_Name 
+
+ STRING VAR l_MangledName
+ [ '_' l_Name ] strings:Cat >>> l_MangledName
+
+ l_MangledName Ctx:Parser:PushSymbol
+ 
+   axiom:PushSymbol VOID 
+   axiom:PushSymbol IMMEDIATE 
+   axiom:PushSymbol axiom:operator
+   l_Name Ctx:Parser:PushSymbol
+   l_MangledName Ctx:Parser:PushString
+   axiom:PushSymbol MangledNamePusher
+   axiom:PushSymbol ;
+
+; // right
+
+// end. params.ms.dict
+
+UNIT arrays.ms.dict
+ 
+macro IT 
+  //ARRAY IN A // - слева должен быть массив
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив A вызывая лямбду aWhatToDo' ;
+ aWhatToDo CompileRef
+ @ SWAP CompileValue
+ @ ITERATE CompileValue
+ //aWhatToDo A ITERATE
+; // IT
+
+/*{operator IT 
+  ARRAY IN A
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив A вызывая лямбду aWhatToDo' ;
+ aWhatToDo A ITERATE
+; // IT}*/
+
+WordAlias ==> IT
+
+macro for
+  ^ IN aList
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив aList вызывая лямбду aWhatToDo' ;
+ aList CompileRef
+ @ DO CompileValue
+ aWhatToDo CompileRef
+ @ SWAP CompileValue
+ @ ITERATE CompileValue
+ //aList DO ==> ( aWhatToDo DO )
+; // for
+
+/*{operator for
+  ^ IN aList
+  ^ IN aWhatToDo
+ %SUMMARY 'Итерирует массив aList вызывая лямбду aWhatToDo' ;
+ aList DO ==> ( aWhatToDo DO )
+; // for}*/
+
+WordAlias >for> ==>
+WordAlias .for> ==>
+
+WordAlias FOR for
+
+ARRAY FUNCTION .slice>
+ ARRAY IN aLeft
+ ^ IN aRight
+ aRight |^@ DO aLeft Array:Slice >>> Result
+; // .slice>
+
+// end. arrays.ms.dict
+
+WordAlias CONSTANT CONST
+
+IMMEDIATE VOID operator Test
+ @SELF Ctx:SetWordProducerForCompiledClass
+ 'VOID' Ctx:Parser:PushSymbol
+ 'axiom:operator' Ctx:Parser:PushSymbol
+; // Test
+
+WordAlias Тест Test
+
+WordAlias Если if
+WordAlias если if
+WordAlias то then
+WordAlias иначе else
+
+WordAlias выходим EXIT
+WordAlias Выходим EXIT
+
+WordAlias =:^ >>>^
+WordAlias =: >>>
+
+IMMEDIATE VOID operator INHERITED
+ OBJECT VAR l_Redef
+ Ctx:WordDefiningNow pop:Word:Redefines >>> l_Redef
+ l_Redef pop:object:IsNil ! ?ASSURE 'Не найдено переопределяемое слово'
+ l_Redef CompileValue
+; // INHERITED
+
+WordAlias inherited INHERITED
+
+STRING FUNCTION strings:CatSep 
+ // - складывает строки массива
+  ARRAY IN anArray
+  STRING IN aSep
+
+ PROCEDURE DoCat 
+  STRING IN aStr
+  
+  if ( aStr '' == ! ) then
+  begin
+   if ( Result '' == ) then
+    ( Result := aStr )
+   else
+    (
+     if ( aSep Result EndsStr ) then
+      (
+       Result := ( Result aStr Cat )
+      )
+     else
+      (
+       Result := ( Result aSep Cat aStr Cat )
+      ) 
+    )
+  end // aStr '' == !
+ ; // DoCat
+
+ Result := ''
+ @ DoCat anArray ITERATE
+; // strings:CatSep
+
+VOID operator DEC
+  ^ IN aWhatToDecrement
+ aWhatToDecrement DO 1 - =:^ aWhatToDecrement
+; // DEC
+
+REDEFINITION
+ STRING FUNCTION ToPrintable
+   IN aValue
+  if ( aValue IsArray )
+   ( 
+    [ 
+     '[ ' 
+     INTEGER VAR l_SL
+     l_SL := StackLevel
+     for aValue ( 
+      INTEGER VAR l_Delta
+      l_Delta := ( StackLevel l_SL - )
+      if ( l_Delta 1 == ) then
+       ( @SELF DO )
+      else
+       (
+        INTEGER VAR l_Index
+        l_Index := l_Delta
+        '{ '
+        l_Delta LOOP ( l_Index ROLL @SELF DO )
+        // Премудрость с LOOP и ROLL для того, чтобы обработать slice'ы
+        '}' 
+       )
+      l_SL := StackLevel 
+     ) // for aValue
+     ']' 
+    ] ' ' strings:CatSep >>> Result 
+   )
+  else 
+   ( aValue inherited >>> Result )
+ ; // ToPrintable
+
+: >>std::out
+ ToPrintable .
+; // >>std::out
+
+USES
+ axiom:std
+;
+
+PROCEDURE std::out<<
+ ^ IN aValue
+ aValue DO >>std::out
+; // std::out<<
+
+REDEFINITION
+ : .
+  >>std::out
+ ; // .
+ 
+UNIT io.ms.dict
+
+//USES
+// types.ms.dict
+//;
+
+ANY TYPE PRINTABLE
+
+PROCEDURE Print
+ PRINTABLE IN aValue
+ if (
+     ( aValue IsObj ) AND ( aValue IS class::TtfwWord )
+    ) then
+ begin
+  aValue |N .
+ end
+ else
+ begin
+  aValue .
+ end
+; // Print
+ 
+// end. io.ms.dict 
+
+OBJECT FUNCTION %ST 
+  IN %S
+ 
+ %SUMMARY 'Возвращает стереотип слова' ;
+ if ( %S NotValid ) then
+ (
+  Result := nil
+ ) 
+ else
+ (
+  Result := ( %S pop:Word:Producer )
+ ) 
+; // %ST
+
+USES
+ axiom:KeywordFinder
+;
+
+BOOLEAN FUNCTION IsWordDeclared
+  STRING IN aName
+  
+ %SUMMARY 'Определяет, что слово aName определено в данном месте' ;
+ aName Ctx:PushFinder pop:KeywordFinder:KeywordByName nil != >>> Result
+; // IsWordDeclared
+
+macro WHILE
+   ^ IN aCondition
+   ^ IN aWhatToDo
+ 
+ %SUMMARY 'Выполняет слово aWhatToDo пока условие aCondition истинно ' ;
+ aCondition CompileRef
+ aWhatToDo CompileRef
+ @ WHILEDO CompileValue
+ //@ ( aCondition DO ) @ ( aWhatToDo DO ) WHILEDO
+; // WHILE
+
+/*{operator WHILE
+   ^ IN aCondition
+   ^ IN aWhatToDo
+ 
+ %SUMMARY 'Выполняет слово aWhatToDo пока условие aCondition истинно ' ;
+ aCondition aWhatToDo WHILEDO 
+ //@ ( aCondition DO ) @ ( aWhatToDo DO ) WHILEDO
+; // WHILE}*/
+
+WordAlias ПОКА WHILE
+WordAlias while WHILE
+
+BOOLEAN operator >
+  COMPARABLE IN aLeft
+  ^ IN aRight
+ Result := ( aLeft aRight DO GREATER )
+;
+
+WordAlias БОЛЬШЕ >
+
+BOOLEAN operator <
+  COMPARABLE IN aLeft
+  ^ IN aRight
+  Result := ( aLeft aRight DO LESS )
+;
+
+WordAlias МЕНЬШЕ <
+
+UNIT Testing.ms.dict
+
+USES
+ axiom:Sequence
+ //axiom_push.ms.dict
+ //macro.ms.dict
+ //core.ms.dict
+ //params.ms.dict
+ //io.ms.dict
+ //EngineTypes.ms.dict
+ //Documentation.ms.dict
+ //arrays.ms.dict
+ //Sequence.It.ms.dict
+;
+
+CONST cTests 'Tests:'
+
+MACRO TestsFor
+ ENGINE_WORD RIGHT LINK IN aWord
+  %REMARK 'aWord ссылка на слово справа от TestsFor'
+ %SUMMARY 'Определяет набор тестов для слова aWord' ;
+
+ axiom:PushSymbol VOID
+ axiom:PushSymbol axiom:operator
+ cTests aWord |N Cat Ctx:Parser:PushSymbol
+; // TestsFor
+
+: PrintStack
+ WHILE ( StackLevel > 0 ) Print
+; // PrintStack
+
+PRIVATE PROCEDURE DoRunTestsFor
+  STRING IN aTestedWordName
+  ENGINE_WORD IN aTestsHolder
+  
+ %SUMMARY 'Выполняет тесты для aTestsHolder' ;
+
+ TRY
+  [ 'Testing: ' aTestedWordName ] strings:Cat Print
+  aTestsHolder pop:Word:MembersIterator .for> (
+   IN aTest
+    %REMARK 'aTest - вложенный элемент aTestsHolder'
+   if ( ( aTest %ST |N ) ( NameOf Test ) == ) then
+    %REMARK '- фильтруем только тесты.'
+   begin
+    aTest |N Print
+     %REMARK 'Печатаем имя теста'
+    aTest DO
+     %REMARK 'Запускаем тест'
+   end // ( ( aTest %ST |N ) ( NameOf Test ) == )
+  )
+  [ 'Testing end: ' aTestedWordName ] strings:Cat Print
+  '------------------' Print
+ EXCEPT
+  PrintStack
+  RAISE
+ END
+; // DoRunTestsFor
+
+PRIVATE PROCEDURE ExpandRunTestsFor
+ ENGINE_WORD IN aTestsHolder
+ STRING VAR l_Name
+ aTestsHolder |N >>> l_Name
+ STRING VAR l_TestsHolderName
+ cTests l_Name Cat >>> l_TestsHolderName
+
+ if ( l_TestsHolderName IsWordDeclared ) then
+ BEGIN
+  l_Name Ctx:Parser:PushString
+  axiom:PushSymbol @
+  l_TestsHolderName Ctx:Parser:PushSymbol
+  axiom:PushSymbol DoRunTestsFor
+ END 
+; // ExpandRunTestsFor
+
+PRIVATE PROCEDURE DoRunTestsA
+ ARRAY IN aWords
+  %REMARK 'aWords ссылка на список слов слева от DoRunTests'
+ %SUMMARY 'Выполняет тесты для списка слов aWords' ;
+ aWords .for> ExpandRunTestsFor
+; // DoRunTestsA
+
+PRIVATE PROCEDURE DoRunTests
+ Sequence IN aWords
+  %REMARK 'aWords ссылка на список слов слева от DoRunTests'
+ %SUMMARY 'Выполняет тесты для списка слов aWords' ;
+ aWords Sequence.It DoRunTestsA
+; // DoRunTests
+
+MACRO RunTests
+ Sequence RIGHT LINK IN aWords
+  %REMARK 'aWords ссылка на список слов справа от RunTests'
+ %SUMMARY 'Выполняет тесты для списка слов aWords' ;
+ aWords |^@ DoRunTests
+; // RunTests
+
+MACRO RunTests.in.array
+ ARRAY RIGHT IN aWords
+  %REMARK 'aWords ссылка на список слов справа от RunTests'
+ %SUMMARY 'Выполняет тесты для списка слов aWords' ;
+ ( aWords |^@ DO ) DoRunTestsA
+; // RunTests.in.array
+
+// end. Testing.ms.dict
+
+UNIT DogAndBracket.ms.dict
+
+USES
+ axiom:Tl3TokenType
+ //axiom_push.ms.dict
+ //core.ms.dict
+ //io.ms.dict
+ //macro.ms.dict
+ //NoCapsLock.ms.dict
+ //params.ms.dict
+ //arrays.ms.dict
+ //Testing.ms.dict
+;
+
+Procedure DogAndBracket
+ String in aBracketOpen
+ String in aBracketClose
+ INTERFACE var l_Parser 
+ Ctx:Parser >>> l_Parser
+ ARRAY var l_A
+ l_A := [ ]
+
+ l_Parser pop:Parser:NextToken
+ while true
+ begin
+  String var l_Token
+  l_Parser pop:Parser:TokenLongString >>> l_Token
+  TOKEN_TYPE var l_TokenType
+  l_Parser pop:Parser:TokenType >>> l_TokenType
+  if ( l_TokenType Tl3TokenType::l3_ttSymbol == ) then
+  begin
+
+   ( l_Token NameOf ( == ) ?Fail 'Вложенные скобки пока не поддерживаются'
+   ( l_Token NameOf [ == ) ?Fail 'Вложенные скобки пока не поддерживаются'
+
+   if ( l_Token aBracketClose == ) then
+   begin
+    aBracketOpen Ctx:Parser:PushSymbol
+    l_A .slice> 2 .for> 
+    begin
+     TOKEN in aSymbol
+     TOKEN_TYPE in aTokenType
+     axiom:PushSymbol @ 
+     aSymbol aTokenType axiom:Push 
+    end
+    l_Token Ctx:Parser:PushSymbol 
+    break
+   end //l_Token aBracketClose ==
+  end // l_TokenType = Tl3TokenType::l3_ttSymbol
+  if ( l_TokenType Tl3TokenType::l3_ttInteger == ) then
+  begin
+   l_Parser pop:Parser:TokenInt >>>[] l_A
+  end // l_TokenType = Tl3TokenType::l3_ttInteger
+  else
+  begin
+   l_Token >>>[] l_A
+  end // l_TokenType = Tl3TokenType::l3_ttInteger
+  l_TokenType >>>[] l_A
+  l_Parser pop:Parser:NextToken
+ end // while true
+; // DogAndBracket
+
+MACRO @(
+ %SUMMARY '
+ Компилирует СПИСОК адресов слов.
+ Аналог ( @ X1 @ X2 .. @ XN )
+ '
+ ;
+ NameOf (
+  NameOf ) 
+   DogAndBracket
+; // @(
+
+TestsFor @(
+ Test T1 @( 1 2 3 4 5 6 1 2 + '123' ) PrintStack ;
+; // TestsFor @(
+
+MACRO @[
+ %SUMMARY '
+ Компилирует МАССИВ адресов слов.
+ Аналог [ @ X1 @ X2 .. @ XN ]
+ '
+ ;
+ NameOf [
+  NameOf ]
+   DogAndBracket
+; // @[
+
+TestsFor @[
+ Test T1 @[ 1 2 3 4 5 6 1 2 + '123' ] PrintStack ;
+; // TestsFor @[
+
+// end. DogAndBracket.ms.dict
+
+VOID operator +!
+  INTEGER IN anIncrement
+  ^ IN aWhatToIncrement
+// Пример:
+// {code}
+// VAR l_WinID
+// 5 >>> l_WinID
+// 1 +! l_WinID
+// l_WinID .
+// {code}
+
+ aWhatToIncrement DO anIncrement + =:^ aWhatToIncrement
+; // +!
+
+WordAlias =+ +!
+
+VOID operator =- 
+  INTEGER IN anInc
+  ^ IN aWhatToDecrement
+ aWhatToDecrement DO anInc - =:^ aWhatToDecrement
+; // =-
+
+VOID operator +=
+  ^@ IN aLeft
+  ^ IN aRight
+ aLeft DO
+ aRight DO
+ +
+ >>>^ aLeft
+;
+
+VOID operator -=
+  ^@ IN aLeft
+  ^ IN aRight
+ aLeft DO
+ aRight DO
+ -
+ >>>^ aLeft
+;
+
+VOID operator INC
+  ^ IN aWhatToIncrement
+ aWhatToIncrement DO 1 + =:^ aWhatToIncrement
+; // INC
+
+WordAlias ++! INC
+WordAlias Inc INC
+
+WordAlias --! DEC
+WordAlias Dec DEC
+
+WordAlias Trunc Array:Trunc
+WordAlias TRUNC Array:Trunc
+
+ARRAY FUNCTION .trunc>
+ ARRAY IN aLeft
+ ^ IN aRight
+ aRight |^@ aLeft TRUNC >>> Result
+; // .trunc>
+
+BOOLEAN FUNCTION array:HasString 
+  ARRAY IN anArray 
+  STRING IN aString
+  
+ %SUMMARY 'Проверяет, что массив содержит строку. С учётом регистра' ; 
+ Result := false
+
+ anArray .for> (
+   STRING IN anItem
+  if ( anItem aString SameStr )
+   ( 
+    Result := true 
+    BREAK-ITERATOR
+   )
+ )
+; // array:HasString
+
+BOOLEAN FUNCTION array:HasText 
+  ARRAY IN anArray 
+  STRING IN aString
+  
+ %SUMMARY 'Проверяет, что массив содержит строку. Без учёта регистра' ; 
+ Result := false
+
+ anArray .for> (
+   STRING IN anItem
+  if ( anItem aString SameText )
+   ( 
+    Result := true 
+    BREAK-ITERATOR
+   )
+ )
+; // array:HasText
+
+INTEGER FUNCTION array:StringCount ARRAY IN anArray STRING IN aString
+ Result := 0
+
+  PROCEDURE Поиск STRING IN anItem
+   if ( anItem aString SameStr )
+    ( ++! Result )
+  ; // Поиск
+
+  @ Поиск anArray ITERATE
+; // array:StringCount
+
+PROCEDURE "Сравнить текущее исключение с эталоном"
+ STRING VAR l_ClassName
+ current:exception:ClassName >>> l_ClassName
+ l_ClassName .
+ STRING VAR l_Message
+ STRING VAR l_Message_out
+ current:exception:Message >>> l_Message
+
+ if ( l_ClassName 'EAssertionFailed' SameText )
+  ( l_Message '(' string:Split DROP >>> l_Message )
+ else
+  ( l_ClassName 'EAccessViolation' SameText ? (
+     l_Message ' at ' string:Split DROP >>> l_Message
+    )
+  )
+ l_Message 'Главный файл:' string:Split =: l_Message_out =: l_Message
+ l_Message_out '. ' string:Split =: l_Message_out DROP
+ l_Message l_Message_out Cat .
+; // "Сравнить текущее исключение с эталоном"
+
+PROCEDURE "Выполнить и если было исключение, то выполнить" IN aProc1 IN aProc2
+ INTEGER VAR l_StackLevel
+ l_StackLevel := StackLevel
+ TRY
+  TRY
+   aProc1 DO
+  EXCEPT
+   "Сравнить текущее исключение с эталоном"
+   aProc2 DO
+  END
+ FINALLY
+  l_StackLevel ReduceStackLevel
+ END
+; // "Выполнить и если было исключение, то выполнить"
+
+VOID operator анти-тест
+  ^ IN aWhatToDo
+ VAR l_WasException
+ false =: l_WasException
+ "Выполнить {(@ ( aWhatToDo DO ) )} и если было исключение, то выполнить {(@ ( true =: l_WasException ) )}"
+ l_WasException
+  [ 'Тест ' script:FileName ' почему-то стал проходить' ] strings:Cat
+   ASSERTS
+; // анти-тест
+
+WordAlias "тест с падением" анти-тест
+
+VOID operator "Выполнить подавив исключение"
+  ^ IN aWhatToDo
+ VAR l_WasException
+ false =: l_WasException
+ "Выполнить {(@ ( aWhatToDo DO ) )} и если было исключение, то выполнить {(@ ( true =: l_WasException ) )}"
+ l_WasException
+  [ 'Запланированного исключения в тесте: ' script:FileName ' почему-то не случилось' ] strings:Cat
+   ASSERTS
+; // "Выполнить подавив исключение"
+
+PROCEDURE "Выполнить обработав исключение" OBJECT IN aProc STRING IN anException
+ TRY
+  aProc DO
+ EXCEPT
+  current:exception:Message anException ?!= ? RAISE
+ END
+; // "Выполнить обработав исключение"
+
+PROCEDURE ToDo STRING IN aString
+ 'To Do: ' aString Cat .
+; // ToDo
+
+PROCEDURE "! Тест в разработке"
+ script:FileName sysutils:ExtractFileName ' в состоянии разработки' Cat ToDo
+; // "! Тест в разработке"
+
+PROCEDURE OnTest
+// - ждёт обновления контролов по OnTest
+  3 LOOP (
+   ProcessMessages
+   application:ActionIdle
+  )
+  // - позволяем пройти всем OnTest
+; // OnTest
+
+WordAlias "Дать системе перерисоваться" OnTest
+
+/*{PROCEDURE "Нажать" STRING IN aString
+ aString key
+ OnTest
+; // "Нажать"
+
+VOID operator "Обработать Enter модально"
+  ^ IN aWhatToDo
+ @ ( "Нажать {('Enter')}" ) MODAL ( aWhatToDo DO )
+; // "Обработать Enter модально"}*/
+// - переехало в KeyboardInputPack.rc.script
+
+PROCEDURE ASSUME STRING IN aStr
+ // Включает "условную директиву" aStr в тестируемом приложении
+ // http://mdp.garant.ru/pages/viewpage.action?pageId=236719181 №44
+; // ASSUME
+
+PROCEDURE UNASSUME STRING IN aStr
+ // Выключает "условную директиву" aStr в тестируемом приложении
+ // http://mdp.garant.ru/pages/viewpage.action?pageId=236719181 №44
+; // UNASSUME
+
+WordAlias [i] Array:Item
+
+BOOLEAN FUNCTION ArraysAreEqual ARRAY IN A ARRAY IN B
+ //A IsArray 'Где массив?' ASSERTS
+ //B IsArray 'Где массив?' ASSERTS
+ CONST l_Exception 'Выходим из итератора'
+ INTEGER VAR l_Index
+ l_Index := 0
+ INTEGER VAR l_Count
+ l_Count := ( A Array:Count )
+
+   PROCEDURE DoWithItem IN B[i]
+    if ( l_Index A [i] B[i] ?== ) then
+     ++! l_Index
+    else
+    (
+     Result := false
+     l_Exception RAISE
+    )
+   ; // DoWithItem
+
+ if ( l_Count B Array:Count ?!= ) then
+ (
+  Result := false
+ )
+ else
+ (
+  TRY
+   @ DoWithItem B ITERATE
+   Result := true
+  EXCEPT
+   if ( current:exception:Message l_Exception ?!= ) then
+    RAISE
+  END
+ )
+; // ArraysAreEqual
+
+WordAlias И AND
+
+BOOLEAN operator OR BOOLEAN
+  IN aFirst
+  ^ IN aSecond
+ // Двусторонний, а не обратный польский ||
+ if aFirst then
+  ( Result := true )
+ else
+  if ( aSecond DO ) then
+   ( Result := true )
+  else
+   ( Result := false )
+; // OR
+
+WordAlias ИЛИ OR
+
+BOOLEAN operator NOT
+  ^ IN aWhatToNot
+ // Правосторонний, а не обратный польский !
+ Result := ( aWhatToNot DO ! )
+; // NOT
+
+WordAlias НЕ NOT
+
+BOOLEAN operator =
+  IN aLeft
+  ^ IN aRight
+ %SUMMARY ' 
+  Правосторонний, а не обратный польский ==
+  ТЕПЕРЬ С БЛЭКДЖЕКОМ И МАССИВАМИ!
+
+  Примеры:
+   1 РАВНО 1  . - True
+   [ 10 20 ] РАВНО ( 10 20 ) . - True
+   [ 10 20 ] РАВНО ( [ 10 20 ] ) . - True
+   [ 10 ] РАВНО ( [ 10 ] ) . - True
+   [ 10 ] РАВНО ( 10 ) . - True
+   [ 10 ] РАВНО ( 20 ) . - False
+ ' ;  
+                    
+ if ( aLeft IsArray ! ) then
+ begin
+  INTEGER VAR l_StackLevel
+  StackLevel >>> l_StackLevel
+  aRight DO 
+  if ( StackLevel l_StackLevel GREATER ) then
+  begin 
+   aLeft ?== >>> Result
+   l_StackLevel ReduceStackLevel
+  end // StackLevel l_StackLevel GREATER
+  else
+  begin
+   false >>> Result
+  end 
+ end // aLeft IsArray !
+ else
+ begin
+  ARRAY VAR l_Right
+  l_Right := [ aRight DO ]
+  TRY
+    if
+     (
+      ( l_Right IsArray ) И
+      ( l_Right Array:Count 1 == ) И
+      ( 0 l_Right [i] IsArray )
+     )
+    then
+    (
+     Result := ( aLeft 0 l_Right [i] ArraysAreEqual )
+    )
+    else
+    (
+     Result := ( aLeft l_Right ArraysAreEqual )
+    )
+  FINALLY
+   l_Right := [ ]
+  END
+ end // aLeft IsArray !
+; // =
+
+WordAlias РАВНО =
+
+BOOLEAN operator <>
+  IN aLeft
+  ^ IN aRight
+ %SUMMARY 'Правосторонний, а не обратный польский !=' ;
+ Result := ( aLeft = ( aRight DO ) ! )
+; //<>
+
+WordAlias НЕРАВНО <>
+WordAlias "НЕ РАВНО" НЕРАВНО
+
+BOOLEAN operator >=
+  COMPARABLE IN aLeft
+  ^ IN aRight
+ Result := ( aLeft < ( aRight DO ) ! )
+;
+
+WordAlias "БОЛЬШЕ ИЛИ РАВНО" >=
+
+BOOLEAN operator <=
+  COMPARABLE IN aLeft
+  ^ IN aRight
+ Result := ( aLeft > ( aRight DO ) ! )
+;
+
+WordAlias "МЕНЬШЕ ИЛИ РАВНО" <=
+
+WordAlias ЯВЛЯЕТСЯ IS
+WordAlias Is IS
+
+BOOLEAN operator NOTIS
+  CASTABLE IN anObj
+  ^ IN aClass
+ Result := NOT ( anObj Is ( aClass DO ) )
+; // NOTIS
+
+WordAlias NotIs NOTIS
+WordAlias НЕЯВЛЯЕТСЯ NOTIS
+WordAlias "НЕ ЯВЛЯЕТСЯ" НЕЯВЛЯЕТСЯ
+
+IMMEDIATE operator WordAliasByRef
+ ^L IN aName
+ ^ IN aCode
+ aCode DO aName |N Define
+; // WordAliasByRef
+
+IMMEDIATE operator [EXECUTE]
+ ^ IN aCode
+ aCode DO
+; // [EXECUTE] 
+ 
+VOID IMMEDIATE operator initialization
+ ^ IN aCode
+ aCode Ctx:Engine pop:ScriptEngine:AddInitialization
+; // initialization
+
+STRING operator |NS
+ IN aName
+ Result := ( [ '`' aName |N '`' ] strings:Cat )
+; // |NS
+
+STRING FUNCTION |S IN %S
+ %S %ST |N =: Result
+; // |S
+
+OBJECT operator %%
+ OBJECT IN aWord
+ ^ IN aName
+ 
+ OBJECT VAR l_Member
+ aName DO aWord pop:Word:FindMember >>> l_Member
+ 
+ if ( l_Member pop:object:IsNil ) then
+  ( Result := nil )
+ else
+  ( Result := ( l_Member pop:KeyWord:Word ) ) 
+; // %%
+ 
+OBJECT FUNCTION %P IN %S
+ VAR l_P
+ l_P := ( %S pop:Word:Parent )
+ if ( l_P pop:Word:Name '%C' SameText ) then
+ ( 
+  l_P := ( l_P pop:Word:Parent )
+ ) 
+ if ( l_P NotValid ) then
+ (
+  Result := nil
+ ) 
+ else
+ (
+  Result := l_P
+ ) 
+; // %P
+
+ARRAY FUNCTION LIST
+ OBJECT IN anObject
+ ^ IN aFunctor
+ 
+ OBJECT VAR l_Element
+ l_Element := anObject
+ BOOLEAN VAR l_NeedDo
+ l_NeedDo := true
+ Result := [
+  while l_NeedDo
+  begin
+   l_Element := ( l_Element aFunctor DO )
+   if ( l_Element pop:object:IsNil ) then
+    ( false >>> l_NeedDo )
+   else 
+    l_Element 
+  end
+ ]
+; // LIST
+
+WordAlias Reverted Array:Reverted
+ 
+^@ operator ::
+ ^@ IN aSelf
+ ^L IN aName
+
+ OBJECT VAR l_Self
+ aSelf |^@ >>> l_Self
+ 
+ STRING VAR l_Name
+ aName |N >>> l_Name
+ 
+ OBJECT VAR l_Res
+ l_Self %% l_Name >>> l_Res
+ 
+ ASSURE 
+  NOT ( l_Res pop:object:IsNil ) 
+  [ 'Не найдено поле: ' l_Self LIST %P Reverted ==> ( |N '::' ) l_Self |N '::' l_Name ]
+ l_Res >>> Result
+; // ::
+ 
+OBJECT operator ->^
+ ^@ IN aSelf
+ ^ IN aName
+ 
+ STRING VAR l_Name
+ aName DO >>> l_Name
+ 
+ OBJECT VAR l_Self
+ aSelf |^@Deepest >>> l_Self
+ 
+ if ( l_Self pop:object:IsNil ) then
+ begin
+  nil >>> Result
+ end 
+ else 
+ begin
+  VAR l_NewVar
+  
+  l_Name l_Self pop:NewWordDefinitor:CheckWord pop:KeyWord:Word >>> l_NewVar
+  
+  if ( l_NewVar pop:object:IsNil ) then
+   (
+    l_Name false l_Self pop:NewWordDefinitor:CheckVar
+    
+     >>> l_NewVar
+    Ctx:ClearTypeInfo
+    
+    @ VAR l_NewVar pop:Word:SetProducer
+   )
+  
+  l_NewVar >>> Result
+ end // l_Self pop:object:IsNil
+; // ->^
+
+^@ operator ->
+ ^@ IN aSelf
+ ^L IN aName
+
+ aSelf ->^ ( aName |N ) >>> Result
+; // ->
+
+OBJECT FUNCTION %T IN %S
+ VAR l_T
+ //l_T := ( %S ->^ '%T' )
+ l_T := ( %S %% '%T' )
+ if ( l_T NotValid ) then
+ (
+  Result := nil
+ ) 
+ else
+ (
+  l_T := ( l_T DO )
+  if ( l_T NotValid ) then
+  (
+   Result := nil
+  ) 
+  else
+  (
+   Result := l_T
+  )
+ )
+; // %T
+
+STRING FUNCTION %TN IN %S
+ Result := ( %S %T |N )
+; // %TN
+
+STRING FUNCTION %TS IN %S
+ Result := ( %S %T |S )
+; // %TS
+
+STRING FUNCTION |U IN %S
+ VAR l_U
+ //l_U := ( %S ->^ '%U' )
+ l_U := ( %S %% '%U' )
+ if ( l_U NotValid ) then
+ (
+  Result := ''
+ ) 
+ else
+ (
+  Result := ( l_U DO |N )
+ )
+; // |U
+
+WordAlias ДА true
+
+WordAlias НЕТ false
+
+BOOLEAN operator "в интервале"
+  INTEGER IN aValue
+  ^ IN anInterval
+ INTEGER VAR "нижнее значение"
+ INTEGER VAR "верхнее значение"
+ ( anInterval DO )
+ >>> "верхнее значение"
+ >>> "нижнее значение"
+ Result := ( ( aValue "БОЛЬШЕ ИЛИ РАВНО" "нижнее значение" )
+ И ( aValue "МЕНЬШЕ ИЛИ РАВНО" "верхнее значение" ) )
+; // "в интервале"
+   
+ARRAY FUNCTION SplitToArray
+ STRING IN aValue
+ STRING IN aDelim
+ STRING VAR l_Tail
+ aValue >>> l_Tail
+ if ( l_Tail '' == ) then
+ begin
+  Result := [ '' ]
+ end 
+ else
+ begin 
+  Result := [ 
+   while ( l_Tail '' != )
+   begin
+    l_Tail aDelim string:Split >>> l_Tail
+   end
+  ]
+ end
+; // SplitToArray
+
+PROCEDURE Ctx:Parser:PushSymbols
+ STRING IN aString
+ aString ' ' SplitToArray ==> ( 
+  STRING IN aStr
+  aStr '%#32' ' ' string:Replace >>> aStr
+  if ( '`' aStr StartsStr ) then
+  begin
+   aStr '`' '' string:Replace Ctx:Parser:PushString
+  end
+  else
+  begin
+   aStr Ctx:Parser:PushSymbol 
+  end
+ )
+; // Ctx:ParserPushSymbols
+
+PROCEDURE Ctx:Parser:PushArray
+ ARRAY IN anArray
+ anArray ==> Ctx:Parser:PushSymbols
+; // Ctx:Parser:PushArray
+
+IMMEDIATE VOID operator WordProducer
+  ^L IN aName
+ 
+ @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE VOID axiom:operator'
+  aName |N
+  '@SELF Ctx:SetWordProducerForCompiledClass'
+  '@ operator DO'
+  ';'
+ ] Ctx:Parser:PushArray
+; // WordProducer
+ 
+IMMEDIATE VOID operator NamedWordProducer
+  ^L IN aName
+  ^L IN aNewName
+ 
+ @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE VOID axiom:operator'
+  aName |N
+  '@SELF Ctx:SetWordProducerForCompiledClass'
+  aNewName |NS
+  'Ctx:SetNewWordName'
+  '@ operator DO'
+  ';'
+ ] Ctx:Parser:PushArray
+; // NamedWordProducer
+
+WordAlias ClassProducer WordProducer
+
+NamedWordProducer %INHERITS %G
+ // - список унаследованных элементов
+
+NamedWordProducer %CHILDREN %C
+// - список дочерних элементов элемента
+
+REDEFINITION
+ NamedWordProducer %SUMMARY %SUM
+// - секция документации
+
+IMMEDIATE VOID operator VarProducer
+  ^L IN aName
+ STRING VAR l_Name
+ aName |N >>> l_Name
+
+ [
+  'IMMEDIATE VOID axiom:operator'
+  l_Name
+  '^L IN aName'
+  'aName |N @SELF axiom:DefineVar'
+  ';'
+ ] Ctx:Parser:PushArray
+; // VarProducer
+
+PROTECTED VOID : axiom:DefineVarWithInit
+  STRING IN aName
+  OBJECT IN aStereo
+  OBJECT IN aValue
+  
+  VAR l_NewVar
+  aName aStereo private:DefineVarEx >>> l_NewVar
+  aValue CompileRef @ DO CompileValue l_NewVar CompileRef @ pop:Word:SetValue CompileValue
+  //aValue l_NewVar ___INIT_VAR
+  // - это может и лишнее, но это чтобы не сломать %DOCUMENTATION и %upv,
+  //   который могут ЧИТАТЬСЯ в обход выполнения кода родительского слова
+  //   Может быть ПОТОМ это вообще на initialization надо будет переделать
+  
+; // axiom:DefineVarWithInit
+  
+IMMEDIATE VOID operator InitedVarProducer
+  ^L IN aName
+ 
+ [
+  'IMMEDIATE VOID axiom:operator'
+  aName |N
+  '^L IN aName'
+  '^ IN aValue'
+  'aName |N @SELF aValue |^@ axiom:DefineVarWithInit'
+  ';'
+ ] Ctx:Parser:PushArray
+; // InitedVarProducer
+
+WordAlias FILTER Array:Filter
+
+ARRAY FUNCTION NativeMembersIterator
+ TtfwWord IN aWord
+
+ BOOLEAN FUNCTION FilterMember 
+   OBJECT IN aMember
+  Result := ( ( aMember NotValid ! ) AND ( aMember pop:Word:IsForHelp ) )
+ ; // FilterMember
+ 
+ Result := ( @ FilterMember aWord pop:Word:MembersIterator FILTER )
+; // NativeMembersIterator
+
+operator AllMembers==>
+// Итерирует все вложенные элементы рекурсивно
+ OBJECT IN anObject
+ ^ IN aLambda
+ 
+ FORWARD DoMembers
+ 
+ PROCEDURE DoMembers
+  OBJECT IN anObject
+  anObject pop:Word:MembersIterator ==> (
+   IN aWord 
+   aWord aLambda DO
+   aWord DoMembers
+  )
+ ; // DoMembers
+ 
+ anObject DoMembers
+; // AllMembers==>
+
+PROCEDURE axiom:DumpMembers
+ OBJECT IN anObject
+ 
+ PROCEDURE Dump
+  OBJECT IN anObject
+   [
+    anObject pop:Word:Directives
+    anObject LIST %ST Reverted ==> |N
+    anObject |N
+   ] ' ' strings:CatSep .
+ ; // Dump
+ 
+ anObject Dump
+ anObject AllMembers==> Dump
+ anObject %P Dump
+; // axiom:DumpMembers
+
+WordAlias __DumpMembers axiom:DumpMembers
+
+operator Ctx:Parser:PushSymbolAtRight
+ ^L IN aName 
+ aName |N Ctx:Parser:PushSymbol
+; // Ctx:Parser:PushSymbolAtRight
+
+IMMEDIATE VOID operator NamedInitedVarProducer
+  ^L IN aName
+  ^L IN aNewName
+ 
+ @SELF Ctx:SetWordProducerForCompiledClass 
+ [
+  'IMMEDIATE VOID axiom:operator'
+  aName |N
+  '^ IN aValue'
+  
+  aNewName |NS
+  
+  '@SELF aValue |^@ axiom:DefineVarWithInit'
+  ';'
+ ] Ctx:Parser:PushArray
+; // NamedInitedVarProducer
+
+NamedInitedVarProducer %DOCUMENTATION %Doc
+// - документация к элементу
+
+IMMEDIATE VOID operator NamedAutolinkProducer
+ ^L IN aOpName
+ ^L IN aName
+ 
+ @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE VOID axiom:operator'
+  aOpName |N
+  '^ IN aCode'
+  'aCode '
+  aName |NS
+  'Define'
+  ';' 
+ ] Ctx:Parser:PushArray
+; // NamedAutolinkProducer
+
+PRIVATE STRING FUNCTION private:CheckSpaces
+ STRING IN aName
+ aName ' ' '%#32' string:Replace >>> Result
+; // private:CheckSpaces
+
+STRING FUNCTION Add<<>>
+ STRING IN aName
+ [ '<<' aName '>>' ] strings:Cat >>> Result
+ Result private:CheckSpaces >>> Result
+; // Add<<>>
+
+STRING FUNCTION Add<<@>>
+ STRING IN aName
+ [ '@' aName ] strings:Cat Add<<>> >>> Result
+; // Add<<>>
+
+VOID operator DefineStereo
+ IN aName
+ IN aSelf
+ 
+ aSelf
+ Ctx:SetWordProducerForCompiledClass
+ 
+ [
+  'IMMEDIATE VOID axiom:operator' aName Add<<>>
+  '^L IN aName'
+ 
+  'aName |N @SELF DefineStereoInstance'
+ 
+  'EXIT'
+ ] Ctx:Parser:PushArray
+; // DefineStereo
+ 
+VOID operator DefineStereoInstance
+ IN aName
+ IN aSelf
+ 
+ aSelf
+ Ctx:SetWordProducerForCompiledClass
+ 
+ [
+  'axiom:operator' aName private:CheckSpaces
+ ] Ctx:Parser:PushArray
+; // DefineStereoInstance
+
+/*{IMMEDIATE operator StereotypeProducer
+  ^L IN aName
+  
+ @SELF Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE VOID axiom:operator' aName |N Add<<>>
+  '^L IN aName'
+  'aName |N @SELF DefineStereo'
+  
+  'EXIT'
+ ] Ctx:Parser:PushArray
+; // StereotypeProducer}*/
+
+VOID operator DefineStereotypeProducer
+ IN aName
+ IN aSelf
+ 
+ aSelf
+ Ctx:SetWordProducerForCompiledClass
+ [
+  'IMMEDIATE VOID axiom:operator' aName Add<<>>
+  '^L IN aName'
+  'aName |N @SELF DefineStereo'
+  
+  'EXIT'
+ ] Ctx:Parser:PushArray
+; // DefineStereotypeProducer
+
+IMMEDIATE VOID operator StereotypeStereotypeProducer
+  ^L IN aName
+ @SELF Ctx:SetWordProducerForCompiledClass 
+ [
+  'IMMEDIATE VOID axiom:operator' aName |N Add<<@>>
+  '^L IN aName'
+  
+  'aName |N @SELF DefineStereotypeProducer'
+  
+  'EXIT'
+ ] Ctx:Parser:PushArray
+; // StereotypeStereotypeProducer
+
+StereotypeStereotypeProducer StereotypeProducer ;
+WordAlias StereotypeProducer <<@StereotypeProducer>>
+
+VOID OPERATOR DisableForHelp
+ OBJECT IN aWord
+ aWord Ctx:Engine pop:ScriptEngine:DisableForHelp
+; // DisableForHelp
+
+VOID IMMEDIATE OPERATOR EXPORTS
+ ^L IN aName
+ STRING VAR l_Name
+ aName |N >>> l_Name
+ 
+ if ( '' l_Name != ) then
+ begin
+  if ( '*' l_Name == ) then
+   ( )
+  else
+  if ( 'axiom:' l_Name StartsStr ) then
+   ( )
+  else
+  if ( '@\' l_Name StartsStr ) then
+   ( l_Name '@\' '\Common\' string:ReplaceFirst >>> l_Name )
+  else
+  if ( l_Name sysutils:ExtractFilePath '' == ) then
+   ( l_Name Ctx:ResolveIncludedFilePath >>> l_Name )
+   //( '\Dictionary\' l_Name Cat >>> l_Name )
+  
+  TtfwDictionaryEx VAR l_OurDict
+  Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary >>> l_OurDict
+  
+  BOOLEAN VAR l_WasExported
+  false >>> l_WasExported
+  
+  l_OurDict pop:DictionaryEx:UsedDictionaries ==> (
+   TtfwDictionaryEx IN aDict
+   
+   PROCEDURE DoExport
+    aDict l_OurDict pop:DictionaryEx:ExportDictionary
+    true >>> l_WasExported 
+   ; // DoExport
+   
+   if ( '*' l_Name == ) then
+    DoExport
+   else 
+   if ( l_Name aDict pop:DictionaryEx:FileName EndsText ) then
+    DoExport
+  )
+  l_WasExported ?ASSURE [ 'Не нашлось подходящего словаря для экспорта: ' l_Name ] 
+ end // ( '' l_Name != )
+; // EXPORTS
+
+VOID IMMEDIATE OPERATOR %DISABLE_CASCADE_DICT
+ Ctx:Engine pop:ScriptEngine:CascadeDict := false
+; // %DISABLE_CASCADE_DICT
+
+VOID IMMEDIATE OPERATOR DECLARED
+  ^L IN aName
+  
+ %SUMMARY 'Определяет, что слово aName определено в данном месте' ; 
+ BOOLEAN VAR l_Found
+ aName |N Ctx:PushFinder pop:KeywordFinder:KeywordByName nil != >>> l_Found
+ l_Found CompileValue
+; // DECLARED
+
+CONST CF_TEXT 1
+CONST CF_BITMAP 2
+CONST CF_METAFILEPICT 3
+CONST CF_SYLK 4
+CONST CF_DIF 5
+CONST CF_TIFF 6
+CONST CF_OEMTEXT 7
+CONST CF_DIB 8
+CONST CF_PALETTE 9
+CONST CF_PENDATA 10
+CONST CF_RIFF 11
+CONST CF_WAVE 12
+CONST CF_UNICODETEXT 13
+CONST CF_ENHMETAFILE 14
+CONST CF_HDROP 15
+CONST CF_LOCALE 16
+CONST CF_MAX 17
+CONST CF_DIBV5 17
+
+MACRO .map>
+  /*ARRAY IN anArray*/ // - слева должен быть массив
+  ^ IN aFunctor
+ 
+ %SUMMARY 'Трансформирует массив функтором aFunctor';
+ aFunctor CompileRef
+ @ SWAP CompileValue
+ @ Array:Map CompileValue
+; // .map>
+
+/*{ARRAY FUNCTION .map>
+  ARRAY IN anArray
+  ^ IN aFunctor
+  
+ %SUMMARY 'Трансформирует массив функтором aFunctor';
+ aFunctor anArray Array:Map >>> Result
+; // .map>}*/
+
+MACRO .filter>
+  /*ARRAY IN anArray*/ // - слева должен быть массив
+  ^ IN aFunctor
+ 
+ %SUMMARY 'Фильтрует указанный массив функтором aFunctor' ;
+ aFunctor CompileRef
+ @ SWAP CompileValue
+ @ Array:Filter CompileValue
+; // .filter>
+
+/*{ARRAY FUNCTION .filter>
+  ARRAY IN anArray
+  ^ IN aFunctor
+ 
+ %SUMMARY 'Фильтрует указанный массив функтором aFunctor' ;
+ aFunctor anArray Array:Filter >>> Result
+; // .filter>}*/
+
+WordAlias .reverted> Array:Reverted
+WordAlias >reverted> Array:Reverted
+
+BOOLEAN FUNCTION array:Has 
+  IN aValue 
+  ARRAY IN anArray
+  
+ %SUMMARY 'Проверяет, что массив содержит значение' ; 
+ false >>> Result
+
+ anArray .for> ( 
+   IN anItem
+  if ( anItem aValue ?== )
+   ( 
+     true >>> Result
+     BREAK-ITERATOR
+   )
+ )
+; // array:Has
+
+STRING FUNCTION ?(+)
+ STRING IN aPrefix
+ ^ IN aSuffix
+ %SUMMARY 'Если aPrefix не пустой, то возвращает сумму aPrefix и aSuffix, иначе возвращает пустую строку' ;
+ '' >>> Result
+ if ( aPrefix '' != ) then
+  ( aPrefix aSuffix DO Cat =: Result )
+; // ?(+)
+
+STRING FUNCTION IndentStr
+ INTEGER IN anIndent
+ anIndent ' ' char:Dupe >>> Result
+; // IndentStr
+
+WordAlias .Stereotype %ST
+
+ARRAY FUNCTION .Stereotype.Words
+  TtfwWord IN Self
+ ( Self LIST .Stereotype ) >>> Result
+; //  .Stereotype.Words
+
+UNIT WordsInfo
+
+USES
+ axiom:Stereotype
+;
+
+USES
+ axiom:Dictionary
+;
+
+FORWARD pop:KeyWord:Print
+
+PROCEDURE pop:Dictionary:Print
+ STRING IN anIndent
+ TtfwDictionary IN aDictionary
+ 
+ if ( aDictionary IsNil ! ) then
+ begin
+  aDictionary pop:Dictionary:KeyWordsIterator ==> ( 
+    TtfwKeyWord IN aKeyWord 
+    anIndent ' ' Cat aKeyWord pop:KeyWord:Print
+  )
+ end // ( aDictionary IsNil ! )
+; // pop:Dictionary:Print
+
+PROCEDURE pop:Word:Print
+  STRING IN anIndent
+  STRING IN aName
+  TtfwWord IN aWord 
+  
+ if ( aWord pop:Word:Name '%SUM' == ) then
+ begin
+  INTEGER VAR l_SL
+  StackLevel >>> l_SL
+  aWord DO
+  if ( StackLevel > l_SL ) then
+  begin
+   [ anIndent 'Documentation:' ] strings:Cat .
+   while ( StackLevel > l_SL )
+   begin
+    IN aValue
+    [ anIndent ' ' Cat aValue ToPrintable ] strings:Cat .
+   end
+  end
+ end // ( aWord pop:Word:Name '%SUM' == )
+ else
+ begin
+  [ anIndent
+   [ 
+    aWord pop:Word:Directives 
+    aWord .Stereotype.Words .reverted> .map> pop:Word:Name ' :: ' strings:CatSep ?(+) ' : '
+    aName 
+   ] ' ' strings:CatSep 
+  ] strings:Cat .
+   
+  TtfwWord VAR l_Redefines 
+  aWord pop:Word:Redefines >>> l_Redefines
+  if ( l_Redefines IsNil ! ) then
+  begin
+   [ anIndent '==> Redefines' ] strings:Cat .
+   TRY
+    anIndent ' ' Cat aWord pop:Word:Name l_Redefines @SELF DO
+   FINALLY
+    [ anIndent '<== Redefines' ] strings:Cat .
+   END
+  end
+   
+  TtfwDictionary VAR l_InnerDictionary
+  aWord pop:Word:InnerDictionary >>> l_InnerDictionary
+  
+  if ( l_InnerDictionary IsNil ! ) then
+  begin
+   anIndent l_InnerDictionary pop:Dictionary:Print
+   
+   [ anIndent '; // ' aName ] strings:Cat .
+  end // ( l_InnerDictionary IsNil ! )
+ end // ( aWord pop:Word:Name '%SUM' == )
+; // pop:Word:Print
+
+PROCEDURE pop:KeyWord:Print
+  STRING IN anIndent
+  TtfwKeyWord IN aKeyWord 
+ 
+ TtfwWord VAR l_Word
+ aKeyWord pop:KeyWord:Word >>> l_Word
+ 
+ if ( l_Word IsNil ! ) then
+  if ( l_Word pop:Word:IsForHelp ) then
+   if ( l_Word Ctx:DisabledForHelp array:Has ! ) then
+   begin
+    anIndent aKeyWord pop:KeyWord:Name l_Word pop:Word:Print  
+   end // ( l_Word Ctx:DisabledForHelp array:Has ! )
+; // pop:KeyWord:Print
+
+PROCEDURE pop:DictionaryEx:Print
+  STRING IN anIndent
+  TtfwDictionaryEx IN aDictionary
+  
+ if ( aDictionary IsNil ! ) then
+ begin  
+  [ 'Dictionary: ' aDictionary pop:DictionaryEx:FileName ] strings:Cat .
+  
+  BOOLEAN VAR l_NeedHeader
+  
+  true >>> l_NeedHeader
+  aDictionary pop:DictionaryEx:UsedDictionaries ==> ( 
+    TtfwDictionaryEx IN aDictionary
+   if ( l_NeedHeader ) then
+   (
+    ' Uses: ' .
+    false >>> l_NeedHeader
+   )
+   [ '  ' aDictionary pop:DictionaryEx:FileName ] strings:Cat .
+  )
+  if ( l_NeedHeader ! ) then
+   ( ' ;' . )
+  
+  true >>> l_NeedHeader
+  aDictionary pop:DictionaryEx:ExportedDictionaries ==> ( 
+    TtfwDictionaryEx IN aDictionary
+   if ( l_NeedHeader ) then
+   (
+    ' Exports: ' .
+    false >>> l_NeedHeader
+   )
+   [ '  ' aDictionary pop:DictionaryEx:FileName ] strings:Cat . 
+  )
+  if ( l_NeedHeader ! ) then
+   ( ' ;' . )
+  
+  aDictionary pop:Dictionary:KeyWordsIterator ==> ( 
+    TtfwKeyWord IN aKeyWord 
+   if ( aKeyWord pop:KeyWord:Dictionary aDictionary == ) then 
+    ( anIndent aKeyWord pop:KeyWord:Print )
+  )
+ end // ( aDictionary IsNil ! )
+ 
+; // pop:DictionaryEx:Print
+
+USES
+ axiom:MainDictionary
+;
+
+PROCEDURE Ctx:PrintDictionaries
+
+ ARRAY VAR l_InitedDictionaries
+ Ctx:InitedDictionaries >>> l_InitedDictionaries
+ 
+ Ctx:StandardDictionaries 
+  .filter> ( l_InitedDictionaries array:Has ! ) 
+   ==> ( TtfwDictionaryEx IN anItem '' anItem pop:DictionaryEx:Print )
+ l_InitedDictionaries ==> ( TtfwDictionaryEx IN anItem '' anItem pop:DictionaryEx:Print )
+ 
+ TtfwWord VAR l_CompiledCode
+ 
+ Ctx:MainDictionary pop:MainDictionary:CompiledCode >>> l_CompiledCode
+ if ( l_CompiledCode IsNil ! ) then
+  ( '' 'Main' l_CompiledCode pop:Word:Print )
+ 
+; // Ctx:PrintDictionaries
+
+WordAlias help Ctx:PrintDictionaries
+
+// end. WordsInfo
+
+//#UC END# *4DC90A1E03C2impl*
+
+
+EXPORTS
+//#UC START# *4DC90A1E03C2exports*
+ *
+//#UC END# *4DC90A1E03C2exports*
+

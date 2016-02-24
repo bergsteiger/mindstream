@@ -18,11 +18,13 @@ PROCEDURE axiom:PushImmediateSymbol
 ; // axiom:PushSymbol
 
 MACRO [] 
+ %SUMMARY 'Пустой массив' ;
  axiom:PushSymbol [ 
  axiom:PushSymbol ]
 ; // []
 
 WordAlias () NOP
+ %REMARK 'Пустой список'
 
 PROCEDURE axiom:PushStringAsSymbol
  ^ IN aString

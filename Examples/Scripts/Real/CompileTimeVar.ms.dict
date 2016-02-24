@@ -1,0 +1,65 @@
+UNIT CompileTimeVar.ms.dict
+
+USES
+ axiom:TtfwValueTypesAccepts
+ axiom_push.ms.dict
+;
+
+PRIVATE : STATIC-VAR:DefineVarEx
+  STRING IN aName
+  OBJECT IN aStereo
+ 
+ aName Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckWord pop:KeyWord:Word pop:object:IsNil
+  ?ASSURE [ '—лово ' aName ' уже существует. Ќельз€ определить переменную с таким же именем' ]
+
+ aName false Ctx:NewWordDefinitor pop:NewWordDefinitor:CheckVar
+ DUP aStereo SWAP pop:Word:SetProducer
+ Ctx:ClearTypeInfo
+; // STATIC-VAR:DefineVarEx
+
+PROTECTED : STATIC-VAR:DefineVar
+ STATIC-VAR:DefineVarEx DROP
+; // STATIC-VAR:DefineVar
+
+IMMEDIATE VOID OPERATOR STATIC-VAR
+ ^L IN aName
+ aName |N @SELF STATIC-VAR:DefineVar
+; // STATIC-VAR
+
+STACK_CHANGING_MACRO CompileTime-VAR
+  Literal IN aName
+  ^ IN aValue
+
+ %SUMMARY 'ќбъ€вл€ет переменную "времени компил€ции" и инициализирует еЄ' ;
+
+ TtfwValueTypes VAR l_ValueTypes
+ Ctx:ValueTypes >>> l_ValueTypes
+ Ctx:ClearTypeInfo
+
+ if ( l_ValueTypes IsNil ! ) then
+ begin
+  STRING VAR l_ValueTypesName
+  l_ValueTypes pop:ValueTypes:Name >>> l_ValueTypesName
+  l_ValueTypesName ' ' string:Pos -1 == ?ASSURE 'ћножественные типы дл€ переменных "времени компил€ции" пока не поддерживаютс€'
+  l_ValueTypesName Ctx:Parser:PushSymbol
+  TtfwValueTypes VAR l_ValueValueTypes
+  aValue pop:Word:GetRef pop:Word:Info pop:WordInfo:ValueTypes >>> l_ValueValueTypes
+  if ( l_ValueValueTypes IsNil ! ) then
+  begin
+   l_ValueValueTypes l_ValueTypes pop:ValueTypes:Accepts TtfwValueTypesAccepts::tfw_vtaNo != ?ASSURE '“ип переменной не совместим с типом значени€'
+  end 
+ end
+
+ axiom:PushSymbol STATIC-VAR
+ STRING VAR l_Name
+ aName |N >>> l_Name
+ l_Name Ctx:Parser:PushString
+ axiom:PushImmediateSymbol (
+ aValue DO
+ axiom:PushImmediateSymbol CompileValue
+ axiom:PushSymbol @
+ l_Name Ctx:Parser:PushSymbol
+ axiom:PushSymbol pop:Word:SetValue
+ axiom:PushSymbol )
+; // CompileTime-VAR
+

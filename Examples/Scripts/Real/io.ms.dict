@@ -1,0 +1,21 @@
+// io.ms.dict
+
+USES
+ types.ms.dict
+;
+
+ANY TYPE PRINTABLE
+
+PROCEDURE Print
+ PRINTABLE IN aValue
+ if (
+     ( aValue IsObj ) AND ( aValue IS class::TtfwWord )
+    ) then
+ begin
+  aValue |N .
+ end
+ else
+ begin
+  aValue .
+ end
+; // Print

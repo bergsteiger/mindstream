@@ -98,10 +98,10 @@ WordAlias .Parent %P
 word_iterator Parent.Words
  %SUMMARY 'Возвращает итератор родителей Self в "терминах определённой модели"' ;
  Result := ( Self LIST .Parent )
-; // Parents
+; // Parent.Words
 
 WordAlias .Stereotype %ST
 
 word_iterator Stereotype.Words
  Result := ( Self LIST .Stereotype )
-; // Stereotypes
+; // Stereotype.Words

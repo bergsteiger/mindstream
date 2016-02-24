@@ -1,0 +1,14 @@
+// InheritsAndImplementsNew.ms.dict
+
+USES
+ macro.ms.dict
+ EngineTypes.ms.dict
+ Documentation.ms.dict
+ NamedCodeProducer.ms.dict
+;
+
+EXPORTS
+ NamedCodeProducer.ms.dict
+
+NamedCodeProducer Inherits %G
+NamedCodeProducer Implements %R

@@ -1,0 +1,18 @@
+USES
+ Literal.ms.dict
+ macro.ms.dict
+;
+
+MACRO REMARK
+ Literal IN aDoc
+ %SUMMARY '–емарка' ;
+; // REMARK
+
+MACRO TODO
+ Literal IN aDoc
+ %SUMMARY '„то-то, что надо сделать потом, но не забыть, и не «јЅ»“№' ;
+; // TODO
+
+WordAlias %REMARK REMARK
+
+WordAlias %TODO TODO

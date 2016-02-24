@@ -242,8 +242,9 @@ PROCEDURE CallGens
  ARRAY IN anElements
  ARRAY IN aGenerators
  %SUMMARY 'Вызывает все определённые генераторы на элементах массива anElements' ;
- OutDir PureDir
-  %REMARK 'Очищаем директорию от "старых" файлов'
+// OutDir PureDir
+//  %REMARK 'Очищаем директорию от "старых" файлов'
+// - нельзя так делать, т.к. удаляются файлы CVS
  TF g_AllRoots
  ( 
   g_AllRoots := anElements

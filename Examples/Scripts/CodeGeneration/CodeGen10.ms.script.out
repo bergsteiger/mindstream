@@ -88,6 +88,8 @@ VOID Test CodeGen
 
 Dictionary: axiom:char
 Dictionary: axiom:class
+Dictionary: axiom:CompiledProcedure
+TkwCompiledProcedure CompiledProcedure:Create
 Dictionary: axiom:CompiledWordWorkerWord
 TtfwWord pop:CompiledWordWorkerWord:Compiled
 Dictionary: axiom:Component
@@ -100,6 +102,8 @@ Dictionary: axiom:exception
 Dictionary: axiom:Finder
 VOID pop:Finder:SetToCtx
 Dictionary: axiom:guid
+Dictionary: axiom:KeyValues
+TkwKeyValues KeyValues:Create
 Dictionary: axiom:Mouse
 mouse:GetCursorIndex
 mouse:GetCursorNameByIndex
@@ -213,6 +217,8 @@ VOID OPERATOR : Tests:@[
 tests:CheckEtalon
 tests:CheckOutputWithInput
 Dictionary: axiom:text
+Dictionary: axiom:WordBox
+TtfwWord pop:WordBox:Boxed
 Dictionary: axiom:WString
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen10.ms.script
  Uses: 
@@ -401,11 +407,9 @@ OBJECT OPERATOR : %%
  OBJECT OPERATOR :: %% : Result
 ; // %%
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %CHILDREN
-IMMEDIATE VOID OPERATOR : %DISABLE_CASCADE_DICT
 IMMEDIATE VOID OPERATOR :: NamedInitedVarProducer : %DOCUMENTATION
  ^ OPERATOR :: IN : aValue
 ; // %DOCUMENTATION
-%INCLUDES
 IMMEDIATE VOID OPERATOR :: NamedWordProducer : %INHERITS
 OBJECT FUNCTION : %P
  OPERATOR :: IN : %S
@@ -477,7 +481,7 @@ ARRAY FUNCTION : .join>
 ; // .join>
 IMMEDIATE VOID OPERATOR :: MACRO : .map>
  Documentation:
-  Трансформирует массив фнуктором aFunctor
+  Трансформирует массив функтором aFunctor
  ^ OPERATOR :: IN : aFunctor
 ; // .map>
 ARRAY .reverted>
@@ -593,6 +597,12 @@ TtfwWord OPERATOR : |^@
  ^@ OPERATOR :: IN : aSelf
  TtfwWord OPERATOR :: |^@ : Result
 ; // |^@
+TtfwWord OPERATOR : |^@Deepest
+ Documentation:
+  Получает ссылку на параметр слева
+ ^@ OPERATOR :: IN : aSelf
+ TtfwWord OPERATOR :: |^@Deepest : Result
+; // |^@Deepest
 BOOLEAN ||
 STRING FUNCTION : |N
  OPERATOR :: IN : %S
@@ -795,25 +805,25 @@ INTEGER Array:Count
 ARRAY Array:Filter
 ARRAY Array:FunctorToIterator
 BOOLEAN FUNCTION : array:Has
+ Documentation:
+  Проверяет, что массив содержит значение
  ARRAY OPERATOR :: IN : anArray
  OPERATOR :: IN : aValue
  BOOLEAN FUNCTION :: array:Has : Result
 ; // array:Has
 BOOLEAN FUNCTION : array:HasString
+ Documentation:
+  Проверяет, что массив содержит строку. С учётом регистра
  ARRAY OPERATOR :: IN : anArray
  STRING OPERATOR :: IN : aString
  BOOLEAN FUNCTION :: array:HasString : Result
- VOID OPERATOR :: PROCEDURE : Поиск
-  STRING OPERATOR :: IN : anItem
- ; // Поиск
 ; // array:HasString
 BOOLEAN FUNCTION : array:HasText
+ Documentation:
+  Проверяет, что массив содержит строку. Без учёта регистра
  ARRAY OPERATOR :: IN : anArray
  STRING OPERATOR :: IN : aString
  BOOLEAN FUNCTION :: array:HasText : Result
- VOID OPERATOR :: PROCEDURE : Поиск
-  STRING OPERATOR :: IN : anItem
- ; // Поиск
 ; // array:HasText
 Struct Array:Item
 VOID Array:Iterate
@@ -856,6 +866,7 @@ IMMEDIATE VOID OPERATOR : axiom:CLASS
 IMMEDIATE VOID OPERATOR : axiom:CompileSetValueTypes
  TtfwValueTypes OPERATOR :: IN : aValues
 ; // axiom:CompileSetValueTypes
+PROTECTED : : axiom:DefineBox
 PROTECTED : : axiom:DefineVar
 PROTECTED VOID : : axiom:DefineVarWithInit
  STRING OPERATOR :: IN : aName
@@ -888,6 +899,9 @@ STRING OPERATOR : axiom:SourceInfo
 begin
 BEGIN
 IMMEDIATE VOID OPERATOR : BOOLEAN
+IMMEDIATE VOID OPERATOR : BOX
+ ^L OPERATOR :: IN : aName
+; // BOX
 VOID break
 VOID BREAK
 VOID BREAK-ITERATOR
@@ -1033,6 +1047,7 @@ TClass class::TkwCompiledIfElse
 TClass class::TkwCompiledIncluded
 TClass class::TkwCompiledMain
 TClass class::TkwCompiledProcedure
+TClass class::TkwCompiledProcedureCreate
 TClass class::TkwCompiledProcedureWithStackChecking
 TClass class::TkwCompiledPushWord
 TClass class::TkwCompiledRules
@@ -1167,11 +1182,7 @@ TClass class::TkwInc
 TClass class::TkwInclude
 TClass class::TkwIncluded
 TClass class::TkwIncludedPrim
-TClass class::TkwINCLUDES
-TClass class::TkwIncludesInChildren
 TClass class::TkwInlinedWord
-TClass class::TkwInnerIncluded
-TClass class::TkwInnerIncludedInChildren
 TClass class::TkwInteger
 TClass class::TkwIntToStr
 TClass class::TkwInvertROT
@@ -1188,6 +1199,8 @@ TClass class::TkwIsTypeOf
 TClass class::TkwIsUnder64
 TClass class::TkwIsVoid
 TClass class::TkwIsXE
+TClass class::TkwKeyValues
+TClass class::TkwKeyValuesCreate
 TClass class::TkwLeftParam
 TClass class::TkwLeftWordRefParam
 TClass class::TkwLESS
@@ -1261,8 +1274,10 @@ TClass class::TkwPopKeyWordDictionary
 TClass class::TkwPopKeywordFinderKeywordByName
 TClass class::TkwPopKeywordFinderParentFinder
 TClass class::TkwPopKeyWordName
+TClass class::TkwPopKeyWordSetWord
 TClass class::TkwPopKeyWordWord
 TClass class::TkwPopMainDictionaryCompiledCode
+TClass class::TkwPopNewWordDefinitorCheckRefcountVar
 TClass class::TkwPopNewWordDefinitorCheckVar
 TClass class::TkwPopNewWordDefinitorCheckWord
 TClass class::TkwPopNewWordDefinitorDefineInParameter
@@ -1290,7 +1305,6 @@ TClass class::TkwPopParserTokenLongString
 TClass class::TkwPopParserTokenType
 TClass class::TkwPopScriptEngineAddInitialization
 TClass class::TkwPopScriptEngineAsKeywordFinder
-TClass class::TkwPopScriptEngineCascadeDict
 TClass class::TkwPopScriptEngineCurrentCompilingDictionary
 TClass class::TkwPopScriptEngineDisableForHelp
 TClass class::TkwPopValueTypesAccepts
@@ -1302,6 +1316,8 @@ TClass class::TkwPopValueTypesEQ
 TClass class::TkwPopValueTypesHas
 TClass class::TkwPopValueTypesMakeCustomName
 TClass class::TkwPopValueTypesName
+TClass class::TkwPopWordBox
+TClass class::TkwPopWordBoxBoxed
 TClass class::TkwPopWordCodeIterator
 TClass class::TkwPopWordDecRef
 TClass class::TkwPopWordDirectives
@@ -1341,6 +1357,8 @@ TClass class::TkwPopWordParent
 TClass class::TkwPopWordProducer
 TClass class::TkwPopWordPublicateInMainDictionary
 TClass class::TkwPopWordRedefines
+TClass class::TkwPopWordSetKey
+TClass class::TkwPopWordSetParent
 TClass class::TkwPopWordSetProducer
 TClass class::TkwPopWordSetValue
 TClass class::TkwPopWordSetValuePrim
@@ -1355,6 +1373,8 @@ TClass class::TkwRAISE
 TClass class::TkwRandom
 TClass class::TkwRandomize
 TClass class::TkwReduceStackLevel
+TClass class::TkwRefcountGlobalVar
+TClass class::TkwRefcountVar
 TClass class::TkwRefParam
 TClass class::TkwRenameFile
 TClass class::TkwRGB2String
@@ -1397,17 +1417,25 @@ TClass class::TkwString
 TClass class::TkwStringChar
 TClass class::TkwStringCodePage
 TClass class::TkwStringConsistsOf
+TClass class::TkwStringDeleteDoubleChars
+TClass class::TkwStringDeleteDoubleSpaces
 TClass class::TkwStringFirstChar
 TClass class::TkwStringHasAnyOf
 TClass class::TkwStringInc
 TClass class::TkwStringLen
+TClass class::TkwStringLower
 TClass class::TkwStringPos
 TClass class::TkwStringPosEx
 TClass class::TkwStringReplace
 TClass class::TkwStringReplaceFirst
 TClass class::TkwStringShift
 TClass class::TkwStringSplit
+TClass class::TkwStringSubstring
 TClass class::TkwStringToChar
+TClass class::TkwStringTrim
+TClass class::TkwStringTrimLeft
+TClass class::TkwStringTrimRight
+TClass class::TkwStringUpper
 TClass class::TkwStrToInt
 TClass class::TkwSub
 TClass class::TkwSWAP
@@ -1744,6 +1772,7 @@ STRING guid::ItfwScriptCaller
 STRING guid::ItfwScriptEngine
 STRING guid::ItfwStoredValuesStack
 STRING guid::ItfwValueList
+STRING guid::ItfwWordBox
 VOID HALT
 BOOLEAN HasTabs
 VOID OPERATOR :: PROCEDURE : help
@@ -1768,7 +1797,6 @@ VOID OPERATOR : INC
  ^ OPERATOR :: IN : aWhatToIncrement
 ; // INC
 INCLUDE
-INCLUDES
 STRING FUNCTION : IndentStr
  INTEGER OPERATOR :: IN : anIndent
  STRING FUNCTION :: IndentStr : Result
@@ -1836,6 +1864,7 @@ ItfwScriptCaller
 ItfwScriptEngine
 ItfwStoredValuesStack
 ItfwValueList
+ItfwWordBox
 ARRAY Join
 ARRAY JOIN
 IMMEDIATE VOID OPERATOR :: TYPE : Lambda
@@ -1997,12 +2026,15 @@ INTEGER pop:String:CodePage
 INTEGER pop:String:CompareStr
 INTEGER pop:String:CompareText
 BOOLEAN pop:String:ConsistsOf
+STRING pop:String:DeleteDoubleChars
+STRING pop:String:DeleteDoubleSpaces
 BOOLEAN pop:String:EndsStr
 BOOLEAN pop:String:EndsText
 CHAR pop:String:FirstChar
 BOOLEAN pop:String:HasAnyOf
 STRING pop:String:Inc
 INTEGER pop:String:Len
+STRING pop:String:Lower
 INTEGER pop:String:Pos
 INTEGER pop:String:PosEx
 STRING pop:String:Replace
@@ -2014,9 +2046,14 @@ STRING pop:String:Split
 BOOLEAN pop:String:StartsStr
 BOOLEAN pop:String:StartsText
 INTEGER pop:String:StrToInt
+STRING pop:String:Substring
 STRING pop:String:text_Replace
 STRING pop:String:text_ReplaceFirst
 CHAR pop:String:ToChar
+STRING pop:String:Trim
+STRING pop:String:TrimLeft
+STRING pop:String:TrimRight
+STRING pop:String:Upper
 VOID OPERATOR :: PROCEDURE : Print
  PRINTABLE OPERATOR :: IN : aValue
 ; // Print
@@ -2119,7 +2156,6 @@ INTEGER StopTimerEx
 IMMEDIATE VOID OPERATOR : string
 String
 IMMEDIATE VOID OPERATOR : STRING
-IMMEDIATE VOID OPERATOR : String$Define
 CHAR string:[]
 CHAR string:[]++!
 CHAR string:[i]
@@ -2129,9 +2165,12 @@ STRING string:++
 VOID string:++!
 INTEGER string:CodePage
 BOOLEAN string:ConsistsOf
+STRING string:DeleteDoubleChars
+STRING string:DeleteDoubleSpaces
 BOOLEAN string:HasAnyOf
 INTEGER string:Len
 VOID string:--Len!
+STRING string:Lower
 INTEGER string:Pos
 INTEGER string:PosEx
 STRING string:Replace
@@ -2139,7 +2178,12 @@ STRING string:ReplaceFirst
 STRING string:RSplitTo!
 STRING string:Split
 STRING string:SplitTo!
+STRING string:Substring
 CHAR string:ToChar
+STRING string:Trim
+STRING string:TrimLeft
+STRING string:TrimRight
+STRING string:Upper
 STRING FUNCTION : strings:Cat
  ARRAY OPERATOR :: IN : anArray
  STRING FUNCTION :: strings:Cat : Result
@@ -2223,6 +2267,7 @@ TkwCompiledIfElse
 TkwCompiledIncluded
 TkwCompiledMain
 TkwCompiledProcedure
+TkwCompiledProcedureCreate
 TkwCompiledProcedureWithStackChecking
 TkwCompiledPushWord
 TkwCompiledRules
@@ -2357,11 +2402,7 @@ TkwInc
 TkwInclude
 TkwIncluded
 TkwIncludedPrim
-TkwINCLUDES
-TkwIncludesInChildren
 TkwInlinedWord
-TkwInnerIncluded
-TkwInnerIncludedInChildren
 TkwInteger
 TkwIntToStr
 TkwInvertROT
@@ -2378,6 +2419,8 @@ TkwIsTypeOf
 TkwIsUnder64
 TkwIsVoid
 TkwIsXE
+TkwKeyValues
+TkwKeyValuesCreate
 TkwLeftParam
 TkwLeftWordRefParam
 TkwLESS
@@ -2451,8 +2494,10 @@ TkwPopKeyWordDictionary
 TkwPopKeywordFinderKeywordByName
 TkwPopKeywordFinderParentFinder
 TkwPopKeyWordName
+TkwPopKeyWordSetWord
 TkwPopKeyWordWord
 TkwPopMainDictionaryCompiledCode
+TkwPopNewWordDefinitorCheckRefcountVar
 TkwPopNewWordDefinitorCheckVar
 TkwPopNewWordDefinitorCheckWord
 TkwPopNewWordDefinitorDefineInParameter
@@ -2480,7 +2525,6 @@ TkwPopParserTokenLongString
 TkwPopParserTokenType
 TkwPopScriptEngineAddInitialization
 TkwPopScriptEngineAsKeywordFinder
-TkwPopScriptEngineCascadeDict
 TkwPopScriptEngineCurrentCompilingDictionary
 TkwPopScriptEngineDisableForHelp
 TkwPopValueTypesAccepts
@@ -2492,6 +2536,8 @@ TkwPopValueTypesEQ
 TkwPopValueTypesHas
 TkwPopValueTypesMakeCustomName
 TkwPopValueTypesName
+TkwPopWordBox
+TkwPopWordBoxBoxed
 TkwPopWordCodeIterator
 TkwPopWordDecRef
 TkwPopWordDirectives
@@ -2531,6 +2577,8 @@ TkwPopWordParent
 TkwPopWordProducer
 TkwPopWordPublicateInMainDictionary
 TkwPopWordRedefines
+TkwPopWordSetKey
+TkwPopWordSetParent
 TkwPopWordSetProducer
 TkwPopWordSetValue
 TkwPopWordSetValuePrim
@@ -2545,6 +2593,8 @@ TkwRAISE
 TkwRandom
 TkwRandomize
 TkwReduceStackLevel
+TkwRefcountGlobalVar
+TkwRefcountVar
 TkwRefParam
 TkwRenameFile
 TkwRGB2String
@@ -2587,17 +2637,25 @@ TkwString
 TkwStringChar
 TkwStringCodePage
 TkwStringConsistsOf
+TkwStringDeleteDoubleChars
+TkwStringDeleteDoubleSpaces
 TkwStringFirstChar
 TkwStringHasAnyOf
 TkwStringInc
 TkwStringLen
+TkwStringLower
 TkwStringPos
 TkwStringPosEx
 TkwStringReplace
 TkwStringReplaceFirst
 TkwStringShift
 TkwStringSplit
+TkwStringSubstring
 TkwStringToChar
+TkwStringTrim
+TkwStringTrimLeft
+TkwStringTrimRight
+TkwStringUpper
 TkwStrToInt
 TkwSub
 TkwSWAP
@@ -2752,9 +2810,6 @@ IMMEDIATE VOID OPERATOR : var
 IMMEDIATE VOID OPERATOR : VAR
  ^L OPERATOR :: IN : aName
 ; // VAR
-IMMEDIATE VOID OPERATOR : var$Define
- ^L OPERATOR :: IN : aName
-; // var$Define
 IMMEDIATE VOID OPERATOR :: TYPE : VAR_REF
 IMMEDIATE VOID OPERATOR :: TYPE : VARIANT
 STRING FUNCTION : VarMsgToStr
@@ -2936,6 +2991,7 @@ TtfwValueTypes Ctx:ValueTypes
 TtfwWord Ctx:WordDefiningNow
 TtfwWordInfo Ctx:WordInfo
 Dictionary: axiom:NewWordDefinitor
+TtfwWord pop:NewWordDefinitor:CheckRefcountVar
 TtfwWord pop:NewWordDefinitor:CheckVar
 TtfwKeyWord pop:NewWordDefinitor:CheckWord
 TtfwWord pop:NewWordDefinitor:DefineInParameter
@@ -2948,6 +3004,7 @@ TtfwWord pop:Compiler:KeywordFinder
 TtfwWord pop:Compiler:NewWordDefinitor
 VOID pop:Compiler:SetToCtx
 Dictionary: axiom:Word
+ItfwWordBox pop:Word:Box
 ARRAY pop:Word:CodeIterator
 VOID pop:Word:DecRef
 STRING pop:Word:Directives
@@ -2960,6 +3017,10 @@ TtfwWord OPERATOR : pop:Word:GetRefDeep
  TtfwWord OPERATOR :: IN : aSelf
  TtfwWord OPERATOR :: pop:Word:GetRefDeep : Result
 ; // pop:Word:GetRefDeep
+TtfwWord OPERATOR : pop:Word:GetRefDeepest
+ TtfwWord OPERATOR :: IN : aSelf
+ TtfwWord OPERATOR :: pop:Word:GetRefDeepest : Result
+; // pop:Word:GetRefDeepest
 VOID pop:Word:IncRef
 TtfwWordInfo pop:Word:Info
 TtfwDictionary pop:Word:InnerDictionary
@@ -2980,6 +3041,8 @@ VOID OPERATOR :: PROCEDURE : pop:Word:Print
 TtfwWord pop:Word:Producer
 VOID pop:Word:PublicateInMainDictionary
 TtfwWord pop:Word:Redefines
+VOID pop:Word:SetKey
+VOID pop:Word:SetParent
 VOID pop:Word:SetProducer
 VOID pop:Word:SetValue
 VOID pop:Word:SetValuePrim
@@ -2992,6 +3055,7 @@ VOID OPERATOR :: PROCEDURE : pop:KeyWord:Print
  STRING OPERATOR :: IN : anIndent
  TtfwWord OPERATOR :: VAR : l_Word
 ; // pop:KeyWord:Print
+VOID pop:KeyWord:SetWord
 TtfwWord pop:KeyWord:Word
 Dictionary: axiom:Parser
 STRING pop:Parser:FileName
@@ -3025,7 +3089,6 @@ STRING application:ExeName
 Dictionary: axiom:ScriptEngine
 VOID pop:ScriptEngine:AddInitialization
 TtfwWord pop:ScriptEngine:AsKeywordFinder
-BOOLEAN pop:ScriptEngine:CascadeDict
 TtfwDictionaryEx pop:ScriptEngine:CurrentCompilingDictionary
 VOID pop:ScriptEngine:DisableForHelp
 Dictionary: axiom:DictionaryEx
@@ -3057,7 +3120,6 @@ STRING TtfwValueType:ValueToName
 Dictionary: axiom:TtfwWordModifier
 TtfwWordModifier TtfwWordModifier::tfw_wmAbstract
 TtfwWordModifier TtfwWordModifier::tfw_wmCaller
-TtfwWordModifier TtfwWordModifier::tfw_wmCanBeMerged
 TtfwWordModifier TtfwWordModifier::tfw_wmFinal
 TtfwWordModifier TtfwWordModifier::tfw_wmImmediate
 TtfwWordModifier TtfwWordModifier::tfw_wmInline
@@ -3092,6 +3154,10 @@ PRIVATE STRING FUNCTION : private:CheckSpaces
  STRING OPERATOR :: IN : aName
  PRIVATE STRING FUNCTION :: private:CheckSpaces : Result
 ; // private:CheckSpaces
+PRIVATE : : private:DefineBoxEx
+ STRING OPERATOR :: IN : aName
+ OBJECT OPERATOR :: IN : aStereo
+; // private:DefineBoxEx
 IMMEDIATE PRIVATE VOID OPERATOR : private:DefineNameParam
 PRIVATE OPERATOR : private:DefineParam
 PRIVATE : : private:DefineVarEx

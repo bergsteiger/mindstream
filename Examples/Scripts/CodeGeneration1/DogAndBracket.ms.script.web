@@ -1,23 +1,13 @@
-// DogAndBracket.ms.script
+PROGRAM DogAndBracket.ms.script
 
 USES
  DogAndBracket.ms.dict
  Testing.ms.dict
- Documentation.ms.dict
 ;
 
-Test DogAndBracketTest
-
-RunTests.in.array @[ @( @[ ]
- %REMARK 'Запускаем тесты к указанным скриптовым словам'
-
-USES
- CodeDump.ms.dict
-;
-
-@SELF DumpElement
- %REMARK 'Дампим собственный код в стандартный вывод чисто для отладки'
-
+Test&Dump DogAndBracketTest
+ RunTests.in.array @[ @( @[ ]
+  %REMARK 'Запускаем тесты к указанным скриптовым словам' 
 ; // DogAndBracketTest
 
 DogAndBracketTest

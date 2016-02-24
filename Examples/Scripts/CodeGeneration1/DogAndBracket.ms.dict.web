@@ -1,4 +1,4 @@
-// DogAndBracket.ms.dict
+UNIT DogAndBracket.ms.dict
 
 USES
  axiom:Tl3TokenType
@@ -18,7 +18,7 @@ Procedure DogAndBracket
  INTERFACE var l_Parser 
  Ctx:Parser &gt;&gt;&gt; l_Parser
  ARRAY var l_A
- l_A := [ ]
+ l_A := []
 
  l_Parser pop:Parser:NextToken
  while true
@@ -60,6 +60,10 @@ Procedure DogAndBracket
  end // while true
 ; // DogAndBracket
 
+USES
+ TestAndDumpStack.ms.dict
+;
+
 MACRO @(
  %SUMMARY '
  Компилирует СПИСОК адресов слов.
@@ -72,7 +76,7 @@ MACRO @(
 ; // @(
 
 TestsFor @(
- Test T1 @( 1 2 3 4 5 6 1 2 + '123' ) WHILE ( StackLevel &gt; 0 ) Print ;
+ Test&DumpStack T1 @( 1 2 3 4 5 6 1 2 + '123' ) ;
 ; // TestsFor @(
 
 MACRO @[
@@ -87,6 +91,6 @@ MACRO @[
 ; // @[
 
 TestsFor @[
- Test T1 @[ 1 2 3 4 5 6 1 2 + '123' ] WHILE ( StackLevel &gt; 0 ) Print ;
+ Test&DumpStack T1 @[ 1 2 3 4 5 6 1 2 + '123' ] ;
 ; // TestsFor @[
 

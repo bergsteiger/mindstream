@@ -628,7 +628,7 @@ STACK_CHANGING_MACRO constructor
  begin
   if ( g_ConstructorsCopied ! ) then
   begin
-   l_Name Log
+   // l_Name Log
    CopyConstructors
   end // g_ConstructorsCopied !
  end // l_Name <> cDefConstructorName
@@ -637,7 +637,7 @@ STACK_CHANGING_MACRO constructor
   g_ConstructorsCopied := true
  end // l_Name <> cDefConstructorName
 
- g_CurrentClass l_Name MakeMethodSignaturePrim Log
+ // g_CurrentClass l_Name MakeMethodSignaturePrim Log
 
  @SELF CompileSetWordProducerForCompiledClass
  axiom:PushStringAsSymbol g_CurrentClass

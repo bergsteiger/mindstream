@@ -1,0 +1,1 @@
+D:\Delphi7\Bin\brcc32.exe m2xltlib.rc

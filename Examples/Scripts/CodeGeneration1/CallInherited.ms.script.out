@@ -1,0 +1,88 @@
+VOID TestWithDump CallInheritedTest
+ : A
+  INTEGER IN Self
+  Self
+  1
+  +
+ ; // : A
+ 
+ : B
+  Inherits %G
+   A
+  ; // Inherits %G
+  
+  INTEGER IN Self
+  Self
+  2
+  +
+  Self
+  A
+  +
+ ; // : B
+ 
+ : C
+  Inherits %G
+   B
+  ; // Inherits %G
+  
+  INTEGER IN Self
+  Self
+  3
+  +
+  Self
+  B
+  +
+ ; // : C
+ 
+ : D
+  Inherits %G
+   C
+  ; // Inherits %G
+  
+  INTEGER IN Self
+  Self
+  4
+  +
+  Self
+  C
+  +
+ ; // : D
+ 
+ : E
+  Inherits %G
+   D
+  ; // Inherits %G
+  
+  INTEGER IN Self
+  Self
+  5
+  +
+  Self
+  D
+  +
+ ; // : E
+ 
+ CallInheritedTest
+ DumpElement
+ 1
+ A
+ .
+ 2
+ B
+ .
+ 3
+ C
+ .
+ 4
+ D
+ .
+ 5
+ E
+ .
+; // VOID TestWithDump CallInheritedTest
+
+2
+7
+15
+26
+40

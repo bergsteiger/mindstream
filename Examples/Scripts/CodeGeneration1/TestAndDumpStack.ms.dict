@@ -1,0 +1,30 @@
+UNIT TestAndDumpStack.ms.dict
+
+USES
+ axiom_push.ms.dict
+ DumpStack.ms.dict
+;
+
+MACRO _CompileCodeRefAndFree
+ TtfwWord IN aCode
+ aCode CompileRef
+ aCode pop:Word:DecRef
+; // _CompileCodeRefAndFree
+
+STACK_CHANGING_MACRO Test&DumpStack
+ Literal IN aName
+ ^ IN aCode
+ 
+ axiom:PushSymbol Test
+ aName |N Ctx:Parser:PushSymbol
+
+ aCode pop:Word:IncRef
+ aCode
+ axiom:PushSymbol _CompileCodeRefAndFree
+
+ axiom:PushSymbol .DumpStack
+ axiom:PushSymbol ;
+; // Test&DumpStack
+
+EXPORTS
+ DumpStack.ms.dict

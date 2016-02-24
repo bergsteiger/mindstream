@@ -1,0 +1,61 @@
+PROGRAM CallInherited.ms.script
+
+USES
+ classRelations.ms.dict
+ CallInherited.ms.dict
+ Testing.ms.dict
+;
+
+Test&Dump CallInheritedTest
+
+ : A
+  INTEGER IN Self
+  Self 1 +
+ ; // A
+
+ : B
+  INTEGER IN Self
+
+  Inherits A
+
+  Self 2 +
+  call.inherited +
+ ; // B
+
+ : C
+  INTEGER IN Self
+
+  Inherits B
+
+  Self 3 +
+  call.inherited +
+ ; // C
+
+ : D
+  INTEGER IN Self
+
+  Inherits C
+
+  Self 4 +
+  call.inherited +
+ ; // D
+
+ : E
+  INTEGER IN Self
+
+  Inherits D
+
+  Self 5 +
+  Self .inherited +
+  //call.inherited +
+ ; // E
+
+ 1 A .
+ 2 B .
+ 3 C .
+ 4 D .
+ 5 E .
+
+; // CallInheritedTest
+
+CallInheritedTest

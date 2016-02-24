@@ -1,0 +1,206 @@
+PROGRAM Etalon.ms.script
+
+USES
+ axiom_push.ms.dict
+;
+
+USES
+ io.ms.dict
+;
+
+USES
+ DumpStack.ms.dict
+;
+
+USES
+ SaveVarAndDo.ms.dict
+;
+
+USES
+ Testing.ms.dict
+;
+
+USES
+ CompileTimeVar.ms.dict
+;
+
+Test&Dump Etalon.ms.script.test
+ 
+ FILE VAR g_OutFile
+ %REMARK 'Текущий файл'
+ ( nil &gt;&gt;&gt; g_OutFile )
+ INTEGER VAR g_EtalonLevel
+ ( 0 &gt;&gt;&gt; g_EtalonLevel )
+ ARRAY VAR g_EtalonPath
+ ( [ 0 ] &gt;&gt;&gt; g_EtalonPath )
+
+ PROCEDURE Out
+   IN aValue
+  g_OutFile IsNil ?FAIL 'Файл для вывода не открыт'
+  aValue ToPrintable g_OutFile File:WriteLn
+ ; // Out
+
+ CONST cCompareUtilCmd 'q:\afc.cmd'
+ %REMARK 'Путь к утилите сравнения'
+ 
+ PROCEDURE Etalon.do
+   IN aLambda
+
+  CONST cPathSep '\'
+
+  BOOLEAN FUNCTION FileIsEmpty
+    STRING IN aFileName
+   aFileName FileSize 0 == &gt;&gt;&gt; Result
+  ; // FileIsEmpty
+  
+  PROCEDURE DeleteEmptyFile
+    STRING IN aFileName
+   aFileName FileIsEmpty ? (
+    aFileName sysutils:FileExists ? (
+     aFileName DeleteFile DROP
+    ) // aFileName sysutils:FileExists
+   ) // aFileName FileSize 0 ==
+  ; // DeleteEmptyFile
+
+  STRING VAR l_EtalonFileName
+  STRING VAR l_CurrentDir
+  script:FileName sysutils:ExtractFilePath &gt;&gt;&gt; l_CurrentDir
+  script:FileName sysutils:ExtractFileName &gt;&gt;&gt; l_EtalonFileName
+
+  if ( l_CurrentDir IsNil ) then
+  begin
+   sysutils:GetCurrentDir &gt;&gt;&gt; l_CurrentDir
+  end // l_CurrentDir IsNil
+
+  [ 
+    l_EtalonFileName 
+    [ g_EtalonPath .map&gt; IntToStr .for&gt; ( '.' SWAP Cat ) ] strings:Cat
+  ] strings:Cat &gt;&gt;&gt; l_EtalonFileName
+
+  CONST cPrnExt '.prn'
+  STRING VAR l_OutFileName
+  l_EtalonFileName &gt;&gt;&gt; l_OutFileName
+  l_OutFileName cPrnExt Cat &gt;&gt;&gt; l_OutFileName
+
+  [ l_CurrentDir 'Etalons' [ l_EtalonFileName cPrnExt '.etalon' ] strings:Cat ] cPathSep strings:CatSep &gt;&gt;&gt; l_EtalonFileName
+
+  STRING VAR l_OutDir
+  [ l_CurrentDir 'Out' ] cPathSep strings:CatSep &gt;&gt;&gt; l_OutDir
+  l_OutDir sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_OutDir ]
+  [ l_OutDir l_OutFileName ] cPathSep strings:CatSep &gt;&gt;&gt; l_OutFileName
+
+  TF g_OutFile (
+   l_OutFileName File:OpenWrite &gt;&gt;&gt; g_OutFile
+   DumpStackTo (
+    aLambda DO 
+   ) Out
+   nil &gt;&gt;&gt; g_OutFile
+  ) // TF g_OutFile
+
+  if ( l_EtalonFileName sysutils:FileExists ) then
+  begin
+   '' l_EtalonFileName l_OutFileName CompareFiles ! ? (
+    cCompareUtilCmd sysutils:FileExists ?ASSURE [ 'Не найдена утилита сравнения: ' cCompareUtilCmd ]
+    STRING VAR l_Compare
+    [ cCompareUtilCmd ' ' l_EtalonFileName ' ' l_OutFileName ] strings:Cat &gt;&gt;&gt; l_Compare
+    l_Compare WinExec
+    %REMARK 'Вызываем внешнюю утилиту сравнения файлов'
+   )
+  end // l_EtalonFileName sysutils:FileExists
+  else
+  begin
+   $20 l_EtalonFileName l_OutFileName CopyFile
+  end // l_EtalonFileName sysutils:FileExists
+  
+  l_EtalonFileName DeleteEmptyFile
+  l_OutFileName DeleteEmptyFile
+
+ ; // Etalon.do
+
+ PROCEDURE Etalon
+   ^ IN aLambda
+
+  ARRAY VAR l_EtalonPathCopy
+  [ g_EtalonPath .for&gt; NOP ] &gt;&gt;&gt; l_EtalonPathCopy
+
+  INTEGER VAR l_EtalonPathCount
+  l_EtalonPathCopy Array:Count &gt;&gt;&gt; l_EtalonPathCount
+
+  g_EtalonLevel &gt;= 0 ?ASSURE [ 'g_EtalonLevel is bad: ' g_EtalonLevel IntToStr ]
+
+  TF g_EtalonLevel (
+   INC g_EtalonLevel
+
+   if ( g_EtalonLevel &gt; l_EtalonPathCount ) then
+   begin
+    0 &gt;&gt;&gt;[] g_EtalonPath
+   end
+
+   aLambda Etalon.do
+
+   if ( g_EtalonLevel &lt; ( g_EtalonPath Array:Count ) ) then
+   begin
+    l_EtalonPathCopy &gt;&gt;&gt; g_EtalonPath 
+   end
+
+   INTEGER VAR l_Index
+   g_EtalonPath Array:Count &gt;&gt;&gt; l_Index
+   Dec l_Index 
+   l_Index &gt;= 0 ?ASSURE 'Индекс не может быть отрицательным'
+
+   INTEGER VAR l_Value
+   l_Index g_EtalonPath Array:Item &gt;&gt;&gt; l_Value
+   l_Value &gt;= 0 ?ASSURE 'Значение не может быть отрицательным'
+
+   Inc l_Value
+
+   l_Index g_EtalonPath Array:Item := l_Value
+  ) // TF g_EtalonLevel
+
+ ; // Etalon
+
+ Etalon ( script:FileName sysutils:ExtractFileName )
+ Etalon (
+  ( 1 2 + )
+  Etalon 'Inner1'
+  Etalon 'Inner2'
+  'Outer1'
+ )
+ Etalon 'Outer2'
+ Etalon 'Hello world'
+ Etalon ()
+ Etalon []
+ Etalon 1
+ Etalon 'Another string'
+ Etalon ''
+
+ Etalon (
+  'Root'
+  Etalon 'Nested1'
+  Etalon ( 
+   'Nested2'
+   Etalon 'Nested2.1'
+   Etalon 'Nested2.2'
+   Etalon 'Nested2.3'
+  )
+  Etalon (
+   'Nested3'
+   Etalon ( 
+    'Nested3.1'
+    Etalon 'Nested3.1.1'
+    Etalon 'Nested3.1.2'
+   )
+   Etalon 'Nested3.2'
+   Etalon (
+    'Nested3.3'
+    Etalon 'Nested3.3.1'
+   )
+   Etalon 'Nested3.4'
+   Etalon 'Nested3.5'
+  )
+  Etalon 'Nested4'
+  Etalon 'Nested5'
+ )
+; // Etalon.ms.script.test
+
+Etalon.ms.script.test

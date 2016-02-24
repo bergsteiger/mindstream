@@ -1,0 +1,316 @@
+VOID TestWithDump CacheFunction.ms.script.test
+ : A
+  STRING FUNCTION X
+   'A.X'
+   Result
+   pop:Word:SetValue
+  ; // STRING FUNCTION X
+  
+  STRING FUNCTION Y
+   'A.Y'
+   Result
+   pop:Word:SetValue
+  ; // STRING FUNCTION Y
+  
+  STRING FUNCTION Z
+   'A.Z'
+   Result
+   pop:Word:SetValue
+  ; // STRING FUNCTION Z
+  
+ ; // : A
+ 
+ : B
+  STRING FUNCTION X
+   'B.X'
+   Result
+   pop:Word:SetValue
+  ; // STRING FUNCTION X
+  
+  STRING FUNCTION Y
+   'B.Y'
+   Result
+   pop:Word:SetValue
+  ; // STRING FUNCTION Y
+  
+  STRING FUNCTION Z
+   'B.Z'
+   Result
+   pop:Word:SetValue
+  ; // STRING FUNCTION Z
+  
+ ; // : B
+ 
+ IMMEDIATE VOID MACRO Cache
+  axiom:PushSymbol
+  @SELF
+  axiom:PushSymbol
+  Cache.do
+ ; // IMMEDIATE VOID MACRO Cache
+ 
+ : Cache.do
+  TtfwWord IN aCacheWhat
+  TtfwWord IN aCacheWhere
+  ^ IN aLambda
+  STRING VAR l_CacheWhat
+  VAR l_FieldVar
+  ARRAY [
+   'cached'
+   aCacheWhat
+   .Parent.Words
+   (
+    class::TkwCompiledMain
+    SWAP
+    pop:Object:Inherits
+    !
+   )
+   SWAP
+   Array:Filter
+   (
+    pop:Word:Parent
+    class::TkwCompiledMain
+    SWAP
+    pop:Object:Inherits
+    !
+   )
+   SWAP
+   Array:Filter
+   pop:Word:Name
+   SWAP
+   Array:Iterate
+   aCacheWhat
+   pop:Word:Name
+  ]
+  ':'
+  strings:CatSep
+  l_CacheWhat
+  pop:Word:SetValue
+  aCacheWhere
+  %%
+  l_CacheWhat
+  l_FieldVar
+  pop:Word:SetValue
+  if
+   (
+    l_FieldVar
+    NotValid
+   )
+  then
+   BEGIN
+    VAR l_NewVar
+    l_CacheWhat
+    false
+    aCacheWhere
+    pop:NewWordDefinitor:CheckVar
+    l_NewVar
+    pop:Word:SetValue
+    Cache.do
+    l_NewVar
+    pop:Word:SetProducer
+    aLambda
+    DO
+    l_NewVar
+    pop:Word:SetValue
+    l_NewVar
+    DO
+   END
+  else
+   BEGIN
+    l_FieldVar
+    DO
+   END
+ ; // : Cache.do
+ 
+ STRING FUNCTION X
+  STRING IN aPrefix
+  TtfwWord IN aWord
+  aPrefix
+  aWord
+  X
+  Cache.do
+  (
+   aWord
+   %%
+   (
+    X
+    pop:Word:Name
+   )
+   DO
+  )
+  Cat
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION X
+ 
+ STRING FUNCTION Y
+  STRING IN aPrefix
+  TtfwWord IN aWord
+  aPrefix
+  aWord
+  Y
+  Cache.do
+  (
+   aWord
+   %%
+   (
+    Y
+    pop:Word:Name
+   )
+   DO
+  )
+  Cat
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Y
+ 
+ STRING FUNCTION Z
+  STRING IN aPrefix
+  TtfwWord IN aWord
+  aPrefix
+  aWord
+  Z
+  Cache.do
+  (
+   aWord
+   %%
+   (
+    Z
+    pop:Word:Name
+   )
+   DO
+  )
+  Cat
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Z
+ 
+ CacheFunction.ms.script.test
+ DumpElement
+ '1'
+ @
+ A
+ X
+ .
+ '2'
+ @
+ B
+ X
+ .
+ '3'
+ @
+ A
+ X
+ .
+ '4'
+ @
+ B
+ X
+ .
+ '1'
+ @
+ A
+ Y
+ .
+ '2'
+ @
+ B
+ Y
+ .
+ '3'
+ @
+ A
+ Y
+ .
+ '4'
+ @
+ B
+ Y
+ .
+ '1'
+ @
+ A
+ Z
+ .
+ '2'
+ @
+ B
+ Z
+ .
+ '3'
+ @
+ A
+ Z
+ .
+ '4'
+ @
+ B
+ Z
+ .
+ @
+ A
+ DumpElement
+ @
+ B
+ DumpElement
+; // VOID TestWithDump CacheFunction.ms.script.test
+
+1A.X
+2B.X
+3A.X
+4B.X
+1A.Y
+2B.Y
+3A.Y
+4B.Y
+1A.Z
+2B.Z
+3A.Z
+4B.Z
+: A
+ Cache.do cached:X
+ Cache.do cached:Y
+ Cache.do cached:Z
+ STRING FUNCTION X
+  'A.X'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION X
+ 
+ STRING FUNCTION Y
+  'A.Y'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Y
+ 
+ STRING FUNCTION Z
+  'A.Z'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Z
+ 
+; // : A
+
+: B
+ Cache.do cached:X
+ Cache.do cached:Y
+ Cache.do cached:Z
+ STRING FUNCTION X
+  'B.X'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION X
+ 
+ STRING FUNCTION Y
+  'B.Y'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Y
+ 
+ STRING FUNCTION Z
+  'B.Z'
+  Result
+  pop:Word:SetValue
+ ; // STRING FUNCTION Z
+ 
+; // : B
+

@@ -1,0 +1,90 @@
+UNIT CallAncestor.ms.dict
+
+USES
+ core.ms.dict
+;
+
+USES
+ WordsRTTI.ms.dict
+;
+
+ TtfwWord FUNCTION .find.ancestor.method
+   STRING IN aWordName
+   TtfwWord IN aWhereToSearch
+
+  nil >>> Result
+
+  aWhereToSearch .Inherited.Words .for> ( 
+   TtfwWord IN l_Ancestor
+
+   TtfwWord VAR l_AncestorMember 
+   l_Ancestor %% aWordName >>> l_AncestorMember
+   if ( l_AncestorMember IsNil ! ) then
+   begin
+    Result IsNil OR ( l_AncestorMember = Result ) 
+     ?ASSURE 
+      [ 'Method ' aWordName ' was already found in ' Result pop:Word:Parent pop:Word:Name ]
+    l_AncestorMember >>> Result
+   end // l_AncestorMember IsNil !
+  ) // aWhereToSearch .Inherited.Words .for>
+
+  if ( Result IsNil ) then
+  begin
+   aWhereToSearch .Inherited.Words .for> ( 
+    TtfwWord IN anAncestor
+    TtfwWord VAR l_Found
+    aWordName anAncestor call.me >>> l_Found
+    l_Found >>> Result 
+   ) // aWhereToSearch .Inherited.Words .for>
+  end // Result IsNil
+ ; // .find.ancestor.method
+
+ TtfwWord FUNCTION .find.method
+   STRING IN aWordName
+   TtfwWord IN aWhereToSearch
+  aWhereToSearch %% aWordName >>> Result
+
+  if ( Result IsNil ) then
+  begin
+   aWordName aWhereToSearch .find.ancestor.method >>> Result
+  end // Result IsNil
+ ; // .find.method
+
+ : .call.method
+   STRING IN aWordName
+   TtfwWord IN aWhereToSearch
+  TtfwWord VAR l_Method
+  aWordName aWhereToSearch .find.method >>> l_Method
+  l_Method IsNil ?FAIL [ 'Method ' aWordName ' not found in word ' aWhereToSearch |N ]
+  l_Method DO
+ ; // .call.method
+
+ : ?->
+   ^@ IN aWhereToSearch
+   Literal IN aWordName
+
+  aWordName |N aWhereToSearch .call.method
+ ; // ?->
+
+ PROCEDURE .call.ancestor.do
+  STRING IN aWordName
+  TtfwWord IN aWord
+
+  TtfwWord VAR l_WordParent
+  aWord pop:Word:Parent >>> l_WordParent
+  l_WordParent IsNil ! ?ASSURE [ 'No parent for ' aWordName ]
+
+  TtfwWord VAR l_FoundWord
+  aWordName l_WordParent .find.ancestor.method >>> l_FoundWord
+
+  l_FoundWord IsNil ! ?ASSURE [ 'Method ' aWordName ' not found in ' l_WordParent pop:Word:Name ]
+  l_FoundWord CompileValue
+ ; // .call.ancestor.do
+
+ MACRO .call.ancestor
+  STRING VAR l_WordName
+  Ctx:KeyWordDefiningNow pop:KeyWord:Name >>> l_WordName
+  l_WordName IsNil ! ?ASSURE [ 'No name for word calling ' @SELF pop:Word:Name ]
+
+  l_WordName Ctx:WordDefiningNow .call.ancestor.do
+ ; // .call.ancestor

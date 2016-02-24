@@ -1,0 +1,32 @@
+UNIT DumpStack.ms.dict
+
+USES
+ io.ms.dict
+;
+
+PROCEDURE DumpStackTo
+  ^ IN aLambda
+ %REMARK 'Вычисляемое значение'
+  ^ IN aOutput
+ %REMARK 'Устройство вывода'
+
+ %SUMMARY 'Печатает состояние стека в "устройство" aOutput после вычисления выражения aLambda' ;
+
+ [ aLambda DO ] .for> ( aOutput DO )
+; // DumpStackTo
+
+PROCEDURE .DumpStack
+  IN aLambdaRef
+ %REMARK 'Вычисляемое значение'
+
+ %SUMMARY 'Печатает состояние стека после вычисления выражения aLambda' ;
+ DumpStackTo ( aLambdaRef DO ) Log
+; // .DumpStack
+
+PROCEDURE DumpStack
+  ^ IN aLambda
+ %REMARK 'Вычисляемое значение'
+
+ %SUMMARY 'Печатает состояние стека после вычисления выражения aLambda' ;
+ DumpStackTo ( aLambda DO ) Log
+; // DumpStack

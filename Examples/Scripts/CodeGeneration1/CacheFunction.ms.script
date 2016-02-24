@@ -1,0 +1,131 @@
+PROGRAM CacheFunction.ms.script
+
+USES
+ axiom_push.ms.dict
+;
+
+USES
+ WordsRTTI.ms.dict
+;
+
+USES
+ Testing.ms.dict
+;
+
+Test&Dump CacheFunction.ms.script.test
+
+ : Cache.do
+   TtfwWord IN aCacheWhere
+    %REMARK 'Где кешировать результат'
+   TtfwWord IN aCacheWhat
+    %REMARK 'Что кешировать'
+   ^ IN aLambda
+    %REMARK 'Лямбда, которая вычисляет результат'
+
+  STRING VAR l_CacheWhat
+  [ 'cached' 
+     aCacheWhat .Parent.Words 
+      .filter> ( class::TkwCompiledMain SWAP pop:Object:Inherits ! ) 
+      .filter> ( pop:Word:Parent class::TkwCompiledMain SWAP pop:Object:Inherits ! )
+       .for> pop:Word:Name 
+     aCacheWhat pop:Word:Name 
+  ] ':' strings:CatSep >>> l_CacheWhat
+
+  VAR l_FieldVar
+  aCacheWhere %% l_CacheWhat >>> l_FieldVar
+
+  if ( l_FieldVar NotValid ) then
+  begin
+   VAR l_NewVar
+   l_CacheWhat false aCacheWhere pop:NewWordDefinitor:CheckVar >>> l_NewVar
+   @SELF l_NewVar pop:Word:SetProducer
+   aLambda DO 
+   l_NewVar pop:Word:SetValue
+   l_NewVar DO
+  end // l_FieldVar NotValid
+  else
+  begin
+   l_FieldVar DO
+  end
+
+ ; // Cache.do
+
+ MACRO Cache
+  axiom:PushSymbol @SELF
+  axiom:PushSymbol Cache.do
+ ; // Cache
+
+ : A
+
+  STRING FUNCTION X
+   'A.X' >>> Result
+  ; // X
+
+  STRING FUNCTION Y
+   'A.Y' >>> Result
+  ; // Y
+
+  STRING FUNCTION Z
+   'A.Z' >>> Result
+  ; // Z
+
+ ; // A
+ 
+ : B
+
+  STRING FUNCTION X
+   'B.X' >>> Result
+  ; // X
+
+  STRING FUNCTION Y
+   'B.Y' >>> Result
+  ; // Y
+
+  STRING FUNCTION Z
+   'B.Z' >>> Result
+  ; // Z
+
+ ; // B
+ 
+ STRING FUNCTION X
+   STRING IN aPrefix
+   TtfwWord IN aWord
+  aPrefix aWord Cache ( aWord %% ( @SELF pop:Word:Name ) DO ) Cat >>> Result
+ ; // X
+
+ STRING FUNCTION Y
+   STRING IN aPrefix
+   TtfwWord IN aWord
+  aPrefix aWord Cache ( aWord %% ( @SELF pop:Word:Name ) DO ) Cat >>> Result
+ ; // Y
+
+ STRING FUNCTION Z
+   STRING IN aPrefix
+   TtfwWord IN aWord
+  aPrefix aWord Cache ( aWord %% ( @SELF pop:Word:Name ) DO ) Cat >>> Result
+ ; // Z
+
+ '1' @ A X .
+ '2' @ B X .
+
+ '3' @ A X .
+ '4' @ B X .
+
+ '1' @ A Y .
+ '2' @ B Y .
+
+ '3' @ A Y .
+ '4' @ B Y .
+
+ '1' @ A Z .
+ '2' @ B Z .
+
+ '3' @ A Z .
+ '4' @ B Z .
+
+ @ A DumpElement
+ @ B DumpElement
+
+; // CacheFunction.ms.script.test
+
+CacheFunction.ms.script.test
