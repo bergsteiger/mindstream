@@ -31,6 +31,15 @@ var
  l_CSVFileName, l_Files, l_FileName : String;
  i : integer;
  l_AllFilesStrings : TStrings;
+ procedure ParseFiles(aFiles : string);
+ var
+  l_Str : string;
+  l_Strings : TArray<string>;
+ begin
+  l_Strings := aFiles.Split([';'], none);
+  for l_Str in l_Strings do
+   l_NotDuplicateFiles.Add(l_Str);
+ end;
 begin
 // todo тут будем загружать список файлов и искать их, и копировать к нам в папку.
  l_CSVFileName := ExtractFileDir(ParamStr(0)) + '\Units.csv';
@@ -46,11 +55,15 @@ begin
  l_AllFilesStrings.LoadFromFile();}
  try
   l_AllFiles.LoadFromFile(l_CSVFileName);
-  {for I := Low to High do}
-  l_NotDuplicateFiles.Add('qwe');
-  l_NotDuplicateFiles.Add('qwe');
-  l_NotDuplicateFiles.Add('qwe');
+
+  for I := 0 to l_AllFiles.Count - 1 do
+  begin
+   l_Files := l_AllFiles[I];
+   ParseFiles(l_Files);
+  end;
+  l_NotDuplicateFiles.Sort;
   lb1.Items.AddStrings(l_NotDuplicateFiles);
+  ShowMessage(IntToStr(l_NotDuplicateFiles.Count));
  finally
   FreeAndNil(l_AllFiles);
   FreeAndNil(l_CopyFiles);
