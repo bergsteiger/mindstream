@@ -14,12 +14,26 @@ object Form6: TForm6
   PixelsPerInch = 96
   TextHeight = 13
   object btnFindAndCopy: TButton
-    Left = 136
-    Top = 192
-    Width = 75
-    Height = 25
+    Left = 0
+    Top = 248
+    Width = 418
+    Height = 33
+    Align = alBottom
     Caption = 'btnFindAndCopy'
     TabOrder = 0
     OnClick = btnFindAndCopyClick
+  end
+  object lb1: TListBox
+    Left = 0
+    Top = 0
+    Width = 418
+    Height = 248
+    Align = alClient
+    ItemHeight = 13
+    TabOrder = 1
+    ExplicitLeft = 104
+    ExplicitTop = 64
+    ExplicitWidth = 121
+    ExplicitHeight = 97
   end
 end
