@@ -2539,7 +2539,7 @@ ModelElement elem_func MethodType
          ( l_Type IsNil ! )
           ( l_Type .Target )
          DEFAULT
-          'Integer'
+          GarantModel::Integer
         ; // RULES  
        ) 
       DEFAULT
@@ -4533,6 +4533,26 @@ INTERFACE elem_func InstanceMethod
  >>> Result
 ; // InstanceMethod
 
+INTERFACE elem_func ExistsMethod
+ Cached:
+ (
+  VAR l_TypeName
+  Self .TypeName >>> l_TypeName
+  'Exists' GarantModel::Boolean MakeFunction
+  DUP
+  VAR l_Boxed
+  pop:WordBox:Boxed >>> l_Boxed
+  l_Boxed -> Stereotype := st_static::Operation
+  l_Boxed -> %SUM := 'Проверяет создан экземпляр синглетона или нет'
+  l_Boxed -> Visibility := PublicAccess
+  l_Boxed ->^ cVarUserCodeName ^:= cEmptyUserCode
+  l_Boxed ->^ cImplementationUserCodeName ^:= [ 
+  ' Result := g_' l_TypeName ' <> nil;'
+  ]
+ )
+ >>> Result
+; // ExistsMethod
+
 INTERFACE elem_func FakeMethod
  Cached:
  (
@@ -4600,6 +4620,27 @@ BOOLEAN elem_func IsServiceIterator
  Self .IsStereotype st_serviceiterator >>> Result
 ; // IsServiceIterator
 
+BOOLEAN elem_func UseNewGen
+ Cached:
+ (
+  RULES
+   ( Self IsNil )
+    false
+   ( Self .IsElementProxy )
+    true
+   ( Self .IsStereotype st_EVD )
+    false 
+   ( Self .UPisTrue "UseNewGen" )
+    true 
+   ( Self .GetUP "finished" false ?== ) 
+    true
+   DEFAULT
+    ( Self .Parent call.me )
+  ; // RULES
+ )
+ >>> Result
+; // UseNewGen
+
 elem_iterator AllOperationsForOverload
  Cached:
  (
@@ -4635,10 +4676,19 @@ elem_iterator AllOperationsForOverload
       .filter> ( .IsFini ! )
       .join> ( Self .Implemented )
       if ( Self .IsSingleton ) then
+      begin
        if ( Self .HasFactory ! ) then
        begin
         .join> [ Self .InstanceMethod ]
-       end // ( Self .IsSingleton )
+       end // ( Self .HasFactory ! )
+       if ( Self .UseNewGen ) then
+       begin
+        if ( Self .Operations .filter> ( .Name 'Exists' == ) .CountIt 0 == ) then
+        begin
+         .join> [ Self .ExistsMethod ]
+        end // ( Self .Operations .filter> ( .Name 'Exists' == ) .CountIt 0 == )
+       end // ( Self .UseNewGen )
+      end // ( Self .IsSingleton )
     )
    DEFAULT
     ( Self .Operations )
@@ -6673,25 +6723,6 @@ elem_proc OutMixIn
   [ cOpenComment '$EndIf ' l_DefineName cCloseComment \n ] .Out
  ) // DoOutUnit
 ; // OutMixIn
-
-BOOLEAN elem_func UseNewGen
- Cached:
- (
-  RULES
-   ( Self IsNil )
-    false
-   ( Self .IsElementProxy )
-    true
-   ( Self .IsStereotype st_EVD )
-    false 
-   ( Self .UPisTrue "UseNewGen" )
-    true 
-   DEFAULT
-    ( Self .Parent call.me )
-  ; // RULES
- )
- >>> Result
-; // UseNewGen
 
 STRING elem_func PasFinalFileName
  Self .GetUP 'intf.pas:Path' >>> Result
