@@ -2073,7 +2073,11 @@ elem_proc MethodUserCode
        VAR l_FieldName
        
        aField .GetUP 'extprop:clearViaProperty' >>> l_FieldName 
-       if ( l_FieldName IsNil ) then
+       
+       if (
+           ( aField .Target .IsRecord )
+           OR ( l_FieldName IsNil ) 
+          ) then
        begin
         aField .Name >>> l_FieldName
        end // ( l_FieldName IsNil )
@@ -3415,7 +3419,7 @@ elem_iterator NeededElementsFromInheritsOrImplements
  Cached:
  (
   ( Self .Inherits )
-  .join> ( Self .Implements )
+  .join> ( Self .Implements .filter> ( .IsEvdSchemaElement ! ) )
  )
  >>> Result
 ; // NeededElementsFromInheritsOrImplements
@@ -3960,17 +3964,52 @@ BOOLEAN CompileTime-VAR g_EnableMethodDirectives true
 BOOLEAN CompileTime-VAR g_EnableMethodDocumentation true
 
 ANY elem_func ExtValue
- Self .GetUP 'extprop:pas:Value' >>> Result
- if ( Result .IsValueValid ) then
- begin
-  if ( Result IsString ) then
+ Cached:
+ (
+  Self .GetUP 'extprop:pas:Value' >>> Result
+  if ( Result .IsValueValid ) then
   begin
-   if ( '.[]' Result EndsStr ) then
-   begin
-    '[]' >>> Result
-   end // ( '.[]' Result EndsStr )
-  end // ( Result IsString )
- end // ( Result .IsValueValid )
+   RULES
+    ( Result IsString )
+     begin
+      RULES
+       ( '.[]' Result EndsStr )
+        begin
+         '[]' >>> Result
+        end // ( '.[]' Result EndsStr )
+       DEFAULT
+        begin
+         VAR l_Type
+         Self .ValueType >>> l_Type
+         if ( l_Type IsNil ! ) then
+         begin
+          VAR l_Target
+          Self .Target >>> l_Target
+          if (
+              ( l_Target IsNil )
+              OR ( l_Target l_Type != ) 
+             ) then
+          begin
+           VAR l_Unit
+           l_Type .EffectiveUnitName >>> l_Unit
+           if ( Self .EffectiveUnitName l_Unit != ) then
+           begin 
+            l_Unit '.' Cat >>> l_Unit
+            if ( l_Unit Result StartsStr ! ) then
+            begin
+             l_Unit Result Cat >>> Result
+            end // ( l_Unit Result StartsStr ! ) 
+           end // ( Self .EffectiveUnitName l_Unit != )
+          end // ( Self .Target l_Type != )
+         end // ( l_Type IsNil ! )
+        end // DEFAULT
+      ; // RULES
+     end // ( Result IsString )
+   ; // RULES
+  end // ( Result .IsValueValid )
+  Result
+ )
+ >>> Result
 ; // ExtValue
 
 elem_proc MethodInterfacePrim
@@ -5786,6 +5825,10 @@ BOOLEAN elem_func IsConstants
  Self .IsStereotype st_Constants >>> Result
 ; // IsConstants
 
+BOOLEAN elem_func IsSetConst
+ Self .IsStereotype st_SetConst >>> Result
+; // IsSetConst
+
 BOOLEAN elem_func IsConstantArray
  Self .IsStereotype st_ConstantArray >>> Result
 ; // IsConstantArray
@@ -5840,6 +5883,49 @@ elem_proc OutConstants
      ');' 
     ] .Out
    ) // ( Self .IsConstantArray )
+   ( Self .IsSetConst )
+    (
+     [ 
+      Self .Name ' = '
+      RULES 
+       ( Self .Attributes .CountIt > 0 )
+        ( 
+         STRING VAR l_Prefix
+         Self .MainAncestor .GetUP 'extprop:pas:ElementPrefix' >>> l_Prefix
+         VAR l_WasComma
+         false >>> l_WasComma
+         '['
+         Self .Attributes 
+         .map> .ExtValue
+         .filter> .IsValueValid
+         .map> ( l_Prefix SWAP Cat )
+         .for> (
+          .WithComma: l_WasComma .KeepInStack
+         ) // .for>
+         ']'
+        )
+       ( Self .MainAncestor .IsSetConst )
+        ( 
+         if ( Self .EffectiveUnitName Self .MainAncestor .EffectiveUnitName != ) then
+         begin
+          Self .MainAncestor .EffectiveUnitName '.'
+         end // ( Self .EffectiveUnitName Self .MainAncestor .EffectiveUnitName != )
+         Self .MainAncestor .Name 
+        )
+       DEFAULT
+        (
+         VAR l_MainAncestor
+         Self .MainAncestor >>> l_MainAncestor
+         if ( l_MainAncestor .IsSetOf ) then
+         begin
+          l_MainAncestor .MainAncestor >>> l_MainAncestor
+         end // ( l_MainAncestor .IsSetOf )
+         '[' 'Low(' l_MainAncestor .TypeName ')' ' .. ' 'High(' l_MainAncestor .TypeName ')' ']'
+        )
+      ; // RULES   
+      ';' 
+     ] .Out
+    ) // ( Self .IsSetConst )
   DEFAULT
    (
     STRING VAR l_Prefix
@@ -5953,6 +6039,17 @@ INTEGER elem_func ConstantsListVisibility
     ) // ( Self .IsConstantArray )
    ( Self .IsLocalConst )
     ( Self .Visibility ) 
+   ( Self .IsSetConst )
+    (
+     VAR l_Vis 
+     Self .Visibility >>> l_Vis
+     RULES
+      ( l_Vis PublicAccess == )
+       ProtectedAccess
+      DEFAULT
+       l_Vis
+     ; // RULES 
+    ) // ( Self .IsSetConst ) 
    ( Self .IsConstants )
     (
      VAR l_Vis 
@@ -5962,13 +6059,26 @@ INTEGER elem_func ConstantsListVisibility
        (
         VAR l_Protected
         Self .Attributes
-        .filter> ( .Target IsNil ! )
+        .mapToTarget>
+        .filterNil>
         .filter> (
-          IN aConst 
-         Self .UnitProducer aConst .Target .UnitProducer == 
+         .UnitProducer Self .UnitProducer  == 
         )
         .CountIt > 0 
         >>> l_Protected
+        
+        if ( l_Protected ! ) then
+        begin
+         Self .Attributes
+         .map> .ValueType
+         .filterNil>
+         .filter> (
+          .UnitProducer Self .UnitProducer  == 
+         )
+         .CountIt > 0 
+         >>> l_Protected
+        end // ( l_Protected ! )
+        
         RULES
          l_Protected
           ProtectedAccess
