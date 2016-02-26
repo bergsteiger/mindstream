@@ -10,9 +10,12 @@ type
   TForm6 = class(TForm)
     btnFindAndCopy: TButton;
     lb1: TListBox;
+    btnFindFiles: TButton;
     procedure btnFindAndCopyClick(Sender: TObject);
+    procedure btnFindFilesClick(Sender: TObject);
   private
     { Private declarations }
+   procedure FindFile(const aDir, aFileName: string);
   public
     { Public declarations }
   end;
@@ -28,9 +31,8 @@ procedure TForm6.btnFindAndCopyClick(Sender: TObject);
 var
  l_AllFiles, l_NotDuplicateFiles,
  l_CopyFiles : TStringList;
- l_CSVFileName, l_Files, l_FileName : String;
+ l_CSVFileName, l_Files : String;
  i : integer;
- l_AllFilesStrings : TStrings;
  procedure ParseFiles(aFiles : string);
  var
   l_Str : string;
@@ -41,7 +43,6 @@ var
    l_NotDuplicateFiles.Add(l_Str);
  end;
 begin
-// todo тут будем загружать список файлов и искать их, и копировать к нам в папку.
  l_CSVFileName := ExtractFileDir(ParamStr(0)) + '\Units.csv';
  l_AllFiles := TStringList.Create;
  l_CopyFiles := TStringList.Create;
@@ -50,9 +51,6 @@ begin
  l_NotDuplicateFiles := TStringList.Create;
  l_NotDuplicateFiles.Duplicates := dupIgnore;
  l_NotDuplicateFiles.Sorted := True;
-{ l_AllFilesStrings := TStrings.Create;
- l_AllFilesStrings.Delimiter := ';';
- l_AllFilesStrings.LoadFromFile();}
  try
   l_AllFiles.LoadFromFile(l_CSVFileName);
 
@@ -63,13 +61,59 @@ begin
   end;
   l_NotDuplicateFiles.Sort;
   lb1.Items.AddStrings(l_NotDuplicateFiles);
-  ShowMessage(IntToStr(l_NotDuplicateFiles.Count));
+  l_NotDuplicateFiles.SaveToFile('Units.txt');
  finally
   FreeAndNil(l_AllFiles);
   FreeAndNil(l_CopyFiles);
   FreeAndNil(l_NotDuplicateFiles);
-  //FreeAndNil(l_AllFilesStrings);
  end;
+end;
+
+procedure TForm6.btnFindFilesClick(Sender: TObject);
+const
+ c_FileName = 'Units.txt';
+ c_UnitsRootDir = 'e:\Work\Repository\CodeGenerations\';
+var
+  l_UnitsFileName : string;
+begin
+  l_UnitsFileName := ExtractFileDir(ParamStr(0));// + c_FileName;
+  lb1.Items.Clear;
+  FindFile(c_UnitsRootDir, 'tfwScriptEngineEX.pas');
+end;
+
+procedure TForm6.FindFile(const aDir, aFileName: string);
+var
+  SR: TSearchRec;
+  FindRes: Integer;
+begin
+  FindRes := FindFirst(aDir + '*.*', faAnyFile, SR);
+  while FindRes = 0 do
+  begin
+    if ((SR.Attr and faDirectory) = faDirectory) and
+      ((SR.Name = '.') or (SR.Name = '..')) then
+    begin
+      FindRes := FindNext(SR);
+      Continue;
+    end;
+
+    // если найден каталог, то
+    if ((SR.Attr and faDirectory) = faDirectory) then
+    begin
+      // входим в процедуру поиска с параметрами текущего каталога +
+      // каталог, что мы нашли
+      FindFile(aDir + SR.Name + '\\', aFileName);
+      FindRes := FindNext(SR);
+      // после осмотра вложенного каталога мы продолжаем поиск
+      // в этом каталоге
+      Continue; // продолжить цикл
+    end;
+
+    if SR.Name = aFileName then
+     lb1.Items.Add(aDir + SR.Name);
+
+    FindRes := FindNext(SR);
+  end;
+  FindClose(SR);
 end;
 
 end.
