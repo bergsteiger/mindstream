@@ -11,6 +11,8 @@ object Form6: TForm6
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object btnFindAndCopy: TButton
@@ -22,7 +24,6 @@ object Form6: TForm6
     Caption = 'ParseCSV'
     TabOrder = 0
     OnClick = btnFindAndCopyClick
-    ExplicitTop = 248
   end
   object lb1: TListBox
     Left = 0
@@ -32,10 +33,6 @@ object Form6: TForm6
     Align = alClient
     ItemHeight = 13
     TabOrder = 1
-    ExplicitLeft = 104
-    ExplicitTop = 64
-    ExplicitWidth = 121
-    ExplicitHeight = 97
   end
   object btnFindFiles: TButton
     Left = 0

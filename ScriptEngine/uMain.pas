@@ -13,8 +13,13 @@ type
     btnFindFiles: TButton;
     procedure btnFindAndCopyClick(Sender: TObject);
     procedure btnFindFilesClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
-    { Private declarations }
+   l_AllFiles,
+   l_NotDuplicateFiles,
+   l_CopyFiles : TStringList;
+   l_CountFindFiles : integer;
    procedure FindFile(const aDir, aFileName: string);
   public
     { Public declarations }
@@ -29,8 +34,7 @@ implementation
 
 procedure TForm6.btnFindAndCopyClick(Sender: TObject);
 var
- l_AllFiles, l_NotDuplicateFiles,
- l_CopyFiles : TStringList;
+
  l_CSVFileName, l_Files : String;
  i : integer;
  procedure ParseFiles(aFiles : string);
@@ -44,11 +48,10 @@ var
  end;
 begin
  l_CSVFileName := ExtractFileDir(ParamStr(0)) + '\Units.csv';
- l_AllFiles := TStringList.Create;
- l_CopyFiles := TStringList.Create;
+
  l_AllFiles.Delimiter:= ';';
  l_AllFiles.Duplicates := dupError;
- l_NotDuplicateFiles := TStringList.Create;
+
  l_NotDuplicateFiles.Duplicates := dupIgnore;
  l_NotDuplicateFiles.Sorted := True;
  try
@@ -63,9 +66,7 @@ begin
   lb1.Items.AddStrings(l_NotDuplicateFiles);
   l_NotDuplicateFiles.SaveToFile('Units.txt');
  finally
-  FreeAndNil(l_AllFiles);
-  FreeAndNil(l_CopyFiles);
-  FreeAndNil(l_NotDuplicateFiles);
+
  end;
 end;
 
@@ -75,10 +76,19 @@ const
  c_UnitsRootDir = 'e:\Work\Repository\CodeGenerations\';
 var
   l_UnitsFileName : string;
+  i : integer;
 begin
   l_UnitsFileName := ExtractFileDir(ParamStr(0));// + c_FileName;
+  l_CountFindFiles := 0;
   lb1.Items.Clear;
-  FindFile(c_UnitsRootDir, 'tfwScriptEngineEX.pas');
+  for i := 0 to l_NotDuplicateFiles.Count - 1 do
+  begin
+   FindFile(c_UnitsRootDir, l_NotDuplicateFiles[i]+'.pas');
+   Application.ProcessMessages;
+  end;
+
+  lb1.Items.SaveToFile('FilesWithPath.txt');
+  ShowMessage(IntToStr(l_CountFindFiles));
 end;
 
 procedure TForm6.FindFile(const aDir, aFileName: string);
@@ -109,11 +119,28 @@ begin
     end;
 
     if SR.Name = aFileName then
+    begin
      lb1.Items.Add(aDir + SR.Name);
+     inc(l_CountFindFiles);
+    end;
 
     FindRes := FindNext(SR);
   end;
   FindClose(SR);
+end;
+
+procedure TForm6.FormCreate(Sender: TObject);
+begin
+ l_AllFiles := TStringList.Create;
+ l_CopyFiles := TStringList.Create;
+ l_NotDuplicateFiles := TStringList.Create;
+end;
+
+procedure TForm6.FormDestroy(Sender: TObject);
+begin
+  FreeAndNil(l_AllFiles);
+  FreeAndNil(l_CopyFiles);
+  FreeAndNil(l_NotDuplicateFiles);
 end;
 
 end.
