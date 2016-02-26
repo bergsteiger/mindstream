@@ -6010,6 +6010,8 @@ INTEGER elem_func ConstantsListVisibility
  Cached:
  (
   RULES
+   ( Self IsNil )
+     PrivateAccess
    ( Self .IsConstantArray )
     (
      VAR l_Vis 
