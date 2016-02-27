@@ -6011,10 +6011,10 @@ INTEGER elem_func ConstantsListVisibility
  (
   RULES
    ( Self IsNil )
-     PrivateAccess
+    PrivateAccess
    ( Self .IsConstantArray )
     (
-     VAR l_Vis 
+     INTEGER VAR l_Vis 
      Self .Visibility >>> l_Vis
      RULES
       ( l_Vis PublicAccess == )
@@ -6043,7 +6043,7 @@ INTEGER elem_func ConstantsListVisibility
     ( Self .Visibility ) 
    ( Self .IsSetConst )
     (
-     VAR l_Vis 
+     INTEGER VAR l_Vis 
      Self .Visibility >>> l_Vis
      RULES
       ( l_Vis PublicAccess == )
@@ -6054,12 +6054,12 @@ INTEGER elem_func ConstantsListVisibility
     ) // ( Self .IsSetConst ) 
    ( Self .IsConstants )
     (
-     VAR l_Vis 
+     INTEGER VAR l_Vis 
      Self .Visibility >>> l_Vis
      RULES
       ( l_Vis PublicAccess == )
        (
-        VAR l_Protected
+        BOOLEAN VAR l_Protected
         Self .Attributes
         .mapToTarget>
         .filterNil>
