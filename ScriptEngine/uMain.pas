@@ -50,13 +50,13 @@ begin
  if lbOutput.Items.Count = 0 then
   lbOutput.Items.LoadFromFile(IncludeTrailingPathDelimiter(ExtractFileDir(ParamStr(0))) + cFilesWithPath);
 
- l_DestinationPath := IncludeTrailingPathDelimiter(ExtractFileDir(ParamStr(0))) + cDestinationPath;
-
-  //TFile.Copy('e:\DEMO.FDB', l_DestinationPath + 'demo.fdb');
-
  for l_Index := 0 to lbOutput.Items.Count - 1 do
  begin
   lbOutput.Items[l_Index] := lbOutput.Items[l_Index].Replace('\\', '\', [rfReplaceAll]);
+  l_DestinationPath := IncludeTrailingPathDelimiter(ExtractFileDir(ParamStr(0))) +
+                       cDestinationPath +
+                       ExtractFileName(lbOutput.Items[l_Index]);
+  TFile.Copy(lbOutput.Items[l_Index], l_DestinationPath, True);
  end;
 
  lbOutput.Items.SaveToFile(IncludeTrailingPathDelimiter(ExtractFileDir(ParamStr(0))) + cFilesWithPath);
