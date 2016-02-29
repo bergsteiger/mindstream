@@ -17,7 +17,7 @@ object Form6: TForm6
   TextHeight = 13
   object btnFindAndCopy: TButton
     Left = 0
-    Top = 215
+    Top = 182
     Width = 418
     Height = 33
     Align = alBottom
@@ -25,23 +25,33 @@ object Form6: TForm6
     TabOrder = 0
     OnClick = btnFindAndCopyClick
   end
-  object lb1: TListBox
+  object lbOutput: TListBox
     Left = 0
     Top = 0
     Width = 418
-    Height = 215
+    Height = 182
     Align = alClient
     ItemHeight = 13
     TabOrder = 1
   end
   object btnFindFiles: TButton
     Left = 0
-    Top = 248
+    Top = 215
     Width = 418
     Height = 33
     Align = alBottom
     Caption = 'Find files'
     TabOrder = 2
     OnClick = btnFindFilesClick
+  end
+  object btnCopyFiles: TButton
+    Left = 0
+    Top = 248
+    Width = 418
+    Height = 33
+    Align = alBottom
+    Caption = 'Copy Files'
+    TabOrder = 3
+    OnClick = btnCopyFilesClick
   end
 end

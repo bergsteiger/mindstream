@@ -9,17 +9,19 @@ uses
 type
   TForm6 = class(TForm)
     btnFindAndCopy: TButton;
-    lb1: TListBox;
+    lbOutput: TListBox;
     btnFindFiles: TButton;
+    btnCopyFiles: TButton;
     procedure btnFindAndCopyClick(Sender: TObject);
     procedure btnFindFilesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure btnCopyFilesClick(Sender: TObject);
   private
-   l_AllFiles,
-   l_NotDuplicateFiles,
-   l_CopyFiles : TStringList;
-   l_CountFindFiles : integer;
+   F_AllFiles,
+   F_NotDuplicateFiles,
+   F_CopyFiles : TStringList;
+   F_CountFindFiles : integer;
    procedure FindFile(const aDir, aFileName: string);
   public
     { Public declarations }
@@ -30,13 +32,41 @@ var
 
 implementation
 
+uses
+ System.IOUtils
+ ;
+
+const
+ cFilesWithPath = 'FilesWithPath.txt';
+ cDestinationPath = '..\..\..\l3Parser\ScriptEngine\';
+
 {$R *.dfm}
+
+procedure TForm6.btnCopyFilesClick(Sender: TObject);
+var
+ l_Index : Integer;
+ l_DestinationPath : string;
+begin
+ if lbOutput.Items.Count = 0 then
+  lbOutput.Items.LoadFromFile(IncludeTrailingPathDelimiter(ExtractFileDir(ParamStr(0))) + cFilesWithPath);
+
+ l_DestinationPath := IncludeTrailingPathDelimiter(ExtractFileDir(ParamStr(0))) + cDestinationPath;
+
+  //TFile.Copy('e:\DEMO.FDB', l_DestinationPath + 'demo.fdb');
+
+ for l_Index := 0 to lbOutput.Items.Count - 1 do
+ begin
+  lbOutput.Items[l_Index] := lbOutput.Items[l_Index].Replace('\\', '\', [rfReplaceAll]);
+ end;
+
+ lbOutput.Items.SaveToFile(IncludeTrailingPathDelimiter(ExtractFileDir(ParamStr(0))) + cFilesWithPath);
+end;
 
 procedure TForm6.btnFindAndCopyClick(Sender: TObject);
 var
 
  l_CSVFileName, l_Files : String;
- i : integer;
+ l_Index : integer;
  procedure ParseFiles(aFiles : string);
  var
   l_Str : string;
@@ -44,27 +74,27 @@ var
  begin
   l_Strings := aFiles.Split([';'], none);
   for l_Str in l_Strings do
-   l_NotDuplicateFiles.Add(l_Str);
+   F_NotDuplicateFiles.Add(l_Str);
  end;
 begin
  l_CSVFileName := ExtractFileDir(ParamStr(0)) + '\Units.csv';
 
- l_AllFiles.Delimiter:= ';';
- l_AllFiles.Duplicates := dupError;
+ F_AllFiles.Delimiter:= ';';
+ F_AllFiles.Duplicates := dupError;
 
- l_NotDuplicateFiles.Duplicates := dupIgnore;
- l_NotDuplicateFiles.Sorted := True;
+ F_NotDuplicateFiles.Duplicates := dupIgnore;
+ F_NotDuplicateFiles.Sorted := True;
  try
-  l_AllFiles.LoadFromFile(l_CSVFileName);
+  F_AllFiles.LoadFromFile(l_CSVFileName);
 
-  for I := 0 to l_AllFiles.Count - 1 do
+  for l_Index := 0 to F_AllFiles.Count - 1 do
   begin
-   l_Files := l_AllFiles[I];
+   l_Files := F_AllFiles[l_Index];
    ParseFiles(l_Files);
   end;
-  l_NotDuplicateFiles.Sort;
-  lb1.Items.AddStrings(l_NotDuplicateFiles);
-  l_NotDuplicateFiles.SaveToFile('Units.txt');
+  F_NotDuplicateFiles.Sort;
+  lbOutput.Items.AddStrings(F_NotDuplicateFiles);
+  F_NotDuplicateFiles.SaveToFile('Units.txt');
  finally
 
  end;
@@ -79,68 +109,69 @@ var
   i : integer;
 begin
   l_UnitsFileName := ExtractFileDir(ParamStr(0));// + c_FileName;
-  l_CountFindFiles := 0;
-  lb1.Items.Clear;
-  for i := 0 to l_NotDuplicateFiles.Count - 1 do
+  F_CountFindFiles := 0;
+  lbOutput.Items.Clear;
+  for i := 0 to F_NotDuplicateFiles.Count - 1 do
   begin
-   FindFile(c_UnitsRootDir, l_NotDuplicateFiles[i]+'.pas');
+   FindFile(c_UnitsRootDir, F_NotDuplicateFiles[i]+'.pas');
    Application.ProcessMessages;
   end;
 
-  lb1.Items.SaveToFile('FilesWithPath.txt');
-  ShowMessage(IntToStr(l_CountFindFiles));
+  lbOutput.Items.SaveToFile(cFilesWithPath);
+  ShowMessage(IntToStr(F_CountFindFiles));
 end;
 
 procedure TForm6.FindFile(const aDir, aFileName: string);
 var
-  SR: TSearchRec;
-  FindRes: Integer;
+  l_SR: TSearchRec;
+  l_FindRes: Integer;
 begin
-  FindRes := FindFirst(aDir + '*.*', faAnyFile, SR);
-  while FindRes = 0 do
+  l_FindRes := FindFirst(aDir + '*.*', faAnyFile, l_SR);
+  while l_FindRes = 0 do
   begin
-    if ((SR.Attr and faDirectory) = faDirectory) and
-      ((SR.Name = '.') or (SR.Name = '..')) then
+    if ((l_SR.Attr and faDirectory) = faDirectory) and
+      ((l_SR.Name = '.') or (l_SR.Name = '..')) then
     begin
-      FindRes := FindNext(SR);
+      l_FindRes := FindNext(l_SR);
       Continue;
     end;
 
     // если найден каталог, то
-    if ((SR.Attr and faDirectory) = faDirectory) then
+    if ((l_SR.Attr and faDirectory) = faDirectory) then
     begin
       // входим в процедуру поиска с параметрами текущего каталога +
       // каталог, что мы нашли
-      FindFile(aDir + SR.Name + '\\', aFileName);
-      FindRes := FindNext(SR);
+      FindFile(aDir + l_SR.Name + '\\', aFileName);
+      l_FindRes := FindNext(l_SR);
       // после осмотра вложенного каталога мы продолжаем поиск
       // в этом каталоге
       Continue; // продолжить цикл
     end;
 
-    if SR.Name = aFileName then
+    if l_SR.Name = aFileName then
     begin
-     lb1.Items.Add(aDir + SR.Name);
-     inc(l_CountFindFiles);
+     lbOutput.Items.Add(aDir + l_SR.Name);
+     inc(F_CountFindFiles);
+     Break;
     end;
 
-    FindRes := FindNext(SR);
+    l_FindRes := FindNext(l_SR);
   end;
-  FindClose(SR);
+  FindClose(l_SR);
 end;
 
 procedure TForm6.FormCreate(Sender: TObject);
 begin
- l_AllFiles := TStringList.Create;
- l_CopyFiles := TStringList.Create;
- l_NotDuplicateFiles := TStringList.Create;
+ F_AllFiles := TStringList.Create;
+ F_CopyFiles := TStringList.Create;
+ F_NotDuplicateFiles := TStringList.Create;
 end;
 
 procedure TForm6.FormDestroy(Sender: TObject);
 begin
-  FreeAndNil(l_AllFiles);
-  FreeAndNil(l_CopyFiles);
-  FreeAndNil(l_NotDuplicateFiles);
+  FreeAndNil(F_AllFiles);
+  FreeAndNil(F_CopyFiles);
+  FreeAndNil(F_NotDuplicateFiles);
 end;
 
 end.
