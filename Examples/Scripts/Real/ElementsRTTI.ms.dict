@@ -178,7 +178,7 @@ USES
    TRY
     aLambda DO
    EXCEPT
-    [ 'Îרטבךא גûחמגא: ' aKey ' םא ' l_CacheWhere pop:Word:Name ] strings:Cat .
+    [ 'Îרטבךא גûחמגא: ' current:exception:Message ' : ' aKey ' םא ' l_CacheWhere pop:Word:Name ] strings:Cat .
     aDefault
    END
    l_NewVar pop:Word:SetValue
