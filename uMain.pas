@@ -80,11 +80,11 @@ begin
 end;
 
 procedure TfmMain.CreateScript;
-var
- l_TestScriptEngine : TtfwScriptEngineEX;
+//var
+// l_TestScriptEngine : TtfwScriptEngineEX;
 begin
- l_TestScriptEngine := TtfwScriptEngineEX.Create;
- FreeAndNil(l_TestScriptEngine);
+// l_TestScriptEngine := TtfwScriptEngineEX.Create;
+// FreeAndNil(l_TestScriptEngine);
 end;
 
 procedure TfmMain.CreateScrollButtons;
