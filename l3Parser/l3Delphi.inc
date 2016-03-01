@@ -180,4 +180,5 @@
   {$define XE4}
   {$define XE8}  
   {$define XE10}  
+  {$define DX}
 {$endif}
