@@ -164,3 +164,20 @@
   {$define XE4}
   {$define XE8}  
 {$endif}
+{$IfDef VER300}
+  {$define Delphi1}
+  {$define Delphi2}
+  {$define Delphi3}
+  {$define Delphi4}
+  {$define Delphi5}
+  {$define Delphi6}
+  {$define Delphi7}
+  {$define Delphi2006}
+  {$define XE}
+  {$define XE1}
+  {$define XE2}
+  {$define XE3}
+  {$define XE4}
+  {$define XE8}  
+  {$define XE10}  
+{$endif}
