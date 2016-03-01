@@ -433,7 +433,7 @@
 // - вставлены директивы Log.
 //
 
-{$Include l3Delphi.inc}
+{$Include \l3Parser\l3Delphi.inc}
 
 {$IfDef NoVCL}
  {$Define NoVGScene}

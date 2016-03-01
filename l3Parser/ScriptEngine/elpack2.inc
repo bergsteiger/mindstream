@@ -1,0 +1,3 @@
+{.$define ELPACK_SINGLECOMP}
+{$undef ELPACK_SINGLECOMP}
+{.$define DEBUG}

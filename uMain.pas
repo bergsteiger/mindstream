@@ -41,6 +41,7 @@ type
    FDiagrammsController: ImsDiagrammsController;
    procedure CreateToolBar(const aPanelWidth: Single);
    procedure CreateScrollButtons;
+   procedure CreateScript;
   public
     { Public declarations }
   end;
@@ -67,7 +68,8 @@ uses
  msScrollShapeUpRight,
  msScrollShapeDownLeft,
  msScrollShapeDownRight,
- msScrollShapeResetOrigin
+ msScrollShapeResetOrigin,
+ tfwScriptEngineEX
  ;
 
 {$R *.fmx}
@@ -75,6 +77,14 @@ uses
 procedure TfmMain.btnClearImageClick(Sender: TObject);
 begin
  FDiagrammsController.Clear;
+end;
+
+procedure TfmMain.CreateScript;
+var
+ l_TestScriptEngine : TtfwScriptEngineEX;
+begin
+ l_TestScriptEngine := TtfwScriptEngineEX.Create;
+ FreeAndNil(l_TestScriptEngine);
 end;
 
 procedure TfmMain.CreateScrollButtons;
@@ -198,6 +208,8 @@ begin
                                                        btnSaveJsonAndPng);
  CreateToolBar(pnlToolBar.Width);
  CreateScrollButtons;
+
+ CreateScript;
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
