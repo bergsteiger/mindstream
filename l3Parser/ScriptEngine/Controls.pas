@@ -27,7 +27,7 @@ type
  );//_TControlStyle
 
  _TControlState = (
-   
+
  );//_TControlState
 
  TControlState = set of _TControlState;

@@ -15,7 +15,7 @@ interface
 
 uses
   SysUtils, Windows, Messages, Classes, Graphics, Controls,
-  StdCtrls, ExtCtrls, Forms;
+  StdCtrls, ExtCtrls, Vcl.Forms, Vcl.Controls;
 
 type
   Tl3LeakObjectsForm = class(TForm)

@@ -68,10 +68,8 @@ uses
  msScrollShapeUpRight,
  msScrollShapeDownLeft,
  msScrollShapeDownRight,
- msScrollShapeResetOrigin
-
-
- , tfwScriptEngineEX
+ msScrollShapeResetOrigin,
+ tfwScriptEngineEX
  ;
 
 {$R *.fmx}
@@ -83,10 +81,10 @@ end;
 
 procedure TfmMain.CreateScript;
 var
- l_Script : TtfwScriptEngineEX;
+ l_TestScriptEngine : TtfwScriptEngineEX;
 begin
- l_Script :=  TtfwScriptEngineEX.create;
- FreeAndNil(l_Script);
+ l_TestScriptEngine := TtfwScriptEngineEX.Create;
+ FreeAndNil(l_TestScriptEngine);
 end;
 
 procedure TfmMain.CreateScrollButtons;

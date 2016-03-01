@@ -66,5 +66,5 @@ type _Instance_R_ = TtfwAxiomaticsResNameGetterList;
 {$Include l3UnrefcountedList.imp.pas}
 
 
-{$IfEnd} //not NoScripts
+{$ENDIF} //not NoScripts
 end.
