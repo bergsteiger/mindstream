@@ -1,0 +1,54 @@
+Test ForToTest
+
+ ARRAY operator to 
+   ^@ IN aFrom
+   ^ IN aTo
+  @ ( 
+   OBJECT IN aLambda
+   INTEGER VAR I
+   I := ( aFrom DO )
+   Dec I
+   ( aTo DO I ) - LOOP ( Inc I I aLambda DO ) 
+  ) FunctorToIterator >>> Result
+ ; // 1to
+ 
+ for ( 1 to 10 ) .
+ // - печатает числа от 1 до 10
+ '' .
+ for ( 1 to 20 ) .
+ // - печатает числа от 1 до 20
+ '' .
+ for ( 0 to 20 ) .
+ // - печатает числа от 0 до 20
+ '' .
+ for ( -1 to 20 ) .
+ // - печатает числа от -1 до 20
+ '' .
+ for ( -1 to 21 ) .
+ // - печатает числа от -1 до 21
+ '' .
+ 0 for ( 1 to 10 ) + .
+ // - суммирует числа от 1 до 10 и печатает результат
+ '' .
+ for ( 1 to 10 Reverted ) .
+ // - печатает числа от 10 до 1
+ 
+/*{ 
+ ARRAY VAR L
+ 
+ 1to 10 >>> L
+ 
+ @ . L ITERATE
+ // - печатает числа от 1 до 10
+ '' .
+ @ . 1to 20 ITERATE
+ // - печатает числа от 1 до 20
+ '' .
+ 0 @ + L ITERATE .
+ // - суммирует числа от 1 до 10 и печатает результат
+ '' .
+ @ . L Reverted ITERATE
+ // - печатает числа от 10 до 1}*/
+; // ForToTest
+
+ForToTest
