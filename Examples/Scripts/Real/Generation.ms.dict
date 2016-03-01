@@ -2409,6 +2409,21 @@ STRING elem_func UnCastSig
  >>> Result  
 ; // UnCastSig
 
+elem_iterator BindServiceImplementationUC
+ [
+  Self .Dependencies
+  .filter> ( .IsStereotype st_implements::Dependency )
+  .for> (
+    IN anItem
+   anItem .Target .IfDefBrace:
+   (
+    cSpace anItem .Target .TypeName '.Instance.Alien := ' Self .TypeName '.Instance;'
+   ) // anItem .Target .IfDefBrace:
+  ) // Self .Dependencies
+ ]
+ >>> Result
+; // BindServiceImplementationUC
+
 ANY elem_func GetUserCode
   STRING IN aKey
  RULES
@@ -2421,17 +2436,7 @@ ANY elem_func GetUserCode
     Self .Parent >>> l_Parent
     RULES
      ( l_Parent .IsServiceImplementation )
-      [
-       l_Parent .Dependencies
-       .filter> ( .IsStereotype st_implements::Dependency )
-       .for> (
-         IN anItem
-        anItem .Target .IfDefBrace:
-        (
-         cSpace anItem .Target .TypeName '.Instance.Alien := ' l_Parent .TypeName '.Instance;'
-        ) // anItem .Target .IfDefBrace:
-       ) // l_Parent .Dependencies
-      ]
+      ( l_Parent .BindServiceImplementationUC )
      ( Self .Name 'Ini_Reg' == ) 
       [ cSpace l_Parent .TypeName '.RegisterInEngine;' ]
      ( Self .Name 'RegAxiom' == ) 
@@ -2470,7 +2475,6 @@ ANY elem_func GetUserCode
       [
        VAR l_SpelledFor
        Self .SpelledFor >>> l_SpelledFor
-//       fm_%f_cut_prefix(%f_pas_TypeName(%S),T).SetFactory(%f_pas_TypeName(%S).Make);\      
        ' ' 'fm_' l_SpelledFor .TypeName .CutT '.SetFactory(' l_SpelledFor .TypeName '.Make);'  
       ]
      ( 
@@ -3596,6 +3600,21 @@ BOOLEAN elem_func InheritsOrImplementsMixIn
  )
  >>> Result
 ; // InheritsOrImplementsMixIn
+
+BOOLEAN elem_func ImplementsMixIn
+ Cached:
+ (
+  RULES
+   //( Self .Inherits .filter> .IsMixIn .CountIt > 0 )
+   // true
+   ( Self .Implements .filter> .IsMixIn .CountIt > 0 )
+    true
+   DEFAULT
+    false
+  ; // RULES 
+ )
+ >>> Result
+; // ImplementsMixIn
 
 elem_iterator OtherMixinValuesUses
  [empty]
@@ -5221,6 +5240,16 @@ elem_proc UndefineImplementedMixInValues
 
 ARRAY CompileTime-VAR g_MixInValues nil
 
+elem_iterator AllInlinedOperations
+ Cached:
+ (
+  Self .Implemented
+  .join> ( Self .Overridden )
+  .filter> ( .IsStereotype st_inline::Operation ) 
+ )
+ >>> Result
+; // AllInlinedOperations
+
 elem_proc OutOtherMixinValues
  Self .Inherits .for> (
    IN aG
@@ -6064,7 +6093,7 @@ INTEGER elem_func ConstantsListVisibility
         .mapToTarget>
         .filterNil>
         .filter> (
-         .UnitProducer Self .UnitProducer  == 
+         .UnitProducer Self .UnitProducer  ?== 
         )
         .CountIt > 0 
         >>> l_Protected
@@ -6075,7 +6104,7 @@ INTEGER elem_func ConstantsListVisibility
          .map> .ValueType
          .filterNil>
          .filter> (
-          .UnitProducer Self .UnitProducer  == 
+          .UnitProducer Self .UnitProducer  ?== 
          )
          .CountIt > 0 
          >>> l_Protected
@@ -6360,16 +6389,6 @@ elem_proc MethodBody
  OutLn
 ; // MethodBody
 
-elem_iterator AllInlinedOperations
- Cached:
- (
-  Self .Implemented
-  .join> ( Self .Overridden )
-  .filter> ( .IsStereotype st_inline::Operation ) 
- )
- >>> Result
-; // AllInlinedOperations
-
 BOOLEAN elem_func NeedsInstanceR
  Cached:
  (
@@ -6392,10 +6411,13 @@ elem_proc OutClassImplementation
  (
   Self .DefineImplementedMixInValues
   
-  if ( Self .InheritsOrImplementsMixIn ) then
+  if ( Self .ImplementsMixIn ) then
   begin
-   Self .OutOtherMixinValues
-  end // ( Self .InheritsOrImplementsMixIn )
+   if ( Self .AllInlinedOperations .CountIt > 0 ) then
+   begin
+    Self .OutOtherMixinValues
+   end // ( Self .AllInlinedOperations .CountIt > 0 )
+  end // ( Self .ImplementsMixIn )
   
   BOOLEAN VAR l_WasFirst
   false >>> l_WasFirst
@@ -6534,9 +6556,29 @@ INTERFACE elem_func RegisterTagTableMethod
  >>> Result
 ; // RegisterTagTableMethod
 
-elem_iterator IniOperations
+INTERFACE elem_func RegisterServiceImplementationMethod
+ //Cached:
+ (
+  'bind' nil MakeFunction
+  DUP
+  VAR l_Boxed
+  pop:WordBox:Boxed >>> l_Boxed
+  l_Boxed -> Stereotype := st_ini::Operation
+  l_Boxed -> Visibility := PrivateAccess
+  l_Boxed -> %SUM := ( 'Регистрация ' Self .TypeName Cat )
+  l_Boxed ->^ cUserCodePrefix ^:= ( Self .BindServiceImplementationUC )
+ )
+ >>> Result
+; // RegisterServiceImplementationMethod
+
+elem_iterator IniOperationsPrim
  Self .Operations 
  .filter> .IsIni
+ >>> Result
+; // IniOperationsPrim
+
+elem_iterator IniOperations
+ Self .IniOperationsPrim
  RULES
   (
    ( Self .IsTestCase )
@@ -6548,6 +6590,12 @@ elem_iterator IniOperations
    ( .join> [ Self .RegisterTestClassMethod ] )
   ( Self .IsTagTable )
    ( .join> [ Self .RegisterTagTableMethod ] )
+  ( 
+   ( Self .IsServiceImplementation ) 
+   AND ( Self .UseNewGen )
+   AND ( Self .IniOperationsPrim .filter> ( .Name 'bind' == ) .CountIt 0 == )
+  ) 
+   ( .join> [ Self .RegisterServiceImplementationMethod ] )
  ; // RULES
  >>> Result
 ; // IniOperations
