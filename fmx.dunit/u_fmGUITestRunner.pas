@@ -7,7 +7,8 @@ uses
  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
  FMX.Layouts, FMX.TreeView, FMX.ListView.Types, FMX.ListView, System.Generics.Collections,
- FMX.DUnit.Interfaces, FMX.Controls.Presentation
+ FMX.DUnit.Interfaces, FMX.Controls.Presentation, FMX.ListView.Appearances,
+  FMX.ListView.Adapters.Base
  ;
 
 type
