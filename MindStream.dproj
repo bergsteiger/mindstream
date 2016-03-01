@@ -209,7 +209,7 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <DCC_UnitSearchPath>E:\Work\Repository\mindstream\l3Parser\ScriptEngine;E:\Work\Repository\mindstream\l3Parser;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>l3Parser\ScriptEngine;l3Parser;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_Namespace>Vcl;$(DCC_Namespace)</DCC_Namespace>
         <DCC_Define>XE;XE3;notDebugStackTrace;NoVCM;NoImageEn;NoVCL;l3ConsoleApp;$(DCC_Define)</DCC_Define>
         <VerInfo_Locale>1033</VerInfo_Locale>
