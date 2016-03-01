@@ -25,7 +25,7 @@ uses
 type
  _FindDataType_ = TtfwTypeInfo;
  _l3Searcher_Parent_ = TtfwValueTypesListPrim;
- {$Include w:\common\components\rtl\Garant\L3\l3Searcher.imp.pas}
+ {$Include l3Searcher.imp.pas}
  TtfwValueTypesList = class(_l3Searcher_)
  end;//TtfwValueTypesList
 {$IfEnd} //not NoScripts
@@ -50,7 +50,7 @@ end;//CompareItemWithData
 
 type _Instance_R_ = TtfwValueTypesList;
 
-{$Include w:\common\components\rtl\Garant\L3\l3Searcher.imp.pas}
+{$Include l3Searcher.imp.pas}
 
 
 {$IfEnd} //not NoScripts

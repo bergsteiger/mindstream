@@ -27,7 +27,7 @@ type
  _FindDataType_ = Tl3WString;
  _ItemType_ = Tl3PrimString;
  _l3Searcher_Parent_ = TtfwDictionaryPrimPrim;
- {$Include w:\common\components\rtl\Garant\L3\l3Searcher.imp.pas}
+ {$Include l3Searcher.imp.pas}
  TtfwDictionaryPrim = {abstract} class(_l3Searcher_)
  end;//TtfwDictionaryPrim
 {$IfEnd} //not NoScripts
@@ -58,7 +58,7 @@ end;//CompareItemWithData
 
 type _Instance_R_ = TtfwDictionaryPrim;
 
-{$Include w:\common\components\rtl\Garant\L3\l3Searcher.imp.pas}
+{$Include l3Searcher.imp.pas}
 
 
 {$IfEnd} //not NoScripts

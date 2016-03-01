@@ -22,7 +22,7 @@ uses
 type
  _FindDataType_ = Tl3WString;
  _l3Searcher_Parent_ = TtfwCStringListPrim;
- {$Include w:\common\components\rtl\Garant\L3\l3Searcher.imp.pas}
+ {$Include l3Searcher.imp.pas}
  TtfwCStringList = class(_l3Searcher_)
  end;//TtfwCStringList
 
@@ -48,6 +48,6 @@ end;//CompareItemWithData
 
 type _Instance_R_ = TtfwCStringList;
 
-{$Include w:\common\components\rtl\Garant\L3\l3Searcher.imp.pas}
+{$Include l3Searcher.imp.pas}
 
 end.

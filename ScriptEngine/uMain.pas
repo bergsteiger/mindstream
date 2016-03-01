@@ -12,11 +12,13 @@ type
     lbOutput: TListBox;
     btnFindFiles: TButton;
     btnCopyFiles: TButton;
+    btnTestScriptEngine: TButton;
     procedure btnFindAndCopyClick(Sender: TObject);
     procedure btnFindFilesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnCopyFilesClick(Sender: TObject);
+    procedure btnTestScriptEngineClick(Sender: TObject);
   private
    F_AllFiles,
    F_NotDuplicateFiles,
@@ -34,6 +36,7 @@ implementation
 
 uses
  System.IOUtils
+ , tfwScriptEngineEX
  ;
 
 const
@@ -119,6 +122,15 @@ begin
 
   lbOutput.Items.SaveToFile(cFilesWithPath);
   ShowMessage(IntToStr(F_CountFindFiles));
+end;
+
+procedure TForm6.btnTestScriptEngineClick(Sender: TObject);
+var
+ ScriptEngineEx : TtfwScriptEngineEX;
+begin
+ ScriptEngineEx := TtfwScriptEngineEX.ScriptFromFile();
+
+ FreeAndNil(ScriptEngineEx);
 end;
 
 procedure TForm6.FindFile(const aDir, aFileName: string);

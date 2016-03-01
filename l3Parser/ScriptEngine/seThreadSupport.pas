@@ -42,7 +42,7 @@ type
  _ItemType_ = TWordThread;
  _l3ObjectPtrList_Parent_ = Tl3ProtoDataContainer;
  {$Define l3Items_IsProto}
- {$Include w:\common\components\rtl\Garant\L3\l3ObjectPtrList.imp.pas}
+ {$Include l3ObjectPtrList.imp.pas}
  TseWorkThreadList = class(_l3ObjectPtrList_)
  public
  // public methods
@@ -112,7 +112,7 @@ end;
 
 type _Instance_R_ = TseWorkThreadList;
 
-{$Include w:\common\components\rtl\Garant\L3\l3ObjectPtrList.imp.pas}
+{$Include l3ObjectPtrList.imp.pas}
 
 // start class TseWorkThreadList
 

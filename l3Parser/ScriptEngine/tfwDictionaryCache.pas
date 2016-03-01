@@ -25,7 +25,7 @@ uses
 type
  _FindDataType_ = Tl3WString;
  _l3Searcher_Parent_ = TtfwDictionaryCachePrim;
- {$Include w:\common\components\rtl\Garant\L3\l3Searcher.imp.pas}
+ {$Include l3Searcher.imp.pas}
  TtfwDictionaryCache = class(_l3Searcher_)
  public
  // overridden public methods
@@ -89,7 +89,7 @@ end;//CompareItemWithData
 
 type _Instance_R_ = TtfwDictionaryCache;
 
-{$Include w:\common\components\rtl\Garant\L3\l3Searcher.imp.pas}
+{$Include l3Searcher.imp.pas}
 
 // start class TtfwDictionaryCache
 

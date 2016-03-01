@@ -169,7 +169,7 @@ type
  end;//TkwRightLiteralParamWordInfo
 
  _kwCompiledVar_Parent_ = TkwCompiledWordPrim;
- {$Include ..\ScriptEngine\kwCompiledVar.imp.pas}
+ {$Include kwCompiledVar.imp.pas}
  TkwLeftParam = class(_kwCompiledVar_)
  public
  // overridden public methods
@@ -195,7 +195,7 @@ uses
 
 {$If not defined(NoScripts)}
 
-{$Include ..\ScriptEngine\kwCompiledVar.imp.pas}
+{$Include kwCompiledVar.imp.pas}
 
 // start class TkwLeftParam
 

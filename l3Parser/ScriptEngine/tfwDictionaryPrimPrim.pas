@@ -24,7 +24,7 @@ uses
 {$If not defined(NoScripts)}
 type
  _l3DelphiStringSearcher_Parent_ = TtfwDictionaryPrimPrimPrim;
- {$Include w:\common\components\rtl\Garant\L3\l3DelphiStringSearcher.imp.pas}
+ {$Include l3DelphiStringSearcher.imp.pas}
  TtfwDictionaryPrimPrim = {abstract} class(_l3DelphiStringSearcher_)
  end;//TtfwDictionaryPrimPrim
 {$IfEnd} //not NoScripts
@@ -41,7 +41,7 @@ uses
 
 type _Instance_R_ = TtfwDictionaryPrimPrim;
 
-{$Include w:\common\components\rtl\Garant\L3\l3DelphiStringSearcher.imp.pas}
+{$Include l3DelphiStringSearcher.imp.pas}
 
 
 {$IfEnd} //not NoScripts

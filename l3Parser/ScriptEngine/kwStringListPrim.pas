@@ -31,7 +31,7 @@ type
  _ItemType_ = TkwString;
  _l3UncomparabeObjectRefList_Parent_ = Tl3ProtoDataContainer;
  {$Define l3Items_IsProto}
- {$Include w:\common\components\rtl\Garant\L3\l3UncomparabeObjectRefList.imp.pas}
+ {$Include l3UncomparabeObjectRefList.imp.pas}
  TkwStringListPrim = class(_l3UncomparabeObjectRefList_)
  end;//TkwStringListPrim
 {$IfEnd} //not NoScripts
@@ -77,7 +77,7 @@ end;//CompareExistingItems
 
 type _Instance_R_ = TkwStringListPrim;
 
-{$Include w:\common\components\rtl\Garant\L3\l3UncomparabeObjectRefList.imp.pas}
+{$Include l3UncomparabeObjectRefList.imp.pas}
 
 
 {$IfEnd} //not NoScripts

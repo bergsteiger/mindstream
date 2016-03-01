@@ -32,7 +32,7 @@ type
  _ItemType_ = TtfwMainDictionary;
  {$Include ..\ScriptEngine\tfwSortedDictionaryList.imp.pas}
  _tfwNamedDictionaryList_Parent_ = _tfwSortedDictionaryList_;
- {$Include ..\ScriptEngine\tfwNamedDictionaryList.imp.pas}
+ {$Include tfwNamedDictionaryList.imp.pas}
  TtfwMainDictionaryList = class(_tfwNamedDictionaryList_)
  end;//TtfwMainDictionaryList
 {$IfEnd} //not NoScripts
@@ -56,7 +56,7 @@ type _Instance_R_ = TtfwMainDictionaryList;
 {$Include ..\ScriptEngine\tfwSortedDictionaryList.imp.pas}
 
 
-{$Include ..\ScriptEngine\tfwNamedDictionaryList.imp.pas}
+{$Include tfwNamedDictionaryList.imp.pas}
 
 
 {$IfEnd} //not NoScripts

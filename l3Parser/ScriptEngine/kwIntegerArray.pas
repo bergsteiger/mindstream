@@ -22,7 +22,7 @@ uses
 {$If not defined(NoScripts)}
 type
  _l3OpenArray_Parent_ = TkwIntegerList;
- {$Include w:\common\components\rtl\Garant\L3\l3OpenArray.imp.pas}
+ {$Include l3OpenArray.imp.pas}
  TkwIntegerArray = class(_l3OpenArray_)
  end;//TkwIntegerArray
 {$IfEnd} //not NoScripts
@@ -39,7 +39,7 @@ uses
 
 type _Instance_R_ = TkwIntegerArray;
 
-{$Include w:\common\components\rtl\Garant\L3\l3OpenArray.imp.pas}
+{$Include l3OpenArray.imp.pas}
 
 
 {$IfEnd} //not NoScripts

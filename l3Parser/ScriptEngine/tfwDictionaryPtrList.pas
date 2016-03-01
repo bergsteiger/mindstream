@@ -35,7 +35,7 @@ type
  _ItemType_ = TtfwDictionaryExPrim;
  _l3ObjectPtrList_Parent_ = Tl3ProtoDataContainer;
  {$Define l3Items_IsProto}
- {$Include w:\common\components\rtl\Garant\L3\l3ObjectPtrList.imp.pas}
+ {$Include l3ObjectPtrList.imp.pas}
  TtfwDictionaryPtrList = class(_l3ObjectPtrList_)
  end;//TtfwDictionaryPtrList
 {$IfEnd} //not NoScripts
@@ -55,7 +55,7 @@ uses
 
 type _Instance_R_ = TtfwDictionaryPtrList;
 
-{$Include w:\common\components\rtl\Garant\L3\l3ObjectPtrList.imp.pas}
+{$Include l3ObjectPtrList.imp.pas}
 
 
 {$IfEnd} //not NoScripts

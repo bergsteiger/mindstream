@@ -24,7 +24,7 @@ uses
 {$If not defined(NoScripts)}
 type
  _tfwOtherWordRunner_Parent_ = TkwCompiledWordWorker;
- {$Include ..\ScriptEngine\tfwOtherWordRunner.imp.pas}
+ {$Include tfwOtherWordRunner.imp.pas}
  TkwCompiledWordWorkerEx = class(_tfwOtherWordRunner_)
  private
  // private fields
@@ -51,7 +51,7 @@ uses
 
 {$If not defined(NoScripts)}
 
-{$Include ..\ScriptEngine\tfwOtherWordRunner.imp.pas}
+{$Include tfwOtherWordRunner.imp.pas}
 
 // start class TkwCompiledWordWorkerEx
 

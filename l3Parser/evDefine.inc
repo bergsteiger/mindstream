@@ -482,11 +482,7 @@
 // Revision 1.55  2003/03/19 10:47:33  law
 // - new directives: evForEE, _evNeedDisp, _evNotNeedDisp.
 //
-// Revision 1.54  2003/02/18 14:31:40  law
-// - new methods: IeeNode.Remove, IeeNode.RemoveChildren (для коллег из Гаранта 6 сделать удаление узлов из дерева №123).
 //
-// Revision 1.53  2003/02/14 13:40:15  law
-// - bug fix: Отключить ClipboardSpy для коллег из Гарант 6 (ee.dll) (№117).
 //
 // Revision 1.52  2003/01/09 14:18:18  law
 // - new directive: evSmartTablePaste.

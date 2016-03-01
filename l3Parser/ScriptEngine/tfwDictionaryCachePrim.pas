@@ -32,7 +32,7 @@ type
  _ItemType_ = TtfwDictionaryEx;
  {$Include ..\ScriptEngine\tfwSortedDictionaryList.imp.pas}
  _tfwNamedDictionaryList_Parent_ = _tfwSortedDictionaryList_;
- {$Include ..\ScriptEngine\tfwNamedDictionaryList.imp.pas}
+ {$Include tfwNamedDictionaryList.imp.pas}
  TtfwDictionaryCachePrim = class(_tfwNamedDictionaryList_)
  end;//TtfwDictionaryCachePrim
 {$IfEnd} //not NoScripts
@@ -56,7 +56,7 @@ type _Instance_R_ = TtfwDictionaryCachePrim;
 {$Include ..\ScriptEngine\tfwSortedDictionaryList.imp.pas}
 
 
-{$Include ..\ScriptEngine\tfwNamedDictionaryList.imp.pas}
+{$Include tfwNamedDictionaryList.imp.pas}
 
 
 {$IfEnd} //not NoScripts

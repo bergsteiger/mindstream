@@ -27,7 +27,7 @@ uses
 {$If not defined(NoScripts)}
 type
  _kwCompiledVar_Parent_ = TkwCompiledWordPrim;
- {$Include ..\ScriptEngine\kwCompiledVar.imp.pas}
+ {$Include kwCompiledVar.imp.pas}
  TkwCompiledVar = class(_kwCompiledVar_)
  public
  // overridden public methods
@@ -56,7 +56,7 @@ uses
 
 {$If not defined(NoScripts)}
 
-{$Include ..\ScriptEngine\kwCompiledVar.imp.pas}
+{$Include kwCompiledVar.imp.pas}
 
 // start class TkwCompiledVar
 

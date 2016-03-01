@@ -33,7 +33,7 @@ uses
 
 type
  _ItemType_ = TtfwDictionaryExPrim;
- {$Include ..\ScriptEngine\tfwDictionaryList.imp.pas}
+ {$Include tfwDictionaryList.imp.pas}
  TtfwInitedDictionariesList = class(_tfwDictionaryList_)
  end;//TtfwInitedDictionariesList
 {$IfEnd} //not NoScripts
@@ -53,7 +53,7 @@ uses
 
 type _Instance_R_ = TtfwInitedDictionariesList;
 
-{$Include ..\ScriptEngine\tfwDictionaryList.imp.pas}
+{$Include tfwDictionaryList.imp.pas}
 
 
 {$IfEnd} //not NoScripts

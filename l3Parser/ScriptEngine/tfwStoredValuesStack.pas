@@ -33,7 +33,7 @@ type
  _ItemType_ = ItfwStoredValues;
  _l3InterfaceRefListPrim_Parent_ = Tl3ProtoDataContainer;
  {$Define l3Items_IsProto}
- {$Include w:\common\components\rtl\Garant\L3\l3InterfaceRefListPrim.imp.pas}
+ {$Include l3InterfaceRefListPrim.imp.pas}
  TtfwStoredValuesStack = class(_l3InterfaceRefListPrim_, ItfwStoredValuesStack)
  protected
  // realized methods
@@ -119,7 +119,7 @@ end;//CompareExistingItems
 
 type _Instance_R_ = TtfwStoredValuesStack;
 
-{$Include w:\common\components\rtl\Garant\L3\l3InterfaceRefListPrim.imp.pas}
+{$Include l3InterfaceRefListPrim.imp.pas}
 
 // start class TtfwStoredValuesStack
 
