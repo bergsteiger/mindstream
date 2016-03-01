@@ -179,5 +179,6 @@
   {$define XE3}
   {$define XE4}
   {$define XE8}  
-  {$define DX}  
+  {$define XE10}  
+  {$define DX}
 {$endif}
