@@ -211,7 +211,7 @@
 // - вставлены директивы Log.
 //
 
-{$Include l3Define.inc }
+{$Include \l3Parser\l3Define.inc }
 
 {$IfDef ALCU}
  {.$Define k2NotForEditor}
