@@ -162,7 +162,7 @@ TtfwWord FUNCTION .FindMemberRecur
     ( Result IsNil ) 
     OR ( l_Found IsNil ) 
     OR ( Result = l_Found ) 
-     ?ASSURE [ 'Multiply inheritance. Word: ' aName ' generator ' aGen pop:Word:Name ' parent generator ' anItem pop:Word:Name ]
+     ?ASSURE [ 'Multiply inheritance. Word: ' aName ' generator ' aGen .WordName ' parent generator ' anItem .WordName ]
     l_Found >>> Result
    ) 
   )
@@ -264,7 +264,7 @@ elem_proc GenerateWordToFileWith:
  TF g_Indent (
   '' >>> g_Indent
   STRING VAR l_FileName 
-  [ Self pop:Word:Name .? Ext ] strings:Cat >>> l_FileName
+  [ Self .WordName .? Ext ] strings:Cat >>> l_FileName
  
   STRING VAR l_TempPath
   'C:\Temp\GenScripts\' >>> l_TempPath
@@ -314,7 +314,7 @@ elem_proc GenerateWordToFileWith:
 elem_proc DeleteWordFile
  
   STRING VAR l_FileName 
-  [ Self pop:Word:Name .? Ext ] strings:Cat >>> l_FileName
+  [ Self .WordName .? Ext ] strings:Cat >>> l_FileName
   
   STRING VAR l_RealPath
   cGenScriptsFolder >>> l_RealPath
@@ -949,6 +949,24 @@ INTERFACE FUNCTION MakeParam
  l_Param pop:Word:DecRef 
 ; // MakeParam
 
+INTERFACE FUNCTION MakeClass
+  STRING IN aName
+  ModelElement IN anAncestor
+ VAR l_Param
+ 
+ KeyValues:Create >>> l_Param
+ 
+ l_Param pop:Word:Box >>> Result
+ 
+ l_Param -> Name := aName
+ if ( anAncestor IsNil ! ) then
+ begin
+  l_Param -> Inherits := [ anAncestor ]
+ end // ( anAncestor IsNil ! )
+ 
+ l_Param pop:Word:DecRef 
+; // MakeClass
+
 WordAlias MakeFunction MakeParam
 WordAlias MakeField MakeParam
 
@@ -967,8 +985,114 @@ BOOLEAN elem_func IsInParam
  Self .IsStereotype st_in::Attribute >>> Result
 ; // IsInParam
 
+BOOLEAN elem_func IsControlPrim
+ Self .IsStereotype st_ControlPrim >>> Result
+; // IsControlPrim
+
+BOOLEAN elem_func IsControlOverride
+ Self .IsStereotype st_ControlOverride >>> Result
+; // IsControlOverride
+
+BOOLEAN elem_func IsMixInParamType
+ Self .IsStereotype st_ImpurityParamType >>> Result
+; // IsMixInParamType
+
+ModelElement elem_func FirstAttribute
+ Cached:
+ (
+  Self .Attributes .FirstElement
+ )
+ >>> Result
+; // FirstAttribute
+
+: g_MixInParamTypes
+ @SELF
+; // g_MixInParamTypes
+  
+STRING elem_func TypeName
+ Cached:
+ (
+  RULES
+   ( Self IsString )
+    Self
+   ( Self .IsOpenArray )
+    ( [ 'array of ' Self .FirstAttribute .Target call.me ] strings:Cat )
+   DEFAULT  
+    (
+     STRING VAR l_ExtName
+     Self .GetUP 'extprop:pas:TypeName' >>> l_ExtName
+     RULES
+      ( l_ExtName IsNil ! )
+       l_ExtName
+      DEFAULT
+       ( Self .Name )
+     ; // RULES
+    )
+  ; // RULES  
+ )
+ >>> Result
+ if ( Self .IsMixInParamType ) then
+ begin
+  VAR l_Field
+  @ g_MixInParamTypes %% ( Self .Name ) >>> l_Field
+  if ( l_Field IsNil ! ) then
+  begin
+   l_Field DO >>> l_Field
+   if ( l_Field IsNil ! ) then
+   begin
+    l_Field call.me >>> Result
+   end // ( l_Field IsNil ! )
+  end // ( l_Field IsNil ! )
+ end // ( Self .IsMixInParamType )
+; // TypeName
+
+ModelElement elem_func FriendClass
+ Cached:
+ (
+  VAR l_TypeName
+  Self .TypeName >>> l_TypeName
+  l_TypeName 'Friend' Cat Self MakeClass
+  DUP
+  VAR l_Boxed
+  pop:WordBox:Boxed >>> l_Boxed
+  l_Boxed -> Stereotype := st_SimpleClass
+  l_Boxed -> %SUM := ( 'Друг к классу ' l_TypeName Cat )
+  l_Boxed -> Visibility := PrivateAccess
+  l_Boxed -> "ifdef" := ( Self .GetUP "ifdef" )
+  l_Boxed -> "ifndef" := ( Self .GetUP "ifndef" )
+ )
+ >>> Result
+; // FriendClass
+
+ModelElement elem_func EffectiveType
+ Cached:
+ (
+  RULES
+   ( Self .UPisTrue "is friend" )
+    ( Self .MainAncestor .FriendClass ) 
+   DEFAULT
+    ( Self .MainAncestor ) 
+  ; // RULES  
+ )
+ >>> Result
+; // EffectiveType
+
+ModelElement elem_func SelfParam
+ Cached:
+ (
+  'Self' Self MakeParam
+ )
+ >>> Result
+; // SelfParam
+
 ARRAY elem_func MethodParameters
  RULES
+  ( Self .Parent .IsTestClass )
+   (
+    [ Self .Parent .EffectiveType .SelfParam ]
+    .join>
+    ( Self .Parameters )
+   )
   ( Self .IsIterator )
    (
     RULES
@@ -993,6 +1117,21 @@ ARRAY elem_func MethodParameters
  ; // RULES
  >>> Result
 ; // MethodParameters
+
+elem_iterator PropertyKeys
+ RULES
+  ( Self .Parent .IsTestClass )
+   (
+    [ Self .Parent .EffectiveType .SelfParam ]
+    .join>
+    ( Self .Attributes )
+   )
+  DEFAULT 
+   ( Self .Attributes )
+ ; // RULES  
+ .filter> ( .IsControlPrim ! )
+ >>> Result
+; // PropertyKeys
 
 ARRAY FUNCTION .With()>
   OUTABLE IN aValue
@@ -1153,11 +1292,11 @@ elem_proc OutUserCode:
   l_TempFileName File:OpenWrite >>> l_Out
   TRY
    g_CurrentGenerator MembersIterator 
-   .filter> ( pop:Word:Name l_CurrentGeneratedElementPrefix SWAP StartsStr )
+   .filter> ( .WordName l_CurrentGeneratedElementPrefix SWAP StartsStr )
    .for> (
      IN anItem
     STRING VAR l_Key 
-    anItem pop:Word:Name cPalka string:Split >>> l_Key DROP
+    anItem .WordName cPalka string:Split >>> l_Key DROP
     
     cUCStart l_Out File:WriteStr
     l_Key l_Out File:WriteWStrLn
@@ -1335,59 +1474,6 @@ BOOLEAN elem_func IsProperty
  >>> Result
 ; // IsProperty
 
-BOOLEAN elem_func IsMixInParamType
- Self .IsStereotype st_ImpurityParamType >>> Result
-; // IsMixInParamType
-
-: g_MixInParamTypes
- @SELF
-; // g_MixInParamTypes
-  
-ModelElement elem_func FirstAttribute
- Cached:
- (
-  Self .Attributes .FirstElement
- )
- >>> Result
-; // FirstAttribute
-
-STRING elem_func TypeName
- Cached:
- (
-  RULES
-   ( Self IsString )
-    Self
-   ( Self .IsOpenArray )
-    ( [ 'array of ' Self .FirstAttribute .Target call.me ] strings:Cat )
-   DEFAULT  
-    (
-     STRING VAR l_ExtName
-     Self .GetUP 'extprop:pas:TypeName' >>> l_ExtName
-     RULES
-      ( l_ExtName IsNil ! )
-       l_ExtName
-      DEFAULT
-       ( Self .Name )
-     ; // RULES
-    )
-  ; // RULES  
- )
- >>> Result
- if ( Self .IsMixInParamType ) then
- begin
-  VAR l_Field
-  @ g_MixInParamTypes %% ( Self .Name ) >>> l_Field
-  if ( l_Field IsNil ! ) then
-  begin
-   l_Field DO >>> l_Field
-   if ( l_Field IsNil ! ) then
-   begin
-    l_Field call.me >>> Result
-   end // ( l_Field IsNil ! )
-  end // ( l_Field IsNil ! )
- end // ( Self .IsMixInParamType )
-; // TypeName
-
 ARRAY FUNCTION .joinWithLambded>
   ARRAY IN anArrayToJoin
   ^ IN anArrayToIterate
@@ -1492,6 +1578,8 @@ INTERFACE elem_func InstanceField
   l_Boxed -> %SUM := ( 'Экземпляр синглетона ' l_TypeName Cat )
   l_Boxed -> Visibility := PrivateAccess
   l_Boxed -> 'extprop:pas:Value' := 'nil'
+  l_Boxed -> "ifdef" := ( Self .GetUP "ifdef" )
+  l_Boxed -> "ifndef" := ( Self .GetUP "ifndef" )
  )
  >>> Result
 ; // InstanceField
@@ -2505,14 +2593,6 @@ ANY elem_func GetUserCode
  >>> Result
 ; // GetUserCode
 
-BOOLEAN elem_func IsControlPrim
- Self .IsStereotype st_ControlPrim >>> Result
-; // IsControlPrim
-
-BOOLEAN elem_func IsControlOverride
- Self .IsStereotype st_ControlOverride >>> Result
-; // IsControlOverride
-
 BOOLEAN elem_func IsConstructorsHolder
  ( Self .MainAncestor IsNil ! )
  AND ( Self .Attributes .CountIt <= 0 )
@@ -3369,10 +3449,25 @@ elem_iterator AttributesAndOperations
  >>> Result
 ; // AttributesAndOperations
 
+elem_iterator ChildrenEx
+ Cached:
+ (
+  Self .Children
+  if ( Self .IsTestClass ) then
+  begin
+   if ( Self .UPisTrue "is friend" ) then
+   begin
+    .join> [ Self .MainAncestor .FriendClass ]
+   end // ( Self .UPisTrue "is friend" )
+  end // ( Self .IsTestClass )
+ )
+ >>> Result
+; // ChildrenEx
+
 elem_iterator ChildrenWithoutOwnFile
  Cached:
  ( 
-  Self .Children .filter> ( .NeedOwnFile ! ) 
+  Self .ChildrenEx .filter> ( .NeedOwnFile ! ) 
  )
  >>> Result
 ; // ChildrenWithoutOwnFile
@@ -3380,7 +3475,7 @@ elem_iterator ChildrenWithoutOwnFile
 elem_iterator ChildrenWithOwnFile
  Cached:
  ( 
-  Self .Children .filter> .NeedOwnFile
+  Self .ChildrenEx .filter> .NeedOwnFile
  )
  >>> Result
 ; // ChildrenWithOwnFile
@@ -3700,6 +3795,11 @@ elem_iterator ImplUses
   .join> ( Self .AbstractUses )
  end // ( Self .IsClassOrMixIn )
   
+ if ( Self .IsTestClass ) then
+ begin
+  .join> [ GarantModel::Variants GarantModel::ActiveX 'tc5OpenAppClasses' 'tc5PublicInfo' 'tc6OpenAppClasses' 'tc6PublicInfo' ]
+ end // ( Self .IsTestClass )
+  
  if ( Self .Name 'l3IID' == ) then
  begin
   .join> [ GarantModel::Windows GarantModel::SysUtils ]
@@ -3964,12 +4064,6 @@ STRING elem_func MethodNamePrefix
  ; // RULES 
  >>> Result
 ; // MethodNamePrefix
-
-elem_iterator PropertyKeys
- Self .Attributes
- .filter> ( .IsControlPrim ! )
- >>> Result
-; // PropertyKeys
 
 INTERFACE elem_func ValueParam
  Cached:
@@ -4551,6 +4645,8 @@ INTERFACE elem_func InstanceFreeMethod
   pop:WordBox:Boxed >>> l_Boxed
   l_Boxed -> %SUM := ( 'Метод освобождения экземпляра синглетона ' l_TypeName Cat )
   l_Boxed -> Visibility := PrivateAccess
+  l_Boxed -> "ifdef" := ( Self .GetUP "ifdef" )
+  l_Boxed -> "ifndef" := ( Self .GetUP "ifndef" )
   l_Boxed ->^ cVarUserCodeName ^:= cEmptyUserCode
   l_Boxed ->^ cImplementationUserCodeName ^:= [ 
    if ( Self .HasFactory ) then
@@ -4685,6 +4781,10 @@ BOOLEAN elem_func UseNewGen
    ( Self IsNil )
     false
    ( Self .IsElementProxy )
+    true
+   ( Self .IsTestClass )
+    true
+   ( Self .IsStereotype st_Wrapper )
     true
    ( Self .IsStereotype st_EVD )
     false 
@@ -5691,6 +5791,8 @@ elem_proc OutType
    ()
   ( Self .IsUserType )
    ()
+  ( Self .IsTestClass )
+   ()
   DEFAULT
    (
     if ( Self g_OutedTypes array:Has ! ) then
@@ -5714,6 +5816,8 @@ elem_proc OutType
         ( Self .OutClass )
        ( Self .IsMixIn )
         ( Self .OutClass )
+       //( Self .IsTestClass )
+       // ( Self .OutClass )
        ( Self .IsClass )
         ( Self .OutClass )
        ( Self .IsPureMixIn ) 
@@ -5747,6 +5851,8 @@ BOOLEAN elem_func IsType
  (
   RULES
    ( Self .IsElementProxy )
+    false
+   ( Self .IsTestClass )
     false
    ( Self .IsUserType ) 
     false
@@ -6491,12 +6597,289 @@ elem_proc OutClassImplementation
 
 ; // OutClassImplementation
 
+elem_proc OutTestClassImplementation
+
+ elem_proc MethodBody
+  Self .UserCode: cVarUserCodeSuffix ()
+  'begin' .Out
+  ' with Self do' .Out
+  ' begin' .Out
+   Self .UserCode: cImplementationUserCodeSuffix ( ' !!! Needs to be implemented !!!' )
+  ' end;//with Self' .Out 
+  [ 'end;//' g_MethodParentPrefix Self .MethodNamePrefix Self .MethodName ] .Out
+  OutLn
+ ; // MethodBody
+ 
+ elem_iterator ParamsOrKeys
+  if ( Self .IsProperty ) then
+   ( Self .PropertyKeys )
+  else 
+   ( Self .MethodParameters )
+  .filter> ( .Name 'Self' != ) 
+  >>> Result 
+ ; // ParamsOrKeys
+ 
+ elem_iterator OperationsAndProperties
+  Self .Operations 
+  .join> ( Self .Properties )
+  >>> Result
+ ; // OperationsAndProperties
+ 
+ TF g_MethodParentPrefix (
+  Self .TypeName >>> g_MethodParentPrefix
+  g_MethodParentPrefix '_' Cat >>> g_MethodParentPrefix
+  
+  Self .OperationsAndProperties .for> .MethodInterfaceForEx: nil .MethodBody
+
+  [ 5 6 ] .for> (
+    IN aNum
+   
+   STRING elem_func ToVariant
+    RULES
+     ( Self .IsSimpleClass )
+      ( [ 'tc' aNum IntToStr 'PublicInfo.VarFromObject' ] strings:Cat )
+     DEFAULT
+      ''
+    ; // RULES
+    >>> Result   
+   ; // ToVariant
+   
+   STRING elem_func FromVariant
+    RULES
+     ( Self .Name 'String' == )
+      '__coerce_String'
+     ( Self .Name 'AnsiString' == )
+      '__coerce_String'
+     DEFAULT
+      'OleVariant'
+    ; // RULES
+    >>> Result   
+   ; // ToVariant
+   
+   Self .OperationsAndProperties .for> (
+     IN aMethod
+    if ( aMethod .IsWriteonlyProperty ! ) then
+    begin 
+     VAR l_MethodName
+     [ 
+      g_MethodParentPrefix 
+      
+      if ( aMethod .IsProperty ) then
+       'Get_'
+      
+      aMethod .Name 
+     ] strings:Cat >>> l_MethodName
+     
+     [ 'procedure ' l_MethodName '_Pub' aNum '(Instance: TObject; Args: PVariantArgList; out Value: OleVariant; Cookie: Cardinal); stdcall;' ] .Out
+     'begin' .Out
+     [ ' Assert(Instance is ' Self .MainAncestor .TypeName ');' ] .Out
+     ' try' .Out
+     [ '  ' 
+      if ( aMethod .MethodType IsNil ! ) then
+      begin
+       'Value := ' aMethod .MethodType .ToVariant '('
+      end // ( aMethod .MethodType IsNil ! )
+      l_MethodName 
+      '(' 
+      Self .EffectiveType .TypeName '(' 'Instance' ')' 
+      
+      VAR l_Index
+      0 >>> l_Index
+      aMethod .ParamsOrKeys .for> ( 
+        IN aParam
+       ', ' 
+       aParam .Target .FromVariant
+       '('
+       'Args^['
+       l_Index
+       ']'
+       ')'
+       INC l_Index
+      ) // aMethod .ParamsOrKeys .for>
+      ')' 
+      if ( aMethod .MethodType IsNil ! ) then
+       ')'
+      ';' 
+     ] .Out
+     ' except' .Out
+     '  // - гасим исключения' .Out
+     if ( aMethod .MethodType IsNil ! ) then
+     begin
+      '  Value := Unassigned;' .Out
+     end // ( aMethod .MethodType IsNil ! )
+     ' end;//try..except' .Out
+     'end;' .Out
+     OutLn
+    end // ( aMethod .IsWriteonlyProperty ! ) 
+    
+    if ( aMethod .IsProperty ) then
+    if ( aMethod .IsReadonlyProperty ! ) then
+    begin 
+     VAR l_MethodName
+     [ 
+      g_MethodParentPrefix 
+      
+       'Set_'
+      
+      aMethod .Name 
+     ] strings:Cat >>> l_MethodName
+     
+     [ 'procedure ' l_MethodName '_Pub' aNum '(Instance: TObject; Args: PVariantArgList; out Value: OleVariant; Cookie: Cardinal); stdcall;' ] .Out
+     'begin' .Out
+     [ ' Assert(Instance is ' Self .MainAncestor .TypeName ');' ] .Out
+     ' try' .Out
+     [ '  ' 
+      l_MethodName 
+      '(' 
+      Self .EffectiveType .TypeName '(' 'Instance' ')' 
+      
+      ', ' 
+      aMethod .Target .FromVariant
+      '('
+      'Args^['
+      0
+      ']'
+      ')'
+      
+      ')' 
+      ';' 
+     ] .Out
+     ' except' .Out
+     '  // - гасим исключения' .Out
+     ' end;//try..except' .Out
+     'end;' .Out
+     OutLn
+    end // ( aMethod .IsReadonlyProperty ! )
+    
+   ) // Self .OperationsAndProperties .for>
+   
+   [ 'procedure _RegisterPublicInformation' aNum ';' ] .Out
+   'begin' .Out
+    Self .OperationsAndProperties .for> (
+      IN aMethod
+     if ( aMethod .IsWriteonlyProperty ! ) then
+     begin 
+      VAR l_MethodName
+      [ 
+       g_MethodParentPrefix 
+       
+       if ( aMethod .IsProperty ) then
+        'Get_'
+       
+       aMethod .Name 
+       '_Pub'
+       aNum IntToStr
+      ] strings:Cat >>> l_MethodName
+      [ 
+       ' ' 'tc' aNum 'PublicInfo._RegisterMethod' 
+       '(' 
+       Self .MainAncestor .TypeName
+       ', '
+       'tc' aNum 'OpenAppClasses' '.' 
+       
+       if ( aMethod .IsProperty ) then
+        'mtGet'
+       else
+        'mtInvoke'
+       
+       ', '
+       cQuote aMethod .Name cQuote
+       
+       ', '
+       if ( aMethod .MethodType IsNil ) then
+        'nil'
+       else
+       begin
+        'TypeInfo(' aMethod .MethodType .TypeName ')'
+       end 
+       
+       ', '
+       '['
+       (
+        VAR l_WasComma
+        false >>> l_WasComma
+        aMethod .ParamsOrKeys .map> ( .Target .TypeName 'TypeInfo(' SWAP Cat ')' Cat ) .for> (
+         .WithComma: l_WasComma .KeepInStack
+        )
+       )
+       ']'
+       
+       ', '
+       '['
+       (
+        VAR l_WasComma
+        false >>> l_WasComma
+        aMethod .ParamsOrKeys .map> ( .Name cQuote SWAP Cat cQuote Cat ) .for> (
+         .WithComma: l_WasComma .KeepInStack
+        )
+       )
+       ']'
+       
+       ', '
+       l_MethodName
+       
+       ')' ';' 
+      ] .Out 
+     end // ( aMethod .IsWriteonlyProperty ! )
+     
+     if ( aMethod .IsProperty ) then
+     if ( aMethod .IsReadonlyProperty ! ) then
+     begin 
+      VAR l_MethodName
+      [ 
+       g_MethodParentPrefix 
+       
+       'Set_'
+       
+       aMethod .Name 
+       '_Pub'
+       aNum IntToStr
+      ] strings:Cat >>> l_MethodName
+      [ 
+       ' ' 'tc' aNum 'PublicInfo._RegisterMethod' 
+       '(' 
+       Self .MainAncestor .TypeName
+       ', '
+       'tc' aNum 'OpenAppClasses' '.' 
+       
+       'mtPut'
+       
+       ', '
+       cQuote aMethod .Name cQuote
+       
+       ', '
+       'nil'
+       
+       ', '
+       '['
+       ']'
+       
+       ', '
+       '['
+       ']'
+       
+       ', '
+       l_MethodName
+       
+       ')' ';' 
+      ] .Out 
+     end // ( aMethod .IsReadonlyProperty ! )
+    ) // Self .OperationsAndProperties .for>
+   'end;' .Out
+   OutLn
+   
+  ) // [ 5 6 ] .for>
+ ) // TF g_MethodParentPrefix
+; // OutTestClassImplementation
+
 elem_proc OutImplementation
  RULES
   ( Self .IsClassOrMixIn )
    ( Self .OutClassImplementation )
   ( Self .IsStaticObject )
    ( Self .OutClassImplementation )
+  ( Self .IsTestClass )
+   ( Self .OutTestClassImplementation )
  ; // RULES
 ; // OutImplementation
 
@@ -6757,7 +7140,7 @@ elem_proc OutUnit
  DoOutUnit (
   TF g_DefaultInterfaceAncestor (
   
-   Self .Children .filter> ( .UPisTrue "is default ancestor" ) .FirstElement >>> g_DefaultInterfaceAncestor
+   Self .ChildrenEx .filter> ( .UPisTrue "is default ancestor" ) .FirstElement >>> g_DefaultInterfaceAncestor
    
    [ 
     RULES
@@ -7278,7 +7661,7 @@ elem_proc GenerateWithChildren
    ) // TF g_CurrentGenerator
   ) // aGenerators CodeIterator .for>
   
-  Self .Children 
+  Self .ChildrenEx 
  //  .filter> ( .NeedOwnFile )
     .for> ( aGenerators call.me )
   // - тут генерируем детей  

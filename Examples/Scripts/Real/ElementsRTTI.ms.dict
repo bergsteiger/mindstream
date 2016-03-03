@@ -139,6 +139,16 @@ USES
  axiom:WordBox
 ;
 
+STRING elem_func WordName
+ RULES
+  ( Self IsIntf )
+   ( Self pop:WordBox:Boxed pop:Word:Name )
+  DEFAULT
+   ( Self pop:Word:Name ) 
+ ; // RULES
+ >>> Result  
+; // WordName
+
 : DoCache
   ModelElement IN aCacheWhere
   STRING IN aKey
@@ -154,12 +164,20 @@ USES
  begin
   aLambda DO
  end // aCacheWhere IsString
+/* else
+ if ( aCacheWhere IsIntf ) then
+ begin
+  aLambda DO
+ end // aCacheWhere IsIntf*/
  else
  begin 
   ModelElement VAR l_CacheWhere
+  VAR l_IsIntf
+  false >>> l_IsIntf
   if ( aCacheWhere IsIntf ) then
   begin
    aCacheWhere pop:WordBox:Boxed >>> l_CacheWhere
+   true >>> l_IsIntf
   end // ( aCacheWhere IsIntf )
   else
   begin
@@ -172,18 +190,30 @@ USES
  
   if ( l_FieldVar NotValid ) then    
   begin
-   VAR l_NewVar
-   aKey false l_CacheWhere pop:NewWordDefinitor:CheckVar >>> l_NewVar
-   @SELF l_NewVar pop:Word:SetProducer
    TRY
     aLambda DO
    EXCEPT
-    [ 'Ошибка вызова: ' current:exception:Message ' : ' aKey ' на ' l_CacheWhere pop:Word:Name ] strings:Cat .
+    [ 'Ошибка вызова: ' current:exception:Message ' : ' aKey ' на ' l_CacheWhere .WordName ] strings:Cat .
     aDefault
    END
-   l_NewVar pop:Word:SetValue
-   l_NewVar DO
-  end
+   
+   if l_IsIntf then
+   begin
+    if ( DUP IsIntf ! ) then
+    begin
+     false >>> l_IsIntf
+    end // l_IsIntf
+   end // l_IsIntf
+   
+   if ( l_IsIntf ! ) then
+   begin
+    VAR l_NewVar
+    aKey false l_CacheWhere pop:NewWordDefinitor:CheckVar >>> l_NewVar
+    @SELF l_NewVar pop:Word:SetProducer
+    l_NewVar pop:Word:SetValue
+    l_NewVar DO
+   end // ( l_IsIntf ! )
+  end // ( l_FieldVar NotValid )
   else 
   begin
    l_FieldVar DO
@@ -195,7 +225,7 @@ USES
   ModelElement IN aCacheWhere
   TtfwWord IN aWord
   ^ IN aLambda
- aCacheWhere aWord pop:Word:Name nil DoCache ( aLambda DO )
+ aCacheWhere aWord .WordName nil DoCache ( aLambda DO )
 ; // CacheWord
 
 MACRO Cache
@@ -281,7 +311,7 @@ STRING elem_func ElemString
  >>> Result 
 ; // ElemString
 
-TtfwWord elem_func ElemWord
+ModelElement elem_func ElemWord
   STRING IN aMemberName
  Self aMemberName nil DoCache
  (
@@ -361,11 +391,11 @@ STRING elem_func Documentation
  Self '%SUM' .ElemString >>> Result
 ; // Documentation
 
-TtfwWord elem_func Target
+ModelElement elem_func Target
  Self 'Target' .ElemWord >>> Result
 ; // Target
 
-TtfwWord elem_func ValueType
+ModelElement elem_func ValueType
  Self 'ValueType' .ElemWord >>> Result
 ; // ValueType
 
@@ -381,7 +411,7 @@ BOOLEAN elem_func UPisTrue
  Self aName |N false .ElemMember true ?== >>> Result  
 ; // UPisTrue
 
-TtfwWord STRING elem_func Stereotype
+ModelElement STRING elem_func Stereotype
  Self 'Stereotype' .ElemWord >>> Result
 ; // Stereotype
 
@@ -389,10 +419,10 @@ BOOLEAN elem_func IsStereotype
   ^ IN aStereo
   
  BOOLEAN FUNCTION IsStereoKindOf
-   TtfwWord IN anOurStereo
-   TtfwWord IN anOtherStereo
+   ModelElement IN anOurStereo
+   ModelElement IN anOtherStereo
   anOurStereo 
-  'isA:' anOtherStereo pop:Word:Name Cat 
+  'isA:' anOtherStereo .WordName Cat 
   false
   DoCache (
    BOOLEAN VAR l_Is
@@ -406,7 +436,7 @@ BOOLEAN elem_func IsStereotype
     anOurStereo .Inherited.Words 
     .trunc> ( DROP l_Is ! ) 
     .for> (
-     TtfwWord IN anAncestor
+     ModelElement IN anAncestor
      if ( anAncestor anOtherStereo call.me ) then
      begin
       true >>> l_Is
@@ -417,7 +447,7 @@ BOOLEAN elem_func IsStereotype
   ) >>> Result
  ; // IsStereoKindOf
 
- TtfwWord VAR l_OurStereo
+ ModelElement VAR l_OurStereo
  Self .Stereotype >>> l_OurStereo
  
  if ( l_OurStereo IsNil ) then
@@ -426,7 +456,7 @@ BOOLEAN elem_func IsStereotype
  end // l_OurStereo IsNil
  else
  begin
-  TtfwWord VAR l_Stereo
+  ModelElement VAR l_Stereo
   aStereo DO >>> l_Stereo
   l_OurStereo l_Stereo IsStereoKindOf >>> Result
  end // // l_OurStereo IsNil
@@ -497,7 +527,7 @@ STRING elem_func UIDEx
      Self .Name >>> l_Name 
      RULES
       ( l_Name IsNil )
-       ( Self pop:Word:Name )
+       ( Self .WordName )
       DEFAULT
        l_Name 
      ; // RULES
@@ -529,7 +559,7 @@ STRING FUNCTION ValueToKey
   ( aValue Is class::TkwCompiledWord )
    ( aValue .UIDEx )
   ( aValue Is class::TtfwWord )
-   ( aValue pop:Word:Name )
+   ( aValue .WordName )
   ( aValue IsObj )
    ERROR 'Невозможно построить ключ для абстрактного объекта'
   ( aValue IsNil )
@@ -546,7 +576,7 @@ STRING FUNCTION ValueToKey
   TtfwWord IN aWord
   ^ IN aLambda
  aCacheWhere 
- aKey ValueToKey aWord pop:Word:Name Cat 
+ aKey ValueToKey aWord .WordName Cat 
  nil DoCache ( aLambda DO )
 ; // CacheWordEx
 

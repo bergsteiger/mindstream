@@ -8,6 +8,8 @@ WordAlias GarantModel::Integer ME_46A606AC03B2
 
 WordAlias GarantModel::Boolean ME_46A603BB0391
 
+WordAlias GarantModel::Variants ME_48088D6800F9
+
 USES
  4AB0C3F60375.pas.ms.script // Windows
 ;
@@ -19,6 +21,12 @@ USES
 ;
 
 WordAlias GarantModel::Classes ME_478CF30500C1
+
+USES
+ 46A0E6C5023A.pas.ms.script  // ActiveX
+;
+
+WordAlias GarantModel::ActiveX ME_46A0E6C5023A
 
 USES
  4799D29F033F.pas.ms.script  // Controls
