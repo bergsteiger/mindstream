@@ -1389,7 +1389,6 @@ TClass class::TkwPopWordMembersIterator
 TClass class::TkwPopWordName
 TClass class::TkwPopWordParent
 TClass class::TkwPopWordProducer
-TClass class::TkwPopWordPublicateInMainDictionary
 TClass class::TkwPopWordRedefines
 TClass class::TkwPopWordSetKey
 TClass class::TkwPopWordSetParent
@@ -2609,7 +2608,6 @@ TkwPopWordMembersIterator
 TkwPopWordName
 TkwPopWordParent
 TkwPopWordProducer
-TkwPopWordPublicateInMainDictionary
 TkwPopWordRedefines
 TkwPopWordSetKey
 TkwPopWordSetParent
@@ -3073,7 +3071,6 @@ VOID OPERATOR :: PROCEDURE : pop:Word:Print
  TtfwWord OPERATOR :: IN : aWord
 ; // pop:Word:Print
 TtfwWord pop:Word:Producer
-VOID pop:Word:PublicateInMainDictionary
 TtfwWord pop:Word:Redefines
 VOID pop:Word:SetKey
 VOID pop:Word:SetParent
