@@ -198,7 +198,7 @@ STRING CALLER operator %SS
 //;
 // - похоже - пока не понадобилось, ввёл вместо него [EXPORT]
 
-IMMEDIATE operator [EXPORT]
+/*{IMMEDIATE operator [EXPORT]
   ^ REFERENCE IN WordToWork
  if ( WordToWork |S '<<MDAUtilityPack>>' SameText ! ) then
  (
@@ -206,7 +206,7 @@ IMMEDIATE operator [EXPORT]
   WordToWork pop:Word:PublicateInMainDictionary
  )
 ;
-// - экспортирует указанное слово в основной словарь
+// - экспортирует указанное слово в основной словарь}*/
 
 IMMEDIATE operator implementation
  ^ IN WordToWork
