@@ -45,3 +45,11 @@ USES
 ;
 
 WordAlias GarantModel::l3Base ME_4773D64E036C
+
+USES
+ 467BAB7F021E.pas.ms.script // vcmExternalInterfaces
+;
+
+WordAlias GarantModel::IvcmTestParamsPrim ME_4683E07E004B
+WordAlias GarantModel::IvcmTestExecutePrim ME_4683E1AD0047
+WordAlias GarantModel::TvcmOperationStateIndex ME_4683F4D501E9

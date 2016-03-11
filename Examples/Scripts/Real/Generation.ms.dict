@@ -949,6 +949,21 @@ INTERFACE FUNCTION MakeParam
  l_Param pop:Word:DecRef 
 ; // MakeParam
 
+USES
+ axiom:WordBox
+;
+
+INTERFACE FUNCTION MakeInOutParam
+  STRING IN aName
+  ModelElement IN aType
+ aName aType MakeParam
+ DUP
+ VAR l_Boxed
+ pop:WordBox:Boxed >>> l_Boxed
+ l_Boxed -> Stereotype := st_inout
+ >>> Result
+; // InstanceMethod
+
 INTERFACE FUNCTION MakeClass
   STRING IN aName
   ModelElement IN anAncestor
@@ -970,10 +985,6 @@ INTERFACE FUNCTION MakeClass
 WordAlias MakeFunction MakeParam
 WordAlias MakeField MakeParam
 
-USES
- axiom:WordBox
-;
-
 INTERFACE elem_func ActionParam
  Cached:
  (
@@ -992,6 +1003,10 @@ BOOLEAN elem_func IsControlPrim
 BOOLEAN elem_func IsControlOverride
  Self .IsStereotype st_ControlOverride >>> Result
 ; // IsControlOverride
+
+BOOLEAN elem_func IsContract
+ Self .IsStereotype st_Contract >>> Result
+; // IsContract
 
 BOOLEAN elem_func IsMixInParamType
  Self .IsStereotype st_ImpurityParamType >>> Result
@@ -1046,6 +1061,120 @@ STRING elem_func TypeName
  end // ( Self .IsMixInParamType )
 ; // TypeName
 
+USES
+ string.ms.dict
+;
+
+STRING FUNCTION RemoveDuplicatedIfDef
+  STRING IN aValue
+ cEmptyStr >>> Result 
+ ARRAY VAR l_Outed
+ [] >>> l_Outed
+ aValue ',' string:Split:for> (
+   IN aSubstr
+  aSubstr string:Trim >>> aSubstr
+  if ( aSubstr IsNil ! ) 
+   if ( l_Outed aSubstr array:HasText ! ) then
+   begin
+    aSubstr array:AddTo l_Outed
+    if ( Result IsNil ) then
+     ( aSubstr >>> Result )
+    else
+     ( Result ',' aSubstr Cat Cat >>> Result )
+   end // ( l_Outed aSubstr array:HasText ! )
+ ) // aValue ',' string:Split:for>
+; // RemoveDuplicatedIfDef
+
+STRING elem_func IfDefStr
+ Cached:
+ (
+  Self .GetUP "ifdef" >>> Result
+  
+  VAR l_Parent
+  Self .Parent >>> l_Parent
+  if ( l_Parent IsNil ! ) then
+  begin
+   VAR l_ParentIfDefStr
+   l_Parent call.me >>> l_ParentIfDefStr
+   if ( l_ParentIfDefStr IsNil ! ) then
+   begin
+    if ( Result IsNil ) then
+    begin
+     l_ParentIfDefStr >>> Result
+    end // ( Result IsNil )
+    else
+    begin
+     l_ParentIfDefStr ',' Result Cat Cat >>> Result
+    end // ( Result IsNil )
+   end // ( l_ParentIfDefStr IsNil ! )
+  end // ( l_Parent IsNil ! )
+  Self .Implementor >>> l_Parent
+  if ( l_Parent IsNil ! ) then
+  begin
+   VAR l_ParentIfDefStr
+   l_Parent call.me >>> l_ParentIfDefStr
+   if ( l_ParentIfDefStr IsNil ! ) then
+   begin
+    if ( Result IsNil ) then
+    begin
+     l_ParentIfDefStr >>> Result
+    end // ( Result IsNil )
+    else
+    begin
+     l_ParentIfDefStr ',' Result Cat Cat >>> Result
+    end // ( Result IsNil )
+   end // ( l_ParentIfDefStr IsNil ! )
+  end // ( l_Parent IsNil ! )
+  Result RemoveDuplicatedIfDef
+ )
+ >>> Result 
+; // IfDefStr
+
+STRING elem_func IfNDefStr
+ Cached:
+ (
+  Self .GetUP "ifndef" >>> Result
+  
+  VAR l_Parent
+  Self .Parent >>> l_Parent
+  if ( l_Parent IsNil ! ) then
+  begin
+   VAR l_ParentIfDefStr
+   l_Parent call.me >>> l_ParentIfDefStr
+   if ( l_ParentIfDefStr IsNil ! ) then
+   begin
+    if ( Result IsNil ) then
+    begin
+     l_ParentIfDefStr >>> Result
+    end // ( Result IsNil )
+    else
+    begin
+     l_ParentIfDefStr ',' Result Cat Cat >>> Result
+    end // ( Result IsNil )
+   end // ( l_ParentIfDefStr IsNil ! )
+  end // ( l_Parent IsNil ! )
+  Self .Implementor >>> l_Parent
+  if ( l_Parent IsNil ! ) then
+  begin
+   VAR l_ParentIfDefStr
+   l_Parent call.me >>> l_ParentIfDefStr
+   if ( l_ParentIfDefStr IsNil ! ) then
+   begin
+    if ( Result IsNil ) then
+    begin
+     l_ParentIfDefStr >>> Result
+    end // ( Result IsNil )
+    else
+    begin
+     l_ParentIfDefStr ',' Result Cat Cat >>> Result
+    end // ( Result IsNil )
+   end // ( l_ParentIfDefStr IsNil ! )
+  end // ( l_Parent IsNil ! )
+  Result RemoveDuplicatedIfDef
+ )
+ >>> Result 
+; // IfNDefStr
+
 ModelElement elem_func FriendClass
  Cached:
  (
@@ -1058,8 +1187,9 @@ ModelElement elem_func FriendClass
   l_Boxed -> Stereotype := st_SimpleClass
   l_Boxed -> %SUM := ( 'Друг к классу ' l_TypeName Cat )
   l_Boxed -> Visibility := PrivateAccess
-  l_Boxed -> "ifdef" := ( Self .GetUP "ifdef" )
-  l_Boxed -> "ifndef" := ( Self .GetUP "ifndef" )
+  l_Boxed -> Abstraction := at_abstract
+  l_Boxed -> "ifdef" := ( Self .IfDefStr )
+  l_Boxed -> "ifndef" := ( Self .IfNDefStr )
  )
  >>> Result
 ; // FriendClass
@@ -1085,8 +1215,104 @@ ModelElement elem_func SelfParam
  >>> Result
 ; // SelfParam
 
+CONST opModifyNone 1
+CONST opModifySetter 2
+CONST opModifyIteratorF 3
+CONST opModifyTest 4
+CONST opModifyExecute 5
+CONST opModifyGetState 6
+
+INTEGER elem_func OpModify
+ Self 'OpModify' opModifyNone .ElemMember >>> Result
+; // OpModify
+
+BOOLEAN elem_func IsIteratorF
+ Self .OpModify opModifyIteratorF ==
+ >>> Result
+; // IsIteratorF
+
+BOOLEAN elem_func IsWriteonlyProperty
+ Self .IsStereotype st_writeonly::Attribute >>> Result
+; // IsWriteonlyProperty
+
+BOOLEAN elem_func IsSetter
+ RULES
+  ( Self .IsWriteonlyProperty ) 
+   true
+  ( Self .OpModify opModifySetter == )
+   true 
+  DEFAULT
+   false
+ ; // RULES
+ >>> Result
+; // IsSetter
+
+BOOLEAN elem_func IsTester
+ Self .OpModify opModifyTest == >>> Result
+; // IsTester
+
+BOOLEAN elem_func IsExecutor
+ Self .OpModify opModifyExecute == >>> Result
+; // IsExecutor
+
+BOOLEAN elem_func IsGetState
+ Self .OpModify opModifyGetState == >>> Result
+; // IsGetState
+
+BOOLEAN elem_func IsVCMOperations
+ Self .IsStereotype st_VCMOperations >>> Result
+; // IsVCMOperations
+
+BOOLEAN elem_func IsVCMOperationPrim
+ RULES
+  ( Self .IsStereotype st_VCMOperationPrim )
+   true
+  ( 
+   ( Self .Parent IsNil ! ) 
+   AND ( Self .Parent .IsVCMOperations )
+  ) 
+   true
+  DEFAULT
+   false 
+ ; // RULES
+ >>> Result
+; // IsVCMOperationPrim
+
+BOOLEAN elem_func IsInternalOperation
+ Self .IsStereotype st_InternalOperation::Operation >>> Result
+; // IsInternalOperation
+
+USES
+ GarantModel.ms.dict
+;
+
+INTERFACE elem_func ParamsParam
+ Cached:
+ (
+  'aParams' Self MakeParam
+ ) >>> Result
+; // ParamsParam
+
 ARRAY elem_func MethodParameters
  RULES
+  ( Self .IsVCMOperationPrim )
+   RULES
+    ( Self .IsTester )
+     ( [ GarantModel::IvcmTestParamsPrim .ParamsParam ] )
+    ( Self .IsExecutor )
+     RULES
+      ( Self .IsInternalOperation )
+       ( Self .Parameters )
+      DEFAULT
+       ( [ GarantModel::IvcmTestExecutePrim .ParamsParam ] )
+     ; // RULES  
+    ( Self .IsGetState )
+     ( [ 'State' GarantModel::TvcmOperationStateIndex MakeInOutParam ] )
+    ( Self .IsInternalOperation ) 
+     ( [ GarantModel::IvcmTestExecutePrim .ParamsParam ] )
+    DEFAULT
+     ( Self .Parameters )
+   ; // RULES 
   ( Self .Parent .IsTestClass )
    (
     [ Self .Parent .EffectiveType .SelfParam ]
@@ -1424,35 +1650,6 @@ ModelElement elem_func ImplementorOrParent
  >>> Result
 ; // ImplementorOrParent
 
-BOOLEAN elem_func IsWriteonlyProperty
- Self .IsStereotype st_writeonly::Attribute >>> Result
-; // IsWriteonlyProperty
-
-CONST opModifyNone 1
-CONST opModifySetter 2
-CONST opModifyIteratorF 3
-
-INTEGER elem_func OpModify
- Self 'OpModify' opModifyNone .ElemMember >>> Result
-; // OpModify
-
-BOOLEAN elem_func IsIteratorF
- Self .OpModify opModifyIteratorF ==
- >>> Result
-; // IsIteratorF
-
-BOOLEAN elem_func IsSetter
- RULES
-  ( Self .IsWriteonlyProperty ) 
-   true
-  ( Self .OpModify opModifySetter == )
-   true 
-  DEFAULT
-   false
- ; // RULES
- >>> Result
-; // IsSetter
-
 BOOLEAN elem_func IsReadonlyProperty
  Self .IsStereotype st_readonly::Attribute >>> Result
 ; // IsReadonlyProperty
@@ -1555,10 +1752,6 @@ BOOLEAN elem_func HasFactory
  >>> Result
 ; // HasFactory
 
-USES
- GarantModel.ms.dict
-;
-
 INTERFACE elem_func InstanceField
  Cached:
  (
@@ -1578,8 +1771,8 @@ INTERFACE elem_func InstanceField
   l_Boxed -> %SUM := ( 'Экземпляр синглетона ' l_TypeName Cat )
   l_Boxed -> Visibility := PrivateAccess
   l_Boxed -> 'extprop:pas:Value' := 'nil'
-  l_Boxed -> "ifdef" := ( Self .GetUP "ifdef" )
-  l_Boxed -> "ifndef" := ( Self .GetUP "ifndef" )
+  l_Boxed -> "ifdef" := ( Self .IfDefStr )
+  l_Boxed -> "ifndef" := ( Self .IfNDefStr )
  )
  >>> Result
 ; // InstanceField
@@ -1680,120 +1873,6 @@ BOOLEAN elem_func IsManaged
  )
  >>> Result
 ; // IsManaged
-
-USES
- string.ms.dict
-;
-
-STRING FUNCTION RemoveDuplicatedIfDef
-  STRING IN aValue
- cEmptyStr >>> Result 
- ARRAY VAR l_Outed
- [] >>> l_Outed
- aValue ',' string:Split:for> (
-   IN aSubstr
-  aSubstr string:Trim >>> aSubstr
-  if ( aSubstr IsNil ! ) 
-   if ( l_Outed aSubstr array:HasText ! ) then
-   begin
-    aSubstr array:AddTo l_Outed
-    if ( Result IsNil ) then
-     ( aSubstr >>> Result )
-    else
-     ( Result ',' aSubstr Cat Cat >>> Result )
-   end // ( l_Outed aSubstr array:HasText ! )
- ) // aValue ',' string:Split:for>
-; // RemoveDuplicatedIfDef
-
-STRING elem_func IfDefStr
- Cached:
- (
-  Self .GetUP "ifdef" >>> Result
-  
-  VAR l_Parent
-  Self .Parent >>> l_Parent
-  if ( l_Parent IsNil ! ) then
-  begin
-   VAR l_ParentIfDefStr
-   l_Parent call.me >>> l_ParentIfDefStr
-   if ( l_ParentIfDefStr IsNil ! ) then
-   begin
-    if ( Result IsNil ) then
-    begin
-     l_ParentIfDefStr >>> Result
-    end // ( Result IsNil )
-    else
-    begin
-     l_ParentIfDefStr ',' Result Cat Cat >>> Result
-    end // ( Result IsNil )
-   end // ( l_ParentIfDefStr IsNil ! )
-  end // ( l_Parent IsNil ! )
-  Self .Implementor >>> l_Parent
-  if ( l_Parent IsNil ! ) then
-  begin
-   VAR l_ParentIfDefStr
-   l_Parent call.me >>> l_ParentIfDefStr
-   if ( l_ParentIfDefStr IsNil ! ) then
-   begin
-    if ( Result IsNil ) then
-    begin
-     l_ParentIfDefStr >>> Result
-    end // ( Result IsNil )
-    else
-    begin
-     l_ParentIfDefStr ',' Result Cat Cat >>> Result
-    end // ( Result IsNil )
-   end // ( l_ParentIfDefStr IsNil ! )
-  end // ( l_Parent IsNil ! )
-  Result RemoveDuplicatedIfDef
- )
- >>> Result 
-; // IfDefStr
-
-STRING elem_func IfNDefStr
- Cached:
- (
-  Self .GetUP "ifndef" >>> Result
-  
-  VAR l_Parent
-  Self .Parent >>> l_Parent
-  if ( l_Parent IsNil ! ) then
-  begin
-   VAR l_ParentIfDefStr
-   l_Parent call.me >>> l_ParentIfDefStr
-   if ( l_ParentIfDefStr IsNil ! ) then
-   begin
-    if ( Result IsNil ) then
-    begin
-     l_ParentIfDefStr >>> Result
-    end // ( Result IsNil )
-    else
-    begin
-     l_ParentIfDefStr ',' Result Cat Cat >>> Result
-    end // ( Result IsNil )
-   end // ( l_ParentIfDefStr IsNil ! )
-  end // ( l_Parent IsNil ! )
-  Self .Implementor >>> l_Parent
-  if ( l_Parent IsNil ! ) then
-  begin
-   VAR l_ParentIfDefStr
-   l_Parent call.me >>> l_ParentIfDefStr
-   if ( l_ParentIfDefStr IsNil ! ) then
-   begin
-    if ( Result IsNil ) then
-    begin
-     l_ParentIfDefStr >>> Result
-    end // ( Result IsNil )
-    else
-    begin
-     l_ParentIfDefStr ',' Result Cat Cat >>> Result
-    end // ( Result IsNil )
-   end // ( l_ParentIfDefStr IsNil ! )
-  end // ( l_Parent IsNil ! )
-  Result RemoveDuplicatedIfDef
- )
- >>> Result 
-; // IfNDefStr
 
 STRING CompileTime-VAR g_IfDefStr ''
 STRING CompileTime-VAR g_IfNDefStr ''
@@ -2035,6 +2114,12 @@ elem_proc MethodUserCode
       ( 'set' l_Key Cat >>> l_Key )
      ( Self .IsProperty ) then
       ( 'get' l_Key Cat >>> l_Key )
+     ( Self .IsTester ) then
+      ( 'test' l_Key Cat >>> l_Key )
+     ( Self .IsExecutor ) then
+      ( 'exec' l_Key Cat >>> l_Key )
+     ( Self .IsGetState ) then
+      ( 'getstate' l_Key Cat >>> l_Key )
     ; // RULES
     
     if ( l_Implementor IsNil ! ) then
@@ -2706,6 +2791,7 @@ BOOLEAN elem_func IsSomeKeyWord
   DEFAULT
    false 
  ; // RULES
+ >>> Result
 ; // IsSomeKeyWord
 
 BOOLEAN elem_func IsCreator
@@ -2790,9 +2876,26 @@ STRING FUNCTION .ToBorland
 ; // .ToBorland
 
 STRING elem_func MethodName
+
+ STRING elem_func FineName
+  Self .Name '__' '_' string:Replace
+  >>> Result
+ ; // FineName
+
  Cached:
  (
   RULES
+   ( Self .IsVCMOperationPrim )
+    RULES
+     ( Self .IsTester )
+      ( [ Self .Parent .Name '_' Self .Name '_Test' ] strings:Cat )
+     ( Self .IsExecutor )
+      ( [ Self .Parent .Name '_' Self .Name '_Execute' ] strings:Cat )
+     ( Self .IsGetState )
+      ( [ Self .Parent .Name '_' Self .Name '_GetState' ] strings:Cat )
+     DEFAULT
+      ( [ Self .Parent .Name '_' Self .Name ] strings:Cat )
+    ; // RULES 
    ( Self .IsIterator )
     (
      RULES
@@ -2811,10 +2914,13 @@ STRING elem_func MethodName
      ( [ Self .Parent .TypeName '_' Self .Name ] strings:Cat )
    ( Self .UPisTrue 'extprop:isGlobal' )
     ( Self .Name .ToBorland )
+    
+   ( Self .Parent .IsUtilityPack ) 
+    ( Self .Parent .GetUP 'extprop:pas:ElementPrefix' Self .FineName Cat )
    ( '__' Self .Name StartsStr ) 
-    ( Self .Name '__' '_' string:Replace )
+    ( Self .FineName )
    DEFAULT
-    ( Self .Name '__' '_' string:Replace )
+    ( Self .FineName )
   ; // RULES 
  )
  >>> Result
@@ -3445,6 +3551,7 @@ elem_iterator AttributesAndOperations
  (
   Self .Attributes
   .join> ( Self .Operations )
+  .filter> ( .IsSomeKeyWord ! )
  )
  >>> Result
 ; // AttributesAndOperations
@@ -3528,16 +3635,119 @@ elem_iterator AttributesAndOperationsNeededElements
  >>> Result
 ; // AttributesAndOperationsNeededElements
 
+BOOLEAN elem_func IsClassImplementable
+ Cached:
+ (
+  RULES
+   ( Self .IsPureMixIn )
+    false
+   ( Self .IsMixIn )
+    false
+   ( Self .IsSimpleClass )
+    false
+   ( Self .IsEvdSchemaElement )
+    false 
+   ( Self .IsStereotype st_MixInMirror )
+    false 
+   ( Self .IsStereotype st_UseCase )
+    false 
+   ( Self .IsVCMOperations )
+    false 
+   ( Self .IsInterface )
+    true
+   ( Self .IsTypedef )
+    RULES
+     ( Self .IsPointer )
+      false
+     DEFAULT
+      ( Self .MainAncestor call.me )
+    ; // RULES  
+   DEFAULT
+    true
+  ; // RULES
+ )
+ >>> Result
+; // IsClassImplementable
+
+elem_iterator ForClassImplements
+ Self .Implements 
+ .filter> .IsClassImplementable
+ >>> Result
+; // ForClassImplements
+
+elem_iterator ClassImplementsPrim
+ Self .ForClassImplements 
+ >>> Result
+; // ClassImplementsPrim
+
+elem_iterator InterfaceForClassImplements
+ Self .ForClassImplements 
+ >>> Result
+; // InterfaceForClassImplements
+
+BOOLEAN elem_func SomeAncestorImplements
+  ModelElement IN anIntf
+  
+ BOOLEAN elem_func ImplementsLoc
+  Self .Implements .filter> ( anIntf ?== ) .CountIt > 0 >>> Result
+ ; // ImplementsLoc
+ 
+ anIntf :Cached:
+ (
+  RULES
+   ( Self .IsTypedef )
+     RULES
+      ( Self .IsPointer )
+       false
+      DEFAULT
+       ( Self .MainAncestorPrim anIntf call.me )
+     ; // RULES
+   ( Self .Inherits .filter> .ImplementsLoc .CountIt > 0 )
+    true 
+   ( Self .Inherits .filter> ( anIntf call.me ) .CountIt > 0 )
+    true 
+   ( Self .Implements .filter> .IsMixIn .filter> .ImplementsLoc .CountIt > 0 )
+    true 
+   ( Self .Implements .filter> .IsMixIn .filter> ( anIntf call.me ) .CountIt > 0 )
+    true 
+   DEFAULT
+    false  
+  ; // RULES 
+ )
+ >>> Result 
+; // SomeAncestorImplements
+
+elem_iterator ClassImplements
+ (
+  Self .ClassImplementsPrim
+  .joinWithLambded> ( Self .ClassImplementsPrim ) .InterfaceForClassImplements
+ ) 
+ .filter> ( Self SWAP .SomeAncestorImplements ! )
+ array:Copy
+ >>> Result
+; // ClassImplements
+
 elem_iterator NeededElements
  Cached:
  (
-  Self .NeededElementsFromInheritsOrImplements
+  if ( Self .IsScriptKeywordsPack ) then
+  begin
+   [empty]
+  end // ( Self .IsScriptKeywordsPack ) 
+  else
+  begin 
+   Self .NeededElementsFromInheritsOrImplements
+  end // ( Self .IsScriptKeywordsPack )
   .join> ( Self .AttributesAndOperationsNeededElements )
   if ( Self .IsTypedef ! ) then
   begin
   .join> ( Self .Implemented .OperationsNeededElements )
   .join> ( Self .Overridden .OperationsNeededElements )
   end // Self .IsTypedef !
+  if ( Self .IsClassOrMixIn ) then
+  begin
+   .joinWithLambded> ( Self .ClassImplementsPrim ) .InterfaceForClassImplements
+  end // ( Self .IsClassOrMixIn )
   .joinWithLambded> ( Self .NeededElementsFromInheritsOrImplements .filter> .IsMixIn ) call.me
  )
  >>> Result
@@ -3617,7 +3827,7 @@ BOOLEAN elem_func IsForImplementation
 
 elem_iterator IntfUses
  [ 'l3IntfUses' ]
- if ( Self .IsScriptKeywordsPack ! ) then
+ /*if ( Self .IsScriptKeywordsPack ! ) then*/
  begin
   .join> ( Self .NeededElements: .IsForInterface )
  end // ( Self .IsScriptKeywordsPack ! )
@@ -3629,40 +3839,6 @@ elem_iterator InjectedElements
  Self .Injected .filter> ( .IsStereotype st_injects::Dependency ) .map> .Parent
  >>> Result
 ; // InjectedElements
-
-BOOLEAN elem_func IsClassImplementable
- Cached:
- (
-  RULES
-   ( Self .IsPureMixIn )
-    false
-   ( Self .IsMixIn )
-    false
-   ( Self .IsSimpleClass )
-    false
-   ( Self .IsEvdSchemaElement )
-    false 
-   ( Self .IsStereotype st_MixInMirror )
-    false 
-   ( Self .IsStereotype st_UseCase )
-    false 
-   ( Self .IsStereotype st_VCMOperations )
-    false 
-   ( Self .IsInterface )
-    true
-   ( Self .IsTypedef )
-    RULES
-     ( Self .IsPointer )
-      false
-     DEFAULT
-      ( Self .MainAncestor call.me )
-    ; // RULES  
-   DEFAULT
-    true
-  ; // RULES
- )
- >>> Result
-; // IsClassImplementable
 
 BOOLEAN elem_func IsUses
  Self .IsStereotype st_uses::Dependency >>> Result
@@ -3775,10 +3951,14 @@ elem_iterator ImplUses
  [ 'l3ImplUses' ]
  if ( Self .IsScriptKeywordsPack ) then
  begin
+  .join> ( Self .NeededElementsFromInheritsOrImplements )
+ end // ( Self .IsScriptKeywordsPack )  
+/*{ if ( Self .IsScriptKeywordsPack ) then
+ begin
   .join> ( Self .NeededElements: .All )
   .join> ( Self .NeededElementsTotal: .All )
  end // ( Self .IsScriptKeywordsPack )
- else
+ else}*/
  begin
   .join> ( Self .NeededElements: .IsForImplementation )
   .join> ( Self .NeededElementsTotal: .IsForImplementation )
@@ -3988,6 +4168,10 @@ OUTABLE elem_func MethodKeyword
  >>> Result
 ; // MethodKeyword
 
+BOOLEAN elem_func IsInline
+ Self .IsStereotype st_inline::Operation >>> Result
+; // IsInline
+
 INTEGER elem_func MethodAbstraction
  Cached:
  (
@@ -4021,9 +4205,13 @@ INTEGER elem_func MethodAbstraction
    opkind_Implemented
     (
      RULES
+      ( Self .IsVCMOperationPrim )
+       at_final
+      ( Self .Parent .IsContract )
+       at_abstract
       ( Self .ParentIsInterface )
        at_final
-      ( Self .IsStereotype st_inline::Operation )
+      ( Self .IsInline )
        at_final
       DEFAULT
        at_override 
@@ -4031,7 +4219,7 @@ INTEGER elem_func MethodAbstraction
     ) // opkind_Implemented
    opkind_Overridden
     RULES
-     ( Self .IsStereotype st_inline::Operation )
+     ( Self .IsInline )
       at_final
      DEFAULT 
       at_override
@@ -4250,7 +4438,7 @@ elem_proc MethodInterfacePrim
       ': ' l_Type .TypeName
      end // ( l_Type IsNil ! )
      
-     if ( l_MethodAbstraction at_override != ) then
+     //if ( l_MethodAbstraction at_override != ) then
      begin
       VAR l_Value
       //aParam .ExtValue >>> l_Value
@@ -4403,6 +4591,66 @@ elem: AsSetterDo:
  ; // RULES
 ; // AsSetterDo:
 
+elem: AsTestDo:
+  ^ IN aLambda
+ RULES
+  ( Self .IsWriteonlyProperty )
+   ( Self aLambda DO )
+  DEFAULT 
+   (
+    VAR l_Setter
+    KeyValues:Create >>> l_Setter
+    TRY
+     l_Setter -> Original := Self
+     l_Setter -> OpModify := opModifyTest
+     l_Setter aLambda DO 
+    FINALLY
+     l_Setter pop:Word:DecRef 
+    END
+   ) // DEFAULT
+ ; // RULES
+; // AsTestDo:
+
+elem: AsExecuteDo:
+  ^ IN aLambda
+ RULES
+  ( Self .IsWriteonlyProperty )
+   ( Self aLambda DO )
+  DEFAULT 
+   (
+    VAR l_Setter
+    KeyValues:Create >>> l_Setter
+    TRY
+     l_Setter -> Original := Self
+     l_Setter -> OpModify := opModifyExecute
+     l_Setter aLambda DO 
+    FINALLY
+     l_Setter pop:Word:DecRef 
+    END
+   ) // DEFAULT
+ ; // RULES
+; // AsExecuteDo:
+
+elem: AsGetStateDo:
+  ^ IN aLambda
+ RULES
+  ( Self .IsWriteonlyProperty )
+   ( Self aLambda DO )
+  DEFAULT 
+   (
+    VAR l_Setter
+    KeyValues:Create >>> l_Setter
+    TRY
+     l_Setter -> Original := Self
+     l_Setter -> OpModify := opModifyGetState
+     l_Setter aLambda DO 
+    FINALLY
+     l_Setter pop:Word:DecRef 
+    END
+   ) // DEFAULT
+ ; // RULES
+; // AsGetStateDo:
+
 elem: AsIteratorFDo:
   ^ IN aLambda
  RULES
@@ -4463,6 +4711,35 @@ elem_proc MethodInterfaceEx
  ; // CallAsSetter
  
  RULES
+  ( Self .IsVCMOperationPrim )
+   (
+    //if ( Self .IsInternalOperation ! ) then
+    begin
+     if ( 
+         ( Self .UPisTrue "is query" ! )
+         AND ( Self .UPisTrue "no test" ! )
+        ) then
+     begin
+      Self .AsTestDo: ( aPrefix aOverload aOfObject aBody .MethodInterfacePrim )
+     end // ( Self .UPisTrue "is query" ! ) ..
+    end // ( Self .IsInternalOperation ! )
+    if (
+        ( Self .UPisTrue "is FormActivate" ! ) 
+        OR ( Self .IsInternalOperation )
+       ) then
+    begin
+     Self .AsExecuteDo: ( aPrefix aOverload aOfObject aBody .MethodInterfacePrim )
+    end // ( Self .UPisTrue "is FormActivate" ! )
+    if ( Self .IsInternalOperation ! ) then
+    begin
+     if ( Self .UPisTrue "has states" ) then
+     begin
+      Self .AsGetStateDo: ( aPrefix aOverload aOfObject aBody .MethodInterfacePrim )
+     end // ( Self .UPisTrue "has states" )
+    end // ( Self .IsInternalOperation ! )
+    if ( Self .IsInternalOperation ) then
+     NormalCall
+   ) // ( Self .IsVCMOperationPrim )
   ( Self .IsReadonlyProperty )
    CallAsGetter
   ( Self .IsWriteonlyProperty ) 
@@ -4524,17 +4801,6 @@ ModelElement elem_func MainClassAncestor
  )
  >>> Result
 ; // MainClassAncestor
-
-elem_iterator ForClassImplements
- Self .Implements 
- .filter> .IsClassImplementable
- >>> Result
-; // ForClassImplements
-
-elem_iterator InterfaceForClassImplements
- Self .ForClassImplements 
- >>> Result
-; // InterfaceForClassImplements
 
 INTERFACE elem_func CastMethod
  Cached:
@@ -4623,17 +4889,6 @@ elem_iterator InterfaceProperties
  >>> Result
 ; // InterfaceProperties
 
-elem_iterator ClassImplementsPrim
- Self .ForClassImplements 
- >>> Result
-; // ClassImplementsPrim
-
-elem_iterator ClassImplements
- Self .ClassImplementsPrim
- .joinWithLambded> ( Self .ClassImplementsPrim ) .InterfaceForClassImplements
- >>> Result
-; // ClassImplements
-
 INTERFACE elem_func InstanceFreeMethod
  Cached:
  (
@@ -4645,8 +4900,8 @@ INTERFACE elem_func InstanceFreeMethod
   pop:WordBox:Boxed >>> l_Boxed
   l_Boxed -> %SUM := ( 'Метод освобождения экземпляра синглетона ' l_TypeName Cat )
   l_Boxed -> Visibility := PrivateAccess
-  l_Boxed -> "ifdef" := ( Self .GetUP "ifdef" )
-  l_Boxed -> "ifndef" := ( Self .GetUP "ifndef" )
+  l_Boxed -> "ifdef" := ( Self .IfDefStr )
+  l_Boxed -> "ifndef" := ( Self .IfNDefStr )
   l_Boxed ->^ cVarUserCodeName ^:= cEmptyUserCode
   l_Boxed ->^ cImplementationUserCodeName ^:= [ 
    if ( Self .HasFactory ) then
@@ -4784,6 +5039,8 @@ BOOLEAN elem_func UseNewGen
     true
    ( Self .IsTestClass )
     true
+   ( Self .IsScriptKeywordsPack )
+    true
    ( Self .IsStereotype st_Wrapper )
     true
    ( Self .IsStereotype st_EVD )
@@ -4821,10 +5078,20 @@ elem_iterator AllOperationsForOverload
    ( Self .IsClassOrMixIn )
     ( 
       Self .Operations 
+      
+      VAR l_CastMethods
+      [] >>> l_CastMethods
+      
       ( Self .ClassImplementsPrim ) .for> (
         IN anItem
-       .joinWithLambded> ( anItem .InterfaceForClassImplements ) (
+       .joinWithLambded> 
+       ( 
+        anItem .InterfaceForClassImplements 
+        .filter> ( l_CastMethods array:Has ! )
+       ) 
+       (
          IN anItem
+        anItem array:AddTo l_CastMethods 
         [ anItem .CastMethod ]
        )
       )
@@ -4832,7 +5099,35 @@ elem_iterator AllOperationsForOverload
       .filter> ( .IsServiceIterator ! ) 
       .filter> ( .IsIni ! )
       .filter> ( .IsFini ! )
-      .join> ( Self .Implemented )
+      
+      (
+       VAR l_VCMOperations
+       [] >>> l_VCMOperations
+       
+       .join> ( 
+         Self .Implemented
+        .filter> ( .IsInline ! )
+        .filter> (
+          IN anOp
+          if ( anOp .IsVCMOperationPrim ) then
+          begin
+           VAR l_Name
+           anOp .MethodName >>> l_Name
+           if ( l_VCMOperations l_Name array:HasString ! ) then
+           begin
+            l_Name array:AddTo l_VCMOperations
+            true
+           end // ( l_VCMOperations l_Name array:HasString ! )
+           else 
+            false
+          end // .IsVCMOperationPrim
+          else
+           true
+        ) // .filter>
+        array:Copy
+       ) // join> ( ( Self .Implemented )
+      )
+       
       if ( Self .IsSingleton ) then
       begin
        if ( Self .HasFactory ! ) then
@@ -4882,8 +5177,11 @@ elem_iterator AllOperationsForDefine
    ( Self .IsClassOrMixIn )
     ( 
      .join> 
-     ( Self .Overridden )
-     .filter> ( .IsStereotype st_inline::Operation ! ) 
+     ( 
+      Self .Overridden 
+      .filter> ( .IsVCMOperationPrim ! )
+     )
+     .filter> ( .IsInline ! ) 
     ) 
   ; // RULES
  )
@@ -4906,6 +5204,7 @@ elem_proc MethodInterfaceForEx:
    begin
     if ( l_Ops 
          .filter> ( .IsProperty ! )
+         .filter> ( .IsVCMOperationPrim ! )
          .filter> ( .MethodName Self .MethodName == ) 
          .CountIt > 1 ) then
     begin
@@ -5047,6 +5346,8 @@ PROCEDURE .ByVisibility>
  false >>> l_WasOut 
  'public' >>> l_Separator
  anArray .filter> ( aFilter DO PublicAccess == ) .for> DoOut
+ 'published' >>> l_Separator
+ anArray .filter> ( aFilter DO PublishedAccess == ) .for> DoOut
 ; // .ByVisibility>
 
 elem_proc OutField
@@ -5069,6 +5370,8 @@ INTEGER elem_func MethodVisibility
   RULES
    ( Self .IsProperty )
     ProtectedAccess
+   ( Self .IsStereotype st_Test )
+    PublishedAccess 
    ( Self .OpKind opkind_Implemented == )
     RULES
      ( Self .Parent .IsPureMixIn )
@@ -5104,6 +5407,19 @@ INTEGER elem_func MethodVisibility
  >>> Result
 ; // MethodVisibility
 
+elem_iterator ClassProperties
+ Cached:
+ (
+  Self .Properties
+  .join> ( 
+   ( Self .Implemented )
+   .filter> .IsProperty
+   .filter> ( .Parent .IsContract )
+  ) 
+ )
+ >>> Result
+; // ClassProperties
+
 elem_proc OutClassInner
  Indented: (
   Self .Fields .ByVisibility> .Visibility .OutField
@@ -5115,7 +5431,7 @@ elem_proc OutClassInner
   .ByVisibility> .MethodVisibility
   .MethodInterfaceFor: l_AllOps
 
-  Self .Properties .ByVisibility> .Visibility .OutProperty
+  Self .ClassProperties .ByVisibility> .Visibility .OutProperty
   
   if ( Self .IsStaticObject ) then
   begin
@@ -5345,7 +5661,7 @@ elem_iterator AllInlinedOperations
  (
   Self .Implemented
   .join> ( Self .Overridden )
-  .filter> ( .IsStereotype st_inline::Operation ) 
+  .filter> ( .IsInline ) 
  )
  >>> Result
 ; // AllInlinedOperations
@@ -6949,7 +7265,8 @@ INTERFACE elem_func RegisterServiceImplementationMethod
   l_Boxed -> Stereotype := st_ini::Operation
   l_Boxed -> Visibility := PrivateAccess
   l_Boxed -> %SUM := ( 'Регистрация ' Self .TypeName Cat )
-  l_Boxed ->^ cUserCodePrefix ^:= ( Self .BindServiceImplementationUC )
+  //l_Boxed ->^ cUserCodePrefix ^:= ( Self .BindServiceImplementationUC )
+  l_Boxed .AddMethodWithParams: cUserCodePrefix Self .BindServiceImplementationUC
  )
  >>> Result
 ; // RegisterServiceImplementationMethod
@@ -7190,8 +7507,25 @@ elem_proc OutUnit
    
    Self .IfDef: ( 
     Self 'impl_uses' .OutUses: l_Used ( Self .ImplUses )
-   
-    Self .OutImplementationSection
+    
+    RULES
+     ( Self .IsTestClass )
+      ( 
+       Self .MainAncestor .IfDef: 
+       ( 
+        Self .OutImplementationSection 
+       ) // Self .MainAncestor .IfDef:
+      ) // ( Self .IsTestClass )
+     ( Self .IsSimpleClass )
+      ( 
+       Self .MainAncestor .IfDef: 
+       ( 
+        Self .OutImplementationSection 
+       ) // Self .MainAncestor .IfDef:
+      ) // ( Self .IsSimpleClass )
+     DEFAULT
+      ( Self .OutImplementationSection )
+    ; // RULES   
     
     RULES
      ( Self .IsElementProxy )

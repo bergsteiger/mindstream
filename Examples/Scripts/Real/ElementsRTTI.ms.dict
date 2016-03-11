@@ -37,6 +37,7 @@ CONST PrivateAccess 0
 CONST ProtectedAccess 1
 CONST PublicAccess 2
 CONST ImplementationAccess 3
+CONST PublishedAccess 4
 
 CONST lt_unknown -1
 CONST lt_agr 0
@@ -295,7 +296,7 @@ ANY elem_func ElemMember
 
 elem_iterator ElemList
   STRING IN aMemberName
- Self aMemberName [empty] DoCache
+ //Self aMemberName [empty] DoCache
  (
   Self aMemberName [empty] .ElemMember 
  )
@@ -313,7 +314,7 @@ STRING elem_func ElemString
 
 ModelElement elem_func ElemWord
   STRING IN aMemberName
- Self aMemberName nil DoCache
+ //Self aMemberName nil DoCache
  (
   Self aMemberName nil .ElemMember 
  ) 
@@ -426,10 +427,10 @@ BOOLEAN elem_func IsStereotype
   false
   DoCache (
    BOOLEAN VAR l_Is
-   anOurStereo anOtherStereo == >>> l_Is
+   anOurStereo anOtherStereo ?== >>> l_Is
    if ( l_Is ! ) then
    begin
-    anOurStereo .Name anOtherStereo .Name == >>> l_Is
+    anOurStereo .Name anOtherStereo .Name ?== >>> l_Is
    end // l_Is !
    if ( l_Is ! ) then
    begin
