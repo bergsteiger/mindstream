@@ -1399,15 +1399,24 @@ ARRAY FUNCTION .With()
   OUTABLE IN aValue
  aValue .With()> .KeepInStack >>> Result 
 ; // .With()
-  
-ARRAY elem_func ParametersList
+
+ARRAY FUNCTION .CommaListWith()
+  ARRAY IN aList
  [
   VAR l_WasComma
   false >>> l_WasComma
-  Self .MethodParameters .map> .Name .for> ( 
+  aList .for> ( 
    .WithComma: l_WasComma .KeepInStack
   )
  ] .With() >>> Result
+; // .CommaListWith()
+  
+ARRAY elem_func ParametersList
+ Cached:
+ (
+  Self .MethodParameters .map> .Name .CommaListWith()
+ )
+ >>> Result
 ; // ParametersList
 
 CONST cUCStart '//#UC START# *'
@@ -2697,6 +2706,15 @@ ModelElement elem_func MethodType
  Cached:
  (
   RULES
+   ( Self .IsInternalOperation )
+    RULES
+     ( Self .OpModify opModifyExecute == )
+      ( Self .Target )
+     DEFAULT
+      nil 
+    ; // RULES 
+   ( Self .IsVCMOperationPrim )
+     nil
    ( Self .IsIterator )
     (
      RULES
@@ -3054,6 +3072,28 @@ elem_proc UserCode:
   ; // ParamPop
   
   RULES
+   (
+    ( Self .IsInternalOperation )
+    AND ( Self .OpModify opModifyNone == )
+   ) 
+    Code: (
+     Indented: ( 
+      [ 
+       if ( 
+           ( Self .Target IsNil ! )
+           OR ( Self .Parameters .CountIt > 0 )
+          ) then
+       begin
+        'with (aParams.Data As I' Self .Parent .Name '_' Self .Name '_Params) do' \n ' '
+       end // ( Self .Target IsNil ! ) ..
+       if ( Self .Target IsNil ! ) then
+       begin
+        'ResultValue := '
+       end // ( Self .Target IsNil ! )
+       'Self.' Self .MethodName '_Execute' Self .Parameters .map> ( .Name 'a' .CutPrefix ) .CommaListWith() ';'
+      ] .Out 
+     ) 
+    )
    (
     ( Self .UID '4DB6D7F70155' == ) // IsImmediate
     AND ( l_Implementor .GetUP "is immediate" IsBool )
