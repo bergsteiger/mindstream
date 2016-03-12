@@ -122,8 +122,6 @@ VOID Test CodeGen
 
 Dictionary: axiom:char
 Dictionary: axiom:class
-Dictionary: axiom:CompiledProcedure
-TkwCompiledProcedure CompiledProcedure:Create
 Dictionary: axiom:CompiledWordWorkerWord
 TtfwWord pop:CompiledWordWorkerWord:Compiled
 Dictionary: axiom:Component
@@ -283,6 +281,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen15.ms.s
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -336,6 +335,7 @@ Dictionary: axiom:axiom
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -368,6 +368,7 @@ Dictionary: axiom:axiom
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -498,6 +499,12 @@ REDIFINITION : : .
 ==> Redefines
  VOID .
 <== Redefines
+VOID OPERATOR :: PROCEDURE : .AddMethodWithParams:
+ ^ OPERATOR :: IN : aCode
+ ^ OPERATOR :: IN : aName
+ ^ OPERATOR :: IN : aParams
+ TtfwWord OPERATOR :: IN : Self
+; // .AddMethodWithParams:
 IMMEDIATE VOID OPERATOR :: MACRO : .filter>
  Documentation:
   Фильтрует указанный массив функтором aFunctor
@@ -815,6 +822,19 @@ STRING FUNCTION : Add<<>>
  STRING OPERATOR :: IN : aName
  STRING FUNCTION :: Add<<>> : Result
 ; // Add<<>>
+TtfwKeyWord FUNCTION : AddMethod
+ TtfwWord OPERATOR :: IN : aCode
+ STRING OPERATOR :: IN : aName
+ TtfwKeyWord FUNCTION :: AddMethod : Result
+ TtfwWord OPERATOR :: IN : Self
+; // AddMethod
+TtfwKeyWord FUNCTION : AddMethodWithParams
+ TtfwWord OPERATOR :: IN : aCode
+ STRING OPERATOR :: IN : aName
+ TtfwWord OPERATOR :: IN : aParams
+ TtfwKeyWord FUNCTION :: AddMethodWithParams : Result
+ TtfwWord OPERATOR :: IN : Self
+; // AddMethodWithParams
 IMMEDIATE VOID OPERATOR : AGGREGATION
 OPERATOR : AllMembers==>
  ^ OPERATOR :: IN : aLambda
@@ -1282,6 +1302,7 @@ TClass class::TkwPICK
 TClass class::TkwPopClassInherits
 TClass class::TkwPopCompiledWordWorkerWordCompiled
 TClass class::TkwPopCompilerAddCodePart
+TClass class::TkwPopCompilerAddCodePartValue
 TClass class::TkwPopCompilerCompileInParameterPopCode
 TClass class::TkwPopCompilerGetWordCompilingNow
 TClass class::TkwPopCompilerKeywordFinder
@@ -2187,7 +2208,6 @@ IMMEDIATE VOID OPERATOR : StereotypeStereotypeProducer
 INTEGER StopTimer
 INTEGER StopTimerEx
 IMMEDIATE VOID OPERATOR : string
-String
 IMMEDIATE VOID OPERATOR : STRING
 CHAR string:[]
 CHAR string:[]++!
@@ -2501,6 +2521,7 @@ TkwPICK
 TkwPopClassInherits
 TkwPopCompiledWordWorkerWordCompiled
 TkwPopCompilerAddCodePart
+TkwPopCompilerAddCodePartValue
 TkwPopCompilerCompileInParameterPopCode
 TkwPopCompilerGetWordCompilingNow
 TkwPopCompilerKeywordFinder
@@ -3030,6 +3051,7 @@ TtfwWord pop:NewWordDefinitor:DefineInParameter
 TtfwWord pop:NewWordDefinitor:KeywordFinder
 Dictionary: axiom:Compiler
 VOID pop:Compiler:AddCodePart
+VOID pop:Compiler:AddCodePartValue
 VOID pop:Compiler:CompileInParameterPopCode
 TtfwWord pop:Compiler:GetWordCompilingNow
 TtfwWord pop:Compiler:KeywordFinder
@@ -3280,6 +3302,8 @@ VOID OPERATOR :: PROCEDURE : pop:Dictionary:Print
 ARRAY pop:Dictionary:WordsIterator
 Dictionary: axiom:MainDictionary
 TtfwWord pop:MainDictionary:CompiledCode
+Dictionary: axiom:CompiledProcedure
+TkwCompiledProcedure CompiledProcedure:Create
 Dictionary: axiom:Array
 Dictionary: axiom:File
 Dictionary: axiom:clipboard
@@ -3333,6 +3357,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.ms.dic
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3383,6 +3408,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.ms.dic
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3435,6 +3461,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3479,6 +3506,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3519,6 +3547,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3556,6 +3585,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3630,6 +3660,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3676,6 +3707,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dic
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3715,6 +3747,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbo
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3764,6 +3797,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3824,6 +3858,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3889,6 +3924,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3949,6 +3985,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -3987,6 +4024,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -4025,6 +4063,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -4089,6 +4128,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -4128,6 +4168,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -4168,6 +4209,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -4208,6 +4250,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.di
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -4245,6 +4288,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -4291,6 +4335,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.di
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
@@ -4388,6 +4433,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.d
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
+  axiom:CompiledProcedure
   axiom:Array
   axiom:File
   axiom:clipboard
