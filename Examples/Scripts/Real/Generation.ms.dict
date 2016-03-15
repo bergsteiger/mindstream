@@ -931,59 +931,99 @@ USES
  axiom:KeyValues
 ;
 
-INTERFACE FUNCTION MakeParam
-  STRING IN aName
-  ModelElement IN aType
- VAR l_Param
- 
+: KeyValuesCreateAndDo:
+  ^ IN aLambda
+ VAR l_Param 
  KeyValues:Create >>> l_Param
- 
- l_Param pop:Word:Box >>> Result
- 
- l_Param -> Name := aName
- if ( aType IsNil ! ) then
- begin
-  l_Param -> Target := aType
- end // ( aType IsNil ! )
- 
- l_Param pop:Word:DecRef 
-; // MakeParam
+ TRY 
+  l_Param aLambda DO
+ FINALLY
+  l_Param pop:Word:DecRef 
+ END // TRY..FINALLY
+; // KeyValuesCreateAndDo:
 
 USES
  axiom:WordBox
 ;
 
+INTERFACE FUNCTION MakeParam:
+  STRING IN aName
+  ModelElement IN aType
+  ^ IN aLambda
+ 
+ KeyValuesCreateAndDo: ( 
+   IN l_Param
+  
+  l_Param pop:Word:Box >>> Result
+  
+  l_Param -> Name := aName
+  if ( aType IsNil ! ) then
+  begin
+   l_Param -> Target := aType
+  end // ( aType IsNil ! )
+  
+  l_Param aLambda DO
+ ) // KeyValuesCreateAndDo:
+ 
+; // MakeParam:
+
+INTERFACE FUNCTION MakeParam
+  STRING IN aName
+  ModelElement IN aType
+ 
+ aName aType MakeParam: DROP
+ >>> Result
+; // MakeParam
+
 INTERFACE FUNCTION MakeInOutParam
   STRING IN aName
   ModelElement IN aType
- aName aType MakeParam
- DUP
- VAR l_Boxed
- pop:WordBox:Boxed >>> l_Boxed
- l_Boxed -> Stereotype := st_inout
+ aName aType MakeParam: ( 
+   IN aMade
+  aMade -> Stereotype := st_inout
+ ) 
  >>> Result
 ; // InstanceMethod
+
+INTERFACE FUNCTION MakeClass:
+  STRING IN aName
+  ModelElement IN anAncestor
+  ^ IN aLambda
+ 
+ KeyValuesCreateAndDo: ( IN l_Param
+  l_Param pop:Word:Box >>> Result
+  
+  l_Param -> Name := aName
+  if ( anAncestor IsNil ! ) then
+  begin
+   l_Param -> Inherits := [ anAncestor ]
+  end // ( anAncestor IsNil ! )
+  
+  l_Param aLambda DO
+ )
+; // MakeClass:
 
 INTERFACE FUNCTION MakeClass
   STRING IN aName
   ModelElement IN anAncestor
- VAR l_Param
- 
- KeyValues:Create >>> l_Param
- 
- l_Param pop:Word:Box >>> Result
- 
- l_Param -> Name := aName
- if ( anAncestor IsNil ! ) then
- begin
-  l_Param -> Inherits := [ anAncestor ]
- end // ( anAncestor IsNil ! )
- 
- l_Param pop:Word:DecRef 
+  
+ aName anAncestor MakeClass: DROP 
+ >>> Result
 ; // MakeClass
 
 WordAlias MakeFunction MakeParam
+WordAlias MakeFunction: MakeParam:
 WordAlias MakeField MakeParam
+WordAlias MakeField: MakeParam:
+
+: MakeProcedure
+ nil MakeFunction
+; // MakeProcedure
+
+MACRO MakeProcedure:
+ 'nil' Ctx:Parser:PushSymbol
+ 'MakeFunction:' Ctx:Parser:PushSymbol
+; // MakeProcedure:
 
 INTERFACE elem_func ActionParam
  Cached:
@@ -1180,16 +1220,15 @@ ModelElement elem_func FriendClass
  (
   VAR l_TypeName
   Self .TypeName >>> l_TypeName
-  l_TypeName 'Friend' Cat Self MakeClass
-  DUP
-  VAR l_Boxed
-  pop:WordBox:Boxed >>> l_Boxed
-  l_Boxed -> Stereotype := st_SimpleClass
-  l_Boxed -> %SUM := ( 'Друг к классу ' l_TypeName Cat )
-  l_Boxed -> Visibility := PrivateAccess
-  l_Boxed -> Abstraction := at_abstract
-  l_Boxed -> "ifdef" := ( Self .IfDefStr )
-  l_Boxed -> "ifndef" := ( Self .IfNDefStr )
+  l_TypeName 'Friend' Cat Self MakeClass: (
+    IN aMade
+   aMade -> Stereotype := st_SimpleClass
+   aMade -> %SUM := ( 'Друг к классу ' l_TypeName Cat )
+   aMade -> Visibility := PrivateAccess
+   aMade -> Abstraction := at_abstract
+   aMade -> "ifdef" := ( Self .IfDefStr )
+   aMade -> "ifndef" := ( Self .IfNDefStr )
+  )
  )
  >>> Result
 ; // FriendClass
@@ -1695,12 +1734,10 @@ INTERFACE elem_func InterfaceLinkField
  (
   VAR l_TypeName
   Self .TypeName >>> l_TypeName
-  'f_' l_TypeName Cat Self MakeField
-  DUP
-  VAR l_Boxed
-  pop:WordBox:Boxed >>> l_Boxed
-  l_Boxed -> %SUM := ( 'Ссылка на интерфейс ' l_TypeName Cat )
-  l_Boxed -> Visibility := PrivateAccess
+  'f_' l_TypeName Cat Self MakeField: ( IN aMade
+   aMade -> %SUM := ( 'Ссылка на интерфейс ' l_TypeName Cat )
+   aMade -> Visibility := PrivateAccess
+  ) 
  )
  >>> Result
 ; // InterfaceLinkField
@@ -1772,16 +1809,13 @@ INTERFACE elem_func InstanceField
     GarantModel::Pointer
    else
     Self 
-   MakeField
-   
-  DUP
-  VAR l_Boxed
-  pop:WordBox:Boxed >>> l_Boxed
-  l_Boxed -> %SUM := ( 'Экземпляр синглетона ' l_TypeName Cat )
-  l_Boxed -> Visibility := PrivateAccess
-  l_Boxed -> 'extprop:pas:Value' := 'nil'
-  l_Boxed -> "ifdef" := ( Self .IfDefStr )
-  l_Boxed -> "ifndef" := ( Self .IfNDefStr )
+  MakeField: ( IN aMade
+   aMade -> %SUM := ( 'Экземпляр синглетона ' l_TypeName Cat )
+   aMade -> Visibility := PrivateAccess
+   aMade -> 'extprop:pas:Value' := 'nil'
+   aMade -> "ifdef" := ( Self .IfDefStr )
+   aMade -> "ifndef" := ( Self .IfNDefStr )
+  )
  )
  >>> Result
 ; // InstanceField
@@ -3470,6 +3504,11 @@ elem_proc UserCode:
           else    
            'l_Inst' 
           
+          if ( Self .UPisTrue "need As" ) then
+          begin
+           ' As ' Self .MethodType .TypeName
+          end // ( Self .UPisTrue "need As" )
+          
           ';' 
          ] .Out
          'finally' .Out
@@ -4318,6 +4357,10 @@ ANY elem_func ExtValue
         begin
          '[]' >>> Result
         end // ( '.[]' Result EndsStr )
+       ( '.nil' Result EndsStr )
+        begin
+         'nil' >>> Result
+        end // ( '.[]' Result EndsStr )
        DEFAULT
         begin
          VAR l_Type
@@ -4481,8 +4524,8 @@ elem_proc MethodInterfacePrim
      //if ( l_MethodAbstraction at_override != ) then
      begin
       VAR l_Value
-      //aParam .ExtValue >>> l_Value
-      aParam .GetUP 'Value' >>> l_Value
+      aParam .ExtValue >>> l_Value
+      //aParam .GetUP 'Value' >>> l_Value
       if ( l_Value .IsValueValid ) then
       begin
        ' = ' l_Value
@@ -4611,6 +4654,15 @@ BOOLEAN elem_func WritesField
  >>> Result
 ; // elem_func WritesField
 
+elem: DecorateMethodAndDo:
+  ^ IN aLambda
+ KeyValuesCreateAndDo: ( 
+   IN aMethod
+  aMethod -> Original := Self
+  aMethod aLambda DO
+ ) // KeyValuesCreateAndDo:
+; // DecorateMethodAndDo:
+
 elem: AsSetterDo:
   ^ IN aLambda
  RULES
@@ -4618,114 +4670,61 @@ elem: AsSetterDo:
    ( Self aLambda DO )
   DEFAULT 
    (
-    VAR l_Setter
-    KeyValues:Create >>> l_Setter
-    TRY
-     l_Setter -> Original := Self
-     l_Setter -> OpModify := opModifySetter
-     l_Setter aLambda DO 
-    FINALLY
-     l_Setter pop:Word:DecRef 
-    END
+    Self .DecorateMethodAndDo: ( IN aMethod
+     aMethod -> OpModify := opModifySetter
+     aMethod aLambda DO 
+    ) 
    ) // DEFAULT
  ; // RULES
 ; // AsSetterDo:
 
 elem: AsTestDo:
   ^ IN aLambda
- RULES
-  ( Self .IsWriteonlyProperty )
-   ( Self aLambda DO )
-  DEFAULT 
-   (
-    VAR l_Setter
-    KeyValues:Create >>> l_Setter
-    TRY
-     l_Setter -> Original := Self
-     l_Setter -> OpModify := opModifyTest
-     l_Setter aLambda DO 
-    FINALLY
-     l_Setter pop:Word:DecRef 
-    END
-   ) // DEFAULT
- ; // RULES
+ Self .DecorateMethodAndDo: ( IN aMethod
+  aMethod -> OpModify := opModifyTest
+  aMethod aLambda DO 
+ ) 
 ; // AsTestDo:
 
 elem: AsExecuteDo:
   ^ IN aLambda
- RULES
-  ( Self .IsWriteonlyProperty )
-   ( Self aLambda DO )
-  DEFAULT 
-   (
-    VAR l_Setter
-    KeyValues:Create >>> l_Setter
-    TRY
-     l_Setter -> Original := Self
-     l_Setter -> OpModify := opModifyExecute
-     l_Setter aLambda DO 
-    FINALLY
-     l_Setter pop:Word:DecRef 
-    END
-   ) // DEFAULT
- ; // RULES
+ Self .DecorateMethodAndDo: ( IN aMethod
+  aMethod -> OpModify := opModifyExecute
+  aMethod aLambda DO 
+ ) 
 ; // AsExecuteDo:
 
 elem: AsGetStateDo:
   ^ IN aLambda
- RULES
-  ( Self .IsWriteonlyProperty )
-   ( Self aLambda DO )
-  DEFAULT 
-   (
-    VAR l_Setter
-    KeyValues:Create >>> l_Setter
-    TRY
-     l_Setter -> Original := Self
-     l_Setter -> OpModify := opModifyGetState
-     l_Setter aLambda DO 
-    FINALLY
-     l_Setter pop:Word:DecRef 
-    END
-   ) // DEFAULT
- ; // RULES
+ Self .DecorateMethodAndDo: ( IN aMethod
+  aMethod -> OpModify := opModifyGetState
+  aMethod aLambda DO 
+ ) 
 ; // AsGetStateDo:
 
 elem: AsIteratorFDo:
   ^ IN aLambda
- RULES
-  ( Self .IsWriteonlyProperty )
-   ( Self aLambda DO )
-  DEFAULT 
-   (
-    VAR l_Setter
-    KeyValues:Create >>> l_Setter
-    TRY
-     l_Setter -> Original := Self
-     l_Setter -> OpModify := opModifyIteratorF
-     l_Setter ->^ cVarUserCodeName ^:= [
-     'var' \n
-     ' Hack : Pointer absolute anAction;'
-     ]
-     l_Setter ->^ cImplementationUserCodeName ^:= [
-     ' try' \n
-     '  '
-     if ( Self .UPisTrue "needs result" ) then
-      'Result := '
-     Self .Name 
-     Self .ParametersList
-     ';'
-     \n
-     ' finally' \n
-     '  l3FreeLocalStub(Hack);' \n
-     ' end;//try..finally'
-     ]
-     l_Setter aLambda DO 
-    FINALLY
-     l_Setter pop:Word:DecRef 
-    END
-   ) // DEFAULT
- ; // RULES
+ Self .DecorateMethodAndDo: ( IN aMethod
+  aMethod -> OpModify := opModifyIteratorF
+  aMethod ->^ cVarUserCodeName ^:= [
+  'var' \n
+  ' Hack : Pointer absolute anAction;'
+  ]
+  aMethod ->^ cImplementationUserCodeName ^:= [
+  ' try' \n
+  '  '
+  if ( Self .UPisTrue "needs result" ) then
+   'Result := '
+  Self .Name 
+  Self .ParametersList
+  ';'
+  \n
+  ' finally' \n
+  '  l3FreeLocalStub(Hack);' \n
+  ' end;//try..finally'
+  ]
+  aMethod aLambda DO 
+ ) 
 ; // AsIteratorFDo:
 
 elem_proc MethodInterfaceEx
@@ -4847,14 +4846,12 @@ INTERFACE elem_func CastMethod
  (
   VAR l_TypeName
   Self .TypeName >>> l_TypeName
-  'As_' l_TypeName Cat Self MakeFunction
-  DUP
-  VAR l_Boxed
-  pop:WordBox:Boxed >>> l_Boxed
-  l_Boxed -> %SUM := ( 'Метод приведения нашего интерфейса к ' l_TypeName Cat )
-  l_Boxed -> Visibility := ProtectedAccess
-  l_Boxed ->^ cVarUserCodeName ^:= cEmptyUserCode
-  l_Boxed ->^ cImplementationUserCodeName ^:= ' Result := Self;'
+  'As_' l_TypeName Cat Self MakeFunction: ( IN aMade
+   aMade -> %SUM := ( 'Метод приведения нашего интерфейса к ' l_TypeName Cat )
+   aMade -> Visibility := ProtectedAccess
+   aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
+   aMade ->^ cImplementationUserCodeName ^:= ' Result := Self;'
+  ) 
  )
  >>> Result
 ; // CastMethod
@@ -4934,25 +4931,23 @@ INTERFACE elem_func InstanceFreeMethod
  (
   VAR l_TypeName
   Self .TypeName >>> l_TypeName
-  l_TypeName 'Free' Cat nil MakeFunction
-  DUP
-  VAR l_Boxed
-  pop:WordBox:Boxed >>> l_Boxed
-  l_Boxed -> %SUM := ( 'Метод освобождения экземпляра синглетона ' l_TypeName Cat )
-  l_Boxed -> Visibility := PrivateAccess
-  l_Boxed -> "ifdef" := ( Self .IfDefStr )
-  l_Boxed -> "ifndef" := ( Self .IfNDefStr )
-  l_Boxed ->^ cVarUserCodeName ^:= cEmptyUserCode
-  l_Boxed ->^ cImplementationUserCodeName ^:= [ 
-   if ( Self .HasFactory ) then
-   begin
-    ' IUnknown(' 'g_' l_TypeName ') := nil;' 
-   end
-   else
-   begin
-    ' l3Free(' 'g_' l_TypeName ');' 
-   end // ( Self .HasFactory )
-  ]
+  l_TypeName 'Free' Cat MakeProcedure: ( IN aMade
+   aMade -> %SUM := ( 'Метод освобождения экземпляра синглетона ' l_TypeName Cat )
+   aMade -> Visibility := PrivateAccess
+   aMade -> "ifdef" := ( Self .IfDefStr )
+   aMade -> "ifndef" := ( Self .IfNDefStr )
+   aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
+   aMade ->^ cImplementationUserCodeName ^:= [ 
+    if ( Self .HasFactory ) then
+    begin
+     ' IUnknown(' 'g_' l_TypeName ') := nil;' 
+    end
+    else
+    begin
+     ' l3Free(' 'g_' l_TypeName ');' 
+    end // ( Self .HasFactory )
+   ]
+  ) 
  )
  >>> Result
 ; // InstanceFreeMethod
@@ -4962,22 +4957,21 @@ INTERFACE elem_func InstanceMethod
  (
   VAR l_TypeName
   Self .TypeName >>> l_TypeName
-  'Instance' Self MakeFunction
-  DUP
-  VAR l_Boxed
-  pop:WordBox:Boxed >>> l_Boxed
-  l_Boxed -> Stereotype := st_static::Operation
-  l_Boxed -> %SUM := ( 'Метод получения экземпляра синглетона ' l_TypeName Cat )
-  l_Boxed -> Visibility := PublicAccess
-  l_Boxed ->^ cVarUserCodeName ^:= cEmptyUserCode
-  l_Boxed ->^ cImplementationUserCodeName ^:= [ 
-  ' if (' 'g_' l_TypeName ' = nil) then' \n
-  ' begin' \n
-  '  l3System.AddExitProc(' l_TypeName 'Free' ');' \n
-  '  g_' l_TypeName ' := Create;' \n
-  ' end;' \n
-  ' Result := g_' l_TypeName ';'
-  ]
+  'Instance' Self MakeFunction: (
+    IN aMade
+   aMade -> Stereotype := st_static::Operation
+   aMade -> %SUM := ( 'Метод получения экземпляра синглетона ' l_TypeName Cat )
+   aMade -> Visibility := PublicAccess
+   aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
+   aMade ->^ cImplementationUserCodeName ^:= [ 
+   ' if (' 'g_' l_TypeName ' = nil) then' \n
+   ' begin' \n
+   '  l3System.AddExitProc(' l_TypeName 'Free' ');' \n
+   '  g_' l_TypeName ' := Create;' \n
+   ' end;' \n
+   ' Result := g_' l_TypeName ';'
+   ]
+  )
  )
  >>> Result
 ; // InstanceMethod
@@ -4987,17 +4981,16 @@ INTERFACE elem_func ExistsMethod
  (
   VAR l_TypeName
   Self .TypeName >>> l_TypeName
-  'Exists' GarantModel::Boolean MakeFunction
-  DUP
-  VAR l_Boxed
-  pop:WordBox:Boxed >>> l_Boxed
-  l_Boxed -> Stereotype := st_static::Operation
-  l_Boxed -> %SUM := 'Проверяет создан экземпляр синглетона или нет'
-  l_Boxed -> Visibility := PublicAccess
-  l_Boxed ->^ cVarUserCodeName ^:= cEmptyUserCode
-  l_Boxed ->^ cImplementationUserCodeName ^:= [ 
-  ' Result := g_' l_TypeName ' <> nil;'
-  ]
+  'Exists' GarantModel::Boolean MakeFunction: (
+    IN aMade
+   aMade -> Stereotype := st_static::Operation
+   aMade -> %SUM := 'Проверяет создан экземпляр синглетона или нет'
+   aMade -> Visibility := PublicAccess
+   aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
+   aMade ->^ cImplementationUserCodeName ^:= [ 
+   ' Result := g_' l_TypeName ' <> nil;'
+   ]
+  ) 
  )
  >>> Result
 ; // ExistsMethod
@@ -5005,15 +4998,13 @@ INTERFACE elem_func ExistsMethod
 INTERFACE elem_func FakeMethod
  Cached:
  (
-  'Fake' nil MakeFunction
-  DUP
-  VAR l_Boxed
-  pop:WordBox:Boxed >>> l_Boxed
-  l_Boxed -> %SUM := 'это нужно чтобы правильно генерировались вызовы методов доступа к свойствам'
-  l_Boxed -> Visibility := PrivateAccess
-  l_Boxed -> Abstraction := at_virtual
-  l_Boxed ->^ cVarUserCodeName ^:= cEmptyUserCode
-  l_Boxed ->^ cImplementationUserCodeName ^:= ' Assert(false);'
+  'Fake' MakeProcedure: ( IN aMade
+   aMade -> %SUM := 'это нужно чтобы правильно генерировались вызовы методов доступа к свойствам'
+   aMade -> Visibility := PrivateAccess
+   aMade -> Abstraction := at_virtual
+   aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
+   aMade ->^ cImplementationUserCodeName ^:= ' Assert(false);'
+  )
  )
  >>> Result
 ; // FakeMethod
@@ -5021,31 +5012,30 @@ INTERFACE elem_func FakeMethod
 INTERFACE elem_func InitConstructor
  Cached:
  (
-  'Init' nil MakeFunction
-  DUP
-  VAR l_Boxed
-  pop:WordBox:Boxed >>> l_Boxed
-  l_Boxed -> Stereotype := st_ctor::Operation
-  l_Boxed -> Visibility := PublicAccess
-  l_Boxed -> Abstraction := at_final
-  l_Boxed -> UID := ( Self .UID 'Init' Cat )
-  if ( Self .IsAutoHelper ) then
-  begin
-   l_Boxed -> Parameters := [ 
-    Self .Implements .for> (
-      IN aR
-     'a' aR .TypeName Cat aR MakeParam 
-    )
-   ]
-   l_Boxed ->^ cImplementationUserCodeName ^:= [
-    Self .Implements .for> (
-      IN aR
-     ' ' 'f_' aR .TypeName ' := ' 'a' aR .TypeName ';'
-    )
-   ]
-  end // ( Self .IsAutoHelper )
-  l_Boxed ->^ cVarUserCodeName ^:= cEmptyUserCode
-  //l_Boxed ->^ cImplementationUserCodeName ^:= ' Assert(false);'
+  'Init' MakeProcedure: (
+    IN aMade
+   aMade -> Stereotype := st_ctor::Operation
+   aMade -> Visibility := PublicAccess
+   aMade -> Abstraction := at_final
+   aMade -> UID := ( Self .UID 'Init' Cat )
+   if ( Self .IsAutoHelper ) then
+   begin
+    aMade -> Parameters := [ 
+     Self .Implements .for> (
+       IN aR
+      'a' aR .TypeName Cat aR MakeParam 
+     )
+    ]
+    aMade ->^ cImplementationUserCodeName ^:= [
+     Self .Implements .for> (
+       IN aR
+      ' ' 'f_' aR .TypeName ' := ' 'a' aR .TypeName ';'
+     )
+    ]
+   end // ( Self .IsAutoHelper )
+   aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
+   //aMade ->^ cImplementationUserCodeName ^:= ' Assert(false);'
+  ) 
  )
  >>> Result
 ; // InitConstructor
@@ -7247,18 +7237,27 @@ elem_proc OutIniOrFini
  ) // Self .IfDef:
 ; // OutIniOrFini
 
+INTERFACE FUNCTION MakeIniProcedure:
+  STRING IN aName
+  ^ IN aLambda
+ aName MakeProcedure: (
+   IN aMade
+  aMade -> Stereotype := st_ini::Operation
+  aMade -> Visibility := PrivateAccess
+  aMade aLambda DO
+ ) // MakeProcedure:
+ >>> Result
+; // MakeIniProcedure:
+
 INTERFACE elem_func RegisterTestCaseMethod
  //Cached:
  (
-  'RegisterTestCase' nil MakeFunction
-  DUP
-  VAR l_Boxed
-  pop:WordBox:Boxed >>> l_Boxed
-  l_Boxed -> Stereotype := st_ini::Operation
-  l_Boxed -> Visibility := PrivateAccess
-  l_Boxed ->^ cUserCodePrefix ^:= [ 
-  ' TestFramework.RegisterTest(' Self .TypeName '.Suite);'
-  ]
+  'RegisterTestCase' MakeIniProcedure: (
+    IN aMade
+   aMade ->^ cUserCodePrefix ^:= [ 
+   ' TestFramework.RegisterTest(' Self .TypeName '.Suite);'
+   ]
+  ) // MakeIniProcedure:
  )
  >>> Result
 ; // RegisterTestCaseMethod
@@ -7266,15 +7265,12 @@ INTERFACE elem_func RegisterTestCaseMethod
 INTERFACE elem_func RegisterTestClassMethod
  //Cached:
  (
-  'RegisterTestClass' nil MakeFunction
-  DUP
-  VAR l_Boxed
-  pop:WordBox:Boxed >>> l_Boxed
-  l_Boxed -> Stereotype := st_ini::Operation
-  l_Boxed -> Visibility := PrivateAccess
-  l_Boxed ->^ cUserCodePrefix ^:= [ 
-  ' _RegisterPublicInformation5;' \n ' _RegisterPublicInformation6;'
-  ]
+  'RegisterTestClass' MakeIniProcedure: (
+    IN aMade
+   aMade ->^ cUserCodePrefix ^:= [ 
+   ' _RegisterPublicInformation5;' \n ' _RegisterPublicInformation6;'
+   ]
+  ) // MakeIniProcedure:
  )
  >>> Result
 ; // RegisterTestClassMethod
@@ -7282,15 +7278,12 @@ INTERFACE elem_func RegisterTestClassMethod
 INTERFACE elem_func RegisterTagTableMethod
  //Cached:
  (
-  'RegisterTagTable' nil MakeFunction
-  DUP
-  VAR l_Boxed
-  pop:WordBox:Boxed >>> l_Boxed
-  l_Boxed -> Stereotype := st_ini::Operation
-  l_Boxed -> Visibility := PrivateAccess
-  l_Boxed ->^ cUserCodePrefix ^:= [ 
-  cSpace Self .TypeName '.SetAsDefault;'
-  ]
+  'RegisterTagTable' MakeIniProcedure: (
+    IN aMade
+   aMade ->^ cUserCodePrefix ^:= [ 
+   cSpace Self .TypeName '.SetAsDefault;'
+   ]
+  ) // MakeIniProcedure:
  )
  >>> Result
 ; // RegisterTagTableMethod
@@ -7298,15 +7291,12 @@ INTERFACE elem_func RegisterTagTableMethod
 INTERFACE elem_func RegisterServiceImplementationMethod
  //Cached:
  (
-  'bind' nil MakeFunction
-  DUP
-  VAR l_Boxed
-  pop:WordBox:Boxed >>> l_Boxed
-  l_Boxed -> Stereotype := st_ini::Operation
-  l_Boxed -> Visibility := PrivateAccess
-  l_Boxed -> %SUM := ( 'Регистрация ' Self .TypeName Cat )
-  //l_Boxed ->^ cUserCodePrefix ^:= ( Self .BindServiceImplementationUC )
-  l_Boxed .AddMethodWithParams: cUserCodePrefix Self .BindServiceImplementationUC
+  'bind' MakeIniProcedure: (
+    IN aMade
+   aMade -> %SUM := ( 'Регистрация ' Self .TypeName Cat )
+   //aMade ->^ cUserCodePrefix ^:= ( Self .BindServiceImplementationUC )
+   aMade .AddMethodWithParams: cUserCodePrefix Self .BindServiceImplementationUC
+  ) // MakeIniProcedure:
  )
  >>> Result
 ; // RegisterServiceImplementationMethod
