@@ -1320,6 +1320,7 @@ TClass class::TkwGlobalVar
 TClass class::TkwGREATER
 TClass class::TkwGreaterThanZero
 TClass class::TkwHALT
+TClass class::TkwHash16Table
 TClass class::TkwHasTabs
 TClass class::TkwIfElse
 TClass class::TkwIMMEDIATE
@@ -1567,7 +1568,10 @@ TClass class::TkwStringDeleteDoubleChars
 TClass class::TkwStringDeleteDoubleSpaces
 TClass class::TkwStringFirstChar
 TClass class::TkwStringHasAnyOf
+TClass class::TkwStringHash
+TClass class::TkwStringHashNew
 TClass class::TkwStringInc
+TClass class::TkwStringIterator
 TClass class::TkwStringLen
 TClass class::TkwStringLower
 TClass class::TkwStringPos
@@ -1575,9 +1579,12 @@ TClass class::TkwStringPosEx
 TClass class::TkwStringReplace
 TClass class::TkwStringReplaceFirst
 TClass class::TkwStringShift
+TClass class::TkwStringSmallHash
+TClass class::TkwStringSmallHashNew
 TClass class::TkwStringSplit
 TClass class::TkwStringSubstring
 TClass class::TkwStringToChar
+TClass class::TkwStringToUnicode
 TClass class::TkwStringTrim
 TClass class::TkwStringTrimLeft
 TClass class::TkwStringTrimRight
@@ -1920,6 +1927,7 @@ STRING guid::ItfwStoredValuesStack
 STRING guid::ItfwValueList
 STRING guid::ItfwWordBox
 VOID HALT
+ARRAY Hash16Table
 BOOLEAN HasTabs
 VOID OPERATOR :: PROCEDURE : help
  TtfwWord OPERATOR :: VAR : l_CompiledCode
@@ -2120,7 +2128,6 @@ VOID pop:Array:Add
 VOID pop:Array:Clear
 INTEGER pop:Array:Count
 ARRAY pop:Array:Filter
-ARRAY pop:Array:FunctorToIterator
 Struct pop:Array:Item
 VOID pop:Array:Iterate
 ARRAY pop:Array:Join
@@ -2130,8 +2137,6 @@ ARRAY pop:Array:Slice
 ARRAY pop:Array:Trunc
 pop:class:Inherits
 BOOLEAN pop:File:EOF
-FILE pop:File:OpenRead
-FILE pop:File:OpenWrite
 VOID pop:File:ReadLines
 STRING pop:File:ReadLn
 W-STRING pop:File:ReadWStrLn
@@ -2166,8 +2171,7 @@ VOID pop:object:SetStrProp
 VOID pop:Object:SetStrProp
 STRING pop:String:Cat
 CHAR pop:String:Char
-STRING pop:String:char_Dupe
-STRING pop:String:char_ToString
+STRING pop:String:char:Dupe
 INTEGER pop:String:CodePage
 INTEGER pop:String:CompareStr
 INTEGER pop:String:CompareText
@@ -2178,7 +2182,10 @@ BOOLEAN pop:String:EndsStr
 BOOLEAN pop:String:EndsText
 CHAR pop:String:FirstChar
 BOOLEAN pop:String:HasAnyOf
+INTEGER pop:String:Hash
+INTEGER pop:String:Hash:New
 STRING pop:String:Inc
+ARRAY pop:String:Iterator
 INTEGER pop:String:Len
 STRING pop:String:Lower
 INTEGER pop:String:Pos
@@ -2188,14 +2195,17 @@ STRING pop:String:ReplaceFirst
 BOOLEAN pop:String:SameStr
 BOOLEAN pop:String:SameText
 STRING pop:String:Shift
+INTEGER pop:String:SmallHash
+INTEGER pop:String:SmallHash:New
 STRING pop:String:Split
 BOOLEAN pop:String:StartsStr
 BOOLEAN pop:String:StartsText
 INTEGER pop:String:StrToInt
 STRING pop:String:Substring
-STRING pop:String:text_Replace
-STRING pop:String:text_ReplaceFirst
+STRING pop:String:text:Replace
+STRING pop:String:text:ReplaceFirst
 CHAR pop:String:ToChar
+STRING pop:String:ToUnicode
 STRING pop:String:Trim
 STRING pop:String:TrimLeft
 STRING pop:String:TrimRight
@@ -2313,6 +2323,9 @@ BOOLEAN string:ConsistsOf
 STRING string:DeleteDoubleChars
 STRING string:DeleteDoubleSpaces
 BOOLEAN string:HasAnyOf
+INTEGER string:Hash
+INTEGER string:Hash:New
+ARRAY string:Iterator
 INTEGER string:Len
 VOID string:--Len!
 STRING string:Lower
@@ -2321,10 +2334,13 @@ INTEGER string:PosEx
 STRING string:Replace
 STRING string:ReplaceFirst
 STRING string:RSplitTo!
+INTEGER string:SmallHash
+INTEGER string:SmallHash:New
 STRING string:Split
 STRING string:SplitTo!
 STRING string:Substring
 CHAR string:ToChar
+STRING string:ToUnicode
 STRING string:Trim
 STRING string:TrimLeft
 STRING string:TrimRight
@@ -2539,6 +2555,7 @@ TkwGlobalVar
 TkwGREATER
 TkwGreaterThanZero
 TkwHALT
+TkwHash16Table
 TkwHasTabs
 TkwIfElse
 TkwIMMEDIATE
@@ -2786,7 +2803,10 @@ TkwStringDeleteDoubleChars
 TkwStringDeleteDoubleSpaces
 TkwStringFirstChar
 TkwStringHasAnyOf
+TkwStringHash
+TkwStringHashNew
 TkwStringInc
+TkwStringIterator
 TkwStringLen
 TkwStringLower
 TkwStringPos
@@ -2794,9 +2814,12 @@ TkwStringPosEx
 TkwStringReplace
 TkwStringReplaceFirst
 TkwStringShift
+TkwStringSmallHash
+TkwStringSmallHashNew
 TkwStringSplit
 TkwStringSubstring
 TkwStringToChar
+TkwStringToUnicode
 TkwStringTrim
 TkwStringTrimLeft
 TkwStringTrimRight
