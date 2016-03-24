@@ -41,10 +41,19 @@ USES
 WordAlias GarantModel::SysUtils ME_47877EB202FB
 
 USES
- 47913B47006E.pas.ms.script // l3Base
+ 47913B47006E.pas.ms.script // l3CoreObjects
 ;
 
 WordAlias GarantModel::l3Base ME_4773D64E036C
+
+WordAlias GarantModel::l3UnknownPrim ME_47913F4E02E0
+WordAlias GarantModel::l3UnknownPrim.ClearFields ME_5000565C019C
+
+USES
+ 561F9F7D02A7.pas.ms.script // ScriptEngine
+;
+
+WordAlias GarantModel::TtfwClassRef(Proxy) ME_561F9F9400BC // TtfwClassRef (Proxy)
 
 USES
  467BAB7F021E.pas.ms.script // vcmExternalInterfaces
@@ -53,3 +62,23 @@ USES
 WordAlias GarantModel::IvcmTestParamsPrim ME_4683E07E004B
 WordAlias GarantModel::IvcmTestExecutePrim ME_4683E1AD0047
 WordAlias GarantModel::TvcmOperationStateIndex ME_4683F4D501E9
+
+USES
+ 4DAF19F600C5.pas.ms.script // tfwScriptingInterfaces
+;
+
+WordAlias GarantModel::TtfwWord ME_4DAEED140007
+WordAlias GarantModel::TtfwWord.IsImmediate ME_4DB6D7F70155
+
+USES
+ 4F3E3F5F0160.pas.ms.script // PrimitiveWords
+;
+
+WordAlias GarantModel::TtfwRegisterableWord ME_53EDC0E701BC
+WordAlias GarantModel::TtfwRegisterableWord.GetWordNameForRegister ME_4DB0614603C8
+
+USES
+ 4F69DF560034.pas.ms.script // ControlsProcessing
+;
+
+WordAlias GarantModel::TkwBynameControlPush ME_4F2141AD0203

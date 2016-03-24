@@ -25,6 +25,7 @@ CONST opkind_Normal 0
 CONST opkind_Implemented 1
 CONST opkind_Overridden 2
  
+CONST class_Unknown -1
 CONST class_Class 0
 CONST class_Category 1
 CONST class_Attribute 2
@@ -296,7 +297,7 @@ ANY elem_func ElemMember
 
 elem_iterator ElemList
   STRING IN aMemberName
- //Self aMemberName [empty] DoCache
+ Self aMemberName [empty] DoCache
  (
   Self aMemberName [empty] .ElemMember 
  )
@@ -472,6 +473,10 @@ INTEGER elem_func Visibility
  Self 'Visibility' UnknownAccess /*PublicAccess*/ .ElemMember >>> Result
 ; // Visibility
 
+INTEGER elem_func MDAClass
+ Self 'Class' class_Unknown .ElemMember >>> Result
+; // MDAClass
+
 INTEGER elem_func LinkType
  Self 'LinkType' lt_unknown .ElemMember >>> Result
 ; // LinkType
@@ -530,7 +535,7 @@ STRING elem_func UIDEx
       ( l_Name IsNil )
        ( Self .WordName )
       DEFAULT
-       l_Name 
+       ( l_Name '_' Self .WordName Cat )
      ; // RULES
     )
    DEFAULT
