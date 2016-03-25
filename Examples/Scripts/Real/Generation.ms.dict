@@ -2590,12 +2590,14 @@ elem_proc MethodUserCode
        
        if (
            ( aField .Target .IsRecord )
+           OR ( aField .Target .IsUnion )
            OR ( l_FieldName IsNil ) 
           ) then
        begin
         if ( 
             ( aField .IsReadonlyProperty ) 
             OR ( aField .Target .IsRecord )
+            OR ( aField .Target .IsUnion )
             OR ( aField .Target .IsMixInParamType )
            ) then
         begin
@@ -3279,7 +3281,15 @@ STRING elem_func MethodName
     ( Self .Name .ToBorland )
     
    ( Self .Parent .IsUtilityPack ) 
-    ( Self .Parent .GetUP 'extprop:pas:ElementPrefix' Self .FineName Cat )
+    ( 
+      VAR l_Prefix
+      Self .Parent .GetUP 'extprop:pas:ElementPrefixBase' >>> l_Prefix
+      if ( l_Prefix IsNil ) then
+      begin
+       Self .Parent .GetUP 'extprop:pas:ElementPrefix' >>> l_Prefix
+      end // ( l_Prefix IsNil )
+      l_Prefix Self .FineName Cat 
+    )
    ( '__' Self .Name StartsStr ) 
     ( Self .FineName )
    DEFAULT
@@ -4255,6 +4265,23 @@ elem_iterator OverriddenEx
   end // ( Self .GetUP "is immediate" IsBool )
   
  end // ( Self .IsClassOrMixIn )
+ 
+ if ( Self .IsTestCase ) then
+ begin
+  if ( Self GarantModel::TBaseTest .InheritsFromOrSomeAncestorImplements ) then
+  begin
+   if ( l_Overridden GarantModel::TAbstractTest.GetFolder .HasModelElement ! ) then
+   begin     
+    .join> [ Self GarantModel::TAbstractTest.GetFolder .OverrideMethod ]
+   end // ( l_Overridden GarantModel::TAbstractTest.GetFolder .HasModelElement )
+   
+   if ( l_Overridden GarantModel::TAbstractTest.GetModelElementGUID .HasModelElement ! ) then
+   begin     
+    .join> [ Self GarantModel::TAbstractTest.GetModelElementGUID .OverrideMethod ]
+   end // ( l_Overridden GarantModel::TAbstractTest.GetModelElementGUID .HasModelElement )
+  end // ( Self GarantModel::TBaseTest .InheritsFromOrSomeAncestorImplements )
+ end // ( Self .IsTestCase )
+ 
  >>> Result
 ; // OverriddenEx
 
@@ -4508,6 +4535,11 @@ elem_iterator Used
     .join> [ GarantModel::TtfwClassRef(Proxy) ]
    end // ( Self GarantModel::TtfwWord .InheritsFrom ! )
   end // ( Self .NeedIniRegClass )
+  
+  if ( Self .IsTestCase ) then
+  begin
+   .join> [ GarantModel::TestFrameWork ]
+  end // ( Self .IsTestCase )
  )
  >>> Result
 ; // Used
@@ -4871,6 +4903,8 @@ ANY elem_func ExtValue
           l_Head >>> Result
          end // ( Result IsNil )
         end // ( '.[]' Result EndsStr )
+       ( 'vcmUserControls.vcm_utAny' Result == )
+        ( 'vcm_utAny' >>> Result )
        DEFAULT
         begin
          VAR l_Type
@@ -5505,6 +5539,23 @@ BOOLEAN elem_func IsServiceIterator
  Self .IsStereotype st_serviceiterator >>> Result
 ; // IsServiceIterator
 
+BOOLEAN elem_func UseNewGenExcluded
+ [
+  '4135B54EF3A1' // FillStrings
+  '3DBAA1891003' // Design_AttrValues implementation after const - надо поступать так же как с Type
+  '52FA4ACA0020' // csRequestTask GetTaggedDataType
+  '4F0C0B6801C7' // DragData cnActiveState = [dsActive, dsPaused];
+ ]
+ .filter> ( Self .UID == )
+ .CountIt > 0
+ >>> Result
+; // UseNewGenExcluded
+
+BOOLEAN elem_func IsVCMControls
+ Self .IsStereotype st_VCMControls
+ >>> Result
+; // IsVCMControls
+
 BOOLEAN elem_func UseNewGen
  Cached:
  (
@@ -5519,10 +5570,15 @@ BOOLEAN elem_func UseNewGen
     true
    ( Self .IsTestCase )
     true
-   ( Self .IsScriptKeyword )
+   ( 
+    ( Self .IsScriptKeyword )
+    AND ( Self .Parent .IsVCMControls ! )
+   ) 
     true
    ( Self .IsScriptKeywordsPack )
     true
+   //( Self .IsUtilityPack )
+   // true
    ( Self .IsScriptKeywords )
     true
    ( Self .IsStereotype st_Wrapper )

@@ -82,3 +82,19 @@ USES
 ;
 
 WordAlias GarantModel::TkwBynameControlPush ME_4F2141AD0203
+
+USES
+ 4B2A0D6A0077.pas.ms.script // Source TestFrameWork
+;
+
+WordAlias GarantModel::TestFrameWork ME_4B2A0DCE03A9
+
+WordAlias GarantModel::TAbstractTest ME_4B2F40E70101
+WordAlias GarantModel::TAbstractTest.GetFolder ME_4C937013031D
+WordAlias GarantModel::TAbstractTest.GetModelElementGUID ME_4DAED6F60146
+
+USES
+ 4B2A112B011A.pas.ms.script // Source TBaseTest
+;
+
+WordAlias GarantModel::TBaseTest ME_4B2A11BC0255
