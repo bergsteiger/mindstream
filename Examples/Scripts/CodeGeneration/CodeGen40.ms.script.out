@@ -1663,6 +1663,7 @@ TClass class::TkwScriptCompileAndProcess
 TClass class::TkwScriptCompileStringAndProcess
 TClass class::TkwScriptExceptionStack
 TClass class::TkwScriptFileName
+TClass class::TkwScriptRunFromFile
 TClass class::TkwSendInputSupport
 TClass class::TkwSetAppPath2CurrentDir
 TClass class::TkwSetLocalDate
@@ -2898,6 +2899,7 @@ TkwScriptCompileAndProcess
 TkwScriptCompileStringAndProcess
 TkwScriptExceptionStack
 TkwScriptFileName
+TkwScriptRunFromFile
 TkwSendInputSupport
 TkwSetAppPath2CurrentDir
 TkwSetLocalDate
@@ -3360,6 +3362,7 @@ script:CompileAndProcess
 script:CompileStringAndProcess
 ARRAY script:ExceptionStack
 STRING script:FileName
+VOID script:RunFromFile
 Dictionary: axiom:sysutils
 STRING sysutils:ChangeFileExt
 BOOLEAN sysutils:CreateDir
