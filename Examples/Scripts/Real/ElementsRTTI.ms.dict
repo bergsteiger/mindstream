@@ -334,6 +334,10 @@ elem_iterator Dependencies
  Self 'Dependencies' .ElemList >>> Result
 ; // Dependencies
 
+elem_iterator Depends
+ Self 'Depends' .ElemList >>> Result
+; // Depends
+
 elem_iterator Injected
  Self 'Injected' .ElemList >>> Result
 ; // Injected
@@ -548,6 +552,8 @@ STRING elem_func UIDEx
 STRING FUNCTION ValueToKey
   ANY IN aValue
  RULES
+  ( aValue IsNil )
+   ''
   ( aValue IsString )
    aValue
   ( aValue IsArray )

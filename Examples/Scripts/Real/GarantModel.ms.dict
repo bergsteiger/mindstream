@@ -8,7 +8,11 @@ WordAlias GarantModel::Integer ME_46A606AC03B2
 
 WordAlias GarantModel::Boolean ME_46A603BB0391
 
+WordAlias GarantModel::ByteBool ME_4F6C9243020F
+
 WordAlias GarantModel::Variants ME_48088D6800F9
+
+WordAlias GarantModel::TObject ME_4807745602C8
 
 USES
  4AB0C3F60375.pas.ms.script // Windows
@@ -21,6 +25,7 @@ USES
 ;
 
 WordAlias GarantModel::Classes ME_478CF30500C1
+WordAlias GarantModel::TDataModule ME_4AAA214A0250
 
 USES
  46A0E6C5023A.pas.ms.script  // ActiveX
@@ -49,6 +54,8 @@ WordAlias GarantModel::l3Base ME_4773D64E036C
 WordAlias GarantModel::l3UnknownPrim ME_47913F4E02E0
 WordAlias GarantModel::l3UnknownPrim.ClearFields ME_5000565C019C
 
+WordAlias GarantModel::Tl3ProtoObject ME_49E7754802A9
+
 USES
  561F9F7D02A7.pas.ms.script // ScriptEngine
 ;
@@ -56,9 +63,16 @@ USES
 WordAlias GarantModel::TtfwClassRef(Proxy) ME_561F9F9400BC // TtfwClassRef (Proxy)
 
 USES
+ 4683F37902CF.pas.ms.script // vcmInterfaces
+;
+
+WordAlias GarantModel::vcmInterfaces ME_4683F37902CF
+
+USES
  467BAB7F021E.pas.ms.script // vcmExternalInterfaces
 ;
 
+WordAlias GarantModel::vcmExternalInterfaces ME_467BAB7F021E
 WordAlias GarantModel::IvcmTestParamsPrim ME_4683E07E004B
 WordAlias GarantModel::IvcmTestExecutePrim ME_4683E1AD0047
 WordAlias GarantModel::TvcmOperationStateIndex ME_4683F4D501E9
@@ -98,3 +112,31 @@ USES
 ;
 
 WordAlias GarantModel::TBaseTest ME_4B2A11BC0255
+
+USES
+ 4982BE090383.pas.ms.script // vcmControllers
+;
+
+WordAlias GarantModel::vcmControllers ME_4982BE090383
+WordAlias GarantModel::IvcmUseCaseController ME_4981E70101D7
+WordAlias GarantModel::IvcmViewAreaController ME_497841510139
+
+USES
+ 4AADF9450143.pas.ms.script // Visual
+;
+
+WordAlias GarantModel::TvcmEntityForm ME_49525B34022A
+WordAlias GarantModel::TvcmContainerForm ME_49525C240170
+WordAlias GarantModel::TvcmMainForm ME_49525C7A0114
+
+USES
+ 47B9727603BE.pas.ms.script // FormSets
+;
+
+WordAlias GarantModel::TvcmFormSetFactory ME_47B97312006D
+
+USES
+ 47D0E1500033.pas.ms.script // Implementation
+;
+
+WordAlias GarantModel::TvcmModule ME_4AB33E14004E
