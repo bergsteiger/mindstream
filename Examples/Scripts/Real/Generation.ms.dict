@@ -443,6 +443,49 @@ PROCEDURE Init_g_UseNewGenExcluded
   
   // ServiceImplementation
   '563208C60299' // TnsBaseSearchServiceImpl Витя недорисовал [Error] nsBaseSearchServiceImpl.pas(54): Undeclared identifier: 'GetBaseSearchModel'
+  
+  // SimpleClass
+  '473C4F1E01A1' // Tl3VirtualCanvas if (DCFlag = ev_dcfLinked) then [Error] l3VirtualCanvas.pas(168): Undeclared identifier: 'ev_dcfLinked'
+  '47F0870E0034' // TnevDocumentContainer [Error] nevDocumentContainer.pas(336): Undeclared identifier: 'Iterate'
+  '48ECD38B0204' // TevMultiSelectionRange [Error] evMultiSelectionRange.pas(97): Undeclared identifier: 'Iterate'
+  '48ECD64B005A' // TevLeafParaMultiSelectionBlock [Error] evLeafParaMultiSelectionBlock.pas(30): Undeclared identifier: 'l3Types'
+  '4E81A1D3027D' // TevReqIterator [Error] evReqIterator.pas(29): Undeclared identifier: 'DoReq'
+  'A8C41C353B7D' // TstDocumentShowChangesInfoItem [Error] stDocumentShowChangesInfoItem.pas(41): Illegal character in input file: '!' ($21)
+  '4D4011460346' // TnsContentsListForFiltering [Error] nsContentsListForFiltering.pas(38): Declaration of 'Item' differs from declaration in interface 'IListForFiltering'
+  '4BAA279500E6' // TnevRangePrim [Error] nevRangePrim.pas(22): Undeclared identifier: 'Iterate'
+  '552FAA38015B' // TevExpandedTextCollapser [Error] evExpandedTextCollapser.pas(42): Undeclared identifier: 'EvExpandOrCollapse'
+  '48CE0B85029C' // TnevParaList [Error] nevParaList.pas(64): Undeclared identifier: 'IteratePara'
+  '48CE5C2E0058' // TnevNullParaList [Error] nevNullParaList.pas(49): Undeclared identifier: 'IteratePara'
+  '4DEFC812022F' // Tl3EventedRecListView [Error] l3EventedRecListView.pas(25): Declaration of 'CompareRecs' differs from previous declaration надо PItemType разрулить
+  '4872337C032B' // TctComboBoxStringsItemNode [Error] ctComboBoxStringsItemNode.pas(23): Undeclared identifier: 'TctComboBoxStringsItemNode'
+  '558947020183' // TvcmHistoryItemList [Error] vcmHistoryItemList.pas(137): Incompatible types: 'IvcmHistoryItems' and '_l3InterfaceRefList_'
+  '5268E523030D' // TddSub [Error] ddSub.pas(59): Undeclared identifier: 'StartSub'
+  '525D26AF0039' // TddHyperlinkTarget [Error] ddHyperlinkTarget.pas(72): Undeclared identifier: 'StartAddress'
+  '54D9AC570374' // TddHyperlink [Error] ddHyperlink.pas(52): Undeclared identifier: 'StartHyperlink'
+  '51E8CE5402CC' // TddTab [Error] ddTab.pas(63): Undeclared identifier: 'StartTab'
+  '54D9B0A2024C' // TddObjectSegment [Error] ddObjectSegment.pas(46): Undeclared identifier: 'StartObjectSegment'
+  '54D9B8E801EA' // TddStyleSegment [Error] ddStyleSegment.pas(59): Undeclared identifier: 'StartTextSegment'
+  '4E085B110285' // TbsDocumentMissingMessage !!! Lost Message ini !!!
+  '4926AE3900B9' // TdeListSet [Error] deListSet.pas(49): Undeclared identifier: 'pm_GetListSynchroViewForm'
+  'DF1A3014EEBC' // TstevStylesPrintAndExportFontSizeItem [Error] stevStylesPrintAndExportFontSizeItem.pas(38): Illegal character in input file: '!' ($21)
+  '4CED3DF702F9' // TnsNativeCommentPara [Error] nsNativeCommentPara.pas(22): Undeclared identifier: 'CommentParaTagClass'
+  '4CEFD73403E4' // TnsLeafParaDecorationsHolder [Error] nsLeafParaDecorationsHolder.pas(19): Undeclared identifier: 'LeafParaDecorationsHolderTagClass'
+  '4BA232B402FF' // TnsFolderFilterInfo aShowFolders: TnsShowFolders = FoldersDomainInterfaces.sfAll): _l3Notifier_; reintroduce;
+  '4EDCFD4D037C' // TnsListWarningGenerator [Error] nsListWarningGenerator.pas(94): Undeclared identifier: 'remListFiltered'
+  '4992891800CF' // TnsStartupTips class function MakePrim: _afwApplicationDataUpdate_; reintroduce;
+  '98CD882A435E' // TstMainMenuChangeableMainMenuTypeItem [Error] stMainMenuChangeableMainMenuTypeItem.pas(41): Illegal character in input file: '!' ($21)
+  '4DDD0D92039C' // TnsChangesBetweenEditionsDocumentContainer [Error] nsChangesBetweenEditionsDocumentContainer.pas(274): Undeclared identifier: 'Tk2Type'
+  '4E8EB01701A5' // TddAutolinkDocEntry [Error] ddAutolinkDocEntry.pas(63): Declaration of 'Set_Date' differs from declaration in interface 'IddAutolinkDocEntry'
+  '559A3BD901CC' // TdaJournal [Error] daJournal.pas(116): Declaration of 'CalcStatistics' differs from declaration in interface 'IdaJournal'
+  '5540D3060300' // ThtJournal [Error] htJournal.pas(52): Declaration of 'MakeResultSet' differs from previous declaration
+  '5555AD2A0004' // TdaParam [Error] daParam.pas(47): Declaration of 'Set_AsStDate' differs from declaration in interface 'IdaParam'
+  '56408DB303B7' // TdaCondition [Error] daCondition.pas(58): Undeclared identifier: 'l3FreeLocalStub'
+  '5640598000F0' // TdaLogicCondition [Error] daLogicCondition.pas(78): Illegal character in input file: '!' ($21)
+  '5641ED5A01D1' // TdaSubQueryCondition [Error] daSubQueryCondition.pas(77): Illegal character in input file: '!' ($21)
+  '54856BFA003E' // TalcuSendTaskExecutor [Error] alcuSendTaskExecutor.pas(134): Undeclared identifier: 'FreeAndNil'
+  '4B683B57028D' // TatChatWorker [Error] atChatWorker.pas(347): Undeclared identifier: 'aNotify'
+  '47ECBAA30322' // TevHiddenFilter TevHiddenFilter.Make [Error] evHiddenFilter.pas(114): Undeclared identifier: 'Result'
+  '467FCCB101CF' // TnsTagNodePrim [Error] nsTagNodePrim.pas(380): Undeclared identifier: 'IDocumentTextProvider'
  ] >>> g_UseNewGenExcluded
 ; // Init_g_UseNewGenExcluded
 
@@ -464,18 +507,46 @@ BOOLEAN elem_func ForceUseNewGen
  >>> Result
 ; // ForceUseNewGen
 
+BOOLEAN elem_func IsScriptKeywordsPack
+ Self .IsStereotype st_ScriptKeywordsPack >>> Result
+; // IsScriptKeywordsPack
+
+BOOLEAN elem_func IsUtilityPack
+ Cached:
+ (
+  RULES
+   ( Self .IsStereotype st_UtilityPack )
+    true
+   ( Self .IsScriptKeywordsPack ) 
+    true
+   DEFAULT
+    false
+  ; // RULES 
+ ) 
+ >>> Result
+; // IsUtilityPack
+
 BOOLEAN elem_func UseNewGenExcluded
  RULES
   ( Self .IsControllerInterfaces )
    true
   ( Self '_vcmData_' .InheritsFrom )
    true
+  ( 
+   ( Self 'Tl3Tag' .InheritsFrom )
+   AND ( Self 'TtfwKeyWordPrim' .InheritsFrom ! )
+   AND ( Self .IsUtilityPack ! )
+  ) 
+   true
+  ( Self 'TddComboBoxConfigItem' .InheritsFrom )
+   true
+  ( Self 'Tl3ProtoObjectForTie' .InheritsFrom )
+   true
+  ( Self '_evdTagHolder_' .InheritsFrom )
+   true
   DEFAULT
   begin
-   if ( 
-       ( g_UseNewGenExcluded IsNil )
-       OR ( g_UseNewGenExcluded IsVoid )
-      ) then
+   if ( g_UseNewGenExcluded IsNil ) then
     Init_g_UseNewGenExcluded
     
    g_UseNewGenExcluded IsNil ?FAIL 'Не инициализирован g_UseNewGenExcluded'
@@ -547,6 +618,9 @@ CONST cGenScriptsFolder 'W:\common\GenScripts\'
 BOOLEAN elem_func CanCopyToFinalFile
  false >>> Result
 ; // CanCopyToFinalFile
+
+PROCEDURE BackupFile
+; // BackupFile
 
 PROCEDURE DoDeleteFile
   STRING IN aFileName
@@ -766,25 +840,6 @@ BOOLEAN elem_func IsSimpleClass
  >>> Result
 ; // IsSimpleClass
  
-BOOLEAN elem_func IsScriptKeywordsPack
- Self .IsStereotype st_ScriptKeywordsPack >>> Result
-; // IsScriptKeywordsPack
-
-BOOLEAN elem_func IsUtilityPack
- Cached:
- (
-  RULES
-   ( Self .IsStereotype st_UtilityPack )
-    true
-   ( Self .IsScriptKeywordsPack ) 
-    true
-   DEFAULT
-    false
-  ; // RULES 
- ) 
- >>> Result
-; // IsUtilityPack
-
 BOOLEAN elem_func IsInternalInterfaces
  Self .IsStereotype st_InternalInterfaces
  >>> Result
@@ -1393,10 +1448,35 @@ BOOLEAN elem_func IsIterator
 ModelElement elem_func MainImplements
  Cached:
  (
-  Self .Implements .FirstElement
+  Self .Implements 
+  .FirstElement
  )
  >>> Result
 ; // MainImplements
+
+BOOLEAN elem_func IsFactoryAcceptable
+ RULES
+  ( Self .IsInterface )
+   true
+  ( Self .IsMixInParamType )
+   true
+  ( Self .IsArray )
+   true 
+  DEFAULT
+   false 
+ ; // RULES  
+ >>> Result
+; // IsFactoryAcceptable
+
+ModelElement elem_func MainImplementsInterface
+ Cached:
+ (
+  Self .Implements 
+  .filter> .IsFactoryAcceptable
+  .FirstElement
+ )
+ >>> Result
+; // MainImplementsInterface
 
 STRING elem_func UIDforUserCode
  RULES
@@ -2194,7 +2274,15 @@ ARRAY FUNCTION .joinWithLambded>
   ^ IN aLambda
   
  anArrayToJoin 
- anArrayToIterate DO .for> ( IN aChild .join> ( aChild aLambda DO ) )
+ anArrayToIterate DO .for> ( 
+  IN aChild 
+  VAR l_Other
+  ( aChild aLambda DO ) >>> l_Other
+  if ( l_Other IsNil ! ) then
+  begin
+   .join> l_Other
+  end // ( l_Other IsNil ! )
+ )
  >>> Result
 ; // .joinWithLambded>
 
@@ -3525,9 +3613,9 @@ ModelElement elem_func MethodType
    begin
     RULES
      ( Self .IsStereotype st_factory::Operation )
-      ( Self .Parent .MainImplements )
+      ( Self .Parent .MainImplementsInterface )
      ( Self .IsFactoryMethod )
-      ( Self .MainImplements )
+      ( Self .MainImplementsInterface )
      DEFAULT
       l_Type
     ; // RULES
@@ -3543,7 +3631,7 @@ ModelElement elem_func MethodType
      ( Self .IsStereotype st_factory::Operation )
       ( 'BadFactoryType' )
      ( Self .IsFactoryMethod )
-      ( Self .Parent .MainImplements )
+      ( Self .Parent .MainImplementsInterface )
      DEFAULT
       l_Type
     ; // RULES
@@ -4405,11 +4493,6 @@ elem_iterator AttributesAndOperations
   .join> ( Self .Operations )
   .filter> ( .IsSomeKeyWord ! )
   .filter> ( .IsStereotype st_link::Attribute ! )
-/*{  if ( Self .IsFactoryMethod ) then
-  begin
-   .join> ( Self .MethodParameters )
-   //.join> [ Self .MainImplements ]
-  end // ( Self .IsFactoryMethod )}*/
  )
  >>> Result
 ; // AttributesAndOperations
@@ -4475,7 +4558,7 @@ ARRAY FUNCTION .OperationsNeededElements
  .joinWithLambded> anArray ( .Parameters .mapToTargetAndValueType> )
  .joinWithLambded> anArray ( .AttributesAndOperations call.me )
  .joinWithLambded> ( anArray .filter> .IsFactoryMethod ) ( .MethodParameters .mapToTargetAndValueType> )
- .joinWithLambded> ( anArray .filter> .IsFactoryMethod ) ( .ElementToArray: .MainImplements )
+ .joinWithLambded> ( anArray .filter> .IsFactoryMethod ) ( .ElementToArray: .MainImplementsInterface )
  .joinWithLambded> anArray .CanRaise
  .joinWithLambded> anArray .CanRaiseInSet 
  >>> Result 
@@ -4766,6 +4849,10 @@ elem_iterator NeededElements
    .joinWithLambded> ( Self .ClassImplementsPrim ) .InterfaceForClassImplements
   end // ( Self .IsClassOrMixIn )
   .joinWithLambded> ( Self .NeededElementsFromInheritsOrImplements .filter> .IsMixIn ) call.me
+  Self .NeededElementsFromInheritsOrImplements .filter> .IsMixIn .for> ( 
+    IN anItem
+   .joinWithLambded> ( anItem .ConstantsAndChildrenWithoutOwnFile ) call.me
+  )
  )
  >>> Result
 ; // NeededElements
