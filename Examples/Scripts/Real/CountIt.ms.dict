@@ -1,0 +1,10 @@
+UNIT CountIt.ms.dict
+
+INTEGER FUNCTION .CountIt
+  ARRAY IN anArray
+ 0 >>> Result
+ anArray .for> ( 
+   IN anItem 
+  Inc Result 
+ ) 
+; // .CountIt

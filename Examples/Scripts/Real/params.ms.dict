@@ -25,13 +25,6 @@ USES
 EXPORTS
  Literal.ms.dict
 
-USES
- core.ms.dict
-;
-
-EXPORTS
- core.ms.dict
-
 MACRO LVALUE
  Literal IN aName
  %SUMMARY 'Параметр слева, который передаётся по ссылке. И из которого можно не только читать, но и в который потенциально можно писать. Если он не Read-Only.' ;
@@ -58,6 +51,10 @@ PRIVATE VOID operator MangledNamePusher
 
 USES
  axiom:ValueTypes
+;
+
+USES
+ NameAsString.ms.dict
 ;
 
 MACRO right
@@ -102,3 +99,10 @@ MACRO right
   ] Ctx:Parser:PushArray
 
 ; // right
+
+USES
+ core.ms.dict
+;
+
+EXPORTS
+ core.ms.dict

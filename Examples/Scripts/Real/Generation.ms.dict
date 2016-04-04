@@ -206,14 +206,31 @@ STRING FUNCTION Ext
  '.dump' >>> Result
 ; // Ext
 
+PROCEDURE BackupFile
+  STRING IN aFileName
+ if ( aFileName sysutils:FileExists ) then
+ begin
+  VAR l_To
+  aFileName >>> l_To
+  l_To 'w:' 'W:' string:Replace >>> l_To
+  l_To 'W:' 'C:\Temp\GenBackup' string:Replace >>> l_To
+  $20 l_To aFileName CopyFile
+ end // ( aFileName sysutils:FileExists )
+; // BackupFile
+
 PROCEDURE CopyChangedFile
   STRING IN aTo
   STRING IN aFrom
+  BOOLEAN IN aNeedBackup
  if (
      ( aTo sysutils:FileExists ! )
      OR ( cEmptyStr aTo aFrom CompareFiles ! ) 
     ) then
  begin
+  if aNeedBackup then
+  begin
+   aTo BackupFile
+  end // aNeedBackup
   $20 aTo aFrom CopyFile
  end 
 ; // CopyChangedFile
@@ -246,14 +263,9 @@ STRING FUNCTION .CutPrefix
  >>> Result 
 ; // .CutPrefix
 
-INTEGER FUNCTION .CountIt
-  ARRAY IN anArray
- 0 >>> Result
- anArray .for> ( 
-   IN anItem 
-  Inc Result 
- ) 
-; // .CountIt
+USES
+ CountIt.ms.dict
+;
 
 BOOLEAN elem_func IsSameModelElement
   ModelElement IN anOther
@@ -374,138 +386,18 @@ BOOLEAN elem_func InheritsFrom
  >>> Result
 ; // InheritsFrom
 
-//ARRAY VAR g_UseNewGenExcluded
-ARRAY CompileTime-VAR g_UseNewGenExcluded nil
-
-PROCEDURE Init_g_UseNewGenExcluded
- [
-  // UtilityPack
-  '4135B54EF3A1' // FillStrings
-  '3DBAA1891003' // Design_AttrValues implementation after const - надо поступать так же как с Type
-  '52FA4ACA0020' // csRequestTask GetTaggedDataType
-  '4F0C0B6801C7' // DragData cnActiveState = [dsActive, dsPaused];
-  'C9ADD4944F97' // evStylesPrintAndExportFontSizeSettingRes FillStrings
-  '48E385660374' // evRange IterateLeafParagraphs
-  '4B2A6D4303A9' // KTestRunner проблемы с TTimeInfoList с предварительным описанием RTestResultsPlace = class of TTestResultsPlace;
-  '4B9777000394' // vcmToolbarMenuRes FillStrings
-  //'4B8E676500AD' // vcmDialogs mbClose в cMsgDlgBtnOrder без IfDef
-  '51E7E79A0341' // vcmMainFormRes !!! Lost Message ini !!!
-  '4AC9A3F801F3' // nsMainMenuNew uses vtOutliner и l3ControlsTypes - отсутствуют
-  '4AAF93E201FD' // nsPostingsLine uses l3TreeInterfaces - отсутствует
-  '5453986402AC' // ncsMessage не реализует pm_GetKind от тега
-  '55CB200E0058' // daTableDescription uses l3L2IA - отсутствует
-  '4F9BB14900E7' // nsQuestionsWithChoices !!! Lost Message ini !!!
-  '4F9A9C6803D4' // nsQuestions !!! Lost Message ini !!!
-  '4B97B148028B' // nsAppConfigRes FillStrings
-  '537AE06700E8' // vcmTabbedContainerRes !!! Lost Message ini !!!
-  '4D5A701702B4' // nsTextWithCommentsRes FillStrings 
-  '9847AD90023A' // DocumentShowChangesInfoSettingRes FillStrings
-  '4E7C528C00BE' // ControlStatusUtils !!! Lost Message ini !!!
-  '55E438930369' // nsListExceptions !!! Lost Message ini !!!
-  '483C0AEA0186' // atGblAdapterWorker [Error] atGblAdapterWorker.pas(132): Declaration of 'Fire' differs from declaration in interface 'IControlledChangeNotifier'
-  '483AD11C02A1' // atQueryExecutor [Error] atQueryExecutor.pas(82): Undeclared identifier: 'FinishProcess'
-  
-  // Impurity
-  '48FDA9D500E4' // nsNodeNotifierImplementation [Error] nsNodeNotifierImplementation.imp.pas(39): Undeclared identifier: 'ChangeChildrenCount'
-  '47EB3E2202E6' // dBaseDocument function _dBaseDocument_.pm_GetdsDocumentRef: IvcmFormDataSourceRef;
-  '537D9BD30297' // vcmContainedForm Витя недорисовал
-  
-  // GuiControl
-  '5028A4C0019B' // TvcmToolbar vcm_DefaultToolbarOptions = [vcm_toModulesInMainToolbar, vcm_toEntitiesInMainToolbar]; [Error] vcmToolbar.pas(45): Constant expression expected
-  '515DA5860015' // TvtOutliner uses Supports SysUtils
-  '5562DB5D0259' // TvtCalendarPanel uses EncodeDate
-  '4AA8AB7B038F' // TvtDateEdit uses Now
-  '4B30EC67025A' // TvcmMenuManager vcm_DefaultMenuOptions = [vcm_moEntitiesInMainMenu, vcm_moEntitiesInTopMainMenu];
-  '4E732D7F0082' // TvtHideField cDefaultOptions = [hfoCanHide, hfoHyperlink];
-  '5270BBC702C7' // TvtColorBox uses Format
-  
-  // InternalInterfaces
-  '4678209200A6' // nevBase nev_plThis = TnevParaLevel(0);
-  '4683F37902CF' // vcmInterfaces Витя недорисовал l_ContainedForm.OpenNew(vcm_okInNewTab, False, l_TabbedForm) [Error] vcmTabbedContainerForm.pas(1145): Too many actual parameters
-  
-  // Interfaces
-  '467C0CAA02AB' // l3InternalInterfaces function Hl3Canvas.pxAverageCharWidth: Integer;
-  '476BEA0B0103' // evConst evEpsilon = l3Epsilon;
-  '47C5207602D1' // nevTools InevParaInternal = interface(InevPara)
-  '485808AB001D' // evControlsBlockConst evControlBlockBefore = l3Inch div 3;
-  '48E3836D00C8' // evEditorInterfaces edSingleCell = [ed_PsevdoSingleCells, ed_SingleCell];
-  '480F77890296' // evTextParaConst evHyphenWidth = l3Inch div 32;
-  '47D0015C0022' // evControlParaConst evCheckableControls = [ev_ctCheckEdit, ev_ctRadioEdit];
-  '4720862F0238' // m3StorageInterfaces m3_saRead = Tm3StoreAccess(STGM_READ or STGM_SHARE_EXCLUSIVE);
-  '5432518A0316' // daInterfaces daTableDescriptionIterator_IterateFieldsF_Action = function(const anItem: IdaFieldDescription): Boolean;
-  '4720831F012D' // m3DBInterfaces m3_defDocPart = m3_dsMain;
-  '4E8EAF5C020F' // ddAutolinkInterfaces procedure Set_Date(const aValue: TStDate); ddAutolinkDocEntry procedure Set_Date(aValue: TStDate);
-  //'49903C95009E' // AdminDomainInterfaces EdsMaxLengthExceed Create
-  '4A9F98B901A5' // BaseSearchInterfaces ns_sseAll = [ns_sseContext, ns_sseNeedShowWindow, ns_sseOpenKind, ns_sseActiveClass, ns_sseSearchArea];
-  
-  // Service
-  '563875050317' // TnsBaseSearchService Витя недорисовал BaseSearch_Module [Error] BaseSearch_Module.pas(245): Undeclared identifier: 'OpenBaseSearch'
-  
-  // ServiceImplementation
-  '563208C60299' // TnsBaseSearchServiceImpl Витя недорисовал [Error] nsBaseSearchServiceImpl.pas(54): Undeclared identifier: 'GetBaseSearchModel'
-  
-  // SimpleClass
-  '473C4F1E01A1' // Tl3VirtualCanvas if (DCFlag = ev_dcfLinked) then [Error] l3VirtualCanvas.pas(168): Undeclared identifier: 'ev_dcfLinked'
-  '47F0870E0034' // TnevDocumentContainer [Error] nevDocumentContainer.pas(336): Undeclared identifier: 'Iterate'
-  '48ECD38B0204' // TevMultiSelectionRange [Error] evMultiSelectionRange.pas(97): Undeclared identifier: 'Iterate'
-  '48ECD64B005A' // TevLeafParaMultiSelectionBlock [Error] evLeafParaMultiSelectionBlock.pas(30): Undeclared identifier: 'l3Types'
-  '4E81A1D3027D' // TevReqIterator [Error] evReqIterator.pas(29): Undeclared identifier: 'DoReq'
-  'A8C41C353B7D' // TstDocumentShowChangesInfoItem [Error] stDocumentShowChangesInfoItem.pas(41): Illegal character in input file: '!' ($21)
-  '4D4011460346' // TnsContentsListForFiltering [Error] nsContentsListForFiltering.pas(38): Declaration of 'Item' differs from declaration in interface 'IListForFiltering'
-  '4BAA279500E6' // TnevRangePrim [Error] nevRangePrim.pas(22): Undeclared identifier: 'Iterate'
-  '552FAA38015B' // TevExpandedTextCollapser [Error] evExpandedTextCollapser.pas(42): Undeclared identifier: 'EvExpandOrCollapse'
-  '48CE0B85029C' // TnevParaList [Error] nevParaList.pas(64): Undeclared identifier: 'IteratePara'
-  '48CE5C2E0058' // TnevNullParaList [Error] nevNullParaList.pas(49): Undeclared identifier: 'IteratePara'
-  '4DEFC812022F' // Tl3EventedRecListView [Error] l3EventedRecListView.pas(25): Declaration of 'CompareRecs' differs from previous declaration надо PItemType разрулить
-  '4872337C032B' // TctComboBoxStringsItemNode [Error] ctComboBoxStringsItemNode.pas(23): Undeclared identifier: 'TctComboBoxStringsItemNode'
-  '558947020183' // TvcmHistoryItemList [Error] vcmHistoryItemList.pas(137): Incompatible types: 'IvcmHistoryItems' and '_l3InterfaceRefList_'
-  '5268E523030D' // TddSub [Error] ddSub.pas(59): Undeclared identifier: 'StartSub'
-  '525D26AF0039' // TddHyperlinkTarget [Error] ddHyperlinkTarget.pas(72): Undeclared identifier: 'StartAddress'
-  '54D9AC570374' // TddHyperlink [Error] ddHyperlink.pas(52): Undeclared identifier: 'StartHyperlink'
-  '51E8CE5402CC' // TddTab [Error] ddTab.pas(63): Undeclared identifier: 'StartTab'
-  '54D9B0A2024C' // TddObjectSegment [Error] ddObjectSegment.pas(46): Undeclared identifier: 'StartObjectSegment'
-  '54D9B8E801EA' // TddStyleSegment [Error] ddStyleSegment.pas(59): Undeclared identifier: 'StartTextSegment'
-  '4E085B110285' // TbsDocumentMissingMessage !!! Lost Message ini !!!
-  '4926AE3900B9' // TdeListSet [Error] deListSet.pas(49): Undeclared identifier: 'pm_GetListSynchroViewForm'
-  'DF1A3014EEBC' // TstevStylesPrintAndExportFontSizeItem [Error] stevStylesPrintAndExportFontSizeItem.pas(38): Illegal character in input file: '!' ($21)
-  '4CED3DF702F9' // TnsNativeCommentPara [Error] nsNativeCommentPara.pas(22): Undeclared identifier: 'CommentParaTagClass'
-  '4CEFD73403E4' // TnsLeafParaDecorationsHolder [Error] nsLeafParaDecorationsHolder.pas(19): Undeclared identifier: 'LeafParaDecorationsHolderTagClass'
-  '4BA232B402FF' // TnsFolderFilterInfo aShowFolders: TnsShowFolders = FoldersDomainInterfaces.sfAll): _l3Notifier_; reintroduce;
-  '4EDCFD4D037C' // TnsListWarningGenerator [Error] nsListWarningGenerator.pas(94): Undeclared identifier: 'remListFiltered'
-  '4992891800CF' // TnsStartupTips class function MakePrim: _afwApplicationDataUpdate_; reintroduce;
-  '98CD882A435E' // TstMainMenuChangeableMainMenuTypeItem [Error] stMainMenuChangeableMainMenuTypeItem.pas(41): Illegal character in input file: '!' ($21)
-  '4DDD0D92039C' // TnsChangesBetweenEditionsDocumentContainer [Error] nsChangesBetweenEditionsDocumentContainer.pas(274): Undeclared identifier: 'Tk2Type'
-  '4E8EB01701A5' // TddAutolinkDocEntry [Error] ddAutolinkDocEntry.pas(63): Declaration of 'Set_Date' differs from declaration in interface 'IddAutolinkDocEntry'
-  '559A3BD901CC' // TdaJournal [Error] daJournal.pas(116): Declaration of 'CalcStatistics' differs from declaration in interface 'IdaJournal'
-  '5540D3060300' // ThtJournal [Error] htJournal.pas(52): Declaration of 'MakeResultSet' differs from previous declaration
-  '5555AD2A0004' // TdaParam [Error] daParam.pas(47): Declaration of 'Set_AsStDate' differs from declaration in interface 'IdaParam'
-  '56408DB303B7' // TdaCondition [Error] daCondition.pas(58): Undeclared identifier: 'l3FreeLocalStub'
-  '5640598000F0' // TdaLogicCondition [Error] daLogicCondition.pas(78): Illegal character in input file: '!' ($21)
-  '5641ED5A01D1' // TdaSubQueryCondition [Error] daSubQueryCondition.pas(77): Illegal character in input file: '!' ($21)
-  '54856BFA003E' // TalcuSendTaskExecutor [Error] alcuSendTaskExecutor.pas(134): Undeclared identifier: 'FreeAndNil'
-  '4B683B57028D' // TatChatWorker [Error] atChatWorker.pas(347): Undeclared identifier: 'aNotify'
-  '47ECBAA30322' // TevHiddenFilter TevHiddenFilter.Make [Error] evHiddenFilter.pas(114): Undeclared identifier: 'Result'
-  '467FCCB101CF' // TnsTagNodePrim [Error] nsTagNodePrim.pas(380): Undeclared identifier: 'IDocumentTextProvider'
- ] >>> g_UseNewGenExcluded
-; // Init_g_UseNewGenExcluded
-
-//( Init_g_UseNewGenExcluded )
+USES
+ UseNewGenExcluded.ms.dict
+;
 
 BOOLEAN elem_func IsControllerInterfaces
  ( Self .IsStereotype st_ControllerInterfaces )
  >>> Result
 ; // IsControllerInterfaces
 
-BOOLEAN elem_func ForceUseNewGen
- [
-  '52F8B15003A7' // TddPicturePathListner
-  '4E01D585033A' // TvcmUserInteractiveForm
-  '5519612B01D3' // TIterateableServiceProvider
- ]
- .filter> ( Self .UID == )
- .CountIt > 0
- >>> Result
-; // ForceUseNewGen
+USES
+ ForceUseNewGen.ms.dict
+;
 
 BOOLEAN elem_func IsScriptKeywordsPack
  Self .IsStereotype st_ScriptKeywordsPack >>> Result
@@ -619,11 +511,13 @@ BOOLEAN elem_func CanCopyToFinalFile
  false >>> Result
 ; // CanCopyToFinalFile
 
-PROCEDURE BackupFile
-; // BackupFile
-
 PROCEDURE DoDeleteFile
   STRING IN aFileName
+  BOOLEAN IN aNeedBackup
+ if aNeedBackup then
+ begin
+  aFileName BackupFile
+ end // aNeedBackup
  aFileName DeleteFile DROP
 ; // DoDeleteFile
 
@@ -667,12 +561,12 @@ elem_proc GenerateWordToFileWith:
          ) // TF g_NeedOutLn
         ) // TF g_UCRead
        ) // TF g_OutFile
-       g_RealFileName g_TempFileName CopyChangedFile
+       g_RealFileName g_TempFileName false CopyChangedFile
        if ( g_FinalFileName IsNil ! ) then
        begin
         if ( Self .? .CanCopyToFinalFile ) then
         begin
-         g_FinalFileName g_TempFileName CopyChangedFile
+         g_FinalFileName g_TempFileName true CopyChangedFile
          
          VAR l_Path
          VAR l_Name
@@ -691,7 +585,7 @@ elem_proc GenerateWordToFileWith:
           begin
            if ( l_FileToDelete sysutils:FileExists ) then
            begin
-            l_FileToDelete DoDeleteFile
+            l_FileToDelete true DoDeleteFile
            end // ( l_FileToDelete sysutils:FileExists )
           end // ( l_FileToDelete g_FinalFileName SameText ! )
          end // ( cNotCompleted l_Name StartsStr ! )
@@ -704,7 +598,7 @@ elem_proc GenerateWordToFileWith:
           begin
            if ( l_FileToDelete sysutils:FileExists ) then
            begin
-            l_FileToDelete DoDeleteFile
+            l_FileToDelete true DoDeleteFile
            end // ( l_FileToDelete sysutils:FileExists )
           end // ( l_FileToDelete g_FinalFileName SameText ! )
          end // ( cNotFinished l_Name StartsStr ! )
@@ -732,7 +626,7 @@ elem_proc DeleteWordFile
    
    if ( g_RealFileName sysutils:FileExists ) then
    begin
-    g_RealFileName DoDeleteFile
+    g_RealFileName true DoDeleteFile
    end // ( g_RealFileName sysutils:FileExists )
   ) // TF g_RealFileName 
 ; // DeleteWordFile
@@ -1480,6 +1374,16 @@ ModelElement elem_func MainImplementsInterface
 
 STRING elem_func UIDforUserCode
  RULES
+  ( Self .IsIterator )
+   RULES
+    (
+     ( Self .MainAncestor IsNil ! )
+     AND ( Self .MainAncestor .IsIterator )
+    ) 
+     ( Self .MainAncestor .UID )
+    DEFAULT
+     ( Self .UID )
+   ; // RULES
   ( Self .IsMethod )
    RULES
     (
@@ -1921,6 +1825,8 @@ ARRAY elem_func MethodParameters
      AND ( Self .MainImplements .IsIterator )
     ) 
      ( Self .MainImplements call.me )
+    ( Self .MainAncestor IsNil ! ) 
+     ( Self .MainAncestor call.me )
     DEFAULT
      ( Self .FirstOperation .Parameters )
    ; // ( Self .IsMethod )
@@ -2133,11 +2039,11 @@ elem_proc OutUserCode:
   FINALLY
    nil >>> l_Out
   END // TRY..FINALLY
-  l_RealFileName l_TempFileName CopyChangedFile
+  l_RealFileName l_TempFileName false CopyChangedFile
   
   if ( l_RealFileName FileSize 0 == ) then
   begin
-   l_RealFileName DoDeleteFile
+   l_RealFileName false DoDeleteFile
   end // ( l_RealFileName FileSize 0 == )
   
  end //( g_UCRead ! ) 
@@ -2553,13 +2459,35 @@ elem_iterator GlobalVars
  >>> Result
 ; // GlobalVars
 
+BOOLEAN elem_func IsWideString
+ Cached:
+ (
+  RULES
+   ( Self .Name 'a-string' == )
+    false
+   ( Self .Name 'a-wstring' == )
+    true
+   ( Self .IsTypedef )
+    RULES
+     ( Self .IsPointer )
+      false
+     DEFAULT
+      ( Self .MainAncestor call.me )
+    ; // RULES  
+   DEFAULT
+    false
+  ; // RULES
+ )
+ >>> Result
+; // IsWideString
+
 BOOLEAN elem_func IsString
  Cached:
  (
   RULES
    ( Self .Name 'a-string' == )
     true
-   ( Self .Name 'a-wstring' == )
+   ( Self .IsWideString )
     true
    ( Self .IsTypedef )
     RULES
@@ -2627,6 +2555,8 @@ BOOLEAN elem_func IsType
     false
    DEFAULT
     RULES
+     ( Self .IsVCMOperations )
+      false
      ( Self .IsControlPrim )
       false
      ( Self .IsProperty )
@@ -3096,17 +3026,22 @@ elem_proc MethodUserCode
            OR ( l_FieldName IsNil ) 
           ) then
        begin
-        if ( 
-            ( aField .IsReadonlyProperty ) 
-            OR ( aField .Target .CannotFinalizeProperty )
-           ) then
-        begin
-         aField .FieldName >>> l_FieldName
-        end // ( aField .IsReadonlyProperty )
-        else
-        begin
-         aField .Name >>> l_FieldName
-        end // ( aField .IsReadonlyProperty )
+        RULES
+         ( 
+          ( aField .IsReadonlyProperty ) 
+          OR ( aField .Target .CannotFinalizeProperty )
+         )
+          ( aField .FieldName >>> l_FieldName )
+         ( 
+          ( aField .IsProperty ) 
+          AND ( aField .LinkType lt_agr == )
+          AND ( aField .Target .IsWideString )
+         )
+         // http://mdp.garant.ru/pages/viewpage.action?pageId=594895802&focusedCommentId=620849995#comment-620849995
+          ( aField .FieldName >>> l_FieldName )
+         DEFAULT 
+          ( aField .Name >>> l_FieldName )
+        ; // RULES  
        end // ( l_FieldName IsNil )
        
        RULES 
@@ -3598,6 +3533,8 @@ ModelElement elem_func MethodType
       AND ( Self .MainImplements .IsIterator )
      ) 
       ( Self .MainImplements call.me )
+     ( Self .MainAncestor IsNil ! ) 
+      ( Self .MainAncestor call.me )
      DEFAULT
       ( Self .FirstOperation .Target )
     ; // RULES  
@@ -4559,6 +4496,12 @@ ARRAY FUNCTION .OperationsNeededElements
  .joinWithLambded> anArray ( .AttributesAndOperations call.me )
  .joinWithLambded> ( anArray .filter> .IsFactoryMethod ) ( .MethodParameters .mapToTargetAndValueType> )
  .joinWithLambded> ( anArray .filter> .IsFactoryMethod ) ( .ElementToArray: .MainImplementsInterface )
+ .joinWithLambded> ( anArray .filter> .IsMethod .map> .MainAncestor .filterNil> ) ( .MethodParameters .mapToTargetAndValueType> )
+ .joinWithLambded> ( anArray .filter> .IsMethod 
+                     .map> .MainAncestor 
+                     .filterNil> 
+                     .map> .MethodType 
+                     .filterNil> ) ( .ElementToArray )
  .joinWithLambded> anArray .CanRaise
  .joinWithLambded> anArray .CanRaiseInSet 
  >>> Result 
@@ -4929,6 +4872,11 @@ BOOLEAN elem_func IsForImplementation
  >>> Result
 ; // IsForImplementation
 
+BOOLEAN elem_func IsVCMControls
+ Self .IsStereotype st_VCMControls
+ >>> Result
+; // IsVCMControls
+
 elem_iterator IntfUses
  [ 'l3IntfUses' ]
  
@@ -4944,6 +4892,11 @@ elem_iterator IntfUses
  begin
   .join> [ GarantModel::vcmInterfaces GarantModel::vcmControllers ]
  end // ( Self .IsControllerInterfaces )
+ 
+ if ( Self .IsVCMControls ) then
+ begin
+  .join> [ GarantModel::vcmExternalInterfaces ]
+ end // ( Self .IsVCMControls )
  
  >>> Result
 ; // IntfUses
@@ -5060,6 +5013,12 @@ BOOLEAN elem_func NeedIniRegClass
  >>> Result
 ; // NeedIniRegClass
 
+elem_iterator ImplementedAndOverridden
+ Self .Implemented
+ .join> ( Self .Overridden )
+ >>> Result
+; // ImplementedAndOverridden
+
 elem_iterator Used
  Cached:
  (
@@ -5082,6 +5041,16 @@ elem_iterator Used
   begin
    .join> [ GarantModel::SysUtils GarantModel::l3Base ]
   end // ( Self .IsSingleton )
+  
+  if ( Self .IsClassOrMixIn ) then
+  begin
+   if ( Self .ImplementedAndOverridden 
+        .filter> .IsIterator 
+        .CountIt 0 != ) then
+   begin
+    .join> [ GarantModel::l3Base ]
+   end // ( Self .ImplementedAndOverridden .filter> .IsIterator .CountIt > 0 )
+  end // ( Self .IsClassOrMixIn )
   
   if ( Self .NeedIniRegClass ) then
   begin
@@ -5379,7 +5348,19 @@ INTEGER elem_func MethodAbstraction
       ( Self .Parent .IsContract )
        at_abstract
       ( Self .ParentIsInterface )
-       at_final
+       RULES
+        ( Self .IsIteratorF ) 
+         at_final
+        ( Self .IsIterator )
+         RULES
+          ( 'F' Self .Name EndsStr )
+           at_final
+          DEFAULT
+           at_virtual
+         ; // RULES 
+        DEFAULT
+         at_final
+       ; // RULES 
       ( Self .IsInline )
        at_final
       DEFAULT
@@ -6128,11 +6109,6 @@ BOOLEAN elem_func NeedsFakeMethod
 BOOLEAN elem_func IsServiceIterator
  Self .IsStereotype st_serviceiterator >>> Result
 ; // IsServiceIterator
-
-BOOLEAN elem_func IsVCMControls
- Self .IsStereotype st_VCMControls
- >>> Result
-; // IsVCMControls
 
 BOOLEAN elem_func IsSettingsHolder
  Self .IsStereotype st_SettingsHolder
@@ -7322,17 +7298,44 @@ elem_proc OutForward
   end // ( Self g_ForwardedTypes array:Has ! )
 ; // OutForward
 
+BOOLEAN elem_func SomeOwnChildrenInheritsOrImplementsMixIn
+ RULES
+  (
+   Self .ChildrenWithoutOwnFile 
+   .filter> .InheritsOrImplementsMixIn
+   .CountIt 0 !=
+  )
+   true
+  DEFAULT
+   false
+ ; // RULES
+ >>> Result
+; // SomeOwnChildrenInheritsOrImplementsMixIn
+
 elem_iterator ForwardedEx
  Self .Forwarded
  RULES
   ( Self .IsPureMixIn )
    ()
+  ( Self .IsTypedef )
+   ()
   ( Self .IsInterface )
   begin
-   if ( Self .Parent .IsInterface ) then
-   begin
-    .join> [ Self .Parent ]
-   end // ( Self .Parent .IsInterface )
+   RULES
+    ( Self .Parent .IsInterface )
+     ( .join> [ Self .Parent ] )
+    ( Self .Parent .IsClass )
+     RULES
+      ( Self .Parent .IsService )
+       ()
+      ( Self .Parent .InheritsOrImplementsMixIn )
+       ()
+      ( Self .Parent .SomeOwnChildrenInheritsOrImplementsMixIn )
+       ()
+      DEFAULT
+       ( .join> [ Self .Parent ] )
+     ; // RULES  
+   ; // RULES  
   end // ( Self .IsInterface )
  ; // RULES
  //.joinWithLambded> ( Self .AllOwnChildren ) call.me
@@ -7365,6 +7368,8 @@ elem_proc OutType
    ()
   ( Self .IsTestClass )
    ()
+  ( Self .IsVCMOperations )
+   () 
   DEFAULT
    (
     if ( Self g_OutedTypes array:Has ! ) then
@@ -7421,6 +7426,18 @@ elem_proc OutType
  ; // RULES
 ; // OutType
 
+BOOLEAN elem_func NeedForwarded
+ RULES
+  ( Self .IsType )
+   true
+  ( Self .IsPureMixIn )
+   true
+  DEFAULT
+   false
+ ; // RULES
+ >>> Result  
+; // NeedForwarded
+
 elem_proc OutChildrenRecPrim
   IN aValid
   IN aOut
@@ -7428,27 +7445,50 @@ elem_proc OutChildrenRecPrim
   
   elem_proc DoOut
    if ( aNeedIfDef
-       AND ( Self .IsType )
+       AND ( Self .NeedForwarded )
        AND ( Self aValid DO )
-      )  then
+      ) then
    begin
     Self .OutForwarded
     Self .IfDef:
     (
-     Self .ChildrenWithoutOwnFile .for> call.me
+     if ( Self .InheritsOrImplementsMixIn ! ) then
+     begin
+      if ( Self .SomeOwnChildrenInheritsOrImplementsMixIn ! ) then
+      begin
+       Self .ChildrenWithoutOwnFile 
+       .filter> ( Self .InheritsFrom )
+       .for> .OutForward
+      end // ( Self .SomeOwnChildrenInheritsOrImplementsMixIn ! )
+     end // ( Self .InheritsOrImplementsMixIn ! )
+     
+     Self .ChildrenWithoutOwnFile 
+     .filter> ( Self .InheritsFrom ! )
+     .for> call.me
+     
      if ( Self aValid DO ) then
      begin
       Self aOut DO
      end // ( Self aValid DO )
+     
+     Self .ChildrenWithoutOwnFile 
+     .filter> ( Self .InheritsFrom )
+     .for> call.me
+     
     ) // Self .IfDef:
    end // ( Self .IsType )
    else
    begin
-    Self .ChildrenWithoutOwnFile .for> call.me
+    Self .ChildrenWithoutOwnFile 
+    .filter> ( Self .InheritsFrom ! )
+    .for> call.me
     if ( Self aValid DO ) then
     begin
      Self aOut DO
     end // ( Self aValid DO )
+    Self .ChildrenWithoutOwnFile 
+    .filter> ( Self .InheritsFrom )
+    .for> call.me
    end // ( Self .IsType )
   ; // DoOut
   
@@ -7488,6 +7528,20 @@ elem_proc OutTypes
   ) // aChild .IfDef:
  ; // DoOutType
  
+/*{ 
+ Self @ ( 
+   IN aChild 
+  aChild aValid DO 
+  AND ( aChild .IsEnum )
+ ) @ DoOutType .OutTypeRec
+
+ Self @ ( 
+   IN aChild 
+  aChild aValid DO 
+  AND ( aChild .IsSetOf )
+ ) @ DoOutType .OutTypeRec
+}*/
+
  Self @ ( 
    IN aChild 
   aChild aValid DO 
@@ -7497,37 +7551,26 @@ elem_proc OutTypes
  Self @ ( 
    IN aChild 
   aChild aValid DO 
-  AND ( aChild .UPisTrue "is default ancestor" ! )
   AND ( aChild .IsPointer )
  ) @ DoOutType .OutTypeRec
 
+ Self @ ( 
+   IN aChild 
+  aChild aValid DO 
+  AND ( aChild .IsClassRef )
+ ) @ DoOutType .OutTypeRec
+ 
 /*{ 
  Self @ ( 
    IN aChild 
   aChild aValid DO 
-  AND ( aChild .UPisTrue "is default ancestor" ! )
-  AND ( aChild .IsPointer ! )
-  AND ( aChild .InheritsOrImplementsMixIn ) // Чтобы классы с примесями попадали выше ClassRef, как в KTestRunner
-  // ^ - не получилось, надо как-то по-другому разруливать 
+  AND ( aChild .IsPureMixIn )
  ) @ DoOutType .OutTypeRec
-}*/
+}*/ 
  
  Self @ ( 
    IN aChild 
   aChild aValid DO 
-  AND ( aChild .UPisTrue "is default ancestor" ! )
-  AND ( aChild .IsPointer ! )
-//  AND ( aChild .InheritsOrImplementsMixIn ! )
-  AND ( aChild .IsClassRef )
- ) @ DoOutType .OutTypeRec
- 
- Self @ ( 
-   IN aChild 
-  aChild aValid DO 
-  AND ( aChild .UPisTrue "is default ancestor" ! )
-  AND ( aChild .IsPointer ! )
-//  AND ( aChild .InheritsOrImplementsMixIn ! )
-  AND ( aChild .IsClassRef ! )
  ) @ DoOutType .OutTypeRec
 ; // OutTypes
 
@@ -8062,7 +8105,15 @@ elem_proc MethodBody
       l_Target .Stub .MethodName
       '('
       '@'
-      aDep .GetUP "iterator func name"
+      
+      VAR l_IteratorFuncName
+      aDep .GetUP "iterator func name" >>> l_IteratorFuncName
+      if ( l_IteratorFuncName IsNil ) then
+      begin
+       'DoIt' >>> l_IteratorFuncName
+      end // ( l_IteratorFuncName IsNil )
+      
+      l_IteratorFuncName
       ')' 
       
       if ( l_NeedsParams ! ) then

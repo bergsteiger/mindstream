@@ -1,0 +1,106 @@
+UNIT UseNewGenExcluded.ms.dict
+
+USES
+ CompileTimeVar.ms.dict
+;
+
+//ARRAY VAR g_UseNewGenExcluded
+ARRAY CompileTime-VAR g_UseNewGenExcluded nil
+
+PROCEDURE Init_g_UseNewGenExcluded
+ [
+  // UtilityPack
+  '4135B54EF3A1' // FillStrings
+  '3DBAA1891003' // Design_AttrValues implementation after const - надо поступать так же как с Type
+  '52FA4ACA0020' // csRequestTask GetTaggedDataType
+  '4F0C0B6801C7' // DragData cnActiveState = [dsActive, dsPaused];
+  'C9ADD4944F97' // evStylesPrintAndExportFontSizeSettingRes FillStrings
+  '48E385660374' // evRange IterateLeafParagraphs
+  '4B2A6D4303A9' // KTestRunner проблемы с TTimeInfoList с предварительным описанием RTestResultsPlace = class of TTestResultsPlace;
+  '4B9777000394' // vcmToolbarMenuRes FillStrings
+  '51E7E79A0341' // vcmMainFormRes !!! Lost Message ini !!!
+  '4AC9A3F801F3' // nsMainMenuNew uses vtOutliner и l3ControlsTypes - отсутствуют
+  '4AAF93E201FD' // nsPostingsLine uses l3TreeInterfaces - отсутствует
+  '5453986402AC' // ncsMessage не реализует pm_GetKind от тега
+  '4F9BB14900E7' // nsQuestionsWithChoices !!! Lost Message ini !!!
+  '4F9A9C6803D4' // nsQuestions !!! Lost Message ini !!!
+  '4B97B148028B' // nsAppConfigRes FillStrings
+  '537AE06700E8' // vcmTabbedContainerRes !!! Lost Message ini !!!
+  '4D5A701702B4' // nsTextWithCommentsRes FillStrings 
+  '9847AD90023A' // DocumentShowChangesInfoSettingRes FillStrings
+  '4E7C528C00BE' // ControlStatusUtils !!! Lost Message ini !!!
+  '55E438930369' // nsListExceptions !!! Lost Message ini !!!
+  '483C0AEA0186' // atGblAdapterWorker [Error] atGblAdapterWorker.pas(132): Declaration of 'Fire' differs from declaration in interface 'IControlledChangeNotifier'
+  '483AD11C02A1' // atQueryExecutor [Error] atQueryExecutor.pas(82): Undeclared identifier: 'FinishProcess'
+  
+  // Impurity
+  '48FDA9D500E4' // nsNodeNotifierImplementation [Error] nsNodeNotifierImplementation.imp.pas(39): Undeclared identifier: 'ChangeChildrenCount'
+  '47EB3E2202E6' // dBaseDocument function _dBaseDocument_.pm_GetdsDocumentRef: IvcmFormDataSourceRef;
+  '537D9BD30297' // vcmContainedForm Витя недорисовал
+  
+  // GuiControl
+  '5028A4C0019B' // TvcmToolbar vcm_DefaultToolbarOptions = [vcm_toModulesInMainToolbar, vcm_toEntitiesInMainToolbar]; [Error] vcmToolbar.pas(45): Constant expression expected
+  '515DA5860015' // TvtOutliner uses Supports SysUtils
+  '5562DB5D0259' // TvtCalendarPanel uses EncodeDate
+  '4AA8AB7B038F' // TvtDateEdit uses Now
+  '4B30EC67025A' // TvcmMenuManager vcm_DefaultMenuOptions = [vcm_moEntitiesInMainMenu, vcm_moEntitiesInTopMainMenu];
+  '4E732D7F0082' // TvtHideField cDefaultOptions = [hfoCanHide, hfoHyperlink];
+  '5270BBC702C7' // TvtColorBox uses Format
+  
+  // InternalInterfaces
+  '4678209200A6' // nevBase nev_plThis = TnevParaLevel(0);
+  '4683F37902CF' // vcmInterfaces Витя недорисовал l_ContainedForm.OpenNew(vcm_okInNewTab, False, l_TabbedForm) [Error] vcmTabbedContainerForm.pas(1145): Too many actual parameters
+  
+  // Interfaces
+  '467C0CAA02AB' // l3InternalInterfaces function Hl3Canvas.pxAverageCharWidth: Integer;
+  '476BEA0B0103' // evConst evEpsilon = l3Epsilon;
+  '47C5207602D1' // nevTools InevParaInternal = interface(InevPara)
+  '485808AB001D' // evControlsBlockConst evControlBlockBefore = l3Inch div 3;
+  '48E3836D00C8' // evEditorInterfaces edSingleCell = [ed_PsevdoSingleCells, ed_SingleCell];
+  '480F77890296' // evTextParaConst evHyphenWidth = l3Inch div 32;
+  '47D0015C0022' // evControlParaConst evCheckableControls = [ev_ctCheckEdit, ev_ctRadioEdit];
+  '4720862F0238' // m3StorageInterfaces m3_saRead = Tm3StoreAccess(STGM_READ or STGM_SHARE_EXCLUSIVE);
+  '4720831F012D' // m3DBInterfaces m3_defDocPart = m3_dsMain;
+  '4A9F98B901A5' // BaseSearchInterfaces ns_sseAll = [ns_sseContext, ns_sseNeedShowWindow, ns_sseOpenKind, ns_sseActiveClass, ns_sseSearchArea];
+  
+  // Service
+  '563875050317' // TnsBaseSearchService Витя недорисовал BaseSearch_Module [Error] BaseSearch_Module.pas(245): Undeclared identifier: 'OpenBaseSearch'
+  
+  // ServiceImplementation
+  '563208C60299' // TnsBaseSearchServiceImpl Витя недорисовал [Error] nsBaseSearchServiceImpl.pas(54): Undeclared identifier: 'GetBaseSearchModel'
+  
+  // SimpleClass
+  '473C4F1E01A1' // Tl3VirtualCanvas if (DCFlag = ev_dcfLinked) then [Error] l3VirtualCanvas.pas(168): Undeclared identifier: 'ev_dcfLinked'
+  '47F0870E0034' // TnevDocumentContainer [Error] nevDocumentContainer.pas(336): Undeclared identifier: 'Iterate'
+  '48ECD38B0204' // TevMultiSelectionRange [Error] evMultiSelectionRange.pas(97): Undeclared identifier: 'Iterate'
+  '48ECD64B005A' // TevLeafParaMultiSelectionBlock [Error] evLeafParaMultiSelectionBlock.pas(30): Undeclared identifier: 'l3Types'
+  '4E81A1D3027D' // TevReqIterator [Error] evReqIterator.pas(29): Undeclared identifier: 'DoReq'
+  'A8C41C353B7D' // TstDocumentShowChangesInfoItem [Error] stDocumentShowChangesInfoItem.pas(41): Illegal character in input file: '!' ($21)
+  '4D4011460346' // TnsContentsListForFiltering [Error] nsContentsListForFiltering.pas(38): Declaration of 'Item' differs from declaration in interface 'IListForFiltering'
+  '4BAA279500E6' // TnevRangePrim [Error] nevRangePrim.pas(22): Undeclared identifier: 'Iterate'
+  '552FAA38015B' // TevExpandedTextCollapser [Error] evExpandedTextCollapser.pas(42): Undeclared identifier: 'EvExpandOrCollapse'
+  '48CE0B85029C' // TnevParaList [Error] nevParaList.pas(64): Undeclared identifier: 'IteratePara'
+  '48CE5C2E0058' // TnevNullParaList [Error] nevNullParaList.pas(49): Undeclared identifier: 'IteratePara'
+  '4DEFC812022F' // Tl3EventedRecListView [Error] l3EventedRecListView.pas(25): Declaration of 'CompareRecs' differs from previous declaration надо PItemType разрулить
+  '5268E523030D' // TddSub [Error] ddSub.pas(59): Undeclared identifier: 'StartSub'
+  '525D26AF0039' // TddHyperlinkTarget [Error] ddHyperlinkTarget.pas(72): Undeclared identifier: 'StartAddress'
+  '54D9AC570374' // TddHyperlink [Error] ddHyperlink.pas(52): Undeclared identifier: 'StartHyperlink'
+  '51E8CE5402CC' // TddTab [Error] ddTab.pas(63): Undeclared identifier: 'StartTab'
+  '54D9B0A2024C' // TddObjectSegment [Error] ddObjectSegment.pas(46): Undeclared identifier: 'StartObjectSegment'
+  '54D9B8E801EA' // TddStyleSegment [Error] ddStyleSegment.pas(59): Undeclared identifier: 'StartTextSegment'
+  '4E085B110285' // TbsDocumentMissingMessage !!! Lost Message ini !!!
+  '4926AE3900B9' // TdeListSet [Error] deListSet.pas(49): Undeclared identifier: 'pm_GetListSynchroViewForm'
+  'DF1A3014EEBC' // TstevStylesPrintAndExportFontSizeItem [Error] stevStylesPrintAndExportFontSizeItem.pas(38): Illegal character in input file: '!' ($21)
+  '4CED3DF702F9' // TnsNativeCommentPara [Error] nsNativeCommentPara.pas(22): Undeclared identifier: 'CommentParaTagClass'
+  '4CEFD73403E4' // TnsLeafParaDecorationsHolder [Error] nsLeafParaDecorationsHolder.pas(19): Undeclared identifier: 'LeafParaDecorationsHolderTagClass'
+  //'4BA232B402FF' // TnsFolderFilterInfo aShowFolders: TnsShowFolders = FoldersDomainInterfaces.sfAll): _l3Notifier_; reintroduce;
+  '4EDCFD4D037C' // TnsListWarningGenerator [Error] nsListWarningGenerator.pas(94): Undeclared identifier: 'remListFiltered'
+  '98CD882A435E' // TstMainMenuChangeableMainMenuTypeItem [Error] stMainMenuChangeableMainMenuTypeItem.pas(41): Illegal character in input file: '!' ($21)
+  '4DDD0D92039C' // TnsChangesBetweenEditionsDocumentContainer [Error] nsChangesBetweenEditionsDocumentContainer.pas(274): Undeclared identifier: 'Tk2Type'
+  //'54856BFA003E' // TalcuSendTaskExecutor [Error] alcuSendTaskExecutor.pas(134): Undeclared identifier: 'FreeAndNil'
+  '4B683B57028D' // TatChatWorker [Error] atChatWorker.pas(347): Undeclared identifier: 'aNotify'
+  '467FCCB101CF' // TnsTagNodePrim [Error] nsTagNodePrim.pas(380): Undeclared identifier: 'IDocumentTextProvider'
+ ] >>> g_UseNewGenExcluded
+; // Init_g_UseNewGenExcluded
+
+//( Init_g_UseNewGenExcluded )

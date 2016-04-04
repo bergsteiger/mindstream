@@ -1,0 +1,20 @@
+UNIT ForceUseNewGen.ms.dict
+
+USES 
+ ElementsRTTI.ms.dict
+;
+
+USES
+ CountIt.ms.dict
+;
+
+BOOLEAN elem_func ForceUseNewGen
+ [
+  '52F8B15003A7' // TddPicturePathListner
+  '4E01D585033A' // TvcmUserInteractiveForm
+  '5519612B01D3' // TIterateableServiceProvider
+ ]
+ .filter> ( Self .UID == )
+ .CountIt > 0
+ >>> Result
+; // ForceUseNewGen
