@@ -208,13 +208,23 @@ STRING FUNCTION Ext
 
 PROCEDURE BackupFile
   STRING IN aFileName
+  VAR l_To
+ aFileName >>> l_To
+ l_To 'w:' 'W:' string:Replace >>> l_To
+ l_To 'W:' 'C:\Temp\GenBackup' string:Replace >>> l_To
  if ( aFileName sysutils:FileExists ) then
  begin
-  VAR l_To
-  aFileName >>> l_To
-  l_To 'w:' 'W:' string:Replace >>> l_To
-  l_To 'W:' 'C:\Temp\GenBackup' string:Replace >>> l_To
   $20 l_To aFileName CopyFile
+ end // ( aFileName sysutils:FileExists )
+ else
+ begin
+  FILE VAR l_In
+  aFileName File:OpenWrite >>> l_In
+  // - делаем пустышку
+  TRY
+  FINALLY
+   nil >>> l_In
+  END // TRY..FINALLY
  end // ( aFileName sysutils:FileExists )
 ; // BackupFile
 
@@ -1825,8 +1835,21 @@ ARRAY elem_func MethodParameters
      AND ( Self .MainImplements .IsIterator )
     ) 
      ( Self .MainImplements call.me )
-    ( Self .MainAncestor IsNil ! ) 
-     ( Self .MainAncestor call.me )
+    ( Self .MainAncestor IsNil ! )
+     RULES 
+      ( Self .FirstOperation IsNil ! )
+       RULES
+        (
+         ( Self .FirstOperation .IsSummoned )
+         AND ( Self .Abstraction at_regular == )
+        ) 
+         ( Self .MainAncestor call.me ) 
+        DEFAULT
+         ( Self .FirstOperation .Parameters )
+       ; // RULES 
+      DEFAULT
+       ( Self .MainAncestor call.me )
+     ; // RULES 
     DEFAULT
      ( Self .FirstOperation .Parameters )
    ; // ( Self .IsMethod )
@@ -3526,6 +3549,8 @@ ModelElement elem_func MethodType
     ( Self .MainAncestor ) 
    ( Self .IsStereotype st_Area )
     ( Self .MainAncestor )
+   ( Self .IsConstructor ) 
+    nil
    ( Self .IsMethod )
     RULES
      (
