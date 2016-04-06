@@ -1,0 +1,14 @@
+UNIT ddStartXXXLost.locked.ms.dict
+
+ARRAY FUNCTION ddStartXXXLost.locked
+ [
+  // SimpleClass
+  '5268E523030D' // TddSub [Error] ddSub.pas(59): Undeclared identifier: 'StartSub'
+  '525D26AF0039' // TddHyperlinkTarget [Error] ddHyperlinkTarget.pas(72): Undeclared identifier: 'StartAddress'
+  '54D9AC570374' // TddHyperlink [Error] ddHyperlink.pas(52): Undeclared identifier: 'StartHyperlink'
+  '51E8CE5402CC' // TddTab [Error] ddTab.pas(63): Undeclared identifier: 'StartTab'
+  '54D9B0A2024C' // TddObjectSegment [Error] ddObjectSegment.pas(46): Undeclared identifier: 'StartObjectSegment'
+  '54D9B8E801EA' // TddStyleSegment [Error] ddStyleSegment.pas(59): Undeclared identifier: 'StartTextSegment'
+ ]
+ >>> Result
+; // ddStartXXXLost.locked

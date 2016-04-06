@@ -1,0 +1,14 @@
+UNIT NotDefinedIterateXXX.locked.ms.dict
+
+ARRAY FUNCTION NotDefinedIterateXXX.locked
+ [
+  // SimpleClass
+  '47F0870E0034' // TnevDocumentContainer [Error] nevDocumentContainer.pas(336): Undeclared identifier: 'Iterate'
+  '48ECD38B0204' // TevMultiSelectionRange [Error] evMultiSelectionRange.pas(97): Undeclared identifier: 'Iterate'
+  '4BAA279500E6' // TnevRangePrim [Error] nevRangePrim.pas(22): Undeclared identifier: 'Iterate'
+  '48CE0B85029C' // TnevParaList [Error] nevParaList.pas(64): Undeclared identifier: 'IteratePara'
+  '48CE5C2E0058' // TnevNullParaList [Error] nevNullParaList.pas(49): Undeclared identifier: 'IteratePara'
+  '4E81A1D3027D' // TevReqIterator [Error] evReqIterator.pas(29): Undeclared identifier: 'DoReq'
+ ]
+ >>> Result
+; // NotDefinedIterateXXX.locked

@@ -206,6 +206,19 @@ STRING FUNCTION Ext
  '.dump' >>> Result
 ; // Ext
 
+PROCEDURE ForceDirectories
+  STRING IN aPath
+ aPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' aPath ]  
+; // ForceDirectories
+
+FILE FUNCTION MakePathAndOpenWrite
+  STRING IN aFileName
+ VAR l_Path 
+ aFileName sysutils:ExtractFilePath >>> l_Path
+ l_Path ForceDirectories
+ aFileName File:OpenWrite >>> Result 
+; // MakePathAndOpenWrite
+
 PROCEDURE BackupFile
   STRING IN aFileName
   VAR l_To
@@ -219,7 +232,7 @@ PROCEDURE BackupFile
  else
  begin
   FILE VAR l_In
-  aFileName File:OpenWrite >>> l_In
+  aFileName MakePathAndOpenWrite >>> l_In
   // - делаем пустышку
   TRY
   FINALLY
@@ -541,11 +554,11 @@ elem_proc GenerateWordToFileWith:
  
   STRING VAR l_TempPath
   'C:\Temp\GenScripts\' >>> l_TempPath
-  l_TempPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_TempPath ]
+  l_TempPath ForceDirectories
   
   STRING VAR l_RealPath
   cGenScriptsFolder >>> l_RealPath
-  l_RealPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' l_RealPath ]
+  l_RealPath ForceDirectories
   
   TF g_TempFileName (
    [ l_TempPath l_FileName ] cPathSep strings:CatSep >>> g_TempFileName
@@ -561,7 +574,7 @@ elem_proc GenerateWordToFileWith:
        Self .FinalFileName >>> g_FinalFileName
        Self false .CustomFinalFileName >>> g_FinalFileNameForUC
        TF g_OutFile (
-        g_TempFileName File:OpenWrite >>> g_OutFile
+        g_TempFileName MakePathAndOpenWrite >>> g_OutFile
         TF g_UCRead (
          TF g_NeedOutLn (
           TF g_CurrentGeneratedElement (
@@ -1349,67 +1362,169 @@ BOOLEAN elem_func IsIterator
  Self .IsStereotype st_Iterator >>> Result
 ; // IsIterator
 
-ModelElement elem_func MainImplements
+BOOLEAN elem_func IsFacetIterator
+ Self .IsStereotype st_facetiterator >>> Result
+; // IsFacetIterator
+
+BOOLEAN elem_func IsMixInMirror
+ Self .IsStereotype st_MixInMirror
+ >>> Result
+; // IsMixInMirror
+
+BOOLEAN elem_func IsVCMOperations
+ Self .IsStereotype st_VCMOperations >>> Result
+; // IsVCMOperations
+
+BOOLEAN elem_func IsClassImplementable
  Cached:
  (
-  Self .Implements 
-  .FirstElement
+  RULES
+   ( Self .IsPureMixIn )
+    false
+   ( Self .IsMixIn )
+    false
+   ( Self .IsSimpleClass )
+    false
+   ( Self .IsEvdSchemaElement )
+    false 
+   ( Self .IsMixInMirror )
+    false 
+   ( Self .IsStereotype st_UseCase )
+    false 
+   ( Self .IsVCMOperations )
+    false 
+   ( Self .IsInterface )
+    true
+   ( Self .IsTypedef )
+    RULES
+     ( Self .IsPointer )
+      false
+     DEFAULT
+      ( Self .MainAncestor call.me )
+    ; // RULES  
+   DEFAULT
+    true
+  ; // RULES
  )
  >>> Result
-; // MainImplements
+; // IsClassImplementable
 
-BOOLEAN elem_func IsFactoryAcceptable
- RULES
-  ( Self .IsInterface )
-   true
-  ( Self .IsMixInParamType )
-   true
-  ( Self .IsArray )
-   true 
-  DEFAULT
-   false 
- ; // RULES  
+elem_iterator ForClassImplements
+ Self .Implements 
+ .filter> .IsClassImplementable
  >>> Result
-; // IsFactoryAcceptable
+; // ForClassImplements
 
-ModelElement elem_func MainImplementsInterface
+elem_iterator ClassImplementsPrim
+ Self .ForClassImplements 
+ >>> Result
+; // ClassImplementsPrim
+
+BOOLEAN elem_func InTie
  Cached:
  (
-  Self .Implements 
-  .filter> .IsFactoryAcceptable
-  .FirstElement
+  RULES
+   ( Self IsNil )
+    false
+   ( Self .GetUP "gui" 'tie' ?== )
+    true
+   ( Self .Parent call.me )
+    true 
+   DEFAULT
+    false
+  ; // RULES
  )
  >>> Result
-; // MainImplementsInterface
+; // InTie
 
-STRING elem_func UIDforUserCode
- RULES
-  ( Self .IsIterator )
-   RULES
-    (
-     ( Self .MainAncestor IsNil ! )
-     AND ( Self .MainAncestor .IsIterator )
-    ) 
-     ( Self .MainAncestor .UID )
-    DEFAULT
-     ( Self .UID )
-   ; // RULES
-  ( Self .IsMethod )
-   RULES
-    (
-     ( Self .MainImplements IsNil ! )
-     AND ( Self .MainImplements .IsIterator )
-    ) 
-     ( Self .MainImplements .UID )
-    DEFAULT
-     ( Self .UID )
-   ; // RULES
-//   ( Self .FirstOperation .UID )
-  DEFAULT
-   ( Self .UID )
- ; // RULES
+elem_iterator InterfaceForClassImplements
+ Self .ForClassImplements 
+ .filter> ( .InTie ! )
  >>> Result
-; // UIDforUserCode
+; // InterfaceForClassImplements
+
+ARRAY FUNCTION .joinWithLambded>
+  ARRAY IN anArrayToJoin
+  ^ IN anArrayToIterate
+  ^ IN aLambda
+  
+ anArrayToJoin 
+ anArrayToIterate DO .for> ( 
+  IN aChild 
+  VAR l_Other
+  ( aChild aLambda DO ) >>> l_Other
+  if ( l_Other IsNil ! ) then
+  begin
+   .join> l_Other
+  end // ( l_Other IsNil ! )
+ )
+ >>> Result
+; // .joinWithLambded>
+
+BOOLEAN elem_func IsMixInOrMixInMirror
+ RULES
+  ( Self .IsMixIn )
+   true
+  ( Self .IsMixInMirror )
+   true
+  DEFAULT
+   false
+ ; // RULES   
+ >>> Result
+; // IsMixInOrMixInMirror
+
+BOOLEAN elem_func SomeAncestorImplements
+  ModelElement IN anIntf
+  
+ BOOLEAN elem_func ImplementsLoc
+  Self .Implements 
+  .filter> ( anIntf .IsSameType ) 
+  .CountIt > 0 >>> Result
+ ; // ImplementsLoc
+ 
+ anIntf :Cached:
+ (
+  RULES
+   ( Self .IsTypedef )
+     RULES
+      ( Self .IsPointer )
+       false
+      DEFAULT
+       ( Self .MainAncestorPrim anIntf call.me )
+     ; // RULES
+   ( Self .Inherits .filter> ( anIntf .IsSameType ) .CountIt > 0 )
+    true 
+   ( Self .Inherits .filter> .ImplementsLoc .CountIt > 0 )
+    true 
+   ( Self .Inherits .filter> ( anIntf call.me ) .CountIt > 0 )
+    true 
+   ( Self .Implements .filter> .IsMixInOrMixInMirror .filter> .ImplementsLoc .CountIt > 0 )
+    true 
+   ( Self .Implements .filter> .IsMixInOrMixInMirror .filter> ( anIntf call.me ) .CountIt > 0 )
+    true 
+   DEFAULT
+    false  
+  ; // RULES 
+ )
+ >>> Result 
+; // SomeAncestorImplements
+
+WordAlias .KeepInStack NOP
+
+ARRAY FUNCTION array:Copy
+  IN anArray
+ [ anArray .for> .KeepInStack ] >>> Result
+; // array:Copy
+
+elem_iterator ClassImplements
+ (
+  Self .ClassImplementsPrim
+  .joinWithLambded> ( Self .ClassImplementsPrim ) .InterfaceForClassImplements
+ ) 
+ .filter> ( Self SWAP .SomeAncestorImplements ! )
+ array:Copy
+ >>> Result
+; // ClassImplements
 
 USES
  axiom:CompiledProcedure
@@ -1430,6 +1545,51 @@ USES
 USES
  axiom:WordBox
 ;
+
+elem: DecorateMethodAndDo:
+  ^ IN aLambda
+ KeyValuesCreateAndDo: ( 
+   IN aMethod
+  if ( Self IsIntf ) then
+  begin
+   aMethod -> Original := ( Self pop:WordBox:Boxed )
+  end // ( Self IsIntf )
+  else
+  begin
+   aMethod -> Original := Self
+  end // ( Self IsIntf )
+  aMethod aLambda DO
+ ) // KeyValuesCreateAndDo:
+; // DecorateMethodAndDo:
+
+INTERFACE elem_func DecorateMethod:
+  ^ IN aLambda
+ Self .DecorateMethodAndDo: (
+   IN aMethod
+  aMethod pop:Word:Box >>> Result
+  aMethod aLambda DO
+ ) // Self .DecorateMethodAndDo:
+; // DecorateMethod:
+
+INTERFACE elem_func OverrideMethod
+  ModelElement IN anOriginalMethod
+ anOriginalMethod .DecorateMethod: 
+ (
+   IN aMethod
+  aMethod -> OpKind := opkind_Overridden
+ ) // anOriginalMethod .DecorateMethod:
+ >>> Result
+; // OverrideMethod
+
+INTERFACE elem_func ImplementMethod
+  ModelElement IN anOriginalMethod
+ anOriginalMethod .DecorateMethod: 
+ (
+   IN aMethod
+  aMethod -> OpKind := opkind_Implemented
+ ) // anOriginalMethod .DecorateMethod:
+ >>> Result
+; // ImplementMethod
 
 INTERFACE FUNCTION MakeParam:
   STRING IN aName
@@ -1500,6 +1660,196 @@ WordAlias MakeFunction MakeParam
 WordAlias MakeFunction: MakeParam:
 WordAlias MakeField MakeParam
 WordAlias MakeField: MakeParam:
+
+CONST cImplementationUserCodeSuffix '_impl'
+CONST cVarUserCodeSuffix '_var'
+CONST cEmptyUserCode #1
+
+CONST cUserCodePrefix 'uc:'
+
+STRING FUNCTION cImplementationUserCodeName
+ cUserCodePrefix cImplementationUserCodeSuffix Cat >>> Result
+; // cImplementationUserCodeName
+
+STRING FUNCTION cVarUserCodeName
+ cUserCodePrefix cVarUserCodeSuffix Cat >>> Result
+; // cVarUserCodeName
+
+INTERFACE elem_func CastMethod
+ Cached:
+ (
+  VAR l_TypeName
+  Self .TypeName >>> l_TypeName
+  'As_' l_TypeName Cat Self MakeFunction: ( IN aMade
+   aMade -> %SUM := ( 'Метод приведения нашего интерфейса к ' l_TypeName Cat )
+   aMade -> Visibility := ProtectedAccess
+   aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
+   aMade ->^ cImplementationUserCodeName ^:= ' Result := Self;'
+  ) 
+ )
+ >>> Result
+; // CastMethod
+
+BOOLEAN elem_func IsStaticMethod
+ RULES
+  ( Self .IsStereotype st_static::Operation )
+   true
+  ( Self .UPisTrue "is static" ) 
+   true
+  DEFAULT
+   false 
+ ; // RULES 
+ >>> Result
+; // IsStaticMethod
+
+ARRAY elem_func ElementToArray:
+  ^ IN aLambda
+ [ Self aLambda DO ]
+ >>> Result 
+; // ElementToArray:
+
+ARRAY elem_func ElementToArray
+ Self .ElementToArray: .KeepInStack
+ >>> Result 
+; // ElementToArray
+
+elem_iterator InterfaceOwnOperations
+ Self .Operations 
+ .filter> ( .IsStaticMethod ! )
+ .joinWithLambded> ( Self .InterfaceForClassImplements ) .ElementToArray: .CastMethod
+ >>> Result
+; // InterfaceOwnOperations
+
+elem_iterator InterfaceOperationsTotal
+ Cached:
+ (
+  Self .InterfaceOwnOperations
+  .joinWithLambded> ( Self .Implements .filter> .IsPureMixIn ) (
+    IN anItem
+   anItem call.me
+   .joinWithLambded> ( anItem .Inherits .filter> .IsPureMixIn ) .InterfaceOwnOperations
+  ) 
+ ) 
+ >>> Result
+; // InterfaceOperationsTotal
+
+ModelElement elem_func MainImplements
+ Cached:
+ (
+  Self .Implements 
+  .FirstElement
+ )
+ >>> Result
+; // MainImplements
+
+BOOLEAN elem_func ImplementsIterator
+ Cached:
+ (
+  RULES
+   ( Self .MainImplements IsNil )
+    false
+   ( Self .MainImplements .IsIterator )
+    true 
+   DEFAULT
+    false
+  ; // RULES
+ )
+ >>> Result
+; // ImplementsIterator
+
+BOOLEAN elem_func IsMethodAndImplementsIterator
+ RULES
+  ( Self .IsMethod ! )
+   false
+  ( Self .ImplementsIterator )
+   true 
+  DEFAULT
+   false
+ ; // RULES
+ >>> Result
+; // IsMethodAndImplementsIterator
+
+BOOLEAN elem_func SomeMethodImplementsThisIterator
+  ModelElement IN anIterator
+ RULES
+  (
+   Self .Operations
+   .filter> .IsMethodAndImplementsIterator
+   .map> .MainImplements
+   .filter> ( anIterator .IsSameModelElement )
+   .CountIt > 0
+  )
+   true
+  DEFAULT
+   false
+ ; // RULES
+ >>> Result 
+; // SomeMethodImplementsThisIterator
+
+elem_iterator ImplementedEx
+ Self .Implemented
+ 
+ if ( Self .IsClassOrMixIn ) then
+ begin
+  .joinWithLambded> ( Self .ClassImplements ) ( 
+   .InterfaceOperationsTotal 
+   .filter> ( .IsFacetIterator ! )
+   .filter> ( .IsIterator )
+   .filter> ( Self SWAP .SomeMethodImplementsThisIterator ! )
+   .map> (
+    Self IsVoid ?FAIL 'Self IsVoid'
+    Self SWAP .ImplementMethod 
+   )
+   array:Copy
+  )
+ end // ( Self .IsClassOrMixIn )
+ 
+ >>> Result
+; // ImplementedEx
+
+BOOLEAN elem_func IsFactoryAcceptable
+ RULES
+  ( Self .IsInterface )
+   true
+  ( Self .IsMixInParamType )
+   true
+  ( Self .IsArray )
+   true 
+  DEFAULT
+   false 
+ ; // RULES  
+ >>> Result
+; // IsFactoryAcceptable
+
+ModelElement elem_func MainImplementsInterface
+ Cached:
+ (
+  Self .Implements 
+  .filter> .IsFactoryAcceptable
+  .FirstElement
+ )
+ >>> Result
+; // MainImplementsInterface
+
+STRING elem_func UIDforUserCode
+ RULES
+  ( Self .IsIterator )
+   RULES
+    (
+     ( Self .MainAncestor IsNil ! )
+     AND ( Self .MainAncestor .IsIterator )
+    ) 
+     ( Self .MainAncestor .UID )
+    DEFAULT
+     ( Self .UID )
+   ; // RULES
+  ( Self .IsMethodAndImplementsIterator )
+   ( Self .MainImplements .UID )
+  DEFAULT
+   ( Self .UID )
+ ; // RULES
+ >>> Result
+; // UIDforUserCode
 
 : MakeProcedure
  nil MakeFunction
@@ -1733,10 +2083,6 @@ BOOLEAN elem_func IsGetState
  Self .OpModify opModifyGetState == >>> Result
 ; // IsGetState
 
-BOOLEAN elem_func IsVCMOperations
- Self .IsStereotype st_VCMOperations >>> Result
-; // IsVCMOperations
-
 BOOLEAN elem_func IsVCMOperationPrim
  RULES
   ( Self .IsStereotype st_VCMOperationPrim )
@@ -1830,10 +2176,7 @@ ARRAY elem_func MethodParameters
    ; // RULES  
   ( Self .IsMethod )
    RULES
-    (
-     ( Self .MainImplements IsNil ! )
-     AND ( Self .MainImplements .IsIterator )
-    ) 
+    ( Self .ImplementsIterator )
      ( Self .MainImplements call.me )
     ( Self .MainAncestor IsNil ! )
      RULES 
@@ -1910,8 +2253,6 @@ ARRAY FUNCTION .With()>
  >>> Result
 ; // .With()
 
-WordAlias .KeepInStack NOP
-
 ARRAY FUNCTION .With()
   OUTABLE IN aValue
  aValue .With()> .KeepInStack >>> Result 
@@ -1938,7 +2279,6 @@ ARRAY elem_func ParametersList
 
 CONST cUCStart '//#UC START# *'
 CONST cUCEnd '//#UC END# *'
-CONST cUserCodePrefix 'uc:'
 
 PROCEDURE ReadUCFromFile
   STRING IN aFileName
@@ -2041,7 +2381,7 @@ elem_proc OutUserCode:
   g_FinalFileNameForUC l_CurrentGeneratedElementPrefix ReadUCFromFile
 
   FILE VAR l_Out
-  l_TempFileName File:OpenWrite >>> l_Out
+  l_TempFileName MakePathAndOpenWrite >>> l_Out
   TRY
    g_CurrentGenerator MembersIterator 
    .filter> ( .WordName l_CurrentGeneratedElementPrefix SWAP StartsStr )
@@ -2126,18 +2466,6 @@ elem_proc PredefinedUserCode:
  ) // Self aKey .OutUserCode:
 ; // PredefinedUserCode:
 
-CONST cImplementationUserCodeSuffix '_impl'
-CONST cVarUserCodeSuffix '_var'
-CONST cEmptyUserCode #1
-
-STRING FUNCTION cImplementationUserCodeName
- cUserCodePrefix cImplementationUserCodeSuffix Cat >>> Result
-; // cImplementationUserCodeName
-
-STRING FUNCTION cVarUserCodeName
- cUserCodePrefix cVarUserCodeSuffix Cat >>> Result
-; // cVarUserCodeName
-
 elem_proc PredefinedMethodUserCode:
   STRING IN aSuffix
   STRING IN aKey
@@ -2197,24 +2525,6 @@ BOOLEAN elem_func IsProperty
  >>> Result
 ; // IsProperty
 
-ARRAY FUNCTION .joinWithLambded>
-  ARRAY IN anArrayToJoin
-  ^ IN anArrayToIterate
-  ^ IN aLambda
-  
- anArrayToJoin 
- anArrayToIterate DO .for> ( 
-  IN aChild 
-  VAR l_Other
-  ( aChild aLambda DO ) >>> l_Other
-  if ( l_Other IsNil ! ) then
-  begin
-   .join> l_Other
-  end // ( l_Other IsNil ! )
- )
- >>> Result
-; // .joinWithLambded>
-
 INTERFACE elem_func InterfaceLinkField
  Cached:
  (
@@ -2252,11 +2562,6 @@ STRING elem_func FieldName
  >>> Result
 ; // FieldName
 
-ARRAY FUNCTION array:Copy
-  IN anArray
- [ anArray .for> .KeepInStack ] >>> Result
-; // array:Copy
-
 BOOLEAN FUNCTION .HasSomeOf:
   ARRAY IN anArray
   ^ IN aCompareFunc
@@ -2284,17 +2589,6 @@ BOOLEAN FUNCTION .HasModelElementWithName
  anArray .HasSomeOf: ( aName .HasName )
  >>> Result
 ; // .HasModelElementWithName
-
-ARRAY elem_func ElementToArray:
-  ^ IN aLambda
- [ Self aLambda DO ]
- >>> Result 
-; // ElementToArray:
-
-ARRAY elem_func ElementToArray
- Self .ElementToArray: .KeepInStack
- >>> Result 
-; // ElementToArray
 
 BOOLEAN elem_func NeedPutToDFM
  Cached:
@@ -2367,6 +2661,18 @@ BOOLEAN elem_func NeedsField
  >>> Result
 ; // NeedsField
 
+BOOLEAN elem_func CanMapPropertiesToFields
+ RULES
+  ( Self .IsClassOrMixIn )
+   true
+  ( Self .IsException )
+   true
+  DEFAULT
+   false
+ ; // RULES
+ >>> Result
+; // CanMapPropertiesToFields
+
 elem_iterator Fields
  Cached:
  (
@@ -2379,10 +2685,7 @@ elem_iterator Fields
   .filter> ( .IsStereotype st_static::Attribute ! )
   >>> l_Fields
   
-  if (
-      ( Self .IsClassOrMixIn )
-      OR ( Self .IsException )
-     ) then
+  if ( Self .CanMapPropertiesToFields ) then
   begin
    l_Fields array:Copy >>> l_Fields
    l_Fields
@@ -3479,23 +3782,6 @@ BOOLEAN elem_func IsConstructorsHolder
  >>> Result
 ; // IsConstructorsHolder
 
-BOOLEAN elem_func InTie
- Cached:
- (
-  RULES
-   ( Self IsNil )
-    false
-   ( Self .GetUP "gui" 'tie' ?== )
-    true
-   ( Self .Parent call.me )
-    true 
-   DEFAULT
-    false
-  ; // RULES
- )
- >>> Result
-; // InTie
-
 ModelElement elem_func MethodType
  Cached:
  (
@@ -3553,10 +3839,7 @@ ModelElement elem_func MethodType
     nil
    ( Self .IsMethod )
     RULES
-     (
-      ( Self .MainImplements IsNil ! )
-      AND ( Self .MainImplements .IsIterator )
-     ) 
+     ( Self .ImplementsIterator )
       ( Self .MainImplements call.me )
      ( Self .MainAncestor IsNil ! ) 
       ( Self .MainAncestor call.me )
@@ -3697,11 +3980,18 @@ STRING FUNCTION .FromTie
  begin
   aValue '_' string:Split:for> ( 
     IN aSubstr
+   aSubstr IsNil ?FAIL 'aSubstr IsNil' 
    [ 
     Result 
     1 0 aSubstr string:Substring string:Upper
-    aSubstr string:Len 1 -
-     1 aSubstr string:Substring
+    VAR l_Len
+    aSubstr string:Len 1 - >>> l_Len
+    l_Len < 0 ?FAIL 'l_Len < 0'
+    VAR l_Tail
+    l_Len
+     1 aSubstr string:Substring >>> l_Tail
+    l_Tail IsNil ?FAIL 'l_Tail IsNil'
+    l_Tail  
    ] strings:Cat >>> Result 
   ) // aValue '_' string:Split:for>
  end // ( aValue IsNil ! )
@@ -3733,6 +4023,8 @@ STRING elem_func MethodName
  Cached:
  (
   RULES
+   ( Self IsNil )
+    ''
    ( Self .InTie )
     ( Self .Name .FromTie )
    ( Self .IsVCMOperationPrim )
@@ -3775,11 +4067,7 @@ STRING elem_func MethodName
       end // ( l_Prefix IsNil )
       l_Prefix Self .FineName Cat 
     )
-   (  
-    ( Self .IsMethod )
-    AND ( Self .MainImplements IsNil ! )
-    AND ( Self .MainImplements .IsIterator )
-   ) 
+   ( Self .IsMethodAndImplementsIterator )
     RULES
      ( Self .IsIteratorF )
       ( Self .MainImplements call.me 'F' Cat )
@@ -4338,7 +4626,6 @@ elem_proc UserCode:
     
    (
     ( Self .OpKind opkind_Normal == ) // - метод новый, а не перекрытый
-    //( Self .Implementor IsNil ) // - метод новый, а не перекрытый
     AND ( l_Op IsNil ! )
     AND ( l_Self IsNil ! )
     AND ( l_Implementor .IsSummoned )
@@ -4547,110 +4834,6 @@ elem_iterator AttributesAndOperationsNeededElements
  >>> Result
 ; // AttributesAndOperationsNeededElements
 
-BOOLEAN elem_func IsMixInMirror
- Self .IsStereotype st_MixInMirror
- >>> Result
-; // IsMixInMirror
-
-BOOLEAN elem_func IsMixInOrMixInMirror
- RULES
-  ( Self .IsMixIn )
-   true
-  ( Self .IsMixInMirror )
-   true
-  DEFAULT
-   false
- ; // RULES   
- >>> Result
-; // IsMixInOrMixInMirror
-
-BOOLEAN elem_func IsClassImplementable
- Cached:
- (
-  RULES
-   ( Self .IsPureMixIn )
-    false
-   ( Self .IsMixIn )
-    false
-   ( Self .IsSimpleClass )
-    false
-   ( Self .IsEvdSchemaElement )
-    false 
-   ( Self .IsMixInMirror )
-    false 
-   ( Self .IsStereotype st_UseCase )
-    false 
-   ( Self .IsVCMOperations )
-    false 
-   ( Self .IsInterface )
-    true
-   ( Self .IsTypedef )
-    RULES
-     ( Self .IsPointer )
-      false
-     DEFAULT
-      ( Self .MainAncestor call.me )
-    ; // RULES  
-   DEFAULT
-    true
-  ; // RULES
- )
- >>> Result
-; // IsClassImplementable
-
-elem_iterator ForClassImplements
- Self .Implements 
- .filter> .IsClassImplementable
- >>> Result
-; // ForClassImplements
-
-elem_iterator ClassImplementsPrim
- Self .ForClassImplements 
- >>> Result
-; // ClassImplementsPrim
-
-elem_iterator InterfaceForClassImplements
- Self .ForClassImplements 
- .filter> ( .InTie ! )
- >>> Result
-; // InterfaceForClassImplements
-
-BOOLEAN elem_func SomeAncestorImplements
-  ModelElement IN anIntf
-  
- BOOLEAN elem_func ImplementsLoc
-  Self .Implements 
-  .filter> ( anIntf .IsSameType ) 
-  .CountIt > 0 >>> Result
- ; // ImplementsLoc
- 
- anIntf :Cached:
- (
-  RULES
-   ( Self .IsTypedef )
-     RULES
-      ( Self .IsPointer )
-       false
-      DEFAULT
-       ( Self .MainAncestorPrim anIntf call.me )
-     ; // RULES
-   ( Self .Inherits .filter> ( anIntf .IsSameType ) .CountIt > 0 )
-    true 
-   ( Self .Inherits .filter> .ImplementsLoc .CountIt > 0 )
-    true 
-   ( Self .Inherits .filter> ( anIntf call.me ) .CountIt > 0 )
-    true 
-   ( Self .Implements .filter> .IsMixInOrMixInMirror .filter> .ImplementsLoc .CountIt > 0 )
-    true 
-   ( Self .Implements .filter> .IsMixInOrMixInMirror .filter> ( anIntf call.me ) .CountIt > 0 )
-    true 
-   DEFAULT
-    false  
-  ; // RULES 
- )
- >>> Result 
-; // SomeAncestorImplements
-
 BOOLEAN elem_func InheritsFromOrSomeAncestorImplements
   ModelElement IN anIntf
  RULES 
@@ -4664,45 +4847,6 @@ BOOLEAN elem_func InheritsFromOrSomeAncestorImplements
  >>> Result      
 ; // InheritsFromOrSomeAncestorImplements
        
-elem_iterator ClassImplements
- (
-  Self .ClassImplementsPrim
-  .joinWithLambded> ( Self .ClassImplementsPrim ) .InterfaceForClassImplements
- ) 
- .filter> ( Self SWAP .SomeAncestorImplements ! )
- array:Copy
- >>> Result
-; // ClassImplements
-
-elem: DecorateMethodAndDo:
-  ^ IN aLambda
- KeyValuesCreateAndDo: ( 
-   IN aMethod
-  aMethod -> Original := Self
-  aMethod aLambda DO
- ) // KeyValuesCreateAndDo:
-; // DecorateMethodAndDo:
-
-INTERFACE elem_func DecorateMethod:
-  ^ IN aLambda
- Self .DecorateMethodAndDo: (
-   IN aMethod
-  aMethod pop:Word:Box >>> Result
-  aMethod aLambda DO
- ) // Self .DecorateMethodAndDo:
-; // DecorateMethod:
-
-INTERFACE elem_func OverrideMethod
-  ModelElement IN anOriginalMethod
- anOriginalMethod .DecorateMethod: 
- (
-   IN aMethod
-  aMethod -> OpKind := opkind_Overridden
-  //aMethod -> Implementor := Self
- ) // anOriginalMethod .DecorateMethod:
- >>> Result
-; // OverrideMethod
-
 BOOLEAN elem_func HasManagedAttributes
  Cached:
  (
@@ -4809,7 +4953,7 @@ elem_iterator NeededElements
   .join> ( Self .AttributesAndOperationsNeededElements )
   if ( Self .IsTypedef ! ) then
   begin
-   .join> ( Self .Implemented .OperationsNeededElements )
+   .join> ( Self .ImplementedEx .OperationsNeededElements )
    .join> ( Self .OverriddenEx .OperationsNeededElements )
   end // Self .IsTypedef !
   if ( Self .IsClassOrMixIn ) then
@@ -5039,7 +5183,7 @@ BOOLEAN elem_func NeedIniRegClass
 ; // NeedIniRegClass
 
 elem_iterator ImplementedAndOverridden
- Self .Implemented
+ Self .ImplementedEx
  .join> ( Self .Overridden )
  >>> Result
 ; // ImplementedAndOverridden
@@ -5276,18 +5420,6 @@ BOOLEAN elem_func IsDestructor
  ; // RULES 
  >>> Result
 ; // IsDestructor
-
-BOOLEAN elem_func IsStaticMethod
- RULES
-  ( Self .IsStereotype st_static::Operation )
-   true
-  ( Self .UPisTrue "is static" ) 
-   true
-  DEFAULT
-   false 
- ; // RULES 
- >>> Result
-; // IsStaticMethod
 
 OUTABLE elem_func MethodKeyword
  Cached:
@@ -5878,11 +6010,7 @@ elem_proc MethodInterfaceEx
       ( Self .AsIteratorFDo: ( aPrefix aOverload aOfObject aBody .MethodInterfacePrim ) )
      end // ( Self .MainAncestor IsNil )
    ) // ( Self .IsIterator )
-  (  
-   ( Self .IsMethod )
-   AND ( Self .MainImplements IsNil ! )
-   AND ( Self .MainImplements .IsIterator )
-  ) 
+  ( Self .IsMethodAndImplementsIterator )
    (
     NormalCall
     if ( 'F' Self .Name EndsStr ! )
@@ -5934,41 +6062,6 @@ ModelElement elem_func MainClassAncestor
  )
  >>> Result
 ; // MainClassAncestor
-
-INTERFACE elem_func CastMethod
- Cached:
- (
-  VAR l_TypeName
-  Self .TypeName >>> l_TypeName
-  'As_' l_TypeName Cat Self MakeFunction: ( IN aMade
-   aMade -> %SUM := ( 'Метод приведения нашего интерфейса к ' l_TypeName Cat )
-   aMade -> Visibility := ProtectedAccess
-   aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
-   aMade ->^ cImplementationUserCodeName ^:= ' Result := Self;'
-  ) 
- )
- >>> Result
-; // CastMethod
-
-elem_iterator InterfaceOwnOperations
- Self .Operations 
- .filter> ( .IsStaticMethod ! )
- .joinWithLambded> ( Self .InterfaceForClassImplements ) .ElementToArray: .CastMethod
- >>> Result
-; // InterfaceOwnOperations
-
-elem_iterator InterfaceOperationsTotal
- Cached:
- (
-  Self .InterfaceOwnOperations
-  .joinWithLambded> ( Self .Implements .filter> .IsPureMixIn ) (
-    IN anItem
-   anItem call.me
-   .joinWithLambded> ( anItem .Inherits .filter> .IsPureMixIn ) .InterfaceOwnOperations
-  ) 
- ) 
- >>> Result
-; // InterfaceOperationsTotal
 
 elem_iterator MixInPropertiesTotal
  Cached:
@@ -6241,7 +6334,7 @@ elem_iterator AllOperationsForOverload
     ( 
       Self .Operations
       .filter> ( .IsStaticConstructor ! )
-      .join> ( Self .Implemented )
+      .join> ( Self .ImplementedEx )
       
       if ( Self .NeedsFakeMethod ) then
       begin
@@ -6278,7 +6371,7 @@ elem_iterator AllOperationsForOverload
        [] >>> l_VCMOperations
        
        .join> ( 
-         Self .Implemented
+         Self .ImplementedEx
         .filter> ( .IsInline ! )
         .filter> (
           IN anOp
@@ -6298,7 +6391,7 @@ elem_iterator AllOperationsForOverload
            true
         ) // .filter>
         array:Copy
-       ) // join> ( ( Self .Implemented )
+       ) // join> ( ( Self .ImplementedEx )
       )
        
       if ( Self .IsSingleton ) then
@@ -6598,7 +6691,7 @@ elem_iterator ClassProperties
  (
   Self .Properties
   .join> ( 
-   ( Self .Implemented )
+   ( Self .ImplementedEx )
    .filter> .IsProperty
    .filter> ( .Parent .IsContract )
   ) 
@@ -6862,7 +6955,7 @@ ARRAY CompileTime-VAR g_MixInValues nil
 elem_iterator AllInlinedOperations
  Cached:
  (
-  Self .Implemented
+  Self .ImplementedEx
   .join> ( Self .OverriddenEx )
   .filter> ( .IsInline ) 
  )
