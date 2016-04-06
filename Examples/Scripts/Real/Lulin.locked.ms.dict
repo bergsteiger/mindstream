@@ -12,16 +12,11 @@ USES
  ddStartXXXLost.locked.ms.dict
 ;
 
-USES
- NotDefinedIterateXXX.locked.ms.dict
-;
-
 ARRAY FUNCTION Lulin.locked
  %SUMMARY 'Элементы модели не законченные Люлиным А. и временно не герерирующиеся в целевой код' ;
  FillStrings.locked
  .join> LostMessageIni.locked
  .join> ddStartXXXLost.locked
- .join> NotDefinedIterateXXX.locked
  .join>
  [
   // UtilityPack

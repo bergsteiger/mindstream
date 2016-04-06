@@ -1786,24 +1786,51 @@ BOOLEAN elem_func SomeMethodImplementsThisIterator
  >>> Result 
 ; // SomeMethodImplementsThisIterator
 
+elem_iterator InterfaceOperationsTotalDeep
+ Self .InterfaceOperationsTotal
+ 
+ .joinWithLambded> ( Self .Inherits .filter> .IsClassImplementable ) call.me
+ 
+ >>> Result
+; // InterfaceOperationsTotalDeep
+
 elem_iterator ImplementedEx
- Self .Implemented
- 
- if ( Self .IsClassOrMixIn ) then
- begin
-  .joinWithLambded> ( Self .ClassImplements ) ( 
-   .InterfaceOperationsTotal 
-   .filter> ( .IsFacetIterator ! )
-   .filter> ( .IsIterator )
-   .filter> ( Self SWAP .SomeMethodImplementsThisIterator ! )
-   .map> (
-    Self IsVoid ?FAIL 'Self IsVoid'
-    Self SWAP .ImplementMethod 
+ Cached:
+ (
+  Self .Implemented
+  
+  if ( Self .IsClassOrMixIn ) then
+  begin
+   VAR l_OutedIterators
+   [] >>> l_OutedIterators
+   
+   .joinWithLambded> ( Self .ClassImplements ) ( 
+    .InterfaceOperationsTotalDeep 
+    .filter> ( .IsFacetIterator ! )
+    .filter> ( .IsIterator )
+    .filter> ( Self SWAP .SomeMethodImplementsThisIterator ! )
+    .filter> ( 
+      IN anItem
+     if ( anItem l_OutedIterators array:Has ! ) then
+     begin
+      anItem array:AddTo l_OutedIterators
+      true
+     end
+     else
+      false 
+    )
+    .filter> ( 
+      IN anItem 
+     Self .MainAncestor call.me .filter> ( anItem .IsSameModelElement ) .CountIt 0 ==
+    )
+    .map> (
+     Self IsVoid ?FAIL 'Self IsVoid'
+     Self SWAP .ImplementMethod 
+    )
+    array:Copy
    )
-   array:Copy
-  )
- end // ( Self .IsClassOrMixIn )
- 
+  end // ( Self .IsClassOrMixIn )
+ )
  >>> Result
 ; // ImplementedEx
 
