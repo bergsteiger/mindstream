@@ -4,26 +4,16 @@ USES
  FillStrings.locked.ms.dict
 ;
 
-USES
- LostMessageIni.locked.ms.dict
-;
-
-USES
- ddStartXXXLost.locked.ms.dict
-;
-
 ARRAY FUNCTION Lulin.locked
  %SUMMARY 'Элементы модели не законченные Люлиным А. и временно не герерирующиеся в целевой код' ;
  FillStrings.locked
- .join> LostMessageIni.locked
- .join> ddStartXXXLost.locked
  .join>
  [
   // UtilityPack
   '3DBAA1891003' // Design_AttrValues implementation after const - надо поступать так же как с Type
   '52FA4ACA0020' // csRequestTask GetTaggedDataType
   '4F0C0B6801C7' // DragData cnActiveState = [dsActive, dsPaused];
-  '48E385660374' // evRange IterateLeafParagraphs
+  //'48E385660374' // evRange IterateLeafParagraphs
   '4B2A6D4303A9' // KTestRunner проблемы с TTimeInfoList с предварительным описанием RTestResultsPlace = class of TTestResultsPlace;
   '4AC9A3F801F3' // nsMainMenuNew uses vtOutliner и l3ControlsTypes - отсутствуют
   '4AAF93E201FD' // nsPostingsLine uses l3TreeInterfaces - отсутствует
@@ -64,7 +54,6 @@ ARRAY FUNCTION Lulin.locked
   '48ECD64B005A' // TevLeafParaMultiSelectionBlock [Error] evLeafParaMultiSelectionBlock.pas(30): Undeclared identifier: 'l3Types'
   'A8C41C353B7D' // TstDocumentShowChangesInfoItem [Error] stDocumentShowChangesInfoItem.pas(41): Illegal character in input file: '!' ($21)
   '4D4011460346' // TnsContentsListForFiltering [Error] nsContentsListForFiltering.pas(38): Declaration of 'Item' differs from declaration in interface 'IListForFiltering'
-  '552FAA38015B' // TevExpandedTextCollapser [Error] evExpandedTextCollapser.pas(42): Undeclared identifier: 'EvExpandOrCollapse'
   '4DEFC812022F' // Tl3EventedRecListView [Error] l3EventedRecListView.pas(25): Declaration of 'CompareRecs' differs from previous declaration надо PItemType разрулить
   '4926AE3900B9' // TdeListSet [Error] deListSet.pas(49): Undeclared identifier: 'pm_GetListSynchroViewForm'
   'DF1A3014EEBC' // TstevStylesPrintAndExportFontSizeItem [Error] stevStylesPrintAndExportFontSizeItem.pas(38): Illegal character in input file: '!' ($21)

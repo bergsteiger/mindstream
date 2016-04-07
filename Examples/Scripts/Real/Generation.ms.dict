@@ -211,12 +211,43 @@ PROCEDURE ForceDirectories
  aPath sysutils:ForceDirectories ?ASSURE [ 'Не удалось создать директорию ' aPath ]  
 ; // ForceDirectories
 
+FILE FUNCTION TryOpen:
+  STRING IN aFileName
+  ^ IN aOpenLambda
+ %SUMMARY 
+  'Открывает файл aFileName методом aOpenLambda обрабатывая ошибки открытия.' 
+  'Пытается открыть файл повторно несколько раз.'
+ ;
+ VAR l_TryCount
+ 20 >>> l_TryCount
+ 
+ while ( l_TryCount > 0 )
+ begin
+  TRY
+   aFileName aOpenLambda DO >>> Result 
+   0 >>> l_TryCount
+  EXCEPT
+   Dec l_TryCount
+   nil >>> Result
+   if ( l_TryCount 0 == ) then
+    RAISE
+   else
+   begin
+    [ 'Файл ' aFileName ' был занят. Ожидаем его освобождения. Попытка номер: ' l_TryCount IntToStr ] strings:Cat >>std::out
+    500 SLEEP
+   end // ( l_TryCount 0 == )
+  END // TRY..EXCEPT
+ end // ( l_TryCount > 0 )
+; // TryOpen: 
+
 FILE FUNCTION MakePathAndOpenWrite
   STRING IN aFileName
- VAR l_Path 
- aFileName sysutils:ExtractFilePath >>> l_Path
- l_Path ForceDirectories
- aFileName File:OpenWrite >>> Result 
+ %SUMMARY 
+  'Открывает файл aFileName на запись.' 
+  'Если надо - создаёт полный путь на файловой системе.'
+ ;
+ aFileName sysutils:ExtractFilePath ForceDirectories
+ aFileName TryOpen: File:OpenWrite >>> Result
 ; // MakePathAndOpenWrite
 
 PROCEDURE BackupFile
@@ -2313,7 +2344,7 @@ PROCEDURE ReadUCFromFile
  if ( aFileName sysutils:FileExists ) then
  begin
   FILE VAR l_In
-  aFileName File:OpenRead >>> l_In
+  aFileName TryOpen: File:OpenRead >>> l_In
   TRY
    VAR l_UCOpened
    ARRAY VAR l_Accumulated
@@ -3721,6 +3752,114 @@ elem_iterator BindServiceImplementationUC
  >>> Result
 ; // BindServiceImplementationUC
 
+/*(*
+%f _AdditionalInitCode
+// параметры: aConstName: a-string = %1
+// возвращаемый результат: a-string
+//#UC START# *4E09C0BD002Afor4E01DC9002B0*
+	%S%[inherited]\
+	<{}{%C#f_IsChoices()=true}{%C}\
+	%C<{}{}{%C}\
+	\n %2N.AddChoice(str_%C%f_pas_Prefix()%C#f_AdditionalPrefix()%f_N(%C));\
+	>\
+	>\
+	<{}{%C#f_IsCustomChoice()=true}{%C}\
+	\n %1N.AddCustomChoice(str_%C%T%f_pas_Prefix()%C%T#f_AdditionalPrefix()%f_N(%C%T));\
+	>\
+	<{}{%C#f_IsDefaultChoice()=true}{%C}\
+	\n %1N.AddDefaultChoice(str_%C%T%f_pas_Prefix()%C%T#f_AdditionalPrefix()%f_N(%C%T));\
+	>\
+*)*/
+
+BOOLEAN elem_func IsChoices
+ Self .IsStereotype st_Choices
+ >>> Result
+; // IsChoices
+
+BOOLEAN elem_func IsChoice
+ Self .IsStereotype st_Choice
+ >>> Result
+; // IsChoice
+
+BOOLEAN elem_func IsCustomChoice
+ Self .IsStereotype st_CustomChoice::Attribute
+ >>> Result
+; // IsCustomChoice
+
+BOOLEAN elem_func IsDefaultChoice
+ Self .IsStereotype st_DefaultChoice::Attribute
+ >>> Result
+; // IsDefaultChoice
+
+elem_iterator AdditionalInitCode
+  STRING IN aName
+  
+ STRING elem_func ChoiceName 
+  [
+   aName
+   //%C%f_pas_Prefix()%C#f_AdditionalPrefix()
+   '_Choice_'
+   Self .Name
+  ] strings:Cat 
+  >>> Result
+ ; // ChoiceName
+ 
+ [
+ Self .Children 
+ .filter> .IsChoices
+ .for> (
+   IN aChoices
+  aChoices .Children 
+  .filter> .IsChoice
+  .for> (
+    IN aChoice
+   \n ' ' aName '.AddChoice(' aChoice .ChoiceName ');'
+  ) // .for>
+ ) // .for>
+ 
+ Self .Attributes
+ .filter> .IsCustomChoice
+ .for> (
+   IN aChoice
+  \n ' ' aName '.AddCustomChoice(' aChoice .Target .ChoiceName ');'
+ ) // .for> 
+ 
+ Self .Attributes
+ .filter> .IsDefaultChoice
+ .for> (
+   IN aChoice
+  \n ' ' aName '.AddDefaultChoice(' aChoice .Target .ChoiceName ');'
+ ) // .for> 
+ 
+ if ( Self .UPisTrue "NeedCheck" ) then
+ begin
+  \n ' ' aName '.SetNeedCheck(true);'
+ end // ( Self .UPisTrue "NeedCheck" )
+ 
+ VAR l_Value
+ Self .GetUP "CheckCaption" >>> l_Value
+ if ( l_Value IsNil ! ) then
+ begin
+  \n ' ' aName '.SetCheckCaption(str_' Self .Name '_CheckCaption);'
+ end // ( l_Value IsNil ! )
+ 
+ Self .GetUP "SettingsCaption" >>> l_Value
+ if ( l_Value IsNil ! ) then
+ begin
+  \n ' ' aName '.SetSettingsCaption(str_' Self .Name '_SettingsCaption);'
+ end // ( l_Value IsNil ! )
+ 
+ Self .GetUP "LongHint" >>> l_Value
+ if ( l_Value IsNil ! ) then
+ begin
+  \n ' ' aName '.SetLongHint(str_' Self .Name '_LongHint);'
+ end // ( l_Value IsNil ! )
+ 
+ \n ' ' aName '.SetDlgType(' 'mt' Self .GetUP "DlgType" ');'
+ ]
+ >>> Result
+; // AdditionalInitCode
+        
 ANY elem_func GetUserCode
   STRING IN aKey
  RULES
@@ -3756,13 +3895,13 @@ ANY elem_func GetUserCode
       [
        VAR l_SpelledFor
        Self .SpelledFor >>> l_SpelledFor
-//	 %{Attr_Inst}%f_pas_Prefix()%f_N(%{Attr_Inst}).Init;\
-//      %C%f_AdditionalInitCode("%{Attr_Inst}%f_pas_Prefix()%f_N(%{Attr_Inst})")\
-       ' ' l_SpelledFor .Parent .GetUP 'extprop:pas:ElementPrefix' l_SpelledFor .Name '.Init;'
+       VAR l_Name
+       [ l_SpelledFor .Parent .GetUP 'extprop:pas:ElementPrefix' l_SpelledFor .Name ] strings:Cat >>> l_Name
+       
+       ' ' l_Name '.Init;'
        if ( Self .Speller .IsStereotype st_Message ) then
        begin
-        \n
-        '!!! Lost Message ini !!!'
+        Self .Speller l_Name .AdditionalInitCode
        end // ( Self .Speller .IsStereotype st_Message )
       ]
      ( 
@@ -4804,10 +4943,99 @@ elem_iterator ChildrenWithOwnFile
  >>> Result
 ; // ChildrenWithOwnFile
 
+INTERFACE FUNCTION MakeConstants:
+  STRING IN aName
+  ^ IN aLambda
+ aName nil MakeParam: ( 
+   IN aMade
+  aMade -> Stereotype := st_Constants
+  aMade aLambda DO
+ )
+ >>> Result 
+; // MakeConstants:
+  
+INTERFACE FUNCTION MakeConstant:
+  STRING IN aName
+  PRINTABLE IN aValue
+  ^ IN aLambda
+ aName nil MakeParam: ( 
+   IN aMade
+  aMade -> Class := class_Attribute
+  aMade -> 'extprop:pas:Value' := aValue
+  aMade aLambda DO
+ )
+ >>> Result 
+; // MakeConstant:
+
+elem_iterator ConstantsEx
+ Cached:
+ (
+  Self .Constants
+  
+  RULES
+   ( Self .IsTypedef )
+    begin
+     VAR l_OtherEnum
+     Self .MainAncestor >>> l_OtherEnum
+     RULES
+      ( l_OtherEnum .IsEnum )
+       RULES
+        ( Self .Name l_OtherEnum .Name == )
+         RULES
+          ( l_OtherEnum .Attributes .CountIt > 0 )
+           begin
+            VAR l_ConstantsName
+            [ Self .Name '_' l_OtherEnum .Name '_' 'Constants' ] strings:Cat >>> l_ConstantsName
+            RULES
+             ( 
+              Self .Parent call.me 
+              .filter> ( .Name l_ConstantsName == )
+              .CountIt 0 ==
+             )
+              begin
+               .join>
+               [
+                VAR l_ElementPrefix
+                l_OtherEnum .GetUP 'extprop:pas:ElementPrefix' >>> l_ElementPrefix
+                l_ConstantsName MakeConstants: (
+                  IN aConstants
+                 aConstants -> %SUM := ( [ 'Алиасы для значений ' l_OtherEnum .Parent .Name '.' l_OtherEnum .Name ] strings:Cat )
+                 aConstants -> Visibility := PublicAccess
+                 //aConstants -> 'extprop:pas:ElementPrefix' := l_ElementPrefix
+                 aConstants -> Attributes := [
+                  l_OtherEnum .Attributes .for> (
+                    IN anItem
+                   VAR l_Name 
+                   [ l_ElementPrefix anItem .Name ] strings:Cat >>> l_Name
+                   l_Name
+                   [ l_OtherEnum .EffectiveUnitName '.' l_Name ] strings:Cat 
+                   MakeConstant: (
+                     IN aConstant
+                    RULES
+                     ( anItem .Documentation IsNil ! )
+                      ( aConstant -> %SUM := ( anItem .Documentation ) )
+                    ; // RULES 
+                   ) // MakeConstant:
+                  ) // l_OtherEnum .Attributes .for>
+                 ] // aConstants -> Attributes
+                ) // MakeConstants:
+               ] // .join>
+              end
+            ; // RULES
+           end // ( l_OtherEnum .Attributes .CountIt > 0 )
+         ; // RULES
+       ; // RULES
+     ; // RULES
+    end // ( Self .IsTypedef )
+  ; // RULES
+ )
+ >>> Result
+; // ConstantsEx
+
 elem_iterator ConstantsAndChildrenWithoutOwnFile
  Cached:
  ( 
-  Self .Constants
+  Self .ConstantsEx
   .join> ( Self .ChildrenWithoutOwnFile )
  )
  >>> Result
@@ -5106,9 +5334,17 @@ BOOLEAN elem_func IsUses
  Self .IsStereotype st_uses::Dependency >>> Result
 ; // IsUses
 
+elem_iterator UsesInDependencies
+ Cached:
+ (
+  Self .Dependencies .filter> .IsUses .mapToTarget>
+ ) 
+ >>> Result
+; // UsesInDependencies
+
 elem_iterator OperationsUsed
  [empty]
- .joinWithLambded> ( Self .Operations ) ( .Dependencies .filter> .IsUses .mapToTarget> )
+ .joinWithLambded> ( Self .Operations ) .UsesInDependencies
  .joinWithLambded> ( Self .Operations ) call.me
  >>> Result
 ; // OperationsUsed
@@ -5218,7 +5454,7 @@ elem_iterator ImplementedAndOverridden
 elem_iterator Used
  Cached:
  (
-  Self .Dependencies .filter> .IsUses .mapToTarget>
+  Self .UsesInDependencies
   if ( Self .IsInterface ! ) then
   begin
    .join> ( Self .InjectedElements )
@@ -5246,6 +5482,7 @@ elem_iterator Used
    begin
     .join> [ GarantModel::l3Base ]
    end // ( Self .ImplementedAndOverridden .filter> .IsIterator .CountIt > 0 )
+   .joinWithLambded> ( Self .ImplementedAndOverridden ) .UsesInDependencies
   end // ( Self .IsClassOrMixIn )
   
   if ( Self .NeedIniRegClass ) then
@@ -5284,7 +5521,7 @@ elem_iterator AbstractUses
     aG .Implements 
     .filter> .IsMixIn
    ) // .joinWithLambded> 
-   .Dependencies .filter> .IsUses .mapToTarget>
+   .UsesInDependencies
    .join> ( aG call.me ) 
   ) // .for>
  ) 
@@ -5955,7 +6192,12 @@ elem: AsIteratorFDo:
   '  '
   if ( Self .UPisTrue "needs result" ) then
    'Result := '
-  Self .Name 
+  RULES
+   ( Self .IsMethodAndImplementsIterator ) 
+    ( Self .MainImplements .MethodName )
+   DEFAULT
+    ( Self .Name )
+  ; // RULES  
   Self .ParametersList
   ';'
   \n
@@ -8022,13 +8264,13 @@ elem_proc OutDefinitionsSection:
  : .Suitable aValid DO ; 
   
  Self .ForChildren> .Suitable (
-  .Constants .filter> ( .ConstantsListVisibility PublicAccess == ) .OutConstantsList
+  .ConstantsEx .filter> ( .ConstantsListVisibility PublicAccess == ) .OutConstantsList
  )
 
  Self .OutTypes .Suitable
  
  Self .ForChildren> .Suitable (
-  .Constants .filter> ( .ConstantsListVisibility ProtectedAccess == ) .OutConstantsList
+  .ConstantsEx .filter> ( .ConstantsListVisibility ProtectedAccess == ) .OutConstantsList
  )
 
 ; // OutDefinitionsSection:
@@ -8936,7 +9178,7 @@ elem_proc OutImplementationSection
  l_WasOut ? OutLn
  
  Self .ForChildren> .All (
-  .Constants .filter> ( .ConstantsListVisibility PrivateAccess == ) .OutConstantsList
+  .ConstantsEx .filter> ( .ConstantsListVisibility PrivateAccess == ) .OutConstantsList
  )
 
  Self .ForChildren> .IsForImplementation (
