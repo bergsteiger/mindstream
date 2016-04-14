@@ -1,0 +1,15 @@
+UNIT Log.ms.dict
+
+WordAlias Log sysutils:Log
+
+PROCEDURE Log:
+ ^ IN aValue
+ VAR l_Value
+ aValue DO >>> l_Value
+ RULES
+  ( l_Value IsArray )
+   ( l_Value .map> ToPrintable strings:Cat Log )
+  DEFAULT 
+   ( l_Value ToPrintable Log )
+ ; // RULES  
+; // Log:

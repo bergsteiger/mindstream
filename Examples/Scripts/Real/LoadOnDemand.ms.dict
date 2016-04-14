@@ -1,3 +1,7 @@
+USES
+ Log.ms.dict
+;
+
 : UIDS_LIST
 ;
 // - список загруженных элементов
@@ -43,6 +47,7 @@ TtfwWord FUNCTION LoadWord
    Result pop:Word:Name aWordName == ?ASSURE [ 'Вернулось неверное слово ' Result pop:Word:Name ' вместо ' aWordName ]
   end // l_WasException !
   l_VAR ^:= Result
+  //Log: [ Result pop:Word:Name ' loaded' ]
  end // l_VAR IsNil !
 ; // LoadWord 
 

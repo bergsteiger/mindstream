@@ -18,41 +18,6 @@ ARRAY CompileTime-VAR [empty] []
 STRING ENGINE_WORD INTERFACE TYPE ModelElement
  %REMARK 'Ёлемент модели'
  
-CONST kind_NormalClass 0
-CONST kind_ParameterizedClass 1
-
-CONST opkind_Normal 0
-CONST opkind_Implemented 1
-CONST opkind_Overridden 2
- 
-CONST class_Unknown -1
-CONST class_Class 0
-CONST class_Category 1
-CONST class_Attribute 2
-CONST class_Operation 3
-CONST class_Dependency 4
-CONST class_Parameter 5
-
-CONST UnknownAccess -1 
-CONST PrivateAccess 0
-CONST ProtectedAccess 1
-CONST PublicAccess 2
-CONST ImplementationAccess 3
-CONST PublishedAccess 4
-
-CONST lt_unknown -1
-CONST lt_agr 0
-CONST lt_lnk 1
-CONST lt_ref 2
-
-CONST at_unknown -1
-CONST at_regular 0
-CONST at_virtual 0
-CONST at_abstract 1
-CONST at_final 2
-CONST at_override 3
-CONST at_message 4
- 
 BOOLEAN FUNCTION .IsWord
  IN aValue
  ( aValue IsObj ) AND ( aValue IS class::TtfwWord ) >>> Result
@@ -164,14 +129,17 @@ STRING elem_func WordName
  else
  if ( aCacheWhere IsString ) then
  begin
+  //[ aCacheWhere ':' aKey ] strings:Cat Msg
   aLambda DO
  end // aCacheWhere IsString
-/* else
+ else
+/*(* 
  if ( aCacheWhere IsIntf ) then
  begin
   aLambda DO
- end // aCacheWhere IsIntf*/
+ end // aCacheWhere IsIntf
  else
+*)*/ 
  begin 
   ModelElement VAR l_CacheWhere
   VAR l_IsIntf
@@ -469,6 +437,13 @@ BOOLEAN elem_func IsStereotype
  
 ; // IsStereotype
 
+USES
+ RoseModel.ms.dict
+;  
+
+EXPORTS
+ RoseModel.ms.dict
+ 
 BOOLEAN elem_func IsSummoned
  Self 'IsSummoned' false .ElemMember >>> Result
 ; // IsSummoned

@@ -1,4 +1,12 @@
 USES
+ RoseModel.ms.dict
+;
+
+USES
+ MDProcess_ForDelphi.tpi.script
+;
+
+USES
  4AB0C3C60310.pas.ms.script // Sys
 ;
 
@@ -46,27 +54,61 @@ USES
 WordAlias GarantModel::SysUtils ME_47877EB202FB
 
 USES
+ 561F9F7D02A7.pas.ms.script // ScriptEngine
+;
+
+WordAlias GarantModel::TtfwClassRef(Proxy) ME_561F9F9400BC // TtfwClassRef (Proxy)
+
+USES
  540EE231015D.pas.ms.script // Logging
 ;
 
 WordAlias GarantModel::Tl3ExceptionsLog ME_540EE24702BC
 
 USES
+ 47BB24D30205.pas.ms.script // Стандартные примеси
+;
+
+WordAlias GarantModel::l3Items ME_47B45152003F
+
+USES
  47913B47006E.pas.ms.script // l3CoreObjects
 ;
 
-WordAlias GarantModel::l3Base ME_4773D64E036C
+WordAlias GarantModel::l3CoreObjects ME_47913B47006E
 
 WordAlias GarantModel::l3UnknownPrim ME_47913F4E02E0
 WordAlias GarantModel::l3UnknownPrim.ClearFields ME_5000565C019C
 
+WordAlias GarantModel::l3Base ME_4773D64E036C
+
 WordAlias GarantModel::Tl3ProtoObject ME_49E7754802A9
 
+WordAlias GarantModel::Tl3DataContainerWithoutIUnknownPrim ME_5319E8FF0107
+
+WordAlias GarantModel::Tl3DataContainerWithoutIUnknown ME_4A60A00700B5
+
+WordAlias GarantModel::Tl3Variant ME_532031160122
+
 USES
- 561F9F7D02A7.pas.ms.script // ScriptEngine
+ LoadOnDemand.ms.dict
+;
+ 
+: GarantModel::Tl3Tag WL 'ME_534572370056' '47913B47006E.pas.ms.script' ;
+: GarantModel::Tl3TagImpl WL 'ME_56FE756F00C4' '47913B47006E.pas.ms.script' ;
+
+//: GarantModel::Tl3Tag ME_534572370056 ;
+//CONST GarantModel::Tl3Tag 'Tl3Tag'
+
+//WordAlias GarantModel::Tl3Tag ME_534572370056
+//WordAlias GarantModel::Tl3TagImpl ME_56FE756F00C4
+// - иначе неосвобождённые объекты
+
+USES
+ 4F4734A40270.pas.ms.script // Parser
 ;
 
-WordAlias GarantModel::TtfwClassRef(Proxy) ME_561F9F9400BC // TtfwClassRef (Proxy)
+WordAlias GarantModel::TtfwKeyWordPrim ME_4FFEEC080367
 
 USES
  4683F37902CF.pas.ms.script // vcmInterfaces
@@ -157,6 +199,8 @@ USES
 
 WordAlias GarantModel::TvcmModule ME_4AB33E14004E
 
+WordAlias GarantModel::vcmData ME_4B16B85D03A1
+
 USES
  5130776E01BE.pas.ms.script // DUnitKeyWordsSupport
 ;
@@ -187,22 +231,119 @@ USES
 
 WordAlias GarantModel::Tl3MouseWheelHelper ME_4F7ACCBE02AF
 
-CONST GarantModel::ControlResizeBugFix 'ControlResizeBugFix'
+USES
+ ref.ms.dict
+;
 
-CONST GarantModel::l3IntfUses 'l3IntfUses'
-CONST GarantModel::l3ImplUses 'l3ImplUses'
+: GarantModel::ControlResizeBugFix
+ CONST UID 'ControlResizeBugFix'
+ CONST Name 'ControlResizeBugFix'
+ CONST Class class_Class
+ : Stereotype st_UtilityPack ;
+ref; // GarantModel::ControlResizeBugFix
 
-CONST GarantModel::StdRes 'StdRes'
+//CONST GarantModel::ControlResizeBugFix 'ControlResizeBugFix'
 
-CONST GarantModel::nsApplication 'nsApplication'
+: GarantModel::l3IntfUses
+ CONST UID 'l3IntfUses'
+ CONST Name 'l3IntfUses'
+ CONST Class class_Class
+ : Stereotype st_UtilityPack ;
+ref; // GarantModel::l3IntfUses
 
-CONST GarantModel::tc5OpenApp 'tc5OpenApp'
-CONST GarantModel::tc6OpenApp 'tc6OpenApp'
+: GarantModel::l3ImplUses
+ CONST UID 'l3ImplUses'
+ CONST Name 'l3ImplUses'
+ CONST Class class_Class
+ : Stereotype st_UtilityPack ;
+ref; // GarantModel::l3ImplUses
 
-CONST GarantModel::tc5OpenAppClasses 'tc5OpenAppClasses'
-CONST GarantModel::tc5PublicInfo 'tc5PublicInfo'
+: GarantModel::StdRes
+ CONST UID 'StdRes'
+ CONST Name 'StdRes'
+ CONST Class class_Class
+ : Stereotype st_UtilityPack ;
+ref; // GarantModel::StdRes
 
-CONST GarantModel::tc6OpenAppClasses 'tc6OpenAppClasses'
-CONST GarantModel::tc6PublicInfo 'tc6PublicInfo'
+: GarantModel::nsApplication
+ CONST UID 'nsApplication'
+ CONST Name 'nsApplication'
+ CONST Class class_Class
+ : Stereotype st_UtilityPack ;
+ref; // GarantModel::nsApplication
 
+: GarantModel::tc5OpenApp
+ CONST UID 'tc5OpenApp'
+ CONST Name 'tc5OpenApp'
+ CONST Class class_Class
+ : Stereotype st_UtilityPack ;
+ref; // GarantModel::tc5OpenApp
 
+: GarantModel::tc6OpenApp
+ CONST UID 'tc6OpenApp'
+ CONST Name 'tc6OpenApp'
+ CONST Class class_Class
+ : Stereotype st_UtilityPack ;
+ref; // GarantModel::tc6OpenApp
+
+: GarantModel::tc5OpenAppClasses
+ CONST UID 'tc5OpenAppClasses'
+ CONST Name 'tc5OpenAppClasses'
+ CONST Class class_Class
+ : Stereotype st_UtilityPack ;
+ref; // GarantModel::tc5OpenAppClasses
+
+: GarantModel::tc5PublicInfo
+ CONST UID 'tc5PublicInfo'
+ CONST Name 'tc5PublicInfo'
+ CONST Class class_Class
+ : Stereotype st_UtilityPack ;
+ref; // GarantModel::tc5PublicInfo
+
+: GarantModel::tc6OpenAppClasses
+ CONST UID 'tc6OpenAppClasses'
+ CONST Name 'tc6OpenAppClasses'
+ CONST Class class_Class
+ : Stereotype st_UtilityPack ;
+ref; // GarantModel::tc6OpenAppClasses
+
+: GarantModel::tc6PublicInfo
+ CONST UID 'tc6PublicInfo'
+ CONST Name 'tc6PublicInfo'
+ CONST Class class_Class
+ : Stereotype st_UtilityPack ;
+ref; // GarantModel::tc6PublicInfo
+
+//CONST GarantModel::l3IntfUses 'l3IntfUses'
+//CONST GarantModel::l3ImplUses 'l3ImplUses'
+
+//CONST GarantModel::StdRes 'StdRes'
+
+//CONST GarantModel::nsApplication 'nsApplication'
+
+//CONST GarantModel::tc5OpenApp 'tc5OpenApp'
+//CONST GarantModel::tc6OpenApp 'tc6OpenApp'
+
+//CONST GarantModel::tc5OpenAppClasses 'tc5OpenAppClasses'
+//CONST GarantModel::tc5PublicInfo 'tc5PublicInfo'
+
+//CONST GarantModel::tc6OpenAppClasses 'tc6OpenAppClasses'
+//CONST GarantModel::tc6PublicInfo 'tc6PublicInfo'
+
+USES
+ 53B15D5603E3.pas.ms.script // TagHolder
+;
+
+WordAlias GarantModel::evdTagHolder ME_53AC01CD0335
+
+USES
+ 4B990EDE031A.pas.ms.script // AppConfig
+;
+
+WordAlias GarantModel::TddComboBoxConfigItem ME_522461B00212
+
+USES
+ 4D8A25430335.pas.ms.script // ContextSearchInEVDDocument
+;
+
+WordAlias GarantModel::Tl3ProtoObjectForTie ME_4C9C9A0603D6

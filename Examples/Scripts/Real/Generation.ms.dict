@@ -13,6 +13,10 @@ USES
 ;
 
 USES
+ Log.ms.dict
+;
+
+USES
  WordsRTTI.ms.dict
 ;
 
@@ -434,6 +438,20 @@ BOOLEAN elem_func IsSameType
  RULES
   ( Self anOther .IsSameModelElement )
    true
+  ( Self IsString )
+   RULES
+    ( anOther IsString )
+     false
+    DEFAULT 
+     ( Self anOther .TypeName == )
+   ; // RULES
+  ( anOther IsString )
+   RULES
+    ( Self IsString )
+     false
+    DEFAULT 
+     ( Self .TypeName anOther == )
+   ; // RULES
   ( Self .TypeName anOther .TypeName == )
    true
   DEFAULT
@@ -496,23 +514,29 @@ BOOLEAN elem_func IsUtilityPack
  >>> Result
 ; // IsUtilityPack
 
+USES
+ GarantModel.ms.dict
+;
+
 BOOLEAN elem_func UseNewGenExcluded
  RULES
   ( Self .IsControllerInterfaces )
    true
-  ( Self '_vcmData_' .InheritsFrom )
+  ( Self GarantModel::vcmData .InheritsFrom )
    true
   ( 
-   ( Self 'Tl3Tag' .InheritsFrom )
-   AND ( Self 'TtfwKeyWordPrim' .InheritsFrom ! )
-   AND ( Self .IsUtilityPack ! )
+   ( Self .IsUtilityPack ! )
+   AND ( Self GarantModel::Tl3Tag .InheritsFrom )
+   //( Self GarantModel::Tl3Variant .InheritsFrom )
+   //AND ( Self GarantModel::Tl3TagImpl .InheritsFrom ! )
+   AND ( Self GarantModel::TtfwKeyWordPrim .InheritsFrom ! )
   ) 
    true
-  ( Self 'TddComboBoxConfigItem' .InheritsFrom )
+  ( Self GarantModel::TddComboBoxConfigItem .InheritsFrom )
    true
-  ( Self 'Tl3ProtoObjectForTie' .InheritsFrom )
+  ( Self GarantModel::Tl3ProtoObjectForTie .InheritsFrom )
    true
-  ( Self '_evdTagHolder_' .InheritsFrom )
+  ( Self GarantModel::evdTagHolder .InheritsFrom )
    true
   DEFAULT
   begin
@@ -962,10 +986,6 @@ BOOLEAN elem_func IsVCMFormsPack
  Self .IsStereotype st_VCMFormsPack >>> Result
 ; // IsVCMFormsPack
 
-USES
- GarantModel.ms.dict
-;
-
 ModelElement elem_func DefaultAncestor
  Cached:
  (
@@ -1149,9 +1169,13 @@ BOOLEAN elem_func IsVCMTestTarget
  Self .IsStereotype st_VCMTestTarget >>> Result
 ; // IsVCMTestTarget
 
+BOOLEAN elem_func IsExeTarget
+ Self .IsStereotype st_ExeTarget >>> Result
+; // IsExeTarget
+
 BOOLEAN elem_func IsExe
  RULES
-  ( Self .IsStereotype st_ExeTarget )
+  ( Self .IsExeTarget )
    true
   ( Self .IsTestTarget )
    true 
@@ -1163,8 +1187,12 @@ BOOLEAN elem_func IsExe
  >>> Result
 ; // IsExe
 
-BOOLEAN elem_func IsDLL
+BOOLEAN elem_func IsAdapterTarget
  Self .IsStereotype st_AdapterTarget >>> Result
+; // IsAdapterTarget
+
+BOOLEAN elem_func IsDLL
+ Self .IsAdapterTarget >>> Result
 ; // IsDLL
 
 BOOLEAN elem_func IsTarget
@@ -5695,6 +5723,11 @@ elem_iterator ImplUses
    .join> ( Self .ChildrenWithOwnFile )
   end // ( Self .IsTarget )
   
+  if ( Self .IsVCMCustomForm ) then
+  begin
+   .join> ( Self .ChildrenWithOwnFile )
+  end // ( Self .IsVCMCustomForm )
+  
   if ( Self .IsClassOrMixIn ) then
   begin
    .join> ( Self .AbstractUses )
@@ -6931,6 +6964,18 @@ BOOLEAN elem_func UseNewGen
     true
    ( Self .IsLibrary ) 
     ( Self .Parent call.me )
+   ( Self .IsVCMTestTarget ) 
+    ( Self .Parent call.me )
+   ( Self .IsTestTarget ) 
+    true
+   ( Self .IsVCMGUI ) 
+    ( Self .Parent call.me )
+   ( Self .IsExeTarget ) 
+    true
+   ( Self .IsDLL ) 
+    ( Self .Parent call.me )
+   ( Self .IsTarget ) 
+    ( Self .Parent call.me )
    DEFAULT
     ( Self .Parent call.me )
   ; // RULES
@@ -7504,7 +7549,7 @@ ModelElement elem_func CalcParentAndInclude
   if ( l_WasProlog ! ) then
   begin
    true >>> l_WasProlog
-   if ( aG '_l3Items_' .InheritsFrom ) then
+   if ( aG GarantModel::l3Items .InheritsFrom ) then
    begin
    
     : OutIsProto
@@ -7512,15 +7557,15 @@ ModelElement elem_func CalcParentAndInclude
     ; // OutIsProto
     
     RULES
-     ( Self 'Tl3ProtoObject' .InheritsFrom )
+     ( Self GarantModel::Tl3ProtoObject .InheritsFrom )
       OutIsProto
      ( 
-      ( Self 'Tl3DataContainerWithoutIUnknownPrim' .InheritsFrom )
-      AND NOT ( Self 'Tl3DataContainerWithoutIUnknown' .InheritsFrom )
+      ( Self GarantModel::Tl3DataContainerWithoutIUnknownPrim .InheritsFrom )
+      AND NOT ( Self GarantModel::Tl3DataContainerWithoutIUnknown .InheritsFrom )
      ) 
       OutIsProto
     ; // RULES
-   end // ( aG '_l3Items_' .InheritsFrom )
+   end // ( aG GarantModel::l3Items .InheritsFrom )
   end // ( l_WasProlog ! )
   
   aG .OutMixInInclude
@@ -9451,7 +9496,7 @@ elem_iterator IniOperations
             IN aMade
            VAR l_TypeName
            Self .TypeName >>> l_TypeName
-           aMade -> Parent := Self
+           aMade -> Parent := ( Self .WeakRef )
            aMade -> "ifndef" := 'NoScripts'
            aMade -> %SUM := ( 'Регистрация ' Self .Name Cat ) 
            aMade ->^ cUserCodePrefix ^:= [ cSpace l_TypeName '.RegisterInEngine;' ]
@@ -9473,7 +9518,7 @@ elem_iterator IniOperations
            IN aMade
           VAR l_TypeName
           Self .TypeName >>> l_TypeName
-          aMade -> Parent := Self
+          aMade -> Parent := ( Self .WeakRef )
           aMade -> "ifndef" := 'NoScripts'
           aMade -> %SUM := ( 'Регистрация ' Self .Name Cat ) 
           aMade ->^ cUserCodePrefix ^:= [ 
@@ -9781,37 +9826,52 @@ elem_proc OutApplicationBody
  ; // RULES
 ; // OutApplicationBody
 
+STRING elem_func ProjectUnitPath
+ Cached:
+ (
+  VAR l_Path
+  RULES
+   ( Self IsString )
+    RULES
+     ( Self GarantModel::StdRes .Name == )
+      ( GarantModel::StdRes .Name '.pas' Cat )
+     DEFAULT
+      '' 
+    ; // RULES
+   ( Self .Name GarantModel::StdRes .Name == )
+    ( GarantModel::StdRes .Name '.pas' Cat )
+   DEFAULT
+    ( Self .FinalFileName )
+  ; // RULES
+  >>> l_Path
+  
+  if ( l_Path IsNil ! ) then
+  begin
+   if ( l_Path 'NotFinished\Borland\Delphi\Rtl\Sys' string:Pos -1 != ) then
+   begin
+    '' >>> l_Path
+   end // ( l_Path 'NotFinished\Borland\Delphi\Rtl\Sys' string:Pos -1 != )
+  end // ( l_Path IsNil ! )
+  
+  if ( l_Path IsNil ! ) then
+  begin
+   l_Path cNotFinished '' string:Replace >>> l_Path
+   l_Path cNotCompleted '' string:Replace >>> l_Path
+   l_Path 'NotFinished\' '' string:Replace >>> l_Path
+  end // ( l_Path IsNil ! )
+  l_Path 
+ ) 
+ >>> Result
+; // ProjectUnitPath
+
 STRING elem_func ProjectUnitName
  Self .UnitName
  
  VAR l_Path
- RULES
-  ( Self IsString )
-   RULES
-    ( Self GarantModel::StdRes == )
-     ( GarantModel::StdRes '.pas' Cat )
-    DEFAULT
-     '' 
-   ; // RULES
-  ( Self .Name GarantModel::StdRes == )
-   ( GarantModel::StdRes '.pas' Cat )
-  DEFAULT
-   ( Self .FinalFileName )
- ; // RULES
- >>> l_Path
+ Self .ProjectUnitPath >>> l_Path
  
  if ( l_Path IsNil ! ) then
  begin
-  if ( l_Path 'NotFinished\Borland\Delphi\Rtl\Sys' string:Pos -1 != ) then
-  begin
-   '' >>> l_Path
-  end // ( l_Path 'NotFinished\Borland\Delphi\Rtl\Sys' string:Pos -1 != )
- end // ( l_Path IsNil ! )
- 
- if ( l_Path IsNil ! ) then
- begin
-  l_Path cNotFinished '' string:Replace >>> l_Path
-  l_Path 'NotFinished\' '' string:Replace >>> l_Path
   [ ' in ' cQuote l_Path cQuote ] strings:Cat Cat
  end // ( l_Path IsNil ! )
  
@@ -10405,15 +10465,27 @@ elem_proc GenerateWithChildren
    TF g_CurrentGenerator (
     aGenerator >>> g_CurrentGenerator
     if ( Self .NeedOwnFile ) then
-     ( Self .GenerateWordToFileWith: .CurrentGenerator )
+    begin
+     VAR l_Name
+     Self .Name >>> l_Name
+     [ l_Name ' ' g_CurrentGenerator .WordName ] strings:Cat >>> l_Name
+     Log: [ l_Name ' generation start' ]
+     VAR l_Time
+     StartTimer
+     TRY
+      ( Self .GenerateWordToFileWith: .CurrentGenerator )
+     FINALLY
+      l_Name StopTimer >>> l_Time
+     END // TRY..FINALLY 
+     l_Time 1000 DIV >>> l_Time
+     //Log: [ l_Name ' generation end ' l_Time ]
+    end // ( Self .NeedOwnFile )
     else
      ( Self .DeleteWordFile ) 
    ) // TF g_CurrentGenerator
   ) // aGenerators CodeIterator .for>
   
-  Self .ChildrenEx 
- //  .filter> ( .NeedOwnFile )
-    .for> ( aGenerators call.me )
+  Self .ChildrenEx .for> ( aGenerators call.me )
   // - тут генерируем детей  
  end // Self g_GeneratedElements array:Has !
 ; // GenerateWithChildren
@@ -10428,5 +10500,4 @@ elem_proc Generate
  g_GeneratedElements IsNil ?FAIL 'Массив g_GeneratedElements не инициализирован'
  
  Self .call.generators.in.list ( .pas .res.cmd .rc .rc.script .dfm )
- 
 ; // Generate
