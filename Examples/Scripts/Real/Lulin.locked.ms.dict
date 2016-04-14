@@ -13,7 +13,6 @@ ARRAY FUNCTION Lulin.locked
   '3DBAA1891003' // Design_AttrValues implementation after const - надо поступать так же как с Type
   '52FA4ACA0020' // csRequestTask GetTaggedDataType
   '4F0C0B6801C7' // DragData cnActiveState = [dsActive, dsPaused];
-  //'48E385660374' // evRange IterateLeafParagraphs
   '4B2A6D4303A9' // KTestRunner проблемы с TTimeInfoList с предварительным описанием RTestResultsPlace = class of TTestResultsPlace;
   '4AC9A3F801F3' // nsMainMenuNew uses vtOutliner и l3ControlsTypes - отсутствуют
   '4AAF93E201FD' // nsPostingsLine uses l3TreeInterfaces - отсутствует
@@ -27,19 +26,14 @@ ARRAY FUNCTION Lulin.locked
   
   // GuiControl
   '5028A4C0019B' // TvcmToolbar vcm_DefaultToolbarOptions = [vcm_toModulesInMainToolbar, vcm_toEntitiesInMainToolbar]; [Error] vcmToolbar.pas(45): Constant expression expected
-  '515DA5860015' // TvtOutliner uses Supports SysUtils
-  '5562DB5D0259' // TvtCalendarPanel uses EncodeDate
-  '4AA8AB7B038F' // TvtDateEdit uses Now
   '4B30EC67025A' // TvcmMenuManager vcm_DefaultMenuOptions = [vcm_moEntitiesInMainMenu, vcm_moEntitiesInTopMainMenu];
   '4E732D7F0082' // TvtHideField cDefaultOptions = [hfoCanHide, hfoHyperlink];
-  '5270BBC702C7' // TvtColorBox uses Format
   
   // InternalInterfaces
   '4678209200A6' // nevBase nev_plThis = TnevParaLevel(0);
   
   // Interfaces
   '467C0CAA02AB' // l3InternalInterfaces function Hl3Canvas.pxAverageCharWidth: Integer;
-  '476BEA0B0103' // evConst evEpsilon = l3Epsilon;
   '47C5207602D1' // nevTools InevParaInternal = interface(InevPara)
   '485808AB001D' // evControlsBlockConst evControlBlockBefore = l3Inch div 3;
   '48E3836D00C8' // evEditorInterfaces edSingleCell = [ed_PsevdoSingleCells, ed_SingleCell];
@@ -51,7 +45,6 @@ ARRAY FUNCTION Lulin.locked
   
   // SimpleClass
   '473C4F1E01A1' // Tl3VirtualCanvas if (DCFlag = ev_dcfLinked) then [Error] l3VirtualCanvas.pas(168): Undeclared identifier: 'ev_dcfLinked'
-  '48ECD64B005A' // TevLeafParaMultiSelectionBlock [Error] evLeafParaMultiSelectionBlock.pas(30): Undeclared identifier: 'l3Types'
   'A8C41C353B7D' // TstDocumentShowChangesInfoItem [Error] stDocumentShowChangesInfoItem.pas(41): Illegal character in input file: '!' ($21)
   '4D4011460346' // TnsContentsListForFiltering [Error] nsContentsListForFiltering.pas(38): Declaration of 'Item' differs from declaration in interface 'IListForFiltering'
   '4DEFC812022F' // Tl3EventedRecListView [Error] l3EventedRecListView.pas(25): Declaration of 'CompareRecs' differs from previous declaration надо PItemType разрулить

@@ -11,9 +11,9 @@ USES
 BOOLEAN elem_func ForceUseNewGen
  %SUMMARY 'Элементы модели ЖЁСТКО генерируемые НОВЫМ генератором' ;
  [
-  '52F8B15003A7' // TddPicturePathListner
-  '4E01D585033A' // TvcmUserInteractiveForm
-  '5519612B01D3' // TIterateableServiceProvider
+  //'52F8B15003A7' // TddPicturePathListner
+  //'4E01D585033A' // TvcmUserInteractiveForm
+  //'5519612B01D3' // TIterateableServiceProvider
  ]
  .filter> ( Self .UID == )
  .CountIt > 0

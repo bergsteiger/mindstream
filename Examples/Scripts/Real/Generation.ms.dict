@@ -293,6 +293,30 @@ STRING elem_func FinalFileNamePrim
  cEmptyStr >>> Result 
 ; // FinalFileNamePrim
 
+STRING FUNCTION .CutSuffix
+  STRING IN aString
+  STRING IN aSuffix
+ RULES
+  ( aString IsNil )
+   ''
+  ( aSuffix IsNil )
+   aString
+  DEFAULT
+  begin   
+   aString >>> Result 
+   if ( aSuffix Result EndsStr ) then
+   begin
+    Result string:Len aSuffix string:Len - 
+    0
+    Result
+    string:Substring >>> Result
+   end // ( aSuffix Result EndsStr )
+   Result
+  end // DEFAULT
+ ; // RULES
+ >>> Result 
+; // .CutSuffix
+
 STRING FUNCTION .CutPrefix
   STRING IN aString
   STRING IN aPrefix
@@ -300,7 +324,7 @@ STRING FUNCTION .CutPrefix
   ( aString IsNil )
    ''
   ( aPrefix IsNil )
-   ''
+   aString
   DEFAULT
   begin   
    aString >>> Result 
@@ -705,6 +729,31 @@ BOOLEAN elem_func IsTestCase
  >>> Result
 ; // IsTestCase
 
+BOOLEAN elem_func IsTestLibrary
+ Self .IsStereotype st_TestLibrary
+ >>> Result
+; // IsTestLibrary
+
+BOOLEAN elem_func IsTestUnit
+ Self .IsStereotype st_TestUnit
+ >>> Result
+; // IsTestUnit
+
+BOOLEAN elem_func IsUnit
+ Self .IsStereotype st_Unit
+ >>> Result
+; // IsUnit
+
+BOOLEAN elem_func IsImpl
+ Self .IsStereotype st_Impl
+ >>> Result
+; // IsImpl
+
+BOOLEAN elem_func IsLibrary
+ Self .IsStereotype st_Library
+ >>> Result
+; // IsLibrary
+
 BOOLEAN elem_func IsVCMCustomForm
  Self .IsStereotype st_VCMCustomForm 
  >>> Result
@@ -1088,11 +1137,25 @@ BOOLEAN elem_func IsTagTable
  Self .IsStereotype st_TagTable >>> Result
 ; // IsTagTable
 
+BOOLEAN elem_func IsVCMGUI
+ Self .IsStereotype st_VCMGUI >>> Result
+; // IsVCMGUI
+
+BOOLEAN elem_func IsTestTarget
+ Self .IsStereotype st_TestTarget >>> Result
+; // IsTestTarget
+
+BOOLEAN elem_func IsVCMTestTarget
+ Self .IsStereotype st_VCMTestTarget >>> Result
+; // IsVCMTestTarget
+
 BOOLEAN elem_func IsExe
  RULES
   ( Self .IsStereotype st_ExeTarget )
    true
-  ( Self .IsStereotype st_TestTarget )
+  ( Self .IsTestTarget )
+   true 
+  ( Self .IsVCMGUI )
    true 
   DEFAULT
    false
@@ -1108,6 +1171,8 @@ BOOLEAN elem_func IsTarget
  Cached:
  (
   RULES
+   ( Self .IsVCMGUI ) 
+    true
    ( Self .IsExe ) 
     true
    ( Self .IsDLL ) 
@@ -1196,6 +1261,26 @@ BOOLEAN elem_func NeedOwnFilePrim
     
    ( Self .IsVCMCustomForm )
     true
+   
+   ( Self .IsTestLibrary )
+    RULES
+     ( Self .FinalFileName IsNil )
+      false
+     DEFAULT
+      true
+    ; // RULES
+    
+   ( Self .IsTestUnit )
+    false  
+   
+   ( Self .IsUnit )
+    false  
+   
+   ( Self .IsImpl )
+    false  
+   
+   ( Self .IsLibrary )
+    false
    
    ( Self .IsSimpleClass )
    begin
@@ -1373,8 +1458,12 @@ BOOLEAN elem_func IsMethod
  Self .IsStereotype st_method >>> Result
 ; // IsMethod
 
-BOOLEAN elem_func IsMessage
+BOOLEAN elem_func IsMessageOperation
  Self .IsStereotype st_message::Operation >>> Result
+; // IsMessageOperation
+
+BOOLEAN elem_func IsMessage
+ Self .IsStereotype st_Message >>> Result
 ; // IsMessage
 
 BOOLEAN elem_func IsLocalMethod
@@ -1577,18 +1666,21 @@ USES
  axiom:WordBox
 ;
 
+ModelElement elem_func WeakRef
+ RULES
+  ( Self IsIntf )
+   ( Self pop:WordBox:Boxed )
+  DEFAULT
+   Self 
+ ; // RULES
+ >>> Result
+; // WeakRef
+
 elem: DecorateMethodAndDo:
   ^ IN aLambda
  KeyValuesCreateAndDo: ( 
    IN aMethod
-  if ( Self IsIntf ) then
-  begin
-   aMethod -> Original := ( Self pop:WordBox:Boxed )
-  end // ( Self IsIntf )
-  else
-  begin
-   aMethod -> Original := Self
-  end // ( Self IsIntf )
+  aMethod -> Original := ( Self .WeakRef )
   aMethod aLambda DO
  ) // KeyValuesCreateAndDo:
 ; // DecorateMethodAndDo:
@@ -2923,6 +3015,56 @@ BOOLEAN elem_func IsManaged
  >>> Result
 ; // IsManaged
 
+BOOLEAN elem_func IsConstants
+ Self .IsStereotype st_Constants >>> Result
+; // IsConstants
+
+BOOLEAN elem_func IsSetConst
+ Self .IsStereotype st_SetConst >>> Result
+; // IsSetConst
+
+BOOLEAN elem_func IsConstantArray
+ Self .IsStereotype st_ConstantArray >>> Result
+; // IsConstantArray
+
+BOOLEAN elem_func IsLocalConst
+ Self .IsStereotype st_LocalConst >>> Result
+; // IsLocalConst
+
+BOOLEAN elem_func IsChoices
+ Self .IsStereotype st_Choices
+ >>> Result
+; // IsChoices
+
+BOOLEAN elem_func IsChoice
+ Self .IsStereotype st_Choice
+ >>> Result
+; // IsChoice
+
+BOOLEAN elem_func IsConstantsButNotType
+ RULES
+  ( Self .IsRange )
+   false
+  ( Self .IsConstants )
+   true
+  ( Self .IsSetConst )
+   true
+  ( Self .IsConstantArray )
+   true
+  ( Self .IsLocalConst )
+   true
+  ( Self .IsMessage )
+   true
+  ( Self .IsChoices )
+   true
+  ( Self .IsChoice )
+   true
+  DEFAULT
+   false 
+ ; // RULES
+ >>> Result  
+; // IsConstantsButNotType
+
 BOOLEAN elem_func IsType
  Cached:
  (
@@ -2939,6 +3081,8 @@ BOOLEAN elem_func IsType
     false
    DEFAULT
     RULES
+     ( Self .IsConstantsButNotType )
+      false
      ( Self .IsVCMOperations )
       false
      ( Self .IsControlPrim )
@@ -3124,7 +3268,7 @@ elem: IfDefPrim:
           if ( g_WasTypeOpener Self ?== ) then
           begin
            DropWasType
-          end // ( g_WasTypeOpener Self ?!= )
+          end // ( g_WasTypeOpener Self ?== )
          end // ( g_WasForwarded ! )
         end // ( Self .IsType )
         
@@ -3752,35 +3896,6 @@ elem_iterator BindServiceImplementationUC
  >>> Result
 ; // BindServiceImplementationUC
 
-/*(*
-%f _AdditionalInitCode
-// параметры: aConstName: a-string = %1
-// возвращаемый результат: a-string
-//#UC START# *4E09C0BD002Afor4E01DC9002B0*
-	%S%[inherited]\
-	<{}{%C#f_IsChoices()=true}{%C}\
-	%C<{}{}{%C}\
-	\n %2N.AddChoice(str_%C%f_pas_Prefix()%C#f_AdditionalPrefix()%f_N(%C));\
-	>\
-	>\
-	<{}{%C#f_IsCustomChoice()=true}{%C}\
-	\n %1N.AddCustomChoice(str_%C%T%f_pas_Prefix()%C%T#f_AdditionalPrefix()%f_N(%C%T));\
-	>\
-	<{}{%C#f_IsDefaultChoice()=true}{%C}\
-	\n %1N.AddDefaultChoice(str_%C%T%f_pas_Prefix()%C%T#f_AdditionalPrefix()%f_N(%C%T));\
-	>\
-*)*/
-
-BOOLEAN elem_func IsChoices
- Self .IsStereotype st_Choices
- >>> Result
-; // IsChoices
-
-BOOLEAN elem_func IsChoice
- Self .IsStereotype st_Choice
- >>> Result
-; // IsChoice
-
 BOOLEAN elem_func IsCustomChoice
  Self .IsStereotype st_CustomChoice::Attribute
  >>> Result
@@ -3859,8 +3974,29 @@ elem_iterator AdditionalInitCode
  ]
  >>> Result
 ; // AdditionalInitCode
+
+PRINTABLE elem_func InitStrUCPrim
+  ModelElement IN aSpeller
+ [
+  VAR l_Name
+  [ Self .Parent .GetUP 'extprop:pas:ElementPrefix' Self .Name ] strings:Cat >>> l_Name
+  
+  ' ' l_Name '.Init;'
+  
+  if ( aSpeller .IsMessage ) then
+  begin
+   aSpeller l_Name .AdditionalInitCode
+  end // ( aSpeller .IsMessage )
+ ]
+ >>> Result
+; // InitStrUCPrim
         
-ANY elem_func GetUserCode
+PRINTABLE elem_func InitStrUC
+ Self .SpelledFor Self .Speller .InitStrUCPrim
+ >>> Result
+; // InitStrUC
+
+PRINTABLE elem_func GetUserCode
   STRING IN aKey
  RULES
   ( 
@@ -3892,18 +4028,7 @@ ANY elem_func GetUserCode
       ( 'Init_Str_' Self .Name StartsStr ) 
       AND ( Self .SpelledFor IsNil ! )
      )
-      [
-       VAR l_SpelledFor
-       Self .SpelledFor >>> l_SpelledFor
-       VAR l_Name
-       [ l_SpelledFor .Parent .GetUP 'extprop:pas:ElementPrefix' l_SpelledFor .Name ] strings:Cat >>> l_Name
-       
-       ' ' l_Name '.Init;'
-       if ( Self .Speller .IsStereotype st_Message ) then
-       begin
-        Self .Speller l_Name .AdditionalInitCode
-       end // ( Self .Speller .IsStereotype st_Message )
-      ]
+      ( Self .InitStrUC )
      ( 
       ( 'Ini_FormFactory_' Self .Name StartsStr ) 
       AND ( Self .SpelledFor IsNil ! )
@@ -4716,6 +4841,13 @@ elem_proc UserCode:
    ( '52E9282B0271' IsUID ) // RightParamsCount
      Code:
        ( ' Result := 1;' .Out )
+   
+   (
+    ( Self .UID '4B7AB0B6016E' == ) // TTestResultsPlace.CommandLineKey
+    AND ( Self .OpKind opkind_Normal != )
+   ) 
+     Code:
+       ( [ ' Result := ' cQuote '-' l_Implementor .Name 'Release' .CutPrefix cQuote ';' ] .Out )
        
    ( Self .IsFactory )
     begin
@@ -4841,6 +4973,7 @@ elem_proc OutUses:
   STRING IN aUCPrefix
   ^ IN aUsed
   ^ IN aLambda
+  ^ IN anItemTransform
   
  ARRAY VAR l_Used
  aUsed DO >>> l_Used
@@ -4878,7 +5011,7 @@ elem_proc OutUses:
      .filterUsed> 
      .for> ( 
        IN anItem
-      anItem .IfDef: ( anItem .UnitName .WithComma: l_NeedComma .Out )
+      anItem .IfDef: ( anItem anItemTransform DO .WithComma: l_NeedComma .Out )
      ) // .for>
      
     if (
@@ -4887,6 +5020,14 @@ elem_proc OutUses:
        ) then
     begin
      Self .UserCode: aUCPrefix ()
+    end // ( Self .IsElementProxy )
+    
+    if (
+        ( aUCPrefix 'intf_uses' == )
+        AND ( Self .UPisTrue "need UC in project" )
+       ) then
+    begin
+     Self .UserCode: 'manualuses' ()
     end // ( Self .IsElementProxy )
     
    ) // Indented:
@@ -5055,13 +5196,14 @@ ARRAY FUNCTION .OperationsNeededElements
  anArray .mapToTargetAndValueType>
  .join> ( 
   anArray 
-  .filter> .IsMessage 
+  .filter> .IsMessageOperation
   .filter> ( .GetUP "Message ID" 'CM_' SWAP StartsStr )
   .map> ( DROP GarantModel::Controls ) 
  ) // .join>
  .joinWithLambded> anArray ( .Parameters .mapToTargetAndValueType> )
  .joinWithLambded> anArray ( .AttributesAndOperations call.me )
  .joinWithLambded> ( anArray .filter> .IsFactoryMethod ) ( .MethodParameters .mapToTargetAndValueType> )
+ .joinWithLambded> ( anArray .filter> .IsIterator ) ( .MethodParameters .mapToTargetAndValueType> )
  .joinWithLambded> ( anArray .filter> .IsFactoryMethod ) ( .ElementToArray: .MainImplementsInterface )
  .joinWithLambded> ( anArray .filter> .IsMethod .map> .MainAncestor .filterNil> ) ( .MethodParameters .mapToTargetAndValueType> )
  .joinWithLambded> ( anArray .filter> .IsMethod 
@@ -5302,26 +5444,28 @@ BOOLEAN elem_func IsVCMControls
 ; // IsVCMControls
 
 elem_iterator IntfUses
- [ 'l3IntfUses' ]
- 
- if ( Self .IsInterfaces ) then
- begin
-  .join> ( Self .Depends .filter> .IsInterfaces )
- end // ( Self .IsInterfaces )
- 
- .join> ( Self .NeededElements: .IsForInterface )
- .join> ( Self .NeededElementsTotal: .IsForInterface )
- 
- if ( Self .IsControllerInterfaces ) then
- begin
-  .join> [ GarantModel::vcmInterfaces GarantModel::vcmControllers ]
- end // ( Self .IsControllerInterfaces )
- 
- if ( Self .IsVCMControls ) then
- begin
-  .join> [ GarantModel::vcmExternalInterfaces ]
- end // ( Self .IsVCMControls )
- 
+ Cached:
+ (
+  [ GarantModel::l3IntfUses ]
+  
+  if ( Self .IsInterfaces ) then
+  begin
+   .join> ( Self .Depends .filter> .IsInterfaces )
+  end // ( Self .IsInterfaces )
+  
+  .join> ( Self .NeededElements: .IsForInterface )
+  .join> ( Self .NeededElementsTotal: .IsForInterface )
+  
+  if ( Self .IsControllerInterfaces ) then
+  begin
+   .join> [ GarantModel::vcmInterfaces GarantModel::vcmControllers ]
+  end // ( Self .IsControllerInterfaces )
+  
+  if ( Self .IsVCMControls ) then
+  begin
+   .join> [ GarantModel::vcmExternalInterfaces ]
+  end // ( Self .IsVCMControls )
+ ) 
  >>> Result
 ; // IntfUses
 
@@ -5529,45 +5673,245 @@ elem_iterator AbstractUses
 ; // AbstractUses
 
 elem_iterator ImplUses
- [ 'l3ImplUses' ]
- if ( Self .IsScriptKeywordsPack ) then
- begin
-  .join> ( Self .NeededElementsFromInheritsOrImplements )
- end // ( Self .IsScriptKeywordsPack )  
-/*{ if ( Self .IsScriptKeywordsPack ) then
- begin
-  .join> ( Self .NeededElements: .All )
-  .join> ( Self .NeededElementsTotal: .All )
- end // ( Self .IsScriptKeywordsPack )
- else}*/
- begin
+ Cached:
+ (
+  [ GarantModel::l3ImplUses ]
+  if ( Self .IsScriptKeywordsPack ) then
+  begin
+   .join> ( Self .NeededElementsFromInheritsOrImplements )
+  end // ( Self .IsScriptKeywordsPack )  
+  
   .join> ( Self .NeededElements: .IsForImplementation )
   .join> ( Self .NeededElementsTotal: .IsForImplementation )
- end // ( Self .IsScriptKeywordsPack )
- .join> ( Self .UsedTotal )
- 
- if ( Self .IsScriptKeywordsPack ) then
- begin
-  .join> ( Self .ChildrenWithOwnFile )
- end // ( Self .IsScriptKeywordsPack )
- 
- if ( Self .IsClassOrMixIn ) then
- begin
-  .join> ( Self .AbstractUses )
- end // ( Self .IsClassOrMixIn )
+  .join> ( Self .UsedTotal )
   
- if ( Self .IsTestClass ) then
- begin
-  .join> [ GarantModel::Variants GarantModel::ActiveX 'tc5OpenAppClasses' 'tc5PublicInfo' 'tc6OpenAppClasses' 'tc6PublicInfo' ]
- end // ( Self .IsTestClass )
+  if ( Self .IsScriptKeywordsPack ) then
+  begin
+   .join> ( Self .ChildrenWithOwnFile )
+  end // ( Self .IsScriptKeywordsPack )
   
- if ( Self .Name 'l3IID' == ) then
- begin
-  .join> [ GarantModel::Windows GarantModel::SysUtils ]
- end // ( Self .Name 'l3IID' == )
+  if ( Self .IsTarget ) then
+  begin
+   .join> ( Self .ChildrenWithOwnFile )
+  end // ( Self .IsTarget )
+  
+  if ( Self .IsClassOrMixIn ) then
+  begin
+   .join> ( Self .AbstractUses )
+  end // ( Self .IsClassOrMixIn )
+   
+  if ( Self .IsTestClass ) then
+  begin
+   .join> [ 
+           GarantModel::Variants 
+           GarantModel::ActiveX 
+           GarantModel::tc5OpenAppClasses 
+           GarantModel::tc5PublicInfo 
+           GarantModel::tc6OpenAppClasses 
+           GarantModel::tc6PublicInfo
+          ]
+  end // ( Self .IsTestClass )
+   
+  if ( Self .Name 'l3IID' == ) then
+  begin
+   .join> [ GarantModel::Windows GarantModel::SysUtils ]
+  end // ( Self .Name 'l3IID' == )
+  
+  RULES
+   ( Self .IsTestTarget )
+    begin
+     .join> [ GarantModel::SysUtils ]
+     .join> [ GarantModel::l3Base ]
+     .join> [ GarantModel::TKBridge ]
+     .join> [ GarantModel::KTestRunner ]
+     .join> [ GarantModel::TextTestRunner ]
+     .join> [ GarantModel::GUITestRunner ]
+     if ( Self .UPisTrue "no scripts" ! ) then
+     begin
+      .join> [ GarantModel::TvcmInsiderTest ]
+     end // ( Self .UPisTrue "no scripts" ! )
+    end // ( Self .IsTestTarget )
+  ; // RULES 
+  
+  RULES
+   ( Self .IsVCMTestTarget )
+    begin
+     RULES
+      (
+       Self .Depends
+       .filter> .IsVCMGUI
+       .filter> ( .GetUP "F1Like" false ?== )
+       .CountIt 0 ==
+      )
+       ( .join> [ GarantModel::TF1AutoTestSuite ] )
+      DEFAULT
+       ( .join> [ GarantModel::TAutoTestsSuite ] )
+     ; // RULES 
+     .join> [ GarantModel::StdRes ]
+    end // ( Self .IsVCMTestTarget )
+   ( Self .IsTestTarget )
+    begin
+     if ( Self .UPisTrue "is insider test" ! ) then
+     begin
+      if ( Self .UPisTrue "no scripts" ! ) then
+      begin
+       .join> [ GarantModel::TAutoTestsSuite ]
+       .join> [ GarantModel::TtfwScriptEngineEX ]
+      end // ( Self .UPisTrue "no scripts" ! )
+     end // ( Self .UPisTrue "is insider test" ! )
+    end // ( Self .IsTestTarget )
+   ( Self .IsVCMGUI ) 
+    ( .join> [ GarantModel::StdRes ] )
+  ; // RULES
+  
+  RULES
+   ( Self .IsTestLibrary )
+    begin
+     Self .Depends
+     .filter> .IsTestLibrary
+     .for> (
+       IN aTestLibrary
+      .join> [ aTestLibrary ] 
+     ) // .for>
+          
+     Self .ChildrenEx 
+     .for> (
+      .ChildrenEx
+      .for> (
+        IN aChild
+       .join> [ aChild ] 
+      ) // .for>
+     ) // .for>
+     .join> [ GarantModel::tc5OpenApp GarantModel::tc6OpenApp ]
+    end // ( Self .IsTestLibrary )
+   ( Self .IsTestTarget )
+    begin
+    
+     : .TestsToUses
+      .for> (
+        IN aTestLibrary
+       aTestLibrary .ChildrenEx
+       .filter> .IsTestUnit
+       .for> (
+         IN aTestUnit
+        aTestUnit .ChildrenEx
+        .filter> .IsTestCase
+        .for> (
+          IN aTestCase
+         .join> [ aTestCase ] 
+        ) // .for>
+       ) // .for>
+      ) // .for>
+     ; // .TestsToUses
+     
+     VAR l_Parent
+     Self .Parent >>> l_Parent
+     
+     // Сначала перебираем чужие тестовые библиотеки:
+     Self .Depends
+     .filter> .IsTestLibrary
+     .filter> ( .Parent l_Parent .IsSameModelElement ! )
+     .TestsToUses
+     
+     // Потом перебираем свои тестовые библиотеки:
+     Self .Depends
+     .filter> .IsTestLibrary
+     .filter> ( .Parent l_Parent .IsSameModelElement )
+     .TestsToUses
+     
+    end // ( Self .IsTestTarget ) 
+  ; // RULES
+ )
  >>> Result
 ; // ImplUses
 
+elem_iterator IntfAndImplUses
+ Self .IntfUses
+ .join> ( Self .ImplUses )
+ >>> Result
+; // IntfAndImplUses
+
+elem_iterator ProjectUsesPrim
+ Cached:
+ (
+  [ GarantModel::l3IntfUses ]
+  
+  RULES
+   ( Self .IsVCMGUI )
+    begin
+     if ( Self .GetUP "F1Like" false ?!= ) then
+     begin
+      .join> [ GarantModel::nsApplication ]
+     end // ( Self .GetUP "F1Like" false ?!= )
+     .join> [ GarantModel::Tl3ExceptionsLog ]
+     .join> [ GarantModel::ControlResizeBugFix ]
+    end // ( Self .IsVCMGUI )
+   ( Self .IsVCMTestTarget )
+    begin
+     .joinWithLambded> ( Self .Depends .filter> .IsVCMGUI ) call.me
+    end // ( Self .IsVCMTestTarget )
+   ( Self .IsExe )
+    begin
+     .join> [ GarantModel::Tl3ExceptionsLog ]
+     if ( Self .UPisTrue "console" ! ) then
+     begin
+      .join> [ GarantModel::ControlResizeBugFix ]
+     end // ( Self .UPisTrue "console" ! )
+    end // ( Self .IsExe )
+  ; // RULES
+  
+  .join> ( Self .IntfAndImplUses )
+  
+  RULES
+   ( Self .IsVCMGUI )
+    begin
+     .join> [ GarantModel::Tl3MouseWheelHelper ]
+    end // ( Self .IsVCMGUI )
+  ; // RULES
+  
+  .map> .UnitProducer 
+  .filterNil>
+  .filterMixIns>
+  array:Copy
+ )
+ >>> Result
+; // ProjectUsesPrim
+
+elem_iterator ProjectUses
+ ARRAY VAR l_ProjectUses
+ [] >>> l_ProjectUses
+ ARRAY VAR l_InUses
+ [] >>> l_InUses
+ 
+ PROCEDURE AccumulateUses
+   ARRAY IN aUses
+  aUses 
+  //.map> .UnitProducer 
+  //.filterNil>
+  //.filterMixIns>
+  .for> (
+    IN anItem
+   if ( l_InUses .filter> ( anItem ?== ) .CountIt 0 == ) then 
+   //if ( anItem l_InUses array:Has ! ) then
+   begin
+    anItem array:AddTo l_InUses
+    anItem array:AddTo l_ProjectUses
+    RULES
+     ( anItem IsString )
+      ()
+     DEFAULT
+      ( anItem .ProjectUsesPrim call.me ) 
+    ; // RULES 
+   end // ( anItem l_InUses array:Has ! )
+  ) // .for>
+ ; // AccumulateUses
+ 
+ Self .ProjectUsesPrim AccumulateUses
+ 
+ l_ProjectUses
+ >>> Result
+; // ProjectUses
+     
 ModelElement elem_func SecondAttribute
  Cached:
  (
@@ -5738,7 +6082,7 @@ INTEGER elem_func MethodAbstraction
    opkind_Normal
     ( 
      RULES
-      ( Self .IsMessage )
+      ( Self .IsMessageOperation )
        at_message
       (
        ( Self .IsIterator )
@@ -6583,7 +6927,10 @@ BOOLEAN elem_func UseNewGen
     ( Self .Parent call.me )
    ( Self .IsSimpleClass ) 
     true
-    //( Self .Parent call.me )
+   ( Self .IsTestLibrary ) 
+    true
+   ( Self .IsLibrary ) 
+    ( Self .Parent call.me )
    DEFAULT
     ( Self .Parent call.me )
   ; // RULES
@@ -7083,7 +7430,7 @@ STRING elem_func PasPathOnly
   Result
  )
  >>> Result
-; // PathOnly
+; // PasPathOnly
 
 STRING elem_func PathOnly
  Cached:
@@ -7757,6 +8104,16 @@ elem_proc OutType
    ()
   ( Self .IsVCMOperations )
    () 
+  ( Self .IsConstantsButNotType )
+   () 
+  ( Self .IsTestUnit )
+   () 
+  ( Self .IsUnit )
+   () 
+  ( Self .IsImpl )
+   () 
+  ( Self .IsTestLibrary )
+   () 
   DEFAULT
    (
     if ( Self g_OutedTypes array:Has ! ) then
@@ -7843,13 +8200,13 @@ elem_proc OutChildrenRecPrim
      begin
       if ( Self .SomeOwnChildrenInheritsOrImplementsMixIn ! ) then
       begin
-       Self .ChildrenWithoutOwnFile 
+       Self .ConstantsAndChildrenWithoutOwnFile
        .filter> ( Self .InheritsFrom )
        .for> .OutForward
       end // ( Self .SomeOwnChildrenInheritsOrImplementsMixIn ! )
      end // ( Self .InheritsOrImplementsMixIn ! )
      
-     Self .ChildrenWithoutOwnFile 
+     Self .ConstantsAndChildrenWithoutOwnFile
      .filter> ( Self .InheritsFrom ! )
      .for> call.me
      
@@ -7858,7 +8215,7 @@ elem_proc OutChildrenRecPrim
       Self aOut DO
      end // ( Self aValid DO )
      
-     Self .ChildrenWithoutOwnFile 
+     Self .ConstantsAndChildrenWithoutOwnFile
      .filter> ( Self .InheritsFrom )
      .for> call.me
      
@@ -7866,14 +8223,14 @@ elem_proc OutChildrenRecPrim
    end // ( Self .IsType )
    else
    begin
-    Self .ChildrenWithoutOwnFile 
+    Self .ConstantsAndChildrenWithoutOwnFile
     .filter> ( Self .InheritsFrom ! )
     .for> call.me
     if ( Self aValid DO ) then
     begin
      Self aOut DO
     end // ( Self aValid DO )
-    Self .ChildrenWithoutOwnFile 
+    Self .ConstantsAndChildrenWithoutOwnFile
     .filter> ( Self .InheritsFrom )
     .for> call.me
    end // ( Self .IsType )
@@ -7960,22 +8317,6 @@ elem_proc OutTypes
   aChild aValid DO 
  ) @ DoOutType .OutTypeRec
 ; // OutTypes
-
-BOOLEAN elem_func IsConstants
- Self .IsStereotype st_Constants >>> Result
-; // IsConstants
-
-BOOLEAN elem_func IsSetConst
- Self .IsStereotype st_SetConst >>> Result
-; // IsSetConst
-
-BOOLEAN elem_func IsConstantArray
- Self .IsStereotype st_ConstantArray >>> Result
-; // IsConstantArray
-
-BOOLEAN elem_func IsLocalConst
- Self .IsStereotype st_LocalConst >>> Result
-; // IsLocalConst
 
 elem_proc OutConstants
  RULES
@@ -8957,7 +9298,6 @@ INTERFACE FUNCTION MakeIniProcedure:
 ; // MakeIniProcedure:
 
 INTERFACE elem_func RegisterTestCaseMethod
- //Cached:
  (
   'RegisterTestCase' MakeIniProcedure: (
     IN aMade
@@ -8970,7 +9310,6 @@ INTERFACE elem_func RegisterTestCaseMethod
 ; // RegisterTestCaseMethod
 
 INTERFACE elem_func RegisterTestClassMethod
- //Cached:
  (
   'RegisterTestClass' MakeIniProcedure: (
     IN aMade
@@ -8983,7 +9322,6 @@ INTERFACE elem_func RegisterTestClassMethod
 ; // RegisterTestClassMethod
 
 INTERFACE elem_func RegisterTagTableMethod
- //Cached:
  (
   'RegisterTagTable' MakeIniProcedure: (
     IN aMade
@@ -8996,17 +9334,31 @@ INTERFACE elem_func RegisterTagTableMethod
 ; // RegisterTagTableMethod
 
 INTERFACE elem_func RegisterServiceImplementationMethod
- //Cached:
  (
   'bind' MakeIniProcedure: (
     IN aMade
    aMade -> %SUM := ( 'Регистрация ' Self .TypeName Cat )
-   //aMade ->^ cUserCodePrefix ^:= ( Self .BindServiceImplementationUC )
    aMade .AddMethodWithParams: cUserCodePrefix Self .BindServiceImplementationUC
   ) // MakeIniProcedure:
  )
  >>> Result
 ; // RegisterServiceImplementationMethod
+
+INTERFACE elem_func MakeIniStr
+  STRING IN aName
+  ModelElement IN aSpeller
+  STRING IN aPrefix
+ (
+  aName MakeIniProcedure: (
+    IN aMade
+   aMade -> %SUM := ( [ 'Инициализация ' aPrefix Self .Name ] strings:Cat )
+   aMade -> "ifdef" := ( Self .IfDefStr )
+   aMade -> "ifndef" := ( Self .IfNDefStr )
+   aMade .AddMethodWithParams: cUserCodePrefix ( Self aSpeller ) .InitStrUCPrim
+  ) // MakeIniProcedure:
+ )
+ >>> Result
+; // MakeIniStr
 
 elem_iterator IniOperationsPrim
  Self .Operations 
@@ -9014,11 +9366,56 @@ elem_iterator IniOperationsPrim
  >>> Result
 ; // IniOperationsPrim
 
+ModelElement elem_func ElementOrParentThatCanHaveIniOperations
+ RULES
+  ( Self .IsClassOrMixIn )
+   Self
+  ( Self .IsUtilityPack )
+   Self
+  ( Self .Parent IsNil )
+   nil
+  DEFAULT 
+   ( Self .Parent call.me )
+ ; // RULES
+ >>> Result
+; // ElementOrParentThatCanHaveIniOperations
+
 elem_iterator IniOperations
  VAR l_IniOperations
  Self .IniOperationsPrim >>> l_IniOperations
  l_IniOperations
  RULES
+  ( Self .IsConstants )
+   begin 
+    VAR l_Speller
+    Self .Speller >>> l_Speller
+    RULES
+     ( l_Speller IsNil ! )
+      begin
+       VAR l_Parent
+       Self .ElementOrParentThatCanHaveIniOperations >>> l_Parent
+       VAR l_Prefix
+       Self .GetUP 'extprop:pas:ElementPrefix' >>> l_Prefix
+       Self .Attributes
+       .for>
+       (
+         IN aConst
+         VAR l_Name
+         [ 'Init_Str_' aConst .Name ] strings:Cat >>> l_Name
+         RULES
+          (
+           l_Parent call.me
+           .filter> ( .Name l_Name == )
+           .CountIt 0 ==
+          ) 
+           ( 
+            .join> [ aConst l_Name aConst .Speller l_Prefix .MakeIniStr ] 
+           ) 
+        ; // RULES
+       ) // .for>
+      end // ( l_Speller IsNil ! )
+    ; // RULES
+   end // ( Self .IsConstants )
   (
    ( Self .IsTestCase )
    AND ( Self .Abstraction at_abstract != )
@@ -9234,7 +9631,7 @@ STRING elem_func Defines
 ; // Defines
 
 elem_proc OutUnitHeader
- [ '// Модуль: "' g_FinalFileName '"' ] .Out
+ [ '// Модуль: "' Self .FinalFileName '"' ] .Out
  [ '// Стереотип: "' Self .Stereotype .Name '"' ] .Out
  if ( Self .Name IsNil ! ) then
  begin
@@ -9285,6 +9682,142 @@ PROCEDURE DoOutUnit
  ) // TF g_Implementor
 ; // DoOutUnit
 
+elem_proc OutApplicationBody
+ RULES
+  ( Self .IsTestTarget )
+   begin
+    [
+     ' {$IfDef nsTest}' \n
+     ' g_CVSPath := ' 
+     cQuote 
+     Self .FinalFileName sysutils:ExtractFilePath '\' .CutSuffix
+     cQuote ';' \n
+     ' {$EndIf nsTest}'
+    ] .Out
+    Indented: ( Self .UserCode: 'CVSPath' () )
+    
+    RULES
+     ( Self .UPisTrue "need UC in project" )
+      begin
+       Indented: ( Self .UserCode: 'manualcode' () )
+      end // ( Self .UPisTrue "need UC in project" )
+     ( Self .IsVCMTestTarget )
+      begin
+       RULES
+        (
+         Self .Depends
+         .filter> .IsVCMGUI
+         .filter> ( .GetUP "F1Like" false ?== )
+         .CountIt 0 ==
+        )
+         ( ' TF1AutoTestSuite.Register;' .Out )
+        DEFAULT
+         ( ' TAutoTestsSuite.Register;' .Out )
+       ; // RULES 
+       
+       Self .Depends
+       .filter> .IsVCMGUI
+       .for> (
+         IN anItem
+        anItem call.me 
+       ) // .for>
+      end // ( Self .IsVCMTestTarget )
+     DEFAULT
+      begin
+       if ( Self .UPisTrue "no scripts" ! ) then
+       begin
+        ' TAutoTestsSuite.Register;' .Out
+       end // ( Self .UPisTrue "no scripts" ! )
+
+       ' try' .Out
+       [
+       '  if KTestRunner.NeedKTestRunner(['
+       
+       VAR l_WasComma
+       false >>> l_WasComma
+       
+       Self .ChildrenEx
+       .filter> .IsTestResults
+       .map> .TypeName
+       .for> ( .WithComma: l_WasComma .KeepInStack )
+       
+       ']) then'
+       ] .Out
+       '   KTestRunner.RunRegisteredTests' .Out
+       '  else' .Out
+       '  if System.IsConsole then' .Out
+       '   TextTestRunner.RunRegisteredTests' .Out
+       '  else' .Out
+       '   GUITestRunner.RunRegisteredTests;' .Out
+       ' except' .Out
+       '  on E: Exception do' .Out
+       '  begin' .Out
+       '   {$If defined(MTDORB) AND defined(NoKPageTool)}' .Out
+       '   if TKBridge.Exists then' .Out
+       '    TKBridge.Instance.Logout;' .Out
+       '   {$IfEnd}' .Out
+       '   l3System.Exception2Log(E);' .Out
+       '   Halt(2);' .Out
+       '  end;//Exception' .Out
+       ' end;//try..except' .Out
+       ' if (TestsExitCode <> 0) then' .Out
+       '  Halt(TestsExitCode);' .Out
+      end // DEFAULT
+    ; // RULES  
+    
+   end // ( Self .IsTestTarget )
+  ( Self .IsVCMGUI )
+   begin
+    [
+     ' ' 'StdRes.TdmStdRes.Run(str_' Self .Name 'Title' ',' ' ' 
+     cQuote Self .GetUP "HelpFile" '.chm' cQuote 
+     ');'
+    ] .Out 
+   end // ( Self .IsVCMGUI )
+  DEFAULT
+   begin
+    Indented: ( Self .UserCode: 'manualcode' () )
+   end // DEFAULT
+ ; // RULES
+; // OutApplicationBody
+
+STRING elem_func ProjectUnitName
+ Self .UnitName
+ 
+ VAR l_Path
+ RULES
+  ( Self IsString )
+   RULES
+    ( Self GarantModel::StdRes == )
+     ( GarantModel::StdRes '.pas' Cat )
+    DEFAULT
+     '' 
+   ; // RULES
+  ( Self .Name GarantModel::StdRes == )
+   ( GarantModel::StdRes '.pas' Cat )
+  DEFAULT
+   ( Self .FinalFileName )
+ ; // RULES
+ >>> l_Path
+ 
+ if ( l_Path IsNil ! ) then
+ begin
+  if ( l_Path 'NotFinished\Borland\Delphi\Rtl\Sys' string:Pos -1 != ) then
+  begin
+   '' >>> l_Path
+  end // ( l_Path 'NotFinished\Borland\Delphi\Rtl\Sys' string:Pos -1 != )
+ end // ( l_Path IsNil ! )
+ 
+ if ( l_Path IsNil ! ) then
+ begin
+  l_Path cNotFinished '' string:Replace >>> l_Path
+  l_Path 'NotFinished\' '' string:Replace >>> l_Path
+  [ ' in ' cQuote l_Path cQuote ] strings:Cat Cat
+ end // ( l_Path IsNil ! )
+ 
+ >>> Result
+; // ProjectUnitName
+
 elem_proc OutUnit
  DoOutUnit (
   TF g_DefaultInterfaceAncestor (
@@ -9316,14 +9849,33 @@ elem_proc OutUnit
     OutLn
    end // ( l_Defines IsNil ! )
    
-   'interface' .Out
-   OutLn
+   if ( Self .IsExe ) then
+   begin
+    if ( Self .UPisTrue "console" ) then
+    begin
+     '{$APPTYPE CONSOLE}' .Out
+     OutLn
+    end // ( Self .UPisTrue "console" )
+   end // ( Self .IsExe )
+   
+   if ( Self .IsTarget ! ) then
+   begin
+    'interface' .Out
+    OutLn
+   end // ( Self .IsTarget ! )
    
    ARRAY VAR l_Used
    [] >>> l_Used
    
    Self .IfDef: ( 
-    Self 'intf_uses' .OutUses: l_Used ( Self .IntfUses )
+    if ( Self .IsTarget ) then
+    begin
+     Self 'intf_uses' .OutUses: l_Used ( Self .ProjectUses ) .ProjectUnitName
+    end // ( Self .IsTarget )
+    else
+    begin
+     Self 'intf_uses' .OutUses: l_Used ( Self .IntfUses ) .UnitName
+    end // ( Self .IsTarget )
    
     Self .OutInterfaceSection
     
@@ -9334,11 +9886,17 @@ elem_proc OutUnit
     end // ( Self .IsElementProxy )
    ) // Self .IfDef:
    
-   'implementation' .Out
-   OutLn
+   if ( Self .IsTarget ! ) then
+   begin
+    'implementation' .Out
+    OutLn
+   end // ( Self .IsTarget ! )
    
    Self .IfDef: ( 
-    Self 'impl_uses' .OutUses: l_Used ( Self .ImplUses )
+    if ( Self .IsTarget ! ) then
+    begin
+     Self 'impl_uses' .OutUses: l_Used ( Self .ImplUses ) .UnitName
+    end // ( Self .IsTarget ! )
     
     RULES
      ( Self .IsTestClass )
@@ -9374,6 +9932,30 @@ elem_proc OutUnit
       )
     ; // RULES
    ) // Self .IfDef:
+   
+   RULES
+    ( Self .IsExe )
+     (
+      if ( Self .UPisTrue "console" ! ) then
+      begin
+       [ '{$R ' Self .UnitName '.res' '}' ] .Out
+       if ( Self .UPisTrue "needs second icon" ) then
+       begin
+        [ '{$R main_icon2.res}' ' // вторая иконка приложения' ] .Out
+       end // ( Self .UPisTrue "needs second icon" )
+       OutLn
+      end // ( Self .UPisTrue "console" ! )
+      
+      if ( Self .UPisTrue "need UC in project" ) then
+      begin
+       Self .UserCode: 'manualres' ()
+       OutLn
+      end // ( Self .UPisTrue "need UC in project" )
+      
+      'begin' .Out
+      Self .OutApplicationBody
+     ) 
+   ; // RULES
    
    'end.' .Out
   ) // TF g_DefaultInterfaceAncestor 
@@ -9486,6 +10068,8 @@ elem_generator pas
   ( Self .IsTarget ) 
    ( Self .OutUnit )
   ( Self .IsTagTable ) 
+   ( Self .OutUnit )
+  ( Self .IsTestLibrary ) 
    ( Self .OutUnit )
   DEFAULT
    ( Self .Name .Out )

@@ -46,6 +46,12 @@ USES
 WordAlias GarantModel::SysUtils ME_47877EB202FB
 
 USES
+ 540EE231015D.pas.ms.script // Logging
+;
+
+WordAlias GarantModel::Tl3ExceptionsLog ME_540EE24702BC
+
+USES
  47913B47006E.pas.ms.script // l3CoreObjects
 ;
 
@@ -98,6 +104,12 @@ USES
 WordAlias GarantModel::TkwBynameControlPush ME_4F2141AD0203
 
 USES
+ 4DEF302C0007.pas.ms.script // ScriptEngine
+;
+
+WordAlias GarantModel::TtfwScriptEngineEX ME_4DEF306102FF
+
+USES
  4B2A0D6A0077.pas.ms.script // Source TestFrameWork
 ;
 
@@ -107,11 +119,15 @@ WordAlias GarantModel::TAbstractTest ME_4B2F40E70101
 WordAlias GarantModel::TAbstractTest.GetFolder ME_4C937013031D
 WordAlias GarantModel::TAbstractTest.GetModelElementGUID ME_4DAED6F60146
 
+WordAlias GarantModel::TextTestRunner ME_4B2A0D8A03A0
+WordAlias GarantModel::GUITestRunner ME_4B2A0D9401CC
+
 USES
  4B2A112B011A.pas.ms.script // Source TBaseTest
 ;
 
 WordAlias GarantModel::TBaseTest ME_4B2A11BC0255
+WordAlias GarantModel::KTestRunner ME_4B2A6D4303A9
 
 USES
  4982BE090383.pas.ms.script // vcmControllers
@@ -140,3 +156,53 @@ USES
 ;
 
 WordAlias GarantModel::TvcmModule ME_4AB33E14004E
+
+USES
+ 5130776E01BE.pas.ms.script // DUnitKeyWordsSupport
+;
+
+WordAlias GarantModel::TAutoTestsSuite ME_4DC24756009A
+
+USES
+ 4E25969000FF.pas.ms.script // AutoTests
+;
+
+WordAlias GarantModel::TF1AutoTestSuite ME_4DC3FE5D03B4
+
+USES
+ 4CA0BB31027B.pas.ms.script // BridgeToKviaCORBA
+;
+
+WordAlias GarantModel::TKBridge ME_4CA0BB8600CF
+
+USES
+ 4B30FC850092.pas.ms.script // VCM_TFW
+;
+
+WordAlias GarantModel::TvcmInsiderTest ME_4DAECE5D0060
+
+USES
+ 4F635E1901E5.pas.ms.script // l3Listeners
+;
+
+WordAlias GarantModel::Tl3MouseWheelHelper ME_4F7ACCBE02AF
+
+CONST GarantModel::ControlResizeBugFix 'ControlResizeBugFix'
+
+CONST GarantModel::l3IntfUses 'l3IntfUses'
+CONST GarantModel::l3ImplUses 'l3ImplUses'
+
+CONST GarantModel::StdRes 'StdRes'
+
+CONST GarantModel::nsApplication 'nsApplication'
+
+CONST GarantModel::tc5OpenApp 'tc5OpenApp'
+CONST GarantModel::tc6OpenApp 'tc6OpenApp'
+
+CONST GarantModel::tc5OpenAppClasses 'tc5OpenAppClasses'
+CONST GarantModel::tc5PublicInfo 'tc5PublicInfo'
+
+CONST GarantModel::tc6OpenAppClasses 'tc6OpenAppClasses'
+CONST GarantModel::tc6PublicInfo 'tc6PublicInfo'
+
+
