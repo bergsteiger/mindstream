@@ -1443,6 +1443,7 @@ TClass class::TkwEXCEPT
 TClass class::TkwEXIT
 TClass class::TkwFalse
 TClass class::TkwFileEOF
+TClass class::TkwFileOpenAppend
 TClass class::TkwFileOpenRead
 TClass class::TkwFileOpenWrite
 TClass class::TkwFileReadLines
@@ -1760,6 +1761,7 @@ TClass class::TkwSysutilsExtractFilePath
 TClass class::TkwSysutilsFileExists
 TClass class::TkwSysutilsForceDirectories
 TClass class::TkwSysutilsGetCurrentDir
+TClass class::TkwSysutilsLog
 TClass class::TkwSysutilsParamCount
 TClass class::TkwSysutilsParamStr
 TClass class::TkwSysutilsRemoveDir
@@ -2033,6 +2035,7 @@ EZeroDivide
 BOOLEAN false
 IMMEDIATE VOID OPERATOR : FILE
 BOOLEAN File:EOF
+FILE File:OpenAppend
 FILE File:OpenRead
 FILE File:OpenWrite
 VOID File:ReadLines
@@ -2679,6 +2682,7 @@ TkwEXCEPT
 TkwEXIT
 TkwFalse
 TkwFileEOF
+TkwFileOpenAppend
 TkwFileOpenRead
 TkwFileOpenWrite
 TkwFileReadLines
@@ -2996,6 +3000,7 @@ TkwSysutilsExtractFilePath
 TkwSysutilsFileExists
 TkwSysutilsForceDirectories
 TkwSysutilsGetCurrentDir
+TkwSysutilsLog
 TkwSysutilsParamCount
 TkwSysutilsParamStr
 TkwSysutilsRemoveDir
@@ -3406,6 +3411,7 @@ STRING sysutils:ExtractFilePath
 BOOLEAN sysutils:FileExists
 BOOLEAN sysutils:ForceDirectories
 STRING sysutils:GetCurrentDir
+VOID sysutils:Log
 INTEGER sysutils:ParamCount
 STRING sysutils:ParamStr
 BOOLEAN sysutils:RemoveDir
