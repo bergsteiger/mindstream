@@ -1571,6 +1571,8 @@ TClass class::TkwStartsText
 TClass class::TkwStartTimer
 TClass class::TkwStopTimer
 TClass class::TkwStopTimerEx
+TClass class::TkwStopTimerExNoLog
+TClass class::TkwStopTimerNoLog
 TClass class::TkwString
 TClass class::TkwStringChar
 TClass class::TkwStringCodePage
@@ -2322,6 +2324,8 @@ IMMEDIATE VOID OPERATOR : StereotypeStereotypeProducer
 ; // StereotypeStereotypeProducer
 INTEGER StopTimer
 INTEGER StopTimerEx
+INTEGER StopTimerExNoLog
+INTEGER StopTimerNoLog
 IMMEDIATE VOID OPERATOR : string
 IMMEDIATE VOID OPERATOR : STRING
 CHAR string:[]
@@ -2810,6 +2814,8 @@ TkwStartsText
 TkwStartTimer
 TkwStopTimer
 TkwStopTimerEx
+TkwStopTimerExNoLog
+TkwStopTimerNoLog
 TkwString
 TkwStringChar
 TkwStringCodePage
