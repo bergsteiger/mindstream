@@ -12,7 +12,10 @@ USES
  CompileTimeVar.ms.dict
 ;
 
-ARRAY CompileTime-VAR [empty] []
+CONST [nil] nil
+%REMARK 'Пустой итератор.'
+CONST [empty] nil
+//ARRAY CompileTime-VAR [empty] []
 %REMARK 'Пустой итератор'
 
 STRING ENGINE_WORD INTERFACE TYPE ModelElement
@@ -40,6 +43,8 @@ MACRO elem_func
  %SUMMARY 'Функция на элементе модели' ;
  aName |N this.method.addr nil 'ModelElement' do_word_func
 ; // elem_func
+
+WordAlias elem_func_with_side_effects elem_func
 
 BOOLEAN elem_func True
  true >>> Result
@@ -129,6 +134,7 @@ STRING elem_func WordName
  else
  if ( aCacheWhere IsString ) then
  begin
+  //ERROR [ aCacheWhere ':' aKey ]
   //[ aCacheWhere ':' aKey ] strings:Cat Msg
   aLambda DO
  end // aCacheWhere IsString
@@ -265,9 +271,9 @@ ANY elem_func ElemMember
 
 elem_iterator ElemList
   STRING IN aMemberName
- Self aMemberName [empty] DoCache
+ Self aMemberName [nil] /*[empty]*/ DoCache
  (
-  Self aMemberName [empty] .ElemMember 
+  Self aMemberName [nil] /*[empty]*/ .ElemMember 
  )
  >>> Result 
 ; // ElemList

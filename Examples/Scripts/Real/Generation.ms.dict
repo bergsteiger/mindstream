@@ -35,7 +35,7 @@ USES
 CONST cPathSep '\'
 
 FILE CompileTime-VAR g_OutFile nil
-%REMARK 'Текущий файл'
+
 
 STRING CompileTime-VAR g_Indent ''
 %REMARK 'Текущий отступ'
@@ -62,6 +62,21 @@ PROCEDURE OutLnToFile
  \n g_OutFile File:WriteStr
 ; // OutLnToFile
 
+BOOLEAN FUNCTION .IsValueValid
+  IN aValue
+ RULES
+  ( aValue IsInt )
+   true
+  ( aValue IsBool )
+   true
+  ( aValue IsNil )
+   false
+  DEFAULT
+   true
+ ; // RULES
+ >>> Result
+; // .IsValueValid
+
 BOOLEAN FUNCTION .Out?
 
   OUTABLE IN aValue
@@ -80,37 +95,41 @@ BOOLEAN FUNCTION .Out?
 
  PROCEDURE .OutValue
    OUTABLE IN aValue
-  if ( aValue IsArray ) then
-  begin
-   aValue .for> call.me
-  end // aValue IsArray
-  else
-  begin
-   STRING VAR l_Value 
-   aValue ToPrintable >>> l_Value
-   if ( l_WasOut ! ) then
-   begin
-    true >>> l_WasOut
-    IndentStr .OutToFile
-    false >>> l_NeedIndent
-   end // l_WasOut !
-   
-   if ( l_NeedIndent ) then
-   begin
-    false >>> l_NeedIndent
-    IndentStr .OutToFile
-   end // l_NeedIndent
-
-   if ( l_Value \n == ) then
-   begin
-    l_Value .OutToFile
-    true >>> l_NeedIndent
-   end // ( l_Value \n == )
-   else
-   begin
-    l_Value .OutToFile
-   end // ( l_Value \n == )
-  end // aValue IsArray
+  RULES 
+   ( aValue .IsValueValid ! )
+    ()
+   ( aValue IsArray )
+    begin
+     aValue .for> call.me
+    end // aValue IsArray
+   DEFAULT 
+    begin
+     STRING VAR l_Value 
+     aValue ToPrintable >>> l_Value
+     if ( l_WasOut ! ) then
+     begin
+      true >>> l_WasOut
+      IndentStr .OutToFile
+      false >>> l_NeedIndent
+     end // l_WasOut !
+     
+     if ( l_NeedIndent ) then
+     begin
+      false >>> l_NeedIndent
+      IndentStr .OutToFile
+     end // l_NeedIndent
+  
+     if ( l_Value \n == ) then
+     begin
+      l_Value .OutToFile
+      true >>> l_NeedIndent
+     end // ( l_Value \n == )
+     else
+     begin
+      l_Value .OutToFile
+     end // ( l_Value \n == )
+    end // DEFAULT
+  ; // RULES  
  ; // .OutValue
  
  false >>> l_WasOut
@@ -254,11 +273,13 @@ FILE FUNCTION MakePathAndOpenWrite
  aFileName TryOpen: File:OpenWrite >>> Result
 ; // MakePathAndOpenWrite
 
+CONST cRoot 'w:'
+
 PROCEDURE BackupFile
   STRING IN aFileName
   VAR l_To
  aFileName >>> l_To
- l_To 'w:' 'W:' string:Replace >>> l_To
+ l_To cRoot 'W:' string:Replace >>> l_To
  l_To 'W:' 'C:\Temp\GenBackup' string:Replace >>> l_To
  if ( aFileName sysutils:FileExists ) then
  begin
@@ -400,6 +421,8 @@ STRING elem_func TypeName
  Cached:
  (
   RULES
+   ( Self IsNil )
+    ''
    ( Self IsString )
     Self
    ( Self .IsOpenArray )
@@ -571,7 +594,7 @@ STRING elem_func CustomFinalFileName
  if ( Result IsNil ! ) then
  begin
   Result '\' .CutPrefix >>> Result
-  [ 'w:' 
+  [ cRoot 
   // - это потому, что в пути нету диска, а для ExtractFileName он нужен
   Result ] cPathSep strings:CatSep >>> Result
  end // ( Result IsNil ! )
@@ -1212,8 +1235,19 @@ BOOLEAN elem_func IsTarget
  >>> Result
 ; // IsTarget
 
+BOOLEAN elem_func IsAtom
+ Self .IsStereotype st_Atom
+ >>> Result
+; // IsAtom
+
+BOOLEAN elem_func IsTag
+ Self .IsStereotype st_Tag
+ >>> Result
+; // IsTag
+
 BOOLEAN elem_func IsEvdSchemaElement
- Self .IsStereotype st_Atom >>> Result
+ Self .IsAtom
+ >>> Result
 ; // IsEvdSchemaElement
 
 BOOLEAN elem_func IsClassOrMixIn
@@ -1661,7 +1695,13 @@ WordAlias .KeepInStack NOP
 
 ARRAY FUNCTION array:Copy
   IN anArray
- [ anArray .for> .KeepInStack ] >>> Result
+ RULES
+  ( anArray IsNil )
+   [nil]
+  DEFAULT 
+   [ anArray .for> .KeepInStack ] 
+ ; // RULES 
+ >>> Result
 ; // array:Copy
 
 elem_iterator ClassImplements
@@ -1695,6 +1735,9 @@ USES
 ;
 
 ModelElement elem_func WeakRef
+ %SUMMARY 
+  'Возвращает СЛАБУЮ ссылку на элемент.'
+ ;
  RULES
   ( Self IsIntf )
    ( Self pop:WordBox:Boxed )
@@ -1853,16 +1896,28 @@ BOOLEAN elem_func IsStaticMethod
  >>> Result
 ; // IsStaticMethod
 
+WordAlias [[ [
+%REMARK 'Начинает определение константного массива. Пока просто мапируется на неконстантный.'
+WordAlias ]] ]
+%REMARK 'Заканчивает определение константного массива. Пока просто мапируется на неконстантный.'
+
+ARRAY elem_func ElementToArray
+ Cached:
+ (
+  [[ Self .WeakRef ]]
+ ) 
+ >>> Result 
+; // ElementToArray
+
+WordAlias .ToArray .ElementToArray
+
 ARRAY elem_func ElementToArray:
   ^ IN aLambda
- [ Self aLambda DO ]
+ Self aLambda DO .ElementToArray
  >>> Result 
 ; // ElementToArray:
 
-ARRAY elem_func ElementToArray
- Self .ElementToArray: .KeepInStack
- >>> Result 
-; // ElementToArray
+WordAlias .ToArray: .ElementToArray:
 
 elem_iterator InterfaceOwnOperations
  Self .Operations 
@@ -2305,80 +2360,83 @@ BOOLEAN elem_func IsFactory
 ; // IsFactory
 
 ARRAY elem_func MethodParameters
- RULES
-  ( Self .IsVCMOperationPrim )
-   RULES
-    ( Self .IsTester )
-     ( [ GarantModel::IvcmTestParamsPrim .ParamsParam ] )
-    ( Self .IsExecutor )
-     RULES
-      ( Self .IsInternalOperation )
-       ( Self .Parameters )
-      DEFAULT
-       ( [ GarantModel::IvcmTestExecutePrim .ParamsParam ] )
-     ; // RULES  
-    ( Self .IsGetState )
-     ( [ 'State' GarantModel::TvcmOperationStateIndex MakeInOutParam ] )
-    ( Self .IsInternalOperation ) 
-     ( [ GarantModel::IvcmTestExecutePrim .ParamsParam ] )
-    DEFAULT
+ Cached:
+ (
+  RULES
+   ( Self .IsVCMOperationPrim )
+    RULES
+     ( Self .IsTester )
+      ( [ GarantModel::IvcmTestParamsPrim .ParamsParam ] )
+     ( Self .IsExecutor )
+      RULES
+       ( Self .IsInternalOperation )
+        ( Self .Parameters )
+       DEFAULT
+        ( [ GarantModel::IvcmTestExecutePrim .ParamsParam ] )
+      ; // RULES  
+     ( Self .IsGetState )
+      ( [ 'State' GarantModel::TvcmOperationStateIndex MakeInOutParam ] )
+     ( Self .IsInternalOperation ) 
+      ( [ GarantModel::IvcmTestExecutePrim .ParamsParam ] )
+     DEFAULT
+      ( Self .Parameters )
+    ; // RULES 
+   ( Self .Parent .IsTestClass )
+    (
+     [ Self .Parent .EffectiveType .SelfParam ]
+     .join>
      ( Self .Parameters )
-   ; // RULES 
-  ( Self .Parent .IsTestClass )
-   (
-    [ Self .Parent .EffectiveType .SelfParam ]
-    .join>
-    ( Self .Parameters )
-   )
-  ( Self .IsIterator )
-   (
+    )
+   ( Self .IsIterator )
+    (
+     RULES
+      ( Self .MainAncestor IsNil ! )
+       ( Self .MainAncestor call.me )
+      DEFAULT
+       (
+        [ Self .ActionParam ]
+        .join> (
+         Self .Attributes
+         .filter> .IsInParam
+        ) // .join>
+       ) // DEFAULT
+     ; // RULES
+    ) 
+   ( Self .IsFactoryMethod )
     RULES
      ( Self .MainAncestor IsNil ! )
       ( Self .MainAncestor call.me )
      DEFAULT
-      (
-       [ Self .ActionParam ]
-       .join> (
-        Self .Attributes
-        .filter> .IsInParam
-       ) // .join>
-      ) // DEFAULT
-    ; // RULES
-   ) 
-  ( Self .IsFactoryMethod )
-   RULES
-    ( Self .MainAncestor IsNil ! )
-     ( Self .MainAncestor call.me )
-    DEFAULT
-     ( Self .FirstOperation .Parameters )
-   ; // RULES  
-  ( Self .IsMethod )
-   RULES
-    ( Self .ImplementsIterator )
-     ( Self .MainImplements call.me )
-    ( Self .MainAncestor IsNil ! )
-     RULES 
-      ( Self .FirstOperation IsNil ! )
-       RULES
-        (
-         ( Self .FirstOperation .IsSummoned )
-         AND ( Self .Abstraction at_regular == )
-        ) 
-         ( Self .MainAncestor call.me ) 
-        DEFAULT
-         ( Self .FirstOperation .Parameters )
-       ; // RULES 
-      DEFAULT
-       ( Self .MainAncestor call.me )
-     ; // RULES 
-    DEFAULT
-     ( Self .FirstOperation .Parameters )
-   ; // ( Self .IsMethod )
-  ( Self .IsFunction )
-   ( Self .FirstOperation .Parameters )
-  DEFAULT 
-   ( Self .Parameters )
- ; // RULES
+      ( Self .FirstOperation .Parameters )
+    ; // RULES  
+   ( Self .IsMethod )
+    RULES
+     ( Self .ImplementsIterator )
+      ( Self .MainImplements call.me )
+     ( Self .MainAncestor IsNil ! )
+      RULES 
+       ( Self .FirstOperation IsNil ! )
+        RULES
+         (
+          ( Self .FirstOperation .IsSummoned )
+          AND ( Self .Abstraction at_regular == )
+         ) 
+          ( Self .MainAncestor call.me ) 
+         DEFAULT
+          ( Self .FirstOperation .Parameters )
+        ; // RULES 
+       DEFAULT
+        ( Self .MainAncestor call.me )
+      ; // RULES 
+     DEFAULT
+      ( Self .FirstOperation .Parameters )
+    ; // ( Self .IsMethod )
+   ( Self .IsFunction )
+    ( Self .FirstOperation .Parameters )
+   DEFAULT 
+    ( Self .Parameters )
+  ; // RULES
+ )
  >>> Result
 ; // MethodParameters
 
@@ -3325,21 +3383,6 @@ elem_proc IfDefElse:
   ^ IN aElseLambda
  Self aElseLambda .IfDefPrim: .Out ( aLambda DO ) 
 ; // IfDefElse:
-
-BOOLEAN FUNCTION .IsValueValid
-  IN aValue
- RULES
-  ( aValue IsInt )
-   true
-  ( aValue IsBool )
-   true
-  ( aValue IsNil )
-   false
-  DEFAULT
-   true
- ; // RULES
- >>> Result
-; // .IsValueValid
 
 BOOLEAN elem_func IsConstructor
   RULES
@@ -5919,9 +5962,6 @@ elem_iterator ProjectUses
  PROCEDURE AccumulateUses
    ARRAY IN aUses
   aUses 
-  //.map> .UnitProducer 
-  //.filterNil>
-  //.filterMixIns>
   .for> (
     IN anItem
    if ( l_InUses .filter> ( anItem ?== ) .CountIt 0 == ) then 
@@ -7430,8 +7470,40 @@ elem_proc OutClassInner
   
 ; // OutClassInner
 
-STRING elem_func MainParentName
-// Возвращает имя родительского класса, который не является примесью.
+elem_iterator InheritsNotMixIn
+ Cached:
+ (
+  Self .Inherits .filterMixIns>
+ )
+ >>> Result
+; // InheritsNotMixIn
+
+INTEGER elem_func InheritsNotMixInCount
+ Cached:
+ (
+  Self .InheritsNotMixIn .CountIt
+ )
+ >>> Result
+; // InheritsNotMixInCount
+
+ModelElement elem_func TagClass
+ %SUMMARY 
+  'Класс, реализующий тег.' 
+  'Возможно будет расширяться, когда будем делать генерацию EVD-схемы.'
+  'И станет полноценным классом с реализуемыми и перекрытыми методами.'
+ ;
+ Cached:
+ (
+  Self .TypeName 'Class' Cat nil MakeClass
+ ) 
+ >>> Result
+; // TagClass
+        
+ModelElement elem_func MainAncestorThatNotMixIn
+ %SUMMARY 
+  'Возвращает имя родительский класс, который не является примесью.' 
+  'Или умолчательного предка'.
+ ;
 /*
 	[{}{\
 	%S%f_pas_DefaultAncestor()\
@@ -7441,23 +7513,32 @@ STRING elem_func MainParentName
 	>\
         ]
 */
- [
-  Self .Inherits .filterMixIns> .for> (
-    IN aG
-   aG .TypeName
-   aG .IsStereotype st_Tag ? 'Class'
-  )
- ] strings:Cat
+ Cached:
+ (
+  RULES
+   ( Self .InheritsNotMixInCount 0 == )
+    ( Self .DefaultAncestor )
+   ( Self .InheritsNotMixIn .filter> .IsTag .CountIt 0 == ) 
+    ( Self .InheritsNotMixIn .FirstElement )
+   DEFAULT
+    begin
+     Self .InheritsNotMixIn 
+     .filter> .IsTag 
+     .map> .TagClass
+     .FirstElement
+    end // DEFAULT
+  ; // RULES
+ )
  >>> Result
- if ( Result IsNil ) then
- begin
-  Self .DefaultAncestor .TypeName >>> Result
- end // ( Result IsNil )
-; // MainParentName        
+; // MainAncestorThatNotMixIn
 
-STRING elem_func MixInParentName
-// Имя родительского типа примеси.
- Self .TypeName 'Parent_' Cat >>> Result
+ModelElement elem_func MixInParentName
+ %SUMMARY 'Псевдо класс для указания родительсого типа примеси.' ;
+ Cached:
+ (
+  Self .TypeName 'Parent_' Cat nil MakeClass
+ ) 
+ >>> Result
 ; // MixInParentName
         
 STRING elem_func PasPathOnly
@@ -7487,7 +7568,7 @@ STRING elem_func PathOnly
    if ( Result IsNil ! ) then
    begin
     Result '\' .CutPrefix >>> Result
-    [ 'w:' 
+    [ cRoot 
     // - это потому, что в пути нету диска, а для ExtractFileName он нужен
     Result ] cPathSep strings:CatSep >>> Result
     Result cPathSep Cat >>> Result
@@ -7506,7 +7587,7 @@ BOOLEAN elem_func HasNonMixInAncestor
  Cached:
  (
   RULES
-   ( Self .Inherits .filterMixIns> .CountIt > 0 )
+   ( Self .InheritsNotMixInCount > 0 )
     true
    ( Self .Inherits .filter> call.me .CountIt > 0 )
     true
@@ -7517,17 +7598,17 @@ BOOLEAN elem_func HasNonMixInAncestor
  >>> Result
 ; // HasNonMixInAncestor
 
-ModelElement elem_func CalcParentAndInclude
+ModelElement elem_func_with_side_effects CalcParentAndInclude
  RULES
   ( Self .IsMixIn )
    RULES
-    ( Self .Inherits .filterMixIns> .CountIt 0 != )
+    ( Self .InheritsNotMixInCount 0 != )
      ( Self .MainClassAncestor )
     DEFAULT
      ( Self .MixInParentName )
    ; // RULES  
   DEFAULT
-   ( Self .MainParentName )
+   ( Self .MainAncestorThatNotMixIn )
  ; // RULES 
  >>> Result
  
@@ -7535,7 +7616,7 @@ ModelElement elem_func CalcParentAndInclude
    IN aG
   if ( Result IsNil ! ) then
   begin 
-   [ aG .MixInParentName ' = ' Result .TypeName ';' ] .Out
+   [ aG .MixInParentName .TypeName ' = ' Result .TypeName ';' ] .Out
   end // ( Result IsNil ! )
  ; // RefG
  
@@ -7544,7 +7625,8 @@ ModelElement elem_func CalcParentAndInclude
  
  : DoG
    IN aG
-  aG .TypeName >>> Result
+  aG >>> Result
+  //aG .TypeName >>> Result
   
   if ( l_WasProlog ! ) then
   begin
@@ -7686,7 +7768,7 @@ elem_proc OutClass
   VAR l_WasComma
   false >>> l_WasComma
   
-   [ l_Parent ]
+  l_Parent .ElementToArray
   .join> ( 
    Self .ClassImplements 
    .filter> (
@@ -7704,10 +7786,17 @@ elem_proc OutClass
   ) // .join>
   .With()> (
     IN anItem
-   anItem .IfDefBraceLn:
-   ( 
-    anItem .TypeName .WithComma: l_WasComma .KeepInStack
-   ) // anItem .IfDefBraceLn:
+   RULES 
+    ( anItem .IsMixIn )
+     ( anItem .TypeName .WithComma: l_WasComma .KeepInStack )
+    DEFAULT
+    begin
+     anItem .IfDefBraceLn:
+     ( 
+      anItem .TypeName .WithComma: l_WasComma .KeepInStack
+     ) // anItem .IfDefBraceLn:
+    end // DEFAULT
+   ; // RULES
   ) // .With()>
  ] .Out
  
@@ -9473,7 +9562,7 @@ elem_iterator IniOperations
    ( .join> [ Self .RegisterTagTableMethod ] )
   ( 
    ( Self .IsServiceImplementation ) 
-   AND ( Self .UseNewGen )
+   //AND ( Self .UseNewGen )
    AND ( l_IniOperations 'bind' .HasModelElementWithName ! )
   ) 
    ( .join> [ Self .RegisterServiceImplementationMethod ] )
@@ -9840,6 +9929,21 @@ STRING elem_func ProjectUnitPath
     ; // RULES
    ( Self .Name GarantModel::StdRes .Name == )
     ( GarantModel::StdRes .Name '.pas' Cat )
+   ( Self .InTie )
+    ( 
+     [ cRoot Self .GetUP 'pas:Path' ] cPathSep strings:CatSep 
+    )
+    // - тут надо брать путь для адаптера
+/*(*
+	[{%S#f_InTie()=true}{\
+	%f_set_var(FILE_PATH,"%So")\
+	}\
+	%f_with_gen_id(pas,%f_set_var(FILE_PATH,"%So"))\
+	]\
+*)*/    
+   
+   ( Self .UnitName 'GblAdapter' == )
+    ''  
    DEFAULT
     ( Self .FinalFileName )
   ; // RULES
@@ -10475,10 +10579,13 @@ elem_proc GenerateWithChildren
      TRY
       ( Self .GenerateWordToFileWith: .CurrentGenerator )
      FINALLY
-      l_Name StopTimer >>> l_Time
+      l_Name StopTimerNoLog >>> l_Time
      END // TRY..FINALLY 
      l_Time 1000 DIV >>> l_Time
-     //Log: [ l_Name ' generation end ' l_Time ]
+     if ( l_Time > 3 ) then
+     begin
+      Log: [ l_Name ' generation end ' l_Time ' seconds' ]
+     end // ( l_Time > 3 )
     end // ( Self .NeedOwnFile )
     else
      ( Self .DeleteWordFile ) 
