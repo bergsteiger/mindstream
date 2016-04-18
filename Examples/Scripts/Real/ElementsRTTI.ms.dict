@@ -47,6 +47,7 @@ MACRO elem_func
 WordAlias elem_func_with_side_effects elem_func
 
 BOOLEAN elem_func True
+ %SUMMARY '‘унктор определ€ющий, что все значени€ подход€т.' ;
  true >>> Result
 ; // True
 
@@ -158,7 +159,7 @@ STRING elem_func WordName
   else
   begin
    aCacheWhere >>> l_CacheWhere
-  end
+  end // ( aCacheWhere IsIntf )
   
   'cache:' aKey Cat >>> aKey
   VAR l_FieldVar
@@ -178,7 +179,7 @@ STRING elem_func WordName
     if ( DUP IsIntf ! ) then
     begin
      false >>> l_IsIntf
-    end // l_IsIntf
+    end // ( DUP IsIntf ! )
    end // l_IsIntf
    
    if ( l_IsIntf ! ) then
@@ -193,7 +194,7 @@ STRING elem_func WordName
   else 
   begin
    l_FieldVar DO
-  end
+  end // ( l_FieldVar NotValid )
  end // aCacheWhere IsNil
 ; // DoCache
 
@@ -520,7 +521,7 @@ STRING elem_func UIDEx
       ( l_Name IsNil )
        ( Self .WordName )
       DEFAULT
-       ( l_Name '_' Self .WordName Cat )
+       ( l_Name '_' Self .WordName Cat Cat )
      ; // RULES
     )
    DEFAULT
@@ -530,18 +531,34 @@ STRING elem_func UIDEx
  >>> Result  
 ; // UIDEx 
 
+BOOLEAN FUNCTION .IsValueValid
+  IN aValue
+ RULES
+  ( aValue IsInt )
+   true
+  ( aValue IsBool )
+   true
+  ( aValue IsNil )
+   false
+  DEFAULT
+   true
+ ; // RULES
+ >>> Result
+; // .IsValueValid
+
 STRING FUNCTION ValueToKey
   ANY IN aValue
  RULES
-  ( aValue IsNil )
-   ''
+  //( aValue .IsValueValid ! )
+  // ''
   ( aValue IsString )
    aValue
   ( aValue IsArray )
    ( 
     aValue 
     .map> call.me
-    strings:Cat
+    '|'
+    strings:CatSep
    )
   ( aValue IsBool )
    ( aValue ToPrintable )

@@ -35,7 +35,7 @@ USES
 CONST cPathSep '\'
 
 FILE CompileTime-VAR g_OutFile nil
-
+%REMARK 'Текущий файл'
 
 STRING CompileTime-VAR g_Indent ''
 %REMARK 'Текущий отступ'
@@ -53,6 +53,7 @@ CONST cQuote ''''
 CONST cOpenComment '{'
 CONST cCloseComment '}'
 CONST cSpace ' '
+CONST cUnderline '_'
 CONST cEmptyStr ''
 
 BOOLEAN CompileTime-VAR g_EnableAutoEOL true
@@ -61,21 +62,6 @@ BOOLEAN CompileTime-VAR g_NeedOutLn false
 PROCEDURE OutLnToFile
  \n g_OutFile File:WriteStr
 ; // OutLnToFile
-
-BOOLEAN FUNCTION .IsValueValid
-  IN aValue
- RULES
-  ( aValue IsInt )
-   true
-  ( aValue IsBool )
-   true
-  ( aValue IsNil )
-   false
-  DEFAULT
-   true
- ; // RULES
- >>> Result
-; // .IsValueValid
 
 BOOLEAN FUNCTION .Out?
 
@@ -208,9 +194,10 @@ TtfwWord VAR g_CurrentGenerator
 ; // WithGen:
 
 WordAlias .All .True
+%REMARK 'Функтор определяющий, что все значения подходят.'
 
-WordAlias Cached: CacheMethod
 WordAlias GenCached: CacheMethod
+%REMARK 'Кеширует значение учитывая текущий генератор. Пока определено как Cached:'
 
 : .?
   ^ IN aWord
@@ -961,8 +948,14 @@ BOOLEAN elem_func IsInterface
 ; // IsInterface
 
 BOOLEAN elem_func IsPureMixIn
- Self .IsStereotype st_PureMixIn >>> Result
+ Self .IsStereotype st_PureMixIn 
+ >>> Result
 ; // IsPureMixIn
+
+BOOLEAN elem_func IsTestCaseMixIn
+ Self .IsStereotype st_TestCaseMixIn
+ >>> Result
+; // IsTestCaseMixIn
 
 BOOLEAN elem_func IsMixIn
  Cached:
@@ -970,7 +963,7 @@ BOOLEAN elem_func IsMixIn
   RULES
    ( Self .IsStereotype st_Impurity )
     true
-   ( Self .IsStereotype st_TestCaseMixIn )
+   ( Self .IsTestCaseMixIn )
     true
    ( Self .IsVCMCustomForm )
     RULES
@@ -1431,6 +1424,8 @@ STRING FUNCTION .CutT
  aName 'T' .CutPrefix >>> Result
 ; // .CutT
 
+CONST cProxy '_Proxy'
+
 STRING elem_func UnitNamePrim
  GenCached:
  (
@@ -1442,7 +1437,7 @@ STRING elem_func UnitNamePrim
    ( Self IsNil )
      cEmptyStr
    ( Self .IsElementProxy )
-    ( Self .Name '_Proxy' Cat )
+    ( Self .Name cProxy Cat )
    ( Self .IsTagTable )
     ( Self .Name '_Schema' Cat )
    ( Self .IsScriptKeyword )
@@ -1766,12 +1761,14 @@ INTERFACE elem_func DecorateMethod:
 ; // DecorateMethod:
 
 INTERFACE elem_func OverrideMethod
-  ModelElement IN anOriginalMethod
- anOriginalMethod .DecorateMethod: 
+ Cached:
  (
-   IN aMethod
-  aMethod -> OpKind := opkind_Overridden
- ) // anOriginalMethod .DecorateMethod:
+  Self .DecorateMethod: 
+  (
+    IN aMethod
+   aMethod -> OpKind := opkind_Overridden
+  ) // Self .DecorateMethod:
+ )
  >>> Result
 ; // OverrideMethod
 
@@ -1822,7 +1819,7 @@ INTERFACE FUNCTION MakeInOutParam
   aMade -> Stereotype := st_inout
  ) 
  >>> Result
-; // InstanceMethod
+; // MakeInOutParam
 
 INTERFACE FUNCTION MakeClass:
   STRING IN aName
@@ -1902,10 +1899,15 @@ WordAlias ]] ]
 %REMARK 'Заканчивает определение константного массива. Пока просто мапируется на неконстантный.'
 
 ARRAY elem_func ElementToArray
- Cached:
- (
-  [[ Self .WeakRef ]]
- ) 
+ RULES
+  DEFAULT
+   begin
+    Cached:
+    (
+     [[ Self .WeakRef ]]
+    ) 
+   end // DEFAULT
+ ; // RULES
  >>> Result 
 ; // ElementToArray
 
@@ -1919,10 +1921,23 @@ ARRAY elem_func ElementToArray:
 
 WordAlias .ToArray: .ElementToArray:
 
+ARRAY FUNCTION ToArray:
+  ^ IN Self
+ VAR l_Value 
+ Self DO >>> l_Value 
+ RULES
+  ( l_Value IsIntf )
+   [[ l_Value ]]
+  DEFAULT
+   ( l_Value .ToArray )
+ ; // RULES  
+ >>> Result 
+; // ToArray:
+
 elem_iterator InterfaceOwnOperations
  Self .Operations 
  .filter> ( .IsStaticMethod ! )
- .joinWithLambded> ( Self .InterfaceForClassImplements ) .ElementToArray: .CastMethod
+ .joinWithLambded> ( Self .InterfaceForClassImplements ) .ToArray: .CastMethod
  >>> Result
 ; // InterfaceOwnOperations
 
@@ -2142,6 +2157,8 @@ STRING FUNCTION RemoveDuplicatedIfDef
 
 ModelElement CompileTime-VAR g_Implementor nil
 
+FORWARD .MainAncestorThatNotMixIn
+
 STRING elem_func IfDefStr
  Cached:
  (
@@ -2165,23 +2182,6 @@ STRING elem_func IfDefStr
     end // ( Result IsNil )
    end // ( l_ParentIfDefStr IsNil ! )
   end // ( l_Parent IsNil ! )
-/*  g_Implementor >>> l_Parent
-  if ( l_Parent IsNil ! ) then
-  begin
-   VAR l_ParentIfDefStr
-   l_Parent call.me >>> l_ParentIfDefStr
-   if ( l_ParentIfDefStr IsNil ! ) then
-   begin
-    if ( Result IsNil ) then
-    begin
-     l_ParentIfDefStr >>> Result
-    end // ( Result IsNil )
-    else
-    begin
-     l_ParentIfDefStr ',' Result Cat Cat >>> Result
-    end // ( Result IsNil )
-   end // ( l_ParentIfDefStr IsNil ! )
-  end // ( l_Parent IsNil ! )*/
   Result RemoveDuplicatedIfDef
  )
  >>> Result 
@@ -2210,23 +2210,6 @@ STRING elem_func IfNDefStr
     end // ( Result IsNil )
    end // ( l_ParentIfDefStr IsNil ! )
   end // ( l_Parent IsNil ! )
-/*  g_Implementor >>> l_Parent
-  if ( l_Parent IsNil ! ) then
-  begin
-   VAR l_ParentIfDefStr
-   l_Parent call.me >>> l_ParentIfDefStr
-   if ( l_ParentIfDefStr IsNil ! ) then
-   begin
-    if ( Result IsNil ) then
-    begin
-     l_ParentIfDefStr >>> Result
-    end // ( Result IsNil )
-    else
-    begin
-     l_ParentIfDefStr ',' Result Cat Cat >>> Result
-    end // ( Result IsNil )
-   end // ( l_ParentIfDefStr IsNil ! )
-  end // ( l_Parent IsNil ! )*/
   Result RemoveDuplicatedIfDef
  )
  >>> Result 
@@ -2339,8 +2322,17 @@ INTERFACE elem_func ParamsParam
  Cached:
  (
   'aParams' Self MakeParam
- ) >>> Result
+ ) 
+ >>> Result
 ; // ParamsParam
+
+INTERFACE elem_func StateParam
+ Cached:
+ (
+  'State' Self MakeInOutParam
+ ) 
+ >>> Result
+; // StateParam
 
 BOOLEAN elem_func IsFactoryMethod
  Self .IsStereotype st_Factory
@@ -2366,18 +2358,18 @@ ARRAY elem_func MethodParameters
    ( Self .IsVCMOperationPrim )
     RULES
      ( Self .IsTester )
-      ( [ GarantModel::IvcmTestParamsPrim .ParamsParam ] )
+      ( GarantModel::IvcmTestParamsPrim .ParamsParam .ToArray )
      ( Self .IsExecutor )
       RULES
        ( Self .IsInternalOperation )
         ( Self .Parameters )
        DEFAULT
-        ( [ GarantModel::IvcmTestExecutePrim .ParamsParam ] )
+        ( GarantModel::IvcmTestExecutePrim .ParamsParam .ToArray )
       ; // RULES  
      ( Self .IsGetState )
-      ( [ 'State' GarantModel::TvcmOperationStateIndex MakeInOutParam ] )
+      ( GarantModel::TvcmOperationStateIndex .StateParam .ToArray )
      ( Self .IsInternalOperation ) 
-      ( [ GarantModel::IvcmTestExecutePrim .ParamsParam ] )
+      ( GarantModel::IvcmTestExecutePrim .ParamsParam .ToArray )
      DEFAULT
       ( Self .Parameters )
     ; // RULES 
@@ -2932,7 +2924,7 @@ elem_iterator Fields
       IN anItem 
      l_Fields .HasSomeOf: ( anItem .FieldName .HasName ) !
     )
-   ) .ElementToArray
+   ) .ToArray
   end // ( Self .IsClassOrMixIn )
   else
    l_Fields
@@ -2941,7 +2933,7 @@ elem_iterator Fields
   begin
    if ( Self .IsAutoHelper ) then
    begin
-    .joinWithLambded> ( Self .Implements ) .ElementToArray: .InterfaceLinkField
+    .joinWithLambded> ( Self .Implements ) .ToArray: .InterfaceLinkField
    end // ( Self .IsAutoHelper )
   end // ( Self .IsStaticObject )
  )
@@ -3005,7 +2997,7 @@ elem_iterator GlobalVars
     .filter> ( .IsStereotype st_static::Attribute )
     if ( Self .IsSingleton ) then
     begin
-     .join> [ Self .InstanceField ]
+     .join> ToArray: ( Self .InstanceField )
     end // ( Self .IsSingleton )
     .join> ( Self .InnerGlobalVars )
    )
@@ -3499,7 +3491,7 @@ elem_proc MethodUserCode
     if ( l_Implementor IsNil ! ) then
     begin
      [ 
-      '_' 
+      cUnderline 
       if ( Self .IsLocalMethod ! ) then
       begin
        l_Implementor .UID 
@@ -3598,7 +3590,7 @@ elem_proc MethodUserCode
      else
      begin
       l_Implementor .Parent .GetUP 'extprop:pas:ElementPrefixBase'
-      l_Implementor .Name '_' ':' string:Replace
+      l_Implementor .Name cUnderline ':' string:Replace
      end // ( l_NameForScript .IsValueValid ) 
       
      cQuote 
@@ -3647,7 +3639,7 @@ elem_proc MethodUserCode
         ( aField .Target .IsInterface )
          ( l_FieldName ' := nil' )
         ( aField .Target .IsString )
-         ( l_FieldName ' := ''''' )
+         ( l_FieldName ' := ' cQuote cQuote )
         ( aField .Target .IsOpenArray )
          ( l_FieldName ' := nil' )
         DEFAULT
@@ -4340,7 +4332,7 @@ STRING FUNCTION .FromTie
  '' >>> Result
  if ( aValue IsNil ! ) then
  begin
-  aValue '_' string:Split:for> ( 
+  aValue cUnderline string:Split:for> ( 
     IN aSubstr
    aSubstr IsNil ?FAIL 'aSubstr IsNil' 
    [ 
@@ -4355,18 +4347,18 @@ STRING FUNCTION .FromTie
     l_Tail IsNil ?FAIL 'l_Tail IsNil'
     l_Tail  
    ] strings:Cat >>> Result 
-  ) // aValue '_' string:Split:for>
+  ) // aValue cUnderline string:Split:for>
  end // ( aValue IsNil ! )
 ; // .FromTie
  
 STRING FUNCTION .ToBorland
   STRING IN aValue
  '' >>> Result
- aValue '_' string:Split:for> ( 
+ aValue cUnderline string:Split:for> ( 
    IN aSubstr
 /*{  if ( aSubstr IsNil ) then 
   begin
-   Result '_' Cat >>> Result
+   Result cUnderline Cat >>> Result
   end 
   else}*/
   begin
@@ -4378,7 +4370,7 @@ STRING FUNCTION .ToBorland
 STRING elem_func MethodName
 
  STRING elem_func FineName
-  Self .Name '__' '_' string:Replace
+  Self .Name '__' cUnderline string:Replace
   >>> Result
  ; // FineName
 
@@ -4392,13 +4384,13 @@ STRING elem_func MethodName
    ( Self .IsVCMOperationPrim )
     RULES
      ( Self .IsTester )
-      ( [ Self .Parent .Name '_' Self .Name '_Test' ] strings:Cat )
+      ( [ Self .Parent .Name cUnderline Self .Name '_Test' ] strings:Cat )
      ( Self .IsExecutor )
-      ( [ Self .Parent .Name '_' Self .Name '_Execute' ] strings:Cat )
+      ( [ Self .Parent .Name cUnderline Self .Name '_Execute' ] strings:Cat )
      ( Self .IsGetState )
-      ( [ Self .Parent .Name '_' Self .Name '_GetState' ] strings:Cat )
+      ( [ Self .Parent .Name cUnderline Self .Name '_GetState' ] strings:Cat )
      DEFAULT
-      ( [ Self .Parent .Name '_' Self .Name ] strings:Cat )
+      ( [ Self .Parent .Name cUnderline Self .Name ] strings:Cat )
     ; // RULES 
    ( Self .IsIterator )
     (
@@ -4413,9 +4405,9 @@ STRING elem_func MethodName
     ) // ( Self .IsIterator )
    ( Self .IsStaticConstructor )
     if ( Self .Parent .IsConstructorsHolder ) then
-     ( [ Self .Parent .MainAncestor .TypeName '_' Self .Name ] strings:Cat )
+     ( [ Self .Parent .MainAncestor .TypeName cUnderline Self .Name ] strings:Cat )
     else
-     ( [ Self .Parent .TypeName '_' Self .Name ] strings:Cat )
+     ( [ Self .Parent .TypeName cUnderline Self .Name ] strings:Cat )
    ( Self .UPisTrue 'extprop:isGlobal' )
     ( Self .Name .ToBorland )
     
@@ -4585,7 +4577,7 @@ elem_proc UserCode:
            OR ( Self .Parameters .CountIt > 0 )
           ) then
        begin
-        'with (aParams.Data As I' Self .Parent .Name '_' Self .Name '_Params) do' \n ' '
+        'with (aParams.Data As I' Self .Parent .Name cUnderline Self .Name '_Params) do' \n ' '
        end // ( Self .Target IsNil ! ) ..
        if ( Self .Target IsNil ! ) then
        begin
@@ -5132,7 +5124,7 @@ elem_iterator ChildrenEx
   begin
    if ( Self .UPisTrue "is friend" ) then
    begin
-    .join> [ Self .MainAncestor .FriendClass ]
+    .join> ToArray: ( Self .MainAncestor .FriendClass )
    end // ( Self .UPisTrue "is friend" )
   end // ( Self .IsTestClass )
  )
@@ -5197,7 +5189,7 @@ elem_iterator ConstantsEx
           ( l_OtherEnum .Attributes .CountIt > 0 )
            begin
             VAR l_ConstantsName
-            [ Self .Name '_' l_OtherEnum .Name '_' 'Constants' ] strings:Cat >>> l_ConstantsName
+            [ Self .Name cUnderline l_OtherEnum .Name cUnderline 'Constants' ] strings:Cat >>> l_ConstantsName
             RULES
              ( 
               Self .Parent call.me 
@@ -5275,13 +5267,13 @@ ARRAY FUNCTION .OperationsNeededElements
  .joinWithLambded> anArray ( .AttributesAndOperations call.me )
  .joinWithLambded> ( anArray .filter> .IsFactoryMethod ) ( .MethodParameters .mapToTargetAndValueType> )
  .joinWithLambded> ( anArray .filter> .IsIterator ) ( .MethodParameters .mapToTargetAndValueType> )
- .joinWithLambded> ( anArray .filter> .IsFactoryMethod ) ( .ElementToArray: .MainImplementsInterface )
+ .joinWithLambded> ( anArray .filter> .IsFactoryMethod ) ( .ToArray: .MainImplementsInterface )
  .joinWithLambded> ( anArray .filter> .IsMethod .map> .MainAncestor .filterNil> ) ( .MethodParameters .mapToTargetAndValueType> )
  .joinWithLambded> ( anArray .filter> .IsMethod 
                      .map> .MainAncestor 
                      .filterNil> 
                      .map> .MethodType 
-                     .filterNil> ) ( .ElementToArray )
+                     .filterNil> ) ( .ToArray )
  .joinWithLambded> anArray .CanRaise
  .joinWithLambded> anArray .CanRaiseInSet 
  >>> Result 
@@ -5353,7 +5345,7 @@ elem_iterator OverriddenEx
    begin
     if ( l_Overridden GarantModel::l3UnknownPrim.ClearFields .HasModelElement ! ) then
     begin     
-     .join> [ Self GarantModel::l3UnknownPrim.ClearFields .OverrideMethod ]
+     .join> ToArray: ( GarantModel::l3UnknownPrim.ClearFields .OverrideMethod )
     end // ( l_Overridden GarantModel::l3UnknownPrim.ClearFields .HasModelElement )
    end // ( Self GarantModel::l3UnknownPrim .InheritsFromOrSomeAncestorImplements )
   end // ( Self .HasManagedAttributes )
@@ -5368,7 +5360,7 @@ elem_iterator OverriddenEx
      begin
       if ( l_Overridden GarantModel::TtfwRegisterableWord.GetWordNameForRegister .HasModelElement ! ) then
       begin     
-       .join> [ Self GarantModel::TtfwRegisterableWord.GetWordNameForRegister .OverrideMethod ]
+       .join> ToArray: ( GarantModel::TtfwRegisterableWord.GetWordNameForRegister .OverrideMethod )
       end // ( l_Overridden GarantModel::TtfwRegisterableWord.GetWordNameForRegister .HasModelElement )
      end // ( Self GarantModel::TtfwRegisterableWord .InheritsFromOrSomeAncestorImplements ) 
     end // ( Self .Abstraction at_abstract != )
@@ -5381,7 +5373,7 @@ elem_iterator OverriddenEx
    begin
     if ( l_Overridden GarantModel::TtfwWord.IsImmediate .HasModelElement ! ) then
     begin     
-     .join> [ Self GarantModel::TtfwWord.IsImmediate .OverrideMethod ]
+     .join> ToArray: ( GarantModel::TtfwWord.IsImmediate .OverrideMethod )
     end // ( l_Overridden GarantModel::TtfwWord.IsImmediate .HasModelElement )
    end // ( Self GarantModel::TtfwWord .InheritsFromOrSomeAncestorImplements ) 
   end // ( Self .GetUP "is immediate" IsBool )
@@ -5394,12 +5386,12 @@ elem_iterator OverriddenEx
   begin
    if ( l_Overridden GarantModel::TAbstractTest.GetFolder .HasModelElement ! ) then
    begin     
-    .join> [ Self GarantModel::TAbstractTest.GetFolder .OverrideMethod ]
+    .join> ToArray: ( GarantModel::TAbstractTest.GetFolder .OverrideMethod )
    end // ( l_Overridden GarantModel::TAbstractTest.GetFolder .HasModelElement )
    
    if ( l_Overridden GarantModel::TAbstractTest.GetModelElementGUID .HasModelElement ! ) then
    begin     
-    .join> [ Self GarantModel::TAbstractTest.GetModelElementGUID .OverrideMethod ]
+    .join> ToArray: ( GarantModel::TAbstractTest.GetModelElementGUID .OverrideMethod )
    end // ( l_Overridden GarantModel::TAbstractTest.GetModelElementGUID .HasModelElement )
   end // ( Self GarantModel::TBaseTest .InheritsFromOrSomeAncestorImplements )
  end // ( Self .IsTestCase )
@@ -5517,7 +5509,7 @@ BOOLEAN elem_func IsVCMControls
 elem_iterator IntfUses
  Cached:
  (
-  [ GarantModel::l3IntfUses ]
+  GarantModel::l3IntfUses .ToArray
   
   if ( Self .IsInterfaces ) then
   begin
@@ -5529,12 +5521,13 @@ elem_iterator IntfUses
   
   if ( Self .IsControllerInterfaces ) then
   begin
-   .join> [ GarantModel::vcmInterfaces GarantModel::vcmControllers ]
+   .join> ToArray: GarantModel::vcmInterfaces 
+   .join> ToArray: GarantModel::vcmControllers
   end // ( Self .IsControllerInterfaces )
   
   if ( Self .IsVCMControls ) then
   begin
-   .join> [ GarantModel::vcmExternalInterfaces ]
+   .join> ToArray: GarantModel::vcmExternalInterfaces 
   end // ( Self .IsVCMControls )
  ) 
  >>> Result
@@ -5686,7 +5679,8 @@ elem_iterator Used
   
   if ( Self .IsSingleton ) then
   begin
-   .join> [ GarantModel::SysUtils GarantModel::l3Base ]
+   .join> ToArray: GarantModel::SysUtils 
+   .join> ToArray: GarantModel::l3Base
   end // ( Self .IsSingleton )
   
   if ( Self .IsClassOrMixIn ) then
@@ -5695,7 +5689,7 @@ elem_iterator Used
         .filter> .IsIterator 
         .CountIt 0 != ) then
    begin
-    .join> [ GarantModel::l3Base ]
+    .join> ToArray: GarantModel::l3Base 
    end // ( Self .ImplementedAndOverridden .filter> .IsIterator .CountIt > 0 )
    .joinWithLambded> ( Self .ImplementedAndOverridden ) .UsesInDependencies
   end // ( Self .IsClassOrMixIn )
@@ -5704,13 +5698,13 @@ elem_iterator Used
   begin
    if ( Self GarantModel::TtfwWord .InheritsFrom ! ) then
    begin
-    .join> [ GarantModel::TtfwClassRef(Proxy) ]
+    .join> ToArray: GarantModel::TtfwClassRef(Proxy) 
    end // ( Self GarantModel::TtfwWord .InheritsFrom ! )
   end // ( Self .NeedIniRegClass )
   
   if ( Self .IsTestCase ) then
   begin
-   .join> [ GarantModel::TestFrameWork ]
+   .join> ToArray: GarantModel::TestFrameWork 
   end // ( Self .IsTestCase )  
  )
  >>> Result
@@ -5743,10 +5737,29 @@ elem_iterator AbstractUses
  >>> Result
 ; // AbstractUses
 
+BOOLEAN elem_func IsTestForTestLibrary
+ RULES
+  ( Self .IsTestClass )
+   true
+  ( Self .IsTestCaseMixIn )
+   true
+  ( Self .IsTestCase )
+   RULES
+    ( Self .Abstraction at_abstract == )
+     false
+    DEFAULT
+     true
+   ; // RULES 
+  DEFAULT
+   false
+ ; // RULES
+ >>> Result
+; // IsTestForTestLibrary
+
 elem_iterator ImplUses
  Cached:
  (
-  [ GarantModel::l3ImplUses ]
+  GarantModel::l3ImplUses .ToArray
   if ( Self .IsScriptKeywordsPack ) then
   begin
    .join> ( Self .NeededElementsFromInheritsOrImplements )
@@ -5778,33 +5791,32 @@ elem_iterator ImplUses
    
   if ( Self .IsTestClass ) then
   begin
-   .join> [ 
-           GarantModel::Variants 
-           GarantModel::ActiveX 
-           GarantModel::tc5OpenAppClasses 
-           GarantModel::tc5PublicInfo 
-           GarantModel::tc6OpenAppClasses 
-           GarantModel::tc6PublicInfo
-          ]
+   .join> ToArray: GarantModel::Variants 
+   .join> ToArray: GarantModel::ActiveX 
+   .join> ToArray: GarantModel::tc5OpenAppClasses 
+   .join> ToArray: GarantModel::tc5PublicInfo 
+   .join> ToArray: GarantModel::tc6OpenAppClasses 
+   .join> ToArray: GarantModel::tc6PublicInfo
   end // ( Self .IsTestClass )
    
   if ( Self .Name 'l3IID' == ) then
   begin
-   .join> [ GarantModel::Windows GarantModel::SysUtils ]
+   .join> ToArray: GarantModel::Windows 
+   .join> ToArray: GarantModel::SysUtils
   end // ( Self .Name 'l3IID' == )
   
   RULES
    ( Self .IsTestTarget )
     begin
-     .join> [ GarantModel::SysUtils ]
-     .join> [ GarantModel::l3Base ]
-     .join> [ GarantModel::TKBridge ]
-     .join> [ GarantModel::KTestRunner ]
-     .join> [ GarantModel::TextTestRunner ]
-     .join> [ GarantModel::GUITestRunner ]
+     .join> ToArray: GarantModel::SysUtils 
+     .join> ToArray: GarantModel::l3Base 
+     .join> ToArray: GarantModel::TKBridge 
+     .join> ToArray: GarantModel::KTestRunner 
+     .join> ToArray: GarantModel::TextTestRunner 
+     .join> ToArray: GarantModel::GUITestRunner 
      if ( Self .UPisTrue "no scripts" ! ) then
      begin
-      .join> [ GarantModel::TvcmInsiderTest ]
+      .join> ToArray: GarantModel::TvcmInsiderTest 
      end // ( Self .UPisTrue "no scripts" ! )
     end // ( Self .IsTestTarget )
   ; // RULES 
@@ -5819,11 +5831,11 @@ elem_iterator ImplUses
        .filter> ( .GetUP "F1Like" false ?== )
        .CountIt 0 ==
       )
-       ( .join> [ GarantModel::TF1AutoTestSuite ] )
+       ( .join> ToArray: GarantModel::TF1AutoTestSuite )
       DEFAULT
-       ( .join> [ GarantModel::TAutoTestsSuite ] )
+       ( .join> ToArray: GarantModel::TAutoTestsSuite )
      ; // RULES 
-     .join> [ GarantModel::StdRes ]
+     .join> ToArray: GarantModel::StdRes
     end // ( Self .IsVCMTestTarget )
    ( Self .IsTestTarget )
     begin
@@ -5831,13 +5843,13 @@ elem_iterator ImplUses
      begin
       if ( Self .UPisTrue "no scripts" ! ) then
       begin
-       .join> [ GarantModel::TAutoTestsSuite ]
-       .join> [ GarantModel::TtfwScriptEngineEX ]
+       .join> ToArray: GarantModel::TAutoTestsSuite
+       .join> ToArray: GarantModel::TtfwScriptEngineEX
       end // ( Self .UPisTrue "no scripts" ! )
      end // ( Self .UPisTrue "is insider test" ! )
     end // ( Self .IsTestTarget )
    ( Self .IsVCMGUI ) 
-    ( .join> [ GarantModel::StdRes ] )
+    ( .join> ToArray: GarantModel::StdRes )
   ; // RULES
   
   RULES
@@ -5847,18 +5859,36 @@ elem_iterator ImplUses
      .filter> .IsTestLibrary
      .for> (
        IN aTestLibrary
-      .join> [ aTestLibrary ] 
+      .join> ToArray: aTestLibrary
      ) // .for>
           
      Self .ChildrenEx 
+     .filter> .IsTestUnit
      .for> (
       .ChildrenEx
+      .filter> .IsTestForTestLibrary
       .for> (
         IN aChild
-       .join> [ aChild ] 
+       .join> ToArray: aChild
       ) // .for>
      ) // .for>
-     .join> [ GarantModel::tc5OpenApp GarantModel::tc6OpenApp ]
+     
+     RULES
+      (
+       Self .ChildrenEx 
+       .filter> .IsTestUnit 
+       .filter> ( 
+        .ChildrenEx 
+        .filter> .IsTestClass 
+        .CountIt > 0 
+       ) // .filter>
+       .CountIt > 0
+      )
+      begin
+       .join> ToArray: GarantModel::tc5OpenApp 
+       .join> ToArray: GarantModel::tc6OpenApp
+      end
+     ; // RULES
     end // ( Self .IsTestLibrary )
    ( Self .IsTestTarget )
     begin
@@ -5866,6 +5896,7 @@ elem_iterator ImplUses
      : .TestsToUses
       .for> (
         IN aTestLibrary
+       .join> ToArray: aTestLibrary
        aTestLibrary .ChildrenEx
        .filter> .IsTestUnit
        .for> (
@@ -5874,7 +5905,7 @@ elem_iterator ImplUses
         .filter> .IsTestCase
         .for> (
           IN aTestCase
-         .join> [ aTestCase ] 
+         .join> ToArray: aTestCase
         ) // .for>
        ) // .for>
       ) // .for>
@@ -5896,6 +5927,44 @@ elem_iterator ImplUses
      .TestsToUses
      
     end // ( Self .IsTestTarget ) 
+   ( Self .IsDLL ) 
+    begin
+     VAR l_Parent
+     Self .Parent >>> l_Parent
+     
+     Self .Depends
+     .filter> .IsLibrary
+     .filter> ( .Parent l_Parent .IsSameModelElement )
+     .for> (
+       IN aLibrary
+      
+      aLibrary .ChildrenEx
+      .for> (
+        IN aChild
+       .join> ToArray: aChild
+      ) // .for>
+       
+      aLibrary .ChildrenEx 
+      .filter> .IsUnit
+      .for> (
+        IN aUnit
+       aUnit .ChildrenEx 
+       .for> (
+         IN aClass
+        .join> ToArray: aClass
+       ) // .for>
+      ) // .for>
+     ) // .for>
+    end // ( Self .IsDLL )
+   ( Self .IsVCMGUI )
+    begin
+     Self .Depends
+     .filter> .IsTestLibrary
+     .for> (
+       IN aTestLibrary
+      .join> ToArray: aTestLibrary
+     ) // .for>
+    end // ( Self .IsVCMGUI )
   ; // RULES
  )
  >>> Result
@@ -5910,17 +5979,17 @@ elem_iterator IntfAndImplUses
 elem_iterator ProjectUsesPrim
  Cached:
  (
-  [ GarantModel::l3IntfUses ]
+  GarantModel::l3IntfUses .ToArray
   
   RULES
    ( Self .IsVCMGUI )
     begin
      if ( Self .GetUP "F1Like" false ?!= ) then
      begin
-      .join> [ GarantModel::nsApplication ]
+      .join> ToArray: GarantModel::nsApplication 
      end // ( Self .GetUP "F1Like" false ?!= )
-     .join> [ GarantModel::Tl3ExceptionsLog ]
-     .join> [ GarantModel::ControlResizeBugFix ]
+     .join> ToArray: GarantModel::Tl3ExceptionsLog 
+     .join> ToArray: GarantModel::ControlResizeBugFix
     end // ( Self .IsVCMGUI )
    ( Self .IsVCMTestTarget )
     begin
@@ -5928,10 +5997,10 @@ elem_iterator ProjectUsesPrim
     end // ( Self .IsVCMTestTarget )
    ( Self .IsExe )
     begin
-     .join> [ GarantModel::Tl3ExceptionsLog ]
+     .join> ToArray: GarantModel::Tl3ExceptionsLog 
      if ( Self .UPisTrue "console" ! ) then
      begin
-      .join> [ GarantModel::ControlResizeBugFix ]
+      .join> ToArray: GarantModel::ControlResizeBugFix
      end // ( Self .UPisTrue "console" ! )
     end // ( Self .IsExe )
   ; // RULES
@@ -5941,14 +6010,25 @@ elem_iterator ProjectUsesPrim
   RULES
    ( Self .IsVCMGUI )
     begin
-     .join> [ GarantModel::Tl3MouseWheelHelper ]
+     .join> ToArray: GarantModel::Tl3MouseWheelHelper
     end // ( Self .IsVCMGUI )
   ; // RULES
+  
+  ARRAY VAR l_Uses
+  [] >>> l_Uses
   
   .map> .UnitProducer 
   .filterNil>
   .filterMixIns>
-  array:Copy
+  //.filter> ( Self ?!= )
+  .filter> ( l_Uses array:Has ! )
+  // - возможно это стоит включить, а также включить сюда фильтрацию дубликатов
+  //   чтобы уменьшить повторно выполняемую работу в ProjectUses AccumulateUses
+  .for> (
+   array:AddTo l_Uses
+  ) // .for>
+  
+  l_Uses
  )
  >>> Result
 ; // ProjectUsesPrim
@@ -5964,8 +6044,9 @@ elem_iterator ProjectUses
   aUses 
   .for> (
     IN anItem
-   if ( l_InUses .filter> ( anItem ?== ) .CountIt 0 == ) then 
-   //if ( anItem l_InUses array:Has ! ) then
+   //if ( l_InUses .filter> ( anItem ?== ) .CountIt 0 == ) then 
+   if ( anItem l_InUses array:Has ! ) then
+   // - это можно в filter перенести, выше
    begin
     anItem array:AddTo l_InUses
     anItem array:AddTo l_ProjectUses
@@ -6412,7 +6493,7 @@ elem_proc MethodInterfacePrim
       ( Self .IsSetter )
        ( 
         Self .PropertyKeys 
-        .join> [ l_Type .ValueParam ]
+        .join> ToArray: ( l_Type .ValueParam )
        )
       ( Self .IsProperty )
        ( Self .PropertyKeys )
@@ -7013,7 +7094,7 @@ BOOLEAN elem_func UseNewGen
    ( Self .IsExeTarget ) 
     true
    ( Self .IsDLL ) 
-    ( Self .Parent call.me )
+    true
    ( Self .IsTarget ) 
     ( Self .Parent call.me )
    DEFAULT
@@ -7039,7 +7120,8 @@ elem_iterator AllOperationsForOverload
       
       if ( Self .NeedsFakeMethod ) then
       begin
-       .join> [ Self .FakeMethod Self .InitConstructor ]
+       .join> ToArray: ( Self .FakeMethod )
+       .join> ToArray: ( Self .InitConstructor )
       end // ( Self .NeedsFakeMethod )
     )
    ( Self .IsClassOrMixIn )
@@ -7059,7 +7141,7 @@ elem_iterator AllOperationsForOverload
        (
          IN anItem
         anItem array:AddTo l_CastMethods 
-        anItem .ElementToArray: .CastMethod
+        anItem .ToArray: .CastMethod
        )
       )
       .filter> ( .IsStereotype st_responsibility::Operation ! ) 
@@ -7099,13 +7181,13 @@ elem_iterator AllOperationsForOverload
       begin
        if ( Self .HasFactory ! ) then
        begin
-        .join> [ Self .InstanceMethod ]
+        .join> ToArray: ( Self .InstanceMethod )
        end // ( Self .HasFactory ! )
        //if ( Self .UseNewGen ) then
        begin
         if ( Self .Operations 'Exists' .HasModelElementWithName ! ) then
         begin
-         .join> [ Self .ExistsMethod ]
+         .join> ToArray: ( Self .ExistsMethod )
         end // ( Self .Operations 'Exists' .HasModelElementWithName ! )
        end // ( Self .UseNewGen )
       end // ( Self .IsSingleton )
@@ -7714,9 +7796,9 @@ elem_proc OutOtherMixinValues
    begin
     aValue .Name array:AddTo g_MixInValues
     [ 
-     '{$If not Declared(' '_' aValue .Name '_' ')' '}'
+     '{$If not Declared(' cUnderline aValue .Name cUnderline ')' '}'
      'type' ' '
-     '_' aValue .Name '_' ' = ' aValue .Target .TypeName ';' 
+     cUnderline aValue .Name cUnderline ' = ' aValue .Target .TypeName ';' 
      '{$IfEnd}'
      \n
     ] .Out
@@ -7738,7 +7820,7 @@ elem_proc OutClass
  Self .MixInValues .for> (
    IN aValue
   aValue .Name array:AddTo g_MixInValues 
-  [ '_' aValue .Name '_' ' = ' aValue .Target .TypeName ';' ] .Out
+  [ cUnderline aValue .Name cUnderline ' = ' aValue .Target .TypeName ';' ] .Out
  )
  
  VAR l_Parent
@@ -7768,7 +7850,7 @@ elem_proc OutClass
   VAR l_WasComma
   false >>> l_WasComma
   
-  l_Parent .ElementToArray
+  l_Parent .ToArray
   .join> ( 
    Self .ClassImplements 
    .filter> (
@@ -7825,7 +7907,7 @@ elem_proc OutInterface
  
  Self .MixInValues .for> (
    IN aValue
-  [ '//' '_' aValue .Name '_' ' = ' aValue .Target .TypeName ';' ] .Out
+  [ '//' cUnderline aValue .Name cUnderline ' = ' aValue .Target .TypeName ';' ] .Out
  ) // Self .MixInValues .for>
  
  [ Self .TypeName ' = interface' Self .MainAncestor .TypeName .With() ] .Out
@@ -7835,7 +7917,7 @@ elem_proc OutInterface
  Self .GUID >>> l_GUID
  if ( l_GUID IsNil ! ) then
  begin
-  Indented: ( [ '[''' cOpenComment l_GUID cCloseComment ''']' ] .Out )
+  Indented: ( [ '[' cQuote cOpenComment l_GUID cCloseComment cQuote ']' ] .Out )
  end // ( l_GUID IsNil ! )
  
  Self .OutInterfaceBody
@@ -8191,7 +8273,7 @@ elem_iterator ForwardedEx
   begin
    RULES
     ( Self .Parent .IsInterface )
-     ( .join> [ Self .Parent ] )
+     ( .join> ToArray: ( Self .Parent ) )
     ( Self .Parent .IsClass )
      RULES
       ( Self .Parent .IsService )
@@ -8201,7 +8283,7 @@ elem_iterator ForwardedEx
       ( Self .Parent .SomeOwnChildrenInheritsOrImplementsMixIn )
        ()
       DEFAULT
-       ( .join> [ Self .Parent ] )
+       ( .join> ToArray: ( Self .Parent ) )
      ; // RULES  
    ; // RULES  
   end // ( Self .IsInterface )
@@ -9153,7 +9235,7 @@ elem_proc OutTestClassImplementation
  
  TF g_MethodParentPrefix (
   Self .TypeName >>> g_MethodParentPrefix
-  g_MethodParentPrefix '_' Cat >>> g_MethodParentPrefix
+  g_MethodParentPrefix cUnderline Cat >>> g_MethodParentPrefix
   
   Self .OperationsAndProperties .for> .MethodInterfaceForEx: nil .MethodBody
 
@@ -9543,7 +9625,7 @@ elem_iterator IniOperations
            .CountIt 0 ==
           ) 
            ( 
-            .join> [ aConst l_Name aConst .Speller l_Prefix .MakeIniStr ] 
+            .join> ToArray: ( aConst l_Name aConst .Speller l_Prefix .MakeIniStr )
            ) 
         ; // RULES
        ) // .for>
@@ -9555,17 +9637,17 @@ elem_iterator IniOperations
    AND ( Self .Abstraction at_abstract != )
    AND ( Self .IsMixIn ! )
   ) 
-   ( .join> [ Self .RegisterTestCaseMethod ] )
+   ( .join> ToArray: ( Self .RegisterTestCaseMethod ) )
   ( Self .IsTestClass )
-   ( .join> [ Self .RegisterTestClassMethod ] )
+   ( .join> ToArray: ( Self .RegisterTestClassMethod ) )
   ( Self .IsTagTable )
-   ( .join> [ Self .RegisterTagTableMethod ] )
+   ( .join> ToArray: ( Self .RegisterTagTableMethod ) )
   ( 
    ( Self .IsServiceImplementation ) 
    //AND ( Self .UseNewGen )
    AND ( l_IniOperations 'bind' .HasModelElementWithName ! )
   ) 
-   ( .join> [ Self .RegisterServiceImplementationMethod ] )
+   ( .join> ToArray: ( Self .RegisterServiceImplementationMethod ) )
   ( Self .IsClassOrMixIn )
    (
     VAR l_WasRegisterInEngine
@@ -9580,7 +9662,7 @@ elem_iterator IniOperations
        true >>> l_WasRegisterInEngine
        if ( l_IniOperations 'Ini_Reg' .HasModelElementWithName ! ) then
        begin     
-        .join> [ 
+        .join> ToArray: ( 
           'Ini_Reg' MakeIniProcedure: (
             IN aMade
            VAR l_TypeName
@@ -9590,7 +9672,7 @@ elem_iterator IniOperations
            aMade -> %SUM := ( 'Регистрация ' Self .Name Cat ) 
            aMade ->^ cUserCodePrefix ^:= [ cSpace l_TypeName '.RegisterInEngine;' ]
           ) // MakeIniProcedure:
-         ] // .join>
+         ) // .join>
        end // ( l_IniOperations GarantModel::l3UnknownPrim.ClearFields .HasModelElement )
       end // ( l_IniOperations 'Ini_Reg' .HasModelElementWithName ! )
      end // ( Self .Abstraction at_abstract != )
@@ -9602,7 +9684,7 @@ elem_iterator IniOperations
      begin
       if ( l_IniOperations 'Ini_Reg_Class' .HasModelElementWithName ! ) then
       begin     
-       .join> [ 
+       .join> ToArray: ( 
          'Ini_Reg_Class' MakeIniProcedure: (
            IN aMade
           VAR l_TypeName
@@ -9621,7 +9703,7 @@ elem_iterator IniOperations
            end 
           ]
          ) // MakeIniProcedure:
-        ] // .join>
+        ) // .join>
       end // ( l_IniOperations GarantModel::l3UnknownPrim.ClearFields .HasModelElement )
      end // ( Self .NeedIniRegClass )
     end // ( l_WasRegisterInEngine ! )
@@ -9930,18 +10012,17 @@ STRING elem_func ProjectUnitPath
    ( Self .Name GarantModel::StdRes .Name == )
     ( GarantModel::StdRes .Name '.pas' Cat )
    ( Self .InTie )
-    ( 
-     [ cRoot Self .GetUP 'pas:Path' ] cPathSep strings:CatSep 
-    )
     // - тут надо брать путь для адаптера
-/*(*
-	[{%S#f_InTie()=true}{\
-	%f_set_var(FILE_PATH,"%So")\
-	}\
-	%f_with_gen_id(pas,%f_set_var(FILE_PATH,"%So"))\
-	]\
-*)*/    
-   
+    ( 
+     VAR l_pasPath
+     Self .GetUP 'pas:Path' >>> l_pasPath
+     RULES
+      ( l_pasPath IsNil )
+       ''
+      DEFAULT 
+       ( [ cRoot l_pasPath ] cPathSep strings:CatSep )
+     ; // RULES  
+    )   
    ( Self .UnitName 'GblAdapter' == )
     ''  
    DEFAULT
@@ -10118,7 +10199,13 @@ elem_proc OutUnit
       
       'begin' .Out
       Self .OutApplicationBody
-     ) 
+     ) // ( Self .IsExe )
+    ( Self .IsDLL ) 
+     (
+      [ '{$R ' Self .UnitName '.res' '}' ] .Out
+      OutLn
+      'begin' .Out
+     ) // ( Self .IsDLL )
    ; // RULES
    
    'end.' .Out
@@ -10129,7 +10216,7 @@ elem_proc OutUnit
 STRING elem_func DefineName
  Cached:
  (
-  Self .UnitName '.' '_' string:Replace
+  Self .UnitName '.' cUnderline string:Replace
  ) 
  >>> Result
 ; // DefineName
@@ -10183,14 +10270,24 @@ STRING elem_func PasFinalFileName
  Self .GetUP 'intf.pas:Path' >>> Result
  if ( Result IsNil ) then
  begin
-  if ( Self .IsElementProxy ) then
-  begin
-   Self .PasPathOnly >>> Result
-   if ( Result IsNil ! ) then
-   begin
-    [ Result [ Self .Name '_Proxy' '.pas' ] strings:Cat ] cPathSep strings:CatSep >>> Result
-   end // ( Result IsNil ! )
-  end // ( Self .IsElementProxy )
+  RULES
+   ( Self .IsTestLibrary )
+    begin
+     Self .PasPathOnly >>> Result
+     if ( Result IsNil ! ) then
+     begin
+      [ Result [ Self .Name cSpace cUnderline string:Replace '_TestLibrary' '.pas' ] strings:Cat ] cPathSep strings:CatSep >>> Result
+     end // ( Result IsNil ! )
+    end // ( Self .IsTestLibrary )
+   ( Self .IsElementProxy )
+    begin
+     Self .PasPathOnly >>> Result
+     if ( Result IsNil ! ) then
+     begin
+      [ Result [ Self .Name cProxy '.pas' ] strings:Cat ] cPathSep strings:CatSep >>> Result
+     end // ( Result IsNil ! )
+    end // ( Self .IsElementProxy )
+  ; // RULES
  end // ( Result IsNil )
 ; // PasFinalFileName
 
@@ -10503,8 +10600,8 @@ elem_generator rc.script
       ':' 
       anOp .Name 
        'pop_' .CutPrefix
-       [ aG .SelfName string:Lower '_' ] strings:Cat .CutPrefix
-       '_' ':' string:Replace
+       [ aG .SelfName string:Lower cUnderline ] strings:Cat .CutPrefix
+       cUnderline ':' string:Replace
      ] strings:Cat >>> l_CanonicName
      
      if ( l_CanonicName l_NameForScript != ) then
