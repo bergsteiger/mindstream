@@ -506,7 +506,8 @@ USES
 ;
 
 BOOLEAN elem_func IsScriptKeywordsPack
- Self .IsStereotype st_ScriptKeywordsPack >>> Result
+ Self .IsStereotype st_ScriptKeywordsPack 
+ >>> Result
 ; // IsScriptKeywordsPack
 
 BOOLEAN elem_func IsUtilityPack
@@ -788,6 +789,11 @@ BOOLEAN elem_func IsLibrary
  >>> Result
 ; // IsLibrary
 
+BOOLEAN elem_func IsVCMModule
+ Self .IsStereotype st_VCMModule
+ >>> Result
+; // IsVCMModule
+
 BOOLEAN elem_func IsVCMCustomForm
  Self .IsStereotype st_VCMCustomForm 
  >>> Result
@@ -819,19 +825,23 @@ BOOLEAN elem_func IsGuiControl
 ; //IsGuiControl
 
 BOOLEAN elem_func IsUseCaseController
- Self .IsStereotype st_UseCaseController >>> Result
+ Self .IsStereotype st_UseCaseController 
+ >>> Result
 ; // IsUseCaseController
 
 BOOLEAN elem_func IsViewAreaController
- Self .IsStereotype st_ViewAreaController >>> Result
+ Self .IsStereotype st_ViewAreaController 
+ >>> Result
 ; // IsViewAreaController
 
 BOOLEAN elem_func IsUseCaseControllerImp
- Self .IsStereotype st_UseCaseControllerImp >>> Result
+ Self .IsStereotype st_UseCaseControllerImp 
+ >>> Result
 ; // IsUseCaseControllerImp
 
 BOOLEAN elem_func IsViewAreaControllerImp
- Self .IsStereotype st_ViewAreaControllerImp >>> Result
+ Self .IsStereotype st_ViewAreaControllerImp 
+ >>> Result
 ; // IsViewAreaControllerImp
 
 BOOLEAN elem_func IsSimpleClass
@@ -909,7 +919,8 @@ BOOLEAN elem_func IsInterfaces
 ModelElement CompileTime-VAR g_DefaultInterfaceAncestor nil
 
 BOOLEAN elem_func IsTypedef
- Self .IsStereotype st_Typedef >>> Result
+ Self .IsStereotype st_Typedef 
+ >>> Result
 ; // IsTypedef
 
 BOOLEAN elem_func IsPointer
@@ -918,7 +929,8 @@ BOOLEAN elem_func IsPointer
 ; // IsPointer
 
 ModelElement elem_func MainAncestorPrim
- Self .Inherits .FirstElement >>> Result
+ Self .Inherits .FirstElement 
+ >>> Result
 ; // MainAncestorPrim
 
 BOOLEAN elem_func IsInterface
@@ -995,11 +1007,13 @@ BOOLEAN elem_func IsMixIn
 ; // IsMixIn
 
 BOOLEAN elem_func IsVCMFormSetFactory
- Self .IsStereotype st_VCMFormSetFactory >>> Result
+ Self .IsStereotype st_VCMFormSetFactory 
+ >>> Result
 ; // IsVCMFormSetFactory
 
 BOOLEAN elem_func IsVCMFormsPack
- Self .IsStereotype st_VCMFormsPack >>> Result
+ Self .IsStereotype st_VCMFormsPack 
+ >>> Result
 ; // IsVCMFormsPack
 
 ModelElement elem_func DefaultAncestor
@@ -1073,15 +1087,18 @@ ModelElement elem_func MainAncestor
 ; // MainAncestor
 
 BOOLEAN elem_func IsRange
- Self .IsStereotype st_Range >>> Result
+ Self .IsStereotype st_Range 
+ >>> Result
 ; // IsRange
 
 BOOLEAN elem_func IsEnum
- Self .IsStereotype st_Enum >>> Result
+ Self .IsStereotype st_Enum 
+ >>> Result
 ; // IsEnum
 
 BOOLEAN elem_func IsFunction
- Self .IsStereotype st_Function >>> Result
+ Self .IsStereotype st_Function 
+ >>> Result
 ; // IsFunction
 
 BOOLEAN elem_func IsRecord
@@ -1102,15 +1119,18 @@ BOOLEAN elem_func IsRecord
 ; // IsRecord
 
 BOOLEAN elem_func IsDefine
- Self .IsStereotype st_Define >>> Result
+ Self .IsStereotype st_Define 
+ >>> Result
 ; // IsDefine
 
 BOOLEAN elem_func IsUndef
- Self .IsStereotype st_Undef >>> Result
+ Self .IsStereotype st_Undef 
+ >>> Result
 ; // IsUndef
 
 BOOLEAN elem_func IsUnion
- Self .IsStereotype st_Union >>> Result
+ Self .IsStereotype st_Union 
+ >>> Result
 ; // IsUnion
 
 BOOLEAN elem_func IsRecordOrUnion
@@ -1126,7 +1146,8 @@ BOOLEAN elem_func IsRecordOrUnion
 ; // IsRecordOrUnion
 
 BOOLEAN elem_func IsStaticObject
- Self .IsStereotype st_StaticObject >>> Result
+ Self .IsStereotype st_StaticObject 
+ >>> Result
 ; // IsStaticObject
 
 BOOLEAN elem_func IsRecordOrUnionOrStaticObject
@@ -1158,35 +1179,53 @@ BOOLEAN elem_func CannotFinalizeProperty
 ; // CannotFinalizeProperty
 
 BOOLEAN elem_func IsElementProxy
- Self .IsStereotype st_ElementProxy >>> Result
+ Self .IsStereotype st_ElementProxy 
+ >>> Result
 ; // IsElementProxy
 
 BOOLEAN elem_func IsSetOf
- Self .IsStereotype st_SetOf >>> Result
+ Self .IsStereotype st_SetOf 
+ >>> Result
 ; // IsSetOf
 
 BOOLEAN elem_func IsException
- Self .IsStereotype st_Exception >>> Result
+ Self .IsStereotype st_Exception 
+ >>> Result
 ; // IsException
 
 BOOLEAN elem_func IsTagTable
- Self .IsStereotype st_TagTable >>> Result
+ Self .IsStereotype st_TagTable 
+ >>> Result
 ; // IsTagTable
 
 BOOLEAN elem_func IsVCMGUI
- Self .IsStereotype st_VCMGUI >>> Result
+ Self .IsStereotype st_VCMGUI 
+ >>> Result
 ; // IsVCMGUI
 
 BOOLEAN elem_func IsTestTarget
- Self .IsStereotype st_TestTarget >>> Result
+ Self .IsStereotype st_TestTarget 
+ >>> Result
 ; // IsTestTarget
 
+BOOLEAN elem_func IsVCMUseCaseRealization
+ Self .IsStereotype st_VCMUseCaseRealization
+ >>> Result
+; // IsVCMUseCaseRealization
+
+BOOLEAN elem_func IsVCMUseCase
+ Self .IsStereotype st_VCMUseCase
+ >>> Result
+; // IsVCMUseCase
+
 BOOLEAN elem_func IsVCMTestTarget
- Self .IsStereotype st_VCMTestTarget >>> Result
+ Self .IsStereotype st_VCMTestTarget 
+ >>> Result
 ; // IsVCMTestTarget
 
 BOOLEAN elem_func IsExeTarget
- Self .IsStereotype st_ExeTarget >>> Result
+ Self .IsStereotype st_ExeTarget 
+ >>> Result
 ; // IsExeTarget
 
 BOOLEAN elem_func IsExe
@@ -1278,6 +1317,9 @@ BOOLEAN elem_func NeedOwnFilePrim
  Cached:
  (
   RULES
+   ( Self IsNil )
+    false
+    
    ( Self .IsScriptKeywords ) 
     false 
     
@@ -1340,10 +1382,20 @@ BOOLEAN elem_func NeedOwnFilePrim
    ( Self .IsSimpleClass )
    begin
     RULES
-     ( Self .Visibility = ProtectedAccess )
+     ( Self .Visibility ProtectedAccess == )
       false
-     ( Self .Visibility = PrivateAccess )
-      false
+     ( Self .Visibility PrivateAccess == )
+      RULES
+       ( Self .IsScriptKeyword )
+        RULES
+         ( Self .Parent .IsVCMModule )
+          true
+         DEFAULT
+          false
+        ; // RULES
+       DEFAULT
+        false
+      ; // RULES  
      DEFAULT
       ( 
        ModelElement VAR l_Parent
@@ -3556,6 +3608,17 @@ elem_proc MethodUserCode
    
   ( Self .UID '55B7A3AF0359' == ) // ResName
    WithoutVar: ( ' Result := ' cQuote l_Implementor .EffectiveUnitName cQuote ';' )
+  ( Self .UID '4DB079E00084' == ) // GetModuleOperationCode
+   ( 
+    WithoutVar:
+    (
+     'Result := TdmStdRes.mod_opcode_' 
+     l_Implementor .Name 
+      'Tkw_' .CutPrefix
+       '_op' '_' string:ReplaceFirst
+     ';'
+    )
+   ) 
   ( Self .UID '4DB0614603C8' == ) // GetWordNameForRegister
    ( 
     WithoutVar:
@@ -4136,6 +4199,11 @@ BOOLEAN elem_func IsConstructorsHolder
  >>> Result
 ; // IsConstructorsHolder
 
+BOOLEAN elem_func IsResultType
+ Self .IsStereotype st_result_type::Attribute
+ >>> Result
+; // IsResultType
+
 ModelElement elem_func MethodType
  Cached:
  (
@@ -4165,7 +4233,7 @@ ModelElement elem_func MethodType
        (
         VAR l_Type
         Self .Attributes 
-        .filter> ( .IsStereotype st_result_type::Attribute )
+        .filter> .IsResultType
         .FirstElement >>> l_Type
         RULES
          ( l_Type IsNil ! )
@@ -5127,6 +5195,7 @@ elem_iterator ChildrenEx
     .join> ToArray: ( Self .MainAncestor .FriendClass )
    end // ( Self .UPisTrue "is friend" )
   end // ( Self .IsTestClass )
+  array:Copy
  )
  >>> Result
 ; // ChildrenEx
@@ -5134,7 +5203,8 @@ elem_iterator ChildrenEx
 elem_iterator ChildrenWithoutOwnFile
  Cached:
  ( 
-  Self .ChildrenEx .filter> ( .NeedOwnFile ! ) 
+  Self .ChildrenEx 
+  .filter> ( .NeedOwnFile ! ) 
  )
  >>> Result
 ; // ChildrenWithoutOwnFile
@@ -5142,7 +5212,9 @@ elem_iterator ChildrenWithoutOwnFile
 elem_iterator ChildrenWithOwnFile
  Cached:
  ( 
-  Self .ChildrenEx .filter> .NeedOwnFile
+  Self .ChildrenEx 
+  .filter> .NeedOwnFile
+  array:Copy
  )
  >>> Result
 ; // ChildrenWithOwnFile
@@ -5232,6 +5304,7 @@ elem_iterator ConstantsEx
      ; // RULES
     end // ( Self .IsTypedef )
   ; // RULES
+  array:Copy
  )
  >>> Result
 ; // ConstantsEx
@@ -5506,6 +5579,15 @@ BOOLEAN elem_func IsVCMControls
  >>> Result
 ; // IsVCMControls
 
+elem_iterator DependsEx
+ Cached:
+ (
+  Self .Depends
+  array:Copy
+ ) 
+ >>> Result
+; // DependsEx
+
 elem_iterator IntfUses
  Cached:
  (
@@ -5513,7 +5595,7 @@ elem_iterator IntfUses
   
   if ( Self .IsInterfaces ) then
   begin
-   .join> ( Self .Depends .filter> .IsInterfaces )
+   .join> ( Self .DependsEx .filter> .IsInterfaces )
   end // ( Self .IsInterfaces )
   
   .join> ( Self .NeededElements: .IsForInterface )
@@ -5533,19 +5615,32 @@ elem_iterator IntfUses
  >>> Result
 ; // IntfUses
 
+BOOLEAN elem_func IsInjects
+ Self .IsStereotype st_injects::Dependency 
+ >>> Result
+; // IsInjects
+
 elem_iterator InjectedElements
- Self .Injected .filter> ( .IsStereotype st_injects::Dependency ) .map> .Parent
+ Cached:
+ (
+  Self .Injected 
+  .filter> .IsInjects
+  .map> .Parent
+  array:Copy
+ ) 
  >>> Result
 ; // InjectedElements
 
 BOOLEAN elem_func IsUses
- Self .IsStereotype st_uses::Dependency >>> Result
+ Self .IsStereotype st_uses::Dependency 
+ >>> Result
 ; // IsUses
 
 elem_iterator UsesInDependencies
  Cached:
  (
   Self .Dependencies .filter> .IsUses .mapToTarget>
+  array:Copy
  ) 
  >>> Result
 ; // UsesInDependencies
@@ -5659,6 +5754,14 @@ elem_iterator ImplementedAndOverridden
  >>> Result
 ; // ImplementedAndOverridden
 
+elem_iterator ImplementsIsInterface
+ Cached:
+ (
+  Self .Implements .filter> .IsInterface
+ ) 
+ >>> Result
+; // ImplementsIsInterface
+
 elem_iterator Used
  Cached:
  (
@@ -5666,7 +5769,7 @@ elem_iterator Used
   if ( Self .IsInterface ! ) then
   begin
    .join> ( Self .InjectedElements )
-   .joinWithLambded> ( Self .Implements .filter> .IsInterface ) .InjectedElements
+   .joinWithLambded> ( Self .ImplementsIsInterface ) .InjectedElements
   end // Self .IsInterface !
   .joinWithLambded> ( Self .Inherits .filter> .IsMixIn ) call.me
   .joinWithLambded> ( Self .Implements .filter> .IsMixIn ) call.me
@@ -5756,6 +5859,31 @@ BOOLEAN elem_func IsTestForTestLibrary
  >>> Result
 ; // IsTestForTestLibrary
 
+elem_iterator DependsVCMGUI
+ Cached:
+ (
+  Self .DependsEx
+  .filter> .IsVCMGUI
+  array:Copy
+ ) 
+ >>> Result
+; // DependsVCMGUI
+
+elem_iterator DependsTestLibrary
+ Cached:
+ (
+  Self .DependsEx
+  .filter> .IsTestLibrary
+  array:Copy
+ ) 
+ >>> Result
+; // DependsTestLibrary
+
+BOOLEAN elem_func IsVCMApplication
+ Self .IsStereotype st_VCMApplication
+ >>> Result
+; // IsVCMApplication
+
 elem_iterator ImplUses
  Cached:
  (
@@ -5783,6 +5911,26 @@ elem_iterator ImplUses
   begin
    .join> ( Self .ChildrenWithOwnFile )
   end // ( Self .IsVCMCustomForm )
+  
+  if ( Self .IsVCMFormsPack ) then
+  begin
+   .join> ( Self .ChildrenWithOwnFile )
+  end // ( Self .IsVCMFormsPack )
+  
+  if ( Self .IsVCMFormSetFactory ) then
+  begin
+   .join> ( Self .ChildrenWithOwnFile )
+  end // ( Self .IsVCMFormSetFactory )
+  
+  if ( Self .IsVCMApplication ) then
+  begin
+   .join> ( Self .ChildrenWithOwnFile )
+  end // ( Self .IsVCMApplication )
+  
+  if ( Self .IsVCMUseCaseRealization ) then
+  begin
+   .join> ( Self .ChildrenWithOwnFile )
+  end // ( Self .IsVCMUseCaseRealization )
   
   if ( Self .IsClassOrMixIn ) then
   begin
@@ -5826,8 +5974,7 @@ elem_iterator ImplUses
     begin
      RULES
       (
-       Self .Depends
-       .filter> .IsVCMGUI
+       Self .DependsVCMGUI
        .filter> ( .GetUP "F1Like" false ?== )
        .CountIt 0 ==
       )
@@ -5855,8 +6002,7 @@ elem_iterator ImplUses
   RULES
    ( Self .IsTestLibrary )
     begin
-     Self .Depends
-     .filter> .IsTestLibrary
+     Self .DependsTestLibrary
      .for> (
        IN aTestLibrary
       .join> ToArray: aTestLibrary
@@ -5915,14 +6061,12 @@ elem_iterator ImplUses
      Self .Parent >>> l_Parent
      
      // —начала перебираем чужие тестовые библиотеки:
-     Self .Depends
-     .filter> .IsTestLibrary
+     Self .DependsTestLibrary
      .filter> ( .Parent l_Parent .IsSameModelElement ! )
      .TestsToUses
      
      // ѕотом перебираем свои тестовые библиотеки:
-     Self .Depends
-     .filter> .IsTestLibrary
+     Self .DependsTestLibrary
      .filter> ( .Parent l_Parent .IsSameModelElement )
      .TestsToUses
      
@@ -5932,7 +6076,7 @@ elem_iterator ImplUses
      VAR l_Parent
      Self .Parent >>> l_Parent
      
-     Self .Depends
+     Self .DependsEx
      .filter> .IsLibrary
      .filter> ( .Parent l_Parent .IsSameModelElement )
      .for> (
@@ -5958,11 +6102,22 @@ elem_iterator ImplUses
     end // ( Self .IsDLL )
    ( Self .IsVCMGUI )
     begin
-     Self .Depends
-     .filter> .IsTestLibrary
+     Self .DependsTestLibrary
      .for> (
        IN aTestLibrary
       .join> ToArray: aTestLibrary
+     ) // .for>
+     
+     Self .DependsEx
+     .filter> .IsVCMUseCase
+     .for> (
+       IN aUseCase
+      aUseCase .ChildrenEx
+      .filter> .IsVCMUseCaseRealization
+      .for> (
+        IN aUseCaseRealization
+       .join> ToArray: aUseCaseRealization
+      ) // .for>
      ) // .for>
     end // ( Self .IsVCMGUI )
   ; // RULES
@@ -5993,7 +6148,7 @@ elem_iterator ProjectUsesPrim
     end // ( Self .IsVCMGUI )
    ( Self .IsVCMTestTarget )
     begin
-     .joinWithLambded> ( Self .Depends .filter> .IsVCMGUI ) call.me
+     .joinWithLambded> ( Self .DependsVCMGUI ) call.me
     end // ( Self .IsVCMTestTarget )
    ( Self .IsExe )
     begin
@@ -7005,11 +7160,6 @@ BOOLEAN elem_func IsInterfaceFactory
  >>> Result
 ; // IsInterfaceFactory
 
-BOOLEAN elem_func IsVCMApplication
- Self .IsStereotype st_VCMApplication
- >>> Result
-; // IsVCMApplication
-
 BOOLEAN elem_func UseNewGen
  Cached:
  (
@@ -7024,11 +7174,15 @@ BOOLEAN elem_func UseNewGen
     true
    ( Self .IsTestCase )
     true
-   ( 
-    ( Self .IsScriptKeyword )
-    AND ( Self .Parent .IsVCMControls ! )
-   ) 
-    true
+   ( Self .IsScriptKeyword )
+    RULES
+     ( Self .Parent .IsVCMControls )
+      false
+     ( Self .Parent .IsVCMModule )
+      true
+     DEFAULT 
+      true
+    ; // RULES  
    ( Self .IsScriptKeywordsPack )
     true
    ( Self .IsUtilityPack )
@@ -7076,9 +7230,9 @@ BOOLEAN elem_func UseNewGen
    ( Self .IsVCMFormsPack ) 
     ( Self .Parent call.me )
    ( Self .IsVCMApplication ) 
-    ( Self .Parent call.me )
+    true
    ( Self .IsTestResults ) 
-    ( Self .Parent call.me )
+    true
    ( Self .IsSimpleClass ) 
     true
    ( Self .IsTestLibrary ) 
@@ -7086,11 +7240,11 @@ BOOLEAN elem_func UseNewGen
    ( Self .IsLibrary ) 
     ( Self .Parent call.me )
    ( Self .IsVCMTestTarget ) 
-    ( Self .Parent call.me )
+    true
    ( Self .IsTestTarget ) 
     true
    ( Self .IsVCMGUI ) 
-    ( Self .Parent call.me )
+    true
    ( Self .IsExeTarget ) 
     true
    ( Self .IsDLL ) 
@@ -7768,11 +7922,11 @@ elem_proc UndefineMixInValues
 ; // UndefineMixInValues
 
 elem_proc DefineImplementedMixInValues
- Self .Implements .filter> .IsInterface .for> .DefineMixInValues
+ Self .ImplementsIsInterface .for> .DefineMixInValues
 ; // DefineImplementedMixInValues
 
 elem_proc UndefineImplementedMixInValues
- Self .Implements .filter> .IsInterface .for> .UndefineMixInValues
+ Self .ImplementsIsInterface .for> .UndefineMixInValues
 ; // DefineImplementedMixInValues
 
 ARRAY CompileTime-VAR g_MixInValues nil
@@ -9921,8 +10075,7 @@ elem_proc OutApplicationBody
       begin
        RULES
         (
-         Self .Depends
-         .filter> .IsVCMGUI
+         Self .DependsVCMGUI
          .filter> ( .GetUP "F1Like" false ?== )
          .CountIt 0 ==
         )
@@ -9931,8 +10084,7 @@ elem_proc OutApplicationBody
          ( ' TAutoTestsSuite.Register;' .Out )
        ; // RULES 
        
-       Self .Depends
-       .filter> .IsVCMGUI
+       Self .DependsVCMGUI
        .for> (
          IN anItem
         anItem call.me 

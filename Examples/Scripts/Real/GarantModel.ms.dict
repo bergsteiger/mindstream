@@ -240,9 +240,9 @@ USES
  CONST Name 'ControlResizeBugFix'
  CONST Class class_Class
  : Stereotype st_UtilityPack ;
+ 
+ CONST "ifndef" 'NoVCL'
 ref; // GarantModel::ControlResizeBugFix
-
-//CONST GarantModel::ControlResizeBugFix 'ControlResizeBugFix'
 
 : GarantModel::l3IntfUses
  CONST UID 'l3IntfUses'
@@ -270,6 +270,8 @@ ref; // GarantModel::StdRes
  CONST Name 'nsApplication'
  CONST Class class_Class
  : Stereotype st_UtilityPack ;
+ 
+ CONST "ifdef" 'Nemesis'
 ref; // GarantModel::nsApplication
 
 : GarantModel::tc5OpenApp
@@ -313,22 +315,6 @@ ref; // GarantModel::tc6OpenAppClasses
  CONST Class class_Class
  : Stereotype st_UtilityPack ;
 ref; // GarantModel::tc6PublicInfo
-
-//CONST GarantModel::l3IntfUses 'l3IntfUses'
-//CONST GarantModel::l3ImplUses 'l3ImplUses'
-
-//CONST GarantModel::StdRes 'StdRes'
-
-//CONST GarantModel::nsApplication 'nsApplication'
-
-//CONST GarantModel::tc5OpenApp 'tc5OpenApp'
-//CONST GarantModel::tc6OpenApp 'tc6OpenApp'
-
-//CONST GarantModel::tc5OpenAppClasses 'tc5OpenAppClasses'
-//CONST GarantModel::tc5PublicInfo 'tc5PublicInfo'
-
-//CONST GarantModel::tc6OpenAppClasses 'tc6OpenAppClasses'
-//CONST GarantModel::tc6PublicInfo 'tc6PublicInfo'
 
 USES
  53B15D5603E3.pas.ms.script // TagHolder
