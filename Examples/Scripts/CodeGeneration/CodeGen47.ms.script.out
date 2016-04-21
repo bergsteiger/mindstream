@@ -1754,6 +1754,7 @@ TClass class::TkwStringSplit
 TClass class::TkwStringSubstring
 TClass class::TkwStringToChar
 TClass class::TkwStringToUnicode
+TClass class::TkwStringTransliterate
 TClass class::TkwStringTrim
 TClass class::TkwStringTrimLeft
 TClass class::TkwStringTrimRight
@@ -1764,6 +1765,7 @@ TClass class::TkwSWAP
 TClass class::TkwSWAP2
 TClass class::TkwSystemIncluded
 TClass class::TkwSysutilsChangeFileExt
+TClass class::TkwSysutilsCodePage
 TClass class::TkwSysutilsCreateDir
 TClass class::TkwSysutilsDirectoryExists
 TClass class::TkwSysutilsExtractFileDrive
@@ -1771,7 +1773,9 @@ TClass class::TkwSysutilsExtractFileName
 TClass class::TkwSysutilsExtractFilePath
 TClass class::TkwSysutilsFileExists
 TClass class::TkwSysutilsForceDirectories
+TClass class::TkwSysutilsGetACP
 TClass class::TkwSysutilsGetCurrentDir
+TClass class::TkwSysutilsLocale
 TClass class::TkwSysutilsLog
 TClass class::TkwSysutilsParamCount
 TClass class::TkwSysutilsParamStr
@@ -2377,6 +2381,7 @@ STRING pop:String:text:Replace
 STRING pop:String:text:ReplaceFirst
 CHAR pop:String:ToChar
 STRING pop:String:ToUnicode
+STRING pop:String:Transliterate
 STRING pop:String:Trim
 STRING pop:String:TrimLeft
 STRING pop:String:TrimRight
@@ -2514,6 +2519,7 @@ STRING string:SplitTo!
 STRING string:Substring
 CHAR string:ToChar
 STRING string:ToUnicode
+STRING string:Transliterate
 STRING string:Trim
 STRING string:TrimLeft
 STRING string:TrimRight
@@ -2997,6 +3003,7 @@ TkwStringSplit
 TkwStringSubstring
 TkwStringToChar
 TkwStringToUnicode
+TkwStringTransliterate
 TkwStringTrim
 TkwStringTrimLeft
 TkwStringTrimRight
@@ -3007,6 +3014,7 @@ TkwSWAP
 TkwSWAP2
 TkwSystemIncluded
 TkwSysutilsChangeFileExt
+TkwSysutilsCodePage
 TkwSysutilsCreateDir
 TkwSysutilsDirectoryExists
 TkwSysutilsExtractFileDrive
@@ -3014,7 +3022,9 @@ TkwSysutilsExtractFileName
 TkwSysutilsExtractFilePath
 TkwSysutilsFileExists
 TkwSysutilsForceDirectories
+TkwSysutilsGetACP
 TkwSysutilsGetCurrentDir
+TkwSysutilsLocale
 TkwSysutilsLog
 TkwSysutilsParamCount
 TkwSysutilsParamStr
@@ -3418,6 +3428,7 @@ STRING script:FileName
 VOID script:RunFromFile
 Dictionary: axiom:sysutils
 STRING sysutils:ChangeFileExt
+INTEGER sysutils:CodePage
 BOOLEAN sysutils:CreateDir
 BOOLEAN sysutils:DirectoryExists
 STRING sysutils:ExtractFileDrive
@@ -3425,7 +3436,9 @@ STRING sysutils:ExtractFileName
 STRING sysutils:ExtractFilePath
 BOOLEAN sysutils:FileExists
 BOOLEAN sysutils:ForceDirectories
+INTEGER sysutils:GetACP
 STRING sysutils:GetCurrentDir
+INTEGER sysutils:Locale
 VOID sysutils:Log
 INTEGER sysutils:ParamCount
 STRING sysutils:ParamStr
