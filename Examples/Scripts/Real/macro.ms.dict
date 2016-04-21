@@ -1,30 +1,3 @@
 UNIT macro.ms.dict
 
-USES
- axiom_push.ms.dict
-;
-
-VOID IMMEDIATE operator MACRO
- %SUMMARY '- MACRO. Пока "фиктивное" понятие. Означает, что "расширяет" собой свои параметры во входном потоке' ;
- axiom:PushSymbol VOID
- axiom:PushSymbol IMMEDIATE
- axiom:PushSymbol axiom:operator
- @SELF Ctx:SetWordProducerForCompiledClass
-; // MACRO
-
 WordAlias macro MACRO
-
-MACRO STACK_CHANGING_MACRO
- %SUMMARY '- аналог MACRO, но который может "потрогать стек", т.е. считать что-то со стека или положить что-то на стек' ;
- axiom:PushSymbol IMMEDIATE
- axiom:PushSymbol axiom:operator
- @SELF Ctx:SetWordProducerForCompiledClass
-; // STACK_CHANGING_MACRO
-
-/*{MACRO _MACRO
- axiom:PushSymbol VOID
- axiom:PushSymbol IMMEDIATE
-; // _MACRO
-
-WordAlias _macro _MACRO}*/
- // - будем считать, что пока не пригодилось

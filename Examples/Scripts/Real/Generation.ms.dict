@@ -54,6 +54,7 @@ CONST cOpenComment '{'
 CONST cCloseComment '}'
 CONST cSpace ' '
 CONST cUnderline '_'
+CONST cDot '.'
 CONST cEmptyStr ''
 
 BOOLEAN CompileTime-VAR g_EnableAutoEOL true
@@ -545,6 +546,8 @@ BOOLEAN elem_func UseNewGenExcluded
    true
   ( Self GarantModel::TddComboBoxConfigItem .InheritsFrom )
    true
+  ( Self GarantModel::Tl3ProtoObjectForTie ?== )
+   false
   ( Self GarantModel::Tl3ProtoObjectForTie .InheritsFrom )
    true
   ( Self GarantModel::evdTagHolder .InheritsFrom )
@@ -656,9 +659,9 @@ elem_proc GenerateWordToFileWith:
    TF g_RealFileName (
     [ l_RealPath l_FileName ] cPathSep strings:CatSep >>> g_RealFileName
     
-    if ( g_GeneratedFiles g_TempFileName array:HasText ! ) then
+    if ( g_TempFileName .TextNotInArray: g_GeneratedFiles ) then
     begin
-     g_TempFileName array:AddTo g_GeneratedFiles
+     g_TempFileName .AddToArray: g_GeneratedFiles
      TF g_FinalFileName (
       TF g_FinalFileNameForUC (
        Self .FinalFileName >>> g_FinalFileName
@@ -720,7 +723,7 @@ elem_proc GenerateWordToFileWith:
        end // ( g_FinalFileName IsNil ! )
       ) // TF g_FinalFileNameForUC
      ) // TF g_FinalFileName
-    end // g_GeneratedFiles g_TempFileName array:HasText !
+    end // g_TempFileName .TextNotInArray: g_GeneratedFiles
    ) // TF g_RealFileName
   ) // TF g_TempFileName
  ) // TF g_Indent 
@@ -1368,7 +1371,7 @@ BOOLEAN elem_func NeedOwnFilePrim
     ; // RULES
     
    ( Self .IsTestUnit )
-    false  
+    true  
    
    ( Self .IsUnit )
     false  
@@ -1746,10 +1749,30 @@ ARRAY FUNCTION array:Copy
   ( anArray IsNil )
    [nil]
   DEFAULT 
-   [ anArray .for> .KeepInStack ] 
+   (
+    VAR l_Empty
+    true >>> l_Empty
+    [ 
+     anArray .for> ( 
+      // .KeepInStack 
+      // - это теперь не нужно, непустой функтор и так есть
+      false >>> l_Empty
+     ) // anArray .for>
+    ] 
+    RULES
+     l_Empty
+      ( DROP [nil] )
+    ; // RULES
+   ) 
  ; // RULES 
  >>> Result
 ; // array:Copy
+
+ARRAY FUNCTION array:CopyNotNil
+  IN anArray
+ [ anArray .for> .KeepInStack ] 
+ >>> Result
+; // array:CopyNotNil
 
 elem_iterator ClassImplements
  (
@@ -2084,9 +2107,9 @@ elem_iterator ImplementedEx
     .filter> ( Self SWAP .SomeMethodImplementsThisIterator ! )
     .filter> ( 
       IN anItem
-     if ( anItem l_OutedIterators array:Has ! ) then
+     if ( anItem .NotInArray: l_OutedIterators ) then
      begin
-      anItem array:AddTo l_OutedIterators
+      anItem .AddToArray: l_OutedIterators
       true
      end
      else
@@ -2196,14 +2219,14 @@ STRING FUNCTION RemoveDuplicatedIfDef
    IN aSubstr
   aSubstr string:Trim >>> aSubstr
   if ( aSubstr IsNil ! ) 
-   if ( l_Outed aSubstr array:HasText ! ) then
+   if ( aSubstr .TextNotInArray: l_Outed ) then
    begin
-    aSubstr array:AddTo l_Outed
+    aSubstr .AddToArray: l_Outed
     if ( Result IsNil ) then
      ( aSubstr >>> Result )
     else
      ( Result ',' aSubstr Cat Cat >>> Result )
-   end // ( l_Outed aSubstr array:HasText ! )
+   end // ( aSubstr .TextNotInArray: l_Outed )
  ) // aValue ',' string:Split:for>
 ; // RemoveDuplicatedIfDef
 
@@ -2606,7 +2629,7 @@ PROCEDURE ReadUCFromFile
         l_Pos 0 aStr string:Substring >>> l_Head
         if ( l_Head string:TrimLeft IsNil ! ) then
         begin
-         l_Head array:AddTo l_Accumulated
+         l_Head .AddToArray: l_Accumulated
          
          aStr string:Len l_Pos - 
          l_Pos 
@@ -2625,7 +2648,7 @@ PROCEDURE ReadUCFromFile
      DEFAULT
       (
        l_UCOpened ? ( 
-        aStr array:AddTo l_Accumulated
+        aStr .AddToArray: l_Accumulated
        ) // l_UCOpened ?
       ) 
     ; // RULES  
@@ -3227,10 +3250,6 @@ BOOLEAN elem_func IsType
       false
      ( Self .IsUserType ) 
       false
-     ( Self .IsStereotype st_ScriptKeywordDocumentation ) 
-      false
-     ( Self .IsStereotype st_ScriptKeywordsDocumentation ) 
-      false
      ( Self .IsUtilityPack )
       false
      ( Self .IsInterfaces )
@@ -3306,9 +3325,9 @@ elem: IfDefPrim:
          ARRAY IN anOuted
         if ( anItem IsNil ! ) then
         begin
-         if ( anOuted anItem array:HasText ! ) then
+         if ( anItem .TextNotInArray: anOuted ) then
          begin
-          anItem array:AddTo anOuted
+          anItem .AddToArray: anOuted
           true >>> l_NeedOut
           cSpace 
           if l_NeedAND then
@@ -3320,7 +3339,7 @@ elem: IfDefPrim:
            true >>> l_NeedAND
           end // l_NeedAND
           aPrefix 'Defined(' anItem ')'
-         end // ( anOuted anItem array:HasText ! )
+         end // ( anItem .TextNotInArray: anOuted )
         end // ( anItem IsNil ! )
        ; // OutItem
        
@@ -3345,8 +3364,8 @@ elem: IfDefPrim:
       begin
        if ( ( l_IfDefStr g_IfDefStr != ) OR ( l_IfNDefStr g_IfNDefStr != ) ) then
        begin
-        g_IfDefArr array:Copy >>> g_IfDefArr
-        g_IfNDefArr array:Copy >>> g_IfNDefArr
+        g_IfDefArr array:CopyNotNil >>> g_IfDefArr
+        g_IfNDefArr array:CopyNotNil >>> g_IfNDefArr
         
         l_IfDefStr >>> g_IfDefStr
         l_IfNDefStr >>> g_IfNDefStr
@@ -4736,7 +4755,7 @@ elem_proc UserCode:
             if ( l_Op .UPisTrue "mapped" ) then
             begin
              'l_' l_Self .SelfName
-             '.'
+             cDot
              l_Op .GetUP 'extprop:prop_name'
              ' := '
              
@@ -5068,7 +5087,7 @@ elem_proc UserCode:
          begin
           'Result := ' 
          end
-         'a' l_Self .SelfName '.' l_Op .Name l_Op .ParametersList ';' 
+         'a' l_Self .SelfName cDot l_Op .Name l_Op .ParametersList ';' 
         ] .Out 
        )
     
@@ -5115,9 +5134,9 @@ elem_proc OutUses:
   .filter> ( 
     IN anItem 
    anItem .UnitName >>> anItem 
-   if ( anItem l_Used array:Has ! ) then
+   if ( anItem .NotInArray: l_Used ) then
    begin
-    anItem array:AddTo l_Used
+    anItem .AddToArray: l_Used
     true
    end
    else
@@ -5275,7 +5294,7 @@ elem_iterator ConstantsEx
                 l_OtherEnum .GetUP 'extprop:pas:ElementPrefix' >>> l_ElementPrefix
                 l_ConstantsName MakeConstants: (
                   IN aConstants
-                 aConstants -> %SUM := ( [ 'јлиасы дл€ значений ' l_OtherEnum .Parent .Name '.' l_OtherEnum .Name ] strings:Cat )
+                 aConstants -> %SUM := ( [ 'јлиасы дл€ значений ' l_OtherEnum .Parent .Name cDot l_OtherEnum .Name ] strings:Cat )
                  aConstants -> Visibility := PublicAccess
                  //aConstants -> 'extprop:pas:ElementPrefix' := l_ElementPrefix
                  aConstants -> Attributes := [
@@ -5284,7 +5303,7 @@ elem_iterator ConstantsEx
                    VAR l_Name 
                    [ l_ElementPrefix anItem .Name ] strings:Cat >>> l_Name
                    l_Name
-                   [ l_OtherEnum .EffectiveUnitName '.' l_Name ] strings:Cat 
+                   [ l_OtherEnum .EffectiveUnitName cDot l_Name ] strings:Cat 
                    MakeConstant: (
                      IN aConstant
                     RULES
@@ -5639,7 +5658,9 @@ BOOLEAN elem_func IsUses
 elem_iterator UsesInDependencies
  Cached:
  (
-  Self .Dependencies .filter> .IsUses .mapToTarget>
+  Self .Dependencies 
+  .filter> .IsUses 
+  .mapToTarget>
   array:Copy
  ) 
  >>> Result
@@ -5932,6 +5953,16 @@ elem_iterator ImplUses
    .join> ( Self .ChildrenWithOwnFile )
   end // ( Self .IsVCMUseCaseRealization )
   
+  if ( Self .IsTestLibrary ) then
+  begin
+   .join> ( Self .ChildrenWithOwnFile .filter> .IsTestUnit )
+  end // ( Self .IsTestLibrary )
+  
+  if ( Self .IsTestUnit ) then
+  begin
+   .join> ( Self .ChildrenWithOwnFile .filter> .IsTestForTestLibrary )
+  end // ( Self .IsTestUnit )
+  
   if ( Self .IsClassOrMixIn ) then
   begin
    .join> ( Self .AbstractUses )
@@ -6002,23 +6033,8 @@ elem_iterator ImplUses
   RULES
    ( Self .IsTestLibrary )
     begin
-     Self .DependsTestLibrary
-     .for> (
-       IN aTestLibrary
-      .join> ToArray: aTestLibrary
-     ) // .for>
+     .join> ( Self .DependsTestLibrary )
           
-     Self .ChildrenEx 
-     .filter> .IsTestUnit
-     .for> (
-      .ChildrenEx
-      .filter> .IsTestForTestLibrary
-      .for> (
-        IN aChild
-       .join> ToArray: aChild
-      ) // .for>
-     ) // .for>
-     
      RULES
       (
        Self .ChildrenEx 
@@ -6039,36 +6055,22 @@ elem_iterator ImplUses
    ( Self .IsTestTarget )
     begin
     
-     : .TestsToUses
-      .for> (
-        IN aTestLibrary
-       .join> ToArray: aTestLibrary
-       aTestLibrary .ChildrenEx
-       .filter> .IsTestUnit
-       .for> (
-         IN aTestUnit
-        aTestUnit .ChildrenEx
-        .filter> .IsTestCase
-        .for> (
-          IN aTestCase
-         .join> ToArray: aTestCase
-        ) // .for>
-       ) // .for>
-      ) // .for>
-     ; // .TestsToUses
-     
      VAR l_Parent
      Self .Parent >>> l_Parent
      
      // —начала перебираем чужие тестовые библиотеки:
-     Self .DependsTestLibrary
-     .filter> ( .Parent l_Parent .IsSameModelElement ! )
-     .TestsToUses
+     .join> (
+      Self .DependsTestLibrary
+      .filter> ( .Parent l_Parent .IsSameModelElement ! )
+      array:Copy
+     ) // .join>
      
      // ѕотом перебираем свои тестовые библиотеки:
-     Self .DependsTestLibrary
-     .filter> ( .Parent l_Parent .IsSameModelElement )
-     .TestsToUses
+     .join> (
+      Self .DependsTestLibrary
+      .filter> ( .Parent l_Parent .IsSameModelElement )
+      array:Copy
+     ) // .join>
      
     end // ( Self .IsTestTarget ) 
    ( Self .IsDLL ) 
@@ -6102,11 +6104,7 @@ elem_iterator ImplUses
     end // ( Self .IsDLL )
    ( Self .IsVCMGUI )
     begin
-     Self .DependsTestLibrary
-     .for> (
-       IN aTestLibrary
-      .join> ToArray: aTestLibrary
-     ) // .for>
+     .join> ( Self .DependsTestLibrary )
      
      Self .DependsEx
      .filter> .IsVCMUseCase
@@ -6176,11 +6174,11 @@ elem_iterator ProjectUsesPrim
   .filterNil>
   .filterMixIns>
   //.filter> ( Self ?!= )
-  .filter> ( l_Uses array:Has ! )
+  .filter> ( .NotInArray: l_Uses )
   // - возможно это стоит включить, а также включить сюда фильтрацию дубликатов
   //   чтобы уменьшить повторно выполн€емую работу в ProjectUses AccumulateUses
   .for> (
-   array:AddTo l_Uses
+   .AddToArray: l_Uses
   ) // .for>
   
   l_Uses
@@ -6200,18 +6198,18 @@ elem_iterator ProjectUses
   .for> (
     IN anItem
    //if ( l_InUses .filter> ( anItem ?== ) .CountIt 0 == ) then 
-   if ( anItem l_InUses array:Has ! ) then
+   if ( anItem .NotInArray: l_InUses ) then
    // - это можно в filter перенести, выше
    begin
-    anItem array:AddTo l_InUses
-    anItem array:AddTo l_ProjectUses
+    anItem .AddToArray: l_InUses
+    anItem .AddToArray: l_ProjectUses
     RULES
      ( anItem IsString )
       ()
      DEFAULT
       ( anItem .ProjectUsesPrim call.me ) 
     ; // RULES 
-   end // ( anItem l_InUses array:Has ! )
+   end // ( anItem .NotInArray: l_InUses )
   ) // .for>
  ; // AccumulateUses
  
@@ -6520,7 +6518,7 @@ ANY elem_func ExtValue
        ) 
         begin
          VAR l_Head
-         Result '.' string:Split >>> Result >>> l_Head
+         Result cDot string:Split >>> Result >>> l_Head
          if ( Result IsNil ) then
          begin
           l_Head >>> Result
@@ -6547,7 +6545,7 @@ ANY elem_func ExtValue
            l_Type .EffectiveUnitName >>> l_Unit
            if ( Self .EffectiveUnitName l_Unit != ) then
            begin 
-            l_Unit '.' Cat >>> l_Unit
+            l_Unit cDot Cat >>> l_Unit
             if ( l_Unit Result StartsStr ! ) then
             begin
              l_Unit Result Cat >>> Result
@@ -7290,11 +7288,11 @@ elem_iterator AllOperationsForOverload
        .joinWithLambded> 
        ( 
         anItem .InterfaceForClassImplements 
-        .filter> ( l_CastMethods array:Has ! )
+        .filter> ( .NotInArray: l_CastMethods )
        ) 
        (
          IN anItem
-        anItem array:AddTo l_CastMethods 
+        anItem .AddToArray: l_CastMethods 
         anItem .ToArray: .CastMethod
        )
       )
@@ -7316,11 +7314,11 @@ elem_iterator AllOperationsForOverload
           begin
            VAR l_Name
            anOp .MethodName >>> l_Name
-           if ( l_VCMOperations l_Name array:HasString ! ) then
+           if ( l_Name .StringNotInArray: l_VCMOperations ) then
            begin
-            l_Name array:AddTo l_VCMOperations
+            l_Name .AddToArray: l_VCMOperations
             true
-           end // ( l_VCMOperations l_Name array:HasString ! )
+           end // ( l_Name .StringNotInArray: l_VCMOperations )
            else 
             false
           end // .IsVCMOperationPrim
@@ -7328,7 +7326,7 @@ elem_iterator AllOperationsForOverload
            true
         ) // .filter>
         array:Copy
-       ) // join> ( ( Self .ImplementedEx )
+       ) // join> ( Self .ImplementedEx )
       )
        
       if ( Self .IsSingleton ) then
@@ -7687,9 +7685,9 @@ elem_proc OutClassInner
        [ 
         'property ' aField .Name ': ' aField .Target .TypeName
         \n 
-        cSpace 'read' cSpace aProp .Name '.' aField .Name
+        cSpace 'read' cSpace aProp .Name cDot aField .Name
         \n
-        cSpace 'write' cSpace aProp .Name '.' aField .Name
+        cSpace 'write' cSpace aProp .Name cDot aField .Name
         ';'
        ] .Out 
       ) // Indented:
@@ -7946,9 +7944,9 @@ elem_proc OutOtherMixinValues
    IN aG
   aG .MixInValues .for> (
     IN aValue
-   if ( g_MixInValues aValue .Name array:HasText ! ) then
+   if ( aValue .Name .TextNotInArray: g_MixInValues ) then
    begin
-    aValue .Name array:AddTo g_MixInValues
+    aValue .Name .AddToArray: g_MixInValues
     [ 
      '{$If not Declared(' cUnderline aValue .Name cUnderline ')' '}'
      'type' ' '
@@ -7956,7 +7954,7 @@ elem_proc OutOtherMixinValues
      '{$IfEnd}'
      \n
     ] .Out
-   end // ( g_MixInValues aValue .Name array:HasText ! )
+   end // ( aValue .Name .TextNotInArray: g_MixInValues )
   ) // aG .MixInValues .for>
   aG call.me
  ) // Self .Inherits .for>
@@ -7973,7 +7971,7 @@ elem_proc OutClass
 
  Self .MixInValues .for> (
    IN aValue
-  aValue .Name array:AddTo g_MixInValues 
+  aValue .Name .AddToArray: g_MixInValues 
   [ cUnderline aValue .Name cUnderline ' = ' aValue .Target .TypeName ';' ] .Out
  )
  
@@ -8009,15 +8007,15 @@ elem_proc OutClass
    Self .ClassImplements 
    .filter> (
      IN anItem
-    if ( anItem l_Implements array:Has ! ) then
+    if ( anItem .NotInArray: l_Implements ) then
     begin
-     anItem array:AddTo l_Implements
+     anItem .AddToArray: l_Implements
      true
-    end // ( anItem l_Implements array:Has ! )
+    end // ( anItem .NotInArray: l_Implements )
     else
     begin
      false
-    end // ( anItem l_Implements array:Has ! )
+    end // ( anItem .NotInArray: l_Implements )
    ) // .filter>
   ) // .join>
   .With()> (
@@ -8281,7 +8279,7 @@ elem_proc OutTypedef
       Self .EffectiveUnitName >>> l_OurUnit
       if ( l_OurUnit l_OtherUnit != ) then
       begin
-       l_OtherUnit '.'
+       l_OtherUnit cDot
       end // l_OurUnit l_OtherUnit !=
      end // Self .TypeName l_MainAncestor .TypeName ==
     end // l_OtherUnit IsNil !
@@ -8371,10 +8369,11 @@ elem_proc OutTypeKeyword
 ; // OutTypeKeyword
   
 elem_proc OutForward
- if ( Self g_OutedTypes array:Has ! ) then
-  if ( Self g_ForwardedTypes array:Has ! ) then
+ if ( Self .NotInArray: g_OutedTypes ) then
+ begin
+  if ( Self .NotInArray: g_ForwardedTypes ) then
   begin
-   Self array:AddTo g_ForwardedTypes
+   Self .AddToArray: g_ForwardedTypes
    RULES
     ( Self .IsPureMixIn ) 
      ()
@@ -8399,7 +8398,8 @@ elem_proc OutForward
      ) // Self .IfDef:
     end // DEFAULT
    ; // RULES  
-  end // ( Self g_ForwardedTypes array:Has ! )
+  end // ( Self .NotInArray: g_ForwardedTypes )
+ end // ( Self .NotInArray: g_OutedTypes )
 ; // OutForward
 
 BOOLEAN elem_func SomeOwnChildrenInheritsOrImplementsMixIn
@@ -8454,10 +8454,6 @@ elem_proc OutType
  RULES
   ( Self .IsElementProxy )
    ()
-  ( Self .IsStereotype st_ScriptKeywordDocumentation )
-   ()
-  ( Self .IsStereotype st_ScriptKeywordsDocumentation )
-   ()
   ( Self .IsUtilityPack )
    ()
   ( Self .IsInterfaces )
@@ -8486,9 +8482,9 @@ elem_proc OutType
    () 
   DEFAULT
    (
-    if ( Self g_OutedTypes array:Has ! ) then
+    if ( Self .NotInArray: g_OutedTypes ) then
     begin
-     Self array:AddTo g_OutedTypes
+     Self .AddToArray: g_OutedTypes
      Self .OutForwarded
      Self .IfDef:
      (
@@ -8535,7 +8531,7 @@ elem_proc OutType
       ) // Indented:
       OutLn
      ) // Self .IfDef:
-    end // ( Self g_OutedTypes array:Has ! )
+    end // ( Self .NotInArray: g_OutedTypes )
    ) // DEFAULT
  ; // RULES
 ; // OutType
@@ -8776,7 +8772,7 @@ elem_proc OutConstants
         ( 
          if ( Self .EffectiveUnitName Self .MainAncestor .EffectiveUnitName != ) then
          begin
-          Self .MainAncestor .EffectiveUnitName '.'
+          Self .MainAncestor .EffectiveUnitName cDot
          end // ( Self .EffectiveUnitName Self .MainAncestor .EffectiveUnitName != )
          Self .MainAncestor .Name 
         )
@@ -9338,7 +9334,7 @@ elem_proc OutClassImplementation
    Self >>> g_Implementor
    TF g_MethodParentPrefix (
     Self .TypeName >>> g_MethodParentPrefix
-    g_MethodParentPrefix '.' Cat >>> g_MethodParentPrefix
+    g_MethodParentPrefix cDot Cat >>> g_MethodParentPrefix
     TF g_EnableMethodDirectives (
      false >>> g_EnableMethodDirectives
      Self .AllOperationsForDefine 
@@ -9537,7 +9533,7 @@ elem_proc OutTestClassImplementation
        '(' 
        Self .MainAncestor .TypeName
        ', '
-       'tc' aNum 'OpenAppClasses' '.' 
+       'tc' aNum 'OpenAppClasses' cDot 
        
        if ( aMethod .IsProperty ) then
         'mtGet'
@@ -9602,7 +9598,7 @@ elem_proc OutTestClassImplementation
        '(' 
        Self .MainAncestor .TypeName
        ', '
-       'tc' aNum 'OpenAppClasses' '.' 
+       'tc' aNum 'OpenAppClasses' cDot 
        
        'mtPut'
        
@@ -10368,7 +10364,7 @@ elem_proc OutUnit
 STRING elem_func DefineName
  Cached:
  (
-  Self .UnitName '.' cUnderline string:Replace
+  Self .UnitName cDot cUnderline string:Replace
  ) 
  >>> Result
 ; // DefineName
@@ -10428,15 +10424,36 @@ STRING elem_func PasFinalFileName
      Self .PasPathOnly >>> Result
      if ( Result IsNil ! ) then
      begin
-      [ Result [ Self .Name cSpace cUnderline string:Replace '_TestLibrary' '.pas' ] strings:Cat ] cPathSep strings:CatSep >>> Result
+      [ 
+       Result 
+       [ Self .Name cSpace cUnderline string:Replace '_TestLibrary' '.pas' ] strings:Cat 
+      ] cPathSep strings:CatSep >>> Result
      end // ( Result IsNil ! )
     end // ( Self .IsTestLibrary )
+   ( Self .IsTestUnit )
+    begin
+     Self .PasPathOnly >>> Result
+     if ( Result IsNil ! ) then
+     begin
+      [ Result 
+       [ 
+        [ Self .Parent .Name '_' Self .Name ] strings:Cat
+        cSpace cUnderline string:Replace
+        cDot cUnderline string:Replace
+        '_TestUnit' '.pas' 
+       ] strings:Cat 
+      ] cPathSep strings:CatSep >>> Result
+     end // ( Result IsNil ! )
+    end // ( Self .IsTestUnit )
    ( Self .IsElementProxy )
     begin
      Self .PasPathOnly >>> Result
      if ( Result IsNil ! ) then
      begin
-      [ Result [ Self .Name cProxy '.pas' ] strings:Cat ] cPathSep strings:CatSep >>> Result
+      [ 
+       Result 
+       [ Self .Name cProxy '.pas' ] strings:Cat 
+      ] cPathSep strings:CatSep >>> Result
      end // ( Result IsNil ! )
     end // ( Self .IsElementProxy )
   ; // RULES
@@ -10483,6 +10500,8 @@ elem_generator pas
   ( Self .IsTagTable ) 
    ( Self .OutUnit )
   ( Self .IsTestLibrary ) 
+   ( Self .OutUnit )
+  ( Self .IsTestUnit ) 
    ( Self .OutUnit )
   DEFAULT
    ( Self .Name .Out )
@@ -10554,9 +10573,9 @@ elem_proc ToDFM
    (
     if ( Self .NeedPutToDFM ) then
     begin
-     if ( g_FormControls Self .AttrName array:HasText ! ) then
+     if ( Self .AttrName .TextNotInArray: g_FormControls ) then
      begin
-      Self .AttrName array:AddTo g_FormControls
+      Self .AttrName .AddToArray: g_FormControls
       Indented: (
        [ ' object ' Self .AttrName ': ' Self .AttrType .TypeName ] .Out
        Self .Attributes .for> call.me
@@ -10568,7 +10587,7 @@ elem_proc ToDFM
        
        [ ' end' ] .Out
       ) // Indented:
-     end // ( g_FormControls Self .AttrName array:HasText ! )
+     end // ( Self .AttrName .TextNotInArray: g_FormControls )
     end // ( Self .NeedPutToDFM )
    ) 
  ; // RULES
@@ -10809,9 +10828,9 @@ ARRAY CompileTime-VAR g_GeneratedElements []
 elem_proc GenerateWithChildren
  Sequence IN aGenerators
  
- if ( Self g_GeneratedElements array:Has ! ) then
+ if ( Self .NotInArray: g_GeneratedElements ) then
  begin
-  Self array:AddTo g_GeneratedElements
+  Self .AddToArray: g_GeneratedElements
   aGenerators CodeIterator .for> (
   // - цикл по генераторам дл€ Self
    TtfwWord IN aGenerator
@@ -10843,7 +10862,7 @@ elem_proc GenerateWithChildren
   
   Self .ChildrenEx .for> ( aGenerators call.me )
   // - тут генерируем детей  
- end // Self g_GeneratedElements array:Has !
+ end // Self .NotInArray: g_GeneratedElements
 ; // GenerateWithChildren
 
 elem_proc call.generators.in.list

@@ -14,48 +14,8 @@ USES
  macro.ms.dict
 ;
 
-macro IT 
-  //ARRAY IN A // - слева должен быть массив
-  ^ IN aWhatToDo
- %SUMMARY 'Итерирует массив A вызывая лямбду aWhatToDo' ;
- aWhatToDo CompileRef
- @ SWAP CompileValue
- @ ITERATE CompileValue
- //aWhatToDo A ITERATE
-; // IT
-
-/*{operator IT 
-  ARRAY IN A
-  ^ IN aWhatToDo
- %SUMMARY 'Итерирует массив A вызывая лямбду aWhatToDo' ;
- aWhatToDo A ITERATE
-; // IT}*/
-
-WordAlias ==> IT
-
-macro for
-  ^ IN aList
-  ^ IN aWhatToDo
- %SUMMARY 'Итерирует массив aList вызывая лямбду aWhatToDo' ;
- aList CompileRef
- @ DO CompileValue
- aWhatToDo CompileRef
- @ SWAP CompileValue
- @ ITERATE CompileValue
- //aList DO ==> ( aWhatToDo DO )
-; // for
-
-/*{operator for
-  ^ IN aList
-  ^ IN aWhatToDo
- %SUMMARY 'Итерирует массив aList вызывая лямбду aWhatToDo' ;
- aList DO ==> ( aWhatToDo DO )
-; // for}*/
-
-WordAlias >for> ==>
-WordAlias .for> ==>
-
 WordAlias array:AddTo >>>[]
+WordAlias .AddToArray: >>>[]
 
 PROCEDURE array:?AddTo
   IN aValue
@@ -68,3 +28,50 @@ PROCEDURE array:?AddTo
   aValue array:AddTo l_Array
  ) // aValue l_Array array:Has ! ?
 ; // array:?AddTo
+
+USES
+ axiom_push.ms.dict
+;
+
+MACRO .InArray:
+  ^ IN anArray
+ anArray CompileValue
+ axiom:PushSymbol array:Has
+; // .InArray:
+
+MACRO .NotInArray:
+  ^ IN anArray
+ anArray CompileValue
+ axiom:PushSymbol array:Has
+ axiom:PushSymbol !
+; // .NotInArray:
+
+MACRO .StringInArray:
+  ^ IN anArray
+ anArray CompileValue
+ axiom:PushSymbol SWAP
+ axiom:PushSymbol array:HasString
+; // .StringInArray:
+
+MACRO .StringNotInArray:
+  ^ IN anArray
+ anArray CompileValue
+ axiom:PushSymbol SWAP
+ axiom:PushSymbol array:HasString
+ axiom:PushSymbol !
+; // .StringNotInArray:
+
+MACRO .TextInArray:
+  ^ IN anArray
+ anArray CompileValue
+ axiom:PushSymbol SWAP
+ axiom:PushSymbol array:HasText
+; // .TextInArray:
+
+MACRO .TextNotInArray:
+  ^ IN anArray
+ anArray CompileValue
+ axiom:PushSymbol SWAP
+ axiom:PushSymbol array:HasText
+ axiom:PushSymbol !
+; // .TextNotInArray:
