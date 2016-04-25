@@ -140,6 +140,18 @@ WordAlias GarantModel::TtfwRegisterableWord ME_53EDC0E701BC
 WordAlias GarantModel::TtfwRegisterableWord.GetWordNameForRegister ME_4DB0614603C8
 
 USES
+ 5527F81C020E.pas.ms.script // TypesRegistration
+;
+
+WordAlias GarantModel::TtfwTypeRegistrator ME_5527F8330362
+
+USES
+ 55BA28CE0290.pas.ms.script // tfwScriptingTypes
+;
+
+WordAlias GarantModel::TypeInfoExt ME_55153C2C036F
+
+USES
  4F69DF560034.pas.ms.script // ControlsProcessing
 ;
 
@@ -333,3 +345,9 @@ WordAlias GarantModel::TddComboBoxConfigItem ME_522461B00212
 //;
 
 WordAlias GarantModel::Tl3ProtoObjectForTie ME_4C9C9A0603D6
+
+USES
+ 4B322B67038B.pas.ms.script // ext
+; 
+ 
+WordAlias GarantModel::evExtFormat ME_4D514CA600C2

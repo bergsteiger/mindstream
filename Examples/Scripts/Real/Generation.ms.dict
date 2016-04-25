@@ -276,7 +276,7 @@ PROCEDURE BackupFile
  else
  begin
   FILE VAR l_In
-  aFileName MakePathAndOpenWrite >>> l_In
+  l_To MakePathAndOpenWrite >>> l_In
   // - делаем пустышку
   TRY
   FINALLY
@@ -5921,6 +5921,9 @@ elem_iterator ImplUses
   if ( Self .IsScriptKeywordsPack ) then
   begin
    .join> ( Self .ChildrenWithOwnFile )
+   .join> ToArray: GarantModel::SysUtils
+   .join> ToArray: GarantModel::TtfwTypeRegistrator
+   .join> ToArray: GarantModel::TypeInfoExt
   end // ( Self .IsScriptKeywordsPack )
   
   if ( Self .IsTarget ) then
@@ -5946,6 +5949,11 @@ elem_iterator ImplUses
   if ( Self .IsVCMApplication ) then
   begin
    .join> ( Self .ChildrenWithOwnFile )
+   .join> ToArray: GarantModel::evExtFormat
+   if ( Self .Abstraction at_final == ) then
+   begin
+    .join> ToArray: GarantModel::StdRes
+   end // ( Self .Abstraction at_final == )
   end // ( Self .IsVCMApplication )
   
   if ( Self .IsVCMUseCaseRealization ) then
