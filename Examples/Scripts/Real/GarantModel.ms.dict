@@ -33,6 +33,10 @@ USES
 ;
 
 WordAlias GarantModel::Classes ME_478CF30500C1
+
+WordAlias GarantModel::TComponent ME_46A4B9AA00F0
+WordAlias GarantModel::TComponent.Loaded ME_484516C00214
+
 WordAlias GarantModel::TDataModule ME_4AAA214A0250
 
 USES
@@ -150,6 +154,13 @@ USES
 ;
 
 WordAlias GarantModel::TypeInfoExt ME_55153C2C036F
+
+USES
+ 55B7A3160128.pas.ms.script // ScriptedAxiomatics
+;
+
+WordAlias GarantModel::TtfwAxiomaticsResNameGetter ME_55B7A33101AF
+WordAlias GarantModel::TtfwAxiomaticsResNameGetter.ResName ME_55B7A3AF0359
 
 USES
  4F69DF560034.pas.ms.script // ControlsProcessing
@@ -275,6 +286,8 @@ ref; // GarantModel::l3ImplUses
  CONST Name 'StdRes'
  CONST Class class_Class
  : Stereotype st_UtilityPack ;
+ 
+ CONST "ifndef" 'NoVCM'
 ref; // GarantModel::StdRes
 
 : GarantModel::nsApplication

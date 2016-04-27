@@ -398,7 +398,8 @@ ModelElement elem_func FirstAttribute
 ; // FirstAttribute
 
 BOOLEAN elem_func IsMixInParamType
- Self .IsStereotype st_ImpurityParamType >>> Result
+ Self .IsStereotype st_ImpurityParamType 
+ >>> Result
 ; // IsMixInParamType
 
 : g_MixInParamTypes
@@ -3527,6 +3528,11 @@ BOOLEAN elem_func IsFieldForCleanup
  >>> Result
 ; // IsFieldForCleanup
 
+BOOLEAN elem_func IsVCMApplication
+ Self .IsStereotype st_VCMApplication
+ >>> Result
+; // IsVCMApplication
+
 elem_proc MethodUserCode
   STRING IN aKey
   TtfwWord IN aCode
@@ -3605,6 +3611,18 @@ elem_proc MethodUserCode
      'f_Alien := aValue;'
     ) 
    ) // Self .Name 'Alien' ==
+   
+  ( 
+   ( Self .UID GarantModel::TComponent.Loaded .UID == ) // TComponent.Loaded
+   AND ( l_Implementor .IsVCMApplication )
+  ) 
+   (
+    WithoutVar:
+    (
+     'inherited;'
+    )
+   )
+  
   ( Self .UID '4C937013031D' == ) // GetFolder
    (
     WithoutVar:
@@ -3625,8 +3643,8 @@ elem_proc MethodUserCode
   ) 
    WithoutVar: ( 'Result := ' l_Implementor .Parent .Name ';' )
    
-  ( Self .UID '55B7A3AF0359' == ) // ResName
-   WithoutVar: ( ' Result := ' cQuote l_Implementor .EffectiveUnitName cQuote ';' )
+  ( Self .UID GarantModel::TtfwAxiomaticsResNameGetter.ResName .UID == ) // ResName
+   WithoutVar: ( 'Result := ' cQuote l_Implementor .EffectiveUnitName cQuote ';' )
   ( Self .UID '4DB079E00084' == ) // GetModuleOperationCode
    ( 
     WithoutVar:
@@ -4041,6 +4059,11 @@ elem_iterator BindServiceImplementationUC
  >>> Result
 ; // BindServiceImplementationUC
 
+elem_iterator RegAxiomUC
+ [ cSpace Self .TypeName '.Register;' ]
+ >>> Result
+; // RegAxiomUC
+
 BOOLEAN elem_func IsCustomChoice
  Self .IsStereotype st_CustomChoice::Attribute
  >>> Result
@@ -4157,7 +4180,7 @@ PRINTABLE elem_func GetUserCode
      ( Self .Name 'Ini_Reg' == ) 
       [ cSpace l_Parent .TypeName '.RegisterInEngine;' ]
      ( Self .Name 'RegAxiom' == ) 
-      [ cSpace l_Parent .TypeName '.Register;' ]
+      ( l_Parent .RegAxiomUC )
      ( Self .Name 'Ini_Reg_Class' == ) 
       [ 
        if ( l_Parent GarantModel::TtfwWord .InheritsFrom ) then
@@ -4411,7 +4434,8 @@ ARRAY FUNCTION .filterOutParam>
 
 ARRAY FUNCTION .mapToTarget>
   ARRAY IN anArray
- anArray .map> .Target >>> Result
+ anArray .map> .Target 
+ >>> Result
 ; // .mapToTarget>
 
 STRING FUNCTION .FromTie
@@ -5093,10 +5117,14 @@ elem_proc UserCode:
     
    ( 
     'ResNameGetter' Self .Name EndsStr 
-    AND ( l_Key 'impl' == )
     AND ( Self .IsSimpleClass ) 
    )
-    ( [ cSpace cOpenComment '$R ' Self .EffectiveUnitName '.res' cCloseComment ] .Out )
+    RULES
+     ( l_Key 'impl' == )
+      ( [ cSpace cOpenComment '$R ' Self .EffectiveUnitName '.res' cCloseComment ] .Out )
+     DEFAULT
+      () 
+    ; // RULES
    ( Self .IsElementProxy )
     AsDefault
    ( Self .IsClassOrMixIn )
@@ -5203,10 +5231,45 @@ elem_iterator AttributesAndOperations
  >>> Result
 ; // AttributesAndOperations
 
+INTERFACE FUNCTION MakeIniProcedure:
+  STRING IN aName
+  ^ IN aLambda
+ aName MakeProcedure: (
+   IN aMade
+  aMade -> Stereotype := st_ini::Operation
+  aMade -> Visibility := PrivateAccess
+  aMade aLambda DO
+ ) // MakeProcedure:
+ >>> Result
+; // MakeIniProcedure:
+
+BOOLEAN elem_func IsFriend
+ Self .IsStereotype st_friend::Dependency 
+ >>> Result
+; // IsFriend
+
 elem_iterator ChildrenEx
  Cached:
  (
-  Self .Children
+  VAR l_Children
+  Self .Children >>> l_Children
+  
+  Self .Dependencies
+  .filter> .IsFriend
+  .mapToTarget>
+  .map> .FriendClass
+  .for> (
+    IN aFriend
+    if ( l_Children aFriend .Name .HasModelElementWithName ! ) then
+    begin
+     l_Children 
+     .join> ToArray: aFriend
+     array:Copy
+     >>> l_Children
+    end // ( l_Children aFriend .Name .HasModelElementWithName ! )
+  ) // .for>
+    
+  l_Children
   if ( Self .IsTestClass ) then
   begin
    if ( Self .UPisTrue "is friend" ) then
@@ -5214,6 +5277,85 @@ elem_iterator ChildrenEx
     .join> ToArray: ( Self .MainAncestor .FriendClass )
    end // ( Self .UPisTrue "is friend" )
   end // ( Self .IsTestClass )
+  
+  if ( Self .UPisTrue "needs script" ) then
+  begin
+   STRING VAR l_ClassName
+   [ 'T' Self .UnitName 'ResNameGetter' ] strings:Cat >>> l_ClassName
+   if ( l_Children l_ClassName .HasModelElementWithName ! ) then
+   begin
+    .join> 
+    [
+     l_ClassName GarantModel::TtfwAxiomaticsResNameGetter MakeClass: (
+       IN aMade
+      aMade -> UID := ( Self .UID '_ResNameGetter' Cat ) 
+      aMade -> Parent := ( Self .WeakRef ) 
+      aMade -> Stereotype := st_SimpleClass
+      aMade -> %SUM := 'Регистрация скриптованой аксиоматики'
+      aMade -> Visibility := PrivateAccess
+      aMade -> Abstraction := at_final
+      aMade -> "ifdef" := ( Self .IfDefStr )
+      aMade -> "ifndef" := ( Self .IfNDefStr )
+      aMade -> "register in scripts" := false
+      aMade -> "need UC" := true
+      
+      aMade -> Operations := [
+       'RegAxiom' MakeIniProcedure: (
+         IN aMadeIni
+        aMadeIni -> %SUM := 'Регистрация скриптованой аксиоматики'
+        aMadeIni .AddMethodWithParams: cUserCodePrefix aMade .RegAxiomUC
+       ) // MakeIniProcedure:
+      ] // aMade -> Operations
+      
+      aMade -> Overridden := [
+       GarantModel::TtfwAxiomaticsResNameGetter.ResName .OverrideMethod
+      ] // aMade -> Overridden
+     ) // l_ClassName GarantModel::TtfwAxiomaticsResNameGetter MakeClass:
+    ] // .join>
+   end // ( l_Children l_ClassName .HasModelElementWithName ! )
+  end // ( Self .UPisTrue "needs script" )
+  
+/*
+f _SpellScriptFramework
+	[{%S{needs script}=true}\
+	%S%f_add_class(%SU_ResNameGetter,SimpleClass,T%f_pas_FileName(%S)ResNameGetter,Class_Inst)\
+	%{Class_Inst}%f_set_documentation(Регистрация скриптованой аксиоматики)\
+	%{Class_Inst}%f_set_abstraction_type(final)\
+	%{Class_Inst}%f_set_visibility_type(PrivateAccess)\
+	[{"%{TtfwAxiomaticsResNameGetter}N"=""}%f_find_element(TtfwAxiomaticsResNameGetter,TtfwAxiomaticsResNameGetter)]\
+	%f_addG(%{Class_Inst},%{TtfwAxiomaticsResNameGetter})\
+	%{Class_Inst}%f_set_up(need UC,true)\
+
+	[{%S#f_UseNewGenRec()!=true}\
+	%{Class_Inst}%f_set_uc_content(intf.pas,impl,\
+	 \{$R %f_pas_FileName(%S).res}\
+	)\
+	]\
+
+	%{Class_Inst}%f_add_operation(%{Class_Inst}U_Reg,ini,RegAxiom (),Reg_Instance)\
+	%{Reg_Instance}%f_set_documentation(Регистрация скриптованой аксиоматики)\
+	%{Reg_Instance}%f_set_abstraction_type(final)\
+	%{Reg_Instance}%f_set_visibility_type(PrivateAccess)\
+
+	[{%S#f_UseNewGenRec()!=true}\
+	%{Reg_Instance}%f_set_uc_content(intf.pas,,\
+	 %f_pas_TypeName(%{Class_Inst}).Register;\
+	)\
+
+	[{"%{TtfwAxiomaticsResNameGetter.ResName}N"=""}%f_find_element(55B7A3AF0359,TtfwAxiomaticsResNameGetter.ResName)]\
+
+	%{TtfwAxiomaticsResNameGetter.ResName}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{TtfwAxiomaticsResNameGetter.ResName},%{Class_Inst})_var,\
+	 {-}\
+	)\
+
+	%{TtfwAxiomaticsResNameGetter.ResName}%f_set_uc_content(intf.pas,_%f_pas_MethodOwnerID(%{TtfwAxiomaticsResNameGetter.ResName},%{Class_Inst})_impl,\
+	 Result := '%f_pas_FileName(%S)';\
+	)\
+	]\
+
+	]
+*/ 
+  
   array:Copy
  )
  >>> Result
@@ -5487,6 +5629,11 @@ elem_iterator OverriddenEx
    end // ( l_Overridden GarantModel::TAbstractTest.GetModelElementGUID .HasModelElement )
   end // ( Self GarantModel::TBaseTest .InheritsFromOrSomeAncestorImplements )
  end // ( Self .IsTestCase )
+ 
+ if ( Self .IsVCMApplication ) then
+ begin
+  .join> ToArray: ( GarantModel::TComponent.Loaded .OverrideMethod )
+ end // ( Self .IsVCMApplication )
  
  >>> Result
 ; // OverriddenEx
@@ -5899,11 +6046,6 @@ elem_iterator DependsTestLibrary
  ) 
  >>> Result
 ; // DependsTestLibrary
-
-BOOLEAN elem_func IsVCMApplication
- Self .IsStereotype st_VCMApplication
- >>> Result
-; // IsVCMApplication
 
 elem_iterator ImplUses
  Cached:
@@ -8308,9 +8450,21 @@ elem_proc OutEnum
   Indented: ( 
    Self .Attributes .for> (
      IN aChild
-    l_Prefix aChild .Name Cat 
-     .WithComma: l_NeedComma .Out
-    aChild .OutDocumentation
+    aChild .IfDef: 
+    (
+     [ 
+      l_Prefix aChild .Name
+     
+      VAR l_Value
+      aChild .ExtValue >>> l_Value
+      if ( l_Value .IsValueValid ) then
+      begin
+       ' = ' l_Value ToPrintable
+      end // ( l_Value .IsValueValid )
+     ] strings:Cat 
+      .WithComma: l_NeedComma .Out
+     aChild .OutDocumentation
+    ) // aChild .IfDef:
    ) // Self .Attributes .for>
   ) // Indented:
  [ ');//' Self .TypeName ] .Out
@@ -9658,18 +9812,6 @@ elem_proc OutIniOrFini
   Self .OutDocumentation
  ) // Self .IfDef:
 ; // OutIniOrFini
-
-INTERFACE FUNCTION MakeIniProcedure:
-  STRING IN aName
-  ^ IN aLambda
- aName MakeProcedure: (
-   IN aMade
-  aMade -> Stereotype := st_ini::Operation
-  aMade -> Visibility := PrivateAccess
-  aMade aLambda DO
- ) // MakeProcedure:
- >>> Result
-; // MakeIniProcedure:
 
 INTERFACE elem_func RegisterTestCaseMethod
  (
