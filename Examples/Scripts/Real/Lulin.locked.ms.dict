@@ -25,9 +25,7 @@ ARRAY FUNCTION Lulin.locked
   '47EB3E2202E6' // dBaseDocument function _dBaseDocument_.pm_GetdsDocumentRef: IvcmFormDataSourceRef;
   
   // GuiControl
-  '5028A4C0019B' // TvcmToolbar vcm_DefaultToolbarOptions = [vcm_toModulesInMainToolbar, vcm_toEntitiesInMainToolbar]; [Error] vcmToolbar.pas(45): Constant expression expected
-  '4B30EC67025A' // TvcmMenuManager vcm_DefaultMenuOptions = [vcm_moEntitiesInMainMenu, vcm_moEntitiesInTopMainMenu];
-  '4E732D7F0082' // TvtHideField cDefaultOptions = [hfoCanHide, hfoHyperlink];
+  //'4E732D7F0082' // TvtHideField cDefaultOptions = [hfoCanHide, hfoHyperlink];
   
   // InternalInterfaces
   '4678209200A6' // nevBase nev_plThis = TnevParaLevel(0);
@@ -35,10 +33,6 @@ ARRAY FUNCTION Lulin.locked
   // Interfaces
   '467C0CAA02AB' // l3InternalInterfaces function Hl3Canvas.pxAverageCharWidth: Integer;
   '47C5207602D1' // nevTools InevParaInternal = interface(InevPara)
-  '485808AB001D' // evControlsBlockConst evControlBlockBefore = l3Inch div 3;
-  '48E3836D00C8' // evEditorInterfaces edSingleCell = [ed_PsevdoSingleCells, ed_SingleCell];
-  '480F77890296' // evTextParaConst evHyphenWidth = l3Inch div 32;
-  '47D0015C0022' // evControlParaConst evCheckableControls = [ev_ctCheckEdit, ev_ctRadioEdit];
   '4720862F0238' // m3StorageInterfaces m3_saRead = Tm3StoreAccess(STGM_READ or STGM_SHARE_EXCLUSIVE);
   '4720831F012D' // m3DBInterfaces m3_defDocPart = m3_dsMain;
   '4A9F98B901A5' // BaseSearchInterfaces ns_sseAll = [ns_sseContext, ns_sseNeedShowWindow, ns_sseOpenKind, ns_sseActiveClass, ns_sseSearchArea];

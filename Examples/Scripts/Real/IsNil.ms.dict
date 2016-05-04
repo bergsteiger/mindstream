@@ -1,0 +1,9 @@
+UNIT IsNil.ms.dict
+
+WordAlias .IsNil IsNil
+
+BOOLEAN FUNCTION .IsNotNil
+  IN aValue
+ aValue .IsNil !
+ >>> Result 
+; // .IsNotNil

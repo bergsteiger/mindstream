@@ -8,3 +8,15 @@ INTEGER FUNCTION .CountIt
   Inc Result 
  ) 
 ; // .CountIt
+
+BOOLEAN FUNCTION .NotEmpty
+  ARRAY IN anArray
+ anArray .CountIt 0 !=
+ >>> Result 
+; // .NotEmpty
+
+BOOLEAN FUNCTION .IsEmpty
+  ARRAY IN anArray
+ anArray .CountIt 0 ==
+ >>> Result 
+; // .IsEmpty
