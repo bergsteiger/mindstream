@@ -326,7 +326,7 @@ end;
 
 procedure TfmGUITestRunner.ClearResult;
 begin
- {$If Defined(VER300)}
+ {$If Defined(VER300) OR Defined(VER310)}
  lvFailureListView.Items.Clear;
  {$Else}
  lvFailureListView.ClearItems;
@@ -461,7 +461,7 @@ procedure TfmGUITestRunner.SetTreeNodeFont(aNode: TTreeViewItem; aColor: TAlphaC
 begin
  // Пока не укажешь какие из настроек стиля разрешены к работе, они работать не будут
  aNode.StyledSettings := aNode.StyledSettings -
-{$IF DEFined(VER270) OR DEFined(VER280) OR DEFined(VER290) OR DEFined(VER300)} [TStyledSetting.FontColor, TStyledSetting.Style];
+{$IF DEFined(VER270) OR DEFined(VER280) OR DEFined(VER290) OR DEFined(VER300) OR DEFined(VER310)} [TStyledSetting.FontColor, TStyledSetting.Style];
 {$ENDIF}
 {$IFDEF VER260} [TStyledSetting.ssFontColor, TStyledSetting.ssStyle]
  ;

@@ -123,7 +123,7 @@ object fmGUITestRunner: TfmGUITestRunner
       Size.PlatformDefault = False
       TextSettings.Font.Family = 'Segoe UI Semibold'
       TextSettings.Font.Size = 16.000000000000000000
-      TextSettings.Font.Style = [fsBold]
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
       Text = 'Time:'
     end
     object lblErros: TLabel
@@ -135,7 +135,7 @@ object fmGUITestRunner: TfmGUITestRunner
       Size.PlatformDefault = False
       TextSettings.Font.Family = 'Segoe UI Semibold'
       TextSettings.Font.Size = 16.000000000000000000
-      TextSettings.Font.Style = [fsBold]
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
       TextSettings.FontColor = claRed
       Text = 'Errors:'
     end
@@ -148,7 +148,7 @@ object fmGUITestRunner: TfmGUITestRunner
       Size.PlatformDefault = False
       TextSettings.Font.Family = 'Segoe UI Semibold'
       TextSettings.Font.Size = 16.000000000000000000
-      TextSettings.Font.Style = [fsBold]
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
       TextSettings.FontColor = claRed
       Text = 'ErrorCount'
     end
@@ -161,7 +161,7 @@ object fmGUITestRunner: TfmGUITestRunner
       Size.PlatformDefault = False
       TextSettings.Font.Family = 'Segoe UI Semibold'
       TextSettings.Font.Size = 16.000000000000000000
-      TextSettings.Font.Style = [fsBold]
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
       TextSettings.FontColor = claFuchsia
       Text = 'Failure:'
     end
@@ -174,7 +174,7 @@ object fmGUITestRunner: TfmGUITestRunner
       Size.PlatformDefault = False
       TextSettings.Font.Family = 'Segoe UI Semibold'
       TextSettings.Font.Size = 16.000000000000000000
-      TextSettings.Font.Style = [fsBold]
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
       TextSettings.FontColor = claFuchsia
       Text = '0'
     end
@@ -187,7 +187,7 @@ object fmGUITestRunner: TfmGUITestRunner
       Size.PlatformDefault = False
       TextSettings.Font.Family = 'Segoe UI Semibold'
       TextSettings.Font.Size = 16.000000000000000000
-      TextSettings.Font.Style = [fsBold]
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
       Text = 'TimeCount'
     end
     object lblRunned: TLabel

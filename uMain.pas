@@ -68,8 +68,8 @@ uses
  msScrollShapeUpRight,
  msScrollShapeDownLeft,
  msScrollShapeDownRight,
- msScrollShapeResetOrigin,
- tfwScriptEngineEX
+ msScrollShapeResetOrigin{,
+ tfwScriptEngineEX}
  ;
 
 {$R *.fmx}

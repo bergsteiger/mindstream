@@ -158,8 +158,8 @@ uses
   msScrollingToolView in 'Views\msScrollingToolView.pas',
   msMoverView in 'Views\msMoverView.pas',
   msPolygonShapeView in 'Views\msPolygonShapeView.pas',
-  msPolylineShapeView in 'Views\msPolylineShapeView.pas',
-  tfwScriptEngineEX in 'l3Parser\ScriptEngine\tfwScriptEngineEX.pas';
+  msPolylineShapeView in 'Views\msPolylineShapeView.pas'{,
+  tfwScriptEngineEX in 'l3Parser\ScriptEngine\tfwScriptEngineEX.pas'};
 
 {$R *.res}
 
